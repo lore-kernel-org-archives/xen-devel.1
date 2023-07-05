@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16C1FC001DF
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 15:27:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.559306.874205 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 289C2C00528
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 15:27:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.559313.874259 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qH4PY-0001zl-3f; Wed, 05 Jul 2023 15:27:20 +0000
+	id 1qH4Pc-0003Mx-IV; Wed, 05 Jul 2023 15:27:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 559306.874205; Wed, 05 Jul 2023 15:27:20 +0000
+Received: by outflank-mailman (output) from mailman id 559313.874259; Wed, 05 Jul 2023 15:27:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qH4PY-0001ze-06; Wed, 05 Jul 2023 15:27:20 +0000
-Received: by outflank-mailman (input) for mailman id 559306;
- Wed, 05 Jul 2023 15:27:18 +0000
+	id 1qH4Pc-0003KV-D0; Wed, 05 Jul 2023 15:27:24 +0000
+Received: by outflank-mailman (input) for mailman id 559313;
+ Wed, 05 Jul 2023 15:27:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yX3c=CX=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qH4PW-0001jW-B5
- for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 15:27:18 +0000
+ id 1qH4Pa-0001jW-OY
+ for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 15:27:22 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6bfce8a8-1b48-11ee-8611-37d641c3527e;
- Wed, 05 Jul 2023 17:27:16 +0200 (CEST)
+ id 6ef988ec-1b48-11ee-8611-37d641c3527e;
+ Wed, 05 Jul 2023 17:27:21 +0200 (CEST)
 Received: from beta.bugseng.com (unknown [37.163.248.64])
- by support.bugseng.com (Postfix) with ESMTPSA id D8C704EE0C89;
- Wed,  5 Jul 2023 17:27:14 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id C4E454EE073E;
+ Wed,  5 Jul 2023 17:27:19 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,21 +41,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6bfce8a8-1b48-11ee-8611-37d641c3527e
+X-Inumbo-ID: 6ef988ec-1b48-11ee-8611-37d641c3527e
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH v2 02/13] AMD/IOMMU: fix violations of MISRA C:2012 Rule 7.2
-Date: Wed,  5 Jul 2023 17:26:24 +0200
-Message-Id: <89ec1b24e6da5738c00155f6f142cb99385fb838.1688559115.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH v2 07/13] x86/vmx: fix violations of MISRA C:2012 Rule 7.2
+Date: Wed,  5 Jul 2023 17:26:29 +0200
+Message-Id: <f30ef7c2cda2516d9ef07bb79e5da5513cd90c6c.1688559115.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1688559115.git.gianluca.luparini@bugseng.com>
 References: <cover.1688559115.git.gianluca.luparini@bugseng.com>
@@ -76,282 +80,216 @@ uniformity.
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in v2:
 - minor change to commit title
 - change commit message
+- remove unnecessary changes in 'vpmu_intel.c' and 'vmx.h'
+- add 'ULL' suffix in 'vpmu_intel.c'
+- add zero-padding to constants in 'vmx.h'
+- add missing 'U' in 'vmx.h'
 ---
- xen/drivers/passthrough/amd/iommu-defs.h | 122 +++++++++++------------
- 1 file changed, 61 insertions(+), 61 deletions(-)
+ xen/arch/x86/cpu/vpmu_intel.c           |  2 +-
+ xen/arch/x86/hvm/vmx/vmcs.c             |  6 ++---
+ xen/arch/x86/hvm/vmx/vvmx.c             | 12 ++++-----
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  6 ++---
+ xen/arch/x86/include/asm/hvm/vmx/vmx.h  | 34 ++++++++++++-------------
+ 5 files changed, 30 insertions(+), 30 deletions(-)
 
-diff --git a/xen/drivers/passthrough/amd/iommu-defs.h b/xen/drivers/passthrough/amd/iommu-defs.h
-index 35de548e3a..c145248f9a 100644
---- a/xen/drivers/passthrough/amd/iommu-defs.h
-+++ b/xen/drivers/passthrough/amd/iommu-defs.h
-@@ -38,49 +38,49 @@
-         ((uint64_t)(offset) << (12 + (PTE_PER_TABLE_SHIFT * ((level) - 1))))
+diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
+index bda5d511ac..890c279310 100644
+--- a/xen/arch/x86/cpu/vpmu_intel.c
++++ b/xen/arch/x86/cpu/vpmu_intel.c
+@@ -946,7 +946,7 @@ const struct arch_vpmu_ops *__init core2_vpmu_init(void)
+     fixed_counters_mask = ~((1ull << core2_get_bitwidth_fix_count()) - 1);
+     global_ctrl_mask = ~((((1ULL << fixed_pmc_cnt) - 1) << 32) |
+                          ((1ULL << arch_pmc_cnt) - 1));
+-    global_ovf_ctrl_mask = ~(0xC000000000000000 |
++    global_ovf_ctrl_mask = ~(0xC000000000000000ULL |
+                              (((1ULL << fixed_pmc_cnt) - 1) << 32) |
+                              ((1ULL << arch_pmc_cnt) - 1));
+     if ( version > 2 )
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index b209563625..d5a2b847a9 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -911,7 +911,7 @@ void vmx_clear_msr_intercept(struct vcpu *v, unsigned int msr,
+         if ( type & VMX_MSR_W )
+             clear_bit(msr, msr_bitmap->write_low);
+     }
+-    else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
++    else if ( (msr >= 0xc0000000U) && (msr <= 0xc0001fffU) )
+     {
+         msr &= 0x1fff;
+         if ( type & VMX_MSR_R )
+@@ -939,7 +939,7 @@ void vmx_set_msr_intercept(struct vcpu *v, unsigned int msr,
+         if ( type & VMX_MSR_W )
+             set_bit(msr, msr_bitmap->write_low);
+     }
+-    else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
++    else if ( (msr >= 0xc0000000U) && (msr <= 0xc0001fffU) )
+     {
+         msr &= 0x1fff;
+         if ( type & VMX_MSR_R )
+@@ -957,7 +957,7 @@ bool vmx_msr_is_intercepted(struct vmx_msr_bitmap *msr_bitmap,
+     if ( msr <= 0x1fff )
+         return test_bit(msr, is_write ? msr_bitmap->write_low
+                                       : msr_bitmap->read_low);
+-    else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
++    else if ( (msr >= 0xc0000000U) && (msr <= 0xc0001fffU) )
+         return test_bit(msr & 0x1fff, is_write ? msr_bitmap->write_high
+                                                : msr_bitmap->read_high);
+     else
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 1034534c97..f59de0f124 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -257,14 +257,14 @@ uint64_t get_vvmcs_virtual(void *vvmcs, uint32_t vmcs_encoding)
  
- /* IOMMU Capability */
--#define PCI_CAP_ID_MASK		0x000000FF
-+#define PCI_CAP_ID_MASK		0x000000FFU
- #define PCI_CAP_ID_SHIFT	0
--#define PCI_CAP_NEXT_PTR_MASK	0x0000FF00
-+#define PCI_CAP_NEXT_PTR_MASK	0x0000FF00U
- #define PCI_CAP_NEXT_PTR_SHIFT	8
--#define PCI_CAP_TYPE_MASK	0x00070000
-+#define PCI_CAP_TYPE_MASK	0x00070000U
- #define PCI_CAP_TYPE_SHIFT	16
--#define PCI_CAP_REV_MASK	0x00F80000
-+#define PCI_CAP_REV_MASK	0x00F80000U
- #define PCI_CAP_REV_SHIFT	19
--#define PCI_CAP_IOTLB_MASK	0x01000000
-+#define PCI_CAP_IOTLB_MASK	0x01000000U
- #define PCI_CAP_IOTLB_SHIFT	24
--#define PCI_CAP_HT_TUNNEL_MASK	0x02000000
-+#define PCI_CAP_HT_TUNNEL_MASK	0x02000000U
- #define PCI_CAP_HT_TUNNEL_SHIFT	25
--#define PCI_CAP_NP_CACHE_MASK	0x04000000
-+#define PCI_CAP_NP_CACHE_MASK	0x04000000U
- #define PCI_CAP_NP_CACHE_SHIFT	26
- #define PCI_CAP_EFRSUP_SHIFT    27
--#define PCI_CAP_RESET_MASK	0x80000000
-+#define PCI_CAP_RESET_MASK	0x80000000U
- #define PCI_CAP_RESET_SHIFT	31
+     switch ( enc.width ) {
+     case VVMCS_WIDTH_16:
+-        res &= 0xffff;
++        res &= 0xffffU;
+         break;
+    case VVMCS_WIDTH_64:
+         if ( enc.access_type )
+             res >>= 32;
+         break;
+     case VVMCS_WIDTH_32:
+-        res &= 0xffffffff;
++        res &= 0xffffffffU;
+         break;
+     case VVMCS_WIDTH_NATURAL:
+     default:
+@@ -311,19 +311,19 @@ void set_vvmcs_virtual(void *vvmcs, uint32_t vmcs_encoding, uint64_t val)
  
- #define PCI_CAP_TYPE_IOMMU		0x3
+     switch ( enc.width ) {
+     case VVMCS_WIDTH_16:
+-        res = val & 0xffff;
++        res = val & 0xffffU;
+         break;
+     case VVMCS_WIDTH_64:
+         if ( enc.access_type )
+         {
+-            res &= 0xffffffff;
++            res &= 0xffffffffU;
+             res |= val << 32;
+         }
+         else
+             res = val;
+         break;
+     case VVMCS_WIDTH_32:
+-        res = val & 0xffffffff;
++        res = val & 0xffffffffU;
+         break;
+     case VVMCS_WIDTH_NATURAL:
+     default:
+@@ -2307,7 +2307,7 @@ int nvmx_msr_read_intercept(unsigned int msr, u64 *msr_content)
+         break;
+     case MSR_IA32_VMX_CR0_FIXED1:
+         /* allow 0-settings for all bits */
+-        data = 0xffffffff;
++        data = 0xffffffffU;
+         break;
+     case MSR_IA32_VMX_CR4_FIXED0:
+         /* VMXE bit must be 1 in VMX operation */
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+index d07fcb2bc9..4acf3970f5 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+@@ -207,7 +207,7 @@ void vmx_vmcs_reload(struct vcpu *v);
+ #define CPU_BASED_ACTIVATE_MSR_BITMAP         0x10000000
+ #define CPU_BASED_MONITOR_EXITING             0x20000000
+ #define CPU_BASED_PAUSE_EXITING               0x40000000
+-#define CPU_BASED_ACTIVATE_SECONDARY_CONTROLS 0x80000000
++#define CPU_BASED_ACTIVATE_SECONDARY_CONTROLS 0x80000000U
+ extern u32 vmx_cpu_based_exec_control;
  
- #define PCI_CAP_MMIO_BAR_LOW_OFFSET	0x04
- #define PCI_CAP_MMIO_BAR_HIGH_OFFSET	0x08
--#define PCI_CAP_MMIO_BAR_LOW_MASK	0xFFFFC000
-+#define PCI_CAP_MMIO_BAR_LOW_MASK	0xFFFFC000U
- #define IOMMU_MMIO_REGION_LENGTH	0x4000
+ #define PIN_BASED_EXT_INTR_MASK         0x00000001
+@@ -257,7 +257,7 @@ extern u32 vmx_vmentry_control;
+ #define SECONDARY_EXEC_XSAVES                   0x00100000
+ #define SECONDARY_EXEC_TSC_SCALING              0x02000000
+ #define SECONDARY_EXEC_BUS_LOCK_DETECTION       0x40000000
+-#define SECONDARY_EXEC_NOTIFY_VM_EXITING        0x80000000
++#define SECONDARY_EXEC_NOTIFY_VM_EXITING        0x80000000U
+ extern u32 vmx_secondary_exec_control;
  
- #define PCI_CAP_RANGE_OFFSET		0x0C
--#define PCI_CAP_BUS_NUMBER_MASK		0x0000FF00
-+#define PCI_CAP_BUS_NUMBER_MASK		0x0000FF00U
- #define PCI_CAP_BUS_NUMBER_SHIFT	8
--#define PCI_CAP_FIRST_DEVICE_MASK	0x00FF0000
-+#define PCI_CAP_FIRST_DEVICE_MASK	0x00FF0000U
- #define PCI_CAP_FIRST_DEVICE_SHIFT	16
--#define PCI_CAP_LAST_DEVICE_MASK	0xFF000000
-+#define PCI_CAP_LAST_DEVICE_MASK	0xFF000000U
- #define PCI_CAP_LAST_DEVICE_SHIFT	24
+ #define VMX_EPT_EXEC_ONLY_SUPPORTED                         0x00000001
+@@ -346,7 +346,7 @@ extern u64 vmx_ept_vpid_cap;
+ #define cpu_has_vmx_notify_vm_exiting \
+     (vmx_secondary_exec_control & SECONDARY_EXEC_NOTIFY_VM_EXITING)
  
--#define PCI_CAP_UNIT_ID_MASK    0x0000001F
-+#define PCI_CAP_UNIT_ID_MASK    0x0000001FU
- #define PCI_CAP_UNIT_ID_SHIFT   0
- #define PCI_CAP_MISC_INFO_OFFSET    0x10
--#define PCI_CAP_MSI_NUMBER_MASK     0x0000001F
-+#define PCI_CAP_MSI_NUMBER_MASK     0x0000001FU
- #define PCI_CAP_MSI_NUMBER_SHIFT    0
+-#define VMCS_RID_TYPE_MASK              0x80000000
++#define VMCS_RID_TYPE_MASK              0x80000000U
  
- /* Device Table */
- #define IOMMU_DEV_TABLE_BASE_LOW_OFFSET		0x00
- #define IOMMU_DEV_TABLE_BASE_HIGH_OFFSET	0x04
--#define IOMMU_DEV_TABLE_SIZE_MASK		0x000001FF
-+#define IOMMU_DEV_TABLE_SIZE_MASK		0x000001FFU
- #define IOMMU_DEV_TABLE_SIZE_SHIFT		0
+ /* GUEST_INTERRUPTIBILITY_INFO flags. */
+ #define VMX_INTR_SHADOW_STI             0x00000001
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+index 36c108d879..6642688e1d 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+@@ -136,7 +136,7 @@ static inline void pi_clear_sn(struct pi_desc *pi_desc)
+ /*
+  * Exit Reasons
+  */
+-#define VMX_EXIT_REASONS_FAILED_VMENTRY 0x80000000
++#define VMX_EXIT_REASONS_FAILED_VMENTRY 0x80000000U
+ #define VMX_EXIT_REASONS_BUS_LOCK       (1u << 26)
  
- #define IOMMU_DEV_TABLE_ENTRIES_PER_BUS		256
-@@ -159,13 +159,13 @@ struct amd_iommu_dte {
- #define IOMMU_CMD_BUFFER_BASE_HIGH_OFFSET	0x0C
- #define IOMMU_CMD_BUFFER_HEAD_OFFSET		0x2000
- #define IOMMU_CMD_BUFFER_TAIL_OFFSET		0x2008
--#define IOMMU_CMD_BUFFER_LENGTH_MASK		0x0F000000
-+#define IOMMU_CMD_BUFFER_LENGTH_MASK		0x0F000000U
- #define IOMMU_CMD_BUFFER_LENGTH_SHIFT		24
+ #define EXIT_REASON_EXCEPTION_NMI       0
+@@ -208,12 +208,12 @@ static inline void pi_clear_sn(struct pi_desc *pi_desc)
+  * Note INTR_INFO_NMI_UNBLOCKED_BY_IRET is also used with Exit Qualification
+  * field for EPT violations, PML full and SPP-related event vmexits.
+  */
+-#define INTR_INFO_VECTOR_MASK           0xff            /* 7:0 */
+-#define INTR_INFO_INTR_TYPE_MASK        0x700           /* 10:8 */
+-#define INTR_INFO_DELIVER_CODE_MASK     0x800           /* 11 */
+-#define INTR_INFO_NMI_UNBLOCKED_BY_IRET 0x1000          /* 12 */
+-#define INTR_INFO_VALID_MASK            0x80000000      /* 31 */
+-#define INTR_INFO_RESVD_BITS_MASK       0x7ffff000
++#define INTR_INFO_VECTOR_MASK           0x000000ffU      /* 7:0 */
++#define INTR_INFO_INTR_TYPE_MASK        0x00000700U      /* 10:8 */
++#define INTR_INFO_DELIVER_CODE_MASK     0x00000800U      /* 11 */
++#define INTR_INFO_NMI_UNBLOCKED_BY_IRET 0x00001000U      /* 12 */
++#define INTR_INFO_VALID_MASK            0x80000000U      /* 31 */
++#define INTR_INFO_RESVD_BITS_MASK       0x7ffff000U
  
- #define IOMMU_CMD_BUFFER_ENTRY_ORDER            4
- #define IOMMU_CMD_BUFFER_MAX_ENTRIES            (1u << 15)
+ /*
+  * Exit Qualifications for NOTIFY VM EXIT
+@@ -246,15 +246,15 @@ typedef union cr_access_qual {
+ /*
+  * Access Rights
+  */
+-#define X86_SEG_AR_SEG_TYPE     0xf        /* 3:0, segment type */
+-#define X86_SEG_AR_DESC_TYPE    (1u << 4)  /* 4, descriptor type */
+-#define X86_SEG_AR_DPL          0x60       /* 6:5, descriptor privilege level */
+-#define X86_SEG_AR_SEG_PRESENT  (1u << 7)  /* 7, segment present */
+-#define X86_SEG_AR_AVL          (1u << 12) /* 12, available for system software */
+-#define X86_SEG_AR_CS_LM_ACTIVE (1u << 13) /* 13, long mode active (CS only) */
+-#define X86_SEG_AR_DEF_OP_SIZE  (1u << 14) /* 14, default operation size */
+-#define X86_SEG_AR_GRANULARITY  (1u << 15) /* 15, granularity */
+-#define X86_SEG_AR_SEG_UNUSABLE (1u << 16) /* 16, segment unusable */
++#define X86_SEG_AR_SEG_TYPE     0xfU       /* 3:0, segment type */
++#define X86_SEG_AR_DESC_TYPE    (1U << 4)  /* 4, descriptor type */
++#define X86_SEG_AR_DPL          0x60U      /* 6:5, descriptor privilege level */
++#define X86_SEG_AR_SEG_PRESENT  (1U << 7)  /* 7, segment present */
++#define X86_SEG_AR_AVL          (1U << 12) /* 12, available for system software */
++#define X86_SEG_AR_CS_LM_ACTIVE (1U << 13) /* 13, long mode active (CS only) */
++#define X86_SEG_AR_DEF_OP_SIZE  (1U << 14) /* 14, default operation size */
++#define X86_SEG_AR_GRANULARITY  (1U << 15) /* 15, granularity */
++#define X86_SEG_AR_SEG_UNUSABLE (1U << 16) /* 16, segment unusable */
  
--#define IOMMU_CMD_OPCODE_MASK			0xF0000000
-+#define IOMMU_CMD_OPCODE_MASK			0xF0000000U
- #define IOMMU_CMD_OPCODE_SHIFT			28
- #define IOMMU_CMD_COMPLETION_WAIT		0x1
- #define IOMMU_CMD_INVALIDATE_DEVTAB_ENTRY	0x2
-@@ -178,50 +178,50 @@ struct amd_iommu_dte {
- /* COMPLETION_WAIT command */
- #define IOMMU_COMP_WAIT_DATA_BUFFER_SIZE	8
- #define IOMMU_COMP_WAIT_DATA_BUFFER_ALIGNMENT	8
--#define IOMMU_COMP_WAIT_S_FLAG_MASK		0x00000001
--#define IOMMU_COMP_WAIT_I_FLAG_MASK		0x00000002
--#define IOMMU_COMP_WAIT_F_FLAG_MASK		0x00000004
--#define IOMMU_COMP_WAIT_ADDR_LOW_MASK		0xFFFFFFF8
-+#define IOMMU_COMP_WAIT_S_FLAG_MASK		0x00000001U
-+#define IOMMU_COMP_WAIT_I_FLAG_MASK		0x00000002U
-+#define IOMMU_COMP_WAIT_F_FLAG_MASK		0x00000004U
-+#define IOMMU_COMP_WAIT_ADDR_LOW_MASK		0xFFFFFFF8U
- #define IOMMU_COMP_WAIT_ADDR_LOW_SHIFT		3
--#define IOMMU_COMP_WAIT_ADDR_HIGH_MASK		0x000FFFFF
-+#define IOMMU_COMP_WAIT_ADDR_HIGH_MASK		0x000FFFFFU
- #define IOMMU_COMP_WAIT_ADDR_HIGH_SHIFT		0
+ #define VMCALL_OPCODE   ".byte 0x0f,0x01,0xc1\n"
+ #define VMCLEAR_OPCODE  ".byte 0x66,0x0f,0xc7\n"        /* reg/opcode: /6 */
+@@ -606,7 +606,7 @@ static inline void vmx_pi_hooks_assign(struct domain *d) {}
+ static inline void vmx_pi_hooks_deassign(struct domain *d) {}
+ #endif
  
- /* INVALIDATE_IOMMU_PAGES command */
--#define IOMMU_INV_IOMMU_PAGES_DOMAIN_ID_MASK	0x0000FFFF
-+#define IOMMU_INV_IOMMU_PAGES_DOMAIN_ID_MASK	0x0000FFFFU
- #define IOMMU_INV_IOMMU_PAGES_DOMAIN_ID_SHIFT	0
--#define IOMMU_INV_IOMMU_PAGES_S_FLAG_MASK	0x00000001
-+#define IOMMU_INV_IOMMU_PAGES_S_FLAG_MASK	0x00000001U
- #define IOMMU_INV_IOMMU_PAGES_S_FLAG_SHIFT	0
--#define IOMMU_INV_IOMMU_PAGES_PDE_FLAG_MASK	0x00000002
-+#define IOMMU_INV_IOMMU_PAGES_PDE_FLAG_MASK	0x00000002U
- #define IOMMU_INV_IOMMU_PAGES_PDE_FLAG_SHIFT	1
--#define IOMMU_INV_IOMMU_PAGES_ADDR_LOW_MASK	0xFFFFF000
-+#define IOMMU_INV_IOMMU_PAGES_ADDR_LOW_MASK	0xFFFFF000U
- #define IOMMU_INV_IOMMU_PAGES_ADDR_LOW_SHIFT	12
--#define IOMMU_INV_IOMMU_PAGES_ADDR_HIGH_MASK	0xFFFFFFFF
-+#define IOMMU_INV_IOMMU_PAGES_ADDR_HIGH_MASK	0xFFFFFFFFU
- #define IOMMU_INV_IOMMU_PAGES_ADDR_HIGH_SHIFT	0
+-#define APIC_INVALID_DEST           0xffffffff
++#define APIC_INVALID_DEST           0xffffffffU
  
- /* INVALIDATE_DEVTAB_ENTRY command */
--#define IOMMU_INV_DEVTAB_ENTRY_DEVICE_ID_MASK   0x0000FFFF
-+#define IOMMU_INV_DEVTAB_ENTRY_DEVICE_ID_MASK   0x0000FFFFU
- #define IOMMU_INV_DEVTAB_ENTRY_DEVICE_ID_SHIFT  0
- 
- /* INVALIDATE_INTERRUPT_TABLE command */
--#define IOMMU_INV_INT_TABLE_DEVICE_ID_MASK   0x0000FFFF
-+#define IOMMU_INV_INT_TABLE_DEVICE_ID_MASK   0x0000FFFFU
- #define IOMMU_INV_INT_TABLE_DEVICE_ID_SHIFT  0
- 
- /* INVALIDATE_IOTLB_PAGES command */
--#define IOMMU_INV_IOTLB_PAGES_MAXPEND_MASK          0xff000000
-+#define IOMMU_INV_IOTLB_PAGES_MAXPEND_MASK          0xff000000U
- #define IOMMU_INV_IOTLB_PAGES_MAXPEND_SHIFT         24
--#define IOMMU_INV_IOTLB_PAGES_PASID1_MASK           0x00ff0000
-+#define IOMMU_INV_IOTLB_PAGES_PASID1_MASK           0x00ff0000U
- #define IOMMU_INV_IOTLB_PAGES_PASID1_SHIFT          16
--#define IOMMU_INV_IOTLB_PAGES_PASID2_MASK           0x0fff0000
-+#define IOMMU_INV_IOTLB_PAGES_PASID2_MASK           0x0fff0000U
- #define IOMMU_INV_IOTLB_PAGES_PASID2_SHIFT          16
--#define IOMMU_INV_IOTLB_PAGES_QUEUEID_MASK          0x0000ffff
-+#define IOMMU_INV_IOTLB_PAGES_QUEUEID_MASK          0x0000ffffU
- #define IOMMU_INV_IOTLB_PAGES_QUEUEID_SHIFT         0
--#define IOMMU_INV_IOTLB_PAGES_DEVICE_ID_MASK        0x0000FFFF
-+#define IOMMU_INV_IOTLB_PAGES_DEVICE_ID_MASK        0x0000FFFFU
- #define IOMMU_INV_IOTLB_PAGES_DEVICE_ID_SHIFT       0
--#define IOMMU_INV_IOTLB_PAGES_ADDR_LOW_MASK         0xFFFFF000
-+#define IOMMU_INV_IOTLB_PAGES_ADDR_LOW_MASK         0xFFFFF000U
- #define IOMMU_INV_IOTLB_PAGES_ADDR_LOW_SHIFT        12
--#define IOMMU_INV_IOTLB_PAGES_ADDR_HIGH_MASK        0xFFFFFFFF
-+#define IOMMU_INV_IOTLB_PAGES_ADDR_HIGH_MASK        0xFFFFFFFFU
- #define IOMMU_INV_IOTLB_PAGES_ADDR_HIGH_SHIFT       0
--#define IOMMU_INV_IOTLB_PAGES_S_FLAG_MASK           0x00000001
-+#define IOMMU_INV_IOTLB_PAGES_S_FLAG_MASK           0x00000001U
- #define IOMMU_INV_IOTLB_PAGES_S_FLAG_SHIFT          0
- 
- /* Event Log */
-@@ -229,18 +229,18 @@ struct amd_iommu_dte {
- #define IOMMU_EVENT_LOG_BASE_HIGH_OFFSET	0x14
- #define IOMMU_EVENT_LOG_HEAD_OFFSET		0x2010
- #define IOMMU_EVENT_LOG_TAIL_OFFSET		0x2018
--#define IOMMU_EVENT_LOG_LENGTH_MASK		0x0F000000
-+#define IOMMU_EVENT_LOG_LENGTH_MASK		0x0F000000U
- #define IOMMU_EVENT_LOG_LENGTH_SHIFT		24
--#define IOMMU_EVENT_LOG_HEAD_MASK		0x0007FFF0
-+#define IOMMU_EVENT_LOG_HEAD_MASK		0x0007FFF0U
- #define IOMMU_EVENT_LOG_HEAD_SHIFT		4
--#define IOMMU_EVENT_LOG_TAIL_MASK		0x0007FFF0
-+#define IOMMU_EVENT_LOG_TAIL_MASK		0x0007FFF0U
- #define IOMMU_EVENT_LOG_TAIL_SHIFT		4
- 
- #define IOMMU_EVENT_LOG_ENTRY_SIZE 			16
- #define IOMMU_EVENT_LOG_POWER_OF2_ENTRIES_PER_PAGE	8
- #define IOMMU_EVENT_LOG_U32_PER_ENTRY	(IOMMU_EVENT_LOG_ENTRY_SIZE / 4)
- 
--#define IOMMU_EVENT_CODE_MASK			0xF0000000
-+#define IOMMU_EVENT_CODE_MASK			0xF0000000U
- #define IOMMU_EVENT_CODE_SHIFT			28
- #define IOMMU_EVENT_ILLEGAL_DEV_TABLE_ENTRY	0x1
- #define IOMMU_EVENT_IO_PAGE_FAULT		0x2
-@@ -251,12 +251,12 @@ struct amd_iommu_dte {
- #define IOMMU_EVENT_IOTLB_INV_TIMEOUT		0x7
- #define IOMMU_EVENT_INVALID_DEV_REQUEST		0x8
- 
--#define IOMMU_EVENT_DOMAIN_ID_MASK           0x0000FFFF
-+#define IOMMU_EVENT_DOMAIN_ID_MASK           0x0000FFFFU
- #define IOMMU_EVENT_DOMAIN_ID_SHIFT          0
--#define IOMMU_EVENT_DEVICE_ID_MASK           0x0000FFFF
-+#define IOMMU_EVENT_DEVICE_ID_MASK           0x0000FFFFU
- #define IOMMU_EVENT_DEVICE_ID_SHIFT          0
- #define IOMMU_EVENT_FLAGS_SHIFT              16
--#define IOMMU_EVENT_FLAGS_MASK               0x0FFF0000
-+#define IOMMU_EVENT_FLAGS_MASK               0x0FFF0000U
- 
- /* PPR Log */
- #define IOMMU_PPR_LOG_ENTRY_SIZE                        16
-@@ -265,21 +265,21 @@ struct amd_iommu_dte {
- 
- #define IOMMU_PPR_LOG_BASE_LOW_OFFSET                   0x0038
- #define IOMMU_PPR_LOG_BASE_HIGH_OFFSET                  0x003C
--#define IOMMU_PPR_LOG_BASE_LOW_MASK                     0xFFFFF000
-+#define IOMMU_PPR_LOG_BASE_LOW_MASK                     0xFFFFF000U
- #define IOMMU_PPR_LOG_BASE_LOW_SHIFT                    12
--#define IOMMU_PPR_LOG_BASE_HIGH_MASK                    0x000FFFFF
-+#define IOMMU_PPR_LOG_BASE_HIGH_MASK                    0x000FFFFFU
- #define IOMMU_PPR_LOG_BASE_HIGH_SHIFT                   0
--#define IOMMU_PPR_LOG_LENGTH_MASK                       0x0F000000
-+#define IOMMU_PPR_LOG_LENGTH_MASK                       0x0F000000U
- #define IOMMU_PPR_LOG_LENGTH_SHIFT                      24
--#define IOMMU_PPR_LOG_HEAD_MASK                         0x0007FFF0
-+#define IOMMU_PPR_LOG_HEAD_MASK                         0x0007FFF0U
- #define IOMMU_PPR_LOG_HEAD_SHIFT                        4
--#define IOMMU_PPR_LOG_TAIL_MASK                         0x0007FFF0
-+#define IOMMU_PPR_LOG_TAIL_MASK                         0x0007FFF0U
- #define IOMMU_PPR_LOG_TAIL_SHIFT                        4
- #define IOMMU_PPR_LOG_HEAD_OFFSET                       0x2030
- #define IOMMU_PPR_LOG_TAIL_OFFSET                       0x2038
--#define IOMMU_PPR_LOG_DEVICE_ID_MASK                    0x0000FFFF
-+#define IOMMU_PPR_LOG_DEVICE_ID_MASK                    0x0000FFFFU
- #define IOMMU_PPR_LOG_DEVICE_ID_SHIFT                   0
--#define IOMMU_PPR_LOG_CODE_MASK                         0xF0000000
-+#define IOMMU_PPR_LOG_CODE_MASK                         0xF0000000U
- #define IOMMU_PPR_LOG_CODE_SHIFT                        28
- 
- #define IOMMU_LOG_ENTRY_TIMEOUT                         1000
-@@ -342,17 +342,17 @@ union amd_iommu_control {
- #define IOMMU_EXCLUSION_BASE_HIGH_OFFSET	0x24
- #define IOMMU_EXCLUSION_LIMIT_LOW_OFFSET	0x28
- #define IOMMU_EXCLUSION_LIMIT_HIGH_OFFSET	0x2C
--#define IOMMU_EXCLUSION_BASE_LOW_MASK		0xFFFFF000
-+#define IOMMU_EXCLUSION_BASE_LOW_MASK		0xFFFFF000U
- #define IOMMU_EXCLUSION_BASE_LOW_SHIFT		12
--#define IOMMU_EXCLUSION_BASE_HIGH_MASK		0xFFFFFFFF
-+#define IOMMU_EXCLUSION_BASE_HIGH_MASK		0xFFFFFFFFU
- #define IOMMU_EXCLUSION_BASE_HIGH_SHIFT		0
--#define IOMMU_EXCLUSION_RANGE_ENABLE_MASK	0x00000001
-+#define IOMMU_EXCLUSION_RANGE_ENABLE_MASK	0x00000001U
- #define IOMMU_EXCLUSION_RANGE_ENABLE_SHIFT	0
--#define IOMMU_EXCLUSION_ALLOW_ALL_MASK		0x00000002
-+#define IOMMU_EXCLUSION_ALLOW_ALL_MASK		0x00000002U
- #define IOMMU_EXCLUSION_ALLOW_ALL_SHIFT		1
--#define IOMMU_EXCLUSION_LIMIT_LOW_MASK		0xFFFFF000
-+#define IOMMU_EXCLUSION_LIMIT_LOW_MASK		0xFFFFF000U
- #define IOMMU_EXCLUSION_LIMIT_LOW_SHIFT		12
--#define IOMMU_EXCLUSION_LIMIT_HIGH_MASK		0xFFFFFFFF
-+#define IOMMU_EXCLUSION_LIMIT_HIGH_MASK		0xFFFFFFFFU
- #define IOMMU_EXCLUSION_LIMIT_HIGH_SHIFT	0
- 
- /* Extended Feature Register */
-@@ -476,14 +476,14 @@ union amd_iommu_pte {
- 
- #define INV_IOMMU_ALL_PAGES_ADDRESS      ((1ULL << 63) - 1)
- 
--#define IOMMU_RING_BUFFER_PTR_MASK                  0x0007FFF0
-+#define IOMMU_RING_BUFFER_PTR_MASK                  0x0007FFF0U
- 
--#define IOMMU_CMD_DEVICE_ID_MASK                    0x0000FFFF
-+#define IOMMU_CMD_DEVICE_ID_MASK                    0x0000FFFFU
- #define IOMMU_CMD_DEVICE_ID_SHIFT                   0
- 
--#define IOMMU_REG_BASE_ADDR_LOW_MASK                0xFFFFF000
-+#define IOMMU_REG_BASE_ADDR_LOW_MASK                0xFFFFF000U
- #define IOMMU_REG_BASE_ADDR_LOW_SHIFT               12
--#define IOMMU_REG_BASE_ADDR_HIGH_MASK               0x000FFFFF
-+#define IOMMU_REG_BASE_ADDR_HIGH_MASK               0x000FFFFFU
- #define IOMMU_REG_BASE_ADDR_HIGH_SHIFT              0
- 
- #endif /* AMD_IOMMU_DEFS_H */
+ /* EPT violation qualifications definitions */
+ typedef union ept_qual {
 -- 
 2.41.0
 
