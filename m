@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB60EB64DD
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 15:27:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.559319.874294 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF910C001B0
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 15:27:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.559308.874216 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qH4Ph-0004Vb-0t; Wed, 05 Jul 2023 15:27:29 +0000
+	id 1qH4PY-0002Aw-Qq; Wed, 05 Jul 2023 15:27:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 559319.874294; Wed, 05 Jul 2023 15:27:28 +0000
+Received: by outflank-mailman (output) from mailman id 559308.874216; Wed, 05 Jul 2023 15:27:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qH4Pg-0004VM-Q4; Wed, 05 Jul 2023 15:27:28 +0000
-Received: by outflank-mailman (input) for mailman id 559319;
- Wed, 05 Jul 2023 15:27:26 +0000
+	id 1qH4PY-0002AB-Jh; Wed, 05 Jul 2023 15:27:20 +0000
+Received: by outflank-mailman (input) for mailman id 559308;
+ Wed, 05 Jul 2023 15:27:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yX3c=CX=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qH4Pe-0001jW-KZ
- for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 15:27:26 +0000
+ id 1qH4PW-0001jW-Vl
+ for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 15:27:18 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7164c290-1b48-11ee-8611-37d641c3527e;
- Wed, 05 Jul 2023 17:27:25 +0200 (CEST)
+ id 6ca95199-1b48-11ee-8611-37d641c3527e;
+ Wed, 05 Jul 2023 17:27:17 +0200 (CEST)
 Received: from beta.bugseng.com (unknown [37.163.248.64])
- by support.bugseng.com (Postfix) with ESMTPSA id 1E4744EE0C9D;
- Wed,  5 Jul 2023 17:27:24 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id E85EF4EE0C8B;
+ Wed,  5 Jul 2023 17:27:15 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,20 +41,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7164c290-1b48-11ee-8611-37d641c3527e
+X-Inumbo-ID: 6ca95199-1b48-11ee-8611-37d641c3527e
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH v2 11/13] xen/vpci: fix violations of MISRA C:2012 Rule 7.2
-Date: Wed,  5 Jul 2023 17:26:33 +0200
-Message-Id: <4b4fad089f8fc85db19b33524ea6b14b1aef7cbb.1688559115.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH v2 03/13] x86/svm: fix violations of MISRA C:2012 Rule 7.2
+Date: Wed,  5 Jul 2023 17:26:25 +0200
+Message-Id: <015d7c13dc4e1b481abb23a3eaa254e316b7ca53.1688559115.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1688559115.git.gianluca.luparini@bugseng.com>
 References: <cover.1688559115.git.gianluca.luparini@bugseng.com>
@@ -78,70 +81,52 @@ Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in v2:
-- minor change to commit title
+- change commit title to make it unique
 - change commit message
 ---
- xen/drivers/vpci/msi.c  | 2 +-
- xen/drivers/vpci/msix.c | 2 +-
- xen/drivers/vpci/vpci.c | 6 +++---
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ xen/arch/x86/hvm/svm/asid.c | 2 +-
+ xen/arch/x86/hvm/svm/svm.c  | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
-index 8f2b59e61a..7908a5dac6 100644
---- a/xen/drivers/vpci/msi.c
-+++ b/xen/drivers/vpci/msi.c
-@@ -124,7 +124,7 @@ static void cf_check address_hi_write(
-     struct vpci_msi *msi = data;
+diff --git a/xen/arch/x86/hvm/svm/asid.c b/xen/arch/x86/hvm/svm/asid.c
+index 09f8c23fd9..56306d1a16 100644
+--- a/xen/arch/x86/hvm/svm/asid.c
++++ b/xen/arch/x86/hvm/svm/asid.c
+@@ -16,7 +16,7 @@ void svm_asid_init(const struct cpuinfo_x86 *c)
  
-     /* Clear and update high part. */
--    msi->address &= 0xffffffff;
-+    msi->address &= 0xffffffffU;
-     msi->address |= (uint64_t)val << 32;
+     /* Check for erratum #170, and leave ASIDs disabled if it's present. */
+     if ( !cpu_has_amd_erratum(c, AMD_ERRATUM_170) )
+-        nasids = cpuid_ebx(0x8000000A);
++        nasids = cpuid_ebx(0x8000000AU);
  
-     update_msi(pdev, msi);
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 25bde77586..d440ffcd81 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -531,7 +531,7 @@ static int cf_check msix_write(
- 
-     case PCI_MSIX_ENTRY_UPPER_ADDR_OFFSET:
-         entry->updated = true;
--        entry->addr &= 0xffffffff;
-+        entry->addr &= 0xffffffffU;
-         entry->addr |= (uint64_t)data << 32;
-         break;
- 
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index d73fa76302..3bec9a4153 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -319,7 +319,7 @@ static void vpci_write_hw(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
- static uint32_t merge_result(uint32_t data, uint32_t new, unsigned int size,
-                              unsigned int offset)
- {
--    uint32_t mask = 0xffffffff >> (32 - 8 * size);
-+    uint32_t mask = 0xffffffffU >> (32 - 8 * size);
- 
-     return (data & ~(mask << (offset * 8))) | ((new & mask) << (offset * 8));
+     hvm_asid_init(nasids);
  }
-@@ -402,7 +402,7 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
-         data = merge_result(data, tmp_data, size - data_offset, data_offset);
-     }
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 59a6e88dff..56cb2f61bb 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -269,9 +269,9 @@ svm_msrbit(unsigned long *msr_bitmap, uint32_t msr)
+      */
+     if ( msr <= 0x1fff )
+         msr_bit = msr_bitmap + 0x0000 / BYTES_PER_LONG;
+-    else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
++    else if ( (msr >= 0xc0000000U) && (msr <= 0xc0001fffU) )
+         msr_bit = msr_bitmap + 0x0800 / BYTES_PER_LONG;
+-    else if ( (msr >= 0xc0010000) && (msr <= 0xc0011fff) )
++    else if ( (msr >= 0xc0010000U) && (msr <= 0xc0011fffU) )
+         msr_bit = msr_bitmap + 0x1000 / BYTES_PER_LONG;
  
--    return data & (0xffffffff >> (32 - 8 * size));
-+    return data & (0xffffffffU >> (32 - 8 * size));
- }
+     return msr_bit;
+@@ -2539,8 +2539,8 @@ const struct hvm_function_table * __init start_svm(void)
  
- /*
-@@ -427,7 +427,7 @@ static void vpci_write_helper(const struct pci_dev *pdev,
-         data = merge_result(val, data, size, offset);
-     }
+     setup_vmcb_dump();
  
--    r->write(pdev, r->offset, data & (0xffffffff >> (32 - 8 * r->size)),
-+    r->write(pdev, r->offset, data & (0xffffffffU >> (32 - 8 * r->size)),
-              r->private);
- }
+-    if ( boot_cpu_data.extended_cpuid_level >= 0x8000000a )
+-        svm_feature_flags = cpuid_edx(0x8000000a);
++    if ( boot_cpu_data.extended_cpuid_level >= 0x8000000aU )
++        svm_feature_flags = cpuid_edx(0x8000000aU);
+ 
+     printk("SVM: Supported advanced features:\n");
  
 -- 
 2.41.0
