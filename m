@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE5EEB64DA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB736C001DF
 	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 09:35:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.558894.873465 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.558898.873500 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qGyv7-0000AJ-JV; Wed, 05 Jul 2023 09:35:33 +0000
+	id 1qGyvG-0002J0-Pv; Wed, 05 Jul 2023 09:35:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 558894.873465; Wed, 05 Jul 2023 09:35:33 +0000
+Received: by outflank-mailman (output) from mailman id 558898.873500; Wed, 05 Jul 2023 09:35:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qGyv7-00009P-81; Wed, 05 Jul 2023 09:35:33 +0000
-Received: by outflank-mailman (input) for mailman id 558894;
- Wed, 05 Jul 2023 09:35:32 +0000
+	id 1qGyvG-0002GF-Cc; Wed, 05 Jul 2023 09:35:42 +0000
+Received: by outflank-mailman (input) for mailman id 558898;
+ Wed, 05 Jul 2023 09:35:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hy0b=CX=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1qGyv6-0006bq-59
- for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 09:35:32 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
+ id 1qGyvE-0006bq-KV
+ for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 09:35:40 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 48d8192e-1b17-11ee-b237-6b7b168915f2;
- Wed, 05 Jul 2023 11:35:31 +0200 (CEST)
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2b69dcf45faso105696701fa.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Jul 2023 02:35:31 -0700 (PDT)
+ id 4dc097f4-1b17-11ee-b237-6b7b168915f2;
+ Wed, 05 Jul 2023 11:35:39 +0200 (CEST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-4fb73ba3b5dso10463065e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Jul 2023 02:35:39 -0700 (PDT)
 Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- q22-20020a2e84d6000000b002b6d8cfb6d2sm2910625ljh.140.2023.07.05.02.35.29
+ q22-20020a2e84d6000000b002b6d8cfb6d2sm2910625ljh.140.2023.07.05.02.35.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Jul 2023 02:35:30 -0700 (PDT)
+ Wed, 05 Jul 2023 02:35:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48d8192e-1b17-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 4dc097f4-1b17-11ee-b237-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1688549731; x=1691141731;
+        d=linaro.org; s=google; t=1688549739; x=1691141739;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=DSBg2xryTcGQSIhkiAk5XZ42VUodB1h52U56N4DUxBw=;
-        b=haix9goqTFpeMCgdTNcgcuJZeX+0YMjDXLAQnkf1/sLdppJVDOj+/tcCGGpSE4G8EH
-         vQPmx4Yyj5Bsq5d7NH26qdkt0k1KVHYKA+/Q/hxhwNJN3XTSoJPzvhtR0pCSQblTvC+f
-         1Ef6o05MuYwmQWRhYVLbF9tIgQx6VW0Fq73Z14/bO+VN6XjhGqoUGGXlZ6KaPAAr3cpQ
-         k8WrX1aPPmAX21Abp6bAZEhIbyGgH7I2Hxpc4jYlaITLXWSqvYRqT47RWAAfvSF6S9MX
-         kC7r1DeLDmttUjKlKn7GAoGJhJp2uAtbqYay9Et9hYwQ8u2GQ+qmjJQR1w5Hn/WgMkkb
-         9PMw==
+        bh=aYbk+SQ1clAFmK5go+uqkAk7DJv+x5ZhyiBn1d+JtnA=;
+        b=RYuKrG+nyp98x2XlR4g1pqGU6cthc/eD2x5DpsJORp1UZ4nEIW8PHICrRlP2vFM4nX
+         t6tVw4TQseuueu2mcA/Ngy0bkB6nPJY1sHXrAKxNGrX6w5A3y3Adigd1rWlESmb1OTGr
+         DhBa8eBoSJKIW7Q0WVBCrHFLrqXUVZG/bt8t3X1rxdGn9jswUa+B9O7LcAPQAo0VO797
+         6C1nb+sMFIzkHTyzv78LqyNkRhzUB7ap8UHSBwchTLQUKyZCUx2i7jN7zInJlHUk8TaP
+         6o0Jian0GRFem6itEKUG9cRtW2JYMVSV/GLBbFfPdlplxdERyZq6w7Tmb/dXdZmtHlOA
+         B3PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688549731; x=1691141731;
+        d=1e100.net; s=20221208; t=1688549739; x=1691141739;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=DSBg2xryTcGQSIhkiAk5XZ42VUodB1h52U56N4DUxBw=;
-        b=dtw2enCkMov8bn/UlslcnBZKzXN3/H6sZZF/U9+YUNTSgnZ25Mbfq1OBjDATyX3937
-         FInXpN3Ob9Sz4V3LjhPaVCrCzAPqyhFrkD3GHdi/sfbt9QtFWAF1iu5Drhoh4wzFSbBe
-         ICGfRkjZq5lUrgSZmdvNixWojp3Wjlw3L6wgun+US8PUKzEbWH6L73RI0UtY1UJEdwuL
-         SVibVdg6XVaibXGcmtYrF+pgnoJRt/L/LN1KX28ElK6yKpGWUvEl4X6U+ZJB67sY07zr
-         z7rgNn102x3STTGM78ZbRIJ9UZsuEjpmCDneuvhdAxh1NKRlyOwYc86RuTAZTh9zlGPx
-         GYqA==
-X-Gm-Message-State: ABy/qLbKIGS6FK/+BuFMvkEVTsMD0i9C1rUd+OdNuPd5Uz93Uo+hBlkF
-	qNNStUxWZGICdPSNA/qsYaNwo4esrSMXeXy7qFU=
-X-Google-Smtp-Source: APBJJlGVz+GGr1BGYhTewNovKl6bOEcgQCxFMYm0WJ6fzZSavWHZSOqfa3zc0++sJavG17h6yVNjHw==
-X-Received: by 2002:a2e:b0d2:0:b0:2b6:d9dd:f65f with SMTP id g18-20020a2eb0d2000000b002b6d9ddf65fmr8142941ljl.17.1688549730903;
-        Wed, 05 Jul 2023 02:35:30 -0700 (PDT)
+        bh=aYbk+SQ1clAFmK5go+uqkAk7DJv+x5ZhyiBn1d+JtnA=;
+        b=crE1OOkPxeuUHUOoxoIFJ3C68/NRLzQFN7RVwi34cRZ/utc3RC2s2aJAzJe5Ek/age
+         VhsvlKo4PuDCPViUMKmEhLBR8dlWm2AOsQdHCu/9n32aDPn5eTQyfCGhpxDAS15bETbG
+         PKa+nodOXRi1qGat12hl6mrCj0JuTrosp1NvI1jZiA1juRiMcAd9aULil2PmWTdEMAVr
+         U0r03IurlNUHDQuYkJEd+w6c9Ebbtf6OBnTKwedBGBhpKAGVZESz+EcrkR2pUTTOpzNf
+         ICSi+msYSaV8q5FyrRllXH25Bwc+5J9OcCnYSalrf4gUc/Wvyk6y40fmxNDhj5S/bzk3
+         fFFg==
+X-Gm-Message-State: ABy/qLbrkr2gLNJHnllNJo9TiHAmUOr9nztiRU+UYlJCKHgnXPKTdvZE
+	nlZK/MPchiRvoDtASYccnrI9JCY9paC2f6nzeNA=
+X-Google-Smtp-Source: APBJJlFEsmI9XieucKFevLoCAa5Lqvq6pcooF4RgPlcFUBGQuDcdyXtmjQu7OcvFUzrfWZsUidy+BQ==
+X-Received: by 2002:a2e:3611:0:b0:2b6:fa8d:ff91 with SMTP id d17-20020a2e3611000000b002b6fa8dff91mr2738414lja.3.1688549739097;
+        Wed, 05 Jul 2023 02:35:39 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -90,227 +90,395 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Achin Gupta <achin.gupta@arm.com>,
 	Jens Wiklander <jens.wiklander@linaro.org>,
 	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [XEN PATCH v9 13/24] xen/arm: ffa: support mapping guest RX/TX buffers
-Date: Wed,  5 Jul 2023 11:34:22 +0200
-Message-Id: <20230705093433.2514898-14-jens.wiklander@linaro.org>
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [XEN PATCH v9 20/24] xen/arm: ffa: support sharing large memory ranges
+Date: Wed,  5 Jul 2023 11:34:29 +0200
+Message-Id: <20230705093433.2514898-21-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230705093433.2514898-1-jens.wiklander@linaro.org>
 References: <20230705093433.2514898-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Adds support in the mediator to map and unmap the RX and TX buffers
-provided by the guest using the two FF-A functions FFA_RXTX_MAP and
-FFA_RXTX_UNMAP.
+Adds support for sharing large memory ranges transmitted in fragments
+using FFA_MEM_FRAG_TX.
 
-These buffer are later used to transmit data that cannot be passed in
-registers only.
+The implementation is the bare minimum to be able to communicate with
+OP-TEE running as an SPMC at S-EL1.
+
+Adds a check that the SP supports the needed FF-A feature
+FFA_MEM_FRAG_TX.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 ---
- xen/arch/arm/tee/ffa.c | 138 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 138 insertions(+)
+ xen/arch/arm/tee/ffa.c | 253 ++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 240 insertions(+), 13 deletions(-)
 
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index d755363de686..ffabb5ed0a80 100644
+index c623c51168b9..ac23b9edc74c 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -74,6 +74,12 @@
-  */
- #define FFA_RXTX_PAGE_COUNT             1
- 
-+/*
-+ * Limits the number of pages RX/TX buffers guests can map.
-+ * TODO support a larger number.
-+ */
-+#define FFA_MAX_RXTX_PAGE_COUNT         1
-+
- /*
-  * Flags and field values used for the MSG_SEND_DIRECT_REQ/RESP:
-  * BIT(31): Framework or partition message
-@@ -169,6 +175,12 @@ struct ffa_partition_info_1_1 {
- };
- 
- struct ffa_ctx {
-+    void *rx;
-+    const void *tx;
-+    struct page_info *rx_pg;
-+    struct page_info *tx_pg;
-+    /* Number of 4kB pages in each of rx/rx_pg and tx/tx_pg */
-+    unsigned int page_count;
-     /* FF-A version used by the guest */
-     uint32_t guest_vers;
-     /*
-@@ -176,6 +188,7 @@ struct ffa_ctx {
-      * ffa_domain_teardown() to know which SPs need to be signalled.
+@@ -359,6 +359,8 @@ struct ffa_ctx {
       */
      uint16_t create_signal_count;
-+    bool rx_is_free;
+     bool rx_is_free;
++    /* Currently used fragment states, struct mem_frag_state */
++    struct list_head frag_list;
+     /* Used shared memory objects, struct ffa_shm_mem */
+     struct list_head shm_list;
+     /* Number of allocated shared memory object */
+@@ -375,6 +377,18 @@ struct ffa_shm_mem {
+     struct page_info *pages[];
  };
  
++struct mem_frag_state {
++    struct list_head list;
++    struct ffa_shm_mem *shm;
++    uint32_t range_count;
++    unsigned int current_page_idx;
++    unsigned int frag_offset;
++    unsigned int range_offset;
++    const uint8_t *buf;
++    unsigned int buf_size;
++    struct ffa_address_range range;
++};
++
  /* Negotiated FF-A version to use with the SPMC */
-@@ -371,6 +384,11 @@ static void set_regs(struct cpu_user_regs *regs, register_t v0, register_t v1,
-         set_user_reg(regs, 7, v7);
+ static uint32_t __ro_after_init ffa_version;
+ 
+@@ -538,6 +552,36 @@ static int32_t ffa_mem_share(uint32_t tot_len, uint32_t frag_len,
+     }
  }
  
-+static void set_regs_error(struct cpu_user_regs *regs, uint32_t error_code)
++static int32_t ffa_mem_frag_tx(uint64_t handle, uint32_t frag_len,
++                               uint16_t sender_id)
 +{
-+    set_regs(regs, FFA_ERROR, 0, error_code, 0, 0, 0, 0, 0);
++    struct arm_smccc_1_2_regs arg = {
++        .a0 = FFA_MEM_FRAG_TX,
++        .a1 = handle & UINT32_MAX,
++        .a2 = handle >> 32,
++        .a3 = frag_len,
++        .a4 = (uint32_t)sender_id << 16,
++    };
++    struct arm_smccc_1_2_regs resp;
++
++    arm_smccc_1_2_smc(&arg, &resp);
++
++    switch ( resp.a0 )
++    {
++    case FFA_ERROR:
++        if ( resp.a2 )
++            return resp.a2;
++        else
++            return FFA_RET_NOT_SUPPORTED;
++    case FFA_SUCCESS_32:
++        return FFA_RET_OK;
++    case FFA_MEM_FRAG_RX:
++        return resp.a3;
++    default:
++            return FFA_RET_NOT_SUPPORTED;
++    }
 +}
 +
- static void set_regs_success(struct cpu_user_regs *regs, uint32_t w2,
-                              uint32_t w3)
+ static int32_t ffa_mem_reclaim(uint32_t handle_lo, uint32_t handle_hi,
+                                uint32_t flags)
  {
-@@ -392,6 +410,106 @@ static void handle_version(struct cpu_user_regs *regs)
-     set_regs(regs, vers, 0, 0, 0, 0, 0, 0, 0);
+@@ -627,6 +671,14 @@ static void set_regs_success(struct cpu_user_regs *regs, uint32_t w2,
+     set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, 0, 0, 0, 0);
  }
  
-+static uint32_t handle_rxtx_map(uint32_t fid, register_t tx_addr,
-+                                register_t rx_addr, uint32_t page_count)
++static void set_regs_frag_rx(struct cpu_user_regs *regs, uint32_t handle_lo,
++                             uint32_t handle_hi, uint32_t frag_offset,
++                             uint16_t sender_id)
 +{
-+    uint32_t ret = FFA_RET_INVALID_PARAMETERS;
-+    struct domain *d = current->domain;
-+    struct ffa_ctx *ctx = d->arch.tee;
-+    struct page_info *tx_pg;
-+    struct page_info *rx_pg;
-+    p2m_type_t t;
-+    void *rx;
-+    void *tx;
-+
-+    if ( !smccc_is_conv_64(fid) )
-+    {
-+        /*
-+         * Calls using the 32-bit calling convention must ignore the upper
-+         * 32 bits in the argument registers.
-+         */
-+        tx_addr &= UINT32_MAX;
-+        rx_addr &= UINT32_MAX;
-+    }
-+
-+    if ( page_count > FFA_MAX_RXTX_PAGE_COUNT )
-+    {
-+        printk(XENLOG_ERR "ffa: RXTX_MAP: error: %u pages requested (limit %u)\n",
-+               page_count, FFA_MAX_RXTX_PAGE_COUNT);
-+        return FFA_RET_NOT_SUPPORTED;
-+    }
-+
-+    /* Already mapped */
-+    if ( ctx->rx )
-+        return FFA_RET_DENIED;
-+
-+    tx_pg = get_page_from_gfn(d, gfn_x(gaddr_to_gfn(tx_addr)), &t, P2M_ALLOC);
-+    if ( !tx_pg )
-+        return FFA_RET_INVALID_PARAMETERS;
-+    /* Only normal RW RAM for now */
-+    if ( t != p2m_ram_rw )
-+        goto err_put_tx_pg;
-+
-+    rx_pg = get_page_from_gfn(d, gfn_x(gaddr_to_gfn(rx_addr)), &t, P2M_ALLOC);
-+    if ( !tx_pg )
-+        goto err_put_tx_pg;
-+    /* Only normal RW RAM for now */
-+    if ( t != p2m_ram_rw )
-+        goto err_put_rx_pg;
-+
-+    tx = __map_domain_page_global(tx_pg);
-+    if ( !tx )
-+        goto err_put_rx_pg;
-+
-+    rx = __map_domain_page_global(rx_pg);
-+    if ( !rx )
-+        goto err_unmap_tx;
-+
-+    ctx->rx = rx;
-+    ctx->tx = tx;
-+    ctx->rx_pg = rx_pg;
-+    ctx->tx_pg = tx_pg;
-+    ctx->page_count = page_count;
-+    ctx->rx_is_free = true;
-+    return FFA_RET_OK;
-+
-+err_unmap_tx:
-+    unmap_domain_page_global(tx);
-+err_put_rx_pg:
-+    put_page(rx_pg);
-+err_put_tx_pg:
-+    put_page(tx_pg);
-+
-+    return ret;
++    set_regs(regs, FFA_MEM_FRAG_RX, handle_lo, handle_hi, frag_offset,
++             (uint32_t)sender_id << 16, 0, 0, 0);
 +}
 +
-+static void rxtx_unmap(struct ffa_ctx *ctx)
-+{
-+    unmap_domain_page_global(ctx->rx);
-+    unmap_domain_page_global(ctx->tx);
-+    put_page(ctx->rx_pg);
-+    put_page(ctx->tx_pg);
-+    ctx->rx = NULL;
-+    ctx->tx = NULL;
-+    ctx->rx_pg = NULL;
-+    ctx->tx_pg = NULL;
-+    ctx->page_count = 0;
-+    ctx->rx_is_free = false;
-+}
-+
-+static uint32_t handle_rxtx_unmap(void)
-+{
-+    struct domain *d = current->domain;
-+    struct ffa_ctx *ctx = d->arch.tee;
-+
-+    if ( !ctx->rx )
-+        return FFA_RET_INVALID_PARAMETERS;
-+
-+    rxtx_unmap(ctx);
-+
-+    return FFA_RET_OK;
-+}
-+
- static void handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
+ static void handle_version(struct cpu_user_regs *regs)
  {
-     struct arm_smccc_1_2_regs arg = { .a0 = fid, };
-@@ -448,6 +566,7 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
-     uint32_t fid = get_user_reg(regs, 0);
      struct domain *d = current->domain;
-     struct ffa_ctx *ctx = d->arch.tee;
-+    int e;
+@@ -999,6 +1051,8 @@ static int share_shm(struct ffa_shm_mem *shm)
+     paddr_t last_pa;
+     unsigned int n;
+     paddr_t pa;
++    bool first;
++    int ret;
  
-     if ( !ctx )
-         return false;
-@@ -460,6 +579,22 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
-     case FFA_ID_GET:
-         set_regs_success(regs, get_vm_id(d), 0);
-         return true;
-+    case FFA_RXTX_MAP_32:
-+    case FFA_RXTX_MAP_64:
-+        e = handle_rxtx_map(fid, get_user_reg(regs, 1), get_user_reg(regs, 2),
-+                            get_user_reg(regs, 3));
-+        if ( e )
-+            set_regs_error(regs, e);
+     ASSERT(spin_is_locked(&ffa_tx_buffer_lock));
+     ASSERT(shm->page_count);
+@@ -1034,13 +1088,23 @@ static int share_shm(struct ffa_shm_mem *shm)
+ 
+     tot_len = ADDR_RANGE_OFFSET(descr->mem_access_count, region_count,
+                                 region_descr->address_range_count);
+-    if ( tot_len > max_frag_len )
+-        return FFA_RET_NOT_SUPPORTED;
+ 
++    /*
++     * Sharing memory with secure world may have to be done with multiple
++     * calls depending on how many address ranges will be needed. If we're
++     * sharing physically contiguous memory we will only need one range but
++     * we will also need to deal with the worst case where all physical
++     * pages are non-contiguous. For the first batch of address ranges we
++     * call ffa_mem_share() and for all that follows ffa_mem_frag_tx().
++     *
++     * We use frag_len to keep track of how far into the transmit buffer we
++     * have gone.
++     */
+     addr_range = region_descr->address_range_array;
+     frag_len = ADDR_RANGE_OFFSET(descr->mem_access_count, region_count, 1);
+     last_pa = page_to_maddr(shm->pages[0]);
+     init_range(addr_range, last_pa);
++    first = true;
+     for ( n = 1; n < shm->page_count; last_pa = pa, n++ )
+     {
+         pa = page_to_maddr(shm->pages[n]);
+@@ -1050,12 +1114,34 @@ static int share_shm(struct ffa_shm_mem *shm)
+             continue;
+         }
+ 
+-        frag_len += sizeof(*addr_range);
+-        addr_range++;
++        if ( frag_len == max_frag_len )
++        {
++            if ( first )
++            {
++                ret = ffa_mem_share(tot_len, frag_len, 0, 0, &shm->handle);
++                first = false;
++            }
++            else
++            {
++                ret = ffa_mem_frag_tx(shm->handle, frag_len, shm->sender_id);
++            }
++            if ( ret <= 0 )
++                return ret;
++            frag_len = sizeof(*addr_range);
++            addr_range = buf;
++        }
 +        else
-+            set_regs_success(regs, 0, 0);
-+        return true;
-+    case FFA_RXTX_UNMAP:
-+        e = handle_rxtx_unmap();
-+        if ( e )
-+            set_regs_error(regs, e);
-+        else
-+            set_regs_success(regs, 0, 0);
-+        return true;
-     case FFA_MSG_SEND_DIRECT_REQ_32:
-     case FFA_MSG_SEND_DIRECT_REQ_64:
-         handle_msg_send_direct_req(regs, fid);
-@@ -551,6 +686,9 @@ static int ffa_domain_teardown(struct domain *d)
-                    get_vm_id(d), subscr_vm_destroyed[n], res);
++        {
++            frag_len += sizeof(*addr_range);
++            addr_range++;
++        }
+         init_range(addr_range, pa);
      }
  
-+    if ( ctx->rx )
-+        rxtx_unmap(ctx);
+-    return ffa_mem_share(tot_len, frag_len, 0, 0, &shm->handle);
++    if ( first )
++        return ffa_mem_share(tot_len, frag_len, 0, 0, &shm->handle);
++    else
++        return ffa_mem_frag_tx(shm->handle, frag_len, shm->sender_id);
+ }
+ 
+ static int read_mem_transaction(uint32_t ffa_vers, const void *buf, size_t blen,
+@@ -1132,8 +1218,53 @@ static int read_mem_transaction(uint32_t ffa_vers, const void *buf, size_t blen,
+     return 0;
+ }
+ 
++static int add_mem_share_frag(struct mem_frag_state *s, unsigned int offs,
++                              unsigned int frag_len)
++{
++    struct domain *d = current->domain;
++    unsigned int o = offs;
++    unsigned int l;
++    int ret;
 +
-     XFREE(d->arch.tee);
++    if ( frag_len < o )
++        return FFA_RET_INVALID_PARAMETERS;
++
++    /* Fill up the first struct ffa_address_range */
++    l = min_t(unsigned int, frag_len - o, sizeof(s->range) - s->range_offset);
++    memcpy((uint8_t *)&s->range + s->range_offset, s->buf + o, l);
++    s->range_offset += l;
++    o += l;
++    if ( s->range_offset != sizeof(s->range) )
++        goto out;
++    s->range_offset = 0;
++
++    while ( true )
++    {
++        ret = get_shm_pages(d, s->shm, &s->range, 1, s->current_page_idx,
++                            &s->current_page_idx);
++        if ( ret )
++            return ret;
++        if ( s->range_count == 1 )
++            return 0;
++        s->range_count--;
++        if ( frag_len - o < sizeof(s->range) )
++            break;
++        memcpy(&s->range, s->buf + o, sizeof(s->range));
++        o += sizeof(s->range);
++    }
++
++    /* Collect any remaining bytes for the next struct ffa_address_range */
++    s->range_offset = frag_len - o;
++    memcpy(&s->range, s->buf + o, frag_len - o);
++out:
++    s->frag_offset += frag_len;
++
++    return s->frag_offset;
++}
++
+ static void handle_mem_share(struct cpu_user_regs *regs)
+ {
++    static uint64_t next_handle = FFA_HANDLE_HYP_FLAG;
+     uint32_t tot_len = get_user_reg(regs, 1);
+     uint32_t frag_len = get_user_reg(regs, 2);
+     uint64_t addr = get_user_reg(regs, 3);
+@@ -1168,13 +1299,6 @@ static void handle_mem_share(struct cpu_user_regs *regs)
+         goto out_set_ret;
+     }
+ 
+-    /* We currently only support a single fragment */
+-    if ( frag_len != tot_len )
+-    {
+-        ret = FFA_RET_NOT_SUPPORTED;
+-        goto out_set_ret;
+-    }
+-
+     spin_lock(&ctx->lock);
+ 
+     if ( frag_len > ctx->page_count * FFA_PAGE_SIZE )
+@@ -1240,6 +1364,36 @@ static void handle_mem_share(struct cpu_user_regs *regs)
+     shm->sender_id = trans.sender_id;
+     shm->ep_id = read_atomic(&mem_access->access_perm.endpoint_id);
+ 
++    if ( frag_len != tot_len )
++    {
++        struct mem_frag_state *s = xzalloc(struct mem_frag_state);
++
++        if ( !s )
++        {
++            ret = FFA_RET_NO_MEMORY;
++            goto out;
++        }
++        s->shm = shm;
++        s->range_count = range_count;
++        s->buf = ctx->tx;
++        s->buf_size = FFA_RXTX_PAGE_COUNT * FFA_PAGE_SIZE;
++        ret = add_mem_share_frag(s, sizeof(*region_descr)  + region_offs,
++                                 frag_len);
++        if ( ret <= 0 )
++        {
++            xfree(s);
++            if ( ret < 0 )
++                goto out;
++        }
++        else
++        {
++            shm->handle = next_handle++;
++            uint64_to_regpair(&handle_hi, &handle_lo, shm->handle);
++            list_add_tail(&s->list, &ctx->frag_list);
++        }
++        goto out_unlock;
++    }
++
+     /*
+      * Check that the Composite memory region descriptor fits.
+      */
+@@ -1278,7 +1432,75 @@ out_unlock:
+     spin_unlock(&ctx->lock);
+ 
+ out_set_ret:
+-    if ( ret == 0)
++    if ( ret > 0 )
++            set_regs_frag_rx(regs, handle_lo, handle_hi, ret, trans.sender_id);
++    else if ( ret == 0)
++            set_regs_success(regs, handle_lo, handle_hi);
++    else
++            set_regs_error(regs, ret);
++}
++
++static struct mem_frag_state *find_frag_state(struct ffa_ctx *ctx,
++                                              uint64_t handle)
++{
++    struct mem_frag_state *s;
++
++    list_for_each_entry(s, &ctx->frag_list, list)
++        if ( s->shm->handle == handle )
++            return s;
++
++    return NULL;
++}
++
++static void handle_mem_frag_tx(struct cpu_user_regs *regs)
++{
++    struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
++    uint32_t frag_len = get_user_reg(regs, 3);
++    uint32_t handle_lo = get_user_reg(regs, 1);
++    uint32_t handle_hi = get_user_reg(regs, 2);
++    uint64_t handle = regpair_to_uint64(handle_hi, handle_lo);
++    struct mem_frag_state *s;
++    uint16_t sender_id = 0;
++    int ret;
++
++    spin_lock(&ctx->lock);
++    s = find_frag_state(ctx, handle);
++    if ( !s )
++    {
++        ret = FFA_RET_INVALID_PARAMETERS;
++        goto out;
++    }
++    sender_id = s->shm->sender_id;
++
++    if ( frag_len > s->buf_size )
++    {
++        ret = FFA_RET_INVALID_PARAMETERS;
++        goto out_free_s;
++    }
++
++    ret = add_mem_share_frag(s, 0, frag_len);
++    if ( ret < 0 )
++        goto out_free_s;
++
++    /* Note that share_shm() uses our tx buffer */
++    spin_lock(&ffa_tx_buffer_lock);
++    ret = share_shm(s->shm);
++    spin_unlock(&ffa_tx_buffer_lock);
++    if ( ret < 0 )
++        goto out_free_s;
++    list_add_tail(&s->shm->list, &ctx->shm_list);
++out_free_s:
++    if ( ret < 0 )
++        free_ffa_shm_mem(ctx, s->shm);
++    list_del(&s->list);
++    xfree(s);
++out:
++    spin_unlock(&ctx->lock);
++
++    if ( ret > 0 )
++            set_regs_frag_rx(regs, handle_lo, handle_hi, ret, sender_id);
++    else if ( ret == 0)
+             set_regs_success(regs, handle_lo, handle_hi);
+     else
+             set_regs_error(regs, ret);
+@@ -1391,6 +1613,9 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
+         else
+             set_regs_success(regs, 0, 0);
+         return true;
++    case FFA_MEM_FRAG_TX:
++        handle_mem_frag_tx(regs);
++        return true;
+ 
+     default:
+         gprintk(XENLOG_ERR, "ffa: unhandled fid 0x%x\n", fid);
+@@ -1432,6 +1657,7 @@ static int ffa_domain_init(struct domain *d)
+     }
+     ctx->create_signal_count = n;
+ 
++    INIT_LIST_HEAD(&ctx->frag_list);
+     INIT_LIST_HEAD(&ctx->shm_list);
  
      return 0;
+@@ -1625,6 +1851,7 @@ static bool ffa_probe(void)
+          !check_mandatory_feature(FFA_MEM_SHARE_64) ||
+          !check_mandatory_feature(FFA_RXTX_UNMAP) ||
+          !check_mandatory_feature(FFA_MEM_SHARE_32) ||
++         !check_mandatory_feature(FFA_MEM_FRAG_TX) ||
+          !check_mandatory_feature(FFA_MEM_RECLAIM) ||
+          !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
+         return false;
 -- 
 2.34.1
 
