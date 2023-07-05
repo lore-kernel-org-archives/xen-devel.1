@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C52EB64DA
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 15:19:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.559299.874175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3EFEB64DA
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 15:27:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.559305.874195 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qH4Hv-0008Qm-R4; Wed, 05 Jul 2023 15:19:27 +0000
+	id 1qH4PW-0001k0-SW; Wed, 05 Jul 2023 15:27:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 559299.874175; Wed, 05 Jul 2023 15:19:27 +0000
+Received: by outflank-mailman (output) from mailman id 559305.874195; Wed, 05 Jul 2023 15:27:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qH4Hv-0008Qf-OO; Wed, 05 Jul 2023 15:19:27 +0000
-Received: by outflank-mailman (input) for mailman id 559299;
- Wed, 05 Jul 2023 15:19:26 +0000
+	id 1qH4PW-0001jt-Pk; Wed, 05 Jul 2023 15:27:18 +0000
+Received: by outflank-mailman (input) for mailman id 559305;
+ Wed, 05 Jul 2023 15:27:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xpdo=CX=gmail.com=bart.vanassche@srs-se1.protection.inumbo.net>)
- id 1qH4Hu-0008Q7-NA
- for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 15:19:26 +0000
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com
- [209.85.166.42]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5325d743-1b47-11ee-b237-6b7b168915f2;
- Wed, 05 Jul 2023 17:19:25 +0200 (CEST)
-Received: by mail-io1-f42.google.com with SMTP id
- ca18e2360f4ac-783546553ddso241845339f.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Jul 2023 08:19:25 -0700 (PDT)
-Received: from ?IPV6:2620:15c:211:201:c1f1:7d21:6172:cbd2?
- ([2620:15c:211:201:c1f1:7d21:6172:cbd2])
- by smtp.gmail.com with ESMTPSA id
- l6-20020a656806000000b005579c73d209sm15456631pgt.1.2023.07.05.08.19.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Jul 2023 08:19:23 -0700 (PDT)
+ <SRS0=yX3c=CX=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
+ id 1qH4PT-0001UO-SK
+ for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 15:27:15 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6b61d52b-1b48-11ee-b237-6b7b168915f2;
+ Wed, 05 Jul 2023 17:27:15 +0200 (CEST)
+Received: from beta.bugseng.com (unknown [37.163.248.64])
+ by support.bugseng.com (Postfix) with ESMTPSA id B058F4EE0C81;
+ Wed,  5 Jul 2023 17:27:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,87 +41,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5325d743-1b47-11ee-b237-6b7b168915f2
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688570364; x=1691162364;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vhOVd+fM39By6Neo4SNlvIwXWgDBhgramNmEhS79nFc=;
-        b=Z97UNyDgzNS3xSouwOAlvgti1JhvSIgx2MkBRWZzcN6zUYAeBeA+QCZzHcCVC2jyY1
-         ZaHMsmLQly1JWFwRtzWCJNrMc4u6NBM6AipTtT7xUnYAs8TAr9BnOJOkYtEIn9t3iuY6
-         xBMZnZzYEbix5X4XdtfJ9tgVo5Q9bCIzj9vEDNmteamI71pL888CyS4wIlxFemaEU+IW
-         TFmOAMexP4GbSMyV+Qfq/Ri8VtFsmexFM6Y+DGCmga9IIj3EuG7toPFc/dL/TZATtf8e
-         KgfV0rg3EhWQYVMcD+AVO3V4f/7WRikoV2jBUW+vb1gUpikJJBL52MKwyMX+ibYbiz/C
-         ejyg==
-X-Gm-Message-State: AC+VfDx7h2A9XPArpLT1xtET4nuhWLGQZlN1lealuIvKn6XXMqFDMhZY
-	NQyCuk8dobNvqVnQCCZzTxg=
-X-Google-Smtp-Source: ACHHUZ70uoI88DRVhGiNe4v8NMOn4CckRug5A25bO6UrnrhXn4O+oQb9CB+u9z1UucgpvIObIHjohw==
-X-Received: by 2002:a05:6602:2113:b0:784:314f:8d68 with SMTP id x19-20020a056602211300b00784314f8d68mr18093430iox.1.1688570364015;
-        Wed, 05 Jul 2023 08:19:24 -0700 (PDT)
-Message-ID: <1ea08f84-f900-92f2-e32b-2db242a74559@acm.org>
-Date: Wed, 5 Jul 2023 08:19:16 -0700
+X-Inumbo-ID: 6b61d52b-1b48-11ee-b237-6b7b168915f2
+From: Simone Ballarin <simone.ballarin@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	Gianluca Luparini <gianluca.luparini@bugseng.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
+	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>
+Subject: [XEN PATCH v2 01/13] x86/cpufreq: fix violations of MISRA C:2012 Rule 7.2
+Date: Wed,  5 Jul 2023 17:26:23 +0200
+Message-Id: <7df9377d4cb218dd54646c2cb1b70327c8b44c96.1688559115.git.gianluca.luparini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1688559115.git.gianluca.luparini@bugseng.com>
+References: <cover.1688559115.git.gianluca.luparini@bugseng.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 01/32] block: Provide blkdev_get_handle_* functions
-Content-Language: en-US
-To: Matthew Wilcox <willy@infradead.org>
-Cc: Jan Kara <jack@suse.cz>, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
- Christoph Hellwig <hch@infradead.org>, Alasdair Kergon <agk@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>, Anna Schumaker <anna@kernel.org>,
- Chao Yu <chao@kernel.org>, Christian Borntraeger
- <borntraeger@linux.ibm.com>, "Darrick J. Wong" <djwong@kernel.org>,
- Dave Kleikamp <shaggy@kernel.org>, David Sterba <dsterba@suse.com>,
- dm-devel@redhat.com, drbd-dev@lists.linbit.com, Gao Xiang
- <xiang@kernel.org>, Jack Wang <jinpu.wang@ionos.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, jfs-discussion@lists.sourceforge.net,
- Joern Engel <joern@lazybastard.org>, Joseph Qi
- <joseph.qi@linux.alibaba.com>, Kent Overstreet <kent.overstreet@gmail.com>,
- linux-bcache@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
- linux-mtd@lists.infradead.org, linux-nfs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-nvme@lists.infradead.org,
- linux-pm@vger.kernel.org, linux-raid@vger.kernel.org,
- linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-xfs@vger.kernel.org, "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Mike Snitzer <snitzer@kernel.org>, Minchan Kim <minchan@kernel.org>,
- ocfs2-devel@oss.oracle.com, reiserfs-devel@vger.kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>, Song Liu <song@kernel.org>,
- Sven Schnelle <svens@linux.ibm.com>, target-devel@vger.kernel.org,
- Ted Tso <tytso@mit.edu>, Trond Myklebust <trond.myklebust@hammerspace.com>,
- xen-devel@lists.xenproject.org
-References: <20230629165206.383-1-jack@suse.cz>
- <20230704122224.16257-1-jack@suse.cz>
- <bb91e76b-0bd8-a949-f8b9-868f919ebcb9@acm.org>
- <ZKRFSZQglwCba9/i@casper.infradead.org>
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <ZKRFSZQglwCba9/i@casper.infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 7/4/23 09:14, Matthew Wilcox wrote:
-> On Tue, Jul 04, 2023 at 07:06:26AM -0700, Bart Van Assche wrote:
->> On 7/4/23 05:21, Jan Kara wrote:
->>> +struct bdev_handle {
->>> +	struct block_device *bdev;
->>> +	void *holder;
->>> +};
->>
->> Please explain in the patch description why a holder pointer is introduced
->> in struct bdev_handle and how it relates to the bd_holder pointer in struct
->> block_device. Is one of the purposes of this patch series perhaps to add
->> support for multiple holders per block device?
-> 
-> That is all in patch 0/32.  Why repeat it?
+From: Gianluca Luparini <gianluca.luparini@bugseng.com>
 
-This cover letter: https://lore.kernel.org/linux-block/20230629165206.383-1-jack@suse.cz/T/#t?
+The xen sources contains violations of MISRA C:2012 Rule 7.2 whose
+headline states:
+"A 'u' or 'U' suffix shall be applied to all integer constants
+that are represented in an unsigned type".
 
-The word "holder" doesn't even occur in that cover letter so how could the
-answer to my question be present in the cover letter?
+Add the 'U' suffix to integers literals with unsigned type and also to other
+literals used in the same contexts or near violations, when their positive
+nature is immediately clear. The latter changes are done for the sake of
+uniformity.
 
-Bart.
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
+---
+Changes in v2:
+- change commit title to make it unique
+- change commit message
+---
+ xen/arch/x86/acpi/cpufreq/powernow.c      | 14 +++++++-------
+ xen/include/acpi/cpufreq/processor_perf.h |  2 +-
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
+index d4c7dcd5d9..8e0784b69c 100644
+--- a/xen/arch/x86/acpi/cpufreq/powernow.c
++++ b/xen/arch/x86/acpi/cpufreq/powernow.c
+@@ -32,14 +32,14 @@
+ #include <acpi/acpi.h>
+ #include <acpi/cpufreq/cpufreq.h>
+ 
+-#define HW_PSTATE_MASK          0x00000007
+-#define HW_PSTATE_VALID_MASK    0x80000000
+-#define HW_PSTATE_MAX_MASK      0x000000f0
++#define HW_PSTATE_MASK          0x00000007U
++#define HW_PSTATE_VALID_MASK    0x80000000U
++#define HW_PSTATE_MAX_MASK      0x000000f0U
+ #define HW_PSTATE_MAX_SHIFT     4
+-#define MSR_PSTATE_DEF_BASE     0xc0010064 /* base of Pstate MSRs */
+-#define MSR_PSTATE_STATUS       0xc0010063 /* Pstate Status MSR */
+-#define MSR_PSTATE_CTRL         0xc0010062 /* Pstate control MSR */
+-#define MSR_PSTATE_CUR_LIMIT    0xc0010061 /* pstate current limit MSR */
++#define MSR_PSTATE_DEF_BASE     0xc0010064U /* base of Pstate MSRs */
++#define MSR_PSTATE_STATUS       0xc0010063U /* Pstate Status MSR */
++#define MSR_PSTATE_CTRL         0xc0010062U /* Pstate control MSR */
++#define MSR_PSTATE_CUR_LIMIT    0xc0010061U /* pstate current limit MSR */
+ #define MSR_HWCR_CPBDIS_MASK    0x02000000ULL
+ 
+ #define ARCH_CPU_FLAG_RESUME	1
+diff --git a/xen/include/acpi/cpufreq/processor_perf.h b/xen/include/acpi/cpufreq/processor_perf.h
+index d8a1ba68a6..8b5a1b9bde 100644
+--- a/xen/include/acpi/cpufreq/processor_perf.h
++++ b/xen/include/acpi/cpufreq/processor_perf.h
+@@ -5,7 +5,7 @@
+ #include <public/sysctl.h>
+ #include <xen/acpi.h>
+ 
+-#define XEN_PX_INIT 0x80000000
++#define XEN_PX_INIT 0x80000000U
+ 
+ int powernow_cpufreq_init(void);
+ unsigned int powernow_register_driver(void);
+-- 
+2.41.0
 
 
