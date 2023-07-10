@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9FD2EB64D9
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Jul 2023 07:10:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.561004.877286 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E00E4EB64D9
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Jul 2023 07:14:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.561039.877310 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qIl23-0004Hs-OO; Mon, 10 Jul 2023 07:10:03 +0000
+	id 1qIl5b-0007h9-3e; Mon, 10 Jul 2023 07:13:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 561004.877286; Mon, 10 Jul 2023 07:10:03 +0000
+Received: by outflank-mailman (output) from mailman id 561039.877310; Mon, 10 Jul 2023 07:13:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qIl23-0004Gb-G0; Mon, 10 Jul 2023 07:10:03 +0000
-Received: by outflank-mailman (input) for mailman id 561004;
- Mon, 10 Jul 2023 07:10:02 +0000
+	id 1qIl5b-0007h2-0x; Mon, 10 Jul 2023 07:13:43 +0000
+Received: by outflank-mailman (input) for mailman id 561039;
+ Mon, 10 Jul 2023 07:13:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Xcmr=C4=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qIktB-0002xd-Un
- for xen-devel@lists.xenproject.org; Mon, 10 Jul 2023 07:00:53 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ (envelope-from <SRS0=72qR=C4=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1qIl5Z-0007gw-Ug
+ for xen-devel@lists.xenproject.org; Mon, 10 Jul 2023 07:13:41 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on2089.outbound.protection.outlook.com [40.107.7.89])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8235cea3-1eef-11ee-b239-6b7b168915f2;
- Mon, 10 Jul 2023 09:00:52 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 7E48421E91;
- Mon, 10 Jul 2023 07:00:52 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4CA0B1361C;
- Mon, 10 Jul 2023 07:00:52 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id pTM4EaSsq2QgYwAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 10 Jul 2023 07:00:52 +0000
+ id 4b6d5e19-1ef1-11ee-b239-6b7b168915f2;
+ Mon, 10 Jul 2023 09:13:41 +0200 (CEST)
+Received: from AS8PR04MB8788.eurprd04.prod.outlook.com (2603:10a6:20b:42f::21)
+ by DB8PR04MB6921.eurprd04.prod.outlook.com (2603:10a6:10:119::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6565.30; Mon, 10 Jul
+ 2023 07:13:10 +0000
+Received: from AS8PR04MB8788.eurprd04.prod.outlook.com
+ ([fe80::cbc0:69aa:c9a2:198e]) by AS8PR04MB8788.eurprd04.prod.outlook.com
+ ([fe80::cbc0:69aa:c9a2:198e%7]) with mapi id 15.20.6565.016; Mon, 10 Jul 2023
+ 07:13:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,392 +48,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8235cea3-1eef-11ee-b239-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1688972452; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=L9wkqTCyOjGjiu/WtVNnaatoSAz4S33Tyi60lW8cADE=;
-	b=vXZvqyklLjIhkBkbKZ5EF4zNFYmCqZpjYoeGcJ14N7NFil/lzVSLDOmKAlUlFo30zU77Ah
-	IESp0RORqr+USuB9SMnROHq1uwRCAZwUg8PlRa4FHh9KkJJMQCM/6q+FwPL18RIlvfWXgD
-	Um3wQAYfNoztBzclilwiFVgOokMWIL8=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 11/18] tools/xenstore: drop use of tdb
-Date: Mon, 10 Jul 2023 08:59:40 +0200
-Message-Id: <20230710065947.4201-12-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20230710065947.4201-1-jgross@suse.com>
-References: <20230710065947.4201-1-jgross@suse.com>
+X-Inumbo-ID: 4b6d5e19-1ef1-11ee-b239-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QxHTCuyMLNU42ij08/WrToDdE+CVSMV0XxO7p9gkiBAWXZOM8ztCI2KeUWocBMBZsJ+34Wjp0Ke1tNjUgXCkfJUJdmkBp30Y3BIgeta9s/x9iFIYASwXxGHdzqu3jwayYhFB8lk9gZtTeC0p7b1ffbX2nqVCdKls/kdP2pvovVks+i0gu6H7PjoKGUks0vShRR3K+slYWx3jjrZ5D7C91naRU/St1skWSRnrB+GJG/hN9ZXfcuOwjy4BR99fY1yX2cGfbTvKHEq4bO6Afov25Nk1b+VKWudp5TgP5M0KhimKIHPLG+1Iq+khXVASv5H4k0bqjlGbNd58HINcsEPE4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iPNBskzHs7SRyoPRZBVHjLPpnZiUNce5R+6Eqo9ZqE0=;
+ b=Foi+pwFcAZ/hCX7xyuc4F27CbLPj1yzBkJLBSSOreqI3Hl/es7lVkTRE7faGN0MNySUuHvmtit9JV7VWa3rNxitC0l+G4rdgmgIv3WGdWX/oTVhGqN8IG9D/WQIXzhrPOn75UBNgNagOk9xdgQMjsVguuneOX3a9OcUG6IzEUvJWwEgyYZgfSlmq+xmwy6n3fzhebAG64RpPoY3wGQEdDnNBEzwNPTyRh6NDEg3UCS8k4opP1lQ4ybKEs9iL0spg93DZYp5LiRZIxvHbuzlHlpBtC2te04awK1xU711nhr8bQUddwKsMmE1R2gzDzJQ/VhD6JZwda6LFMsXLXfhzfA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iPNBskzHs7SRyoPRZBVHjLPpnZiUNce5R+6Eqo9ZqE0=;
+ b=2B9s46JuqJ0SbNCk8W+CpONW1/h+eYmkj8oJqmqvtsNH/fJTy6y0f5k3XoW7tebxGvkn3DTALAuaxL7SJTuItT3kJ+vOtACXKF51h2IeEtmlLQ9fh5lUsCNL90lbDg8LcQszDH6hLGGGl4PsiQA0Kauu/YXh+VQXtsIbOcFXX9CR1QoWn7oq74xSelf5ESMAIRXaipualZML/IvQDmar8M/+kJLaInNJ8l/e8wSqEWgnY/blPXxD9Diy/FM9Dv2AU6wH5TR8Wctlk/+6F8MilnyRbdGj7Vengu/too8Bkro97vghNQSf2sUS0n5LfLhtQ69uYQZQESWFjosSjKZlWQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <643b2df8-e3c6-8bee-dba7-141324198791@suse.com>
+Date: Mon, 10 Jul 2023 09:13:10 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 04/10] x86 setup: porting dom0 construction logic to boot
+ module structures
+Content-Language: en-US
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org,
+ Daniel Smith <dpsmith@apertussolutions.com>, stefano.stabellini@amd.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Luca Fancellu <luca.fancellu@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Rich Persaud <persaur@gmail.com>,
+ Christopher Clark <christopher.w.clark@gmail.com>
+References: <20230701071835.41599-1-christopher.w.clark@gmail.com>
+ <20230701071835.41599-5-christopher.w.clark@gmail.com>
+ <alpine.DEB.2.22.394.2307081149090.761183@ubuntu-linux-20-04-desktop>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <alpine.DEB.2.22.394.2307081149090.761183@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0143.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:96::17) To AS8PR04MB8788.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42f::21)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8788:EE_|DB8PR04MB6921:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21acd519-159c-43d5-0cfd-08db81151e42
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	InknVlxjFgiZ7DlQrX83UaRD2YHvDsAUN4tmyh9+2JuOXWKA8hnqFVx8LTrTbpSWSR4dOMBpmLBl3m/J7BTQBetYfqW2xWG1hWablJKCuKySy/HIw5k5DdBJvoM24fxZmSy+XIRZRNfscNFnbSuftp3E4B04UM3+5rBmnZliIQ+3pzME0MZu9590fcNfU3KiWzowJxpV7qqjHFBj73CI4UxhmoiJdjTRIxwQGdDyTPfHgLp4R7W9CV20krEAqJ8+Vy7lZGpSkaCWUEOyfehvqSAAD4zFE5akxuZNmtD21DjK//CzBJaC62CNjkKFk1XgP1VOFSb/KgpIxP+z6VHMKS557Nwxddcx51nvxQ9TQ2Ro7h4mLQBuuqNSNinYt4Mr24ovDfcsVEoQvwn8NmH1q/Rc02RUI/qImKIXEfP6tu+vXXkkyXB3X6dPkT36ocnSh471XIb2Z12NQgc8BAU5axc07xkQiikqdJUt9rNuAgyAqKpbdhZxhUWjaFZOYlzPp5J9Yk1KIbRaK6sRuMptZVPC23mtbGDfaiuC0SfGm3JwEEeWz96sAwWRxSXrnF0H11wejodJbV77gXcjTkwnI9KAUt1PQxhu3AzWilDBzfADcVUbPM/N8QHyKp3zupmQegQVx2IoxGqBEJeeemjiIQ==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8788.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(396003)(366004)(376002)(346002)(39860400002)(136003)(451199021)(86362001)(31696002)(38100700002)(31686004)(36756003)(6486002)(54906003)(53546011)(26005)(6506007)(186003)(6512007)(2616005)(7416002)(5660300002)(2906002)(66556008)(316002)(478600001)(66946007)(8936002)(66476007)(8676002)(83380400001)(4326008)(6916009)(41300700001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?OUphTHFTMDE5ZXVESkxoUENwdUNiU1Y2bDRjOVYzN2VSRG9obEdUUVVtQ0NB?=
+ =?utf-8?B?dnJUVlNzakFFVkEwc25Ba2pMYzBrSEJXMHZRa3NaMm5uNDlYcUJvaVovNy9K?=
+ =?utf-8?B?a0ZSaDkxeW8xZ0NHRng3L01USXc0YUs0ejJNVFFPYzZkRHNOVWs5cWEzWlpW?=
+ =?utf-8?B?TFlGenBEczVMZUdBaUNQZ1J2UEo4SjZoWWE1U21VVG0zWEM4MERIUzB3b29O?=
+ =?utf-8?B?cTZZblp1ME9FVmhCMGxocklKbFZPWkRYWFh4RXZrRDBiSEQ2eVh3ZnpqVmdD?=
+ =?utf-8?B?eUg5Z1dVNStTNUdZREVHZWdYQ0JndjY0V1ZyaTFMd0FrMnhGS21nY2hKcHcv?=
+ =?utf-8?B?NGp0SldCdTNzQ2lpb1cyemZEaGZrQ3pWMkVCNzlZTjVWcHVmZXdKQTY5T2Vq?=
+ =?utf-8?B?K2YrSmpaQThWVUI2T0p6RDR4QWRsb2ZxWWVFd3VsdVA2NXVxcnkveGRaZ05X?=
+ =?utf-8?B?UkF0ZEFSOWs2VUQ0N1g3aTV6cFVXeHAxRUVPcGZoRjZzYnJWa0VkeHpIek55?=
+ =?utf-8?B?QlM2ZFJUOE5STHRaTmd4b0dFbjBoc1d3a0NEOThEUDNkc3dqZUIrTDdWanJy?=
+ =?utf-8?B?c0ozYlo4YzM0SENIZ2lGL0xITTFjMVpDQ09uMVNoWWV2ZFhGenJPVGdqOFcr?=
+ =?utf-8?B?MmNZc29OUTNzN0hQT0UvWFl3WnhWNThWa05zdkNGYVlMOXdDWllqSXhhTGdG?=
+ =?utf-8?B?Q1BhdnYybHBIMnVYRzVvQzMwM2xlS1BHSnFkRVpHMmU2SWZoUlFxcmREK3VB?=
+ =?utf-8?B?OFpCWmdzenhobEZoZlhBcnVYK3A5b1U5TWl1SUJ2a0wxcm55OUJRSTVtVkM1?=
+ =?utf-8?B?QzVOdDhwREw3RFhNU2xLanBHOXVZeWt5bWVoVVl4L1dtVEdTeUUwS3YwRFN4?=
+ =?utf-8?B?THNoWGhWWTE3eWNJakhlRERTM1NTOVdQSVluZDVYRnJuY0pCL1dHd0pEc2Er?=
+ =?utf-8?B?Rm9EdnhxRkRBSU1aUlRCT2FlYVNnYWtzZ0ZDM2llVlk3R2c4ZWpLQ0xlY0xE?=
+ =?utf-8?B?R081eVdnWG9NNG9FNjNDS3JFYm1VY2hjKzEvUTNqODl1R3UzampYU3ZyM0J5?=
+ =?utf-8?B?dkRqeEpKY0t1alA4VHZublVPSmc0REVJMTlDTUJiclg4SkJUOS9Fd0FrdTRn?=
+ =?utf-8?B?TXVUZG9TWEF0dUttdjlOWTlVN1pYTmVWMC9lUFdQZEloS0N6NTZ5WHlrdXda?=
+ =?utf-8?B?VnhMVjdhY29lbmYyb3hONTVGS295dlp2NFlxdWxPQU9lMDJlSmhUS3dqcVc1?=
+ =?utf-8?B?TC85VlRaZ0hpMVlZMG1Wcm1qVWI4cDZ6UGsvajJPdGd2WVJkdlk4blFIM0h4?=
+ =?utf-8?B?cFQ3UjMvMzdiMFc5NWcyUVFoM0hmQWNqQms2NEFocThVM2N5dkprbHRPeXNj?=
+ =?utf-8?B?WmJTSXdKV2p0amRGaWkvYm1vbHBFTDFpR1FXTnFHdEJZOWRvODNqZFpQc2Jy?=
+ =?utf-8?B?UnR6K2hzbFliajVmeTIrZ1JOLzZIZXdrY21rY2tPKzJyY1poSW8wVWQwN0dj?=
+ =?utf-8?B?bE5EMkRQTFhJSGVSd0x1T2V4STBjSTc3YzIzMG5tQTZqMERPbU1lUW9nVTVT?=
+ =?utf-8?B?MDZSMFdESjdnRmZOZ2ROekM5WWgybUllT0VITjlkOFk1dnhaNUxPVEgwTlBw?=
+ =?utf-8?B?RzNYamFacWdtMUlQWHRsUkJzT21ZUWcrRHNaa0pwNS9TUTcxa3VOVVRpQ0M5?=
+ =?utf-8?B?TVZjTmM1eExhNmVON1JsR2U5a1N2RFkwT0FRMjNmVkhONXdIU0JLa1NUSjhv?=
+ =?utf-8?B?dVpUbmNNYitLMnBLdTZ4cjc5SHZLb252UTJaWkRoM3hsQVVJWmlrTU15aWVi?=
+ =?utf-8?B?TkdNUW01OG9SNzd5NG5Qb0pxSExIZjd6S2VEZFdOUkdENndEbFhIQ2tYaVNF?=
+ =?utf-8?B?S0VOSnI2YnlMQXZ2U1BXc1NDbkZXUEpKRlByWXdCSCs5QzV5TDFMNGp4dmdK?=
+ =?utf-8?B?TndnQ2pYUnlQaS9oRTBYemdMd3dZbEF3dVE5Tk02TzRycTlIaDBtdkR2MjZp?=
+ =?utf-8?B?YUVWak1obkk4WjNoaDNiNFZmRkI1LzBJcWdMcnAvME42ZW1VU2JyczFRTGli?=
+ =?utf-8?B?dkd0a0dubGs0Q1ZuL0o0ZzFsMHNwOXdEUXlTNUYzY0FhNVE4OGd1bExGOEFK?=
+ =?utf-8?Q?tSl077s8GjmrgceQrSbik+UUV?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21acd519-159c-43d5-0cfd-08db81151e42
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8788.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2023 07:13:10.5753
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XacT9hcypJgSO4OeeHjuhCMxLcq3x7r4ut7WbSvCWmcbCtKunxPiBnFBHWvsazKl/aI3BHNNxefHS07ANNOuTw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6921
 
-Today all Xenstore nodes are stored in a TDB data base. This data base
-has several disadvantages:
+On 08.07.2023 21:15, Stefano Stabellini wrote:
+> On Sat, 1 Jul 2023, Christopher Clark wrote:
+>> @@ -1357,12 +1382,14 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+>>           * respective reserve_e820_ram() invocation below. No need to
+>>           * query efi_boot_mem_unused() here, though.
+>>           */
+>> -        mod[boot_info->nr_mods].mod_start = virt_to_mfn(_stext);
+>> -        mod[boot_info->nr_mods].mod_end = __2M_rwdata_end - _stext;
+>> +        bootmodule_update_start(&boot_info->mods[boot_info->nr_mods],
+>> +                                virt_to_maddr(_stext));
+>> +        boot_info->mods[boot_info->nr_mods].size = __2M_rwdata_end - _stext;
+>>      }
+> 
+> The original code had the end address as "__2M_rwdata_end - _stext"
+> while now we have the size as "__2M_rwdata_end - _stext" which is not
+> the same?
 
-- It is using a fixed sized hash table, resulting in high memory
-  overhead for small installations with only very few VMs, and a rather
-  large performance hit for systems with lots of VMs due to many
-  collisions.
-  The hash table size today is 7919 entries. This means that e.g. in
-  case of a simple desktop use case with 2 or 3 VMs probably far less
-  than 10% of the entries will be used (assuming roughly 100 nodes per
-  VM). OTOH a setup on a large server with 500 VMs would result in
-  heavy conflicts in the hash list with 5-10 nodes per hash table entry.
+A few lines up from here you'll find code adjusting what .mod_end holds:
+We use it as a size field in most places (along with using page-granular
+.mod_start; page-granular .mod_end wouldn't work as an address, as
+modules may be any number of bytes).
 
-- TDB is using a single large memory area for storing the nodes. It
-  only ever increases this area and will never shrink it afterwards.
-  This will result in more memory usage than necessary after a peak of
-  Xenstore usage.
-
-- Xenstore is only single-threaded, while TDB is designed to be fit
-  for multi-threaded use cases, resulting in much higher code
-  complexity than needed.
-
-- Special use cases of Xenstore are not possible to implement with TDB
-  in an effective way, while an implementation of a data base tailored
-  for Xenstore could simplify some handling (e.g. transactions) a lot.
-
-So drop using TDB and store the nodes directly in memory making them
-easily accessible. Use a hash-based lookup mechanism for fast lookup
-of nodes by their full path.
-
-For now only replace TDB keeping the current access functions.
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- add const (Julien Grall)
-- use specific pointer type instead of void * (Julien Grall)
-- add comment to db_fetch() (Julien Grall)
----
- tools/xenstore/xenstored_core.c        | 158 ++++++++++---------------
- tools/xenstore/xenstored_core.h        |   5 +-
- tools/xenstore/xenstored_transaction.c |   1 -
- 3 files changed, 64 insertions(+), 100 deletions(-)
-
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 70db5265ad..ff10659e65 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -53,7 +53,6 @@
- #include "xenstored_domain.h"
- #include "xenstored_control.h"
- #include "xenstored_lu.h"
--#include "tdb.h"
- 
- #ifndef NO_SOCKETS
- #if defined(HAVE_SYSTEMD)
-@@ -85,7 +84,7 @@ bool keep_orphans = false;
- static int reopen_log_pipe[2];
- static int reopen_log_pipe0_pollfd_idx = -1;
- char *tracefile = NULL;
--static TDB_CONTEXT *tdb_ctx = NULL;
-+static struct hashtable *nodes;
- unsigned int trace_flags = TRACE_OBJ | TRACE_IO;
- 
- static const char *sockmsg_string(enum xsd_sockmsg_type type);
-@@ -556,32 +555,32 @@ static void initialize_fds(int *p_sock_pollfd_idx, int *ptimeout)
- 	}
- }
- 
--static void set_tdb_key(const char *name, TDB_DATA *key)
--{
--	/*
--	 * Dropping const is fine here, as the key will never be modified
--	 * by TDB.
--	 */
--	key->dptr = (char *)name;
--	key->dsize = strlen(name);
--}
--
- struct xs_tdb_record_hdr *db_fetch(const char *db_name, size_t *size)
- {
--	TDB_DATA key, data;
-+	const struct xs_tdb_record_hdr *hdr;
-+	struct xs_tdb_record_hdr *p;
- 
--	set_tdb_key(db_name, &key);
--	data = tdb_fetch(tdb_ctx, key);
--	if (!data.dptr) {
--		errno = (tdb_error(tdb_ctx) == TDB_ERR_NOEXIST) ? ENOENT : EIO;
--		*size = 0;
--	} else {
--		*size = data.dsize;
--		trace_tdb("read %s size %zu\n", db_name,
--			  *size + strlen(db_name));
-+	hdr = hashtable_search(nodes, db_name);
-+	if (!hdr) {
-+		errno = ENOENT;
-+		return NULL;
- 	}
- 
--	return (struct xs_tdb_record_hdr *)data.dptr;
-+	*size = sizeof(*hdr) + hdr->num_perms * sizeof(hdr->perms[0]) +
-+		hdr->datalen + hdr->childlen;
-+
-+	p = talloc_size(NULL, *size);
-+	if (!p) {
-+		errno = ENOMEM;
-+		return NULL;
-+	}
-+
-+	trace_tdb("read %s size %zu\n", db_name, *size + strlen(db_name));
-+
-+	/* Return a copy, avoiding a potential modification in the DB. */
-+	memcpy(p, hdr, *size);
-+
-+	return p;
- }
- 
- static void get_acc_data(const char *name, struct node_account_data *acc)
-@@ -621,12 +620,10 @@ int db_write(struct connection *conn, const char *db_name, void *data,
- 	struct xs_tdb_record_hdr *hdr = data;
- 	struct node_account_data old_acc = {};
- 	unsigned int old_domid, new_domid;
-+	size_t name_len = strlen(db_name);
-+	const char *name;
- 	int ret;
--	TDB_DATA key, dat;
- 
--	set_tdb_key(db_name, &key);
--	dat.dptr = data;
--	dat.dsize = size;
- 	if (!acc)
- 		old_acc.memory = -1;
- 	else
-@@ -642,29 +639,36 @@ int db_write(struct connection *conn, const char *db_name, void *data,
- 	 */
- 	if (old_acc.memory)
- 		domain_memory_add_nochk(conn, old_domid,
--					-old_acc.memory - key.dsize);
--	ret = domain_memory_add(conn, new_domid, size + key.dsize,
-+					-old_acc.memory - name_len);
-+	ret = domain_memory_add(conn, new_domid, size + name_len,
- 				no_quota_check);
- 	if (ret) {
- 		/* Error path, so no quota check. */
- 		if (old_acc.memory)
- 			domain_memory_add_nochk(conn, old_domid,
--						old_acc.memory + key.dsize);
-+						old_acc.memory + name_len);
- 		return ret;
- 	}
- 
--	/* TDB should set errno, but doesn't even set ecode AFAICT. */
--	if (tdb_store(tdb_ctx, key, dat,
--		      (mode == NODE_CREATE) ? TDB_INSERT : TDB_MODIFY) != 0) {
--		domain_memory_add_nochk(conn, new_domid, -size - key.dsize);
-+	if (mode == NODE_CREATE) {
-+		/* db_name could be modified later, so allocate a copy. */
-+		name = talloc_strdup(data, db_name);
-+		ret = name ? hashtable_add(nodes, name, data) : ENOMEM;
-+	} else
-+		ret = hashtable_replace(nodes, db_name, data);
-+
-+	if (ret) {
-+		/* Free data, as it isn't owned by hashtable now. */
-+		talloc_free(data);
-+		domain_memory_add_nochk(conn, new_domid, -size - name_len);
- 		/* Error path, so no quota check. */
- 		if (old_acc.memory)
- 			domain_memory_add_nochk(conn, old_domid,
--						old_acc.memory + key.dsize);
--		errno = EIO;
-+						old_acc.memory + name_len);
-+		errno = ret;
- 		return errno;
- 	}
--	trace_tdb("store %s size %zu\n", db_name, size + key.dsize);
-+	trace_tdb("store %s size %zu\n", db_name, size + name_len);
- 
- 	if (acc) {
- 		/* Don't use new_domid, as it might be a transaction node. */
-@@ -680,9 +684,6 @@ int db_delete(struct connection *conn, const char *name,
- {
- 	struct node_account_data tmp_acc;
- 	unsigned int domid;
--	TDB_DATA key;
--
--	set_tdb_key(name, &key);
- 
- 	if (!acc) {
- 		acc = &tmp_acc;
-@@ -691,15 +692,13 @@ int db_delete(struct connection *conn, const char *name,
- 
- 	get_acc_data(name, acc);
- 
--	if (tdb_delete(tdb_ctx, key)) {
--		errno = EIO;
--		return errno;
--	}
-+	hashtable_remove(nodes, name);
- 	trace_tdb("delete %s\n", name);
- 
- 	if (acc->memory) {
- 		domid = get_acc_domid(conn, name, acc->domid);
--		domain_memory_add_nochk(conn, domid, -acc->memory - key.dsize);
-+		domain_memory_add_nochk(conn, domid,
-+					-acc->memory - strlen(name));
- 	}
- 
- 	return 0;
-@@ -2349,43 +2348,29 @@ static void manual_node(const char *name, const char *child)
- 	talloc_free(node);
- }
- 
--static void tdb_logger(TDB_CONTEXT *tdb, int level, const char * fmt, ...)
-+static unsigned int hash_from_key_fn(const void *k)
- {
--	va_list ap;
--	char *s;
--	int saved_errno = errno;
-+	const char *str = k;
-+	unsigned int hash = 5381;
-+	char c;
- 
--	va_start(ap, fmt);
--	s = talloc_vasprintf(NULL, fmt, ap);
--	va_end(ap);
-+	while ((c = *str++))
-+		hash = ((hash << 5) + hash) + (unsigned int)c;
- 
--	if (s) {
--		trace("TDB: %s\n", s);
--		syslog(LOG_ERR, "TDB: %s",  s);
--		if (verbose)
--			xprintf("TDB: %s", s);
--		talloc_free(s);
--	} else {
--		trace("talloc failure during logging\n");
--		syslog(LOG_ERR, "talloc failure during logging\n");
--	}
-+	return hash;
-+}
- 
--	errno = saved_errno;
-+static int keys_equal_fn(const void *key1, const void *key2)
-+{
-+	return 0 == strcmp(key1, key2);
- }
- 
- void setup_structure(bool live_update)
- {
--	char *tdbname;
--
--	tdbname = talloc_strdup(talloc_autofree_context(), "/dev/mem");
--	if (!tdbname)
--		barf_perror("Could not create tdbname");
--
--	tdb_ctx = tdb_open_ex(tdbname, 7919, TDB_INTERNAL | TDB_NOLOCK,
--			      O_RDWR | O_CREAT | O_EXCL | O_CLOEXEC,
--			      0640, &tdb_logger, NULL);
--	if (!tdb_ctx)
--		barf_perror("Could not create tdb file %s", tdbname);
-+	nodes = create_hashtable(NULL, "nodes", hash_from_key_fn, keys_equal_fn,
-+				 HASHTABLE_FREE_KEY | HASHTABLE_FREE_VALUE);
-+	if (!nodes)
-+		barf_perror("Could not create nodes hashtable");
- 
- 	if (live_update)
- 		manual_node("/", NULL);
-@@ -2399,24 +2384,6 @@ void setup_structure(bool live_update)
- 	}
- }
- 
--static unsigned int hash_from_key_fn(const void *k)
--{
--	const char *str = k;
--	unsigned int hash = 5381;
--	char c;
--
--	while ((c = *str++))
--		hash = ((hash << 5) + hash) + (unsigned int)c;
--
--	return hash;
--}
--
--
--static int keys_equal_fn(const void *key1, const void *key2)
--{
--	return 0 == strcmp(key1, key2);
--}
--
- int remember_string(struct hashtable *hash, const char *str)
- {
- 	char *k = talloc_strdup(NULL, str);
-@@ -2476,12 +2443,11 @@ static int check_store_enoent(const void *ctx, struct connection *conn,
- /**
-  * Helper to clean_store below.
-  */
--static int clean_store_(TDB_CONTEXT *tdb, TDB_DATA key, TDB_DATA val,
--			void *private)
-+static int clean_store_(const void *key, void *val, void *private)
- {
- 	struct hashtable *reachable = private;
- 	char *slash;
--	char * name = talloc_strndup(NULL, key.dptr, key.dsize);
-+	char *name = talloc_strdup(NULL, key);
- 
- 	if (!name) {
- 		log("clean_store: ENOMEM");
-@@ -2511,7 +2477,7 @@ static int clean_store_(TDB_CONTEXT *tdb, TDB_DATA key, TDB_DATA val,
-  */
- static void clean_store(struct check_store_data *data)
- {
--	tdb_traverse(tdb_ctx, &clean_store_, data->reachable);
-+	hashtable_iterate(nodes, clean_store_, data->reachable);
- 	domain_check_acc(data->domains);
- }
- 
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 590d1b0a1f..5d96799c60 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -33,7 +33,6 @@
- #include "xenstore_lib.h"
- #include "xenstore_state.h"
- #include "list.h"
--#include "tdb.h"
- #include "hashtable.h"
- 
- #ifndef O_CLOEXEC
-@@ -236,7 +235,7 @@ static inline unsigned int get_node_owner(const struct node *node)
- 	return node->perms.p[0].id;
- }
- 
--/* Write a node to the tdb data base. */
-+/* Write a node to the data base. */
- enum write_node_mode {
- 	NODE_CREATE,
- 	NODE_MODIFY
-@@ -246,7 +245,7 @@ int write_node_raw(struct connection *conn, const char *db_name,
- 		   struct node *node, enum write_node_mode mode,
- 		   bool no_quota_check);
- 
--/* Get a node from the tdb data base. */
-+/* Get a node from the data base. */
- struct node *read_node(struct connection *conn, const void *ctx,
- 		       const char *name);
- 
-diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
-index 7d8c0afc6a..420645e55d 100644
---- a/tools/xenstore/xenstored_transaction.c
-+++ b/tools/xenstore/xenstored_transaction.c
-@@ -396,7 +396,6 @@ static int finalize_transaction(struct connection *conn,
- 				       ? NODE_CREATE : NODE_MODIFY;
- 				*is_corrupt |= db_write(conn, i->node, hdr,
- 							size, NULL, flag, true);
--				talloc_free(hdr);
- 				if (db_delete(conn, i->trans_name, NULL))
- 					*is_corrupt = true;
- 			} else {
--- 
-2.35.3
-
+Jan
 
