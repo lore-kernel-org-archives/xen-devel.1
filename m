@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75AB1EB64DD
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jul 2023 04:20:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.561380.877970 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6B89EB64DD
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jul 2023 04:20:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.561379.877965 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJ4rN-0006uQ-S4; Tue, 11 Jul 2023 04:20:21 +0000
+	id 1qJ4rN-0006nD-JJ; Tue, 11 Jul 2023 04:20:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 561380.877970; Tue, 11 Jul 2023 04:20:21 +0000
+Received: by outflank-mailman (output) from mailman id 561379.877965; Tue, 11 Jul 2023 04:20:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJ4rN-0006tR-OB; Tue, 11 Jul 2023 04:20:21 +0000
-Received: by outflank-mailman (input) for mailman id 561380;
+	id 1qJ4rN-0006m3-EW; Tue, 11 Jul 2023 04:20:21 +0000
+Received: by outflank-mailman (input) for mailman id 561379;
  Mon, 10 Jul 2023 19:25:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=6PHc=C4=gmail.com=ubizjak@srs-se1.protection.inumbo.net>)
- id 1qIwVJ-0005bX-56
+ id 1qIwVJ-0005bW-3T
  for xen-devel@lists.xenproject.org; Mon, 10 Jul 2023 19:25:01 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 74e96e22-1f57-11ee-8611-37d641c3527e;
- Mon, 10 Jul 2023 21:24:58 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-991da766865so621284266b.0
- for <xen-devel@lists.xenproject.org>; Mon, 10 Jul 2023 12:24:58 -0700 (PDT)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 75dd6d1f-1f57-11ee-b239-6b7b168915f2;
+ Mon, 10 Jul 2023 21:24:59 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-99364ae9596so627397366b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Jul 2023 12:24:59 -0700 (PDT)
 Received: from localhost.localdomain ([46.248.82.114])
  by smtp.gmail.com with ESMTPSA id
- w15-20020a170906480f00b0096a6be0b66dsm110076ejq.208.2023.07.10.12.24.56
+ w15-20020a170906480f00b0096a6be0b66dsm110076ejq.208.2023.07.10.12.24.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jul 2023 12:24:56 -0700 (PDT)
+ Mon, 10 Jul 2023 12:24:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,211 +47,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 74e96e22-1f57-11ee-8611-37d641c3527e
+X-Inumbo-ID: 75dd6d1f-1f57-11ee-b239-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689017097; x=1691609097;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jftu1XapvOLMzEYkqywXgUEUxuMrQszDRi+r4S9T/B8=;
-        b=jFKS0dDJt25TajexlB3hdj0BfuVDTTR2cNBPmf6qukrN+1LWfsXoV1T2h3hMn11QA7
-         PVdUNSGV8fNwqYlSRRmyhqaLM4ctHU2vDoVaOjgmxwQ1mTesI4qIpka4EGOuxewv/777
-         HUwt1q2YZucKXu8Ew9w2AGcbpraL2lrANBy/H87nIkET4S/EVNiN5FxqKhHDkTHIr0AH
-         ZRhGfVbts058LX9BW6ssPRYfynYgC9yAmNQ1V5Lu/Nsg0plw43AjSQyyQFRI7RPTBjD9
-         VR9T8R8SOgbdiqHefLbmNbw0rrKfrtzs1LNjqjFnJNkDbwm/R0EED27L2yKFN9S4KtaW
-         2i7w==
+        d=gmail.com; s=20221208; t=1689017099; x=1691609099;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8jAJrLaj81nDh4wW1pP27vJFmY8UiJKSEaQ+/Hb04Nc=;
+        b=hnX3o4peRysHE4PlLHbB9M+JugRMzR7VVp6giACiIXm0TS66MpvDNrmpEM20fnHH2A
+         oSFUd0VYZ/MdWgmzGsmXue6dq2b+VMz3GxtLT1LjmN2vOJPTyB1MlJVUP4Zg1582I7Ih
+         bvByd4d2/2KrUOhapdZ5gYfpSGWLMwWzS/Wj/NbCJxGevCFI9QeDcs9Auy4zAcVQ/Tf8
+         inx384WtL7/fUnA4qAcq/gmiQWcOE2I+2JT4Su/1IT5W/UTbkLOtSMHLNoEqNw2olwUV
+         YBlaAEf7Uv05hM5H6jTxldHdo0TkB+So0trN2HA+X0Z1MAsWYaG52b6cC+vifMgd8TY2
+         hLeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689017097; x=1691609097;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jftu1XapvOLMzEYkqywXgUEUxuMrQszDRi+r4S9T/B8=;
-        b=kjCILL+ufzxy6O0Qf6zXTpiug4sB36ZEGCsgyyZRnyqhSqJVRSfTy3vpDQkAxT2PQz
-         HhMJ/Z+I93eDm/LVz6ozgQ7cqj/QwsxzQjlYcDgw/9WBNhXzZK4xMa5Cvoxj/cQKVGGm
-         M97p0Dbr0LO5AcCWBaApf2hcbQzSKkrZTC7C92VCDQ7SzbAH3kwW2J6Vqr/5+gwIKpLB
-         rCu/P1wB7TCJcqZTtp1tfJXLbDiDRB+35PDb3bS+YSeh+81NzXeyr78eKoXu5qvk4v1I
-         EFKPxMsdHQQzit4LvB3uRqI/wrTC16Sj6PYNuWHfc9vmNgKqYfmni6Qjx0LqkJtNrRrw
-         FTgA==
-X-Gm-Message-State: ABy/qLZqWhUV6xQyILKlErINmleBWQfI8KIMq33OZbVmteUH4YuKcRts
-	53uGpiIocN40oIRu/0nleEQ=
-X-Google-Smtp-Source: APBJJlH5IVyTpedE5IkFA68q07QVykSKpgW8fZffI7YRGbCbmTiXrGVpLLobb4Cs4f1LpCQFV5itgQ==
-X-Received: by 2002:a17:906:edbb:b0:98d:63c5:d135 with SMTP id sa27-20020a170906edbb00b0098d63c5d135mr750873ejb.54.1689017097267;
-        Mon, 10 Jul 2023 12:24:57 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1689017099; x=1691609099;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8jAJrLaj81nDh4wW1pP27vJFmY8UiJKSEaQ+/Hb04Nc=;
+        b=RRtbJCctKJmNo0eKgvj1WDRPlq+xdKEl+H8XbAYhmYSeReeiS4KMZoatnLrpU7l6/z
+         ux94NcTHCjBC6FUCwx4TsallS7KHZMr4bzT/gm+15e8gQB1gsYSviI4RQP3qoLOom/YZ
+         5bqmWAxDEKQHgkhlZaLjyewgYtpSFYG+m1JtXn5WySCLzWY9J7+K7GvjijUZfAF3W4FA
+         A3P8UsWpWThHCG1J7Ko2w7tw576M0Rf8As7CyzJv5iU3VhYi5WkggAF7rsOi5uYfR+AU
+         mxHxyGAJFQgxxeYVl1smHhodXXs0g8VvQFjpY/wVmnNhNQYm1eDKSfi2YSP6DvhVJIh1
+         w2nQ==
+X-Gm-Message-State: ABy/qLaqg4WIvLUwVSVipAj6v2k4lGmOm23bTpnNdJPUQIzbV+yVj5aN
+	aXoPt4Mb8mP6NIhD88HHrBE=
+X-Google-Smtp-Source: APBJJlHwVT5frp02REiaP08Tw2FykEOwGxdLWWsPCiw5aMtj6jXyTUwf06D5IHzSoxQJfVL+VWOmXA==
+X-Received: by 2002:a17:906:5307:b0:993:f996:52d3 with SMTP id h7-20020a170906530700b00993f99652d3mr6394846ejo.25.1689017099074;
+        Mon, 10 Jul 2023 12:24:59 -0700 (PDT)
 From: Uros Bizjak <ubizjak@gmail.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
 Cc: Uros Bizjak <ubizjak@gmail.com>,
-	Will Deacon <will@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	Mark Rutland <mark.rutland@arm.com>
-Subject: [PATCH 1/3] locking/generic: Add generic support for sync_try_cmpxchg and its falback
-Date: Mon, 10 Jul 2023 21:21:54 +0200
-Message-ID: <20230710192440.47140-1-ubizjak@gmail.com>
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH 3/3] xen: Illustrate the transition to sync_try_cmpxchg
+Date: Mon, 10 Jul 2023 21:21:56 +0200
+Message-ID: <20230710192440.47140-3-ubizjak@gmail.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230710192440.47140-1-ubizjak@gmail.com>
+References: <20230710192440.47140-1-ubizjak@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Provide the generic sync_try_cmpxchg function from the
-raw_ prefixed version, also adding explicit instrumentation.
+This patch illustrates the transition to sync_try_cmpxchg.
+It is not intended to be merged as-is.
 
-Cc: Will Deacon <will@kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Boqun Feng <boqun.feng@gmail.com>
-Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 Signed-off-by: Uros Bizjak <ubizjak@gmail.com>
 ---
- include/linux/atomic/atomic-arch-fallback.h | 15 +++++++++-
- include/linux/atomic/atomic-instrumented.h  | 10 ++++++-
- scripts/atomic/gen-atomic-fallback.sh       | 33 +++++++++++----------
- scripts/atomic/gen-atomic-instrumented.sh   |  3 +-
- 4 files changed, 43 insertions(+), 18 deletions(-)
+ drivers/xen/events/events_fifo.c | 26 ++++++++++++--------------
+ drivers/xen/grant-table.c        | 10 ++++------
+ 2 files changed, 16 insertions(+), 20 deletions(-)
 
-diff --git a/include/linux/atomic/atomic-arch-fallback.h b/include/linux/atomic/atomic-arch-fallback.h
-index 18f5744dfb5d..037742c9f97d 100644
---- a/include/linux/atomic/atomic-arch-fallback.h
-+++ b/include/linux/atomic/atomic-arch-fallback.h
-@@ -428,6 +428,19 @@ extern void raw_cmpxchg128_relaxed_not_implemented(void);
- 
- #define raw_sync_cmpxchg arch_sync_cmpxchg
- 
-+#ifdef arch_sync_try_cmpxchg
-+#define raw_sync_try_cmpxchg arch_sync_try_cmpxchg
-+#else
-+#define raw_sync_try_cmpxchg(_ptr, _oldp, _new) \
-+({ \
-+	typeof(*(_ptr)) *___op = (_oldp), ___o = *___op, ___r; \
-+	___r = raw_sync_cmpxchg((_ptr), ___o, (_new)); \
-+	if (unlikely(___r != ___o)) \
-+		*___op = ___r; \
-+	likely(___r == ___o); \
-+})
-+#endif
-+
- /**
-  * raw_atomic_read() - atomic load with relaxed ordering
-  * @v: pointer to atomic_t
-@@ -4657,4 +4670,4 @@ raw_atomic64_dec_if_positive(atomic64_t *v)
- }
- 
- #endif /* _LINUX_ATOMIC_FALLBACK_H */
--// 202b45c7db600ce36198eb1f1fc2c2d5268ace2d
-+// 2eb1fe994b6dcab645bbb5a642a4aaa9374c5600
-diff --git a/include/linux/atomic/atomic-instrumented.h b/include/linux/atomic/atomic-instrumented.h
-index d401b406ef7c..54d7bbe0aeaa 100644
---- a/include/linux/atomic/atomic-instrumented.h
-+++ b/include/linux/atomic/atomic-instrumented.h
-@@ -4998,6 +4998,14 @@ atomic_long_dec_if_positive(atomic_long_t *v)
- 	raw_try_cmpxchg128_local(__ai_ptr, __ai_oldp, __VA_ARGS__); \
- })
- 
-+#define sync_try_cmpxchg(ptr, ...) \
-+({ \
-+	typeof(ptr) __ai_ptr = (ptr); \
-+	kcsan_mb(); \
-+	instrument_atomic_read_write(__ai_ptr, sizeof(*__ai_ptr)); \
-+	raw_sync_try_cmpxchg(__ai_ptr, __VA_ARGS__); \
-+})
-+
- 
- #endif /* _LINUX_ATOMIC_INSTRUMENTED_H */
--// 1568f875fef72097413caab8339120c065a39aa4
-+// 2cc4bc990fef44d3836ec108f11b610f3f438184
-diff --git a/scripts/atomic/gen-atomic-fallback.sh b/scripts/atomic/gen-atomic-fallback.sh
-index c0c8a85d7c81..d87148d6e588 100755
---- a/scripts/atomic/gen-atomic-fallback.sh
-+++ b/scripts/atomic/gen-atomic-fallback.sh
-@@ -223,14 +223,15 @@ gen_xchg_fallbacks()
- 
- gen_try_cmpxchg_fallback()
+diff --git a/drivers/xen/events/events_fifo.c b/drivers/xen/events/events_fifo.c
+index ad9fe51d3fb3..655775db7caf 100644
+--- a/drivers/xen/events/events_fifo.c
++++ b/drivers/xen/events/events_fifo.c
+@@ -226,21 +226,20 @@ static bool evtchn_fifo_is_masked(evtchn_port_t port)
+  */
+ static bool clear_masked_cond(volatile event_word_t *word)
  {
-+	local prefix="$1"; shift
- 	local cmpxchg="$1"; shift;
--	local order="$1"; shift;
-+	local suffix="$1"; shift;
+-	event_word_t new, old, w;
++	event_word_t new, old;
  
- cat <<EOF
--#define raw_try_${cmpxchg}${order}(_ptr, _oldp, _new) \\
-+#define raw_${prefix}try_${cmpxchg}${suffix}(_ptr, _oldp, _new) \\
- ({ \\
- 	typeof(*(_ptr)) *___op = (_oldp), ___o = *___op, ___r; \\
--	___r = raw_${cmpxchg}${order}((_ptr), ___o, (_new)); \\
-+	___r = raw_${prefix}${cmpxchg}${suffix}((_ptr), ___o, (_new)); \\
- 	if (unlikely(___r != ___o)) \\
- 		*___op = ___r; \\
- 	likely(___r == ___o); \\
-@@ -259,11 +260,11 @@ gen_try_cmpxchg_order_fallback()
- 	fi
+-	w = *word;
++	old = *word;
  
- 	printf "#else\n"
--	gen_try_cmpxchg_fallback "${cmpxchg}" "${order}"
-+	gen_try_cmpxchg_fallback "" "${cmpxchg}" "${order}"
- 	printf "#endif\n\n"
+ 	do {
+-		if (!(w & (1 << EVTCHN_FIFO_MASKED)))
++		if (!(old & (1 << EVTCHN_FIFO_MASKED)))
+ 			return true;
+ 
+-		if (w & (1 << EVTCHN_FIFO_PENDING))
++		if (old & (1 << EVTCHN_FIFO_PENDING))
+ 			return false;
+ 
+-		old = w & ~(1 << EVTCHN_FIFO_BUSY);
++		old = old & ~(1 << EVTCHN_FIFO_BUSY);
+ 		new = old & ~(1 << EVTCHN_FIFO_MASKED);
+-		w = sync_cmpxchg(word, old, new);
+-	} while (w != old);
++	} while (!sync_try_cmpxchg(word, &old, new));
+ 
+ 	return true;
  }
+@@ -259,17 +258,16 @@ static void evtchn_fifo_unmask(evtchn_port_t port)
  
--gen_try_cmpxchg_fallbacks()
-+gen_try_cmpxchg_order_fallbacks()
+ static uint32_t clear_linked(volatile event_word_t *word)
  {
- 	local cmpxchg="$1"; shift;
+-	event_word_t new, old, w;
++	event_word_t new, old;
  
-@@ -272,15 +273,17 @@ gen_try_cmpxchg_fallbacks()
- 	done
+-	w = *word;
++	old = *word;
+ 
+ 	do {
+-		old = w;
+-		new = (w & ~((1 << EVTCHN_FIFO_LINKED)
+-			     | EVTCHN_FIFO_LINK_MASK));
+-	} while ((w = sync_cmpxchg(word, old, new)) != old);
++		new = (old & ~((1 << EVTCHN_FIFO_LINKED)
++			       | EVTCHN_FIFO_LINK_MASK));
++	} while (!sync_try_cmpxchg(word, &old, new));
+ 
+-	return w & EVTCHN_FIFO_LINK_MASK;
++	return old & EVTCHN_FIFO_LINK_MASK;
  }
  
--gen_cmpxchg_local_fallbacks()
-+gen_def_and_try_cmpxchg_fallback()
+ static void consume_one_event(unsigned cpu, struct evtchn_loop_ctrl *ctrl,
+diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
+index e1ec725c2819..211d083d4fbe 100644
+--- a/drivers/xen/grant-table.c
++++ b/drivers/xen/grant-table.c
+@@ -427,16 +427,14 @@ EXPORT_SYMBOL_GPL(gnttab_grant_foreign_access);
+ 
+ static int gnttab_end_foreign_access_ref_v1(grant_ref_t ref)
  {
-+	local prefix="$1"; shift
- 	local cmpxchg="$1"; shift
-+	local suffix="$1"; shift
+-	u16 flags, nflags;
+-	u16 *pflags;
++	u16 *pflags = &gnttab_shared.v1[ref].flags;
++	u16 flags;
  
--	printf "#define raw_${cmpxchg} arch_${cmpxchg}\n\n"
--	printf "#ifdef arch_try_${cmpxchg}\n"
--	printf "#define raw_try_${cmpxchg} arch_try_${cmpxchg}\n"
-+	printf "#define raw_${prefix}${cmpxchg}${suffix} arch_${prefix}${cmpxchg}${suffix}\n\n"
-+	printf "#ifdef arch_${prefix}try_${cmpxchg}${suffix}\n"
-+	printf "#define raw_${prefix}try_${cmpxchg}${suffix} arch_${prefix}try_${cmpxchg}${suffix}\n"
- 	printf "#else\n"
--	gen_try_cmpxchg_fallback "${cmpxchg}" ""
-+	gen_try_cmpxchg_fallback "${prefix}" "${cmpxchg}" "${suffix}"
- 	printf "#endif\n\n"
+-	pflags = &gnttab_shared.v1[ref].flags;
+-	nflags = *pflags;
++	flags = *pflags;
+ 	do {
+-		flags = nflags;
+ 		if (flags & (GTF_reading|GTF_writing))
+ 			return 0;
+-	} while ((nflags = sync_cmpxchg(pflags, flags, 0)) != flags);
++	} while (!sync_try_cmpxchg(pflags, &flags, 0));
+ 
+ 	return 1;
  }
- 
-@@ -302,15 +305,15 @@ for xchg in "xchg" "cmpxchg" "cmpxchg64" "cmpxchg128"; do
- done
- 
- for cmpxchg in "cmpxchg" "cmpxchg64" "cmpxchg128"; do
--	gen_try_cmpxchg_fallbacks "${cmpxchg}"
-+	gen_try_cmpxchg_order_fallbacks "${cmpxchg}"
- done
- 
--for cmpxchg in "cmpxchg_local" "cmpxchg64_local" "cmpxchg128_local"; do
--	gen_cmpxchg_local_fallbacks "${cmpxchg}" ""
-+for cmpxchg in "cmpxchg" "cmpxchg64" "cmpxchg128"; do
-+	gen_def_and_try_cmpxchg_fallback "" "${cmpxchg}" "_local"
- done
- 
--for cmpxchg in "sync_cmpxchg"; do
--	printf "#define raw_${cmpxchg} arch_${cmpxchg}\n\n"
-+for cmpxchg in "cmpxchg"; do
-+	gen_def_and_try_cmpxchg_fallback "sync_" "${cmpxchg}" ""
- done
- 
- grep '^[a-z]' "$1" | while read name meta args; do
-diff --git a/scripts/atomic/gen-atomic-instrumented.sh b/scripts/atomic/gen-atomic-instrumented.sh
-index 8f8f8e3b20f9..592f3ec89b5f 100755
---- a/scripts/atomic/gen-atomic-instrumented.sh
-+++ b/scripts/atomic/gen-atomic-instrumented.sh
-@@ -169,7 +169,8 @@ for xchg in "xchg" "cmpxchg" "cmpxchg64" "cmpxchg128" "try_cmpxchg" "try_cmpxchg
- 	done
- done
- 
--for xchg in "cmpxchg_local" "cmpxchg64_local" "cmpxchg128_local" "sync_cmpxchg" "try_cmpxchg_local" "try_cmpxchg64_local" "try_cmpxchg128_local"; do
-+for xchg in "cmpxchg_local" "cmpxchg64_local" "cmpxchg128_local" "sync_cmpxchg" \
-+	    "try_cmpxchg_local" "try_cmpxchg64_local" "try_cmpxchg128_local" "sync_try_cmpxchg"; do
- 	gen_xchg "${xchg}" ""
- 	printf "\n"
- done
 -- 
 2.41.0
 
