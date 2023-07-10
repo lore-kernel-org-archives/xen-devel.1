@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C486CEB64D9
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Jul 2023 07:00:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.560944.877110 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C813EB64D9
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Jul 2023 07:00:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.560948.877141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qIksE-0002ht-97; Mon, 10 Jul 2023 06:59:54 +0000
+	id 1qIksT-0004SZ-4Q; Mon, 10 Jul 2023 07:00:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 560944.877110; Mon, 10 Jul 2023 06:59:54 +0000
+Received: by outflank-mailman (output) from mailman id 560948.877141; Mon, 10 Jul 2023 07:00:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qIksE-0002hm-61; Mon, 10 Jul 2023 06:59:54 +0000
-Received: by outflank-mailman (input) for mailman id 560944;
- Mon, 10 Jul 2023 06:59:52 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qIksT-0004SM-15; Mon, 10 Jul 2023 07:00:09 +0000
+Received: by outflank-mailman (input) for mailman id 560948;
+ Mon, 10 Jul 2023 07:00:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Xcmr=C4=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qIksC-0002bQ-Ip
- for xen-devel@lists.xenproject.org; Mon, 10 Jul 2023 06:59:52 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5d4881e2-1eef-11ee-8611-37d641c3527e;
- Mon, 10 Jul 2023 08:59:50 +0200 (CEST)
+ id 1qIksS-0002xd-CK
+ for xen-devel@lists.xenproject.org; Mon, 10 Jul 2023 07:00:08 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 676f134e-1eef-11ee-b239-6b7b168915f2;
+ Mon, 10 Jul 2023 09:00:07 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4AE4E1F38D;
- Mon, 10 Jul 2023 06:59:50 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 904E921E97;
+ Mon, 10 Jul 2023 07:00:07 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1B5811361C;
- Mon, 10 Jul 2023 06:59:50 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 537C71361C;
+ Mon, 10 Jul 2023 07:00:07 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id PTQrBWasq2RZYgAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 10 Jul 2023 06:59:50 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id Afj2Enesq2StYgAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 10 Jul 2023 07:00:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,81 +53,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d4881e2-1eef-11ee-8611-37d641c3527e
+X-Inumbo-ID: 676f134e-1eef-11ee-b239-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1688972390; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=F4puyu1BswEV6Vw6vcv/7pys51yNvY/2hWRwamK9TBg=;
-	b=ZW0LiOn712hAR3YKocaUBKvsk/ejYT0Jl2kcJDehsSDOWx9Wcqt5XrXp14g3sAS7yVxbu7
-	w5RpdHQAhHzyhXXiSts9x5Slg9hwZLMr0WY8Ln6+YR/EITM/rBenronzdudvwYBfJUlltt
-	sqRE3A6b3q4gJN2THAWy5t8ViV5Fa68=
+	t=1688972407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=OZ3QkIbfe9/RFlUdF2rbK/pn4dQLdQYEQ838CQ5c7JM=;
+	b=jpqktDvbyx541fU5KQztWpDkZnrOt8ulOrNzkJjycn8dGFTtVOEoIXGoP/IjzJ3/RLznTj
+	eqrOeGhP/o4nhBF0CSYSA86iJbOoX4Dp+jyCENU8V1RwRKcTKfSage9dE5BCNP2guHZrrl
+	nIvA/wbfBnfNZDm/MxsRIWCtlIeDewA=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 00/18] tools/xenstore: drop TDB
-Date: Mon, 10 Jul 2023 08:59:29 +0200
-Message-Id: <20230710065947.4201-1-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v2 03/18] tools/xenstore: let transaction_prepend() return the name for access
+Date: Mon, 10 Jul 2023 08:59:32 +0200
+Message-Id: <20230710065947.4201-4-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230710065947.4201-1-jgross@suse.com>
+References: <20230710065947.4201-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Using TDB for storing the Xenstore nodes is adding more complexity
-instead of removing it. With keeping the data in memory only, the main
-reason for using TDB has disappeared.
+Instead of setting the TDB key for accessing the node in the data base,
+let transaction_prepend() return the associated name instead.
 
-This series is replacing TDB with a hashlist referencing directly
-individually allocated Xenstore nodes.
+This is in preparation to replace TDB with a more simple data storage.
 
-This in turn allows to use references of the stored nodes instead of
-copying them in case only read access is needed. Some simple tests
-using the test-xenstore utility have shown no single test being slower
-with this series applied, but some tests experienced up to 10% better
-performance.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+---
+ tools/xenstore/xenstored_core.c        |  4 +++-
+ tools/xenstore/xenstored_transaction.c | 11 ++++-------
+ tools/xenstore/xenstored_transaction.h |  3 +--
+ 3 files changed, 8 insertions(+), 10 deletions(-)
 
-Changes in V2:
-- addressed comments
-- split former patch 9 into 2 patches
-- added patches 13-18
-
-Juergen Gross (18):
-  tools/xenstore: explicitly specify create or modify for tdb_store()
-  tools/xenstore: replace key in struct node with data base name
-  tools/xenstore: let transaction_prepend() return the name for access
-  tools/xenstore: rename do_tdb_delete() and change parameter type
-  tools/xenstore: rename do_tdb_write() and change parameter type
-  tools/xenstore: switch get_acc_data() to use name instead of key
-  tools/xenstore: add wrapper for tdb_fetch()
-  tools/xenstore: make hashtable key and value parameters const
-  tools/xenstore: let hashtable_add() fail in case of existing entry
-  tools/xenstore: add hashtable_replace() function
-  tools/xenstore: drop use of tdb
-  tools/xenstore: remove tdb code
-  tools/xenstore: let db_delete() return void
-  tools/xenstore: move copying of node data out of db_fetch()
-  tools/xenstore: rework struct xs_tdb_record_hdr
-  tools/xenstore: don't use struct node_perms in struct node
-  tools/xenstore: use struct node_hdr in struct node
-  tools/xenstore: add nocopy flag to node read functions
-
- tools/xenstore/Makefile.common         |    2 +-
- tools/xenstore/hashtable.c             |   60 +-
- tools/xenstore/hashtable.h             |   20 +-
- tools/xenstore/tdb.c                   | 1748 ------------------------
- tools/xenstore/tdb.h                   |  132 --
- tools/xenstore/utils.h                 |    9 -
- tools/xenstore/xenstored_core.c        |  498 ++++---
- tools/xenstore/xenstored_core.h        |   81 +-
- tools/xenstore/xenstored_domain.c      |   20 +-
- tools/xenstore/xenstored_transaction.c |   95 +-
- tools/xenstore/xenstored_transaction.h |    5 +-
- tools/xenstore/xenstored_watch.c       |   11 +-
- 12 files changed, 427 insertions(+), 2254 deletions(-)
- delete mode 100644 tools/xenstore/tdb.c
- delete mode 100644 tools/xenstore/tdb.h
-
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 521ce1a70e..6d7f002b54 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -695,6 +695,7 @@ struct node *read_node(struct connection *conn, const void *ctx,
+ 	TDB_DATA key, data;
+ 	struct xs_tdb_record_hdr *hdr;
+ 	struct node *node;
++	const char *db_name;
+ 	int err;
+ 
+ 	node = talloc(ctx, struct node);
+@@ -709,7 +710,8 @@ struct node *read_node(struct connection *conn, const void *ctx,
+ 		return NULL;
+ 	}
+ 
+-	transaction_prepend(conn, name, &key);
++	db_name = transaction_prepend(conn, name);
++	set_tdb_key(db_name, &key);
+ 
+ 	data = tdb_fetch(tdb_ctx, key);
+ 
+diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
+index 9dab0cd165..1646c07040 100644
+--- a/tools/xenstore/xenstored_transaction.c
++++ b/tools/xenstore/xenstored_transaction.c
+@@ -196,20 +196,17 @@ static char *transaction_get_node_name(void *ctx, struct transaction *trans,
+  * Prepend the transaction to name if node has been modified in the current
+  * transaction.
+  */
+-void transaction_prepend(struct connection *conn, const char *name,
+-			 TDB_DATA *key)
++const char *transaction_prepend(struct connection *conn, const char *name)
+ {
+ 	struct accessed_node *i;
+ 
+ 	if (conn && conn->transaction) {
+ 		i = find_accessed_node(conn->transaction, name);
+-		if (i) {
+-			set_tdb_key(i->trans_name, key);
+-			return;
+-		}
++		if (i)
++			return i->trans_name;
+ 	}
+ 
+-	set_tdb_key(name, key);
++	return name;
+ }
+ 
+ /*
+diff --git a/tools/xenstore/xenstored_transaction.h b/tools/xenstore/xenstored_transaction.h
+index f6a2e2f7f5..b196b1ab07 100644
+--- a/tools/xenstore/xenstored_transaction.h
++++ b/tools/xenstore/xenstored_transaction.h
+@@ -47,8 +47,7 @@ int __must_check access_node(struct connection *conn, struct node *node,
+ void queue_watches(struct connection *conn, const char *name, bool watch_exact);
+ 
+ /* Prepend the transaction to name if appropriate. */
+-void transaction_prepend(struct connection *conn, const char *name,
+-                         TDB_DATA *key);
++const char *transaction_prepend(struct connection *conn, const char *name);
+ 
+ /* Mark the transaction as failed. This will prevent it to be committed. */
+ void fail_transaction(struct transaction *trans);
 -- 
 2.35.3
 
