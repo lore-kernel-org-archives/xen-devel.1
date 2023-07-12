@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4B2EB64D9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F07C001DD
 	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 10:34:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.562212.878861 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.562206.878838 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJXAV-00084M-B2; Wed, 12 Jul 2023 10:33:59 +0000
+	id 1qJXAR-0007Fm-BY; Wed, 12 Jul 2023 10:33:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 562212.878861; Wed, 12 Jul 2023 10:33:59 +0000
+Received: by outflank-mailman (output) from mailman id 562206.878838; Wed, 12 Jul 2023 10:33:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJXAU-000837-Rb; Wed, 12 Jul 2023 10:33:58 +0000
-Received: by outflank-mailman (input) for mailman id 562212;
- Wed, 12 Jul 2023 10:33:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qJXAQ-0007De-V9; Wed, 12 Jul 2023 10:33:54 +0000
+Received: by outflank-mailman (input) for mailman id 562206;
+ Wed, 12 Jul 2023 10:33:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M0TT=C6=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qJXAS-0006Dd-NG
- for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 10:33:56 +0000
+ id 1qJXAQ-00061z-10
+ for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 10:33:54 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9a50ef10-209f-11ee-b239-6b7b168915f2;
- Wed, 12 Jul 2023 12:33:55 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9831a288-209f-11ee-8611-37d641c3527e;
+ Wed, 12 Jul 2023 12:33:52 +0200 (CEST)
 Received: from beta.bugseng.com (unknown [37.161.151.90])
- by support.bugseng.com (Postfix) with ESMTPSA id 7E3AD4EE0C88;
- Wed, 12 Jul 2023 12:33:54 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id F0ED54EE0C8D;
+ Wed, 12 Jul 2023 12:33:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,22 +41,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a50ef10-209f-11ee-b239-6b7b168915f2
+X-Inumbo-ID: 9831a288-209f-11ee-8611-37d641c3527e
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH v3 08/15] xen/pci: fix violations of MISRA C:2012 Rule 7.2
-Date: Wed, 12 Jul 2023 12:32:09 +0200
-Message-Id: <b1bb12e7a6fb73f691d76728688e85437c701c1d.1689152719.git.gianluca.luparini@bugseng.com>
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Luca Fancellu <luca.fancellu@arm.com>
+Subject: [XEN PATCH v3 05/15] xen/device-tree: fix violations of MISRA C:2012 Rule 7.2
+Date: Wed, 12 Jul 2023 12:32:06 +0200
+Message-Id: <e916a127d06480384b9de2765b81bd798006e636.1689152719.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1689152719.git.gianluca.luparini@bugseng.com>
 References: <cover.1689152719.git.gianluca.luparini@bugseng.com>
@@ -77,34 +76,43 @@ uniformity.
 
 Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v3:
 - change 'Signed-off-by' ordering
 
 Changes in v2:
-- minor change to commit title
+- change commit title to the right one
 - change commit message
+- change maintainers in Cc
+- remove changes in 'libfdt'
 ---
- xen/drivers/passthrough/pci.c | 4 ++--
+ xen/common/device_tree.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 07d1986d33..95846e84f2 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -990,8 +990,8 @@ bool_t __init pci_device_detect(u16 seg, u8 bus, u8 dev, u8 func)
+diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
+index 8da1052911..0677193ab3 100644
+--- a/xen/common/device_tree.c
++++ b/xen/common/device_tree.c
+@@ -2115,7 +2115,7 @@ static void __init __unflatten_device_tree(const void *fdt,
+     /* Allocate memory for the expanded device tree */
+     mem = (unsigned long)_xmalloc (size + 4, __alignof__(struct dt_device_node));
  
-     vendor = pci_conf_read32(PCI_SBDF(seg, bus, dev, func), PCI_VENDOR_ID);
-     /* some broken boards return 0 or ~0 if a slot is empty: */
--    if ( (vendor == 0xffffffff) || (vendor == 0x00000000) ||
--         (vendor == 0x0000ffff) || (vendor == 0xffff0000) )
-+    if ( (vendor == 0xffffffffU) || (vendor == 0x00000000U) ||
-+         (vendor == 0x0000ffffU) || (vendor == 0xffff0000U) )
-         return 0;
-     return 1;
- }
+-    ((__be32 *)mem)[size / 4] = cpu_to_be32(0xdeadbeef);
++    ((__be32 *)mem)[size / 4] = cpu_to_be32(0xdeadbeefU);
+ 
+     dt_dprintk("  unflattening %lx...\n", mem);
+ 
+@@ -2125,7 +2125,7 @@ static void __init __unflatten_device_tree(const void *fdt,
+     if ( be32_to_cpup((__be32 *)start) != FDT_END )
+         printk(XENLOG_WARNING "Weird tag at end of tree: %08x\n",
+                   *((u32 *)start));
+-    if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeef )
++    if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeefU )
+         printk(XENLOG_WARNING "End of tree marker overwritten: %08x\n",
+                   be32_to_cpu(((__be32 *)mem)[size / 4]));
+     *allnextp = NULL;
 -- 
 2.41.0
 
