@@ -4,36 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C553FEB64DA
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 14:56:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.562581.879336 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C14EB64D9
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 15:09:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.562594.879346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJbGP-000406-0I; Wed, 12 Jul 2023 14:56:21 +0000
+	id 1qJbSz-0005hB-5O; Wed, 12 Jul 2023 15:09:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 562581.879336; Wed, 12 Jul 2023 14:56:20 +0000
+Received: by outflank-mailman (output) from mailman id 562594.879346; Wed, 12 Jul 2023 15:09:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJbGO-0003zz-TH; Wed, 12 Jul 2023 14:56:20 +0000
-Received: by outflank-mailman (input) for mailman id 562581;
- Wed, 12 Jul 2023 14:35:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vScV=C6=intel.com=jani.nikula@srs-se1.protection.inumbo.net>)
- id 1qJawK-00016Z-Dg
- for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 14:35:36 +0000
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5a2d191a-20c1-11ee-8611-37d641c3527e;
- Wed, 12 Jul 2023 16:35:32 +0200 (CEST)
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Jul 2023 07:35:29 -0700
-Received: from pmessina-mobl.ger.corp.intel.com (HELO localhost)
- ([10.252.42.186])
- by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Jul 2023 07:34:31 -0700
+	id 1qJbSz-0005h4-1n; Wed, 12 Jul 2023 15:09:21 +0000
+Received: by outflank-mailman (input) for mailman id 562594;
+ Wed, 12 Jul 2023 15:09:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8Wak=C6=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1qJbSx-0005gy-60
+ for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 15:09:19 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on0604.outbound.protection.outlook.com
+ [2a01:111:f400:fe0e::604])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 124ca65b-20c6-11ee-b239-6b7b168915f2;
+ Wed, 12 Jul 2023 17:09:18 +0200 (CEST)
+Received: from AS8PR04MB8788.eurprd04.prod.outlook.com (2603:10a6:20b:42f::21)
+ by AS8PR04MB7575.eurprd04.prod.outlook.com (2603:10a6:20b:29c::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6565.32; Wed, 12 Jul
+ 2023 15:09:16 +0000
+Received: from AS8PR04MB8788.eurprd04.prod.outlook.com
+ ([fe80::cbc0:69aa:c9a2:198e]) by AS8PR04MB8788.eurprd04.prod.outlook.com
+ ([fe80::cbc0:69aa:c9a2:198e%7]) with mapi id 15.20.6565.016; Wed, 12 Jul 2023
+ 15:09:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,266 +49,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a2d191a-20c1-11ee-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1689172533; x=1720708533;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version:content-transfer-encoding;
-  bh=7EqKUdX8amzDodN7nIatZqqu7r5MTljrQuoCdn53hEQ=;
-  b=a9UqAWc65MIY0tDFR7woBKTQ7PdJvKloaE11JNi6ZEGFF5k501iM06Jr
-   OIdPWpNKzlHwS/I2RR2+6Bd/Ia8wQVmWo72oS4O8Bdl3iOPjUHmnQogw+
-   wVdbTrsXujqJSk96HOk8a4jI8oYEGmE52vpglbv93YibVDdcWO2512vA2
-   87MnV82lrcJ0h0qxmKT06OvkfjQ8SfSFZ6IwfhWdhDsyACDhtjl9S9ynF
-   G0nhj4DiWY70mZcfWvZ/yCxF1Oep7Mf9moWDXEYlLJTisyqovkyNxfr/9
-   6d3ET/5hSkyY520f9Y4Yg5UPOZdk++rH58NkCtJJ3Z5h2y5g2RXke0GB7
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10769"; a="428641969"
-X-IronPort-AV: E=Sophos;i="6.01,199,1684825200"; 
-   d="scan'208";a="428641969"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10769"; a="845686939"
-X-IronPort-AV: E=Sophos;i="6.01,199,1684825200"; 
-   d="scan'208";a="845686939"
-From: Jani Nikula <jani.nikula@intel.com>
-To: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Christian =?utf-8?Q?K=C3=B6nig?= <christian.koenig@amd.com>,
-	"Pan, Xinhui" <Xinhui.Pan@amd.com>, Harry
- Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Rodrigo
- Siqueira <Rodrigo.Siqueira@amd.com>, Hamza Mahfooz <hamza.mahfooz@amd.com>,
-	Javier Martinez Canillas <javierm@redhat.com>,
-	Guchun Chen <guchun.chen@amd.com>,
-	Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
-	Evan Quan <evan.quan@amd.com>, Likun Gao <Likun.Gao@amd.com>,
-	Marek =?utf-8?B?T2zFocOhaw==?= <marek.olsak@amd.com>,
-	David Francis <David.Francis@amd.com>,
-	Hawking Zhang <Hawking.Zhang@amd.com>,
-	Graham Sider <Graham.Sider@amd.com>, Lang Yu <Lang.Yu@amd.com>,
-	Philip Yang <Philip.Yang@amd.com>,
-	Yifan Zhang <yifan1.zhang@amd.com>, Tim Huang <Tim.Huang@amd.com>,
-	Zack Rusin <zackr@vmware.com>, Sam Ravnborg <sam@ravnborg.org>,
-	xurui <xurui@kylinos.cn>,
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-	=?utf-8?Q?Ma=C3=ADra?= Canal <mairacanal@riseup.net>,
-	=?utf-8?Q?Andr=C3=A9?= Almeida <andrealmeid@igalia.com>,
-	Qingqing Zhuo <qingqing.zhuo@amd.com>,
-	Aurabindo Pillai <aurabindo.pillai@amd.com>, Hersen
- Wu <hersenxs.wu@amd.com>, Fangzhi Zuo <jerry.zuo@amd.com>,
-	Stylon Wang <stylon.wang@amd.com>, Alan Liu <haoping.liu@amd.com>,
-	Wayne Lin <Wayne.Lin@amd.com>, Aaron Liu <aaron.liu@amd.com>,
-	Melissa Wen <mwen@igalia.com>,
-	Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>, David
- Tadokoro <davidbtadokoro@usp.br>, Wenjing Liu <wenjing.liu@amd.com>,
- Jiapeng
- Chong <jiapeng.chong@linux.alibaba.com>,
-	Mario Limonciello <mario.limonciello@amd.com>,
-	Alexey Kodanev <aleksei.kodanev@bell-sw.com>,
-	Roman Li <roman.li@amd.com>,
-	=?utf-8?Q?Joaqu=C3=ADn?= Ignacio =?utf-8?Q?Aramend=C3=ADa?=
- <samsagax@gmail.com>,
-	Dave Airlie <airlied@redhat.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Liviu Dudau <liviu.dudau@arm.com>, Joel Stanley <joel@jms.id.au>,
-	Boris Brezillon <bbrezillon@kernel.org>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@microchip.com>,
-	Inki Dae <inki.dae@samsung.com>, Seung-Woo
- Kim <sw0312.kim@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-	Stefan Agner <stefan@agner.ch>, Alison Wang <alison.wang@nxp.com>,
-	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
-	Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
-	Xinliang Liu <xinliang.liu@linaro.org>,
-	Tian Tao <tiantao6@hisilicon.com>,
-	Danilo Krummrich <dakr@redhat.com>,
-	Deepak Rawat <drawat.floss@gmail.com>, Joonas
- Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-	Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>, Lucas De
- Marchi <lucas.demarchi@intel.com>,
-	Ankit Nautiyal <ankit.k.nautiyal@intel.com>,
-	Andrzej Hajda <andrzej.hajda@intel.com>, Matt
- Roper <matthew.d.roper@intel.com>,
-	Stanislav Lisovskiy <stanislav.lisovskiy@intel.com>,
-	Radhakrishna Sripada <radhakrishna.sripada@intel.com>,
-	Hans de Goede <hdegoede@redhat.com>, Luca
- Coelho <luciano.coelho@intel.com>,
-	Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
-	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
-	Vinod Govindapillai <vinod.govindapillai@intel.com>,
-	=?utf-8?Q?=C5=81ukasz?= Bartosik <lb@semihalf.com>,
-	Anusha Srivatsa <anusha.srivatsa@intel.com>, Chaitanya
- Kumar Borah <chaitanya.kumar.borah@intel.com>,
-	Uma Shankar <uma.shankar@intel.com>, Imre Deak <imre.deak@intel.com>,
-	Mitul Golani <mitulkumar.ajitkumar.golani@intel.com>,
-	Swati Sharma <swati2.sharma@intel.com>,
-	Jouni =?utf-8?Q?H=C3=B6gander?= <jouni.hogander@intel.com>,
-	Mika Kahola <mika.kahola@intel.com>,
-	=?utf-8?Q?Jos=C3=A9?= Roberto de Souza <jose.souza@intel.com>,
-	Arun R Murthy <arun.r.murthy@intel.com>,
-	Gustavo Sousa <gustavo.sousa@intel.com>, Khaled
- Almahallawy <khaled.almahallawy@intel.com>,
-	Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
-	Andi Shyti <andi.shyti@linux.intel.com>,
-	Nirmoy Das <nirmoy.das@intel.com>, Fei Yang <fei.yang@intel.com>, Animesh
- Manna <animesh.manna@intel.com>, Deepak R Varma <drv@mailo.com>, "Jiri
- Slaby
- (SUSE)" <jirislaby@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-	Vandita Kulkarni <vandita.kulkarni@intel.com>,
-	Suraj Kandpal <suraj.kandpal@intel.com>,
-	Manasi Navare <manasi.d.navare@intel.com>,
-	Drew Davenport <ddavenport@chromium.org>,
-	Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
-	Shawn Guo <shawnguo@kernel.org>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Marian Cichy <m.cichy@pengutronix.de>, Dan
- Carpenter <error27@gmail.com>, Paul Cercueil <paul@crapouillou.net>, Anitha
- Chrisanthus <anitha.chrisanthus@intel.com>,
-	Edmund Dea <edmund.j.dea@intel.com>,
-	Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Chun-Kuang Hu <chunkuang.hu@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>, Neil
- Armstrong <neil.armstrong@linaro.org>, Kevin Hilman <khilman@baylibre.com>,
-	Rob Clark <robdclark@gmail.com>,
-	Abhinav Kumar <quic_abhinavk@quicinc.com>,
-	Vinod Polimera <quic_vpolimer@quicinc.com>,
-	Jiasheng Jiang <jiasheng@iscas.ac.cn>,
-	Konrad Dybcio <konrad.dybcio@linaro.org>, Jessica
- Zhang <quic_jesszhan@quicinc.com>, Liu Shixin <liushixin2@huawei.com>,
- Marek
- Vasut <marex@denx.de>, Ben Skeggs <bskeggs@redhat.com>,
-	Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
-	Tomi Valkeinen <tomba@kernel.org>, Emma Anholt <emma@anholt.net>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
-	Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
-	Wolfram Sang <wsa+renesas@sang-engineering.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Biju Das <biju.das.jz@bp.renesas.com>,
-	Sandy Huang <hjc@rock-chips.com>, Heiko =?utf-8?Q?St=C3=BCbner?=
- <heiko@sntech.de>, Orson
- Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Alain Volmat <alain.volmat@foss.st.com>,
-	Yannick Fertre <yannick.fertre@foss.st.com>,
-	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
-	Philippe Cornu <philippe.cornu@foss.st.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Chen-Yu Tsai <wens@csie.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Thierry Reding <thierry.reding@gmail.com>, Mikko
- Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>,
-	Jyri Sarha <jyri.sarha@iki.fi>, David Lechner <david@lechnology.com>,
- Kamlesh
- Gurudasani <kamlesh.gurudasani@gmail.com>,
-	Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
-	Melissa Wen <melissa.srw@gmail.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Michal Simek <michal.simek@amd.com>
-Cc: dri-devel@lists.freedesktop.org, kernel@pengutronix.de,
-	amd-gfx@lists.freedesktop.org, Andrew Jeffery <andrew@aj.id.au>,
-	linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org, Alim
- Akhtar <alim.akhtar@samsung.com>, linux-samsung-soc@vger.kernel.org, Xinwei
- Kong <kong.kongxinwei@hisilicon.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Yongqin Liu <yongqin.liu@linaro.org>,
-	John Stultz <jstultz@google.com>, linux-hyperv@vger.kernel.org,
-	intel-gfx@lists.freedesktop.org, Lucas
- Stach <l.stach@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, NXP Linux
- Team <linux-imx@nxp.com>, linux-mips@vger.kernel.org, AngeloGioacchino Del
- Regno <angelogioacchino.delregno@collabora.com>,
-	linux-mediatek@lists.infradead.org,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	linux-amlogic@lists.infradead.org, Sean Paul <sean@poorly.run>, Marijn
- Suijten <marijn.suijten@somainline.org>, linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org,
-	spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
-	linux-rockchip@lists.infradead.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Chia-I Wu <olvaffe@gmail.com>,
-	Haneen Mohammed <hamohammed.sa@gmail.com>,
-	VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH RFC v1 00/52] drm/crtc: Rename struct drm_crtc::dev to
- drm_dev
-In-Reply-To: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
-Date: Wed, 12 Jul 2023 17:34:28 +0300
-Message-ID: <87fs5tgpvv.fsf@intel.com>
+X-Inumbo-ID: 124ca65b-20c6-11ee-b239-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jBPmDsZzX+DSJUC/QwnX5jJok1095aEuOiuBf9RcrJWTiYpxrnYrrG86VhivrwXVLZoZYW7k3AH5e9F19wrZWzOkcFT3Cgka/5ZkF/4wOwBpsUuHzH8aRXv9llCkT9ytvTjnX9Vc2cy/uyXYyRhEngfbFmlZjYaAVQNg1Nwm0+7Z2jvHIn4a84L4DA5oi5ajPow476a06IgfpKZTi2x1Fo7p5ernPNNjai4aVcmX7fDESvj4warGJ46nKz13KrnzGggyUAgJx/aYl0hQboI97aNMw7+DmdISF++2sCCjw+EMm1xnLwF4fesCpQUcNYvum3DB9nDcvXrtIvJPTFWvng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wm70FUsX5KjiAsWaedna3TwjjujG0aJ9RtEpykIh6i4=;
+ b=fiPhUIHJ3NxIU8Vg4JF8GdHXsrw/dLlsWx6CLeNbkjW4xFhatUW09uTd1JgogDDrf9k8bYpK1PDMwsdussXaTsCei8dO9/XqLlaOz4NaC6Xb+1YMe8afkRcozuDOpWTv2u0lQw1wrJStfNxzTRi0l+slmFWBJQh2L50zOCAkkcXxDgjhrbQ/V7ofKvSsGYyDbROHZocTTPWOv5f4zG/ETFQ081S9qGVK+ntC81CLeUVOU5Z7TQICFuP8tTGN7mOZhR2r0UbEbicUzRUwy73jHC7Mp93SMVigrCeSrHxO5DzArjb6sTdixcTKcn0bbbtyDB6vkCdevAfklH1fTJLRBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wm70FUsX5KjiAsWaedna3TwjjujG0aJ9RtEpykIh6i4=;
+ b=3F8gzg7M42zB0NcEdlMRple25Sq7UwraKo7P+Zg27TFsf/oHCXKDGA9EXfRBo6RMvEsxPplnNRYbEWF1smJJZOEeWNL0Xq5J7KUrFg5Z6LFnPEMDEjBIBvcetBmtKBNrTlNqPBQkWlW5ZqVdRey5pj4HhqLtKbNKDdy3QGb4Qtuvl1idVLEf0LtKreJkrFPdkByBowT1oRNfDEdEk3t5A7tie6nXUN7jZRT9sDzND3AjRr30yqw+Y1UXI9hV0jmabqUCZNy4ZBMUduGqco6g4FPHgfAfaK+hCgkHvmRyxoMZRqMVaxNoI+X1lhcaArejhHc3J7g6XSFPdVPBwPzxVA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <561ec830-d3cb-3f47-00ed-219cc03108d0@suse.com>
+Date: Wed, 12 Jul 2023 17:09:14 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: Violations of mandatory MISRA C:2012 Rule 19.1 in X86_64 build
+Content-Language: en-US
+To: Roberto Bagnara <roberto.bagnara@bugseng.com>
+References: <fa2bc5da-b866-05ac-409f-c26e025428c3@bugseng.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <fa2bc5da-b866-05ac-409f-c26e025428c3@bugseng.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0074.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1e::20) To AS8PR04MB8788.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42f::21)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8788:EE_|AS8PR04MB7575:EE_
+X-MS-Office365-Filtering-Correlation-Id: 429ee0f3-7c28-4d19-f3ac-08db82e9f58e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	d65LMXgyMhocHiiehtXRroqo5RJTh8DqRb/iMnhSJgmBV3V6sTLk+SkMtfh28Gpv7JCF5MKUNEI3qTT3vQSkFOL3DPdUQ50ThAmSwIBb6PFMDw0/tPWTmpLKq9GXYzdx9dP8zVtLob1j9aWfY7VXWgAQKho9iD5FO5j1q+G7QMMCkD2zIa7xCIY+/aXnb8wHQxy+NQM7VumYkPxb0Q5RFdBPzOgH6i3WQjSHS2U1DXp+UDKeczsx9cJAYqXtDSlvjhoZAMkz3U4SQbd9ivdBrOddG3ASV24W30DkmxJ2wzzhsDtf2S0a1sR7+GkVYF98X/e4liXT0hq9KvPcRgPJJDbvnlDDr5VCeDivGjyF5ZJzGDIKrLqW43HVMKlC+pm3V35JGHbhM1SFnvdMt+eZXUBPM8z2Z5UeTi8KbDe1U8BxvhByGJ1sfILs+BDa4FYde1UdEY4x5K/3BdZeLRiQ2kItSHWKwEBqZqCOa1pOtib/k0Et4Fpz1PuXZ/HoCVNEsHSWK6LBCIFAWAIPVuyPdx1JWp7JqY/vgFxn3liDNUxXrcNXhTgs4qv5F28dNMoKiHvImkCFMXq50lysZ1E7WzysV+JH1aO4uJXbd2A/GessWQzSNvjSQggzOy/mt5ai
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8788.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(396003)(39860400002)(376002)(366004)(136003)(346002)(451199021)(186003)(66899021)(41300700001)(26005)(5660300002)(6506007)(478600001)(53546011)(8936002)(54906003)(66556008)(2906002)(6486002)(2616005)(4326008)(36756003)(6916009)(66946007)(66476007)(8676002)(31696002)(86362001)(31686004)(316002)(6512007)(966005)(38100700002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UXZRZ3ZUU1RmV3UwRjlPeHVLV0dscGhvbFNHanVhMFlDcTlZTTduYTJ1bW9F?=
+ =?utf-8?B?MDVvVC9QeGRhSGVCRWpvK3QyaGlsM1kxbUVwWXdVTTdrQWVGb3FiUUJUNlBU?=
+ =?utf-8?B?cC91bG1yRDZsbWtOTU1sMG5QM3ZrYlV5d1ZGTWlHVkIyN2VZK05SS0k0WHcv?=
+ =?utf-8?B?UGVHVSt3aS9oUW5jc2pCTlBYSkdVYlVWRWR3SXBGTjRMYU9LbVdHM0tsd2lS?=
+ =?utf-8?B?aGVmenFSVzBEM3R5Q216SGdNUmwxeGNxRHB2RlFIRkhQN3YwdHROajhPS3V1?=
+ =?utf-8?B?anRvM3FUYWxQZnNRYTJxaDR0Q3o2WmxGL0xxY1ZQcU5HTlVtSFhjS2xYK1Zh?=
+ =?utf-8?B?WHFJUGV6bG5DZ0p2czNMd1RETXM4N2xUcERNT042aWNhK0RnODc0UFc1ckU3?=
+ =?utf-8?B?TTR3Mi96QXlnL0Q2am9KdU1mQndYU0dWUTBpM1lEMXIyN0MxTERoTmtzMi9D?=
+ =?utf-8?B?aVhhd2NoWXR5YmdseVFKMW9nUFVGRlp5RjlaNzI2UGRkaFZLb2ZFTUdKVVRs?=
+ =?utf-8?B?Y2lJYmpOcWhpYU1QbTVrNUp5RkYyL0xGUGhacHRIY2hEbDNtMlpXem1kYkpq?=
+ =?utf-8?B?WXZPQm1ZZmJ5SStlL212VTdnUmw4WW9HVUxUaVFGcWtvVnp0dWVTWW85eFJr?=
+ =?utf-8?B?TWRUOHd1N3pEb3ZUUmxjNlk0YlFjVzVyQ0UySWl0ZGpRWmFOWjdnUTI3azVE?=
+ =?utf-8?B?bGwyU1g4Q0dxb1hEMUY0RmxKWmM3clZiT3NlQmNsUzYyMmltaEZmT3dNTDV3?=
+ =?utf-8?B?bG5sV0dqZ0txQStDbmcyc0hKOW9RNkd4dk5Ic0xmSXBkR0IrVnpVQVlkL1hj?=
+ =?utf-8?B?YlIzSDBHNmpJeTZnYm9tOERhcUwxNE53MkQ4Zkw2cUd5UjFuZ21GcXNKR1Nq?=
+ =?utf-8?B?bHkxNWdGMUxCM09QQVlRdWpGaEdwQmxxL0VCTE1yNnFUVG9mRmFJZEYwTDhM?=
+ =?utf-8?B?ajhjWGRoU2VLKy9DRWhDUWkxKzhQU01kQ280dlhGYUpmWmlsYktWdjYrOVZk?=
+ =?utf-8?B?TjIvdURmNmdsS3YyUWpVcWUvUnJkZHhNdDlmdFZzTyszblBESEd3OStOOFlt?=
+ =?utf-8?B?WUV3MTBJRitqc2JrMWNZbUxjYVZDa2x0TjBrVklnMXdZbXFXdVppQ2l5eFZu?=
+ =?utf-8?B?eE1jd0ZpNjlobWUyMG0xMTBpdEowTzE5WEtkMk9pTkQ3cWlMMSsyUzYwV2I2?=
+ =?utf-8?B?N205RnZnaHdiL0h3ZVJmUXNPQmtrRFJSOTgwOFdCeXZneXljd1U3NGtINmdw?=
+ =?utf-8?B?RXNSOXJDRGlSMUd0N25FcTVnNVkzZENneXNiZi9yOHFNcXBsUFFCQjV5RWxp?=
+ =?utf-8?B?NUllT3lnQ1cyMm1kcjZnVTN4bDNIcjJqakVWU0x6TU1rMmhmL1RURkF2RVIv?=
+ =?utf-8?B?M2pkc2puWCthcjd4R0E0elY3QktMYXFVdUZDQUZHV3hVV1dzRHdoRU0vb2ZP?=
+ =?utf-8?B?anlZallpRno1b3dmKzA3cncxejFNK1l0emVCN0dQU0dCWTg2cU9oelhManVJ?=
+ =?utf-8?B?eFdGbjZ6ZWFuT0RWbTFETjFlVktZdGxPSkVHUFA3OFFwN1UxVjhmb21YUXVi?=
+ =?utf-8?B?MnhVZWh1VmgxaUMvTjVuSDliRWtXcGtOdHZGK1NnS1Z6L0JmZEdyU2VkdC9p?=
+ =?utf-8?B?Ykg0c3Q5NUZRa0lvZlZYR2ZxK0FQcVNmaGhGNC9lelIwZy9OeEdodW92LzV0?=
+ =?utf-8?B?eDF5eUpNWG90cHFaclBXYUtUQ0lFVFhmcDI4NjJYTjVWL0JhZHgrZW5MWmFm?=
+ =?utf-8?B?SmZCOUZqMk5yWW11a2hXOHFKd2U3WkR3dlRIT3QraDNpcnk3MWdMTHlwSHhY?=
+ =?utf-8?B?aWhLRUZ1eHRGaWxnRHErck1EQjFFQUR5aFY1ZXg5TWl1S1ZKaC83VHFwLzV4?=
+ =?utf-8?B?cHBpdWZ5Q1IyVUw1bWJybUVpWTQzV0JQL2haMGMrRUJDQnU1ekNLV2Yza3JP?=
+ =?utf-8?B?UVZjRG1FWGNOSXUvcEoyMWVpSWRidmYvZFR2WlI2dFFhWE5URDVWY0tVaWR5?=
+ =?utf-8?B?UkJPdERnMWtJS3ppeU9vcVpSZHhRTnlyRnQ2cCtxL1E4dnVzdXFLYWNlZkdo?=
+ =?utf-8?B?NDZCdGw4ZnVGQzJhWkpOVU5jRGRZM0w2Q3g2YTBuWnRzY24xU0pEZ25BZVpm?=
+ =?utf-8?Q?hHZV0Ixi5/Yw9UQt3Cpq6fHNr?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 429ee0f3-7c28-4d19-f3ac-08db82e9f58e
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8788.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2023 15:09:16.2638
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8e2K85rV8+Pb6wkBMB49REyjmUX1xuIwHpBY6nM3ItDYcYEFynliQul/bqeND/rhpMT1iPsntWKvx3C2bspd9Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7575
 
-On Wed, 12 Jul 2023, Uwe Kleine-K=C3=B6nig <u.kleine-koenig@pengutronix.de>=
- wrote:
-> Hello,
->
-> while I debugged an issue in the imx-lcdc driver I was constantly
-> irritated about struct drm_device pointer variables being named "dev"
-> because with that name I usually expect a struct device pointer.
->
-> I think there is a big benefit when these are all renamed to "drm_dev".
-> I have no strong preference here though, so "drmdev" or "drm" are fine
-> for me, too. Let the bikesheding begin!
->
-> Some statistics:
->
-> $ git grep -ohE 'struct drm_device *\* *[^ (),;]*' v6.5-rc1 | sort | uniq=
- -c | sort -n
->       1 struct drm_device *adev_to_drm
->       1 struct drm_device *drm_
->       1 struct drm_device          *drm_dev
->       1 struct drm_device        *drm_dev
->       1 struct drm_device *pdev
->       1 struct drm_device *rdev
->       1 struct drm_device *vdev
->       2 struct drm_device *dcss_drv_dev_to_drm
->       2 struct drm_device **ddev
->       2 struct drm_device *drm_dev_alloc
->       2 struct drm_device *mock
->       2 struct drm_device *p_ddev
->       5 struct drm_device *device
->       9 struct drm_device * dev
->      25 struct drm_device *d
->      95 struct drm_device *
->     216 struct drm_device *ddev
->     234 struct drm_device *drm_dev
->     611 struct drm_device *drm
->    4190 struct drm_device *dev
->
-> This series starts with renaming struct drm_crtc::dev to drm_dev. If
-> it's not only me and others like the result of this effort it should be
-> followed up by adapting the other structs and the individual usages in
-> the different drivers.
+On 11.07.2023 18:40, Roberto Bagnara wrote:
+> Mandatory Rule 19.1 (An object shall not be assigned or copied to an
+> overlapping object) is directly targeted at two undefined behaviors,
+> one of which is the subject of 6.5.16.1p3, namely:
+> 
+>    If the value being stored in an object is read from another object
+>    that overlaps in any way the storage of the first object, then the
+>    overlap shall be exact and the two objects shall have qualified or
+>    unqualified versions of a compatible type; otherwise, the behavior
+>    is undefined.
+> 
+> You can see a number of definite violations in the X86_64 build
+> at this link:
+> 
+>    https://saas.eclairit.com:3787/fs/var/local/eclair/XEN.ecdf/ECLAIR_normal/origin/staging/X86_64-Set1/149/PROJECT.ecd;/by_service/MC3R1.R19.1.html
 
-I think this is an unnecessary change. In drm, a dev is usually a drm
-device, i.e. struct drm_device *. As shown by the numbers above.
+Just to summarize: Except for one instance, all follow the same pattern
+of extending in-place a (guest) register value. Sometimes in straight
+line code (typically eip -> rip), otherwise in get_rep_prefix() (esi ->
+rsi and edi -> rdi). I continue to think that the way we have it is the
+best way for it to be written; as per an earlier reply I also can't see
+how even a "malicious" compiler (still aiming at generating correct
+code, just not necessarily doing things the "obvious" way) could break
+those cases. (I understand none of this is going to help, yet I'd like
+to clarify that sometimes overly strict rules are getting in the way,
+like here forcing use to e.g. switch to using casts when we'd like to
+avoid doing so.)
 
-If folks insist on following through with this anyway, I'm firmly in the
-camp the name should be "drm" and nothing else.
+The one other instance is in compat multicall handling. There I guess
+the compiler could indeed do things "the wrong way". Any solution there
+that I can think of would involve an auxiliary on-stack array, to first
+copy into and then out of. That's not very efficient, so I wonder what
+your suggestion would be how to deal with such a case.
 
-
-BR,
-Jani.
-
-
---=20
-Jani Nikula, Intel Open Source Graphics Center
+Jan
 
