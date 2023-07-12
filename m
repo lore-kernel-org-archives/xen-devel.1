@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E5CEB64DD
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 10:34:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.562218.878881 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6BB1EB64D9
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 10:37:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.562257.878905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJXAX-0000Gd-Ru; Wed, 12 Jul 2023 10:34:01 +0000
+	id 1qJXDn-0004Am-Kr; Wed, 12 Jul 2023 10:37:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 562218.878881; Wed, 12 Jul 2023 10:34:01 +0000
+Received: by outflank-mailman (output) from mailman id 562257.878905; Wed, 12 Jul 2023 10:37:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJXAX-0000Er-In; Wed, 12 Jul 2023 10:34:01 +0000
-Received: by outflank-mailman (input) for mailman id 562218;
- Wed, 12 Jul 2023 10:34:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qJXDn-0004Ad-G1; Wed, 12 Jul 2023 10:37:23 +0000
+Received: by outflank-mailman (input) for mailman id 562257;
+ Wed, 12 Jul 2023 10:37:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M0TT=C6=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qJXAV-00061z-Rk
- for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 10:33:59 +0000
+ id 1qJXAb-0006Dd-EF
+ for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 10:34:05 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9bdd7fe3-209f-11ee-8611-37d641c3527e;
- Wed, 12 Jul 2023 12:33:58 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9fa98df3-209f-11ee-b239-6b7b168915f2;
+ Wed, 12 Jul 2023 12:34:04 +0200 (CEST)
 Received: from beta.bugseng.com (unknown [37.161.151.90])
- by support.bugseng.com (Postfix) with ESMTPSA id C1E9A4EE0C87;
- Wed, 12 Jul 2023 12:33:56 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 4CB734EE0737;
+ Wed, 12 Jul 2023 12:34:03 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,26 +41,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9bdd7fe3-209f-11ee-8611-37d641c3527e
+X-Inumbo-ID: 9fa98df3-209f-11ee-b239-6b7b168915f2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH v3 10/15] x86/monitor: fix violations of MISRA C:2012 Rule 7.2
-Date: Wed, 12 Jul 2023 12:32:11 +0200
-Message-Id: <13ba23be1b7aba72bbae2cdec781eba9d7d4abd3.1689152719.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH v3 15/15] xen: fix violations of MISRA C:2012 Rule 7.2
+Date: Wed, 12 Jul 2023 12:32:16 +0200
+Message-Id: <7a58c9341d10ef79e117ac35da048bbb088ec5d0.1689152719.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1689152719.git.gianluca.luparini@bugseng.com>
 References: <cover.1689152719.git.gianluca.luparini@bugseng.com>
@@ -74,10 +72,11 @@ headline states:
 "A 'u' or 'U' suffix shall be applied to all integer constants
 that are represented in an unsigned type".
 
-Add the 'U' suffix to integers literals with unsigned type and also to other
-literals used in the same contexts or near violations, when their positive
-nature is immediately clear. The latter changes are done for the sake of
-uniformity.
+Add the 'U' suffix to integers literals with unsigned type.
+
+Fot the sake of uniformity, the following changes are made:
+- add the 'U' suffix to all integer constants before the
+  '?' operator in 'bitops.h'
 
 Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
@@ -85,39 +84,154 @@ Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in v3:
 - change 'Signed-off-by' ordering
+- change commit message
+- fix in 'muldiv64.c'
+- add changes to 'bitops.h' macros
+- move 'cper.h' in a separate commit
 
 Changes in v2:
-- change commit title to make it unique
+- minor change to commit title
 - change commit message
+- add '(uint32_t)' in 'muldiv64.c' for consistency
+- add fix in 'vesa.c'
 ---
- xen/arch/x86/monitor.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/common/gunzip.c          |  2 +-
+ xen/common/xmalloc_tlsf.c    |  2 +-
+ xen/drivers/char/ehci-dbgp.c |  4 ++--
+ xen/drivers/video/vesa.c     |  2 +-
+ xen/include/public/memory.h  |  2 +-
+ xen/include/public/sysctl.h  |  4 ++--
+ xen/include/xen/bitops.h     | 10 +++++-----
+ xen/lib/muldiv64.c           |  2 +-
+ 8 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/xen/arch/x86/monitor.c b/xen/arch/x86/monitor.c
-index d4857faf8a..dc336c239a 100644
---- a/xen/arch/x86/monitor.c
-+++ b/xen/arch/x86/monitor.c
-@@ -48,17 +48,17 @@ static unsigned long *monitor_bitmap_for_msr(const struct domain *d, u32 *msr)
+diff --git a/xen/common/gunzip.c b/xen/common/gunzip.c
+index 71ec5f26be..b810499be2 100644
+--- a/xen/common/gunzip.c
++++ b/xen/common/gunzip.c
+@@ -11,7 +11,7 @@ static unsigned char *__initdata window;
+ static memptr __initdata free_mem_ptr;
+ static memptr __initdata free_mem_end_ptr;
  
-     switch ( *msr )
+-#define WSIZE           0x80000000
++#define WSIZE           0x80000000U
+ 
+ static unsigned char *__initdata inbuf;
+ static unsigned int __initdata insize;
+diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
+index 75bdf18c4e..c21bf71e88 100644
+--- a/xen/common/xmalloc_tlsf.c
++++ b/xen/common/xmalloc_tlsf.c
+@@ -46,7 +46,7 @@
+ #define BHDR_OVERHEAD   (sizeof(struct bhdr) - MIN_BLOCK_SIZE)
+ 
+ #define PTR_MASK        (sizeof(void *) - 1)
+-#define BLOCK_SIZE_MASK (0xFFFFFFFF - PTR_MASK)
++#define BLOCK_SIZE_MASK (0xFFFFFFFFU - PTR_MASK)
+ 
+ #define GET_NEXT_BLOCK(addr, r) ((struct bhdr *) \
+                                 ((char *)(addr) + (r)))
+diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
+index bb9d3198d9..4d8d765122 100644
+--- a/xen/drivers/char/ehci-dbgp.c
++++ b/xen/drivers/char/ehci-dbgp.c
+@@ -375,12 +375,12 @@ static inline u32 dbgp_pid_write_update(u32 x, u32 tok)
+     static u8 data0 = USB_PID_DATA1;
+ 
+     data0 ^= USB_PID_DATA0 ^ USB_PID_DATA1;
+-    return (x & 0xffff0000) | (data0 << 8) | (tok & 0xff);
++    return (x & 0xffff0000U) | (data0 << 8) | (tok & 0xffU);
+ }
+ 
+ static inline u32 dbgp_pid_read_update(u32 x, u32 tok)
+ {
+-    return (x & 0xffffff00) | (tok & 0xff);
++    return (x & 0xffffff00U) | (tok & 0xffU);
+ }
+ 
+ static inline void dbgp_set_data(struct ehci_dbg_port __iomem *ehci_debug,
+diff --git a/xen/drivers/video/vesa.c b/xen/drivers/video/vesa.c
+index c41f6b8d40..b007ff5678 100644
+--- a/xen/drivers/video/vesa.c
++++ b/xen/drivers/video/vesa.c
+@@ -123,7 +123,7 @@ void __init vesa_init(void)
+     if ( vlfb_info.bits_per_pixel > 8 )
      {
--    case 0 ... 0x1fff:
-+    case 0 ... 0x1fffU:
-         BUILD_BUG_ON(sizeof(d->arch.monitor.msr_bitmap->low) * 8 <= 0x1fff);
-         return d->arch.monitor.msr_bitmap->low;
+         /* Light grey in truecolor. */
+-        unsigned int grey = 0xaaaaaaaa;
++        unsigned int grey = 0xaaaaaaaaU;
+         lfbp.pixel_on =
+             ((grey >> (32 - vlfb_info.  red_size)) << vlfb_info.  red_pos) |
+             ((grey >> (32 - vlfb_info.green_size)) << vlfb_info.green_pos) |
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index c5f0d31e23..5e545ae9a4 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -234,7 +234,7 @@ struct xen_add_to_physmap {
  
--    case 0x40000000 ... 0x40001fff:
-+    case 0x40000000U ... 0x40001fffU:
-         BUILD_BUG_ON(
-             sizeof(d->arch.monitor.msr_bitmap->hypervisor) * 8 <= 0x1fff);
-         *msr &= 0x1fff;
-         return d->arch.monitor.msr_bitmap->hypervisor;
+     unsigned int space; /* => enum phys_map_space */
  
--    case 0xc0000000 ... 0xc0001fff:
-+    case 0xc0000000U ... 0xc0001fffU:
-         BUILD_BUG_ON(sizeof(d->arch.monitor.msr_bitmap->high) * 8 <= 0x1fff);
-         *msr &= 0x1fff;
-         return d->arch.monitor.msr_bitmap->high;
+-#define XENMAPIDX_grant_table_status 0x80000000
++#define XENMAPIDX_grant_table_status 0x80000000U
+ 
+     /* Index into space being mapped. */
+     xen_ulong_t idx;
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 33e86ace51..fa7147de47 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -384,7 +384,7 @@ struct xen_sysctl_pm_op {
+         struct xen_set_cpufreq_para set_para;
+         uint64_aligned_t get_avgfreq;
+         uint32_t                    set_sched_opt_smt;
+-#define XEN_SYSCTL_CX_UNLIMITED 0xffffffff
++#define XEN_SYSCTL_CX_UNLIMITED 0xffffffffU
+         uint32_t                    get_max_cstate;
+         uint32_t                    set_max_cstate;
+     } u;
+@@ -547,7 +547,7 @@ struct xen_sysctl_numainfo {
+ #define XEN_SYSCTL_CPUPOOL_OP_RMCPU                 5  /* R */
+ #define XEN_SYSCTL_CPUPOOL_OP_MOVEDOMAIN            6  /* M */
+ #define XEN_SYSCTL_CPUPOOL_OP_FREEINFO              7  /* F */
+-#define XEN_SYSCTL_CPUPOOL_PAR_ANY     0xFFFFFFFF
++#define XEN_SYSCTL_CPUPOOL_PAR_ANY     0xFFFFFFFFU
+ struct xen_sysctl_cpupool_op {
+     uint32_t op;          /* IN */
+     uint32_t cpupool_id;  /* IN: CDIARM OUT: CI */
+diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
+index 4cd0310789..e926047932 100644
+--- a/xen/include/xen/bitops.h
++++ b/xen/include/xen/bitops.h
+@@ -227,11 +227,11 @@ static inline __u32 ror32(__u32 word, unsigned int shift)
+ }
+ 
+ /* base-2 logarithm */
+-#define __L2(_x)  (((_x) & 0x00000002) ?   1 : 0)
+-#define __L4(_x)  (((_x) & 0x0000000c) ? ( 2 + __L2( (_x)>> 2)) : __L2( _x))
+-#define __L8(_x)  (((_x) & 0x000000f0) ? ( 4 + __L4( (_x)>> 4)) : __L4( _x))
+-#define __L16(_x) (((_x) & 0x0000ff00) ? ( 8 + __L8( (_x)>> 8)) : __L8( _x))
+-#define ilog2(_x) (((_x) & 0xffff0000) ? (16 + __L16((_x)>>16)) : __L16(_x))
++#define __L2(x)  (((x) & 0x00000002U) ?   1                     : 0)
++#define __L4(x)  (((x) & 0x0000000cU) ? ( 2 + __L2( (x) >> 2))  : __L2( x))
++#define __L8(x)  (((x) & 0x000000f0U) ? ( 4 + __L4( (x) >> 4))  : __L4( x))
++#define __L16(x) (((x) & 0x0000ff00U) ? ( 8 + __L8( (x) >> 8))  : __L8( x))
++#define ilog2(x) (((x) & 0xffff0000U) ? (16 + __L16((x) >> 16)) : __L16(x))
+ 
+ /**
+  * for_each_set_bit - iterate over every set bit in a memory region
+diff --git a/xen/lib/muldiv64.c b/xen/lib/muldiv64.c
+index 78177ce616..a51cbc8767 100644
+--- a/xen/lib/muldiv64.c
++++ b/xen/lib/muldiv64.c
+@@ -27,7 +27,7 @@ uint64_t muldiv64(uint64_t a, uint32_t b, uint32_t c)
+     rh = (uint64_t)u.l.high * (uint64_t)b;
+     rh += (rl >> 32);
+     res.l.high = rh / c;
+-    res.l.low = (((rh % c) << 32) + (rl & 0xffffffff)) / c;
++    res.l.low = (((rh % c) << 32) + ((uint32_t)rl)) / c;
+ 
+     return res.ll;
+ #endif
 -- 
 2.41.0
 
