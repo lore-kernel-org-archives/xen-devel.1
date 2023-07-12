@@ -4,29 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F5AEB64D9
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 14:35:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.562575.879315 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02258EB64D9
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 14:51:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.562585.879325 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJavO-0000jL-Su; Wed, 12 Jul 2023 14:34:38 +0000
+	id 1qJbAv-0003Ho-Cu; Wed, 12 Jul 2023 14:50:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 562575.879315; Wed, 12 Jul 2023 14:34:38 +0000
+Received: by outflank-mailman (output) from mailman id 562585.879325; Wed, 12 Jul 2023 14:50:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJavO-0000jE-QL; Wed, 12 Jul 2023 14:34:38 +0000
-Received: by outflank-mailman (input) for mailman id 562575;
- Wed, 12 Jul 2023 14:34:37 +0000
+	id 1qJbAv-0003Hh-A4; Wed, 12 Jul 2023 14:50:41 +0000
+Received: by outflank-mailman (input) for mailman id 562585;
+ Wed, 12 Jul 2023 14:50:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=R8Q3=C6=citrix.com=prvs=550b2c143=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1qJavN-0000j8-Az
- for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 14:34:37 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 37ce9924-20c1-11ee-b239-6b7b168915f2;
- Wed, 12 Jul 2023 16:34:35 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8Wak=C6=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1qJbAt-0003Hb-PU
+ for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 14:50:39 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20621.outbound.protection.outlook.com
+ [2a01:111:f400:7d00::621])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 76dbeed3-20c3-11ee-b239-6b7b168915f2;
+ Wed, 12 Jul 2023 16:50:38 +0200 (CEST)
+Received: from AS8PR04MB8788.eurprd04.prod.outlook.com (2603:10a6:20b:42f::21)
+ by AS8PR04MB8086.eurprd04.prod.outlook.com (2603:10a6:20b:3f6::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6565.32; Wed, 12 Jul
+ 2023 14:50:36 +0000
+Received: from AS8PR04MB8788.eurprd04.prod.outlook.com
+ ([fe80::cbc0:69aa:c9a2:198e]) by AS8PR04MB8788.eurprd04.prod.outlook.com
+ ([fe80::cbc0:69aa:c9a2:198e%7]) with mapi id 15.20.6565.016; Wed, 12 Jul 2023
+ 14:50:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,167 +49,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 37ce9924-20c1-11ee-b239-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1689172475;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=LG9LqQMdV6J2PUCymKn3Aox/gbkTEDTWztzIR4DCS/E=;
-  b=OsT6C5pBggjfprhx1cq9gzMZ6L9FvHd7C5CReHbujskU/V4FoKYV7Gdu
-   uX7caFkL1pOOIurA6yKWBDXCw4lyviSD0BOD+gO+pYnqU/OFYW1NfPPVy
-   bfXV8Jy7uRuuQ9sDX3Y5+TJsvHuCgxXVYDdmoDoE7/+PUX2hfhxc5s+xj
-   E=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 114690188
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:1Whm7aD3HtDf8xVW/zzjw5YqxClBgxIJ4kV8jS/XYbTApDIkgTQBy
- WYeCGyBa/uONmameNB2Po7gp0JUvsDcyd5kQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
- yk6QoOdRCzhZiaE/n9BCpC48T8nk/nOHuGmYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
- t7pyyHlEAbNNwVcbCRMsspvlDs15K6p4GxB5ARkDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
- uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
- jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIwpPsnIEFH6
- KEhBG4qQg2BrLrn+IywRbw57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
- pdHL2M1N3wsYDUWUrsTIJs4gOevgGi5azBCoUiZjaE2/3LS3Ep6172F3N/9I4XWG5QNxxbIz
- o7A10PXOAEYOZux8jum9V6xpemRjRP/CLtHQdVU8dY12QbOlwT/EiY+RVa95PW0lEO6c9ZeM
- FAPvDojq7Ao806mRcW7WAe3yFabujYMVtwWFPc1gCmPxbDT+B2xHXUfQ3hKb9lOnMYuSCYjz
- FOhg9LjDjspu7qQIU9x7Z/N82n0Y3JMazZfO2ldF1BtD8TfTJ8b0A+fb/ZqDfOMooPSNSzy6
- GjblBY1iOBG5SIU7JlX7Wwrkhr1+MiYF1Jqt1mHNo62xlgnPdD4PuRE/XCetK8dd9jBEzFtq
- VBew6CjAPYy4YZhfcBnaMEEB/mX6vmMK1UwanY/TsB6p1xBF5NOFL28AQ2Sx28zaK7ogRezP
- CfuVfp5vfe/xkeCY65teJ6WAM8316XmHtmNfqmKPosXOsAsLFHbpnEGiausM4fFyRhErE3CE
- c3DLZbE4YgyVMyLMwZat89CiOR2l0jSNEvYRIzhzgTP7FZtTCf9dFvxC3PXNrpRxPrd8G3oH
- yN3a5PiJ+N3DLevPUE6MOc7cTg3EJTMLcqu8ZcIK7HffVUO9aNII6a5/I7NsrdNx8x9/tokN
- FnkMqOE4DITXUH6FDg=
-IronPort-HdrOrdr: A9a23:5rn3V622SldIw3nNjupOKAqjBJkkLtp133Aq2lEZdPU1SL38qy
- nKpp536faaslossR0b9uxoQZPwOE80lqQFg7X5X43DYOCOggLBEGgF1+XfKlbbak7DH4BmtJ
- uIRJIObOEYXWIQsS8j2njCLz/7+qjgzEl0v5a4856wd3ATV0i/1XYCNjqm
-X-Talos-CUID: =?us-ascii?q?9a23=3A+dTrdmoG27WBjb0WqvNo55bmUZ44Ilz9xWqNGmP?=
- =?us-ascii?q?mLkp0SpbNGGeu86wxxg=3D=3D?=
-X-Talos-MUID: 9a23:POLyrghEAvOsUpK6q5Y1K8MpE+lS86ajT242kLYBl9SnM3JgCzPNtWHi
-X-IronPort-AV: E=Sophos;i="6.01,199,1684814400"; 
-   d="scan'208";a="114690188"
-Date: Wed, 12 Jul 2023 15:34:23 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Roger Pau Monne <roger.pau@citrix.com>
-CC: <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
-	<jgross@suse.com>
-Subject: Re: [PATCH v2 1/6] libs/guest: introduce support for setting guest
- MSRs
-Message-ID: <45c89e03-fe3d-43f0-9f2b-de11ae4fd539@perard>
-References: <20230711092230.15408-1-roger.pau@citrix.com>
- <20230711092230.15408-2-roger.pau@citrix.com>
+X-Inumbo-ID: 76dbeed3-20c3-11ee-b239-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IhH4ZVNKSYuNHiLDblrALwKOuprX4FxB+AFU8/TjagABSspGhPqPdgpyi1/I9AyOLImYV9dPsMNeTUs2qGDnJUKqAWiIy9T7Ex4jgLpWWrLHlEhu3lQ5zRDdxGkvmb+uEbqAztrwl3aiZbsMUC9xPot47nhB0dxN4J1JnxSv+bcJLfo/yfcOx8AAtEBb+jN28KPrVCMARanoHsCAKJy6UlKXJ424QpfsZFQz7ysv83CYToqXDc5ZopzUbF2EEQY8mZkl5i3SkWf7XHULoWJ1mWrcJx5Y+X1jv3ab4ELdSP/Zw5c6GW32NfN4WDudb8Q+3NSokVRg5q2TSHIcMdYB4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7fmrr+0oe+hp5dkJ3y2M5RfCMw4ULlntis3R15ewqVQ=;
+ b=kcAWuq66bgl05LwOK7j3skje9BFFlBOR8nw2YBC6gaLb9YOiFRYcU3aEDdWMxFLuad5BT38uj10UGoGn3re67AgFjDka/qKUF9ke8nYI2kvh7/0L+OulrjtIaSP1+tU94qT5gjMo73TWDKHa0r5YpNgQoZYPVm2xs4VPLn9VaAGdpjgQ/CGql0qMmDMUrYtr56aszsUDTIER6Iwe8H2eVq0SQCm6cyA+DeCaujVqQk0oH219zymiPON1aFx3Fus60TsGOBkAoP9ejZVhummuOT8bSWj+uXBPA9RhYTPYU3i4iZj0E2Mpe0n8wX6SG4SJOXLIE8Nc9fN7KBQK76jBTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7fmrr+0oe+hp5dkJ3y2M5RfCMw4ULlntis3R15ewqVQ=;
+ b=Q+AFOjcifNPEM6yP+KeRT9ASOGsaYZAasY7xIXTX/GwXQfkG4b6FkuFcpcSiXak47kao8vm50WJPVmzZ7jxc+EsV423utRGX/jSonb7cItbpFIkr3GoGAryAisQ8KK7ew49rFCdv0TRKTx6aKodriPPeXYAZAHImX6UU7aATw+nvBTnfMmWxOOIWjwNpI7nm7+8I9uuATiNa01Pi9UGckwvnGUoY6j9VFNOn7bPsViAerEPDuu0mvuZ4teghXFSETOc31+r2ml/Qm/lwBdMKcy2EMRQwXfcW9Yeprx5e/bkVpyMiC69guJC0onB+VR7XVam/idpiOr0sxl3wytRfNg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <d84482f4-8be6-e514-58a7-a529890c8feb@suse.com>
+Date: Wed, 12 Jul 2023 16:50:34 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] x86/ioapic: sanitize IO-APIC pins before enabling the
+ local APIC
+Content-Language: en-US
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20230707095338.44244-1-roger.pau@citrix.com>
+ <92d16012-ff9f-693b-07c6-d45fe07a00a0@suse.com>
+ <ZKwZBQ_0Z2c7NJNL@MacBook-Air-de-Roger.local>
+ <1f79491a-46f5-5293-e92f-0e2b0b3efb62@suse.com>
+ <ZK1S1V71ZUIPjKqZ@MacBook-Air-de-Roger.local>
+ <eb2e3b57-a423-cf52-0192-a344db33a58f@suse.com>
+ <ZK6wcpHnh5OgHv4R@MacBook-Air-de-Roger.local>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <ZK6wcpHnh5OgHv4R@MacBook-Air-de-Roger.local>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0096.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a9::9) To AS8PR04MB8788.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42f::21)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230711092230.15408-2-roger.pau@citrix.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8788:EE_|AS8PR04MB8086:EE_
+X-MS-Office365-Filtering-Correlation-Id: 32de923c-e7f1-4f0d-78ef-08db82e759ff
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	OdIidflwN4YO+u46KnqZDBCdl7owgGtqrFmjdiRIamMmwCUlmXVMftWzfry2bxNT6rwFZ20gsucYARwDhFrxJRbwYzJbr89i2dF9fKw3sBFr4G4zXoKaEWX3qS/k2ViriDCUbcPfItlm383W4abKmMC8o0/VaBVyel15yu33c/HNTjDLYDpv8iaV5mFmNxqUwNLIA31FXxVr6P+1BqcbP1M+KSqRF9c6E0rf+kiORHqdgZ6m9gkS/JR/ovkOgSOwZX8uV5wp+WIpMuCSnsU4RsRE5tylwtwiv9H97/xpIqTlmXV3jW/vfZ4kdXElclQZGqDWz7quPCwDcm43g9aq79HbGOgoYaoHyspFRgiGM1DNaBMKw4LA/fX3TlgapJ1hxJ6msjEH2Bv31XB2pnLHzQBbwAh2oVGJKkc1D3mlSXlmz5DxKJmPI6NjkAk9Cp7Qhc01cE/HC2iZweI/aZoBtiw42cD6ERgFPHLXtTv3MMvSw8QHQUhbfOwZODH2fk0LdvrRa/FuaI8yhGYi0fkgjr4nssRC6mc/EygU66Tbm20ujMh7Hft40pDuRQ2TegFEFck7D59mQ2dGgjCK1jGLvr9r+phFhn8tlm3xhpAnk54a2t6iZWvqitmBiBCwGmkUXA6IkXKXIzC8+hvCXD1Aza621ixr2dXYn1UG/GiiCD2KMxWXNPhcO1ZczfwPonnBY5638ZK3nZMY2xlepFP1hQ==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8788.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(39860400002)(396003)(366004)(136003)(346002)(451199021)(8936002)(8676002)(5660300002)(478600001)(41300700001)(316002)(6512007)(6486002)(4326008)(6916009)(31686004)(53546011)(186003)(26005)(6506007)(66556008)(66946007)(66476007)(54906003)(2906002)(2616005)(38100700002)(31696002)(86362001)(36756003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?S3JNa3hjYlZmc3QrMjAyNnJWenN0QXVBdi8xSUVpNDR3K3QyYllsQlJaUVVZ?=
+ =?utf-8?B?MWZCdGxJcFI1VFNvcjFTaVI5RWN0Z0laQzExVFlKalp6NmhCRGZ6Y2JCSVh1?=
+ =?utf-8?B?c0ZTdE5IS3hCeEdTT0pXd3dTTTlaaWFDU1hnWjNnSml2Smg5eXhUem1VRzFV?=
+ =?utf-8?B?OUNMdTAzblBmM29ENS9IUTZ3RzJZZGNRN1JvVlNmZnJjT2ZNTVBEcW11QzNQ?=
+ =?utf-8?B?aUVFZ3ZCMzFCaXRyZHpxL1pDZzJabEgrZzZFZnVHNmdWazlnck9Ra3cxdkNw?=
+ =?utf-8?B?akN6UGJyUDJEK3lCZURFME1NcnBUSnNYUElJNXRZZEFReis4WXNuS3E3YzRF?=
+ =?utf-8?B?WTh6eENFLzFSdW5ISkZBNUlHZ0x3YjRWVjVVcmswZjVSb0EybjZPOFVBSGU1?=
+ =?utf-8?B?YlFERkRXanBjZFAvODZPVGtjMWVRTnVxMnE5enNMUU9XQVJ6bnZPVWd1WkR5?=
+ =?utf-8?B?QzNrdUUyQTNseWY2ZDkyWnBpdWVqUC9Fcnl0NVZRQ0lzLzJsL3dCcy90SkVi?=
+ =?utf-8?B?bFRhSWRQcTYzY1NNeWpodzhKRmE0bjBsMlhjTGh4cHVhcUNWMmtPcllJL2xt?=
+ =?utf-8?B?aGlVaE0vbmNaTkVGaFNPMUp1UjE4NXNZZk92ZzVjZmtZMmlzbWF3cXpkR1pL?=
+ =?utf-8?B?dmRtcTB6OHNxaVJldElIMlZYb2cwdVZ6K2l1b003YzlaTGZVMjkyQW1JaXA5?=
+ =?utf-8?B?VlJZTGJYVGJuL0grT3FWVVVkaVY3aEVCemo5ajFnbFY0enJiZHNtRWVxcWZK?=
+ =?utf-8?B?Um9uR2RJaUppeHlUQnVkZGNDWTQvbjBKTENZYzdkOVdBdVZzc0lGTnM3cDZM?=
+ =?utf-8?B?cmEvTE5wL2NxZW14NW5wSVFHYzI3RG0xZkR1WU1TTHNLV1ZHM2RBd0I1UVFn?=
+ =?utf-8?B?VkgvQnFvb2Y3Zm1EaHJaUE1ON3NSczc4QVhERGFrNERNQ3g4N09TUVY5ZVFv?=
+ =?utf-8?B?QXdDL2dScWVyaXpHMU5rY3plWGNTb1ByL2xjVGlzR1QwOWRibmtvclhWQW8v?=
+ =?utf-8?B?c0haRXRjV1JSN1pLeldZMUVSZ1ZxYTBydEM3eXplZmhocmttN2NKUHg4V1Y1?=
+ =?utf-8?B?NnZRTk1DcE53RjR5S1JIT3hXbU8vb0t2a1ZMQ0hWaEI2eFVZb3ZQeWphTHYz?=
+ =?utf-8?B?eDJQeHphNGhEanVLNTVhTmcyakpraEZyWHRSYkNrTDkrZnlZZHJNQnAvZHRi?=
+ =?utf-8?B?K0EwUkhuK2ZrOE05U3V1bnY0aDB1SWZKZW0xaDJHQ3lUSUZ6dnlOcEJvcGRq?=
+ =?utf-8?B?clRON2hMQnBOaVR0cG1nRTg2Ykt3LzR6ZEt1NlVoT0Q0NWJlL1huQlNxdE45?=
+ =?utf-8?B?MnhXT0xKcGc1ZTh3TDNYZ3JhS1ZvOElIYTFpVVhqQlpQNHhwY0hUQkZmRzFT?=
+ =?utf-8?B?YWE1eEs3cWc0VG8yUXFqN2RFODJqd0MvMWJFdTNBcGlHaTdMS0xuQWhoaXdH?=
+ =?utf-8?B?WG84WTBzQVNTZTJaTUt0K3MzcmlUTmR5NVh3VHBKRThFRWROMUk5QTdCeUFM?=
+ =?utf-8?B?YzVIZkJJL3BzSUFxeVBRbUwzUTNLb1hrS3lWQUhJT2VmdFpoaytPSEJ2WGY4?=
+ =?utf-8?B?dkQ1bDYxUlNYNFVuUVhvSTRRZUJpRCtpQlgxcHU1WUdGdmJQV1g1YVJpVFJ5?=
+ =?utf-8?B?UEVhRWlZa1lObmxEaVFoWVpTd25jd2JqODRqdGh2WTlUWC93emhHM2ZNTC9s?=
+ =?utf-8?B?VStnai9JWDJRcE03eXp0UEpuY0FnWThENDNGdFJXdVBjRnJDVXFvcnFkY0V3?=
+ =?utf-8?B?dGNtZTFPcmJheWd3OE9SWHRhTlQrWktXQmJ1TUpEN0QwbmV6aEJud3NMakh2?=
+ =?utf-8?B?Z2pSWldOVCttQjBvSVJleDdkYUxlUU9mMTVWQUw3VnlMKzBSNW9pVWNBT3Ju?=
+ =?utf-8?B?YUp1b1BUS0VGVzJoSkxlQjQ1eXNUZjZjYWVPR0swUWhZV3pCM2J3NnMySEdz?=
+ =?utf-8?B?VlFCelpQaCtkRkZBL041aGVyMVJCbmtwZUdhTDYvT252amtXWkV6NUYva1ZY?=
+ =?utf-8?B?eFdOU1pMQWZQdVJpVEFaMW5zZ3hjWU4vOVhLd3lhSkplZ1puTEpCNWZOUjR2?=
+ =?utf-8?B?OFhhRWJDMWMwOFdRa3ZVWS9FL3Z4clZpRGl0ZVZ2d1R3SGtiMFhsaTAzbmdu?=
+ =?utf-8?Q?omgyGvrtxWnbA8qBIi0pPSGeJ?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32de923c-e7f1-4f0d-78ef-08db82e759ff
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8788.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2023 14:50:36.3099
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: T/DaovDOkrklZl38YPUYoQXeCBzyEQxiGDYj+l3Ew+wRZJp91cSsD3iBEbduv7mcA+Ko/zMIDSIJFNDe2RczTg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8086
 
-On Tue, Jul 11, 2023 at 11:22:25AM +0200, Roger Pau Monne wrote:
-> diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
-> index 5b035223f4f5..5e5c8124dd74 100644
-> --- a/tools/libs/guest/xg_cpuid_x86.c
-> +++ b/tools/libs/guest/xg_cpuid_x86.c
-> +static int xc_msr_policy(xc_interface *xch, domid_t domid,
-> +                         const struct xc_msr *msr)
-> +{
-[...]
-> +
-> +    rc = -ENOMEM;
+On 12.07.2023 15:53, Roger Pau Monné wrote:
+> On Wed, Jul 12, 2023 at 12:07:43PM +0200, Jan Beulich wrote:
+>> On 11.07.2023 15:02, Roger Pau Monné wrote:
+>>> On Tue, Jul 11, 2023 at 12:53:31PM +0200, Jan Beulich wrote:
+>>>> On 10.07.2023 16:43, Roger Pau Monné wrote:
+>>>>> On Mon, Jul 10, 2023 at 12:56:27PM +0200, Jan Beulich wrote:
+>>>>>> On 07.07.2023 11:53, Roger Pau Monne wrote:
+>>>>>>> The current logic to init the local APIC and the IO-APIC does init the
+>>>>>>> former first before doing any kind of sanitation on the IO-APIC pin
+>>>>>>> configuration.  It's already noted on enable_IO_APIC() that Xen
+>>>>>>> shouldn't trust the IO-APIC being empty at bootup.
+>>>>>>>
+>>>>>>> At XenServer we have a system where the IO-APIC 0 is handed to Xen
+>>>>>>> with pin 0 unmasked, set to Fixed delivery mode, edge triggered and
+>>>>>>> with a vector of 0 (all fields of the RTE are zeroed).  Once the local
+>>>>>>> APIC is enabled periodic injections from such pin cause a storm of
+>>>>>>> errors:
+>>>>>>>
+>>>>>>> APIC error on CPU0: 00(40), Received illegal vector
+>>>>>>> APIC error on CPU0: 40(40), Received illegal vector
+>>>>>>> APIC error on CPU0: 40(40), Received illegal vector
+>>>>>>> APIC error on CPU0: 40(40), Received illegal vector
+>>>>>>> APIC error on CPU0: 40(40), Received illegal vector
+>>>>>>> APIC error on CPU0: 40(40), Received illegal vector
+>>>>>>>
+>>>>>>> That prevents Xen from booting.
+>>>>>>
+>>>>>> And I expect no RTE is in ExtInt mode, so one might conclude that
+>>>>>> firmware meant to set up RTE 0 that way. Mainly as a remark, albeit
+>>>>>> of course there's then the question whether to change the RTE
+>>>>>> rather than masking it. What do ACPI tables say?
+>>>>>
+>>>>> There's one relevant override:
+>>>>>
+>>>>> [668h 1640   1]                Subtable Type : 02 [Interrupt Source Override]
+>>>>> [669h 1641   1]                       Length : 0A
+>>>>> [66Ah 1642   1]                          Bus : 00
+>>>>> [66Bh 1643   1]                       Source : 00
+>>>>> [66Ch 1644   4]                    Interrupt : 00000002
+>>>>> [670h 1648   2]        Flags (decoded below) : 0000
+>>>>>                                     Polarity : 0
+>>>>>                                 Trigger Mode : 0
+>>>>>
+>>>>> So IRQ 0 -> GSI 2, so it's likely pin 0 is the one the i8259 is
+>>>>> connected to.
+>>>>
+>>>> Then wouldn't we be better off converting that RTE to ExtInt? That
+>>>> would allow PIC IRQs (not likely to exist, but still) to work
+>>>> (without undue other side effects afaics), whereas masking this RTE
+>>>> would not.
+>>>
+>>> I'm kind of worry of trying to automate this logic.  Should we always
+>>> convert pin 0 to ExtInt if it's found unmasked, with and invalid
+>>> vector and there's a source override entry for the IRQ?
+>>>
+>>> It seems weird to infer this just from the fact that pin 0 is all
+>>> zeroed out.
+>>
+>> As you say in the earlier paragraph, it wouldn't be just that. It's
+>> unmasked + bad vector + present source override (indicating that
+>> nothing except perhaps a PIC is connected to the pin).
+> 
+> I can do this as a separate patch, but not really here IMO.  The
+> purpose of this patch is strictly to perform the IO-APIC sanitation
+> ahead of enabling the local APIC.  I will add a followup patch to the
+> series, albeit I'm unconvinced we want to infer IO-APIC pin
+> configuration based on firmware miss configurations.
 
-This `rc' value looks unused, should it be moved to the if true block?
+Hmm. The question really is which of the changes we want to backport.
+That one should be first. While it's largely guesswork, I'd be more
+inclined to take the change that has less of an effect overall.
 
-> +    if ( (host = calloc(nr_msrs, sizeof(*host))) == NULL ||
-> +         (def  = calloc(nr_msrs, sizeof(*def)))  == NULL ||
-> +         (cur  = calloc(nr_msrs, sizeof(*cur)))  == NULL )
-> +    {
-> +        ERROR("Unable to allocate memory for %u CPUID leaves", nr_leaves);
-> +        goto fail;
-> +    }
-> +
-> +    /* Get the domain's current policy. */
-> +    nr_leaves = 0;
-> +    nr_cur = nr_msrs;
-> +    rc = get_domain_cpu_policy(xch, domid, &nr_leaves, NULL, &nr_cur, cur);
-[...]
-> +    for ( ; msr->index != XC_MSR_INPUT_UNUSED; ++msr )
-> +    {
-> +        xen_msr_entry_t *cur_msr = find_msr(cur, nr_cur, msr->index);
-> +        const xen_msr_entry_t *def_msr = find_msr(def, nr_def, msr->index);
-> +        const xen_msr_entry_t *host_msr = find_msr(host, nr_host, msr->index);
-> +        unsigned int i;
-> +
-> +        if ( cur_msr == NULL || def_msr == NULL || host_msr == NULL )
-> +        {
-> +            ERROR("Missing MSR %#x", msr->index);
-> +            rc = -ENOENT;
-> +            goto fail;
-> +        }
-> +
-> +        for ( i = 0; i < ARRAY_SIZE(msr->policy) - 1; i++ )
-> +        {
-> +            bool val;
-> +
-> +            if ( msr->policy[i] == '1' )
-> +                val = true;
-> +            else if ( msr->policy[i] == '0' )
-> +                val = false;
-> +            else if ( msr->policy[i] == 'x' )
-> +                val = test_bit(63 - i, &def_msr->val);
-> +            else if ( msr->policy[i] == 'k' )
-> +                val = test_bit(63 - i, &host_msr->val);
-> +            else
-> +            {
-> +                ERROR("Bad character '%c' in policy string '%s'",
-> +                      msr->policy[i], msr->policy);
+That said I can see that Linux have their enable_IO_APIC() calls
+also ahead of setup_IO_APIC() (but after connect_bsp_APIC() and
+setup_local_APIC()). IOW with your change we'd do the masking yet
+earlier than them. This may of course even be advantageous, but
+there may also be good reasons for the sequence they're using.
 
-Would it be useful to also display msr->index?
-
-> +                rc = -EINVAL;
-> +                goto fail;
-> +            }
-> +
-> +            clear_bit(63 - i, &cur_msr->val);
-> +            if ( val )
-> +                set_bit(63 - i, &cur_msr->val);
-
-Does this need to be first clear then set? A opposed to just do one or
-the other.
-
-> +        }
-> +    }
-> +
-> +    /* Feed the transformed policy back up to Xen. */
-> +    rc = xc_set_domain_cpu_policy(xch, domid, 0, NULL, nr_cur, cur,
-> +                                  &err_leaf, &err_subleaf, &err_msr);
-> +    if ( rc )
-> +    {
-> +        PERROR("Failed to set d%d's policy (err leaf %#x, subleaf %#x, msr %#x)",
-> +               domid, err_leaf, err_subleaf, err_msr);
-> +        rc = -errno;
-> +        goto fail;
-> +    }
-> +
-> +    /* Success! */
-> +
-> + fail:
-
-Even if this label is only used on "fail", the code path is also use on
-success. So a label named "out" might be more appropriate.
-
-> +    free(cur);
-> +    free(def);
-> +    free(host);
-> +
-> +    return rc;
-> +}
-> +
-
-In any case, patch looks fine to me:
-Acked-by: Anthony PERARD <anthony.perard@citrix.com>
-
-Thanks,
-
--- 
-Anthony PERARD
+Jan
 
