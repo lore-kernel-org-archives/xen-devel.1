@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BEAC001B0
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 10:34:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.562201.878791 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05AF7C001DF
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Jul 2023 10:34:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.562205.878831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJXAM-00066u-85; Wed, 12 Jul 2023 10:33:50 +0000
+	id 1qJXAQ-0007Bn-N9; Wed, 12 Jul 2023 10:33:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 562201.878791; Wed, 12 Jul 2023 10:33:50 +0000
+Received: by outflank-mailman (output) from mailman id 562205.878831; Wed, 12 Jul 2023 10:33:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJXAM-00065M-2Q; Wed, 12 Jul 2023 10:33:50 +0000
-Received: by outflank-mailman (input) for mailman id 562201;
- Wed, 12 Jul 2023 10:33:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qJXAQ-00079N-JQ; Wed, 12 Jul 2023 10:33:54 +0000
+Received: by outflank-mailman (input) for mailman id 562205;
+ Wed, 12 Jul 2023 10:33:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M0TT=C6=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qJXAK-00061z-Tc
- for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 10:33:48 +0000
+ id 1qJXAP-0006Dd-Mr
+ for xen-devel@lists.xenproject.org; Wed, 12 Jul 2023 10:33:53 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9556afb5-209f-11ee-8611-37d641c3527e;
- Wed, 12 Jul 2023 12:33:47 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 98cb6af0-209f-11ee-b239-6b7b168915f2;
+ Wed, 12 Jul 2023 12:33:53 +0200 (CEST)
 Received: from beta.bugseng.com (unknown [37.161.151.90])
- by support.bugseng.com (Postfix) with ESMTPSA id 15B614EE0C87;
- Wed, 12 Jul 2023 12:33:46 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 16E794EE0C8F;
+ Wed, 12 Jul 2023 12:33:52 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,23 +41,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9556afb5-209f-11ee-8611-37d641c3527e
+X-Inumbo-ID: 98cb6af0-209f-11ee-b239-6b7b168915f2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH v3 01/15] x86/cpufreq: fix violations of MISRA C:2012 Rule 7.2
-Date: Wed, 12 Jul 2023 12:32:02 +0200
-Message-Id: <4f22e7c9de1ca407d976891774ad7c74df6cb36f.1689152719.git.gianluca.luparini@bugseng.com>
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Luca Fancellu <luca.fancellu@arm.com>
+Subject: [XEN PATCH v3 06/15] xen/efi: fix violations of MISRA C:2012 Rule 7.2
+Date: Wed, 12 Jul 2023 12:32:07 +0200
+Message-Id: <4e53fc8fc5c3512a521311220375ba8542ae0e5f.1689152719.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1689152719.git.gianluca.luparini@bugseng.com>
 References: <cover.1689152719.git.gianluca.luparini@bugseng.com>
@@ -71,66 +69,66 @@ headline states:
 "A 'u' or 'U' suffix shall be applied to all integer constants
 that are represented in an unsigned type".
 
-Add the 'U' suffix to integers literals with unsigned type and also to other
-literals used in the same contexts or near violations, when their positive
-nature is immediately clear. The latter changes are done for the sake of
-uniformity.
+Add the 'U' suffix to integers literals with unsigned type.
+
+For the sake of uniformity, the following changes are made:
+- add the 'U' suffix to all first macro's arguments in 'boot.c'
+- add the 'U' suffix near '0x3fffffff' in 'runtime.c'
 
 Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v3:
 - change 'Signed-off-by' ordering
+- change commit message
+- remove excessive suffixes in 'boot.c'
 
 Changes in v2:
-- change commit title to make it unique
+- minor change to commit title
 - change commit message
+- remove changes in 'efibind.h', 'efiapi.h', 'efidef.h' and 'efiprot.h'
 ---
- xen/arch/x86/acpi/cpufreq/powernow.c      | 14 +++++++-------
- xen/include/acpi/cpufreq/processor_perf.h |  2 +-
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ xen/common/efi/boot.c    | 8 ++++----
+ xen/common/efi/runtime.c | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
-index d4c7dcd5d9..8e0784b69c 100644
---- a/xen/arch/x86/acpi/cpufreq/powernow.c
-+++ b/xen/arch/x86/acpi/cpufreq/powernow.c
-@@ -32,14 +32,14 @@
- #include <acpi/acpi.h>
- #include <acpi/cpufreq/cpufreq.h>
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index c5850c26af..24169b7b50 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -34,13 +34,13 @@
+ #define EFI_REVISION(major, minor) (((major) << 16) | (minor))
  
--#define HW_PSTATE_MASK          0x00000007
--#define HW_PSTATE_VALID_MASK    0x80000000
--#define HW_PSTATE_MAX_MASK      0x000000f0
-+#define HW_PSTATE_MASK          0x00000007U
-+#define HW_PSTATE_VALID_MASK    0x80000000U
-+#define HW_PSTATE_MAX_MASK      0x000000f0U
- #define HW_PSTATE_MAX_SHIFT     4
--#define MSR_PSTATE_DEF_BASE     0xc0010064 /* base of Pstate MSRs */
--#define MSR_PSTATE_STATUS       0xc0010063 /* Pstate Status MSR */
--#define MSR_PSTATE_CTRL         0xc0010062 /* Pstate control MSR */
--#define MSR_PSTATE_CUR_LIMIT    0xc0010061 /* pstate current limit MSR */
-+#define MSR_PSTATE_DEF_BASE     0xc0010064U /* base of Pstate MSRs */
-+#define MSR_PSTATE_STATUS       0xc0010063U /* Pstate Status MSR */
-+#define MSR_PSTATE_CTRL         0xc0010062U /* Pstate control MSR */
-+#define MSR_PSTATE_CUR_LIMIT    0xc0010061U /* pstate current limit MSR */
- #define MSR_HWCR_CPBDIS_MASK    0x02000000ULL
+ #define SMBIOS3_TABLE_GUID \
+-  { 0xf2fd1544, 0x9794, 0x4a2c, {0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94} }
++  { 0xf2fd1544U, 0x9794, 0x4a2c, {0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94} }
+ #define SHIM_LOCK_PROTOCOL_GUID \
+-  { 0x605dab50, 0xe046, 0x4300, {0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23} }
++  { 0x605dab50U, 0xe046, 0x4300, {0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23} }
+ #define APPLE_PROPERTIES_PROTOCOL_GUID \
+-  { 0x91bd12fe, 0xf6c3, 0x44fb, { 0xa5, 0xb7, 0x51, 0x22, 0xab, 0x30, 0x3a, 0xe0} }
++  { 0x91bd12feU, 0xf6c3, 0x44fb, {0xa5, 0xb7, 0x51, 0x22, 0xab, 0x30, 0x3a, 0xe0} }
+ #define EFI_SYSTEM_RESOURCE_TABLE_GUID    \
+-  { 0xb122a263, 0x3661, 0x4f68, {0x99, 0x29, 0x78, 0xf8, 0xb0, 0xd6, 0x21, 0x80} }
++  { 0xb122a263U, 0x3661, 0x4f68, {0x99, 0x29, 0x78, 0xf8, 0xb0, 0xd6, 0x21, 0x80} }
+ #define EFI_SYSTEM_RESOURCE_TABLE_FIRMWARE_RESOURCE_VERSION 1
  
- #define ARCH_CPU_FLAG_RESUME	1
-diff --git a/xen/include/acpi/cpufreq/processor_perf.h b/xen/include/acpi/cpufreq/processor_perf.h
-index d8a1ba68a6..8b5a1b9bde 100644
---- a/xen/include/acpi/cpufreq/processor_perf.h
-+++ b/xen/include/acpi/cpufreq/processor_perf.h
-@@ -5,7 +5,7 @@
- #include <public/sysctl.h>
- #include <xen/acpi.h>
+ typedef struct {
+diff --git a/xen/common/efi/runtime.c b/xen/common/efi/runtime.c
+index 13b0975866..5cb7504c96 100644
+--- a/xen/common/efi/runtime.c
++++ b/xen/common/efi/runtime.c
+@@ -698,7 +698,7 @@ int efi_runtime_call(struct xenpf_efi_runtime_call *op)
+ #ifndef COMPAT
+     op->status = status;
+ #else
+-    op->status = (status & 0x3fffffff) | ((status >> 32) & 0xc0000000);
++    op->status = (status & 0x3fffffffU) | ((status >> 32) & 0xc0000000U);
+ #endif
  
--#define XEN_PX_INIT 0x80000000
-+#define XEN_PX_INIT 0x80000000U
- 
- int powernow_cpufreq_init(void);
- unsigned int powernow_register_driver(void);
+     return rc;
 -- 
 2.41.0
 
