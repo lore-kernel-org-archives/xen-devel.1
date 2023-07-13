@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5014BC04FDF
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:27:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.575423.901141 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDEF6C00528
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:27:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.575436.901167 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJNb-0007V6-A5; Wed, 02 Aug 2023 21:27:39 +0000
+	id 1qRJNd-0008DV-Rm; Wed, 02 Aug 2023 21:27:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 575423.901141; Wed, 02 Aug 2023 21:27:39 +0000
+Received: by outflank-mailman (output) from mailman id 575436.901167; Wed, 02 Aug 2023 21:27:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJNb-0007Tn-3h; Wed, 02 Aug 2023 21:27:39 +0000
-Received: by outflank-mailman (input) for mailman id 575423;
- Wed, 02 Aug 2023 21:27:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qRJNd-0008DE-MB; Wed, 02 Aug 2023 21:27:41 +0000
+Received: by outflank-mailman (input) for mailman id 575436;
+ Wed, 02 Aug 2023 21:27:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1qRJJ7-0004vP-OS
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:23:01 +0000
+ id 1qRJE7-0001jm-EO
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:17:51 +0000
 Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c1bf85c8-317a-11ee-b263-6b7b168915f2;
- Wed, 02 Aug 2023 23:23:01 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 08349857-317a-11ee-8613-37d641c3527e;
+ Wed, 02 Aug 2023 23:17:49 +0200 (CEST)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LMpRt008400
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LHc3i008327
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 2 Aug 2023 17:22:57 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Wed, 2 Aug 2023 17:17:43 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 372LMphh008399;
- Wed, 2 Aug 2023 14:22:51 -0700 (PDT) (envelope-from ehem)
+ by m5p.com (8.16.1/8.15.2/Submit) id 372LHcDt008326;
+ Wed, 2 Aug 2023 14:17:38 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,8 +45,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1bf85c8-317a-11ee-b263-6b7b168915f2
-Message-Id: <cdd94e122d92f65b6df668faac3f8d2b25eddb0a.1690990427.git.ehem+xen@m5p.com>
+X-Inumbo-ID: 08349857-317a-11ee-8613-37d641c3527e
+Message-Id: <dd995e0b975d55b905ad6f668bac7cf56992981a.1690990427.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1690990427.git.ehem+xen@m5p.com>
 References: <cover.1690990427.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -54,143 +54,53 @@ To: xen-devel@lists.xenproject.org
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 Cc: Juergen Gross <jgross@suse.com>
-Date: Sat, 29 Jul 2023 17:03:47 -0700
-Subject: [PATCH 08/22] tools/utils: Bison: switch from name-prefix to
- api.prefix
+Date: Wed, 12 Jul 2023 23:29:59 -0700
+Subject: [PATCH 02/22] tools/utils: rename "n" arguments to "key"
 
-bison -Wall declares %name-prefix deprecated.  The suggested replacement
-is "api.prefix".  "api.prefix" though effects rather a lot more places
-than %name-prefix does.  As a result, rename YYLTYPE/YYSTYPE to match.
-
-As a quick workaround #define YYLTYPE/YYSTYPE to convince flex to
-interface correctly.
+Hopefully make it clearer to others this is the key associated with the
+storage value to retrieve.
 
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
-According to the documentation api.prefix was introduced in Bison 2.6,
-while braces became recommended with Bison 3.0.  This seems sufficiently
-in the past to be worth adopting now.
+ tools/include/libxlutil.h | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-A better workaround for flex is needed.
----
- tools/libs/util/libxlu_cfg.c      |  9 +++++----
- tools/libs/util/libxlu_cfg_y.y    | 13 +++++++++----
- tools/libs/util/libxlu_internal.h |  8 ++++----
- 3 files changed, 18 insertions(+), 12 deletions(-)
-
-diff --git a/tools/libs/util/libxlu_cfg.c b/tools/libs/util/libxlu_cfg.c
-index 7e9eec550d..20534343f4 100644
---- a/tools/libs/util/libxlu_cfg.c
-+++ b/tools/libs/util/libxlu_cfg.c
-@@ -388,7 +388,7 @@ const char *xlu_cfg_get_listitem(const XLU_ConfigList *list, int entry) {
+diff --git a/tools/include/libxlutil.h b/tools/include/libxlutil.h
+index fcbe41b15a..0ce66c2096 100644
+--- a/tools/include/libxlutil.h
++++ b/tools/include/libxlutil.h
+@@ -56,24 +56,24 @@ void xlu_cfg_destroy(XLU_Config *cfg);
+  *   ERANGE   value out of range (from strtol)
+  */
  
+-int xlu_cfg_get_string(const XLU_Config *cfg, const char *n,
++int xlu_cfg_get_string(const XLU_Config *cfg, const char *key,
+                        const char **value_r, int dont_warn);
+ /* free/strdup version */
+-int xlu_cfg_replace_string(const XLU_Config *cfg, const char *n,
++int xlu_cfg_replace_string(const XLU_Config *cfg, const char *key,
+                            char **value_r, int dont_warn);
+-int xlu_cfg_get_long(const XLU_Config *cfg, const char *n, long *value_r,
++int xlu_cfg_get_long(const XLU_Config *cfg, const char *key, long *value_r,
+                      int dont_warn);
+-int xlu_cfg_get_bounded_long(const XLU_Config *cfg, const char *n, long min,
++int xlu_cfg_get_bounded_long(const XLU_Config *cfg, const char *key, long min,
+                              long max, long *value_r, int dont_warn);
+-int xlu_cfg_get_defbool(const XLU_Config *cfg, const char *n,
++int xlu_cfg_get_defbool(const XLU_Config *cfg, const char *key,
+                         libxl_defbool *value_r, int dont_warn);
  
- XLU_ConfigValue *xlu__cfg_string_mk(CfgParseContext *ctx, char *atom,
--                                    YYLTYPE *loc)
-+                                    XLU__CFG_YYLTYPE *loc)
- {
-     XLU_ConfigValue *value = NULL;
- 
-@@ -412,7 +412,7 @@ XLU_ConfigValue *xlu__cfg_string_mk(CfgParseContext *ctx, char *atom,
- 
- XLU_ConfigValue *xlu__cfg_list_mk(CfgParseContext *ctx,
-                                   XLU_ConfigValue *val,
--                                  YYLTYPE *loc)
-+                                  XLU__CFG_YYLTYPE *loc)
- {
-     XLU_ConfigValue *value = NULL;
-     XLU_ConfigValue **values = NULL;
-@@ -667,13 +667,14 @@ char *xlu__cfgl_dequote(CfgParseContext *ctx, const char *src) {
- }
- 
- void xlu__cfgl_lexicalerror(CfgParseContext *ctx, char const *msg) {
--    YYLTYPE loc;
-+    XLU__CFG_YYLTYPE loc;
-     loc.first_line= xlu__cfg_yyget_lineno(ctx->scanner);
-     xlu__cfg_yyerror(&loc, ctx, msg);
-     ctx->lexerrlineno= loc.first_line;
- }
- 
--void xlu__cfg_yyerror(YYLTYPE *loc, CfgParseContext *ctx, char const *msg) {
-+void xlu__cfg_yyerror(XLU__CFG_YYLTYPE *loc, CfgParseContext *ctx,
-+        char const *msg) {
-     const char *text, *newline;
-     int len, lineno;
- 
-diff --git a/tools/libs/util/libxlu_cfg_y.y b/tools/libs/util/libxlu_cfg_y.y
-index e796066941..adbb74ff11 100644
---- a/tools/libs/util/libxlu_cfg_y.y
-+++ b/tools/libs/util/libxlu_cfg_y.y
-@@ -26,10 +26,10 @@ void xlu__cfg_set_store(CfgParseContext*, char *name,
-                         enum XLU_Operation op,
-                         XLU_ConfigValue *val, int lineno);
- XLU_ConfigValue *xlu__cfg_string_mk(CfgParseContext *ctx,
--                                    char *atom, YYLTYPE *loc);
-+                                    char *atom, XLU__CFG_YYLTYPE *loc);
- XLU_ConfigValue *xlu__cfg_list_mk(CfgParseContext *ctx,
-                                   XLU_ConfigValue *val,
--                                  YYLTYPE *loc);
-+                                  XLU__CFG_YYLTYPE *loc);
- void xlu__cfg_list_append(CfgParseContext *ctx,
-                           XLU_ConfigValue *list,
-                           XLU_ConfigValue *val);
-@@ -37,10 +37,15 @@ void xlu__cfg_value_free(XLU_ConfigValue *value);
- char *xlu__cfgl_strdup(CfgParseContext*, const char *src);
- char *xlu__cfgl_dequote(CfgParseContext*, const char *src);
- 
--void xlu__cfg_yyerror(YYLTYPE *locp, CfgParseContext*, char const *msg);
-+void xlu__cfg_yyerror(XLU__CFG_YYLTYPE *locp, CfgParseContext*,
-+                      char const *msg);
- void xlu__cfgl_lexicalerror(CfgParseContext*, char const *msg);
- 
- void xlu__cfgl_likely_python(CfgParseContext *ctx);
-+
-+/* issue of name-prefix versus api.prefix and Flex Bison-bridge */
-+#define YYLTYPE XLU__CFG_YYLTYPE
-+#define YYSTYPE XLU__CFG_YYSTYPE
- }
- 
- %{
-@@ -58,7 +63,7 @@ void xlu__cfgl_likely_python(CfgParseContext *ctx);
- %define api.pure
- %defines
- %define parse.error verbose
--%name-prefix "xlu__cfg_yy"
-+%define api.prefix {xlu__cfg_yy}
- %parse-param { CfgParseContext *ctx }
- %lex-param { ctx_scanner }
- 
-diff --git a/tools/libs/util/libxlu_internal.h b/tools/libs/util/libxlu_internal.h
-index 1f7559ecd9..01fe073069 100644
---- a/tools/libs/util/libxlu_internal.h
-+++ b/tools/libs/util/libxlu_internal.h
-@@ -31,14 +31,14 @@ struct XLU_ConfigList {
-     XLU_ConfigValue **values;
- };
- 
--typedef struct YYLTYPE
-+typedef struct XLU__CFG_YYLTYPE
- {
-   int first_line;
-   int first_column;
-   int last_line;
-   int last_column;
--} YYLTYPE;
--#define YYLTYPE_IS_DECLARED
-+} XLU__CFG_YYLTYPE;
-+#define XLU__CFG_YYLTYPE_IS_DECLARED
- 
- struct XLU_ConfigValue {
-     enum XLU_ConfigValueType type;
-@@ -46,7 +46,7 @@ struct XLU_ConfigValue {
-         char *string;
-         XLU_ConfigList list;
-     } u;
--    YYLTYPE loc;
-+    XLU__CFG_YYLTYPE loc;
- };
- 
- typedef struct XLU_ConfigSetting { /* transparent */
+-int xlu_cfg_get_list(const XLU_Config *cfg, const char *n,
++int xlu_cfg_get_list(const XLU_Config *cfg, const char *key,
+                      XLU_ConfigList **list_r /* may be 0 */,
+                      int *entries_r /* may be 0 */,
+                      int dont_warn);
+   /* there is no need to free *list_r; lifetime is that of the XLU_Config */
+-int xlu_cfg_get_list_as_string_list(const XLU_Config *cfg, const char *n,
++int xlu_cfg_get_list_as_string_list(const XLU_Config *cfg, const char *key,
+                                     libxl_string_list *sl, int dont_warn);
+ const char *xlu_cfg_get_listitem(const XLU_ConfigList *list, int entry);
+   /* xlu_cfg_get_listitem cannot fail, except that if entry is
 -- 
 (\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
  \BS (    |       ehem+sigmsg@m5p.com      PGP 87145445       |    )   /
