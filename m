@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80FE9C001B0
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 15:20:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.563226.880347 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69379C00528
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 15:24:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.563237.880372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJy6i-0001Ca-3B; Thu, 13 Jul 2023 15:19:52 +0000
+	id 1qJyBT-0003Si-1X; Thu, 13 Jul 2023 15:24:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 563226.880347; Thu, 13 Jul 2023 15:19:52 +0000
+Received: by outflank-mailman (output) from mailman id 563237.880372; Thu, 13 Jul 2023 15:24:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJy6h-0001By-Vk; Thu, 13 Jul 2023 15:19:51 +0000
-Received: by outflank-mailman (input) for mailman id 563226;
- Thu, 13 Jul 2023 15:15:51 +0000
+	id 1qJyBS-0003Sb-Uk; Thu, 13 Jul 2023 15:24:46 +0000
+Received: by outflank-mailman (input) for mailman id 563237;
+ Thu, 13 Jul 2023 15:24:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=no0J=C7=linux.intel.com=tvrtko.ursulin@srs-se1.protection.inumbo.net>)
- id 1qJy2p-00011Z-MS
- for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 15:15:51 +0000
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ <SRS0=9mYz=C7=huaweicloud.com=petrtesarik@srs-se1.protection.inumbo.net>)
+ id 1qJyBR-0003BB-Rh
+ for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 15:24:45 +0000
+Received: from frasgout13.his.huawei.com (unknown [14.137.139.46])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 240fbcfb-2190-11ee-b239-6b7b168915f2;
- Thu, 13 Jul 2023 17:15:48 +0200 (CEST)
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Jul 2023 08:15:44 -0700
-Received: from apaulaux-mobl.ger.corp.intel.com (HELO [10.213.206.56])
- ([10.213.206.56])
- by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Jul 2023 08:14:58 -0700
+ id 64b7b8d9-2191-11ee-b239-6b7b168915f2;
+ Thu, 13 Jul 2023 17:24:44 +0200 (CEST)
+Received: from mail02.huawei.com (unknown [172.18.147.227])
+ by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4R1ymf2hgwz9xGn0
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Jul 2023 23:13:38 +0800 (CST)
+Received: from A2101119013HW2.china.huawei.com (unknown [10.81.218.161])
+ by APP1 (Coremail) with SMTP id LxC2BwA3k94BF7BkxG6BBA--.7207S3;
+ Thu, 13 Jul 2023 16:24:16 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,261 +44,294 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 240fbcfb-2190-11ee-b239-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1689261348; x=1720797348;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=FdV+ihBB75TX4OJUKwPysdCuraDJ8JqOsAXrG1NV6Qw=;
-  b=RWlgdMrt8+bpnTLUPvcDLKRRTjVo0+h/H74wgrwp+mToZcR+LhUHgDT9
-   z9jZaRhcRgzL3PuZN1HG+yuqam+fdljJFBpp7dC0LSX80iXUp+6O2tJdj
-   1vlM7Js6aFWMR4Bq9QRq1g/FtMjiO16Hyr/BR9vbesjM/VnphowPoZgt7
-   R+9m5ojVlEsjWYoLntZibrezpVCuUCNbgmzxqqSHfBGRJic3p/8/WWb8N
-   g8GGup2zjDZxqKx/EqVYlbTVGAU3bP6mm1paboMEcVzQRKx7Apxtg0Am+
-   as/oLmgsp5H+OGfjDNp3K9xkq8XPaYMVXPsJfCYhwDW8Ny6OziK6cGszG
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10770"; a="350089226"
-X-IronPort-AV: E=Sophos;i="6.01,203,1684825200"; 
-   d="scan'208";a="350089226"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10770"; a="968656199"
-X-IronPort-AV: E=Sophos;i="6.01,203,1684825200"; 
-   d="scan'208";a="968656199"
-Message-ID: <d6160aeb-6344-b272-775a-cb665dca46ac@linux.intel.com>
-Date: Thu, 13 Jul 2023 16:14:55 +0100
+X-Inumbo-ID: 64b7b8d9-2191-11ee-b239-6b7b168915f2
+From: Petr Tesarik <petrtesarik@huaweicloud.com>
+To: Stefano Stabellini <sstabellini@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Petr Tesarik <petr.tesarik.ext@huawei.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	James Seo <james@equiv.tech>,
+	James Clark <james.clark@arm.com>,
+	Kees Cook <keescook@chromium.org>,
+	xen-devel@lists.xenproject.org (moderated list:XEN HYPERVISOR ARM),
+	linux-arm-kernel@lists.infradead.org (moderated list:ARM PORT),
+	linux-kernel@vger.kernel.org (open list),
+	linux-mips@vger.kernel.org (open list:MIPS),
+	iommu@lists.linux.dev (open list:XEN SWIOTLB SUBSYSTEM)
+Cc: Roberto Sassu <roberto.sassu@huaweicloud.com>,
+	Kefeng Wang <wangkefeng.wang@huawei.com>,
+	petr@tesarici.cz
+Subject: [PATCH v4 1/8] swiotlb: make io_tlb_default_mem local to swiotlb.c
+Date: Thu, 13 Jul 2023 17:23:12 +0200
+Message-Id: <7f64111986f4f361a2deb4a1a1b6f588e63a851b.1689261692.git.petr.tesarik.ext@huawei.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1689261692.git.petr.tesarik.ext@huawei.com>
+References: <cover.1689261692.git.petr.tesarik.ext@huawei.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [Freedreno] [PATCH RFC v1 00/52] drm/crtc: Rename struct
- drm_crtc::dev to drm_dev
-Content-Language: en-US
-To: Thomas Zimmermann <tzimmermann@suse.de>, Sean Paul
- <seanpaul@chromium.org>, =?UTF-8?Q?Uwe_Kleine-K=c3=b6nig?=
- <u.kleine-koenig@pengutronix.de>
-Cc: Jani Nikula <jani.nikula@intel.com>, =?UTF-8?Q?Heiko_St=c3=bcbner?=
- <heiko@sntech.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
- Xinliang Liu <xinliang.liu@linaro.org>,
- Linus Walleij <linus.walleij@linaro.org>,
- Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
- Alexey Kodanev <aleksei.kodanev@bell-sw.com>,
- dri-devel@lists.freedesktop.org,
- Vandita Kulkarni <vandita.kulkarni@intel.com>,
- Alim Akhtar <alim.akhtar@samsung.com>,
- Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Arun R Murthy <arun.r.murthy@intel.com>, Jerome Brunet
- <jbrunet@baylibre.com>, Liu Shixin <liushixin2@huawei.com>,
- linux-samsung-soc@vger.kernel.org, Samuel Holland <samuel@sholland.org>,
- Matt Roper <matthew.d.roper@intel.com>, Wenjing Liu <wenjing.liu@amd.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Stanislav Lisovskiy <stanislav.lisovskiy@intel.com>,
- Danilo Krummrich <dakr@redhat.com>, NXP Linux Team <linux-imx@nxp.com>,
- spice-devel@lists.freedesktop.org,
- Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
- linux-sunxi@lists.linux.dev, Stylon Wang <stylon.wang@amd.com>,
- Tim Huang <Tim.Huang@amd.com>, Suraj Kandpal <suraj.kandpal@intel.com>,
- =?UTF-8?Q?Andr=c3=a9_Almeida?= <andrealmeid@igalia.com>,
- Andi Shyti <andi.shyti@linux.intel.com>, Yifan Zhang <yifan1.zhang@amd.com>,
- Leo Li <sunpeng.li@amd.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- Lucas De Marchi <lucas.demarchi@intel.com>, Inki Dae <inki.dae@samsung.com>,
- Hersen Wu <hersenxs.wu@amd.com>, Jessica Zhang <quic_jesszhan@quicinc.com>,
- Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
- Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
- =?UTF-8?Q?=c5=81ukasz_Bartosik?= <lb@semihalf.com>,
- Radhakrishna Sripada <radhakrishna.sripada@intel.com>,
- Andrew Jeffery <andrew@aj.id.au>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>, kernel@pengutronix.de,
- Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
- Claudiu Beznea <claudiu.beznea@microchip.com>, Zack Rusin
- <zackr@vmware.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- Mitul Golani <mitulkumar.ajitkumar.golani@intel.com>,
- =?UTF-8?Q?Jos=c3=a9_Roberto_de_Souza?= <jose.souza@intel.com>,
- virtualization@lists.linux-foundation.org,
- Thierry Reding <thierry.reding@gmail.com>,
- Yongqin Liu <yongqin.liu@linaro.org>,
- Mario Limonciello <mario.limonciello@amd.com>, Fei Yang
- <fei.yang@intel.com>, =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?=
- <ville.syrjala@linux.intel.com>, David Lechner <david@lechnology.com>,
- Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
- "Jiri Slaby (SUSE)" <jirislaby@kernel.org>,
- David Francis <David.Francis@amd.com>, Aaron Liu <aaron.liu@amd.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Vinod Polimera <quic_vpolimer@quicinc.com>,
- linux-rockchip@lists.infradead.org, Fangzhi Zuo <jerry.zuo@amd.com>,
- Aurabindo Pillai <aurabindo.pillai@amd.com>,
- VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, =?UTF-8?Q?Jouni_H=c3=b6gander?=
- <jouni.hogander@intel.com>, Dave Airlie <airlied@redhat.com>,
- linux-mips@vger.kernel.org, Gurchetan Singh <gurchetansingh@chromium.org>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- linux-arm-msm@vger.kernel.org, Animesh Manna <animesh.manna@intel.com>,
- linux-renesas-soc@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
- Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
- Philipp Zabel <p.zabel@pengutronix.de>, linux-amlogic@lists.infradead.org,
- Evan Quan <evan.quan@amd.com>, Michal Simek <michal.simek@amd.com>,
- linux-arm-kernel@lists.infradead.org, Sean Paul <sean@poorly.run>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Kai Vehmanen <kai.vehmanen@linux.intel.com>,
- Boris Brezillon <bbrezillon@kernel.org>, Chunyan Zhang
- <zhang.lyra@gmail.com>, Qingqing Zhuo <qingqing.zhuo@amd.com>,
- Sandy Huang <hjc@rock-chips.com>, Swati Sharma <swati2.sharma@intel.com>,
- John Stultz <jstultz@google.com>,
- Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Drew Davenport <ddavenport@chromium.org>, Kevin Hilman
- <khilman@baylibre.com>, Hawking Zhang <Hawking.Zhang@amd.com>,
- Haneen Mohammed <hamohammed.sa@gmail.com>,
- Anusha Srivatsa <anusha.srivatsa@intel.com>,
- Dan Carpenter <error27@gmail.com>, Karol Herbst <kherbst@redhat.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- linux-hyperv@vger.kernel.org, Stefan Agner <stefan@agner.ch>,
- Melissa Wen <melissa.srw@gmail.com>, =?UTF-8?Q?Ma=c3=adra_Canal?=
- <mairacanal@riseup.net>, Luca Coelho <luciano.coelho@intel.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>, Likun Gao <Likun.Gao@amd.com>,
- Sam Ravnborg <sam@ravnborg.org>, Alain Volmat <alain.volmat@foss.st.com>,
- Xinwei Kong <kong.kongxinwei@hisilicon.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Deepak Rawat <drawat.floss@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Joel Stanley <joel@jms.id.au>, Ankit Nautiyal <ankit.k.nautiyal@intel.com>,
- Harry Wentland <harry.wentland@amd.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, Alan Liu <haoping.liu@amd.com>,
- Philip Yang <Philip.Yang@amd.com>, Lyude Paul <lyude@redhat.com>,
- intel-gfx@lists.freedesktop.org, Alison Wang <alison.wang@nxp.com>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Gustavo Sousa <gustavo.sousa@intel.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Mikko Perttunen <mperttunen@nvidia.com>,
- Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
- Tomi Valkeinen <tomba@kernel.org>, Deepak R Varma <drv@mailo.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Chia-I Wu <olvaffe@gmail.com>, Konrad Dybcio <konrad.dybcio@linaro.org>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
- Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Khaled Almahallawy <khaled.almahallawy@intel.com>,
- linux-stm32@st-md-mailman.stormreply.com, Emma Anholt <emma@anholt.net>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, Imre Deak <imre.deak@intel.com>,
- Liviu Dudau <liviu.dudau@arm.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>, Roman Li
- <roman.li@amd.com>, Paul Cercueil <paul@crapouillou.net>,
- Rob Clark <robdclark@gmail.com>, Hamza Mahfooz <hamza.mahfooz@amd.com>,
- David Airlie <airlied@gmail.com>, Marek Vasut <marex@denx.de>,
- Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
- xen-devel@lists.xenproject.org, Guchun Chen <guchun.chen@amd.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
- Russell King <linux@armlinux.org.uk>, Uma Shankar <uma.shankar@intel.com>,
- Mika Kahola <mika.kahola@intel.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Jiasheng Jiang <jiasheng@iscas.ac.cn>,
- Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
- Vinod Govindapillai <vinod.govindapillai@intel.com>,
- linux-tegra@vger.kernel.org, =?UTF-8?B?TWFyZWsgT2zFocOhaw==?=
- <marek.olsak@amd.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>,
- =?UTF-8?Q?Joaqu=c3=adn_Ignacio_Aramend=c3=ada?= <samsagax@gmail.com>,
- Melissa Wen <mwen@igalia.com>, Hans de Goede <hdegoede@redhat.com>,
- linux-mediatek@lists.infradead.org, Fabio Estevam <festevam@gmail.com>,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- David Tadokoro <davidbtadokoro@usp.br>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Orson Zhai <orsonzhai@gmail.com>, amd-gfx@lists.freedesktop.org,
- Jyri Sarha <jyri.sarha@iki.fi>, Yannick Fertre <yannick.fertre@foss.st.com>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Philippe Cornu <philippe.cornu@foss.st.com>, Daniel Vetter
- <daniel@ffwll.ch>, Wayne Lin <Wayne.Lin@amd.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
- Lucas Stach <l.stach@pengutronix.de>
-References: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
- <87fs5tgpvv.fsf@intel.com>
- <CAOw6vbLO_UaXDbTCtAQJgthXOUMPqEV+c2MQhP-1DuK44OhGxw@mail.gmail.com>
- <20230713130337.fd2l67r23g2irifx@pengutronix.de>
- <CAOw6vbKtjyUm+OqO7LSV1hDOMQATwkEWP4GzBbbXib0i5EviUQ@mail.gmail.com>
- <78be52b8-5ffb-601a-84b2-ead2894973a6@suse.de>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <78be52b8-5ffb-601a-84b2-ead2894973a6@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:LxC2BwA3k94BF7BkxG6BBA--.7207S3
+X-Coremail-Antispam: 1UD129KBjvJXoW3WF1DXF47Xw4UJw4xGF15Arb_yoWxKFyrpr
+	yUAFyrGF42grn7ArW3C3WkAF1Y93Z7K3y7CryS9w15ZFnxGwn8JF4DtrWYyr1rJrW8uF4f
+	AFy0vFyakw47Aw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUQq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+	x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+	Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+	8EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
+	e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+	8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+	jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
+	kIwI1lc7CjxVAaw2AFwI0_Jw0_GFylc7CjxVAKzI0EY4vE52x082I5MxAIw28IcxkI7VAK
+	I48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
+	xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1lIxkGc2Ij64vIr41lIxAIcVC0
+	I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42
+	xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF
+	7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUjPCztUUUUU==
+X-CM-SenderInfo: hshw23xhvd2x3n6k3tpzhluzxrxghudrp/
+X-CFilter-Loop: Reflected
 
+From: Petr Tesarik <petr.tesarik.ext@huawei.com>
 
-On 13/07/2023 16:09, Thomas Zimmermann wrote:
-> Hi
-> 
-> Am 13.07.23 um 16:41 schrieb Sean Paul:
->> On Thu, Jul 13, 2023 at 9:04 AM Uwe Kleine-König
->> <u.kleine-koenig@pengutronix.de> wrote:
->>>
->>> hello Sean,
->>>
->>> On Wed, Jul 12, 2023 at 02:31:02PM -0400, Sean Paul wrote:
->>>> I'd really prefer this patch (series or single) is not accepted. This
->>>> will cause problems for everyone cherry-picking patches to a
->>>> downstream kernel (LTS or distro tree). I usually wouldn't expect
->>>> sympathy here, but the questionable benefit does not outweigh the cost
->>>> IM[biased]O.
->>>
->>> I agree that for backports this isn't so nice. However with the split
->>> approach (that was argumented against here) it's not soo bad. Patch #1
->>> (and similar changes for the other affected structures) could be
->>> trivially backported and with that it doesn't matter if you write dev or
->>> drm (or whatever name is chosen in the end); both work in the same way.
->>
->> Patch #1 avoids the need to backport the entire set, however every
->> change occuring after the rename patches will cause conflicts on
->> future cherry-picks. Downstream kernels will have to backport the
->> whole set. Backporting the entire set will create an epoch in
->> downstream kernels where cherry-picking patches preceding this set
->> will need to undergo conflict resolution as well. As mentioned in my
->> previous email, I don't expect sympathy here, it's part of maintaining
->> a downstream kernel, but there is a real cost to kernel consumers.
->>
->>>
->>> But even with the one-patch-per-rename approach I'd consider the
->>> renaming a net win, because ease of understanding code has a big value.
->>> It's value is not so easy measurable as "conflicts when backporting",
->>> but it also matters in say two years from now, while backporting
->>> shouldn't be an issue then any more.
->>
->> You've rightly identified the conjecture in your statement. I've been
->> on both sides of the argument, having written/maintained drm code
->> upstream and cherry-picked changes to a downstream kernel. Perhaps
->> it's because drm's definition of dev is ingrained in my muscle memory,
->> or maybe it's because I don't do a lot of upstream development these
->> days, but I just have a hard time seeing the benefit here.
-> 
-> I can only second what Sean writes. I've done quite a bit of backporting 
-> of DRM code. It's hard already. And this kind of change is going to to 
-> affect almost every backported DRM patch in the coming years. Not just 
-> for distribution kernels, but also for upstream's stable series. It's 
-> really only possible to do this change over many releases while keeping 
-> compatible with the old name. So the more I think about it, the less I 
-> like this change.
+SWIOTLB implementation details should not be exposed to the rest of the
+kernel. This will allow to make changes to the implementation without
+modifying non-swiotlb code.
 
-I've done my share of backporting, and still am doing it, so I can say I 
-dislike it as much as anyone, however.. Is this an argument which the 
-kernel as a wider entity typically accepts? If not could it be a 
-slippery slope to start a precedent?
+To avoid breaking existing users, provide helper functions for the few
+required fields.
 
-It is a honest question - I am not familiar if there were or were not 
-any similar discussions in the past.
+As a bonus, using a helper function to initialize struct device allows to
+get rid of an #ifdef in driver core.
 
-My gut feeling is that *if* there is a consensus that something 
-_improves_ the code base significantly, backporting pains should 
-probably not be weighted very heavily as a contra argument.
+Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
+---
+ arch/arm/xen/mm.c          |  2 +-
+ arch/mips/pci/pci-octeon.c |  2 +-
+ arch/x86/kernel/pci-dma.c  |  2 +-
+ drivers/base/core.c        |  4 +---
+ drivers/xen/swiotlb-xen.c  |  2 +-
+ include/linux/swiotlb.h    | 25 +++++++++++++++++++++++-
+ kernel/dma/swiotlb.c       | 39 +++++++++++++++++++++++++++++++++++++-
+ 7 files changed, 67 insertions(+), 9 deletions(-)
 
-Regards,
+diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c
+index 3d826c0b5fee..0f32c14eb786 100644
+--- a/arch/arm/xen/mm.c
++++ b/arch/arm/xen/mm.c
+@@ -125,7 +125,7 @@ static int __init xen_mm_init(void)
+ 		return 0;
+ 
+ 	/* we can work with the default swiotlb */
+-	if (!io_tlb_default_mem.nslabs) {
++	if (!is_swiotlb_allocated()) {
+ 		rc = swiotlb_init_late(swiotlb_size_or_default(),
+ 				       xen_swiotlb_gfp(), NULL);
+ 		if (rc < 0)
+diff --git a/arch/mips/pci/pci-octeon.c b/arch/mips/pci/pci-octeon.c
+index e457a18cbdc5..c5c4c1f7d5e4 100644
+--- a/arch/mips/pci/pci-octeon.c
++++ b/arch/mips/pci/pci-octeon.c
+@@ -664,7 +664,7 @@ static int __init octeon_pci_setup(void)
+ 
+ 		/* BAR1 movable regions contiguous to cover the swiotlb */
+ 		octeon_bar1_pci_phys =
+-			io_tlb_default_mem.start & ~((1ull << 22) - 1);
++			default_swiotlb_start() & ~((1ull << 22) - 1);
+ 
+ 		for (index = 0; index < 32; index++) {
+ 			union cvmx_pci_bar1_indexx bar1_index;
+diff --git a/arch/x86/kernel/pci-dma.c b/arch/x86/kernel/pci-dma.c
+index de6be0a3965e..08c6ffc3550f 100644
+--- a/arch/x86/kernel/pci-dma.c
++++ b/arch/x86/kernel/pci-dma.c
+@@ -90,7 +90,7 @@ int pci_xen_swiotlb_init_late(void)
+ 		return 0;
+ 
+ 	/* we can work with the default swiotlb */
+-	if (!io_tlb_default_mem.nslabs) {
++	if (!is_swiotlb_allocated()) {
+ 		int rc = swiotlb_init_late(swiotlb_size_or_default(),
+ 					   GFP_KERNEL, xen_swiotlb_fixup);
+ 		if (rc < 0)
+diff --git a/drivers/base/core.c b/drivers/base/core.c
+index 3dff5037943e..46d1d78c5beb 100644
+--- a/drivers/base/core.c
++++ b/drivers/base/core.c
+@@ -3108,9 +3108,7 @@ void device_initialize(struct device *dev)
+     defined(CONFIG_ARCH_HAS_SYNC_DMA_FOR_CPU_ALL)
+ 	dev->dma_coherent = dma_default_coherent;
+ #endif
+-#ifdef CONFIG_SWIOTLB
+-	dev->dma_io_tlb_mem = &io_tlb_default_mem;
+-#endif
++	swiotlb_dev_init(dev);
+ }
+ EXPORT_SYMBOL_GPL(device_initialize);
+ 
+diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+index 67aa74d20162..946bd56f0ac5 100644
+--- a/drivers/xen/swiotlb-xen.c
++++ b/drivers/xen/swiotlb-xen.c
+@@ -381,7 +381,7 @@ xen_swiotlb_sync_sg_for_device(struct device *dev, struct scatterlist *sgl,
+ static int
+ xen_swiotlb_dma_supported(struct device *hwdev, u64 mask)
+ {
+-	return xen_phys_to_dma(hwdev, io_tlb_default_mem.end - 1) <= mask;
++	return xen_phys_to_dma(hwdev, default_swiotlb_limit()) <= mask;
+ }
+ 
+ const struct dma_map_ops xen_swiotlb_dma_ops = {
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index 4e52cd5e0bdc..07216af59e93 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -110,7 +110,6 @@ struct io_tlb_mem {
+ 	atomic_long_t used_hiwater;
+ #endif
+ };
+-extern struct io_tlb_mem io_tlb_default_mem;
+ 
+ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
+ {
+@@ -128,13 +127,22 @@ static inline bool is_swiotlb_force_bounce(struct device *dev)
+ 
+ void swiotlb_init(bool addressing_limited, unsigned int flags);
+ void __init swiotlb_exit(void);
++void swiotlb_dev_init(struct device *dev);
+ size_t swiotlb_max_mapping_size(struct device *dev);
++bool is_swiotlb_allocated(void);
+ bool is_swiotlb_active(struct device *dev);
+ void __init swiotlb_adjust_size(unsigned long size);
++phys_addr_t default_swiotlb_start(void);
++phys_addr_t default_swiotlb_limit(void);
+ #else
+ static inline void swiotlb_init(bool addressing_limited, unsigned int flags)
+ {
+ }
++
++static inline void swiotlb_dev_init(struct device *dev)
++{
++}
++
+ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
+ {
+ 	return false;
+@@ -151,6 +159,11 @@ static inline size_t swiotlb_max_mapping_size(struct device *dev)
+ 	return SIZE_MAX;
+ }
+ 
++static inline bool is_swiotlb_allocated(void)
++{
++	return false;
++}
++
+ static inline bool is_swiotlb_active(struct device *dev)
+ {
+ 	return false;
+@@ -159,6 +172,16 @@ static inline bool is_swiotlb_active(struct device *dev)
+ static inline void swiotlb_adjust_size(unsigned long size)
+ {
+ }
++
++static inline phys_addr_t default_swiotlb_start(void)
++{
++	return 0;
++}
++
++static inline phys_addr_t default_swiotlb_limit(void)
++{
++	return 0;
++}
+ #endif /* CONFIG_SWIOTLB */
+ 
+ extern void swiotlb_print_info(void);
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 2b83e3ad9dca..873b077d7e37 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -71,7 +71,7 @@ struct io_tlb_slot {
+ static bool swiotlb_force_bounce;
+ static bool swiotlb_force_disable;
+ 
+-struct io_tlb_mem io_tlb_default_mem;
++static struct io_tlb_mem io_tlb_default_mem;
+ 
+ static unsigned long default_nslabs = IO_TLB_DEFAULT_SIZE >> IO_TLB_SHIFT;
+ static unsigned long default_nareas;
+@@ -486,6 +486,15 @@ void __init swiotlb_exit(void)
+ 	memset(mem, 0, sizeof(*mem));
+ }
+ 
++/**
++ * swiotlb_dev_init() - initialize swiotlb fields in &struct device
++ * @dev:	Device to be initialized.
++ */
++void swiotlb_dev_init(struct device *dev)
++{
++	dev->dma_io_tlb_mem = &io_tlb_default_mem;
++}
++
+ /*
+  * Return the offset into a iotlb slot required to keep the device happy.
+  */
+@@ -950,6 +959,14 @@ size_t swiotlb_max_mapping_size(struct device *dev)
+ 	return ((size_t)IO_TLB_SIZE) * IO_TLB_SEGSIZE - min_align;
+ }
+ 
++/**
++ * is_swiotlb_allocated() - check if the default software IO TLB is initialized
++ */
++bool is_swiotlb_allocated(void)
++{
++	return !!io_tlb_default_mem.nslabs;
++}
++
+ bool is_swiotlb_active(struct device *dev)
+ {
+ 	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+@@ -958,6 +975,26 @@ bool is_swiotlb_active(struct device *dev)
+ }
+ EXPORT_SYMBOL_GPL(is_swiotlb_active);
+ 
++/**
++ * default_swiotlb_start() - get the start of the default SWIOTLB
++ *
++ * Get the lowest physical address used by the default software IO TLB pool.
++ */
++phys_addr_t default_swiotlb_start(void)
++{
++	return io_tlb_default_mem.start;
++}
++
++/**
++ * default_swiotlb_limit() - get the highest address in the default SWIOTLB
++ *
++ * Get the highest physical address used by the default software IO TLB pool.
++ */
++phys_addr_t default_swiotlb_limit(void)
++{
++	return io_tlb_default_mem.end - 1;
++}
++
+ #ifdef CONFIG_DEBUG_FS
+ 
+ static int io_tlb_used_get(void *data, u64 *val)
+-- 
+2.25.1
 
-Tvrtko
 
