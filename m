@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0FD2EB64DD
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 08:43:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.563019.879894 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01388C001B0
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 09:11:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.563028.879904 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJruv-0006FZ-MJ; Thu, 13 Jul 2023 08:43:17 +0000
+	id 1qJsLa-0001PN-1v; Thu, 13 Jul 2023 09:10:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 563019.879894; Thu, 13 Jul 2023 08:43:17 +0000
+Received: by outflank-mailman (output) from mailman id 563028.879904; Thu, 13 Jul 2023 09:10:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJruv-0006FS-Jd; Thu, 13 Jul 2023 08:43:17 +0000
-Received: by outflank-mailman (input) for mailman id 563019;
- Thu, 13 Jul 2023 08:43:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qJsLZ-0001PG-Uz; Thu, 13 Jul 2023 09:10:49 +0000
+Received: by outflank-mailman (input) for mailman id 563028;
+ Thu, 13 Jul 2023 09:10:48 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZvnF=C7=tibco.com=clindig@srs-se1.protection.inumbo.net>)
- id 1qJrut-0006FM-J4
- for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 08:43:15 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4e05aa37-2159-11ee-b239-6b7b168915f2;
- Thu, 13 Jul 2023 10:43:14 +0200 (CEST)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-993a37b79e2so77951266b.1
- for <xen-devel@lists.xenproject.org>; Thu, 13 Jul 2023 01:43:14 -0700 (PDT)
-Received: from smtpclient.apple (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- cd26-20020a170906b35a00b009929c39d5c4sm3682659ejb.36.2023.07.13.01.43.13
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 13 Jul 2023 01:43:13 -0700 (PDT)
+ (envelope-from <julien@xen.org>) id 1qJsLY-0001PA-JG
+ for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 09:10:48 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qJsLX-0003fk-6j; Thu, 13 Jul 2023 09:10:47 +0000
+Received: from [15.248.2.150] (helo=[10.24.67.22])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qJsLW-0000Tc-VZ; Thu, 13 Jul 2023 09:10:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,104 +41,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4e05aa37-2159-11ee-b239-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1689237793; x=1691829793;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dd4So+ud0W3G2H0jXSJDsrDV60FvjWe7/Kq5sWGCO44=;
-        b=AvKvhjrdDcPOagBfUHANws+zB3BDy7ObiUWv5S8EJML2iP85bW/TOWZl8SGa8a3LfZ
-         b82KbpYdrRTHOiVXkigutBJQUUx1yM7uann9J/BSRV7GiW9CEtP7C/KdlsiSDVrsU7iz
-         iCQAmyvEG3Aid1b+Wi4XpD0UljthfbAH4PpcE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689237793; x=1691829793;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dd4So+ud0W3G2H0jXSJDsrDV60FvjWe7/Kq5sWGCO44=;
-        b=XzvD5m0PJq3N9Xi90o/62ZKYVs3Nq/tDZhhP/Qq1F7B49y8z2xSJ9JFgZ5PavlW3Ki
-         uJVHaiG90hg/1VyCmb1AZWcpimbxRk3qsiYvaHarE2zOtdwLmiD/Phff7NivDzw9CBD7
-         Q1AATeiFjHPg19y3qs5DTES3JqsHPUnCAyjdQ5TdIIGLDLal6CprmJjYNPnKajb7UNah
-         mM23sSDTIsqj42Xiw8hMM4XazWPSbFW2i4ypYPXfHlM/aUbnRPVPntaXcqWuHyCHmVan
-         Ghj4TB7o3+UegV9lgtmoGk9KT0PTaKgIzONZlCwtoNi0RYUy20ikqdA+65qjUoECDp03
-         N6OQ==
-X-Gm-Message-State: ABy/qLYKRpPrHLNxuyPIqB0vgEPsoSmcCu9lEUWBAWf+IGrpm8fRIig5
-	FeyWuRwZt7Vi3o7/VlGFd6ngvw==
-X-Google-Smtp-Source: APBJJlGu5GsdVUCQZ22Fu9xArfZ9UNN5ewwVWFMDZLdIXxHer+riKWKb9HChJjqO2OHnErKNAS1l+w==
-X-Received: by 2002:a17:907:2093:b0:991:b2a2:e424 with SMTP id pv19-20020a170907209300b00991b2a2e424mr890047ejb.76.1689237793525;
-        Thu, 13 Jul 2023 01:43:13 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3696.120.41.1.3\))
-Subject: Re: [PATCH] xenctrl_stubs.c: fix NULL dereference
-From: Christian Lindig <christian.lindig@cloud.com>
-In-Reply-To: <3b6374c44ae7e4afce427a9ea852d8d1ebbb42b3.1689236671.git.edwin.torok@cloud.com>
-Date: Thu, 13 Jul 2023 09:43:12 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=8LZFOLx1RGeM07jcNM4RNjnkjegoh+yZ61l0VIGUVWw=; b=yFvHf79esqr4NQl32aF22Cwn8n
+	KTlc3Z9nN0GvO1D4niBIgREz5q/jEMApW5kS1ff0Moh7RegiZQl4SirpXYxbp01u+x9xE+ndZGHtQ
+	bgWNx1OHROBObqcy19Og7I2/RNVqyVKDsDy6HlDsvj4aG4O/3+gORoWHflWMUE2nrRug=;
+Message-ID: <1ee3260f-7592-8384-9000-ea068b84a6c7@xen.org>
+Date: Thu, 13 Jul 2023 10:10:44 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.12.0
+Subject: Re: [XEN PATCH v9 00/24] Xen FF-A mediator
+Content-Language: en-US
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>
 Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- =?utf-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@cloud.com>,
- Christian Lindig <christian.lindig@citrix.com>,
- David Scott <dave@recoil.org>,
- Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <B7692393-A65B-4CDB-803B-4F8C135E0341@cloud.com>
-References: <3b6374c44ae7e4afce427a9ea852d8d1ebbb42b3.1689236671.git.edwin.torok@cloud.com>
-To: =?utf-8?B?RWR3aW4gVMO2csO2aw==?= <edvin.torok@citrix.com>
-X-Mailer: Apple Mail (2.3696.120.41.1.3)
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>,
+ Wei Liu <wl@xen.org>, Marc Bonnici <Marc.Bonnici@arm.com>,
+ Achin Gupta <Achin.Gupta@arm.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>
+References: <20230705093433.2514898-1-jens.wiklander@linaro.org>
+ <480AA225-0590-40BE-BCD5-ADCCB1BC2274@arm.com>
+ <CAHUa44FQotjOASHhUknwju20iOoFnub3erYOp+b_2+h=NCvv1A@mail.gmail.com>
+ <DBFFABBE-AF3A-4ED1-8DAB-B00054D41C37@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <DBFFABBE-AF3A-4ED1-8DAB-B00054D41C37@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
 
-> On 13 Jul 2023, at 09:30, Edwin T=C3=B6r=C3=B6k =
-<edvin.torok@citrix.com> wrote:
->=20
-> From: Edwin T=C3=B6r=C3=B6k <edwin.torok@cloud.com>
->=20
-> `Tag_cons` is `0` and is meant to be used as the tag argument for =
-`caml_alloc`/`caml_alloc_small`
-> when constructing a non-empty list.
-> The empty list is `Val_emptylist` instead (which is really just =
-`Val_int(0)`).
->=20
-> Assigning `0` to a list value like this is equivalent to assigning the =
-naked pointer `NULL` to the field.
-> Naked pointers are not valid in OCaml 5, however even in OCaml <5.x =
-any attempt to iterate on the list will lead to a segfault.
->=20
-> The list currently only has an opaque type, so no code would have =
-reason to iterate on it currently,
-> but we shouldn't construct invalid OCaml values that might lead to a =
-crash when exploring the type.
->=20
-> `Val_emptylist` is available since OCaml 3.01 as a constant.
->=20
-> Fixes: e5ac68a011 ("x86/hvm: Revert per-domain APIC acceleration =
-support")
->=20
-> Signed-off-by: Edwin T=C3=B6r=C3=B6k <edwin.torok@cloud.com>
-> ---
-> tools/ocaml/libs/xc/xenctrl_stubs.c | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c =
-b/tools/ocaml/libs/xc/xenctrl_stubs.c
-> index e4d9070f2d..3703f48c74 100644
-> --- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-> +++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-> @@ -832,7 +832,7 @@ CAMLprim value physinfo_arch_caps(const =
-xc_physinfo_t *info)
->=20
-> 	tag =3D 1; /* tag x86 */
->=20
-> -	arch_obj =3D Tag_cons;
-> +	arch_obj =3D Val_emptylist;
->=20
-> #endif
->=20
-> --=20
-> 2.41.0
->=20
+On 13/07/2023 08:37, Bertrand Marquis wrote:
+>> On 13 Jul 2023, at 09:12, Jens Wiklander <jens.wiklander@linaro.org> wrote:
+>>>
+>>> It makes it easier for reviewers if you put the changelog per patch
+>>> instead of having all of them in the cover letter.
+>>
+>> OK. When I post the next version is it enough to document the v9->v10
+>> changes in the affected patches?
+> 
+> 
+> Yes that would be ok for me. If someone else has other requirements they will tell you :-)
 
-Acked-by: Christian Lindig <christian.lindig@cloud.com>
+No problem from me. It would be mean to request adding the per-patch 
+changelog retroactively for 10 versions :).
 
+Cheers,
+
+-- 
+Julien Grall
 
