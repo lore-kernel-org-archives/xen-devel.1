@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 954CEEB64DD
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 13:03:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.563147.880172 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8632C0015E
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 13:09:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.563152.880182 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJvy9-0003Y1-L5; Thu, 13 Jul 2023 13:02:53 +0000
+	id 1qJw49-0004Ed-Cu; Thu, 13 Jul 2023 13:09:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 563147.880172; Thu, 13 Jul 2023 13:02:53 +0000
+Received: by outflank-mailman (output) from mailman id 563152.880182; Thu, 13 Jul 2023 13:09:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJvy9-0003Xu-IO; Thu, 13 Jul 2023 13:02:53 +0000
-Received: by outflank-mailman (input) for mailman id 563147;
- Thu, 13 Jul 2023 13:02:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qJw49-0004EW-9P; Thu, 13 Jul 2023 13:09:05 +0000
+Received: by outflank-mailman (input) for mailman id 563152;
+ Thu, 13 Jul 2023 13:09:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=0tL6=C7=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qJvy7-0003Xo-Pt
- for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 13:02:51 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2062d.outbound.protection.outlook.com
- [2a01:111:f400:7e1b::62d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 91e5d1a2-217d-11ee-b239-6b7b168915f2;
- Thu, 13 Jul 2023 15:02:50 +0200 (CEST)
+ id 1qJw47-0004EP-Gp
+ for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 13:09:03 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on060a.outbound.protection.outlook.com
+ [2a01:111:f400:fe0e::60a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6f691731-217e-11ee-8611-37d641c3527e;
+ Thu, 13 Jul 2023 15:09:01 +0200 (CEST)
 Received: from AS8PR04MB8788.eurprd04.prod.outlook.com (2603:10a6:20b:42f::21)
- by AM9PR04MB8700.eurprd04.prod.outlook.com (2603:10a6:20b:43f::8)
+ by AM7PR04MB6933.eurprd04.prod.outlook.com (2603:10a6:20b:10d::23)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6565.17; Thu, 13 Jul
- 2023 13:02:48 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6565.32; Thu, 13 Jul
+ 2023 13:08:59 +0000
 Received: from AS8PR04MB8788.eurprd04.prod.outlook.com
  ([fe80::cbc0:69aa:c9a2:198e]) by AS8PR04MB8788.eurprd04.prod.outlook.com
  ([fe80::cbc0:69aa:c9a2:198e%7]) with mapi id 15.20.6565.016; Thu, 13 Jul 2023
- 13:02:48 +0000
+ 13:08:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,233 +49,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91e5d1a2-217d-11ee-b239-6b7b168915f2
+X-Inumbo-ID: 6f691731-217e-11ee-8611-37d641c3527e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CGUBywDFApOIuzIET8t+G9bHPRrjH5BLKsDmc1BXb6oc5/V5jcF1b5xSCGA1PJ5JwPRYnAiVeLRA8KiPx7d8+ocZiHH0m7pdjqBIxfBSmt6NDrIXGS48iHbcL21hBW7pGHYDszypa/kysTSPSdx7oFZwNaLXZrkMTXXadYHBi5a0uYPODWwQFkDOTu/s7Dzocwgzyf38WNZGYiGQp3grxZ0u1XcJi8mp9rYk9/9IU3wmuYWUzbtQ3ZhmA3c0DKYDy9DJWxEk8xDzl6GvLviYqUCnv9MDJ2Qxop8YtCKZlYejZ5ClaSDbEBvK2DJMrSxaUi5TG3PwNQNtnq2+TiOIPg==
+ b=EgMW0twK4Kmt7AK5PYyrDX5/Js0krtQ5U55SKrpY3p0WjKoVLnP8oeYbxdHxbsyLLu5Ivicsvk2VdSu5rH/zpNhOCAloJrUfbJk+/Nh6OwHRJkSxKnGImRfs5siZtFu13i3q6sp1xpixyXaKjYj3E0LE86wAc8HJMgJ7tmH+o1WwoQ9/fddbI6DOTrUsGSNF4au0TA/R2nl9P1VXzV4XR95NNVXXfXYmaalFlXaVt50pEDFxSLpfcci5IrNZH4glL3EcTnWhWguuLwsOoQWARS3SROHcMByzwJrDfdd6f3XWfgoorbTIEodXEFmOKLJeWTm3wR4zaU5OT43NG3XAdA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q0+JziC2DWMLKXUQ2+6AYymAasPio2XVKkf1gkCYdak=;
- b=iObK6TJFbycwLWo9PSAB93J2/WVlz6GX6Vm9Okz3UQy69NNt5ffehCof8Hz+gpLo4Ex/37Bu5oxvFxi0pZnGiRcWL2HbtrIOxT725lOPqQkAsukhaV/x0uP2CiFYaxKSDXE0rdKaPMgns9x8m9jbq32Grget5X7tPDwNt+z75PVm63gv1nfy4Ffy9IA8mTLuKJAicrGz91jwYWs9tmkmin1CwkALTaCEZesVpoyCzKrmXyOGrr1yFV6uVsmVMnjK7x691NyvwgE1rl+FO3fKMZxWIjMilWzJXLuWirT9BybYWE0ZSwRwR6uxRnNusGB05Lp5VlkjANg5NdkP6X5Oog==
+ bh=cRGt5nOPXknVEwGQlNXG3ZB3qCaI9fOSOZb+oc2CknQ=;
+ b=ghu0LQPwrfRKrYy24FeoaiIqzrPV3WQ/eR23RTihHY3zpPMex788ppZFknCcLNbZib06K1BVcbps0zQ971G7MiiHw7PskIeyA5b7rjzhUDmO4ac4YVz4HduJKEw4O+WU05t8q5A39OoPD7yv7pmpj0gG8afKzQPts1gJw6JFnFyVaFbZI26ZQncdRolkTx3qCVYThIUAVEyPnvi6GEUIbhYMbeXsp6gORxIiH0bS1VCcr3DjhcO+LD56zjR9ezpAAQvbLatnN8XHD16SV3NtTLD7cWq14F67d03Q5F2uuc6j7hXVyR6hJyqM2NHG+m8zHFMZR0try4sWhOFkdstb7A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q0+JziC2DWMLKXUQ2+6AYymAasPio2XVKkf1gkCYdak=;
- b=21VCb9/bD1buOoIWuNk+mK3eCrhhXBt98IRrTSbhlkp+sjINOMniDPJWSA5exLqdZSuv5V3n5yKaduFNupiIYJF3oXV8yJcynIa7q7DcTPk9CRKG9qmvJb1eY7Y+p5EzTve5+i7eQfVkiobIL2eYHmzfLKvyN2OC00XVDnvBD9Iilxs50hRiXd4DxPjZHl25iaF/ROk11KcmxvtmfjVCJOVaSObAy1ZP0iR5/M7EmxMfH2WYM0p4XJWmBJoe6GjBly8sqDtYXv/U2rSsUDL4z+xmNI5b8ps2KDhgjqVWmp6wwZFHM+54Pxs47j4umg6lvRkyE3/7fle6wHkLnwrybw==
+ bh=cRGt5nOPXknVEwGQlNXG3ZB3qCaI9fOSOZb+oc2CknQ=;
+ b=AbtwiNeuRI3qc8F6A3Qkkm+HdkLEl6xjvojbfSeGYzdDOR9ZLc1grgXzfhz9ApvM2qiNI2AYgM7P4xrcj39S3yVFfcigj2Lb544oe5+34iirjA7EkFSdIsLlpUaI7Erh3IFT1excKdOvgbjDyKrdSTZOqwCasQKB7kjAwzxsZ5c8I5wqB1FS0TJyRyWQFBMrj6HFNHtH6ZhZq6uKJAcy8yzbEJi2J4yGW21gvVVhZEPZG7vhNnE7XfN9hn0NCYx7NyBsrxTNg6MI8YTs00ss+KjrQpRUwJeDq8vwblrBssbNy8qYv/yqui13/wxJtm9dJTK7/QJ4MFLttzjcJceYgw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <e398f2f3-3c12-5bbd-5bfb-d3fac7c1b23a@suse.com>
-Date: Thu, 13 Jul 2023 15:02:45 +0200
+Message-ID: <5a3664ef-6b58-cefd-ba42-f4b70da348b0@suse.com>
+Date: Thu, 13 Jul 2023 15:08:56 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH v5 12/15] xen: Add SET_CPUFREQ_HWP xen_sysctl_pm_op
+Subject: Re: [PATCH v3 1/3] x86/APIC: include full string with
+ error_interrupt() error messages
 Content-Language: en-US
-To: Jason Andryuk <jandryuk@gmail.com>
+To: Elliott Mitchell <ehem+xen@m5p.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-References: <20230706185440.48333-1-jandryuk@gmail.com>
- <20230706185440.48333-13-jandryuk@gmail.com>
+ <wl@xen.org>, xen-devel@lists.xenproject.org
+References: <cover.1689191941.git.ehem+xen@m5p.com>
+ <062ed51e7529d282b6e336c8b62734afaf21979f.1689191941.git.ehem+xen@m5p.com>
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20230706185440.48333-13-jandryuk@gmail.com>
+In-Reply-To: <062ed51e7529d282b6e336c8b62734afaf21979f.1689191941.git.ehem+xen@m5p.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0182.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a4::17) To AS8PR04MB8788.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0168.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b4::17) To AS8PR04MB8788.eurprd04.prod.outlook.com
  (2603:10a6:20b:42f::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8788:EE_|AM9PR04MB8700:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2ca83f2-7115-4e48-b0ea-08db83a17511
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8788:EE_|AM7PR04MB6933:EE_
+X-MS-Office365-Filtering-Correlation-Id: 34201bfc-6831-4f6b-3c9f-08db83a25222
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	V2CUDUNAk+YXKdzWqz+IGTB89fiJn9NU9aX6rpcOOdvlMCsJCAM3ajkz4E5V5MPFhxbB6kGCMYVR7j7UX9ncP1q4rjhmtiP+Fvkd3XN7NMGWMzZm2l9dsS0lhxmMXisAU8XpaZ+hC/pAO9EJWKjWqf7pUzYL3pf+Tv0+y1a5p4I8Xz4Gt0myuh0S/GmUclhFQFQ6dgdTFB7XB25z8wKbr3ZyrqcURcSmHLQEjySlvPuo1ghA0j4yP4JX6lHMyHXffF7x9nTy3XC81NfvnZr62/MhkSSHmCQVi2qDkcM0rMdDnQnhGzmU8D72Pj2SW8ZAJorBo5FTZ6+gt4iBA23DT7w+n1d0Tv2sFmXnUN0U5B8w/nXO7MdXVbUKdMF2ZTEAf29EJMJ78sZED08ZykODaO/PuBgygyF7iKJNBQyxnVDiaeBj1mYYOTZEY4cFGuqPuV6cjdhG9IyY5TuZtOBDwY7j8Dws3pm9RyyNuadtixLvHESNcs8bRtIFuDXPP6ex31S+1fM1ZTSEctN4xqIcvp1OGDS+nSs+rumq5qrdwTyz6z8D2WMbHxwkPq3Elt/cc6mba5PzDYF0ApiaNFaoxVJ1cWwuYjXcL8sfIw9b706f4IcjtMFXHvCh2zzVUBaDqhKccjEQYWMTkdHr4mqpJA==
+	4EPrmHdeRKNJ9amwglQL8hK1KhIGFBesNNc3Q/pjttb1BnWP92wHD3joVDyW7aJpmRqKc3WVNAR0F/xArI4p+4ijp1XnGExr3j/mJBbI4Xk5LAqyerjXtZws6p8ZNUh8vDxrpLweZZljVFBp6Z711Aeay6rhmyUow1sR2DExkgzY5oCIT323vHht3kG3OlNAUvF+hqPDi3dvrDcq6vHuhrATDjeiIQWXoYBNfYZPrvz0V28bv2TW4izmI00TPXqL5FeNM8OvnyIKZnbSWEbOSKej2jcyevD64GKbXtamQHsXvbB1n1TFzpbfTy92HTZGaEXh8LvcDEd0w6PgBXC6+CCrfYBWgsY03mJbsHBsYP52T+lyirX57btr22ZwO4DfnMrkcO/HDBtsh6C6Rp1H+SZnm8bGCKi/cnQec4HcKMo3OnYyLsyshlDIwL1gZMFJNDL7CSQlFT1PU4kEk15WOXVkbVWf2FEOq+m1YgF2Z5IQUrrSG43Rkc9EHBbppYIIrM3/RAiZyJka5IOsNuvOqd3ZY++4vUpBb4sgA3uOwrySIOchNISTiPLGPIm6ulflGgG20A86CVJrsywoBcJeHC/6JvE2j19iZZzG2Br6jLGYDE82CcDZTxR4E/4TUwDQRiPaWWUKKpJ2jPA0uML7UQ==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8788.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(346002)(376002)(396003)(366004)(39860400002)(136003)(451199021)(31686004)(8936002)(8676002)(5660300002)(41300700001)(83380400001)(316002)(2906002)(6916009)(66556008)(66476007)(38100700002)(66946007)(2616005)(4326008)(186003)(36756003)(53546011)(6486002)(26005)(6506007)(6666004)(31696002)(86362001)(6512007)(478600001)(54906003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8788.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(366004)(376002)(136003)(396003)(39860400002)(346002)(451199021)(54906003)(31686004)(41300700001)(2616005)(2906002)(5660300002)(186003)(36756003)(26005)(8676002)(8936002)(53546011)(316002)(6506007)(66556008)(66476007)(38100700002)(4326008)(66946007)(31696002)(6486002)(86362001)(6512007)(478600001)(6666004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?c08rcVVabnFJRDZxaVkrcjA2YitVNlhkaEJFNkszckRhTUV4QmVhcHlmVm9j?=
- =?utf-8?B?T3d6NEVIYklNTHIxWnk0ZUFVdHY4T0VtdFpKT1hLbjlIdVBHWVZHai9wZkts?=
- =?utf-8?B?emlWMVBoRUxkcWg2OVc2WlZ3Sm9RTmtvVXorVDlXNEtmUEk4bmZzaTVURDc3?=
- =?utf-8?B?THZWUmRZRkFEcFZSZ016V1Bxdjg4MG14ckQ4b3I1SmliU0JxcU0rRzV1Umli?=
- =?utf-8?B?U051TEY0RHZRNjJyeXpkeHBFMmlYeGxtKzc1cE0vRFd3M3FnN0c4YWJWSmdM?=
- =?utf-8?B?dFdmZy9veXIvamhQMFpuaUdiOWNzandLR0pFOUNIQUZPVjJGMUZjMHpzSlRk?=
- =?utf-8?B?VG9jbG01bEdaTEt5clFrZ0hxdWZ3aUdxdFIveW1TSjFyMzQrTkFKTUNyeGRW?=
- =?utf-8?B?MmVqTUZzbk1GUUpTeFgwWEtITFhvbXRNMmZHaURuNTdobnFoQjhneEZkQURN?=
- =?utf-8?B?eUVLUk5zM1NEQ2crVElKYlFEVk5qNjBtUHlzMHVDemVFZHhRVnFybVVYVE9P?=
- =?utf-8?B?TVhSN3BmWnA4WGFzVDlqYWphK2JDbHQxUUlad3M1ZS9hT0dIRHA3QS9sRTRw?=
- =?utf-8?B?VE96Q2lhRm5XZXBRTjE2T08rdDFGaDZxcXpSNUNaTUxYYkgzMXEwWjI3YTkz?=
- =?utf-8?B?a1JDZzI3WjlGbmN0SHRQTnkzYXdBcWJDZmNjT1pIalNXZUErbDdOYm4wSjYz?=
- =?utf-8?B?SUJ1RWZHcncybVFkNjM2eEl6b0h1ZnVlUTErVmJ0TTFxK2hEbEhYQXhWS1BC?=
- =?utf-8?B?UVV1Uk1VMEtHbzFzRUI1WkhOVVZCL0lONTFHNkxCMkZlbTNnbC9RUEVIaGlE?=
- =?utf-8?B?cEJWWlFOZ0FHTFhsbDFNRDJTV3RsUTBPdHZ5VmFicExLekNKRlFSV0FYYThN?=
- =?utf-8?B?MDdFZDhmUDF5ZitiQVA2UVZHRjg4ZXdVL21TK2x4TGdhNS8yM2orR2ZYOFp6?=
- =?utf-8?B?STc4UzhSOEZ4R1BBSU80ZHo0TDRCbjVkVkMwOUFSUVhOUStsR3RFZ0FYSG9N?=
- =?utf-8?B?SkxHeDA4Z0dvaVV6eFVSY3NOQ3JxUzQ4RFFJTmx5akMycWhUVkRGNHZQUjdT?=
- =?utf-8?B?NHp6WEV2Z040UXA3djdNNTl6TjVVU3A2L3l0RkJodjVTS1lrMzdScjFiVmhK?=
- =?utf-8?B?Y2tmMGFvdjNDUlpLamhnUE9KaGFLMG9UUVFkaUxpWklCNG1mY0hvNnVTSHFW?=
- =?utf-8?B?MCs1OVJ1Vzhadk9EQ2c5aFliN3hIKzA3TVdYSGRZaUhqZW5BR3FJcEtRbGg2?=
- =?utf-8?B?VjMvaFY3Z3JQL3VCb08vRE1VSmlIS1JhQW44VkVKZlFaTldEVStUNDZTSENa?=
- =?utf-8?B?b0IvYW96NUw5RHlnaTMrOW1QM2xWMkNEWTQydytDdnFzY3BtaXhzN2tWTVBz?=
- =?utf-8?B?M0ZxWTZqOXQxa3l3dFV2RnBHc0xvMGJ1RkM1ZGVkVmNjbll1R29zV1k3L2Y2?=
- =?utf-8?B?bUQ4ckNhQ0M3dlRzNTlNWFNneVdUelZlaWprc3JsMEdjd0E2U2cxblJIMG1V?=
- =?utf-8?B?MmhldmdBOXZZamZmcTZEczJNS3d0OWtwejJVbGtheENVcCs4UkgyYVdvdHRY?=
- =?utf-8?B?Q3pXMEdhQVFkMEJ2RG9rMjVCaUJCSVc4Z2Nmd3IwM0xVelNxSndPNXNJc25z?=
- =?utf-8?B?Yi82eXZJMnBxaUJ0V29va1N2MGpKcHBua09IS3V3Umtra0ZrNy8vY05NR01m?=
- =?utf-8?B?UnBNL1N6d3FxS29Ja25NQ2lsck9IbzlFVjYwSVh5c2thMGJqWGFaTmhqY1Fv?=
- =?utf-8?B?NjI3bk1kZko0KzVUTVI0UEthZXkvV3Fpa3paR2Q1M2gzMGh4eTJnYjYxbHhm?=
- =?utf-8?B?cytwNTY3ck1GNVc4Q0U5NTlFOUgzVnVDOWl5M0JlY3p2eXdRZWZ2M3g5Z1JK?=
- =?utf-8?B?TmxncmtBYW9yYTZCYmlWMWZFYVBPSzF5MlZ6aUN3dXVRRTRkWXpLdUtZSnA0?=
- =?utf-8?B?RTIrdlgxdzVMZ0xuWk5wZzNQRThETzd2MDBkbGozcjdOS0liVlJCZ3RIazJZ?=
- =?utf-8?B?N1FzQUViRFpsVm9VdTh5dkswSndMSThmTnU5cXFEZnhNSWF1b0ROS0tJOFY4?=
- =?utf-8?B?aFI2TDlPaEVJd0ovWFRxQ3ROeWoxMFF2MVQyd2tpZndyRzVqV1FMNHluSi8v?=
- =?utf-8?Q?OSjGTZ4ujDaiqHsiZftVP/VYn?=
+	=?utf-8?B?NjdkTERrMWxKcGVxVHdZQXpBaXdxQnJUUXAreFVBd2NmcFp5d0o2emZBU0Rk?=
+ =?utf-8?B?b3Z0VldTZHc2VTFLbi83NGorRTRZQ2t1a25RMGQyVWN5SktUWFlIdHNROUIy?=
+ =?utf-8?B?MXczajcvWGRkTkJuZWptcTBTeXo1a3Q2bUh3cUJpTXFpNjczTDQ0LzZrRHh5?=
+ =?utf-8?B?WEZadXNIOTFUZzkyeGhlWjgvYS9IRFIxUzVIZXJ4dXQ4MUZnOEF0dlByRFM4?=
+ =?utf-8?B?MFNkUmEzcTJvQWlqc2hoQWZ5SGtmWEZUeklUS2d3S2dLOWFZWEVsdnZ0dXFi?=
+ =?utf-8?B?bXp5a1o4VjV3VHNJZHRkWFQvYjZ0Ny9zVWRNTm8ycEtYS3dhTFo3dk9zRGdh?=
+ =?utf-8?B?RjZ6U0JabythZDFNY1pCaHRjMUl0QnVXbXhGaGRPUGduZW9WZEpNUVliNEI5?=
+ =?utf-8?B?V2V2YkVpUlFkeHAwYjRySGpLRmNROGc1L2paQm9JWlVzbk4vY2lhQnA0dUxZ?=
+ =?utf-8?B?a0txc1RrWU9zUzM4MUtNbVl0aUVnM2xhaGh0anpmbkpjZHl5NUkzaFJOOCtu?=
+ =?utf-8?B?bE1IcXZYSlQ1TGZvMmJCbXBBVG1xdkcrcWhQaHNUZ3pIY0tTZ2Npc2RKSVpl?=
+ =?utf-8?B?ZzBkVFE0S2hKYWp0dmpFVFhaMHRIcXd4c0g2RVd5aU95WjNUdFpWUUE4VUFZ?=
+ =?utf-8?B?YS9ud3hHSS9TWVRtVk00ZDNnK2g1K1cyV3JYcjNFWGxIY1lJRTlTYW9GRFJ4?=
+ =?utf-8?B?cGdkS0xYZUxTalpvQTZIRnlybkxTUk9nUHVCLzBlVXR0Vlhja2tBV1hXR3Zx?=
+ =?utf-8?B?elZvNFdDdDFoYjBTNXpKc3F6ekI1dk5tVnUvbDhGQzI0WnZTSExMcmd3emlU?=
+ =?utf-8?B?MFZEL0FjcTRqUWJEMmQrTStxT2ZsdEE0L2JUdWF4V1VoL3djSlVYVG4xRWlv?=
+ =?utf-8?B?eFFYelArQklHT1NxZXBPTXk0ZWxsWUVjUFEyR1JFUkRGSWxnVXFlWHY5RWRP?=
+ =?utf-8?B?ZWVCbXF5SURkTWxmZHgzSnB6T1ppWGRubWhic1FLUm5Dd0cybTJGQnVNNWxs?=
+ =?utf-8?B?UUx1eXl5TUJPRExOcUk5UEFERVBKVW9RMXRDdnJCQktsSndmN01xYXVBSjVr?=
+ =?utf-8?B?K3V0bjBQMmxLblN0dXR4RThhdng4SlU2cmVJdFVOWHJ3RXFUcnlxZlFKSHJx?=
+ =?utf-8?B?blJySEdBZVNFZzFFMnRjVlF5aGx6QmltV0hSM0QwZ1dyY3JDb2FCMlVLZzhK?=
+ =?utf-8?B?L1YyMkN5dnVTTVNFT2w4MndRWTlxNW1hV2RUNXRGaDV4UFdhb3JNSjQ5dlJj?=
+ =?utf-8?B?T3c1c1drcnkrZ0JvK1dvaWRORDVIYVVlS0l0dTNndWdwcTlPSlppTm54NUtC?=
+ =?utf-8?B?TVZHS1BSeEVwUkQ0bTR6MzRyRjlaaCtCeDd2dU5OVWd4YTBKWW9TSWJhdnZG?=
+ =?utf-8?B?Q0Y5UGoxQkJNQ3FpUDBramVPcGo5bE9zbGRDMFpVTlF6M3Jzc0lhVTQ0cnB1?=
+ =?utf-8?B?QkJQbkJPdlVpNjVpcnFVMHZiQWNhWTNzNG1sbUpYU1FzbHRKTk5kbHdYQlRX?=
+ =?utf-8?B?M3VWVHVZaUFDRXRvaU9wZ0U5cnRCY0NhTER0SzRTSVlKMUxYeWlnbDBvZURv?=
+ =?utf-8?B?eElBZDZyMjA1MXh6bTAyYlM4WHpDUkhpRnZ4dzdPSHRYVVRXclQxWUJENjRt?=
+ =?utf-8?B?elcwaThoTlF1QldKbW8wWlVLM1pyb1hrb0s1V053dHBHQnAzUXFLU0l6MlI5?=
+ =?utf-8?B?Zk81NGxvOE8rSkZ4cHFNY2ZwMG5IODMreDAxZ1hMcTJtZkxwSnc5bnJNdVdJ?=
+ =?utf-8?B?Si96WVJvSzN1dTNGQVRrYmVBb2VMRXN1MXY0a1ZJY1pYZDJFeWNhc0NZSWZR?=
+ =?utf-8?B?d2piWFhkMzQ0L2M0VkRwVk9PeW1pVGJDT0hkMHNPdTB4T2E1MDJpVUt4dGVy?=
+ =?utf-8?B?WDZXemlzUnpVRjFaZTRyamFDSXFiNDdNL2lJS0J1d3hYQTh0SWxTbHlJSGVn?=
+ =?utf-8?B?ZWVyYTE3eE5pUlEwR25LSHFKb0FtQndEZTFtcG9ua0txbXI4YzJwV2tidU5J?=
+ =?utf-8?B?T3BIcUJCcnVOK1JMNUhWZGdIOVFDOEVJMzltcFh3VmJzZmxWTkpVRDlWV1VO?=
+ =?utf-8?B?ZEdaZGZDOGF5amhBL0VLZ0FrZzhuc2ZsS1d1RDdwRDNIaHc1N1lkQytUekxu?=
+ =?utf-8?Q?Qr3nXGPdORnqk9K63K62Zx7Z3?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2ca83f2-7115-4e48-b0ea-08db83a17511
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34201bfc-6831-4f6b-3c9f-08db83a25222
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8788.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2023 13:02:48.1142
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2023 13:08:58.9900
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: G/iqbNIGCpzTQa/ZjQR1W2AQolVAydKoSFTrEtPtkDxK7jjFn5nFEgepmZ8jrgB1Gknn04sjkXUmNRcEgmbARg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8700
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8SOsjkaxaVvYI8IHE8nX3IbRL7b2miv7UdYRKOmgGueX8MaFeK91EFFAmzP/tUOsVoDyzVfOk0k2yQLK3/DtEQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6933
 
-On 06.07.2023 20:54, Jason Andryuk wrote:
-> @@ -531,6 +535,103 @@ int get_hwp_para(unsigned int cpu,
->      return 0;
->  }
->  
-> +int set_hwp_para(struct cpufreq_policy *policy,
-> +                 struct xen_set_cppc_para *set_cppc)
-> +{
-> +    unsigned int cpu = policy->cpu;
-> +    struct hwp_drv_data *data = per_cpu(hwp_drv_data, cpu);
-> +    bool cleared_act_window = false;
-> +
-> +    if ( data == NULL )
-> +        return -EINVAL;
+On 17.03.2023 20:45, Elliott Mitchell wrote:
+> Rather than adding ", " with each printf(), simply include them in the
+> string initially.  This allows converting to strlcat() or other methods
+> which strictly concatenate, rather than formatting.
+> 
+> Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 
-I don't think EINVAL is appropriate here. EOPNOTSUPP might be, or ENOENT,
-or EIO, or perhaps a few others.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-> +    /* Validate all parameters - Disallow reserved bits. */
-> +    if ( set_cppc->minimum > 255 ||
-> +         set_cppc->maximum > 255 ||
-> +         set_cppc->desired > 255 ||
-> +         set_cppc->energy_perf > 255 ||
-> +         set_cppc->set_params & ~XEN_SYSCTL_CPPC_SET_PARAM_MASK ||
-> +         set_cppc->activity_window & ~XEN_SYSCTL_CPPC_ACT_WINDOW_MASK )
+Nevertheless I wonder ...
 
-Nit: Parentheses again please around the operands of &.
+> --- a/xen/arch/x86/apic.c
+> +++ b/xen/arch/x86/apic.c
+> @@ -1401,14 +1401,14 @@ static void cf_check spurious_interrupt(struct cpu_user_regs *regs)
+>  static void cf_check error_interrupt(struct cpu_user_regs *regs)
+>  {
+>      static const char *const esr_fields[] = {
+> -        "Send CS error",
+> -        "Receive CS error",
+> -        "Send accept error",
+> -        "Receive accept error",
+> -        "Redirectable IPI",
+> -        "Send illegal vector",
+> -        "Received illegal vector",
+> -        "Illegal register address",
+> +        ", Send CS error",
+> +        ", Receive CS error",
+> +        ", Send accept error",
+> +        ", Receive accept error",
+> +        ", Redirectable IPI",
+> +        ", Send illegal vector",
+> +        ", Received illegal vector",
+> +        ", Illegal register address",
+>      };
+>      unsigned int v, v1;
+>      int i;
+> @@ -1423,7 +1423,7 @@ static void cf_check error_interrupt(struct cpu_user_regs *regs)
+>              smp_processor_id(), v , v1);
+>      for ( i = 7; i >= 0; --i )
+>          if ( v1 & (1 << i) )
+> -            printk(", %s", esr_fields[i]);
+> +            printk("%s", esr_fields[i]);
 
-> +        return -EINVAL;
-> +
-> +    /* Only allow values if params bit is set. */
-> +    if ( (!(set_cppc->set_params & XEN_SYSCTL_CPPC_SET_DESIRED) &&
-> +          set_cppc->desired) ||
-> +         (!(set_cppc->set_params & XEN_SYSCTL_CPPC_SET_MINIMUM) &&
-> +          set_cppc->minimum) ||
-> +         (!(set_cppc->set_params & XEN_SYSCTL_CPPC_SET_MAXIMUM) &&
-> +          set_cppc->maximum) ||
-> +         (!(set_cppc->set_params & XEN_SYSCTL_CPPC_SET_ENERGY_PERF) &&
-> +          set_cppc->energy_perf) ||
-> +         (!(set_cppc->set_params & XEN_SYSCTL_CPPC_SET_ACT_WINDOW) &&
-> +          set_cppc->activity_window) )
-> +        return -EINVAL;
-> +
-> +    /* Clear out activity window if lacking HW supported. */
-> +    if ( (set_cppc->set_params & XEN_SYSCTL_CPPC_SET_ACT_WINDOW) &&
-> +         !feature_hwp_activity_window ) {
-> +        set_cppc->set_params &= ~XEN_SYSCTL_CPPC_SET_ACT_WINDOW;
-> +        cleared_act_window = true;
-> +    }
-> +
-> +    /* Return if there is nothing to do. */
-> +    if ( set_cppc->set_params == 0 )
-> +        return cleared_act_window ? 0 : -EINVAL;
-
-Is it really necessary to return an error when there's nothing to do?
-We have various hypercalls which can degenerate to no-ops under
-certain conditions, and which simply return success then.
-
-> --- a/xen/drivers/acpi/pmstat.c
-> +++ b/xen/drivers/acpi/pmstat.c
-> @@ -400,6 +400,19 @@ static int set_cpufreq_para(struct xen_sysctl_pm_op *op)
->      return ret;
->  }
->  
-> +static int set_cpufreq_cppc(struct xen_sysctl_pm_op *op)
-> +{
-> +    struct cpufreq_policy *policy = per_cpu(cpufreq_cpu_policy, op->cpuid);
-> +
-> +    if ( !policy || !policy->governor )
-> +        return -EINVAL;
-> +
-> +    if ( !hwp_active() )
-> +        return -EINVAL;
-
-In both cases I again wonder in how far EINVAL is really appropriate.
-
-> --- a/xen/include/public/sysctl.h
-> +++ b/xen/include/public/sysctl.h
-> @@ -351,6 +351,68 @@ struct xen_cppc_para {
->      uint32_t activity_window;
->  };
->  
-> +/*
-> + * Set CPPC values.
-> + *
-> + * Configure the parameters for CPPC.  Set bits in set_params control which
-> + * values are applied.  If a bit is not set in set_params, the field must be
-> + * zero.
-> + *
-> + * For HWP specifically, values must be limited to 0-255 or within
-> + * XEN_SYSCTL_CPPC_ACT_WINDOW_MASK for activity window.  Set bits outside the
-> + * range will be returned as -EINVAL.
-> + *
-> + * Activity Window may not be supported by the hardware.  In that case, the
-> + * returned set_params will clear XEN_SYSCTL_CPPC_SET_ACT_WINDOW to indicate
-> + * that it was not applied - though the rest of the values will be applied.
-> + *
-> + * There are a set of presets along with individual fields.  Presets are
-> + * applied first, and then individual fields.  This allows customizing
-> + * a preset without having to specify every value.
-> + *
-> + * The preset options values are as follows:
-> + *
-> + * preset      | minimum | maxium  | energy_perf
-> + * ------------+---------+---------+----------------
-> + * powersave   | lowest  | lowest  | powersave (255)
-> + * ------------+---------+---------+----------------
-> + * balance     | lowest  | highest | balance (128)
-> + * ------------+---------+---------+----------------
-> + * performance | highest | highest | performance (0)
-> + *
-> + * desired and activity_window are set to 0, hardware selected.
-> + */
-> +struct xen_set_cppc_para {
-> +#define XEN_SYSCTL_CPPC_SET_MINIMUM              (1U << 0)
-> +#define XEN_SYSCTL_CPPC_SET_MAXIMUM              (1U << 1)
-> +#define XEN_SYSCTL_CPPC_SET_DESIRED              (1U << 2)
-> +#define XEN_SYSCTL_CPPC_SET_ENERGY_PERF          (1U << 3)
-> +#define XEN_SYSCTL_CPPC_SET_ACT_WINDOW           (1U << 4)
-> +#define XEN_SYSCTL_CPPC_SET_PRESET_MASK          0xf0000000
-> +#define XEN_SYSCTL_CPPC_SET_PRESET_NONE          0x00000000
-> +#define XEN_SYSCTL_CPPC_SET_PRESET_BALANCE       0x10000000
-> +#define XEN_SYSCTL_CPPC_SET_PRESET_POWERSAVE     0x20000000
-> +#define XEN_SYSCTL_CPPC_SET_PRESET_PERFORMANCE   0x30000000
-
-As corrections for the respective Misra rule are in the process of
-being merged, please add U suffixes here (at the very least on the
-_MASK).
+... whether the extra level of indirection (by using %s) is then still
+necessary: There are no % characters in any of the individual strings.
+Then again iirc this goes away anyway in the next patch ...
 
 Jan
 
