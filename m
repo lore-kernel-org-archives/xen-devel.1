@@ -4,40 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDBBEB64DD
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 13:13:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.563155.880191 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D9C8EB64DD
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 13:14:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.563150.880202 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJw7z-0005fa-SF; Thu, 13 Jul 2023 13:13:03 +0000
+	id 1qJw95-0006GQ-9d; Thu, 13 Jul 2023 13:14:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 563155.880191; Thu, 13 Jul 2023 13:13:03 +0000
+Received: by outflank-mailman (output) from mailman id 563150.880202; Thu, 13 Jul 2023 13:14:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJw7z-0005fT-PU; Thu, 13 Jul 2023 13:13:03 +0000
-Received: by outflank-mailman (input) for mailman id 563155;
- Thu, 13 Jul 2023 13:13:02 +0000
+	id 1qJw95-0006GJ-6o; Thu, 13 Jul 2023 13:14:11 +0000
+Received: by outflank-mailman (input) for mailman id 563150;
+ Thu, 13 Jul 2023 13:05:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0tL6=C7=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qJw7y-0005fK-FG
- for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 13:13:02 +0000
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20620.outbound.protection.outlook.com
- [2a01:111:f400:7e1a::620])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=MlyT=C7=pengutronix.de=ukl@srs-se1.protection.inumbo.net>)
+ id 1qJw14-00048d-Sv
+ for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 13:05:54 +0000
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+ [2001:67c:670:201:290:27ff:fe1d:cc33])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fd9ff272-217e-11ee-8611-37d641c3527e;
- Thu, 13 Jul 2023 15:13:00 +0200 (CEST)
-Received: from AS8PR04MB8788.eurprd04.prod.outlook.com (2603:10a6:20b:42f::21)
- by DU2PR04MB9114.eurprd04.prod.outlook.com (2603:10a6:10:2f5::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.24; Thu, 13 Jul
- 2023 13:12:58 +0000
-Received: from AS8PR04MB8788.eurprd04.prod.outlook.com
- ([fe80::cbc0:69aa:c9a2:198e]) by AS8PR04MB8788.eurprd04.prod.outlook.com
- ([fe80::cbc0:69aa:c9a2:198e%7]) with mapi id 15.20.6565.016; Thu, 13 Jul 2023
- 13:12:58 +0000
+ id fed1a7e7-217d-11ee-8611-37d641c3527e;
+ Thu, 13 Jul 2023 15:05:52 +0200 (CEST)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1qJvzH-0005FV-62; Thu, 13 Jul 2023 15:04:03 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1qJvyt-00E7bY-FX; Thu, 13 Jul 2023 15:03:39 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1qJvys-004Ym0-J0; Thu, 13 Jul 2023 15:03:38 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,141 +51,251 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd9ff272-217e-11ee-8611-37d641c3527e
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gdP+J5eNOns6j1+OWdZ2qY/7f7yVb+nzLnw4YYzoVcwdG5D/JJ6Y64YjDGMD3sBmFop6L/l/b0IdvKJEV/hLy1YkTNRiCQCFyl+YoSS7odxiASMtHZKFAHK0H4W8Nrtsp+Y3B7Ahl9+CcrNbTERXihVA6KAaeBtqif8+3JLvh1yBv9CL/3SaweN1jFmciIk789sUJvNlFHt26EkLTxM9nh/OvF7zOCTbmd80vRP+WTNg3Rx4EiGAugvbgFEMfYbxrjCkn3DZFn+Bzj0DaKktIXh/kKYaybS6k9sNk4rjXHoAOq9Gxvq+xFORjx9cqsrV6Tfc39PGB5iCk1UrTFJ/7A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=q0BYXk1Yk4nLEnI1bExbCgN5JYJ0yDm2Or9qYtttFtU=;
- b=U7+T5MsvHkkTJ2zz7WRjRftp3bV6xzWkBb0bEU2XU0uu1Pm8hMRTXRquctckEiGeT65knV08uWDGabQwq1/BzVC1m7MLYUMl1aS7s3oLF3r3fW1hVs/M74yoy6L4VktLdV/DRZA/WKHGXlI5u6QkixvHwbmhytiwBLnrD1PTJzLaFmuIkDjTwvL83/a6O4buN+abiVOZbOCdz5DFr550EfPqZWfbMlZ2OM1M8L5bplii1J/rfwOj8HjKE9zH6dDZgyQyhf6hh49a273U3ti79D05ItPY77gBAFJKJMx0tVlN9Hb6/eIGBObHee0Rh9iv1MZo4zby/kts0cRQg7lAhw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=q0BYXk1Yk4nLEnI1bExbCgN5JYJ0yDm2Or9qYtttFtU=;
- b=G5spflWqUE+vN3e2G+WYLqdTd3Xlwi3pGhPLWc5HLTV0NQhiBGrsORE/BlrrUKsa8l21d3SxCiHTkL0Bk63HyicSVtxtC248zqHHVjgMem6ekp7Fhyi3sNtAgJiDjJwHB60RgL4pZc6DtoxPdfN7laD/LyCd44AZuo/mUhfpUeKFVC49Q/P4P4jdb3KJgwOej8fo56P2gu4k2fnwsD2hVFWqT4yVGEXrm5fS3anv6Dz9yRzxVI5IJEoSs93NgaUN3tF6juD0iFfWbTXlOlTML5Oq0VwOG5HhVv1+uCYgEj+R8xWYj/IVxaCptCDbfCR1Mfk0ZblEqBst+amfR/g9fQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <3b16e1d8-acfb-8dd4-763b-57908ea6a2a1@suse.com>
-Date: Thu, 13 Jul 2023 15:12:55 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v3 2/3] x86/APIC: modify error_interrupt() to output using
- single printk()
-Content-Language: en-US
-To: Elliott Mitchell <ehem+xen@m5p.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, xen-devel@lists.xenproject.org
-References: <cover.1689191941.git.ehem+xen@m5p.com>
- <7771343b52e6769d7670ad73094f5276025a10fe.1689191941.git.ehem+xen@m5p.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <7771343b52e6769d7670ad73094f5276025a10fe.1689191941.git.ehem+xen@m5p.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0039.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:48::22) To AS8PR04MB8788.eurprd04.prod.outlook.com
- (2603:10a6:20b:42f::21)
+X-Inumbo-ID: fed1a7e7-217d-11ee-8611-37d641c3527e
+Date: Thu, 13 Jul 2023 15:03:37 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: Sean Paul <seanpaul@chromium.org>
+Cc: Jani Nikula <jani.nikula@intel.com>,
+	Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Xinliang Liu <xinliang.liu@linaro.org>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
+	Alexey Kodanev <aleksei.kodanev@bell-sw.com>,
+	dri-devel@lists.freedesktop.org,
+	Vandita Kulkarni <vandita.kulkarni@intel.com>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Arun R Murthy <arun.r.murthy@intel.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Liu Shixin <liushixin2@huawei.com>,
+	linux-samsung-soc@vger.kernel.org,
+	Samuel Holland <samuel@sholland.org>,
+	Matt Roper <matthew.d.roper@intel.com>,
+	Wenjing Liu <wenjing.liu@amd.com>,
+	Javier Martinez Canillas <javierm@redhat.com>,
+	Stanislav Lisovskiy <stanislav.lisovskiy@intel.com>,
+	Danilo Krummrich <dakr@redhat.com>,
+	NXP Linux Team <linux-imx@nxp.com>,
+	spice-devel@lists.freedesktop.org,
+	Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
+	linux-sunxi@lists.linux.dev, Stylon Wang <stylon.wang@amd.com>,
+	Tim Huang <Tim.Huang@amd.com>,
+	Suraj Kandpal <suraj.kandpal@intel.com>,
+	=?utf-8?B?QW5kcsOp?= Almeida <andrealmeid@igalia.com>,
+	Andi Shyti <andi.shyti@linux.intel.com>,
+	Yifan Zhang <yifan1.zhang@amd.com>, Leo Li <sunpeng.li@amd.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Lucas De Marchi <lucas.demarchi@intel.com>,
+	Inki Dae <inki.dae@samsung.com>, Hersen Wu <hersenxs.wu@amd.com>,
+	Jessica Zhang <quic_jesszhan@quicinc.com>,
+	Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
+	Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
+	=?utf-8?Q?=C5=81ukasz?= Bartosik <lb@semihalf.com>,
+	Radhakrishna Sripada <radhakrishna.sripada@intel.com>,
+	Andrew Jeffery <andrew@aj.id.au>,
+	Seung-Woo Kim <sw0312.kim@samsung.com>,
+	Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
+	kernel@pengutronix.de, Alex Deucher <alexander.deucher@amd.com>,
+	freedreno@lists.freedesktop.org,
+	Claudiu Beznea <claudiu.beznea@microchip.com>,
+	Zack Rusin <zackr@vmware.com>, Gerd Hoffmann <kraxel@redhat.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+	Mitul Golani <mitulkumar.ajitkumar.golani@intel.com>,
+	=?utf-8?B?Sm9zw6k=?= Roberto de Souza <jose.souza@intel.com>,
+	virtualization@lists.linux-foundation.org,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Yongqin Liu <yongqin.liu@linaro.org>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Fei Yang <fei.yang@intel.com>,
+	Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
+	David Lechner <david@lechnology.com>,
+	Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
+	"Jiri Slaby (SUSE)" <jirislaby@kernel.org>,
+	David Francis <David.Francis@amd.com>,
+	Aaron Liu <aaron.liu@amd.com>,
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+	Vinod Polimera <quic_vpolimer@quicinc.com>,
+	linux-rockchip@lists.infradead.org, Fangzhi Zuo <jerry.zuo@amd.com>,
+	Aurabindo Pillai <aurabindo.pillai@amd.com>,
+	VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+	Ben Skeggs <bskeggs@redhat.com>,
+	Jouni =?utf-8?B?SMO2Z2FuZGVy?= <jouni.hogander@intel.com>,
+	Dave Airlie <airlied@redhat.com>, linux-mips@vger.kernel.org,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	linux-arm-msm@vger.kernel.org,
+	Animesh Manna <animesh.manna@intel.com>,
+	linux-renesas-soc@vger.kernel.org,
+	Maxime Ripard <mripard@kernel.org>,
+	Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	linux-amlogic@lists.infradead.org, Evan Quan <evan.quan@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	linux-arm-kernel@lists.infradead.org, Sean Paul <sean@poorly.run>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+	Boris Brezillon <bbrezillon@kernel.org>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Qingqing Zhuo <qingqing.zhuo@amd.com>,
+	Sandy Huang <hjc@rock-chips.com>,
+	Swati Sharma <swati2.sharma@intel.com>,
+	John Stultz <jstultz@google.com>,
+	Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
+	Kyungmin Park <kyungmin.park@samsung.com>,
+	Drew Davenport <ddavenport@chromium.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Hawking Zhang <Hawking.Zhang@amd.com>,
+	Haneen Mohammed <hamohammed.sa@gmail.com>,
+	Anusha Srivatsa <anusha.srivatsa@intel.com>,
+	Dan Carpenter <error27@gmail.com>,
+	Karol Herbst <kherbst@redhat.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	linux-hyperv@vger.kernel.org, Stefan Agner <stefan@agner.ch>,
+	Melissa Wen <melissa.srw@gmail.com>,
+	=?utf-8?B?TWHDrXJh?= Canal <mairacanal@riseup.net>,
+	Luca Coelho <luciano.coelho@intel.com>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Andrzej Hajda <andrzej.hajda@intel.com>,
+	Likun Gao <Likun.Gao@amd.com>, Sam Ravnborg <sam@ravnborg.org>,
+	Alain Volmat <alain.volmat@foss.st.com>,
+	Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Deepak Rawat <drawat.floss@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+	Joel Stanley <joel@jms.id.au>,
+	Ankit Nautiyal <ankit.k.nautiyal@intel.com>,
+	Harry Wentland <harry.wentland@amd.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Alan Liu <haoping.liu@amd.com>, Philip Yang <Philip.Yang@amd.com>,
+	Lyude Paul <lyude@redhat.com>, intel-gfx@lists.freedesktop.org,
+	Alison Wang <alison.wang@nxp.com>,
+	Wolfram Sang <wsa+renesas@sang-engineering.com>,
+	Abhinav Kumar <quic_abhinavk@quicinc.com>,
+	Gustavo Sousa <gustavo.sousa@intel.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Mikko Perttunen <mperttunen@nvidia.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
+	Tomi Valkeinen <tomba@kernel.org>, Deepak R Varma <drv@mailo.com>,
+	"Pan, Xinhui" <Xinhui.Pan@amd.com>,
+	Biju Das <biju.das.jz@bp.renesas.com>,
+	Chia-I Wu <olvaffe@gmail.com>,
+	Konrad Dybcio <konrad.dybcio@linaro.org>,
+	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+	Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
+	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+	Khaled Almahallawy <khaled.almahallawy@intel.com>,
+	linux-stm32@st-md-mailman.stormreply.com,
+	Emma Anholt <emma@anholt.net>,
+	Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+	Imre Deak <imre.deak@intel.com>, Liviu Dudau <liviu.dudau@arm.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Roman Li <roman.li@amd.com>, Paul Cercueil <paul@crapouillou.net>,
+	Rob Clark <robdclark@gmail.com>,
+	Hamza Mahfooz <hamza.mahfooz@amd.com>,
+	David Airlie <airlied@gmail.com>, Marek Vasut <marex@denx.de>,
+	Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
+	xen-devel@lists.xenproject.org, Guchun Chen <guchun.chen@amd.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+	Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Uma Shankar <uma.shankar@intel.com>,
+	Mika Kahola <mika.kahola@intel.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Jiasheng Jiang <jiasheng@iscas.ac.cn>,
+	Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Vinod Govindapillai <vinod.govindapillai@intel.com>,
+	linux-tegra@vger.kernel.org,
+	Marek =?utf-8?B?T2zFocOhaw==?= <marek.olsak@amd.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	=?utf-8?Q?Joaqu=C3=ADn_Ignacio_Aramend=C3=ADa?= <samsagax@gmail.com>,
+	Melissa Wen <mwen@igalia.com>, Hans de Goede <hdegoede@redhat.com>,
+	linux-mediatek@lists.infradead.org,
+	Fabio Estevam <festevam@gmail.com>,
+	Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	David Tadokoro <davidbtadokoro@usp.br>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Orson Zhai <orsonzhai@gmail.com>, amd-gfx@lists.freedesktop.org,
+	Jyri Sarha <jyri.sarha@iki.fi>,
+	Yannick Fertre <yannick.fertre@foss.st.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+	Philippe Cornu <philippe.cornu@foss.st.com>,
+	Daniel Vetter <daniel@ffwll.ch>, Wayne Lin <Wayne.Lin@amd.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+	Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
+	Lucas Stach <l.stach@pengutronix.de>
+Subject: Re: [Freedreno] [PATCH RFC v1 00/52] drm/crtc: Rename struct
+ drm_crtc::dev to drm_dev
+Message-ID: <20230713130337.fd2l67r23g2irifx@pengutronix.de>
+References: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
+ <87fs5tgpvv.fsf@intel.com>
+ <CAOw6vbLO_UaXDbTCtAQJgthXOUMPqEV+c2MQhP-1DuK44OhGxw@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8788:EE_|DU2PR04MB9114:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8bfb5aee-867a-4d09-2cb3-08db83a2e0b6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	JLm8r/4UUj2bv2Tt/b7YEhW25GihVzptf4gYM8RqXeASxb0C9FIFTYp/qP07eskp+NSx4kgQQk540+xx27P5WWp9dHYflty3wPUvG8NGILVROFyg06CdxTzr4JWxX5UjhmmJH+4bT/GxdxAIxgjcKB4cTes45nc8LWRQC26+H1GAFYWQNEgGAVRCA/Rm61L9yotfPiBVCAxRMAkHuDu6BDLaAOxw+ulfOA/Wr0Q/IcreWQS2YEk7zItozecqiHCBXYQaaKenK0U3Yocyd5A1q06PgSKOEDpY83D6mz2gENdzbRQPT4YYBh2Msrfcpo4DJOReDW2h5zpqBxPyR6uKyv1BIap6gL/LCUf20NW1jKGXax961dFQDQU+LyFx4GmsjXwkN9437v5hCH8ThW5ppiM2y5TXYz51chrg8BryvAlQhU9fK2YjjrIlZd5THkkX3ZTfV/IXUkoiGtTzGqg8DrOp+4fahHtyuaFiVsC6hg8H5a0oVTt6AEfK4eTghnFuR2E4ssk4ShCBfiTzw8/xlWwnpocDoFnRYLpt3h0RojHCTXx6yOaMi6maxGgoIsY0ael1p3AMgfKe8EnHy4lbdSmj9eTvSqiPG1CYcYD7Qa/eiNn24YL7ARZMYpzuotWZT1oKFyIYtsQI3vBqdFox2w==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8788.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(346002)(376002)(396003)(136003)(39860400002)(366004)(451199021)(478600001)(31686004)(54906003)(66946007)(4326008)(2906002)(5660300002)(316002)(41300700001)(8676002)(6666004)(8936002)(66556008)(66476007)(6512007)(6486002)(26005)(6506007)(53546011)(38100700002)(186003)(2616005)(36756003)(86362001)(31696002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MGtHNHlDWTdDcHphV3poV1h2eUhJY2x4NkZMSXJGdzd0NTduYThlcGxOQy85?=
- =?utf-8?B?T1hxbzdQOXkyUXNvb0pMZ0xVQ3dVSFlvQytEZE1udUoyaTY0VWlhV1F2c2lr?=
- =?utf-8?B?NzllMHNrd2padWt4YXAwQ2ZEckErN25XTzVpR3B5WUtFendQRCt0RjhVRHd2?=
- =?utf-8?B?VTZPQ0o3R2NNQStyKzR2MUlGMWcxNjlUOGdtT2JHTEtacWpKdXY1dDg3YU9E?=
- =?utf-8?B?VWNROE9BZ3BxQm9yT3NDUWYvYnhxdnF4UU82UXNHTkRPWHpYSkJDdjNFcExU?=
- =?utf-8?B?Tm9HVnd0L3l5Sm1HUEFHczA5bzgzL2pkanBBRG9PMVY2MWg3YjExWWd6N0JH?=
- =?utf-8?B?SVpERG53ZUlEbGk2NkxyM3VXTnQrbE0vaDJ0ZlBlLzUrYm1FbGVZRGtzbGZs?=
- =?utf-8?B?Nm9RREZBZ1N0TENpYytlSTE1WHdHNUlKUVNKODR6WXNraWhqditjb1lsNUJr?=
- =?utf-8?B?aERWblNNbjZOMDBLNFNYTHdiMTRMd0dQYm85MThQbzBrZzBwTHNQY0JFNzNG?=
- =?utf-8?B?WWJieFcrbUlKRWhVVGx2N3czMGhyTTMyWTdtaUVMbnRlZURXbVBXNUptK2Jy?=
- =?utf-8?B?bjllVUJMUzhuUlNVN2MwL0pLWE5RaUpobHdBaW5TMktkemFVOFBsT0JYeEVw?=
- =?utf-8?B?ZjUzeGthZFZlTi90Y1Y3U2NSYWhnWnNXVDRqcTBBRnh0TWg5THIrVjZGcmR5?=
- =?utf-8?B?RzltT2wyUHhOL01lTm5NTE1aSTlEYlhSZU9LZkMvWURZb1NqSm1sbVRMRGRN?=
- =?utf-8?B?N3lZSVlCZUZHR0IwK2daM0RQTWlPL2pVR21xWEhFdlowWTBwL2EzTFk3ME1T?=
- =?utf-8?B?NCtYT2VsUG9VTy9mVit1TUtzbGw5ekEwNU5pMUJxL0kwM0Y1UTgrZXgyODI3?=
- =?utf-8?B?U0RFbWJ4TzB2bHZEY2Q5U0FYamc3UHladmRwcE5STmd5ZWpBd0N1cG9Na0VE?=
- =?utf-8?B?b3dTSWZ3cnM2b0xZVm9POVBCM1A1Z1JtQ2VtMkxOSXA1eXBrVFllYWdzcjJj?=
- =?utf-8?B?YzNnZm85QloyelVEblk1bi9WdTVzVVRGOU9kVWphRTN4WFZJcDJQbUVnQzZF?=
- =?utf-8?B?NndEeUFrK2ZScTQxc2V2N01EVitQelFwV0hZYVdvSGU3dTllK0RuN01pK1ND?=
- =?utf-8?B?eXRHbzRqTWFCWGk2SUNHOE9iOWUwRVdCWnpyRFBkYXppMXljZVhaenBVVGVj?=
- =?utf-8?B?TjdTWkRUTWRMUnV6WXkxc0hDUG5aVU9UczNHWlZ2U0hnamlteVJjTzdyWHpM?=
- =?utf-8?B?L2M4STdhL2RmdXUzK1FadDJDKzNXRWM5eGpBRDNTZ0hiS3pNTWJlUUVOVFVB?=
- =?utf-8?B?empIRFoxc2U2cjVoSlFFdEphVm5BSXpIWElFRGk4UHFYQ0NjMXVuSUJjaUhx?=
- =?utf-8?B?YlBZaE5IM3Z6RzkzaS8zempVbUZzb2xVUm1ndjY2aDZlREJuaW9tblorRTVL?=
- =?utf-8?B?ZnhETE10YmRleHdqbllUQjJPV21wSkJYSWVDMjZYOVJSZmZORUNISGtYN056?=
- =?utf-8?B?V0F1YzNZbWpwSE1lS2ZrVXFEY21sYWc4aEVXMmU1R0JaT0N2KyswZmVwWjVP?=
- =?utf-8?B?RWF4LzBxVWl5ZndNTkJiMnk4MExYcEVlbzY1OWs1UUlTUUxYc1lEaVZ4M2Ro?=
- =?utf-8?B?ODVlM3BhVjJISWtkbmJoWXowZEJLRjdhVlVLNGN4OUdHVHVBU0gzVGdwQ0ly?=
- =?utf-8?B?cEsybkgzMGZuWEZGWTZYRWcxTXIrM0ZwZEtpQXBPSmhhMTZWZEhHSi9VTEly?=
- =?utf-8?B?UTJpVWtCdFBTTVFtajhhTTRkSWhrN3piQ21sQk5jRXAwNDYvdWw1ZW9GMm91?=
- =?utf-8?B?OElsRDlDUFl1dUJoUTFObTVsYTRPMUEwWDJwQ2J5OUEzS2hzRUk1RHN0b05o?=
- =?utf-8?B?ZnRQZG85bURXQ0hObUR3VEhKVm5MVm1EQ3N4eW1ueFIrTm1sN0xkelJLRTlL?=
- =?utf-8?B?TnNxd2pNOTlXQi9wYjRka3BrQnBVSDFUa0pjd3FBSmxidUlWZlErUzlQT3di?=
- =?utf-8?B?ZWhaNEh2am8zYU9PODRFK1phcmJKKzFyME5vNXVTdW92MzVzeDRpMFVVMmJz?=
- =?utf-8?B?L0JMQVdlNWNSMzcxdFJlUWMzVzkzU1NnNUtkNlB1QXNLUUNKeVZVZ1lrVUNp?=
- =?utf-8?Q?3E/tOHt2WjX1ex8crOcIxvQKf?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8bfb5aee-867a-4d09-2cb3-08db83a2e0b6
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8788.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2023 13:12:58.1785
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LqYN+bL/2BNxidrJL6w3+pdhgFWBdhbuOUH56YjpNnxAtcaY2Wzlw5MmQUagzhX5K8VHJIl8MMFKUNaRKfXt0w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB9114
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="5p2oc3dth3vpey32"
+Content-Disposition: inline
+In-Reply-To: <CAOw6vbLO_UaXDbTCtAQJgthXOUMPqEV+c2MQhP-1DuK44OhGxw@mail.gmail.com>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: xen-devel@lists.xenproject.org
 
-On 17.03.2023 20:53, Elliott Mitchell wrote:
-> --- a/xen/arch/x86/apic.c
-> +++ b/xen/arch/x86/apic.c
-> @@ -1410,6 +1410,7 @@ static void cf_check error_interrupt(struct cpu_user_regs *regs)
->          ", Received illegal vector",
->          ", Illegal register address",
->      };
-> +    const char *entries[ARRAY_SIZE(esr_fields)];
->      unsigned int v, v1;
->      int i;
->  
-> @@ -1419,12 +1420,13 @@ static void cf_check error_interrupt(struct cpu_user_regs *regs)
->      v1 = apic_read(APIC_ESR);
->      ack_APIC_irq();
->  
-> -    printk(XENLOG_DEBUG "APIC error on CPU%u: %02x(%02x)",
-> -            smp_processor_id(), v , v1);
->      for ( i = 7; i >= 0; --i )
-> -        if ( v1 & (1 << i) )
-> -            printk("%s", esr_fields[i]);
-> -    printk("\n");
-> +        entries[i] = v1 & (1 << i) ? esr_fields[i] : "";
-> +    printk(XENLOG_DEBUG "APIC error on CPU%u: %02x(%02x)"
-> +        "%s%s%s%s%s%s%s%s" "\n",
-> +        smp_processor_id(), v , v1,
-> +        entries[7], entries[6],
-> +        entries[5], entries[4], entries[3], entries[2], entries[1], entries[0]);
 
-While pre-existing in both cases, two nits: There's a stray blank before one
-of the commas, and indentation is wrong too.
+--5p2oc3dth3vpey32
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Furthermore there's no reason to split the format string, especially not
-ahead of the \n. Plus line wrapping for the 8 entries[] references could
-also be done more evenly.
+hello Sean,
 
-Since these are all cosmetic, I guess I'll do adjustments while committing:
-Acked-by: Jan Beulich <jbeulich@suse.com>
+On Wed, Jul 12, 2023 at 02:31:02PM -0400, Sean Paul wrote:
+> I'd really prefer this patch (series or single) is not accepted. This
+> will cause problems for everyone cherry-picking patches to a
+> downstream kernel (LTS or distro tree). I usually wouldn't expect
+> sympathy here, but the questionable benefit does not outweigh the cost
+> IM[biased]O.
 
-Jan
+I agree that for backports this isn't so nice. However with the split
+approach (that was argumented against here) it's not soo bad. Patch #1
+(and similar changes for the other affected structures) could be
+trivially backported and with that it doesn't matter if you write dev or
+drm (or whatever name is chosen in the end); both work in the same way.
+
+But even with the one-patch-per-rename approach I'd consider the
+renaming a net win, because ease of understanding code has a big value.
+It's value is not so easy measurable as "conflicts when backporting",
+but it also matters in say two years from now, while backporting
+shouldn't be an issue then any more.
+
+Thanks for your input, best regards
+Uwe
+
+--=20
+Pengutronix e.K.                           | Uwe Kleine-K=F6nig            |
+Industrial Linux Solutions                 | https://www.pengutronix.de/ |
+
+--5p2oc3dth3vpey32
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmSv9igACgkQj4D7WH0S
+/k6RYAf+Kb/OGUhX7UtaJ7F8lhh4A5MpdV0+zb8XHPmzkL4JlVB9wEVJC/FPN8Ls
+d7eLHeVkntU9o11OhmTy2/1TYBfmcdz9eAte/ft+tAvD4DhDvUPySu9XvRYf1iov
+ksEZynnx3l/QMc+WWmWc+3w7jN+LPiTg3ONEV2zyBDlx1VjCHUZSbmUsEM3o8NnW
+2J2n4ghAkrSQ77hLo6RAshVhlbGx7jstgB7iuFZwsamrdDZSVscJBkclQtvSxLxI
+BleN75F50zT+Gn8wdseapq9FCEZhz/l9JcpAW1IabKTU9puwfuVyUkBQ3qEpRLGB
+GaDEUTla8XGImNxnIA6ElXmraX1ZqA==
+=qokw
+-----END PGP SIGNATURE-----
+
+--5p2oc3dth3vpey32--
 
