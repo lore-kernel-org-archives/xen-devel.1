@@ -4,42 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A9A5EB64DD
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 10:44:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.563075.880058 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF962EB64DD
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 10:48:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.563092.880068 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJtnX-00008R-1E; Thu, 13 Jul 2023 10:43:47 +0000
+	id 1qJts1-0000oY-If; Thu, 13 Jul 2023 10:48:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 563075.880058; Thu, 13 Jul 2023 10:43:47 +0000
+Received: by outflank-mailman (output) from mailman id 563092.880068; Thu, 13 Jul 2023 10:48:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJtnW-00008K-Um; Thu, 13 Jul 2023 10:43:46 +0000
-Received: by outflank-mailman (input) for mailman id 563075;
- Thu, 13 Jul 2023 10:06:11 +0000
+	id 1qJts1-0000oR-Fm; Thu, 13 Jul 2023 10:48:25 +0000
+Received: by outflank-mailman (input) for mailman id 563092;
+ Thu, 13 Jul 2023 10:48:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MlyT=C7=pengutronix.de=ukl@srs-se1.protection.inumbo.net>)
- id 1qJtD9-0002xw-SM
- for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 10:06:11 +0000
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
- [2001:67c:670:201:290:27ff:fe1d:cc33])
+ <SRS0=0yHZ=C7=amd.com=Xenia.Ragiadakou@srs-se1.protection.inumbo.net>)
+ id 1qJtrz-0000oL-Qq
+ for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 10:48:24 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20612.outbound.protection.outlook.com
+ [2a01:111:f400:fe5a::612])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e2a5e786-2164-11ee-b239-6b7b168915f2;
- Thu, 13 Jul 2023 12:06:08 +0200 (CEST)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.ext.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1qJtAp-0005VD-Rg; Thu, 13 Jul 2023 12:03:47 +0200
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
- by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1qJtAh-00E5Qb-W2; Thu, 13 Jul 2023 12:03:40 +0200
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1qJtAh-004WUt-8s; Thu, 13 Jul 2023 12:03:39 +0200
+ id c84fea2a-216a-11ee-b239-6b7b168915f2;
+ Thu, 13 Jul 2023 12:48:21 +0200 (CEST)
+Received: from DM5PR08CA0057.namprd08.prod.outlook.com (2603:10b6:4:60::46) by
+ CY5PR12MB6432.namprd12.prod.outlook.com (2603:10b6:930:38::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6588.20; Thu, 13 Jul 2023 10:48:17 +0000
+Received: from DM6NAM11FT050.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:4:60:cafe::a3) by DM5PR08CA0057.outlook.office365.com
+ (2603:10b6:4:60::46) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6565.32 via Frontend
+ Transport; Thu, 13 Jul 2023 10:48:17 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DM6NAM11FT050.mail.protection.outlook.com (10.13.173.111) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6588.20 via Frontend Transport; Thu, 13 Jul 2023 10:48:17 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Thu, 13 Jul
+ 2023 05:48:16 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Thu, 13 Jul
+ 2023 05:48:16 -0500
+Received: from 10.0.2.15 (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.23 via Frontend
+ Transport; Thu, 13 Jul 2023 05:48:14 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,288 +65,293 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e2a5e786-2164-11ee-b239-6b7b168915f2
-Date: Thu, 13 Jul 2023 12:03:39 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Xinliang Liu <xinliang.liu@linaro.org>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
-	Alexey Kodanev <aleksei.kodanev@bell-sw.com>,
-	dri-devel@lists.freedesktop.org,
-	Vandita Kulkarni <vandita.kulkarni@intel.com>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Arun R Murthy <arun.r.murthy@intel.com>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Liu Shixin <liushixin2@huawei.com>,
-	linux-samsung-soc@vger.kernel.org,
-	Samuel Holland <samuel@sholland.org>,
-	Matt Roper <matthew.d.roper@intel.com>,
-	Wenjing Liu <wenjing.liu@amd.com>,
-	Javier Martinez Canillas <javierm@redhat.com>,
-	Stanislav Lisovskiy <stanislav.lisovskiy@intel.com>,
-	Danilo Krummrich <dakr@redhat.com>,
-	NXP Linux Team <linux-imx@nxp.com>,
-	spice-devel@lists.freedesktop.org,
-	Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
-	linux-sunxi@lists.linux.dev, Stylon Wang <stylon.wang@amd.com>,
-	Tim Huang <Tim.Huang@amd.com>,
-	Suraj Kandpal <suraj.kandpal@intel.com>,
-	=?utf-8?B?QW5kcsOp?= Almeida <andrealmeid@igalia.com>,
-	Andi Shyti <andi.shyti@linux.intel.com>,
-	Yifan Zhang <yifan1.zhang@amd.com>, Leo Li <sunpeng.li@amd.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Lucas De Marchi <lucas.demarchi@intel.com>,
-	Inki Dae <inki.dae@samsung.com>, Hersen Wu <hersenxs.wu@amd.com>,
-	Jessica Zhang <quic_jesszhan@quicinc.com>,
-	Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
-	Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
-	=?utf-8?Q?=C5=81ukasz?= Bartosik <lb@semihalf.com>,
-	Radhakrishna Sripada <radhakrishna.sripada@intel.com>,
-	Andrew Jeffery <andrew@aj.id.au>,
-	Seung-Woo Kim <sw0312.kim@samsung.com>,
-	Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
-	kernel@pengutronix.de, Alex Deucher <alexander.deucher@amd.com>,
-	freedreno@lists.freedesktop.org,
-	Claudiu Beznea <claudiu.beznea@microchip.com>,
-	Zack Rusin <zackr@vmware.com>, Gerd Hoffmann <kraxel@redhat.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
-	Mitul Golani <mitulkumar.ajitkumar.golani@intel.com>,
-	=?utf-8?B?Sm9zw6k=?= Roberto de Souza <jose.souza@intel.com>,
-	virtualization@lists.linux-foundation.org,
-	Thierry Reding <thierry.reding@gmail.com>,
-	Yongqin Liu <yongqin.liu@linaro.org>,
-	Mario Limonciello <mario.limonciello@amd.com>,
-	Fei Yang <fei.yang@intel.com>,
-	Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
-	David Lechner <david@lechnology.com>,
-	Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
-	"Jiri Slaby (SUSE)" <jirislaby@kernel.org>,
-	David Francis <David.Francis@amd.com>,
-	Aaron Liu <aaron.liu@amd.com>,
-	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
-	Vinod Polimera <quic_vpolimer@quicinc.com>,
-	linux-rockchip@lists.infradead.org, Fangzhi Zuo <jerry.zuo@amd.com>,
-	Aurabindo Pillai <aurabindo.pillai@amd.com>,
-	VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
-	Ben Skeggs <bskeggs@redhat.com>,
-	Jouni =?utf-8?B?SMO2Z2FuZGVy?= <jouni.hogander@intel.com>,
-	Dave Airlie <airlied@redhat.com>, linux-mips@vger.kernel.org,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	linux-arm-msm@vger.kernel.org,
-	Animesh Manna <animesh.manna@intel.com>,
-	linux-renesas-soc@vger.kernel.org,
-	Maxime Ripard <mripard@kernel.org>,
-	Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
-	Biju Das <biju.das.jz@bp.renesas.com>,
-	linux-amlogic@lists.infradead.org, Evan Quan <evan.quan@amd.com>,
-	Michal Simek <michal.simek@amd.com>,
-	linux-arm-kernel@lists.infradead.org, Sean Paul <sean@poorly.run>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
-	Boris Brezillon <bbrezillon@kernel.org>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Qingqing Zhuo <qingqing.zhuo@amd.com>,
-	Sandy Huang <hjc@rock-chips.com>,
-	Swati Sharma <swati2.sharma@intel.com>,
-	John Stultz <jstultz@google.com>,
-	Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
-	Kyungmin Park <kyungmin.park@samsung.com>,
-	Drew Davenport <ddavenport@chromium.org>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Hawking Zhang <Hawking.Zhang@amd.com>,
-	Haneen Mohammed <hamohammed.sa@gmail.com>,
-	Anusha Srivatsa <anusha.srivatsa@intel.com>,
-	Dan Carpenter <error27@gmail.com>,
-	Karol Herbst <kherbst@redhat.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	linux-hyperv@vger.kernel.org, Stefan Agner <stefan@agner.ch>,
-	Melissa Wen <melissa.srw@gmail.com>,
-	=?utf-8?B?TWHDrXJh?= Canal <mairacanal@riseup.net>,
-	Luca Coelho <luciano.coelho@intel.com>,
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-	Andrzej Hajda <andrzej.hajda@intel.com>,
-	Likun Gao <Likun.Gao@amd.com>, Sam Ravnborg <sam@ravnborg.org>,
-	Alain Volmat <alain.volmat@foss.st.com>,
-	Xinwei Kong <kong.kongxinwei@hisilicon.com>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Deepak Rawat <drawat.floss@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
-	Joel Stanley <joel@jms.id.au>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Ankit Nautiyal <ankit.k.nautiyal@intel.com>,
-	Harry Wentland <harry.wentland@amd.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Alan Liu <haoping.liu@amd.com>, Philip Yang <Philip.Yang@amd.com>,
-	Lyude Paul <lyude@redhat.com>, intel-gfx@lists.freedesktop.org,
-	Alison Wang <alison.wang@nxp.com>,
-	Wolfram Sang <wsa+renesas@sang-engineering.com>,
-	Abhinav Kumar <quic_abhinavk@quicinc.com>,
-	Gustavo Sousa <gustavo.sousa@intel.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Mikko Perttunen <mperttunen@nvidia.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-	Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
-	Tomi Valkeinen <tomba@kernel.org>, Deepak R Varma <drv@mailo.com>,
-	"Pan, Xinhui" <Xinhui.Pan@amd.com>, Chia-I Wu <olvaffe@gmail.com>,
-	Konrad Dybcio <konrad.dybcio@linaro.org>,
-	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
-	Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
-	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
-	Khaled Almahallawy <khaled.almahallawy@intel.com>,
-	linux-stm32@st-md-mailman.stormreply.com,
-	Emma Anholt <emma@anholt.net>,
-	Chun-Kuang Hu <chunkuang.hu@kernel.org>,
-	Imre Deak <imre.deak@intel.com>, Liviu Dudau <liviu.dudau@arm.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Roman Li <roman.li@amd.com>, Paul Cercueil <paul@crapouillou.net>,
-	Rob Clark <robdclark@gmail.com>,
-	Hamza Mahfooz <hamza.mahfooz@amd.com>,
-	David Airlie <airlied@gmail.com>, Marek Vasut <marex@denx.de>,
-	Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
-	xen-devel@lists.xenproject.org, Guchun Chen <guchun.chen@amd.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
-	Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Jani Nikula <jani.nikula@intel.com>,
-	Uma Shankar <uma.shankar@intel.com>,
-	Mika Kahola <mika.kahola@intel.com>,
-	Jiasheng Jiang <jiasheng@iscas.ac.cn>,
-	Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Vinod Govindapillai <vinod.govindapillai@intel.com>,
-	linux-tegra@vger.kernel.org,
-	Marek =?utf-8?B?T2zFocOhaw==?= <marek.olsak@amd.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	=?utf-8?Q?Joaqu=C3=ADn_Ignacio_Aramend=C3=ADa?= <samsagax@gmail.com>,
-	Melissa Wen <mwen@igalia.com>, Hans de Goede <hdegoede@redhat.com>,
-	linux-mediatek@lists.infradead.org,
-	Fabio Estevam <festevam@gmail.com>,
-	Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	David Tadokoro <davidbtadokoro@usp.br>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Orson Zhai <orsonzhai@gmail.com>, amd-gfx@lists.freedesktop.org,
-	Jyri Sarha <jyri.sarha@iki.fi>,
-	Yannick Fertre <yannick.fertre@foss.st.com>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-	Philippe Cornu <philippe.cornu@foss.st.com>,
-	Daniel Vetter <daniel@ffwll.ch>, Wayne Lin <Wayne.Lin@amd.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-	Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
-	Lucas Stach <l.stach@pengutronix.de>
-Subject: Re: [PATCH RFC v1 00/52] drm/crtc: Rename struct drm_crtc::dev to
- drm_dev
-Message-ID: <20230713100339.a3ve3ixhuwqyrp4d@pengutronix.de>
-References: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
- <87fs5tgpvv.fsf@intel.com>
- <20230712161025.22op3gtzgujrhytb@pengutronix.de>
- <CAMuHMdWuvkxcj05OTfEn5f2p-6e71QEHVjSLWwNFRnR_=WEJVQ@mail.gmail.com>
+X-Inumbo-ID: c84fea2a-216a-11ee-b239-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WAyXxHTvSdqzH3BpepE0v7KHbb5IeAAm+Gfk8tEtBCCvBPuk1S4rLNaGDYbad3B7ZqggGGnLbcwlKI47esxc5xRZFniEAfR+OmqoWgyARwWJV48dpXM3DMW7mcRKOTKIKBGbJe7ZWcv8Z+QFSGnAEo46LPHcSF7CiMv+d5aiK3XEiRaIeG44Q2Tw7wjpzdypDREh3SfzGsJ39Kinc6zNBaYhRaX/iku5/Mh+CPycuYY1zddUfm5CcWg7fPafPriB9Og0sArAK8iQpyNb1k7NizMkzpPZ+7Do5EJoNKD2XFuUUw/GaKPqf/0PvJXaR82ycz6tjiMU4O6YZYAZDRSmtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JYJ17GsHkvf3wzt1JRROVoT4+2yfsQVmFXOSjlfBPiM=;
+ b=aog1K4YF/xyIbgR9DwskjEM7XnG0vfcvplVFUn3Wrik2SzLP7syjz5uZLYIaalvVKZviUSwjSruduWRcW7Jl7Haj0pI8aV44rey/jZTNR9XNtU04l9BcHEQ9ZREu+Jl1x23E0QEVhdt6NwxcEJjsjCUScl3mkiHU/nB1Z/lavJ9Ef7JpHYcy4/v/KOaxps2gJVcB5rkl7sDKCUmHes5pi76eiOIgQ9GHh/eIweeCy9L4fDngu+CUmUflFssBou/DEKPzqFqdBWs8L+i45BNIdGhBaK5RmzenFzByBvwtDrC5LBzqeHBhsupZbMZAUNVHjOZ9IO654LiWIqtJXGF8LA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=edk2.groups.io smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JYJ17GsHkvf3wzt1JRROVoT4+2yfsQVmFXOSjlfBPiM=;
+ b=aWbZB5YgnL1IRzWEGp7XaNyc8pr0hZHwb6wM3DXiCJWddthPJwrSjzZWuUDpYpHbNe081mjx5334xifux9B0NfEytofRjQPZzQBOEqahpcGCQ2FmQeD8BOTdgB7TCIDkj+VEGYA+Ztllm6lrSd5Qs+nm7Kku3K2MzNvGiu875ME=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: Xenia Ragiadakou <xenia.ragiadakou@amd.com>
+To: <devel@edk2.groups.io>
+CC: Xenia Ragiadakou <xenia.ragiadakou@amd.com>, Ard Biesheuvel
+	<ardb+tianocore@kernel.org>, Jiewen Yao <jiewen.yao@intel.com>, Jordan Justen
+	<jordan.l.justen@intel.com>, Gerd Hoffmann <kraxel@redhat.com>, "Anthony
+ Perard" <anthony.perard@citrix.com>, Julien Grall <julien@xen.org>,
+	<xen-devel@lists.xenproject.org>
+Subject: [PATCH] OvmfPkg/OvmfXen: Fix S3
+Date: Thu, 13 Jul 2023 13:47:12 +0300
+Message-ID: <c79e568e0d1c85bef9a2efc4c854de8f80ea1487.1689244868.git.xenia.ragiadakou@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="r55rq6gusfloss7g"
-Content-Disposition: inline
-In-Reply-To: <CAMuHMdWuvkxcj05OTfEn5f2p-6e71QEHVjSLWwNFRnR_=WEJVQ@mail.gmail.com>
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: xen-devel@lists.xenproject.org
-
-
---r55rq6gusfloss7g
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT050:EE_|CY5PR12MB6432:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f4bc75a-0e66-4e36-4d84-08db838eaaa2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	x5K9rcAeMqL33oug1dkj/87yvNCmnA3SLr4+mhtkujkITsdUWiIFCxohXMPSTmzDAACgt9YGpGuom5i/ExWNPyRkucbnqXaK1AZ5W7xytv+s4wsaUO90wyGhhtU7Ia5CJ7zAtq7KcEHvye35sHY31DxOmQvxYgXKSWLFBcxDsshFZwnJRCyVR+giFDppKD79sPi96kNZM8ufEXb6hJD579TPAF+PsQIX5lpAeeZB3To3wpV3YlMQWR3fCC/30Jrob1a0QwIdQ/FYYL/RsHoho8ZZpHtjvVY4+q60KURIudoA5+c6Musg3nAs6BCTR1ycQU313tv2bymZ9tQURQbqs1223sP4JnABLjX5LYNR6INltbRYnSpJKHIbvm61af4xzBBACOzJPpUDVpPWsHo7TTQHPsJbJ0HaFxbrFWPKinS073RG8jMO6m61vo8sry6ebL1n0uwNkaYzEAExD1C6XM+uW/qm9+lcrqNWH1g5CBbfBiomtQHpfVybJ4KD8NQoe6qQucJ0ty0kCyJJ3mH+naoSdxsQ6K4iochW1olCHt/VbJs9oorMJnaceqS+qQgLLyFr4xjRsjohARBsVGM/B+PQ7zlatzlYpC9prUGjYucB/kl4NIKERKgcO5KSLx5sf2tpQsna6gQJLRbh+CicBqtvEWG4xmTqhjZOR3IxvksNaf0Pxig0RiTgPUMhP4rtC6qizddPsRzIswqWq2lGdkDqH8g2r1uqWLJlqLh1s4itbi8OjFlDX+3cLddcmfPXjflA45j9Vdpmpsy5IxIotw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(376002)(396003)(346002)(39860400002)(136003)(451199021)(36840700001)(46966006)(40470700004)(478600001)(47076005)(83380400001)(86362001)(81166007)(70586007)(70206006)(6916009)(4326008)(16576012)(82740400003)(356005)(26005)(186003)(336012)(36860700001)(19627235002)(54906003)(2616005)(426003)(5660300002)(44832011)(8676002)(8936002)(40460700003)(316002)(2906002)(41300700001)(40480700001)(36756003)(82310400005)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2023 10:48:17.3634
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f4bc75a-0e66-4e36-4d84-08db838eaaa2
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DM6NAM11FT050.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6432
 
-On Thu, Jul 13, 2023 at 08:52:12AM +0200, Geert Uytterhoeven wrote:
-> Hi Uwe,
->=20
-> Let's add some fuel to keep the thread alive ;-)
->=20
-> On Wed, Jul 12, 2023 at 6:13=E2=80=AFPM Uwe Kleine-K=C3=B6nig
-> <u.kleine-koenig@pengutronix.de> wrote:
-> > On Wed, Jul 12, 2023 at 05:34:28PM +0300, Jani Nikula wrote:
-> > > I think this is an unnecessary change. In drm, a dev is usually a drm
-> > > device, i.e. struct drm_device *.
-> >
-> > Well, unless it's not. Prominently there is
-> >
-> >         struct drm_device {
-> >                 ...
-> >                 struct device *dev;
-> >                 ...
-> >         };
-> >
-> > which yields quite a few code locations using dev->dev which is
-> > IMHO unnecessary irritating:
-> >
-> >         $ git grep '\<dev->dev' v6.5-rc1 drivers/gpu/drm | wc -l
-> >         1633
->=20
-> I find that irritating as well...
->=20
-> Same for e.g. crtc->crtc.
->=20
-> Hence that's why I had sent patches to rename the base members in the
-> shmob_drm-specific subclasses of drm_{crtc,connector,plane} to "base".
-> https://lore.kernel.org/dri-devel/b3daca80f82625ba14e3aeaf2fca6dcefa056e4=
-7.1687423204.git.geert+renesas@glider.be
->=20
-> > Also the functions that deal with both a struct device and a struct
-> > drm_device often use "dev" for the struct device and then "ddev" for
-> > the drm_device (see for example amdgpu_device_get_pcie_replay_count()).
->=20
-> I guess you considered "drm_dev", because it is still a short name?
+Currently, resuming an S3 suspended guest results in the following
+assertion failure:
+ASSERT MdePkg/Library/PeiResourcePublicationLib/PeiResourcePublicationLib.c=
+(41): MemoryLength > 0
+This happens because some parts of the S3 suspend and resume paths
+are missing in order for S3 to work. For instance, the variables
+mS3AcpiReservedMemoryBase and mS3AcpiReservedMemoryBase are not
+initialized, regions that are used on S3 resume are either missing
+or not marked as ACPI NVS memory and can be corrupted by the OS.
+This patch adds the missing parts based heavily on the existing S3
+implementation of other virtual platforms.
 
-I considered drm_dev because it is still moderately short and a good
-approximation of "drm_device". Other than that the main driving force to
-pick "drm_dev" was that it's unique enough that I could have done
-s/\<drm_dev\>/$nameofchoice/ on the initial patch and get it mostly
-right.
+For S3 support, the provision of fw_cfg is required in order for
+suspend states to be retrieved.
 
-> Code dealing with platform devices usually uses "pdev" and "dev".
-> Same for PCI drivers (despite "pci_dev" being a short name).
+Another issue noticed is that when CalibrateLapicTimer() is called
+on S3 resume path, the shared info page is remapped to a different
+guest physical address. This remapping happens under guest's feet,
+so any subsequent attempt of the guest to access the shared info
+page results in nested page faults. This patch removes any local
+APIC timer initializion and calibration from S3 resume path.
 
-pci_dev and platform_device both typlically using pdev already annoyed
-me in the past. However less than drm_device *dev because for pci_dev +
-platform_device there is little overlap.
+Signed-off-by: Xenia Ragiadakou <xenia.ragiadakou@amd.com>
+---
+ OvmfPkg/XenPlatformPei/Fv.c               |  2 +-
+ OvmfPkg/XenPlatformPei/MemDetect.c        | 60 ++++++++++++++++++++++-
+ OvmfPkg/XenPlatformPei/Platform.c         | 11 ++++-
+ OvmfPkg/XenPlatformPei/Platform.h         |  2 +
+ OvmfPkg/XenPlatformPei/XenPlatformPei.inf |  7 +++
+ 5 files changed, 78 insertions(+), 4 deletions(-)
 
-> So my personal preference goes to "ddev".
-
-I sticked to "drm" for the new series. I think this provides less fuel.
-
-Best regards and thanks for your thoughts,
-Uwe
-
+diff --git a/OvmfPkg/XenPlatformPei/Fv.c b/OvmfPkg/XenPlatformPei/Fv.c
+index 871a2c1c5b..37ecb3cfee 100644
+--- a/OvmfPkg/XenPlatformPei/Fv.c
++++ b/OvmfPkg/XenPlatformPei/Fv.c
+@@ -37,7 +37,7 @@ PeiFvInitialization (
+   BuildMemoryAllocationHob (=0D
+     PcdGet32 (PcdOvmfPeiMemFvBase),=0D
+     PcdGet32 (PcdOvmfPeiMemFvSize),=0D
+-    EfiBootServicesData=0D
++    mS3Supported ? EfiACPIMemoryNVS : EfiBootServicesData=0D
+     );=0D
+ =0D
+   //=0D
+diff --git a/OvmfPkg/XenPlatformPei/MemDetect.c b/OvmfPkg/XenPlatformPei/Me=
+mDetect.c
+index e552e7a55e..1724a4988f 100644
+--- a/OvmfPkg/XenPlatformPei/MemDetect.c
++++ b/OvmfPkg/XenPlatformPei/MemDetect.c
+@@ -283,6 +283,19 @@ PublishPeiMemory (
+ =0D
+   LowerMemorySize =3D GetSystemMemorySizeBelow4gb ();=0D
+ =0D
++  //=0D
++  // If S3 is supported, then the S3 permanent PEI memory is placed next,=
+=0D
++  // downwards. Its size is primarily dictated by CpuMpPei. The formula be=
+low=0D
++  // is an approximation.=0D
++  //=0D
++  if (mS3Supported) {=0D
++    mS3AcpiReservedMemorySize =3D SIZE_512KB +=0D
++                                PcdGet32 (PcdCpuMaxLogicalProcessorNumber)=
+ *=0D
++                                PcdGet32 (PcdCpuApStackSize);=0D
++    mS3AcpiReservedMemoryBase =3D LowerMemorySize - mS3AcpiReservedMemoryS=
+ize;=0D
++    LowerMemorySize           =3D mS3AcpiReservedMemoryBase;=0D
++  }=0D
++=0D
+   if (mBootMode =3D=3D BOOT_ON_S3_RESUME) {=0D
+     MemoryBase =3D mS3AcpiReservedMemoryBase;=0D
+     MemorySize =3D mS3AcpiReservedMemorySize;=0D
+@@ -328,6 +341,51 @@ InitializeRamRegions (
+ {=0D
+   XenPublishRamRegions ();=0D
+ =0D
++  if (mS3Supported && (mBootMode !=3D BOOT_ON_S3_RESUME)) {=0D
++    //=0D
++    // This is the memory range that will be used for PEI on S3 resume=0D
++    //=0D
++    BuildMemoryAllocationHob (=0D
++      mS3AcpiReservedMemoryBase,=0D
++      mS3AcpiReservedMemorySize,=0D
++      EfiACPIMemoryNVS=0D
++      );=0D
++=0D
++    //=0D
++    // Cover the initial RAM area used as stack and temporary PEI heap.=0D
++    //=0D
++    // This is reserved as ACPI NVS so it can be used on S3 resume.=0D
++    //=0D
++    BuildMemoryAllocationHob (=0D
++      PcdGet32 (PcdOvmfSecPeiTempRamBase),=0D
++      PcdGet32 (PcdOvmfSecPeiTempRamSize),=0D
++      EfiACPIMemoryNVS=0D
++      );=0D
++=0D
++    //=0D
++    // SEC stores its table of GUIDed section handlers here.=0D
++    //=0D
++    BuildMemoryAllocationHob (=0D
++      PcdGet64 (PcdGuidedExtractHandlerTableAddress),=0D
++      PcdGet32 (PcdGuidedExtractHandlerTableSize),=0D
++      EfiACPIMemoryNVS=0D
++      );=0D
++=0D
++ #ifdef MDE_CPU_X64=0D
++    //=0D
++    // Reserve the initial page tables built by the reset vector code.=0D
++    //=0D
++    // Since this memory range will be used by the Reset Vector on S3=0D
++    // resume, it must be reserved as ACPI NVS.=0D
++    //=0D
++    BuildMemoryAllocationHob (=0D
++      (EFI_PHYSICAL_ADDRESS)(UINTN)PcdGet32 (PcdOvmfSecPageTablesBase),=0D
++      (UINT64)(UINTN)PcdGet32 (PcdOvmfSecPageTablesSize),=0D
++      EfiACPIMemoryNVS=0D
++      );=0D
++ #endif=0D
++  }=0D
++=0D
+   if (mBootMode !=3D BOOT_ON_S3_RESUME) {=0D
+     //=0D
+     // Reserve the lock box storage area=0D
+@@ -346,7 +404,7 @@ InitializeRamRegions (
+     BuildMemoryAllocationHob (=0D
+       (EFI_PHYSICAL_ADDRESS)(UINTN)PcdGet32 (PcdOvmfLockBoxStorageBase),=0D
+       (UINT64)(UINTN)PcdGet32 (PcdOvmfLockBoxStorageSize),=0D
+-      EfiBootServicesData=0D
++      mS3Supported ? EfiACPIMemoryNVS : EfiBootServicesData=0D
+       );=0D
+   }=0D
+ }=0D
+diff --git a/OvmfPkg/XenPlatformPei/Platform.c b/OvmfPkg/XenPlatformPei/Pla=
+tform.c
+index c3fdf3d0b8..1b074cff33 100644
+--- a/OvmfPkg/XenPlatformPei/Platform.c
++++ b/OvmfPkg/XenPlatformPei/Platform.c
+@@ -60,6 +60,8 @@ UINT16  mHostBridgeDevId;
+ =0D
+ EFI_BOOT_MODE  mBootMode =3D BOOT_WITH_FULL_CONFIGURATION;=0D
+ =0D
++BOOLEAN  mS3Supported =3D FALSE;=0D
++=0D
+ VOID=0D
+ AddIoMemoryBaseSizeHob (=0D
+   EFI_PHYSICAL_ADDRESS  MemoryBase,=0D
+@@ -350,6 +352,11 @@ BootModeInitialization (
+ =0D
+   if (CmosRead8 (0xF) =3D=3D 0xFE) {=0D
+     mBootMode =3D BOOT_ON_S3_RESUME;=0D
++    if (!mS3Supported) {=0D
++      DEBUG ((DEBUG_ERROR, "ERROR: S3 not supported\n"));=0D
++      ASSERT (FALSE);=0D
++      CpuDeadLoop ();=0D
++    }=0D
+   }=0D
+ =0D
+   CmosWrite8 (0xF, 0x00);=0D
+@@ -463,6 +470,7 @@ InitializeXenPlatform (
+   //=0D
+   if (QemuFwCfgS3Enabled ()) {=0D
+     DEBUG ((DEBUG_INFO, "S3 support was detected on QEMU\n"));=0D
++    mS3Supported =3D TRUE;=0D
+     Status =3D PcdSetBoolS (PcdAcpiS3Enable, TRUE);=0D
+     ASSERT_EFI_ERROR (Status);=0D
+   }=0D
+@@ -481,9 +489,8 @@ InitializeXenPlatform (
+ =0D
+   InitializeRamRegions ();=0D
+ =0D
+-  CalibrateLapicTimer ();=0D
+-=0D
+   if (mBootMode !=3D BOOT_ON_S3_RESUME) {=0D
++    CalibrateLapicTimer ();=0D
+     ReserveEmuVariableNvStore ();=0D
+     PeiFvInitialization ();=0D
+     MemMapInitialization ();=0D
+diff --git a/OvmfPkg/XenPlatformPei/Platform.h b/OvmfPkg/XenPlatformPei/Pla=
+tform.h
+index 7b4de128e7..fda66747cc 100644
+--- a/OvmfPkg/XenPlatformPei/Platform.h
++++ b/OvmfPkg/XenPlatformPei/Platform.h
+@@ -139,4 +139,6 @@ extern UINT8  mPhysMemAddressWidth;
+ =0D
+ extern UINT16  mHostBridgeDevId;=0D
+ =0D
++extern BOOLEAN  mS3Supported;=0D
++=0D
+ #endif // _PLATFORM_PEI_H_INCLUDED_=0D
+diff --git a/OvmfPkg/XenPlatformPei/XenPlatformPei.inf b/OvmfPkg/XenPlatfor=
+mPei/XenPlatformPei.inf
+index 20c27ff34b..a359cf60ca 100644
+--- a/OvmfPkg/XenPlatformPei/XenPlatformPei.inf
++++ b/OvmfPkg/XenPlatformPei/XenPlatformPei.inf
+@@ -69,9 +69,13 @@
+   gUefiOvmfPkgTokenSpaceGuid.PcdOvmfPeiMemFvSize=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvBase=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvSize=0D
++  gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPeiTempRamBase=0D
++  gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPeiTempRamSize=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesBase=0D
++  gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesSize=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdOvmfLockBoxStorageBase=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdOvmfLockBoxStorageSize=0D
++  gUefiOvmfPkgTokenSpaceGuid.PcdGuidedExtractHandlerTableSize=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdOvmfHostBridgePciDevId=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdPciIoBase=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdPciIoSize=0D
+@@ -80,6 +84,7 @@
+   gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Base=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Size=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdQ35TsegMbytes=0D
++  gEfiMdePkgTokenSpaceGuid.PcdGuidedExtractHandlerTableAddress=0D
+   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiS3Enable=0D
+   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize=0D
+   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvStoreReserved=0D
+@@ -89,6 +94,8 @@
+   gEfiMdePkgTokenSpaceGuid.PcdFSBClock=0D
+   gEfiSecurityPkgTokenSpaceGuid.PcdOptionRomImageVerificationPolicy=0D
+   gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress=0D
++  gUefiCpuPkgTokenSpaceGuid.PcdCpuApStackSize=0D
++  gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber=0D
+ =0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdXenPvhStartOfDayStructPtr=0D
+   gUefiOvmfPkgTokenSpaceGuid.PcdXenPvhStartOfDayStructPtrSize=0D
 --=20
-Pengutronix e.K.                           | Uwe Kleine-K=C3=B6nig         =
-   |
-Industrial Linux Solutions                 | https://www.pengutronix.de/ |
+2.34.1
 
---r55rq6gusfloss7g
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmSvy/oACgkQj4D7WH0S
-/k4Sjgf/S9rhd9EUi1FPWVc+CvaTZE8MfgLnoSUtdUSBBTwMois7UyHR7Le2pcT8
-nnC4R7NI8fo5mVcNuPc8tU8wwm/qtM6iRRfrPkx4mefnVwh+eg5AnkzNGDgo7IGq
-s6wGtKn7VWysrV1LV+fCgmL1Tb/CIkawX8hIvgpLnuXpyeQP4HrYFNu6i1evGJ5/
-mQiWx6HCN+8HpAIFOwC0TIleVN/MxUZKW0cKcl9jWdRO+HYz6yRJtaipU6I3v4CN
-foFppbbIUOpFDstiqGWJm9Bh5dt/o3gF8kS90ZvOVqCZuHFC+lPLX3kcXIDhos1Y
-LuJHug8FRIi/8Js5JUXPzf5Melun0g==
-=EIdq
------END PGP SIGNATURE-----
-
---r55rq6gusfloss7g--
 
