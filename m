@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06F86C001DE
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 15:24:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.563235.880362 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BB0C0015E
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Jul 2023 15:25:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.563242.880382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJyBH-0003BO-QS; Thu, 13 Jul 2023 15:24:35 +0000
+	id 1qJyBj-0003zI-9B; Thu, 13 Jul 2023 15:25:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 563235.880362; Thu, 13 Jul 2023 15:24:35 +0000
+Received: by outflank-mailman (output) from mailman id 563242.880382; Thu, 13 Jul 2023 15:25:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qJyBH-0003BH-Ne; Thu, 13 Jul 2023 15:24:35 +0000
-Received: by outflank-mailman (input) for mailman id 563235;
- Thu, 13 Jul 2023 15:24:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qJyBj-0003zB-5o; Thu, 13 Jul 2023 15:25:03 +0000
+Received: by outflank-mailman (input) for mailman id 563242;
+ Thu, 13 Jul 2023 15:25:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9mYz=C7=huaweicloud.com=petrtesarik@srs-se1.protection.inumbo.net>)
- id 1qJyBG-0003BB-Gv
- for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 15:24:34 +0000
-Received: from frasgout11.his.huawei.com (unknown [14.137.139.23])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5c549fba-2191-11ee-b239-6b7b168915f2;
- Thu, 13 Jul 2023 17:24:30 +0200 (CEST)
-Received: from mail02.huawei.com (unknown [172.18.147.227])
- by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4R1ymK5CXbz9xGgh
- for <xen-devel@lists.xenproject.org>; Thu, 13 Jul 2023 23:13:21 +0800 (CST)
+ id 1qJyBi-0003b5-IK
+ for xen-devel@lists.xenproject.org; Thu, 13 Jul 2023 15:25:02 +0000
+Received: from frasgout13.his.huawei.com (unknown [14.137.139.46])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6d35db2d-2191-11ee-8611-37d641c3527e;
+ Thu, 13 Jul 2023 17:24:59 +0200 (CEST)
+Received: from mail02.huawei.com (unknown [172.18.147.229])
+ by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4R1ymw4VCSz9xGn0
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Jul 2023 23:13:52 +0800 (CST)
 Received: from A2101119013HW2.china.huawei.com (unknown [10.81.218.161])
- by APP1 (Coremail) with SMTP id LxC2BwA3k94BF7BkxG6BBA--.7207S2;
- Thu, 13 Jul 2023 16:24:02 +0100 (CET)
+ by APP1 (Coremail) with SMTP id LxC2BwA3k94BF7BkxG6BBA--.7207S4;
+ Thu, 13 Jul 2023 16:24:31 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c549fba-2191-11ee-b239-6b7b168915f2
+X-Inumbo-ID: 6d35db2d-2191-11ee-8611-37d641c3527e
 From: Petr Tesarik <petrtesarik@huaweicloud.com>
 To: Stefano Stabellini <sstabellini@kernel.org>,
 	Russell King <linux@armlinux.org.uk>,
@@ -77,257 +77,191 @@ To: Stefano Stabellini <sstabellini@kernel.org>,
 Cc: Roberto Sassu <roberto.sassu@huaweicloud.com>,
 	Kefeng Wang <wangkefeng.wang@huawei.com>,
 	petr@tesarici.cz
-Subject: [PATCH v4 0/8] Allow dynamic allocation of software IO TLB bounce buffers
-Date: Thu, 13 Jul 2023 17:23:11 +0200
-Message-Id: <cover.1689261692.git.petr.tesarik.ext@huawei.com>
+Subject: [PATCH v4 2/8] swiotlb: add documentation and rename swiotlb_do_find_slots()
+Date: Thu, 13 Jul 2023 17:23:13 +0200
+Message-Id: <11826bfbc148771ab36d0b485558aa52cbdd204f.1689261692.git.petr.tesarik.ext@huawei.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1689261692.git.petr.tesarik.ext@huawei.com>
+References: <cover.1689261692.git.petr.tesarik.ext@huawei.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:LxC2BwA3k94BF7BkxG6BBA--.7207S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Wr1Dtw1rJr47Aw4kKrykZrb_yoWfCrW8pF
-	WrKryxtF4qqryfAwn7Ca18GFyrKa1kGry5GrWFvryrur13Cr1j93WktayFqFyUGrWIvF1j
-	qFyYvw13uw1DZ3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUBl14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
-	6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
-	0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
-	6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
-	0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
-	8cxan2IY04v7MxkF7I0En4kS14v26r1q6r43MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20x
-	vY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I
-	3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Wrv_Gr1UMIIYrxkI7VAKI48JMI
-	IF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
-	0xvE42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I
-	8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUjmFAJUUUUU==
+X-CM-TRANSID:LxC2BwA3k94BF7BkxG6BBA--.7207S4
+X-Coremail-Antispam: 1UD129KBjvJXoW3GrWfGF4UuFy8tF1xZF1kKrg_yoW7Zw4rpF
+	48KFn8tFZ8Jr1xC39Fka18uF1S9w4kK347uFWavryF9rnxJr9agFyvyrW5Xa4rJFWxuF4U
+	Ja4avr48GF45Xr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUQv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+	x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+	Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+	A2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
+	M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
+	v20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
+	F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
+	IY04v7MxkF7I0En4kS14v26r1q6r43MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0E
+	wIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E74
+	80Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Wrv_Gr1UMIIYrxkI7VAKI48JMIIF0xvE
+	2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6x
+	AIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY
+	1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUa2NtUUUUU=
 X-CM-SenderInfo: hshw23xhvd2x3n6k3tpzhluzxrxghudrp/
 X-CFilter-Loop: Reflected
 
 From: Petr Tesarik <petr.tesarik.ext@huawei.com>
 
-Motivation
-==========
+Add some kernel-doc comments and move the existing documentation of struct
+io_tlb_slot to its correct location. The latter was forgotten in commit
+942a8186eb445 ("swiotlb: move struct io_tlb_slot to swiotlb.c").
 
-The software IO TLB was designed with these assumptions:
+Use the opportunity to give swiotlb_do_find_slots() a more descriptive
+name, which makes it clear how it differs from swiotlb_find_slots().
 
-1) It would not be used much. Small systems (little RAM) don't need it, and
-   big systems (lots of RAM) would have modern DMA controllers and an IOMMU
-   chip to handle legacy devices.
-2) A small fixed memory area (64 MiB by default) is sufficient to
-   handle the few cases which require a bounce buffer.
-3) 64 MiB is little enough that it has no impact on the rest of the
-   system.
-4) Bounce buffers require large contiguous chunks of low memory. Such
-   memory is precious and can be allocated only early at boot.
+Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
+---
+ include/linux/swiotlb.h | 15 +++++++---
+ kernel/dma/swiotlb.c    | 61 +++++++++++++++++++++++++++++++++++++----
+ 2 files changed, 66 insertions(+), 10 deletions(-)
 
-It turns out they are not always true:
-
-1) Embedded systems may have more than 4GiB RAM but no IOMMU and legacy
-   32-bit peripheral busses and/or DMA controllers.
-2) CoCo VMs use bounce buffers for all I/O but may need substantially more
-   than 64 MiB.
-3) Embedded developers put as many features as possible into the available
-   memory. A few dozen "missing" megabytes may limit what features can be
-   implemented.
-4) If CMA is available, it can allocate large continuous chunks even after
-   the system has run for some time.
-
-Goals
-=====
-
-The goal of this work is to start with a small software IO TLB at boot and
-expand it later when/if needed.
-
-Design
-======
-
-This version of the patch series retains the current slot allocation
-algorithm with multiple areas to reduce lock contention, but additional
-slots can be added when necessary.
-
-These alternatives have been considered:
-
-- Allocate and free buffers as needed using direct DMA API. This works
-  quite well, except in CoCo VMs where each allocation/free requires
-  decrypting/encrypting memory, which is a very expensive operation.
-
-- Allocate a very large software IO TLB at boot, but allow to migrate pages
-  to/from it (like CMA does). For systems with CMA, this would mean two big
-  allocations at boot. Finding the balance between CMA, SWIOTLB and rest of
-  available RAM can be challenging. More importantly, there is no clear
-  benefit compared to allocating SWIOTLB memory pools from the CMA.
-
-Implementation Constraints
-==========================
-
-These constraints have been taken into account:
-
-1) Minimize impact on devices which do not benefit from the change.
-2) Minimize the number of memory decryption/encryption operations.
-3) Avoid contention on a lock or atomic variable to preserve parallel
-   scalability.
-
-Additionally, the software IO TLB code is also used to implement restricted
-DMA pools. These pools are restricted to a pre-defined physical memory
-region and must not use any other memory. In other words, dynamic
-allocation of memory pools must be disabled for restricted DMA pools.
-
-Data Structures
-===============
-
-The existing struct io_tlb_mem is the central type for a SWIOTLB allocator,
-but it now contains multiple memory pools::
-
-  io_tlb_mem
-  +---------+   io_tlb_pool
-  | SWIOTLB | 	+-------+   +-------+   +-------+
-  |allocator|-->|default|-->|dynamic|-->|dynamic|-->...
-  |    	    |  	|memory |   |memory |   |memory |
-  +---------+ 	| pool  |   | pool  |   | pool  |
-	      	+-------+   +-------+   +-------+
-
-The allocator structure contains global state (such as flags and counters)
-and structures needed to schedule new allocations. Each memory pool
-contains the actual buffer slots and metadata. The first memory pool in the
-list is the default memory pool allocated statically at early boot.
-
-New memory pools are allocated from a kernel worker thread. That's because
-bounce buffers are allocated when mapping a DMA buffer, which may happen in
-interrupt context where large atomic allocations would probably fail.
-Allocation from process context is much more likely to succeed, especially
-if it can use CMA.
-
-Nonetheless, the onset of a load spike may fill up the SWIOTLB before the
-worker has a chance to run. In that case, try to allocate a small transient
-memory pool to accommodate the request. If memory is encrypted and the
-device cannot do DMA to encrypted memory, this buffer is allocated from the
-coherent atomic DMA memory pool. Reducing the size of SWIOTLB may therefore
-require increasing the size of the coherent pool with the "coherent_pool"
-command-line parameter.
-
-Performance
-===========
-
-All testing compared a vanilla v6.4-rc6 kernel with a fully patched
-kernel. The kernel was booted with "swiotlb=force" to allow stress-testing
-the software IO TLB on a high-performance device that would otherwise not
-need it. CONFIG_DEBUG_FS was set to 'y' to match the configuration of
-popular distribution kernels; it is understood that parallel workloads
-suffer from contention on the recently added debugfs atomic counters.
-
-These benchmarks were run:
-
-- small: single-threaded I/O of 4 KiB blocks,
-- big: single-threaded I/O of 64 KiB blocks,
-- 4way: 4-way parallel I/O of 4 KiB blocks.
-
-In all tested cases, the default 64 MiB SWIOTLB would be sufficient (but
-wasteful). The "default" pair of columns shows performance impact when
-booted with 64 MiB SWIOTLB (i.e. current state). The "growing" pair of
-columns shows the impact when booted with a 1 MiB initial SWIOTLB, which
-grew to 5 MiB at run time. The "var" column in the tables below is the
-coefficient of variance over 5 runs of the test, the "diff" column is the
-difference in read-write I/O bandwidth (MiB/s). The very first column is
-the coefficient of variance in the results of the base unpatched kernel.
-
-First, on an x86 VM against a QEMU virtio SATA driver backed by a RAM-based
-block device on the host:
-
-	base	   default	   growing
-	var	var	diff	var	diff
-small	1.96%	0.47%	-1.5%	0.52%	-2.2%
-big	2.03%	1.35%	+0.9%	2.22%	+2.9%
-4way	0.80%	0.45%	-0.7%	1.22%	<0.1%
-
-Second, on a Raspberry Pi4 with 8G RAM and a class 10 A1 microSD card:
-
-	base	   default	   growing
-	var	var	diff	var	diff
-small	1.09%	1.69%	+0.5%	2.14%	-0.2%
-big	0.03%	0.28%	-0.5%	0.03%	-0.1%
-4way	5.15%	2.39%	+0.2%	0.66%	<0.1%
-
-Third, on a CoCo VM. This was a bigger system, so I also added a 24-thread
-parallel I/O test:
-
-	base	   default	   growing
-	var	var	diff	var	diff
-small	2.41%	6.02%	+1.1%	10.33%	+6.7%
-big	9.20%	2.81%	-0.6%	16.84%	-0.2%
-4way	0.86%	2.66%	-0.1%	 2.22%	-4.9%
-24way	3.19%	6.19%	+4.4%	 4.08%	-5.9%
-
-Note the increased variance of the CoCo VM, although the host was not
-otherwise loaded. These are caused by the first run, which includes the
-overhead of allocating additional bounce buffers and sharing them with the
-hypervisor. The system was not rebooted between successive runs.
-
-Parallel tests suffer from a reduced number of areas in the dynamically
-allocated memory pools. This can be improved by allocating a larger pool
-from CMA (not implemented in this series yet).
-
-I have no good explanation for the increase in performance of the
-24-thread I/O test with the default (non-growing) memory pool. Although the
-difference is within variance, it seems to be real. The average bandwidth
-is consistently above that of the unpatched kernel.
-
-To sum it up:
-
-- All workloads benefit from reduced memory footprint.
-- No performance regressions have been observed with the default size of
-  the software IO TLB.
-- Most workloads retain their former performance even if the software IO
-  TLB grows at run time.
-
-Changelog
-=========
-
-Changes from v3:
-- Provide swiotlb_is_allocated() instead of extending swiotlb_is_active().
-- Do not grow SWIOTLB if its address has been queried (affects Octeon).
-- Do not grow SWIOTLB if a remap function is used (affects Xen PV).
-- Use dma_mask instead of coherent_dma_mask.
-- Replace complex ternary operators with if-else blocks.
-
-Changes from v2:
-- Complete rewrite using dynamically allocated memory pools rather
-  than a list of individual buffers
-- Depend on other SWIOTLB fixes (already sent)
-- Fix Xen and MIPS Octeon builds
-
-Changes from RFC:
-- Track dynamic buffers per device instead of per swiotlb
-- Use a linked list instead of a maple tree
-- Move initialization of swiotlb fields of struct device to a
-  helper function
-- Rename __lookup_dyn_slot() to lookup_dyn_slot_locked()
-- Introduce per-device flag if dynamic buffers are in use
-- Add one more user of DMA_ATTR_MAY_SLEEP
-- Add kernel-doc comments for new (and some old) code
-- Properly escape '*' in dma-attributes.rst
-
-Petr Tesarik (8):
-  swiotlb: make io_tlb_default_mem local to swiotlb.c
-  swiotlb: add documentation and rename swiotlb_do_find_slots()
-  swiotlb: separate memory pool data from other allocator data
-  swiotlb: add a flag whether a SWIOTLB is allowed to grow
-  swiotlb: if swiotlb is full, fall back to a transient memory pool
-  swiotlb: determine potential physical address limit
-  swiotlb: allocate a new memory pool when existing pools are full
-  swiotlb: search the software IO TLB only if a device makes use of it
-
- arch/arm/xen/mm.c           |   2 +-
- arch/mips/pci/pci-octeon.c  |   2 +-
- arch/x86/kernel/pci-dma.c   |   2 +-
- drivers/base/core.c         |   4 +-
- drivers/xen/swiotlb-xen.c   |   2 +-
- include/linux/device.h      |   8 +-
- include/linux/dma-mapping.h |   2 +
- include/linux/swiotlb.h     | 111 +++++--
- kernel/dma/direct.c         |   2 +-
- kernel/dma/swiotlb.c        | 605 ++++++++++++++++++++++++++++++++----
- 10 files changed, 643 insertions(+), 97 deletions(-)
-
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index 07216af59e93..39313c3a791a 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -76,10 +76,6 @@ dma_addr_t swiotlb_map(struct device *dev, phys_addr_t phys,
+  * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
+  *		@end. For default swiotlb, this is command line adjustable via
+  *		setup_io_tlb_npages.
+- * @list:	The free list describing the number of free entries available
+- *		from each index.
+- * @orig_addr:	The original address corresponding to a mapped entry.
+- * @alloc_size:	Size of the allocated buffer.
+  * @debugfs:	The dentry to debugfs.
+  * @late_alloc:	%true if allocated using the page allocator
+  * @force_bounce: %true if swiotlb bouncing is forced
+@@ -111,6 +107,17 @@ struct io_tlb_mem {
+ #endif
+ };
+ 
++/**
++ * is_swiotlb_buffer() - check if a physical address belongs to a swiotlb
++ * @dev:        Device which has mapped the buffer.
++ * @paddr:      Physical address within the DMA buffer.
++ *
++ * Check if @paddr points into a bounce buffer.
++ *
++ * Return:
++ * * %true if @paddr points into a bounce buffer
++ * * %false otherwise
++ */
+ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
+ {
+ 	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 873b077d7e37..01161d040639 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -62,6 +62,13 @@
+ 
+ #define INVALID_PHYS_ADDR (~(phys_addr_t)0)
+ 
++/**
++ * struct io_tlb_slot - IO TLB slot descriptor
++ * @orig_addr:	The original address corresponding to a mapped entry.
++ * @alloc_size:	Size of the allocated buffer.
++ * @list:	The free list describing the number of free entries available
++ *		from each index.
++ */
+ struct io_tlb_slot {
+ 	phys_addr_t orig_addr;
+ 	size_t alloc_size;
+@@ -632,11 +639,22 @@ static void dec_used(struct io_tlb_mem *mem, unsigned int nslots)
+ }
+ #endif /* CONFIG_DEBUG_FS */
+ 
+-/*
+- * Find a suitable number of IO TLB entries size that will fit this request and
+- * allocate a buffer from that IO TLB pool.
++/**
++ * area_find_slots() - search for slots in one IO TLB memory area
++ * @dev:	Device which maps the buffer.
++ * @area_index:	Index of the IO TLB memory area to be searched.
++ * @orig_addr:	Original (non-bounced) IO buffer address.
++ * @alloc_size: Total requested size of the bounce buffer,
++ *		including initial alignment padding.
++ * @alloc_align_mask:	Required alignment of the allocated buffer.
++ *
++ * Find a suitable sequence of IO TLB entries for the request and allocate
++ * a buffer from the given IO TLB memory area.
++ * This function takes care of locking.
++ *
++ * Return: Index of the first allocated slot, or -1 on error.
+  */
+-static int swiotlb_do_find_slots(struct device *dev, int area_index,
++static int area_find_slots(struct device *dev, int area_index,
+ 		phys_addr_t orig_addr, size_t alloc_size,
+ 		unsigned int alloc_align_mask)
+ {
+@@ -731,6 +749,19 @@ static int swiotlb_do_find_slots(struct device *dev, int area_index,
+ 	return slot_index;
+ }
+ 
++/**
++ * swiotlb_find_slots() - search for slots in the whole swiotlb
++ * @dev:	Device which maps the buffer.
++ * @orig_addr:	Original (non-bounced) IO buffer address.
++ * @alloc_size: Total requested size of the bounce buffer,
++ *		including initial alignment padding.
++ * @alloc_align_mask:	Required alignment of the allocated buffer.
++ *
++ * Search through the whole software IO TLB to find a sequence of slots that
++ * match the allocation constraints.
++ *
++ * Return: Index of the first allocated slot, or -1 on error.
++ */
+ static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
+ 		size_t alloc_size, unsigned int alloc_align_mask)
+ {
+@@ -739,8 +770,8 @@ static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
+ 	int i = start, index;
+ 
+ 	do {
+-		index = swiotlb_do_find_slots(dev, i, orig_addr, alloc_size,
+-					      alloc_align_mask);
++		index = area_find_slots(dev, i, orig_addr, alloc_size,
++					alloc_align_mask);
+ 		if (index >= 0)
+ 			return index;
+ 		if (++i >= mem->nareas)
+@@ -752,6 +783,15 @@ static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
+ 
+ #ifdef CONFIG_DEBUG_FS
+ 
++/**
++ * mem_used() - get number of used slots in an allocator
++ * @mem:	Software IO TLB allocator.
++ *
++ * The result is accurate in this version of the function, because an atomic
++ * counter is available if CONFIG_DEBUG_FS is set.
++ *
++ * Return: Number of used slots.
++ */
+ static unsigned long mem_used(struct io_tlb_mem *mem)
+ {
+ 	return atomic_long_read(&mem->total_used);
+@@ -759,6 +799,15 @@ static unsigned long mem_used(struct io_tlb_mem *mem)
+ 
+ #else /* !CONFIG_DEBUG_FS */
+ 
++/**
++ * mem_used() - get number of used slots in an allocator
++ * @mem:	Software IO TLB allocator.
++ *
++ * The result is not accurate, because there is no locking of individual
++ * areas.
++ *
++ * Return: Approximate number of used slots.
++ */
+ static unsigned long mem_used(struct io_tlb_mem *mem)
+ {
+ 	int i;
 -- 
 2.25.1
 
