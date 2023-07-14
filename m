@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E63B5EB64DA
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Jul 2023 08:49:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.563545.880781 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E603EB64DA
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Jul 2023 09:29:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.563548.880791 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qKEU0-0007d0-Fe; Fri, 14 Jul 2023 08:49:00 +0000
+	id 1qKF6k-0003oc-Ge; Fri, 14 Jul 2023 09:29:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 563545.880781; Fri, 14 Jul 2023 08:49:00 +0000
+Received: by outflank-mailman (output) from mailman id 563548.880791; Fri, 14 Jul 2023 09:29:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qKEU0-0007ct-Cr; Fri, 14 Jul 2023 08:49:00 +0000
-Received: by outflank-mailman (input) for mailman id 563545;
- Fri, 14 Jul 2023 08:49:00 +0000
+	id 1qKF6k-0003oV-E0; Fri, 14 Jul 2023 09:29:02 +0000
+Received: by outflank-mailman (input) for mailman id 563548;
+ Fri, 14 Jul 2023 09:29:00 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qKEU0-0007cn-03
- for xen-devel@lists.xenproject.org; Fri, 14 Jul 2023 08:49:00 +0000
+ (envelope-from <julien@xen.org>) id 1qKF6i-0003oP-SU
+ for xen-devel@lists.xenproject.org; Fri, 14 Jul 2023 09:29:00 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qKETw-000463-HJ; Fri, 14 Jul 2023 08:48:56 +0000
+ id 1qKF6c-000581-RO; Fri, 14 Jul 2023 09:28:54 +0000
 Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qKETw-0007oX-Bl; Fri, 14 Jul 2023 08:48:56 +0000
+ id 1qKF6c-0000uG-GC; Fri, 14 Jul 2023 09:28:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +44,137 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=1ZuDIzolVXjcGfSwtYfZGIy2VfnapVBjsWS6xe58X0I=; b=LMczv2XecMCYenzptHJYRh5lJx
-	lU4+EAvMFTCEGAOeLgAdX98gKee0OGchcAQxidKDYpxDVPJnv6O87jUfAYnseCFdGzeS/7vXXDDWr
-	XrmsSAMR7AeXkNvLyDYuxAUe+6Oe/ndhgwDYyvuJhFD0TLCG57u2A+fa7Ps4DCZ+XHcs=;
-Message-ID: <610ce9f8-58d1-a5d8-d46a-888e119762b6@xen.org>
-Date: Fri, 14 Jul 2023 09:48:54 +0100
+	bh=50WfSytNTAkD+vaGxiaTL0sbP+GHuBfj/91rG957sjc=; b=k0RHeoIDNSQIKXyNHV0DXZdumo
+	9ejlFGcrG1cxxfj1Cek2LZPZPYpNn4xNJSiQCgtPBfuj2sBf7i9zLUrhEEjBd8Rh4LKutxBD3AHqo
+	m3nQmkwP1ujLEqOMtO4BOwDEFJLn/m1iAiDEbaBIYuowsgOGyTcnlVOVVgj4KbQiJYxc=;
+Message-ID: <4a6bd691-95e1-ad15-1054-b43460c85b32@xen.org>
+Date: Fri, 14 Jul 2023 10:28:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH] ns1650: refactor interrupt handling in
- ns16550_uart_dt_init()
+Subject: Re: [PATCH v2 1/2] restrict concept of pIRQ to x86
 Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>, Oleksii <oleksii.kurochko@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <cc5a08056abacdbb6d6509b56716eb45467307bb.1689240611.git.oleksii.kurochko@gmail.com>
- <a385a17b-a60c-d770-e044-af64273371d6@suse.com>
- <86702f86787ee7b963b131c4b2d6db463eddc1f3.camel@gmail.com>
- <3e4c673d-1b8b-15ab-629f-27a9f687b37a@suse.com>
- <83f67337cb69fb8cf2aa5d56b8a711384cdaa5f0.camel@gmail.com>
- <200693a2-267d-16c8-61f3-3047dc8967da@suse.com>
- <9415dc2fe8c8ca0325ba6dfe41fdf72cb0f2ea0a.camel@gmail.com>
- <ed458992-b1c3-527c-4372-67355a5616e0@suse.com>
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <85e59fd5-9a06-48b4-ba7e-81865d44e332@suse.com>
+ <98f51b96-8a1c-7f33-b4d3-1744174df465@suse.com>
+ <0cd9d94b-0a8d-a3e1-d683-04fac1572750@xen.org>
+ <8cdf9179-7b3f-5a52-ff02-8ededbe03e0c@suse.com>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <ed458992-b1c3-527c-4372-67355a5616e0@suse.com>
+In-Reply-To: <8cdf9179-7b3f-5a52-ff02-8ededbe03e0c@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi Jan,
 
-On 14/07/2023 07:56, Jan Beulich wrote:
-> On 13.07.2023 19:49, Oleksii wrote:
->> On Thu, 2023-07-13 at 16:26 +0200, Jan Beulich wrote:
->>> On 13.07.2023 15:36, Oleksii wrote:
->>>> On Thu, 2023-07-13 at 15:27 +0200, Jan Beulich wrote:
->>>>> I don't understand. My earlier comment was affecting all checks
->>>>> of
->>>>> uart->irq alike, as I'm unconvinced IRQ0 may not possibly be
->>>>> usable
->>>>> on some architecture / platform. IOW I don't see why the check in
->>>>> ns16550_init_postirq() would allow us any leeway.
->>>> It looks like I misunderstood you.
->>>>
->>>> Do you mean that on some architecture IRQ0 may be used for ns16550?
->>>
->>> Yes, I don't see why this shouldn't be possible in principle. As
->>> Julien
->>> said it can't happen on Arm, so if it also can't happen on RISC-V and
->>> PPC, we could elect to continue to ignore that aspect.
->>>
->> Then for RISC-V ( at least, for PLIC interrupt controller ) it is
->> reserved:
->> https://github.com/riscv/riscv-plic-spec/blob/master/riscv-plic.adoc#interrupt-identifiers-ids
->>
->> What about to have 'define NO_IRQ_POLL 0' ( mentioned by Julien )+
->> assert(irq_from_device_tree != NO_IRQ_POLL) ?
+On 11/07/2023 13:29, Jan Beulich wrote:
+> On 10.07.2023 22:59, Julien Grall wrote:
+>>> ---
+>>> I'm not really certain about XEN_DOMCTL_irq_permission: With pIRQ-s not
+>>> used, the prior pIRQ -> IRQ translation cannot have succeeded on Arm, so
+>>> quite possibly the entire domctl is unused there? Yet then how is access
+>>> to particular device IRQs being granted/revoked?
 > 
-> Such a #define may be okay as long as indeed used consistently in all
-> places where it belongs (which may mean making some code less simple,
-> which is a downside), but I can't judge at all the validity of the
-> assertion you propose.
+> (Leaving this in context, as it'll be relevant for the last comment you
+> gave.)
 
-Is the assert() indented to check the return of platform_get_irq()? If 
-so, the return value is considered as user input because it is coming 
-from the device-tree. assert()s must not be used for checking external 
-input. Instead, you need to add proper check (i.e. if (...)).
+Sorry I missed this comment.
+
+ > so quite possibly the entire domctl is unused there?
+
+You are right, the domctl permission is not used on Arm.
+
+ >  Yet then how is access to particular device IRQs being granted/revoked?
+
+At the moment, a device can only be attached at domain creation and 
+detached when the domain is destroyed. Also, only the toolstack can map 
+IRQs. So we don't need to worry for granting/revoking IRQs.
+
+> 
+>>> --- a/xen/common/domain.c
+>>> +++ b/xen/common/domain.c
+>>> @@ -350,6 +350,8 @@ static int late_hwdom_init(struct domain
+>>>    #endif
+>>>    }
+>>>    
+>>> +#ifdef CONFIG_HAS_PIRQ
+>>> +
+>>>    static unsigned int __read_mostly extra_hwdom_irqs;
+>>>    static unsigned int __read_mostly extra_domU_irqs = 32;
+>>>    
+>>> @@ -364,6 +366,8 @@ static int __init cf_check parse_extra_g
+>>>    }
+>>>    custom_param("extra_guest_irqs", parse_extra_guest_irqs);
+>>>    
+>>> +#endif /* CONFIG_HAS_PIRQ */
+>>
+>> NIT: I would suggest create a file pirq.c and move anything PIRQ
+>> specific there. This should reduce the number of #ifdef in the code.
+> 
+> I did consider that, but it looked quite a bit more intrusive to
+> me than the few #ifdef-s added to this file. (The ones in other
+> files would be yet uglier to eliminate, if that was to be implied
+> from your remark.)
+
+I was under the impression we wanted to limit the number of #ifdef in 
+the common code. They didn't seem to be warrant here and, from a brief 
+look, it didn't seem the option would be that "ugly". But I guess this 
+is a matter of taste.
+
+> 
+>>> @@ -1864,6 +1874,8 @@ long do_vm_assist(unsigned int cmd, unsi
+>>>    }
+>>>    #endif
+>>>    
+>>> +#ifdef CONFIG_HAS_PIRQ
+>>> +
+>>
+>> With this change and some others, we probably can remove
+>> alloc_pirq_struct() & co. I will have a look to send a clean-up patch
+>> after this goes in.
+> 
+> Right, there's likely further cleanup possible.
+> 
+>>> --- a/xen/common/domctl.c
+>>> +++ b/xen/common/domctl.c
+>>> @@ -683,11 +683,13 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xe
+>>>            unsigned int pirq = op->u.irq_permission.pirq, irq;
+>>>            int allow = op->u.irq_permission.allow_access;
+>>>    
+>>> +#ifdef CONFIG_HAS_PIRQ
+>>>            if ( pirq >= current->domain->nr_pirqs )
+>>>            {
+>>>                ret = -EINVAL;
+>>>                break;
+>>>            }
+>>> +#endif
+>>
+>> This #ifdef reads a little bit strange. If we can get away with the
+>> check for Arm, then why can't when CONFIG_HAS_PIRQ=y? Overall, a comment
+>> would be helpful.
+> 
+> As per the post-commit-message remark first of all I need to understand
+> why things were the way they were, and why (whether) that was correct
+> (or at least entirely benign) for Arm in the first place. Only then I'll
+> (hopefully) be in the position of putting a sensible comment here.
+> 
+> One thing is clear, I suppose: Without the #ifdef the code wouldn't
+> build. Yet imo if things all matched up, it should have been buildable
+> either way already in the past. Hence the questions.
+
+Right, it would not build. But does this check really matter even in the 
+case where CONFIG_HAS_PIRQ=y? Looking at the code, it sounds like more 
+an optimization/a way to return a different error code if there value is 
+too high. For the domctl, it doesn't seem to be worth it, the more if we 
+need to add #ifdef.
+
+With that, the rest of the domctl should mostly work for Arm.
 
 Cheers,
 
