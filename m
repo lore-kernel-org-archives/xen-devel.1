@@ -4,40 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19D03C001DF
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 11:50:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.564455.881877 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58013EB64DC
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 11:50:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.564446.881886 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLMjg-0005rR-FD; Mon, 17 Jul 2023 11:49:52 +0000
+	id 1qLMkB-0007Hp-Ob; Mon, 17 Jul 2023 11:50:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 564455.881877; Mon, 17 Jul 2023 11:49:52 +0000
+Received: by outflank-mailman (output) from mailman id 564446.881886; Mon, 17 Jul 2023 11:50:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLMjg-0005rK-C9; Mon, 17 Jul 2023 11:49:52 +0000
-Received: by outflank-mailman (input) for mailman id 564455;
- Mon, 17 Jul 2023 11:49:51 +0000
+	id 1qLMkB-0007Hf-LU; Mon, 17 Jul 2023 11:50:23 +0000
+Received: by outflank-mailman (input) for mailman id 564446;
+ Mon, 17 Jul 2023 11:36:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=hD51=DD=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qLMje-0005nK-Sa
- for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 11:49:50 +0000
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on2060f.outbound.protection.outlook.com
- [2a01:111:f400:fe16::60f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 08511dc5-2498-11ee-b23a-6b7b168915f2;
- Mon, 17 Jul 2023 13:49:49 +0200 (CEST)
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by AS4PR04MB9340.eurprd04.prod.outlook.com (2603:10a6:20b:4e8::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.31; Mon, 17 Jul
- 2023 11:49:46 +0000
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::9bd3:48c9:ff58:9880]) by DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::9bd3:48c9:ff58:9880%4]) with mapi id 15.20.6588.031; Mon, 17 Jul 2023
- 11:49:46 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=2MJZ=DD=ideasonboard.com=kieran.bingham@srs-se1.protection.inumbo.net>)
+ id 1qLMWN-0004NL-Ke
+ for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 11:36:07 +0000
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1d0d9a98-2496-11ee-b23a-6b7b168915f2;
+ Mon, 17 Jul 2023 13:36:05 +0200 (CEST)
+Received: from pendragon.ideasonboard.com
+ (aztw-30-b2-v4wan-166917-cust845.vm26.cable.virginm.net [82.37.23.78])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id AC0DD16C4;
+ Mon, 17 Jul 2023 13:35:09 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,152 +42,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08511dc5-2498-11ee-b23a-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Iyl1Oo8DB/kCRdv0R84EN5n7GDu0dtuzo7OtTj4H5XHw5wEcYGsCULLStxBcM4mlP4mipYatrm6cATI7eBxbPubQcQ6vHLzGTjYm8nUkOwcOibCGcaft8ELtaJV836IjlUpsP/bYkW9Xqb+mtV3pnYI8ViCnBV9A/XZJYN4fkBPT4QrpK6PEa/8rEsKlEvARQJ7A5wTXKkY6/gK2soasOGFIk4uO5dlcgJfv59l/j/UQx7fDmmku+1+vmc0DTet3ZiHlOHBtfuEffENeX/i3OPaG5s0tnET24XaHJJ7TCNIqPZaf+KhPJZYYLNGNG7vK0xIqNzm0I+Y5eja7PgggMA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G2hGiGSrw+OF/jiEOTj/fWw3gTtw4oQnJMlMtS2g2eo=;
- b=jnfZl6zcAsEuVaoP/IvEMGjQgdQwrexHulLCdRCEYshAziY1xx1eiORVwK5rbHwmuA7mIIFt6ccNidD0Vz/VNBtg4zjsjVihn2HA2M5ADvbLbwaGosPoOG5M+KKjEUlOqv8mC7LEu3XwH5PCTg3dPftdrYbdnTDsTEJps1knNkOV5ahU47oBK5tc047NS2+dYUqyUIjgkh7SrW30dGVuGDtyDItktCz5JeEMPE7eL41lP4y0VLhhUUyLZ+TCmBKSHiJF6boNDFSTQ/OZln1mN1fAOlTK/G2K8dC2xTMpHfnRgG9u8yq506C7vhMVjTDm97/sVIXHIEItH5kKVvBjNg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G2hGiGSrw+OF/jiEOTj/fWw3gTtw4oQnJMlMtS2g2eo=;
- b=I/16AX3aoY6n3wnXIpKb6Vuzyx4B1rBr7e7EAIujMg2xOLTUjGEOVP7L2ZLxFG6p9IjFIevmE2bG70bGHWaFN84oMJgMfPheNQqvugty/W4nYqOa7wlohrzkqO9G21hl33YyHpKertqz6h71PonwUurPYZGDvqHv2ejUWts0adaSm0SP69Iw7UYIOlFJnhzFJ+TmPjMdy4wqe8Ag2Q2BUmI+4tJt51L6NTAY10C2sGSN4h1AvUra+MHQR2Sewfj+ZdyqBLTcODnHulf6PT8HrmU5r6juOfdBtKXUBOT5QCcEuBVA38L1JnHZNn+VHpxeAdQXeWBpa79uwNFabQ8HMQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <f254729d-1b6c-8aaf-98d5-c1b739519081@suse.com>
-Date: Mon, 17 Jul 2023 13:49:43 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] x86/HVM: adjust pIRQ calculation in hvm_inject_msi()
-Content-Language: en-US
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Simone Ballarin <simone.ballarin@bugseng.com>,
- Gianluca Luparini <gianluca.luparini@bugseng.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <5cfda162-07a3-8a02-4511-b0578b12dbc2@suse.com>
- <ZLUdTB_gZjRzhpJe@MacBook-Air-de-Roger.local>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <ZLUdTB_gZjRzhpJe@MacBook-Air-de-Roger.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR2P281CA0140.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9e::8) To DU2PR04MB8790.eurprd04.prod.outlook.com
- (2603:10a6:10:2e1::23)
+X-Inumbo-ID: 1d0d9a98-2496-11ee-b23a-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1689593710;
+	bh=Q3mYfdnpaLKlY8/jxmRm80QstU9e0PZzEci91ZZE1j4=;
+	h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
+	b=D34b2nk3MBeIsD4Hh9go1cz7KYgQfaVb0QwyTeWrvQudhj3fcvsR86k18n5c2Eh/a
+	 11cp7FnDEwboNqdfvQSni7J+NuSf4nawSesO0QfLQ1Tb/Qq/1vhrC/00e2IYaQomU7
+	 muczhfhcRx636pqbzTWg6NH753X76UJuCpEmbpUo=
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|AS4PR04MB9340:EE_
-X-MS-Office365-Filtering-Correlation-Id: ad36f198-9379-40c2-bcce-08db86bbeaeb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	n2qOyv6lxsTcOao3IjmMeP8QhiJqTOUvxg6ZKbtXF+abvopnK5TMNmGfy0SYDa9PffoObCOGHQEp1xHGLHCnYnEDhGSc5zQ85yKSqXyo67uINsxwpMzaSQVMld8j0ypL4WVf2IwJaGLaorL/bBCTd8vTkrC2WuGE8X9sD319/bUb0NVyiMlqi8pdI8e9OVuk1i3+M24W/L3k3kfSrsQQOvR3nRdKEvG/Ql8SUX7AZQ3wITVwbqj15wGOiysbXz3hrDcPai6YZ7LxmUIqa9ASmqyxihRhijUUuyYQwH4ykcn2rBOFTLwstbrbdEXdMwWFnLGhUPqH9DOYoWw15TwThkIWVjGYlffCClv/Y5NR4Z6nyQSCTMVNGdIC27dKjAZCZP0gyJuTDtY6DFCiewu/meMAa1SOb82W3Hs54OI0Wdkuu8cMWI1PN1yeGr8sW5eEUvdhdX6xFX2VZhb5gOCIbqFhtwPUG+Qk7OMM3BxQr6joH6ej0Yfjb+MSVeJmkvxmDRFxQ9NCvwkOXc3JmPvBCeNpVlumogTwkfTTGSCCdcXkUej139QaCyQNgVaEGLSCXtlRM2vhE7mPfiKF2Qh73ctWnhnBOxR2zdcD/5Q4tBiAQLQjYhLb5bD1xpwJ3bY97XoZgEuEQiVfNlR54j0Qnw==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(346002)(366004)(39860400002)(396003)(136003)(451199021)(41300700001)(8676002)(8936002)(26005)(53546011)(6506007)(54906003)(478600001)(66946007)(66556008)(66476007)(4326008)(6916009)(316002)(6512007)(36756003)(6666004)(6486002)(38100700002)(31686004)(86362001)(83380400001)(2906002)(31696002)(2616005)(5660300002)(186003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?N0tBOWZlVjVGNm1mOUszSGo1K3J0MmZNamVzb1lSRUNSU25xRDh2ek9jVzc1?=
- =?utf-8?B?N0V0L0h3d0lnUStSK3FEK2Ewd1VNUWtaR01ZNG5LZ0VpT1Z4UGFGdDl0Wmhh?=
- =?utf-8?B?d2Y4akNoVmpkT2pjQjE1VjNMU2JsWGw2Wm5XMWxqRldJOC91bm1EdjFBNTM4?=
- =?utf-8?B?Qi9PVVF0d0YvaTJPY0NLRjZqeXByNk5UQ2ZaKys0SlcvZzhhNHM2Y3pMeFUw?=
- =?utf-8?B?ekd3WTErMnh3U0pXQmIrbUlDUHVIUzgrR3dTaUNNSWNOZjI2NGQzUHpqaWtC?=
- =?utf-8?B?Vmx5N291VmVOQ3JBWFN5V3R4NDUrUE5oNzk5YkVaalZGTjZZMHF0TG1uYjhh?=
- =?utf-8?B?U3dpekxPd2kwVE5CY0s1bEc4a085L1h3bUMwbEtiT3h4anNrOU5mbjFzdVVX?=
- =?utf-8?B?b1dWSWRzV3BMTnRLT00vMlNMOUxRVWJVaE13UFBQLzdsdERBTmhnQ3dJRlJJ?=
- =?utf-8?B?d2F1NWVnN1dhVTMrNVlpekkwWjhVbmNiUkhtemVEN0xKckNXcU0xSzJFSFhi?=
- =?utf-8?B?UFZ2dXkwTC8zNUU0YjA0RERuVGZmUktyM1hBSUplODFyczdZZUxTeHB2YXFX?=
- =?utf-8?B?WkRjQ1BBNVpFR1JIN2Z5VWhvM1NSRHFUTEllRVk5THlLZmJ2c05ZNHQzd2gw?=
- =?utf-8?B?NE5XcjJqZERIci9aeXF3TmFOODZodVQ1T3RRcnhIUnhKRjE3elYvUWNPQ2Zp?=
- =?utf-8?B?OU5qbHR4MjhLOFRUelZIQjZZTDNVbHlTYmk0eERwYUVyWlNSVDdVelhSbFZp?=
- =?utf-8?B?TEthWjFlclFyMjh1UG9hUjUrUHBhdXB6QXBUb1NtQUdWUlFpY2JwbjAvK1NW?=
- =?utf-8?B?bkErejVEYm9iRlpCVFViMFlwREdMYnlZdDU0enpMUjllM0ZRaERocUpLTHVD?=
- =?utf-8?B?WXY3UWFxd2drak4yaklIZkFJOVh5UWQ3VUcyV1UrQkxETTE3VDYybFNwL2FQ?=
- =?utf-8?B?Ujk4SU9qNFlWeStlaEdFTHpmUUJlb0U3dGxsNCttRjZLcTRCUVQwN3U0cFBv?=
- =?utf-8?B?U2RsOEhYWHFJRGRValh6S1JFOHJZUzdrNTRnUldOeG5NbjJiNzBqWHliNmFK?=
- =?utf-8?B?eWdQWnhBeCtxNFZyT2RVSDZDZk9JUnVqRHM0YkxXVno3YlZ0L0lMUjc5ak1s?=
- =?utf-8?B?Nm5rTlBwQnBlZFZQb2ZUdEtzODFVb2tTWXFZeVpUS0FWN1NyV3BPd05pcnJt?=
- =?utf-8?B?RjE2OU9QS0ZmWW1OM2tvdktuNGp2REIreWlJdlFiaHgyWUZyQll0TEJhNHNJ?=
- =?utf-8?B?alVvVVYyY3U3dXkyOURNd0dLSXdrOG9hQVMzQjJhaVZ4TS9tVXg0SFRHSXg2?=
- =?utf-8?B?RXo1UlYrZHd2ZzFvN1d0dWtKSHFueURxRTFyN09raVdMQ2pnQitpRTZXVmM0?=
- =?utf-8?B?SFIyQ2NhdmZIbEpqb3dqelBkZEg1c3UvMFRvb0Z3M0R5YTRrTytxeUcwb1l5?=
- =?utf-8?B?dlpSQUdsdmhrZVBzeDY1YlByWDJjYzNXNjF5dU9xWW1yN3Q2NGdtUE1PbkUv?=
- =?utf-8?B?cVYrSWNDTll0RXQ5TGY2WURhcDNoWVl0VWxtZGJKZ2I2MGRjRllDSk15SjMy?=
- =?utf-8?B?OEEzTk80TW1HeHBhbktHbmh5UzlEVWVOTE94OVdpQUtpQ0ozczB0VWg0WDI3?=
- =?utf-8?B?d1BZWlBIQ1FYdXMrKzRBdXdoOU1SWko0UTJVN2J4Wm0vM0FyQlRMWC9uKzRk?=
- =?utf-8?B?VldMUXorWU5ObmYwVUs2cTRpVHVqMnhyQWpRUzloamo0cmFnVGxMaHJWWG40?=
- =?utf-8?B?UTZrNHZvaTVoT0c1akJMa2U1VnNWdVl3QURUTlozeHR5b1Z6cFNiZEVlQ0Zr?=
- =?utf-8?B?MzN0RTBFaStPSjJtTEg0bWdFWXZvZTdnQ2pFTW9nd3RHaXIzRFBocEpXZk5T?=
- =?utf-8?B?Q085QmRGYXNiaWVVRThKalJSdVR3S05ZcENBb040UjNpcm5nUDdLS1FjUVN2?=
- =?utf-8?B?RzRxUi9kaDc5RUhQVjlLQzBzL3FpcGEzVDJoM1VJRkpsT3B4SWFYdFFEdUxm?=
- =?utf-8?B?L1RZN1pxVVhHNzlxeTFhR0NRZS9nWjA0TlI2bGNVS0ZSM0dIUEkyK0lRcXBz?=
- =?utf-8?B?ekd3cUE2U2c4MkdXZjYyZzJZeTNiTW1RT3oyMzlJc1Y1dzhjU3U2bWIzejNY?=
- =?utf-8?Q?K6iDxv1P3lcVy/cS51pK+9MP1?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad36f198-9379-40c2-bcce-08db86bbeaeb
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2023 11:49:46.2977
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7JeNSWuaSG41rSK58sKe2b4wQc/TTEayX3tBIWX3pTfTF5YCT7U4vmFJODYTsJrhbHS10jMM2kVt+UakaNquBA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9340
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20230714174545.4056287-1-robh@kernel.org>
+References: <20230714174545.4056287-1-robh@kernel.org>
+Subject: Re: [PATCH] drm: Explicitly include correct DT includes
+From: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+Cc: devicetree@vger.kernel.org, Ondrej Jirman <megous@megous.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, etnaviv@lists.freedesktop.org, linux-samsung-soc@vger.kernel.org, linux-mips@vger.kernel.org, lima@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, linux-rpi-kernel@lists.infradead.org, linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com, linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org, xen-devel@lists.xenproject.org
+To: Abhinav Kumar <quic_abhinavk@quicinc.com>, Alain Volmat <alain.volmat@foss.st.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, Alim Akhtar <alim.akhtar@samsung.com>, Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>, Andrzej Hajda <andrzej.hajda@intel.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Artur Weber <aweber.kernel@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Chen-Yu Tsai <wens@csie.org>, Christian Gmeiner <christian.gmeiner@gmail.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>, Chunyan Zhang <zhang.lyra@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@gmail.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Emma Anholt <emma@anholt.net>, Fabio Estevam <festevam@gmail.com>, Florian Fainelli <florian.fainelli@broadcom.com>, Guido =?utf-8?q?G=C3=BCnther?= <agx@sigxcpu.org>, Heiko =?utf-8?q?St=C3=BCbner?= <heiko@sntech.de>, Icenow
+ y Zheng <icenowy@aosc.io>, Inki Dae <inki.dae@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>, Javier Martinez Canillas <javierm@redhat.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Jerome Brunet <jbrunet@baylibre.com>, Jerry Han <hanxu5@huaqin.corp-partner.google.com>, Jianhua Lu <lujianhua000@gmail.com>, John Stultz <jstultz@google.com>, Jonas Karlman <jonas@kwiboo.se>, Jonathan Hunter <jonathanh@nvidia.com>, Jyri Sarha <jyri.sarha@iki.fi>, Kevin Hilman <khilman@baylibre.com>, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Kyungmin Park <kyungmin.park@samsung.com>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, Linus Walleij <linus.walleij@linaro.org>, Liu Ying <victor.liu@nxp.com>, Liviu Dudau <liviu.dudau@arm.com>, Lucas Stach <l.stach@pengutronix.de>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Marek Szyprowski <m.szyprowski@samsung.com>, Marek Vasut <marex@denx.de>, Marijn Suijten <marijn.suijten@
+ somainline.org>, Martin Blumenstingl <martin.blumenstingl@googlemail.com>, Matthias Brugger <matthias.bgg@gmail.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, Maxime Ripard <mripard@kernel.org>, Mikko Perttunen <mperttunen@nvidia.com>, NXP Linux Team <linux-imx@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Ondrej Jirman <megi@xff.cz>, Orson Zhai <orsonzhai@gmail.com>, Paul Cercueil <paul@crapouillou.net>, Paul Kocialkowski <paul.kocialkowski@bootlin.com>, Pengutronix Kernel Team <kernel@pengutronix.de>, Philipp Zabel <p.zabel@pengutronix.de>, Philippe Cornu <philippe.cornu@foss.st.com>, Purism Kernel Team <kernel@puri.sm>, Qiang Yu <yuq825@gmail.com>, Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, Rob Clark <robdclark@gmail.com>, Rob Herring <robh@kernel.org>, Robert Foss <rfoss@kernel.org>, Russell King <linux+etnaviv@armlinux.org.uk>, Sam Ravnborg <sam@ravnborg.org>, Samuel Holland <samuel@sholland.org
+ >, Sandy Huang <hjc@rock-chips.com>, Sascha Hauer <s.hauer@pengutronix.de>, Sean Paul <sean@poorly.run>, Seung-Woo Kim <sw0312.kim@samsung.com>, Shawn Guo <shawnguo@kernel.org>, Stefan Agner <stefan@agner.ch>, Steven Price <steven.price@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Thomas Zimmermann <tzimmermann@suse.de>, Tian Tao <tiantao6@hisilicon.com>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Tomi Valkeinen <tomba@kernel.org>, Xinliang Liu <xinliang.liu@linaro.org>, Xinwei Kong <kong.kongxinwei@hisilicon.com>, Yannick Fertre <yannick.fertre@foss.st.com>, Yongqin Liu <yongqin.liu@linaro.org>
+Date: Mon, 17 Jul 2023 12:35:59 +0100
+Message-ID: <168959375926.3515353.7529038208688306372@Monstersaurus>
+User-Agent: alot/0.10
 
-On 17.07.2023 12:51, Roger Pau Monné wrote:
-> On Mon, Jul 17, 2023 at 11:31:57AM +0200, Jan Beulich wrote:
->> While the referenced commit came without any update to the public header
->> (which doesn't clarify how the upper address bits are used), the
->> intention looks to have been that bits 12..19 and 40..63 form the pIRQ.
->> Negative values simply make no sense, and pirq_info() also generally
->> wants invoking with an unsigned (and not just positive) value.
->>
->> Since the line was pointed out by Eclair, address Misra rule 7.2 at the
->> same time, by adding the missing U suffix.
->>
->> Fixes: 88fccdd11ca0 ("xen: event channel remapping for emulated MSIs")
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Quoting Rob Herring (2023-07-14 18:45:34)
+> The DT of_device.h and of_platform.h date back to the separate
+> of_platform_bus_type before it as merged into the regular platform bus.
+> As part of that merge prepping Arm DT support 13 years ago, they
+> "temporarily" include each other. They also include platform_device.h
+> and of.h. As a result, there's a pretty much random mix of those include
+> files used throughout the tree. In order to detangle these headers and
+> replace the implicit includes with struct declarations, users need to
+> explicitly include the correct includes.
+>=20
+> Signed-off-by: Rob Herring <robh@kernel.org>
 
-Thanks.
+>  drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c         | 2 +-
+>  drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c         | 2 ++
+>  drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c         | 1 +
+>  drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c       | 1 -
+>  drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c      | 1 -
 
-> I have a question below, but not related to the change here.
-> 
->>
->> --- a/xen/arch/x86/hvm/irq.c
->> +++ b/xen/arch/x86/hvm/irq.c
->> @@ -383,7 +383,7 @@ int hvm_inject_msi(struct domain *d, uin
->>  
->>      if ( !vector )
->>      {
->> -        int pirq = ((addr >> 32) & 0xffffff00) | dest;
->> +        unsigned int pirq = ((addr >> 32) & 0xffffff00U) | dest;
->>  
->>          if ( pirq > 0 )
-> 
-> I do wonder whether this check is also accurate, as pIRQ 0 could be a
-> valid value.  Should it instead use INVALID_PIRQ?
+For drivers/gpu/drm/renesas/rcar-du/
 
-I think 0 is okay to use here, as the low IRQs (at least the 16 ISA
-ones) are all 1:1 mapped to their "machine" (i.e. Xen's) IRQ numbers.
-And IRQ0 is always the timer, never given to guests (not even to
-Dom0).
+> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c b/drivers/gpu/=
+drm/renesas/rcar-du/rcar_du_drv.c
+> index 1ffde19cb87f..3904b0cca814 100644
+> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c
+> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c
+> @@ -12,7 +12,7 @@
+>  #include <linux/io.h>
+>  #include <linux/mm.h>
+>  #include <linux/module.h>
+> -#include <linux/of_device.h>
+> +#include <linux/of.h>
+>  #include <linux/platform_device.h>
+>  #include <linux/pm.h>
+>  #include <linux/slab.h>
+> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c b/drivers/gpu/=
+drm/renesas/rcar-du/rcar_du_kms.c
+> index adfb36b0e815..9ff4537c26c8 100644
+> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
+> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
+> @@ -20,8 +20,10 @@
+> =20
+>  #include <linux/device.h>
+>  #include <linux/dma-buf.h>
+> +#include <linux/of.h>
+>  #include <linux/of_graph.h>
+>  #include <linux/of_platform.h>
+> +#include <linux/platform_device.h>
+>  #include <linux/wait.h>
+> =20
+>  #include "rcar_du_crtc.h"
+> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c b/drivers/gpu/=
+drm/renesas/rcar-du/rcar_du_vsp.c
+> index 45c05d0ffc70..9cbb5e6e2cba 100644
+> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c
+> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c
+> @@ -22,6 +22,7 @@
+>  #include <linux/bitops.h>
+>  #include <linux/dma-mapping.h>
+>  #include <linux/of_platform.h>
+> +#include <linux/platform_device.h>
+>  #include <linux/scatterlist.h>
+>  #include <linux/slab.h>
+>  #include <linux/videodev2.h>
+> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c b/drivers/gp=
+u/drm/renesas/rcar-du/rcar_mipi_dsi.c
+> index e10e4d4b89a2..db2e6f16f954 100644
+> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c
+> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c
+> @@ -12,7 +12,6 @@
+>  #include <linux/math64.h>
+>  #include <linux/module.h>
+>  #include <linux/of.h>
+> -#include <linux/of_device.h>
+>  #include <linux/of_graph.h>
+>  #include <linux/platform_device.h>
+>  #include <linux/reset.h>
+> diff --git a/drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c b/drivers/g=
+pu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c
+> index aa95b85a2964..8048bdca2d6c 100644
+> --- a/drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c
+> +++ b/drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c
+> @@ -10,7 +10,6 @@
+>  #include <linux/iopoll.h>
+>  #include <linux/module.h>
+>  #include <linux/of.h>
+> -#include <linux/of_device.h>
+>  #include <linux/of_graph.h>
+>  #include <linux/platform_device.h>
+>  #include <linux/pm_runtime.h>
 
-If we wanted to use INVALID_PIRQ here, we'd first need to make this
-part of the public interface.
-
-> Since there's no specification or documentation how this is supposed
-> to work it's hard to tell.
-
-Indeed.
-
-Jan
+Reviewed-by: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
 
