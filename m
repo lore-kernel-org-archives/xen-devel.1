@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A36C001B0
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 07:21:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.564186.881563 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA2F6C3DA40
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 07:22:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.564177.881493 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLIY6-0008PI-0C; Mon, 17 Jul 2023 07:21:38 +0000
+	id 1qLIXx-0006OM-Sj; Mon, 17 Jul 2023 07:21:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 564186.881563; Mon, 17 Jul 2023 07:21:37 +0000
+Received: by outflank-mailman (output) from mailman id 564177.881493; Mon, 17 Jul 2023 07:21:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLIY5-0008OI-PP; Mon, 17 Jul 2023 07:21:37 +0000
-Received: by outflank-mailman (input) for mailman id 564186;
- Mon, 17 Jul 2023 07:21:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qLIXx-0006Nf-PN; Mon, 17 Jul 2023 07:21:29 +0000
+Received: by outflank-mailman (input) for mailman id 564177;
+ Mon, 17 Jul 2023 07:21:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xV9D=DD=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1qLIY4-0005A9-FA
- for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 07:21:36 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8f6fbc9a-2472-11ee-8611-37d641c3527e;
- Mon, 17 Jul 2023 09:21:34 +0200 (CEST)
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-4fb8574a3a1so6410259e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 00:21:34 -0700 (PDT)
+ id 1qLIXw-0005A3-5T
+ for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 07:21:28 +0000
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [2a00:1450:4864:20::12d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8b5cc22a-2472-11ee-b23a-6b7b168915f2;
+ Mon, 17 Jul 2023 09:21:27 +0200 (CEST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-4fb5bcb9a28so6385308e87.3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 00:21:27 -0700 (PDT)
 Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- l10-20020ac24a8a000000b004f846cd74bcsm2658938lfp.245.2023.07.17.00.21.32
+ l10-20020ac24a8a000000b004f846cd74bcsm2658938lfp.245.2023.07.17.00.21.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jul 2023 00:21:33 -0700 (PDT)
+ Mon, 17 Jul 2023 00:21:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f6fbc9a-2472-11ee-8611-37d641c3527e
+X-Inumbo-ID: 8b5cc22a-2472-11ee-b23a-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1689578494; x=1692170494;
+        d=linaro.org; s=google; t=1689578487; x=1692170487;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xKMZdOi/Dn1qjCZASYiDWBzyjEGqNklqsbHI8w4JIKE=;
-        b=c4Bd4oT61+05JIG5n8aLHl41wWub0vJuw4h7zAoij+UDaznVtkVxL/gBtIW9xjxWtD
-         1aZFbmW4uTmkM3RCVecePFD8SyJwMv++Zb79+H67D8GxEDvXVh2aeVH9vrgjIvgjX2Mz
-         3ji8vR1NrzoUgrLQrvV5sHfC7Dr0+uPdfH7H68BsMpByFMdtLaoEXA66mIpQNGt0sv96
-         nFxlY7NH1QtbxCpLFQbdS10JnVMU8q0WcHT3Gt0ouKDJ/9kL4dh72zWmcyC7PdqKCdYI
-         72dMA3K4tAPNa6UGcNyU8keeU0me8BfVocfav7dws5ArBKj+zk9eI2ficM7RqIZ9pjEQ
-         I2JA==
+        bh=4wSiWqYej8EPgULt6otzEwmKVlaIAponcAwfHuOJ0rA=;
+        b=qZlG5/5+KozbDG0dX2Pv46WGN80L7UYXywXQ+0/2LnHsEZfdvzqVzKq6DYdlBIkufx
+         MsJI0/Kv4gGhPvcwBAT2ZhvJPFKOFTlg2aqK1h7wHNZ9MBUbNJ6SOyMC8cbKmDBrAoVg
+         M6Ijx/72XKfb0hklTPFpMmmd18TMEdL82yOMRO4govS81iwG4I5CW5eD+b0qOTR8d+d5
+         I916oiuztElanzYWmV32MZ2DGizLFiUzzcPnF/pFm9rwv6Spuz4RkzKN6NxHYBAzJOKj
+         kIzG86XXbbXZdlLfy8BWrCVrgyCULG0QcK4e5p1c8gfT5YxOw2gtrMkeQ4QZ+UQNRyOs
+         PCfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689578494; x=1692170494;
+        d=1e100.net; s=20221208; t=1689578487; x=1692170487;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xKMZdOi/Dn1qjCZASYiDWBzyjEGqNklqsbHI8w4JIKE=;
-        b=hx2bMfp1RCgXxRdDQcOEHMlvQ274tgB9geas0LegGd8fuYqv1gUAxEXKjEeociHWuJ
-         GdXP+x1xjNRNl3sIfetgEBKCYQSFkbjVtltonPLmocAiP0+MkY5qXodah2TUSJTY6qdl
-         to3qgEtkEVzO5rj3Jd+FT1d4HJlJQvqEu62HBRh7VT8t18t8WWnNlv8MNMeGbtAbOC/t
-         k2v+eyumLScBIWG6GafNr6jZrDDDDmM9pXRQT916uDJ6Yzl2AZmIA35f1XjuZlMfurgL
-         T7DgBHTnruMuvpXk46uFjA3+49kVmgO2jNVts6fHohUWCAGK0f/mpyweSOK3sxCWWTF9
-         cLHw==
-X-Gm-Message-State: ABy/qLbYWQW4yYGiwroPznj4PcmnQOMIPQS+PYQHkjz3GWh+PMUOAU5n
-	FZMGOB0jfSbrnlrja4y1LcR+ilTWCPkEGu5WtO8=
-X-Google-Smtp-Source: APBJJlH1XfaEHWpQQp8qy2+MtzfZswKeRNkdS4EtbQQm4fpT9dPK2G7U1sV/Mb6FSfYhrSeHHKCeOw==
-X-Received: by 2002:ac2:447b:0:b0:4fb:8441:be06 with SMTP id y27-20020ac2447b000000b004fb8441be06mr6836417lfl.18.1689578493876;
-        Mon, 17 Jul 2023 00:21:33 -0700 (PDT)
+        bh=4wSiWqYej8EPgULt6otzEwmKVlaIAponcAwfHuOJ0rA=;
+        b=HsJxrecgYTXFegKO0rPC080T6ONZMDlWCEj4AKzqrzHTFxpTAoEkjToTQqgcn4N69M
+         WGrbF8AlD+zCb96Vu9KInyUIQW+r0o+p9jJwVc9Nipq3RWJlydCrNt8fF22inzR7WL/A
+         dpf6nywUqDi+k0gFGAoRweqWJjVeX7vzIO30hXDjGA+hoQUwORG0KEuOietVRlmUurBx
+         Ri4bNx0u4NwX9L/ckGHAH+AiqDmmvJph/yfYD8Fc7bqWWok42itbjyXV0IP521bwEbg5
+         CiJaGJkXdVXupp+094r/oeiG7OcfKZp7zYKb7L+nkxJ3/Eo6fxI6mfELV/kp+w4nhlMK
+         FZ6w==
+X-Gm-Message-State: ABy/qLZroWUk1bKznFvrKYo03W55wVbO0tEYV0f6C297YSHeb7D5Pi4E
+	SyPartw42DanHfOzU3gpW1DdktraHE8wMME/Big=
+X-Google-Smtp-Source: APBJJlHsUIExGwq/SOkJY5f47gzvIKiWT9Pe1PJHiVjY2QneHf99uvvJZtEmarMrEGqvoCJjvSgxVg==
+X-Received: by 2002:ac2:5921:0:b0:4fb:85ad:b6e2 with SMTP id v1-20020ac25921000000b004fb85adb6e2mr7278312lfi.50.1689578487119;
+        Mon, 17 Jul 2023 00:21:27 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -91,343 +91,70 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Jens Wiklander <jens.wiklander@linaro.org>,
 	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [XEN PATCH v10 12/24] xen/arm: ffa: send guest events to Secure Partitions
-Date: Mon, 17 Jul 2023 09:20:55 +0200
-Message-Id: <20230717072107.753304-13-jens.wiklander@linaro.org>
+	Henry Wang <Henry.Wang@arm.com>
+Subject: [XEN PATCH v10 06/24] xen/arm: ffa: add flags for FFA_PARTITION_INFO_GET
+Date: Mon, 17 Jul 2023 09:20:49 +0200
+Message-Id: <20230717072107.753304-7-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230717072107.753304-1-jens.wiklander@linaro.org>
 References: <20230717072107.753304-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The FF-A specification defines framework messages sent as direct
-requests when certain events occurs. For instance when a VM (guest) is
-created or destroyed. Only SPs which have subscribed to these events
-will receive them. An SP can subscribe to these messages in its
-partition properties.
-
-Adds a check that the SP supports the needed FF-A features
-FFA_PARTITION_INFO_GET and FFA_RX_RELEASE.
-
-The partition properties of each SP is retrieved with
-FFA_PARTITION_INFO_GET which returns the information in our RX buffer.
-Using FFA_PARTITION_INFO_GET changes the owner of the RX buffer to the
-caller (us), so once we're done with the buffer it must be released
-using FFA_RX_RELEASE before another call can be made.
+According to DEN0077A version 1.1 REL0, section 13.8, defines
+flags used for the function FFA_PARTITION_INFO_GET.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Reviewed-by: Henry Wang <Henry.Wang@arm.com>
 ---
- xen/arch/arm/tee/ffa.c | 233 ++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 231 insertions(+), 2 deletions(-)
+ xen/arch/arm/tee/ffa.c | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index f8ccaabc568d..d755363de686 100644
+index 2296e3115beb..c1dead73d1f2 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -160,14 +160,33 @@
- #define FFA_MSG_SEND                    0x8400006EU
- #define FFA_MSG_POLL                    0x8400006AU
+@@ -57,6 +57,40 @@
+ #define FFA_MY_VERSION          MAKE_FFA_VERSION(FFA_MY_VERSION_MAJOR, \
+                                                  FFA_MY_VERSION_MINOR)
  
-+/* Partition information descriptor */
-+struct ffa_partition_info_1_1 {
-+    uint16_t id;
-+    uint16_t execution_context;
-+    uint32_t partition_properties;
-+    uint8_t uuid[16];
-+};
++/*
++ * Flags to determine partition properties in FFA_PARTITION_INFO_GET return
++ * message:
++ * BIT(0): Supports receipt of direct requests
++ * BIT(1): Can send direct requests
++ * BIT(2): Can send and receive indirect messages
++ * BIT(3): Supports receipt of notifications
++ * BIT(4-5): Partition ID is a PE endpoint ID
++ * BIT(6): Partition must be informed about each VM that is created by
++ *         the Hypervisor
++ * BIT(7): Partition must be informed about each VM that is destroyed by
++ *         the Hypervisor
++ * BIT(8): Partition runs in the AArch64 execution state else AArch32
++ *         execution state
++ */
++#define FFA_PART_PROP_DIRECT_REQ_RECV   BIT(0, U)
++#define FFA_PART_PROP_DIRECT_REQ_SEND   BIT(1, U)
++#define FFA_PART_PROP_INDIRECT_MSGS     BIT(2, U)
++#define FFA_PART_PROP_RECV_NOTIF        BIT(3, U)
++#define FFA_PART_PROP_IS_TYPE_MASK      (3U << 4)
++#define FFA_PART_PROP_IS_PE_ID          (0U << 4)
++#define FFA_PART_PROP_IS_SEPID_INDEP    (1U << 4)
++#define FFA_PART_PROP_IS_SEPID_DEP      (2U << 4)
++#define FFA_PART_PROP_IS_AUX_ID         (3U << 4)
++#define FFA_PART_PROP_NOTIF_CREATED     BIT(6, U)
++#define FFA_PART_PROP_NOTIF_DESTROYED   BIT(7, U)
++#define FFA_PART_PROP_AARCH64_STATE     BIT(8, U)
 +
- struct ffa_ctx {
-     /* FF-A version used by the guest */
-     uint32_t guest_vers;
-+    /*
-+     * Number of SPs that we have sent a VM created signal to, used in
-+     * ffa_domain_teardown() to know which SPs need to be signalled.
-+     */
-+    uint16_t create_signal_count;
- };
- 
- /* Negotiated FF-A version to use with the SPMC */
- static uint32_t __ro_after_init ffa_version;
- 
-+/* SPs subscribing to VM_CREATE and VM_DESTROYED events */
-+static uint16_t *subscr_vm_created __read_mostly;
-+static uint16_t subscr_vm_created_count __read_mostly;
-+static uint16_t *subscr_vm_destroyed __read_mostly;
-+static uint16_t subscr_vm_destroyed_count __read_mostly;
++/*
++ * Flag used as parameter to FFA_PARTITION_INFO_GET to return partition
++ * count only.
++ */
++#define FFA_PARTITION_INFO_GET_COUNT_FLAG BIT(0, U)
 +
- /*
-  * Our rx/tx buffers shared with the SPMC. FFA_RXTX_PAGE_COUNT is the
-  * number of pages used in each of these buffers.
-@@ -251,6 +270,87 @@ static int32_t ffa_rxtx_map(paddr_t tx_addr, paddr_t rx_addr,
-     return ffa_simple_call(FFA_RXTX_MAP_64, tx_addr, rx_addr, page_count, 0);
- }
- 
-+static int32_t ffa_partition_info_get(uint32_t w1, uint32_t w2, uint32_t w3,
-+                                      uint32_t w4, uint32_t w5,
-+                                      uint32_t *count)
-+{
-+    const struct arm_smccc_1_2_regs arg = {
-+        .a0 = FFA_PARTITION_INFO_GET,
-+        .a1 = w1,
-+        .a2 = w2,
-+        .a3 = w3,
-+        .a4 = w4,
-+        .a5 = w5,
-+    };
-+    struct arm_smccc_1_2_regs resp;
-+    uint32_t ret;
-+
-+    arm_smccc_1_2_smc(&arg, &resp);
-+
-+    ret = get_ffa_ret_code(&resp);
-+    if ( !ret )
-+        *count = resp.a2;
-+
-+    return ret;
-+}
-+
-+static int32_t ffa_rx_release(void)
-+{
-+    return ffa_simple_call(FFA_RX_RELEASE, 0, 0, 0, 0);
-+}
-+
-+static int32_t ffa_direct_req_send_vm(uint16_t sp_id, uint16_t vm_id,
-+                                      uint8_t msg)
-+{
-+    uint32_t exp_resp = FFA_MSG_FLAG_FRAMEWORK;
-+    unsigned int retry_count = 0;
-+    int32_t res;
-+
-+    if ( msg == FFA_MSG_SEND_VM_CREATED )
-+        exp_resp |= FFA_MSG_RESP_VM_CREATED;
-+    else if ( msg == FFA_MSG_SEND_VM_DESTROYED )
-+        exp_resp |= FFA_MSG_RESP_VM_DESTROYED;
-+    else
-+        return FFA_RET_INVALID_PARAMETERS;
-+
-+    do {
-+        const struct arm_smccc_1_2_regs arg = {
-+            .a0 = FFA_MSG_SEND_DIRECT_REQ_32,
-+            .a1 = sp_id,
-+            .a2 = FFA_MSG_FLAG_FRAMEWORK | msg,
-+            .a5 = vm_id,
-+        };
-+        struct arm_smccc_1_2_regs resp;
-+
-+        arm_smccc_1_2_smc(&arg, &resp);
-+        if ( resp.a0 != FFA_MSG_SEND_DIRECT_RESP_32 || resp.a2 != exp_resp )
-+        {
-+            /*
-+             * This is an invalid response, likely due to some error in the
-+             * implementation of the ABI.
-+             */
-+            return FFA_RET_INVALID_PARAMETERS;
-+        }
-+        res = resp.a3;
-+        if ( ++retry_count > 10 )
-+        {
-+            /*
-+             * TODO
-+             * FFA_RET_INTERRUPTED means that the SPMC has a pending
-+             * non-secure interrupt, we need a way of delivering that
-+             * non-secure interrupt.
-+             * FFA_RET_RETRY is the SP telling us that it's temporarily
-+             * blocked from handling the direct request, we need a generic
-+             * way to deal with this.
-+             * For now in both cases, give up after a few retries.
-+             */
-+            return res;
-+        }
-+    } while ( res == FFA_RET_INTERRUPTED || res == FFA_RET_RETRY );
-+
-+    return res;
-+}
-+
- static uint16_t get_vm_id(const struct domain *d)
- {
-     /* +1 since 0 is reserved for the hypervisor in FF-A */
-@@ -374,6 +474,8 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
- static int ffa_domain_init(struct domain *d)
- {
-     struct ffa_ctx *ctx;
-+    unsigned int n;
-+    int32_t res;
- 
-     if ( !ffa_version )
-         return -ENODEV;
-@@ -387,20 +489,68 @@ static int ffa_domain_init(struct domain *d)
-     ctx = xzalloc(struct ffa_ctx);
-     if ( !ctx )
-         return -ENOMEM;
--
-     d->arch.tee = ctx;
- 
-+    for ( n = 0; n < subscr_vm_created_count; n++ )
-+    {
-+        res = ffa_direct_req_send_vm(subscr_vm_created[n], get_vm_id(d),
-+                                     FFA_MSG_SEND_VM_CREATED);
-+        if ( res )
-+        {
-+            printk(XENLOG_ERR "ffa: Failed to report creation of vm_id %u to  %u: res %d\n",
-+                   get_vm_id(d), subscr_vm_created[n], res);
-+            ctx->create_signal_count = n;
-+            return -EIO;
-+        }
-+    }
-+    ctx->create_signal_count = n;
-+
-     return 0;
- }
- 
-+static bool is_in_subscr_list(const uint16_t *subscr, uint16_t start,
-+                              uint16_t end, uint16_t vm_id)
-+{
-+    unsigned int n;
-+
-+    for (n = start; n < end; n++)
-+    {
-+        if (subscr[n] == vm_id)
-+            return true;
-+    }
-+
-+    return false;
-+}
-+
- /* This function is supposed to undo what ffa_domain_init() has done */
- static int ffa_domain_teardown(struct domain *d)
- {
-     struct ffa_ctx *ctx = d->arch.tee;
-+    unsigned int n;
-+    int32_t res;
- 
-     if ( !ctx )
-         return 0;
- 
-+    for ( n = 0; n < subscr_vm_destroyed_count; n++ )
-+    {
-+        /*
-+         * Skip SPs subscribed to the VM created event that never was
-+         * notified of the VM creation due to an error during
-+         * ffa_domain_init().
-+         */
-+        if ( is_in_subscr_list(subscr_vm_created, ctx->create_signal_count,
-+                               subscr_vm_created_count, get_vm_id(d)) )
-+            continue;
-+
-+        res = ffa_direct_req_send_vm(subscr_vm_destroyed[n], get_vm_id(d),
-+                                     FFA_MSG_SEND_VM_DESTROYED);
-+
-+        if ( res )
-+            printk(XENLOG_ERR "ffa: Failed to report destruction of vm_id %u to  %u: res %d\n",
-+                   get_vm_id(d), subscr_vm_destroyed[n], res);
-+    }
-+
-     XFREE(d->arch.tee);
- 
-     return 0;
-@@ -411,6 +561,81 @@ static int ffa_relinquish_resources(struct domain *d)
-     return 0;
- }
- 
-+static void uninit_subscribers(void)
-+{
-+        subscr_vm_created_count = 0;
-+        subscr_vm_destroyed_count = 0;
-+        XFREE(subscr_vm_created);
-+        XFREE(subscr_vm_destroyed);
-+}
-+
-+static bool init_subscribers(struct ffa_partition_info_1_1 *fpi, uint16_t count)
-+{
-+    uint16_t n;
-+    uint16_t c_pos;
-+    uint16_t d_pos;
-+
-+    subscr_vm_created_count = 0;
-+    subscr_vm_destroyed_count = 0;
-+    for ( n = 0; n < count; n++ )
-+    {
-+        if (fpi[n].partition_properties & FFA_PART_PROP_NOTIF_CREATED)
-+            subscr_vm_created_count++;
-+        if (fpi[n].partition_properties & FFA_PART_PROP_NOTIF_DESTROYED)
-+            subscr_vm_destroyed_count++;
-+    }
-+
-+    if ( subscr_vm_created_count )
-+        subscr_vm_created = xzalloc_array(uint16_t, subscr_vm_created_count);
-+    if ( subscr_vm_destroyed_count )
-+        subscr_vm_destroyed = xzalloc_array(uint16_t,
-+                                            subscr_vm_destroyed_count);
-+    if ( (subscr_vm_created_count && !subscr_vm_created) ||
-+         (subscr_vm_destroyed_count && !subscr_vm_destroyed) )
-+    {
-+        printk(XENLOG_ERR "ffa: Failed to allocate subscription lists\n");
-+        uninit_subscribers();
-+        return false;
-+    }
-+
-+    for ( c_pos = 0, d_pos = 0, n = 0; n < count; n++ )
-+    {
-+        if ( fpi[n].partition_properties & FFA_PART_PROP_NOTIF_CREATED )
-+            subscr_vm_created[c_pos++] = fpi[n].id;
-+        if ( fpi[n].partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
-+            subscr_vm_destroyed[d_pos++] = fpi[n].id;
-+    }
-+
-+    return true;
-+}
-+
-+static bool init_sps(void)
-+{
-+    bool ret = false;
-+    uint32_t count;
-+    int e;
-+
-+    e = ffa_partition_info_get(0, 0, 0, 0, 0, &count);
-+    if ( e )
-+    {
-+        printk(XENLOG_ERR "ffa: Failed to get list of SPs: %d\n", e);
-+        goto out;
-+    }
-+
-+    if ( count >= UINT16_MAX )
-+    {
-+        printk(XENLOG_ERR "ffa: Impossible number of SPs: %u\n", count);
-+        goto out;
-+    }
-+
-+    ret = init_subscribers(ffa_rx, count);
-+
-+out:
-+    ffa_rx_release();
-+
-+    return ret;
-+}
-+
- static bool ffa_probe(void)
- {
-     uint32_t vers;
-@@ -462,7 +687,8 @@ static bool ffa_probe(void)
-      * TODO: Rework the code to allow domain to use a subset of the
-      * features supported.
-      */
--    if (
-+    if ( !check_mandatory_feature(FFA_PARTITION_INFO_GET) ||
-+         !check_mandatory_feature(FFA_RX_RELEASE) ||
-          !check_mandatory_feature(FFA_RXTX_MAP_64) ||
-          !check_mandatory_feature(FFA_RXTX_UNMAP) ||
-          !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
-@@ -484,6 +710,9 @@ static bool ffa_probe(void)
-     }
-     ffa_version = vers;
- 
-+    if ( !init_sps() )
-+        goto err_free_ffa_tx;
-+
-     return true;
- 
- err_free_ffa_tx:
+ /* Function IDs */
+ #define FFA_ERROR                       0x84000060U
+ #define FFA_SUCCESS_32                  0x84000061U
 -- 
 2.34.1
 
