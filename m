@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83275C001B0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D7C9EB64DC
 	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 07:22:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.564194.881612 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.564188.881574 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLIYG-0002RD-9R; Mon, 17 Jul 2023 07:21:48 +0000
+	id 1qLIY7-0000FZ-Aq; Mon, 17 Jul 2023 07:21:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 564194.881612; Mon, 17 Jul 2023 07:21:48 +0000
+Received: by outflank-mailman (output) from mailman id 564188.881574; Mon, 17 Jul 2023 07:21:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLIYF-0002JR-Jf; Mon, 17 Jul 2023 07:21:47 +0000
-Received: by outflank-mailman (input) for mailman id 564194;
- Mon, 17 Jul 2023 07:21:43 +0000
+	id 1qLIY7-0000C5-42; Mon, 17 Jul 2023 07:21:39 +0000
+Received: by outflank-mailman (input) for mailman id 564188;
+ Mon, 17 Jul 2023 07:21:37 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xV9D=DD=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1qLIYA-0005A3-Rw
- for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 07:21:42 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
+ id 1qLIY5-0005A3-IT
+ for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 07:21:37 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 940e4892-2472-11ee-b23a-6b7b168915f2;
- Mon, 17 Jul 2023 09:21:42 +0200 (CEST)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-4fdb3f66fd6so2316152e87.3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 00:21:42 -0700 (PDT)
+ id 90e6f746-2472-11ee-b23a-6b7b168915f2;
+ Mon, 17 Jul 2023 09:21:37 +0200 (CEST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-4fb7589b187so6466236e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 00:21:37 -0700 (PDT)
 Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- l10-20020ac24a8a000000b004f846cd74bcsm2658938lfp.245.2023.07.17.00.21.40
+ l10-20020ac24a8a000000b004f846cd74bcsm2658938lfp.245.2023.07.17.00.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jul 2023 00:21:41 -0700 (PDT)
+ Mon, 17 Jul 2023 00:21:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 940e4892-2472-11ee-b23a-6b7b168915f2
+X-Inumbo-ID: 90e6f746-2472-11ee-b23a-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1689578501; x=1692170501;
+        d=linaro.org; s=google; t=1689578496; x=1692170496;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sWua/aGnhgeAUqYKtQ1Lf4Q/vc2pnAQzQP1lQqZFLOs=;
-        b=bRjF4qKlC8vQak3a4DLbOBqDwDc1E6uXtGEPEfJ1xjeRdPixyi+QSuS8In7gooenqa
-         5LM1ti6GdGiCYor3Hvgi7Vyfr6ehTbnawBDdjY80hwpzONoTF3Cdx5AACoIcMWqaL4cV
-         ts1xjZXyWW/cBGhjPqcVVusxsaZFUtYG8CGyRv/68JMesrhA2tooS7Bmaaet/FxSsEVU
-         r1ITlSP+YIgA69lr/c1y9F3QtKHiWnccgNzBESM90J+sFGLrKRZBMWJ46NGHOqoiLCcQ
-         Bw0oJbQBKeYHDdq1+iH2PHH6BqmJ5ExHGZC5fCOh1ObEXIJ8I5p0Ex+OUHuct9qH1rBu
-         3sMg==
+        bh=yGDYqeByXV8bSEztmWgee0JK3pFxnI7HN01UFyB4olQ=;
+        b=OIZFFuTGAtZmeKjST/n6DeRljPjk2acHhAkyrWuRPC3tj2Sucl9X/WYuOkB0ZrbAUw
+         1XrOFO4iYXb4iQ5HSLZ9Qcl16KCU21E/2lzRRHFrI5I6Vs9xgy+uSjyW61JtgAtmL6D4
+         OlcKXt0Ba+jkzWTmiQ/pExxDF4xgys1e06ITWeH7ZCZl+xFAaqyXAjT6QKYjGF5uJWtf
+         f9pBlRGjHn2gmLDZTSn1uIWwQsogSZO62tu2cLUaSV8sn7wlzkHsPsgAjfLLKIdW2xxH
+         e23MR7lzjRwqEVeVm92+alZA9erf1oLHfG0Qq8/aMWCaqdfHWrxPXKtFCqf9nwtt3hUO
+         wE1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689578501; x=1692170501;
+        d=1e100.net; s=20221208; t=1689578496; x=1692170496;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sWua/aGnhgeAUqYKtQ1Lf4Q/vc2pnAQzQP1lQqZFLOs=;
-        b=OFqaXwSbOMIODu0ChlMMYVrd3fwP7jammi9KTCuTd5JsMFPvjgAYxQ70kdQHSSB4EG
-         Ctpa6mbZ9XZR4EjhPYXyysdlNuzyfFh4Z6j1O3WiMmBwLTNEAt7IckC3yVw05TOyaPco
-         NJOoLoQU/5quGtGc+U5s+61xFaWg2wfiT3z5JZrOdRjoqrJEg3+zpzAE9GNYFyCTGf5e
-         kpxovXJMB9knErpeBKUl5R2D+8v3fp51LySncZG/sBhbRCnVkwvauj3xfGahYGLZ2sfn
-         vR+qX0pIsKBT4XccrxbzChwScnWTciymPAO8n447pcmB9a5aTk3lm/zUtCH5ixaXKYoG
-         UZ8A==
-X-Gm-Message-State: ABy/qLYRol0ELno2Dm+ZtqLJuREQHZyUMbQ8/m9iIqonas+dS5y8RYw2
-	26XnVR2rq3Al9ybrfeSnijryf9D0H6D7e37oUAQ=
-X-Google-Smtp-Source: APBJJlFGgqFk90LEx9JDGoSMAlQiXMj+Tu7SBoByp/VnNfNwMZZkYSroesEVWBr3gChieyYidLnpBA==
-X-Received: by 2002:ac2:5973:0:b0:4f8:770f:1b0b with SMTP id h19-20020ac25973000000b004f8770f1b0bmr7012547lfp.33.1689578501722;
-        Mon, 17 Jul 2023 00:21:41 -0700 (PDT)
+        bh=yGDYqeByXV8bSEztmWgee0JK3pFxnI7HN01UFyB4olQ=;
+        b=Ah6EtxsEq13b7MpXDea6+hK1o2xITBVxkFjTSTaZKj/9lmcXYef332Qp0tL7QklZZi
+         WGF4ipJreAs1YnqKD3xuxlvE5sbXqPl4wqMsgkSIlMILdvKzKiUhBK7Ozbq4knWSKk1q
+         ft91e4QzuXUHenFRtrrnFHEpWUMffc6tyMmV2O03BlFEr4aE9T8LJQ3N4m0zipgka2V9
+         hwd7+R9qDmsBJ0J+VY5Qp9kpp34bpaEHmdszk5pFYqN9ikaOXGZIZO9stGBgJCIKMsR8
+         14HuFMNzhAGZtpaeIVYNM85t3wRJRMJZ+tDV5GAIg79YfrbqMVMVpJ7UphO8AslcNzlJ
+         cseQ==
+X-Gm-Message-State: ABy/qLZiyxHdgaC/S1rEWctF9qi4covurjgPn2njVT48QoYPoPdV9M+q
+	5QtD/CaqDFh1k4H8euX7Sv4Msj0lMF4cWGXoZNQ=
+X-Google-Smtp-Source: APBJJlFvMF9sKJ05ylGz+WoP/8dMl7wwvn0bfoZtSSw2bLeWWbzmADI1sZPqGifTfzAoEY6+Ufkgxw==
+X-Received: by 2002:a05:6512:304a:b0:4fa:a0c3:ef9d with SMTP id b10-20020a056512304a00b004faa0c3ef9dmr8538752lfb.18.1689578496323;
+        Mon, 17 Jul 2023 00:21:36 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -91,115 +91,209 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Jens Wiklander <jens.wiklander@linaro.org>,
 	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [XEN PATCH v10 19/24] xen/arm: ffa: add support to reclaim shared memory
-Date: Mon, 17 Jul 2023 09:21:02 +0200
-Message-Id: <20230717072107.753304-20-jens.wiklander@linaro.org>
+Subject: [XEN PATCH v10 14/24] xen/arm: ffa: support guest FFA_PARTITION_INFO_GET
+Date: Mon, 17 Jul 2023 09:20:57 +0200
+Message-Id: <20230717072107.753304-15-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230717072107.753304-1-jens.wiklander@linaro.org>
 References: <20230717072107.753304-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Adds support to reclaim memory previously shared with FFA_MEM_SHARE.
+Adds support in the mediator to handle FFA_PARTITION_INFO_GET requests
+from a guest. The requests are forwarded to the SPMC and the response is
+translated according to the FF-A version in use by the guest.
 
-A memory region that doesn't need to be shared any longer can be
-reclaimed with FFA_MEM_RECLAIM once the SP doesn't use it any longer.
-This is checked by the SPMC and not in control of the mediator.
-
-Adds a check that the SP supports the needed FF-A feature
-FFA_MEM_RECLAIM.
+Using FFA_PARTITION_INFO_GET changes the owner of the RX buffer to the
+caller (the guest in this case), so once it is done with the buffer it
+must be released using FFA_RX_RELEASE before another call can be made.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/arm/tee/ffa.c | 53 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 53 insertions(+)
+ xen/arch/arm/tee/ffa.c | 131 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 131 insertions(+)
 
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index f3eb84a8e9b7..c623c51168b9 100644
+index ffabb5ed0a80..d5748b9ce88c 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -538,6 +538,12 @@ static int32_t ffa_mem_share(uint32_t tot_len, uint32_t frag_len,
-     }
- }
+@@ -166,7 +166,18 @@
+ #define FFA_MSG_SEND                    0x8400006EU
+ #define FFA_MSG_POLL                    0x8400006AU
  
-+static int32_t ffa_mem_reclaim(uint32_t handle_lo, uint32_t handle_hi,
-+                               uint32_t flags)
-+{
-+    return ffa_simple_call(FFA_MEM_RECLAIM, handle_lo, handle_hi, flags, 0);
-+}
++/*
++ * Structs below ending with _1_0 are defined in FF-A-1.0-REL and
++ * struct ending with _1_1 are defined in FF-A-1.1-REL0.
++ */
 +
- static int32_t ffa_direct_req_send_vm(uint16_t sp_id, uint16_t vm_id,
-                                       uint8_t msg)
+ /* Partition information descriptor */
++struct ffa_partition_info_1_0 {
++    uint16_t id;
++    uint16_t execution_context;
++    uint32_t partition_properties;
++};
++
+ struct ffa_partition_info_1_1 {
+     uint16_t id;
+     uint16_t execution_context;
+@@ -189,6 +200,7 @@ struct ffa_ctx {
+      */
+     uint16_t create_signal_count;
+     bool rx_is_free;
++    spinlock_t lock;
+ };
+ 
+ /* Negotiated FF-A version to use with the SPMC */
+@@ -203,9 +215,15 @@ static uint16_t subscr_vm_destroyed_count __read_mostly;
+ /*
+  * Our rx/tx buffers shared with the SPMC. FFA_RXTX_PAGE_COUNT is the
+  * number of pages used in each of these buffers.
++ *
++ * The RX buffer is protected from concurrent usage with ffa_rx_buffer_lock.
++ * Note that the SPMC is also tracking the ownership of our RX buffer so
++ * for calls which uses our RX buffer to deliver a result we must call
++ * ffa_rx_release() to let the SPMC know that we're done with the buffer.
+  */
+ static void *ffa_rx __read_mostly;
+ static void *ffa_tx __read_mostly;
++static DEFINE_SPINLOCK(ffa_rx_buffer_lock);
+ 
+ static bool ffa_get_version(uint32_t *vers)
  {
-@@ -1278,6 +1284,43 @@ out_set_ret:
-             set_regs_error(regs, ret);
+@@ -510,6 +528,100 @@ static uint32_t handle_rxtx_unmap(void)
+     return FFA_RET_OK;
  }
  
-+static int handle_mem_reclaim(uint64_t handle, uint32_t flags)
++static int32_t handle_partition_info_get(uint32_t w1, uint32_t w2, uint32_t w3,
++                                         uint32_t w4, uint32_t w5,
++                                         uint32_t *count)
 +{
++    int32_t ret = FFA_RET_DENIED;
 +    struct domain *d = current->domain;
 +    struct ffa_ctx *ctx = d->arch.tee;
-+    struct ffa_shm_mem *shm;
-+    register_t handle_hi;
-+    register_t handle_lo;
-+    int ret;
++
++    /*
++     * FF-A v1.0 has w5 MBZ while v1.1 allows
++     * FFA_PARTITION_INFO_GET_COUNT_FLAG to be non-zero.
++     */
++    if ( w5 == FFA_PARTITION_INFO_GET_COUNT_FLAG &&
++         ctx->guest_vers == FFA_VERSION_1_1 )
++        return ffa_partition_info_get(w1, w2, w3, w4, w5, count);
++    if ( w5 )
++        return FFA_RET_INVALID_PARAMETERS;
++
++    if ( !ffa_rx )
++        return FFA_RET_DENIED;
 +
 +    spin_lock(&ctx->lock);
-+    list_for_each_entry(shm, &ctx->shm_list, list)
-+    {
-+        if ( shm->handle == handle )
-+            goto found_it;
-+    }
-+    shm = NULL;
-+    ret = FFA_RET_INVALID_PARAMETERS;
-+    goto out;
-+found_it:
-+
-+    uint64_to_regpair(&handle_hi, &handle_lo, handle);
-+    ret = ffa_mem_reclaim(handle_lo, handle_hi, flags);
-+    if ( ret )
-+    {
-+        shm = NULL;
++    if ( !ctx->page_count || !ctx->rx_is_free )
 +        goto out;
++    spin_lock(&ffa_rx_buffer_lock);
++    ret = ffa_partition_info_get(w1, w2, w3, w4, w5, count);
++    if ( ret )
++        goto out_rx_buf_unlock;
++    /*
++     * ffa_partition_info_get() succeeded so we now own the RX buffer we
++     * share with the SPMC. We must give it back using ffa_rx_release()
++     * once we've copied the content.
++     */
++
++    if ( ctx->guest_vers == FFA_VERSION_1_0 )
++    {
++        size_t n;
++        struct ffa_partition_info_1_1 *src = ffa_rx;
++        struct ffa_partition_info_1_0 *dst = ctx->rx;
++
++        if ( ctx->page_count * FFA_PAGE_SIZE < *count * sizeof(*dst) )
++        {
++            ret = FFA_RET_NO_MEMORY;
++            goto out_rx_release;
++        }
++
++        for ( n = 0; n < *count; n++ )
++        {
++            dst[n].id = src[n].id;
++            dst[n].execution_context = src[n].execution_context;
++            dst[n].partition_properties = src[n].partition_properties;
++        }
 +    }
++    else
++    {
++        size_t sz = *count * sizeof(struct ffa_partition_info_1_1);
 +
-+    list_del(&shm->list);
++        if ( ctx->page_count * FFA_PAGE_SIZE < sz )
++        {
++            ret = FFA_RET_NO_MEMORY;
++            goto out_rx_release;
++        }
 +
++
++        memcpy(ctx->rx, ffa_rx, sz);
++    }
++    ctx->rx_is_free = false;
++out_rx_release:
++    ffa_rx_release();
++out_rx_buf_unlock:
++    spin_unlock(&ffa_rx_buffer_lock);
 +out:
-+    free_ffa_shm_mem(ctx, shm);
 +    spin_unlock(&ctx->lock);
 +
 +    return ret;
 +}
 +
- static bool ffa_handle_call(struct cpu_user_regs *regs)
++static int32_t handle_rx_release(void)
++{
++    int32_t ret = FFA_RET_DENIED;
++    struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    spin_lock(&ctx->lock);
++    if ( !ctx->page_count || ctx->rx_is_free )
++        goto out;
++    ret = FFA_RET_OK;
++    ctx->rx_is_free = true;
++out:
++    spin_unlock(&ctx->lock);
++
++    return ret;
++}
++
+ static void handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
  {
+     struct arm_smccc_1_2_regs arg = { .a0 = fid, };
+@@ -566,6 +678,7 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
      uint32_t fid = get_user_reg(regs, 0);
-@@ -1339,6 +1382,15 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
-     case FFA_MEM_SHARE_64:
-         handle_mem_share(regs);
+     struct domain *d = current->domain;
+     struct ffa_ctx *ctx = d->arch.tee;
++    uint32_t count;
+     int e;
+ 
+     if ( !ctx )
+@@ -595,6 +708,24 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
+         else
+             set_regs_success(regs, 0, 0);
          return true;
-+    case FFA_MEM_RECLAIM:
-+        e = handle_mem_reclaim(regpair_to_uint64(get_user_reg(regs, 2),
-+                                                 get_user_reg(regs, 1)),
-+                               get_user_reg(regs, 3));
++    case FFA_PARTITION_INFO_GET:
++        e = handle_partition_info_get(get_user_reg(regs, 1),
++                                      get_user_reg(regs, 2),
++                                      get_user_reg(regs, 3),
++                                      get_user_reg(regs, 4),
++                                      get_user_reg(regs, 5), &count);
++        if ( e )
++            set_regs_error(regs, e);
++        else
++            set_regs_success(regs, count, 0);
++        return true;
++    case FFA_RX_RELEASE:
++        e = handle_rx_release();
 +        if ( e )
 +            set_regs_error(regs, e);
 +        else
 +            set_regs_success(regs, 0, 0);
 +        return true;
- 
-     default:
-         gprintk(XENLOG_ERR, "ffa: unhandled fid 0x%x\n", fid);
-@@ -1573,6 +1625,7 @@ static bool ffa_probe(void)
-          !check_mandatory_feature(FFA_MEM_SHARE_64) ||
-          !check_mandatory_feature(FFA_RXTX_UNMAP) ||
-          !check_mandatory_feature(FFA_MEM_SHARE_32) ||
-+         !check_mandatory_feature(FFA_MEM_RECLAIM) ||
-          !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
-         return false;
- 
+     case FFA_MSG_SEND_DIRECT_REQ_32:
+     case FFA_MSG_SEND_DIRECT_REQ_64:
+         handle_msg_send_direct_req(regs, fid);
 -- 
 2.34.1
 
