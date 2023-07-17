@@ -4,33 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58013EB64DC
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 11:50:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.564446.881886 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5755EB64DC
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 11:52:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.564464.881897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLMkB-0007Hp-Ob; Mon, 17 Jul 2023 11:50:23 +0000
+	id 1qLMls-0007vy-4O; Mon, 17 Jul 2023 11:52:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 564446.881886; Mon, 17 Jul 2023 11:50:23 +0000
+Received: by outflank-mailman (output) from mailman id 564464.881897; Mon, 17 Jul 2023 11:52:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLMkB-0007Hf-LU; Mon, 17 Jul 2023 11:50:23 +0000
-Received: by outflank-mailman (input) for mailman id 564446;
- Mon, 17 Jul 2023 11:36:07 +0000
+	id 1qLMls-0007vr-1T; Mon, 17 Jul 2023 11:52:08 +0000
+Received: by outflank-mailman (input) for mailman id 564464;
+ Mon, 17 Jul 2023 11:52:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2MJZ=DD=ideasonboard.com=kieran.bingham@srs-se1.protection.inumbo.net>)
- id 1qLMWN-0004NL-Ke
- for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 11:36:07 +0000
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1d0d9a98-2496-11ee-b23a-6b7b168915f2;
- Mon, 17 Jul 2023 13:36:05 +0200 (CEST)
-Received: from pendragon.ideasonboard.com
- (aztw-30-b2-v4wan-166917-cust845.vm26.cable.virginm.net [82.37.23.78])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id AC0DD16C4;
- Mon, 17 Jul 2023 13:35:09 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=hD51=DD=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1qLMlq-0007vT-Fr
+ for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 11:52:06 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on2062e.outbound.protection.outlook.com
+ [2a01:111:f400:7e1a::62e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 59a72d89-2498-11ee-b23a-6b7b168915f2;
+ Mon, 17 Jul 2023 13:52:05 +0200 (CEST)
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
+ by DB9PR04MB9675.eurprd04.prod.outlook.com (2603:10a6:10:307::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.31; Mon, 17 Jul
+ 2023 11:52:03 +0000
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::9bd3:48c9:ff58:9880]) by DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::9bd3:48c9:ff58:9880%4]) with mapi id 15.20.6588.031; Mon, 17 Jul 2023
+ 11:52:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,119 +49,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1d0d9a98-2496-11ee-b23a-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1689593710;
-	bh=Q3mYfdnpaLKlY8/jxmRm80QstU9e0PZzEci91ZZE1j4=;
-	h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
-	b=D34b2nk3MBeIsD4Hh9go1cz7KYgQfaVb0QwyTeWrvQudhj3fcvsR86k18n5c2Eh/a
-	 11cp7FnDEwboNqdfvQSni7J+NuSf4nawSesO0QfLQ1Tb/Qq/1vhrC/00e2IYaQomU7
-	 muczhfhcRx636pqbzTWg6NH753X76UJuCpEmbpUo=
-Content-Type: text/plain; charset="utf-8"
+X-Inumbo-ID: 59a72d89-2498-11ee-b23a-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Xam5R/J7gGlLvqFiUNOxQP/WkFWtNnyHmVivgchabfgR+JyYz59w4p+nmLuPrYfwBMOopcXjg8YbwBcYsupuCWebtd3uYXG8YDrk07ZmXDbLbft4Q7CkEHrFawvdd8Zyj7Ifqe46LK6Z/mnFD9tzOneEvBSbIcEWX0ITjCAXj563XAEmNykaagnRl56ORGLjmxgvCy0SZ21D7j6PVZ3DA4I5IWyInSqy2oVBpdJlZg0B+eh45RX3rEwe/8ZLozy4wPAL+6bPXilS9HeBHSDUHMm+4aRB75Y9/tlr/5qRAN+Dhzy6YWe+xKLlDhdtp3gQCCRamQKSZ9y+AdJ3d+0xuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gVBzIRKhDWPWD4lcUpcjO3vCJbP0ot4R2AJ0zXXGXZs=;
+ b=fpyhyOvQJTOLfeaoxUURkZPJ2GJa7vP3v0A3QyA32cMky3zknkvFxAjKWjsz4kJEpGIaN9JBBdKLQYi9Y2dTok0tOi1wTw567fHGHD25kQGUb8XgM03zxmIsnIxIhLAMi7pp+xtpI0xxMGD479kX4cku6rSxKMAn4a5Fn4ArnUOzUq6r8OuWlWSTpzLNPQBM++xHaddOFLr2ljcllM88T80AhBwVYHpNWIAzxWLgeRkZarfI2tAnTeF28lOjp5fTWcW5hAdqU90i6QyoOl3dK2JjrePufAODgE+wxYe9LnYAxRBBQRnEDjU63S2RoO9SkgpRFgZcQgL92R3a7SJs8g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gVBzIRKhDWPWD4lcUpcjO3vCJbP0ot4R2AJ0zXXGXZs=;
+ b=S58G2yI3HwjTnjjRxK5EWh9HHtiE5FTwrMzURJIOtnwNMXrUPOCpW2IU4p04m8j/TwvThgONLFSTSp0mJuq1HqSo59UkOoQBCjl/Wbx9ZvTsueU2zNK+1gPPZ/mjIHGwjZX28RtYPehFlcgAeoAn2LoZLnaXN+CPRsmQpIM3VjuZq+lQTtnR+o4PYd7obSX2g0EZyAKMWYMgYi4D/rgOeA3vlAjlmAQo0ZrSbI3ATWLEKBAD1SDYw1NFTR1eK2va/ZD56cdl1ZwcKdAjv1lpyvFJTagP6+AlBxzGwh+ReX64y+7UjjYHbOFtJ6RLgd6mKV+tJup64lCqlY++CFQNVA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <ee342a26-5f26-0e47-06a6-c74fdb3270d6@suse.com>
+Date: Mon, 17 Jul 2023 13:52:01 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] x86: drop old (32-bit-only) MSR definitions
+Content-Language: en-US
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, Simone Ballarin <simone.ballarin@bugseng.com>,
+ Gianluca Luparini <gianluca.luparini@bugseng.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <df2c3154-2e8b-194a-ec1e-472819bbf026@suse.com>
+ <38707d09-92a3-2807-4bf0-167be5c3bb15@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <38707d09-92a3-2807-4bf0-167be5c3bb15@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0268.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b5::12) To DU2PR04MB8790.eurprd04.prod.outlook.com
+ (2603:10a6:10:2e1::23)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20230714174545.4056287-1-robh@kernel.org>
-References: <20230714174545.4056287-1-robh@kernel.org>
-Subject: Re: [PATCH] drm: Explicitly include correct DT includes
-From: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
-Cc: devicetree@vger.kernel.org, Ondrej Jirman <megous@megous.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, etnaviv@lists.freedesktop.org, linux-samsung-soc@vger.kernel.org, linux-mips@vger.kernel.org, lima@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, linux-rpi-kernel@lists.infradead.org, linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com, linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org, xen-devel@lists.xenproject.org
-To: Abhinav Kumar <quic_abhinavk@quicinc.com>, Alain Volmat <alain.volmat@foss.st.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, Alim Akhtar <alim.akhtar@samsung.com>, Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>, Andrzej Hajda <andrzej.hajda@intel.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Artur Weber <aweber.kernel@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Chen-Yu Tsai <wens@csie.org>, Christian Gmeiner <christian.gmeiner@gmail.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>, Chunyan Zhang <zhang.lyra@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@gmail.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Emma Anholt <emma@anholt.net>, Fabio Estevam <festevam@gmail.com>, Florian Fainelli <florian.fainelli@broadcom.com>, Guido =?utf-8?q?G=C3=BCnther?= <agx@sigxcpu.org>, Heiko =?utf-8?q?St=C3=BCbner?= <heiko@sntech.de>, Icenow
- y Zheng <icenowy@aosc.io>, Inki Dae <inki.dae@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>, Javier Martinez Canillas <javierm@redhat.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Jerome Brunet <jbrunet@baylibre.com>, Jerry Han <hanxu5@huaqin.corp-partner.google.com>, Jianhua Lu <lujianhua000@gmail.com>, John Stultz <jstultz@google.com>, Jonas Karlman <jonas@kwiboo.se>, Jonathan Hunter <jonathanh@nvidia.com>, Jyri Sarha <jyri.sarha@iki.fi>, Kevin Hilman <khilman@baylibre.com>, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Kyungmin Park <kyungmin.park@samsung.com>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, Linus Walleij <linus.walleij@linaro.org>, Liu Ying <victor.liu@nxp.com>, Liviu Dudau <liviu.dudau@arm.com>, Lucas Stach <l.stach@pengutronix.de>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Marek Szyprowski <m.szyprowski@samsung.com>, Marek Vasut <marex@denx.de>, Marijn Suijten <marijn.suijten@
- somainline.org>, Martin Blumenstingl <martin.blumenstingl@googlemail.com>, Matthias Brugger <matthias.bgg@gmail.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, Maxime Ripard <mripard@kernel.org>, Mikko Perttunen <mperttunen@nvidia.com>, NXP Linux Team <linux-imx@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Ondrej Jirman <megi@xff.cz>, Orson Zhai <orsonzhai@gmail.com>, Paul Cercueil <paul@crapouillou.net>, Paul Kocialkowski <paul.kocialkowski@bootlin.com>, Pengutronix Kernel Team <kernel@pengutronix.de>, Philipp Zabel <p.zabel@pengutronix.de>, Philippe Cornu <philippe.cornu@foss.st.com>, Purism Kernel Team <kernel@puri.sm>, Qiang Yu <yuq825@gmail.com>, Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, Rob Clark <robdclark@gmail.com>, Rob Herring <robh@kernel.org>, Robert Foss <rfoss@kernel.org>, Russell King <linux+etnaviv@armlinux.org.uk>, Sam Ravnborg <sam@ravnborg.org>, Samuel Holland <samuel@sholland.org
- >, Sandy Huang <hjc@rock-chips.com>, Sascha Hauer <s.hauer@pengutronix.de>, Sean Paul <sean@poorly.run>, Seung-Woo Kim <sw0312.kim@samsung.com>, Shawn Guo <shawnguo@kernel.org>, Stefan Agner <stefan@agner.ch>, Steven Price <steven.price@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Thomas Zimmermann <tzimmermann@suse.de>, Tian Tao <tiantao6@hisilicon.com>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Tomi Valkeinen <tomba@kernel.org>, Xinliang Liu <xinliang.liu@linaro.org>, Xinwei Kong <kong.kongxinwei@hisilicon.com>, Yannick Fertre <yannick.fertre@foss.st.com>, Yongqin Liu <yongqin.liu@linaro.org>
-Date: Mon, 17 Jul 2023 12:35:59 +0100
-Message-ID: <168959375926.3515353.7529038208688306372@Monstersaurus>
-User-Agent: alot/0.10
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|DB9PR04MB9675:EE_
+X-MS-Office365-Filtering-Correlation-Id: afb41cf9-d93a-41f0-abb0-08db86bc3ce8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	9lozIEIvGR3oTcBijjurCxB7+smoxmkb8I9a0K9E2mSSK12XADwzzV8+1uhAwqv8ntAhu1yi4xlG1+MCO48H4tgQMzbeEf3iB39Zs6hZllP0F3xaHDBaVzezh+MhmyLAHYladsS6S2tnaHZhTAwEQFJFCV80c/Ey/4B/H4O1HZpa6x0tUqQs4F6jZChhyLe75de4M2ph6eCj1nuenG2IE/Ab3J3SiwbWOQEaCiUhTNC/sxutVxwkfqOhj+Yl4OeHHwWau9GmhcKG+Vp9iQPQo6yEMjYs8CDytfR8jwuDBlLANMusLXQ3Wrl2+I2BPVDB4KTBTLMJSemPINE388xu5/CHqDo5DlcbuLLziwHbItVxGtKktopuyxNpY6lFwWgIcIHwW7v8VG46cTWsAynIEyy7EcBzYunwDuo9J2T2VAKnBYStsyWDOBivZkW83h1xvZXuNG9KYtbOY29HmkWYRFBUgVbc75+bKpQXjxmC3KTlR9/VaOjFQtTNr5QuSPcQrNTEW+GjBTIk/xW2zryDsKUpERfcRCqax0EsAwCuGRGC72wvVZ4rWq1YNg0KMJ/9SPDpu1D1l+ai593+BGyoq21bZtf8ii9r80Sc8hN2ysDkF6NApdOdUIPXUXE7/ZNy6I+KXt/LOxsx+FyK18U7gdPNGT8x0PXcx1XqZH1dB8ABTOXhkyu/6/VGh2NZ1BS1r6x0C+WiULs+lHeH2GTuMw==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(396003)(346002)(376002)(366004)(39860400002)(136003)(451199021)(54906003)(38100700002)(6486002)(41300700001)(8936002)(478600001)(5660300002)(8676002)(66476007)(66946007)(316002)(4326008)(66556008)(6916009)(2616005)(186003)(6512007)(26005)(6506007)(53546011)(86362001)(31696002)(36756003)(4744005)(2906002)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?S2FVc3l5MEFGOU14TXhZNmtPUmQzRWpDSUhpcEpFNmMzY3hjZ1VCcS85ZnBS?=
+ =?utf-8?B?Lzc1d2FEajBsTW1CUUtHWHEwN2RiTittUlBoUiswc3Ria05weHA0NzBTcVNF?=
+ =?utf-8?B?NzB5N0loUDZBN2t4NUhQOTlZOXNGUVFEdDY0QmhpSE42eVBvTDViVHgyZUgy?=
+ =?utf-8?B?NU82VDRUam9OcG52YVNFUjdiVEFWZGdTdHY1ZnlWQVY2YUhLRHlPVmhka09H?=
+ =?utf-8?B?ZkdkYldia0RPeVBrUlhRaWRSTnB2T3ZpZ1RVU1JxMVdneThqR3hXYkZGQTdD?=
+ =?utf-8?B?eFEzckpZL3p6N0V4WjdGc1Q4aHVjcnkrOHJRKzJUcHVkSGV0SkJrU3B6azFN?=
+ =?utf-8?B?Tk1FeGhkWjVqdEU3K1Y5WVlieVRzcG9zbUM3M21oSi92dFI3QzUvWUkyK1M1?=
+ =?utf-8?B?d1EwRDJSZ3N4NU95dTVibHprcGlXb250dWJEajdoRmVBOEpNUHVwWXRSMm1V?=
+ =?utf-8?B?dkRuSWFkUkZoVzA2Rk9rZ0trWEY3a0UvbjMwOEdob3d1eG1sNFhVNFJ3dUo5?=
+ =?utf-8?B?MUhMV0ZBOHlOUFBhV2ozSiszZFY0dmExdzBzcEJZR1FMM0QwTVNkQ3NNTEFa?=
+ =?utf-8?B?TnhxMDRTMHg2NTJnYVFFd0U3aHVYM1NpUE4wNS81WXdnSjJMU0ROWWNJMGRj?=
+ =?utf-8?B?alpFa0JDbmt4ckF1ZnNSaFF0eWlTZ2tsWHJhKzdIeDZ6eW81ZjA2WHMvRXdI?=
+ =?utf-8?B?VkVmakhxVlpoOWJ4M2VkMnBhZDhDNGJlYUVobGFPM3dXcktLL01tNENsUGk3?=
+ =?utf-8?B?a21CZGFjcFBzZ1FMN00rTEYyUXY5bXhONU9GOHp4N04zT3JuUkNkQWZTbjRZ?=
+ =?utf-8?B?d0dUblRLOUpuZU84YVZxNi9PT0c2bm5CdGJWdWtIVU4ydzAxRmJvNUFXUVlJ?=
+ =?utf-8?B?QVR5SFZYWXpRQUw3aEgySjZnZ2N6RVJWTXoyeXhnK1YvV04wQmtzZGQrMEdw?=
+ =?utf-8?B?bno3SzdlRjh0S1ptTUN4dVczb25nNm55djVUamN1dXJGWk5Walo4TUdKUjJQ?=
+ =?utf-8?B?UWwwUEh3cjUwVEhJakhLSG9NQVJQejhFRVZTeU9ERlZhb2hFUkloSGpFOGt5?=
+ =?utf-8?B?alNndlA4SW5CdC9tWDc0TjRKL3hEaFRPaHhaTHhZRWVmRGR1bnQvU2F5MWwv?=
+ =?utf-8?B?OCtNWWIxbHpaZ2JYOW1SUGhLS2JWeDZMTk16Nm1tazl4M1hiekluMmh4b2hP?=
+ =?utf-8?B?d1BLVllYOUhyV09sdnBxRWVUQ1pQSXgrSHlTS1ZETlZTVytXa2VISDgwcDVz?=
+ =?utf-8?B?MDR2ZXVPQ3VXZVhRVGQzelVqQ0dzQTdKNUZQSDJ3QU95UjFIYmxUUzk3YVU4?=
+ =?utf-8?B?N09JR01YN0JCUGZ3cEFYSDF2SEtLNXhJRXUxRzlweWdUWFEvTUorbFJWRnNJ?=
+ =?utf-8?B?b3ZFajJ6QjV0NW80bXJocm0vblg4NXRUT21GaE9UbFVXME4xckFNZXNiVjJE?=
+ =?utf-8?B?dGFTMzRMbFlpbmZDVWozV0hsTC9PY3lTVzE5ampDQngxQ0U2Zzl2d3BKbmFP?=
+ =?utf-8?B?SjlnWjNxcXVkUVVjTGNuRmZyM0NaN3lrYTlxZEk2dXA0QTduQmpUU3JUTFFu?=
+ =?utf-8?B?V1poWElJRHQ4TEtyTlRwT2JUYnF4ZEhDZGRpQ0VrVktmY1UvUjlqSHVweUkz?=
+ =?utf-8?B?bG0yZDRFQ25sbHkxLzYvSnA1dzNxTDZoVzlOb3pPT0U1dkcrUHd6MmYvdlBP?=
+ =?utf-8?B?cmMrRmpHVzNVUE1PWHREdlRidVhSZUIvM0llMTNMbHVGYmtEemtpaW5sYjh4?=
+ =?utf-8?B?QklDbjNlVFU0RnUyY2xKQ0F2TVdqQW52a09ETGVUV1VyZjcrNnhYaHMxb2t1?=
+ =?utf-8?B?dXJIREVmQkJDRktOdDMwM2NhUlNya3lxaGFwWUlyclFjTEdnZGkrVWQ5NmFB?=
+ =?utf-8?B?TjhpU2pCdHM0c2xlUWg3Z2I2eXZ1bE9iR09aTE83a1lSSDVIS0VlVytzVk94?=
+ =?utf-8?B?ZFF2LzRacG5Xc3Zmb2VlVnZqdzNQWk1GaHBISXgwS0VtWTRnOFgwUGdIZjU1?=
+ =?utf-8?B?SFRUK1ZUd0xTalVBSzZrMHVJYmFqR3dRK3g4WS9aUFh3ZXZ0ZS92blppZlZr?=
+ =?utf-8?B?bFJIWjUxYWZwV3BYQXBVUnFlSWMvN00xUGdNYmsrekg0NmU5STlsbVc0Nzdm?=
+ =?utf-8?Q?qDkZJfC4m6Q96H3x8SL1hB8NH?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: afb41cf9-d93a-41f0-abb0-08db86bc3ce8
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2023 11:52:03.8022
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 76H5o6EPOndZbWiHp3CmXoP3L7P+XZAuNPVlK0zdyGB20M3u9swrE4MvDBx/qy6uqEsLCZz8r48id1zg3FUquQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9675
 
-Quoting Rob Herring (2023-07-14 18:45:34)
-> The DT of_device.h and of_platform.h date back to the separate
-> of_platform_bus_type before it as merged into the regular platform bus.
-> As part of that merge prepping Arm DT support 13 years ago, they
-> "temporarily" include each other. They also include platform_device.h
-> and of.h. As a result, there's a pretty much random mix of those include
-> files used throughout the tree. In order to detangle these headers and
-> replace the implicit includes with struct declarations, users need to
-> explicitly include the correct includes.
->=20
-> Signed-off-by: Rob Herring <robh@kernel.org>
+On 17.07.2023 12:33, Andrew Cooper wrote:
+> On 17/07/2023 10:17 am, Jan Beulich wrote:
+>>  /* Intel defined MSRs. */
+>> -#define MSR_IA32_P5_MC_ADDR		0x00000000
+>> -#define MSR_IA32_P5_MC_TYPE		0x00000001
+> 
+> These are architectural.  They still exist in all Intel and AMD CPUs.
+> 
+> I'd suggest keeping them, because I think we're required to expose them
+> when advertising MCA.
 
->  drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c         | 2 +-
->  drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c         | 2 ++
->  drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c         | 1 +
->  drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c       | 1 -
->  drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c      | 1 -
+We have them twice, and I've kept the instances without IA32 in their names
+(at the very top of the file, i.e. already in the "new style" section).
 
-For drivers/gpu/drm/renesas/rcar-du/
-
-> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c b/drivers/gpu/=
-drm/renesas/rcar-du/rcar_du_drv.c
-> index 1ffde19cb87f..3904b0cca814 100644
-> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c
-> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_drv.c
-> @@ -12,7 +12,7 @@
->  #include <linux/io.h>
->  #include <linux/mm.h>
->  #include <linux/module.h>
-> -#include <linux/of_device.h>
-> +#include <linux/of.h>
->  #include <linux/platform_device.h>
->  #include <linux/pm.h>
->  #include <linux/slab.h>
-> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c b/drivers/gpu/=
-drm/renesas/rcar-du/rcar_du_kms.c
-> index adfb36b0e815..9ff4537c26c8 100644
-> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
-> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
-> @@ -20,8 +20,10 @@
-> =20
->  #include <linux/device.h>
->  #include <linux/dma-buf.h>
-> +#include <linux/of.h>
->  #include <linux/of_graph.h>
->  #include <linux/of_platform.h>
-> +#include <linux/platform_device.h>
->  #include <linux/wait.h>
-> =20
->  #include "rcar_du_crtc.h"
-> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c b/drivers/gpu/=
-drm/renesas/rcar-du/rcar_du_vsp.c
-> index 45c05d0ffc70..9cbb5e6e2cba 100644
-> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c
-> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c
-> @@ -22,6 +22,7 @@
->  #include <linux/bitops.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/of_platform.h>
-> +#include <linux/platform_device.h>
->  #include <linux/scatterlist.h>
->  #include <linux/slab.h>
->  #include <linux/videodev2.h>
-> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c b/drivers/gp=
-u/drm/renesas/rcar-du/rcar_mipi_dsi.c
-> index e10e4d4b89a2..db2e6f16f954 100644
-> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c
-> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c
-> @@ -12,7 +12,6 @@
->  #include <linux/math64.h>
->  #include <linux/module.h>
->  #include <linux/of.h>
-> -#include <linux/of_device.h>
->  #include <linux/of_graph.h>
->  #include <linux/platform_device.h>
->  #include <linux/reset.h>
-> diff --git a/drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c b/drivers/g=
-pu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c
-> index aa95b85a2964..8048bdca2d6c 100644
-> --- a/drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c
-> +++ b/drivers/gpu/drm/renesas/rcar-du/rzg2l_mipi_dsi.c
-> @@ -10,7 +10,6 @@
->  #include <linux/iopoll.h>
->  #include <linux/module.h>
->  #include <linux/of.h>
-> -#include <linux/of_device.h>
->  #include <linux/of_graph.h>
->  #include <linux/platform_device.h>
->  #include <linux/pm_runtime.h>
-
-Reviewed-by: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+Jan
 
