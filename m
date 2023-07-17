@@ -4,41 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A637DEB64DC
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 15:50:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.564710.882352 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7264AC00528
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 16:00:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.564721.882363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLQUO-0007ot-SK; Mon, 17 Jul 2023 15:50:20 +0000
+	id 1qLQdu-0001QU-TI; Mon, 17 Jul 2023 16:00:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 564710.882352; Mon, 17 Jul 2023 15:50:20 +0000
+Received: by outflank-mailman (output) from mailman id 564721.882363; Mon, 17 Jul 2023 16:00:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLQUO-0007om-PN; Mon, 17 Jul 2023 15:50:20 +0000
-Received: by outflank-mailman (input) for mailman id 564710;
- Mon, 17 Jul 2023 15:40:09 +0000
+	id 1qLQdu-0001QN-QI; Mon, 17 Jul 2023 16:00:10 +0000
+Received: by outflank-mailman (input) for mailman id 564721;
+ Mon, 17 Jul 2023 16:00:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=damT=DD=kernel.org=rfoss@srs-se1.protection.inumbo.net>)
- id 1qLQKX-0006DV-Qt
- for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 15:40:09 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 349f065a-24b8-11ee-b23a-6b7b168915f2;
- Mon, 17 Jul 2023 17:40:08 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9F46561166
- for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 15:40:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931A3C611A5
- for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 15:40:05 +0000 (UTC)
-Received: by mail-oa1-f53.google.com with SMTP id
- 586e51a60fabf-1b0419f758eso3617961fac.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 08:40:05 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=OuH4=DD=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
+ id 1qLQds-0001Q1-NT
+ for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 16:00:08 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fea42a2c-24ba-11ee-b23a-6b7b168915f2;
+ Mon, 17 Jul 2023 18:00:06 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 37D2882866D1;
+ Mon, 17 Jul 2023 11:00:04 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id v3nomEdnxO0X; Mon, 17 Jul 2023 11:00:03 -0500 (CDT)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id DBFAE8285AF8;
+ Mon, 17 Jul 2023 11:00:02 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 6RfTliW6wtWj; Mon, 17 Jul 2023 11:00:02 -0500 (CDT)
+Received: from [10.11.0.2] (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id 8283A8285AF0;
+ Mon, 17 Jul 2023 11:00:02 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,141 +53,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 349f065a-24b8-11ee-b23a-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1689608405;
-	bh=tF/K12dcb1AtR13XQY0pq3bgmoCAiVfZHpGq03H1+sk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=mX8RhJfEol8SKSIZYImvm3vgYGg2QOjrhEImVy70eQw9yFGHJhacPYnLrSEjLcXVH
-	 lsK1foH9DnVkOrz0XgrZvShJMkw35zdZXkm28OGXKxZAPZQPWjnMqmD7u1K/6wWyrF
-	 KESSOxDGgUcHfAUMGWeNgAp8rP61IeLKmYc7IOGocR2yzizGnLQn+2LOPOUV3VN8RI
-	 nXJsuiRAgYTOZFEMemZolvUrK9EbLD+pNe2um6lCwrS0nGmoypnFT87DTWspO0tENT
-	 6g2YWD6p/fpzoiD+byVvvn8YboH7BuhPrNAUEc3aLc7yE8lROrZtFeZkeMUjss/bxz
-	 8gUvf0rnNUAvw==
-X-Gm-Message-State: ABy/qLZ9qen2BEU7hLd72owiWq3gmNWB6jyLBZRZeZ9omdok8mAZGJ5a
-	saIwsmqvgYVCTx2f589sMWSDVWISZU92vRZySqh0bg==
-X-Google-Smtp-Source: APBJJlHs9bNlVGErzzDkG3ITNYPrBi9bcbK5hB2pZ5ku9OA6MncccRQ7QQDddVXbZVn5Z/tCXP76UHYBqks/PFSJBmQ=
-X-Received: by 2002:a17:90b:1095:b0:263:3567:f99 with SMTP id
- gj21-20020a17090b109500b0026335670f99mr13011407pjb.15.1689608384033; Mon, 17
- Jul 2023 08:39:44 -0700 (PDT)
+X-Inumbo-ID: fea42a2c-24ba-11ee-b23a-6b7b168915f2
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com DBFAE8285AF8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1689609602; bh=uTU8lD0bifweRhIffd7gxqa1k05FO2jioX6eJl/ozL8=;
+	h=Message-ID:Date:MIME-Version:To:From;
+	b=QCzWv1rRP6ySQK6tEtGzgjfhNUX/uAHiyyuBJjhtNYgPOE5dcNTWFEwLP+gyPYtH/
+	 eveJf5pxv29d2hrNMIjBV5MKte6e38S2ThnOorZZ2q0tyH2G75LXbq5Nto0b4RLl+y
+	 tTNnKC+LySIyrp4JxjeC2s4kcxr4OG/OW401A6rY=
+X-Virus-Scanned: amavisd-new at rptsys.com
+Message-ID: <dc64009d-53d5-6bd2-14ab-be2481523b0f@raptorengineering.com>
+Date: Mon, 17 Jul 2023 11:00:01 -0500
 MIME-Version: 1.0
-References: <20230714174545.4056287-1-robh@kernel.org> <114500369.nniJfEyVGO@phil>
- <CAL_JsqJMo4LHRmsfRQAr-j6oNESbS=q+eFU+B7e720emjf+8nA@mail.gmail.com>
-In-Reply-To: <CAL_JsqJMo4LHRmsfRQAr-j6oNESbS=q+eFU+B7e720emjf+8nA@mail.gmail.com>
-From: Robert Foss <rfoss@kernel.org>
-Date: Mon, 17 Jul 2023 17:39:32 +0200
-X-Gmail-Original-Message-ID: <CAN6tsi5wOhptw4PgP2etkC5KYh_5cfOXZuVhsN6YCMiqn15hog@mail.gmail.com>
-Message-ID: <CAN6tsi5wOhptw4PgP2etkC5KYh_5cfOXZuVhsN6YCMiqn15hog@mail.gmail.com>
-Subject: Re: [PATCH] drm: Explicitly include correct DT includes
-To: Rob Herring <robh@kernel.org>
-Cc: Heiko Stuebner <heiko@sntech.de>, Liviu Dudau <liviu.dudau@arm.com>, 
-	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, 
-	Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>, 
-	Jernej Skrabec <jernej.skrabec@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
-	Liu Ying <victor.liu@nxp.com>, Shawn Guo <shawnguo@kernel.org>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, NXP Linux Team <linux-imx@nxp.com>, Inki Dae <inki.dae@samsung.com>, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Lucas Stach <l.stach@pengutronix.de>, 
-	Russell King <linux+etnaviv@armlinux.org.uk>, 
-	Christian Gmeiner <christian.gmeiner@gmail.com>, Seung-Woo Kim <sw0312.kim@samsung.com>, 
-	Kyungmin Park <kyungmin.park@samsung.com>, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
-	Xinliang Liu <xinliang.liu@linaro.org>, Tian Tao <tiantao6@hisilicon.com>, 
-	Xinwei Kong <kong.kongxinwei@hisilicon.com>, Sumit Semwal <sumit.semwal@linaro.org>, 
-	Yongqin Liu <yongqin.liu@linaro.org>, John Stultz <jstultz@google.com>, 
-	Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, Paul Cercueil <paul@crapouillou.net>, 
-	Qiang Yu <yuq825@gmail.com>, Paul Kocialkowski <paul.kocialkowski@bootlin.com>, 
-	Linus Walleij <linus.walleij@linaro.org>, Chun-Kuang Hu <chunkuang.hu@kernel.org>, 
-	Philipp Zabel <p.zabel@pengutronix.de>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>, 
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>, Rob Clark <robdclark@gmail.com>, 
-	Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	Marek Vasut <marex@denx.de>, Stefan Agner <stefan@agner.ch>, Sam Ravnborg <sam@ravnborg.org>, 
-	Jerry Han <hanxu5@huaqin.corp-partner.google.com>, Icenowy Zheng <icenowy@aosc.io>, 
-	Ondrej Jirman <megi@xff.cz>, Javier Martinez Canillas <javierm@redhat.com>, =?UTF-8?Q?Guido_G=C3=BCnther?= <agx@sigxcpu.org>, 
-	Purism Kernel Team <kernel@puri.sm>, Jianhua Lu <lujianhua000@gmail.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
-	Artur Weber <aweber.kernel@gmail.com>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, 
-	Steven Price <steven.price@arm.com>, Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>, 
-	Emma Anholt <emma@anholt.net>, Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, 
-	Sandy Huang <hjc@rock-chips.com>, Orson Zhai <orsonzhai@gmail.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
-	Alain Volmat <alain.volmat@foss.st.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
-	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
-	Philippe Cornu <philippe.cornu@foss.st.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
-	Alexandre Torgue <alexandre.torgue@foss.st.com>, Chen-Yu Tsai <wens@csie.org>, 
-	Samuel Holland <samuel@sholland.org>, Thierry Reding <thierry.reding@gmail.com>, 
-	Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Jyri Sarha <jyri.sarha@iki.fi>, Tomi Valkeinen <tomba@kernel.org>, 
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, devicetree@vger.kernel.org, 
-	Ondrej Jirman <megous@megous.com>, dri-devel@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	etnaviv@lists.freedesktop.org, linux-samsung-soc@vger.kernel.org, 
-	linux-mips@vger.kernel.org, lima@lists.freedesktop.org, 
-	linux-mediatek@lists.infradead.org, linux-amlogic@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
-	linux-rpi-kernel@lists.infradead.org, linux-renesas-soc@vger.kernel.org, 
-	linux-rockchip@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com, 
-	linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v3 1/3] xen/ppc: Set up a basic C environment
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Timothy Pearson <tpearson@raptorengineering.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <cover.1688670018.git.sanastasio@raptorengineering.com>
+ <8c79f498ffcb0837ff18640dbaf5b66f79186574.1688670018.git.sanastasio@raptorengineering.com>
+ <7f6feb8b-29fe-7a7f-8965-20a12b4dfb25@suse.com>
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
+In-Reply-To: <7f6feb8b-29fe-7a7f-8965-20a12b4dfb25@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 17, 2023 at 4:27=E2=80=AFPM Rob Herring <robh@kernel.org> wrote=
-:
->
-> On Sun, Jul 16, 2023 at 3:26=E2=80=AFAM Heiko Stuebner <heiko@sntech.de> =
-wrote:
-> >
-> > Am Freitag, 14. Juli 2023, 19:45:34 CEST schrieb Rob Herring:
-> > > The DT of_device.h and of_platform.h date back to the separate
-> > > of_platform_bus_type before it as merged into the regular platform bu=
-s.
-> > > As part of that merge prepping Arm DT support 13 years ago, they
-> > > "temporarily" include each other. They also include platform_device.h
-> > > and of.h. As a result, there's a pretty much random mix of those incl=
-ude
-> > > files used throughout the tree. In order to detangle these headers an=
-d
-> > > replace the implicit includes with struct declarations, users need to
-> > > explicitly include the correct includes.
-> > >
-> > > Signed-off-by: Rob Herring <robh@kernel.org>
-> > > ---
-> >
-> > [...]
-> >
-> > > diff --git a/drivers/gpu/drm/rockchip/dw-mipi-dsi-rockchip.c b/driver=
-s/gpu/drm/rockchip/dw-mipi-dsi-rockchip.c
-> > > index 917e79951aac..2744d8f4a6fa 100644
-> > > --- a/drivers/gpu/drm/rockchip/dw-mipi-dsi-rockchip.c
-> > > +++ b/drivers/gpu/drm/rockchip/dw-mipi-dsi-rockchip.c
-> > > @@ -12,7 +12,9 @@
-> > >  #include <linux/mfd/syscon.h>
-> > >  #include <linux/module.h>
-> > >  #include <linux/of_device.h>
-> > > +#include <linux/of_platform.h>
-> > >  #include <linux/phy/phy.h>
-> > > +#include <linux/platform_device.h>
-> > >  #include <linux/pm_runtime.h>
-> > >  #include <linux/regmap.h>
-> >
-> > I'm not sure if I'm just misreading something, but in all other places
-> > of_device.h gets removed while here is stays as an include. Is this
-> > correct this way?
->
-> Yes, because of_match_device() is used.
->
-> Rob
->
+On 7/17/23 10:38 AM, Jan Beulich wrote:
+> On 06.07.2023 21:04, Shawn Anastasio wrote:
+>> --- a/xen/arch/ppc/include/asm/config.h
+>> +++ b/xen/arch/ppc/include/asm/config.h
+>> @@ -43,7 +43,7 @@
+>>  
+>>  #define SMP_CACHE_BYTES (1 << 6)
+>>  
+>> -#define STACK_ORDER 2
+>> +#define STACK_ORDER 0
+>>  #define STACK_SIZE  (PAGE_SIZE << STACK_ORDER)
+> 
+> In which way is this related to the change at hand? Aren't you going to
+> need to undo this rather sooner than later?
 
-For drivers/gpu/drm/bridge/
+I noticed the stack order being too large when I moved the stack
+declaration to .c per Andrew's recommendation for v2. Since we're using
+64k pages, I don't see why the stack would need to be this big. A quick
+look at ARM shows they have a stack order of 3, which would yield a
+stack size of just 32k.
 
-Acked-by: Robert Foss <rfoss@kernel.org>
+>> --- a/xen/arch/ppc/ppc64/head.S
+>> +++ b/xen/arch/ppc/ppc64/head.S
+>> @@ -1,30 +1,30 @@
+>>  /* SPDX-License-Identifier: GPL-2.0-or-later */
+>>  
+>> +#include <asm/asm-defns.h>
+>> +
+>>      .section .text.header, "ax", %progbits
+>>  
+>>  ENTRY(start)
+>>      /*
+>> -     * Depending on how we were booted, the CPU could be running in either
+>> -     * Little Endian or Big Endian mode. The following trampoline from Linux
+>> -     * cleverly uses an instruction that encodes to a NOP if the CPU's
+>> -     * endianness matches the assumption of the assembler (LE, in our case)
+>> -     * or a branch to code that performs the endian switch in the other case.
+>> +     * NOTE: argument registers (r3-r9) must be preserved until the C entrypoint
+>>       */
+>> -    tdi 0, 0, 0x48    /* Reverse endian of b . + 8          */
+>> -    b . + 44          /* Skip trampoline if endian is good  */
+>> -    .long 0xa600607d  /* mfmsr r11                          */
+>> -    .long 0x01006b69  /* xori r11,r11,1                     */
+>> -    .long 0x00004039  /* li r10,0                           */
+>> -    .long 0x6401417d  /* mtmsrd r10,1                       */
+>> -    .long 0x05009f42  /* bcl 20,31,$+4                      */
+>> -    .long 0xa602487d  /* mflr r10                           */
+>> -    .long 0x14004a39  /* addi r10,r10,20                    */
+>> -    .long 0xa6035a7d  /* mtsrr0 r10                         */
+>> -    .long 0xa6037b7d  /* mtsrr1 r11                         */
+>> -    .long 0x2400004c  /* rfid                               */
+>> -
+>> -    /* Now that the endianness is confirmed, continue */
+>> -1:  b 1b
+>> +    FIXUP_ENDIAN
+>> +
+>> +    /* set up the TOC pointer */
+>> +    LOAD_IMM32(%r2, .TOC.)
+>> +
+>> +    /* set up the initial stack */
+>> +    LOAD_IMM32(%r1, cpu0_boot_stack)
+> 
+> Wouldn't this (and perhaps also .TOC.) better be calculated in a
+> PC-relative manner? Or is the plan to have Xen linked to an address
+> below 4Gb?
+
+As mentioned previously, I am planning to enable the PIC code model in
+my next series in order to accommodate booting on the PowerNV firmware
+type which has a different load address. That patch will change the
+initial TOC load to a simulated PC-relative one (pre-POWER10 doesn't
+have proper PC-relative loads/stores) and the rest to TOC-relative.
+
+>> +    li %r11, 0
+>> +    stdu %r11, -STACK_FRAME_OVERHEAD(%r1)
+>> +
+>> +    /* call the C entrypoint */
+>> +    bl start_xen
+>> +
+>> +    /* should never return */
+>> +    trap
+>>  
+>>      .size start, . - start
+>>      .type start, %function
+>> +
+>> +    .section .init.data, "aw", @progbits
+> 
+> What's this good for when no data follows?
+
+Good catch. With the stack no longer declared in head.S this is
+unnecessary. Will remove in v3.
+
+>> --- /dev/null
+>> +++ b/xen/arch/ppc/setup.c
+>> @@ -0,0 +1,19 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>> +#include <xen/init.h>
+>> +
+>> +/* Xen stack for bringing up the first CPU. */
+>> +unsigned char __initdata cpu0_boot_stack[STACK_SIZE] __aligned(STACK_SIZE);
+> 
+> This yields the entire array as zero-initialized. At which point I
+> don't see a need for the store in head.S.
+
+Okay, fair enough. Given that the array is zero-initialized the stdu
+could be replaced with an `addi %r1, %r1, -STACK_FRAME_OVERHEAD`, and
+the load of zero to %r11 could be deferred to the second patch in this
+series where it's used in the .bss clearing loop.
+
+That said I don't really see the harm with keeping the standard
+idiomatic `stdu` for the initial stack frame setup. Other than
+performance, which isn't a concern here in early setup code.
+
+>> +/* Macro to adjust thread priority for hardware multithreading */
+>> +#define HMT_very_low()  asm volatile (" or %r31, %r31, %r31 ")
+> 
+> Nit: Style. Wants to be
+> 
+> #define HMT_very_low()  asm volatile ( "or %r31, %r31, %r31" )
+
+Will fix in v3.
+
+> Jan
+
+Thanks,
+Shawn
 
