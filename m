@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7264AC00528
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 16:00:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.564721.882363 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCCC1EB64DC
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jul 2023 16:03:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.564732.882412 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLQdu-0001QU-TI; Mon, 17 Jul 2023 16:00:10 +0000
+	id 1qLQh7-00032l-3R; Mon, 17 Jul 2023 16:03:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 564721.882363; Mon, 17 Jul 2023 16:00:10 +0000
+Received: by outflank-mailman (output) from mailman id 564732.882412; Mon, 17 Jul 2023 16:03:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLQdu-0001QN-QI; Mon, 17 Jul 2023 16:00:10 +0000
-Received: by outflank-mailman (input) for mailman id 564721;
- Mon, 17 Jul 2023 16:00:08 +0000
+	id 1qLQh6-00030p-RD; Mon, 17 Jul 2023 16:03:28 +0000
+Received: by outflank-mailman (input) for mailman id 564732;
+ Mon, 17 Jul 2023 16:03:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OuH4=DD=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qLQds-0001Q1-NT
- for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 16:00:08 +0000
-Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fea42a2c-24ba-11ee-b23a-6b7b168915f2;
- Mon, 17 Jul 2023 18:00:06 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 37D2882866D1;
- Mon, 17 Jul 2023 11:00:04 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id v3nomEdnxO0X; Mon, 17 Jul 2023 11:00:03 -0500 (CDT)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id DBFAE8285AF8;
- Mon, 17 Jul 2023 11:00:02 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 6RfTliW6wtWj; Mon, 17 Jul 2023 11:00:02 -0500 (CDT)
-Received: from [10.11.0.2] (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 8283A8285AF0;
- Mon, 17 Jul 2023 11:00:02 -0500 (CDT)
+ <SRS0=fcy7=DD=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
+ id 1qLQh5-00027B-4c
+ for xen-devel@lists.xenproject.org; Mon, 17 Jul 2023 16:03:27 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 75f1a2cd-24bb-11ee-b23a-6b7b168915f2;
+ Mon, 17 Jul 2023 18:03:25 +0200 (CEST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-51e56749750so6312473a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Jul 2023 09:03:25 -0700 (PDT)
+Received: from EMEAENGAAD19049.citrite.net
+ (default-46-102-197-194.interdsl.co.uk. [46.102.197.194])
+ by smtp.gmail.com with ESMTPSA id
+ bo28-20020a0564020b3c00b0051df5bd1cd8sm10099050edb.65.2023.07.17.09.03.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Jul 2023 09:03:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,157 +48,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fea42a2c-24ba-11ee-b23a-6b7b168915f2
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com DBFAE8285AF8
+X-Inumbo-ID: 75f1a2cd-24bb-11ee-b23a-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1689609602; bh=uTU8lD0bifweRhIffd7gxqa1k05FO2jioX6eJl/ozL8=;
-	h=Message-ID:Date:MIME-Version:To:From;
-	b=QCzWv1rRP6ySQK6tEtGzgjfhNUX/uAHiyyuBJjhtNYgPOE5dcNTWFEwLP+gyPYtH/
-	 eveJf5pxv29d2hrNMIjBV5MKte6e38S2ThnOorZZ2q0tyH2G75LXbq5Nto0b4RLl+y
-	 tTNnKC+LySIyrp4JxjeC2s4kcxr4OG/OW401A6rY=
-X-Virus-Scanned: amavisd-new at rptsys.com
-Message-ID: <dc64009d-53d5-6bd2-14ab-be2481523b0f@raptorengineering.com>
-Date: Mon, 17 Jul 2023 11:00:01 -0500
+        d=cloud.com; s=cloud; t=1689609804; x=1692201804;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=EaOSzOKwnaNDbtFFGDCLrWszAMCEvLERpiHBsiwXmN8=;
+        b=VvXSrWXjavQXI5yrEBMvKrTHVuE2itZE0f9oFhSLvAVAI1RTJGLVA3uqhxBzf3MMSh
+         zTyK49m5celffRs4jobunADI5Kc3uv3YaHzbiP4iy9ONqjGDUNA2QMg69bXyvuq5wjl5
+         3MYXJd4ATPjuKvZGXB/uxLoB04zVq8sxvM1l0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689609804; x=1692201804;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EaOSzOKwnaNDbtFFGDCLrWszAMCEvLERpiHBsiwXmN8=;
+        b=dAjb9EUzeNiNBZDLzdWNmgn7m776iSFuQt1W4/ANG5Y7cDJnc7MMEBHdGkwFwCkLo+
+         h6qty6M6LhX+0eUqis74GlNhtN7UKC51JyV0qB7mCkN5xnOXYumwv2UBx5nfeIxGbV7Z
+         aIwnY5k3We7LBYir2RDTFQu/PiGaRy998fgOKZnPGvZYb2IO1bAD4BN5y2cDHWovQGdN
+         BzjViPuWxES8GI3p+XlFFdUGXyJobFyvgA2NdUnpSslQVarS5DdJ3XKRMh3rrCJniWdO
+         oxEtSsmO3Tdb9pFLGzCA1sBPWECbYUW2yY7GlVJki2KEuoIXZ879VRhNlfQd4Fdkaa2m
+         EZRQ==
+X-Gm-Message-State: ABy/qLYFMYNfCPmq2Hojanoxe2gc4y1dXKDxeisgK+xiEFNRHrXqKGYR
+	rlv5+jd38kd2qR6cXcEm7YxDyJETIvdh09JF+cs=
+X-Google-Smtp-Source: APBJJlHxlHXDnujOKuyyvPzhR1A6cx4oXng80WRe0d6aM0pVJeTuzQusY90cvxRft80tFLU+BAPBZA==
+X-Received: by 2002:a05:6402:8c2:b0:51d:ece5:afd9 with SMTP id d2-20020a05640208c200b0051dece5afd9mr12464346edz.21.1689609804717;
+        Mon, 17 Jul 2023 09:03:24 -0700 (PDT)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 5/8] mm: Factor out the pdx compression logic in ma/va converters
+Date: Mon, 17 Jul 2023 17:03:15 +0100
+Message-Id: <20230717160318.2113-6-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230717160318.2113-1-alejandro.vallejo@cloud.com>
+References: <20230717160318.2113-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH v3 1/3] xen/ppc: Set up a basic C environment
-Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Timothy Pearson <tpearson@raptorengineering.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-References: <cover.1688670018.git.sanastasio@raptorengineering.com>
- <8c79f498ffcb0837ff18640dbaf5b66f79186574.1688670018.git.sanastasio@raptorengineering.com>
- <7f6feb8b-29fe-7a7f-8965-20a12b4dfb25@suse.com>
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
-In-Reply-To: <7f6feb8b-29fe-7a7f-8965-20a12b4dfb25@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 7/17/23 10:38 AM, Jan Beulich wrote:
-> On 06.07.2023 21:04, Shawn Anastasio wrote:
->> --- a/xen/arch/ppc/include/asm/config.h
->> +++ b/xen/arch/ppc/include/asm/config.h
->> @@ -43,7 +43,7 @@
->>  
->>  #define SMP_CACHE_BYTES (1 << 6)
->>  
->> -#define STACK_ORDER 2
->> +#define STACK_ORDER 0
->>  #define STACK_SIZE  (PAGE_SIZE << STACK_ORDER)
-> 
-> In which way is this related to the change at hand? Aren't you going to
-> need to undo this rather sooner than later?
+This patch factors out the pdx compression logic hardcoded in both ports
+for the maddr<->vaddr conversion functions.
 
-I noticed the stack order being too large when I moved the stack
-declaration to .c per Andrew's recommendation for v2. Since we're using
-64k pages, I don't see why the stack would need to be this big. A quick
-look at ARM shows they have a stack order of 3, which would yield a
-stack size of just 32k.
+Touches both x86 and arm ports.
 
->> --- a/xen/arch/ppc/ppc64/head.S
->> +++ b/xen/arch/ppc/ppc64/head.S
->> @@ -1,30 +1,30 @@
->>  /* SPDX-License-Identifier: GPL-2.0-or-later */
->>  
->> +#include <asm/asm-defns.h>
->> +
->>      .section .text.header, "ax", %progbits
->>  
->>  ENTRY(start)
->>      /*
->> -     * Depending on how we were booted, the CPU could be running in either
->> -     * Little Endian or Big Endian mode. The following trampoline from Linux
->> -     * cleverly uses an instruction that encodes to a NOP if the CPU's
->> -     * endianness matches the assumption of the assembler (LE, in our case)
->> -     * or a branch to code that performs the endian switch in the other case.
->> +     * NOTE: argument registers (r3-r9) must be preserved until the C entrypoint
->>       */
->> -    tdi 0, 0, 0x48    /* Reverse endian of b . + 8          */
->> -    b . + 44          /* Skip trampoline if endian is good  */
->> -    .long 0xa600607d  /* mfmsr r11                          */
->> -    .long 0x01006b69  /* xori r11,r11,1                     */
->> -    .long 0x00004039  /* li r10,0                           */
->> -    .long 0x6401417d  /* mtmsrd r10,1                       */
->> -    .long 0x05009f42  /* bcl 20,31,$+4                      */
->> -    .long 0xa602487d  /* mflr r10                           */
->> -    .long 0x14004a39  /* addi r10,r10,20                    */
->> -    .long 0xa6035a7d  /* mtsrr0 r10                         */
->> -    .long 0xa6037b7d  /* mtsrr1 r11                         */
->> -    .long 0x2400004c  /* rfid                               */
->> -
->> -    /* Now that the endianness is confirmed, continue */
->> -1:  b 1b
->> +    FIXUP_ENDIAN
->> +
->> +    /* set up the TOC pointer */
->> +    LOAD_IMM32(%r2, .TOC.)
->> +
->> +    /* set up the initial stack */
->> +    LOAD_IMM32(%r1, cpu0_boot_stack)
-> 
-> Wouldn't this (and perhaps also .TOC.) better be calculated in a
-> PC-relative manner? Or is the plan to have Xen linked to an address
-> below 4Gb?
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+ xen/arch/arm/include/asm/mm.h          |  3 +--
+ xen/arch/x86/include/asm/x86_64/page.h | 28 +++++++++++---------------
+ xen/include/xen/pdx.h                  | 25 +++++++++++++++++++++++
+ 3 files changed, 38 insertions(+), 18 deletions(-)
 
-As mentioned previously, I am planning to enable the PIC code model in
-my next series in order to accommodate booting on the PowerNV firmware
-type which has a different load address. That patch will change the
-initial TOC load to a simulated PC-relative one (pre-POWER10 doesn't
-have proper PC-relative loads/stores) and the rest to TOC-relative.
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 1a83f41879..78cb23858a 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -320,8 +320,7 @@ static inline void *maddr_to_virt(paddr_t ma)
+            (DIRECTMAP_SIZE >> PAGE_SHIFT));
+     return (void *)(XENHEAP_VIRT_START -
+                     (directmap_base_pdx << PAGE_SHIFT) +
+-                    ((ma & ma_va_bottom_mask) |
+-                     ((ma & ma_top_mask) >> pfn_pdx_hole_shift)));
++                    maddr_to_directmapoff(ma));
+ }
+ #endif
+ 
+diff --git a/xen/arch/x86/include/asm/x86_64/page.h b/xen/arch/x86/include/asm/x86_64/page.h
+index 53faa7875b..b589c93e77 100644
+--- a/xen/arch/x86/include/asm/x86_64/page.h
++++ b/xen/arch/x86/include/asm/x86_64/page.h
+@@ -36,26 +36,22 @@ static inline unsigned long __virt_to_maddr(unsigned long va)
+ {
+     ASSERT(va < DIRECTMAP_VIRT_END);
+     if ( va >= DIRECTMAP_VIRT_START )
+-        va -= DIRECTMAP_VIRT_START;
+-    else
+-    {
+-        BUILD_BUG_ON(XEN_VIRT_END - XEN_VIRT_START != GB(1));
+-        /* Signed, so ((long)XEN_VIRT_START >> 30) fits in an imm32. */
+-        ASSERT(((long)va >> (PAGE_ORDER_1G + PAGE_SHIFT)) ==
+-               ((long)XEN_VIRT_START >> (PAGE_ORDER_1G + PAGE_SHIFT)));
+-
+-        va += xen_phys_start - XEN_VIRT_START;
+-    }
+-    return (va & ma_va_bottom_mask) |
+-           ((va << pfn_pdx_hole_shift) & ma_top_mask);
++        return directmapoff_to_maddr(va - DIRECTMAP_VIRT_START);
++
++    BUILD_BUG_ON(XEN_VIRT_END - XEN_VIRT_START != GB(1));
++    /* Signed, so ((long)XEN_VIRT_START >> 30) fits in an imm32. */
++    ASSERT(((long)va >> (PAGE_ORDER_1G + PAGE_SHIFT)) ==
++           ((long)XEN_VIRT_START >> (PAGE_ORDER_1G + PAGE_SHIFT)));
++
++    return xen_phys_start + va - XEN_VIRT_START;
+ }
+ 
+ static inline void *__maddr_to_virt(unsigned long ma)
+ {
+-    ASSERT(pfn_to_pdx(ma >> PAGE_SHIFT) < (DIRECTMAP_SIZE >> PAGE_SHIFT));
+-    return (void *)(DIRECTMAP_VIRT_START +
+-                    ((ma & ma_va_bottom_mask) |
+-                     ((ma & ma_top_mask) >> pfn_pdx_hole_shift)));
++    /* Offset in the direct map, accounting for pdx compression */
++    size_t va_offset = maddr_to_directmapoff(ma);
++    ASSERT(va_offset < DIRECTMAP_SIZE);
++    return (void *)(DIRECTMAP_VIRT_START + va_offset);
+ }
+ 
+ /* read access (should only be used for debug printk's) */
+diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
+index 67ae20e89c..f8ca0f5821 100644
+--- a/xen/include/xen/pdx.h
++++ b/xen/include/xen/pdx.h
+@@ -158,6 +158,31 @@ static inline unsigned long pdx_to_pfn(unsigned long pdx)
+ #define mfn_to_pdx(mfn) pfn_to_pdx(mfn_x(mfn))
+ #define pdx_to_mfn(pdx) _mfn(pdx_to_pfn(pdx))
+ 
++/**
++ * Computes the offset into the direct map of an maddr
++ *
++ * @param ma Machine address
++ * @return Offset on the direct map where that
++ *         machine address can be accessed
++ */
++static inline unsigned long maddr_to_directmapoff(uint64_t ma)
++{
++    return ((ma & ma_top_mask) >> pfn_pdx_hole_shift) |
++           (ma & ma_va_bottom_mask);
++}
++
++/**
++ * Computes a machine address given a direct map offset
++ *
++ * @param offset Offset into the direct map
++ * @return Corresponding machine address of that virtual location
++ */
++static inline uint64_t directmapoff_to_maddr(unsigned long offset)
++{
++    return ((offset << pfn_pdx_hole_shift) & ma_top_mask) |
++           (offset & ma_va_bottom_mask);
++}
++
+ /**
+  * Initializes global variables with information about the compressible
+  * range of the current memory regions.
+-- 
+2.34.1
 
->> +    li %r11, 0
->> +    stdu %r11, -STACK_FRAME_OVERHEAD(%r1)
->> +
->> +    /* call the C entrypoint */
->> +    bl start_xen
->> +
->> +    /* should never return */
->> +    trap
->>  
->>      .size start, . - start
->>      .type start, %function
->> +
->> +    .section .init.data, "aw", @progbits
-> 
-> What's this good for when no data follows?
-
-Good catch. With the stack no longer declared in head.S this is
-unnecessary. Will remove in v3.
-
->> --- /dev/null
->> +++ b/xen/arch/ppc/setup.c
->> @@ -0,0 +1,19 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +#include <xen/init.h>
->> +
->> +/* Xen stack for bringing up the first CPU. */
->> +unsigned char __initdata cpu0_boot_stack[STACK_SIZE] __aligned(STACK_SIZE);
-> 
-> This yields the entire array as zero-initialized. At which point I
-> don't see a need for the store in head.S.
-
-Okay, fair enough. Given that the array is zero-initialized the stdu
-could be replaced with an `addi %r1, %r1, -STACK_FRAME_OVERHEAD`, and
-the load of zero to %r11 could be deferred to the second patch in this
-series where it's used in the .bss clearing loop.
-
-That said I don't really see the harm with keeping the standard
-idiomatic `stdu` for the initial stack frame setup. Other than
-performance, which isn't a concern here in early setup code.
-
->> +/* Macro to adjust thread priority for hardware multithreading */
->> +#define HMT_very_low()  asm volatile (" or %r31, %r31, %r31 ")
-> 
-> Nit: Style. Wants to be
-> 
-> #define HMT_very_low()  asm volatile ( "or %r31, %r31, %r31" )
-
-Will fix in v3.
-
-> Jan
-
-Thanks,
-Shawn
 
