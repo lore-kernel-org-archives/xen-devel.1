@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B53A6EB64DD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E016EB64DC
 	for <xen-devel@archiver.kernel.org>; Tue, 18 Jul 2023 20:32:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.565459.883572 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.565461.883590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLrMq-00072K-HK; Tue, 18 Jul 2023 20:32:20 +0000
+	id 1qLrMs-0007VO-13; Tue, 18 Jul 2023 20:32:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 565459.883572; Tue, 18 Jul 2023 20:32:20 +0000
+Received: by outflank-mailman (output) from mailman id 565461.883590; Tue, 18 Jul 2023 20:32:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qLrMq-00070r-An; Tue, 18 Jul 2023 20:32:20 +0000
-Received: by outflank-mailman (input) for mailman id 565459;
+	id 1qLrMr-0007UV-T8; Tue, 18 Jul 2023 20:32:21 +0000
+Received: by outflank-mailman (input) for mailman id 565461;
  Tue, 18 Jul 2023 20:32:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jxnk=DE=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qLrMp-0006yG-5Q
+ id 1qLrMp-0006yH-PJ
  for xen-devel@lists.xenproject.org; Tue, 18 Jul 2023 20:32:19 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2f003ff4-25aa-11ee-b23a-6b7b168915f2;
- Tue, 18 Jul 2023 22:32:16 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2f504cbc-25aa-11ee-8611-37d641c3527e;
+ Tue, 18 Jul 2023 22:32:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id B549B8285A3B;
- Tue, 18 Jul 2023 15:32:15 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 24998828589A;
+ Tue, 18 Jul 2023 15:32:16 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 0JzLlLKB04kQ; Tue, 18 Jul 2023 15:32:14 -0500 (CDT)
+ with ESMTP id Y7otsZ7yXEFE; Tue, 18 Jul 2023 15:32:15 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 3FC5C828589A;
- Tue, 18 Jul 2023 15:32:14 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 435D98285801;
+ Tue, 18 Jul 2023 15:32:15 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id uGduJ8A_xMO2; Tue, 18 Jul 2023 15:32:13 -0500 (CDT)
+ with ESMTP id cnbo2qalqoqO; Tue, 18 Jul 2023 15:32:14 -0500 (CDT)
 Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 90CB28285396;
- Tue, 18 Jul 2023 15:32:13 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id 75BE58285396;
+ Tue, 18 Jul 2023 15:32:14 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,228 +53,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f003ff4-25aa-11ee-b23a-6b7b168915f2
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 3FC5C828589A
+X-Inumbo-ID: 2f504cbc-25aa-11ee-8611-37d641c3527e
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 435D98285801
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1689712334; bh=EIrL/yGJUm3I3KmoQSr4XAFX8FSNsnfCUSHA0v9VEX0=;
+	t=1689712335; bh=t2XSxlE4JcYvYurr+9ZptgwwCybbDwha+GFsOD84g3s=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=awckF/T2VruCm78M6GewEgv1R0pAn1K12vqLMPvnqxQypFuWKeAtQvGoonPA85GqU
-	 aBp8cBHpsgKW99D9NxfDZsVSCjW6Bz8ZASkvhazZQR/fZOihGZWM06E85+CMgCvMB+
-	 p4p4dG5LuuUhDB9sWTxJcjDiwH8CcoNDA64IUhJs=
+	b=kCfArSjN9I/0wwvVWLLqC74ZIlfSiZc8lhVxYa+0s5AYzqjO1f8Ca+yzZrZHt1QKv
+	 yPbA4GLrzkA1VUfPiFLeMAYqRv2Kozo9gZbOa3TuFviYM9o+9Lm5mwPVbAZHW3vJLW
+	 VsribFbSNmHGFA4oE1va2N5f6GDEt6xCsO71GRxE=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v4 2/4] xen/ppc: Set up a basic C environment
-Date: Tue, 18 Jul 2023 15:20:23 -0500
-Message-Id: <6d2a906f3321f4f846ccede25a600a4b85183a38.1689710519.git.sanastasio@raptorengineering.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4 4/4] automation: Add smoke test for ppc64le
+Date: Tue, 18 Jul 2023 15:20:25 -0500
+Message-Id: <4fcc3b787f481b2d0b8e4b7db492eb81faf04d3f.1689710519.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1689710519.git.sanastasio@raptorengineering.com>
 References: <cover.1689710519.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Update ppc64/head.S to set up an initial boot stack, zero the .bss
-section, and jump to C.
+Add an initial smoke test that boots xen on a ppc64/pseries machine and
+checks for a magic string. Based on the riscv smoke test.
 
-Also refactor the endian fixup trampoline into its own macro, since it
-will need to be used in multiple places, including every time we make a
-call into firmware (see next commit).
+Eventually the powernv9 (POWER9 bare metal) machine type will want to be
+tested as well, but for now we only boot on pseries.
 
 Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/arch/ppc/Makefile                |  2 ++
- xen/arch/ppc/include/asm/asm-defns.h | 40 ++++++++++++++++++++++++++++
- xen/arch/ppc/include/asm/config.h    |  2 +-
- xen/arch/ppc/ppc64/head.S            | 38 +++++++++++++-------------
- xen/arch/ppc/setup.c                 | 19 +++++++++++++
- 5 files changed, 80 insertions(+), 21 deletions(-)
- create mode 100644 xen/arch/ppc/include/asm/asm-defns.h
- create mode 100644 xen/arch/ppc/setup.c
+ automation/gitlab-ci/test.yaml           | 20 ++++++++++++++++++
+ automation/scripts/qemu-smoke-ppc64le.sh | 27 ++++++++++++++++++++++++
+ 2 files changed, 47 insertions(+)
+ create mode 100755 automation/scripts/qemu-smoke-ppc64le.sh
 
-diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
-index 98220648af..530fba2121 100644
---- a/xen/arch/ppc/Makefile
-+++ b/xen/arch/ppc/Makefile
-@@ -1,5 +1,7 @@
- obj-$(CONFIG_PPC64) +=3D ppc64/
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.y=
+aml
+index d5cb238b0a..45e8ddb7a3 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -71,6 +71,19 @@
+   tags:
+     - x86_64
 =20
-+obj-y +=3D setup.o
++.qemu-ppc64le:
++  extends: .test-jobs-common
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    LOGFILE: qemu-smoke-ppc64le.log
++  artifacts:
++    paths:
++      - smoke.serial
++      - '*.log'
++    when: always
++  tags:
++    - x86_64
 +
- $(TARGET): $(TARGET)-syms
- 	cp -f $< $@
-=20
-diff --git a/xen/arch/ppc/include/asm/asm-defns.h b/xen/arch/ppc/include/=
-asm/asm-defns.h
-new file mode 100644
-index 0000000000..6ea35f6edb
+ .xilinx-arm64:
+   extends: .test-jobs-common
+   variables:
+@@ -444,3 +457,10 @@ qemu-smoke-riscv64-gcc:
+     - ./automation/scripts/qemu-smoke-riscv64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - archlinux-current-gcc-riscv64-debug
++
++qemu-smoke-ppc64le-pseries-gcc:
++  extends: .qemu-ppc64le
++  script:
++    - ./automation/scripts/qemu-smoke-ppc64le.sh pseries-5.2 2>&1 | tee =
+${LOGFILE}
++  needs:
++    - debian-bullseye-gcc-ppc64le-debug
+diff --git a/automation/scripts/qemu-smoke-ppc64le.sh b/automation/script=
+s/qemu-smoke-ppc64le.sh
+new file mode 100755
+index 0000000000..eb55221221
 --- /dev/null
-+++ b/xen/arch/ppc/include/asm/asm-defns.h
-@@ -0,0 +1,40 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+#ifndef _ASM_PPC_ASM_DEFNS_H
-+#define _ASM_PPC_ASM_DEFNS_H
++++ b/automation/scripts/qemu-smoke-ppc64le.sh
+@@ -0,0 +1,27 @@
++#!/bin/bash
 +
-+/*
-+ * Load a 64-bit immediate value into the specified GPR.
-+ */
-+#define LOAD_IMM64(reg, val)                                            =
-     \
-+    lis reg, (val) @highest;                                            =
-     \
-+    ori reg, reg, (val) @higher;                                        =
-     \
-+    rldicr reg, reg, 32, 31;                                            =
-     \
-+    oris reg, reg, (val) @h;                                            =
-     \
-+    ori reg, reg, (val) @l;
++set -ex
 +
-+#define LOAD_IMM32(reg, val)                                            =
-     \
-+    lis reg, (val) @h;                                                  =
-     \
-+    ori reg, reg, (val) @l;                                             =
-     \
++# machine type from first arg passed directly to qemu -M
++machine=3D$1
 +
-+/*
-+ * Depending on how we were booted, the CPU could be running in either
-+ * Little Endian or Big Endian mode. The following trampoline from Linux
-+ * cleverly uses an instruction that encodes to a NOP if the CPU's
-+ * endianness matches the assumption of the assembler (LE, in our case)
-+ * or a branch to code that performs the endian switch in the other case=
-.
-+ */
-+#define FIXUP_ENDIAN                                                    =
-       \
-+    tdi 0, 0, 0x48;   /* Reverse endian of b . + 8          */          =
-       \
-+    b . + 44;         /* Skip trampoline if endian is good  */          =
-       \
-+    .long 0xa600607d; /* mfmsr r11                          */          =
-       \
-+    .long 0x01006b69; /* xori r11,r11,1                     */          =
-       \
-+    .long 0x00004039; /* li r10,0                           */          =
-       \
-+    .long 0x6401417d; /* mtmsrd r10,1                       */          =
-       \
-+    .long 0x05009f42; /* bcl 20,31,$+4                      */          =
-       \
-+    .long 0xa602487d; /* mflr r10                           */          =
-       \
-+    .long 0x14004a39; /* addi r10,r10,20                    */          =
-       \
-+    .long 0xa6035a7d; /* mtsrr0 r10                         */          =
-       \
-+    .long 0xa6037b7d; /* mtsrr1 r11                         */          =
-       \
-+    .long 0x2400004c  /* rfid                               */
++# Run the test
++rm -f smoke.serial
++set +e
 +
-+#endif /* _ASM_PPC_ASM_DEFNS_H */
-diff --git a/xen/arch/ppc/include/asm/config.h b/xen/arch/ppc/include/asm=
-/config.h
-index b9a6814f00..01ca5d0803 100644
---- a/xen/arch/ppc/include/asm/config.h
-+++ b/xen/arch/ppc/include/asm/config.h
-@@ -43,7 +43,7 @@
-=20
- #define SMP_CACHE_BYTES (1 << 6)
-=20
--#define STACK_ORDER 2
-+#define STACK_ORDER 0
- #define STACK_SIZE  (PAGE_SIZE << STACK_ORDER)
-=20
- /* 288 bytes below the stack pointer must be preserved by interrupt hand=
-lers */
-diff --git a/xen/arch/ppc/ppc64/head.S b/xen/arch/ppc/ppc64/head.S
-index 2fcefb40d8..17f4a3e19c 100644
---- a/xen/arch/ppc/ppc64/head.S
-+++ b/xen/arch/ppc/ppc64/head.S
-@@ -1,30 +1,28 @@
- /* SPDX-License-Identifier: GPL-2.0-or-later */
-=20
-+#include <asm/asm-defns.h>
++touch smoke.serial
 +
-     .section .text.header, "ax", %progbits
-=20
- ENTRY(start)
-     /*
--     * Depending on how we were booted, the CPU could be running in eith=
-er
--     * Little Endian or Big Endian mode. The following trampoline from L=
-inux
--     * cleverly uses an instruction that encodes to a NOP if the CPU's
--     * endianness matches the assumption of the assembler (LE, in our ca=
-se)
--     * or a branch to code that performs the endian switch in the other =
-case.
-+     * NOTE: argument registers (r3-r9) must be preserved until the C en=
-trypoint
-      */
--    tdi 0, 0, 0x48    /* Reverse endian of b . + 8          */
--    b . + 44          /* Skip trampoline if endian is good  */
--    .long 0xa600607d  /* mfmsr r11                          */
--    .long 0x01006b69  /* xori r11,r11,1                     */
--    .long 0x00004039  /* li r10,0                           */
--    .long 0x6401417d  /* mtmsrd r10,1                       */
--    .long 0x05009f42  /* bcl 20,31,$+4                      */
--    .long 0xa602487d  /* mflr r10                           */
--    .long 0x14004a39  /* addi r10,r10,20                    */
--    .long 0xa6035a7d  /* mtsrr0 r10                         */
--    .long 0xa6037b7d  /* mtsrr1 r11                         */
--    .long 0x2400004c  /* rfid                               */
--
--    /* Now that the endianness is confirmed, continue */
--1:  b 1b
-+    FIXUP_ENDIAN
++timeout -k 1 20 \
++qemu-system-ppc64 \
++    -M $machine \
++    -m 2g \
++    -smp 1 \
++    -vga none \
++    -monitor none \
++    -nographic \
++    -serial file:smoke.serial \
++    -kernel binaries/xen
 +
-+    /* set up the TOC pointer */
-+    LOAD_IMM32(%r2, .TOC.)
-+
-+    /* set up the initial stack */
-+    LOAD_IMM32(%r1, cpu0_boot_stack)
-+    li %r11, 0
-+    stdu %r11, -STACK_FRAME_OVERHEAD(%r1)
-+
-+    /* call the C entrypoint */
-+    bl start_xen
-+
-+    /* should never return */
-+    trap
-=20
-     .size start, . - start
-     .type start, %function
-diff --git a/xen/arch/ppc/setup.c b/xen/arch/ppc/setup.c
-new file mode 100644
-index 0000000000..9e90a6179a
---- /dev/null
-+++ b/xen/arch/ppc/setup.c
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+#include <xen/init.h>
-+
-+/* Xen stack for bringing up the first CPU. */
-+unsigned char __initdata cpu0_boot_stack[STACK_SIZE] __aligned(STACK_SIZ=
-E);
-+
-+/* Macro to adjust thread priority for hardware multithreading */
-+#define HMT_very_low()  asm volatile ( "or %r31, %r31, %r31" )
-+
-+void __init noreturn start_xen(unsigned long r3, unsigned long r4,
-+                               unsigned long r5, unsigned long r6,
-+                               unsigned long r7)
-+{
-+    for ( ; ; )
-+        /* Set current hardware thread to very low priority */
-+        HMT_very_low();
-+
-+    unreachable();
-+}
++set -e
++(grep -q "Hello, ppc64le!" smoke.serial) || exit 1
++exit 0
 --=20
 2.30.2
 
