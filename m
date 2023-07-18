@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3218CC001DF
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:24:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.575359.901116 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE00C001DF
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:24:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.575374.901126 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJK0-000680-5P; Wed, 02 Aug 2023 21:23:56 +0000
+	id 1qRJKq-0006l8-IS; Wed, 02 Aug 2023 21:24:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 575359.901116; Wed, 02 Aug 2023 21:23:56 +0000
+Received: by outflank-mailman (output) from mailman id 575374.901126; Wed, 02 Aug 2023 21:24:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJK0-00067t-2j; Wed, 02 Aug 2023 21:23:56 +0000
-Received: by outflank-mailman (input) for mailman id 575359;
- Wed, 02 Aug 2023 21:23:55 +0000
+	id 1qRJKq-0006l1-Fn; Wed, 02 Aug 2023 21:24:48 +0000
+Received: by outflank-mailman (input) for mailman id 575374;
+ Wed, 02 Aug 2023 21:24:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1qRJJz-00067Z-5k
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:23:55 +0000
+ id 1qRJKo-00067Z-UA
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:24:46 +0000
 Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e0e72bc8-317a-11ee-8613-37d641c3527e;
- Wed, 02 Aug 2023 23:23:53 +0200 (CEST)
+ id ffe0de99-317a-11ee-8613-37d641c3527e;
+ Wed, 02 Aug 2023 23:24:45 +0200 (CEST)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LNhnU008407
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LOZ04008420
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 2 Aug 2023 17:23:49 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Wed, 2 Aug 2023 17:24:41 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 372LNhDC008406;
- Wed, 2 Aug 2023 14:23:43 -0700 (PDT) (envelope-from ehem)
+ by m5p.com (8.16.1/8.15.2/Submit) id 372LOZN1008419;
+ Wed, 2 Aug 2023 14:24:35 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,8 +45,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0e72bc8-317a-11ee-8613-37d641c3527e
-Message-Id: <58041bfb2a8ce9a54a337a2293c5094c119f7390.1690990427.git.ehem+xen@m5p.com>
+X-Inumbo-ID: ffe0de99-317a-11ee-8613-37d641c3527e
+Message-Id: <e25a056307c43161cdd93bb9aaf6c5073971034f.1690990427.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1690990427.git.ehem+xen@m5p.com>
 References: <cover.1690990427.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -54,69 +54,67 @@ To: xen-devel@lists.xenproject.org
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 Cc: Juergen Gross <jgross@suse.com>
-Date: Wed, 26 Jul 2023 21:56:32 -0700
-Subject: [PATCH 09/22] tools/utils: move CfgParseContext to top of
- libxlu_cfg_y.y
+Date: Tue, 18 Jul 2023 16:31:34 -0700
+Subject: [PATCH 10/22] tools/utils: move XLU_ConfigSetting to libxl_cfg.c
 
-The CfgParseContext structure/typedef is used inside the parser.  Whereas
-most #include's of libxlu_internal.h need the common declarations, not
-the parser internals.  Due to this, the structure should be near the top
-of libxlu_cfg_y.h (libxlu_cfg_i.h @b104c3762d), and not towards the
-middle of libxlu_internal.h.
+XLU_ConfigSetting is only used inside libxl_cfg.c, so no need for it in
+the internal header.  Keep the type definition in libxlu_internal.h as
+the incomplete definition is needed for xlu__cfg_set_free().
 
-Fixes: b104c3762d ('Replace config file parser for "xl"')
+There is no longer any need for XLU_ConfigSetting to be transparent.
+
+Fixes: b104c3762d, 1a09c5113a ("libxlu: rework internal representation of setting")
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
-Ideally at @b104c3762d Bison might already have implemented its %code
-feature.  Less ideal, but workable CfgParseContext should have been
-placed in libxlu_cfg_i.h, between the two #includes:
- #include "libxlu_internal.h"
- typedef struct { } CfgParseContext;
- #include "libxlu_cfg_y.h"
+@1a09c5113a deeper probing should have been done and figured out
+everything needed to move to libxlu_cfg_i.h.  Making use of %code would
+have been better, but moving would have been sufficient.
 
-Using Bison's %code feature is rather superior though.  This patch is
-where indentation in Bison.y files becomes crucial.  I'm unsure of the
-call to make, so I've left this as cut&paste which means this will almost
-certainly change.
+Note: If the decision is made to keep libxlu_cfg.c intact, then the type
+definition should be in libxlu_cfg_y.y/libxlu_cfg_y.h.
 ---
- tools/libs/util/libxlu_cfg_y.y    | 6 ++++++
- tools/libs/util/libxlu_internal.h | 6 ------
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ tools/libs/util/libxlu_cfg.c      | 8 ++++++++
+ tools/libs/util/libxlu_internal.h | 8 +-------
+ 2 files changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/tools/libs/util/libxlu_cfg_y.y b/tools/libs/util/libxlu_cfg_y.y
-index adbb74ff11..75e7140478 100644
---- a/tools/libs/util/libxlu_cfg_y.y
-+++ b/tools/libs/util/libxlu_cfg_y.y
-@@ -18,6 +18,12 @@
+diff --git a/tools/libs/util/libxlu_cfg.c b/tools/libs/util/libxlu_cfg.c
+index 20534343f4..2ad58d4240 100644
+--- a/tools/libs/util/libxlu_cfg.c
++++ b/tools/libs/util/libxlu_cfg.c
+@@ -23,6 +23,14 @@
+ #include "libxlu_cfg_y.h"
+ #include "libxlu_cfg_l.h"
  
- %code requires {
- #include "libxlu_internal.h"
++struct XLU_ConfigSetting {
++    struct XLU_ConfigSetting *next;
++    char *name;
++    XLU_ConfigValue *value;
++    enum XLU_Operation op;
++    int lineno;
++};
 +
-+typedef struct {
-+    XLU_Config *cfg;
-+    int err, lexerrlineno, likely_python;
-+    void *scanner;
-+} CfgParseContext;
- }
+ XLU_Config *xlu_cfg_init(FILE *report, const char *report_source) {
+     XLU_Config *cfg;
  
- %code provides {
 diff --git a/tools/libs/util/libxlu_internal.h b/tools/libs/util/libxlu_internal.h
-index 01fe073069..246ad0bde7 100644
+index 246ad0bde7..bf1827ea73 100644
 --- a/tools/libs/util/libxlu_internal.h
 +++ b/tools/libs/util/libxlu_internal.h
-@@ -63,12 +63,6 @@ struct XLU_Config {
-     char *config_source;
+@@ -49,13 +49,7 @@ struct XLU_ConfigValue {
+     XLU__CFG_YYLTYPE loc;
  };
  
--typedef struct {
--    XLU_Config *cfg;
--    int err, lexerrlineno, likely_python;
--    void *scanner;
--} CfgParseContext;
--
+-typedef struct XLU_ConfigSetting { /* transparent */
+-    struct XLU_ConfigSetting *next;
+-    char *name;
+-    XLU_ConfigValue *value;
+-    enum XLU_Operation op;
+-    int lineno;
+-} XLU_ConfigSetting;
++typedef struct XLU_ConfigSetting XLU_ConfigSetting;
  
- #define STRINGIFY(x) #x
- #define TOSTRING(x) STRINGIFY(x)
+ struct XLU_Config {
+     XLU_ConfigSetting *settings;
 -- 
 (\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
  \BS (    |       ehem+sigmsg@m5p.com      PGP 87145445       |    )   /
