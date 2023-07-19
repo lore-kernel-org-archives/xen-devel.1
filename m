@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE00C001DF
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:24:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.575374.901126 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 205A4C001E0
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:27:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.575426.901147 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJKq-0006l8-IS; Wed, 02 Aug 2023 21:24:48 +0000
+	id 1qRJNb-0007YR-KB; Wed, 02 Aug 2023 21:27:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 575374.901126; Wed, 02 Aug 2023 21:24:48 +0000
+Received: by outflank-mailman (output) from mailman id 575426.901147; Wed, 02 Aug 2023 21:27:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJKq-0006l1-Fn; Wed, 02 Aug 2023 21:24:48 +0000
-Received: by outflank-mailman (input) for mailman id 575374;
- Wed, 02 Aug 2023 21:24:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qRJNb-0007WQ-Bz; Wed, 02 Aug 2023 21:27:39 +0000
+Received: by outflank-mailman (input) for mailman id 575426;
+ Wed, 02 Aug 2023 21:27:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1qRJKo-00067Z-UA
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:24:46 +0000
+ id 1qRJLe-0004vP-1G
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:25:38 +0000
 Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ffe0de99-317a-11ee-8613-37d641c3527e;
- Wed, 02 Aug 2023 23:24:45 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1ef7b072-317b-11ee-b263-6b7b168915f2;
+ Wed, 02 Aug 2023 23:25:37 +0200 (CEST)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LOZ04008420
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LPSkE008432
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 2 Aug 2023 17:24:41 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Wed, 2 Aug 2023 17:25:33 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 372LOZN1008419;
- Wed, 2 Aug 2023 14:24:35 -0700 (PDT) (envelope-from ehem)
+ by m5p.com (8.16.1/8.15.2/Submit) id 372LPS4R008431;
+ Wed, 2 Aug 2023 14:25:28 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,8 +45,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ffe0de99-317a-11ee-8613-37d641c3527e
-Message-Id: <e25a056307c43161cdd93bb9aaf6c5073971034f.1690990427.git.ehem+xen@m5p.com>
+X-Inumbo-ID: 1ef7b072-317b-11ee-b263-6b7b168915f2
+Message-Id: <22cd5f8f7d7d7c54a1a02a36bcd32c88632c6dbb.1690990427.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1690990427.git.ehem+xen@m5p.com>
 References: <cover.1690990427.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -54,67 +54,59 @@ To: xen-devel@lists.xenproject.org
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 Cc: Juergen Gross <jgross@suse.com>
-Date: Tue, 18 Jul 2023 16:31:34 -0700
-Subject: [PATCH 10/22] tools/utils: move XLU_ConfigSetting to libxl_cfg.c
+Date: Tue, 18 Jul 2023 23:07:20 -0700
+Subject: [PATCH 11/22] tools/utils: move XLU_ConfigValue to libxl_cfg.c
 
-XLU_ConfigSetting is only used inside libxl_cfg.c, so no need for it in
-the internal header.  Keep the type definition in libxlu_internal.h as
-the incomplete definition is needed for xlu__cfg_set_free().
+At no point was the complete type for XLU_ConfigValue used anywhere
+besides libxlu_cfg.c, overdue for a move.
 
-There is no longer any need for XLU_ConfigSetting to be transparent.
-
-Fixes: b104c3762d, 1a09c5113a ("libxlu: rework internal representation of setting")
+Fixes: 1a09c5113a ("libxlu: rework internal representation of setting")
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
-@1a09c5113a deeper probing should have been done and figured out
-everything needed to move to libxlu_cfg_i.h.  Making use of %code would
-have been better, but moving would have been sufficient.
-
-Note: If the decision is made to keep libxlu_cfg.c intact, then the type
-definition should be in libxlu_cfg_y.y/libxlu_cfg_y.h.
----
- tools/libs/util/libxlu_cfg.c      | 8 ++++++++
- tools/libs/util/libxlu_internal.h | 8 +-------
- 2 files changed, 9 insertions(+), 7 deletions(-)
+ tools/libs/util/libxlu_cfg.c      | 9 +++++++++
+ tools/libs/util/libxlu_internal.h | 9 ---------
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/tools/libs/util/libxlu_cfg.c b/tools/libs/util/libxlu_cfg.c
-index 20534343f4..2ad58d4240 100644
+index 2ad58d4240..d3b5c86ed6 100644
 --- a/tools/libs/util/libxlu_cfg.c
 +++ b/tools/libs/util/libxlu_cfg.c
-@@ -23,6 +23,14 @@
- #include "libxlu_cfg_y.h"
- #include "libxlu_cfg_l.h"
+@@ -31,6 +31,15 @@ struct XLU_ConfigSetting {
+     int lineno;
+ };
  
-+struct XLU_ConfigSetting {
-+    struct XLU_ConfigSetting *next;
-+    char *name;
-+    XLU_ConfigValue *value;
-+    enum XLU_Operation op;
-+    int lineno;
++struct XLU_ConfigValue {
++    enum XLU_ConfigValueType type;
++    union {
++        char *string;
++        XLU_ConfigList list;
++    } u;
++    XLU__CFG_YYLTYPE loc;
 +};
 +
  XLU_Config *xlu_cfg_init(FILE *report, const char *report_source) {
      XLU_Config *cfg;
  
 diff --git a/tools/libs/util/libxlu_internal.h b/tools/libs/util/libxlu_internal.h
-index 246ad0bde7..bf1827ea73 100644
+index bf1827ea73..1a9d25e14e 100644
 --- a/tools/libs/util/libxlu_internal.h
 +++ b/tools/libs/util/libxlu_internal.h
-@@ -49,13 +49,7 @@ struct XLU_ConfigValue {
-     XLU__CFG_YYLTYPE loc;
- };
+@@ -40,15 +40,6 @@ typedef struct XLU__CFG_YYLTYPE
+ } XLU__CFG_YYLTYPE;
+ #define XLU__CFG_YYLTYPE_IS_DECLARED
  
--typedef struct XLU_ConfigSetting { /* transparent */
--    struct XLU_ConfigSetting *next;
--    char *name;
--    XLU_ConfigValue *value;
--    enum XLU_Operation op;
--    int lineno;
--} XLU_ConfigSetting;
-+typedef struct XLU_ConfigSetting XLU_ConfigSetting;
+-struct XLU_ConfigValue {
+-    enum XLU_ConfigValueType type;
+-    union {
+-        char *string;
+-        XLU_ConfigList list;
+-    } u;
+-    XLU__CFG_YYLTYPE loc;
+-};
+-
+ typedef struct XLU_ConfigSetting XLU_ConfigSetting;
  
  struct XLU_Config {
-     XLU_ConfigSetting *settings;
 -- 
 (\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
  \BS (    |       ehem+sigmsg@m5p.com      PGP 87145445       |    )   /
