@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE5D1C04A94
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:37:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.575603.901237 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD71C04A94
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:37:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.575654.901266 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJX0-0005nx-GS; Wed, 02 Aug 2023 21:37:22 +0000
+	id 1qRJXK-00070e-64; Wed, 02 Aug 2023 21:37:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 575603.901237; Wed, 02 Aug 2023 21:37:22 +0000
+Received: by outflank-mailman (output) from mailman id 575654.901266; Wed, 02 Aug 2023 21:37:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJX0-0005nq-C3; Wed, 02 Aug 2023 21:37:22 +0000
-Received: by outflank-mailman (input) for mailman id 575603;
- Wed, 02 Aug 2023 21:37:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qRJXK-00070T-2D; Wed, 02 Aug 2023 21:37:42 +0000
+Received: by outflank-mailman (input) for mailman id 575654;
+ Wed, 02 Aug 2023 21:37:40 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1qRJU4-0003Og-Oi
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:34:20 +0000
+ id 1qRJNK-0004vP-G1
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:27:22 +0000
 Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55ed6a32-317c-11ee-8613-37d641c3527e;
- Wed, 02 Aug 2023 23:34:19 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5d25a01e-317b-11ee-b263-6b7b168915f2;
+ Wed, 02 Aug 2023 23:27:21 +0200 (CEST)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LY9lp008578
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LRCsJ008463
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 2 Aug 2023 17:34:15 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Wed, 2 Aug 2023 17:27:18 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 372LY9Dr008577;
- Wed, 2 Aug 2023 14:34:09 -0700 (PDT) (envelope-from ehem)
+ by m5p.com (8.16.1/8.15.2/Submit) id 372LRCav008462;
+ Wed, 2 Aug 2023 14:27:12 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,8 +45,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55ed6a32-317c-11ee-8613-37d641c3527e
-Message-Id: <d1e5795e274571a63b94148a7d371c629eefb3a5.1690990428.git.ehem+xen@m5p.com>
+X-Inumbo-ID: 5d25a01e-317b-11ee-b263-6b7b168915f2
+Message-Id: <de7fedb2b94476563d9c7657c9cba70b82767027.1690990428.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1690990427.git.ehem+xen@m5p.com>
 References: <cover.1690990427.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -54,56 +54,55 @@ To: xen-devel@lists.xenproject.org
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 Cc: Juergen Gross <jgross@suse.com>
-Date: Tue, 25 Jul 2023 20:11:06 -0700
-Subject: [PATCH 21/22] tools/utils: add settings get function
+Date: Tue, 18 Jul 2023 23:07:20 -0700
+Subject: [PATCH 13/22] tools/utils: move XLU_ConfigList to libxl_cfg.c
 
-The better to isolate the shared portion of the interface from the
-low-level implementation.
+With XLU_ConfigValue now in libxlu_cfg.c, XLU_ConfigList can follow.
 
+Fixes: 1a09c5113a ("libxlu: rework internal representation of setting")
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
- tools/libs/util/libxlu_cfg.c      | 7 ++++++-
- tools/libs/util/libxlu_internal.h | 2 ++
- 2 files changed, 8 insertions(+), 1 deletion(-)
+Placing XLU_ConfigValue/XLU_ConfigList in libxlu_internal.h was certainly
+*wrong*.
+---
+ tools/libs/util/libxlu_cfg.c      | 6 ++++++
+ tools/libs/util/libxlu_internal.h | 6 ------
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/tools/libs/util/libxlu_cfg.c b/tools/libs/util/libxlu_cfg.c
-index cb99b0aab0..7bbedde8f6 100644
+index d3b5c86ed6..67d1a8123f 100644
 --- a/tools/libs/util/libxlu_cfg.c
 +++ b/tools/libs/util/libxlu_cfg.c
-@@ -240,7 +240,7 @@ int xlu_cfg_printf(const XLU_Config *cfg, const char *format, ...)
- static XLU_ConfigSetting *find(const XLU_Config *cfg, const char *n) {
-     XLU_ConfigSetting *set;
+@@ -31,6 +31,12 @@ struct XLU_ConfigSetting {
+     int lineno;
+ };
  
--    for (set= cfg->settings;
-+    for (set = xlu__cfg_get_settings(cfg);
-          set;
-          set= set->next)
-         if (!strcmp(set->name, n))
-@@ -267,6 +267,11 @@ static int find_atom(const XLU_Config *cfg, const char *n,
-     return 0;
- }
- 
-+XLU_ConfigSetting *xlu__cfg_get_settings(const XLU_Config *cfg)
-+{
-+    return cfg->settings;
-+}
++struct XLU_ConfigList {
++    int avalues; /* available slots */
++    int nvalues; /* actual occupied slots */
++    XLU_ConfigValue **values;
++};
 +
- 
- enum XLU_ConfigValueType xlu_cfg_value_type(const XLU_ConfigValue *value)
- {
+ struct XLU_ConfigValue {
+     enum XLU_ConfigValueType type;
+     union {
 diff --git a/tools/libs/util/libxlu_internal.h b/tools/libs/util/libxlu_internal.h
-index 34c6c7a443..993ff88171 100644
+index c68669c3a1..310e2145a7 100644
 --- a/tools/libs/util/libxlu_internal.h
 +++ b/tools/libs/util/libxlu_internal.h
-@@ -45,6 +45,8 @@ extern int xlu__cfg_readfile(XLU_Config *cfg, FILE *msgfile,
- extern int xlu__cfg_readdata(XLU_Config *cfg, FILE *msgfile,
-     const char *msgprefix, XLU_ConfigSetting **psettings, const char *data,
-     int length);
-+extern XLU_ConfigSetting *xlu__cfg_get_settings(const XLU_Config *cfg)
-+    __attribute__((access(read_only, 1)));
+@@ -25,12 +25,6 @@
  
- #endif /*LIBXLU_INTERNAL_H*/
+ #include "libxlutil.h"
  
+-struct XLU_ConfigList {
+-    int avalues; /* available slots */
+-    int nvalues; /* actual occupied slots */
+-    XLU_ConfigValue **values;
+-};
+-
+ typedef struct XLU_ConfigSetting XLU_ConfigSetting;
+ 
+ struct XLU_Config {
 -- 
 (\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
  \BS (    |       ehem+sigmsg@m5p.com      PGP 87145445       |    )   /
