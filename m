@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0075C001DC
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Jul 2023 00:33:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.566260.884883 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B495AC001DE
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Jul 2023 00:33:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.566264.884925 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qMHb6-0002ZN-FW; Thu, 20 Jul 2023 00:32:48 +0000
+	id 1qMHbA-0003j7-Af; Thu, 20 Jul 2023 00:32:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 566260.884883; Thu, 20 Jul 2023 00:32:48 +0000
+Received: by outflank-mailman (output) from mailman id 566264.884925; Thu, 20 Jul 2023 00:32:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qMHb6-0002Wl-2w; Thu, 20 Jul 2023 00:32:48 +0000
-Received: by outflank-mailman (input) for mailman id 566260;
- Thu, 20 Jul 2023 00:32:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qMHb9-0003gc-Th; Thu, 20 Jul 2023 00:32:51 +0000
+Received: by outflank-mailman (input) for mailman id 566264;
+ Thu, 20 Jul 2023 00:32:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5z78=DG=epam.com=prvs=156527e6f7=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1qMHb2-0001JI-Nb
- for xen-devel@lists.xenproject.org; Thu, 20 Jul 2023 00:32:44 +0000
+ id 1qMHb5-0001JN-1B
+ for xen-devel@lists.xenproject.org; Thu, 20 Jul 2023 00:32:47 +0000
 Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f00b8948-2694-11ee-b23a-6b7b168915f2;
- Thu, 20 Jul 2023 02:32:43 +0200 (CEST)
+ [148.163.133.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f145304a-2694-11ee-8611-37d641c3527e;
+ Thu, 20 Jul 2023 02:32:45 +0200 (CEST)
 Received: from pps.filterd (m0174678.ppops.net [127.0.0.1])
  by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 36JMeiB9017190
- for <xen-devel@lists.xenproject.org>; Thu, 20 Jul 2023 00:32:41 GMT
+ 36JMeiBB017190
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Jul 2023 00:32:43 GMT
 Received: from eur04-he1-obe.outbound.protection.outlook.com
  (mail-he1eur04lp2057.outbound.protection.outlook.com [104.47.13.57])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3rxgyx9k43-7
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3rxgyx9k43-9
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Thu, 20 Jul 2023 00:32:41 +0000
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Jul 2023 00:32:43 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
  by AS8PR03MB7783.eurprd03.prod.outlook.com (2603:10a6:20b:407::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.33; Thu, 20 Jul
- 2023 00:32:34 +0000
+ 2023 00:32:36 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::68d2:d90f:ac32:7c85]) by VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::68d2:d90f:ac32:7c85%3]) with mapi id 15.20.6588.035; Thu, 20 Jul 2023
- 00:32:34 +0000
+ 00:32:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,29 +56,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f00b8948-2694-11ee-b23a-6b7b168915f2
+X-Inumbo-ID: f145304a-2694-11ee-8611-37d641c3527e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nYqEJpvxPZBlTonCwr9TjNiNyZ+rpTnSAEfBNglKZtr188G7UwvqgDBw1xMytIqehwuY+b3W4OOY1nGN/GFOl9ZojPxhKoAnPEbUwHHjTiu5WQmOmZvdfQVFUGpXkthaC6yHvupJx9E3pHF1IQHZD23pj++M43EtNg1xQPeER6/3C/C463rchSDIAAKkd72PKj2l/EEQvnfIB2F0oh6Jm/gkmfkxOZ0YEUCO5OW3nd9SzPcbu51JO5Yp2Rk4ZEpEU+9a4yWIYP4yofLDH1dgDFhq1dn3bJHG1ar5FtLNSRimGM+XpGPK+hwCxpZSFLcpdNnlQFAKvlaRw6TbsgeFAA==
+ b=EbmXx/22LKfQRQwLVu7oAp+Y09LuzEaKSN1INqGdI2J44hndpKNfevWbKi3DuHAyyQkXeBGvpJpY4RFOhEiEk55p3yVgwvUJZmeToiIrooS9HVYHQQIKcwiLbmZyclS4ihQgo22PAv3DbpNSajymtQvPEkHVzl7MnIyPafKzuiNEAzIV2/2+NxHUhem1AQfllvSVxfMLORxXsRiQMBqeF9ATu+ywKVJ//t383zISHbBIGshlxc3zlxuW0I+hIeHqzJfL+jbuCRBP8x2R6wZxL/OZKolihWYXmZLev2RwZJpEW8v2wvXdl51KUweKpLou3/Dvt0TShb6Uhetl9MvizA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bfSYFj3qCWK47xmolGi8XD+FB4uZs6VedMBJamb2Ugc=;
- b=YW1GaM+YsJ5rRQo1Gi6tsw4/8E3YqmuEcUaRqIud8EgGuVEe14aPx7Oe178L0dWT9/AE0SonYbGpOttEYOUYaUy5GqSlBBgoLhS0T4pGmm+JX8/PT4yrQbUq27fDV44Agei49v2gufcNR40J1jGv1+ykgrUBmkyPDceQyGamCpWVz9rfWyQCNB+++mGieWaJ44k9uvjxLRPVoITKssXhwvJisCJKOyw9m2RXBwma/6P1XnhGkNG/0HnrFFVlvIGXTGYN/rTqHT31uMdqUunBqH3p75XsuGJHlUOGO7VlwAUh+/LZqSq27VyZ0iUeCKP6lajSjBXlrJLbfyFSe/ZpfQ==
+ bh=yKI7dy86L8X5wiqLrmIlzaIxxL726p8ahnVAZh89ZZg=;
+ b=WRll1E6h0KeiUgyUnJmi0g8d2h+oEznsETceUb6RfVNZjRrQQxKdXO/7z2PTfX7BxSLo3YZC48vPq5tKyeox5BIoiCuiAm3zSQnh1VDsxSl6BHhb5bmtK48Fx4dMAtmrTpP4dln1zUgXaCm9oysT9HF8lsLSwqYkCZBc3F/3KMj+AwpaR/C7seM1JmKDs0CwpT2R7tacW1PuWICA6L1g2IBTSFFHn5Dy5NykmAMGV9beiADuxwsr2IRdIV5EyLCXYVEJ13OpJXdX0e9yiuGbZMtp8HG0yi0B7yaAF85b2X9Qfxtc05cs4ua8t5meVdvEWCkTrEhbXJmH7gOxk1ciUw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bfSYFj3qCWK47xmolGi8XD+FB4uZs6VedMBJamb2Ugc=;
- b=NPR0A6/NeRFbFCMCF/wH/kDzC2fdmn+ICsaLvWry6oOyoSP3AzmO2/nB0wu2zmCoPre3rGCo+AxlMkAqC9ZM24AAcTi+CHySrtU/gK6hHefL+SRVBSTD3MRw0rrCHC+890fIA1s5zIFKTysu9pu5q+UncorEPSNwxy14QWJpEU+gXiqS4478aOUqglqpkPIGRdLZDwiwzfDjFMTgD4oGXxgqe0Y8lE3XRlMDU1iwpFj7X6Cj34xZBaCIVpXEiZodY4B/9cO1KGFwJMNQ3qZ5UQwzop28N3Us6RrjxyH/vTFwgZgztC3BhYfN9iC4ovOyCY0a7iz0RMXRulLpOUBGmQ==
+ bh=yKI7dy86L8X5wiqLrmIlzaIxxL726p8ahnVAZh89ZZg=;
+ b=P0D1qmX0OevASwK/CWkJ+A2BOFfgJpF6nIO5lrhNFxUdy3k0xoLilE+33Fe13qcP8IJA66dUktDFkd8enhonXJGWr0GzbgyzU/PZrMNSZcNkorGOo0nkgVAoLCEcBHxmweATXAj9oa8fOX+Uib1HgQdQ5hmAbnFyBerJzos6PsZPhB923WMTJyA0yWG3l8kO3tvX7Yo2uu+YRaQ2QIQQ1aGH5EVnQwxGL0LSJ181mbQmlFdRPCaXpZ48nvzvCUp1rahivn9cOvBychIamG4hLDTx2wCC0ZxqdWg6pJD7GDMOLQYetyjZY+gqx/CPA9hP4pC/dgDAPIosxuk4U3QP0A==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-Subject: [PATCH v8 07/13] vpci/header: handle p2m range sets per BAR
-Thread-Topic: [PATCH v8 07/13] vpci/header: handle p2m range sets per BAR
-Thread-Index: AQHZuqGsZnHxruBgBUyW03RT0neDNA==
-Date: Thu, 20 Jul 2023 00:32:32 +0000
-Message-ID: <20230720003205.1828537-8-volodymyr_babchuk@epam.com>
+Subject: [PATCH v8 11/13] vpci: add initial support for virtual PCI bus
+ topology
+Thread-Topic: [PATCH v8 11/13] vpci: add initial support for virtual PCI bus
+ topology
+Thread-Index: AQHZuqGtdYewPbeaYUqE4k9SPFwhog==
+Date: Thu, 20 Jul 2023 00:32:33 +0000
+Message-ID: <20230720003205.1828537-12-volodymyr_babchuk@epam.com>
 References: <20230720003205.1828537-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20230720003205.1828537-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -88,44 +90,44 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.41.0
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|AS8PR03MB7783:EE_
-x-ms-office365-filtering-correlation-id: 3e92be7c-f784-46f7-965c-08db88b8cf93
+x-ms-office365-filtering-correlation-id: 40e488b3-4a91-452a-6e5e-08db88b8d0d5
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- BK1LdzmU+hqekDAeNPKL4IDn/fEeCCv9qazQv56iSKag8/YWoRUwunYPSdwxh9jK+ajt2XX6FJrLMgtxy2BF7l2JCIlw2K69OER88KEDEZddVsXZR7Jn0kx9VN1WWNwrp1+/jJ9Km4WGEyLOHAykZXaXvdQqxTOy+HWnrtTZEZT/JDg7uZg9kFoaC8wyHkUlte9WAOg7BM1d9yU4twOXv/U8zjIS4k2z7fc1AyP4qGJFAFbd8QcPcWrHo91zAEVlZiMBKxKeCR2CkvXhQtcOnWATpX9S2cccpdQFJs6oirjyB4DEqbBYy+LDAnsG/pS6R/tHWOZSzdqarbji9IIQQJUuGFWEmvrl8sOlR9TUdd3ypWbnfVHCta9X/NEKFvH5uQUc7rFZffkzIzY/Pi8cP6jK7ko4Hzk0owMm6zSjREC4vuUguLnuUyxyqVRhs+cA7/pVxKrVoHFOqyzH6eiaJCEGp+XBGuqXUPxeUFUYPy7CbyFdPp4AEVd2jtI847pwP1s2eFdpmdE4mU9/d8Vg2+pdy6cAjgPZ34tKwaeBdpcnhgDJa9fMUEorsT4EzAf8AKp1jH1eXwOoe195a84ozqciZWZu6Z999STFlcwIT1pchDHXICFtYlwwEtRYvSbo
+ 6PGJdDLYhXwsyvAPjswMBSvoufFZdqvQxN87xdbKiF+H5LDXpZbdP5fY8GoTtRLUNzDtbPLS1DCUz+BnAXeEjGsFhmm3xzYtO7IaqZ5cfeQYTZx3I9UroLTLwwPBgz2l9IV6P5tXXDUWN7FTRE0BvPYCWlER22Xs4RBdUmCjI/ubivr8ioEd+AN04giOXfEojChV9Z1VvumOQokyTAi3vh7eZfwxYni9ltpimeXM5tBQ9o0gPhw578Ewf+4VqSRNsEQ5j9dToaM1XYhx9EoUmmpIiMB9vzBtw2XXjeAcePCVoahs6LEXlTGp54CucpRO8k8LE0vUbjpMua0ItaqmVPvMszCLImpJh12pvSuJBFig601Pxfu6/EI1/ob3eYxYU/mj1Fo46ckbZgzLZuiAEGSgbqOo8RWsF4fY5Ss7Zh99K5tGW1cjb5uqpNrlDQN4NwGlMQj6apGtJj3eTWCT4q/v9G3a3C003taXWpZx0wrF5COKFvJrIiiN1rQzHbqdixEA345GiI1XGTYheWjPm0IZuVO9yKbIrX23pkEhVrkeoQh4E95PCp8vl1qdphKeeukQrXAfxkrNnZgb+tHL9lfOiEUEuUmNPGGFkCAbk9Q=
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(39860400002)(346002)(366004)(396003)(376002)(451199021)(55236004)(26005)(1076003)(6506007)(41300700001)(316002)(83380400001)(2616005)(107886003)(186003)(6512007)(6486002)(122000001)(478600001)(66946007)(71200400001)(4326008)(64756008)(38070700005)(66556008)(76116006)(66476007)(91956017)(6916009)(38100700002)(86362001)(5660300002)(66446008)(8936002)(8676002)(36756003)(30864003)(2906002);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(39860400002)(346002)(366004)(396003)(376002)(451199021)(55236004)(26005)(1076003)(6506007)(41300700001)(316002)(83380400001)(2616005)(107886003)(186003)(6512007)(6486002)(122000001)(478600001)(66946007)(6666004)(71200400001)(4326008)(64756008)(38070700005)(66556008)(76116006)(66476007)(91956017)(6916009)(38100700002)(86362001)(5660300002)(66446008)(8936002)(8676002)(36756003)(2906002);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?2CqbqWqG/524K9F4nPw4O4wGKQmJmSlw8DyE0zB0mTfVEwo4PxM2m3GAxZ?=
- =?iso-8859-1?Q?1Q3/3mqsh+95o75DmgM3bFH1HO3QbQD6zMb0Qgj7aFxyWGGUcNvGOI6CEM?=
- =?iso-8859-1?Q?jyVsOW7Hh47ihHcjV5Qo5CZSAlXhovur8+Y4bXZhGbAhg5eNyDoR3fSyo8?=
- =?iso-8859-1?Q?aw8LlJJvvwDmq6agYhxLsl1ds7EuQZxBzmcfGe2RAo9ZGY027sllv6SMx1?=
- =?iso-8859-1?Q?my0cb87I6qege6rKD8+s8H8/nnw4N6vtjB6/ha2N8XKC2m7BJGA8hOiLtf?=
- =?iso-8859-1?Q?Jczi3GAbuMhSbNUQDEoJsJVE55/Izeis0qsX80uY4qhfwYy9Lbq+OCC6Rh?=
- =?iso-8859-1?Q?fRQ9M9DcIzGUywpV+4cB5QRxIYGA/vVBJRQokCFdji+V53OrUBiggLJ18I?=
- =?iso-8859-1?Q?p0tAewYF9Wjg9rAtaftbefJnsDLZugBz+MNFkhEqTCdEAh9My+UF1Ya0cS?=
- =?iso-8859-1?Q?GZ92Os5yowwG8RLn79Dd6B95zo/1IU7UgwhGqMhmPBYVRv12jPBosDhwIv?=
- =?iso-8859-1?Q?Ucr4bngASup5VWg1rFQUwvqU/SeAAq3F/ah7PoA6OaaOt45hGNZPQ1jInA?=
- =?iso-8859-1?Q?hEx//Bt8uxy5e9mktAccSWUjQGYZeRpVTcDWwP8eF5l8lEOkrqzLEYdrTb?=
- =?iso-8859-1?Q?wTgJ7uQsQtJHCzzLcE1IlwXaL12w6BUH4niXJ/CpybG/E18xNRQbAsjf10?=
- =?iso-8859-1?Q?DpcD9j+IEDlauaenlwJHjN/gzQ8zHA+WQ9GfLWDDJwQqHwjrRZBSNZq4GW?=
- =?iso-8859-1?Q?+zsHlLIB3C3aqNM+UzrP/5r9JtwxVbusAVnhDhaaaLQPnzGpwItmPJAubJ?=
- =?iso-8859-1?Q?2j8B9X0ILhh6M8uyCbXWajNRE14Ieje2vZnMtTgcjX9hrNoNtyvW+c65nB?=
- =?iso-8859-1?Q?YYw3fuTI2/k4lRNw6p/gSknEG6gzoZmhbDJqzSO5uvAp1niU49iY512kv1?=
- =?iso-8859-1?Q?m7uEfNAPpuJgv8HyHeZjcmAimLQqHYw+xktg/zsMFVtx4HgO17E+swd1SS?=
- =?iso-8859-1?Q?A0pNMbwCkgPkf90k7X7BjiVhL1jZbrNhz/d7XFBNFFVHdrvHFju+vK6STM?=
- =?iso-8859-1?Q?VWNH25fGpc+yD1ljHOQyg3puSpUhCOqKgM9Raejn3a9OhMDNpVJbKRbEPL?=
- =?iso-8859-1?Q?pvSCrnmgmk+fYZWLE0yGiGpUixwrlrEeXundIS+Ce2Z44RsZ6K45QwC1T9?=
- =?iso-8859-1?Q?Nt/5WReQtsohZMJwX4toPZkt5qcuKTAhGK8GQudwy6Jz1JE19wGTDPYsVx?=
- =?iso-8859-1?Q?jJGk3uGaBEnD4eKEY4XEFk0THrsAAaLgK3aAsIpMBiLI1BN2PVSlp2a7oE?=
- =?iso-8859-1?Q?8oOg9qdYMzaMZMuvyM+KqYAbPNjth3kztJvaiVWRXKWLFyMdYlRiEu0QwP?=
- =?iso-8859-1?Q?UjvpgUBwGfYUsDw8eiJCcxKLEQ+Jva2bqoEu4iLCPaVg5vt3a0WBgzx6Hq?=
- =?iso-8859-1?Q?f8gqNiFqCUUk9/3/RQQ3ABFfH6JXhDq+3baVA6j4/nE6a/SoAjLEsw+x06?=
- =?iso-8859-1?Q?mJ6HVH278Sspp4xdyCriQSL6Lt3cmHOkwm6Ues82PqNkT/Yj6w7zTaMhcp?=
- =?iso-8859-1?Q?4YZggnxi2VtbvzbH0ktncvOP2671zweZdI58iyMAuTAJJEiZgCXkl3YF3b?=
- =?iso-8859-1?Q?o/8o3jEzQ5FILRUYFFka/1sdh/ZO7pTVBNYLnJ9QdmzQ9n2g9fYSr/Vg?=
+ =?iso-8859-1?Q?36oUKNGtNs106p3sGC1Mt3qchr1vTDTf914cJKzkCaXH3M8CoDnK2k/yx3?=
+ =?iso-8859-1?Q?eIQW+41w8IVJ45wQXB9ANB6MYV4t29rU18cz36BKytQR5G9SjKz+5BgHpX?=
+ =?iso-8859-1?Q?3ZeyT2JPq4JkZfw6EyfZdVpDZnacJXhY5xcCZVBt9VjP8wrlL8FyDk0Ycw?=
+ =?iso-8859-1?Q?cRL5vqcTOe/vM9TNLzLa981GdKd7K21twFV4ywFprFKMNMZajMqfvXOfvh?=
+ =?iso-8859-1?Q?4xyR2p0msktZVnYJTrg83f6f9Z+IUqvyrTB0/hIhRxDVZ1p46VdIuFI/Lg?=
+ =?iso-8859-1?Q?awwg0ADh8fspP6leo74Yybq4bEnqseAXAWWU6JPNt1qFmuTOUoC3z7ouZn?=
+ =?iso-8859-1?Q?YcUVoU+R+zy/k6gfFqZUu2KDPQZtGOFo4dD/MvxEcie1HeOOvrbmpc2Tmp?=
+ =?iso-8859-1?Q?zKDVajTqhpBoGE2w3VOL6soo7mNZxmsiytYslpLwAjl5Sq3rP0/wOPf9s6?=
+ =?iso-8859-1?Q?FAUw47CPBfNnI4O14NH6KAomaourvgmIDN2+2wZpphN9soNKtRHe5rXlce?=
+ =?iso-8859-1?Q?+/YJ5fHF5XexcmAAALo9vCoUOGesnPEHRFcqXoco9UqeNdq1erxNoe+k/x?=
+ =?iso-8859-1?Q?5o63sjtzVMpxfRrJbfBBEj/DMD18MbPhilM/HZPrpcGUxCFbUsle+JLfFF?=
+ =?iso-8859-1?Q?QLTN6botHSDlM4TK8f3ziiqiCihknqeB2xvN1bDfxnxz6vZl+HD+0TAkLo?=
+ =?iso-8859-1?Q?o8gdQ0GR8bG1MbIbpz1qttfCY1VgGizEO6MUSg2QUQGN8p9QRfpqECWDJK?=
+ =?iso-8859-1?Q?0MyTsUXwSbpLPvjqe9ZHrop1z2w8LrN1oO046PrJLJShJyprOYa4maLlUy?=
+ =?iso-8859-1?Q?8f6mCp4upjV6L/rBppqJ4OcvGaTKISGC825gIpwHElnM69PF3CeAexJRQU?=
+ =?iso-8859-1?Q?meF1q+YL/wNyOxQT+csUmN2iFTUErkr1DUj8ojRdQ0bDgjeTd27y4o4l/F?=
+ =?iso-8859-1?Q?zhrKT+vBjaRS5O5MPYwnelaOzGMTvOtmfgtbwsEFNuFAiLtEeoupcopmaH?=
+ =?iso-8859-1?Q?VOFi5RvM+zGM0D+gaV95MZeOSzh5cVXAKhF4vRDBLvraJ+OtsTfobFkrUN?=
+ =?iso-8859-1?Q?5fpe0Ty4RGXXqutfLveH86xRCmJinHwIld+ACbSWw+ZjtBCsxH5uz0IjfT?=
+ =?iso-8859-1?Q?otMBLWRMG/Fr8vVlV11bVosHZq7skcysJ4ifcRWw9RZXrCQmffLWrrPNus?=
+ =?iso-8859-1?Q?Yd6TgpN2/lYuHNJPirFjN1tDKv3p4neNTSCMTSY4ELP1IFNQnNVPXDOq9N?=
+ =?iso-8859-1?Q?IA3LneR7H2lq4RXAG9QpVTN9bIqFbdEa0whHVkXEugSYmz8N/5H32GuZDv?=
+ =?iso-8859-1?Q?cxOE5Sk9MflUbK4y8Km2JgYs8VuVtWxV/rz08RuXa/Jf42jL2SZ5cWdY8s?=
+ =?iso-8859-1?Q?DagDvGuK9rpWw9bHFqHQNyv0Wg9pCKv2fgGmw1Hv3iE0NekMdDd0XLjhWy?=
+ =?iso-8859-1?Q?BZpRaulHSssEPHwkfp2KweMt24kXXHBChKZCOq/IoetmFv+3z9FlbbeoH/?=
+ =?iso-8859-1?Q?AZvn0vJsjL9RBHPjMsVghWjiOAKwluC7krf5LmOBFLlv8MQ4KcyBLo2GRV?=
+ =?iso-8859-1?Q?l46q6301n22XkIqLuXp/Nw01SZx2fwGT41t5FuXWbpzmkbiLyKwJbJAq+V?=
+ =?iso-8859-1?Q?KZh4FgqlcpdBZBRbkPU6AjPHlavlRwlqAB7fJzM+t/SbUYQMmDZZP/mA?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -133,16 +135,16 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e92be7c-f784-46f7-965c-08db88b8cf93
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jul 2023 00:32:32.9924
+X-MS-Exchange-CrossTenant-Network-Message-Id: 40e488b3-4a91-452a-6e5e-08db88b8d0d5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jul 2023 00:32:34.0150
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Oez4NfckEs57RyrUo/1qQTogW9Yip7DfAQWbsDZ2gNJj9eiMpm5G6Nea+VyT5xExOY6Y7NSQMFhCdtJ2zJYv36/VlZP0djs3cbC7gX+YZaU=
+X-MS-Exchange-CrossTenant-userprincipalname: k84+8ahfRZfxLDIqeXyM/qpkacYmv3X1KEXBSPF3Lj8xewp0T4Uc/22arBwdoywXsURyeQsYFBDdpPIl3aI0NbjIFv/0HB4nAACfIZtVxH4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7783
-X-Proofpoint-ORIG-GUID: v7awCBYqKbbJt-sdSLCk-QjslHKggHmC
-X-Proofpoint-GUID: v7awCBYqKbbJt-sdSLCk-QjslHKggHmC
+X-Proofpoint-ORIG-GUID: q9JJ6ULmBvRj2LdFzvGmWJYkebN7q3t-
+X-Proofpoint-GUID: q9JJ6ULmBvRj2LdFzvGmWJYkebN7q3t-
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
  definitions=2023-07-19_16,2023-07-19_01,2023-05-22_02
@@ -154,499 +156,211 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscor
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Instead of handling a single range set, that contains all the memory
-regions of all the BARs and ROM, have them per BAR.
-As the range sets are now created when a PCI device is added and destroyed
-when it is removed so make them named and accounted.
+Assign SBDF to the PCI devices being passed through with bus 0.
+The resulting topology is where PCIe devices reside on the bus 0 of the
+root complex itself (embedded endpoints).
+This implementation is limited to 32 devices which are allowed on
+a single PCI bus.
 
-Note that rangesets were chosen here despite there being only up to
-3 separate ranges in each set (typically just 1). But rangeset per BAR
-was chosen for the ease of implementation and existing code re-usability.
-
-This is in preparation of making non-identity mappings in p2m for the MMIOs=
-.
+Please note, that at the moment only function 0 of a multifunction
+device can be passed through.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-
 ---
+Since v8:
+- Added write lock in add_virtual_device
 Since v6:
-- update according to the new locking scheme
-- remove odd fail label in modify_bars
+- re-work wrt new locking scheme
+- OT: add ASSERT(pcidevs_write_locked()); to add_virtual_device()
 Since v5:
-- fix comments
-- move rangeset allocation to init_bars and only allocate
-  for MAPPABLE BARs
-- check for overlap with the already setup BAR ranges
+- s/vpci_add_virtual_device/add_virtual_device and make it static
+- call add_virtual_device from vpci_assign_device and do not use
+  REGISTER_VPCI_INIT machinery
+- add pcidevs_locked ASSERT
+- use DECLARE_BITMAP for vpci_dev_assigned_map
 Since v4:
-- use named range sets for BARs (Jan)
-- changes required by the new locking scheme
-- updated commit message (Jan)
+- moved and re-worked guest sbdf initializers
+- s/set_bit/__set_bit
+- s/clear_bit/__clear_bit
+- minor comment fix s/Virtual/Guest/
+- added VPCI_MAX_VIRT_DEV constant (PCI_SLOT(~0) + 1) which will be used
+  later for counting the number of MMIO handlers required for a guest
+  (Julien)
 Since v3:
-- re-work vpci_cancel_pending accordingly to the per-BAR handling
-- s/num_mem_ranges/map_pending and s/uint8_t/bool
-- ASSERT(bar->mem) in modify_bars
-- create and destroy the rangesets on add/remove
+ - make use of VPCI_INIT
+ - moved all new code to vpci.c which belongs to it
+ - changed open-coded 31 to PCI_SLOT(~0)
+ - added comments and code to reject multifunction devices with
+   functions other than 0
+ - updated comment about vpci_dev_next and made it unsigned int
+ - implement roll back in case of error while assigning/deassigning devices
+ - s/dom%pd/%pd
+Since v2:
+ - remove casts that are (a) malformed and (b) unnecessary
+ - add new line for better readability
+ - remove CONFIG_HAS_VPCI_GUEST_SUPPORT ifdef's as the relevant vPCI
+    functions are now completely gated with this config
+ - gate common code with CONFIG_HAS_VPCI_GUEST_SUPPORT
+New in v2
 ---
- xen/drivers/vpci/header.c | 235 ++++++++++++++++++++++++++++----------
- xen/drivers/vpci/vpci.c   |   6 +
- xen/include/xen/vpci.h    |   3 +-
- 3 files changed, 181 insertions(+), 63 deletions(-)
+ xen/drivers/vpci/vpci.c | 72 ++++++++++++++++++++++++++++++++++++++++-
+ xen/include/xen/sched.h |  8 +++++
+ xen/include/xen/vpci.h  | 11 +++++++
+ 3 files changed, 90 insertions(+), 1 deletion(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 5dc9b5338b..eb07fa0bb2 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -141,63 +141,106 @@ static void modify_decoding(const struct pci_dev *pd=
-ev, uint16_t cmd,
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index ca3505ecb7..baaafe4a2a 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -46,6 +46,16 @@ void vpci_remove_device(struct pci_dev *pdev)
+         return;
 =20
- bool vpci_process_pending(struct vcpu *v)
- {
--    if ( v->vpci.mem )
-+    struct pci_dev *pdev =3D v->vpci.pdev;
+     spin_lock(&pdev->vpci->lock);
 +
-+    if ( !pdev )
-+        return false;
-+
-+    if ( v->vpci.map_pending )
-     {
-         struct map_data data =3D {
-             .d =3D v->domain,
-             .map =3D v->vpci.cmd & PCI_COMMAND_MEMORY,
-         };
--        int rc =3D rangeset_consume_ranges(v->vpci.mem, map_range, &data);
--
--        if ( rc =3D=3D -ERESTART )
--            return true;
-+        struct vpci_header *header =3D &pdev->vpci->header;
-+        unsigned int i;
-=20
-         write_lock(&v->domain->pci_lock);
--        spin_lock(&v->vpci.pdev->vpci->lock);
--        /* Disable memory decoding unconditionally on failure. */
--        modify_decoding(v->vpci.pdev,
--                        rc ? v->vpci.cmd & ~PCI_COMMAND_MEMORY : v->vpci.c=
-md,
--                        !rc && v->vpci.rom_only);
--        spin_unlock(&v->vpci.pdev->vpci->lock);
--
--        rangeset_destroy(v->vpci.mem);
--        v->vpci.mem =3D NULL;
--        if ( rc )
--            /*
--             * FIXME: in case of failure remove the device from the domain=
-.
--             * Note that there might still be leftover mappings. While thi=
-s is
--             * safe for Dom0, for DomUs the domain will likely need to be
--             * killed in order to avoid leaking stale p2m mappings on
--             * failure.
--             */
--            vpci_remove_device(v->vpci.pdev);
-+
-+        for ( i =3D 0; i < ARRAY_SIZE(header->bars); i++ )
-+        {
-+            struct vpci_bar *bar =3D &header->bars[i];
-+            int rc;
-+
-+            if ( rangeset_is_empty(bar->mem) )
-+                continue;
-+
-+            rc =3D rangeset_consume_ranges(bar->mem, map_range, &data);
-+
-+            if ( rc =3D=3D -ERESTART )
-+            {
-+                write_unlock(&v->domain->pci_lock);
-+                return true;
-+            }
-+
-+            spin_lock(&pdev->vpci->lock);
-+            /* Disable memory decoding unconditionally on failure. */
-+            modify_decoding(pdev, rc ? v->vpci.cmd & ~PCI_COMMAND_MEMORY :
-+                                       v->vpci.cmd, !rc && v->vpci.rom_onl=
-y);
-+            spin_unlock(&pdev->vpci->lock);
-+
-+            if ( rc )
-+            {
-+                /*
-+                 * FIXME: in case of failure remove the device from the do=
-main.
-+                 * Note that there might still be leftover mappings. While=
- this
-+                 * is safe for Dom0, for DomUs the domain needs to be kill=
-ed in
-+                 * order to avoid leaking stale p2m mappings on failure.
-+                 */
-+                v->vpci.map_pending =3D false;
-+
-+                if ( is_hardware_domain(v->domain) )
-+                {
-+                    vpci_remove_device(pdev);
-+                    write_unlock(&v->domain->pci_lock);
-+                }
-+                else
-+                {
-+                    write_unlock(&v->domain->pci_lock);
-+                    domain_crash(v->domain);
-+                }
-+                return false;
-+            }
-+        }
-         write_unlock(&v->domain->pci_lock);
-+
-+        v->vpci.map_pending =3D false;
-     }
-=20
-+
-     return false;
- }
-=20
- static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
--                            struct rangeset *mem, uint16_t cmd)
-+                            uint16_t cmd)
- {
-     struct map_data data =3D { .d =3D d, .map =3D true };
--    int rc;
-+    struct vpci_header *header =3D &pdev->vpci->header;
-+    int rc =3D 0;
-+    unsigned int i;
-=20
-     ASSERT(rw_is_locked(&d->pci_lock));
-=20
--    while ( (rc =3D rangeset_consume_ranges(mem, map_range, &data)) =3D=3D=
- -ERESTART )
-+    for ( i =3D 0; i < ARRAY_SIZE(header->bars); i++ )
-     {
--        /*
--         * It's safe to drop and reacquire the lock in this context
--         * without risking pdev disappearing because devices cannot be
--         * removed until the initial domain has been started.
--         */
--        read_unlock(&d->pci_lock);
--        process_pending_softirqs();
--        read_lock(&d->pci_lock);
--    }
-+        struct vpci_bar *bar =3D &header->bars[i];
-=20
--    rangeset_destroy(mem);
-+        if ( rangeset_is_empty(bar->mem) )
-+            continue;
-+
-+        while ( (rc =3D rangeset_consume_ranges(bar->mem, map_range,
-+                                              &data)) =3D=3D -ERESTART )
-+        {
-+            /*
-+             * It's safe to drop and reacquire the lock in this context
-+             * without risking pdev disappearing because devices cannot be
-+             * removed until the initial domain has been started.
-+             */
-+            write_unlock(&d->pci_lock);
-+            process_pending_softirqs();
-+            write_lock(&d->pci_lock);
-+        }
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    if ( pdev->vpci->guest_sbdf.sbdf !=3D ~0 )
++    {
++        __clear_bit(pdev->vpci->guest_sbdf.dev,
++                    &pdev->domain->vpci_dev_assigned_map);
++        pdev->vpci->guest_sbdf.sbdf =3D ~0;
 +    }
-     if ( !rc )
-         modify_decoding(pdev, cmd, false);
-=20
-@@ -205,10 +248,12 @@ static int __init apply_map(struct domain *d, const s=
-truct pci_dev *pdev,
- }
-=20
- static void defer_map(struct domain *d, struct pci_dev *pdev,
--                      struct rangeset *mem, uint16_t cmd, bool rom_only)
-+                      uint16_t cmd, bool rom_only)
- {
-     struct vcpu *curr =3D current;
-=20
-+    ASSERT(!!rw_is_write_locked(&pdev->domain->pci_lock));
++#endif
 +
-     /*
-      * FIXME: when deferring the {un}map the state of the device should no=
-t
-      * be trusted. For example the enable bit is toggled after the device
-@@ -216,7 +261,7 @@ static void defer_map(struct domain *d, struct pci_dev =
-*pdev,
-      * started for the same device if the domain is not well-behaved.
-      */
-     curr->vpci.pdev =3D pdev;
--    curr->vpci.mem =3D mem;
-+    curr->vpci.map_pending =3D true;
-     curr->vpci.cmd =3D cmd;
-     curr->vpci.rom_only =3D rom_only;
-     /*
-@@ -230,33 +275,34 @@ static void defer_map(struct domain *d, struct pci_de=
-v *pdev,
- static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_=
-only)
- {
-     struct vpci_header *header =3D &pdev->vpci->header;
--    struct rangeset *mem =3D rangeset_new(NULL, NULL, 0);
-     struct pci_dev *tmp, *dev =3D NULL;
-     const struct domain *d;
-     const struct vpci_msix *msix =3D pdev->vpci->msix;
--    unsigned int i;
-+    unsigned int i, j;
-     int rc;
-+    bool map_pending;
-=20
-     ASSERT(rw_is_locked(&pdev->domain->pci_lock));
-=20
--    if ( !mem )
--        return -ENOMEM;
--
-     /*
--     * Create a rangeset that represents the current device BARs memory re=
-gion
--     * and compare it against all the currently active BAR memory regions.=
- If
--     * an overlap is found, subtract it from the region to be mapped/unmap=
-ped.
-+     * Create a rangeset per BAR that represents the current device memory
-+     * region and compare it against all the currently active BAR memory
-+     * regions. If an overlap is found, subtract it from the region to be
-+     * mapped/unmapped.
-      *
--     * First fill the rangeset with all the BARs of this device or with th=
-e ROM
-+     * First fill the rangesets with the BARs of this device or with the R=
-OM
-      * BAR only, depending on whether the guest is toggling the memory dec=
-ode
-      * bit of the command register, or the enable bit of the ROM BAR regis=
-ter.
-      */
-     for ( i =3D 0; i < ARRAY_SIZE(header->bars); i++ )
+     while ( !list_empty(&pdev->vpci->handlers) )
      {
--        const struct vpci_bar *bar =3D &header->bars[i];
-+        struct vpci_bar *bar =3D &header->bars[i];
-         unsigned long start =3D PFN_DOWN(bar->addr);
-         unsigned long end =3D PFN_DOWN(bar->addr + bar->size - 1);
+         struct vpci_register *r =3D list_first_entry(&pdev->vpci->handlers=
+,
+@@ -101,6 +111,10 @@ int vpci_add_handlers(struct pci_dev *pdev)
+     INIT_LIST_HEAD(&pdev->vpci->handlers);
+     spin_lock_init(&pdev->vpci->lock);
 =20
-+        if ( !bar->mem )
-+            continue;
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    pdev->vpci->guest_sbdf.sbdf =3D ~0;
++#endif
 +
-         if ( !MAPPABLE_BAR(bar) ||
-              (rom_only ? bar->type !=3D VPCI_BAR_ROM
-                        : (bar->type =3D=3D VPCI_BAR_ROM && !header->rom_en=
-abled)) ||
-@@ -272,14 +318,31 @@ static int modify_bars(const struct pci_dev *pdev, ui=
-nt16_t cmd, bool rom_only)
-             continue;
-         }
-=20
--        rc =3D rangeset_add_range(mem, start, end);
-+        rc =3D rangeset_add_range(bar->mem, start, end);
-         if ( rc )
-         {
-             printk(XENLOG_G_WARNING "Failed to add [%lx, %lx]: %d\n",
-                    start, end, rc);
--            rangeset_destroy(mem);
-             return rc;
-         }
-+
-+        /* Check for overlap with the already setup BAR ranges. */
-+        for ( j =3D 0; j < i; j++ )
-+        {
-+            struct vpci_bar *bar =3D &header->bars[j];
-+
-+            if ( rangeset_is_empty(bar->mem) )
-+                continue;
-+
-+            rc =3D rangeset_remove_range(bar->mem, start, end);
-+            if ( rc )
-+            {
-+                printk(XENLOG_G_WARNING
-+                       "Failed to remove overlapping range [%lx, %lx]: %d\=
-n",
-+                       start, end, rc);
-+                return rc;
-+            }
-+        }
-     }
-=20
-     /* Remove any MSIX regions if present. */
-@@ -289,14 +352,21 @@ static int modify_bars(const struct pci_dev *pdev, ui=
-nt16_t cmd, bool rom_only)
-         unsigned long end =3D PFN_DOWN(vmsix_table_addr(pdev->vpci, i) +
-                                      vmsix_table_size(pdev->vpci, i) - 1);
-=20
--        rc =3D rangeset_remove_range(mem, start, end);
--        if ( rc )
-+        for ( j =3D 0; j < ARRAY_SIZE(header->bars); j++ )
-         {
--            printk(XENLOG_G_WARNING
--                   "Failed to remove MSIX table [%lx, %lx]: %d\n",
--                   start, end, rc);
--            rangeset_destroy(mem);
--            return rc;
-+            const struct vpci_bar *bar =3D &header->bars[j];
-+
-+            if ( rangeset_is_empty(bar->mem) )
-+                continue;
-+
-+            rc =3D rangeset_remove_range(bar->mem, start, end);
-+            if ( rc )
-+            {
-+                printk(XENLOG_G_WARNING
-+                       "Failed to remove MSIX table [%lx, %lx]: %d\n",
-+                       start, end, rc);
-+                return rc;
-+            }
-         }
-     }
-=20
-@@ -341,7 +411,7 @@ static int modify_bars(const struct pci_dev *pdev, uint=
-16_t cmd, bool rom_only)
-                 unsigned long end =3D PFN_DOWN(bar->addr + bar->size - 1);
-=20
-                 if ( !bar->enabled ||
--                     !rangeset_overlaps_range(mem, start, end) ||
-+                     !rangeset_overlaps_range(bar->mem, start, end) ||
-                      /*
-                       * If only the ROM enable bit is toggled check agains=
-t
-                       * other BARs in the same device for overlaps, but no=
-t
-@@ -350,12 +420,11 @@ static int modify_bars(const struct pci_dev *pdev, ui=
-nt16_t cmd, bool rom_only)
-                      (rom_only && tmp =3D=3D pdev && bar->type =3D=3D VPCI=
-_BAR_ROM) )
-                     continue;
-=20
--                rc =3D rangeset_remove_range(mem, start, end);
-+                rc =3D rangeset_remove_range(bar->mem, start, end);
-                 if ( rc )
-                 {
-                     printk(XENLOG_G_WARNING "Failed to remove [%lx, %lx]: =
-%d\n",
-                            start, end, rc);
--                    rangeset_destroy(mem);
-                     return rc;
-                 }
-             }
-@@ -380,10 +449,23 @@ static int modify_bars(const struct pci_dev *pdev, ui=
-nt16_t cmd, bool rom_only)
-          * will always be to establish mappings and process all the BARs.
-          */
-         ASSERT((cmd & PCI_COMMAND_MEMORY) && !rom_only);
--        return apply_map(pdev->domain, pdev, mem, cmd);
-+        return apply_map(pdev->domain, pdev, cmd);
-     }
-=20
--    defer_map(dev->domain, dev, mem, cmd, rom_only);
-+    /* Find out how many memory ranges has left after MSI and overlaps. */
-+    map_pending =3D false;
-+    for ( i =3D 0; i < ARRAY_SIZE(header->bars); i++ )
-+        if ( !rangeset_is_empty(header->bars[i].mem) )
-+        {
-+            map_pending =3D true;
-+            break;
-+        }
-+
-+    /* If there's no mapping work write the command register now. */
-+    if ( !map_pending )
-+        pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
-+    else
-+        defer_map(dev->domain, dev, cmd, rom_only);
-=20
-     return 0;
- }
-@@ -574,6 +656,19 @@ static void cf_check rom_write(
-         rom->addr =3D val & PCI_ROM_ADDRESS_MASK;
+     for ( i =3D 0; i < NUM_VPCI_INIT; i++ )
+     {
+         rc =3D __start_vpci_array[i](pdev);
+@@ -115,6 +129,54 @@ int vpci_add_handlers(struct pci_dev *pdev)
  }
 =20
-+static int bar_add_rangeset(struct pci_dev *pdev, struct vpci_bar *bar, in=
-t i)
+ #ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++static int add_virtual_device(struct pci_dev *pdev)
 +{
-+    char str[32];
++    struct domain *d =3D pdev->domain;
++    pci_sbdf_t sbdf =3D { 0 };
++    unsigned long new_dev_number;
 +
-+    snprintf(str, sizeof(str), "%pp:BAR%d", &pdev->sbdf, i);
++    if ( is_hardware_domain(d) )
++        return 0;
 +
-+    bar->mem =3D rangeset_new(pdev->domain, str, RANGESETF_no_print);
-+    if ( !bar->mem )
-+        return -ENOMEM;
++    ASSERT(pcidevs_locked());
++
++    /*
++     * Each PCI bus supports 32 devices/slots at max or up to 256 when
++     * there are multi-function ones which are not yet supported.
++     */
++    if ( pdev->info.is_extfn )
++    {
++        gdprintk(XENLOG_ERR, "%pp: only function 0 passthrough supported\n=
+",
++                 &pdev->sbdf);
++        return -EOPNOTSUPP;
++    }
++
++    write_lock(&pdev->domain->pci_lock);
++    new_dev_number =3D find_first_zero_bit(d->vpci_dev_assigned_map,
++                                         VPCI_MAX_VIRT_DEV);
++    if ( new_dev_number >=3D VPCI_MAX_VIRT_DEV )
++    {
++        write_unlock(&pdev->domain->pci_lock);
++        return -ENOSPC;
++    }
++
++    __set_bit(new_dev_number, &d->vpci_dev_assigned_map);
++
++    /*
++     * Both segment and bus number are 0:
++     *  - we emulate a single host bridge for the guest, e.g. segment 0
++     *  - with bus 0 the virtual devices are seen as embedded
++     *    endpoints behind the root complex
++     *
++     * TODO: add support for multi-function devices.
++     */
++    sbdf.devfn =3D PCI_DEVFN(new_dev_number, 0);
++    pdev->vpci->guest_sbdf =3D sbdf;
++    write_unlock(&pdev->domain->pci_lock);
 +
 +    return 0;
 +}
 +
- static int cf_check init_bars(struct pci_dev *pdev)
+ /* Notify vPCI that device is assigned to guest. */
+ int vpci_assign_device(struct pci_dev *pdev)
  {
-     uint16_t cmd;
-@@ -657,6 +752,13 @@ static int cf_check init_bars(struct pci_dev *pdev)
-         else
-             bars[i].type =3D VPCI_BAR_MEM32;
+@@ -125,8 +187,16 @@ int vpci_assign_device(struct pci_dev *pdev)
 =20
-+        rc =3D bar_add_rangeset(pdev, &bars[i], i);
-+        if ( rc )
-+        {
-+            bars[i].type =3D VPCI_BAR_EMPTY;
-+            return rc;
-+        }
+     rc =3D vpci_add_handlers(pdev);
+     if ( rc )
+-        vpci_deassign_device(pdev);
++        goto fail;
 +
-         rc =3D pci_size_mem_bar(pdev->sbdf, reg, &addr, &size,
-                               (i =3D=3D num_bars - 1) ? PCI_BAR_LAST : 0);
-         if ( rc < 0 )
-@@ -707,6 +809,15 @@ static int cf_check init_bars(struct pci_dev *pdev)
-                                    rom_reg, 4, rom);
-             if ( rc )
-                 rom->type =3D VPCI_BAR_EMPTY;
-+            else
-+            {
-+                rc =3D bar_add_rangeset(pdev, rom, i);
-+                if ( rc )
-+                {
-+                    rom->type =3D VPCI_BAR_EMPTY;
-+                    return rc;
-+                }
-+            }
-         }
-     }
-     else
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index a97710a806..ca3505ecb7 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -38,6 +38,8 @@ extern vpci_register_init_t *const __end_vpci_array[];
++    rc =3D add_virtual_device(pdev);
++    if ( rc )
++        goto fail;
++
++    return 0;
 =20
- void vpci_remove_device(struct pci_dev *pdev)
- {
-+    unsigned int i;
-+
-     ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
++ fail:
++    vpci_deassign_device(pdev);
+     return rc;
+ }
+ #endif /* CONFIG_HAS_VPCI_GUEST_SUPPORT */
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 80dd150bbf..478bd21f3e 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -461,6 +461,14 @@ struct domain
+ #ifdef CONFIG_HAS_PCI
+     struct list_head pdev_list;
+     rwlock_t pci_lock;
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    /*
++     * The bitmap which shows which device numbers are already used by the
++     * virtual PCI bus topology and is used to assign a unique SBDF to the
++     * next passed through virtual PCI device.
++     */
++    DECLARE_BITMAP(vpci_dev_assigned_map, VPCI_MAX_VIRT_DEV);
++#endif
+ #endif
 =20
-     if ( !has_vpci(pdev->domain) || !pdev->vpci )
-@@ -63,6 +65,10 @@ void vpci_remove_device(struct pci_dev *pdev)
-             if ( pdev->vpci->msix->table[i] )
-                 iounmap(pdev->vpci->msix->table[i]);
-     }
-+
-+    for ( i =3D 0; i < ARRAY_SIZE(pdev->vpci->header.bars); i++ )
-+        rangeset_destroy(pdev->vpci->header.bars[i].mem);
-+
-     xfree(pdev->vpci->msix);
-     xfree(pdev->vpci->msi);
-     xfree(pdev->vpci);
+ #ifdef CONFIG_HAS_PASSTHROUGH
 diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 486a655e8d..b78dd6512b 100644
+index 6099d2141d..c55c45f7a1 100644
 --- a/xen/include/xen/vpci.h
 +++ b/xen/include/xen/vpci.h
-@@ -72,6 +72,7 @@ struct vpci {
-             /* Guest view of the BAR: address and lower bits. */
-             uint64_t guest_reg;
-             uint64_t size;
-+            struct rangeset *mem;
-             enum {
-                 VPCI_BAR_EMPTY,
-                 VPCI_BAR_IO,
-@@ -156,9 +157,9 @@ struct vpci {
+@@ -21,6 +21,13 @@ typedef int vpci_register_init_t(struct pci_dev *dev);
 =20
- struct vpci_vcpu {
-     /* Per-vcpu structure to store state while {un}mapping of PCI BARs. */
--    struct rangeset *mem;
-     struct pci_dev *pdev;
-     uint16_t cmd;
-+    bool map_pending : 1;
-     bool rom_only : 1;
+ #define VPCI_ECAM_BDF(addr)     (((addr) & 0x0ffff000) >> 12)
+=20
++/*
++ * Maximum number of devices supported by the virtual bus topology:
++ * each PCI bus supports 32 devices/slots at max or up to 256 when
++ * there are multi-function ones which are not yet supported.
++ */
++#define VPCI_MAX_VIRT_DEV       (PCI_SLOT(~0) + 1)
++
+ #define REGISTER_VPCI_INIT(x, p)                \
+   static vpci_register_init_t *const x##_entry  \
+                __used_section(".data.vpci." p) =3D x
+@@ -155,6 +162,10 @@ struct vpci {
+             struct vpci_arch_msix_entry arch;
+         } entries[];
+     } *msix;
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    /* Guest SBDF of the device. */
++    pci_sbdf_t guest_sbdf;
++#endif
+ #endif
  };
 =20
 --=20
