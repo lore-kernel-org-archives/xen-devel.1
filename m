@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E31D6EB64DA
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Jul 2023 12:34:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.566580.885587 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 851C1EB64DA
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Jul 2023 12:37:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.566586.885597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qMSqr-00012b-Fm; Thu, 20 Jul 2023 12:33:49 +0000
+	id 1qMStq-0001dn-TY; Thu, 20 Jul 2023 12:36:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 566580.885587; Thu, 20 Jul 2023 12:33:49 +0000
+Received: by outflank-mailman (output) from mailman id 566586.885597; Thu, 20 Jul 2023 12:36:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qMSqr-00012U-Cg; Thu, 20 Jul 2023 12:33:49 +0000
-Received: by outflank-mailman (input) for mailman id 566580;
- Thu, 20 Jul 2023 12:33:48 +0000
+	id 1qMStq-0001dg-Q5; Thu, 20 Jul 2023 12:36:54 +0000
+Received: by outflank-mailman (input) for mailman id 566586;
+ Thu, 20 Jul 2023 12:36:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=o2HW=DG=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qMSqq-00012J-5G
- for xen-devel@lists.xenproject.org; Thu, 20 Jul 2023 12:33:48 +0000
+ id 1qMStp-0001da-Oa
+ for xen-devel@lists.xenproject.org; Thu, 20 Jul 2023 12:36:53 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aaa8020b-26f9-11ee-8611-37d641c3527e;
- Thu, 20 Jul 2023 14:33:45 +0200 (CEST)
-Received: from Dell.bugseng.com (unknown [37.162.143.190])
- by support.bugseng.com (Postfix) with ESMTPSA id 940974EE0C89;
- Thu, 20 Jul 2023 14:33:43 +0200 (CEST)
+ id 1a2099c4-26fa-11ee-8611-37d641c3527e;
+ Thu, 20 Jul 2023 14:36:51 +0200 (CEST)
+Received: from [192.168.1.101] (unknown [37.162.143.190])
+ by support.bugseng.com (Postfix) with ESMTPSA id E84D64EE0C89;
+ Thu, 20 Jul 2023 14:36:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,60 +41,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aaa8020b-26f9-11ee-8611-37d641c3527e
-From: Federico Serafini <federico.serafini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
-	Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Subject: [XEN PATCH v2] x86/mtrr: address violations of MISRA C:2012 Rule 8.3 on parameter types
-Date: Thu, 20 Jul 2023 14:33:34 +0200
-Message-Id: <514c6dbe4ccfa1fdd66f80a0f8c8e248886bdc4e.1689856301.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 1a2099c4-26fa-11ee-8611-37d641c3527e
+Message-ID: <22263163-d3f3-eacd-1adc-0fb254ee618b@bugseng.com>
+Date: Thu, 20 Jul 2023 14:36:50 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [XEN PATCH] x86/mtrr: address violations of MISRA C:2012 Rule 8.3
+ on parameter types
+Content-Language: en-US, it
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, consulting@bugseng.com,
+ Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+ Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+References: <76dba3f8a6a7bc12f15a9e4fc8c73826a08e4b5c.1689849810.git.federico.serafini@bugseng.com>
+ <ZLklfgA3grgWIT7u@MacBook-Air-de-Roger.local>
+From: Federico Serafini <federico.serafini@bugseng.com>
+Organization: BUGSENG srl
+In-Reply-To: <ZLklfgA3grgWIT7u@MacBook-Air-de-Roger.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Change parameter types of function declarations to be consistent with
-the ones used in the corresponding definitions,
-thus addressing violations of MISRA C:2012 Rule 8.3 ("All declarations
-of an object or function shall use the same names and type qualifiers").
 
-No functional changes.
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
-Changes in v2:
-  - removed unwated tabs.
----
- xen/arch/x86/include/asm/mtrr.h | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+On 20/07/23 14:15, Roger Pau Monné wrote:
+> On Thu, Jul 20, 2023 at 12:48:36PM +0200, Federico Serafini wrote:
+>> +extern uint32_t get_pat_flags(struct vcpu *v, uint32_t gl1e_flags,
+>> +                              paddr_t gpaddr, paddr_t spaddr,
+>> +															uint8_t gmtrr_mtype);
+> 
+> Wrong usage of hard tabs.
+> 
+> Thanks, Roger.
 
-diff --git a/xen/arch/x86/include/asm/mtrr.h b/xen/arch/x86/include/asm/mtrr.h
-index e4f6ca6048..14246e3387 100644
---- a/xen/arch/x86/include/asm/mtrr.h
-+++ b/xen/arch/x86/include/asm/mtrr.h
-@@ -59,9 +59,10 @@ extern int mtrr_del_page(int reg, unsigned long base, unsigned long size);
- extern int mtrr_get_type(const struct mtrr_state *m, paddr_t pa,
-                          unsigned int order);
- extern void mtrr_centaur_report_mcr(int mcr, u32 lo, u32 hi);
--extern u32 get_pat_flags(struct vcpu *v, u32 gl1e_flags, paddr_t gpaddr,
--                  paddr_t spaddr, uint8_t gmtrr_mtype);
--extern unsigned char pat_type_2_pte_flags(unsigned char pat_type);
-+extern uint32_t get_pat_flags(struct vcpu *v, uint32_t gl1e_flags,
-+                              paddr_t gpaddr, paddr_t spaddr,
-+                              uint8_t gmtrr_mtype);
-+extern uint8_t pat_type_2_pte_flags(uint8_t pat_type);
- extern int hold_mtrr_updates_on_aps;
- extern void mtrr_aps_sync_begin(void);
- extern void mtrr_aps_sync_end(void);
+Sorry, some update must have changed the settings of my editor.
+Thanks for reporting.
+
+Regards
 -- 
-2.34.1
+Federico Serafini, M.Sc.
 
+Software Engineer, BUGSENG (http://bugseng.com)
 
