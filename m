@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4EDC07E8A
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:50:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568552.887983 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D994C07E8C
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:50:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568559.888009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsCx-0001AZ-Cy; Mon, 24 Jul 2023 09:50:27 +0000
+	id 1qNsCz-0001kK-Eq; Mon, 24 Jul 2023 09:50:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568552.887983; Mon, 24 Jul 2023 09:50:27 +0000
+Received: by outflank-mailman (output) from mailman id 568559.888009; Mon, 24 Jul 2023 09:50:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsCw-00016z-Q6; Mon, 24 Jul 2023 09:50:26 +0000
-Received: by outflank-mailman (input) for mailman id 568552;
- Mon, 24 Jul 2023 09:46:21 +0000
+	id 1qNsCy-0001gL-Lh; Mon, 24 Jul 2023 09:50:28 +0000
+Received: by outflank-mailman (input) for mailman id 568559;
+ Mon, 24 Jul 2023 09:46:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jodz=DK=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qNs8z-0007Fv-NO
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:46:21 +0000
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [2607:f8b0:4864:20::62b])
+ id 1qNs9a-0007Fv-5a
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:46:58 +0000
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [2607:f8b0:4864:20::62c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f013a20f-2a06-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 11:46:19 +0200 (CEST)
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1bb85ed352bso2229915ad.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:46:20 -0700 (PDT)
+ id 05cfbcb0-2a07-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 11:46:55 +0200 (CEST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1b8c364ad3bso8857575ad.1
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:46:56 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.46.07
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.46.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:46:18 -0700 (PDT)
+ Mon, 24 Jul 2023 02:46:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f013a20f-2a06-11ee-8612-37d641c3527e
+X-Inumbo-ID: 05cfbcb0-2a07-11ee-8612-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690191978; x=1690796778;
+        d=bytedance.com; s=google; t=1690192015; x=1690796815;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YJ34aDXYlHmjcWHNnO8BUtZL0Yf5ZszuCt3/FkcxObI=;
-        b=dPg8Z+s3aha2IvphpVKs8g7PSY6piop3d9NgPI5ubIDitgffw9A2UJF008ettaOzL2
-         E1tyNH7CPDs7txXWOfoA23V8TkeR2HnX04I7DoxtzP6sL4XEnTxiiEMAs0kV9Z/otM2W
-         0kOcjwbHjS6iULnGuX+LKfjLBZnKtzDuWFv8l1d9/Rkqg83rJ36ocDx6bY7GsC2wtJpk
-         Mw6apkZAnLMNttQVQifEE+ksvX6HBpvA7k/G1tddocZPzT2wZK5koTXpHocOk7zUb799
-         2LPg0QZl2ME3q58o3tQeyyaY1BlYV7m8Ier04lnGoxRFxPK9Wx4EcovR5xvgXGZWDCe6
-         9eCQ==
+        bh=hKcV3vb4MClJJQ+mNTta07ndMYtKKP0SAkTwCVeOX0w=;
+        b=a7lFhyKpvN91nijv1nVs3JeaaLMDFPSuaWY4NCEQD9DCJQdlhcmwFlvKgxp6H5QA07
+         3dkX4W4M1txISO3DSWoCDCRM1ysYCDf7oPJVOFGCIfe+DlrmZLhiur4I07AdWC0aW3Dw
+         CVnibojO6zdjwPP037s+ZGzHTbYwQp1TRk5IbZ0gf2icMTq1nF1E5wJ/BtOX4xZvFUp0
+         NkBwNV73kgVtBd1NdtpFu3djSHL7HyBXhuBz5mRGNaBtssuegwQh/61PWGRXQCMhsibP
+         +eC6XYGvARqk02NWbIzA2EZWiSinAW1FFs+vgwRWCCseEycqYRnDfiCLO/I65f90R1Q3
+         zmCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690191978; x=1690796778;
+        d=1e100.net; s=20221208; t=1690192015; x=1690796815;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YJ34aDXYlHmjcWHNnO8BUtZL0Yf5ZszuCt3/FkcxObI=;
-        b=eo+JvcGxY7P/pgS9f34MYYZVZMMS0jouyHtOR87mhFIjkfKvJOyo7d4h7fHTEFEIel
-         tNcTeJ/5jrnEfx/wUiXnYYqh6kDXisCZSDbjABF5WZ/K+7KjyvrEcfl25RbglqsWx0Jq
-         9k68/0GhjLtfE0IFUz6Ak3GioQtSulVjUW2p9KbhywPApRjjyHYZ+44cTHBmZTM1y6k4
-         lBYGp/Pv+nXddPrPt1x6Zjfrr/bTuAEab5euq6Dl19Z4oiThDZ+BLgcHDljo5NbBoYzt
-         bzcZ4mWPYnL1ydkq8OlTTA87jYYkk0uFP6f8335emLBtLdVNrJ+67YcJhCCzGJGLXOwn
-         1bCw==
-X-Gm-Message-State: ABy/qLbacej6D/BDA/NNsmH7q2TSgIvjdYQBD1D3Krna9QubtyRXBJUO
-	xSposC3rYB9JcnClDScwovBTWw==
-X-Google-Smtp-Source: APBJJlGS+SYk55mAAJOUNGx8fxUIn0OJAQvX8pDu/8/ugt1o28j6t6h3zVeppHUSF07Rw5MgS0vxBA==
-X-Received: by 2002:a17:902:d484:b0:1b8:a27d:f591 with SMTP id c4-20020a170902d48400b001b8a27df591mr12255719plg.5.1690191978640;
-        Mon, 24 Jul 2023 02:46:18 -0700 (PDT)
+        bh=hKcV3vb4MClJJQ+mNTta07ndMYtKKP0SAkTwCVeOX0w=;
+        b=EJvCMuPG0W+T5wZhLur0YQXPqKHJ4JxnwhtCauC2a0IZjdRC80Qt3sHJoBlCdjR+jS
+         ARvOYs19dGneCzQiTR7iIe3hMuPr8PdiV9GDiyrXTtvjYPd8FEoMYDpwxzg8Yc0lIwYy
+         d0/lJfV19N+Kz7w76DgRJhghGpIEb97Vwgcm9SyOy7D4FHs0r/pnyJoAnNCxyYODELb6
+         jsSjwenb3tkpX/X4J5JCzWDDKTYlq6Z7IiUK/R/mzAmoFp5CowSL8cnwWjkkrsnhzYha
+         Hty5qyvwm+ex1Du7n0Lp/w8XV/Wx10qDcsXF6K/l862IPWVNrECTih6qQzFp7n0YjPBY
+         tANg==
+X-Gm-Message-State: ABy/qLYVkssQos8Xd18FGrHfloJRvz4tpGM3wfAlAkNiQlt5VhkU9mf2
+	Pfzfszxnt1Hw0WfyEXnl5nhuXQ==
+X-Google-Smtp-Source: APBJJlFJGAUudAfwbE4FzEeIId9jY33sdTrNWRyhFQwrzl0Tx9fNVh9CNxBzY73cH6rP3yfMJCnueA==
+X-Received: by 2002:a17:902:dace:b0:1b8:811:b079 with SMTP id q14-20020a170902dace00b001b80811b079mr12305026plx.0.1690192015077;
+        Mon, 24 Jul 2023 02:46:55 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -116,76 +116,86 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v2 06/47] drm/ttm: dynamically allocate the drm-ttm_pool shrinker
-Date: Mon, 24 Jul 2023 17:43:13 +0800
-Message-Id: <20230724094354.90817-7-zhengqi.arch@bytedance.com>
+Subject: [PATCH v2 09/47] f2fs: dynamically allocate the f2fs-shrinker
+Date: Mon, 24 Jul 2023 17:43:16 +0800
+Message-Id: <20230724094354.90817-10-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the drm-ttm_pool shrinker.
+Use new APIs to dynamically allocate the f2fs-shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- drivers/gpu/drm/ttm/ttm_pool.c | 23 +++++++++++++++--------
- 1 file changed, 15 insertions(+), 8 deletions(-)
+ fs/f2fs/super.c | 32 ++++++++++++++++++++++++--------
+ 1 file changed, 24 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/gpu/drm/ttm/ttm_pool.c b/drivers/gpu/drm/ttm/ttm_pool.c
-index cddb9151d20f..e1eb73d0b72a 100644
---- a/drivers/gpu/drm/ttm/ttm_pool.c
-+++ b/drivers/gpu/drm/ttm/ttm_pool.c
-@@ -73,7 +73,7 @@ static struct ttm_pool_type global_dma32_uncached[MAX_ORDER + 1];
- 
- static spinlock_t shrinker_lock;
- static struct list_head shrinker_list;
--static struct shrinker mm_shrinker;
-+static struct shrinker *mm_shrinker;
- 
- /* Allocate pages of size 1 << order with the given gfp_flags */
- static struct page *ttm_pool_alloc_page(struct ttm_pool *pool, gfp_t gfp_flags,
-@@ -734,8 +734,8 @@ static int ttm_pool_debugfs_shrink_show(struct seq_file *m, void *data)
- 	struct shrink_control sc = { .gfp_mask = GFP_NOFS };
- 
- 	fs_reclaim_acquire(GFP_KERNEL);
--	seq_printf(m, "%lu/%lu\n", ttm_pool_shrinker_count(&mm_shrinker, &sc),
--		   ttm_pool_shrinker_scan(&mm_shrinker, &sc));
-+	seq_printf(m, "%lu/%lu\n", ttm_pool_shrinker_count(mm_shrinker, &sc),
-+		   ttm_pool_shrinker_scan(mm_shrinker, &sc));
- 	fs_reclaim_release(GFP_KERNEL);
- 
- 	return 0;
-@@ -779,10 +779,17 @@ int ttm_pool_mgr_init(unsigned long num_pages)
- 			    &ttm_pool_debugfs_shrink_fops);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index ca31163da00a..8b08473db358 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -83,11 +83,27 @@ void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
  #endif
  
--	mm_shrinker.count_objects = ttm_pool_shrinker_count;
--	mm_shrinker.scan_objects = ttm_pool_shrinker_scan;
--	mm_shrinker.seeks = 1;
--	return register_shrinker(&mm_shrinker, "drm-ttm_pool");
-+	mm_shrinker = shrinker_alloc(0, "drm-ttm_pool");
-+	if (!mm_shrinker)
+ /* f2fs-wide shrinker description */
+-static struct shrinker f2fs_shrinker_info = {
+-	.scan_objects = f2fs_shrink_scan,
+-	.count_objects = f2fs_shrink_count,
+-	.seeks = DEFAULT_SEEKS,
+-};
++static struct shrinker *f2fs_shrinker_info;
++
++static int f2fs_init_shrinker(void)
++{
++	f2fs_shrinker_info = shrinker_alloc(0, "f2fs-shrinker");
++	if (!f2fs_shrinker_info)
 +		return -ENOMEM;
 +
-+	mm_shrinker->count_objects = ttm_pool_shrinker_count;
-+	mm_shrinker->scan_objects = ttm_pool_shrinker_scan;
-+	mm_shrinker->seeks = 1;
++	f2fs_shrinker_info->count_objects = f2fs_shrink_count;
++	f2fs_shrinker_info->scan_objects = f2fs_shrink_scan;
++	f2fs_shrinker_info->seeks = DEFAULT_SEEKS;
 +
-+	shrinker_register(mm_shrinker);
++	shrinker_register(f2fs_shrinker_info);
 +
 +	return 0;
- }
++}
++
++static void f2fs_exit_shrinker(void)
++{
++	shrinker_unregister(f2fs_shrinker_info);
++}
  
- /**
-@@ -802,6 +809,6 @@ void ttm_pool_mgr_fini(void)
- 		ttm_pool_type_fini(&global_dma32_uncached[i]);
- 	}
- 
--	unregister_shrinker(&mm_shrinker);
-+	shrinker_unregister(mm_shrinker);
- 	WARN_ON(!list_empty(&shrinker_list));
- }
+ enum {
+ 	Opt_gc_background,
+@@ -4941,7 +4957,7 @@ static int __init init_f2fs_fs(void)
+ 	err = f2fs_init_sysfs();
+ 	if (err)
+ 		goto free_garbage_collection_cache;
+-	err = register_shrinker(&f2fs_shrinker_info, "f2fs-shrinker");
++	err = f2fs_init_shrinker();
+ 	if (err)
+ 		goto free_sysfs;
+ 	err = register_filesystem(&f2fs_fs_type);
+@@ -4986,7 +5002,7 @@ static int __init init_f2fs_fs(void)
+ 	f2fs_destroy_root_stats();
+ 	unregister_filesystem(&f2fs_fs_type);
+ free_shrinker:
+-	unregister_shrinker(&f2fs_shrinker_info);
++	f2fs_exit_shrinker();
+ free_sysfs:
+ 	f2fs_exit_sysfs();
+ free_garbage_collection_cache:
+@@ -5018,7 +5034,7 @@ static void __exit exit_f2fs_fs(void)
+ 	f2fs_destroy_post_read_processing();
+ 	f2fs_destroy_root_stats();
+ 	unregister_filesystem(&f2fs_fs_type);
+-	unregister_shrinker(&f2fs_shrinker_info);
++	f2fs_exit_shrinker();
+ 	f2fs_exit_sysfs();
+ 	f2fs_destroy_garbage_collection_cache();
+ 	f2fs_destroy_extent_cache();
 -- 
 2.30.2
 
