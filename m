@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7C3C001B0
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 13:16:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568954.889192 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65B54C001B0
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 13:16:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568958.889202 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNvPj-0006re-I1; Mon, 24 Jul 2023 13:15:51 +0000
+	id 1qNvQC-0007KJ-PW; Mon, 24 Jul 2023 13:16:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568954.889192; Mon, 24 Jul 2023 13:15:51 +0000
+Received: by outflank-mailman (output) from mailman id 568958.889202; Mon, 24 Jul 2023 13:16:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNvPj-0006rX-Eu; Mon, 24 Jul 2023 13:15:51 +0000
-Received: by outflank-mailman (input) for mailman id 568954;
- Mon, 24 Jul 2023 13:15:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=AOzI=DK=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qNvPi-0006rR-Hs
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 13:15:50 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 345ec366-2a24-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 15:15:48 +0200 (CEST)
-Received: from [192.168.1.100] (unknown [37.162.132.135])
- by support.bugseng.com (Postfix) with ESMTPSA id 61D1F4EE0737;
- Mon, 24 Jul 2023 15:15:46 +0200 (CEST)
+	id 1qNvQC-0007KA-Mw; Mon, 24 Jul 2023 13:16:20 +0000
+Received: by outflank-mailman (input) for mailman id 568958;
+ Mon, 24 Jul 2023 13:16:20 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1qNvQC-0007K2-3j
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 13:16:20 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qNvQB-0000vC-8U; Mon, 24 Jul 2023 13:16:19 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qNvQA-00049t-V5; Mon, 24 Jul 2023 13:16:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,71 +41,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 345ec366-2a24-11ee-8612-37d641c3527e
-Message-ID: <33af17e5-2942-e263-22bf-7e60148e1de1@bugseng.com>
-Date: Mon, 24 Jul 2023 15:15:45 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=bz+o/Hq9OltO/IW7Qgu7d5gD1r3RxbSX/CoTGtoJgcU=; b=h8ohktsOIpVk1qdwbp/Xt42hsk
+	Yponiq4vOAFc5VcykOCN3MaQWkCTa7ce0GGr61qnseIuR+dMtVu5DMmTo7IjkEjJGqQclLc7naDIS
+	AOsR231xAPTpKm9LSiYNs4nUbRQWba3rN4hob6BV/72v9YVoGnQG9aMkWu7464E/oPdY=;
+Message-ID: <9de1b328-a1d3-1544-addb-5909618df2ba@xen.org>
+Date: Mon, 24 Jul 2023 14:16:17 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: Re: [XEN PATCH] xen/arm: p2m: refactor 'p2m_get_entry'
-To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
- ayan.kumar.halder@amd.com, consulting@bugseng.com,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.13.0
+Subject: Re: [PATCH] xen/dt: Rework the prototype of dt_property_read_string()
+ to help Eclair
+Content-Language: en-US
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ xen-devel@lists.xenproject.org
+Cc: Julien Grall <jgrall@amazon.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
  Bertrand Marquis <bertrand.marquis@arm.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <118566cd8b9ebbcedd2b610f5f602cc31c12fd55.1689922099.git.nicola.vetrini@bugseng.com>
- <9c1b7c53-f8da-76a2-cc02-7c72a3030be4@xen.org>
-Content-Language: en-US
-In-Reply-To: <9c1b7c53-f8da-76a2-cc02-7c72a3030be4@xen.org>
+References: <20230724102443.91894-1-julien@xen.org>
+ <014b6c1a-9e83-15f7-67d7-74afaf97b9a2@bugseng.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <014b6c1a-9e83-15f7-67d7-74afaf97b9a2@bugseng.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
+Hi Nicola,
 
-
-On 21/07/23 12:01, Julien Grall wrote:
-> Hi Nicola,
+On 24/07/2023 13:58, Nicola Vetrini wrote:
 > 
-> I would add "to please ECLAIR" in the commit title.
-
-I would be against this. It's the MISRA assessor that needs
-to understand and agree on what has been done to claim MISRA compliance. 
-A static analysis tool is just a useful way to help reaching this aim.
-
 > 
-> On 21/07/2023 07:49, Nicola Vetrini wrote:
->> This function is refactored to avoid using a
->> local dummy variable that served as a fallback
->> if the parameter 't' is NULL.
+> On 24/07/23 12:24, Julien Grall wrote:
+>> From: Julien Grall <jgrall@amazon.com>
 >>
->> Storing the address of that variable into 't' caused
->> static analysis tools not to be able to recognize the
+>> Eclair vXXX is unable to prove the parameter out_string will only be
+>> used the return of dt_property_read_string() is 0. So it will consider
+>> that MISRA C:2012 Rule 9.1 was violated.
 > 
-> Can you mention which static analysis tools is not happy and the 
-> version? This could help us in the future if we decided to revert the 
-> patch.
+> This is not correct: ECLAIR cannot prove that the rule is not violated, 
+> and hence emits a caution, because the analysis is sound.
+
+Ok. How about: "So it will not be able to prove that MISR C:2012 Rule 
+9.1 wasn't violated"?
+
 > 
+>>
+>> Rework the prototype so the string is returned and use ERR_PTR() to
+>> embed the error code.
+>>
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+>>
+>> ---
+>>
+>> The XXX should be replaced with the version of Eclair. Nicola, can you
+>> provide it?
+> 
+> I don't see as valuable mentioning ECLAIR at all, but rather explain 
+> what the change is about (encoding the error value as a return value and 
+> removing the **out_value parameter).
+If Eclair didn't report a caution, then I would not have spent time 
+writing this patch.
 
-It is not a matter of tool happiness, but of MISRA compliance.
-There are several tools (even emblazoned ones) that have lots
-of false negatives, also for mandatory guidelines such as Rule 9.1:
-the fact that they do not issue messages for possible violations
-they cannot exclude is happiness for nobody (especially for those
-who have to ensure there are indeed no violations). Two things
-that have to be kept well in mind are:
+Also, the point of mentioning the Eclair version is that if someone ever 
+want to change the prototype back to where it was (e.g. because another 
+tools is unhappy), then we have some details on why it was done and way 
+to reproduce. This would avoid endless argument on the ML on whether it 
+is safe to revert it.
 
-1) Rule 9.1 is undecidable, there will never be a tool that flags all
-    and only the violations; tools will false positives, false negatives
-    or both. ECLAIR (all versions of it) errs on the safe side.
+So overall, the value is not necessarily for today, but for the future 
+reader.
 
-2) Safety-critical code has to be boring and obviously correct:
-    programming virtuosism and safety are in two very different leagues.
-    This is why ECLAIR uses the algorithm it uses: typically when it
-    issues a caution the code is not obviously correct.
-
-Kind Regards,
+Cheers,
 
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+Julien Grall
 
