@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6FA1C04FE1
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:50:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568571.888067 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89332C001DF
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:50:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568576.888089 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsD5-0003Uz-Hg; Mon, 24 Jul 2023 09:50:35 +0000
+	id 1qNsD8-0004GY-UP; Mon, 24 Jul 2023 09:50:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568571.888067; Mon, 24 Jul 2023 09:50:35 +0000
+Received: by outflank-mailman (output) from mailman id 568576.888089; Mon, 24 Jul 2023 09:50:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsD4-0003Nc-Ep; Mon, 24 Jul 2023 09:50:34 +0000
-Received: by outflank-mailman (input) for mailman id 568571;
- Mon, 24 Jul 2023 09:48:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qNsD7-00049u-RA; Mon, 24 Jul 2023 09:50:37 +0000
+Received: by outflank-mailman (input) for mailman id 568576;
+ Mon, 24 Jul 2023 09:48:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jodz=DK=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qNsAi-0007J3-Ms
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:48:08 +0000
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [2607:f8b0:4864:20::429])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3106102d-2a07-11ee-b23a-6b7b168915f2;
- Mon, 24 Jul 2023 11:48:07 +0200 (CEST)
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-682eef7d752so1028046b3a.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:48:07 -0700 (PDT)
+ id 1qNsB7-0007Pe-He
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:48:33 +0000
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [2607:f8b0:4864:20::630])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3f4604fc-2a07-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 11:48:31 +0200 (CEST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1bb85ed352bso2235835ad.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:48:31 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.47.54
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.48.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:48:06 -0700 (PDT)
+ Mon, 24 Jul 2023 02:48:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3106102d-2a07-11ee-b23a-6b7b168915f2
+X-Inumbo-ID: 3f4604fc-2a07-11ee-8612-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690192086; x=1690796886;
+        d=bytedance.com; s=google; t=1690192110; x=1690796910;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ztwb9n/1dXh113w/8xubUIoix8VXd/5rqVT4RvFn/tw=;
-        b=Am7FnjS3Cpm4I6+unn47wV0WInP35j7cWyw7YSHmXYddBbEndaPLIOhBD501lhuXhz
-         ziS0uq23cHOpl1MZygPYTe8AuNvoAdPlGK8k32I3Ef9lRu2tiO1YjBbYZCD1R2rMLxT1
-         sbS7mgch7/EfOaLRKT3V6tvhfJSY21ngFnqMEHN8grEnjoqg0M6Q11qf7CVQTrHQJzW3
-         E1Q+qRl3oeLAaumIkMGruzrANQhf6ocLGFa54JS2CwGaWbDUA2Re4gbZJ2jDKM9ntSrw
-         dCSeZvHulgVnMl/ivIn59gXFxJS3Mnbl4ERIMhlA37amtawTgx9ciEfDapqLjZzr2ZBw
-         AsLQ==
+        bh=8oqpenbl7KoJJhQpMWpio5jwf7tXqseO0h4l218M5aA=;
+        b=aCj2BNfrpcxtoTz1/CdONfPnB9TAYVTaqB4T4WqFv6y7Hxl9V0boEFHOTATComBNn2
+         xnFJ8tDKgZzO2TH4FwPeDTaYzb9x0D/uxmdjUcwFhXWgN5824wox+O8c9U9ybGUIohlv
+         M3vK6kDUgbRBz02IXlUWPuxdPW8hkxiMWgJebr95xqiqSLJbGYOLAINvEuBU6c5+0m2D
+         KwQfMs1a5lB1SKCsavAJR55Sjok6of8gfoBXMKjbRTfwQ6NM1BD/3dZZP6dR7OXOKSHl
+         QBl4iWtqq0OikEBOGyMzrxqP+jJMX2cWmHkmCbYCS6DP7MDoD2ilfcJavniQ/pgHFrWu
+         bw9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690192086; x=1690796886;
+        d=1e100.net; s=20221208; t=1690192110; x=1690796910;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ztwb9n/1dXh113w/8xubUIoix8VXd/5rqVT4RvFn/tw=;
-        b=N0SD36Pj+gfyIIhu/RyDQGS8Xve37Zgo56eS9NhHYD25qwbXS1Qe5HGbwicF7lSoFz
-         nl51d9r5NFvlglfo+qXoD4y89+jgjSdjaXaBi/AN/jOZJOZ9vY4r0y8JuaHfnP2PT++T
-         HtkfI/Vd3E4+d4EC9g/AdoceqsyNXJdy34NaUmf2HkjxVZmXrkgpshbJj8brH82EdOU5
-         t3C/lDmDZOp8kCKWCX7cFk28eMWy0RWxOh/kvNd0fVoK5N/H0bmFnF9EgIYDwGEmBO1g
-         tULZyOGf/orkyYEAas3hngK1pcWvWBVJiePilTZBcyWrNGx4+ryXGzqkIlfa/kfKu/Gn
-         gGoQ==
-X-Gm-Message-State: ABy/qLaRah1Tw1dZIcDw6h1Go4D6bXq/7gKk1LhBnmfQISnzD+nVe78W
-	4OpGSdFhEJPbB09gNqLcGa3rTg==
-X-Google-Smtp-Source: APBJJlHRxCFTSeAmJPIiRwzXlrngv0y6n5gqphR6YCBFCcMRvGq0CtVM2WuFHUMj7p5y6QUWxkmpXA==
-X-Received: by 2002:a17:902:dad1:b0:1b8:aded:524c with SMTP id q17-20020a170902dad100b001b8aded524cmr12538511plx.1.1690192086608;
-        Mon, 24 Jul 2023 02:48:06 -0700 (PDT)
+        bh=8oqpenbl7KoJJhQpMWpio5jwf7tXqseO0h4l218M5aA=;
+        b=HnmBLTjN61RoVyNfbfta1PmY8E1Ao+KbStV57f1SGo1aUyKQPDBnSrcU8dwxZl42bO
+         8Uxi3KypCifcNVXQNalQvj44xDs/eGWe2H7xcM2OVtAzsnA9sKmbVpw5hzrLzhcSo57x
+         ICm96Q/PsB+fPygoB6RQfXPFRWROdjv1c+7qsjmpJblkJVRjRhl43VVVY1Mfzu4mqWZf
+         OkCcdwTH9E2ST8HozvOAL8vzOVL9GnH7l4AjuylUS0LPwTTQAc2PazKj0sIltS3j0O3N
+         mFhpKQp2bI9+a0X/txD5jeC5osAcOH/w4zR573ZYcwA/qU5er8M6QkdwiInFeDyaK1Hb
+         Ypew==
+X-Gm-Message-State: ABy/qLZFGmLZPGIvB8C/EiiriXtKt6P+jkxAvzNApaVQFXWCoSFpmKXh
+	Kg2H5dj4yfb5th+qgiO1RE7r2Q==
+X-Google-Smtp-Source: APBJJlFv5Kl04F8rp2naJTMNzHe6rYzFJJPXcSejcs04WaV/YhAbklIOobqPbsV/O0Fdd5o/IKlERw==
+X-Received: by 2002:a17:902:d484:b0:1b8:a27d:f591 with SMTP id c4-20020a170902d48400b001b8a27df591mr12259746plg.5.1690192110449;
+        Mon, 24 Jul 2023 02:48:30 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -116,57 +116,59 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v2 15/47] quota: dynamically allocate the dquota-cache shrinker
-Date: Mon, 24 Jul 2023 17:43:22 +0800
-Message-Id: <20230724094354.90817-16-zhengqi.arch@bytedance.com>
+Subject: [PATCH v2 17/47] rcu: dynamically allocate the rcu-lazy shrinker
+Date: Mon, 24 Jul 2023 17:43:24 +0800
+Message-Id: <20230724094354.90817-18-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the dquota-cache shrinker.
+Use new APIs to dynamically allocate the rcu-lazy shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- fs/quota/dquot.c | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ kernel/rcu/tree_nocb.h | 19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/fs/quota/dquot.c b/fs/quota/dquot.c
-index e8232242dd34..6cb2d8911bc3 100644
---- a/fs/quota/dquot.c
-+++ b/fs/quota/dquot.c
-@@ -791,11 +791,7 @@ dqcache_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
- 	percpu_counter_read_positive(&dqstats.counter[DQST_FREE_DQUOTS]));
+diff --git a/kernel/rcu/tree_nocb.h b/kernel/rcu/tree_nocb.h
+index 43229d2b0c44..919f17561733 100644
+--- a/kernel/rcu/tree_nocb.h
++++ b/kernel/rcu/tree_nocb.h
+@@ -1397,12 +1397,7 @@ lazy_rcu_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
+ 	return count ? count : SHRINK_STOP;
  }
  
--static struct shrinker dqcache_shrinker = {
--	.count_objects = dqcache_shrink_count,
--	.scan_objects = dqcache_shrink_scan,
+-static struct shrinker lazy_rcu_shrinker = {
+-	.count_objects = lazy_rcu_shrink_count,
+-	.scan_objects = lazy_rcu_shrink_scan,
+-	.batch = 0,
 -	.seeks = DEFAULT_SEEKS,
 -};
-+static struct shrinker *dqcache_shrinker;
++static struct shrinker *lazy_rcu_shrinker;
+ #endif // #ifdef CONFIG_RCU_LAZY
  
- /*
-  * Safely release dquot and put reference to dquot.
-@@ -2991,8 +2987,15 @@ static int __init dquot_init(void)
- 	pr_info("VFS: Dquot-cache hash table entries: %ld (order %ld,"
- 		" %ld bytes)\n", nr_hash, order, (PAGE_SIZE << order));
+ void __init rcu_init_nohz(void)
+@@ -1436,8 +1431,16 @@ void __init rcu_init_nohz(void)
+ 		return;
  
--	if (register_shrinker(&dqcache_shrinker, "dquota-cache"))
--		panic("Cannot register dquot shrinker");
-+	dqcache_shrinker = shrinker_alloc(0, "dquota-cache");
-+	if (!dqcache_shrinker)
-+		panic("Cannot allocate dquot shrinker");
+ #ifdef CONFIG_RCU_LAZY
+-	if (register_shrinker(&lazy_rcu_shrinker, "rcu-lazy"))
+-		pr_err("Failed to register lazy_rcu shrinker!\n");
++	lazy_rcu_shrinker = shrinker_alloc(0, "rcu-lazy");
++	if (!lazy_rcu_shrinker) {
++		pr_err("Failed to allocate lazy_rcu shrinker!\n");
++	} else {
++		lazy_rcu_shrinker->count_objects = lazy_rcu_shrink_count;
++		lazy_rcu_shrinker->scan_objects = lazy_rcu_shrink_scan;
++		lazy_rcu_shrinker->seeks = DEFAULT_SEEKS;
 +
-+	dqcache_shrinker->count_objects = dqcache_shrink_count;
-+	dqcache_shrinker->scan_objects = dqcache_shrink_scan;
-+	dqcache_shrinker->seeks = DEFAULT_SEEKS;
-+
-+	shrinker_register(dqcache_shrinker);
++		shrinker_register(lazy_rcu_shrinker);
++	}
+ #endif // #ifdef CONFIG_RCU_LAZY
  
- 	return 0;
- }
+ 	if (!cpumask_subset(rcu_nocb_mask, cpu_possible_mask)) {
 -- 
 2.30.2
 
