@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53719C0015E
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 11:08:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568760.888712 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E0ADC001B0
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 11:08:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568761.888723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNtQ1-0000LQ-RN; Mon, 24 Jul 2023 11:08:01 +0000
+	id 1qNtQ5-0000eX-4A; Mon, 24 Jul 2023 11:08:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568760.888712; Mon, 24 Jul 2023 11:08:01 +0000
+Received: by outflank-mailman (output) from mailman id 568761.888723; Mon, 24 Jul 2023 11:08:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNtQ1-0000LJ-OU; Mon, 24 Jul 2023 11:08:01 +0000
-Received: by outflank-mailman (input) for mailman id 568760;
- Mon, 24 Jul 2023 11:08:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qNtQ4-0000eM-WD; Mon, 24 Jul 2023 11:08:05 +0000
+Received: by outflank-mailman (input) for mailman id 568761;
+ Mon, 24 Jul 2023 11:08:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jVkC=DK=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qNtLl-0008WC-0G
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 11:03:37 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bc13b991-2a11-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 13:03:35 +0200 (CEST)
+ id 1qNtMH-0000KR-Vb
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 11:04:09 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d05cbdf6-2a11-11ee-b23a-6b7b168915f2;
+ Mon, 24 Jul 2023 13:04:09 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 3F31522971;
- Mon, 24 Jul 2023 11:03:35 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 45ABF20697;
+ Mon, 24 Jul 2023 11:04:09 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1404513476;
- Mon, 24 Jul 2023 11:03:35 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0C7D713476;
+ Mon, 24 Jul 2023 11:04:09 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 5EluA4davmSdYQAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 24 Jul 2023 11:03:35 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id TaAkAalavmTxYQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 24 Jul 2023 11:04:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,90 +53,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc13b991-2a11-11ee-8612-37d641c3527e
+X-Inumbo-ID: d05cbdf6-2a11-11ee-b23a-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1690196615; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1690196649; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=siTlKvWMR/RT4S0FnCgR+ZpOvEYZZwpHnARxR3tmw/4=;
-	b=GhkPau+GxIQNm74gzCxgvTBrLWE2MgNHxieKxWzLiPjFgsNIFEOgi7RytaTF7pPUsSfRza
-	DCLsvzH7D+ukWicqelez/plpzkItVdogW46c3rM6PBa4p9wCdzdgJCRobpbNsqNz51o33/
-	ETy0NnKk3qhcCynU9B/BCCLdpaAS/hk=
+	bh=ybmSsNxeUNBDfbwoafuFdaqkBsZjOSyQ+1w8Dv8MPBA=;
+	b=A/+QxO4eCzEmjzHMxT+ihNVdWzxr23vis3Q0qbpNKOW1152yipSC9ZR4tXOG8BWTybH0aY
+	9nrT9YRxvzWTGdXrw/DW0rYz8g8aZgcrEFmTjFcRtaG5ChKRzaWJ4z53RKkeFVOrvBxZOm
+	5CUF2So2ScZF3HnjW2o241v+gK5OiaU=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v3 08/25] tools/xenstore: make hashtable key and value parameters const
-Date: Mon, 24 Jul 2023 13:02:30 +0200
-Message-Id: <20230724110247.10520-9-jgross@suse.com>
+Subject: [PATCH v3 14/25] tools/xenstore: change talloc_free() to take a const pointer
+Date: Mon, 24 Jul 2023 13:02:36 +0200
+Message-Id: <20230724110247.10520-15-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230724110247.10520-1-jgross@suse.com>
 References: <20230724110247.10520-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The key and value are never modified by hashtable code, so they should
-be marked as const.
+With talloc_free() and related functions not taking a ponter to const
+it is tedious to use the const attribute for talloc()-ed memory in
+many cases.
+
+Change the related prototypes to use "const void *" instead of
+"void *".
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V3:
-- make value const, too.
+- new patch
 ---
- tools/xenstore/hashtable.c | 7 ++++---
- tools/xenstore/hashtable.h | 4 ++--
- 2 files changed, 6 insertions(+), 5 deletions(-)
+ tools/xenstore/talloc.c | 8 ++++----
+ tools/xenstore/talloc.h | 4 ++--
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
-index 11f6bf8f15..670dc01003 100644
---- a/tools/xenstore/hashtable.c
-+++ b/tools/xenstore/hashtable.c
-@@ -11,7 +11,8 @@
- 
- struct entry
+diff --git a/tools/xenstore/talloc.c b/tools/xenstore/talloc.c
+index 23c3a23b19..4f08dbec59 100644
+--- a/tools/xenstore/talloc.c
++++ b/tools/xenstore/talloc.c
+@@ -319,7 +319,7 @@ static int talloc_unreference(const void *context, const void *ptr)
+   remove a specific parent context from a pointer. This is a more
+   controlled varient of talloc_free()
+ */
+-int talloc_unlink(const void *context, void *ptr)
++int talloc_unlink(const void *context, const void *ptr)
  {
--    void *k, *v;
-+    const void *k;
-+    void *v;
-     unsigned int h;
-     struct entry *next;
- };
-@@ -140,7 +141,7 @@ static int hashtable_expand(struct hashtable *h)
-     return 0;
- }
- 
--int hashtable_add(struct hashtable *h, void *k, void *v)
-+int hashtable_add(struct hashtable *h, const void *k, const void *v)
+ 	struct talloc_chunk *tc_p, *new_p;
+ 	void *new_parent;
+@@ -499,7 +499,7 @@ void *talloc_init(const char *fmt, ...)
+   should probably not be used in new code. It's in here to keep the talloc
+   code consistent across Samba 3 and 4.
+ */
+-static void talloc_free_children(void *ptr)
++static void talloc_free_children(const void *ptr)
  {
-     /* This method allows duplicate keys - but they shouldn't be used */
-     unsigned int index;
-@@ -164,7 +165,7 @@ int hashtable_add(struct hashtable *h, void *k, void *v)
-     e->k = k;
-     if (h->flags & HASHTABLE_FREE_KEY)
-         talloc_steal(e, k);
--    e->v = v;
-+    e->v = (void *)v;
-     if (h->flags & HASHTABLE_FREE_VALUE)
-         talloc_steal(e, v);
-     e->next = h->table[index];
-diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
-index 5a2cc4a4be..1da3af2648 100644
---- a/tools/xenstore/hashtable.h
-+++ b/tools/xenstore/hashtable.h
-@@ -48,8 +48,8 @@ create_hashtable(const void *ctx, const char *name,
-  * If in doubt, remove before insert.
-  */
+ 	struct talloc_chunk *tc;
  
--int 
--hashtable_add(struct hashtable *h, void *k, void *v);
-+int
-+hashtable_add(struct hashtable *h, const void *k, const void *v);
- 
- /*****************************************************************************
-  * hashtable_search
+@@ -539,7 +539,7 @@ static void talloc_free_children(void *ptr)
+    will not be freed if the ref_count is > 1 or the destructor (if
+    any) returns non-zero
+ */
+-int talloc_free(void *ptr)
++int talloc_free(const void *ptr)
+ {
+ 	int saved_errno = errno;
+ 	struct talloc_chunk *tc;
+@@ -571,7 +571,7 @@ int talloc_free(void *ptr)
+ 			goto err;
+ 		}
+ 		tc->destructor = (talloc_destructor_t)-1;
+-		if (d(ptr) == -1) {
++		if (d((void *)ptr) == -1) {
+ 			tc->destructor = d;
+ 			goto err;
+ 		}
+diff --git a/tools/xenstore/talloc.h b/tools/xenstore/talloc.h
+index 518fcac151..32cee63d4d 100644
+--- a/tools/xenstore/talloc.h
++++ b/tools/xenstore/talloc.h
+@@ -92,7 +92,7 @@ void *_talloc(const void *context, size_t size);
+ void talloc_set_destructor(const void *ptr, int (*destructor)(void *));
+ void talloc_increase_ref_count(const void *ptr);
+ void *talloc_reference(const void *context, const void *ptr);
+-int talloc_unlink(const void *context, void *ptr);
++int talloc_unlink(const void *context, const void *ptr);
+ void talloc_set_name(const void *ptr, const char *fmt, ...) PRINTF_ATTRIBUTE(2,3);
+ void talloc_set_name_const(const void *ptr, const char *name);
+ void *talloc_named(const void *context, size_t size, 
+@@ -103,7 +103,7 @@ void *talloc_check_name(const void *ptr, const char *name);
+ void talloc_report_depth(const void *ptr, FILE *f, int depth);
+ void *talloc_parent(const void *ptr);
+ void *talloc_init(const char *fmt, ...) PRINTF_ATTRIBUTE(1,2);
+-int talloc_free(void *ptr);
++int talloc_free(const void *ptr);
+ void *_talloc_realloc(const void *context, void *ptr, size_t size, const char *name);
+ void *talloc_steal(const void *new_ctx, const void *ptr);
+ off_t talloc_total_size(const void *ptr);
 -- 
 2.35.3
 
