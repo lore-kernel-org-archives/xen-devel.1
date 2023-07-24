@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC86C00528
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 17:52:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.569202.889511 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F055C001DF
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 17:52:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.569204.889537 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNzjT-0001oL-DW; Mon, 24 Jul 2023 17:52:31 +0000
+	id 1qNzjX-0002We-S9; Mon, 24 Jul 2023 17:52:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 569202.889511; Mon, 24 Jul 2023 17:52:31 +0000
+Received: by outflank-mailman (output) from mailman id 569204.889537; Mon, 24 Jul 2023 17:52:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNzjT-0001np-A8; Mon, 24 Jul 2023 17:52:31 +0000
-Received: by outflank-mailman (input) for mailman id 569202;
- Mon, 24 Jul 2023 17:52:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qNzjX-0002WX-Om; Mon, 24 Jul 2023 17:52:35 +0000
+Received: by outflank-mailman (input) for mailman id 569204;
+ Mon, 24 Jul 2023 17:52:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ixEc=DK=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qNzjS-0001ku-O2
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 17:52:30 +0000
+ id 1qNzjW-0002Up-7i
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 17:52:34 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dbd347fe-2a4a-11ee-b23c-6b7b168915f2;
- Mon, 24 Jul 2023 19:52:30 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cc0e1619-2a4a-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 19:52:03 +0200 (CEST)
 Received: from Dell.bugseng.com (unknown [37.161.223.75])
- by support.bugseng.com (Postfix) with ESMTPSA id 746694EE0C87;
- Mon, 24 Jul 2023 19:52:28 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id ED8F94EE0C89;
+ Mon, 24 Jul 2023 19:52:30 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,176 +41,226 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dbd347fe-2a4a-11ee-b23c-6b7b168915f2
+X-Inumbo-ID: cc0e1619-2a4a-11ee-8612-37d641c3527e
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 1/3] xen/irq: add missing parameter names
-Date: Mon, 24 Jul 2023 19:50:27 +0200
-Message-Id: <54ce64f3634a19a834cc1ce5ed74527bf8fa9420.1690217195.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 3/3] x86/irq: address violations of MISRA C:2012 Rules 8.2 and 8.3
+Date: Mon, 24 Jul 2023 19:50:29 +0200
+Message-Id: <ae48788c6c41e5e506b9995037d176ac8b08d3f2.1690217195.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1690217195.git.federico.serafini@bugseng.com>
 References: <cover.1690217195.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing parameter names thus addressing violations of MISRA C:2012
-Rule 8.2: "Function types shall be in prototype form with named
-parameters".
+Give a name to unnamed parameters thus addressing violations of
+MISRA C:2012 Rule 8.2 ("Function types shall be in prototype form with
+named parameters").
+Keep consistency between parameter names and types used in function
+declarations and the ones used in the corresponding function
+definitions, thus addressing violations of MISRA C:2012 Rule 8.3
+("All declarations of an object or function shall use the same names
+and type qualifiers").
 
 No functional changes.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/include/xen/irq.h     | 59 ++++++++++++++++++++-------------------
- xen/include/xen/softirq.h |  2 +-
- 2 files changed, 31 insertions(+), 30 deletions(-)
+ xen/arch/x86/include/asm/irq.h | 32 ++++++++++++++++----------------
+ xen/arch/x86/irq.c             | 28 ++++++++++++++--------------
+ 2 files changed, 30 insertions(+), 30 deletions(-)
 
-diff --git a/xen/include/xen/irq.h b/xen/include/xen/irq.h
-index 300625e56d..7cc6917513 100644
---- a/xen/include/xen/irq.h
-+++ b/xen/include/xen/irq.h
-@@ -18,7 +18,7 @@
-     ASSERT(!in_irq() && (local_irq_is_enabled() || num_online_cpus() <= 1))
+diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
+index 3f95dd39b7..bb8b7ff2cc 100644
+--- a/xen/arch/x86/include/asm/irq.h
++++ b/xen/arch/x86/include/asm/irq.h
+@@ -101,18 +101,18 @@ void cf_check irq_move_cleanup_interrupt(struct cpu_user_regs *regs);
+ uint8_t alloc_hipriority_vector(void);
  
- struct irqaction {
--    void (*handler)(int, void *, struct cpu_user_regs *);
-+    void (*handler)(int irq, void *data, struct cpu_user_regs *regs);
-     const char *name;
-     void *dev_id;
-     bool_t free_on_release;
-@@ -58,21 +58,21 @@ struct irq_desc;
+ void set_direct_apic_vector(
+-    uint8_t vector, void (*handler)(struct cpu_user_regs *));
++    uint8_t vector, void (*handler)(struct cpu_user_regs *regs));
+ void alloc_direct_apic_vector(
+-    uint8_t *vector, void (*handler)(struct cpu_user_regs *));
++    uint8_t *vector, void (*handler)(struct cpu_user_regs *regs));
  
- /*
-  * Interrupt controller descriptor. This is all we need
-- * to describe about the low-level hardware. 
-+ * to describe about the low-level hardware.
+ void do_IRQ(struct cpu_user_regs *regs);
+ 
+-void cf_check disable_8259A_irq(struct irq_desc *);
+-void cf_check enable_8259A_irq(struct irq_desc *);
++void cf_check disable_8259A_irq(struct irq_desc *desc);
++void cf_check enable_8259A_irq(struct irq_desc *desc);
+ int i8259A_irq_pending(unsigned int irq);
+ void mask_8259A(void);
+ void unmask_8259A(void);
+-void init_8259A(int aeoi);
++void init_8259A(int auto_eoi);
+ void make_8259A_irq(unsigned int irq);
+ bool bogus_8259A_irq(unsigned int irq);
+ int i8259A_suspend(void);
+@@ -148,9 +148,9 @@ int map_domain_pirq(struct domain *d, int pirq, int irq, int type,
+                            void *data);
+ int unmap_domain_pirq(struct domain *d, int pirq);
+ int get_free_pirq(struct domain *d, int type);
+-int get_free_pirqs(struct domain *, unsigned int nr);
++int get_free_pirqs(struct domain *d, unsigned int nr);
+ void free_domain_pirqs(struct domain *d);
+-int map_domain_emuirq_pirq(struct domain *d, int pirq, int irq);
++int map_domain_emuirq_pirq(struct domain *d, int pirq, int emuirq);
+ int unmap_domain_pirq_emuirq(struct domain *d, int pirq);
+ 
+ /* Reset irq affinities to match the given CPU mask. */
+@@ -168,9 +168,9 @@ int irq_to_vector(int irq);
   */
- struct hw_interrupt_type {
-     const char *typename;
--    unsigned int (*startup)(struct irq_desc *);
--    void (*shutdown)(struct irq_desc *);
--    void (*enable)(struct irq_desc *);
--    void (*disable)(struct irq_desc *);
--    void (*ack)(struct irq_desc *);
-+    unsigned int (*startup)(struct irq_desc *desc);
-+    void (*shutdown)(struct irq_desc *desc);
-+    void (*enable)(struct irq_desc *desc);
-+    void (*disable)(struct irq_desc *desc);
-+    void (*ack)(struct irq_desc *desc);
- #ifdef CONFIG_X86
--    void (*end)(struct irq_desc *, u8 vector);
-+    void (*end)(struct irq_desc *desc, u8 vector);
- #else
--    void (*end)(struct irq_desc *);
-+    void (*end)(struct irq_desc *desc);
- #endif
--    void (*set_affinity)(struct irq_desc *, const cpumask_t *);
-+    void (*set_affinity)(struct irq_desc *desc, const cpumask_t *mask);
- };
+ int create_irq(nodeid_t node, bool grant_access);
+ void destroy_irq(unsigned int irq);
+-int assign_irq_vector(int irq, const cpumask_t *);
++int assign_irq_vector(int irq, const cpumask_t *mask);
  
- typedef const struct hw_interrupt_type hw_irq_controller;
-@@ -110,22 +110,23 @@ typedef struct irq_desc {
- #define irq_to_desc(irq)    (&irq_desc[irq])
- #endif
+-void cf_check irq_complete_move(struct irq_desc *);
++void cf_check irq_complete_move(struct irq_desc *desc);
  
--int init_one_irq_desc(struct irq_desc *);
--int arch_init_one_irq_desc(struct irq_desc *);
-+int init_one_irq_desc(struct irq_desc *desc);
-+int arch_init_one_irq_desc(struct irq_desc *desc);
+ extern struct irq_desc *irq_desc;
  
- #define irq_desc_initialized(desc) ((desc)->handler != NULL)
+@@ -179,16 +179,16 @@ void unlock_vector_lock(void);
  
- extern int setup_irq(unsigned int irq, unsigned int irqflags,
--                     struct irqaction *);
-+                     struct irqaction *new);
- extern void release_irq(unsigned int irq, const void *dev_id);
- extern int request_irq(unsigned int irq, unsigned int irqflags,
--               void (*handler)(int, void *, struct cpu_user_regs *),
-+               void (*handler)(int irq, void *dev_id,
-+                     struct cpu_user_regs *regs),
-                const char * devname, void *dev_id);
+ void setup_vector_irq(unsigned int cpu);
  
- extern hw_irq_controller no_irq_type;
- void cf_check no_action(int cpl, void *dev_id, struct cpu_user_regs *regs);
--unsigned int cf_check irq_startup_none(struct irq_desc *);
--void cf_check irq_actor_none(struct irq_desc *);
-+unsigned int cf_check irq_startup_none(struct irq_desc *desc);
-+void cf_check irq_actor_none(struct irq_desc *desc);
- #define irq_shutdown_none irq_actor_none
- #define irq_disable_none irq_actor_none
- #define irq_enable_none irq_actor_none
-@@ -146,7 +147,7 @@ struct pirq {
- #define pirq_info(d, p) ((struct pirq *)radix_tree_lookup(&(d)->pirq_tree, p))
+-void move_native_irq(struct irq_desc *);
+-void move_masked_irq(struct irq_desc *);
++void move_native_irq(struct irq_desc *desc);
++void move_masked_irq(struct irq_desc *desc);
  
- /* Use this instead of pirq_info() if the structure may need allocating. */
--extern struct pirq *pirq_get_info(struct domain *, int pirq);
-+extern struct pirq *pirq_get_info(struct domain *d, int pirq);
+-int bind_irq_vector(int irq, int vector, const cpumask_t *);
++int bind_irq_vector(int irq, int vector, const cpumask_t *mask);
  
- #define pirq_field(d, p, f, def) ({ \
-     const struct pirq *__pi = pirq_info(d, p); \
-@@ -155,30 +156,30 @@ extern struct pirq *pirq_get_info(struct domain *, int pirq);
- #define pirq_to_evtchn(d, pirq) pirq_field(d, pirq, evtchn, 0)
- #define pirq_masked(d, pirq) pirq_field(d, pirq, masked, 0)
+-void cf_check end_nonmaskable_irq(struct irq_desc *, uint8_t vector);
+-void irq_set_affinity(struct irq_desc *, const cpumask_t *mask);
++void cf_check end_nonmaskable_irq(struct irq_desc *desc, uint8_t vector);
++void irq_set_affinity(struct irq_desc *desc, const cpumask_t *mask);
  
--void pirq_cleanup_check(struct pirq *, struct domain *);
-+void pirq_cleanup_check(struct pirq *pirq, struct domain *d);
+-int init_domain_irq_mapping(struct domain *);
+-void cleanup_domain_irq_mapping(struct domain *);
++int init_domain_irq_mapping(struct domain *d);
++void cleanup_domain_irq_mapping(struct domain *d);
  
- #define pirq_cleanup_check(pirq, d) \
-     ((pirq)->evtchn ? pirq_cleanup_check(pirq, d) : (void)0)
+ #define domain_pirq_to_irq(d, pirq) pirq_field(d, pirq, arch.irq, 0)
+ #define domain_irq_to_pirq(d, irq) ({                           \
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 20150b1c7f..c2ec1182f1 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -148,14 +148,14 @@ static void trace_irq_mask(uint32_t event, int irq, int vector,
+ }
  
--extern void pirq_guest_eoi(struct pirq *);
--extern void desc_guest_eoi(struct irq_desc *, struct pirq *);
-+extern void pirq_guest_eoi(struct pirq *pirq);
-+extern void desc_guest_eoi(struct irq_desc *desc, struct pirq *pirq);
- extern int pirq_guest_unmask(struct domain *d);
--extern int pirq_guest_bind(struct vcpu *, struct pirq *, int will_share);
--extern void pirq_guest_unbind(struct domain *d, struct pirq *);
--extern void pirq_set_affinity(struct domain *d, int irq, const cpumask_t *);
--extern irq_desc_t *domain_spin_lock_irq_desc(
-+extern int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share);
-+extern void pirq_guest_unbind(struct domain *d, struct pirq *pirq);
-+extern void pirq_set_affinity(struct domain *d, int irq, const cpumask_t *mask);
-+extern struct irq_desc *domain_spin_lock_irq_desc(
-     struct domain *d, int irq, unsigned long *pflags);
--extern irq_desc_t *pirq_spin_lock_irq_desc(
--    const struct pirq *, unsigned long *pflags);
-+extern struct irq_desc *pirq_spin_lock_irq_desc(
-+    const struct pirq *pirq, unsigned long *pflags);
+ static int __init _bind_irq_vector(struct irq_desc *desc, int vector,
+-                                   const cpumask_t *cpu_mask)
++                                   const cpumask_t *mask)
+ {
+     cpumask_t online_mask;
+     int cpu;
  
--unsigned int set_desc_affinity(struct irq_desc *, const cpumask_t *);
-+unsigned int set_desc_affinity(struct irq_desc *desc, const cpumask_t *mask);
+     BUG_ON((unsigned)vector >= X86_NR_VECTORS);
  
- #ifndef arch_hwdom_irqs
--unsigned int arch_hwdom_irqs(domid_t);
-+unsigned int arch_hwdom_irqs(domid_t domid);
- #endif
+-    cpumask_and(&online_mask, cpu_mask, &cpu_online_map);
++    cpumask_and(&online_mask, mask, &cpu_online_map);
+     if (cpumask_empty(&online_mask))
+         return -EINVAL;
+     if ( (desc->arch.vector == vector) &&
+@@ -177,7 +177,7 @@ static int __init _bind_irq_vector(struct irq_desc *desc, int vector,
+     return 0;
+ }
  
- #ifndef arch_evtchn_bind_pirq
--void arch_evtchn_bind_pirq(struct domain *, int pirq);
-+void arch_evtchn_bind_pirq(struct domain *d, int pirq);
- #endif
+-int __init bind_irq_vector(int irq, int vector, const cpumask_t *cpu_mask)
++int __init bind_irq_vector(int irq, int vector, const cpumask_t *mask)
+ {
+     struct irq_desc *desc = irq_to_desc(irq);
+     unsigned long flags;
+@@ -187,7 +187,7 @@ int __init bind_irq_vector(int irq, int vector, const cpumask_t *cpu_mask)
  
- #endif /* __XEN_IRQ_H__ */
-diff --git a/xen/include/xen/softirq.h b/xen/include/xen/softirq.h
-index 1f6c4783da..33d6f2ecd2 100644
---- a/xen/include/xen/softirq.h
-+++ b/xen/include/xen/softirq.h
-@@ -26,7 +26,7 @@ typedef void (*softirq_handler)(void);
- void do_softirq(void);
- void open_softirq(int nr, softirq_handler handler);
+     spin_lock_irqsave(&desc->lock, flags);
+     spin_lock(&vector_lock);
+-    ret = _bind_irq_vector(desc, vector, cpu_mask);
++    ret = _bind_irq_vector(desc, vector, mask);
+     spin_unlock(&vector_lock);
+     spin_unlock_irqrestore(&desc->lock, flags);
  
--void cpumask_raise_softirq(const cpumask_t *, unsigned int nr);
-+void cpumask_raise_softirq(const cpumask_t *mask, unsigned int nr);
- void cpu_raise_softirq(unsigned int cpu, unsigned int nr);
- void raise_softirq(unsigned int nr);
+@@ -893,10 +893,10 @@ void irq_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
+     desc->status |= IRQ_MOVE_PENDING;
+ }
+ 
+-void pirq_set_affinity(struct domain *d, int pirq, const cpumask_t *mask)
++void pirq_set_affinity(struct domain *d, int irq, const cpumask_t *mask)
+ {
+     unsigned long flags;
+-    struct irq_desc *desc = domain_spin_lock_irq_desc(d, pirq, &flags);
++    struct irq_desc *desc = domain_spin_lock_irq_desc(d, irq, &flags);
+ 
+     if ( !desc )
+         return;
+@@ -915,16 +915,16 @@ uint8_t alloc_hipriority_vector(void)
+     return next++;
+ }
+ 
+-static void (*direct_apic_vector[X86_NR_VECTORS])(struct cpu_user_regs *);
++static void (*direct_apic_vector[X86_NR_VECTORS])(struct cpu_user_regs *regs);
+ void set_direct_apic_vector(
+-    uint8_t vector, void (*handler)(struct cpu_user_regs *))
++    uint8_t vector, void (*handler)(struct cpu_user_regs *regs))
+ {
+     BUG_ON(direct_apic_vector[vector] != NULL);
+     direct_apic_vector[vector] = handler;
+ }
+ 
+ void alloc_direct_apic_vector(
+-    uint8_t *vector, void (*handler)(struct cpu_user_regs *))
++    uint8_t *vector, void (*handler)(struct cpu_user_regs *regs))
+ {
+     static DEFINE_SPINLOCK(lock);
+ 
+@@ -964,7 +964,7 @@ static int __init cf_check irq_ratelimit_init(void)
+ __initcall(irq_ratelimit_init);
+ 
+ int __init request_irq(unsigned int irq, unsigned int irqflags,
+-        void (*handler)(int, void *, struct cpu_user_regs *),
++        void (*handler)(int irq, void *dev_id, struct cpu_user_regs *regs),
+         const char * devname, void *dev_id)
+ {
+     struct irqaction * action;
+@@ -1194,9 +1194,9 @@ static void cf_check irq_guest_eoi_timer_fn(void *data)
+  * to the per-domain irq-to-vector mapping.
+  */
+ struct irq_desc *domain_spin_lock_irq_desc(
+-    struct domain *d, int pirq, unsigned long *pflags)
++    struct domain *d, int irq, unsigned long *pflags)
+ {
+-    const struct pirq *info = pirq_info(d, pirq);
++    const struct pirq *info = pirq_info(d, irq);
+ 
+     return info ? pirq_spin_lock_irq_desc(info, pflags) : NULL;
+ }
+@@ -1525,14 +1525,14 @@ static int irq_acktype(const struct irq_desc *desc)
+     return 0;
+ }
+ 
+-int pirq_shared(struct domain *d, int pirq)
++int pirq_shared(struct domain *d, int irq)
+ {
+     struct irq_desc    *desc;
+     const irq_guest_action_t *action;
+     unsigned long       flags;
+     int                 shared;
+ 
+-    desc = domain_spin_lock_irq_desc(d, pirq, &flags);
++    desc = domain_spin_lock_irq_desc(d, irq, &flags);
+     if ( desc == NULL )
+         return 0;
  
 -- 
 2.34.1
