@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05F81C0015E
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 10:43:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568725.888543 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A749AC0015E
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 11:03:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568731.888573 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNt2J-0005pq-Dn; Mon, 24 Jul 2023 10:43:31 +0000
+	id 1qNtLD-0000cz-Fr; Mon, 24 Jul 2023 11:03:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568725.888543; Mon, 24 Jul 2023 10:43:31 +0000
+Received: by outflank-mailman (output) from mailman id 568731.888573; Mon, 24 Jul 2023 11:03:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNt2J-0005pj-Af; Mon, 24 Jul 2023 10:43:31 +0000
-Received: by outflank-mailman (input) for mailman id 568725;
- Mon, 24 Jul 2023 10:43:29 +0000
+	id 1qNtLD-0000cm-Bf; Mon, 24 Jul 2023 11:03:03 +0000
+Received: by outflank-mailman (input) for mailman id 568731;
+ Mon, 24 Jul 2023 11:03:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vJ35=DK=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qNt2H-0005pd-As
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 10:43:29 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20606.outbound.protection.outlook.com
- [2a01:111:f400:7e1b::606])
+ (envelope-from <SRS0=jVkC=DK=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qNtLC-0000KR-Dn
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 11:03:02 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ec52bbb5-2a0e-11ee-b23a-6b7b168915f2;
- Mon, 24 Jul 2023 12:43:28 +0200 (CEST)
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by VI1PR04MB6909.eurprd04.prod.outlook.com (2603:10a6:803:13d::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6609.32; Mon, 24 Jul
- 2023 10:43:25 +0000
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::e5cf:5743:ab60:b14e]) by DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::e5cf:5743:ab60:b14e%5]) with mapi id 15.20.6609.031; Mon, 24 Jul 2023
- 10:43:25 +0000
+ id a7f7b8d4-2a11-11ee-b23a-6b7b168915f2;
+ Mon, 24 Jul 2023 13:03:01 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 7E64F20695;
+ Mon, 24 Jul 2023 11:03:01 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 47ED013476;
+ Mon, 24 Jul 2023 11:03:01 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id shAlEGVavmRCYQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 24 Jul 2023 11:03:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,137 +53,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec52bbb5-2a0e-11ee-b23a-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=L7RkoT7QsftZogJL7Wgo5hX6vObQT5J9zyIyLjin9HBNHgs+zDzp8HK4B11F9boE9bsVaPtwjWVFHpoIiBcxBsdNpwYO1a7YtIZEv5pSEy1oPI/18OEzcBiMsP0Of2yLytMBQ0hRb33rPetqjYw3hPeCOFdeKkcUH696lbQZGPgS12RY4ZzvDO83EWZtzwdUTe8TJU8hyAAOF67qPvJb6+UPTIMXjIe3nx7CtpzHpfjN1WiqIuFXs2a7MSm08568Zg9cIVWrkOEAer5tK3uAI8eUWhlGbtol4VFDeQpxEdbh4UrffpvQfl3v4jG9WvIILa00SddQqQhUTaHtkyk+GQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=C6wO8FBEHzc5PzmCi6rSpI2LcKx70ml1aeaqOcxC6ik=;
- b=AIdSeRUiSr+yRxCn3gkT+buefQmRdybCfc+PKi95MsQWAiB5yShxF2EGSxgU7DSJqjGXbVPWQ/2yAe1kPxRHMCUoRIT8q9X2oKTOifmNrXaO23JVifBzRRlxis9Pepv8pCX70VvKz5TQi+7DpgXDxnR0FkdD/un9sPkmlOxa+QaIMDOXiQqH0cunBN2T4i8+BJWyqwKzL1Ppzw9S2yjWvicbfoJcu/jM1eCF31adkA8OBweLg+i63rX7NQOPV+EwLGGA44mEvxxZiDwWXtQGeMd7bgmD/+iJfeAfl/oZUZZpn3NUAsd44houdcTnhiYk6HU5noaSaTUuH20gm3KclA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C6wO8FBEHzc5PzmCi6rSpI2LcKx70ml1aeaqOcxC6ik=;
- b=ITxnBZ2B9nkFFLR9OnphPlrR9zjj8+7KkZdjunONRcljTXEvtZbzf7OdknX/As3gNqePT6FzeuJWnUUTUVo5IF2Mo8Ox2DLydYcOKDhip9mbFDek6ihqoQqgPmi1pHTgez2bUcd7dvNRVKi01nSECf5qdKruJUN+vQdP3W0vnNf7Jr2aBPtgoSMW6IHw/plD6Y4VNud8TwhCkH7lQQp6ofeMMrXI/P5g7c4QB0uVmMvqP0Syoba306fut5NYmXuZQR1Dvb/SGdIHLZbKrYvCXRm3HZHgTRSmcieTSvpnj3gCbUtKzpqwdV0gm26NN9cEyNXqxcvfv4eST/gZvZ2aPA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <f2b8945e-cedf-3b38-042c-7b1288cfcde7@suse.com>
-Date: Mon, 24 Jul 2023 12:43:26 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v8 08/13] vpci/header: program p2m with guest BAR view
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <20230720003205.1828537-1-volodymyr_babchuk@epam.com>
- <20230720003205.1828537-9-volodymyr_babchuk@epam.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20230720003205.1828537-9-volodymyr_babchuk@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0157.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a2::13) To DU2PR04MB8790.eurprd04.prod.outlook.com
- (2603:10a6:10:2e1::23)
+X-Inumbo-ID: a7f7b8d4-2a11-11ee-b23a-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1690196581; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+f/2hssl9+9pqd2iopuWIXDOp4+T2afqdOEfLUF2eXs=;
+	b=aZejtC3pt47Q/KokoffOLlIiVzv9E9jbRDtmAQpCNjbn1+pHDrGUjVKSZVSOpTv8CUXkf1
+	TsFDcBIhZ/bkaIyBM44hOASLTSdqWSLiw9BN+PKw6+2sa7MN7gaC3+ojczYCqBKjc4t7/L
+	t/nFy8Q7mYpX2abMiB6Es6YImsmN+YQ=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v3 02/25] tools/xenstore: replace key in struct node with data base name
+Date: Mon, 24 Jul 2023 13:02:24 +0200
+Message-Id: <20230724110247.10520-3-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230724110247.10520-1-jgross@suse.com>
+References: <20230724110247.10520-1-jgross@suse.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|VI1PR04MB6909:EE_
-X-MS-Office365-Filtering-Correlation-Id: dc4283c4-b581-4f61-62f4-08db8c32cf32
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	4A974rIDwJp/Ej1bnXkdbbFCHV+Q85e7DiA/Sjxzk7i+nz7L70Z3+QYxllbJZ1CLw9189SWgu3Sm66tfpQdZ5vYfTowk6M83ydsaABiT89+akprjtwhgZBOPX6dtFeD9EDtJo5CxQmyKpQjkCW+vhjWNA/zNcn8SA+2co4aupTFX2zGq0ZiHKkGmifN2FSoSGVqODXFQUyRmj4P4Jx6rmSkhYFZnKWWnA0HM4GBFV7lX0uMuQ64A0WKSYyiUJ2+BpHn3x6aNcJ5tENkyVjrf4GToGxyxXsFYKrDpkH3SdaM9KwPfYmN1amgbA4jA1lwJGk2IaAKqWudSxwfEAqYCACIQ3MNyOWZWzwigOremXKHjA9vodG6//JLjRdMvNMEP71/PRJt8AVNvbfmJOCWuJxMfuGiUzQUTJreajCwPlAoqcchZrQA7bGnRd5j2YlP2AVqo134r4rAJNStxUKcLxI1yozOB8/AlDT/CMHtMrys7uNZOAShyLEmzE+nnVhAu80paxJQ7/Dyd9GJt9cNrkjcourOZRskfFlZOQ7PadQQq+ytTtAQiY1wruXGMc4Z1nYV7/b+T1qjS/CoP83PvKD5umAef0735ubAd2nj4XrWr96a1+52/GTqMB52JPGvI0qRfs6uNnBsLwy4I711N1Q==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(39850400004)(346002)(136003)(366004)(396003)(376002)(451199021)(38100700002)(66556008)(66899021)(36756003)(53546011)(2616005)(8676002)(8936002)(5660300002)(54906003)(478600001)(66476007)(6916009)(4326008)(316002)(66946007)(41300700001)(186003)(26005)(6506007)(6486002)(6512007)(2906002)(31686004)(31696002)(86362001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?RUp6emg3a2xuekllUHdOZG81c1FVYmdBVm5Mb252VWlWMDZWdURCWVlLMnJQ?=
- =?utf-8?B?MGJwV1NYWjU3NjlFZVl3Z2xjUmpJTEF0dFY3Q3BQT2l1UW5jQ2hPTWU5OUJJ?=
- =?utf-8?B?cXVSYVlKanNEL3l5ZlNmNDlmaXFROUQ0aVBTMzR0anB3TEE4RExRdVlXczFt?=
- =?utf-8?B?ZVROb0ovbUhXZUcrdEhVTDUybDc0OVY1ZVg3Rkp2MVM2L0NLVGZxN2RPYXV0?=
- =?utf-8?B?RC9nWWpobFpqQzNHRTRrQURjclc3UjBBbUx2ZFRaNXdTMUhuZkt5Y2hLbm1o?=
- =?utf-8?B?NWNLWnoxUFQxOTZRcm4wM0oyUFR5OWd5cmJmandheFovc2VvRzNpMkNDYUNB?=
- =?utf-8?B?ZUVoc0tKeUJYQzlFK1ZCcUl3alF3RUVqQ1NDTnFWejVmM1VOQW55blUySll0?=
- =?utf-8?B?b2FCUTN5cnJ0WWNCbXZmMm5yL3llZHpKeWVaVG5xdldTSFhLWlhJc2tQQitK?=
- =?utf-8?B?K2M2Z0pjamsxTGVRYW9zMDJIQS9YdTlKaU1JRm1GMVVZQmJCbkc2UGxWeU9B?=
- =?utf-8?B?aXg1UG9oZWxTTUtYSWpqWFVuU044TWdDK2FLQjBqempGYkJtN0N5Y245RFdx?=
- =?utf-8?B?a2szdFBXVlNmNWFlMEZINTJLUHRJVHdVbnB1ak8zd0dCNEtSRXlyOHZGOTRQ?=
- =?utf-8?B?QS9PTlBJaS9ScTNoTWRCS01FV1BnQnY3cGxCWERDRW91UHhtWklrdE1VWFFY?=
- =?utf-8?B?MjBHZFB3YURvNlRjbXRKZnU1REFDS2FOSmFOSHo2WmlPbnNJeDFHam5XakpG?=
- =?utf-8?B?U25lSlYzM2NMaVEvd2htaUNjR0RqSnU5RHFvVDV3S1dpTzNBZ2lzVmJBVkpa?=
- =?utf-8?B?YmFiZ3Q0QjlacjF6Qi80VysvQmh2cUJkNkpabHNtU1pqbFFQcjl2S2E5QTFJ?=
- =?utf-8?B?QWQzTk1uN3FUdE9lSCtoYldSRmhzYkxMTGVtN1dTUi9tQlZId1RjTUJMTjNQ?=
- =?utf-8?B?VjR6Z0hMTGNOYk1iQjNuWCtWWVVZa3VYMVhKOHNXUEFFenZRZTR6a3pwRFJX?=
- =?utf-8?B?bXN2enQwUjYzRXhEZlRnRC9iTHhaemovQS9BczZ5ZWFHa3MrRm52V0hJbDRp?=
- =?utf-8?B?ellWL3l0aUNGWllMQWtSZU1ldzZIbUJ5NVlNLzVYM0JXcmJTbE5CRUlvY2Zk?=
- =?utf-8?B?NjZHWUNhenEvMzVWdmpZT2hmZ0RxVWJQbXh3QWFVWEVKN2kraUhSdGNkM0Zu?=
- =?utf-8?B?RHhKNFQ3bWR0RzFhbmdtNHJ4UEJoYUdRanhBbTREbDNjZFgxUHNiWmc5VGdu?=
- =?utf-8?B?NVNrRXZFaHpVdE1FVGdLQ0tTdlJWUEgwYTY1bGtKNUpNY1VYQ3RoR3NjTHh2?=
- =?utf-8?B?Ni94NjhoLzdLLzlEWDBnYWp1akJ1TU5oTmdLT29zdkxmdWp5cWpTTjhUcGM3?=
- =?utf-8?B?aWRVVzJXWUFBR0xxUEEvdTZtbGx2akR2aml5NEs0UlBYbW9NeXF2MmFITkRE?=
- =?utf-8?B?Rll2VkxmeWtyazVSQWdtVW5PUzEzZi9wY0FnOGZoRlB1TGVEbnR0ZTJ1eWJR?=
- =?utf-8?B?TDBibjZPVHVyckVSRnViV2FzS0RRSlFBeTRsRzJTd0RrbmFZMktLUklXdmlt?=
- =?utf-8?B?Vy8zVFJlS1Fpazc5Rmphd09heFNyaFFya1NuazVHZ01WNTFpTnJIMCs0THN6?=
- =?utf-8?B?NzRSdjJqWjlzY2I0VkZwTEFzWElyVTBxS2I3RG53cnlXL2dNeGJ0dUVzSk5P?=
- =?utf-8?B?OHBUR1d4dUdDVCtnKzFSKzh3ZmFVOWs2N2JCVEF3ZFo2RVVuM2RldzJFM3dR?=
- =?utf-8?B?dkxoY3ZaYmNHM2M1OTd4VHN5RkZLc1lrOGpyb0F3RGFPdTNZZkJpNmFHNTU4?=
- =?utf-8?B?RjQ4RlR5NjVKQkhheURXRUxBdDVCV0RyTmZoVTFkQmlEbGExbXdLQUVLN2Vt?=
- =?utf-8?B?THJaNVExNkcyZWJMNno2YnpKSURkV013dzRadzFhc1RjL0lGSHl1bHBiaDFV?=
- =?utf-8?B?Y1BicWRMa01VcDBZS0k2cDdUM2hTcVY2RnVrMlU0SzNYK2JuU0JxdStOeklT?=
- =?utf-8?B?R1FlL0hnZnBuYTU0aDMwQmd2dC9pWTJFdEFUbTFidjlRandRV2x5V2drZzhw?=
- =?utf-8?B?Mk9hak9ocjQ5OE5PdmJZS0dINHFoYzJZc3gwMThMSndxdE91NG9PYXpCMFk0?=
- =?utf-8?Q?R+PiLAaKrojinOTQVa1xfFhWk?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dc4283c4-b581-4f61-62f4-08db8c32cf32
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2023 10:43:25.6683
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OcPvL9Sc/xAoCdxA+twIZnuHi3VyMTCWOAiTmrHbUVjiu38uhtfIRdvWEia/C5R0m6QzUVf2xFC7ta7cNfXRDg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6909
+Content-Transfer-Encoding: 8bit
 
-On 20.07.2023 02:32, Volodymyr Babchuk wrote:
-> @@ -52,8 +66,8 @@ static int cf_check map_range(
->           * - {un}map_mmio_regions doesn't support preemption.
->           */
->  
-> -        rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(s))
-> -                      : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(s));
-> +        rc = map->map ? map_mmio_regions(map->d, start_gfn, size, _mfn(s))
-> +                      : unmap_mmio_regions(map->d, start_gfn, size, _mfn(s));
+Instead of storing the TDB key in struct node, only store the name of
+the node used to access it in the data base.
 
-Aiui this is the first direct exposure of these functions to DomU-s;
-so far all calls were Xen-internal or from a domctl. There are a
-couple of Arm TODOs listed in the comment ahead, but I'm not sure
-that's all what is lacking here, and it's unclear whether this can
-sensibly be left as a follow-on activity (at the very least known
-open issues need mentioning as TODOs).
+Associated with that change replace the key parameter of access_node()
+with the equivalent db_name.
 
-For example the x86 function truncates an unsigned long local
-variable to (signed) int in its main return statement. This may for
-the moment still be only a theoretical issue, but will need dealing
-with sooner or later, I think.
+This is in preparation to replace TDB with a more simple data storage.
 
-Furthermore this yet again allows DomU-s to fiddle with their p2m.
-To a degree this is unavoidable, I suppose. But some thought may
-need putting into this anyway. Aiui on real hardware if a BAR is
-placed over RAM, behavior is simply undefined. Once the BAR is
-moved away though, behavior will become defined again: The RAM will
-"reappear" in case the earlier undefined-ness made it disappear. I
-don't know how the Arm variants of the functions behave, but on x86
-the RAM pages will disappear from the guest's p2m upon putting a
-BAR there, but they won't reappear upon unmapping of the BAR.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+---
+ tools/xenstore/xenstored_core.c        | 19 +++++++++++++------
+ tools/xenstore/xenstored_core.h        |  4 ++--
+ tools/xenstore/xenstored_transaction.c | 10 +++++-----
+ tools/xenstore/xenstored_transaction.h |  2 +-
+ 4 files changed, 21 insertions(+), 14 deletions(-)
 
-Luckily at least preemption looks to be handled in a satisfactory
-manner already.
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index b7fdf16718..ba4798dd6e 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -821,18 +821,20 @@ int write_node_raw(struct connection *conn, TDB_DATA *key, struct node *node,
+ }
+ 
+ /*
+- * Write the node. If the node is written, caller can find the key used in
+- * node->key. This can later be used if the change needs to be reverted.
++ * Write the node. If the node is written, caller can find the DB name used in
++ * node->db_name. This can later be used if the change needs to be reverted.
+  */
+ static int write_node(struct connection *conn, struct node *node,
+ 		      enum write_node_mode mode, bool no_quota_check)
+ {
+ 	int ret;
++	TDB_DATA key;
+ 
+-	if (access_node(conn, node, NODE_ACCESS_WRITE, &node->key))
++	if (access_node(conn, node, NODE_ACCESS_WRITE, &node->db_name))
+ 		return errno;
+ 
+-	ret = write_node_raw(conn, &node->key, node, mode, no_quota_check);
++	set_tdb_key(node->db_name, &key);
++	ret = write_node_raw(conn, &key, node, mode, no_quota_check);
+ 	if (ret && conn && conn->transaction) {
+ 		/*
+ 		 * Reverting access_node() is hard, so just fail the
+@@ -1450,10 +1452,13 @@ nomem:
+ 
+ static void destroy_node_rm(struct connection *conn, struct node *node)
+ {
++	TDB_DATA key;
++
+ 	if (streq(node->name, "/"))
+ 		corrupt(NULL, "Destroying root node!");
+ 
+-	do_tdb_delete(conn, &node->key, &node->acc);
++	set_tdb_key(node->db_name, &key);
++	do_tdb_delete(conn, &key, &node->acc);
+ }
+ 
+ static int destroy_node(struct connection *conn, struct node *node)
+@@ -1643,10 +1648,11 @@ static int delnode_sub(const void *ctx, struct connection *conn,
+ 	const char *root = arg;
+ 	bool watch_exact;
+ 	int ret;
++	const char *db_name;
+ 	TDB_DATA key;
+ 
+ 	/* Any error here will probably be repeated for all following calls. */
+-	ret = access_node(conn, node, NODE_ACCESS_DELETE, &key);
++	ret = access_node(conn, node, NODE_ACCESS_DELETE, &db_name);
+ 	if (ret > 0)
+ 		return WALK_TREE_SUCCESS_STOP;
+ 
+@@ -1654,6 +1660,7 @@ static int delnode_sub(const void *ctx, struct connection *conn,
+ 		return WALK_TREE_ERROR_STOP;
+ 
+ 	/* In case of error stop the walk. */
++	set_tdb_key(db_name, &key);
+ 	if (!ret && do_tdb_delete(conn, &key, &node->acc))
+ 		return WALK_TREE_ERROR_STOP;
+ 
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 19a81adc49..ec7a56a869 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -181,8 +181,8 @@ struct node_account_data {
+ 
+ struct node {
+ 	const char *name;
+-	/* Key used to update TDB */
+-	TDB_DATA key;
++	/* Name used to access data base. */
++	const char *db_name;
+ 
+ 	/* Parent (optional) */
+ 	struct node *parent;
+diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
+index baad9e472d..020b70d954 100644
+--- a/tools/xenstore/xenstored_transaction.c
++++ b/tools/xenstore/xenstored_transaction.c
+@@ -227,7 +227,7 @@ void transaction_prepend(struct connection *conn, const char *name,
+  * to be accessed in the data base.
+  */
+ int access_node(struct connection *conn, struct node *node,
+-		enum node_access_type type, TDB_DATA *key)
++		enum node_access_type type, const char **db_name)
+ {
+ 	struct accessed_node *i = NULL;
+ 	struct transaction *trans;
+@@ -243,8 +243,8 @@ int access_node(struct connection *conn, struct node *node,
+ 
+ 	if (!conn || !conn->transaction) {
+ 		/* They're changing the global database. */
+-		if (key)
+-			set_tdb_key(node->name, key);
++		if (db_name)
++			*db_name = node->name;
+ 		return 0;
+ 	}
+ 
+@@ -308,8 +308,8 @@ int access_node(struct connection *conn, struct node *node,
+ 		/* Nothing to delete. */
+ 		return -1;
+ 
+-	if (key) {
+-		set_tdb_key(i->trans_name, key);
++	if (db_name) {
++		*db_name = i->trans_name;
+ 		if (type == NODE_ACCESS_WRITE)
+ 			i->ta_node = true;
+ 		if (type == NODE_ACCESS_DELETE)
+diff --git a/tools/xenstore/xenstored_transaction.h b/tools/xenstore/xenstored_transaction.h
+index 883145163f..f6a2e2f7f5 100644
+--- a/tools/xenstore/xenstored_transaction.h
++++ b/tools/xenstore/xenstored_transaction.h
+@@ -41,7 +41,7 @@ void ta_node_created(struct transaction *trans);
+ 
+ /* This node was accessed. */
+ int __must_check access_node(struct connection *conn, struct node *node,
+-                             enum node_access_type type, TDB_DATA *key);
++                             enum node_access_type type, const char **db_name);
+ 
+ /* Queue watches for a modified node. */
+ void queue_watches(struct connection *conn, const char *name, bool watch_exact);
+-- 
+2.35.3
 
-Jan
 
