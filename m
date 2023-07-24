@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFD9C07E8B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4EDC07E8A
 	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:50:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568548.887965 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.568552.887983 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsCw-0000mi-2u; Mon, 24 Jul 2023 09:50:26 +0000
+	id 1qNsCx-0001AZ-Cy; Mon, 24 Jul 2023 09:50:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568548.887965; Mon, 24 Jul 2023 09:50:26 +0000
+Received: by outflank-mailman (output) from mailman id 568552.887983; Mon, 24 Jul 2023 09:50:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsCv-0000kB-QH; Mon, 24 Jul 2023 09:50:25 +0000
-Received: by outflank-mailman (input) for mailman id 568548;
- Mon, 24 Jul 2023 09:45:57 +0000
+	id 1qNsCw-00016z-Q6; Mon, 24 Jul 2023 09:50:26 +0000
+Received: by outflank-mailman (input) for mailman id 568552;
+ Mon, 24 Jul 2023 09:46:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jodz=DK=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qNs8b-0007Fv-SO
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:45:57 +0000
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [2607:f8b0:4864:20::633])
+ id 1qNs8z-0007Fv-NO
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:46:21 +0000
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [2607:f8b0:4864:20::62b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e1e1fd9c-2a06-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 11:45:55 +0200 (CEST)
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1b8c364ad3bso8855635ad.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:45:56 -0700 (PDT)
+ id f013a20f-2a06-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 11:46:19 +0200 (CEST)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1bb85ed352bso2229915ad.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:46:20 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.45.43
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.46.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:45:54 -0700 (PDT)
+ Mon, 24 Jul 2023 02:46:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e1e1fd9c-2a06-11ee-8612-37d641c3527e
+X-Inumbo-ID: f013a20f-2a06-11ee-8612-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690191955; x=1690796755;
+        d=bytedance.com; s=google; t=1690191978; x=1690796778;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jmPwAlPL0TnDBmalzCzATtOPmfxfqu3Q+7XaFZclAtg=;
-        b=IZCH5tV1VdvhB0RXcuG+SL+gg1mEbPZMQJz8qUY1fWCpYBfjAR72/AnWbcPpstjQLI
-         aFpv+l8Q67Kc3iJwSzziW/zZbsYehvkdZbQbXx8X8jR6oJCUrIFV8Qzo50G/FYmT9t2/
-         w6ZN7N+ZviCRVJxyy+bucuBxrS6SRhon2EIiX0i15H4OrDXIvK+dChrAy0pj6MjsuwdC
-         6yiqEWuw0/0mdj0SNL2xTjIsK+WXPpE1gw9KgQ4WCUpGSoFe6rXH0GXBficEqbQlrShV
-         wc7SdQklmSH69kiwU3dxFC6F0qOnJE6NuoEe6VBjJkE5shAIs2KVw9Ha+vCxjUcFWX2y
-         lSHQ==
+        bh=YJ34aDXYlHmjcWHNnO8BUtZL0Yf5ZszuCt3/FkcxObI=;
+        b=dPg8Z+s3aha2IvphpVKs8g7PSY6piop3d9NgPI5ubIDitgffw9A2UJF008ettaOzL2
+         E1tyNH7CPDs7txXWOfoA23V8TkeR2HnX04I7DoxtzP6sL4XEnTxiiEMAs0kV9Z/otM2W
+         0kOcjwbHjS6iULnGuX+LKfjLBZnKtzDuWFv8l1d9/Rkqg83rJ36ocDx6bY7GsC2wtJpk
+         Mw6apkZAnLMNttQVQifEE+ksvX6HBpvA7k/G1tddocZPzT2wZK5koTXpHocOk7zUb799
+         2LPg0QZl2ME3q58o3tQeyyaY1BlYV7m8Ier04lnGoxRFxPK9Wx4EcovR5xvgXGZWDCe6
+         9eCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690191955; x=1690796755;
+        d=1e100.net; s=20221208; t=1690191978; x=1690796778;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jmPwAlPL0TnDBmalzCzATtOPmfxfqu3Q+7XaFZclAtg=;
-        b=O4mLPDHWqAp2DSOBEiSyFKn/iLTNNeiMqfx7mPn9zvAa2KYOE4xkkhSOt9prHhAMp6
-         qp5Wum9X8oDiYU2vMFSYDIXqj+OHXefwXYG0Aix7amEXFYSTULA48G1/MdXRa5bqDmS6
-         eWXjOFl++aGtvW2pHi/OltzzZX1BgRJfORIyGr5N/5lOXFdALKBhfoKPrr4keBc5Nh3Y
-         naDnRlPVyvIr4xQw3Ci1uivEr0kYL2z9JWc9/A5uMiNGiTwghBvuA+vbiBj62Yr1rTZW
-         DaN5m76WQijfiXMczXQcuNTBUQvaNko1EPEhZFzt6ROt2J07jKswlMn0Y/mRJWIg7iyC
-         8Z7Q==
-X-Gm-Message-State: ABy/qLbNHIlC05wn4fkg31F8ao3VNF6q2wndO8tO2ehUEyySgFP0MkDt
-	yNJbImPKOk3kG1yDOSfvM5nN8g==
-X-Google-Smtp-Source: APBJJlHDY1qhgSa+H4mr70oj6h44PLP3QUTUzXb3MsGg4I77oDNLLFWrtOaIhBAmIAnOXFQDdEVBFw==
-X-Received: by 2002:a17:902:d4cb:b0:1b1:9272:55e2 with SMTP id o11-20020a170902d4cb00b001b1927255e2mr12365119plg.3.1690191954835;
-        Mon, 24 Jul 2023 02:45:54 -0700 (PDT)
+        bh=YJ34aDXYlHmjcWHNnO8BUtZL0Yf5ZszuCt3/FkcxObI=;
+        b=eo+JvcGxY7P/pgS9f34MYYZVZMMS0jouyHtOR87mhFIjkfKvJOyo7d4h7fHTEFEIel
+         tNcTeJ/5jrnEfx/wUiXnYYqh6kDXisCZSDbjABF5WZ/K+7KjyvrEcfl25RbglqsWx0Jq
+         9k68/0GhjLtfE0IFUz6Ak3GioQtSulVjUW2p9KbhywPApRjjyHYZ+44cTHBmZTM1y6k4
+         lBYGp/Pv+nXddPrPt1x6Zjfrr/bTuAEab5euq6Dl19Z4oiThDZ+BLgcHDljo5NbBoYzt
+         bzcZ4mWPYnL1ydkq8OlTTA87jYYkk0uFP6f8335emLBtLdVNrJ+67YcJhCCzGJGLXOwn
+         1bCw==
+X-Gm-Message-State: ABy/qLbacej6D/BDA/NNsmH7q2TSgIvjdYQBD1D3Krna9QubtyRXBJUO
+	xSposC3rYB9JcnClDScwovBTWw==
+X-Google-Smtp-Source: APBJJlGS+SYk55mAAJOUNGx8fxUIn0OJAQvX8pDu/8/ugt1o28j6t6h3zVeppHUSF07Rw5MgS0vxBA==
+X-Received: by 2002:a17:902:d484:b0:1b8:a27d:f591 with SMTP id c4-20020a170902d48400b001b8a27df591mr12255719plg.5.1690191978640;
+        Mon, 24 Jul 2023 02:46:18 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -116,67 +116,76 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v2 04/47] kvm: mmu: dynamically allocate the x86-mmu shrinker
-Date: Mon, 24 Jul 2023 17:43:11 +0800
-Message-Id: <20230724094354.90817-5-zhengqi.arch@bytedance.com>
+Subject: [PATCH v2 06/47] drm/ttm: dynamically allocate the drm-ttm_pool shrinker
+Date: Mon, 24 Jul 2023 17:43:13 +0800
+Message-Id: <20230724094354.90817-7-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the x86-mmu shrinker.
+Use new APIs to dynamically allocate the drm-ttm_pool shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- arch/x86/kvm/mmu/mmu.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ drivers/gpu/drm/ttm/ttm_pool.c | 23 +++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
 
-diff --git a/arch/x86/kvm/mmu/mmu.c b/arch/x86/kvm/mmu/mmu.c
-index ec169f5c7dce..ab405e0a8954 100644
---- a/arch/x86/kvm/mmu/mmu.c
-+++ b/arch/x86/kvm/mmu/mmu.c
-@@ -6847,11 +6847,7 @@ static unsigned long mmu_shrink_count(struct shrinker *shrink,
- 	return percpu_counter_read_positive(&kvm_total_used_mmu_pages);
- }
+diff --git a/drivers/gpu/drm/ttm/ttm_pool.c b/drivers/gpu/drm/ttm/ttm_pool.c
+index cddb9151d20f..e1eb73d0b72a 100644
+--- a/drivers/gpu/drm/ttm/ttm_pool.c
++++ b/drivers/gpu/drm/ttm/ttm_pool.c
+@@ -73,7 +73,7 @@ static struct ttm_pool_type global_dma32_uncached[MAX_ORDER + 1];
  
--static struct shrinker mmu_shrinker = {
--	.count_objects = mmu_shrink_count,
--	.scan_objects = mmu_shrink_scan,
--	.seeks = DEFAULT_SEEKS * 10,
--};
-+static struct shrinker *mmu_shrinker;
+ static spinlock_t shrinker_lock;
+ static struct list_head shrinker_list;
+-static struct shrinker mm_shrinker;
++static struct shrinker *mm_shrinker;
  
- static void mmu_destroy_caches(void)
- {
-@@ -6984,10 +6980,16 @@ int kvm_mmu_vendor_module_init(void)
- 	if (percpu_counter_init(&kvm_total_used_mmu_pages, 0, GFP_KERNEL))
- 		goto out;
+ /* Allocate pages of size 1 << order with the given gfp_flags */
+ static struct page *ttm_pool_alloc_page(struct ttm_pool *pool, gfp_t gfp_flags,
+@@ -734,8 +734,8 @@ static int ttm_pool_debugfs_shrink_show(struct seq_file *m, void *data)
+ 	struct shrink_control sc = { .gfp_mask = GFP_NOFS };
  
--	ret = register_shrinker(&mmu_shrinker, "x86-mmu");
--	if (ret)
-+	mmu_shrinker = shrinker_alloc(0, "x86-mmu");
-+	if (!mmu_shrinker)
- 		goto out_shrinker;
+ 	fs_reclaim_acquire(GFP_KERNEL);
+-	seq_printf(m, "%lu/%lu\n", ttm_pool_shrinker_count(&mm_shrinker, &sc),
+-		   ttm_pool_shrinker_scan(&mm_shrinker, &sc));
++	seq_printf(m, "%lu/%lu\n", ttm_pool_shrinker_count(mm_shrinker, &sc),
++		   ttm_pool_shrinker_scan(mm_shrinker, &sc));
+ 	fs_reclaim_release(GFP_KERNEL);
  
-+	mmu_shrinker->count_objects = mmu_shrink_count;
-+	mmu_shrinker->scan_objects = mmu_shrink_scan;
-+	mmu_shrinker->seeks = DEFAULT_SEEKS * 10;
-+
-+	shrinker_register(mmu_shrinker);
-+
  	return 0;
+@@ -779,10 +779,17 @@ int ttm_pool_mgr_init(unsigned long num_pages)
+ 			    &ttm_pool_debugfs_shrink_fops);
+ #endif
  
- out_shrinker:
-@@ -7009,7 +7011,7 @@ void kvm_mmu_vendor_module_exit(void)
- {
- 	mmu_destroy_caches();
- 	percpu_counter_destroy(&kvm_total_used_mmu_pages);
--	unregister_shrinker(&mmu_shrinker);
-+	shrinker_unregister(mmu_shrinker);
+-	mm_shrinker.count_objects = ttm_pool_shrinker_count;
+-	mm_shrinker.scan_objects = ttm_pool_shrinker_scan;
+-	mm_shrinker.seeks = 1;
+-	return register_shrinker(&mm_shrinker, "drm-ttm_pool");
++	mm_shrinker = shrinker_alloc(0, "drm-ttm_pool");
++	if (!mm_shrinker)
++		return -ENOMEM;
++
++	mm_shrinker->count_objects = ttm_pool_shrinker_count;
++	mm_shrinker->scan_objects = ttm_pool_shrinker_scan;
++	mm_shrinker->seeks = 1;
++
++	shrinker_register(mm_shrinker);
++
++	return 0;
  }
  
- /*
+ /**
+@@ -802,6 +809,6 @@ void ttm_pool_mgr_fini(void)
+ 		ttm_pool_type_fini(&global_dma32_uncached[i]);
+ 	}
+ 
+-	unregister_shrinker(&mm_shrinker);
++	shrinker_unregister(mm_shrinker);
+ 	WARN_ON(!list_empty(&shrinker_list));
+ }
 -- 
 2.30.2
 
