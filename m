@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0808AC0015E
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:51:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568595.888157 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E884C04FE1
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:51:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568599.888193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsDM-00084E-Pc; Mon, 24 Jul 2023 09:50:52 +0000
+	id 1qNsDV-0002Dg-9U; Mon, 24 Jul 2023 09:51:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568595.888157; Mon, 24 Jul 2023 09:50:52 +0000
+Received: by outflank-mailman (output) from mailman id 568599.888193; Mon, 24 Jul 2023 09:51:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsDL-0007y3-Ez; Mon, 24 Jul 2023 09:50:51 +0000
-Received: by outflank-mailman (input) for mailman id 568595;
- Mon, 24 Jul 2023 09:49:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qNsDU-00029b-IH; Mon, 24 Jul 2023 09:51:00 +0000
+Received: by outflank-mailman (input) for mailman id 568599;
+ Mon, 24 Jul 2023 09:50:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jodz=DK=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qNsCU-0007Pe-6Z
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:49:58 +0000
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [2607:f8b0:4864:20::635])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 71a55ef8-2a07-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 11:49:56 +0200 (CEST)
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1b8c364ad3bso8862085ad.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:49:56 -0700 (PDT)
+ id 1qNsDE-0005oA-PG
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:50:44 +0000
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [2607:f8b0:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8deadc2d-2a07-11ee-b23a-6b7b168915f2;
+ Mon, 24 Jul 2023 11:50:43 +0200 (CEST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1bb91c20602so2232125ad.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:50:43 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.49.42
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.50.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:49:54 -0700 (PDT)
+ Mon, 24 Jul 2023 02:50:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71a55ef8-2a07-11ee-8612-37d641c3527e
+X-Inumbo-ID: 8deadc2d-2a07-11ee-b23a-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690192195; x=1690796995;
+        d=bytedance.com; s=google; t=1690192242; x=1690797042;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9Za/Hz+nmH3G3JzZh25LzFiu0ZOWgA3znFTLEp4oxTw=;
-        b=gR2qnZxmoz280cmZWcXiSCLKKkR1JfAp12ElTfYwqMrNTp8JCp9ZKZRXrFwOkcY/Sb
-         CrbcisbKWYe3aY6B3pvGdH/dVnCF0vGzFeD5T1Yk3y+VfaQjIO+EZahaao1fjNd/BZoI
-         apuMNV19Cpy+f53Y3adNFJ3coCvNEOiZFJQcm8nd+dDkCN4T/1IxyvGyE+UJ4ZlCp1aB
-         v/6FaBWqZJevgDX1XD0OMGqFb23jKwI+/PxmuakBM9m0V+vk+xlBE1r0FaEXeTkyqUfe
-         vbAcs9nc+KNDOrB0YDxGRMugv4K0wSAyub+4ZaUHe2Bm2guChHPn7IXXTJaLQIHDrakU
-         MiWA==
+        bh=ZDFCq+3UkmhmTN0HM4/h2IKWPu86Pd5FvtdYemXQxRk=;
+        b=XqHXKo6vbgHHpc6RhHf64kOEkWmd4DwF9S3G2HlcDNVprLbMgrziPLHmF3/SloAlTi
+         M4qErsaBI3Xm//ZP8dUEW0qhn54k8U+Wqiz5Z3pGQ/Kj67wHGAvT2pzICXrQ4EWgGi4s
+         SU7OWwibP9GfdaanTmVVTd7EGnabpaclCsU9Kc2UxrRFm4MGqpHvMAQuuWz3XkPdgRtX
+         h20Y8gEliJsCmA8XQP0mFOD72LdPGTY+615jy3RfIBkDojgIRwF3RNuCELN3vZVJJ3vk
+         B2oIbMm9U2+ETc6xL/s4Xuc7N8cOCExDDhuoZilq51tIchlhwDinGVhSK9NnH/LxlRAX
+         CyQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690192195; x=1690796995;
+        d=1e100.net; s=20221208; t=1690192242; x=1690797042;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9Za/Hz+nmH3G3JzZh25LzFiu0ZOWgA3znFTLEp4oxTw=;
-        b=eop+PxTl0Q4qh2sQTnm+Y+WbVi4Za2RqZmW5/eUrgcMr+0ypj5XJ7iYHfNR5gfKeko
-         tH/rTA0bY6NmU0ppup0Ql32Ylk/sAEpE0+GvDdOm/6h6O+1wKa38XjtqTxzIUk+C+KPU
-         jSk+ihxq5k5Pt6pCFfMG+RS6zt+xq8bvsWpkv3JprzKGaACzC/TybIG5jGzfqbUBd7Qh
-         CSOjf7+6rzvAuNyWlSUpFiFS+7KaQMtCGAZNL8z1xxk+Lwr3oeD2NoHSFHQH1CmUEMrW
-         3eIjqIVCJpYDg//YguIaujwJrBStwrA1khYwFpIpiSWvs2E2apVnIhjGvGiJPOZEWTAP
-         gZ5A==
-X-Gm-Message-State: ABy/qLb3DimpATv3swvA67vaJIPjY068+FPz1Nol3KAHrb/pbeKcjEZn
-	ktM7+IHkV1spw9fUAQQP0z4oJw==
-X-Google-Smtp-Source: APBJJlFYiQjYsesoLBIGYzIbaqvqBpGNnPrMVt+9gbe/8vvXchqG9OkxYsLP3NQiA5NgJtO6rGDrrQ==
-X-Received: by 2002:a17:902:e80a:b0:1b8:50a9:6874 with SMTP id u10-20020a170902e80a00b001b850a96874mr12325717plg.5.1690192194956;
-        Mon, 24 Jul 2023 02:49:54 -0700 (PDT)
+        bh=ZDFCq+3UkmhmTN0HM4/h2IKWPu86Pd5FvtdYemXQxRk=;
+        b=g4zLXTS4nbILmIWYdIrutpKxYp2DJP5bj5Ge2Dv/c/de246JW97/gs2gnlX/JWq+zm
+         sQh90yl8/Z3Yh9ICYBaU1XjBkl40eVBnTR5s7NxVKwE4d5e1nnAyVnh8ZhPnM867Qrtm
+         qhwj8s8tmIiQJrn34ZoYkgkNRKZ5BnpgfHkifGL5Xbx+fkpLMqagFXprMVk4Nijo5kIM
+         Wy5q5JVO+lB4/+zioqKVzVMkYFPoTUO2KhU7trwlMwCa4DjrhH82DCQhDQda6Ktqu0LI
+         2nsFl7QYilr0RopxIIOk+8IVgYmC6a9bBqNN5hAcQZi2K13JRVj2bfwjJmRhoGsCd9gn
+         614w==
+X-Gm-Message-State: ABy/qLbpM8Wl+h2VdfLL36pUBrKOEojdJfb3PlHm9vaH9xeI87zeMzxF
+	PxeIY1WG70XpGkI/aWWvskUj4w==
+X-Google-Smtp-Source: APBJJlGR+n0mPlGVKvsXqmDpjqybpKJnY8gMKNhLgc/3jSHzBMUiGDHHAqX91CFo21fNITu34xNtfg==
+X-Received: by 2002:a17:902:ec8b:b0:1b3:d8ac:8db3 with SMTP id x11-20020a170902ec8b00b001b3d8ac8db3mr12344607plg.6.1690192242411;
+        Mon, 24 Jul 2023 02:50:42 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -116,9 +116,9 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v2 24/47] drm/panfrost: dynamically allocate the drm-panfrost shrinker
-Date: Mon, 24 Jul 2023 17:43:31 +0800
-Message-Id: <20230724094354.90817-25-zhengqi.arch@bytedance.com>
+Subject: [PATCH v2 28/47] bcache: dynamically allocate the md-bcache shrinker
+Date: Mon, 24 Jul 2023 17:43:35 +0800
+Message-Id: <20230724094354.90817-29-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
@@ -126,128 +126,104 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 In preparation for implementing lockless slab shrink, use new APIs to
-dynamically allocate the drm-panfrost shrinker, so that it can be freed
+dynamically allocate the md-bcache shrinker, so that it can be freed
 asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
-read-side critical section when releasing the struct panfrost_device.
+read-side critical section when releasing the struct cache_set.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- drivers/gpu/drm/panfrost/panfrost_device.h    |  2 +-
- drivers/gpu/drm/panfrost/panfrost_drv.c       |  6 +++-
- drivers/gpu/drm/panfrost/panfrost_gem.h       |  2 +-
- .../gpu/drm/panfrost/panfrost_gem_shrinker.c  | 32 ++++++++++++-------
- 4 files changed, 27 insertions(+), 15 deletions(-)
+ drivers/md/bcache/bcache.h |  2 +-
+ drivers/md/bcache/btree.c  | 27 ++++++++++++++++-----------
+ drivers/md/bcache/sysfs.c  |  3 ++-
+ 3 files changed, 19 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/gpu/drm/panfrost/panfrost_device.h b/drivers/gpu/drm/panfrost/panfrost_device.h
-index b0126b9fbadc..e667e5689353 100644
---- a/drivers/gpu/drm/panfrost/panfrost_device.h
-+++ b/drivers/gpu/drm/panfrost/panfrost_device.h
-@@ -118,7 +118,7 @@ struct panfrost_device {
+diff --git a/drivers/md/bcache/bcache.h b/drivers/md/bcache/bcache.h
+index 5a79bb3c272f..c622bc50f81b 100644
+--- a/drivers/md/bcache/bcache.h
++++ b/drivers/md/bcache/bcache.h
+@@ -541,7 +541,7 @@ struct cache_set {
+ 	struct bio_set		bio_split;
  
- 	struct mutex shrinker_lock;
- 	struct list_head shrinker_list;
--	struct shrinker shrinker;
-+	struct shrinker *shrinker;
+ 	/* For the btree cache */
+-	struct shrinker		shrink;
++	struct shrinker		*shrink;
  
- 	struct panfrost_devfreq pfdevfreq;
- };
-diff --git a/drivers/gpu/drm/panfrost/panfrost_drv.c b/drivers/gpu/drm/panfrost/panfrost_drv.c
-index bbada731bbbd..f705bbdea360 100644
---- a/drivers/gpu/drm/panfrost/panfrost_drv.c
-+++ b/drivers/gpu/drm/panfrost/panfrost_drv.c
-@@ -598,10 +598,14 @@ static int panfrost_probe(struct platform_device *pdev)
- 	if (err < 0)
- 		goto err_out1;
- 
--	panfrost_gem_shrinker_init(ddev);
-+	err = panfrost_gem_shrinker_init(ddev);
-+	if (err)
-+		goto err_out2;
- 
- 	return 0;
- 
-+err_out2:
-+	drm_dev_unregister(ddev);
- err_out1:
- 	pm_runtime_disable(pfdev->dev);
- 	panfrost_device_fini(pfdev);
-diff --git a/drivers/gpu/drm/panfrost/panfrost_gem.h b/drivers/gpu/drm/panfrost/panfrost_gem.h
-index ad2877eeeccd..863d2ec8d4f0 100644
---- a/drivers/gpu/drm/panfrost/panfrost_gem.h
-+++ b/drivers/gpu/drm/panfrost/panfrost_gem.h
-@@ -81,7 +81,7 @@ panfrost_gem_mapping_get(struct panfrost_gem_object *bo,
- void panfrost_gem_mapping_put(struct panfrost_gem_mapping *mapping);
- void panfrost_gem_teardown_mappings_locked(struct panfrost_gem_object *bo);
- 
--void panfrost_gem_shrinker_init(struct drm_device *dev);
-+int panfrost_gem_shrinker_init(struct drm_device *dev);
- void panfrost_gem_shrinker_cleanup(struct drm_device *dev);
- 
- #endif /* __PANFROST_GEM_H__ */
-diff --git a/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c b/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c
-index bf0170782f25..9a90dfb5301f 100644
---- a/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c
-+++ b/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c
-@@ -18,8 +18,7 @@
- static unsigned long
- panfrost_gem_shrinker_count(struct shrinker *shrinker, struct shrink_control *sc)
+ 	/* For the btree cache and anything allocation related */
+ 	struct mutex		bucket_lock;
+diff --git a/drivers/md/bcache/btree.c b/drivers/md/bcache/btree.c
+index fd121a61f17c..c176c7fc77d9 100644
+--- a/drivers/md/bcache/btree.c
++++ b/drivers/md/bcache/btree.c
+@@ -667,7 +667,7 @@ static int mca_reap(struct btree *b, unsigned int min_order, bool flush)
+ static unsigned long bch_mca_scan(struct shrinker *shrink,
+ 				  struct shrink_control *sc)
  {
--	struct panfrost_device *pfdev =
--		container_of(shrinker, struct panfrost_device, shrinker);
-+	struct panfrost_device *pfdev = shrinker->private_data;
- 	struct drm_gem_shmem_object *shmem;
- 	unsigned long count = 0;
- 
-@@ -65,8 +64,7 @@ static bool panfrost_gem_purge(struct drm_gem_object *obj)
- static unsigned long
- panfrost_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
- {
--	struct panfrost_device *pfdev =
--		container_of(shrinker, struct panfrost_device, shrinker);
-+	struct panfrost_device *pfdev = shrinker->private_data;
- 	struct drm_gem_shmem_object *shmem, *tmp;
+-	struct cache_set *c = container_of(shrink, struct cache_set, shrink);
++	struct cache_set *c = shrink->private_data;
+ 	struct btree *b, *t;
+ 	unsigned long i, nr = sc->nr_to_scan;
  	unsigned long freed = 0;
- 
-@@ -97,13 +95,24 @@ panfrost_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
-  *
-  * This function registers and sets up the panfrost shrinker.
-  */
--void panfrost_gem_shrinker_init(struct drm_device *dev)
-+int panfrost_gem_shrinker_init(struct drm_device *dev)
+@@ -734,7 +734,7 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
+ static unsigned long bch_mca_count(struct shrinker *shrink,
+ 				   struct shrink_control *sc)
  {
- 	struct panfrost_device *pfdev = dev->dev_private;
--	pfdev->shrinker.count_objects = panfrost_gem_shrinker_count;
--	pfdev->shrinker.scan_objects = panfrost_gem_shrinker_scan;
--	pfdev->shrinker.seeks = DEFAULT_SEEKS;
--	WARN_ON(register_shrinker(&pfdev->shrinker, "drm-panfrost"));
-+
-+	pfdev->shrinker = shrinker_alloc(0, "drm-panfrost");
-+	if (!pfdev->shrinker) {
-+		WARN_ON(1);
+-	struct cache_set *c = container_of(shrink, struct cache_set, shrink);
++	struct cache_set *c = shrink->private_data;
+ 
+ 	if (c->shrinker_disabled)
+ 		return 0;
+@@ -752,8 +752,8 @@ void bch_btree_cache_free(struct cache_set *c)
+ 
+ 	closure_init_stack(&cl);
+ 
+-	if (c->shrink.list.next)
+-		unregister_shrinker(&c->shrink);
++	if (c->shrink)
++		shrinker_unregister(c->shrink);
+ 
+ 	mutex_lock(&c->bucket_lock);
+ 
+@@ -828,14 +828,19 @@ int bch_btree_cache_alloc(struct cache_set *c)
+ 		c->verify_data = NULL;
+ #endif
+ 
+-	c->shrink.count_objects = bch_mca_count;
+-	c->shrink.scan_objects = bch_mca_scan;
+-	c->shrink.seeks = 4;
+-	c->shrink.batch = c->btree_pages * 2;
++	c->shrink = shrinker_alloc(0, "md-bcache:%pU", c->set_uuid);
++	if (!c->shrink) {
++		pr_warn("bcache: %s: could not allocate shrinker\n", __func__);
 +		return -ENOMEM;
 +	}
 +
-+	pfdev->shrinker->count_objects = panfrost_gem_shrinker_count;
-+	pfdev->shrinker->scan_objects = panfrost_gem_shrinker_scan;
-+	pfdev->shrinker->seeks = DEFAULT_SEEKS;
-+	pfdev->shrinker->private_data = pfdev;
-+
-+	shrinker_register(pfdev->shrinker);
-+
-+	return 0;
- }
++	c->shrink->count_objects = bch_mca_count;
++	c->shrink->scan_objects = bch_mca_scan;
++	c->shrink->seeks = 4;
++	c->shrink->batch = c->btree_pages * 2;
++	c->shrink->private_data = c;
  
- /**
-@@ -116,7 +125,6 @@ void panfrost_gem_shrinker_cleanup(struct drm_device *dev)
- {
- 	struct panfrost_device *pfdev = dev->dev_private;
+-	if (register_shrinker(&c->shrink, "md-bcache:%pU", c->set_uuid))
+-		pr_warn("bcache: %s: could not register shrinker\n",
+-				__func__);
++	shrinker_register(c->shrink);
  
--	if (pfdev->shrinker.nr_deferred) {
--		unregister_shrinker(&pfdev->shrinker);
--	}
-+	if (pfdev->shrinker)
-+		shrinker_unregister(pfdev->shrinker);
+ 	return 0;
  }
+diff --git a/drivers/md/bcache/sysfs.c b/drivers/md/bcache/sysfs.c
+index 0e2c1880f60b..45d8af755de6 100644
+--- a/drivers/md/bcache/sysfs.c
++++ b/drivers/md/bcache/sysfs.c
+@@ -866,7 +866,8 @@ STORE(__bch_cache_set)
+ 
+ 		sc.gfp_mask = GFP_KERNEL;
+ 		sc.nr_to_scan = strtoul_or_return(buf);
+-		c->shrink.scan_objects(&c->shrink, &sc);
++		if (c->shrink)
++			c->shrink->scan_objects(c->shrink, &sc);
+ 	}
+ 
+ 	sysfs_strtoul_clamp(congested_read_threshold_us,
 -- 
 2.30.2
 
