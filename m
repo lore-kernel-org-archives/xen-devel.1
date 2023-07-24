@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F21C04A94
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:50:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568569.888059 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FDF9C001DF
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:50:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568574.888081 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsD4-0003E3-EM; Mon, 24 Jul 2023 09:50:34 +0000
+	id 1qNsD7-0003vq-MY; Mon, 24 Jul 2023 09:50:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568569.888059; Mon, 24 Jul 2023 09:50:34 +0000
+Received: by outflank-mailman (output) from mailman id 568574.888081; Mon, 24 Jul 2023 09:50:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsD3-0003A8-LI; Mon, 24 Jul 2023 09:50:33 +0000
-Received: by outflank-mailman (input) for mailman id 568569;
- Mon, 24 Jul 2023 09:47:58 +0000
+	id 1qNsD6-0003pO-9w; Mon, 24 Jul 2023 09:50:36 +0000
+Received: by outflank-mailman (input) for mailman id 568574;
+ Mon, 24 Jul 2023 09:48:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jodz=DK=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qNsAY-0007Pe-CF
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:47:58 +0000
+ id 1qNsAv-0007Pe-KG
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:48:21 +0000
 Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
  [2607:f8b0:4864:20::633])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29da9214-2a07-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 11:47:56 +0200 (CEST)
+ id 382642cf-2a07-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 11:48:19 +0200 (CEST)
 Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1b7dfb95761so5876465ad.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:47:55 -0700 (PDT)
+ d9443c01a7336-1bb91c20602so2228665ad.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:48:19 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.47.42
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.48.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:47:54 -0700 (PDT)
+ Mon, 24 Jul 2023 02:48:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29da9214-2a07-11ee-8612-37d641c3527e
+X-Inumbo-ID: 382642cf-2a07-11ee-8612-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690192074; x=1690796874;
+        d=bytedance.com; s=google; t=1690192098; x=1690796898;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qReDjbjFz0xyiV7re04rgbBc1uubNDIxQ7QKRYWZSRs=;
-        b=ENVLEGhvMjLiUvisyoHJontwb50xfTslV0XVCIZNbj3XxjFa+A4sTXO4Rw3QqFmux5
-         XbznTWGuyuir8FMQeIa7tywzBJUnyvYSwuYJ02HBKdcTkSJdAtoOPw44n28eP8zUKucc
-         q8yY+ysDs6yXU3SX/8XFuGMKyo+SMyS0Zlg4rwVloT2TyOVOz/Imh5E9tEAGm8xg8jyO
-         QATQrcFlR17SUbjRuc1dqQxPY8algfDWOcvmKhvXGbaXm39iJYJiLthaOzWAxzJVeqgh
-         fJOtvB6CBEjtg12DSwkb6lmHRDFIhGbGsjcgpxt8MGvrxNBdwtVQD4ot+/N3ASfLH/lS
-         XEeQ==
+        bh=av+QDe1dYuRDqLy0LPAsVex0suGCyDNqgU4hNImbDOo=;
+        b=bDwQiK4fS0yTwWq4oVGVRKxPIDCclDxFD1XuAsmfHKruu98HTXXz11gYjdkSK/HgQ4
+         rQnPx3dscLMyKil4aICcT0ClG/ZXMBy6mCQ6rCkQE03v5xWhoTzeYQvpLwD9l9p7vXT0
+         v6DYimpLGMp1ValFsBMSR4AyqoftBHG/Cr11IkBPDpuRa7fi2izlKP1Mq3g/2PWtCUJ9
+         byo8ZZ2a8q2qzXYTrMXoHTjOf2N4B4XMSkAD5N1iIFEjrTIqUQlkmwpGlE+j3WXksgRd
+         fNHXLvhFxXWRY9vsToZ4OCxL1qfGN5pYRyHLSBIlboKFdsL2/OFWebl/aiL58+zCQO6q
+         AKNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690192074; x=1690796874;
+        d=1e100.net; s=20221208; t=1690192098; x=1690796898;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qReDjbjFz0xyiV7re04rgbBc1uubNDIxQ7QKRYWZSRs=;
-        b=YDx8jm6pOIY3u4qiKr2Eo6LY1/wVzPS9L8jRSU2nqkQoTwWHJCVtcsL1qilT0k1ldf
-         s5kFjVWpuBAuXCXrPyakbjaA6HLl9bSiCr6dtIW81AJcwG857qru0uniX/RIoGmmZEJb
-         3/rKc+kZuQCYp6t4uSvuClq2J0gCJ38plwwFvk8PtXENnlj90j2o+xEbYOLYEI3CThI6
-         00bulTJ50suZoagXNrOse0dcLN2UkjZNddnPgP3d60N/xUzaZ9IykKrkrLP9OtU2wtUR
-         Q84vQsbp13xScKGbFRM8edbNQOqU8rpHDQwRsRsxsiTzuU0Jxvopzf//r93mBQEx0PVR
-         nd0w==
-X-Gm-Message-State: ABy/qLZdPaoEeFn6rn/S22Gfjzc1kKIeWL0sU+qB5jKd5uI5H47HpD4F
-	uyXAFXzyzjNlthVmvAM9u8UwyA==
-X-Google-Smtp-Source: APBJJlFmRr0YS7/80cQjb3Wv0/ryy4A2Bv0/hjBc48SsvJ3Rmt9/pUa2TTT24oRtgj6qJ02D1OEnuA==
-X-Received: by 2002:a17:902:dacf:b0:1b8:9215:9163 with SMTP id q15-20020a170902dacf00b001b892159163mr12197474plx.6.1690192074491;
-        Mon, 24 Jul 2023 02:47:54 -0700 (PDT)
+        bh=av+QDe1dYuRDqLy0LPAsVex0suGCyDNqgU4hNImbDOo=;
+        b=Pgm5J1Lwu3zbgdYuWiXKxV+eiGeiXp5Z8UcZLFVXeAIPZJn5PElR5j1NjjWHhti2QP
+         o/A6WJpwRBYXklk7xxzH1FwjqXROGWioIyyPbrCkZlaklnpHP1bHYcYgnylEpB6z7a63
+         N3WyhoOmjam++apBj0Pv6qKR/PDHaKCqXDvd4U5CM3+v1WRsI0nc1YbQlpEY+4ZkCs7c
+         +ajuyHEBrfZxFaBQKq/d9MaMBMG2WZOKT2GKByuYs7I/4nMUxF433ZttUqdwUDEKhCFD
+         HvXguWhK4RNbPWt0sVJVpPHA/zvv/qKbpQwR3ETalASKc6ZCYmBVxwEa6+ikTNo6iTq2
+         oSeQ==
+X-Gm-Message-State: ABy/qLZ6hiQ8FFwBmdxqqrSzK8WaT/FCYb0dx16ZAI1aEuLeZOPH5omZ
+	fmLUaRWtubGCbWgoNz5wxz8wzg==
+X-Google-Smtp-Source: APBJJlGdal6NRof8mBJ7MOpqyhGdVFWorp9Fsw25TA7e6Zh0vfd9YbcVPo2ONhSqPJyVS7KwA30xww==
+X-Received: by 2002:a17:902:ea01:b0:1bb:83ec:832 with SMTP id s1-20020a170902ea0100b001bb83ec0832mr8333588plg.2.1690192098526;
+        Mon, 24 Jul 2023 02:48:18 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -116,79 +116,85 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v2 14/47] nfsd: dynamically allocate the nfsd-filecache shrinker
-Date: Mon, 24 Jul 2023 17:43:21 +0800
-Message-Id: <20230724094354.90817-15-zhengqi.arch@bytedance.com>
+Subject: [PATCH v2 16/47] ubifs: dynamically allocate the ubifs-slab shrinker
+Date: Mon, 24 Jul 2023 17:43:23 +0800
+Message-Id: <20230724094354.90817-17-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the nfsd-filecache shrinker.
+Use new APIs to dynamically allocate the ubifs-slab shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- fs/nfsd/filecache.c | 22 ++++++++++++----------
+ fs/ubifs/super.c | 22 ++++++++++++----------
  1 file changed, 12 insertions(+), 10 deletions(-)
 
-diff --git a/fs/nfsd/filecache.c b/fs/nfsd/filecache.c
-index ee9c923192e0..50216768d408 100644
---- a/fs/nfsd/filecache.c
-+++ b/fs/nfsd/filecache.c
-@@ -521,11 +521,7 @@ nfsd_file_lru_scan(struct shrinker *s, struct shrink_control *sc)
- 	return ret;
- }
+diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
+index 32cb14759796..f2a3a58f7860 100644
+--- a/fs/ubifs/super.c
++++ b/fs/ubifs/super.c
+@@ -54,11 +54,7 @@ module_param_cb(default_version, &ubifs_default_version_ops, &ubifs_default_vers
+ static struct kmem_cache *ubifs_inode_slab;
  
--static struct shrinker	nfsd_file_shrinker = {
--	.scan_objects = nfsd_file_lru_scan,
--	.count_objects = nfsd_file_lru_count,
--	.seeks = 1,
+ /* UBIFS TNC shrinker description */
+-static struct shrinker ubifs_shrinker_info = {
+-	.scan_objects = ubifs_shrink_scan,
+-	.count_objects = ubifs_shrink_count,
+-	.seeks = DEFAULT_SEEKS,
 -};
-+static struct shrinker *nfsd_file_shrinker;
++static struct shrinker *ubifs_shrinker_info;
  
  /**
-  * nfsd_file_cond_queue - conditionally unhash and queue a nfsd_file
-@@ -746,12 +742,18 @@ nfsd_file_cache_init(void)
- 		goto out_err;
- 	}
+  * validate_inode - validate inode.
+@@ -2373,7 +2369,7 @@ static void inode_slab_ctor(void *obj)
  
--	ret = register_shrinker(&nfsd_file_shrinker, "nfsd-filecache");
--	if (ret) {
--		pr_err("nfsd: failed to register nfsd_file_shrinker: %d\n", ret);
-+	nfsd_file_shrinker = shrinker_alloc(0, "nfsd-filecache");
-+	if (!nfsd_file_shrinker) {
-+		pr_err("nfsd: failed to allocate nfsd_file_shrinker\n");
- 		goto out_lru;
- 	}
+ static int __init ubifs_init(void)
+ {
+-	int err;
++	int err = -ENOMEM;
  
-+	nfsd_file_shrinker->count_objects = nfsd_file_lru_count;
-+	nfsd_file_shrinker->scan_objects = nfsd_file_lru_scan;
-+	nfsd_file_shrinker->seeks = 1;
+ 	BUILD_BUG_ON(sizeof(struct ubifs_ch) != 24);
+ 
+@@ -2439,10 +2435,16 @@ static int __init ubifs_init(void)
+ 	if (!ubifs_inode_slab)
+ 		return -ENOMEM;
+ 
+-	err = register_shrinker(&ubifs_shrinker_info, "ubifs-slab");
+-	if (err)
++	ubifs_shrinker_info = shrinker_alloc(0, "ubifs-slab");
++	if (!ubifs_shrinker_info)
+ 		goto out_slab;
+ 
++	ubifs_shrinker_info->count_objects = ubifs_shrink_count;
++	ubifs_shrinker_info->scan_objects = ubifs_shrink_scan;
++	ubifs_shrinker_info->seeks = DEFAULT_SEEKS;
 +
-+	shrinker_register(nfsd_file_shrinker);
++	shrinker_register(ubifs_shrinker_info);
 +
- 	ret = lease_register_notifier(&nfsd_file_lease_notifier);
- 	if (ret) {
- 		pr_err("nfsd: unable to register lease notifier: %d\n", ret);
-@@ -774,7 +776,7 @@ nfsd_file_cache_init(void)
- out_notifier:
- 	lease_unregister_notifier(&nfsd_file_lease_notifier);
+ 	err = ubifs_compressors_init();
+ 	if (err)
+ 		goto out_shrinker;
+@@ -2467,7 +2469,7 @@ static int __init ubifs_init(void)
+ 	dbg_debugfs_exit();
+ 	ubifs_compressors_exit();
  out_shrinker:
--	unregister_shrinker(&nfsd_file_shrinker);
-+	shrinker_unregister(nfsd_file_shrinker);
- out_lru:
- 	list_lru_destroy(&nfsd_file_lru);
- out_err:
-@@ -891,7 +893,7 @@ nfsd_file_cache_shutdown(void)
- 		return;
+-	unregister_shrinker(&ubifs_shrinker_info);
++	shrinker_unregister(ubifs_shrinker_info);
+ out_slab:
+ 	kmem_cache_destroy(ubifs_inode_slab);
+ 	return err;
+@@ -2483,7 +2485,7 @@ static void __exit ubifs_exit(void)
+ 	dbg_debugfs_exit();
+ 	ubifs_sysfs_exit();
+ 	ubifs_compressors_exit();
+-	unregister_shrinker(&ubifs_shrinker_info);
++	shrinker_unregister(ubifs_shrinker_info);
  
- 	lease_unregister_notifier(&nfsd_file_lease_notifier);
--	unregister_shrinker(&nfsd_file_shrinker);
-+	shrinker_unregister(nfsd_file_shrinker);
  	/*
- 	 * make sure all callers of nfsd_file_lru_cb are done before
- 	 * calling nfsd_file_cache_purge
+ 	 * Make sure all delayed rcu free inodes are flushed before we
 -- 
 2.30.2
 
