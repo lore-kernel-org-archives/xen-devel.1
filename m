@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E714C001B0
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 12:59:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568913.889033 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C133C001B0
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 12:59:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568915.889053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNv9m-0003z6-NK; Mon, 24 Jul 2023 12:59:22 +0000
+	id 1qNv9r-0004Yg-7G; Mon, 24 Jul 2023 12:59:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568913.889033; Mon, 24 Jul 2023 12:59:22 +0000
+Received: by outflank-mailman (output) from mailman id 568915.889053; Mon, 24 Jul 2023 12:59:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNv9m-0003yz-Ji; Mon, 24 Jul 2023 12:59:22 +0000
-Received: by outflank-mailman (input) for mailman id 568913;
- Mon, 24 Jul 2023 12:59:21 +0000
+	id 1qNv9r-0004YV-3x; Mon, 24 Jul 2023 12:59:27 +0000
+Received: by outflank-mailman (input) for mailman id 568915;
+ Mon, 24 Jul 2023 12:59:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ymW7=DK=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1qNv9l-0003BP-HJ
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 12:59:21 +0000
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [2607:f8b0:4864:20::82c])
+ id 1qNv9p-0003BP-D6
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 12:59:25 +0000
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [2607:f8b0:4864:20::82f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e6c3b833-2a21-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 14:59:19 +0200 (CEST)
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-403f65a3f8cso33875051cf.2
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 05:59:19 -0700 (PDT)
+ id e9526194-2a21-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 14:59:23 +0200 (CEST)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-403a7066bc8so34716411cf.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 05:59:23 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com
  (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
  [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
- d3-20020ac81183000000b00402364e77dcsm3273060qtj.7.2023.07.24.05.59.16
+ d3-20020ac81183000000b00402364e77dcsm3273060qtj.7.2023.07.24.05.59.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 05:59:17 -0700 (PDT)
+ Mon, 24 Jul 2023 05:59:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,161 +48,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6c3b833-2a21-11ee-8612-37d641c3527e
+X-Inumbo-ID: e9526194-2a21-11ee-8612-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690203558; x=1690808358;
+        d=gmail.com; s=20221208; t=1690203562; x=1690808362;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vNQhWJqSLtysm6iaINr+s0i3gnrhiDBqgnXkQD6RBcM=;
-        b=jzJf7FgcwuUKsKESZMpF55d1xqwWqJHwFCR4zuSTi+QWm3u8jN0QVvhkIGBQRXFD7y
-         YZV5+qeXwjJK2oIVQ6A61KGyl3JEIti2HJkuhraBoFQc4S6WDGYRzqbB7O6Yo9nON5Qr
-         YIFdWnq72RVfzRflIjH6IBoNSuhJ/Lx/lhtUpV6DcaGP6VY0l3pBINRta1CauaZQ+0HZ
-         1YNa7biAradn/d5roC/ZdEpqDc2dXEIX+LWbACL2EC14akyYOkCrM+snVWxsgY4CFPvg
-         egvmx8Klc/7eqFe5ujV9bOnU1zc7qFaW7GZ3oVu+C+6mGRIS7LlXHL9eVMLS78VjiYTK
-         F7Yw==
+        bh=6N7tHO/NpGPoNencisuqLlnFkoHrBAPddvPlzfIc1r8=;
+        b=cGb1P+6S3Av5VGzrgSZc1YUQupRCIbJ6DAVAiXA9Mottwv6P7pTsXXlnUeOeNQE6yS
+         KXloN25oLGNWTvgFBoaCmcjPodiF98MuPueE99Oh/l/jiDSTy99X+cbsz2u76U2fKDtN
+         GQrq3t/hMKxCpsFJTSG9KtG3i9LiWtrYvD7m9p/nqooS4SIDUyfGT/NS++diC6BVnvYM
+         Ix7EoMFBJPh27yiNw7eExYutYYqXbb/9Z8YQbEJAVDxim2gAX+MmqXE5Q4IU8yVcoGq9
+         XjmjJLYBdAdSc/tLVMdlChHQPvllJwyAX9ZrBYPRgSvckE/QVWo5fwOj/SOgEjcjVEbp
+         MuFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690203558; x=1690808358;
+        d=1e100.net; s=20221208; t=1690203562; x=1690808362;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vNQhWJqSLtysm6iaINr+s0i3gnrhiDBqgnXkQD6RBcM=;
-        b=ERev7igYntj78oaenAkoiIhyxjPawOC3lsWiRxRb0CtRYCWtv6TMSX6qRYDqXEYlar
-         bJ0gkG6TFeUjiSJt44n/kW4U48rjF4zNVQx27AzfuvMmRDaqcEXHsKyrhElbOwgTfnfB
-         DPHXELJpuvEzgzA/mH+HsCbp3l36ijUypb7C5BpdA6ikUAiZ/qfBqYy52GAlahNhGmSE
-         6oPyn/8kL64l1m97g4qqri/s0cXit7jX4PjCQ32opvlNiAhI3ae6fpFc2mhNrLW7NBA/
-         kVcaTzHc2KZpTAOqRA4pmz6QYRU2KL0J4bIjTHqdQrZEiklLWTB/BDYazS8hEpQMdG6w
-         FZ8Q==
-X-Gm-Message-State: ABy/qLbwB4VBqEOeueKfuWp0c/nIMvOcYDta/16jZYmCLOmSVvgWVbEk
-	Mans1X29tykwaspQHph7ivzNV26papY=
-X-Google-Smtp-Source: APBJJlHC4Avp8+Uss8Thrg0l6R9yg0cs9o3uBbVy0DGpOB/Ec+Z1s8yL4NlgLNOMeOEwphsJvge5+g==
-X-Received: by 2002:ac8:5786:0:b0:403:e895:155b with SMTP id v6-20020ac85786000000b00403e895155bmr8528736qta.34.1690203557767;
-        Mon, 24 Jul 2023 05:59:17 -0700 (PDT)
+        bh=6N7tHO/NpGPoNencisuqLlnFkoHrBAPddvPlzfIc1r8=;
+        b=PXjrY+0V7KnGLn2F1j/Q01hUIJvBNBzCMo3KNBvD8Ksh8YiD7f3MbNHevryu6tHOXY
+         fV3QXdNbKzZxuyF1lRo3s/++Hyxz4lW/qO6T6XrDl0mnCzWRzQZw3nm78A7cJExP3qvz
+         VJCIvg6d0ioqltx+WqWsZ5Gy+uj4UblKo8Qgrvf6AORVHsAUhtenfZ3JEGInFIagPEg7
+         hE8I8B6v2e8OaKmElI+yBw4z2uE5plmd/2xTgPIPdzaW65SGwAhOKn8kSwGlxJGszmD2
+         pOwKui4Y9hBeYQ1hwcsJrz5limFBjHrcEEfK2x32EAQeB02+PbNecYjdt1TFFhL4kNcW
+         On+Q==
+X-Gm-Message-State: ABy/qLYrSEFy1dnw3z81yYGwmeYzVg+bvMM06YA2BC7xekwiXvgq9NwY
+	TWm7+Y8TPT0TJnJJ6sWT+Dm4g4BHLkc=
+X-Google-Smtp-Source: APBJJlHp7cIM4/UVssHdBqftTk4Z3lll3Mh05WSVk3y28GZq+W5S9sj/cFB3io/d1A08Hhw1vN1MKw==
+X-Received: by 2002:ac8:5e46:0:b0:400:91d8:a704 with SMTP id i6-20020ac85e46000000b0040091d8a704mr10189554qtx.47.1690203562196;
+        Mon, 24 Jul 2023 05:59:22 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v6 01/15] cpufreq: Allow restricting to internal governors only
-Date: Mon, 24 Jul 2023 08:58:43 -0400
-Message-ID: <20230724125857.11133-2-jandryuk@gmail.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v6 03/15] cpufreq: Export intel_feature_detect
+Date: Mon, 24 Jul 2023 08:58:45 -0400
+Message-ID: <20230724125857.11133-4-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230724125857.11133-1-jandryuk@gmail.com>
 References: <20230724125857.11133-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-For hwp, the standard governors are not usable, and only the internal
-one is applicable.  Add the cpufreq_governor_internal boolean to
-indicate when an internal governor, like hwp, will be used.  This is set
-during presmp_initcall, and governor registration can be skipped when
-called during initcall.
-
-This way unusable governors are not registered, and only compatible
-governors are advertised to userspace.
+Export feature_detect as intel_feature_detect so it can be re-used by
+HWP.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v6:
+v4:
 Add Jan's Ack
 
-v5:
-Check cpufreq_governor_internal and skip registration as applicable
-Remove internal flag
-
-v4:
-Rework to use an internal flag
-Removed Jan's Ack since the approach is different.
-
 v3:
-Switch to initdata
-Add Jan Acked-by
-Commit message s/they/the/ typo
-Don't register hwp-internal when running non-hwp - Marek
+Remove void * cast when calling intel_feature_detect
 
 v2:
-Switch to "-internal"
-Add blank line in header
+export intel_feature_detect with typed pointer
+Move intel_feature_detect to acpi/cpufreq/cpufreq.h since the
+declaration now contains struct cpufreq_policy *.
 ---
- xen/drivers/cpufreq/cpufreq.c                | 1 +
- xen/drivers/cpufreq/cpufreq_misc_governors.c | 9 +++++++++
- xen/drivers/cpufreq/cpufreq_ondemand.c       | 3 +++
- xen/include/acpi/cpufreq/cpufreq.h           | 2 ++
- 4 files changed, 15 insertions(+)
+ xen/arch/x86/acpi/cpufreq/cpufreq.c | 8 ++++++--
+ xen/include/acpi/cpufreq/cpufreq.h  | 2 ++
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
-index 2321c7dd07..67a58d409b 100644
---- a/xen/drivers/cpufreq/cpufreq.c
-+++ b/xen/drivers/cpufreq/cpufreq.c
-@@ -56,6 +56,7 @@ struct cpufreq_dom {
- };
- static LIST_HEAD_READ_MOSTLY(cpufreq_dom_list_head);
- 
-+bool __initdata cpufreq_governor_internal;
- struct cpufreq_governor *__read_mostly cpufreq_opt_governor;
- LIST_HEAD_READ_MOSTLY(cpufreq_governor_list);
- 
-diff --git a/xen/drivers/cpufreq/cpufreq_misc_governors.c b/xen/drivers/cpufreq/cpufreq_misc_governors.c
-index f5571f5486..0327fad23b 100644
---- a/xen/drivers/cpufreq/cpufreq_misc_governors.c
-+++ b/xen/drivers/cpufreq/cpufreq_misc_governors.c
-@@ -120,6 +120,9 @@ static int __init cf_check cpufreq_gov_userspace_init(void)
- {
-     unsigned int cpu;
- 
-+    if ( cpufreq_governor_internal )
-+        return 0;
-+
-     for_each_online_cpu(cpu)
-         per_cpu(cpu_set_freq, cpu) = userspace_cmdline_freq;
-     register_cpu_notifier(&cpufreq_userspace_cpu_nfb);
-@@ -162,6 +165,9 @@ struct cpufreq_governor cpufreq_gov_performance = {
- 
- static int __init cf_check cpufreq_gov_performance_init(void)
- {
-+    if ( cpufreq_governor_internal )
-+        return 0;
-+
-     return cpufreq_register_governor(&cpufreq_gov_performance);
+diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+index 6c70d04395..f1cc473b4f 100644
+--- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
++++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+@@ -339,9 +339,8 @@ static unsigned int cf_check get_cur_freq_on_cpu(unsigned int cpu)
+     return extract_freq(get_cur_val(cpumask_of(cpu)), data);
  }
- __initcall(cpufreq_gov_performance_init);
-@@ -201,6 +207,9 @@ struct cpufreq_governor cpufreq_gov_powersave = {
  
- static int __init cf_check cpufreq_gov_powersave_init(void)
+-static void cf_check feature_detect(void *info)
++void intel_feature_detect(struct cpufreq_policy *policy)
  {
-+    if ( cpufreq_governor_internal )
-+        return 0;
-+
-     return cpufreq_register_governor(&cpufreq_gov_powersave);
- }
- __initcall(cpufreq_gov_powersave_init);
-diff --git a/xen/drivers/cpufreq/cpufreq_ondemand.c b/xen/drivers/cpufreq/cpufreq_ondemand.c
-index fbcd14d6c3..06cfc88d30 100644
---- a/xen/drivers/cpufreq/cpufreq_ondemand.c
-+++ b/xen/drivers/cpufreq/cpufreq_ondemand.c
-@@ -360,6 +360,9 @@ struct cpufreq_governor cpufreq_gov_dbs = {
+-    struct cpufreq_policy *policy = info;
+     unsigned int eax;
  
- static int __init cf_check cpufreq_gov_dbs_init(void)
- {
-+    if ( cpufreq_governor_internal )
-+        return 0;
-+
-     return cpufreq_register_governor(&cpufreq_gov_dbs);
+     eax = cpuid_eax(6);
+@@ -353,6 +352,11 @@ static void cf_check feature_detect(void *info)
+     }
  }
- __initcall(cpufreq_gov_dbs_init);
+ 
++static void cf_check feature_detect(void *info)
++{
++    intel_feature_detect(info);
++}
++
+ static unsigned int check_freqs(const cpumask_t *mask, unsigned int freq,
+                                 struct acpi_cpufreq_data *data)
+ {
 diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
-index 35dcf21e8f..44fc4c58fc 100644
+index 1f1898d811..482ea5b0de 100644
 --- a/xen/include/acpi/cpufreq/cpufreq.h
 +++ b/xen/include/acpi/cpufreq/cpufreq.h
-@@ -116,6 +116,8 @@ extern struct cpufreq_governor cpufreq_gov_powersave;
+@@ -243,4 +243,6 @@ int write_userspace_scaling_setspeed(unsigned int cpu, unsigned int freq);
+ void cpufreq_dbs_timer_suspend(void);
+ void cpufreq_dbs_timer_resume(void);
  
- extern struct list_head cpufreq_governor_list;
- 
-+extern bool cpufreq_governor_internal;
++void intel_feature_detect(struct cpufreq_policy *policy);
 +
- extern int cpufreq_register_governor(struct cpufreq_governor *governor);
- extern struct cpufreq_governor *__find_governor(const char *governor);
- #define CPUFREQ_DEFAULT_GOVERNOR &cpufreq_gov_dbs
+ #endif /* __XEN_CPUFREQ_PM_H__ */
 -- 
 2.41.0
 
