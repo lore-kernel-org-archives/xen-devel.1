@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4261C001DF
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:56:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568627.888302 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD180C001B0
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:57:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568630.888322 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsJ3-0003ph-Qk; Mon, 24 Jul 2023 09:56:45 +0000
+	id 1qNsJe-0004aq-Cw; Mon, 24 Jul 2023 09:57:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568627.888302; Mon, 24 Jul 2023 09:56:45 +0000
+Received: by outflank-mailman (output) from mailman id 568630.888322; Mon, 24 Jul 2023 09:57:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNsJ3-0003pa-O5; Mon, 24 Jul 2023 09:56:45 +0000
-Received: by outflank-mailman (input) for mailman id 568627;
- Mon, 24 Jul 2023 09:56:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qNsJe-0004aj-9j; Mon, 24 Jul 2023 09:57:22 +0000
+Received: by outflank-mailman (input) for mailman id 568630;
+ Mon, 24 Jul 2023 09:57:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jodz=DK=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qNsJ1-0003pU-Lh
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:56:43 +0000
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [2607:f8b0:4864:20::42c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 63b2cc17-2a08-11ee-b23a-6b7b168915f2;
- Mon, 24 Jul 2023 11:56:42 +0200 (CEST)
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-682ae5d4184so1051746b3a.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:56:42 -0700 (PDT)
-Received: from [10.70.252.135] ([203.208.167.147])
+ id 1qNsDR-0007Pe-Mu
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:50:57 +0000
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [2607:f8b0:4864:20::62e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 95172630-2a07-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 11:50:55 +0200 (CEST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1bb91c20602so2232375ad.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:50:55 -0700 (PDT)
+Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- y1-20020aa78541000000b00682aac1e2b8sm7356787pfn.60.2023.07.24.02.56.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jul 2023 02:56:40 -0700 (PDT)
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.50.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Jul 2023 02:50:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,68 +47,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 63b2cc17-2a08-11ee-b23a-6b7b168915f2
+X-Inumbo-ID: 95172630-2a07-11ee-8612-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690192601; x=1690797401;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=am2eIoStEhYj6reS+R983QZxh6h3W0xYr71gNNToCQ8=;
-        b=OlJHj1/yO42yQ42YyfDdqtfuDdXGGV/WQ0GpL38YIfO5RJZmkcdCx+PepLtkyGVzEN
-         bTK4LhGsJI+OJKO7VuvlEDj/aPd3bZAexndKWivptO/xeLBD7J/JCOubjicjaVNWXLQ5
-         H6fB+0YsEx63uc5TiCs20sSEjZ3JxRWkjZHG3LQbatv3J9k4pmh0VpqAg7R562nbzzly
-         s71ebLgHH+wdbZuHYfqIuXfOS4H3wCLtxZ6Rqc556hBiF9jLddR68NJcthdMi5JsNo9F
-         fUAZvFHEDsznNwsCMgykOwv5P0YMuteT/vvRsXd6nvRv9Clc/Ic3a7YeuRAtFe+vPCu7
-         EZug==
+        d=bytedance.com; s=google; t=1690192254; x=1690797054;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qE79rW9nQFdZueatbKkJSwG7PQvomLDBWPiy7CJ1pOw=;
+        b=M5PackbLD4uz3PJU8ZrV6Y6kpl/UkDSiJMWkyeKo1o/QqggjCRDFeggmumRocssEkO
+         U5pgVFb8eWXMORlIOr1ePtq+FK8kOLkQFNqmDuq4b+d33HgRHPfZYHAMUXUlROjpk8+o
+         J1M8uQcskFRR53Czt+aOUFg/PIJgAadgSulzfayHiil7eFnaN+rquA9rpl4WBOKlzYvu
+         UE9+Mze0Myg1eBjhHiRU9V6RNrQVMPxaTSp0Rfud/ExFs8cbE/oAjSNMW4v95hOWnnh1
+         IBtexczqggdcPw8iGrtFLB0PL+o6pwYWvLTFYmwk22wyiYE0MeWKeaT0SoMLZVVWr3fx
+         Grfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690192601; x=1690797401;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=am2eIoStEhYj6reS+R983QZxh6h3W0xYr71gNNToCQ8=;
-        b=ijq8OemdaTZp24RCnF5Hkyvf2oCTx2U++K+EBQKl6KtOFVt1mgo7pA2nJpMi0UtWs4
-         AG8txnG1kDs9RbYbT0WpigPPjPYVK8Cy+2ZImL5m/scYFXh0Sr0jywW+81bbRCdzUKyg
-         BENGpNz1IfmpOrYuoL4HMrHOBF+7tFtkp3IcYa5CaoCpcsnhQO0AZPFmv+XjokSJwvQQ
-         RWuNWP4+2f0PV+2mOVtrDMhfPCJQWULMW8gBOCAGeZUMTknoDqopmMyupb6JjgZqOsCG
-         iPTvh/2hCqFe9DWw1u/8AMkThnUng8z+XkOOhfy8Hr4n7p7ryFtLkRe+N2j+ZmqCNLEG
-         +c7w==
-X-Gm-Message-State: ABy/qLawimyUMFeUPE1yj7BJeBrjC/Ij7Rpi2owbJcihevfAktknBbMD
-	2rSxDx96bV8Th/+4K9bibZW3gQ==
-X-Google-Smtp-Source: APBJJlEtnCzvJ6I1rkWEELadVXHfZtUE/plpWIuGp/MFKpOvTS509ssN84iHDxA1POdeL3+D21rKQg==
-X-Received: by 2002:a05:6a20:8e04:b0:137:3941:17b3 with SMTP id y4-20020a056a208e0400b00137394117b3mr14532126pzj.6.1690192601020;
-        Mon, 24 Jul 2023 02:56:41 -0700 (PDT)
-Message-ID: <7b4eb3fa-1ebd-de07-1a16-9533b069a66e@bytedance.com>
-Date: Mon, 24 Jul 2023 17:56:27 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH v2 05/47] binder: dynamically allocate the android-binder
- shrinker
-Content-Language: en-US
-To: akpm@linux-foundation.org, david@fromorbit.com, tkhai@ya.ru,
- vbabka@suse.cz, roman.gushchin@linux.dev, djwong@kernel.org,
- brauner@kernel.org, paulmck@kernel.org, tytso@mit.edu, steven.price@arm.com,
- cel@kernel.org, senozhatsky@chromium.org, yujie.liu@intel.com,
- gregkh@linuxfoundation.org, muchun.song@linux.dev
-Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org, x86@kernel.org,
- kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-erofs@lists.ozlabs.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, linux-nfs@vger.kernel.org,
- linux-mtd@lists.infradead.org, rcu@vger.kernel.org, netdev@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- dm-devel@redhat.com, linux-raid@vger.kernel.org,
- linux-bcache@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-xfs@vger.kernel.org, linux-btrfs@vger.kernel.org
-References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-6-zhengqi.arch@bytedance.com>
+        d=1e100.net; s=20221208; t=1690192254; x=1690797054;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=qE79rW9nQFdZueatbKkJSwG7PQvomLDBWPiy7CJ1pOw=;
+        b=GQ1ekgGAevLBZhG0UzLD8IU2Q1eUP0SmADj0TNAsIaXKY9BCeflk1NxNWrEMLFwQqE
+         G3glmZG4f/c+5YaO6nxk4zgiisphs1j8rLV1QCD5J0aQqaqvZIsg1sfoVYtw3Es39FU/
+         +YSp1hVk4uat/ZDIeFycT3gFOH2e+/uR8RS9vbM/8fPDq8zAZ7EPdky1M2kcipp0mkTy
+         /a9rN+GbTTd2L3KM+PPb9NPbY3nS96RfxLaNwmR6OsRboLwP0eUBIFybJakBPaygeFfw
+         fpykixctzUZT5fstOUYh+NtW/19Q+hIfQQVunUYWdoV/gtqI8GL+W805bPQJ4XR5qpiE
+         DTiA==
+X-Gm-Message-State: ABy/qLbKqtGctd2Iq7dhep3cFc9B5kiXSfB9GZurHsuAAqlBdWbjf3g7
+	irVg4A/Xq8NZkGhLuOyapMiwgw==
+X-Google-Smtp-Source: APBJJlFDDpJsPsXaM9K0eN3GbgFDnugc0MZ81V5AeEkSNRv9osxW0v212MSH0egY7R7+BB7SiCdLdQ==
+X-Received: by 2002:a17:902:e802:b0:1b3:d4bb:3515 with SMTP id u2-20020a170902e80200b001b3d4bb3515mr12388503plg.0.1690192254453;
+        Mon, 24 Jul 2023 02:50:54 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
-In-Reply-To: <20230724094354.90817-6-zhengqi.arch@bytedance.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: akpm@linux-foundation.org,
+	david@fromorbit.com,
+	tkhai@ya.ru,
+	vbabka@suse.cz,
+	roman.gushchin@linux.dev,
+	djwong@kernel.org,
+	brauner@kernel.org,
+	paulmck@kernel.org,
+	tytso@mit.edu,
+	steven.price@arm.com,
+	cel@kernel.org,
+	senozhatsky@chromium.org,
+	yujie.liu@intel.com,
+	gregkh@linuxfoundation.org,
+	muchun.song@linux.dev
+Cc: linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	x86@kernel.org,
+	kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-erofs@lists.ozlabs.org,
+	linux-f2fs-devel@lists.sourceforge.net,
+	cluster-devel@redhat.com,
+	linux-nfs@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	rcu@vger.kernel.org,
+	netdev@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	dm-devel@redhat.com,
+	linux-raid@vger.kernel.org,
+	linux-bcache@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-ext4@vger.kernel.org,
+	linux-xfs@vger.kernel.org,
+	linux-btrfs@vger.kernel.org,
+	Qi Zheng <zhengqi.arch@bytedance.com>
+Subject: [PATCH v2 29/47] vmw_balloon: dynamically allocate the vmw-balloon shrinker
+Date: Mon, 24 Jul 2023 17:43:36 +0800
+Message-Id: <20230724094354.90817-30-zhengqi.arch@bytedance.com>
+X-Mailer: git-send-email 2.24.3 (Apple Git-128)
+In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
+References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
+In preparation for implementing lockless slab shrink, use new APIs to
+dynamically allocate the vmw-balloon shrinker, so that it can be freed
+asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
+read-side critical section when releasing the struct vmballoon.
 
-This patch depends on the patch: 
-https://lore.kernel.org/lkml/20230625154937.64316-1-qi.zheng@linux.dev/
+And we can simply exit vmballoon_init() when registering the shrinker
+fails. So the shrinker_registered indication is redundant, just remove it.
+
+Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+---
+ drivers/misc/vmw_balloon.c | 38 ++++++++++++--------------------------
+ 1 file changed, 12 insertions(+), 26 deletions(-)
+
+diff --git a/drivers/misc/vmw_balloon.c b/drivers/misc/vmw_balloon.c
+index 9ce9b9e0e9b6..d216d4dc042e 100644
+--- a/drivers/misc/vmw_balloon.c
++++ b/drivers/misc/vmw_balloon.c
+@@ -380,16 +380,7 @@ struct vmballoon {
+ 	/**
+ 	 * @shrinker: shrinker interface that is used to avoid over-inflation.
+ 	 */
+-	struct shrinker shrinker;
+-
+-	/**
+-	 * @shrinker_registered: whether the shrinker was registered.
+-	 *
+-	 * The shrinker interface does not handle gracefully the removal of
+-	 * shrinker that was not registered before. This indication allows to
+-	 * simplify the unregistration process.
+-	 */
+-	bool shrinker_registered;
++	struct shrinker *shrinker;
+ };
+ 
+ static struct vmballoon balloon;
+@@ -1568,29 +1559,27 @@ static unsigned long vmballoon_shrinker_count(struct shrinker *shrinker,
+ 
+ static void vmballoon_unregister_shrinker(struct vmballoon *b)
+ {
+-	if (b->shrinker_registered)
+-		unregister_shrinker(&b->shrinker);
+-	b->shrinker_registered = false;
++	shrinker_unregister(b->shrinker);
+ }
+ 
+ static int vmballoon_register_shrinker(struct vmballoon *b)
+ {
+-	int r;
+-
+ 	/* Do nothing if the shrinker is not enabled */
+ 	if (!vmwballoon_shrinker_enable)
+ 		return 0;
+ 
+-	b->shrinker.scan_objects = vmballoon_shrinker_scan;
+-	b->shrinker.count_objects = vmballoon_shrinker_count;
+-	b->shrinker.seeks = DEFAULT_SEEKS;
++	b->shrinker = shrinker_alloc(0, "vmw-balloon");
++	if (!b->shrinker)
++		return -ENOMEM;
+ 
+-	r = register_shrinker(&b->shrinker, "vmw-balloon");
++	b->shrinker->scan_objects = vmballoon_shrinker_scan;
++	b->shrinker->count_objects = vmballoon_shrinker_count;
++	b->shrinker->seeks = DEFAULT_SEEKS;
++	b->shrinker->private_data = b;
+ 
+-	if (r == 0)
+-		b->shrinker_registered = true;
++	shrinker_register(b->shrinker);
+ 
+-	return r;
++	return 0;
+ }
+ 
+ /*
+@@ -1883,7 +1872,7 @@ static int __init vmballoon_init(void)
+ 
+ 	error = vmballoon_register_shrinker(&balloon);
+ 	if (error)
+-		goto fail;
++		return error;
+ 
+ 	/*
+ 	 * Initialization of compaction must be done after the call to
+@@ -1905,9 +1894,6 @@ static int __init vmballoon_init(void)
+ 	vmballoon_debugfs_init(&balloon);
+ 
+ 	return 0;
+-fail:
+-	vmballoon_unregister_shrinker(&balloon);
+-	return error;
+ }
+ 
+ /*
+-- 
+2.30.2
 
 
