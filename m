@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A6EC0015E
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:43:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568526.887923 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1EE4C001DE
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 09:49:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568580.887933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNs5b-0005yX-23; Mon, 24 Jul 2023 09:42:51 +0000
+	id 1qNsBS-0007T0-37; Mon, 24 Jul 2023 09:48:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568526.887923; Mon, 24 Jul 2023 09:42:51 +0000
+Received: by outflank-mailman (output) from mailman id 568580.887933; Mon, 24 Jul 2023 09:48:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNs5a-0005yI-VN; Mon, 24 Jul 2023 09:42:50 +0000
-Received: by outflank-mailman (input) for mailman id 568526;
- Mon, 24 Jul 2023 09:42:49 +0000
+	id 1qNsBR-0007St-VO; Mon, 24 Jul 2023 09:48:53 +0000
+Received: by outflank-mailman (input) for mailman id 568580;
+ Mon, 24 Jul 2023 09:48:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=c6P8=DK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qNs5Z-0005hi-IK
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:42:49 +0000
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [2a00:1450:4864:20::533])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7188aa35-2a06-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 11:42:46 +0200 (CEST)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5217bb5ae05so5541090a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 02:42:47 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- k10-20020aa7c04a000000b0050488d1d376sm6020958edo.0.2023.07.24.02.42.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:42:45 -0700 (PDT)
+ <SRS0=sIK2=DK=invisiblethingslab.com=simon@srs-se1.protection.inumbo.net>)
+ id 1qNsBQ-0007Pe-GK
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 09:48:52 +0000
+Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
+ [64.147.123.20]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 49170100-2a07-11ee-8612-37d641c3527e;
+ Mon, 24 Jul 2023 11:48:49 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.west.internal (Postfix) with ESMTP id 5FFC73200065;
+ Mon, 24 Jul 2023 05:48:45 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Mon, 24 Jul 2023 05:48:45 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 24 Jul 2023 05:48:40 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,363 +45,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7188aa35-2a06-11ee-8612-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690191766; x=1690796566;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3A7jIfn7cd5zSr8lvNclLlaXmI+gimV3tunSWePZzuo=;
-        b=FjreHnYj84PURYQMOG0tUHg+XaO1B9OA3QVLQjya6LJldeYPkey2vp9IUaPHOh4NQy
-         MT2iIAlfbtOO/34TpgSXH3aCtWK3c2vldGXFpGzPnrnr2ogTMq72dzamNad5ueGMkwAT
-         3myLua7hvHOW9CklzECY3YKzu+hBvQ+5TspzuGN//+h68Av93EIrXExoPmJVWyeXqqSb
-         NUIm2vaDT/mlWHyRPu2CdgOC/yi6ssthGQ8T9hQKV7QrjMqV4C87/VbMcccXWjuWSACX
-         DGBSlMMEORsIbZNE8gK0xdYh8PjH6sHyZ5W9yHxnk5VrD9irW4g2fomW+zZ4nnMiDJyQ
-         IeEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690191766; x=1690796566;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3A7jIfn7cd5zSr8lvNclLlaXmI+gimV3tunSWePZzuo=;
-        b=hUzEegW0N7UZcxX3bKnIqmYyfqeqtxC9eyE5IvrCx11xgtsGHuh5ybgDTQ/iJVmuG1
-         li0PBsb3sM1kBbRUuDt3lf7aAgyun2sWIYB+rG1eVpXiAjqeqMVCHgpl/xeEI+YAvtjP
-         1GLe6RwH8eFb8b0nOatFSpzfS8fnQSmbR7KeJM0QaOFbwz6rNg6/SwoERL52likxhKw+
-         gxTUKYfBKXaoRperjjY+JNynuUtrzwp7MbHZaq01b31+BuaNZJ4XGTGIq+3F3LWXLnKV
-         gROCpl2vQG35OUiuuoJmSWOtR29CqZgtp4ZUvkyQ0EdslyJPCb0NTFy9TYcYI90d4s8U
-         do/Q==
-X-Gm-Message-State: ABy/qLawgpy+0D7afEFdy73yx+kjC7nDtG7Ri81vI9WHd2WQLm9iqpsE
-	dInUNtxrSCgkKutIy19CrZ5Q2MZ0vTg=
-X-Google-Smtp-Source: APBJJlG3Jq/VevmjGpaGSwcVLTeyfhAWXO+R3+Bc6NhCeh5J20ZztJ0zkfTfmbGo4ZDw8LV/OAY01Q==
-X-Received: by 2002:a05:6402:609:b0:51e:c82:6f3b with SMTP id n9-20020a056402060900b0051e0c826f3bmr7925509edv.16.1690191765947;
-        Mon, 24 Jul 2023 02:42:45 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v4 2/2] xen/riscv: introduce identity mapping
-Date: Mon, 24 Jul 2023 12:42:41 +0300
-Message-ID: <a8ab1829ab718dda869db3df3348ded211e81967.1690191480.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1690191480.git.oleksii.kurochko@gmail.com>
-References: <cover.1690191480.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 49170100-2a07-11ee-8612-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm3; t=
+	1690192124; x=1690278524; bh=2rLKSuU16UsnDfiMjPqYzoBhsClO4zSaeBL
+	j/AD8j3o=; b=zinzpmKDgvyvA+XfsPVuDxD5BhJ/IC/cIU6erncXhQumrGFqW9N
+	wHywbRgNM3UodM3aiwhoJAOlNhuOTDJP4sx/3luYLCTipe1X/8yDs+5ABqchmOxX
+	E4MZl6RYvYUscgaC95qq9eeyYsK6OZSUa/LhoMjq3MAcybz/Oom0ig1f+VFomqi/
+	Zan+lvcDYO8nubHvrvSf8zkGOKnDOw9LPnMURzhLCrDPtpLCzw/K1JeqXEmvSewT
+	Axo3CsYtyP/72/VEOKKl9BF9Ndbu+6P8d8VkOn+R2A+g4kOJOsroWFNRrGhA1V8P
+	+wbDkglvlKOlBOwEjdXZjlj+pRyZh3Wqliw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1690192124; x=1690278524; bh=2rLKSuU16UsnD
+	fiMjPqYzoBhsClO4zSaeBLj/AD8j3o=; b=jaGpchDJCwSbaGsk7mdZSuU7tkWYq
+	CZSMzkHBV9zjhYyVFhTYVt9pZG+qJVyxJGGzleQZn79TUmaFK8Ob1lsSQI+P2rAp
+	NytI8fZxWFrxDIBWwOZK4ELBYOmbXflcNRnTerlpaZmqMXEAZH+t2kgItn+orWve
+	Lfzw/tLNqwIKleOGyviwmH/ilFYtjCGovkVSmMptnU99xhVn5Rc/CnBVCtvGQcjg
+	lsiF+aL5uW194aLTvVGMK67loSn7+PWSX1vv3tKaDSoGNlaEbBkBjgVouAfZfZfW
+	sAHOCHlF+BSj5hDCOftDFWaZ0FeR7wPskzdh7pJvarZc8kFHKszWvvb7g==
+X-ME-Sender: <xms:_Ei-ZGtCrqPojc3lqdPdePyySCxn7PfGGjQfBnf3kLRKabGOWKGzyA>
+    <xme:_Ei-ZLeFeI3uqrLKZA9ANMmn6Gh4qrayhT0dYUn-B1M2r1S1PXPIUFdp6e-Os3f8V
+    Nveq9i8zyGuGS0>
+X-ME-Received: <xmr:_Ei-ZByxh3Itp-JN7uemWWjqWHxW6kNpC05NQJ3Q0n6xwnBbsiNDSClr79veagdB>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrheekgddulecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefkffgguffvvehfhfgjtgesghdtreertddtjeenucfhrhhomhepufhimhhonhcu
+    ifgrihhsvghruceoshhimhhonhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
+    hmqeenucggtffrrghtthgvrhhnpeekueffiedtgeffleeglefhledtfefgiedtveeiffeg
+    hffgledtveehhfdugfetveenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+    grihhlfhhrohhmpehsihhmohhnsehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtgho
+    mh
+X-ME-Proxy: <xmx:_Ei-ZBP9mH-FhqcuIatPiNiv60S1gQoDsTm0hkWufo2LH6Dzh2_nVg>
+    <xmx:_Ei-ZG-XSstEohxVe-_timxON9w41F59geEX06gC58feTVBmVyaXyw>
+    <xmx:_Ei-ZJXQCvAf6-oIGO7nqoemCpXLt-U7RCFQ-NTyUrZrRInC1DmTWA>
+    <xmx:_Ei-ZNbTIj9LOGlB4nuznzzfTae9yPMrUGCut2ZH9S5OLVU-I32-tg>
+Feedback-ID: idc5945a3:Fastmail
+Message-ID: <2b4075e5-0b17-fe14-72db-12c63ab30f86@invisiblethingslab.com>
+Date: Mon, 24 Jul 2023 11:48:24 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [XEN PATCH] x86/hpet: Disable legacy replacement mode after IRQ
+ test if not needed
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>
+References: <20230718122603.2002-1-simon@invisiblethingslab.com>
+ <ZLaLLe2HFDN5oWUq@MacBook-Air-de-Roger.local>
+ <ac77ecba-6804-1d16-60dc-f184e5d31dcb@invisiblethingslab.com>
+ <58ee9410-e758-1503-e3f1-d25989fedc1e@suse.com>
+Content-Language: en-US
+From: Simon Gaiser <simon@invisiblethingslab.com>
+In-Reply-To: <58ee9410-e758-1503-e3f1-d25989fedc1e@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------BaKg4KX5cvA95YSCPwr5wObm"
 
-The way how switch to virtual address was implemented in the
-commit e66003e7be ("xen/riscv: introduce setup_initial_pages")
-isn't safe enough as:
-* enable_mmu() depends on hooking all exceptions
-  and pagefault.
-* Any exception other than pagefault, or not taking a pagefault
-  causes it to malfunction, which means you will fail to boot
-  depending on where Xen was loaded into memory.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------BaKg4KX5cvA95YSCPwr5wObm
+Content-Type: multipart/mixed; boundary="------------LVwnDABkqVYRbyUaMPboQkTp";
+ protected-headers="v1"
+From: Simon Gaiser <simon@invisiblethingslab.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>
+Message-ID: <2b4075e5-0b17-fe14-72db-12c63ab30f86@invisiblethingslab.com>
+Subject: Re: [XEN PATCH] x86/hpet: Disable legacy replacement mode after IRQ
+ test if not needed
+References: <20230718122603.2002-1-simon@invisiblethingslab.com>
+ <ZLaLLe2HFDN5oWUq@MacBook-Air-de-Roger.local>
+ <ac77ecba-6804-1d16-60dc-f184e5d31dcb@invisiblethingslab.com>
+ <58ee9410-e758-1503-e3f1-d25989fedc1e@suse.com>
+In-Reply-To: <58ee9410-e758-1503-e3f1-d25989fedc1e@suse.com>
 
-Instead of the proposed way of switching to virtual addresses was
-decided to use identity mapping of the entrire Xen and after
-switching to virtual addresses identity mapping is removed from
-page-tables in the following way: recursively visit all ptes related
-to identity mapping and remove them.
+--------------LVwnDABkqVYRbyUaMPboQkTp
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Fixes: e66003e7be ("xen/riscv: introduce setup_initial_pages")
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-Changes in V4:
- - remove definition of ARRAY_SIZE and ROUNDUP as <xen/macors.h> was introduced where these macros are located now.
- - update definition of PGTBL_INITIAL_COUNT
- - update the commit message
- - update the algo of identity mapping removing
----
-Changes in V3:
- - remove unrelated to the patch changes ( SPDX tags in config.h ).
- - update definition of PGTBL_INITIAL_COUNT taking into account identity mapping.
- - refactor remove_identity_mapping() function.
- - add explanatory comments in xen.lds.S and mm.c.
- - update commit message.
- - move save/restore of a0/a1 registers to [PATCH v2 2/3] xen/riscv: introduce
-   function for physical offset calculation.
----
-Changes in V2:
-  - update definition of PGTBL_INITIAL_COUNT and the comment above.
-  - code style fixes.
-  - 1:1 mapping for entire Xen.
-  - remove id_addrs array becase entire Xen is mapped.
-  - reverse condition for cycle inside remove_identity_mapping().
-  - fix page table walk in remove_identity_mapping().
-  - update the commit message.
-  - add Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-  - save hart_id and dtb_addr before call MMU related C functions.
-  - use phys_offset variable instead of doing calcultations to get phys offset
-    in head.S file. ( it can be easily done as entire Xen is 1:1 mapped )
-  - declare enable_muu() as __init.
----
- xen/arch/riscv/include/asm/mm.h |   3 +-
- xen/arch/riscv/mm.c             | 101 ++++++++++++++++++++------------
- xen/arch/riscv/riscv64/head.S   |  22 +++++++
- xen/arch/riscv/setup.c          |  14 +----
- xen/arch/riscv/xen.lds.S        |   4 ++
- 5 files changed, 93 insertions(+), 51 deletions(-)
+Jan Beulich:
+> On 18.07.2023 23:51, Simon Gaiser wrote:
+>> Roger Pau Monn=C3=A9:
+>>> On Tue, Jul 18, 2023 at 02:26:03PM +0200, Simon Gaiser wrote:
+>>>> As far as I understand the HPET legacy mode is not required on syste=
+ms
+>>>> with ARAT after the timer IRQ test.
+>>>
+>>> What's the relation with ARAT here?
+>>>
+>>> It would seem to me that keeping legacy replacement enabled should
+>>> only be done when opt_hpet_legacy_replacement > 0, and the currently
+>>> modified block is already in a opt_hpet_legacy_replacement < 0 gated
+>>> chunk.
+>>
+>> I was concerned that on systems without ARAT cpuidle might rely on HPE=
+T
+>> legacy mode being available. See _disable_pit_irq and lapic_timer_init=
+=2E
+>> But now that I stared at this again, I think that condition isn't
+>> actually needed. If we reach that code we know that we have no working=
 
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index d9c4205103..085eaab7fb 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -13,7 +13,8 @@ extern unsigned char cpu0_boot_stack[];
- void setup_initial_pagetables(void);
- 
- void enable_mmu(void);
--void cont_after_mmu_is_enabled(void);
-+
-+void remove_identity_mapping(void);
- 
- void calc_phys_offset(void);
- 
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index c84a8a7c3c..aae24f3a54 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -4,6 +4,7 @@
- #include <xen/compiler.h>
- #include <xen/init.h>
- #include <xen/kernel.h>
-+#include <xen/macros.h>
- #include <xen/pfn.h>
- 
- #include <asm/early_printk.h>
-@@ -35,8 +36,10 @@ unsigned long __ro_after_init phys_offset;
-  *
-  * It might be needed one more page table in case when Xen load address
-  * isn't 2 MB aligned.
-+ *
-+ * CONFIG_PAGING_LEVELS page tables are needed for identity mapping.
-  */
--#define PGTBL_INITIAL_COUNT ((CONFIG_PAGING_LEVELS - 1) + 1)
-+#define PGTBL_INITIAL_COUNT ((CONFIG_PAGING_LEVELS - 1) * 2) + 1
- 
- pte_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
- stage1_pgtbl_root[PAGETABLE_ENTRIES];
-@@ -75,10 +78,11 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
-     unsigned int index;
-     pte_t *pgtbl;
-     unsigned long page_addr;
-+    bool is_identity_mapping = map_start == pa_start;
- 
--    if ( (unsigned long)_start % XEN_PT_LEVEL_SIZE(0) )
-+    if ( !IS_ALIGNED((unsigned long)_start, KB(4)) )
-     {
--        early_printk("(XEN) Xen should be loaded at 4k boundary\n");
-+        early_printk("(XEN) Xen should be loaded at 4KB boundary\n");
-         die();
-     }
- 
-@@ -108,16 +112,18 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
-             {
-                 unsigned long paddr = (page_addr - map_start) + pa_start;
-                 unsigned int permissions = PTE_LEAF_DEFAULT;
-+                unsigned long addr = is_identity_mapping
-+                                     ? page_addr : LINK_TO_LOAD(page_addr);
-                 pte_t pte_to_be_written;
- 
-                 index = pt_index(0, page_addr);
- 
--                if ( is_kernel_text(LINK_TO_LOAD(page_addr)) ||
--                     is_kernel_inittext(LINK_TO_LOAD(page_addr)) )
--                    permissions =
--                        PTE_EXECUTABLE | PTE_READABLE | PTE_VALID;
-+                if ( is_kernel_text(addr) ||
-+                     is_kernel_inittext(addr) )
-+                        permissions =
-+                            PTE_EXECUTABLE | PTE_READABLE | PTE_VALID;
- 
--                if ( is_kernel_rodata(LINK_TO_LOAD(page_addr)) )
-+                if ( is_kernel_rodata(addr) )
-                     permissions = PTE_READABLE | PTE_VALID;
- 
-                 pte_to_be_written = paddr_to_pte(paddr, permissions);
-@@ -211,6 +217,10 @@ void __init setup_initial_pagetables(void)
-     unsigned long linker_start  = LOAD_TO_LINK(load_start);
-     unsigned long linker_end    = LOAD_TO_LINK(load_end);
- 
-+    /*
-+     * If the overlapping check will be removed then remove_identity_mapping()
-+     * logic should be updated.
-+     */
-     if ( (linker_start != load_start) &&
-          (linker_start <= load_end) && (load_start <= linker_end) )
-     {
-@@ -232,22 +242,18 @@ void __init setup_initial_pagetables(void)
-                           linker_start,
-                           linker_end,
-                           load_start);
-+
-+    if ( linker_start == load_start )
-+        return;
-+
-+    setup_initial_mapping(&mmu_desc,
-+                          load_start,
-+                          load_end,
-+                          load_start);
- }
- 
--void __init noreturn noinline enable_mmu()
-+void __init enable_mmu(void)
- {
--    /*
--     * Calculate a linker time address of the mmu_is_enabled
--     * label and update CSR_STVEC with it.
--     * MMU is configured in a way where linker addresses are mapped
--     * on load addresses so in a case when linker addresses are not equal
--     * to load addresses, after MMU is enabled, it will cause
--     * an exception and jump to linker time addresses.
--     * Otherwise if load addresses are equal to linker addresses the code
--     * after mmu_is_enabled label will be executed without exception.
--     */
--    csr_write(CSR_STVEC, LOAD_TO_LINK((unsigned long)&&mmu_is_enabled));
--
-     /* Ensure page table writes precede loading the SATP */
-     sfence_vma();
- 
-@@ -255,25 +261,44 @@ void __init noreturn noinline enable_mmu()
-     csr_write(CSR_SATP,
-               PFN_DOWN((unsigned long)stage1_pgtbl_root) |
-               RV_STAGE1_MODE << SATP_MODE_SHIFT);
-+}
- 
--    asm volatile ( ".p2align 2" );
-- mmu_is_enabled:
--    /*
--     * Stack should be re-inited as:
--     * 1. Right now an address of the stack is relative to load time
--     *    addresses what will cause an issue in case of load start address
--     *    isn't equal to linker start address.
--     * 2. Addresses in stack are all load time relative which can be an
--     *    issue in case when load start address isn't equal to linker
--     *    start address.
--     *
--     * We can't return to the caller because the stack was reseted
--     * and it may have stash some variable on the stack.
--     * Jump to a brand new function as the stack was reseted
--     */
-+void __init remove_identity_mapping(void)
-+{
-+    static pte_t *pgtbl = stage1_pgtbl_root;
-+    static unsigned long load_start = XEN_VIRT_START;
-+    static unsigned int pt_level = CONFIG_PAGING_LEVELS - 1;
-+
-+    unsigned long load_end = LINK_TO_LOAD(_end);
-+    unsigned long xen_size;
-+    unsigned long pt_level_size = XEN_PT_LEVEL_SIZE(pt_level);
-+    unsigned long pte_nums;
-+
-+    unsigned long virt_indx = pt_index(pt_level, XEN_VIRT_START);
-+    unsigned long indx;
-+
-+    if ( load_start == XEN_VIRT_START )
-+        load_start = LINK_TO_LOAD(_start);
-+
-+    xen_size = load_end - load_start;
-+    pte_nums = ROUNDUP(xen_size, pt_level_size) / pt_level_size;
-+
-+    while ( pte_nums-- )
-+    {
-+        indx = pt_index(pt_level, load_start);
- 
--    switch_stack_and_jump((unsigned long)cpu0_boot_stack + STACK_SIZE,
--                          cont_after_mmu_is_enabled);
-+        if ( virt_indx != indx )
-+        {
-+            pgtbl[indx].pte = 0;
-+            load_start += XEN_PT_LEVEL_SIZE(pt_level);
-+        }
-+        else
-+        {
-+            pgtbl =  (pte_t *)LOAD_TO_LINK(pte_to_paddr(pgtbl[indx]));
-+            pt_level--;
-+            remove_identity_mapping();
-+        }
-+    }
- }
- 
- /*
-diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
-index a28714e0ef..d74412351e 100644
---- a/xen/arch/riscv/riscv64/head.S
-+++ b/xen/arch/riscv/riscv64/head.S
-@@ -38,6 +38,28 @@ ENTRY(start)
- 
-         jal     calc_phys_offset
- 
-+        jal     setup_initial_pagetables
-+
-+        jal     enable_mmu
-+
-+        la      t1, phys_offset
-+        REG_L   t1, (t1)
-+
-+        /* Calculate proper VA after jump from 1:1 mapping */
-+        la      t0, .L_primary_switched
-+        sub     t0, t0, t1
-+
-+        /* Jump from 1:1 mapping world */
-+        jr      t0
-+
-+.L_primary_switched:
-+        /*
-+         * cpu0_boot_stack address is 1:1 mapping related so it should be
-+         * recalculated after jump from 1:1 mapping world as 1:1 mapping
-+         * will be removed soon in start_xen().
-+         */
-+        jal     reset_stack
-+
-         /* restore hart_id ( bootcpu_id ) and dtb address */
-         mv      a0, s0
-         mv      a1, s1
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index dde8fb898b..6593f601c1 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -13,20 +13,10 @@ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
- {
--    early_printk("Hello from C env\n");
--
--    setup_initial_pagetables();
--
--    enable_mmu();
--
--    for ( ;; )
--        asm volatile ("wfi");
-+    remove_identity_mapping();
- 
--    unreachable();
--}
-+    early_printk("Hello from C env\n");
- 
--void __init noreturn cont_after_mmu_is_enabled(void)
--{
-     early_printk("All set up\n");
- 
-     for ( ;; )
-diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
-index 9064852173..31ccebadcb 100644
---- a/xen/arch/riscv/xen.lds.S
-+++ b/xen/arch/riscv/xen.lds.S
-@@ -173,4 +173,8 @@ ASSERT(IS_ALIGNED(__bss_end,        POINTER_ALIGN), "__bss_end is misaligned")
- ASSERT(!SIZEOF(.got),      ".got non-empty")
- ASSERT(!SIZEOF(.got.plt),  ".got.plt non-empty")
- 
-+/*
-+ * Changing the size of Xen binary can require an update of
-+ * PGTBL_INITIAL_COUNT.
-+ */
- ASSERT(_end - _start <= MB(2), "Xen too large for early-boot assumptions")
--- 
-2.41.0
+>> PIT, but HPET is working. So _disable_pit_irq which is run after
+>> check_timer (__start_xen first calls check_timer via smp_prepare_cpus
+>> and only later disable_pit_irq via do_initcalls) will setup HPET
+>> broadcast, which should succeed since HPET worked previously.
+>>
+>> So I guess we can just drop the condition (please double check, that
+>> code is quite tangled and I'm not familiar with it).
+>=20
+> What you want to respect instead though is opt_hpet_legacy_replacement.=
 
+
+Can you please explain what behavior you expect? As Roger pointed out
+this code only runs with opt_hpet_legacy_replacement < 0 so the user
+didn't make an explicit choice. In that case enabling the legacy mode
+for the timer IRQ test and then disabling it to allow lower power modes
+seems reasonable to me.
+
+Simon
+
+--------------LVwnDABkqVYRbyUaMPboQkTp--
+
+--------------BaKg4KX5cvA95YSCPwr5wObm
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAmS+SOoACgkQkO9xfO/x
+ly9JPw//WumzM2bn//BEMPfXjj2ucaftDIJnuu3r44ih3EPtDdtUSSrdojLUqce3
+vRBETsGbdMowB/5rTfr34xXoyNA/gcvy0SormM7+soou74ZrC7aq0VMYoz9F9R5U
+oLPS3l2I3gxCOPr/wO1j5L3Exq7+XBTL/bIn5xl13BN97a6cqsk/AcB9gYcuUag4
+MzlUa3FNdbJtcxaMbk8tSxsWL5snuFmtIjmUcdn1TDPNPS9RxtsjefsVVaXbexrV
+5Ejt8wGlD6X+9rgZMsrc5fjA1SbqmQU4E/I8PipH9d+oVzqzfbSQNkgk4QS2C8WW
+7jZxMLs34hN6ZiF3pok6Od+VfcYHhqw6ihlLGGpp6KGjI/UsjNGjDdBkWE+zPg8r
+GS4p28KlhD/RBfoJUKgun9WdQq/z7hXo3m8czwONIMhLPEpKxDfrr9yJYnAwe6P2
+JYmje077UgNtXyg4d/xzzlqCMFaxHthkeu0nyWJfEz1ARXldHEs7NVObbEustPV5
+o7YgsHzE1LobqK8JWNeKDqDV8SUrNgvUIKn9V+CKU8kE2VBbzPSt6cSmkxDxQbOR
+ubTOxn4CgQE7Q2opwjMTLe/qF16YQdTOqlL+EIZ1DiWI4x+uy/Qyo9Y7rTjS+Z22
+EXZXkzh/273tMzRnUnyGsb8sVP1EPIaBcOZNnpa9Uda0PzHYBn4=
+=gRqi
+-----END PGP SIGNATURE-----
+
+--------------BaKg4KX5cvA95YSCPwr5wObm--
 
