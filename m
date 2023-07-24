@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B54ECC001B0
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 11:06:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.568749.888662 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11280C0015E
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jul 2023 11:07:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.568752.888673 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNtOa-0006NB-ET; Mon, 24 Jul 2023 11:06:32 +0000
+	id 1qNtPT-0006xN-Ri; Mon, 24 Jul 2023 11:07:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 568749.888662; Mon, 24 Jul 2023 11:06:32 +0000
+Received: by outflank-mailman (output) from mailman id 568752.888673; Mon, 24 Jul 2023 11:07:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qNtOa-0006N4-Bg; Mon, 24 Jul 2023 11:06:32 +0000
-Received: by outflank-mailman (input) for mailman id 568749;
- Mon, 24 Jul 2023 11:06:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qNtPT-0006xE-Nt; Mon, 24 Jul 2023 11:07:27 +0000
+Received: by outflank-mailman (input) for mailman id 568752;
+ Mon, 24 Jul 2023 11:07:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vJ35=DK=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qNtOZ-0006Mx-A9
- for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 11:06:31 +0000
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on2060c.outbound.protection.outlook.com
- [2a01:111:f400:fe1a::60c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 239b4dd2-2a12-11ee-8612-37d641c3527e;
- Mon, 24 Jul 2023 13:06:29 +0200 (CEST)
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by DU2PR04MB8584.eurprd04.prod.outlook.com (2603:10a6:10:2db::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6609.32; Mon, 24 Jul
- 2023 11:06:27 +0000
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::e5cf:5743:ab60:b14e]) by DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::e5cf:5743:ab60:b14e%5]) with mapi id 15.20.6609.031; Mon, 24 Jul 2023
- 11:06:27 +0000
+ (envelope-from <SRS0=jVkC=DK=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qNtMZ-0000KR-0e
+ for xen-devel@lists.xenproject.org; Mon, 24 Jul 2023 11:04:27 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id da691f06-2a11-11ee-b23a-6b7b168915f2;
+ Mon, 24 Jul 2023 13:04:26 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2673A2298F;
+ Mon, 24 Jul 2023 11:04:26 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EC43613476;
+ Mon, 24 Jul 2023 11:04:25 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id X8JKOLlavmQZYgAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 24 Jul 2023 11:04:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,160 +53,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 239b4dd2-2a12-11ee-8612-37d641c3527e
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NTlimjO3+UW7EPgu0O42i7iKiII7dMOWoe4aO/WselrTtTSLAfapWN2GXL+AKcvGeu3B7VCrnq7aQFDHEZ5ycZc6a/Xdd+fXw1lKHTuYId7BWMIqEzTee0m/e+YOBvaPueVjy9VOkQnrWR3Z7+L0UF7lc/nBLKCYK/Lcf9wi+nhFg3akFx3Fo/uRYs8lgAhfglj6/Z26rRAyz9AwGbMa0X4y9FYi/5snNhLOLGpv5rLFs37/MWlJwQoQ8zWJFPrCj0mIo6051VuberYOUHqob/0zv4oUYKboSWw+bufloRJZ+d2T9Li49dZLqsz19sjZgg+1D7rI46IsZobaSMxvOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ecwrqCzGMywutxclDewn5ns90+IWxqevIEVLjZHvqAo=;
- b=oTzdBSDi/ndPs+3ANrjGRiQmtjbRjlbqwzM/M9EjpHNOohudiUpQDZO1oUdZeXo4n4iKuRGj+VRSKNx3bj5InivVmSAxDkMsY2rcf7M+l9YjwwGdVsRmvo/qUE7zW2LL4eLiDAfqcPQU48//D6ikoSPKPoysebdq7QyprXWGzFQP8TYQJHwTwhqkUYNhSYTjvrqJd0EL6TbCODmTjIt6zT8xqp5NtfIwXgbsUHhcx099gaDS6eE/WMPMrE/fhfhJxvRVG8XMv8u/uHl6HV9jUq4RZ3PrYugEKjsAY3mDUcpzsKBcBQcgJOy4MSsqj+qfGT4CXk0tQECA5tVh6TrjCg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ecwrqCzGMywutxclDewn5ns90+IWxqevIEVLjZHvqAo=;
- b=b8bzIQUPCgUuoKGs04oAWCKt3IusTL0Sgk2pgUSyzOCzvtCUl7JIJUxAzG1F0FCurEnMGXahOS3LIYP9rGI0Zps8LgaDL95WhDe1xa3KYaJ3vXxJfY8pkGpj8ydQe/i95WHpU7Xj3XI700LrbMWnPpKYgB3iRz0OOrCRJW8Zr5oQpV9ALB2ZE537vyXGbSPUFSqYRKDnW+2Q63bbh2Mv8hqcgPt/MRj+/tCiv7EbIQUOW3Zg86RuEN20TFHdmIJlB7IWDScCCnXUssJuH+R7Wma4/utQbJvT0yJI7VtTZBF8b+Wsqo4sHPXlNbbVJIw02a0iz4ntE2oNJStCbYCXWw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <98c801fd-f352-cad1-5e44-d6d8ca433422@suse.com>
-Date: Mon, 24 Jul 2023 13:06:27 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v8 09/13] vpci/header: emulate PCI_COMMAND register for
- guests
-Content-Language: en-US
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20230720003205.1828537-1-volodymyr_babchuk@epam.com>
- <20230720003205.1828537-10-volodymyr_babchuk@epam.com>
- <ZLqI65gmNj1XDBm4@MacBook-Air-de-Roger.local>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <ZLqI65gmNj1XDBm4@MacBook-Air-de-Roger.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0099.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a9::17) To DU2PR04MB8790.eurprd04.prod.outlook.com
- (2603:10a6:10:2e1::23)
+X-Inumbo-ID: da691f06-2a11-11ee-b23a-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1690196666; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HbG6vFfvfpnBEfnaaQaQ12ffiTPqhKHDZgquwOgUpOo=;
+	b=lZQCbaqclyrLeW7Qk45h0NM5eK5D7aWNYWZkIEjznaHuVvQhWzLS/6hNsyXfCkYebr4QcY
+	/af6jMVjIgKjxv3/cmUE8B/NTSXBHaXGbmWeB6qDLDr+p1Q37j3B2msfrrWU5l0VXzBiSl
+	fRmhVGMr4Z0lqkE6w4mkKCpYP7QaCAU=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3 17/25] tools/xenstore: rework struct xs_tdb_record_hdr
+Date: Mon, 24 Jul 2023 13:02:39 +0200
+Message-Id: <20230724110247.10520-18-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230724110247.10520-1-jgross@suse.com>
+References: <20230724110247.10520-1-jgross@suse.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|DU2PR04MB8584:EE_
-X-MS-Office365-Filtering-Correlation-Id: fdda0065-2c09-4782-d494-08db8c3606b0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	EP3fWYe5RYCM4wbtnbw5bx/2F05Pve3DAqoX31ewpBYKG6kM9YfBvETUWt+uAcqupRvUar2g6KaFi5EoVw2bXVJtY0oTYM9mIfst4vug6Qx+0WMTvnyvZYQUKGauRkaoW4k/CrL6KbeVHHkiqa0f8XPMAoMSZS7QRsSfN9QVinbXbgHq/MgsTSEWx3m7clpzdFzbhk3yT2TO37FkusXm/OtC3GmnGS/NAY3hrEpyPXaen/a8reqgBhcvowh4kaYy7eQLipZwneORo6AFaGahbO6SorfAhj0/BjP5W1hBOge+SXiNlhYZja8hNJyR9rK/LfqsoRL4esuB9BjzmS9CO4Lis30Rc5CN/Oeamyt2aaIn8vTlVDVyOXt6oS0vxGz01RY4Fl9dJgpxE0/Lqnk+K+lgUDHGQAeKnYMDRTyPJtlUkMbmx7C+uAr3naZ/Rk2xdyj7zK4xwPVED5znq2d5nM/pJKosZKLBLtoJw3JXov+7JWORcEfYNI63Lfffl50zk3MPhqIGprPO8ZgwycTwrPXZ7aP/6GwiMr1ezjNlj1mI5rF4x9obo/0W+AHXBqUBwBFK1vL0dz3/u8m1TbcfpI9Z1gZlehM1TuAm7mGGQcNfLTrC6+2BdH++RWxsmeUWF1PRS6mANXkWwdBGyc2+jg==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(346002)(39850400004)(366004)(396003)(136003)(451199021)(6512007)(6486002)(478600001)(54906003)(186003)(53546011)(2616005)(6506007)(26005)(2906002)(6916009)(316002)(41300700001)(66556008)(66476007)(4326008)(8676002)(5660300002)(8936002)(66946007)(38100700002)(86362001)(31696002)(83380400001)(36756003)(31686004)(66899021)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SWJzd1N3OTBEOURZUU1wVFlURlJ6SlJpRGhrdXVzQTQwWXRUbWR4YmJ0L0FI?=
- =?utf-8?B?R2dYZUVPYWtrWlNFOUZRcGROZXhFZUNXeU9qZ0tJTmtFYjBDVjJBaDJCZmU0?=
- =?utf-8?B?YW01RWxHaWNHNTVkTndyNTM4b0JOQjRQaWhvdURTT25DMTU0ZWw5TVZTWGFT?=
- =?utf-8?B?b205Y2RXRVBDWTc0ZHBUcTJETm1GYXR2bTZoOWpLT0dvS3dRM2NzdWVoVXJX?=
- =?utf-8?B?TG5iQjZWQUxCeHBzbWkvekcwMEkvY3l5RTczNW1uelVpb1dBT1pWUEwrWThF?=
- =?utf-8?B?c3lrRFBzQkJYSW0vUzNnZmxuc0tGOE9aeFpIUk5kUEQzZmFTR21PQjBTWkEw?=
- =?utf-8?B?eVdLREs5UmRtenZqK2ZDN1NaaGl6Q1pzN0JFbDFoOVhVSWVGYnYzdEJDWWhZ?=
- =?utf-8?B?Zjl4K3F0TzVaQjF1ZlJlMmNWOXJOSGM4SkZRQ2hFMFMwNnZ3TnN1Smh6NkZX?=
- =?utf-8?B?T05uVlN2SlFqbGtNdVlIYlUrc0pETUR4NEkzbDF6YzFSVWZWdHZNK1YrVi9z?=
- =?utf-8?B?YlhJOTNOWk5wL2ZKK0hqU2lhN1dwbHk5YkZ4cmFRYUN6a2JldWVDRm1RWG0y?=
- =?utf-8?B?VmhxbzBlRDNyS1laVGFtUFFkdHp4Q1p5THpKclZXL2Fkb0hzQ21hTU1jVVpM?=
- =?utf-8?B?UmNpWGN0dklqSk5kYWRMRWxYZlNoa0ZEa2JIUXZHdmREMkVVQzVSWDVvWWVP?=
- =?utf-8?B?WTlRck1MUkwwdWF5bHBBUDEveTg2TjhHbWdwMk9jbkpObThlenRyR2IxQ3Qy?=
- =?utf-8?B?bkovdnI4clZNVGZ5R0xtWlJSZmFoSS9rNzdkTFdhS1o2Slh1WlZjSEpPaWVU?=
- =?utf-8?B?WjdSYkxCRk5nRjdIUXFKeWxHdjIzZUNUK2h1WmJsUDdYWE02NkpmZFBPVVFP?=
- =?utf-8?B?M1Z0T2JYY1lEWFVtMnpvTVRhR3N0T2lHNlZCcmtvM3J0REFuSHpLNk1wQmtZ?=
- =?utf-8?B?N3ZxWDhxU1NncGN3a3BWdzZtRlN5RmVpYzFST08yZWJobXFWOHhSdHN2K3lz?=
- =?utf-8?B?eURDVEQ5eFFZUEFPbWFrRUp2eC8zbFRua3pHbzQ5djlidi96TDZIL2d6blB5?=
- =?utf-8?B?L09aVHlIY3N1ZlVmTWR3K0RkWHduSDFRTXNhWDkzN0JFc1JEVDYwWEVrVk1V?=
- =?utf-8?B?SjZmTjVNZUdlZE4ySk9wYTdsenNCQzA4dm9wZk82c1lXdmx1N0JNV25YSzVB?=
- =?utf-8?B?a2tYT3ZNVWhJemM2S0QycGprSDVLTUYyOHhkdndtTHVTTi9xTUlEVVVHakRx?=
- =?utf-8?B?OS9TUnJmaTVPSmE2NVNHVm9DSS8zdFpMN0ZnaVNDSS9YeWN2d25vZ1RvWC9S?=
- =?utf-8?B?QlJ4MGxOY0lSRTdYU2RuWHpxd1ZYdGNRcE9PbUVBWkdPQzRJTUcxYmxDQ09w?=
- =?utf-8?B?aGYxMDJjaVhiNHJFL2lTcHQ1a3dyQmRRVG5aNnA2c1ZadDNDbk4zenNqeG0y?=
- =?utf-8?B?UlhQSUpVWUZYczBxU09rSjRqSGpObHRCMHM0eldkRnNZLzBMUmpnaGUrUjB6?=
- =?utf-8?B?QXBTMWhiL0YxVHdaYXVoRnJ5UnJHOUozaS9GS01MZUpFZkNWcnEwclF2N0Ix?=
- =?utf-8?B?bXNDTzhRM2tTTFk3TlN5MXNhTWwwV0U2b3ZFQ0xma2tQbXE3ZnFiSmg4c0ZY?=
- =?utf-8?B?dGliYkd6ZUpPRHpsWjJ0WWNMUVc3Q3crVDFTOFVQUFp0aUYwWkdCQU8xeWN1?=
- =?utf-8?B?b1cyK2l5VXdsSjdZa1M5UmVLbzlFVmNacmRqODg0WnFITnlJaURvT2RqaFd1?=
- =?utf-8?B?MGtBSVFQS2VnUVltZndlNWFZNUZhVWtiYXN0MG1uR0FFU3hqRk95ZWlnOVdK?=
- =?utf-8?B?T21RTDdkK0Fva1JyM3V0Z2dVeENwME5hZ3hlaGRUSkF6azFITkpsL1lGSjVX?=
- =?utf-8?B?OTBXY2tEZ3VraFBSQzhrWktwZkVXa0ZFeEZaN1ZYbFdYOTlGTkRGVmZnT2pF?=
- =?utf-8?B?M1pnQmR6aWNzWFlRSWNRVnNycW55Q0Z1d25meDdEQ1U4Q1BkaHkydU0weUZR?=
- =?utf-8?B?Y3ovK2xqL0Exci8za3NVUXVsOUNEa3FiYTNUY3hKaHRPNVFoNmxDOE4vMmdp?=
- =?utf-8?B?a0JlZ1FFRmE1elpLeXRZemw5cVQ2TmdWbmdNbm92TzBVckFSM3pENTZjbmZk?=
- =?utf-8?Q?8UHpLmub4w4EA26PdDo7Lpl3f?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fdda0065-2c09-4782-d494-08db8c3606b0
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2023 11:06:27.2688
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EiSIShzsOPWsxeNGqZByy/z7rWqKUMWQT7gIjLUq9ccN8GzM7B7LwuI28jBVEtEnPQ2HNF/XCXxpVGQeS/GHAg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8584
+Content-Transfer-Encoding: 8bit
 
-On 21.07.2023 15:32, Roger Pau Monné wrote:
-> On Thu, Jul 20, 2023 at 12:32:33AM +0000, Volodymyr Babchuk wrote:
->> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
->>
->> Xen and/or Dom0 may have put values in PCI_COMMAND which they expect
->> to remain unaltered. PCI_COMMAND_SERR bit is a good example: while the
->> guest's view of this will want to be zero initially, the host having set
->> it to 1 may not easily be overwritten with 0, or else we'd effectively
->> imply giving the guest control of the bit. Thus, PCI_COMMAND register needs
->> proper emulation in order to honor host's settings.
-> 
-> You speak about SERR here, yet in the code all bits are togglable by
-> domUs.
+Struct xs_tdb_record_hdr is used for nodes stored in the data base.
+When working on a node, struct node is being used, which is including
+the same information as struct xs_tdb_record_hdr, but in a different
+format. Rework struct xs_tdb_record_hdr in order to prepare including
+it in struct node.
 
-I think this paragraph is meant to describe only what would need doing,
-as per what's said ...
+Do the following modifications:
 
->> There are examples of emulators [1], [2] which already deal with PCI_COMMAND
->> register emulation and it seems that at most they care about is the only INTx
->                                                                       ^ stray?
->> bit (besides IO/memory enable and bus master which are write through).
->> It could be because in order to properly emulate the PCI_COMMAND register
->> we need to know about the whole PCI topology, e.g. if any setting in device's
->> command register is aligned with the upstream port etc.
->>
->> This makes me think that because of this complexity others just ignore that.
->> Neither I think this can easily be done in Xen case.
->>
->> According to "PCI LOCAL BUS SPECIFICATION, REV. 3.0", section "6.2.2
->> Device Control" the reset state of the command register is typically 0,
->> so when assigning a PCI device use 0 as the initial state for the guest's view
->> of the command register.
->>
->> For now our emulation only makes sure INTx is set according to the host
->> requirements, i.e. depending on MSI/MSI-X enabled state.
->>
->> This implementation and the decision to only emulate INTx bit for now
->> is based on the previous discussion at [3].
+- move its definition to xenstored_core.h, as the reason to put it into
+  utils.h are no longer existing
 
-... through to down here. Yet I agree the title suggests otherwise, and
-hence that initial paragraph is further misleading.
+- rename it to struct node_hdr, as the "tdb" in its name has only
+  historical reasons
 
->> --- a/xen/drivers/vpci/header.c
->> +++ b/xen/drivers/vpci/header.c
->> @@ -486,11 +486,27 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
->>      return 0;
->>  }
->>  
->> +/* TODO: Add proper emulation for all bits of the command register. */
->>  static void cf_check cmd_write(
->>      const struct pci_dev *pdev, unsigned int reg, uint32_t cmd, void *data)
->>  {
+- replace the empty permission array at the end with a comment about
+  the layout of data in the data base (concatenation of header,
+  permissions, node contents, and children list)
 
-Note also the TODO being added here. Which course will need resolving
-before any of this can become supported.
+- use narrower types for num_perms and datalen, as those are naturally
+  limited to XENSTORE_PAYLOAD_MAX (childlen is different here, as it is
+  in theory basically unlimited)
 
-Jan
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch
+---
+ tools/xenstore/utils.h                 |  9 -------
+ tools/xenstore/xenstored_core.c        | 35 +++++++++++++++-----------
+ tools/xenstore/xenstored_core.h        | 20 ++++++++++++++-
+ tools/xenstore/xenstored_transaction.c |  6 ++---
+ 4 files changed, 42 insertions(+), 28 deletions(-)
+
+diff --git a/tools/xenstore/utils.h b/tools/xenstore/utils.h
+index 028ecb9d7a..405d662ea2 100644
+--- a/tools/xenstore/utils.h
++++ b/tools/xenstore/utils.h
+@@ -9,15 +9,6 @@
+ 
+ #include "xenstore_lib.h"
+ 
+-/* Header of the node record in tdb. */
+-struct xs_tdb_record_hdr {
+-	uint64_t generation;
+-	uint32_t num_perms;
+-	uint32_t datalen;
+-	uint32_t childlen;
+-	struct xs_permissions perms[0];
+-};
+-
+ /* Is A == B ? */
+ #define streq(a,b) (strcmp((a),(b)) == 0)
+ 
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 1f5f118f1c..86b7c9bf36 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -555,9 +555,9 @@ static void initialize_fds(int *p_sock_pollfd_idx, int *ptimeout)
+ 	}
+ }
+ 
+-const struct xs_tdb_record_hdr *db_fetch(const char *db_name, size_t *size)
++const struct node_hdr *db_fetch(const char *db_name, size_t *size)
+ {
+-	struct xs_tdb_record_hdr *hdr;
++	struct node_hdr *hdr;
+ 
+ 	hdr = hashtable_search(nodes, db_name);
+ 	if (!hdr) {
+@@ -565,7 +565,7 @@ const struct xs_tdb_record_hdr *db_fetch(const char *db_name, size_t *size)
+ 		return NULL;
+ 	}
+ 
+-	*size = sizeof(*hdr) + hdr->num_perms * sizeof(hdr->perms[0]) +
++	*size = sizeof(*hdr) + hdr->num_perms * sizeof(struct xs_permissions) +
+ 		hdr->datalen + hdr->childlen;
+ 
+ 	trace_tdb("read %s size %zu\n", db_name, *size + strlen(db_name));
+@@ -573,10 +573,15 @@ const struct xs_tdb_record_hdr *db_fetch(const char *db_name, size_t *size)
+ 	return hdr;
+ }
+ 
++static struct xs_permissions *perms_from_node_hdr(const struct node_hdr *hdr)
++{
++	return (struct xs_permissions *)(hdr + 1);
++}
++
+ static void get_acc_data(const char *name, struct node_account_data *acc)
+ {
+ 	size_t size;
+-	const struct xs_tdb_record_hdr *hdr;
++	const struct node_hdr *hdr;
+ 
+ 	if (acc->memory < 0) {
+ 		hdr = db_fetch(name, &size);
+@@ -585,7 +590,7 @@ static void get_acc_data(const char *name, struct node_account_data *acc)
+ 			acc->memory = 0;
+ 		} else {
+ 			acc->memory = size;
+-			acc->domid = hdr->perms[0].id;
++			acc->domid = perms_from_node_hdr(hdr)->id;
+ 		}
+ 	}
+ }
+@@ -606,7 +611,7 @@ int db_write(struct connection *conn, const char *db_name, const void *data,
+ 	     size_t size, struct node_account_data *acc,
+ 	     enum write_node_mode mode, bool no_quota_check)
+ {
+-	const struct xs_tdb_record_hdr *hdr = data;
++	const struct node_hdr *hdr = data;
+ 	struct node_account_data old_acc = {};
+ 	unsigned int old_domid, new_domid;
+ 	size_t name_len = strlen(db_name);
+@@ -620,7 +625,7 @@ int db_write(struct connection *conn, const char *db_name, const void *data,
+ 
+ 	get_acc_data(db_name, &old_acc);
+ 	old_domid = get_acc_domid(conn, db_name, old_acc.domid);
+-	new_domid = get_acc_domid(conn, db_name, hdr->perms[0].id);
++	new_domid = get_acc_domid(conn, db_name, perms_from_node_hdr(hdr)->id);
+ 
+ 	/*
+ 	 * Don't check for ENOENT, as we want to be able to switch orphaned
+@@ -661,7 +666,7 @@ int db_write(struct connection *conn, const char *db_name, const void *data,
+ 
+ 	if (acc) {
+ 		/* Don't use new_domid, as it might be a transaction node. */
+-		acc->domid = hdr->perms[0].id;
++		acc->domid = perms_from_node_hdr(hdr)->id;
+ 		acc->memory = size;
+ 	}
+ 
+@@ -699,7 +704,7 @@ struct node *read_node(struct connection *conn, const void *ctx,
+ 		       const char *name)
+ {
+ 	size_t size;
+-	const struct xs_tdb_record_hdr *hdr;
++	const struct node_hdr *hdr;
+ 	struct node *node;
+ 	const char *db_name;
+ 	int err;
+@@ -733,12 +738,12 @@ struct node *read_node(struct connection *conn, const void *ctx,
+ 	node->perms.num = hdr->num_perms;
+ 	node->datalen = hdr->datalen;
+ 	node->childlen = hdr->childlen;
+-	node->acc.domid = hdr->perms[0].id;
++	node->acc.domid = perms_from_node_hdr(hdr)->id;
+ 	node->acc.memory = size;
+ 
+ 	/* Copy node data to new memory area, starting with permissions. */
+ 	size -= sizeof(*hdr);
+-	node->perms.p = talloc_memdup(node, hdr->perms, size);
++	node->perms.p = talloc_memdup(node, perms_from_node_hdr(hdr), size);
+ 	if (node->perms.p == NULL) {
+ 		errno = ENOMEM;
+ 		goto error;
+@@ -785,7 +790,7 @@ int write_node_raw(struct connection *conn, const char *db_name,
+ 	void *data;
+ 	size_t size;
+ 	void *p;
+-	struct xs_tdb_record_hdr *hdr;
++	struct node_hdr *hdr;
+ 
+ 	if (domain_adjust_node_perms(node))
+ 		return errno;
+@@ -812,9 +817,9 @@ int write_node_raw(struct connection *conn, const char *db_name,
+ 	hdr->datalen = node->datalen;
+ 	hdr->childlen = node->childlen;
+ 
+-	memcpy(hdr->perms, node->perms.p,
+-	       node->perms.num * sizeof(*node->perms.p));
+-	p = hdr->perms + node->perms.num;
++	p = perms_from_node_hdr(hdr);
++	memcpy(p, node->perms.p, node->perms.num * sizeof(*node->perms.p));
++	p += node->perms.num * sizeof(*node->perms.p);
+ 	memcpy(p, node->data, node->datalen);
+ 	p += node->datalen;
+ 	memcpy(p, node->children, node->childlen);
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 6d1578ce97..c965709090 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -168,6 +168,24 @@ struct connection
+ };
+ extern struct list_head connections;
+ 
++/*
++ * Header of the node record in the data base.
++ * In the data base the memory of the node is a single memory chunk with the
++ * following format:
++ * struct {
++ *     node_hdr hdr;
++ *     struct xs_permissions perms[hdr.num_perms];
++ *     char data[hdr.datalen];
++ *     char children[hdr.childlen];
++ * };
++ */
++struct node_hdr {
++	uint64_t generation;
++	uint16_t num_perms;
++	uint16_t datalen;
++	uint32_t childlen;
++};
++
+ struct node_perms {
+ 	unsigned int num;
+ 	struct xs_permissions *p;
+@@ -362,7 +380,7 @@ extern xengnttab_handle **xgt_handle;
+ int remember_string(struct hashtable *hash, const char *str);
+ 
+ /* Data base access functions. */
+-const struct xs_tdb_record_hdr *db_fetch(const char *db_name, size_t *size);
++const struct node_hdr *db_fetch(const char *db_name, size_t *size);
+ int db_write(struct connection *conn, const char *db_name, const void *data,
+ 	     size_t size, struct node_account_data *acc,
+ 	     enum write_node_mode mode, bool no_quota_check);
+diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
+index a90283dcc5..9ca73b9874 100644
+--- a/tools/xenstore/xenstored_transaction.c
++++ b/tools/xenstore/xenstored_transaction.c
+@@ -357,7 +357,7 @@ static int finalize_transaction(struct connection *conn,
+ {
+ 	struct accessed_node *i, *n;
+ 	size_t size;
+-	const struct xs_tdb_record_hdr *hdr;
++	const struct node_hdr *hdr;
+ 	uint64_t gen;
+ 
+ 	list_for_each_entry_safe(i, n, &trans->accessed, list) {
+@@ -394,12 +394,12 @@ static int finalize_transaction(struct connection *conn,
+ 				 * generation count.
+ 				 */
+ 				enum write_node_mode mode;
+-				struct xs_tdb_record_hdr *own;
++				struct node_hdr *own;
+ 
+ 				talloc_increase_ref_count(hdr);
+ 				db_delete(conn, i->trans_name, NULL);
+ 
+-				own = (struct xs_tdb_record_hdr *)hdr;
++				own = (struct node_hdr *)hdr;
+ 				own->generation = ++generation;
+ 				mode = (i->generation == NO_GENERATION)
+ 				       ? NODE_CREATE : NODE_MODIFY;
+-- 
+2.35.3
+
 
