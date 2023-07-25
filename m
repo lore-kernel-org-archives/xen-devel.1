@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FBB1EB64DD
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jul 2023 03:28:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.569351.889780 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CCFEB64DD
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jul 2023 04:21:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.569355.889800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qO8ie-0003ue-6H; Tue, 25 Jul 2023 03:28:16 +0000
+	id 1qO9Xu-0002JH-Fe; Tue, 25 Jul 2023 04:21:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 569351.889780; Tue, 25 Jul 2023 03:28:16 +0000
+Received: by outflank-mailman (output) from mailman id 569355.889800; Tue, 25 Jul 2023 04:21:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qO8ie-0003uX-2o; Tue, 25 Jul 2023 03:28:16 +0000
-Received: by outflank-mailman (input) for mailman id 569351;
- Tue, 25 Jul 2023 03:28:15 +0000
+	id 1qO9Xu-0002J6-An; Tue, 25 Jul 2023 04:21:14 +0000
+Received: by outflank-mailman (input) for mailman id 569355;
+ Tue, 25 Jul 2023 04:21:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8+K8=DL=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qO8ic-0003uR-N9
- for xen-devel@lists.xenproject.org; Tue, 25 Jul 2023 03:28:15 +0000
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [2607:f8b0:4864:20::435])
+ <SRS0=dJfN=DL=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
+ id 1qO9Xr-00023t-Gs
+ for xen-devel@lists.xenproject.org; Tue, 25 Jul 2023 04:21:11 +0000
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [2607:f8b0:4864:20::b2a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 47ea8840-2a9b-11ee-8613-37d641c3527e;
- Tue, 25 Jul 2023 05:28:11 +0200 (CEST)
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-682a5465e9eso1181695b3a.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 20:28:11 -0700 (PDT)
-Received: from ?IPV6:fdbd:ff1:ce00:1c25:884:3ed:e1db:b610?
- ([240e:694:e21:b::2]) by smtp.gmail.com with ESMTPSA id
- s3-20020aa78283000000b00682a9325ffcsm8407714pfm.5.2023.07.24.20.27.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jul 2023 20:28:10 -0700 (PDT)
+ id ae3b0ebb-2aa2-11ee-8613-37d641c3527e;
+ Tue, 25 Jul 2023 06:21:09 +0200 (CEST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-cf284f4d7afso5663482276.3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 21:21:09 -0700 (PDT)
+Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
+ by smtp.googlemail.com with ESMTPSA id
+ h9-20020a25b189000000b00d0db687ef48sm1175540ybj.61.2023.07.24.21.21.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Jul 2023 21:21:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,121 +47,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47ea8840-2a9b-11ee-8613-37d641c3527e
+X-Inumbo-ID: ae3b0ebb-2aa2-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690255690; x=1690860490;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=6wY4cILkEhsrpRf+mNddP0nleKOSU9sayj8Z5h0ToXM=;
-        b=PknHptOa2Z8+2vaclzexjcjHcgGTKnQ0JRJ89LK+GvkJZyUzNmFYDaw4LaxhrbAB97
-         Qlt49eA21cgLfip1YkLzQvNHl9NRE1uu+H3yLMzr5GUQw2R94ASja3LKRc7K2/IuJ877
-         /rUQws3HOX4h/pSV0QLIC/txctttQBZDy4goWlpNGxYwzk8J6CttdGDNpskz9IiWFE6E
-         W06R7YBvAlwN2Ll/k0WZ+e8J2UJKgy2rlagtK3lUaqPgpyCrwLsDTNoP/0MXBrAUaLK4
-         fe8VXE6m3BmotnBeZ7KmASyzpGnPX5FsNzpJdMUNn5TjD0dfcmx5lygJuqraNOT+sjor
-         yB3A==
+        d=gmail.com; s=20221208; t=1690258868; x=1690863668;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DXYENedStYVsFXpaqy8X3+wmlabVR1q8JHyD5+dxFj0=;
+        b=NIGVZvXp4f6PI/DiyEOXr4f5A6/bm955BIOhiZOHaf2xh+RIldWqkGVwj9eR6s7h/D
+         u8onvMaEHJrYU/HCUYvuGCCHfNRwQcrgAf2DqnNwPmYZKfV6oX/8zUa5Ig2Q+OQW0ypq
+         XPjKaW0SZdhI5qLkWxfkcfI+eeyw8wOays1ttc+jYPlhsNlhP4uKwb+dfDR5nCYKuXl2
+         +XMxk/OSmgfJy9dL/mFwEgWIg+fhMPrVsdF2dCpA0ebzWdyAhRP+4N95J6UWvMmJ+uKs
+         yf/le1oPMyKhHzKGvzlCs3EuPlXqwgoKoHDer5fRkFbOxeVLftXul8Z+3F07FK5C3JFa
+         Y2Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690255690; x=1690860490;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=6wY4cILkEhsrpRf+mNddP0nleKOSU9sayj8Z5h0ToXM=;
-        b=JsIYdUKGimVX5XBd+GVVNhsp/VWMfCmRpjUuJyMFDOurNgEUmIcdGPoqlYS3gybF6n
-         cUFl30dOZNdpJqG+EJQ60v8OkbSJ0ZkdNJb/Ki4G6soATAbRZcrZ3p1GXwWm/YYi49Ny
-         p3F+EKg4TPp7lsQ9qA0c5MqLzw0RsrkUoRc8RIr5jpw2SIcpePbGAObRgyn0H+LzhyGK
-         k3i/q+8GQ9KkXF63nGzGk5DFQ8puUjn0hFLFil4P+7YsEKWajpUJ2+XuCbw1Nv76sDPb
-         Nk8YfMwAVV3+PcN/33PZ5ohWBCly7zyLGZvc+decM8LNu9rdGX2rJ5SfIT5uA5qoP0A5
-         APcA==
-X-Gm-Message-State: ABy/qLYYPVzwGKCk2Weq9fLjNk+DX3NOiaYjH3uI001fWAMwX5wa45XW
-	yYGSTGfLsnMF06vHngDTMpAWsA==
-X-Google-Smtp-Source: APBJJlHvnzRChS6v/nee9rDGEWxm9C29UVXVwYKOSH3HP5ue/guAsHAKmcdiSeukVqd30tCkGAz2cw==
-X-Received: by 2002:a05:6a00:cd1:b0:677:bb4c:c321 with SMTP id b17-20020a056a000cd100b00677bb4cc321mr15272930pfv.0.1690255690395;
-        Mon, 24 Jul 2023 20:28:10 -0700 (PDT)
-Message-ID: <bbd36d96-b6b8-08c3-1092-e3d0b255134a@bytedance.com>
-Date: Tue, 25 Jul 2023 11:27:55 +0800
+        d=1e100.net; s=20221208; t=1690258868; x=1690863668;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=DXYENedStYVsFXpaqy8X3+wmlabVR1q8JHyD5+dxFj0=;
+        b=bmnxiiVaX2ngYRYJJgQ+mug9jOyeGMlgvYY4FiANy9nQ1eE+xJPcA24ZeVewswS+Jy
+         zXMOQpbNZL3RGzgApW4gWF+kJSTBkmLRhVBxRktiDGPOP+N3laa1G3RnLDofWhjaJ69+
+         m0seDyp9mbcjwfYu+O3g2GaaIUgthh39rv+e+iUaPMtwShOWvwuirWj+3PSEwX7X5gTx
+         ux0nG1+AeawhZXqmUwGw8GMc+Z5aHaPtWp+4nWH/3E0BwsXvc1NIzu6R3h3UphdhYiz0
+         21h8eILGF682rkhhxAJXNEeuzq6pTd4+HUv0O81FP4rt4fiFPQdd1i4/6K9UPV7wfwyF
+         lcow==
+X-Gm-Message-State: ABy/qLbFluIiWyKRe0C0lrybhZ+rBSX3N1iwpJOtp4YsuVYuajOf9g87
+	lgSHFYMpWXmerGJ5E/Y+oEk=
+X-Google-Smtp-Source: APBJJlFMeQGxec1oJDVWQUYg3sII69ysVmGK3iC6jxP+dksIpqg/98z6796G6YK9NBoYSePtafE2Ug==
+X-Received: by 2002:a25:7ac6:0:b0:c5e:d3af:35cb with SMTP id v189-20020a257ac6000000b00c5ed3af35cbmr8904739ybc.42.1690258868599;
+        Mon, 24 Jul 2023 21:21:08 -0700 (PDT)
+From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Matthew Wilcox <willy@infradead.org>
+Cc: linux-mm@kvack.org,
+	linux-arch@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-csky@vger.kernel.org,
+	linux-hexagon@vger.kernel.org,
+	loongarch@lists.linux.dev,
+	linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org,
+	linux-openrisc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-sh@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	linux-um@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	kvm@vger.kernel.org,
+	Hugh Dickins <hughd@google.com>,
+	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
+	Mike Rapoport <rppt@kernel.org>
+Subject: [PATCH mm-unstable v7 01/31] mm: Add PAGE_TYPE_OP folio functions
+Date: Mon, 24 Jul 2023 21:20:21 -0700
+Message-Id: <20230725042051.36691-2-vishal.moola@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230725042051.36691-1-vishal.moola@gmail.com>
+References: <20230725042051.36691-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH v2 01/47] mm: vmscan: move shrinker-related code into a
- separate file
-Content-Language: en-US
-To: Muchun Song <muchun.song@linux.dev>
-Cc: Andrew Morton <akpm@linux-foundation.org>, david@fromorbit.com,
- tkhai@ya.ru, Vlastimil Babka <vbabka@suse.cz>,
- Roman Gushchin <roman.gushchin@linux.dev>, djwong@kernel.org,
- Christian Brauner <brauner@kernel.org>, "Paul E. McKenney"
- <paulmck@kernel.org>, tytso@mit.edu, steven.price@arm.com, cel@kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>, yujie.liu@intel.com,
- Greg KH <gregkh@linuxfoundation.org>, LKML <linux-kernel@vger.kernel.org>,
- Linux Memory Management List <linux-mm@kvack.org>, x86@kernel.org,
- kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-erofs@lists.ozlabs.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, linux-nfs@vger.kernel.org,
- linux-mtd@lists.infradead.org, rcu@vger.kernel.org,
- netdev <netdev@vger.kernel.org>, dri-devel@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, dm-devel@redhat.com,
- linux-raid@vger.kernel.org, linux-bcache@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org,
- linux-btrfs@vger.kernel.org
-References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-2-zhengqi.arch@bytedance.com>
- <97E80C37-8872-4C5A-A027-A0B35F39152A@linux.dev>
- <d2621ad0-8b99-9154-5ff5-509dec2f32a3@bytedance.com>
- <6FE62F56-1B4E-4E2A-BEA9-0DA6907A2FA9@linux.dev>
-From: Qi Zheng <zhengqi.arch@bytedance.com>
-In-Reply-To: <6FE62F56-1B4E-4E2A-BEA9-0DA6907A2FA9@linux.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+No folio equivalents for page type operations have been defined, so
+define them for later folio conversions.
 
+Also changes the Page##uname macros to take in const struct page* since
+we only read the memory here.
 
-On 2023/7/25 11:23, Muchun Song wrote:
-> 
-> 
->> On Jul 25, 2023, at 11:09, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
->>
->>
->>
->> On 2023/7/25 10:35, Muchun Song wrote:
->>>> On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
->>>>
->>>> The mm/vmscan.c file is too large, so separate the shrinker-related
->>>> code from it into a separate file. No functional changes.
->>>>
->>>> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
->>>> ---
->>>> include/linux/shrinker.h |   3 +
->>>> mm/Makefile              |   4 +-
->>>> mm/shrinker.c            | 707 +++++++++++++++++++++++++++++++++++++++
->>>> mm/vmscan.c              | 701 --------------------------------------
->>>> 4 files changed, 712 insertions(+), 703 deletions(-)
->>>> create mode 100644 mm/shrinker.c
->>>>
->>>> diff --git a/include/linux/shrinker.h b/include/linux/shrinker.h
->>>> index 224293b2dd06..961cb84e51f5 100644
->>>> --- a/include/linux/shrinker.h
->>>> +++ b/include/linux/shrinker.h
->>>> @@ -96,6 +96,9 @@ struct shrinker {
->>>>   */
->>>> #define SHRINKER_NONSLAB (1 << 3)
->>>>
->>>> +unsigned long shrink_slab(gfp_t gfp_mask, int nid, struct mem_cgroup *memcg,
->>>> +    int priority);
->>> A good cleanup, vmscan.c is so huge.
->>> I'd like to introduce a new header in mm/ directory and contains those
->>> declarations of functions (like this and other debug function in
->>> shrinker_debug.c) since they are used internally across mm.
->>
->> How about putting them in the mm/internal.h file?
-> 
-> Either is fine to me.
+Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
+---
+ include/linux/page-flags.h | 30 +++++++++++++++++++++++-------
+ 1 file changed, 23 insertions(+), 7 deletions(-)
 
-OK, will do in the next version.
+diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
+index 92a2063a0a23..9218028caf33 100644
+--- a/include/linux/page-flags.h
++++ b/include/linux/page-flags.h
+@@ -908,6 +908,8 @@ static inline bool is_page_hwpoison(struct page *page)
+ 
+ #define PageType(page, flag)						\
+ 	((page->page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
++#define folio_test_type(folio, flag)					\
++	((folio->page.page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
+ 
+ static inline int page_type_has_type(unsigned int page_type)
+ {
+@@ -919,27 +921,41 @@ static inline int page_has_type(struct page *page)
+ 	return page_type_has_type(page->page_type);
+ }
+ 
+-#define PAGE_TYPE_OPS(uname, lname)					\
+-static __always_inline int Page##uname(struct page *page)		\
++#define PAGE_TYPE_OPS(uname, lname, fname)				\
++static __always_inline int Page##uname(const struct page *page)		\
+ {									\
+ 	return PageType(page, PG_##lname);				\
+ }									\
++static __always_inline int folio_test_##fname(const struct folio *folio)\
++{									\
++	return folio_test_type(folio, PG_##lname);			\
++}									\
+ static __always_inline void __SetPage##uname(struct page *page)		\
+ {									\
+ 	VM_BUG_ON_PAGE(!PageType(page, 0), page);			\
+ 	page->page_type &= ~PG_##lname;					\
+ }									\
++static __always_inline void __folio_set_##fname(struct folio *folio)	\
++{									\
++	VM_BUG_ON_FOLIO(!folio_test_type(folio, 0), folio);		\
++	folio->page.page_type &= ~PG_##lname;				\
++}									\
+ static __always_inline void __ClearPage##uname(struct page *page)	\
+ {									\
+ 	VM_BUG_ON_PAGE(!Page##uname(page), page);			\
+ 	page->page_type |= PG_##lname;					\
+-}
++}									\
++static __always_inline void __folio_clear_##fname(struct folio *folio)	\
++{									\
++	VM_BUG_ON_FOLIO(!folio_test_##fname(folio), folio);		\
++	folio->page.page_type |= PG_##lname;				\
++}									\
+ 
+ /*
+  * PageBuddy() indicates that the page is free and in the buddy system
+  * (see mm/page_alloc.c).
+  */
+-PAGE_TYPE_OPS(Buddy, buddy)
++PAGE_TYPE_OPS(Buddy, buddy, buddy)
+ 
+ /*
+  * PageOffline() indicates that the page is logically offline although the
+@@ -963,7 +979,7 @@ PAGE_TYPE_OPS(Buddy, buddy)
+  * pages should check PageOffline() and synchronize with such drivers using
+  * page_offline_freeze()/page_offline_thaw().
+  */
+-PAGE_TYPE_OPS(Offline, offline)
++PAGE_TYPE_OPS(Offline, offline, offline)
+ 
+ extern void page_offline_freeze(void);
+ extern void page_offline_thaw(void);
+@@ -973,12 +989,12 @@ extern void page_offline_end(void);
+ /*
+  * Marks pages in use as page tables.
+  */
+-PAGE_TYPE_OPS(Table, table)
++PAGE_TYPE_OPS(Table, table, pgtable)
+ 
+ /*
+  * Marks guardpages used with debug_pagealloc.
+  */
+-PAGE_TYPE_OPS(Guard, guard)
++PAGE_TYPE_OPS(Guard, guard, guard)
+ 
+ extern bool is_free_buddy_page(struct page *page);
+ 
+-- 
+2.40.1
 
-> 
->>
->>> Thanks.
-> 
-> 
 
