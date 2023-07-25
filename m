@@ -4,30 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D182C001DF
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jul 2023 04:24:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.569349.889942 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7888FEB64DD
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jul 2023 04:27:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.569384.889977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qO9bF-0001fG-1N; Tue, 25 Jul 2023 04:24:41 +0000
+	id 1qO9dq-0003Ne-Cj; Tue, 25 Jul 2023 04:27:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 569349.889942; Tue, 25 Jul 2023 04:24:40 +0000
+Received: by outflank-mailman (output) from mailman id 569384.889977; Tue, 25 Jul 2023 04:27:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qO9bE-0001bF-Pg; Tue, 25 Jul 2023 04:24:40 +0000
-Received: by outflank-mailman (input) for mailman id 569349;
- Tue, 25 Jul 2023 03:24:44 +0000
+	id 1qO9dq-0003Lj-0q; Tue, 25 Jul 2023 04:27:22 +0000
+Received: by outflank-mailman (input) for mailman id 569384;
+ Tue, 25 Jul 2023 04:27:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+ZC3=DL=linux.dev=muchun.song@srs-se1.protection.inumbo.net>)
- id 1qO8fE-0003q7-OE
- for xen-devel@lists.xenproject.org; Tue, 25 Jul 2023 03:24:44 +0000
-Received: from out-8.mta0.migadu.com (out-8.mta0.migadu.com
- [2001:41d0:1004:224b::8])
+ <SRS0=dJfN=DL=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
+ id 1qO9Yj-0002Iw-Ua
+ for xen-devel@lists.xenproject.org; Tue, 25 Jul 2023 04:22:05 +0000
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [2607:f8b0:4864:20::b32])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cb52a77e-2a9a-11ee-b23c-6b7b168915f2;
- Tue, 25 Jul 2023 05:24:43 +0200 (CEST)
+ id cf77cfc5-2aa2-11ee-b23c-6b7b168915f2;
+ Tue, 25 Jul 2023 06:22:05 +0200 (CEST)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-c5ffb6cda23so5568569276.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Jul 2023 21:22:05 -0700 (PDT)
+Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
+ by smtp.googlemail.com with ESMTPSA id
+ h9-20020a25b189000000b00d0db687ef48sm1175540ybj.61.2023.07.24.21.22.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Jul 2023 21:22:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,119 +47,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb52a77e-2a9a-11ee-b23c-6b7b168915f2
-Content-Type: text/plain;
-	charset=us-ascii
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1690255481;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=6p0DFvIoLJzSIVM0qRIM/GXeN12xkckyA9Fji4TGEhI=;
-	b=r9D+tXFVa/N1RN+BLv5WgR5iQ4rwtyebnPM62Sh3w2AQ+19WlSlFOjsJl5wosr8TEtJchn
-	V877L2MD6oNieyuMlTG6JawmQ1ns/Fjh33pHsVXqhR6CCRTDc2499SUTwOS+JRsWVrdweW
-	vS3GyBw0+b28Uj9NeJVk00fqQ8IPfLM=
+X-Inumbo-ID: cf77cfc5-2aa2-11ee-b23c-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1690258924; x=1690863724;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NG13BwzmmAIpXpcduEwvRHFbS3iQhU18W2JpKLteVDY=;
+        b=GBQqKOXR4MY0Ps6Ytzn9QjLc5kcnNARqYVMOSqCl4nxxP5zueTINjr7iMbjZhk8uU1
+         uF+ZNdDLWemlb8QXVTn60jLorPF4KaxuajyPq7XQ8ZCUpgrsfyxcNU4aZsjJHBdfgv4V
+         f3SehFOrdMCWYaV3GNfOxXZlwwtfQps2pLwSnw0r1MZbny4VXC0cZl+5ECg/uwswSkJJ
+         2spe5/EA1yI0VqTuQ1Drr9GEQcMwkhM/FKbElCEbuZdJkSdi81Zbahgosic5IMYJMWsY
+         zz7YF2FVGFBOrfl6ZnWHbV39qhmx668oKEAvnRRKMjMLLqABK50UfsT2Oc13y2cvxYxd
+         xuhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690258924; x=1690863724;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=NG13BwzmmAIpXpcduEwvRHFbS3iQhU18W2JpKLteVDY=;
+        b=PMRaDkoZNCaRbOaRnbUN1wAVrRs8iX+YHSchPqsiocZvhRdOy8wYtNgevBws4Sbs0H
+         7xIzR8EdHmuNk9agLw4vYvRcqbXPECowF34pzupimFPTIVA+V7nB/uIZAixebOIMA49K
+         OfN17x2J4oU4r6H/Qn6bJHKJsp1f3LC1ThKDyAGxNN3RF4W9EQ/EkvEpTewbY9H5pgBc
+         heMCgrwwGorb5gMWBs9EwBC3kQa9J/zvs006ZIZ5rDSUYjC2YZuduOXMexTLj5j9JQeH
+         FvKunre9VgmNp66R3UCq7jODMCaT0gv9FpiUBNJAriq27pRd7I5jkgtoXDXK3c2ut2qk
+         yZOQ==
+X-Gm-Message-State: ABy/qLYeI5x3v0In8PF+YQxGSwUzdyzXnoglttRqYhgEEXcHdW1CDfK8
+	9Wa97c4K7bab9TDLq/jLYiw=
+X-Google-Smtp-Source: APBJJlFIEKBO4FnrV/9ajkbTKUo/vEdRCYW7kk6X3z3g19puIv3mx6us1kMtRHRFLnY2I/2ODsKhEw==
+X-Received: by 2002:a25:2309:0:b0:d0d:2d82:7a27 with SMTP id j9-20020a252309000000b00d0d2d827a27mr4389099ybj.13.1690258924402;
+        Mon, 24 Jul 2023 21:22:04 -0700 (PDT)
+From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Matthew Wilcox <willy@infradead.org>
+Cc: linux-mm@kvack.org,
+	linux-arch@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-csky@vger.kernel.org,
+	linux-hexagon@vger.kernel.org,
+	loongarch@lists.linux.dev,
+	linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org,
+	linux-openrisc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-sh@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	linux-um@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	kvm@vger.kernel.org,
+	Hugh Dickins <hughd@google.com>,
+	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+	Mike Rapoport <rppt@kernel.org>
+Subject: [PATCH mm-unstable v7 27/31] sh: Convert pte_free_tlb() to use ptdescs
+Date: Mon, 24 Jul 2023 21:20:47 -0700
+Message-Id: <20230725042051.36691-28-vishal.moola@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230725042051.36691-1-vishal.moola@gmail.com>
+References: <20230725042051.36691-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 01/47] mm: vmscan: move shrinker-related code into a
- separate file
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <d2621ad0-8b99-9154-5ff5-509dec2f32a3@bytedance.com>
-Date: Tue, 25 Jul 2023 11:23:54 +0800
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- david@fromorbit.com,
- tkhai@ya.ru,
- Vlastimil Babka <vbabka@suse.cz>,
- Roman Gushchin <roman.gushchin@linux.dev>,
- djwong@kernel.org,
- Christian Brauner <brauner@kernel.org>,
- "Paul E. McKenney" <paulmck@kernel.org>,
- tytso@mit.edu,
- steven.price@arm.com,
- cel@kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- yujie.liu@intel.com,
- Greg KH <gregkh@linuxfoundation.org>,
- LKML <linux-kernel@vger.kernel.org>,
- Linux Memory Management List <linux-mm@kvack.org>,
- x86@kernel.org,
- kvm@vger.kernel.org,
- xen-devel@lists.xenproject.org,
- linux-erofs@lists.ozlabs.org,
- linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com,
- linux-nfs@vger.kernel.org,
- linux-mtd@lists.infradead.org,
- rcu@vger.kernel.org,
- netdev <netdev@vger.kernel.org>,
- dri-devel@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org,
- dm-devel@redhat.com,
- linux-raid@vger.kernel.org,
- linux-bcache@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org,
- linux-xfs@vger.kernel.org,
- linux-btrfs@vger.kernel.org
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <6FE62F56-1B4E-4E2A-BEA9-0DA6907A2FA9@linux.dev>
-References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-2-zhengqi.arch@bytedance.com>
- <97E80C37-8872-4C5A-A027-A0B35F39152A@linux.dev>
- <d2621ad0-8b99-9154-5ff5-509dec2f32a3@bytedance.com>
-To: Qi Zheng <zhengqi.arch@bytedance.com>
-X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: 8bit
 
+Part of the conversions to replace pgtable constructor/destructors with
+ptdesc equivalents. Also cleans up some spacing issues.
 
+Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Acked-by: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
+---
+ arch/sh/include/asm/pgalloc.h | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-> On Jul 25, 2023, at 11:09, Qi Zheng <zhengqi.arch@bytedance.com> =
-wrote:
->=20
->=20
->=20
-> On 2023/7/25 10:35, Muchun Song wrote:
->>> On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> =
-wrote:
->>>=20
->>> The mm/vmscan.c file is too large, so separate the shrinker-related
->>> code from it into a separate file. No functional changes.
->>>=20
->>> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
->>> ---
->>> include/linux/shrinker.h |   3 +
->>> mm/Makefile              |   4 +-
->>> mm/shrinker.c            | 707 =
-+++++++++++++++++++++++++++++++++++++++
->>> mm/vmscan.c              | 701 =
---------------------------------------
->>> 4 files changed, 712 insertions(+), 703 deletions(-)
->>> create mode 100644 mm/shrinker.c
->>>=20
->>> diff --git a/include/linux/shrinker.h b/include/linux/shrinker.h
->>> index 224293b2dd06..961cb84e51f5 100644
->>> --- a/include/linux/shrinker.h
->>> +++ b/include/linux/shrinker.h
->>> @@ -96,6 +96,9 @@ struct shrinker {
->>>  */
->>> #define SHRINKER_NONSLAB (1 << 3)
->>>=20
->>> +unsigned long shrink_slab(gfp_t gfp_mask, int nid, struct =
-mem_cgroup *memcg,
->>> +    int priority);
->> A good cleanup, vmscan.c is so huge.
->> I'd like to introduce a new header in mm/ directory and contains =
-those
->> declarations of functions (like this and other debug function in
->> shrinker_debug.c) since they are used internally across mm.
->=20
-> How about putting them in the mm/internal.h file?
-
-Either is fine to me.
-
->=20
->> Thanks.
-
+diff --git a/arch/sh/include/asm/pgalloc.h b/arch/sh/include/asm/pgalloc.h
+index a9e98233c4d4..5d8577ab1591 100644
+--- a/arch/sh/include/asm/pgalloc.h
++++ b/arch/sh/include/asm/pgalloc.h
+@@ -2,6 +2,7 @@
+ #ifndef __ASM_SH_PGALLOC_H
+ #define __ASM_SH_PGALLOC_H
+ 
++#include <linux/mm.h>
+ #include <asm/page.h>
+ 
+ #define __HAVE_ARCH_PMD_ALLOC_ONE
+@@ -31,10 +32,10 @@ static inline void pmd_populate(struct mm_struct *mm, pmd_t *pmd,
+ 	set_pmd(pmd, __pmd((unsigned long)page_address(pte)));
+ }
+ 
+-#define __pte_free_tlb(tlb,pte,addr)			\
+-do {							\
+-	pgtable_pte_page_dtor(pte);			\
+-	tlb_remove_page((tlb), (pte));			\
++#define __pte_free_tlb(tlb, pte, addr)				\
++do {								\
++	pagetable_pte_dtor(page_ptdesc(pte));			\
++	tlb_remove_page_ptdesc((tlb), (page_ptdesc(pte)));	\
+ } while (0)
+ 
+ #endif /* __ASM_SH_PGALLOC_H */
+-- 
+2.40.1
 
 
