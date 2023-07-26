@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2CBC41513
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61464C001DC
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 17:17:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570661.892713 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.570656.892701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOi8Z-0003uN-GJ; Wed, 26 Jul 2023 17:17:23 +0000
+	id 1qOi8Y-0003l6-Vj; Wed, 26 Jul 2023 17:17:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570661.892713; Wed, 26 Jul 2023 17:17:23 +0000
+Received: by outflank-mailman (output) from mailman id 570656.892701; Wed, 26 Jul 2023 17:17:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOi8Z-0003tC-By; Wed, 26 Jul 2023 17:17:23 +0000
-Received: by outflank-mailman (input) for mailman id 570661;
- Wed, 26 Jul 2023 17:17:21 +0000
+	id 1qOi8Y-0003kz-Ro; Wed, 26 Jul 2023 17:17:22 +0000
+Received: by outflank-mailman (input) for mailman id 570656;
+ Wed, 26 Jul 2023 17:17:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Pn9P=DM=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1qOi2j-0005nP-QP
- for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 17:11:21 +0000
-Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
- [2607:f8b0:4864:20::e34])
+ id 1qOi2S-0005nP-GG
+ for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 17:11:04 +0000
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [2607:f8b0:4864:20::f2c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6fe5d449-2bd7-11ee-8613-37d641c3527e;
- Wed, 26 Jul 2023 19:11:19 +0200 (CEST)
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-44757af136cso14433137.3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Jul 2023 10:11:20 -0700 (PDT)
+ id 65880181-2bd7-11ee-8613-37d641c3527e;
+ Wed, 26 Jul 2023 19:11:02 +0200 (CEST)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6378cec43ddso375246d6.2
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Jul 2023 10:11:02 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com
  (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
  [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
- s17-20020a0ca611000000b0063d1aa446e2sm1248019qva.59.2023.07.26.10.11.16
+ s17-20020a0ca611000000b0063d1aa446e2sm1248019qva.59.2023.07.26.10.10.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jul 2023 10:11:17 -0700 (PDT)
+ Wed, 26 Jul 2023 10:11:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,125 +48,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6fe5d449-2bd7-11ee-8613-37d641c3527e
+X-Inumbo-ID: 65880181-2bd7-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690391478; x=1690996278;
+        d=gmail.com; s=20221208; t=1690391461; x=1690996261;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wIB5Z/ggG5eJ8M2F2JBMwNaYc9A5YlbhT5y/HdVUB7g=;
-        b=i6jixsyaZ39eQkyDMG2g2c4UpEA1PEFFmE0zEADrlJ36oqzICRuU7Fv+UHs2lF03JB
-         Q11hQjU2R46sWY4p2ZXIR2/GGnk/gWTpGKNp7gd0avUxUHA12sXjR3vE6Pw24ANzPiVx
-         CptPVMLnfyF6QeHibjl8CcxI6HANdIZBAqXmLAxJRZjYBWCMBcwKO4qapxOOwPW3wD7K
-         C4ijSLPdidWSj4qm/6UA1Gxnbq0+mULORy+T4RLqcGMdUaQXZvvMizEjTvGvFn0ly65X
-         uflwgHV851IddZe2qkf6O4dDWUTJVm3UaeiNosjfVQARZtSQXk3DmvRD/yLeIwDYnVwC
-         O6nw==
+        bh=imeu59UbyEmxk/60do4rzt8IPOfqsoGRviRd+fRZmSg=;
+        b=cfCWBHQN8Rx3skIwDb8tQKTb4yWLK4tNuauqP7/MkSC+Nyh3LyrBID5/Boz2Gx4Zwl
+         KZxZirZdeRGoY15ZRY2G+pvyiZXofrEdvFGe+HJeHw13kfcszDjc4hL+p7J6SG8aZSEJ
+         JyP8EtgLp1zRNihXxGq1XhJw2D205C8Fo2gr+u8BMiZUVdgg5DF3kjgA5x3MlZp/06LJ
+         KmVbJ2f9CAJDW3JY3goGxrEyTyx6JDUQa/DByhUOl4Gx/7ZzqOWeBjYP0tEBkV9yqufn
+         r6lDya10frr0lN54lmVKbYjpP3wtP9aj3BfpJbKocPFfcwiH12a10hAz22DUAeEI7/Zk
+         boRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690391478; x=1690996278;
+        d=1e100.net; s=20221208; t=1690391461; x=1690996261;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wIB5Z/ggG5eJ8M2F2JBMwNaYc9A5YlbhT5y/HdVUB7g=;
-        b=T8zT6P/dyr4BH5hA1WGSdNNLhL0wXXqD7oUl4WTTsZMKnQUyfItQXA1AhpMWkDqZgG
-         mX5D4gqcHjo17wSF1iBmQEBeN5BQcAZbsMGNEI/MPLmW/f4Nlg61H3+06PryJ9vYd1p2
-         MJDFF+dCmUkbfAYq1ss2JBueIcYiFuKwzpHMkWuaHwgLv+5NkkbhO7POuJwmZZLDP8Ye
-         8U/Km9fFfz4a9gqrSTAatKnw1djZtlFqXLgkmX1ZWPbTMT/N2nlmuWTN4tFCXfxRDLd6
-         CTvwCQbM7v/OMYWteFcLEx9ifJVRGULNk2YEkfvXSyElsAdJp6/qFysHEXb92Q73/Io/
-         VHmg==
-X-Gm-Message-State: ABy/qLaf1enoKvVi/Kkv8lIEbfj/tOvoz6Qv63lej9OjCY+8KUQOFdoR
-	gB8XbfuuuYR4LgP2Dugdr9wrWBCYxhE=
-X-Google-Smtp-Source: APBJJlGbfOVaJ6JhFnY4cR2crCc3Eb+DisFFZbx74DJbPeLPPfwaRq2ZeagfuZLH46r4KPc7asidLg==
-X-Received: by 2002:a67:ef92:0:b0:443:66b9:b8f0 with SMTP id r18-20020a67ef92000000b0044366b9b8f0mr2027430vsp.10.1690391478530;
-        Wed, 26 Jul 2023 10:11:18 -0700 (PDT)
+        bh=imeu59UbyEmxk/60do4rzt8IPOfqsoGRviRd+fRZmSg=;
+        b=NWCNpzIq0AdqzEat3spWQlSaS1s66TWf0CzEhCVOJzXQrEeoF34045YfwS7lI+L6Pb
+         Jsp65jVdPj1Bn4qGhXj3W4rX9URjkNOqyNZ1w77Y66duzw/ANCYjWlovH45mo4klGPT+
+         R65hVukc07nrKiN5GAVNQ3/z/DjQfRsMrsFSixcspXJnhtbikrLhNarVfwak//aVV4Y1
+         0bxHbqQy+arzf6XU8/3pQZrH6wdvbQJbrBb1ns3ZMq6AGbJ53Rn0mHDAJnRIx5WA1crc
+         GQR6Y6btqboQbiaSHN6tmMzl+WM+dbmr2FmjBEuUvc75CE+IC8DpjZuIIVs0GRlB4EKv
+         84iQ==
+X-Gm-Message-State: ABy/qLZtrCV8lJXPW/IvQ4w8sKyxhG72g8BWkhBfV4wzOxvGwsp2i4eZ
+	Dq4Dr4k7nwqw0shwEh8uotaB+JQlgtU=
+X-Google-Smtp-Source: APBJJlE+vt1k5qigt2ot0tq2Cf86zCqHXL5I/dtYIhfnyiUGkSEF61FqmaMokrlG483z9w5brciStw==
+X-Received: by 2002:a0c:e305:0:b0:63c:fbd0:84a6 with SMTP id s5-20020a0ce305000000b0063cfbd084a6mr2839134qvl.5.1690391461166;
+        Wed, 26 Jul 2023 10:11:01 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v7 13/15] libxc: Add xc_set_cpufreq_cppc
-Date: Wed, 26 Jul 2023 13:09:43 -0400
-Message-ID: <20230726170945.34961-14-jandryuk@gmail.com>
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v7 11/15] xenpm: Print HWP/CPPC parameters
+Date: Wed, 26 Jul 2023 13:09:41 -0400
+Message-ID: <20230726170945.34961-12-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230726170945.34961-1-jandryuk@gmail.com>
 References: <20230726170945.34961-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add xc_set_cpufreq_cppc to allow calling xen_systctl_pm_op
-SET_CPUFREQ_CPPC.
+Print HWP-specific parameters.  Some are always present, but others
+depend on hardware support.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
-Acked-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 v2:
-Mark xc_set_hwp_para_t const
+Style fixes
+Declare i outside loop
+Replace repearted hardware/configured limits with spaces
+Fixup for hw_ removal
+Use XEN_HWP_GOVERNOR
+Use HWP_ACT_WINDOW_EXPONENT_*
+Remove energy_perf hw autonomous - 0 doesn't mean autonomous
 
 v4:
-s/hwp/cppc/
-Add Anthony's Ack
+Return activity_window from calculate_hwp_activity_window
+Use blanks instead of _ in output
+Use MASK_EXTR
+Check XEN_HWP_DRIVER name since governor is no longer returned
+s/hwp/cppc
 
 v5:
-Remove const and copy back result
+Add Jan's Reviewed-by
 ---
- tools/include/xenctrl.h |  4 ++++
- tools/libs/ctrl/xc_pm.c | 23 +++++++++++++++++++++++
- 2 files changed, 27 insertions(+)
+ tools/misc/xenpm.c | 66 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 66 insertions(+)
 
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 2092632296..52f42fb5b6 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -1930,11 +1930,15 @@ struct xc_get_cpufreq_para {
-     int32_t turbo_enabled;
- };
- 
-+typedef struct xen_set_cppc_para xc_set_cppc_para_t;
-+
- int xc_get_cpufreq_para(xc_interface *xch, int cpuid,
-                         struct xc_get_cpufreq_para *user_para);
- int xc_set_cpufreq_gov(xc_interface *xch, int cpuid, char *govname);
- int xc_set_cpufreq_para(xc_interface *xch, int cpuid,
-                         int ctrl_type, int ctrl_value);
-+int xc_set_cpufreq_cppc(xc_interface *xch, int cpuid,
-+                        xc_set_cppc_para_t *set_cppc);
- int xc_get_cpufreq_avgfreq(xc_interface *xch, int cpuid, int *avg_freq);
- 
- int xc_set_sched_opt_smt(xc_interface *xch, uint32_t value);
-diff --git a/tools/libs/ctrl/xc_pm.c b/tools/libs/ctrl/xc_pm.c
-index cea3eab22e..1f267147f6 100644
---- a/tools/libs/ctrl/xc_pm.c
-+++ b/tools/libs/ctrl/xc_pm.c
-@@ -329,6 +329,29 @@ int xc_set_cpufreq_para(xc_interface *xch, int cpuid,
-     return xc_sysctl(xch, &sysctl);
+diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
+index 21c93386de..3abd99fd20 100644
+--- a/tools/misc/xenpm.c
++++ b/tools/misc/xenpm.c
+@@ -708,6 +708,46 @@ void start_gather_func(int argc, char *argv[])
+     pause();
  }
  
-+int xc_set_cpufreq_cppc(xc_interface *xch, int cpuid,
-+                        xc_set_cppc_para_t *set_cppc)
++static unsigned int calculate_activity_window(const xc_cppc_para_t *cppc,
++                                              const char **units)
 +{
-+    DECLARE_SYSCTL;
-+    int ret;
++    unsigned int mantissa = MASK_EXTR(cppc->activity_window,
++                                      XEN_CPPC_ACT_WINDOW_MANTISSA_MASK);
++    unsigned int exponent = MASK_EXTR(cppc->activity_window,
++                                      XEN_CPPC_ACT_WINDOW_EXPONENT_MASK);
++    unsigned int multiplier = 1;
++    unsigned int i;
 +
-+    if ( !xch )
++    /*
++     * SDM only states a 0 register is hardware selected, and doesn't mention
++     * a 0 mantissa with a non-0 exponent.  Only special case a 0 register.
++     */
++    if ( cppc->activity_window == 0 )
 +    {
-+        errno = EINVAL;
-+        return -1;
++        *units = "hardware selected";
++
++        return 0;
 +    }
-+    sysctl.cmd = XEN_SYSCTL_pm_op;
-+    sysctl.u.pm_op.cmd = SET_CPUFREQ_CPPC;
-+    sysctl.u.pm_op.cpuid = cpuid;
-+    sysctl.u.pm_op.u.set_cppc = *set_cppc;
 +
-+    ret = xc_sysctl(xch, &sysctl);
++    if ( exponent >= 6 )
++    {
++        *units = "s";
++        exponent -= 6;
++    }
++    else if ( exponent >= 3 )
++    {
++        *units = "ms";
++        exponent -= 3;
++    }
++    else
++        *units = "us";
 +
-+    *set_cppc = sysctl.u.pm_op.u.set_cppc;
++    for ( i = 0; i < exponent; i++ )
++        multiplier *= 10;
 +
-+    return ret;
++    return mantissa * multiplier;
 +}
 +
- int xc_get_cpufreq_avgfreq(xc_interface *xch, int cpuid, int *avg_freq)
+ /* print out parameters about cpu frequency */
+ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
  {
-     int ret = 0;
+@@ -772,6 +812,32 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
+                p_cpufreq->u.s.scaling_min_freq,
+                p_cpufreq->u.s.scaling_cur_freq);
+     }
++    else
++    {
++        const xc_cppc_para_t *cppc = &p_cpufreq->u.cppc_para;
++
++        printf("cppc variables       :\n");
++        printf("  hardware limits    : lowest [%u] lowest nonlinear [%u]\n",
++               cppc->lowest, cppc->lowest_nonlinear);
++        printf("                     : nominal [%u] highest [%u]\n",
++               cppc->nominal, cppc->highest);
++        printf("  configured limits  : min [%u] max [%u] energy perf [%u]\n",
++               cppc->minimum, cppc->maximum, cppc->energy_perf);
++
++        if ( cppc->features & XEN_SYSCTL_CPPC_FEAT_ACT_WINDOW )
++        {
++            unsigned int activity_window;
++            const char *units;
++
++            activity_window = calculate_activity_window(cppc, &units);
++            printf("                     : activity_window [%u %s]\n",
++                   activity_window, units);
++        }
++
++        printf("                     : desired [%u%s]\n",
++               cppc->desired,
++               cppc->desired ? "" : " hw autonomous");
++    }
+ 
+     printf("turbo mode           : %s\n",
+            p_cpufreq->turbo_enabled ? "enabled" : "disabled or n/a");
 -- 
 2.41.0
 
