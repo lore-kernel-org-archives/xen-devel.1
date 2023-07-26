@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A9EDC001DF
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 17:11:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570650.892690 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2CBC41513
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 17:17:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.570661.892713 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOi2Q-0001oy-71; Wed, 26 Jul 2023 17:11:02 +0000
+	id 1qOi8Z-0003uN-GJ; Wed, 26 Jul 2023 17:17:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570650.892690; Wed, 26 Jul 2023 17:11:02 +0000
+Received: by outflank-mailman (output) from mailman id 570661.892713; Wed, 26 Jul 2023 17:17:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOi2Q-0001o2-3o; Wed, 26 Jul 2023 17:11:02 +0000
-Received: by outflank-mailman (input) for mailman id 570650;
- Wed, 26 Jul 2023 17:11:00 +0000
+	id 1qOi8Z-0003tC-By; Wed, 26 Jul 2023 17:17:23 +0000
+Received: by outflank-mailman (input) for mailman id 570661;
+ Wed, 26 Jul 2023 17:17:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Pn9P=DM=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1qOi2O-0005nP-KU
- for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 17:11:00 +0000
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [2607:f8b0:4864:20::22f])
+ id 1qOi2j-0005nP-QP
+ for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 17:11:21 +0000
+Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
+ [2607:f8b0:4864:20::e34])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 632e1871-2bd7-11ee-8613-37d641c3527e;
- Wed, 26 Jul 2023 19:10:58 +0200 (CEST)
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3a5ad44dc5aso59885b6e.3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Jul 2023 10:10:59 -0700 (PDT)
+ id 6fe5d449-2bd7-11ee-8613-37d641c3527e;
+ Wed, 26 Jul 2023 19:11:19 +0200 (CEST)
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-44757af136cso14433137.3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Jul 2023 10:11:20 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com
  (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
  [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
- s17-20020a0ca611000000b0063d1aa446e2sm1248019qva.59.2023.07.26.10.10.55
+ s17-20020a0ca611000000b0063d1aa446e2sm1248019qva.59.2023.07.26.10.11.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jul 2023 10:10:56 -0700 (PDT)
+ Wed, 26 Jul 2023 10:11:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,83 +48,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 632e1871-2bd7-11ee-8613-37d641c3527e
+X-Inumbo-ID: 6fe5d449-2bd7-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690391457; x=1690996257;
+        d=gmail.com; s=20221208; t=1690391478; x=1690996278;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5g90NEIr2gEQRrKv4KW4CuJMuwsS8xE3NxELsPnfYWs=;
-        b=ieIvb0nsEqn45EN9wBUG7zCS0ysQE3YMY/JPe3LBe5YSqZVCLms2wsrlKDh6wggile
-         LjQT8tcD2aEifnw6oE7EsHtLIDhmp7BWcvmsdMDuO/aSvt/vaDLeG2TBTyZR37+paTRQ
-         sMWBeoc2Z0OfMWHSnCHY4mUyv/VUEQcEEQ+MdT8n7g2XexZwKdoH62D7quutmw7KtcOD
-         XjRSWq+4DFXTkz9Koj9b38WyPMtm8ZNYs4ZcUyGCCYC5n+gDehy+ctS8caP7/hNv/gFW
-         unVctgbgLcORrCrEbED9R9Smopv+SNuog6F0XqCzAAL/vmiDz9eGHl+W8cNcwPwZb6fX
-         gELg==
+        bh=wIB5Z/ggG5eJ8M2F2JBMwNaYc9A5YlbhT5y/HdVUB7g=;
+        b=i6jixsyaZ39eQkyDMG2g2c4UpEA1PEFFmE0zEADrlJ36oqzICRuU7Fv+UHs2lF03JB
+         Q11hQjU2R46sWY4p2ZXIR2/GGnk/gWTpGKNp7gd0avUxUHA12sXjR3vE6Pw24ANzPiVx
+         CptPVMLnfyF6QeHibjl8CcxI6HANdIZBAqXmLAxJRZjYBWCMBcwKO4qapxOOwPW3wD7K
+         C4ijSLPdidWSj4qm/6UA1Gxnbq0+mULORy+T4RLqcGMdUaQXZvvMizEjTvGvFn0ly65X
+         uflwgHV851IddZe2qkf6O4dDWUTJVm3UaeiNosjfVQARZtSQXk3DmvRD/yLeIwDYnVwC
+         O6nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690391457; x=1690996257;
+        d=1e100.net; s=20221208; t=1690391478; x=1690996278;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5g90NEIr2gEQRrKv4KW4CuJMuwsS8xE3NxELsPnfYWs=;
-        b=KSTiZew5Gsriszzvf4ff8HO1W8ceTcq+YMeKoVYeJ1aB16HkNRxHMMz9v9Mc/X3P1V
-         tTqObSMl0R71JCWevdaE1B1fyttvN4BGNqgqREC7PCGB3W4JK+VFh5xEY6STwqV9O9Nw
-         OFqEVNFwrOuUjKPMBAcvQXoSHrRrVRezmUaV1AcyyX/zPYVKSM+pwmlLSm4ORV3+MMfp
-         vsemXZ5FisEAXdcgHv0zrPs6xF1feiuPDBASoLVzXTVpPzxVP9m62Sicq9TPPse8XBqH
-         PF7tXz8s8Gl78Rbo5kSOGvVdaI+g+ytEF6LySjHSEFoBLQoiV1LOpGpjt7Af/p4TNpcQ
-         954Q==
-X-Gm-Message-State: ABy/qLas6AIG8varAeUWoYueVYmeskk/eLKGQU0rg/gH3ka4UWBc5nxk
-	KsG1/Ux3EgCaJcvcRL0xnXPYnqTwREE=
-X-Google-Smtp-Source: APBJJlEupFohQgvxB5P2BCuegnEvzZJOKE+6E6RhSIp0mlGObHvccrBu5ABGhPxiXxPdStE3Xh90nQ==
-X-Received: by 2002:a05:6808:bc7:b0:3a3:eab8:8c40 with SMTP id o7-20020a0568080bc700b003a3eab88c40mr135683oik.54.1690391457086;
-        Wed, 26 Jul 2023 10:10:57 -0700 (PDT)
+        bh=wIB5Z/ggG5eJ8M2F2JBMwNaYc9A5YlbhT5y/HdVUB7g=;
+        b=T8zT6P/dyr4BH5hA1WGSdNNLhL0wXXqD7oUl4WTTsZMKnQUyfItQXA1AhpMWkDqZgG
+         mX5D4gqcHjo17wSF1iBmQEBeN5BQcAZbsMGNEI/MPLmW/f4Nlg61H3+06PryJ9vYd1p2
+         MJDFF+dCmUkbfAYq1ss2JBueIcYiFuKwzpHMkWuaHwgLv+5NkkbhO7POuJwmZZLDP8Ye
+         8U/Km9fFfz4a9gqrSTAatKnw1djZtlFqXLgkmX1ZWPbTMT/N2nlmuWTN4tFCXfxRDLd6
+         CTvwCQbM7v/OMYWteFcLEx9ifJVRGULNk2YEkfvXSyElsAdJp6/qFysHEXb92Q73/Io/
+         VHmg==
+X-Gm-Message-State: ABy/qLaf1enoKvVi/Kkv8lIEbfj/tOvoz6Qv63lej9OjCY+8KUQOFdoR
+	gB8XbfuuuYR4LgP2Dugdr9wrWBCYxhE=
+X-Google-Smtp-Source: APBJJlGbfOVaJ6JhFnY4cR2crCc3Eb+DisFFZbx74DJbPeLPPfwaRq2ZeagfuZLH46r4KPc7asidLg==
+X-Received: by 2002:a67:ef92:0:b0:443:66b9:b8f0 with SMTP id r18-20020a67ef92000000b0044366b9b8f0mr2027430vsp.10.1690391478530;
+        Wed, 26 Jul 2023 10:11:18 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v7 10/15] libxc: Include cppc_para in definitions
-Date: Wed, 26 Jul 2023 13:09:40 -0400
-Message-ID: <20230726170945.34961-11-jandryuk@gmail.com>
+Subject: [PATCH v7 13/15] libxc: Add xc_set_cpufreq_cppc
+Date: Wed, 26 Jul 2023 13:09:43 -0400
+Message-ID: <20230726170945.34961-14-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230726170945.34961-1-jandryuk@gmail.com>
 References: <20230726170945.34961-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Expose the cppc_para fields through libxc.
+Add xc_set_cpufreq_cppc to allow calling xen_systctl_pm_op
+SET_CPUFREQ_CPPC.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
+v2:
+Mark xc_set_hwp_para_t const
+
 v4:
-Rename hwp to cppc
+s/hwp/cppc/
 Add Anthony's Ack
+
+v5:
+Remove const and copy back result
 ---
- tools/include/xenctrl.h | 2 ++
- 1 file changed, 2 insertions(+)
+ tools/include/xenctrl.h |  4 ++++
+ tools/libs/ctrl/xc_pm.c | 23 +++++++++++++++++++++++
+ 2 files changed, 27 insertions(+)
 
 diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 8aedb952a0..2092632296 100644
+index 2092632296..52f42fb5b6 100644
 --- a/tools/include/xenctrl.h
 +++ b/tools/include/xenctrl.h
-@@ -1892,6 +1892,7 @@ int xc_smt_disable(xc_interface *xch);
-  */
- typedef struct xen_userspace xc_userspace_t;
- typedef struct xen_ondemand xc_ondemand_t;
-+typedef struct xen_cppc_para xc_cppc_para_t;
- 
- struct xc_get_cpufreq_para {
-     /* IN/OUT variable */
-@@ -1923,6 +1924,7 @@ struct xc_get_cpufreq_para {
-                 xc_ondemand_t ondemand;
-             } u;
-         } s;
-+        xc_cppc_para_t cppc_para;
-     } u;
- 
+@@ -1930,11 +1930,15 @@ struct xc_get_cpufreq_para {
      int32_t turbo_enabled;
+ };
+ 
++typedef struct xen_set_cppc_para xc_set_cppc_para_t;
++
+ int xc_get_cpufreq_para(xc_interface *xch, int cpuid,
+                         struct xc_get_cpufreq_para *user_para);
+ int xc_set_cpufreq_gov(xc_interface *xch, int cpuid, char *govname);
+ int xc_set_cpufreq_para(xc_interface *xch, int cpuid,
+                         int ctrl_type, int ctrl_value);
++int xc_set_cpufreq_cppc(xc_interface *xch, int cpuid,
++                        xc_set_cppc_para_t *set_cppc);
+ int xc_get_cpufreq_avgfreq(xc_interface *xch, int cpuid, int *avg_freq);
+ 
+ int xc_set_sched_opt_smt(xc_interface *xch, uint32_t value);
+diff --git a/tools/libs/ctrl/xc_pm.c b/tools/libs/ctrl/xc_pm.c
+index cea3eab22e..1f267147f6 100644
+--- a/tools/libs/ctrl/xc_pm.c
++++ b/tools/libs/ctrl/xc_pm.c
+@@ -329,6 +329,29 @@ int xc_set_cpufreq_para(xc_interface *xch, int cpuid,
+     return xc_sysctl(xch, &sysctl);
+ }
+ 
++int xc_set_cpufreq_cppc(xc_interface *xch, int cpuid,
++                        xc_set_cppc_para_t *set_cppc)
++{
++    DECLARE_SYSCTL;
++    int ret;
++
++    if ( !xch )
++    {
++        errno = EINVAL;
++        return -1;
++    }
++    sysctl.cmd = XEN_SYSCTL_pm_op;
++    sysctl.u.pm_op.cmd = SET_CPUFREQ_CPPC;
++    sysctl.u.pm_op.cpuid = cpuid;
++    sysctl.u.pm_op.u.set_cppc = *set_cppc;
++
++    ret = xc_sysctl(xch, &sysctl);
++
++    *set_cppc = sysctl.u.pm_op.u.set_cppc;
++
++    return ret;
++}
++
+ int xc_get_cpufreq_avgfreq(xc_interface *xch, int cpuid, int *avg_freq)
+ {
+     int ret = 0;
 -- 
 2.41.0
 
