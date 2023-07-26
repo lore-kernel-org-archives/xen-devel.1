@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E0D6C001B0
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 11:04:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570306.892069 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C91FFC001DE
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 11:04:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.570304.892049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOcJZ-0006Gu-0r; Wed, 26 Jul 2023 11:04:21 +0000
+	id 1qOcJU-0005mP-HQ; Wed, 26 Jul 2023 11:04:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570306.892069; Wed, 26 Jul 2023 11:04:20 +0000
+Received: by outflank-mailman (output) from mailman id 570304.892049; Wed, 26 Jul 2023 11:04:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOcJY-0006Gl-Tw; Wed, 26 Jul 2023 11:04:20 +0000
-Received: by outflank-mailman (input) for mailman id 570306;
- Wed, 26 Jul 2023 11:04:19 +0000
+	id 1qOcJU-0005mI-Eu; Wed, 26 Jul 2023 11:04:16 +0000
+Received: by outflank-mailman (input) for mailman id 570304;
+ Wed, 26 Jul 2023 11:04:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=j0A2=DM=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qOcJX-0005mC-Lx
- for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 11:04:19 +0000
+ id 1qOcJT-0005mC-5m
+ for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 11:04:15 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2aeff599-2ba4-11ee-b242-6b7b168915f2;
- Wed, 26 Jul 2023 13:04:19 +0200 (CEST)
+ id 27719c83-2ba4-11ee-b242-6b7b168915f2;
+ Wed, 26 Jul 2023 13:04:13 +0200 (CEST)
 Received: from beta.bugseng.com (unknown [37.163.26.92])
- by support.bugseng.com (Postfix) with ESMTPSA id 46FF34EE073C;
- Wed, 26 Jul 2023 13:04:18 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id C98084EE0738;
+ Wed, 26 Jul 2023 13:04:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,113 +41,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2aeff599-2ba4-11ee-b242-6b7b168915f2
+X-Inumbo-ID: 27719c83-2ba4-11ee-b242-6b7b168915f2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
-	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH v4 2/4] xen/vpci: address violations of MISRA C:2012 Rule 7.2
-Date: Wed, 26 Jul 2023 13:03:37 +0200
-Message-Id: <2cb770d946c4bf858a41271fd7b9985f789ca149.1690368810.git.simone.ballarin@bugseng.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Paul Durrant <paul@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH 0/4] xen: address violations of MISRA C:2012 Rule 7.2
+Date: Wed, 26 Jul 2023 13:03:35 +0200
+Message-Id: <cover.1690368810.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1690368810.git.simone.ballarin@bugseng.com>
-References: <cover.1690368810.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Gianluca Luparini <gianluca.luparini@bugseng.com>
+The xen sources contains violations of MISRA C:2012 Rule 7.2 whose headline
+states:
+"A 'u' or 'U' suffix shall be applied to all integer constants that are
+represented in an unsigned type".
 
-The xen sources contains violations of MISRA C:2012 Rule 7.2 whose
-headline states:
-"A 'u' or 'U' suffix shall be applied to all integer constants
-that are represented in an unsigned type".
+These violations are caused by the missing "u" or "U" suffix in unsigned
+integer constants, such as:
 
-Add the 'U' suffix to integers literals with unsigned type and also to other
+xen/arch/x86/hvm/hypercall.c:132.17-132.26
+if ( (eax & 0x80000000) && is_viridian_domain(currd) )
+
+If a rule is not met, changes are needed in order to achieve compliance.
+The patches in this series achieve compliance for MISRA C:2012 Rule 7.2 by
+adding the 'U' suffix to integers literals with unsigned type and also to other
 literals used in the same contexts or near violations, when their positive
 nature is immediately clear. The latter changes are done for the sake of
 uniformity.
 
-Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
----
-Changes in v4:
-- change commit headline
+Gianluca Luparini (4):
+  x86/vmx: address violations of MISRA C:2012 Rule 7.2
+  xen/vpci: address violations of MISRA C:2012 Rule 7.2
+  x86/viridian: address violations of MISRA C:2012 Rule 7.2
+  xen/x86: address violations of MISRA C:2012 Rule 7.2
 
-Changes in v3:
-- change 'Signed-off-by' ordering
-- add 'uint32_t' casts in 'msi.c' and 'msix.c'
+ xen/arch/x86/apic.c                          |   2 +-
+ xen/arch/x86/cpu-policy.c                    |  18 +-
+ xen/arch/x86/cpu/mcheck/mce-apei.c           |   4 +-
+ xen/arch/x86/cpu/vpmu_intel.c                |   2 +-
+ xen/arch/x86/cpuid.c                         |   8 +-
+ xen/arch/x86/efi/efi-boot.h                  |   6 +-
+ xen/arch/x86/extable.c                       |   2 +-
+ xen/arch/x86/hvm/hypercall.c                 |   2 +-
+ xen/arch/x86/hvm/pmtimer.c                   |   4 +-
+ xen/arch/x86/hvm/stdvga.c                    |  50 +++---
+ xen/arch/x86/hvm/viridian/viridian.c         |   2 +-
+ xen/arch/x86/hvm/vlapic.c                    |   6 +-
+ xen/arch/x86/hvm/vmx/vmcs.c                  |   6 +-
+ xen/arch/x86/hvm/vmx/vvmx.c                  |   8 +-
+ xen/arch/x86/include/asm/apicdef.h           |   2 +-
+ xen/arch/x86/include/asm/config.h            |   2 +-
+ xen/arch/x86/include/asm/guest/hyperv-tlfs.h |  28 +--
+ xen/arch/x86/include/asm/hpet.h              |   2 +-
+ xen/arch/x86/include/asm/hvm/trace.h         |   4 +-
+ xen/arch/x86/include/asm/hvm/vioapic.h       |   2 +-
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h      |  84 ++++-----
+ xen/arch/x86/include/asm/hvm/vmx/vmx.h       |  16 +-
+ xen/arch/x86/include/asm/msi.h               |   2 +-
+ xen/arch/x86/include/asm/msr-index.h         | 180 +++++++++----------
+ xen/arch/x86/include/asm/pci.h               |   8 +-
+ xen/arch/x86/include/asm/x86-defns.h         |  24 +--
+ xen/arch/x86/percpu.c                        |   2 +-
+ xen/arch/x86/psr.c                           |   2 +-
+ xen/arch/x86/spec_ctrl.c                     |   8 +-
+ xen/arch/x86/x86_64/pci.c                    |   2 +-
+ xen/arch/x86/x86_emulate/x86_emulate.h       |   2 +-
+ xen/drivers/vpci/msi.c                       |   2 +-
+ xen/drivers/vpci/msix.c                      |   2 +-
+ xen/drivers/vpci/vpci.c                      |   6 +-
+ xen/lib/x86/cpuid.c                          |   8 +-
+ xen/lib/x86/policy.c                         |   2 +-
+ 36 files changed, 255 insertions(+), 255 deletions(-)
 
-Changes in v2:
-- minor change to commit title
-- change commit message
----
- xen/drivers/vpci/msi.c  | 2 +-
- xen/drivers/vpci/msix.c | 2 +-
- xen/drivers/vpci/vpci.c | 6 +++---
- 3 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
-index 8f2b59e61a..bf5fe2f981 100644
---- a/xen/drivers/vpci/msi.c
-+++ b/xen/drivers/vpci/msi.c
-@@ -124,7 +124,7 @@ static void cf_check address_hi_write(
-     struct vpci_msi *msi = data;
- 
-     /* Clear and update high part. */
--    msi->address &= 0xffffffff;
-+    msi->address  = (uint32_t)msi->address;
-     msi->address |= (uint64_t)val << 32;
- 
-     update_msi(pdev, msi);
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 25bde77586..2090168f42 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -531,7 +531,7 @@ static int cf_check msix_write(
- 
-     case PCI_MSIX_ENTRY_UPPER_ADDR_OFFSET:
-         entry->updated = true;
--        entry->addr &= 0xffffffff;
-+        entry->addr  = (uint32_t)entry->addr;
-         entry->addr |= (uint64_t)data << 32;
-         break;
- 
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index d73fa76302..3bec9a4153 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -319,7 +319,7 @@ static void vpci_write_hw(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
- static uint32_t merge_result(uint32_t data, uint32_t new, unsigned int size,
-                              unsigned int offset)
- {
--    uint32_t mask = 0xffffffff >> (32 - 8 * size);
-+    uint32_t mask = 0xffffffffU >> (32 - 8 * size);
- 
-     return (data & ~(mask << (offset * 8))) | ((new & mask) << (offset * 8));
- }
-@@ -402,7 +402,7 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
-         data = merge_result(data, tmp_data, size - data_offset, data_offset);
-     }
- 
--    return data & (0xffffffff >> (32 - 8 * size));
-+    return data & (0xffffffffU >> (32 - 8 * size));
- }
- 
- /*
-@@ -427,7 +427,7 @@ static void vpci_write_helper(const struct pci_dev *pdev,
-         data = merge_result(val, data, size, offset);
-     }
- 
--    r->write(pdev, r->offset, data & (0xffffffff >> (32 - 8 * r->size)),
-+    r->write(pdev, r->offset, data & (0xffffffffU >> (32 - 8 * r->size)),
-              r->private);
- }
- 
 -- 
 2.34.1
 
