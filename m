@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F7CC001E0
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 07:12:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570102.891490 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97DE1C001DE
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 07:14:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.570105.891500 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOYh5-0001eV-OW; Wed, 26 Jul 2023 07:12:23 +0000
+	id 1qOYij-0002E0-3e; Wed, 26 Jul 2023 07:14:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570102.891490; Wed, 26 Jul 2023 07:12:23 +0000
+Received: by outflank-mailman (output) from mailman id 570105.891500; Wed, 26 Jul 2023 07:14:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOYh5-0001eO-Lf; Wed, 26 Jul 2023 07:12:23 +0000
-Received: by outflank-mailman (input) for mailman id 570102;
- Wed, 26 Jul 2023 07:12:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qOYij-0002Dt-0h; Wed, 26 Jul 2023 07:14:05 +0000
+Received: by outflank-mailman (input) for mailman id 570105;
+ Wed, 26 Jul 2023 07:14:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pzNf=DM=linux.dev=muchun.song@srs-se1.protection.inumbo.net>)
- id 1qOYh4-0001eI-Ks
- for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 07:12:22 +0000
-Received: from out-25.mta1.migadu.com (out-25.mta1.migadu.com [95.215.58.25])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c332b527-2b83-11ee-b242-6b7b168915f2;
- Wed, 26 Jul 2023 09:12:21 +0200 (CEST)
+ id 1qOYih-0002Dj-LB
+ for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 07:14:03 +0000
+Received: from out-3.mta0.migadu.com (out-3.mta0.migadu.com [91.218.175.3])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ff11c44a-2b83-11ee-8613-37d641c3527e;
+ Wed, 26 Jul 2023 09:14:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,26 +38,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c332b527-2b83-11ee-b242-6b7b168915f2
+X-Inumbo-ID: ff11c44a-2b83-11ee-8613-37d641c3527e
 Content-Type: text/plain;
 	charset=us-ascii
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1690355540;
+	t=1690355641;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=3alJFErDP2kwm77gyuNSGQkYOJLqXt+yE3nd00upks4=;
-	b=vFtGC5wfJTYRsW6KFexwkQT3iRPwDHegF5FOg2h20LJFCKDKgiueZl1TgVj25vGIeLy7ev
-	gbMI47WpJ3SatO/WJHqfwuqpLbaPS/nnmDmyz+2u4x5goaLDmfN+L7AmLPQ0S7B/YtBgkI
-	d+QZKno/sWpLFHvrrBRFsFnaygfyjd4=
+	bh=PGcKZp3hFkU5xFrSCjAkw6H7DFoCu3eaWoJYWwGl/BE=;
+	b=oAdnd9nZjeI3kyPEsvbWMnutbGwA6A/dnneU8CJq7+Jt5loXWooRhnwIByjGtqjMSkXONA
+	pNjiGN0aO6zYh0sGJrXLfhIGW2JwY9JyCA6cMT7CdHDW/adI6zyBptMVHroPA7pSViOJ/f
+	hCfYb58R4eJqbPwcBX6PzM13HtrcK50=
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 20/47] sunrpc: dynamically allocate the sunrpc_cred
- shrinker
+Subject: Re: [PATCH v2 21/47] mm: workingset: dynamically allocate the
+ mm-shadow shrinker
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20230724094354.90817-21-zhengqi.arch@bytedance.com>
-Date: Wed, 26 Jul 2023 15:11:36 +0800
+In-Reply-To: <20230724094354.90817-22-zhengqi.arch@bytedance.com>
+Date: Wed, 26 Jul 2023 15:13:37 +0800
 Cc: Andrew Morton <akpm@linux-foundation.org>,
  david@fromorbit.com,
  tkhai@ya.ru,
@@ -69,7 +69,7 @@ Cc: Andrew Morton <akpm@linux-foundation.org>,
  tytso@mit.edu,
  steven.price@arm.com,
  cel@kernel.org,
- senozhatsky@chromium.org,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
  yujie.liu@intel.com,
  gregkh@linuxfoundation.org,
  linux-kernel@vger.kernel.org,
@@ -94,22 +94,42 @@ Cc: Andrew Morton <akpm@linux-foundation.org>,
  linux-ext4@vger.kernel.org,
  linux-xfs@vger.kernel.org,
  linux-btrfs@vger.kernel.org
-Content-Transfer-Encoding: 7bit
-Message-Id: <D2E8BDAB-A8E8-40D2-BCC5-FEF97C9D721D@linux.dev>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <08F2140B-0684-4FB0-8FB9-CEB88882F884@linux.dev>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-21-zhengqi.arch@bytedance.com>
+ <20230724094354.90817-22-zhengqi.arch@bytedance.com>
 To: Qi Zheng <zhengqi.arch@bytedance.com>
 X-Migadu-Flow: FLOW_OUT
 
 
 
-> On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
-> 
-> Use new APIs to dynamically allocate the sunrpc_cred shrinker.
-> 
+> On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> =
+wrote:
+>=20
+> Use new APIs to dynamically allocate the mm-shadow shrinker.
+>=20
 > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+> ---
+> mm/workingset.c | 26 ++++++++++++++------------
+> 1 file changed, 14 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/mm/workingset.c b/mm/workingset.c
+> index 4686ae363000..4bc85f739b13 100644
+> --- a/mm/workingset.c
+> +++ b/mm/workingset.c
+> @@ -762,12 +762,7 @@ static unsigned long scan_shadow_nodes(struct =
+shrinker *shrinker,
+> NULL);
+> }
+>=20
+> -static struct shrinker workingset_shadow_shrinker =3D {
+> -	.count_objects =3D count_shadow_nodes,
+> -	.scan_objects =3D scan_shadow_nodes,
+> -	.seeks =3D 0, /* ->count reports only fully expendable nodes */
+> -	.flags =3D SHRINKER_NUMA_AWARE | SHRINKER_MEMCG_AWARE,
+> -};
+> +static struct shrinker *workingset_shadow_shrinker;
 
-Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 
-
+Same as patch #17.=
 
