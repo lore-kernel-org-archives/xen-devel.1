@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B039C0015E
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 16:21:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570592.892510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABB0C41513
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jul 2023 16:22:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.570597.892531 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOhGE-0004uY-43; Wed, 26 Jul 2023 16:21:14 +0000
+	id 1qOhGq-0005eP-SB; Wed, 26 Jul 2023 16:21:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570592.892510; Wed, 26 Jul 2023 16:21:14 +0000
+Received: by outflank-mailman (output) from mailman id 570597.892531; Wed, 26 Jul 2023 16:21:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOhGE-0004uR-0i; Wed, 26 Jul 2023 16:21:14 +0000
-Received: by outflank-mailman (input) for mailman id 570592;
- Wed, 26 Jul 2023 16:21:12 +0000
+	id 1qOhGq-0005eI-OL; Wed, 26 Jul 2023 16:21:52 +0000
+Received: by outflank-mailman (input) for mailman id 570597;
+ Wed, 26 Jul 2023 16:21:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=j0A2=DM=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qOhGC-0004uL-IA
- for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 16:21:12 +0000
+ id 1qOhGp-0004uL-QP
+ for xen-devel@lists.xenproject.org; Wed, 26 Jul 2023 16:21:51 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6ec485e9-2bd0-11ee-b242-6b7b168915f2;
- Wed, 26 Jul 2023 18:21:10 +0200 (CEST)
+ id 86d869b5-2bd0-11ee-b242-6b7b168915f2;
+ Wed, 26 Jul 2023 18:21:51 +0200 (CEST)
 Received: from beta.bugseng.com (unknown [37.163.26.92])
- by support.bugseng.com (Postfix) with ESMTPSA id 790DC4EE0738;
- Wed, 26 Jul 2023 18:21:09 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 766C14EE073C;
+ Wed, 26 Jul 2023 18:21:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,32 +41,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ec485e9-2bd0-11ee-b242-6b7b168915f2
+X-Inumbo-ID: 86d869b5-2bd0-11ee-b242-6b7b168915f2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v4 0/4] automation: Add ECLAIR pipelines
-Date: Wed, 26 Jul 2023 18:20:46 +0200
-Message-Id: <cover.1690387393.git.simone.ballarin@bugseng.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v4 3/4] automation: Add ECLAIR pipelines
+Date: Wed, 26 Jul 2023 18:20:49 +0200
+Message-Id: <4da07f65cf6f2e2d9ccffa479f3cb8165f273fdc.1690387393.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1690387393.git.simone.ballarin@bugseng.com>
+References: <cover.1690387393.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch series adds two pipelines that analyze an ARM64 and a X86_64
-build with the ECLAIR static analyzer on the guidelines contained in Set1.
-The builds analyzed are the ones triggered by automation/eclair_analysis/build.sh.
+Add two pipelines that analyze an ARM64 and a X86_64 build with the
+ECLAIR static analyzer on the guidelines contained in Set1.
 
-automation/eclair_analysis/ECLAIR contains the ECLAIR configuration files
-(.ecl files) and scripts that implement the integration (action* scripts).
+The analysis configuration is stored in automation/eclair_analysis.
 
 All commits on the xen-project/xen:staging branch will be analyzed
 and their artifacts will be stored indefinitely; the integration will
@@ -77,86 +71,153 @@ only the last ten artifacts will be kept; the integration will report
 differential information with respect to the analysis done on the common
 ancestor with xen-project/xen:staging (if available).
 
+Currently the pipeline variable ENABLE_ECLAIR_BOT is set to "n".
+Doing so disables the generation of comments with the analysis summary
+on the commit threads. The variable can be set to "y" if the a masked
+variable named ECLAIR_BOT_TOKEN is set with the impersonation token of
+an account with enough privileges to write on all repositories.
+
 Additionaly any repository should be able to read a masked variable
-named WTOKEN with the token provided by BUGSENG, otherwise the pipeline
-will fail.
+named WTOKEN with the token provided by BUGSENG.
 
 The analysis fails if it contains violations of guidelines tagged as
 clean:added. The list of clean guidelines are maintained in
 automation/eclair_analysis/ECLAIR/tagging.ecl.
 
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+
 --
 Changes in v4:
 - move link to the analysis results at the end of the console log
-- avoid git warning
-- avoid undesired git logs
-- remove undesired blanks in MAINTAINERS
 
-Simone Ballarin (4):
-  automation: Add ECLAIR utilities and settings
-  automation: Add xen builds for the ECLAIR analyses
-  automation: Add ECLAIR pipelines
-  maintainers: Add ECLAIR reviewer
+Changes in v3:
+- split definitions of the ECLAIR pipelines in a separate patch;
+- if the WTOKEN variable is missing now the analysis fails immediately.
 
- .gitlab-ci.yml                                |   2 +
- MAINTAINERS                                   |   6 +
- automation/eclair_analysis/ECLAIR/Set1.ecl    |  59 ++++
- automation/eclair_analysis/ECLAIR/Set2.ecl    |  25 ++
- automation/eclair_analysis/ECLAIR/Set3.ecl    |  67 ++++
- .../eclair_analysis/ECLAIR/action.helpers     | 193 ++++++++++++
- .../eclair_analysis/ECLAIR/action.settings    | 172 ++++++++++
- .../ECLAIR/action_clean_added.sh              |  36 +++
- .../eclair_analysis/ECLAIR/action_log.sh      |  15 +
- .../ECLAIR/action_pull_request.sh             |  57 ++++
- .../eclair_analysis/ECLAIR/action_push.sh     |  95 ++++++
- .../ECLAIR/action_upload_sarif.sh             |  31 ++
- .../eclair_analysis/ECLAIR/analysis.ecl       |  25 ++
- automation/eclair_analysis/ECLAIR/analyze.sh  | 106 +++++++
- .../ECLAIR/call_properties.ecl                | 106 +++++++
- .../eclair_analysis/ECLAIR/deviations.ecl     | 298 ++++++++++++++++++
- .../eclair_analysis/ECLAIR/out_of_scope.ecl   | 127 ++++++++
- .../ECLAIR/print_analyzed_files.sh            |  66 ++++
- .../eclair_analysis/ECLAIR/public_APIs.ecl    |   6 +
- automation/eclair_analysis/ECLAIR/report.ecl  |   4 +
- automation/eclair_analysis/ECLAIR/tagging.ecl |  34 ++
- .../eclair_analysis/ECLAIR/toolchain.ecl      | 275 ++++++++++++++++
- automation/eclair_analysis/Makefile.prepare   |   6 +
- automation/eclair_analysis/build.sh           |  44 +++
- automation/eclair_analysis/prepare.sh         |  42 +++
- automation/eclair_analysis/xen_arm_config     | 147 +++++++++
- automation/eclair_analysis/xen_x86_config     | 152 +++++++++
- automation/gitlab-ci/analyze.yaml             |  38 +++
- automation/gitlab-ci/build.yaml               |   1 +
- automation/scripts/eclair                     |  34 ++
- 30 files changed, 2269 insertions(+)
- create mode 100644 automation/eclair_analysis/ECLAIR/Set1.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/Set2.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/Set3.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/action.helpers
- create mode 100644 automation/eclair_analysis/ECLAIR/action.settings
- create mode 100755 automation/eclair_analysis/ECLAIR/action_clean_added.sh
- create mode 100755 automation/eclair_analysis/ECLAIR/action_log.sh
- create mode 100644 automation/eclair_analysis/ECLAIR/action_pull_request.sh
- create mode 100755 automation/eclair_analysis/ECLAIR/action_push.sh
- create mode 100755 automation/eclair_analysis/ECLAIR/action_upload_sarif.sh
- create mode 100644 automation/eclair_analysis/ECLAIR/analysis.ecl
- create mode 100755 automation/eclair_analysis/ECLAIR/analyze.sh
- create mode 100644 automation/eclair_analysis/ECLAIR/call_properties.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/deviations.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/out_of_scope.ecl
- create mode 100755 automation/eclair_analysis/ECLAIR/print_analyzed_files.sh
- create mode 100644 automation/eclair_analysis/ECLAIR/public_APIs.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/report.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/tagging.ecl
- create mode 100644 automation/eclair_analysis/ECLAIR/toolchain.ecl
- create mode 100644 automation/eclair_analysis/Makefile.prepare
- create mode 100755 automation/eclair_analysis/build.sh
- create mode 100755 automation/eclair_analysis/prepare.sh
- create mode 100644 automation/eclair_analysis/xen_arm_config
- create mode 100644 automation/eclair_analysis/xen_x86_config
+Changes in v2:
+- add ECLAIR configuration files (before they were fetched from a separate
+    repository);
+- now the pipeline fails if there are new violations of guidelines tagged
+    with clean:added.
+---
+ .gitlab-ci.yml                    |  2 ++
+ automation/gitlab-ci/analyze.yaml | 38 +++++++++++++++++++++++++++++++
+ automation/gitlab-ci/build.yaml   |  1 +
+ automation/scripts/eclair         | 34 +++++++++++++++++++++++++++
+ 4 files changed, 75 insertions(+)
  create mode 100644 automation/gitlab-ci/analyze.yaml
  create mode 100755 automation/scripts/eclair
 
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index c8bd7519d5..ee5430b8b7 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -1,7 +1,9 @@
+ stages:
++  - analyze
+   - build
+   - test
+ 
+ include:
++  - 'automation/gitlab-ci/analyze.yaml'
+   - 'automation/gitlab-ci/build.yaml'
+   - 'automation/gitlab-ci/test.yaml'
+diff --git a/automation/gitlab-ci/analyze.yaml b/automation/gitlab-ci/analyze.yaml
+new file mode 100644
+index 0000000000..3d8166572b
+--- /dev/null
++++ b/automation/gitlab-ci/analyze.yaml
+@@ -0,0 +1,38 @@
++.eclair-analysis:
++  stage: analyze
++  tags:
++    - eclair-analysis
++  variables:
++    ECLAIR_OUTPUT_DIR: "ECLAIR_out"
++    ANALYSIS_KIND: "normal"
++    ENABLE_ECLAIR_BOT: "n"
++    AUTO_PR_BRANCH: "staging"
++    AUTO_PR_REPOSITORY: "xen-project/xen"
++  artifacts:
++    when: always
++    paths:
++      - "${ECLAIR_OUTPUT_DIR}/*.log"
++      - "${ECLAIR_OUTPUT_DIR}/*.txt"
++      - '*.log'
++    reports:
++      codequality: gl-code-quality-report.json
++
++eclair-x86_64:
++  extends: .eclair-analysis
++  variables:
++    LOGFILE: "eclair-x86_64.log"
++    VARIANT: "X86_64"
++    RULESET: "Set1"
++  script:
++    - ./automation/scripts/eclair 2>&1 | tee "${LOGFILE}"
++  allow_failure: true
++
++eclair-ARM64:
++  extends: .eclair-analysis
++  variables:
++    LOGFILE: "eclair-ARM64.log"
++    VARIANT: "ARM64"
++    RULESET: "Set1"
++  script:
++    - ./automation/scripts/eclair 2>&1 | tee "${LOGFILE}"
++  allow_failure: true
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index c401f62d61..f01e2c32bb 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -11,6 +11,7 @@
+       - '*.log'
+       - '*/*.log'
+     when: always
++  needs: []
+   except:
+     - master
+     - smoke
+diff --git a/automation/scripts/eclair b/automation/scripts/eclair
+new file mode 100755
+index 0000000000..813a56eb6a
+--- /dev/null
++++ b/automation/scripts/eclair
+@@ -0,0 +1,34 @@
++#!/bin/sh -eu
++
++ECLAIR_ANALYSIS_DIR=automation/eclair_analysis
++ECLAIR_DIR="${ECLAIR_ANALYSIS_DIR}/ECLAIR"
++ECLAIR_OUTPUT_DIR=$(realpath "${ECLAIR_OUTPUT_DIR}")
++
++if [ -z "${WTOKEN:-}" ]; then
++    echo "Failure: the WTOKEN variable is not defined." >&2
++    exit 1
++fi
++
++"${ECLAIR_ANALYSIS_DIR}/prepare.sh" "${VARIANT}"
++
++ex=0
++"${ECLAIR_DIR}/analyze.sh" "${VARIANT}" "${RULESET}" || ex=$?
++"${ECLAIR_DIR}/action_log.sh" ANALYSIS_LOG \
++                             "ECLAIR analysis log" \
++                             "${ECLAIR_OUTPUT_DIR}/ANALYSIS.log" \
++                             "${ex}"
++"${ECLAIR_DIR}/action_log.sh" REPORT_LOG \
++                             "ECLAIR report log" \
++                             "${ECLAIR_OUTPUT_DIR}/REPORT.log" \
++                             "${ex}"
++[ "${ex}" = 0 ] || exit "${ex}"
++
++# Fail in case of new reports
++"${ECLAIR_DIR}/action_clean_added.sh" "${ECLAIR_OUTPUT_DIR}" || ex=$?
++"${ECLAIR_DIR}/action_log.sh" DIFF_CHECK_LOG \
++                             "ECLAIR diff check" \
++                             "${ECLAIR_OUTPUT_DIR}/clean_added.log" \
++                             "${ex}"
++
++"${ECLAIR_DIR}/action_push.sh" "${WTOKEN}" "${ECLAIR_OUTPUT_DIR}"
++[ "${ex}" = 0 ] || exit "${ex}"
 -- 
 2.34.1
 
