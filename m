@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5703CC04FDF
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 08:17:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570886.893336 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B39B2C41513
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 08:17:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.570893.893379 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOwBa-0007UN-A6; Thu, 27 Jul 2023 08:17:26 +0000
+	id 1qOwBd-0000LR-WF; Thu, 27 Jul 2023 08:17:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570886.893336; Thu, 27 Jul 2023 08:17:26 +0000
+Received: by outflank-mailman (output) from mailman id 570893.893379; Thu, 27 Jul 2023 08:17:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOwBZ-0007T4-TU; Thu, 27 Jul 2023 08:17:25 +0000
-Received: by outflank-mailman (input) for mailman id 570886;
- Thu, 27 Jul 2023 08:17:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qOwBd-0000Jw-PC; Thu, 27 Jul 2023 08:17:29 +0000
+Received: by outflank-mailman (input) for mailman id 570893;
+ Thu, 27 Jul 2023 08:17:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eXb/=DN=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qOw64-0001DS-B7
- for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 08:11:44 +0000
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [2607:f8b0:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 38a03c80-2c55-11ee-b247-6b7b168915f2;
- Thu, 27 Jul 2023 10:11:43 +0200 (CEST)
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-686f6231bdeso113471b3a.1
- for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 01:11:43 -0700 (PDT)
+ id 1qOw2A-0000Tn-Ut
+ for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 08:07:42 +0000
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [2607:f8b0:4864:20::430])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a7f9273a-2c54-11ee-8613-37d641c3527e;
+ Thu, 27 Jul 2023 10:07:41 +0200 (CEST)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-682b1768a0bso174674b3a.0
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 01:07:41 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.11.30
+ j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.07.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jul 2023 01:11:41 -0700 (PDT)
+ Thu, 27 Jul 2023 01:07:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38a03c80-2c55-11ee-b247-6b7b168915f2
+X-Inumbo-ID: a7f9273a-2c54-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690445502; x=1691050302;
+        d=bytedance.com; s=google; t=1690445259; x=1691050059;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LaFX3BwmrpvhCQ7689MuoFj6fWFWMuerWJZNZNxWVVc=;
-        b=SGV84iDT12fuj4KQ/vgxpHx68bD/8JsYSa9nhb7ntFAq0TKpEUCTaHREzmRsJ3Oz9G
-         gFKmoptXd+Bze48vx/wk2NbZ7T10E7S2MEqYjOuFeG7krpKwSKpfVHBIQRglXfDWTvzO
-         H6VjPKPaTyQraf7CXaxRYntDfW/rFmDGA8pIc8wp3mkyDCZKtDmTVn+WhnbJ9UTHRuGw
-         cfWrmdeiaPvvoPdILYK4+expmzf+8d5vjjDAS5qG8jY/gHHW1jvZoSyULsapwlJ7yOSa
-         R+fxk2s2E87YRuuXF3DsPLATcyScHTHvPiXBlY0TGTmF0pFa842v0dWDdf9orTc8Pn3s
-         TgHw==
+        bh=bO4yc6b0222dRNj48HoFyPuU9QjRVolFKKVhhMGpLKw=;
+        b=bsOGFEHMBlylId/BUUU6j2E7pnjQ9uMa3Dv7D6LoIY48uPLQavKrpj689NrNUpNLTl
+         Aanz7sKMrDaOTTGh4q0MwHTWAvihn1jLx/NBWz0K9CQrFU5rnVI5CzfKG4yO6ADEleGk
+         +0iHBjbO0i9m2+usUNEX9xFmZ3EhQv1mJHg4H05ocCDdgDOngyKPTxLLXx+aCRh/qeWu
+         DaVggQ15a1Fk3lZ/quyODiCtb+FgmREKB0V2Ac2I9AcArTAe8N9Pb2STGieOdKv9GKuP
+         YDdg42gSOnr6HuMRpDchso7LM2qcKeKJNp+Y2dbUP8m4urT1oK6m0eJU2zmqUir1DcF2
+         Lspg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690445502; x=1691050302;
+        d=1e100.net; s=20221208; t=1690445259; x=1691050059;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LaFX3BwmrpvhCQ7689MuoFj6fWFWMuerWJZNZNxWVVc=;
-        b=UCl29DLWo7TBt37dHoh+CsmkvvRldhJ6GTk72XgBKlTbw+OdV3RmV6BAl3Zpt3IbkC
-         Ke/45wyjhDY3G0gjTcLlln8KwPopRX1S7Pa88zI2EgUzx1skFFSwaanPri4o2GFuqCXB
-         slQ+vFU+ciPy8NeF9OKFpCnLkwGGHa1PQovzMkJJ1lhjs7XsfJYoiduHO/7bFpeU62bb
-         1QJ5GXlQxvRH8AKTeHhUqwiSnwKsm8og7u12iWLvrvMWbNkKtHvd7XGZqXuWm4xrTyXI
-         uR/+X4CB2GFSem+MC2T5V2XqqWtp2wFm5tODEx0pgTZJlTmxr8UmUoOWqwcasmFfVLQJ
-         jPyg==
-X-Gm-Message-State: ABy/qLYchj62JlTZwiwz5igl2R0vMxHmeMEVP3IHVf/bvy9TM1mAztup
-	H+RVKXvzbQmLCWpKXDTO/SoN1w==
-X-Google-Smtp-Source: APBJJlE5krPFtX55mdmbm5NUPWWjP9qjtSRaT4qUAQtTa6jtnXVyWfbzlnq9LXdP1SlmgTnMsVycpA==
-X-Received: by 2002:a05:6a21:78a8:b0:137:3eba:b81f with SMTP id bf40-20020a056a2178a800b001373ebab81fmr6016028pzc.3.1690445502183;
-        Thu, 27 Jul 2023 01:11:42 -0700 (PDT)
+        bh=bO4yc6b0222dRNj48HoFyPuU9QjRVolFKKVhhMGpLKw=;
+        b=M9O7sDayoabJlIu+DRbGXEDWGO21EFB1N95fisxwKgkD0Q9UFwNHRDa3WYE1gV9CLJ
+         B5UXv62qXB3ZRVaja49F9A+8+4Q0sOCpagCseHolFkRIAdfiONxJ3seWE4a8rPQS8KyR
+         Dep4+YLYA2gITr9LdNMK7ndViKXUYfl6yGRt2UX8Cqu4XFYo6fYp44rVk8czFqttUORk
+         Z5bILAdj36/lpcAqJRWkw0iaYUa9+RpfOgaAz1zjCfo6s3OqvzjmERtVzX6oCCWNtfjV
+         069tKd6e9u9OEYX1s9fbQQP+dhrx5tB8adnJlymnCTjJ5Algj5mvOIuRGVRpntCt9WHd
+         lmHw==
+X-Gm-Message-State: ABy/qLbH8PqRWCeoz2/9EQ7tAe3YXJWgZiLEJv208uiyKhBvfYvJPwKC
+	/sksUHx1c+1so141WRl99lM7fA==
+X-Google-Smtp-Source: APBJJlEtjuu7JvMViG/zI1+BRK6QgnXajX34xFKdSMMqB1WswZOW9mIhLIlLvIrLtx031P4ulw5hGg==
+X-Received: by 2002:a05:6a20:9381:b0:137:8f19:1de7 with SMTP id x1-20020a056a20938100b001378f191de7mr6160325pzh.0.1690445259706;
+        Thu, 27 Jul 2023 01:07:39 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -117,101 +117,61 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>,
 	Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v3 29/49] md/raid5: dynamically allocate the md-raid5 shrinker
-Date: Thu, 27 Jul 2023 16:04:42 +0800
-Message-Id: <20230727080502.77895-30-zhengqi.arch@bytedance.com>
+Subject: [PATCH v3 09/49] xenbus/backend: dynamically allocate the xen-backend shrinker
+Date: Thu, 27 Jul 2023 16:04:22 +0800
+Message-Id: <20230727080502.77895-10-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 References: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In preparation for implementing lockless slab shrink, use new APIs to
-dynamically allocate the md-raid5 shrinker, so that it can be freed
-asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
-read-side critical section when releasing the struct r5conf.
+Use new APIs to dynamically allocate the xen-backend shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- drivers/md/raid5.c | 25 ++++++++++++++-----------
- drivers/md/raid5.h |  2 +-
- 2 files changed, 15 insertions(+), 12 deletions(-)
+ drivers/xen/xenbus/xenbus_probe_backend.c | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/md/raid5.c b/drivers/md/raid5.c
-index 85b3004594e0..fbb4e6f5ff43 100644
---- a/drivers/md/raid5.c
-+++ b/drivers/md/raid5.c
-@@ -7414,7 +7414,7 @@ static void free_conf(struct r5conf *conf)
+diff --git a/drivers/xen/xenbus/xenbus_probe_backend.c b/drivers/xen/xenbus/xenbus_probe_backend.c
+index da96c260e26b..929c41a5ccee 100644
+--- a/drivers/xen/xenbus/xenbus_probe_backend.c
++++ b/drivers/xen/xenbus/xenbus_probe_backend.c
+@@ -284,13 +284,9 @@ static unsigned long backend_shrink_memory_count(struct shrinker *shrinker,
+ 	return 0;
+ }
  
- 	log_exit(conf);
- 
--	unregister_shrinker(&conf->shrinker);
-+	shrinker_free(conf->shrinker);
- 	free_thread_groups(conf);
- 	shrink_stripes(conf);
- 	raid5_free_percpu(conf);
-@@ -7462,7 +7462,7 @@ static int raid5_alloc_percpu(struct r5conf *conf)
- static unsigned long raid5_cache_scan(struct shrinker *shrink,
- 				      struct shrink_control *sc)
+-static struct shrinker backend_memory_shrinker = {
+-	.count_objects = backend_shrink_memory_count,
+-	.seeks = DEFAULT_SEEKS,
+-};
+-
+ static int __init xenbus_probe_backend_init(void)
  {
--	struct r5conf *conf = container_of(shrink, struct r5conf, shrinker);
-+	struct r5conf *conf = shrink->private_data;
- 	unsigned long ret = SHRINK_STOP;
++	struct shrinker *backend_memory_shrinker;
+ 	static struct notifier_block xenstore_notifier = {
+ 		.notifier_call = backend_probe_and_watch
+ 	};
+@@ -305,8 +301,16 @@ static int __init xenbus_probe_backend_init(void)
  
- 	if (mutex_trylock(&conf->cache_size_mutex)) {
-@@ -7483,7 +7483,7 @@ static unsigned long raid5_cache_scan(struct shrinker *shrink,
- static unsigned long raid5_cache_count(struct shrinker *shrink,
- 				       struct shrink_control *sc)
- {
--	struct r5conf *conf = container_of(shrink, struct r5conf, shrinker);
-+	struct r5conf *conf = shrink->private_data;
+ 	register_xenstore_notifier(&xenstore_notifier);
  
- 	if (conf->max_nr_stripes < conf->min_nr_stripes)
- 		/* unlikely, but not impossible */
-@@ -7718,18 +7718,21 @@ static struct r5conf *setup_conf(struct mddev *mddev)
- 	 * it reduces the queue depth and so can hurt throughput.
- 	 * So set it rather large, scaled by number of devices.
- 	 */
--	conf->shrinker.seeks = DEFAULT_SEEKS * conf->raid_disks * 4;
--	conf->shrinker.scan_objects = raid5_cache_scan;
--	conf->shrinker.count_objects = raid5_cache_count;
--	conf->shrinker.batch = 128;
--	conf->shrinker.flags = 0;
--	ret = register_shrinker(&conf->shrinker, "md-raid5:%s", mdname(mddev));
--	if (ret) {
--		pr_warn("md/raid:%s: couldn't register shrinker.\n",
-+	conf->shrinker = shrinker_alloc(0, "md-raid5:%s", mdname(mddev));
-+	if (!conf->shrinker) {
-+		pr_warn("md/raid:%s: couldn't allocate shrinker.\n",
- 			mdname(mddev));
- 		goto abort;
- 	}
- 
-+	conf->shrinker->seeks = DEFAULT_SEEKS * conf->raid_disks * 4;
-+	conf->shrinker->scan_objects = raid5_cache_scan;
-+	conf->shrinker->count_objects = raid5_cache_count;
-+	conf->shrinker->batch = 128;
-+	conf->shrinker->private_data = conf;
+-	if (register_shrinker(&backend_memory_shrinker, "xen-backend"))
+-		pr_warn("shrinker registration failed\n");
++	backend_memory_shrinker = shrinker_alloc(0, "xen-backend");
++	if (!backend_memory_shrinker) {
++		pr_warn("shrinker allocation failed\n");
++		return 0;
++	}
 +
-+	shrinker_register(conf->shrinker);
++	backend_memory_shrinker->count_objects = backend_shrink_memory_count;
++	backend_memory_shrinker->seeks = DEFAULT_SEEKS;
 +
- 	sprintf(pers_name, "raid%d", mddev->new_level);
- 	rcu_assign_pointer(conf->thread,
- 			   md_register_thread(raid5d, mddev, pers_name));
-diff --git a/drivers/md/raid5.h b/drivers/md/raid5.h
-index 97a795979a35..22bea20eccbd 100644
---- a/drivers/md/raid5.h
-+++ b/drivers/md/raid5.h
-@@ -670,7 +670,7 @@ struct r5conf {
- 	wait_queue_head_t	wait_for_stripe;
- 	wait_queue_head_t	wait_for_overlap;
- 	unsigned long		cache_state;
--	struct shrinker		shrinker;
-+	struct shrinker		*shrinker;
- 	int			pool_size; /* number of disks in stripeheads in pool */
- 	spinlock_t		device_lock;
- 	struct disk_info	*disks;
++	shrinker_register(backend_memory_shrinker);
+ 
+ 	return 0;
+ }
 -- 
 2.30.2
 
