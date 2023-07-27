@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06CA6C04E69
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 08:10:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570858.893189 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11ECCC00528
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 08:10:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.570859.893199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOw4X-00009j-QC; Thu, 27 Jul 2023 08:10:09 +0000
+	id 1qOw4v-0000i7-2G; Thu, 27 Jul 2023 08:10:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570858.893189; Thu, 27 Jul 2023 08:10:09 +0000
+Received: by outflank-mailman (output) from mailman id 570859.893199; Thu, 27 Jul 2023 08:10:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOw4X-00009Z-NR; Thu, 27 Jul 2023 08:10:09 +0000
-Received: by outflank-mailman (input) for mailman id 570858;
- Thu, 27 Jul 2023 08:10:08 +0000
+	id 1qOw4u-0000i0-Vh; Thu, 27 Jul 2023 08:10:32 +0000
+Received: by outflank-mailman (input) for mailman id 570859;
+ Thu, 27 Jul 2023 08:10:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eXb/=DN=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qOw4W-0005Vh-Iy
- for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 08:10:08 +0000
+ id 1qOw4u-0005Vh-6J
+ for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 08:10:32 +0000
 Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
  [2607:f8b0:4864:20::436])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id febf9b3f-2c54-11ee-8613-37d641c3527e;
- Thu, 27 Jul 2023 10:10:06 +0200 (CEST)
+ id 0cf55329-2c55-11ee-8613-37d641c3527e;
+ Thu, 27 Jul 2023 10:10:30 +0200 (CEST)
 Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6862d4a1376so189008b3a.0
- for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 01:10:06 -0700 (PDT)
+ d2e1a72fcca58-686f74a8992so77879b3a.1
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 01:10:30 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.09.53
+ j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.10.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jul 2023 01:10:04 -0700 (PDT)
+ Thu, 27 Jul 2023 01:10:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: febf9b3f-2c54-11ee-8613-37d641c3527e
+X-Inumbo-ID: 0cf55329-2c55-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690445405; x=1691050205;
+        d=bytedance.com; s=google; t=1690445429; x=1691050229;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zAZIQD5LE19JLWIPx8KiiULhQHk9tWBr8sqfFcta/MI=;
-        b=NqYwP+7q26BX+05EQAE55Kus0VTZ4uDrn8hA+JsQeQZJT9fqe02P3PtEqTbWL+ex0x
-         YIFFlprB9LN8XpWOyzBWvs6bF2o1el7zRiKvHm2Vd5z2Or8QA2PiX1E8ylBDH7Szeeh9
-         /iQcvqB1l/KdO3epgECrqpXSIR/s/RJamq92lbZYEsjapR5/FUExLIHgiZunap4eHVCx
-         zA39TmQ89NL3AupWiP9iOshQQO6k89rLp1YMDCuDF8tqw1FNGVEm51b05cxcsW4A6ycO
-         oxBBen2ORAG64Kh5EsfwftGMbRswk1n9HcylImCxbc9GAVmkCHyiC5Q0TKVbaeRFnqta
-         TxEw==
+        bh=uDu/4z0sff3MNLq2Hem41DvJLtW9HR7Ht2OY0+o3IBw=;
+        b=iVGfsyXkMcKNuSj4S4+ETT1e5FnNKRSLwcupS7aKQrOa2P/cg11EPb/fa7MepSVN0c
+         souD70V3XZBCWCF1GY2G8kOBoazYK/GwCZP5iJVITEwRi2CFhPhtCnmN6NHRYDRfscjM
+         ei11bn/3SqGlS2cI+uWxsIZ60GgV8/Th1+KRHAcGdOM/vcClXnAdg9IcKu5dXKtmCkaz
+         1Uv1368bMlurEfH1GvebpNgAfjlYTQWl+OVWRYv+SAitVhKYxMqk7I6vstlqXAV5ZTFg
+         13mCns35aGRuj+msRJnkqY3lYp1C9AqbhcZNDVttxslcFzKIxthPN+0g8mDIqHh31rTQ
+         XhNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690445405; x=1691050205;
+        d=1e100.net; s=20221208; t=1690445429; x=1691050229;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=zAZIQD5LE19JLWIPx8KiiULhQHk9tWBr8sqfFcta/MI=;
-        b=QbzMAGoczIfyXl5S8CxvYiK4v2mFWMbHhLd7bpOQ7pFqQURzvYM5nUZ6PJMgRs6+jf
-         w5Sa6HeCn10PGYBvIM6LXcVwWzIaKR6JZEXGkn3zXahWslGueul4qmQ6k0rx2/KfIwXN
-         yTb/smojVnVm8WKWtxwkRFz3+rjgFkJjDrrpOK3trsLHhSAb3fYc5K0K9vB6uP8w9sxm
-         GbQx6fgo1h1+jQZMq3r3r0zYOxLycUMHp8gow2FqhICIv/tOVQZ77nKncntenMYNHYVJ
-         ZY3s8NA3xyUV7qP/rznyiISPDnNjBOqvXf1X+bpEEKwB7matBDPX8RgYQNKaq3exZD8Z
-         YaXw==
-X-Gm-Message-State: ABy/qLZLE3UONh3kxhQEpPd5lRyip7QdppI2UXpCh+jDYrOuk7+JX5qi
-	Ss19lSoVgjZAoAOYH9ugayDYoA==
-X-Google-Smtp-Source: APBJJlGpZH0OiKzZvwM26WklEwoVdvnyU6bL6rc8uFjIqbOYU7fWKIX23eNXK117O9K5uschqUp2Jg==
-X-Received: by 2002:a05:6a00:4a83:b0:679:a1f1:a5f8 with SMTP id dr3-20020a056a004a8300b00679a1f1a5f8mr4623296pfb.3.1690445405268;
-        Thu, 27 Jul 2023 01:10:05 -0700 (PDT)
+        bh=uDu/4z0sff3MNLq2Hem41DvJLtW9HR7Ht2OY0+o3IBw=;
+        b=h8x7d0IF7UOBd6HFjTCgoZYhJ7nelUszyK0cM5JGe4S5iZlGVERlJnOHfqpH7JNSAo
+         Tg0Ku9E6ijTzooB7sWQ7qlxLkwLw9RZ6QVYuSu6oeQmYb05FeDZ0nf9z047K9BOvGyEW
+         gufeyhyXu4XJGtAhbl28rCpt8uok9ILwJlLK5YK1L7Ov3Zz3vyTm3LfUcyIqcFjQ8zOc
+         1HWdvU9PLs7lLd+D91C9HYFDkcnzx8JhWNlKF5nF5Tpi/rgESja90b3zg82MmoOnb6ij
+         3/lLjwmicErKkgBOy0lHRb4dNZFsC42BJLkzi5sCB3q7fGQUNF4qVUj60LPWjbwtuDq5
+         4FXw==
+X-Gm-Message-State: ABy/qLajoh3MWymY/TKOPJyDYYAzT7FJqA6gQQrQ2s+Ohli279wuCi++
+	IkHZoinxNYA3R69GLWPtPRBCTg==
+X-Google-Smtp-Source: APBJJlHGswV8UzzwdSNooBFOlXCa2QxTNwcJjWEIeOA/B6KtVME+e61/tgitLanHgBraDSTbcyHPAw==
+X-Received: by 2002:a05:6a20:1595:b0:137:30db:bc1e with SMTP id h21-20020a056a20159500b0013730dbbc1emr5696433pzj.3.1690445429121;
+        Thu, 27 Jul 2023 01:10:29 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -116,146 +116,82 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v3 21/49] mm: thp: dynamically allocate the thp-related shrinkers
-Date: Thu, 27 Jul 2023 16:04:34 +0800
-Message-Id: <20230727080502.77895-22-zhengqi.arch@bytedance.com>
+Subject: [PATCH v3 23/49] mm: workingset: dynamically allocate the mm-shadow shrinker
+Date: Thu, 27 Jul 2023 16:04:36 +0800
+Message-Id: <20230727080502.77895-24-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 References: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the thp-zero and thp-deferred_split
-shrinkers.
+Use new APIs to dynamically allocate the mm-shadow shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- mm/huge_memory.c | 69 +++++++++++++++++++++++++++++++-----------------
- 1 file changed, 45 insertions(+), 24 deletions(-)
+ mm/workingset.c | 27 ++++++++++++++-------------
+ 1 file changed, 14 insertions(+), 13 deletions(-)
 
-diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-index e371503f7746..a0dbb55b4913 100644
---- a/mm/huge_memory.c
-+++ b/mm/huge_memory.c
-@@ -65,7 +65,11 @@ unsigned long transparent_hugepage_flags __read_mostly =
- 	(1<<TRANSPARENT_HUGEPAGE_DEFRAG_KHUGEPAGED_FLAG)|
- 	(1<<TRANSPARENT_HUGEPAGE_USE_ZERO_PAGE_FLAG);
- 
--static struct shrinker deferred_split_shrinker;
-+static struct shrinker *deferred_split_shrinker;
-+static unsigned long deferred_split_count(struct shrinker *shrink,
-+					  struct shrink_control *sc);
-+static unsigned long deferred_split_scan(struct shrinker *shrink,
-+					 struct shrink_control *sc);
- 
- static atomic_t huge_zero_refcount;
- struct page *huge_zero_page __read_mostly;
-@@ -229,11 +233,7 @@ static unsigned long shrink_huge_zero_page_scan(struct shrinker *shrink,
- 	return 0;
+diff --git a/mm/workingset.c b/mm/workingset.c
+index da58a26d0d4d..3c53138903a7 100644
+--- a/mm/workingset.c
++++ b/mm/workingset.c
+@@ -763,13 +763,6 @@ static unsigned long scan_shadow_nodes(struct shrinker *shrinker,
+ 					NULL);
  }
  
--static struct shrinker huge_zero_page_shrinker = {
--	.count_objects = shrink_huge_zero_page_count,
--	.scan_objects = shrink_huge_zero_page_scan,
--	.seeks = DEFAULT_SEEKS,
--};
-+static struct shrinker *huge_zero_page_shrinker;
- 
- #ifdef CONFIG_SYSFS
- static ssize_t enabled_show(struct kobject *kobj,
-@@ -454,6 +454,40 @@ static inline void hugepage_exit_sysfs(struct kobject *hugepage_kobj)
- }
- #endif /* CONFIG_SYSFS */
- 
-+static int __init thp_shrinker_init(void)
-+{
-+	huge_zero_page_shrinker = shrinker_alloc(0, "thp-zero");
-+	if (!huge_zero_page_shrinker)
-+		return -ENOMEM;
-+
-+	deferred_split_shrinker = shrinker_alloc(SHRINKER_NUMA_AWARE |
-+						 SHRINKER_MEMCG_AWARE |
-+						 SHRINKER_NONSLAB,
-+						 "thp-deferred_split");
-+	if (!deferred_split_shrinker) {
-+		shrinker_free(huge_zero_page_shrinker);
-+		return -ENOMEM;
-+	}
-+
-+	huge_zero_page_shrinker->count_objects = shrink_huge_zero_page_count;
-+	huge_zero_page_shrinker->scan_objects = shrink_huge_zero_page_scan;
-+	huge_zero_page_shrinker->seeks = DEFAULT_SEEKS;
-+	shrinker_register(huge_zero_page_shrinker);
-+
-+	deferred_split_shrinker->count_objects = deferred_split_count;
-+	deferred_split_shrinker->scan_objects = deferred_split_scan;
-+	deferred_split_shrinker->seeks = DEFAULT_SEEKS;
-+	shrinker_register(deferred_split_shrinker);
-+
-+	return 0;
-+}
-+
-+static void __init thp_shrinker_exit(void)
-+{
-+	shrinker_free(huge_zero_page_shrinker);
-+	shrinker_free(deferred_split_shrinker);
-+}
-+
- static int __init hugepage_init(void)
- {
- 	int err;
-@@ -482,12 +516,9 @@ static int __init hugepage_init(void)
- 	if (err)
- 		goto err_slab;
- 
--	err = register_shrinker(&huge_zero_page_shrinker, "thp-zero");
--	if (err)
--		goto err_hzp_shrinker;
--	err = register_shrinker(&deferred_split_shrinker, "thp-deferred_split");
-+	err = thp_shrinker_init();
- 	if (err)
--		goto err_split_shrinker;
-+		goto err_shrinker;
- 
- 	/*
- 	 * By default disable transparent hugepages on smaller systems,
-@@ -505,10 +536,8 @@ static int __init hugepage_init(void)
- 
- 	return 0;
- err_khugepaged:
--	unregister_shrinker(&deferred_split_shrinker);
--err_split_shrinker:
--	unregister_shrinker(&huge_zero_page_shrinker);
--err_hzp_shrinker:
-+	thp_shrinker_exit();
-+err_shrinker:
- 	khugepaged_destroy();
- err_slab:
- 	hugepage_exit_sysfs(hugepage_kobj);
-@@ -2833,7 +2862,7 @@ void deferred_split_folio(struct folio *folio)
- #ifdef CONFIG_MEMCG
- 		if (memcg)
- 			set_shrinker_bit(memcg, folio_nid(folio),
--					 deferred_split_shrinker.id);
-+					 deferred_split_shrinker->id);
- #endif
- 	}
- 	spin_unlock_irqrestore(&ds_queue->split_queue_lock, flags);
-@@ -2907,14 +2936,6 @@ static unsigned long deferred_split_scan(struct shrinker *shrink,
- 	return split;
- }
- 
--static struct shrinker deferred_split_shrinker = {
--	.count_objects = deferred_split_count,
--	.scan_objects = deferred_split_scan,
--	.seeks = DEFAULT_SEEKS,
--	.flags = SHRINKER_NUMA_AWARE | SHRINKER_MEMCG_AWARE |
--		 SHRINKER_NONSLAB,
+-static struct shrinker workingset_shadow_shrinker = {
+-	.count_objects = count_shadow_nodes,
+-	.scan_objects = scan_shadow_nodes,
+-	.seeks = 0, /* ->count reports only fully expendable nodes */
+-	.flags = SHRINKER_NUMA_AWARE | SHRINKER_MEMCG_AWARE,
 -};
 -
- #ifdef CONFIG_DEBUG_FS
- static void split_huge_pages_all(void)
+ /*
+  * Our list_lru->lock is IRQ-safe as it nests inside the IRQ-safe
+  * i_pages lock.
+@@ -778,9 +771,10 @@ static struct lock_class_key shadow_nodes_key;
+ 
+ static int __init workingset_init(void)
  {
++	struct shrinker *workingset_shadow_shrinker;
+ 	unsigned int timestamp_bits;
+ 	unsigned int max_order;
+-	int ret;
++	int ret = -ENOMEM;
+ 
+ 	BUILD_BUG_ON(BITS_PER_LONG < EVICTION_SHIFT);
+ 	/*
+@@ -797,17 +791,24 @@ static int __init workingset_init(void)
+ 	pr_info("workingset: timestamp_bits=%d max_order=%d bucket_order=%u\n",
+ 	       timestamp_bits, max_order, bucket_order);
+ 
+-	ret = prealloc_shrinker(&workingset_shadow_shrinker, "mm-shadow");
+-	if (ret)
++	workingset_shadow_shrinker = shrinker_alloc(SHRINKER_NUMA_AWARE |
++						    SHRINKER_MEMCG_AWARE,
++						    "mm-shadow");
++	if (!workingset_shadow_shrinker)
+ 		goto err;
++
+ 	ret = __list_lru_init(&shadow_nodes, true, &shadow_nodes_key,
+-			      &workingset_shadow_shrinker);
++			      workingset_shadow_shrinker);
+ 	if (ret)
+ 		goto err_list_lru;
+-	register_shrinker_prepared(&workingset_shadow_shrinker);
++
++	workingset_shadow_shrinker->count_objects = count_shadow_nodes;
++	workingset_shadow_shrinker->scan_objects = scan_shadow_nodes;
++
++	shrinker_register(workingset_shadow_shrinker);
+ 	return 0;
+ err_list_lru:
+-	free_prealloced_shrinker(&workingset_shadow_shrinker);
++	shrinker_free(workingset_shadow_shrinker);
+ err:
+ 	return ret;
+ }
 -- 
 2.30.2
 
