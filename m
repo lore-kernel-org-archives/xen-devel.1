@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68899C001DF
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:22:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.575335.901103 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3218CC001DF
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 21:24:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.575359.901116 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJIJ-0005Ul-Ow; Wed, 02 Aug 2023 21:22:11 +0000
+	id 1qRJK0-000680-5P; Wed, 02 Aug 2023 21:23:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 575335.901103; Wed, 02 Aug 2023 21:22:11 +0000
+Received: by outflank-mailman (output) from mailman id 575359.901116; Wed, 02 Aug 2023 21:23:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRJIJ-0005Ue-M5; Wed, 02 Aug 2023 21:22:11 +0000
-Received: by outflank-mailman (input) for mailman id 575335;
- Wed, 02 Aug 2023 21:22:10 +0000
+	id 1qRJK0-00067t-2j; Wed, 02 Aug 2023 21:23:56 +0000
+Received: by outflank-mailman (input) for mailman id 575359;
+ Wed, 02 Aug 2023 21:23:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1qRJII-0005Ie-Kh
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:22:10 +0000
+ id 1qRJJz-00067Z-5k
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 21:23:55 +0000
 Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a2aa3667-317a-11ee-8613-37d641c3527e;
- Wed, 02 Aug 2023 23:22:08 +0200 (CEST)
+ id e0e72bc8-317a-11ee-8613-37d641c3527e;
+ Wed, 02 Aug 2023 23:23:53 +0200 (CEST)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LLxep008383
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 372LNhnU008407
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 2 Aug 2023 17:22:05 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Wed, 2 Aug 2023 17:23:49 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 372LLx0F008382;
- Wed, 2 Aug 2023 14:21:59 -0700 (PDT) (envelope-from ehem)
+ by m5p.com (8.16.1/8.15.2/Submit) id 372LNhDC008406;
+ Wed, 2 Aug 2023 14:23:43 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,8 +45,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a2aa3667-317a-11ee-8613-37d641c3527e
-Message-Id: <39785555d883fa43b03423e68964bd21f92e791a.1690990427.git.ehem+xen@m5p.com>
+X-Inumbo-ID: e0e72bc8-317a-11ee-8613-37d641c3527e
+Message-Id: <58041bfb2a8ce9a54a337a2293c5094c119f7390.1690990427.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1690990427.git.ehem+xen@m5p.com>
 References: <cover.1690990427.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -54,172 +54,69 @@ To: xen-devel@lists.xenproject.org
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 Cc: Juergen Gross <jgross@suse.com>
-Date: Fri, 28 Jul 2023 12:10:14 -0700
-Subject: [PATCH 07/22] tools/utils: merge contents of libxlu_cfg_i.h to
+Date: Wed, 26 Jul 2023 21:56:32 -0700
+Subject: [PATCH 09/22] tools/utils: move CfgParseContext to top of
  libxlu_cfg_y.y
 
-Bison has added the ability to emit declarations in its header.  As such
-everything can instead be dumped in Bison's header instead of having a
-private one.
-
-This resolves the mixed up situation with the libxlu headers.  Problem is
-libxlu_cfg_i.h was trying to function as a wrapper for libxlu_cfg_y.h.
-Issue is libxlu_cfg.c's #include order didn't match and thus everything
-was fragile.
+The CfgParseContext structure/typedef is used inside the parser.  Whereas
+most #include's of libxlu_internal.h need the common declarations, not
+the parser internals.  Due to this, the structure should be near the top
+of libxlu_cfg_y.h (libxlu_cfg_i.h @b104c3762d), and not towards the
+middle of libxlu_internal.h.
 
 Fixes: b104c3762d ('Replace config file parser for "xl"')
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
-The bug @b104c3762d was the incorrect ordering of #includes in
-libxlu_cfg.c.  It should instead have been:
- #include "libxlu_cfg_i.h"
- #include "libxlu_cfg_l.h"
-
-Had this bug not been present, later commits might have looked deeper and
-chosen correct solutions.  Instead this resulted in all the ripples which
-this series fixes.
-
-I'm unsure whether Bison had implemented the %code feature by this point
-in time.
-
-The one and a half remaining issues are whether to convert the %{ %}
-section to %code and move it after the %union.  The %union construct ends
-up in libxlu_cfg_y.h, whereas the %{ %}/%code construct ends up in
-libxlu_cfg_y.c.
----
- tools/libs/util/libxlu_cfg.c   |  1 -
- tools/libs/util/libxlu_cfg_i.h | 53 ----------------------------------
- tools/libs/util/libxlu_cfg_l.l |  2 +-
- tools/libs/util/libxlu_cfg_y.y | 29 ++++++++++++++++++-
- 4 files changed, 29 insertions(+), 56 deletions(-)
- delete mode 100644 tools/libs/util/libxlu_cfg_i.h
-
-diff --git a/tools/libs/util/libxlu_cfg.c b/tools/libs/util/libxlu_cfg.c
-index 87ac8c4b41..7e9eec550d 100644
---- a/tools/libs/util/libxlu_cfg.c
-+++ b/tools/libs/util/libxlu_cfg.c
-@@ -22,7 +22,6 @@
+Ideally at @b104c3762d Bison might already have implemented its %code
+feature.  Less ideal, but workable CfgParseContext should have been
+placed in libxlu_cfg_i.h, between the two #includes:
  #include "libxlu_internal.h"
+ typedef struct { } CfgParseContext;
  #include "libxlu_cfg_y.h"
- #include "libxlu_cfg_l.h"
--#include "libxlu_cfg_i.h"
- 
- XLU_Config *xlu_cfg_init(FILE *report, const char *report_source) {
-     XLU_Config *cfg;
-diff --git a/tools/libs/util/libxlu_cfg_i.h b/tools/libs/util/libxlu_cfg_i.h
-deleted file mode 100644
-index 3717b9460c..0000000000
---- a/tools/libs/util/libxlu_cfg_i.h
-+++ /dev/null
-@@ -1,53 +0,0 @@
--/*
-- * libxlu_cfg_i.h - xl configuration file parsing: parser-internal declarations
-- *
-- * Copyright (C) 2010      Citrix Ltd.
-- * Author Ian Jackson <ian.jackson@eu.citrix.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU Lesser General Public License as published
-- * by the Free Software Foundation; version 2.1 only. with the special
-- * exception on linking described in file LICENSE.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- * GNU Lesser General Public License for more details.
-- */
--
--#ifndef LIBXLU_CFG_I_H
--#define LIBXLU_CFG_I_H
--
--#include "libxlu_internal.h"
--#include "libxlu_cfg_y.h"
--
--void xlu__cfg_set_free(XLU_ConfigSetting *set);
--void xlu__cfg_set_store(CfgParseContext*, char *name,
--                        enum XLU_Operation op,
--                        XLU_ConfigValue *val, int lineno);
--XLU_ConfigValue *xlu__cfg_string_mk(CfgParseContext *ctx,
--                                    char *atom, YYLTYPE *loc);
--XLU_ConfigValue *xlu__cfg_list_mk(CfgParseContext *ctx,
--                                  XLU_ConfigValue *val,
--                                  YYLTYPE *loc);
--void xlu__cfg_list_append(CfgParseContext *ctx,
--                          XLU_ConfigValue *list,
--                          XLU_ConfigValue *val);
--void xlu__cfg_value_free(XLU_ConfigValue *value);
--char *xlu__cfgl_strdup(CfgParseContext*, const char *src);
--char *xlu__cfgl_dequote(CfgParseContext*, const char *src);
--
--void xlu__cfg_yyerror(YYLTYPE *locp, CfgParseContext*, char const *msg);
--void xlu__cfgl_lexicalerror(CfgParseContext*, char const *msg);
--
--void xlu__cfgl_likely_python(CfgParseContext *ctx);
--
--#endif /*LIBXLU_CFG_I_H*/
--
--/*
-- * Local variables:
-- * mode: C
-- * c-basic-offset: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
-diff --git a/tools/libs/util/libxlu_cfg_l.l b/tools/libs/util/libxlu_cfg_l.l
-index 390d6e2c2b..ba023fd679 100644
---- a/tools/libs/util/libxlu_cfg_l.l
-+++ b/tools/libs/util/libxlu_cfg_l.l
-@@ -17,7 +17,7 @@
-  */
- 
- %{
--#include "libxlu_cfg_i.h"
-+#include "libxlu_cfg_y.h"
- 
- #define ctx ((CfgParseContext*)yyextra)
- #define YY_NO_INPUT
+
+Using Bison's %code feature is rather superior though.  This patch is
+where indentation in Bison.y files becomes crucial.  I'm unsure of the
+call to make, so I've left this as cut&paste which means this will almost
+certainly change.
+---
+ tools/libs/util/libxlu_cfg_y.y    | 6 ++++++
+ tools/libs/util/libxlu_internal.h | 6 ------
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
 diff --git a/tools/libs/util/libxlu_cfg_y.y b/tools/libs/util/libxlu_cfg_y.y
-index e53d8ed337..e796066941 100644
+index adbb74ff11..75e7140478 100644
 --- a/tools/libs/util/libxlu_cfg_y.y
 +++ b/tools/libs/util/libxlu_cfg_y.y
-@@ -16,9 +16,36 @@
-  * GNU Lesser General Public License for more details.
-  */
+@@ -18,6 +18,12 @@
  
-+%code requires {
-+#include "libxlu_internal.h"
-+}
+ %code requires {
+ #include "libxlu_internal.h"
 +
-+%code provides {
-+void xlu__cfg_set_free(XLU_ConfigSetting *set);
-+void xlu__cfg_set_store(CfgParseContext*, char *name,
-+                        enum XLU_Operation op,
-+                        XLU_ConfigValue *val, int lineno);
-+XLU_ConfigValue *xlu__cfg_string_mk(CfgParseContext *ctx,
-+                                    char *atom, YYLTYPE *loc);
-+XLU_ConfigValue *xlu__cfg_list_mk(CfgParseContext *ctx,
-+                                  XLU_ConfigValue *val,
-+                                  YYLTYPE *loc);
-+void xlu__cfg_list_append(CfgParseContext *ctx,
-+                          XLU_ConfigValue *list,
-+                          XLU_ConfigValue *val);
-+void xlu__cfg_value_free(XLU_ConfigValue *value);
-+char *xlu__cfgl_strdup(CfgParseContext*, const char *src);
-+char *xlu__cfgl_dequote(CfgParseContext*, const char *src);
-+
-+void xlu__cfg_yyerror(YYLTYPE *locp, CfgParseContext*, char const *msg);
-+void xlu__cfgl_lexicalerror(CfgParseContext*, char const *msg);
-+
-+void xlu__cfgl_likely_python(CfgParseContext *ctx);
-+}
-+
- %{
- #define ctx_scanner ctx->scanner
--#include "libxlu_cfg_i.h"
-+#include "libxlu_cfg_y.h"
- #include "libxlu_cfg_l.h"
- %}
++typedef struct {
++    XLU_Config *cfg;
++    int err, lexerrlineno, likely_python;
++    void *scanner;
++} CfgParseContext;
+ }
  
+ %code provides {
+diff --git a/tools/libs/util/libxlu_internal.h b/tools/libs/util/libxlu_internal.h
+index 01fe073069..246ad0bde7 100644
+--- a/tools/libs/util/libxlu_internal.h
++++ b/tools/libs/util/libxlu_internal.h
+@@ -63,12 +63,6 @@ struct XLU_Config {
+     char *config_source;
+ };
+ 
+-typedef struct {
+-    XLU_Config *cfg;
+-    int err, lexerrlineno, likely_python;
+-    void *scanner;
+-} CfgParseContext;
+-
+ 
+ #define STRINGIFY(x) #x
+ #define TOSTRING(x) STRINGIFY(x)
 -- 
 (\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
  \BS (    |       ehem+sigmsg@m5p.com      PGP 87145445       |    )   /
