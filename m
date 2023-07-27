@@ -4,35 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16D37C001DC
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 16:45:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.571230.894592 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66D06C001DC
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 16:45:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.571239.894612 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qP472-0004MH-Oz; Thu, 27 Jul 2023 16:45:16 +0000
+	id 1qP47T-0005KQ-FJ; Thu, 27 Jul 2023 16:45:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 571230.894592; Thu, 27 Jul 2023 16:45:16 +0000
+Received: by outflank-mailman (output) from mailman id 571239.894612; Thu, 27 Jul 2023 16:45:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qP472-0004MA-Lb; Thu, 27 Jul 2023 16:45:16 +0000
-Received: by outflank-mailman (input) for mailman id 571230;
- Thu, 27 Jul 2023 16:45:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qP47T-0005KJ-BU; Thu, 27 Jul 2023 16:45:43 +0000
+Received: by outflank-mailman (input) for mailman id 571239;
+ Thu, 27 Jul 2023 16:45:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=k29T=DN=arm.com=peter.hoyes@srs-se1.protection.inumbo.net>)
- id 1qP471-00047I-6J
- for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 16:45:15 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id f4d9edec-2c9c-11ee-8613-37d641c3527e;
- Thu, 27 Jul 2023 18:45:13 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C2C06FEC;
- Thu, 27 Jul 2023 09:45:55 -0700 (PDT)
-Received: from e125920.cambridge.arm.com (unknown [10.1.199.65])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6E62C3F5A1;
- Thu, 27 Jul 2023 09:45:11 -0700 (PDT)
+ <SRS0=SoSB=DN=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1qP47S-0004vW-3L
+ for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 16:45:42 +0000
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [2a00:1450:4864:20::233])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 05d5d26b-2c9d-11ee-b24a-6b7b168915f2;
+ Thu, 27 Jul 2023 18:45:41 +0200 (CEST)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2b97f34239cso17259611fa.3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 09:45:41 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ q24-20020a2e8758000000b002b69febf515sm429800ljj.125.2023.07.27.09.45.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Jul 2023 09:45:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,141 +46,254 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f4d9edec-2c9c-11ee-8613-37d641c3527e
-From: Peter Hoyes <peter.hoyes@arm.com>
+X-Inumbo-ID: 05d5d26b-2c9d-11ee-b24a-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1690476341; x=1691081141;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0MkIz6ax8NL2d1PW8QNC5JcfmZ1hJCFw2AFK9nrAP+Q=;
+        b=aOCMnskHowYe+xQXN+QFOKtpBKHrhdp0F4PAJ3Gn0p5HFtF/lWtmx4xJLCp9yBST1/
+         Sm/sumjgp6b+0lctZ9eC0uBiIT/GmxEYo+6rDJjLJYLVrRYPjDdkbf+MzlIEmfTrB5il
+         IkhuASodKTmYN0wY2qtJXndm6ZcxzkdFGRTDZsjb2b1chl54QE4vNPVrY4tliReCsV/O
+         y4VV3XWnoSsyH8e4gFJ+ENf/96ZlSfajm5lhzJ69xHbVWvzuyvOmFwPZBQ/6/mvqAuIF
+         rjLZERpIXROyJAR/qSNXJ+qzqIQMCaB229y6fdg0mMei4IlUoqETI0pKArszJM4f1Z7c
+         cDGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690476341; x=1691081141;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=0MkIz6ax8NL2d1PW8QNC5JcfmZ1hJCFw2AFK9nrAP+Q=;
+        b=N5ug7hSVmuGm6Sa44Ig6gAM8Im3wsGzYjXtZXX9FjMTaaOXZwzs2uH9PrHtuBysaSb
+         kQfraC4i5x9q2ptHe1leY1Hc/KPmYP11+TsAvZeMAokfPjMrXLTnumqFN4xqGT1ycfEV
+         l+XuCfwWZIwB5Ima+P0xx6oKIv/bh/soouvhNq90IhIJd++IzftYGtHyvsTBVlfx740l
+         K7MsKOChR8wc5lb+Gz6UU1t7Cce8jVKfk6d8i1VicsnZoTx6h5q1fYaaBXgwn9G5LclS
+         iScoQN8dIDf0dNwsp5Df2xJlbOHhEOYEPavbVkYUi2ecEm5oc+YU7OcpiS9K+UnumLsN
+         meKw==
+X-Gm-Message-State: ABy/qLa1TtcK44VSPfuK8P3EOyidmzDA/vm1xoSsASuztTc6IDZNA8/o
+	LBHYFAHUphADxE0ulwCTWfL5yHwSBPo=
+X-Google-Smtp-Source: APBJJlHd+2XuTzLRTrR2TWXzINDheyjAbqKpbMRTaztzV6z9rDFfYDzJpW7suvL6/C+YEjjCuBjumw==
+X-Received: by 2002:a2e:9b54:0:b0:2b6:e196:68c4 with SMTP id o20-20020a2e9b54000000b002b6e19668c4mr2207348ljj.39.1690476340394;
+        Thu, 27 Jul 2023 09:45:40 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	wei.chen@arm.com,
-	luca.fancellu@arm.com,
-	Peter Hoyes <Peter.Hoyes@arm.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Hongda Deng <hongda.deng@arm.com>
-Subject: [PATCH v6 1/2] tools/console: Add escape argument to configure escape character
-Date: Thu, 27 Jul 2023 17:44:48 +0100
-Message-Id: <20230727164450.77640-2-peter.hoyes@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230727164450.77640-1-peter.hoyes@arm.com>
-References: <20230727164450.77640-1-peter.hoyes@arm.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 1/1] ns16550: add support for polling mode when device tree is used
+Date: Thu, 27 Jul 2023 19:45:37 +0300
+Message-ID: <6e8f243284b53a9c56e7faf5e0e5ee5e20de9958.1690475512.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <cover.1690475512.git.oleksii.kurochko@gmail.com>
+References: <cover.1690475512.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Peter Hoyes <Peter.Hoyes@arm.com>
+RISC-V doesn't support interrupts for the time being, so it would be nice to
+have polling mode.
 
-Dom0 may be accessed via telnet, meaning the default escape character
-(which is the same as telnet's) cannot be directly used to exit the
-console. It would be helpful to make the escape character customizable
-in such use cases.
+To force poll mode it was added parsing of new 'poll' property under "com<N>="
 
-Add --escape argument to console tool for this purpose.
+If there is no interrupt property in UART node, then polling will be used.
+According to 4.2.2 National Semiconductor 16450/16550 Compatible UART
+Requirements from The Devicetree Specification v0.4
+( https://www.devicetree.org/specifications/ ) the interrupt property is
+optional.
 
-Add argument to getopt options, parse and validate the escape character
-and pass value to console_loop.
+Also, it is possible that interrupt '0' can be used for some architectures as
+an legal UART interrupt number ( according to dts files in Linux kernel ), so
+the check of the return value of platform_get_irq() was updated in case of when
+device tree is used for UART initialization.
+For example:
+https://github.com/torvalds/linux/blob/master/arch/powerpc/boot/dts/ebony.dts#L197
 
-If --escape is not specified, it falls back to the existing behavior
-using DEFAULT_ESCAPE_SEQUENCE.
-
-Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Hongda Deng <hongda.deng@arm.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in v5:
-- Add this changelog
+Changes in V4:
+ - fix code style for ns16550_irq().
+ - partially revert changes in pci_uart_config().
+ - add check of "poll" property under "com<N>=" instead of "console=".
+ - remove seting of polling mode in parsing of msi in parse_positional().
+ - update comment above opt_com1 about Configuration string of serial port.
+---
+ xen/drivers/char/ns16550.c | 64 +++++++++++++++++++++++++-------------
+ 1 file changed, 42 insertions(+), 22 deletions(-)
 
-Changes in v4:
-- Improve validation of the escape_character optarg
-
-Changes in v3:
-- Re-add the Reviewed-By tag accidentally removed in v2
-
-Changes in v2:
-- Drop the tags intended only for internal use at Arm
-
- tools/console/client/main.c | 21 +++++++++++++++++----
- 1 file changed, 17 insertions(+), 4 deletions(-)
-
-diff --git a/tools/console/client/main.c b/tools/console/client/main.c
-index 6775006488..d2dcc3ddca 100644
---- a/tools/console/client/main.c
-+++ b/tools/console/client/main.c
-@@ -42,7 +42,7 @@
- #include <xenstore.h>
- #include "xenctrl.h"
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index 2aed6ec707..83170fd6b8 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -58,7 +58,11 @@ static struct ns16550 {
+     struct timer timer;
+     struct timer resume_timer;
+     unsigned int timeout_ms;
+-    bool_t intr_works;
++    enum {
++        intr_off,
++        intr_on,
++        polling,
++    } intr_works;
+     bool_t dw_usr_bsy;
+ #ifdef NS16550_PCI
+     /* PCI card parameters. */
+@@ -112,6 +116,19 @@ struct ns16550_config_param {
+ static void enable_exar_enhanced_bits(const struct ns16550 *uart);
+ #endif
  
--#define ESCAPE_CHARACTER 0x1d
-+#define DEFAULT_ESCAPE_CHARACTER 0x1d
++/*
++ * Configure serial port with a string:
++ *   <baud>[/<base_baud>][,DPS[,<io-base>[,<irq>|msi|poll[,<port-bdf>[,<bridge-bdf>]]]]].
++ * The tail of the string can be omitted if platform defaults are sufficient.
++ * If the baud rate is pre-configured, perhaps by a bootloader, then 'auto'
++ * can be specified in place of a numeric baud rate. Polled mode is specified
++ * by poll property.
++ */
++static char __initdata opt_com1[128] = "";
++static char __initdata opt_com2[128] = "";
++string_param("com1", opt_com1);
++string_param("com2", opt_com2);
++
+ static void cf_check ns16550_delayed_resume(void *data);
  
- static volatile sig_atomic_t received_signal = 0;
- static char lockfile[sizeof (XEN_LOCK_DIR "/xenconsole.") + 8] = { 0 };
-@@ -77,6 +77,7 @@ static void usage(const char *program) {
- 	       "  -n, --num N      use console number N\n"
- 	       "  --type TYPE      console type. must be 'pv', 'serial' or 'vuart'\n"
- 	       "  --start-notify-fd N file descriptor used to notify parent\n"
-+	       "  --escape E       escape sequence to exit console\n"
- 	       , program);
- }
+ static u8 ns_read_reg(const struct ns16550 *uart, unsigned int reg)
+@@ -181,7 +198,7 @@ static void cf_check ns16550_interrupt(
+     struct serial_port *port = dev_id;
+     struct ns16550 *uart = port->uart;
  
-@@ -174,7 +175,7 @@ static void restore_term(int fd, struct termios *old)
- }
+-    uart->intr_works = 1;
++    uart->intr_works = intr_on;
  
- static int console_loop(int fd, struct xs_handle *xs, char *pty_path,
--		        bool interactive)
-+			bool interactive, char escape_character)
+     while ( !(ns_read_reg(uart, UART_IIR) & UART_IIR_NOINT) )
+     {
+@@ -212,7 +229,7 @@ static void cf_check __ns16550_poll(struct cpu_user_regs *regs)
+     struct serial_port *port = this_cpu(poll_port);
+     struct ns16550 *uart = port->uart;
+ 
+-    if ( uart->intr_works )
++    if ( uart->intr_works == intr_on )
+         return; /* Interrupts work - no more polling */
+ 
+     while ( ns_read_reg(uart, UART_LSR) & UART_LSR_DR )
+@@ -305,7 +322,8 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
+     unsigned char lcr;
+     unsigned int  divisor;
+ 
+-    uart->intr_works = 0;
++    if ( uart->intr_works != polling )
++        uart->intr_works = intr_off;
+ 
+     pci_serial_early_init(uart);
+ 
+@@ -394,7 +412,7 @@ static void __init cf_check ns16550_init_irq(struct serial_port *port)
+ 
+ static void ns16550_setup_postirq(struct ns16550 *uart)
  {
- 	int ret, xs_fd = xs_fileno(xs), max_fd = -1;
+-    if ( uart->irq > 0 )
++    if ( uart->intr_works != polling )
+     {
+         /* Master interrupt enable; also keep DTR/RTS asserted. */
+         ns_write_reg(uart,
+@@ -473,6 +491,7 @@ static void __init cf_check ns16550_init_postirq(struct serial_port *port)
+                 if ( rc )
+                 {
+                     uart->irq = 0;
++                    uart->intr_works = polling;
+                     if ( msi_desc )
+                         msi_free_irq(msi_desc);
+                     else
+@@ -488,7 +507,7 @@ static void __init cf_check ns16550_init_postirq(struct serial_port *port)
+     }
+ #endif
  
-@@ -215,7 +216,7 @@ static int console_loop(int fd, struct xs_handle *xs, char *pty_path,
- 			char msg[60];
+-    if ( uart->irq > 0 )
++    if ( uart->intr_works != polling )
+     {
+         uart->irqaction.handler = ns16550_interrupt;
+         uart->irqaction.name    = "ns16550";
+@@ -595,7 +614,8 @@ static void __init cf_check ns16550_endboot(struct serial_port *port)
+ static int __init cf_check ns16550_irq(struct serial_port *port)
+ {
+     struct ns16550 *uart = port->uart;
+-    return ((uart->irq > 0) ? uart->irq : -1);
++
++    return ((uart->intr_works != polling) ? uart->irq : -1);
+ }
  
- 			len = read(STDIN_FILENO, msg, sizeof(msg));
--			if (len == 1 && msg[0] == ESCAPE_CHARACTER) {
-+			if (len == 1 && msg[0] == escape_character) {
- 				return 0;
- 			} 
+ static void cf_check ns16550_start_tx(struct serial_port *port)
+@@ -654,6 +674,9 @@ static void ns16550_init_common(struct ns16550 *uart)
  
-@@ -335,6 +336,7 @@ int main(int argc, char **argv)
- 		{ "help",    0, 0, 'h' },
- 		{ "start-notify-fd", 1, 0, 's' },
- 		{ "interactive", 0, 0, 'i' },
-+		{ "escape",  1, 0, 'e' },
- 		{ 0 },
+     /* Default lsr_mask = UART_LSR_THRE */
+     uart->lsr_mask  = UART_LSR_THRE;
++
++    if ( strstr(opt_com1, "poll") || strstr(opt_com2, "poll") )
++        uart->intr_works = polling;
+ }
  
- 	};
-@@ -345,6 +347,7 @@ int main(int argc, char **argv)
- 	console_type type = CONSOLE_INVAL;
- 	bool interactive = 0;
- 	const char *console_names = "serial, pv, vuart";
-+	char escape_character = DEFAULT_ESCAPE_CHARACTER;
+ #ifdef CONFIG_X86
+@@ -1333,9 +1356,13 @@ pci_uart_config(struct ns16550 *uart, bool_t skip_amt, unsigned int idx)
+                     uart->irq = 0;
+ #endif
+                 if ( !uart->irq )
++                {
++                    uart->intr_works = polling;
++
+                     printk(XENLOG_INFO
+                            "ns16550: %pp: no legacy IRQ, using poll mode\n",
+                            &PCI_SBDF(0, b, d, f));
++                }
  
- 	while((ch = getopt_long(argc, argv, sopt, lopt, &opt_ind)) != -1) {
- 		switch(ch) {
-@@ -375,6 +378,16 @@ int main(int argc, char **argv)
- 		case 'i':
- 			interactive = 1;
- 			break;
-+		case 'e':
-+			if (optarg[0] == '^' && optarg[1] && optarg[2] == '\0')
-+				escape_character = optarg[1] & 0x1f;
-+			else if (optarg[0] && optarg[1] == '\0')
-+				escape_character = optarg[0];
-+			else {
-+				fprintf(stderr, "Invalid escape argument\n");
-+				exit(EINVAL);
-+			}
-+			break;
- 		default:
- 			fprintf(stderr, "Invalid argument\n");
- 			fprintf(stderr, "Try `%s --help' for more information.\n", 
-@@ -493,7 +506,7 @@ int main(int argc, char **argv)
- 		close(start_notify_fd);
- 	}
+                 return 0;
+             }
+@@ -1374,19 +1401,6 @@ static void enable_exar_enhanced_bits(const struct ns16550 *uart)
  
--	console_loop(spty, xs, path, interactive);
-+	console_loop(spty, xs, path, interactive, escape_character);
+ #endif /* CONFIG_HAS_PCI */
  
- 	free(path);
- 	free(dom_path);
+-/*
+- * Configure serial port with a string:
+- *   <baud>[/<base_baud>][,DPS[,<io-base>[,<irq>[,<port-bdf>[,<bridge-bdf>]]]]].
+- * The tail of the string can be omitted if platform defaults are sufficient.
+- * If the baud rate is pre-configured, perhaps by a bootloader, then 'auto'
+- * can be specified in place of a numeric baud rate. Polled mode is specified
+- * by requesting irq 0.
+- */
+-static char __initdata opt_com1[128] = "";
+-static char __initdata opt_com2[128] = "";
+-string_param("com1", opt_com1);
+-string_param("com2", opt_com2);
+-
+ enum serial_param_type {
+     baud,
+     clock_hz,
+@@ -1555,6 +1569,9 @@ static bool __init parse_positional(struct ns16550 *uart, char **str)
+         }
+         else
+ #endif
++        if ( strncmp(conf, "poll", 4) == 0 )
++            uart->intr_works = polling;
++        else
+             uart->irq = simple_strtol(conf, &conf, 10);
+     }
+ 
+@@ -1791,8 +1808,11 @@ static int __init ns16550_uart_dt_init(struct dt_device_node *dev,
+     }
+ 
+     res = platform_get_irq(dev, 0);
+-    if ( ! res )
+-        return -EINVAL;
++    if ( res < 0 )
++    {
++        printk("there is no interrupt property, polling will be used\n");
++        uart->intr_works = polling;
++    }
+     uart->irq = res;
+ 
+     uart->dw_usr_bsy = dt_device_is_compatible(dev, "snps,dw-apb-uart");
 -- 
-2.34.1
+2.41.0
 
 
