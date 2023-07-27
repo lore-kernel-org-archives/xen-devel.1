@@ -4,40 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E49C0015E
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 12:15:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.571072.894029 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F827C04A6A
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 12:17:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.571074.894039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOztp-0004E8-4s; Thu, 27 Jul 2023 12:15:21 +0000
+	id 1qOzvl-0004ml-Ii; Thu, 27 Jul 2023 12:17:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 571072.894029; Thu, 27 Jul 2023 12:15:21 +0000
+Received: by outflank-mailman (output) from mailman id 571074.894039; Thu, 27 Jul 2023 12:17:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOztp-0004E1-2C; Thu, 27 Jul 2023 12:15:21 +0000
-Received: by outflank-mailman (input) for mailman id 571072;
- Thu, 27 Jul 2023 12:15:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=m5Ij=DN=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qOztn-0004Dv-TK
- for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 12:15:20 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on062b.outbound.protection.outlook.com
- [2a01:111:f400:fe0c::62b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 401f5007-2c77-11ee-b247-6b7b168915f2;
- Thu, 27 Jul 2023 14:15:18 +0200 (CEST)
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by AS8PR04MB7575.eurprd04.prod.outlook.com (2603:10a6:20b:29c::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.29; Thu, 27 Jul
- 2023 12:15:16 +0000
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::e5cf:5743:ab60:b14e]) by DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::e5cf:5743:ab60:b14e%5]) with mapi id 15.20.6631.026; Thu, 27 Jul 2023
- 12:15:15 +0000
+	id 1qOzvl-0004mc-Dy; Thu, 27 Jul 2023 12:17:21 +0000
+Received: by outflank-mailman (input) for mailman id 571074;
+ Thu, 27 Jul 2023 12:17:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=C0z/=DN=huaweicloud.com=petrtesarik@srs-se1.protection.inumbo.net>)
+ id 1qOznF-00079h-Qj
+ for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 12:08:33 +0000
+Received: from frasgout11.his.huawei.com (unknown [14.137.139.23])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4d452ed0-2c76-11ee-8613-37d641c3527e;
+ Thu, 27 Jul 2023 14:08:31 +0200 (CEST)
+Received: from mail02.huawei.com (unknown [172.18.147.228])
+ by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4RBTlQ2Zb0z9v7gP
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 19:57:06 +0800 (CST)
+Received: from A2101119013HW2.china.huawei.com (unknown [10.81.209.69])
+ by APP2 (Coremail) with SMTP id GxC2BwBnGkGaXcJkfMYUBQ--.33878S8;
+ Thu, 27 Jul 2023 13:07:52 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,241 +44,648 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 401f5007-2c77-11ee-b247-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PR5t8iZQ9AshKDtFG0b7NPqE170QRgpI9UQ8pz/A1+Y5Cbi9n65h/uzW3Oz/eGBP9R6nL2eaQpNfNL95EIZ4rZunR/0vVAs/TMY6GeS9voUQPaYiwuisgdd/OXLX2xg72+wCTSVl+WUcX6Z+IhcZEF4HWHr9Ql412VtY7zT1YzobpHMEdaA/sGwT9lZp9nnNZvSGS3/c0J4APaC3o1saA9/0kUbTH0YpXL4mY/Of7mk8t5h7n2HUpJxw6VtFk4W2KPaEaHWGNdj3b/+AeNmF5v9hoMWPGL3l4BVTvG4ETUyKZDWTk16BU9EJ3imfJkdQRtJOuAg2PU4cKBqQfE6/wQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7rFGLkvY8Qw30FFpaVhWJtSW9PoM0yeIUsss/wKQnpQ=;
- b=RAgZ0HymH9ZG7upDb0KrEMz2qHOlhKQprrbGPzD7GnsX/r6g1pjaY6XoVdwA9X1hJig1vVnzEh+1Cav5Y9uU7hyXRJYMHimaHtFq0+bYKE/81JbYjyPXuViK0J1HOgeowglFS28abB3jbmNJVc1A+y7RM+eK7SBfToHzcoJE12HTRnN+OHqZRKdcnTH1CF6aDY8e+fyHNyGedvvYHmxepC+MnYhkuOD2z4/b+BrsC8k+zjzs9YhpIOZThObEnGjdw9i5h74OIilTPaVyzzjku85UN2aY4hgvvpd6e84A5OwWUvI5tuJfCrz6Bqz1hbYXW5ldQoTbL+2Zl4l173jtGw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7rFGLkvY8Qw30FFpaVhWJtSW9PoM0yeIUsss/wKQnpQ=;
- b=4CfVfMKhW2xqJpGk4IyEhpukwAi8Del1p7lBJbxXqOxlXduHjawYpXZkj/pcuGH/Exk+PdGX6PCDSvHw7Z8n6EL8X6YNkbhbxX5+Eofawxhnpt2EG3RL51z5H/34TLNSxubffw5PVhv1c1l9Ss+jh36ECiW3NOe+YISAVl/ILJLOw/1Q2t2vFtaLaOlpZRp1s2KJ3f/zgx8Q+mnb3+q2J9XB7VDlQionNk6OpDcHR93o5lDqSFi8C7twSsFwI42hWp9AWc0pLYWpbdP3hmPsYCfsEeAWXQMyQZafDaFIEwHM/CewM+o38OZdPUtm6U4fYKWKNelPNijNtqrEwzztTA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <5ee3c63e-27ab-406a-7307-16061b65f42c@suse.com>
-Date: Thu, 27 Jul 2023 14:15:13 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [XEN PATCH v4 4/4] xen/x86: address violations of MISRA C:2012
- Rule 7.2
-Content-Language: en-US
-To: Simone Ballarin <simone.ballarin@bugseng.com>
-Cc: consulting@bugseng.com, Gianluca Luparini
- <gianluca.luparini@bugseng.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-References: <cover.1690368810.git.simone.ballarin@bugseng.com>
- <3790011b9d9235fd0c3fd2016ee25feb37e925f5.1690368810.git.simone.ballarin@bugseng.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <3790011b9d9235fd0c3fd2016ee25feb37e925f5.1690368810.git.simone.ballarin@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0100.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a9::6) To DU2PR04MB8790.eurprd04.prod.outlook.com
- (2603:10a6:10:2e1::23)
+X-Inumbo-ID: 4d452ed0-2c76-11ee-8613-37d641c3527e
+From: Petr Tesarik <petrtesarik@huaweicloud.com>
+To: Stefano Stabellini <sstabellini@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Christoph Lameter <cl@linux.com>,
+	Pekka Enberg <penberg@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	Hyeonggon Yoo <42.hyeyoo@gmail.com>,
+	Petr Tesarik <petr.tesarik.ext@huawei.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	James Seo <james@equiv.tech>,
+	James Clark <james.clark@arm.com>,
+	Kees Cook <keescook@chromium.org>,
+	xen-devel@lists.xenproject.org (moderated list:XEN HYPERVISOR ARM),
+	linux-arm-kernel@lists.infradead.org (moderated list:ARM PORT),
+	linux-kernel@vger.kernel.org (open list),
+	linux-mips@vger.kernel.org (open list:MIPS),
+	iommu@lists.linux.dev (open list:XEN SWIOTLB SUBSYSTEM),
+	linux-mm@kvack.org (open list:SLAB ALLOCATOR)
+Cc: Roberto Sassu <roberto.sassu@huaweicloud.com>,
+	petr@tesarici.cz
+Subject: [PATCH v6 6/9] swiotlb: if swiotlb is full, fall back to a transient memory pool
+Date: Thu, 27 Jul 2023 14:05:34 +0200
+Message-Id: <1e68badec34c5dee652d4b320fefcdd1951cde5d.1690459412.git.petr.tesarik.ext@huawei.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1690459412.git.petr.tesarik.ext@huawei.com>
+References: <cover.1690459412.git.petr.tesarik.ext@huawei.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|AS8PR04MB7575:EE_
-X-MS-Office365-Filtering-Correlation-Id: dfd91c9e-249a-4a3f-9a82-08db8e9b226d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	2sn95Vh114BvEjmDf5SaBbbX0pKWZKWvtFrh/jMqU/GVfBBhZy5wkk8N1ToDb8Twpq2wyrVSROvfSlnRbS4VCIB5YB0bFlIp8Nr/5B5WZJ00PLSFMBBADlY6clhlQ1iG9T0uGAOdxxOeY4Jf50GZdt2ZUIWDo41gCw3eFw22jaCroZrUFZH/cOsG0G21ebGuuHC7ARUgA8L2lkremC6IkNvljavwP7ba4S80+2y+L2q59zodtK68boKZOe/wtxxQaFhPgphkIUAC13lg9i8Pqy3Wco+BnIzaZKPjevtcK1kesc87z1yZNszGTZMMD/L1AreEscNjFipWiT6ixCmmDtMYS3C7zEsx53gy6zwqZ21MVJKwolgGH2iYr7CswN8yynewcGMlp8McwgVeUKkJt9FDM+aU1AS3G+EY9pKAcvsTNQuZjvw9T0f3Xj9t1+zz97zcQB2nNhowH87qTuQcxQbJRJEmb4SboNfnWieH0RCkp+p0MsO1qERry+mcOFwOurYTQxuXNXmpETWeEm6EQOgHletUxkIsHeaegjWv3MXC8W7WhI2OruKQdrI3rHn2bL1V/Ud2CsoZdIVEvzw02Mx0qaeYbKAiqr1R6sq7an17/2kwVrUUyTkiqvHwEMxahwiTOxzf3gYa1EvnFXuYew==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(396003)(346002)(136003)(376002)(39860400002)(366004)(451199021)(53546011)(31696002)(6506007)(2616005)(66476007)(6916009)(4326008)(66946007)(86362001)(26005)(66556008)(6512007)(186003)(31686004)(36756003)(2906002)(6486002)(478600001)(54906003)(41300700001)(38100700002)(316002)(8676002)(5660300002)(8936002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?U0RzNS9aS2ptaDNNSTNLUGFGNllqTXZpb0gyTDl3L3Jkeld1WGR2NWllSVJ0?=
- =?utf-8?B?dC9sR3M5a1p5YVcxZkoxcjlmT3Uwc05PZzc3SDBGc24zbTlsbUVoYWN2bk0w?=
- =?utf-8?B?Uy9HVnFwZWo3dmZqUElMR3loMTNaT3pNditad09LaEF5bWhaVmYyakgzNFBT?=
- =?utf-8?B?U2hpKzJQLzRRUkVqYnc0Uk9DRC9oV0I1ZFpDWExWUmxpTjZ1Y3hqdTk4Wmhy?=
- =?utf-8?B?TWdqdTBTNmJOZFg5b3RmeTVPY011L3k3OXJNUTVic1JOZHNEWXBaT2JYaE1G?=
- =?utf-8?B?MWJ5OXdDbWxibklRd0N2a3pZMktTZVl0VUp0RGF2eXgveW1FMXZWOWJ1RjZD?=
- =?utf-8?B?eVdKZkM1ZldCNEk0cnVJNVZYN2NKSGd3VGc5TUdNc0FJYUJLNnpTZHNGQjNv?=
- =?utf-8?B?eER6WmZjWElOU0FQSzFVblp5Y010ZGpVdnVRTzNkNDZScC9qb05tTzZZRWtZ?=
- =?utf-8?B?aEIrMFVIZkJIejhFMzFNZ1VUU3I2NXV4WGlMRDd3MThnQ0p3dVNtWSttUmFF?=
- =?utf-8?B?d2ZUVGZRSitndW1zeGxoNzZvZlpxd3ZnNUsrcnllK3pOdThtNm9PQkYrT2hv?=
- =?utf-8?B?T3hnamVBNWwxVUZEbisrQm1wc1k5NUhFUFF4dkRoOUVOS3VKbWtvbWk1cUt4?=
- =?utf-8?B?Y0U4NHRRcFp1bWVQaVYzZm1nbm96djNkcXl3M3hRRktUd0Q1NzljQ3kwajlv?=
- =?utf-8?B?VEpZdStBUlJVMjVreGQ1YjlHN0F4Y2pKN0dHYzB1NENSUGRHNGl4NHpHeTd2?=
- =?utf-8?B?NmNpblZnb0Zkc29OMlUrRytOMm1MQml0MHhXdEVscG9UdFMxaytCYWV4REYr?=
- =?utf-8?B?NmhLZDU2Ym9UL3lXdlFneWJReGZ6YURJTzYreTJTZ1drYWU3M1A5azAvaG13?=
- =?utf-8?B?RnlJT2lZSEpTaDhOdXFLOFJGem5DK2ZWV0czN0pQcEIvUjUvRXJWR28rTFdw?=
- =?utf-8?B?dm1FVG9za2VIOE05cm1DMTFrSkxBYnlFSUp2MGZ4L3I4VGkzMFVZNnpFcHY5?=
- =?utf-8?B?VUJBVXgwRHhBbjNUbnhjU2NiNjJ4Yk5vQ1YzTktSb1BuRncxWVQ3VGpIN3RS?=
- =?utf-8?B?dXA4NmdwR1grSyt5bEpuanJhZlBnaFhCYldpQS83TGFvVDBGaXE5alphMFNR?=
- =?utf-8?B?ZlF1RjFja1dVMVZEc052SklWQjVDQis5MHBLWVdwcm0xeGl6R0VYSHNXZSt0?=
- =?utf-8?B?R25rVjA4OWE1N1hLWTk1Mk5LNEpXRG0zckVQS1FUVHBwcVlzY2tVb0tLVkRD?=
- =?utf-8?B?K2dickU5QVJ1dkJHV1Nja0ZVV1hRcmNvUWZEbEZ3WTFnUkw4ellpV0ZQWDMw?=
- =?utf-8?B?Zm5KTHVXczd3akhKMGtMK0d0ajdJeTFHYW0vZEpoaEt3V1pMQUlLSjVrSkpT?=
- =?utf-8?B?RWlsenlrKy91eXZHK1V2Z0QvckhWYkJCcFM3b1JtcjRhc2I0WHNwcmVSTWNq?=
- =?utf-8?B?blB6SWQvajBsR1U2QjdST1cyRW1wMURCSG1qUjFFMnJMSjJHT1Bya2RBRlBa?=
- =?utf-8?B?Nksvb1dhczJUSFlGTkt2dHBiYjVhMjgwS0hBVlFFOEltaDlVWUlDeVVvQXJi?=
- =?utf-8?B?TWtLVGtwQm9WdWVFaGhyT3NDTUZqdlBDejdWSTU3dm41Q3NhVUlFMW5hOXZZ?=
- =?utf-8?B?WWpIYWlwczRHU3BocjI5cGo4TUtpb21YU011cnBMaDg0WTVGZndPVDJjaWVm?=
- =?utf-8?B?YmNML2tkNUJkZVhqR3hjMmRYMGoyYVVLNm1abzRYRlJvYjFrMlpheG82OXpK?=
- =?utf-8?B?a0hXOGlWUnphdnVWZUxTWEZjK0FIRk5OWCtvV0lDSDQ2blNvSVAzLzhjYmt4?=
- =?utf-8?B?Y0NmQnk2aTJJeFdQVkVQVCs2RWs4dXA3ZzN5SUhNSzNNbFNZZ2dOaWpMUURD?=
- =?utf-8?B?MXVzd2pZVnJXeGpVUWVSNTVrRDNkb0tVWm9YbnFPaUw0SThIZjZTbmhXaE9x?=
- =?utf-8?B?WndrVWx4eWRxVVgxVEhyR0wwdEdzWkdmdkNoNk8yemtyaWJHdm1wUENSdEd6?=
- =?utf-8?B?amZacnp4eC9qcktTSDlDaSt3TVcwQzJkQWV3N3c1WWVmdERUMWhvNnlsd1FB?=
- =?utf-8?B?MXoyRDJBUTJ6NzErOXJML0tvNFVKTWdjS1JFLzFuTzdiSG9LQi9RRUVtOEdh?=
- =?utf-8?Q?pl9AZsVFtexgkl/mROhodC5Ni?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dfd91c9e-249a-4a3f-9a82-08db8e9b226d
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2023 12:15:15.2934
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: id1+A2UHT4Ip8jGucD2/qds5XBfRQkdG0NgkOxMpVAlHh8pwGdxMqs+HwTLNMxmxcb0/xZCggQFq9TrZnMdcoA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7575
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:GxC2BwBnGkGaXcJkfMYUBQ--.33878S8
+X-Coremail-Antispam: 1UD129KBjvAXoW3Cr4UZr48Zr45Jw18Zw17Awb_yoW8CF1rXo
+	W7uFn3Ww4fJ34UCF4rGFs7Gr47Za1kKa18AF4fuayYgayjvryYgrW7ta15X3sI9ryIkFWx
+	Aw1Sqa4fWF4xArykn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+	AaLaJ3UjIYCTnIWjp_UUUOl7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
+	j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r126s0DM28Irc
+	Ia0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l
+	84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJV
+	WxJr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
+	6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
+	C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
+	6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
+	8vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCY1x0264kExVAvwVAq07x20xyl42xK82IY
+	c2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s
+	026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCIc40Y0x0EwIxGrwCI
+	42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UMI
+	IF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E
+	87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUUMKZtUUUUU==
+X-CM-SenderInfo: hshw23xhvd2x3n6k3tpzhluzxrxghudrp/
+X-CFilter-Loop: Reflected
 
-On 26.07.2023 13:03, Simone Ballarin wrote:
-> @@ -70,15 +70,15 @@ static const uint8_t sr_mask[8] = {
->  };
->  
->  static const uint8_t gr_mask[9] = {
-> -    (uint8_t)~0xf0, /* 0x00 */
-> -    (uint8_t)~0xf0, /* 0x01 */
-> -    (uint8_t)~0xf0, /* 0x02 */
-> -    (uint8_t)~0xe0, /* 0x03 */
-> -    (uint8_t)~0xfc, /* 0x04 */
-> -    (uint8_t)~0x84, /* 0x05 */
-> -    (uint8_t)~0xf0, /* 0x06 */
-> -    (uint8_t)~0xf0, /* 0x07 */
-> -    (uint8_t)~0x00, /* 0x08 */
-> +    (uint8_t)~0xf0,
-> +    (uint8_t)~0xf0,
-> +    (uint8_t)~0xf0,
-> +    (uint8_t)~0xe0,
-> +    (uint8_t)~0xfc,
-> +    (uint8_t)~0x84,
-> +    (uint8_t)~0xf0,
-> +    (uint8_t)~0xf0,
-> +    (uint8_t)~0x00,
->  };
+From: Petr Tesarik <petr.tesarik.ext@huawei.com>
 
-Hmm, this stray change is _still_ there.
+Try to allocate a transient memory pool if no suitable slots can be found
+and the respective SWIOTLB is allowed to grow. The transient pool is just
+enough big for this one bounce buffer. It is inserted into a per-device
+list of transient memory pools, and it is freed again when the bounce
+buffer is unmapped.
 
-> --- a/xen/arch/x86/include/asm/hvm/trace.h
-> +++ b/xen/arch/x86/include/asm/hvm/trace.h
-> @@ -58,7 +58,7 @@
->  #define DO_TRC_HVM_VLAPIC           DEFAULT_HVM_MISC
->  
->  
-> -#define TRC_PAR_LONG(par) ((par)&0xFFFFFFFF),((par)>>32)
-> +#define TRC_PAR_LONG(par) ((uint32_t)par), ((par) >> 32)
+Transient memory pools are kept in an RCU list. A memory barrier is
+required after adding a new entry, because any address within a transient
+buffer must be immediately recognized as belonging to the SWIOTLB, even if
+it is passed to another CPU.
 
-You've lost parentheses around "par".
+Deletion does not require any synchronization beyond RCU ordering
+guarantees. After a buffer is unmapped, its physical addresses may no
+longer be passed to the DMA API, so the memory range of the corresponding
+stale entry in the RCU list never matches. If the memory range gets
+allocated again, then it happens only after a RCU quiescent state.
 
-> @@ -93,7 +93,7 @@
->      HVMTRACE_ND(evt, 0, 0)
->  
->  #define HVMTRACE_LONG_1D(evt, d1)                  \
-> -                   HVMTRACE_2D(evt ## 64, (d1) & 0xFFFFFFFF, (d1) >> 32)
-> +                   HVMTRACE_2D(evt ## 64, (uint32_t)d1, (d1) >> 32)
+Since bounce buffers can now be allocated from different pools, add a
+parameter to swiotlb_alloc_pool() to let the caller know which memory pool
+is used. Add swiotlb_find_pool() to find the memory pool corresponding to
+an address. This function is now also used by is_swiotlb_buffer(), because
+a simple boundary check is no longer sufficient.
 
-Same for "d1" here.
+The logic in swiotlb_alloc_tlb() is taken from __dma_direct_alloc_pages(),
+simplified and enhanced to use coherent memory pools if needed.
 
-Both of these are, btw., indications that you should have dropped Stefano's
-R-b.
+Note that this is not the most efficient way to provide a bounce buffer,
+but when a DMA buffer can't be mapped, something may (and will) actually
+break. At that point it is better to make an allocation, even if it may be
+an expensive operation.
 
-> --- a/xen/arch/x86/include/asm/msr-index.h
-> +++ b/xen/arch/x86/include/asm/msr-index.h
-> @@ -30,7 +30,7 @@
->  
->  #define MSR_INTEL_CORE_THREAD_COUNT         0x00000035
->  #define  MSR_CTC_THREAD_MASK                0x0000ffff
-> -#define  MSR_CTC_CORE_MASK                  0xffff0000
-> +#define  MSR_CTC_CORE_MASK                  0xffff0000U
->  
->  #define MSR_SPEC_CTRL                       0x00000048
->  #define  SPEC_CTRL_IBRS                     (_AC(1, ULL) <<  0)
-> @@ -168,7 +168,7 @@
->  #define MSR_UARCH_MISC_CTRL                 0x00001b01
->  #define  UARCH_CTRL_DOITM                   (_AC(1, ULL) <<  0)
->  
-> -#define MSR_EFER                            0xc0000080 /* Extended Feature Enable Register */
-> +#define MSR_EFER                            _AC(0xc0000080, U)  /* Extended Feature Enable Register */
+Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
+---
+ include/linux/device.h      |   6 +
+ include/linux/dma-mapping.h |   2 +
+ include/linux/swiotlb.h     |  29 +++-
+ kernel/dma/direct.c         |   2 +-
+ kernel/dma/swiotlb.c        | 316 +++++++++++++++++++++++++++++++++++-
+ 5 files changed, 345 insertions(+), 10 deletions(-)
 
-I understand you use _AC() here because the constant is used in assembly
-code. But I don't understand why you use it only here, and not throughout
-at least the "modern" portion of the file. I wonder what other x86
-maintainers think about this.
+diff --git a/include/linux/device.h b/include/linux/device.h
+index d9754a68ba95..5fd89c9d005c 100644
+--- a/include/linux/device.h
++++ b/include/linux/device.h
+@@ -626,6 +626,8 @@ struct device_physical_location {
+  * @dma_mem:	Internal for coherent mem override.
+  * @cma_area:	Contiguous memory area for dma allocations
+  * @dma_io_tlb_mem: Software IO TLB allocator.  Not for driver use.
++ * @dma_io_tlb_pools:	List of transient swiotlb memory pools.
++ * @dma_io_tlb_lock:	Protects changes to the list of active pools.
+  * @archdata:	For arch-specific additions.
+  * @of_node:	Associated device tree node.
+  * @fwnode:	Associated device node supplied by platform firmware.
+@@ -731,6 +733,10 @@ struct device {
+ #endif
+ #ifdef CONFIG_SWIOTLB
+ 	struct io_tlb_mem *dma_io_tlb_mem;
++#endif
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++	struct list_head dma_io_tlb_pools;
++	spinlock_t dma_io_tlb_lock;
+ #endif
+ 	/* arch specific additions */
+ 	struct dev_archdata	archdata;
+diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+index e13050eb9777..f0ccca16a0ac 100644
+--- a/include/linux/dma-mapping.h
++++ b/include/linux/dma-mapping.h
+@@ -418,6 +418,8 @@ static inline void dma_sync_sgtable_for_device(struct device *dev,
+ #define dma_get_sgtable(d, t, v, h, s) dma_get_sgtable_attrs(d, t, v, h, s, 0)
+ #define dma_mmap_coherent(d, v, c, h, s) dma_mmap_attrs(d, v, c, h, s, 0)
+ 
++bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size);
++
+ static inline void *dma_alloc_coherent(struct device *dev, size_t size,
+ 		dma_addr_t *dma_handle, gfp_t gfp)
+ {
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index 57be2a0a9fbf..66867d2188ba 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -80,6 +80,9 @@ dma_addr_t swiotlb_map(struct device *dev, phys_addr_t phys,
+  * @area_nslabs: Number of slots in each area.
+  * @areas:	Array of memory area descriptors.
+  * @slots:	Array of slot descriptors.
++ * @node:	Member of the IO TLB memory pool list.
++ * @rcu:	RCU head for swiotlb_dyn_free().
++ * @transient:  %true if transient memory pool.
+  */
+ struct io_tlb_pool {
+ 	phys_addr_t start;
+@@ -91,6 +94,11 @@ struct io_tlb_pool {
+ 	unsigned int area_nslabs;
+ 	struct io_tlb_area *areas;
+ 	struct io_tlb_slot *slots;
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++	struct list_head node;
++	struct rcu_head rcu;
++	bool transient;
++#endif
+ };
+ 
+ /**
+@@ -122,6 +130,20 @@ struct io_tlb_mem {
+ #endif
+ };
+ 
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++
++struct io_tlb_pool *swiotlb_find_pool(struct device *dev, phys_addr_t paddr);
++
++#else
++
++static inline struct io_tlb_pool *swiotlb_find_pool(struct device *dev,
++						    phys_addr_t paddr)
++{
++	return &dev->dma_io_tlb_mem->defpool;
++}
++
++#endif
++
+ /**
+  * is_swiotlb_buffer() - check if a physical address belongs to a swiotlb
+  * @dev:        Device which has mapped the buffer.
+@@ -137,7 +159,12 @@ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
+ {
+ 	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+ 
+-	return mem && paddr >= mem->defpool.start && paddr < mem->defpool.end;
++	if (!mem)
++		return false;
++
++	if (IS_ENABLED(CONFIG_SWIOTLB_DYNAMIC))
++		return swiotlb_find_pool(dev, paddr);
++	return paddr >= mem->defpool.start && paddr < mem->defpool.end;
+ }
+ 
+ static inline bool is_swiotlb_force_bounce(struct device *dev)
+diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
+index d29cade048db..9596ae1aa0da 100644
+--- a/kernel/dma/direct.c
++++ b/kernel/dma/direct.c
+@@ -66,7 +66,7 @@ static gfp_t dma_direct_optimal_gfp_mask(struct device *dev, u64 *phys_limit)
+ 	return 0;
+ }
+ 
+-static bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size)
++bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size)
+ {
+ 	dma_addr_t dma_addr = phys_to_dma_direct(dev, phys);
+ 
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 346857581b75..6e985f65b9f5 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -35,6 +35,7 @@
+ #include <linux/memblock.h>
+ #include <linux/mm.h>
+ #include <linux/pfn.h>
++#include <linux/rculist.h>
+ #include <linux/scatterlist.h>
+ #include <linux/set_memory.h>
+ #include <linux/spinlock.h>
+@@ -510,6 +511,211 @@ void __init swiotlb_exit(void)
+ 	memset(mem, 0, sizeof(*mem));
+ }
+ 
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++
++/**
++ * alloc_dma_pages() - allocate pages to be used for DMA
++ * @gfp:	GFP flags for the allocation.
++ * @bytes:	Size of the buffer.
++ *
++ * Allocate pages from the buddy allocator. If successful, make the allocated
++ * pages decrypted that they can be used for DMA.
++ *
++ * Return: Decrypted pages, or %NULL on failure.
++ */
++static struct page *alloc_dma_pages(gfp_t gfp, size_t bytes)
++{
++	unsigned int order = get_order(bytes);
++	struct page *page;
++	void *vaddr;
++
++	page = alloc_pages(gfp, order);
++	if (!page)
++		return NULL;
++
++	vaddr = page_address(page);
++	if (set_memory_decrypted((unsigned long)vaddr, PFN_UP(bytes)))
++		goto error;
++	return page;
++
++error:
++	__free_pages(page, order);
++	return NULL;
++}
++
++/**
++ * swiotlb_alloc_tlb() - allocate a dynamic IO TLB buffer
++ * @dev:	Device for which a memory pool is allocated.
++ * @bytes:	Size of the buffer.
++ * @phys_limit:	Maximum allowed physical address of the buffer.
++ * @gfp:	GFP flags for the allocation.
++ *
++ * Return: Allocated pages, or %NULL on allocation failure.
++ */
++static struct page *swiotlb_alloc_tlb(struct device *dev, size_t bytes,
++		u64 phys_limit, gfp_t gfp)
++{
++	struct page *page;
++
++	/*
++	 * Allocate from the atomic pools if memory is encrypted and
++	 * the allocation is atomic, because decrypting may block.
++	 */
++	if (!gfpflags_allow_blocking(gfp) && dev && force_dma_unencrypted(dev)) {
++		void *vaddr;
++
++		if (!IS_ENABLED(CONFIG_DMA_COHERENT_POOL))
++			return NULL;
++
++		return dma_alloc_from_pool(dev, bytes, &vaddr, gfp,
++					   dma_coherent_ok);
++	}
++
++	gfp &= ~GFP_ZONEMASK;
++	if (phys_limit <= DMA_BIT_MASK(zone_dma_bits))
++		gfp |= __GFP_DMA;
++	else if (phys_limit <= DMA_BIT_MASK(32))
++		gfp |= __GFP_DMA32;
++
++	while ((page = alloc_dma_pages(gfp, bytes)) &&
++	       page_to_phys(page) + bytes - 1 > phys_limit) {
++		/* allocated, but too high */
++		__free_pages(page, get_order(bytes));
++
++		if (IS_ENABLED(CONFIG_ZONE_DMA32) &&
++		    phys_limit < DMA_BIT_MASK(64) &&
++		    !(gfp & (__GFP_DMA32 | __GFP_DMA)))
++			gfp |= __GFP_DMA32;
++		else if (IS_ENABLED(CONFIG_ZONE_DMA) &&
++			 !(gfp & __GFP_DMA))
++			gfp = (gfp & ~__GFP_DMA32) | __GFP_DMA;
++		else
++			return NULL;
++	}
++
++	return page;
++}
++
++/**
++ * swiotlb_free_tlb() - free a dynamically allocated IO TLB buffer
++ * @vaddr:	Virtual address of the buffer.
++ * @bytes:	Size of the buffer.
++ */
++static void swiotlb_free_tlb(void *vaddr, size_t bytes)
++{
++	if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
++	    dma_free_from_pool(NULL, vaddr, bytes))
++		return;
++
++	/* Intentional leak if pages cannot be encrypted again. */
++	if (!set_memory_encrypted((unsigned long)vaddr, PFN_UP(bytes)))
++		__free_pages(virt_to_page(vaddr), get_order(bytes));
++}
++
++/**
++ * swiotlb_alloc_pool() - allocate a new IO TLB memory pool
++ * @dev:	Device for which a memory pool is allocated.
++ * @nslabs:	Desired number of slabs.
++ * @phys_limit:	Maximum DMA buffer physical address.
++ * @gfp:	GFP flags for the allocations.
++ *
++ * Allocate and initialize a new IO TLB memory pool.
++ *
++ * Return: New memory pool, or %NULL on allocation failure.
++ */
++static struct io_tlb_pool *swiotlb_alloc_pool(struct device *dev,
++		unsigned int nslabs, u64 phys_limit, gfp_t gfp)
++{
++	struct io_tlb_pool *pool;
++	struct page *tlb;
++	size_t pool_size;
++	size_t tlb_size;
++
++	pool_size = sizeof(*pool) + array_size(sizeof(*pool->areas), 1) +
++		array_size(sizeof(*pool->slots), nslabs);
++	pool = kzalloc(pool_size, gfp);
++	if (!pool)
++		goto error;
++	pool->areas = (void *)pool + sizeof(*pool);
++	pool->slots = (void *)pool->areas + sizeof(*pool->areas);
++
++	tlb_size = nslabs << IO_TLB_SHIFT;
++	tlb = swiotlb_alloc_tlb(dev, tlb_size, phys_limit, gfp);
++	if (!tlb)
++		goto error_tlb;
++
++	swiotlb_init_io_tlb_pool(pool, page_to_phys(tlb), nslabs, true, 1);
++	return pool;
++
++error_tlb:
++	kfree(pool);
++error:
++	return NULL;
++}
++
++/**
++ * swiotlb_dyn_free() - RCU callback to free a memory pool
++ * @rcu:	RCU head in the corresponding struct io_tlb_pool.
++ */
++static void swiotlb_dyn_free(struct rcu_head *rcu)
++{
++	struct io_tlb_pool *pool = container_of(rcu, struct io_tlb_pool, rcu);
++	size_t tlb_size = pool->end - pool->start;
++
++	swiotlb_free_tlb(pool->vaddr, tlb_size);
++	kfree(pool);
++}
++
++/**
++ * swiotlb_find_pool() - find the IO TLB pool for a physical address
++ * @dev:        Device which has mapped the DMA buffer.
++ * @paddr:      Physical address within the DMA buffer.
++ *
++ * Find the IO TLB memory pool descriptor which contains the given physical
++ * address, if any.
++ *
++ * Return: Memory pool which contains @paddr, or %NULL if none.
++ */
++struct io_tlb_pool *swiotlb_find_pool(struct device *dev, phys_addr_t paddr)
++{
++	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
++	struct io_tlb_pool *pool = &mem->defpool;
++
++	if (paddr >= pool->start && paddr < pool->end)
++		return pool;
++
++	/* Pairs with smp_wmb() in swiotlb_find_slots(). */
++	smp_rmb();
++
++	rcu_read_lock();
++	list_for_each_entry_rcu(pool, &dev->dma_io_tlb_pools, node) {
++		if (paddr >= pool->start && paddr < pool->end)
++			goto out;
++	}
++	pool = NULL;
++out:
++	rcu_read_unlock();
++	return pool;
++}
++
++/**
++ * swiotlb_del_pool() - remove an IO TLB pool from a device
++ * @dev:	Owning device.
++ * @pool:	Memory pool to be removed.
++ */
++static void swiotlb_del_pool(struct device *dev, struct io_tlb_pool *pool)
++{
++	unsigned long flags;
++
++	spin_lock_irqsave(&dev->dma_io_tlb_lock, flags);
++	list_del_rcu(&pool->node);
++	spin_unlock_irqrestore(&dev->dma_io_tlb_lock, flags);
++
++	call_rcu(&pool->rcu, swiotlb_dyn_free);
++}
++
++#endif	/* CONFIG_SWIOTLB_DYNAMIC */
++
+ /**
+  * swiotlb_dev_init() - initialize swiotlb fields in &struct device
+  * @dev:	Device to be initialized.
+@@ -517,6 +723,10 @@ void __init swiotlb_exit(void)
+ void swiotlb_dev_init(struct device *dev)
+ {
+ 	dev->dma_io_tlb_mem = &io_tlb_default_mem;
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++	INIT_LIST_HEAD(&dev->dma_io_tlb_pools);
++	spin_lock_init(&dev->dma_io_tlb_lock);
++#endif
+ }
+ 
+ /*
+@@ -533,7 +743,7 @@ static unsigned int swiotlb_align_offset(struct device *dev, u64 addr)
+ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size,
+ 			   enum dma_data_direction dir)
+ {
+-	struct io_tlb_pool *mem = &dev->dma_io_tlb_mem->defpool;
++	struct io_tlb_pool *mem = swiotlb_find_pool(dev, tlb_addr);
+ 	int index = (tlb_addr - mem->start) >> IO_TLB_SHIFT;
+ 	phys_addr_t orig_addr = mem->slots[index].orig_addr;
+ 	size_t alloc_size = mem->slots[index].alloc_size;
+@@ -799,6 +1009,8 @@ static int swiotlb_pool_find_slots(struct device *dev, struct io_tlb_pool *pool,
+ 	return -1;
+ }
+ 
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++
+ /**
+  * swiotlb_find_slots() - search for slots in the whole swiotlb
+  * @dev:	Device which maps the buffer.
+@@ -806,6 +1018,7 @@ static int swiotlb_pool_find_slots(struct device *dev, struct io_tlb_pool *pool,
+  * @alloc_size: Total requested size of the bounce buffer,
+  *		including initial alignment padding.
+  * @alloc_align_mask:	Required alignment of the allocated buffer.
++ * @retpool:	Used memory pool, updated on return.
+  *
+  * Search through the whole software IO TLB to find a sequence of slots that
+  * match the allocation constraints.
+@@ -813,12 +1026,64 @@ static int swiotlb_pool_find_slots(struct device *dev, struct io_tlb_pool *pool,
+  * Return: Index of the first allocated slot, or -1 on error.
+  */
+ static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
+-		size_t alloc_size, unsigned int alloc_align_mask)
++		size_t alloc_size, unsigned int alloc_align_mask,
++		struct io_tlb_pool **retpool)
+ {
+-	return swiotlb_pool_find_slots(dev, &dev->dma_io_tlb_mem->defpool,
++	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
++	struct io_tlb_pool *pool;
++	unsigned long nslabs;
++	unsigned long flags;
++	u64 phys_limit;
++	int index;
++
++	pool = &mem->defpool;
++	index = swiotlb_pool_find_slots(dev, pool, orig_addr,
++					alloc_size, alloc_align_mask);
++	if (index >= 0)
++		goto found;
++
++	if (!mem->can_grow)
++		return -1;
++
++	nslabs = nr_slots(alloc_size);
++	phys_limit = min_not_zero(*dev->dma_mask, dev->bus_dma_limit);
++	pool = swiotlb_alloc_pool(dev, nslabs, phys_limit,
++				  GFP_NOWAIT | __GFP_NOWARN);
++	if (!pool)
++		return -1;
++
++	index = swiotlb_pool_find_slots(dev, pool, orig_addr,
++					alloc_size, alloc_align_mask);
++	if (index < 0) {
++		swiotlb_dyn_free(&pool->rcu);
++		return -1;
++	}
++
++	pool->transient = true;
++	spin_lock_irqsave(&dev->dma_io_tlb_lock, flags);
++	list_add_rcu(&pool->node, &dev->dma_io_tlb_pools);
++	spin_unlock_irqrestore(&dev->dma_io_tlb_lock, flags);
++
++	/* Pairs with smp_rmb() in swiotlb_find_pool(). */
++	smp_wmb();
++found:
++	*retpool = pool;
++	return index;
++}
++
++#else  /* !CONFIG_SWIOTLB_DYNAMIC */
++
++static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
++		size_t alloc_size, unsigned int alloc_align_mask,
++		struct io_tlb_pool **retpool)
++{
++	*retpool = &dev->dma_io_tlb_mem->defpool;
++	return swiotlb_pool_find_slots(dev, *retpool,
+ 				       orig_addr, alloc_size, alloc_align_mask);
+ }
+ 
++#endif /* CONFIG_SWIOTLB_DYNAMIC */
++
+ #ifdef CONFIG_DEBUG_FS
+ 
+ /**
+@@ -899,7 +1164,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+ 	}
+ 
+ 	index = swiotlb_find_slots(dev, orig_addr,
+-				   alloc_size + offset, alloc_align_mask);
++				   alloc_size + offset, alloc_align_mask, &pool);
+ 	if (index == -1) {
+ 		if (!(attrs & DMA_ATTR_NO_WARN))
+ 			dev_warn_ratelimited(dev,
+@@ -913,7 +1178,6 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+ 	 * This is needed when we sync the memory.  Then we sync the buffer if
+ 	 * needed.
+ 	 */
+-	pool = &mem->defpool;
+ 	for (i = 0; i < nr_slots(alloc_size + offset); i++)
+ 		pool->slots[index + i].orig_addr = slot_addr(orig_addr, i);
+ 	tlb_addr = slot_addr(pool->start, index) + offset;
+@@ -930,7 +1194,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+ 
+ static void swiotlb_release_slots(struct device *dev, phys_addr_t tlb_addr)
+ {
+-	struct io_tlb_pool *mem = &dev->dma_io_tlb_mem->defpool;
++	struct io_tlb_pool *mem = swiotlb_find_pool(dev, tlb_addr);
+ 	unsigned long flags;
+ 	unsigned int offset = swiotlb_align_offset(dev, tlb_addr);
+ 	int index = (tlb_addr - offset - mem->start) >> IO_TLB_SHIFT;
+@@ -977,6 +1241,41 @@ static void swiotlb_release_slots(struct device *dev, phys_addr_t tlb_addr)
+ 	dec_used(dev->dma_io_tlb_mem, nslots);
+ }
+ 
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++
++/**
++ * swiotlb_del_transient() - delete a transient memory pool
++ * @dev:	Device which mapped the buffer.
++ * @tlb_addr:	Physical address within a bounce buffer.
++ *
++ * Check whether the address belongs to a transient SWIOTLB memory pool.
++ * If yes, then delete the pool.
++ *
++ * Return: %true if @tlb_addr belonged to a transient pool that was released.
++ */
++static bool swiotlb_del_transient(struct device *dev, phys_addr_t tlb_addr)
++{
++	struct io_tlb_pool *pool;
++
++	pool = swiotlb_find_pool(dev, tlb_addr);
++	if (!pool->transient)
++		return false;
++
++	dec_used(dev->dma_io_tlb_mem, pool->nslabs);
++	swiotlb_del_pool(dev, pool);
++	return true;
++}
++
++#else  /* !CONFIG_SWIOTLB_DYNAMIC */
++
++static inline bool swiotlb_del_transient(struct device *dev,
++					 phys_addr_t tlb_addr)
++{
++	return false;
++}
++
++#endif	/* CONFIG_SWIOTLB_DYNAMIC */
++
+ /*
+  * tlb_addr is the physical address of the bounce buffer to unmap.
+  */
+@@ -991,6 +1290,8 @@ void swiotlb_tbl_unmap_single(struct device *dev, phys_addr_t tlb_addr,
+ 	    (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL))
+ 		swiotlb_bounce(dev, tlb_addr, mapping_size, DMA_FROM_DEVICE);
+ 
++	if (swiotlb_del_transient(dev, tlb_addr))
++		return;
+ 	swiotlb_release_slots(dev, tlb_addr);
+ }
+ 
+@@ -1180,11 +1481,10 @@ struct page *swiotlb_alloc(struct device *dev, size_t size)
+ 	if (!mem)
+ 		return NULL;
+ 
+-	index = swiotlb_find_slots(dev, 0, size, 0);
++	index = swiotlb_find_slots(dev, 0, size, 0, &pool);
+ 	if (index == -1)
+ 		return NULL;
+ 
+-	pool = &mem->defpool;
+ 	tlb_addr = slot_addr(pool->start, index);
+ 
+ 	return pfn_to_page(PFN_DOWN(tlb_addr));
+-- 
+2.25.1
 
-As a minor aspect, I also don't really see why you insert a 2nd blank
-ahead of the comment.
-
->  #define  EFER_SCE                           (_AC(1, ULL) <<  0) /* SYSCALL Enable */
->  #define  EFER_LME                           (_AC(1, ULL) <<  8) /* Long Mode Enable */
->  #define  EFER_LMA                           (_AC(1, ULL) << 10) /* Long Mode Active */
-> @@ -181,35 +181,35 @@
->      (EFER_SCE | EFER_LME | EFER_LMA | EFER_NXE | EFER_SVME | EFER_FFXSE | \
->       EFER_AIBRSE)
->  
-> -#define MSR_STAR                            0xc0000081 /* legacy mode SYSCALL target */
-> -#define MSR_LSTAR                           0xc0000082 /* long mode SYSCALL target */
-> -#define MSR_CSTAR                           0xc0000083 /* compat mode SYSCALL target */
-> -#define MSR_SYSCALL_MASK                    0xc0000084 /* EFLAGS mask for syscall */
-> -#define MSR_FS_BASE                         0xc0000100 /* 64bit FS base */
-> -#define MSR_GS_BASE                         0xc0000101 /* 64bit GS base */
-> -#define MSR_SHADOW_GS_BASE                  0xc0000102 /* SwapGS GS shadow */
-> -#define MSR_TSC_AUX                         0xc0000103 /* Auxiliary TSC */
-> +#define MSR_STAR                            0xc0000081U /* legacy mode SYSCALL target */
-> +#define MSR_LSTAR                           0xc0000082U /* long mode SYSCALL target */
-> +#define MSR_CSTAR                           0xc0000083U /* compat mode SYSCALL target */
-> +#define MSR_SYSCALL_MASK                    0xc0000084U /* EFLAGS mask for syscall */
-> +#define MSR_FS_BASE                         0xc0000100U /* 64bit FS base */
-> +#define MSR_GS_BASE                         0xc0000101U /* 64bit GS base */
-> +#define MSR_SHADOW_GS_BASE                  0xc0000102U /* SwapGS GS shadow */
-> +#define MSR_TSC_AUX                         0xc0000103U /* Auxiliary TSC */
->  
-> -#define MSR_K8_SYSCFG                       0xc0010010
-> +#define MSR_K8_SYSCFG                       0xc0010010U
->  #define  SYSCFG_MTRR_FIX_DRAM_EN            (_AC(1, ULL) << 18)
->  #define  SYSCFG_MTRR_FIX_DRAM_MOD_EN        (_AC(1, ULL) << 19)
->  #define  SYSCFG_MTRR_VAR_DRAM_EN            (_AC(1, ULL) << 20)
->  #define  SYSCFG_MTRR_TOM2_EN                (_AC(1, ULL) << 21)
->  #define  SYSCFG_TOM2_FORCE_WB               (_AC(1, ULL) << 22)
->  
-> -#define MSR_K8_IORR_BASE0                   0xc0010016
-> -#define MSR_K8_IORR_MASK0                   0xc0010017
-> -#define MSR_K8_IORR_BASE1                   0xc0010018
-> -#define MSR_K8_IORR_MASK1                   0xc0010019
-> +#define MSR_K8_IORR_BASE0                   0xc0010016U
-> +#define MSR_K8_IORR_MASK0                   0xc0010017U
-> +#define MSR_K8_IORR_BASE1                   0xc0010018U
-> +#define MSR_K8_IORR_MASK1                   0xc0010019U
->  
-> -#define MSR_K8_TSEG_BASE                    0xc0010112 /* AMD doc: SMMAddr */
-> -#define MSR_K8_TSEG_MASK                    0xc0010113 /* AMD doc: SMMMask */
-> +#define MSR_K8_TSEG_BASE                    0xc0010112U /* AMD doc: SMMAddr */
-> +#define MSR_K8_TSEG_MASK                    0xc0010113U /* AMD doc: SMMMask */
->  
-> -#define MSR_K8_VM_CR                        0xc0010114
-> +#define MSR_K8_VM_CR                        0xc0010114U
->  #define  VM_CR_INIT_REDIRECTION             (_AC(1, ULL) <<  1)
->  #define  VM_CR_SVM_DISABLE                  (_AC(1, ULL) <<  4)
->  
-> -#define MSR_VIRT_SPEC_CTRL                  0xc001011f /* Layout matches MSR_SPEC_CTRL */
-> +#define MSR_VIRT_SPEC_CTRL                  0xc001011fU /* Layout matches MSR_SPEC_CTRL */
->  
->  /*
->   * Legacy MSR constants in need of cleanup.  No new MSRs below this comment.
-
-(As to above remark: This is the separator between "modern" [above]
-and "historic" [below].)
-
-Jan
 
