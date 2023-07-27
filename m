@@ -4,33 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44096C04A6A
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 14:28:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.571134.894242 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A53C5C001DC
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 14:34:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.571138.894262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qP1yh-0003ic-9d; Thu, 27 Jul 2023 14:28:31 +0000
+	id 1qP23o-0005lY-58; Thu, 27 Jul 2023 14:33:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 571134.894242; Thu, 27 Jul 2023 14:28:31 +0000
+Received: by outflank-mailman (output) from mailman id 571138.894262; Thu, 27 Jul 2023 14:33:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qP1yh-0003iV-6Z; Thu, 27 Jul 2023 14:28:31 +0000
-Received: by outflank-mailman (input) for mailman id 571134;
- Thu, 27 Jul 2023 14:28:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qP23o-0005lR-1X; Thu, 27 Jul 2023 14:33:48 +0000
+Received: by outflank-mailman (input) for mailman id 571138;
+ Thu, 27 Jul 2023 14:33:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=8wl5=DN=tibco.com=gdunlap@srs-se1.protection.inumbo.net>)
- id 1qP1yf-0003iP-Py
- for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 14:28:29 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id da14dbbd-2c89-11ee-8613-37d641c3527e;
- Thu, 27 Jul 2023 16:28:27 +0200 (CEST)
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-4fb960b7c9dso1877212e87.0
- for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 07:28:27 -0700 (PDT)
+ (envelope-from <SRS0=m5Ij=DN=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1qP23m-0005l2-T9
+ for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 14:33:46 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on2041.outbound.protection.outlook.com [40.107.7.41])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9790a994-2c8a-11ee-b248-6b7b168915f2;
+ Thu, 27 Jul 2023 16:33:45 +0200 (CEST)
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
+ by DU2PR04MB9100.eurprd04.prod.outlook.com (2603:10a6:10:2f3::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.29; Thu, 27 Jul
+ 2023 14:33:16 +0000
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::e5cf:5743:ab60:b14e]) by DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::e5cf:5743:ab60:b14e%5]) with mapi id 15.20.6631.026; Thu, 27 Jul 2023
+ 14:33:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,159 +48,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: da14dbbd-2c89-11ee-8613-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1690468107; x=1691072907;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=s9ahMakn0xR+k1w0lDlVVqaf5hQgGYAB74KigutUxbI=;
-        b=W+ZT/L/9o5MRISlsC5IbwVJAIUOREjLdvz44100YymjDCz/SEAKK9xCreGeF74ZEw3
-         Nys9pu/MqZd5hHjaOIDOSUAmOZLiJSpjDHXQkdaJc1puAcXnL89ZDr3FarLgFr7QD5Nl
-         I/jdCpiuWojhdOdVcvlL2TD/mLFNMoNte/7Iw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690468107; x=1691072907;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=s9ahMakn0xR+k1w0lDlVVqaf5hQgGYAB74KigutUxbI=;
-        b=EnJ/rmvaNTGP7JjiStPtk+fSyhh7nhnlaYR+i/hX3zwUbi6cjeZsnpwFBDkStffnrY
-         Qddh0qXTy/TNiLFwfjiqgWTVGUiyszCjlea1WUEFVpjn9pwM0PBlAcujTCqbcPXENzPH
-         f57erTunijtoXf+HlbEhiMB0gGexfk6vYEj70ahukVFW6e78zep2fHqEbbrMz2QqwrY5
-         ZT6YzFfxZTKT7eTi9XTwD5/uMaLFjp/XqkEOrfEd+UeFFeP4HYbPvUKBPvgYu0RoA1hL
-         zbep3t7qTZfFG8aPG/6xlg12LkBDIgdT+zQ6LUuG0Hk7wy49pevEq5Z8VJqIBsizIIg1
-         QoEA==
-X-Gm-Message-State: ABy/qLbhLDRAPedYlEQqrOO3gvq0IOHGj8dTJONZD98+VcTwtm+Gsewa
-	zmbOOSm46dzwt6ct4y1JTiFzkZT+hd7HSy5SN02Bs7OmzoVxBNHKNBsBzg/L
-X-Google-Smtp-Source: APBJJlErGuhybN8B7FVWJr3J2pEJo6EQU8WgVQNMM6mpeyk4pELcjF0x22Pb8TEJKP84kpHq6Uw9obRnCSNUn+y9KJY=
-X-Received: by 2002:ac2:465c:0:b0:4fb:8492:83fb with SMTP id
- s28-20020ac2465c000000b004fb849283fbmr1759692lfo.68.1690468106795; Thu, 27
- Jul 2023 07:28:26 -0700 (PDT)
+X-Inumbo-ID: 9790a994-2c8a-11ee-b248-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fA2As1BK5Jiu1bned2TySv5n1Z8aGRfZoCO5L76l418vruHirOPzVv2+yp1S95vbxyw92FzknwQydjhpMIQPoQWSVq1M9Z2e4keCS1CchXG5Eo76Ob/pnQOnMkL7Wq2VZ6c6zxVE+FpThnEL8hJfHUdY8o60RKfoOiiXEQOQF4YVse7QdSzstCg4IzgkHF7FcRNGXFUA4X0m1MEDslzMq9P4M83tvY8fs8ZY9CLEZ9o/MVIqoWdQ7HRwyiknPqdmGtY/2mAeNNW1LshTbUlTVIpO2L5FJaz4QpnCct8ZqtsxfcqWdFoVmDjSewb5wm1Sn2zRlm+VNF1CPvnIs41/qw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UQ8VFHLzAI05SKWB7ehWmpZpzVH9greL9ap0tjkiyso=;
+ b=WDof8tYgRmdu4ESWkl5GI6WYIc8L2J83XLmtvZpMN6EHYF0KX6jeYoV9I3ZN5H8zo//b/28YMORLNhuKSx8uBeYtOaDFEi7YZTD75ifTQb2KZQFHLzJK4c7yrIury2fVbvjaihsAy7emxpWgaHMQBHmsVjZTI08a6gG9p0zi9TxAPhhfPwvvM4M+Ttytofwz069snB3Lay6CSl6hGytcGoy4vXx5qhA6WMl+8fU3+D9NkKM50sObrUsR2Ffjawmee+Olih+nBIArTqTED+2t/k446bSP8N3ZtUonp2G53So0kkWYTZ3E1ZuKmG8vj4zDJzFhjSD2HEvYGypWBCo/cA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UQ8VFHLzAI05SKWB7ehWmpZpzVH9greL9ap0tjkiyso=;
+ b=Kau2eoSM4RsMXYJasaGAtldX8FVLCSb37PC3HJVJhKOe0chN2Tt0Pjj27fVxP5XkdRXqSp72kJtkhqpqc/Hd7EHhBroJ8wPdWbhUn17pYOoBBu0bCpeV/Bx8mielPCZEE8qd2Xj/u5cWRrS3UZqWSS8v9N1mknl9Ei5UbQQn3aT03/lSAvScW2RHYjwGZ5/EzbeGumL4Azma6EJyB086U08XSIrxXw8LAWjA36YlNfoMPNLGvcwhi0vm1u+L56SqQyVZ7f0KIHCIHroJcsNc8zGcLnOMZcnBsIZ/uInUGS1ETDGhlAV4rZM29KAaYMrvaZvtae3Cy7seDhCVrS0Bag==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <f8c151e4-1e0a-1465-0d5e-be55e25df818@suse.com>
+Date: Thu, 27 Jul 2023 16:33:14 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] libxl: Add missing libxl__virtio_devtype to
+ device_type_tbl array
+Content-Language: en-US
+To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
+Cc: Wei Liu <wl@xen.org>, Oleksandr Tyshchenko <olekstysh@gmail.com>,
+ Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>,
+ Viresh Kumar <viresh.kumar@linaro.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <20230726141459.985463-1-olekstysh@gmail.com>
+ <969aacb8-a608-be01-f0f5-34fb1cc61d62@suse.com>
+ <35a1988d-94a5-9f2e-2478-ab08268f02b0@epam.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <35a1988d-94a5-9f2e-2478-ab08268f02b0@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0053.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:48::17) To DU2PR04MB8790.eurprd04.prod.outlook.com
+ (2603:10a6:10:2e1::23)
 MIME-Version: 1.0
-From: George Dunlap <george.dunlap@cloud.com>
-Date: Thu, 27 Jul 2023 15:28:15 +0100
-Message-ID: <CA+zSX=ZmedcCdDi1xNjhxW-TCiuswm5+=Gd72hvEQGet5coTrA@mail.gmail.com>
-Subject: [ANNOUNCE] Call for agenda items for 3 August Community Call @ 1500 UTC
-To: Xen-devel <xen-devel@lists.xenproject.org>, 
-	Tamas K Lengyel <tamas.k.lengyel@gmail.com>, "intel-xen@intel.com" <intel-xen@intel.com>, 
-	"daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, Roger Pau Monne <roger.pau@citrix.com>, 
-	Sergey Dyasli <sergey.dyasli@citrix.com>, 
-	Christopher Clark <christopher.w.clark@gmail.com>, Rich Persaud <persaur@gmail.com>, 
-	Kevin Pearson <kevin.pearson@ortmanconsulting.com>, Juergen Gross <jgross@suse.com>, 
-	Paul Durrant <pdurrant@amazon.com>, "Ji, John" <john.ji@intel.com>, 
-	"edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, 
-	"robin.randhawa@arm.com" <robin.randhawa@arm.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, 
-	Matt Spencer <Matt.Spencer@arm.com>, Stewart Hildebrand <Stewart.Hildebrand@amd.com>, 
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Jeff Kubascik <Jeff.Kubascik@dornerworks.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Rian Quinn <rianquinn@gmail.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>, 
-	=?UTF-8?B?4oCL4oCL4oCL4oCL4oCL4oCL4oCLRG91ZyBHb2xkc3RlaW4=?= <cardoe@cardoe.com>, 
-	George Dunlap <george.dunlap@citrix.com>, David Woodhouse <dwmw@amazon.co.uk>, 
-	=?UTF-8?B?4oCL4oCL4oCL4oCL4oCL4oCL4oCLQW1pdCBTaGFo?= <amit@infradead.org>, 
-	=?UTF-8?B?4oCL4oCL4oCL4oCL4oCL4oCL4oCLVmFyYWQgR2F1dGFt?= <varadgautam@gmail.com>, 
-	Brian Woods <brian.woods@xilinx.com>, Robert Townley <rob.townley@gmail.com>, 
-	Bobby Eshleman <bobby.eshleman@gmail.com>, 
-	=?UTF-8?B?4oCL4oCL4oCL4oCL4oCL4oCL4oCLQ29yZXkgTWlueWFyZA==?= <cminyard@mvista.com>, 
-	Olivier Lambert <olivier.lambert@vates.fr>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Ash Wilding <ash.j.wilding@gmail.com>, Rahul Singh <Rahul.Singh@arm.com>, 
-	=?UTF-8?Q?Piotr_Kr=C3=B3l?= <piotr.krol@3mdeb.com>, 
-	Brendan Kerrigan <brendank310@gmail.com>, Thierry Laurion <insurgo@riseup.net>, 
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Scott Davis <scottwd@gmail.com>, 
-	Anthony PERARD <anthony.perard@citrix.com>, Michal Orzel <michal.orzel@amd.com>, 
-	Marc Ungeschikts <marc.ungeschikts@vates.fr>, Zhiming Shen <zshen@exotanium.io>, 
-	Xenia Ragiadakou <burzalodowa@gmail.com>, 
-	=?UTF-8?B?4oCL4oCL4oCL4oCL4oCL4oCL4oCLSGVucnkgV2FuZw==?= <Henry.Wang@arm.com>, 
-	Per Bilse <per.bilse@citrix.com>, Samuel Verschelde <stormi-xcp@ylix.fr>, 
-	Andrei Semenov <andrei.semenov@vates.fr>, Yann Dirson <yann.dirson@vates.fr>, 
-	Bernhard Kaindl <bernhard.kaindl@cloud.com>, 
-	=?UTF-8?B?4oCL4oCL4oCL4oCL4oCL4oCL4oCLTHVjYSBGYW5jZWxsdQ==?= <luca.fancellu@arm.com>, 
-	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
-	Vikram Garhwal <vikram.garhwal@amd.com>, Kelly Choi <kelly.choi@cloud.com>
-Content-Type: multipart/alternative; boundary="0000000000000291ff060178c72f"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|DU2PR04MB9100:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ac518c5-4dd3-4934-291c-08db8eae6a4d
+X-LD-Processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtFwd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	7CczQI7SZzc0/a/3guHy7dZmjbnh5Bxtvh/RPOCP++1L50jlF3kHTUPS9uNWTVgOXypQpM5Bilji41FFVKvCp+TCxAKzgOAq06msxD6+rLj9cWd+eAFrHPZUlRAjJ42gNLL9pg6k06brtcw113F3fan86G9/LHuo9k2Kj0jiVDE7/4yQ4IABdjfDD2r2J109DN/9kVkIQ+ROojJ9XwvzgHiTb6ihbdV9Erc030jA018AjbOrVgCV03Maoo1G731AvWF9Ho566OTLeEUqCtNJH8wjrzka5qau6W71ezhqL+9YMqfaZqeskFWSFyLG+mKBAgnlP5mDUpFPQghyn95sCQ/HGA13qItPHTPHSyAqSjeyQEc6JXusKeVeMI1Kr4HzWgRkj/vim0bKlnKdT5B5G35P0E0y8HfqTRORZ352B/MPKeHen6kYV3QE4ZpqNFVnlVkg0iOBjE2sBrmKw6j3MLcsM/OZGmP4QJInWU5ylXxIKW76Nn6Pah4IOpMAyCxQ3MBasKZgbo3fNr8wbgtprtgEfEFxZh5ijJSU9ccpff7BwoPqLPtKk9Ado2JC3at6wdvWcRcctD2g8vqIfSjOeNOqHIgNPwsg4bedmH+uHqOvmYi74cwyNwFUiff2QPfD4YWVTdsK1JwarYfvrBsSerwSPPcMxNcRPihHl8ptHj3CG4tzas0ZQ4VmAIqXaboK
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(39860400002)(346002)(396003)(136003)(366004)(451199021)(2906002)(41300700001)(316002)(5660300002)(8936002)(8676002)(36756003)(86362001)(31696002)(6512007)(6506007)(26005)(53546011)(478600001)(6486002)(38100700002)(186003)(31686004)(2616005)(4326008)(6916009)(66476007)(66946007)(66556008)(54906003)(101420200003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?R1k0QzRndWtZUkFSbHY4TW41Mm00U1BWc3VucUtOcTIxUWkwamo5NnQ3eHV4?=
+ =?utf-8?B?WDBxVjByeFQ0SEFyY3VoQXBxNS8vR2J4Mmt5VkNDYzAxUE4rU3p1UFd6eUVO?=
+ =?utf-8?B?RUNRZElKTHdDclQ5R3lMZ3FTN0NDL1U2ZTRvOVpEMm11bndCaWVrVDh5RmdP?=
+ =?utf-8?B?RE5tUllrR3I0L3BBSUROcllpeDR2ckEvUTRUK0FUZmllVVFCeHNKdDdzUTRQ?=
+ =?utf-8?B?SDRzcFF2bHp0YnBXZTlxOG5NMmFzNXYvYTBFRjRJSit1ZTJTK3NpUGdpVkR1?=
+ =?utf-8?B?VW0wOEx3bDJtMW9DMVZBRk9rb0N2VjVaaFJPMWxvWEh6V0MzdDhObUE1bk9L?=
+ =?utf-8?B?Tm1Sb0MwSjRLczRiOUxnNy8xV0hvNUk1Y0w0K3JCT1IrbGNLU3NLTUEvM3hN?=
+ =?utf-8?B?RzdDeXFleXVVZFZsa29Rd1JaQlMzNWdDNFRWSFB5enZWRUp6SzRPbTR3MkZr?=
+ =?utf-8?B?ajM0MHlSL2VVWFZEemI5eFRGejNlcThtMWpLdW9EZGhjZk4reW5ycmw5Ry9v?=
+ =?utf-8?B?UU92dzZ5STNlUlorMVN3R2s1eHVVeTJSMlhURzdFQ0FwZDZQbFJEcmxpNFVD?=
+ =?utf-8?B?MUtNZGhZTUxKS3gveVJjcGhvditTZmdlRTFCWDNXWVhLNDBIQnNJeW50OHdO?=
+ =?utf-8?B?TEhIVUlXQndBL29LQUMxdWhldFEraTY5Mmh2SkIwZ3BOd1lCdGpXWlRGUHZK?=
+ =?utf-8?B?T3NVcVV3SGRiNVRUdktValh5ZGdTVGt5UUhOSDMxY0xIMEdkT2lHSGVRMFJK?=
+ =?utf-8?B?bmU1c0xDTmovTS9GM0RKWGtKSjU4RFU4Nk1KMVluaHUrdE5MQ3l2d1VhbnFL?=
+ =?utf-8?B?Rm90d2JPNFhxdUpmeTVId2kyUE5GdkRaV2ovUHlFejFTMmMyUHBESG1ERkdU?=
+ =?utf-8?B?LzZyQ0dQZVdhRnljbTFkSmZRSkZndzB5K2hYdHpYUzVNOUFqYzc4ZWFXQUp1?=
+ =?utf-8?B?VExUeE82UmUrK2JJUUNleDc3N1g2SDc3MGdLL1ZqYjlXeWJtd3djMDRhOS9H?=
+ =?utf-8?B?bDBtNUZacjFWZWpTYlE5d2tkRmM5TGlibWg2MG4xZzkzQjZsTDJaSnQ3ZGxv?=
+ =?utf-8?B?QmVMcU1BL2VjbUkxcDBpcko5T0xQclB6eWlqVHk3K1kzTnF4N3FLSUlXZmsx?=
+ =?utf-8?B?SGRPOGN5TTdMSEZ3TDhzTXVjUVVtSlhMSXYzZDFucnhIT3RXbXFjTU9DSDNP?=
+ =?utf-8?B?WkhCeit6Qm9GamRXa0p2c0tjdzdqUUJUdEtURDFpOGsvZSsxTkdKclo3ZUpy?=
+ =?utf-8?B?VzFPSTNEaWFvMHNMY2l2Y1J0SVJqV2paNWY5TlpqSlNzRGNaWVBUNlRRcFc4?=
+ =?utf-8?B?NUVXd3F3bWROOGxZeFVBT3Z0anlmMUVNSU9OQi9VdzQ5Uml5Q1QrcWVXMGpm?=
+ =?utf-8?B?V2xtN3VlcTdra04zN2sxSkNvMmRHWFgyU0FoOFZXOGRsenVvWXNBMHZ1Q3lK?=
+ =?utf-8?B?cFNHQ1EyTXRpa1czRHFpcWJ6Q3JkRU5mSXd4TFpHOUJOMWFrRWVBTXl1T0Ni?=
+ =?utf-8?B?RWRLak51UW9odzBDakxHRlBZTHZJUUtHTGhjSStBaGtPVGZpb2ZHanRrSnZJ?=
+ =?utf-8?B?OWJITWQzajdNMjJqMzhrUDRkQkVMeE9nSHlGOFJiWnQ1ZjFsakZOVk42SXVB?=
+ =?utf-8?B?Wm92VjMzOUdsQkw3L0RCRHBIUWJ2ZHRERnFGSFVQSEMydWNNazBYQWR2blFW?=
+ =?utf-8?B?d3lUSDcvQnFMbDJLZzhLdVU4VzQ1SUJnbGlTbHNKOFlyd3pzb1kxc1ZRcUFx?=
+ =?utf-8?B?NnpCbkJFdDA1UGZKYnFmUnJaUVpSU1RrZDVheDBkVEZDZW0yU0hpM2ozQjZq?=
+ =?utf-8?B?dStBWVlGdjZYK0tLSjl1UXNGczFoNzlDMmZDcTVGNENVRkdVSW5oWERCd3B2?=
+ =?utf-8?B?TXpJaWUwcnBwUlBiQzFpSmhuSXlhcmxnSk9SVnBZNDdxZjhDc3lDWFBLaitB?=
+ =?utf-8?B?Zmx6cE5sZk00Tnc1T1pNV3N2c3hIV2dHN0EzNVMyb3JxS0Nwd0FMOHNHUjZx?=
+ =?utf-8?B?QTZRMDJ4SGsxRmYvZ3pKU244OTBESzFDaHhLWEZ0ZHR6cENvQ2YwTlZPcjZN?=
+ =?utf-8?B?MGJtYTRNeFdYdDNSQjlURjUwdHZkOUgwNVZMVVhxVlVnMW5nSXpsYlR5QzBP?=
+ =?utf-8?Q?8/axD1Q24RzDBkc0kaAwFoP0p?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ac518c5-4dd3-4934-291c-08db8eae6a4d
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2023 14:33:16.3639
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LCPg1aWCvX6r875E+FQTrawN+PTAQlJ2IEzNn4aajqdxcler50cJJzOjIFPeINp0jGaANVYZZKhN8RSZZaaQGg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB9100
 
---0000000000000291ff060178c72f
-Content-Type: text/plain; charset="UTF-8"
+On 26.07.2023 17:13, Oleksandr Tyshchenko wrote:
+> On 26.07.23 17:50, Jan Beulich wrote:
+>> On 26.07.2023 16:14, Oleksandr Tyshchenko wrote:
+>>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>>
+>>> Without it being present it won't be possible to use some
+>>> libxl__device_type's callbacks for virtio devices as the common code
+>>> can only invoke these callbacks (by dereferencing a pointer) for valid
+>>> libxl__device_type's elements when iterating over device_type_tbl[].
+>>>
+>>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>> ---
+>>>   tools/libs/light/libxl_create.c | 1 +
+>>>   1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+>>> index 393c535579..c91059d713 100644
+>>> --- a/tools/libs/light/libxl_create.c
+>>> +++ b/tools/libs/light/libxl_create.c
+>>> @@ -1887,6 +1887,7 @@ const libxl__device_type *device_type_tbl[] = {
+>>>       &libxl__dtdev_devtype,
+>>>       &libxl__vdispl_devtype,
+>>>       &libxl__vsnd_devtype,
+>>> +    &libxl__virtio_devtype,
+>>>       NULL
+>>>   };
+>>
+>>  From description and nature of the change this looks like a Fixes:
+>> tag would be warranted.
+> 
+> Looks like, yes. Thanks.
+> 
+> I guess, this should point to the commit that introduced 
+> libxl__virtio_devtype
+> 
+> Fixes: 43ba5202e2ee ('libxl: add support for generic virtio device')
 
-Hi all,
+In light of Anthony's feedback I'm now thinking that no Fixes: tag
+should be here, as is being clarified by the addition to the
+description (which I guess can be folded in while committing).
 
-The proposed agenda is in
-https://cryptpad.fr/pad/#/2/pad/edit/Rk5kDLwcc7CrqFm6O7xq2Jci/ and you can
-edit to add items.  Alternatively, you can reply to this mail directly.
-
-Agenda items appreciated a few days before the call: please put your name
-besides items if you edit the document.
-
-Note the following administrative conventions for the call:
-* Unless, agreed in the previous meeting otherwise, the call is on the 1st
-Thursday of each month at 1600 British Time (either GMT or BST)
-* I usually send out a meeting reminder a few days before with a
-provisional agenda
-
-* To allow time to switch between meetings, we'll plan on starting the
-agenda at 16:05 sharp.  Aim to join by 16:03 if possible to allocate time
-to sort out technical difficulties &c
-
-* If you want to be CC'ed please add or remove yourself from the
-sign-up-sheet at
-https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/
-
-Best Regards
-George
-
-
-== Dial-in Information ==
-## Meeting time
-16:00 - 17:00 British time
-Further International meeting times:
-<https://www.timeanddate.com/worldclock/meetingdetails.html?year=2020&month=4&day=2&hour=15&min=0&sec=0&p1=1234&p2=37&p3=224&p4=179>
-<https://www.timeanddate.com/worldclock/meetingdetails.html?year=2021&month=04&day=8&hour=15&min=0&sec=0&p1=1234&p2=37&p3=224&p4=179>
-https://www.timeanddate.com/worldclock/meetingdetails.html?year=2023&month=8&day=3&hour=15&min=0&sec=0&p1=1234&p2=37&p3=224&p4=179
-
-
-## Dial in details
-Web: https://meet.jit.si/XenProjectCommunityCall
-
-Dial-in info and pin can be found here:
-
-https://meet.jit.si/static/dialInInfo.html?room=XenProjectCommunityCall
-
---0000000000000291ff060178c72f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><p>Hi all,</p><p>The proposed agenda is in <a href=3D"http=
-s://cryptpad.fr/pad/#/2/pad/edit/Rk5kDLwcc7CrqFm6O7xq2Jci/">https://cryptpa=
-d.fr/pad/#/2/pad/edit/Rk5kDLwcc7CrqFm6O7xq2Jci/</a>=C2=A0and you can edit t=
-o add items.=C2=A0 Alternatively, you can reply to this mail directly.<br><=
-/p><p>Agenda items appreciated a few days before the call: please put your =
-name besides items if you edit the document.<br></p><p>Note the following a=
-dministrative conventions for the call:<br>* Unless, agreed in the previous=
- meeting otherwise, the call is on the 1st Thursday of each month at 1600 B=
-ritish Time (either GMT or BST)<br>* I usually send out a meeting reminder =
-a few days before with a provisional agenda<br></p><p>* To allow time to sw=
-itch between meetings, we&#39;ll plan on starting the agenda at 16:05 sharp=
-.=C2=A0 Aim to join by 16:03 if possible to allocate time to sort out techn=
-ical difficulties &amp;c</p><p>* If you want to be CC&#39;ed please add or =
-remove yourself from the sign-up-sheet at=C2=A0<a href=3D"https://cryptpad.=
-fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/">https://cryptpad.fr/pad/#/2/=
-pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/</a><br></p><p>Best Regards<br>George<br>=
-</p><p><br></p><p>=3D=3D Dial-in Information =3D=3D<br>## Meeting time<br>1=
-6:00 - 17:00 British time<br>Further International meeting times:=C2=A0<a h=
-ref=3D"https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D20=
-20&amp;month=3D4&amp;day=3D2&amp;hour=3D15&amp;min=3D0&amp;sec=3D0&amp;p1=
-=3D1234&amp;p2=3D37&amp;p3=3D224&amp;p4=3D179"></a><a href=3D"https://www.t=
-imeanddate.com/worldclock/meetingdetails.html?year=3D2021&amp;month=3D04&am=
-p;day=3D8&amp;hour=3D15&amp;min=3D0&amp;sec=3D0&amp;p1=3D1234&amp;p2=3D37&a=
-mp;p3=3D224&amp;p4=3D179"></a><a href=3D"https://www.timeanddate.com/worldc=
-lock/meetingdetails.html?year=3D2023&amp;month=3D8&amp;day=3D3&amp;hour=3D1=
-5&amp;min=3D0&amp;sec=3D0&amp;p1=3D1234&amp;p2=3D37&amp;p3=3D224&amp;p4=3D1=
-79">https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2023&=
-amp;month=3D8&amp;day=3D3&amp;hour=3D15&amp;min=3D0&amp;sec=3D0&amp;p1=3D12=
-34&amp;p2=3D37&amp;p3=3D224&amp;p4=3D179</a><br></p><p><br>## Dial in detai=
-ls<br>Web:=C2=A0<a href=3D"https://meet.jit.si/XenProjectCommunityCall">htt=
-ps://meet.jit.si/XenProjectCommunityCall</a><br></p><p>Dial-in info and pin=
- can be found here:<br></p><p><a href=3D"https://meet.jit.si/static/dialInI=
-nfo.html?room=3DXenProjectCommunityCall">https://meet.jit.si/static/dialInI=
-nfo.html?room=3DXenProjectCommunityCall</a></p></div>
-
---0000000000000291ff060178c72f--
+Jan
 
