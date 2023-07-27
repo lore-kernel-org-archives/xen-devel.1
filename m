@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6C6CC04E69
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 08:06:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.570834.893079 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C9BC04FE0
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jul 2023 08:06:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.570838.893099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOw0o-0001Gn-Ej; Thu, 27 Jul 2023 08:06:18 +0000
+	id 1qOw19-0002Ev-47; Thu, 27 Jul 2023 08:06:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 570834.893079; Thu, 27 Jul 2023 08:06:18 +0000
+Received: by outflank-mailman (output) from mailman id 570838.893099; Thu, 27 Jul 2023 08:06:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qOw0o-0001Gg-C9; Thu, 27 Jul 2023 08:06:18 +0000
-Received: by outflank-mailman (input) for mailman id 570834;
- Thu, 27 Jul 2023 08:06:16 +0000
+	id 1qOw19-0002Ek-1F; Thu, 27 Jul 2023 08:06:39 +0000
+Received: by outflank-mailman (input) for mailman id 570838;
+ Thu, 27 Jul 2023 08:06:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eXb/=DN=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qOw0m-0001DS-Pt
- for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 08:06:16 +0000
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [2607:f8b0:4864:20::42b])
+ id 1qOw18-0001DS-Ne
+ for xen-devel@lists.xenproject.org; Thu, 27 Jul 2023 08:06:38 +0000
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [2607:f8b0:4864:20::432])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 73c860c0-2c54-11ee-b247-6b7b168915f2;
- Thu, 27 Jul 2023 10:06:14 +0200 (CEST)
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6862d4a1376so188187b3a.0
- for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 01:06:13 -0700 (PDT)
+ id 825f735c-2c54-11ee-b247-6b7b168915f2;
+ Thu, 27 Jul 2023 10:06:38 +0200 (CEST)
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6862d4a1376so188273b3a.0
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Jul 2023 01:06:38 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.06.00
+ j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.06.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jul 2023 01:06:11 -0700 (PDT)
+ Thu, 27 Jul 2023 01:06:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 73c860c0-2c54-11ee-b247-6b7b168915f2
+X-Inumbo-ID: 825f735c-2c54-11ee-b247-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1690445172; x=1691049972;
+        d=bytedance.com; s=google; t=1690445196; x=1691049996;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hMz0NiXWW4aad/y0uXjwCFa/Ag/H17CXQFU4sIH/+zs=;
-        b=AHxGvLfHLl40j8B2JJRU5s4VfBVIfkKAsI0cQEyx34RUKm+kvHJrB2iQzGzRnBcS3v
-         6USwrAVD49Q91VdWL412Beuc1lh9luLsvseTAfwZXNQFTlfXj/44XL3QSDLO3kE477UK
-         PuQisTQDtaTenLhmz9UxJrWIk76t/9C2sGl3AoIFTG0F/GG2DtEXlZsFxPta58HNNxGh
-         nuotqk/EcRuGp6B6DpQqHvzB1OaU8/LVfrpsdfcpoHM2+LjVOOXNlq+MDZzMAY0XeOby
-         XoS1N9oa25ZJEGOvTPLqpEaa/2bkazEZHcopiam72Y0TXS5KlF1vjQrUn3lGIfR4Oiwn
-         FzZg==
+        bh=5ddhCZTkz2TFo7oGCFzg4uU7nrLecafIDKLLill2eh8=;
+        b=EEgKRQyP19rDGzyMkxrAyrND65/av9N1ZEpraFKdjf5iHd/PgC9Uhy/xnwzeo3ff8l
+         m3TJD5UzpvFEDeBzcRtJtOD/qHmmEUSLFJuussVMd7PAkAK7iQKGftfC2f44nNeUEfJr
+         mKle0CkHpRLYz5sWKpGW6Zb4t5WjMo/pANabwTgogYiGmsOD2+fKJGiw7ZJ36fC4jq2K
+         1KqECLKCfE0K//MR+hlNLb+3ZgY7viYlU4DaknQaSi+VFe2dV+fDBnzCaNkdmNFv1cVa
+         f6nuMbduVm+LsREYRbVVclCckYchB0Qi+6OZAWegvIeaDdeHomKe1HhIBSolAxF7uDUX
+         dSVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690445172; x=1691049972;
+        d=1e100.net; s=20221208; t=1690445196; x=1691049996;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=hMz0NiXWW4aad/y0uXjwCFa/Ag/H17CXQFU4sIH/+zs=;
-        b=XJuVC8r8RudjUWkm6AUFFEDOAq8+rqiF/7IqAKzCWaWcA2ucKnU8ontW57lDtgMik5
-         4Ev7uxgqFOV1++eTl3GW44Sx12tH8Ih5Z4kwRo9JFqCfUvKOgVoNXOveEiB1bSrCFUPj
-         Un01ncIKHQrFKgF6rd3dAC5F/cYktUXqNdlcZJOLBIvCzzxvU/CF4WZwwZ28oPqhXZ0B
-         Mmg0aIzPPx1zNoTfnEtSah4Le8hNxAByV6Kwm0OdKTTWLEj8ZPURrQBJnnpU361SGp4V
-         vzBlMjsdMZOP7ToItO1Znq1u7TRGstuHMxrtz4r0HB7FeaOiHang4jvL+q2Ocd/MtMaJ
-         DfPw==
-X-Gm-Message-State: ABy/qLaw3IQ9W+IKerVuCJt9FwDrwNjYUsv6sI6HqpF78td8SxaCwUUl
-	gZGpabVIvxiFYN7A2VUcy6rdGA==
-X-Google-Smtp-Source: APBJJlELtr5cWJQ0To//AtRPEOYgFBMbhSo+p4MsXdX0IoPp5bJSVuIL2HKgeywTxbzsVW+qtVe8tQ==
-X-Received: by 2002:a05:6a00:4792:b0:668:834d:4bd with SMTP id dh18-20020a056a00479200b00668834d04bdmr4674312pfb.0.1690445172123;
-        Thu, 27 Jul 2023 01:06:12 -0700 (PDT)
+        bh=5ddhCZTkz2TFo7oGCFzg4uU7nrLecafIDKLLill2eh8=;
+        b=KpkhO3ib/ws80p6i3aibXDdWBdgk3DYmWAj0z6lv+56SSVfX/aOUqYImOle7oWbxWO
+         jnLHdtQvfpxRt16w5zqJcZDxQXkBnsPzpuWwAcgUPfX8JehTZmGD4zHkeE5TxAED5MaO
+         nv3Xr+HjHcrTvtR4vmDNkg4adKwp+qzuPWb97/xG5mmqNCOOQwfo2KSq78MDnlkcWn+P
+         GH8WlUAfXLAo7qmmxfHcW44ssfePwgnPsGGivpI6T8r5sztzPuGmIwKL2M7+Nz7ZQKl5
+         gbmO7Vu6AjhYLZWJ/Y6ftlWsFOj/3NNmzKpdWddf7/AXcZ8/5cxxc9ud9tXc5BYDABhT
+         sF9A==
+X-Gm-Message-State: ABy/qLYdL06Sw92fJyb9wPT1vJ3ivi1wTsUDxDzIzyaAj3IDCDjy8HdZ
+	EbwASkp9W+I18nx31w9ybhrE4w==
+X-Google-Smtp-Source: APBJJlGC9GcjpF//RTfgHk/e3ibfMuX5WCzda5QO/QIZ+yDcAz1vV0DX9dFwhd70yzWPOAQ384luFQ==
+X-Received: by 2002:a05:6a21:6da1:b0:134:1671:6191 with SMTP id wl33-20020a056a216da100b0013416716191mr5882289pzb.0.1690445196605;
+        Thu, 27 Jul 2023 01:06:36 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -115,99 +115,81 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-ext4@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
-	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v3 02/49] mm: move some shrinker-related function declarations to mm/internal.h
-Date: Thu, 27 Jul 2023 16:04:15 +0800
-Message-Id: <20230727080502.77895-3-zhengqi.arch@bytedance.com>
+	Qi Zheng <zhengqi.arch@bytedance.com>,
+	Muchun Song <songmuchun@bytedance.com>
+Subject: [PATCH v3 04/49] mm: shrinker: remove redundant shrinker_rwsem in debugfs operations
+Date: Thu, 27 Jul 2023 16:04:17 +0800
+Message-Id: <20230727080502.77895-5-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 References: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The following functions are only used inside the mm subsystem, so it's
-better to move their declarations to the mm/internal.h file.
-
-1. shrinker_debugfs_add()
-2. shrinker_debugfs_detach()
-3. shrinker_debugfs_remove()
+The debugfs_remove_recursive() will wait for debugfs_file_put() to return,
+so the shrinker will not be freed when doing debugfs operations (such as
+shrinker_debugfs_count_show() and shrinker_debugfs_scan_write()), so there
+is no need to hold shrinker_rwsem during debugfs operations.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- include/linux/shrinker.h | 19 -------------------
- mm/internal.h            | 28 ++++++++++++++++++++++++++++
- 2 files changed, 28 insertions(+), 19 deletions(-)
+ mm/shrinker_debug.c | 14 --------------
+ 1 file changed, 14 deletions(-)
 
-diff --git a/include/linux/shrinker.h b/include/linux/shrinker.h
-index 224293b2dd06..8dc15aa37410 100644
---- a/include/linux/shrinker.h
-+++ b/include/linux/shrinker.h
-@@ -106,28 +106,9 @@ extern void free_prealloced_shrinker(struct shrinker *shrinker);
- extern void synchronize_shrinkers(void);
+diff --git a/mm/shrinker_debug.c b/mm/shrinker_debug.c
+index 3ab53fad8876..f1becfd45853 100644
+--- a/mm/shrinker_debug.c
++++ b/mm/shrinker_debug.c
+@@ -55,11 +55,6 @@ static int shrinker_debugfs_count_show(struct seq_file *m, void *v)
+ 	if (!count_per_node)
+ 		return -ENOMEM;
  
- #ifdef CONFIG_SHRINKER_DEBUG
--extern int shrinker_debugfs_add(struct shrinker *shrinker);
--extern struct dentry *shrinker_debugfs_detach(struct shrinker *shrinker,
--					      int *debugfs_id);
--extern void shrinker_debugfs_remove(struct dentry *debugfs_entry,
--				    int debugfs_id);
- extern int __printf(2, 3) shrinker_debugfs_rename(struct shrinker *shrinker,
- 						  const char *fmt, ...);
- #else /* CONFIG_SHRINKER_DEBUG */
--static inline int shrinker_debugfs_add(struct shrinker *shrinker)
--{
--	return 0;
--}
--static inline struct dentry *shrinker_debugfs_detach(struct shrinker *shrinker,
--						     int *debugfs_id)
--{
--	*debugfs_id = -1;
--	return NULL;
--}
--static inline void shrinker_debugfs_remove(struct dentry *debugfs_entry,
--					   int debugfs_id)
--{
--}
- static inline __printf(2, 3)
- int shrinker_debugfs_rename(struct shrinker *shrinker, const char *fmt, ...)
- {
-diff --git a/mm/internal.h b/mm/internal.h
-index 5a03bc4782a2..8aeaf16ae039 100644
---- a/mm/internal.h
-+++ b/mm/internal.h
-@@ -1135,4 +1135,32 @@ struct vma_prepare {
- 	struct vm_area_struct *remove;
- 	struct vm_area_struct *remove2;
- };
-+
-+/*
-+ * shrinker related functions
-+ */
-+
-+#ifdef CONFIG_SHRINKER_DEBUG
-+extern int shrinker_debugfs_add(struct shrinker *shrinker);
-+extern struct dentry *shrinker_debugfs_detach(struct shrinker *shrinker,
-+					      int *debugfs_id);
-+extern void shrinker_debugfs_remove(struct dentry *debugfs_entry,
-+				    int debugfs_id);
-+#else /* CONFIG_SHRINKER_DEBUG */
-+static inline int shrinker_debugfs_add(struct shrinker *shrinker)
-+{
-+	return 0;
-+}
-+static inline struct dentry *shrinker_debugfs_detach(struct shrinker *shrinker,
-+						     int *debugfs_id)
-+{
-+	*debugfs_id = -1;
-+	return NULL;
-+}
-+static inline void shrinker_debugfs_remove(struct dentry *debugfs_entry,
-+					   int debugfs_id)
-+{
-+}
-+#endif /* CONFIG_SHRINKER_DEBUG */
-+
- #endif	/* __MM_INTERNAL_H */
+-	ret = down_read_killable(&shrinker_rwsem);
+-	if (ret) {
+-		kfree(count_per_node);
+-		return ret;
+-	}
+ 	rcu_read_lock();
+ 
+ 	memcg_aware = shrinker->flags & SHRINKER_MEMCG_AWARE;
+@@ -92,7 +87,6 @@ static int shrinker_debugfs_count_show(struct seq_file *m, void *v)
+ 	} while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)) != NULL);
+ 
+ 	rcu_read_unlock();
+-	up_read(&shrinker_rwsem);
+ 
+ 	kfree(count_per_node);
+ 	return ret;
+@@ -117,7 +111,6 @@ static ssize_t shrinker_debugfs_scan_write(struct file *file,
+ 	struct mem_cgroup *memcg = NULL;
+ 	int nid;
+ 	char kbuf[72];
+-	ssize_t ret;
+ 
+ 	read_len = size < (sizeof(kbuf) - 1) ? size : (sizeof(kbuf) - 1);
+ 	if (copy_from_user(kbuf, buf, read_len))
+@@ -146,12 +139,6 @@ static ssize_t shrinker_debugfs_scan_write(struct file *file,
+ 		return -EINVAL;
+ 	}
+ 
+-	ret = down_read_killable(&shrinker_rwsem);
+-	if (ret) {
+-		mem_cgroup_put(memcg);
+-		return ret;
+-	}
+-
+ 	sc.nid = nid;
+ 	sc.memcg = memcg;
+ 	sc.nr_to_scan = nr_to_scan;
+@@ -159,7 +146,6 @@ static ssize_t shrinker_debugfs_scan_write(struct file *file,
+ 
+ 	shrinker->scan_objects(shrinker, &sc);
+ 
+-	up_read(&shrinker_rwsem);
+ 	mem_cgroup_put(memcg);
+ 
+ 	return size;
 -- 
 2.30.2
 
