@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8E88C001E0
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Jul 2023 08:12:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.571375.895070 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F63C0015E
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Jul 2023 08:12:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.571372.895044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qPIZx-00051t-OV; Fri, 28 Jul 2023 08:12:05 +0000
+	id 1qPIZv-0004Pb-JM; Fri, 28 Jul 2023 08:12:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 571375.895070; Fri, 28 Jul 2023 08:12:05 +0000
+Received: by outflank-mailman (output) from mailman id 571372.895044; Fri, 28 Jul 2023 08:12:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qPIZx-00050C-JJ; Fri, 28 Jul 2023 08:12:05 +0000
-Received: by outflank-mailman (input) for mailman id 571375;
- Fri, 28 Jul 2023 08:12:04 +0000
+	id 1qPIZv-0004PU-Go; Fri, 28 Jul 2023 08:12:03 +0000
+Received: by outflank-mailman (input) for mailman id 571372;
+ Fri, 28 Jul 2023 08:12:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=B1pf=DO=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1qPIZw-0004AY-1R
- for xen-devel@lists.xenproject.org; Fri, 28 Jul 2023 08:12:04 +0000
+ id 1qPIZu-0004AY-CM
+ for xen-devel@lists.xenproject.org; Fri, 28 Jul 2023 08:12:02 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 6f271b89-2d1e-11ee-b24d-6b7b168915f2;
- Fri, 28 Jul 2023 10:12:03 +0200 (CEST)
+ id 6cd904e3-2d1e-11ee-b24d-6b7b168915f2;
+ Fri, 28 Jul 2023 10:11:59 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F36AF2F4;
- Fri, 28 Jul 2023 01:12:45 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 14C43D75;
+ Fri, 28 Jul 2023 01:12:42 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C4D073F67D;
- Fri, 28 Jul 2023 01:12:01 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9DD3F3F67D;
+ Fri, 28 Jul 2023 01:11:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,53 +44,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f271b89-2d1e-11ee-b24d-6b7b168915f2
+X-Inumbo-ID: 6cd904e3-2d1e-11ee-b24d-6b7b168915f2
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH 4/5] x86/HVM: protect mm_type_tbl format from clang-format
-Date: Fri, 28 Jul 2023 09:11:43 +0100
-Message-Id: <20230728081144.4124309-5-luca.fancellu@arm.com>
+Subject: [RFC PATCH 1/5] [WIP]misra: add entries to the excluded list
+Date: Fri, 28 Jul 2023 09:11:40 +0100
+Message-Id: <20230728081144.4124309-2-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230728081144.4124309-1-luca.fancellu@arm.com>
 References: <20230728081144.4124309-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The array mm_type_tbl initialization is formatted in a way that
-clang-format can't keep, so disable clang-format on that array
-initialization.
+Add entries to the exclusion list, so that they can be excluded
+from the formatter tool.
+
+TBD: add a field on each entry to understand for what tool is the
+exclusion
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/x86/hvm/mtrr.c | 2 ++
- 1 file changed, 2 insertions(+)
+ docs/misra/exclude-list.json | 88 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 88 insertions(+)
 
-diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
-index 29f3fb160776..f32ce3162ae2 100644
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -18,6 +18,7 @@
- /* Get page attribute fields (PAn) from PAT MSR. */
- #define pat_cr_2_paf(pat_cr,n)  ((((uint64_t)pat_cr) >> ((n)<<3)) & 0xff)
- 
-+/* clang-format off */
- /* Effective mm type lookup table, according to MTRR and PAT. */
- static const uint8_t mm_type_tbl[MTRR_NUM_TYPES][X86_NUM_MT] = {
- #define RS MEMORY_NUM_TYPES
-@@ -43,6 +44,7 @@ static const uint8_t mm_type_tbl[MTRR_NUM_TYPES][X86_NUM_MT] = {
- #undef WB
- #undef RS
- };
-+/* clang-format on */
- 
- /*
-  * Reverse lookup table, to find a pat type according to MTRR and effective
+diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
+index ca1e2dd678ff..c103c69209c9 100644
+--- a/docs/misra/exclude-list.json
++++ b/docs/misra/exclude-list.json
+@@ -1,6 +1,10 @@
+ {
+     "version": "1.0",
+     "content": [
++        {
++            "rel_path": "arch/arm/arm32/lib/assembler.h",
++            "comment": "Includes mostly assembly macro and it's meant to be included only in assembly code"
++        },
+         {
+             "rel_path": "arch/arm/arm64/cpufeature.c",
+             "comment": "Imported from Linux, ignore for now"
+@@ -13,6 +17,26 @@
+             "rel_path": "arch/arm/arm64/lib/find_next_bit.c",
+             "comment": "Imported from Linux, ignore for now"
+         },
++        {
++            "rel_path": "arch/arm/include/asm/arm32/macros.h",
++            "comment": "Includes only assembly macro"
++        },
++        {
++            "rel_path": "arch/arm/include/asm/arm64/macros.h",
++            "comment": "Includes only assembly macro"
++        },
++        {
++            "rel_path": "arch/arm/include/asm/alternative.h",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/arm/include/asm/asm_defns.h",
++            "comment": "Includes mostly assembly macro"
++        },
++        {
++            "rel_path": "arch/arm/include/asm/macros.h",
++            "comment": "Includes mostly assembly macro and it's meant to be included only in assembly code"
++        },
+         {
+             "rel_path": "arch/x86/acpi/boot.c",
+             "comment": "Imported from Linux, ignore for now"
+@@ -69,6 +93,30 @@
+             "rel_path": "arch/x86/cpu/mwait-idle.c",
+             "comment": "Imported from Linux, ignore for now"
+         },
++        {
++            "rel_path": "arch/x86/include/asm/alternative-asm.h",
++            "comment": "Includes mostly assembly macro and it's meant to be included only in assembly code"
++        },
++        {
++            "rel_path": "arch/x86/include/asm/asm_defns.h",
++            "comment": "Includes mostly assembly macro"
++        },
++        {
++            "rel_path": "arch/x86/include/asm/asm-defns.h",
++            "comment": "Includes mostly assembly macro"
++        },
++        {
++            "rel_path": "arch/x86/include/asm/bug.h",
++            "comment": "Includes mostly assembly macro"
++        },
++        {
++            "rel_path": "arch/x86/include/asm/mpspec.h",
++            "comment": "Imported from Linux, also case ranges are not handled by clang-format, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/include/asm/spec_ctrl_asm.h",
++            "comment": "Includes mostly assembly macro"
++        },
+         {
+             "rel_path": "arch/x86/delay.c",
+             "comment": "Imported from Linux, ignore for now"
+@@ -181,6 +229,42 @@
+             "rel_path": "drivers/video/font_*",
+             "comment": "Imported from Linux, ignore for now"
+         },
++        {
++            "rel_path": "include/efi/*.h",
++            "comment": "Imported from gnu-efi-3.0k"
++        },
++        {
++            "rel_path": "include/public/arch-x86/cpufeatureset.h",
++            "comment": "This file contains some inputs for the gen-cpuid.py script, leave it out"
++        },
++        {
++            "rel_path": "include/public/**/**/*.h",
++            "comment": "Public headers are quite sensitive to format tools"
++        },
++        {
++            "rel_path": "include/public/**/*.h",
++            "comment": "Public headers are quite sensitive to format tools"
++        },
++        {
++            "rel_path": "include/public/*.h",
++            "comment": "Public headers are quite sensitive to format tools"
++        },
++        {
++            "rel_path": "include/xen/cper.h",
++            "comment": "Header does not follow Xen coding style"
++        },
++        {
++            "rel_path": "include/xen/nodemask.h",
++            "comment": "Imported from Linux, also case ranges are not handled by clang-format, ignore for now"
++        },
++        {
++            "rel_path": "include/xen/xen.lds.h",
++            "comment": "This file contains only macros used inside the linker script"
++        },
++        {
++            "rel_path": "include/hypercall-defs.c",
++            "comment": "This file contains only C preprocessing syntax, the other lines are not C and are used to generate the hypercall definition by another script."
++        },
+         {
+             "rel_path": "lib/list-sort.c",
+             "comment": "Imported from Linux, ignore for now"
+@@ -193,6 +277,10 @@
+             "rel_path": "lib/xxhash*.c",
+             "comment": "Imported from Linux, ignore for now"
+         },
++        {
++            "rel_path": "tools/*",
++            "comment": "Contains host tools imported from Linux, ignore for now"
++        },
+         {
+             "rel_path": "xsm/flask/*",
+             "comment": "Not in scope initially as it generates many violations and it is not enabled in safety configurations"
 -- 
 2.34.1
 
