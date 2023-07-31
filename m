@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C9FAC001DF
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:07:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572673.896630 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BBD0C001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:07:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572675.896648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0B-0002U2-Jo; Mon, 31 Jul 2023 07:07:35 +0000
+	id 1qQN0G-0003KL-32; Mon, 31 Jul 2023 07:07:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572673.896630; Mon, 31 Jul 2023 07:07:35 +0000
+Received: by outflank-mailman (output) from mailman id 572675.896648; Mon, 31 Jul 2023 07:07:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0B-0002RS-9T; Mon, 31 Jul 2023 07:07:35 +0000
-Received: by outflank-mailman (input) for mailman id 572673;
- Mon, 31 Jul 2023 07:07:33 +0000
+	id 1qQN0F-0003KA-UK; Mon, 31 Jul 2023 07:07:39 +0000
+Received: by outflank-mailman (input) for mailman id 572675;
+ Mon, 31 Jul 2023 07:07:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMuy-0000hs-EH
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:12 +0000
+ id 1qQMvA-0000hs-Rf
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:24 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2ab1fe57-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:11 +0200 (CEST)
+ id 3338abd2-2f70-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:02:24 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:02:01 -0700
+ 31 Jul 2023 00:02:13 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:02 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:14 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ab1fe57-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 3338abd2-2f70-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786931; x=1722322931;
+  t=1690786944; x=1722322944;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=lZsnH9xZ+sSI0HJfWdXFi2jVveN7fME2POBe5mQbKKE=;
-  b=i9tOlYs85Zi+Qcjn3PjuN1ImJWxeLfXI7hh6rY7Bx8dGDdpzPuY/UBYp
-   BiGf97DmswARirXPyVxkIRnbQKAzLP+sG1lsQYIgOx/2ZX4EqPlP/bexN
-   P8IhVHDCz4URZlPZLmDJ1hA1bwRgjQYPAW4hzyQsaSLMDh59E8b54GJ7l
-   2ym7Okwlby8XYQHvlRub1XVfKfGQfVV7nJCS8OX2kmOkC+5TudiK/sjj/
-   7RGLGd07rEjmYyoY0dDVzMuVUAADuaeuohPuD4GCyrYDmrX0Ugm7uHYIN
-   UJeLWlVOqZTPT17x+g4SVsjcXrRVa+O1s83G3ixErexV9paJSuUCNYIAP
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648996"
+  bh=e41GdB5DEWVT44n/+24ZLrn6jlcg49oHxwygKL8Pbqk=;
+  b=Y0eez2dKjzOOW7ugu3A5WYuDtc3xvMVTZA3U9PRRJCt3FRXotNnPQYLC
+   0ZUFU6RRNFJTK7x7fk0rBTaESMgs4X13cXlNvSYLNAylAyTxaYiFjQCL+
+   BJaWAfpGn9XW/jWUj4IXN8/pP9vcvHiL5FCHSwjD0+ixvpQeC9DniUrza
+   kiKRaGKltAQuwHm/iHpbIwm7l+tN7dn6IKPNppXJFTbIgyf1g86QJCsSo
+   gEjsST2o0afaduX94B5xvn/mJPREY5EL7ouAKTYWn/8uzoPaHGcVivUze
+   tBs/qQs3TQyl2vZgk+oAKWzBu57s27SseJI5wogKrKfvM2ZsC+ab0LhcF
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649386"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371648996"
+   d="scan'208";a="371649386"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543400"
+   d="scan'208";a="871543481"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,53 +139,72 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 12/36] x86/fred: Update MSR_IA32_FRED_RSP0 during task switch
-Date: Sun, 30 Jul 2023 23:32:53 -0700
-Message-Id: <20230731063317.3720-13-xin3.li@intel.com>
+Subject: [PATCH v9 23/36] x86/entry: Remove idtentry_sysvec from entry_{32,64}.S
+Date: Sun, 30 Jul 2023 23:33:04 -0700
+Message-Id: <20230731063317.3720-24-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+idtentry_sysvec is really just DECLARE_IDTENTRY defined in
+<asm/idtentry.h>, no need to define it separately.
 
-MSR_IA32_FRED_RSP0 is used during ring 3 event delivery, and needs to
-be updated to point to the top of next task stack during task switch.
-
-Update MSR_IA32_FRED_RSP0 with WRMSR instruction for now, and will use
-WRMSRNS/WRMSRLIST for performance once it gets upstreamed.
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/asm/switch_to.h | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ arch/x86/entry/entry_32.S       | 4 ----
+ arch/x86/entry/entry_64.S       | 8 --------
+ arch/x86/include/asm/idtentry.h | 2 +-
+ 3 files changed, 1 insertion(+), 13 deletions(-)
 
-diff --git a/arch/x86/include/asm/switch_to.h b/arch/x86/include/asm/switch_to.h
-index f42dbf17f52b..6c911fd400b2 100644
---- a/arch/x86/include/asm/switch_to.h
-+++ b/arch/x86/include/asm/switch_to.h
-@@ -70,9 +70,16 @@ static inline void update_task_stack(struct task_struct *task)
- #ifdef CONFIG_X86_32
- 	this_cpu_write(cpu_tss_rw.x86_tss.sp1, task->thread.sp0);
- #else
--	/* Xen PV enters the kernel on the thread stack. */
--	if (cpu_feature_enabled(X86_FEATURE_XENPV))
-+	if (cpu_feature_enabled(X86_FEATURE_FRED)) {
-+		/*
-+		 * Will use WRMSRNS/WRMSRLIST for performance once it's upstreamed.
-+		 */
-+		wrmsrl(MSR_IA32_FRED_RSP0,
-+		       (unsigned long)task_stack_page(task) + THREAD_SIZE);
-+	} else if (cpu_feature_enabled(X86_FEATURE_XENPV)) {
-+		/* Xen PV enters the kernel on the thread stack. */
- 		load_sp0(task_top_of_stack(task));
-+	}
- #endif
- }
+diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
+index 6e6af42e044a..e0f22ad8ff7e 100644
+--- a/arch/x86/entry/entry_32.S
++++ b/arch/x86/entry/entry_32.S
+@@ -649,10 +649,6 @@ SYM_CODE_START_LOCAL(asm_\cfunc)
+ SYM_CODE_END(asm_\cfunc)
+ .endm
  
+-.macro idtentry_sysvec vector cfunc
+-	idtentry \vector asm_\cfunc \cfunc has_error_code=0
+-.endm
+-
+ /*
+  * Include the defines which emit the idt entries which are shared
+  * shared between 32 and 64 bit and emit the __irqentry_text_* markers
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index 8069151176f2..44f14b990597 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -438,14 +438,6 @@ SYM_CODE_END(\asmsym)
+ 	idtentry \vector asm_\cfunc \cfunc has_error_code=1
+ .endm
+ 
+-/*
+- * System vectors which invoke their handlers directly and are not
+- * going through the regular common device interrupt handling code.
+- */
+-.macro idtentry_sysvec vector cfunc
+-	idtentry \vector asm_\cfunc \cfunc has_error_code=0
+-.endm
+-
+ /**
+  * idtentry_mce_db - Macro to generate entry stubs for #MC and #DB
+  * @vector:		Vector number
+diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
+index cd5c10a74071..6817c0f8e323 100644
+--- a/arch/x86/include/asm/idtentry.h
++++ b/arch/x86/include/asm/idtentry.h
+@@ -447,7 +447,7 @@ __visible noinstr void func(struct pt_regs *regs,			\
+ 
+ /* System vector entries */
+ #define DECLARE_IDTENTRY_SYSVEC(vector, func)				\
+-	idtentry_sysvec vector func
++	DECLARE_IDTENTRY(vector, func)
+ 
+ #ifdef CONFIG_X86_64
+ # define DECLARE_IDTENTRY_MCE(vector, func)				\
 -- 
 2.34.1
 
