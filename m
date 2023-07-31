@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B35BC04FE2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D68BC05052
 	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:03:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572630.896481 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.572635.896503 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvk-0001y0-IY; Mon, 31 Jul 2023 07:03:00 +0000
+	id 1qQMvl-0002Nb-PV; Mon, 31 Jul 2023 07:03:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572630.896481; Mon, 31 Jul 2023 07:03:00 +0000
+Received: by outflank-mailman (output) from mailman id 572635.896503; Mon, 31 Jul 2023 07:03:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvk-0001uF-9Y; Mon, 31 Jul 2023 07:03:00 +0000
-Received: by outflank-mailman (input) for mailman id 572630;
- Mon, 31 Jul 2023 07:02:08 +0000
+	id 1qQMvl-0002Lz-Bb; Mon, 31 Jul 2023 07:03:01 +0000
+Received: by outflank-mailman (input) for mailman id 572635;
+ Mon, 31 Jul 2023 07:02:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMuu-0000hs-Am
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:08 +0000
+ id 1qQMuw-0000hs-Az
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:10 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2868a8ba-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:05 +0200 (CEST)
+ id 29d8aa5a-2f70-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:02:08 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:01:56 -0700
+ 31 Jul 2023 00:01:58 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:01:57 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:01:59 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2868a8ba-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 29d8aa5a-2f70-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786926; x=1722322926;
+  t=1690786928; x=1722322928;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ks9fQ3QR6UqRMocjQpLz+yk1iYvQPVTbiFl2BDd8yPg=;
-  b=FJ6c1HRtn6LGcysL1uA2OSv4/K/7VnmXSE4ZnZBZEB0V525Psxg8LIv4
-   HOpM0/sVyOWNFp/HyGernH33Igw9EAl/Q2pfGd0MxnSI94zfhoRUoYwp8
-   hOgFT9uL9oRdAj1es5CPJ2G8OSpn+hdeis4R2kPAkuPnDpMEfGWCJolfl
-   9lZGt1aCgWf5le/dHhWxQHlFcByLDuL4Gm7fk/u8NJxL3vJag3ZUMljFJ
-   /Kvn1OxuVWCQ7+hvGGplMMzqwsDHSOeTx239IuWfskJp1MTvhyedufhRI
-   BVzKxQEt6YDroTIG/Hy4n1cFSbxd91MSzl8hMdt1VAyvZmVkOZBv/Os3C
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648818"
+  bh=f1KjXTBSCMC/3m47AKFmo72XHXtCtx2wNvJSmQVR8WU=;
+  b=MCe+CkaaOiasJb1YHhBc5MD3+mkULEaIwSc2b0nqLgHl35bWnYPW2MVd
+   oLYZ6P/TBL3/VszdfJUxVACbdrS3T4M2UzhLoLBsGIdyNEGUdk8ps5WjS
+   WCcAgU3YaN6JtJ33av8BNHvuhuqF9BdMyXDM26cZ02VHRg2NqGR2pTMIm
+   A/f5cqYgTkG9iuVaUgK6SMp/0NoxXfloPca512UwrjnQfc4x01HbjpL6a
+   YK9/BeBDAc1qazAfrfj9igsTMvyl4MD1893H9wakRgLsA9nbWGiuOZryw
+   zo8KVPzZHuLfdnWnzErn4XQGTGktLRyFFyzIfvJftOQS4ufqt+4TpWpmm
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648889"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371648818"
+   d="scan'208";a="371648889"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543368"
+   d="scan'208";a="871543380"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,9 +139,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 07/36] x86/cpu: Add X86_CR4_FRED macro
-Date: Sun, 30 Jul 2023 23:32:48 -0700
-Message-Id: <20230731063317.3720-8-xin3.li@intel.com>
+Subject: [PATCH v9 09/36] x86/fred: Make unions for the cs and ss fields in struct pt_regs
+Date: Sun, 30 Jul 2023 23:32:50 -0700
+Message-Id: <20230731063317.3720-10-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
@@ -150,83 +150,133 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add X86_CR4_FRED macro for the FRED bit in %cr4. This bit should be a
-pinned bit, not to be changed after initialization.
+Make the cs and ss fields in struct pt_regs unions between the actual
+selector and the unsigned long stack slot. FRED uses this space to
+store additional flags.
 
-CR4 macros are defined in arch/x86/include/uapi/asm/processor-flags.h,
-which is uapi, and thus cannot depend on CONFIG_X86_64.
-
-Using _BITUL() causes build errors on 32 bits, and there is no
-guarantee that user space applications (e.g. something like Qemu)
-might not want to use this declaration even when building for i386 or
-x32.
-
-However, %cr4 is a machine word (unsigned long), so to avoid build
-warnings on 32 bits, explicitly cast the value to unsigned long,
-truncating upper 32 bits.
-
-The other alternative would be to use CONFIG_X86_64 around the
-definition of cr4_pinned_mask. It is probably not desirable to make
-cr4_pinned_mask non-const.
-
-Another option, which may be preferable, to be honest: explicitly
-enumerate the CR4 bits which *may* be changed (a whitelist), instead
-of the ones that may not. That would be a separate, pre-FRED, patch,
-and would automatically resolve this problem as a side effect.
-
-The following flags probably should have been in this set all along,
-as they are all controls affecting the kernel runtime environment as
-opposed to user space:
-
-X86_CR4_DE, X86_CR4_PAE, X86_CR4_PSE, X86_CR4_MCE, X86_CR4_PGE,
-X86_CR4_OSFXSR, X86_CR4_OSXMMEXCPT, X86_CR4_LA57, X86_CR4_PCIDE,
-X86_CR4_LAM_SUP
-
-Possibly X86_CR4_VMXE as well, which seems harmless even if KVM is
-not loaded; X86_CR4_PKE can be fixed as long as the PKE configuration
-registers are at least initialized to disabled.
-
-It is relatively simple to do an audit of which flags are allowed to
-be modified at runtime and whitelist only those. There is no reason
-why we should allow bits in CR4 to be toggled by default.
+The printk changes are simply due to the cs and ss fields changed to
+unsigned short from unsigned long.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/uapi/asm/processor-flags.h | 2 ++
- arch/x86/kernel/cpu/common.c                | 5 +++--
- 2 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/include/uapi/asm/processor-flags.h b/arch/x86/include/uapi/asm/processor-flags.h
-index d898432947ff..ce08c2ca70b5 100644
---- a/arch/x86/include/uapi/asm/processor-flags.h
-+++ b/arch/x86/include/uapi/asm/processor-flags.h
-@@ -138,6 +138,8 @@
- #define X86_CR4_CET		_BITUL(X86_CR4_CET_BIT)
- #define X86_CR4_LAM_SUP_BIT	28 /* LAM for supervisor pointers */
- #define X86_CR4_LAM_SUP		_BITUL(X86_CR4_LAM_SUP_BIT)
-+#define X86_CR4_FRED_BIT	32 /* enable FRED kernel entry */
-+#define X86_CR4_FRED		_BITULL(X86_CR4_FRED_BIT)
+Changes since v8:
+* Reflect stack frame definition changes from FRED spec 3.0 to 5.0.
+* Use __packed instead of __attribute__((__packed__)) (Borislav Petkov).
+* Put all comments above the members, like the rest of the file does
+  (Borislav Petkov).
+
+Changes since v3:
+* Rename csl/ssl of the pt_regs structure to csx/ssx (x for extended)
+  (Andrew Cooper).
+---
+ arch/x86/entry/vsyscall/vsyscall_64.c |  2 +-
+ arch/x86/include/asm/ptrace.h         | 57 +++++++++++++++++++++++++--
+ arch/x86/kernel/process_64.c          |  2 +-
+ 3 files changed, 56 insertions(+), 5 deletions(-)
+
+diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
+index e0ca8120aea8..a3c0df11d0e6 100644
+--- a/arch/x86/entry/vsyscall/vsyscall_64.c
++++ b/arch/x86/entry/vsyscall/vsyscall_64.c
+@@ -76,7 +76,7 @@ static void warn_bad_vsyscall(const char *level, struct pt_regs *regs,
+ 	if (!show_unhandled_signals)
+ 		return;
  
+-	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%lx sp:%lx ax:%lx si:%lx di:%lx\n",
++	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%x sp:%lx ax:%lx si:%lx di:%lx\n",
+ 			   level, current->comm, task_pid_nr(current),
+ 			   message, regs->ip, regs->cs,
+ 			   regs->sp, regs->ax, regs->si, regs->di);
+diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
+index f4db78b09c8f..f1690beffd15 100644
+--- a/arch/x86/include/asm/ptrace.h
++++ b/arch/x86/include/asm/ptrace.h
+@@ -80,15 +80,66 @@ struct pt_regs {
  /*
-  * x86-64 Task Priority Register, CR8
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 0ba1067f4e5f..331b06d19f7f 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -402,8 +402,9 @@ static __always_inline void setup_umip(struct cpuinfo_x86 *c)
+  * On syscall entry, this is syscall#. On CPU exception, this is error code.
+  * On hw interrupt, it's IRQ number:
++ *
++ * A FRED stack frame starts here:
++ *   1) It _always_ includes an error code;
++ *   2) The return frame for eretu/erets starts here.
+  */
+ 	unsigned long orig_ax;
+ /* Return frame for iretq */
+ 	unsigned long ip;
+-	unsigned long cs;
++	union {
++/* CS extended: CS + any fields above it */
++		unsigned long csx;
++		struct {
++/* CS selector proper */
++			unsigned short cs;
++/* The stack level (SL) at the time the event occurred */
++			unsigned int sl		: 2;
++/* Set to indicate that indirect branch tracker in WAIT_FOR_ENDBRANCH state */
++			unsigned int wfe	: 1;
++			unsigned int __csx_resv1: 13;
++			unsigned int __csx_resv2: 32;
++		} __packed;
++	};
+ 	unsigned long flags;
+ 	unsigned long sp;
+-	unsigned long ss;
+-/* top of stack page */
++	union {
++/* SS extended: SS + any fields above it */
++		unsigned long ssx;
++		struct {
++/* SS selector proper */
++			unsigned short ss;
++/* Set to indicate that interrupt blocking by STI was in effect */
++			unsigned int sti	: 1;
++/* For SYSCALL, SYSENTER, or INT n (for any value of n) */
++			unsigned int sys	: 1;
++			unsigned int nmi	: 1;
++			unsigned int __ssx_resv1: 13;
++/* Event information fields, ignored by the FRED return instructions */
++			unsigned int vector	: 8;
++			unsigned int __ssx_resv2: 8;
++			unsigned int type	: 4;
++			unsigned int __ssx_resv3: 4;
++/* Set to indicate that the event was incident to enclave execution */
++			unsigned int enc	: 1;
++/* Set to indicate that the logical processor had been in 64-bit mode */
++			unsigned int l		: 1;
++/*
++ * Set to indicate the event is a nested exception encountered during FRED
++ * event delivery of another event. This bit is not set if the event is
++ * double fault (#DF).
++ */
++			unsigned int nst	: 1;
++			unsigned int __ssx_resv4: 1;
++/* The length of the instruction causing the event */
++			unsigned int instr_len	: 4;
++		} __packed;
++	};
++/*
++ * Top of stack page on IDT systems, while FRED systems have extra fields
++ * defined above, see <asm/fred.h>.
++ */
+ };
  
- /* These bits should not change their value after CPU init is finished. */
- static const unsigned long cr4_pinned_mask =
--	X86_CR4_SMEP | X86_CR4_SMAP | X86_CR4_UMIP |
--	X86_CR4_FSGSBASE | X86_CR4_CET;
-+	(unsigned long)
-+	(X86_CR4_SMEP | X86_CR4_SMAP | X86_CR4_UMIP |
-+	 X86_CR4_FSGSBASE | X86_CR4_CET | X86_CR4_FRED);
- static DEFINE_STATIC_KEY_FALSE_RO(cr_pinning);
- static unsigned long cr4_pinned_bits __ro_after_init;
+ #endif /* !__i386__ */
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 3d181c16a2f6..265ab8fcb146 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -117,7 +117,7 @@ void __show_regs(struct pt_regs *regs, enum show_regs_mode mode,
  
+ 	printk("%sFS:  %016lx(%04x) GS:%016lx(%04x) knlGS:%016lx\n",
+ 	       log_lvl, fs, fsindex, gs, gsindex, shadowgs);
+-	printk("%sCS:  %04lx DS: %04x ES: %04x CR0: %016lx\n",
++	printk("%sCS:  %04x DS: %04x ES: %04x CR0: %016lx\n",
+ 		log_lvl, regs->cs, ds, es, cr0);
+ 	printk("%sCR2: %016lx CR3: %016lx CR4: %016lx\n",
+ 		log_lvl, cr2, cr3, cr4);
 -- 
 2.34.1
 
