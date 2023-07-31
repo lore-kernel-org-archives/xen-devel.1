@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BBD0C001DC
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:07:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572675.896648 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA0FC001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:07:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572680.896658 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0G-0003KL-32; Mon, 31 Jul 2023 07:07:40 +0000
+	id 1qQN0Q-0004W1-E1; Mon, 31 Jul 2023 07:07:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572675.896648; Mon, 31 Jul 2023 07:07:40 +0000
+Received: by outflank-mailman (output) from mailman id 572680.896658; Mon, 31 Jul 2023 07:07:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0F-0003KA-UK; Mon, 31 Jul 2023 07:07:39 +0000
-Received: by outflank-mailman (input) for mailman id 572675;
- Mon, 31 Jul 2023 07:07:38 +0000
+	id 1qQN0Q-0004Vt-B3; Mon, 31 Jul 2023 07:07:50 +0000
+Received: by outflank-mailman (input) for mailman id 572680;
+ Mon, 31 Jul 2023 07:07:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMvA-0000hs-Rf
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:24 +0000
+ id 1qQMv1-0000hs-B2
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:15 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3338abd2-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:24 +0200 (CEST)
+ id 2d8364a7-2f70-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:02:14 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:02:13 -0700
+ 31 Jul 2023 00:02:03 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:14 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:04 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3338abd2-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 2d8364a7-2f70-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786944; x=1722322944;
+  t=1690786934; x=1722322934;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=e41GdB5DEWVT44n/+24ZLrn6jlcg49oHxwygKL8Pbqk=;
-  b=Y0eez2dKjzOOW7ugu3A5WYuDtc3xvMVTZA3U9PRRJCt3FRXotNnPQYLC
-   0ZUFU6RRNFJTK7x7fk0rBTaESMgs4X13cXlNvSYLNAylAyTxaYiFjQCL+
-   BJaWAfpGn9XW/jWUj4IXN8/pP9vcvHiL5FCHSwjD0+ixvpQeC9DniUrza
-   kiKRaGKltAQuwHm/iHpbIwm7l+tN7dn6IKPNppXJFTbIgyf1g86QJCsSo
-   gEjsST2o0afaduX94B5xvn/mJPREY5EL7ouAKTYWn/8uzoPaHGcVivUze
-   tBs/qQs3TQyl2vZgk+oAKWzBu57s27SseJI5wogKrKfvM2ZsC+ab0LhcF
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649386"
+  bh=sycVsd87zmfA3yJCdcgOgrxd4mm6nSq5VT1UdIRGngQ=;
+  b=ezfaFIjsoAjRlZeP5ypMnjJEjXCe45dxgAgZ0oIizMTfTKHPYroBeVKW
+   sZIp4OrCMHILpMcY1s4UUd0LHsqps1y8Ruif7U86H85g7aVePo0PE3qeO
+   YoKqGWTcb1ddawS/IUe53j4AS1g17zeu56qKDiYyl32HkERak2BINu4Ro
+   viylJPuG9lzsNkG37OcVSOJCcsIeJogVJ8iMNCvHWXLVubIxSZBlRBoQX
+   5DUF/hwKJXeCLPPMgNOqMbY5XmNOpiALvRrcSCKtgpYiGBNijU5OYU44M
+   7BOCa1MB7BXbmoi7I8lFb1QeVX1vkokNe2y3yNB6MiZZ3ibJfeWm1AUll
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649065"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371649386"
+   d="scan'208";a="371649065"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543481"
+   d="scan'208";a="871543425"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,72 +139,67 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 23/36] x86/entry: Remove idtentry_sysvec from entry_{32,64}.S
-Date: Sun, 30 Jul 2023 23:33:04 -0700
-Message-Id: <20230731063317.3720-24-xin3.li@intel.com>
+Subject: [PATCH v9 14/36] x86/fred: Disallow the swapgs instruction when FRED is enabled
+Date: Sun, 30 Jul 2023 23:32:55 -0700
+Message-Id: <20230731063317.3720-15-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-idtentry_sysvec is really just DECLARE_IDTENTRY defined in
-<asm/idtentry.h>, no need to define it separately.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
+The FRED architecture establishes the full supervisor/user through:
+1) FRED event delivery from ring 3 swaps the value of the GS base
+   address and that of the IA32_KERNEL_GS_BASE MSR.
+2) ERETU swaps the value of the GS base address and that of the
+   IA32_KERNEL_GS_BASE MSR.
+3) LKGS is already upstreamed and automatically enabled with FRED to
+   load the GS base address directly into the IA32_KERNEL_GS_BASE MSR
+   instead of the GS segment’s descriptor cache.
+
+As a result, there is no need to SWAPGS away from the kernel GS base,
+i.e., the swapgs instruction is no longer needed when FRED is enabled,
+thus is disallowed. Otherwise it causes #UD.
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/entry/entry_32.S       | 4 ----
- arch/x86/entry/entry_64.S       | 8 --------
- arch/x86/include/asm/idtentry.h | 2 +-
- 3 files changed, 1 insertion(+), 13 deletions(-)
 
-diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index 6e6af42e044a..e0f22ad8ff7e 100644
---- a/arch/x86/entry/entry_32.S
-+++ b/arch/x86/entry/entry_32.S
-@@ -649,10 +649,6 @@ SYM_CODE_START_LOCAL(asm_\cfunc)
- SYM_CODE_END(asm_\cfunc)
- .endm
+Changes since v8:
+* Explain why writing directly to the IA32_KERNEL_GS_BASE MSR is
+  doing the right thing (Thomas Gleixner).
+---
+ arch/x86/kernel/process_64.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 265ab8fcb146..6d5fed29f552 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -166,7 +166,8 @@ static noinstr unsigned long __rdgsbase_inactive(void)
  
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /*
-  * Include the defines which emit the idt entries which are shared
-  * shared between 32 and 64 bit and emit the __irqentry_text_* markers
-diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-index 8069151176f2..44f14b990597 100644
---- a/arch/x86/entry/entry_64.S
-+++ b/arch/x86/entry/entry_64.S
-@@ -438,14 +438,6 @@ SYM_CODE_END(\asmsym)
- 	idtentry \vector asm_\cfunc \cfunc has_error_code=1
- .endm
+ 	lockdep_assert_irqs_disabled();
  
--/*
-- * System vectors which invoke their handlers directly and are not
-- * going through the regular common device interrupt handling code.
-- */
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /**
-  * idtentry_mce_db - Macro to generate entry stubs for #MC and #DB
-  * @vector:		Vector number
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index cd5c10a74071..6817c0f8e323 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -447,7 +447,7 @@ __visible noinstr void func(struct pt_regs *regs,			\
+-	if (!cpu_feature_enabled(X86_FEATURE_XENPV)) {
++	if (!cpu_feature_enabled(X86_FEATURE_FRED) &&
++	    !cpu_feature_enabled(X86_FEATURE_XENPV)) {
+ 		native_swapgs();
+ 		gsbase = rdgsbase();
+ 		native_swapgs();
+@@ -191,7 +192,8 @@ static noinstr void __wrgsbase_inactive(unsigned long gsbase)
+ {
+ 	lockdep_assert_irqs_disabled();
  
- /* System vector entries */
- #define DECLARE_IDTENTRY_SYSVEC(vector, func)				\
--	idtentry_sysvec vector func
-+	DECLARE_IDTENTRY(vector, func)
- 
- #ifdef CONFIG_X86_64
- # define DECLARE_IDTENTRY_MCE(vector, func)				\
+-	if (!cpu_feature_enabled(X86_FEATURE_XENPV)) {
++	if (!cpu_feature_enabled(X86_FEATURE_FRED) &&
++	    !cpu_feature_enabled(X86_FEATURE_XENPV)) {
+ 		native_swapgs();
+ 		wrgsbase(gsbase);
+ 		native_swapgs();
 -- 
 2.34.1
 
