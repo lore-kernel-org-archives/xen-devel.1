@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD10DC3DA41
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED51BC04FE1
 	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:03:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572619.896433 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.572642.896531 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvi-0000ux-37; Mon, 31 Jul 2023 07:02:58 +0000
+	id 1qQMvn-00038w-SI; Mon, 31 Jul 2023 07:03:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572619.896433; Mon, 31 Jul 2023 07:02:58 +0000
+Received: by outflank-mailman (output) from mailman id 572642.896531; Mon, 31 Jul 2023 07:03:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvh-0000uJ-U2; Mon, 31 Jul 2023 07:02:57 +0000
-Received: by outflank-mailman (input) for mailman id 572619;
- Mon, 31 Jul 2023 07:02:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qQMvn-00035v-EC; Mon, 31 Jul 2023 07:03:03 +0000
+Received: by outflank-mailman (input) for mailman id 572642;
+ Mon, 31 Jul 2023 07:02:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMup-0000hs-TD
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:03 +0000
+ id 1qQMv5-0000iu-AB
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:19 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 268026c1-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:03 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2e037e01-2f70-11ee-8613-37d641c3527e;
+ Mon, 31 Jul 2023 09:02:16 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:01:50 -0700
+ 31 Jul 2023 00:02:06 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:01:51 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:06 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 268026c1-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 2e037e01-2f70-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786923; x=1722322923;
+  t=1690786936; x=1722322936;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=6FF6EgUyznIqvHXwn5+F1gytlgvayKLTt5Pzm0+v43k=;
-  b=VIEYLllxZhrrDtJZRSCRijifgJdBrLeSCYIB3/RUjrBU/Si5crQJPia1
-   xAqxuoSl5XwxQUxMPTdCHIdfb8wH+tnnH5AuCRrhMSfcn/mh1Fo8363DJ
-   yqsYzcpTd09vyEywm+XjUYlwhcfz1TRe9dWDUmU7nR55TkDybCBlDsvfc
-   53TQDScVkfWcvwU7nL+g4+5O8p+/rQuVYKqN107w/pbDvN4Suo2dXp95L
-   YWnf7PaaqxcNZ3AHmTuICHlbOD7ruLzQlgVdd5MqQ5UHMHbVRuWpHTOi4
-   bbcX3c8a9xQXJ8mmABBVGeg3mhxmHAC/26bWHMCxhcsMx3IhsQvNxxmr5
+  bh=R/F68dINSJ894CWgsWAeNvE3sYeHzSDBLZY+Pavzuys=;
+  b=MwYQYeWgkLy9687TOqWh8rDzU3V+asMVksYj58l1VRT64u+L3rOFHST1
+   YJLWsx8mqUSfXSkn2g6H4rwR7iepQyIP2Jvl5IPzppSSba1Ynt9Y0HzfB
+   K2t+M8Uw7jz5PSZ57z+1dlFWb2PlTSfh9P29Aac0WUKbNt89yWnlw6xu4
+   5seqrDkzXkeHBXh+hAxCMt6gwkpyWl1M6eIke/rjBU8GTYciVfzOe7jTV
+   n6sgDbEOyvmHvFGz6GxScaGgdK81/Z5CcGsz/o4V9STQ0dT7nbVvhjWoe
+   TNXmRB1YPmx4icSt6BhN6U4Y4PF5og8nhPTJ4is+9hym1NbjssvyaGMLv
    g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648596"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649141"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371648596"
+   d="scan'208";a="371649141"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543335"
+   d="scan'208";a="871543437"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,143 +139,90 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 01/36] Documentation/x86/64: Add documentation for FRED
-Date: Sun, 30 Jul 2023 23:32:42 -0700
-Message-Id: <20230731063317.3720-2-xin3.li@intel.com>
+Subject: [PATCH v9 16/36] x86/fred: Allow single-step trap and NMI when starting a new task
+Date: Sun, 30 Jul 2023 23:32:57 -0700
+Message-Id: <20230731063317.3720-17-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Briefly introduce FRED, its advantages compared to IDT, and its
-Linux enabling.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
+Entering a new task is logically speaking a return from a system call
+(exec, fork, clone, etc.). As such, if ptrace enables single stepping
+a single step exception should be allowed to trigger immediately upon
+entering user space. This is not optional.
+
+NMI should *never* be disabled in user space. As such, this is an
+optional, opportunistic way to catch errors.
+
+Allow single-step trap and NMI when starting a new task, thus once
+the new task enters user space, single-step trap and NMI are both
+enabled immediately.
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- Documentation/arch/x86/x86_64/fred.rst  | 102 ++++++++++++++++++++++++
- Documentation/arch/x86/x86_64/index.rst |   1 +
- 2 files changed, 103 insertions(+)
- create mode 100644 Documentation/arch/x86/x86_64/fred.rst
 
-diff --git a/Documentation/arch/x86/x86_64/fred.rst b/Documentation/arch/x86/x86_64/fred.rst
-new file mode 100644
-index 000000000000..27c980e882ba
---- /dev/null
-+++ b/Documentation/arch/x86/x86_64/fred.rst
-@@ -0,0 +1,102 @@
-+.. SPDX-License-Identifier: GPL-2.0
+Changes since v8:
+* Use high-order 48 bits above the lowest 16 bit SS only when FRED
+  is enabled (Thomas Gleixner).
+---
+ arch/x86/kernel/process_64.c | 23 +++++++++++++++++------
+ 1 file changed, 17 insertions(+), 6 deletions(-)
+
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 6d5fed29f552..0b47871a6141 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -56,6 +56,7 @@
+ #include <asm/resctrl.h>
+ #include <asm/unistd.h>
+ #include <asm/fsgsbase.h>
++#include <asm/fred.h>
+ #ifdef CONFIG_IA32_EMULATION
+ /* Not included via unistd.h */
+ #include <asm/unistd_32_ia32.h>
+@@ -507,8 +508,18 @@ void x86_gsbase_write_task(struct task_struct *task, unsigned long gsbase)
+ static void
+ start_thread_common(struct pt_regs *regs, unsigned long new_ip,
+ 		    unsigned long new_sp,
+-		    unsigned int _cs, unsigned int _ss, unsigned int _ds)
++		    u16 _cs, u16 _ss, u16 _ds)
+ {
++	/*
++	 * Paranoia: High-order 48 bits above the lowest 16 bit SS are
++	 * discarded by the legacy IRET instruction on all Intel, AMD,
++	 * and Cyrix/Centaur/VIA CPUs, thus can be set unconditionally,
++	 * even when FRED is not enabled. But we choose the safer side
++	 * to use these bits only when FRED is enabled.
++	 */
++	const unsigned long ssx_flags = cpu_feature_enabled(X86_FEATURE_FRED) ?
++		(FRED_SSX_SOFTWARE_INITIATED | FRED_SSX_NMI) : 0;
 +
-+=========================================
-+Flexible Return and Event Delivery (FRED)
-+=========================================
-+
-+Overview
-+========
-+
-+The FRED architecture defines simple new transitions that change
-+privilege level (ring transitions). The FRED architecture was
-+designed with the following goals:
-+
-+1) Improve overall performance and response time by replacing event
-+   delivery through the interrupt descriptor table (IDT event
-+   delivery) and event return by the IRET instruction with lower
-+   latency transitions.
-+
-+2) Improve software robustness by ensuring that event delivery
-+   establishes the full supervisor context and that event return
-+   establishes the full user context.
-+
-+The new transitions defined by the FRED architecture are FRED event
-+delivery and, for returning from events, two FRED return instructions.
-+FRED event delivery can effect a transition from ring 3 to ring 0, but
-+it is used also to deliver events incident to ring 0. One FRED
-+instruction (ERETU) effects a return from ring 0 to ring 3, while the
-+other (ERETS) returns while remaining in ring 0. Collectively, FRED
-+event delivery and the FRED return instructions are FRED transitions.
-+
-+In addition to these transitions, the FRED architecture defines a new
-+instruction (LKGS) for managing the state of the GS segment register.
-+The LKGS instruction can be used by 64-bit operating systems that do
-+not use the new FRED transitions.
-+
-+Software based event dispatching
-+================================
-+
-+FRED operates differently from IDT in terms of event handling. Instead
-+of directly dispatching an event to its handler based on the event
-+vector, FRED requires the software to dispatch an event to its handler
-+based on both the event's type and vector. Therefore, an event
-+dispatch framework must be implemented to facilitate the
-+event-to-handler dispatch process. The FRED event dispatch framework
-+assumes control once an event is delivered, starting from two FRED
-+entry points, after which several event dispatch tables are introduced
-+to facilitate the dispatching.
-+
-+The first level dispatching is event type based, and two tables need
-+to be defined, one for ring 3 event dispatching, and the other
-+for ring 0.
-+
-+The second level dispatching is event vector based, and
-+several tables need to be defined, e.g., an exception handler table
-+for exception dispatching.
-+
-+Full supervisor/user context
-+============================
-+
-+FRED event delivery atomically save and restore full supervisor/user
-+context upon event delivery and return. Thus it avoids the problem of
-+transient states due to %cr2 and/or %dr6, thus it is no longer needed
-+to handle all the ugly corner cases caused by half baked CPU states.
-+
-+FRED allows explicit unblock of NMI with new event return instructions
-+ERETS/ERETU, avoiding the mess caused by IRET which unconditionally
-+unblocks NMI, when an exception happens during NMI handling.
-+
-+FRED always restores the full value of %rsp, thus ESPFIX is no longer
-+needed when FRED is enabled.
-+
-+LKGS
-+====
-+
-+LKGS behaves like the MOV to GS instruction except that it loads the
-+base address into the IA32_KERNEL_GS_BASE MSR instead of the GS
-+segment’s descriptor cache, which is exactly what Linux kernel does
-+to load user level GS base. With LKGS, it ends up with avoiding
-+mucking with kernel GS.
-+
-+Because FRED event delivery from ring 3 swaps the value of the GS base
-+address and that of the IA32_KERNEL_GS_BASE MSR, and ERETU swaps the
-+value of the GS base address and that of the IA32_KERNEL_GS_BASE MSR,
-+plus the introduction of LKGS instruction, the SWAPGS instruction is
-+no longer needed when FRED is enabled, thus is disallowed (#UD).
-+
-+Stack levels
-+============
-+
-+4 stack levels 0~3 are introduced to replace the un-reentrant IST for
-+handling events. Each stack level could be configured to use a
-+dedicated stack.
-+
-+The current stack level could be unchanged or go higher upon FRED
-+event delivery. If unchanged, the CPU keeps using the current event
-+stack. If higher, the CPU switches to a new stack specified by the
-+stack MSR of the new stack level.
-+
-+Only execution of a FRED return instruction ERETU or ERETS could lower
-+the current stack level, causing the CPU to switch back to the stack
-+it was on before a previous event delivery.
-+satck.
-diff --git a/Documentation/arch/x86/x86_64/index.rst b/Documentation/arch/x86/x86_64/index.rst
-index a56070fc8e77..ad15e9bd623f 100644
---- a/Documentation/arch/x86/x86_64/index.rst
-+++ b/Documentation/arch/x86/x86_64/index.rst
-@@ -15,3 +15,4 @@ x86_64 Support
-    cpu-hotplug-spec
-    machinecheck
-    fsgs
-+   fred
+ 	WARN_ON_ONCE(regs != current_pt_regs());
+ 
+ 	if (static_cpu_has(X86_BUG_NULL_SEG)) {
+@@ -522,11 +533,11 @@ start_thread_common(struct pt_regs *regs, unsigned long new_ip,
+ 	loadsegment(ds, _ds);
+ 	load_gs_index(0);
+ 
+-	regs->ip		= new_ip;
+-	regs->sp		= new_sp;
+-	regs->cs		= _cs;
+-	regs->ss		= _ss;
+-	regs->flags		= X86_EFLAGS_IF;
++	regs->ip	= new_ip;
++	regs->sp	= new_sp;
++	regs->csx	= _cs;
++	regs->ssx	= _ss | ssx_flags;
++	regs->flags	= X86_EFLAGS_IF | X86_EFLAGS_FIXED;
+ }
+ 
+ void
 -- 
 2.34.1
 
