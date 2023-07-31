@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8635AC04A94
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:07:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572670.896609 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81A34C001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:07:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572672.896623 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN06-0001uH-F3; Mon, 31 Jul 2023 07:07:30 +0000
+	id 1qQN0B-0002Lf-4H; Mon, 31 Jul 2023 07:07:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572670.896609; Mon, 31 Jul 2023 07:07:30 +0000
+Received: by outflank-mailman (output) from mailman id 572672.896623; Mon, 31 Jul 2023 07:07:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN06-0001u4-8g; Mon, 31 Jul 2023 07:07:30 +0000
-Received: by outflank-mailman (input) for mailman id 572670;
- Mon, 31 Jul 2023 07:07:29 +0000
+	id 1qQN0A-0002Ke-T6; Mon, 31 Jul 2023 07:07:34 +0000
+Received: by outflank-mailman (input) for mailman id 572672;
+ Mon, 31 Jul 2023 07:07:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMv2-0000hs-Io
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:16 +0000
+ id 1qQMvD-0000hs-FS
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:27 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e47e567-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:15 +0200 (CEST)
+ id 34c29131-2f70-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:02:26 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:02:04 -0700
+ 31 Jul 2023 00:02:15 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:05 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:16 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e47e567-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 34c29131-2f70-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786935; x=1722322935;
+  t=1690786946; x=1722322946;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=YTgEgmA3f1uzY8PacyZ6XmpZcGIgDW5/dB0vDrivilc=;
-  b=fnppCNQlR8OFiIsXmxCPcLsvBqp/aiHqB5+XNK4UjDRsFJdcVecVBV8S
-   lJ4wW293gtb5RnIyZa4CjPTRxmu9XN0M3djYCvrU9d3nKRcd2GJAYrgiA
-   K5OyaPyG0TrymSos449pgtkV7r9WMLtRMkGD6zeURTLpb90DA7YhdNoTx
-   SJThy+Bi3L/XhuAB0FHbYZLUz9NGt+ME7Podi/bNSW6nxXPn5y+EIeYR6
-   OVLgqBA3axyFB1N8NdYEsVxWqme5wfR2MzbDNTRnCjfP2Ht2oK4jgLdcI
-   Dmz/Z5B+z3dV785uJc4h1GPXLXtRC0RIA0GdDHPJfns1w3z9jW4UEJ7bQ
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649101"
+  bh=X4MZTo9+yUn1bPdeMYVQLWvNe1DyIq6KwUj9R7l5YRg=;
+  b=N5Si3Ws1VMbXxHI8QgjvDAHm4N2jojeHgT97Lr0u2scFwWbCKU5mLzeq
+   oZuefwZ6NzXukcm8AkWX/AfrhtgdlyTgIqQUGPS0kSkH+6teyttLdrqz+
+   wwhNhlcQuSgPXM4Ve/92j1QElbfHc1pN9GrI1hwnzpZOnlFREBmSsi3cA
+   304cqtRWWGZgbJoz774RqtrZqPxpu9bgzI7z4C4SNLU3eFKFcdLkGXJiA
+   YdbRL2ntJVk8SIW18LwKz7n36PwRXMqP6X7ftnKOfJo3QJpcKDSz+j0Q0
+   ZMFkuajhB9VFENUcTNUEtvvG0FNPj4Ga8IN1iTzA2nda1h95kYNYVnmeX
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649455"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371649101"
+   d="scan'208";a="371649455"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543430"
+   d="scan'208";a="871543489"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,9 +139,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 15/36] x86/fred: No ESPFIX needed when FRED is enabled
-Date: Sun, 30 Jul 2023 23:32:56 -0700
-Message-Id: <20230731063317.3720-16-xin3.li@intel.com>
+Subject: [PATCH v9 25/36] x86/traps: Add a system interrupt handler table for system interrupt dispatch
+Date: Sun, 30 Jul 2023 23:33:06 -0700
+Message-Id: <20230731063317.3720-26-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
@@ -150,42 +150,105 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Because FRED always restores the full value of %rsp, ESPFIX is
-no longer needed when it's enabled.
+On x86, external interrupts can be categorized into two groups:
+  1) System interrupts
+  2) External device interrupts
+
+All external device interrupts are directed to the common_interrupt(),
+which, in turn, dispatches these external device interrupts using a
+per-CPU external device interrupt dispatch table vector_irq.
+
+To handle system interrupts, a system interrupt handler table needs to
+be introduced. This table enables the direct dispatching of a system
+interrupt to its corresponding handler. As a result, a software-based
+dispatch function will be implemented as:
+
+  void external_interrupt(struct pt_regs *regs)
+  {
+    u8 vector = regs->vector;
+    if (is_system_interrupt(vector))
+      system_interrupt_handlers[vector_to_sysvec(vector)](regs);
+    else /* external device interrupt */
+      common_interrupt(regs);
+  }
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Co-developed-by: Xin Li <xin3.li@intel.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/kernel/espfix_64.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
 
-diff --git a/arch/x86/kernel/espfix_64.c b/arch/x86/kernel/espfix_64.c
-index 16f9814c9be0..48d133a54f45 100644
---- a/arch/x86/kernel/espfix_64.c
-+++ b/arch/x86/kernel/espfix_64.c
-@@ -106,6 +106,10 @@ void __init init_espfix_bsp(void)
- 	pgd_t *pgd;
- 	p4d_t *p4d;
+Changes since v8:
+* Remove junk code that assumes no local APIC on x86_64 (Thomas Gleixner).
+
+Changes since v5:
+* Initialize system_interrupt_handlers with dispatch_table_spurious_interrupt()
+  instead of NULL to get rid of any NULL check (Peter Zijlstra).
+---
+ arch/x86/kernel/traps.c | 50 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
+
+diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
+index 49dd92458eb0..e430a8c47931 100644
+--- a/arch/x86/kernel/traps.c
++++ b/arch/x86/kernel/traps.c
+@@ -1488,6 +1488,56 @@ DEFINE_IDTENTRY_SW(iret_error)
+ }
+ #endif
  
-+	/* FRED systems don't need ESPFIX */
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		return;
++#ifdef CONFIG_X86_64
 +
- 	/* Install the espfix pud into the kernel page directory */
- 	pgd = &init_top_pgt[pgd_index(ESPFIX_BASE_ADDR)];
- 	p4d = p4d_alloc(&init_mm, pgd, ESPFIX_BASE_ADDR);
-@@ -129,6 +133,10 @@ void init_espfix_ap(int cpu)
- 	void *stack_page;
- 	pteval_t ptemask;
- 
-+	/* FRED systems don't need ESPFIX */
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		return;
++static void dispatch_table_spurious_interrupt(struct pt_regs *regs)
++{
++	dispatch_spurious_interrupt(regs, regs->vector);
++}
 +
- 	/* We only have to do this once... */
- 	if (likely(per_cpu(espfix_stack, cpu)))
- 		return;		/* Already initialized */
++#define SYSV(x,y) [(x) - FIRST_SYSTEM_VECTOR] = y
++
++static system_interrupt_handler system_interrupt_handlers[NR_SYSTEM_VECTORS] = {
++	[0 ... NR_SYSTEM_VECTORS-1]		= dispatch_table_spurious_interrupt,
++#ifdef CONFIG_SMP
++	SYSV(RESCHEDULE_VECTOR,			dispatch_table_sysvec_reschedule_ipi),
++	SYSV(CALL_FUNCTION_VECTOR,		dispatch_table_sysvec_call_function),
++	SYSV(CALL_FUNCTION_SINGLE_VECTOR,	dispatch_table_sysvec_call_function_single),
++	SYSV(REBOOT_VECTOR,			dispatch_table_sysvec_reboot),
++#endif
++
++#ifdef CONFIG_X86_THERMAL_VECTOR
++	SYSV(THERMAL_APIC_VECTOR,		dispatch_table_sysvec_thermal),
++#endif
++
++#ifdef CONFIG_X86_MCE_THRESHOLD
++	SYSV(THRESHOLD_APIC_VECTOR,		dispatch_table_sysvec_threshold),
++#endif
++
++#ifdef CONFIG_X86_MCE_AMD
++	SYSV(DEFERRED_ERROR_VECTOR,		dispatch_table_sysvec_deferred_error),
++#endif
++
++#ifdef CONFIG_X86_LOCAL_APIC
++	SYSV(LOCAL_TIMER_VECTOR,		dispatch_table_sysvec_apic_timer_interrupt),
++	SYSV(X86_PLATFORM_IPI_VECTOR,		dispatch_table_sysvec_x86_platform_ipi),
++# ifdef CONFIG_HAVE_KVM
++	SYSV(POSTED_INTR_VECTOR,		dispatch_table_sysvec_kvm_posted_intr_ipi),
++	SYSV(POSTED_INTR_WAKEUP_VECTOR,		dispatch_table_sysvec_kvm_posted_intr_wakeup_ipi),
++	SYSV(POSTED_INTR_NESTED_VECTOR,		dispatch_table_sysvec_kvm_posted_intr_nested_ipi),
++# endif
++# ifdef CONFIG_IRQ_WORK
++	SYSV(IRQ_WORK_VECTOR,			dispatch_table_sysvec_irq_work),
++# endif
++	SYSV(SPURIOUS_APIC_VECTOR,		dispatch_table_sysvec_spurious_apic_interrupt),
++	SYSV(ERROR_APIC_VECTOR,			dispatch_table_sysvec_error_interrupt),
++#endif
++};
++
++#undef SYSV
++
++#endif /* CONFIG_X86_64 */
++
+ void __init trap_init(void)
+ {
+ 	/* Init cpu_entry_area before IST entries are set up */
 -- 
 2.34.1
 
