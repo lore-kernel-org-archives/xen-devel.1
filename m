@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8D5C04A94
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:10:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572721.896742 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC771C04E69
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:10:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572722.896756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN2r-0001md-ED; Mon, 31 Jul 2023 07:10:21 +0000
+	id 1qQN2s-0002Cs-OD; Mon, 31 Jul 2023 07:10:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572721.896742; Mon, 31 Jul 2023 07:10:21 +0000
+Received: by outflank-mailman (output) from mailman id 572722.896756; Mon, 31 Jul 2023 07:10:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN2r-0001m1-Ak; Mon, 31 Jul 2023 07:10:21 +0000
-Received: by outflank-mailman (input) for mailman id 572721;
- Mon, 31 Jul 2023 07:10:20 +0000
+	id 1qQN2s-0002Bg-KK; Mon, 31 Jul 2023 07:10:22 +0000
+Received: by outflank-mailman (input) for mailman id 572722;
+ Mon, 31 Jul 2023 07:10:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQN2q-00082R-IZ
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:10:20 +0000
+ id 1qQN2r-00082R-Iq
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:10:21 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4e515373-2f71-11ee-b254-6b7b168915f2;
+ id 4eaa67a3-2f71-11ee-b254-6b7b168915f2;
  Mon, 31 Jul 2023 09:10:19 +0200 (CEST)
 Received: from fmsmga004.fm.intel.com ([10.253.24.48])
  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  31 Jul 2023 00:10:13 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga004.fm.intel.com with ESMTP; 31 Jul 2023 00:10:08 -0700
+ by fmsmga004.fm.intel.com with ESMTP; 31 Jul 2023 00:10:09 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4e515373-2f71-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 4eaa67a3-2f71-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
   t=1690787419; x=1722323419;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=0k0T0+NBS4NOJOU0xtkOh6eqcDmcObEt/EaW35o1kMc=;
-  b=Io8VBjx4WPxeWsjjo+kHfTr+wPWIlw3Q0lpAZKWfjAzjCC1jwLLo0nsI
-   bkcNvkkIylTPfrIMt5pUqj5wvCvawIand3leLFzgAGLcuvWlX7ztHgPOa
-   5ScVo972rYpEfM7CObpaRlrQ5hZ8de944QfWVbYLyVRurs/AZ4RWz+kEM
-   KITeHy0FO69OdvLZ24cOtAnhaT3h/K367tyfBWYJFTVHL7qpx30qCx+dp
-   q1AUS6/30+nKkZ8osjlWF3zU2cxF5xhjronlGqLj7/z1PmmLKYzG3H8jc
-   uqG7R/Uzi4kzXoGRb1W0BpsqRs2duQSQwJo1Dc6w0kDS/j3q/2TxAj+4G
+  bh=g76n0qqOm69A/O2uudI0FugS1H+Frufn6xIPQbl7rb0=;
+  b=JPuhIYzpH6H4s8kKu+qdo5s+M8ul37eCfJR12xhkmS9nDdVbErviuSQQ
+   ufhtYITzWOoe69Uq2C2/YMU9vB98LxTH58uh3NstKWLeuRAHIETVuxzx7
+   /Bcu2+yr62Nz0EfkMPk1wPc6prXoMbHppVFAwj6Y5SinpLet0Lp33+1nZ
+   MDvbNJaqHZHP1aG+VD2Tf4xNhOb6B9YovbSF1EchmZh2DA0qyyQsbBKHz
+   oEHqPZdWemKNJHmlmn9ixabfXjqaU0XOiFWspIPc2q228A0N1UtQRHAtm
+   vym0SlCESOwR7LAv+ojFW020NpytWa1o1imI+xhY5prQZhx1gnnDJhBzb
    g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="432750139"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="432750181"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="432750139"
+   d="scan'208";a="432750181"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="798157785"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="798157799"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="798157785"
+   d="scan'208";a="798157799"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -140,40 +140,57 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 32/36] x86/fred: Export fred_entrypoint_kernel() for handling NMI in NMI induced VM exits
-Date: Sun, 30 Jul 2023 23:41:29 -0700
-Message-Id: <20230731064133.3881-3-xin3.li@intel.com>
+Subject: [PATCH v9 34/36] x86/syscall: Split IDT syscall setup code into idt_syscall_init()
+Date: Sun, 30 Jul 2023 23:41:31 -0700
+Message-Id: <20230731064133.3881-5-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731064133.3881-1-xin3.li@intel.com>
 References: <20230731064133.3881-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Export fred_entrypoint_kernel() for handling NMI in NMI induced VM exits.
+Split IDT syscall setup code into idt_syscall_init() to make it
+cleaner to add FRED syscall setup code.
 
+Suggested-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/entry/entry_64_fred.S | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/x86/kernel/cpu/common.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/entry/entry_64_fred.S b/arch/x86/entry/entry_64_fred.S
-index d24bf7f10ac8..12063267d2ac 100644
---- a/arch/x86/entry/entry_64_fred.S
-+++ b/arch/x86/entry/entry_64_fred.S
-@@ -4,6 +4,7 @@
-  */
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index 331b06d19f7f..bb03dacc5fb8 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -2027,10 +2027,8 @@ static void wrmsrl_cstar(unsigned long val)
+ 		wrmsrl(MSR_CSTAR, val);
+ }
  
- #include <asm/asm.h>
-+#include <asm/export.h>
- #include <asm/fred.h>
+-/* May not be marked __init: used by software suspend */
+-void syscall_init(void)
++static inline void idt_syscall_init(void)
+ {
+-	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
+ 	wrmsrl(MSR_LSTAR, (unsigned long)entry_SYSCALL_64);
  
- #include "calling.h"
-@@ -54,3 +55,4 @@ SYM_CODE_START_NOALIGN(fred_entrypoint_kernel)
- 	FRED_EXIT
- 	ERETS
- SYM_CODE_END(fred_entrypoint_kernel)
-+EXPORT_SYMBOL(fred_entrypoint_kernel)
+ #ifdef CONFIG_IA32_EMULATION
+@@ -2064,6 +2062,15 @@ void syscall_init(void)
+ 	       X86_EFLAGS_AC|X86_EFLAGS_ID);
+ }
+ 
++/* May not be marked __init: used by software suspend */
++void syscall_init(void)
++{
++	/* The default user and kernel segments */
++	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
++
++	idt_syscall_init();
++}
++
+ #else	/* CONFIG_X86_64 */
+ 
+ #ifdef CONFIG_STACKPROTECTOR
 -- 
 2.34.1
 
