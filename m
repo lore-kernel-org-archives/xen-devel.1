@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F821C07E8E
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:03:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572620.896440 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84406C001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:03:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572645.896548 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvi-00011Q-G2; Mon, 31 Jul 2023 07:02:58 +0000
+	id 1qQMvp-0003Zz-FE; Mon, 31 Jul 2023 07:03:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572620.896440; Mon, 31 Jul 2023 07:02:58 +0000
+Received: by outflank-mailman (output) from mailman id 572645.896548; Mon, 31 Jul 2023 07:03:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvi-00010k-8r; Mon, 31 Jul 2023 07:02:58 +0000
-Received: by outflank-mailman (input) for mailman id 572620;
- Mon, 31 Jul 2023 07:02:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qQMvo-0003Wx-QS; Mon, 31 Jul 2023 07:03:04 +0000
+Received: by outflank-mailman (input) for mailman id 572645;
+ Mon, 31 Jul 2023 07:02:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMuq-0000hs-9n
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:04 +0000
+ id 1qQMv8-0000iu-Ce
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:22 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 25ea018a-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:03 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 311d8aa6-2f70-11ee-8613-37d641c3527e;
+ Mon, 31 Jul 2023 09:02:20 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:01:52 -0700
+ 31 Jul 2023 00:02:10 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:01:53 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:11 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25ea018a-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 311d8aa6-2f70-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786923; x=1722322923;
+  t=1690786940; x=1722322940;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ok7xj4KwdkLOXDJ1J3mT1oirCcERqdhXdoxphTKdFWY=;
-  b=h22EGWLMyombHvE/E3NPf3fPvGDNcjsCizffViaDgtVxy0rRXN6YS6Uz
-   WxctpgXshZ6JRh3N3ubDIYv5Ckf3ngtxIwIpVtVD16fZadFGMgKCJaCv8
-   yTlqoSLYFY0IG0XAwUUdfcqiXVva3oqTpEoXeF5JTcpbKCnYWSsnORkGS
-   oCgm1m4UQLU99d8Wvl2Nn1+YmmS/WFxTPBNEyhzxiTuZMWN+wTt9UGm8v
-   KcqOGT2nBhlsjWk1aLI5Gse1Y9dH0HS4Ty/hp+PrxIcVMgTbWq3nHhM2t
-   KrojR+BF1pZkNGTlc0GYiKTSeXtjF8mpYRjcjCu41Y2yqrYdhayEbfyp6
+  bh=CDXH8O7ex78Bl5bAFBaH8EJ8EpWaGJ2TaZytElzEDrs=;
+  b=WVV+s6dLELKa6tA35e8yr4O7g8OwcxgwUPDLHTX1Vcwg2G0WjzKlGQSQ
+   EgbY4MKcP5wP2SxcX3Bb2dC0Gk91KI4bGDwjkU30f4PRLQXn7Xyh0aIUq
+   XBbB7plUjId8Wwy/YNr1l91edqDM4NWkYTiLCpsdqrS63ZQHI/Zye/BZv
+   rp4EZmqPsdDzCI0p+RpXOWKXL/bMjfRdrqqioAEoDWvUA5JuPNSvUDkgN
+   to6rmUCOxav5i8GBIkDCHYTYxfTLXcK5pHAld8ngriwQhDZ2lL0+XlExq
+   c/GO+yJVNFWl9CRmeFsNUooHQeqttN61Hp+y1kXx8pIvsbrJmeF3fPhR1
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648667"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649276"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371648667"
+   d="scan'208";a="371649276"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543348"
+   d="scan'208";a="871543462"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,9 +139,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 03/36] x86/fred: Disable FRED support if CONFIG_X86_FRED is disabled
-Date: Sun, 30 Jul 2023 23:32:44 -0700
-Message-Id: <20230731063317.3720-4-xin3.li@intel.com>
+Subject: [PATCH v9 20/36] x86/fred: Add a NMI entry stub for FRED
+Date: Sun, 30 Jul 2023 23:33:01 -0700
+Message-Id: <20230731063317.3720-21-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
@@ -150,70 +150,69 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add CONFIG_X86_FRED to <asm/disabled-features.h> to make
-cpu_feature_enabled() work correctly with FRED.
+On a FRED system, NMIs nest both with themselves and faults, transient
+information is saved into the stack frame, and NMI unblocking only
+happens when the stack frame indicates that so should happen.
 
-Originally-by: Megha Dey <megha.dey@intel.com>
+Thus, the NMI entry stub for FRED is really quite small...
+
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/asm/disabled-features.h       | 8 +++++++-
- tools/arch/x86/include/asm/disabled-features.h | 8 +++++++-
- 2 files changed, 14 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/fred.h |  1 +
+ arch/x86/kernel/nmi.c       | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-diff --git a/arch/x86/include/asm/disabled-features.h b/arch/x86/include/asm/disabled-features.h
-index fafe9be7a6f4..85fd67c67ce1 100644
---- a/arch/x86/include/asm/disabled-features.h
-+++ b/arch/x86/include/asm/disabled-features.h
-@@ -105,6 +105,12 @@
- # define DISABLE_TDX_GUEST	(1 << (X86_FEATURE_TDX_GUEST & 31))
+diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
+index ad7b79130b1e..2a7c47dfd733 100644
+--- a/arch/x86/include/asm/fred.h
++++ b/arch/x86/include/asm/fred.h
+@@ -112,6 +112,7 @@ static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
+ 
+ typedef DECLARE_FRED_HANDLER((*fred_handler));
+ 
++DECLARE_FRED_HANDLER(fred_exc_nmi);
+ DECLARE_FRED_HANDLER(fred_exc_debug);
+ DECLARE_FRED_HANDLER(fred_exc_page_fault);
+ 
+diff --git a/arch/x86/kernel/nmi.c b/arch/x86/kernel/nmi.c
+index a0c551846b35..f803e2bcd024 100644
+--- a/arch/x86/kernel/nmi.c
++++ b/arch/x86/kernel/nmi.c
+@@ -34,6 +34,7 @@
+ #include <asm/cache.h>
+ #include <asm/nospec-branch.h>
+ #include <asm/sev.h>
++#include <asm/fred.h>
+ 
+ #define CREATE_TRACE_POINTS
+ #include <trace/events/nmi.h>
+@@ -643,6 +644,24 @@ void nmi_backtrace_stall_check(const struct cpumask *btp)
+ 
  #endif
  
 +#ifdef CONFIG_X86_FRED
-+# define DISABLE_FRED 0
-+#else
-+# define DISABLE_FRED (1 << (X86_FEATURE_FRED & 31))
++DEFINE_FRED_HANDLER(fred_exc_nmi)
++{
++	/*
++	 * With FRED, CR2 and DR6 are pushed atomically on faults,
++	 * so we don't have to worry about saving and restoring them.
++	 * Breakpoint faults nest, so assume it is OK to leave DR7
++	 * enabled.
++	 */
++	irqentry_state_t irq_state = irqentry_nmi_enter(regs);
++
++	inc_irq_stat(__nmi_count);
++	default_do_nmi(regs);
++
++	irqentry_nmi_exit(regs, irq_state);
++}
 +#endif
 +
- /*
-  * Make sure to add features to the correct mask
-  */
-@@ -122,7 +128,7 @@
- #define DISABLED_MASK11	(DISABLE_RETPOLINE|DISABLE_RETHUNK|DISABLE_UNRET| \
- 			 DISABLE_CALL_DEPTH_TRACKING)
- #define DISABLED_MASK12	(DISABLE_LAM)
--#define DISABLED_MASK13	0
-+#define DISABLED_MASK13	(DISABLE_FRED)
- #define DISABLED_MASK14	0
- #define DISABLED_MASK15	0
- #define DISABLED_MASK16	(DISABLE_PKU|DISABLE_OSPKE|DISABLE_LA57|DISABLE_UMIP| \
-diff --git a/tools/arch/x86/include/asm/disabled-features.h b/tools/arch/x86/include/asm/disabled-features.h
-index fafe9be7a6f4..85fd67c67ce1 100644
---- a/tools/arch/x86/include/asm/disabled-features.h
-+++ b/tools/arch/x86/include/asm/disabled-features.h
-@@ -105,6 +105,12 @@
- # define DISABLE_TDX_GUEST	(1 << (X86_FEATURE_TDX_GUEST & 31))
- #endif
- 
-+#ifdef CONFIG_X86_FRED
-+# define DISABLE_FRED 0
-+#else
-+# define DISABLE_FRED (1 << (X86_FEATURE_FRED & 31))
-+#endif
-+
- /*
-  * Make sure to add features to the correct mask
-  */
-@@ -122,7 +128,7 @@
- #define DISABLED_MASK11	(DISABLE_RETPOLINE|DISABLE_RETHUNK|DISABLE_UNRET| \
- 			 DISABLE_CALL_DEPTH_TRACKING)
- #define DISABLED_MASK12	(DISABLE_LAM)
--#define DISABLED_MASK13	0
-+#define DISABLED_MASK13	(DISABLE_FRED)
- #define DISABLED_MASK14	0
- #define DISABLED_MASK15	0
- #define DISABLED_MASK16	(DISABLE_PKU|DISABLE_OSPKE|DISABLE_LA57|DISABLE_UMIP| \
+ void stop_nmi(void)
+ {
+ 	ignore_nmis++;
 -- 
 2.34.1
 
