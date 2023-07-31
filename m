@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2E6C001DC
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 17:08:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573360.898062 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E41CAC001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 17:10:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573371.898072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQWNI-0006aH-CX; Mon, 31 Jul 2023 17:08:04 +0000
+	id 1qQWP4-0001OU-Rp; Mon, 31 Jul 2023 17:09:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573360.898062; Mon, 31 Jul 2023 17:08:04 +0000
+Received: by outflank-mailman (output) from mailman id 573371.898072; Mon, 31 Jul 2023 17:09:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQWNI-0006Zw-7p; Mon, 31 Jul 2023 17:08:04 +0000
-Received: by outflank-mailman (input) for mailman id 573360;
- Mon, 31 Jul 2023 17:08:02 +0000
+	id 1qQWP4-0001OM-O8; Mon, 31 Jul 2023 17:09:54 +0000
+Received: by outflank-mailman (input) for mailman id 573371;
+ Mon, 31 Jul 2023 17:09:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=d7tO=DR=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1qQWJc-0008Np-0A
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 17:04:16 +0000
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [2607:f8b0:4864:20::b34])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 45cc9ed1-2fc4-11ee-8613-37d641c3527e;
- Mon, 31 Jul 2023 19:04:13 +0200 (CEST)
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-d0728058651so4980564276.1
- for <xen-devel@lists.xenproject.org>; Mon, 31 Jul 2023 10:04:13 -0700 (PDT)
-Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
- by smtp.googlemail.com with ESMTPSA id
- x31-20020a25ac9f000000b00c832ad2e2eesm2511833ybi.60.2023.07.31.10.04.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Jul 2023 10:04:11 -0700 (PDT)
+ <SRS0=7hZk=DR=chiark.greenend.org.uk=ijackson@srs-se1.protection.inumbo.net>)
+ id 1qQWP2-0001NR-KV
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 17:09:53 +0000
+Received: from chiark.greenend.org.uk (v6.chiark.greenend.org.uk
+ [2001:ba8:1e3::]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0caf9753-2fc5-11ee-8613-37d641c3527e;
+ Mon, 31 Jul 2023 19:09:48 +0200 (CEST)
+Received: by chiark.greenend.org.uk (Debian Exim 4.94.2 #2) with local
+ (return-path ijackson@chiark.greenend.org.uk)
+ id 1qQWOr-0002ds-L1; Mon, 31 Jul 2023 18:09:41 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,141 +41,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 45cc9ed1-2fc4-11ee-8613-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690823052; x=1691427852;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jHkn+4hWn6cNWfQmftBQOtWQYQb9iJJIYcRZZNmu6iY=;
-        b=S9WpMAU4z7s2Ag9JtWlTuDFooWQlFyPv89tIlGGSbz0E38KMeV4JUqyRKP7B2mlsst
-         3/F+7yoyQbv3i3KcMwuVSsZv9i7LAi+BdMh8bqQ1OIkDFwNfq0t6pWYwMasYC2CpjBTn
-         bovNcdPK8kmT56us8VfFMktVF9KG2tmTn5UTLjX+ZXj2DR3oFDYqVFA7hvTFAXfeR6X5
-         Q0VEEuNVDIcDX6dTwPvkDuk+ca9lyAO0oa7PZRgQNSWYVbj0QEi1SCUj2cu+UiTNTCrz
-         l0MpQh+abPw7+Fj+nKTUpgwidBjEPvlqq0Mg8+dCJJ46uHZsBMSboAizdy+gmVRglE/z
-         7Cpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690823052; x=1691427852;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jHkn+4hWn6cNWfQmftBQOtWQYQb9iJJIYcRZZNmu6iY=;
-        b=UO1A6cPpBGd12ODN+8rKh1ZOYowVCV/hCiimpGCVa3i4/uM9yYj5eXfHYmy98Fx4J7
-         XK3YJVXnAbq4Z8NaooES4oFPG97FU0TLKmwSZ3L8UatB6V2dFZKqseaHwnWO4jGNh9HK
-         AqjRSRhlWvXUC025xm0UQ4ZK47uqm2L6+voRiYgSlzKRmO1hjbhaqH70J1Ggx/Q/Z1/k
-         iau4FlY8eOsqfe/6IJKAZE+hz4qXJkQjZZ5hi0XIVKFDKi5+ScuEKtBtsgjOkTJxQXmB
-         W1QIYqW869UuEIMRtA9HQjFlBSx3dssMetKoGyjyZ/L6k4t0iJ+GolGq1b8GVeUAqlh3
-         BSkA==
-X-Gm-Message-State: ABy/qLa1KpyJRr7R8yWoVdP+wc2Wnv+Sh/mDtgWfXvZaSxLhyOPplRhv
-	aF4KmfJEsb2x79V0fbtTxp0=
-X-Google-Smtp-Source: APBJJlF45VM+96NADPgQk/bfcoyXe13svaytrCoN6xBKbPq7ENGGS7BXy6U+VNxQQfsm+MAmj6JoEQ==
-X-Received: by 2002:a25:b296:0:b0:d35:cfa3:cbde with SMTP id k22-20020a25b296000000b00d35cfa3cbdemr1080223ybj.38.1690823052039;
-        Mon, 31 Jul 2023 10:04:12 -0700 (PDT)
-From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	Matthew Wilcox <willy@infradead.org>
-Cc: linux-mm@kvack.org,
-	linux-arch@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-csky@vger.kernel.org,
-	linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org,
-	linux-openrisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org,
-	xen-devel@lists.xenproject.org,
-	kvm@vger.kernel.org,
-	Hugh Dickins <hughd@google.com>,
-	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Mike Rapoport <rppt@kernel.org>
-Subject: [PATCH mm-unstable v8 17/31] arm: Convert various functions to use ptdescs
-Date: Mon, 31 Jul 2023 10:03:18 -0700
-Message-Id: <20230731170332.69404-18-vishal.moola@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230731170332.69404-1-vishal.moola@gmail.com>
-References: <20230731170332.69404-1-vishal.moola@gmail.com>
+X-Inumbo-ID: 0caf9753-2fc5-11ee-8613-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=chiark.greenend.org.uk; s=k.chiark; h=DKIM-Signature-Warning:References:
+	In-Reply-To:Subject:Cc:To:Date:Message-ID:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:From:Sender:Reply-To:Content-ID:Content-Description
+	:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:
+	List-Archive; bh=kq3C9qdHinQVZt4g5pbFr5nLdggSuLiE7Cy5h/e80Zg=; b=nVIcsoN2NZw4
+	t4niyQw0UBtVPY+ovRrpXqXj7lLH5sP2WdBDMupYBXLq7dowyyxhYsD//uhlw5Q/HSAdEM/uLYapU
+	qmyAxubtVzqdsAO7Y8OT3ywsDXb/+fDJXa+MUDVuW+rwkyKkvgd85mluwnjcCPHX6EPwX2Xq21AZJ
+	6tkjxd2SBjylDBYnVL9eHRt/rNzHdI8o8OI2zrDkRhWlzPPNnUPiqHKcfFjnKhwDo/b0tjcv+cPBs
+	F3R+E8kOTEDMPjj5PnsO8yMSuPNiGPGnmQhNVDe6Zvc9+DsfC/IAlIbKna4LdFC5IUUjYy8Eud68W
+	HaI+2GByL816gphy5JOVuQ==;
+From: Ian Jackson <ijackson@chiark.greenend.org.uk>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+Message-ID: <25799.60117.528120.26189@chiark.greenend.org.uk>
+Date: Mon, 31 Jul 2023 18:09:41 +0100
+To: Elliott Mitchell <ehem+xen@m5p.com>
+Cc: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+    xen-devel@lists.xenproject.org,
+    wl@xen.org,
+    Anthony PERARD <anthony.perard@citrix.com>,
+    Juergen Gross <jgross@suse.com>
+Subject: Re: Python in Domain Configurations
+In-Reply-To: <ZMflj1F5qDydEgbd@mattapan.m5p.com>
+References: <ZKiN80e08QIojRSL@mattapan.m5p.com>
+	<ZL7e6IcJWK38IHU7@mattapan.m5p.com>
+	<ZMcxvdSbpQdWg5/r@mail-itl>
+	<ZMflj1F5qDydEgbd@mattapan.m5p.com>
+X-Mailer: VM 8.2.0b under 27.1 (x86_64-pc-linux-gnu)
+DKIM-Signature-Warning: NOTE REGARDING DKIM KEY COMPROMISE https://www.chiark.greenend.org.uk/dkim-rotate/README.txt https://www.chiark.greenend.org.uk/dkim-rotate/af/afac8f396f88c5d9f7a728135905de4e.pem
 
-As part of the conversions to replace pgtable constructor/destructors with
-ptdesc equivalents, convert various page table functions to use ptdescs.
+Elliott Mitchell writes ("Re: Python in Domain Configurations"):
+> On Mon, Jul 31, 2023 at 05:59:55AM +0200, Marek Marczykowski-G=F3reck=
+i wrote:
+> > So, IMHO reducing config file from a full python (like it used to b=
+e in
+> > xend times) into a static file with well defined syntax was an
+> > improvement. Lets not go backward.
 
-late_alloc() also uses the __get_free_pages() helper function. Convert
-this to use pagetable_alloc() and ptdesc_address() instead to help
-standardize page tables further.
+I'm no longer working on this codebase, but since I've been CC'd:
 
-Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
-Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
----
- arch/arm/include/asm/tlb.h | 12 +++++++-----
- arch/arm/mm/mmu.c          |  7 ++++---
- 2 files changed, 11 insertions(+), 8 deletions(-)
+I was one of the people who replaced the Python-based config parsing
+with the current arrangements.  We didn't just do this because we were
+replacing xend (whose use of Python as implementation language made it
+appear convenient to just read and execute the configs as Python
+code).
 
-diff --git a/arch/arm/include/asm/tlb.h b/arch/arm/include/asm/tlb.h
-index b8cbe03ad260..f40d06ad5d2a 100644
---- a/arch/arm/include/asm/tlb.h
-+++ b/arch/arm/include/asm/tlb.h
-@@ -39,7 +39,9 @@ static inline void __tlb_remove_table(void *_table)
- static inline void
- __pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte, unsigned long addr)
- {
--	pgtable_pte_page_dtor(pte);
-+	struct ptdesc *ptdesc = page_ptdesc(pte);
-+
-+	pagetable_pte_dtor(ptdesc);
- 
- #ifndef CONFIG_ARM_LPAE
- 	/*
-@@ -50,17 +52,17 @@ __pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte, unsigned long addr)
- 	__tlb_adjust_range(tlb, addr - PAGE_SIZE, 2 * PAGE_SIZE);
- #endif
- 
--	tlb_remove_table(tlb, pte);
-+	tlb_remove_ptdesc(tlb, ptdesc);
- }
- 
- static inline void
- __pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmdp, unsigned long addr)
- {
- #ifdef CONFIG_ARM_LPAE
--	struct page *page = virt_to_page(pmdp);
-+	struct ptdesc *ptdesc = virt_to_ptdesc(pmdp);
- 
--	pgtable_pmd_page_dtor(page);
--	tlb_remove_table(tlb, page);
-+	pagetable_pmd_dtor(ptdesc);
-+	tlb_remove_ptdesc(tlb, ptdesc);
- #endif
- }
- 
-diff --git a/arch/arm/mm/mmu.c b/arch/arm/mm/mmu.c
-index 13fc4bb5f792..fdeaee30d167 100644
---- a/arch/arm/mm/mmu.c
-+++ b/arch/arm/mm/mmu.c
-@@ -737,11 +737,12 @@ static void __init *early_alloc(unsigned long sz)
- 
- static void *__init late_alloc(unsigned long sz)
- {
--	void *ptr = (void *)__get_free_pages(GFP_PGTABLE_KERNEL, get_order(sz));
-+	void *ptdesc = pagetable_alloc(GFP_PGTABLE_KERNEL & ~__GFP_HIGHMEM,
-+			get_order(sz));
- 
--	if (!ptr || !pgtable_pte_page_ctor(virt_to_page(ptr)))
-+	if (!ptdesc || !pagetable_pte_ctor(ptdesc))
- 		BUG();
--	return ptr;
-+	return ptdesc_to_virt(ptdesc);
- }
- 
- static pte_t * __init arm_pte_alloc(pmd_t *pmd, unsigned long addr,
--- 
-2.40.1
+We did it for the reasons Marek gives.  It's true that the existing
+format is not as well specified as it could be.  It was intended as a
+plausible subset of Python literal syntax.  We chose that syntax to
+preserve compatibility with the vast majority of existing config files
+and to provide something familiar.  (And it seems we did achieve those
+goals.)
 
+The disk configuration syntax is particularly warty, but we inherited
+much of that from the Python version.
+
+If we had a free choice today, I might advocate for TOML.  But I don't
+see any value in changing the concrete syntax now.
+
+> > As for your original problem, IIUC you would like to add some data =
+that
+> > would _not_ be interpreted by libxl, right? For that you can use
+> > comments with some specific marker for your script. This approach u=
+sed
+> > to work well for SysV init script, and in fact for a very similar u=
+se case
+> > (ordering and dependencies, among other things).
+>=20
+> That is /not/ the issue.  `xl` simply ignores any variables which it
+> doesn't interpret (this is in fact a Bad Thing).
+
+I forget, but isn't there some kind of scheme for warning about
+unrecognised configuration options ?
+
+>  I need to know what the limits to the syntax are.
+
+I agree that it's not great that the syntax is not 100% documented.
+The parser is in
+  tools/libs/util/libxlu_cfg_y.y
+  tools/libs/util/libxlu_cfg_l.l
+I'm sure patches to improve the docs would be welcome.
+
+Note that it is still a *subset* of Python, so if you wish to use a
+Python interpreter to parse it in your own tooling, you're very
+welcome to do so.
+
+> Notice how many init scripts do `. /etc/default/<somefile>` to load
+> configuration?  I'm thinking it would be very handy to use a similar
+> technique to load domain.cfg files, with Python being the interpreter=
+.
+
+I don't think this is a good idea.  Both because I don't think the
+functionality available in a Python interpreter should be available in
+the libxl configuration, and because Python is a large and complex
+dependency which we don't want to pull in here.
+
+> I also think some portions of the domain.cfg format might work better=
+
+> with full Python syntax.  For example might it be handier to allow:
+>=20
+> disk =3D [
+> =09{
+> =09=09'vdev': 'xvda',
+> =09=09'format': 'raw',
+> =09=09'access': 'rw',
+> =09=09'target': '/dev/disk/by-path/foo-bar-baz',
+> =09},
+> ]
+
+I agree that something like this would be nice.  I don't think it
+should be done by importing Python.  These two files - the main part
+of the existing parser - is only 183 loc including comments.
+Extending it (and the support code in libxlu_cfg.c) to do dictionaries
+as well as lists doesn't seem like it would make it too much bigger.
+
+Thanks,
+Ian.
+
+--=20
+Ian Jackson <ijackson@chiark.greenend.org.uk>   These opinions are my o=
+wn. =20
+
+Pronouns: they/he.  If I emailed you from @fyvzl.net or @evade.org.uk,
+that is a private address which bypasses my fierce spamfilter.
 
