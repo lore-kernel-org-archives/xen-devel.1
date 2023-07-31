@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B954DC001DC
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:08:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572687.896678 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8796C001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:09:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572693.896687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0X-0005UY-7J; Mon, 31 Jul 2023 07:07:57 +0000
+	id 1qQN1e-0006tP-Gu; Mon, 31 Jul 2023 07:09:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572687.896678; Mon, 31 Jul 2023 07:07:57 +0000
+Received: by outflank-mailman (output) from mailman id 572693.896687; Mon, 31 Jul 2023 07:09:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0X-0005UG-3e; Mon, 31 Jul 2023 07:07:57 +0000
-Received: by outflank-mailman (input) for mailman id 572687;
- Mon, 31 Jul 2023 07:07:55 +0000
+	id 1qQN1e-0006tI-E0; Mon, 31 Jul 2023 07:09:06 +0000
+Received: by outflank-mailman (input) for mailman id 572693;
+ Mon, 31 Jul 2023 07:09:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMv4-0000hs-Db
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:18 +0000
-Received: from mgamail.intel.com (unknown [134.134.136.24])
+ id 1qQN1d-0006t8-01
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:09:05 +0000
+Received: from mgamail.intel.com (unknown [192.55.52.136])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2f4ac32f-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:17 +0200 (CEST)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:02:07 -0700
+ id 1f916e0a-2f71-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:09:03 +0200 (CEST)
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 31 Jul 2023 00:08:58 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:07 -0700
+ by orsmga004.jf.intel.com with ESMTP; 31 Jul 2023 00:08:56 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f4ac32f-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 1f916e0a-2f71-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786937; x=1722322937;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=1h9fTPNcW28O8bu/nclSFH4GxPR5CW0Rl9/PbASKNuY=;
-  b=iF6eXrfrOnoSm19j9AZjAPSyHUnFeiB/czSt48vp9UlmImF8ID+G6TsU
-   dUP2nUs2eatyVRuhInmPTuTgY6UOVwNHm0OjW+kDV4/esPNOdfdhqwFjj
-   lTtL1SpIuYVoVctsagsOgFvVDCd4gWUMGmzGHOVEtbspB91eIcw2ciVTm
-   Xlzj9dJfpkOmeeRPEGHDaGM52MbcBOse+aAq+I2b0wt3Kl98tv0FjeONp
-   vU/3fv+if1piUIVPljaQovfVv91vroviHnEaHVQsprvmF0KdiOBGC8QfZ
-   HokLzzTU4tHznCSDXCOiqTs4pGD7Tcqeog6lFsgOokAhRoJUhVs9vPMjz
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649175"
+  t=1690787343; x=1722323343;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=0Vsn6bDzpRkXYLGAG2NP2KMCccOE1uQI/p8GcVukrL0=;
+  b=BsNJME0sFaaDGCxaCoyqKL2b/N7F/ktpYpBNO/adW0ujcyKUc+Mt6z3R
+   A7lJ67624thc4aN0LDXNzJJp40zG5+U0owVg/+SrIU42b0Q9N6rveoW7g
+   0YbEDuEw/EAHa5k27FCPzBIeWKI0+Nk/XJeRmdM84azCLgdxwymQBP5S5
+   23w4pTvMwG0069HRJ3rHUpsuK8HiJUKntjRXi5wqeFlzIiMalvpxUHy8O
+   y3sqpGwUTDWmnAcK1RpKLv6AfaPeomkK2NVSivREK+1ilQGJ9h36TaC6+
+   HaUEUuo1qnAMcaBPIHH7aSLQ8G2IX/Pn2fREI9eKZcfrqj47tTJjKrR5F
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="348538895"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371649175"
+   d="scan'208";a="348538895"
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543443"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="851922998"
+X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
+   d="scan'208";a="851922998"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,66 +140,175 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 17/36] x86/fred: Define a common function type fred_handler
-Date: Sun, 30 Jul 2023 23:32:58 -0700
-Message-Id: <20230731063317.3720-18-xin3.li@intel.com>
+Subject: [PATCH v9 26/36] x86/traps: Add sysvec_install() to install a system interrupt handler
+Date: Sun, 30 Jul 2023 23:40:25 -0700
+Message-Id: <20230731064025.3819-1-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
-References: <20230731063317.3720-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-FRED event delivery establishes a full supervisor context by saving
-the essential information about an event to a FRED stack frame, e.g.,
-the faulting linear address of a #PF is saved as event data of a FRED
-stack frame. Thus a struct pt_regs has all the needed data to handle
-an event and it's the only input argument of a FRED event handler.
+Add sysvec_install() to install a system interrupt handler into both
+the IDT and system_interrupt_handlers. The latter is used to dispatch
+system interrupts to their respective handlers when FRED is enabled.
 
-Define fred_handler, a common function type used in the FRED event
-dispatch framework, which makes it easier to find the entry points
-(via grep), allows the prototype to change if necessary without
-requiring changing changes everywhere, and makes sure that all the
-entry points have the proper decorations (currently noinstr, but
-could change in the future.)
-
+Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/asm/fred.h | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
 
-diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-index d76e681a806f..b45c1bea5b7f 100644
---- a/arch/x86/include/asm/fred.h
-+++ b/arch/x86/include/asm/fred.h
-@@ -68,6 +68,19 @@
- #define FRED_SSX_64_BIT_MODE_BIT	57
- #define FRED_SSX_64_BIT_MODE		_BITUL(FRED_SSX_64_BIT_MODE_BIT)
+Changes since v8:
+* Introduce a macro sysvec_install() to derive the asm handler name from
+  a C handler, which simplifies the code and avoids an ugly typecast
+  (Thomas Gleixner).
+---
+ arch/x86/include/asm/traps.h     | 19 +++++++++++++++++++
+ arch/x86/kernel/cpu/acrn.c       |  5 +++--
+ arch/x86/kernel/cpu/mshyperv.c   | 16 ++++++++--------
+ arch/x86/kernel/kvm.c            |  2 +-
+ arch/x86/kernel/traps.c          |  6 ++++++
+ drivers/xen/events/events_base.c |  3 ++-
+ 6 files changed, 39 insertions(+), 12 deletions(-)
+
+diff --git a/arch/x86/include/asm/traps.h b/arch/x86/include/asm/traps.h
+index 47ecfff2c83d..cba3e4dfc329 100644
+--- a/arch/x86/include/asm/traps.h
++++ b/arch/x86/include/asm/traps.h
+@@ -47,4 +47,23 @@ void __noreturn handle_stack_overflow(struct pt_regs *regs,
+ 				      struct stack_info *info);
+ #endif
  
-+/*
-+ * FRED event delivery establishes a full supervisor context by
-+ * saving the essential information about an event to a FRED
-+ * stack frame, e.g., the faulting linear address of a #PF is
-+ * saved as event data of a FRED #PF stack frame. Thus a struct
-+ * pt_regs has all the needed data to handle an event and it's
-+ * the only input argument of a FRED event handler.
-+ *
-+ * FRED handlers need to be placed in the noinstr text section.
-+ */
-+#define DECLARE_FRED_HANDLER(f) void f (struct pt_regs *regs)
-+#define DEFINE_FRED_HANDLER(f) noinstr DECLARE_FRED_HANDLER(f)
++#ifdef CONFIG_X86_64
++inline void set_sysvec_handler(unsigned int i, system_interrupt_handler func);
 +
- #ifdef CONFIG_X86_FRED
++static inline void sysvec_setup_fred(unsigned int vector, system_interrupt_handler func)
++{
++	BUG_ON(vector < FIRST_SYSTEM_VECTOR);
++	set_sysvec_handler(vector - FIRST_SYSTEM_VECTOR, func);
++}
++#else
++static inline void sysvec_setup_fred(unsigned int vector, system_interrupt_handler func)
++{
++}
++#endif
++
++#define sysvec_install(vector, func) {					\
++	sysvec_setup_fred(vector, func);				\
++	alloc_intr_gate(vector, asm_##func);				\
++}
++
+ #endif /* _ASM_X86_TRAPS_H */
+diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
+index 485441b7f030..a879b4b87740 100644
+--- a/arch/x86/kernel/cpu/acrn.c
++++ b/arch/x86/kernel/cpu/acrn.c
+@@ -18,6 +18,7 @@
+ #include <asm/hypervisor.h>
+ #include <asm/idtentry.h>
+ #include <asm/irq_regs.h>
++#include <asm/traps.h>
  
- #ifndef __ASSEMBLY__
-@@ -97,6 +110,8 @@ static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
- 	return fred_info(regs)->edata;
+ static u32 __init acrn_detect(void)
+ {
+@@ -26,8 +27,8 @@ static u32 __init acrn_detect(void)
+ 
+ static void __init acrn_init_platform(void)
+ {
+-	/* Setup the IDT for ACRN hypervisor callback */
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_acrn_hv_callback);
++	/* Install system interrupt handler for ACRN hypervisor callback */
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
+ 
+ 	x86_platform.calibrate_tsc = acrn_get_tsc_khz;
+ 	x86_platform.calibrate_cpu = acrn_get_tsc_khz;
+diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
+index c7969e806c64..134830a7f575 100644
+--- a/arch/x86/kernel/cpu/mshyperv.c
++++ b/arch/x86/kernel/cpu/mshyperv.c
+@@ -28,6 +28,7 @@
+ #include <asm/i8259.h>
+ #include <asm/apic.h>
+ #include <asm/timer.h>
++#include <asm/traps.h>
+ #include <asm/reboot.h>
+ #include <asm/nmi.h>
+ #include <clocksource/hyperv_timer.h>
+@@ -480,19 +481,18 @@ static void __init ms_hyperv_init_platform(void)
+ 	 */
+ 	x86_platform.apic_post_init = hyperv_init;
+ 	hyperv_setup_mmu_ops();
+-	/* Setup the IDT for hypervisor callback */
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_hyperv_callback);
+ 
+-	/* Setup the IDT for reenlightenment notifications */
++	/* Install system interrupt handler for hypervisor callback */
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_hyperv_callback);
++
++	/* Install system interrupt handler for reenlightenment notifications */
+ 	if (ms_hyperv.features & HV_ACCESS_REENLIGHTENMENT) {
+-		alloc_intr_gate(HYPERV_REENLIGHTENMENT_VECTOR,
+-				asm_sysvec_hyperv_reenlightenment);
++		sysvec_install(HYPERV_REENLIGHTENMENT_VECTOR, sysvec_hyperv_reenlightenment);
+ 	}
+ 
+-	/* Setup the IDT for stimer0 */
++	/* Install system interrupt handler for stimer0 */
+ 	if (ms_hyperv.misc_features & HV_STIMER_DIRECT_MODE_AVAILABLE) {
+-		alloc_intr_gate(HYPERV_STIMER0_VECTOR,
+-				asm_sysvec_hyperv_stimer0);
++		sysvec_install(HYPERV_STIMER0_VECTOR, sysvec_hyperv_stimer0);
+ 	}
+ 
+ # ifdef CONFIG_SMP
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 1cceac5984da..12c799412c5d 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -829,7 +829,7 @@ static void __init kvm_guest_init(void)
+ 
+ 	if (kvm_para_has_feature(KVM_FEATURE_ASYNC_PF_INT) && kvmapf) {
+ 		static_branch_enable(&kvm_async_pf_enabled);
+-		alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_kvm_asyncpf_interrupt);
++		sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_kvm_asyncpf_interrupt);
+ 	}
+ 
+ #ifdef CONFIG_SMP
+diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
+index e430a8c47931..9040c7f01c93 100644
+--- a/arch/x86/kernel/traps.c
++++ b/arch/x86/kernel/traps.c
+@@ -1536,6 +1536,12 @@ static system_interrupt_handler system_interrupt_handlers[NR_SYSTEM_VECTORS] = {
+ 
+ #undef SYSV
+ 
++void set_sysvec_handler(unsigned int i, system_interrupt_handler func)
++{
++	BUG_ON(i >= NR_SYSTEM_VECTORS);
++	system_interrupt_handlers[i] = func;
++}
++
+ #endif /* CONFIG_X86_64 */
+ 
+ void __init trap_init(void)
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index c7715f8bd452..16d51338e1f8 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -45,6 +45,7 @@
+ #include <asm/irq.h>
+ #include <asm/io_apic.h>
+ #include <asm/i8259.h>
++#include <asm/traps.h>
+ #include <asm/xen/cpuid.h>
+ #include <asm/xen/pci.h>
+ #endif
+@@ -2249,7 +2250,7 @@ static __init void xen_alloc_callback_vector(void)
+ 		return;
+ 
+ 	pr_info("Xen HVM callback vector for event delivery is enabled\n");
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_xen_hvm_callback);
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_xen_hvm_callback);
  }
- 
-+typedef DECLARE_FRED_HANDLER((*fred_handler));
-+
- #endif /* __ASSEMBLY__ */
- 
- #endif /* CONFIG_X86_FRED */
+ #else
+ void xen_setup_callback_vector(void) {}
 -- 
 2.34.1
 
