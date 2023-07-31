@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32582C07E8C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3266AC07E8D
 	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:03:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572639.896523 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.572648.896556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvn-0002tK-95; Mon, 31 Jul 2023 07:03:03 +0000
+	id 1qQMvq-0003ok-FB; Mon, 31 Jul 2023 07:03:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572639.896523; Mon, 31 Jul 2023 07:03:03 +0000
+Received: by outflank-mailman (output) from mailman id 572648.896556; Mon, 31 Jul 2023 07:03:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvm-0002pL-MC; Mon, 31 Jul 2023 07:03:02 +0000
-Received: by outflank-mailman (input) for mailman id 572639;
- Mon, 31 Jul 2023 07:02:12 +0000
+	id 1qQMvp-0003k7-O6; Mon, 31 Jul 2023 07:03:05 +0000
+Received: by outflank-mailman (input) for mailman id 572648;
+ Mon, 31 Jul 2023 07:02:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMuy-0000iu-7L
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:12 +0000
+ id 1qQMvA-0000iu-Ty
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:24 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29eee602-2f70-11ee-8613-37d641c3527e;
- Mon, 31 Jul 2023 09:02:09 +0200 (CEST)
+ id 329a4bd2-2f70-11ee-8613-37d641c3527e;
+ Mon, 31 Jul 2023 09:02:23 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:01:59 -0700
+ 31 Jul 2023 00:02:12 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:00 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:13 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29eee602-2f70-11ee-8613-37d641c3527e
+X-Inumbo-ID: 329a4bd2-2f70-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786929; x=1722322929;
+  t=1690786943; x=1722322943;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=2rbYs2KdLMV2D8jndr60eRf402MI8mOow/QviwqPNSc=;
-  b=nNlM8I/yp9KSLBodDD1PTyH9qE+LuGseHi6TLUO0EgSF7ynBulOQ980z
-   hKyqnJOhlN35rV1tXbsW8zTuytbj+ZOqA64PKx5mYlSNILWMpyTEGQ5QZ
-   9DYGqo/2tYMZg92aRAFtHRts8WL7TpOJSVA7OYvVLHnUfpEyhelxgEDod
-   240C+kS0XixnCNdBBFO0NjU7Jgk1F8cwf46SlpIZ61638nkZYu8CZYbs6
-   XXXIhvH9KFGak2xriDXAKnLCZVuesckWMPH4DzcTXvZBx8iEatGq3nFJp
-   O6bZE9l7BLBkzROFJrTNyRA4IuONWmcufhg9HJnbfNP+fx4n+2YJXvTz7
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648926"
+  bh=QeZUtDgMAPwFIrdo9TmaG72+ignP6GGIZpxe8B2aw6k=;
+  b=QuUXo2nb07kF44TG969mFLg28G1/4KTubgFPBSjRLmyJ7vTIp0rSbvsl
+   XFiPuxZL4Q/geYa/I2UaJyiFx5mi1CR6naRlvLyukNEd7yXU0y9EYd8Cl
+   Oi3q4c2uSu/JN2B2omLZpu6wAUNAPdtDaaiCezqfsyKCxbQSUCBYTa4n5
+   6X1Ap+fFj/Guudf6c1cBPJxM1/J+ERuuRmXv8XeCbLsCh1l+2LVfOCd0W
+   o5l/t++z+yxhYff7dPHV2rKgXM+Z4fIFXSW90NT+lyzrer4ZH1i1sGg4p
+   6aIoeD+57B02bhHgANDn/jGHEkowA0Z9wHBpos2uXM/jDWEdN/9jF+Hro
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649347"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371648926"
+   d="scan'208";a="371649347"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543389"
+   d="scan'208";a="871543474"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,141 +139,79 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 10/36] x86/fred: Add a new header file for FRED definitions
-Date: Sun, 30 Jul 2023 23:32:51 -0700
-Message-Id: <20230731063317.3720-11-xin3.li@intel.com>
+Subject: [PATCH v9 22/36] x86/fred: Add a double fault entry stub for FRED
+Date: Sun, 30 Jul 2023 23:33:03 -0700
+Message-Id: <20230731063317.3720-23-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+The IDT event delivery of a double fault pushes an error code into the
+orig_ax member of the pt_regs structure, and the error code is passed
+as the second argument of its C-handler exc_double_fault(), although
+the pt_regs structure is already passed as the first argument.
 
-Add a header file for FRED prototypes and definitions.
+The existing IDT double fault asm entry code does the following
 
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+  movq ORIG_RAX(%rsp), %rsi	/* get error code into 2nd argument*/
+  movq $-1, ORIG_RAX(%rsp)	/* no syscall to restart */
+
+to set the orig_ax member to -1 just before calling the C-handler.
+
+X86_TRAP_TS, X86_TRAP_NP, X86_TRAP_SS, X86_TRAP_GP, X86_TRAP_AC and
+X86_TRAP_CP are all handled in the same way because the IDT event
+delivery pushes an error code into their stack frame for them.
+
+The commit d99015b1abbad ("x86: move entry_64.S register saving out of
+the macros") introduced the changes to set orig_ax to -1, but I can't
+see why. Our tests with FRED seem fine if orig_ax is left unchanged
+instead of set to -1. It's probably cleaner and simpler to remove the
+second argument from exc_double_fault() while leave orig_ax unchanged
+to pass the error code inside the first argument, at least on native
+x86_64. That would be a separate, pre-FRED, patch.
+
+For now just add a double fault entry stub for FRED, which simply
+calls the existing exc_double_fault().
+
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
-
-Changes since v6:
-* Replace pt_regs csx flags prefix FRED_CSL_ with FRED_CSX_.
----
- arch/x86/include/asm/fred.h | 104 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 104 insertions(+)
- create mode 100644 arch/x86/include/asm/fred.h
+ arch/x86/include/asm/fred.h | 1 +
+ arch/x86/kernel/traps.c     | 7 +++++++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-new file mode 100644
-index 000000000000..d76e681a806f
---- /dev/null
+index f559dd9dc4f2..bd701ac87528 100644
+--- a/arch/x86/include/asm/fred.h
 +++ b/arch/x86/include/asm/fred.h
-@@ -0,0 +1,104 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Macros for Flexible Return and Event Delivery (FRED)
-+ */
-+
-+#ifndef ASM_X86_FRED_H
-+#define ASM_X86_FRED_H
-+
-+#include <linux/const.h>
-+#include <asm/asm.h>
-+
-+/*
-+ * FRED return instructions
-+ *
-+ * Replace with "ERETS"/"ERETU" once binutils support FRED return instructions.
-+ * The binutils version supporting FRED instructions is still TBD, and will
-+ * update once we have it.
-+ */
-+#define ERETS			_ASM_BYTES(0xf2,0x0f,0x01,0xca)
-+#define ERETU			_ASM_BYTES(0xf3,0x0f,0x01,0xca)
-+
-+/*
-+ * RSP is aligned to a 64-byte boundary before used to push a new stack frame
-+ */
-+#define FRED_STACK_FRAME_RSP_MASK	_AT(unsigned long, (~0x3f))
-+
-+/*
-+ * Event stack level macro for the FRED_STKLVLS MSR.
-+ * Usage example: FRED_STKLVL(X86_TRAP_DF, 3)
-+ * Multiple values can be ORd together.
-+ */
-+#define FRED_STKLVL(v,l)	(_AT(unsigned long, l) << (2*(v)))
-+
-+/* FRED_CONFIG MSR */
-+#define FRED_CONFIG_CSL_MASK		0x3
-+/*
-+ * Used for the return address for call emulation during code patching,
-+ * and measured in 64-byte cache lines.
-+ */
-+#define FRED_CONFIG_REDZONE_AMOUNT	1
-+#define FRED_CONFIG_REDZONE		(_AT(unsigned long, FRED_CONFIG_REDZONE_AMOUNT) << 6)
-+#define FRED_CONFIG_INT_STKLVL(l)	(_AT(unsigned long, l) << 9)
-+#define FRED_CONFIG_ENTRYPOINT(p)	_AT(unsigned long, (p))
-+
-+/*
-+ * FRED event type and vector bit width and counts.
-+ *
-+ * There is space in the stack frame making it possible to extend event type
-+ * and vector fields in the future.
-+ */
-+#define FRED_EVENT_TYPE_BITS		3
-+#define FRED_EVENT_TYPE_COUNT		_BITUL(FRED_EVENT_TYPE_BITS)
-+#define FRED_EVENT_VECTOR_BITS		8
-+#define FRED_EVENT_VECTOR_COUNT		_BITUL(FRED_EVENT_VECTOR_BITS)
-+
-+/* FRED EVENT_TYPE_OTHER vector numbers */
-+#define FRED_SYSCALL			1
-+#define FRED_SYSENTER			2
-+#define FRED_NUM_OTHER_VECTORS		3
-+
-+/* Flags above the SS selector (regs->ssx) */
-+#define FRED_SSX_INTERRUPT_SHADOW_BIT	16
-+#define FRED_SSX_INTERRUPT_SHADOW	_BITUL(FRED_SSX_INTERRUPT_SHADOW_BIT)
-+#define FRED_SSX_SOFTWARE_INITIATED_BIT	17
-+#define FRED_SSX_SOFTWARE_INITIATED	_BITUL(FRED_SSX_SOFTWARE_INITIATED_BIT)
-+#define FRED_SSX_NMI_BIT		18
-+#define FRED_SSX_NMI			_BITUL(FRED_SSX_NMI_BIT)
-+#define FRED_SSX_64_BIT_MODE_BIT	57
-+#define FRED_SSX_64_BIT_MODE		_BITUL(FRED_SSX_64_BIT_MODE_BIT)
-+
+@@ -116,6 +116,7 @@ DECLARE_FRED_HANDLER(fred_exc_nmi);
+ DECLARE_FRED_HANDLER(fred_exc_debug);
+ DECLARE_FRED_HANDLER(fred_exc_page_fault);
+ DECLARE_FRED_HANDLER(fred_exc_machine_check);
++DECLARE_FRED_HANDLER(fred_exc_double_fault);
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
+index b10464966a81..49dd92458eb0 100644
+--- a/arch/x86/kernel/traps.c
++++ b/arch/x86/kernel/traps.c
+@@ -555,6 +555,13 @@ DEFINE_IDTENTRY_DF(exc_double_fault)
+ 	instrumentation_end();
+ }
+ 
 +#ifdef CONFIG_X86_FRED
-+
-+#ifndef __ASSEMBLY__
-+
-+#include <linux/kernel.h>
-+#include <asm/ptrace.h>
-+
-+struct fred_info {
-+	/* Event data: CR2, DR6, ... */
-+	unsigned long edata;
-+	unsigned long resv;
-+};
-+
-+/* Full format of the FRED stack frame */
-+struct fred_frame {
-+	struct pt_regs   regs;
-+	struct fred_info info;
-+};
-+
-+static __always_inline struct fred_info *fred_info(struct pt_regs *regs)
++DEFINE_FRED_HANDLER(fred_exc_double_fault)
 +{
-+	return &container_of(regs, struct fred_frame, regs)->info;
++	exc_double_fault(regs, regs->orig_ax);
 +}
++#endif
 +
-+static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
-+{
-+	return fred_info(regs)->edata;
-+}
-+
-+#endif /* __ASSEMBLY__ */
-+
-+#endif /* CONFIG_X86_FRED */
-+
-+#endif /* ASM_X86_FRED_H */
+ DEFINE_IDTENTRY(exc_bounds)
+ {
+ 	if (notify_die(DIE_TRAP, "bounds", regs, 0,
 -- 
 2.34.1
 
