@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17F5CC001DC
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 12:15:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572960.897128 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7640C001E0
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 12:15:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572963.897158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQRoP-0003rN-T5; Mon, 31 Jul 2023 12:15:45 +0000
+	id 1qQRoR-0004aN-OU; Mon, 31 Jul 2023 12:15:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572960.897128; Mon, 31 Jul 2023 12:15:45 +0000
+Received: by outflank-mailman (output) from mailman id 572963.897158; Mon, 31 Jul 2023 12:15:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQRoP-0003rD-O0; Mon, 31 Jul 2023 12:15:45 +0000
-Received: by outflank-mailman (input) for mailman id 572960;
- Mon, 31 Jul 2023 12:15:43 +0000
+	id 1qQRoR-0004Zo-LK; Mon, 31 Jul 2023 12:15:47 +0000
+Received: by outflank-mailman (input) for mailman id 572963;
+ Mon, 31 Jul 2023 12:15:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VuP2=DR=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1qQRoN-0003r0-NM
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 12:15:43 +0000
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [2a00:1450:4864:20::12f])
+ id 1qQRoQ-0003r0-3A
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 12:15:46 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f79b89dc-2f9b-11ee-b255-6b7b168915f2;
- Mon, 31 Jul 2023 14:15:41 +0200 (CEST)
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-4fe3b86cec1so795803e87.2
- for <xen-devel@lists.xenproject.org>; Mon, 31 Jul 2023 05:15:41 -0700 (PDT)
+ id f9d27e97-2f9b-11ee-b255-6b7b168915f2;
+ Mon, 31 Jul 2023 14:15:45 +0200 (CEST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-4fe3c7f16bbso618996e87.0
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Jul 2023 05:15:45 -0700 (PDT)
 Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- l10-20020ac2430a000000b004fbb1bc1ae0sm2028077lfh.163.2023.07.31.05.15.39
+ l10-20020ac2430a000000b004fbb1bc1ae0sm2028077lfh.163.2023.07.31.05.15.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Jul 2023 05:15:39 -0700 (PDT)
+ Mon, 31 Jul 2023 05:15:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,35 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f79b89dc-2f9b-11ee-b255-6b7b168915f2
+X-Inumbo-ID: f9d27e97-2f9b-11ee-b255-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1690805741; x=1691410541;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Sofim43fiClmTkvykAPI1lYXDzYxAeLBu1kfoTW77BQ=;
-        b=XDK31rNov5YxdjA8GswOCWAHl90VZfrp/JsbiYxM75jAFIoL7AFlLoZev63lvlytbe
-         3cgeTsyBQL6WMHtGk7d+cRE/hHg0V2zYhC7lHOyZPeOMdhQAS2XEKvhec77xMYhTHa/K
-         UsgG9hZglwwURrCGVf6FpUVv0hZXk99AugKcY9joluPuF6jETpBEPYCf+DqA164x+ZUJ
-         eRcVn0xvo2jrxenC5j541CcbZFqxKluZ/l0utvsEZEhIHb8mVxGnGwqHL3/9sljbQ4SK
-         2RbNg3DxIh31BxMj8hSg0O2PeTDk3L/rAf63OmF9VISwI4uufDVB/lz2fAnrfJ3otdA2
-         HPvQ==
+        d=linaro.org; s=google; t=1690805744; x=1691410544;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rFiw8jg7BUWz3gVWuBmPXLW/ZlH0wqkGB//S/ukxL+E=;
+        b=Qmwm9M97izBmwm1GD6NJ6Bhvhd+288hCfhcwIHcm55wS3ig67kJAaYkRGeB7KYqGIF
+         pvlN9gR1TpKDjSpNwApHqe6KaNTRVI0UVb/UigDUqVs9zvYECJxtQRxEax9Bm6RHqkTE
+         oTfuY28Fjm8w4NcVNyxrurfa5493FahG+kGJEUeoPlmrmlv1El4LPD2+80zHxvKMpJJu
+         OgojCGL6dsIqAG+Oh1cNqaTSAWChsOesplW5X4cQmZKe4qqnc5ZhJQGC3NlsbouX1zbc
+         FTBe5XrhQytGeT43SNt2F5zn/P0z2t9nOda0IqRBmXPSfaazINWLs5BWTFbj/HvFOQFM
+         Uq1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690805741; x=1691410541;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Sofim43fiClmTkvykAPI1lYXDzYxAeLBu1kfoTW77BQ=;
-        b=ckaKeLaWHt/cjLw1ZnMfPPCONzRzgkuyz2DipOR8cccf+HeOGSOFY5QLN+B31U8Bob
-         q7kg8Yhg3ZYeeXw3wcwv/lRAv65no/9k6/wzZuVS8Cnj9Hgzx2Wn/IxNnxwbNCWosccn
-         T2QY3yItrfdHRq+hlfVCQI2Qiv4bEwvusaaTCEui3+mT9AkqoO96oyE22iPGqW+zGBTE
-         5gcHXhYRzG4LElg+Lc3DBwF8unR9+3eSUxdSJ9P91Gw7sdWHuomG4dsJi2IdU3l3IpGC
-         sVoVdDHJN4bOry556sEYKZrjHc/c7VESYyTK+r0LOPW3tuIsxfAJOXWfyC+mLuoRNzHK
-         OejA==
-X-Gm-Message-State: ABy/qLZ0Yf+afltXhim3wwmaQWOqXFL9fVZGZ7DVUYwS4U1a3/22UJ4h
-	f4ZVk414dj6fJNfQmA9Hs7s8x5R2f3wKXf07RcA=
-X-Google-Smtp-Source: APBJJlFWi/A7xf0+Dj+bIE4/NR6DUObaD+vi8h4iPq1FsPQ+yOKvISrFeJuvOZMg+5m5EARmYUdYaw==
-X-Received: by 2002:ac2:4652:0:b0:4fd:d9dd:7a1a with SMTP id s18-20020ac24652000000b004fdd9dd7a1amr5493238lfo.31.1690805740547;
-        Mon, 31 Jul 2023 05:15:40 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1690805744; x=1691410544;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rFiw8jg7BUWz3gVWuBmPXLW/ZlH0wqkGB//S/ukxL+E=;
+        b=b90xTgULTXE7pHqXHbYnwvyEFr6xGvI3mVEgh1y0CP3XEzcJPH/X8Olckp19xpooWk
+         HjRTA6C1rqfuSBgSNYhFGmFJ+ySF8om0qdee7hOY1EpS0UH2F84c3WHGSbN99cT4tpt0
+         wLpeaz0kaTY9zWzhfGM2ddHHViF2l4EA0psgf46QLNL/TZwaYqcfGupjX1a6D2VpNPRx
+         sPkVYmJtdQDDdk6frZpYuv/03nMCSgkL19UN/ZNw1iMgC97PkBL7nAK1+EvAAUr/ZGLz
+         vbCDdm+OFRfYTZk2ktB3lkRUZL1Dmux0lOdFwEmwLlQ2pYKPgoTHTlzwrIpi1kJxTAKJ
+         jd5A==
+X-Gm-Message-State: ABy/qLbMFfYyBg9q6l4eZzYq5yOKMyCfiVD2hUOaBCn7xMuHTw25dSPe
+	uWLed3DTK82feIqaE8xDxNxrTUfaNymF2QRXJnk=
+X-Google-Smtp-Source: APBJJlEzvi+DSzU4DDcyxiL5ilCoLcuqx0IiNp6RDvbEy4U+ssR82e1McUCSHJzxgnYrqgDPH6Pp+Q==
+X-Received: by 2002:a05:6512:39c5:b0:4fb:89f2:278e with SMTP id k5-20020a05651239c500b004fb89f2278emr6049815lfu.68.1690805744438;
+        Mon, 31 Jul 2023 05:15:44 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Bertrand.Marquis@arm.com,
@@ -85,345 +86,347 @@ Cc: Bertrand.Marquis@arm.com,
 	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Henry Wang <Henry.Wang@arm.com>,
-	Community Manager <community.manager@xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [XEN PATCH v11 00/14] Xen FF-A mediator
-Date: Mon, 31 Jul 2023 14:15:22 +0200
-Message-Id: <20230731121536.934239-1-jens.wiklander@linaro.org>
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [XEN PATCH v11 03/14] xen/arm: ffa: send guest events to Secure Partitions
+Date: Mon, 31 Jul 2023 14:15:25 +0200
+Message-Id: <20230731121536.934239-4-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230731121536.934239-1-jens.wiklander@linaro.org>
+References: <20230731121536.934239-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi,
+The FF-A specification defines framework messages sent as direct
+requests when certain events occurs. For instance when a VM (guest) is
+created or destroyed. Only SPs which have subscribed to these events
+will receive them. An SP can subscribe to these messages in its
+partition properties.
 
-[Parts of the patchset has been merged already, see the changelog below
-for details.]
+Adds a check that the SP supports the needed FF-A features
+FFA_PARTITION_INFO_GET and FFA_RX_RELEASE.
 
-This patch set adds an FF-A [1] mediator to the TEE mediator framework
-already present in Xen. The FF-A mediator implements the subset of the
-FF-A 1.1 specification needed to communicate with OP-TEE using FF-A as
-transport mechanism instead of SMC/HVC as with the TEE mediator. It allows
-a similar design in OP-TEE as with the TEE mediator where OP-TEE presents
-one virtual partition of itself to each guest in Xen.
+The partition properties of each SP is retrieved with
+FFA_PARTITION_INFO_GET which returns the information in our RX buffer.
+Using FFA_PARTITION_INFO_GET changes the owner of the RX buffer to the
+caller (us), so once we're done with the buffer it must be released
+using FFA_RX_RELEASE before another call can be made.
 
-The FF-A mediator is generic in the sense it has nothing OP-TEE specific
-except that only the subset needed for OP-TEE is implemented so far. The
-hooks needed to inform OP-TEE that a guest is created or destroyed are part
-of the FF-A specification.
-
-It should be possible to extend the FF-A mediator to implement a larger
-portion of the FF-A 1.1 specification without breaking with the way OP-TEE
-is communicated with here. So it should be possible to support any TEE or
-Secure Partition using FF-A as transport with this mediator.
-
-The patches are also available at https://github.com/jenswi-linaro/xen
-branch "xen_ffa_v11".
-
-With help from Bertrand I've integrated this in a test setup with OP-TEE.
-Please check prerequisites at
-https://optee.readthedocs.io/en/latest/building/prerequisites.html
-
-My setup is duplicated using:
-repo init -u https://github.com/jenswi-linaro/manifest.git -m qemu_v8.xml \
-        -b qemu_xen_ffa
-repo sync -j8
-cd build
-make -j8 toolchains
-make -j8 all
-make run-only
-
-Test in dom0 with for instance:
-xtest 1004
-
-at the prompt.
-
-To start up a domu and connect to it do:
-cd /mnt/host/build/qemu_v8/xen
-xl create guest_ffa.cfg
-xl console domu
-
-Then test as usual with "xtest 1004".
-
-The setup uses the branch "ffa" from https://github.com/jenswi-linaro/xen.
-That's currently the same as the "xen_ffa_v11" branch, but the "ffa" branch
-may change later as I update for a new version of the patch set.
-
-[1] https://developer.arm.com/documentation/den0077/latest
-
-Thanks,
-Jens
-
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+---
 v10->v11:
-- Rebased on staging and dropping the following patches that already have
-  been merged:
-  - xen: Introduce arch_domain_teardown()
-  - xen/arm: add TEE teardown to arch_domain_teardown()
-  - xen/arm: smccc: add support for SMCCCv1.2 extended input/output registers
-  - xen/arm: tee: add a primitive FF-A mediator
-  - xen/arm: ffa: add remaining SMC function IDs
-  - xen/arm: ffa: add flags for FFA_PARTITION_INFO_GET
-  - xen/arm: ffa: add defines for framework direct request/response messages
-  - xen/arm: ffa: enforce dependency on 4k pages
-  - xen/arm: ffa: add support for FFA_ID_GET
-- Dropping "xen/arm: ffa: support sharing large memory ranges" since it's
-  quite complicated and FF-A still works for OP-TEE
-- Changelog in each of the patches
+- Addressing comments and fixing a few style issues
+- Fixing how is_in_subscr_list() is used, it's supposed to take an
+  sp_id, not a vm_id.
+---
+ xen/arch/arm/tee/ffa.c | 234 ++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 233 insertions(+), 1 deletion(-)
 
-v9->v10:
-Changelog in the the patches for two changed patches:
-- "xen: Introduce arch_domain_teardown()"
-- "xen/arm: add TEE teardown to arch_domain_teardown()"
-
-v8->v9:
-* Patch "xen/arm: ffa: add remaining SMC function IDs"
-  - mention the documentation number used
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-* Patch "xen/arm: ffa: add flags for FFA_PARTITION_INFO_GET"
-  - Adding a reference to the documentation
-  - Renaming FFA_PART_PROP_IS_MASK to FFA_PART_PROP_IS_TYPE_MASK
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-* Patch "xen/arm: ffa: add defines for framework direct request/response messages"
-  - add a reference to the documentation
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-* Patch "docs: add Arm FF-A mediator"
-  - Updating the wording as requested.
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-  - Fixing a few typos and adding a reference to the code for a list of
-    limitations
-* Patch "xen/arm: ffa: list current limitations"
-  - Fixing a couple of typos
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-  - Removing an invalid limitation of FFA_RXTX_MAP_*
-* Patch "xen/arm: ffa: add defines for sharing memory"
-  - Fixing a few typos
-  - Adding a reference to the documentation
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-  - Updating FFA_MAX_SHM_PAGE_COUNT to have a safe margin to
-    TEEC_CONFIG_SHAREDMEM_MAX_SIZE
-* Patch "xen/arm: ffa: add direct request support"
-  - Fixing a coding style issue
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-  - Updating the TODO comment about features.
-* Patch "xen/arm: ffa: send guest events to Secure Partitions"
-  - Adding a TODO comment and a limit on the loop in ffa_direct_req_send_vm()
-* Patch "xen/arm: ffa: support mapping guest RX/TX buffers"
-  - Change FFA_MAX_RXTX_PAGE_COUNT to 1 with a TODO for a larger value
-  - Replace !p2m_is_ram(t) test with t != p2m_ram_rw
-  - Rename the introduced field tx_is_free to tx_is_free
-* Patch "xen/arm: ffa: support sharing memory"
-  - Fixing read_atomic() issue in get_shm_pages()
-  - Fixing style issue in free_ffa_shm_mem()
-  - Replace !p2m_is_ram(t) test with t != p2m_ram_rw in get_shm_pages()
-* Patch "tools: add Arm FF-A mediator"
-  - Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-  - Adding Acked-by: Anthony PERARD <anthony.perard@citrix.com>
-  - Moving the patch to just before the docs patch.
-* Adding Reviewed-by: Henry Wang <Henry.Wang@arm.com to:
-  - "xen/arm: ffa: enforce dependency on 4k pages"
-  - "xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h"
-  - "xen/arm: ffa: add ABI structs for sharing memory"
-* Adding "xen: Introduce arch_domain_teardown()" by Andrew Cooper
-* Adding "xen/arm: add TEE teardown to arch_domain_teardown()" 
-  based on a patch from Andrew Cooper
-
-v7->v8:
-* Adding "xen/arm: ffa: list current limitations" as requested
-* Adding tags to "xen/arm: smccc: add support for SMCCCv1.2 extended
-  input/output registers"
-* Patch "xen/arm: tee: add a primitive FF-A mediator":
-  - Changing license for ffa.h and ffa.c to GPL-2.0-only
-  - Avoiding IS_ENABLED() in the constant FFA_NR_FUNCS
-  - Accepting version 1.1 SPMC only to keep things simple
-  - Removes 32bit and only supports 64bit to keep things simple
-* Patch "tools: add Arm FF-A mediator"
-  - Adding Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-  - Adding LIBXL_HAVE_BUILDINFO_ARCH_ARM_TEE_FFA for the "ffa" value 
-    in arch_arm.tee
-* Patch "docs: add Arm FF-A mediator"
-  - Fixing a spell error
-  - Moving the patch last in the series
-* Patch "xen/arm: ffa: add remaining SMC function IDs"
-  - Adding Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-  - Renaming the define FFA_MSG_RUN to FFA_RUN to match the specification
-* Patch "xen/arm: ffa: add flags for FFA_PARTITION_INFO_GET"
-  - Updating the comment describing the flags for FFA_PARTITION_INFO_GET
-* Patch "xen/arm: ffa: add defines for framework direct request/response
-  messages"
-  - Updating the comment describing the flags for MSG_SEND_DIRECT_REQ/RESP
-* Patch "xen/arm: ffa: enforce dependency on 4k pages"
-  - Updating title of patch
-  - Adding Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-* Patch "xen/arm: ffa: add support for FFA_ID_GET"
-  - In ffa_domain_init(), check that domain_id isn't greater than
-    UINT16_MAX to avoid a future potential integer overflow in get_vm_id()
-* Patch "xen/arm: ffa: add direct request support"
-  - Move preemption (interrupted) parts to a separate patch "xen/arm: ffa:
-    support preemption of SP during direct request"
-  - Remove loop in handle_msg_send_direct_req() to return eventual
-    errors back to the VM instead of the SP.
-* Patch "xen/arm: ffa: map SPMC rx/tx buffers"
-  - Adding a FFA_RXTX_PAGE_COUNT define instead of using 1 directly
-* New patch "xen/arm: ffa: support preemption of SP during direct request"
-* Patch "xen/arm: ffa: send guest events to Secure Partitions"
-  - Replacing unsigned int with uint16_t for subscr_vm_created_count and
-    subscr_vm_destroyed_count plus the needed range check to see that
-    they don't overflow.
-* Patch "xen/arm: ffa: support mapping guest RX/TX buffers"
-  - Limit the number of pages in VM RX/TX buffers to 32 using a new
-    FFA_MAX_RXTX_PAGE_COUNT define.
-* Patch "xen/arm: ffa: support guest FFA_PARTITION_INFO_GET"
-  - Renaming tx_is_mine to rx_is_free as requested
-  - Simplified the FFA_PARTITION_INFO_GET_COUNT_FLAG check in
-    handle_partition_info_get()
-  - Adding a comment on ownership of the RX buffer
-  - Adding the patch "xen/arm: ffa: improve lock granularity" to address
-    parts of the locking concerns.
-* Patch "xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h"
-  - Adding Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-* Patch "xen/arm: ffa: add defines for sharing memory"
-  - Fixing reference for FFA_NORMAL_MEM_REG_ATTR and FFA_MEM_ACC_RW
-  - Updating descirption for FFA_MAX_SHM_PAGE_COUNT
-* Patch "xen/arm: ffa: add ABI structs for sharing memory"
-  - Changing name of the "global_handle" memeber in struct
-    ffa_mem_transaction_* to "handle".
-* Patch "xen/arm: ffa: support sharing memory"
-  - Use FFA_MEM_SHARE_64 only since we changed to only suporting ARM_64.
-  - Rename struct ffa_mem_transaction_x to struct ffa_mem_transaction_int
-    as requested.
-  - Adding a check that shm->page_count isn't 0 before calling share_shm()
-  - Masking return value from FFA_MEM_FRAG_RX to avoid an implic cast to
-    the int32_t returned by ffa_mem_share().
-* Patch "xen/arm: ffa: add support to reclaim shared memory"
-  - Adding Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-* Patch "xen/arm: ffa: support sharing large memory ranges"
-  - Adding commetns for struct ffa_ctx
-  - Cleaning up and removing the fragmentation state if handle_mem_frag_tx()
-    detects an error.
-* Adding "xen/arm: ffa: improve lock granularity" to address some of the
-  locking concerns.
-
-v6->v7:
-* Split some of the larger patches into smaller patches for easier review.
-  For instance, the v6 patch "xen/arm: add a primitive FF-A mediator" has
-  been replaced with:
-  - "xen/arm: add a primitive FF-A mediator"
-  - "tools: add Arm FF-A mediator"
-  - "docs: add Arm FF-A mediator"
-  - "xen/arm: ffa: add remaining SMC function IDs"
-* Some small fixes in the error path for handle_mem_share()
-* Switched to SPDX for license in new files.
-* Fixed comment style issues in
-  "xen/arm: smccc: add support for SMCCCv1.2 extended input/output registers"
-* Made FFA support UNSUPPORTED in "xen/arm: add a primitive FF-A mediator"
-* Replaced ffa_get_call_count() with FFA_NR_FUNCS
-* Update the FFA_MAX_SHM_PAGE_COUNT with a formula instead of a value.
-* Replaced XEN_ARM_FLAGS_FFA with XEN_DOMCTL_CONFIG_TEE_FFA to minimize impact
-  on struct xen_arch_domainconfig. This works because the FF-A mediator and
-  the OP-TEE mediator will not be used at the same time in by a guest.
-* Replaced "ffa" boolean in the guest config with a new "ffa" value to the
-  enumeration "tee_type".
-* Integrated the FF-A mediator in the TEE mediator framework instead of
-  being its own.
-* Rebased on staging as of 2023-02-16
-
-v5->v6:
-* Updated "xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h"
-  commit message and moved the patch right before the patch which needs it.
-  Applied Michal Orzel's R-B tag.
-* Renamed the guest configuration option "ffa_enabled" to "ffa" and
-  updated the description.
-* More tools update in "xen/arm: add a primitive FF-A mediator" with the "ffa"
-  option, including golang and ocaml.
-* Update ffa_domain_init() to return an error if communication with
-  the SPMC can't be established.
-* Factored out a ffa_domain_destroy() from ffa_relinquish_resources().
-* Added ffa_get_call_count() to give an accurate number of FF-A function,
-  updated in each patch as new FF-A functions are added.
-* Added a flags field in struct xen_arch_domainconfig that replaces the
-  ffa_enabled field.
-* Made check_mandatory_feature() __init
-* Replaced a few printk() calls with gprintk() where needed.
-* Rebased on staging as of 2022-09-14
-
-V4->v5:
-* Added "xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h"
-* Added documentation for the "ffa_enabled" guest config flag
-* Changed to GPL license for xen/arch/arm/ffa.c
-* Added __read_mostly and const where applicable
-* Added more describing comments in the code
-* Moved list of shared memory object ("ffa_mem_list") into the guest context
-  as they are guest specific
-* Simplified a few of the simple wrapper functions for SMC to SPMC
-* Added a BUILD_BUG_ON(PAGE_SIZE != FFA_PAGE_SIZE) since the mediator
-  currently depends on the page size to be same as FFA_PAGE_SIZE (4k).
-* Added max number of shared memory object per guest and max number of
-  size of each shared memory object
-* Added helper macros to calculate offsets of different FF-A data structures
-  in the communication buffer instead of relying on pointer arithmetic
-* Addressed style issues and other comments
-* Broke the commit "xen/arm: add FF-A mediator" into multiple parts, trying
-  to add a few features at a time as requested
-* Added a missing call to rxtx_unmap() in ffa_relinquish_resources()
-* Assignment of "ffa_enabled" is kept as is until I have something definitive
-  on the type etc.
-* Tested with CONFIG_DEBUG=y
-
-v3->v4:
-* Missed v3 and sent a v4 instead by mistake.
-
-v2->v3:
-* Generates offsets into struct arm_smccc_1_2_regs with asm-offsets.c in
-  order to avoid hard coded offsets in the assembly function
-  arm_smccc_1_2_smc()
-* Adds an entry in SUPPORT.md on the FF-A status
-* Adds a configuration variable "ffa_enabled" to tell if FF-A should be
-  enabled for a particular domu guest
-* Moves the ffa_frag_list for fragmented memory share requests into
-  struct ffa_ctx instead to keep it per guest in order to avoid mixups
-  and simplify locking
-* Adds a spinlock to struct ffa_ctx for per guest locking
-* Addressing style issues and suggestions
-* Uses FFA_FEATURES to check that all the needed features are available
-  before initializing the mediator
-* Rebased on staging as of 2022-06-20
-
-v1->v2:
-* Rebased on staging to resolve some merge conflicts as requested
-
-Jens Wiklander (14):
-  xen/arm: ffa: add direct request support
-  xen/arm: ffa: map SPMC rx/tx buffers
-  xen/arm: ffa: send guest events to Secure Partitions
-  xen/arm: ffa: support mapping guest RX/TX buffers
-  xen/arm: ffa: support guest FFA_PARTITION_INFO_GET
-  xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h
-  xen/arm: ffa: add defines for sharing memory
-  xen/arm: ffa: add ABI structs for sharing memory
-  xen/arm: ffa: support sharing memory
-  xen/arm: ffa: add support to reclaim shared memory
-  xen/arm: ffa: improve lock granularity
-  xen/arm: ffa: list current limitations
-  tools: add Arm FF-A mediator
-  docs: add Arm FF-A mediator
-
- CHANGELOG.md                     |    3 +-
- SUPPORT.md                       |    9 +
- docs/man/xl.cfg.5.pod.in         |   15 +
- tools/include/libxl.h            |    5 +
- tools/libs/light/libxl_arm.c     |    3 +
- tools/libs/light/libxl_types.idl |    3 +-
- xen/arch/arm/include/asm/regs.h  |   12 +
- xen/arch/arm/tee/ffa.c           | 1411 ++++++++++++++++++++++++++++++
- xen/arch/arm/tee/optee.c         |   11 -
- 9 files changed, 1459 insertions(+), 13 deletions(-)
-
+diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+index 072198a1326d..5af3e5eedc88 100644
+--- a/xen/arch/arm/tee/ffa.c
++++ b/xen/arch/arm/tee/ffa.c
+@@ -160,14 +160,33 @@
+ #define FFA_MSG_SEND                    0x8400006EU
+ #define FFA_MSG_POLL                    0x8400006AU
+ 
++/* Partition information descriptor */
++struct ffa_partition_info_1_1 {
++    uint16_t id;
++    uint16_t execution_context;
++    uint32_t partition_properties;
++    uint8_t uuid[16];
++};
++
+ struct ffa_ctx {
+     /* FF-A version used by the guest */
+     uint32_t guest_vers;
++    /*
++     * Number of SPs that we have sent a VM created signal to, used in
++     * ffa_domain_teardown() to know which SPs need to be signalled.
++     */
++    uint16_t create_signal_count;
+ };
+ 
+ /* Negotiated FF-A version to use with the SPMC */
+ static uint32_t __ro_after_init ffa_version;
+ 
++/* SPs subscribing to VM_CREATE and VM_DESTROYED events */
++static uint16_t *subscr_vm_created __read_mostly;
++static uint16_t subscr_vm_created_count __read_mostly;
++static uint16_t *subscr_vm_destroyed __read_mostly;
++static uint16_t subscr_vm_destroyed_count __read_mostly;
++
+ /*
+  * Our rx/tx buffers shared with the SPMC. FFA_RXTX_PAGE_COUNT is the
+  * number of pages used in each of these buffers.
+@@ -251,6 +270,87 @@ static int32_t ffa_rxtx_map(paddr_t tx_addr, paddr_t rx_addr,
+     return ffa_simple_call(FFA_RXTX_MAP_64, tx_addr, rx_addr, page_count, 0);
+ }
+ 
++static int32_t ffa_partition_info_get(uint32_t w1, uint32_t w2, uint32_t w3,
++                                      uint32_t w4, uint32_t w5,
++                                      uint32_t *count)
++{
++    const struct arm_smccc_1_2_regs arg = {
++        .a0 = FFA_PARTITION_INFO_GET,
++        .a1 = w1,
++        .a2 = w2,
++        .a3 = w3,
++        .a4 = w4,
++        .a5 = w5,
++    };
++    struct arm_smccc_1_2_regs resp;
++    uint32_t ret;
++
++    arm_smccc_1_2_smc(&arg, &resp);
++
++    ret = get_ffa_ret_code(&resp);
++    if ( !ret )
++        *count = resp.a2;
++
++    return ret;
++}
++
++static int32_t ffa_rx_release(void)
++{
++    return ffa_simple_call(FFA_RX_RELEASE, 0, 0, 0, 0);
++}
++
++static int32_t ffa_direct_req_send_vm(uint16_t sp_id, uint16_t vm_id,
++                                      uint8_t msg)
++{
++    uint32_t exp_resp = FFA_MSG_FLAG_FRAMEWORK;
++    unsigned int retry_count = 0;
++    int32_t res;
++
++    if ( msg == FFA_MSG_SEND_VM_CREATED )
++        exp_resp |= FFA_MSG_RESP_VM_CREATED;
++    else if ( msg == FFA_MSG_SEND_VM_DESTROYED )
++        exp_resp |= FFA_MSG_RESP_VM_DESTROYED;
++    else
++        return FFA_RET_INVALID_PARAMETERS;
++
++    do {
++        const struct arm_smccc_1_2_regs arg = {
++            .a0 = FFA_MSG_SEND_DIRECT_REQ_32,
++            .a1 = sp_id,
++            .a2 = FFA_MSG_FLAG_FRAMEWORK | msg,
++            .a5 = vm_id,
++        };
++        struct arm_smccc_1_2_regs resp;
++
++        arm_smccc_1_2_smc(&arg, &resp);
++        if ( resp.a0 != FFA_MSG_SEND_DIRECT_RESP_32 || resp.a2 != exp_resp )
++        {
++            /*
++             * This is an invalid response, likely due to some error in the
++             * implementation of the ABI.
++             */
++            return FFA_RET_INVALID_PARAMETERS;
++        }
++        res = resp.a3;
++        if ( ++retry_count > 10 )
++        {
++            /*
++             * TODO
++             * FFA_RET_INTERRUPTED means that the SPMC has a pending
++             * non-secure interrupt, we need a way of delivering that
++             * non-secure interrupt.
++             * FFA_RET_RETRY is the SP telling us that it's temporarily
++             * blocked from handling the direct request, we need a generic
++             * way to deal with this.
++             * For now in both cases, give up after a few retries.
++             */
++            return res;
++        }
++    } while ( res == FFA_RET_INTERRUPTED || res == FFA_RET_RETRY );
++
++    return res;
++}
++
+ static uint16_t get_vm_id(const struct domain *d)
+ {
+     /* +1 since 0 is reserved for the hypervisor in FF-A */
+@@ -374,6 +474,8 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
+ static int ffa_domain_init(struct domain *d)
+ {
+     struct ffa_ctx *ctx;
++    unsigned int n;
++    int32_t res;
+ 
+     if ( !ffa_version )
+         return -ENODEV;
+@@ -390,17 +492,68 @@ static int ffa_domain_init(struct domain *d)
+ 
+     d->arch.tee = ctx;
+ 
++    for ( n = 0; n < subscr_vm_created_count; n++ )
++    {
++        res = ffa_direct_req_send_vm(subscr_vm_created[n], get_vm_id(d),
++                                     FFA_MSG_SEND_VM_CREATED);
++        if ( res )
++        {
++            printk(XENLOG_ERR "ffa: Failed to report creation of vm_id %u to  %u: res %d\n",
++                   get_vm_id(d), subscr_vm_created[n], res);
++            ctx->create_signal_count = n;
++            return -EIO;
++        }
++    }
++    ctx->create_signal_count = subscr_vm_created_count;
++
+     return 0;
+ }
+ 
++static bool is_in_subscr_list(const uint16_t *subscr, uint16_t start,
++                              uint16_t end, uint16_t sp_id)
++{
++    unsigned int n;
++
++    for ( n = start; n < end; n++ )
++    {
++        if ( subscr[n] == sp_id )
++            return true;
++    }
++
++    return false;
++}
++
+ /* This function is supposed to undo what ffa_domain_init() has done */
+ static int ffa_domain_teardown(struct domain *d)
+ {
+     struct ffa_ctx *ctx = d->arch.tee;
++    unsigned int n;
++    int32_t res;
+ 
+     if ( !ctx )
+         return 0;
+ 
++
++    for ( n = 0; n < subscr_vm_destroyed_count; n++ )
++    {
++        /*
++         * Skip SPs subscribed to the VM created event that never was
++         * notified of the VM creation due to an error during
++         * ffa_domain_init().
++         */
++        if ( is_in_subscr_list(subscr_vm_created, ctx->create_signal_count,
++                               subscr_vm_created_count,
++                               subscr_vm_destroyed[n]) )
++            continue;
++
++        res = ffa_direct_req_send_vm(subscr_vm_destroyed[n], get_vm_id(d),
++                                     FFA_MSG_SEND_VM_DESTROYED);
++
++        if ( res )
++            printk(XENLOG_ERR "ffa: Failed to report destruction of vm_id %u to  %u: res %d\n",
++                   get_vm_id(d), subscr_vm_destroyed[n], res);
++    }
++
+     XFREE(d->arch.tee);
+ 
+     return 0;
+@@ -411,6 +564,81 @@ static int ffa_relinquish_resources(struct domain *d)
+     return 0;
+ }
+ 
++static void uninit_subscribers(void)
++{
++        subscr_vm_created_count = 0;
++        subscr_vm_destroyed_count = 0;
++        XFREE(subscr_vm_created);
++        XFREE(subscr_vm_destroyed);
++}
++
++static bool init_subscribers(struct ffa_partition_info_1_1 *fpi, uint16_t count)
++{
++    uint16_t n;
++    uint16_t c_pos;
++    uint16_t d_pos;
++
++    subscr_vm_created_count = 0;
++    subscr_vm_destroyed_count = 0;
++    for ( n = 0; n < count; n++ )
++    {
++        if ( fpi[n].partition_properties & FFA_PART_PROP_NOTIF_CREATED )
++            subscr_vm_created_count++;
++        if ( fpi[n].partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
++            subscr_vm_destroyed_count++;
++    }
++
++    if ( subscr_vm_created_count )
++        subscr_vm_created = xzalloc_array(uint16_t, subscr_vm_created_count);
++    if ( subscr_vm_destroyed_count )
++        subscr_vm_destroyed = xzalloc_array(uint16_t,
++                                            subscr_vm_destroyed_count);
++    if ( (subscr_vm_created_count && !subscr_vm_created) ||
++         (subscr_vm_destroyed_count && !subscr_vm_destroyed) )
++    {
++        printk(XENLOG_ERR "ffa: Failed to allocate subscription lists\n");
++        uninit_subscribers();
++        return false;
++    }
++
++    for ( c_pos = 0, d_pos = 0, n = 0; n < count; n++ )
++    {
++        if ( fpi[n].partition_properties & FFA_PART_PROP_NOTIF_CREATED )
++            subscr_vm_created[c_pos++] = fpi[n].id;
++        if ( fpi[n].partition_properties & FFA_PART_PROP_NOTIF_DESTROYED )
++            subscr_vm_destroyed[d_pos++] = fpi[n].id;
++    }
++
++    return true;
++}
++
++static bool init_sps(void)
++{
++    bool ret = false;
++    uint32_t count;
++    int e;
++
++    e = ffa_partition_info_get(0, 0, 0, 0, 0, &count);
++    if ( e )
++    {
++        printk(XENLOG_ERR "ffa: Failed to get list of SPs: %d\n", e);
++        goto out;
++    }
++
++    if ( count >= UINT16_MAX )
++    {
++        printk(XENLOG_ERR "ffa: Impossible number of SPs: %u\n", count);
++        goto out;
++    }
++
++    ret = init_subscribers(ffa_rx, count);
++
++out:
++    ffa_rx_release();
++
++    return ret;
++}
++
+ static bool ffa_probe(void)
+ {
+     uint32_t vers;
+@@ -462,7 +690,8 @@ static bool ffa_probe(void)
+      * TODO: Rework the code to allow domain to use a subset of the
+      * features supported.
+      */
+-    if (
++    if ( !check_mandatory_feature(FFA_PARTITION_INFO_GET) ||
++         !check_mandatory_feature(FFA_RX_RELEASE) ||
+          !check_mandatory_feature(FFA_RXTX_MAP_64) ||
+          !check_mandatory_feature(FFA_RXTX_UNMAP) ||
+          !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
+@@ -484,6 +713,9 @@ static bool ffa_probe(void)
+     }
+     ffa_version = vers;
+ 
++    if ( !init_sps() )
++        goto err_free_ffa_tx;
++
+     return true;
+ 
+ err_free_ffa_tx:
 -- 
 2.34.1
 
