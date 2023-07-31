@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DACA2C001DF
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:08:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572686.896668 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B954DC001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:08:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572687.896678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0U-00056k-UI; Mon, 31 Jul 2023 07:07:54 +0000
+	id 1qQN0X-0005UY-7J; Mon, 31 Jul 2023 07:07:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572686.896668; Mon, 31 Jul 2023 07:07:54 +0000
+Received: by outflank-mailman (output) from mailman id 572687.896678; Mon, 31 Jul 2023 07:07:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0U-00056T-R9; Mon, 31 Jul 2023 07:07:54 +0000
-Received: by outflank-mailman (input) for mailman id 572686;
- Mon, 31 Jul 2023 07:07:53 +0000
+	id 1qQN0X-0005UG-3e; Mon, 31 Jul 2023 07:07:57 +0000
+Received: by outflank-mailman (input) for mailman id 572687;
+ Mon, 31 Jul 2023 07:07:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMv9-0000hs-J1
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:23 +0000
+ id 1qQMv4-0000hs-Db
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:18 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 31a357b3-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:22 +0200 (CEST)
+ id 2f4ac32f-2f70-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:02:17 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:02:11 -0700
+ 31 Jul 2023 00:02:07 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:12 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:07 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31a357b3-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 2f4ac32f-2f70-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786942; x=1722322942;
+  t=1690786937; x=1722322937;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=dQPbDjEqQWsCazdenr4wm1/cp/YJX7zOnAx3X5niG4Q=;
-  b=BiyLKgnzmGgaii2j2tnzTHQ7wjZGhw/aOhWEE86YWroNQNDOe9I3EKQp
-   W6Zq15e0ReQZcRPjRslHBSSA8nygh8NmfV25/jwoCcHiKW5RNmYN167y4
-   WkhXDHLbbihGnhxi7X4NiwGVQ4V75FIDEXyMjZWIzNIgz0ojV+Gf1wETe
-   k8AhdJNy6HR3fjUJ2HegcPvgrx1yKzUxEPMnZWCaAe9FCAq012OyzBYVQ
-   zt2dwBsws6HNwWbdVU4XyEwU+hVqNrbYzlKAli2bQEvPRoM0Zi7MLrZwU
-   F0a+JyPEULRvlU+Un+xU7kpRWAgmuzh9Lnit2mssOYww13RuVYhFLnond
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649311"
+  bh=1h9fTPNcW28O8bu/nclSFH4GxPR5CW0Rl9/PbASKNuY=;
+  b=iF6eXrfrOnoSm19j9AZjAPSyHUnFeiB/czSt48vp9UlmImF8ID+G6TsU
+   dUP2nUs2eatyVRuhInmPTuTgY6UOVwNHm0OjW+kDV4/esPNOdfdhqwFjj
+   lTtL1SpIuYVoVctsagsOgFvVDCd4gWUMGmzGHOVEtbspB91eIcw2ciVTm
+   Xlzj9dJfpkOmeeRPEGHDaGM52MbcBOse+aAq+I2b0wt3Kl98tv0FjeONp
+   vU/3fv+if1piUIVPljaQovfVv91vroviHnEaHVQsprvmF0KdiOBGC8QfZ
+   HokLzzTU4tHznCSDXCOiqTs4pGD7Tcqeog6lFsgOokAhRoJUhVs9vPMjz
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649175"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371649311"
+   d="scan'208";a="371649175"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543470"
+   d="scan'208";a="871543443"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,73 +139,66 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 21/36] x86/fred: Add a machine check entry stub for FRED
-Date: Sun, 30 Jul 2023 23:33:02 -0700
-Message-Id: <20230731063317.3720-22-xin3.li@intel.com>
+Subject: [PATCH v9 17/36] x86/fred: Define a common function type fred_handler
+Date: Sun, 30 Jul 2023 23:32:58 -0700
+Message-Id: <20230731063317.3720-18-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a machine check entry stub for FRED.
+FRED event delivery establishes a full supervisor context by saving
+the essential information about an event to a FRED stack frame, e.g.,
+the faulting linear address of a #PF is saved as event data of a FRED
+stack frame. Thus a struct pt_regs has all the needed data to handle
+an event and it's the only input argument of a FRED event handler.
 
-Tested-by: Shan Kang <shan.kang@intel.com>
+Define fred_handler, a common function type used in the FRED event
+dispatch framework, which makes it easier to find the entry points
+(via grep), allows the prototype to change if necessary without
+requiring changing changes everywhere, and makes sure that all the
+entry points have the proper decorations (currently noinstr, but
+could change in the future.)
+
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
-
-Changes since v5:
-* Disallow #DB inside #MCE for robustness sake (Peter Zijlstra).
----
- arch/x86/include/asm/fred.h    |  1 +
- arch/x86/kernel/cpu/mce/core.c | 15 +++++++++++++++
- 2 files changed, 16 insertions(+)
+ arch/x86/include/asm/fred.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
 diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-index 2a7c47dfd733..f559dd9dc4f2 100644
+index d76e681a806f..b45c1bea5b7f 100644
 --- a/arch/x86/include/asm/fred.h
 +++ b/arch/x86/include/asm/fred.h
-@@ -115,6 +115,7 @@ typedef DECLARE_FRED_HANDLER((*fred_handler));
- DECLARE_FRED_HANDLER(fred_exc_nmi);
- DECLARE_FRED_HANDLER(fred_exc_debug);
- DECLARE_FRED_HANDLER(fred_exc_page_fault);
-+DECLARE_FRED_HANDLER(fred_exc_machine_check);
+@@ -68,6 +68,19 @@
+ #define FRED_SSX_64_BIT_MODE_BIT	57
+ #define FRED_SSX_64_BIT_MODE		_BITUL(FRED_SSX_64_BIT_MODE_BIT)
  
++/*
++ * FRED event delivery establishes a full supervisor context by
++ * saving the essential information about an event to a FRED
++ * stack frame, e.g., the faulting linear address of a #PF is
++ * saved as event data of a FRED #PF stack frame. Thus a struct
++ * pt_regs has all the needed data to handle an event and it's
++ * the only input argument of a FRED event handler.
++ *
++ * FRED handlers need to be placed in the noinstr text section.
++ */
++#define DECLARE_FRED_HANDLER(f) void f (struct pt_regs *regs)
++#define DEFINE_FRED_HANDLER(f) noinstr DECLARE_FRED_HANDLER(f)
++
+ #ifdef CONFIG_X86_FRED
+ 
+ #ifndef __ASSEMBLY__
+@@ -97,6 +110,8 @@ static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
+ 	return fred_info(regs)->edata;
+ }
+ 
++typedef DECLARE_FRED_HANDLER((*fred_handler));
++
  #endif /* __ASSEMBLY__ */
  
-diff --git a/arch/x86/kernel/cpu/mce/core.c b/arch/x86/kernel/cpu/mce/core.c
-index b8ad5a5b4026..98456e20f155 100644
---- a/arch/x86/kernel/cpu/mce/core.c
-+++ b/arch/x86/kernel/cpu/mce/core.c
-@@ -52,6 +52,7 @@
- #include <asm/mce.h>
- #include <asm/msr.h>
- #include <asm/reboot.h>
-+#include <asm/fred.h>
- 
- #include "internal.h"
- 
-@@ -2118,6 +2119,20 @@ DEFINE_IDTENTRY_MCE_USER(exc_machine_check)
- 	exc_machine_check_user(regs);
- 	local_db_restore(dr7);
- }
-+
-+#ifdef CONFIG_X86_FRED
-+DEFINE_FRED_HANDLER(fred_exc_machine_check)
-+{
-+	unsigned long dr7;
-+
-+	dr7 = local_db_save();
-+	if (user_mode(regs))
-+		exc_machine_check_user(regs);
-+	else
-+		exc_machine_check_kernel(regs);
-+	local_db_restore(dr7);
-+}
-+#endif
- #else
- /* 32bit unified entry point */
- DEFINE_IDTENTRY_RAW(exc_machine_check)
+ #endif /* CONFIG_X86_FRED */
 -- 
 2.34.1
 
