@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC59C001DC
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 17:07:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573304.897937 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E8BC001DE
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 17:08:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573320.897987 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQWMr-0000oi-GV; Mon, 31 Jul 2023 17:07:37 +0000
+	id 1qQWN6-0003Hz-7L; Mon, 31 Jul 2023 17:07:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573304.897937; Mon, 31 Jul 2023 17:07:37 +0000
+Received: by outflank-mailman (output) from mailman id 573320.897987; Mon, 31 Jul 2023 17:07:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQWMr-0000nQ-6o; Mon, 31 Jul 2023 17:07:37 +0000
-Received: by outflank-mailman (input) for mailman id 573304;
- Mon, 31 Jul 2023 17:07:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qQWN5-0003Go-TU; Mon, 31 Jul 2023 17:07:51 +0000
+Received: by outflank-mailman (input) for mailman id 573320;
+ Mon, 31 Jul 2023 17:07:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=d7tO=DR=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1qQWJd-0008Np-1u
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 17:04:17 +0000
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [2607:f8b0:4864:20::b2c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4708122c-2fc4-11ee-8613-37d641c3527e;
- Mon, 31 Jul 2023 19:04:15 +0200 (CEST)
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-d29a5f7dc74so3268155276.3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Jul 2023 10:04:15 -0700 (PDT)
+ id 1qQWJo-0000C0-BL
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 17:04:28 +0000
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [2607:f8b0:4864:20::b33])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4e6019b4-2fc4-11ee-b255-6b7b168915f2;
+ Mon, 31 Jul 2023 19:04:27 +0200 (CEST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-d16639e16e6so3788726276.3
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Jul 2023 10:04:27 -0700 (PDT)
 Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
  by smtp.googlemail.com with ESMTPSA id
- x31-20020a25ac9f000000b00c832ad2e2eesm2511833ybi.60.2023.07.31.10.04.12
+ x31-20020a25ac9f000000b00c832ad2e2eesm2511833ybi.60.2023.07.31.10.04.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Jul 2023 10:04:13 -0700 (PDT)
+ Mon, 31 Jul 2023 10:04:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4708122c-2fc4-11ee-8613-37d641c3527e
+X-Inumbo-ID: 4e6019b4-2fc4-11ee-b255-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690823054; x=1691427854;
+        d=gmail.com; s=20221208; t=1690823066; x=1691427866;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1W6z1I6yvWrQZbHmgHYBEGZZDstSbvELOPET/EcKlKw=;
-        b=DoLYDaRBa41Zdh1yGELvr4mktDPzCr5wZMtfaOFQzQ5hTcfRkcfNo2gxzOD+0/ykOM
-         euBOcnH4+UQlm104MdM8Mcd6Wd+0oXQ7r2d8C7k16OxK93xpXJQ9cxidNEnw+09+Tsgn
-         4MiJbaZ4azooZbJym/w2spQi4ZLNoUGyQvzF+yt3P/maH4DT1bEGYtqh5RJ+6A+RSiNZ
-         F4VZO0F3scHf9jVdMvyffz9Y4Un+dZzmqLUFBUExZqr5BTOKTZ3vKrNuYiRkZjRgx8qM
-         A0v2BAwmzAgXUoHV1OBdUh/BQxSYjg1Y5Vc+ifw6djIqa1GbEqCTgLRTuyk3SSeDHWhN
-         ZcIA==
+        bh=DOzSOLTncjJXn0AvJQqE6PD7zrtBe8MIuyz5zw7TzDY=;
+        b=f6adceAKsPvui0l7VSUiRnWj+VnC8V29gRyKPW/KXba4L11duKnXDkkl9h+DOUEe82
+         /+uFEmkPUA7pfwVfanOSjRVPX3wfPLVY3FZPvGi3VyyqlsToEnHzzIylic2yHwlsDcH3
+         W3JP9R5mJExPbkEH69AGyH0gizw4AowCqMoujs5LGqqMzZnJK/dPFOzk0elvmdxwimx1
+         zHO/RBskNqXdsMC9zN3IXGN1/Qatnc3KRzwrgmn/b1CAPxkc6smcQgcPCS+F4TUkpdDt
+         7sG/wG+FEbTCZLXxJ46EURhFx988hfZQfl6N1HhCumdsXb4Bqj21mhmFktRwf8yfQcyF
+         sVPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690823054; x=1691427854;
+        d=1e100.net; s=20221208; t=1690823066; x=1691427866;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1W6z1I6yvWrQZbHmgHYBEGZZDstSbvELOPET/EcKlKw=;
-        b=QOoLRrO4kNjbucoAbySdE62uGp8pYr1JdptiJSU3pQEGwV1L+IRTPX9n8BQpnX3lBI
-         B5P/UTBq920j5UrAy3fpdgbAdOBiMGTDzwPCwBnUuSciJ5wddpVqrqBt3kF3aUEIO1KJ
-         FI/hZKLwOT0KAHgoGRKXHudY2vNEK5S+PEy9LOnOmXhTnUbptRvcSfMgLnD2NgU4ZX/b
-         X3DVtrfbFZHfVM9XelSzatk5FiWVAOuvqlZ7BHnCqUD5kMSfIT/3m3YHBwJGtVJ6wLwJ
-         /gCmKnCHIQrW0NRxjwEbes0e2eFRF56kEX4T48ACVnfe317J+VyrpDIxtYEieif5br6w
-         LkBw==
-X-Gm-Message-State: ABy/qLYBxqRqYC8UQxEIJpG6+n6PNxHN0WRFoh1zhAiRb7xXekneM4Yq
-	UCgVnqpBDqyiZ4I7gp3SV24=
-X-Google-Smtp-Source: APBJJlEdpRjJyqAaQhaJuPKqzpefz2AFbwFC7sVhDBH7lQjGs0g9KoyKRkFSzeflgvIaUwqu4lunqA==
-X-Received: by 2002:a25:b08d:0:b0:d11:2a52:3f35 with SMTP id f13-20020a25b08d000000b00d112a523f35mr11488364ybj.20.1690823054136;
-        Mon, 31 Jul 2023 10:04:14 -0700 (PDT)
+        bh=DOzSOLTncjJXn0AvJQqE6PD7zrtBe8MIuyz5zw7TzDY=;
+        b=XRuMWbP4d99OYfo5ZzjXAXeMo1Qc+kTamUOL6YYJ+B1v8kRv/zP5n5EZ/9P8/Hk3NT
+         8Qv78NGc4zgQrqJ0aqvzNv/RDw2XcCwZf0VtZZ50yom5N0MMI5hxRLItX8nJSXDIdCDy
+         +AfY12nnQRL1YY+VRxilfQmgkFh5DLX3GJ1fFjjlQKf2teTwpSuXEd2pXnYygbj2Pnqr
+         SNNUqUDRvubtcdcfGcy/98HbjcOrbryTEuRndonR2Ofrs72emGs69LCqfpo5WbRehL61
+         5J3OeOb1zo3w1v2xtg9FPouZsrnaD1HfOJACZyoJgHKee3jNSUqKCUfxoAPc5wlWeY0P
+         3mtQ==
+X-Gm-Message-State: ABy/qLbVoghxRQ/7buBJTLDIka5myKkdSC+DV1dApWntSSD4UKFm1EWx
+	O6W8UjsSVv86gcfs0o57v1Y=
+X-Google-Smtp-Source: APBJJlE4T05ogdyrjIbBXTs0RpkDVTPnYG3Ig2UA6lH+KuSSQ9n98n0kBdmmWfFoFgc9s9NgVox+UA==
+X-Received: by 2002:a25:ada4:0:b0:d0a:8973:b1c with SMTP id z36-20020a25ada4000000b00d0a89730b1cmr247583ybi.12.1690823066447;
+        Mon, 31 Jul 2023 10:04:26 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Matthew Wilcox <willy@infradead.org>
@@ -100,94 +100,45 @@ Cc: linux-mm@kvack.org,
 	Hugh Dickins <hughd@google.com>,
 	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
 	Mike Rapoport <rppt@kernel.org>,
-	Catalin Marinas <catalin.marinas@arm.com>
-Subject: [PATCH mm-unstable v8 18/31] arm64: Convert various functions to use ptdescs
-Date: Mon, 31 Jul 2023 10:03:19 -0700
-Message-Id: <20230731170332.69404-19-vishal.moola@gmail.com>
+	Dinh Nguyen <dinguyen@kernel.org>
+Subject: [PATCH mm-unstable v8 24/31] nios2: Convert __pte_free_tlb() to use ptdescs
+Date: Mon, 31 Jul 2023 10:03:25 -0700
+Message-Id: <20230731170332.69404-25-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230731170332.69404-1-vishal.moola@gmail.com>
 References: <20230731170332.69404-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As part of the conversions to replace pgtable constructor/destructors with
-ptdesc equivalents, convert various page table functions to use ptdescs.
+Part of the conversions to replace pgtable constructor/destructors with
+ptdesc equivalents.
 
 Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
 Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
-Acked-by: Catalin Marinas <catalin.marinas@arm.com>
+Acked-by: Dinh Nguyen <dinguyen@kernel.org>
 ---
- arch/arm64/include/asm/tlb.h | 14 ++++++++------
- arch/arm64/mm/mmu.c          |  7 ++++---
- 2 files changed, 12 insertions(+), 9 deletions(-)
+ arch/nios2/include/asm/pgalloc.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/include/asm/tlb.h b/arch/arm64/include/asm/tlb.h
-index c995d1f4594f..2c29239d05c3 100644
---- a/arch/arm64/include/asm/tlb.h
-+++ b/arch/arm64/include/asm/tlb.h
-@@ -75,18 +75,20 @@ static inline void tlb_flush(struct mmu_gather *tlb)
- static inline void __pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte,
- 				  unsigned long addr)
- {
--	pgtable_pte_page_dtor(pte);
--	tlb_remove_table(tlb, pte);
-+	struct ptdesc *ptdesc = page_ptdesc(pte);
-+
-+	pagetable_pte_dtor(ptdesc);
-+	tlb_remove_ptdesc(tlb, ptdesc);
- }
+diff --git a/arch/nios2/include/asm/pgalloc.h b/arch/nios2/include/asm/pgalloc.h
+index ecd1657bb2ce..ce6bb8e74271 100644
+--- a/arch/nios2/include/asm/pgalloc.h
++++ b/arch/nios2/include/asm/pgalloc.h
+@@ -28,10 +28,10 @@ static inline void pmd_populate(struct mm_struct *mm, pmd_t *pmd,
  
- #if CONFIG_PGTABLE_LEVELS > 2
- static inline void __pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmdp,
- 				  unsigned long addr)
- {
--	struct page *page = virt_to_page(pmdp);
-+	struct ptdesc *ptdesc = virt_to_ptdesc(pmdp);
+ extern pgd_t *pgd_alloc(struct mm_struct *mm);
  
--	pgtable_pmd_page_dtor(page);
--	tlb_remove_table(tlb, page);
-+	pagetable_pmd_dtor(ptdesc);
-+	tlb_remove_ptdesc(tlb, ptdesc);
- }
- #endif
+-#define __pte_free_tlb(tlb, pte, addr)				\
+-	do {							\
+-		pgtable_pte_page_dtor(pte);			\
+-		tlb_remove_page((tlb), (pte));			\
++#define __pte_free_tlb(tlb, pte, addr)					\
++	do {								\
++		pagetable_pte_dtor(page_ptdesc(pte));			\
++		tlb_remove_page_ptdesc((tlb), (page_ptdesc(pte)));	\
+ 	} while (0)
  
-@@ -94,7 +96,7 @@ static inline void __pmd_free_tlb(struct mmu_gather *tlb, pmd_t *pmdp,
- static inline void __pud_free_tlb(struct mmu_gather *tlb, pud_t *pudp,
- 				  unsigned long addr)
- {
--	tlb_remove_table(tlb, virt_to_page(pudp));
-+	tlb_remove_ptdesc(tlb, virt_to_ptdesc(pudp));
- }
- #endif
- 
-diff --git a/arch/arm64/mm/mmu.c b/arch/arm64/mm/mmu.c
-index 95d360805f8a..47781bec6171 100644
---- a/arch/arm64/mm/mmu.c
-+++ b/arch/arm64/mm/mmu.c
-@@ -426,6 +426,7 @@ static phys_addr_t __pgd_pgtable_alloc(int shift)
- static phys_addr_t pgd_pgtable_alloc(int shift)
- {
- 	phys_addr_t pa = __pgd_pgtable_alloc(shift);
-+	struct ptdesc *ptdesc = page_ptdesc(phys_to_page(pa));
- 
- 	/*
- 	 * Call proper page table ctor in case later we need to
-@@ -433,12 +434,12 @@ static phys_addr_t pgd_pgtable_alloc(int shift)
- 	 * this pre-allocated page table.
- 	 *
- 	 * We don't select ARCH_ENABLE_SPLIT_PMD_PTLOCK if pmd is
--	 * folded, and if so pgtable_pmd_page_ctor() becomes nop.
-+	 * folded, and if so pagetable_pte_ctor() becomes nop.
- 	 */
- 	if (shift == PAGE_SHIFT)
--		BUG_ON(!pgtable_pte_page_ctor(phys_to_page(pa)));
-+		BUG_ON(!pagetable_pte_ctor(ptdesc));
- 	else if (shift == PMD_SHIFT)
--		BUG_ON(!pgtable_pmd_page_ctor(phys_to_page(pa)));
-+		BUG_ON(!pagetable_pmd_ctor(ptdesc));
- 
- 	return pa;
- }
+ #endif /* _ASM_NIOS2_PGALLOC_H */
 -- 
 2.40.1
 
