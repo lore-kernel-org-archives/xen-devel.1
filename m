@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA0FC001DC
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:07:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572680.896658 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DACA2C001DF
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:08:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572686.896668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0Q-0004W1-E1; Mon, 31 Jul 2023 07:07:50 +0000
+	id 1qQN0U-00056k-UI; Mon, 31 Jul 2023 07:07:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572680.896658; Mon, 31 Jul 2023 07:07:50 +0000
+Received: by outflank-mailman (output) from mailman id 572686.896668; Mon, 31 Jul 2023 07:07:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN0Q-0004Vt-B3; Mon, 31 Jul 2023 07:07:50 +0000
-Received: by outflank-mailman (input) for mailman id 572680;
- Mon, 31 Jul 2023 07:07:48 +0000
+	id 1qQN0U-00056T-R9; Mon, 31 Jul 2023 07:07:54 +0000
+Received: by outflank-mailman (input) for mailman id 572686;
+ Mon, 31 Jul 2023 07:07:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMv1-0000hs-B2
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:15 +0000
+ id 1qQMv9-0000hs-J1
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:23 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2d8364a7-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:14 +0200 (CEST)
+ id 31a357b3-2f70-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:02:22 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:02:03 -0700
+ 31 Jul 2023 00:02:11 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:04 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:02:12 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d8364a7-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 31a357b3-2f70-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786934; x=1722322934;
+  t=1690786942; x=1722322942;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=sycVsd87zmfA3yJCdcgOgrxd4mm6nSq5VT1UdIRGngQ=;
-  b=ezfaFIjsoAjRlZeP5ypMnjJEjXCe45dxgAgZ0oIizMTfTKHPYroBeVKW
-   sZIp4OrCMHILpMcY1s4UUd0LHsqps1y8Ruif7U86H85g7aVePo0PE3qeO
-   YoKqGWTcb1ddawS/IUe53j4AS1g17zeu56qKDiYyl32HkERak2BINu4Ro
-   viylJPuG9lzsNkG37OcVSOJCcsIeJogVJ8iMNCvHWXLVubIxSZBlRBoQX
-   5DUF/hwKJXeCLPPMgNOqMbY5XmNOpiALvRrcSCKtgpYiGBNijU5OYU44M
-   7BOCa1MB7BXbmoi7I8lFb1QeVX1vkokNe2y3yNB6MiZZ3ibJfeWm1AUll
+  bh=dQPbDjEqQWsCazdenr4wm1/cp/YJX7zOnAx3X5niG4Q=;
+  b=BiyLKgnzmGgaii2j2tnzTHQ7wjZGhw/aOhWEE86YWroNQNDOe9I3EKQp
+   W6Zq15e0ReQZcRPjRslHBSSA8nygh8NmfV25/jwoCcHiKW5RNmYN167y4
+   WkhXDHLbbihGnhxi7X4NiwGVQ4V75FIDEXyMjZWIzNIgz0ojV+Gf1wETe
+   k8AhdJNy6HR3fjUJ2HegcPvgrx1yKzUxEPMnZWCaAe9FCAq012OyzBYVQ
+   zt2dwBsws6HNwWbdVU4XyEwU+hVqNrbYzlKAli2bQEvPRoM0Zi7MLrZwU
+   F0a+JyPEULRvlU+Un+xU7kpRWAgmuzh9Lnit2mssOYww13RuVYhFLnond
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649065"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371649311"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371649065"
+   d="scan'208";a="371649311"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543425"
+   d="scan'208";a="871543470"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,67 +139,73 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 14/36] x86/fred: Disallow the swapgs instruction when FRED is enabled
-Date: Sun, 30 Jul 2023 23:32:55 -0700
-Message-Id: <20230731063317.3720-15-xin3.li@intel.com>
+Subject: [PATCH v9 21/36] x86/fred: Add a machine check entry stub for FRED
+Date: Sun, 30 Jul 2023 23:33:02 -0700
+Message-Id: <20230731063317.3720-22-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+Add a machine check entry stub for FRED.
 
-The FRED architecture establishes the full supervisor/user through:
-1) FRED event delivery from ring 3 swaps the value of the GS base
-   address and that of the IA32_KERNEL_GS_BASE MSR.
-2) ERETU swaps the value of the GS base address and that of the
-   IA32_KERNEL_GS_BASE MSR.
-3) LKGS is already upstreamed and automatically enabled with FRED to
-   load the GS base address directly into the IA32_KERNEL_GS_BASE MSR
-   instead of the GS segment’s descriptor cache.
-
-As a result, there is no need to SWAPGS away from the kernel GS base,
-i.e., the swapgs instruction is no longer needed when FRED is enabled,
-thus is disallowed. Otherwise it causes #UD.
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Changes since v8:
-* Explain why writing directly to the IA32_KERNEL_GS_BASE MSR is
-  doing the right thing (Thomas Gleixner).
+Changes since v5:
+* Disallow #DB inside #MCE for robustness sake (Peter Zijlstra).
 ---
- arch/x86/kernel/process_64.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/fred.h    |  1 +
+ arch/x86/kernel/cpu/mce/core.c | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+)
 
-diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
-index 265ab8fcb146..6d5fed29f552 100644
---- a/arch/x86/kernel/process_64.c
-+++ b/arch/x86/kernel/process_64.c
-@@ -166,7 +166,8 @@ static noinstr unsigned long __rdgsbase_inactive(void)
+diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
+index 2a7c47dfd733..f559dd9dc4f2 100644
+--- a/arch/x86/include/asm/fred.h
++++ b/arch/x86/include/asm/fred.h
+@@ -115,6 +115,7 @@ typedef DECLARE_FRED_HANDLER((*fred_handler));
+ DECLARE_FRED_HANDLER(fred_exc_nmi);
+ DECLARE_FRED_HANDLER(fred_exc_debug);
+ DECLARE_FRED_HANDLER(fred_exc_page_fault);
++DECLARE_FRED_HANDLER(fred_exc_machine_check);
  
- 	lockdep_assert_irqs_disabled();
+ #endif /* __ASSEMBLY__ */
  
--	if (!cpu_feature_enabled(X86_FEATURE_XENPV)) {
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED) &&
-+	    !cpu_feature_enabled(X86_FEATURE_XENPV)) {
- 		native_swapgs();
- 		gsbase = rdgsbase();
- 		native_swapgs();
-@@ -191,7 +192,8 @@ static noinstr void __wrgsbase_inactive(unsigned long gsbase)
- {
- 	lockdep_assert_irqs_disabled();
+diff --git a/arch/x86/kernel/cpu/mce/core.c b/arch/x86/kernel/cpu/mce/core.c
+index b8ad5a5b4026..98456e20f155 100644
+--- a/arch/x86/kernel/cpu/mce/core.c
++++ b/arch/x86/kernel/cpu/mce/core.c
+@@ -52,6 +52,7 @@
+ #include <asm/mce.h>
+ #include <asm/msr.h>
+ #include <asm/reboot.h>
++#include <asm/fred.h>
  
--	if (!cpu_feature_enabled(X86_FEATURE_XENPV)) {
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED) &&
-+	    !cpu_feature_enabled(X86_FEATURE_XENPV)) {
- 		native_swapgs();
- 		wrgsbase(gsbase);
- 		native_swapgs();
+ #include "internal.h"
+ 
+@@ -2118,6 +2119,20 @@ DEFINE_IDTENTRY_MCE_USER(exc_machine_check)
+ 	exc_machine_check_user(regs);
+ 	local_db_restore(dr7);
+ }
++
++#ifdef CONFIG_X86_FRED
++DEFINE_FRED_HANDLER(fred_exc_machine_check)
++{
++	unsigned long dr7;
++
++	dr7 = local_db_save();
++	if (user_mode(regs))
++		exc_machine_check_user(regs);
++	else
++		exc_machine_check_kernel(regs);
++	local_db_restore(dr7);
++}
++#endif
+ #else
+ /* 32bit unified entry point */
+ DEFINE_IDTENTRY_RAW(exc_machine_check)
 -- 
 2.34.1
 
