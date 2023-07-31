@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B180C001DF
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:10:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572719.896738 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDEB3C001DC
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:10:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.572723.896768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN2r-0001is-5I; Mon, 31 Jul 2023 07:10:21 +0000
+	id 1qQN2u-0002Wx-5e; Mon, 31 Jul 2023 07:10:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572719.896738; Mon, 31 Jul 2023 07:10:21 +0000
+Received: by outflank-mailman (output) from mailman id 572723.896768; Mon, 31 Jul 2023 07:10:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQN2r-0001ij-1R; Mon, 31 Jul 2023 07:10:21 +0000
-Received: by outflank-mailman (input) for mailman id 572719;
- Mon, 31 Jul 2023 07:10:19 +0000
+	id 1qQN2u-0002W6-0c; Mon, 31 Jul 2023 07:10:24 +0000
+Received: by outflank-mailman (input) for mailman id 572723;
+ Mon, 31 Jul 2023 07:10:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQN2p-00082R-IE
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:10:19 +0000
+ id 1qQN2s-00082R-Is
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:10:22 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d45415c-2f71-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:10:18 +0200 (CEST)
+ id 4e1eb71b-2f71-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:10:20 +0200 (CEST)
 Received: from fmsmga004.fm.intel.com ([10.253.24.48])
  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:10:12 -0700
+ 31 Jul 2023 00:10:13 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga004.fm.intel.com with ESMTP; 31 Jul 2023 00:10:07 -0700
+ by fmsmga004.fm.intel.com with ESMTP; 31 Jul 2023 00:10:09 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d45415c-2f71-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 4e1eb71b-2f71-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690787418; x=1722323418;
+  t=1690787420; x=1722323420;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=QJo+FdezOu/7r5CtwRnG6EayDGJs/agjxSi0oClRDik=;
-  b=LfoXMB8r+hnUS/QoVdG9KsBj24ApZYT41lva79JWYPpJFqsbH3//e7Ri
-   ct1Q3BCelxp8i786I4ILda5ygS5ta3um0Nm5P0MxcgPZymcnmBffnMOR6
-   al9dE5Epiv4qK8CYURR2OcnTZStzSxLzGjx5Jl0JlMI4/MgTXPwHaQm84
-   JtifLBFPjG4JhVawC1ikNAng46K5g6/Uiu8Eq8mRa/JejWJHo1gY2sFLa
-   4f43jcoluu03A58dTNcjWyMGMqI8h0f6GO+SgTmC/M/mX6+X6oqbARyvc
-   5Rhbr8zaFDQmjl/p30frqFvSsg3EvoSDB5RuQwQ9rXksOsugaLWvly4Wd
+  bh=nRz3qqnddKXYmfF22m/o97+CO0o46xEgUK6odjAvUmY=;
+  b=aHSiz+tu5rimEGmJNwK1yDTcD8u1Vaal46D3lmli46lf5T/d8Lw0F4C+
+   qETYOVhJLPF/na5vsBFoADpUf6iP+j2O5j4DAg26LRBPEn9MnU97v9A7T
+   Cg41EdbEm3EJ9JgL/Fu+LjCaDqx32+cxxYm1/MnOQzwg3fstTiiAHgDvS
+   G3SLPBDvKmKsSaLauPPVyxunHSkHBtXq6riZDVzXChTZsyeRYsyL8eB0c
+   17dxGI7VUdY32TolGEty1erbdnjnJt+sR/pNrodtiDE9EIh2AkO6kiqhS
+   ga+AP4Zn0qtj+skHz2vh3Dnko1+Z/BIBSalGQlF4MC/99FYYbGmKGlgTS
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="432750104"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="432750173"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="432750104"
+   d="scan'208";a="432750173"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="798157781"
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="798157787"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="798157781"
+   d="scan'208";a="798157787"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -140,39 +140,218 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 31/36] x86/traps: Export external_interrupt() for handling IRQ in IRQ induced VM exits
-Date: Sun, 30 Jul 2023 23:41:28 -0700
-Message-Id: <20230731064133.3881-2-xin3.li@intel.com>
+Subject: [PATCH v9 33/36] KVM: VMX: Add VMX_DO_FRED_EVENT_IRQOFF for IRQ/NMI handling
+Date: Sun, 30 Jul 2023 23:41:30 -0700
+Message-Id: <20230731064133.3881-4-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731064133.3881-1-xin3.li@intel.com>
 References: <20230731064133.3881-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Export external_interrupt() for handling IRQ in IRQ induced VM exits.
+Compared to an IDT stack frame, a FRED stack frame has extra 16 bytes of
+information pushed at the regular stack top and 8 bytes of error code _always_
+pushed at the regular stack bottom, add VMX_DO_FRED_EVENT_IRQOFF to generate
+FRED stack frames with event type and vector properly set. Thus, IRQ/NMI can
+be handled with the existing approach when FRED is enabled.
+
+For IRQ handling, general purpose registers are pushed to the stack to form
+a pt_regs structure, which is then used to call external_interrupt(). As a
+result, IRQ handling no longer re-enters the noinstr code.
 
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/kernel/traps.c | 5 +++++
- 1 file changed, 5 insertions(+)
 
-diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
-index 90fdfcccee7a..6143ad56008e 100644
---- a/arch/x86/kernel/traps.c
-+++ b/arch/x86/kernel/traps.c
-@@ -1560,6 +1560,11 @@ int external_interrupt(struct pt_regs *regs)
- 	return 0;
- }
+Changes since v8:
+* Add a new macro VMX_DO_FRED_EVENT_IRQOFF for FRED instead of refactoring
+  VMX_DO_EVENT_IRQOFF (Sean Christopherson).
+* Do NOT use a trampoline, just LEA+PUSH the return RIP, PUSH the error code,
+  and jump to the FRED kernel entry point for NMI or call external_interrupt()
+  for IRQs (Sean Christopherson).
+* Call external_interrupt() only when FRED is enabled, and convert the non-FRED
+  handling to external_interrupt() after FRED lands (Sean Christopherson).
+---
+ arch/x86/kvm/vmx/vmenter.S | 88 ++++++++++++++++++++++++++++++++++++++
+ arch/x86/kvm/vmx/vmx.c     | 19 ++++++--
+ 2 files changed, 104 insertions(+), 3 deletions(-)
+
+diff --git a/arch/x86/kvm/vmx/vmenter.S b/arch/x86/kvm/vmx/vmenter.S
+index 07e927d4d099..5ee6a57b59a5 100644
+--- a/arch/x86/kvm/vmx/vmenter.S
++++ b/arch/x86/kvm/vmx/vmenter.S
+@@ -2,12 +2,14 @@
+ #include <linux/linkage.h>
+ #include <asm/asm.h>
+ #include <asm/bitsperlong.h>
++#include <asm/fred.h>
+ #include <asm/kvm_vcpu_regs.h>
+ #include <asm/nospec-branch.h>
+ #include <asm/percpu.h>
+ #include <asm/segment.h>
+ #include "kvm-asm-offsets.h"
+ #include "run_flags.h"
++#include "../../entry/calling.h"
  
-+#if IS_ENABLED(CONFIG_KVM_INTEL)
-+/* For KVM VMX to handle IRQs in IRQ induced VM exits. */
-+EXPORT_SYMBOL_GPL(external_interrupt);
+ #define WORD_SIZE (BITS_PER_LONG / 8)
+ 
+@@ -31,6 +33,80 @@
+ #define VCPU_R15	__VCPU_REGS_R15 * WORD_SIZE
+ #endif
+ 
++#ifdef CONFIG_X86_FRED
++.macro VMX_DO_FRED_EVENT_IRQOFF branch_insn branch_target nmi=0
++	/*
++	 * Unconditionally create a stack frame, getting the correct RSP on the
++	 * stack (for x86-64) would take two instructions anyways, and RBP can
++	 * be used to restore RSP to make objtool happy (see below).
++	 */
++	push %_ASM_BP
++	mov %_ASM_SP, %_ASM_BP
++
++	/*
++	 * Don't check the FRED stack level, the call stack leading to this
++	 * helper is effectively constant and shallow (relatively speaking).
++	 *
++	 * Emulate the FRED-defined redzone and stack alignment.
++	 */
++	sub $(FRED_CONFIG_REDZONE_AMOUNT << 6), %rsp
++	and $FRED_STACK_FRAME_RSP_MASK, %rsp
++
++	/*
++	 * A FRED stack frame has extra 16 bytes of information pushed at the
++	 * regular stack top compared to an IDT stack frame.
++	 */
++	push $0		/* Reserved by FRED, must be 0 */
++	push $0		/* FRED event data, 0 for NMI and external interrupts */
++
++	shl $32, %rdi				/* FRED event type and vector */
++	.if \nmi
++	bts $FRED_SSX_NMI_BIT, %rdi		/* Set the NMI bit */
++	.endif
++	bts $FRED_SSX_64_BIT_MODE_BIT, %rdi	/* Set the 64-bit mode */
++	or $__KERNEL_DS, %rdi
++	push %rdi
++	push %rbp
++	pushf
++	mov $__KERNEL_CS, %rax
++	push %rax
++
++	/*
++	 * Unlike the IDT event delivery, FRED _always_ pushes an error code
++	 * after pushing the return RIP, thus the CALL instruction CANNOT be
++	 * used here to push the return RIP, otherwise there is no chance to
++	 * push an error code before invoking the IRQ/NMI handler.
++	 *
++	 * Use LEA to get the return RIP and push it, then push an error code.
++	 */
++	lea 1f(%rip), %rax
++	push %rax
++	push $0		/* FRED error code, 0 for NMI and external interrupts */
++
++	.if \nmi == 0
++	PUSH_REGS
++	mov %rsp, %rdi
++	.endif
++
++	\branch_insn \branch_target
++
++	.if \nmi == 0
++	POP_REGS
++	.endif
++
++1:
++	/*
++	 * "Restore" RSP from RBP, even though IRET has already unwound RSP to
++	 * the correct value.  objtool doesn't know the callee will IRET and,
++	 * without the explicit restore, thinks the stack is getting walloped.
++	 * Using an unwind hint is problematic due to x86-64's dynamic alignment.
++	 */
++	mov %_ASM_BP, %_ASM_SP
++	pop %_ASM_BP
++	RET
++.endm
 +#endif
 +
- #endif /* CONFIG_X86_64 */
+ .macro VMX_DO_EVENT_IRQOFF call_insn call_target
+ 	/*
+ 	 * Unconditionally create a stack frame, getting the correct RSP on the
+@@ -299,6 +375,12 @@ SYM_INNER_LABEL_ALIGN(vmx_vmexit, SYM_L_GLOBAL)
  
- void __init trap_init(void)
+ SYM_FUNC_END(__vmx_vcpu_run)
+ 
++#ifdef CONFIG_X86_FRED
++SYM_FUNC_START(vmx_do_fred_nmi_irqoff)
++	VMX_DO_FRED_EVENT_IRQOFF jmp fred_entrypoint_kernel nmi=1
++SYM_FUNC_END(vmx_do_fred_nmi_irqoff)
++#endif
++
+ SYM_FUNC_START(vmx_do_nmi_irqoff)
+ 	VMX_DO_EVENT_IRQOFF call asm_exc_nmi_kvm_vmx
+ SYM_FUNC_END(vmx_do_nmi_irqoff)
+@@ -357,6 +439,12 @@ SYM_FUNC_START(vmread_error_trampoline)
+ SYM_FUNC_END(vmread_error_trampoline)
+ #endif
+ 
++#ifdef CONFIG_X86_FRED
++SYM_FUNC_START(vmx_do_fred_interrupt_irqoff)
++	VMX_DO_FRED_EVENT_IRQOFF call external_interrupt
++SYM_FUNC_END(vmx_do_fred_interrupt_irqoff)
++#endif
++
+ SYM_FUNC_START(vmx_do_interrupt_irqoff)
+ 	VMX_DO_EVENT_IRQOFF CALL_NOSPEC _ASM_ARG1
+ SYM_FUNC_END(vmx_do_interrupt_irqoff)
+diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
+index 0ecf4be2c6af..4e90c69a92bf 100644
+--- a/arch/x86/kvm/vmx/vmx.c
++++ b/arch/x86/kvm/vmx/vmx.c
+@@ -6890,6 +6890,14 @@ static void vmx_apicv_post_state_restore(struct kvm_vcpu *vcpu)
+ 	memset(vmx->pi_desc.pir, 0, sizeof(vmx->pi_desc.pir));
+ }
+ 
++#ifdef CONFIG_X86_FRED
++void vmx_do_fred_interrupt_irqoff(unsigned int vector);
++void vmx_do_fred_nmi_irqoff(unsigned int vector);
++#else
++#define vmx_do_fred_interrupt_irqoff(x) BUG()
++#define vmx_do_fred_nmi_irqoff(x) BUG()
++#endif
++
+ void vmx_do_interrupt_irqoff(unsigned long entry);
+ void vmx_do_nmi_irqoff(void);
+ 
+@@ -6932,14 +6940,16 @@ static void handle_external_interrupt_irqoff(struct kvm_vcpu *vcpu)
+ {
+ 	u32 intr_info = vmx_get_intr_info(vcpu);
+ 	unsigned int vector = intr_info & INTR_INFO_VECTOR_MASK;
+-	gate_desc *desc = (gate_desc *)host_idt_base + vector;
+ 
+ 	if (KVM_BUG(!is_external_intr(intr_info), vcpu->kvm,
+ 	    "unexpected VM-Exit interrupt info: 0x%x", intr_info))
+ 		return;
+ 
+ 	kvm_before_interrupt(vcpu, KVM_HANDLING_IRQ);
+-	vmx_do_interrupt_irqoff(gate_offset(desc));
++	if (cpu_feature_enabled(X86_FEATURE_FRED))
++		vmx_do_fred_interrupt_irqoff(vector);	/* Event type is 0 */
++	else
++		vmx_do_interrupt_irqoff(gate_offset((gate_desc *)host_idt_base + vector));
+ 	kvm_after_interrupt(vcpu);
+ 
+ 	vcpu->arch.at_instruction_boundary = true;
+@@ -7225,7 +7235,10 @@ static noinstr void vmx_vcpu_enter_exit(struct kvm_vcpu *vcpu,
+ 	if ((u16)vmx->exit_reason.basic == EXIT_REASON_EXCEPTION_NMI &&
+ 	    is_nmi(vmx_get_intr_info(vcpu))) {
+ 		kvm_before_interrupt(vcpu, KVM_HANDLING_NMI);
+-		vmx_do_nmi_irqoff();
++		if (cpu_feature_enabled(X86_FEATURE_FRED))
++			vmx_do_fred_nmi_irqoff((EVENT_TYPE_NMI << 16) | NMI_VECTOR);
++		else
++			vmx_do_nmi_irqoff();
+ 		kvm_after_interrupt(vcpu);
+ 	}
+ 
 -- 
 2.34.1
 
