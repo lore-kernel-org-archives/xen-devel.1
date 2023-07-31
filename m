@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7368C04E69
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3236C04A94
 	for <xen-devel@archiver.kernel.org>; Mon, 31 Jul 2023 07:03:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.572622.896449 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.572627.896473 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvi-0001AC-TK; Mon, 31 Jul 2023 07:02:58 +0000
+	id 1qQMvk-0001la-10; Mon, 31 Jul 2023 07:03:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 572622.896449; Mon, 31 Jul 2023 07:02:58 +0000
+Received: by outflank-mailman (output) from mailman id 572627.896473; Mon, 31 Jul 2023 07:02:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQMvi-00018L-K5; Mon, 31 Jul 2023 07:02:58 +0000
-Received: by outflank-mailman (input) for mailman id 572622;
- Mon, 31 Jul 2023 07:02:05 +0000
+	id 1qQMvj-0001j8-QB; Mon, 31 Jul 2023 07:02:59 +0000
+Received: by outflank-mailman (input) for mailman id 572627;
+ Mon, 31 Jul 2023 07:02:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8T0J=DR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQMur-0000hs-A7
- for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:05 +0000
+ id 1qQMut-0000hs-AV
+ for xen-devel@lists.xenproject.org; Mon, 31 Jul 2023 07:02:07 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.24])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 27813696-2f70-11ee-b254-6b7b168915f2;
- Mon, 31 Jul 2023 09:02:04 +0200 (CEST)
+ id 28444133-2f70-11ee-b254-6b7b168915f2;
+ Mon, 31 Jul 2023 09:02:05 +0200 (CEST)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jul 2023 00:01:53 -0700
+ 31 Jul 2023 00:01:55 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:01:54 -0700
+ by fmsmga001.fm.intel.com with ESMTP; 31 Jul 2023 00:01:56 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,26 +43,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27813696-2f70-11ee-b254-6b7b168915f2
+X-Inumbo-ID: 28444133-2f70-11ee-b254-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690786924; x=1722322924;
+  t=1690786925; x=1722322925;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=tXI/C++YYSo9nyQMGnRVNwF3YsuprVE9KCho8shF7bg=;
-  b=oKkBY9juQMSzrILzvSiqxxPqUVuXAfq646vitouqi/Nthv0nu1GJqIsz
-   PL/NR53vA7ASniMtqUlBAoUWKMpwb7qDeG1eEBpkcRIC1vZv5sNTV5YKR
-   hc0Zoq6OpgRUNYmBgg4S81pcJojfpiT7M/5anj3rOzO8o3/4we8BIXY4S
-   cUDCVFWaTvRX0QMndSE8EiPmAc1IAa3RTnK6m5pr/6A4YgRrIqPnaCzaM
-   xnJUJ3udwk1Rb3mJrhY3Ny/ZRwe8nTMyMqxyuGg8BJTgkQNgryAlYz083
-   HfU5nsWHMXRxHSG/KbpV/WlXjAyqT7k507s/6KmkybzD7mQymSjs+TgTF
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648703"
+  bh=+857ZiZ3kYB9kvyULHXUrCarfExj5Gil+GQ461ib92M=;
+  b=NE4em+KwgK+XoH/U7xVPtrVo6rpE0Dy4VRKTigLSgq2pLWRSRYyeqyT3
+   zk9R/n0uB1yqFlMwabpgzPknIwroSMZGdFeDA9P4INOL8lZO5uj4+qg2f
+   uQ/q13Nh8u59aehP0x2GChul1f6nXuab2LXKaekVEnDfUUDvH0mJu0f5d
+   ASibBM4CfGnxm+gbGWJnjDnaUsNuPOpwEn/sFWJtYmoPslM9l6j6HiXTF
+   opnY/E8H8M2V1fd8NhPA6NqaSybSK9paXNHhujmFdTHmlW4D82ybYB/+5
+   tUQCzMUtQCMjk6gvtq/d9eg1cI5o+9RYcg4N9LdnCIjRevhybKUFqivzN
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="371648779"
 X-IronPort-AV: E=Sophos;i="6.01,244,1684825200"; 
-   d="scan'208";a="371648703"
+   d="scan'208";a="371648779"
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.01,202,1684825200"; 
-   d="scan'208";a="871543352"
+   d="scan'208";a="871543364"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,9 +139,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH v9 04/36] x86/cpufeatures: Add the cpu feature bit for FRED
-Date: Sun, 30 Jul 2023 23:32:45 -0700
-Message-Id: <20230731063317.3720-5-xin3.li@intel.com>
+Subject: [PATCH v9 06/36] x86/objtool: Teach objtool about ERETU and ERETS
+Date: Sun, 30 Jul 2023 23:32:47 -0700
+Message-Id: <20230731063317.3720-7-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230731063317.3720-1-xin3.li@intel.com>
 References: <20230731063317.3720-1-xin3.li@intel.com>
@@ -150,40 +150,46 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add the CPU feature bit for FRED.
+Update the objtool decoder to know about the ERETU and ERETS
+instructions (type INSN_CONTEXT_SWITCH).
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/asm/cpufeatures.h       | 1 +
- tools/arch/x86/include/asm/cpufeatures.h | 1 +
- 2 files changed, 2 insertions(+)
+ tools/objtool/arch/x86/decode.c | 19 ++++++++++++++-----
+ 1 file changed, 14 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
-index cb8ca46213be..fd3ddd5c0283 100644
---- a/arch/x86/include/asm/cpufeatures.h
-+++ b/arch/x86/include/asm/cpufeatures.h
-@@ -317,6 +317,7 @@
- #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
- #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
- #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
-+#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
- #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
- #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
- #define X86_FEATURE_AVX_IFMA            (12*32+23) /* "" Support for VPMADD52[H,L]UQ */
-diff --git a/tools/arch/x86/include/asm/cpufeatures.h b/tools/arch/x86/include/asm/cpufeatures.h
-index cb8ca46213be..fd3ddd5c0283 100644
---- a/tools/arch/x86/include/asm/cpufeatures.h
-+++ b/tools/arch/x86/include/asm/cpufeatures.h
-@@ -317,6 +317,7 @@
- #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
- #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
- #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
-+#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
- #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
- #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
- #define X86_FEATURE_AVX_IFMA            (12*32+23) /* "" Support for VPMADD52[H,L]UQ */
+diff --git a/tools/objtool/arch/x86/decode.c b/tools/objtool/arch/x86/decode.c
+index 2e1caabecb18..a486485cff20 100644
+--- a/tools/objtool/arch/x86/decode.c
++++ b/tools/objtool/arch/x86/decode.c
+@@ -509,11 +509,20 @@ int arch_decode_instruction(struct objtool_file *file, const struct section *sec
+ 
+ 		if (op2 == 0x01) {
+ 
+-			if (modrm == 0xca)
+-				insn->type = INSN_CLAC;
+-			else if (modrm == 0xcb)
+-				insn->type = INSN_STAC;
+-
++			switch (insn_last_prefix_id(&ins)) {
++			case INAT_PFX_REPE:
++			case INAT_PFX_REPNE:
++				if (modrm == 0xca)
++					/* eretu/erets */
++					insn->type = INSN_CONTEXT_SWITCH;
++				break;
++			default:
++				if (modrm == 0xca)
++					insn->type = INSN_CLAC;
++				else if (modrm == 0xcb)
++					insn->type = INSN_STAC;
++				break;
++			}
+ 		} else if (op2 >= 0x80 && op2 <= 0x8f) {
+ 
+ 			insn->type = INSN_JUMP_CONDITIONAL;
 -- 
 2.34.1
 
