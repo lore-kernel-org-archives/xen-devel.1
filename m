@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6413EC001E0
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:08:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573946.899117 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B38CAEB64DD
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:08:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573957.899132 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlMP-0005or-JZ; Tue, 01 Aug 2023 09:08:09 +0000
+	id 1qQlMZ-0006nr-1S; Tue, 01 Aug 2023 09:08:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573946.899117; Tue, 01 Aug 2023 09:08:09 +0000
+Received: by outflank-mailman (output) from mailman id 573957.899132; Tue, 01 Aug 2023 09:08:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlMP-0005oC-Ca; Tue, 01 Aug 2023 09:08:09 +0000
-Received: by outflank-mailman (input) for mailman id 573946;
- Tue, 01 Aug 2023 09:08:07 +0000
+	id 1qQlMY-0006nf-TF; Tue, 01 Aug 2023 09:08:18 +0000
+Received: by outflank-mailman (input) for mailman id 573957;
+ Tue, 01 Aug 2023 09:08:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L1iX=DS=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQlGp-0005E5-Vu
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:24 +0000
+ id 1qQlGs-0005E5-1v
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:26 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.31])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1f941154-304a-11ee-8613-37d641c3527e;
- Tue, 01 Aug 2023 11:02:21 +0200 (CEST)
+ id 1f0b02d1-304a-11ee-8613-37d641c3527e;
+ Tue, 01 Aug 2023 11:02:23 +0200 (CEST)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 02:02:13 -0700
+ 01 Aug 2023 02:02:15 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:02:12 -0700
+ by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:02:14 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f941154-304a-11ee-8613-37d641c3527e
+X-Inumbo-ID: 1f0b02d1-304a-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690880541; x=1722416541;
+  t=1690880543; x=1722416543;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=noUm+C4jbhw0mC8rdAqNdlrDhDQPWQ7nu1SRrIUqW1s=;
-  b=cfcqHCV6MVt1dSSCeYpGuLuuVv1HiIuEpr8aALTGu5WTcSGfUa725rUq
-   zpWaEN19WqIkIjqwtfFIkF8+Ggx+JFIqdlBR5GncXJedwX8Kcwdksy0mx
-   h7y0gVCdIScXVIAfl5ewS1JNa75lpBPi+xyejc/hya0DBwhTdJ5wnjYKz
-   S6absSKgKzqmRNAHTLFl48Fz+Doyv8+7robP1s1eGxDmlX0oZ2DqoIwu/
-   GXVRY5oVuBWmwz3XJLD/pdUV+qFnJVqMS6IpAfOYCrP9LruFTMNlM1vY+
-   sP+ppd9Q87KbNK3Va3UvRDNMnSHtlGVNN4Z1AkRaa0uPFysqmVZ9U7cxz
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082844"
+  bh=0Vsn6bDzpRkXYLGAG2NP2KMCccOE1uQI/p8GcVukrL0=;
+  b=DMaiO47Z2+wpPhrKmZNLe4YnyWJ8bHznHAQrQTp3H/fKcVglw0ubF8mS
+   TZCmJCzy8lvh85PuyfjG8XzaybLxXrvPRv5nHo/knKFWzSF8ZSxtT68Rr
+   Rm0u4/EbEF8nbvs/Z8aglgyo9Pc7viiKk5Fq39+wTU0M2E3BHUV9S/w29
+   AN3tITji3aXTmV9Oe3y06L8V4ifmzoUDxZOAmbH6d9KTQv024L2uO0pXe
+   eJjKaI6vunRYzJJKu2SL53COwIAZPkYDyHqqTR8qHlBQjx0GAa8rsVPwu
+   W39OQr9lY6rx+SQk8ZBytSl0vB/e2dQhTeYf8IdiWXr5EAdtEoMiVFr19
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082913"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="433082844"
+   d="scan'208";a="433082913"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975217087"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975217094"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="975217087"
+   d="scan'208";a="975217094"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,229 +139,177 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH RESEND v9 24/36] x86/idtentry: Incorporate definitions/declarations of the FRED external interrupt handler type
-Date: Tue,  1 Aug 2023 01:33:06 -0700
-Message-Id: <20230801083318.8363-25-xin3.li@intel.com>
+Subject: [PATCH RESEND v9 26/36] x86/traps: Add sysvec_install() to install a system interrupt handler
+Date: Tue,  1 Aug 2023 01:33:08 -0700
+Message-Id: <20230801083318.8363-27-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230801083318.8363-1-xin3.li@intel.com>
 References: <20230801083318.8363-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-FRED operates differently from IDT in terms of interrupt handling.
-Instead of directly dispatching an interrupt to its handler based
-on the interrupt vector, FRED requires the software to dispatch
-an event to its handler based on both the event's type and vector.
-Therefore, an event dispatch framework must be implemented to
-facilitate the event-to-handler dispatch process.
-
-The FRED event dispatch framework assumes control once an event is
-delivered, starting from two FRED entry points, after which several
-event dispatch tables are introduced to facilitate the dispatching.
-The first level dispatching is event type based, and two tables need
-to be defined, one for ring 3 event dispatching, and the other for
-ring 0. The second level dispatching is event vector based, and
-several tables need to be defined, e.g., an exception handler table
-for exception dispatching.
-
-Handlers in these tables are typically noinstr. However for external
-interrupt dispatching, irqentry_{enter,exit}() and
-instrumentation_{begin,end}() can be extracted from respective interrupt
-handler to the dispatch framework. As a result, FRED external interrupt
-handlers don't need to be noinstr.
-
-Incorporate definitions/declarations of FRED external interrupt handler
-types into the IDT entry macros.
-
-It is probably better to rename idtentry as event_entry.
+Add sysvec_install() to install a system interrupt handler into both
+the IDT and system_interrupt_handlers. The latter is used to dispatch
+system interrupts to their respective handlers when FRED is enabled.
 
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
 Changes since v8:
-* Put IDTENTRY changes in a separate patch (Thomas Gleixner).
+* Introduce a macro sysvec_install() to derive the asm handler name from
+  a C handler, which simplifies the code and avoids an ugly typecast
+  (Thomas Gleixner).
 ---
- arch/x86/include/asm/idtentry.h | 91 +++++++++++++++++++++++++++++----
- 1 file changed, 82 insertions(+), 9 deletions(-)
+ arch/x86/include/asm/traps.h     | 19 +++++++++++++++++++
+ arch/x86/kernel/cpu/acrn.c       |  5 +++--
+ arch/x86/kernel/cpu/mshyperv.c   | 16 ++++++++--------
+ arch/x86/kernel/kvm.c            |  2 +-
+ arch/x86/kernel/traps.c          |  6 ++++++
+ drivers/xen/events/events_base.c |  3 ++-
+ 6 files changed, 39 insertions(+), 12 deletions(-)
 
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index 6817c0f8e323..e67d111bf932 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -167,17 +167,22 @@ __visible noinstr void func(struct pt_regs *regs, unsigned long error_code)
- 
- /**
-  * DECLARE_IDTENTRY_IRQ - Declare functions for device interrupt IDT entry
-- *			  points (common/spurious)
-+ *			  points (common/spurious) and their corresponding
-+ *			  software based dispatch handlers in the non-noinstr
-+ *			  text section
-  * @vector:	Vector number (ignored for C)
-  * @func:	Function name of the entry point
-  *
-- * Maps to DECLARE_IDTENTRY_ERRORCODE()
-+ * Maps to DECLARE_IDTENTRY_ERRORCODE(), plus a dispatch function prototype
-  */
- #define DECLARE_IDTENTRY_IRQ(vector, func)				\
--	DECLARE_IDTENTRY_ERRORCODE(vector, func)
-+	DECLARE_IDTENTRY_ERRORCODE(vector, func);			\
-+	void dispatch_##func(struct pt_regs *regs, unsigned long error_code)
- 
- /**
-  * DEFINE_IDTENTRY_IRQ - Emit code for device interrupt IDT entry points
-+ *			 and their corresponding software based dispatch
-+ *			 handlers in the non-noinstr text section
-  * @func:	Function name of the entry point
-  *
-  * The vector number is pushed by the low level entry stub and handed
-@@ -187,6 +192,11 @@ __visible noinstr void func(struct pt_regs *regs, unsigned long error_code)
-  * irq_enter/exit_rcu() are invoked before the function body and the
-  * KVM L1D flush request is set. Stack switching to the interrupt stack
-  * has to be done in the function body if necessary.
-+ *
-+ * dispatch_func() is a software based dispatch handler in the non-noinstr
-+ * text section, assuming the irqentry_{enter,exit}() and
-+ * instrumentation_{begin,end}() helpers are invoked in the external
-+ * interrupt dispatch framework before and after dispatch_func().
-  */
- #define DEFINE_IDTENTRY_IRQ(func)					\
- static void __##func(struct pt_regs *regs, u32 vector);			\
-@@ -204,31 +214,68 @@ __visible noinstr void func(struct pt_regs *regs,			\
- 	irqentry_exit(regs, state);					\
- }									\
- 									\
-+__visible void dispatch_##func(struct pt_regs *regs,			\
-+			       unsigned long error_code)		\
-+{									\
-+	u32 vector = (u32)(u8)error_code;				\
-+									\
-+	kvm_set_cpu_l1tf_flush_l1d();					\
-+	run_irq_on_irqstack_cond(__##func, regs, vector);		\
-+}									\
-+									\
- static noinline void __##func(struct pt_regs *regs, u32 vector)
- 
-+/*
-+ * Define a function type system_interrupt_handler as the element type of
-+ * the table system_interrupt_handlers.
-+ *
-+ * System interrupt handlers don't take any interrupt vector number, or
-+ * any interrupt error code as arguments, as a system interrupt handler
-+ * is defined to handle a specific interrupt vector, and no error code
-+ * is defined for external interrupts. It takes only one argument of type
-+ * struct pt_regs *.
-+ */
-+#define DECLARE_SYSTEM_INTERRUPT_HANDLER(f) \
-+	void f (struct pt_regs *regs)
-+#define DEFINE_SYSTEM_INTERRUPT_HANDLER(f) \
-+	__visible DECLARE_SYSTEM_INTERRUPT_HANDLER(f)
-+typedef DECLARE_SYSTEM_INTERRUPT_HANDLER((*system_interrupt_handler));
-+
- /**
-  * DECLARE_IDTENTRY_SYSVEC - Declare functions for system vector entry points
-+ *			     and their corresponding software based dispatch
-+ *			     handlers in the non-noinstr text section
-  * @vector:	Vector number (ignored for C)
-  * @func:	Function name of the entry point
-  *
-- * Declares three functions:
-+ * Declares four functions:
-  * - The ASM entry point: asm_##func
-  * - The XEN PV trap entry point: xen_##func (maybe unused)
-  * - The C handler called from the ASM entry point
-+ * - The C handler used in the system interrupt handler table
-  *
-- * Maps to DECLARE_IDTENTRY().
-+ * Maps to DECLARE_IDTENTRY(), plus a dispatch table function prototype
-  */
- #define DECLARE_IDTENTRY_SYSVEC(vector, func)				\
--	DECLARE_IDTENTRY(vector, func)
-+	DECLARE_IDTENTRY(vector, func);					\
-+	DECLARE_SYSTEM_INTERRUPT_HANDLER(dispatch_table_##func)
- 
- /**
-  * DEFINE_IDTENTRY_SYSVEC - Emit code for system vector IDT entry points
-+ *			    and their corresponding software based dispatch
-+ *			    handlers in the non-noinstr text section
-  * @func:	Function name of the entry point
-  *
-  * irqentry_enter/exit() and irq_enter/exit_rcu() are invoked before the
-  * function body. KVM L1D flush request is set.
-  *
-- * Runs the function on the interrupt stack if the entry hit kernel mode
-+ * Runs the function on the interrupt stack if the entry hit kernel mode.
-+ *
-+ * dispatch_table_func() is used to fill the system interrupt handler table
-+ * for system interrupts dispatching, assuming the irqentry_{enter,exit}()
-+ * and instrumentation_{begin,end}() helpers are invoked in the external
-+ * interrupt dispatch framework before and after dispatch_table_func(),
-+ * thus in the non-noinstr text section.
-  */
- #define DEFINE_IDTENTRY_SYSVEC(func)					\
- static void __##func(struct pt_regs *regs);				\
-@@ -244,11 +291,19 @@ __visible noinstr void func(struct pt_regs *regs)			\
- 	irqentry_exit(regs, state);					\
- }									\
- 									\
-+DEFINE_SYSTEM_INTERRUPT_HANDLER(dispatch_table_##func)			\
-+{									\
-+	kvm_set_cpu_l1tf_flush_l1d();					\
-+	run_sysvec_on_irqstack_cond(__##func, regs);			\
-+}									\
-+									\
- static noinline void __##func(struct pt_regs *regs)
- 
- /**
-  * DEFINE_IDTENTRY_SYSVEC_SIMPLE - Emit code for simple system vector IDT
-- *				   entry points
-+ *				   entry points and their corresponding
-+ *				   software based dispatch handlers in
-+ *				   the non-noinstr text section
-  * @func:	Function name of the entry point
-  *
-  * Runs the function on the interrupted stack. No switch to IRQ stack and
-@@ -256,6 +311,12 @@ static noinline void __##func(struct pt_regs *regs)
-  *
-  * Only use for 'empty' vectors like reschedule IPI and KVM posted
-  * interrupt vectors.
-+ *
-+ * dispatch_table_func() is used to fill the system interrupt handler table
-+ * for system interrupts dispatching, assuming the irqentry_{enter,exit}()
-+ * and instrumentation_{begin,end}() helpers are invoked in the external
-+ * interrupt dispatch framework before and after dispatch_table_func(),
-+ * thus in the non-noinstr text section.
-  */
- #define DEFINE_IDTENTRY_SYSVEC_SIMPLE(func)				\
- static __always_inline void __##func(struct pt_regs *regs);		\
-@@ -273,6 +334,14 @@ __visible noinstr void func(struct pt_regs *regs)			\
- 	irqentry_exit(regs, state);					\
- }									\
- 									\
-+DEFINE_SYSTEM_INTERRUPT_HANDLER(dispatch_table_##func)			\
-+{									\
-+	__irq_enter_raw();						\
-+	kvm_set_cpu_l1tf_flush_l1d();					\
-+	__##func (regs);						\
-+	__irq_exit_raw();						\
-+}									\
-+									\
- static __always_inline void __##func(struct pt_regs *regs)
- 
- /**
-@@ -647,7 +716,11 @@ DECLARE_IDTENTRY_SYSVEC(X86_PLATFORM_IPI_VECTOR,	sysvec_x86_platform_ipi);
+diff --git a/arch/x86/include/asm/traps.h b/arch/x86/include/asm/traps.h
+index 47ecfff2c83d..cba3e4dfc329 100644
+--- a/arch/x86/include/asm/traps.h
++++ b/arch/x86/include/asm/traps.h
+@@ -47,4 +47,23 @@ void __noreturn handle_stack_overflow(struct pt_regs *regs,
+ 				      struct stack_info *info);
  #endif
  
++#ifdef CONFIG_X86_64
++inline void set_sysvec_handler(unsigned int i, system_interrupt_handler func);
++
++static inline void sysvec_setup_fred(unsigned int vector, system_interrupt_handler func)
++{
++	BUG_ON(vector < FIRST_SYSTEM_VECTOR);
++	set_sysvec_handler(vector - FIRST_SYSTEM_VECTOR, func);
++}
++#else
++static inline void sysvec_setup_fred(unsigned int vector, system_interrupt_handler func)
++{
++}
++#endif
++
++#define sysvec_install(vector, func) {					\
++	sysvec_setup_fred(vector, func);				\
++	alloc_intr_gate(vector, asm_##func);				\
++}
++
+ #endif /* _ASM_X86_TRAPS_H */
+diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
+index 485441b7f030..a879b4b87740 100644
+--- a/arch/x86/kernel/cpu/acrn.c
++++ b/arch/x86/kernel/cpu/acrn.c
+@@ -18,6 +18,7 @@
+ #include <asm/hypervisor.h>
+ #include <asm/idtentry.h>
+ #include <asm/irq_regs.h>
++#include <asm/traps.h>
+ 
+ static u32 __init acrn_detect(void)
+ {
+@@ -26,8 +27,8 @@ static u32 __init acrn_detect(void)
+ 
+ static void __init acrn_init_platform(void)
+ {
+-	/* Setup the IDT for ACRN hypervisor callback */
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_acrn_hv_callback);
++	/* Install system interrupt handler for ACRN hypervisor callback */
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
+ 
+ 	x86_platform.calibrate_tsc = acrn_get_tsc_khz;
+ 	x86_platform.calibrate_cpu = acrn_get_tsc_khz;
+diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
+index c7969e806c64..134830a7f575 100644
+--- a/arch/x86/kernel/cpu/mshyperv.c
++++ b/arch/x86/kernel/cpu/mshyperv.c
+@@ -28,6 +28,7 @@
+ #include <asm/i8259.h>
+ #include <asm/apic.h>
+ #include <asm/timer.h>
++#include <asm/traps.h>
+ #include <asm/reboot.h>
+ #include <asm/nmi.h>
+ #include <clocksource/hyperv_timer.h>
+@@ -480,19 +481,18 @@ static void __init ms_hyperv_init_platform(void)
+ 	 */
+ 	x86_platform.apic_post_init = hyperv_init;
+ 	hyperv_setup_mmu_ops();
+-	/* Setup the IDT for hypervisor callback */
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_hyperv_callback);
+ 
+-	/* Setup the IDT for reenlightenment notifications */
++	/* Install system interrupt handler for hypervisor callback */
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_hyperv_callback);
++
++	/* Install system interrupt handler for reenlightenment notifications */
+ 	if (ms_hyperv.features & HV_ACCESS_REENLIGHTENMENT) {
+-		alloc_intr_gate(HYPERV_REENLIGHTENMENT_VECTOR,
+-				asm_sysvec_hyperv_reenlightenment);
++		sysvec_install(HYPERV_REENLIGHTENMENT_VECTOR, sysvec_hyperv_reenlightenment);
+ 	}
+ 
+-	/* Setup the IDT for stimer0 */
++	/* Install system interrupt handler for stimer0 */
+ 	if (ms_hyperv.misc_features & HV_STIMER_DIRECT_MODE_AVAILABLE) {
+-		alloc_intr_gate(HYPERV_STIMER0_VECTOR,
+-				asm_sysvec_hyperv_stimer0);
++		sysvec_install(HYPERV_STIMER0_VECTOR, sysvec_hyperv_stimer0);
+ 	}
+ 
+ # ifdef CONFIG_SMP
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 1cceac5984da..12c799412c5d 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -829,7 +829,7 @@ static void __init kvm_guest_init(void)
+ 
+ 	if (kvm_para_has_feature(KVM_FEATURE_ASYNC_PF_INT) && kvmapf) {
+ 		static_branch_enable(&kvm_async_pf_enabled);
+-		alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_kvm_asyncpf_interrupt);
++		sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_kvm_asyncpf_interrupt);
+ 	}
+ 
  #ifdef CONFIG_SMP
--DECLARE_IDTENTRY(RESCHEDULE_VECTOR,			sysvec_reschedule_ipi);
-+/*
-+ * Use DECLARE_IDTENTRY_SYSVEC instead of DECLARE_IDTENTRY to add a
-+ * software based dispatch handler declaration for RESCHEDULE_VECTOR.
-+ */
-+DECLARE_IDTENTRY_SYSVEC(RESCHEDULE_VECTOR,		sysvec_reschedule_ipi);
- DECLARE_IDTENTRY_SYSVEC(REBOOT_VECTOR,			sysvec_reboot);
- DECLARE_IDTENTRY_SYSVEC(CALL_FUNCTION_SINGLE_VECTOR,	sysvec_call_function_single);
- DECLARE_IDTENTRY_SYSVEC(CALL_FUNCTION_VECTOR,		sysvec_call_function);
+diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
+index e430a8c47931..9040c7f01c93 100644
+--- a/arch/x86/kernel/traps.c
++++ b/arch/x86/kernel/traps.c
+@@ -1536,6 +1536,12 @@ static system_interrupt_handler system_interrupt_handlers[NR_SYSTEM_VECTORS] = {
+ 
+ #undef SYSV
+ 
++void set_sysvec_handler(unsigned int i, system_interrupt_handler func)
++{
++	BUG_ON(i >= NR_SYSTEM_VECTORS);
++	system_interrupt_handlers[i] = func;
++}
++
+ #endif /* CONFIG_X86_64 */
+ 
+ void __init trap_init(void)
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index c7715f8bd452..16d51338e1f8 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -45,6 +45,7 @@
+ #include <asm/irq.h>
+ #include <asm/io_apic.h>
+ #include <asm/i8259.h>
++#include <asm/traps.h>
+ #include <asm/xen/cpuid.h>
+ #include <asm/xen/pci.h>
+ #endif
+@@ -2249,7 +2250,7 @@ static __init void xen_alloc_callback_vector(void)
+ 		return;
+ 
+ 	pr_info("Xen HVM callback vector for event delivery is enabled\n");
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_xen_hvm_callback);
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_xen_hvm_callback);
+ }
+ #else
+ void xen_setup_callback_vector(void) {}
 -- 
 2.34.1
 
