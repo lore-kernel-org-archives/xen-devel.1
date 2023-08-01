@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B85DEB64DD
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 06:29:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573691.898632 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A632C001E0
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 06:37:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573698.898642 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQit7-0005Jc-0O; Tue, 01 Aug 2023 06:29:45 +0000
+	id 1qQj0V-0006pR-Pp; Tue, 01 Aug 2023 06:37:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573691.898632; Tue, 01 Aug 2023 06:29:44 +0000
+Received: by outflank-mailman (output) from mailman id 573698.898642; Tue, 01 Aug 2023 06:37:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQit6-0005JV-SJ; Tue, 01 Aug 2023 06:29:44 +0000
-Received: by outflank-mailman (input) for mailman id 573691;
- Tue, 01 Aug 2023 06:29:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qQj0V-0006pD-Kz; Tue, 01 Aug 2023 06:37:23 +0000
+Received: by outflank-mailman (input) for mailman id 573698;
+ Tue, 01 Aug 2023 06:37:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jaq7=DS=huaweicloud.com=petrtesarik@srs-se1.protection.inumbo.net>)
- id 1qQit5-0005JL-B3
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 06:29:43 +0000
-Received: from frasgout13.his.huawei.com (unknown [14.137.139.46])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cbda619b-3034-11ee-b258-6b7b168915f2;
- Tue, 01 Aug 2023 08:29:41 +0200 (CEST)
-Received: from mail02.huawei.com (unknown [172.18.147.229])
- by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4RFQ063Qhbz9y7l5
- for <xen-devel@lists.xenproject.org>; Tue,  1 Aug 2023 14:18:14 +0800 (CST)
-Received: from [10.81.220.249] (unknown [10.81.220.249])
- by APP1 (Coremail) with SMTP id LxC2BwC3abkdpshkKRcYAA--.13561S2;
- Tue, 01 Aug 2023 07:29:03 +0100 (CET)
+ id 1qQiqz-00011l-B4
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 06:27:33 +0000
+Received: from frasgout12.his.huawei.com (unknown [14.137.139.154])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7d028bae-3034-11ee-8613-37d641c3527e;
+ Tue, 01 Aug 2023 08:27:30 +0200 (CEST)
+Received: from mail02.huawei.com (unknown [172.18.147.227])
+ by frasgout12.his.huawei.com (SkyGuard) with ESMTP id 4RFPvD5k2mz9ttD0
+ for <xen-devel@lists.xenproject.org>; Tue,  1 Aug 2023 14:14:00 +0800 (CST)
+Received: from A2101119013HW2.china.huawei.com (unknown [10.81.220.249])
+ by APP1 (Coremail) with SMTP id LxC2BwCHOroapchkgAwYAA--.27948S9;
+ Tue, 01 Aug 2023 07:26:50 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,84 +44,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cbda619b-3034-11ee-b258-6b7b168915f2
-Message-ID: <4c2f96bc-f6c0-4a04-e4fa-6ab1b5e56bd6@huaweicloud.com>
-Date: Tue, 1 Aug 2023 08:28:42 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 0/9] Allow dynamic allocation of software IO TLB bounce
- buffers
-Content-Language: en-US
-To: =?UTF-8?B?UGV0ciBUZXNhxZnDrWs=?= <petr@tesarici.cz>,
- Christoph Hellwig <hch@lst.de>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Russell King <linux@armlinux.org.uk>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
- "H. Peter Anvin" <hpa@zytor.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Juergen Gross <jgross@suse.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Robin Murphy <robin.murphy@arm.com>, Christoph Lameter <cl@linux.com>,
- Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>,
- Joonsoo Kim <iamjoonsoo.kim@lge.com>,
- Andrew Morton <akpm@linux-foundation.org>, Vlastimil Babka <vbabka@suse.cz>,
- Roman Gushchin <roman.gushchin@linux.dev>,
- Hyeonggon Yoo <42.hyeyoo@gmail.com>,
- Petr Tesarik <petr.tesarik.ext@huawei.com>, Jonathan Corbet
- <corbet@lwn.net>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Hans de Goede <hdegoede@redhat.com>, James Seo <james@equiv.tech>,
- James Clark <james.clark@arm.com>, Kees Cook <keescook@chromium.org>,
- "moderated list:XEN HYPERVISOR ARM" <xen-devel@lists.xenproject.org>,
- "moderated list:ARM PORT" <linux-arm-kernel@lists.infradead.org>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:MIPS" <linux-mips@vger.kernel.org>,
- "open list:XEN SWIOTLB SUBSYSTEM" <iommu@lists.linux.dev>,
- "open list:SLAB ALLOCATOR" <linux-mm@kvack.org>,
- Roberto Sassu <roberto.sassu@huaweicloud.com>
-References: <cover.1690459412.git.petr.tesarik.ext@huawei.com>
- <20230731160409.GA8991@lst.de> <20230731214618.6e7cde05@meshulam.tesarici.cz>
+X-Inumbo-ID: 7d028bae-3034-11ee-8613-37d641c3527e
 From: Petr Tesarik <petrtesarik@huaweicloud.com>
-In-Reply-To: <20230731214618.6e7cde05@meshulam.tesarici.cz>
-Content-Type: text/plain; charset=UTF-8
+To: Stefano Stabellini <sstabellini@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Christoph Lameter <cl@linux.com>,
+	Pekka Enberg <penberg@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	Hyeonggon Yoo <42.hyeyoo@gmail.com>,
+	Petr Tesarik <petr.tesarik.ext@huawei.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	James Seo <james@equiv.tech>,
+	James Clark <james.clark@arm.com>,
+	Kees Cook <keescook@chromium.org>,
+	xen-devel@lists.xenproject.org (moderated list:XEN HYPERVISOR ARM),
+	linux-arm-kernel@lists.infradead.org (moderated list:ARM PORT),
+	linux-kernel@vger.kernel.org (open list),
+	linux-mips@vger.kernel.org (open list:MIPS),
+	iommu@lists.linux.dev (open list:XEN SWIOTLB SUBSYSTEM),
+	linux-mm@kvack.org (open list:SLAB ALLOCATOR)
+Cc: Roberto Sassu <roberto.sassu@huaweicloud.com>,
+	petr@tesarici.cz
+Subject: [PATCH v7 7/9] swiotlb: determine potential physical address limit
+Date: Tue,  1 Aug 2023 08:24:02 +0200
+Message-Id: <ae33edc0be30182067d33a6e4fb20889b2db10b1.1690871004.git.petr.tesarik.ext@huawei.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1690871004.git.petr.tesarik.ext@huawei.com>
+References: <cover.1690871004.git.petr.tesarik.ext@huawei.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:LxC2BwC3abkdpshkKRcYAA--.13561S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
-	VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYc7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E
-	6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
-	kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8I
-	cVCY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87
-	Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAK
-	zVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx
-	8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwAC
-	I402YVCY1x02628vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJV
-	W8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF
-	1VAFwI0_Wrv_Gr1UMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcV
-	C0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6Fyj6rWUJwCI
-	42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26F4UJVW0obIYCTnIWI
-	evJa73UjIFyTuYvjfUoL0eDUUUU
+X-CM-TRANSID:LxC2BwCHOroapchkgAwYAA--.27948S9
+X-Coremail-Antispam: 1UD129KBjvJXoWxXw4fJr4xAF4rZr4UWr4kWFg_yoW5AF4DpF
+	y8Jr4FgFsFqF17ArWxCw1IyFn5Ga10k3y29rW5urnxZr17Ww13WrsrKr45trySqF4IgF4f
+	uFyxua4Y9F42v37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUQC14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+	kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+	z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+	4UJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_
+	Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
+	IIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
+	Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8c
+	xan2IY04v7MxkF7I0En4kS14v26r1q6r43MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY
+	0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I
+	0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Wrv_Gr1UMIIYrxkI7VAKI48JMIIF
+	0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIx
+	AIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2
+	jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjfU8fHUDUUUU
 X-CM-SenderInfo: hshw23xhvd2x3n6k3tpzhluzxrxghudrp/
 X-CFilter-Loop: Reflected
 
-On 7/31/2023 9:46 PM, Petr Tesařík wrote:
-> V Mon, 31 Jul 2023 18:04:09 +0200
-> Christoph Hellwig <hch@lst.de> napsáno:
-> 
->> I was just going to apply this, but patch 1 seems to have a non-trivial
->> conflict with the is_swiotlb_active removal in pci-dma.c.  Can you resend
->> against the current dma-mapping for-next tree?
-> 
-> Sure thing, will re-send tomorrow morning.
+From: Petr Tesarik <petr.tesarik.ext@huawei.com>
 
-After commit f9a38ea5172a ("x86: always initialize xen-swiotlb when
-xen-pcifront is enabling") removed that call to swiotlb_init_late(),
-there is nothing to patch, and the hunk can be dropped.
+The value returned by default_swiotlb_limit() should be constant, because
+it is used to decide whether DMA can be used. To allow allocating memory
+pools on the fly, use the maximum possible physical address rather than the
+highest address used by the default pool.
 
-I have just sent v7.
+For swiotlb_init_remap(), this is either an arch-specific limit used by
+memblock_alloc_low(), or the highest directly mapped physical address if
+the initialization flags include SWIOTLB_ANY. For swiotlb_init_late(), the
+highest address is determined by the GFP flags.
 
-Petr T
+Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
+---
+ include/linux/swiotlb.h |  2 ++
+ kernel/dma/swiotlb.c    | 14 ++++++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index 66867d2188ba..9825fa14abe4 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -109,6 +109,7 @@ struct io_tlb_pool {
+  * @force_bounce: %true if swiotlb bouncing is forced
+  * @for_alloc:  %true if the pool is used for memory allocation
+  * @can_grow:	%true if more pools can be allocated dynamically.
++ * @phys_limit:	Maximum allowed physical address.
+  * @total_used:	The total number of slots in the pool that are currently used
+  *		across all areas. Used only for calculating used_hiwater in
+  *		debugfs.
+@@ -123,6 +124,7 @@ struct io_tlb_mem {
+ 	bool for_alloc;
+ #ifdef CONFIG_SWIOTLB_DYNAMIC
+ 	bool can_grow;
++	u64 phys_limit;
+ #endif
+ #ifdef CONFIG_DEBUG_FS
+ 	atomic_long_t total_used;
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 30d0fcc3ccb9..0fa081defdbd 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -334,6 +334,10 @@ void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
+ #ifdef CONFIG_SWIOTLB_DYNAMIC
+ 	if (!remap)
+ 		io_tlb_default_mem.can_grow = true;
++	if (flags & SWIOTLB_ANY)
++		io_tlb_default_mem.phys_limit = virt_to_phys(high_memory - 1);
++	else
++		io_tlb_default_mem.phys_limit = ARCH_LOW_ADDRESS_LIMIT;
+ #endif
+ 
+ 	if (!default_nareas)
+@@ -409,6 +413,12 @@ int swiotlb_init_late(size_t size, gfp_t gfp_mask,
+ #ifdef CONFIG_SWIOTLB_DYNAMIC
+ 	if (!remap)
+ 		io_tlb_default_mem.can_grow = true;
++	if (IS_ENABLED(CONFIG_ZONE_DMA) && (gfp_mask & __GFP_DMA))
++		io_tlb_default_mem.phys_limit = DMA_BIT_MASK(zone_dma_bits);
++	else if (IS_ENABLED(CONFIG_ZONE_DMA32) && (gfp_mask & __GFP_DMA32))
++		io_tlb_default_mem.phys_limit = DMA_BIT_MASK(32);
++	else
++		io_tlb_default_mem.phys_limit = virt_to_phys(high_memory - 1);
+ #endif
+ 
+ 	if (!default_nareas)
+@@ -1397,7 +1407,11 @@ phys_addr_t default_swiotlb_base(void)
+  */
+ phys_addr_t default_swiotlb_limit(void)
+ {
++#ifdef CONFIG_SWIOTLB_DYNAMIC
++	return io_tlb_default_mem.phys_limit;
++#else
+ 	return io_tlb_default_mem.defpool.end - 1;
++#endif
+ }
+ 
+ #ifdef CONFIG_DEBUG_FS
+-- 
+2.25.1
 
 
