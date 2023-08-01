@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F15E6C04E69
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:08:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573938.899092 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4D07C001DF
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:08:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573940.899102 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlMI-00058m-KJ; Tue, 01 Aug 2023 09:08:02 +0000
+	id 1qQlMN-0005Tu-SV; Tue, 01 Aug 2023 09:08:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573938.899092; Tue, 01 Aug 2023 09:08:02 +0000
+Received: by outflank-mailman (output) from mailman id 573940.899102; Tue, 01 Aug 2023 09:08:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlMI-00058f-Hg; Tue, 01 Aug 2023 09:08:02 +0000
-Received: by outflank-mailman (input) for mailman id 573938;
- Tue, 01 Aug 2023 09:08:02 +0000
+	id 1qQlMN-0005Tm-PO; Tue, 01 Aug 2023 09:08:07 +0000
+Received: by outflank-mailman (input) for mailman id 573940;
+ Tue, 01 Aug 2023 09:08:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L1iX=DS=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQlGn-0005CK-9s
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:21 +0000
+ id 1qQlGk-0005CK-O6
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:18 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1effbd01-304a-11ee-b259-6b7b168915f2;
- Tue, 01 Aug 2023 11:02:20 +0200 (CEST)
+ id 1cad0178-304a-11ee-b259-6b7b168915f2;
+ Tue, 01 Aug 2023 11:02:17 +0200 (CEST)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 02:02:12 -0700
+ 01 Aug 2023 02:02:09 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:02:11 -0700
+ by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:02:08 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1effbd01-304a-11ee-b259-6b7b168915f2
+X-Inumbo-ID: 1cad0178-304a-11ee-b259-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690880540; x=1722416540;
+  t=1690880537; x=1722416537;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=e41GdB5DEWVT44n/+24ZLrn6jlcg49oHxwygKL8Pbqk=;
-  b=A+1flqiEw8dMX2wPYysxaD3/gAk2kQw3/Vd5t9eI0hf4nrOOjWTzdV3A
-   xfspG5eTEQ6oJ2TKy3s/25FDnDFqm/Rd9oF7ppthXAVFOESuk33c6dm+H
-   GyYKx6w2a8Jgy/G+jIeIj3/XgochE7V8RDuYkba8YNFPGvV5G3nV7aqwf
-   7kziMYW6OR38WFvleASOVENltIqYwegD4bedvFqWKf255r3122ZrU0dPV
-   /vav+bFbILa5dtrIBDcYpwB6V9sKSdUIMnsGGn5+9CRt/VodXGpNr2ATO
-   k6C7CTpd28wdAL8VVtAM7gUcyHS4IDr1EJlr04xrJXG1NcHLkN3dEb2io
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082814"
+  bh=CDXH8O7ex78Bl5bAFBaH8EJ8EpWaGJ2TaZytElzEDrs=;
+  b=iKCET4nu2td9LD1US09FDuYAzFoT6/Nv9TRtc3CQS2f5MKCV0QOYbrxW
+   BhJUI93avdfbluLIgI4L0LuQOuQCl0TjTRn0JDaMKB+lvebGEGq0rFQOq
+   EkgHHCpjsjQYCMRquRMc7Xot3gQNUXSdQfXl2FrxcRa45uATW0GLagFjr
+   e5YUUBu3SQCrjM8VomA1yew0ryAACWmXMDePN4tf3BitvJKWkmHo5PgIj
+   bZFXGvriKuCHgLWzZWBTRVzO4a5W9Ho27K+bhcoMqHgVI/vnx62iAalvB
+   2Nm0eKaMWrjKFrQtYyXX8SPG6DzFUlJhnrju6WooNqnjBtHZCjOOBt2NE
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082713"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="433082814"
+   d="scan'208";a="433082713"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975217082"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975217069"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="975217082"
+   d="scan'208";a="975217069"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,72 +139,80 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH RESEND v9 23/36] x86/entry: Remove idtentry_sysvec from entry_{32,64}.S
-Date: Tue,  1 Aug 2023 01:33:05 -0700
-Message-Id: <20230801083318.8363-24-xin3.li@intel.com>
+Subject: [PATCH RESEND v9 20/36] x86/fred: Add a NMI entry stub for FRED
+Date: Tue,  1 Aug 2023 01:33:02 -0700
+Message-Id: <20230801083318.8363-21-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230801083318.8363-1-xin3.li@intel.com>
 References: <20230801083318.8363-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-idtentry_sysvec is really just DECLARE_IDTENTRY defined in
-<asm/idtentry.h>, no need to define it separately.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
+On a FRED system, NMIs nest both with themselves and faults, transient
+information is saved into the stack frame, and NMI unblocking only
+happens when the stack frame indicates that so should happen.
+
+Thus, the NMI entry stub for FRED is really quite small...
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/entry/entry_32.S       | 4 ----
- arch/x86/entry/entry_64.S       | 8 --------
- arch/x86/include/asm/idtentry.h | 2 +-
- 3 files changed, 1 insertion(+), 13 deletions(-)
+ arch/x86/include/asm/fred.h |  1 +
+ arch/x86/kernel/nmi.c       | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index 6e6af42e044a..e0f22ad8ff7e 100644
---- a/arch/x86/entry/entry_32.S
-+++ b/arch/x86/entry/entry_32.S
-@@ -649,10 +649,6 @@ SYM_CODE_START_LOCAL(asm_\cfunc)
- SYM_CODE_END(asm_\cfunc)
- .endm
+diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
+index ad7b79130b1e..2a7c47dfd733 100644
+--- a/arch/x86/include/asm/fred.h
++++ b/arch/x86/include/asm/fred.h
+@@ -112,6 +112,7 @@ static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
  
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /*
-  * Include the defines which emit the idt entries which are shared
-  * shared between 32 and 64 bit and emit the __irqentry_text_* markers
-diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-index 8069151176f2..44f14b990597 100644
---- a/arch/x86/entry/entry_64.S
-+++ b/arch/x86/entry/entry_64.S
-@@ -438,14 +438,6 @@ SYM_CODE_END(\asmsym)
- 	idtentry \vector asm_\cfunc \cfunc has_error_code=1
- .endm
+ typedef DECLARE_FRED_HANDLER((*fred_handler));
  
--/*
-- * System vectors which invoke their handlers directly and are not
-- * going through the regular common device interrupt handling code.
-- */
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /**
-  * idtentry_mce_db - Macro to generate entry stubs for #MC and #DB
-  * @vector:		Vector number
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index cd5c10a74071..6817c0f8e323 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -447,7 +447,7 @@ __visible noinstr void func(struct pt_regs *regs,			\
++DECLARE_FRED_HANDLER(fred_exc_nmi);
+ DECLARE_FRED_HANDLER(fred_exc_debug);
+ DECLARE_FRED_HANDLER(fred_exc_page_fault);
  
- /* System vector entries */
- #define DECLARE_IDTENTRY_SYSVEC(vector, func)				\
--	idtentry_sysvec vector func
-+	DECLARE_IDTENTRY(vector, func)
+diff --git a/arch/x86/kernel/nmi.c b/arch/x86/kernel/nmi.c
+index a0c551846b35..f803e2bcd024 100644
+--- a/arch/x86/kernel/nmi.c
++++ b/arch/x86/kernel/nmi.c
+@@ -34,6 +34,7 @@
+ #include <asm/cache.h>
+ #include <asm/nospec-branch.h>
+ #include <asm/sev.h>
++#include <asm/fred.h>
  
- #ifdef CONFIG_X86_64
- # define DECLARE_IDTENTRY_MCE(vector, func)				\
+ #define CREATE_TRACE_POINTS
+ #include <trace/events/nmi.h>
+@@ -643,6 +644,24 @@ void nmi_backtrace_stall_check(const struct cpumask *btp)
+ 
+ #endif
+ 
++#ifdef CONFIG_X86_FRED
++DEFINE_FRED_HANDLER(fred_exc_nmi)
++{
++	/*
++	 * With FRED, CR2 and DR6 are pushed atomically on faults,
++	 * so we don't have to worry about saving and restoring them.
++	 * Breakpoint faults nest, so assume it is OK to leave DR7
++	 * enabled.
++	 */
++	irqentry_state_t irq_state = irqentry_nmi_enter(regs);
++
++	inc_irq_stat(__nmi_count);
++	default_do_nmi(regs);
++
++	irqentry_nmi_exit(regs, irq_state);
++}
++#endif
++
+ void stop_nmi(void)
+ {
+ 	ignore_nmis++;
 -- 
 2.34.1
 
