@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EAD8C04FE2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76C29C07E8B
 	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:04:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573860.898982 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.573864.899022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlIv-0007KM-GE; Tue, 01 Aug 2023 09:04:33 +0000
+	id 1qQlJ1-0008PV-Rv; Tue, 01 Aug 2023 09:04:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573860.898982; Tue, 01 Aug 2023 09:04:33 +0000
+Received: by outflank-mailman (output) from mailman id 573864.899022; Tue, 01 Aug 2023 09:04:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlIv-0007KF-Cr; Tue, 01 Aug 2023 09:04:33 +0000
-Received: by outflank-mailman (input) for mailman id 573860;
- Tue, 01 Aug 2023 09:04:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qQlJ1-0008OW-Nn; Tue, 01 Aug 2023 09:04:39 +0000
+Received: by outflank-mailman (input) for mailman id 573864;
+ Tue, 01 Aug 2023 09:04:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L1iX=DS=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQlIu-0007Jn-K5
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:04:32 +0000
-Received: from mgamail.intel.com (unknown [192.55.52.93])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6bbce850-304a-11ee-b259-6b7b168915f2;
- Tue, 01 Aug 2023 11:04:31 +0200 (CEST)
+ id 1qQlJ0-0007sM-Ak
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:04:38 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.93])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6df44d94-304a-11ee-8613-37d641c3527e;
+ Tue, 01 Aug 2023 11:04:36 +0200 (CEST)
 Received: from orsmga007.jf.intel.com ([10.7.209.58])
  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 02:04:27 -0700
+ 01 Aug 2023 02:04:34 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by orsmga007.jf.intel.com with ESMTP; 01 Aug 2023 02:04:25 -0700
+ by orsmga007.jf.intel.com with ESMTP; 01 Aug 2023 02:04:32 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6bbce850-304a-11ee-b259-6b7b168915f2
+X-Inumbo-ID: 6df44d94-304a-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690880671; x=1722416671;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=BTa7pFRtc5hN79memTk6tlfkpBhDUr274mj/lMgq9SQ=;
-  b=iwWWZKuu4xbsqr19bzfC8K3WoG9XzEp5B0XQzMT+x6Moxf6XMwjzmLPo
-   HQDk8ALog3LT/kvc3ccUb5YjwwY+JwHKdiP9r+p51KPrBmC6+nKs8Pz6z
-   qCKMTdKOJY8uHVq+J0mCxKzWhlulldZunvU2teOiRymiGzS+KTHHW7ExQ
-   3yIXqND2VsOje6YfOStFk46C89M0O79/RkRBKKzNF0ZHkTDwOzUKuI4qD
-   O5dDcaE2Guk1wBnCwd/QwnXuLmpY8KunpsJ+DbABie96ee0dkob26UV14
-   A6JU5FNZlXWy5ameY5eyj2rlhssc9WR+oS/9vmpDc9lQHNh35/njCXRaL
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="366713452"
+  t=1690880676; x=1722416676;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=QJo+FdezOu/7r5CtwRnG6EayDGJs/agjxSi0oClRDik=;
+  b=LJ3fyLruDPs5uYPMxpUokpiz5GD2N0VvPWAkxd1zkcieDy89uuHZ5Utn
+   G1SUgXRYaPZxQkByR4jv6sGpiMJOf14LZJRm8yhLmp9PX+ucPWLx/sr/A
+   8MkBxGSSdXQDeTOGpiMbSNRqawUBBLLbhOaCo1KAQi9y6GzCphEnIZ6zl
+   WbHqjEyncD8mqNGs48Q3K3paoWSLYD0x2xzX31wXcWXQY7c2xz8f3mnoV
+   KpHKWmaKcCKnk2kb4fX8FQt6Gi/o9u0t+jmBj/a4B8vWgyHDHtyHaD4SX
+   8kjOojzXY64Ro0VJH4Edyz5EywoqQ8LOf/xSBxeR2a+DZOMmvKo8htMK4
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="366713612"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="366713452"
+   d="scan'208";a="366713612"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="722420705"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="722420738"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="722420705"
+   d="scan'208";a="722420738"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,73 +139,35 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH RESEND v9 27/36] x86/traps: Add external_interrupt() to dispatch external interrupts
-Date: Tue,  1 Aug 2023 01:35:44 -0700
-Message-Id: <20230801083553.8468-1-xin3.li@intel.com>
+Subject: [PATCH RESEND v9 31/36] x86/traps: Export external_interrupt() for handling IRQ in IRQ induced VM exits
+Date: Tue,  1 Aug 2023 01:35:48 -0700
+Message-Id: <20230801083553.8468-5-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230801083553.8468-1-xin3.li@intel.com>
+References: <20230801083553.8468-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+Export external_interrupt() for handling IRQ in IRQ induced VM exits.
 
-external_interrupt() dispatches all external interrupts: it checks if an
-external interrupt is a system interrupt, if yes it dipatches it through
-the system_interrupt_handlers table, otherwise to
-dispatch_common_interrupt().
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Co-developed-by: Xin Li <xin3.li@intel.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/kernel/traps.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Changes since v8:
-* Reword the patch description, which was confusing (Thomas Gleixner).
-
-Changes since v5:
-* Initialize system_interrupt_handlers with dispatch_table_spurious_interrupt()
-  instead of NULL to get rid of a branch (Peter Zijlstra).
----
- arch/x86/include/asm/traps.h |  2 ++
- arch/x86/kernel/traps.c      | 18 ++++++++++++++++++
- 2 files changed, 20 insertions(+)
-
-diff --git a/arch/x86/include/asm/traps.h b/arch/x86/include/asm/traps.h
-index cba3e4dfc329..48daa78ee88c 100644
---- a/arch/x86/include/asm/traps.h
-+++ b/arch/x86/include/asm/traps.h
-@@ -66,4 +66,6 @@ static inline void sysvec_setup_fred(unsigned int vector, system_interrupt_handl
- 	alloc_intr_gate(vector, asm_##func);				\
- }
- 
-+int external_interrupt(struct pt_regs *regs);
-+
- #endif /* _ASM_X86_TRAPS_H */
 diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
-index 9040c7f01c93..90fdfcccee7a 100644
+index 90fdfcccee7a..6143ad56008e 100644
 --- a/arch/x86/kernel/traps.c
 +++ b/arch/x86/kernel/traps.c
-@@ -1542,6 +1542,24 @@ void set_sysvec_handler(unsigned int i, system_interrupt_handler func)
- 	system_interrupt_handlers[i] = func;
+@@ -1560,6 +1560,11 @@ int external_interrupt(struct pt_regs *regs)
+ 	return 0;
  }
  
-+int external_interrupt(struct pt_regs *regs)
-+{
-+	unsigned int vector = regs->vector;
-+	unsigned int sysvec = vector - FIRST_SYSTEM_VECTOR;
-+
-+	if (unlikely(vector < FIRST_EXTERNAL_VECTOR)) {
-+		pr_err("invalid external interrupt vector %d\n", vector);
-+		return -EINVAL;
-+	}
-+
-+	if (sysvec < NR_SYSTEM_VECTORS)
-+		system_interrupt_handlers[sysvec](regs);
-+	else
-+		dispatch_common_interrupt(regs, vector);
-+
-+	return 0;
-+}
++#if IS_ENABLED(CONFIG_KVM_INTEL)
++/* For KVM VMX to handle IRQs in IRQ induced VM exits. */
++EXPORT_SYMBOL_GPL(external_interrupt);
++#endif
 +
  #endif /* CONFIG_X86_64 */
  
