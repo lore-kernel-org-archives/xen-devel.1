@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F036DC41513
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5112C001E0
 	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:02:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573847.898852 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.573842.898812 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlGY-0006dm-SW; Tue, 01 Aug 2023 09:02:06 +0000
+	id 1qQlGV-0005h7-Q3; Tue, 01 Aug 2023 09:02:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573847.898852; Tue, 01 Aug 2023 09:02:06 +0000
+Received: by outflank-mailman (output) from mailman id 573842.898812; Tue, 01 Aug 2023 09:02:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlGY-0006bP-MD; Tue, 01 Aug 2023 09:02:06 +0000
-Received: by outflank-mailman (input) for mailman id 573847;
- Tue, 01 Aug 2023 09:02:05 +0000
+	id 1qQlGV-0005gz-Lz; Tue, 01 Aug 2023 09:02:03 +0000
+Received: by outflank-mailman (input) for mailman id 573842;
+ Tue, 01 Aug 2023 09:02:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L1iX=DS=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQlGW-0005CK-Rl
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:04 +0000
+ id 1qQlGU-0005CK-8H
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:02 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 15299869-304a-11ee-b259-6b7b168915f2;
- Tue, 01 Aug 2023 11:02:03 +0200 (CEST)
+ id 13ae1b3c-304a-11ee-b259-6b7b168915f2;
+ Tue, 01 Aug 2023 11:02:01 +0200 (CEST)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 02:01:58 -0700
+ 01 Aug 2023 02:01:54 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:01:57 -0700
+ by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:01:53 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 15299869-304a-11ee-b259-6b7b168915f2
+X-Inumbo-ID: 13ae1b3c-304a-11ee-b259-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690880523; x=1722416523;
+  t=1690880521; x=1722416521;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=4BQfFZvfF2FO6NJuqP2rESZLyKeNKRqaVIW2rUp/ej0=;
-  b=DM33ycWPt/lnS/yPJd4VjncxVMg7Sssbbj0SKNg4pQBDR3R+F4utCr2i
-   pEfC9THyeJgNdt0ryuaAYSsXvbwt4NYFXDaDVCvnNGmGD+NwXDAep9W9P
-   JJPn4RauZA7kR7NGFQ4y+eoUgMn5WxlWUwFgLX2E+KqavJcvuLFl7IyFO
-   7wu92UGJjmlBROjVsFbH1P4VHDq5LfUPS4M8j5JFqbbQ3QRA79zjg398w
-   PYOJjwNc7/VettikkDQ6781Tlc04ZiK5rgAOE5+Haq8q+B8jhC4F7/skq
-   yQrMKOyH+7SIdbaraBm424V6nfZaSjVFL9TfsHXZe8ExVLHIfFpQjU4sy
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082298"
+  bh=tXI/C++YYSo9nyQMGnRVNwF3YsuprVE9KCho8shF7bg=;
+  b=FBrTccm1qP69TBPG13LdDhfig5WgYaMoIz7PFFbEgJQThQFc0W55BqkV
+   +Uqv041tr72H7Fn9DVl5s/w1uBW0zfEqKpiesD+VUAJ2iPOAm2l8Gvhmw
+   9LmUR713IrRBFhpQQLqU32CPrNOC2jjPoPc2zMVOwV72cSDyQg/lkKGZx
+   CnbL6kfvSRZr165+Hm29r4LHKcPCafWd32ZCvsUyeNt4cPDReE0DiP4hU
+   Gx+sWuA6jditj7v4tKbWxtyUJxPUiHJlkB4ucfeVMW0N4WksPfsTb0Pe7
+   VDaG+4Ts3cYD/jsvX9EJcZKBhYjDdtLq+iB1KhtIwSEy/2iaW7Hj+GY+S
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082167"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="433082298"
+   d="scan'208";a="433082167"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975216988"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975216959"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="975216988"
+   d="scan'208";a="975216959"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,9 +139,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH RESEND v9 08/36] x86/cpu: Add MSR numbers for FRED configuration
-Date: Tue,  1 Aug 2023 01:32:50 -0700
-Message-Id: <20230801083318.8363-9-xin3.li@intel.com>
+Subject: [PATCH RESEND v9 04/36] x86/cpufeatures: Add the cpu feature bit for FRED
+Date: Tue,  1 Aug 2023 01:32:46 -0700
+Message-Id: <20230801083318.8363-5-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230801083318.8363-1-xin3.li@intel.com>
 References: <20230801083318.8363-1-xin3.li@intel.com>
@@ -150,67 +150,40 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add MSR numbers for the FRED configuration registers.
+Add the CPU feature bit for FRED.
 
-Originally-by: Megha Dey <megha.dey@intel.com>
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/asm/msr-index.h       | 13 ++++++++++++-
- tools/arch/x86/include/asm/msr-index.h | 13 ++++++++++++-
- 2 files changed, 24 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/cpufeatures.h       | 1 +
+ tools/arch/x86/include/asm/cpufeatures.h | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-index.h
-index a00a53e15ab7..111fb76f6dbe 100644
---- a/arch/x86/include/asm/msr-index.h
-+++ b/arch/x86/include/asm/msr-index.h
-@@ -36,8 +36,19 @@
- #define EFER_FFXSR		(1<<_EFER_FFXSR)
- #define EFER_AUTOIBRS		(1<<_EFER_AUTOIBRS)
- 
--/* Intel MSRs. Some also available on other CPUs */
-+/* FRED MSRs */
-+#define MSR_IA32_FRED_RSP0	0x1cc /* Level 0 stack pointer */
-+#define MSR_IA32_FRED_RSP1	0x1cd /* Level 1 stack pointer */
-+#define MSR_IA32_FRED_RSP2	0x1ce /* Level 2 stack pointer */
-+#define MSR_IA32_FRED_RSP3	0x1cf /* Level 3 stack pointer */
-+#define MSR_IA32_FRED_STKLVLS	0x1d0 /* Exception stack levels */
-+#define MSR_IA32_FRED_SSP0	MSR_IA32_PL0_SSP /* Level 0 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP1	0x1d1 /* Level 1 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP2	0x1d2 /* Level 2 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP3	0x1d3 /* Level 3 shadow stack pointer */
-+#define MSR_IA32_FRED_CONFIG	0x1d4 /* Entrypoint and interrupt stack level */
- 
-+/* Intel MSRs. Some also available on other CPUs */
- #define MSR_TEST_CTRL				0x00000033
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT	29
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT		BIT(MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT)
-diff --git a/tools/arch/x86/include/asm/msr-index.h b/tools/arch/x86/include/asm/msr-index.h
-index 3aedae61af4f..565cade0785a 100644
---- a/tools/arch/x86/include/asm/msr-index.h
-+++ b/tools/arch/x86/include/asm/msr-index.h
-@@ -36,8 +36,19 @@
- #define EFER_FFXSR		(1<<_EFER_FFXSR)
- #define EFER_AUTOIBRS		(1<<_EFER_AUTOIBRS)
- 
--/* Intel MSRs. Some also available on other CPUs */
-+/* FRED MSRs */
-+#define MSR_IA32_FRED_RSP0	0x1cc /* Level 0 stack pointer */
-+#define MSR_IA32_FRED_RSP1	0x1cd /* Level 1 stack pointer */
-+#define MSR_IA32_FRED_RSP2	0x1ce /* Level 2 stack pointer */
-+#define MSR_IA32_FRED_RSP3	0x1cf /* Level 3 stack pointer */
-+#define MSR_IA32_FRED_STKLVLS	0x1d0 /* Exception stack levels */
-+#define MSR_IA32_FRED_SSP0	MSR_IA32_PL0_SSP /* Level 0 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP1	0x1d1 /* Level 1 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP2	0x1d2 /* Level 2 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP3	0x1d3 /* Level 3 shadow stack pointer */
-+#define MSR_IA32_FRED_CONFIG	0x1d4 /* Entrypoint and interrupt stack level */
- 
-+/* Intel MSRs. Some also available on other CPUs */
- #define MSR_TEST_CTRL				0x00000033
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT	29
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT		BIT(MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT)
+diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
+index cb8ca46213be..fd3ddd5c0283 100644
+--- a/arch/x86/include/asm/cpufeatures.h
++++ b/arch/x86/include/asm/cpufeatures.h
+@@ -317,6 +317,7 @@
+ #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
+ #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
+ #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
++#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
+ #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
+ #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
+ #define X86_FEATURE_AVX_IFMA            (12*32+23) /* "" Support for VPMADD52[H,L]UQ */
+diff --git a/tools/arch/x86/include/asm/cpufeatures.h b/tools/arch/x86/include/asm/cpufeatures.h
+index cb8ca46213be..fd3ddd5c0283 100644
+--- a/tools/arch/x86/include/asm/cpufeatures.h
++++ b/tools/arch/x86/include/asm/cpufeatures.h
+@@ -317,6 +317,7 @@
+ #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
+ #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
+ #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
++#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
+ #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
+ #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
+ #define X86_FEATURE_AVX_IFMA            (12*32+23) /* "" Support for VPMADD52[H,L]UQ */
 -- 
 2.34.1
 
