@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD21C001DF
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:02:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573845.898828 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA06C04FE2
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:02:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573849.898872 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlGX-00060d-1v; Tue, 01 Aug 2023 09:02:05 +0000
+	id 1qQlGa-0007EI-Sw; Tue, 01 Aug 2023 09:02:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573845.898828; Tue, 01 Aug 2023 09:02:05 +0000
+Received: by outflank-mailman (output) from mailman id 573849.898872; Tue, 01 Aug 2023 09:02:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlGW-0005yb-RJ; Tue, 01 Aug 2023 09:02:04 +0000
-Received: by outflank-mailman (input) for mailman id 573845;
- Tue, 01 Aug 2023 09:02:03 +0000
+	id 1qQlGa-0007CG-JY; Tue, 01 Aug 2023 09:02:08 +0000
+Received: by outflank-mailman (input) for mailman id 573849;
+ Tue, 01 Aug 2023 09:02:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L1iX=DS=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQlGV-0005CK-HQ
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:03 +0000
+ id 1qQlGY-0005CK-90
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:06 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1464ee31-304a-11ee-b259-6b7b168915f2;
- Tue, 01 Aug 2023 11:02:02 +0200 (CEST)
+ id 15f6f484-304a-11ee-b259-6b7b168915f2;
+ Tue, 01 Aug 2023 11:02:05 +0200 (CEST)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 02:01:57 -0700
+ 01 Aug 2023 02:02:01 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:01:56 -0700
+ by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:02:00 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1464ee31-304a-11ee-b259-6b7b168915f2
+X-Inumbo-ID: 15f6f484-304a-11ee-b259-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690880522; x=1722416522;
+  t=1690880525; x=1722416525;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ks9fQ3QR6UqRMocjQpLz+yk1iYvQPVTbiFl2BDd8yPg=;
-  b=NAPIbyZIKv5DrR7BPINGcZPR/dmN67i6cSKgYGGqixiyqI+NoGjojH9z
-   PRn9oAvSZiQjd0NJ+OpU36zPManyXRvKv7UBrX4OjenF2fB2uD2TKUdDo
-   5S5sfQEi1QEwDO78xWuj6ZXGQLgsyla6QRO9+w5Ru12vC8cQvLquTebNK
-   K2E8CL7KG+aiawEm+W21PestMYHBuWuNBITr8IRzqW/50sFEsuszSeLHT
-   /RsjhDHThtV0OLY+LmtWberNvm1JlbVDJyqwVeAjumoqfvs6PeWREF3cb
-   /gOMFkSpuevXgmECORWuq2gpAq97W3LQkpKI36ShhzEZ+XGICazpUeXFz
+  bh=+L7aUhS6u+4qwVp6754zs3SWJDqRpOJYTCoF5qb+V6E=;
+  b=g2sDu022VTc1+4G5uAVLwL6WUnnLArVoJS6blZ8YWHfmg4UC5CF+VD6R
+   t9EXgX2sYMiHjGHcOcEBJ5IQdL5tSnsqMAzdp2MEK65fmoGYPSlgec+dU
+   tVvO4eK7jA2zogEmfy2xt2ZOH412B7AFcFsrUZiAR9kZKCx6iOVP00e4Q
+   QZu2qkwj8hhOjMzc7D2HRbsRp8rFo5GWuaR2ZrDbRmlU8bmPY9uC7nQ3C
+   7kSzaI3M8jIOof/8k0c0xD2MaHgUaPAiz4Ribm3iIozuc6Y2IFCET+XmV
+   y8b94CM7m3RQ7qrdU6lSZ2Kh6h8qbQ7TmQXbi+EtRElJ1FzbUT+JgWJ5A
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082268"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082397"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="433082268"
+   d="scan'208";a="433082397"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975216979"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975217010"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="975216979"
+   d="scan'208";a="975217010"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,9 +139,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH RESEND v9 07/36] x86/cpu: Add X86_CR4_FRED macro
-Date: Tue,  1 Aug 2023 01:32:49 -0700
-Message-Id: <20230801083318.8363-8-xin3.li@intel.com>
+Subject: [PATCH RESEND v9 11/36] x86/fred: Reserve space for the FRED stack frame
+Date: Tue,  1 Aug 2023 01:32:53 -0700
+Message-Id: <20230801083318.8363-12-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230801083318.8363-1-xin3.li@intel.com>
 References: <20230801083318.8363-1-xin3.li@intel.com>
@@ -150,83 +150,46 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add X86_CR4_FRED macro for the FRED bit in %cr4. This bit should be a
-pinned bit, not to be changed after initialization.
-
-CR4 macros are defined in arch/x86/include/uapi/asm/processor-flags.h,
-which is uapi, and thus cannot depend on CONFIG_X86_64.
-
-Using _BITUL() causes build errors on 32 bits, and there is no
-guarantee that user space applications (e.g. something like Qemu)
-might not want to use this declaration even when building for i386 or
-x32.
-
-However, %cr4 is a machine word (unsigned long), so to avoid build
-warnings on 32 bits, explicitly cast the value to unsigned long,
-truncating upper 32 bits.
-
-The other alternative would be to use CONFIG_X86_64 around the
-definition of cr4_pinned_mask. It is probably not desirable to make
-cr4_pinned_mask non-const.
-
-Another option, which may be preferable, to be honest: explicitly
-enumerate the CR4 bits which *may* be changed (a whitelist), instead
-of the ones that may not. That would be a separate, pre-FRED, patch,
-and would automatically resolve this problem as a side effect.
-
-The following flags probably should have been in this set all along,
-as they are all controls affecting the kernel runtime environment as
-opposed to user space:
-
-X86_CR4_DE, X86_CR4_PAE, X86_CR4_PSE, X86_CR4_MCE, X86_CR4_PGE,
-X86_CR4_OSFXSR, X86_CR4_OSXMMEXCPT, X86_CR4_LA57, X86_CR4_PCIDE,
-X86_CR4_LAM_SUP
-
-Possibly X86_CR4_VMXE as well, which seems harmless even if KVM is
-not loaded; X86_CR4_PKE can be fixed as long as the PKE configuration
-registers are at least initialized to disabled.
-
-It is relatively simple to do an audit of which flags are allowed to
-be modified at runtime and whitelist only those. There is no reason
-why we should allow bits in CR4 to be toggled by default.
+When using FRED, reserve space at the top of the stack frame, just
+like i386 does.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/uapi/asm/processor-flags.h | 2 ++
- arch/x86/kernel/cpu/common.c                | 5 +++--
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/thread_info.h | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/include/uapi/asm/processor-flags.h b/arch/x86/include/uapi/asm/processor-flags.h
-index d898432947ff..ce08c2ca70b5 100644
---- a/arch/x86/include/uapi/asm/processor-flags.h
-+++ b/arch/x86/include/uapi/asm/processor-flags.h
-@@ -138,6 +138,8 @@
- #define X86_CR4_CET		_BITUL(X86_CR4_CET_BIT)
- #define X86_CR4_LAM_SUP_BIT	28 /* LAM for supervisor pointers */
- #define X86_CR4_LAM_SUP		_BITUL(X86_CR4_LAM_SUP_BIT)
-+#define X86_CR4_FRED_BIT	32 /* enable FRED kernel entry */
-+#define X86_CR4_FRED		_BITULL(X86_CR4_FRED_BIT)
+diff --git a/arch/x86/include/asm/thread_info.h b/arch/x86/include/asm/thread_info.h
+index d63b02940747..089cab875cba 100644
+--- a/arch/x86/include/asm/thread_info.h
++++ b/arch/x86/include/asm/thread_info.h
+@@ -31,7 +31,9 @@
+  * In vm86 mode, the hardware frame is much longer still, so add 16
+  * bytes to make room for the real-mode segments.
+  *
+- * x86_64 has a fixed-length stack frame.
++ * x86-64 has a fixed-length stack frame, but it depends on whether
++ * or not FRED is enabled. Future versions of FRED might make this
++ * dynamic, but for now it is always 2 words longer.
+  */
+ #ifdef CONFIG_X86_32
+ # ifdef CONFIG_VM86
+@@ -39,8 +41,12 @@
+ # else
+ #  define TOP_OF_KERNEL_STACK_PADDING 8
+ # endif
+-#else
+-# define TOP_OF_KERNEL_STACK_PADDING 0
++#else /* x86-64 */
++# ifdef CONFIG_X86_FRED
++#  define TOP_OF_KERNEL_STACK_PADDING (2*8)
++# else
++#  define TOP_OF_KERNEL_STACK_PADDING 0
++# endif
+ #endif
  
  /*
-  * x86-64 Task Priority Register, CR8
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 0ba1067f4e5f..331b06d19f7f 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -402,8 +402,9 @@ static __always_inline void setup_umip(struct cpuinfo_x86 *c)
- 
- /* These bits should not change their value after CPU init is finished. */
- static const unsigned long cr4_pinned_mask =
--	X86_CR4_SMEP | X86_CR4_SMAP | X86_CR4_UMIP |
--	X86_CR4_FSGSBASE | X86_CR4_CET;
-+	(unsigned long)
-+	(X86_CR4_SMEP | X86_CR4_SMAP | X86_CR4_UMIP |
-+	 X86_CR4_FSGSBASE | X86_CR4_CET | X86_CR4_FRED);
- static DEFINE_STATIC_KEY_FALSE_RO(cr_pinning);
- static unsigned long cr4_pinned_bits __ro_after_init;
- 
 -- 
 2.34.1
 
