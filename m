@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20E53C00528
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 03:44:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573551.898352 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EACAC0015E
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 03:44:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573555.898382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQgJG-0006rW-VK; Tue, 01 Aug 2023 03:44:34 +0000
+	id 1qQgJW-0007kE-1k; Tue, 01 Aug 2023 03:44:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573551.898352; Tue, 01 Aug 2023 03:44:34 +0000
+Received: by outflank-mailman (output) from mailman id 573555.898382; Tue, 01 Aug 2023 03:44:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQgJG-0006rP-Rt; Tue, 01 Aug 2023 03:44:34 +0000
-Received: by outflank-mailman (input) for mailman id 573551;
- Tue, 01 Aug 2023 03:44:33 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qQgJV-0007k6-UW; Tue, 01 Aug 2023 03:44:49 +0000
+Received: by outflank-mailman (input) for mailman id 573555;
+ Tue, 01 Aug 2023 03:44:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qUf/=DS=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qQgJF-0006rJ-Sx
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 03:44:33 +0000
+ id 1qQgJT-00076X-Nn
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 03:44:47 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id b8ef5b99-301d-11ee-b258-6b7b168915f2;
- Tue, 01 Aug 2023 05:44:31 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id c08dcdcf-301d-11ee-8613-37d641c3527e;
+ Tue, 01 Aug 2023 05:44:44 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E8721D75;
- Mon, 31 Jul 2023 20:45:13 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A91D1D75;
+ Mon, 31 Jul 2023 20:45:26 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id AD6423F59C;
- Mon, 31 Jul 2023 20:44:26 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5A7613F59C;
+ Mon, 31 Jul 2023 20:44:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,97 +45,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8ef5b99-301d-11ee-b258-6b7b168915f2
+X-Inumbo-ID: c08dcdcf-301d-11ee-8613-37d641c3527e
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Henry Wang <Henry.Wang@arm.com>,
+Cc: Wei Chen <wei.chen@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Wei Chen <wei.chen@arm.com>,
-	Penny Zheng <penny.zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 00/13] xen/arm: Split MMU code as the prepration of MPU work
-Date: Tue,  1 Aug 2023 11:44:06 +0800
-Message-Id: <20230801034419.2047541-1-Henry.Wang@arm.com>
+	Penny Zheng <penny.zheng@arm.com>,
+	Henry Wang <Henry.Wang@arm.com>
+Subject: [PATCH v4 03/13] xen/arm64: prepare for moving MMU related code from head.S
+Date: Tue,  1 Aug 2023 11:44:09 +0800
+Message-Id: <20230801034419.2047541-4-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230801034419.2047541-1-Henry.Wang@arm.com>
+References: <20230801034419.2047541-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Based on the discussion in the Xen Summit [1], sending this series out after
-addressing the comments in v3 [2] as the preparation work to add MPU support.
+From: Wei Chen <wei.chen@arm.com>
 
-Mostly code movement, with some of Kconfig and build system (mainly Makefiles)
-adjustment. No functional change expected.
+We want to reuse head.S for MPU systems, but there are some
+code are implemented for MMU systems only. We will move such
+code to another MMU specific file. But before that we will
+do some indentations fix in this patch to make them be easier
+for reviewing:
+1. Fix the indentations and incorrect style of code comments.
+2. Fix the indentations for .text.header section.
+3. Rename puts() to asm_puts() for global export
 
-[1] https://lore.kernel.org/xen-devel/AS8PR08MB799122F8B0CB841DED64F4819226A@AS8PR08MB7991.eurprd08.prod.outlook.com/
-[2] https://lore.kernel.org/xen-devel/20230626033443.2943270-1-Penny.Zheng@arm.com/
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+---
+v4:
+- Rebase to pick the adr -> adr_l change in PRINT(_s).
+- Correct in-code comment for asm_puts() and add a note to
+  mention that asm_puts() should be only called from assembly.
+- Drop redundant puts (now asm_puts) under CONFIG_EARLY_PRINTK.
+v3:
+-  fix commit message
+-  Rename puts() to asm_puts() for global export
+v2:
+-  New patch.
+---
+ xen/arch/arm/arm64/head.S | 46 ++++++++++++++++++++-------------------
+ 1 file changed, 24 insertions(+), 22 deletions(-)
 
-Henry Wang (4):
-  xen/arm: Introduce 'choice' for memory system architecture
-  xen/arm64: Split and move MMU-specific head.S to mmu/head.S
-  xen/arm64: Move setup_fixmap() to create_page_tables()
-  xen/arm: Extract MMU-specific code
-
-Penny Zheng (6):
-  xen/arm: Fold pmap and fixmap into MMU system
-  xen/arm: mm: Use generic variable/function names for extendability
-  xen/arm: mmu: move MMU-specific setup_mm to mmu/setup.c
-  xen/arm: mmu: move MMU specific P2M code to mmu/p2m.{c,h}
-  xen/arm: mmu: relocate copy_from_paddr() to setup.c
-  xen/arm: mmu: enable SMMU subsystem only in MMU
-
-Wei Chen (3):
-  xen/arm64: head.S: Introduce enable_{boot,secondary}_cpu_mm
-  xen/arm64: prepare for moving MMU related code from head.S
-  xen/arm: Move MMU related definitions from config.h to mmu/layout.h
-
- xen/arch/arm/Kconfig                    |   16 +-
- xen/arch/arm/Makefile                   |    1 +
- xen/arch/arm/arm32/head.S               |    4 +-
- xen/arch/arm/arm64/Makefile             |    2 +-
- xen/arch/arm/arm64/head.S               |  497 +------
- xen/arch/arm/arm64/mmu/Makefile         |    2 +
- xen/arch/arm/arm64/mmu/head.S           |  471 ++++++
- xen/arch/arm/arm64/{ => mmu}/mm.c       |   11 +-
- xen/arch/arm/arm64/smpboot.c            |    6 +-
- xen/arch/arm/include/asm/arm64/macros.h |   36 +
- xen/arch/arm/include/asm/arm64/mm.h     |    7 +-
- xen/arch/arm/include/asm/config.h       |  132 +-
- xen/arch/arm/include/asm/fixmap.h       |    7 +-
- xen/arch/arm/include/asm/mm.h           |   28 +-
- xen/arch/arm/include/asm/mmu/layout.h   |  146 ++
- xen/arch/arm/include/asm/mmu/mm.h       |   55 +
- xen/arch/arm/include/asm/mmu/p2m.h      |   18 +
- xen/arch/arm/include/asm/p2m.h          |   33 +-
- xen/arch/arm/include/asm/page.h         |   15 -
- xen/arch/arm/include/asm/setup.h        |    8 +-
- xen/arch/arm/kernel.c                   |   27 -
- xen/arch/arm/mm.c                       | 1119 --------------
- xen/arch/arm/mmu/Makefile               |    3 +
- xen/arch/arm/mmu/mm.c                   | 1153 +++++++++++++++
- xen/arch/arm/mmu/p2m.c                  | 1610 ++++++++++++++++++++
- xen/arch/arm/mmu/setup.c                |  366 +++++
- xen/arch/arm/p2m.c                      | 1772 ++---------------------
- xen/arch/arm/setup.c                    |  326 +----
- xen/arch/arm/smpboot.c                  |    4 +-
- xen/arch/arm/xen.lds.S                  |    1 +
- xen/drivers/passthrough/Kconfig         |    3 +-
- 31 files changed, 4064 insertions(+), 3815 deletions(-)
- create mode 100644 xen/arch/arm/arm64/mmu/Makefile
- create mode 100644 xen/arch/arm/arm64/mmu/head.S
- rename xen/arch/arm/arm64/{ => mmu}/mm.c (95%)
- create mode 100644 xen/arch/arm/include/asm/mmu/layout.h
- create mode 100644 xen/arch/arm/include/asm/mmu/mm.h
- create mode 100644 xen/arch/arm/include/asm/mmu/p2m.h
- create mode 100644 xen/arch/arm/mmu/Makefile
- create mode 100644 xen/arch/arm/mmu/mm.c
- create mode 100644 xen/arch/arm/mmu/p2m.c
- create mode 100644 xen/arch/arm/mmu/setup.c
-
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 2af9f974d5..b29bffce5b 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -94,7 +94,7 @@
+ #define PRINT(_s)          \
+         mov   x3, lr ;     \
+         adr_l x0, 98f ;    \
+-        bl    puts    ;    \
++        bl    asm_puts ;   \
+         mov   lr, x3 ;     \
+         RODATA_STR(98, _s)
+ 
+@@ -136,21 +136,21 @@
+         add \xb, \xb, x20
+ .endm
+ 
+-        .section .text.header, "ax", %progbits
+-        /*.aarch64*/
++.section .text.header, "ax", %progbits
++/*.aarch64*/
+ 
+-        /*
+-         * Kernel startup entry point.
+-         * ---------------------------
+-         *
+-         * The requirements are:
+-         *   MMU = off, D-cache = off, I-cache = on or off,
+-         *   x0 = physical address to the FDT blob.
+-         *
+-         * This must be the very first address in the loaded image.
+-         * It should be linked at XEN_VIRT_START, and loaded at any
+-         * 4K-aligned address.
+-         */
++/*
++ * Kernel startup entry point.
++ * ---------------------------
++ *
++ * The requirements are:
++ *   MMU = off, D-cache = off, I-cache = on or off,
++ *   x0 = physical address to the FDT blob.
++ *
++ * This must be the very first address in the loaded image.
++ * It should be linked at XEN_VIRT_START, and loaded at any
++ * 4K-aligned address.
++ */
+ 
+ GLOBAL(start)
+         /*
+@@ -535,7 +535,7 @@ ENDPROC(cpu_init)
+  * Macro to create a mapping entry in \tbl to \phys. Only mapping in 3rd
+  * level table (i.e page granularity) is supported.
+  *
+- * ptbl:     table symbol where the entry will be created
++ * ptbl:    table symbol where the entry will be created
+  * virt:    virtual address
+  * phys:    physical address (should be page aligned)
+  * tmp1:    scratch register
+@@ -970,19 +970,22 @@ init_uart:
+         ret
+ ENDPROC(init_uart)
+ 
+-/* Print early debug messages.
++/*
++ * Print early debug messages.
++ * Note: This function is only supposed to be called from assembly.
+  * x0: Nul-terminated string to print.
+  * x23: Early UART base address
+- * Clobbers x0-x1 */
+-puts:
++ * Clobbers x0-x1
++ */
++ENTRY(asm_puts)
+         early_uart_ready x23, 1
+         ldrb  w1, [x0], #1           /* Load next char */
+         cbz   w1, 1f                 /* Exit on nul */
+         early_uart_transmit x23, w1
+-        b     puts
++        b     asm_puts
+ 1:
+         ret
+-ENDPROC(puts)
++ENDPROC(asm_puts)
+ 
+ /*
+  * Print a 64-bit number in hex.
+@@ -1012,7 +1015,6 @@ hex:    .ascii "0123456789abcdef"
+ 
+ ENTRY(early_puts)
+ init_uart:
+-puts:
+ putn:   ret
+ 
+ #endif /* !CONFIG_EARLY_PRINTK */
 -- 
 2.25.1
 
