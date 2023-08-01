@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B033C05052
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:04:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573869.899067 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9424FC001DF
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:08:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573930.899081 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlJ9-0001NC-DF; Tue, 01 Aug 2023 09:04:47 +0000
+	id 1qQlME-0004rX-D4; Tue, 01 Aug 2023 09:07:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573869.899067; Tue, 01 Aug 2023 09:04:47 +0000
+Received: by outflank-mailman (output) from mailman id 573930.899081; Tue, 01 Aug 2023 09:07:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlJ9-0001KU-34; Tue, 01 Aug 2023 09:04:47 +0000
-Received: by outflank-mailman (input) for mailman id 573869;
- Tue, 01 Aug 2023 09:04:45 +0000
+	id 1qQlME-0004rQ-9u; Tue, 01 Aug 2023 09:07:58 +0000
+Received: by outflank-mailman (input) for mailman id 573930;
+ Tue, 01 Aug 2023 09:07:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L1iX=DS=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQlJ7-0007Jn-Ms
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:04:45 +0000
-Received: from mgamail.intel.com (unknown [192.55.52.93])
+ id 1qQlGm-0005CK-0V
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:20 +0000
+Received: from mgamail.intel.com (unknown [134.134.136.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 750ae0e8-304a-11ee-b259-6b7b168915f2;
- Tue, 01 Aug 2023 11:04:44 +0200 (CEST)
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 02:04:43 -0700
+ id 1e3ff35a-304a-11ee-b259-6b7b168915f2;
+ Tue, 01 Aug 2023 11:02:19 +0200 (CEST)
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Aug 2023 02:02:11 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by orsmga007.jf.intel.com with ESMTP; 01 Aug 2023 02:04:42 -0700
+ by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:02:10 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 750ae0e8-304a-11ee-b259-6b7b168915f2
+X-Inumbo-ID: 1e3ff35a-304a-11ee-b259-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690880684; x=1722416684;
+  t=1690880539; x=1722416539;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=gEY4ZGGaaQpe3vscglEO/Z/ZNgQa2ejE/Ek77q9vAj0=;
-  b=QFIE8Szr7GbNnf0WcdEBwBq/u2eE3k1tDtEPMZLbFbZJXd7GhBceJPFP
-   tUKorNIdVL8t+ScOfYP7lO7vCYKYh34PWt+/xAr64jOcHWlxKXbvGEmhG
-   PIpQu6G22Fa3NiihLeRUYWW8OwyFY5IzNHOHYaKvElSgvP7NPoO+TVMog
-   ZazPcdcc5yO8a+vLmlYdW/jTGVceK8TvtDgYvb7Xm/FJZF3QHxg8xpmHm
-   TCH9tpfb4oJV2cEHv0rThDae8El6xVNQQEKTouk5uTGMOn8p9DxurMXFX
-   OqBSTHoJ/99/N/IOkAG6KUFIjRNiuhaA1tYd7R12wGv9Y21BIQygSRf4l
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="366713784"
+  bh=QeZUtDgMAPwFIrdo9TmaG72+ignP6GGIZpxe8B2aw6k=;
+  b=WQl6TwPrN6Sy0l3M4N9YPr7w8tT645eltV74dGUcBukoP7OtWEQhomST
+   yHhoujrwYNpdqb3LLemUZEHFJHoEdqD/LXMMIIEmhir8yVnBd9f6roMAI
+   ydfKMVXNaKpSfnj51pcIVmyLXPyC2zOW134BHNGT4E04avgYIBIzmpHdX
+   jfGepdVKDTsTNWYCp8/PjAfX21wJ+vudiZc5CrY1ysrVNyhiGTEZIOsiI
+   ojLeEuRHjcw192UTIsbFAZaZ1uIcE3uxzFdWdtgPBHQ+x6V1gztueQEff
+   P5Cy4Erb7RC7+EtLSq5XB5eA6ModcQRbWsN6aPsNPcdnu4Ph4aDStmUX6
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082780"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="366713784"
+   d="scan'208";a="433082780"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="722420775"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975217078"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="722420775"
+   d="scan'208";a="975217078"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,74 +139,79 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH RESEND v9 36/36] x86/fred: Disable FRED by default in its early stage
-Date: Tue,  1 Aug 2023 01:35:53 -0700
-Message-Id: <20230801083553.8468-10-xin3.li@intel.com>
+Subject: [PATCH RESEND v9 22/36] x86/fred: Add a double fault entry stub for FRED
+Date: Tue,  1 Aug 2023 01:33:04 -0700
+Message-Id: <20230801083318.8363-23-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230801083553.8468-1-xin3.li@intel.com>
-References: <20230801083553.8468-1-xin3.li@intel.com>
+In-Reply-To: <20230801083318.8363-1-xin3.li@intel.com>
+References: <20230801083318.8363-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Disable FRED by default in its early stage.
+The IDT event delivery of a double fault pushes an error code into the
+orig_ax member of the pt_regs structure, and the error code is passed
+as the second argument of its C-handler exc_double_fault(), although
+the pt_regs structure is already passed as the first argument.
 
-To enable FRED, a new kernel command line option "fred" needs to be added.
+The existing IDT double fault asm entry code does the following
+
+  movq ORIG_RAX(%rsp), %rsi	/* get error code into 2nd argument*/
+  movq $-1, ORIG_RAX(%rsp)	/* no syscall to restart */
+
+to set the orig_ax member to -1 just before calling the C-handler.
+
+X86_TRAP_TS, X86_TRAP_NP, X86_TRAP_SS, X86_TRAP_GP, X86_TRAP_AC and
+X86_TRAP_CP are all handled in the same way because the IDT event
+delivery pushes an error code into their stack frame for them.
+
+The commit d99015b1abbad ("x86: move entry_64.S register saving out of
+the macros") introduced the changes to set orig_ax to -1, but I can't
+see why. Our tests with FRED seem fine if orig_ax is left unchanged
+instead of set to -1. It's probably cleaner and simpler to remove the
+second argument from exc_double_fault() while leave orig_ax unchanged
+to pass the error code inside the first argument, at least on native
+x86_64. That would be a separate, pre-FRED, patch.
+
+For now just add a double fault entry stub for FRED, which simply
+calls the existing exc_double_fault().
 
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/include/asm/fred.h | 1 +
+ arch/x86/kernel/traps.c     | 7 +++++++
+ 2 files changed, 8 insertions(+)
 
-Changes since v7:
-* Add a log message when FRED is enabled.
----
- Documentation/admin-guide/kernel-parameters.txt | 4 ++++
- arch/x86/kernel/cpu/common.c                    | 3 +++
- arch/x86/kernel/fred.c                          | 3 +++
- 3 files changed, 10 insertions(+)
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index a1457995fd41..cb12decfcdc0 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1513,6 +1513,10 @@
- 			Warning: use of this parameter will taint the kernel
- 			and may cause unknown problems.
+diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
+index f559dd9dc4f2..bd701ac87528 100644
+--- a/arch/x86/include/asm/fred.h
++++ b/arch/x86/include/asm/fred.h
+@@ -116,6 +116,7 @@ DECLARE_FRED_HANDLER(fred_exc_nmi);
+ DECLARE_FRED_HANDLER(fred_exc_debug);
+ DECLARE_FRED_HANDLER(fred_exc_page_fault);
+ DECLARE_FRED_HANDLER(fred_exc_machine_check);
++DECLARE_FRED_HANDLER(fred_exc_double_fault);
  
-+	fred
-+			Forcefully enable flexible return and event delivery,
-+			which is otherwise disabled by default.
+ #endif /* __ASSEMBLY__ */
+ 
+diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
+index b10464966a81..49dd92458eb0 100644
+--- a/arch/x86/kernel/traps.c
++++ b/arch/x86/kernel/traps.c
+@@ -555,6 +555,13 @@ DEFINE_IDTENTRY_DF(exc_double_fault)
+ 	instrumentation_end();
+ }
+ 
++#ifdef CONFIG_X86_FRED
++DEFINE_FRED_HANDLER(fred_exc_double_fault)
++{
++	exc_double_fault(regs, regs->orig_ax);
++}
++#endif
 +
- 	ftrace=[tracer]
- 			[FTRACE] will set and start the specified tracer
- 			as early as possible in order to facilitate early
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index b34a8a138755..38cf4f64a56e 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -1451,6 +1451,9 @@ static void __init cpu_parse_early_param(void)
- 	char *argptr = arg, *opt;
- 	int arglen, taint = 0;
- 
-+	if (!cmdline_find_option_bool(boot_command_line, "fred"))
-+		setup_clear_cpu_cap(X86_FEATURE_FRED);
-+
- #ifdef CONFIG_X86_32
- 	if (cmdline_find_option_bool(boot_command_line, "no387"))
- #ifdef CONFIG_MATH_EMULATION
-diff --git a/arch/x86/kernel/fred.c b/arch/x86/kernel/fred.c
-index 7fdf79c964a8..a4a726ea9fc2 100644
---- a/arch/x86/kernel/fred.c
-+++ b/arch/x86/kernel/fred.c
-@@ -8,6 +8,9 @@
- 
- void cpu_init_fred_exceptions(void)
+ DEFINE_IDTENTRY(exc_bounds)
  {
-+	/* When FRED is enabled by default, this log message may not needed */
-+	pr_info("Initialize FRED on CPU%d\n", smp_processor_id());
-+
- 	wrmsrl(MSR_IA32_FRED_CONFIG,
- 	       /* Reserve for CALL emulation */
- 	       FRED_CONFIG_REDZONE |
+ 	if (notify_die(DIE_TRAP, "bounds", regs, 0,
 -- 
 2.34.1
 
