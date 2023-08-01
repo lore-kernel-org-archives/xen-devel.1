@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09EF6C05051
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:02:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573848.898862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F3B0C05052
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 09:02:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573852.898897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlGZ-0006r3-LV; Tue, 01 Aug 2023 09:02:07 +0000
+	id 1qQlGd-0007nG-J6; Tue, 01 Aug 2023 09:02:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573848.898862; Tue, 01 Aug 2023 09:02:07 +0000
+Received: by outflank-mailman (output) from mailman id 573852.898897; Tue, 01 Aug 2023 09:02:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQlGZ-0006ot-BM; Tue, 01 Aug 2023 09:02:07 +0000
-Received: by outflank-mailman (input) for mailman id 573848;
- Tue, 01 Aug 2023 09:02:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qQlGd-0007kx-0b; Tue, 01 Aug 2023 09:02:11 +0000
+Received: by outflank-mailman (input) for mailman id 573852;
+ Tue, 01 Aug 2023 09:02:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L1iX=DS=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qQlGX-0005E5-8S
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:05 +0000
+ id 1qQlGZ-0005CK-I1
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 09:02:07 +0000
 Received: from mgamail.intel.com (unknown [134.134.136.31])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 144b77da-304a-11ee-8613-37d641c3527e;
- Tue, 01 Aug 2023 11:02:02 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 16c89ace-304a-11ee-b259-6b7b168915f2;
+ Tue, 01 Aug 2023 11:02:06 +0200 (CEST)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 02:01:55 -0700
+ 01 Aug 2023 02:02:02 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:01:54 -0700
+ by fmsmga006.fm.intel.com with ESMTP; 01 Aug 2023 02:02:01 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 144b77da-304a-11ee-8613-37d641c3527e
+X-Inumbo-ID: 16c89ace-304a-11ee-b259-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690880522; x=1722416522;
+  t=1690880526; x=1722416526;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=F/SemwGNBG6weEZopYj3iIwsf6sy0XGLv5PanieJeUc=;
-  b=PTf1qI/ntclSmq1E2/3athJC4+4Uw8AXodqtZ1ZdAzqdFaR+P44xWfaN
-   NKBFci8grUrleWddGCMdr7nLnVeDndsQmaiQebxXxxW18oOrQpgTLGBiV
-   o7KVaO9UCuhVhD1aaEFrtTNbEAYti3xqOCXHSxzlAekNz96NJBdHVQZkM
-   JIV5HQqjLFrWnLq98+xyULmBkylJwlcdInYiMoVqvDcq7irkjzogvMlAs
-   K23NPVPsatH0RhwsKtcPK5V/OzXnaKB325gasMLMjlPSQBaEY1TtLNA+g
-   yl3lRyLsYKJvBHXWW2nc9PdT3YogRGKI24D1AwZA84Fx2tIC07d9NJuby
+  bh=lZsnH9xZ+sSI0HJfWdXFi2jVveN7fME2POBe5mQbKKE=;
+  b=HcVaThGnaKpuSYErS/ovXzFXKxGhluRl0nl7EgI60sqm1S7xY8hWOQQP
+   IAvuhcFnAVm77Qakw9/mHk3ld8+U+VT7TiIPI7Vd/CAPWoF1M9qLdVlbH
+   lRNdtCWWaAh+N112PZJs0pAfEGHtfIwxd2JwXpDKzS+TIOH0/VmC9Yc2M
+   s+3Lw1iVhDgI/gH6/dzavRxxzyAQukD/x5XdJRiI0jFXLeROPCsuuIOR+
+   idEqYPf8KhcLIb6BEyAi2Hrhj1s6Ol5wiOf10kwlcIKgE9vX9lAntEaug
+   xVWH5Dp+lj6oFn5k8gYmSDD+ubKJaImgPEcKk5XafZOIo1XFlXyN/P6rM
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082199"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="433082432"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="433082199"
+   d="scan'208";a="433082432"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975216963"
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="975217021"
 X-IronPort-AV: E=Sophos;i="6.01,246,1684825200"; 
-   d="scan'208";a="975216963"
+   d="scan'208";a="975217021"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -139,9 +139,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Yantengsi <siyanteng@loongson.cn>,
 	Christophe Leroy <christophe.leroy@csgroup.eu>,
 	Sathvika Vasireddy <sv@linux.ibm.com>
-Subject: [PATCH RESEND v9 05/36] x86/opcode: Add ERETU, ERETS instructions to x86-opcode-map
-Date: Tue,  1 Aug 2023 01:32:47 -0700
-Message-Id: <20230801083318.8363-6-xin3.li@intel.com>
+Subject: [PATCH RESEND v9 12/36] x86/fred: Update MSR_IA32_FRED_RSP0 during task switch
+Date: Tue,  1 Aug 2023 01:32:54 -0700
+Message-Id: <20230801083318.8363-13-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230801083318.8363-1-xin3.li@intel.com>
 References: <20230801083318.8363-1-xin3.li@intel.com>
@@ -150,44 +150,42 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add instruction opcodes used by FRED ERETU/ERETS to x86-opcode-map.
+MSR_IA32_FRED_RSP0 is used during ring 3 event delivery, and needs to
+be updated to point to the top of next task stack during task switch.
 
-Opcode numbers are per FRED spec v5.0.
+Update MSR_IA32_FRED_RSP0 with WRMSR instruction for now, and will use
+WRMSRNS/WRMSRLIST for performance once it gets upstreamed.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/lib/x86-opcode-map.txt       | 2 +-
- tools/arch/x86/lib/x86-opcode-map.txt | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/switch_to.h | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/lib/x86-opcode-map.txt b/arch/x86/lib/x86-opcode-map.txt
-index 5168ee0360b2..7a269e269dc0 100644
---- a/arch/x86/lib/x86-opcode-map.txt
-+++ b/arch/x86/lib/x86-opcode-map.txt
-@@ -1052,7 +1052,7 @@ EndTable
+diff --git a/arch/x86/include/asm/switch_to.h b/arch/x86/include/asm/switch_to.h
+index f42dbf17f52b..6c911fd400b2 100644
+--- a/arch/x86/include/asm/switch_to.h
++++ b/arch/x86/include/asm/switch_to.h
+@@ -70,9 +70,16 @@ static inline void update_task_stack(struct task_struct *task)
+ #ifdef CONFIG_X86_32
+ 	this_cpu_write(cpu_tss_rw.x86_tss.sp1, task->thread.sp0);
+ #else
+-	/* Xen PV enters the kernel on the thread stack. */
+-	if (cpu_feature_enabled(X86_FEATURE_XENPV))
++	if (cpu_feature_enabled(X86_FEATURE_FRED)) {
++		/*
++		 * Will use WRMSRNS/WRMSRLIST for performance once it's upstreamed.
++		 */
++		wrmsrl(MSR_IA32_FRED_RSP0,
++		       (unsigned long)task_stack_page(task) + THREAD_SIZE);
++	} else if (cpu_feature_enabled(X86_FEATURE_XENPV)) {
++		/* Xen PV enters the kernel on the thread stack. */
+ 		load_sp0(task_top_of_stack(task));
++	}
+ #endif
+ }
  
- GrpTable: Grp7
- 0: SGDT Ms | VMCALL (001),(11B) | VMLAUNCH (010),(11B) | VMRESUME (011),(11B) | VMXOFF (100),(11B) | PCONFIG (101),(11B) | ENCLV (000),(11B)
--1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B)
-+1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B) | ERETU (F3),(010),(11B) | ERETS (F2),(010),(11B)
- 2: LGDT Ms | XGETBV (000),(11B) | XSETBV (001),(11B) | VMFUNC (100),(11B) | XEND (101)(11B) | XTEST (110)(11B) | ENCLU (111),(11B)
- 3: LIDT Ms
- 4: SMSW Mw/Rv
-diff --git a/tools/arch/x86/lib/x86-opcode-map.txt b/tools/arch/x86/lib/x86-opcode-map.txt
-index 5168ee0360b2..7a269e269dc0 100644
---- a/tools/arch/x86/lib/x86-opcode-map.txt
-+++ b/tools/arch/x86/lib/x86-opcode-map.txt
-@@ -1052,7 +1052,7 @@ EndTable
- 
- GrpTable: Grp7
- 0: SGDT Ms | VMCALL (001),(11B) | VMLAUNCH (010),(11B) | VMRESUME (011),(11B) | VMXOFF (100),(11B) | PCONFIG (101),(11B) | ENCLV (000),(11B)
--1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B)
-+1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B) | ERETU (F3),(010),(11B) | ERETS (F2),(010),(11B)
- 2: LGDT Ms | XGETBV (000),(11B) | XSETBV (001),(11B) | VMFUNC (100),(11B) | XEND (101)(11B) | XTEST (110)(11B) | ENCLU (111),(11B)
- 3: LIDT Ms
- 4: SMSW Mw/Rv
 -- 
 2.34.1
 
