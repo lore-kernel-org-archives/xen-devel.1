@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0722DC001E0
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 12:39:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.574128.899311 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E3BC001DF
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 12:48:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.574136.899322 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQof8-0000rP-GX; Tue, 01 Aug 2023 12:39:42 +0000
+	id 1qQonf-0002N0-Bg; Tue, 01 Aug 2023 12:48:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 574128.899311; Tue, 01 Aug 2023 12:39:42 +0000
+Received: by outflank-mailman (output) from mailman id 574136.899322; Tue, 01 Aug 2023 12:48:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQof8-0000rI-E2; Tue, 01 Aug 2023 12:39:42 +0000
-Received: by outflank-mailman (input) for mailman id 574128;
- Tue, 01 Aug 2023 12:39:41 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qQof7-0000r8-4t; Tue, 01 Aug 2023 12:39:41 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qQof7-0003qY-2F; Tue, 01 Aug 2023 12:39:41 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qQof6-0007HI-Ia; Tue, 01 Aug 2023 12:39:40 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1qQof6-0005cZ-I3; Tue, 01 Aug 2023 12:39:40 +0000
+	id 1qQonf-0002Mt-8q; Tue, 01 Aug 2023 12:48:31 +0000
+Received: by outflank-mailman (input) for mailman id 574136;
+ Tue, 01 Aug 2023 12:48:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=gjSu=DS=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qQond-0002MS-I7
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 12:48:29 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b6a4c424-3069-11ee-b25a-6b7b168915f2;
+ Tue, 01 Aug 2023 14:48:29 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id 0CFED4EE0742;
+ Tue,  1 Aug 2023 14:48:27 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,88 +41,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=lmAfiUsMHa4WXes13kR2BK2h29MjO/JZpxnYByTClHs=; b=njqxdzqAIWi2rzjNhQof2pFlc8
-	YL23nBL1ZL4Ojm9fMbmSaQlt/9s40wbcrpT4M3ouZUt7FG83QPWyycfwDEiLnCp5aP8sMdmCe+I7c
-	noJStmAAkHCVp4SgTuWasVtTg36lAXy1jF0p+Dh+Do45A+8cGVjlNf15GHR9G/syYDyo=;
+X-Inumbo-ID: b6a4c424-3069-11ee-b25a-6b7b168915f2
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-182100-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 2/3] drivers/char: address MISRA C:2012 Rule 5.3
+Date: Tue,  1 Aug 2023 14:47:43 +0200
+Message-Id: <69fad93eeafdceae5de1f2483015f05d1798b6be.1690893696.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1690893696.git.nicola.vetrini@bugseng.com>
+References: <cover.1690893696.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 182100: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=c2026b88b58cbb6a84e2885c320a8cfe08f8ffc8
-X-Osstest-Versions-That:
-    xen=70eb862b01023c45b943e8ff92ef4f6a7e9e8950
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 01 Aug 2023 12:39:40 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 182100 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/182100/
+The following strategies are adopted to deal with violations
+of MISRA C:2012 Rule 5.3:
+"An identifier declared in an inner scope shall not hide an
+identifier declared in an outer scope".
 
-Failures :-/ but no regressions.
+Local variable 'ctrl' shadows a variable defined in an outer scope.
+Since the innermost variable is used only once after being set, it is safe
+to remove it entirely.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+The enum constant 'baud' is shadowed by local a local variable at line
+1476, and renaming the enum constant avoid such conflicts.
 
-version targeted for testing:
- xen                  c2026b88b58cbb6a84e2885c320a8cfe08f8ffc8
-baseline version:
- xen                  70eb862b01023c45b943e8ff92ef4f6a7e9e8950
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+Changes in v2:
+- Renamed the enum constant instead of the local variable 'baud'.
+- Removed the inner variable entirely, as it serves no purpose.
+---
+ xen/drivers/char/ehci-dbgp.c | 4 +---
+ xen/drivers/char/ns16550.c   | 6 +++---
+ 2 files changed, 4 insertions(+), 6 deletions(-)
 
-Last test of basis   182098  2023-07-31 20:00:37 Z    0 days
-Testing same since   182100  2023-08-01 10:03:51 Z    0 days    1 attempts
+diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
+index 4d8d765122..72be4d9cc9 100644
+--- a/xen/drivers/char/ehci-dbgp.c
++++ b/xen/drivers/char/ehci-dbgp.c
+@@ -424,9 +424,7 @@ static void dbgp_issue_command(struct ehci_dbgp *dbgp, u32 ctrl,
+          * checks to see if ACPI or some other initialization also
+          * reset the EHCI debug port.
+          */
+-        u32 ctrl = readl(&dbgp->ehci_debug->control);
+-
+-        if ( ctrl & DBGP_ENABLED )
++        if ( readl(&dbgp->ehci_debug->control) & DBGP_ENABLED )
+         {
+             cmd |= CMD_RUN;
+             writel(cmd, &dbgp->ehci_regs->command);
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index 212a9c49ae..b75e7f8fa0 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -1388,7 +1388,7 @@ string_param("com1", opt_com1);
+ string_param("com2", opt_com2);
+ 
+ enum serial_param_type {
+-    baud,
++    baud_rate,
+     clock_hz,
+     data_bits,
+     io_base,
+@@ -1416,7 +1416,7 @@ struct serial_param_var {
+  * com_console_options for serial port com1 and com2.
+  */
+ static const struct serial_param_var __initconst sp_vars[] = {
+-    {"baud", baud},
++    {"baud", baud_rate},
+     {"clock-hz", clock_hz},
+     {"data-bits", data_bits},
+     {"io-base", io_base},
+@@ -1596,7 +1596,7 @@ static bool __init parse_namevalue_pairs(char *str, struct ns16550 *uart)
+ 
+         switch ( get_token(token, &param_value) )
+         {
+-        case baud:
++        case baud_rate:
+             uart->baud = simple_strtoul(param_value, NULL, 0);
+             break;
+ 
+-- 
+2.34.1
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Federico Serafini <federico.serafini@bugseng.com>
-  Jan Beulich <jbeulich@suse.com>
-  Nicola Vetrini <nicola.vetrini@bugseng.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   70eb862b01..c2026b88b5  c2026b88b58cbb6a84e2885c320a8cfe08f8ffc8 -> smoke
 
