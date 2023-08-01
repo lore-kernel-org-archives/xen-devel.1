@@ -4,35 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB0AC0015E
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 06:37:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.573699.898647 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B041EB64DD
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Aug 2023 06:38:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.573707.898662 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQj0W-0006sZ-2o; Tue, 01 Aug 2023 06:37:24 +0000
+	id 1qQj1J-0007uX-Fg; Tue, 01 Aug 2023 06:38:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 573699.898647; Tue, 01 Aug 2023 06:37:24 +0000
+Received: by outflank-mailman (output) from mailman id 573707.898662; Tue, 01 Aug 2023 06:38:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQj0V-0006rL-Sj; Tue, 01 Aug 2023 06:37:23 +0000
-Received: by outflank-mailman (input) for mailman id 573699;
- Tue, 01 Aug 2023 06:37:22 +0000
+	id 1qQj1J-0007uQ-BQ; Tue, 01 Aug 2023 06:38:13 +0000
+Received: by outflank-mailman (input) for mailman id 573707;
+ Tue, 01 Aug 2023 06:38:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Jaq7=DS=huaweicloud.com=petrtesarik@srs-se1.protection.inumbo.net>)
- id 1qQirE-00011l-Mi
- for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 06:27:48 +0000
-Received: from frasgout13.his.huawei.com (unknown [14.137.139.46])
+ <SRS0=5P4A=DS=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
+ id 1qQj1I-0007hB-HJ
+ for xen-devel@lists.xenproject.org; Tue, 01 Aug 2023 06:38:12 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 879d7940-3034-11ee-8613-37d641c3527e;
- Tue, 01 Aug 2023 08:27:46 +0200 (CEST)
-Received: from mail02.huawei.com (unknown [172.18.147.227])
- by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4RFPxv14Dgz9y7l9
- for <xen-devel@lists.xenproject.org>; Tue,  1 Aug 2023 14:16:19 +0800 (CST)
-Received: from A2101119013HW2.china.huawei.com (unknown [10.81.220.249])
- by APP1 (Coremail) with SMTP id LxC2BwCHOroapchkgAwYAA--.27948S10;
- Tue, 01 Aug 2023 07:27:08 +0100 (CET)
+ id faa209d6-3035-11ee-8613-37d641c3527e;
+ Tue, 01 Aug 2023 08:38:10 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 49E1B6147A;
+ Tue,  1 Aug 2023 06:38:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31641C433C8;
+ Tue,  1 Aug 2023 06:38:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,26 +46,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 879d7940-3034-11ee-8613-37d641c3527e
-From: Petr Tesarik <petrtesarik@huaweicloud.com>
-To: Stefano Stabellini <sstabellini@kernel.org>,
+X-Inumbo-ID: faa209d6-3035-11ee-8613-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1690871887;
+	bh=hDT+iR6AIZkPiUojYsTG3f1l1RIz7J/cYfpHFlOtmcY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ihVqg2sCDGTatgUfOTqQau2d5hVIQ7FhkJ4dQpOT6tNN864bCCltGkeZsSp33J3G6
+	 67N3c/0YoQ7uttpJF1XBIQwpsMlhyfqYfn0RI23AQwNs82WxOMomf6WcFs2wg6yuwo
+	 qESSyNtICw/59SiCMx7JA4bv1FkEQ3vhy5wSX/Nc=
+Date: Tue, 1 Aug 2023 08:38:05 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Petr Tesarik <petrtesarik@huaweicloud.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Russell King <linux@armlinux.org.uk>,
 	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
 	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	"Rafael J. Wysocki" <rafael@kernel.org>,
 	Juergen Gross <jgross@suse.com>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Christoph Hellwig <hch@lst.de>,
 	Marek Szyprowski <m.szyprowski@samsung.com>,
 	Robin Murphy <robin.murphy@arm.com>,
-	Christoph Lameter <cl@linux.com>,
-	Pekka Enberg <penberg@kernel.org>,
+	Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>,
 	David Rientjes <rientjes@google.com>,
 	Joonsoo Kim <iamjoonsoo.kim@lge.com>,
 	Andrew Morton <akpm@linux-foundation.org>,
@@ -73,381 +81,204 @@ To: Stefano Stabellini <sstabellini@kernel.org>,
 	Petr Tesarik <petr.tesarik.ext@huawei.com>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Hans de Goede <hdegoede@redhat.com>,
-	James Seo <james@equiv.tech>,
+	Hans de Goede <hdegoede@redhat.com>, James Seo <james@equiv.tech>,
 	James Clark <james.clark@arm.com>,
 	Kees Cook <keescook@chromium.org>,
-	xen-devel@lists.xenproject.org (moderated list:XEN HYPERVISOR ARM),
-	linux-arm-kernel@lists.infradead.org (moderated list:ARM PORT),
-	linux-kernel@vger.kernel.org (open list),
-	linux-mips@vger.kernel.org (open list:MIPS),
-	iommu@lists.linux.dev (open list:XEN SWIOTLB SUBSYSTEM),
-	linux-mm@kvack.org (open list:SLAB ALLOCATOR)
-Cc: Roberto Sassu <roberto.sassu@huaweicloud.com>,
-	petr@tesarici.cz
-Subject: [PATCH v7 8/9] swiotlb: allocate a new memory pool when existing pools are full
-Date: Tue,  1 Aug 2023 08:24:03 +0200
-Message-Id: <e6fc5b3d0695870774f01a8c2416aa5b639ee2b5.1690871004.git.petr.tesarik.ext@huawei.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1690871004.git.petr.tesarik.ext@huawei.com>
+	"moderated list:XEN HYPERVISOR ARM" <xen-devel@lists.xenproject.org>,
+	"moderated list:ARM PORT" <linux-arm-kernel@lists.infradead.org>,
+	open list <linux-kernel@vger.kernel.org>,
+	"open list:MIPS" <linux-mips@vger.kernel.org>,
+	"open list:XEN SWIOTLB SUBSYSTEM" <iommu@lists.linux.dev>,
+	"open list:SLAB ALLOCATOR" <linux-mm@kvack.org>,
+	Roberto Sassu <roberto.sassu@huaweicloud.com>, petr@tesarici.cz
+Subject: Re: [PATCH v7 0/9] Allow dynamic allocation of software IO TLB
+ bounce buffers
+Message-ID: <2023080144-cardigan-nerd-2bed@gregkh>
 References: <cover.1690871004.git.petr.tesarik.ext@huawei.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:LxC2BwCHOroapchkgAwYAA--.27948S10
-X-Coremail-Antispam: 1UD129KBjvJXoW3ZrWfGFyxAryxCr4UJFWfAFb_yoWkXrW3pF
-	y5Aa47KFWUXrn7CFy2k3WUCF1a9w4vkr47CrWa9rn8Zrn7Wrn8tFyqkryYqr95JF4DZF13
-	tFWYvF15uw47Zw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUQv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-	kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-	z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr1j6r
-	xdM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJVW0
-	owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
-	IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
-	M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
-	kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCY1x0264kExVAvwVAq07x20xyl42xK82IYc2Ij
-	64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x
-	8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCIc40Y0x0EwIxGrwCI42IY
-	6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJr0_GcWlIxAIcV
-	CF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIE
-	c7CjxVAFwI0_Cr1j6rxdYxBIdaVFxhVjvjDU0xZFpf9x0JU2XdbUUUUU=
-X-CM-SenderInfo: hshw23xhvd2x3n6k3tpzhluzxrxghudrp/
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1690871004.git.petr.tesarik.ext@huawei.com>
 
-From: Petr Tesarik <petr.tesarik.ext@huawei.com>
+On Tue, Aug 01, 2023 at 08:23:55AM +0200, Petr Tesarik wrote:
+> From: Petr Tesarik <petr.tesarik.ext@huawei.com>
+> 
+> Motivation
+> ==========
+> 
+> The software IO TLB was designed with these assumptions:
+> 
+> 1) It would not be used much. Small systems (little RAM) don't need it, and
+>    big systems (lots of RAM) would have modern DMA controllers and an IOMMU
+>    chip to handle legacy devices.
+> 2) A small fixed memory area (64 MiB by default) is sufficient to
+>    handle the few cases which require a bounce buffer.
+> 3) 64 MiB is little enough that it has no impact on the rest of the
+>    system.
+> 4) Bounce buffers require large contiguous chunks of low memory. Such
+>    memory is precious and can be allocated only early at boot.
+> 
+> It turns out they are not always true:
+> 
+> 1) Embedded systems may have more than 4GiB RAM but no IOMMU and legacy
+>    32-bit peripheral busses and/or DMA controllers.
+> 2) CoCo VMs use bounce buffers for all I/O but may need substantially more
+>    than 64 MiB.
+> 3) Embedded developers put as many features as possible into the available
+>    memory. A few dozen "missing" megabytes may limit what features can be
+>    implemented.
+> 4) If CMA is available, it can allocate large continuous chunks even after
+>    the system has run for some time.
+> 
+> Goals
+> =====
+> 
+> The goal of this work is to start with a small software IO TLB at boot and
+> expand it later when/if needed.
+> 
+> Design
+> ======
+> 
+> This version of the patch series retains the current slot allocation
+> algorithm with multiple areas to reduce lock contention, but additional
+> slots can be added when necessary.
+> 
+> These alternatives have been considered:
+> 
+> - Allocate and free buffers as needed using direct DMA API. This works
+>   quite well, except in CoCo VMs where each allocation/free requires
+>   decrypting/encrypting memory, which is a very expensive operation.
+> 
+> - Allocate a very large software IO TLB at boot, but allow to migrate pages
+>   to/from it (like CMA does). For systems with CMA, this would mean two big
+>   allocations at boot. Finding the balance between CMA, SWIOTLB and rest of
+>   available RAM can be challenging. More importantly, there is no clear
+>   benefit compared to allocating SWIOTLB memory pools from the CMA.
+> 
+> Implementation Constraints
+> ==========================
+> 
+> These constraints have been taken into account:
+> 
+> 1) Minimize impact on devices which do not benefit from the change.
+> 2) Minimize the number of memory decryption/encryption operations.
+> 3) Avoid contention on a lock or atomic variable to preserve parallel
+>    scalability.
+> 
+> Additionally, the software IO TLB code is also used to implement restricted
+> DMA pools. These pools are restricted to a pre-defined physical memory
+> region and must not use any other memory. In other words, dynamic
+> allocation of memory pools must be disabled for restricted DMA pools.
+> 
+> Data Structures
+> ===============
+> 
+> The existing struct io_tlb_mem is the central type for a SWIOTLB allocator,
+> but it now contains multiple memory pools::
+> 
+>   io_tlb_mem
+>   +---------+   io_tlb_pool
+>   | SWIOTLB | 	+-------+   +-------+   +-------+
+>   |allocator|-->|default|-->|dynamic|-->|dynamic|-->...
+>   |    	    |  	|memory |   |memory |   |memory |
+>   +---------+ 	| pool  |   | pool  |   | pool  |
+> 	      	+-------+   +-------+   +-------+
+> 
+> The allocator structure contains global state (such as flags and counters)
+> and structures needed to schedule new allocations. Each memory pool
+> contains the actual buffer slots and metadata. The first memory pool in the
+> list is the default memory pool allocated statically at early boot.
+> 
+> New memory pools are allocated from a kernel worker thread. That's because
+> bounce buffers are allocated when mapping a DMA buffer, which may happen in
+> interrupt context where large atomic allocations would probably fail.
+> Allocation from process context is much more likely to succeed, especially
+> if it can use CMA.
+> 
+> Nonetheless, the onset of a load spike may fill up the SWIOTLB before the
+> worker has a chance to run. In that case, try to allocate a small transient
+> memory pool to accommodate the request. If memory is encrypted and the
+> device cannot do DMA to encrypted memory, this buffer is allocated from the
+> coherent atomic DMA memory pool. Reducing the size of SWIOTLB may therefore
+> require increasing the size of the coherent pool with the "coherent_pool"
+> command-line parameter.
+> 
+> Performance
+> ===========
+> 
+> All testing compared a vanilla v6.4-rc6 kernel with a fully patched
+> kernel. The kernel was booted with "swiotlb=force" to allow stress-testing
+> the software IO TLB on a high-performance device that would otherwise not
+> need it. CONFIG_DEBUG_FS was set to 'y' to match the configuration of
+> popular distribution kernels; it is understood that parallel workloads
+> suffer from contention on the recently added debugfs atomic counters.
+> 
+> These benchmarks were run:
+> 
+> - small: single-threaded I/O of 4 KiB blocks,
+> - big: single-threaded I/O of 64 KiB blocks,
+> - 4way: 4-way parallel I/O of 4 KiB blocks.
+> 
+> In all tested cases, the default 64 MiB SWIOTLB would be sufficient (but
+> wasteful). The "default" pair of columns shows performance impact when
+> booted with 64 MiB SWIOTLB (i.e. current state). The "growing" pair of
+> columns shows the impact when booted with a 1 MiB initial SWIOTLB, which
+> grew to 5 MiB at run time. The "var" column in the tables below is the
+> coefficient of variance over 5 runs of the test, the "diff" column is the
+> difference in read-write I/O bandwidth (MiB/s). The very first column is
+> the coefficient of variance in the results of the base unpatched kernel.
+> 
+> First, on an x86 VM against a QEMU virtio SATA driver backed by a RAM-based
+> block device on the host:
+> 
+> 	base	   default	   growing
+> 	var	var	diff	var	diff
+> small	1.96%	0.47%	-1.5%	0.52%	-2.2%
+> big	2.03%	1.35%	+0.9%	2.22%	+2.9%
+> 4way	0.80%	0.45%	-0.7%	1.22%	<0.1%
+> 
+> Second, on a Raspberry Pi4 with 8G RAM and a class 10 A1 microSD card:
+> 
+> 	base	   default	   growing
+> 	var	var	diff	var	diff
+> small	1.09%	1.69%	+0.5%	2.14%	-0.2%
+> big	0.03%	0.28%	-0.5%	0.03%	-0.1%
+> 4way	5.15%	2.39%	+0.2%	0.66%	<0.1%
+> 
+> Third, on a CoCo VM. This was a bigger system, so I also added a 24-thread
+> parallel I/O test:
+> 
+> 	base	   default	   growing
+> 	var	var	diff	var	diff
+> small	2.41%	6.02%	+1.1%	10.33%	+6.7%
+> big	9.20%	2.81%	-0.6%	16.84%	-0.2%
+> 4way	0.86%	2.66%	-0.1%	 2.22%	-4.9%
+> 24way	3.19%	6.19%	+4.4%	 4.08%	-5.9%
+> 
+> Note the increased variance of the CoCo VM, although the host was not
+> otherwise loaded. These are caused by the first run, which includes the
+> overhead of allocating additional bounce buffers and sharing them with the
+> hypervisor. The system was not rebooted between successive runs.
+> 
+> Parallel tests suffer from a reduced number of areas in the dynamically
+> allocated memory pools. This can be improved by allocating a larger pool
+> from CMA (not implemented in this series yet).
+> 
+> I have no good explanation for the increase in performance of the
+> 24-thread I/O test with the default (non-growing) memory pool. Although the
+> difference is within variance, it seems to be real. The average bandwidth
+> is consistently above that of the unpatched kernel.
+> 
+> To sum it up:
+> 
+> - All workloads benefit from reduced memory footprint.
+> - No performance regressions have been observed with the default size of
+>   the software IO TLB.
+> - Most workloads retain their former performance even if the software IO
+>   TLB grows at run time.
+> 
 
-When swiotlb_find_slots() cannot find suitable slots, schedule the
-allocation of a new memory pool. It is not possible to allocate the pool
-immediately, because this code may run in interrupt context, which is not
-suitable for large memory allocations. This means that the memory pool will
-be available too late for the currently requested mapping, but the stress
-on the software IO TLB allocator is likely to continue, and subsequent
-allocations will benefit from the additional pool eventually.
+For the driver-core touched portions:
 
-Keep all memory pools for an allocator in an RCU list to avoid locking on
-the read side. For modifications, add a new spinlock to struct io_tlb_mem.
-
-The spinlock also protects updates to the total number of slabs (nslabs in
-struct io_tlb_mem), but not reads of the value. Readers may therefore
-encounter a stale value, but this is not an issue:
-
-- swiotlb_tbl_map_single() and is_swiotlb_active() only check for non-zero
-  value. This is ensured by the existence of the default memory pool,
-  allocated at boot.
-
-- The exact value is used only for non-critical purposes (debugfs, kernel
-  messages).
-
-Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
----
- include/linux/swiotlb.h |   8 +++
- kernel/dma/swiotlb.c    | 148 +++++++++++++++++++++++++++++++++-------
- 2 files changed, 131 insertions(+), 25 deletions(-)
-
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 9825fa14abe4..8371c92a0271 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -8,6 +8,7 @@
- #include <linux/types.h>
- #include <linux/limits.h>
- #include <linux/spinlock.h>
-+#include <linux/workqueue.h>
- 
- struct device;
- struct page;
-@@ -104,12 +105,16 @@ struct io_tlb_pool {
- /**
-  * struct io_tlb_mem - Software IO TLB allocator
-  * @defpool:	Default (initial) IO TLB memory pool descriptor.
-+ * @pool:	IO TLB memory pool descriptor (if not dynamic).
-  * @nslabs:	Total number of IO TLB slabs in all pools.
-  * @debugfs:	The dentry to debugfs.
-  * @force_bounce: %true if swiotlb bouncing is forced
-  * @for_alloc:  %true if the pool is used for memory allocation
-  * @can_grow:	%true if more pools can be allocated dynamically.
-  * @phys_limit:	Maximum allowed physical address.
-+ * @lock:	Lock to synchronize changes to the list.
-+ * @pools:	List of IO TLB memory pool descriptors (if dynamic).
-+ * @dyn_alloc:	Dynamic IO TLB pool allocation work.
-  * @total_used:	The total number of slots in the pool that are currently used
-  *		across all areas. Used only for calculating used_hiwater in
-  *		debugfs.
-@@ -125,6 +130,9 @@ struct io_tlb_mem {
- #ifdef CONFIG_SWIOTLB_DYNAMIC
- 	bool can_grow;
- 	u64 phys_limit;
-+	spinlock_t lock;
-+	struct list_head pools;
-+	struct work_struct dyn_alloc;
- #endif
- #ifdef CONFIG_DEBUG_FS
- 	atomic_long_t total_used;
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 0fa081defdbd..adf80dec42d7 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -79,8 +79,23 @@ struct io_tlb_slot {
- static bool swiotlb_force_bounce;
- static bool swiotlb_force_disable;
- 
-+#ifdef CONFIG_SWIOTLB_DYNAMIC
-+
-+static void swiotlb_dyn_alloc(struct work_struct *work);
-+
-+static struct io_tlb_mem io_tlb_default_mem = {
-+	.lock = __SPIN_LOCK_UNLOCKED(io_tlb_default_mem.lock),
-+	.pools = LIST_HEAD_INIT(io_tlb_default_mem.pools),
-+	.dyn_alloc = __WORK_INITIALIZER(io_tlb_default_mem.dyn_alloc,
-+					swiotlb_dyn_alloc),
-+};
-+
-+#else  /* !CONFIG_SWIOTLB_DYNAMIC */
-+
- static struct io_tlb_mem io_tlb_default_mem;
- 
-+#endif	/* CONFIG_SWIOTLB_DYNAMIC */
-+
- static unsigned long default_nslabs = IO_TLB_DEFAULT_SIZE >> IO_TLB_SHIFT;
- static unsigned long default_nareas;
- 
-@@ -278,6 +293,23 @@ static void swiotlb_init_io_tlb_pool(struct io_tlb_pool *mem, phys_addr_t start,
- 	return;
- }
- 
-+/**
-+ * add_mem_pool() - add a memory pool to the allocator
-+ * @mem:	Software IO TLB allocator.
-+ * @pool:	Memory pool to be added.
-+ */
-+static void add_mem_pool(struct io_tlb_mem *mem, struct io_tlb_pool *pool)
-+{
-+#ifdef CONFIG_SWIOTLB_DYNAMIC
-+	spin_lock(&mem->lock);
-+	list_add_rcu(&pool->node, &mem->pools);
-+	mem->nslabs += pool->nslabs;
-+	spin_unlock(&mem->lock);
-+#else
-+	mem->nslabs = pool->nslabs;
-+#endif
-+}
-+
- static void __init *swiotlb_memblock_alloc(unsigned long nslabs,
- 		unsigned int flags,
- 		int (*remap)(void *tlb, unsigned long nslabs))
-@@ -375,7 +407,7 @@ void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
- 
- 	swiotlb_init_io_tlb_pool(mem, __pa(tlb), nslabs, false,
- 				 default_nareas);
--	io_tlb_default_mem.nslabs = nslabs;
-+	add_mem_pool(&io_tlb_default_mem, mem);
- 
- 	if (flags & SWIOTLB_VERBOSE)
- 		swiotlb_print_info();
-@@ -474,7 +506,7 @@ int swiotlb_init_late(size_t size, gfp_t gfp_mask,
- 			     (nslabs << IO_TLB_SHIFT) >> PAGE_SHIFT);
- 	swiotlb_init_io_tlb_pool(mem, virt_to_phys(vstart), nslabs, true,
- 				 nareas);
--	io_tlb_default_mem.nslabs = nslabs;
-+	add_mem_pool(&io_tlb_default_mem, mem);
- 
- 	swiotlb_print_info();
- 	return 0;
-@@ -625,44 +657,83 @@ static void swiotlb_free_tlb(void *vaddr, size_t bytes)
- /**
-  * swiotlb_alloc_pool() - allocate a new IO TLB memory pool
-  * @dev:	Device for which a memory pool is allocated.
-- * @nslabs:	Desired number of slabs.
-+ * @minslabs:	Minimum number of slabs.
-+ * @nslabs:	Desired (maximum) number of slabs.
-+ * @nareas:	Number of areas.
-  * @phys_limit:	Maximum DMA buffer physical address.
-  * @gfp:	GFP flags for the allocations.
-  *
-- * Allocate and initialize a new IO TLB memory pool.
-+ * Allocate and initialize a new IO TLB memory pool. The actual number of
-+ * slabs may be reduced if allocation of @nslabs fails. If even
-+ * @minslabs cannot be allocated, this function fails.
-  *
-  * Return: New memory pool, or %NULL on allocation failure.
-  */
- static struct io_tlb_pool *swiotlb_alloc_pool(struct device *dev,
--		unsigned int nslabs, u64 phys_limit, gfp_t gfp)
-+		unsigned long minslabs, unsigned long nslabs,
-+		unsigned int nareas, u64 phys_limit, gfp_t gfp)
- {
- 	struct io_tlb_pool *pool;
-+	unsigned int slot_order;
- 	struct page *tlb;
- 	size_t pool_size;
- 	size_t tlb_size;
- 
--	pool_size = sizeof(*pool) + array_size(sizeof(*pool->areas), 1) +
--		array_size(sizeof(*pool->slots), nslabs);
-+	pool_size = sizeof(*pool) + array_size(sizeof(*pool->areas), nareas);
- 	pool = kzalloc(pool_size, gfp);
- 	if (!pool)
- 		goto error;
- 	pool->areas = (void *)pool + sizeof(*pool);
--	pool->slots = (void *)pool->areas + sizeof(*pool->areas);
- 
- 	tlb_size = nslabs << IO_TLB_SHIFT;
--	tlb = swiotlb_alloc_tlb(dev, tlb_size, phys_limit, gfp);
--	if (!tlb)
--		goto error_tlb;
-+	while (!(tlb = swiotlb_alloc_tlb(dev, tlb_size, phys_limit, gfp))) {
-+		if (nslabs <= minslabs)
-+			goto error_tlb;
-+		nslabs = ALIGN(nslabs >> 1, IO_TLB_SEGSIZE);
-+		nareas = limit_nareas(nareas, nslabs);
-+		tlb_size = nslabs << IO_TLB_SHIFT;
-+	}
- 
--	swiotlb_init_io_tlb_pool(pool, page_to_phys(tlb), nslabs, true, 1);
-+	slot_order = get_order(array_size(sizeof(*pool->slots), nslabs));
-+	pool->slots = (struct io_tlb_slot *)
-+		__get_free_pages(gfp, slot_order);
-+	if (!pool->slots)
-+		goto error_slots;
-+
-+	swiotlb_init_io_tlb_pool(pool, page_to_phys(tlb), nslabs, true, nareas);
- 	return pool;
- 
-+error_slots:
-+	swiotlb_free_tlb(page_address(tlb), tlb_size);
- error_tlb:
- 	kfree(pool);
- error:
- 	return NULL;
- }
- 
-+/**
-+ * swiotlb_dyn_alloc() - dynamic memory pool allocation worker
-+ * @work:	Pointer to dyn_alloc in struct io_tlb_mem.
-+ */
-+static void swiotlb_dyn_alloc(struct work_struct *work)
-+{
-+	struct io_tlb_mem *mem =
-+		container_of(work, struct io_tlb_mem, dyn_alloc);
-+	struct io_tlb_pool *pool;
-+
-+	pool = swiotlb_alloc_pool(NULL, IO_TLB_MIN_SLABS, default_nslabs,
-+				  default_nareas, mem->phys_limit, GFP_KERNEL);
-+	if (!pool) {
-+		pr_warn_ratelimited("Failed to allocate new pool");
-+		return;
-+	}
-+
-+	add_mem_pool(mem, pool);
-+
-+	/* Pairs with smp_rmb() in swiotlb_find_pool(). */
-+	smp_wmb();
-+}
-+
- /**
-  * swiotlb_dyn_free() - RCU callback to free a memory pool
-  * @rcu:	RCU head in the corresponding struct io_tlb_pool.
-@@ -670,8 +741,10 @@ static struct io_tlb_pool *swiotlb_alloc_pool(struct device *dev,
- static void swiotlb_dyn_free(struct rcu_head *rcu)
- {
- 	struct io_tlb_pool *pool = container_of(rcu, struct io_tlb_pool, rcu);
-+	size_t slots_size = array_size(sizeof(*pool->slots), pool->nslabs);
- 	size_t tlb_size = pool->end - pool->start;
- 
-+	free_pages((unsigned long)pool->slots, get_order(slots_size));
- 	swiotlb_free_tlb(pool->vaddr, tlb_size);
- 	kfree(pool);
- }
-@@ -689,15 +762,19 @@ static void swiotlb_dyn_free(struct rcu_head *rcu)
- struct io_tlb_pool *swiotlb_find_pool(struct device *dev, phys_addr_t paddr)
- {
- 	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
--	struct io_tlb_pool *pool = &mem->defpool;
--
--	if (paddr >= pool->start && paddr < pool->end)
--		return pool;
-+	struct io_tlb_pool *pool;
- 
--	/* Pairs with smp_wmb() in swiotlb_find_slots(). */
-+	/* Pairs with smp_wmb() in swiotlb_find_slots() and
-+	 * swiotlb_dyn_alloc(), which modify the RCU lists.
-+	 */
- 	smp_rmb();
- 
- 	rcu_read_lock();
-+	list_for_each_entry_rcu(pool, &mem->pools, node) {
-+		if (paddr >= pool->start && paddr < pool->end)
-+			goto out;
-+	}
-+
- 	list_for_each_entry_rcu(pool, &dev->dma_io_tlb_pools, node) {
- 		if (paddr >= pool->start && paddr < pool->end)
- 			goto out;
-@@ -1046,18 +1123,24 @@ static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
- 	u64 phys_limit;
- 	int index;
- 
--	pool = &mem->defpool;
--	index = swiotlb_pool_find_slots(dev, pool, orig_addr,
--					alloc_size, alloc_align_mask);
--	if (index >= 0)
--		goto found;
--
-+	rcu_read_lock();
-+	list_for_each_entry_rcu(pool, &mem->pools, node) {
-+		index = swiotlb_pool_find_slots(dev, pool, orig_addr,
-+						alloc_size, alloc_align_mask);
-+		if (index >= 0) {
-+			rcu_read_unlock();
-+			goto found;
-+		}
-+	}
-+	rcu_read_unlock();
- 	if (!mem->can_grow)
- 		return -1;
- 
-+	schedule_work(&mem->dyn_alloc);
-+
- 	nslabs = nr_slots(alloc_size);
- 	phys_limit = min_not_zero(*dev->dma_mask, dev->bus_dma_limit);
--	pool = swiotlb_alloc_pool(dev, nslabs, phys_limit,
-+	pool = swiotlb_alloc_pool(dev, nslabs, nslabs, 1, phys_limit,
- 				  GFP_NOWAIT | __GFP_NOWARN);
- 	if (!pool)
- 		return -1;
-@@ -1141,7 +1224,19 @@ static unsigned long mem_pool_used(struct io_tlb_pool *pool)
-  */
- static unsigned long mem_used(struct io_tlb_mem *mem)
- {
-+#ifdef CONFIG_SWIOTLB_DYNAMIC
-+	struct io_tlb_pool *pool;
-+	unsigned long used = 0;
-+
-+	rcu_read_lock();
-+	list_for_each_entry_rcu(pool, &mem->pools, node)
-+		used += mem_pool_used(pool);
-+	rcu_read_unlock();
-+
-+	return used;
-+#else
- 	return mem_pool_used(&mem->defpool);
-+#endif
- }
- 
- #endif /* CONFIG_DEBUG_FS */
-@@ -1562,7 +1657,10 @@ static int rmem_swiotlb_device_init(struct reserved_mem *rmem,
- 					 false, nareas);
- 		mem->force_bounce = true;
- 		mem->for_alloc = true;
--		mem->nslabs = nslabs;
-+#ifdef CONFIG_SWIOTLB_DYNAMIC
-+		spin_lock_init(&mem->lock);
-+#endif
-+		add_mem_pool(mem, pool);
- 
- 		rmem->priv = mem;
- 
--- 
-2.25.1
-
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
