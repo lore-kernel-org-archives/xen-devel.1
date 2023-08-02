@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB6EC05051
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 23:03:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.575860.901338 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 175E9C00528
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 23:03:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.575863.901368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRKsF-0002mr-D3; Wed, 02 Aug 2023 23:03:23 +0000
+	id 1qRKsH-0003Ws-NH; Wed, 02 Aug 2023 23:03:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 575860.901338; Wed, 02 Aug 2023 23:03:23 +0000
+Received: by outflank-mailman (output) from mailman id 575863.901368; Wed, 02 Aug 2023 23:03:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRKsF-0002mk-AG; Wed, 02 Aug 2023 23:03:23 +0000
-Received: by outflank-mailman (input) for mailman id 575860;
- Wed, 02 Aug 2023 23:03:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qRKsH-0003Vo-JJ; Wed, 02 Aug 2023 23:03:25 +0000
+Received: by outflank-mailman (input) for mailman id 575863;
+ Wed, 02 Aug 2023 23:03:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SOIS=DT=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qRKsD-0002Xg-KX
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 23:03:21 +0000
+ id 1qRKsF-0002ha-K9
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 23:03:23 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c461f0e5-3188-11ee-b265-6b7b168915f2;
- Thu, 03 Aug 2023 01:03:18 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c48f3022-3188-11ee-8613-37d641c3527e;
+ Thu, 03 Aug 2023 01:03:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id CCB3382867D6;
- Wed,  2 Aug 2023 18:03:16 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 8476682854B3;
+ Wed,  2 Aug 2023 18:03:17 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 89gNs2vIgyAc; Wed,  2 Aug 2023 18:03:15 -0500 (CDT)
+ with ESMTP id aZx53xWMIUrw; Wed,  2 Aug 2023 18:03:16 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 858D082854B3;
- Wed,  2 Aug 2023 18:03:15 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 5A90282857CC;
+ Wed,  2 Aug 2023 18:03:16 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id fUmWstjzii5g; Wed,  2 Aug 2023 18:03:15 -0500 (CDT)
+ with ESMTP id KeZPv3Og7xUN; Wed,  2 Aug 2023 18:03:16 -0500 (CDT)
 Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 0975682853DD;
+ by mail.rptsys.com (Postfix) with ESMTPSA id ECB318285755;
  Wed,  2 Aug 2023 18:03:15 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,15 +53,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c461f0e5-3188-11ee-b265-6b7b168915f2
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 858D082854B3
+X-Inumbo-ID: c48f3022-3188-11ee-8613-37d641c3527e
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 5A90282857CC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1691017395; bh=tcDUbXvor3Abx3L0/suO4KclBQRdywXt5N4X3WqZUt8=;
+	t=1691017396; bh=/NqBjJ2QqrMRxqfD0TktMNubuD+Oy6q5OiAFylCvLXw=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=ZcdhIBKkTIX0iC2GYS9WP2stox3fAcZx7VzpECgVJap6ytyLcaZeMxS1rtOGiPlwX
-	 vpQF/5Y43ijsrJGHSaxOMCfeMb2U2PE+d4y/um5KQ76lrPL5hTkAKV4JROdbDHSo9f
-	 4mVsygeluQw2zSrRAv7QdrW2YkFAX2k2TanbLAcw=
+	b=NvDnMh3sMDwd8EfBcxA5F5FsRtP8g0Ve+fM0s3yIte6Yy23dwnX5IaCZC2Z10ygI1
+	 1YZDZDWBqSIqdqiNNTUq3hkEAMUx4pg09L/jNejXqO2G18nFZd1QAGxTcmW+xFgqNg
+	 wjkeTJ5Pd1ddx93S1kDo1i6p/QlwgO0EXMFbA3DM=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
@@ -69,149 +69,189 @@ Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 0/9] ppc: Enable full Xen build
-Date: Wed,  2 Aug 2023 18:02:56 -0500
-Message-Id: <cover.1691016993.git.sanastasio@raptorengineering.com>
+Subject: [PATCH 2/9] xen/ppc: Add public/arch-ppc.h
+Date: Wed,  2 Aug 2023 18:02:58 -0500
+Message-Id: <14d8455ca49f69a56e87aad5d4e20cf8f77e55cd.1691016993.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1691016993.git.sanastasio@raptorengineering.com>
+References: <cover.1691016993.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Hello all,
-
-This patch series performs all of the additions necessary to drop the
-build overrides for PPC and enable the full Xen build. Except in cases
-where compatibile implementations already exist (e.g. atomic.h and
-bitops.h), the newly added definitions are simple, unimplemented stubs
-that just call BUG().
-
-A few miscellaneous changes were also made to non-ppc code as well,
-namely a few missing header fixes as well as an ARM-ism in the ns16550
-driver.
-
-Thanks,
-Shawn
-
-Shawn Anastasio (9):
-  xen/common: Add missing #includes treewide
-  xen/ppc: Add public/arch-ppc.h
-  xen/ppc: Implement atomic.h
-  xen/ppc: Implement bitops.h
-  xen/ppc: Define minimal stub headers required for full build
-  ns16550: Guard accesses to `vuart` field by CONFIG_ARM
-  xen/ppc: Define bug frames table in linker script
-  xen/ppc: Add stub function and symbol definitions
-  xen/ppc: Enable full Xen build
-
- xen/arch/ppc/Kconfig                     |   1 +
- xen/arch/ppc/Makefile                    |  17 +-
- xen/arch/ppc/arch.mk                     |   3 -
- xen/arch/ppc/include/asm/altp2m.h        |  39 +++
- xen/arch/ppc/include/asm/atomic.h        | 387 +++++++++++++++++++++++
- xen/arch/ppc/include/asm/bitops.h        | 331 ++++++++++++++++++-
- xen/arch/ppc/include/asm/bug.h           |   7 +
- xen/arch/ppc/include/asm/cache.h         |   2 +
- xen/arch/ppc/include/asm/config.h        |   9 +
- xen/arch/ppc/include/asm/cpufeature.h    |   9 +
- xen/arch/ppc/include/asm/current.h       |  42 +++
- xen/arch/ppc/include/asm/delay.h         |  11 +
- xen/arch/ppc/include/asm/desc.h          |   0
- xen/arch/ppc/include/asm/device.h        |  53 ++++
- xen/arch/ppc/include/asm/div64.h         |  14 +
- xen/arch/ppc/include/asm/domain.h        |  46 +++
- xen/arch/ppc/include/asm/event.h         |  35 ++
- xen/arch/ppc/include/asm/flushtlb.h      |  23 ++
- xen/arch/ppc/include/asm/grant_table.h   |   0
- xen/arch/ppc/include/asm/guest_access.h  |  54 ++++
- xen/arch/ppc/include/asm/guest_atomics.h |  14 +
- xen/arch/ppc/include/asm/hardirq.h       |  18 ++
- xen/arch/ppc/include/asm/hypercall.h     |   0
- xen/arch/ppc/include/asm/io.h            |  15 +
- xen/arch/ppc/include/asm/iocap.h         |   7 +
- xen/arch/ppc/include/asm/iommu.h         |   7 +
- xen/arch/ppc/include/asm/irq.h           |  32 ++
- xen/arch/ppc/include/asm/mem_access.h    |   0
- xen/arch/ppc/include/asm/memory.h        |  34 ++
- xen/arch/ppc/include/asm/mm.h            | 255 ++++++++++++++-
- xen/arch/ppc/include/asm/monitor.h       |  48 +++
- xen/arch/ppc/include/asm/nospec.h        |  18 ++
- xen/arch/ppc/include/asm/numa.h          |  26 ++
- xen/arch/ppc/include/asm/p2m.h           | 105 ++++++
- xen/arch/ppc/include/asm/page.h          |  19 ++
- xen/arch/ppc/include/asm/paging.h        |   7 +
- xen/arch/ppc/include/asm/pci.h           |   7 +
- xen/arch/ppc/include/asm/percpu.h        |  26 ++
- xen/arch/ppc/include/asm/procarea.h      |  38 +++
- xen/arch/ppc/include/asm/processor.h     |   6 +
- xen/arch/ppc/include/asm/random.h        |   9 +
- xen/arch/ppc/include/asm/regs.h          |   2 +
- xen/arch/ppc/include/asm/setup.h         |   6 +
- xen/arch/ppc/include/asm/smp.h           |  18 ++
- xen/arch/ppc/include/asm/softirq.h       |   8 +
- xen/arch/ppc/include/asm/spinlock.h      |  15 +
- xen/arch/ppc/include/asm/system.h        | 243 +++++++++++++-
- xen/arch/ppc/include/asm/time.h          |  20 ++
- xen/arch/ppc/include/asm/vm_event.h      |  49 +++
- xen/arch/ppc/include/asm/xenoprof.h      |   0
- xen/arch/ppc/mm-radix.c                  |  46 ++-
- xen/arch/ppc/opal.c                      |   2 -
- xen/arch/ppc/setup.c                     |  10 +-
- xen/arch/ppc/stubs.c                     | 351 ++++++++++++++++++++
- xen/arch/ppc/tlb-radix.c                 |   2 +-
- xen/arch/ppc/xen.lds.S                   |  10 +
- xen/common/memory.c                      |   1 +
- xen/common/symbols.c                     |   1 +
- xen/common/xmalloc_tlsf.c                |   1 +
- xen/drivers/char/ns16550.c               |   2 +
- xen/include/public/arch-ppc.h            | 140 ++++++++
- xen/include/public/hvm/save.h            |   2 +
- xen/include/public/pmu.h                 |   2 +
- xen/include/public/xen.h                 |   2 +
- xen/include/xen/domain.h                 |   1 +
- xen/include/xen/iommu.h                  |   1 +
- xen/include/xen/sched.h                  |   1 +
- 67 files changed, 2693 insertions(+), 17 deletions(-)
- create mode 100644 xen/arch/ppc/include/asm/altp2m.h
- create mode 100644 xen/arch/ppc/include/asm/atomic.h
- create mode 100644 xen/arch/ppc/include/asm/cpufeature.h
- create mode 100644 xen/arch/ppc/include/asm/current.h
- create mode 100644 xen/arch/ppc/include/asm/delay.h
- create mode 100644 xen/arch/ppc/include/asm/desc.h
- create mode 100644 xen/arch/ppc/include/asm/device.h
- create mode 100644 xen/arch/ppc/include/asm/div64.h
- create mode 100644 xen/arch/ppc/include/asm/domain.h
- create mode 100644 xen/arch/ppc/include/asm/event.h
- create mode 100644 xen/arch/ppc/include/asm/flushtlb.h
- create mode 100644 xen/arch/ppc/include/asm/grant_table.h
- create mode 100644 xen/arch/ppc/include/asm/guest_access.h
- create mode 100644 xen/arch/ppc/include/asm/guest_atomics.h
- create mode 100644 xen/arch/ppc/include/asm/hardirq.h
- create mode 100644 xen/arch/ppc/include/asm/hypercall.h
- create mode 100644 xen/arch/ppc/include/asm/io.h
- create mode 100644 xen/arch/ppc/include/asm/iocap.h
- create mode 100644 xen/arch/ppc/include/asm/iommu.h
- create mode 100644 xen/arch/ppc/include/asm/irq.h
- create mode 100644 xen/arch/ppc/include/asm/mem_access.h
- create mode 100644 xen/arch/ppc/include/asm/memory.h
- create mode 100644 xen/arch/ppc/include/asm/monitor.h
- create mode 100644 xen/arch/ppc/include/asm/nospec.h
- create mode 100644 xen/arch/ppc/include/asm/numa.h
- create mode 100644 xen/arch/ppc/include/asm/p2m.h
- create mode 100644 xen/arch/ppc/include/asm/paging.h
- create mode 100644 xen/arch/ppc/include/asm/pci.h
- create mode 100644 xen/arch/ppc/include/asm/percpu.h
- create mode 100644 xen/arch/ppc/include/asm/procarea.h
- create mode 100644 xen/arch/ppc/include/asm/random.h
- create mode 100644 xen/arch/ppc/include/asm/setup.h
- create mode 100644 xen/arch/ppc/include/asm/smp.h
- create mode 100644 xen/arch/ppc/include/asm/softirq.h
- create mode 100644 xen/arch/ppc/include/asm/spinlock.h
- create mode 100644 xen/arch/ppc/include/asm/time.h
- create mode 100644 xen/arch/ppc/include/asm/vm_event.h
- create mode 100644 xen/arch/ppc/include/asm/xenoprof.h
- create mode 100644 xen/arch/ppc/stubs.c
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+ xen/include/public/arch-ppc.h | 140 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 140 insertions(+)
  create mode 100644 xen/include/public/arch-ppc.h
 
---
+diff --git a/xen/include/public/arch-ppc.h b/xen/include/public/arch-ppc.=
+h
+new file mode 100644
+index 0000000000..0eb7ce4208
+--- /dev/null
++++ b/xen/include/public/arch-ppc.h
+@@ -0,0 +1,140 @@
++/*
++ * Permission is hereby granted, free of charge, to any person obtaining=
+ a copy
++ * of this software and associated documentation files (the "Software"),=
+ to
++ * deal in the Software without restriction, including without limitatio=
+n the
++ * rights to use, copy, modify, merge, publish, distribute, sublicense, =
+and/or
++ * sell copies of the Software, and to permit persons to whom the Softwa=
+re is
++ * furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be includ=
+ed in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRE=
+SS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILI=
+TY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHA=
+LL THE
++ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHE=
+R
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISI=
+NG
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ *
++ * Copyright (C) IBM Corp. 2005, 2006
++ * Copyright (C) Raptor Engineering, LLC 2023
++ *
++ * Authors: Hollis Blanchard <hollisb@us.ibm.com>
++ *          Timothy Pearson <tpearson@raptorengineering.com>
++ */
++
++#ifndef __XEN_PUBLIC_ARCH_PPC64_H__
++#define __XEN_PUBLIC_ARCH_PPC64_H__
++
++#define  int64_aligned_t  int64_t __attribute__((aligned(8)))
++#define uint64_aligned_t uint64_t __attribute__((aligned(8)))
++
++#ifndef __ASSEMBLY__
++#define ___DEFINE_XEN_GUEST_HANDLE(name, type)                  \
++    typedef union { type *p; unsigned long q; }                 \
++        __guest_handle_ ## name;                                \
++    typedef union { type *p; uint64_aligned_t q; }              \
++        __guest_handle_64_ ## name
++
++#define __DEFINE_XEN_GUEST_HANDLE(name, type) \
++    ___DEFINE_XEN_GUEST_HANDLE(name, type);   \
++    ___DEFINE_XEN_GUEST_HANDLE(const_##name, const type)
++#define DEFINE_XEN_GUEST_HANDLE(name)   __DEFINE_XEN_GUEST_HANDLE(name, =
+name)
++#define __XEN_GUEST_HANDLE(name)        __guest_handle_64_ ## name
++#define XEN_GUEST_HANDLE(name)          __XEN_GUEST_HANDLE(name)
++#define XEN_GUEST_HANDLE_PARAM(name)    __guest_handle_ ## name
++#define set_xen_guest_handle_raw(hnd, val)                  \
++    do {                                                    \
++        __typeof__(&(hnd)) _sxghr_tmp =3D &(hnd);             \
++        _sxghr_tmp->q =3D 0;                                  \
++        _sxghr_tmp->p =3D val;                                \
++    } while ( 0 )
++#define set_xen_guest_handle(hnd, val) set_xen_guest_handle_raw(hnd, val=
+)
++
++#ifdef __XEN_TOOLS__
++#define get_xen_guest_handle(val, hnd)  do { val =3D (hnd).p; } while (0=
+)
++#endif
++
++typedef uint64_t xen_pfn_t;
++#define PRI_xen_pfn PRIx64
++#define PRIu_xen_pfn PRIu64
++
++/*
++ * Maximum number of virtual CPUs in legacy multi-processor guests.
++ * Only one. All other VCPUS must use VCPUOP_register_vcpu_info.
++ */
++#define XEN_LEGACY_MAX_VCPUS 1
++
++typedef uint64_t xen_ulong_t;
++#define PRI_xen_ulong PRIx64
++#endif
++
++/*
++ * Pointers and other address fields inside interface structures are pad=
+ded to
++ * 64 bits. This means that field alignments aren't different between 32=
+- and
++ * 64-bit architectures.
++ */
++/* NB. Multi-level macro ensures __LINE__ is expanded before concatenati=
+on. */
++#define __MEMORY_PADDING(_X)
++#define _MEMORY_PADDING(_X)  __MEMORY_PADDING(_X)
++#define MEMORY_PADDING       _MEMORY_PADDING(__LINE__)
++
++/* And the trap vector is... */
++#define TRAP_INSTR "li 0,-1; sc" /* XXX just "sc"? */
++
++#ifndef __ASSEMBLY__
++
++#define XENCOMM_INLINE_FLAG (1UL << 63)
++
++typedef uint64_t xen_ulong_t;
++
++/* User-accessible registers: nost of these need to be saved/restored
++ * for every nested Xen invocation. */
++struct vcpu_guest_core_regs
++{
++    uint64_t gprs[32];
++    uint64_t lr;
++    uint64_t ctr;
++    uint64_t srr0;
++    uint64_t srr1;
++    uint64_t pc;
++    uint64_t msr;
++    uint64_t fpscr;             /* XXX Is this necessary */
++    uint64_t xer;
++    uint64_t hid4;              /* debug only */
++    uint64_t dar;               /* debug only */
++    uint32_t dsisr;             /* debug only */
++    uint32_t cr;
++    uint32_t __pad;             /* good spot for another 32bit reg */
++    uint32_t entry_vector;
++};
++typedef struct vcpu_guest_core_regs vcpu_guest_core_regs_t;
++
++typedef uint64_t tsc_timestamp_t; /* RDTSC timestamp */ /* XXX timebase =
+*/
++
++/* ONLY used to communicate with dom0! See also struct exec_domain. */
++struct vcpu_guest_context {
++    vcpu_guest_core_regs_t user_regs;         /* User-level CPU register=
+s     */
++    uint64_t sdr1;                     /* Pagetable base               *=
+/
++    /* XXX etc */
++};
++typedef struct vcpu_guest_context vcpu_guest_context_t;
++DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
++
++struct arch_shared_info {
++    uint64_t boot_timebase;
++};
++
++struct arch_vcpu_info {
++};
++
++struct xen_arch_domainconfig {
++};
++
++typedef struct xen_pmu_arch { uint8_t dummy; } xen_pmu_arch_t;
++
++/* Support for multi-processor guests. */
++#endif
++
++#endif
+--=20
 2.30.2
 
 
