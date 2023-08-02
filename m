@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F44EC04E69
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 14:38:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.574981.900712 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CABCC04A6A
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 14:38:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.574982.900728 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRCzw-0000Kk-8t; Wed, 02 Aug 2023 14:38:48 +0000
+	id 1qRCzx-0000y3-Vj; Wed, 02 Aug 2023 14:38:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 574981.900712; Wed, 02 Aug 2023 14:38:48 +0000
+Received: by outflank-mailman (output) from mailman id 574982.900728; Wed, 02 Aug 2023 14:38:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRCzv-0000J0-Sz; Wed, 02 Aug 2023 14:38:47 +0000
-Received: by outflank-mailman (input) for mailman id 574981;
- Wed, 02 Aug 2023 14:38:46 +0000
+	id 1qRCzx-0000vx-Kp; Wed, 02 Aug 2023 14:38:49 +0000
+Received: by outflank-mailman (input) for mailman id 574982;
+ Wed, 02 Aug 2023 14:38:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YIS5=DT=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qRCzt-0007ap-U6
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 14:38:45 +0000
+ id 1qRCzv-0007ap-E4
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 14:38:47 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 48220271-3142-11ee-8613-37d641c3527e;
- Wed, 02 Aug 2023 16:38:44 +0200 (CEST)
+ id 4900c027-3142-11ee-8613-37d641c3527e;
+ Wed, 02 Aug 2023 16:38:45 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 95DD24EE0742;
- Wed,  2 Aug 2023 16:38:43 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id F2D134EE0747;
+ Wed,  2 Aug 2023 16:38:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48220271-3142-11ee-8613-37d641c3527e
+X-Inumbo-ID: 4900c027-3142-11ee-8613-37d641c3527e
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,44 +53,54 @@ Cc: sstabellini@kernel.org,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 09/11] x86/xstate: moved BUILD_BUG_ON to address MISRA C:2012 Rule 2.1
-Date: Wed,  2 Aug 2023 16:38:15 +0200
-Message-Id: <4cdcd0a9f99109463686420d6c3fc6681d215d99.1690985045.git.nicola.vetrini@bugseng.com>
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>
+Subject: [XEN PATCH 11/11] x86/mm: Add assertion to address MISRA C:2012 Rule 2.1
+Date: Wed,  2 Aug 2023 16:38:17 +0200
+Message-Id: <91b2f2c9e728c1f19f7baab301299d995a074279.1690985045.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1690985045.git.nicola.vetrini@bugseng.com>
 References: <cover.1690985045.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Variable declarations between a switch statement guard and before
-any case label are unreachable code, and hence violate Rule 2.1:
-"A project shall not contain unreachable code".
+The ASSERT_UNREACHABLE() assertion is added before a definitely
+unreachable return statement to address MISRA C:2012 Rule 2.1,
+because the explicit return from a non-void function is a defensive
+coding measure, and thus intended to be unreachable.
 
-Therefore the variable declarations are moved in the smallest enclosing
-scope, near other variable definitions.
+No functional changes.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/xstate.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/x86/mm.c         | 1 +
+ xen/arch/x86/mm/p2m-pod.c | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index 92496f3795..cb2b9e720c 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -396,9 +396,10 @@ void xrstor(struct vcpu *v, uint64_t mask)
-      */
-     for ( prev_faults = faults = 0; ; prev_faults = faults )
-     {
-+        BUILD_BUG_ON(sizeof(faults) != 4); /* Clang doesn't support %z in asm. */
-+
-         switch ( __builtin_expect(ptr->fpu_sse.x[FPU_WORD_SIZE_OFFSET], 8) )
-         {
--            BUILD_BUG_ON(sizeof(faults) != 4); /* Clang doesn't support %z in asm. */
- #define _xrstor(insn) \
-         asm volatile ( "1: .byte " insn "\n" \
-                        "3:\n" \
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index be2b10a391..ebd4f3827a 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -4879,6 +4879,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+         return subarch_memory_op(cmd, arg);
+     }
+ 
++    ASSERT_UNREACHABLE();
+     return 0;
+ }
+ 
+diff --git a/xen/arch/x86/mm/p2m-pod.c b/xen/arch/x86/mm/p2m-pod.c
+index 9969eb45fa..cd5501217f 100644
+--- a/xen/arch/x86/mm/p2m-pod.c
++++ b/xen/arch/x86/mm/p2m-pod.c
+@@ -1045,6 +1045,7 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
+     }
+ 
+     return;
++    ASSERT_UNREACHABLE();
+ 
+ out_unmap:
+     /*
 -- 
 2.34.1
 
