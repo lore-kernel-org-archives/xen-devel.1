@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32097C0729B
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 14:38:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.574975.900663 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30473C001E0
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 14:38:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.574979.900708 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRCzs-0007d3-4K; Wed, 02 Aug 2023 14:38:44 +0000
+	id 1qRCzv-0000Fe-UB; Wed, 02 Aug 2023 14:38:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 574975.900663; Wed, 02 Aug 2023 14:38:44 +0000
+Received: by outflank-mailman (output) from mailman id 574979.900708; Wed, 02 Aug 2023 14:38:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRCzs-0007cn-0n; Wed, 02 Aug 2023 14:38:44 +0000
-Received: by outflank-mailman (input) for mailman id 574975;
- Wed, 02 Aug 2023 14:38:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qRCzv-0000Dx-Fv; Wed, 02 Aug 2023 14:38:47 +0000
+Received: by outflank-mailman (input) for mailman id 574979;
+ Wed, 02 Aug 2023 14:38:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YIS5=DT=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qRCzp-0006bO-WE
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 14:38:42 +0000
+ id 1qRCzt-0007ap-7L
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 14:38:45 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 465e692a-3142-11ee-b260-6b7b168915f2;
- Wed, 02 Aug 2023 16:38:41 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 47b43c9a-3142-11ee-8613-37d641c3527e;
+ Wed, 02 Aug 2023 16:38:43 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 978C14EE0744;
- Wed,  2 Aug 2023 16:38:40 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id C89704EE0740;
+ Wed,  2 Aug 2023 16:38:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 465e692a-3142-11ee-b260-6b7b168915f2
+X-Inumbo-ID: 47b43c9a-3142-11ee-8613-37d641c3527e
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -50,19 +50,21 @@ Cc: sstabellini@kernel.org,
 	ayan.kumar.halder@amd.com,
 	consulting@bugseng.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 05/11] drivers/pci: move variable definitions to address MISRA C:2012 Rule 2.1
-Date: Wed,  2 Aug 2023 16:38:11 +0200
-Message-Id: <99f434f5d8b9c8eca275f23799a642ba34e79eb8.1690985045.git.nicola.vetrini@bugseng.com>
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 08/11] xen: move declarations to address MISRA C:2012 Rule 2.1
+Date: Wed,  2 Aug 2023 16:38:14 +0200
+Message-Id: <055dce166662183c68fb488fa7f7722a3a5fcd98.1690985045.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1690985045.git.nicola.vetrini@bugseng.com>
 References: <cover.1690985045.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Variable declarations between a switch statement guard and before
+Declarations between a switch statement guard and before
 any case label are unreachable code, and hence violate Rule 2.1:
 "A project shall not contain unreachable code".
 
@@ -71,57 +73,62 @@ scope, near other variable definitions.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/drivers/passthrough/pci.c | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ xen/common/compat/memory.c |  3 +--
+ xen/common/domain.c        | 15 +++++++--------
+ 2 files changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 33452791a8..3f5fa5beef 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -315,6 +315,7 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
-     struct pci_dev *pdev;
-     unsigned int pos;
-     int rc;
-+    unsigned int cap, sec_bus, sub_bus;
+diff --git a/xen/common/compat/memory.c b/xen/common/compat/memory.c
+index 8ca63ceda6..d4c4204119 100644
+--- a/xen/common/compat/memory.c
++++ b/xen/common/compat/memory.c
+@@ -85,13 +85,12 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
+             struct compat_mem_access_op mao;
+             struct compat_mem_acquire_resource mar;
+         } cmp;
++        xen_pfn_t *space;
  
-     list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
-         if ( pdev->bus == bus && pdev->devfn == devfn )
-@@ -343,8 +344,6 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
-     /* update bus2bridge */
-     switch ( pdev->type = pdev_type(pseg->nr, bus, devfn) )
-     {
--        unsigned int cap, sec_bus, sub_bus;
+         set_xen_guest_handle(nat.hnd, COMPAT_ARG_XLAT_VIRT_BASE);
+         split = 0;
+         switch ( op )
+         {
+-            xen_pfn_t *space;
 -
-         case DEV_TYPE_PCIe2PCI_BRIDGE:
-         case DEV_TYPE_LEGACY_PCI_BRIDGE:
-             sec_bus = pci_conf_read8(pdev->sbdf, PCI_SECONDARY_BUS);
-@@ -424,11 +423,11 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
- 
- static void free_pdev(struct pci_seg *pseg, struct pci_dev *pdev)
+         case XENMEM_increase_reservation:
+         case XENMEM_decrease_reservation:
+         case XENMEM_populate_physmap:
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 304aa04fa6..e3aeaf059d 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -401,6 +401,13 @@ static int domain_teardown(struct domain *d)
  {
-+    unsigned int sec_bus, sub_bus;
-+
-     /* update bus2bridge */
-     switch ( pdev->type )
-     {
--        unsigned int sec_bus, sub_bus;
--
-         case DEV_TYPE_PCIe2PCI_BRIDGE:
-         case DEV_TYPE_LEGACY_PCI_BRIDGE:
-             sec_bus = pci_conf_read8(pdev->sbdf, PCI_SECONDARY_BUS);
-@@ -1555,11 +1554,10 @@ int iommu_do_pci_domctl(
-     u8 bus, devfn;
-     int ret = 0;
-     uint32_t machine_sbdf;
-+    unsigned int flags;
+     struct vcpu *v;
+     int rc;
++    enum {
++        PROG_none,
++        PROG_gnttab_mappings,
++        PROG_vcpu_teardown,
++        PROG_arch_teardown,
++        PROG_done,
++    };
  
-     switch ( domctl->cmd )
-     {
--        unsigned int flags;
+     BUG_ON(!d->is_dying);
+ 
+@@ -435,14 +442,6 @@ static int domain_teardown(struct domain *d)
+     case PROG_vcpu_ ## x:                       \
+         v = d->teardown.vcpu
+ 
+-        enum {
+-            PROG_none,
+-            PROG_gnttab_mappings,
+-            PROG_vcpu_teardown,
+-            PROG_arch_teardown,
+-            PROG_done,
+-        };
 -
-     case XEN_DOMCTL_get_device_group:
-     {
-         u32 max_sdevs;
+     case PROG_none:
+         BUILD_BUG_ON(PROG_none != 0);
+ 
 -- 
 2.34.1
 
