@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A609BC04E69
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 14:38:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.574972.900629 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D7AC04FE0
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 14:38:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.574978.900680 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRCzo-0006eR-9z; Wed, 02 Aug 2023 14:38:40 +0000
+	id 1qRCzt-0007yB-FC; Wed, 02 Aug 2023 14:38:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 574972.900629; Wed, 02 Aug 2023 14:38:40 +0000
+Received: by outflank-mailman (output) from mailman id 574978.900680; Wed, 02 Aug 2023 14:38:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRCzo-0006dO-4Z; Wed, 02 Aug 2023 14:38:40 +0000
-Received: by outflank-mailman (input) for mailman id 574972;
- Wed, 02 Aug 2023 14:38:38 +0000
+	id 1qRCzt-0007vk-7n; Wed, 02 Aug 2023 14:38:45 +0000
+Received: by outflank-mailman (input) for mailman id 574978;
+ Wed, 02 Aug 2023 14:38:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YIS5=DT=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qRCzm-0006bO-Pb
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 14:38:38 +0000
+ id 1qRCzr-0006bO-QZ
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 14:38:43 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 444042f5-3142-11ee-b260-6b7b168915f2;
- Wed, 02 Aug 2023 16:38:37 +0200 (CEST)
+ id 473a13cb-3142-11ee-b260-6b7b168915f2;
+ Wed, 02 Aug 2023 16:38:42 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 4A5D14EE0740;
- Wed,  2 Aug 2023 16:38:36 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id EE2194EE073F;
+ Wed,  2 Aug 2023 16:38:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 444042f5-3142-11ee-b260-6b7b168915f2
+X-Inumbo-ID: 473a13cb-3142-11ee-b260-6b7b168915f2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -50,53 +50,91 @@ Cc: sstabellini@kernel.org,
 	ayan.kumar.halder@amd.com,
 	consulting@bugseng.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 01/11] x86/efi: move variable declaration to address MISRA C:2012 Rule 2.1
-Date: Wed,  2 Aug 2023 16:38:07 +0200
-Message-Id: <aa72e3371fa4ab4806cd866c569718d766d3142e.1690985045.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 07/11] xen: address MISRA C:2012 Rule 2.1
+Date: Wed,  2 Aug 2023 16:38:13 +0200
+Message-Id: <7f8cbd8c8ad64cd3a0d099f31cb4d3fad48aa63b.1690985045.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1690985045.git.nicola.vetrini@bugseng.com>
 References: <cover.1690985045.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The variable declaration is moved where it's actually used, rather
-than being declared in the switch before any clause, thus being
-classified as unreachable code.
+Rule 2.1 states: "A project shall not contain unreachable code".
 
-No functional changes.
+The functions
+- machine_halt
+- maybe_reboot
+- machine_restart
+are not supposed to return, hence the following break statement
+is marked as intentionally unreachable with the ASSERT_UNREACHABLE()
+macro to justify the violation of the rule.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/efi/efi-boot.h | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ xen/common/shutdown.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index 92f4cfe8bd..b00441b1a2 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -390,8 +390,6 @@ static void __init efi_arch_edd(void)
-         {
-             switch ( DevicePathType(devp.DevPath) )
-             {
--                const u8 *p;
--
-             case ACPI_DEVICE_PATH:
-                 if ( state != root || boot_edd_info_nr > EDD_INFO_MAX )
-                     break;
-@@ -463,7 +461,8 @@ static void __init efi_arch_edd(void)
-                 params->device_path_info_length =
-                     sizeof(struct edd_device_params) -
-                     offsetof(struct edd_device_params, key);
--                for ( p = (const u8 *)&params->key; p < &params->checksum; ++p )
-+                for ( const u8 *p = (const u8 *)&params->key;
-+                      p < &params->checksum; ++p )
-                     params->checksum -= *p;
-                 break;
-             case MEDIA_DEVICE_PATH:
+diff --git a/xen/common/shutdown.c b/xen/common/shutdown.c
+index a933ee001e..88f735a30e 100644
+--- a/xen/common/shutdown.c
++++ b/xen/common/shutdown.c
+@@ -38,39 +38,45 @@ void hwdom_shutdown(u8 reason)
+         printk("Hardware Dom%u halted: halting machine\n",
+                hardware_domain->domain_id);
+         machine_halt();
+-        break; /* not reached */
++        ASSERT_UNREACHABLE();
++        break;
+ 
+     case SHUTDOWN_crash:
+         debugger_trap_immediate();
+         printk("Hardware Dom%u crashed: ", hardware_domain->domain_id);
+         kexec_crash(CRASHREASON_HWDOM);
+         maybe_reboot();
+-        break; /* not reached */
++        ASSERT_UNREACHABLE();
++        break;
+ 
+     case SHUTDOWN_reboot:
+         printk("Hardware Dom%u shutdown: rebooting machine\n",
+                hardware_domain->domain_id);
+         machine_restart(0);
+-        break; /* not reached */
++        ASSERT_UNREACHABLE();
++        break;
+ 
+     case SHUTDOWN_watchdog:
+         printk("Hardware Dom%u shutdown: watchdog rebooting machine\n",
+                hardware_domain->domain_id);
+         kexec_crash(CRASHREASON_WATCHDOG);
+         machine_restart(0);
+-        break; /* not reached */
++        ASSERT_UNREACHABLE();
++        break;
+ 
+     case SHUTDOWN_soft_reset:
+         printk("Hardware domain %d did unsupported soft reset, rebooting.\n",
+                hardware_domain->domain_id);
+         machine_restart(0);
+-        break; /* not reached */
++        ASSERT_UNREACHABLE();
++        break;
+ 
+     default:
+         printk("Hardware Dom%u shutdown (unknown reason %u): ",
+                hardware_domain->domain_id, reason);
+         maybe_reboot();
+-        break; /* not reached */
++        ASSERT_UNREACHABLE();
++        break;
+     }
+ }  
+ 
 -- 
 2.34.1
 
