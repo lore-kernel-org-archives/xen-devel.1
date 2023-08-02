@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6D0C00528
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85FBFC41513
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Aug 2023 00:11:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.574612.900057 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.574611.900049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQzSk-0003Ym-MM; Wed, 02 Aug 2023 00:11:38 +0000
+	id 1qQzSk-0003Us-5j; Wed, 02 Aug 2023 00:11:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 574612.900057; Wed, 02 Aug 2023 00:11:38 +0000
+Received: by outflank-mailman (output) from mailman id 574611.900049; Wed, 02 Aug 2023 00:11:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qQzSk-0003YO-E1; Wed, 02 Aug 2023 00:11:38 +0000
-Received: by outflank-mailman (input) for mailman id 574612;
- Wed, 02 Aug 2023 00:11:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qQzSk-0003Ul-2k; Wed, 02 Aug 2023 00:11:38 +0000
+Received: by outflank-mailman (input) for mailman id 574611;
+ Wed, 02 Aug 2023 00:11:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SOIS=DT=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qQzSj-0003Fo-4K
- for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 00:11:37 +0000
+ id 1qQzSi-0003Fc-79
+ for xen-devel@lists.xenproject.org; Wed, 02 Aug 2023 00:11:36 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 23bf799c-30c9-11ee-8613-37d641c3527e;
- Wed, 02 Aug 2023 02:11:34 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 23034186-30c9-11ee-b25c-6b7b168915f2;
+ Wed, 02 Aug 2023 02:11:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id E16608285393;
- Tue,  1 Aug 2023 19:11:33 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id jmLuI6QSiIjo; Tue,  1 Aug 2023 19:11:32 -0500 (CDT)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id AE9DD82865A8;
+ by mail.rptsys.com (Postfix) with ESMTP id A538B828574A;
  Tue,  1 Aug 2023 19:11:32 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id DUQIxQ5pEZEn; Tue,  1 Aug 2023 19:11:31 -0500 (CDT)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 6DE398284EB7;
+ Tue,  1 Aug 2023 19:11:31 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id ksnYdg15_S0P; Tue,  1 Aug 2023 19:11:32 -0500 (CDT)
+ with ESMTP id sEqQJTs6SKw6; Tue,  1 Aug 2023 19:11:31 -0500 (CDT)
 Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 074B282860C6;
+ by mail.rptsys.com (Postfix) with ESMTPSA id 171CE8285491;
  Tue,  1 Aug 2023 19:11:31 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,15 +53,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23bf799c-30c9-11ee-8613-37d641c3527e
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com AE9DD82865A8
+X-Inumbo-ID: 23034186-30c9-11ee-b25c-6b7b168915f2
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 6DE398284EB7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1690935092; bh=O7tKNlbYGTBKU34+OS6G3eEZ3bNtT5+tgy+g2otdYhY=;
+	t=1690935091; bh=evTmLh29uUc24NiflnIA1Cij5ypJhBmERpFc9O8S3xI=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=V/3EqYNrKKtMm/16ssB2zqoK89/dcxqBADN4KXTDJAOOLV73GByo4nUzisq/nL/ym
-	 kb1QDaOsd6x972vpY6m4Zb9QwcyMKV5hTFpwdzGgDnLZHJQUAHMVON1DXPuIlQnjBZ
-	 1G8boDVthyNjJDi5p3dcMydwTS27PAu5xnnuEq4M=
+	b=caEcdTwlQbhKy8QLdyCBbZLRGtqRv7YaDeFXDJlJ/YnRhdU+LjpFDhvYX39D2fITo
+	 +/+2mJi8jWHC/e2o3lbo1oBy4Gvo/xgTPWZEXEMWRxGiyJu/Z+njG+jhxuzBzZ4kQD
+	 IqG8pvweAKvZ1FBcDIwqUScYaiZdHMPcaaYYiXiM=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
@@ -69,282 +69,255 @@ Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 3/4] xen/ppc: Parse device tree for OPAL node on PowerNV
-Date: Tue,  1 Aug 2023 19:11:05 -0500
-Message-Id: <7026e54897e360d935d065c7ec904dc3f6082857.1690934409.git.sanastasio@raptorengineering.com>
+Subject: [PATCH 1/4] xen/ppc: Switch to medium PIC code model
+Date: Tue,  1 Aug 2023 19:11:03 -0500
+Message-Id: <c72c242988295b665a8bd235a351806dc112ad01.1690934409.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1690934409.git.sanastasio@raptorengineering.com>
 References: <cover.1690934409.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Communication with firmware boot services on PowerNV requires parsing
-the fdt blob passed by the bootloader in order to obtain the firmware
-entrypoint. Use Xen's libfdt to do this and store the information
-required for firmware calls, to be implemented in a future patch.
+Switch Xen to the medium PIC code model on Power. Among other things,
+this allows us to be load address agnostic and will open the door to
+booting on bare metal PowerNV systems that don't use OpenFirmware.
 
-The full xen/common build doesn't yet work, but libfdt and its xen/lib
-dependency can be made to build by defining a few stub headers.
+Also update XEN_VIRT_START to 0xc000000000000000, which is equivalent to
+address 0x0 when the MMU is off. This prevents Open Firmware from
+loading Xen at an offset from its base load address, so the DECL_SECTION
+hack in xen.lds.S is no longer required.
 
 Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
 Changed in v2:
-  - Remove ALL_LIBS-y override
+  - Remove stray newline
+  - Use label instead of .+4 in TOC setup branch
 
- xen/arch/ppc/Kconfig                 |  1 +
- xen/arch/ppc/Makefile                |  1 +
- xen/arch/ppc/arch.mk                 |  3 +-
- xen/arch/ppc/include/asm/boot.h      | 16 +++++++++-
- xen/arch/ppc/include/asm/bug.h       | 18 +++++++++++
- xen/arch/ppc/include/asm/cache.h     |  6 ++++
- xen/arch/ppc/include/asm/processor.h | 13 +++++++-
- xen/arch/ppc/include/asm/string.h    |  6 ++++
- xen/arch/ppc/include/asm/system.h    |  6 ++++
- xen/arch/ppc/opal.c                  | 48 ++++++++++++++++++++++++++++
- xen/arch/ppc/setup.c                 |  9 ++++--
- 11 files changed, 121 insertions(+), 6 deletions(-)
- create mode 100644 xen/arch/ppc/include/asm/bug.h
- create mode 100644 xen/arch/ppc/include/asm/cache.h
- create mode 100644 xen/arch/ppc/include/asm/string.h
- create mode 100644 xen/arch/ppc/include/asm/system.h
- create mode 100644 xen/arch/ppc/opal.c
+ xen/arch/ppc/arch.mk                 |  2 +-
+ xen/arch/ppc/include/asm/asm-defns.h |  7 +++++
+ xen/arch/ppc/include/asm/config.h    |  2 +-
+ xen/arch/ppc/ppc64/head.S            | 12 +++++---
+ xen/arch/ppc/xen.lds.S               | 44 ++++++++++------------------
+ 5 files changed, 33 insertions(+), 34 deletions(-)
 
-diff --git a/xen/arch/ppc/Kconfig b/xen/arch/ppc/Kconfig
-index a2ade2ecf4..b32dce39b8 100644
---- a/xen/arch/ppc/Kconfig
-+++ b/xen/arch/ppc/Kconfig
-@@ -1,5 +1,6 @@
- config PPC
- 	def_bool y
-+	select HAS_DEVICE_TREE
-
- config PPC64
- 	def_bool y
-diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
-index 098a4dd0a9..0c0a7884a1 100644
---- a/xen/arch/ppc/Makefile
-+++ b/xen/arch/ppc/Makefile
-@@ -2,6 +2,7 @@ obj-$(CONFIG_PPC64) +=3D ppc64/
-
- obj-y +=3D boot-of.init.o
- obj-$(CONFIG_EARLY_PRINTK) +=3D early_printk.init.o
-+obj-y +=3D opal.o
- obj-y +=3D setup.o
-
- $(TARGET): $(TARGET)-syms
 diff --git a/xen/arch/ppc/arch.mk b/xen/arch/ppc/arch.mk
-index 0183b9ac6a..3bf79bac37 100644
+index 7eec22c283..0183b9ac6a 100644
 --- a/xen/arch/ppc/arch.mk
 +++ b/xen/arch/ppc/arch.mk
-@@ -10,5 +10,4 @@ CFLAGS +=3D -mstrict-align -mcmodel=3Dmedium -mabi=3Del=
-fv2 -fPIC -mno-altivec -mno-vsx
+@@ -5,7 +5,7 @@ ppc-march-$(CONFIG_POWER_ISA_2_07B) :=3D power8
+ ppc-march-$(CONFIG_POWER_ISA_3_00) :=3D power9
+
+ CFLAGS +=3D -m64 -mlittle-endian -mcpu=3D$(ppc-march-y)
+-CFLAGS +=3D -mstrict-align -mcmodel=3Dlarge -mabi=3Delfv2 -mno-altivec -=
+mno-vsx
++CFLAGS +=3D -mstrict-align -mcmodel=3Dmedium -mabi=3Delfv2 -fPIC -mno-al=
+tivec -mno-vsx -msoft-float
+
  LDFLAGS +=3D -m elf64lppc
 
- # TODO: Drop override when more of the build is working
--override ALL_OBJS-y =3D arch/$(SRCARCH)/built_in.o
--override ALL_LIBS-y =3D
-+override ALL_OBJS-y =3D arch/$(SRCARCH)/built_in.o common/libfdt/built_i=
-n.o lib/built_in.o
-diff --git a/xen/arch/ppc/include/asm/boot.h b/xen/arch/ppc/include/asm/b=
-oot.h
-index 9b8a7c43c2..296539cd9e 100644
---- a/xen/arch/ppc/include/asm/boot.h
-+++ b/xen/arch/ppc/include/asm/boot.h
-@@ -4,7 +4,10 @@
-
- #include <xen/types.h>
-
--/* a collection of interfaces used during boot. */
-+/*
-+ * OpenFirmware boot interfaces
-+ */
-+
- enum {
-     OF_FAILURE =3D -1,
-     OF_SUCCESS =3D 0,
-@@ -20,4 +23,15 @@ struct of_service {
- int enter_of(struct of_service *args, unsigned long entry);
- void boot_of_init(unsigned long vec);
+diff --git a/xen/arch/ppc/include/asm/asm-defns.h b/xen/arch/ppc/include/=
+asm/asm-defns.h
+index 35b1c89d4e..5821f9024d 100644
+--- a/xen/arch/ppc/include/asm/asm-defns.h
++++ b/xen/arch/ppc/include/asm/asm-defns.h
+@@ -16,6 +16,13 @@
+     lis reg, (val) @h;                                                  =
+     \
+     ori reg, reg, (val) @l;                                             =
+     \
 
 +/*
-+ * OPAL boot interfaces
++ * Load the address of a symbol from the TOC into the specified GPR.
 + */
++#define LOAD_REG_ADDR(reg,name)                                         =
+     \
++    addis reg,%r2,name@toc@ha;                                          =
+     \
++    addi  reg,reg,name@toc@l
 +
-+struct opal {
-+    uint64_t base;
-+    uint64_t entry;
-+};
-+
-+void boot_opal_init(const void *fdt);
-+
- #endif /* _ASM_PPC_BOOT_H */
-diff --git a/xen/arch/ppc/include/asm/bug.h b/xen/arch/ppc/include/asm/bu=
-g.h
-new file mode 100644
-index 0000000000..e5e874b31c
---- /dev/null
-+++ b/xen/arch/ppc/include/asm/bug.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef _ASM_PPC_BUG_H
-+#define _ASM_PPC_BUG_H
-+
-+#include <xen/stringify.h>
-+
-+/*
-+ * Power ISA guarantees that an instruction consisting of all zeroes is
-+ * illegal.
-+ */
-+#define BUG_OPCODE  0x00000000
-+
-+#define BUG_INSTR ".long " __stringify(BUG_OPCODE)
-+
-+#define BUG_FN_REG r0
-+
-+#endif /* _ASM_PPC_BUG_H */
-diff --git a/xen/arch/ppc/include/asm/cache.h b/xen/arch/ppc/include/asm/=
-cache.h
-new file mode 100644
-index 0000000000..8a0a6b7b17
---- /dev/null
-+++ b/xen/arch/ppc/include/asm/cache.h
-@@ -0,0 +1,6 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef _ASM_PPC_CACHE_H
-+#define _ASM_PPC_CACHE_H
-+
-+#endif /* _ASM_PPC_CACHE_H */
-diff --git a/xen/arch/ppc/include/asm/processor.h b/xen/arch/ppc/include/=
-asm/processor.h
-index 838d279508..2300640787 100644
---- a/xen/arch/ppc/include/asm/processor.h
-+++ b/xen/arch/ppc/include/asm/processor.h
-@@ -133,6 +133,17 @@ struct cpu_user_regs
-     uint32_t entry_vector;
- };
+ /*
+  * Depending on how we were booted, the CPU could be running in either
+  * Little Endian or Big Endian mode. The following trampoline from Linux
+diff --git a/xen/arch/ppc/include/asm/config.h b/xen/arch/ppc/include/asm=
+/config.h
+index cb27d2781e..d060f0dca7 100644
+--- a/xen/arch/ppc/include/asm/config.h
++++ b/xen/arch/ppc/include/asm/config.h
+@@ -39,7 +39,7 @@
+     name:
+ #endif
 
+-#define XEN_VIRT_START _AT(UL, 0x400000)
++#define XEN_VIRT_START _AT(UL, 0xc000000000000000)
+
+ #define SMP_CACHE_BYTES (1 << 6)
+
+diff --git a/xen/arch/ppc/ppc64/head.S b/xen/arch/ppc/ppc64/head.S
+index 02ff520458..4172f1b8ec 100644
+--- a/xen/arch/ppc/ppc64/head.S
++++ b/xen/arch/ppc/ppc64/head.S
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+
+ #include <asm/asm-defns.h>
++#include <asm/asm-offsets.h>
+
+     .section .text.header, "ax", %progbits
+
+@@ -11,16 +12,19 @@ ENTRY(start)
+     FIXUP_ENDIAN
+
+     /* set up the TOC pointer */
+-    LOAD_IMM32(%r2, .TOC.)
++    bcl	    20, 31, 1f
++1:  mflr    %r12
++    addis   %r2, %r12, .TOC.-1b@ha
++    addi    %r2, %r2, .TOC.-1b@l
+
+     /* set up the initial stack */
+-    LOAD_IMM32(%r1, cpu0_boot_stack)
++    LOAD_REG_ADDR(%r1, cpu0_boot_stack)
+     li      %r11, 0
+     stdu    %r11, -STACK_FRAME_OVERHEAD(%r1)
+
+     /* clear .bss */
+-    LOAD_IMM32(%r14, __bss_start)
+-    LOAD_IMM32(%r15, __bss_end)
++    LOAD_REG_ADDR(%r14, __bss_start)
++    LOAD_REG_ADDR(%r15, __bss_end)
+ 1:
+     std     %r11, 0(%r14)
+     addi    %r14, %r14, 8
+diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
+index c628cc0e5c..2fa81d5a83 100644
+--- a/xen/arch/ppc/xen.lds.S
++++ b/xen/arch/ppc/xen.lds.S
+@@ -15,25 +15,12 @@ PHDRS
+ #endif
+ }
+
+-/**
+- * OpenFirmware's base load address is 0x400000 (XEN_VIRT_START).
+- * By defining sections this way, we can keep our virtual address base a=
+t 0x400000
+- * while keeping the physical base at 0x0.
+- *
+- * Otherwise, OpenFirmware incorrectly loads .text at 0x400000 + 0x40000=
+0 =3D 0x800000.
+- * Taken from x86/xen.lds.S
+- */
+-#ifdef CONFIG_LD_IS_GNU
+-# define DECL_SECTION(x) x : AT(ADDR(#x) - XEN_VIRT_START)
+-#else
+-# define DECL_SECTION(x) x : AT(ADDR(x) - XEN_VIRT_START)
 -#endif
-+/*
-+ * panic() isn't available at the moment so an infinite loop will be
-+ * used temporarily.
-+ * TODO: change it to panic()
-+ */
-+static inline void noreturn die(void)
-+{
-+    for ( ; ; )
-+        HMT_very_low();
-+}
-+
-+#endif /* __ASSEMBLY__ */
+-
+ SECTIONS
+ {
+     . =3D XEN_VIRT_START;
++    _start =3D .;
 
- #endif /* _ASM_PPC_PROCESSOR_H */
-diff --git a/xen/arch/ppc/include/asm/string.h b/xen/arch/ppc/include/asm=
-/string.h
-new file mode 100644
-index 0000000000..7a420e05e4
---- /dev/null
-+++ b/xen/arch/ppc/include/asm/string.h
-@@ -0,0 +1,6 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef _ASM_PPC_STRING_H
-+#define _ASM_PPC_STRING_H
-+
-+#endif /* _ASM_PPC_STRING_H */
-diff --git a/xen/arch/ppc/include/asm/system.h b/xen/arch/ppc/include/asm=
-/system.h
-new file mode 100644
-index 0000000000..94091df644
---- /dev/null
-+++ b/xen/arch/ppc/include/asm/system.h
-@@ -0,0 +1,6 @@
-+#ifndef _ASM_SYSTEM_H_
-+#define _ASM_SYSTEM_H_
-+
-+#define smp_wmb() __asm__ __volatile__ ( "lwsync" : : : "memory" )
-+
-+#endif /* _ASM_SYSTEM_H */
-diff --git a/xen/arch/ppc/opal.c b/xen/arch/ppc/opal.c
-new file mode 100644
-index 0000000000..251de8ac23
---- /dev/null
-+++ b/xen/arch/ppc/opal.c
-@@ -0,0 +1,48 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+#include <asm/boot.h>
-+#include <asm/early_printk.h>
-+#include <asm/opal-api.h>
-+#include <asm/processor.h>
-+#include <xen/types.h>
-+#include <xen/libfdt/libfdt.h>
-+#include <xen/init.h>
-+#include <xen/lib.h>
-+
-+/* Global OPAL struct containing entrypoint and base */
-+struct opal opal;
-+
-+void __init boot_opal_init(const void *fdt)
-+{
-+    int opal_node;
-+    const __be64 *opal_base;
-+    const __be64 *opal_entry;
-+
-+    if ( fdt_check_header(fdt) < 0 )
-+    {
-+        /*
-+         * NOTE: This won't actually print since the early serial
-+         * console isn't set up yet.
-+         */
-+        early_printk("Booted without valid FDT pointer in r3!\n");
-+        die();
-+    }
-+
-+    opal_node =3D fdt_path_offset(fdt, "/ibm,opal");
-+    if ( opal_node < 0 )
-+    {
-+        early_printk("Unable to find ibm,opal node!\n");
-+        die();
-+    }
-+
-+    opal_base =3D fdt_getprop(fdt, opal_node, "opal-base-address", NULL)=
-;
-+    opal_entry =3D fdt_getprop(fdt, opal_node, "opal-entry-address", NUL=
-L);
-+    if ( !opal_base || !opal_entry )
-+    {
-+        early_printk("Failed to get opal-base-address/opal-entry-address=
- "
-+                     "property from DT!\n");
-+        die();
-+    }
-+
-+    opal.base =3D be64_to_cpu(*opal_base);
-+    opal.entry =3D be64_to_cpu(*opal_entry);
-+}
-diff --git a/xen/arch/ppc/setup.c b/xen/arch/ppc/setup.c
-index 7c623a49f5..bacd6d1acd 100644
---- a/xen/arch/ppc/setup.c
-+++ b/xen/arch/ppc/setup.c
-@@ -18,8 +18,13 @@ void __init noreturn start_xen(unsigned long r3, unsig=
-ned long r4,
-     }
-     else
-     {
--        /* kexec boot: Unimplemented */
--        __builtin_trap();
-+        /*
-+         * kexec boot protocol
-+         *
-+         * TODO: This currently assumes an OPAL/PowerNV system, but it's=
- also
-+         * possible to be kexec'd on an OF system.
-+         */
-+        boot_opal_init((void *) r3);
-     }
+-    DECL_SECTION(.text) {
++    .text : {
+         _stext =3D .;            /* Text section */
+         *(.text.header)
 
-     early_printk("Hello, ppc64le!\n");
+@@ -52,7 +39,7 @@ SECTIONS
+     } :text
+
+     . =3D ALIGN(PAGE_SIZE);
+-    DECL_SECTION(.rodata) {
++    .rodata : {
+         _srodata =3D .;          /* Read-only data */
+         *(.rodata)
+         *(.rodata.*)
+@@ -67,7 +54,7 @@ SECTIONS
+
+     #if defined(BUILD_ID)
+     . =3D ALIGN(4);
+-    DECL_SECTION(.note.gnu.build-id) {
++    .note.gnu.build-id : {
+         __note_gnu_build_id_start =3D .;
+         *(.note.gnu.build-id)
+         __note_gnu_build_id_end =3D .;
+@@ -76,19 +63,19 @@ SECTIONS
+     _erodata =3D .;                /* End of read-only data */
+
+     . =3D ALIGN(PAGE_SIZE);
+-    DECL_SECTION(.data.ro_after_init) {
++    .data.ro_after_init : {
+         __ro_after_init_start =3D .;
+         *(.data.ro_after_init)
+         . =3D ALIGN(PAGE_SIZE);
+         __ro_after_init_end =3D .;
+-    } : text
++    } :text
+
+-    DECL_SECTION(.data.read_mostly) {
++    .data.read_mostly : {
+         *(.data.read_mostly)
+     } :text
+
+     . =3D ALIGN(PAGE_SIZE);
+-    DECL_SECTION(.data) {                    /* Data */
++    .data : {                    /* Data */
+         *(.data.page_aligned)
+         . =3D ALIGN(8);
+         __start_schedulers_array =3D .;
+@@ -103,7 +90,7 @@ SECTIONS
+
+     . =3D ALIGN(PAGE_SIZE);             /* Init code and data */
+     __init_begin =3D .;
+-    DECL_SECTION(.init.text) {
++    .init.text : {
+         _sinittext =3D .;
+         *(.init.text)
+         _einittext =3D .;
+@@ -111,7 +98,7 @@ SECTIONS
+     } :text
+
+     . =3D ALIGN(PAGE_SIZE);
+-    DECL_SECTION(.init.data) {
++    .init.data : {
+         *(.init.rodata)
+         *(.init.rodata.*)
+
+@@ -140,18 +127,18 @@ SECTIONS
+         __ctors_end =3D .;
+     } :text
+
+-    DECL_SECTION(.got) {
+-        *(.got)
++    .got : {
++        *(.got .toc)
+     } :text
+
+-    DECL_SECTION(.got.plt) {
++    .got.plt : {
+         *(.got.plt)
+     } :text
+
+     . =3D ALIGN(POINTER_ALIGN);
+     __init_end =3D .;
+
+-    DECL_SECTION(.bss) {                     /* BSS */
++    .bss : {                     /* BSS */
+         __bss_start =3D .;
+         *(.bss.stack_aligned)
+         *(.bss.page_aligned)
+@@ -167,10 +154,11 @@ SECTIONS
+         . =3D ALIGN(POINTER_ALIGN);
+         __bss_end =3D .;
+     } :text
++
+     _end =3D . ;
+
+     /* Section for the device tree blob (if any). */
+-    DECL_SECTION(.dtb) { *(.dtb) } :text
++    .dtb : { *(.dtb) } :text
+
+     DWARF2_DEBUG_SECTIONS
+
 --
 2.30.2
 
