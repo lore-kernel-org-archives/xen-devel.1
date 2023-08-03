@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D92A5C04A94
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Aug 2023 10:23:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.576181.902064 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E53C04A6A
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Aug 2023 10:23:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.576182.902067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRVUM-0005XO-1f; Thu, 03 Aug 2023 10:23:26 +0000
+	id 1qRVUM-0005br-7u; Thu, 03 Aug 2023 10:23:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 576181.902064; Thu, 03 Aug 2023 10:23:25 +0000
+Received: by outflank-mailman (output) from mailman id 576182.902067; Thu, 03 Aug 2023 10:23:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRVUL-0005Wh-P3; Thu, 03 Aug 2023 10:23:25 +0000
-Received: by outflank-mailman (input) for mailman id 576181;
- Thu, 03 Aug 2023 10:23:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qRVUM-0005a4-2T; Thu, 03 Aug 2023 10:23:26 +0000
+Received: by outflank-mailman (input) for mailman id 576182;
+ Thu, 03 Aug 2023 10:23:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nYgs=DU=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qRVUJ-0005QX-Lm
- for xen-devel@lists.xenproject.org; Thu, 03 Aug 2023 10:23:23 +0000
+ id 1qRVUL-0004Rp-0m
+ for xen-devel@lists.xenproject.org; Thu, 03 Aug 2023 10:23:25 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c587ec01-31e7-11ee-8613-37d641c3527e;
- Thu, 03 Aug 2023 12:23:21 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c718767e-31e7-11ee-b268-6b7b168915f2;
+ Thu, 03 Aug 2023 12:23:24 +0200 (CEST)
 Received: from beta.station (net-188-218-251-179.cust.vodafonedsl.it
  [188.218.251.179])
- by support.bugseng.com (Postfix) with ESMTPSA id 217904EE0741;
- Thu,  3 Aug 2023 12:23:21 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id E185C4EE0740;
+ Thu,  3 Aug 2023 12:23:23 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,19 +42,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c587ec01-31e7-11ee-8613-37d641c3527e
+X-Inumbo-ID: c718767e-31e7-11ee-b268-6b7b168915f2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Paul Durrant <paul@xen.org>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH 03/13] xen/arm: address violations of MISRA C:2012 Rule 7.3
-Date: Thu,  3 Aug 2023 12:22:18 +0200
-Message-Id: <c39836607097b09119a4f4480c77506295333a55.1691053438.git.simone.ballarin@bugseng.com>
+Subject: [XEN PATCH 05/13] xen/ioreq: address violations of MISRA C:2012 Rule 7.3
+Date: Thu,  3 Aug 2023 12:22:20 +0200
+Message-Id: <771362e703548e55d4ccc420fa880585a5748c4f.1691053438.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1691053438.git.simone.ballarin@bugseng.com>
 References: <cover.1691053438.git.simone.ballarin@bugseng.com>
@@ -75,40 +72,36 @@ The changes in this patch are mechanical.
 Signed-off-by: Gianluca	Luparini <gianluca.luparini@bugseng.com>
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/arch/arm/include/asm/processor.h | 6 +++---
- xen/arch/arm/vtimer.c                | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ xen/common/ioreq.c      | 2 +-
+ xen/include/xen/ioreq.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
-index 7e42ff8811..8e02410465 100644
---- a/xen/arch/arm/include/asm/processor.h
-+++ b/xen/arch/arm/include/asm/processor.h
-@@ -521,9 +521,9 @@ extern register_t __cpu_logical_map[];
- #define CNTKCTL_EL1_EL0PTEN  (1u<<9) /* Expose phys timer registers to EL0 */
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index 7cb717f7a2..62b907f4c4 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -1182,7 +1182,7 @@ static int ioreq_send_buffered(struct ioreq_server *s, ioreq_t *p)
+      *  - the count field is usually used with data_is_ptr and since we don't
+      *    support data_is_ptr we do not waste space for the count field either
+      */
+-    if ( (p->addr > 0xffffful) || p->data_is_ptr || (p->count != 1) )
++    if ( (p->addr > 0xfffffUL) || p->data_is_ptr || (p->count != 1) )
+         return 0;
  
- /* Timer control registers */
--#define CNTx_CTL_ENABLE   (1ul<<0)  /* Enable timer */
--#define CNTx_CTL_MASK     (1ul<<1)  /* Mask IRQ */
--#define CNTx_CTL_PENDING  (1ul<<2)  /* IRQ pending */
-+#define CNTx_CTL_ENABLE   (1UL<<0)  /* Enable timer */
-+#define CNTx_CTL_MASK     (1UL<<1)  /* Mask IRQ */
-+#define CNTx_CTL_PENDING  (1UL<<2)  /* IRQ pending */
+     switch ( p->size )
+diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
+index a26614d331..cd399adf17 100644
+--- a/xen/include/xen/ioreq.h
++++ b/xen/include/xen/ioreq.h
+@@ -60,7 +60,7 @@ struct ioreq_server {
+ static inline paddr_t ioreq_mmio_first_byte(const ioreq_t *p)
+ {
+     return unlikely(p->df) ?
+-           p->addr - (p->count - 1ul) * p->size :
++           p->addr - (p->count - 1UL) * p->size :
+            p->addr;
+ }
  
- /* Timer frequency mask */
- #define CNTFRQ_MASK       GENMASK(31, 0)
-diff --git a/xen/arch/arm/vtimer.c b/xen/arch/arm/vtimer.c
-index 48f2daa907..c54360e202 100644
---- a/xen/arch/arm/vtimer.c
-+++ b/xen/arch/arm/vtimer.c
-@@ -206,7 +206,7 @@ static bool vtimer_cntp_tval(struct cpu_user_regs *regs, register_t *r,
- 
-     if ( read )
-     {
--        *r = (uint32_t)((v->arch.phys_timer.cval - cntpct) & 0xffffffffull);
-+        *r = (uint32_t)((v->arch.phys_timer.cval - cntpct) & 0xffffffffULL);
-     }
-     else
-     {
 -- 
 2.34.1
 
