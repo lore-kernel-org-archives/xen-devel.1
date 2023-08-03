@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB2B2C04E69
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Aug 2023 10:23:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.576180.902058 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69123C04A94
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Aug 2023 10:23:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.576183.902088 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRVUL-0005U1-Ki; Thu, 03 Aug 2023 10:23:25 +0000
+	id 1qRVUO-0006Ir-HW; Thu, 03 Aug 2023 10:23:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 576180.902058; Thu, 03 Aug 2023 10:23:25 +0000
+Received: by outflank-mailman (output) from mailman id 576183.902088; Thu, 03 Aug 2023 10:23:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRVUL-0005Tu-Gl; Thu, 03 Aug 2023 10:23:25 +0000
-Received: by outflank-mailman (input) for mailman id 576180;
- Thu, 03 Aug 2023 10:23:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qRVUO-0006Ii-DC; Thu, 03 Aug 2023 10:23:28 +0000
+Received: by outflank-mailman (input) for mailman id 576183;
+ Thu, 03 Aug 2023 10:23:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nYgs=DU=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qRVUJ-0004Rp-Ja
- for xen-devel@lists.xenproject.org; Thu, 03 Aug 2023 10:23:23 +0000
+ id 1qRVUN-0005QX-EG
+ for xen-devel@lists.xenproject.org; Thu, 03 Aug 2023 10:23:27 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c64a8d92-31e7-11ee-b268-6b7b168915f2;
- Thu, 03 Aug 2023 12:23:23 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c7fccec2-31e7-11ee-8613-37d641c3527e;
+ Thu, 03 Aug 2023 12:23:25 +0200 (CEST)
 Received: from beta.station (net-188-218-251-179.cust.vodafonedsl.it
  [188.218.251.179])
- by support.bugseng.com (Postfix) with ESMTPSA id 765244EE0737;
- Thu,  3 Aug 2023 12:23:22 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 483E64EE0737;
+ Thu,  3 Aug 2023 12:23:25 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,18 +42,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c64a8d92-31e7-11ee-b268-6b7b168915f2
+X-Inumbo-ID: c7fccec2-31e7-11ee-8613-37d641c3527e
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH 04/13] x86/IOMMU: address violations of MISRA C:2012 Rule 7.3
-Date: Thu,  3 Aug 2023 12:22:19 +0200
-Message-Id: <ba2605e168cb65ca7f2e4fcc6b957b5ae0b3062a.1691053438.git.simone.ballarin@bugseng.com>
+Subject: [XEN PATCH 06/13] xen/mem_access: address violations of MISRA C:2012 Rule 7.3
+Date: Thu,  3 Aug 2023 12:22:21 +0200
+Message-Id: <7e4ff67a24206177c5a304055f395cc2983bb994.1691053438.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1691053438.git.simone.ballarin@bugseng.com>
 References: <cover.1691053438.git.simone.ballarin@bugseng.com>
@@ -71,37 +71,34 @@ If the "u" suffix is used near "L", use the "U" suffix instead, for consistency.
 
 The changes in this patch are mechanical.
 
-Signed-off-by: Gianluca	Luparini <gianluca.luparini@bugseng.com>
+Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/drivers/passthrough/x86/iommu.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ xen/common/mem_access.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index d290855959..c85549ccad 100644
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -576,16 +576,16 @@ struct page_info *iommu_alloc_pgtable(struct domain_iommu *hd,
+diff --git a/xen/common/mem_access.c b/xen/common/mem_access.c
+index 010e6f8dbf..385950789c 100644
+--- a/xen/common/mem_access.c
++++ b/xen/common/mem_access.c
+@@ -60,7 +60,7 @@ int mem_access_memop(unsigned long cmd,
  
-         ASSERT((CONTIG_LEVEL_SHIFT & (contig_mask >> shift)) == CONTIG_LEVEL_SHIFT);
+     case XENMEM_access_op_set_access:
+         rc = -EINVAL;
+-        if ( (mao.pfn != ~0ull) &&
++        if ( (mao.pfn != ~0ULL) &&
+              (mao.nr < start_iter ||
+               ((mao.pfn + mao.nr - 1) < mao.pfn) ||
+               ((mao.pfn + mao.nr - 1) > domain_get_maximum_gpfn(d))) )
+@@ -96,7 +96,7 @@ int mem_access_memop(unsigned long cmd,
+             break;
  
--        p[0] = (CONTIG_LEVEL_SHIFT + 0ull) << shift;
-+        p[0] = (CONTIG_LEVEL_SHIFT + 0ULL) << shift;
-         p[1] = 0;
--        p[2] = 1ull << shift;
-+        p[2] = 1ULL << shift;
-         p[3] = 0;
+         rc = -EINVAL;
+-        if ( (mao.pfn > domain_get_maximum_gpfn(d)) && mao.pfn != ~0ull )
++        if ( (mao.pfn > domain_get_maximum_gpfn(d)) && mao.pfn != ~0ULL )
+             break;
  
-         for ( i = 4; i < PAGE_SIZE / sizeof(*p); i += 4 )
-         {
--            p[i + 0] = (find_first_set_bit(i) + 0ull) << shift;
-+            p[i + 0] = (find_first_set_bit(i) + 0ULL) << shift;
-             p[i + 1] = 0;
--            p[i + 2] = 1ull << shift;
-+            p[i + 2] = 1ULL << shift;
-             p[i + 3] = 0;
-         }
-     }
+         rc = p2m_get_mem_access(d, _gfn(mao.pfn), &access, 0);
 -- 
 2.34.1
 
