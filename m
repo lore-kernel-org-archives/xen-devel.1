@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 110D1C001DF
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Aug 2023 12:05:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.576309.902320 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF10DC001DF
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Aug 2023 12:19:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.576334.902339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRX5B-000461-Cx; Thu, 03 Aug 2023 12:05:33 +0000
+	id 1qRXIf-0007pb-Oh; Thu, 03 Aug 2023 12:19:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 576309.902320; Thu, 03 Aug 2023 12:05:33 +0000
+Received: by outflank-mailman (output) from mailman id 576334.902339; Thu, 03 Aug 2023 12:19:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRX5B-000455-63; Thu, 03 Aug 2023 12:05:33 +0000
-Received: by outflank-mailman (input) for mailman id 576309;
- Thu, 03 Aug 2023 12:05:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DEIV=DU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qRX59-0002sc-P8
- for xen-devel@lists.xenproject.org; Thu, 03 Aug 2023 12:05:31 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0a391522-31f6-11ee-8613-37d641c3527e;
- Thu, 03 Aug 2023 14:05:29 +0200 (CEST)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-4fe0e23a4b1so1554116e87.3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Aug 2023 05:05:29 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- e22-20020ac25476000000b004fdfefdf4acsm3304557lfn.39.2023.08.03.05.05.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Aug 2023 05:05:28 -0700 (PDT)
+	id 1qRXIf-0007pU-IY; Thu, 03 Aug 2023 12:19:29 +0000
+Received: by outflank-mailman (input) for mailman id 576334;
+ Thu, 03 Aug 2023 12:19:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=VY8U=DU=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1qRXId-0007pO-Nh
+ for xen-devel@lists.xenproject.org; Thu, 03 Aug 2023 12:19:27 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20624.outbound.protection.outlook.com
+ [2a01:111:f400:7e1b::624])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fcdaaee8-31f7-11ee-b268-6b7b168915f2;
+ Thu, 03 Aug 2023 14:19:26 +0200 (CEST)
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
+ by PAWPR04MB9957.eurprd04.prod.outlook.com (2603:10a6:102:385::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.47; Thu, 3 Aug
+ 2023 12:19:24 +0000
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::e5cf:5743:ab60:b14e]) by DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::e5cf:5743:ab60:b14e%5]) with mapi id 15.20.6631.046; Thu, 3 Aug 2023
+ 12:19:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,344 +49,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0a391522-31f6-11ee-8613-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691064329; x=1691669129;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=n0T/c4H8PYV8a+tUf8bqa7kNmhfFOIl+4o24A/6F65Y=;
-        b=m802bzewGsdutyqXiwNNiqsYfn3M4z9y5xCanYDSAoA3f8ePVkg/q+T3QSz1krZJbW
-         jjE8Xme9E05+k17DEBsRkiMxZZykmstizUoamdINVEJCYaIYmeHaHYC9ZVoVkasrusoA
-         uf5rdFd9/O+WPvJhaFwBNPQs2EImt+HITbwLhyIKB2WpT/gVrGZpyDy/LQDO4RiHAiPz
-         gov6/EsKwHHrHiJ03r9iFFaks7XPrryTi/ovEt/VWVMnw0jgF22Xz7tTfh9cI5elTtD2
-         5VfQWJx/V7Y2a1p0RNkqKmTGedc6bUl0Rh/szGEDOmkoLoM9ZDoxeEEKbtVLYPeUx8Ob
-         O8xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691064329; x=1691669129;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=n0T/c4H8PYV8a+tUf8bqa7kNmhfFOIl+4o24A/6F65Y=;
-        b=iKYl6iSfjwVm7hBvMLRCItxmHJYRF9QbfVImBux0YncG32F06xsVe31eMDWjJ0+vie
-         hXyyXCmiMKFBszlw9D7JtTFL74Gn6Ue2tAKRrX7bcktHsWx0R+FPu0kPMITQ19S+J8YZ
-         5vks78AEE4lWi+8mD6Y3+vOK2c7JUpddKeVNEpQvltD16Kkwi3IPbqxmk6ySrwVEbxfd
-         IMc/tF4f8KqI+SM0jkAc18/UnVZ4xdAUoEpGX8M8WHWMrQhqXLKiuQzr8pnCDsr4zEkb
-         vZHGjLoYWaFwhKfrP1BAtYLRLBd6R7HRh+fPIvmpAXIG7pN5/7rgtKMG1tWVA0JfeiJ0
-         EbGg==
-X-Gm-Message-State: ABy/qLY60VFWowZGvnfR/5SRbw1eD9uO5VITQs4c4IVhsXXyoYxpaUpx
-	KUFFmj77MAhjFD7c+V9N0pZj4SWzuCk=
-X-Google-Smtp-Source: APBJJlFcG/cnXqx2b/EBsYl3rOroJ1/VDytVVW7Wh4XLH1gBRwg4iEuipD+1UxKgXe6vmMzf+NnUCA==
-X-Received: by 2002:ac2:5b4e:0:b0:4fe:1f1c:184f with SMTP id i14-20020ac25b4e000000b004fe1f1c184fmr7005761lfp.44.1691064329028;
-        Thu, 03 Aug 2023 05:05:29 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v7 5/6] xen/riscv: introduce an implementation of macros from <asm/bug.h>
-Date: Thu,  3 Aug 2023 15:05:21 +0300
-Message-ID: <9fdda7716faf412f1e2cdf9a990c98e64c4b21f3.1691063432.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1691063432.git.oleksii.kurochko@gmail.com>
-References: <cover.1691063432.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: fcdaaee8-31f7-11ee-b268-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BaYwzBPEX9lr2OJVd1/Arq/DJhrPKi1q/bc/j7ya3lWX9fi6b8ob4z/887Vl8s4Ohv/75OaPIF2dz5pX5G+DtLZulkp8Sav4CANd6O5Cno2Ff7aCT1VvFdlap0cHin7JGLx5uu6msAmhg43iF+pD1xaTlwETDppPrKNDHvA5Tz+uBylZtsurtNOXlMBvpk0GVFlV5MUTo8lc2QZ6NbOCeUXkRwXzwgM+XXRcZaA+cuk8KaehSrBaJldKx4PLGdMoYtEYJbmEFfkvZtBnCsF3xKZq08/Tegk0vIjuf+O9w+77AtqPQB5E0+7WQW+leAxF7jDyZApK7bCg21565pU9Lw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4dhR017bDjrmKAEZTxdhb12weLlVVl90mgs3HHFP1mQ=;
+ b=cb/K/GwQYZAQo4+8aY9amQ1ASgkqMyMLk9deFJJxlCEplSdqg5h2CfIm1O6uHCchVXuLPJJT7HiDjH6ugzmglCZIK1/USsNGsVOFC1+ITlZ77TEWT2kXVHtUFIoXxwTlVqP22cT7L6QCeIFdww7FIormHBxp1YkUhP3JvB8GGD8WwH1RNEcnk6rTY6OqYHZYPLDyUOZ1D857m3mCWMG5SsGYgZcVkxlELEaEZn6YBM12uSxqhYuSKlP8jFgrLFHJbbkf5VBksTgtjljxmzhH+jD0uoTQ9FYZaac9GsL8kjBuYbNMY9E6U7nA+XNd+eitXbFihhUvdL9CwXIAqSYyEw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4dhR017bDjrmKAEZTxdhb12weLlVVl90mgs3HHFP1mQ=;
+ b=AtqngBJpoGB6ggEiJvgtgd7+czBIwgUZCdsnMoRueCzDIzxjexqPelMMz4bsnAywvN909sZ2i5HEPioc8WqW+2bpyxLTgLwTygwhmso7oDWdWUa4T/X+ufjfqUhQ2StkVk6iuusvEJ/bduxpfUJ4k127IP+pti6gMNPxCCF7mbR2C7pUxO6GHfBIbk21xf7aRGuYgbOxtbnJgJjNRf6Y/Lwh1Fvjt+sZnq+vOdBCJG5fN/PtJdby7q5c7drtee/OqNbQFI7NOki3MkCKtmp0dsal9XIaJLOtDCylwp0Ypu6N4QfUheNGhHU67SE79gPksxIYoeHr8RpUL9K/XjxjUw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <52a02ef3-80a7-9000-4644-38adbb5a2573@suse.com>
+Date: Thu, 3 Aug 2023 14:19:21 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.1
+Subject: Re: [PATCH v2 1/2] docs: update hyperlaunch device tree
+Content-Language: en-US
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20230803104438.24720-1-dpsmith@apertussolutions.com>
+ <20230803104438.24720-2-dpsmith@apertussolutions.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <20230803104438.24720-2-dpsmith@apertussolutions.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0154.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b3::11) To DU2PR04MB8790.eurprd04.prod.outlook.com
+ (2603:10a6:10:2e1::23)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|PAWPR04MB9957:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0773aea1-301c-4a54-e1cb-08db941bdf96
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Pp7oYPnCZVLhTJfM1bQg6MG0CRlLIrCVH7gf258mfLT/wYXwHpcfhmY+Z4M21r+9gfaVeX2pgChZZff98IsyLCkdRsKYGmpHh7/VSHU4I3GrZMek4J0QkgdWwXrvsgoDHEzz2Az4c7G1avaSfZqSrwR390DbPmexhEsevf43eF4YWyagbtXs8SLbTBcUEWyLnfOUxNhMNqwUxHhIwANaYn3QUAwYz5cburzuVZ8ew29I0TG7btQkTuZy0GbxoqM5//pIpq//r0oiRB+heVZEWLs7B34LOnFtSgTN3UImKutv0BSBRbEZS2OuEsW7xSNf8+HPtbYxc1XXqZbJJDLCeXdtMa2oONJsaHzgGUWnCM33NTMsGHZXZh6stzpPVeSqGz0PB+g89G3QpwdHKQUhFsPRipVDH0DDqXb8FvA/TAVuUX/x6KJkF3yhkIZwxqp8iO6gdqLgReSaVKfvPMrdv4Mih6F01bFsmlAhPtC+8Ea2CahW/VHzE+47XqaBuHdw0D0zUnTNThQs0wsi2ixk/MEJjCl6UxEvoY477YPYNl9wKeGHbkT1uy61ZQZ8hppupIaec4Uj6hIp3Thwh4jig+q6cJoFK2XPT35kcZg8FS77ZIyOeC6f3OmzjwY7hAae
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(39860400002)(346002)(366004)(396003)(136003)(451199021)(2616005)(53546011)(6506007)(26005)(186003)(316002)(2906002)(66946007)(4326008)(66476007)(66556008)(5660300002)(6916009)(41300700001)(8676002)(8936002)(6486002)(6666004)(966005)(6512007)(54906003)(478600001)(38100700002)(36756003)(31696002)(86362001)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Wk95WWljb3U0YzdkWVBkMFZmd3loS2VaM3d3b3BlZVZYMDVwK2FIQkpMUkZG?=
+ =?utf-8?B?QmdmeVNYSGpxV1pyalVPbTdFSW5pTnFGWjJjczU5alI4NG5rYnBPaVlkcTMy?=
+ =?utf-8?B?QUZaYUtaZTc2WnlRU0NLQXdTSFhxMy9TRHdmOCtZOHZkSnlYN0RtcGd5WFVu?=
+ =?utf-8?B?TjRDeE9uMXF6K0RuWmpGeldJMHdaVC9uVWFEaStiQnR3KzVOZDZKNUJJVE9W?=
+ =?utf-8?B?b1pmVW4xTW0wSWRQNDlHaUhwTG9CK1RWOTQ0bHJ2c29DN05sOHF1cytJZ2RR?=
+ =?utf-8?B?RFB5cjVkcnR1dlZROXBjZk55TmNCVXB6K0pRcXJGRW9GOWJ0WG1wNUExcUFV?=
+ =?utf-8?B?T1JjbFoyd0ZNMm43RGMrTFVyWlNlemZmSjc0aUpzalZzZDlnV0hselhpNU43?=
+ =?utf-8?B?ZVBDZEtpQkc0M1FEeTN3Z0R6dmFRdkhoL2pFclZFVDdQcEtHMUw1dEZBNlRS?=
+ =?utf-8?B?aW9UMU9jVWlZUCtTK2xBSExOaGRsWS9GWGhNU0pydFhvaTArb294dld4dFpn?=
+ =?utf-8?B?UVJLRHZKU0s1ajV4dXlJOE5FeWZ0SWxCMnkrR1ZGdGxpU0N0SVhhTjFKc3Vh?=
+ =?utf-8?B?NmFMdkFvMlV6U2VydTRsZjRkVUJ2R1ZCNjh5Uk5jZEUzMnRSNGdCcUFBMHA3?=
+ =?utf-8?B?dm55U0VSYmd5c015MzVnR1N1MFdGZDIrQ25VMHRweENFeVhvNVFITUZGZGZS?=
+ =?utf-8?B?ZTFaSkl6cE9URVh2ZVV1eXJLMXNmcmx6QUNHRzh1aUlXV1hFRWtwVEt0dmVQ?=
+ =?utf-8?B?N3dkSEt3dzhIRGJFTkErYmNHa2VLOC9pMHlqaWNHaWpMbEdROGFNbDhySHFt?=
+ =?utf-8?B?czdFaDNjQTlpUENKZTBRQ3JrT1BFNVlWaUxXRnFXOUtHcUFQYVlvWTBrTkdr?=
+ =?utf-8?B?aXpzZjc0emJNY0Zva2JTOTJ5U1lBZXo0K2ZHMUpJNWJBK2pZNUJ1QjhTS2dE?=
+ =?utf-8?B?MGhMaHpMdGlOcWRST016V2R3N2llUktQR2dtU2piU0VnSG04cmZaejhlbm9i?=
+ =?utf-8?B?NkwvL3I3aTFtLzFDUGYxTlA0WXczb0tOZ1FRUFBPRXF0K1pnc0ZzT3FseEx4?=
+ =?utf-8?B?d0hWb24yRHY1NUdpbHFWMmp1L3dJeWpFWmp5UER3Y2xtcXc3TGR3Mk1Rcks2?=
+ =?utf-8?B?bWZQN1JLZ05RNVRsNVFSRTRYSHZMQTVZSGNFaWhTRWJobWphVHIydXBJT2gz?=
+ =?utf-8?B?K05YdC92MFNFTnhTT1daak5XT2thQk1KYUxjcVpac2w1V2p0blBPNzFLSEEr?=
+ =?utf-8?B?UCtuU1daWllkcjloNUZXVmJVTmNaNUhUM0xRSDh4VWRUVXBHMkI0UmFIY0Vo?=
+ =?utf-8?B?T2pKUnUyTVBBdzRZYVZ3YWdWU3JzSmZIeUVLVXY5Y1hkaUhudEdLZWdndW0x?=
+ =?utf-8?B?bDRaMldJeEg1UXZvc09qR1IxNUdORm9VcCtpVW5yMmhJUkZtUnNVRi8yTCs3?=
+ =?utf-8?B?UTB6Y3VBUG4xUjJjblN6SXJuVm10Q1Z4M0gxcGJFcVo2cXFwdWhGblpjcjhH?=
+ =?utf-8?B?TWJQKzJkOTd3bWRncFRPNkIya3gremlhU3NkdTA2dHFMbENrY0VGaTB4N0xL?=
+ =?utf-8?B?V0UvdTEvOFFYMWRNMFRuWTkwaVovcHVNT1hZSnJGOXhzMWt6WjhxOGNGQ1g5?=
+ =?utf-8?B?OW9ITmNLTGpUTDdZc092WmRuNmxlRUNLMy8zTVJmWGM3d1RicDZVa05iZ3JQ?=
+ =?utf-8?B?VGJaR0szL0lVYzVrSEY2aHpwRSttL0txQXM4RUVPVkNXSjdFRUo0d0U2amZh?=
+ =?utf-8?B?YU5JaUhqNlIyOTd1eDNIdVNTVjhWMHNKdjF1RkVhM1duS1c0TmcwQzViLzhr?=
+ =?utf-8?B?YzhqYVZwYXBpa1M1WUo0WHAxT1RIZzdrMHFGa2hmNFNtUm9Qb1M4cGY2QlVV?=
+ =?utf-8?B?Q0pJd0czcDFNcmJaOWM0aGh3TEN6ZkFlNnIrZUZsNEFMQ1lxYllIYlkrVzlU?=
+ =?utf-8?B?emFBdXdlTlcyaTMvbE9Cb1pBSG90a1d2RVgwUU1zV2tjMk5NWU4vUTJzZzND?=
+ =?utf-8?B?ZVhneFBteW9rd0dLTG95QVpvYlVFL1lKeUZmTk1uanJnckx1bENPSXl6L1hq?=
+ =?utf-8?B?QVpMTkxEem1PbWFxUHQ5ODZMNnZGM05RcDVwM3NpTzZhVVNHMWZDVW9QMnlQ?=
+ =?utf-8?Q?GZx12GroIqw7z6Se4Apy6Qmhb?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0773aea1-301c-4a54-e1cb-08db941bdf96
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2023 12:19:24.0543
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: y/m4lXhNOKVXyD2Ewa7kkAeThlrPIi2LAhCIqz94EEWa+WocF7GO7ATL+kln/hDWZjVbYFcRy+QZkQFaHfaiDA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR04MB9957
 
-The patch introduces macros: BUG(), WARN(), run_in_exception(),
-assert_failed.
-To be precise, the macros from generic bug implementation (<xen/bug.h>)
-will be used.
+On 03.08.2023 12:44, Daniel P. Smith wrote:
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -332,6 +332,15 @@ M:	Nick Rosbrook <rosbrookn@gmail.com>
+>  S:	Maintained
+>  F:	tools/golang
+>  
+> +HYPERLAUNCH
+> +M:	Daniel P. Smith <dpsmith@apertussolutions.com>
+> +M:	Christopher Clark <christopher.w.clark@gmail.com>
+> +W:	https://wiki.xenproject.org/wiki/Hyperlaunch
+> +S:	Supported
+> +F:	docs/design/launch/hyperlaunch.rst
+> +F:	docs/design/launch/hyperlaunch-devicetree.rst
+> +F:	xen/common/domain-builder/
 
-The implementation uses "ebreak" instruction in combination with
-diffrent bug frame tables (for each type) which contains useful
-information.
+I would generally suggest that maintainership changes come in a separate
+patch. Furthermore aiui lots of stuff is going to be moved from elsewhere,
+and such code may better stay under its original maintainership (unless
+it was agreed that it would shift). So initially maybe best to name the
+original maintainers here under M: and add the two of you with R: ?
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V7:
- - move to this patch the definition of cast_to_bug_frame() from the previous patch.
- - update the comment in bug.h.
- - update the comment above do_bug_frame().
- - fix code style.
- - add comment to read_instr func.
- - add space for bug_frames in lds.S. 
----
-Changes in V6:
-  - Avoid LINK_TO_LOAD() as bug.h functionality expected to be used
-    after MMU is enabled.
-  - Change early_printk() to printk()
----
-Changes in V5:
-  - Remove "#include <xen/types.h>" from <asm/bug.h> as there is no any need in it anymore
-  - Update macros GET_INSN_LENGTH: remove UL and 'unsigned int len;' from it
-  - Remove " include <xen/bug.h>" from risc/setup.c. it is not needed in the current version of
-    the patch
-  - change an argument type from vaddr_t to uint32_t for is_valid_bugaddr and introduce read_instr() to
-    read instruction properly as the length of qinstruction can be either 32 or 16 bits.
-  - Code style fixes
-  - update the comments before do_bug_frame() in riscv/trap.c
-  - Refactor is_valid_bugaddr() function.
-  - introduce macros cast_to_bug_frame(addr) to hide casts.
-  - use LINK_TO_LOAD() for addresses which are linker time relative.
----
-Changes in V4:
-  - Updates in RISC-V's <asm/bug.h>:
-    * Add explanatory comment about why there is only defined for 32-bits length
-      instructions and 16/32-bits BUG_INSN_{16,32}.
-    * Change 'unsigned long' to 'unsigned int' inside GET_INSN_LENGTH().
-    * Update declaration of is_valid_bugaddr(): switch return type from int to bool
-      and the argument from 'unsigned int' to 'vaddr'.
-  - Updates in RISC-V's traps.c:
-    * replace /xen and /asm includes 
-    * update definition of is_valid_bugaddr():switch return type from int to bool
-      and the argument from 'unsigned int' to 'vaddr'. Code style inside function
-      was updated too.
-    * do_bug_frame() refactoring:
-      * local variables start and bug became 'const struct bug_frame'
-      * bug_frames[] array became 'static const struct bug_frame[] = ...'
-      * remove all casts
-      * remove unneeded comments and add an explanatory comment that the do_bug_frame()
-        will be switched to a generic one.
-    * do_trap() refactoring:
-      * read 16-bits value instead of 32-bits as compressed instruction can
-        be used and it might happen than only 16-bits may be accessible.
-      * code style updates
-      * re-use instr variable instead of re-reading instruction.
-  - Updates in setup.c:
-    * add blank line between xen/ and asm/ includes.
----
-Changes in V3:
-  - Rebase the patch "xen/riscv: introduce an implementation of macros
-    from <asm/bug.h>" on top of patch series [introduce generic implementation
-    of macros from bug.h]
----
-Changes in V2:
-  - Remove __ in define namings
-  - Update run_in_exception_handler() with
-    register void *fn_ asm(__stringify(BUG_FN_REG)) = (fn);
-  - Remove bug_instr_t type and change it's usage to uint32_t
----
- xen/arch/riscv/include/asm/bug.h |  27 +++++++
- xen/arch/riscv/traps.c           | 128 +++++++++++++++++++++++++++++++
- xen/arch/riscv/xen.lds.S         |  10 +++
- 3 files changed, 165 insertions(+)
+I also don't think it makes sense to include a not-yet-populated path
+here; who knows what this is going to change to by the time things get
+committed.
 
-diff --git a/xen/arch/riscv/include/asm/bug.h b/xen/arch/riscv/include/asm/bug.h
-index e8b1e40823..f5ff96140f 100644
---- a/xen/arch/riscv/include/asm/bug.h
-+++ b/xen/arch/riscv/include/asm/bug.h
-@@ -7,4 +7,31 @@
- #ifndef _ASM_RISCV_BUG_H
- #define _ASM_RISCV_BUG_H
- 
-+#ifndef __ASSEMBLY__
-+
-+#define BUG_INSTR "ebreak"
-+
-+/*
-+ * The base instruction set has a fixed length of 32-bit naturally aligned
-+ * instructions.
-+ *
-+ * There are extensions of variable length ( where each instruction can be
-+ * any number of 16-bit parcels in length ).
-+ *
-+ * Compressed ISA is used now where the instruction length is 16 bit  and
-+ * 'ebreak' instruction, in this case, can be either 16 or 32 bit (
-+ * depending on if compressed ISA is used or not )
-+ */
-+#define INSN_LENGTH_MASK        _UL(0x3)
-+#define INSN_LENGTH_32          _UL(0x3)
-+
-+#define BUG_INSN_32             _UL(0x00100073) /* ebreak */
-+#define BUG_INSN_16             _UL(0x9002)     /* c.ebreak */
-+#define COMPRESSED_INSN_MASK    _UL(0xffff)
-+
-+#define GET_INSN_LENGTH(insn)                               \
-+    (((insn) & INSN_LENGTH_MASK) == INSN_LENGTH_32 ? 4 : 2) \
-+
-+#endif /* !__ASSEMBLY__ */
-+
- #endif /* _ASM_RISCV_BUG_H */
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index 3e08ec44f7..439c098c22 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -5,6 +5,8 @@
-  * RISC-V Trap handlers
-  */
- 
-+#include <xen/bug.h>
-+#include <xen/errno.h>
- #include <xen/lib.h>
- 
- #include <asm/csr.h>
-@@ -12,6 +14,8 @@
- #include <asm/processor.h>
- #include <asm/traps.h>
- 
-+#define cast_to_bug_frame(addr) ((const struct bug_frame *)(addr))
-+
- /*
-  * Initialize the trap handling.
-  *
-@@ -101,7 +105,131 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
-     die();
- }
- 
-+void show_execution_state(const struct cpu_user_regs *regs)
-+{
-+    printk("implement show_execution_state(regs)\n");
-+}
-+
-+/*
-+ * TODO: generic do_bug_frame() should be used instead of current
-+ * implementation panic(), printk() and find_text_region()
-+ * (virtual memory?) will be ready/merged
-+ */
-+int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
-+{
-+    const struct bug_frame *start, *end;
-+    const struct bug_frame *bug = NULL;
-+    unsigned int id = 0;
-+    const char *filename, *predicate;
-+    int lineno;
-+
-+    static const struct bug_frame *bug_frames[] = {
-+        &__start_bug_frames[0],
-+        &__stop_bug_frames_0[0],
-+        &__stop_bug_frames_1[0],
-+        &__stop_bug_frames_2[0],
-+        &__stop_bug_frames_3[0],
-+    };
-+
-+    for ( id = 0; id < BUGFRAME_NR; id++ )
-+    {
-+        start = cast_to_bug_frame(bug_frames[id]);
-+        end   = cast_to_bug_frame(bug_frames[id + 1]);
-+
-+        while ( start != end )
-+        {
-+            if ( (vaddr_t)bug_loc(start) == pc )
-+            {
-+                bug = start;
-+                goto found;
-+            }
-+
-+            start++;
-+        }
-+    }
-+
-+ found:
-+    if ( bug == NULL )
-+        return -ENOENT;
-+
-+    if ( id == BUGFRAME_run_fn )
-+    {
-+        void (*fn)(const struct cpu_user_regs *) = bug_ptr(bug);
-+
-+        fn(regs);
-+
-+        goto end;
-+    }
-+
-+    /* WARN, BUG or ASSERT: decode the filename pointer and line number. */
-+    filename = bug_ptr(bug);
-+    lineno = bug_line(bug);
-+
-+    switch ( id )
-+    {
-+    case BUGFRAME_warn:
-+        printk("Xen WARN at %s:%d\n", filename, lineno);
-+
-+        show_execution_state(regs);
-+
-+        goto end;
-+
-+    case BUGFRAME_bug:
-+        printk("Xen BUG at %s:%d\n", filename, lineno);
-+
-+        show_execution_state(regs);
-+
-+        printk("change wait_for_interrupt to panic() when common is available\n");
-+        die();
-+
-+    case BUGFRAME_assert:
-+        /* ASSERT: decode the predicate string pointer. */
-+        predicate = bug_msg(bug);
-+
-+        printk("Assertion %s failed at %s:%d\n", predicate, filename, lineno);
-+
-+        show_execution_state(regs);
-+
-+        printk("change wait_for_interrupt to panic() when common is available\n");
-+        die();
-+    }
-+
-+    return -EINVAL;
-+
-+ end:
-+    return 0;
-+}
-+
-+static bool is_valid_bugaddr(uint32_t insn)
-+{
-+    return insn == BUG_INSN_32 ||
-+           (insn & COMPRESSED_INSN_MASK) == BUG_INSN_16;
-+}
-+
-+/* Should be used only in Xen code ? */
-+static uint32_t read_instr(unsigned long pc)
-+{
-+    uint16_t instr16 = *(uint16_t *)pc;
-+
-+    if ( GET_INSN_LENGTH(instr16) == 2 )
-+        return (uint32_t)instr16;
-+    else
-+        return *(uint32_t *)pc;
-+}
-+
- void do_trap(struct cpu_user_regs *cpu_regs)
- {
-+    register_t pc = cpu_regs->sepc;
-+    uint32_t instr = read_instr(pc);
-+
-+    if ( is_valid_bugaddr(instr) )
-+    {
-+        if ( !do_bug_frame(cpu_regs, pc) )
-+        {
-+            cpu_regs->sepc += GET_INSN_LENGTH(instr);
-+            return;
-+        }
-+    }
-+
-     do_unexpected_trap(cpu_regs);
- }
-diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
-index 3fa7db3bf9..a10e0ad87c 100644
---- a/xen/arch/riscv/xen.lds.S
-+++ b/xen/arch/riscv/xen.lds.S
-@@ -45,6 +45,16 @@ SECTIONS
-     . = ALIGN(PAGE_SIZE);
-     .rodata : {
-         _srodata = .;          /* Read-only data */
-+        /* Bug frames table */
-+        __start_bug_frames = .;
-+        *(.bug_frames.0)
-+        __stop_bug_frames_0 = .;
-+        *(.bug_frames.1)
-+        __stop_bug_frames_1 = .;
-+        *(.bug_frames.2)
-+        __stop_bug_frames_2 = .;
-+        *(.bug_frames.3)
-+        __stop_bug_frames_3 = .;
-         *(.rodata)
-         *(.rodata.*)
-         *(.data.rel.ro)
--- 
-2.41.0
-
+Jan
 
