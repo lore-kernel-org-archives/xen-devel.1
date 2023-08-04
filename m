@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5039CC001DF
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Aug 2023 14:12:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.577183.904131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49AACC001DB
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Aug 2023 15:28:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.577194.904187 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRvXH-0000Ny-1Z; Fri, 04 Aug 2023 14:12:11 +0000
+	id 1qRwiu-0000aN-Ck; Fri, 04 Aug 2023 15:28:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 577183.904131; Fri, 04 Aug 2023 14:12:11 +0000
+Received: by outflank-mailman (output) from mailman id 577194.904187; Fri, 04 Aug 2023 15:28:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRvXG-0000Nr-VC; Fri, 04 Aug 2023 14:12:10 +0000
-Received: by outflank-mailman (input) for mailman id 577183;
- Fri, 04 Aug 2023 14:12:09 +0000
+	id 1qRwiu-0000YN-4z; Fri, 04 Aug 2023 15:28:16 +0000
+Received: by outflank-mailman (input) for mailman id 577194;
+ Fri, 04 Aug 2023 15:28:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HS9z=DV=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qRvXF-0000Nl-K6
- for xen-devel@lists.xenproject.org; Fri, 04 Aug 2023 14:12:09 +0000
+ <SRS0=BlMS=DV=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qRwis-00080Z-Ap
+ for xen-devel@lists.xenproject.org; Fri, 04 Aug 2023 15:28:14 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e5139f66-32d0-11ee-8613-37d641c3527e;
- Fri, 04 Aug 2023 16:12:07 +0200 (CEST)
-Received: from Dell.homenet.telecomitalia.it
- (host-79-35-203-138.retail.telecomitalia.it [79.35.203.138])
- by support.bugseng.com (Postfix) with ESMTPSA id CFB8D4EE0737;
- Fri,  4 Aug 2023 16:12:06 +0200 (CEST)
+ id 863935ce-32db-11ee-8613-37d641c3527e;
+ Fri, 04 Aug 2023 17:28:12 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id D99AB4EE0743;
+ Fri,  4 Aug 2023 17:28:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,120 +41,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e5139f66-32d0-11ee-8613-37d641c3527e
-From: Federico Serafini <federico.serafini@bugseng.com>
+X-Inumbo-ID: 863935ce-32db-11ee-8613-37d641c3527e
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
-	Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Subject: [XEN PATCH] x86: Address violations of MISRA C:2012 and drop bool_t
-Date: Fri,  4 Aug 2023 16:11:59 +0200
-Message-Id: <2cd78bd0d39b36fe73e87cd1011658a54c2c729d.1691158092.git.federico.serafini@bugseng.com>
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 4/6] x86/include: address MISRA C:2012 Rule 5.3.
+Date: Fri,  4 Aug 2023 17:27:47 +0200
+Message-Id: <40823fbaa9e0a9b026e5ff3b01af9d83583889fd.1691162261.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1691162261.git.nicola.vetrini@bugseng.com>
+References: <cover.1691162261.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Give a name to unnamed parameters to address violations of
-MISRA C:2012 Rule 8.2 ("Function types shall be in prototype form with
-named parameters").
-Keep consistency between object and function declarations thus
-addressing violations of MISRA C:2012 Rule 8.3 ("All declarations of an
-object or function shall use the same names and type qualifiers").
-Replace the occurrences of bool_t with bool.
+s/mpc_default_type/mpc_default in 'xen/arch/x86/include/asm/mpspec.h'
+to avoid clashing with function parameter names in 'mpparse.c'.
 
-No functional change.
+No functional changes.
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/cpu/common.c            |  6 +++---
- xen/arch/x86/include/asm/processor.h | 16 ++++++++--------
- 2 files changed, 11 insertions(+), 11 deletions(-)
+Even though the global variable does not seem to be used anywhere and is
+perhaps better to remove it entirely.
+---
+ xen/arch/x86/include/asm/mpspec.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index cfcdaace12..5f29148416 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -26,11 +26,11 @@
+diff --git a/xen/arch/x86/include/asm/mpspec.h b/xen/arch/x86/include/asm/mpspec.h
+index 1246eece0b..cc96ee63bd 100644
+--- a/xen/arch/x86/include/asm/mpspec.h
++++ b/xen/arch/x86/include/asm/mpspec.h
+@@ -15,7 +15,7 @@ extern void get_smp_config (void);
+ extern unsigned char apic_version [MAX_APICS];
+ extern int mp_irq_entries;
+ extern struct mpc_config_intsrc mp_irqs [MAX_IRQ_SOURCES];
+-extern int mpc_default_type;
++extern int mpc_default;
+ extern unsigned long mp_lapic_addr;
+ extern bool pic_mode;
  
- bool __read_mostly opt_dom0_cpuid_faulting = true;
- 
--bool_t opt_arat = 1;
-+bool opt_arat = 1;
- boolean_param("arat", opt_arat);
- 
- /* pku: Flag to enable Memory Protection Keys (default on). */
--static bool_t opt_pku = 1;
-+static bool opt_pku = 1;
- boolean_param("pku", opt_pku);
- 
- unsigned int opt_cpuid_mask_ecx = ~0u;
-@@ -208,7 +208,7 @@ void ctxt_switch_levelling(const struct vcpu *next)
- 		alternative_vcall(ctxt_switch_masking, next);
- }
- 
--bool_t opt_cpu_info;
-+bool opt_cpu_info;
- boolean_param("cpuinfo", opt_cpu_info);
- 
- int get_model_name(struct cpuinfo_x86 *c)
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index 0989748be6..8d1909f73d 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -96,7 +96,7 @@ extern bool probe_cpuid_faulting(void);
- extern void ctxt_switch_levelling(const struct vcpu *next);
- extern void (*ctxt_switch_masking)(const struct vcpu *next);
- 
--extern bool_t opt_cpu_info;
-+extern bool opt_cpu_info;
- extern u32 trampoline_efer;
- extern u64 trampoline_misc_enable_off;
- 
-@@ -109,17 +109,17 @@ extern unsigned int vaddr_bits;
- 
- extern const struct x86_cpu_id *x86_match_cpu(const struct x86_cpu_id table[]);
- 
--extern void identify_cpu(struct cpuinfo_x86 *);
--extern void setup_clear_cpu_cap(unsigned int);
--extern void setup_force_cpu_cap(unsigned int);
--extern bool is_forced_cpu_cap(unsigned int);
-+extern void identify_cpu(struct cpuinfo_x86 *c);
-+extern void setup_clear_cpu_cap(unsigned int cap);
-+extern void setup_force_cpu_cap(unsigned int cap);
-+extern bool is_forced_cpu_cap(unsigned int cap);
- extern void print_cpu_info(unsigned int cpu);
- extern void init_intel_cacheinfo(struct cpuinfo_x86 *c);
- 
- #define cpu_to_core(_cpu)   (cpu_data[_cpu].cpu_core_id)
- #define cpu_to_socket(_cpu) (cpu_data[_cpu].phys_proc_id)
- 
--unsigned int apicid_to_socket(unsigned int);
-+unsigned int apicid_to_socket(unsigned int apicid);
- 
- static inline int cpu_nr_siblings(unsigned int cpu)
- {
-@@ -410,12 +410,12 @@ void show_registers(const struct cpu_user_regs *regs);
- #define dump_execution_state() \
-     run_in_exception_handler(show_execution_state_nonconst)
- void show_page_walk(unsigned long addr);
--void noreturn fatal_trap(const struct cpu_user_regs *regs, bool_t show_remote);
-+void noreturn fatal_trap(const struct cpu_user_regs *regs, bool show_remote);
- 
- extern void mtrr_ap_init(void);
- extern void mtrr_bp_init(void);
- 
--void mcheck_init(struct cpuinfo_x86 *c, bool_t bsp);
-+void mcheck_init(struct cpuinfo_x86 *c, bool bsp);
- 
- void do_nmi(const struct cpu_user_regs *regs);
- void do_machine_check(const struct cpu_user_regs *regs);
 -- 
 2.34.1
 
