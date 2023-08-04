@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49AACC001DB
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Aug 2023 15:28:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.577194.904187 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56307C04FE0
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Aug 2023 15:28:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.577189.904141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRwiu-0000aN-Ck; Fri, 04 Aug 2023 15:28:16 +0000
+	id 1qRwir-000812-Lp; Fri, 04 Aug 2023 15:28:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 577194.904187; Fri, 04 Aug 2023 15:28:16 +0000
+Received: by outflank-mailman (output) from mailman id 577189.904141; Fri, 04 Aug 2023 15:28:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qRwiu-0000YN-4z; Fri, 04 Aug 2023 15:28:16 +0000
-Received: by outflank-mailman (input) for mailman id 577194;
- Fri, 04 Aug 2023 15:28:14 +0000
+	id 1qRwir-00080v-J5; Fri, 04 Aug 2023 15:28:13 +0000
+Received: by outflank-mailman (input) for mailman id 577189;
+ Fri, 04 Aug 2023 15:28:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BlMS=DV=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qRwis-00080Z-Ap
- for xen-devel@lists.xenproject.org; Fri, 04 Aug 2023 15:28:14 +0000
+ id 1qRwiq-00080Z-5M
+ for xen-devel@lists.xenproject.org; Fri, 04 Aug 2023 15:28:12 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 863935ce-32db-11ee-8613-37d641c3527e;
- Fri, 04 Aug 2023 17:28:12 +0200 (CEST)
+ id 841a11cc-32db-11ee-8613-37d641c3527e;
+ Fri, 04 Aug 2023 17:28:09 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id D99AB4EE0743;
- Fri,  4 Aug 2023 17:28:11 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id D61F84EE0737;
+ Fri,  4 Aug 2023 17:28:07 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 863935ce-32db-11ee-8613-37d641c3527e
+X-Inumbo-ID: 841a11cc-32db-11ee-8613-37d641c3527e
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,43 +53,52 @@ Cc: sstabellini@kernel.org,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 4/6] x86/include: address MISRA C:2012 Rule 5.3.
-Date: Fri,  4 Aug 2023 17:27:47 +0200
-Message-Id: <40823fbaa9e0a9b026e5ff3b01af9d83583889fd.1691162261.git.nicola.vetrini@bugseng.com>
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>
+Subject: [XEN PATCH 0/6] xen: address MISRA C:2012 Rule 5.3
+Date: Fri,  4 Aug 2023 17:27:43 +0200
+Message-Id: <cover.1691162261.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1691162261.git.nicola.vetrini@bugseng.com>
-References: <cover.1691162261.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-s/mpc_default_type/mpc_default in 'xen/arch/x86/include/asm/mpspec.h'
-to avoid clashing with function parameter names in 'mpparse.c'.
+This series addresses shadowing issues to resolve violations of Rule 5.3, whose
+headline states:
+"An identifier declared in an inner scope shall not hide an identifier
+declared in an outer scope". To do this, suitable renames are made.
+In some cases global objects are modified, while other modifications concern
+local variables, possibly lessening the probability of future clashes from
+occurring, by suffixing variables in some macros.
 
-No functional changes.
+No functional change.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-Even though the global variable does not seem to be used anywhere and is
-perhaps better to remove it entirely.
----
- xen/arch/x86/include/asm/mpspec.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Nicola Vetrini (6):
+  x86: rename variable 'e820' to address MISRA C:2012 Rule 5.3
+  libelf: address MISRA C:2012 Rule 5.3
+  xen/delay: address MISRA C:2012 Rule 5.3.
+  x86/include: address MISRA C:2012 Rule 5.3.
+  x86/xstate: address MISRA C:2012 Rule 5.3
+  x86: refactor macros in 'xen-mca.h' to address MISRA C:2012 Rule 5.3
 
-diff --git a/xen/arch/x86/include/asm/mpspec.h b/xen/arch/x86/include/asm/mpspec.h
-index 1246eece0b..cc96ee63bd 100644
---- a/xen/arch/x86/include/asm/mpspec.h
-+++ b/xen/arch/x86/include/asm/mpspec.h
-@@ -15,7 +15,7 @@ extern void get_smp_config (void);
- extern unsigned char apic_version [MAX_APICS];
- extern int mp_irq_entries;
- extern struct mpc_config_intsrc mp_irqs [MAX_IRQ_SOURCES];
--extern int mpc_default_type;
-+extern int mpc_default;
- extern unsigned long mp_lapic_addr;
- extern bool pic_mode;
- 
--- 
+ xen/arch/x86/dom0_build.c                | 10 ++--
+ xen/arch/x86/e820.c                      | 66 ++++++++++++------------
+ xen/arch/x86/guest/xen/xen.c             |  4 +-
+ xen/arch/x86/hvm/dom0_build.c            |  6 +--
+ xen/arch/x86/include/asm/e820.h          |  2 +-
+ xen/arch/x86/include/asm/mpspec.h        |  2 +-
+ xen/arch/x86/mm.c                        | 49 +++++++++---------
+ xen/arch/x86/numa.c                      |  8 +--
+ xen/arch/x86/setup.c                     | 22 ++++----
+ xen/arch/x86/srat.c                      |  6 +--
+ xen/arch/x86/x86_64/mmconf-fam10h.c      |  2 +-
+ xen/arch/x86/xstate.c                    | 30 +++++------
+ xen/common/libelf/libelf-tools.c         | 24 ++++-----
+ xen/drivers/passthrough/amd/iommu_acpi.c |  2 +-
+ xen/include/public/arch-x86/xen-mca.h    | 38 +++++++-------
+ xen/include/xen/delay.h                  |  2 +-
+ 16 files changed, 137 insertions(+), 136 deletions(-)
+
+--
 2.34.1
-
 
