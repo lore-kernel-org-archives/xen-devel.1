@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AEFDC00528
-	for <xen-devel@archiver.kernel.org>; Sat,  5 Aug 2023 02:23:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.577389.904514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6730C00528
+	for <xen-devel@archiver.kernel.org>; Sat,  5 Aug 2023 04:27:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.577396.904523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qS6w8-0005R8-Ua; Sat, 05 Aug 2023 02:22:36 +0000
+	id 1qS8sQ-00018v-I7; Sat, 05 Aug 2023 04:26:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 577389.904514; Sat, 05 Aug 2023 02:22:36 +0000
+Received: by outflank-mailman (output) from mailman id 577396.904523; Sat, 05 Aug 2023 04:26:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qS6w8-0005Qm-O4; Sat, 05 Aug 2023 02:22:36 +0000
-Received: by outflank-mailman (input) for mailman id 577389;
- Sat, 05 Aug 2023 02:22:35 +0000
+	id 1qS8sQ-00018o-Ew; Sat, 05 Aug 2023 04:26:54 +0000
+Received: by outflank-mailman (input) for mailman id 577396;
+ Sat, 05 Aug 2023 04:26:52 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1qS6w6-0005Qc-Vp; Sat, 05 Aug 2023 02:22:34 +0000
+ id 1qS8sO-00018e-Fo; Sat, 05 Aug 2023 04:26:52 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1qS6w6-0008Fr-UL; Sat, 05 Aug 2023 02:22:34 +0000
+ id 1qS8sO-0002tg-Bg; Sat, 05 Aug 2023 04:26:52 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1qS6w6-0003m4-Hw; Sat, 05 Aug 2023 02:22:34 +0000
+ id 1qS8sN-0008RJ-TN; Sat, 05 Aug 2023 04:26:52 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1qS6w6-000576-HR; Sat, 05 Aug 2023 02:22:34 +0000
+ id 1qS8sN-0001E9-So; Sat, 05 Aug 2023 04:26:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,61 +47,122 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=u/4WZQQLL/sgEmhY2I5IbjkcOklGrVUBw9toUqTqnFU=; b=lKbltn0TC6VVpCWatL/5nkSkiY
-	H0ysT4h0hLXbQC6ctGyTuwskeOuv9/YLtIlYguRFjhBbhBki/csr0BO8fXL20JDFfqs5m3tk91R3o
-	SnTcVUzGPtV2s7evQL1Wyd8R7a604lrQwA8dzoYgvbo8y52ivgymdCuK+lUSyrc4at/I=;
+	bh=frvnaTq2Jw07Yx/jjOFkceZmOhyce8asiVn/vbP8jmE=; b=qcfPPffLmdGYIIv3nNBb2kjpCR
+	1wWDamJxkHe3nszJVBp8CbHY+0mXPhzrxlYAaari6d+sGxP95l/lNq2ORNn1r5PseWl0sAbVAXsz0
+	I7vHfZBzpn3TrKFC2+VgwaSyeOBU1ropOv5QhjA/IVHGRrODtEAeD0tH6vBsTHkR9oa8=;
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-182189-mainreport@xen.org>
+Message-ID: <osstest-182181-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 182189: tolerable all pass - PUSHED
+Subject: [libvirt test] 182181: tolerable all pass - PUSHED
 X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
 X-Osstest-Versions-This:
-    xen=e55146071de9257d70bd157047700071d0007622
+    libvirt=3a45a4d78c820c79e664ccfcba0153e5336a5c59
 X-Osstest-Versions-That:
-    xen=4a6448fd6497ad7952cd0baacec1869f6791de9e
+    libvirt=99349ba18e726465215a71f28d2146a0a2adb65d
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 05 Aug 2023 02:22:34 +0000
+Date: Sat, 05 Aug 2023 04:26:51 +0000
 
-flight 182189 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/182189/
+flight 182181 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/182181/
 
 Failures :-/ but no regressions.
 
 Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 182131
+ test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 182131
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 182131
+ test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
  test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
 
 version targeted for testing:
- xen                  e55146071de9257d70bd157047700071d0007622
+ libvirt              3a45a4d78c820c79e664ccfcba0153e5336a5c59
 baseline version:
- xen                  4a6448fd6497ad7952cd0baacec1869f6791de9e
+ libvirt              99349ba18e726465215a71f28d2146a0a2adb65d
 
-Last test of basis   182177  2023-08-04 02:02:01 Z    1 days
-Testing same since   182189  2023-08-04 23:00:26 Z    0 days    1 attempts
+Last test of basis   182131  2023-08-02 19:15:02 Z    2 days
+Failing since        182175  2023-08-04 01:18:07 Z    1 days    2 attempts
+Testing same since   182181  2023-08-04 12:27:34 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
-  Stefano Stabellini <stefano.stabellini@amd.com>
+  Laine Stump <laine@redhat.com>
+  Michal Privoznik <mprivozn@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
 
 jobs:
+ build-amd64-xsm                                              pass    
  build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
  build-amd64                                                  pass    
+ build-arm64                                                  pass    
  build-armhf                                                  pass    
+ build-i386                                                   pass    
  build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
  test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-libvirt-raw                                  pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
 
 
 ------------------------------------------------------------
@@ -122,6 +183,6 @@ Test harness code can be found at
 
 Pushing revision :
 
-To xenbits.xen.org:/home/xen/git/xen.git
-   4a6448fd64..e55146071d  e55146071de9257d70bd157047700071d0007622 -> smoke
+To xenbits.xen.org:/home/xen/git/libvirt.git
+   99349ba18e..3a45a4d78c  3a45a4d78c820c79e664ccfcba0153e5336a5c59 -> xen-tested-master
 
