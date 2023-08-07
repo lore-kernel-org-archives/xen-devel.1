@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44695C001DB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E87C04FE1
 	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:17:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578083.905379 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.578080.905356 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyEn-0003Gy-1Y; Mon, 07 Aug 2023 11:17:25 +0000
+	id 1qSyEl-0002gy-Bh; Mon, 07 Aug 2023 11:17:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578083.905379; Mon, 07 Aug 2023 11:17:24 +0000
+Received: by outflank-mailman (output) from mailman id 578080.905356; Mon, 07 Aug 2023 11:17:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyEm-0003Gj-Nw; Mon, 07 Aug 2023 11:17:24 +0000
-Received: by outflank-mailman (input) for mailman id 578083;
- Mon, 07 Aug 2023 11:17:23 +0000
+	id 1qSyEl-0002f9-6O; Mon, 07 Aug 2023 11:17:23 +0000
+Received: by outflank-mailman (input) for mailman id 578080;
+ Mon, 07 Aug 2023 11:17:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qSgZ=DY=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qSyEc-0006s9-Rc
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:17:14 +0000
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [2607:f8b0:4864:20::1034])
+ id 1qSyBX-0002Ee-9B
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:14:03 +0000
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [2607:f8b0:4864:20::534])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f577d7a0-3513-11ee-b27d-6b7b168915f2;
- Mon, 07 Aug 2023 13:17:14 +0200 (CEST)
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-265c94064b8so593165a91.0
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:17:14 -0700 (PDT)
+ id 834e3ed1-3513-11ee-b27d-6b7b168915f2;
+ Mon, 07 Aug 2023 13:14:02 +0200 (CEST)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-55b5a37acb6so362204a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:14:02 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.146])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.17.00
+ y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.13.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 04:17:12 -0700 (PDT)
+ Mon, 07 Aug 2023 04:14:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f577d7a0-3513-11ee-b27d-6b7b168915f2
+X-Inumbo-ID: 834e3ed1-3513-11ee-b27d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1691407033; x=1692011833;
+        d=bytedance.com; s=google; t=1691406841; x=1692011641;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=48waxWZGd1WUnLYaDrTSxvJywKXLcopaiUkWgt7j5Rg=;
-        b=IF5FMf6vfUKWXKquwpCQEDXlMw21VPTq0vQh30bzDQAe43NcnPpm7+3Lc8a3CIJRpA
-         3D5+DTGp/GVVz7K0qnRkJHp3ElWCuX/V5mJLE2CMMPVLrH696jMkWhUZV5knoMheDkE7
-         LNxcBFVMjsAliYNw3/qsjltVAMCexO3SFZuMneEunxblALcqU49wFlwUCGkH4chcrTm+
-         Mu+nFly5hda7TWhSn6s/LaVQ5cZernQQxFJBPj8H2QEyQDfBEaIAKgcH8kpChkzLsY8n
-         h49b3nM+GUF7t0uuu7NHoFu5rdBXy5wqqQ2n0YE+hiJT0Y6kOYKfZmJPFvsrDsGv9xrG
-         NHZQ==
+        bh=a0ijFA9s9bGVMHT4vLgTYS12L8yx2Rc7o6TjM9ZoJx8=;
+        b=j23yTPIuNE+5ql7c6DjTIXWDr8oKTSMtsFBsjjClL+S91jhwZsCcQpsRFgnSFEePMC
+         wDGERQ9BkTMGtvLZ5zfdg/UY3HTRyGts+YmZTXabmNDPI0OPAQAqDfrw+jtLBHzydYmo
+         a162rquUe53dODAJSpyuVfvHf3Ov/M30E8XZRIYttEwAxKqQFIS0/ih88OAzPNYyRzzl
+         3HkOwk/otVmt9H2o9TgGnt1eeNwmmBoINVdlSrRso11GlktIoEp92Q8ZBNulwW/JkpbE
+         xeEGYB8AYsoVpHQBF7XcqQ5QT7dfjGJtE4RXA0EdlD1H8/kYwDQ1OkZhdkl3HITdo9Iq
+         hOkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691407033; x=1692011833;
+        d=1e100.net; s=20221208; t=1691406841; x=1692011641;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=48waxWZGd1WUnLYaDrTSxvJywKXLcopaiUkWgt7j5Rg=;
-        b=IOkLFO6DP6V+f6FDWY17VhrK70pujN2TI2xS4gL2GV2/BuYROdkkzH8nkXcofomKWr
-         YS9aWF2Z54yWqzNuq/l14ORo1cHvGI3UGsL3y0E2rOYXRQiKJEhfnz1Bwm6PSNHIiEV2
-         eBEjdqvHQ/gYzkzQVWX8ANm2V95RT+JX4p+K24q1a7Sft8a1ZUevkob6mz87Tk2Q1Abl
-         94xyaM52MCbGX7XVeQgTX0SGkGGKwvAJkrIzdZ6Bj7o+6Nf3p5T4QsFKLjPOvDEwm+aL
-         1VYmXhWSzZZOFvRoy77GcwI1l9A+mNUK2y+q2d2y1RJAEJk1+8jEYjPq7Q/aBD7lLHJG
-         Ho0g==
-X-Gm-Message-State: ABy/qLbvvgUEl07B5GRpxaBjTvfgdMFY3U7WpePaEv3UQszqjUPfXa15
-	eDD7GZwsdRTRfkvI9FZry+OCIQ==
-X-Google-Smtp-Source: APBJJlHbn14CvO5TR8loNSEkHloCg3xrbjPIwtza5v7TtzUnsc09AI3fvHMVCyYd3DTpdbD1pcNBzw==
-X-Received: by 2002:a17:90a:4104:b0:25c:1ad3:a4a1 with SMTP id u4-20020a17090a410400b0025c1ad3a4a1mr24600948pjf.1.1691407032801;
-        Mon, 07 Aug 2023 04:17:12 -0700 (PDT)
+        bh=a0ijFA9s9bGVMHT4vLgTYS12L8yx2Rc7o6TjM9ZoJx8=;
+        b=a9+2UBveKVbOmBjpxuHqt7LHvskr50YmPUsi0OflXynnbDEvlPJWKDIo26tcLhFMdC
+         swlu2hujAoijYDzGt46YCreGi2mNiO8xAaa6wzIp/agVnwNVbE64KJFJsWxIG0Fkkhc2
+         PHFo1dMxSOG/53ljwhaOnj8PrmLsvx20oqvy7Zk7mhRkYRPE6r9x+pN4n+vGMRqx0HXJ
+         VOXyXkapmtMW9CGwE+3ZTjLdnwxMgAPrLqF8NSF4WR1+UwyOjddWmcCN3wlIr4aQh/D+
+         Z8dvyZtMT6+u/BJJS/a7MyScT2E3KcRb+m9iu6qTE6uQ9DYjrrkpyuruI+CX6IEshd5J
+         OzvA==
+X-Gm-Message-State: AOJu0YzAG5RHtm/HZZ6vKkcj8IotM3skjCPzv8fcKLIgEAos/BapVp27
+	U3cjMAz0lbYOeISiW+imYLIaXQ==
+X-Google-Smtp-Source: AGHT+IELWLhV4Bj40lkko/D2F7gtSRcHKPclt9k8JlXsq8dyT7OdoG/0VZRRAUzfMJnehzLNwTS/oA==
+X-Received: by 2002:a17:90a:2909:b0:269:5bf7:d79c with SMTP id g9-20020a17090a290900b002695bf7d79cmr2214416pjd.1.1691406841328;
+        Mon, 07 Aug 2023 04:14:01 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -117,109 +117,70 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-ext4@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
-	Qi Zheng <zhengqi.arch@bytedance.com>,
-	Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v4 34/48] jbd2,ext4: dynamically allocate the jbd2-journal shrinker
-Date: Mon,  7 Aug 2023 19:09:22 +0800
-Message-Id: <20230807110936.21819-35-zhengqi.arch@bytedance.com>
+	Qi Zheng <zhengqi.arch@bytedance.com>
+Subject: [PATCH v4 19/48] rcu: dynamically allocate the rcu-kfree shrinker
+Date: Mon,  7 Aug 2023 19:09:07 +0800
+Message-Id: <20230807110936.21819-20-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In preparation for implementing lockless slab shrink, use new APIs to
-dynamically allocate the jbd2-journal shrinker, so that it can be freed
-asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
-read-side critical section when releasing the struct journal_s.
+Use new APIs to dynamically allocate the rcu-kfree shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
-Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- fs/jbd2/journal.c    | 27 +++++++++++++++++----------
- include/linux/jbd2.h |  2 +-
- 2 files changed, 18 insertions(+), 11 deletions(-)
+ kernel/rcu/tree.c | 22 +++++++++++++---------
+ 1 file changed, 13 insertions(+), 9 deletions(-)
 
-diff --git a/fs/jbd2/journal.c b/fs/jbd2/journal.c
-index 1b5a45ab62b0..4c421da03fee 100644
---- a/fs/jbd2/journal.c
-+++ b/fs/jbd2/journal.c
-@@ -1298,7 +1298,7 @@ static int jbd2_min_tag_size(void)
- static unsigned long jbd2_journal_shrink_scan(struct shrinker *shrink,
- 					      struct shrink_control *sc)
+diff --git a/kernel/rcu/tree.c b/kernel/rcu/tree.c
+index 7c79480bfaa0..3b20fc46c514 100644
+--- a/kernel/rcu/tree.c
++++ b/kernel/rcu/tree.c
+@@ -3449,13 +3449,6 @@ kfree_rcu_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
+ 	return freed == 0 ? SHRINK_STOP : freed;
+ }
+ 
+-static struct shrinker kfree_rcu_shrinker = {
+-	.count_objects = kfree_rcu_shrink_count,
+-	.scan_objects = kfree_rcu_shrink_scan,
+-	.batch = 0,
+-	.seeks = DEFAULT_SEEKS,
+-};
+-
+ void __init kfree_rcu_scheduler_running(void)
  {
--	journal_t *journal = container_of(shrink, journal_t, j_shrinker);
-+	journal_t *journal = shrink->private_data;
- 	unsigned long nr_to_scan = sc->nr_to_scan;
- 	unsigned long nr_shrunk;
- 	unsigned long count;
-@@ -1324,7 +1324,7 @@ static unsigned long jbd2_journal_shrink_scan(struct shrinker *shrink,
- static unsigned long jbd2_journal_shrink_count(struct shrinker *shrink,
- 					       struct shrink_control *sc)
+ 	int cpu;
+@@ -4931,6 +4924,7 @@ static void __init kfree_rcu_batch_init(void)
  {
--	journal_t *journal = container_of(shrink, journal_t, j_shrinker);
-+	journal_t *journal = shrink->private_data;
- 	unsigned long count;
+ 	int cpu;
+ 	int i, j;
++	struct shrinker *kfree_rcu_shrinker;
  
- 	count = percpu_counter_read_positive(&journal->j_checkpoint_jh_count);
-@@ -1412,19 +1412,26 @@ static journal_t *journal_init_common(struct block_device *bdev,
- 	journal->j_superblock = (journal_superblock_t *)bh->b_data;
- 
- 	journal->j_shrink_transaction = NULL;
--	journal->j_shrinker.scan_objects = jbd2_journal_shrink_scan;
--	journal->j_shrinker.count_objects = jbd2_journal_shrink_count;
--	journal->j_shrinker.seeks = DEFAULT_SEEKS;
--	journal->j_shrinker.batch = journal->j_max_transaction_buffers;
- 
- 	if (percpu_counter_init(&journal->j_checkpoint_jh_count, 0, GFP_KERNEL))
- 		goto err_cleanup;
- 
--	if (register_shrinker(&journal->j_shrinker, "jbd2-journal:(%u:%u)",
--			      MAJOR(bdev->bd_dev), MINOR(bdev->bd_dev))) {
-+	journal->j_shrinker = shrinker_alloc(0, "jbd2-journal:(%u:%u)",
-+					     MAJOR(bdev->bd_dev),
-+					     MINOR(bdev->bd_dev));
-+	if (!journal->j_shrinker) {
- 		percpu_counter_destroy(&journal->j_checkpoint_jh_count);
- 		goto err_cleanup;
+ 	/* Clamp it to [0:100] seconds interval. */
+ 	if (rcu_delay_page_cache_fill_msec < 0 ||
+@@ -4962,8 +4956,18 @@ static void __init kfree_rcu_batch_init(void)
+ 		INIT_DELAYED_WORK(&krcp->page_cache_work, fill_page_cache_func);
+ 		krcp->initialized = true;
  	}
+-	if (register_shrinker(&kfree_rcu_shrinker, "rcu-kfree"))
+-		pr_err("Failed to register kfree_rcu() shrinker!\n");
 +
-+	journal->j_shrinker->scan_objects = jbd2_journal_shrink_scan;
-+	journal->j_shrinker->count_objects = jbd2_journal_shrink_count;
-+	journal->j_shrinker->seeks = DEFAULT_SEEKS;
-+	journal->j_shrinker->batch = journal->j_max_transaction_buffers;
-+	journal->j_shrinker->private_data = journal;
++	kfree_rcu_shrinker = shrinker_alloc(0, "rcu-kfree");
++	if (!kfree_rcu_shrinker) {
++		pr_err("Failed to allocate kfree_rcu() shrinker!\n");
++		return;
++	}
 +
-+	shrinker_register(journal->j_shrinker);
++	kfree_rcu_shrinker->count_objects = kfree_rcu_shrink_count;
++	kfree_rcu_shrinker->scan_objects = kfree_rcu_shrink_scan;
++	kfree_rcu_shrinker->seeks = DEFAULT_SEEKS;
 +
- 	return journal;
++	shrinker_register(kfree_rcu_shrinker);
+ }
  
- err_cleanup:
-@@ -2187,9 +2194,9 @@ int jbd2_journal_destroy(journal_t *journal)
- 		brelse(journal->j_sb_buffer);
- 	}
- 
--	if (journal->j_shrinker.flags & SHRINKER_REGISTERED) {
-+	if (journal->j_shrinker) {
- 		percpu_counter_destroy(&journal->j_checkpoint_jh_count);
--		unregister_shrinker(&journal->j_shrinker);
-+		shrinker_free(journal->j_shrinker);
- 	}
- 	if (journal->j_proc_entry)
- 		jbd2_stats_proc_exit(journal);
-diff --git a/include/linux/jbd2.h b/include/linux/jbd2.h
-index 44c298aa58d4..beb4c4586320 100644
---- a/include/linux/jbd2.h
-+++ b/include/linux/jbd2.h
-@@ -891,7 +891,7 @@ struct journal_s
- 	 * Journal head shrinker, reclaim buffer's journal head which
- 	 * has been written back.
- 	 */
--	struct shrinker		j_shrinker;
-+	struct shrinker		*j_shrinker;
- 
- 	/**
- 	 * @j_checkpoint_jh_count:
+ void __init rcu_init(void)
 -- 
 2.30.2
 
