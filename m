@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0147C04A94
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:17:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578088.905413 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D369CC001DF
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:17:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.578090.905431 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyEq-0004Dv-4Q; Mon, 07 Aug 2023 11:17:28 +0000
+	id 1qSyEw-0005CH-VN; Mon, 07 Aug 2023 11:17:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578088.905413; Mon, 07 Aug 2023 11:17:28 +0000
+Received: by outflank-mailman (output) from mailman id 578090.905431; Mon, 07 Aug 2023 11:17:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyEp-0004C9-Sz; Mon, 07 Aug 2023 11:17:27 +0000
-Received: by outflank-mailman (input) for mailman id 578088;
- Mon, 07 Aug 2023 11:17:26 +0000
+	id 1qSyEw-0005Bt-Nm; Mon, 07 Aug 2023 11:17:34 +0000
+Received: by outflank-mailman (input) for mailman id 578090;
+ Mon, 07 Aug 2023 11:17:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qSgZ=DY=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qSyB8-0002Ee-OW
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:13:38 +0000
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [2607:f8b0:4864:20::630])
+ id 1qSyDO-0006s9-H3
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:15:58 +0000
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [2607:f8b0:4864:20::1033])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 749e73d5-3513-11ee-b27d-6b7b168915f2;
- Mon, 07 Aug 2023 13:13:38 +0200 (CEST)
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1bc76cdf0cbso595335ad.1
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:13:38 -0700 (PDT)
+ id c7faa358-3513-11ee-b27d-6b7b168915f2;
+ Mon, 07 Aug 2023 13:15:58 +0200 (CEST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2684e225a6cso660974a91.1
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:15:57 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.146])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.13.24
+ y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.15.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 04:13:36 -0700 (PDT)
+ Mon, 07 Aug 2023 04:15:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 749e73d5-3513-11ee-b27d-6b7b168915f2
+X-Inumbo-ID: c7faa358-3513-11ee-b27d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1691406816; x=1692011616;
+        d=bytedance.com; s=google; t=1691406956; x=1692011756;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=et7oKjMo2RpAm9eGe6PO8KzXkO6yMET8jj6KuxhxE1o=;
-        b=LikGQLIJYBMaIhLRv2oXwUZ1S5/lUocFnmTR+FYR6Ek9DrdoATbLs4CDlynPte0jm9
-         +o4McGrgBARlkb75OrdIWJKTn+TAsEnotraDhrP3rtl6y6q5edkiQAwqNgCpWHEQGLxu
-         GHvaWLUFDnTHEHQY8B66ZCvfeUOtDRooCdq2e8FvhkYGE0+2kW031xfZ/1GeTTnnyACe
-         erVR01yoMD1wcFa+90Rr7nUgrj+jHy2UHL/0KieWzuXqT/QJWuskjH4/gIAZtbTfNj8h
-         rLHAUVp+wWaVi0Nz3/+zkqLaFK0QZUGbmHkke0Mu+daDajI/xmbze4i5ZAJyYAfaC1ge
-         umJQ==
+        bh=x1yZWn5jqhhXD5GlPCwn7Rqy/lqVgw4fKiPcfLbuAyw=;
+        b=AcIjUBUrPWg0UzvX5wfFusVN+dKafMdFSH2GRzDH1OvYCulGxI33IbPnGkf00jzcfm
+         4A2gtuaaMbbtp6GdbHcVvPsXNRG1dmOn4MOltHcp0lO1ZvH61PsHri+EHSBurlaP3++Q
+         4Ay4mp+CERsWHNo0m/mtiLtHugH42cl3pUwAYaJdXbMqhQOvO09TYlTgMkhLAJn4/X6x
+         i3g9KcsL+Xka9qDqamdAs09xw8L3SMlDoJ+EPUs9bBOqEWf8CI1XS8GEbt6nh07SwXhK
+         J3x/B99DfdJVBmu0rw2+YUXatA5oQZwE4RwMladVYflBE1HvjLGyTI12ejp5Woqr/FOF
+         LWLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691406816; x=1692011616;
+        d=1e100.net; s=20221208; t=1691406956; x=1692011756;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=et7oKjMo2RpAm9eGe6PO8KzXkO6yMET8jj6KuxhxE1o=;
-        b=bbls2+I+i31HLCrym91HF8qetfuWEIq9Fx2x2EGUbiHpZideXIJsBnJKknHOi+6BA8
-         vRS5KBqh2isbNar5all8w4t+6V5o+jSLeBuHZHw3xGKIpYtahe2h98+9kS52JQUiJSyq
-         nVp3xCQlQeBX9SYjCCNlQjeIAvwW2fhaW9KJJbukGZA0QeCche1cs0n/uWsrFvqxenjS
-         c1120HAsF0jXzpUPELrBTVPMcGqQThTns30Bj2flqpceLiurjfpUXmBQeg5K82FMPKoC
-         K1+KMMA0DDkUcvadcDSYP4HcXnd8ynKRBsNw99k7Dxl7lF9ceZWHs9p/AJXM3XGD8U/I
-         BEHg==
-X-Gm-Message-State: ABy/qLbzx8eUf/R4ZXlrXMid8ZQTRLMlgZDT7pK6uPn9sAOgRv9NQFN8
-	2E3Cw5FaGSzlPgVAoYwgT9Tl5A==
-X-Google-Smtp-Source: APBJJlF9QaWRkA2HFZAXDPGIksSZq6NqNIS7MDluuBXjMUyGz8OacRKwa0/I1dCKrdRRT8VidP2X/g==
-X-Received: by 2002:a17:902:ea04:b0:1b8:a27d:f591 with SMTP id s4-20020a170902ea0400b001b8a27df591mr32781910plg.5.1691406816716;
-        Mon, 07 Aug 2023 04:13:36 -0700 (PDT)
+        bh=x1yZWn5jqhhXD5GlPCwn7Rqy/lqVgw4fKiPcfLbuAyw=;
+        b=fHMuOLLF5QKRDZJMkN9pEmQd5u/Oiz0CDM3SQ+3FuIPmXEQqN/ODMr6BM8NkzMRjRC
+         IJWyoStlqxLdOFaacAyPJj7Ucv5Q+7FHPAQRZDaEW7O0puPELW2v7bbcXNYmRHUcWeLE
+         UUUTqus9hC2cfZ+xnOwMtbGvDG/OfPpjCvflo0W2TTDMJGrN93C78kImrxBpS2UW7XKQ
+         TG8X5KHzvXVhmQeoOmq6kWhhuLqrM/KkCk54V3E+iNmgzSFnYt+aBpAQzlLfN+Buoy5Q
+         u+7ATAfQKx0y1VH2a+V06Qda8TZrmRfY/v/tvLaWBBn/Uac5V+YO5rvJF6dBuIgBbK6e
+         eDtw==
+X-Gm-Message-State: AOJu0YxQcIR7SJR3bFFPvurLYwc12YvpoGptx3qGt9h9j72qbARLeudc
+	nq1fvtWPmcHUIfxhH2uruxeL3w==
+X-Google-Smtp-Source: AGHT+IFmiFe8iRG7X1ND7nrFgfyiRFI3F00Omyk3P1Mi12alvC2oRACqfoDpuN1VIlTmyfJiX72rxw==
+X-Received: by 2002:a17:90a:2909:b0:269:5bf7:d79c with SMTP id g9-20020a17090a290900b002695bf7d79cmr2218056pjd.1.1691406956537;
+        Mon, 07 Aug 2023 04:15:56 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -119,86 +119,102 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>,
 	Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v4 17/48] ubifs: dynamically allocate the ubifs-slab shrinker
-Date: Mon,  7 Aug 2023 19:09:05 +0800
-Message-Id: <20230807110936.21819-18-zhengqi.arch@bytedance.com>
+Subject: [PATCH v4 28/48] md/raid5: dynamically allocate the md-raid5 shrinker
+Date: Mon,  7 Aug 2023 19:09:16 +0800
+Message-Id: <20230807110936.21819-29-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the ubifs-slab shrinker.
+In preparation for implementing lockless slab shrink, use new APIs to
+dynamically allocate the md-raid5 shrinker, so that it can be freed
+asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
+read-side critical section when releasing the struct r5conf.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- fs/ubifs/super.c | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
+ drivers/md/raid5.c | 26 +++++++++++++++-----------
+ drivers/md/raid5.h |  2 +-
+ 2 files changed, 16 insertions(+), 12 deletions(-)
 
-diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
-index b08fb28d16b5..c690782388a8 100644
---- a/fs/ubifs/super.c
-+++ b/fs/ubifs/super.c
-@@ -54,11 +54,7 @@ module_param_cb(default_version, &ubifs_default_version_ops, &ubifs_default_vers
- static struct kmem_cache *ubifs_inode_slab;
+diff --git a/drivers/md/raid5.c b/drivers/md/raid5.c
+index 32a87193bad7..e284c2f7dbe4 100644
+--- a/drivers/md/raid5.c
++++ b/drivers/md/raid5.c
+@@ -7401,7 +7401,7 @@ static void free_conf(struct r5conf *conf)
  
- /* UBIFS TNC shrinker description */
--static struct shrinker ubifs_shrinker_info = {
--	.scan_objects = ubifs_shrink_scan,
--	.count_objects = ubifs_shrink_count,
--	.seeks = DEFAULT_SEEKS,
--};
-+static struct shrinker *ubifs_shrinker_info;
+ 	log_exit(conf);
  
- /**
-  * validate_inode - validate inode.
-@@ -2373,7 +2369,7 @@ static void inode_slab_ctor(void *obj)
- 
- static int __init ubifs_init(void)
+-	unregister_shrinker(&conf->shrinker);
++	shrinker_free(conf->shrinker);
+ 	free_thread_groups(conf);
+ 	shrink_stripes(conf);
+ 	raid5_free_percpu(conf);
+@@ -7449,7 +7449,7 @@ static int raid5_alloc_percpu(struct r5conf *conf)
+ static unsigned long raid5_cache_scan(struct shrinker *shrink,
+ 				      struct shrink_control *sc)
  {
--	int err;
-+	int err = -ENOMEM;
+-	struct r5conf *conf = container_of(shrink, struct r5conf, shrinker);
++	struct r5conf *conf = shrink->private_data;
+ 	unsigned long ret = SHRINK_STOP;
  
- 	BUILD_BUG_ON(sizeof(struct ubifs_ch) != 24);
+ 	if (mutex_trylock(&conf->cache_size_mutex)) {
+@@ -7470,7 +7470,7 @@ static unsigned long raid5_cache_scan(struct shrinker *shrink,
+ static unsigned long raid5_cache_count(struct shrinker *shrink,
+ 				       struct shrink_control *sc)
+ {
+-	struct r5conf *conf = container_of(shrink, struct r5conf, shrinker);
++	struct r5conf *conf = shrink->private_data;
  
-@@ -2439,10 +2435,16 @@ static int __init ubifs_init(void)
- 	if (!ubifs_inode_slab)
- 		return -ENOMEM;
+ 	if (conf->max_nr_stripes < conf->min_nr_stripes)
+ 		/* unlikely, but not impossible */
+@@ -7705,18 +7705,22 @@ static struct r5conf *setup_conf(struct mddev *mddev)
+ 	 * it reduces the queue depth and so can hurt throughput.
+ 	 * So set it rather large, scaled by number of devices.
+ 	 */
+-	conf->shrinker.seeks = DEFAULT_SEEKS * conf->raid_disks * 4;
+-	conf->shrinker.scan_objects = raid5_cache_scan;
+-	conf->shrinker.count_objects = raid5_cache_count;
+-	conf->shrinker.batch = 128;
+-	conf->shrinker.flags = 0;
+-	ret = register_shrinker(&conf->shrinker, "md-raid5:%s", mdname(mddev));
+-	if (ret) {
+-		pr_warn("md/raid:%s: couldn't register shrinker.\n",
++	conf->shrinker = shrinker_alloc(0, "md-raid5:%s", mdname(mddev));
++	if (!conf->shrinker) {
++		ret = -ENOMEM;
++		pr_warn("md/raid:%s: couldn't allocate shrinker.\n",
+ 			mdname(mddev));
+ 		goto abort;
+ 	}
  
--	err = register_shrinker(&ubifs_shrinker_info, "ubifs-slab");
--	if (err)
-+	ubifs_shrinker_info = shrinker_alloc(0, "ubifs-slab");
-+	if (!ubifs_shrinker_info)
- 		goto out_slab;
- 
-+	ubifs_shrinker_info->count_objects = ubifs_shrink_count;
-+	ubifs_shrinker_info->scan_objects = ubifs_shrink_scan;
-+	ubifs_shrinker_info->seeks = DEFAULT_SEEKS;
++	conf->shrinker->seeks = DEFAULT_SEEKS * conf->raid_disks * 4;
++	conf->shrinker->scan_objects = raid5_cache_scan;
++	conf->shrinker->count_objects = raid5_cache_count;
++	conf->shrinker->batch = 128;
++	conf->shrinker->private_data = conf;
 +
-+	shrinker_register(ubifs_shrinker_info);
++	shrinker_register(conf->shrinker);
 +
- 	err = ubifs_compressors_init();
- 	if (err)
- 		goto out_shrinker;
-@@ -2467,7 +2469,7 @@ static int __init ubifs_init(void)
- 	dbg_debugfs_exit();
- 	ubifs_compressors_exit();
- out_shrinker:
--	unregister_shrinker(&ubifs_shrinker_info);
-+	shrinker_free(ubifs_shrinker_info);
- out_slab:
- 	kmem_cache_destroy(ubifs_inode_slab);
- 	return err;
-@@ -2483,7 +2485,7 @@ static void __exit ubifs_exit(void)
- 	dbg_debugfs_exit();
- 	ubifs_sysfs_exit();
- 	ubifs_compressors_exit();
--	unregister_shrinker(&ubifs_shrinker_info);
-+	shrinker_free(ubifs_shrinker_info);
- 
- 	/*
- 	 * Make sure all delayed rcu free inodes are flushed before we
+ 	sprintf(pers_name, "raid%d", mddev->new_level);
+ 	rcu_assign_pointer(conf->thread,
+ 			   md_register_thread(raid5d, mddev, pers_name));
+diff --git a/drivers/md/raid5.h b/drivers/md/raid5.h
+index 97a795979a35..22bea20eccbd 100644
+--- a/drivers/md/raid5.h
++++ b/drivers/md/raid5.h
+@@ -670,7 +670,7 @@ struct r5conf {
+ 	wait_queue_head_t	wait_for_stripe;
+ 	wait_queue_head_t	wait_for_overlap;
+ 	unsigned long		cache_state;
+-	struct shrinker		shrinker;
++	struct shrinker		*shrinker;
+ 	int			pool_size; /* number of disks in stripeheads in pool */
+ 	spinlock_t		device_lock;
+ 	struct disk_info	*disks;
 -- 
 2.30.2
 
