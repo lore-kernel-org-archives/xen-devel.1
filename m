@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21BE2C05052
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE893C07E8A
 	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 23:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.579034.906891 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.579032.906884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qT9Jv-0001n5-Dw; Mon, 07 Aug 2023 23:07:27 +0000
+	id 1qT9Ju-0001gI-Qr; Mon, 07 Aug 2023 23:07:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 579034.906891; Mon, 07 Aug 2023 23:07:27 +0000
+Received: by outflank-mailman (output) from mailman id 579032.906884; Mon, 07 Aug 2023 23:07:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qT9Jv-0001m3-3v; Mon, 07 Aug 2023 23:07:27 +0000
-Received: by outflank-mailman (input) for mailman id 579034;
+	id 1qT9Ju-0001eq-LD; Mon, 07 Aug 2023 23:07:26 +0000
+Received: by outflank-mailman (input) for mailman id 579032;
  Mon, 07 Aug 2023 23:07:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CnMB=DY=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1qT9IP-0001NS-Jh
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 23:05:53 +0000
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [2607:f8b0:4864:20::b35])
+ id 1qT9Iv-0001NS-KU
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 23:06:25 +0000
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [2607:f8b0:4864:20::b2c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f3ff3a5f-3576-11ee-8613-37d641c3527e;
- Tue, 08 Aug 2023 01:05:51 +0200 (CEST)
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-d35a9d7a5bdso5116753276.0
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 16:05:51 -0700 (PDT)
+ id 072753b6-3577-11ee-8613-37d641c3527e;
+ Tue, 08 Aug 2023 01:06:23 +0200 (CEST)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-d59da7115bdso264051276.3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 16:06:23 -0700 (PDT)
 Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
  by smtp.googlemail.com with ESMTPSA id
- d190-20020a25cdc7000000b00d3596aca5bcsm2545203ybf.34.2023.08.07.16.05.48
+ d190-20020a25cdc7000000b00d3596aca5bcsm2545203ybf.34.2023.08.07.16.06.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 16:05:50 -0700 (PDT)
+ Mon, 07 Aug 2023 16:06:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3ff3a5f-3576-11ee-8613-37d641c3527e
+X-Inumbo-ID: 072753b6-3577-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691449550; x=1692054350;
+        d=gmail.com; s=20221208; t=1691449583; x=1692054383;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bBkB4loM/Mt006iaxsYk7j8UnaAx8a9/NTd5FkPootg=;
-        b=VY/s2U3lT3eb7t5IpiSg8gZgrV6zdEznmL00awlF+lYtU+Ed+18ZVDdsEO6HtU7Vpy
-         dstrUN4SchMkl2fom9aAptCCOd47DbaRbKQrrssm7FlhTEAcsGfKdLEpxi/zNmVX8fbV
-         m0BaPQ+7+Y3ljNnqxJV89KTzVnBKrAEa7+VtN/uK6yP5RttPNi+e44fLcNeyDJwviR59
-         fKsVvf58pKEDMlQLmejzlB0KwEwg/f+nuBnJ5WOjDekR3PGb3d8Uh4xNSu90knT7V2KQ
-         ue+Oh5SumW1Q6VzG3Nvx4HCQCUch1OMetRhRQnyZsGJky+dnZgy775ZLVF7RMseL02QV
-         h21w==
+        bh=gIX4EtUZRQHbbGVDBj/rJyP4ZKSCaTL9vvlgteJwLjg=;
+        b=ny/PO9Rzwz4wKD05c8Oj8x01t9rfWUwF+DPBSi6xhAQ1t3uiUBYZ7YUUbf8WtD6fas
+         a2dGGpvFO2SYjUkztwf/JpnNv7QhJL+Goto2OWRpxKnsAjXenC9v6P3rISzqLv6y4LVV
+         4Qzw+SXgVTszZ9R94kkJTKmg5SvkJhFFe8ZHJiGz98l2xVrWZH/L4O6QNYM4Ix9oN6dK
+         IfbxHi4LcKxjr+5M4cvO0MwysEIi/pmb6eegOI2VGQmX9xJr0pTMWjXflu5Ws+wnG+9V
+         BkJIEDxKgjBTQlry6d49f1/eWCkgGXBEpt1ui7ZKc/08IVlfaQd/C3Y9s9851HPExZOi
+         t/gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691449550; x=1692054350;
+        d=1e100.net; s=20221208; t=1691449583; x=1692054383;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bBkB4loM/Mt006iaxsYk7j8UnaAx8a9/NTd5FkPootg=;
-        b=fgwIPjQu9XF0x5A2lMU8flY6FlJ27NIqYWtLdWPZrTuN48lHhfM7KTU/olXCOh2tVL
-         /ti00ENsdsWz4kugwPSJzMhRcUa3E0KYRbjK43DBuFSM5F9IHQ1/l5jc1CglossFlLS8
-         dYxs5f099iqQew9jtaAjN39bXWpQ9sbAmtIIPByNxMNZrhDXTsV//fQCaXLprSSP+meS
-         Yd8hZSTJoG0b/wo4PgTLsml8nxaCuQhv4bU9eDLn4yl8DKOpBXwEtq4ZBRFfVggpMKa6
-         s3D2pomoDaNiI5GtpJluH8HettBhUvNjOvBpyGn3xfSrH95Y2X1eZMELCvPev1IlOiiA
-         26Nw==
-X-Gm-Message-State: AOJu0YyX8hU14k8H9sC9+9zBBnwOOCRxsBqNTxFlKn5oUlkbcUrP7JgO
-	SxEdsaP2dDmjXWYGXGpDjf8Zlc7w8M2nlA==
-X-Google-Smtp-Source: AGHT+IF/jyNrncOka/KAbgWZqRRy9OsJr4lD7fBxdAmIgyKSndALMkVGpelnzbmpBefUTJnYvKwx8g==
-X-Received: by 2002:a25:8001:0:b0:d0f:ea4b:1dff with SMTP id m1-20020a258001000000b00d0fea4b1dffmr9335352ybk.8.1691449550566;
-        Mon, 07 Aug 2023 16:05:50 -0700 (PDT)
+        bh=gIX4EtUZRQHbbGVDBj/rJyP4ZKSCaTL9vvlgteJwLjg=;
+        b=AHpKMVvvRJt5vU6pCMhYSgi3xEOAvewviIqQI07CaqocweBxU2y9cQPT4ZX8rTqbLn
+         36EJYjgn+sQGWRPY3Dv+preN4MAMRedKDqMxXbQdbUCltPS/pF5xrpsXxdbWeg3Cu3To
+         NZVtUtX8GPp8+WRj9a6UbQ3JGOri6Go98tRGXWXG5QXh1X5RL2QyRb5osGnLmmvTNp5A
+         k6Uz7YEm3RERF3m1F6xQvt/xe+y2O7nV8Redj+jzCC4ZvGPe3zzOz+DUe34P1YvW84T8
+         g7w5Ar0LavycHIZbWhME8yK5637FgKoDC/qvlAaN/JiblmKNDoHK+SK4pmxbk9YZZ8po
+         g4oQ==
+X-Gm-Message-State: AOJu0YwJlNfSm3nqEFi/hoY5jXPQE9v4xPj3pycZN+VKgerf0c/YvWMp
+	CgPybTa8WZox+aEWcmKkcGw=
+X-Google-Smtp-Source: AGHT+IHSz7sLxFa/9tcB1BFEAx77xsw7IyoQHCgeHupxbvTa93/qmodby26m2eSPWXo4FijMYi73DQ==
+X-Received: by 2002:a25:e708:0:b0:d53:f88a:dc09 with SMTP id e8-20020a25e708000000b00d53f88adc09mr3953501ybh.2.1691449582662;
+        Mon, 07 Aug 2023 16:06:22 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Matthew Wilcox <willy@infradead.org>
@@ -98,247 +98,168 @@ Cc: linux-mm@kvack.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	Hugh Dickins <hughd@google.com>,
-	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Subject: [PATCH mm-unstable v9 16/31] pgalloc: Convert various functions to use ptdescs
-Date: Mon,  7 Aug 2023 16:04:58 -0700
-Message-Id: <20230807230513.102486-17-vishal.moola@gmail.com>
+	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
+	Mike Rapoport <rppt@kernel.org>
+Subject: [PATCH mm-unstable v9 31/31] mm: Remove pgtable_{pmd, pte}_page_{ctor, dtor}() wrappers
+Date: Mon,  7 Aug 2023 16:05:13 -0700
+Message-Id: <20230807230513.102486-32-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230807230513.102486-1-vishal.moola@gmail.com>
 References: <20230807230513.102486-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-As part of the conversions to replace pgtable constructor/destructors with
-ptdesc equivalents, convert various page table functions to use ptdescs.
+These functions are no longer necessary. Remove them and cleanup
+Documentation referencing them.
 
-Some of the functions use the *get*page*() helper functions. Convert
-these to use pagetable_alloc() and ptdesc_address() instead to help
-standardize page tables further.
-
+Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
 Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
 ---
- include/asm-generic/pgalloc.h | 88 +++++++++++++++++++++--------------
- 1 file changed, 52 insertions(+), 36 deletions(-)
+ Documentation/mm/split_page_table_lock.rst    | 12 +++++------
+ .../zh_CN/mm/split_page_table_lock.rst        | 14 ++++++-------
+ include/linux/mm.h                            | 20 -------------------
+ 3 files changed, 13 insertions(+), 33 deletions(-)
 
-diff --git a/include/asm-generic/pgalloc.h b/include/asm-generic/pgalloc.h
-index a7cf825befae..c75d4a753849 100644
---- a/include/asm-generic/pgalloc.h
-+++ b/include/asm-generic/pgalloc.h
-@@ -8,7 +8,7 @@
- #define GFP_PGTABLE_USER	(GFP_PGTABLE_KERNEL | __GFP_ACCOUNT)
+diff --git a/Documentation/mm/split_page_table_lock.rst b/Documentation/mm/split_page_table_lock.rst
+index a834fad9de12..e4f6972eb6c0 100644
+--- a/Documentation/mm/split_page_table_lock.rst
++++ b/Documentation/mm/split_page_table_lock.rst
+@@ -58,7 +58,7 @@ Support of split page table lock by an architecture
+ ===================================================
  
- /**
-- * __pte_alloc_one_kernel - allocate a page for PTE-level kernel page table
-+ * __pte_alloc_one_kernel - allocate memory for a PTE-level kernel page table
-  * @mm: the mm_struct of the current context
-  *
-  * This function is intended for architectures that need
-@@ -18,12 +18,17 @@
-  */
- static inline pte_t *__pte_alloc_one_kernel(struct mm_struct *mm)
- {
--	return (pte_t *)__get_free_page(GFP_PGTABLE_KERNEL);
-+	struct ptdesc *ptdesc = pagetable_alloc(GFP_PGTABLE_KERNEL &
-+			~__GFP_HIGHMEM, 0);
-+
-+	if (!ptdesc)
-+		return NULL;
-+	return ptdesc_address(ptdesc);
+ There's no need in special enabling of PTE split page table lock: everything
+-required is done by pgtable_pte_page_ctor() and pgtable_pte_page_dtor(), which
++required is done by pagetable_pte_ctor() and pagetable_pte_dtor(), which
+ must be called on PTE table allocation / freeing.
+ 
+ Make sure the architecture doesn't use slab allocator for page table
+@@ -68,8 +68,8 @@ This field shares storage with page->ptl.
+ PMD split lock only makes sense if you have more than two page table
+ levels.
+ 
+-PMD split lock enabling requires pgtable_pmd_page_ctor() call on PMD table
+-allocation and pgtable_pmd_page_dtor() on freeing.
++PMD split lock enabling requires pagetable_pmd_ctor() call on PMD table
++allocation and pagetable_pmd_dtor() on freeing.
+ 
+ Allocation usually happens in pmd_alloc_one(), freeing in pmd_free() and
+ pmd_free_tlb(), but make sure you cover all PMD table allocation / freeing
+@@ -77,7 +77,7 @@ paths: i.e X86_PAE preallocate few PMDs on pgd_alloc().
+ 
+ With everything in place you can set CONFIG_ARCH_ENABLE_SPLIT_PMD_PTLOCK.
+ 
+-NOTE: pgtable_pte_page_ctor() and pgtable_pmd_page_ctor() can fail -- it must
++NOTE: pagetable_pte_ctor() and pagetable_pmd_ctor() can fail -- it must
+ be handled properly.
+ 
+ page->ptl
+@@ -97,7 +97,7 @@ trick:
+    split lock with enabled DEBUG_SPINLOCK or DEBUG_LOCK_ALLOC, but costs
+    one more cache line for indirect access;
+ 
+-The spinlock_t allocated in pgtable_pte_page_ctor() for PTE table and in
+-pgtable_pmd_page_ctor() for PMD table.
++The spinlock_t allocated in pagetable_pte_ctor() for PTE table and in
++pagetable_pmd_ctor() for PMD table.
+ 
+ Please, never access page->ptl directly -- use appropriate helper.
+diff --git a/Documentation/translations/zh_CN/mm/split_page_table_lock.rst b/Documentation/translations/zh_CN/mm/split_page_table_lock.rst
+index 4fb7aa666037..a2c288670a24 100644
+--- a/Documentation/translations/zh_CN/mm/split_page_table_lock.rst
++++ b/Documentation/translations/zh_CN/mm/split_page_table_lock.rst
+@@ -56,16 +56,16 @@ Hugetlb特定的辅助函数:
+ 架构对分页表锁的支持
+ ====================
+ 
+-没有必要特别启用PTE分页表锁：所有需要的东西都由pgtable_pte_page_ctor()
+-和pgtable_pte_page_dtor()完成，它们必须在PTE表分配/释放时被调用。
++没有必要特别启用PTE分页表锁：所有需要的东西都由pagetable_pte_ctor()
++和pagetable_pte_dtor()完成，它们必须在PTE表分配/释放时被调用。
+ 
+ 确保架构不使用slab分配器来分配页表：slab使用page->slab_cache来分配其页
+ 面。这个区域与page->ptl共享存储。
+ 
+ PMD分页锁只有在你有两个以上的页表级别时才有意义。
+ 
+-启用PMD分页锁需要在PMD表分配时调用pgtable_pmd_page_ctor()，在释放时调
+-用pgtable_pmd_page_dtor()。
++启用PMD分页锁需要在PMD表分配时调用pagetable_pmd_ctor()，在释放时调
++用pagetable_pmd_dtor()。
+ 
+ 分配通常发生在pmd_alloc_one()中，释放发生在pmd_free()和pmd_free_tlb()
+ 中，但要确保覆盖所有的PMD表分配/释放路径：即X86_PAE在pgd_alloc()中预先
+@@ -73,7 +73,7 @@ PMD分页锁只有在你有两个以上的页表级别时才有意义。
+ 
+ 一切就绪后，你可以设置CONFIG_ARCH_ENABLE_SPLIT_PMD_PTLOCK。
+ 
+-注意：pgtable_pte_page_ctor()和pgtable_pmd_page_ctor()可能失败--必
++注意：pagetable_pte_ctor()和pagetable_pmd_ctor()可能失败--必
+ 须正确处理。
+ 
+ page->ptl
+@@ -90,7 +90,7 @@ page->ptl用于访问分割页表锁，其中'page'是包含该表的页面struc
+    的指针并动态分配它。这允许在启用DEBUG_SPINLOCK或DEBUG_LOCK_ALLOC的
+    情况下使用分页锁，但由于间接访问而多花了一个缓存行。
+ 
+-PTE表的spinlock_t分配在pgtable_pte_page_ctor()中，PMD表的spinlock_t
+-分配在pgtable_pmd_page_ctor()中。
++PTE表的spinlock_t分配在pagetable_pte_ctor()中，PMD表的spinlock_t
++分配在pagetable_pmd_ctor()中。
+ 
+ 请不要直接访问page->ptl - -使用适当的辅助函数。
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 6310e0c59efe..6a95dfed4957 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -2932,11 +2932,6 @@ static inline bool pagetable_pte_ctor(struct ptdesc *ptdesc)
+ 	return true;
  }
  
- #ifndef __HAVE_ARCH_PTE_ALLOC_ONE_KERNEL
- /**
-- * pte_alloc_one_kernel - allocate a page for PTE-level kernel page table
-+ * pte_alloc_one_kernel - allocate memory for a PTE-level kernel page table
-  * @mm: the mm_struct of the current context
-  *
-  * Return: pointer to the allocated memory or %NULL on error
-@@ -35,40 +40,40 @@ static inline pte_t *pte_alloc_one_kernel(struct mm_struct *mm)
- #endif
- 
- /**
-- * pte_free_kernel - free PTE-level kernel page table page
-+ * pte_free_kernel - free PTE-level kernel page table memory
-  * @mm: the mm_struct of the current context
-  * @pte: pointer to the memory containing the page table
-  */
- static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
+-static inline bool pgtable_pte_page_ctor(struct page *page)
+-{
+-	return pagetable_pte_ctor(page_ptdesc(page));
+-}
+-
+ static inline void pagetable_pte_dtor(struct ptdesc *ptdesc)
  {
--	free_page((unsigned long)pte);
-+	pagetable_free(virt_to_ptdesc(pte));
+ 	struct folio *folio = ptdesc_folio(ptdesc);
+@@ -2946,11 +2941,6 @@ static inline void pagetable_pte_dtor(struct ptdesc *ptdesc)
+ 	lruvec_stat_sub_folio(folio, NR_PAGETABLE);
  }
  
- /**
-- * __pte_alloc_one - allocate a page for PTE-level user page table
-+ * __pte_alloc_one - allocate memory for a PTE-level user page table
-  * @mm: the mm_struct of the current context
-  * @gfp: GFP flags to use for the allocation
-  *
-- * Allocates a page and runs the pgtable_pte_page_ctor().
-+ * Allocate memory for a page table and ptdesc and runs pagetable_pte_ctor().
-  *
-  * This function is intended for architectures that need
-  * anything beyond simple page allocation or must have custom GFP flags.
-  *
-- * Return: `struct page` initialized as page table or %NULL on error
-+ * Return: `struct page` referencing the ptdesc or %NULL on error
-  */
- static inline pgtable_t __pte_alloc_one(struct mm_struct *mm, gfp_t gfp)
+-static inline void pgtable_pte_page_dtor(struct page *page)
+-{
+-	pagetable_pte_dtor(page_ptdesc(page));
+-}
+-
+ pte_t *__pte_offset_map(pmd_t *pmd, unsigned long addr, pmd_t *pmdvalp);
+ static inline pte_t *pte_offset_map(pmd_t *pmd, unsigned long addr)
  {
--	struct page *pte;
-+	struct ptdesc *ptdesc;
- 
--	pte = alloc_page(gfp);
--	if (!pte)
-+	ptdesc = pagetable_alloc(gfp, 0);
-+	if (!ptdesc)
- 		return NULL;
--	if (!pgtable_pte_page_ctor(pte)) {
--		__free_page(pte);
-+	if (!pagetable_pte_ctor(ptdesc)) {
-+		pagetable_free(ptdesc);
- 		return NULL;
- 	}
- 
--	return pte;
-+	return ptdesc_page(ptdesc);
+@@ -3057,11 +3047,6 @@ static inline bool pagetable_pmd_ctor(struct ptdesc *ptdesc)
+ 	return true;
  }
  
- #ifndef __HAVE_ARCH_PTE_ALLOC_ONE
-@@ -76,9 +81,9 @@ static inline pgtable_t __pte_alloc_one(struct mm_struct *mm, gfp_t gfp)
-  * pte_alloc_one - allocate a page for PTE-level user page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page and runs the pgtable_pte_page_ctor().
-+ * Allocate memory for a page table and ptdesc and runs pagetable_pte_ctor().
-  *
-- * Return: `struct page` initialized as page table or %NULL on error
-+ * Return: `struct page` referencing the ptdesc or %NULL on error
-  */
- static inline pgtable_t pte_alloc_one(struct mm_struct *mm)
+-static inline bool pgtable_pmd_page_ctor(struct page *page)
+-{
+-	return pagetable_pmd_ctor(page_ptdesc(page));
+-}
+-
+ static inline void pagetable_pmd_dtor(struct ptdesc *ptdesc)
  {
-@@ -92,14 +97,16 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm)
-  */
- 
- /**
-- * pte_free - free PTE-level user page table page
-+ * pte_free - free PTE-level user page table memory
-  * @mm: the mm_struct of the current context
-- * @pte_page: the `struct page` representing the page table
-+ * @pte_page: the `struct page` referencing the ptdesc
-  */
- static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
- {
--	pgtable_pte_page_dtor(pte_page);
--	__free_page(pte_page);
-+	struct ptdesc *ptdesc = page_ptdesc(pte_page);
-+
-+	pagetable_pte_dtor(ptdesc);
-+	pagetable_free(ptdesc);
+ 	struct folio *folio = ptdesc_folio(ptdesc);
+@@ -3071,11 +3056,6 @@ static inline void pagetable_pmd_dtor(struct ptdesc *ptdesc)
+ 	lruvec_stat_sub_folio(folio, NR_PAGETABLE);
  }
  
- 
-@@ -107,10 +114,11 @@ static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
- 
- #ifndef __HAVE_ARCH_PMD_ALLOC_ONE
- /**
-- * pmd_alloc_one - allocate a page for PMD-level page table
-+ * pmd_alloc_one - allocate memory for a PMD-level page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page and runs the pgtable_pmd_page_ctor().
-+ * Allocate memory for a page table and ptdesc and runs pagetable_pmd_ctor().
-+ *
-  * Allocations use %GFP_PGTABLE_USER in user context and
-  * %GFP_PGTABLE_KERNEL in kernel context.
-  *
-@@ -118,28 +126,30 @@ static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
-  */
- static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
- {
--	struct page *page;
-+	struct ptdesc *ptdesc;
- 	gfp_t gfp = GFP_PGTABLE_USER;
- 
- 	if (mm == &init_mm)
- 		gfp = GFP_PGTABLE_KERNEL;
--	page = alloc_page(gfp);
--	if (!page)
-+	ptdesc = pagetable_alloc(gfp, 0);
-+	if (!ptdesc)
- 		return NULL;
--	if (!pgtable_pmd_page_ctor(page)) {
--		__free_page(page);
-+	if (!pagetable_pmd_ctor(ptdesc)) {
-+		pagetable_free(ptdesc);
- 		return NULL;
- 	}
--	return (pmd_t *)page_address(page);
-+	return ptdesc_address(ptdesc);
- }
- #endif
- 
- #ifndef __HAVE_ARCH_PMD_FREE
- static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
- {
-+	struct ptdesc *ptdesc = virt_to_ptdesc(pmd);
-+
- 	BUG_ON((unsigned long)pmd & (PAGE_SIZE-1));
--	pgtable_pmd_page_dtor(virt_to_page(pmd));
--	free_page((unsigned long)pmd);
-+	pagetable_pmd_dtor(ptdesc);
-+	pagetable_free(ptdesc);
- }
- #endif
- 
-@@ -150,19 +160,25 @@ static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
- static inline pud_t *__pud_alloc_one(struct mm_struct *mm, unsigned long addr)
- {
- 	gfp_t gfp = GFP_PGTABLE_USER;
-+	struct ptdesc *ptdesc;
- 
- 	if (mm == &init_mm)
- 		gfp = GFP_PGTABLE_KERNEL;
--	return (pud_t *)get_zeroed_page(gfp);
-+	gfp &= ~__GFP_HIGHMEM;
-+
-+	ptdesc = pagetable_alloc(gfp, 0);
-+	if (!ptdesc)
-+		return NULL;
-+	return ptdesc_address(ptdesc);
- }
- 
- #ifndef __HAVE_ARCH_PUD_ALLOC_ONE
- /**
-- * pud_alloc_one - allocate a page for PUD-level page table
-+ * pud_alloc_one - allocate memory for a PUD-level page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page using %GFP_PGTABLE_USER for user context and
-- * %GFP_PGTABLE_KERNEL for kernel context.
-+ * Allocate memory for a page table using %GFP_PGTABLE_USER for user context
-+ * and %GFP_PGTABLE_KERNEL for kernel context.
-  *
-  * Return: pointer to the allocated memory or %NULL on error
-  */
-@@ -175,7 +191,7 @@ static inline pud_t *pud_alloc_one(struct mm_struct *mm, unsigned long addr)
- static inline void __pud_free(struct mm_struct *mm, pud_t *pud)
- {
- 	BUG_ON((unsigned long)pud & (PAGE_SIZE-1));
--	free_page((unsigned long)pud);
-+	pagetable_free(virt_to_ptdesc(pud));
- }
- 
- #ifndef __HAVE_ARCH_PUD_FREE
-@@ -190,7 +206,7 @@ static inline void pud_free(struct mm_struct *mm, pud_t *pud)
- #ifndef __HAVE_ARCH_PGD_FREE
- static inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)
- {
--	free_page((unsigned long)pgd);
-+	pagetable_free(virt_to_ptdesc(pgd));
- }
- #endif
- 
+-static inline void pgtable_pmd_page_dtor(struct page *page)
+-{
+-	pagetable_pmd_dtor(page_ptdesc(page));
+-}
+-
+ /*
+  * No scalability reason to split PUD locks yet, but follow the same pattern
+  * as the PMD locks to make it easier if we decide to.  The VM should not be
 -- 
 2.40.1
 
