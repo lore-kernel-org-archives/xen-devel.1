@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C155CEB64DD
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:18:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578121.905520 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8EAEB64DD
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:18:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.578139.905551 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyFC-0000kr-OV; Mon, 07 Aug 2023 11:17:50 +0000
+	id 1qSyFU-000458-8r; Mon, 07 Aug 2023 11:18:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578121.905520; Mon, 07 Aug 2023 11:17:50 +0000
+Received: by outflank-mailman (output) from mailman id 578139.905551; Mon, 07 Aug 2023 11:18:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyFB-0000fh-TK; Mon, 07 Aug 2023 11:17:49 +0000
-Received: by outflank-mailman (input) for mailman id 578121;
- Mon, 07 Aug 2023 11:17:47 +0000
+	id 1qSyFU-00044r-4m; Mon, 07 Aug 2023 11:18:08 +0000
+Received: by outflank-mailman (input) for mailman id 578139;
+ Mon, 07 Aug 2023 11:18:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qSgZ=DY=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qSyAw-00018O-Mz
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:13:26 +0000
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [2607:f8b0:4864:20::d2e])
+ id 1qSyFT-0003uh-8f
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:18:07 +0000
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [2607:f8b0:4864:20::1033])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6cfbef2d-3513-11ee-8613-37d641c3527e;
- Mon, 07 Aug 2023 13:13:25 +0200 (CEST)
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-790b9d7d643so44487739f.1
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:13:25 -0700 (PDT)
+ id 14127c17-3514-11ee-8613-37d641c3527e;
+ Mon, 07 Aug 2023 13:18:05 +0200 (CEST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2690803a368so591336a91.1
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:18:05 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.146])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.13.11
+ y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.17.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 04:13:23 -0700 (PDT)
+ Mon, 07 Aug 2023 04:18:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6cfbef2d-3513-11ee-8613-37d641c3527e
+X-Inumbo-ID: 14127c17-3514-11ee-8613-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1691406804; x=1692011604;
+        d=bytedance.com; s=google; t=1691407084; x=1692011884;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4VJlLpDqVGiuvI83ez+3bl7yR5bVuWalBgtTU2vfBLE=;
-        b=i2oZ2Se5RaRdFd0q9t3NqBTv/dUkxD/p2SyHpAjMjg/XHGqyx1ejwAfepurqt3olXd
-         4JrDoh1Y9dLDoFntnleeQjfq8XZjg4nTjOSD4Duga+gvfwhzkhg3QVfdrOJlicPQaYUD
-         v5DwTanMH6RhkvK4rWOetuDFETnSCGxcV41PCfrrWGGU2b+vPg8IYLTIauqtUI6qQnyf
-         JDKJFxqA5C/eh/Oo8gwkHqwPIIO1pJg4e68ItW2uJIdbbavFER6b/PwVILGTxzeWrF6b
-         lEtQmpfrwSnO090W7cEUPihusqog8pTCjc32QMYuqZWzqkk8YiBOx308Pfsd+2Yt04OK
-         T2NQ==
+        bh=vAE6p5mA5n3yxm+4IPfXfMLc8MGv4J5wg3qHubren08=;
+        b=J9sRUnLVr/1gRDCZ8z/wUaEuDmB5tyJkvTgo3ljho94pxMvUbNxIs6BrAr5OvjDeBd
+         NlwSsbr2CKM03GvossTeyaJQF+TsD29ATXSWWvjw7Kcrs+m5LHvK9yHheRdx6ItlS6Ki
+         yb6ebrPqrWzCUCYAOoHHLe8DTcWnRGuK8IbRkKFIstk7vHG8sx3yXUkwwQ7Mu6THuK5U
+         s7cxqSXTHpGPngOLWfQooqg5Gbhqn2y84s5NSz7JvKiqnrRjOpTq1zeDW5zGBhCfHp8b
+         AvjxYc2lq/KA07E2LvbgtvS8QM8QXYSNfper7Sm+pyp3P6HdBQtVhRokTkSwmgm01BsE
+         Ay4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691406804; x=1692011604;
+        d=1e100.net; s=20221208; t=1691407084; x=1692011884;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4VJlLpDqVGiuvI83ez+3bl7yR5bVuWalBgtTU2vfBLE=;
-        b=CUnagC+IRunxI2I+HWCzEVGaZSYwKqtSxXMk8im0u2rFHCPdhY6JheJr2nC+tOGBI5
-         efPqCsH5oio4qUsHDG7mxgk5A7/y/fXhioCGNOO85zB/JBq9qX5APfJ9aYDH4cWa47t3
-         WxJQvZbmhJadS25MyJFXaXMYj24ZOqk9XhjEpo17/qQLPihm+Zuhn3nzS0FOIe6EDj+a
-         CGBIAPnRtyHUv6vkn4x3WUNrGNQQ8J0FLqigRFDFHq9EMuGn0b2rLPDw4UgUYMgl2sjp
-         usK4dannFYg6re5yv8VSYqfeUzHDORaUx8Hekhbf+OFcrgT1xvPoN8Pbmcas3Env0JOc
-         0oSQ==
-X-Gm-Message-State: ABy/qLYZse8gTekHOX8ovMuUEZfnGlD8yFygrts/pO3R1ha1DCoO0Wu4
-	OxH9i2oXsqE/6t0nnHTQRIXTxQ==
-X-Google-Smtp-Source: APBJJlG6KxjpSP18cuDMGPLwCal+2Q6XOYkRmOlR+93TSEU+QOz0TNU1VRvfHZPrdEq648UTFq+gsw==
-X-Received: by 2002:a92:d944:0:b0:349:3c78:fd14 with SMTP id l4-20020a92d944000000b003493c78fd14mr13499018ilq.1.1691406803912;
-        Mon, 07 Aug 2023 04:13:23 -0700 (PDT)
+        bh=vAE6p5mA5n3yxm+4IPfXfMLc8MGv4J5wg3qHubren08=;
+        b=lXfchn7SMlQdL8z3pIbysKLrnE8lsMtjGjXZS6PDnf6it1EnbkWepJc1/DVMdM8r9d
+         13Bgkkcva2ipb5VQNmH9Gq1MqVz+dvtVn+duwih5+YjBnfpQ6znY5ef1Ybycq1mEkeCo
+         XfxT4vnP7tSaanCD3yWdvalRreZiW54l4L1HzRcb4MZQyGuTB03mG2GmmeVWTUATUF5K
+         xEPFjWgeDWxNCzuXXL8v6gsp+HK1u/AlMkvRQy9FGlmYsjl8Ndn1Hojb8RwGMuZaOjxc
+         W9W3Qt998l9azrYuic/2UOcIukZ2zVcA2duhO8t5AnMaWJvLFS+9MPxbIsyHpaAKRcbW
+         1OfA==
+X-Gm-Message-State: AOJu0Yzy/mw9gq1ZG8+Zbs7hgp26SRnRoI97xRbfTZZswbWhpPsF9CTX
+	c0bNdAFKplZCJjo4jdimjyRlgw==
+X-Google-Smtp-Source: AGHT+IEh5Yyc2UkocOBP861I39wck8cTfExcJN4mGltuRpL51+0K+Rth+2UxJEat5gVmOs+WZ1XBzA==
+X-Received: by 2002:a17:90a:648:b0:269:60ed:d493 with SMTP id q8-20020a17090a064800b0026960edd493mr1826843pje.4.1691407084214;
+        Mon, 07 Aug 2023 04:18:04 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -119,66 +119,114 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>,
 	Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v4 16/48] quota: dynamically allocate the dquota-cache shrinker
-Date: Mon,  7 Aug 2023 19:09:04 +0800
-Message-Id: <20230807110936.21819-17-zhengqi.arch@bytedance.com>
+Subject: [PATCH v4 38/48] xfs: dynamically allocate the xfs-inodegc shrinker
+Date: Mon,  7 Aug 2023 19:09:26 +0800
+Message-Id: <20230807110936.21819-39-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the dquota-cache shrinker.
+In preparation for implementing lockless slab shrink, use new APIs to
+dynamically allocate the xfs-inodegc shrinker, so that it can be freed
+asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
+read-side critical section when releasing the struct xfs_mount.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- fs/quota/dquot.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ fs/xfs/xfs_icache.c | 26 +++++++++++++++-----------
+ fs/xfs/xfs_mount.c  |  4 ++--
+ fs/xfs/xfs_mount.h  |  2 +-
+ 3 files changed, 18 insertions(+), 14 deletions(-)
 
-diff --git a/fs/quota/dquot.c b/fs/quota/dquot.c
-index 9e72bfe8bbad..c303cffdf433 100644
---- a/fs/quota/dquot.c
-+++ b/fs/quota/dquot.c
-@@ -791,12 +791,6 @@ dqcache_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
- 	percpu_counter_read_positive(&dqstats.counter[DQST_FREE_DQUOTS]));
- }
- 
--static struct shrinker dqcache_shrinker = {
--	.count_objects = dqcache_shrink_count,
--	.scan_objects = dqcache_shrink_scan,
--	.seeks = DEFAULT_SEEKS,
--};
--
- /*
-  * Safely release dquot and put reference to dquot.
-  */
-@@ -2956,6 +2950,7 @@ static int __init dquot_init(void)
+diff --git a/fs/xfs/xfs_icache.c b/fs/xfs/xfs_icache.c
+index 453890942d9f..751c380afd5a 100644
+--- a/fs/xfs/xfs_icache.c
++++ b/fs/xfs/xfs_icache.c
+@@ -2225,8 +2225,7 @@ xfs_inodegc_shrinker_count(
+ 	struct shrinker		*shrink,
+ 	struct shrink_control	*sc)
  {
- 	int i, ret;
- 	unsigned long nr_hash, order;
-+	struct shrinker *dqcache_shrinker;
+-	struct xfs_mount	*mp = container_of(shrink, struct xfs_mount,
+-						   m_inodegc_shrinker);
++	struct xfs_mount	*mp = shrink->private_data;
+ 	struct xfs_inodegc	*gc;
+ 	int			cpu;
  
- 	printk(KERN_NOTICE "VFS: Disk quotas %s\n", __DQUOT_VERSION__);
- 
-@@ -2990,8 +2985,15 @@ static int __init dquot_init(void)
- 	pr_info("VFS: Dquot-cache hash table entries: %ld (order %ld,"
- 		" %ld bytes)\n", nr_hash, order, (PAGE_SIZE << order));
- 
--	if (register_shrinker(&dqcache_shrinker, "dquota-cache"))
--		panic("Cannot register dquot shrinker");
-+	dqcache_shrinker = shrinker_alloc(0, "dquota-cache");
-+	if (!dqcache_shrinker)
-+		panic("Cannot allocate dquot shrinker");
+@@ -2247,8 +2246,7 @@ xfs_inodegc_shrinker_scan(
+ 	struct shrinker		*shrink,
+ 	struct shrink_control	*sc)
+ {
+-	struct xfs_mount	*mp = container_of(shrink, struct xfs_mount,
+-						   m_inodegc_shrinker);
++	struct xfs_mount	*mp = shrink->private_data;
+ 	struct xfs_inodegc	*gc;
+ 	int			cpu;
+ 	bool			no_items = true;
+@@ -2284,13 +2282,19 @@ int
+ xfs_inodegc_register_shrinker(
+ 	struct xfs_mount	*mp)
+ {
+-	struct shrinker		*shrink = &mp->m_inodegc_shrinker;
++	mp->m_inodegc_shrinker = shrinker_alloc(SHRINKER_NONSLAB,
++						"xfs-inodegc:%s",
++						mp->m_super->s_id);
++	if (!mp->m_inodegc_shrinker)
++		return -ENOMEM;
 +
-+	dqcache_shrinker->count_objects = dqcache_shrink_count;
-+	dqcache_shrinker->scan_objects = dqcache_shrink_scan;
-+	dqcache_shrinker->seeks = DEFAULT_SEEKS;
-+
-+	shrinker_register(dqcache_shrinker);
++	mp->m_inodegc_shrinker->count_objects = xfs_inodegc_shrinker_count;
++	mp->m_inodegc_shrinker->scan_objects = xfs_inodegc_shrinker_scan;
++	mp->m_inodegc_shrinker->seeks = 0;
++	mp->m_inodegc_shrinker->batch = XFS_INODEGC_SHRINKER_BATCH;
++	mp->m_inodegc_shrinker->private_data = mp;
  
- 	return 0;
+-	shrink->count_objects = xfs_inodegc_shrinker_count;
+-	shrink->scan_objects = xfs_inodegc_shrinker_scan;
+-	shrink->seeks = 0;
+-	shrink->flags = SHRINKER_NONSLAB;
+-	shrink->batch = XFS_INODEGC_SHRINKER_BATCH;
++	shrinker_register(mp->m_inodegc_shrinker);
+ 
+-	return register_shrinker(shrink, "xfs-inodegc:%s", mp->m_super->s_id);
++	return 0;
  }
+diff --git a/fs/xfs/xfs_mount.c b/fs/xfs/xfs_mount.c
+index fb87ffb48f7f..640d09891a4e 100644
+--- a/fs/xfs/xfs_mount.c
++++ b/fs/xfs/xfs_mount.c
+@@ -1018,7 +1018,7 @@ xfs_mountfs(
+  out_log_dealloc:
+ 	xfs_log_mount_cancel(mp);
+  out_inodegc_shrinker:
+-	unregister_shrinker(&mp->m_inodegc_shrinker);
++	shrinker_free(mp->m_inodegc_shrinker);
+  out_fail_wait:
+ 	if (mp->m_logdev_targp && mp->m_logdev_targp != mp->m_ddev_targp)
+ 		xfs_buftarg_drain(mp->m_logdev_targp);
+@@ -1100,7 +1100,7 @@ xfs_unmountfs(
+ #if defined(DEBUG)
+ 	xfs_errortag_clearall(mp);
+ #endif
+-	unregister_shrinker(&mp->m_inodegc_shrinker);
++	shrinker_free(mp->m_inodegc_shrinker);
+ 	xfs_free_perag(mp);
+ 
+ 	xfs_errortag_del(mp);
+diff --git a/fs/xfs/xfs_mount.h b/fs/xfs/xfs_mount.h
+index e2866e7fa60c..562c294ca08e 100644
+--- a/fs/xfs/xfs_mount.h
++++ b/fs/xfs/xfs_mount.h
+@@ -217,7 +217,7 @@ typedef struct xfs_mount {
+ 	atomic_t		m_agirotor;	/* last ag dir inode alloced */
+ 
+ 	/* Memory shrinker to throttle and reprioritize inodegc */
+-	struct shrinker		m_inodegc_shrinker;
++	struct shrinker		*m_inodegc_shrinker;
+ 	/*
+ 	 * Workqueue item so that we can coalesce multiple inode flush attempts
+ 	 * into a single flush.
 -- 
 2.30.2
 
