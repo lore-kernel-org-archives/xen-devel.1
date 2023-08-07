@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E96C001DF
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:39:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578296.905721 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F265EB64DD
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:44:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.578304.905741 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyaB-0000qC-8F; Mon, 07 Aug 2023 11:39:31 +0000
+	id 1qSyeP-0002Z8-00; Mon, 07 Aug 2023 11:43:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578296.905721; Mon, 07 Aug 2023 11:39:31 +0000
+Received: by outflank-mailman (output) from mailman id 578304.905741; Mon, 07 Aug 2023 11:43:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyaB-0000q5-57; Mon, 07 Aug 2023 11:39:31 +0000
-Received: by outflank-mailman (input) for mailman id 578296;
- Mon, 07 Aug 2023 11:39:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LmzZ=DY=invisiblethingslab.com=simon@srs-se1.protection.inumbo.net>)
- id 1qSyPu-00024C-KR
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:28:54 +0000
-Received: from wout2-smtp.messagingengine.com (wout2-smtp.messagingengine.com
- [64.147.123.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 94f2039a-3515-11ee-8613-37d641c3527e;
- Mon, 07 Aug 2023 13:28:52 +0200 (CEST)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id BA0DC3200948;
- Mon,  7 Aug 2023 07:28:48 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Mon, 07 Aug 2023 07:28:49 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Aug 2023 07:28:44 -0400 (EDT)
+	id 1qSyeO-0002Z1-TH; Mon, 07 Aug 2023 11:43:52 +0000
+Received: by outflank-mailman (input) for mailman id 578304;
+ Mon, 07 Aug 2023 11:43:51 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1qSyeN-0002YK-Jm
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:43:51 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qSyeN-0005HA-3P; Mon, 07 Aug 2023 11:43:51 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qSyeM-00044z-Qk; Mon, 07 Aug 2023 11:43:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,105 +41,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94f2039a-3515-11ee-8613-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to; s=fm3; t=
-	1691407728; x=1691494128; bh=V1p5A9ACqsnl2tgeoDxtsmzUi6y8s5WkawP
-	sN/O3EGU=; b=pRpj3enyACb/haiSdwNnxdJ+CfbcUP2+lhuc2IGeMNLynwF0DPc
-	SGtCvuZpUEST2aW4JF6Q+/aP+ol6dwSdKcV3OddWPfBKvWsgYl16oY4zxLEUwUec
-	Pcs654y3N21UOJzNnTUUHEy2oRC6MTO6m7JpK/OOeH0vk5lbLC2o+roSVq7VmnUK
-	jtTxJD309QKNk1CvJzKfe7ksl1oK5mixaLbFMCkL6Ulq+tGpq47ncz+YehE+qzR+
-	YOQtqNafgFKKc8PHoZ4kKKNQVCa0UF+x7hL7EqvXdbs9id/hyLiy6jKX+jrfJLuK
-	PQEJ3EGVS75PF/p5saqjFbhSfJr14JIFXIw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm3; t=1691407728; x=1691494128; bh=V1p5A9ACqsnl2
-	tgeoDxtsmzUi6y8s5WkawPsN/O3EGU=; b=naXg0GIwmibCTbs1OcPrEs16htIJc
-	kY0qVYxANqvGVM3+Mi9AbdDJDu1ojzOEo8d+rBtfxHxoerJxhdWYSrnzNrTTVk36
-	FDjUi3lWaSfGceEQqwZ8axIEzXZw5pca/w3LsabJjYa9EA6mR4tafPgRk9Y8JXGX
-	pkm9hPKohSezAseRAMCFiKFiC6jFod9dorqd78GAZs5mnsiLuaBVNBKZe7fpTUFB
-	zNiahTPagtgSKOM2AicojV8oHwgmBq+ZJglhsx/pbCQvQskSdP0ECJ0Ofm2RJP6W
-	HwSAC4IJKMi4Ypvs0226t7PS2w8U6xHi1lUbcPspwyDrbvcWy37/FGCsg==
-X-ME-Sender: <xms:b9XQZKU7SbnVYnzoOjKjzl7Zjjky0CyBcSSWhTuFjvNZEIfhGaU34Q>
-    <xme:b9XQZGm_1glR0eU73UwUk774mDXs-lVIJS9CRjmMtJgVl7HSKkDuylScpIBOzJ8xc
-    mK6DOpaYrpDDeA>
-X-ME-Received: <xmr:b9XQZOYtlJpWvke40tQRen0_QFRWSBukD0odwDBYGOb2rBfPqaPnI2zL>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrledtgdeflecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefuihhmohhnucfi
-    rghishgvrhcuoehsihhmohhnsehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-    eqnecuggftrfgrthhtvghrnhepueevheegtdefgeefuddvfeduueduffffffejveeugeef
-    udefiedugedugeevudfgnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhush
-    htvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehsihhmohhnsehinhhv
-    ihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:b9XQZBWbP_s0r4tASYPqECq9Y0MLh5J2fJ0vVkLeib1adot-NmErRw>
-    <xmx:b9XQZEmqCYkcUtcJLrSTv-unCPsLsAbT_tHKmscHHzepqtk1rTzoxw>
-    <xmx:b9XQZGezTdJPOEL1oGn2mqNBtrDhkScHLn1ZCPDcId9eFG-1EQFpnQ>
-    <xmx:cNXQZFAY-i3_vWVEVgEZyEQbG66JqCicS5X5SHqFP6bRmlxHJxk9Yw>
-Feedback-ID: idc5945a3:Fastmail
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: Simon Gaiser <simon@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [XEN PATCH v3] x86/hpet: Disable legacy replacement mode after IRQ test
-Date: Mon,  7 Aug 2023 13:28:22 +0200
-Message-ID: <a112f0fbbb333fc29a35d0a81853d59409a33fde.1690798460.git.simon@invisiblethingslab.com>
-X-Mailer: git-send-email 2.40.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=N0tLBPm3rHVOypWUD918M6DeqCdBgaaafpUssnEENr8=; b=WKFeOsRCY9Z4jQUpmGV3QPtJAd
+	iTa+V4+pqljdHOfZ5ftkK96ou7DKMeUHM5hkIa0yytNCodCQxItnJ0m30w2X1/68fbQwLk4GtrZl4
+	cdgx7aY4QOCS0r3HgWsfiKCl1vIl0WLfq4iYrfPGcj+fohqlvrNPa4nV2XZGUsQTx2Pk=;
+Message-ID: <88fff832-af85-497e-9608-612c8a351d9b@xen.org>
+Date: Mon, 7 Aug 2023 12:43:48 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Message-ID: <20230807112822.SH-oTswq3yvPRtsileT_5vXQwIPbLp9Hjwntk2iIgrg@z>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 01/13] xen/arm64: head.S: Introduce
+ enable_{boot,secondary}_cpu_mm
+Content-Language: en-GB
+To: Henry Wang <Henry.Wang@arm.com>, Ayan Kumar Halder <ayankuma@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Wei Chen <Wei.Chen@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Penny Zheng <Penny.Zheng@arm.com>
+References: <20230801034419.2047541-1-Henry.Wang@arm.com>
+ <20230801034419.2047541-2-Henry.Wang@arm.com>
+ <79de42d1-35db-79b1-da2a-f08a72fa53d7@amd.com>
+ <AS8PR08MB7991B7C1B78531B9322934E2920CA@AS8PR08MB7991.eurprd08.prod.outlook.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <AS8PR08MB7991B7C1B78531B9322934E2920CA@AS8PR08MB7991.eurprd08.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-As far as I understand the HPET legacy mode is not required after the
-timer IRQ test. For previous discussion see [1] and [2]. Keeping it
-enabled prevents reaching deeper C-states on some systems and thereby
-also S0ix residency. So disable it after the timer IRQ test worked. Note
-that this code path is only reached when opt_hpet_legacy_replacement < 0,
-so explicit user choice is still honored.
 
-Link: https://lore.kernel.org/xen-devel/cb408368-077d-edb5-b4ad-f80086db48c1@invisiblethingslab.com/ # [1]
-Link: https://lore.kernel.org/xen-devel/20230718122603.2002-1-simon@invisiblethingslab.com/ # [2]
-Signed-off-by: Simon Gaiser <simon@invisiblethingslab.com>
----
 
-Changes in v3:
+On 07/08/2023 12:35, Henry Wang wrote:
+> Hi Ayan,
 
- - Edit log message and downgrade it to XENLOG_DEBUG.
+Hi Henry,
 
-Changes in v2:
+>> -----Original Message-----
+>> Hi Henry,
+>>
+>>> At the moment, on MMU system, enable_mmu() will return to an
+>>> address in the 1:1 mapping, then each path is responsible to
+>>> switch to virtual runtime mapping. Then remove_identity_mapping()
+>>> is called on the boot CPU to remove all 1:1 mapping.
+>>>
+>>> Since remove_identity_mapping() is not necessary on Non-MMU system,
+>>> and we also avoid creating empty function for Non-MMU system, trying
+>>> to keep only one codeflow in arm64/head.S, we move path switch and
+>>> remove_identity_mapping() in enable_mmu() on MMU system.
+>>>
+>>> As the remove_identity_mapping should only be called for the boot
+>>> CPU only, so we introduce enable_boot_cpu_mm() for boot CPU and
+>>> enable_secondary_cpu_mm() for secondary CPUs in this patch.
+>>>
+>>> Signed-off-by: Wei Chen <wei.chen@arm.com>
+>>> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+>>> Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+>>
+>> With two comments
+>>
+>> Reviewed-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+>>
+>> Tested-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+> 
+> Thanks, and...
+> 
+>>
+>>> +/*
+>>> + * Enable mm (turn on the data cache and the MMU) for secondary CPUs.
+>>> + * The function will return to the virtual address provided in LR (e.g. the
+>>> + * runtime mapping).
+>>> + *
+>>> + * Inputs:
+>>> + *   lr : Virtual address to return to.
+>>> + *
+>>> + * Clobbers x0 - x5
+>>> + */
+>>> +enable_secondary_cpu_mm:
+>> I will prefer "enable_secondary_cpu_mmu" as it is MMU specific. And ...
+> 
+> ...actually this as well as...
+> 
+>>> +/*
+>>> + * Enable mm (turn on the data cache and the MMU) for the boot CPU.
+>>> + * The function will return to the virtual address provided in LR (e.g. the
+>>> + * runtime mapping).
+>>> + *
+>>> + * Inputs:
+>>> + *   lr : Virtual address to return to.
+>>> + *
+>>> + * Clobbers x0 - x5
+>>> + */
+>>> +enable_boot_cpu_mm:
+>>
+>> prefer "enable_boot_cpu_mmu" as it is MMU specific as well.
+> 
+> ...this, are the name suggested by Julien in [1], so probably I will stick
+> to these names, unless he would prefer the proposed names. I would
+> personally prefer the names that Julien suggested too, because from
+> the comments above these two functions, these functions not only
+> enable the MMU, but also turn on the d-cache, hence a more generic
+> name (using "mm"), is more appropriate here I guess.
 
- - Always disable legacy mode after test, not only when ARAT is
-   available. See [3] for reasoning.
+I have suggested those name because the two functions are meant to 
+abstract the implementation between MPU and MMU (see [2] for the MPU).
 
-[3]: https://lore.kernel.org/xen-devel/ac77ecba-6804-1d16-60dc-f184e5d31dcb@invisiblethingslab.com/
+If we prefix them with *_mmu now, they will have to be renamed later on 
+and will just introduce unnecessary churn.
 
----
- xen/arch/x86/io_apic.c | 2 ++
- 1 file changed, 2 insertions(+)
+> 
+> [1] https://lore.kernel.org/xen-devel/c10bc254-ad79-dada-d5fb-9ee619934ffb@xen.org/
 
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index 041233b9b7..b4b4cd5939 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -1967,6 +1967,8 @@ static void __init check_timer(void)
- 
-             if ( timer_irq_works() )
-             {
-+                printk(XENLOG_DEBUG "IRQ test with HPET Legacy Replacement Mode worked - disabling it again\n");
-+                hpet_disable_legacy_replacement_mode();
-                 local_irq_restore(flags);
-                 return;
-             }
+[2] 
+https://gitlab.com/xen-project/people/henryw/xen/-/blob/mpu_v4/xen/arch/arm/arm64/mpu/head.S?ref_type=heads#L205
+
 -- 
-2.40.1
-
+Julien Grall
 
