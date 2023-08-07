@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3685EC04E69
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:17:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578116.905498 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B6C1C04A6A
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:17:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.578118.905504 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyF9-00006D-Bd; Mon, 07 Aug 2023 11:17:47 +0000
+	id 1qSyFA-0000FU-A1; Mon, 07 Aug 2023 11:17:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578116.905498; Mon, 07 Aug 2023 11:17:47 +0000
+Received: by outflank-mailman (output) from mailman id 578118.905504; Mon, 07 Aug 2023 11:17:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyF9-0008W6-17; Mon, 07 Aug 2023 11:17:47 +0000
-Received: by outflank-mailman (input) for mailman id 578116;
- Mon, 07 Aug 2023 11:17:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qSyF9-0000CR-RB; Mon, 07 Aug 2023 11:17:47 +0000
+Received: by outflank-mailman (input) for mailman id 578118;
+ Mon, 07 Aug 2023 11:17:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qSgZ=DY=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qSy9T-00018O-8u
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:11:55 +0000
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [2607:f8b0:4864:20::632])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3658959a-3513-11ee-8613-37d641c3527e;
- Mon, 07 Aug 2023 13:11:53 +0200 (CEST)
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1bba9539a23so9296655ad.1
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:11:53 -0700 (PDT)
+ id 1qSyAj-0002Ee-4h
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:13:13 +0000
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [2607:f8b0:4864:20::52a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6567a3f8-3513-11ee-b27d-6b7b168915f2;
+ Mon, 07 Aug 2023 13:13:12 +0200 (CEST)
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-51f64817809so360317a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:13:12 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.146])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.11.39
+ y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.12.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 04:11:51 -0700 (PDT)
+ Mon, 07 Aug 2023 04:13:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3658959a-3513-11ee-8613-37d641c3527e
+X-Inumbo-ID: 6567a3f8-3513-11ee-b27d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1691406712; x=1692011512;
+        d=bytedance.com; s=google; t=1691406791; x=1692011591;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ubpyp4SIhGXjO6/VTKiZvWjlRzyN8ANvKHVN5xSGnIw=;
-        b=G6tJn+16QVti2qtu2hqYljseIE/XGpe1Yhsul4LFU6R/aCDAM7lceOlES83Z0B/Pue
-         2irlih/PCzGRhADqlmxdT4ZmTPg/rDw2XT4QeZKx/Tui9xhVWAtyJogqiocaYi2mPJVJ
-         JfsH0RSoKbpVavaYBWWtyo/mJh8W+H0WFTE4SVefHn6UoqHLIS8l90Z//i2iVib88cLh
-         SO8x9HJ9eijOF2Obr6A8OaZNG3N0xetNtsejNB5r0CVLeObeV8ZzJa8r4m2G8/H610tO
-         JRFiieD8eIQL4G+uzuFBv5AMDY6TbkMqFwB+fegzuV4xQGReerwz1d1NP8JNZHZ17Zsd
-         g+Fg==
+        bh=urGrhHBCGKwKuhIkQmOHRuysXuy1mToQA+AaHWoY6PY=;
+        b=gvEcin7S0wJ5rW0wtj9WnWp/4gO3FOqyEc5Qy3KVjjCOMIdl063r7goatTKMU5K63u
+         IABDDkTZbyMiPq/rwoG72XrgfLWlV6/YJwymkZtRfBVcrDOzJOk+V88T6EEEXGW6nfh0
+         le0xVwnZY7As0nXjZy+hSjIWRCXvYGRHiEKZrDZnQb7QflVpjM7uq/81aSxj3traKDGt
+         VXa/baYLLxxBhWBawSSBHT4dMsZ/NRoyUnn0XTD8JWz4/O0ULe9Suh4wohOUxiotc5cA
+         +kJEwQbIJfS1Vrk1T3/Loi8TKjO+pow/TrGBcBE2xp4OSLxBFU0bCUPycoGAdA8SsoOk
+         yeOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691406712; x=1692011512;
+        d=1e100.net; s=20221208; t=1691406791; x=1692011591;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ubpyp4SIhGXjO6/VTKiZvWjlRzyN8ANvKHVN5xSGnIw=;
-        b=ADOMiGOztu18Bes1lAIdYFV2nDWoRzI2F6b+ugOzUrvjuV4OtyVI+KN/qiVYZZLKEq
-         d6l9aXCYqbCBDMs+COSw3gs/TW5I0SGdmkq01kY2iDZf6hTU7KObzldcbQZJaD17r9sG
-         8zmcjJ4LszgAGHc5coDdIPe7I8i943xtKCCzSPJcGzVfb++JsBgSF1TcZmUshxw3fqJe
-         0GvMj5OZ8bfiawP/G6UBrQeDTaXiq8rHY3CR7Aly5UNnKWvevywJWLdiVGDQMGn2QMXC
-         k0H8kj2h8bOGzKR/uuYWWf6lso9QA9RVGmHHIPMeTz5sfVaVt6t1SriU+2QnJXG3ZHt8
-         aEcg==
-X-Gm-Message-State: ABy/qLapRxa4AfqvHitebMftOEwpOAdulAmdymM44ukMxV39Wz/9FOBZ
-	UnG9OiptPj/NWCjtLR5jvnldRA==
-X-Google-Smtp-Source: APBJJlGAdl0ewhYUg6UhJdRJKXIwq0U3XoR/AJshcbF16xE0A4mgQC4Umc8PgwnpC/Hq6tl8ikCZEw==
-X-Received: by 2002:a17:902:ea04:b0:1b8:17e8:547e with SMTP id s4-20020a170902ea0400b001b817e8547emr32460173plg.1.1691406712196;
-        Mon, 07 Aug 2023 04:11:52 -0700 (PDT)
+        bh=urGrhHBCGKwKuhIkQmOHRuysXuy1mToQA+AaHWoY6PY=;
+        b=RXUFXd7NwT2/evqnMyQEMgGHNkZjUnvwOFbWFEJn1owNtp/RxAQXXWAY5WOebYQ2oW
+         3yDFydkYV4+f0I2irfQ7dfGYWWd/mx3cfMyYEtkkNztYpVqfDW9TR1KG/O0OVN/eRCqf
+         Lhm8jCwsdNPjjdbKPLKq0GgFyRGYkZX/0be+q2HlQdOizcGZ44yQpz08pjdzhYfU+9J0
+         GpziJoxSjr42YYLSt3Z1lGa/HmZIp7ZcNtEyMrPybfzWNmIxiFH7984o6L/4bHtbn22x
+         L2yLkqIUc28xLoPN3M6tTmCA6Dm/ilP5z2Q5C01sflULTR2MJqEZV1Beg/w47+yPJPiG
+         PkKg==
+X-Gm-Message-State: ABy/qLYlWKW8uG9ND+nWs6W8szU9K7ZfqWbZwPHOyL3/s8kd6WK1+rhR
+	Ho4ElCBZPGlbQ6GUA6/tgHpi5g==
+X-Google-Smtp-Source: APBJJlGG9fl/KZM7Wu/aB3nA3qPBXzAgCls0ii/X4UboFM2rQSd7zbDq190u8vBbdPOZ8QFUsdy1lw==
+X-Received: by 2002:a17:90a:faf:b0:268:abc:83d5 with SMTP id 44-20020a17090a0faf00b002680abc83d5mr23478200pjz.4.1691406791204;
+        Mon, 07 Aug 2023 04:13:11 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -119,60 +119,81 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>,
 	Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v4 09/48] erofs: dynamically allocate the erofs-shrinker
-Date: Mon,  7 Aug 2023 19:08:57 +0800
-Message-Id: <20230807110936.21819-10-zhengqi.arch@bytedance.com>
+Subject: [PATCH v4 15/48] nfsd: dynamically allocate the nfsd-filecache shrinker
+Date: Mon,  7 Aug 2023 19:09:03 +0800
+Message-Id: <20230807110936.21819-16-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use new APIs to dynamically allocate the erofs-shrinker.
+Use new APIs to dynamically allocate the nfsd-filecache shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- fs/erofs/utils.c | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+ fs/nfsd/filecache.c | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
-diff --git a/fs/erofs/utils.c b/fs/erofs/utils.c
-index cc6fb9e98899..6e1a828e6ca3 100644
---- a/fs/erofs/utils.c
-+++ b/fs/erofs/utils.c
-@@ -270,19 +270,25 @@ static unsigned long erofs_shrink_scan(struct shrinker *shrink,
- 	return freed;
+diff --git a/fs/nfsd/filecache.c b/fs/nfsd/filecache.c
+index ee9c923192e0..9c62b4502539 100644
+--- a/fs/nfsd/filecache.c
++++ b/fs/nfsd/filecache.c
+@@ -521,11 +521,7 @@ nfsd_file_lru_scan(struct shrinker *s, struct shrink_control *sc)
+ 	return ret;
  }
  
--static struct shrinker erofs_shrinker_info = {
--	.scan_objects = erofs_shrink_scan,
--	.count_objects = erofs_shrink_count,
--	.seeks = DEFAULT_SEEKS,
+-static struct shrinker	nfsd_file_shrinker = {
+-	.scan_objects = nfsd_file_lru_scan,
+-	.count_objects = nfsd_file_lru_count,
+-	.seeks = 1,
 -};
-+static struct shrinker *erofs_shrinker_info;
++static struct shrinker *nfsd_file_shrinker;
  
- int __init erofs_init_shrinker(void)
- {
--	return register_shrinker(&erofs_shrinker_info, "erofs-shrinker");
-+	erofs_shrinker_info = shrinker_alloc(0, "erofs-shrinker");
-+	if (!erofs_shrinker_info)
-+		return -ENOMEM;
-+
-+	erofs_shrinker_info->count_objects = erofs_shrink_count;
-+	erofs_shrinker_info->scan_objects = erofs_shrink_scan;
-+	erofs_shrinker_info->seeks = DEFAULT_SEEKS;
-+
-+	shrinker_register(erofs_shrinker_info);
-+
-+	return 0;
- }
+ /**
+  * nfsd_file_cond_queue - conditionally unhash and queue a nfsd_file
+@@ -746,12 +742,19 @@ nfsd_file_cache_init(void)
+ 		goto out_err;
+ 	}
  
- void erofs_exit_shrinker(void)
- {
--	unregister_shrinker(&erofs_shrinker_info);
-+	shrinker_free(erofs_shrinker_info);
- }
- #endif	/* !CONFIG_EROFS_FS_ZIP */
+-	ret = register_shrinker(&nfsd_file_shrinker, "nfsd-filecache");
+-	if (ret) {
+-		pr_err("nfsd: failed to register nfsd_file_shrinker: %d\n", ret);
++	nfsd_file_shrinker = shrinker_alloc(0, "nfsd-filecache");
++	if (!nfsd_file_shrinker) {
++		ret = -ENOMEM;
++		pr_err("nfsd: failed to allocate nfsd_file_shrinker\n");
+ 		goto out_lru;
+ 	}
+ 
++	nfsd_file_shrinker->count_objects = nfsd_file_lru_count;
++	nfsd_file_shrinker->scan_objects = nfsd_file_lru_scan;
++	nfsd_file_shrinker->seeks = 1;
++
++	shrinker_register(nfsd_file_shrinker);
++
+ 	ret = lease_register_notifier(&nfsd_file_lease_notifier);
+ 	if (ret) {
+ 		pr_err("nfsd: unable to register lease notifier: %d\n", ret);
+@@ -774,7 +777,7 @@ nfsd_file_cache_init(void)
+ out_notifier:
+ 	lease_unregister_notifier(&nfsd_file_lease_notifier);
+ out_shrinker:
+-	unregister_shrinker(&nfsd_file_shrinker);
++	shrinker_free(nfsd_file_shrinker);
+ out_lru:
+ 	list_lru_destroy(&nfsd_file_lru);
+ out_err:
+@@ -891,7 +894,7 @@ nfsd_file_cache_shutdown(void)
+ 		return;
+ 
+ 	lease_unregister_notifier(&nfsd_file_lease_notifier);
+-	unregister_shrinker(&nfsd_file_shrinker);
++	shrinker_free(nfsd_file_shrinker);
+ 	/*
+ 	 * make sure all callers of nfsd_file_lru_cb are done before
+ 	 * calling nfsd_file_cache_purge
 -- 
 2.30.2
 
