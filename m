@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72005C001DE
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 18:52:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578806.906566 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE44C001DB
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 18:52:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.578812.906576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qT5L4-0000IT-PV; Mon, 07 Aug 2023 18:52:22 +0000
+	id 1qT5LE-0001PL-21; Mon, 07 Aug 2023 18:52:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578806.906566; Mon, 07 Aug 2023 18:52:22 +0000
+Received: by outflank-mailman (output) from mailman id 578812.906576; Mon, 07 Aug 2023 18:52:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qT5L4-0000Hw-LH; Mon, 07 Aug 2023 18:52:22 +0000
-Received: by outflank-mailman (input) for mailman id 578806;
- Mon, 07 Aug 2023 18:52:21 +0000
+	id 1qT5LD-0001PC-UU; Mon, 07 Aug 2023 18:52:31 +0000
+Received: by outflank-mailman (input) for mailman id 578812;
+ Mon, 07 Aug 2023 18:52:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qk11=DY=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1qT5L3-0004lg-Fp
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 18:52:21 +0000
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [2607:f8b0:4864:20::c30])
+ id 1qT5LC-0004lg-Nm
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 18:52:30 +0000
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [2607:f8b0:4864:20::730])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 89533fb3-3553-11ee-b280-6b7b168915f2;
- Mon, 07 Aug 2023 20:52:20 +0200 (CEST)
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-56ca4d7079aso3310667eaf.0
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 11:52:20 -0700 (PDT)
+ id 8eea7ef2-3553-11ee-b280-6b7b168915f2;
+ Mon, 07 Aug 2023 20:52:29 +0200 (CEST)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-76cdf055c64so417800685a.3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 11:52:29 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com
  (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
  [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
- l3-20020a0ce503000000b00635fcd30ff9sm3077278qvm.40.2023.08.07.11.52.18
+ l3-20020a0ce503000000b00635fcd30ff9sm3077278qvm.40.2023.08.07.11.52.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 11:52:18 -0700 (PDT)
+ Mon, 07 Aug 2023 11:52:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,169 +48,377 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 89533fb3-3553-11ee-b280-6b7b168915f2
+X-Inumbo-ID: 8eea7ef2-3553-11ee-b280-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691434339; x=1692039139;
+        d=gmail.com; s=20221208; t=1691434348; x=1692039148;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=u8YY0cMbSt93RGcC2b1IS+Yfu6uCEeREtdnIWAGkVWs=;
-        b=GYWW5JX4pXnd3+DLhH12t6E5X7ni1FxzUuRMa1pwAj58O14rcveuPnkf8ddsYil1bg
-         /W7kjcE1lJFd1OexBkUESi9KAaguNkDuL9n7WJ0Qj96karMvJ9LsBCvWGl6E5BhqQSTs
-         g/IbyLBh1RC10mAfYXllHqhvKZOGpSlV10BrHRgh3uwo+YwDsN564CHxhD9u+1w/IZ/L
-         qHVqnZaukjwds/uomKxmmITyBQuPEgyuuDm7mXOieVRIGiS8PWZcSJf1v6wv32CTcfHg
-         /Ts3HpaKR8PNoDtOZd0mxvRj4U+xDPX1mI7ZllF8j0EimHiJjelyBL9Klm7GKPT8WBwA
-         wMzA==
+        bh=vy6l55+rICbbuCBbADGaq7cX5z20EMNlyiZQ4cOI23w=;
+        b=gnpUvo20i1TFYP99cadluOYvaxMNd5nY7wt+HzhGdEQfwgjkzX3n0qokafBMyYnkYC
+         2MI25xGHI4+fCYKeBHFj3UlNT3t5Kko9a5kEeZwIFE4U4W1QPMv+xE+7Ew216R5LcMbS
+         D7PDx2N1CdPxYqDXi7rvurW4Du/FPSKCyedzSmbEThpKWHYpZUPo1nIKXX4ZnRfa/9W3
+         go+0A3zypevobOWqNSvY9PF2w/IKOBJD2IY9xq0Fe7UFGF+oYI4V1YbZWvMJ6cB+mmVa
+         YgrWnwvgBzw526ibKsN67rnrt7Eqf4g0yPZdFwnq04Qr9qoCzvZTngxsdLxX7m8s3K1G
+         9X3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691434339; x=1692039139;
+        d=1e100.net; s=20221208; t=1691434348; x=1692039148;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=u8YY0cMbSt93RGcC2b1IS+Yfu6uCEeREtdnIWAGkVWs=;
-        b=MxYWnl1oEYYaSFsh8a595kPrgRf5/fm6a4kYR8O5OXcbx/dpwt39eBuY32Ce/3v9Pq
-         GMVCH8BDSKRompoDOhcHWfMdaZlONa6xQX/GjpyHyeF4ZUztE22qDyk/YxtqJnE4hzB6
-         o4kSCzlJIWyDFpMc3XMz1Hry8U/nkIXxPECVhjwqtduYe4UaDmM04hVQwP0qm6I6J8Mg
-         TaJSn5CspInEOIad3/q7KVPtrV3fysZ2DCQAP5xhTrUI5Fu0dIS3AF+2D5uexG6iHD3K
-         an/4DPzhwFfhJ4OuETFun5T+kiOvuHoqbs2/F8nO7HxcETRK8tjKqggha0tfGp7qNc6h
-         PTWA==
-X-Gm-Message-State: AOJu0Yzu40o2i6lxsMYjX3xjIbaewr/TLnpXwGeF9I4A0fHHdMo1f4vK
-	tQKtYLg8nxELO77EvB1m2DARTxwXDzk=
-X-Google-Smtp-Source: AGHT+IEgaCDlSduv/RvPBK6XMI+y0QAxWUnpQ54azRZXBg+BliJoQMDaz8dLyZ2DSoZcqwCXAbZbdQ==
-X-Received: by 2002:a05:6358:4285:b0:134:eed0:3bc5 with SMTP id s5-20020a056358428500b00134eed03bc5mr7203855rwc.9.1691434338972;
-        Mon, 07 Aug 2023 11:52:18 -0700 (PDT)
+        bh=vy6l55+rICbbuCBbADGaq7cX5z20EMNlyiZQ4cOI23w=;
+        b=ALQR2l7wpzmW4XgQ1jycutQ0Aa4gnRUfa7YIxDRJXY2peU0o9GuYz2OAWOIq/w7nPP
+         u7Kjaw3raoCTGgRvZO4YgRS2qc5CRAYuFcAFsonHQ0rcJw7W13wkMxNWIRUZLYssrKkr
+         igrJ+7bCSARkQQYbaUpdPR6geDNxWGDNv34AhXYWHiE05t2ajui5Oqlz9clyPTn4IptD
+         K90YdO46pfJCHHG2rYvpSC02EaG3427sm+0pKN2oGUa1fKb//MA/fOwa/54cGD8IzvyN
+         iqu9Yq1hd3qLyqLP1zrqgChFJVqPAItajMoLckNuIOwsm89uIjWYIhx4ysE8LxQpsZxp
+         WDaA==
+X-Gm-Message-State: AOJu0YxjjnQRT3uCot9p3gRk1A3cP4FacwHqunboYxPZV8PlpF8JnwaG
+	OTdm3NpY3MoaQmkreGHDVg3NTCh5j3I=
+X-Google-Smtp-Source: AGHT+IE270NkHftGVb6Bp1YfXQBa81JVmCLv3fKo81pPhZF8LWIBeXSP4vpcU+9V5qDfro0337GIoA==
+X-Received: by 2002:a0c:e3c3:0:b0:636:47a5:4bc5 with SMTP id e3-20020a0ce3c3000000b0063647a54bc5mr9335668qvl.62.1691434348336;
+        Mon, 07 Aug 2023 11:52:28 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v8 11/15] xenpm: Print HWP/CPPC parameters
-Date: Mon,  7 Aug 2023 14:51:15 -0400
-Message-ID: <20230807185119.98333-12-jandryuk@gmail.com>
+Subject: [PATCH v8 14/15] xenpm: Add set-cpufreq-cppc subcommand
+Date: Mon,  7 Aug 2023 14:51:18 -0400
+Message-ID: <20230807185119.98333-15-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230807185119.98333-1-jandryuk@gmail.com>
 References: <20230807185119.98333-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Print HWP-specific parameters.  Some are always present, but others
-depend on hardware support.
+set-cpufreq-cppc allows setting the Hardware P-State (HWP) parameters.
+
+It can be run on all or just a single cpu.  There are presets of
+balance, powersave & performance.  Those can be further tweaked by
+param:val arguments as explained in the usage description.
+
+Parameter names are just checked to the first 3 characters to shorten
+typing.
+
+Some options are hardware dependent, and ranges can be found in
+get-cpufreq-para.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
-v2:
-Style fixes
-Declare i outside loop
-Replace repearted hardware/configured limits with spaces
-Fixup for hw_ removal
-Use XEN_HWP_GOVERNOR
-Use HWP_ACT_WINDOW_EXPONENT_*
-Remove energy_perf hw autonomous - 0 doesn't mean autonomous
-
-v4:
-Return activity_window from calculate_hwp_activity_window
-Use blanks instead of _ in output
-Use MASK_EXTR
-Check XEN_HWP_DRIVER name since governor is no longer returned
-s/hwp/cppc
+v8:
+Add Anthony's Ack
 
 v5:
-Add Jan's Reviewed-by
+Make i unsigned int
+Use local max_cpuid instead of max_cpu_nr
+Add Jan's Ack
+Check set_params and print a message if activity window wasn't set
 
-v8:
-Switch from "if ( !hwp )" to "if ( hwp )" and re-org code.
-Use %PRIu32 instead of %u - this lengthens some strings past 80 chars
+v4:
+Remove energy bias 0-15 & 7 references
+Use MASK_INSR
+Fixup { placement
+Drop extra case in parse_activity_window
+strcmp suffix
+Expand help text
+s/hwp/cppc/
+Use isdigit() to check cpuid - otherwise run on all CPUs.
+
+v2:
+Compare provided parameter name and not just 3 characters.
+Use "-" in parameter names
+Remove hw_
+Replace sscanf with strchr & strtoul.
+Remove toplevel error message with lower level ones.
+Help text s/127/128/
+Help text mention truncation.
+Avoid some truncation rounding down by adding 5 before division.
+Help test mention default microseconds
+Also comment the limit check written to avoid overflow.
 ---
- tools/misc/xenpm.c | 68 +++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 67 insertions(+), 1 deletion(-)
+ tools/misc/xenpm.c | 244 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 244 insertions(+)
 
 diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
-index 3f5b2afcea..688529b59d 100644
+index 688529b59d..d982482a3f 100644
 --- a/tools/misc/xenpm.c
 +++ b/tools/misc/xenpm.c
-@@ -708,6 +708,46 @@ void start_gather_func(int argc, char *argv[])
-     pause();
+@@ -16,6 +16,8 @@
+  */
+ #define MAX_NR_CPU 512
+ 
++#include <ctype.h>
++#include <limits.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <unistd.h>
+@@ -67,6 +69,30 @@ void show_help(void)
+             " set-max-cstate        <num>|'unlimited' [<num2>|'unlimited']\n"
+             "                                     set the C-State limitation (<num> >= 0) and\n"
+             "                                     optionally the C-sub-state limitation (<num2> >= 0)\n"
++            " set-cpufreq-cppc      [cpuid] [balance|performance|powersave] <param:val>*\n"
++            "                                     set Hardware P-State (HWP) parameters\n"
++            "                                     on CPU <cpuid> or all if omitted.\n"
++            "                                     optionally a preset of one of:\n"
++            "                                       balance|performance|powersave\n"
++            "                                     an optional list of param:val arguments\n"
++            "                                       minimum:N (0-255)\n"
++            "                                       maximum:N (0-255)\n"
++            "                                           get-cpufreq-para lowest/highest\n"
++            "                                           values are limits for\n"
++            "                                           minumum/maximum.\n"
++            "                                       desired:N (0-255)\n"
++            "                                           set explicit performance target.\n"
++            "                                           non-zero disables auto-HWP mode.\n"
++            "                                       energy-perf:N (0-255)\n"
++            "                                                   energy/performance hint\n"
++            "                                                   lower - favor performance\n"
++            "                                                   higher - favor powersave\n"
++            "                                                   128 - balance\n"
++            "                                       act-window:N{,m,u}s range 1us-1270s\n"
++            "                                           window for internal calculations.\n"
++            "                                           units default to \"us\" if unspecified.\n"
++            "                                           truncates un-representable values.\n"
++            "                                           0 lets the hardware decide.\n"
+             " start [seconds]                     start collect Cx/Px statistics,\n"
+             "                                     output after CTRL-C or SIGINT or several seconds.\n"
+             " enable-turbo-mode     [cpuid]       enable Turbo Mode for processors that support it.\n"
+@@ -1292,6 +1318,223 @@ void disable_turbo_mode(int argc, char *argv[])
+                 errno, strerror(errno));
  }
  
-+static unsigned int calculate_activity_window(const xc_cppc_para_t *cppc,
-+                                              const char **units)
++/*
++ * Parse activity_window:NNN{us,ms,s} and validate range.
++ *
++ * Activity window is a 7bit mantissa (0-127) with a 3bit exponent (0-7) base
++ * 10 in microseconds.  So the range is 1 microsecond to 1270 seconds.  A value
++ * of 0 lets the hardware autonomously select the window.
++ *
++ * Return 0 on success
++ *       -1 on error
++ */
++static int parse_activity_window(xc_set_cppc_para_t *set_cppc, unsigned long u,
++                                 const char *suffix)
 +{
-+    unsigned int mantissa = MASK_EXTR(cppc->activity_window,
-+                                      XEN_CPPC_ACT_WINDOW_MANTISSA_MASK);
-+    unsigned int exponent = MASK_EXTR(cppc->activity_window,
-+                                      XEN_CPPC_ACT_WINDOW_EXPONENT_MASK);
++    unsigned int exponent = 0;
 +    unsigned int multiplier = 1;
-+    unsigned int i;
 +
-+    /*
-+     * SDM only states a 0 register is hardware selected, and doesn't mention
-+     * a 0 mantissa with a non-0 exponent.  Only special case a 0 register.
-+     */
-+    if ( cppc->activity_window == 0 )
++    if ( suffix && suffix[0] )
 +    {
-+        *units = "hardware selected";
++        if ( strcmp(suffix, "s") == 0 )
++        {
++            multiplier = 1000 * 1000;
++            exponent = 6;
++        }
++        else if ( strcmp(suffix, "ms") == 0 )
++        {
++            multiplier = 1000;
++            exponent = 3;
++        }
++        else if ( strcmp(suffix, "us") != 0 )
++        {
++            fprintf(stderr, "invalid activity window units: \"%s\"\n", suffix);
 +
-+        return 0;
++            return -1;
++        }
 +    }
 +
-+    if ( exponent >= 6 )
++    /* u * multipler > 1270 * 1000 * 1000 transformed to avoid overflow. */
++    if ( u > 1270 * 1000 * 1000 / multiplier )
 +    {
-+        *units = "s";
-+        exponent -= 6;
++        fprintf(stderr, "activity window is too large\n");
++
++        return -1;
 +    }
-+    else if ( exponent >= 3 )
++
++    /* looking for 7 bits of mantissa and 3 bits of exponent */
++    while ( u > 127 )
 +    {
-+        *units = "ms";
-+        exponent -= 3;
++        u += 5; /* Round up to mitigate truncation rounding down
++                   e.g. 128 -> 120 vs 128 -> 130. */
++        u /= 10;
++        exponent += 1;
 +    }
-+    else
-+        *units = "us";
 +
-+    for ( i = 0; i < exponent; i++ )
-+        multiplier *= 10;
++    set_cppc->activity_window =
++        MASK_INSR(exponent, XEN_CPPC_ACT_WINDOW_EXPONENT_MASK) |
++        MASK_INSR(u, XEN_CPPC_ACT_WINDOW_MANTISSA_MASK);
++    set_cppc->set_params |= XEN_SYSCTL_CPPC_SET_ACT_WINDOW;
 +
-+    return mantissa * multiplier;
++    return 0;
 +}
 +
- /* print out parameters about cpu frequency */
- static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
- {
-@@ -733,7 +773,33 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
- 
-     printf("scaling_driver       : %s\n", p_cpufreq->scaling_driver);
- 
--    if ( !hwp )
-+    if ( hwp )
++static int parse_cppc_opts(xc_set_cppc_para_t *set_cppc, int *cpuid,
++                           int argc, char *argv[])
++{
++    int i = 0;
++
++    if ( argc < 1 )
 +    {
-+        const xc_cppc_para_t *cppc = &p_cpufreq->u.cppc_para;
++        fprintf(stderr, "Missing arguments\n");
++        return -1;
++    }
 +
-+        printf("cppc variables       :\n");
-+        printf("  hardware limits    : lowest [%"PRIu32"] lowest nonlinear [%"PRIu32"]\n",
-+               cppc->lowest, cppc->lowest_nonlinear);
-+        printf("                     : nominal [%"PRIu32"] highest [%"PRIu32"]\n",
-+               cppc->nominal, cppc->highest);
-+        printf("  configured limits  : min [%"PRIu32"] max [%"PRIu32"] energy perf [%"PRIu32"]\n",
-+               cppc->minimum, cppc->maximum, cppc->energy_perf);
-+
-+        if ( cppc->features & XEN_SYSCTL_CPPC_FEAT_ACT_WINDOW )
++    if ( isdigit(argv[i][0]) )
++    {
++        if ( sscanf(argv[i], "%d", cpuid) != 1 || *cpuid < 0 )
 +        {
-+            unsigned int activity_window;
-+            const char *units;
-+
-+            activity_window = calculate_activity_window(cppc, &units);
-+            printf("                     : activity_window [%"PRIu32" %s]\n",
-+                   activity_window, units);
++            fprintf(stderr, "Could not parse cpuid \"%s\"\n", argv[i]);
++            return -1;
 +        }
 +
-+        printf("                     : desired [%"PRIu32"%s]\n",
-+               cppc->desired,
-+               cppc->desired ? "" : " hw autonomous");
++        i++;
 +    }
-+    else
-     {
-         printf("scaling_avail_gov    : %s\n",
-                p_cpufreq->scaling_available_governors);
++
++    if ( i == argc )
++    {
++        fprintf(stderr, "Missing arguments\n");
++        return -1;
++    }
++
++    if ( strcasecmp(argv[i], "powersave") == 0 )
++    {
++        set_cppc->set_params = XEN_SYSCTL_CPPC_SET_PRESET_POWERSAVE;
++        i++;
++    }
++    else if ( strcasecmp(argv[i], "performance") == 0 )
++    {
++        set_cppc->set_params = XEN_SYSCTL_CPPC_SET_PRESET_PERFORMANCE;
++        i++;
++    }
++    else if ( strcasecmp(argv[i], "balance") == 0 )
++    {
++        set_cppc->set_params = XEN_SYSCTL_CPPC_SET_PRESET_BALANCE;
++        i++;
++    }
++
++    for ( ; i < argc; i++)
++    {
++        unsigned long val;
++        char *param = argv[i];
++        char *value;
++        char *suffix;
++        int ret;
++
++        value = strchr(param, ':');
++        if ( value == NULL )
++        {
++            fprintf(stderr, "\"%s\" is an invalid cppc parameter\n", argv[i]);
++            return -1;
++        }
++
++        value[0] = '\0';
++        value++;
++
++        errno = 0;
++        val = strtoul(value, &suffix, 10);
++        if ( (errno && val == ULONG_MAX) || value == suffix )
++        {
++            fprintf(stderr, "Could not parse number \"%s\"\n", value);
++            return -1;
++        }
++
++        if ( strncasecmp(param, "act-window", strlen(param)) == 0 )
++        {
++            ret = parse_activity_window(set_cppc, val, suffix);
++            if (ret)
++                return -1;
++
++            continue;
++        }
++
++        if ( val > 255 )
++        {
++            fprintf(stderr, "\"%s\" value \"%lu\" is out of range\n", param,
++                    val);
++            return -1;
++        }
++
++        if ( suffix && suffix[0] )
++        {
++            fprintf(stderr, "Suffix \"%s\" is invalid\n", suffix);
++            return -1;
++        }
++
++        if ( strncasecmp(param, "minimum", MAX(2, strlen(param))) == 0 )
++        {
++            set_cppc->minimum = val;
++            set_cppc->set_params |= XEN_SYSCTL_CPPC_SET_MINIMUM;
++        }
++        else if ( strncasecmp(param, "maximum", MAX(2, strlen(param))) == 0 )
++        {
++            set_cppc->maximum = val;
++            set_cppc->set_params |= XEN_SYSCTL_CPPC_SET_MAXIMUM;
++        }
++        else if ( strncasecmp(param, "desired", strlen(param)) == 0 )
++        {
++            set_cppc->desired = val;
++            set_cppc->set_params |= XEN_SYSCTL_CPPC_SET_DESIRED;
++        }
++        else if ( strncasecmp(param, "energy-perf", strlen(param)) == 0 )
++        {
++            set_cppc->energy_perf = val;
++            set_cppc->set_params |= XEN_SYSCTL_CPPC_SET_ENERGY_PERF;
++        }
++        else
++        {
++            fprintf(stderr, "\"%s\" is an invalid parameter\n", param);
++            return -1;
++        }
++    }
++
++    if ( set_cppc->set_params == 0 )
++    {
++        fprintf(stderr, "No parameters set in request\n");
++        return -1;
++    }
++
++    return 0;
++}
++
++static void cppc_set_func(int argc, char *argv[])
++{
++    xc_set_cppc_para_t set_cppc = {};
++    unsigned int max_cpuid = max_cpu_nr;
++    int cpuid = -1;
++    unsigned int i = 0;
++    uint32_t set_params;
++
++    if ( parse_cppc_opts(&set_cppc, &cpuid, argc, argv) )
++        exit(EINVAL);
++
++    if ( cpuid != -1 )
++    {
++        i = cpuid;
++        max_cpuid = i + 1;
++    }
++
++    set_params = set_cppc.set_params;
++    for ( ; i < max_cpuid; i++ ) {
++        if ( xc_set_cpufreq_cppc(xc_handle, i, &set_cppc) )
++            fprintf(stderr, "[CPU%d] failed to set cppc params (%d - %s)\n",
++                    i, errno, strerror(errno));
++    }
++
++    if ( (set_params ^ set_cppc.set_params) & XEN_SYSCTL_CPPC_SET_ACT_WINDOW )
++        printf("Activity window not supported and omitted\n");
++}
++
+ struct {
+     const char *name;
+     void (*function)(int argc, char *argv[]);
+@@ -1302,6 +1545,7 @@ struct {
+     { "get-cpufreq-average", cpufreq_func },
+     { "start", start_gather_func },
+     { "get-cpufreq-para", cpufreq_para_func },
++    { "set-cpufreq-cppc", cppc_set_func },
+     { "set-scaling-maxfreq", scaling_max_freq_func },
+     { "set-scaling-minfreq", scaling_min_freq_func },
+     { "set-scaling-governor", scaling_governor_func },
 -- 
 2.41.0
 
