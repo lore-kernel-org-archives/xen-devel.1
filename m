@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C63AEB64DD
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:27:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578200.905631 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DDFC001B0
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:27:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.578201.905641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyOj-0001Xc-Aj; Mon, 07 Aug 2023 11:27:41 +0000
+	id 1qSyOm-00024Q-PQ; Mon, 07 Aug 2023 11:27:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578200.905631; Mon, 07 Aug 2023 11:27:41 +0000
+Received: by outflank-mailman (output) from mailman id 578201.905641; Mon, 07 Aug 2023 11:27:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyOj-0001XK-4D; Mon, 07 Aug 2023 11:27:41 +0000
-Received: by outflank-mailman (input) for mailman id 578200;
- Mon, 07 Aug 2023 11:27:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qSyOm-00024B-Le; Mon, 07 Aug 2023 11:27:44 +0000
+Received: by outflank-mailman (input) for mailman id 578201;
+ Mon, 07 Aug 2023 11:27:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qSgZ=DY=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qSyH8-0003uh-IS
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:19:50 +0000
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [2607:f8b0:4864:20::102b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 517fee21-3514-11ee-8613-37d641c3527e;
- Mon, 07 Aug 2023 13:19:48 +0200 (CEST)
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-265c94064b8so593535a91.0
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:19:48 -0700 (PDT)
+ id 1qSyEq-0006s9-17
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:17:28 +0000
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [2607:f8b0:4864:20::52c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fd484779-3513-11ee-b27d-6b7b168915f2;
+ Mon, 07 Aug 2023 13:17:27 +0200 (CEST)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-55b5a37acb6so362679a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:17:27 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.146])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.19.35
+ y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.17.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 04:19:46 -0700 (PDT)
+ Mon, 07 Aug 2023 04:17:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 517fee21-3514-11ee-8613-37d641c3527e
+X-Inumbo-ID: fd484779-3513-11ee-b27d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1691407187; x=1692011987;
+        d=bytedance.com; s=google; t=1691407046; x=1692011846;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kfKKsEp61SZUnTy00HUcIO/dAXsDrrCBrc1q4f5gA2g=;
-        b=O8pmKc9mkUPcwQn3K6b4vfxrIY3urK+/nlSQG6IQu3i18+IpYULExI3wKEZ/xymknF
-         +6oCCfFy6i2a+FxBuWdzORrib00J2OMl9nk96M99T35Rfc4jeDAhNe99hGl5QvCM8eUE
-         R++VmLiOwJ6rpxA/HEOBJYNzpyPX4zl9hoqj3WQaK+cPExCggyj0/ZBw0z6oFSY7C91n
-         2YVhcwVUTJYlZTyzWc8hxnW2XvaNGOtz3UCGr0ovpjlwcNhR4geKecrxjuux2WrpYp3y
-         4o91QPRwP3cp6mR8m2un4L62pLlrYSmXBb+57ubwaC0hesJSLB153WlFgONAQW4tHigo
-         DeMg==
+        bh=v5vYJ8kE3O6JXdLxdEEyUgUMjz4KJqSKKSB151wqkNo=;
+        b=SddB5W7TBGS4uOBB54oAwQadrL7fhf6DQuFGu8VJel4YD8JvtkF5mhOckA/6vdi9nq
+         hlVTmdr/Kx1D4xlpvO2OSKYXB5RvVMiR6sESxeeh8/ktD09qDCXXwpDE4WqRU8hY11FY
+         G6KR4LUZZolsNcExYWQgBloqrZSLljdTAa93b1m2N036gRwi9BwogxNRXUsItZlswdeV
+         RttwDZcFyg1S8l+4ePFxtqYFv2AYsGXbvb/zq8emVyERgALeuEVi3b9ZjwWVeQ9iauxk
+         xcZs9+wDP4Bgr5Tw0/5OxVGHY2k5SYNUfTOTk9l9GbDIx4PuLA8GEzMw0rmzVwGr35V7
+         B6uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691407187; x=1692011987;
+        d=1e100.net; s=20221208; t=1691407046; x=1692011846;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kfKKsEp61SZUnTy00HUcIO/dAXsDrrCBrc1q4f5gA2g=;
-        b=TCN//pwjuWDnBv90TUNEs0bhRtc7s9FnVv/oHoFgbIPedHewlrOkfjuUJTiEMvaHbi
-         LggwCMSo//7FPTbuKxkxHX4WQuvxO9snig6YwZrM/mMBcKlFe3v4TJBicTQfC8SbRsaw
-         /tAXwWTC0s9+rW6P23aIMuWSqVJa37PV3GQm31rpnmDDZgbABmWYk4w3AjJFkNRadvUZ
-         fcNFRBS3boshSqD3R5CCCYOKxe2uHcDNUggyBK8Otsb2qEwIHqpDPssNjZVF8XZHgSOY
-         yPljpjNX+F1rLg5wfo+5oxZblrxKP6OcrWyvPNtr/dtob3+zYE3cLX4wGmnLYL34OV55
-         l3jA==
-X-Gm-Message-State: ABy/qLap3eP3JiqQYjoIPq5qVnQSkh7aeBv49ODGxsrhduheAzhFy3u3
-	wtkJS0maD5wVvE4o1rsrEmo+9A==
-X-Google-Smtp-Source: APBJJlGG6pz8UXODUVvMLzBj3hYH8JYeumw11e9YZ9plh8RnP0KuzfFyuRP+T7CTu9v0n/nCJMsqhQ==
-X-Received: by 2002:a17:90a:1090:b0:268:126c:8a8b with SMTP id c16-20020a17090a109000b00268126c8a8bmr24580285pja.3.1691407187287;
-        Mon, 07 Aug 2023 04:19:47 -0700 (PDT)
+        bh=v5vYJ8kE3O6JXdLxdEEyUgUMjz4KJqSKKSB151wqkNo=;
+        b=aqrltFF/tdLNYFuL4MG2Nkt9RG2bbpGrIy0b/jR2db7xHovuGDMeejsUPOw54ge5yR
+         rpu9EsmCjPyOQ+nqJtYz0xGV4SZ8fwVOYZIsujRnCOUrtI+hmR1XVjSAQ5ZpltzI70iu
+         96rwb5jk30nzKHkm7if/fSiBT68SHKp6ybvFFQc03ljZXls+evqJu8v5WC+QpB32Q3Z+
+         LZjkpwjyA9XQ98HAmc+VfqtigarIV738AUaiHoRRuqYdvr3aaL+M68jlc0YS+tjeO5I4
+         uJioYxIEHbjyN5Y63g30JmGtzDI/4Dxr2SahGXHluFh+H81dY/QjYayPxYMzMR6jYBNn
+         urKA==
+X-Gm-Message-State: ABy/qLYMZA4esmacX5lwF1cVGCLre79RYKxU8MPlX6c8c+wMgJoGD+36
+	VeTCUQvgdh71nTKMxCFAScwiBQ==
+X-Google-Smtp-Source: APBJJlFyAF6s6JefOZNl/scuUGwKU5q0BmH7yK6Qf+JZ3E1mrAS2lh5NuGQm2RRGuEVfms4+14afyQ==
+X-Received: by 2002:a17:90a:3f08:b0:268:1e3b:14c9 with SMTP id l8-20020a17090a3f0800b002681e3b14c9mr23486908pjc.2.1691407045970;
+        Mon, 07 Aug 2023 04:17:25 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -117,308 +117,90 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-ext4@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
-	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v4 46/48] mm: shrinker: make memcg slab shrink lockless
-Date: Mon,  7 Aug 2023 19:09:34 +0800
-Message-Id: <20230807110936.21819-47-zhengqi.arch@bytedance.com>
+	Qi Zheng <zhengqi.arch@bytedance.com>,
+	Chuck Lever <chuck.lever@oracle.com>,
+	Jeff Layton <jlayton@kernel.org>
+Subject: [PATCH v4 35/48] nfsd: dynamically allocate the nfsd-client shrinker
+Date: Mon,  7 Aug 2023 19:09:23 +0800
+Message-Id: <20230807110936.21819-36-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Like global slab shrink, this commit also uses refcount+RCU method to make
-memcg slab shrink lockless.
-
-Use the following script to do slab shrink stress test:
-
-```
-
-DIR="/root/shrinker/memcg/mnt"
-
-do_create()
-{
-    mkdir -p /sys/fs/cgroup/memory/test
-    echo 4G > /sys/fs/cgroup/memory/test/memory.limit_in_bytes
-    for i in `seq 0 $1`;
-    do
-        mkdir -p /sys/fs/cgroup/memory/test/$i;
-        echo $$ > /sys/fs/cgroup/memory/test/$i/cgroup.procs;
-        mkdir -p $DIR/$i;
-    done
-}
-
-do_mount()
-{
-    for i in `seq $1 $2`;
-    do
-        mount -t tmpfs $i $DIR/$i;
-    done
-}
-
-do_touch()
-{
-    for i in `seq $1 $2`;
-    do
-        echo $$ > /sys/fs/cgroup/memory/test/$i/cgroup.procs;
-        dd if=/dev/zero of=$DIR/$i/file$i bs=1M count=1 &
-    done
-}
-
-case "$1" in
-  touch)
-    do_touch $2 $3
-    ;;
-  test)
-    do_create 4000
-    do_mount 0 4000
-    do_touch 0 3000
-    ;;
-  *)
-    exit 1
-    ;;
-esac
-```
-
-Save the above script, then run test and touch commands. Then we can use
-the following perf command to view hotspots:
-
-perf top -U -F 999
-
-1) Before applying this patchset:
-
-  40.44%  [kernel]            [k] down_read_trylock
-  17.59%  [kernel]            [k] up_read
-  13.64%  [kernel]            [k] pv_native_safe_halt
-  11.90%  [kernel]            [k] shrink_slab
-   8.21%  [kernel]            [k] idr_find
-   2.71%  [kernel]            [k] _find_next_bit
-   1.36%  [kernel]            [k] shrink_node
-   0.81%  [kernel]            [k] shrink_lruvec
-   0.80%  [kernel]            [k] __radix_tree_lookup
-   0.50%  [kernel]            [k] do_shrink_slab
-   0.21%  [kernel]            [k] list_lru_count_one
-   0.16%  [kernel]            [k] mem_cgroup_iter
-
-2) After applying this patchset:
-
-  60.17%  [kernel]           [k] shrink_slab
-  20.42%  [kernel]           [k] pv_native_safe_halt
-   3.03%  [kernel]           [k] do_shrink_slab
-   2.73%  [kernel]           [k] shrink_node
-   2.27%  [kernel]           [k] shrink_lruvec
-   2.00%  [kernel]           [k] __rcu_read_unlock
-   1.92%  [kernel]           [k] mem_cgroup_iter
-   0.98%  [kernel]           [k] __rcu_read_lock
-   0.91%  [kernel]           [k] osq_lock
-   0.63%  [kernel]           [k] mem_cgroup_calculate_protection
-   0.55%  [kernel]           [k] shrinker_put
-   0.46%  [kernel]           [k] list_lru_count_one
-
-We can see that the first perf hotspot becomes shrink_slab, which is what
-we expect.
+In preparation for implementing lockless slab shrink, use new APIs to
+dynamically allocate the nfsd-client shrinker, so that it can be freed
+asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
+read-side critical section when releasing the struct nfsd_net.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+Acked-by: Chuck Lever <chuck.lever@oracle.com>
+Acked-by: Jeff Layton <jlayton@kernel.org>
 ---
- mm/shrinker.c | 80 ++++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 54 insertions(+), 26 deletions(-)
+ fs/nfsd/netns.h     |  2 +-
+ fs/nfsd/nfs4state.c | 20 ++++++++++++--------
+ 2 files changed, 13 insertions(+), 9 deletions(-)
 
-diff --git a/mm/shrinker.c b/mm/shrinker.c
-index d318f5621862..fee6f62904fb 100644
---- a/mm/shrinker.c
-+++ b/mm/shrinker.c
-@@ -107,6 +107,12 @@ static struct shrinker_info *shrinker_info_protected(struct mem_cgroup *memcg,
- 					 lockdep_is_held(&shrinker_rwsem));
- }
+diff --git a/fs/nfsd/netns.h b/fs/nfsd/netns.h
+index ec49b200b797..f669444d5336 100644
+--- a/fs/nfsd/netns.h
++++ b/fs/nfsd/netns.h
+@@ -195,7 +195,7 @@ struct nfsd_net {
+ 	int			nfs4_max_clients;
  
-+static struct shrinker_info *shrinker_info_rcu(struct mem_cgroup *memcg,
-+					       int nid)
-+{
-+	return rcu_dereference(memcg->nodeinfo[nid]->shrinker_info);
-+}
-+
- static int expand_one_shrinker_info(struct mem_cgroup *memcg, int new_size,
- 				    int old_size, int new_nr_max)
+ 	atomic_t		nfsd_courtesy_clients;
+-	struct shrinker		nfsd_client_shrinker;
++	struct shrinker		*nfsd_client_shrinker;
+ 	struct work_struct	nfsd_shrinker_work;
+ };
+ 
+diff --git a/fs/nfsd/nfs4state.c b/fs/nfsd/nfs4state.c
+index 8534693eb6a4..9e401db8a6d2 100644
+--- a/fs/nfsd/nfs4state.c
++++ b/fs/nfsd/nfs4state.c
+@@ -4400,8 +4400,7 @@ static unsigned long
+ nfsd4_state_shrinker_count(struct shrinker *shrink, struct shrink_control *sc)
  {
-@@ -198,7 +204,7 @@ void set_shrinker_bit(struct mem_cgroup *memcg, int nid, int shrinker_id)
- 		struct shrinker_info_unit *unit;
+ 	int count;
+-	struct nfsd_net *nn = container_of(shrink,
+-			struct nfsd_net, nfsd_client_shrinker);
++	struct nfsd_net *nn = shrink->private_data;
  
- 		rcu_read_lock();
--		info = rcu_dereference(memcg->nodeinfo[nid]->shrinker_info);
-+		info = shrinker_info_rcu(memcg, nid);
- 		unit = info->unit[shriner_id_to_index(shrinker_id)];
- 		if (!WARN_ON_ONCE(shrinker_id >= info->map_nr_max)) {
- 			/* Pairs with smp mb in shrink_slab() */
-@@ -211,7 +217,7 @@ void set_shrinker_bit(struct mem_cgroup *memcg, int nid, int shrinker_id)
+ 	count = atomic_read(&nn->nfsd_courtesy_clients);
+ 	if (!count)
+@@ -8149,12 +8148,17 @@ static int nfs4_state_create_net(struct net *net)
+ 	INIT_WORK(&nn->nfsd_shrinker_work, nfsd4_state_shrinker_worker);
+ 	get_net(net);
  
- static DEFINE_IDR(shrinker_idr);
- 
--static int prealloc_memcg_shrinker(struct shrinker *shrinker)
-+static int shrinker_memcg_alloc(struct shrinker *shrinker)
- {
- 	int id, ret = -ENOMEM;
- 
-@@ -219,7 +225,6 @@ static int prealloc_memcg_shrinker(struct shrinker *shrinker)
- 		return -ENOSYS;
- 
- 	down_write(&shrinker_rwsem);
--	/* This may call shrinker, so it must use down_read_trylock() */
- 	id = idr_alloc(&shrinker_idr, shrinker, 0, 0, GFP_KERNEL);
- 	if (id < 0)
- 		goto unlock;
-@@ -237,7 +242,7 @@ static int prealloc_memcg_shrinker(struct shrinker *shrinker)
- 	return ret;
- }
- 
--static void unregister_memcg_shrinker(struct shrinker *shrinker)
-+static void shrinker_memcg_remove(struct shrinker *shrinker)
- {
- 	int id = shrinker->id;
- 
-@@ -253,10 +258,15 @@ static long xchg_nr_deferred_memcg(int nid, struct shrinker *shrinker,
- {
- 	struct shrinker_info *info;
- 	struct shrinker_info_unit *unit;
-+	long nr_deferred;
- 
--	info = shrinker_info_protected(memcg, nid);
-+	rcu_read_lock();
-+	info = shrinker_info_rcu(memcg, nid);
- 	unit = info->unit[shriner_id_to_index(shrinker->id)];
--	return atomic_long_xchg(&unit->nr_deferred[shriner_id_to_offset(shrinker->id)], 0);
-+	nr_deferred = atomic_long_xchg(&unit->nr_deferred[shriner_id_to_offset(shrinker->id)], 0);
-+	rcu_read_unlock();
-+
-+	return nr_deferred;
- }
- 
- static long add_nr_deferred_memcg(long nr, int nid, struct shrinker *shrinker,
-@@ -264,10 +274,16 @@ static long add_nr_deferred_memcg(long nr, int nid, struct shrinker *shrinker,
- {
- 	struct shrinker_info *info;
- 	struct shrinker_info_unit *unit;
-+	long nr_deferred;
- 
--	info = shrinker_info_protected(memcg, nid);
-+	rcu_read_lock();
-+	info = shrinker_info_rcu(memcg, nid);
- 	unit = info->unit[shriner_id_to_index(shrinker->id)];
--	return atomic_long_add_return(nr, &unit->nr_deferred[shriner_id_to_offset(shrinker->id)]);
-+	nr_deferred =
-+		atomic_long_add_return(nr, &unit->nr_deferred[shriner_id_to_offset(shrinker->id)]);
-+	rcu_read_unlock();
-+
-+	return nr_deferred;
- }
- 
- void reparent_shrinker_deferred(struct mem_cgroup *memcg)
-@@ -299,12 +315,12 @@ void reparent_shrinker_deferred(struct mem_cgroup *memcg)
- 	up_read(&shrinker_rwsem);
- }
- #else
--static int prealloc_memcg_shrinker(struct shrinker *shrinker)
-+static int shrinker_memcg_alloc(struct shrinker *shrinker)
- {
- 	return -ENOSYS;
- }
- 
--static void unregister_memcg_shrinker(struct shrinker *shrinker)
-+static void shrinker_memcg_remove(struct shrinker *shrinker)
- {
- }
- 
-@@ -464,18 +480,23 @@ static unsigned long shrink_slab_memcg(gfp_t gfp_mask, int nid,
- 	if (!mem_cgroup_online(memcg))
- 		return 0;
- 
--	if (!down_read_trylock(&shrinker_rwsem))
--		return 0;
+-	nn->nfsd_client_shrinker.scan_objects = nfsd4_state_shrinker_scan;
+-	nn->nfsd_client_shrinker.count_objects = nfsd4_state_shrinker_count;
+-	nn->nfsd_client_shrinker.seeks = DEFAULT_SEEKS;
 -
--	info = shrinker_info_protected(memcg, nid);
-+again:
-+	rcu_read_lock();
-+	info = shrinker_info_rcu(memcg, nid);
- 	if (unlikely(!info))
- 		goto unlock;
- 
--	for (; index < shriner_id_to_index(info->map_nr_max); index++) {
-+	if (index < shriner_id_to_index(info->map_nr_max)) {
- 		struct shrinker_info_unit *unit;
- 
- 		unit = info->unit[index];
- 
-+		/*
-+		 * The shrinker_info_unit will not be freed, so we can
-+		 * safely release the RCU lock here.
-+		 */
-+		rcu_read_unlock();
+-	if (register_shrinker(&nn->nfsd_client_shrinker, "nfsd-client"))
++	nn->nfsd_client_shrinker = shrinker_alloc(0, "nfsd-client");
++	if (!nn->nfsd_client_shrinker)
+ 		goto err_shrinker;
 +
- 		for_each_set_bit(offset, unit->map, SHRINKER_UNIT_BITS) {
- 			struct shrink_control sc = {
- 				.gfp_mask = gfp_mask,
-@@ -485,12 +506,14 @@ static unsigned long shrink_slab_memcg(gfp_t gfp_mask, int nid,
- 			struct shrinker *shrinker;
- 			int shrinker_id = calc_shrinker_id(index, offset);
- 
-+			rcu_read_lock();
- 			shrinker = idr_find(&shrinker_idr, shrinker_id);
--			if (unlikely(!shrinker || !(shrinker->flags & SHRINKER_REGISTERED))) {
--				if (!shrinker)
--					clear_bit(offset, unit->map);
-+			if (unlikely(!shrinker || !shrinker_try_get(shrinker))) {
-+				clear_bit(offset, unit->map);
-+				rcu_read_unlock();
- 				continue;
- 			}
-+			rcu_read_unlock();
- 
- 			/* Call non-slab shrinkers even though kmem is disabled */
- 			if (!memcg_kmem_online() &&
-@@ -523,15 +546,20 @@ static unsigned long shrink_slab_memcg(gfp_t gfp_mask, int nid,
- 					set_shrinker_bit(memcg, nid, shrinker_id);
- 			}
- 			freed += ret;
--
--			if (rwsem_is_contended(&shrinker_rwsem)) {
--				freed = freed ? : 1;
--				goto unlock;
--			}
-+			shrinker_put(shrinker);
- 		}
++	nn->nfsd_client_shrinker->scan_objects = nfsd4_state_shrinker_scan;
++	nn->nfsd_client_shrinker->count_objects = nfsd4_state_shrinker_count;
++	nn->nfsd_client_shrinker->seeks = DEFAULT_SEEKS;
++	nn->nfsd_client_shrinker->private_data = nn;
 +
-+		/*
-+		 * We have already exited the read-side of rcu critical section
-+		 * before calling do_shrink_slab(), the shrinker_info may be
-+		 * released in expand_one_shrinker_info(), so reacquire the
-+		 * shrinker_info.
-+		 */
-+		index++;
-+		goto again;
- 	}
- unlock:
--	up_read(&shrinker_rwsem);
-+	rcu_read_unlock();
- 	return freed;
- }
- #else /* !CONFIG_MEMCG */
-@@ -638,7 +666,7 @@ struct shrinker *shrinker_alloc(unsigned int flags, const char *fmt, ...)
- 	shrinker->flags = flags | SHRINKER_ALLOCATED;
++	shrinker_register(nn->nfsd_client_shrinker);
++
+ 	return 0;
  
- 	if (flags & SHRINKER_MEMCG_AWARE) {
--		err = prealloc_memcg_shrinker(shrinker);
-+		err = shrinker_memcg_alloc(shrinker);
- 		if (err == -ENOSYS)
- 			shrinker->flags &= ~SHRINKER_MEMCG_AWARE;
- 		else if (err == 0)
-@@ -731,7 +759,7 @@ void shrinker_free(struct shrinker *shrinker)
- 	}
+ err_shrinker:
+@@ -8252,7 +8256,7 @@ nfs4_state_shutdown_net(struct net *net)
+ 	struct list_head *pos, *next, reaplist;
+ 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
  
- 	if (shrinker->flags & SHRINKER_MEMCG_AWARE)
--		unregister_memcg_shrinker(shrinker);
-+		shrinker_memcg_remove(shrinker);
- 	up_write(&shrinker_rwsem);
- 
- 	if (debugfs_entry)
+-	unregister_shrinker(&nn->nfsd_client_shrinker);
++	shrinker_free(nn->nfsd_client_shrinker);
+ 	cancel_work(&nn->nfsd_shrinker_work);
+ 	cancel_delayed_work_sync(&nn->laundromat_work);
+ 	locks_end_grace(&nn->nfsd4_manager);
 -- 
 2.30.2
 
