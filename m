@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1EF4C05052
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:17:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.578079.905351 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2690CC04A6A
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Aug 2023 11:17:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.578087.905400 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyEl-0002dI-3B; Mon, 07 Aug 2023 11:17:23 +0000
+	id 1qSyEo-0003kc-N2; Mon, 07 Aug 2023 11:17:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 578079.905351; Mon, 07 Aug 2023 11:17:23 +0000
+Received: by outflank-mailman (output) from mailman id 578087.905400; Mon, 07 Aug 2023 11:17:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qSyEk-0002dB-Uc; Mon, 07 Aug 2023 11:17:22 +0000
-Received: by outflank-mailman (input) for mailman id 578079;
- Mon, 07 Aug 2023 11:17:21 +0000
+	id 1qSyEo-0003g0-AV; Mon, 07 Aug 2023 11:17:26 +0000
+Received: by outflank-mailman (input) for mailman id 578087;
+ Mon, 07 Aug 2023 11:17:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qSgZ=DY=bytedance.com=zhengqi.arch@srs-se1.protection.inumbo.net>)
- id 1qSyDb-0006s9-2r
- for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:16:11 +0000
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [2607:f8b0:4864:20::102b])
+ id 1qSyBK-0002Ee-V3
+ for xen-devel@lists.xenproject.org; Mon, 07 Aug 2023 11:13:50 +0000
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [2607:f8b0:4864:20::52f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cf743b57-3513-11ee-b27d-6b7b168915f2;
- Mon, 07 Aug 2023 13:16:10 +0200 (CEST)
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-26890669c8eso932191a91.1
- for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:16:10 -0700 (PDT)
+ id 7becbc7e-3513-11ee-b27d-6b7b168915f2;
+ Mon, 07 Aug 2023 13:13:50 +0200 (CEST)
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-55b78bf0423so391759a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Aug 2023 04:13:50 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.146])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.15.56
+ y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.13.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 04:16:08 -0700 (PDT)
+ Mon, 07 Aug 2023 04:13:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cf743b57-3513-11ee-b27d-6b7b168915f2
+X-Inumbo-ID: 7becbc7e-3513-11ee-b27d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1691406969; x=1692011769;
+        d=bytedance.com; s=google; t=1691406829; x=1692011629;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=v2xQZfHf5bNVsT7uWSGQWuu07PHxrGT3T56hFvtqSrg=;
-        b=PhZgEytbdr8CvNBxueya8LJEBJpXwGWT4buounuwMzZgdINLVWVhWlDlK5qgc2p2kt
-         RnCQbjUwWxqdm7J4M7EGc1Ch17V+zcgd4r1Zi/3vO2292nZ9ssUadxFIe0dzINz36EEw
-         HVRix2YnCwrYzOYArOpD9yWwDi1L0lwbZbmCgyeiLVpEO0l9z3l7+yQI3NnEvQZkBYSV
-         kAWt+c/pFJSgV6aTUUqi7ips5HoQ3TEpyq/Sxi9XAc6jQa+5WRv9fo1CMPIL4wKkfI5R
-         cCEylx4Q4qJCTb4YKG/AnxQtLRIB707mPePFz8XepMv7bUxA9w4l0/+xaTDhOuBgbM/U
-         hPfQ==
+        bh=GSWsN00ewH1CUxuL2on0amogNZtYjpfZMPk3tXk1MLc=;
+        b=dRL5OTw58GKSKLSEPIkOk3RNFcmmAqsiLvwXwuCsQ6898crZQ//U31N7J6aETctBqp
+         +yNfSzW4P67hr/Q5en6KlpeaCzhuSArK09Uv1s7rX7JtU6KCmHd6Mqm/4AQ65zu5m5Io
+         c0AgOv8G8SDnrmCDqGvw9U9rsdHywgcFHequBwptONEnrpN+7djJ7c1au1NclddO4RuF
+         fGkbwSFA8neTzyjHzVx+h2JTuM9t2Q0O3KvbIWMUOl7gxPC5QUE4BflF3xVEC1ALf5VX
+         oJ+rwFdIWe78RvMraM76IWcwrhx+7xBzgx3bdbJKVCqu0ytQTpll1s2Np/nEdRD5cowd
+         HYLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691406969; x=1692011769;
+        d=1e100.net; s=20221208; t=1691406829; x=1692011629;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=v2xQZfHf5bNVsT7uWSGQWuu07PHxrGT3T56hFvtqSrg=;
-        b=ddmClkqAwXJXXJ/jcg6UlIU8x9XkvZXC5du0HI8FpcwuvXsgWd0xZWJQDuxvlKyQ9H
-         7sbJeVnF8D2qrAH0AqwVZQc7kZ9lGSdOirRIhS6px9YnQdWvqVycBZ0RjWU1MX0dq+ai
-         RQX0Mr1dg3COnN77eVZxbw2o+r/S/r72gFKChY4h1niNM4GnvY/y3OJO6tN/KdNPxFHf
-         VunCyQLIzuIn0k1VLsQp8BSsZm+DhAeh/lH/PqjuR2MKC+CSp+Zp7axeTgozU3F/ex+3
-         aYQvmBstenT2wM93M4u9qdzj9jDekDYtGZdNJElWOh+jh1/T5YeMRvCbjLjm6Vh9M9ir
-         b+Vw==
-X-Gm-Message-State: AOJu0Yzdu4rO72+IxXgHkNsKfWE/5i5a/9PGCaZKCI0/oQib71ZrOvDe
-	m9WHlcaiytHm92Bu4o2eYlwMiA==
-X-Google-Smtp-Source: AGHT+IFlvQWL2g4YOY+ZhMNeAWWdQSS9yshpdy35E0gAyloBC4LB48Br4CdI402F04hX0eeuRkMt6Q==
-X-Received: by 2002:a17:90a:c8d:b0:268:196f:9656 with SMTP id v13-20020a17090a0c8d00b00268196f9656mr12999255pja.1.1691406969055;
-        Mon, 07 Aug 2023 04:16:09 -0700 (PDT)
+        bh=GSWsN00ewH1CUxuL2on0amogNZtYjpfZMPk3tXk1MLc=;
+        b=bJMUGyQwZhvvuDyqQyVET4Uug+0iJLBjuXzQpvlxLLaQWAnWvmFnjIe3t4Tg/urD72
+         EU3X9Wke6qcIyVxszCcqE9fLqsQfMYseSNdfEOcVdPb346UUqDuLIBLLyt+UPgMpbylQ
+         mkAfNKwa7/JUipeS3HmFY3c1xdMCF/gI2tp7yJtXPAxog5eVaVdYSag6DDCkM0yewH9w
+         TBZOgH0Vuwitb/tvEN+cNhG7vAPW+w5cc7+sT/26LbpLyD0DSZB4UwiXb4V92+8oVprQ
+         9zvwP3/FuH7oelz6DfLT/p9cvqjpw/L+FSbyquEp3tPJWqpR1sdBDj9PKblFyiAIDv3H
+         uEHg==
+X-Gm-Message-State: ABy/qLZAfeAEhMtUr2z1abXqLJNPqbSzePI5ARJ4/Wih/QrjXugEWnO0
+	JPg67pO5Pt9gB+9VYafXc8SupQ==
+X-Google-Smtp-Source: APBJJlEEwhe0wjgrc7nxC5j9G5K3ZI0sWgwDykpBRAx7nLtKV2LZNd6jgA89VvGSaryf9LAeIFxakg==
+X-Received: by 2002:a17:90a:901:b0:268:3a31:3e4d with SMTP id n1-20020a17090a090100b002683a313e4dmr23070871pjn.2.1691406828996;
+        Mon, 07 Aug 2023 04:13:48 -0700 (PDT)
 From: Qi Zheng <zhengqi.arch@bytedance.com>
 To: akpm@linux-foundation.org,
 	david@fromorbit.com,
@@ -118,114 +118,67 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-xfs@vger.kernel.org,
 	linux-btrfs@vger.kernel.org,
 	Qi Zheng <zhengqi.arch@bytedance.com>
-Subject: [PATCH v4 29/48] bcache: dynamically allocate the md-bcache shrinker
-Date: Mon,  7 Aug 2023 19:09:17 +0800
-Message-Id: <20230807110936.21819-30-zhengqi.arch@bytedance.com>
+Subject: [PATCH v4 18/48] rcu: dynamically allocate the rcu-lazy shrinker
+Date: Mon,  7 Aug 2023 19:09:06 +0800
+Message-Id: <20230807110936.21819-19-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In preparation for implementing lockless slab shrink, use new APIs to
-dynamically allocate the md-bcache shrinker, so that it can be freed
-asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
-read-side critical section when releasing the struct cache_set.
+Use new APIs to dynamically allocate the rcu-lazy shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- drivers/md/bcache/bcache.h |  2 +-
- drivers/md/bcache/btree.c  | 27 ++++++++++++++++-----------
- drivers/md/bcache/sysfs.c  |  3 ++-
- 3 files changed, 19 insertions(+), 13 deletions(-)
+ kernel/rcu/tree_nocb.h | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/md/bcache/bcache.h b/drivers/md/bcache/bcache.h
-index 5a79bb3c272f..c622bc50f81b 100644
---- a/drivers/md/bcache/bcache.h
-+++ b/drivers/md/bcache/bcache.h
-@@ -541,7 +541,7 @@ struct cache_set {
- 	struct bio_set		bio_split;
+diff --git a/kernel/rcu/tree_nocb.h b/kernel/rcu/tree_nocb.h
+index 5598212d1f27..e1c59c33738a 100644
+--- a/kernel/rcu/tree_nocb.h
++++ b/kernel/rcu/tree_nocb.h
+@@ -1396,13 +1396,6 @@ lazy_rcu_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
  
- 	/* For the btree cache */
--	struct shrinker		shrink;
-+	struct shrinker		*shrink;
- 
- 	/* For the btree cache and anything allocation related */
- 	struct mutex		bucket_lock;
-diff --git a/drivers/md/bcache/btree.c b/drivers/md/bcache/btree.c
-index fd121a61f17c..ae5cbb55861f 100644
---- a/drivers/md/bcache/btree.c
-+++ b/drivers/md/bcache/btree.c
-@@ -667,7 +667,7 @@ static int mca_reap(struct btree *b, unsigned int min_order, bool flush)
- static unsigned long bch_mca_scan(struct shrinker *shrink,
- 				  struct shrink_control *sc)
- {
--	struct cache_set *c = container_of(shrink, struct cache_set, shrink);
-+	struct cache_set *c = shrink->private_data;
- 	struct btree *b, *t;
- 	unsigned long i, nr = sc->nr_to_scan;
- 	unsigned long freed = 0;
-@@ -734,7 +734,7 @@ static unsigned long bch_mca_scan(struct shrinker *shrink,
- static unsigned long bch_mca_count(struct shrinker *shrink,
- 				   struct shrink_control *sc)
- {
--	struct cache_set *c = container_of(shrink, struct cache_set, shrink);
-+	struct cache_set *c = shrink->private_data;
- 
- 	if (c->shrinker_disabled)
- 		return 0;
-@@ -752,8 +752,8 @@ void bch_btree_cache_free(struct cache_set *c)
- 
- 	closure_init_stack(&cl);
- 
--	if (c->shrink.list.next)
--		unregister_shrinker(&c->shrink);
-+	if (c->shrink)
-+		shrinker_free(c->shrink);
- 
- 	mutex_lock(&c->bucket_lock);
- 
-@@ -828,14 +828,19 @@ int bch_btree_cache_alloc(struct cache_set *c)
- 		c->verify_data = NULL;
- #endif
- 
--	c->shrink.count_objects = bch_mca_count;
--	c->shrink.scan_objects = bch_mca_scan;
--	c->shrink.seeks = 4;
--	c->shrink.batch = c->btree_pages * 2;
-+	c->shrink = shrinker_alloc(0, "md-bcache:%pU", c->set_uuid);
-+	if (!c->shrink) {
-+		pr_warn("bcache: %s: could not allocate shrinker\n", __func__);
-+		return 0;
-+	}
-+
-+	c->shrink->count_objects = bch_mca_count;
-+	c->shrink->scan_objects = bch_mca_scan;
-+	c->shrink->seeks = 4;
-+	c->shrink->batch = c->btree_pages * 2;
-+	c->shrink->private_data = c;
- 
--	if (register_shrinker(&c->shrink, "md-bcache:%pU", c->set_uuid))
--		pr_warn("bcache: %s: could not register shrinker\n",
--				__func__);
-+	shrinker_register(c->shrink);
- 
- 	return 0;
+ 	return count ? count : SHRINK_STOP;
  }
-diff --git a/drivers/md/bcache/sysfs.c b/drivers/md/bcache/sysfs.c
-index 0e2c1880f60b..45d8af755de6 100644
---- a/drivers/md/bcache/sysfs.c
-+++ b/drivers/md/bcache/sysfs.c
-@@ -866,7 +866,8 @@ STORE(__bch_cache_set)
+-
+-static struct shrinker lazy_rcu_shrinker = {
+-	.count_objects = lazy_rcu_shrink_count,
+-	.scan_objects = lazy_rcu_shrink_scan,
+-	.batch = 0,
+-	.seeks = DEFAULT_SEEKS,
+-};
+ #endif // #ifdef CONFIG_RCU_LAZY
  
- 		sc.gfp_mask = GFP_KERNEL;
- 		sc.nr_to_scan = strtoul_or_return(buf);
--		c->shrink.scan_objects(&c->shrink, &sc);
-+		if (c->shrink)
-+			c->shrink->scan_objects(c->shrink, &sc);
- 	}
+ void __init rcu_init_nohz(void)
+@@ -1410,6 +1403,7 @@ void __init rcu_init_nohz(void)
+ 	int cpu;
+ 	struct rcu_data *rdp;
+ 	const struct cpumask *cpumask = NULL;
++	struct shrinker * __maybe_unused lazy_rcu_shrinker;
  
- 	sysfs_strtoul_clamp(congested_read_threshold_us,
+ #if defined(CONFIG_NO_HZ_FULL)
+ 	if (tick_nohz_full_running && !cpumask_empty(tick_nohz_full_mask))
+@@ -1436,8 +1430,16 @@ void __init rcu_init_nohz(void)
+ 		return;
+ 
+ #ifdef CONFIG_RCU_LAZY
+-	if (register_shrinker(&lazy_rcu_shrinker, "rcu-lazy"))
+-		pr_err("Failed to register lazy_rcu shrinker!\n");
++	lazy_rcu_shrinker = shrinker_alloc(0, "rcu-lazy");
++	if (!lazy_rcu_shrinker) {
++		pr_err("Failed to allocate lazy_rcu shrinker!\n");
++	} else {
++		lazy_rcu_shrinker->count_objects = lazy_rcu_shrink_count;
++		lazy_rcu_shrinker->scan_objects = lazy_rcu_shrink_scan;
++		lazy_rcu_shrinker->seeks = DEFAULT_SEEKS;
++
++		shrinker_register(lazy_rcu_shrinker);
++	}
+ #endif // #ifdef CONFIG_RCU_LAZY
+ 
+ 	if (!cpumask_subset(rcu_nocb_mask, cpu_possible_mask)) {
 -- 
 2.30.2
 
