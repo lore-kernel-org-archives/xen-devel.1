@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A848C001B0
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Aug 2023 13:02:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.579782.907901 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B57FC04A6A
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Aug 2023 13:02:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.579784.907925 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTMMC-0003NJ-UN; Tue, 08 Aug 2023 13:02:40 +0000
+	id 1qTMMF-00043N-DB; Tue, 08 Aug 2023 13:02:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 579782.907901; Tue, 08 Aug 2023 13:02:40 +0000
+Received: by outflank-mailman (output) from mailman id 579784.907925; Tue, 08 Aug 2023 13:02:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTMMC-0003Mw-P0; Tue, 08 Aug 2023 13:02:40 +0000
-Received: by outflank-mailman (input) for mailman id 579782;
- Tue, 08 Aug 2023 13:02:39 +0000
+	id 1qTMMF-00043G-9I; Tue, 08 Aug 2023 13:02:43 +0000
+Received: by outflank-mailman (input) for mailman id 579784;
+ Tue, 08 Aug 2023 13:02:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Gjkb=DZ=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1qTMMB-0003KL-QL
- for xen-devel@lists.xenproject.org; Tue, 08 Aug 2023 13:02:39 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
+ id 1qTMMD-0003KL-8i
+ for xen-devel@lists.xenproject.org; Tue, 08 Aug 2023 13:02:41 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d9aac536-35eb-11ee-b280-6b7b168915f2;
- Tue, 08 Aug 2023 15:02:38 +0200 (CEST)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-3fe2fb9b4d7so47794765e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 08 Aug 2023 06:02:38 -0700 (PDT)
+ id db1c4a94-35eb-11ee-b280-6b7b168915f2;
+ Tue, 08 Aug 2023 15:02:40 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-3fbea14700bso48055405e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Aug 2023 06:02:40 -0700 (PDT)
 Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- y15-20020a5d4acf000000b003144b50034esm13567072wrs.110.2023.08.08.06.02.36
+ y15-20020a5d4acf000000b003144b50034esm13567072wrs.110.2023.08.08.06.02.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Aug 2023 06:02:36 -0700 (PDT)
+ Tue, 08 Aug 2023 06:02:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d9aac536-35eb-11ee-b280-6b7b168915f2
+X-Inumbo-ID: db1c4a94-35eb-11ee-b280-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1691499757; x=1692104557;
+        d=cloud.com; s=cloud; t=1691499760; x=1692104560;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=I6QBQAGjY2r360IlHRoBLqtdiryrX7RiFTTDs7pUf/s=;
-        b=lc7bZs3dOMd6Nfz9ANn2pPGoZX0osgPGShUy6l6kN2Yq6Z/ZJoMOqVnmGyLsy4hCDL
-         B6MG6+iJjZKS9NaWVbpqrgb28AwKQWOzmdYsoFhSiStk+8R0UMs9djSaBGjN14+qhMkn
-         GX+CpclGLCSR4GndhJCA93ewSmAEiGEuTp4Bw=
+        bh=CLKiL/jNslxYi/QSWYQzg3uu6el6+QZP5XsqGeRNlAs=;
+        b=Yk2dU9B70C6NTd0q+fmYujVQUDxUzjoJ1Ysp42lk4W37mG7tb3DKPXw/RhRga+2oRR
+         M/kOXQzc5+oJVn6ptI/aUS9kSvCrV0rxeKDHsjAyrb8/4pnJY27YeCCAS5399PRQeBIY
+         BWMKM/aK7koR6IvEahvAw0xLiWNgi/Wr4WqYc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691499757; x=1692104557;
+        d=1e100.net; s=20221208; t=1691499760; x=1692104560;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=I6QBQAGjY2r360IlHRoBLqtdiryrX7RiFTTDs7pUf/s=;
-        b=Yb1k6OWU82S00uPKZ4rgat0tUsRvZpsKHzVjIiKtxa7xZPVJmphXX/22nySLtP1+7f
-         WZ28LVfgDeRAgardKIUWunMoMHHYkr9/SEjz+9OC8RjRl9TcAWFsW3+gNSf0PrKQYDWj
-         I7o+RIon4WnsnMwQgcp9lhB5oy1EUyCWqqOteyUJOzK1FSLNrXj9oj+ru9Tvo0LXDPPx
-         5uknn9KWyhQcr7JTB1Jr7BHAxsbi/Ud1YzD3B7eyeF0BcOZK2j487yl9ERlRn85LpyAR
-         c3YX6ZpH/JEOE6WSO900Pch5TIy/2igOM5lTXUS2PQgTftjPzANd9RYDYSFmP3sAhZMn
-         4LhQ==
-X-Gm-Message-State: AOJu0YxawKebhctvo702AlRnN+iGnv9EdEqKOqZN8qjlw2l/WxtTltWw
-	CLm6faZrKozZQQ14gq0ki8PQ656/nZNB022A8DE=
-X-Google-Smtp-Source: AGHT+IGI4sjkvPq5FlJLChKC03G3IDBfL8r9LDQBa14X9x6e46zkyN+2uB0RKQUmhONKDEg0sakldw==
-X-Received: by 2002:adf:ce09:0:b0:317:5caa:c3a3 with SMTP id p9-20020adfce09000000b003175caac3a3mr7489337wrn.40.1691499757343;
-        Tue, 08 Aug 2023 06:02:37 -0700 (PDT)
+        bh=CLKiL/jNslxYi/QSWYQzg3uu6el6+QZP5XsqGeRNlAs=;
+        b=ZGrpmHoJwna1rb1N1Ea0s8BxA2L8UUjuv7e6x2BgP0jKCLQmoTEu2qe2o0SlYIQ8W4
+         lXFL4504GWdn79DJcOFZ09aBCOZ3ztNvY4wgynDdsLC8ADe4aYtW03ZGZkphtQZJaUwI
+         t5X5vp2nqoiDwegiqN7UpqR3CjQIAS4qSyiOIsVAGIpZny5aWWGD6aJ5MX6vnv1P3Ufd
+         gwckdetsMDG3fWfoDBEjZBVqKESZLWTfEEPpyaIJhRdiK63D3utrSdF25XvMPy7CqJRb
+         zsXQ98lCpCakR6awF61ugD6W3orPIRdAPLRl4Ilxsm8wgsI3XqO43NDPJpCv4jcNO2LN
+         lbPA==
+X-Gm-Message-State: AOJu0YzsViNU8HhyhmkVUmN4p/LOfTbaa0VC/beB3nSMYZpB8RjVMKZ2
+	k7G8xfwq5DtaLE60qcHosdEKF4cy0HP9TJg8Ttw=
+X-Google-Smtp-Source: AGHT+IGaM6+/0iPdaGeT67glHUk1CVKgmWsCdOnkmwkJfkQWD8hDRBMP6LVD/yt05UNn/y/OWrxcyA==
+X-Received: by 2002:a1c:7708:0:b0:3fe:108d:7f88 with SMTP id t8-20020a1c7708000000b003fe108d7f88mr7998422wmi.36.1691499759914;
+        Tue, 08 Aug 2023 06:02:39 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -87,125 +87,253 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 1/4] mm: Factor out the pdx compression logic in ma/va converters
-Date: Tue,  8 Aug 2023 14:02:17 +0100
-Message-Id: <20230808130220.27891-2-alejandro.vallejo@cloud.com>
+Subject: [PATCH v3 4/4] pdx: Add CONFIG_PDX_COMPRESSION as a common Kconfig option
+Date: Tue,  8 Aug 2023 14:02:20 +0100
+Message-Id: <20230808130220.27891-5-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230808130220.27891-1-alejandro.vallejo@cloud.com>
 References: <20230808130220.27891-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch factors out the pdx compression logic hardcoded in both ports
-for the maddr<->vaddr conversion functions.
+Adds a new compile-time flag to allow disabling pdx compression and
+compiles out compression-related code/data. It also shorts the pdx<->pfn
+conversion macros and creates stubs for masking fucntions.
 
-Touches both x86 and arm ports.
+While at it, removes the old arch-defined CONFIG_HAS_PDX flag, as it was
+not removable in practice.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
 v3:
-  * size_t -> unsigned long (Jan)
-  * uint64_t -> paddr_t (Jan)
+  * Fixed a typo in Kconfig's help
+  * Gated CONFIG_PDX_COMPRESSION under EXPERT=y and left default=ARM
+  * Fixed commit message after renaming CONFIG_PDX_COMPRESSION (Julien)
+  * Changed #else comment to the reason it executes (Julien)
+  * Various blank-line related style changes (Jan)
 ---
- xen/arch/arm/include/asm/mm.h          |  3 +--
- xen/arch/x86/include/asm/x86_64/page.h | 28 +++++++++++---------------
- xen/include/xen/pdx.h                  | 25 +++++++++++++++++++++++
- 3 files changed, 38 insertions(+), 18 deletions(-)
+ xen/arch/arm/Kconfig  |  1 -
+ xen/arch/x86/Kconfig  |  1 -
+ xen/arch/x86/domain.c | 19 +++++++++++++------
+ xen/common/Kconfig    | 13 ++++++++++---
+ xen/common/Makefile   |  2 +-
+ xen/common/pdx.c      | 16 ++++++++++++----
+ xen/include/xen/pdx.h | 38 +++++++++++++++++++++++++++++++++++---
+ 7 files changed, 71 insertions(+), 19 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 5b530f0f40..c0d7f0f181 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -319,8 +319,7 @@ static inline void *maddr_to_virt(paddr_t ma)
-            (DIRECTMAP_SIZE >> PAGE_SHIFT));
-     return (void *)(XENHEAP_VIRT_START -
-                     (directmap_base_pdx << PAGE_SHIFT) +
--                    ((ma & ma_va_bottom_mask) |
--                     ((ma & ma_top_mask) >> pfn_pdx_hole_shift)));
-+                    maddr_to_directmapoff(ma));
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 57bd1d01d7..224db89c05 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -14,7 +14,6 @@ config ARM
+ 	select HAS_ALTERNATIVE
+ 	select HAS_DEVICE_TREE
+ 	select HAS_PASSTHROUGH
+-	select HAS_PDX
+ 	select HAS_PMAP
+ 	select HAS_UBSAN
+ 	select IOMMU_FORCE_PT_SHARE
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 92f3a627da..30df085d96 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -24,7 +24,6 @@ config X86
+ 	select HAS_PASSTHROUGH
+ 	select HAS_PCI
+ 	select HAS_PCI_MSI
+-	select HAS_PDX
+ 	select HAS_SCHED_GRANULARITY
+ 	select HAS_UBSAN
+ 	select HAS_VPCI if HVM
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index fe86a7f853..f476df17e4 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -458,7 +458,7 @@ void domain_cpu_policy_changed(struct domain *d)
+     }
  }
- #endif
  
-diff --git a/xen/arch/x86/include/asm/x86_64/page.h b/xen/arch/x86/include/asm/x86_64/page.h
-index 53faa7875b..e40b451221 100644
---- a/xen/arch/x86/include/asm/x86_64/page.h
-+++ b/xen/arch/x86/include/asm/x86_64/page.h
-@@ -36,26 +36,22 @@ static inline unsigned long __virt_to_maddr(unsigned long va)
+-#ifndef CONFIG_BIGMEM
++#if !defined(CONFIG_BIGMEM) && defined(CONFIG_PDX_COMPRESSION)
+ /*
+  * The hole may be at or above the 44-bit boundary, so we need to determine
+  * the total bit count until reaching 32 significant (not squashed out) bits
+@@ -485,13 +485,20 @@ static unsigned int __init noinline _domain_struct_bits(void)
+ struct domain *alloc_domain_struct(void)
  {
-     ASSERT(va < DIRECTMAP_VIRT_END);
-     if ( va >= DIRECTMAP_VIRT_START )
--        va -= DIRECTMAP_VIRT_START;
--    else
--    {
--        BUILD_BUG_ON(XEN_VIRT_END - XEN_VIRT_START != GB(1));
--        /* Signed, so ((long)XEN_VIRT_START >> 30) fits in an imm32. */
--        ASSERT(((long)va >> (PAGE_ORDER_1G + PAGE_SHIFT)) ==
--               ((long)XEN_VIRT_START >> (PAGE_ORDER_1G + PAGE_SHIFT)));
+     struct domain *d;
+-#ifdef CONFIG_BIGMEM
+-    const unsigned int bits = 0;
+-#else
++
+     /*
+-     * We pack the PDX of the domain structure into a 32-bit field within
+-     * the page_info structure. Hence the MEMF_bits() restriction.
++     * Without CONFIG_BIGMEM, we pack the PDX of the domain structure into
++     * a 32-bit field within the page_info structure. Hence the MEMF_bits()
++     * restriction. With PDX compression in place the number of bits must
++     * be calculated at runtime, but it's fixed otherwise.
++     *
++     * On systems with CONFIG_BIGMEM there's no packing, and so there's no
++     * such restriction.
+      */
++#if defined(CONFIG_BIGMEM) || !defined(CONFIG_PDX_COMPRESSION)
++    const unsigned int bits = IS_ENABLED(CONFIG_BIGMEM) ? 0 :
++                                                          32 + PAGE_SHIFT;
++#else
+     static unsigned int __read_mostly bits;
+ 
+     if ( unlikely(!bits) )
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 0d248ab941..2c1d1fc3a2 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -23,6 +23,16 @@ config GRANT_TABLE
+ 
+ 	  If unsure, say Y.
+ 
++config PDX_COMPRESSION
++	bool "PDX (Page inDeX) compression support" if EXPERT
++	default ARM
++	help
++	  PDX compression is a technique that allows the hypervisor to
++	  represent physical addresses in a very space-efficient manner.
++	  This is very helpful reducing memory wastage in systems with
++	  memory banks with base addresses far from each other, but carries
++	  a performance cost.
++
+ config ALTERNATIVE_CALL
+ 	bool
+ 
+@@ -53,9 +63,6 @@ config HAS_IOPORTS
+ config HAS_KEXEC
+ 	bool
+ 
+-config HAS_PDX
+-	bool
 -
--        va += xen_phys_start - XEN_VIRT_START;
--    }
--    return (va & ma_va_bottom_mask) |
--           ((va << pfn_pdx_hole_shift) & ma_top_mask);
-+        return directmapoff_to_maddr(va - DIRECTMAP_VIRT_START);
-+
-+    BUILD_BUG_ON(XEN_VIRT_END - XEN_VIRT_START != GB(1));
-+    /* Signed, so ((long)XEN_VIRT_START >> 30) fits in an imm32. */
-+    ASSERT(((long)va >> (PAGE_ORDER_1G + PAGE_SHIFT)) ==
-+           ((long)XEN_VIRT_START >> (PAGE_ORDER_1G + PAGE_SHIFT)));
-+
-+    return xen_phys_start + va - XEN_VIRT_START;
- }
+ config HAS_PMAP
+ 	bool
  
- static inline void *__maddr_to_virt(unsigned long ma)
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 46049eac35..0020cafb8a 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -29,7 +29,7 @@ obj-y += multicall.o
+ obj-y += notifier.o
+ obj-$(CONFIG_NUMA) += numa.o
+ obj-y += page_alloc.o
+-obj-$(CONFIG_HAS_PDX) += pdx.o
++obj-y += pdx.o
+ obj-$(CONFIG_PERF_COUNTERS) += perfc.o
+ obj-bin-$(CONFIG_HAS_PMAP) += pmap.init.o
+ obj-y += preempt.o
+diff --git a/xen/common/pdx.c b/xen/common/pdx.c
+index d3d38965bd..d3d63b0750 100644
+--- a/xen/common/pdx.c
++++ b/xen/common/pdx.c
+@@ -31,11 +31,16 @@ unsigned long __read_mostly pdx_group_valid[BITS_TO_LONGS(
+ 
+ bool __mfn_valid(unsigned long mfn)
  {
--    ASSERT(pfn_to_pdx(ma >> PAGE_SHIFT) < (DIRECTMAP_SIZE >> PAGE_SHIFT));
--    return (void *)(DIRECTMAP_VIRT_START +
--                    ((ma & ma_va_bottom_mask) |
--                     ((ma & ma_top_mask) >> pfn_pdx_hole_shift)));
-+    /* Offset in the direct map, accounting for pdx compression */
-+    unsigned long va_offset = maddr_to_directmapoff(ma);
-+    ASSERT(va_offset < DIRECTMAP_SIZE);
-+    return (void *)(DIRECTMAP_VIRT_START + va_offset);
+-    if ( unlikely(evaluate_nospec(mfn >= max_page)) )
++    bool invalid = mfn >= max_page;
++
++#ifdef CONFIG_PDX_COMPRESSION
++    invalid |= mfn & pfn_hole_mask;
++#endif
++
++    if ( unlikely(evaluate_nospec(invalid)) )
+         return false;
+-    return likely(!(mfn & pfn_hole_mask)) &&
+-           likely(test_bit(pfn_to_pdx(mfn) / PDX_GROUP_COUNT,
+-                           pdx_group_valid));
++
++    return test_bit(pfn_to_pdx(mfn) / PDX_GROUP_COUNT, pdx_group_valid);
  }
  
- /* read access (should only be used for debug printk's) */
+ void set_pdx_range(unsigned long smfn, unsigned long emfn)
+@@ -49,6 +54,8 @@ void set_pdx_range(unsigned long smfn, unsigned long emfn)
+         __set_bit(idx, pdx_group_valid);
+ }
+ 
++#ifdef CONFIG_PDX_COMPRESSION
++
+ /*
+  * Diagram to make sense of the following variables. The masks and shifts
+  * are done on mfn values in order to convert to/from pdx:
+@@ -176,6 +183,7 @@ void __init pfn_pdx_hole_setup(unsigned long mask)
+     ma_top_mask         = pfn_top_mask << PAGE_SHIFT;
+ }
+ 
++#endif /* CONFIG_PDX_COMPRESSION */
+ 
+ /*
+  * Local variables:
 diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
-index de5439a5e5..8f29598230 100644
+index b5367a33ca..6511aba6c7 100644
 --- a/xen/include/xen/pdx.h
 +++ b/xen/include/xen/pdx.h
-@@ -160,6 +160,31 @@ static inline unsigned long pdx_to_pfn(unsigned long pdx)
+@@ -67,8 +67,6 @@
+  * region involved.
+  */
+ 
+-#ifdef CONFIG_HAS_PDX
+-
+ extern unsigned long max_pdx;
+ 
+ #define PDX_GROUP_COUNT ((1 << PDX_GROUP_SHIFT) / \
+@@ -100,6 +98,8 @@ bool __mfn_valid(unsigned long mfn);
  #define mfn_to_pdx(mfn) pfn_to_pdx(mfn_x(mfn))
  #define pdx_to_mfn(pdx) _mfn(pdx_to_pfn(pdx))
  
-+/**
-+ * Computes the offset into the direct map of an maddr
-+ *
-+ * @param ma Machine address
-+ * @return Offset on the direct map where that
-+ *         machine address can be accessed
-+ */
-+static inline unsigned long maddr_to_directmapoff(paddr_t ma)
++#ifdef CONFIG_PDX_COMPRESSION
++
+ extern unsigned long pfn_pdx_bottom_mask, ma_va_bottom_mask;
+ extern unsigned int pfn_pdx_hole_shift;
+ extern unsigned long pfn_hole_mask;
+@@ -206,7 +206,39 @@ static inline paddr_t directmapoff_to_maddr(unsigned long offset)
+  */
+ void pfn_pdx_hole_setup(unsigned long mask);
+ 
+-#endif /* HAS_PDX */
++#else /* !CONFIG_PDX_COMPRESSION */
++
++/* Without PDX compression we can skip some computations */
++
++/* pdx<->pfn == identity */
++#define pdx_to_pfn(x) (x)
++#define pfn_to_pdx(x) (x)
++
++/* directmap is indexed by by maddr */
++#define maddr_to_directmapoff(x) (x)
++#define directmapoff_to_maddr(x) (x)
++
++static inline bool pdx_is_region_compressible(unsigned long smfn,
++                                              unsigned long emfn)
 +{
-+    return ((ma & ma_top_mask) >> pfn_pdx_hole_shift) |
-+           (ma & ma_va_bottom_mask);
++    return true;
 +}
 +
-+/**
-+ * Computes a machine address given a direct map offset
-+ *
-+ * @param offset Offset into the direct map
-+ * @return Corresponding machine address of that virtual location
-+ */
-+static inline paddr_t directmapoff_to_maddr(unsigned long offset)
++static inline uint64_t pdx_init_mask(uint64_t base_addr)
 +{
-+    return (((paddr_t)offset << pfn_pdx_hole_shift) & ma_top_mask) |
-+           (offset & ma_va_bottom_mask);
++    return 0;
 +}
 +
- /**
-  * Initializes global variables with information about the compressible
-  * range of the current memory regions.
++static inline uint64_t pdx_region_mask(uint64_t base, uint64_t len)
++{
++    return 0;
++}
++
++static inline void pfn_pdx_hole_setup(unsigned long mask)
++{
++}
++
++#endif /* CONFIG_PDX_COMPRESSION */
+ #endif /* __XEN_PDX_H__ */
+ 
+ /*
 -- 
 2.34.1
 
