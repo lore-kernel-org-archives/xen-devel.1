@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B87C001DF
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Aug 2023 11:08:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.579641.907730 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3815BC41513
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Aug 2023 11:14:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.579673.907775 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTKZx-0006UB-Fz; Tue, 08 Aug 2023 11:08:45 +0000
+	id 1qTKfa-0002Fz-RD; Tue, 08 Aug 2023 11:14:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 579641.907730; Tue, 08 Aug 2023 11:08:45 +0000
+Received: by outflank-mailman (output) from mailman id 579673.907775; Tue, 08 Aug 2023 11:14:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTKZx-0006Ru-6Z; Tue, 08 Aug 2023 11:08:45 +0000
-Received: by outflank-mailman (input) for mailman id 579641;
- Tue, 08 Aug 2023 11:08:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aYul=DZ=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qTKZv-00068O-To
- for xen-devel@lists.xenproject.org; Tue, 08 Aug 2023 11:08:43 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id efae8582-35db-11ee-b280-6b7b168915f2;
- Tue, 08 Aug 2023 13:08:43 +0200 (CEST)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 50E094EE0744;
- Tue,  8 Aug 2023 13:08:42 +0200 (CEST)
+	id 1qTKfa-0002Fs-NL; Tue, 08 Aug 2023 11:14:34 +0000
+Received: by outflank-mailman (input) for mailman id 579673;
+ Tue, 08 Aug 2023 11:14:32 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qTKfY-0002Fg-KR; Tue, 08 Aug 2023 11:14:32 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qTKfY-0001bB-Eo; Tue, 08 Aug 2023 11:14:32 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qTKfY-00008c-1c; Tue, 08 Aug 2023 11:14:32 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1qTKfY-0002nH-1F; Tue, 08 Aug 2023 11:14:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,137 +44,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: efae8582-35db-11ee-b280-6b7b168915f2
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=4G5K2W1uL+hI/kLBZpAo4TDhKPvOkPE9bNf8chu88Z8=; b=5SUA3rhdt4osjYNOkyp6QtKD1l
+	697fCDcTGYTiK1tRgAODn+iYTVMdkbpa3A3aaNwsVWlXuKL/WkMWKrZlnpyRr1cOIuhp+IPW+VzvK
+	RF62laDj2TU4CH5T7cgh6IrCj0bY5jfmwRYqqOSw3zTVryIjLhuOmhQjFuvO/oHEifS0=;
 To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 4/5] x86/xstate: address MISRA C:2012 Rule 5.3
-Date: Tue,  8 Aug 2023 13:08:06 +0200
-Message-Id: <927d771a3c38b8a3c47913aea21cf8890fd4e6ef.1691492441.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1691492441.git.nicola.vetrini@bugseng.com>
-References: <cover.1691492441.git.nicola.vetrini@bugseng.com>
-MIME-Version: 1.0
+Message-ID: <osstest-182229-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 182229: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=bd3ddaf6ee7fa312bd077305819105f84a34008d
+X-Osstest-Versions-That:
+    xen=d3be806dae9c122fe94702cd9fa2e358a60828cd
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 08 Aug 2023 11:14:32 +0000
 
-Rename the local variables s/xsave/xstate/ to avoid clashing
-with function 'xsave' defined in 'xen/arch/x86/include/asm/xstate.h'.
+flight 182229 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/182229/
 
-No functional changes.
+Failures :-/ but no regressions.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-Changes in v2:
-- s/xsave_area/xstate/, since that is the newest common name, also
-used in other parts of the modified file.
----
- xen/arch/x86/xstate.c | 30 +++++++++++++++---------------
- 1 file changed, 15 insertions(+), 15 deletions(-)
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index 770747d88f..f442610fc5 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -174,10 +174,10 @@ static void setup_xstate_comp(uint16_t *comp_offsets,
-  */
- void expand_xsave_states(const struct vcpu *v, void *dest, unsigned int size)
- {
--    const struct xsave_struct *xsave = v->arch.xsave_area;
-+    const struct xsave_struct *xstate = v->arch.xsave_area;
-     const void *src;
-     uint16_t comp_offsets[sizeof(xfeature_mask)*8];
--    u64 xstate_bv = xsave->xsave_hdr.xstate_bv;
-+    u64 xstate_bv = xstate->xsave_hdr.xstate_bv;
-     u64 valid;
- 
-     /* Check there is state to serialise (i.e. at least an XSAVE_HDR) */
-@@ -185,19 +185,19 @@ void expand_xsave_states(const struct vcpu *v, void *dest, unsigned int size)
-     /* Check there is the correct room to decompress into. */
-     BUG_ON(size != xstate_ctxt_size(v->arch.xcr0_accum));
- 
--    if ( !(xsave->xsave_hdr.xcomp_bv & XSTATE_COMPACTION_ENABLED) )
-+    if ( !(xstate->xsave_hdr.xcomp_bv & XSTATE_COMPACTION_ENABLED) )
-     {
--        memcpy(dest, xsave, size);
-+        memcpy(dest, xstate, size);
-         return;
-     }
- 
--    ASSERT(xsave_area_compressed(xsave));
--    setup_xstate_comp(comp_offsets, xsave->xsave_hdr.xcomp_bv);
-+    ASSERT(xsave_area_compressed(xstate));
-+    setup_xstate_comp(comp_offsets, xstate->xsave_hdr.xcomp_bv);
- 
-     /*
-      * Copy legacy XSAVE area and XSAVE hdr area.
-      */
--    memcpy(dest, xsave, XSTATE_AREA_MIN_SIZE);
-+    memcpy(dest, xstate, XSTATE_AREA_MIN_SIZE);
-     memset(dest + XSTATE_AREA_MIN_SIZE, 0, size - XSTATE_AREA_MIN_SIZE);
- 
-     ((struct xsave_struct *)dest)->xsave_hdr.xcomp_bv =  0;
-@@ -206,7 +206,7 @@ void expand_xsave_states(const struct vcpu *v, void *dest, unsigned int size)
-      * Copy each region from the possibly compacted offset to the
-      * non-compacted offset.
-      */
--    src = xsave;
-+    src = xstate;
-     valid = xstate_bv & ~XSTATE_FP_SSE;
-     while ( valid )
-     {
-@@ -239,7 +239,7 @@ void expand_xsave_states(const struct vcpu *v, void *dest, unsigned int size)
-  */
- void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
- {
--    struct xsave_struct *xsave = v->arch.xsave_area;
-+    struct xsave_struct *xstate = v->arch.xsave_area;
-     void *dest;
-     uint16_t comp_offsets[sizeof(xfeature_mask)*8];
-     u64 xstate_bv, valid;
-@@ -252,7 +252,7 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
- 
-     if ( !(v->arch.xcr0_accum & XSTATE_XSAVES_ONLY) )
-     {
--        memcpy(xsave, src, size);
-+        memcpy(xstate, src, size);
-         return;
-     }
- 
-@@ -260,19 +260,19 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
-      * Copy legacy XSAVE area, to avoid complications with CPUID
-      * leaves 0 and 1 in the loop below.
-      */
--    memcpy(xsave, src, FXSAVE_SIZE);
-+    memcpy(xstate, src, FXSAVE_SIZE);
- 
-     /* Set XSTATE_BV and XCOMP_BV.  */
--    xsave->xsave_hdr.xstate_bv = xstate_bv;
--    xsave->xsave_hdr.xcomp_bv = v->arch.xcr0_accum | XSTATE_COMPACTION_ENABLED;
-+    xstate->xsave_hdr.xstate_bv = xstate_bv;
-+    xstate->xsave_hdr.xcomp_bv = v->arch.xcr0_accum | XSTATE_COMPACTION_ENABLED;
- 
--    setup_xstate_comp(comp_offsets, xsave->xsave_hdr.xcomp_bv);
-+    setup_xstate_comp(comp_offsets, xstate->xsave_hdr.xcomp_bv);
- 
-     /*
-      * Copy each region from the non-compacted offset to the
-      * possibly compacted offset.
-      */
--    dest = xsave;
-+    dest = xstate;
-     valid = xstate_bv & ~XSTATE_FP_SSE;
-     while ( valid )
-     {
--- 
-2.34.1
+version targeted for testing:
+ xen                  bd3ddaf6ee7fa312bd077305819105f84a34008d
+baseline version:
+ xen                  d3be806dae9c122fe94702cd9fa2e358a60828cd
 
+Last test of basis   182223  2023-08-07 23:02:06 Z    0 days
+Testing same since   182229  2023-08-08 08:00:25 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Anthony PERARD <anthony.perard@citrix.com>
+  Federico Serafini <federico.serafini@bugseng.com>
+  Jan Beulich <jbeulich@suse.com>
+  Luca Fancellu <luca.fancellu@arm.com>
+  Shawn Anastasio <sanastasio@raptorengineering.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   d3be806dae..bd3ddaf6ee  bd3ddaf6ee7fa312bd077305819105f84a34008d -> smoke
 
