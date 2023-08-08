@@ -4,44 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2400C001B0
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Aug 2023 13:22:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.579860.908055 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C90E4C001DF
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Aug 2023 13:28:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.579888.908074 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTMfX-000510-Px; Tue, 08 Aug 2023 13:22:39 +0000
+	id 1qTMkd-0006sr-Gg; Tue, 08 Aug 2023 13:27:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 579860.908055; Tue, 08 Aug 2023 13:22:39 +0000
+Received: by outflank-mailman (output) from mailman id 579888.908074; Tue, 08 Aug 2023 13:27:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTMfX-00050s-Lr; Tue, 08 Aug 2023 13:22:39 +0000
-Received: by outflank-mailman (input) for mailman id 579860;
- Tue, 08 Aug 2023 13:22:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Yw+Y=DZ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qTMfX-0003ij-3a
- for xen-devel@lists.xenproject.org; Tue, 08 Aug 2023 13:22:39 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a5282306-35ee-11ee-b280-6b7b168915f2;
- Tue, 08 Aug 2023 15:22:38 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 5B39821CC5;
- Tue,  8 Aug 2023 13:22:38 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 23510139D1;
- Tue,  8 Aug 2023 13:22:38 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id nhv0Bp5B0mSqFAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 08 Aug 2023 13:22:38 +0000
+	id 1qTMkd-0006sk-Dk; Tue, 08 Aug 2023 13:27:55 +0000
+Received: by outflank-mailman (input) for mailman id 579888;
+ Tue, 08 Aug 2023 13:27:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Gjkb=DZ=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
+ id 1qTMkb-0006sC-Su
+ for xen-devel@lists.xenproject.org; Tue, 08 Aug 2023 13:27:53 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5fe9dd3c-35ef-11ee-8613-37d641c3527e;
+ Tue, 08 Aug 2023 15:27:51 +0200 (CEST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-4fe1c285690so8763764e87.3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Aug 2023 06:27:51 -0700 (PDT)
+Received: from EMEAENGAAD19049. (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ y14-20020a25ad0e000000b00d59ac349fe0sm431377ybi.25.2023.08.08.06.27.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Aug 2023 06:27:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,64 +47,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a5282306-35ee-11ee-b280-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1691500958; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=K/AHDp091ry1sq7bDUAxHTIgZCYOG8/+0FTmesY5Vjg=;
-	b=bWr3s96eU9z2EIZ5poVBpHPjBxsT1bl4L75UlatOE7GePtIEBAN/IdNR7Y4awTLjIjP2jG
-	iPC/lSTST3X8whr7mx/habJlmb9N6ljaMNFgIMRS6QH/c4wKlPaRTZucEoVnIb4c4bEsik
-	yCHTGz0gx/Ecv18DebFLC/hhRKbfo2A=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 3/3] tools/xl: reject bootloader=pygrub in case pygrub is disabled
-Date: Tue,  8 Aug 2023 15:22:19 +0200
-Message-Id: <20230808132219.6422-4-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20230808132219.6422-1-jgross@suse.com>
-References: <20230808132219.6422-1-jgross@suse.com>
+X-Inumbo-ID: 5fe9dd3c-35ef-11ee-8613-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1691501271; x=1692106071;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=NoQrogLV9f5a5mnrTdAisY2Um7UDzKxPXcl25SM3U04=;
+        b=eyP5qe/EmJhArZ8mNk+WDiEx+C7k3o3fKsxQt+6X4AH1pbMXedscRsNHyjqufzauIc
+         S4rVGyIDGMhF/0bPOZYcjrUMmwnyPEUVxMVdIhFzIr7e0eSugkeL7S2HiDey0QCPrwsZ
+         x2/1cAVyKIstAHUQK37doSlFLq5SVdN77QLuQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691501271; x=1692106071;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NoQrogLV9f5a5mnrTdAisY2Um7UDzKxPXcl25SM3U04=;
+        b=CrZ9ctuqbj5AU4T3Bql2wLN1ODcp6cmShZOEokQi0CqYKTnX3by7LvVeVYrr1rNFvn
+         I7XMbF9XjDTJY+duuHHB/da+yoVbYuhZe2QR8BRcOR6s50EEokPL+ORZpZsEvctbJxzt
+         kOpMnUQFvo6qY5PW2b/GPiBVPIkPgIDQQswBBWcWSRNCG8mIuVk6nsuRVJk7yU3r+TAB
+         mO9QFbW72JdLTrFr0KeLN1bUZr4X9FnyNhE5kb6IqO4KAODDEwAt80+dKP7McsO5dvu2
+         wY3bwwFxeHTVfqX6KCkTzuEq1FwMna/l+5L9/1DbfLB2YbYiUB5NXOXxTFT59n81e4i/
+         n3uA==
+X-Gm-Message-State: AOJu0Yx42cEcHcEkvAbzCTC8iLef89Zg89+tDQFj5sSNOnaSyh/VZw2A
+	WTYtcvNXCH+Ti0cNQXl8/PkeAg==
+X-Google-Smtp-Source: AGHT+IHYtuFP80fZIYZobFnijetCi53/w7Gpsd2lBsHcrZLuTWwOR76UNvXkTfFTUOoXW3x80WAc4w==
+X-Received: by 2002:a05:6512:3b29:b0:4fd:faa5:64ed with SMTP id f41-20020a0565123b2900b004fdfaa564edmr10967056lfv.11.1691501271248;
+        Tue, 08 Aug 2023 06:27:51 -0700 (PDT)
+Message-ID: <64d242d6.250a0220.6b78d.2b35@mx.google.com>
+X-Google-Original-Message-ID: <ZNJC0iDJA5yax1Zg@EMEAENGAAD19049.>
+Date: Tue, 8 Aug 2023 14:27:46 +0100
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v7 1/3] x86/microcode: Ignore microcode loading interface
+ for revision = -1
+References: <20230808130331.27995-1-alejandro.vallejo@cloud.com>
+ <20230808130331.27995-2-alejandro.vallejo@cloud.com>
+ <efee9d93-e1d8-6606-0e97-3f63ecefc8be@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <efee9d93-e1d8-6606-0e97-3f63ecefc8be@suse.com>
 
-In case Xen has been configured with "--disable-pygrub", don't accept
-the domain config option "bootloader=pygrub".
+Hi,
 
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- new patch
----
- tools/xl/xl_parse.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+On Tue, Aug 08, 2023 at 03:08:04PM +0200, Jan Beulich wrote:
+> On 08.08.2023 15:03, Alejandro Vallejo wrote:
+> > --- a/xen/arch/x86/cpu/microcode/core.c
+> > +++ b/xen/arch/x86/cpu/microcode/core.c
+> > @@ -867,10 +867,23 @@ int __init early_microcode_init(unsigned long *module_map,
+> >          return -ENODEV;
+> >      }
+> >  
+> > -    microcode_grab_module(module_map, mbi);
+> > -
+> >      ucode_ops.collect_cpu_info();
+> >  
+> > +    /*
+> > +     * Some hypervisors deliberately report a microcode revision of -1 to
+> > +     * mean that they will not accept microcode updates. We take the hint
+> > +     * and ignore the microcode interface in that case.
+> > +     */
+> > +    if ( this_cpu(cpu_sig).rev == ~0 )
+> > +    {
+> > +        printk(XENLOG_WARNING "Microcode loading disabled due to: %s",
+> > +                              "rev = ~0");
+> 
+> Sadly there now looks to be a newline missing. Easy to add while committing,
+> I suppose, and with it added (back)
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Jan
+You mean the missing newline after "%s"? It fell under the cracks
+while adding the substring in v6. It should indeed be there, cheers.
 
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 1a5556d3bb..0e8c604bbf 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1692,6 +1692,15 @@ void parse_config_data(const char *config_source,
-     xlu_cfg_get_defbool(config, "acpi", &b_info->acpi, 0);
- 
-     xlu_cfg_replace_string (config, "bootloader", &b_info->bootloader, 0);
-+#ifndef HAVE_PYGRUB
-+    if (b_info->bootloader &&
-+        (!strcmp(b_info->bootloader, "pygrub") ||
-+	 !strcmp(b_info->bootloader, "/usr/bin/pygrub"))) {
-+        fprintf(stderr, "ERROR: this instance of Xen has been built without support of \"pygrub\".\n");
-+        exit(-ERROR_FAIL);
-+    }
-+#endif
-+
-     switch (xlu_cfg_get_list_as_string_list(config, "bootloader_args",
-                                             &b_info->bootloader_args, 1)) {
-     case 0:
--- 
-2.35.3
-
+Thanks,
+Alejandro
 
