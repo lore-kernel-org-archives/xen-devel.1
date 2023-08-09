@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 558CBEB64DD
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Aug 2023 11:01:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.580887.909359 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C52EB64DD
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Aug 2023 11:03:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.580896.909367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTgw8-0006ev-HK; Wed, 09 Aug 2023 11:01:08 +0000
+	id 1qTgxt-0007KO-RU; Wed, 09 Aug 2023 11:02:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 580887.909359; Wed, 09 Aug 2023 11:01:08 +0000
+Received: by outflank-mailman (output) from mailman id 580896.909367; Wed, 09 Aug 2023 11:02:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTgw8-0006eo-Cu; Wed, 09 Aug 2023 11:01:08 +0000
-Received: by outflank-mailman (input) for mailman id 580887;
- Wed, 09 Aug 2023 11:01:06 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qTgw6-0006eP-BR
- for xen-devel@lists.xenproject.org; Wed, 09 Aug 2023 11:01:06 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qTgw6-0005z1-2q; Wed, 09 Aug 2023 11:01:06 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=[192.168.16.102]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qTgw5-0002MQ-T0; Wed, 09 Aug 2023 11:01:06 +0000
+	id 1qTgxt-0007KH-Oo; Wed, 09 Aug 2023 11:02:57 +0000
+Received: by outflank-mailman (input) for mailman id 580896;
+ Wed, 09 Aug 2023 11:02:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=hYF7=D2=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qTgxs-0007Jy-FY
+ for xen-devel@lists.xenproject.org; Wed, 09 Aug 2023 11:02:56 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4ad2802d-36a4-11ee-b280-6b7b168915f2;
+ Wed, 09 Aug 2023 13:02:55 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id A0A094EE0741;
+ Wed,  9 Aug 2023 13:02:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,55 +41,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	References:Cc:To:From:Subject:MIME-Version:Date:Message-ID;
-	bh=xOx+4Ax9tWrThOMr59/CmR+MJNDke0Rlr81gpb/QdF0=; b=BPYLpauOeaw4+ra7gYleAt/E/E
-	ODNwbji6dcTkLFks8Cp1R9YG39SwFCS7rzvQivGMFclSgy7DTVzZsrJlXKTTGlQrEqhK31yY+lM2m
-	ZzRIwmCgRSHXolId+1silHXz2dukjudH9hDzpfFiu7vqqnxe0a7VfKXo0sngxiz/TFJc=;
-Message-ID: <42256506-2437-4f6a-849d-df8101ec6aa9@xen.org>
-Date: Wed, 9 Aug 2023 12:01:04 +0100
+X-Inumbo-ID: 4ad2802d-36a4-11ee-b280-6b7b168915f2
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH 1/8] arm/efi: address MISRA C:2012 Rule 8.4
+Date: Wed,  9 Aug 2023 13:02:34 +0200
+Message-Id: <4d087a54edb3f92e9271e3d01c1abebf00d3e298.1691575243.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1691575243.git.nicola.vetrini@bugseng.com>
+References: <cover.1691575243.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm64: head: Introduce a helper to flush local TLBs
-Content-Language: en-GB
-From: Julien Grall <julien@xen.org>
-To: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20230808110739.1296-1-michal.orzel@amd.com>
- <55750925-8966-47ef-ace1-712a9467876b@xen.org>
-In-Reply-To: <55750925-8966-47ef-ace1-712a9467876b@xen.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+the function 'fdt_add_uefi_nodes' can be defined static, as its
+only callers are within the same file. This in turn avoids
+violating Rule 8.4 because no declaration is present.
 
+No functional change.
 
-On 09/08/2023 12:00, Julien Grall wrote:
-> Hi Michal,
-> 
-> On 08/08/2023 12:07, Michal Orzel wrote:
->> Instead of repeating the same sequence of instructions to flush the TLBs
->> in various places, introduce a macro flush_xen_tlb_local and make use of
->> it. This is similar to what was done for arm32 by the commit:
->> dea9dddeceec8a1d68da24b14d5b2396effe555f
-> 
-> NIT: In general, we tend to refer to commit with the abbreviated ID and 
-> the title.
-> 
->>
->> This is also making the flush sequence in enable_mmu more clear and
->> consistent.
->>
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-> 
-> Reviewed-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+ xen/arch/arm/efi/efi-boot.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I forgot to mention that I have committed the patch.
-
-Cheers,
-
+diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
+index f24df2abb9..1c3640bb65 100644
+--- a/xen/arch/arm/efi/efi-boot.h
++++ b/xen/arch/arm/efi/efi-boot.h
+@@ -227,7 +227,7 @@ static EFI_STATUS __init efi_process_memory_map_bootinfo(EFI_MEMORY_DESCRIPTOR *
+  * of the System table address, the address of the final EFI memory map,
+  * and memory map information.
+  */
+-EFI_STATUS __init fdt_add_uefi_nodes(EFI_SYSTEM_TABLE *sys_table,
++static EFI_STATUS __init fdt_add_uefi_nodes(EFI_SYSTEM_TABLE *sys_table,
+                                             void *fdt,
+                                             EFI_MEMORY_DESCRIPTOR *memory_map,
+                                             UINTN map_size,
 -- 
-Julien Grall
+2.34.1
+
 
