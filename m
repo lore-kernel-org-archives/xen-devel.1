@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E199C04FDF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC18C04A94
 	for <xen-devel@archiver.kernel.org>; Wed,  9 Aug 2023 11:03:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.580900.909403 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.580897.909374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTgxw-00086p-5I; Wed, 09 Aug 2023 11:03:00 +0000
+	id 1qTgxu-0007O6-4t; Wed, 09 Aug 2023 11:02:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 580900.909403; Wed, 09 Aug 2023 11:03:00 +0000
+Received: by outflank-mailman (output) from mailman id 580897.909374; Wed, 09 Aug 2023 11:02:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qTgxv-00085g-TG; Wed, 09 Aug 2023 11:02:59 +0000
-Received: by outflank-mailman (input) for mailman id 580900;
- Wed, 09 Aug 2023 11:02:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qTgxu-0007N9-06; Wed, 09 Aug 2023 11:02:58 +0000
+Received: by outflank-mailman (input) for mailman id 580897;
+ Wed, 09 Aug 2023 11:02:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hYF7=D2=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qTgxu-0007Jy-AM
- for xen-devel@lists.xenproject.org; Wed, 09 Aug 2023 11:02:58 +0000
+ id 1qTgxt-0007K6-By
+ for xen-devel@lists.xenproject.org; Wed, 09 Aug 2023 11:02:57 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c3c12b6-36a4-11ee-b280-6b7b168915f2;
- Wed, 09 Aug 2023 13:02:57 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4a849d26-36a4-11ee-8613-37d641c3527e;
+ Wed, 09 Aug 2023 13:02:55 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id D6B454EE0744;
- Wed,  9 Aug 2023 13:02:56 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id B0CED4EE073F;
+ Wed,  9 Aug 2023 13:02:53 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c3c12b6-36a4-11ee-b280-6b7b168915f2
+X-Inumbo-ID: 4a849d26-36a4-11ee-8613-37d641c3527e
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -56,86 +56,63 @@ Cc: sstabellini@kernel.org,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 4/8] xen/arm: address MISRA C:2012 Rule 8.4
-Date: Wed,  9 Aug 2023 13:02:37 +0200
-Message-Id: <c2b0bb92a246e5cf149b1ec81c6ed635a275f9df.1691575243.git.nicola.vetrini@bugseng.com>
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [XEN PATCH 0/8] xen: address MISRA C:2012 Rule 8.4
+Date: Wed,  9 Aug 2023 13:02:33 +0200
+Message-Id: <cover.1691575243.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1691575243.git.nicola.vetrini@bugseng.com>
-References: <cover.1691575243.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-'xen/hypercall.h' is included in 'xen/arch/arm/setup.c' to allow
-the declaration of 'arch_get_xen_caps' to be visible when
-defining the function.
+Rule states the following:
+"A compatible declaration shall be visible when an object or function with
+external linkage is defined".
 
-The header 'xen/delay.h' is included in 'xen/arch/arm/time.c'
-to allow the declaration of 'udelay' to be visible.
+This series deals with violations concerning functions and variables used by C
+code (thus not used only within asm). The resolution strategies are as follows:
 
-At the same time, a declaration for 'get_sec' is added in
-'xen/include/xen/time.h' to be available for every call site
-(in particular cper.h).
+1. make the functions/variables static
+2. include the header that contains the compatible declaration, or add one in
+   the header if that's not the case.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/arch/arm/setup.c   | 1 +
- xen/arch/arm/time.c    | 1 +
- xen/include/xen/cper.h | 3 +--
- xen/include/xen/time.h | 1 +
- 4 files changed, 4 insertions(+), 2 deletions(-)
+No functional change.
 
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index bbf72b69aa..44ccea03ca 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -32,6 +32,7 @@
- #include <xen/libfdt/libfdt-xen.h>
- #include <xen/acpi.h>
- #include <xen/warning.h>
-+#include <xen/hypercall.h>
- #include <asm/alternative.h>
- #include <asm/page.h>
- #include <asm/current.h>
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index 0b482d7db3..3535bd8ac7 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -17,6 +17,7 @@
- #include <xen/softirq.h>
- #include <xen/sched.h>
- #include <xen/time.h>
-+#include <xen/delay.h>
- #include <xen/sched.h>
- #include <xen/event.h>
- #include <xen/acpi.h>
-diff --git a/xen/include/xen/cper.h b/xen/include/xen/cper.h
-index 7c6a4c45ce..de8f385bdd 100644
---- a/xen/include/xen/cper.h
-+++ b/xen/include/xen/cper.h
-@@ -23,8 +23,7 @@
- 
- #include <xen/types.h>
- #include <xen/string.h>
--
--extern unsigned long get_sec(void);
-+#include <xen/time.h>
- 
- typedef struct {
- 	uint8_t b[16];
-diff --git a/xen/include/xen/time.h b/xen/include/xen/time.h
-index 5aafdda4f3..67c586b736 100644
---- a/xen/include/xen/time.h
-+++ b/xen/include/xen/time.h
-@@ -36,6 +36,7 @@ s_time_t get_s_time_fixed(u64 at_tick);
- s_time_t get_s_time(void);
- unsigned long get_localtime(struct domain *d);
- uint64_t get_localtime_us(struct domain *d);
-+unsigned long get_sec(void);
- 
- struct tm {
-     int     tm_sec;         /* seconds */
--- 
+Additional notes:
+- other cases, such as functions/variables used only in asm code will be possibly
+  dealt with in future patches.
+- functions in 'gcov_base.c' are deviated, since they are called only from code
+  generated by gcc in a particular non-release build configuration;
+- variables in 'xen/include/acpi/acglobal.h' are deviated temporarily, since
+  it's uncertain whether modifying the include pattern to be compliant with the
+	rule would introduce subtle bugs.
+
+Nicola Vetrini (8):
+  arm/efi: address MISRA C:2012 Rule 8.4
+  xen/memory: address MISRA C:2012 Rule 8.4
+  xen: address MISRA C:2012 Rule 8.4
+  xen/arm: address MISRA C:2012 Rule 8.4
+  x86: address MISRA C:2012 Rule 8.4
+  xen/arm: mm: address MISRA C:2012 Rule 8.4
+  x86/i8259: address MISRA C:2012 Rule 8.4
+  x86/nmi: address MISRA C:2012 Rule 8.4
+
+ xen/arch/arm/efi/efi-boot.h       | 2 +-
+ xen/arch/arm/include/asm/mm.h     | 3 +++
+ xen/arch/arm/setup.c              | 1 +
+ xen/arch/arm/time.c               | 1 +
+ xen/arch/x86/cpu/mcheck/mce.c     | 2 +-
+ xen/arch/x86/cpu/mcheck/mce_amd.c | 2 +-
+ xen/arch/x86/cpu/microcode/core.c | 2 +-
+ xen/arch/x86/i8259.c              | 1 +
+ xen/arch/x86/nmi.c                | 3 ++-
+ xen/arch/x86/spec_ctrl.c          | 4 ++--
+ xen/common/kernel.c               | 2 +-
+ xen/common/memory.c               | 2 +-
+ xen/include/xen/cper.h            | 3 +--
+ xen/include/xen/time.h            | 1 +
+ 14 files changed, 18 insertions(+), 11 deletions(-)
+
+--
 2.34.1
-
 
