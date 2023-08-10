@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E25C04E69
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0680DC41513
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Aug 2023 08:40:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.581925.911408 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.581926.911428 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qU1DI-0005gt-SF; Thu, 10 Aug 2023 08:40:12 +0000
+	id 1qU1DL-0006O6-2Y; Thu, 10 Aug 2023 08:40:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 581925.911408; Thu, 10 Aug 2023 08:40:12 +0000
+Received: by outflank-mailman (output) from mailman id 581926.911428; Thu, 10 Aug 2023 08:40:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qU1DI-0005gS-M5; Thu, 10 Aug 2023 08:40:12 +0000
-Received: by outflank-mailman (input) for mailman id 581925;
- Thu, 10 Aug 2023 08:40:11 +0000
+	id 1qU1DK-0006Nx-UF; Thu, 10 Aug 2023 08:40:14 +0000
+Received: by outflank-mailman (input) for mailman id 581926;
+ Thu, 10 Aug 2023 08:40:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MZIv=D3=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qU1DH-0005Mc-Aj
- for xen-devel@lists.xenproject.org; Thu, 10 Aug 2023 08:40:11 +0000
+ id 1qU1DJ-0005Mc-0J
+ for xen-devel@lists.xenproject.org; Thu, 10 Aug 2023 08:40:13 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7d9acf43-3759-11ee-8613-37d641c3527e;
- Thu, 10 Aug 2023 10:39:59 +0200 (CEST)
+ id 7e89fe20-3759-11ee-8613-37d641c3527e;
+ Thu, 10 Aug 2023 10:40:01 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id D242D4EE0742;
- Thu, 10 Aug 2023 10:40:08 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 97BB84EE0744;
+ Thu, 10 Aug 2023 10:40:10 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7d9acf43-3759-11ee-8613-37d641c3527e
+X-Inumbo-ID: 7e89fe20-3759-11ee-8613-37d641c3527e
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -50,49 +50,62 @@ Cc: sstabellini@kernel.org,
 	ayan.kumar.halder@amd.com,
 	consulting@bugseng.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>,
-	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [XEN PATCH v2 2/7] xen: make 'saved_cmdline' static
-Date: Thu, 10 Aug 2023 10:39:42 +0200
-Message-Id: <3a3f56b54b7051a9a741f5b54e8bc266b451c5e4.1691655814.git.nicola.vetrini@bugseng.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH v2 4/7] xen/arm: make declarations visible before function definitions
+Date: Thu, 10 Aug 2023 10:39:44 +0200
+Message-Id: <05f4dd673312ddd52dcbc8a3b7bcf0ee84993d6e.1691655814.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1691655814.git.nicola.vetrini@bugseng.com>
 References: <cover.1691655814.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The variable 'saved_cmdline' can be defined static,
-as its only uses are within the same file. This in turn avoids
-violating Rule 8.4 because no declaration is present.
+'xen/hypercall.h' is included in 'xen/arch/arm/setup.c' to allow
+the declaration of 'arch_get_xen_caps' to be visible when
+defining the function.
+
+The header 'xen/delay.h' is included in 'xen/arch/arm/time.c'
+to allow the declaration of 'udelay' to be visible.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Fixes: e6ee01ad24b6 ("xen/version: Drop compat/kernel.c")
-Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Fixes: 7cfc339cbc2f ("arm: Implement arch_get_xen_caps")
+Fixes: 335ba242c55c ("arm: implement udelay()")
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in v2:
 - Revised commit message
+- Split patch
 ---
- xen/common/kernel.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/arm/setup.c | 1 +
+ xen/arch/arm/time.c  | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index fb919f3d9c38..52aa28762782 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -28,7 +28,7 @@ CHECK_feature_info;
- 
- enum system_state system_state = SYS_STATE_early_boot;
- 
--xen_commandline_t saved_cmdline;
-+static xen_commandline_t saved_cmdline;
- static const char __initconst opt_builtin_cmdline[] = CONFIG_CMDLINE;
- 
- static int assign_integer_param(const struct kernel_param *param, uint64_t val)
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index bbf72b69aae6..44ccea03ca14 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -32,6 +32,7 @@
+ #include <xen/libfdt/libfdt-xen.h>
+ #include <xen/acpi.h>
+ #include <xen/warning.h>
++#include <xen/hypercall.h>
+ #include <asm/alternative.h>
+ #include <asm/page.h>
+ #include <asm/current.h>
+diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
+index 0b482d7db30c..3535bd8ac7c7 100644
+--- a/xen/arch/arm/time.c
++++ b/xen/arch/arm/time.c
+@@ -17,6 +17,7 @@
+ #include <xen/softirq.h>
+ #include <xen/sched.h>
+ #include <xen/time.h>
++#include <xen/delay.h>
+ #include <xen/sched.h>
+ #include <xen/event.h>
+ #include <xen/acpi.h>
 -- 
 2.34.1
 
