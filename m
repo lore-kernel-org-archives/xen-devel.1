@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 069B6C04FDF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Aug 2023 08:40:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.581924.911400 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E25C04E69
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Aug 2023 08:40:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.581925.911408 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qU1DI-0005Yp-Fn; Thu, 10 Aug 2023 08:40:12 +0000
+	id 1qU1DI-0005gt-SF; Thu, 10 Aug 2023 08:40:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 581924.911400; Thu, 10 Aug 2023 08:40:12 +0000
+Received: by outflank-mailman (output) from mailman id 581925.911408; Thu, 10 Aug 2023 08:40:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qU1DI-0005XO-BK; Thu, 10 Aug 2023 08:40:12 +0000
-Received: by outflank-mailman (input) for mailman id 581924;
+	id 1qU1DI-0005gS-M5; Thu, 10 Aug 2023 08:40:12 +0000
+Received: by outflank-mailman (input) for mailman id 581925;
  Thu, 10 Aug 2023 08:40:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MZIv=D3=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qU1DH-0005MW-AQ
+ id 1qU1DH-0005Mc-Aj
  for xen-devel@lists.xenproject.org; Thu, 10 Aug 2023 08:40:11 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 844667fe-3759-11ee-b283-6b7b168915f2;
- Thu, 10 Aug 2023 10:40:10 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7d9acf43-3759-11ee-8613-37d641c3527e;
+ Thu, 10 Aug 2023 10:39:59 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id B79434EE0743;
- Thu, 10 Aug 2023 10:40:09 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id D242D4EE0742;
+ Thu, 10 Aug 2023 10:40:08 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 844667fe-3759-11ee-b283-6b7b168915f2
+X-Inumbo-ID: 7d9acf43-3759-11ee-8613-37d641c3527e
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -54,57 +54,45 @@ Cc: sstabellini@kernel.org,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 3/7] xen/include: make a declaration of 'get_sec' visible where needed
-Date: Thu, 10 Aug 2023 10:39:43 +0200
-Message-Id: <37fed394315c24e7b7419e564696a534886f0d53.1691655814.git.nicola.vetrini@bugseng.com>
+	Wei Liu <wl@xen.org>,
+	Luca Fancellu <luca.fancellu@arm.com>
+Subject: [XEN PATCH v2 2/7] xen: make 'saved_cmdline' static
+Date: Thu, 10 Aug 2023 10:39:42 +0200
+Message-Id: <3a3f56b54b7051a9a741f5b54e8bc266b451c5e4.1691655814.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1691655814.git.nicola.vetrini@bugseng.com>
 References: <cover.1691655814.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-A declaration for 'get_sec' is added in 'xen/include/xen/time.h' to
-be available for every call site (in particular 'cper.h').
-This also resolves a violation of MISRA C:2012 Rule 8.4.
+The variable 'saved_cmdline' can be defined static,
+as its only uses are within the same file. This in turn avoids
+violating Rule 8.4 because no declaration is present.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Fixes: c8cb30cfc87a ("mce: Provide ERST interface")
+Fixes: e6ee01ad24b6 ("xen/version: Drop compat/kernel.c")
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in v2:
 - Revised commit message
-- Split patch
 ---
- xen/include/xen/cper.h | 3 +--
- xen/include/xen/time.h | 1 +
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ xen/common/kernel.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/include/xen/cper.h b/xen/include/xen/cper.h
-index 7c6a4c45ce32..de8f385bdd5c 100644
---- a/xen/include/xen/cper.h
-+++ b/xen/include/xen/cper.h
-@@ -23,8 +23,7 @@
+diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+index fb919f3d9c38..52aa28762782 100644
+--- a/xen/common/kernel.c
++++ b/xen/common/kernel.c
+@@ -28,7 +28,7 @@ CHECK_feature_info;
  
- #include <xen/types.h>
- #include <xen/string.h>
--
--extern unsigned long get_sec(void);
-+#include <xen/time.h>
+ enum system_state system_state = SYS_STATE_early_boot;
  
- typedef struct {
- 	uint8_t b[16];
-diff --git a/xen/include/xen/time.h b/xen/include/xen/time.h
-index 5aafdda4f392..67c586b7369c 100644
---- a/xen/include/xen/time.h
-+++ b/xen/include/xen/time.h
-@@ -36,6 +36,7 @@ s_time_t get_s_time_fixed(u64 at_tick);
- s_time_t get_s_time(void);
- unsigned long get_localtime(struct domain *d);
- uint64_t get_localtime_us(struct domain *d);
-+unsigned long get_sec(void);
+-xen_commandline_t saved_cmdline;
++static xen_commandline_t saved_cmdline;
+ static const char __initconst opt_builtin_cmdline[] = CONFIG_CMDLINE;
  
- struct tm {
-     int     tm_sec;         /* seconds */
+ static int assign_integer_param(const struct kernel_param *param, uint64_t val)
 -- 
 2.34.1
 
