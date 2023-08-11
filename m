@@ -4,29 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39502C001B0
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 14:32:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.582499.912293 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8EFAC001DB
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 14:33:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.582503.912303 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUTBc-0004TG-0F; Fri, 11 Aug 2023 14:32:20 +0000
+	id 1qUTCH-00050n-8U; Fri, 11 Aug 2023 14:33:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 582499.912293; Fri, 11 Aug 2023 14:32:19 +0000
+Received: by outflank-mailman (output) from mailman id 582503.912303; Fri, 11 Aug 2023 14:33:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUTBb-0004T9-TE; Fri, 11 Aug 2023 14:32:19 +0000
-Received: by outflank-mailman (input) for mailman id 582499;
- Fri, 11 Aug 2023 14:32:18 +0000
+	id 1qUTCH-00050g-5t; Fri, 11 Aug 2023 14:33:01 +0000
+Received: by outflank-mailman (input) for mailman id 582503;
+ Fri, 11 Aug 2023 14:33:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hSUX=D4=citrix.com=prvs=58088f632=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1qUTBa-00049h-IO
- for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 14:32:18 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id de3e8300-3853-11ee-b284-6b7b168915f2;
- Fri, 11 Aug 2023 16:32:17 +0200 (CEST)
+ <SRS0=zNma=D4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1qUTCF-00049h-V0
+ for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 14:33:00 +0000
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [2a00:1450:4864:20::132])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f8364630-3853-11ee-b284-6b7b168915f2;
+ Fri, 11 Aug 2023 16:32:59 +0200 (CEST)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-4fe28e4671dso3281410e87.0
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Aug 2023 07:32:59 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ q2-20020ac25a02000000b004fe07f06337sm753453lfn.53.2023.08.11.07.32.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Aug 2023 07:32:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,75 +46,247 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: de3e8300-3853-11ee-b284-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1691764337;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=QSD97pX4rIQFsdB9WrmfNuasn0tkdiTxkR97JAfxjbA=;
-  b=cTYLzgDZfY8/5VtNDc2RbcapHhPZrh65Wdan+g2YGmkdz/q7jzyx6LXO
-   LI5WBtYW4maVVwn2npwgcw0RsglvT8CFSU8iwjFwlVUlVHvxLyLsJio5G
-   OdIvmTxKLlysJk59jfLPeu4T/kRj2FpwlFROHn87B3XHXjZdWZfnUUFAw
-   Q=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 117921539
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:CSxFn6gz7kTBmiZVRPtkpF4GX161sBAKZh0ujC45NGQN5FlHY01je
- htvXmGAPK7fMDP2fN5/Po/joRgOscOEzNNkQFNk+Hg0Engb9cadCdqndUqhZCn6wu8v7q5Ex
- 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
- cKai8DEMRqu1iUc3lg8sspvkzsx+qyr0N8klgZmP6sT7AaHzyN94K83fsldEVOpGuG4IcbiL
- wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
- OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
- tQFdm8iXDCEm9iP3a28YeQxtOExHdPkadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
- pRDL2A1NVKZPkMJYw1MYH49tL7Aan3XejtEqFWTtOwv7nLa1gBZ27nxKtvFPNeNQK25m27B/
- z2XpT2kWUBy2Nq31QSqyniOl+P1thjbB7s+Hpme5qcxqQjGroAUIEJPDgbqyRWjsWa8Ud9CL
- 00f+gI1sLM/skesS7HVTxC+5XKJoBMYc95RCPEhrhGAzLLO5ASUDXRCSSROAPQkqcs3SDoCx
- lKP2dTzClRHq6aJQHiQ8rOVqzKaOiUPK2IGIygeQmMt/N3LsIw1yBXVQb5LGba4lNTvFRnsw
- jqBq241gLB7sCIQ//zlpxad2Wvq/8WXCFdvvW07Q15J8CtkOtGKVayv9WLi8OlHB4vEfHyTj
- WILzp32AP81MbmBkymEQeMoFb6v5uqYPDC0vWODD6XN5Bz2pSf9INk4DCVWYR4wb51aIWOBj
- Fr741s52XNFAJe9gUabiaqVAt9i86XvHM+Nuhv8PosXOcgZmONqEUhTia+sM4LFyhREfUIXY
- 83znSOQ4ZEyWMxaIMKeHbt17FPS7nlWKZnvbZ761Q+79rGVeWSYT7wIWHPXMLFgsvLe+lqEr
- YsEXydv9/m5eLehCsUw2dRJRW3m0FBhXcymwyCpXrHrzvVa9JEJVKaKnOJJl31NlKVJjObYl
- kxRqWcBoGcTcUbvcF3QAlg6MeOHYHqKhS5jVcDaFQryiidLjEfGxPt3SqbbipF7rbQ8nKQoH
- 6JZEyhCa9wWIgn6F/0mRcGVhORfmN6D31nm0/aNCNTnQ6Ndeg==
-IronPort-HdrOrdr: A9a23:pLkEaK74nPGkI6W+mwPXwMjXdLJyesId70hD6qhwISY6TiW9rb
- HLoB17726QtN9/YhwdcLy7VJVoBEmskqKdgrNhX4tKPjOHhILAFugLhuHfKn/bak7DH4ZmpM
- FdmsNFaeEYY2IUsfrH
-X-Talos-CUID: 9a23:NAw1YG8AjX9LGI26TBiVv1NKRe8XUnrB9k7NPEiTBDtbba+kU1DFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3AWIopSg0GcWaokUxif+76HUdYpTUj/5qBMEovgJk?=
- =?us-ascii?q?8kPKkahVcMRO7nG3sa9py?=
-X-IronPort-AV: E=Sophos;i="6.01,165,1684814400"; 
-   d="scan'208";a="117921539"
-Date: Fri, 11 Aug 2023 15:31:58 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] build: correct gas --noexecstack check
-Message-ID: <ad590b68-ba27-412e-ae9d-e6104c104cf4@perard>
-References: <e5b54663-77c3-5be1-ea54-3f18246bf77f@suse.com>
+X-Inumbo-ID: f8364630-3853-11ee-b284-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1691764379; x=1692369179;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=m8jHaMKqz0HfbXk2J9EkqrL9mGdPZo33L8RyKFfrtek=;
+        b=fdlqZrbaH0gKi00KzPG9s/IrK3X7nR8PjPZvg2UWwNEUsT70z2RhysrSdXrWXwHzw+
+         zLVxLb9JY6UBPReG8thCEa7lNhoAy1cwBsWda5bT2ggPkTcttMeAY0bUfmxhdU70kMnt
+         Y96CV9RZeCjJbjbbWxI96Oh5RYi5Z8kITenQUWJkWhnqTUZefiZ6C4InM/3plcDSns8H
+         VkJzkTAW/k0PTT4hul0ACb3wmmAVQd9O6E8rF/w4JkrxOy+B9Y/jgUQyEg6gY9eO7SvH
+         RniFpvyyR2p9g3jBiur901Woy5Vpm7YiomceKi3cCa3PvmjQKwGzrPQWl/vAd8WbBygc
+         iprg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691764379; x=1692369179;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=m8jHaMKqz0HfbXk2J9EkqrL9mGdPZo33L8RyKFfrtek=;
+        b=W/Lt7dxdGCHvdjra5erdt07ycBdwHJZj3kQSDltbluWXH/Nbut6zgG+BGAwgx8M0I0
+         ZJdCxQfaSq4qRfgzpYLiEQc+0xMCt7mNcnbaAPrgOKdbbd4LKv1FfVBYkUDz4FIm/WpA
+         KjEDf55hfrlmEjoWdiXrgNw+XRlEeU1Jslx7DLpfMY0V29bGzhLsmkA1QmrfEznHdNbN
+         FWUsTcS5cGIIQ1tCv4iPQD7BfmH1OyOdxFAiZ+naEr2BPxO6vSf9+F5fuvNQNFw96ct8
+         63foEpPSaXSXOfhd6AujIJH7E2+dX3ThOOIA0AKwuNglyinkMrFnyTycWY0zKyACQlUd
+         +pKg==
+X-Gm-Message-State: AOJu0YxTRPnVxaWv11B7V7NlOdJfW7kZclmNpxZwMn04PHLOuY7jRl5c
+	sSqtBv08cHk4shmb2cwaZzifIsafKnU=
+X-Google-Smtp-Source: AGHT+IF1Q8q72UIc0xVO9V0e4F5v7jMaTT86mWd5rfbSM2zcPNlU9v2BoTXjhKKgMx9lbGjS/2wKeA==
+X-Received: by 2002:a19:9148:0:b0:4fb:978e:95b8 with SMTP id y8-20020a199148000000b004fb978e95b8mr1523531lfj.59.1691764378388;
+        Fri, 11 Aug 2023 07:32:58 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v8 1/6] xen/riscv: introduce temporary printk stuff
+Date: Fri, 11 Aug 2023 17:32:50 +0300
+Message-ID: <4d986a1083f35ab66eba6ffde964af3b4453b216.1691763757.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <cover.1691763757.git.oleksii.kurochko@gmail.com>
+References: <cover.1691763757.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <e5b54663-77c3-5be1-ea54-3f18246bf77f@suse.com>
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jul 12, 2023 at 04:23:22PM +0200, Jan Beulich wrote:
-> The check was missing an escape for the inner $, thus breaking things
-> in the unlikely event that the underlying assembler doesn't support this
-> option.
-> 
-> Fixes: 62d22296a95d ("build: silence GNU ld warning about executable stacks")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+The patch introdcuces printk related stuff which should be deleted
+after Xen common code will be available.
 
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V8:
+ - only rebase was done.
+---
+Changes in V7:
+ - only rebase was done.
+---
+Changes in V6:
+ - the patch was introduced in the current patch series (V6)
+---
+ xen/arch/riscv/early_printk.c | 168 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 168 insertions(+)
 
-Thanks,
-
+diff --git a/xen/arch/riscv/early_printk.c b/xen/arch/riscv/early_printk.c
+index 610c814f54..60742a042d 100644
+--- a/xen/arch/riscv/early_printk.c
++++ b/xen/arch/riscv/early_printk.c
+@@ -40,3 +40,171 @@ void early_printk(const char *str)
+         str++;
+     }
+ }
++
++/*
++ * The following #if 1 ... #endif should be removed after printk
++ * and related stuff are ready.
++ */
++#if 1
++
++#include <xen/stdarg.h>
++#include <xen/string.h>
++
++/**
++ * strlen - Find the length of a string
++ * @s: The string to be sized
++ */
++size_t (strlen)(const char * s)
++{
++    const char *sc;
++
++    for (sc = s; *sc != '\0'; ++sc)
++        /* nothing */;
++    return sc - s;
++}
++
++/**
++ * memcpy - Copy one area of memory to another
++ * @dest: Where to copy to
++ * @src: Where to copy from
++ * @count: The size of the area.
++ *
++ * You should not use this function to access IO space, use memcpy_toio()
++ * or memcpy_fromio() instead.
++ */
++void *(memcpy)(void *dest, const void *src, size_t count)
++{
++    char *tmp = (char *) dest, *s = (char *) src;
++
++    while (count--)
++        *tmp++ = *s++;
++
++    return dest;
++}
++
++int vsnprintf(char* str, size_t size, const char* format, va_list args)
++{
++    size_t i = 0; /* Current position in the output string */
++    size_t written = 0; /* Total number of characters written */
++    char* dest = str;
++
++    while ( format[i] != '\0' && written < size - 1 )
++    {
++        if ( format[i] == '%' )
++        {
++            i++;
++
++            if ( format[i] == '\0' )
++                break;
++
++            if ( format[i] == '%' )
++            {
++                if ( written < size - 1 )
++                {
++                    dest[written] = '%';
++                    written++;
++                }
++                i++;
++                continue;
++            }
++
++            /*
++             * Handle format specifiers.
++             * For simplicity, only %s and %d are implemented here.
++             */
++
++            if ( format[i] == 's' )
++            {
++                char* arg = va_arg(args, char*);
++                size_t arglen = strlen(arg);
++
++                size_t remaining = size - written - 1;
++
++                if ( arglen > remaining )
++                    arglen = remaining;
++
++                memcpy(dest + written, arg, arglen);
++
++                written += arglen;
++                i++;
++            }
++            else if ( format[i] == 'd' )
++            {
++                int arg = va_arg(args, int);
++
++                /* Convert the integer to string representation */
++                char numstr[32]; /* Assumes a maximum of 32 digits */
++                int numlen = 0;
++                int num = arg;
++                size_t remaining;
++
++                if ( arg < 0 )
++                {
++                    if ( written < size - 1 )
++                    {
++                        dest[written] = '-';
++                        written++;
++                    }
++
++                    num = -arg;
++                }
++
++                do
++                {
++                    numstr[numlen] = '0' + num % 10;
++                    num = num / 10;
++                    numlen++;
++                } while ( num > 0 );
++
++                /* Reverse the string */
++                for (int j = 0; j < numlen / 2; j++)
++                {
++                    char tmp = numstr[j];
++                    numstr[j] = numstr[numlen - 1 - j];
++                    numstr[numlen - 1 - j] = tmp;
++                }
++
++                remaining = size - written - 1;
++
++                if ( numlen > remaining )
++                    numlen = remaining;
++
++                memcpy(dest + written, numstr, numlen);
++
++                written += numlen;
++                i++;
++            }
++        }
++        else
++        {
++            if ( written < size - 1 )
++            {
++                dest[written] = format[i];
++                written++;
++            }
++            i++;
++        }
++    }
++
++    if ( size > 0 )
++        dest[written] = '\0';
++
++    return written;
++}
++
++void printk(const char *format, ...)
++{
++    static char buf[1024];
++
++    va_list args;
++    va_start(args, format);
++
++    (void)vsnprintf(buf, sizeof(buf), format, args);
++
++    early_printk(buf);
++
++    va_end(args);
++}
++
++#endif
++
 -- 
-Anthony PERARD
+2.41.0
+
 
