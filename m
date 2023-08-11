@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AAE7C001DB
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 14:37:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.582539.912358 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43018C001DB
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 14:49:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.582553.912372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUTGY-00089U-CS; Fri, 11 Aug 2023 14:37:26 +0000
+	id 1qUTRZ-0001qz-Di; Fri, 11 Aug 2023 14:48:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 582539.912358; Fri, 11 Aug 2023 14:37:26 +0000
+Received: by outflank-mailman (output) from mailman id 582553.912372; Fri, 11 Aug 2023 14:48:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUTGY-00088x-7G; Fri, 11 Aug 2023 14:37:26 +0000
-Received: by outflank-mailman (input) for mailman id 582539;
- Fri, 11 Aug 2023 14:37:24 +0000
+	id 1qUTRZ-0001qs-BA; Fri, 11 Aug 2023 14:48:49 +0000
+Received: by outflank-mailman (input) for mailman id 582553;
+ Fri, 11 Aug 2023 14:48:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zNma=D4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qUTCJ-00049h-WA
- for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 14:33:04 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Ud7f=D4=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qUTRY-0001qm-BJ
+ for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 14:48:48 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f9ca3bd4-3853-11ee-b284-6b7b168915f2;
- Fri, 11 Aug 2023 16:33:02 +0200 (CEST)
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-4fe216edaf7so3719472e87.0
- for <xen-devel@lists.xenproject.org>; Fri, 11 Aug 2023 07:33:01 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- q2-20020ac25a02000000b004fe07f06337sm753453lfn.53.2023.08.11.07.33.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Aug 2023 07:33:00 -0700 (PDT)
+ id 2d0f511a-3856-11ee-b284-6b7b168915f2;
+ Fri, 11 Aug 2023 16:48:47 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B55A81F890;
+ Fri, 11 Aug 2023 14:48:46 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5CA0D138E2;
+ Fri, 11 Aug 2023 14:48:46 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id Ct4VFU5K1mTfIwAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 11 Aug 2023 14:48:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,313 +53,171 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9ca3bd4-3853-11ee-b284-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691764381; x=1692369181;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WxemZPSrKphIU1DOnZWltN7srrgDFj6wafS5aBn4TaY=;
-        b=RledqS7a4a44XsG7EKTMY24d/SDPhktwyck2xu6KGzJ7wyApw2dfUkQd7Kryd3TO1/
-         a5TgrjPSpWXNbIEhgiP1MnemhYvo/Lr102dhbYyr9A6jTFWPOHyuRdA584aSCTQeEO1S
-         1MQiQeqq0GFpRj/dpFRe7uVBzXr0aVrIQYwmpfMTu/quwxag+61u6TDRZXrmLEhLJ/4I
-         n4hVXqoug9eVGd6w20vIrfK4eroSNCicM04l5OCxpWrUD+EamEGvlA0JrpZaTFHCcUc7
-         C9Kfnct8VHop8wCVc69ObTkBuNfHeafbAXIxFe6eFzyLKYAj3i5DaE399QspFyDppNnq
-         qCfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691764381; x=1692369181;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=WxemZPSrKphIU1DOnZWltN7srrgDFj6wafS5aBn4TaY=;
-        b=ft+g4b0aH+l074sNllTs/DVG/2admK8Pt3eGu3PhEIsAblkj/wP5AWaZwFs3TI7xX0
-         RMxMeelta3TfHaU01FiRlTp34ZuB6DSTdOL6EQqXjRhwlFUI8YrVjAOHR+Y/hdlE5bLF
-         uuuHUz5XCFqifj1crin61aviR04x/xEDkN6jKyACQOsRIz4rhGF4v/9MMKFEcuu3/3U4
-         shE2+8MMUip7Sv2ySkxAny2UGKgLlD92djRXA7/uVHLx9U7oDwXl/xvAs10m9s6ApRTy
-         GX3KhcqlfTE2d/tWieNlb/mxz6E7CWZs+WR07AS6hT9LSse33EoGDmMgFmVBX47+ccT3
-         m7wg==
-X-Gm-Message-State: AOJu0Yy4GMyHxyPDIVPOt+uBiv9qJ8A1Q8LQVysvunc9dN50Csy4YVX9
-	oVKCEDa9k1zB7Bk1QlIr/rTq98zotSw=
-X-Google-Smtp-Source: AGHT+IFdYvM9CDX0s6tuokZtE3ADXkxDijqkkbycTjKUe2GpoqCgYMO++xnf4wBPtEU2jr/fZOk7aA==
-X-Received: by 2002:a05:6512:3d8b:b0:4fd:d226:adcc with SMTP id k11-20020a0565123d8b00b004fdd226adccmr2129948lfv.21.1691764380992;
-        Fri, 11 Aug 2023 07:33:00 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v8 5/6] xen/riscv: implement do_bug_frame()
-Date: Fri, 11 Aug 2023 17:32:54 +0300
-Message-ID: <bb1ebda319fc6f74456306a4051dd6da721bb797.1691763757.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1691763757.git.oleksii.kurochko@gmail.com>
-References: <cover.1691763757.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 2d0f511a-3856-11ee-b284-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1691765326; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Gw52YPmnJbwbBui3jMLpskbzPI80Nh14yVsnnlONxsk=;
+	b=FCCNBvqHru32bhc8TbaxBFcFU0nAAL5mMdjW1sCrAc2Y1lUMUvAXDq/BTAxR3gXQNoiDoQ
+	wGxSqlpsR01QwTqKHY3Ph5QjnxDvqiEWPNijQyKtrC2sn3tLa3v9xg4Eg2ix0Acy4MZADt
+	IU/ILViVUL0gNz39+KovsZLT4eVD2Oo=
+Message-ID: <90fea352-28f1-44b3-af68-4164923e0415@suse.com>
+Date: Fri, 11 Aug 2023 16:48:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/xen: Make virt_to_pfn() a static inline
+Content-Language: en-US
+To: Linus Walleij <linus.walleij@linaro.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+References: <20230810-virt-to-phys-x86-xen-v1-1-9e966d333e7a@linaro.org>
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20230810-virt-to-phys-x86-xen-v1-1-9e966d333e7a@linaro.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------LyyBIubDDvwubRKKekZ0lyPg"
 
-The patch introduces the temporary implementation of do_bug_frame().
-When common code is merged, CONFIG_GENERIC_BUG_FRAME should
-be used instead.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------LyyBIubDDvwubRKKekZ0lyPg
+Content-Type: multipart/mixed; boundary="------------0mo6g77IQFk0gt5SdmlFBb8L";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Linus Walleij <linus.walleij@linaro.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Message-ID: <90fea352-28f1-44b3-af68-4164923e0415@suse.com>
+Subject: Re: [PATCH] x86/xen: Make virt_to_pfn() a static inline
+References: <20230810-virt-to-phys-x86-xen-v1-1-9e966d333e7a@linaro.org>
+In-Reply-To: <20230810-virt-to-phys-x86-xen-v1-1-9e966d333e7a@linaro.org>
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V8:
-  - remove Pointless initializer of id.
-  - make bug_frames[] array constant.
-  - remove cast_to_bug_frame(addr).
-  - rename is_valig_bugaddr to is_valid_bug_insn().
-  - add check that read_instr is used only on xen code
-  - update the commit message.
----
-Changes in V7:
- - move to this patch the definition of cast_to_bug_frame() from the previous patch.
- - update the comment in bug.h.
- - update the comment above do_bug_frame().
- - fix code style.
- - add comment to read_instr func.
- - add space for bug_frames in lds.S. 
----
-Changes in V6:
-  - Avoid LINK_TO_LOAD() as bug.h functionality expected to be used
-    after MMU is enabled.
-  - Change early_printk() to printk()
----
-Changes in V5:
-  - Remove "#include <xen/types.h>" from <asm/bug.h> as there is no any need in it anymore
-  - Update macros GET_INSN_LENGTH: remove UL and 'unsigned int len;' from it
-  - Remove " include <xen/bug.h>" from risc/setup.c. it is not needed in the current version of
-    the patch
-  - change an argument type from vaddr_t to uint32_t for is_valid_bugaddr and introduce read_instr() to
-    read instruction properly as the length of qinstruction can be either 32 or 16 bits.
-  - Code style fixes
-  - update the comments before do_bug_frame() in riscv/trap.c
-  - Refactor is_valid_bugaddr() function.
-  - introduce macros cast_to_bug_frame(addr) to hide casts.
-  - use LINK_TO_LOAD() for addresses which are linker time relative.
----
-Changes in V4:
-  - Updates in RISC-V's <asm/bug.h>:
-    * Add explanatory comment about why there is only defined for 32-bits length
-      instructions and 16/32-bits BUG_INSN_{16,32}.
-    * Change 'unsigned long' to 'unsigned int' inside GET_INSN_LENGTH().
-    * Update declaration of is_valid_bugaddr(): switch return type from int to bool
-      and the argument from 'unsigned int' to 'vaddr'.
-  - Updates in RISC-V's traps.c:
-    * replace /xen and /asm includes 
-    * update definition of is_valid_bugaddr():switch return type from int to bool
-      and the argument from 'unsigned int' to 'vaddr'. Code style inside function
-      was updated too.
-    * do_bug_frame() refactoring:
-      * local variables start and bug became 'const struct bug_frame'
-      * bug_frames[] array became 'static const struct bug_frame[] = ...'
-      * remove all casts
-      * remove unneeded comments and add an explanatory comment that the do_bug_frame()
-        will be switched to a generic one.
-    * do_trap() refactoring:
-      * read 16-bits value instead of 32-bits as compressed instruction can
-        be used and it might happen than only 16-bits may be accessible.
-      * code style updates
-      * re-use instr variable instead of re-reading instruction.
-  - Updates in setup.c:
-    * add blank line between xen/ and asm/ includes.
----
-Changes in V3:
-  - Rebase the patch "xen/riscv: introduce an implementation of macros
-    from <asm/bug.h>" on top of patch series [introduce generic implementation
-    of macros from bug.h]
----
-Changes in V2:
-  - Remove __ in define namings
-  - Update run_in_exception_handler() with
-    register void *fn_ asm(__stringify(BUG_FN_REG)) = (fn);
-  - Remove bug_instr_t type and change it's usage to uint32_t
----
- xen/arch/riscv/traps.c   | 138 +++++++++++++++++++++++++++++++++++++++
- xen/arch/riscv/xen.lds.S |  10 +++
- 2 files changed, 148 insertions(+)
+--------------0mo6g77IQFk0gt5SdmlFBb8L
+Content-Type: multipart/mixed; boundary="------------GkKNuK07sT0oo4ArMpofhz2w"
 
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index c1175668b6..b096dce6c7 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -5,6 +5,8 @@
-  * RISC-V Trap handlers
-  */
- 
-+#include <xen/bug.h>
-+#include <xen/errno.h>
- #include <xen/lib.h>
- 
- #include <asm/csr.h>
-@@ -101,7 +103,143 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
-     die();
- }
- 
-+void show_execution_state(const struct cpu_user_regs *regs)
-+{
-+    printk("implement show_execution_state(regs)\n");
-+}
-+
-+/*
-+ * TODO: generic do_bug_frame() should be used instead of current
-+ * implementation panic(), printk() and find_text_region()
-+ * (virtual memory?) will be ready/merged
-+ */
-+int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
-+{
-+    const struct bug_frame *start, *end;
-+    const struct bug_frame *bug = NULL;
-+    unsigned int id;
-+    const char *filename, *predicate;
-+    int lineno;
-+
-+    static const struct bug_frame * const bug_frames[] = {
-+        &__start_bug_frames[0],
-+        &__stop_bug_frames_0[0],
-+        &__stop_bug_frames_1[0],
-+        &__stop_bug_frames_2[0],
-+        &__stop_bug_frames_3[0],
-+    };
-+
-+    for ( id = 0; id < BUGFRAME_NR; id++ )
-+    {
-+        start = bug_frames[id];
-+        end   = bug_frames[id + 1];
-+
-+        while ( start != end )
-+        {
-+            if ( (vaddr_t)bug_loc(start) == pc )
-+            {
-+                bug = start;
-+                goto found;
-+            }
-+
-+            start++;
-+        }
-+    }
-+
-+ found:
-+    if ( bug == NULL )
-+        return -ENOENT;
-+
-+    if ( id == BUGFRAME_run_fn )
-+    {
-+        void (*fn)(const struct cpu_user_regs *) = bug_ptr(bug);
-+
-+        fn(regs);
-+
-+        goto end;
-+    }
-+
-+    /* WARN, BUG or ASSERT: decode the filename pointer and line number. */
-+    filename = bug_ptr(bug);
-+    lineno = bug_line(bug);
-+
-+    switch ( id )
-+    {
-+    case BUGFRAME_warn:
-+        printk("Xen WARN at %s:%d\n", filename, lineno);
-+
-+        show_execution_state(regs);
-+
-+        goto end;
-+
-+    case BUGFRAME_bug:
-+        printk("Xen BUG at %s:%d\n", filename, lineno);
-+
-+        show_execution_state(regs);
-+
-+        printk("change wait_for_interrupt to panic() when common is available\n");
-+        die();
-+
-+    case BUGFRAME_assert:
-+        /* ASSERT: decode the predicate string pointer. */
-+        predicate = bug_msg(bug);
-+
-+        printk("Assertion %s failed at %s:%d\n", predicate, filename, lineno);
-+
-+        show_execution_state(regs);
-+
-+        printk("change wait_for_interrupt to panic() when common is available\n");
-+        die();
-+    }
-+
-+    return -EINVAL;
-+
-+ end:
-+    return 0;
-+}
-+
-+static bool is_valid_bug_insn(uint32_t insn)
-+{
-+    return insn == BUG_INSN_32 ||
-+           (insn & COMPRESSED_INSN_MASK) == BUG_INSN_16;
-+}
-+
-+/* There are no guests for now so  the func has to return alwasys false */
-+static inline bool guest_mode(void)
-+{
-+    return false;
-+}
-+
-+/* Should be used only on Xen code */
-+static uint32_t read_instr(unsigned long pc)
-+{
-+    uint16_t instr16 = *(uint16_t *)pc;
-+
-+    if ( guest_mode() )
-+    {
-+        printk("%s should be called only on Xen code\n", __func__);
-+        die();
-+    }
-+
-+    if ( GET_INSN_LENGTH(instr16) == 2 )
-+        return instr16;
-+    else
-+        return *(uint32_t *)pc;
-+}
-+
- void do_trap(struct cpu_user_regs *cpu_regs)
- {
-+    register_t pc = cpu_regs->sepc;
-+    uint32_t instr = read_instr(pc);
-+
-+    if ( is_valid_bug_insn(instr) )
-+    {
-+        if ( !do_bug_frame(cpu_regs, pc) )
-+        {
-+            cpu_regs->sepc += GET_INSN_LENGTH(instr);
-+            return;
-+        }
-+    }
-+
-     do_unexpected_trap(cpu_regs);
- }
-diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
-index 3fa7db3bf9..a10e0ad87c 100644
---- a/xen/arch/riscv/xen.lds.S
-+++ b/xen/arch/riscv/xen.lds.S
-@@ -45,6 +45,16 @@ SECTIONS
-     . = ALIGN(PAGE_SIZE);
-     .rodata : {
-         _srodata = .;          /* Read-only data */
-+        /* Bug frames table */
-+        __start_bug_frames = .;
-+        *(.bug_frames.0)
-+        __stop_bug_frames_0 = .;
-+        *(.bug_frames.1)
-+        __stop_bug_frames_1 = .;
-+        *(.bug_frames.2)
-+        __stop_bug_frames_2 = .;
-+        *(.bug_frames.3)
-+        __stop_bug_frames_3 = .;
-         *(.rodata)
-         *(.rodata.*)
-         *(.data.rel.ro)
--- 
-2.41.0
+--------------GkKNuK07sT0oo4ArMpofhz2w
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+T24gMTAuMDguMjMgMDk6MjcsIExpbnVzIFdhbGxlaWogd3JvdGU6DQo+IE1ha2luZyB2aXJ0
+X3RvX3BmbigpIGEgc3RhdGljIGlubGluZSB0YWtpbmcgYSBzdHJvbmdseSB0eXBlZA0KPiAo
+Y29uc3Qgdm9pZCAqKSBtYWtlcyB0aGUgY29udHJhY3Qgb2YgYSBwYXNzaW5nIGEgcG9pbnRl
+ciBvZiB0aGF0DQo+IHR5cGUgdG8gdGhlIGZ1bmN0aW9uIGV4cGxpY2l0IGFuZCBleHBvc2Vz
+IGFueSBtaXN1c2Ugb2YgdGhlDQo+IG1hY3JvIHZpcnRfdG9fcGZuKCkgYWN0aW5nIHBvbHlt
+b3JwaGljIGFuZCBhY2NlcHRpbmcgbWFueSB0eXBlcw0KPiBzdWNoIGFzICh2b2lkICopLCAo
+dW5pdHB0cl90KSBvciAodW5zaWduZWQgbG9uZykgYXMgYXJndW1lbnRzDQo+IHdpdGhvdXQg
+d2FybmluZ3MuDQo+IA0KPiBBbHNvIGZpeCBhbGwgb2ZmZW5kaW5nIGNhbGwgc2l0ZXMgdG8g
+cGFzcyBhICh2b2lkICopIHJhdGhlcg0KPiB0aGFuIGFuIHVuc2lnbmVkIGxvbmcuIFNpbmNl
+IHZpcnRfdG9fbWZuKCkgaXMgd3JhcHBpbmcNCj4gdmlydF90b19wZm4oKSB0aGlzIGZ1bmN0
+aW9uIGhhcyBiZWNvbWUgcG9seW1vcnBoaWMgYXMgd2VsbA0KPiBzbyB0aGUgdXNhZ2UgbmVl
+ZCB0byBiZSBmaXhlZCB1cC4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IExpbnVzIFdhbGxlaWog
+PGxpbnVzLndhbGxlaWpAbGluYXJvLm9yZz4NCg0KQWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3Mg
+PGpncm9zc0BzdXNlLmNvbT4NCg0KDQpKdWVyZ2VuDQoNCg==
+--------------GkKNuK07sT0oo4ArMpofhz2w
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------GkKNuK07sT0oo4ArMpofhz2w--
+
+--------------0mo6g77IQFk0gt5SdmlFBb8L--
+
+--------------LyyBIubDDvwubRKKekZ0lyPg
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmTWSk0FAwAAAAAACgkQsN6d1ii/Ey/X
+5Qf8C7GqyT2mz7CEqG2ZUTnQuF47cxJK++r2KNPIZ1RoC+/FnHzCR1zL7khkuIffxJqktzwxX7QW
+nfFKAqvrCvrOPFebjzewdwkwkI0coeKgDgDMu8eH9ognbZi/2cIm4G+sqjdfC55hxcNP2IbN7pr6
+KiAoswuhEv2i3DslqzQ/8CZvkMLhVItOvqcWAlF0A0cJ7aF7duJV34THQJSU8+789x0OL6s4LYue
+sY3tCVRr50mtjX5B36/AQ6xA/a1WLdTDtzGfz+7u6XgrUD65uEIFkBzvvw7iy1YN3ymna3/XlaiE
+YgJgUnXA76LzJq/TAIIGA5G8NOYMTo0Jfc/wRCphDQ==
+=u8Kt
+-----END PGP SIGNATURE-----
+
+--------------LyyBIubDDvwubRKKekZ0lyPg--
 
