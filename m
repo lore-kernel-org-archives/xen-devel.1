@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1AAC001B0
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 14:33:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.582507.912343 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7591BC41513
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 14:37:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.582538.912353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUTCL-000646-HI; Fri, 11 Aug 2023 14:33:05 +0000
+	id 1qUTGY-00086z-3Q; Fri, 11 Aug 2023 14:37:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 582507.912343; Fri, 11 Aug 2023 14:33:05 +0000
+Received: by outflank-mailman (output) from mailman id 582538.912353; Fri, 11 Aug 2023 14:37:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUTCL-00063x-EN; Fri, 11 Aug 2023 14:33:05 +0000
-Received: by outflank-mailman (input) for mailman id 582507;
- Fri, 11 Aug 2023 14:33:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qUTGY-00086s-0j; Fri, 11 Aug 2023 14:37:26 +0000
+Received: by outflank-mailman (input) for mailman id 582538;
+ Fri, 11 Aug 2023 14:37:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zNma=D4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qUTCJ-0004v5-Us
- for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 14:33:03 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f9bcacf7-3853-11ee-8613-37d641c3527e;
- Fri, 11 Aug 2023 16:33:01 +0200 (CEST)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-4fe4f5290daso3197740e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 11 Aug 2023 07:33:02 -0700 (PDT)
+ id 1qUTCH-00049h-VT
+ for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 14:33:01 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f9208269-3853-11ee-b284-6b7b168915f2;
+ Fri, 11 Aug 2023 16:33:00 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-4fe1489ced6so3309330e87.0
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Aug 2023 07:33:00 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- q2-20020ac25a02000000b004fe07f06337sm753453lfn.53.2023.08.11.07.33.01
+ q2-20020ac25a02000000b004fe07f06337sm753453lfn.53.2023.08.11.07.32.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Aug 2023 07:33:01 -0700 (PDT)
+ Fri, 11 Aug 2023 07:32:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9bcacf7-3853-11ee-8613-37d641c3527e
+X-Inumbo-ID: f9208269-3853-11ee-b284-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691764382; x=1692369182;
+        d=gmail.com; s=20221208; t=1691764380; x=1692369180;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jFpMwQTvtWnzo8KwJdfRA9hSdfLNtSc3JC0W+s/e69Y=;
-        b=P5p5421NCrEG8Ee6OjVvEtTzJqh/gZr4I11F/MVRGw8mylTa77oLnjMUivSurxOrm8
-         kT0ZVuSdvBJwvF2rlVH5af9eQ6yYJqSeBkz+3Icxk9m3BjRV7TtlfpwK0UDA9dxw5yIc
-         e1tFzdOx1oHhkmGSKU82xA1qfYNZxO+Tl0zsLAEI1sPphlXMout0wEXYInSp9p+T8Z27
-         7WyStY3dW05+tRPeHp4HOB4YHsrb+OKa8n0GE2Gjwx7Gt2q10l6FBruaSaX+lv7RYyZe
-         wUOZ6Zo2VUI/yD2PjkmRGLiTxVw7D48tdFcNLX/tYSQmKSC/vmK6s8gCJdtEqI2bXW2y
-         4eXg==
+        bh=Nt7soPoblldHqrs8iwJbMnbI3th3kHrjMiBeC6m3Zr4=;
+        b=cMPfu9KZPOhHwuYJe5Ic3ZCC/qBC+8k5RNGZzZ0LNtY1oFu0pi7gqF/m7Mfrt6UpOk
+         7rPXfc2BpnF7lwRF7OdnspLelDtF4YkDNBPRUY8zL78BhIjKNK1GHGg0B2zuesgCSojb
+         EUEfWmlES0cKFY/W7HZU++baBk4b/PzDepRR/zTHVBQe6xicajFLpu/ZEUZhV6UY5vKT
+         DbJP8BTX3k/Uti5DFwg432RKO+4CsBtiNQZaWNO5TN1nuj3hekiGB5jHn/ooXH2SWyUd
+         48IH54Ds7M1IZH/5MqsQdjDB79qhl/1lZntlgoYsxe8yB1kv8AnWRk/TpEPhpznadYpo
+         G5jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691764382; x=1692369182;
+        d=1e100.net; s=20221208; t=1691764380; x=1692369180;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jFpMwQTvtWnzo8KwJdfRA9hSdfLNtSc3JC0W+s/e69Y=;
-        b=DcB+yDbDSF5/7i012olUijniCxstOR83N6qLsGp4/0ZAXykwRSsY4jopPfRvZPYOJS
-         E6KYX99MKW83jm5ynfASoaizA7tJR7hmthRMQ4Yt2A32mQCa3dQRtlxet1IEnVF7RW6X
-         BRm9uIz/N7saEZwIaSdP59Q2eic2ihFA1aTsVWnCRRQe/xqd1SbEVOI+37Sri57XHwyy
-         he40WxapkySc/PQ+oBCE6buQyPmHB6M4kGYJvw9O/vjBcRd7Mg1iDqqqchxeMmVO2yWq
-         RU4e9qodURbrs57Sc8O/5x5ZE8g6zB1FwJHfhw52VbzAhKgXuKKHaA5fZxe+zQY1EqWj
-         jQQg==
-X-Gm-Message-State: AOJu0YwRwZTjdaELR0clmiZed3dXjOS86yrWXOROCxBYia/ydVWmLaNE
-	7/06096xX6g5RJlftUX7lmNJD6VkT/Q=
-X-Google-Smtp-Source: AGHT+IG6Q6Ixn2L8rvE0G3xiM07jPib5otv7nMk8wxhac8f6YUd0iuw91E+NK5WgQy510PAzqLGYqw==
-X-Received: by 2002:a05:6512:3d1d:b0:4f9:607a:6508 with SMTP id d29-20020a0565123d1d00b004f9607a6508mr1707605lfv.50.1691764381583;
-        Fri, 11 Aug 2023 07:33:01 -0700 (PDT)
+        bh=Nt7soPoblldHqrs8iwJbMnbI3th3kHrjMiBeC6m3Zr4=;
+        b=FZ/Y6Xs1jUoiZzI+EDymXfKQceLg5Y+meAW+IpTONUAap6G8g2VE8IFSEwUS56JHZ2
+         hsmUNfFpw3Z69yFaKXyDlnt+27JGSr4jrdSzculmAP1XJLESY54TGrUuwni48vnJNjsM
+         +cOWS7BSAyiVOOENzK2MXBvmPWKrdUAkNGuzuRLWOshe1XMS18ntDTIDXulZBMFSSSlT
+         2nnf3jt2o4j1RZKDps499ZsJV/qiLJddgc8qBp/ynIItrw2J3dqZ5tbSR7b1MBYtfEiw
+         gRIChDtovIBNNTnXtyw8RT8bN7s9Bn2QZcCDKqFSbD5tHKs7JL2RTfIqK3kF49V3kHBM
+         oS4Q==
+X-Gm-Message-State: AOJu0Yw5QjeKnMVlIv8C2cr/0KfC6tDvma2UfjhryG1LO2F31u+fIF+P
+	xMEfOTVCfKvOnF+nWUlUca2hrVt0sb0=
+X-Google-Smtp-Source: AGHT+IFLritZVFHFNIyx1qPpf3U57eldQaFfs/SVN+5U80NMv5bcu2V+pM3HV3sGy1NKrD/z2JjUyw==
+X-Received: by 2002:a05:6512:2249:b0:4fb:8eec:ce49 with SMTP id i9-20020a056512224900b004fb8eecce49mr1870456lfu.31.1691764380132;
+        Fri, 11 Aug 2023 07:33:00 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -84,9 +84,9 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v8 6/6] xen/riscv: test basic handling stuff
-Date: Fri, 11 Aug 2023 17:32:55 +0300
-Message-ID: <557ee932891edcfd189dfee006317094a9144f10.1691763757.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v8 4/6] xen/riscv: introduce trap_init()
+Date: Fri, 11 Aug 2023 17:32:53 +0300
+Message-ID: <e7e267e4d0032d45e03870c9778e68943d2e0edd.1691763757.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1691763757.git.oleksii.kurochko@gmail.com>
 References: <cover.1691763757.git.oleksii.kurochko@gmail.com>
@@ -94,73 +94,93 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 Changes in V8:
-  - Nothing changed. Only rebase.
+ - nothing changed. only rebase was done.
+---
+Changes in V7:
+ - #define cast_to_bug_frame(addr) ((const struct bug_frame *)(addr)).
+ - remove unnecessary comments in trap_init() function.
 ---
 Changes in V6:
-  - Nothing changed. Only rebase.
----
-Changes in V6:
-  - Nothing changed
+ - trap_init() is now called after enabling the MMU.
+ - Add additional explanatory comments.
 ---
 Changes in V5:
   - Nothing changed
 ---
 Changes in V4:
-  - Add Acked-by: Alistair Francis <alistair.francis@wdc.com>
+  - Nothing changed
 ---
 Changes in V3:
   - Nothing changed
 ---
 Changes in V2:
-  - Nothing changed
+  - Rename setup_trap_handler() to trap_init().
+  - Add Reviewed-by to the commit message.
 ---
- xen/arch/riscv/setup.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ xen/arch/riscv/include/asm/traps.h |  1 +
+ xen/arch/riscv/setup.c             |  3 +++
+ xen/arch/riscv/traps.c             | 12 ++++++++++++
+ 3 files changed, 16 insertions(+)
 
+diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
+index 3fef318478..c30118e095 100644
+--- a/xen/arch/riscv/include/asm/traps.h
++++ b/xen/arch/riscv/include/asm/traps.h
+@@ -9,6 +9,7 @@
+ 
+ void do_trap(struct cpu_user_regs *cpu_regs);
+ void handle_trap(void);
++void trap_init(void);
+ 
+ #endif /* __ASSEMBLY__ */
+ 
 diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index abdd1669c6..ab83f84e67 100644
+index 6593f601c1..abdd1669c6 100644
 --- a/xen/arch/riscv/setup.c
 +++ b/xen/arch/riscv/setup.c
-@@ -1,5 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
+@@ -5,6 +5,7 @@
  
-+#include <xen/bug.h>
- #include <xen/compile.h>
- #include <xen/init.h>
+ #include <asm/early_printk.h>
+ #include <asm/mm.h>
++#include <asm/traps.h>
  
-@@ -11,6 +12,20 @@
+ /* Xen stack for bringing up the first CPU. */
  unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-     __aligned(STACK_SIZE);
- 
-+static void test_run_in_exception(struct cpu_user_regs *regs)
-+{
-+    early_printk("If you see this message, ");
-+    early_printk("run_in_exception_handler is most likely working\n");
-+}
-+
-+static void test_macros_from_bug_h(void)
-+{
-+    run_in_exception_handler(test_run_in_exception);
-+    WARN();
-+    early_printk("If you see this message, ");
-+    early_printk("WARN is most likely working\n");
-+}
-+
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
+@@ -15,6 +16,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
  {
-@@ -18,6 +33,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+     remove_identity_mapping();
  
-     trap_init();
- 
-+    test_macros_from_bug_h();
++    trap_init();
 +
      early_printk("Hello from C env\n");
  
      early_printk("All set up\n");
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index a2b63d579b..c1175668b6 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -12,6 +12,18 @@
+ #include <asm/processor.h>
+ #include <asm/traps.h>
+ 
++/*
++ * Initialize the trap handling.
++ *
++ * The function is called after MMU is enabled.
++ */
++void trap_init(void)
++{
++    unsigned long addr = (unsigned long)&handle_trap;
++
++    csr_write(CSR_STVEC, addr);
++}
++
+ static const char *decode_trap_cause(unsigned long cause)
+ {
+     static const char *const trap_causes[] = {
 -- 
 2.41.0
 
