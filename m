@@ -4,32 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99607C001DB
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 10:32:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.582375.912114 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A99C0015E
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Aug 2023 11:05:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.582381.912124 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUPRJ-0004W0-IC; Fri, 11 Aug 2023 10:32:17 +0000
+	id 1qUPx7-0008KA-2O; Fri, 11 Aug 2023 11:05:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 582375.912114; Fri, 11 Aug 2023 10:32:17 +0000
+Received: by outflank-mailman (output) from mailman id 582381.912124; Fri, 11 Aug 2023 11:05:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qUPRJ-0004Vt-FX; Fri, 11 Aug 2023 10:32:17 +0000
-Received: by outflank-mailman (input) for mailman id 582375;
- Fri, 11 Aug 2023 10:32:16 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1qUPx6-0008K3-W0; Fri, 11 Aug 2023 11:05:08 +0000
+Received: by outflank-mailman (input) for mailman id 582381;
+ Fri, 11 Aug 2023 11:05:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qUPRI-0004Vn-Nc
- for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 10:32:16 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qUPRH-00084u-Ie; Fri, 11 Aug 2023 10:32:15 +0000
-Received: from 54-240-197-234.amazon.com ([54.240.197.234]
- helo=[192.168.207.66]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qUPRH-0002MW-Bn; Fri, 11 Aug 2023 10:32:15 +0000
+ (envelope-from <SRS0=fQ3J=D4=suse.cz=jack@srs-se1.protection.inumbo.net>)
+ id 1qUPx5-0008Js-UF
+ for xen-devel@lists.xenproject.org; Fri, 11 Aug 2023 11:05:08 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ed8acbd5-3836-11ee-b284-6b7b168915f2;
+ Fri, 11 Aug 2023 13:05:06 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id BD1191F891;
+ Fri, 11 Aug 2023 11:05:05 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B031C139FD;
+ Fri, 11 Aug 2023 11:05:05 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id P7n/KuEV1mRGRQAAMHmgww
+ (envelope-from <jack@suse.cz>); Fri, 11 Aug 2023 11:05:05 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id E0560A077F; Fri, 11 Aug 2023 13:05:04 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,145 +55,219 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=ktTYnxaJliQmP6svwaLVJ0Ml4z0+NKivmbjfpX2UNjg=; b=wS0bj8eDd1I8kpL3ndrziL62KM
-	fiQmnYd7K8Yy7bc979XbOiQlYTjA7IguhY9Rq/b1fXWhvOs7imx8xUBgY1B6pGru29WjXIQBrdBBk
-	gKvNdaADgUCROotrzLY00gOwmbo63wKImfL+ThxcjWiCkNNPUGdvE76TAxLVbb1Q2Zcw=;
-Message-ID: <63f1ba1f-05ec-4400-9804-43948989d550@xen.org>
-Date: Fri, 11 Aug 2023 11:32:13 +0100
+X-Inumbo-ID: ed8acbd5-3836-11ee-b284-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1691751905; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=o4+jKqQ1x0Ey1yIHBqwsn99vq9xGiNmltJzcj4Snsx4=;
+	b=NymZwWCmDVPf+oAdkRp6Fd3W33uCeIVi+mDXP+gMel/Ag9XuCoE75HkGLq87VAtzoY82Pm
+	NRBGYqUSqo7VuWbrTkTzLCA0urGSKJ/5ochKyN1G0WVh4j4TjzEhOXMakth4zvXTMyjtXs
+	phXifH8SKsqXtabIeHdhAQ6M8qKgMH4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1691751905;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=o4+jKqQ1x0Ey1yIHBqwsn99vq9xGiNmltJzcj4Snsx4=;
+	b=GsSZk6dIGu7xkC6a1rGWdt52tNx1adZtbaEtcaKG74D2xlinnFSyKWvF4DBqQnfyI5MBxR
+	hwouiESDYmn+fWDw==
+From: Jan Kara <jack@suse.cz>
+To: <linux-fsdevel@vger.kernel.org>
+Cc: <linux-block@vger.kernel.org>,
+	Christoph Hellwig <hch@infradead.org>,
+	Jan Kara <jack@suse.cz>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH 07/29] xen/blkback: Convert to bdev_open_by_dev()
+Date: Fri, 11 Aug 2023 13:04:38 +0200
+Message-Id: <20230811110504.27514-7-jack@suse.cz>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230810171429.31759-1-jack@suse.cz>
+References: <20230810171429.31759-1-jack@suse.cz>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] tools/light: Revoke permissions when a PCI detach for
- HVM domain
-Content-Language: en-GB
-To: Jason Andryuk <jandryuk@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
- Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
- Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <20230809103305.30561-1-julien@xen.org>
- <20230809103305.30561-3-julien@xen.org>
- <CAKf6xpvLtOTH-WVz8B6df=WF5M=Cng8BBWTvOOJ3C1N8QbqWWA@mail.gmail.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <CAKf6xpvLtOTH-WVz8B6df=WF5M=Cng8BBWTvOOJ3C1N8QbqWWA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6152; i=jack@suse.cz; h=from:subject; bh=BtKISSNjUPlIJ2mx01CaoHxKal+UUOpgJzDPeV+Tjng=; b=owEBbQGS/pANAwAIAZydqgc/ZEDZAcsmYgBk1hXJTAApujvhW+MJCl3UP6VxhTukhoQX0oarVPIN qZbOtKeJATMEAAEIAB0WIQSrWdEr1p4yirVVKBycnaoHP2RA2QUCZNYVyQAKCRCcnaoHP2RA2YTBCA CGxviiVkdtcZrheoDeTPAHsM7pySrLUYJzmmOtb66fig1K8eNsZaga/HYJbzFzqEARVS6BHDnBMlS3 O6ZPWXyrpodgPwsFXMfYq75Qm4aYI/emJOyrnM3Eg5TRgBaYBgBwKimM3309HZVfpmKEXA+l2JqpnN N1GFvI9ldoBqGQfiATVauUfxihdiK0b7Ci5P6Q6B/FABpjHt+kD2mOftlwneWhBtpWzPbo77dCeIq6 U5qLYZLH8KswL1ZMes46IO8lZ6pC8GnmqswRKSRwsLfsX3pCaY5rhmakO5hIhf6L3AcqUD519hed5z L1KRtGnxJ+LiyTUMYbQ1H0ZIb4KQeO
+X-Developer-Key: i=jack@suse.cz; a=openpgp; fpr=93C6099A142276A28BBE35D815BC833443038D8C
 Content-Transfer-Encoding: 8bit
 
-Hi Jason,
+Convert xen/blkback to use bdev_open_by_dev() and pass the
+handle around.
 
-On 10/08/2023 21:02, Jason Andryuk wrote:
-> On Wed, Aug 9, 2023 at 6:34 AM Julien Grall <julien@xen.org> wrote:
->>
->> From: Julien Grall <jgrall@amazon.com>
->>
->> Currently, libxl will grant IOMEM, I/O port and IRQ permissions when
->> a PCI is attached (see pci_add_dm_done()) for all domain types. However,
->> the permissions are only revoked for non-HVM domain (see do_pci_remove()).
->>
->> This means that HVM domains will be left with extra permissions. While
->> this look bad on the paper, the IRQ permissions should be revoked
->> when the Device Model call xc_physdev_unmap_pirq() and such domain
->> cannot directly mapped I/O port and IOMEM regions. Instead, this has to
->> be done by a Device Model.
->>
->> The Device Model can only run in dom0 or PV stubdomain (upstream libxl
->> doesn't have support for HVM/PVH stubdomain).
->>
->> For PV/PVH stubdomain, the permission are properly revoked, so there is
->> no security concern.
->>
->> This leaves dom0. There are two cases:
->>    1) Privileged: Anyone gaining access to the Device Model would already
->>       have large control on the host.
->>    2) Deprivileged: PCI passthrough require PHYSDEV operations which
->>       are not accessible when the Device Model is restricted.
->>
->> So overall, it is believed that the extra permissions cannot be exploited.
->>
->> Rework the code so the permissions are all removed for HVM domains.
->> This needs to happen after the QEMU has detached the device. So
->> the revocation is now moved in a separate function which is called
->> from pci_remove_detached().
->>
->> Signed-off-by: Julien Grall <jgrall@amazon.com>
-> 
-> Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
+CC: xen-devel@lists.xenproject.org
+Signed-off-by: Jan Kara <jack@suse.cz>
+---
+ drivers/block/xen-blkback/blkback.c |  4 +--
+ drivers/block/xen-blkback/common.h  |  4 +--
+ drivers/block/xen-blkback/xenbus.c  | 40 +++++++++++++++--------------
+ 3 files changed, 25 insertions(+), 23 deletions(-)
 
-Thanks for the review!
-
-> 
-> With one suggestion below
-> 
->> ---
->>
->> TODO: I am getting a bit confused with the async work in libxl. I am
->> not entirely sure whether pci_remove_detached() is the correct place
->> to revoke.
-> 
-> I think the location is fine.
-> 
->> TODO: For HVM, we are now getting the following error on detach:
->> libxl: error: libxl_pci.c:2009:pci_revoke_permissions: Domain 3:xc_physdev_unmap_pirq irq=23: Invalid argument
->>
->> This is because the IRQ was unmapped by QEMU. It doesn't feel
->> right to skip the call. So maybe we can ignore the error?
-> 
-> Sounds reasonable.  Would be better if we could clearly differentiate
-> between QEMU already unmapped and some other EINVAL error.
-
-The only way I could think is to have a distinct errno in Xen to 
-indicate the PIRQ is not mapped. CCing the x86 maintainers to check if 
-they would be ok with that.
-
-> 
->> ---
->>   tools/libs/light/libxl_pci.c | 142 ++++++++++++++++++++---------------
->>   1 file changed, 80 insertions(+), 62 deletions(-)
->>
->> diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
->> index 7f5f170e6eb0..f5a4b88eb2c0 100644
->> --- a/tools/libs/light/libxl_pci.c
->> +++ b/tools/libs/light/libxl_pci.c
->> @@ -1943,6 +1943,79 @@ static void pci_remove_stubdom_done(libxl__egc *egc,
->>   static void pci_remove_done(libxl__egc *egc,
->>       pci_remove_state *prs, int rc);
->>
->> +static void pci_revoke_permissions(libxl__egc *egc, pci_remove_state *prs)
->> +{
->> +    STATE_AO_GC(prs->aodev->ao);
->> +    libxl_ctx *ctx = libxl__gc_owner(gc);
->> +    const libxl_device_pci *pci = &prs->pci;
->> +    const char *sysfs_path;
->> +    uint32_t domid = prs->domid;
->> +    FILE *f;
->> +    unsigned int start = 0, end = 0, flags = 0, size = 0;
-> 
-> These variables ...
-> 
->> +    int irq = 0;
->> +    int i, rc;
->> +
->> +    sysfs_path = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/resource",
->> +                           pci->domain, pci->bus, pci->dev, pci->func);
->> +
->> +    f = fopen(sysfs_path, "r");
->> +    if (f == NULL) {
->> +        LOGED(ERROR, domid, "Couldn't open %s", sysfs_path);
->> +        goto skip_bar;
->> +    }
->> +
->> +    for (i = 0; i < PROC_PCI_NUM_RESOURCES; i++) {
-> 
-> ... could move into the loop here.
-
-You are right. I will respin the patch with this change and whatever we 
-decide for the unmap error.
-
-Cheers,
-
+diff --git a/drivers/block/xen-blkback/blkback.c b/drivers/block/xen-blkback/blkback.c
+index c362f4ad80ab..4defd7f387c7 100644
+--- a/drivers/block/xen-blkback/blkback.c
++++ b/drivers/block/xen-blkback/blkback.c
+@@ -465,7 +465,7 @@ static int xen_vbd_translate(struct phys_req *req, struct xen_blkif *blkif,
+ 	}
+ 
+ 	req->dev  = vbd->pdevice;
+-	req->bdev = vbd->bdev;
++	req->bdev = vbd->bdev_handle->bdev;
+ 	rc = 0;
+ 
+  out:
+@@ -969,7 +969,7 @@ static int dispatch_discard_io(struct xen_blkif_ring *ring,
+ 	int err = 0;
+ 	int status = BLKIF_RSP_OKAY;
+ 	struct xen_blkif *blkif = ring->blkif;
+-	struct block_device *bdev = blkif->vbd.bdev;
++	struct block_device *bdev = blkif->vbd.bdev_handle->bdev;
+ 	struct phys_req preq;
+ 
+ 	xen_blkif_get(blkif);
+diff --git a/drivers/block/xen-blkback/common.h b/drivers/block/xen-blkback/common.h
+index 40f67bfc052d..5ff50e76cee5 100644
+--- a/drivers/block/xen-blkback/common.h
++++ b/drivers/block/xen-blkback/common.h
+@@ -221,7 +221,7 @@ struct xen_vbd {
+ 	unsigned char		type;
+ 	/* phys device that this vbd maps to. */
+ 	u32			pdevice;
+-	struct block_device	*bdev;
++	struct bdev_handle	*bdev_handle;
+ 	/* Cached size parameter. */
+ 	sector_t		size;
+ 	unsigned int		flush_support:1;
+@@ -360,7 +360,7 @@ struct pending_req {
+ };
+ 
+ 
+-#define vbd_sz(_v)	bdev_nr_sectors((_v)->bdev)
++#define vbd_sz(_v)	bdev_nr_sectors((_v)->bdev_handle->bdev)
+ 
+ #define xen_blkif_get(_b) (atomic_inc(&(_b)->refcnt))
+ #define xen_blkif_put(_b)				\
+diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
+index bb66178c432b..e34219ea2b05 100644
+--- a/drivers/block/xen-blkback/xenbus.c
++++ b/drivers/block/xen-blkback/xenbus.c
+@@ -81,7 +81,7 @@ static void xen_update_blkif_status(struct xen_blkif *blkif)
+ 	int i;
+ 
+ 	/* Not ready to connect? */
+-	if (!blkif->rings || !blkif->rings[0].irq || !blkif->vbd.bdev)
++	if (!blkif->rings || !blkif->rings[0].irq || !blkif->vbd.bdev_handle)
+ 		return;
+ 
+ 	/* Already connected? */
+@@ -99,12 +99,13 @@ static void xen_update_blkif_status(struct xen_blkif *blkif)
+ 		return;
+ 	}
+ 
+-	err = sync_blockdev(blkif->vbd.bdev);
++	err = sync_blockdev(blkif->vbd.bdev_handle->bdev);
+ 	if (err) {
+ 		xenbus_dev_error(blkif->be->dev, err, "block flush");
+ 		return;
+ 	}
+-	invalidate_inode_pages2(blkif->vbd.bdev->bd_inode->i_mapping);
++	invalidate_inode_pages2(
++			blkif->vbd.bdev_handle->bdev->bd_inode->i_mapping);
+ 
+ 	for (i = 0; i < blkif->nr_rings; i++) {
+ 		ring = &blkif->rings[i];
+@@ -472,9 +473,9 @@ static void xenvbd_sysfs_delif(struct xenbus_device *dev)
+ 
+ static void xen_vbd_free(struct xen_vbd *vbd)
+ {
+-	if (vbd->bdev)
+-		blkdev_put(vbd->bdev, NULL);
+-	vbd->bdev = NULL;
++	if (vbd->bdev_handle)
++		bdev_release(vbd->bdev_handle);
++	vbd->bdev_handle = NULL;
+ }
+ 
+ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
+@@ -482,7 +483,7 @@ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
+ 			  int cdrom)
+ {
+ 	struct xen_vbd *vbd;
+-	struct block_device *bdev;
++	struct bdev_handle *bdev_handle;
+ 
+ 	vbd = &blkif->vbd;
+ 	vbd->handle   = handle;
+@@ -491,17 +492,17 @@ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
+ 
+ 	vbd->pdevice  = MKDEV(major, minor);
+ 
+-	bdev = blkdev_get_by_dev(vbd->pdevice, vbd->readonly ?
++	bdev_handle = bdev_open_by_dev(vbd->pdevice, vbd->readonly ?
+ 				 BLK_OPEN_READ : BLK_OPEN_WRITE, NULL, NULL);
+ 
+-	if (IS_ERR(bdev)) {
++	if (IS_ERR(bdev_handle)) {
+ 		pr_warn("xen_vbd_create: device %08x could not be opened\n",
+ 			vbd->pdevice);
+ 		return -ENOENT;
+ 	}
+ 
+-	vbd->bdev = bdev;
+-	if (vbd->bdev->bd_disk == NULL) {
++	vbd->bdev_handle = bdev_handle;
++	if (vbd->bdev_handle->bdev->bd_disk == NULL) {
+ 		pr_warn("xen_vbd_create: device %08x doesn't exist\n",
+ 			vbd->pdevice);
+ 		xen_vbd_free(vbd);
+@@ -509,14 +510,14 @@ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
+ 	}
+ 	vbd->size = vbd_sz(vbd);
+ 
+-	if (cdrom || disk_to_cdi(vbd->bdev->bd_disk))
++	if (cdrom || disk_to_cdi(vbd->bdev_handle->bdev->bd_disk))
+ 		vbd->type |= VDISK_CDROM;
+-	if (vbd->bdev->bd_disk->flags & GENHD_FL_REMOVABLE)
++	if (vbd->bdev_handle->bdev->bd_disk->flags & GENHD_FL_REMOVABLE)
+ 		vbd->type |= VDISK_REMOVABLE;
+ 
+-	if (bdev_write_cache(bdev))
++	if (bdev_write_cache(bdev_handle->bdev))
+ 		vbd->flush_support = true;
+-	if (bdev_max_secure_erase_sectors(bdev))
++	if (bdev_max_secure_erase_sectors(bdev_handle->bdev))
+ 		vbd->discard_secure = true;
+ 
+ 	pr_debug("Successful creation of handle=%04x (dom=%u)\n",
+@@ -569,7 +570,7 @@ static void xen_blkbk_discard(struct xenbus_transaction xbt, struct backend_info
+ 	struct xen_blkif *blkif = be->blkif;
+ 	int err;
+ 	int state = 0;
+-	struct block_device *bdev = be->blkif->vbd.bdev;
++	struct block_device *bdev = be->blkif->vbd.bdev_handle->bdev;
+ 
+ 	if (!xenbus_read_unsigned(dev->nodename, "discard-enable", 1))
+ 		return;
+@@ -930,15 +931,16 @@ static void connect(struct backend_info *be)
+ 		goto abort;
+ 	}
+ 	err = xenbus_printf(xbt, dev->nodename, "sector-size", "%lu",
+-			    (unsigned long)
+-			    bdev_logical_block_size(be->blkif->vbd.bdev));
++			    (unsigned long)bdev_logical_block_size(
++					be->blkif->vbd.bdev_handle->bdev));
+ 	if (err) {
+ 		xenbus_dev_fatal(dev, err, "writing %s/sector-size",
+ 				 dev->nodename);
+ 		goto abort;
+ 	}
+ 	err = xenbus_printf(xbt, dev->nodename, "physical-sector-size", "%u",
+-			    bdev_physical_block_size(be->blkif->vbd.bdev));
++			    bdev_physical_block_size(
++					be->blkif->vbd.bdev_handle->bdev));
+ 	if (err)
+ 		xenbus_dev_error(dev, err, "writing %s/physical-sector-size",
+ 				 dev->nodename);
 -- 
-Julien Grall
+2.35.3
+
 
