@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C45C001B0
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 07:47:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.583307.913436 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68420C04A94
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 07:47:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.583308.913447 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVSI9-0001ZP-SP; Mon, 14 Aug 2023 07:47:09 +0000
+	id 1qVSIE-0001ow-3E; Mon, 14 Aug 2023 07:47:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 583307.913436; Mon, 14 Aug 2023 07:47:09 +0000
+Received: by outflank-mailman (output) from mailman id 583308.913447; Mon, 14 Aug 2023 07:47:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVSI9-0001ZI-Pl; Mon, 14 Aug 2023 07:47:09 +0000
-Received: by outflank-mailman (input) for mailman id 583307;
- Mon, 14 Aug 2023 07:47:08 +0000
+	id 1qVSIE-0001op-0L; Mon, 14 Aug 2023 07:47:14 +0000
+Received: by outflank-mailman (input) for mailman id 583308;
+ Mon, 14 Aug 2023 07:47:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Q53I=D7=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qVSI8-0001Z5-N7
- for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 07:47:08 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20624.outbound.protection.outlook.com
- [2a01:111:f400:7d00::624])
+ (envelope-from <SRS0=NzbS=D7=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qVSIC-0001Z5-Vc
+ for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 07:47:12 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c401486b-3a76-11ee-8613-37d641c3527e;
- Mon, 14 Aug 2023 09:47:06 +0200 (CEST)
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by PA4PR04MB7503.eurprd04.prod.outlook.com (2603:10a6:102:f2::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.24; Mon, 14 Aug
- 2023 07:47:04 +0000
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::79a:54ba:8003:fbe7]) by DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::79a:54ba:8003:fbe7%6]) with mapi id 15.20.6678.022; Mon, 14 Aug 2023
- 07:47:04 +0000
+ id c6822fa9-3a76-11ee-8613-37d641c3527e;
+ Mon, 14 Aug 2023 09:47:11 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 45FFB21985;
+ Mon, 14 Aug 2023 07:47:10 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id ED650138EE;
+ Mon, 14 Aug 2023 07:47:09 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id Kt2FOP3b2WSbQQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 14 Aug 2023 07:47:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,115 +53,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c401486b-3a76-11ee-8613-37d641c3527e
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oRWNntG5/P9CuyYdptZUzan6QVnPEez8nMIQ6mvoDhSSkBNNefS28b5O96X1CN4X2ngnqZA+CRnIeI3i9PZ/JaLCBPB+Xg6D86zVet+oIAKyz8ADzhIMpVoD4cUh/hTELxIv/EEkHx4lzZI/jqDzfhz6dmGURdHaWUUY++09kJtTEwi2yahcpEZgSNESY67Ay6OY/YQhqqVAZvPgTmp0VUyRdJrlrR9XbP41fou+38Zr/fiebVYZvC0UuWDabJtoCwYfYYyj6xXSbp9v2TS25RKk3mb4v77JruvEIqWB787gtIpOgPTOYXCYn/kE4ra7uuPnNL/ya0tXrufb9WIzgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8Kzc73uKuSH5JXOpxI9il3tZEXdtHLPQsJnaErBBvaI=;
- b=BhsqpGl6qQ9Hf5kUZ/X7Q1Rlv3aQh7J/LBtVK8Nng7bTlMGcEoyvXUMfBQaP8UTRezlJ98Awb6+Bzj6HVkciJXTad+LrRt06fVidYNBKYJ08rK3GYGZTe/AFwfR6UU+A2mqjo0s4I8YeodrW1LRiOIoS3tSClItYuUVPCiIZP5vA2RbVjarFyYsMr9Gwl/NtIlRIxUbQULIn6KnJ8gnEtaMW4lcJS2E/9oj3fAUWFQV1d059rNXYChalNAWaNAnqT7bLZ2qsnZC1hIio6xZk7Lg/1T4mgEgW2pqjuUaWrqJtmJn0wUhavcRlS6X7+GZh/jvAEqPnRxi1ntDSm1f+8Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8Kzc73uKuSH5JXOpxI9il3tZEXdtHLPQsJnaErBBvaI=;
- b=4JsqLbPy6QbybRFTltQCJyKOZY8S9EWDzIRc5F1c43mAnfDApfln1IbhxOeogtTYsmfKEeL1ev6DhbBBwpEPs/5O2ezpSEFoj8aQLDgNtzVu/5JOOVnmNtUTRlPPUyLcX1lvd6NQGnylNhtBL1wu5+yj8MPO2EHOHAn1GHoNB575ePF4jRTBbBblMli+TwqpYhH/b63EbSs7KXKTda9knT8BVt/6XuDjRUt/glyLVE1ow7MXyeDGBHzYa05r9iLT3G7Ix3tZxi1gEHGdwlLV88j/XEevPdzzCT3pz/PksBFP7PKbkMcTwz7rZNcgY9XQFOiOUs1qmq9QSp30r1mJng==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <d021c6a0-6826-351b-1613-82ec9ad85868@suse.com>
-Date: Mon, 14 Aug 2023 09:47:06 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [XEN PATCH 6/6] drivers/video: make declarations of defined
- functions available
-Content-Language: en-US
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
- ayan.kumar.halder@amd.com, consulting@bugseng.com,
- xen-devel@lists.xenproject.org
-References: <cover.1691676251.git.nicola.vetrini@bugseng.com>
- <a50cc0f60c536554591834da660c540fcb77faf8.1691676251.git.nicola.vetrini@bugseng.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <a50cc0f60c536554591834da660c540fcb77faf8.1691676251.git.nicola.vetrini@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0025.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:14::12) To DU2PR04MB8790.eurprd04.prod.outlook.com
- (2603:10a6:10:2e1::23)
+X-Inumbo-ID: c6822fa9-3a76-11ee-8613-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1691999230; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=3RsN8HoNcUzlEfb0weiWS8CSZC021emYD0YUNvn1dus=;
+	b=QWHgKOBH7lOLmMIS/QlK7i61UJ53fL097cMFG5UMIDW8D+Mw3P5ApJdq0NIhX9qa4rWrUt
+	x3cpthDzoNfrft2R3qZJNVJsVGmXDUd0jJGAxkwOwFS6mKHo1TRkdICxZD9JoknVBQ14fm
+	qzk0w6sPOCcs02TdfRqwFht3T/Rh7K8=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v4 00/19] tools/xenstore: drop TDB
+Date: Mon, 14 Aug 2023 09:46:48 +0200
+Message-Id: <20230814074707.27696-1-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|PA4PR04MB7503:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5bfcea1a-8a13-462d-d3da-08db9c9aa713
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	f0E9LVKfkEdta4TE1YpUc5RvPOQvsMmKBibTQDuTG34Ss0liHK9HPxxBY4NuBhBgI9xxU1tCja8Z5hCLpGZ/utfs1YTH3MHzCgNLggcUQJBYHWpmW4qdqt0vdf/tMPVH0jxIzOh77DhD6aKh4I8TVUtgkrGnlv8x/dnieffPYMsylIIY0zSLidKrVoVVUl0gEK/3g51Oh8BBGrWvBquC7fZlmv1I8L4eoFhG10NSHgJeS46sSqP8EUns6Vxh3vDmKd5wu4rYoUCOxHs0ipevfevcqqPyOnzIr/bZCn+LSwovPq8b4uxsPp25bDjzr1tWvotFLd4/4hO+gHFapDKVn70eru6ruUE29CdMA/9wBBJVElsaBIAdUIhwtPbB2cKlfWraXnuA/7RDkaYWYFayiX5QbyaJutpIYIj0BoH3CR8fEJKykj5ekh6LUIH2rz15Q3ii85apPi7ptf0SO34hgXPN6Tf7xeLsNxlNcy5ckE+Pnsoiu+ZmWcbnsOT89hDxXoGjuwj0XfyZnBccrmaY+EDvCCcFXpUBMYtzS95kVrz8KgbJ8iUF0UWd8YmRFWw62iXgxTRPKbnXOV031+J4VrhM245Xr36LOFfG0l+0YmaZiPeKnX9R6m0wa0sqGwvLJWC3P601JvEVX67+bjdOTg==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(39860400002)(366004)(376002)(136003)(346002)(396003)(451199021)(186006)(1800799006)(31686004)(6486002)(6506007)(478600001)(36756003)(86362001)(31696002)(2906002)(6512007)(26005)(66946007)(4744005)(2616005)(53546011)(38100700002)(316002)(8676002)(66476007)(6916009)(66556008)(4326008)(5660300002)(8936002)(41300700001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dmhKcXBmaHpvR1VieFRLeWhzNTNlNk10NXNKWHN0MzFCbVlScG4rQ0h2V3JV?=
- =?utf-8?B?MTcwOHg4T3pSSEpqc0xodFB4eVNJenJpKzJyVU9FczdvZEE5dk1YSDV3b3g5?=
- =?utf-8?B?WE1ROEV5eFNyclVobTlBc29MZmFLclhkck1KLzdMd3J1QUpSVEdDREh0N29a?=
- =?utf-8?B?Zlk3TncrcGZGaDN5MlRrTDhxdDFCYjhHTkhlRU1NSm1vTXpSY3czMFBMZ1lC?=
- =?utf-8?B?RFVROXVNVk1QZ1NzWVhHaTV5RmNLWkM2aDlKUHJ1OWYzTjIyelhzcWdvVnNp?=
- =?utf-8?B?TlNJeG9Oc0VNWE9oY1p5c0haMDNFT1plb294VUZlS1Ard0FVOFRrR1k0Qjdl?=
- =?utf-8?B?NitzSEdwRUZKbHNEZFVPMnVOQjBrVkpVeXo4QjU1eC9DbzBVcFpGWTlXVVFR?=
- =?utf-8?B?QlRlb29teU1RZkt6aVd0Q2IrM2UvMVE1VjNWUFlPNGJ1N1JEWCt6OUY5NUkz?=
- =?utf-8?B?anBUbVQ5SS9zUEhuM3VGbXJMZTB4RkJCZlNzZi9RZjBCOW5PQ2dPc1o4V1BG?=
- =?utf-8?B?ZGpOZEcrTXlsK01XV0NNQ21YN1pvU0JVaHM1Tm1vRkFxRmYvU0p4ZnBsaysy?=
- =?utf-8?B?aC9LMTNlamYrUFFBazhkS2FoSHlDaGpkdGRRa2Mzd0N6MEpEUzU4RUxzOXVp?=
- =?utf-8?B?SjhmUEY1WWh5UVA5RnY4SDJyVG01Nys2S21SSVhzcFl4a3FSU29HVUhsa0p3?=
- =?utf-8?B?N09Ta3VjWHRVTitjdE9hdDlIS25PamNwdWw0a0N0TXVadVBXV09wd215Zitl?=
- =?utf-8?B?L2JzN2h4RVFDWkxINFRsNkNCQndBbXZoNmFFcnNyOEZEamFPTWJlSzJueEN3?=
- =?utf-8?B?cE9vMDNnVkVxZHY2QmJZNDhvckxKTzRCMzFESmxUVWE0dHdNR1NaWDRRSXdE?=
- =?utf-8?B?dFlENFkwWU43YkEva0RLVC83TUVWMm5WZzNzdW40SlV0dUJEVCtLVUl3UVJs?=
- =?utf-8?B?cUl1enhLRXZDSjczN09Ob0xjandPQ29ZQ3RDY2M5MlR1SzlnbUhtTHBIYlFN?=
- =?utf-8?B?UUs0T2lWRkxNN0VKNy8rQkxvKzVKTThlTGU5dFNJK2hoSjFQVTdzQlJrQzVZ?=
- =?utf-8?B?OGdwK1Ardm5tODZRYllLSVlxM2J0WEdVVWNhYzFrTnNldS9ablQ2SFRKT3Zu?=
- =?utf-8?B?Uzd0eTdXVExvS1lDL29ZclEzMThoQWFYalkrb29SY0JIcUsyaW5VVDZpZmpO?=
- =?utf-8?B?R2dOZHR6SEl1T2FkKzN5Tm1lS1dNTDhmZkhtdE5RVHpoc1pRMEhpWGpxcGhL?=
- =?utf-8?B?eGhEZHBya2g0NytWdEYrNjhkUGN2WGJHcGxubXlheERocnRYUks1Szdnb3VV?=
- =?utf-8?B?emdySlJ4VUFBY21tU0wrYmJpUmxNYmduWU4rcFFHaVN4aFJtRzNxYVNqUWJi?=
- =?utf-8?B?T1EvUGJkUFAxR3VXVUVVUjI0WUtpVmdZcVplSU5iOHFPeWVwMHBzdXpuVXZM?=
- =?utf-8?B?UXNPYWJWL2VybEZIVkNWSCt4bkM0WGlVUzNkV3R6WmJnRWN6dW85WEZXUmZq?=
- =?utf-8?B?eGJjeUdKWG9ibEk4WEZ2V1hKcUVFdmQ4SDIrcmpNUk9yK2RiUTFsMUdFeTcv?=
- =?utf-8?B?WWF4TlVCUUlHM1dnSVVGRlgrc3BvZGJXSkRPNUNnSkFuOWZiMzRhUmJkQzc0?=
- =?utf-8?B?dThnMVFTKzZjaFZnOUcwRWlRa1JUbTNTV2EweU81Z1JiZWl0VFZGdFpQcTZO?=
- =?utf-8?B?Vy9lM0JJOVE5T2RaWWlZa1BVSFRpemg4b3dGREhxUWJMdHdhZnFqOHF3VTJH?=
- =?utf-8?B?cmZtSE92UDhkZE9DMzdtU0hzOVBWeDNvdi9NY2t2SjhnbmI4Q3JSb0dNOXhn?=
- =?utf-8?B?Y2NWRTI0UUUzRi9mZjUyYm90UFFYY0hDKzR0WDJxeTRLV0VBZUVQMFJoUmth?=
- =?utf-8?B?YzJrYlUyNW1LelQxVytlSjNqam5kTElYK1F3NXEwYjkyMkN6WGFFZVM0MUw5?=
- =?utf-8?B?R3NwUytZSFVwSXJCU1BsV0piQThKVHVud0lldXBnTzVVQ1hmOCszOEhrdFdj?=
- =?utf-8?B?QmFGR3N0SDlDSHFtdGVJVWxKVlpJMEtQQzBwb2tSSjlsd1BxT2d5cnpkRE1y?=
- =?utf-8?B?TWxVV0pkZWdXc09HVXpvNHlSdDBHdTBaWE9NWmJqUzRyL3lwZUdVZGpuOUpT?=
- =?utf-8?Q?qf4WtBX03lZY/1H5+eD6WXtm6?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5bfcea1a-8a13-462d-d3da-08db9c9aa713
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2023 07:47:04.6862
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zSmmMRSgFZ4Z5IixO6s1DeYZZFmu1LQlVaJO6eOmOH/3Hc9SaxuqSQ3LcfroCMZDbbNnFiM4oIqI+grA5DAbtA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7503
+Content-Transfer-Encoding: 8bit
 
-On 11.08.2023 09:19, Nicola Vetrini wrote:
-> --- a/xen/drivers/video/vga.c
-> +++ b/xen/drivers/video/vga.c
-> @@ -9,6 +9,7 @@
->  #include <xen/mm.h>
->  #include <xen/param.h>
->  #include <xen/vga.h>
-> +#include <xen/console.h>
+Using TDB for storing the Xenstore nodes is adding more complexity
+instead of removing it. With keeping the data in memory only, the main
+reason for using TDB has disappeared.
 
-xen/vga.h, which you move the declarations to, is already included here.
-Why the need for xen/console.h?
+This series is replacing TDB with a hashlist referencing directly
+individually allocated Xenstore nodes.
 
-Jan
+This in turn allows to use references of the stored nodes instead of
+copying them in case only read access is needed. Some simple tests
+using the test-xenstore utility have shown no single test being slower
+with this series applied, but some tests experienced up to 10% better
+performance.
+
+Changes in V4:
+- addressed comments
+- patches 1-7 already applied
+- dropped patch 15 of v3
+- add patches 18+19
+
+Changes in V3:
+- addressed comments
+- add patches 14+15
+- replace patch 18 of v2 with patches 20-25
+
+Changes in V2:
+- addressed comments
+- split former patch 9 into 2 patches
+- added patches 13-18
+
+Juergen Gross (19):
+  tools/xenstore: make hashtable key parameter const
+  tools/xenstore: let hashtable_add() fail in case of existing entry
+  tools/xenstore: add hashtable_replace() function
+  tools/xenstore: drop use of tdb
+  tools/xenstore: remove tdb code
+  tools/xenstore: let db_delete() return void
+  tools/xenstore: change talloc_free() to take a const pointer
+  tools/xenstore: move copying of node data out of db_fetch()
+  tools/xenstore: rework struct xs_tdb_record_hdr
+  tools/xenstore: don't use struct node_perms in struct node
+  tools/xenstore: use struct node_hdr in struct node
+  tools/xenstore: alloc new memory in domain_adjust_node_perms()
+  tools/xenstore: introduce read_node_const()
+  tools/xenstore: merge get_spec_node() into get_node_canonicalized()
+  tools/xenstore: merge is_valid_nodename() into canonicalize()
+  tools/xenstore: rework get_node()
+  tools/xenstore: introduce get_node_const()
+  tools/config: add XEN_RUN_STORED to config.h
+  tools/xenstore: move xenstored sources into dedicated directory
+
+ .gitignore                                    |    2 +-
+ MAINTAINERS                                   |    1 +
+ configure                                     |    5 +
+ m4/paths.m4                                   |    1 +
+ stubdom/Makefile                              |    4 +-
+ tools/Makefile                                |    1 +
+ tools/config.h.in                             |    3 +
+ tools/configure                               |    5 +
+ tools/libs/store/Makefile                     |    1 -
+ tools/xenstore/Makefile                       |   30 +-
+ tools/xenstore/Makefile.common                |   31 -
+ tools/xenstore/tdb.c                          | 1748 -----------------
+ tools/xenstore/tdb.h                          |  132 --
+ tools/xenstored/Makefile                      |   48 +
+ tools/xenstored/Makefile.common               |   29 +
+ tools/{xenstore => xenstored}/README          |    0
+ .../control.c}                                |    8 +-
+ .../control.h}                                |    0
+ .../xenstored_core.c => xenstored/core.c}     |  643 +++---
+ .../xenstored_core.h => xenstored/core.h}     |   77 +-
+ .../xenstored_domain.c => xenstored/domain.c} |   44 +-
+ .../xenstored_domain.h => xenstored/domain.h} |    8 +-
+ tools/{xenstore => xenstored}/hashtable.c     |   60 +-
+ tools/{xenstore => xenstored}/hashtable.h     |   24 +-
+ tools/{xenstore => xenstored}/list.h          |    0
+ .../xenstored_lu.c => xenstored/lu.c}         |    8 +-
+ .../xenstored_lu.h => xenstored/lu.h}         |    0
+ .../lu_daemon.c}                              |    4 +-
+ .../lu_minios.c}                              |    2 +-
+ .../xenstored_minios.c => xenstored/minios.c} |    2 +-
+ .../xenstored_osdep.h => xenstored/osdep.h}   |    0
+ .../xenstored_posix.c => xenstored/posix.c}   |    4 +-
+ tools/{xenstore => xenstored}/talloc.c        |   10 +-
+ tools/{xenstore => xenstored}/talloc.h        |    4 +-
+ .../{xenstore => xenstored}/talloc_guide.txt  |    0
+ .../transaction.c}                            |   57 +-
+ .../transaction.h}                            |    2 +-
+ tools/{xenstore => xenstored}/utils.c         |    0
+ tools/{xenstore => xenstored}/utils.h         |    9 -
+ .../xenstored_watch.c => xenstored/watch.c}   |   45 +-
+ .../xenstored_watch.h => xenstored/watch.h}   |    5 +-
+ .../include => xenstored}/xenstore_state.h    |    0
+ 42 files changed, 666 insertions(+), 2391 deletions(-)
+ delete mode 100644 tools/xenstore/Makefile.common
+ delete mode 100644 tools/xenstore/tdb.c
+ delete mode 100644 tools/xenstore/tdb.h
+ create mode 100644 tools/xenstored/Makefile
+ create mode 100644 tools/xenstored/Makefile.common
+ rename tools/{xenstore => xenstored}/README (100%)
+ rename tools/{xenstore/xenstored_control.c => xenstored/control.c} (98%)
+ rename tools/{xenstore/xenstored_control.h => xenstored/control.h} (100%)
+ rename tools/{xenstore/xenstored_core.c => xenstored/core.c} (88%)
+ rename tools/{xenstore/xenstored_core.h => xenstored/core.h} (88%)
+ rename tools/{xenstore/xenstored_domain.c => xenstored/domain.c} (98%)
+ rename tools/{xenstore/xenstored_domain.h => xenstored/domain.h} (95%)
+ rename tools/{xenstore => xenstored}/hashtable.c (89%)
+ rename tools/{xenstore => xenstored}/hashtable.h (89%)
+ rename tools/{xenstore => xenstored}/list.h (100%)
+ rename tools/{xenstore/xenstored_lu.c => xenstored/lu.c} (98%)
+ rename tools/{xenstore/xenstored_lu.h => xenstored/lu.h} (100%)
+ rename tools/{xenstore/xenstored_lu_daemon.c => xenstored/lu_daemon.c} (97%)
+ rename tools/{xenstore/xenstored_lu_minios.c => xenstored/lu_minios.c} (98%)
+ rename tools/{xenstore/xenstored_minios.c => xenstored/minios.c} (97%)
+ rename tools/{xenstore/xenstored_osdep.h => xenstored/osdep.h} (100%)
+ rename tools/{xenstore/xenstored_posix.c => xenstored/posix.c} (98%)
+ rename tools/{xenstore => xenstored}/talloc.c (99%)
+ rename tools/{xenstore => xenstored}/talloc.h (98%)
+ rename tools/{xenstore => xenstored}/talloc_guide.txt (100%)
+ rename tools/{xenstore/xenstored_transaction.c => xenstored/transaction.c} (93%)
+ rename tools/{xenstore/xenstored_transaction.h => xenstored/transaction.h} (98%)
+ rename tools/{xenstore => xenstored}/utils.c (100%)
+ rename tools/{xenstore => xenstored}/utils.h (89%)
+ rename tools/{xenstore/xenstored_watch.c => xenstored/watch.c} (90%)
+ rename tools/{xenstore/xenstored_watch.h => xenstored/watch.h} (93%)
+ rename tools/{xenstore/include => xenstored}/xenstore_state.h (100%)
+
+-- 
+2.35.3
+
 
