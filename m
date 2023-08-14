@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E281C04E69
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA0E2C04FE0
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 08:02:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.583426.913650 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.583427.913658 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVSWz-0006RU-6R; Mon, 14 Aug 2023 08:02:29 +0000
+	id 1qVSWz-0006jK-Rp; Mon, 14 Aug 2023 08:02:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 583426.913650; Mon, 14 Aug 2023 08:02:29 +0000
+Received: by outflank-mailman (output) from mailman id 583427.913658; Mon, 14 Aug 2023 08:02:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVSWy-0006Or-U2; Mon, 14 Aug 2023 08:02:28 +0000
-Received: by outflank-mailman (input) for mailman id 583426;
+	id 1qVSWz-0006fq-Kl; Mon, 14 Aug 2023 08:02:29 +0000
+Received: by outflank-mailman (input) for mailman id 583427;
  Mon, 14 Aug 2023 08:02:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NzbS=D7=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qVSJS-0001Z5-PN
- for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 07:48:30 +0000
+ id 1qVSJi-0002SK-GQ
+ for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 07:48:46 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f527da99-3a76-11ee-8613-37d641c3527e;
- Mon, 14 Aug 2023 09:48:29 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ff2a92bc-3a76-11ee-b288-6b7b168915f2;
+ Mon, 14 Aug 2023 09:48:45 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id C7D8021984;
- Mon, 14 Aug 2023 07:48:28 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 8D85C21984;
+ Mon, 14 Aug 2023 07:48:45 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 98504138EE;
- Mon, 14 Aug 2023 07:48:28 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 616BE138EE;
+ Mon, 14 Aug 2023 07:48:45 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id KWffI0zc2WQyQgAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 14 Aug 2023 07:48:28 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id TH6NFl3c2WRRQgAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 14 Aug 2023 07:48:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,243 +53,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f527da99-3a76-11ee-8613-37d641c3527e
+X-Inumbo-ID: ff2a92bc-3a76-11ee-b288-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1691999308; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1691999325; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5bnEnKl2k584I2gogO8qpBBRAlYy26bn85d9fhzAf9E=;
-	b=PfvT02qon9pJ7zdNI9Ne6QjLaveWPp2svjDZf0r2F+ZoPQ7Xme2Ro5SfDZBiXjxkiUkyQ/
-	HpJk1ZlAqVIUQ4hSg53QwykIVCxI4RQZ9DTAxHPhcOLq/1XZwhN2iI4XXz2rMGK9mN3xbY
-	s5964k/2sLZsU17iFHX3/9/yACORJRY=
+	bh=TKsSCupJgCOy14CkP0dNJUmpxlUXvXGKgcCx2Ay0CRA=;
+	b=oR81TxzpJQCiV64A1w0J54wH4uOELCDJMrJl8x3+xsqvN8oMwrqrKeP00IbGPTAH+M6Pnc
+	j5a7f1qpIbENbuULGu5hiYljUNjP5/wALJpe051M8hwEukBAGP1e5+aUGiiMVWf1S+dl3q
+	W8Hyl967DMV25sk+7egIae1TRYg7E9E=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v4 14/19] tools/xenstore: merge get_spec_node() into get_node_canonicalized()
-Date: Mon, 14 Aug 2023 09:47:02 +0200
-Message-Id: <20230814074707.27696-15-jgross@suse.com>
+Subject: [PATCH v4 17/19] tools/xenstore: introduce get_node_const()
+Date: Mon, 14 Aug 2023 09:47:05 +0200
+Message-Id: <20230814074707.27696-18-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230814074707.27696-1-jgross@suse.com>
 References: <20230814074707.27696-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a "allow_special" parameter to get_node_canonicalized() allowing
-to merge get_spec_node() into get_node_canonicalized().
+Add a variant of get_node() returning a const struct node pointer.
 
-Add the same parameter to is_valid_nodename(), as this will simplify
-check_watch_path().
-
-This is done in preparation to introducing a get_node() variant
-returning a pointer to const struct node.
-
-Note that this will change how special node names are going to be
-validated, as now the normal restrictions for node names will be
-applied:
-
-- they can't end with "/"
-- they can't contain "//"
-- they can't contain characters other than the ones allowed for normal
-  nodes
-- the length of the node name is restricted by the max path length
-  quota
-
-For defined special node names this isn't any real restriction, though.
+Note that all callers of this new variant don't supply a pointer where
+to store the canonical node name, while all callers needing a non-const
+node do supply this pointer. This results in an asymmetric
+simplification of the two variants.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V3:
-- new patch
-V4:
-- expand commit message (Julien Grall)
+- new approach (Julien Grall)
 ---
- tools/xenstore/xenstored_core.c  | 45 +++++++++++++-------------------
- tools/xenstore/xenstored_core.h  |  3 ++-
- tools/xenstore/xenstored_watch.c | 19 +++++---------
- 3 files changed, 26 insertions(+), 41 deletions(-)
+ tools/xenstore/xenstored_core.c | 35 ++++++++++++++++++++++-----------
+ 1 file changed, 24 insertions(+), 11 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index f8e5e7b697..0ebe4bb7d2 100644
+index 9098b7eee2..7de4df2f28 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -1219,13 +1219,14 @@ static bool valid_chars(const char *node)
- 		       "0123456789-/_@") == strlen(node));
- }
- 
--bool is_valid_nodename(const struct connection *conn, const char *node)
-+bool is_valid_nodename(const struct connection *conn, const char *node,
-+		       bool allow_special)
+@@ -1301,11 +1301,8 @@ static struct node *get_node(struct connection *conn, const void *ctx,
+ 			     const char *name, const char **canonical_name,
+ 			     unsigned int perm, bool allow_special)
  {
- 	int local_off = 0;
- 	unsigned int domid;
+-	const char *tmp_name;
+ 	struct node *node;
  
--	/* Must start in /. */
--	if (!strstarts(node, "/"))
-+	/* Must start in / or - if special nodes are allowed - in @. */
-+	if (!strstarts(node, "/") && (!allow_special || !strstarts(node, "@")))
- 		return false;
- 
- 	/* Cannot end in / (unless it's just "/"). */
-@@ -1293,7 +1294,8 @@ static struct node *get_node_canonicalized(struct connection *conn,
- 					   const void *ctx,
- 					   const char *name,
- 					   const char **canonical_name,
--					   unsigned int perm)
-+					   unsigned int perm,
-+					   bool allow_special)
- {
- 	const char *tmp_name;
- 
-@@ -1302,33 +1304,20 @@ static struct node *get_node_canonicalized(struct connection *conn,
- 	*canonical_name = canonicalize(conn, ctx, name);
+-	if (!canonical_name)
+-		canonical_name = &tmp_name;
+ 	*canonical_name = canonicalize(conn, ctx, name, allow_special);
  	if (!*canonical_name)
  		return NULL;
--	if (!is_valid_nodename(conn, *canonical_name)) {
-+	if (!is_valid_nodename(conn, *canonical_name, allow_special)) {
- 		errno = EINVAL;
- 		return NULL;
- 	}
- 	return get_node(conn, ctx, *canonical_name, perm);
+@@ -1316,12 +1313,28 @@ static struct node *get_node(struct connection *conn, const void *ctx,
+ 	       ? node : NULL;
  }
  
--static struct node *get_spec_node(struct connection *conn, const void *ctx,
--				  const char *name, const char **canonical_name,
--				  unsigned int perm)
--{
--	if (name[0] == '@') {
--		if (canonical_name)
--			*canonical_name = name;
--		return get_node(conn, ctx, name, perm);
--	}
--
--	return get_node_canonicalized(conn, ctx, name, canonical_name, perm);
--}
--
++static const struct node *get_node_const(struct connection *conn,
++					 const void *ctx, const char *name,
++					 unsigned int perm, bool allow_special)
++{
++	const char *tmp_name;
++	const struct node *node;
++
++	tmp_name = canonicalize(conn, ctx, name, allow_special);
++	if (!tmp_name)
++		return NULL;
++
++	node = read_node_const(conn, ctx, tmp_name);
++
++	return get_node_chk_perm(conn, ctx, node, tmp_name, perm) ? node : NULL;
++}
++
  static int send_directory(const void *ctx, struct connection *conn,
  			  struct buffered_data *in)
  {
- 	struct node *node;
+-	struct node *node;
++	const struct node *node;
  
- 	node = get_node_canonicalized(conn, ctx, onearg(in), NULL,
--				      XS_PERM_READ);
-+				      XS_PERM_READ, false);
+-	node = get_node(conn, ctx, onearg(in), NULL, XS_PERM_READ, false);
++	node = get_node_const(conn, ctx, onearg(in), XS_PERM_READ, false);
  	if (!node)
  		return errno;
  
-@@ -1350,7 +1339,7 @@ static int send_directory_part(const void *ctx, struct connection *conn,
+@@ -1335,14 +1348,14 @@ static int send_directory_part(const void *ctx, struct connection *conn,
+ {
+ 	unsigned int off, len, maxlen, genlen;
+ 	char *child, *data;
+-	struct node *node;
++	const struct node *node;
+ 	char gen[24];
+ 
+ 	if (xenstore_count_strings(in->buffer, in->used) != 2)
+ 		return EINVAL;
  
  	/* First arg is node name. */
- 	node = get_node_canonicalized(conn, ctx, in->buffer, NULL,
--				      XS_PERM_READ);
-+				      XS_PERM_READ, false);
+-	node = get_node(conn, ctx, in->buffer, NULL, XS_PERM_READ, false);
++	node = get_node_const(conn, ctx, in->buffer, XS_PERM_READ, false);
  	if (!node)
  		return errno;
  
-@@ -1400,7 +1389,7 @@ static int do_read(const void *ctx, struct connection *conn,
- 	struct node *node;
+@@ -1389,9 +1402,9 @@ static int send_directory_part(const void *ctx, struct connection *conn,
+ static int do_read(const void *ctx, struct connection *conn,
+ 		   struct buffered_data *in)
+ {
+-	struct node *node;
++	const struct node *node;
  
- 	node = get_node_canonicalized(conn, ctx, onearg(in), NULL,
--				      XS_PERM_READ);
-+				      XS_PERM_READ, false);
+-	node = get_node(conn, ctx, onearg(in), NULL, XS_PERM_READ, false);
++	node = get_node_const(conn, ctx, onearg(in), XS_PERM_READ, false);
  	if (!node)
  		return errno;
  
-@@ -1614,7 +1603,8 @@ static int do_write(const void *ctx, struct connection *conn,
- 	offset = strlen(vec[0]) + 1;
- 	datalen = in->used - offset;
- 
--	node = get_node_canonicalized(conn, ctx, vec[0], &name, XS_PERM_WRITE);
-+	node = get_node_canonicalized(conn, ctx, vec[0], &name, XS_PERM_WRITE,
-+				      false);
- 	if (!node) {
- 		/* No permissions, invalid input? */
- 		if (errno != ENOENT)
-@@ -1643,7 +1633,7 @@ static int do_mkdir(const void *ctx, struct connection *conn,
- 	const char *name;
- 
- 	node = get_node_canonicalized(conn, ctx, onearg(in), &name,
--				      XS_PERM_WRITE);
-+				      XS_PERM_WRITE, false);
- 
- 	/* If it already exists, fine. */
- 	if (!node) {
-@@ -1773,7 +1763,7 @@ static int do_rm(const void *ctx, struct connection *conn,
- 	char *parentname;
- 
- 	node = get_node_canonicalized(conn, ctx, onearg(in), &name,
--				      XS_PERM_WRITE);
-+				      XS_PERM_WRITE, false);
- 	if (!node) {
- 		/* Didn't exist already?  Fine, if parent exists. */
- 		if (errno == ENOENT) {
-@@ -1814,7 +1804,8 @@ static int do_get_perms(const void *ctx, struct connection *conn,
+@@ -1799,11 +1812,11 @@ static int do_rm(const void *ctx, struct connection *conn,
+ static int do_get_perms(const void *ctx, struct connection *conn,
+ 			struct buffered_data *in)
+ {
+-	struct node *node;
++	const struct node *node;
  	char *strings;
  	unsigned int len;
  
--	node = get_spec_node(conn, ctx, onearg(in), NULL, XS_PERM_READ);
-+	node = get_node_canonicalized(conn, ctx, onearg(in), NULL, XS_PERM_READ,
-+				      true);
+-	node = get_node(conn, ctx, onearg(in), NULL, XS_PERM_READ, true);
++	node = get_node_const(conn, ctx, onearg(in), XS_PERM_READ, true);
  	if (!node)
  		return errno;
- 
-@@ -1857,8 +1848,8 @@ static int do_set_perms(const void *ctx, struct connection *conn,
- 		return ENOENT;
- 
- 	/* We must own node to do this (tools can do this too). */
--	node = get_spec_node(conn, ctx, in->buffer, &name,
--			     XS_PERM_WRITE | XS_PERM_OWNER);
-+	node = get_node_canonicalized(conn, ctx, in->buffer, &name,
-+				      XS_PERM_WRITE | XS_PERM_OWNER, true);
- 	if (!node)
- 		return errno;
- 
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 07c59c07b7..5575cc0689 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -305,7 +305,8 @@ void check_store(void);
- void corrupt(struct connection *conn, const char *fmt, ...);
- 
- /* Is this a valid node name? */
--bool is_valid_nodename(const struct connection *conn, const char *node);
-+bool is_valid_nodename(const struct connection *conn, const char *node,
-+		       bool allow_special);
- 
- /* Get name of parent node. */
- char *get_parent(const void *ctx, const char *node);
-diff --git a/tools/xenstore/xenstored_watch.c b/tools/xenstore/xenstored_watch.c
-index d6e5a4be1e..e695762c64 100644
---- a/tools/xenstore/xenstored_watch.c
-+++ b/tools/xenstore/xenstored_watch.c
-@@ -163,19 +163,12 @@ static int destroy_watch(void *_watch)
- static int check_watch_path(struct connection *conn, const void *ctx,
- 			    const char **path, bool *relative)
- {
--	/* Check if valid event. */
--	if (strstarts(*path, "@")) {
--		*relative = false;
--		if (strlen(*path) > XENSTORE_REL_PATH_MAX)
--			goto inval;
--	} else {
--		*relative = !strstarts(*path, "/");
--		*path = canonicalize(conn, ctx, *path);
--		if (!*path)
--			return errno;
--		if (!is_valid_nodename(conn, *path))
--			goto inval;
--	}
-+	*relative = !strstarts(*path, "/") && !strstarts(*path, "@");
-+	*path = canonicalize(conn, ctx, *path);
-+	if (!*path)
-+		return errno;
-+	if (!is_valid_nodename(conn, *path, true))
-+		goto inval;
- 
- 	return 0;
  
 -- 
 2.35.3
