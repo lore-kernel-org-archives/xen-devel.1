@@ -4,32 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27144C001B0
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 09:06:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.583511.913726 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D1BC001B0
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 09:06:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.583486.913737 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVTWZ-00071U-RR; Mon, 14 Aug 2023 09:06:07 +0000
+	id 1qVTWx-0007Q7-3d; Mon, 14 Aug 2023 09:06:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 583511.913726; Mon, 14 Aug 2023 09:06:07 +0000
+Received: by outflank-mailman (output) from mailman id 583486.913737; Mon, 14 Aug 2023 09:06:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVTWZ-00071N-Oc; Mon, 14 Aug 2023 09:06:07 +0000
-Received: by outflank-mailman (input) for mailman id 583511;
- Mon, 14 Aug 2023 09:06:06 +0000
+	id 1qVTWw-0007Q0-W3; Mon, 14 Aug 2023 09:06:30 +0000
+Received: by outflank-mailman (input) for mailman id 583486;
+ Mon, 14 Aug 2023 08:46:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DK7P=D7=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qVTWY-00071H-5z
- for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 09:06:06 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=bJaN=D7=kernel.org=hawk@srs-se1.protection.inumbo.net>)
+ id 1qVTDF-0003rl-IJ
+ for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 08:46:09 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cb2d292a-3a81-11ee-8613-37d641c3527e;
- Mon, 14 Aug 2023 11:06:03 +0200 (CEST)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 8E66F4EE0737;
- Mon, 14 Aug 2023 11:06:02 +0200 (CEST)
+ id ff0f225a-3a7e-11ee-8613-37d641c3527e;
+ Mon, 14 Aug 2023 10:46:03 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 55A6763064;
+ Mon, 14 Aug 2023 08:46:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9824C433C7;
+ Mon, 14 Aug 2023 08:45:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,372 +47,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb2d292a-3a81-11ee-8613-37d641c3527e
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>
-Subject: [XEN PATCH v2] x86: address MISRA C:2012 Rule 5.3
-Date: Mon, 14 Aug 2023 11:05:30 +0200
-Message-Id: <c0bb67b18e1ad158a8af059abd1436c36eb8edf6.1692003656.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: ff0f225a-3a7e-11ee-8613-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1692002760;
+	bh=B3y8EHsDG3ckVBJqhMu+4wNcutKVET22OPIzB3BHlZ0=;
+	h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+	b=IAwz4csbyfvh6Sc60rY3F4KQBQhcpuI6oJ+2qyYb1X2EbPWPD3nk515LAGsCCsdua
+	 /RrfgQ8LZe60yxmHXmLqV2iNhQXTZt2yJNHTUAdt5j2LnL1x91+2f5crAXVuXr7I+M
+	 4yclnHX6puLJ4n3dhyx6fFlKoAJrUyCEJEOmcFpwYcb5oz6hDBAECRGUtxHoU2pTIO
+	 MFGXP339tDE3ExQFau5AQwyOMqlNhNAVCuVXJbJGJti/5BtYxFL5HOtTmPoxvb3ZI5
+	 /6NUgd6v072+ZFgYjyLs9xp0kxcFYsd108Ld5M+KyiFrmZ+S1cmRAt8Vy6EnHsgF6C
+	 14tNDLeY82NTw==
+Message-ID: <cceef8a4-6f38-bfd4-4f77-5dffa558b287@kernel.org>
+Date: Mon, 14 Aug 2023 10:45:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Cc: hawk@kernel.org, "davem@davemloft.net" <davem@davemloft.net>,
+ "edumazet@google.com" <edumazet@google.com>,
+ "kuba@kernel.org" <kuba@kernel.org>, "pabeni@redhat.com"
+ <pabeni@redhat.com>, "ast@kernel.org" <ast@kernel.org>,
+ "daniel@iogearbox.net" <daniel@iogearbox.net>,
+ "john.fastabend@gmail.com" <john.fastabend@gmail.com>,
+ "jiawenwu@trustnetic.com" <jiawenwu@trustnetic.com>,
+ "mengyuanlou@net-swift.com" <mengyuanlou@net-swift.com>,
+ "yang.lee@linux.alibaba.com" <yang.lee@linux.alibaba.com>,
+ "error27@gmail.com" <error27@gmail.com>,
+ "linyunsheng@huawei.com" <linyunsheng@huawei.com>,
+ "linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+ "kys@microsoft.com" <kys@microsoft.com>,
+ "haiyangz@microsoft.com" <haiyangz@microsoft.com>,
+ "wei.liu@kernel.org" <wei.liu@kernel.org>,
+ "decui@microsoft.com" <decui@microsoft.com>,
+ "longli@microsoft.com" <longli@microsoft.com>,
+ "shradhagupta@linux.microsoft.com" <shradhagupta@linux.microsoft.com>,
+ "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+ "michael.chan@broadcom.com" <michael.chan@broadcom.com>,
+ "richardcochran@gmail.com" <richardcochran@gmail.com>,
+ "jdelvare@suse.com" <jdelvare@suse.com>,
+ "linux@roeck-us.net" <linux@roeck-us.net>,
+ "yisen.zhuang@huawei.com" <yisen.zhuang@huawei.com>,
+ "salil.mehta@huawei.com" <salil.mehta@huawei.com>,
+ "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>,
+ "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
+ "nbd@nbd.name" <nbd@nbd.name>, "john@phrozen.org" <john@phrozen.org>,
+ "sean.wang@mediatek.com" <sean.wang@mediatek.com>,
+ "Mark-MC.Lee@mediatek.com" <Mark-MC.Lee@mediatek.com>,
+ "lorenzo@kernel.org" <lorenzo@kernel.org>,
+ "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>,
+ "angelogioacchino.delregno@collabora.com"
+ <angelogioacchino.delregno@collabora.com>,
+ "linux@armlinux.org.uk" <linux@armlinux.org.uk>,
+ "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
+ "saeedm@nvidia.com" <saeedm@nvidia.com>, "leon@kernel.org"
+ <leon@kernel.org>,
+ "gerhard@engleder-embedded.com" <gerhard@engleder-embedded.com>,
+ "maciej.fijalkowski@intel.com" <maciej.fijalkowski@intel.com>,
+ "alexanderduyck@fb.com" <alexanderduyck@fb.com>,
+ "wei.fang@nxp.com" <wei.fang@nxp.com>,
+ "shenwei.wang@nxp.com" <shenwei.wang@nxp.com>,
+ "xiaoning.wang@nxp.com" <xiaoning.wang@nxp.com>,
+ "linux-imx@nxp.com" <linux-imx@nxp.com>,
+ "lgirdwood@gmail.com" <lgirdwood@gmail.com>,
+ "broonie@kernel.org" <broonie@kernel.org>,
+ "jaswinder.singh@linaro.org" <jaswinder.singh@linaro.org>,
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
+ "UNGLinuxDriver@microchip.com" <UNGLinuxDriver@microchip.com>,
+ "horatiu.vultur@microchip.com" <horatiu.vultur@microchip.com>,
+ "linux-omap@vger.kernel.org" <linux-omap@vger.kernel.org>,
+ "grygorii.strashko@ti.com" <grygorii.strashko@ti.com>,
+ "simon.horman@corigine.com" <simon.horman@corigine.com>,
+ "vladimir.oltean@nxp.com" <vladimir.oltean@nxp.com>,
+ "aleksander.lobakin@intel.com" <aleksander.lobakin@intel.com>,
+ "linux-stm32@st-md-mailman.stormreply.com"
+ <linux-stm32@st-md-mailman.stormreply.com>,
+ "alexandre.torgue@foss.st.com" <alexandre.torgue@foss.st.com>,
+ "joabreu@synopsys.com" <joabreu@synopsys.com>,
+ "mcoquelin.stm32@gmail.com" <mcoquelin.stm32@gmail.com>,
+ "p.zabel@pengutronix.de" <p.zabel@pengutronix.de>,
+ "thomas.petazzoni@bootlin.com" <thomas.petazzoni@bootlin.com>,
+ "mw@semihalf.com" <mw@semihalf.com>,
+ Sunil Kovvuri Goutham <sgoutham@marvell.com>,
+ Geethasowjanya Akula <gakula@marvell.com>,
+ Subbaraya Sundeep Bhatta <sbhatta@marvell.com>,
+ Hariprasad Kelam <hkelam@marvell.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "jgross@suse.com" <jgross@suse.com>,
+ "sstabellini@kernel.org" <sstabellini@kernel.org>,
+ "oleksandr_tyshchenko@epam.com" <oleksandr_tyshchenko@epam.com>,
+ "linux-wireless@vger.kernel.org" <linux-wireless@vger.kernel.org>,
+ "ryder.lee@mediatek.com" <ryder.lee@mediatek.com>,
+ "shayne.chen@mediatek.com" <shayne.chen@mediatek.com>,
+ "kvalo@kernel.org" <kvalo@kernel.org>, "andrii@kernel.org"
+ <andrii@kernel.org>, "martin.lau@linux.dev" <martin.lau@linux.dev>,
+ "song@kernel.org" <song@kernel.org>,
+ "yonghong.song@linux.dev" <yonghong.song@linux.dev>,
+ "kpsingh@kernel.org" <kpsingh@kernel.org>, "sdf@google.com"
+ <sdf@google.com>, "haoluo@google.com" <haoluo@google.com>,
+ "jolsa@kernel.org" <jolsa@kernel.org>
+Subject: Re: [EXT] Re: [PATCH v1 net] page_pool: Cap queue size to 32k.
+Content-Language: en-US
+To: Ratheesh Kannoth <rkannoth@marvell.com>,
+ Johannes Berg <johannes@sipsolutions.net>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+References: <20230814060411.2401817-1-rkannoth@marvell.com>
+ <8c6d19da5c4c38062b7a4e500de1d5dc1280fbc8.camel@sipsolutions.net>
+ <MWHPR1801MB1918230E007D7B2C5A768B37D317A@MWHPR1801MB1918.namprd18.prod.outlook.com>
+From: Jesper Dangaard Brouer <hawk@kernel.org>
+In-Reply-To: <MWHPR1801MB1918230E007D7B2C5A768B37D317A@MWHPR1801MB1918.namprd18.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Address some occurrences of shadowing between the global
-variable 'e820' in 'xen/arch/x86/e820.c' and the function
-parameter name of 'e820_add_range'.
 
-Since the function is only ever called with the global variable
-as the actual parameter, so there is no need to have it as a parameter
-because both are defined in the same file (mentioned above).
-This in turn causes several other functions to lose their parameter
-'e820' because they are involved in the call chain that leads to
-'e820_add_range'.
 
-Similarly, 'kexec_reserve_area' is only ever called with the static
-variable 'boot_e820' as a parameter, which is defined in the same file
-as the function, thus it does not need that parameter, which is a cause
-of shadowing, as explained above.
+On 14/08/2023 10.05, Ratheesh Kannoth wrote:
+>> From: Johannes Berg <johannes@sipsolutions.net>
+>> Subject: [EXT] Re: [PATCH v1 net] page_pool: Cap queue size to 32k.
+>>> Please find discussion at
+>>> https://urldefense.proofpoint.com/v2/url?u=https-3A__lore.kernel.org_l
+>>>
+>> I'm not the one who's going to apply this, but honestly, I don't think that will
+>> work as a commit message for such a change ...
+>> Sure, link to it by all means, but also summarize it and make sense of it for
+>> the commit message?
+> 
+> Why do you think it will not work ?. There is a long discussion about pros and cons of different approaches by
+> Page pool maintainers in the discussion link.  However I  summarize it here, as commit message, it will
+> Lead to some more questions by reviewers.
+> 
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-Changes in v2:
-- Mention 'kexec_reserve_area' in the commit message.
+I agree with Johannes, this commit message is too thin.
 
-Other occurrences of shadowing on the same global in
-'e820_change_range_type' and 'reserve_e820_ram' are not addressed in
-this patch and will be the subject of a future one, as the parameter
-needs to be renamed instead, and could potentially be part of a general
-name refactoring for consistency around e820.
+It makes sense to give a summary of the discussion, because it show us
+(page_pool maintainers) what you concluded for the discussion.
 
-The following threads are useful to have more context about this patch, which
-was previously part of a series of changes related to the same MISRA Rule.
-- https://lore.kernel.org/xen-devel/3a9db416c6f8b2d5a549d49ff02238eb408cc905.1691492441.git.nicola.vetrini@bugseng.com/
-- https://lore.kernel.org/xen-devel/896a2235560fd348f79eded33731609c5d2e74ab.1691162261.git.nicola.vetrini@bugseng.com/
----
- xen/arch/x86/e820.c                         | 38 ++++++++++-----------
- xen/arch/x86/guest/hyperv/hyperv.c          |  4 +--
- xen/arch/x86/guest/hypervisor.c             |  4 +--
- xen/arch/x86/guest/xen/xen.c                |  4 +--
- xen/arch/x86/include/asm/e820.h             |  3 +-
- xen/arch/x86/include/asm/guest/hypervisor.h |  6 ++--
- xen/arch/x86/include/asm/pv/shim.h          |  4 +--
- xen/arch/x86/pv/shim.c                      | 10 +++---
- xen/arch/x86/setup.c                        |  8 ++---
- xen/arch/x86/x86_64/mmconf-fam10h.c         |  2 +-
- xen/drivers/passthrough/amd/iommu_acpi.c    |  2 +-
- 11 files changed, 42 insertions(+), 43 deletions(-)
+Further more, you also send another patch:
+  - "[PATCH net-next] page_pool: Set page pool size"
+  - 
+https://lore.kernel.org/all/20230809021920.913324-1-rkannoth@marvell.com/
 
-diff --git a/xen/arch/x86/e820.c b/xen/arch/x86/e820.c
-index 4911e64b8cf4..6a3ce7e0a07f 100644
---- a/xen/arch/x86/e820.c
-+++ b/xen/arch/x86/e820.c
-@@ -543,27 +543,27 @@ static void __init machine_specific_memory_setup(struct e820map *raw)
-         clip_to_limit(top_of_ram, "MTRRs do not cover all of memory.");
- }
+That patch solves the issue for your driver marvell/octeontx2 and I like
+than change.
 
--/* This function relies on the passed in e820->map[] being sorted. */
--int __init e820_add_range(
--    struct e820map *e820, uint64_t s, uint64_t e, uint32_t type)
-+/* This function relies on the global e820->map[] being sorted. */
-+int __init e820_add_range(uint64_t s, uint64_t e, uint32_t type)
- {
-     unsigned int i;
-+    struct e820entry *ei = e820.map;
+Why did you conclude that PP core should also change?
 
--    for ( i = 0; i < e820->nr_map; ++i )
-+    for ( i = 0; i < e820.nr_map; ++i )
-     {
--        uint64_t rs = e820->map[i].addr;
--        uint64_t re = rs + e820->map[i].size;
-+        uint64_t rs = ei[i].addr;
-+        uint64_t re = rs + ei[i].size;
+--Jesper
+(p.s. Cc/To list have gotten excessive with 89 recipients)
 
--        if ( rs == e && e820->map[i].type == type )
-+        if ( rs == e && ei[i].type == type )
-         {
--            e820->map[i].addr = s;
-+            ei[i].addr = s;
-             return 1;
-         }
 
--        if ( re == s && e820->map[i].type == type &&
--             (i + 1 == e820->nr_map || e820->map[i + 1].addr >= e) )
-+        if ( re == s && ei[i].type == type &&
-+             (i + 1 == e820.nr_map || ei[i + 1].addr >= e) )
-         {
--            e820->map[i].size += e - s;
-+            ei[i].size += e - s;
-             return 1;
-         }
 
-@@ -574,20 +574,20 @@ int __init e820_add_range(
-             return 0;
-     }
-
--    if ( e820->nr_map >= ARRAY_SIZE(e820->map) )
-+    if ( e820.nr_map >= ARRAY_SIZE(e820.map) )
-     {
-         printk(XENLOG_WARNING "E820: overflow while adding region"
-                " %"PRIx64"-%"PRIx64"\n", s, e);
-         return 0;
-     }
-
--    memmove(e820->map + i + 1, e820->map + i,
--            (e820->nr_map - i) * sizeof(*e820->map));
-+    memmove(ei + i + 1, ei + i,
-+            (e820.nr_map - i) * sizeof(*e820.map));
-
--    e820->nr_map++;
--    e820->map[i].addr = s;
--    e820->map[i].size = e - s;
--    e820->map[i].type = type;
-+    e820.nr_map++;
-+    ei[i].addr = s;
-+    ei[i].size = e - s;
-+    ei[i].type = type;
-
-     return 1;
- }
-@@ -694,7 +694,7 @@ unsigned long __init init_e820(const char *str, struct e820map *raw)
-     machine_specific_memory_setup(raw);
-
-     if ( cpu_has_hypervisor )
--        hypervisor_e820_fixup(&e820);
-+        hypervisor_e820_fixup();
-
-     printk("%s RAM map:\n", str);
-     print_e820_memory_map(e820.map, e820.nr_map);
-diff --git a/xen/arch/x86/guest/hyperv/hyperv.c b/xen/arch/x86/guest/hyperv/hyperv.c
-index aacc7a61670b..912099564ec4 100644
---- a/xen/arch/x86/guest/hyperv/hyperv.c
-+++ b/xen/arch/x86/guest/hyperv/hyperv.c
-@@ -187,11 +187,11 @@ static int cf_check ap_setup(void)
-     return setup_vp_assist();
- }
-
--static void __init cf_check e820_fixup(struct e820map *e820)
-+static void __init cf_check e820_fixup(void)
- {
-     uint64_t s = HV_HCALL_MFN << PAGE_SHIFT;
-
--    if ( !e820_add_range(e820, s, s + PAGE_SIZE, E820_RESERVED) )
-+    if ( !e820_add_range(s, s + PAGE_SIZE, E820_RESERVED) )
-         panic("Unable to reserve Hyper-V hypercall range\n");
- }
-
-diff --git a/xen/arch/x86/guest/hypervisor.c b/xen/arch/x86/guest/hypervisor.c
-index b8549a131a5a..e0b046cc6c89 100644
---- a/xen/arch/x86/guest/hypervisor.c
-+++ b/xen/arch/x86/guest/hypervisor.c
-@@ -60,10 +60,10 @@ void hypervisor_resume(void)
-         ops.resume();
- }
-
--void __init hypervisor_e820_fixup(struct e820map *e820)
-+void __init hypervisor_e820_fixup(void)
- {
-     if ( ops.e820_fixup )
--        ops.e820_fixup(e820);
-+        ops.e820_fixup();
- }
-
- int hypervisor_flush_tlb(const cpumask_t *mask, const void *va,
-diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
-index f93dfc89f724..2eed32fe46c7 100644
---- a/xen/arch/x86/guest/xen/xen.c
-+++ b/xen/arch/x86/guest/xen/xen.c
-@@ -306,10 +306,10 @@ static void cf_check resume(void)
-         pv_console_init();
- }
-
--static void __init cf_check e820_fixup(struct e820map *e820)
-+static void __init cf_check e820_fixup(void)
- {
-     if ( pv_shim )
--        pv_shim_fixup_e820(e820);
-+        pv_shim_fixup_e820();
- }
-
- static int cf_check flush_tlb(
-diff --git a/xen/arch/x86/include/asm/e820.h b/xen/arch/x86/include/asm/e820.h
-index 213d5b5dd227..af90085d65d1 100644
---- a/xen/arch/x86/include/asm/e820.h
-+++ b/xen/arch/x86/include/asm/e820.h
-@@ -29,8 +29,7 @@ extern int reserve_e820_ram(struct e820map *e820, uint64_t s, uint64_t e);
- extern int e820_change_range_type(
-     struct e820map *e820, uint64_t s, uint64_t e,
-     uint32_t orig_type, uint32_t new_type);
--extern int e820_add_range(
--    struct e820map *, uint64_t s, uint64_t e, uint32_t type);
-+extern int e820_add_range(uint64_t s, uint64_t e, uint32_t type);
- extern unsigned long init_e820(const char *str, struct e820map *raw);
- extern void print_e820_memory_map(const struct e820entry *map,
-     unsigned int entries);
-diff --git a/xen/arch/x86/include/asm/guest/hypervisor.h b/xen/arch/x86/include/asm/guest/hypervisor.h
-index 4cffea386609..c8f18a035ee6 100644
---- a/xen/arch/x86/include/asm/guest/hypervisor.h
-+++ b/xen/arch/x86/include/asm/guest/hypervisor.h
-@@ -22,7 +22,7 @@ struct hypervisor_ops {
-     /* Resume from suspension */
-     void (*resume)(void);
-     /* Fix up e820 map */
--    void (*e820_fixup)(struct e820map *e820);
-+    void (*e820_fixup)(void);
-     /* L0 assisted TLB flush */
-     int (*flush_tlb)(const cpumask_t *mask, const void *va, unsigned int flags);
- };
-@@ -33,7 +33,7 @@ const char *hypervisor_probe(void);
- void hypervisor_setup(void);
- int hypervisor_ap_setup(void);
- void hypervisor_resume(void);
--void hypervisor_e820_fixup(struct e820map *e820);
-+void hypervisor_e820_fixup(void);
- /*
-  * L0 assisted TLB flush.
-  * mask: cpumask of the dirty vCPUs that should be flushed.
-@@ -52,7 +52,7 @@ static inline const char *hypervisor_probe(void) { return NULL; }
- static inline void hypervisor_setup(void) { ASSERT_UNREACHABLE(); }
- static inline int hypervisor_ap_setup(void) { return 0; }
- static inline void hypervisor_resume(void) { ASSERT_UNREACHABLE(); }
--static inline void hypervisor_e820_fixup(struct e820map *e820) {}
-+static inline void hypervisor_e820_fixup(void) {}
- static inline int hypervisor_flush_tlb(const cpumask_t *mask, const void *va,
-                                        unsigned int flags)
- {
-diff --git a/xen/arch/x86/include/asm/pv/shim.h b/xen/arch/x86/include/asm/pv/shim.h
-index 5625b90b72bd..6153e2700598 100644
---- a/xen/arch/x86/include/asm/pv/shim.h
-+++ b/xen/arch/x86/include/asm/pv/shim.h
-@@ -33,7 +33,7 @@ void pv_shim_online_memory(unsigned int nr, unsigned int order);
- void pv_shim_offline_memory(unsigned int nr, unsigned int order);
- domid_t get_initial_domain_id(void);
- uint64_t pv_shim_mem(uint64_t avail);
--void pv_shim_fixup_e820(struct e820map *e820);
-+void pv_shim_fixup_e820(void);
- const struct platform_bad_page *pv_shim_reserved_pages(unsigned int *size);
- typeof(do_event_channel_op) pv_shim_event_channel_op;
- typeof(do_grant_table_op) pv_shim_grant_table_op;
-@@ -85,7 +85,7 @@ static inline uint64_t pv_shim_mem(uint64_t avail)
-     ASSERT_UNREACHABLE();
-     return 0;
- }
--static inline void pv_shim_fixup_e820(struct e820map *e820)
-+static inline void pv_shim_fixup_e820(void)
- {
-     ASSERT_UNREACHABLE();
- }
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index 404408711972..ca0e639db323 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -98,17 +98,17 @@ uint64_t pv_shim_mem(uint64_t avail)
-     return shim_nrpages;
- }
-
--static void __init mark_pfn_as_ram(struct e820map *e820, uint64_t pfn)
-+static void __init mark_pfn_as_ram(uint64_t pfn)
- {
--    if ( !e820_add_range(e820, pfn << PAGE_SHIFT,
-+    if ( !e820_add_range(pfn << PAGE_SHIFT,
-                          (pfn << PAGE_SHIFT) + PAGE_SIZE, E820_RAM) &&
--         !e820_change_range_type(e820, pfn << PAGE_SHIFT,
-+         !e820_change_range_type(&e820, pfn << PAGE_SHIFT,
-                                  (pfn << PAGE_SHIFT) + PAGE_SIZE,
-                                  E820_RESERVED, E820_RAM) )
-         panic("Unable to add/change memory type of pfn %#lx to RAM\n", pfn);
- }
-
--void __init pv_shim_fixup_e820(struct e820map *e820)
-+void __init pv_shim_fixup_e820(void)
- {
-     uint64_t pfn = 0;
-     unsigned int i = 0;
-@@ -120,7 +120,7 @@ void __init pv_shim_fixup_e820(struct e820map *e820)
-     rc = xen_hypercall_hvm_get_param(p, &pfn);  \
-     if ( rc )                                   \
-         panic("Unable to get " #p "\n");        \
--    mark_pfn_as_ram(e820, pfn);                 \
-+    mark_pfn_as_ram(pfn);                       \
-     ASSERT(i < ARRAY_SIZE(reserved_pages));     \
-     reserved_pages[i++].mfn = pfn;              \
- })
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 2bfc1fd00f8c..3358d9a0ff63 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -688,7 +688,7 @@ static void __init parse_video_info(void)
- #endif
- }
-
--static void __init kexec_reserve_area(struct e820map *e820)
-+static void __init kexec_reserve_area(void)
- {
- #ifdef CONFIG_KEXEC
-     unsigned long kdump_start = kexec_crash_area.start;
-@@ -702,7 +702,7 @@ static void __init kexec_reserve_area(struct e820map *e820)
-
-     is_reserved = true;
-
--    if ( !reserve_e820_ram(e820, kdump_start, kdump_start + kdump_size) )
-+    if ( !reserve_e820_ram(&boot_e820, kdump_start, kdump_start + kdump_size) )
-     {
-         printk("Kdump: DISABLED (failed to reserve %luMB (%lukB) at %#lx)"
-                "\n", kdump_size >> 20, kdump_size >> 10, kdump_start);
-@@ -1310,7 +1310,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-         if ( e820.map[i].type == E820_RAM )
-             nr_pages += e820.map[i].size >> PAGE_SHIFT;
-     set_kexec_crash_area_size((u64)nr_pages << PAGE_SHIFT);
--    kexec_reserve_area(&boot_e820);
-+    kexec_reserve_area();
-
-     initial_images = mod;
-     nr_initial_images = mbi->mods_count;
-@@ -1497,7 +1497,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-         reserve_e820_ram(&boot_e820, __pa(_stext), __pa(__2M_rwdata_end));
-
-     /* Late kexec reservation (dynamic start address). */
--    kexec_reserve_area(&boot_e820);
-+    kexec_reserve_area();
-
-     setup_max_pdx(raw_max_page);
-     if ( highmem_start )
-diff --git a/xen/arch/x86/x86_64/mmconf-fam10h.c b/xen/arch/x86/x86_64/mmconf-fam10h.c
-index a834ab3149be..36b32eb769e1 100644
---- a/xen/arch/x86/x86_64/mmconf-fam10h.c
-+++ b/xen/arch/x86/x86_64/mmconf-fam10h.c
-@@ -135,7 +135,7 @@ static void __init get_fam10h_pci_mmconf_base(void)
- 	return;
-
- out:
--	if (e820_add_range(&e820, start, start + SIZE, E820_RESERVED))
-+	if (e820_add_range(start, start + SIZE, E820_RESERVED))
- 		fam10h_pci_mmconf_base = start;
- }
-
-diff --git a/xen/drivers/passthrough/amd/iommu_acpi.c b/xen/drivers/passthrough/amd/iommu_acpi.c
-index 3b577c9b390c..db993d6df275 100644
---- a/xen/drivers/passthrough/amd/iommu_acpi.c
-+++ b/xen/drivers/passthrough/amd/iommu_acpi.c
-@@ -418,7 +418,7 @@ static int __init parse_ivmd_block(const struct acpi_ivrs_memory *ivmd_block)
-
-             if ( type == RAM_TYPE_UNKNOWN )
-             {
--                if ( e820_add_range(&e820, addr, addr + PAGE_SIZE,
-+                if ( e820_add_range(addr, addr + PAGE_SIZE,
-                                     E820_RESERVED) )
-                     continue;
-                 AMD_IOMMU_ERROR("IVMD: page at %lx couldn't be reserved\n",
---
-2.34.1
 
