@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CFF1C001E0
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 07:54:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.583350.913546 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E591C001DB
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 07:56:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.583356.913556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVSPQ-0000Ji-NV; Mon, 14 Aug 2023 07:54:40 +0000
+	id 1qVSRR-0000tN-2V; Mon, 14 Aug 2023 07:56:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 583350.913546; Mon, 14 Aug 2023 07:54:40 +0000
+Received: by outflank-mailman (output) from mailman id 583356.913556; Mon, 14 Aug 2023 07:56:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVSPQ-0000Jb-Ku; Mon, 14 Aug 2023 07:54:40 +0000
-Received: by outflank-mailman (input) for mailman id 583350;
- Mon, 14 Aug 2023 07:54:39 +0000
+	id 1qVSRQ-0000tG-W0; Mon, 14 Aug 2023 07:56:44 +0000
+Received: by outflank-mailman (input) for mailman id 583356;
+ Mon, 14 Aug 2023 07:56:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DK7P=D7=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qVSPP-0000JT-Qn
- for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 07:54:39 +0000
+ id 1qVSRQ-0000t7-12
+ for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 07:56:44 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d11f4249-3a77-11ee-b288-6b7b168915f2;
- Mon, 14 Aug 2023 09:54:38 +0200 (CEST)
+ id 1bc2a17c-3a78-11ee-b288-6b7b168915f2;
+ Mon, 14 Aug 2023 09:56:43 +0200 (CEST)
 Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id A97274EE0737;
- Mon, 14 Aug 2023 09:54:37 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPA id F0F1A4EE0737;
+ Mon, 14 Aug 2023 09:56:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,45 +41,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d11f4249-3a77-11ee-b288-6b7b168915f2
+X-Inumbo-ID: 1bc2a17c-3a78-11ee-b288-6b7b168915f2
 MIME-Version: 1.0
-Date: Mon, 14 Aug 2023 09:54:37 +0200
+Date: Mon, 14 Aug 2023 09:56:42 +0200
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
  ayan.kumar.halder@amd.com, consulting@bugseng.com,
  xen-devel@lists.xenproject.org
-Subject: Re: [XEN PATCH 5/6] vpic/msix: make 'get_slot' static
-In-Reply-To: <fde117b3-f9e2-f98d-4301-04683d99635e@suse.com>
+Subject: Re: [XEN PATCH 6/6] drivers/video: make declarations of defined
+ functions available
+In-Reply-To: <d021c6a0-6826-351b-1613-82ec9ad85868@suse.com>
 References: <cover.1691676251.git.nicola.vetrini@bugseng.com>
- <6ff95436f704c852e6397a584eef65f9d1713999.1691676251.git.nicola.vetrini@bugseng.com>
- <fde117b3-f9e2-f98d-4301-04683d99635e@suse.com>
+ <a50cc0f60c536554591834da660c540fcb77faf8.1691676251.git.nicola.vetrini@bugseng.com>
+ <d021c6a0-6826-351b-1613-82ec9ad85868@suse.com>
 User-Agent: Roundcube Webmail/1.4.3
-Message-ID: <2c0f387f1a4f875f844e497f61f9fcc4@bugseng.com>
+Message-ID: <fe1c5eeeb01cb2690d80acec2bfdf721@bugseng.com>
 X-Sender: nicola.vetrini@bugseng.com
 Organization: BUGSENG s.r.l.
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 14/08/2023 09:44, Jan Beulich wrote:
+On 14/08/2023 09:47, Jan Beulich wrote:
 > On 11.08.2023 09:19, Nicola Vetrini wrote:
->> The function can become static since it's used only within this file.
->> This also resolves a violation of MISRA C:2012 Rule 8.4 due to the 
->> absence
->> of a declaration before the function definition.
->> 
->> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
->> Fixes: b177892d2d0e ("vpci/msix: handle accesses adjacent to the MSI-X 
->> table")
+>> --- a/xen/drivers/video/vga.c
+>> +++ b/xen/drivers/video/vga.c
+>> @@ -9,6 +9,7 @@
+>>  #include <xen/mm.h>
+>>  #include <xen/param.h>
+>>  #include <xen/vga.h>
+>> +#include <xen/console.h>
 > 
-> Nit (typo): In the title you mean "vpci/msix", just like this quoted
-> commit has it. This is important-ish because we also have "vpic"
-> elsewhere in the tree. (Can certainly be adjusted while committing.)
+> xen/vga.h, which you move the declarations to, is already included 
+> here.
+> Why the need for xen/console.h?
 > 
 > Jan
 
-Yes, I meant to write 'vpci/msix'.
+vga.c needs a declaration for fill_console_start_info, which is declared 
+in console.h, as
+stated in the commit message (it could be clarified perhaps).
 
 -- 
 Nicola Vetrini, BSc
