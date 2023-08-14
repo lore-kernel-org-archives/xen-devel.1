@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48461C04A6A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE02DC04A94
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 04:26:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.583055.913067 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.583057.913081 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVP9S-0002Fg-JS; Mon, 14 Aug 2023 04:25:58 +0000
+	id 1qVP9Z-0002Xn-W7; Mon, 14 Aug 2023 04:26:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 583055.913067; Mon, 14 Aug 2023 04:25:58 +0000
+Received: by outflank-mailman (output) from mailman id 583057.913081; Mon, 14 Aug 2023 04:26:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVP9S-0002FK-E8; Mon, 14 Aug 2023 04:25:58 +0000
-Received: by outflank-mailman (input) for mailman id 583055;
- Mon, 14 Aug 2023 04:25:57 +0000
+	id 1qVP9Z-0002X4-Sf; Mon, 14 Aug 2023 04:26:05 +0000
+Received: by outflank-mailman (input) for mailman id 583057;
+ Mon, 14 Aug 2023 04:26:04 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8M3t=D7=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qVP9R-0002FE-GS
- for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 04:25:57 +0000
+ id 1qVP9Y-0002FE-Ak
+ for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 04:26:04 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id a86cf4e4-3a5a-11ee-b288-6b7b168915f2;
- Mon, 14 Aug 2023 06:25:54 +0200 (CEST)
+ id adb528c3-3a5a-11ee-b288-6b7b168915f2;
+ Mon, 14 Aug 2023 06:26:03 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3A2D52F4;
- Sun, 13 Aug 2023 21:26:36 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2F9F2106F;
+ Sun, 13 Aug 2023 21:26:45 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 251F53F64C;
- Sun, 13 Aug 2023 21:25:49 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A71CA3F64C;
+ Sun, 13 Aug 2023 21:25:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a86cf4e4-3a5a-11ee-b288-6b7b168915f2
+X-Inumbo-ID: adb528c3-3a5a-11ee-b288-6b7b168915f2
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Henry Wang <Henry.Wang@arm.com>,
@@ -55,94 +55,55 @@ Cc: Henry Wang <Henry.Wang@arm.com>,
 	Wei Chen <wei.chen@arm.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 00/13] xen/arm: Split MMU code as the prepration of MPU work
-Date: Mon, 14 Aug 2023 12:25:23 +0800
-Message-Id: <20230814042536.878720-1-Henry.Wang@arm.com>
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v5 02/13] xen/arm: Introduce CONFIG_MMU Kconfig option
+Date: Mon, 14 Aug 2023 12:25:25 +0800
+Message-Id: <20230814042536.878720-3-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230814042536.878720-1-Henry.Wang@arm.com>
+References: <20230814042536.878720-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Based on the discussion in the Xen Summit [1], sending this series out after
-addressing the comments in v4 [2] as the preparation work to add MPU support.
-Full series of single core MPU support to boot Linux guest can be found
-in [3], which passed the GitLab CI check in [4].
+There are two types of memory system architectures available for
+Arm-based systems, namely the Virtual Memory System Architecture (VMSA)
+and the Protected Memory System Architecture (PMSA). According to
+ARM DDI 0487G.a, A VMSA provides a Memory Management Unit (MMU) that
+controls address translation, access permissions, and memory attribute
+determination and checking, for memory accesses made by the PE. And
+refer to ARM DDI 0600A.c, the PMSA supports a unified memory protection
+scheme where an Memory Protection Unit (MPU) manages instruction and
+data access. Currently, Xen only suuports VMSA.
 
-Mostly code movement, with some of Kconfig and build system (mainly Makefiles)
-adjustment. No functional change expected.
+Introduce a Kconfig option CONFIG_MMU, which is currently default
+set to y and unselectable because currently only VMSA is supported.
 
-This series is based on:
-a9a3b432a8 x86: adjust comparison for earlier signedness change
+Suggested-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+---
+v5:
+- Only introduce the unselectable CONFIG_MMU, add the 'choice' in
+  future commits.
+v4:
+- Completely rework "[v3,06/52] xen/arm: introduce CONFIG_HAS_MMU"
+---
+ xen/arch/arm/Kconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-[1] https://lore.kernel.org/xen-devel/AS8PR08MB799122F8B0CB841DED64F4819226A@AS8PR08MB7991.eurprd08.prod.outlook.com/
-[2] https://lore.kernel.org/xen-devel/20230801034419.2047541-1-Henry.Wang@arm.com/
-[3] https://gitlab.com/xen-project/people/henryw/xen/-/commits/mpu_v5/
-[4] https://gitlab.com/xen-project/people/henryw/xen/-/pipelines/966450933
-
-Henry Wang (4):
-  xen/arm: Introduce CONFIG_MMU Kconfig option
-  xen/arm64: Split and move MMU-specific head.S to mmu/head.S
-  xen/arm64: Fold setup_fixmap() to create_page_tables()
-  xen/arm: Extract MMU-specific code
-
-Penny Zheng (6):
-  xen/arm: Fold pmap and fixmap into MMU system
-  xen/arm: mm: Use generic variable/function names for extendability
-  xen/arm: mmu: move MMU-specific setup_mm to mmu/setup.c
-  xen/arm: mmu: move MMU specific P2M code to mmu/p2m.{c,h}
-  xen/arm: mmu: relocate copy_from_paddr() to setup.c
-  xen/arm: mmu: enable SMMU subsystem only in MMU
-
-Wei Chen (3):
-  xen/arm64: head.S: Introduce enable_{boot,secondary}_cpu_mm()
-  xen/arm64: prepare for moving MMU related code from head.S
-  xen/arm: Move MMU related definitions from config.h to mmu/layout.h
-
- xen/arch/arm/Kconfig                    |    5 +-
- xen/arch/arm/Makefile                   |    1 +
- xen/arch/arm/arm32/head.S               |    4 +-
- xen/arch/arm/arm64/Makefile             |    2 +-
- xen/arch/arm/arm64/head.S               |  496 +------
- xen/arch/arm/arm64/mmu/Makefile         |    2 +
- xen/arch/arm/arm64/mmu/head.S           |  460 ++++++
- xen/arch/arm/arm64/{ => mmu}/mm.c       |   11 +-
- xen/arch/arm/arm64/smpboot.c            |    6 +-
- xen/arch/arm/include/asm/arm64/macros.h |   36 +
- xen/arch/arm/include/asm/arm64/mm.h     |    7 +-
- xen/arch/arm/include/asm/config.h       |  132 +-
- xen/arch/arm/include/asm/fixmap.h       |    7 +-
- xen/arch/arm/include/asm/mm.h           |   30 +-
- xen/arch/arm/include/asm/mmu/layout.h   |  146 ++
- xen/arch/arm/include/asm/mmu/mm.h       |   55 +
- xen/arch/arm/include/asm/mmu/p2m.h      |   18 +
- xen/arch/arm/include/asm/p2m.h          |   33 +-
- xen/arch/arm/include/asm/page.h         |   15 -
- xen/arch/arm/include/asm/setup.h        |    8 +-
- xen/arch/arm/kernel.c                   |   27 -
- xen/arch/arm/mm.c                       | 1119 --------------
- xen/arch/arm/mmu/Makefile               |    3 +
- xen/arch/arm/mmu/mm.c                   | 1153 +++++++++++++++
- xen/arch/arm/mmu/p2m.c                  | 1610 ++++++++++++++++++++
- xen/arch/arm/mmu/setup.c                |  366 +++++
- xen/arch/arm/p2m.c                      | 1772 ++---------------------
- xen/arch/arm/setup.c                    |  326 +----
- xen/arch/arm/smpboot.c                  |    4 +-
- xen/arch/arm/xen.lds.S                  |    1 +
- xen/drivers/passthrough/Kconfig         |    3 +-
- 31 files changed, 4042 insertions(+), 3816 deletions(-)
- create mode 100644 xen/arch/arm/arm64/mmu/Makefile
- create mode 100644 xen/arch/arm/arm64/mmu/head.S
- rename xen/arch/arm/arm64/{ => mmu}/mm.c (95%)
- create mode 100644 xen/arch/arm/include/asm/mmu/layout.h
- create mode 100644 xen/arch/arm/include/asm/mmu/mm.h
- create mode 100644 xen/arch/arm/include/asm/mmu/p2m.h
- create mode 100644 xen/arch/arm/mmu/Makefile
- create mode 100644 xen/arch/arm/mmu/mm.c
- create mode 100644 xen/arch/arm/mmu/p2m.c
- create mode 100644 xen/arch/arm/mmu/setup.c
-
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 57bd1d01d7..eb0413336b 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -59,6 +59,9 @@ config PADDR_BITS
+ 	default 40 if ARM_PA_BITS_40
+ 	default 48 if ARM_64
+ 
++config MMU
++	def_bool y
++
+ source "arch/Kconfig"
+ 
+ config ACPI
 -- 
 2.25.1
 
