@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0158C04A6A
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 04:26:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.583065.913127 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4AA6C04A6A
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Aug 2023 04:26:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.583073.913147 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVP9q-0004F7-91; Mon, 14 Aug 2023 04:26:22 +0000
+	id 1qVP9y-0005FZ-5p; Mon, 14 Aug 2023 04:26:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 583065.913127; Mon, 14 Aug 2023 04:26:22 +0000
+Received: by outflank-mailman (output) from mailman id 583073.913147; Mon, 14 Aug 2023 04:26:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qVP9q-0004En-5V; Mon, 14 Aug 2023 04:26:22 +0000
-Received: by outflank-mailman (input) for mailman id 583065;
- Mon, 14 Aug 2023 04:26:20 +0000
+	id 1qVP9y-0005FL-2C; Mon, 14 Aug 2023 04:26:30 +0000
+Received: by outflank-mailman (input) for mailman id 583073;
+ Mon, 14 Aug 2023 04:26:28 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8M3t=D7=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qVP9o-0002FE-Km
- for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 04:26:20 +0000
+ id 1qVP9w-0002FE-Oh
+ for xen-devel@lists.xenproject.org; Mon, 14 Aug 2023 04:26:28 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id b784e6c6-3a5a-11ee-b288-6b7b168915f2;
- Mon, 14 Aug 2023 06:26:19 +0200 (CEST)
+ id bc838aec-3a5a-11ee-b288-6b7b168915f2;
+ Mon, 14 Aug 2023 06:26:28 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A09262F4;
- Sun, 13 Aug 2023 21:27:01 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A7B41063;
+ Sun, 13 Aug 2023 21:27:10 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 680A23F64C;
- Sun, 13 Aug 2023 21:26:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D5F703F64C;
+ Sun, 13 Aug 2023 21:26:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,138 +45,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b784e6c6-3a5a-11ee-b288-6b7b168915f2
+X-Inumbo-ID: bc838aec-3a5a-11ee-b288-6b7b168915f2
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Henry Wang <Henry.Wang@arm.com>,
+Cc: Penny Zheng <penny.zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Wei Chen <wei.chen@arm.com>,
-	Penny Zheng <penny.zheng@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 06/13] xen/arm64: Fold setup_fixmap() to create_page_tables()
-Date: Mon, 14 Aug 2023 12:25:29 +0800
-Message-Id: <20230814042536.878720-7-Henry.Wang@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Henry Wang <Henry.Wang@arm.com>
+Subject: [PATCH v5 08/13] xen/arm: Fold pmap and fixmap into MMU system
+Date: Mon, 14 Aug 2023 12:25:31 +0800
+Message-Id: <20230814042536.878720-9-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230814042536.878720-1-Henry.Wang@arm.com>
 References: <20230814042536.878720-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The original assembly setup_fixmap() is actually doing two seperate
-tasks, one is enabling the early UART when earlyprintk on, and the
-other is to set up the fixmap (even when earlyprintk is off).
+From: Penny Zheng <penny.zheng@arm.com>
 
-Per discussion in [1], since commit
-9d267c049d92 ("xen/arm64: Rework the memory layout"), there is no
-chance that the fixmap and the mapping of early UART will clash with
-the 1:1 mapping. Therefore the mapping of both the fixmap and the
-early UART can be moved to the end of create_pagetables().
+fixmap and pmap are MMU-specific features, so fold them to MMU system.
+Do the folding for pmap by moving the HAS_PMAP Kconfig selection under
+HAS_MMU. Do the folding for fixmap by moving the implementation of
+virt_to_fix() to mmu/mm.c, so that unnecessary stubs can be avoided.
 
-No functional change intended.
-
-[1] https://lore.kernel.org/xen-devel/78862bb8-fd7f-5a51-a7ae-3c5b5998ed80@xen.org/
-
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
 ---
 v5:
-- Refine the title and commit message.
-- Drop the "not applied" in-code comment about the 1:1 mapping clash on
-  top of create_page_tables().
-- Drop the unnecessary dsb and isb from the original setup_fixmap().
+- Rebase on top of xen/arm: Introduce CONFIG_MMU Kconfig option
 v4:
-- Rework "[v3,12/52] xen/mmu: extract early uart mapping from setup_fixmap"
+- Rework "[v3,11/52] xen/arm: mmu: fold FIXMAP into MMU system",
+  change the order of this patch and avoid introducing stubs.
 ---
- xen/arch/arm/arm64/head.S     |  1 -
- xen/arch/arm/arm64/mmu/head.S | 48 ++++++++---------------------------
- 2 files changed, 10 insertions(+), 39 deletions(-)
+ xen/arch/arm/Kconfig              | 2 +-
+ xen/arch/arm/include/asm/fixmap.h | 7 +------
+ xen/arch/arm/mmu/mm.c             | 7 +++++++
+ 3 files changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 3c8a12eda7..4ad85dcf58 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -275,7 +275,6 @@ real_start_efi:
-         b     enable_boot_cpu_mm
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index eb0413336b..8a7b79b4b5 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -15,7 +15,6 @@ config ARM
+ 	select HAS_DEVICE_TREE
+ 	select HAS_PASSTHROUGH
+ 	select HAS_PDX
+-	select HAS_PMAP
+ 	select HAS_UBSAN
+ 	select IOMMU_FORCE_PT_SHARE
  
- primary_switched:
--        bl    setup_fixmap
- #ifdef CONFIG_EARLY_PRINTK
-         /* Use a virtual address to access the UART. */
-         ldr   x23, =EARLY_UART_VIRTUAL_ADDRESS
-diff --git a/xen/arch/arm/arm64/mmu/head.S b/xen/arch/arm/arm64/mmu/head.S
-index 97d872c3cb..ba2ddd7e67 100644
---- a/xen/arch/arm/arm64/mmu/head.S
-+++ b/xen/arch/arm/arm64/mmu/head.S
-@@ -126,11 +126,6 @@
-  * Rebuild the boot pagetable's first-level entries. The structure
-  * is described in mm.c.
-  *
-- * After the CPU enables paging it will add the fixmap mapping
-- * to these page tables, however this may clash with the 1:1
-- * mapping. So each CPU must rebuild the page tables here with
-- * the 1:1 in place.
-- *
-  * Inputs:
-  *   x19: paddr(start)
-  *   x20: phys offset
-@@ -243,6 +238,16 @@ link_from_second_id:
-         create_table_entry boot_second_id, boot_third_id, x19, 2, x0, x1, x2
- link_from_third_id:
-         create_mapping_entry boot_third_id, x19, x19, x0, x1, x2
+@@ -61,6 +60,7 @@ config PADDR_BITS
+ 
+ config MMU
+ 	def_bool y
++	select HAS_PMAP
+ 
+ source "arch/Kconfig"
+ 
+diff --git a/xen/arch/arm/include/asm/fixmap.h b/xen/arch/arm/include/asm/fixmap.h
+index 734eb9b1d4..5d5de6995a 100644
+--- a/xen/arch/arm/include/asm/fixmap.h
++++ b/xen/arch/arm/include/asm/fixmap.h
+@@ -36,12 +36,7 @@ extern void clear_fixmap(unsigned int map);
+ 
+ #define fix_to_virt(slot) ((void *)FIXMAP_ADDR(slot))
+ 
+-static inline unsigned int virt_to_fix(vaddr_t vaddr)
+-{
+-    BUG_ON(vaddr >= FIXADDR_TOP || vaddr < FIXADDR_START);
+-
+-    return ((vaddr - FIXADDR_START) >> PAGE_SHIFT);
+-}
++extern unsigned int virt_to_fix(vaddr_t vaddr);
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+diff --git a/xen/arch/arm/mmu/mm.c b/xen/arch/arm/mmu/mm.c
+index b70982e9d6..1d6267e6c5 100644
+--- a/xen/arch/arm/mmu/mm.c
++++ b/xen/arch/arm/mmu/mm.c
+@@ -1136,6 +1136,13 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+     return xen_pt_update(virt, INVALID_MFN, nr_mfns, _PAGE_POPULATE);
+ }
+ 
++unsigned int virt_to_fix(vaddr_t vaddr)
++{
++    BUG_ON(vaddr >= FIXADDR_TOP || vaddr < FIXADDR_START);
 +
-+#ifdef CONFIG_EARLY_PRINTK
-+        /* Add UART to the fixmap table */
-+        ldr   x0, =EARLY_UART_VIRTUAL_ADDRESS
-+        /* x23: Early UART base physical address */
-+        create_mapping_entry xen_fixmap, x0, x23, x1, x2, x3, type=PT_DEV_L3
-+#endif
-+        /* Map fixmap into boot_second */
-+        ldr   x0, =FIXMAP_ADDR(0)
-+        create_table_entry boot_second, xen_fixmap, x0, 2, x1, x2, x3
-         ret
- 
- virtphys_clash:
-@@ -402,39 +407,6 @@ identity_mapping_removed:
-         ret
- ENDPROC(remove_identity_mapping)
- 
--/*
-- * Map the UART in the fixmap (when earlyprintk is used) and hook the
-- * fixmap table in the page tables.
-- *
-- * The fixmap cannot be mapped in create_page_tables because it may
-- * clash with the 1:1 mapping.
-- *
-- * Inputs:
-- *   x20: Physical offset
-- *   x23: Early UART base physical address
-- *
-- * Clobbers x0 - x3
-- */
--ENTRY(setup_fixmap)
--#ifdef CONFIG_EARLY_PRINTK
--        /* Add UART to the fixmap table */
--        ldr   x0, =EARLY_UART_VIRTUAL_ADDRESS
--        create_mapping_entry xen_fixmap, x0, x23, x1, x2, x3, type=PT_DEV_L3
--#endif
--        /* Map fixmap into boot_second */
--        ldr   x0, =FIXMAP_ADDR(0)
--        create_table_entry boot_second, xen_fixmap, x0, 2, x1, x2, x3
--        /* Ensure any page table updates made above have occurred. */
--        dsb   nshst
--        /*
--         * The fixmap area will be used soon after. So ensure no hardware
--         * translation happens before the dsb completes.
--         */
--        isb
--
--        ret
--ENDPROC(setup_fixmap)
--
- /* Fail-stop */
- fail:   PRINT("- Boot failed -\r\n")
- 1:      wfe
++    return ((vaddr - FIXADDR_START) >> PAGE_SHIFT);
++}
++
+ /*
+  * Local variables:
+  * mode: C
 -- 
 2.25.1
 
