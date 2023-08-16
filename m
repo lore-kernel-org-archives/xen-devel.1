@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55AC4C001B0
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:33:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.584543.915470 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63AEFC001DF
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:48:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.584639.915484 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDph-0003cD-AE; Wed, 16 Aug 2023 10:32:57 +0000
+	id 1qWE3r-0007fr-Ih; Wed, 16 Aug 2023 10:47:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 584543.915470; Wed, 16 Aug 2023 10:32:57 +0000
+Received: by outflank-mailman (output) from mailman id 584639.915484; Wed, 16 Aug 2023 10:47:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDph-0003bE-2r; Wed, 16 Aug 2023 10:32:57 +0000
-Received: by outflank-mailman (input) for mailman id 584543;
- Wed, 16 Aug 2023 10:32:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qWE3r-0007fk-EX; Wed, 16 Aug 2023 10:47:35 +0000
+Received: by outflank-mailman (input) for mailman id 584639;
+ Wed, 16 Aug 2023 10:47:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aIlC=EB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qWDdu-0003R9-HA
- for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:46 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8ffa5610-3c1e-11ee-8779-cb3800f73035;
- Wed, 16 Aug 2023 12:20:46 +0200 (CEST)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3196fdb3238so3156396f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:46 -0700 (PDT)
-Received: from 192.168.1.26 ([151.25.98.127]) by smtp.gmail.com with ESMTPSA id
- g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 03:20:44 -0700 (PDT)
+ <SRS0=hDLr=EB=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qWE3q-0007fb-3R
+ for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:47:34 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4d39e916-3c22-11ee-9b0c-b553b5be7939;
+ Wed, 16 Aug 2023 12:47:31 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id 6D6F84EE0737;
+ Wed, 16 Aug 2023 12:47:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,99 +41,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ffa5610-3c1e-11ee-8779-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692181245; x=1692786045;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=T49tZkAQeR8noCxKYSkS705bNR9eV7TlBqTPGyzE3TM=;
-        b=mZXFwdNlW0SWlJc6RrvZAYdaGHjuxZFmTDOj8llQbYxrSZvhMP+kBFgHpQOgeBTb+3
-         uOULziQzAXK0wq7KLVCNGA47O3jKd7Zk8fjke4d0JA0fVTnPbL8tH/8If/ktghwhkGPW
-         +l3PIVXEkDkmBGX2LTEIcllnBDAoXWeS8Ca4cUFhaHJDWYbOs8XdH1cnOatCHyLyDa3o
-         iBIwtdTuIk76XevlYRyOcx7MelhdInpPKJxqVQjfWj4JV51LDLcbvisNLmSGSfxHgsH5
-         Y2JNcMoiFBZ6oY6XyAF8S/uckuD7xbo0xhxC6064vnlXMkSuPYLR1ELczBV4z403UpjU
-         JISw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692181245; x=1692786045;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=T49tZkAQeR8noCxKYSkS705bNR9eV7TlBqTPGyzE3TM=;
-        b=X8sclU58MwCdXPcrbUCFo4sswZYW2LQCKTHaCul4d7UckuhZLtNFoa7rKiKZsn9P5Z
-         E3wWmxX0WS4UlpKl4pOhetpg9e0bQ6KrYBBWo4xglUEdljw/PflvPE+ardVuaOPw/2tJ
-         BaSeRKQHXlS7SOAteh0kzwDkH9LvqiiFQqm3MXTWSRAHaEdv9WYkLbA9ur5xCwlhogFj
-         pILPjhxoJBUApJxqte5kVvtDb4fYa+ZSuDmZTRuSeMW74V8RXAsvesYPI/Kzng0iVl5r
-         Yofs4BIXZghg9ZyZJyQcaTJRrAXphZI9il/YqyERKBD0k4NPOZ8z2nsMFl0vAr+XpkSC
-         Tzsw==
-X-Gm-Message-State: AOJu0Yy0/1noFlVF/26PjhrqPCj+tsLno9/hRD18uun9yMI9k2aoQ3Xx
-	wcCIs7Xt2F3I/z6n4min/fwtm/DXCJyknLDt
-X-Google-Smtp-Source: AGHT+IFYXS0uByg6EvyNusfkF4IYow/JnDAQyb+YpiPj2io/McI/fxMDQGdunJVA1y436jtdtW5VZg==
-X-Received: by 2002:a5d:548e:0:b0:315:ae39:27c with SMTP id h14-20020a5d548e000000b00315ae39027cmr1091413wrv.70.1692181245079;
-        Wed, 16 Aug 2023 03:20:45 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 37/57] xen/riscv: introduce asm/irq.h
-Date: Wed, 16 Aug 2023 13:19:49 +0300
-Message-ID: <9c083a58f7371c1c8da92556ab5ae7f47e650b3d.1692181079.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1692181079.git.oleksii.kurochko@gmail.com>
-References: <cover.1692181079.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 4d39e916-3c22-11ee-9b0c-b553b5be7939
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Wed, 16 Aug 2023 12:47:31 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, michal.orzel@amd.com,
+ xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, consulting@bugseng.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+ <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Wei Liu
+ <wl@xen.org>, xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH 07/11] xen: address MISRA C:2012 Rule 2.1
+In-Reply-To: <2b26baf0-6a82-0bff-99b5-ade067e0d74d@suse.com>
+References: <cover.1690985045.git.nicola.vetrini@bugseng.com>
+ <7f8cbd8c8ad64cd3a0d099f31cb4d3fad48aa63b.1690985045.git.nicola.vetrini@bugseng.com>
+ <e2d71138-e714-3c19-d5b9-94b322a47191@suse.com>
+ <alpine.DEB.2.22.394.2308031648340.2127516@ubuntu-linux-20-04-desktop>
+ <3a6ab847-fd31-60e4-2558-feed71d670dd@suse.com>
+ <b0581f49ac01c923809c0e15c1a1dfed@bugseng.com>
+ <6e1dbf093687e5fa66295621ce67e4dc@bugseng.com>
+ <2b26baf0-6a82-0bff-99b5-ade067e0d74d@suse.com>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <c9197dca7802b08765c0b2b6800e548c@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/arch/riscv/include/asm/irq.h | 34 ++++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/irq.h
+On 16/08/2023 12:31, Jan Beulich wrote:
+> On 16.08.2023 12:01, Nicola Vetrini wrote:
+>> Hi,
+>> 
+>> On 08/08/2023 11:03, Nicola Vetrini wrote:
+>>> On 04/08/2023 08:42, Jan Beulich wrote:
+>>>> On 04.08.2023 01:50, Stefano Stabellini wrote:
+>>>>> On Thu, 3 Aug 2023, Jan Beulich wrote:
+>>>>>> On 02.08.2023 16:38, Nicola Vetrini wrote:
+>>>>>>> Rule 2.1 states: "A project shall not contain unreachable code".
+>>>>>>> 
+>>>>>>> The functions
+>>>>>>> - machine_halt
+>>>>>>> - maybe_reboot
+>>>>>>> - machine_restart
+>>>>>>> are not supposed to return, hence the following break statement
+>>>>>>> is marked as intentionally unreachable with the
+>>>>>>> ASSERT_UNREACHABLE()
+>>>>>>> macro to justify the violation of the rule.
+>>>>>> 
+>>>>>> During the discussion it was mentioned that this won't help with
+>>>>>> release builds, where right now ASSERT_UNREACHABLE() expands to
+>>>>>> effectively nothing. You want to clarify here how release builds
+>>>>>> are to be taken care of, as those are what eventual certification
+>>>>>> will be run against.
+>>>>> 
+>>>>> Something along these lines:
+>>>>> 
+>>>>> ASSERT_UNREACHABLE(), not only is used in non-release builds to
+>>>>> actually
+>>>>> assert and detect errors, but it is also used as a marker to tag
+>>>>> unreachable code. In release builds ASSERT_UNREACHABLE() doesn't
+>>>>> resolve
+>>>>> into an assert, but retains its role of a code marker.
+>>>>> 
+>>>>> Does it work?
+>>>> 
+>>>> Well, it states what is happening, but I'm not convinced it 
+>>>> satisfies
+>>>> rule 2.1. There's then still code there which isn't reachable, and
+>>>> which a scanner will spot and report.
+>>> 
+>>> It's not clear to me whether you dislike the patch itself or the 
+>>> commit
+>>> message. If it's the latter, how about:
+>>> "ASSERT_UNREACHABLE() is used as a marker for intentionally
+>>> unreachable code, which
+>>> constitutes a motivated deviation from Rule 2.1. Additionally, in
+>>> non-release
+>>> builds, this macro performs a failing assertion to detect errors."
+>> 
+>> Any feedback on this (with one edit: s/a failing assertion/an
+>> assertion/)
+> 
+> The patch here is kind of okay, but I'm afraid I view my earlier 
+> question
+> as not addressed: How will the proposed change prevent the scanner from
+> spotting issues here in release builds? Just stating in the description
+> that there's a deviation is not going to help that.
+> 
+> Jan
 
-diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
-new file mode 100644
-index 0000000000..7b08785f3f
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/irq.h
-@@ -0,0 +1,34 @@
-+#ifndef __ASM_RISCV_IRQ_H__
-+#define __ASM_RISCV_IRQ_H__
-+
-+#include <xen/lib.h>
-+#include <xen/device_tree.h>
-+#include <public/device_tree_defs.h>
-+
-+/* TODO */
-+#define nr_irqs 0U
-+#define nr_static_irqs 0
-+#define arch_hwdom_irqs(domid) 0U
-+
-+#define domain_pirq_to_irq(d, pirq) (pirq)
-+
-+#define arch_evtchn_bind_pirq(d, pirq) ((void)((d) + (pirq)))
-+
-+struct arch_pirq {
-+};
-+
-+struct arch_irq_desc {
-+    unsigned int type;
-+};
-+
-+static inline void arch_move_irqs(struct vcpu *v)
-+{
-+    BUG();
-+}
-+
-+static inline int platform_get_irq(const struct dt_device_node *device, int index)
-+{
-+    BUG();
-+}
-+
-+#endif /* __ASM_RISCV_IRQ_H__ */
-\ No newline at end of file
+There is a deviation already in place. At the moment it just ignores 
+anything below an unreachable ASSERT_UNREACHABLE(), no matter what that 
+macro will expand to.
+
 -- 
-2.41.0
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
