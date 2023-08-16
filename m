@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D732EC001B0
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:33:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.584540.915464 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55AC4C001B0
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:33:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.584543.915470 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDpg-0003X5-Ua; Wed, 16 Aug 2023 10:32:56 +0000
+	id 1qWDph-0003cD-AE; Wed, 16 Aug 2023 10:32:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 584540.915464; Wed, 16 Aug 2023 10:32:56 +0000
+Received: by outflank-mailman (output) from mailman id 584543.915470; Wed, 16 Aug 2023 10:32:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDpg-0003Wu-PR; Wed, 16 Aug 2023 10:32:56 +0000
-Received: by outflank-mailman (input) for mailman id 584540;
- Wed, 16 Aug 2023 10:32:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qWDph-0003bE-2r; Wed, 16 Aug 2023 10:32:57 +0000
+Received: by outflank-mailman (input) for mailman id 584543;
+ Wed, 16 Aug 2023 10:32:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aIlC=EB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qWDdw-0003RA-11
- for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:48 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8dbaca2d-3c1e-11ee-9b0c-b553b5be7939;
- Wed, 16 Aug 2023 12:20:42 +0200 (CEST)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3197b461bb5so2203182f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:42 -0700 (PDT)
+ id 1qWDdu-0003R9-HA
+ for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:46 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8ffa5610-3c1e-11ee-8779-cb3800f73035;
+ Wed, 16 Aug 2023 12:20:46 +0200 (CEST)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3196fdb3238so3156396f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:46 -0700 (PDT)
 Received: from 192.168.1.26 ([151.25.98.127]) by smtp.gmail.com with ESMTPSA id
- g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.40
+ g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 03:20:40 -0700 (PDT)
+ Wed, 16 Aug 2023 03:20:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,45 +46,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8dbaca2d-3c1e-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: 8ffa5610-3c1e-11ee-8779-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692181241; x=1692786041;
+        d=gmail.com; s=20221208; t=1692181245; x=1692786045;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=CeCsLtvDCyT32A3FOXuYg+gr5XNtFdVisCuwj+PGRb4=;
-        b=du5yjxIoyISeBHtmLt0EgW8TPB1X3CQ3eb4cs6NheiY/8Y/h4LUusXSat2XsjZ7XRY
-         uXtyQk7Bl7CXMRZWV9wSSprIstx35W79L1OG7evvc5GOWhvsR91o0jfyJbSUr5VlK9uT
-         5VCCZ5KRBmg7FwjLMBmDuG6dAJExrKNeev/23dbcASTqFXQR2zsgdderg9y4UJi9Ubqv
-         c//ZCOh74XWZXR9cdjEqDEBzUM4xfRMGcnFHEn16ybTvukuYdbi5ERfkGlJjzScUVU9+
-         zlQztkgtf2DH58f0N7hmHIwMopk+upUiCFxDrmj7Vj4//AVegoMD4r9LHrxIunQxjyIC
-         9bjg==
+        bh=T49tZkAQeR8noCxKYSkS705bNR9eV7TlBqTPGyzE3TM=;
+        b=mZXFwdNlW0SWlJc6RrvZAYdaGHjuxZFmTDOj8llQbYxrSZvhMP+kBFgHpQOgeBTb+3
+         uOULziQzAXK0wq7KLVCNGA47O3jKd7Zk8fjke4d0JA0fVTnPbL8tH/8If/ktghwhkGPW
+         +l3PIVXEkDkmBGX2LTEIcllnBDAoXWeS8Ca4cUFhaHJDWYbOs8XdH1cnOatCHyLyDa3o
+         iBIwtdTuIk76XevlYRyOcx7MelhdInpPKJxqVQjfWj4JV51LDLcbvisNLmSGSfxHgsH5
+         Y2JNcMoiFBZ6oY6XyAF8S/uckuD7xbo0xhxC6064vnlXMkSuPYLR1ELczBV4z403UpjU
+         JISw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692181241; x=1692786041;
+        d=1e100.net; s=20221208; t=1692181245; x=1692786045;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=CeCsLtvDCyT32A3FOXuYg+gr5XNtFdVisCuwj+PGRb4=;
-        b=ekZWoWWaybqPCeMnCOD4DJ9Wv9Cl4iRuC1+2bXZqWZG+s9yNL9+Aqr6Dc0qZ//ZwO/
-         8y7JEvGLNzHYmpUspiNiPtrv5nOZyXGmQHT7jvh6S+jBujxdczb4Ddy8PsfLx4bXghwT
-         8ca4igRwqr55fV6eVbI0r5TGuFMfcfHg4lin1A4YTQcPGI6X+gZsIFD5/cssAlyIFjeB
-         zT7D+7MUzJNotgy7syP7GdcgzB3wvyV0VPUGddKeuOrx+vF5nMgUJpu+xX05TQtizARv
-         AMmGjOWJeTvkCzG3z9RdJfjYlYXfAXCXhVTqhBAFMW2pkEu8/gXeO9KgT0J4kJPMoptH
-         gb5g==
-X-Gm-Message-State: AOJu0YxtVP7D5u8ecwqNMjf0aJGZbEM7Zd3R+1XVw58u7klwGKleofzr
-	fGxcHfFOf7FtJz4g1Ud8SpxPRb0XNDL9ia6U
-X-Google-Smtp-Source: AGHT+IHXcO4BYXI9ietutHR0LKi2b7BvNdJrsbnNiH25wXy6NACl4RHwkmJbgTrsWoFjH1mzR+O7nA==
-X-Received: by 2002:a5d:6386:0:b0:318:70:a4ac with SMTP id p6-20020a5d6386000000b003180070a4acmr1081479wru.17.1692181241215;
-        Wed, 16 Aug 2023 03:20:41 -0700 (PDT)
+        bh=T49tZkAQeR8noCxKYSkS705bNR9eV7TlBqTPGyzE3TM=;
+        b=X8sclU58MwCdXPcrbUCFo4sswZYW2LQCKTHaCul4d7UckuhZLtNFoa7rKiKZsn9P5Z
+         E3wWmxX0WS4UlpKl4pOhetpg9e0bQ6KrYBBWo4xglUEdljw/PflvPE+ardVuaOPw/2tJ
+         BaSeRKQHXlS7SOAteh0kzwDkH9LvqiiFQqm3MXTWSRAHaEdv9WYkLbA9ur5xCwlhogFj
+         pILPjhxoJBUApJxqte5kVvtDb4fYa+ZSuDmZTRuSeMW74V8RXAsvesYPI/Kzng0iVl5r
+         Yofs4BIXZghg9ZyZJyQcaTJRrAXphZI9il/YqyERKBD0k4NPOZ8z2nsMFl0vAr+XpkSC
+         Tzsw==
+X-Gm-Message-State: AOJu0Yy0/1noFlVF/26PjhrqPCj+tsLno9/hRD18uun9yMI9k2aoQ3Xx
+	wcCIs7Xt2F3I/z6n4min/fwtm/DXCJyknLDt
+X-Google-Smtp-Source: AGHT+IFYXS0uByg6EvyNusfkF4IYow/JnDAQyb+YpiPj2io/McI/fxMDQGdunJVA1y436jtdtW5VZg==
+X-Received: by 2002:a5d:548e:0:b0:315:ae39:27c with SMTP id h14-20020a5d548e000000b00315ae39027cmr1091413wrv.70.1692181245079;
+        Wed, 16 Aug 2023 03:20:45 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 32/57] xen/riscv: introduce bit operations
-Date: Wed, 16 Aug 2023 13:19:44 +0300
-Message-ID: <ccdab77ac44b2697ea26ff0789c636ce8362abea.1692181079.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 37/57] xen/riscv: introduce asm/irq.h
+Date: Wed, 16 Aug 2023 13:19:49 +0300
+Message-ID: <9c083a58f7371c1c8da92556ab5ae7f47e650b3d.1692181079.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1692181079.git.oleksii.kurochko@gmail.com>
 References: <cover.1692181079.git.oleksii.kurochko@gmail.com>
@@ -93,315 +93,51 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/Makefile            |   1 +
- xen/arch/riscv/lib/Makefile        |   1 +
- xen/arch/riscv/lib/find_next_bit.c | 278 +++++++++++++++++++++++++++++
- 3 files changed, 280 insertions(+)
- create mode 100644 xen/arch/riscv/lib/Makefile
- create mode 100644 xen/arch/riscv/lib/find_next_bit.c
+ xen/arch/riscv/include/asm/irq.h | 34 ++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/irq.h
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 2fefe14e7c..b08048948f 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -1,5 +1,6 @@
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
- obj-y += entry.o
-+obj-y += lib/
- obj-y += mm.o
- obj-$(CONFIG_RISCV_64) += riscv64/
- obj-y += sbi.o
-diff --git a/xen/arch/riscv/lib/Makefile b/xen/arch/riscv/lib/Makefile
+diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
 new file mode 100644
-index 0000000000..6fae6a1f10
+index 0000000000..7b08785f3f
 --- /dev/null
-+++ b/xen/arch/riscv/lib/Makefile
-@@ -0,0 +1 @@
-+obj-y += find_next_bit.o
-diff --git a/xen/arch/riscv/lib/find_next_bit.c b/xen/arch/riscv/lib/find_next_bit.c
-new file mode 100644
-index 0000000000..ac5a4687e3
---- /dev/null
-+++ b/xen/arch/riscv/lib/find_next_bit.c
-@@ -0,0 +1,278 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * find_next_bit.c: fallback find next bit implementation
-+ *
-+ * Copyright (C) 2004 Red Hat, Inc. All Rights Reserved.
-+ * Written by David Howells (dhowells@redhat.com)
-+ */
-+#include <xen/bitops.h>
-+#include <asm/types.h>
-+#include <asm/byteorder.h>
++++ b/xen/arch/riscv/include/asm/irq.h
+@@ -0,0 +1,34 @@
++#ifndef __ASM_RISCV_IRQ_H__
++#define __ASM_RISCV_IRQ_H__
 +
-+#ifndef find_next_bit
-+/*
-+ * Find the next set bit in a memory region.
-+ */
-+unsigned long find_next_bit(const unsigned long *addr, unsigned long size,
-+			    unsigned long offset)
++#include <xen/lib.h>
++#include <xen/device_tree.h>
++#include <public/device_tree_defs.h>
++
++/* TODO */
++#define nr_irqs 0U
++#define nr_static_irqs 0
++#define arch_hwdom_irqs(domid) 0U
++
++#define domain_pirq_to_irq(d, pirq) (pirq)
++
++#define arch_evtchn_bind_pirq(d, pirq) ((void)((d) + (pirq)))
++
++struct arch_pirq {
++};
++
++struct arch_irq_desc {
++    unsigned int type;
++};
++
++static inline void arch_move_irqs(struct vcpu *v)
 +{
-+	const unsigned long *p = addr + BIT_WORD(offset);
-+	unsigned long result = offset & ~(BITS_PER_LONG-1);
-+	unsigned long tmp;
-+
-+	if (offset >= size)
-+		return size;
-+	size -= result;
-+	offset %= BITS_PER_LONG;
-+	if (offset) {
-+		tmp = *(p++);
-+		tmp &= (~0UL << offset);
-+		if (size < BITS_PER_LONG)
-+			goto found_first;
-+		if (tmp)
-+			goto found_middle;
-+		size -= BITS_PER_LONG;
-+		result += BITS_PER_LONG;
-+	}
-+	while (size & ~(BITS_PER_LONG-1)) {
-+		if ((tmp = *(p++)))
-+			goto found_middle;
-+		result += BITS_PER_LONG;
-+		size -= BITS_PER_LONG;
-+	}
-+	if (!size)
-+		return result;
-+	tmp = *p;
-+
-+found_first:
-+	tmp &= (~0UL >> (BITS_PER_LONG - size));
-+	if (tmp == 0UL)		/* Are any bits set? */
-+		return result + size;	/* Nope. */
-+found_middle:
-+	return result + __ffs(tmp);
-+}
-+EXPORT_SYMBOL(find_next_bit);
-+#endif
-+
-+#ifndef find_next_zero_bit
-+/*
-+ * This implementation of find_{first,next}_zero_bit was stolen from
-+ * Linus' asm-alpha/bitops.h.
-+ */
-+unsigned long find_next_zero_bit(const unsigned long *addr, unsigned long size,
-+				 unsigned long offset)
-+{
-+	const unsigned long *p = addr + BIT_WORD(offset);
-+	unsigned long result = offset & ~(BITS_PER_LONG-1);
-+	unsigned long tmp;
-+
-+	if (offset >= size)
-+		return size;
-+	size -= result;
-+	offset %= BITS_PER_LONG;
-+	if (offset) {
-+		tmp = *(p++);
-+		tmp |= ~0UL >> (BITS_PER_LONG - offset);
-+		if (size < BITS_PER_LONG)
-+			goto found_first;
-+		if (~tmp)
-+			goto found_middle;
-+		size -= BITS_PER_LONG;
-+		result += BITS_PER_LONG;
-+	}
-+	while (size & ~(BITS_PER_LONG-1)) {
-+		if (~(tmp = *(p++)))
-+			goto found_middle;
-+		result += BITS_PER_LONG;
-+		size -= BITS_PER_LONG;
-+	}
-+	if (!size)
-+		return result;
-+	tmp = *p;
-+
-+found_first:
-+	tmp |= ~0UL << size;
-+	if (tmp == ~0UL)	/* Are any bits zero? */
-+		return result + size;	/* Nope. */
-+found_middle:
-+	return result + ffz(tmp);
-+}
-+EXPORT_SYMBOL(find_next_zero_bit);
-+#endif
-+
-+#ifndef find_first_bit
-+/*
-+ * Find the first set bit in a memory region.
-+ */
-+unsigned long find_first_bit(const unsigned long *addr, unsigned long size)
-+{
-+	const unsigned long *p = addr;
-+	unsigned long result = 0;
-+	unsigned long tmp;
-+
-+	while (size & ~(BITS_PER_LONG-1)) {
-+		if ((tmp = *(p++)))
-+			goto found;
-+		result += BITS_PER_LONG;
-+		size -= BITS_PER_LONG;
-+	}
-+	if (!size)
-+		return result;
-+
-+	tmp = (*p) & (~0UL >> (BITS_PER_LONG - size));
-+	if (tmp == 0UL)		/* Are any bits set? */
-+		return result + size;	/* Nope. */
-+found:
-+	return result + __ffs(tmp);
-+}
-+EXPORT_SYMBOL(find_first_bit);
-+#endif
-+
-+#ifndef find_first_zero_bit
-+/*
-+ * Find the first cleared bit in a memory region.
-+ */
-+unsigned long find_first_zero_bit(const unsigned long *addr, unsigned long size)
-+{
-+	const unsigned long *p = addr;
-+	unsigned long result = 0;
-+	unsigned long tmp;
-+
-+	while (size & ~(BITS_PER_LONG-1)) {
-+		if (~(tmp = *(p++)))
-+			goto found;
-+		result += BITS_PER_LONG;
-+		size -= BITS_PER_LONG;
-+	}
-+	if (!size)
-+		return result;
-+
-+	tmp = (*p) | (~0UL << size);
-+	if (tmp == ~0UL)	/* Are any bits zero? */
-+		return result + size;	/* Nope. */
-+found:
-+	return result + ffz(tmp);
-+}
-+EXPORT_SYMBOL(find_first_zero_bit);
-+#endif
-+
-+#ifdef __BIG_ENDIAN
-+
-+/* include/linux/byteorder does not support "unsigned long" type */
-+static inline unsigned long ext2_swabp(const unsigned long * x)
-+{
-+#if BITS_PER_LONG == 64
-+	return (unsigned long) __swab64p((u64 *) x);
-+#elif BITS_PER_LONG == 32
-+	return (unsigned long) __swab32p((u32 *) x);
-+#else
-+#error BITS_PER_LONG not defined
-+#endif
++    BUG();
 +}
 +
-+/* include/linux/byteorder doesn't support "unsigned long" type */
-+static inline unsigned long ext2_swab(const unsigned long y)
++static inline int platform_get_irq(const struct dt_device_node *device, int index)
 +{
-+#if BITS_PER_LONG == 64
-+	return (unsigned long) __swab64((u64) y);
-+#elif BITS_PER_LONG == 32
-+	return (unsigned long) __swab32((u32) y);
-+#else
-+#error BITS_PER_LONG not defined
-+#endif
++    BUG();
 +}
 +
-+#ifndef find_next_zero_bit_le
-+unsigned long find_next_zero_bit_le(const void *addr, unsigned
-+		long size, unsigned long offset)
-+{
-+	const unsigned long *p = addr;
-+	unsigned long result = offset & ~(BITS_PER_LONG - 1);
-+	unsigned long tmp;
-+
-+	if (offset >= size)
-+		return size;
-+	p += BIT_WORD(offset);
-+	size -= result;
-+	offset &= (BITS_PER_LONG - 1UL);
-+	if (offset) {
-+		tmp = ext2_swabp(p++);
-+		tmp |= (~0UL >> (BITS_PER_LONG - offset));
-+		if (size < BITS_PER_LONG)
-+			goto found_first;
-+		if (~tmp)
-+			goto found_middle;
-+		size -= BITS_PER_LONG;
-+		result += BITS_PER_LONG;
-+	}
-+
-+	while (size & ~(BITS_PER_LONG - 1)) {
-+		if (~(tmp = *(p++)))
-+			goto found_middle_swap;
-+		result += BITS_PER_LONG;
-+		size -= BITS_PER_LONG;
-+	}
-+	if (!size)
-+		return result;
-+	tmp = ext2_swabp(p);
-+found_first:
-+	tmp |= ~0UL << size;
-+	if (tmp == ~0UL)	/* Are any bits zero? */
-+		return result + size; /* Nope. Skip ffz */
-+found_middle:
-+	return result + ffz(tmp);
-+
-+found_middle_swap:
-+	return result + ffz(ext2_swab(tmp));
-+}
-+EXPORT_SYMBOL(find_next_zero_bit_le);
-+#endif
-+
-+#ifndef find_next_bit_le
-+unsigned long find_next_bit_le(const void *addr, unsigned
-+		long size, unsigned long offset)
-+{
-+	const unsigned long *p = addr;
-+	unsigned long result = offset & ~(BITS_PER_LONG - 1);
-+	unsigned long tmp;
-+
-+	if (offset >= size)
-+		return size;
-+	p += BIT_WORD(offset);
-+	size -= result;
-+	offset &= (BITS_PER_LONG - 1UL);
-+	if (offset) {
-+		tmp = ext2_swabp(p++);
-+		tmp &= (~0UL << offset);
-+		if (size < BITS_PER_LONG)
-+			goto found_first;
-+		if (tmp)
-+			goto found_middle;
-+		size -= BITS_PER_LONG;
-+		result += BITS_PER_LONG;
-+	}
-+
-+	while (size & ~(BITS_PER_LONG - 1)) {
-+		tmp = *(p++);
-+		if (tmp)
-+			goto found_middle_swap;
-+		result += BITS_PER_LONG;
-+		size -= BITS_PER_LONG;
-+	}
-+	if (!size)
-+		return result;
-+	tmp = ext2_swabp(p);
-+found_first:
-+	tmp &= (~0UL >> (BITS_PER_LONG - size));
-+	if (tmp == 0UL)		/* Are any bits set? */
-+		return result + size; /* Nope. */
-+found_middle:
-+	return result + __ffs(tmp);
-+
-+found_middle_swap:
-+	return result + __ffs(ext2_swab(tmp));
-+}
-+EXPORT_SYMBOL(find_next_bit_le);
-+#endif
-+
-+#endif /* __BIG_ENDIAN */
++#endif /* __ASM_RISCV_IRQ_H__ */
+\ No newline at end of file
 -- 
 2.41.0
 
