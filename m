@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC6CC001B0
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:31:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.584444.915194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C44EFC04A94
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:31:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.584452.915223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDnu-0004Jd-AQ; Wed, 16 Aug 2023 10:31:06 +0000
+	id 1qWDo6-0006D3-Gw; Wed, 16 Aug 2023 10:31:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 584444.915194; Wed, 16 Aug 2023 10:31:06 +0000
+Received: by outflank-mailman (output) from mailman id 584452.915223; Wed, 16 Aug 2023 10:31:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDnu-0004JQ-5R; Wed, 16 Aug 2023 10:31:06 +0000
-Received: by outflank-mailman (input) for mailman id 584444;
- Wed, 16 Aug 2023 10:31:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qWDo6-0006CF-CD; Wed, 16 Aug 2023 10:31:18 +0000
+Received: by outflank-mailman (input) for mailman id 584452;
+ Wed, 16 Aug 2023 10:31:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aIlC=EB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qWDdo-0003R9-6Q
- for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:40 +0000
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [2a00:1450:4864:20::231])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8c5df3f5-3c1e-11ee-8779-cb3800f73035;
- Wed, 16 Aug 2023 12:20:39 +0200 (CEST)
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2b9d07a8d84so101385581fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:39 -0700 (PDT)
+ id 1qWDdk-0003RA-Ii
+ for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:36 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 897f77b2-3c1e-11ee-9b0c-b553b5be7939;
+ Wed, 16 Aug 2023 12:20:35 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-3fe9c20f449so28962775e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:35 -0700 (PDT)
 Received: from 192.168.1.26 ([151.25.98.127]) by smtp.gmail.com with ESMTPSA id
- g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.38
+ g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 03:20:38 -0700 (PDT)
+ Wed, 16 Aug 2023 03:20:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,81 +46,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c5df3f5-3c1e-11ee-8779-cb3800f73035
+X-Inumbo-ID: 897f77b2-3c1e-11ee-9b0c-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692181239; x=1692786039;
+        d=gmail.com; s=20221208; t=1692181234; x=1692786034;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1LCHRZgc+hBy0s0HZAJ5FU9CXl325alrh/h/y5fRpu8=;
-        b=HCOYwN5QwnAk9n9txQ71i1zzvI+5FPCZe4HVXbwPsGrWlz7KhgPvQqLdTGRxTOBGXp
-         SOwh8Ojv0RBdcQKR/SPm8GvzZ8uLUrzn1tHDQGAwrziMbE/jJELl/PgfyIazG/RdHqtM
-         q2bbgkJnzGWz1TJVq1bLVC6PIH6H/+QTnktXL0ffCoNkDDXvSumYqo2jgWlcngQiSar1
-         y0+1tREhOMo5cpWWFDg+/4gNmny+h4vMkQhh0MqSxawz96cbK73HNkMDT5fMbMT39rBf
-         pTjaucez68ob3wzWHu4nHD0TJamv00vkJrjLljgce9KVlMTsD785zex7hmGTwcBhNQOZ
-         dSgg==
+        bh=sLIASc1fyYfMjusfrMttWAQg8/twNkOwdqmjV/1G2Fc=;
+        b=kaKR7umiM0h39ZFQVRDgarJtolm0eEM3cAXiiUmpiUjOm/GhJyFf3lAQMTlmWGzZsi
+         A///Bu2YCorwkk8FNYajoQ1vZW6JzswOHpLciHtSoP7txJMeoHtTMAFluiODsrekrBpG
+         X0c7hMgS13SBynL1LXctnbsXZojkdMPIARs+mu5AyjMRrdpqUosmARPycrlC5g6xelJ5
+         pi9y58fFFnVjBP0lJJqIvlayApQyvJkTgDMjedmUBx8Orl5h5urRrzjYo42duU0RdXnH
+         ZOWJ8DFedXoPQF7An3KQFTxSulg1fINZYY7ckw/0kWDMI5H/GhKkVQzoXvrD+4GU+NKd
+         mRAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692181239; x=1692786039;
+        d=1e100.net; s=20221208; t=1692181234; x=1692786034;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1LCHRZgc+hBy0s0HZAJ5FU9CXl325alrh/h/y5fRpu8=;
-        b=MBYdT88SLIRBH3ZCx5chP1qJ6JK8+hzkJejJVkYeh3DRKkTbDyda+OZvLOj491sayc
-         a564Wg5FWBXvDES4kw8l91VQuZ+wFT3vXvFKVm6kxSgLi5zXGeEZt1zN5sRzoIIKR0KN
-         UDUan+hAUkPsBpgXUdfXPV+ZYkpQXgX9eV07HlWDdqMjTAc6eKA7NfaGXainoS9Zesi1
-         Q61On97fDy+aFQdJ5KenqrPHLq8xoKexEM+7hQ9IPM0+4NFdPcE4rc6nBOdUlChdhjZM
-         CD5Dnmlkee/gNMHEhjQ04fnoZwzGe7TYuplrr12IqGAsTt1l1D0tamKo+2In3rLGHjGc
-         0k/A==
-X-Gm-Message-State: AOJu0YylXPUOsmCetMhhycwFkbNQ6Ph9Xt8q0s/kJQ+12b+1NRqQ8HxU
-	pFCWBbEZEm/npW6v+OGvJPseOu33D2bWuiJc
-X-Google-Smtp-Source: AGHT+IG39bsuDoglkMGjOOfoVa1/5SZpxRN/EtmpU69vaK33fvCzzUTYk3ADgyUhW0SL2+AjVkappg==
-X-Received: by 2002:a2e:3a05:0:b0:2b7:b9ca:3eda with SMTP id h5-20020a2e3a05000000b002b7b9ca3edamr1176467lja.34.1692181238813;
-        Wed, 16 Aug 2023 03:20:38 -0700 (PDT)
+        bh=sLIASc1fyYfMjusfrMttWAQg8/twNkOwdqmjV/1G2Fc=;
+        b=OpEFVSrW9I7RaIpIeq7DlEsjX4RlFn86EPTg8tbJPmSDT024i4VKDQb7zQ9FD4XMd+
+         vFi7iiyDGU6kqLGDDzGIb210LuuAS7qPxeZ2z2PfuQq3fwkNo4knppWcFU4k7sURtWK1
+         d6bLscWPxME8eIMH3mT9J+brWg/hhbHinDa8JbpCvCD9v5XiDnXmvOeD7X4tBpBthrmz
+         l9zwATl6XEd4f7vJrqm1B9zKe8dATwJ/BJ8842B0DuyBeAJblo3g6VKCmMjjeA2Nyt+r
+         yWa31uIgbR15P2HV16lEKxpnGF6erDunKC9YJ4zoITJlb3q8vxEstww1S0TNe/oQl1qC
+         JBOA==
+X-Gm-Message-State: AOJu0Yzgb5gDmN5cX8SG3WIGWisf+6JGddDYBHDrH3saDPBc0rXOVH3n
+	UVivNX2fT6g7L13RYjXZsBgYwQdDrco6gkyk
+X-Google-Smtp-Source: AGHT+IFBrDaJx0kKlKbLXHePOS4B9TQ+9HilzbO+YwCEtC0GDaCRTRdAkcbgAXUOL00030HssdY92A==
+X-Received: by 2002:a1c:f715:0:b0:3fc:60:7dbf with SMTP id v21-20020a1cf715000000b003fc00607dbfmr1055200wmh.41.1692181234302;
+        Wed, 16 Aug 2023 03:20:34 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 29/56] xxen/riscv: introduce asm/hardirq.h
-Date: Wed, 16 Aug 2023 13:19:41 +0300
-Message-ID: <94e7437392b5a77d58a91727b36eaf8c49c55cb3.1692166745.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 24/57] xen/riscv: introduce asm/percpu.h
+Date: Wed, 16 Aug 2023 13:19:35 +0300
+Message-ID: <2b60f93696f70dcd430cb525597b12f5d154262c.1692181079.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1692166745.git.oleksii.kurochko@gmail.com>
-References: <cover.1692166745.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <cover.1692181079.git.oleksii.kurochko@gmail.com>
+References: <cover.1692181079.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/hardirq.h | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/hardirq.h
+ xen/arch/riscv/include/asm/percpu.h | 33 +++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/percpu.h
 
-diff --git a/xen/arch/riscv/include/asm/hardirq.h b/xen/arch/riscv/include/asm/hardirq.h
+diff --git a/xen/arch/riscv/include/asm/percpu.h b/xen/arch/riscv/include/asm/percpu.h
 new file mode 100644
-index 0000000000..467421849a
+index 0000000000..6b317a28fd
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/hardirq.h
-@@ -0,0 +1,26 @@
-+#ifndef __ASM_RISCV_HARDIRQ_H
-+#define __ASM_RISCV_HARDIRQ_H
++++ b/xen/arch/riscv/include/asm/percpu.h
+@@ -0,0 +1,33 @@
++#ifndef __ASM_RISCV_PERCPU_H__
++#define __ASM_RISCV_PERCPU_H__
 +
-+#include <xen/smp.h>
++#ifndef __ASSEMBLY__
 +
-+typedef struct {
-+        unsigned long __softirq_pending;
-+        unsigned int __local_irq_count;
-+} __cacheline_aligned irq_cpustat_t;
++#include <xen/types.h>
 +
-+#include <xen/irq_cpustat.h>    /* Standard mappings for irq_cpustat_t above */
++extern char __per_cpu_start[], __per_cpu_data_end[];
++extern unsigned long __per_cpu_offset[NR_CPUS];
++void percpu_init_areas(void);
 +
-+#define in_irq() (local_irq_count(smp_processor_id()) != 0)
++#define per_cpu(var, cpu)  \
++    (*RELOC_HIDE(&per_cpu__##var, __per_cpu_offset[cpu]))
 +
-+#define irq_enter()     (local_irq_count(smp_processor_id())++)
-+#define irq_exit()      (local_irq_count(smp_processor_id())--)
++#define this_cpu(var) \
++    (*RELOC_HIDE(&per_cpu__##var, __per_cpu_offset[get_processor_id()]))
 +
-+#endif /* __ASM_RISCV_HARDIRQ_H */
++#define per_cpu_ptr(var, cpu)  \
++    (*RELOC_HIDE(var, __per_cpu_offset[cpu]))
++#define this_cpu_ptr(var) \
++    (*RELOC_HIDE(var, get_processor_id()))
++
++#endif
++
++#endif /* __ASM_RISCV_PERCPU_H__ */
 +/*
 + * Local variables:
 + * mode: C
