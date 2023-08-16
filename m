@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3304C04A94
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:31:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.584429.915167 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88576C001B0
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:31:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.584445.915199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDnk-0002px-GW; Wed, 16 Aug 2023 10:30:56 +0000
+	id 1qWDnu-0004OE-Oc; Wed, 16 Aug 2023 10:31:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 584429.915167; Wed, 16 Aug 2023 10:30:56 +0000
+Received: by outflank-mailman (output) from mailman id 584445.915199; Wed, 16 Aug 2023 10:31:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDnk-0002oe-86; Wed, 16 Aug 2023 10:30:56 +0000
-Received: by outflank-mailman (input) for mailman id 584429;
- Wed, 16 Aug 2023 10:30:54 +0000
+	id 1qWDnu-0004Na-Gt; Wed, 16 Aug 2023 10:31:06 +0000
+Received: by outflank-mailman (input) for mailman id 584445;
+ Wed, 16 Aug 2023 10:31:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aIlC=EB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qWDe1-0003RA-1V
- for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:53 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1qWDeH-0003RA-3d
+ for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:21:09 +0000
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [2a00:1450:4864:20::433])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8f7869d4-3c1e-11ee-9b0c-b553b5be7939;
- Wed, 16 Aug 2023 12:20:45 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-3fe4cdb724cso59495765e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:45 -0700 (PDT)
+ id 96013628-3c1e-11ee-9b0c-b553b5be7939;
+ Wed, 16 Aug 2023 12:20:56 +0200 (CEST)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3197f632449so2046386f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:56 -0700 (PDT)
 Received: from 192.168.1.26 ([151.25.98.127]) by smtp.gmail.com with ESMTPSA id
- g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.43
+ g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 03:20:44 -0700 (PDT)
+ Wed, 16 Aug 2023 03:20:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,45 +46,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f7869d4-3c1e-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: 96013628-3c1e-11ee-9b0c-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692181244; x=1692786044;
+        d=gmail.com; s=20221208; t=1692181255; x=1692786055;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4SQGhzw7Z54ve6BdWhYdtY9jpypc4ffZo2cW4GL4tQI=;
-        b=k/oGzO07yQPqf6KSnwR4eYwj5isgM7TpBXewlc8GdLYHmIdJWlkmnXvp+oRYK4w6px
-         LlI0nuv/Rm0Lj17o9+keXsw3NwZVJp8MoXKqO1+sMGmc4UtQpfVTPtshUlcvHNJ4l3kr
-         nlkBki5IXwgXFBZOIPZ0L51+Spv5cBCLsCweVGJMjPLLbtl2xYpsML/mNWMSknvXMQbV
-         uzVIEDOcpytHQJk8srkTzRTwwFQfhfXiUM22NdVH2bTwYzs5hdE9Z7c+HrtobLZAlyEu
-         fuqIbJ0ShUxx3ZDW7slJVD2sJpqx4xuPfmmusI9ERsbksQWvQSsW+kgeTKD2SBmb1UmO
-         qDoQ==
+        bh=xyGs7CnsViwgB5MgcxTTzAGPB+T2Y8tFCTpCN8v2198=;
+        b=V6Uc5dIpcKOHvGRRdn03XFm2/DIWrt0Ocxwq/2Pli5zGu5WgX0hl3knnAUUzxtdUc3
+         lKPWGC45zDXJsJrmCIdgA1cw14Jbc1PcgnYAGxnab16D2UhOS12fdE2BALxl4p2bhLac
+         dqtRuMZDuIsjtPpu6X1zjmilArdZGL1nuQeYJHEWhCNGyjTJ75FkD7eDGT/C4T2URkWl
+         RmGC4hHRRg0qVCQNc5Hd63ha+EgvRwLEj2aIp8N3PL/9YOk+Imy/J02MKp3kr1kCp5f8
+         d1VdEWrVSABdcZqH46/DNnigsUHkpSQvvFFmMk2FOqG1NPNMa4LaFe1gbaN1wum3OHHl
+         lqYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692181244; x=1692786044;
+        d=1e100.net; s=20221208; t=1692181255; x=1692786055;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4SQGhzw7Z54ve6BdWhYdtY9jpypc4ffZo2cW4GL4tQI=;
-        b=As6iMRiYgvAFZZcz0Mkqn0AH2em2uvfZd3cU4ZT9Hc8kP8He3EXQfK8pXnaew3lFe1
-         ps90I2TbzCq6mPjLefvfK7WyRYDraFo/ptfgo0d3ppaPApYkchn+mGp7G22FxS3CANIg
-         A6jMwM4fBVC0cXaFOuboCvGjp9PDirc+SvZBuPzTqp5Pt/3/D4EwgkI48sbcXeU+gYdj
-         H8BwkQo/v6RSOyEfvex4g2ImUz/h7rcMD8h8u9j54RtUUsm/Ym1fmEHGzTlDhiC287oz
-         R5Hj8DnQ4UHXIfBPVM1tYxHc6I04iss0ho75muTK0+Gfrb1eZiyoI+NZCHacLRAmiDtj
-         MD/g==
-X-Gm-Message-State: AOJu0YzEcyu0ETVaEQQUn8DAKwgSP63Da+VPhhJcE360Rdu5awHrJMMQ
-	lIvA5dTRNTsbsBGo7VUxi8bb8PpW6eEnp2Cj
-X-Google-Smtp-Source: AGHT+IF2ANjzEb8TnVK90wqPqlMyVQ4yLFdAl8ZVGmxtSU4/oqzOtyZnXf9SdyUU5iTvDm5rO3GdCg==
-X-Received: by 2002:adf:e745:0:b0:319:650f:60e2 with SMTP id c5-20020adfe745000000b00319650f60e2mr1032627wrn.11.1692181244319;
-        Wed, 16 Aug 2023 03:20:44 -0700 (PDT)
+        bh=xyGs7CnsViwgB5MgcxTTzAGPB+T2Y8tFCTpCN8v2198=;
+        b=Nug94O/Tznb/vMSUqN5+2v3edeH6GsFOLMZ1znAXn5VRA7s7hGqfKGnRmrixO76/Aq
+         UyABtsvQhf9NgcwMzWiqJSDZJPsIAeRViUxOvXvR6Sw5xrKcfDOYaSg+MS+74zX5etPr
+         PCjGnGMIRDxhvIeEPATt7YDdarbJFBBuWBRUg/BcwWTWsoLUoeW9oayDDI9FSv9WiReR
+         aWBIteNIpRWAQPBIVFLnpqjwQF6fbFUisWHQp/6KClztwNjimOxUvBBE2/RwZOFZO0Hx
+         KnaNDuoP4j9dea91PmDYVhUTTJkL1KXM9CFX7X1nqAt0LjpSuyENG0cPIJIh2099Ubry
+         iTBg==
+X-Gm-Message-State: AOJu0Yw2Gy9SVeDs+/qD+vf2PoUxjZB2FXgOyhcNVeuXNK/fpF5b316Y
+	D1EBVixvTSzydAkLEvx726inuSq3tlKHZYSh
+X-Google-Smtp-Source: AGHT+IF4I3zhVFFCcSCP5RHe/vVkgg0jJN/B9mkw4/3wZ2J4n42ccn5NtIwS8/C983cGRiIQN1i8Hw==
+X-Received: by 2002:a5d:440f:0:b0:319:6e58:7095 with SMTP id z15-20020a5d440f000000b003196e587095mr1050171wrq.66.1692181255210;
+        Wed, 16 Aug 2023 03:20:55 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 36/57] xen/riscv: introduce asm/guest_access.h
-Date: Wed, 16 Aug 2023 13:19:48 +0300
-Message-ID: <d22756677e8ce55ebbf00641abafd4ed6297efbf.1692181079.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 49/57] xen/riscv: add minimal stuff to asm/processor.h to build full Xen
+Date: Wed, 16 Aug 2023 13:20:02 +0300
+Message-ID: <49fc04992808963a17321e4f34b8310a4b3077fb.1692181079.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1692181079.git.oleksii.kurochko@gmail.com>
 References: <cover.1692181079.git.oleksii.kurochko@gmail.com>
@@ -93,45 +93,42 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/guest_access.h | 29 +++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/guest_access.h
+ xen/arch/riscv/include/asm/processor.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/guest_access.h b/xen/arch/riscv/include/asm/guest_access.h
-new file mode 100644
-index 0000000000..7be5c4509d
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/guest_access.h
-@@ -0,0 +1,29 @@
-+#ifndef __ASM_RISCV_GUEST_ACCESS_H__
-+#define __ASM_RISCV_GUEST_ACCESS_H__
+diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+index 6db681d805..b6218a00a7 100644
+--- a/xen/arch/riscv/include/asm/processor.h
++++ b/xen/arch/riscv/include/asm/processor.h
+@@ -12,6 +12,9 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
++/* TODO: need to be implemeted */
++#define get_processor_id() 0
 +
-+#include <xen/mm.h>
+ /* On stack VCPU state */
+ struct cpu_user_regs
+ {
+@@ -53,6 +56,18 @@ struct cpu_user_regs
+     unsigned long pregs;
+ };
+ 
++/* TODO: need to implement */
++#define cpu_to_core(_cpu)   (0)
++#define cpu_to_socket(_cpu) (0)
 +
-+unsigned long raw_copy_to_guest(void *to, const void *from, unsigned len);
-+unsigned long raw_copy_from_guest(void *to, const void *from, unsigned len);
++static inline void cpu_relax(void)
++{
++	int dummy;
++	/* In lieu of a halt instruction, induce a long-latency stall. */
++	__asm__ __volatile__ ("div %0, %0, zero" : "=r" (dummy));
++	barrier();
++}
 +
-+#define __raw_copy_to_guest raw_copy_to_guest
-+#define __raw_copy_from_guest raw_copy_from_guest
-+
-+#define guest_handle_okay(hnd, nr) (1)
-+#define guest_handle_subrange_okay(hnd, first, last) (1)
-+
-+struct domain;
-+unsigned long copy_to_guest_phys(struct domain *d,
-+                                 paddr_t gpa,
-+                                 void *buf,
-+                                 unsigned int len);
-+
-+#endif /* __ASM_RISCV_GUEST_ACCESS_H__ */
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ static inline void wfi(void)
+ {
+     __asm__ __volatile__ ("wfi");
 -- 
 2.41.0
 
