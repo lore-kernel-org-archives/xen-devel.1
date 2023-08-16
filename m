@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7F2C001B0
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:20:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.584336.915021 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B88C001B0
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:30:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.584376.915063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDdj-0007Xc-36; Wed, 16 Aug 2023 10:20:35 +0000
+	id 1qWDmz-0006df-GR; Wed, 16 Aug 2023 10:30:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 584336.915021; Wed, 16 Aug 2023 10:20:34 +0000
+Received: by outflank-mailman (output) from mailman id 584376.915063; Wed, 16 Aug 2023 10:30:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDdi-0007VB-93; Wed, 16 Aug 2023 10:20:34 +0000
-Received: by outflank-mailman (input) for mailman id 584336;
- Wed, 16 Aug 2023 10:20:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qWDmz-0006dY-Du; Wed, 16 Aug 2023 10:30:09 +0000
+Received: by outflank-mailman (input) for mailman id 584376;
+ Wed, 16 Aug 2023 10:30:07 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aIlC=EB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qWDde-0003R9-2N
- for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:30 +0000
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [2a00:1450:4864:20::430])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8647627b-3c1e-11ee-8779-cb3800f73035;
- Wed, 16 Aug 2023 12:20:29 +0200 (CEST)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-317c3ac7339so5414514f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:29 -0700 (PDT)
+ id 1qWDe0-0003RA-1Q
+ for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:52 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8f0b964a-3c1e-11ee-9b0c-b553b5be7939;
+ Wed, 16 Aug 2023 12:20:44 +0200 (CEST)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-31977ace1c8so2581488f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:44 -0700 (PDT)
 Received: from 192.168.1.26 ([151.25.98.127]) by smtp.gmail.com with ESMTPSA id
- g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.28
+ g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 03:20:28 -0700 (PDT)
+ Wed, 16 Aug 2023 03:20:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,45 +46,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8647627b-3c1e-11ee-8779-cb3800f73035
+X-Inumbo-ID: 8f0b964a-3c1e-11ee-9b0c-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692181229; x=1692786029;
+        d=gmail.com; s=20221208; t=1692181243; x=1692786043;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=v6/TWt8JyUliAgL0VQ9PeLBO2G1fGORJ9yn65OnmJ4U=;
-        b=I+5Nqq1AycjwHVxZF/DsdtKPQOyyfDk1IyIvnOX8ulAS6SlCHGRKInO/9Ad0k+q4GL
-         qqmcwYI2ZzDODWAITgGFoK+e1u1Ji+ToSOw5bvWuVzIwp2mvh38UwWngkDaWd7Zxkane
-         8IBNhUs+6N9VxIVU18DUR2YxCdyKRnqvzkzm9WJTMRdFaCt/PnNda2+zjpiZw7KEboUR
-         9Wt71u1Ber212slFrk3C7g1tINh25t5GPJZZPP8P1rpIL7w+RBWpew++AxeIREigKyE2
-         B3ibj+rEA2gcbq3Q5jPsP9H2DVbYQVkTrqM+QhMbz9vV9LVYbzgBwxX+iPFGNpvZcQlh
-         8aIw==
+        bh=3qabthrf3WuIFhKG0aPx+f/gl7fkW41S3cfH+4WOWAo=;
+        b=o9prk/8bIkhqAjR8Sc2hhLFOUp4vssSSvpzG8j2XHj4dAehdtxhCV+jVJL8WwwvQU1
+         OImpm8Ec7ICTf7x2wU9VHczSa0RBGsLmiHQLsBGgjD62IkuMR24Qgl53Jw91JsZAFA3R
+         R23qW0jWH3rjtSHli/wVbpyxX664/hupW4lm4mLDpJ9Gz5ciMmloYM/eOzNJLoqUd5hx
+         AZSCtkCwmeNoom+KhE86yTgFiZfAKMGYhHwfQHx2SJdp1R23BDQKl4ttEdtPai5tgGCO
+         iPUFqAHRXmXziRbklZbxwOnushJ8YrnW2IKVTZvBHQkksy/Wafl7zOUSCLZijU1A4SNI
+         0LXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692181229; x=1692786029;
+        d=1e100.net; s=20221208; t=1692181243; x=1692786043;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=v6/TWt8JyUliAgL0VQ9PeLBO2G1fGORJ9yn65OnmJ4U=;
-        b=e7gBnhD4BiHWB0gqEzh1D+siKPBWIzDTVI/VhAfhMem+dRMVBE5lcEgeUtsXOTUD8T
-         E52tyOhgK7Fc+ctBdYXWUI2HTKcw9gO63rIcNu63jG7OIaBFCqi+O6g1knXR/sNiaLc2
-         RUjaROuMmYKeFr+Zmguh7izUVhZ0f1C12z1VNKbL4VwelQKVP9dy8fEhOjTF++h/D78v
-         IgY+72bhNTESwDBo323NSN6VP+8ep/HsLSbf8CVwO/pCGOR9sF4GC3TmI+CMkEmf30Yg
-         HmxS7HxJEnLOAqwsXVwxgJMBwUNhBnaDt4FW7KZhbL4GLo8rbmdSGg/YO1/bl1hDbXID
-         Gikw==
-X-Gm-Message-State: AOJu0Ywv1QNpb/N2VK2uw3Lw834osfjU8nzKpLXhkPbSNAzLgc51lq56
-	zYgtvKyMu6B/MZoSNKIiHiHpu9p5NX1dHXhI
-X-Google-Smtp-Source: AGHT+IFAOEgWdsxQHRgM8pPlFS9Qu1nW/WAL7gnra6ITXmlqiWLCRHhCviGf4fr6QgZ3esNJb4QGiA==
-X-Received: by 2002:a5d:46d2:0:b0:319:8a2f:bdf0 with SMTP id g18-20020a5d46d2000000b003198a2fbdf0mr1218455wrs.17.1692181228707;
-        Wed, 16 Aug 2023 03:20:28 -0700 (PDT)
+        bh=3qabthrf3WuIFhKG0aPx+f/gl7fkW41S3cfH+4WOWAo=;
+        b=k2xSmeZyK6mQf3DUblQk+XcMpP5eFzETJC1wT0bnPXC6mibuFlQTYmqOJ8RtkWe2qi
+         l13XhXWM81X3dqrm0PuSwK1WQqF5YnjsIq/wWL6YG6nS8bSifutsJSg8gVm/15nFP0o1
+         adMntK2w6YqE3HBjlXYLf68UZbvvqdDHDcDb5KswGjIxPY623umWAQ9oxlrwQymucEMd
+         RqiQF7ajZOkBk6VrKWfaW1EHCaY8byiwcSGLX2hVgBvK8kTk0rBj0iE2G6QyUtlz/GBi
+         hWt70j5JhpGK1xC76VIkAkK1Oc6z4vj79CM3Zss8UDVlqKelqA9Lj53y8pCoYMxpOCu3
+         LtSA==
+X-Gm-Message-State: AOJu0Yzq6LhD6DDL8R7GE85oFKTwny82ryG3xsrt1k9wP9BNXc5urz0s
+	AZXQeRogYAUonw/OAUBmbHXimui4B4Qc83S6
+X-Google-Smtp-Source: AGHT+IG/P0EQNkrXaE3fVLPqB+wQhZBB6/ClOFaMSvF0M3DhkohnxG/nvZZpwwwjzvQVQWoWbQMLhw==
+X-Received: by 2002:a5d:664f:0:b0:317:1b08:b317 with SMTP id f15-20020a5d664f000000b003171b08b317mr1057011wrw.6.1692181243592;
+        Wed, 16 Aug 2023 03:20:43 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 18/57] xen/riscv: introduce asm/random.h
-Date: Wed, 16 Aug 2023 13:19:28 +0300
-Message-ID: <93fb3701ad107c4cb772eacad215e70016ebf348.1692181079.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 35/57] xen/riscv: introduce asm/domain.h
+Date: Wed, 16 Aug 2023 13:19:47 +0300
+Message-ID: <a7c6142549c7bf004e87cccfdf12b8d703a0b812.1692181079.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1692181079.git.oleksii.kurochko@gmail.com>
 References: <cover.1692181079.git.oleksii.kurochko@gmail.com>
@@ -93,25 +93,60 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/random.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/random.h
+ xen/arch/riscv/include/asm/domain.h | 43 +++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/domain.h
 
-diff --git a/xen/arch/riscv/include/asm/random.h b/xen/arch/riscv/include/asm/random.h
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
 new file mode 100644
-index 0000000000..8d5df8a9b6
+index 0000000000..680c357d4d
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/random.h
-@@ -0,0 +1,9 @@
-+#ifndef __ASM_RISCV_RANDOM_H__
-+#define __ASM_RISCV_RANDOM_H__
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -0,0 +1,43 @@
++#ifndef __ASM_RISCV_DOMAIN_H__
++#define __ASM_RISCV_DOMAIN_H__
 +
-+static inline unsigned int arch_get_random(void)
++#include <xen/xmalloc.h>
++#include <public/hvm/params.h>
++
++struct hvm_domain
 +{
-+    return 0;
++    uint64_t              params[HVM_NR_PARAMS];
++};
++
++#define is_domain_direct_mapped(d) ((void)(d), 0)
++
++struct arch_vcpu_io {
++};
++
++struct arch_vcpu {
++};
++
++struct arch_domain {
++    struct hvm_domain hvm;
++};
++
++#include <xen/sched.h>
++
++static inline struct vcpu_guest_context *alloc_vcpu_guest_context(void)
++{
++    return xmalloc(struct vcpu_guest_context);
 +}
 +
-+#endif /* __ASM_RISCV_RANDOM_H__ */
++static inline void free_vcpu_guest_context(struct vcpu_guest_context *vgc)
++{
++    xfree(vgc);
++}
++
++struct guest_memory_policy {};
++static inline void update_guest_memory_policy(struct vcpu *v,
++                                              struct guest_memory_policy *gmp)
++{}
++
++static inline void arch_vcpu_block(struct vcpu *v) {}
++
++#endif /* __ASM_RISCV_DOMAIN_H__ */
+\ No newline at end of file
 -- 
 2.41.0
 
