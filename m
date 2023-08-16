@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F27C001DF
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:32:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.584505.915388 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 464DCC04FDF
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:32:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.584507.915399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDpB-0006Ui-6j; Wed, 16 Aug 2023 10:32:25 +0000
+	id 1qWDpC-0006nl-Hn; Wed, 16 Aug 2023 10:32:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 584505.915388; Wed, 16 Aug 2023 10:32:25 +0000
+Received: by outflank-mailman (output) from mailman id 584507.915399; Wed, 16 Aug 2023 10:32:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDpA-0006TC-V2; Wed, 16 Aug 2023 10:32:24 +0000
-Received: by outflank-mailman (input) for mailman id 584505;
+	id 1qWDpC-0006lM-3p; Wed, 16 Aug 2023 10:32:26 +0000
+Received: by outflank-mailman (input) for mailman id 584507;
  Wed, 16 Aug 2023 10:32:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aIlC=EB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qWDe8-0003RA-2T
- for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:21:00 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 92a5e942-3c1e-11ee-9b0c-b553b5be7939;
- Wed, 16 Aug 2023 12:20:50 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-319e93a1594so550858f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:50 -0700 (PDT)
+ id 1qWDe4-0003R9-Jh
+ for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:56 +0000
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [2a00:1450:4864:20::232])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 94a37645-3c1e-11ee-8779-cb3800f73035;
+ Wed, 16 Aug 2023 12:20:53 +0200 (CEST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2bb9a063f26so4877431fa.2
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:53 -0700 (PDT)
 Received: from 192.168.1.26 ([151.25.98.127]) by smtp.gmail.com with ESMTPSA id
- g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.49
+ g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 03:20:49 -0700 (PDT)
+ Wed, 16 Aug 2023 03:20:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,79 +46,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92a5e942-3c1e-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: 94a37645-3c1e-11ee-8779-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692181249; x=1692786049;
+        d=gmail.com; s=20221208; t=1692181253; x=1692786053;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OHCt3rIVbyvXRgwAssE3JC7jIeGq6/wtVtrQWKu19qs=;
-        b=oOxinih1MvrlDtL77m6bZY+7k6RK84W2TCemn4LqrF9VnmcCmPBypZju7aVIcP2/XP
-         Ee1Gg8L1Zm2Rr2y3qai/N1op+n6QUgmuO3Fa8Ne7w8L2KvK+HzDbjIDRCBiQ/LumuBrf
-         KWdV+e+X+m2DXIREIPVH+MnDOavGJq4D4WLGe/FnxsCNI+3VmnTN6sf9w8/MMYO7kS9k
-         palTLjSYQ0/3bhRQkKr7d1C/XWUoTt10OlCqiNoPuYjbA1QVAsT8vXj/ZV2xxyYIZHSN
-         pXL1PhcrjWpVOLe9Uv8xROHpFneUoQiIxKfmzNMNHULeJF2Un1GwMqKIA+/PtNAhvrUr
-         aVFQ==
+        bh=a5o/J0Yhy4zQnMbYIdMWJX60W2Yerk1IC1deMjRe2no=;
+        b=sr51+ZqaNCC8F3FLT++AiEX4BmivgASgkqfxYcbwMmvh93OejrpnbMnEV3BiIK1q5q
+         hI4/sKh3UHlNh4p7t2YMKUl5JephP+022eEB2tSz61A9OXsq6wxLE0CNnAgLV6nuIuAE
+         9OjU4PLZZgGpihmiI9RUohX6DHrSJ5/m+Hbho8jEl9gQWRFogMPoDt2OdbZ31CdYcaV1
+         lf1QaDa4bMUP1rxlvlGvib4ecvDnJnekiiimZGKa/gmgnub50WmF53L3p+fq1QvO1Ycx
+         yNdPPzSxMLegLlghV//+Y7cUlKEUygQ5vIzRW9RWuektsugMR+8z4Uqhuil1jj1eW5nd
+         kfYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692181249; x=1692786049;
+        d=1e100.net; s=20221208; t=1692181253; x=1692786053;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OHCt3rIVbyvXRgwAssE3JC7jIeGq6/wtVtrQWKu19qs=;
-        b=QLEqHJp8kZFr39oZGSVl61WktGhi+Me7QtZwt9v8GJJ5+nyJqX8Aq2mgXrnHPmRtmH
-         hJ/bRVZk/eyBV2bv+qXdEPc+zL5af7iEQtIy3oGp2ddyvXtxSJkYnNS6qXN2I5vGn878
-         T1TdgYpnjwrDDlNVr8fQuKA9ZPZ8zt6q481oxuOfXOazDJneGQM818QR2YBOHj7l/jRG
-         Y5S566SwO+1ACdneZNm01v0Enp7Ze6BQAcRoO8GV444DKmmZhRdpa0b8mvpVgVvZZMnv
-         WG8dwr7SmepHlipIcs4cMWTYeuwD2PTam9ujAJIF6XXY6azFqkoDkPGwAEfSFsNfRgXB
-         AWeA==
-X-Gm-Message-State: AOJu0YxeyKQYHRQ8jnSwzb2E8Sb6zQuG1abQpaW+TbVNSL0LwW1gE0Vb
-	IW/hRVSsU/ChhPlTNyT1ozwfBX6EehovjZ5W
-X-Google-Smtp-Source: AGHT+IE0+2TyfHFFrR72mXBKm3+Bz9S1F94hCDTqMCfEI5yg0YAyFA3X/R+trUNJem/BQAr5FXcaOg==
-X-Received: by 2002:adf:f3ce:0:b0:319:8333:9052 with SMTP id g14-20020adff3ce000000b0031983339052mr1067526wrp.26.1692181249622;
-        Wed, 16 Aug 2023 03:20:49 -0700 (PDT)
+        bh=a5o/J0Yhy4zQnMbYIdMWJX60W2Yerk1IC1deMjRe2no=;
+        b=C/uo5pt0vtTN0E3FlRbKSN4KxexLT+0RE57j6jVjRsaMtY/1vahixxWUJUb/VNVwSe
+         6fIemtcM/fr53ttzi9E9fUM2vruZ+JmDHe/xOWX2R37AGTDHNywjM/MAUXzJDPEYAf6j
+         9LIyDv3wYD+dJ5AgN1mTKkmHoUg+Z77W6gWe6r9nraUXYpaz+pY7kGuIdXtXLi6rWNl6
+         4fLzmAN0Jk8fOenUi1OfgB66HSxsCCOYL/Xwg5jEw5D/oog2kVvppcPdZHl4hqeXqcX9
+         38inGOL6bYC17FI+B/gnI4zDasHYsh9AK8QoExWmmG3T+XUCozDkaOpB+1+qchEs/Lvo
+         a1oQ==
+X-Gm-Message-State: AOJu0YxbB7QHvCGTjJ08ofj3iKuxSW7oXH2VS51QzNPU+92EPv+Qo+BP
+	0vtQdD+q+46bl9jBrtXgFo9ceP3mX4VyK5KU
+X-Google-Smtp-Source: AGHT+IGc4HRQkUQ4oizER2Lxid9+s3toHPwW+S5C/FlXgrPoF7uyRY4LwRlLNBqL31IvVoUed0+3IQ==
+X-Received: by 2002:a2e:8341:0:b0:2b9:e053:79d8 with SMTP id l1-20020a2e8341000000b002b9e05379d8mr1071162ljh.18.1692181252829;
+        Wed, 16 Aug 2023 03:20:52 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 42/57] xen/riscv: introduce asm/softirq.h
-Date: Wed, 16 Aug 2023 13:19:55 +0300
-Message-ID: <a818a6f55bbdd21b554134d772f11b07d8d25ce5.1692181079.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 46/57] xen/riscv: define an address of frame table
+Date: Wed, 16 Aug 2023 13:19:59 +0300
+Message-ID: <8d3a615afbcff9681aa0ba8e2272d7e7e26251d1.1692181079.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1692181079.git.oleksii.kurochko@gmail.com>
 References: <cover.1692181079.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Also the patchs adds some helpful macros.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/softirq.h | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/softirq.h
+ xen/arch/riscv/include/asm/config.h | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/softirq.h b/xen/arch/riscv/include/asm/softirq.h
-new file mode 100644
-index 0000000000..8364aa2810
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/softirq.h
-@@ -0,0 +1,16 @@
-+#ifndef __ASM_RISCV_SOFTIRQ_H__
-+#define __ASM_RISCV_SOFTIRQ_H__
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index fa90ae0898..63ddcae1f9 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -77,12 +77,31 @@
+   name:
+ #endif
+ 
++#define VPN_BITS    (9)
++#define OFFSET_BITS (12)
 +
-+#define NR_ARCH_SOFTIRQS       0
+ #ifdef CONFIG_RISCV_64
 +
-+#define arch_skip_send_event_check(cpu) 0
++#define SLOTN_ENTRY_BITS        (HYP_PT_ROOT_LEVEL * VPN_BITS + OFFSET_BITS)
++#define SLOTN(slot)             (_AT(vaddr_t,slot) << SLOTN_ENTRY_BITS)
++#define SLOTN_ENTRY_SIZE        SLOTN(1)
 +
-+#endif /* __ASM_RISCV_SOFTIRQ_H__ */
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #define XEN_VIRT_START 0xFFFFFFFFC0000000 /* (_AC(-1, UL) + 1 - GB(1)) */
++
++#define FRAMETABLE_VIRT_START   SLOTN(196)
++#define FRAMETABLE_SIZE         GB(3)
++#define FRAMETABLE_NR           (FRAMETABLE_SIZE / sizeof(*frame_table))
++#define FRAMETABLE_VIRT_END     (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
++
++#define VMAP_VIRT_START         SLOTN(194)
++#define VMAP_VIRT_SIZE          GB(1)
++
+ #else
+ #error "RV32 isn't supported"
+ #endif
+ 
++#define HYPERVISOR_VIRT_START XEN_VIRT_START
++
+ #define SMP_CACHE_BYTES (1 << 6)
+ 
+ #define STACK_SIZE PAGE_SIZE
+@@ -95,6 +114,8 @@
+ #define RV_STAGE1_MODE SATP_MODE_SV32
+ #endif
+ 
++#define HYP_PT_ROOT_LEVEL (CONFIG_PAGING_LEVELS - 1)
++
+ #endif /* __RISCV_CONFIG_H__ */
+ /*
+  * Local variables:
 -- 
 2.41.0
 
