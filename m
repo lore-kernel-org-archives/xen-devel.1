@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE9DC04A94
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDCBC001B0
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Aug 2023 10:30:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.584417.915144 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.584410.915134 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDnf-0001wV-1x; Wed, 16 Aug 2023 10:30:51 +0000
+	id 1qWDna-0001Jf-ME; Wed, 16 Aug 2023 10:30:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 584417.915144; Wed, 16 Aug 2023 10:30:51 +0000
+Received: by outflank-mailman (output) from mailman id 584410.915134; Wed, 16 Aug 2023 10:30:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWDne-0001wI-Sb; Wed, 16 Aug 2023 10:30:50 +0000
-Received: by outflank-mailman (input) for mailman id 584417;
- Wed, 16 Aug 2023 10:30:50 +0000
+	id 1qWDna-0001JS-IC; Wed, 16 Aug 2023 10:30:46 +0000
+Received: by outflank-mailman (input) for mailman id 584410;
+ Wed, 16 Aug 2023 10:30:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aIlC=EB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qWDe5-0003RA-20
- for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:57 +0000
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [2a00:1450:4864:20::432])
+ id 1qWDdp-0003RA-07
+ for xen-devel@lists.xenproject.org; Wed, 16 Aug 2023 10:20:41 +0000
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [2a00:1450:4864:20::42e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 915067c9-3c1e-11ee-9b0c-b553b5be7939;
- Wed, 16 Aug 2023 12:20:48 +0200 (CEST)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-31427ddd3fbso5587482f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:48 -0700 (PDT)
+ id 8b0b7a2e-3c1e-11ee-9b0c-b553b5be7939;
+ Wed, 16 Aug 2023 12:20:37 +0200 (CEST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-313e742a787so3760964f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Aug 2023 03:20:37 -0700 (PDT)
 Received: from 192.168.1.26 ([151.25.98.127]) by smtp.gmail.com with ESMTPSA id
- g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.46
+ g5-20020adfe405000000b0031773a8e5c4sm20877843wrm.37.2023.08.16.03.20.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 03:20:47 -0700 (PDT)
+ Wed, 16 Aug 2023 03:20:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,45 +46,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 915067c9-3c1e-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: 8b0b7a2e-3c1e-11ee-9b0c-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692181247; x=1692786047;
+        d=gmail.com; s=20221208; t=1692181237; x=1692786037;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A4ptIkdY77K81tEHPihXAWsNfWZZEHDjxbo0FTlxYlU=;
-        b=XtyAC0+03O+lcAoJTH90d0Xw/+/Y4m9yfG8qf0MAAKksaJFO9D3fm//nZ6W+92DN2R
-         FoKsOpma8nphGPA8CnZB66JX4nutbQrxDIpWMIj1HiUA+hSOBiNS0ewblDtQh1hSJLhQ
-         6XcxHm/umSMjlQ1OjIZQnKfgnS4eWhEfLo+L8v0goKkqvVyCnVpV0h7gjiqTxdXExD/h
-         obliHHmmuPKzeA+fYQ6tEgEX9bQQQFAlTSUgb/oHX14u+fzOZIPSxO2nC86S/Iq1Zanu
-         KWuxBCKs9KDiKUvyZetcR3INqaf6++6/gKASfSUNOR0yNKyMYWBY8xUVMD0lmiRA1tTV
-         tsFg==
+        bh=faZN0PTWNbimEuXos1DkocfCWtrw9mSeUqlog2BUeiI=;
+        b=YdCBSPSKbYCBxpDMBHXEQhGFr8AgEm/LkqDl1kqIZ000qx+DJCDH62tqCWWgFQyeIs
+         CDTmrEO09BVDhVoY/xulFCAtQLtcKuS4NpEaUdY4QPr/BYgktG0lVaZpSQueaTGYMNyg
+         Pk2y8HEhpBkEJgyHYdtbDv5cDLJQ7UfQHxS0SOAfRCGR9i3GaYVGNDSEd/PBkj8hCv/4
+         p1a8nyDjCQz6AmmjbqgaAjMyG14SQw0FhmAO0s8ofpp2ITFOokfp5+5+AFGRHB9DKJoQ
+         3htgiCnQYSQ+Iht27fLP8c5pcRMobpCAir0fL5eZ0Ke110Wi37e2wsQQ2HD43BM67Msz
+         ABNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692181247; x=1692786047;
+        d=1e100.net; s=20221208; t=1692181237; x=1692786037;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=A4ptIkdY77K81tEHPihXAWsNfWZZEHDjxbo0FTlxYlU=;
-        b=HEI80zcxcrLhxXfyAyHkTv2zbHU3pqFuegvoCbkjGg8f5o0nfCa+rKZguzHL0jamR/
-         Kv/sz57Y2gVq3pkSR6uywRoGYrsviMzUA5nsYmLCgXgF0HKVrV4+JkHpYTCNIPo3Aj3T
-         C52YQJa9Ba6t/+zFhM+FkhqyOQIWvhwhlIwFQPqvoLikHs3BsE0pBh90+FFrBErkbnfu
-         PGG5nAIUxe1XmSX6n+fvFAH/MMARWZCSteHbX3CGckdCjIgy8cOr92Gf8cVkl7Ka1aOE
-         fmVe8A5105WC7+vV7bfkPHrPl4j811vHUziLhBoM5I1QUV5LatPBQwSaBtCdPhVcgc0M
-         WeDQ==
-X-Gm-Message-State: AOJu0YxZ5zl166iOP1UsmTW32OGU8h7EPLhncs2iFVzFvk1mFzHVCZoz
-	FgJmJQrraHjYqSrRNJe5eI8m8kNTbuc+TEre
-X-Google-Smtp-Source: AGHT+IGCl+DIeeg07CmJpFpxf0G2RfI19ePdYZMhf/aVNXmeprpsvU6nEMrj8W/oR/+jOE+i6iGGZA==
-X-Received: by 2002:a5d:5192:0:b0:319:8bb3:ab8a with SMTP id k18-20020a5d5192000000b003198bb3ab8amr948431wrv.52.1692181247379;
-        Wed, 16 Aug 2023 03:20:47 -0700 (PDT)
+        bh=faZN0PTWNbimEuXos1DkocfCWtrw9mSeUqlog2BUeiI=;
+        b=WD/CILCaYAmBkKkNQqOwtgsCqgO0V/qCrCCDHlNVUM/a0hDLFnsxHbbJ6CjwRWeDWn
+         GZdgWXcIIA7lL4hdcJuRcHxtmRn1w8uqwPHLdrChfG97ywCrmyoa4d0v7SdeuePdW2Nk
+         d6YO/etkyI7ZMm72r+mDBu4jAFMCU5dGE50DtxX5cbhPYfSslDceM9cl0x/PhtbnPm2T
+         DAcPu6NrL/ZRZwGKkECMd2pINRjvJM01dnblWWAPyBRrcOHH8K7jfmxpCZbx5BYYeyzg
+         T2KdAKXjwEj+sbpxZxAmQn4kXyQmNSNmDTPNbp7zIbDsMpmlJ7bgHGxfgKLxqOE77dm4
+         di/Q==
+X-Gm-Message-State: AOJu0YyEEz1gyPKXYvWKKvQvIZnJHUPNqk48Yob1V6cJTgJ9R2dzj5ZE
+	jZpJlifwBNau/tEqpMs38gejXrNSd9eUdS6A
+X-Google-Smtp-Source: AGHT+IF8tuHIm+FkkBwpLbydHWbU9mFl4l7bkcD3+wGHwX/5HpYqSeCo7GHdjNYhQzso5iBPXeACxQ==
+X-Received: by 2002:adf:ff82:0:b0:313:e391:e492 with SMTP id j2-20020adfff82000000b00313e391e492mr1185063wrr.17.1692181236671;
+        Wed, 16 Aug 2023 03:20:36 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 40/57] xen/riscv: introduce asm/p2m.h
-Date: Wed, 16 Aug 2023 13:19:52 +0300
-Message-ID: <7c1a1083ac3577c26071de14459f7a3ba7316a27.1692181079.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 27/57] xen/riscv: introduce cmpxchg.h
+Date: Wed, 16 Aug 2023 13:19:38 +0300
+Message-ID: <40b81d8e401e375bc3723657e6b41f6b8d256490.1692181079.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1692181079.git.oleksii.kurochko@gmail.com>
 References: <cover.1692181079.git.oleksii.kurochko@gmail.com>
@@ -93,122 +93,389 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/p2m.h | 105 +++++++++++++++++++++++++++++++
- 1 file changed, 105 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/p2m.h
+ xen/arch/riscv/include/asm/cmpxchg.h | 373 +++++++++++++++++++++++++++
+ 1 file changed, 373 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/cmpxchg.h
 
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+diff --git a/xen/arch/riscv/include/asm/cmpxchg.h b/xen/arch/riscv/include/asm/cmpxchg.h
 new file mode 100644
-index 0000000000..993aec6d2c
+index 0000000000..8660ecd287
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -0,0 +1,105 @@
-+#ifndef __ASM_RISCV_P2M_H__
-+#define __ASM_RISCV_P2M_H__
++++ b/xen/arch/riscv/include/asm/cmpxchg.h
+@@ -0,0 +1,373 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Copyright (C) 2014 Regents of the University of California */
 +
-+#include <asm/page-bits.h>
++#ifndef _ASM_RISCV_CMPXCHG_H
++#define _ASM_RISCV_CMPXCHG_H
 +
-+#define paddr_bits PADDR_BITS
++#include <asm/system.h>
++#include <asm/fence.h>
++#include <xen/lib.h>
++
++#define __xchg_relaxed(ptr, new, size)					\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(new) __new = (new);					\
++	__typeof__(*(ptr)) __ret;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			"	amoswap.w %0, %2, %1\n"			\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			"	amoswap.d %0, %2, %1\n"			\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	default:							\
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
++
++#define xchg_relaxed(ptr, x)						\
++({									\
++	__typeof__(*(ptr)) _x_ = (x);					\
++	(__typeof__(*(ptr))) __xchg_relaxed((ptr),			\
++					    _x_, sizeof(*(ptr)));	\
++})
++
++#define __xchg_acquire(ptr, new, size)					\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(new) __new = (new);					\
++	__typeof__(*(ptr)) __ret;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			"	amoswap.w %0, %2, %1\n"			\
++			RISCV_ACQUIRE_BARRIER				\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			"	amoswap.d %0, %2, %1\n"			\
++			RISCV_ACQUIRE_BARRIER				\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	default:							\
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
++
++#define xchg_acquire(ptr, x)						\
++({									\
++	__typeof__(*(ptr)) _x_ = (x);					\
++	(__typeof__(*(ptr))) __xchg_acquire((ptr),			\
++					    _x_, sizeof(*(ptr)));	\
++})
++
++#define __xchg_release(ptr, new, size)					\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(new) __new = (new);					\
++	__typeof__(*(ptr)) __ret;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			RISCV_RELEASE_BARRIER				\
++			"	amoswap.w %0, %2, %1\n"			\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			RISCV_RELEASE_BARRIER				\
++			"	amoswap.d %0, %2, %1\n"			\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	default:							\
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
++
++#define xchg_release(ptr, x)						\
++({									\
++	__typeof__(*(ptr)) _x_ = (x);					\
++	(__typeof__(*(ptr))) __xchg_release((ptr),			\
++					    _x_, sizeof(*(ptr)));	\
++})
++
++#define __xchg(ptr, new, size)						\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(new) __new = (new);					\
++	__typeof__(*(ptr)) __ret;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			"	amoswap.w.aqrl %0, %2, %1\n"		\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			"	amoswap.d.aqrl %0, %2, %1\n"		\
++			: "=r" (__ret), "+A" (*__ptr)			\
++			: "r" (__new)					\
++			: "memory");					\
++		break;							\
++	default:							\
++		__ret = 0; \
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
++
++#define xchg(ptr, x)							\
++({									\
++	__typeof__(*(ptr)) _x_ = (x);					\
++	(__typeof__(*(ptr))) __xchg((ptr), _x_, sizeof(*(ptr)));	\
++})
++
++#define xchg32(ptr, x)							\
++({									\
++	BUILD_BUG_ON(sizeof(*(ptr)) != 4);				\
++	xchg((ptr), (x));						\
++})
++
++#define xchg64(ptr, x)							\
++({									\
++	BUILD_BUG_ON(sizeof(*(ptr)) != 8);				\
++	xchg((ptr), (x));						\
++})
 +
 +/*
-+ * List of possible type for each page in the p2m entry.
-+ * The number of available bit per page in the pte for this purpose is 4 bits.
-+ * So it's possible to only have 16 fields. If we run out of value in the
-+ * future, it's possible to use higher value for pseudo-type and don't store
-+ * them in the p2m entry.
++ * Atomic compare and exchange.  Compare OLD with MEM, if identical,
++ * store NEW in MEM.  Return the initial value in MEM.  Success is
++ * indicated by comparing RETURN with OLD.
 + */
-+typedef enum {
-+    p2m_invalid = 0,    /* Nothing mapped here */
-+    p2m_ram_rw,         /* Normal read/write guest RAM */
-+    p2m_ram_ro,         /* Read-only; writes are silently dropped */
-+    p2m_mmio_direct_dev,/* Read/write mapping of genuine Device MMIO area */
-+    p2m_mmio_direct_nc, /* Read/write mapping of genuine MMIO area non-cacheable */
-+    p2m_mmio_direct_c,  /* Read/write mapping of genuine MMIO area cacheable */
-+    p2m_map_foreign_rw, /* Read/write RAM pages from foreign domain */
-+    p2m_map_foreign_ro, /* Read-only RAM pages from foreign domain */
-+    p2m_grant_map_rw,   /* Read/write grant mapping */
-+    p2m_grant_map_ro,   /* Read-only grant mapping */
-+    /* The types below are only used to decide the page attribute in the P2M */
-+    p2m_iommu_map_rw,   /* Read/write iommu mapping */
-+    p2m_iommu_map_ro,   /* Read-only iommu mapping */
-+    p2m_max_real_type,  /* Types after this won't be store in the p2m */
-+} p2m_type_t;
++#define __cmpxchg_relaxed(ptr, old, new, size)				\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(*(ptr)) __old = (old);				\
++	__typeof__(*(ptr)) __new = (new);				\
++	__typeof__(*(ptr)) __ret;					\
++	register unsigned int __rc;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			"0:	lr.w %0, %2\n"				\
++			"	bne  %0, %z3, 1f\n"			\
++			"	sc.w %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			"0:	lr.d %0, %2\n"				\
++			"	bne %0, %z3, 1f\n"			\
++			"	sc.d %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	default:							\
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
 +
-+#include <xen/p2m-common.h>
++#define cmpxchg_relaxed(ptr, o, n)					\
++({									\
++	__typeof__(*(ptr)) _o_ = (o);					\
++	__typeof__(*(ptr)) _n_ = (n);					\
++	(__typeof__(*(ptr))) __cmpxchg_relaxed((ptr),			\
++					_o_, _n_, sizeof(*(ptr)));	\
++})
 +
-+static inline int get_page_and_type(struct page_info *page,
-+                                    struct domain *domain,
-+                                    unsigned long type)
-+{
-+    BUG();
-+    return 1;
-+}
++#define __cmpxchg_acquire(ptr, old, new, size)				\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(*(ptr)) __old = (old);				\
++	__typeof__(*(ptr)) __new = (new);				\
++	__typeof__(*(ptr)) __ret;					\
++	register unsigned int __rc;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			"0:	lr.w %0, %2\n"				\
++			"	bne  %0, %z3, 1f\n"			\
++			"	sc.w %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			RISCV_ACQUIRE_BARRIER				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			"0:	lr.d %0, %2\n"				\
++			"	bne %0, %z3, 1f\n"			\
++			"	sc.d %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			RISCV_ACQUIRE_BARRIER				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	default:							\
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
 +
-+/* Look up a GFN and take a reference count on the backing page. */
-+typedef unsigned int p2m_query_t;
-+#define P2M_ALLOC    (1u<<0)   /* Populate PoD and paged-out entries */
-+#define P2M_UNSHARE  (1u<<1)   /* Break CoW sharing */
++#define cmpxchg_acquire(ptr, o, n)					\
++({									\
++	__typeof__(*(ptr)) _o_ = (o);					\
++	__typeof__(*(ptr)) _n_ = (n);					\
++	(__typeof__(*(ptr))) __cmpxchg_acquire((ptr),			\
++					_o_, _n_, sizeof(*(ptr)));	\
++})
 +
-+static inline struct page_info *get_page_from_gfn(
-+    struct domain *d, unsigned long gfn, p2m_type_t *t, p2m_query_t q)
-+{
-+    BUG();
-+    return NULL;
-+}
++#define __cmpxchg_release(ptr, old, new, size)				\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(*(ptr)) __old = (old);				\
++	__typeof__(*(ptr)) __new = (new);				\
++	__typeof__(*(ptr)) __ret;					\
++	register unsigned int __rc;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			RISCV_RELEASE_BARRIER				\
++			"0:	lr.w %0, %2\n"				\
++			"	bne  %0, %z3, 1f\n"			\
++			"	sc.w %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			RISCV_RELEASE_BARRIER				\
++			"0:	lr.d %0, %2\n"				\
++			"	bne %0, %z3, 1f\n"			\
++			"	sc.d %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	default:							\
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
 +
-+static inline void memory_type_changed(struct domain *d)
-+{
-+    BUG();
-+}
++#define cmpxchg_release(ptr, o, n)					\
++({									\
++	__typeof__(*(ptr)) _o_ = (o);					\
++	__typeof__(*(ptr)) _n_ = (n);					\
++	(__typeof__(*(ptr))) __cmpxchg_release((ptr),			\
++					_o_, _n_, sizeof(*(ptr)));	\
++})
 +
++#define __cmpxchg(ptr, old, new, size)					\
++({									\
++	__typeof__(ptr) __ptr = (ptr);					\
++	__typeof__(*(ptr)) __old = (__typeof__(*(ptr)))(old);				\
++	__typeof__(*(ptr)) __new = (__typeof__(*(ptr)))(new);				\
++	__typeof__(*(ptr)) __ret;					\
++	register unsigned int __rc;					\
++	switch (size) {							\
++	case 4:								\
++		__asm__ __volatile__ (					\
++			"0:	lr.w %0, %2\n"				\
++			"	bne  %0, %z3, 1f\n"			\
++			"	sc.w.rl %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			"	fence rw, rw\n"				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	case 8:								\
++		__asm__ __volatile__ (					\
++			"0:	lr.d %0, %2\n"				\
++			"	bne %0, %z3, 1f\n"			\
++			"	sc.d.rl %1, %z4, %2\n"			\
++			"	bnez %1, 0b\n"				\
++			"	fence rw, rw\n"				\
++			"1:\n"						\
++			: "=&r" (__ret), "=&r" (__rc), "+A" (*__ptr)	\
++			: "rJ" (__old), "rJ" (__new)			\
++			: "memory");					\
++		break;							\
++	default:							\
++		ASSERT_UNREACHABLE();					\
++	}								\
++	__ret;								\
++})
 +
-+static inline int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
-+                                                        unsigned int order)
-+{
-+    BUG();
-+    return 1;
-+}
++#define cmpxchg(ptr, o, n)						\
++({									\
++	__typeof__(*(ptr)) _o_ = (o);					\
++	__typeof__(*(ptr)) _n_ = (n);					\
++	(__typeof__(*(ptr))) __cmpxchg((ptr),				\
++				       _o_, _n_, sizeof(*(ptr)));	\
++})
 +
-+static inline int guest_physmap_add_entry(struct domain *d,
-+                            gfn_t gfn,
-+                            mfn_t mfn,
-+                            unsigned long page_order,
-+                            p2m_type_t t)
-+{
-+    BUG();
-+    return 1;
-+}
++#define cmpxchg_local(ptr, o, n)					\
++	(__cmpxchg_relaxed((ptr), (o), (n), sizeof(*(ptr))))
 +
-+/* Untyped version for RAM only, for compatibility */
-+static inline int __must_check
-+guest_physmap_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
-+                       unsigned int page_order)
-+{
-+    return guest_physmap_add_entry(d, gfn, mfn, page_order, p2m_ram_rw);
-+}
++#define cmpxchg32(ptr, o, n)						\
++({									\
++	BUILD_BUG_ON(sizeof(*(ptr)) != 4);				\
++	cmpxchg((ptr), (o), (n));					\
++})
 +
-+static inline mfn_t gfn_to_mfn(struct domain *d, gfn_t gfn)
-+{
-+    BUG();
-+    return _mfn(0);
-+}
++#define cmpxchg32_local(ptr, o, n)					\
++({									\
++	BUILD_BUG_ON(sizeof(*(ptr)) != 4);				\
++	cmpxchg_relaxed((ptr), (o), (n))				\
++})
 +
-+static inline bool arch_acquire_resource_check(struct domain *d)
-+{
-+    /*
-+     * The reference counting of foreign entries in set_foreign_p2m_entry()
-+     * is supported on RISCV.
-+     */
-+    return true;
-+}
++#define cmpxchg64(ptr, o, n)						\
++({									\
++	BUILD_BUG_ON(sizeof(*(ptr)) != 8);				\
++	cmpxchg((ptr), (o), (n));					\
++})
 +
-+static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
-+{
-+    /* Not supported on RISCV. */
-+}
++#define cmpxchg64_local(ptr, o, n)					\
++({									\
++	BUILD_BUG_ON(sizeof(*(ptr)) != 8);				\
++	cmpxchg_relaxed((ptr), (o), (n));				\
++})
 +
-+#endif /* __ASM_RISCV_P2M_H__ */
-\ No newline at end of file
++#endif /* _ASM_RISCV_CMPXCHG_H */
 -- 
 2.41.0
 
