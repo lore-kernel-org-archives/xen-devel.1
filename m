@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6562FC677C4
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Aug 2023 21:44:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.585635.916800 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3230AC64EDA
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Aug 2023 21:44:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.585637.916812 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWkmo-0007xA-FL; Thu, 17 Aug 2023 21:44:10 +0000
+	id 1qWkmp-00088g-4w; Thu, 17 Aug 2023 21:44:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 585635.916800; Thu, 17 Aug 2023 21:44:10 +0000
+Received: by outflank-mailman (output) from mailman id 585637.916812; Thu, 17 Aug 2023 21:44:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWkmo-0007x3-A8; Thu, 17 Aug 2023 21:44:10 +0000
-Received: by outflank-mailman (input) for mailman id 585635;
- Thu, 17 Aug 2023 21:44:08 +0000
+	id 1qWkmo-00087S-T9; Thu, 17 Aug 2023 21:44:10 +0000
+Received: by outflank-mailman (input) for mailman id 585637;
+ Thu, 17 Aug 2023 21:44:10 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qWkmm-0007i3-Bm
- for xen-devel@lists.xenproject.org; Thu, 17 Aug 2023 21:44:08 +0000
+ (envelope-from <julien@xen.org>) id 1qWkmo-0007wy-8n
+ for xen-devel@lists.xenproject.org; Thu, 17 Aug 2023 21:44:10 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qWkmm-0001Ji-3m; Thu, 17 Aug 2023 21:44:08 +0000
+ id 1qWkmo-0001Kn-0d; Thu, 17 Aug 2023 21:44:10 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qWkml-0002Ab-Py; Thu, 17 Aug 2023 21:44:08 +0000
+ id 1qWkmn-0002Ab-PI; Thu, 17 Aug 2023 21:44:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=I7zoXV1nPGurVpsLsqbHeCL12heA5HUJVOTneiY8xyg=; b=I8TCtvUc18bxbcOXepyZEsUMf6
-	RBvc/Ya+AiTVoH5ExncbXUnBbdkYaKccjSf3Pg5qomedQFiwOeUSfo9wYbJUcJUB8xNuT96BfXfHk
-	+yJexMafoe4MtnGypuF+r8GIW3qFBD3waSismQK/4/UsQApyJTlwcfS6a0iFILT6OujU=;
+	bh=+HktoAPJl+g/kSxPYwPyXQAcUUkLIppr+tW9RDnrz7w=; b=Lz29J5VJzuf2FD1iFxADa2ecDH
+	pK5D9eZwpml1cfAhoAl0tK16++5rwyeVWmZcfWht/G3db2mPfTGyh3Bksoe+6WOl2BtdaZjLsbHuN
+	qA5b+OG9OI3xm4nMfICZllZ6167TF7QaUl7tspNr/LuI6ra5AGGwtzIb+Od/cSRZ0ymo=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -55,9 +55,9 @@ Cc: julien@xen.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/3] xen/arm: vmmio: The number of entries cannot be negative
-Date: Thu, 17 Aug 2023 22:43:54 +0100
-Message-Id: <20230817214356.47174-2-julien@xen.org>
+Subject: [PATCH 3/3] xen/public: arch-arm: All PSR_* defines should be unsigned
+Date: Thu, 17 Aug 2023 22:43:56 +0100
+Message-Id: <20230817214356.47174-4-julien@xen.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230817214356.47174-1-julien@xen.org>
 References: <20230817214356.47174-1-julien@xen.org>
@@ -66,151 +66,83 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-The number of virtual MMIO regions cannot be negative. So switch
-the field 'num_entries' and 'max_num_entries' to 'unsigned int'.
+The defines PSR_* are field in registers and always unsigned. So
+add 'U' to clarify.
 
-The new type is then propagated to the caller and the vGIC
-code.
+This should help with MISRA Rule 7.2.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/arch/arm/domain.c           | 3 ++-
- xen/arch/arm/include/asm/mmio.h | 6 +++---
- xen/arch/arm/include/asm/vgic.h | 6 +++---
- xen/arch/arm/io.c               | 2 +-
- xen/arch/arm/vgic-v2.c          | 2 +-
- xen/arch/arm/vgic-v3.c          | 2 +-
- xen/arch/arm/vgic.c             | 2 +-
- xen/arch/arm/vgic/vgic-init.c   | 2 +-
- 8 files changed, 13 insertions(+), 12 deletions(-)
+ xen/include/public/arch-arm.h | 52 +++++++++++++++++------------------
+ 1 file changed, 26 insertions(+), 26 deletions(-)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 6113ca785c78..28e3aaa5e482 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -694,7 +694,8 @@ int arch_domain_create(struct domain *d,
-                        struct xen_domctl_createdomain *config,
-                        unsigned int flags)
- {
--    int rc, count = 0;
-+    unsigned int count = 0;
-+    int rc;
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index c6449893e493..492819ad22c9 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -339,36 +339,36 @@ typedef uint64_t xen_callback_t;
  
-     BUILD_BUG_ON(GUEST_MAX_VCPUS < MAX_VIRT_CPUS);
+ /* PSR bits (CPSR, SPSR) */
  
-diff --git a/xen/arch/arm/include/asm/mmio.h b/xen/arch/arm/include/asm/mmio.h
-index 79e64d9af804..b22cfdac5be9 100644
---- a/xen/arch/arm/include/asm/mmio.h
-+++ b/xen/arch/arm/include/asm/mmio.h
-@@ -75,8 +75,8 @@ struct mmio_handler {
- };
+-#define PSR_THUMB       (1<<5)        /* Thumb Mode enable */
+-#define PSR_FIQ_MASK    (1<<6)        /* Fast Interrupt mask */
+-#define PSR_IRQ_MASK    (1<<7)        /* Interrupt mask */
+-#define PSR_ABT_MASK    (1<<8)        /* Asynchronous Abort mask */
+-#define PSR_BIG_ENDIAN  (1<<9)        /* arm32: Big Endian Mode */
+-#define PSR_DBG_MASK    (1<<9)        /* arm64: Debug Exception mask */
+-#define PSR_IT_MASK     (0x0600fc00)  /* Thumb If-Then Mask */
+-#define PSR_JAZELLE     (1<<24)       /* Jazelle Mode */
+-#define PSR_Z           (1<<30)       /* Zero condition flag */
++#define PSR_THUMB       (1U <<5)      /* Thumb Mode enable */
++#define PSR_FIQ_MASK    (1U <<6)      /* Fast Interrupt mask */
++#define PSR_IRQ_MASK    (1U <<7)      /* Interrupt mask */
++#define PSR_ABT_MASK    (1U <<8)      /* Asynchronous Abort mask */
++#define PSR_BIG_ENDIAN  (1U << 9)     /* arm32: Big Endian Mode */
++#define PSR_DBG_MASK    (1U << 9)     /* arm64: Debug Exception mask */
++#define PSR_IT_MASK     (0x0600fc00U) /* Thumb If-Then Mask */
++#define PSR_JAZELLE     (1U << 24)    /* Jazelle Mode */
++#define PSR_Z           (1U << 30)    /* Zero condition flag */
  
- struct vmmio {
--    int num_entries;
--    int max_num_entries;
-+    unsigned int num_entries;
-+    unsigned int max_num_entries;
-     rwlock_t lock;
-     struct mmio_handler *handlers;
- };
-@@ -86,7 +86,7 @@ enum io_state try_handle_mmio(struct cpu_user_regs *regs,
- void register_mmio_handler(struct domain *d,
-                            const struct mmio_handler_ops *ops,
-                            paddr_t addr, paddr_t size, void *priv);
--int domain_io_init(struct domain *d, int max_count);
-+int domain_io_init(struct domain *d, unsigned int max_count);
- void domain_io_free(struct domain *d);
+ /* 32 bit modes */
+-#define PSR_MODE_USR 0x10
+-#define PSR_MODE_FIQ 0x11
+-#define PSR_MODE_IRQ 0x12
+-#define PSR_MODE_SVC 0x13
+-#define PSR_MODE_MON 0x16
+-#define PSR_MODE_ABT 0x17
+-#define PSR_MODE_HYP 0x1a
+-#define PSR_MODE_UND 0x1b
+-#define PSR_MODE_SYS 0x1f
++#define PSR_MODE_USR 0x10U
++#define PSR_MODE_FIQ 0x11U
++#define PSR_MODE_IRQ 0x12U
++#define PSR_MODE_SVC 0x13U
++#define PSR_MODE_MON 0x16U
++#define PSR_MODE_ABT 0x17U
++#define PSR_MODE_HYP 0x1aU
++#define PSR_MODE_UND 0x1bU
++#define PSR_MODE_SYS 0x1fU
  
- void try_decode_instruction(const struct cpu_user_regs *regs,
-diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgic.h
-index aa9f49409edc..6901a05c0669 100644
---- a/xen/arch/arm/include/asm/vgic.h
-+++ b/xen/arch/arm/include/asm/vgic.h
-@@ -304,8 +304,8 @@ extern void vgic_enable_irqs(struct vcpu *v, uint32_t r, int n);
- extern void vgic_set_irqs_pending(struct vcpu *v, uint32_t r,
-                                   unsigned int rank);
- extern void register_vgic_ops(struct domain *d, const struct vgic_ops *ops);
--int vgic_v2_init(struct domain *d, int *mmio_count);
--int vgic_v3_init(struct domain *d, int *mmio_count);
-+int vgic_v2_init(struct domain *d, unsigned int *mmio_count);
-+int vgic_v3_init(struct domain *d, unsigned int *mmio_count);
+ /* 64 bit modes */
+-#define PSR_MODE_BIT  0x10 /* Set iff AArch32 */
+-#define PSR_MODE_EL3h 0x0d
+-#define PSR_MODE_EL3t 0x0c
+-#define PSR_MODE_EL2h 0x09
+-#define PSR_MODE_EL2t 0x08
+-#define PSR_MODE_EL1h 0x05
+-#define PSR_MODE_EL1t 0x04
+-#define PSR_MODE_EL0t 0x00
++#define PSR_MODE_BIT  0x10U /* Set iff AArch32 */
++#define PSR_MODE_EL3h 0x0dU
++#define PSR_MODE_EL3t 0x0cU
++#define PSR_MODE_EL2h 0x09U
++#define PSR_MODE_EL2t 0x08U
++#define PSR_MODE_EL1h 0x05U
++#define PSR_MODE_EL1t 0x04U
++#define PSR_MODE_EL0t 0x00U
  
- extern bool vgic_to_sgi(struct vcpu *v, register_t sgir,
-                         enum gic_sgi_mode irqmode, int virq,
-@@ -352,7 +352,7 @@ int vgic_connect_hw_irq(struct domain *d, struct vcpu *v, unsigned int virq,
- 
- bool vgic_evtchn_irq_pending(struct vcpu *v);
- 
--int domain_vgic_register(struct domain *d, int *mmio_count);
-+int domain_vgic_register(struct domain *d, unsigned int *mmio_count);
- int domain_vgic_init(struct domain *d, unsigned int nr_spis);
- void domain_vgic_free(struct domain *d);
- int vcpu_vgic_init(struct vcpu *v);
-diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
-index 172583df047f..96c740d5636c 100644
---- a/xen/arch/arm/io.c
-+++ b/xen/arch/arm/io.c
-@@ -224,7 +224,7 @@ void register_mmio_handler(struct domain *d,
-     write_unlock(&vmmio->lock);
- }
- 
--int domain_io_init(struct domain *d, int max_count)
-+int domain_io_init(struct domain *d, unsigned int max_count)
- {
-     rwlock_init(&d->arch.vmmio.lock);
-     d->arch.vmmio.num_entries = 0;
-diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
-index 35363fee098c..2a2eda2e6f4c 100644
---- a/xen/arch/arm/vgic-v2.c
-+++ b/xen/arch/arm/vgic-v2.c
-@@ -731,7 +731,7 @@ static const struct vgic_ops vgic_v2_ops = {
-     .lpi_get_priority = vgic_v2_lpi_get_priority,
- };
- 
--int vgic_v2_init(struct domain *d, int *mmio_count)
-+int vgic_v2_init(struct domain *d, unsigned int *mmio_count)
- {
-     if ( !vgic_v2_hw.enabled )
-     {
-diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
-index 1b7173da1e30..05a009409ab8 100644
---- a/xen/arch/arm/vgic-v3.c
-+++ b/xen/arch/arm/vgic-v3.c
-@@ -1812,7 +1812,7 @@ static const struct vgic_ops v3_ops = {
-     .lpi_get_priority = vgic_v3_lpi_get_priority,
- };
- 
--int vgic_v3_init(struct domain *d, int *mmio_count)
-+int vgic_v3_init(struct domain *d, unsigned int *mmio_count)
- {
-     if ( !vgic_v3_hw.enabled )
-     {
-diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-index 97d6f6106638..afcac791fe4b 100644
---- a/xen/arch/arm/vgic.c
-+++ b/xen/arch/arm/vgic.c
-@@ -85,7 +85,7 @@ static void vgic_rank_init(struct vgic_irq_rank *rank, uint8_t index,
-         write_atomic(&rank->vcpu[i], vcpu);
- }
- 
--int domain_vgic_register(struct domain *d, int *mmio_count)
-+int domain_vgic_register(struct domain *d, unsigned int *mmio_count)
- {
-     switch ( d->arch.vgic.version )
-     {
-diff --git a/xen/arch/arm/vgic/vgic-init.c b/xen/arch/arm/vgic/vgic-init.c
-index 76b85ea8231b..f8d7d3a226d0 100644
---- a/xen/arch/arm/vgic/vgic-init.c
-+++ b/xen/arch/arm/vgic/vgic-init.c
-@@ -101,7 +101,7 @@ static void vgic_vcpu_early_init(struct vcpu *vcpu)
-  *
-  * was: kvm_vgic_create
-  */
--int domain_vgic_register(struct domain *d, int *mmio_count)
-+int domain_vgic_register(struct domain *d, unsigned int *mmio_count)
- {
-     switch ( d->arch.vgic.version )
-     {
+ /*
+  * We set PSR_Z to be able to boot Linux kernel versions with an invalid
 -- 
 2.40.1
 
