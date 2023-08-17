@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCF06C27C7A
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Aug 2023 12:18:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.585367.916451 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E149C41513
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Aug 2023 12:40:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.585374.916461 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWbwq-0005s6-J2; Thu, 17 Aug 2023 12:17:56 +0000
+	id 1qWcI9-0000KZ-9v; Thu, 17 Aug 2023 12:39:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 585367.916451; Thu, 17 Aug 2023 12:17:56 +0000
+Received: by outflank-mailman (output) from mailman id 585374.916461; Thu, 17 Aug 2023 12:39:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWbwq-0005rz-GO; Thu, 17 Aug 2023 12:17:56 +0000
-Received: by outflank-mailman (input) for mailman id 585367;
- Thu, 17 Aug 2023 12:17:55 +0000
+	id 1qWcI9-0000KS-6q; Thu, 17 Aug 2023 12:39:57 +0000
+Received: by outflank-mailman (input) for mailman id 585374;
+ Thu, 17 Aug 2023 12:39:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ql+W=EC=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1qWbwp-0005o2-Sq
- for xen-devel@lists.xenproject.org; Thu, 17 Aug 2023 12:17:55 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ <SRS0=0n1I=EC=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qWcI7-0000KB-EJ
+ for xen-devel@lists.xenproject.org; Thu, 17 Aug 2023 12:39:55 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 18512d98-3cf8-11ee-877b-cb3800f73035;
- Thu, 17 Aug 2023 14:17:55 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-99c93638322so184921366b.1
- for <xen-devel@lists.xenproject.org>; Thu, 17 Aug 2023 05:17:55 -0700 (PDT)
+ id 2a74b0ea-3cfb-11ee-877b-cb3800f73035;
+ Thu, 17 Aug 2023 14:39:54 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id 2C7E54EE073C;
+ Thu, 17 Aug 2023 14:39:53 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,70 +41,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 18512d98-3cf8-11ee-877b-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692274675; x=1692879475;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vyGu2tmQwe2b5D7VbO24y947d2slAAh2NIefrQhG5/c=;
-        b=VvbCEs21FJNZVaIGvRvJJtJITTfhxL3/t0kfscGym5j6TdpYPLH7E0MuctsvNP4bY4
-         g4j7MYjP6OJip5ztMNALW4wYHPeHGGHgjZQ0OgkhXDK4V0gUB1pmcUE5laLftZEDQ4Yw
-         yLjwg+V2jhSB+VZP1qPKo6IlpHCpCqmobEHr45xirf+bnFJIMAq4xp9OAH0sH1gTd+M1
-         4PxCBRKjPQ2P3IU0mt/Io4QaxtypNZujZrebNBtWmlGB8mjXrKnDHi0LrjchzM64Jz+q
-         8fixaTJPSRX8qFSlbX++OHpkgGOOlmYG9g6CLqaMssOzysSdksXoDD6p2nTEckd2dDv5
-         6L1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692274675; x=1692879475;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vyGu2tmQwe2b5D7VbO24y947d2slAAh2NIefrQhG5/c=;
-        b=Y3/6n+gg0zE75Il8lktvqAKJ9kw1neYq6ct5vZ2vWdiVKstI0bVIGaXauNME2InCEM
-         0NxNHKZQ/hOzXjaLorQb2XWK7odvGQjjMFIEBEXskaaBHJh61DF7Gm5UHjuLt27mN47i
-         gMA3iwaBhVmZuzr/N2LHcU4iQhfw69ua+BjBUhSe74xOEYiH3LOWRKCRJrVBUxLvo0NU
-         JsUwfnz6ohXUHQfc91vww+2K56hrf4CzeCC+DpauHUdJpCBdHhxUyRivTgyfEQBMuQ/H
-         +FGjzBVHhRL9wkEkGF50C/Mk0u1ZlKG4KzvPOf8i/7lYfj2bz6xGbaFHW5Gq1U5sY87e
-         9yzw==
-X-Gm-Message-State: AOJu0YwTWwuw6LxUjYitb9Ay4YGtsiqY3VDLZuY7Fld0sQozwM2ZfdhM
-	h1IMJiL98MQAcWXB963/f0lnkDzu6jaarJ81LKGqh4bI
-X-Google-Smtp-Source: AGHT+IGGzBRc7FYcPSgN1rCHDPezZ0yAPDcW6psVS3/fH2IBeU18LlTvCvbxMRYIbC+TbW3/KAEYNuyp79+321d79gI=
-X-Received: by 2002:a17:907:847:b0:99d:f274:316e with SMTP id
- ww7-20020a170907084700b0099df274316emr2970709ejb.2.1692274674596; Thu, 17 Aug
- 2023 05:17:54 -0700 (PDT)
+X-Inumbo-ID: 2a74b0ea-3cfb-11ee-877b-cb3800f73035
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 1/3] vm_event: rework inclusions to use arch-indipendent header
+Date: Thu, 17 Aug 2023 14:39:26 +0200
+Message-Id: <6ef8207eee081e2c9a3914a14025077fc72b19e6.1692275359.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1692275359.git.nicola.vetrini@bugseng.com>
+References: <cover.1692275359.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
-References: <20230816190425.8160-1-dpsmith@apertussolutions.com>
-In-Reply-To: <20230816190425.8160-1-dpsmith@apertussolutions.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Thu, 17 Aug 2023 08:17:42 -0400
-Message-ID: <CAKf6xpvpHq5vBHm20snGr+fgu78Kviiwne2JVcxrESXStDs2Mw@mail.gmail.com>
-Subject: Re: [PATCH] xsm: removing inclusion of byteorder.h
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Cc: xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Wed, Aug 16, 2023 at 3:05=E2=80=AFPM Daniel P. Smith
-<dpsmith@apertussolutions.com> wrote:
->
-> This is to complement patch 'common: move Linux-inherited fixed width typ=
-e
-> decls to common header' by removing the unnecessary include of
-> 'asm/byteorder.h'. In the process of removing these includes, the orderin=
-g was
-> corrected to comply with current coding style.
->
-> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-> ---
->  xen/xsm/flask/ss/avtab.c       | 3 +--
->  xen/xsm/flask/ss/conditional.c | 9 ++++-----
->  xen/xsm/flask/ss/ebitmap.c     | 8 ++++----
->  xen/xsm/flask/ss/policydb.c    | 9 ++++-----
->  4 files changed, 13 insertions(+), 16 deletions(-)
+The arch-specific header <asm/vm_event.h> should be included by the
+common header <xen/vm_event.h>, so that the latter can be included
+in the source files.
 
-These four files all call le32_to_cpu(), so AFAICT, you are trading an
-explicit dependency for an implicit one.  Is that what you want?
+This also resolves violations of MISRA C:2012 Rule 8.4 that were
+caused by declarations for
+'vm_event_{fill_regs,set_registers,monitor_next_interrupt}'
+in <asm/vm_event.h> not being visible when
+defining functions in 'xen/arch/x86/vm_event.c'
 
-Regards,
-Jason
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+Changes in v2:
+- Include the arch-specific header in the common one, and only include
+  the latter in source files.
+
+The following functions have been mainly touched by the following commits,
+but the present commit does not solve a problem introduced by one of them per se, except perhaps the first one mentioned, which is why I didn't put a Fixes tag in this v2:
+- 975efd3baa8d ("introduce VM_EVENT_FLAG_SET_REGISTERS")
+- adc75eba8b15 ("x86/vm_event: consolidate hvm_event_fill_regs and p2m_vm_event_fill_regs")
+- 9864841914c2 ("x86/vm_event: add support for VM_EVENT_REASON_INTERRUPT")
+---
+ xen/arch/arm/include/asm/vm_event.h | 1 -
+ xen/arch/arm/vm_event.c             | 2 +-
+ xen/arch/x86/vm_event.c             | 2 +-
+ xen/include/xen/vm_event.h          | 1 +
+ 4 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/arm/include/asm/vm_event.h b/xen/arch/arm/include/asm/vm_event.h
+index abe7db1970ca..4d861373b38d 100644
+--- a/xen/arch/arm/include/asm/vm_event.h
++++ b/xen/arch/arm/include/asm/vm_event.h
+@@ -20,7 +20,6 @@
+ #define __ASM_ARM_VM_EVENT_H__
+ 
+ #include <xen/sched.h>
+-#include <xen/vm_event.h>
+ #include <public/domctl.h>
+ 
+ static inline int vm_event_init_domain(struct domain *d)
+diff --git a/xen/arch/arm/vm_event.c b/xen/arch/arm/vm_event.c
+index ba99f56eb20c..ccfd25bbbca9 100644
+--- a/xen/arch/arm/vm_event.c
++++ b/xen/arch/arm/vm_event.c
+@@ -8,7 +8,7 @@
+  */
+ 
+ #include <xen/sched.h>
+-#include <asm/vm_event.h>
++#include <xen/vm_event.h>
+ 
+ void vm_event_fill_regs(vm_event_request_t *req)
+ {
+diff --git a/xen/arch/x86/vm_event.c b/xen/arch/x86/vm_event.c
+index 7027c08a926b..e6c7ad5337dd 100644
+--- a/xen/arch/x86/vm_event.c
++++ b/xen/arch/x86/vm_event.c
+@@ -20,7 +20,7 @@
+ 
+ #include <xen/sched.h>
+ #include <xen/mem_access.h>
+-#include <asm/vm_event.h>
++#include <xen/vm_event.h>
+ 
+ /* Implicitly serialized by the domctl lock. */
+ int vm_event_init_domain(struct domain *d)
+diff --git a/xen/include/xen/vm_event.h b/xen/include/xen/vm_event.h
+index 92811d9110e5..9a86358b42ae 100644
+--- a/xen/include/xen/vm_event.h
++++ b/xen/include/xen/vm_event.h
+@@ -25,6 +25,7 @@
+ 
+ #include <xen/sched.h>
+ #include <public/vm_event.h>
++#include <asm/vm_event.h>
+ 
+ struct vm_event_domain
+ {
+-- 
+2.34.1
+
 
