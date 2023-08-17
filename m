@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9267AEB64DD
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Aug 2023 12:40:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.585377.916492 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62EE1C2FC15
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Aug 2023 12:40:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.585375.916468 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWcIB-00013C-8g; Thu, 17 Aug 2023 12:39:59 +0000
+	id 1qWcI9-0000Nw-In; Thu, 17 Aug 2023 12:39:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 585377.916492; Thu, 17 Aug 2023 12:39:59 +0000
+Received: by outflank-mailman (output) from mailman id 585375.916468; Thu, 17 Aug 2023 12:39:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qWcIB-000133-4d; Thu, 17 Aug 2023 12:39:59 +0000
-Received: by outflank-mailman (input) for mailman id 585377;
- Thu, 17 Aug 2023 12:39:57 +0000
+	id 1qWcI9-0000NW-Dz; Thu, 17 Aug 2023 12:39:57 +0000
+Received: by outflank-mailman (input) for mailman id 585375;
+ Thu, 17 Aug 2023 12:39:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0n1I=EC=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qWcI9-0000KH-OT
- for xen-devel@lists.xenproject.org; Thu, 17 Aug 2023 12:39:57 +0000
+ id 1qWcI8-0000KH-2m
+ for xen-devel@lists.xenproject.org; Thu, 17 Aug 2023 12:39:56 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2b84098b-3cfb-11ee-9b0c-b553b5be7939;
- Thu, 17 Aug 2023 14:39:56 +0200 (CEST)
+ id 29edf115-3cfb-11ee-9b0c-b553b5be7939;
+ Thu, 17 Aug 2023 14:39:53 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 183814EE073A;
- Thu, 17 Aug 2023 14:39:55 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id EDD7D4EE0737;
+ Thu, 17 Aug 2023 14:39:51 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b84098b-3cfb-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: 29edf115-3cfb-11ee-9b0c-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -50,156 +50,66 @@ Cc: sstabellini@kernel.org,
 	ayan.kumar.halder@amd.com,
 	consulting@bugseng.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>
-Subject: [XEN PATCH v2 3/3] drivers/video: make declarations of defined functions available
-Date: Thu, 17 Aug 2023 14:39:28 +0200
-Message-Id: <cc46049dbdf86cad33f6a9f7ae79851b54cecea1.1692275359.git.nicola.vetrini@bugseng.com>
+	George Dunlap <george.dunlap@citrix.com>
+Subject: [XEN PATCH v2 0/3] xen: fix inclusions and static storage duration
+Date: Thu, 17 Aug 2023 14:39:25 +0200
+Message-Id: <cover.1692275359.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1692275359.git.nicola.vetrini@bugseng.com>
-References: <cover.1692275359.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The declarations for 'vesa_{init,early_init,endboot}' needed by
-'xen/drivers/video/vesa.c' and 'fill_console_start_info' in 'vga.c'
-are now available by moving the relative code inside 'vga.h'.
-The latter is moved from 'xen/console.h' because of its close relation with vga.
-This also resolves violations of MISRA C:2012 Rule 8.4.
+The files touched by this series contain function or variable definitions with
+no prior declaration visible, because it's inside an header that is not included
+or it's not present anywhere. This is a risk in itself, but also violates
+MISRA C:2012 Rule 8.4, which states the following:
+"A compatible declaration shall be visible when an object or function with
+external linkage is defined".
 
-Fixes: 6d9199bd0f22 ("x86-64: enable hypervisor output on VESA frame buffer")
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
+The resolution strategies are as follows:
+
+1. make the functions/variables static
+2. include the header that contains the compatible declaration
+
+No functional change.
+
+Additional notes:
+- This series is a continuation of the work done here [1], so the same additional
+  notes apply.
+
+[1] https://lore.kernel.org/xen-devel/cover.1691655814.git.nicola.vetrini@bugseng.com/T/#m28da1b5ef8d9a7683937bfc345765e3438b89977
+
 Changes in v2:
-- Moved fill_console_start_info to vga.h
-  (21bee1787021 introduced this function)
----
- xen/arch/x86/include/asm/setup.h  |  6 ------
- xen/arch/x86/platform_hypercall.c |  2 +-
- xen/arch/x86/pv/dom0_build.c      |  2 +-
- xen/drivers/video/vga.c           |  8 --------
- xen/include/xen/console.h         |  2 --
- xen/include/xen/vga.h             | 16 ++++++++++++++++
- 6 files changed, 18 insertions(+), 18 deletions(-)
+- Addressed review comments on the leftover patches
+- Patches 1,2,4 from the previous version have already been committed
 
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index b0e6a39e2365..dfdd9e555149 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -25,12 +25,6 @@ void subarch_init_memory(void);
+Nicola Vetrini (3):
+  vm_event: rework inclusions to use arch-indipendent header
+  vpci/msix: make 'get_slot' static
+  drivers/video: make declarations of defined functions available
 
- void init_IRQ(void);
+ xen/arch/arm/include/asm/vm_event.h |  1 -
+ xen/arch/arm/vm_event.c             |  2 +-
+ xen/arch/x86/include/asm/setup.h    |  6 ------
+ xen/arch/x86/platform_hypercall.c   |  2 +-
+ xen/arch/x86/pv/dom0_build.c        |  2 +-
+ xen/arch/x86/vm_event.c             |  2 +-
+ xen/drivers/video/vga.c             |  8 --------
+ xen/drivers/vpci/msix.c             |  2 +-
+ xen/include/xen/console.h           |  2 --
+ xen/include/xen/vga.h               | 16 ++++++++++++++++
+ xen/include/xen/vm_event.h          |  1 +
+ 11 files changed, 22 insertions(+), 22 deletions(-)
 
--#ifdef CONFIG_VIDEO
--void vesa_init(void);
--#else
--static inline void vesa_init(void) {};
--#endif
--
- int construct_dom0(
-     struct domain *d,
-     const module_t *image, unsigned long image_headroom,
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 9ff2da8fc324..9469de9045c7 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -14,7 +14,6 @@
- #include <xen/event.h>
- #include <xen/domain_page.h>
- #include <xen/trace.h>
--#include <xen/console.h>
- #include <xen/iocap.h>
- #include <xen/guest_access.h>
- #include <xen/hypercall.h>
-@@ -24,6 +23,7 @@
- #include <xen/pmstat.h>
- #include <xen/irq.h>
- #include <xen/symbols.h>
-+#include <xen/vga.h>
- #include <asm/current.h>
- #include <public/platform.h>
- #include <acpi/cpufreq/processor_perf.h>
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 909ee9a899a4..5bbed3a36a21 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -4,7 +4,6 @@
-  * Copyright (c) 2002-2005, K A Fraser
-  */
-
--#include <xen/console.h>
- #include <xen/domain.h>
- #include <xen/domain_page.h>
- #include <xen/init.h>
-@@ -13,6 +12,7 @@
- #include <xen/pfn.h>
- #include <xen/sched.h>
- #include <xen/softirq.h>
-+#include <xen/vga.h>
-
- #include <asm/bzimage.h>
- #include <asm/dom0_build.h>
-diff --git a/xen/drivers/video/vga.c b/xen/drivers/video/vga.c
-index 0a03508bee60..18b590cdf072 100644
---- a/xen/drivers/video/vga.c
-+++ b/xen/drivers/video/vga.c
-@@ -54,14 +54,6 @@ string_param("vga", opt_vga);
- static unsigned int columns, lines;
- #define ATTRIBUTE   7
-
--#ifdef CONFIG_X86
--void vesa_early_init(void);
--void vesa_endboot(bool_t keep);
--#else
--#define vesa_early_init() ((void)0)
--#define vesa_endboot(x)   ((void)0)
--#endif
--
- void __init video_init(void)
- {
-     char *p;
-diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
-index 53c56191ba9e..ab5c30c0daf2 100644
---- a/xen/include/xen/console.h
-+++ b/xen/include/xen/console.h
-@@ -20,8 +20,6 @@ void console_init_postirq(void);
- void console_endboot(void);
- int console_has(const char *device);
-
--int fill_console_start_info(struct dom0_vga_console_info *);
--
- unsigned long console_lock_recursive_irqsave(void);
- void console_unlock_recursive_irqrestore(unsigned long flags);
- void console_force_unlock(void);
-diff --git a/xen/include/xen/vga.h b/xen/include/xen/vga.h
-index f72b63d446b1..1d53f0149433 100644
---- a/xen/include/xen/vga.h
-+++ b/xen/include/xen/vga.h
-@@ -15,4 +15,20 @@
- extern struct xen_vga_console_info vga_console_info;
- #endif
-
-+int fill_console_start_info(struct dom0_vga_console_info *);
-+
-+#ifdef CONFIG_X86
-+void vesa_early_init(void);
-+void vesa_endboot(bool_t keep);
-+#else
-+#define vesa_early_init() ((void)0)
-+#define vesa_endboot(x)   ((void)0)
-+#endif
-+
-+#ifdef CONFIG_VIDEO
-+void vesa_init(void);
-+#else
-+static inline void vesa_init(void) {};
-+#endif
-+
- #endif /* _XEN_VGA_H */
 --
 2.34.1
 
