@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5192EE49A5
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 04:01:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.587205.918551 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE30EE49A0
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 04:01:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.587207.918561 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qXw6U-00043h-S2; Mon, 21 Aug 2023 04:01:22 +0000
+	id 1qXw6d-0004Si-9K; Mon, 21 Aug 2023 04:01:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 587205.918551; Mon, 21 Aug 2023 04:01:22 +0000
+Received: by outflank-mailman (output) from mailman id 587207.918561; Mon, 21 Aug 2023 04:01:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qXw6U-00043Y-Ot; Mon, 21 Aug 2023 04:01:22 +0000
-Received: by outflank-mailman (input) for mailman id 587205;
- Mon, 21 Aug 2023 04:01:22 +0000
+	id 1qXw6d-0004SX-64; Mon, 21 Aug 2023 04:01:31 +0000
+Received: by outflank-mailman (input) for mailman id 587207;
+ Mon, 21 Aug 2023 04:01:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Scea=EG=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qXw6U-0003VX-53
- for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 04:01:22 +0000
+ id 1qXw6b-0003VX-E3
+ for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 04:01:29 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 6289e56a-3fd7-11ee-9b0c-b553b5be7939;
- Mon, 21 Aug 2023 06:01:20 +0200 (CEST)
+ id 66cbb6ce-3fd7-11ee-9b0c-b553b5be7939;
+ Mon, 21 Aug 2023 06:01:27 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 40FA11FB;
- Sun, 20 Aug 2023 21:02:00 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3BDC81FB;
+ Sun, 20 Aug 2023 21:02:07 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id CED123F740;
- Sun, 20 Aug 2023 21:01:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C8B823F7CE;
+ Sun, 20 Aug 2023 21:01:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6289e56a-3fd7-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: 66cbb6ce-3fd7-11ee-9b0c-b553b5be7939
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -55,249 +55,375 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v3 3/8] xen/arm: introduce allocate_domheap_memory and guest_physmap_memory
-Date: Mon, 21 Aug 2023 12:00:41 +0800
-Message-Id: <20230821040046.2965665-4-Penny.Zheng@arm.com>
+Subject: [PATCH v3 5/8] xen/arm: support static shared memory when host address not provided
+Date: Mon, 21 Aug 2023 12:00:43 +0800
+Message-Id: <20230821040046.2965665-6-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230821040046.2965665-1-Penny.Zheng@arm.com>
 References: <20230821040046.2965665-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We split the code of allocate_bank_memory into two parts,
-allocate_domheap_memory and guest_physmap_memory.
+In order to support static shared memory when host address not provided,
+we shall do the following modification:
+- we shall let Xen allocate memory from heap for static shared memory
+at first domain, no matter it is owner or borrower.
+- In acquire_shared_memory_bank, as static shared memory has already
+been allocated from heap, we shall assign them to the owner domain
+using function "assign_pages".
+- Function get_shm_pages_reference is created to add as many
+additional reference as the number of borrowers.
+- We implement a new helper "add_foreign_mapping_for_borrower" to set
+up foreign memory mapping for borrower.
 
-One is about allocating guest RAM from heap, which could be re-used later for
-allocating static shared memory from heap when host address is not provided.
-The other is building up guest P2M mapping.
-
-We also define a set of MACRO helpers to access common fields in data
-structure of "meminfo" type, e.g. "struct meminfo" is one of them, and
-later new "struct shm_meminfo" is also one of them.
-This kind of structures must have the following characteristics:
-- an array of "struct membank"
-- a member called "nr_banks" indicating current array size
-- a field indicating the maximum array size
-When introducing a new data structure, according callbacks with function type
-"retrieve_fn" shall be defined for using MACRO helpers.
-This commit defines callback "retrieve_meminfo" for data structure
-"struct meminfo".
+Instead of using multiple function parameters to deliver various shm-related
+info, like host physical address, SHMID, etc, and with the introduction
+of new struct "shm_memnode" to include banked host memory info, we switch to
+use "shm_memnode" as function parameter to replace them all, to make codes more
+clear and tidy.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 ---
 v1 -> v2:
--  define a set of MACRO helpers to access common fields in data structure of
-"meminfo" type. "struct meminfo" is one of them, and according callback
-"retrieve_meminfo" is also introduced here.
-- typo of changing 1ULL to 1UL
+- combine commits 4 - 6 in Serie 1
+- Adapt to changes of introducing "struct shm_memnode"
 ---
 v2 -> v3
-- rebase and no changes
+- fix infinite loop bug and bad indentation
+- rebase
 ---
- xen/arch/arm/domain_build.c      | 119 ++++++++++++++++++++++++-------
- xen/arch/arm/include/asm/setup.h |  33 +++++++++
- 2 files changed, 127 insertions(+), 25 deletions(-)
+ xen/arch/arm/domain_build.c | 223 +++++++++++++++++++++++++-----------
+ 1 file changed, 155 insertions(+), 68 deletions(-)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index b639d3dc78..97f9db1175 100644
+index e37f3376a1..687420956f 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -99,6 +99,26 @@ int __init parse_arch_dom0_param(const char *s, const char *e)
-  */
- #define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry))
- 
-+static void __init retrieve_meminfo(void *mem, unsigned int *max_mem_banks,
-+                                    struct membank **bank,
-+                                    unsigned int **nr_banks)
-+{
-+    struct meminfo *meminfo = (struct meminfo *)mem;
-+
-+    if ( max_mem_banks )
-+        *max_mem_banks = NR_MEM_BANKS;
-+
-+    if ( nr_banks )
-+        *nr_banks = &(meminfo->nr_banks);
-+
-+    if ( bank )
-+        *bank = meminfo->bank;
-+}
-+
-+retrieve_fn __initdata retrievers[MAX_MEMINFO_TYPE] = {
-+    [NORMAL_MEMINFO] = retrieve_meminfo,
-+};
-+
- unsigned int __init dom0_max_vcpus(void)
- {
-     if ( opt_dom0_max_vcpus == 0 )
-@@ -413,34 +433,20 @@ static void __init allocate_memory_11(struct domain *d,
-     }
+@@ -891,6 +891,11 @@ static void __init assign_static_memory_11(struct domain *d,
  }
  
--static bool __init allocate_bank_memory(struct domain *d,
--                                        struct kernel_info *kinfo,
--                                        gfn_t sgfn,
--                                        paddr_t tot_size)
-+static bool __init allocate_domheap_memory(struct domain *d,
-+                                           paddr_t tot_size,
-+                                           void *mem, enum meminfo_type type)
+ #ifdef CONFIG_STATIC_SHM
++static bool __init is_shm_allocated_from_heap(struct shm_memnode *node)
++{
++    return (node->meminfo.nr_banks != 0);
++}
++
+ static int __init acquire_nr_borrower_domain(const char *shm_id,
+                                              unsigned long *nr_borrowers)
  {
+@@ -934,12 +939,12 @@ static struct shm_memnode * __init find_shm_memnode(const char *shm_id)
+  * This function checks whether the static shared memory region is
+  * already allocated to dom_io.
+  */
+-static bool __init is_shm_allocated_to_domio(paddr_t pbase)
++static bool __init is_shm_allocated_to_domio(struct shm_memnode *node)
+ {
+     struct page_info *page;
+     struct domain *d;
+ 
+-    page = maddr_to_page(pbase);
++    page = maddr_to_page(node->meminfo.bank[0].start);
+     d = page_get_owner_and_reference(page);
+     if ( d == NULL )
+         return false;
+@@ -957,67 +962,128 @@ static bool __init is_shm_allocated_to_domio(paddr_t pbase)
+ }
+ 
+ static mfn_t __init acquire_shared_memory_bank(struct domain *d,
+-                                               paddr_t pbase, paddr_t psize)
++                                               struct shm_meminfo *meminfo,
++                                               bool paddr_assigned)
+ {
+-    mfn_t smfn;
+-    unsigned long nr_pfns;
 -    int res;
-     struct page_info *pg;
--    struct membank *bank;
-     unsigned int max_order = ~0;
--
++    int res, i = 0;
+ 
 -    /*
--     * allocate_bank_memory can be called with a tot_size of zero for
--     * the second memory bank. It is not an error and we can safely
--     * avoid creating a zero-size memory bank.
+-     * Pages of statically shared memory shall be included
+-     * into domain_tot_pages().
 -     */
--    if ( tot_size == 0 )
--        return true;
--
--    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
--    bank->start = gfn_to_gaddr(sgfn);
--    bank->size = tot_size;
-+    unsigned int *nr_banks = GET_NR_BANKS(mem, type);
- 
-     while ( tot_size > 0 )
+-    nr_pfns = PFN_DOWN(psize);
+-    if ( (UINT_MAX - d->max_pages) < nr_pfns )
++    for ( ; i < meminfo->nr_banks; i++ )
      {
-         unsigned int order = get_allocation_size(tot_size);
-+        struct membank *membank;
- 
-         order = min(max_order, order);
--
-         pg = alloc_domheap_pages(d, order, 0);
-         if ( !pg )
-         {
-@@ -460,15 +466,78 @@ static bool __init allocate_bank_memory(struct domain *d,
-             continue;
-         }
- 
--        res = guest_physmap_add_page(d, sgfn, page_to_mfn(pg), order);
--        if ( res )
--        {
--            dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
-+        if ( *nr_banks == MAX_MEM_BANKS(type) )
-             return false;
--        }
+-        printk(XENLOG_ERR "%pd: Over-allocation for d->max_pages: %lu.\n",
+-               d, nr_pfns);
+-        return INVALID_MFN;
++        paddr_t pbase = meminfo->bank[i].start, psize = meminfo->bank[i].size;
++        unsigned long nr_pfns;
 +
-+        membank = GET_MEMBANK(mem, type, *nr_banks);
-+        membank->start = mfn_to_maddr(page_to_mfn(pg));
-+        membank->size = 1ULL << (PAGE_SHIFT + order);
-+        (*nr_banks)++;
-+        tot_size -= membank->size;
-+    }
++        /*
++         * Pages of statically shared memory shall be included
++         * into domain_tot_pages().
++         */
++        nr_pfns = PFN_DOWN(psize);
++        if ( (UINT_MAX - d->max_pages) < nr_pfns )
++        {
++            printk(XENLOG_ERR "%pd: Over-allocation for d->max_pages: %lu.\n",
++                   d, nr_pfns);
++            return INVALID_MFN;
++        }
++        d->max_pages += nr_pfns;
 +
-+    return true;
++        if ( paddr_assigned )
++        {
++            res = acquire_domstatic_pages(d, maddr_to_mfn(pbase), nr_pfns, 0);
++            if ( res )
++            {
++                printk(XENLOG_ERR
++                       "%pd: failed to acquire static memory: %d.\n", d, res);
++                goto fail;
++            }
++        }
++        else
++            /*
++             * When host address is not provided, static shared memory is
++             * allocated from heap and shall be assigned to owner domain.
++             */
++            if ( assign_pages(maddr_to_page(pbase), nr_pfns, d, 0) )
++                goto fail;
+     }
+-    d->max_pages += nr_pfns;
+ 
+-    smfn = maddr_to_mfn(pbase);
+-    res = acquire_domstatic_pages(d, smfn, nr_pfns, 0);
+-    if ( res )
++    return maddr_to_mfn(meminfo->bank[0].start);
++
++ fail:
++    while( --i >= 0 )
++        d->max_pages -= PFN_DOWN(meminfo->bank[i].size);
++    return INVALID_MFN;
 +}
 +
-+static int __init guest_physmap_memory(struct domain *d,
-+                                       void *mem, enum meminfo_type type,
-+                                       gfn_t sgfn)
++static int __init get_shm_pages_reference(struct domain *d,
++                                          struct shm_meminfo *meminfo,
++                                          unsigned long count)
 +{
-+    unsigned int i;
-+    int res;
-+    unsigned int *nr_banks = GET_NR_BANKS(mem, type);
++    struct page_info *page;
++    int i = 0, j;
 +
-+    for ( i = 0; i < *nr_banks; i++ )
-+    {
-+        struct membank *membank = GET_MEMBANK(mem, type, i);
-+        paddr_t start = membank->start;
-+        paddr_t size = membank->size;
-+        unsigned int order = get_order_from_bytes(size);
++    for ( ; i < meminfo->nr_banks; i++ )
+     {
+-        printk(XENLOG_ERR
+-               "%pd: failed to acquire static memory: %d.\n", d, res);
+-        d->max_pages -= nr_pfns;
+-        return INVALID_MFN;
++        paddr_t pbase = meminfo->bank[i].start, psize = meminfo->bank[i].size;
++        unsigned long nr_pages = PFN_DOWN(psize);
 +
-+        /* Size must be power of two */
-+        BUG_ON(!size || (size & (size - 1)));
-+        res = guest_physmap_add_page(d, sgfn, maddr_to_mfn(start), order);
-+        if ( res )
-+            return res;
- 
-         sgfn = gfn_add(sgfn, 1UL << order);
--        tot_size -= (1ULL << (PAGE_SHIFT + order));
-+    }
-+
-+    return 0;
-+}
-+
-+static bool __init allocate_bank_memory(struct domain *d,
-+                                        struct kernel_info *kinfo,
-+                                        gfn_t sgfn,
-+                                        paddr_t total_size)
-+{
-+    struct membank *bank;
-+    struct meminfo host = { 0 };
-+
-+    /*
-+     * allocate_bank_memory can be called with a total_size of zero for
-+     * the second memory bank. It is not an error and we can safely
-+     * avoid creating a zero-size memory bank.
-+     */
-+    if ( total_size == 0 )
-+        return true;
-+
-+    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
-+    bank->start = gfn_to_gaddr(sgfn);
-+    bank->size = total_size;
-+
-+    if ( !allocate_domheap_memory(d, total_size, (void *)&host, NORMAL_MEMINFO) )
-+    {
-+        printk(XENLOG_ERR "Failed to allocate (%"PRIpaddr"MB) pages to %pd\n",
-+               total_size >> 20, d);
-+        return false;
-+    }
-+
-+    if ( guest_physmap_memory(d, (void *)&host, NORMAL_MEMINFO, sgfn) )
-+    {
-+        printk(XENLOG_ERR "Failed to map (%"PRIpaddr"MB) pages to %pd\n",
-+               total_size >> 20, d);
-+        return false;
++        page = maddr_to_page(pbase);
++        for ( j = 0; j < nr_pages; j++ )
++        {
++            if ( !get_page_nr(page + j, d, count) )
++            {
++                printk(XENLOG_ERR
++                       "Failed to add %lu references to page %"PRI_mfn".\n",
++                       count, mfn_x(page_to_mfn(page + j)));
++                goto fail;
++            }
++        }
      }
  
-     kinfo->mem.nr_banks++;
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 840ef50ef5..dba140d12f 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -57,6 +57,39 @@ struct meminfo {
-     struct membank bank[NR_MEM_BANKS];
- };
+-    return smfn;
++    return 0;
++
++ fail:
++    while ( --j >= 0 )
++        put_page_nr(page + j, count);
++    while ( --i >= 0 )
++    {
++        page = maddr_to_page(meminfo->bank[i].start);
++        j = PFN_DOWN(meminfo->bank[i].size);
++        while ( --j >= 0 )
++            put_page_nr(page + j, count);
++    }
++    return -EINVAL;
+ }
  
-+enum meminfo_type {
-+    NORMAL_MEMINFO,
-+    MAX_MEMINFO_TYPE,
-+};
+ static int __init assign_shared_memory(struct domain *d,
+-                                       paddr_t pbase, paddr_t psize,
+-                                       paddr_t gbase, const char *shm_id)
++                                       struct shm_memnode *node, paddr_t gbase,
++                                       bool paddr_assigned)
+ {
+     mfn_t smfn;
+-    int ret = 0;
+-    unsigned long nr_pages, nr_borrowers, i;
+-    struct page_info *page;
+-
+-    printk("%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
+-           d, pbase, pbase + psize);
++    int ret;
++    unsigned long nr_borrowers, i;
++    struct shm_meminfo *meminfo = &node->meminfo;
+ 
+-    smfn = acquire_shared_memory_bank(d, pbase, psize);
++    smfn = acquire_shared_memory_bank(d, meminfo, paddr_assigned);
+     if ( mfn_eq(smfn, INVALID_MFN) )
+         return -EINVAL;
+ 
+-    /*
+-     * DOMID_IO is not auto-translated (i.e. it sees RAM 1:1). So we do not need
+-     * to create mapping in the P2M.
+-     */
+-    nr_pages = PFN_DOWN(psize);
+-    if ( d != dom_io )
++    for ( i = 0; i < meminfo->nr_banks; i++ )
+     {
+-        ret = guest_physmap_add_pages(d, gaddr_to_gfn(gbase), smfn,
+-                                      PFN_DOWN(psize));
+-        if ( ret )
++        paddr_t pbase = meminfo->bank[i].start, psize = meminfo->bank[i].size;
 +
-+/*
-+ * Define a set of MACRO helpers to access meminfo_type, like "struct meminfo"
-+ * as type of NORMAL_MEMINFO, etc.
-+ * This kind of structure must have a array of "struct membank",
-+ * a member called nr_banks indicating the current array size, and also a field
-+ * indicating the maximum array size.
-+ */
-+typedef void (*retrieve_fn)(void *, unsigned int *, struct membank **,
-+                            unsigned int **);
++        /*
++         * DOMID_IO is not auto-translated (i.e. it sees RAM 1:1). So we do
++         * not need to create mapping in the P2M.
++         */
++        if ( d != dom_io )
+         {
+-            printk(XENLOG_ERR "Failed to map shared memory to %pd.\n", d);
+-            return ret;
++            ret = guest_physmap_add_pages(d, gaddr_to_gfn(gbase),
++                                          maddr_to_mfn(pbase),
++                                          PFN_DOWN(psize));
++            if ( ret )
++            {
++                printk(XENLOG_ERR "Failed to map shared memory to %pd.\n", d);
++                return ret;
++            }
++            gbase += psize;
+         }
+     }
+ 
+@@ -1025,7 +1091,7 @@ static int __init assign_shared_memory(struct domain *d,
+      * Get the right amount of references per page, which is the number of
+      * borrower domains.
+      */
+-    ret = acquire_nr_borrower_domain(shm_id, &nr_borrowers);
++    ret = acquire_nr_borrower_domain(node->shm_id, &nr_borrowers);
+     if ( ret )
+         return ret;
+ 
+@@ -1037,24 +1103,30 @@ static int __init assign_shared_memory(struct domain *d,
+      * So if the borrower is created first, it will cause adding pages
+      * in the P2M without reference.
+      */
+-    page = mfn_to_page(smfn);
+-    for ( i = 0; i < nr_pages; i++ )
++    return get_shm_pages_reference(d, meminfo, nr_borrowers);
++}
 +
-+#define MAX_MEM_BANKS(type) ({                              \
-+    unsigned int _max_mem_banks;                            \
-+    retrievers[type](NULL, &_max_mem_banks, NULL, NULL);    \
-+    _max_mem_banks;                                         \
-+})
++static int __init add_foreign_mapping_for_borrower(struct domain *d,
++                                                   struct shm_memnode *node,
++                                                   paddr_t gbase)
++{
++    unsigned int i = 0;
++    struct shm_meminfo *meminfo = &node->meminfo;
 +
-+#define GET_MEMBANK(mem, type, index) ({                    \
-+    struct membank *_bank;                                  \
-+    retrievers[type]((void *)(mem), NULL, &_bank, NULL);    \
-+    &(_bank[index]);                                        \
-+})
++    for ( ; i < meminfo->nr_banks; i++ )
+     {
+-        if ( !get_page_nr(page + i, d, nr_borrowers) )
+-        {
+-            printk(XENLOG_ERR
+-                   "Failed to add %lu references to page %"PRI_mfn".\n",
+-                   nr_borrowers, mfn_x(smfn) + i);
+-            goto fail;
+-        }
++        paddr_t pbase = meminfo->bank[i].start, psize = meminfo->bank[i].size;
++        int ret;
 +
-+#define GET_NR_BANKS(mem, type) ({                          \
-+    unsigned int *_nr_banks;                                \
-+    retrievers[type]((void *)mem, NULL, NULL, &_nr_banks);  \
-+    _nr_banks;                                              \
-+})
++        /* Set up P2M foreign mapping for borrower domain. */
++        ret = map_regions_p2mt(d, _gfn(PFN_UP(gbase)), PFN_DOWN(psize),
++                               _mfn(PFN_UP(pbase)), p2m_map_foreign_rw);
++        if ( ret )
++            return ret;
++        gbase += psize;
+     }
+ 
+     return 0;
+-
+- fail:
+-    while ( --i >= 0 )
+-        put_page_nr(page + i, nr_borrowers);
+-    return ret;
+ }
+ 
+ static int __init append_shm_bank_to_domain(struct kernel_info *kinfo,
+@@ -1178,7 +1250,7 @@ static int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+ 
+     dt_for_each_child_node(node, shm_node)
+     {
+-        paddr_t gbase, pbase, psize;
++        paddr_t gbase;
+         int ret = 0;
+         const char *role_str;
+         const char *shm_id;
+@@ -1207,15 +1279,30 @@ static int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+                                          shm_id);
+         if ( !shm_memnode )
+             return -EINVAL;
+-        pbase = shm_memnode->meminfo.bank[0].start;
+-        psize = shm_memnode->meminfo.bank[0].size;
 +
- /*
-  * The domU flag is set for kernels and ramdisks of "xen,domain" nodes.
-  * The purpose of the domU flag is to avoid getting confused in
++        /*
++         * When host address is not provided in "xen,shared-mem",
++         * we let Xen allocate memory from heap at first domain.
++         */
++        if ( !paddr_assigned && !is_shm_allocated_from_heap(shm_memnode) )
++        {
++            if ( !allocate_domheap_memory(NULL, shm_memnode->meminfo.tot_size,
++                                          (void *)&shm_memnode->meminfo,
++                                          SHM_MEMINFO) )
++            {
++                printk(XENLOG_ERR
++                       "Failed to allocate (%"PRIpaddr"MB) pages as static shared memory from heap\n",
++                       shm_memnode->meminfo.tot_size >> 20);
++                return -EINVAL;
++            }
++        }
+ 
+         /*
+          * DOMID_IO is a fake domain and is not described in the Device-Tree.
+          * Therefore when the owner of the shared region is DOMID_IO, we will
+          * only find the borrowers.
+          */
+-        if ( (owner_dom_io && !is_shm_allocated_to_domio(pbase)) ||
++        if ( (owner_dom_io && !is_shm_allocated_to_domio(shm_memnode)) ||
+              (!owner_dom_io && strcmp(role_str, "owner") == 0) )
+         {
+             /*
+@@ -1223,16 +1310,14 @@ static int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+              * specified, so they should be assigned to dom_io.
+              */
+             ret = assign_shared_memory(owner_dom_io ? dom_io : d,
+-                                       pbase, psize, gbase, shm_id);
++                                       shm_memnode, gbase, paddr_assigned);
+             if ( ret )
+                 return ret;
+         }
+ 
+         if ( owner_dom_io || (strcmp(role_str, "borrower") == 0) )
+         {
+-            /* Set up P2M foreign mapping for borrower domain. */
+-            ret = map_regions_p2mt(d, _gfn(PFN_UP(gbase)), PFN_DOWN(psize),
+-                                   _mfn(PFN_UP(pbase)), p2m_map_foreign_rw);
++            ret = add_foreign_mapping_for_borrower(d, shm_memnode, gbase);
+             if ( ret )
+                 return ret;
+         }
+@@ -1241,7 +1326,9 @@ static int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+          * Record static shared memory region info for later setting
+          * up shm-node in guest device tree.
+          */
+-        ret = append_shm_bank_to_domain(kinfo, gbase, psize, shm_id);
++        ret = append_shm_bank_to_domain(kinfo, gbase,
++                                        shm_memnode->meminfo.tot_size,
++                                        shm_memnode->shm_id);
+         if ( ret )
+             return ret;
+     }
 -- 
 2.25.1
 
