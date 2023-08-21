@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD8DEEE49A6
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 16:55:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.587724.919101 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3053EE4993
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 16:59:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.587754.919141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qY8BH-0002je-JP; Mon, 21 Aug 2023 16:55:07 +0000
+	id 1qY8FF-00052t-5v; Mon, 21 Aug 2023 16:59:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 587724.919101; Mon, 21 Aug 2023 16:55:07 +0000
+Received: by outflank-mailman (output) from mailman id 587754.919141; Mon, 21 Aug 2023 16:59:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qY8BH-0002jX-Ey; Mon, 21 Aug 2023 16:55:07 +0000
-Received: by outflank-mailman (input) for mailman id 587724;
- Mon, 21 Aug 2023 16:55:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TIpk=EG=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qY8BG-0002jB-7h
- for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 16:55:06 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 79982c8e-4043-11ee-8782-cb3800f73035;
- Mon, 21 Aug 2023 18:55:04 +0200 (CEST)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 75C424EE073C;
- Mon, 21 Aug 2023 18:55:03 +0200 (CEST)
+	id 1qY8FF-00052m-21; Mon, 21 Aug 2023 16:59:13 +0000
+Received: by outflank-mailman (input) for mailman id 587754;
+ Mon, 21 Aug 2023 16:59:11 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1qY8FD-00052g-PP
+ for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 16:59:11 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qY8FC-00040g-U7; Mon, 21 Aug 2023 16:59:10 +0000
+Received: from [54.239.6.178] (helo=[192.168.0.85])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qY8FC-0003vU-No; Mon, 21 Aug 2023 16:59:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,306 +41,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79982c8e-4043-11ee-8782-cb3800f73035
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH 1/3] docs/misra: add documentation for MISRA C:2012 Dir 4.1
-Date: Mon, 21 Aug 2023 18:54:37 +0200
-Message-Id: <3635c6896e8c31a9b3bf12e0c8f0718ce0b7ee77.1692636338.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1692636338.git.nicola.vetrini@bugseng.com>
-References: <cover.1692636338.git.nicola.vetrini@bugseng.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=sm96LL/Ueuw7bpfF5KoaNjdtAjMXB9S5tqnKzZvLavc=; b=RGQFogqdy7Gt5vuyAPstEbn0aZ
+	RFDugCbX4h1Fag76Y89RVSDQQX4pPjlMS4CEynEPTXVu2VIi8ENHt1Jn9jICi5cbK28Cn2AkNVjrX
+	bQRnf6AsV31kGZg1rMbOMCw6G2IdQ51jEv7lPYTcuLUB9a/Ho5it+uhqM3MF7gj3G0U0=;
+Message-ID: <42d720af-f0fd-4c05-8637-05bf16dfeed1@xen.org>
+Date: Mon, 21 Aug 2023 17:59:08 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] xen/arm: vgic: Use 'unsigned int' rather than 'int'
+ whenever it is possible
+Content-Language: en-GB
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20230817214356.47174-1-julien@xen.org>
+ <20230817214356.47174-3-julien@xen.org>
+ <alpine.DEB.2.22.394.2308171602450.6458@ubuntu-linux-20-04-desktop>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <alpine.DEB.2.22.394.2308171602450.6458@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The aforementioned directive requires the project to supply documentation
-on the measures taken towards the minimization of run-time failures.
+Hi Stefano,
 
-The 'rules.rst' file is updated accordingly to mention the newly
-added documentation.
+On 18/08/2023 00:04, Stefano Stabellini wrote:
+> On Thu, 17 Aug 2023, Julien Grall wrote:
+>> From: Julien Grall <jgrall@amazon.com>
+>>
+>> Switch to unsigned int for the return/parameters of the following
+>> functions:
+>>      * REG_RANK_NR(): 'b' (number of bits) and the return is always positive.
+>>        'n' doesn't need to be size specific.
+>>      * vgic_rank_offset(): 'b' (number of bits), 'n' (register index),
+>>        's' (size of the access) are always positive.
+>>      * vgic_{enable, disable}_irqs(): 'n' (rank index) is always positive
+>>      * vgic_get_virq_type(): 'n' (rank index) and 'index' (register
+>>        index) are always positive.
+>>
+>> Take the opportunity to propogate the unsignedness to the local
+>> variable used for the arguments.
+>>
+>> This will remove some of the warning reported by GCC 12.2.1 when
+>> passing the flags -Wsign-conversion/-Wconversion.
+>>
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+>> ---
+>>   xen/arch/arm/include/asm/vgic.h | 11 +++++++----
+>>   xen/arch/arm/vgic-v2.c          | 12 ++++++++++--
+>>   xen/arch/arm/vgic.c             | 21 ++++++++++++---------
+>>   3 files changed, 29 insertions(+), 15 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgic.h
+>> index 6901a05c0669..922779ce146a 100644
+>> --- a/xen/arch/arm/include/asm/vgic.h
+>> +++ b/xen/arch/arm/include/asm/vgic.h
+>> @@ -252,7 +252,7 @@ struct vgic_ops {
+>>    * Rank containing GICD_<FOO><n> for GICD_<FOO> with
+>>    * <b>-bits-per-interrupt
+>>    */
+>> -static inline int REG_RANK_NR(int b, uint32_t n)
+>> +static inline unsigned int REG_RANK_NR(unsigned int b, unsigned int n)
+>>   {
+>>       switch ( b )
+>>       {
+>> @@ -297,10 +297,13 @@ extern void gic_remove_from_lr_pending(struct vcpu *v, struct pending_irq *p);
+>>   extern void vgic_init_pending_irq(struct pending_irq *p, unsigned int virq);
+>>   extern struct pending_irq *irq_to_pending(struct vcpu *v, unsigned int irq);
+>>   extern struct pending_irq *spi_to_pending(struct domain *d, unsigned int irq);
+>> -extern struct vgic_irq_rank *vgic_rank_offset(struct vcpu *v, int b, int n, int s);
+>> +extern struct vgic_irq_rank *vgic_rank_offset(struct vcpu *v,
+>> +                                              unsigned int b,
+>> +                                              unsigned int n,
+>> +                                              unsigned int s);
+>>   extern struct vgic_irq_rank *vgic_rank_irq(struct vcpu *v, unsigned int irq);
+>> -extern void vgic_disable_irqs(struct vcpu *v, uint32_t r, int n);
+>> -extern void vgic_enable_irqs(struct vcpu *v, uint32_t r, int n);
+>> +extern void vgic_disable_irqs(struct vcpu *v, uint32_t r, unsigned int n);
+>> +extern void vgic_enable_irqs(struct vcpu *v, uint32_t r, unsigned int n);
+>>   extern void vgic_set_irqs_pending(struct vcpu *v, uint32_t r,
+>>                                     unsigned int rank);
+>>   extern void register_vgic_ops(struct domain *d, const struct vgic_ops *ops);
+>> diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
+>> index 2a2eda2e6f4c..0aa10fff0f10 100644
+>> --- a/xen/arch/arm/vgic-v2.c
+>> +++ b/xen/arch/arm/vgic-v2.c
+>> @@ -161,7 +161,11 @@ static int vgic_v2_distr_mmio_read(struct vcpu *v, mmio_info_t *info,
+>>   {
+>>       struct hsr_dabt dabt = info->dabt;
+>>       struct vgic_irq_rank *rank;
+>> -    int gicd_reg = (int)(info->gpa - v->domain->arch.vgic.dbase);
+>> +    /*
+>> +     * gpa/dbase are paddr_t which size may be higher than 32-bit. Yet
+>> +     * the difference will always be smaller than 32-bit.
+>> +     */
+>> +    unsigned int gicd_reg = info->gpa - v->domain->arch.vgic.dbase;
+>>       unsigned long flags;
+>>   
+>>       perfc_incr(vgicd_reads);
+>> @@ -403,7 +407,11 @@ static int vgic_v2_distr_mmio_write(struct vcpu *v, mmio_info_t *info,
+>>   {
+>>       struct hsr_dabt dabt = info->dabt;
+>>       struct vgic_irq_rank *rank;
+>> -    int gicd_reg = (int)(info->gpa - v->domain->arch.vgic.dbase);
+>> +    /*
+>> +     * gpa/dbase are paddr_t which size may be higher than 32-bit. Yet
+>> +     * the difference will always be smaller than 32-bit.
+>> +     */
+>> +    unsigned int gicd_reg = info->gpa - v->domain->arch.vgic.dbase;
+>>       uint32_t tr;
+>>       unsigned long flags;
+>>   
+>> diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+>> index afcac791fe4b..269b804974e0 100644
+>> --- a/xen/arch/arm/vgic.c
+>> +++ b/xen/arch/arm/vgic.c
+>> @@ -24,7 +24,8 @@
+>>   #include <asm/gic.h>
+>>   #include <asm/vgic.h>
+>>   
+>> -static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v, int rank)
+>> +static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v,
+>> +                                                  unsigned int rank)
+>>   {
+>>       if ( rank == 0 )
+>>           return v->arch.vgic.private_irqs;
+>> @@ -38,17 +39,17 @@ static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v, int rank)
+>>    * Returns rank corresponding to a GICD_<FOO><n> register for
+>>    * GICD_<FOO> with <b>-bits-per-interrupt.
+>>    */
+>> -struct vgic_irq_rank *vgic_rank_offset(struct vcpu *v, int b, int n,
+>> -                                              int s)
+>> +struct vgic_irq_rank *vgic_rank_offset(struct vcpu *v, unsigned int b,
+>> +                                       unsigned int n, unsigned int s)
+>>   {
+>> -    int rank = REG_RANK_NR(b, (n >> s));
+>> +    unsigned int rank = REG_RANK_NR(b, (n >> s));
+>>   
+>>       return vgic_get_rank(v, rank);
+>>   }
+>>   
+>>   struct vgic_irq_rank *vgic_rank_irq(struct vcpu *v, unsigned int irq)
+>>   {
+>> -    int rank = irq/32;
+>> +    unsigned int rank = irq / 32;
+>>   
+>>       return vgic_get_rank(v, rank);
+>>   }
+>> @@ -324,14 +325,14 @@ void arch_move_irqs(struct vcpu *v)
+>>       }
+>>   }
+>>   
+>> -void vgic_disable_irqs(struct vcpu *v, uint32_t r, int n)
+>> +void vgic_disable_irqs(struct vcpu *v, uint32_t r, unsigned int n)
+>>   {
+>>       const unsigned long mask = r;
+>>       struct pending_irq *p;
+>>       struct irq_desc *desc;
+>>       unsigned int irq;
+>>       unsigned long flags;
+>> -    int i = 0;
+>> +    unsigned int i = 0;
+>>       struct vcpu *v_target;
+>>   
+>>       /* LPIs will never be disabled via this function. */
+>> @@ -361,7 +362,9 @@ void vgic_disable_irqs(struct vcpu *v, uint32_t r, int n)
+>>   #define VGIC_ICFG_MASK(intr) (1U << ((2 * ((intr) % 16)) + 1))
+>>   
+>>   /* The function should be called with the rank lock taken */
+>> -static inline unsigned int vgic_get_virq_type(struct vcpu *v, int n, int index)
+>> +static inline unsigned int vgic_get_virq_type(struct vcpu *v,
+>> +                                              unsigned int n,
+>> +                                              unsigned int index)
+>>   {
+>>       struct vgic_irq_rank *r = vgic_get_rank(v, n);
+>>       uint32_t tr = r->icfg[index >> 4];
+>> @@ -374,7 +377,7 @@ static inline unsigned int vgic_get_virq_type(struct vcpu *v, int n, int index)
+>>           return IRQ_TYPE_LEVEL_HIGH;
+>>   }
+>>   
+>> -void vgic_enable_irqs(struct vcpu *v, uint32_t r, int n)
+>> +void vgic_enable_irqs(struct vcpu *v, uint32_t r, unsigned int n)
+>>   {
+>>       const unsigned long mask = r;
+>>       struct pending_irq *p;
+> 
+> It looks like you could also switch 'i' to unsigned int in
+> vgic_enable_irqs like you did in vgic_disable_irqs
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- docs/misra/C-runtime-failures.rst | 239 ++++++++++++++++++++++++++++++
- docs/misra/rules.rst              |   7 +-
- 2 files changed, 245 insertions(+), 1 deletion(-)
- create mode 100644 docs/misra/C-runtime-failures.rst
+Indeed. I have updated the patch.
 
-diff --git a/docs/misra/C-runtime-failures.rst b/docs/misra/C-runtime-failures.rst
-new file mode 100644
-index 000000000000..f72385b08417
---- /dev/null
-+++ b/docs/misra/C-runtime-failures.rst
-@@ -0,0 +1,239 @@
-+===================================================================
-+Measures taken towards the minimization of Run-time failures in Xen
-+===================================================================
-+
-+This document specifies which procedures and techinques are used troughout the
-+Xen codebase to prevent or minimize the impact of certain classes of run-time
-+errors that can occurr in the execution of a C program, due to the very minimal
-+built-in checks that are present in the language.
-+
-+The presence of such documentation is requested by MISRA C:2012 Directive 4.1,
-+whose headline states: "Run-time failures shall be minimized".
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: overflow
-+________________________________________________
-+
-+To be written.
-+Example: Pervasive use of assertions and extensive test suite.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: unexpected wrapping
-+___________________________________________________________
-+
-+To be written.
-+Example: The only wrapping the is present in the code concerns
-+unsigned integers and they are all expected.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: invalid shift
-+_____________________________________________________
-+
-+To be written.
-+Example: Pervasive use of assertions and extensive test suite.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: division/remainder by zero
-+__________________________________________________________________
-+
-+To be written.
-+Example:
-+There division or remainder operations in the project code ensure that
-+their second argument is never zero.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: unsequenced side effects
-+________________________________________________________________
-+
-+To be written.
-+Example:
-+No function in this project is meant to be executed from interrupt handlers
-+or in multi-threading environments.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: read from uninitialized automatic object
-+________________________________________________________________________________
-+
-+To be written.
-+Example:
-+Automatic variables are used to store temporary parameters and they
-+are always initialized to either a default value or a proper value
-+before usage.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: read from uninitialized allocated object
-+________________________________________________________________________________
-+
-+To be written.
-+Example:
-+The code does not use dynamically allocated storage.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: write to string literal or const object
-+_______________________________________________________________________________
-+
-+To be written.
-+Example:
-+The toolchain puts every string literal and const object into a read-only
-+section of memory.  The hardware exception raised when a write is attempted
-+on such a memory section is correctly handled.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: non-volatile access to volatile object
-+______________________________________________________________________________
-+
-+To be written.
-+Example:
-+Volatile access is limited to registers that are always accessed
-+through macros or inline functions.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: access to dead allocated object
-+_______________________________________________________________________
-+
-+To be written.
-+Example:
-+The code does not use dynamically allocated storage.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: access to dead automatic object
-+_______________________________________________________________________
-+
-+To be written.
-+Example:
-+Pointers to automatic variables are never returned, nor stored in
-+wider-scoped objects.  No function does the same on any pointer
-+received as a parameter.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: access to dead thread object
-+____________________________________________________________________
-+
-+To be written.
-+Example:
-+The program does not use per-thread variables.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: access using null pointer
-+_________________________________________________________________
-+
-+To be written.
-+Example:
-+All possibly null pointers are checked before access.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: access using invalid pointer
-+____________________________________________________________________
-+
-+To be written.
-+Example:
-+Usage of pointers is limited.  Pointers passed as parameters are
-+always checked for validity.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: access using out-of-bounds pointer
-+__________________________________________________________________________
-+
-+To be written.
-+Example:
-+Pointers are never uses to access arrays: indices are always used
-+instead.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: access using unaligned pointer
-+______________________________________________________________________
-+
-+To be written.
-+Example:
-+Pointer conversion that may result in unaligned pointers are never used.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: mistyped access to object
-+-----------------------------------------------------------------
-+
-+To be written.
-+Example:
-+Pointer conversions that may result in mistyped accesses to objects
-+are never used.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: mistyped access to function
-+___________________________________________________________________
-+
-+To be written.
-+Example:
-+The code never uses function pointers.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: invalid pointer arithmetic
-+__________________________________________________________________
-+
-+To be written.
-+Example:
-+Pointer arithmetic is never used.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: invalid pointer comparison
-+__________________________________________________________________
-+
-+To be written.
-+Example:
-+Arrays are always accessed using indices instead of pointers.  Pointers
-+are only compared to NULL.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: overlapping copy
-+________________________________________________________
-+
-+To be written.
-+Example:
-+The code never uses memcpy() and does not perform assignment of
-+overlapping objects (which is doable only via pointers).
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: invalid arguments to function
-+_____________________________________________________________________
-+
-+To be written.
-+Example:
-+All parameters to functions are checked for validity.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: returned function error
-+_______________________________________________________________
-+
-+To be written.
-+Example:
-+All functions that may produce an error, do returns a suitable status code
-+that is checked at each call site.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: tainted input
-+_____________________________________________________
-+
-+To be written.
-+Example:
-+All parameters of all functions in the API are checked before being used.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: data race
-+_________________________________________________
-+
-+To be written.
-+Example:
-+No function in this code is meant to be executed from interrupt handlers or
-+in a multi-threading environment.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: invariant violation
-+___________________________________________________________
-+
-+To be written.
-+
-+
-+Documentation for MISRA C:2012 Dir 4.1: communication error
-+___________________________________________________________
-+
-+To be written.
-+Example:
-+This project does not involve any external communication.
-diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
-index 8f0e4d3f25f4..cebff854a95c 100644
---- a/docs/misra/rules.rst
-+++ b/docs/misra/rules.rst
-@@ -47,7 +47,12 @@ maintainers if you want to suggest a change.
-    * - `Dir 2.1 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_02_01.c>`_
-      - Required
-      - All source files shall compile without any compilation errors
--     -
-+
-+   * - `Dir 4.1 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_04_01.c>`_
-+     - Required
-+     - Run-time failures shall be minimized
-+     - The strategies adopted by Xen to prevent certain classes of runtime
-+       failures are documented by `C-runtime-failures.rst <docs/misra/C-runtime-failures.rst>`_
- 
-    * - `Dir 4.7 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_04_07.c>`_
-      - Required
+> 
+> You could do that on commit:
+> 
+> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+
+Thanks!
+
+Cheers,
+
 -- 
-2.34.1
-
+Julien Grall
 
