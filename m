@@ -4,36 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A26EE49A8
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 04:01:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.587218.918601 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40661EE4996
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 06:27:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.587280.918611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qXw6o-00067L-Ih; Mon, 21 Aug 2023 04:01:42 +0000
+	id 1qXyNn-0006Xv-2N; Mon, 21 Aug 2023 06:27:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 587218.918601; Mon, 21 Aug 2023 04:01:42 +0000
+Received: by outflank-mailman (output) from mailman id 587280.918611; Mon, 21 Aug 2023 06:27:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qXw6o-00066s-DY; Mon, 21 Aug 2023 04:01:42 +0000
-Received: by outflank-mailman (input) for mailman id 587218;
- Mon, 21 Aug 2023 04:01:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qXyNm-0006Xo-Uj; Mon, 21 Aug 2023 06:27:22 +0000
+Received: by outflank-mailman (input) for mailman id 587280;
+ Mon, 21 Aug 2023 06:27:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Scea=EG=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qXw6n-0003VX-16
- for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 04:01:41 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 6dae723c-3fd7-11ee-9b0c-b553b5be7939;
- Mon, 21 Aug 2023 06:01:38 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DC86E2F4;
- Sun, 20 Aug 2023 21:02:18 -0700 (PDT)
-Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
- [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 74B913F740;
- Sun, 20 Aug 2023 21:01:30 -0700 (PDT)
+ <SRS0=/hii=EG=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1qXyNm-0006Xi-3F
+ for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 06:27:22 +0000
+Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
+ [2607:f8b0:4864:20::929])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c807f069-3feb-11ee-8782-cb3800f73035;
+ Mon, 21 Aug 2023 08:27:20 +0200 (CEST)
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-799761430c2so832983241.2
+ for <xen-devel@lists.xenproject.org>; Sun, 20 Aug 2023 23:27:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,136 +42,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6dae723c-3fd7-11ee-9b0c-b553b5be7939
-From: Penny Zheng <Penny.Zheng@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: wei.chen@arm.com,
-	Penny Zheng <Penny.Zheng@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v3 7/8] xen/p2m: put reference for superpage
-Date: Mon, 21 Aug 2023 12:00:45 +0800
-Message-Id: <20230821040046.2965665-8-Penny.Zheng@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230821040046.2965665-1-Penny.Zheng@arm.com>
-References: <20230821040046.2965665-1-Penny.Zheng@arm.com>
+X-Inumbo-ID: c807f069-3feb-11ee-8782-cb3800f73035
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1692599239; x=1693204039;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=d3HEhziiMoRq8W+iz0cEqn9W08+Qli95DYLv6cEuSnY=;
+        b=X5paJG+12fla41xVVoY7NvDb6EtN/SVGH2deq6rIztGbwz3pthUAAPC/2J7ik0brKd
+         DRsJnlT1nthvz6krd5SBg2HSqXuV0kimoaGqiWfKFFg5Gorw1LbbBve+Cbh4Ii1fxAHs
+         QvVrtQdyZ1FNd01gAqDAJVt/Yd+TFbvEmrvVdhc+0tuNF/YUT7FDfpMDW5lm7cfad1RR
+         si4TDmNg/La2IZDQNod8IExo+2YpiQfU3wg8hhbO1o3ZliO0lTndkkvbw3+0LmOYXo8l
+         12y3SpyYznkngnURKxda8b19pNixgw557SZsg14mjubBsn0TnfAu9iRTy1nVVVqXlVMk
+         rncQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692599239; x=1693204039;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=d3HEhziiMoRq8W+iz0cEqn9W08+Qli95DYLv6cEuSnY=;
+        b=Vws2qKN8/y1eEQLXZy7kGqJS1Okz7DzZpPcuZWWRBi9U2lx64aOoWENHgqi70adC+z
+         9qaJcjcB5T/4t4oxt+WWTvN9HxRyqQfTrBt5Edi0/0913wrknf2YtatRBhmo6yrhhBEr
+         Vfj2kb6eQkD2DXTYC+3CDkZsXOjS6mBGsEahUjPZFVr+OrbhaPhDbuVJykUQVeyWoJS5
+         MQN81OP7VlztbEMfEmwWl91tOE3wQc8s8QhCh9Rkl20p4uw2+QhlBdtbUKD/6W+jcNUz
+         075pkXuTNt706Zmtfme2IawDvRemVm3ENnTyg60LQaxTcz1bJzEWUZsrEPIAsfJhC+IK
+         2Utw==
+X-Gm-Message-State: AOJu0YxVfUaTaSk1co/kyTEnvt2WIx+Ueiore8rHJmw7lruRnRYrZlXy
+	wSQpVf41AEwdu3KsdMsJuDEc3+Fjl4R1IkbHmJdXMQ==
+X-Google-Smtp-Source: AGHT+IEBFaw+H2Pu/Q7Qzq8+pmK3GmRwVJC5nABLokpWQnMzwL0+z6jwMQBoHsv+0Hgk2AEyAU6mJTJINMNy4akm0Kw=
+X-Received: by 2002:a67:f603:0:b0:445:1e73:3742 with SMTP id
+ k3-20020a67f603000000b004451e733742mr4748077vso.4.1692599239679; Sun, 20 Aug
+ 2023 23:27:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230731121536.934239-1-jens.wiklander@linaro.org> <e4b538d7-447b-4b4d-8c3a-bfb452cb76a8@xen.org>
+In-Reply-To: <e4b538d7-447b-4b4d-8c3a-bfb452cb76a8@xen.org>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Mon, 21 Aug 2023 08:27:08 +0200
+Message-ID: <CAHUa44ERDnPw_0E=KAGn7x77utObEzD7Z5q20ZNkRhgxCWKTzg@mail.gmail.com>
+Subject: Re: [XEN PATCH v11 00/14] Xen FF-A mediator
+To: Julien Grall <julien@xen.org>
+Cc: xen-devel@lists.xenproject.org, Bertrand.Marquis@arm.com, 
+	Marc Bonnici <marc.bonnici@arm.com>, Achin Gupta <achin.gupta@arm.com>, 
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, 
+	Henry Wang <Henry.Wang@arm.com>, Community Manager <community.manager@xenproject.org>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
+	Jan Beulich <jbeulich@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-We are doing foreign memory mapping for static shared memory, and
-there is a great possibility that it could be super mapped.
-But today, p2m_put_l3_page could not handle superpages.
+Hi Julien,
 
-This commits implements a new function p2m_put_superpage to handle superpages,
-specifically for helping put extra references for foreign superpages.
+On Fri, Aug 18, 2023 at 10:32=E2=80=AFAM Julien Grall <julien@xen.org> wrot=
+e:
+>
+> Hi Jens,
+>
+> On 31/07/2023 13:15, Jens Wiklander wrote:
+> > Jens Wiklander (14):
+> >    xen/arm: ffa: add direct request support
+> >    xen/arm: ffa: map SPMC rx/tx buffers
+> >    xen/arm: ffa: send guest events to Secure Partitions
+> >    xen/arm: ffa: support mapping guest RX/TX buffers
+> >    xen/arm: ffa: support guest FFA_PARTITION_INFO_GET
+> >    xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h
+> >    xen/arm: ffa: add defines for sharing memory
+> >    xen/arm: ffa: add ABI structs for sharing memory
+> >    xen/arm: ffa: support sharing memory
+> >    xen/arm: ffa: add support to reclaim shared memory
+> >    xen/arm: ffa: improve lock granularity
+> >    xen/arm: ffa: list current limitations
+> >    tools: add Arm FF-A mediator
+> >    docs: add Arm FF-A mediator
+>
+> The series is now committed. Note, I had to resolve a context conflict
+> in the CHANGELOG.md.
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
----
-v1 -> v2:
-- new commit
----
-v2 -> v3:
-- rebase and no change
----
- xen/arch/arm/p2m.c | 58 ++++++++++++++++++++++++++++++++++------------
- 1 file changed, 43 insertions(+), 15 deletions(-)
+Thanks for the update, and a big thank you to all of you who have
+helped me to get this into a committable state.
 
-diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
-index de32a2d638..b7b3db005e 100644
---- a/xen/arch/arm/p2m.c
-+++ b/xen/arch/arm/p2m.c
-@@ -851,17 +851,9 @@ static int p2m_mem_access_radix_set(struct p2m_domain *p2m, gfn_t gfn,
-     return rc;
- }
- 
--/*
-- * Put any references on the single 4K page referenced by pte.
-- * TODO: Handle superpages, for now we only take special references for leaf
-- * pages (specifically foreign ones, which can't be super mapped today).
-- */
--static void p2m_put_l3_page(const lpae_t pte)
-+/* Put any references on the single 4K page referenced by mfn. */
-+static void p2m_put_l3_page(mfn_t mfn, unsigned type)
- {
--    mfn_t mfn = lpae_get_mfn(pte);
--
--    ASSERT(p2m_is_valid(pte));
--
-     /*
-      * TODO: Handle other p2m types
-      *
-@@ -869,16 +861,53 @@ static void p2m_put_l3_page(const lpae_t pte)
-      * flush the TLBs if the page is reallocated before the end of
-      * this loop.
-      */
--    if ( p2m_is_foreign(pte.p2m.type) )
-+    if ( p2m_is_foreign(type) )
-     {
-         ASSERT(mfn_valid(mfn));
-         put_page(mfn_to_page(mfn));
-     }
-     /* Detect the xenheap page and mark the stored GFN as invalid. */
--    else if ( p2m_is_ram(pte.p2m.type) && is_xen_heap_mfn(mfn) )
-+    else if ( p2m_is_ram(type) && is_xen_heap_mfn(mfn) )
-         page_set_xenheap_gfn(mfn_to_page(mfn), INVALID_GFN);
- }
- 
-+/* Put any references on the superpage referenced by mfn. */
-+static void p2m_put_superpage(mfn_t mfn, unsigned int next_level, unsigned type)
-+{
-+    unsigned int i;
-+    unsigned int level_order = XEN_PT_LEVEL_ORDER(next_level);
-+
-+    for ( i = 0; i < XEN_PT_LPAE_ENTRIES; i++ )
-+    {
-+        if ( next_level == 3 )
-+            p2m_put_l3_page(mfn, type);
-+        else
-+            p2m_put_superpage(mfn, next_level + 1, type);
-+
-+        mfn = mfn_add(mfn, 1 << level_order);
-+    }
-+}
-+
-+/* Put any references on the page referenced by pte. */
-+static void p2m_put_page(const lpae_t pte, unsigned int level)
-+{
-+    mfn_t mfn = lpae_get_mfn(pte);
-+
-+    ASSERT(p2m_is_valid(pte));
-+
-+    /*
-+     * We are either having a first level 1G superpage or a
-+     * second level 2M superpage.
-+     */
-+    if ( p2m_is_superpage(pte, level) )
-+        return p2m_put_superpage(mfn, level + 1, pte.p2m.type);
-+    else
-+    {
-+        ASSERT(level == 3);
-+        return p2m_put_l3_page(mfn, pte.p2m.type);
-+    }
-+}
-+
- /* Free lpae sub-tree behind an entry */
- static void p2m_free_entry(struct p2m_domain *p2m,
-                            lpae_t entry, unsigned int level)
-@@ -907,9 +936,8 @@ static void p2m_free_entry(struct p2m_domain *p2m,
- #endif
- 
-         p2m->stats.mappings[level]--;
--        /* Nothing to do if the entry is a super-page. */
--        if ( level == 3 )
--            p2m_put_l3_page(entry);
-+        p2m_put_page(entry, level);
-+
-         return;
-     }
- 
--- 
-2.25.1
+Cheers,
+Jens
 
+>
+> Cheers,
+>
+> --
+> Julien Grall
 
