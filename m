@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE0A1EE4996
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 08:55:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.587407.918791 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B785BEE4993
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 09:18:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.587437.918810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qY0gQ-0007oA-Aj; Mon, 21 Aug 2023 08:54:46 +0000
+	id 1qY134-0003Si-BO; Mon, 21 Aug 2023 09:18:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 587407.918791; Mon, 21 Aug 2023 08:54:46 +0000
+Received: by outflank-mailman (output) from mailman id 587437.918810; Mon, 21 Aug 2023 09:18:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qY0gQ-0007o3-81; Mon, 21 Aug 2023 08:54:46 +0000
-Received: by outflank-mailman (input) for mailman id 587407;
- Mon, 21 Aug 2023 08:54:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ixuA=EG=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qY0gP-0007nI-Ag
- for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 08:54:45 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5f425fbf-4000-11ee-8782-cb3800f73035;
- Mon, 21 Aug 2023 10:54:44 +0200 (CEST)
-Received: from beta.station (net-93-66-137-131.cust.vodafonedsl.it
- [93.66.137.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 4F7894EE0739;
- Mon, 21 Aug 2023 10:54:43 +0200 (CEST)
+	id 1qY134-0003Sb-8p; Mon, 21 Aug 2023 09:18:10 +0000
+Received: by outflank-mailman (input) for mailman id 587437;
+ Mon, 21 Aug 2023 09:18:08 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1qY132-0003SV-IK
+ for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 09:18:08 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qY132-0001L3-3H; Mon, 21 Aug 2023 09:18:08 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qY131-0004eW-U9; Mon, 21 Aug 2023 09:18:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,110 +41,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f425fbf-4000-11ee-8782-cb3800f73035
-From: Simone Ballarin <simone.ballarin@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	andrew.cooper3@citrix.com,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH v2 1/2] automation/eclair: avoid unintentional ECLAIR analysis
-Date: Mon, 21 Aug 2023 10:54:06 +0200
-Message-Id: <4de9a2e93015b12186675b9a3f7ebff7fcd71baa.1692607487.git.simone.ballarin@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1692607487.git.simone.ballarin@bugseng.com>
-References: <cover.1692607487.git.simone.ballarin@bugseng.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=PeR3DWP6ML9TMDhiiCrGMKnX38BXCKnT5/9aVEsTcnI=; b=Ux27h4UVueTHOuvGDjSdCxOMd9
+	bO67xLQ9a/FN7sHa5Dvb6EM5mPOph/vJZzq5KRkbG4+KGoAz4NCgdikpWNoqLDDRMJqyhrLWbS+Jf
+	WeUVWcPFgV6hrd8PwU3mlLk39lkKF2WxSV8JrdqnRfa88XlO5oWE5UFKAcSs/zaWuOYA=;
+Message-ID: <bffdb783-fd63-4a93-b80b-42634643b2d3@xen.org>
+Date: Mon, 21 Aug 2023 10:18:06 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 04/13] xen/arm64: Split and move MMU-specific head.S to
+ mmu/head.S
+Content-Language: en-GB
+To: Henry Wang <Henry.Wang@arm.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Penny Zheng <penny.zheng@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Wei Chen <wei.chen@arm.com>
+References: <20230814042536.878720-1-Henry.Wang@arm.com>
+ <20230814042536.878720-5-Henry.Wang@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20230814042536.878720-5-Henry.Wang@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-With this patch, ECLAIR jobs will need to be manually
-started for "people/.*" pipelines and will not be triggered
-if the WTOKEN variable is missing.
+Hi Henry,
 
-This avoids occupying the runner on analyzes that might
-not be used by developers.
+On 14/08/2023 05:25, Henry Wang wrote:
+> The MMU specific code in head.S will not be used on MPU systems.
+> Instead of introducing more #ifdefs which will bring complexity
+> to the code, move MMU related code to mmu/head.S and keep common
+> code in head.S. Two notes while moving:
+> - As "fail" in original head.S is very simple and this name is too
+>    easy to be conflicted, duplicate it in mmu/head.S instead of
+>    exporting it.
+> - Use ENTRY() for enable_secondary_cpu_mm, enable_boot_cpu_mm and
+>    setup_fixmap to please the compiler after the code movement.
 
-If developers want to analyze their own repositories
-they need to launch them from GitLab.
+I am not sure I understand why you are saying "to please the compiler" 
+here. Isn't it necessary for the linker (not the compiler) to find the 
+function? And therefore there is no pleasing (as in this is not a bug in 
+the toolchain).
 
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+Other than that, the split looks good to me.
 
----
-Changes in v2:
-- avoid ECLAIR jobs if the WTOKEN variable is not defined.
----
- automation/gitlab-ci/analyze.yaml | 22 +++++++++++++++++-----
- automation/scripts/eclair         |  5 -----
- 2 files changed, 17 insertions(+), 10 deletions(-)
+Cheers,
 
-diff --git a/automation/gitlab-ci/analyze.yaml b/automation/gitlab-ci/analyze.yaml
-index 4aa4abe2ee..bd9a68de31 100644
---- a/automation/gitlab-ci/analyze.yaml
-+++ b/automation/gitlab-ci/analyze.yaml
-@@ -18,28 +18,40 @@
-       - '*.log'
-     reports:
-       codequality: gl-code-quality-report.json
-+  rules:
-+    - if: $WTOKEN == null
-+      when: never
-+    - when: always
-   needs: []
- 
--eclair-x86_64:
-+.eclair-analysis:triggered:
-   extends: .eclair-analysis
-+  allow_failure: true
-+  rules:
-+    - if: $WTOKEN && $CI_PROJECT_PATH =~ /^xen-project\/people\/.*$/
-+      when: manual
-+    - !reference [.eclair-analysis, rules]
-+
-+eclair-x86_64:
-+  extends: .eclair-analysis:triggered
-   variables:
-     LOGFILE: "eclair-x86_64.log"
-     VARIANT: "X86_64"
-     RULESET: "Set1"
--  allow_failure: true
- 
- eclair-ARM64:
--  extends: .eclair-analysis
-+  extends: .eclair-analysis:triggered
-   variables:
-     LOGFILE: "eclair-ARM64.log"
-     VARIANT: "ARM64"
-     RULESET: "Set1"
--  allow_failure: true
- 
- .eclair-analysis:on-schedule:
-   extends: .eclair-analysis
-   rules:
--    - if: $CI_PIPELINE_SOURCE == "schedule"
-+    - if: $CI_PIPELINE_SOURCE != "schedule"
-+      when: never
-+    - !reference [.eclair-analysis, rules]
- 
- eclair-x86_64-Set1:on-schedule:
-   extends: .eclair-analysis:on-schedule
-diff --git a/automation/scripts/eclair b/automation/scripts/eclair
-index 813a56eb6a..14e47a6f97 100755
---- a/automation/scripts/eclair
-+++ b/automation/scripts/eclair
-@@ -4,11 +4,6 @@ ECLAIR_ANALYSIS_DIR=automation/eclair_analysis
- ECLAIR_DIR="${ECLAIR_ANALYSIS_DIR}/ECLAIR"
- ECLAIR_OUTPUT_DIR=$(realpath "${ECLAIR_OUTPUT_DIR}")
- 
--if [ -z "${WTOKEN:-}" ]; then
--    echo "Failure: the WTOKEN variable is not defined." >&2
--    exit 1
--fi
--
- "${ECLAIR_ANALYSIS_DIR}/prepare.sh" "${VARIANT}"
- 
- ex=0
 -- 
-2.34.1
-
+Julien Grall
 
