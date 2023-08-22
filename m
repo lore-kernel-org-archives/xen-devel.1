@@ -4,37 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09612EE4996
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Aug 2023 01:30:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.587986.919397 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 008B6EE49AA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Aug 2023 01:30:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.587987.919402 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYGDv-0000xM-1K; Tue, 22 Aug 2023 01:30:23 +0000
+	id 1qYGDv-00010L-BU; Tue, 22 Aug 2023 01:30:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 587986.919397; Tue, 22 Aug 2023 01:30:23 +0000
+Received: by outflank-mailman (output) from mailman id 587987.919402; Tue, 22 Aug 2023 01:30:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYGDu-0000xF-UN; Tue, 22 Aug 2023 01:30:22 +0000
-Received: by outflank-mailman (input) for mailman id 587986;
+	id 1qYGDv-0000zK-5l; Tue, 22 Aug 2023 01:30:23 +0000
+Received: by outflank-mailman (input) for mailman id 587987;
  Tue, 22 Aug 2023 01:30:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gk3p=EH=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1qYGDt-0000x3-7p
+ <SRS0=MiiM=EH=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1qYGDt-0000x4-9o
  for xen-devel@lists.xenproject.org; Tue, 22 Aug 2023 01:30:21 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7414f001-408b-11ee-8782-cb3800f73035;
- Tue, 22 Aug 2023 03:30:19 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 365EF631CD;
- Tue, 22 Aug 2023 01:30:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D4BAC433C9;
- Tue, 22 Aug 2023 01:30:16 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2060a.outbound.protection.outlook.com
+ [2a01:111:f400:7e89::60a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 72979f87-408b-11ee-9b0c-b553b5be7939;
+ Tue, 22 Aug 2023 03:30:18 +0200 (CEST)
+Received: from MW4PR04CA0146.namprd04.prod.outlook.com (2603:10b6:303:84::31)
+ by DM4PR12MB7766.namprd12.prod.outlook.com (2603:10b6:8:101::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.24; Tue, 22 Aug
+ 2023 01:30:13 +0000
+Received: from CO1PEPF000044EF.namprd05.prod.outlook.com
+ (2603:10b6:303:84:cafe::1d) by MW4PR04CA0146.outlook.office365.com
+ (2603:10b6:303:84::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.20 via Frontend
+ Transport; Tue, 22 Aug 2023 01:30:13 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000044EF.mail.protection.outlook.com (10.167.241.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6699.15 via Frontend Transport; Tue, 22 Aug 2023 01:30:12 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 21 Aug
+ 2023 20:30:10 -0500
+Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
+ Transport; Mon, 21 Aug 2023 20:30:08 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,109 +61,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7414f001-408b-11ee-8782-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1692667817;
-	bh=x7ZIUaab4xQmU47UhZ5g+A3jXBvHCK6jXJMADn63+h8=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Bxt3gNtorgJ3Ch3z5sjXPayTQ58QZinFGNNUdWouHsTYaMyhNnIKM+w/1jdrpbOV8
-	 Wq9d52IhYsKwMFcf9hu32m9OmFRdXAD9STauhcs9bex2cUvoLdlEc+mQYWp/ib4Izq
-	 OO3ku68lTcSsa1Tv+qGxtG7Z4Wm9fyU6xcJzRISYqK+TDvJJQuXvuoYyH5+bulBW/H
-	 MSUs3B9E6Js31yZ+UjWaSR4AfzbZDqHy/SnNIhrWm0xyiAe/amgDfLieueI5H1FFnh
-	 +cdF16AdjHNKdYuyQOS8agQAqlLOrXoBLyYdOgWhcnXXywN5hk9AEzZI5w4sV/v60M
-	 1YyAcPXR1fxUw==
-From: Stefano Stabellini <sstabellini@kernel.org>
-To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	julien@xen.org,
-	sstabellini@kernel.org,
-	george.dunlap@citrix.com,
-	bertrand.marquis@arm.com,
-	Stefano Stabellini <stefano.stabellini@amd.com>
-Subject: [PATCH v2] docs/misra: add exceptions to rules
-Date: Mon, 21 Aug 2023 18:30:14 -0700
-Message-Id: <20230822013014.2523202-1-sstabellini@kernel.org>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 72979f87-408b-11ee-9b0c-b553b5be7939
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MP0zm67+1B4m35uORS/grVn/DkDd8FJeh/nsU2MVb9nFeuBO4CFZXXbAJK9xEjxiTLf5Zqi3eLlg3mpYmSG1wdhRs6PfJYSkNjJIEqagJpBzIy5t5PL82xo8glOTIWiCbOcT/7bmGR8R4M8GKxDc4y4FEMXLyLobp4vJPyck1rCYdSBh1fxr1DMweFTwLS4bxUX6ofBmWRlyq94wtZgvt1c1gO/zvTLCYSQs9k+exSeZ5Z4BLl/Y9vHetkecJ5Ervk+++uqO+bWdOURZIynh+IheyMF1OwiXWvf5XQjwtKZrTcAdj1A0baCnHO7N5KVhisMJi07XEjWzE/e8mhCCfw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VL6lMQVeMDc9PDrdGemq8BetWEBzdrBiDPf1TKvHKwo=;
+ b=n34YAKLAvY/z7MH9KQW1D1+65RO62aCdcuayRxq/3ZpyGO3GXAkswRURaQII27jH2176CC0HtWElriDZnWBvmuqFEqVrEpvQWOvNMXTaGWQ5F+4dBhY0LgCAAaM53UWMgggFlSCILDof94lxDP7AM8936RkfU2ffSDbu5hUpJID/u7z+p8iOqdAAADfQQRm7yFbz5mYd55lGraj6D5nv4ELgD6Bkg3AFCX+V/SD+10MQ5yEhUpRO8OZQhX7KvtwvGVXga8PL+e2+TRAUpwaNwpdPFqJooqCYetDBRfBccRB9AuvErXFgmCMjYUWcrUJk37PtkHVTWwCd7iPkMn8Opw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VL6lMQVeMDc9PDrdGemq8BetWEBzdrBiDPf1TKvHKwo=;
+ b=pCJSMgRu14HXaTtcBweUAwcAkBMXUCSEMtbEIql9TzLV3oAtBIoxmOC2NedZHIJzB9JbmMg2QCDLbitVEZL7VAxze2qPm4mRGDduhjeFmflGTW25K/IITBWPTpcl1Ox41hbh4Fm4iQ65rrcmg7R96185AcyXd9McYF0rAeZV5ik=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Paul Durrant
+	<paul@xen.org>, Kevin Tian <kevin.tian@intel.com>
+Subject: [PATCH v3 0/4] vPCI capabilities filtering
+Date: Mon, 21 Aug 2023 21:29:48 -0400
+Message-ID: <20230822012955.312930-1-stewart.hildebrand@amd.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044EF:EE_|DM4PR12MB7766:EE_
+X-MS-Office365-Filtering-Correlation-Id: b196264d-ae01-4631-d8b4-08dba2af5486
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	YQA9CwIotRzSoOh5NxcbH+bIEW7GfZV+g5Z0HCWxNnEqGpLeEMQWP0R8SKzxvU+eK/JByoUCfY47IHUzJSyBQHSpoUwHI7PJlmO4ENTWabWMgC5zma/X5cuvB5XVZQNmPo1KH58q4Mzp0s0kCZzrcs0UtLzkqbhqE/Ww1gAA9liXt+gVEzYEYp2HLbgoNJMhNZyjJJWGdYi6ENjOrzfi+6q8g6+TSCxu/x0MVAZw2Snu6KaPWGFHdYlQ3cLoEWcPZr1rps0HcvmaCscDvtogwzUgKuys/62JeBbL7ArtHSc3QG1zuGdMLCFnlO9OXo8lzi2zcop9GZEdhfk5Y3LLHM7MVWAcUNY1GvckW8T2n6zksosC67ynUelonLqeIaJzIocjKCBHq+XxPkCjdr61I5YB35AFk70einf5PhGqP+nW7sgJNRLvOgu6UZbWOm9Chy9Q+wCqzPLBvuzzeiW9frJKaNZ+gLDwEE6QOUqNmIH5qLCB6Ez0E0u+hFCMS/6asOXmQxS009Xvun5NX3mzT6S9bdnod1Uhd/Z5qcUZFiX9oWJawrElct6clJfXfXJzZ/MCnANb3wGy3Av3aUVudev69EFKU54HxwSxcjJlbV9+wJAwpngcG/xl/hpL9RzwPzdsYwSvfVJCpN7e9tve6rQ+qVQEtyvQInMgUHUGWUNMr7CCYB8PQH53AwUN7q01Jpd2nsd5gWF3K86PTVmpgcSqvlaRqoh9A/bKhAfIIDpqpR/XEu5L05CC+yk5E9MJ3IqsxmnOQlzaepPluvS9iA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(136003)(39860400002)(346002)(376002)(186009)(1800799009)(82310400011)(451199024)(40470700004)(46966006)(36840700001)(54906003)(70586007)(6916009)(66899024)(70206006)(316002)(8936002)(8676002)(2616005)(4326008)(1076003)(40460700003)(41300700001)(36756003)(82740400003)(356005)(81166007)(478600001)(966005)(6666004)(40480700001)(2906002)(7416002)(83380400001)(86362001)(47076005)(36860700001)(336012)(44832011)(426003)(5660300002)(26005)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2023 01:30:12.2438
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b196264d-ae01-4631-d8b4-08dba2af5486
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000044EF.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7766
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
+This small series enables vPCI to filter which PCI capabilities we expose to a
+domU. This series adds vPCI register handlers within
+xen/drivers/vpci/header.c:init_bars(), along with some supporting functions.
 
-During the discussions that led to the acceptable of the Rules, we
-decided on a few exceptions that were not properly recorded in
-rules.rst. Other times, the exceptions were decided later when it came
-to enabling a rule in ECLAIR.
+Note there are minor rebase conflicts with the in-progress vPCI series [1].
+These conflicts fall into the category of functions and code being added
+adjacent to one another, so are easily resolved. I did not identify any
+dependency on the vPCI locking work, and the two series deal with different
+aspects of emulating the PCI header.
 
-Either way, update rules.rst with appropriate notes.
+Future work may involve adding handlers for more registers in the vPCI header,
+such as VID/DID, etc. Future work may also involve exposing additional
+capabilities to the guest for broader device/driver support.
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
----
-v2:
-- remove autogenerated from D4.10
-- remove R2.1
-- remove R5.6
-- remove R7.1
-- reword R8.3
----
- docs/misra/rules.rst | 36 +++++++++++++++++++++++++++++-------
- 1 file changed, 29 insertions(+), 7 deletions(-)
+v2->v3:
+* drop RFC "xen/vpci: header: avoid cast for value passed to vpci_read_val"
+* minor misra C violation fixup in preparatory patch
+* switch to pci_sbdf_t in preparatory patch
+* introduce status handler
 
-diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
-index 8f0e4d3f25..62bd4620fd 100644
---- a/docs/misra/rules.rst
-+++ b/docs/misra/rules.rst
-@@ -59,7 +59,8 @@ maintainers if you want to suggest a change.
-      - Required
-      - Precautions shall be taken in order to prevent the contents of a
-        header file being included more than once
--     -
-+     - Files that are intended to be included more than once do not need to
-+       conform to the directive
- 
-    * - `Dir 4.11 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_04_11.c>`_
-      - Required
-@@ -117,7 +131,7 @@ maintainers if you want to suggest a change.
-      - Required
-      - The character sequences /* and // shall not be used within a
-        comment
--     -
-+     - Comments containing hyperlinks inside C-style block comments are safe
- 
-    * - `Rule 3.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_03_02.c>`_
-      - Required
-@@ -239,13 +256,16 @@ maintainers if you want to suggest a change.
-      - Required
-      - All declarations of an object or function shall use the same
-        names and type qualifiers
--     -
-+     - The type ret_t maybe be deliberately used and defined as int or
-+       long depending on the type of guest to service
- 
-    * - `Rule 8.4 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_04.c>`_
-      - Required
-      - A compatible declaration shall be visible when an object or
-        function with external linkage is defined
--     -
-+     - Allowed exceptions: asm-offsets.c (definitions for asm modules
-+       not called from C code), gcov_base.c (definitions only used in
-+       non-release builds)
- 
-    * - `Rule 8.5 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_05_2.c>`_
-      - Required
-@@ -369,7 +389,9 @@ maintainers if you want to suggest a change.
-      - Required
-      - Expressions resulting from the expansion of macro parameters
-        shall be enclosed in parentheses
--     -
-+     - Extra parentheses are not required when macro parameters are used
-+       as function arguments, as macro arguments, array indices, lhs in
-+       assignments
- 
-    * - `Rule 20.13 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_13.c>`_
-      - Required
+v1->v2:
+* squash helper functions into the patch where they are used to avoid transient
+  dead code situation
+* add new RFC patch, possibly throwaway, to get an idea of what it would look
+  like to get rid of the (void *)(uintptr_t) cast by introducing a new memory
+  allocation
+
+[1] https://lists.xenproject.org/archives/html/xen-devel/2023-07/msg01281.html
+
+Stewart Hildebrand (4):
+  xen/pci: address a violation of MISRA C:2012 Rule 8.3
+  xen/pci: convert pci_find_*cap* to pci_sbdf_t
+  xen/vpci: header: filter PCI capabilities
+  xen/vpci: header: status register handler
+
+ xen/arch/x86/msi.c                         | 47 +++--------
+ xen/drivers/char/ehci-dbgp.c               |  3 +-
+ xen/drivers/passthrough/amd/iommu_detect.c |  2 +-
+ xen/drivers/passthrough/ats.c              |  4 +-
+ xen/drivers/passthrough/ats.h              |  6 +-
+ xen/drivers/passthrough/msi.c              |  6 +-
+ xen/drivers/passthrough/pci.c              | 20 ++---
+ xen/drivers/passthrough/vtd/quirks.c       | 10 +--
+ xen/drivers/passthrough/vtd/x86/ats.c      |  3 +-
+ xen/drivers/pci/pci.c                      | 50 +++++++-----
+ xen/drivers/vpci/header.c                  | 93 ++++++++++++++++++++++
+ xen/drivers/vpci/msi.c                     |  4 +-
+ xen/drivers/vpci/msix.c                    |  4 +-
+ xen/drivers/vpci/vpci.c                    | 53 +++++++++---
+ xen/include/xen/pci.h                      | 11 ++-
+ xen/include/xen/vpci.h                     | 14 ++++
+ 16 files changed, 221 insertions(+), 109 deletions(-)
+
+
+base-commit: 3fae7c56b313a12288a05e0a8c14c47bfd4dc40e
 -- 
-2.25.1
+2.41.0
 
 
