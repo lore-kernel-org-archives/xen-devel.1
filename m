@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30C67EE4996
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Aug 2023 21:34:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.587903.919307 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EFF4EE4996
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Aug 2023 00:46:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.587946.919345 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYCXq-0002YB-J8; Mon, 21 Aug 2023 21:34:42 +0000
+	id 1qYFWf-0007eO-Sa; Tue, 22 Aug 2023 00:45:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 587903.919307; Mon, 21 Aug 2023 21:34:42 +0000
+Received: by outflank-mailman (output) from mailman id 587946.919345; Tue, 22 Aug 2023 00:45:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYCXq-0002Y4-GA; Mon, 21 Aug 2023 21:34:42 +0000
-Received: by outflank-mailman (input) for mailman id 587903;
- Mon, 21 Aug 2023 21:34:41 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qYCXp-0002Xy-LJ
- for xen-devel@lists.xenproject.org; Mon, 21 Aug 2023 21:34:41 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qYCXp-0002dO-5T; Mon, 21 Aug 2023 21:34:41 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.102])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qYCXo-0007eZ-UM; Mon, 21 Aug 2023 21:34:41 +0000
+	id 1qYFWf-0007eH-PS; Tue, 22 Aug 2023 00:45:41 +0000
+Received: by outflank-mailman (input) for mailman id 587946;
+ Tue, 22 Aug 2023 00:45:40 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=gk3p=EH=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1qYFWe-0007P4-Fm
+ for xen-devel@lists.xenproject.org; Tue, 22 Aug 2023 00:45:40 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 36c014c5-4085-11ee-8782-cb3800f73035;
+ Tue, 22 Aug 2023 02:45:39 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 82B5660C08;
+ Tue, 22 Aug 2023 00:45:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1939AC433C8;
+ Tue, 22 Aug 2023 00:45:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,85 +46,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=Qa3s1YolGB3ar4TNKgUfeOUYGBgoB/JRJVVzTqWfkfk=; b=dhBHsRdN371HyC3v7ny5ewVuX9
-	GTkta/jGn2/mPg8wB4/TCEHf0VK/97i+2G2b2sZvSOvKzXT07izouQiALMysqEG6U+SPUSpydSi4X
-	+4Fo+qx2ztLjqTckEXfHH/y7bHM0Wut+xksFxcDbPiN8OYpBCR3BTcnszUPTi6+CkNfw=;
-Message-ID: <67f4015f-fb63-f097-ce1b-ea6264232a1e@xen.org>
-Date: Mon, 21 Aug 2023 22:34:38 +0100
+X-Inumbo-ID: 36c014c5-4085-11ee-8782-cb3800f73035
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1692665137;
+	bh=qoLgfJQBWiPHTzycW67/vN/z3+TsS+y7d+PacMcrhnY=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=PKwFWqy4qynyI1zaCBqO4CJ6aTYQe8/EvWMlTJ9cvyQd7TBLGpwkN8tCAhxUCOxKD
+	 peqxajrpgYUnLWFyvSbN+VoWLK7dvPaBrpIYLRJpv8l+68r9Vkt+8Xcg38YtSLFMQ2
+	 trhykHEy1k1OvFNnuzaZHZtWCGV1VudiAhR3sdNYEBx++CdknGlQiICzaIaB0Bk3AW
+	 q3LGqB6BN/g1fFFN4dR4n10lCvc1ysznKapoBbLtbt9Cwe8rWZGNOBD4z+XPY6i6xG
+	 cVHZwLBXXY6XAkpE0YfL7zTscf5NRRAPX5XDEHOwlRBsFAj4ZP6ayb2H8CKNZiDCW4
+	 VJiUfJEtKR3LA==
+Date: Mon, 21 Aug 2023 17:45:35 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Simone Ballarin <simone.ballarin@bugseng.com>
+cc: xen-devel@lists.xenproject.org, consulting@bugseng.com, 
+    andrew.cooper3@citrix.com, Doug Goldstein <cardoe@cardoe.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [XEN PATCH v2 2/2] automation: avoid pipelines on specific
+ branches
+In-Reply-To: <8ca21d49e7b95e788a4c092c1b8dcd3d1245d638.1692607487.git.simone.ballarin@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2308211744110.6458@ubuntu-linux-20-04-desktop>
+References: <cover.1692607487.git.simone.ballarin@bugseng.com> <8ca21d49e7b95e788a4c092c1b8dcd3d1245d638.1692607487.git.simone.ballarin@bugseng.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.13.0
-Subject: Re: [PATCH v5 13/13] xen/arm: mmu: enable SMMU subsystem only in MMU
-To: Henry Wang <Henry.Wang@arm.com>, xen-devel@lists.xenproject.org
-Cc: Penny Zheng <Penny.Zheng@arm.com>, Jan Beulich <jbeulich@suse.com>,
- Paul Durrant <paul@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>, Wei Chen <wei.chen@arm.com>
-References: <20230814042536.878720-1-Henry.Wang@arm.com>
- <20230814042536.878720-14-Henry.Wang@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <20230814042536.878720-14-Henry.Wang@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
 
-Hi,
-
-On 14/08/2023 05:25, Henry Wang wrote:
-> From: Penny Zheng <Penny.Zheng@arm.com>
+On Mon, 21 Aug 2023, Simone Ballarin wrote:
+> This patch avoids the execution of pipelines in the
+> following branches:
+> - master
+> - smoke
+> - coverirty-tested/.*
+> - stable-.*
 > 
-> SMMU subsystem is only supported in MMU system, so we make it dependent
-> on CONFIG_HAS_MMU.
-
-"only supported" as in it doesn't work with Xen or the HW is not 
-supporting it?
-
-Also, I am not entirely convinced that anything in passthrough would 
-properly work with MPU. At least none of the IOMMU drivers are. So I 
-would consider to completely disable HAS_PASSTHROUGH.
-
+> The job-level exclusions have been removed as they are
+> pointless with this new workspace-level exclusion.
 > 
-> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
-> Signed-off-by: Wei Chen <wei.chen@arm.com>
-> Signed-off-by: Henry Wang <Henry.Wang@arm.com>
-> Acked-by: Jan Beulich <jbeulich@suse.com>
+> Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
 > ---
-> v5:
-> - Add Acked-by tag from Jan.
-> v4:
-> - No change
-> v3:
-> - new patch
+> Changes in v2:
+> - remove useless except clause in .yocto-test.
 > ---
->   xen/drivers/passthrough/Kconfig | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
+>  .gitlab-ci.yml                  |  6 ++++++
+>  automation/gitlab-ci/build.yaml | 11 -----------
+>  automation/gitlab-ci/test.yaml  |  5 -----
+>  3 files changed, 6 insertions(+), 16 deletions(-)
 > 
-> diff --git a/xen/drivers/passthrough/Kconfig b/xen/drivers/passthrough/Kconfig
-> index 864fcf3b0c..ebb350bc37 100644
-> --- a/xen/drivers/passthrough/Kconfig
-> +++ b/xen/drivers/passthrough/Kconfig
-> @@ -5,6 +5,7 @@ config HAS_PASSTHROUGH
->   if ARM
->   config ARM_SMMU
->   	bool "ARM SMMUv1 and v2 driver"
-> +	depends on MMU
->   	default y
->   	---help---
->   	  Support for implementations of the ARM System MMU architecture
-> @@ -15,7 +16,7 @@ config ARM_SMMU
->   
->   config ARM_SMMU_V3
->   	bool "ARM Ltd. System MMU Version 3 (SMMUv3) Support" if EXPERT
-> -	depends on ARM_64 && (!ACPI || BROKEN)
-> +	depends on ARM_64 && (!ACPI || BROKEN) && MMU
->   	---help---
->   	 Support for implementations of the ARM System MMU architecture
->   	 version 3. Driver is in experimental stage and should not be used in
-
-Cheers,
-
--- 
-Julien Grall
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index ee5430b8b7..ef4484e09a 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -1,3 +1,9 @@
+> +workflow:
+> +  rules:
+> +    - if: $CI_COMMIT_BRANCH =~ /^(master|smoke|^coverity-tested\/.*|stable-.*)$/
+> +      when: never
+> +    - when: always
+> +
+>  stages:
+>    - analyze
+>    - build
+> diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+> index 1a4a5e490d..b633facff4 100644
+> --- a/automation/gitlab-ci/build.yaml
+> +++ b/automation/gitlab-ci/build.yaml
+> @@ -12,11 +12,6 @@
+>        - '*/*.log'
+>      when: always
+>    needs: []
+> -  except:
+> -    - master
+> -    - smoke
+> -    - /^coverity-tested\/.*/
+> -    - /^stable-.*/
+>  
+>  .gcc-tmpl:
+>    variables: &gcc
+> @@ -214,11 +209,6 @@
+>  .yocto-test:
+>    stage: build
+>    image: registry.gitlab.com/xen-project/xen/${CONTAINER}
+> -  except:
+> -    - master
+> -    - smoke
+> -    - /^coverity-tested\/.*/
+> -    - /^stable-.*/
+>    script:
+>      - ./automation/build/yocto/build-yocto.sh -v --log-dir=./logs --xen-dir=`pwd` ${YOCTO_BOARD} ${YOCTO_OUTPUT}
+>    variables:
+> @@ -269,7 +259,6 @@
+>  .test-jobs-artifact-common:
+>    stage: build
+>    needs: []
+> -  except: !reference [.test-jobs-common, except]
+>  
+>  # Arm test artifacts
+>  
+> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+> index 810631bc46..8737f367c8 100644
+> --- a/automation/gitlab-ci/test.yaml
+> +++ b/automation/gitlab-ci/test.yaml
+> @@ -1,11 +1,6 @@
+>  .test-jobs-common:
+>    stage: test
+>    image: registry.gitlab.com/xen-project/xen/${CONTAINER}
+> -  except:
+> -    - master
+> -    - smoke
+> -    - /^coverity-tested\/.*/
+> -    - /^stable-.*/
+>  
+>  .arm64-test-needs: &arm64-test-needs
+>    - alpine-3.18-arm64-rootfs-export
+> -- 
+> 2.34.1
+> 
 
