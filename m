@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56963EE4993
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Aug 2023 13:45:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.589248.921081 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4979EEE4993
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Aug 2023 13:47:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.589254.921091 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYoAY-0004gu-9x; Wed, 23 Aug 2023 13:45:10 +0000
+	id 1qYoCc-0005FI-Mc; Wed, 23 Aug 2023 13:47:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 589248.921081; Wed, 23 Aug 2023 13:45:10 +0000
+Received: by outflank-mailman (output) from mailman id 589254.921091; Wed, 23 Aug 2023 13:47:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYoAY-0004gn-73; Wed, 23 Aug 2023 13:45:10 +0000
-Received: by outflank-mailman (input) for mailman id 589248;
- Wed, 23 Aug 2023 13:45:08 +0000
+	id 1qYoCc-0005FB-Is; Wed, 23 Aug 2023 13:47:18 +0000
+Received: by outflank-mailman (input) for mailman id 589254;
+ Wed, 23 Aug 2023 13:47:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3PRN=EI=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1qYoAW-0004ge-NK
- for xen-devel@lists.xenproject.org; Wed, 23 Aug 2023 13:45:08 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
+ id 1qYoCb-0005F5-Bi
+ for xen-devel@lists.xenproject.org; Wed, 23 Aug 2023 13:47:17 +0000
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [2a00:1450:4864:20::42b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 458a6801-41bb-11ee-8783-cb3800f73035;
- Wed, 23 Aug 2023 15:45:07 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-319559fd67dso5121270f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Aug 2023 06:45:07 -0700 (PDT)
+ id 9243064b-41bb-11ee-8783-cb3800f73035;
+ Wed, 23 Aug 2023 15:47:16 +0200 (CEST)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-31c479ede21so2919251f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Aug 2023 06:47:16 -0700 (PDT)
 Received: from perard.uk.xensource.com (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- m14-20020adffe4e000000b00317b0155502sm19537353wrs.8.2023.08.23.06.45.06
+ v6-20020a7bcb46000000b003fbb25da65bsm19048963wmj.30.2023.08.23.06.47.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 06:45:06 -0700 (PDT)
+ Wed, 23 Aug 2023 06:47:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,69 +47,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 458a6801-41bb-11ee-8783-cb3800f73035
+X-Inumbo-ID: 9243064b-41bb-11ee-8783-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1692798307; x=1693403107;
+        d=citrix.com; s=google; t=1692798436; x=1693403236;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=fQ5GaiT0sZIp6gIQXTOGRDxpxHA+t700hx68Ehib/FM=;
-        b=eyEhnZwjhRY3GGR9zHAUSh8FAimxzhZZ0xIBDGW330ZnbI3GQgh7XEC0YWeKqFrqtN
-         J0Yd2wGDgh3Efb9uNtJ5qrg7d8RZ3u6OAuGyLcOgPHsbHa5Pk1D0WTgoaF1mplbVW0ii
-         iEEFWhKP9Vv4AG2nejz3ghzpT8DmjeSXx7iyg=
+        bh=k0aPLN/EaS/YF5ywh2B6zULMXaN4Yrpyic2bVj2iISw=;
+        b=hUUjRe96aaonb5z5HnCVJ6+zAclSuiXSdP37lREJIoPbZEwdpXbrWYCP4SqpEMH/kO
+         1Mg8Mjc9WRy4aV+tJirtdsC5iuW/296658QQSkxqe3W9YYuGYpuu4FqhR+H5i4OgaWo6
+         U3VcWnhgSNUxTPudzcAAvIO9hVvPBOqQ/CIaI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692798307; x=1693403107;
+        d=1e100.net; s=20221208; t=1692798436; x=1693403236;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fQ5GaiT0sZIp6gIQXTOGRDxpxHA+t700hx68Ehib/FM=;
-        b=cr22UJn2IHUHDnYA8whZ42a8ZUkOh7HXYWlud6ImptM/FUnMx90881hS2Vcnk+qIqG
-         OPlyYgI98TDEAxPmVQKpGCgLtHLVq5USKnSU8Idj0ujZnhf8eLNdveKeOX0uMJ27zieK
-         Xni8Rw++FRVnPgvtVWQijFdNdzJnEoPJQ9KF3LS52cZwD1y4JAkCml9eCr1Ax0ck30i4
-         0f7lEuFymr65niZPEec8frWb3qM/OqI2RhJFmSRsr0fFs88myUPgrdaVHw39Mrcnv2FZ
-         JORwPPN+vTyBr4CCwT0GE/R1PQjn7L7fDNNkU6lZBRqOpVbzYymr6+nQK9Ogb3bjLlaO
-         bwRw==
-X-Gm-Message-State: AOJu0Ywu9LVIV5ZvumBS/V7SHdhHxw5CRp1T9Bf8qruZhxbArI/p86rn
-	P/GjdzS0MEM7EKeOlCAP/guSbQ==
-X-Google-Smtp-Source: AGHT+IHlDzZY0UEI+cOAySVz9M9j3Ruhqgy5Q3zcqNJDHw5JH8pFHDk8WTco/aHUkWkskzqkNXR01w==
-X-Received: by 2002:adf:e6c9:0:b0:31a:e744:1297 with SMTP id y9-20020adfe6c9000000b0031ae7441297mr9031737wrm.50.1692798307200;
-        Wed, 23 Aug 2023 06:45:07 -0700 (PDT)
-Date: Wed, 23 Aug 2023 14:45:06 +0100
+        bh=k0aPLN/EaS/YF5ywh2B6zULMXaN4Yrpyic2bVj2iISw=;
+        b=NRs+tuNnPjdsa9DOb+nVroiy2hgK6K8HbfcOAH6FqcbPX/gcsZZiVUf4IlKvs+ccBc
+         yysB5y2NQIei1WncNc77A9msObGuOW1MQ8y2see1BEgtCSFNTf/iCEfR2opQR9rA8TTB
+         ec4XWXPA9zXlPHnDeSqC6XMpRd0ERhZ838WF0Mj2VnpDkASq/glohXbrlRtjvxUakY3N
+         8MZ7O7Y1KcaQ1oZv361DPEy5NDSnbVyUhBKcqV4DycdoxI9SiFmZe09jb+4GUxSLfTmc
+         lWIgTQ295ddV8Zf7pWeklfvHM05n29lUgoBLbyRPgOHC7Wapi6mIDhOXpcbkWRFZ7DgT
+         hyFw==
+X-Gm-Message-State: AOJu0YzGswfr/XzyA5zzdod0ab4Bm8PyqhDSwyhr/XWvkaKfBmVp27UD
+	HI8fLd4LoSZEjGQChPp2A3PHVJvI/USJym/PXWVGJQ==
+X-Google-Smtp-Source: AGHT+IEhQVN+NfCxL6CZOwuqqPxqEgmMKGkvlSlPWx2Klmr2lMN1NVRMqtjk+BA7uXwHszCQkiQwew==
+X-Received: by 2002:a5d:4286:0:b0:317:73d3:441a with SMTP id k6-20020a5d4286000000b0031773d3441amr9016488wrq.46.1692798435955;
+        Wed, 23 Aug 2023 06:47:15 -0700 (PDT)
+Date: Wed, 23 Aug 2023 14:47:15 +0100
 From: Anthony PERARD <anthony.perard@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] libxl/CPUID: drop two more feature flag table entries
-Message-ID: <0fec10d1-b56f-416e-a417-b887a3219fea@perard>
-References: <1517da3b-7d39-47b9-2714-d97dac217678@suse.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: Re: [PATCH] stubdom: remove openssl related clean actions
+Message-ID: <e7521955-b979-47f3-83b9-1a4095df8b0c@perard>
+References: <20230823083219.19517-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <1517da3b-7d39-47b9-2714-d97dac217678@suse.com>
+In-Reply-To: <20230823083219.19517-1-jgross@suse.com>
 
-On Wed, Aug 23, 2023 at 09:21:26AM +0200, Jan Beulich wrote:
-> Two entries were left in place by d638fe233cb3 ("libxl: use the cpuid
-> feature names from cpufeatureset.h"), despite matching the generated
-> names.
+On Wed, Aug 23, 2023 at 10:32:19AM +0200, Juergen Gross wrote:
+> When introducing polarssl into stubdom building the clean targets of
+> stubdom/Makefile gained actions for removing openssl directories and
+> files additional to polarssl ones.
 > 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> As those openssl files are never downloaded or created during build,
+> the related actions can be dropped.
+> 
+> Fixes: bdd516dc6b2f ("vtpm/vtpmmgr and required libs to stubdom/Makefile")
+> Signed-off-by: Juergen Gross <jgross@suse.com>
 
-Acked-by: Anthony PERARD <anthony.perard@citrix.com>
-
-> ---
-> Permitting "psn", "ia64, "cntxid", and "perfctr_*" when the hypervisor
-> doesn't even know of the bits (perhaps wrongly so) is kind of odd as
-> well. Permitting bits like "est", which the hypervisor knows of but
-> doesn't expose to guests, is also questionable.
-
-I think those are just aliases, to a specific bit in a bitmap. Even if
-we remove those aliases, it is still possible to instruct libxl to do
-something with those bits. So there presence isn't permission, I don't
-think.
-
-Looks like "est" is just an alias for "eist", so it doesn't seems useful
-to remove it either.
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 
 Thanks,
 
