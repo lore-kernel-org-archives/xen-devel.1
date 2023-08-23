@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609B1C71145
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF2E0C71153
 	for <xen-devel@archiver.kernel.org>; Wed, 23 Aug 2023 20:07:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.589511.921445 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.589514.921475 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYu8d-0004W1-G9; Wed, 23 Aug 2023 20:07:35 +0000
+	id 1qYu8h-0005IG-GH; Wed, 23 Aug 2023 20:07:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 589511.921445; Wed, 23 Aug 2023 20:07:35 +0000
+Received: by outflank-mailman (output) from mailman id 589514.921475; Wed, 23 Aug 2023 20:07:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYu8d-0004Vu-D1; Wed, 23 Aug 2023 20:07:35 +0000
-Received: by outflank-mailman (input) for mailman id 589511;
- Wed, 23 Aug 2023 20:07:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qYu8h-0005I0-AJ; Wed, 23 Aug 2023 20:07:39 +0000
+Received: by outflank-mailman (input) for mailman id 589514;
+ Wed, 23 Aug 2023 20:07:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Z2Dg=EI=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qYu8c-0004Vf-9g
- for xen-devel@lists.xenproject.org; Wed, 23 Aug 2023 20:07:34 +0000
+ id 1qYu8f-0004Vt-25
+ for xen-devel@lists.xenproject.org; Wed, 23 Aug 2023 20:07:37 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b1a07918-41f0-11ee-8783-cb3800f73035;
- Wed, 23 Aug 2023 22:07:32 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b283a07a-41f0-11ee-9b0c-b553b5be7939;
+ Wed, 23 Aug 2023 22:07:34 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id B7063828556D;
- Wed, 23 Aug 2023 15:07:31 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 8F0E582854AE;
+ Wed, 23 Aug 2023 15:07:33 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id BqzCzCq5iCkc; Wed, 23 Aug 2023 15:07:30 -0500 (CDT)
+ with ESMTP id YTJzfzVQV2hR; Wed, 23 Aug 2023 15:07:32 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 7B75C82855DC;
- Wed, 23 Aug 2023 15:07:30 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 2F7E682869C8;
+ Wed, 23 Aug 2023 15:07:32 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id sB7DRz0y0DOz; Wed, 23 Aug 2023 15:07:30 -0500 (CDT)
+ with ESMTP id 6s5iL9zWkkxd; Wed, 23 Aug 2023 15:07:32 -0500 (CDT)
 Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id EC4FB82854AE;
- Wed, 23 Aug 2023 15:07:29 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id A7A2B82867AA;
+ Wed, 23 Aug 2023 15:07:31 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,173 +53,556 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1a07918-41f0-11ee-8783-cb3800f73035
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 7B75C82855DC
+X-Inumbo-ID: b283a07a-41f0-11ee-9b0c-b553b5be7939
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 2F7E682869C8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1692821250; bh=nlIU48HQ2yi2f+3BsZi02EOPrJtql+H7fvyUot2YPQ0=;
+	t=1692821252; bh=XCBWqK2VpcokHzQVBLv4ZPgd/MF7ZgElAFHIz8B9Ncc=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=uHSWJGE6sPafFX+X2qlJtFPI6McDq9lrFCYvdU/LI52eawfjUYcKd6E84F65GF+Pn
-	 2AtYTvG3EWJS+eZRJbwx5Gb8KQNbuKgl9nwXEM5xKnHiATBZ2hpTHN5fqX31f5muGi
-	 dRSr2ft8m1dgKIWji4r/npcnUuSGC0zemvkwDIX4=
+	b=Z4GIiAUk6EbG+TlS14V8exhvwUovzAOF0xu18NZiBRAnGRoyd+yF7zkA40YlKKA03
+	 mav32eNkWx745nWrDNG0bX9JBOuM1AzGgBXZDt4TxAReN0idTZZUiFb0ObrHBDlJ0i
+	 2EMvp2pm72gGxjJXP23bUPnUAwpjEAsiyN+H81CU=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 0/8] ppc: Enable full Xen build
-Date: Wed, 23 Aug 2023 15:07:11 -0500
-Message-Id: <cover.1692816595.git.sanastasio@raptorengineering.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v2 3/8] xen/ppc: Implement atomic.h
+Date: Wed, 23 Aug 2023 15:07:14 -0500
+Message-Id: <6d97bdeb1c114026105e72c6ee6e1b024565bf95.1692816595.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1692816595.git.sanastasio@raptorengineering.com>
+References: <cover.1692816595.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Hello all,
+Implement atomic.h for PPC, based off of the original Xen 3.2
+implementation.
 
-This patch series performs all of the additions necessary to drop the
-build overrides for PPC and enable the full Xen build. Except in cases
-where compatibile implementations already exist (e.g. atomic.h and
-bitops.h), the newly added definitions are simple, unimplemented stubs
-that just call BUG_ON("unimplemented").
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+v2:
+  - Fix style of asm block constraints to include required spaces
+  - Fix macro local variable naming (use trailing underscore instead of
+    leading)
+  - Drop unnecessary parens in __atomic_add_unless
 
-A few miscellaneous changes were also made to non-ppc code as well,
-specifically a few missing header fixes in common.
-
-Thanks,
-Shawn
-
---
-v2: Address review comments from v1. Some changes are still pending until
-the following patches are merged:
-  - [PATCH] mem-sharing: move (x86) / drop (Arm) arch_dump_shared_mem_inf=
-o()
-  https://lists.xen.org/archives/html/xen-devel/2023-08/msg00887.html
-
-  - [PATCH] move max_page and total_pages to common code
-  https://lists.xen.org/archives/html/xen-devel/2023-08/msg00874.html
-
-Shawn Anastasio (8):
-  xen/common: Add missing #includes treewide
-  xen/ppc: Add public/arch-ppc.h
-  xen/ppc: Implement atomic.h
-  xen/ppc: Implement bitops.h
-  xen/ppc: Define minimal stub headers required for full build
-  xen/ppc: Define bug frames table in linker script
-  xen/ppc: Add stub function and symbol definitions
-  xen/ppc: Enable full Xen build
-
- xen/arch/ppc/Kconfig                     |   1 +
- xen/arch/ppc/Makefile                    |  17 +-
- xen/arch/ppc/arch.mk                     |   3 -
- xen/arch/ppc/include/asm/altp2m.h        |  25 ++
- xen/arch/ppc/include/asm/atomic.h        | 390 +++++++++++++++++++++++
- xen/arch/ppc/include/asm/bitops.h        | 332 ++++++++++++++++++-
- xen/arch/ppc/include/asm/bug.h           |   9 +
- xen/arch/ppc/include/asm/cache.h         |   2 +
- xen/arch/ppc/include/asm/config.h        |   9 +
- xen/arch/ppc/include/asm/cpufeature.h    |   9 +
- xen/arch/ppc/include/asm/current.h       |  42 +++
- xen/arch/ppc/include/asm/delay.h         |  11 +
- xen/arch/ppc/include/asm/device.h        |  53 +++
- xen/arch/ppc/include/asm/div64.h         |  14 +
- xen/arch/ppc/include/asm/domain.h        |  46 +++
- xen/arch/ppc/include/asm/event.h         |  35 ++
- xen/arch/ppc/include/asm/flushtlb.h      |  23 ++
- xen/arch/ppc/include/asm/grant_table.h   |   0
- xen/arch/ppc/include/asm/guest_access.h  |  54 ++++
- xen/arch/ppc/include/asm/guest_atomics.h |  14 +
- xen/arch/ppc/include/asm/hardirq.h       |  18 ++
- xen/arch/ppc/include/asm/hypercall.h     |   0
- xen/arch/ppc/include/asm/io.h            |  15 +
- xen/arch/ppc/include/asm/iocap.h         |   7 +
- xen/arch/ppc/include/asm/iommu.h         |   7 +
- xen/arch/ppc/include/asm/irq.h           |  32 ++
- xen/arch/ppc/include/asm/mem_access.h    |   0
- xen/arch/ppc/include/asm/memory.h        |  34 ++
- xen/arch/ppc/include/asm/mm.h            | 249 ++++++++++++++-
- xen/arch/ppc/include/asm/monitor.h       |  46 +++
- xen/arch/ppc/include/asm/nospec.h        |  18 ++
- xen/arch/ppc/include/asm/numa.h          |  26 ++
- xen/arch/ppc/include/asm/p2m.h           | 105 ++++++
- xen/arch/ppc/include/asm/page.h          |  19 ++
- xen/arch/ppc/include/asm/paging.h        |   7 +
- xen/arch/ppc/include/asm/pci.h           |   7 +
- xen/arch/ppc/include/asm/percpu.h        |  24 ++
- xen/arch/ppc/include/asm/procarea.h      |  20 ++
- xen/arch/ppc/include/asm/processor.h     |  10 +
- xen/arch/ppc/include/asm/random.h        |   9 +
- xen/arch/ppc/include/asm/setup.h         |   6 +
- xen/arch/ppc/include/asm/smp.h           |  18 ++
- xen/arch/ppc/include/asm/softirq.h       |   8 +
- xen/arch/ppc/include/asm/spinlock.h      |  15 +
- xen/arch/ppc/include/asm/system.h        | 229 ++++++++++++-
- xen/arch/ppc/include/asm/time.h          |  20 ++
- xen/arch/ppc/include/asm/vm_event.h      |  49 +++
- xen/arch/ppc/include/asm/xenoprof.h      |   0
- xen/arch/ppc/mm-radix.c                  |  44 ++-
- xen/arch/ppc/setup.c                     |   8 +
- xen/arch/ppc/stubs.c                     | 345 ++++++++++++++++++++
- xen/arch/ppc/tlb-radix.c                 |   2 +-
- xen/arch/ppc/xen.lds.S                   |  10 +
- xen/common/memory.c                      |   1 +
- xen/common/symbols.c                     |   1 +
- xen/common/xmalloc_tlsf.c                |   1 +
- xen/include/public/arch-ppc.h            | 110 +++++++
- xen/include/public/hvm/save.h            |   2 +
- xen/include/public/pmu.h                 |   2 +
- xen/include/public/xen.h                 |   2 +
- xen/include/xen/domain.h                 |   1 +
- xen/include/xen/iommu.h                  |   1 +
- xen/include/xen/sched.h                  |   1 +
- 63 files changed, 2607 insertions(+), 11 deletions(-)
- create mode 100644 xen/arch/ppc/include/asm/altp2m.h
+ xen/arch/ppc/include/asm/atomic.h | 390 ++++++++++++++++++++++++++++++
+ xen/arch/ppc/include/asm/memory.h |  34 +++
+ 2 files changed, 424 insertions(+)
  create mode 100644 xen/arch/ppc/include/asm/atomic.h
- create mode 100644 xen/arch/ppc/include/asm/cpufeature.h
- create mode 100644 xen/arch/ppc/include/asm/current.h
- create mode 100644 xen/arch/ppc/include/asm/delay.h
- create mode 100644 xen/arch/ppc/include/asm/device.h
- create mode 100644 xen/arch/ppc/include/asm/div64.h
- create mode 100644 xen/arch/ppc/include/asm/domain.h
- create mode 100644 xen/arch/ppc/include/asm/event.h
- create mode 100644 xen/arch/ppc/include/asm/flushtlb.h
- create mode 100644 xen/arch/ppc/include/asm/grant_table.h
- create mode 100644 xen/arch/ppc/include/asm/guest_access.h
- create mode 100644 xen/arch/ppc/include/asm/guest_atomics.h
- create mode 100644 xen/arch/ppc/include/asm/hardirq.h
- create mode 100644 xen/arch/ppc/include/asm/hypercall.h
- create mode 100644 xen/arch/ppc/include/asm/io.h
- create mode 100644 xen/arch/ppc/include/asm/iocap.h
- create mode 100644 xen/arch/ppc/include/asm/iommu.h
- create mode 100644 xen/arch/ppc/include/asm/irq.h
- create mode 100644 xen/arch/ppc/include/asm/mem_access.h
  create mode 100644 xen/arch/ppc/include/asm/memory.h
- create mode 100644 xen/arch/ppc/include/asm/monitor.h
- create mode 100644 xen/arch/ppc/include/asm/nospec.h
- create mode 100644 xen/arch/ppc/include/asm/numa.h
- create mode 100644 xen/arch/ppc/include/asm/p2m.h
- create mode 100644 xen/arch/ppc/include/asm/paging.h
- create mode 100644 xen/arch/ppc/include/asm/pci.h
- create mode 100644 xen/arch/ppc/include/asm/percpu.h
- create mode 100644 xen/arch/ppc/include/asm/procarea.h
- create mode 100644 xen/arch/ppc/include/asm/random.h
- create mode 100644 xen/arch/ppc/include/asm/setup.h
- create mode 100644 xen/arch/ppc/include/asm/smp.h
- create mode 100644 xen/arch/ppc/include/asm/softirq.h
- create mode 100644 xen/arch/ppc/include/asm/spinlock.h
- create mode 100644 xen/arch/ppc/include/asm/time.h
- create mode 100644 xen/arch/ppc/include/asm/vm_event.h
- create mode 100644 xen/arch/ppc/include/asm/xenoprof.h
- create mode 100644 xen/arch/ppc/stubs.c
- create mode 100644 xen/include/public/arch-ppc.h
 
+diff --git a/xen/arch/ppc/include/asm/atomic.h b/xen/arch/ppc/include/asm=
+/atomic.h
+new file mode 100644
+index 0000000000..43febda7ab
+--- /dev/null
++++ b/xen/arch/ppc/include/asm/atomic.h
+@@ -0,0 +1,390 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * PowerPC64 atomic operations
++ *
++ * Copyright (C) 2001 Paul Mackerras <paulus@au.ibm.com>, IBM
++ * Copyright (C) 2001 Anton Blanchard <anton@au.ibm.com>, IBM
++ * Copyright Raptor Engineering LLC
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version
++ * 2 of the License, or (at your option) any later version.
++ */
++
++#ifndef _ASM_PPC64_ATOMIC_H_
++#define _ASM_PPC64_ATOMIC_H_
++
++#include <xen/atomic.h>
++
++#include <asm/memory.h>
++#include <asm/system.h>
++
++static inline int atomic_read(const atomic_t *v)
++{
++    return *(volatile int *)&v->counter;
++}
++
++static inline int _atomic_read(atomic_t v)
++{
++    return v.counter;
++}
++
++static inline void atomic_set(atomic_t *v, int i)
++{
++    v->counter =3D i;
++}
++
++static inline void _atomic_set(atomic_t *v, int i)
++{
++    v->counter =3D i;
++}
++
++void __bad_atomic_read(const volatile void *p, void *res);
++void __bad_atomic_size(void);
++
++#define build_atomic_read(name, insn, type)                             =
+       \
++    static inline type name(const volatile type *addr)                  =
+       \
++    {                                                                   =
+       \
++        type ret;                                                       =
+       \
++        asm volatile ( insn "%U1%X1 %0,%1" : "=3Dr" (ret) : "m<>" (*addr=
+) );     \
++        return ret;                                                     =
+       \
++    }
++
++#define build_atomic_write(name, insn, type)                            =
+       \
++    static inline void name(volatile type *addr, type val)              =
+       \
++    {                                                                   =
+       \
++        asm volatile ( insn "%U0%X0 %1,%0" : "=3Dm<>" (*addr) : "r" (val=
+) );     \
++    }
++
++#define build_add_sized(name, ldinsn, stinsn, type)                     =
+       \
++    static inline void name(volatile type *addr, type val)              =
+       \
++    {                                                                   =
+       \
++        type t;                                                         =
+       \
++        asm volatile ( "1: " ldinsn " %0,0,%3\n"                        =
+       \
++                       "add%I2 %0,%0,%2\n"                              =
+       \
++                       stinsn " %0,0,%3 \n"                             =
+       \
++                       "bne- 1b\n"                                      =
+       \
++                       : "=3D&r" (t), "+m" (*addr)                      =
+         \
++                       : "r" (val), "r" (addr)                          =
+       \
++                       : "cc" );                                        =
+       \
++    }
++
++build_atomic_read(read_u8_atomic, "lbz", uint8_t)
++build_atomic_read(read_u16_atomic, "lhz", uint16_t)
++build_atomic_read(read_u32_atomic, "lwz", uint32_t)
++build_atomic_read(read_u64_atomic, "ldz", uint64_t)
++
++build_atomic_write(write_u8_atomic, "stb", uint8_t)
++build_atomic_write(write_u16_atomic, "sth", uint16_t)
++build_atomic_write(write_u32_atomic, "stw", uint32_t)
++build_atomic_write(write_u64_atomic, "std", uint64_t)
++
++build_add_sized(add_u8_sized, "lbarx", "stbcx.",uint8_t)
++build_add_sized(add_u16_sized, "lharx", "sthcx.", uint16_t)
++build_add_sized(add_u32_sized, "lwarx", "stwcx.", uint32_t)
++
++#undef build_atomic_read
++#undef build_atomic_write
++#undef build_add_sized
++
++static always_inline void read_atomic_size(const volatile void *p, void =
+*res,
++                                           unsigned int size)
++{
++    ASSERT(IS_ALIGNED((vaddr_t) p, size));
++    switch ( size )
++    {
++    case 1:
++        *(uint8_t *)res =3D read_u8_atomic(p);
++        break;
++    case 2:
++        *(uint16_t *)res =3D read_u16_atomic(p);
++        break;
++    case 4:
++        *(uint32_t *)res =3D read_u32_atomic(p);
++        break;
++    case 8:
++        *(uint64_t *)res =3D read_u64_atomic(p);
++        break;
++    default:
++        __bad_atomic_read(p, res);
++        break;
++    }
++}
++
++static always_inline void write_atomic_size(volatile void *p, void *val,
++                                            unsigned int size)
++{
++    ASSERT(IS_ALIGNED((vaddr_t) p, size));
++    switch ( size )
++    {
++    case 1:
++        write_u8_atomic(p, *(uint8_t *)val);
++        break;
++    case 2:
++        write_u16_atomic(p, *(uint16_t *)val);
++        break;
++    case 4:
++        write_u32_atomic(p, *(uint32_t *)val);
++        break;
++    case 8:
++        write_u64_atomic(p, *(uint64_t *)val);
++        break;
++    default:
++        __bad_atomic_size();
++        break;
++    }
++}
++
++#define read_atomic(p)                                                  =
+       \
++    ({                                                                  =
+       \
++        union {                                                         =
+       \
++            typeof(*(p)) val;                                           =
+       \
++            char c[0];                                                  =
+       \
++        } x_;                                                           =
+       \
++        read_atomic_size(p, x_.c, sizeof(*(p)));                        =
+       \
++        x_.val;                                                         =
+       \
++    })
++
++#define write_atomic(p, x)                                              =
+       \
++    do                                                                  =
+       \
++    {                                                                   =
+       \
++        typeof(*(p)) x_ =3D (x);                                        =
+         \
++        write_atomic_size(p, &x_, sizeof(*(p)));                        =
+       \
++    } while ( 0 )
++
++#define add_sized(p, x)                                                 =
+       \
++    ({                                                                  =
+       \
++        typeof(*(p)) x_ =3D (x);                                        =
+        \
++        switch ( sizeof(*(p)) )                                         =
+       \
++        {                                                               =
+       \
++        case 1:                                                         =
+       \
++            add_u8_sized((uint8_t *) (p), x_);                          =
+      \
++            break;                                                      =
+       \
++        case 2:                                                         =
+       \
++            add_u16_sized((uint16_t *) (p), x_);                        =
+      \
++            break;                                                      =
+       \
++        case 4:                                                         =
+       \
++            add_u32_sized((uint32_t *) (p), x_);                        =
+      \
++            break;                                                      =
+       \
++        default:                                                        =
+       \
++            __bad_atomic_size();                                        =
+       \
++            break;                                                      =
+       \
++        }                                                               =
+       \
++    })
++
++static inline void atomic_add(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%3\n"
++                   "add %0,%2,%0\n"
++                   "stwcx. %0,0,%3\n"
++                   "bne- 1b"
++                   : "=3D&r" (t), "+m" (v->counter)
++                   : "r" (a), "r" (&v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_add_return(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%2\n"
++                   "add %0,%1,%0\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=3D&r" (t)
++                   : "r" (a), "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
++
++static inline void atomic_sub(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%3\n"
++                   "subf %0,%2,%0\n"
++                   "stwcx. %0,0,%3\n"
++                   "bne- 1b"
++                   : "=3D&r" (t), "=3Dm" (v->counter)
++                   : "r" (a), "r" (&v->counter), "m" (v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_sub_return(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%2\n"
++                   "subf %0,%1,%0\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=3D&r" (t)
++                   : "r" (a), "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
++
++static inline void atomic_inc(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%2\n"
++                   "addic %0,%0,1\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b"
++                   : "=3D&r" (t), "=3Dm" (v->counter)
++                   : "r" (&v->counter), "m" (v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_inc_return(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%1\n"
++                   "addic %0,%0,1\n"
++                   "stwcx. %0,0,%1\n"
++                   "bne- 1b"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=3D&r" (t)
++                   : "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
++
++static inline void atomic_dec(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%2\n"
++                   "addic %0,%0,-1\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b"
++                   : "=3D&r" (t), "=3Dm" (v->counter)
++                   : "r" (&v->counter), "m" (v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_dec_return(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%1\n"
++                   "addic %0,%0,-1\n"
++                   "stwcx. %0,0,%1\n"
++                   "bne- 1b"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=3D&r" (t)
++                   : "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
++
++/*
++ * Atomically test *v and decrement if it is greater than 0.
++ * The function returns the old value of *v minus 1.
++ */
++static inline int atomic_dec_if_positive(atomic_t *v)
++{
++    int t;
++
++    asm volatile( PPC_ATOMIC_ENTRY_BARRIER
++                  "1: lwarx %0,0,%1 # atomic_dec_if_positive\n"
++                  "addic. %0,%0,-1\n"
++                  "blt- 2f\n"
++                  "stwcx. %0,0,%1\n"
++                  "bne- 1b\n"
++                  PPC_ATOMIC_EXIT_BARRIER
++                  "2:"
++                  : "=3D&r" (t)
++                  : "r" (&v->counter)
++                  : "cc", "memory" );
++
++    return t;
++}
++
++static inline atomic_t atomic_compareandswap(atomic_t old, atomic_t new,
++                                             atomic_t *v)
++{
++    atomic_t rc;
++    rc.counter =3D __cmpxchg(&v->counter, old.counter, new.counter, size=
+of(int));
++    return rc;
++}
++
++#define arch_cmpxchg(ptr, o, n)                                         =
+       \
++    ({                                                                  =
+       \
++        __typeof__(*(ptr)) o_ =3D (o);                                  =
+        \
++        __typeof__(*(ptr)) n_ =3D (n);                                  =
+        \
++        (__typeof__(*(ptr))) __cmpxchg((ptr), (unsigned long) o_,       =
+      \
++                                       (unsigned long) n_, sizeof(*(ptr)=
+));   \
++    })
++
++static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
++{
++    return arch_cmpxchg(&v->counter, old, new);
++}
++
++#define ATOMIC_OP(op, insn, suffix, sign) \
++    static inline void atomic_##op(int a, atomic_t *v)                  =
+         \
++    {                                                                   =
+         \
++        int t;                                                          =
+         \
++        asm volatile ( "1: lwarx %0,0,%3\n"                             =
+         \
++                       insn "%I2" suffix " %0,%0,%2\n"                  =
+         \
++                       "stwcx. %0,0,%3 \n"                              =
+         \
++                       "bne- 1b\n"                                      =
+         \
++                       : "=3D&r" (t), "+m" (v->counter)                 =
+           \
++                       : "r" #sign (a), "r" (&v->counter)               =
+         \
++                       : "cc" );                                        =
+         \
++    }
++
++ATOMIC_OP(and, "and", ".", K)
++
++static inline int atomic_sub_and_test(int i, atomic_t *v)
++{
++    return atomic_sub_return(i, v) =3D=3D 0;
++}
++
++static inline int atomic_inc_and_test(atomic_t *v)
++{
++    return atomic_add_return(1, v) =3D=3D 0;
++}
++
++static inline int atomic_dec_and_test(atomic_t *v)
++{
++    return atomic_sub_return(1, v) =3D=3D 0;
++}
++
++static inline int atomic_add_negative(int i, atomic_t *v)
++{
++    return atomic_add_return(i, v) < 0;
++}
++
++static inline int __atomic_add_unless(atomic_t *v, int a, int u)
++{
++	int c, old;
++
++	c =3D atomic_read(v);
++	while (c !=3D u && (old =3D atomic_cmpxchg(v, c, c + a)) !=3D c)
++		c =3D old;
++	return c;
++}
++
++static inline int atomic_add_unless(atomic_t *v, int a, int u)
++{
++    return __atomic_add_unless(v, a, u);
++}
++
++#endif /* _ASM_PPC64_ATOMIC_H_ */
+diff --git a/xen/arch/ppc/include/asm/memory.h b/xen/arch/ppc/include/asm=
+/memory.h
+new file mode 100644
+index 0000000000..7b12e01b1a
+--- /dev/null
++++ b/xen/arch/ppc/include/asm/memory.h
+@@ -0,0 +1,34 @@
++/*
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, =
+USA.
++ *
++ * Copyright (C) IBM Corp. 2005
++ *
++ * Authors: Jimi Xenidis <jimix@watson.ibm.com>
++ */
++
++#ifndef _ASM_MEMORY_H_
++#define _ASM_MEMORY_H_
++
++#include <xen/config.h>
++
++#ifdef CONFIG_SMP
++#define PPC_ATOMIC_ENTRY_BARRIER "sync\n"
++#define PPC_ATOMIC_EXIT_BARRIER  "sync\n"
++#else
++#define PPC_ATOMIC_ENTRY_BARRIER
++#define PPC_ATOMIC_EXIT_BARRIER
++#endif
++
++#endif
 --
 2.30.2
 
