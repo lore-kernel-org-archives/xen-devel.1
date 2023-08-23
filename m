@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DAEC27C40
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Aug 2023 20:07:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.589513.921465 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F112FC7113B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Aug 2023 20:07:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.589516.921487 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYu8g-00051B-4a; Wed, 23 Aug 2023 20:07:38 +0000
+	id 1qYu8i-0005WA-FO; Wed, 23 Aug 2023 20:07:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 589513.921465; Wed, 23 Aug 2023 20:07:38 +0000
+Received: by outflank-mailman (output) from mailman id 589516.921487; Wed, 23 Aug 2023 20:07:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qYu8g-000512-1l; Wed, 23 Aug 2023 20:07:38 +0000
-Received: by outflank-mailman (input) for mailman id 589513;
- Wed, 23 Aug 2023 20:07:36 +0000
+	id 1qYu8i-0005Sg-5O; Wed, 23 Aug 2023 20:07:40 +0000
+Received: by outflank-mailman (input) for mailman id 589516;
+ Wed, 23 Aug 2023 20:07:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Z2Dg=EI=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qYu8e-0004Vt-RP
- for xen-devel@lists.xenproject.org; Wed, 23 Aug 2023 20:07:36 +0000
+ id 1qYu8g-0004Vt-A0
+ for xen-devel@lists.xenproject.org; Wed, 23 Aug 2023 20:07:38 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b1a7cf85-41f0-11ee-9b0c-b553b5be7939;
- Wed, 23 Aug 2023 22:07:33 +0200 (CEST)
+ id b3144e82-41f0-11ee-9b0c-b553b5be7939;
+ Wed, 23 Aug 2023 22:07:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 1852182855DC;
- Wed, 23 Aug 2023 15:07:32 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 886A58285AAD;
+ Wed, 23 Aug 2023 15:07:34 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id uZoO9KfOnNA8; Wed, 23 Aug 2023 15:07:31 -0500 (CDT)
+ with ESMTP id JI6P4Lpkb6Si; Wed, 23 Aug 2023 15:07:33 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 3457682854AE;
- Wed, 23 Aug 2023 15:07:31 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 7F1E082869C3;
+ Wed, 23 Aug 2023 15:07:33 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id LcVz9PzYzhOf; Wed, 23 Aug 2023 15:07:31 -0500 (CDT)
+ with ESMTP id 1aMetp_PCimj; Wed, 23 Aug 2023 15:07:33 -0500 (CDT)
 Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 733AE828556D;
- Wed, 23 Aug 2023 15:07:30 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id 23104828673D;
+ Wed, 23 Aug 2023 15:07:33 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,129 +53,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1a7cf85-41f0-11ee-9b0c-b553b5be7939
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 3457682854AE
+X-Inumbo-ID: b3144e82-41f0-11ee-9b0c-b553b5be7939
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 7F1E082869C3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1692821251; bh=uqKv0cI8bm6fBXMRvyKP1NoJ1ooRWBO2+LzKlpR82/4=;
+	t=1692821253; bh=GeGECnKBSpninCMh4v2k/q/3WkfOACULzVkAztOkkWU=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=ovKK6ImsM4R5NCJFZ1t6DSwnX9zJEsrlW1yPlwnYq8v80cnLGc0SAIbqfcrQqPiVH
-	 yLWvAzIih5Lg6HnMqPAoW30U18qtJOzhPcoHKk6hNvj78VZXGHLt7B93TO9A+Vy2RQ
-	 p9ZcEjmQMBgwOK8PBBbLg25Gix94zQoKHLTeEz04=
+	b=gk5eRib8yTv1SeODNU176oFuRMTBaL0ZyZHLBO1Pfc1giUpmLfSJYTP2gFFypnMhQ
+	 Yw7vVLuCqgsgqR//uUzSu34Jv391y1PpI4INmGLNtAIyeAqMk0YFuCDlqOgdqT0OHy
+	 SEiWFQ54jUp4HiX9vCkjjn1i01JFFn1C/ZTZZMIQ=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 1/8] xen/common: Add missing #includes treewide
-Date: Wed, 23 Aug 2023 15:07:12 -0500
-Message-Id: <e786dd5bbd6c235c69f5b2e49d485397f155d393.1692816595.git.sanastasio@raptorengineering.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v2 6/8] xen/ppc: Define bug frames table in linker script
+Date: Wed, 23 Aug 2023 15:07:17 -0500
+Message-Id: <f81914771ec96a48adf25c55329aa5f739f174d0.1692816595.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1692816595.git.sanastasio@raptorengineering.com>
 References: <cover.1692816595.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-A few files treewide depend on defininitions in headers that they
-don't include. This works when arch headers end up including the
-required headers by chance, but broke on ppc64 with only minimal/stub
-arch headers.
+Define the bug frames table in ppc's linker script as is done by other
+architectures.
 
 Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v2:
-  - (xen/domain.h) Drop <public/domctl.h> include in favor of a forward
-    declaration of struct xen_domctl_createdomain.
+v2: Add extra space to fix alignment of newly added lines
+ xen/arch/ppc/xen.lds.S | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
- xen/common/memory.c       | 1 +
- xen/common/symbols.c      | 1 +
- xen/common/xmalloc_tlsf.c | 1 +
- xen/include/xen/domain.h  | 1 +
- xen/include/xen/iommu.h   | 1 +
- xen/include/xen/sched.h   | 1 +
- 6 files changed, 6 insertions(+)
-
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index b1dcbaf551..fa165ebc14 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -28,6 +28,7 @@
- #include <asm/current.h>
- #include <asm/hardirq.h>
- #include <asm/p2m.h>
-+#include <asm/page.h>
- #include <public/memory.h>
- #include <xsm/xsm.h>
-
-diff --git a/xen/common/symbols.c b/xen/common/symbols.c
-index 9377f41424..691e617925 100644
---- a/xen/common/symbols.c
-+++ b/xen/common/symbols.c
-@@ -19,6 +19,7 @@
- #include <xen/virtual_region.h>
- #include <public/platform.h>
- #include <xen/guest_access.h>
-+#include <xen/errno.h>
-
- #ifdef SYMBOLS_ORIGIN
- extern const unsigned int symbols_offsets[];
-diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
-index c603c39bb9..349b31cb4c 100644
---- a/xen/common/xmalloc_tlsf.c
-+++ b/xen/common/xmalloc_tlsf.c
-@@ -27,6 +27,7 @@
- #include <xen/mm.h>
- #include <xen/pfn.h>
- #include <asm/time.h>
-+#include <asm/page.h>
-
- #define MAX_POOL_NAME_LEN       16
-
-diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
-index d35af34841..81fb05a642 100644
---- a/xen/include/xen/domain.h
-+++ b/xen/include/xen/domain.h
-@@ -77,6 +77,7 @@ void arch_vcpu_destroy(struct vcpu *v);
- int map_vcpu_info(struct vcpu *v, unsigned long gfn, unsigned int offset=
-);
- void unmap_vcpu_info(struct vcpu *v);
-
-+struct xen_domctl_createdomain;
- int arch_domain_create(struct domain *d,
-                        struct xen_domctl_createdomain *config,
-                        unsigned int flags);
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 110693c59f..7368df9138 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -24,6 +24,7 @@
- #include <xen/page-defs.h>
- #include <xen/pci.h>
- #include <xen/spinlock.h>
-+#include <xen/errno.h>
- #include <public/domctl.h>
- #include <public/hvm/ioreq.h>
- #include <asm/device.h>
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index b4f43cd410..d8c8dd85a6 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -21,6 +21,7 @@
- #include <xen/smp.h>
- #include <xen/perfc.h>
- #include <asm/atomic.h>
-+#include <asm/current.h>
- #include <xen/vpci.h>
- #include <xen/wait.h>
- #include <public/xen.h>
+diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
+index 2fa81d5a83..9e46035155 100644
+--- a/xen/arch/ppc/xen.lds.S
++++ b/xen/arch/ppc/xen.lds.S
+@@ -41,6 +41,16 @@ SECTIONS
+     . =3D ALIGN(PAGE_SIZE);
+     .rodata : {
+         _srodata =3D .;          /* Read-only data */
++        /* Bug frames table */
++        __start_bug_frames =3D .;
++        *(.bug_frames.0)
++        __stop_bug_frames_0 =3D .;
++        *(.bug_frames.1)
++        __stop_bug_frames_1 =3D .;
++        *(.bug_frames.2)
++        __stop_bug_frames_2 =3D .;
++        *(.bug_frames.3)
++        __stop_bug_frames_3 =3D .;
+         *(.rodata)
+         *(.rodata.*)
+         *(.data.rel.ro)
 --
 2.30.2
 
