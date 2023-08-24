@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01F1C6FA8F
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Aug 2023 13:00:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.590071.922165 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04744C3DA6F
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Aug 2023 13:03:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.590085.922184 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZ9wV-0001J9-Vg; Thu, 24 Aug 2023 13:00:07 +0000
+	id 1qZ9zO-0002Ye-Nf; Thu, 24 Aug 2023 13:03:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 590071.922165; Thu, 24 Aug 2023 13:00:07 +0000
+Received: by outflank-mailman (output) from mailman id 590085.922184; Thu, 24 Aug 2023 13:03:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZ9wV-0001J2-Sa; Thu, 24 Aug 2023 13:00:07 +0000
-Received: by outflank-mailman (input) for mailman id 590071;
- Thu, 24 Aug 2023 13:00:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qZ9zO-0002YX-Ke; Thu, 24 Aug 2023 13:03:06 +0000
+Received: by outflank-mailman (input) for mailman id 590085;
+ Thu, 24 Aug 2023 13:03:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1Jvz=EJ=cloud.com=christian.lindig@srs-se1.protection.inumbo.net>)
- id 1qZ9wU-00019V-4m
- for xen-devel@lists.xenproject.org; Thu, 24 Aug 2023 13:00:06 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 23da82d2-427e-11ee-9b0c-b553b5be7939;
- Thu, 24 Aug 2023 15:00:03 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4013454fa93so6776655e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 24 Aug 2023 06:00:04 -0700 (PDT)
-Received: from smtpclient.apple (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- i12-20020adffdcc000000b0031ae8d86af4sm19874328wrs.103.2023.08.24.06.00.02
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 24 Aug 2023 06:00:03 -0700 (PDT)
+ <SRS0=EWrD=EJ=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qZ9zM-0002YK-Fo
+ for xen-devel@lists.xenproject.org; Thu, 24 Aug 2023 13:03:04 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8eebe84b-427e-11ee-8783-cb3800f73035;
+ Thu, 24 Aug 2023 15:03:03 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id 51C184EE0737;
+ Thu, 24 Aug 2023 15:03:02 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,108 +41,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23da82d2-427e-11ee-9b0c-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1692882003; x=1693486803;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iDPak5yt8Nzl4Pm+Drg/e/4B55PA4fyHt5ck5SHf+2Q=;
-        b=gFHbxLQzabYnZh1YXuZjqv1Yv0xmWoxrd5c9b3IP7cJzDOlUU1Bfzz9PnfWB3YJqH6
-         8yhXmexPZ0CyK43fMUuosBz0Jjl+Ht5gopnxQ9hdkYa35TnGCt6LaFWlQcXVAoW+1H1a
-         BM0P+0t0YnsFlh4YZHmCYmeaH6/dWmcP08dsY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692882003; x=1693486803;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iDPak5yt8Nzl4Pm+Drg/e/4B55PA4fyHt5ck5SHf+2Q=;
-        b=eVvYEzXfvky/ga9UE6igLgu8b5N5fUwg0OEiigcCS4DlQdRh6nfNIgsaKzF5FOG9gs
-         FSdDER4+YDUHqamEfpXZn7Y4O4dnjNVcMzMkUpQVQtgbKjlkLSwaQZWYq4tDbmExkLCa
-         ROdO1k05bpn83B5EsNqfAjaYPnKQN7ujAmEK2B/4NGb3FFPSTHwWbnXgwZ2Nwqc13J8s
-         uG1kAhQKt4fzG7DL+LcDPl6E+fHAtRZw5DwPL5lMzvZeOKiytVkhK04xT9JX1SeMVceb
-         jcZ94aScEAFqDRUr0otVPttq8n+Q9ekXw+puB7KdpkfhwWG9UZmLaaMaTUgOQF17C64P
-         do1w==
-X-Gm-Message-State: AOJu0Yyo28FegSdJxWVjaleueG9fyvaZxLmQfslod+mxb35tXsPTFQLx
-	5NW2VC0KAUtMKFxNz1K/utPgNg==
-X-Google-Smtp-Source: AGHT+IEUn9CT+p/yK1TzQRbamb+Bo+IrpjFqRubP7AAyA6O3jIAii7aQhkzIRChYGkq51nfAGWjJlw==
-X-Received: by 2002:adf:f6c9:0:b0:319:6956:725f with SMTP id y9-20020adff6c9000000b003196956725fmr12099529wrp.41.1692882003421;
-        Thu, 24 Aug 2023 06:00:03 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3696.120.41.1.3\))
-Subject: Re: [PATCH] tools/oxenstored: Additional debugging commands
-From: Christian Lindig <christian.lindig@cloud.com>
-In-Reply-To: <20230824123939.1297171-1-andrew.cooper3@citrix.com>
-Date: Thu, 24 Aug 2023 14:00:01 +0100
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- =?utf-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@cloud.com>,
- Christian Lindig <christian.lindig@citrix.com>,
- Rob Hoes <Rob.Hoes@citrix.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <4E36B681-1E60-47F2-8B71-D3649F4B21A1@cloud.com>
-References: <20230824123939.1297171-1-andrew.cooper3@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-X-Mailer: Apple Mail (2.3696.120.41.1.3)
+X-Inumbo-ID: 8eebe84b-427e-11ee-8783-cb3800f73035
+MIME-Version: 1.0
+Date: Thu, 24 Aug 2023 15:03:02 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Julien Grall <julien@xen.org>
+Cc: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org,
+ sstabellini@kernel.org, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com,
+ consulting@bugseng.com, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [XEN PATCH v2] arm64/vfp: address MISRA C:2012 Dir 4.3
+In-Reply-To: <707b09d3-c69e-4212-be64-7e2bde73d4af@xen.org>
+References: <140f450d4f4f88096158e54522fc2734367a90cb.1692807017.git.nicola.vetrini@bugseng.com>
+ <941f9188-6d59-12a6-9868-daa39b51687a@amd.com>
+ <387d99d2066e1f07b7d5d04ff54a0ac9@bugseng.com>
+ <707b09d3-c69e-4212-be64-7e2bde73d4af@xen.org>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <9a86952af47d7911941b1df765cb1101@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
 
-Acked-by: Christian Lindig <christian.lindig@cloud.com>
+On 24/08/2023 13:20, Julien Grall wrote:
+> Hi Nicola,
+> 
+> On 24/08/2023 12:11, Nicola Vetrini wrote:
+>> On 24/08/2023 10:01, Michal Orzel wrote:
+>>> Hi Nicola,
+>>> 
+>>> On 24/08/2023 09:37, Nicola Vetrini wrote:
+>>>> 
+>>>> 
+>>>> Directive 4.3 prescribes the following:
+>>>> "Assembly language shall be encapsulated and isolated",
+>>>> on the grounds of improved readability and ease of maintenance.
+>>>> 
+>>>> A static inline function is the chosen encapsulation mechanism.
+>>>> 
+>>>> No functional change.
+>>>> 
+>>>> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+>>>> ---
+>>>> Changes in v2:
+>>>> - Switched to a static inline function
+>>>> ---
+>>>>  xen/arch/arm/arm64/vfp.c | 78 
+>>>> ++++++++++++++++++++++------------------
+>>>>  1 file changed, 44 insertions(+), 34 deletions(-)
+>>>> 
+>>>> diff --git a/xen/arch/arm/arm64/vfp.c b/xen/arch/arm/arm64/vfp.c
+>>>> index 2d0d7c2e6ddb..5c884380ee42 100644
+>>>> --- a/xen/arch/arm/arm64/vfp.c
+>>>> +++ b/xen/arch/arm/arm64/vfp.c
+>>>> @@ -4,6 +4,48 @@
+>>>>  #include <asm/vfp.h>
+>>>>  #include <asm/arm64/sve.h>
+>>>> 
+>>>> +static inline void save_state(uint64_t *fpregs)
+>>>> +{
+>>>> +    asm volatile("stp q0, q1, [%1, #16 * 0]\n\t"
+>>>> +                 "stp q2, q3, [%1, #16 * 2]\n\t"
+>>>> +                 "stp q4, q5, [%1, #16 * 4]\n\t"
+>>>> +                 "stp q6, q7, [%1, #16 * 6]\n\t"
+>>>> +                 "stp q8, q9, [%1, #16 * 8]\n\t"
+>>>> +                 "stp q10, q11, [%1, #16 * 10]\n\t"
+>>>> +                 "stp q12, q13, [%1, #16 * 12]\n\t"
+>>>> +                 "stp q14, q15, [%1, #16 * 14]\n\t"
+>>>> +                 "stp q16, q17, [%1, #16 * 16]\n\t"
+>>>> +                 "stp q18, q19, [%1, #16 * 18]\n\t"
+>>>> +                 "stp q20, q21, [%1, #16 * 20]\n\t"
+>>>> +                 "stp q22, q23, [%1, #16 * 22]\n\t"
+>>>> +                 "stp q24, q25, [%1, #16 * 24]\n\t"
+>>>> +                 "stp q26, q27, [%1, #16 * 26]\n\t"
+>>>> +                 "stp q28, q29, [%1, #16 * 28]\n\t"
+>>>> +                 "stp q30, q31, [%1, #16 * 30]\n\t"
+>>>> +                 : "=Q" (*fpregs) : "r" (fpregs));
+>>>> +}
+>>>> +
+>>>> +static inline void restore_state(uint64_t *fpregs)
+>>> This can be const as you are loading data from fpregs into registers
+>>> 
+>> 
+>> I wonder whether this would make a difference, given that the return 
+>> type is void.
+> 
+> It is telling the reader that the function is not supposed to modify
+> the 'fpregs'. A compiler will also be able to throw an error if a
+> developper broke this assumption.
+> 
+> I have been pushing quite a lot recently to add 'const' when a pointer
+> is not supposed to be modified. And before someone mention it, I know
+> that 'const' is not perfect in C as if a field points to another area,
+> that area would not be const (unless the definition of the field
+> contains const). But that's better than nothing :).
+> 
+> Cheers,
 
+Ah, yes indeed. I wasn't paying enough attention before.
+Thanks,
 
-> On 24 Aug 2023, at 13:39, Andrew Cooper <andrew.cooper3@citrix.com> =
-wrote:
->=20
-> From: Edwin T=C3=B6r=C3=B6k <edwin.torok@cloud.com>
->=20
-> These were added to aid security development, and are useful generally =
-for
-> debugging.
->=20
-> Signed-off-by: Edwin T=C3=B6r=C3=B6k <edwin.torok@cloud.com>
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Christian Lindig <christian.lindig@citrix.com>
-> CC: Edwin T=C3=B6r=C3=B6k <edwin.torok@cloud.com>
-> CC: Rob Hoes <Rob.Hoes@citrix.com>
->=20
-> I found this hiding down the back of the patchqueue.
-> ---
-> tools/ocaml/xenstored/process.ml | 17 +++++++++++++++++
-> 1 file changed, 17 insertions(+)
->=20
-> diff --git a/tools/ocaml/xenstored/process.ml =
-b/tools/ocaml/xenstored/process.ml
-> index 2e62c7a10e7a..432d66321cbb 100644
-> --- a/tools/ocaml/xenstored/process.ml
-> +++ b/tools/ocaml/xenstored/process.ml
-> @@ -235,6 +235,23 @@ let do_debug con t _domains cons data =3D
->     | "watches" :: _ ->
->       let watches =3D Connections.debug cons in
->       Some (watches ^ "\000")
-> +    | "compact" :: _ ->
-> +      Gc.compact ();
-> +      Some "Compacted"
-> +    | "trim" :: _ ->
-> +      History.trim ();
-> +      Some "trimmed"
-> +    | "txn" :: domid :: _ ->
-> +      let domid =3D int_of_string domid in
-> +      let con =3D Connections.find_domain cons domid in
-> +      let b =3D Buffer.create 128 in
-> +      let () =3D con.transactions |> Hashtbl.iter @@ fun id tx ->
-> +        Printf.bprintf b "paths: %d, operations: %d, quota_reached: =
-%b\n"
-> +          (List.length tx.Transaction.paths)
-> +          (List.length tx.Transaction.operations)
-> +          tx.Transaction.quota_reached
-> +      in
-> +      Some (Buffer.contents b)
->     | "xenbus" :: domid :: _ ->
->       let domid =3D int_of_string domid in
->       let con =3D Connections.find_domain cons domid in
->=20
-> base-commit: b0cd7499ddd281033548a702c6d61ab13fdd1f67
-> --=20
-> 2.30.2
->=20
-
+-- 
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
