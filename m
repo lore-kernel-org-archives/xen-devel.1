@@ -4,52 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD0B8C3DA6F
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Aug 2023 08:03:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.590547.922869 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 636D5C7EE2C
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Aug 2023 08:03:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.590549.922897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZRmc-0007Sd-QJ; Fri, 25 Aug 2023 08:03:06 +0000
+	id 1qZRmg-0008Mx-RM; Fri, 25 Aug 2023 08:03:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 590547.922869; Fri, 25 Aug 2023 08:03:06 +0000
+Received: by outflank-mailman (output) from mailman id 590549.922897; Fri, 25 Aug 2023 08:03:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZRmc-0007RB-Jv; Fri, 25 Aug 2023 08:03:06 +0000
-Received: by outflank-mailman (input) for mailman id 590547;
- Fri, 25 Aug 2023 08:03:05 +0000
+	id 1qZRmg-0008Mi-Jm; Fri, 25 Aug 2023 08:03:10 +0000
+Received: by outflank-mailman (input) for mailman id 590549;
+ Fri, 25 Aug 2023 08:03:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+VXW=EK=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1qZRmb-0007GZ-6u
- for xen-devel@lists.xenproject.org; Fri, 25 Aug 2023 08:03:05 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2060e.outbound.protection.outlook.com
- [2a01:111:f400:7e88::60e])
+ id 1qZRme-0007GZ-DN
+ for xen-devel@lists.xenproject.org; Fri, 25 Aug 2023 08:03:08 +0000
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on20622.outbound.protection.outlook.com
+ [2a01:111:f400:7e83::622])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d0a40d40-431d-11ee-8783-cb3800f73035;
- Fri, 25 Aug 2023 10:03:04 +0200 (CEST)
-Received: from MW4PR03CA0037.namprd03.prod.outlook.com (2603:10b6:303:8e::12)
- by IA1PR12MB8496.namprd12.prod.outlook.com (2603:10b6:208:446::10)
+ id d2cb8fba-431d-11ee-8783-cb3800f73035;
+ Fri, 25 Aug 2023 10:03:07 +0200 (CEST)
+Received: from MW4PR03CA0269.namprd03.prod.outlook.com (2603:10b6:303:b4::34)
+ by IA0PR12MB8208.namprd12.prod.outlook.com (2603:10b6:208:409::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.27; Fri, 25 Aug
- 2023 08:02:58 +0000
-Received: from CO1PEPF000044FB.namprd21.prod.outlook.com
- (2603:10b6:303:8e:cafe::f6) by MW4PR03CA0037.outlook.office365.com
- (2603:10b6:303:8e::12) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 08:03:04 +0000
+Received: from CO1PEPF000044F8.namprd21.prod.outlook.com
+ (2603:10b6:303:b4:cafe::9a) by MW4PR03CA0269.outlook.office365.com
+ (2603:10b6:303:b4::34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.30 via Frontend
- Transport; Fri, 25 Aug 2023 08:02:58 +0000
+ Transport; Fri, 25 Aug 2023 08:03:03 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CO1PEPF000044FB.mail.protection.outlook.com (10.167.241.201) with Microsoft
+ CO1PEPF000044F8.mail.protection.outlook.com (10.167.241.198) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.2 via Frontend Transport; Fri, 25 Aug 2023 08:02:58 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ 15.20.6745.2 via Frontend Transport; Fri, 25 Aug 2023 08:03:03 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 25 Aug
- 2023 03:02:58 -0500
+ 2023 03:03:02 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 25 Aug
+ 2023 01:03:01 -0700
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Fri, 25 Aug 2023 03:02:57 -0500
+ Transport; Fri, 25 Aug 2023 03:03:01 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d0a40d40-431d-11ee-8783-cb3800f73035
+X-Inumbo-ID: d2cb8fba-431d-11ee-8783-cb3800f73035
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CgumGq9aZCLCsioaDumg9l1ra1WH63XNss7bY8kPvTXG22l0TOwp/q3jWnHJbFPD2mG9YdxxxPDyBHmjo74mfU06S7Fz/sdMVOopAYl5UowekfoIYnJCN/9rj7lLB6ZRvXzuAJgcsUfi0HQkOSkhdajfNZepnFGBL8/BHD3ol4TT8nq2mKf7J6NdRJuff8De6DUC/mh+3QPiJeIzZVQ0lqgkeclvekN309O8ryx5y89BoajL47BraBg9NDEE6ctqHo3ePNqFI4gsP7J0d9bfDSMfn5S2CEEjCFVLEdnS3wSqyWE6oJRioVEpjWuRRpYx64Y1x443V9vtxFC97jYvxw==
+ b=aIK8AW8F5UrujvOMvLRRXkzlSpjoYFH9716GEBkNG8VPl56ms5Viv1bpJtrY19TsgIYxZW05g6YNDkqbkU5VkIiYiR5DWaDH1p6DLSW8YhQobAnlr1+gvGizEttiTmTsxtQl+YVZ/9KhXmh69RmL/Q9yv+SLVClq/gF5GM9WCw/arZyQeY6lqYrbw0fM9JiJESh+Q/Zi+4grBxaGSG0qooS6T+/hlDQlQM2WmeICBazdOW2kn/nvUHp4QSdSaKB3uU0twHo0iG/pQZy4ooUffXUs2wUsF4u2qTSShqbCpj3EBryaZatO2pleO/czm9+bPeIudid16XumCnrJcH3ljg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N48gpSlC0ul9Dgr5X4IgXaGnFeuJhzDtng9Ayqa//1E=;
- b=foEjyy0NPEwpDfiwJw/N96j6IlrTtxty8iW7Xb+vfjGZMVLKKLIt90jr0vzSSTXEJP8JRx6g2mo5YnlU9jMg/Z0A8ZFqU5AiciuY+AmZMRdo0S22VLf8+I3Q0J2OAvfJATU+A+kA20rkNCvlM0Ojh+tKR7rEFIHxqqzsTWtnH6s7rryKbFFAfRQpTUC7mzyAK5hR7x3Cg0G1KT4jEGYmdqzj3Rjw3m4Y1iFnqkdbbIMmMZKD/X6p82iwKEKL6RzGmBc4YlwKvcs7Dkt7gOyY07FoxsAMFySSEwOWPZvh8MgHKhanO89GncIP5fZgZoqfTJwi2EwBefxqPpBF26pEKQ==
+ bh=lPFr75nv1aBnnGpQw+siLMDm3xpzWwYvMbfH1Hl8l3c=;
+ b=PoHkyuAF8IYl6YQiFkJGGIPtdTJOPtLfJ2DcFtlXzSmqy4PrJ+8SIu3A4bLINk+GouyjhsZt0P5CmxNBhRjXKc7wRHGkuLwEmvm1caEPptfbMopAQ1P/sv4TWcIFQWYD21JqJ7eustrS38t3VxcJ056L7OUR0zqCdDA/qSwu18JyoSdV2p96lr6VPXOE1Ex/OTQPtLxHNhYV5jJKgWFfMVbpPNRDClprchlNpRfFJimI4UIKHESQqssUuI57p/F1/j/DKQEKkhr559IkzXE/NvYPOttNSrxLeFyvVela1BY9zh79KfTyt4Whqum11AhzPrA7Q7WmYwKhp0ZWnt24cg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N48gpSlC0ul9Dgr5X4IgXaGnFeuJhzDtng9Ayqa//1E=;
- b=U5lQyWoIPj714eCMMBBWlHCbVtlrHEUTzdlS4upIGEsQfYZPzscuTcRyxZZ6Voin52grovV4qrBKSoE+KvAV2nq0yTaouLUuDFhsWvOX58rktslRLEJuSzLCa8ew4/bImsy5MKOqqoVa6Lu3CrVO3lOMXZOwV3SjrvhcAAQpzcM=
+ bh=lPFr75nv1aBnnGpQw+siLMDm3xpzWwYvMbfH1Hl8l3c=;
+ b=fmWniqkPSZ2zRJjMXdt4YrMm5zuirBGKoKS3VYkEEq9nYAdctMlJTpiMiXDZEGga2GKrkITI5Yu+C8p/25/H9dqyvEtG2vWon8YwF1u7RD+e5aaheQL6EEfrIbtAgmafFR6vY28MsWVsEvrl0nHZ/CuzILoKANNTSSokZORLpmU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -87,9 +91,9 @@ From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <michal.orzel@amd.com>, <sstabellini@kernel.org>,
 	<vikram.garhwal@amd.com>, <julien@xen.org>
-Subject: [XEN][PATCH v10 04/20] common/device_tree: Export __unflatten_device_tree()
-Date: Fri, 25 Aug 2023 01:02:06 -0700
-Message-ID: <20230825080222.14247-5-vikram.garhwal@amd.com>
+Subject: [XEN][PATCH v10 08/20] xen/device-tree: Add device_tree_find_node_by_path() to find nodes in device tree
+Date: Fri, 25 Aug 2023 01:02:10 -0700
+Message-ID: <20230825080222.14247-9-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230825080222.14247-1-vikram.garhwal@amd.com>
 References: <20230825080222.14247-1-vikram.garhwal@amd.com>
@@ -97,112 +101,107 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044FB:EE_|IA1PR12MB8496:EE_
-X-MS-Office365-Filtering-Correlation-Id: 537abbab-683b-413a-1e03-08dba541b25c
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F8:EE_|IA0PR12MB8208:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9dcc3098-e987-4c11-5176-08dba541b566
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	QYjgEMkYOgrV7ptUCqmB/PJckNRAgoc8nhwvUqlAwkBtBTTNUCxcq7ZWs1sml+4+rn2C6DdBysmzPaw9gp0uKf0RTBHN1msq3BrJvEFg3uQtYgxsTs6sCDVNlf3YUaU2uCJw002jOLmVnG8yTf16b9ViR8VhhhYAKMv/+kDk7exfaIy0vLmE4LvB0zlOri0cnc6nKhPbpXNeRZz+mruSUFBqpHDiaOLxdtbs4d/fwKnF74++CSIdHEmjQJe9IXaKa2CAd9LKnxusnNAhIgbV/HqiBHSGQfR9SRoZm558a4tWI/u8awthhiIt8GVy4aFGp+m5kKckziXWH3ro7QNqKS5H4wJgWkjS0riBYfnxxAu6ShdHAgpqCWaQmnBc/n92ycf3lV6Z0kzB3SNss5OTyGDaj4MG+U6RECmKd0wcUPP7VBahp6zOLjbukYB2gl4d+bOusLtUSIQrYjHJc3wX+IUT3HgKPTH9HIwIE6m33noYAF3ualORpcJ7pMZ+agJSokx1Dxwv8TZL1MmG/mn4wQqikg3mdH9R6kZaJE1qo0AOX9ig3isaXwvQty4eUZH9g1Q1LYXFF5vIF772eI5ZYJcGPTI89h3DjG2cTjIMMxQbDza3yD3/Sir/8JPu2nRxRm3EKzibQ5UwriYcl8EpG5Qu+FjwHxQujJkI2NR9Xo+lxasjfL8QZ8bk/qRTGi737UvSeIJyntuSiLPRd/CPeOEBhvsHSDnbPUmBtliqbhjgXDMkos/4EA0BIViUm7q/9JZVlf6UxVc7FA2u5BcAlA==
+	Gf3wjCDMmpXWahX+UJC54kkPGRLzFolOGP7SOnzlE+Ace2x5Es1//zvTxMVVUrjVO10lZb4qRCkkhVGsUgflRNfBgzZkounRNs0+bwRfmObnf7TNhp3Oa5h2EQh1FJHmGu7v4wFhxvTIZy7oqAHbN6a7UPfL+eVEynqKaFiT2QlLIAFft1XyM8YqmqIi55oPsBvDJAgFyn/PHwNI8aH6pc9YfBqrIqJDLk5O13XPEbl5tQ+D4+mvaCWQ1FA4aqhg2GASgb5dfm0s/MSpz6McwRmL12DFfrXmw9NiCjOSM/q0zwEi/20jeGsTDdl7VB30mQ2RyhvBn0bCl/ceVlpBK570qo+8LXsr8zQTbhBcfFs3MDtRRN5EBbnC1JLVbqY1hkZ4BcY9cHwEdHO3w7DCvIgpru9bik6Lz5F1UHv3PxbDtbZ1KwFFQLkdioXkAce6N8VL8IlnmJLQpQQAjnKC6iqxlS44Txq0Slyms6byWCwJKRTPerqx3Sf0o7ZD+Y9EJLomuE0Pqk9Zog/IQwFx10Re0NUSauJv2QJYd0UOFYNbvL8/f1EEf5A55gIcWUVXKoRJ5Sv5aN3vR/UDWPx+rHOFukJTqc2PKcuvlw/xBOEbQsIBEijDMMn9QN+pMtjUB/qwEcCuz8FcmVVpmOfMU8fit7v/EiF6dpamahJOQk7sgvSgyFgnTlzxEH9dnyVBAG9t1Vsotbg7XpqQQmOm7EE2+wS3V8m96esLLfLzR5Honw0vaZ+EOdArIRY4c5uQVyOCOi8nsItLPU4L1EME1ZO304jhZxabjGE699NHh/0=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(39860400002)(136003)(396003)(376002)(186009)(1800799009)(82310400011)(451199024)(40470700004)(46966006)(36840700001)(54906003)(70586007)(70206006)(316002)(6916009)(81166007)(478600001)(40480700001)(26005)(6666004)(82740400003)(41300700001)(86362001)(2906002)(356005)(4326008)(8676002)(8936002)(83380400001)(2616005)(40460700003)(5660300002)(47076005)(44832011)(1076003)(426003)(336012)(36756003)(36860700001)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(376002)(39860400002)(396003)(136003)(346002)(186009)(451199024)(1800799009)(82310400011)(46966006)(36840700001)(40470700004)(40460700003)(2906002)(336012)(426003)(83380400001)(1076003)(2616005)(47076005)(36860700001)(41300700001)(26005)(316002)(70206006)(6916009)(70586007)(5660300002)(4326008)(44832011)(8936002)(8676002)(6666004)(478600001)(54906003)(40480700001)(86362001)(82740400003)(356005)(81166007)(36756003)(37363002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 08:02:58.5489
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 08:03:03.6333
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 537abbab-683b-413a-1e03-08dba541b25c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9dcc3098-e987-4c11-5176-08dba541b566
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000044FB.namprd21.prod.outlook.com
+	CO1PEPF000044F8.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8496
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8208
 
-Following changes are done to __unflatten_device_tree():
-    1. __unflatten_device_tree() is renamed to unflatten_device_tree().
-    2. Remove __init and static function type.
+Add device_tree_find_node_by_path() to find a matching node with path for a
+dt_device_node.
 
-The changes are done to make this function useable for dynamic node programming
-where new device tree overlay nodes are added to fdt and further unflattend to
-update xen device tree during runtime.
+Reason behind this function:
+    Each time overlay nodes are added using .dtbo, a new fdt(memcpy of
+    device_tree_flattened) is created and updated with overlay nodes. This
+    updated fdt is further unflattened to a dt_host_new. Next, we need to find
+    the overlay nodes in dt_host_new, find the overlay node's parent in dt_host
+    and add the nodes as child under their parent in the dt_host. Thus we need
+    this function to search for node in different unflattened device trees.
+
+Also, make dt_find_node_by_path() static inline.
 
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 
 ---
+Changes from v9:
+    Fix indentation issues.
+
 Changes from v7:
-    Update the commit with why unflatten_device_tree() is changed.
-    Move function documentation to device_tree.h
+    Rename device_tree_find_node_by_path() to dt_find_node_by_path_from().
+    Fix indentation.
 ---
 ---
- xen/common/device_tree.c      | 19 +++----------------
- xen/include/xen/device_tree.h | 14 ++++++++++++++
- 2 files changed, 17 insertions(+), 16 deletions(-)
+ xen/common/device_tree.c      |  5 +++--
+ xen/include/xen/device_tree.h | 17 +++++++++++++++--
+ 2 files changed, 18 insertions(+), 4 deletions(-)
 
 diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-index fccf98f94e..b8ef1c7ae2 100644
+index b8ef1c7ae2..f38f51ec0b 100644
 --- a/xen/common/device_tree.c
 +++ b/xen/common/device_tree.c
-@@ -2082,20 +2082,7 @@ static unsigned long unflatten_dt_node(const void *fdt,
-     return mem;
+@@ -358,11 +358,12 @@ struct dt_device_node *dt_find_node_by_type(struct dt_device_node *from,
+     return np;
  }
  
--/**
-- * __unflatten_device_tree - create tree of device_nodes from flat blob
-- *
-- * unflattens a device-tree, creating the
-- * tree of struct device_node. It also fills the "name" and "type"
-- * pointers of the nodes so the normal device-tree walking functions
-- * can be used.
-- * @fdt: The fdt to expand
-- * @mynodes: The device_node tree created by the call
-- *
-- * Returns 0 on success and a negative number on error
-- */
--static int __init __unflatten_device_tree(const void *fdt,
--                                          struct dt_device_node **mynodes)
-+int unflatten_device_tree(const void *fdt, struct dt_device_node **mynodes)
+-struct dt_device_node *dt_find_node_by_path(const char *path)
++struct dt_device_node *dt_find_node_by_path_from(struct dt_device_node *from,
++                                                 const char *path)
  {
-     unsigned long start, mem, size;
-     struct dt_device_node **allnextp = mynodes;
-@@ -2234,10 +2221,10 @@ dt_find_interrupt_controller(const struct dt_device_match *matches)
+     struct dt_device_node *np;
  
- void __init dt_unflatten_host_device_tree(void)
- {
--    int error = __unflatten_device_tree(device_tree_flattened, &dt_host);
-+    int error = unflatten_device_tree(device_tree_flattened, &dt_host);
+-    dt_for_each_device_node(dt_host, np)
++    dt_for_each_device_node(from, np)
+         if ( np->full_name && (dt_node_cmp(np->full_name, path) == 0) )
+             break;
  
-     if ( error )
--        panic("__unflatten_device_tree failed with error %d\n", error);
-+        panic("unflatten_device_tree failed with error %d\n", error);
- 
-     dt_alias_scan();
- }
 diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index 1d79e23b28..a518310a62 100644
+index a518310a62..44d315c8ba 100644
 --- a/xen/include/xen/device_tree.h
 +++ b/xen/include/xen/device_tree.h
-@@ -178,6 +178,20 @@ int device_tree_for_each_node(const void *fdt, int node,
+@@ -570,13 +570,26 @@ struct dt_device_node *dt_find_node_by_type(struct dt_device_node *from,
+ struct dt_device_node *dt_find_node_by_alias(const char *alias);
+ 
+ /**
+- * dt_find_node_by_path - Find a node matching a full DT path
++ * dt_find_node_by_path_from - Generic function to find a node matching the
++ * full DT path for any given unflatten device tree
++ * @from: The device tree node to start searching from
+  * @path: The full path to match
+  *
+  * Returns a node pointer.
   */
- void dt_unflatten_host_device_tree(void);
+-struct dt_device_node *dt_find_node_by_path(const char *path);
++struct dt_device_node *dt_find_node_by_path_from(struct dt_device_node *from,
++                                                 const char *path);
  
 +/**
-+ * unflatten_device_tree - create tree of device_nodes from flat blob
++ * dt_find_node_by_path - Find a node matching a full DT path in dt_host
++ * @path: The full path to match
 + *
-+ * unflattens a device-tree, creating the
-+ * tree of struct device_node. It also fills the "name" and "type"
-+ * pointers of the nodes so the normal device-tree walking functions
-+ * can be used.
-+ * @fdt: The fdt to expand
-+ * @mynodes: The device_node tree created by the call
-+ *
-+ * Returns 0 on success and a negative number on error
++ * Returns a node pointer.
 + */
-+int unflatten_device_tree(const void *fdt, struct dt_device_node **mynodes);
-+
++static inline struct dt_device_node *dt_find_node_by_path(const char *path)
++{
++    return dt_find_node_by_path_from(dt_host, path);
++}
+ 
  /**
-  * IRQ translation callback
-  * TODO: For the moment we assume that we only have ONE
+  * dt_find_node_by_gpath - Same as dt_find_node_by_path but retrieve the
 -- 
 2.17.1
 
