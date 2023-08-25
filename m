@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33574C3DA66
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Aug 2023 08:03:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.590561.922979 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C768C7EE2C
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Aug 2023 08:03:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.590557.922950 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZRmq-0002IL-7a; Fri, 25 Aug 2023 08:03:20 +0000
+	id 1qZRmm-0001Ff-3v; Fri, 25 Aug 2023 08:03:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 590561.922979; Fri, 25 Aug 2023 08:03:20 +0000
+Received: by outflank-mailman (output) from mailman id 590557.922950; Fri, 25 Aug 2023 08:03:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZRmp-0002EI-IO; Fri, 25 Aug 2023 08:03:19 +0000
-Received: by outflank-mailman (input) for mailman id 590561;
- Fri, 25 Aug 2023 08:03:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qZRml-0001Dn-LG; Fri, 25 Aug 2023 08:03:15 +0000
+Received: by outflank-mailman (input) for mailman id 590557;
+ Fri, 25 Aug 2023 08:03:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+VXW=EK=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1qZRmk-0007GZ-Er
- for xen-devel@lists.xenproject.org; Fri, 25 Aug 2023 08:03:14 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20616.outbound.protection.outlook.com
- [2a01:111:f400:fe5b::616])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d5f05c61-431d-11ee-8783-cb3800f73035;
+ id 1qZRmi-0007G4-Ua
+ for xen-devel@lists.xenproject.org; Fri, 25 Aug 2023 08:03:12 +0000
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on2060a.outbound.protection.outlook.com
+ [2a01:111:f400:7ea9::60a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d58f77b7-431d-11ee-9b0c-b553b5be7939;
  Fri, 25 Aug 2023 10:03:11 +0200 (CEST)
-Received: from SJ0PR13CA0202.namprd13.prod.outlook.com (2603:10b6:a03:2c3::27)
- by BL1PR12MB5706.namprd12.prod.outlook.com (2603:10b6:208:385::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.29; Fri, 25 Aug
- 2023 08:03:07 +0000
+Received: from SJ0PR13CA0207.namprd13.prod.outlook.com (2603:10b6:a03:2c3::32)
+ by DM4PR12MB6206.namprd12.prod.outlook.com (2603:10b6:8:a7::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.29; Fri, 25 Aug 2023 08:03:05 +0000
 Received: from CO1PEPF000044F5.namprd05.prod.outlook.com
- (2603:10b6:a03:2c3:cafe::3b) by SJ0PR13CA0202.outlook.office365.com
- (2603:10b6:a03:2c3::27) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:a03:2c3:cafe::aa) by SJ0PR13CA0207.outlook.office365.com
+ (2603:10b6:a03:2c3::32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.14 via Frontend
- Transport; Fri, 25 Aug 2023 08:03:06 +0000
+ Transport; Fri, 25 Aug 2023 08:03:05 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  CO1PEPF000044F5.mail.protection.outlook.com (10.167.241.75) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6699.15 via Frontend Transport; Fri, 25 Aug 2023 08:03:06 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ 15.20.6699.15 via Frontend Transport; Fri, 25 Aug 2023 08:03:05 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 25 Aug
- 2023 03:03:02 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 25 Aug
- 2023 03:03:02 -0500
+ 2023 03:03:00 -0500
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Fri, 25 Aug 2023 03:03:02 -0500
+ Transport; Fri, 25 Aug 2023 03:02:59 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d5f05c61-431d-11ee-8783-cb3800f73035
+X-Inumbo-ID: d58f77b7-431d-11ee-9b0c-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AibZfvB1j1eJmcQxa9jPL9SsdKUIKL/J9ZgWdVJa7KcwnVhYskpucGOZe+RQOlvyp0BS/fjbW4ruHwhZO9VCl/WlEZNaEEaVn6huN9UoGbi+2D0rWMMbPdOFbwe+lM24cB7QCzJI7rtvxpN4bVL01sO5Z6MRuRZpx8ti+eW0G5v78UJITyyLFsQlHMzcqOXZAK0Kvwxhx40hFPuwsQ5Q/SOxggG7pd8wRHZHT2GHDzPhmFkCpJ1AEaVn3EXVh8E+2fU3NvWfauKO+DulTq5r1gDUDNEhb0x6SCSYCMThOkeBvWwVz4bDIwsV84dThCYjlPo3SPzSh2TQJHVld4WLag==
+ b=dKislC23qUUQRL2Vr8JOs7s3LAf0PG1xd6HaS59cjNWzdNT9wGWIQBcrLNTcwnjvgoQqtlGyBTWJEhrxoasHaqVjrxPWDo6ctkULvYAt43JgMUlD7qJkyPkLdiMhzHI7V+6zsaF8JlhffIsWiFo//SfgmhIUPJL/yy6DFdsYviJDj9Wnp9AuzVYgNnF+yDosXSOME1d7YXow8GNOM6N+VKvNl4oEYK6DI9Z9yPtxjHgamDYzJbibdRbEx7UetewkAellAcYg4GCOUYJxp6o97Lu7ZBun/ZOp4Vw4eVEGWzsgZf2UUk8CCt7QENHxFaTJko59d4HXzChwfFCCvw+shw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bbLjByfblu66od1Vdrl71+ZR1WzFVQiYpHtzjdK7oJE=;
- b=JgZmabtjnrUSQyY139mI246NXEqOR1/m/2UoBHxKatWJL89GUW00VJ3Klx9L/AIPgDVcorP0eE86dyNmruwLPyy0ySnMrqXBmXkeAXdBc2KP8iou0dj25+fQ4jvt7YH4idFgmizqAIcXnct6FjkNRmCFLdRIzSSrnve9OtjH/ocTbrG1l0V3vkPSBE7jYnUOj6Fi0oXY89rKj0J7PuwksTBEguN2kGjm8GhXIzZtqoH71xtib1pk4doILmFEokRVv0Ipebpet7tUyeRZzJ4GY2kuhg7VWqOkPYz3L71/ShjRXFokZh33XY9uqj8wjye2Zs8roOy3aKIm0DsVy4zrEg==
+ bh=+aOH8wbfxJ3CDB9n8z4otIPVVDXaY3ZnHxlpPeTlbO8=;
+ b=lKwP13yn/5bUO87KwHcKBlEV84uIV2FapQ9uACFshvhyysF8EdHz/InJeHb2QTs4yHnn3Ns/WrvO9cIZVImF9X1WE4HgPoHTPbGvNnhinOyVmz75OxYwhBlGGIvCatg1i5PIl3NxxFyhdzbusFGdsDEJdo48l9Jq4Rm/Jt1QILDRvy0ZKlUjmeawgqtRgSg15biLdDAhu8G/pTJpKV4oVN9DONJnycPej0ILYNdU+5jYqXIrEjVhdAPrYEGYfvcDzIxplNcyvwcPRblTuRI0x1JpZu+4Sb5eKvoFQ92UsgzCq++3yxfM8/jcaGYZQ0Tc/l1aNH9hw7lG0J6Bj7y7lQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bbLjByfblu66od1Vdrl71+ZR1WzFVQiYpHtzjdK7oJE=;
- b=CFxt1tLjr1yErFOh+K8+rgeOfMdbHPMLh40gwdgP9JWtnqDyo21nmp/dBnbqSUPM1gCOsSnVBZyBSUxlAZ5yMbQWq08E61DOhNBNIMVgT0rftisg+Q9MC7FQVsYTdEouYr9pi1mfst9nHFaf/ps27sdbwySyflFerDXvHwFVV3s=
+ bh=+aOH8wbfxJ3CDB9n8z4otIPVVDXaY3ZnHxlpPeTlbO8=;
+ b=kTqr/MSGDC2yAdHlqRbyolTivQ3SuOJcvfa3Uh5K85mh8S56vbFPBrpQnYJUHrdajQD1Nt5pQZlobZsZUdXooaGqc/XFgjvjFj3Vjv7LSRWtC+KSUSENs7apuvzwx5CGb2TRJocwsG1+OQQJOhiPwJDTelXGjdJSoG3R79xXmcY=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -91,9 +87,9 @@ From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <michal.orzel@amd.com>, <sstabellini@kernel.org>,
 	<vikram.garhwal@amd.com>, <julien@xen.org>
-Subject: [XEN][PATCH v10 09/20] xen/iommu: Move spin_lock from iommu_dt_device_is_assigned to caller
-Date: Fri, 25 Aug 2023 01:02:11 -0700
-Message-ID: <20230825080222.14247-10-vikram.garhwal@amd.com>
+Subject: [XEN][PATCH v10 06/20] libfdt: Keep fdt functions after init for CONFIG_OVERLAY_DTB.
+Date: Fri, 25 Aug 2023 01:02:08 -0700
+Message-ID: <20230825080222.14247-7-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230825080222.14247-1-vikram.garhwal@amd.com>
 References: <20230825080222.14247-1-vikram.garhwal@amd.com>
@@ -101,98 +97,52 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044F5:EE_|BL1PR12MB5706:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8607ac54-e699-4797-b404-08dba541b709
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F5:EE_|DM4PR12MB6206:EE_
+X-MS-Office365-Filtering-Correlation-Id: fe5d618e-bf27-494e-6d0f-08dba541b660
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	4UZi/QuVEXYlI1/AmUrqeTIJ7P+rJWg5nPk1/sqtzFiDNFDHuvOCFoAsYHErYf0db5oSWswGP904QVMCHriN1ptRp5LZ5dU4VS6Xp6izgntc7uaFx400pvWxPHF1b4+MBhzjim9sSkNsPcv2ufdUwbrb+/A1BoUVdVajceUr4oO2j9ZjCRdV7M6XQvpLsI2uJgcz5WBYPHOdlp1grmDra+T/o4UrMAGE+xuHkoWLajsA/9wi3lz7WJJNm64kWa8s6G9eIY9SVx8bNpkK8X+okvU2Tji6n1G6RSDHtF+p3nU5GcnBDWs0+fkORCQ1aFA9tYSmumzeQib67XWFqTbEmzLDgd7ykp81xuzM836CPeDF0QtpFnxCY/CHrPUkLRSVIzMgRHWGr23juYsBGfiynDCnDxRMUuUtgxdT4EAsV8hDVBLG/lG2db+mydp+bACLBd8Iy5yxbH/gPhKh7m0wy3/gTRN0nPALluIPlqmr7I79MKA9dAcpsFABA8PHnMa1dKGhx9kwpRtR/nV6WHKVGIhzsJ76bAdnPFmkSU+6BP4aKabouGPKtKghtbJ2Pgziala9Z3WIVlJ9jl0dTNMFHUbGM4pWuDQMK7RZYyiTJMQ+j07ZC3euvkrp/Vq8p16mW+vhWhAsC2CKQJoq2J9cTZu2PH23kfwxfpoSBCV60PYPximvzoAXF10TyrcyG/E9NhIsfKfduOTlGlgAnI+PUw8BuhnxAGI5D5S3FYpfibhzG2Q8YNjFYASbU9lAHi0aZMSR3iWo4v5r4JPXB1z4qA==
+	JOi6MCIzvT27J7jf3vQElEY2nG7J9611Ixiq2ORkMOyuuV+ucUfyaV/9JcngEacTvQXaZwHQHg/+P4w6MG+uivuJ/CV3EJ5KTr9URIz5RUShm2oZeaczxInxQ9LONrwnL+UbvcBTlQopBwvMLxDEpl3O99E366cqOJ3tah0hXY6T1dLddpf4EO3nbNFioaamNDOo8JObyjwxxCfayKrll+RElqNy/xEBz2+LGW0Q14CrNekbPi2vmodXINy5t0OLwO/tuQF7lrGov/42w7t8Qf6CKDs2OGP94nuDdLCM9mKG9A0ZCcVn+L11LyS4JiQB4xmOJeI4IWsAunlATIxMMYVWJarxXmfTC1mElKmVwrfpPgMcLrCOk81RqQQ9p81uITnwDx/R0t0ecX6COreLAuz4HZAAtRKdYEDXQYgi185oa17DJ69F0eS3KcxiWh6HFwKVZxg82j/NcTcCnJVu/4fMyGftim3zVHxJQ5gtbnQ+7v17ZevOyQuEr7irdsrRZoId/qXTBFL4eo3U96Ws/UFK/cc35McFstLJ6OQhmM+EKcqgjz79FREJErCMBMjmOE/3b8GJmb1vGhfYzejjCiIP27Kwi7p14qq3IWJBQ9f621N1QivRbvgHC5mPxDcJ9oVgJrs1a6SRaDwxuslYP0JvzjEYqBJciOVBqB3fgNdqXWID3BO91z9eeZXbUf6e7yfXIyPbANN8xlcddXji58MVxJ7UnjS66GrsQmmvhmBrXRoBPNRd6urdVTS+g7xJJPJrerh1mRTqRBzt2kdQTA==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(136003)(376002)(346002)(396003)(82310400011)(451199024)(1800799009)(186009)(46966006)(40470700004)(36840700001)(82740400003)(81166007)(356005)(40460700003)(8676002)(4326008)(8936002)(54906003)(41300700001)(6666004)(316002)(36756003)(6916009)(70586007)(70206006)(86362001)(40480700001)(47076005)(26005)(478600001)(336012)(36860700001)(1076003)(44832011)(83380400001)(2906002)(2616005)(426003)(5660300002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(136003)(376002)(346002)(396003)(82310400011)(451199024)(1800799009)(186009)(46966006)(40470700004)(36840700001)(82740400003)(81166007)(356005)(40460700003)(8676002)(4326008)(8936002)(54906003)(41300700001)(6666004)(316002)(36756003)(6916009)(70586007)(70206006)(86362001)(40480700001)(47076005)(26005)(478600001)(336012)(36860700001)(1076003)(44832011)(83380400001)(2906002)(4744005)(2616005)(426003)(5660300002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 08:03:06.3662
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 08:03:05.2568
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8607ac54-e699-4797-b404-08dba541b709
+X-MS-Exchange-CrossTenant-Network-Message-Id: fe5d618e-bf27-494e-6d0f-08dba541b660
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	CO1PEPF000044F5.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5706
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6206
 
-Rename iommu_dt_device_is_assigned() to iommu_dt_device_is_assigned_locked().
-
-Moving spin_lock to caller was done to prevent the concurrent access to
-iommu_dt_device_is_assigned while doing add/remove/assign/deassign. Follow-up
-patches in this series introduces node add/remove feature.
+This is done to access fdt library function which are required for adding device
+tree overlay nodes for dynamic programming of nodes.
 
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
+---
+ xen/common/libfdt/Makefile | 4 ++++
+ 1 file changed, 4 insertions(+)
 
----
-Changes from v9:
-    Make iommu_dt_device_is_assigned_locked() static and delete header.
-    Move dtdevs_lock before iommu_dt_device_is_assigned_locked().
-Changes from v7:
-    Update commit message.
-    Add ASSERT().
----
----
- xen/drivers/passthrough/device_tree.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
-
-diff --git a/xen/drivers/passthrough/device_tree.c b/xen/drivers/passthrough/device_tree.c
-index 1c32d7b50c..5d84c07b50 100644
---- a/xen/drivers/passthrough/device_tree.c
-+++ b/xen/drivers/passthrough/device_tree.c
-@@ -83,16 +83,17 @@ fail:
-     return rc;
- }
+diff --git a/xen/common/libfdt/Makefile b/xen/common/libfdt/Makefile
+index 75aaefa2e3..d50487aa6e 100644
+--- a/xen/common/libfdt/Makefile
++++ b/xen/common/libfdt/Makefile
+@@ -1,7 +1,11 @@
+ include $(src)/Makefile.libfdt
  
--static bool_t iommu_dt_device_is_assigned(const struct dt_device_node *dev)
-+static bool_t
-+iommu_dt_device_is_assigned_locked(const struct dt_device_node *dev)
- {
-     bool_t assigned = 0;
- 
-+    ASSERT(spin_is_locked(&dtdevs_lock));
+ SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
 +
-     if ( !dt_device_is_protected(dev) )
-         return 0;
++# For CONFIG_OVERLAY_DTB, libfdt functionalities will be needed during runtime.
++ifneq ($(CONFIG_OVERLAY_DTB),y)
+ OBJCOPYFLAGS := $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s))
++endif
  
--    spin_lock(&dtdevs_lock);
-     assigned = !list_empty(&dev->domain_list);
--    spin_unlock(&dtdevs_lock);
- 
-     return assigned;
- }
-@@ -223,17 +224,24 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
-         if ( ret )
-             break;
- 
-+        spin_lock(&dtdevs_lock);
-+
-         if ( domctl->cmd == XEN_DOMCTL_test_assign_device )
-         {
--            if ( iommu_dt_device_is_assigned(dev) )
-+
-+            if ( iommu_dt_device_is_assigned_locked(dev) )
-             {
-                 printk(XENLOG_G_ERR "%s already assigned.\n",
-                        dt_node_full_name(dev));
-                 ret = -EINVAL;
-             }
-+
-+            spin_unlock(&dtdevs_lock);
-             break;
-         }
- 
-+        spin_unlock(&dtdevs_lock);
-+
-         if ( d == dom_io )
-             return -EINVAL;
- 
+ obj-y += libfdt.o
+ nocov-y += libfdt.o
 -- 
 2.17.1
 
