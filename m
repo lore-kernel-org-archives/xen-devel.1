@@ -4,32 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02618C3DA66
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Aug 2023 08:03:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.590544.922846 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BD82C3DA66
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Aug 2023 08:03:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.590545.922856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZRmM-0006xw-Pw; Fri, 25 Aug 2023 08:02:50 +0000
+	id 1qZRmc-0007HF-2h; Fri, 25 Aug 2023 08:03:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 590544.922846; Fri, 25 Aug 2023 08:02:50 +0000
+Received: by outflank-mailman (output) from mailman id 590545.922856; Fri, 25 Aug 2023 08:03:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qZRmM-0006xp-NM; Fri, 25 Aug 2023 08:02:50 +0000
-Received: by outflank-mailman (input) for mailman id 590544;
- Fri, 25 Aug 2023 08:02:49 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qZRmL-0006xj-Dn
- for xen-devel@lists.xenproject.org; Fri, 25 Aug 2023 08:02:49 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qZRmK-0004Wn-R8; Fri, 25 Aug 2023 08:02:48 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1qZRmK-00055P-KW; Fri, 25 Aug 2023 08:02:48 +0000
+	id 1qZRmb-0007H8-Vx; Fri, 25 Aug 2023 08:03:05 +0000
+Received: by outflank-mailman (input) for mailman id 590545;
+ Fri, 25 Aug 2023 08:03:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=+VXW=EK=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
+ id 1qZRma-0007G4-5E
+ for xen-devel@lists.xenproject.org; Fri, 25 Aug 2023 08:03:04 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2062a.outbound.protection.outlook.com
+ [2a01:111:f400:fe59::62a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cf165a16-431d-11ee-9b0c-b553b5be7939;
+ Fri, 25 Aug 2023 10:03:01 +0200 (CEST)
+Received: from MW4PR03CA0055.namprd03.prod.outlook.com (2603:10b6:303:8e::30)
+ by CH0PR12MB8579.namprd12.prod.outlook.com (2603:10b6:610:182::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.29; Fri, 25 Aug
+ 2023 08:02:58 +0000
+Received: from CO1PEPF000044FB.namprd21.prod.outlook.com
+ (2603:10b6:303:8e:cafe::6b) by MW4PR03CA0055.outlook.office365.com
+ (2603:10b6:303:8e::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.30 via Frontend
+ Transport; Fri, 25 Aug 2023 08:02:57 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CO1PEPF000044FB.mail.protection.outlook.com (10.167.241.201) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.2 via Frontend Transport; Fri, 25 Aug 2023 08:02:56 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 25 Aug
+ 2023 03:02:56 -0500
+Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
+ Transport; Fri, 25 Aug 2023 03:02:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,115 +61,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=NpRUren4+J3+pdVbHgrKx/G8R8Y8JYXimKfGoyW/ESI=; b=Ii6Lll1HigmnBxgobEM3sk+0Yy
-	IpgC+Fdv5H/pNF1moiOx1cMd17lySiKbssZXHhIV56KP9zqLnyBk6N3kFKpvCLfgQHh54MlZbJCdw
-	myqM1gyimBVNTPisnJ5GdzSnPpS+YCijtxC8o0mJ1slHSW6bqN1q0DZlDnojqia/tD9U=;
-Message-ID: <5908b638-f436-4060-a426-9839fc563c63@xen.org>
-Date: Fri, 25 Aug 2023 09:02:46 +0100
+X-Inumbo-ID: cf165a16-431d-11ee-9b0c-b553b5be7939
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lBOpXoPbVXKhhA9fvSvRPQDpLfTnQc/j2mT1T1cFfeHMFNpOhP0gJBEntm94K7+WcWQiY5xGcPtem8NS5vIA3gs1BykGxoodMow2z2BZqm6I8MqOPwWQqk2yg+Q4n/f46kVn4rf73LFL848EnclVuL/G8xv/h2LjZ2mCtpaYwckE97dVdPxR0hJKUBTqcu94Upk3iD8CJnchP6HAXs3+G5oGpsziNANxFeDazX5NZEm+VmHeP/EoNOGx2Onh19UFx6FZeOChiNdwEzJEkzB16RPbtsI5AwfHYsNRDE6i4FE2sUgmft00UmQHQNqXguER63rgKu3ZHOJsq71keORTUw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TvyzZKkKruBh4hcUgS0xB1M/ZVRIznonRnMXhEGKKko=;
+ b=D8sIOba4VEYzLXSpBIfSfUF0avv+xNqRjRB5RnMtl83nr1mWQiH+INv5PfB+Ite8LLD3bVD8bQmzjO9kqKqirMs0ft+3rbSccIMKCcOzsSSej+SfiX1LxaAw3/t+vfzBbiWIqVJcV2E/cfbubM3SYKTkrpx+D1cqtP25/VJp0kXXIlKUw9W9gv4ovFvRevQCW5e+WXIVow2XMJELT+syzAmSWVXKtQNj4byBgF1QbwDS+TXyNAVV1oyXcq17HHPLZaSnPCjWwi5sS6bCfJI8j0FaiHDu3eoi8iRvoSMilUgvWVRkIH5GCfUnu7E0eJJDY7tn2SEEVhqh9eJEr2y+kw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TvyzZKkKruBh4hcUgS0xB1M/ZVRIznonRnMXhEGKKko=;
+ b=Mf+rCflavkMxuB6E/HBkt2zLAo/0V4lnxc1DhzZ2InHLW+b/M77HwO1z4BVsB+rZkmsVQsCN0XU1TYXZqciNkmEncR2ctS+X+pjWypAdHQ9lvsANiL+wAyEwSk0ua6xXbf36sBANNPoUl9XuXPJdzw//f2ZSHmFYkbK6no9SZ4c=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: Vikram Garhwal <vikram.garhwal@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <michal.orzel@amd.com>, <sstabellini@kernel.org>,
+	<vikram.garhwal@amd.com>, <julien@xen.org>
+Subject: [XEN][PATCH v10 02/20] common/device_tree.c: unflatten_device_tree() propagate errors
+Date: Fri, 25 Aug 2023 01:02:04 -0700
+Message-ID: <20230825080222.14247-3-vikram.garhwal@amd.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20230825080222.14247-1-vikram.garhwal@amd.com>
+References: <20230825080222.14247-1-vikram.garhwal@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN][PATCH v9 03/19] xen/arm/device: Remove __init from function
- type
-Content-Language: en-GB
-To: Vikram Garhwal <vikram.garhwal@amd.com>
-Cc: xen-devel@lists.xenproject.org, michal.orzel@amd.com,
- sstabellini@kernel.org, jbeulich@suse.com,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20230819002850.32349-1-vikram.garhwal@amd.com>
- <20230819002850.32349-4-vikram.garhwal@amd.com>
- <734587ea-4066-4f60-8903-7f43a10bb1b6@xen.org> <ZOf7V_FsJ_CgeL64@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <ZOf7V_FsJ_CgeL64@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044FB:EE_|CH0PR12MB8579:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27be0861-6331-4eb8-c6c9-08dba541b161
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	7633raw/rY21lrYvW8KiPPfcqYi3gUz/Z2zNyZ5d/SXhDGvYg8amPgPdnKH4keKZCtbkUK7WMewNPSEpZ4FoIYPaoYFNNbz3g6K0jnwqxPmwJKCEdFcyY2qmq3WHKiecJFyG3tUvWCjli3wnuTAFkDgA22DQJwcKjI3LChn5oapa64A8DkJquGgcqXFG1VPozZ3wGUpiJ9Nsqh8ZbvS+4KMw2VtRkymGRf0YB3YI3Nr0cWnRlF/VjzxBQ72fR6KpVbFRvlCJwCTz10cjnIepZoD3fUBQ3MzOEGuTlmIEGSl83fqSZgl3EYauaZH4fPStjeg3fXGgMwt9Y9T9IlVfR9xrTu+VsxgqLNjO0Dm84duNZHw8xemLAi+jeO0sWEypX51x2K5q1hEyY4ju+J4Hwd3FNhGsj1/B4psbCKzdmxnjEkUMkLltxe9y6yCWrkMtNN7dh26Np1DXxyPIsT+vi5Hc9TvzpCcpWHo5/+11uZ62pL4spivnaBjjr5nxXmflFkrsIc5BgZS5jCXCuM7gwYFigVRthXArntCucX7T+HMSEHI6EK4S0/+O5hRBcaiUoUAhiZdmNex7vDKe0So4fAb+L7cwNZu3DqnzxiAgum3q6lb8ua8m4rHA95OaOdIRao3PvguJXJvN0RpDLqVCjz+uNKn6L7ZsprOJeyLQeat+7onKt8FPTd73ZnaT5B+KX5/ZNBJlFzj4Y38rmK58n7LhgCZqj5Pf8ZSbdT4eI3d3T5rhwsX2LXiwysjTHv7cEVNB0Ah2u1Q4jAiitAvkZQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(346002)(39860400002)(396003)(376002)(186009)(82310400011)(1800799009)(451199024)(40470700004)(36840700001)(46966006)(356005)(82740400003)(81166007)(40460700003)(8676002)(4326008)(8936002)(54906003)(41300700001)(6666004)(316002)(36756003)(6916009)(70586007)(70206006)(86362001)(40480700001)(47076005)(26005)(478600001)(336012)(36860700001)(1076003)(44832011)(83380400001)(2906002)(2616005)(5660300002)(426003)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 08:02:56.9083
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27be0861-6331-4eb8-c6c9-08dba541b161
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000044FB.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8579
 
-Hi,
+This will be useful in dynamic node programming when new dt nodes are unflattend
+during runtime. Invalid device tree node related errors should be propagated
+back to the caller.
 
-On 25/08/2023 01:52, Vikram Garhwal wrote:
-> Hi Julien,
-> On Tue, Aug 22, 2023 at 07:59:13PM +0100, Julien Grall wrote:
->> Hi Vikram,
->>
->> On 19/08/2023 01:28, Vikram Garhwal wrote:
->>> Remove __init from following function to access during runtime:
->>>       1. map_irq_to_domain()
->>>       2. handle_device_interrupts()
->>>       3. map_range_to_domain()
->>>       4. unflatten_dt_node()
->>
->> We are at v9 now, so this is more a remark for the future. In general we are
->> trying to avoid modifying the same code multiple time within the series
->> because this makes it more difficult to review. In this case, you could have
->> removed the __init in patch #4 where you also export it.
->>
->>>
->>> Move map_irq_to_domain() prototype from domain_build.h to setup.h.
->>>
->>> To avoid breaking the build, following changes are also done:
->>
->> I am guessing by "breaking the build", you mean that you will get an error
->> because an non-init function is implemented in domain_build.c. Right? If so,
->> I think this should be spelled out.
-> Yeah, i will change the commit with right reasoning.
->>
->>> 1. Move map_irq_to_domain(), handle_device_interrupts() and map_range_to_domain()
->>>       to device.c. After removing __init type,  these functions are not specific
->>>       to domain building, so moving them out of domain_build.c to device.c.
->>> 2. Remove static type from handle_device_interrupt().
->>
->> Typo: s/interrupt/interrupts/ to match the function name. But I don't link
->> the name when it is exported as it leads to think this is dealing with real
->> interrupt.
-> With using handle_device() in overlay as your below suggestion will anyway need
-> this handle_device_interrupts() function here.
+Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
 
-Ah I didn't notice it was used in handle_passthrough_prop(). So it 
-indeed needs to be exported. In which case, I would suggest to rename to 
-"map_device_irqs_to_domain()".
+---
+Changes from v9:
+    Replace __be64 with void.
+Changes from v7:
+    Free allocated memory in case of errors when calling unflatten_dt_node.
+---
+---
+ xen/common/device_tree.c | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
 
->>
->> Looking at the overlay code, the caller (i.e. add_resources()) is very
->> similar to handle_device(). AFAICT the only differences are:
->>     1/ add_resources() doesn't deal with mapping (you said it will in the
->> future)
->>     2/ You need to update some rangeset
->>
->> For 1/ it means this is a superset. For 2/, I think this could be abstracted
->> by adding a pointer to the rangesets in map_range_data. They could be NULL
->> for the domain build case.
->>
->> So can you look at abstracting? This will make easier to maintain a single
->> place to parse a device node and map it.
->>
->> A possible name for the function would be dt_map_resources_to_domain().
-> For this part of dynamic overlay programming this function can be used.
-> I updated the overlay code to use handle_device() as per your suggestions. Moved
-> handle_device() and other relevant function out of domain_build.
-> About renaming the function name to dt_map_resource_to_domain(): I will see if
-> i can come with better name else will keep your suggestion.
-> Now with this case, overlay device tree needs to have "xen,passthrough" enabled
-> else it will try to map and fail as Xen supports irq_route and mapping only at
-> the domain creation. In earlier patches this worked fine as we were always skip
-> the routing and map.
-
-Right, but this also meant the behavior when parsing the DT overlay 
-would not have been consistent with parsing the host DT.
-
-You would have then had to break backward compatibility to add support 
-for mapping the resources. If this was planned to be dealt before DT 
-Overlay becomes supported, then this would have been fine as we don't 
-guarantee stable interface for experimental/tech preview feature.
-
-The new approach should at least prevent any backward compatibility 
-breakage and would allow us to support DT overlay even before the 
-resource mapping is supported. So I think this is better.
-
-Cheers,
-
+diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
+index 7c6b41c3b4..b6d9f018c6 100644
+--- a/xen/common/device_tree.c
++++ b/xen/common/device_tree.c
+@@ -2110,6 +2110,9 @@ static int __init __unflatten_device_tree(const void *fdt,
+     /* First pass, scan for size */
+     start = ((unsigned long)fdt) + fdt_off_dt_struct(fdt);
+     size = unflatten_dt_node(fdt, 0, &start, NULL, NULL, 0);
++    if ( !size )
++        return -EINVAL;
++
+     size = (size | 3) + 1;
+ 
+     dt_dprintk("  size is %#lx allocating...\n", size);
+@@ -2127,11 +2130,21 @@ static int __init __unflatten_device_tree(const void *fdt,
+     start = ((unsigned long)fdt) + fdt_off_dt_struct(fdt);
+     unflatten_dt_node(fdt, mem, &start, NULL, &allnextp, 0);
+     if ( be32_to_cpup((__be32 *)start) != FDT_END )
+-        printk(XENLOG_WARNING "Weird tag at end of tree: %08x\n",
++    {
++        printk(XENLOG_ERR "Weird tag at end of tree: %08x\n",
+                   *((u32 *)start));
++        xfree((void *)mem);
++        return -EINVAL;
++    }
++
+     if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeefU )
+-        printk(XENLOG_WARNING "End of tree marker overwritten: %08x\n",
++    {
++        printk(XENLOG_ERR "End of tree marker overwritten: %08x\n",
+                   be32_to_cpu(((__be32 *)mem)[size / 4]));
++        xfree((void *)mem);
++        return -EINVAL;
++    }
++
+     *allnextp = NULL;
+ 
+     dt_dprintk(" <- unflatten_device_tree()\n");
 -- 
-Julien Grall
+2.17.1
+
 
