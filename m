@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA372C71153
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 14:30:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.591525.924003 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0555CC71153
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 14:45:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.591537.924061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qadFs-0004m8-Qi; Mon, 28 Aug 2023 14:30:12 +0000
+	id 1qadUN-0001Xh-Im; Mon, 28 Aug 2023 14:45:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 591525.924003; Mon, 28 Aug 2023 14:30:12 +0000
+Received: by outflank-mailman (output) from mailman id 591537.924061; Mon, 28 Aug 2023 14:45:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qadFs-0004h4-BL; Mon, 28 Aug 2023 14:30:12 +0000
-Received: by outflank-mailman (input) for mailman id 591525;
- Mon, 28 Aug 2023 13:21:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qadUN-0001VO-8C; Mon, 28 Aug 2023 14:45:11 +0000
+Received: by outflank-mailman (input) for mailman id 591537;
+ Mon, 28 Aug 2023 13:36:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3W1q=EN=kernel.org=brauner@srs-se1.protection.inumbo.net>)
- id 1qacB3-00032e-Pk
- for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 13:21:09 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id be281668-45a5-11ee-8783-cb3800f73035;
- Mon, 28 Aug 2023 15:21:06 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 1E9A96187E;
- Mon, 28 Aug 2023 13:21:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6569C433C8;
- Mon, 28 Aug 2023 13:20:54 +0000 (UTC)
+ <SRS0=RJ5s=EN=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
+ id 1qacPy-0004gK-Kc
+ for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 13:36:34 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a904a21b-45a5-11ee-9b0c-b553b5be7939;
+ Mon, 28 Aug 2023 15:20:30 +0200 (CEST)
+Received: from beta.station (net-93-66-137-131.cust.vodafonedsl.it
+ [93.66.137.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id A7A354EE073D;
+ Mon, 28 Aug 2023 15:20:29 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,68 +42,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be281668-45a5-11ee-8783-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1693228864;
-	bh=QtirhpZ6M4wRBs0PcZuQKaZInNnIQCord7zI9oR3eYc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=dGzUUvJG87+eWzsz6xzROYCBNDl7W5LTOJNZSdrdj6kC4UZhu/D9tYCBTY1kzrQPe
-	 x7WILXB1VLYusnI7i57xbkDNp7AlezoIITxDEYtPZbpKeaRaDjmpnSpx19pqxTzCO1
-	 eHWv5jG6Kk405k0HzfGlQ5FnGrphH6RQF/qbsChQZpHtUi1E5k/RJY2W8E0veW1Pw4
-	 WmlHIAC8kSpEcFeEGWLjHX2ee4G742ubGUZGwha6A7RHD325wN5SUYbEQ3omUMFDG/
-	 CM1aA/cNlMXqkEYlHa/Phek8pvPKy4SQPmUA3IhuobWAQwG6yFUbEhG6jgGYrQO+H2
-	 J9dq9/E4F2ZeQ==
-Date: Mon, 28 Aug 2023 15:20:47 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Cc: Al Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
-	linux-block@vger.kernel.org, Christoph Hellwig <hch@infradead.org>,
-	Alasdair Kergon <agk@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Anna Schumaker <anna@kernel.org>, Chao Yu <chao@kernel.org>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	"Darrick J. Wong" <djwong@kernel.org>,
-	Dave Kleikamp <shaggy@kernel.org>, David Sterba <dsterba@suse.com>,
-	dm-devel@redhat.com, drbd-dev@lists.linbit.com,
-	Gao Xiang <xiang@kernel.org>, Jack Wang <jinpu.wang@ionos.com>,
-	Jaegeuk Kim <jaegeuk@kernel.org>,
-	jfs-discussion@lists.sourceforge.net,
-	Joern Engel <joern@lazybastard.org>,
-	Joseph Qi <joseph.qi@linux.alibaba.com>,
-	Kent Overstreet <kent.overstreet@gmail.com>,
-	linux-bcache@vger.kernel.org, linux-btrfs@vger.kernel.org,
-	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
-	linux-mtd@lists.infradead.org, linux-nfs@vger.kernel.org,
-	linux-nilfs@vger.kernel.org, linux-nvme@lists.infradead.org,
-	linux-pm@vger.kernel.org, linux-raid@vger.kernel.org,
-	linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org,
-	linux-xfs@vger.kernel.org,
-	"Md. Haris Iqbal" <haris.iqbal@ionos.com>,
-	Mike Snitzer <snitzer@kernel.org>, Minchan Kim <minchan@kernel.org>,
-	ocfs2-devel@oss.oracle.com, reiserfs-devel@vger.kernel.org,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Song Liu <song@kernel.org>, Sven Schnelle <svens@linux.ibm.com>,
-	target-devel@vger.kernel.org, Ted Tso <tytso@mit.edu>,
-	Trond Myklebust <trond.myklebust@hammerspace.com>,
-	xen-devel@lists.xenproject.org, Jens Axboe <axboe@kernel.dk>
-Subject: Re: [PATCH v2 0/29] block: Make blkdev_get_by_*() return handle
-Message-ID: <20230828-durften-hauswand-67319ee0c17c@brauner>
-References: <20230810171429.31759-1-jack@suse.cz>
- <20230825015843.GB95084@ZenIV>
- <20230825134756.o3wpq6bogndukn53@quack3>
+X-Inumbo-ID: a904a21b-45a5-11ee-9b0c-b553b5be7939
+From: Simone Ballarin <simone.ballarin@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	sstabellini@kernel.org,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 05/13] automation/eclair: add deviation for usercopy.c
+Date: Mon, 28 Aug 2023 15:20:02 +0200
+Message-Id: <4039623dc4341758f383ec49228c1e55e5862b0f.1693228255.git.simone.ballarin@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1693228255.git.simone.ballarin@bugseng.com>
+References: <cover.1693228255.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20230825134756.o3wpq6bogndukn53@quack3>
+Content-Transfer-Encoding: 8bit
 
-> So besides my last fput() worry about I think this could work and would be
-> probably a bit nicer than what I have. But before going and redoing the whole
-> series let me gather some more feedback so that we don't go back and forth.
-> Christoph, Christian, Jens, any opinion?
+xen/arch/x86/usercopy.c includes itself, so it is not supposed to
+comply with Directive 4.10:
+"Precautions shall be taken in order to prevent the contents of a
+header file being included more than once"
 
-I'll be a bit under water for the next few days, I expect but I'll get
-back to this. I think not making you redo this whole thing from scratch
-is what I'd prefer unless there's really clear advantages. But I don't
-want to offer a haphazard opinion in the middle of the merge window.
+This patch adds a deviation for the file.
+
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+---
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 4 ++++
+ docs/misra/rules.rst                             | 2 ++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index 2681a4cff5..a7d4f29b43 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -96,6 +96,10 @@ conform to the directive."
+ -config=MC3R1.D4.10,reports+={safe, "first_area(text(^ \\* In this case, no inclusion guards apply and the caller is responsible.*\\*/$, begin-1))"}
+ -doc_end
+ 
++-doc_begin="xen/arch/x86/usercopy.c includes itself: it is not supposed to comply with the directive"
++-config=MC3R1.D4.10,reports+={deliberate, "all_area(all_loc(file("^xen/arch/x86/usercopy\\.c$")))"}
++-doc_end
++
+ #
+ # Series 5.
+ #
+diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+index 4b1a7b02b6..45e13d0302 100644
+--- a/docs/misra/rules.rst
++++ b/docs/misra/rules.rst
+@@ -62,6 +62,8 @@ maintainers if you want to suggest a change.
+      - Files that are intended to be included more than once do not need to
+        conform to the directive. Files that explicitly avoid inclusion guards
+        under specific circumstances do not need to conform the directive.
++       xen/arch/x86/usercopy.c includes itself: it is not supposed to comply
++       with the directive.
+ 
+    * - `Dir 4.11 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_04_11.c>`_
+      - Required
+-- 
+2.34.1
+
 
