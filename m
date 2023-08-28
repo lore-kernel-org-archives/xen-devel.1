@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB4AC83F14
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 01:33:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.591207.923582 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 655BEC83F11
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 01:33:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.591211.923613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qaR7V-0000y5-9f; Mon, 28 Aug 2023 01:32:45 +0000
+	id 1qaR7g-0001qe-8y; Mon, 28 Aug 2023 01:32:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 591207.923582; Mon, 28 Aug 2023 01:32:45 +0000
+Received: by outflank-mailman (output) from mailman id 591211.923613; Mon, 28 Aug 2023 01:32:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qaR7V-0000xy-65; Mon, 28 Aug 2023 01:32:45 +0000
-Received: by outflank-mailman (input) for mailman id 591207;
- Mon, 28 Aug 2023 01:32:44 +0000
+	id 1qaR7g-0001qV-3x; Mon, 28 Aug 2023 01:32:56 +0000
+Received: by outflank-mailman (input) for mailman id 591211;
+ Mon, 28 Aug 2023 01:32:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nwb3=EN=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qaR7U-0000xW-0J
- for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 01:32:44 +0000
+ id 1qaR7f-0000xW-5W
+ for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 01:32:55 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id c6a5c786-4542-11ee-9b0c-b553b5be7939;
- Mon, 28 Aug 2023 03:32:40 +0200 (CEST)
+ id ce5967b2-4542-11ee-9b0c-b553b5be7939;
+ Mon, 28 Aug 2023 03:32:53 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BD15C2F4;
- Sun, 27 Aug 2023 18:33:19 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AB85B143D;
+ Sun, 27 Aug 2023 18:33:32 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 60AA53F740;
- Sun, 27 Aug 2023 18:32:36 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 4F4E73F740;
+ Sun, 27 Aug 2023 18:32:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6a5c786-4542-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: ce5967b2-4542-11ee-9b0c-b553b5be7939
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Wei Chen <wei.chen@arm.com>,
@@ -56,9 +56,9 @@ Cc: Wei Chen <wei.chen@arm.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Henry Wang <Henry.Wang@arm.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v6 01/13] xen/arm64: head.S: Introduce enable_{boot,secondary}_cpu_mm()
-Date: Mon, 28 Aug 2023 09:32:12 +0800
-Message-Id: <20230828013224.669433-2-Henry.Wang@arm.com>
+Subject: [PATCH v6 04/13] xen/arm: Move MMU related definitions from config.h to mmu/layout.h
+Date: Mon, 28 Aug 2023 09:32:15 +0800
+Message-Id: <20230828013224.669433-5-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230828013224.669433-1-Henry.Wang@arm.com>
 References: <20230828013224.669433-1-Henry.Wang@arm.com>
@@ -67,19 +67,14 @@ Content-Transfer-Encoding: 8bit
 
 From: Wei Chen <wei.chen@arm.com>
 
-At the moment, on MMU system, enable_mmu() will return to an
-address in the 1:1 mapping, then each path is responsible to
-switch to virtual runtime mapping. Then remove_identity_mapping()
-is called on the boot CPU to remove all 1:1 mapping.
+Xen defines some global configuration macros for Arm in config.h.
+However there are some address layout related definitions that are
+defined for MMU systems only, and these definitions could not be
+used by MPU systems. Adding ifdefs to differentiate the MPU from MMU
+layout will result in a messy and hard-to-read/maintain code.
 
-Since remove_identity_mapping() is not necessary on Non-MMU system,
-and we also avoid creating empty function for Non-MMU system, trying
-to keep only one codeflow in arm64/head.S, we move path switch and
-remove_identity_mapping() in enable_mmu() on MMU system.
-
-As the remove_identity_mapping should only be called for the boot
-CPU only, so we introduce enable_boot_cpu_mm() for boot CPU and
-enable_secondary_cpu_mm() for secondary CPUs in this patch.
+So move all memory layout definitions to a new file, i.e. mmu/layout.h
+to avoid spreading "#ifdef" everywhere.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
@@ -87,137 +82,322 @@ Signed-off-by: Henry Wang <Henry.Wang@arm.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
 v6:
-- Add Julien's Reviewed-by tag.
+- No change.
 v5:
-- Add missing "()" in title.
-- Use more generic comment in enable_{boot,secondary}_cpu_mm() to
-  mention function will return to the vaddr requested by the caller.
-- Move 'mov lr, x5' closer to 'b remove_identity_mapping'.
-- Drop the 'b fail' for unreachable code in enable_boot_cpu_mm().
+- Rework commit message.
+- Add Reviewed-by tag from Julien
 v4:
-- Clarify remove_identity_mapping() is called on boot CPU and keep
-  the function/proc format consistent in commit msg.
-- Drop inaccurate (due to the refactor) in-code comment.
-- Rename enable_{boot,runtime}_mmu to enable_{boot,secondary}_cpu_mm.
-- Reword the in-code comment on top of enable_{boot,secondary}_cpu_mm.
-- Call "fail" for unreachable code.
+- Rebase on top of latest staging to pick the recent UBSAN change
+  to the layout.
+- Use #ifdef CONFIG_HAS_MMU instead of #ifndef CONFIG_HAS_MPU, add
+  a #else case.
+- Rework commit message.
 v3:
-- new patch
+- name the new header layout.h
+v2:
+- Remove duplicated FIXMAP definitions from config_mmu.h
 ---
- xen/arch/arm/arm64/head.S | 83 ++++++++++++++++++++++++++++++---------
- 1 file changed, 64 insertions(+), 19 deletions(-)
+ xen/arch/arm/include/asm/config.h     | 132 +----------------------
+ xen/arch/arm/include/asm/mmu/layout.h | 146 ++++++++++++++++++++++++++
+ 2 files changed, 149 insertions(+), 129 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/mmu/layout.h
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 5029013a14..f25a41d36c 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -325,21 +325,11 @@ real_start_efi:
+diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+index 83cbf6b0cb..e1dcec4dd7 100644
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
+@@ -71,136 +71,10 @@
+ #include <xen/const.h>
+ #include <xen/page-size.h>
  
-         bl    check_cpu_mode
-         bl    cpu_init
--        bl    create_page_tables
--        load_paddr x0, boot_pgtable
--        bl    enable_mmu
- 
--        /* We are still in the 1:1 mapping. Jump to the runtime Virtual Address. */
--        ldr   x0, =primary_switched
--        br    x0
-+        ldr   lr, =primary_switched
-+        b     enable_boot_cpu_mm
-+
- primary_switched:
--        /*
--         * The 1:1 map may clash with other parts of the Xen virtual memory
--         * layout. As it is not used anymore, remove it completely to
--         * avoid having to worry about replacing existing mapping
--         * afterwards.
--         */
--        bl    remove_identity_mapping
-         bl    setup_fixmap
- #ifdef CONFIG_EARLY_PRINTK
-         /* Use a virtual address to access the UART. */
-@@ -384,13 +374,10 @@ GLOBAL(init_secondary)
+-/*
+- * ARM32 layout:
+- *   0  -   2M   Unmapped
+- *   2M -  10M   Xen text, data, bss
+- *  10M -  12M   Fixmap: special-purpose 4K mapping slots
+- *  12M -  16M   Early boot mapping of FDT
+- *  16M -  18M   Livepatch vmap (if compiled in)
+- *
+- *  32M - 128M   Frametable: 32 bytes per page for 12GB of RAM
+- * 256M -   1G   VMAP: ioremap and early_ioremap use this virtual address
+- *                    space
+- *
+- *   1G -   2G   Xenheap: always-mapped memory
+- *   2G -   4G   Domheap: on-demand-mapped
+- *
+- * ARM64 layout:
+- * 0x0000000000000000 - 0x000001ffffffffff (2TB, L0 slots [0..3])
+- *
+- *  Reserved to identity map Xen
+- *
+- * 0x0000020000000000 - 0x0000027fffffffff (512GB, L0 slot [4])
+- *  (Relative offsets)
+- *   0  -   2M   Unmapped
+- *   2M -  10M   Xen text, data, bss
+- *  10M -  12M   Fixmap: special-purpose 4K mapping slots
+- *  12M -  16M   Early boot mapping of FDT
+- *  16M -  18M   Livepatch vmap (if compiled in)
+- *
+- *   1G -   2G   VMAP: ioremap and early_ioremap
+- *
+- *  32G -  64G   Frametable: 56 bytes per page for 2TB of RAM
+- *
+- * 0x0000028000000000 - 0x00007fffffffffff (125TB, L0 slots [5..255])
+- *  Unused
+- *
+- * 0x0000800000000000 - 0x000084ffffffffff (5TB, L0 slots [256..265])
+- *  1:1 mapping of RAM
+- *
+- * 0x0000850000000000 - 0x0000ffffffffffff (123TB, L0 slots [266..511])
+- *  Unused
+- */
+-
+-#ifdef CONFIG_ARM_32
+-#define XEN_VIRT_START          _AT(vaddr_t, MB(2))
++#ifdef CONFIG_MMU
++#include <asm/mmu/layout.h>
+ #else
+-
+-#define SLOT0_ENTRY_BITS  39
+-#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
+-#define SLOT0_ENTRY_SIZE  SLOT0(1)
+-
+-#define XEN_VIRT_START          (SLOT0(4) + _AT(vaddr_t, MB(2)))
+-#endif
+-
+-/*
+- * Reserve enough space so both UBSAN and GCOV can be enabled together
+- * plus some slack for future growth.
+- */
+-#define XEN_VIRT_SIZE           _AT(vaddr_t, MB(8))
+-#define XEN_NR_ENTRIES(lvl)     (XEN_VIRT_SIZE / XEN_PT_LEVEL_SIZE(lvl))
+-
+-#define FIXMAP_VIRT_START       (XEN_VIRT_START + XEN_VIRT_SIZE)
+-#define FIXMAP_VIRT_SIZE        _AT(vaddr_t, MB(2))
+-
+-#define FIXMAP_ADDR(n)          (FIXMAP_VIRT_START + (n) * PAGE_SIZE)
+-
+-#define BOOT_FDT_VIRT_START     (FIXMAP_VIRT_START + FIXMAP_VIRT_SIZE)
+-#define BOOT_FDT_VIRT_SIZE      _AT(vaddr_t, MB(4))
+-
+-#ifdef CONFIG_LIVEPATCH
+-#define LIVEPATCH_VMAP_START    (BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE)
+-#define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
+-#endif
+-
+-#define HYPERVISOR_VIRT_START  XEN_VIRT_START
+-
+-#ifdef CONFIG_ARM_32
+-
+-#define CONFIG_SEPARATE_XENHEAP 1
+-
+-#define FRAMETABLE_VIRT_START  _AT(vaddr_t, MB(32))
+-#define FRAMETABLE_SIZE        MB(128-32)
+-#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
+-
+-#define VMAP_VIRT_START        _AT(vaddr_t, MB(256))
+-#define VMAP_VIRT_SIZE         _AT(vaddr_t, GB(1) - MB(256))
+-
+-#define XENHEAP_VIRT_START     _AT(vaddr_t, GB(1))
+-#define XENHEAP_VIRT_SIZE      _AT(vaddr_t, GB(1))
+-
+-#define DOMHEAP_VIRT_START     _AT(vaddr_t, GB(2))
+-#define DOMHEAP_VIRT_SIZE      _AT(vaddr_t, GB(2))
+-
+-#define DOMHEAP_ENTRIES        1024  /* 1024 2MB mapping slots */
+-
+-/* Number of domheap pagetable pages required at the second level (2MB mappings) */
+-#define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
+-
+-/*
+- * The temporary area is overlapping with the domheap area. This may
+- * be used to create an alias of the first slot containing Xen mappings
+- * when turning on/off the MMU.
+- */
+-#define TEMPORARY_AREA_FIRST_SLOT    (first_table_offset(DOMHEAP_VIRT_START))
+-
+-/* Calculate the address in the temporary area */
+-#define TEMPORARY_AREA_ADDR(addr)                           \
+-     (((addr) & ~XEN_PT_LEVEL_MASK(1)) |                    \
+-      (TEMPORARY_AREA_FIRST_SLOT << XEN_PT_LEVEL_SHIFT(1)))
+-
+-#define TEMPORARY_XEN_VIRT_START    TEMPORARY_AREA_ADDR(XEN_VIRT_START)
+-
+-#else /* ARM_64 */
+-
+-#define IDENTITY_MAPPING_AREA_NR_L0  4
+-
+-#define VMAP_VIRT_START  (SLOT0(4) + GB(1))
+-#define VMAP_VIRT_SIZE   GB(1)
+-
+-#define FRAMETABLE_VIRT_START  (SLOT0(4) + GB(32))
+-#define FRAMETABLE_SIZE        GB(32)
+-#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
+-
+-#define DIRECTMAP_VIRT_START   SLOT0(256)
+-#define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (266 - 256))
+-#define DIRECTMAP_VIRT_END     (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE - 1)
+-
+-#define XENHEAP_VIRT_START     directmap_virt_start
+-
+-#define HYPERVISOR_VIRT_END    DIRECTMAP_VIRT_END
+-
++# error "Unknown memory management layout"
  #endif
-         bl    check_cpu_mode
-         bl    cpu_init
--        load_paddr x0, init_ttbr
--        ldr   x0, [x0]
--        bl    enable_mmu
  
--        /* We are still in the 1:1 mapping. Jump to the runtime Virtual Address. */
--        ldr   x0, =secondary_switched
--        br    x0
-+        ldr   lr, =secondary_switched
-+        b     enable_secondary_cpu_mm
+ #define NR_hypercalls 64
+diff --git a/xen/arch/arm/include/asm/mmu/layout.h b/xen/arch/arm/include/asm/mmu/layout.h
+new file mode 100644
+index 0000000000..da6be276ac
+--- /dev/null
++++ b/xen/arch/arm/include/asm/mmu/layout.h
+@@ -0,0 +1,146 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +
- secondary_switched:
- #ifdef CONFIG_EARLY_PRINTK
-         /* Use a virtual address to access the UART. */
-@@ -748,6 +735,64 @@ enable_mmu:
-         ret
- ENDPROC(enable_mmu)
- 
-+/*
-+ * Enable mm (turn on the data cache and the MMU) for secondary CPUs.
-+ * The function will return to the virtual address provided in LR (e.g. the
-+ * runtime mapping).
-+ *
-+ * Inputs:
-+ *   lr : Virtual address to return to.
-+ *
-+ * Clobbers x0 - x5
-+ */
-+enable_secondary_cpu_mm:
-+        mov   x5, lr
-+
-+        load_paddr x0, init_ttbr
-+        ldr   x0, [x0]
-+
-+        bl    enable_mmu
-+        mov   lr, x5
-+
-+        /* Return to the virtual address requested by the caller. */
-+        ret
-+ENDPROC(enable_secondary_cpu_mm)
++#ifndef __ARM_MMU_LAYOUT_H__
++#define __ARM_MMU_LAYOUT_H__
 +
 +/*
-+ * Enable mm (turn on the data cache and the MMU) for the boot CPU.
-+ * The function will return to the virtual address provided in LR (e.g. the
-+ * runtime mapping).
++ * ARM32 layout:
++ *   0  -   2M   Unmapped
++ *   2M -  10M   Xen text, data, bss
++ *  10M -  12M   Fixmap: special-purpose 4K mapping slots
++ *  12M -  16M   Early boot mapping of FDT
++ *  16M -  18M   Livepatch vmap (if compiled in)
 + *
-+ * Inputs:
-+ *   lr : Virtual address to return to.
++ *  32M - 128M   Frametable: 32 bytes per page for 12GB of RAM
++ * 256M -   1G   VMAP: ioremap and early_ioremap use this virtual address
++ *                    space
 + *
-+ * Clobbers x0 - x5
++ *   1G -   2G   Xenheap: always-mapped memory
++ *   2G -   4G   Domheap: on-demand-mapped
++ *
++ * ARM64 layout:
++ * 0x0000000000000000 - 0x000001ffffffffff (2TB, L0 slots [0..3])
++ *
++ *  Reserved to identity map Xen
++ *
++ * 0x0000020000000000 - 0x0000027fffffffff (512GB, L0 slot [4])
++ *  (Relative offsets)
++ *   0  -   2M   Unmapped
++ *   2M -  10M   Xen text, data, bss
++ *  10M -  12M   Fixmap: special-purpose 4K mapping slots
++ *  12M -  16M   Early boot mapping of FDT
++ *  16M -  18M   Livepatch vmap (if compiled in)
++ *
++ *   1G -   2G   VMAP: ioremap and early_ioremap
++ *
++ *  32G -  64G   Frametable: 56 bytes per page for 2TB of RAM
++ *
++ * 0x0000028000000000 - 0x00007fffffffffff (125TB, L0 slots [5..255])
++ *  Unused
++ *
++ * 0x0000800000000000 - 0x000084ffffffffff (5TB, L0 slots [256..265])
++ *  1:1 mapping of RAM
++ *
++ * 0x0000850000000000 - 0x0000ffffffffffff (123TB, L0 slots [266..511])
++ *  Unused
 + */
-+enable_boot_cpu_mm:
-+        mov   x5, lr
 +
-+        bl    create_page_tables
-+        load_paddr x0, boot_pgtable
++#ifdef CONFIG_ARM_32
++#define XEN_VIRT_START          _AT(vaddr_t, MB(2))
++#else
 +
-+        bl    enable_mmu
++#define SLOT0_ENTRY_BITS  39
++#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
++#define SLOT0_ENTRY_SIZE  SLOT0(1)
 +
-+        /*
-+         * The MMU is turned on and we are in the 1:1 mapping. Switch
-+         * to the runtime mapping.
-+         */
-+        ldr   x0, =1f
-+        br    x0
-+1:
-+        mov   lr, x5
-+        /*
-+         * The 1:1 map may clash with other parts of the Xen virtual memory
-+         * layout. As it is not used anymore, remove it completely to avoid
-+         * having to worry about replacing existing mapping afterwards.
-+         * Function will return to the virtual address requested by the caller.
-+         */
-+        b     remove_identity_mapping
-+ENDPROC(enable_boot_cpu_mm)
++#define XEN_VIRT_START          (SLOT0(4) + _AT(vaddr_t, MB(2)))
++#endif
 +
- /*
-  * Remove the 1:1 map from the page-tables. It is not easy to keep track
-  * where the 1:1 map was mapped, so we will look for the top-level entry
++/*
++ * Reserve enough space so both UBSAN and GCOV can be enabled together
++ * plus some slack for future growth.
++ */
++#define XEN_VIRT_SIZE           _AT(vaddr_t, MB(8))
++#define XEN_NR_ENTRIES(lvl)     (XEN_VIRT_SIZE / XEN_PT_LEVEL_SIZE(lvl))
++
++#define FIXMAP_VIRT_START       (XEN_VIRT_START + XEN_VIRT_SIZE)
++#define FIXMAP_VIRT_SIZE        _AT(vaddr_t, MB(2))
++
++#define FIXMAP_ADDR(n)          (FIXMAP_VIRT_START + (n) * PAGE_SIZE)
++
++#define BOOT_FDT_VIRT_START     (FIXMAP_VIRT_START + FIXMAP_VIRT_SIZE)
++#define BOOT_FDT_VIRT_SIZE      _AT(vaddr_t, MB(4))
++
++#ifdef CONFIG_LIVEPATCH
++#define LIVEPATCH_VMAP_START    (BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE)
++#define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
++#endif
++
++#define HYPERVISOR_VIRT_START  XEN_VIRT_START
++
++#ifdef CONFIG_ARM_32
++
++#define CONFIG_SEPARATE_XENHEAP 1
++
++#define FRAMETABLE_VIRT_START  _AT(vaddr_t, MB(32))
++#define FRAMETABLE_SIZE        MB(128-32)
++#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
++
++#define VMAP_VIRT_START        _AT(vaddr_t, MB(256))
++#define VMAP_VIRT_SIZE         _AT(vaddr_t, GB(1) - MB(256))
++
++#define XENHEAP_VIRT_START     _AT(vaddr_t, GB(1))
++#define XENHEAP_VIRT_SIZE      _AT(vaddr_t, GB(1))
++
++#define DOMHEAP_VIRT_START     _AT(vaddr_t, GB(2))
++#define DOMHEAP_VIRT_SIZE      _AT(vaddr_t, GB(2))
++
++#define DOMHEAP_ENTRIES        1024  /* 1024 2MB mapping slots */
++
++/* Number of domheap pagetable pages required at the second level (2MB mappings) */
++#define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
++
++/*
++ * The temporary area is overlapping with the domheap area. This may
++ * be used to create an alias of the first slot containing Xen mappings
++ * when turning on/off the MMU.
++ */
++#define TEMPORARY_AREA_FIRST_SLOT    (first_table_offset(DOMHEAP_VIRT_START))
++
++/* Calculate the address in the temporary area */
++#define TEMPORARY_AREA_ADDR(addr)                           \
++     (((addr) & ~XEN_PT_LEVEL_MASK(1)) |                    \
++      (TEMPORARY_AREA_FIRST_SLOT << XEN_PT_LEVEL_SHIFT(1)))
++
++#define TEMPORARY_XEN_VIRT_START    TEMPORARY_AREA_ADDR(XEN_VIRT_START)
++
++#else /* ARM_64 */
++
++#define IDENTITY_MAPPING_AREA_NR_L0  4
++
++#define VMAP_VIRT_START  (SLOT0(4) + GB(1))
++#define VMAP_VIRT_SIZE   GB(1)
++
++#define FRAMETABLE_VIRT_START  (SLOT0(4) + GB(32))
++#define FRAMETABLE_SIZE        GB(32)
++#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
++
++#define DIRECTMAP_VIRT_START   SLOT0(256)
++#define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (266 - 256))
++#define DIRECTMAP_VIRT_END     (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE - 1)
++
++#define XENHEAP_VIRT_START     directmap_virt_start
++
++#define HYPERVISOR_VIRT_END    DIRECTMAP_VIRT_END
++
++#endif
++
++#endif /* __ARM_MMU_LAYOUT_H__ */
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.25.1
 
