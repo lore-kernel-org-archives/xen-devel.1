@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F15C83F11
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 01:33:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.591208.923593 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58025C83F11
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 01:33:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.591212.923623 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qaR7X-0001EB-Hs; Mon, 28 Aug 2023 01:32:47 +0000
+	id 1qaR7j-0002DF-Ik; Mon, 28 Aug 2023 01:32:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 591208.923593; Mon, 28 Aug 2023 01:32:47 +0000
+Received: by outflank-mailman (output) from mailman id 591212.923623; Mon, 28 Aug 2023 01:32:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qaR7X-0001E1-Ed; Mon, 28 Aug 2023 01:32:47 +0000
-Received: by outflank-mailman (input) for mailman id 591208;
- Mon, 28 Aug 2023 01:32:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qaR7j-0002Co-Du; Mon, 28 Aug 2023 01:32:59 +0000
+Received: by outflank-mailman (input) for mailman id 591212;
+ Mon, 28 Aug 2023 01:32:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nwb3=EN=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qaR7V-0000xW-S6
- for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 01:32:45 +0000
+ id 1qaR7h-0000i9-W6
+ for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 01:32:57 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id c921712e-4542-11ee-9b0c-b553b5be7939;
- Mon, 28 Aug 2023 03:32:44 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id d0d877ef-4542-11ee-8783-cb3800f73035;
+ Mon, 28 Aug 2023 03:32:57 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DFDFD2F4;
- Sun, 27 Aug 2023 18:33:23 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C96362F4;
+ Sun, 27 Aug 2023 18:33:36 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 840BD3F740;
- Sun, 27 Aug 2023 18:32:40 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 6D8F23F740;
+ Sun, 27 Aug 2023 18:32:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c921712e-4542-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: d0d877ef-4542-11ee-8783-cb3800f73035
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Henry Wang <Henry.Wang@arm.com>,
@@ -56,60 +56,130 @@ Cc: Henry Wang <Henry.Wang@arm.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v6 02/13] xen/arm: Introduce CONFIG_MMU Kconfig option
-Date: Mon, 28 Aug 2023 09:32:13 +0800
-Message-Id: <20230828013224.669433-3-Henry.Wang@arm.com>
+Subject: [PATCH v6 05/13] xen/arm64: Fold setup_fixmap() to create_page_tables()
+Date: Mon, 28 Aug 2023 09:32:16 +0800
+Message-Id: <20230828013224.669433-6-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230828013224.669433-1-Henry.Wang@arm.com>
 References: <20230828013224.669433-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There are two types of memory system architectures available for
-Arm-based systems, namely the Virtual Memory System Architecture (VMSA)
-and the Protected Memory System Architecture (PMSA). According to
-ARM DDI 0487G.a, A VMSA provides a Memory Management Unit (MMU) that
-controls address translation, access permissions, and memory attribute
-determination and checking, for memory accesses made by the PE. And
-refer to ARM DDI 0600A.c, the PMSA supports a unified memory protection
-scheme where an Memory Protection Unit (MPU) manages instruction and
-data access. Currently, Xen only supports VMSA.
+The original assembly setup_fixmap() is actually doing two seperate
+tasks, one is enabling the early UART when earlyprintk on, and the
+other is to set up the fixmap (even when earlyprintk is off).
 
-Introduce a Kconfig option CONFIG_MMU, which is currently default
-set to y and unselectable because currently only VMSA is supported.
-CONFIG_MMU will be used in follow-up patches.
+Per discussion in [1], since commit
+9d267c049d92 ("xen/arm64: Rework the memory layout"), there is no
+chance that the fixmap and the mapping of early UART will clash with
+the 1:1 mapping. Therefore the mapping of both the fixmap and the
+early UART can be moved to the end of create_pagetables().
 
-Suggested-by: Julien Grall <jgrall@amazon.com>
+[1] https://lore.kernel.org/xen-devel/78862bb8-fd7f-5a51-a7ae-3c5b5998ed80@xen.org/
+
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
 v6:
-- Correct typo in commit message, explicitly mention CONFIG_MMU will be
-  used in follow-up patches.
-- Add Julien's Acked-by tag.
+- Drop the "No functional change intended." sentence in commit msg.
+- Add Julien's Reviewed-by tag.
 v5:
-- Only introduce the unselectable CONFIG_MMU, add the 'choice' in
-  future commits.
+- Refine the title and commit message.
+- Drop the "not applied" in-code comment about the 1:1 mapping clash on
+  top of create_page_tables().
+- Drop the unnecessary dsb and isb from the original setup_fixmap().
 v4:
-- Completely rework "[v3,06/52] xen/arm: introduce CONFIG_HAS_MMU"
+- Rework "[v3,12/52] xen/mmu: extract early uart mapping from setup_fixmap"
 ---
- xen/arch/arm/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ xen/arch/arm/arm64/head.S     |  1 -
+ xen/arch/arm/arm64/mmu/head.S | 48 ++++++++---------------------------
+ 2 files changed, 10 insertions(+), 39 deletions(-)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 57bd1d01d7..eb0413336b 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -59,6 +59,9 @@ config PADDR_BITS
- 	default 40 if ARM_PA_BITS_40
- 	default 48 if ARM_64
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 3c8a12eda7..4ad85dcf58 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -275,7 +275,6 @@ real_start_efi:
+         b     enable_boot_cpu_mm
  
-+config MMU
-+	def_bool y
+ primary_switched:
+-        bl    setup_fixmap
+ #ifdef CONFIG_EARLY_PRINTK
+         /* Use a virtual address to access the UART. */
+         ldr   x23, =EARLY_UART_VIRTUAL_ADDRESS
+diff --git a/xen/arch/arm/arm64/mmu/head.S b/xen/arch/arm/arm64/mmu/head.S
+index d71fdc69a5..a5271e3880 100644
+--- a/xen/arch/arm/arm64/mmu/head.S
++++ b/xen/arch/arm/arm64/mmu/head.S
+@@ -126,11 +126,6 @@
+  * Rebuild the boot pagetable's first-level entries. The structure
+  * is described in mm.c.
+  *
+- * After the CPU enables paging it will add the fixmap mapping
+- * to these page tables, however this may clash with the 1:1
+- * mapping. So each CPU must rebuild the page tables here with
+- * the 1:1 in place.
+- *
+  * Inputs:
+  *   x19: paddr(start)
+  *   x20: phys offset
+@@ -243,6 +238,16 @@ link_from_second_id:
+         create_table_entry boot_second_id, boot_third_id, x19, 2, x0, x1, x2
+ link_from_third_id:
+         create_mapping_entry boot_third_id, x19, x19, x0, x1, x2
 +
- source "arch/Kconfig"
++#ifdef CONFIG_EARLY_PRINTK
++        /* Add UART to the fixmap table */
++        ldr   x0, =EARLY_UART_VIRTUAL_ADDRESS
++        /* x23: Early UART base physical address */
++        create_mapping_entry xen_fixmap, x0, x23, x1, x2, x3, type=PT_DEV_L3
++#endif
++        /* Map fixmap into boot_second */
++        ldr   x0, =FIXMAP_ADDR(0)
++        create_table_entry boot_second, xen_fixmap, x0, 2, x1, x2, x3
+         ret
  
- config ACPI
+ virtphys_clash:
+@@ -402,39 +407,6 @@ identity_mapping_removed:
+         ret
+ ENDPROC(remove_identity_mapping)
+ 
+-/*
+- * Map the UART in the fixmap (when earlyprintk is used) and hook the
+- * fixmap table in the page tables.
+- *
+- * The fixmap cannot be mapped in create_page_tables because it may
+- * clash with the 1:1 mapping.
+- *
+- * Inputs:
+- *   x20: Physical offset
+- *   x23: Early UART base physical address
+- *
+- * Clobbers x0 - x3
+- */
+-ENTRY(setup_fixmap)
+-#ifdef CONFIG_EARLY_PRINTK
+-        /* Add UART to the fixmap table */
+-        ldr   x0, =EARLY_UART_VIRTUAL_ADDRESS
+-        create_mapping_entry xen_fixmap, x0, x23, x1, x2, x3, type=PT_DEV_L3
+-#endif
+-        /* Map fixmap into boot_second */
+-        ldr   x0, =FIXMAP_ADDR(0)
+-        create_table_entry boot_second, xen_fixmap, x0, 2, x1, x2, x3
+-        /* Ensure any page table updates made above have occurred. */
+-        dsb   nshst
+-        /*
+-         * The fixmap area will be used soon after. So ensure no hardware
+-         * translation happens before the dsb completes.
+-         */
+-        isb
+-
+-        ret
+-ENDPROC(setup_fixmap)
+-
+ /* Fail-stop */
+ fail:   PRINT("- Boot failed -\r\n")
+ 1:      wfe
 -- 
 2.25.1
 
