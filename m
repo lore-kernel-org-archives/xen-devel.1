@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E6ADC71153
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 14:28:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.591549.923940 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56094C71153
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 14:30:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.591520.923963 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qadDq-0002Ax-3U; Mon, 28 Aug 2023 14:28:06 +0000
+	id 1qadFq-0003rF-6J; Mon, 28 Aug 2023 14:30:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 591549.923940; Mon, 28 Aug 2023 14:28:06 +0000
+Received: by outflank-mailman (output) from mailman id 591520.923963; Mon, 28 Aug 2023 14:30:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qadDq-0002Aq-0w; Mon, 28 Aug 2023 14:28:06 +0000
-Received: by outflank-mailman (input) for mailman id 591549;
- Mon, 28 Aug 2023 14:28:04 +0000
+	id 1qadFq-0003qL-1E; Mon, 28 Aug 2023 14:30:10 +0000
+Received: by outflank-mailman (input) for mailman id 591520;
+ Mon, 28 Aug 2023 13:20:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MuY7=EN=bombadil.srs.infradead.org=BATV+b83d16e5cd0c301f07e4+7309+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1qadDo-0002Ak-Fl
- for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 14:28:04 +0000
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [2607:7c80:54:3::133])
+ <SRS0=RJ5s=EN=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
+ id 1qacAS-00031h-1E
+ for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 13:20:32 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 17b7f2b0-45af-11ee-8783-cb3800f73035;
- Mon, 28 Aug 2023 16:28:03 +0200 (CEST)
-Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qadDM-009iIb-0l; Mon, 28 Aug 2023 14:27:36 +0000
+ id a9ab7628-45a5-11ee-8783-cb3800f73035;
+ Mon, 28 Aug 2023 15:20:31 +0200 (CEST)
+Received: from beta.station (net-93-66-137-131.cust.vodafonedsl.it
+ [93.66.137.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id D3C664EE0C87;
+ Mon, 28 Aug 2023 15:20:30 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,99 +42,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 17b7f2b0-45af-11ee-8783-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=uSnxqZdcrAYLPJPn0DfMY9X2iPdkTMayza8iox8Bem8=; b=rbTi8dih1WwPPGr+ioF2zSIKKN
-	0mmMd7Mf6Y5CF6A3xbL6k1rG0Eq5PWNYD84YkTP/PYD6I8n7fwj9JtPf3x5xfflk7Of9PmT6yVoWg
-	jDUfTlhnUqF1ibZ6C9C5Qp1FAcJBPSA1UYGVoKPgYhWBRS4hFyN/qulLfky0u5g5JfBjJuWo9rAVd
-	OmVBPYeBaMmY44rW3+ehZ8vQr36snspggxlo5N+wQ2MnsZOlSw7LhANyJrm+6WDGYJ2q3IlcmhpsD
-	alE6KXAxYfEVAogHtFQTNBnQoXb84wJ9x/IDWMwjf/34MizydIM1onWP9QQVyidEc4XNREZoED++f
-	uj07NLVA==;
-Date: Mon, 28 Aug 2023 07:27:36 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Cc: Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org,
-	linux-block@vger.kernel.org, Christoph Hellwig <hch@infradead.org>,
-	Alasdair Kergon <agk@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Anna Schumaker <anna@kernel.org>, Chao Yu <chao@kernel.org>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	"Darrick J. Wong" <djwong@kernel.org>,
-	Dave Kleikamp <shaggy@kernel.org>, David Sterba <dsterba@suse.com>,
-	dm-devel@redhat.com, drbd-dev@lists.linbit.com,
-	Gao Xiang <xiang@kernel.org>, Jack Wang <jinpu.wang@ionos.com>,
-	Jaegeuk Kim <jaegeuk@kernel.org>,
-	jfs-discussion@lists.sourceforge.net,
-	Joern Engel <joern@lazybastard.org>,
-	Joseph Qi <joseph.qi@linux.alibaba.com>,
-	Kent Overstreet <kent.overstreet@gmail.com>,
-	linux-bcache@vger.kernel.org, linux-btrfs@vger.kernel.org,
-	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
-	linux-mtd@lists.infradead.org, linux-nfs@vger.kernel.org,
-	linux-nilfs@vger.kernel.org, linux-nvme@lists.infradead.org,
-	linux-pm@vger.kernel.org, linux-raid@vger.kernel.org,
-	linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org,
-	linux-xfs@vger.kernel.org,
-	"Md. Haris Iqbal" <haris.iqbal@ionos.com>,
-	Mike Snitzer <snitzer@kernel.org>, Minchan Kim <minchan@kernel.org>,
-	ocfs2-devel@oss.oracle.com, reiserfs-devel@vger.kernel.org,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Song Liu <song@kernel.org>, Sven Schnelle <svens@linux.ibm.com>,
-	target-devel@vger.kernel.org, Ted Tso <tytso@mit.edu>,
-	Trond Myklebust <trond.myklebust@hammerspace.com>,
-	xen-devel@lists.xenproject.org, Jens Axboe <axboe@kernel.dk>,
-	Christian Brauner <brauner@kernel.org>
-Subject: Re: [PATCH v2 0/29] block: Make blkdev_get_by_*() return handle
-Message-ID: <ZOyu2FX7Fmzj6JJz@infradead.org>
-References: <20230810171429.31759-1-jack@suse.cz>
- <20230825015843.GB95084@ZenIV>
- <20230825134756.o3wpq6bogndukn53@quack3>
- <20230826022852.GO3390869@ZenIV>
+X-Inumbo-ID: a9ab7628-45a5-11ee-8783-cb3800f73035
+From: Simone Ballarin <simone.ballarin@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	sstabellini@kernel.org,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 07/13] x86/asm: address violations of MISRA C:2012 Directive 4.10
+Date: Mon, 28 Aug 2023 15:20:04 +0200
+Message-Id: <c5b6c3b7824d620b341c72c8d5dde5f5fce17dec.1693228255.git.simone.ballarin@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1693228255.git.simone.ballarin@bugseng.com>
+References: <cover.1693228255.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230826022852.GO3390869@ZenIV>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Content-Transfer-Encoding: 8bit
 
-On Sat, Aug 26, 2023 at 03:28:52AM +0100, Al Viro wrote:
-> I mean, look at claim_swapfile() for example:
->                 p->bdev = blkdev_get_by_dev(inode->i_rdev,
->                                    FMODE_READ | FMODE_WRITE | FMODE_EXCL, p);
->                 if (IS_ERR(p->bdev)) {
->                         error = PTR_ERR(p->bdev);
->                         p->bdev = NULL;
->                         return error;
->                 }
->                 p->old_block_size = block_size(p->bdev);
->                 error = set_blocksize(p->bdev, PAGE_SIZE);
->                 if (error < 0)
->                         return error;
-> we already have the file opened, and we keep it opened all the way until
-> the swapoff(2); here we have noticed that it's a block device and we
-> 	* open the fucker again (by device number), this time claiming
-> it with our swap_info_struct as holder, to be closed at swapoff(2) time
-> (just before we close the file)
+Add or move inclusion guards to address violations of
+MISRA C:2012 Directive 4.10 ("Precautions shall be taken in order
+to prevent the contents of a header file being included more than
+once").
 
-Note that some drivers look at FMODE_EXCL/BLK_OPEN_EXCL in ->open.
-These are probably bogus and maybe we want to kill them, but that will
-need an audit first.
+Inclusion guards must appear at the beginning of the headers
+(comments are permitted anywhere).
 
-> BTW, what happens if two threads call ioctl(fd, BLKBSZSET, &n)
-> for the same descriptor that happens to have been opened O_EXCL?
-> Without O_EXCL they would've been unable to claim the sucker at the same
-> time - the holder we are using is the address of a function argument,
-> i.e. something that points to kernel stack of the caller.  Those would
-> conflict and we either get set_blocksize() calls fully serialized, or
-> one of the callers would eat -EBUSY.  Not so in "opened with O_EXCL"
-> case - they can very well overlap and IIRC set_blocksize() does *not*
-> expect that kind of crap...  It's all under CAP_SYS_ADMIN, so it's not
-> as if it was a meaningful security hole anyway, but it does look fishy.
+The text of the beggining comment of cpufeatures.h has been changed
+to match the deviation in automation/eclair_analysis/ECLAIR/deviations.ecl,
+moreover this new formulation is already used in other files.
 
-The user get to keep the pieces..  BLKBSZSET is kinda bogus anyway
-as the soft blocksize only matters for buffer_head-like I/O, and
-there only for file systems.  Not idea why anyone would set it manually.
+Mechanical change.
+
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+---
+ xen/arch/x86/include/asm/compat.h      | 5 +++++
+ xen/arch/x86/include/asm/cpufeatures.h | 4 +---
+ xen/arch/x86/include/asm/efibind.h     | 5 +++++
+ xen/arch/x86/include/asm/hypercall.h   | 6 +++---
+ 4 files changed, 14 insertions(+), 6 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/compat.h b/xen/arch/x86/include/asm/compat.h
+index 818cad87db..3d3891d061 100644
+--- a/xen/arch/x86/include/asm/compat.h
++++ b/xen/arch/x86/include/asm/compat.h
+@@ -2,6 +2,9 @@
+  * compat.h
+  */
+ 
++#ifndef __ASM_X86_COMPAT_H__
++#define __ASM_X86_COMPAT_H__
++
+ #ifdef CONFIG_COMPAT
+ 
+ #define COMPAT_BITS_PER_LONG 32
+@@ -18,3 +21,5 @@ int switch_compat(struct domain *);
+ #include <xen/errno.h>
+ static inline int switch_compat(struct domain *d) { return -EOPNOTSUPP; }
+ #endif
++
++#endif /* __ASM_X86_COMPAT_H__ */
+diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
+index da0593de85..1dfdd478ab 100644
+--- a/xen/arch/x86/include/asm/cpufeatures.h
++++ b/xen/arch/x86/include/asm/cpufeatures.h
+@@ -1,6 +1,4 @@
+-/*
+- * Explicitly intended for multiple inclusion.
+- */
++/* This file is legitimately included multiple times */
+ 
+ #include <xen/lib/x86/cpuid-autogen.h>
+ 
+diff --git a/xen/arch/x86/include/asm/efibind.h b/xen/arch/x86/include/asm/efibind.h
+index bce02f3707..f2eb8b5496 100644
+--- a/xen/arch/x86/include/asm/efibind.h
++++ b/xen/arch/x86/include/asm/efibind.h
+@@ -1,2 +1,7 @@
++#ifndef __ASM_X86_EFIBIND_H__
++#define __ASM_X86_EFIBIND_H__
++
+ #include <xen/types.h>
+ #include <asm/x86_64/efibind.h>
++
++#endif /* __ASM_X86_EFIBIND_H__ */
+diff --git a/xen/arch/x86/include/asm/hypercall.h b/xen/arch/x86/include/asm/hypercall.h
+index ec2edc771e..2ade5d71b8 100644
+--- a/xen/arch/x86/include/asm/hypercall.h
++++ b/xen/arch/x86/include/asm/hypercall.h
+@@ -2,13 +2,13 @@
+  * asm-x86/hypercall.h
+  */
+ 
++#ifndef __ASM_X86_HYPERCALL_H__
++#define __ASM_X86_HYPERCALL_H__
++
+ #ifndef __XEN_HYPERCALL_H__
+ #error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
+ #endif
+ 
+-#ifndef __ASM_X86_HYPERCALL_H__
+-#define __ASM_X86_HYPERCALL_H__
+-
+ #include <xen/types.h>
+ #include <public/physdev.h>
+ #include <public/event_channel.h>
+-- 
+2.34.1
+
 
