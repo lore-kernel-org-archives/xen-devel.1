@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF4BC71153
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 14:45:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.591535.924052 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD20AC83F15
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Aug 2023 14:45:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.591538.924063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qadUN-0001Oo-5T; Mon, 28 Aug 2023 14:45:11 +0000
+	id 1qadUN-0001j1-RU; Mon, 28 Aug 2023 14:45:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 591535.924052; Mon, 28 Aug 2023 14:45:11 +0000
+Received: by outflank-mailman (output) from mailman id 591538.924063; Mon, 28 Aug 2023 14:45:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qadUM-0001Nj-Vx; Mon, 28 Aug 2023 14:45:10 +0000
-Received: by outflank-mailman (input) for mailman id 591535;
- Mon, 28 Aug 2023 13:36:33 +0000
+	id 1qadUN-0001f8-Lb; Mon, 28 Aug 2023 14:45:11 +0000
+Received: by outflank-mailman (input) for mailman id 591538;
+ Mon, 28 Aug 2023 13:36:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RJ5s=EN=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qacPx-0004gK-KO
- for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 13:36:33 +0000
+ id 1qacPz-0004gK-Kw
+ for xen-devel@lists.xenproject.org; Mon, 28 Aug 2023 13:36:35 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a8a3e59e-45a5-11ee-9b0c-b553b5be7939;
- Mon, 28 Aug 2023 15:20:29 +0200 (CEST)
+ id aa04e8e8-45a5-11ee-9b0c-b553b5be7939;
+ Mon, 28 Aug 2023 15:20:32 +0200 (CEST)
 Received: from beta.station (net-93-66-137-131.cust.vodafonedsl.it
  [93.66.137.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 239EC4EE074E;
- Mon, 28 Aug 2023 15:20:29 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 64F7E4EE0C88;
+ Mon, 28 Aug 2023 15:20:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a8a3e59e-45a5-11ee-9b0c-b553b5be7939
+X-Inumbo-ID: aa04e8e8-45a5-11ee-9b0c-b553b5be7939
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -50,206 +50,78 @@ Cc: consulting@bugseng.com,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 04/13] xen/x86: address violations of MISRA C:2012 Directive 4.10
-Date: Mon, 28 Aug 2023 15:20:01 +0200
-Message-Id: <d2f0b1184ac9d2a79cc4651e6e4469bc38a6c24a.1693228255.git.simone.ballarin@bugseng.com>
+Subject: [XEN PATCH 08/13] x86/mm: address violations of MISRA C:2012 Directive 4.10
+Date: Mon, 28 Aug 2023 15:20:05 +0200
+Message-Id: <b994059118b867960b619d40d74c8f579c0a4d87.1693228255.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1693228255.git.simone.ballarin@bugseng.com>
 References: <cover.1693228255.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add or move inclusion guards to address violations of
+Add inclusion guards to address violations of
 MISRA C:2012 Directive 4.10 ("Precautions shall be taken in order
 to prevent the contents of a header file being included more than
 once").
 
-Inclusion guards must appear at the beginning of the headers
-(comments are permitted anywhere).
-
-Also C files, if included somewhere, need to comply with the guideline.
+C files, if included somewhere, need to comply with the guideline.
 
 Mechanical change.
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/arch/x86/Makefile                  | 8 ++++----
- xen/arch/x86/cpu/cpu.h                 | 5 +++++
- xen/arch/x86/physdev.c                 | 4 ++++
- xen/arch/x86/platform_hypercall.c      | 5 +++++
- xen/arch/x86/x86_64/compat/mm.c        | 5 +++++
- xen/arch/x86/x86_64/mmconfig.h         | 5 +++++
- xen/arch/x86/x86_emulate/private.h     | 5 +++++
- xen/arch/x86/x86_emulate/x86_emulate.c | 5 +++++
- 8 files changed, 38 insertions(+), 4 deletions(-)
+ xen/arch/x86/mm/guest_walk.c     | 5 +++++
+ xen/arch/x86/mm/hap/guest_walk.c | 4 ++++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index e642ad6c55..f956b7f0cd 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -259,17 +259,17 @@ $(objtree)/arch/x86/include/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefil
- 	$(call filechk,asm-macros.h)
- 
- define filechk_asm-macros.h
-+    echo '#ifndef __ASM_MACROS_H__'; \
-+    echo '#define __ASM_MACROS_H__'; \
-     echo '#if 0'; \
-     echo '.if 0'; \
-     echo '#endif'; \
--    echo '#ifndef __ASM_MACROS_H__'; \
--    echo '#define __ASM_MACROS_H__'; \
-     echo 'asm ( ".include \"$@\"" );'; \
--    echo '#endif /* __ASM_MACROS_H__ */'; \
-     echo '#if 0'; \
-     echo '.endif'; \
-     cat $<; \
--    echo '#endif'
-+    echo '#endif'; \
-+    echo '#endif /* __ASM_MACROS_H__ */'
- endef
- 
- $(obj)/efi.lds: AFLAGS-y += -DEFI
-diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
-index e3d06278b3..95939c7fb6 100644
---- a/xen/arch/x86/cpu/cpu.h
-+++ b/xen/arch/x86/cpu/cpu.h
-@@ -1,3 +1,6 @@
-+#ifndef __X86_CPU_CPU_H__
-+#define __X86_CPU_CPU_H__
-+
- /* attempt to consolidate cpu attributes */
- struct cpu_dev {
- 	void		(*c_early_init)(struct cpuinfo_x86 *c);
-@@ -24,3 +27,5 @@ void amd_init_lfence(struct cpuinfo_x86 *c);
- void amd_init_ssbd(const struct cpuinfo_x86 *c);
- void amd_init_spectral_chicken(void);
- void detect_zen2_null_seg_behaviour(void);
-+
-+#endif /* __X86_CPU_CPU_H__ */
-diff --git a/xen/arch/x86/physdev.c b/xen/arch/x86/physdev.c
-index 2f1d955a96..08b391d8f3 100644
---- a/xen/arch/x86/physdev.c
-+++ b/xen/arch/x86/physdev.c
-@@ -1,3 +1,5 @@
-+#ifndef  __X86_PHYSDEV_C__
-+#define  __X86_PHYSDEV_C__
- 
- #include <xen/init.h>
- #include <xen/lib.h>
-@@ -623,6 +625,8 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return ret;
- }
- 
-+#endif /* __X86_PHYSDEV_C__ */
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 9ff2da8fc3..11aa084887 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -6,6 +6,9 @@
-  * Copyright (c) 2002-2006, K Fraser
+diff --git a/xen/arch/x86/mm/guest_walk.c b/xen/arch/x86/mm/guest_walk.c
+index fe7393334f..66c127156d 100644
+--- a/xen/arch/x86/mm/guest_walk.c
++++ b/xen/arch/x86/mm/guest_walk.c
+@@ -9,6 +9,9 @@
+  * Parts based on earlier work by Michael A Fetterman, Ian Pratt et al.
   */
  
-+#ifndef __X86_PLATFORM_HYPERCALL_C__
-+#define __X86_PLATFORM_HYPERCALL_C__
++#ifndef __X86_MM_GUEST_WALK_C__
++#define __X86_MM_GUEST_WALK_C__
 +
  #include <xen/types.h>
- #include <xen/lib.h>
  #include <xen/mm.h>
-@@ -899,6 +902,8 @@ ret_t do_platform_op(
-     return ret;
- }
- 
-+#endif /* __X86_PLATFORM_HYPERCALL_C__ */
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/x86_64/compat/mm.c b/xen/arch/x86/x86_64/compat/mm.c
-index d54efaad21..24f7eb8788 100644
---- a/xen/arch/x86/x86_64/compat/mm.c
-+++ b/xen/arch/x86/x86_64/compat/mm.c
-@@ -1,3 +1,6 @@
-+#ifndef __X86_X86_64_COMPAT_MM_C__
-+#define __X86_X86_64_COMPAT_MM_C__
-+
- #include <xen/event.h>
- #include <xen/hypercall.h>
- #include <xen/mem_access.h>
-@@ -326,6 +329,8 @@ int compat_mmuext_op(
- }
- #endif /* CONFIG_PV */
- 
-+#endif /* __X86_X86_64_COMPAT_MM_C__ */
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/x86_64/mmconfig.h b/xen/arch/x86/x86_64/mmconfig.h
-index 2d49fc79a0..c562879c76 100644
---- a/xen/arch/x86/x86_64/mmconfig.h
-+++ b/xen/arch/x86/x86_64/mmconfig.h
-@@ -5,6 +5,9 @@
-  * Author: Allen Kay <allen.m.kay@intel.com> - adapted from linux
-  */
- 
-+#ifndef __X86_X86_64_MMCONFIG_H__
-+#define __X86_X86_64_MMCONFIG_H__
-+
- #define PCI_DEVICE_ID_INTEL_E7520_MCH    0x3590
- #define PCI_DEVICE_ID_INTEL_82945G_HB    0x2770
- 
-@@ -72,3 +75,5 @@ int pci_mmcfg_reserved(uint64_t address, unsigned int segment,
- int pci_mmcfg_arch_init(void);
- int pci_mmcfg_arch_enable(unsigned int);
- void pci_mmcfg_arch_disable(unsigned int);
-+
-+#endif /* __X86_X86_64_MMCONFIG_H__ */
-diff --git a/xen/arch/x86/x86_emulate/private.h b/xen/arch/x86/x86_emulate/private.h
-index 719dad59cd..ffa134f297 100644
---- a/xen/arch/x86/x86_emulate/private.h
-+++ b/xen/arch/x86/x86_emulate/private.h
-@@ -6,6 +6,9 @@
-  * Copyright (c) 2005-2007 XenSource Inc.
-  */
- 
-+#ifndef __X86_X86_EMULATE_PRIVATE_H__
-+#define __X86_X86_EMULATE_PRIVATE_H__
-+
- #ifdef __XEN__
- 
- # include <xen/kernel.h>
-@@ -831,3 +834,5 @@ static inline int read_ulong(enum x86_segment seg,
-     *val = 0;
-     return ops->read(seg, offset, val, bytes, ctxt);
- }
-+
-+#endif /* __X86_X86_EMULATE_PRIVATE_H__ */
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
-index e88245eae9..8977a1b82e 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -8,6 +8,9 @@
-  * Copyright (c) 2005-2007 XenSource Inc.
-  */
- 
-+#ifndef __X86_X86_EMULATE_EMULATE_C__
-+#define __X86_X86_EMULATE_EMULATE_C__
-+
- #include "private.h"
- 
- /*
-@@ -8678,3 +8681,5 @@ int x86_emulate_wrapper(
-     return rc;
+ #include <xen/paging.h>
+@@ -576,6 +579,8 @@ void *map_domain_gfn(struct p2m_domain *p2m, gfn_t gfn, mfn_t *mfn,
  }
  #endif
+ 
++#endif /* __X86_MM_GUEST_WALK_C__ */
 +
-+#endif /* __X86_X86_EMULATE_EMULATE_C__ */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/x86/mm/hap/guest_walk.c b/xen/arch/x86/mm/hap/guest_walk.c
+index d1b7c5762c..d4ffa8141f 100644
+--- a/xen/arch/x86/mm/hap/guest_walk.c
++++ b/xen/arch/x86/mm/hap/guest_walk.c
+@@ -7,6 +7,9 @@
+  * Copyright (c) 2007, XenSource Inc.
+  */
+ 
++#ifndef __X86_MM_HAP_GUEST_WALK_C__
++#define __X86_MM_HAP_GUEST_WALK_C__
++
+ #include <xen/domain_page.h>
+ #include <xen/paging.h>
+ #include <xen/sched.h>
+@@ -124,6 +127,7 @@ unsigned long cf_check hap_p2m_ga_to_gfn(GUEST_PAGING_LEVELS)(
+     return gfn_x(INVALID_GFN);
+ }
+ 
++#endif /* __X86_MM_HAP_GUEST_WALK_C__ */
+ 
+ /*
+  * Local variables:
 -- 
 2.34.1
 
