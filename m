@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FA4C83F1A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC8AC83F1B
 	for <xen-devel@archiver.kernel.org>; Tue, 29 Aug 2023 23:20:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.592512.925269 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.592514.925285 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qb808-0007XZ-Do; Tue, 29 Aug 2023 23:20:00 +0000
+	id 1qb809-0007sM-Hm; Tue, 29 Aug 2023 23:20:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 592512.925269; Tue, 29 Aug 2023 23:20:00 +0000
+Received: by outflank-mailman (output) from mailman id 592514.925285; Tue, 29 Aug 2023 23:20:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qb808-0007Wf-8m; Tue, 29 Aug 2023 23:20:00 +0000
-Received: by outflank-mailman (input) for mailman id 592512;
- Tue, 29 Aug 2023 23:19:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qb809-0007qB-7M; Tue, 29 Aug 2023 23:20:01 +0000
+Received: by outflank-mailman (input) for mailman id 592514;
+ Tue, 29 Aug 2023 23:19:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Y18t=EO=epam.com=prvs=36058b40d2=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1qb806-0007EX-Ou
- for xen-devel@lists.xenproject.org; Tue, 29 Aug 2023 23:19:58 +0000
+ id 1qb807-0006kQ-CO
+ for xen-devel@lists.xenproject.org; Tue, 29 Aug 2023 23:19:59 +0000
 Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
- [148.163.137.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 906de3b4-46c2-11ee-8783-cb3800f73035;
- Wed, 30 Aug 2023 01:19:56 +0200 (CEST)
+ [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 91395310-46c2-11ee-9b0d-b553b5be7939;
+ Wed, 30 Aug 2023 01:19:57 +0200 (CEST)
 Received: from pps.filterd (m0174682.ppops.net [127.0.0.1])
  by mx0b-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37TFMk9n021983; Tue, 29 Aug 2023 23:19:54 GMT
+ 37TFMk9p021983; Tue, 29 Aug 2023 23:19:55 GMT
 Received: from eur05-db8-obe.outbound.protection.outlook.com
  (mail-db8eur05lp2108.outbound.protection.outlook.com [104.47.17.108])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3ssdvpbm4f-9
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3ssdvpbm4f-11
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 29 Aug 2023 23:19:54 +0000
+ Tue, 29 Aug 2023 23:19:55 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
  by AM7PR03MB6371.eurprd03.prod.outlook.com (2603:10a6:20b:1b8::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Tue, 29 Aug
- 2023 23:19:47 +0000
+ 2023 23:19:48 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::9d42:8444:f00d:7895]) by VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::9d42:8444:f00d:7895%4]) with mapi id 15.20.6699.034; Tue, 29 Aug 2023
- 23:19:47 +0000
+ 23:19:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,36 +55,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 906de3b4-46c2-11ee-8783-cb3800f73035
+X-Inumbo-ID: 91395310-46c2-11ee-9b0d-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NFNvxgSYc7546OdTijmQX44mWvoH4tcLfFaU9etjqk16saqG/2vvNZuHwPYOFNxVYYZiavhrGkXxfHcHy9C8+xMgyoFoUIs0GmrFJFs4akMsUyjoL/F6BSDYO2R/C0v2ieE2SZA6sNkq0Kue3i1s3ZwcaUxswZPbcwkv/ht7z0ebblhGsA9JEgTIQibsviN7uptXXVcelUqHuKNFW1xhI4yEjRwy/E2GQuGgpiybbMKPAUw+vz245GjFk4uL2a97oHoXf+/Nh1hLGhMyZTjmea0iLtTbi9u5TETjCFgqwt0SvBZWzHOUJJrlvJPhiD0vaNP6iDIEr5pBCzunYR4VvQ==
+ b=m+E0+htBOuRqUkOXEOH0PhRZYcgmKQUqttJGKIJRnaonfSlB02lCzplD+ZVXLVVL6442sA88tyBwDqB8OZZvD4wgT5TO3TGh9dLiTXqX5mEgYQ2/U76z9NDfuGavqGNXlEzxa8S0DVT3wETa/fhWAZOenuf776bGcVu9nCHGxjcgjzqLhfzezm9A88DlViR14zIaS0sJAk3hYyaZQ2JI5pg+ifS1negLstRxRMEh7471ye6biLql1UOkbPTXZINFy6v9zeXfJ+ZoAyCivOVoyK668iTuE7CzgRQKqC7VceYFovtBuQl6epUHRCjPWnFYJ42MuZFddX2ZRVJhSBAvQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9RSd6gDogowC6YhVNDeraATH9brdfi3Ahv2ppWZqTGA=;
- b=atcBiMjCfxvymrQ4SJ0twGA54cS7eYzAlura4+BMruMC4SzahHXr/fdCX7aSgfU6NNo9H8R0J8khXoTTqgMbgBig7HojyEjLAM78Yna6hIhv6IEmQT5uXNWSTZqr3n22rxNYPle+Cltp5YIaWiJJG8Y0R0DCkqEzA5K9d/41jY2DlGnfNuo59tT2EmBFFAqHkW45ncO9GNrklrPHrBYZIO5o8D5DoI3FvYmrywwYe2pNZaJmU7/HOkGHC/YBNl+6KRIugZUBN08Y1OrbHUySa7Dwc/9fu53GXQfmRWZ9TCPBbqktSBuUHj8DtaPc/rabrPx1BsQxjkFR1vcUno4JTw==
+ bh=yi13S8hn57H9+SZArk4saLc0rRHuoOULjXT1oxZYZRk=;
+ b=moR5GxUVlhOgAP5lHmGfUM2ihkIhSTVWebcDAvvxgrsDHQGia/sMr/unYTTnpqcEZn6esviCuw+c7x3Pv3lzvfurVADpXaxXWTp+ouaBILzx1hSmwY2A14Jnz1RAaQKZCGVn3IIKlEpW9eOJMFE3w+SFkWlBd/gzIoe2i40LzY1zywSwA2dvI7Lut4HPEq2RvqP4p3uyOHkwVag2lmKY6N0gqOC7J4yKDq4EZ1X2xTA6Cn/YWNALWWXRtjmPtbFhJhzD4MHszRLK5Q0jSPSFE1AQQevaIdDmCsp82BwJb0oGL66gLoDuqV7JkaoRW6KGs93TPIJf1dDgyUcZIAz80A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9RSd6gDogowC6YhVNDeraATH9brdfi3Ahv2ppWZqTGA=;
- b=I2jgfL5DnVKAf1ygP4cdznYC0z/K09yDnV7bNh+A/HYc3CTIugtY8EDQzwojAEMr/n9XQVWAeThbpAH37OpxRK7iKjVf2UkR5LM/oMV9yCOv1dGHtKYgoqaVb+mvE5vjeBwuAxnRYSZtCQxycKtODT/aaO3VDDYAiXDXH9vla63VubOMt3hMiidJ8t9uLKpKAt458y/YszA+mN+oHDxrYt7LKEkXslgQn+5/Fwq6qiDBb/YOLBgvl6NNP2bB3Ml1SC1Vbjb/EIFykcZebaZbmZvYL0G04UzZgQkggTiBXOKpmLHX+2+lPEIpW2JbbuOv/sL90lef01kXJMabnsIiHQ==
+ bh=yi13S8hn57H9+SZArk4saLc0rRHuoOULjXT1oxZYZRk=;
+ b=dX3UFhNJRTa68AjCy+w5L8tncG354AUvN5Vye+BsFdWpgjSaadLPtv5AarUOQqldyDh2kuc4NpGgzomx+0rGODc3ZlGxWHJzjx+7xw4c5w5Bxgzq3NZumaJqZCSFOXb/SGWMFymm+8DThMZo1tjuzIAukjS9rY8gZkVMEU0fjrlWDI4xMOiGhEkn1ga2tPqyPJCyn9PI8sAymZK+hclvcNdYboMovXtRvhTV306J5eydca02mvPajSRmHnWp6sDDwSh3dhdwO3bhfkco0eX0Xr2PbYdp5oASyrdbHrwZiuFYgqyBH5ZHfinnCQPJhf944O5T5KoWbY5Syi1+sqSSkg==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
-        Oleksandr Andrushchenko
-	<Oleksandr_Andrushchenko@epam.com>,
-        =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger.pau@citrix.com>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v9 11/16] vpci/header: reset the command register when adding
- devices
-Thread-Topic: [PATCH v9 11/16] vpci/header: reset the command register when
- adding devices
-Thread-Index: AQHZ2s9MXPBeWfv85UCGprRCw+JOTA==
-Date: Tue, 29 Aug 2023 23:19:45 +0000
-Message-ID: <20230829231912.4091958-12-volodymyr_babchuk@epam.com>
+        =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>
+Subject: [PATCH v9 15/16] xen/arm: vpci: check guest range
+Thread-Topic: [PATCH v9 15/16] xen/arm: vpci: check guest range
+Thread-Index: AQHZ2s9NAWcA6L4O6U+PqFV61kFyWA==
+Date: Tue, 29 Aug 2023 23:19:47 +0000
+Message-ID: <20230829231912.4091958-16-volodymyr_babchuk@epam.com>
 References: <20230829231912.4091958-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20230829231912.4091958-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -94,45 +88,45 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.41.0
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|AM7PR03MB6371:EE_
-x-ms-office365-filtering-correlation-id: 7fe41a12-c778-4505-0a99-08dba8e66f85
+x-ms-office365-filtering-correlation-id: c40aa71a-dea3-465e-8813-08dba8e67048
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- Khx25rAAxPb5tewtTg56lJepyiILqmxKrWLWqy1AYR0tEnVJ8xZCAS1jhafIpaREn3Ew5AIlLHe91+AESZf8v4LdHZx97VRUqs39kpyGuEBNvXRjehvU3+ausJWkdHFDYkfjMxLFqiQxkVrGWhjE0BuoyiUmiA1YG6EpXnHG32YBsXNLgbii3orGellZlL6dyrKcV0xzJpalZThVjI/uKfHJPlb8/Th0WQSJiDZZM0fmNsMVWHJ2TCF+IUyb6s+C9jdT950dkYdAOJUu8blbERcNXD6rRfiW8rN1lnRKjXoASp5S2FJLFbDwx5S3mJ+lkGWliRB7D1ury6uTKcxkSErYVagUI9GSJ24HPYpXOm9wa6uKJ09zBYtB512KQcAyoFdS9tNgaYlzzV4WNZKrYpGtoxBNPt43lHE4hEXVoG5idE+o40Voi3XdfKUvOzJjtuI1hjub/JWUaSwvp4GtXUVvuhUzwnwdmax6WUA6snzfsoUIXX/32kpvywTb+K+Vp9ZIzMMeR2yRn1BhHlknQ+eVqLHEhCru8GpaeGeGaWgZBOBmP9G5q1qOmQCpHzu6TJ9kPJKDBFKrWC2nH3BD2qhQVUEMbu6hJZ4KhSfE3+OYJBRo8g2Il3bB2e+WtSU3
+ nce5vjY9Bj7S0RfJjidE5Ey36FrFrSjWBJ8HsoJgONqTUkX/GHNCLXztGOelXZfj7CzMzS24tETH4OD22SWHCIG+dkzxR2yY2JaRHrVvmpbFcTnCJyu/lOIOWfTpT5UpSJPJI06M8u0k8wwLiFZ/fN8g+rkwoEO9VvXyTn/jGc63Gl90gRleaWpPPqvIqjmn5tSk97+XbruNOG3L+tr/rIA2Pq4ixWUufp5+lYrhnnEaoCijuefXRlNIvcZuJZRX0FRcJ5SOnNF3ZQzyxFWNS4+2JBD3o6tpUyKrKqFPCBIjje7I7G+qT1OuiTxz9DjF1yfMuUUjDQAHBAY0UZFDON6nIQOskLgcga5ExiY3SPOugMNLAIy9GVuO6vl5CbkLupL+s+YYZjtKk0+irr5lmmf7GEwypd43K2QPOqjx4byjezu+KBNDj1i71WNNtCeKODHmrCqZdpnaITwiIGl6wq8sUefuXuvSByy6HqAHypsrXpuMWXdi4M0yvTBQ1HB3hTiXZ0E5vKomV/Md1k2yCArLvk2dmodgvwYEfWlTesScw+xXUDiCteeLozbnYzSt/RAv+aJs03jkXg1jyikCsHau6WuOy/A/Q8/Yboo5CBkHz8zTGRdRuJyzBZNqJYg1
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(39860400002)(376002)(396003)(136003)(366004)(451199024)(1800799009)(186009)(71200400001)(6512007)(6506007)(6486002)(478600001)(55236004)(76116006)(1076003)(2616005)(107886003)(26005)(2906002)(6916009)(64756008)(66446008)(54906003)(316002)(5660300002)(66476007)(66556008)(91956017)(66946007)(41300700001)(83380400001)(8936002)(4326008)(8676002)(36756003)(38070700005)(38100700002)(86362001)(122000001);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(39860400002)(376002)(396003)(136003)(366004)(451199024)(1800799009)(186009)(71200400001)(6512007)(6506007)(6486002)(478600001)(55236004)(76116006)(1076003)(2616005)(26005)(4744005)(2906002)(6916009)(64756008)(66446008)(54906003)(316002)(5660300002)(66476007)(66556008)(91956017)(66946007)(41300700001)(83380400001)(8936002)(4326008)(8676002)(36756003)(38070700005)(38100700002)(86362001)(122000001);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?kKVjg2jz1fMVhMkci3qaTCO5RXnT2hxuIhVQVDTpnRumPOqtHX7kqcRZNz?=
- =?iso-8859-1?Q?4gBLGbNp8yAtUFdIWd7Rg8x8OQBMxrHkYYVR01e9RlSMwMoBFkQZqAW3a1?=
- =?iso-8859-1?Q?P03ycvzU4SAzOf43q+fNaabmA9miI6CAH6SBx3xPyRoSdJ68A/FIbGwfqt?=
- =?iso-8859-1?Q?J/jAqzMg5ujnSz3Y51IJ5l3hmw0+l1onCDwPT63IqEFwRY7wA71aMfy2so?=
- =?iso-8859-1?Q?gGgcnmeyb8LxoyB4xE8pddHkT3IIaLTnHL2TYqTmUwsVgk/Qvaf0/v6clK?=
- =?iso-8859-1?Q?1RgG2VfmXVU9tf0mCGl2EfFlWIWs+tA1TY2GoNHyMiUtdVbzDHL252mlqL?=
- =?iso-8859-1?Q?Ygd4XvikyDNLVG2EgoVrfv7e8ug8XpblP7awshlXY1Fu02gyUaRglYV4qa?=
- =?iso-8859-1?Q?mmXgw2REaGF/m7XKrgF4ocqxRsGfplMk1E8B3XDRhyPPZgE2BtyNWQ4I5q?=
- =?iso-8859-1?Q?/rtze5125XmP9ptNL4M3fu1THndUxBapgUnMFeSOgCmTxnabmZIzyU9au+?=
- =?iso-8859-1?Q?LBvISciGyHLHrZ7GH6tQL3zBhKTHjM4SLR1ZiSQg9TAxhLLvddwlpvYXm3?=
- =?iso-8859-1?Q?4XSStH2KOlEFkLEbewaVBbezTvmKWOUvMOc/KfmO//WS8myBXd9V+ZoAWa?=
- =?iso-8859-1?Q?jw6qOPxB+RLQEoQHNIuUWDvOjONkx9MxSnFG5Hifv8nFR1otuQpk1xGiDI?=
- =?iso-8859-1?Q?RGeHyzRgcpwYr1y9NLtkZvRssXF1VqFqLGilZ9XR0sz9fOWpA4WxY+wwQl?=
- =?iso-8859-1?Q?HVcHSpf45TMMdnlgL/BsEcZmETjG3BlJ4dlTSLPS9hhJ2Mph3RC4kV/1GS?=
- =?iso-8859-1?Q?f73mTCjFZ0aXKKgfUlz/1nUAOkYiz9Lc3U++TolGtIU20uEiohkq4tQy/0?=
- =?iso-8859-1?Q?Uk2a9YtQ1PslPgEp/FKtPjcd1BphV4oZ/ZQH+hMOCbODmvp1fb+B/L5nCW?=
- =?iso-8859-1?Q?1W/Qmn2ViJF2Mp1LgWQNlJ9pqXMzvExY9xshwDfmpGBJzT6kNvYnHm6gM0?=
- =?iso-8859-1?Q?OLHD9O3zJ/GcjuwxLQ6zQCQeTxBjKzh82wJ4DdZlzuGR/ZLpJdFgEkazH6?=
- =?iso-8859-1?Q?ij4jKZqzfX4t5jkhWpRL4o02M26hR/FWWXm9XQkA/nJWpSocqx16CLtiqZ?=
- =?iso-8859-1?Q?CgflUHkNNoOUfgpkPVrX6dCFSlELztZIXUstcH819Tls7Pc9kMvsGnf65+?=
- =?iso-8859-1?Q?yDBi2W/ASMkg36nZYvsAzwesvTWyNObxy3im2u4DRYOqSvAI90QNwifIIf?=
- =?iso-8859-1?Q?s4PL6DPK3qyd5o9rcIoqm9rnoXUGSw5D+M3IleAVfSMQ+A/PoSYG/bKEP/?=
- =?iso-8859-1?Q?+QmGVG/CGKApwUxI0d/4X7x/JVMLp6mkrpt3jofixwWOUVJ0/YrQCUbxAL?=
- =?iso-8859-1?Q?HZEjf6mz6E/XaPZUT8aGHUMpe9Z93zB+X///CyNlC/uIozEVTygdUIut83?=
- =?iso-8859-1?Q?aL68tYSg9j5EPk3CQzWC2eVNAdAfuNLUoWEM1soyrXVsMoVhsxMxIKdyW6?=
- =?iso-8859-1?Q?ddeZMpzQ5WJ+peu3qXzlgrN9u0bQw8yauh5Mc5JPP7W59bmbX6FI0WEWIX?=
- =?iso-8859-1?Q?JfBnKRbXxsWNfSvM05o33+q79+VNK0j035b8MOqguIUO/EBTp3/W90qLOZ?=
- =?iso-8859-1?Q?J8q49OuKkVonlqV0pjFvTQajEqVSBd+bgEEyNC4hy/HUZqreFwKN5gdg?=
+ =?iso-8859-1?Q?v3AAlS0/O+hVoALSrmYskDyzgHKG9tnCFfK0g1fMGoPPYIkL4OEv/qZIQL?=
+ =?iso-8859-1?Q?wWWvRuQrxj0j8tRA0LbxiPavBlCGPuRBvW002OhWolk6Lszxk4emN5vqlr?=
+ =?iso-8859-1?Q?KXP8MxjgW2OxJLA8iVG64VzjaBQc/cznAcMm+347uUm7spITSMvo1Bb+XK?=
+ =?iso-8859-1?Q?quKxk3WeGhCbSlT0hOiK0kDQ6mceUsRGW8rCSeI7+R70YVxXbTlAdikQFk?=
+ =?iso-8859-1?Q?HZ+Rimd1ksco6RPpfXHyUlc9KdRwv0Dq5j4Y9ctmtXgKG1p8i0OUjglD5K?=
+ =?iso-8859-1?Q?hZ03M0Kt8iVwuCF/97m9Sd0ajDtynQN8j97LH632EcP7+aao4MD7+ugHgE?=
+ =?iso-8859-1?Q?R2XQmuED2K32MkxcB+BQ6+OpLMIT7UkRte8mlgbanf0lQyV15bWyJ/uaxu?=
+ =?iso-8859-1?Q?e8KEQ02EI9w04g+lEBdk2OANAKU4kKPO7e8zXy+bpVf2thlAttQCl5BbqL?=
+ =?iso-8859-1?Q?l5/WSX9Eu8AS31TETJSdb3BMqDL5ALaOP1tF3Yi9tuXyCJ0c34uKti6UUP?=
+ =?iso-8859-1?Q?lJrHFzMYt4pU/p5tkdvD88dqM5MN/3uSNjz3EIuaYKZ5Gjak8VDk1jvtUn?=
+ =?iso-8859-1?Q?m8IAcB0it0W2vTlKTgS/kWPKDhYth6ME/abS7nLo6WmCdvGe6BUpabUC8J?=
+ =?iso-8859-1?Q?x08I85BdPzAOH8pW12EaTPDFW5Mjkn/ugqeuACRt3KlcJuKPtK8uUWM/6s?=
+ =?iso-8859-1?Q?s+LqNSbJXOkCFF32IbYrpUA4RC7wgO3xPZpjQhWxwMQmJkRhdUx0fAhqU0?=
+ =?iso-8859-1?Q?JgSP9kdgB2USpGttJ3HtnrvIBNM0MmhsXO6Vs6FHW7x42FWrYB2R13mLm8?=
+ =?iso-8859-1?Q?OVKCFE77BH65BCM/XS6gdRKHy88LhEtk3SVMMhbYaSHAAmU1/O7VtB7+ao?=
+ =?iso-8859-1?Q?D8Tvq0o1FFpauF8YdOOwYn9HtY/fc5Ww1MK/eQM+3YRrq1MG47kc5qC4G3?=
+ =?iso-8859-1?Q?FLhKF9nVVdFrGloOANaxVnOkVE0CeCr2MV7G87SgbnIwyo+SBHg3FdCfIu?=
+ =?iso-8859-1?Q?3XCrZ0zF/pqRMhVocRRhWg3xIaiNuIwmgu50kElRUkxyyHKEySUaMJRL5H?=
+ =?iso-8859-1?Q?8c2PGJN8FWu8wH3ZMIahLY59TOcIxuX2AIkYHGpJ73j6LCgnOg5VKnVYgm?=
+ =?iso-8859-1?Q?w3t99Rk62Rnf22im7DktL6rdnOB0jI5LOVppJ4m///LudZ9qf90u9G1QUo?=
+ =?iso-8859-1?Q?0VIkZkwxkJQXYhlrDyRvqp079r7OxXHztSBmkq8FhbSUvB9IzstcsUmaS6?=
+ =?iso-8859-1?Q?GCUW8AxM20W7dauiD8PkRyAxcnVacLy+LXnPPiO4W+TB3MnxRL2e2ca0TZ?=
+ =?iso-8859-1?Q?T9/JvIXY4+F8PuR/3ltZv8ywDqHlhc8QFUcqu5t7n8GPvLWUmYSwahn1tx?=
+ =?iso-8859-1?Q?7dHNbDrU+ls+uziWB1x0RnklyO17ltZAXsXsvFWF8Rb6r0gq3tWgnwZGiR?=
+ =?iso-8859-1?Q?7xWL0C7dN1gsRfdU5mdh6/5b/+csNkMIDXxkZsIKWcU3aKgx1jtrhrcxsN?=
+ =?iso-8859-1?Q?BUNtsJ78qwFhC8xS3WhIx3uyJXNNJH6MgiAGEo813WHVdhzLlOKbtkEH5L?=
+ =?iso-8859-1?Q?L18HOywf6FH1KiUK0N7SBk3NXneB7ZOoMP8h/pjxWKgJb/iiGmxUZIljUB?=
+ =?iso-8859-1?Q?I/H1GkgM5jtazSyFZErIiMYGIG807/lINN75Qw5MQwG4Vvj6Az1SzW2A?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -140,16 +134,16 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7fe41a12-c778-4505-0a99-08dba8e66f85
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2023 23:19:45.7988
+X-MS-Exchange-CrossTenant-Network-Message-Id: c40aa71a-dea3-465e-8813-08dba8e67048
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2023 23:19:47.1794
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bZCU0z54kkWGdCZrSNmr86fffomPYbPYVxkN/dRFcei4yxubJXWfxl/MwisPI2rSQVtN3JntZKSrwBx8d1ekNhoH5fjzOo4W9eN4zVcHkwM=
+X-MS-Exchange-CrossTenant-userprincipalname: gytcEUZUjVKHGaY2dSVtG+1lgSDsEAeVWo0uaQpqp8wFJWoLkVSXTPav+fygCR/hXkPL4DzN+11mZhDA/mfmu96o/FrtL23coUBEB+OFbUo=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR03MB6371
-X-Proofpoint-ORIG-GUID: MQgBqpkbI7iOVGkXuVffYd7iKFg8BBkZ
-X-Proofpoint-GUID: MQgBqpkbI7iOVGkXuVffYd7iKFg8BBkZ
+X-Proofpoint-ORIG-GUID: aFHW6Lc_ErMGQ8h4n_X-XZDPu2KyqPqd
+X-Proofpoint-GUID: aFHW6Lc_ErMGQ8h4n_X-XZDPu2KyqPqd
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
  definitions=2023-08-29_16,2023-08-29_01,2023-05-22_02
@@ -159,61 +153,37 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malware
  clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2308100000 definitions=main-2308290202
 
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
 
-Reset the command register when assigning a PCI device to a guest:
-according to the PCI spec the PCI_COMMAND register is typically all 0's
-after reset, but this might not be true for the guest as it needs
-to respect host's settings.
-For that reason, do not write 0 to the PCI_COMMAND register directly,
-but go through the corresponding emulation layer (cmd_write), which
-will take care about the actual bits written. Also, honor value of
-PCI_COMMAND_VGA_PALETTE value, which is set by firmware.
+Skip mapping the BAR if it is not in a valid range.
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 ---
-Since v9:
-- Honor PCI_COMMAND_VGA_PALETTE bit
-Since v6:
-- use cmd_write directly without introducing emulate_cmd_reg
-- update commit message with more description on all 0's in PCI_COMMAND
-Since v5:
-- updated commit message
-Since v1:
- - do not write 0 to the command register, but respect host settings.
----
- xen/drivers/vpci/header.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ xen/drivers/vpci/header.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index e351db4620..1d243eeaf9 100644
+index 1d243eeaf9..dbabdcbed2 100644
 --- a/xen/drivers/vpci/header.c
 +++ b/xen/drivers/vpci/header.c
-@@ -762,6 +762,12 @@ static int cf_check init_bars(struct pci_dev *pdev)
-         return -EOPNOTSUPP;
-     }
+@@ -345,6 +345,15 @@ static int modify_bars(const struct pci_dev *pdev, uin=
+t16_t cmd, bool rom_only)
+              bar->enabled =3D=3D !!(cmd & PCI_COMMAND_MEMORY) )
+             continue;
 =20
-+    /* Reset the command register for guests. We want to preserve only
-+     * PCI_COMMAND_VGA_PALETTE as it is configured by firmware */
-+    cmd =3D pci_conf_read16(pdev->sbdf, PCI_COMMAND);
-+    if ( !is_hwdom )
-+        cmd_write(pdev, PCI_COMMAND, cmd & PCI_COMMAND_VGA_PALETTE, header=
-);
++#ifdef CONFIG_ARM
++        if ( !is_hardware_domain(pdev->domain) )
++        {
++            if ( (start_guest < PFN_DOWN(GUEST_VPCI_MEM_ADDR)) ||
++                 (end_guest >=3D PFN_DOWN(GUEST_VPCI_MEM_ADDR + GUEST_VPCI=
+_MEM_SIZE)) )
++                continue;
++        }
++#endif
 +
-     /* Setup a handler for the command register. */
-     if ( is_hwdom )
-         rc =3D vpci_add_register(pdev->vpci, vpci_hw_read16, cmd_write, PC=
-I_COMMAND,
-@@ -776,7 +782,6 @@ static int cf_check init_bars(struct pci_dev *pdev)
-         return 0;
-=20
-     /* Disable memory decoding before sizing. */
--    cmd =3D pci_conf_read16(pdev->sbdf, PCI_COMMAND);
-     if ( cmd & PCI_COMMAND_MEMORY )
-         pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd & ~PCI_COMMAND_MEMOR=
-Y);
-=20
+         if ( !pci_check_bar(pdev, _mfn(start), _mfn(end)) )
+         {
+             printk(XENLOG_G_WARNING
 --=20
 2.41.0
 
