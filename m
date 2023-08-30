@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BC7DC83F01
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Aug 2023 15:53:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.593116.926031 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52356C83F01
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Aug 2023 15:53:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.593120.926064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbNVd-00065C-Pv; Wed, 30 Aug 2023 15:53:33 +0000
+	id 1qbNVg-0006jb-00; Wed, 30 Aug 2023 15:53:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 593116.926031; Wed, 30 Aug 2023 15:53:33 +0000
+Received: by outflank-mailman (output) from mailman id 593120.926064; Wed, 30 Aug 2023 15:53:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbNVd-000655-NK; Wed, 30 Aug 2023 15:53:33 +0000
-Received: by outflank-mailman (input) for mailman id 593116;
- Wed, 30 Aug 2023 15:53:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qbNVf-0006hR-P5; Wed, 30 Aug 2023 15:53:35 +0000
+Received: by outflank-mailman (input) for mailman id 593120;
+ Wed, 30 Aug 2023 15:53:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Xver=EP=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1qbNVb-00064j-Ti
- for xen-devel@lists.xenproject.org; Wed, 30 Aug 2023 15:53:31 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5d425d57-474d-11ee-8783-cb3800f73035;
- Wed, 30 Aug 2023 17:53:29 +0200 (CEST)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-401da71b7c5so15834335e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 30 Aug 2023 08:53:29 -0700 (PDT)
+ id 1qbNVd-00064u-TS
+ for xen-devel@lists.xenproject.org; Wed, 30 Aug 2023 15:53:33 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5e4d1b19-474d-11ee-9b0d-b553b5be7939;
+ Wed, 30 Aug 2023 17:53:31 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-3fee5ddc23eso54102605e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Aug 2023 08:53:31 -0700 (PDT)
 Received: from localhost.localdomain ([66.81.173.62])
  by smtp.gmail.com with ESMTPSA id
- b4-20020adff244000000b0031423a8f4f7sm17000009wrp.56.2023.08.30.08.53.28
+ b4-20020adff244000000b0031423a8f4f7sm17000009wrp.56.2023.08.30.08.53.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 08:53:28 -0700 (PDT)
+ Wed, 30 Aug 2023 08:53:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,32 +47,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d425d57-474d-11ee-8783-cb3800f73035
+X-Inumbo-ID: 5e4d1b19-474d-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1693410809; x=1694015609; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zgFprSpF684gDhgVue83BunhcMq8nZ7UpRqzRTLCkOY=;
-        b=QfvWPzMIjD+dVulfMtyJ444WFvq6k93ZnU566kne96Po0nppJrO2nVtogN9bx+Vk3c
-         HhzKhnQi1KCk6LHvXU3WbKjZaJ/Qj4Oy8nn35IAPqe7wGPhWtGLk9uDzBw9/eJ5wrDyE
-         HXx5mGoewzTcGOxknMrUraTnrrNexJbNSB88Y=
+        d=cloud.com; s=cloud; t=1693410811; x=1694015611; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=R8UgQOatn3NPVJHNw6kasdgFNmIqy5Hk8BBIW+w2Wt0=;
+        b=VTBensWZxsJ8fiJ7iO8Ia0Drr7Azk5kThLIQYEdw6qNUOSgJI517gmvQgeqjKjBvLn
+         L6jo1nRGTh5A17nrjzEHJeoAGYyXtlYqqlMStpLRD5hY55vMOAJj+VVTV+bUnejAj564
+         rexXmaXj53oZGpvAgxt5rBNwZzepKO5Tmr2vU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693410809; x=1694015609;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zgFprSpF684gDhgVue83BunhcMq8nZ7UpRqzRTLCkOY=;
-        b=kvStSLFTvLaLiZXR9Y0YUTL2vavZsT9jKCMswqZkEPiOIXr/6Dw8HlThV2mjDMNSAz
-         BM2gkjf+nSVUKKx3DuApIcP1EWdcqo3xhnR/K185uYjtV3+TOlVF8fFDbEOy5XRmcSx3
-         9dfmxLvcuv9TKTqL5S0MfhpryaySo+NNF7soD1lEIw8cwGuO+KuTj3u2aSNKTX1m6Z3I
-         IkiWnIBurFjJC7qoQApMmUM5MGN2Fc8YSdVgiC3UDkV411ID3yF2BDwPKm9SMcev/nw4
-         NyZMktseer+f0JBxVPVUxT7bg3bExTszXuULTxOxo91qtCLCZVYJCbG4KB3Vyw57f4to
-         O/0w==
-X-Gm-Message-State: AOJu0Yxq7sRJGVUFxy4fwI0r1LH3Yu4ctYBMCvzPZaKxZwISkQ/JjQQm
-	+RqbJeqSn6rd5w7+1i4Q9XsUB+TTCf0Nnb7sPPU=
-X-Google-Smtp-Source: AGHT+IFddvf2Q+Owe/TEqPTLzef95kwb7kAD0mOciGkW60nUtF5+77cEcNnxjtnHq+vNbtdNOmDeiw==
-X-Received: by 2002:a7b:ca47:0:b0:401:a0b1:aef6 with SMTP id m7-20020a7bca47000000b00401a0b1aef6mr2198039wml.2.1693410809033;
-        Wed, 30 Aug 2023 08:53:29 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1693410811; x=1694015611;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=R8UgQOatn3NPVJHNw6kasdgFNmIqy5Hk8BBIW+w2Wt0=;
+        b=EPiAbarz3Fu6MprSPbQzfaNTI79MK2IcbOj8KiAyOuaey9cuw2RoNwxfgLThO36GcR
+         K7KJbseZs9UjVjL6VeVEhDzCxFZ0iYUEkMou0SOMdbhLWJOiUtzi10YZ3N4oHeTRKC2K
+         E1lBG4s2pTUCkA62ieVZDRjMDBrRDRK8vd6hYVQpvFnkSKcUROrHeRfLtU8dwUfwUcAB
+         BzDnFoCyEUdJWIa3DiQDMSB9AD7+Ve/F4c/wv4dPgHtCoN9SmU1wFi68YiG3bB2WLAuQ
+         TMgodX4YCyYpdNfuCv2PbsLSsLiF1DSynBQcj2zN124gWtCt2sDSndYeNyrLKvKuiVEu
+         0P7A==
+X-Gm-Message-State: AOJu0Yx/Zt1ABgLYhcVg/+KuQAJjA4ZGJCagzcHzZda9wphjf7Cjl/Xa
+	6zquL+7hhPbLC/lHtLRN17GypHPlyOgDliHiUU0=
+X-Google-Smtp-Source: AGHT+IGYgQhnwEHlhwfzZkwAAdRNrGsano6Huf/C2z6GFWnt+n4nAo64M8BC5Lw9Qc5DMykRw9H+bQ==
+X-Received: by 2002:a1c:7c19:0:b0:401:6f48:f3b5 with SMTP id x25-20020a1c7c19000000b004016f48f3b5mr2108170wmc.32.1693410810977;
+        Wed, 30 Aug 2023 08:53:30 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -80,67 +81,163 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v8 0/4] Prevent attempting updates known to fail
-Date: Wed, 30 Aug 2023 16:53:22 +0100
-Message-Id: <20230830155326.10199-1-alejandro.vallejo@cloud.com>
+Subject: [PATCH v8 3/4] x86: Read MSR_ARCH_CAPS immediately after early_microcode_init()
+Date: Wed, 30 Aug 2023 16:53:25 +0100
+Message-Id: <20230830155326.10199-4-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230830155326.10199-1-alejandro.vallejo@cloud.com>
+References: <20230830155326.10199-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Now that XENLOG_INFO is the default logging level...
+Move MSR_ARCH_CAPS read code from tsx_init() to early_cpu_init(). Because
+microcode updates might make them that MSR to appear/have different values
+we also must reload it after a microcode update in early_microcode_init().
 
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
 v8:
-  * Fixed last bits mentioned by Jan in v7/patch1 (v8/patch2)
-  * Rolled back to having new printk as INFO
-  * Added v8/patch1 to ensure the existing early exit from
-    early_cpu_init() has INFO severity as well.
+ * No change
+---
+ xen/arch/x86/cpu/common.c         | 20 +++++++++++++++-----
+ xen/arch/x86/cpu/microcode/core.c |  9 +++++++++
+ xen/arch/x86/include/asm/setup.h  |  2 +-
+ xen/arch/x86/setup.c              |  2 +-
+ xen/arch/x86/tsx.c                | 16 ++++------------
+ 5 files changed, 30 insertions(+), 19 deletions(-)
 
-Original cover letter:
-
-Under certain conditions a CPU may not be able to perform microcode updates
-even if hardware exists to that effect. In particular:
-
- * If Xen runs under certain hypervisors they won't allow microcode
-   updates, and will signal this fact by reporting a microcode revision of
-   -1.
- * If the DIS_MCU_LOAD bit is set, which is expected in some baremetal
-   clouds where the owner may not trust the tenant, then the CPU is not
-   capable of loading new microcode.
-
-This series adds logic so that in both of these cases we don't needlessly
-attempt updates that are not going to succeed. Patch summary:
-
-Patch 1 Modifies the severity of the printk statement in
-        early_microcode_init() to be INFO
-
-Patch 2 Ignores microcode facilities when the current microcode revision is -1
-        (was v7/patch1)
-
-Patch 3 Moves the MSR_ARCH_CAPS read in tsx_init() to early_cpu_init() and
-        early_microcode_init()
-        (was v7/patch2)
-
-Patch 4 Adds the logic to detect microcode updates being disabled on Intel.
-        (was v7/patch3)
-
-Alejandro Vallejo (4):
-  x86/microcode: WARN->INFO for the "no ucode loading" log message
-  x86/microcode: Ignore microcode loading interface for revision = -1
-  x86: Read MSR_ARCH_CAPS immediately after early_microcode_init()
-  x86/microcode: Disable microcode update handler if DIS_MCU_UPDATE is
-    set
-
- xen/arch/x86/cpu/common.c             | 20 ++++++++++----
- xen/arch/x86/cpu/microcode/core.c     | 40 +++++++++++++++++++++++----
- xen/arch/x86/cpu/microcode/intel.c    | 13 +++++++++
- xen/arch/x86/cpu/microcode/private.h  |  7 +++++
- xen/arch/x86/include/asm/cpufeature.h |  1 +
- xen/arch/x86/include/asm/msr-index.h  |  5 ++++
- xen/arch/x86/include/asm/setup.h      |  2 +-
- xen/arch/x86/setup.c                  |  2 +-
- xen/arch/x86/tsx.c                    | 16 +++--------
- 9 files changed, 82 insertions(+), 24 deletions(-)
-
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 6fada384a1..3fd4fd0654 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -299,7 +299,7 @@ static inline u32 phys_pkg_id(u32 cpuid_apic, int index_msb)
+ 
+    WARNING: this function is only called on the BP.  Don't add code here
+    that is supposed to run on all CPUs. */
+-void __init early_cpu_init(void)
++void __init early_cpu_init(bool verbose)
+ {
+ 	struct cpuinfo_x86 *c = &boot_cpu_data;
+ 	u32 eax, ebx, ecx, edx;
+@@ -320,6 +320,8 @@ void __init early_cpu_init(void)
+ 	case X86_VENDOR_SHANGHAI: this_cpu = &shanghai_cpu_dev; break;
+ 	case X86_VENDOR_HYGON:    this_cpu = &hygon_cpu_dev;    break;
+ 	default:
++		if (!verbose)
++			break;
+ 		printk(XENLOG_ERR
+ 		       "Unrecognised or unsupported CPU vendor '%.12s'\n",
+ 		       c->x86_vendor_id);
+@@ -336,10 +338,13 @@ void __init early_cpu_init(void)
+ 	c->x86_capability[FEATURESET_1d] = edx;
+ 	c->x86_capability[FEATURESET_1c] = ecx;
+ 
+-	printk(XENLOG_INFO
+-	       "CPU Vendor: %s, Family %u (%#x), Model %u (%#x), Stepping %u (raw %08x)\n",
+-	       x86_cpuid_vendor_to_str(c->x86_vendor), c->x86, c->x86,
+-	       c->x86_model, c->x86_model, c->x86_mask, eax);
++	if (verbose)
++		printk(XENLOG_INFO
++		       "CPU Vendor: %s, Family %u (%#x), "
++		       "Model %u (%#x), Stepping %u (raw %08x)\n",
++		       x86_cpuid_vendor_to_str(c->x86_vendor), c->x86,
++		       c->x86, c->x86_model, c->x86_model, c->x86_mask,
++		       eax);
+ 
+ 	if (c->cpuid_level >= 7) {
+ 		uint32_t max_subleaf;
+@@ -348,6 +353,11 @@ void __init early_cpu_init(void)
+ 			    &c->x86_capability[FEATURESET_7c0],
+ 			    &c->x86_capability[FEATURESET_7d0]);
+ 
++		if (test_bit(X86_FEATURE_ARCH_CAPS, c->x86_capability))
++			rdmsr(MSR_ARCH_CAPABILITIES,
++			      c->x86_capability[FEATURESET_m10Al],
++			      c->x86_capability[FEATURESET_m10Ah]);
++
+ 		if (max_subleaf >= 1)
+ 			cpuid_count(7, 1, &eax, &ebx, &ecx,
+ 				    &c->x86_capability[FEATURESET_7d1]);
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 01f1dd4710..b3df4d40e6 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -887,5 +887,14 @@ int __init early_microcode_init(unsigned long *module_map,
+     if ( ucode_mod.mod_end || ucode_blob.size )
+         rc = early_microcode_update_cpu();
+ 
++    /*
++     * Some CPUID leaves and MSRs are only present after microcode updates
++     * on some processors. We take the chance here to make sure what little
++     * state we have already probed is re-probed in order to ensure we do
++     * not use stale values. tsx_init() in particular needs to have up to
++     * date MSR_ARCH_CAPS.
++     */
++    early_cpu_init(false);
++
+     return rc;
+ }
+diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+index b0e6a39e23..8350167650 100644
+--- a/xen/arch/x86/include/asm/setup.h
++++ b/xen/arch/x86/include/asm/setup.h
+@@ -15,7 +15,7 @@ extern uint64_t boot_tsc_stamp;
+ 
+ extern void *stack_start;
+ 
+-void early_cpu_init(void);
++void early_cpu_init(bool verbose);
+ void early_time_init(void);
+ 
+ void set_nr_cpu_ids(unsigned int max_cpus);
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 3358d9a0ff..3641d5fbac 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1213,7 +1213,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         panic("Bootloader provided no memory information\n");
+ 
+     /* This must come before e820 code because it sets paddr_bits. */
+-    early_cpu_init();
++    early_cpu_init(true);
+ 
+     /* Choose shadow stack early, to set infrastructure up appropriately. */
+     if ( !boot_cpu_has(X86_FEATURE_CET_SS) )
+diff --git a/xen/arch/x86/tsx.c b/xen/arch/x86/tsx.c
+index 80c6f4cedd..50d8059f23 100644
+--- a/xen/arch/x86/tsx.c
++++ b/xen/arch/x86/tsx.c
+@@ -39,9 +39,10 @@ void tsx_init(void)
+     static bool __read_mostly once;
+ 
+     /*
+-     * This function is first called between microcode being loaded, and CPUID
+-     * being scanned generally.  Read into boot_cpu_data.x86_capability[] for
+-     * the cpu_has_* bits we care about using here.
++     * This function is first called between microcode being loaded, and
++     * CPUID being scanned generally. early_cpu_init() has already prepared
++     * the feature bits needed here. And early_microcode_init() has ensured
++     * they are not stale after the microcode update.
+      */
+     if ( unlikely(!once) )
+     {
+@@ -49,15 +50,6 @@ void tsx_init(void)
+ 
+         once = true;
+ 
+-        if ( boot_cpu_data.cpuid_level >= 7 )
+-            boot_cpu_data.x86_capability[FEATURESET_7d0]
+-                = cpuid_count_edx(7, 0);
+-
+-        if ( cpu_has_arch_caps )
+-            rdmsr(MSR_ARCH_CAPABILITIES,
+-                  boot_cpu_data.x86_capability[FEATURESET_m10Al],
+-                  boot_cpu_data.x86_capability[FEATURESET_m10Ah]);
+-
+         has_rtm_always_abort = cpu_has_rtm_always_abort;
+ 
+         if ( cpu_has_tsx_ctrl && cpu_has_srbds_ctrl )
 -- 
 2.34.1
 
