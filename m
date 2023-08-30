@@ -4,41 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6199DC83F15
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Aug 2023 16:57:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.593170.926102 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB9E1C83F15
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Aug 2023 16:57:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.593173.926111 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbOUm-0002eO-Au; Wed, 30 Aug 2023 16:56:44 +0000
+	id 1qbOVI-000364-JD; Wed, 30 Aug 2023 16:57:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 593170.926102; Wed, 30 Aug 2023 16:56:44 +0000
+Received: by outflank-mailman (output) from mailman id 593173.926111; Wed, 30 Aug 2023 16:57:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbOUm-0002eH-7T; Wed, 30 Aug 2023 16:56:44 +0000
-Received: by outflank-mailman (input) for mailman id 593170;
- Wed, 30 Aug 2023 16:56:43 +0000
+	id 1qbOVI-00035x-G3; Wed, 30 Aug 2023 16:57:16 +0000
+Received: by outflank-mailman (input) for mailman id 593173;
+ Wed, 30 Aug 2023 16:57:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=o6gQ=EP=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
- id 1qbOUl-0002eB-Ec
- for xen-devel@lists.xenproject.org; Wed, 30 Aug 2023 16:56:43 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
+ <SRS0=6FTw=EP=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1qbOVH-00034Q-3j
+ for xen-devel@lists.xenproject.org; Wed, 30 Aug 2023 16:57:15 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 309c0c3f-4756-11ee-8783-cb3800f73035;
- Wed, 30 Aug 2023 18:56:40 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-307d20548adso4931116f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 30 Aug 2023 09:56:40 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
- by smtp.gmail.com with ESMTPSA id
- x14-20020a05600c2a4e00b003fed70fb09dsm2797536wme.26.2023.08.30.09.56.39
+ id 44b1e743-4756-11ee-8783-cb3800f73035;
+ Wed, 30 Aug 2023 18:57:14 +0200 (CEST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-500a8b2b73eso97158e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Aug 2023 09:57:14 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ er7-20020a05651248c700b004fd36c89c3csm2458240lfb.43.2023.08.30.09.57.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 09:56:39 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 09DFB1FFBB;
- Wed, 30 Aug 2023 17:56:39 +0100 (BST)
+ Wed, 30 Aug 2023 09:57:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,104 +46,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 309c0c3f-4756-11ee-8783-cb3800f73035
+X-Inumbo-ID: 44b1e743-4756-11ee-8783-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1693414600; x=1694019400; darn=lists.xenproject.org;
+        d=gmail.com; s=20221208; t=1693414633; x=1694019433; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:user-agent:from:to:cc:subject:date:message-id:reply-to;
-        bh=k1Xb31+XM7zyf4p96PIo9CJeeb1rikbvP4JHVrcSM/U=;
-        b=vXrdcVGoawYtV0sS1kQMveUCkMocu24LkkZzHbcCv0O1TSFpoOvs8zFAgyl0neNHkb
-         yaGVNnc/OhiP0mCU2Cmq9zxuCJgQCK4RZmTAXlGvgexOxkPTHECbz8+6pkInqhGqTCF9
-         acrPQNO4WIsuPrVn9MOLuEDrGp2T3ylh9UJ+pjShKJd22OUp4YKYZjzsL1HFZaXjTH7s
-         K3rAl2G7JSqv/BDozKZAyF5DHmRggk9Ep7q7+TGy9u2Ay520P9aYEPkiM3XQVP8gJhs5
-         kcbBGKz1Iwgs3+A7KbCO8WajR9r+pPaQYL9B4BVxyoPj54/52qLX56u2CcrTNgGgVvJS
-         KB7A==
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=l++Zpa9W3cVegRsEsIxzmI6J+GeofQzkS3WKSaWLCrY=;
+        b=d7jMPKmZTiYsL1CLUQB8VLiQGy+9hEU2Yevc4WlBR8EncxWsrGGzYdIyYwKufBkRXE
+         Zxerkhgz0uBBhDe2r5pRifQz1RJJHEshgSloncl+70kvKQJS8wbMjZdHkrflUgpczWCw
+         qeeOJnUs/m7eiK3uowD3YMDJPgHEkuAn73+gR5a5UkwjrV/4px5F8rJehGhVapYIB0aU
+         25EwO18feNfG1gCqr/xDq7j4jqPBMsJAvQWzlV2fTmnyvUrt0ZEnmWExBrL8FEVI7MqI
+         tttdePKyG0vEzfNz8Df28BdPDAb1T2E7qYWr8wdshMiudTuYCn+/m7AXPnok1Si/NbGR
+         TaDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693414600; x=1694019400;
+        d=1e100.net; s=20221208; t=1693414633; x=1694019433;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:user-agent:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=k1Xb31+XM7zyf4p96PIo9CJeeb1rikbvP4JHVrcSM/U=;
-        b=XjVHNInDaARnv0exXw0Y+lIMuGN4/WMznSEkvsrVy41JVEtuveeJmc8kjCRyL56WNU
-         ziUELhYK8voy6B9wo17ddNsvn0s6qxJOTsyRHwMjRCvQRARHNiDYD6xkHUOZcBQTNW0u
-         CAv52ZS0t02KHZBX//LdsyNUlr6dhcdU5kLz5xMV8RHwT4FYtivifqeOXhJKJLksLT2R
-         W9CIhFA7trMz76B9mjZTDVXHB1N717iEHq/NR+nBhqzbG7x2oXB1YfjrvuK6zSODRc7J
-         xLivqwcXGwnn8JY6TLgP6m/DUbn3py9M/FVlXUqGSyVcBp2t/qQ4Xfex6/041PQXbeb8
-         BODw==
-X-Gm-Message-State: AOJu0Ywj9YxWL614O4WCwlrcwcvLndfUdvyU5kPXsrFsX/UXQlvu2R85
-	gZGt3Zm04KkBIG+LoFghRfwDFw==
-X-Google-Smtp-Source: AGHT+IHGgTVU+REc/aEIU4qFjHGblxDqda4AQyqsdIdkvvPCfEUq+PlwvQDCu10lcyi+JsaaB31q1A==
-X-Received: by 2002:a5d:6108:0:b0:317:7eec:5e9d with SMTP id v8-20020a5d6108000000b003177eec5e9dmr2314014wrt.16.1693414599909;
-        Wed, 30 Aug 2023 09:56:39 -0700 (PDT)
-User-agent: mu4e 1.11.16; emacs 29.1.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Xen-devel <xen-devel@lists.xenproject.org>, Stewart Hildebrand
- <stewart.hildebrand@amd.com>, Viresh Kumar <viresh.kumar@linaro.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Sergiy Kibrik
- <Sergiy_Kibrik@epam.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, Vikram Garhwal
- <vikram.garhwal@amd.com>, Stefano Stabellini <stefano.stabellini@amd.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, Jonathan Cameron
- <jonathan.cameron@huawei.com>
-Subject: QEMU features useful for Xen development?
-Date: Wed, 30 Aug 2023 17:11:02 +0100
-Message-ID: <87y1hspiyh.fsf@linaro.org>
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=l++Zpa9W3cVegRsEsIxzmI6J+GeofQzkS3WKSaWLCrY=;
+        b=BNcLaZkju3zdJy6LcFxLC1uL3TcNfpDu8E4dg3BSJ6CCAQ/M20aic3F5vqtu1sxVnf
+         tHWxbKAT7CQQSAnHcklo//sHJ9fo0+lU2BYtXRCgrNMA0fwxfJszIhhW/y6GfGIDWjkm
+         2qDW3G4+VEVGjcDUNedZidxNh6J5vtAzSovz7mQgPdpARpxEek0UfkItcYw99QIYTUxD
+         igx1l92wBRLTLY5eBaJXaPsClr8wrPSa/HCYlEeeDTNBVgh3OLXztLryzOAftDjX/Ivt
+         Zb7MMmu65pIgxcWnTHaCGlbzDhan4fAvRKIMZv3TrV33l4tQKYjENR+9ov1Ro1lxSLTU
+         yW6w==
+X-Gm-Message-State: AOJu0YxlL090lFfY3+wZX1/FfbnapiPNsowj954ujEFzj86ptW4mXKYd
+	N1Bc+1M63iN5gxPokVHrbzEFiIaRhwo=
+X-Google-Smtp-Source: AGHT+IFBoVzr/rUfHRjhoFg22flNv3fLTNX3h1DFKGxL0xeQtc8pcyZO3B5nCSXsLQFDNd8wtqArOg==
+X-Received: by 2002:a05:6512:519:b0:500:7de4:300e with SMTP id o25-20020a056512051900b005007de4300emr1668737lfb.58.1693414632868;
+        Wed, 30 Aug 2023 09:57:12 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 0/2] introduce stub directory to storing empty/stub headers
+Date: Wed, 30 Aug 2023 19:57:05 +0300
+Message-ID: <cover.1693414172.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
+A lot of empty/stub headers should be introduced during the early steps of adding
+support of new architecture.
 
-Dear Xen community,
+An example can be found here:
+1. https://lore.kernel.org/xen-devel/cover.1692181079.git.oleksii.kurochko@gmail.com/
+2. https://lore.kernel.org/xen-devel/a92f99e8f697da99d77bfde562a549dbef3760ce.1692816595.git.sanastasio@raptorengineering.com/
 
-Linaro is significantly invested in QEMU development, with a special
-focus on Arm-related aspects. We recognize the value of QEMU as a
-readily available software reference platform for projects that need to
-test their software well before the availability of real hardware.
+As part of the patch series, asm/vm_event.h was moved to the stubs directory because
+It is the same for ARM, PPC, and RISC-V.
 
-The primary focus of our effort is on adding core architectural elements
-to the CPU emulation. For an overview of the current feature set, please
-see:
+---
+Changes in V3:
+ - add Acked-by: Stefano Stabellini <sstabellini@kernel.org> for "xen: move arm/include/asm/vm_event.h to asm-generic"
+ - update SPDX tag.
+ - move asm/vm_event.h to asm-generic.
+ - rename stubs dir to asm-generic.
 
-  https://qemu.readthedocs.io/en/master/system/arm/emulation.html
+---
+Changes in V2:
+ - change public/domctl.h to public/vm_event.h.
+ - update commit message of [PATCH v2 2/2] xen: move arm/include/asm/vm_event.h to stubs
 
-Besides the -cpu max, providing an approximation of a v9.0 baseline CPU,
-we have also recently added several specific CPU types like the
-Neoverse-N1 and V1 processor types as well as numerous Cortex CPU
-models.
+Oleksii Kurochko (2):
+  xen: add asm-generic dir to include path
+  xen: move arm/include/asm/vm_event.h to stubs
 
-Our most utilized machine model is "virt", which is primarily designed
-for guest operation and therefore has minimal resemblance to actual
-hardware. "sbsa-ref" was implemented to more closely simulate a real
-machine that aligns with Arm's SBSA specification.
+ xen/Makefile                           |  1 +
+ xen/arch/arm/include/asm/vm_event.h    | 66 --------------------------
+ xen/include/asm-generic/asm/vm_event.h | 55 +++++++++++++++++++++
+ 3 files changed, 56 insertions(+), 66 deletions(-)
+ delete mode 100644 xen/arch/arm/include/asm/vm_event.h
+ create mode 100644 xen/include/asm-generic/asm/vm_event.h
 
-In our work on VirtIO, we often use QEMU. Most of our rust-vmm
-vhost-device backends, for instance, were initially tested on QEMU.
+-- 
+2.41.0
 
-Now that everyone is up-to-date, I would welcome any feedback from the
-Xen community on features that would increase QEMU's usefulness as a
-development target.
-
-Do you have interest in any upcoming Arm CPU features? For example, we
-recently added FEAT_RME support for Arm's new confidential computing,
-but currently do not implement FEAT_NV/NV2.
-
-How about the HW emulation in QEMU? Is the PCI emulation reliable enough
-to ensure confidence while testing changes to Xen's PCI management? What
-about the few peripherals that the hypervisor accesses directly?
-
-Are there other development features you consider essential? Have you
-noticed any limitations with gdbstub? Does anyone use the record/replay
-or reverse debug functions? Has anyone tried TCG plugins for analysing
-the behavior of the hypervisor?
-
-While I cannot promise to implement every wish-list item (performance
-counter emulation, for example, as we are not a uArch simulator), I am
-eager to gather feedback on how QEMU could be improved to help the Xen
-community deliver it's roadmap faster.
-
-Thank you for your time and I look forward to any feedback :-)
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
