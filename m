@@ -4,46 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0270C83F12
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 10:41:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.593751.926824 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1909AC83F01
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 10:43:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.593760.926843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbf79-0003Ja-Sr; Thu, 31 Aug 2023 10:41:27 +0000
+	id 1qbf95-0004fx-LW; Thu, 31 Aug 2023 10:43:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 593751.926824; Thu, 31 Aug 2023 10:41:27 +0000
+Received: by outflank-mailman (output) from mailman id 593760.926843; Thu, 31 Aug 2023 10:43:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbf79-0003JT-Q2; Thu, 31 Aug 2023 10:41:27 +0000
-Received: by outflank-mailman (input) for mailman id 593751;
- Thu, 31 Aug 2023 10:40:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qbf95-0004fq-Ii; Thu, 31 Aug 2023 10:43:27 +0000
+Received: by outflank-mailman (input) for mailman id 593760;
+ Thu, 31 Aug 2023 10:43:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4Z81=EQ=quicinc.com=quic_acaggian@srs-se1.protection.inumbo.net>)
- id 1qbf6I-00033t-M8
- for xen-devel@lists.xenproject.org; Thu, 31 Aug 2023 10:40:34 +0000
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cf3634a9-47ea-11ee-8783-cb3800f73035;
- Thu, 31 Aug 2023 12:40:33 +0200 (CEST)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37VAPWlS029502; Thu, 31 Aug 2023 10:40:21 GMT
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com
- [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3st6cta50c-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Aug 2023 10:40:21 +0000
-Received: from nalasex01c.na.qualcomm.com (nalasex01c.na.qualcomm.com
- [10.47.97.35])
- by NALASPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 37VAeJ2U026136
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Aug 2023 10:40:19 GMT
-Received: from [10.111.142.103] (10.80.80.8) by nalasex01c.na.qualcomm.com
- (10.47.97.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.30; Thu, 31 Aug
- 2023 03:40:13 -0700
+ <SRS0=DT0c=EQ=daynix.com=akihiko.odaki@srs-se1.protection.inumbo.net>)
+ id 1qbf94-0004NX-L8
+ for xen-devel@lists.xenproject.org; Thu, 31 Aug 2023 10:43:26 +0000
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [2607:f8b0:4864:20::62e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 35bb055b-47eb-11ee-9b0d-b553b5be7939;
+ Thu, 31 Aug 2023 12:43:24 +0200 (CEST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1bc8a2f71eeso4873805ad.0
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Aug 2023 03:43:24 -0700 (PDT)
+Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
+ ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
+ by smtp.gmail.com with ESMTPSA id
+ g12-20020a170902740c00b001bbdd44bbb6sm984888pll.136.2023.08.31.03.43.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Aug 2023 03:43:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,159 +48,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cf3634a9-47ea-11ee-8783-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=qcppdkim1;
- bh=znF0BF1kUSuueMdP2rNueLOh4tYw4WJJ9faw+zW9ezE=;
- b=ELQ9F/3ZU0zebAto+M91FILiBhz/DQXgs5NK032d7uTi7rI/0PAJVoCP9YYtYpaKkag9
- NHdp3y0kTUMyStycA0deIeSIJyylGiRugrZoFY8zicKsIzFaMpcwcc9hgT+6ESNiM3GC
- KXnCnTf8IF/bwaxq9IIgcrknWCfwBOU7i84qQTWnp+o+3KWyG7fr272KGlHOGF3jR3jG
- bqZU3/tabQx3cxvQ4vX5zeyvmMM6VaKNk7rzw4sK9SLlxxhZv2gi4OIPKalnkU4OIOLN
- ptOlrfISRvBhuEsWoXtXu/dpiHOK8oj4dv6yh8BynsXLol1+dQtMbR3oSUbkEcg0IMnk zw== 
-Message-ID: <ca8bcf9a-2886-aed0-5229-4787808bd39c@quicinc.com>
-Date: Thu, 31 Aug 2023 12:40:11 +0200
+X-Inumbo-ID: 35bb055b-47eb-11ee-9b0d-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1693478603; x=1694083403; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=pthxO9otZ5F1W93I4fM7b6t8TGyUaxxABGXbq13EuGw=;
+        b=gPOroCW4qRVBzkrAiSeqzGcQfzPYMLftQS6QjTlVFg+m6xxI021tY9VCQcmb5R9Kzl
+         l0qP+5gcnxPnbbOHJT4ObH/KGB8JhyXCZgaTgRR49+C+FBTfAnFazHY7Xwhgx7UrsWOG
+         FNLLkTj4Fm9q0NLEGmdiD2wrtY/rqvOt/MhyLCrr8q22iB9AfG51hk9gp7XarGSi/8M6
+         3f9NVzK3VNPQJjdqqdKQKfFbgfXFZ0w4xMQkyfJsZli/vLghdb2s0arI7ikS+yr7NRnA
+         tAPzerzEbgfnJDZdobREJ8UhjZ4h0zpxhj1aQpTKcckEUDH475Sl59tGUh6iPx3VqpLr
+         lHyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1693478603; x=1694083403;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=pthxO9otZ5F1W93I4fM7b6t8TGyUaxxABGXbq13EuGw=;
+        b=FBHDt4LE+JUiThxvpf/dm/pKkAa/kfnQMx8oPYUAMHR3BVQxmeesIZn2Tmzaq+l7ni
+         IXFSdU8u1X4YDBrs7b5JMWY+OByuneysqBGWH3/GyokAb8nfjSRChwVSFqfIw1/gSiwk
+         8xpSN/CRiszc3y9LMIr3E6Yl7n4AHRghiaedPAX+E3TzMxTGJ4tG5hjffY2MTPvln5/x
+         b8kZZAn9byYENT2838PkssruM5Uj8nBrCdXPFKInUdXkxWZKRY4B3uLSNrAds65ltJOb
+         gHsu5nl39rgLhp+ThLU4fczxXFbXpWxEwHakO2hyxcwDa3vP6pa0m7N+OhCUj4vl+sAX
+         toNg==
+X-Gm-Message-State: AOJu0Yw1307HlFVqaXIQTni1Fu91ejebgjvzIinB0EvHxdZmKBbClV0g
+	5tGTpuyPYmLs1h44E/OZF+2hug==
+X-Google-Smtp-Source: AGHT+IF61CnqGDOu6EZq+ZgIaumeod7KOlm7Ef1ZjxoEiKfNUFtI0udiwYapvHIpTz8Oekph4Jtnfg==
+X-Received: by 2002:a17:902:c086:b0:1c0:6e92:8cc5 with SMTP id j6-20020a170902c08600b001c06e928cc5mr3604644pld.17.1693478603280;
+        Thu, 31 Aug 2023 03:43:23 -0700 (PDT)
+Message-ID: <fe36e4e1-1198-4da4-b6ee-a6a00a44298a@daynix.com>
+Date: Thu, 31 Aug 2023 19:43:17 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [QEMU PATCH v4 12/13] virtio-gpu: Initialize Venus
+Subject: Re: [QEMU PATCH v4 11/13] virtio-gpu: Support Venus capset
 Content-Language: en-US
 To: Huang Rui <ray.huang@amd.com>, Gerd Hoffmann <kraxel@redhat.com>,
-        "Michael
- S . Tsirkin" <mst@redhat.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Anthony PERARD <anthony.perard@citrix.com>,
-        Antonio Caggiano
-	<antonio.caggiano@collabora.com>,
-        "Dr . David Alan Gilbert"
-	<dgilbert@redhat.com>,
-        Robert Beckett <bob.beckett@collabora.com>,
-        Dmitry
- Osipenko <dmitry.osipenko@collabora.com>,
-        =?UTF-8?Q?Alex_Benn=C3=A9e?=
-	<alex.bennee@linaro.org>,
-        <qemu-devel@nongnu.org>
-CC: <xen-devel@lists.xenproject.org>,
-        Gurchetan Singh
-	<gurchetansingh@chromium.org>, <ernunes@redhat.com>,
-        =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-        Akihiko Odaki
-	<akihiko.odaki@daynix.com>, Alyssa Ross <hi@alyssa.is>,
-        =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
-        Alex Deucher
-	<alexander.deucher@amd.com>,
-        =?UTF-8?Q?Christian_K=C3=B6nig?=
-	<christian.koenig@amd.com>,
-        Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
-        Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
-        Honglei
- Huang <honglei1.huang@amd.com>,
-        Julia Zhang <julia.zhang@amd.com>, Chen
- Jiqian <Jiqian.Chen@amd.com>
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Antonio Caggiano <antonio.caggiano@collabora.com>,
+ "Dr . David Alan Gilbert" <dgilbert@redhat.com>,
+ Robert Beckett <bob.beckett@collabora.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-devel@nongnu.org
+Cc: xen-devel@lists.xenproject.org,
+ Gurchetan Singh <gurchetansingh@chromium.org>, ernunes@redhat.com,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Alyssa Ross <hi@alyssa.is>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+ Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
+ Honglei Huang <honglei1.huang@amd.com>, Julia Zhang <julia.zhang@amd.com>,
+ Chen Jiqian <Jiqian.Chen@amd.com>
 References: <20230831093252.2461282-1-ray.huang@amd.com>
- <20230831093252.2461282-13-ray.huang@amd.com>
-From: Antonio Caggiano <quic_acaggian@quicinc.com>
-In-Reply-To: <20230831093252.2461282-13-ray.huang@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+ <20230831093252.2461282-12-ray.huang@amd.com>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <20230831093252.2461282-12-ray.huang@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01c.na.qualcomm.com (10.47.97.35)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: IyA5KR4iV1dHZO-i5Zd2-Cub9Bp8YLb6
-X-Proofpoint-ORIG-GUID: IyA5KR4iV1dHZO-i5Zd2-Cub9Bp8YLb6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-31_07,2023-08-31_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- clxscore=1011 malwarescore=0 phishscore=0 adultscore=0 mlxlogscore=961
- suspectscore=0 spamscore=0 lowpriorityscore=0 mlxscore=0 bulkscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2308100000 definitions=main-2308310094
 
-Hi Huang,
-
-Thank you for pushing this forward!
-
-On 31/08/2023 11:32, Huang Rui wrote:
+On 2023/08/31 18:32, Huang Rui wrote:
 > From: Antonio Caggiano <antonio.caggiano@collabora.com>
 > 
-> Request Venus when initializing VirGL.
+> Add support for the Venus capset, which enables Vulkan support through
+> the Venus Vulkan driver for virtio-gpu.
 > 
 > Signed-off-by: Antonio Caggiano <antonio.caggiano@collabora.com>
 > Signed-off-by: Huang Rui <ray.huang@amd.com>
 > ---
-> 
-> v1->v2:
->      - Rebase to latest version
-> 
->   hw/display/virtio-gpu-virgl.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   hw/display/virtio-gpu-virgl.c               | 21 +++++++++++++++++----
+>   include/standard-headers/linux/virtio_gpu.h |  2 ++
+>   2 files changed, 19 insertions(+), 4 deletions(-)
 > 
 > diff --git a/hw/display/virtio-gpu-virgl.c b/hw/display/virtio-gpu-virgl.c
-> index 83cd8c8fd0..c5a62665bd 100644
+> index 1a996a08fc..83cd8c8fd0 100644
 > --- a/hw/display/virtio-gpu-virgl.c
 > +++ b/hw/display/virtio-gpu-virgl.c
-> @@ -887,6 +887,8 @@ int virtio_gpu_virgl_init(VirtIOGPU *g)
->       }
->   #endif
+> @@ -437,6 +437,11 @@ static void virgl_cmd_get_capset_info(VirtIOGPU *g,
+>           virgl_renderer_get_cap_set(resp.capset_id,
+>                                      &resp.capset_max_version,
+>                                      &resp.capset_max_size);
+> +    } else if (info.capset_index == 2) {
+> +        resp.capset_id = VIRTIO_GPU_CAPSET_VENUS;
+> +        virgl_renderer_get_cap_set(resp.capset_id,
+> +                                   &resp.capset_max_version,
+> +                                   &resp.capset_max_size);
+>       } else {
+>           resp.capset_max_version = 0;
+>           resp.capset_max_size = 0;
+> @@ -901,10 +906,18 @@ int virtio_gpu_virgl_init(VirtIOGPU *g)
 >   
-> +    flags |= VIRGL_RENDERER_VENUS;
+>   int virtio_gpu_virgl_get_num_capsets(VirtIOGPU *g)
+>   {
+> -    uint32_t capset2_max_ver, capset2_max_size;
+> +    uint32_t capset2_max_ver, capset2_max_size, num_capsets;
+> +    num_capsets = 1;
 > +
+>       virgl_renderer_get_cap_set(VIRTIO_GPU_CAPSET_VIRGL2,
+> -                              &capset2_max_ver,
+> -                              &capset2_max_size);
+> +                               &capset2_max_ver,
+> +                               &capset2_max_size);
+> +    num_capsets += capset2_max_ver ? 1 : 0;
+> +
+> +    virgl_renderer_get_cap_set(VIRTIO_GPU_CAPSET_VENUS,
+> +                               &capset2_max_ver,
+> +                               &capset2_max_size);
+> +    num_capsets += capset2_max_size ? 1 : 0;
+>   
+> -    return capset2_max_ver ? 2 : 1;
+> +    return num_capsets;
+>   }
+> diff --git a/include/standard-headers/linux/virtio_gpu.h b/include/standard-headers/linux/virtio_gpu.h
+> index 2da48d3d4c..2db643ed8f 100644
+> --- a/include/standard-headers/linux/virtio_gpu.h
+> +++ b/include/standard-headers/linux/virtio_gpu.h
+> @@ -309,6 +309,8 @@ struct virtio_gpu_cmd_submit {
+>   
+>   #define VIRTIO_GPU_CAPSET_VIRGL 1
+>   #define VIRTIO_GPU_CAPSET_VIRGL2 2
+> +/* 3 is reserved for gfxstream */
+> +#define VIRTIO_GPU_CAPSET_VENUS 4
 
-VIRGL_RENDERER_VENUS is a symbol only available from virglrenderer 0.9.1 
-[0] and only if VIRGL_RENDERER_UNSTABLE_APIS is defined.
+This file is synced with scripts/update-linux-headers.sh and should not 
+be modified.
 
-Luckily for us, VIRGL_RENDERER_UNSTABLE_APIS is defined unconditionally 
-from virglrenderer 0.9.0 [1], so we could check for that in qemu/meson.build
-
-e.g.
-
-
-   if virgl.version().version_compare('>= 0.9.0')
-     message('Enabling virglrenderer unstable APIs')
-     virgl = declare_dependency(compile_args: 
-'-DVIRGL_RENDERER_UNSTABLE_APIS',
-                                dependencies: virgl)
-   endif
-
-
-Also, while testing this with various versions of virglrenderer, I 
-realized there are no guarantees for Venus backend to be available in 
-the linked library. Virglrenderer should be built with 
--Dvenus_experimental=true, and if that is not the case, the following 
-virgl_renderer_init would fail for previous versions of virglrenderer or 
-in case it has not been built with venus support.
-
-I would suggest another approach for that which tries initializing Venus 
-only if VIRGL_RENDERER_VENUS is actually defined. Then, if it fails 
-cause virglrenderer has not been built with venus support, try again 
-falling back to virgl only.
-
-e.g.
-
-#ifdef VIRGL_RENDERER_VENUS
-     ret = virgl_renderer_init(g, VIRGL_RENDERER_VENUS, &virtio_gpu_3d_cbs);
-     if (ret != 0) {
-         warn_report("Failed to initialize virglrenderer with venus: 
-%d", ret);
-         warn_report("Falling back to virgl only");
-         ret = virgl_renderer_init(g, 0, &virtio_gpu_3d_cbs);
-     }
-#else
-     ret = virgl_renderer_init(g, 0, &virtio_gpu_3d_cbs);
-#endif
-
-
->       ret = virgl_renderer_init(g, flags, &virtio_gpu_3d_cbs);
->       if (ret != 0) {
->           error_report("virgl could not be initialized: %d", ret);
-
-[0] 
-https://gitlab.freedesktop.org/virgl/virglrenderer/-/commit/6c31f85330bb4c5aba8b82eba606971e598c6e25
-[1] 
-https://gitlab.freedesktop.org/virgl/virglrenderer/-/commit/491afdc42a49ec6a1b8d7cbc5c97360229002d41
-
-Best regards,
-Antonio Caggiano
+>   
+>   /* VIRTIO_GPU_CMD_GET_CAPSET_INFO */
+>   struct virtio_gpu_get_capset_info {
 
