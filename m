@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55B0C83F01
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 13:26:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.593898.927036 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9155CC83F01
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 13:26:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.593897.927031 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbhgL-0001F0-Ra; Thu, 31 Aug 2023 13:25:57 +0000
+	id 1qbhgL-00015e-Gm; Thu, 31 Aug 2023 13:25:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 593898.927036; Thu, 31 Aug 2023 13:25:57 +0000
+Received: by outflank-mailman (output) from mailman id 593897.927031; Thu, 31 Aug 2023 13:25:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbhgL-0001DA-LH; Thu, 31 Aug 2023 13:25:57 +0000
-Received: by outflank-mailman (input) for mailman id 593898;
+	id 1qbhgL-00014r-91; Thu, 31 Aug 2023 13:25:57 +0000
+Received: by outflank-mailman (input) for mailman id 593897;
  Thu, 31 Aug 2023 13:25:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=smM9=EQ=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1qbhgK-00011s-NH
+ id 1qbhgK-00011s-22
  for xen-devel@lists.xenproject.org; Thu, 31 Aug 2023 13:25:56 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e942bb3b-4801-11ee-8783-cb3800f73035;
- Thu, 31 Aug 2023 15:25:54 +0200 (CEST)
+ id e93455de-4801-11ee-8783-cb3800f73035;
+ Thu, 31 Aug 2023 15:25:55 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-523-ZOz2lGL7N_eF6b9Vwy-JnQ-1; Thu, 31 Aug 2023 09:25:50 -0400
+ us-mta-295-Llrh_6NmMhmdbB-Mj6wUlA-1; Thu, 31 Aug 2023 09:25:49 -0400
 Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
  [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B8C49185A7AC;
- Thu, 31 Aug 2023 13:25:49 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 925DD80CC51;
+ Thu, 31 Aug 2023 13:25:48 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.30])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 799C3401E63;
- Thu, 31 Aug 2023 13:25:49 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C0A0640316A;
+ Thu, 31 Aug 2023 13:25:47 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id C82A921E60D8; Thu, 31 Aug 2023 15:25:46 +0200 (CEST)
+ id BEFA621E6936; Thu, 31 Aug 2023 15:25:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e942bb3b-4801-11ee-8783-cb3800f73035
+X-Inumbo-ID: e93455de-4801-11ee-8783-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	s=mimecast20190719; t=1693488353;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Hg2ISKwBEelJK+K3yl7ZcIq6TU8ASl2mfkZDanBbqQM=;
-	b=LoWI5Sj6leXAQWfNLUyYYZUn+wzY/9HoA0WZ08YJiK/yNmwCBvzDAnJ8tGSiyFrqCXrH+U
-	aDz89yzrktEpsLfR/mqywLxx2WHCKCX+lJFs/7hy5bF+vu7ZYPlIMDryz7cuo1h97I5O2Q
-	HBJe9XI5PH7zU2bpG57c44E/I0egHRo=
-X-MC-Unique: ZOz2lGL7N_eF6b9Vwy-JnQ-1
+	bh=/fqTkl561vUPRN4wCY4+4zlKemE2JuQ2aeOXAdkttl0=;
+	b=PX+XZV5QSqsUAioazvBZ2vkio4UteDbVaMdMrd4ipqbe2c9PY1q13GTOhmNLK+05JkFgXm
+	DYvqtj0PFEFoGyI8K4p4Nf0AnKevT4FiHYwpawHElwOPc7trWHWqetIjHBVOBw9dqwyjgN
+	8I8qoV6eTp+KJ5SZy6dw7qLmDbxg7ec=
+X-MC-Unique: Llrh_6NmMhmdbB-Mj6wUlA-1
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: kwolf@redhat.com,
@@ -94,9 +94,9 @@ Cc: kwolf@redhat.com,
 	xen-devel@lists.xenproject.org,
 	alex.bennee@linaro.org,
 	peter.maydell@linaro.org
-Subject: [PATCH 7/7] qobject atomics osdep: Make a few macros more hygienic
-Date: Thu, 31 Aug 2023 15:25:46 +0200
-Message-ID: <20230831132546.3525721-8-armbru@redhat.com>
+Subject: [PATCH 4/7] block/dirty-bitmap: Clean up local variable shadowing
+Date: Thu, 31 Aug 2023 15:25:43 +0200
+Message-ID: <20230831132546.3525721-5-armbru@redhat.com>
 In-Reply-To: <20230831132546.3525721-1-armbru@redhat.com>
 References: <20230831132546.3525721-1-armbru@redhat.com>
 MIME-Version: 1.0
@@ -104,204 +104,51 @@ Content-type: text/plain
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
 
-Variables declared in macros can shadow other variables.  Much of the
-time, this is harmless, e.g.:
-
-    #define _FDT(exp)                                                  \
-        do {                                                           \
-            int ret = (exp);                                           \
-            if (ret < 0) {                                             \
-                error_report("error creating device tree: %s: %s",   \
-                        #exp, fdt_strerror(ret));                      \
-                exit(1);                                               \
-            }                                                          \
-        } while (0)
-
-Harmless shadowing in h_client_architecture_support():
-
-        target_ulong ret;
-
-        [...]
-
-        ret = do_client_architecture_support(cpu, spapr, vec, fdt_bufsize);
-        if (ret == H_SUCCESS) {
-            _FDT((fdt_pack(spapr->fdt_blob)));
-            [...]
-        }
-
-        return ret;
-
-However, we can get in trouble when the shadowed variable is used in a
-macro argument:
-
-    #define QOBJECT(obj) ({                                 \
-        typeof(obj) o = (obj);                              \
-        o ? container_of(&(o)->base, QObject, base) : NULL; \
-     })
-
-QOBJECT(o) expands into
-
-    ({
---->    typeof(o) o = (o);
-        o ? container_of(&(o)->base, QObject, base) : NULL;
-    })
-
-Unintended variable name capture at --->.  We'd be saved by
--Winit-self.  But I could certainly construct more elaborate death
-traps that don't trigger it.
-
-To reduce the risk of trapping ourselves, we use variable names in
-macros that no sane person would use elsewhere.  Here's our actual
-definition of QOBJECT():
-
-    #define QOBJECT(obj) ({                                         \
-        typeof(obj) _obj = (obj);                                   \
-        _obj ? container_of(&(_obj)->base, QObject, base) : NULL;   \
-    })
-
-Works well enough until we nest macro calls.  For instance, with
-
-    #define qobject_ref(obj) ({                     \
-        typeof(obj) _obj = (obj);                   \
-        qobject_ref_impl(QOBJECT(_obj));            \
-        _obj;                                       \
-    })
-
-the expression qobject_ref(obj) expands into
-
-    ({
-        typeof(obj) _obj = (obj);
-        qobject_ref_impl(
-            ({
---->            typeof(_obj) _obj = (_obj);
-                _obj ? container_of(&(_obj)->base, QObject, base) : NULL;
-            }));
-        _obj;
-    })
-
-Unintended variable name capture at --->.
-
-The only reliable way to prevent unintended variable name capture is
--Wshadow.
-
-One blocker for enabling it is shadowing hiding in function-like
-macros like
-
-     qdict_put(dict, "name", qobject_ref(...))
-
-qdict_put() wraps its last argument in QOBJECT(), and the last
-argument here contains another QOBJECT().
-
-Use dark preprocessor sorcery to make the macros that give us this
-problem use different variable names on every call.
+Local variables shadowing other local variables or parameters make the
+code needlessly hard to understand.  Tracked down with -Wshadow=local.
+Clean up: delete inner declarations when they are actually redundant,
+else rename variables.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- include/qapi/qmp/qobject.h |  8 +++++---
- include/qemu/atomic.h      | 11 ++++++-----
- include/qemu/osdep.h       | 34 +++++++++++++++++++---------------
- 3 files changed, 30 insertions(+), 23 deletions(-)
+ block/monitor/bitmap-qmp-cmds.c | 2 +-
+ block/qcow2-bitmap.c            | 3 +--
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/include/qapi/qmp/qobject.h b/include/qapi/qmp/qobject.h
-index 9003b71fd3..7b50fc905d 100644
---- a/include/qapi/qmp/qobject.h
-+++ b/include/qapi/qmp/qobject.h
-@@ -45,10 +45,12 @@ struct QObject {
-     struct QObjectBase_ base;
- };
+diff --git a/block/monitor/bitmap-qmp-cmds.c b/block/monitor/bitmap-qmp-cmds.c
+index 55f778f5af..4d018423d8 100644
+--- a/block/monitor/bitmap-qmp-cmds.c
++++ b/block/monitor/bitmap-qmp-cmds.c
+@@ -276,7 +276,7 @@ BdrvDirtyBitmap *block_dirty_bitmap_merge(const char *node, const char *target,
  
--#define QOBJECT(obj) ({                                         \
--    typeof(obj) _obj = (obj);                                   \
--    _obj ? container_of(&(_obj)->base, QObject, base) : NULL;   \
-+#define QOBJECT_INTERNAL(obj, l) ({                                     \
-+    typeof(obj) PASTE(_obj, l) = (obj);                                 \
-+    PASTE(_obj, l)                                                      \
-+        ? container_of(&(PASTE(_obj, l))->base, QObject, base) : NULL;  \
- })
-+#define QOBJECT(obj) QOBJECT_INTERNAL((obj), __COUNTER__)
+     for (lst = bms; lst; lst = lst->next) {
+         switch (lst->value->type) {
+-            const char *name, *node;
++            const char *name;
+         case QTYPE_QSTRING:
+             name = lst->value->u.local;
+             src = bdrv_find_dirty_bitmap(bs, name);
+diff --git a/block/qcow2-bitmap.c b/block/qcow2-bitmap.c
+index 037fa2d435..ffd5cd3b23 100644
+--- a/block/qcow2-bitmap.c
++++ b/block/qcow2-bitmap.c
+@@ -1555,7 +1555,6 @@ bool qcow2_store_persistent_dirty_bitmaps(BlockDriverState *bs,
+     FOR_EACH_DIRTY_BITMAP(bs, bitmap) {
+         const char *name = bdrv_dirty_bitmap_name(bitmap);
+         uint32_t granularity = bdrv_dirty_bitmap_granularity(bitmap);
+-        Qcow2Bitmap *bm;
  
- /* Required for qobject_to() */
- #define QTYPE_CAST_TO_QNull     QTYPE_QNULL
-diff --git a/include/qemu/atomic.h b/include/qemu/atomic.h
-index d95612f7a0..3f80ffac69 100644
---- a/include/qemu/atomic.h
-+++ b/include/qemu/atomic.h
-@@ -157,13 +157,14 @@
-     smp_read_barrier_depends();
- #endif
+         if (!bdrv_dirty_bitmap_get_persistence(bitmap) ||
+             bdrv_dirty_bitmap_inconsistent(bitmap)) {
+@@ -1625,7 +1624,7 @@ bool qcow2_store_persistent_dirty_bitmaps(BlockDriverState *bs,
  
--#define qatomic_rcu_read(ptr)                          \
--    ({                                                 \
-+#define qatomic_rcu_read_internal(ptr, l)               \
-+    ({                                                  \
-     qemu_build_assert(sizeof(*ptr) <= ATOMIC_REG_SIZE); \
--    typeof_strip_qual(*ptr) _val;                      \
--    qatomic_rcu_read__nocheck(ptr, &_val);             \
--    _val;                                              \
-+    typeof_strip_qual(*ptr) PASTE(_val, l);             \
-+    qatomic_rcu_read__nocheck(ptr, &PASTE(_val, l));    \
-+    PASTE(_val, l);                                     \
-     })
-+#define qatomic_rcu_read(ptr) qatomic_rcu_read_internal((ptr), __COUNTER__)
+     /* allocate clusters and store bitmaps */
+     QSIMPLEQ_FOREACH(bm, bm_list, entry) {
+-        BdrvDirtyBitmap *bitmap = bm->dirty_bitmap;
++        bitmap = bm->dirty_bitmap;
  
- #define qatomic_rcu_set(ptr, i) do {                   \
-     qemu_build_assert(sizeof(*ptr) <= ATOMIC_REG_SIZE); \
-diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
-index 21ef8f1699..9c191ebe99 100644
---- a/include/qemu/osdep.h
-+++ b/include/qemu/osdep.h
-@@ -371,18 +371,21 @@ void QEMU_ERROR("code path is reachable")
-  * have to open-code it.  Sadly, Coverity is severely confused by the
-  * constant variants, so we have to dumb things down there.
-  */
-+#define PASTE(a, b) a##b
-+#define MIN_INTERNAL(a, b, l)                                           \
-+    ({                                                                  \
-+        typeof(1 ? (a) : (b)) PASTE(_a, l) = (a), PASTE(_b, l) = (b);   \
-+        PASTE(_a, l) < PASTE(_b, l) ? PASTE(_a, l) : PASTE(_b, l);      \
-+    })
- #undef MIN
--#define MIN(a, b)                                       \
--    ({                                                  \
--        typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
--        _a < _b ? _a : _b;                              \
-+#define MIN(a, b) MIN_INTERNAL((a), (b), __COUNTER__)
-+#define MAX_INTERNAL(a, b, l)                                           \
-+    ({                                                                  \
-+        typeof(1 ? (a) : (b)) PASTE(_a, l) = (a), PASTE(_b, l) = (b);   \
-+        PASTE(_a, l) > PASTE(_b, l) ? PASTE(_a, l) : PASTE(_b, l);      \
-     })
- #undef MAX
--#define MAX(a, b)                                       \
--    ({                                                  \
--        typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
--        _a > _b ? _a : _b;                              \
--    })
-+#define MAX(a, b) MAX_INTERNAL((a), (b), __COUNTER__)
- 
- #ifdef __COVERITY__
- # define MIN_CONST(a, b) ((a) < (b) ? (a) : (b))
-@@ -404,13 +407,14 @@ void QEMU_ERROR("code path is reachable")
-  * Minimum function that returns zero only if both values are zero.
-  * Intended for use with unsigned values only.
-  */
--#ifndef MIN_NON_ZERO
--#define MIN_NON_ZERO(a, b)                              \
--    ({                                                  \
--        typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
--        _a == 0 ? _b : (_b == 0 || _b > _a) ? _a : _b;  \
-+#define MIN_NON_ZERO_INTERNAL(a, b, l)                                  \
-+    ({                                                                  \
-+        typeof(1 ? (a) : (b)) PASTE(_a, l) = (a), PASTE(_b, l) = (b);   \
-+        PASTE(_a, l) == 0 ? PASTE(_b, l)                                \
-+        : (PASTE(_b, l) == 0 || PASTE(_b, l) > PASTE(_a, l)) ? PASTE(_a, l) \
-+        : PASTE(_b, l);                                                 \
-     })
--#endif
-+#define MIN_NON_ZERO(a, b) MIN_NON_ZERO_INTERNAL((a), (b), __COUNTER__)
- 
- /*
-  * Round number down to multiple. Safe when m is not a power of 2 (see
+         if (bitmap == NULL || bdrv_dirty_bitmap_readonly(bitmap)) {
+             continue;
 -- 
 2.41.0
 
