@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC69C83F01
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 13:26:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.593896.927023 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55B0C83F01
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 13:26:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.593898.927036 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbhgL-00012F-5a; Thu, 31 Aug 2023 13:25:57 +0000
+	id 1qbhgL-0001F0-Ra; Thu, 31 Aug 2023 13:25:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 593896.927023; Thu, 31 Aug 2023 13:25:57 +0000
+Received: by outflank-mailman (output) from mailman id 593898.927036; Thu, 31 Aug 2023 13:25:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbhgL-000128-1v; Thu, 31 Aug 2023 13:25:57 +0000
-Received: by outflank-mailman (input) for mailman id 593896;
- Thu, 31 Aug 2023 13:25:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qbhgL-0001DA-LH; Thu, 31 Aug 2023 13:25:57 +0000
+Received: by outflank-mailman (input) for mailman id 593898;
+ Thu, 31 Aug 2023 13:25:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=smM9=EQ=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1qbhgJ-00011r-RE
- for xen-devel@lists.xenproject.org; Thu, 31 Aug 2023 13:25:55 +0000
+ id 1qbhgK-00011s-NH
+ for xen-devel@lists.xenproject.org; Thu, 31 Aug 2023 13:25:56 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e82f3920-4801-11ee-9b0d-b553b5be7939;
- Thu, 31 Aug 2023 15:25:53 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-295-HdqLDN7ZOBSSRUpyNiZzoA-1; Thu, 31 Aug 2023 09:25:49 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e942bb3b-4801-11ee-8783-cb3800f73035;
+ Thu, 31 Aug 2023 15:25:54 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-523-ZOz2lGL7N_eF6b9Vwy-JnQ-1; Thu, 31 Aug 2023 09:25:50 -0400
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 94F8F280D228;
- Thu, 31 Aug 2023 13:25:48 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B8C49185A7AC;
+ Thu, 31 Aug 2023 13:25:49 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.30])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id BC49B63F7A;
- Thu, 31 Aug 2023 13:25:47 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 799C3401E63;
+ Thu, 31 Aug 2023 13:25:49 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id B8D7621E692B; Thu, 31 Aug 2023 15:25:46 +0200 (CEST)
+ id C82A921E60D8; Thu, 31 Aug 2023 15:25:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e82f3920-4801-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: e942bb3b-4801-11ee-8783-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1693488352;
+	s=mimecast20190719; t=1693488353;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=izx4/tWmYybNankH2Ws9lrXMsYKcXA5u48G6FxidvA8=;
-	b=W6o95x7O1m3Gsk9QM/P038kv7SaPp6sqdi+dLVhub9Kr9b0mf3WTBrTKwyLroJHOLGtBS/
-	Bm7rNa140gPQ65lELUUhaaolMzMpJv/aYK8Jqi+gtExU4esg7B2dMbJKfyyS/r13MW8LeF
-	4MgJmp3BEDe2plUdJZivbPi3nvls3L4=
-X-MC-Unique: HdqLDN7ZOBSSRUpyNiZzoA-1
+	bh=Hg2ISKwBEelJK+K3yl7ZcIq6TU8ASl2mfkZDanBbqQM=;
+	b=LoWI5Sj6leXAQWfNLUyYYZUn+wzY/9HoA0WZ08YJiK/yNmwCBvzDAnJ8tGSiyFrqCXrH+U
+	aDz89yzrktEpsLfR/mqywLxx2WHCKCX+lJFs/7hy5bF+vu7ZYPlIMDryz7cuo1h97I5O2Q
+	HBJe9XI5PH7zU2bpG57c44E/I0egHRo=
+X-MC-Unique: ZOz2lGL7N_eF6b9Vwy-JnQ-1
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: kwolf@redhat.com,
@@ -94,105 +94,214 @@ Cc: kwolf@redhat.com,
 	xen-devel@lists.xenproject.org,
 	alex.bennee@linaro.org,
 	peter.maydell@linaro.org
-Subject: [PATCH 2/7] migration: Clean up local variable shadowing
-Date: Thu, 31 Aug 2023 15:25:41 +0200
-Message-ID: <20230831132546.3525721-3-armbru@redhat.com>
+Subject: [PATCH 7/7] qobject atomics osdep: Make a few macros more hygienic
+Date: Thu, 31 Aug 2023 15:25:46 +0200
+Message-ID: <20230831132546.3525721-8-armbru@redhat.com>
 In-Reply-To: <20230831132546.3525721-1-armbru@redhat.com>
 References: <20230831132546.3525721-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
 
-Local variables shadowing other local variables or parameters make the
-code needlessly hard to understand.  Tracked down with -Wshadow=local.
-Clean up: delete inner declarations when they are actually redundant,
-else rename variables.
+Variables declared in macros can shadow other variables.  Much of the
+time, this is harmless, e.g.:
+
+    #define _FDT(exp)                                                  \
+        do {                                                           \
+            int ret = (exp);                                           \
+            if (ret < 0) {                                             \
+                error_report("error creating device tree: %s: %s",   \
+                        #exp, fdt_strerror(ret));                      \
+                exit(1);                                               \
+            }                                                          \
+        } while (0)
+
+Harmless shadowing in h_client_architecture_support():
+
+        target_ulong ret;
+
+        [...]
+
+        ret = do_client_architecture_support(cpu, spapr, vec, fdt_bufsize);
+        if (ret == H_SUCCESS) {
+            _FDT((fdt_pack(spapr->fdt_blob)));
+            [...]
+        }
+
+        return ret;
+
+However, we can get in trouble when the shadowed variable is used in a
+macro argument:
+
+    #define QOBJECT(obj) ({                                 \
+        typeof(obj) o = (obj);                              \
+        o ? container_of(&(o)->base, QObject, base) : NULL; \
+     })
+
+QOBJECT(o) expands into
+
+    ({
+--->    typeof(o) o = (o);
+        o ? container_of(&(o)->base, QObject, base) : NULL;
+    })
+
+Unintended variable name capture at --->.  We'd be saved by
+-Winit-self.  But I could certainly construct more elaborate death
+traps that don't trigger it.
+
+To reduce the risk of trapping ourselves, we use variable names in
+macros that no sane person would use elsewhere.  Here's our actual
+definition of QOBJECT():
+
+    #define QOBJECT(obj) ({                                         \
+        typeof(obj) _obj = (obj);                                   \
+        _obj ? container_of(&(_obj)->base, QObject, base) : NULL;   \
+    })
+
+Works well enough until we nest macro calls.  For instance, with
+
+    #define qobject_ref(obj) ({                     \
+        typeof(obj) _obj = (obj);                   \
+        qobject_ref_impl(QOBJECT(_obj));            \
+        _obj;                                       \
+    })
+
+the expression qobject_ref(obj) expands into
+
+    ({
+        typeof(obj) _obj = (obj);
+        qobject_ref_impl(
+            ({
+--->            typeof(_obj) _obj = (_obj);
+                _obj ? container_of(&(_obj)->base, QObject, base) : NULL;
+            }));
+        _obj;
+    })
+
+Unintended variable name capture at --->.
+
+The only reliable way to prevent unintended variable name capture is
+-Wshadow.
+
+One blocker for enabling it is shadowing hiding in function-like
+macros like
+
+     qdict_put(dict, "name", qobject_ref(...))
+
+qdict_put() wraps its last argument in QOBJECT(), and the last
+argument here contains another QOBJECT().
+
+Use dark preprocessor sorcery to make the macros that give us this
+problem use different variable names on every call.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- migration/block.c   | 4 ++--
- migration/ram.c     | 8 +++-----
- migration/rdma.c    | 8 +++++---
- migration/vmstate.c | 2 +-
- 4 files changed, 11 insertions(+), 11 deletions(-)
+ include/qapi/qmp/qobject.h |  8 +++++---
+ include/qemu/atomic.h      | 11 ++++++-----
+ include/qemu/osdep.h       | 34 +++++++++++++++++++---------------
+ 3 files changed, 30 insertions(+), 23 deletions(-)
 
-diff --git a/migration/block.c b/migration/block.c
-index b9580a6c7e..33b3776198 100644
---- a/migration/block.c
-+++ b/migration/block.c
-@@ -438,8 +438,8 @@ static int init_blk_migration(QEMUFile *f)
-     /* Can only insert new BDSes now because doing so while iterating block
-      * devices may end up in a deadlock (iterating the new BDSes, too). */
-     for (i = 0; i < num_bs; i++) {
--        BlkMigDevState *bmds = bmds_bs[i].bmds;
--        BlockDriverState *bs = bmds_bs[i].bs;
-+        bmds = bmds_bs[i].bmds;
-+        bs = bmds_bs[i].bs;
+diff --git a/include/qapi/qmp/qobject.h b/include/qapi/qmp/qobject.h
+index 9003b71fd3..7b50fc905d 100644
+--- a/include/qapi/qmp/qobject.h
++++ b/include/qapi/qmp/qobject.h
+@@ -45,10 +45,12 @@ struct QObject {
+     struct QObjectBase_ base;
+ };
  
-         if (bmds) {
-             ret = blk_insert_bs(bmds->blk, bs, &local_err);
-diff --git a/migration/ram.c b/migration/ram.c
-index 9040d66e61..0c202f8109 100644
---- a/migration/ram.c
-+++ b/migration/ram.c
-@@ -3517,8 +3517,6 @@ int colo_init_ram_cache(void)
-     * we use the same name 'ram_bitmap' as for migration.
-     */
-     if (ram_bytes_total()) {
--        RAMBlock *block;
--
-         RAMBLOCK_FOREACH_NOT_IGNORED(block) {
-             unsigned long pages = block->max_length >> TARGET_PAGE_BITS;
-             block->bmap = bitmap_new(pages);
-@@ -3998,12 +3996,12 @@ static int ram_load_precopy(QEMUFile *f)
-                         }
-                     }
-                     if (migrate_ignore_shared()) {
--                        hwaddr addr = qemu_get_be64(f);
-+                        hwaddr addr2 = qemu_get_be64(f);
-                         if (migrate_ram_is_ignored(block) &&
--                            block->mr->addr != addr) {
-+                            block->mr->addr != addr2) {
-                             error_report("Mismatched GPAs for block %s "
-                                          "%" PRId64 "!= %" PRId64,
--                                         id, (uint64_t)addr,
-+                                         id, (uint64_t)addr2,
-                                          (uint64_t)block->mr->addr);
-                             ret = -EINVAL;
-                         }
-diff --git a/migration/rdma.c b/migration/rdma.c
-index b2e869aced..c6400cf641 100644
---- a/migration/rdma.c
-+++ b/migration/rdma.c
-@@ -1902,9 +1902,11 @@ static int qemu_rdma_exchange_send(RDMAContext *rdma, RDMAControlHeader *head,
-      * by waiting for a READY message.
-      */
-     if (rdma->control_ready_expected) {
--        RDMAControlHeader resp;
--        ret = qemu_rdma_exchange_get_response(rdma,
--                                    &resp, RDMA_CONTROL_READY, RDMA_WRID_READY);
-+        RDMAControlHeader resp_ignored;
-+
-+        ret = qemu_rdma_exchange_get_response(rdma, &resp_ignored,
-+                                              RDMA_CONTROL_READY,
-+                                              RDMA_WRID_READY);
-         if (ret < 0) {
-             return ret;
-         }
-diff --git a/migration/vmstate.c b/migration/vmstate.c
-index 31842c3afb..438ea77cfa 100644
---- a/migration/vmstate.c
-+++ b/migration/vmstate.c
-@@ -97,7 +97,7 @@ int vmstate_load_state(QEMUFile *f, const VMStateDescription *vmsd,
-         return -EINVAL;
-     }
-     if (vmsd->pre_load) {
--        int ret = vmsd->pre_load(opaque);
-+        ret = vmsd->pre_load(opaque);
-         if (ret) {
-             return ret;
-         }
+-#define QOBJECT(obj) ({                                         \
+-    typeof(obj) _obj = (obj);                                   \
+-    _obj ? container_of(&(_obj)->base, QObject, base) : NULL;   \
++#define QOBJECT_INTERNAL(obj, l) ({                                     \
++    typeof(obj) PASTE(_obj, l) = (obj);                                 \
++    PASTE(_obj, l)                                                      \
++        ? container_of(&(PASTE(_obj, l))->base, QObject, base) : NULL;  \
+ })
++#define QOBJECT(obj) QOBJECT_INTERNAL((obj), __COUNTER__)
+ 
+ /* Required for qobject_to() */
+ #define QTYPE_CAST_TO_QNull     QTYPE_QNULL
+diff --git a/include/qemu/atomic.h b/include/qemu/atomic.h
+index d95612f7a0..3f80ffac69 100644
+--- a/include/qemu/atomic.h
++++ b/include/qemu/atomic.h
+@@ -157,13 +157,14 @@
+     smp_read_barrier_depends();
+ #endif
+ 
+-#define qatomic_rcu_read(ptr)                          \
+-    ({                                                 \
++#define qatomic_rcu_read_internal(ptr, l)               \
++    ({                                                  \
+     qemu_build_assert(sizeof(*ptr) <= ATOMIC_REG_SIZE); \
+-    typeof_strip_qual(*ptr) _val;                      \
+-    qatomic_rcu_read__nocheck(ptr, &_val);             \
+-    _val;                                              \
++    typeof_strip_qual(*ptr) PASTE(_val, l);             \
++    qatomic_rcu_read__nocheck(ptr, &PASTE(_val, l));    \
++    PASTE(_val, l);                                     \
+     })
++#define qatomic_rcu_read(ptr) qatomic_rcu_read_internal((ptr), __COUNTER__)
+ 
+ #define qatomic_rcu_set(ptr, i) do {                   \
+     qemu_build_assert(sizeof(*ptr) <= ATOMIC_REG_SIZE); \
+diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
+index 21ef8f1699..9c191ebe99 100644
+--- a/include/qemu/osdep.h
++++ b/include/qemu/osdep.h
+@@ -371,18 +371,21 @@ void QEMU_ERROR("code path is reachable")
+  * have to open-code it.  Sadly, Coverity is severely confused by the
+  * constant variants, so we have to dumb things down there.
+  */
++#define PASTE(a, b) a##b
++#define MIN_INTERNAL(a, b, l)                                           \
++    ({                                                                  \
++        typeof(1 ? (a) : (b)) PASTE(_a, l) = (a), PASTE(_b, l) = (b);   \
++        PASTE(_a, l) < PASTE(_b, l) ? PASTE(_a, l) : PASTE(_b, l);      \
++    })
+ #undef MIN
+-#define MIN(a, b)                                       \
+-    ({                                                  \
+-        typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
+-        _a < _b ? _a : _b;                              \
++#define MIN(a, b) MIN_INTERNAL((a), (b), __COUNTER__)
++#define MAX_INTERNAL(a, b, l)                                           \
++    ({                                                                  \
++        typeof(1 ? (a) : (b)) PASTE(_a, l) = (a), PASTE(_b, l) = (b);   \
++        PASTE(_a, l) > PASTE(_b, l) ? PASTE(_a, l) : PASTE(_b, l);      \
+     })
+ #undef MAX
+-#define MAX(a, b)                                       \
+-    ({                                                  \
+-        typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
+-        _a > _b ? _a : _b;                              \
+-    })
++#define MAX(a, b) MAX_INTERNAL((a), (b), __COUNTER__)
+ 
+ #ifdef __COVERITY__
+ # define MIN_CONST(a, b) ((a) < (b) ? (a) : (b))
+@@ -404,13 +407,14 @@ void QEMU_ERROR("code path is reachable")
+  * Minimum function that returns zero only if both values are zero.
+  * Intended for use with unsigned values only.
+  */
+-#ifndef MIN_NON_ZERO
+-#define MIN_NON_ZERO(a, b)                              \
+-    ({                                                  \
+-        typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
+-        _a == 0 ? _b : (_b == 0 || _b > _a) ? _a : _b;  \
++#define MIN_NON_ZERO_INTERNAL(a, b, l)                                  \
++    ({                                                                  \
++        typeof(1 ? (a) : (b)) PASTE(_a, l) = (a), PASTE(_b, l) = (b);   \
++        PASTE(_a, l) == 0 ? PASTE(_b, l)                                \
++        : (PASTE(_b, l) == 0 || PASTE(_b, l) > PASTE(_a, l)) ? PASTE(_a, l) \
++        : PASTE(_b, l);                                                 \
+     })
+-#endif
++#define MIN_NON_ZERO(a, b) MIN_NON_ZERO_INTERNAL((a), (b), __COUNTER__)
+ 
+ /*
+  * Round number down to multiple. Safe when m is not a power of 2 (see
 -- 
 2.41.0
 
