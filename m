@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B87AAC83F10
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 13:26:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.593899.927053 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC038C83F10
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Aug 2023 13:26:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.593901.927064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbhgN-0001k0-4q; Thu, 31 Aug 2023 13:25:59 +0000
+	id 1qbhgO-00023z-F8; Thu, 31 Aug 2023 13:26:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 593899.927053; Thu, 31 Aug 2023 13:25:59 +0000
+Received: by outflank-mailman (output) from mailman id 593901.927064; Thu, 31 Aug 2023 13:26:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbhgM-0001jN-UO; Thu, 31 Aug 2023 13:25:58 +0000
-Received: by outflank-mailman (input) for mailman id 593899;
- Thu, 31 Aug 2023 13:25:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qbhgO-00023o-Bo; Thu, 31 Aug 2023 13:26:00 +0000
+Received: by outflank-mailman (input) for mailman id 593901;
+ Thu, 31 Aug 2023 13:25:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=smM9=EQ=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1qbhgL-00011s-NQ
- for xen-devel@lists.xenproject.org; Thu, 31 Aug 2023 13:25:57 +0000
+ id 1qbhgM-00011r-P4
+ for xen-devel@lists.xenproject.org; Thu, 31 Aug 2023 13:25:58 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e95f4452-4801-11ee-8783-cb3800f73035;
- Thu, 31 Aug 2023 15:25:55 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-272-rzJRNDtEPsaeyhBiWaVnBg-1; Thu, 31 Aug 2023 09:25:50 -0400
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ea6a390e-4801-11ee-9b0d-b553b5be7939;
+ Thu, 31 Aug 2023 15:25:56 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-166-AMkiEJVzP9q12H4PY919rg-1; Thu, 31 Aug 2023 09:25:49 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BB1023C17134;
- Thu, 31 Aug 2023 13:25:49 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B086D80CC5E;
+ Thu, 31 Aug 2023 13:25:48 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.30])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 79F372026D3F;
- Thu, 31 Aug 2023 13:25:49 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id BC58240C2072;
+ Thu, 31 Aug 2023 13:25:47 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id C537E21E64CF; Thu, 31 Aug 2023 15:25:46 +0200 (CEST)
+ id BBE4421E6930; Thu, 31 Aug 2023 15:25:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e95f4452-4801-11ee-8783-cb3800f73035
+X-Inumbo-ID: ea6a390e-4801-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1693488354;
+	s=mimecast20190719; t=1693488355;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=h7uzBTuTWO11DD+dOgzT1HasQacubNXtfwGPA3YrMFc=;
-	b=fj66brTHl0mROcEyZJl7uH5YIfDfXm+ik8YY2b+XvGVhPfYLkZ835L//ARkHQJwpHB1NFs
-	aVM5ZP3g9rvKFOLEbNfBkU7XHoY/zwgfgeQZiusxMqb18szV+HeBiLtMjfVyGTgnmpHDgP
-	WTHaBS27dca0AqXct/0Yo13CRChXxFI=
-X-MC-Unique: rzJRNDtEPsaeyhBiWaVnBg-1
+	bh=J6v14ZSStXkdDjMaevSWEfLeuGs8oIU/1ND+Elarnrg=;
+	b=dsTldv1lQKpc5w9dMH5RQoqhpPNG0XPonsXeQqvF2S6K2K7sIGW6N/fNb0sJfJ4u5DBCnV
+	oBH322YsuKCii2SK5WcCAD0UX0pTiXXrQMcCaPCgmcgWzyhio2XgqQG/6o6RLQlO0GC/u+
+	YHMIyuZ0CjO0VvkjZylV7N28b7I/bbk=
+X-MC-Unique: AMkiEJVzP9q12H4PY919rg-1
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: kwolf@redhat.com,
@@ -94,15 +94,15 @@ Cc: kwolf@redhat.com,
 	xen-devel@lists.xenproject.org,
 	alex.bennee@linaro.org,
 	peter.maydell@linaro.org
-Subject: [PATCH 6/7] block: Clean up local variable shadowing
-Date: Thu, 31 Aug 2023 15:25:45 +0200
-Message-ID: <20230831132546.3525721-7-armbru@redhat.com>
+Subject: [PATCH 3/7] ui: Clean up local variable shadowing
+Date: Thu, 31 Aug 2023 15:25:42 +0200
+Message-ID: <20230831132546.3525721-4-armbru@redhat.com>
 In-Reply-To: <20230831132546.3525721-1-armbru@redhat.com>
 References: <20230831132546.3525721-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
 
 Local variables shadowing other local variables or parameters make the
 code needlessly hard to understand.  Tracked down with -Wshadow=local.
@@ -111,217 +111,157 @@ else rename variables.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- block.c              |  7 ++++---
- block/rbd.c          |  2 +-
- block/stream.c       |  1 -
- block/vvfat.c        | 34 +++++++++++++++++-----------------
- hw/block/xen-block.c |  6 +++---
- 5 files changed, 25 insertions(+), 25 deletions(-)
+ ui/gtk.c              | 14 +++++++-------
+ ui/spice-display.c    |  9 +++++----
+ ui/vnc-palette.c      |  2 --
+ ui/vnc.c              | 12 ++++++------
+ ui/vnc-enc-zrle.c.inc |  9 ++++-----
+ 5 files changed, 22 insertions(+), 24 deletions(-)
 
-diff --git a/block.c b/block.c
-index a307c151a8..7f0003d8ac 100644
---- a/block.c
-+++ b/block.c
-@@ -3001,7 +3001,8 @@ static BdrvChild *bdrv_attach_child_common(BlockDriverState *child_bs,
-                                            BdrvChildRole child_role,
-                                            uint64_t perm, uint64_t shared_perm,
-                                            void *opaque,
--                                           Transaction *tran, Error **errp)
-+                                           Transaction *transaction,
-+                                           Error **errp)
- {
-     BdrvChild *new_child;
-     AioContext *parent_ctx, *new_child_ctx;
-@@ -3088,7 +3089,7 @@ static BdrvChild *bdrv_attach_child_common(BlockDriverState *child_bs,
-         .old_parent_ctx = parent_ctx,
-         .old_child_ctx = child_ctx,
-     };
--    tran_add(tran, &bdrv_attach_child_common_drv, s);
-+    tran_add(transaction, &bdrv_attach_child_common_drv, s);
+diff --git a/ui/gtk.c b/ui/gtk.c
+index 8ba41c8f13..24c78df79e 100644
+--- a/ui/gtk.c
++++ b/ui/gtk.c
+@@ -930,8 +930,8 @@ static gboolean gd_motion_event(GtkWidget *widget, GdkEventMotion *motion,
+         GdkMonitor *monitor = gdk_display_get_monitor_at_window(dpy, win);
+         GdkRectangle geometry;
  
-     if (new_child_ctx != child_ctx) {
-         aio_context_release(new_child_ctx);
-@@ -6073,12 +6074,12 @@ void bdrv_iterate_format(void (*it)(void *opaque, const char *name),
-     QLIST_FOREACH(drv, &bdrv_drivers, list) {
-         if (drv->format_name) {
-             bool found = false;
--            int i = count;
+-        int x = (int)motion->x_root;
+-        int y = (int)motion->y_root;
++        int xr = (int)motion->x_root;
++        int yr = (int)motion->y_root;
  
-             if (use_bdrv_whitelist && !bdrv_is_whitelisted(drv, read_only)) {
-                 continue;
-             }
+         gdk_monitor_get_geometry(monitor, &geometry);
  
-+            i = count;
-             while (formats && i && !found) {
-                 found = !strcmp(formats[--i], drv->format_name);
-             }
-diff --git a/block/rbd.c b/block/rbd.c
-index 978671411e..472ca05cba 100644
---- a/block/rbd.c
-+++ b/block/rbd.c
-@@ -1290,7 +1290,7 @@ static int coroutine_fn qemu_rbd_start_co(BlockDriverState *bs,
-          * operations that exceed the current size.
-          */
-         if (offset + bytes > s->image_size) {
--            int r = qemu_rbd_resize(bs, offset + bytes);
-+            r = qemu_rbd_resize(bs, offset + bytes);
-             if (r < 0) {
-                 return r;
-             }
-diff --git a/block/stream.c b/block/stream.c
-index e522bbdec5..007253880b 100644
---- a/block/stream.c
-+++ b/block/stream.c
-@@ -282,7 +282,6 @@ void stream_start(const char *job_id, BlockDriverState *bs,
-     /* Make sure that the image is opened in read-write mode */
-     bs_read_only = bdrv_is_read_only(bs);
-     if (bs_read_only) {
--        int ret;
-         /* Hold the chain during reopen */
-         if (bdrv_freeze_backing_chain(bs, above_base, errp) < 0) {
-             return;
-diff --git a/block/vvfat.c b/block/vvfat.c
-index 0ddc91fc09..d7425ee602 100644
---- a/block/vvfat.c
-+++ b/block/vvfat.c
-@@ -777,7 +777,6 @@ static int read_directory(BDRVVVFATState* s, int mapping_index)
-     while((entry=readdir(dir))) {
-         unsigned int length=strlen(dirname)+2+strlen(entry->d_name);
-         char* buffer;
--        direntry_t* direntry;
-         struct stat st;
-         int is_dot=!strcmp(entry->d_name,".");
-         int is_dotdot=!strcmp(entry->d_name,"..");
-@@ -857,7 +856,7 @@ static int read_directory(BDRVVVFATState* s, int mapping_index)
+@@ -942,13 +942,13 @@ static gboolean gd_motion_event(GtkWidget *widget, GdkEventMotion *motion,
+          * may still be only half way across the screen. Without
+          * this warp, the server pointer would thus appear to hit
+          * an invisible wall */
+-        if (x <= geometry.x || x - geometry.x >= geometry.width - 1 ||
+-            y <= geometry.y || y - geometry.y >= geometry.height - 1) {
++        if (xr <= geometry.x || xr - geometry.x >= geometry.width - 1 ||
++            yr <= geometry.y || yr - geometry.y >= geometry.height - 1) {
+             GdkDevice *dev = gdk_event_get_device((GdkEvent *)motion);
+-            x = geometry.x + geometry.width / 2;
+-            y = geometry.y + geometry.height / 2;
++            xr = geometry.x + geometry.width / 2;
++            yr = geometry.y + geometry.height / 2;
  
-     /* fill with zeroes up to the end of the cluster */
-     while(s->directory.next%(0x10*s->sectors_per_cluster)) {
--        direntry_t* direntry=array_get_next(&(s->directory));
-+        direntry = array_get_next(&(s->directory));
-         memset(direntry,0,sizeof(direntry_t));
+-            gdk_device_warp(dev, screen, x, y);
++            gdk_device_warp(dev, screen, xr, yr);
+             s->last_set = FALSE;
+             return FALSE;
+         }
+diff --git a/ui/spice-display.c b/ui/spice-display.c
+index 3f3f8013d8..cbaba3bbad 100644
+--- a/ui/spice-display.c
++++ b/ui/spice-display.c
+@@ -1080,15 +1080,16 @@ static void qemu_spice_gl_update(DisplayChangeListener *dcl,
      }
  
-@@ -1962,24 +1961,24 @@ get_cluster_count_for_direntry(BDRVVVFATState* s, direntry_t* direntry, const ch
-                  * This is horribly inefficient, but that is okay, since
-                  * it is rarely executed, if at all.
-                  */
--                int64_t offset = cluster2sector(s, cluster_num);
-+                int64_t offs = cluster2sector(s, cluster_num);
- 
-                 vvfat_close_current_file(s);
-                 for (i = 0; i < s->sectors_per_cluster; i++) {
-                     int res;
- 
-                     res = bdrv_is_allocated(s->qcow->bs,
--                                            (offset + i) * BDRV_SECTOR_SIZE,
-+                                            (offs + i) * BDRV_SECTOR_SIZE,
-                                             BDRV_SECTOR_SIZE, NULL);
-                     if (res < 0) {
-                         return -1;
-                     }
-                     if (!res) {
--                        res = vvfat_read(s->bs, offset, s->cluster_buffer, 1);
-+                        res = vvfat_read(s->bs, offs, s->cluster_buffer, 1);
-                         if (res) {
-                             return -1;
-                         }
--                        res = bdrv_co_pwrite(s->qcow, offset * BDRV_SECTOR_SIZE,
-+                        res = bdrv_co_pwrite(s->qcow, offs * BDRV_SECTOR_SIZE,
-                                              BDRV_SECTOR_SIZE, s->cluster_buffer,
-                                              0);
-                         if (res < 0) {
-@@ -2467,8 +2466,9 @@ commit_direntries(BDRVVVFATState* s, int dir_index, int parent_mapping_index)
- 
-     for (c = first_cluster; !fat_eof(s, c); c = modified_fat_get(s, c)) {
-         direntry_t *first_direntry;
--        void* direntry = array_get(&(s->directory), current_dir_index);
--        int ret = vvfat_read(s->bs, cluster2sector(s, c), direntry,
+     if (render_cursor) {
+-        int x, y;
++        int ptr_x, ptr_y;
 +
-+        direntry = array_get(&(s->directory), current_dir_index);
-+        ret = vvfat_read(s->bs, cluster2sector(s, c), (uint8_t *)direntry,
-                 s->sectors_per_cluster);
-         if (ret)
-             return ret;
-@@ -2690,12 +2690,12 @@ static int handle_renames_and_mkdirs(BDRVVVFATState* s)
-                 direntry_t* direntry = array_get(&(s->directory),
-                         mapping->info.dir.first_dir_index);
-                 uint32_t c = mapping->begin;
--                int i = 0;
-+                int j = 0;
- 
-                 /* recurse */
-                 while (!fat_eof(s, c)) {
-                     do {
--                        direntry_t* d = direntry + i;
-+                        direntry_t* d = direntry + j;
- 
-                         if (is_file(d) || (is_directory(d) && !is_dot(d))) {
-                             int l;
-@@ -2716,8 +2716,8 @@ static int handle_renames_and_mkdirs(BDRVVVFATState* s)
- 
-                             schedule_rename(s, m->begin, new_path);
-                         }
--                        i++;
--                    } while((i % (0x10 * s->sectors_per_cluster)) != 0);
-+                        j++;
-+                    } while((j % (0x10 * s->sectors_per_cluster)) != 0);
-                     c = fat_get(s, c);
-                 }
-             }
-@@ -2804,16 +2804,16 @@ static int coroutine_fn GRAPH_RDLOCK handle_commits(BDRVVVFATState* s)
-             int begin = commit->param.new_file.first_cluster;
-             mapping_t* mapping = find_mapping_for_cluster(s, begin);
-             direntry_t* entry;
--            int i;
-+            int j;
- 
-             /* find direntry */
--            for (i = 0; i < s->directory.next; i++) {
--                entry = array_get(&(s->directory), i);
-+            for (j = 0; j < s->directory.next; j++) {
-+                entry = array_get(&(s->directory), j);
-                 if (is_file(entry) && begin_of_direntry(entry) == begin)
-                     break;
-             }
- 
--            if (i >= s->directory.next) {
-+            if (j >= s->directory.next) {
-                 fail = -6;
-                 continue;
-             }
-@@ -2833,7 +2833,7 @@ static int coroutine_fn GRAPH_RDLOCK handle_commits(BDRVVVFATState* s)
-             mapping->mode = MODE_NORMAL;
-             mapping->info.file.offset = 0;
- 
--            if (commit_one_file(s, i, 0))
-+            if (commit_one_file(s, j, 0))
-                 fail = -7;
- 
-             break;
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 3906b9058b..a07cd7eb5d 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -369,7 +369,7 @@ static void xen_block_get_vdev(Object *obj, Visitor *v, const char *name,
-     case XEN_BLOCK_VDEV_TYPE_XVD:
-     case XEN_BLOCK_VDEV_TYPE_HD:
-     case XEN_BLOCK_VDEV_TYPE_SD: {
--        char *name = disk_to_vbd_name(vdev->disk);
-+        char *vbd_name = disk_to_vbd_name(vdev->disk);
- 
-         str = g_strdup_printf("%s%s%lu",
-                               (vdev->type == XEN_BLOCK_VDEV_TYPE_XVD) ?
-@@ -377,8 +377,8 @@ static void xen_block_get_vdev(Object *obj, Visitor *v, const char *name,
-                               (vdev->type == XEN_BLOCK_VDEV_TYPE_HD) ?
-                               "hd" :
-                               "sd",
--                              name, vdev->partition);
--        g_free(name);
-+                              vbd_name, vdev->partition);
-+        g_free(vbd_name);
-         break;
+         qemu_mutex_lock(&ssd->lock);
+-        x = ssd->ptr_x;
+-        y = ssd->ptr_y;
++        ptr_x = ssd->ptr_x;
++        ptr_y = ssd->ptr_y;
+         qemu_mutex_unlock(&ssd->lock);
+         egl_texture_blit(ssd->gls, &ssd->blit_fb, &ssd->guest_fb,
+                          !y_0_top);
+         egl_texture_blend(ssd->gls, &ssd->blit_fb, &ssd->cursor_fb,
+-                          !y_0_top, x, y, 1.0, 1.0);
++                          !y_0_top, ptr_x, ptr_y, 1.0, 1.0);
+         glFlush();
      }
-     default:
+ 
+diff --git a/ui/vnc-palette.c b/ui/vnc-palette.c
+index dc7c0ba997..4e88c412f0 100644
+--- a/ui/vnc-palette.c
++++ b/ui/vnc-palette.c
+@@ -86,8 +86,6 @@ int palette_put(VncPalette *palette, uint32_t color)
+         return 0;
+     }
+     if (!entry) {
+-        VncPaletteEntry *entry;
+-
+         entry = &palette->pool[palette->size];
+         entry->color = color;
+         entry->idx = idx;
+diff --git a/ui/vnc.c b/ui/vnc.c
+index 92964dcc0c..3e1fccffa3 100644
+--- a/ui/vnc.c
++++ b/ui/vnc.c
+@@ -1584,15 +1584,15 @@ static void vnc_jobs_bh(void *opaque)
+  */
+ static int vnc_client_read(VncState *vs)
+ {
+-    size_t ret;
++    size_t sz;
+ 
+ #ifdef CONFIG_VNC_SASL
+     if (vs->sasl.conn && vs->sasl.runSSF)
+-        ret = vnc_client_read_sasl(vs);
++        sz = vnc_client_read_sasl(vs);
+     else
+ #endif /* CONFIG_VNC_SASL */
+-        ret = vnc_client_read_plain(vs);
+-    if (!ret) {
++        sz = vnc_client_read_plain(vs);
++    if (!sz) {
+         if (vs->disconnecting) {
+             vnc_disconnect_finish(vs);
+             return -1;
+@@ -3118,8 +3118,8 @@ static int vnc_refresh_server_surface(VncDisplay *vd)
+     cmp_bytes = MIN(VNC_DIRTY_PIXELS_PER_BIT * VNC_SERVER_FB_BYTES,
+                     server_stride);
+     if (vd->guest.format != VNC_SERVER_FB_FORMAT) {
+-        int width = pixman_image_get_width(vd->server);
+-        tmpbuf = qemu_pixman_linebuf_create(VNC_SERVER_FB_FORMAT, width);
++        int w = pixman_image_get_width(vd->server);
++        tmpbuf = qemu_pixman_linebuf_create(VNC_SERVER_FB_FORMAT, w);
+     } else {
+         int guest_bpp =
+             PIXMAN_FORMAT_BPP(pixman_image_get_format(vd->guest.fb));
+diff --git a/ui/vnc-enc-zrle.c.inc b/ui/vnc-enc-zrle.c.inc
+index c107d8affc..edf42d4a6a 100644
+--- a/ui/vnc-enc-zrle.c.inc
++++ b/ui/vnc-enc-zrle.c.inc
+@@ -153,11 +153,12 @@ static void ZRLE_ENCODE_TILE(VncState *vs, ZRLE_PIXEL *data, int w, int h,
+     }
+ 
+     if (use_rle) {
+-        ZRLE_PIXEL *ptr = data;
+-        ZRLE_PIXEL *end = ptr + w * h;
+         ZRLE_PIXEL *run_start;
+         ZRLE_PIXEL pix;
+ 
++	ptr = data;
++        end = ptr + w * h;
++
+         while (ptr < end) {
+             int len;
+             int index = 0;
+@@ -198,7 +199,7 @@ static void ZRLE_ENCODE_TILE(VncState *vs, ZRLE_PIXEL *data, int w, int h,
+         }
+     } else if (use_palette) { /* no RLE */
+         int bppp;
+-        ZRLE_PIXEL *ptr = data;
++        ptr = data;
+ 
+         /* packed pixels */
+ 
+@@ -241,8 +242,6 @@ static void ZRLE_ENCODE_TILE(VncState *vs, ZRLE_PIXEL *data, int w, int h,
+ #endif
+         {
+ #ifdef ZRLE_COMPACT_PIXEL
+-            ZRLE_PIXEL *ptr;
+-
+             for (ptr = data; ptr < data + w * h; ptr++) {
+                 ZRLE_WRITE_PIXEL(vs, *ptr);
+             }
 -- 
 2.41.0
 
