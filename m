@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6973ACA0FE1
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 09:07:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.594513.927863 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8951FCA0FE6
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 09:13:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.594545.927895 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qc07F-0003Fj-6x; Fri, 01 Sep 2023 09:06:57 +0000
+	id 1qc0DJ-0006dn-AW; Fri, 01 Sep 2023 09:13:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 594513.927863; Fri, 01 Sep 2023 09:06:57 +0000
+Received: by outflank-mailman (output) from mailman id 594545.927895; Fri, 01 Sep 2023 09:13:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qc07E-0003Dn-VU; Fri, 01 Sep 2023 09:06:56 +0000
-Received: by outflank-mailman (input) for mailman id 594513;
- Fri, 01 Sep 2023 09:06:55 +0000
+	id 1qc0DJ-0006dg-7h; Fri, 01 Sep 2023 09:13:13 +0000
+Received: by outflank-mailman (input) for mailman id 594545;
+ Fri, 01 Sep 2023 09:13:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TF5h=ER=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qc07D-00035h-M1
- for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 09:06:55 +0000
+ id 1qc0DI-0006da-2N
+ for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 09:13:12 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e4f9913a-48a6-11ee-9b0d-b553b5be7939;
- Fri, 01 Sep 2023 11:06:54 +0200 (CEST)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 12DB94EE073A;
- Fri,  1 Sep 2023 11:06:53 +0200 (CEST)
+ id c523b2a0-48a7-11ee-9b0d-b553b5be7939;
+ Fri, 01 Sep 2023 11:13:10 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id 80EA14EE0737;
+ Fri,  1 Sep 2023 11:13:09 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,101 +41,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e4f9913a-48a6-11ee-9b0d-b553b5be7939
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>
-Subject: [XEN PATCH 2/3] docs: make the docs for MISRA C:2012 Dir 4.1 visible to ECLAIR
-Date: Fri,  1 Sep 2023 11:06:39 +0200
-Message-Id: <bf38efce3ac551fc95eaf1935ce7f574a7804df2.1693558913.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1693558913.git.nicola.vetrini@bugseng.com>
-References: <cover.1693558913.git.nicola.vetrini@bugseng.com>
+X-Inumbo-ID: c523b2a0-48a7-11ee-9b0d-b553b5be7939
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Fri, 01 Sep 2023 11:13:09 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
+ ayan.kumar.halder@amd.com, consulting@bugseng.com, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Paul Durrant <paul@xen.org>,
+ xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH] ioreq: include arch-specific ioreq header in
+ <xen/ioreq.h>
+In-Reply-To: <15eef072-d7a5-23a9-a7de-3c16fea49dd9@suse.com>
+References: <e5f13920dfcb9f828abb4a36dd410d342f4c0939.1692974235.git.nicola.vetrini@bugseng.com>
+ <73a78132-a086-5ae1-2617-fb38c51e64e5@suse.com>
+ <f96865f3d7a47e4d9d52ee13dea064e3@bugseng.com>
+ <15eef072-d7a5-23a9-a7de-3c16fea49dd9@suse.com>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <cf5f8c126cc6bb5564ac4cf214055df2@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-To be able to check for the existence of the necessary subsections in
-the documentation for MISRA C:2012 Dir 4.1, ECLAIR needs to have a source
-file that is built.
+On 01/09/2023 09:36, Jan Beulich wrote:
+> On 01.09.2023 09:13, Nicola Vetrini wrote:
+>> On 28/08/2023 09:59, Jan Beulich wrote:
+>>> On 25.08.2023 17:02, Nicola Vetrini wrote:
+>>>> The common header file for ioreq should include the arch-specific 
+>>>> one.
+>>> 
+>>> To be honest I'm not convinced of "should" here. There are two 
+>>> aspects
+>>> to consider: On one hand it is good practice to do what you say. Otoh
+>>> it
+>>> introduces a needless dependency, and it'll require new arch-es
+>>> (RISC-V,
+>>> PPC at present) to introduce another dummy header just to satisfy the
+>>> xen/ioreq.h use in common/memory.c. Therefore, _if_ we want to go 
+>>> this
+>>> route, besides a wording change here I think ...
+>>> 
+>> 
+>> Since including both <xen/ioreq.h> and the arch-specific one was
+>> requested to be changed
+>> in previous series, I was trying to apply the same pattern here.
+>> If you prefer not to change the current layout then the fix is even
+>> simpler: I'll just
+>> include <asm/ioreq.h> in xen/arch/arm/ioreq.c, which is where it's
+>> missing.
+>> 
+>>>> --- a/xen/include/xen/ioreq.h
+>>>> +++ b/xen/include/xen/ioreq.h
+>>>> @@ -20,6 +20,7 @@
+>>>>  #define __XEN_IOREQ_H__
+>>>> 
+>>>>  #include <xen/sched.h>
+>>>> +#include <asm/ioreq.h>
+>>> 
+>>> ... this #include wants to be conditional upon CONFIG_IOREQ_SERVER
+>>> being
+>>> defined. (I'm actually surprised that there's no respective #ifdef in
+>>> that header, meaning types defined there are available even when the
+>>> functionality was turned off.)
+>> 
+>> The two functions in question are actually guarded by an #ifdef
+>> CONFIG_IOREQ_SERVER
+>> in arch/arm/include/asm/ioreq.h (in the #else branch some stubs are
+>> defined)
+> 
+> Well, I don't see how an #ifdef there helps with the aspect mentioned
+> earlier (new arch-es needing to needlessly provide such a header as 
+> long
+> as the #include here is unconditional).
+> 
 
-This file is generated from 'C-runtime-failures.rst' in docs/misra
-and the configuration is updated accordingly.
+As far as I can tell, including the asm header in the arm implementation 
+file does not imply
+that new archs will need such an header. Of course, if the solution 
+proposed in the patch is
+chosen then I agree with you.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-Changes from RFC:
-- Dropped unused/useless code
-- Revised the sed command
-- Revised the clean target
----
- docs/Makefile       |  7 ++++++-
- docs/misra/Makefile | 17 +++++++++++++++++
- 2 files changed, 23 insertions(+), 1 deletion(-)
- create mode 100644 docs/misra/Makefile
-
-diff --git a/docs/Makefile b/docs/Makefile
-index 966a104490ac..ff991a0c3ca2 100644
---- a/docs/Makefile
-+++ b/docs/Makefile
-@@ -43,7 +43,7 @@ DOC_PDF  := $(patsubst %.pandoc,pdf/%.pdf,$(PANDOCSRC-y)) \
- all: build
- 
- .PHONY: build
--build: html txt pdf man-pages figs
-+build: html txt pdf man-pages figs misra
- 
- .PHONY: sphinx-html
- sphinx-html:
-@@ -66,9 +66,14 @@ endif
- .PHONY: pdf
- pdf: $(DOC_PDF)
- 
-+.PHONY: misra
-+misra:
-+	$(MAKE) -C misra
-+
- .PHONY: clean
- clean: clean-man-pages
- 	$(MAKE) -C figs clean
-+	$(MAKE) -C misra clean
- 	rm -rf .word_count *.aux *.dvi *.bbl *.blg *.glo *.idx *~
- 	rm -rf *.ilg *.log *.ind *.toc *.bak *.tmp core
- 	rm -rf html txt pdf sphinx/html
-diff --git a/docs/misra/Makefile b/docs/misra/Makefile
-new file mode 100644
-index 000000000000..8ea0505c8a20
---- /dev/null
-+++ b/docs/misra/Makefile
-@@ -0,0 +1,17 @@
-+TARGETS := C-runtime-failures.o
-+
-+all: $(TARGETS)
-+
-+# sed is used in place of cat to prevent occurrences of '*/'
-+# in the .rst from breaking the compilation
-+$(TARGETS:.o=.c): %.c: %.rst
-+	echo "/*\n" > $@.tmp
-+	sed -e 's|\*/|*//*|g' $< >> $@.tmp
-+	echo "\n*/" >> $@.tmp
-+	mv $@.tmp $@
-+
-+%.o: %.c
-+	$(CC) -c $< -o $@
-+
-+clean:
-+	rm -f C-runtime-failures.c *.o *.tmp
 -- 
-2.34.1
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
