@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB479CA0FE6
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:10:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.594252.927536 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D681CA0FE6
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:11:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.594260.927546 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwQP-0000N6-Pz; Fri, 01 Sep 2023 05:10:29 +0000
+	id 1qbwR3-00016u-2P; Fri, 01 Sep 2023 05:11:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 594252.927536; Fri, 01 Sep 2023 05:10:29 +0000
+Received: by outflank-mailman (output) from mailman id 594260.927546; Fri, 01 Sep 2023 05:11:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwQP-0000Mz-Ly; Fri, 01 Sep 2023 05:10:29 +0000
-Received: by outflank-mailman (input) for mailman id 594252;
- Fri, 01 Sep 2023 05:10:28 +0000
+	id 1qbwR2-00016n-UE; Fri, 01 Sep 2023 05:11:08 +0000
+Received: by outflank-mailman (input) for mailman id 594260;
+ Fri, 01 Sep 2023 05:11:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JvPm=ER=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1qbwGc-0001Hn-KV
- for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:22 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20624.outbound.protection.outlook.com
- [2a01:111:f400:fe5a::624])
+ id 1qbwGY-0001Hn-6H
+ for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:18 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20602.outbound.protection.outlook.com
+ [2a01:111:f400:7eab::602])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 72e360b3-4884-11ee-9b0d-b553b5be7939;
- Fri, 01 Sep 2023 07:00:20 +0200 (CEST)
-Received: from DM6PR17CA0009.namprd17.prod.outlook.com (2603:10b6:5:1b3::22)
- by CH0PR12MB5330.namprd12.prod.outlook.com (2603:10b6:610:d5::7) with
+ id 7032be93-4884-11ee-9b0d-b553b5be7939;
+ Fri, 01 Sep 2023 07:00:16 +0200 (CEST)
+Received: from CY5PR15CA0006.namprd15.prod.outlook.com (2603:10b6:930:14::9)
+ by DM4PR12MB7719.namprd12.prod.outlook.com (2603:10b6:8:101::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.23; Fri, 1 Sep
- 2023 05:00:14 +0000
-Received: from CY4PEPF0000EDD7.namprd03.prod.outlook.com
- (2603:10b6:5:1b3:cafe::21) by DM6PR17CA0009.outlook.office365.com
- (2603:10b6:5:1b3::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22 via Frontend
- Transport; Fri, 1 Sep 2023 05:00:14 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EDD7.mail.protection.outlook.com (10.167.241.211) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22; Fri, 1 Sep
+ 2023 05:00:13 +0000
+Received: from CY4PEPF0000EE32.namprd05.prod.outlook.com
+ (2603:10b6:930:14:cafe::fb) by CY5PR15CA0006.outlook.office365.com
+ (2603:10b6:930:14::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.21 via Frontend
+ Transport; Fri, 1 Sep 2023 05:00:13 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EE32.mail.protection.outlook.com (10.167.242.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.16 via Frontend Transport; Fri, 1 Sep 2023 05:00:14 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.6745.16 via Frontend Transport; Fri, 1 Sep 2023 05:00:12 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
- 2023 00:00:12 -0500
+ 2023 00:00:09 -0500
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Fri, 1 Sep 2023 00:00:12 -0500
+ Transport; Fri, 1 Sep 2023 00:00:09 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,36 +61,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 72e360b3-4884-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 7032be93-4884-11ee-9b0d-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bTSZxqIGX6QUklP7E+2bT/V1IuikQIE7ptoo+pjO/hd1Go0+JvZiGOqh2QD11Qeq9To5cOfeLioLO/L2WEPvabHLtcOhC8fX+JENV1xPYwU9Ls1r9sF3H9YCQtVtSfC5Lgca4oHRzEzDj+nDlL0ChVqnXVddqi9FqmRSk0HhjMppx+A8Qn0u+eYR9K2gbLFVLCUkB15oAiT24/+3MYiNd4S/28D94MZQi7c/ak6zzMS6vVtqlLES7yCtRXiyM6m40N7gQeLodYTBE8ltFTP1zCdFXd6Us5Pa59LCIjTJ5zXVHoKxXPWMG2uj33pF9MkQ8RodIsR9lvJLV9ox20Q7yQ==
+ b=K89iQoFiEFSf0bqsEWd6uzDbDH/mfon3zokUzk7FcE5tydUT7CV2KTJCCNIoRxdh+biJMEworTi+m6W8DMbAuPmvOqyzTu0dUFssyIDTseJEoxNXoOBNfj5N4KQaNnpWGRkl57bGjDR6EDUI94FHEw5xc4ZPyB9ZxQDz/mOLD4nF+tw596aYs+vOE0g8ufwuky6IMGkSPLco6pIrH+JQ0wkV3eVpoFESilzvVKf5L7a1AklSyk/1Zb4CaF8SXCRrcQIS665uj2TDW6JfpbZaeoVDAEeeErRs7xC7bIT0T0YYGs69HqLe4f/82bFxf6ykuLJdiqnvTJ5KZMMM+bPmLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N5Ad07nFyqe3yvUSTljKoScg3IAugPfBscvADFFb2TQ=;
- b=cfoERg+tJmlDINXCzok+2CY0OCeCSEjzptvM96kFfbMXaRJjGM7zr3+kp03HRbf/5XfXN5TJDkqOF3a80bcPxnEt5+cBOiT2NKhBmjhBe6SbMgK+PD3w4SxofdoD8gpO0+1udy5dn+ilQMG8zlRFavKi84lii1al8V1NKOW1Srt3t6WAB9jXuMpg7tf+0kepteck8tUwmRhVFbxStlRzPso2CqcapRc7VbYlAZOO+QWa7Qta0qDBKNdRcs3Cgxeek78CjkSBLIXaDdfgSIa8BtmkWwmM1HV0K3hahzf2bpWWHy99ir2/D66GNi1WIxQoSso4Zfx0D61REXPj1SLuFg==
+ bh=JIgawtLTJDYclMTRziV6+ukrPXqF+ozH3iEpHoQmI6c=;
+ b=Z/w6AMB1A8+3B8OzZy71juf5K2/KzMsJm9oYqLZ8O+L/oDZlG/7sShD2Wly+C+W7nuVyrJB3wAnVKTLGwTS++aETrA5w3qsgPV1/iRSEPpHX1u7kKXGxWmnyoAaNiREsnRaXNibnbvsYr9CjmQoItBgHvGD9O/DMvR6X4gGAdanfxCsAgmsULkopBmuhGAqBR4CgFtSkSZ1KSMGc7LLKN6Ink75Zni3RQt2gpptQs5dutGrgkX3nSfV3BINO1VmBhC6dDPvlcPrvFAIW05+lTJKyjNs1eI0zyT7WkzPNFYLGaqWfzve/0iQLLUM3Rd/kImKWRxAQyIFPfAYc99K1kQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N5Ad07nFyqe3yvUSTljKoScg3IAugPfBscvADFFb2TQ=;
- b=qwxtyOjyiw0it9jprvyaGDAx8fvVBChsAjAVNbo9CrfC9gDmtKH0EcHVwKZX+7BEwQNh/uWTu4oWpgeOB8owMRn2ld0ViOfeV26L6ipx1fxE3yDFgr0ff/wltqKEd/svN2gQfPJUS6JZLfC85X2h4w9h1FtPbeLVXgKeZEvhsGM=
+ bh=JIgawtLTJDYclMTRziV6+ukrPXqF+ozH3iEpHoQmI6c=;
+ b=27/PiAWhzMgPwauVdDVn7zfLiIo9Cv5Q9YNhIqBX4P8uZFZFKP7QtkREDNRvBidQewuifvZ8K75ZbhALEWJp0tQ8pw/n4s7SzIt6layvuNh6MxijnTSjGpjP6IBy5OedqvPGnSl2WBPQDdTiRhpDFgkiIuZY94Ns+0/OlkcpsYI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <vikram.garhwal@amd.com>, <julien@xen.org>, <michal.orzel@amd.com>,
-	<sstabellini@kernel.org>, Rahul Singh <rahul.singh@arm.com>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [XEN][PATCH v11 12/20] xen/smmu: Add remove_device callback for smmu_iommu ops
-Date: Thu, 31 Aug 2023 21:59:39 -0700
-Message-ID: <20230901045947.32351-13-vikram.garhwal@amd.com>
+	<sstabellini@kernel.org>
+Subject: [XEN][PATCH v11 08/20] xen/device-tree: Add dt_find_node_by_path_from() to find nodes in device tree
+Date: Thu, 31 Aug 2023 21:59:35 -0700
+Message-ID: <20230901045947.32351-9-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230901045947.32351-1-vikram.garhwal@amd.com>
 References: <20230901045947.32351-1-vikram.garhwal@amd.com>
@@ -98,138 +97,111 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD7:EE_|CH0PR12MB5330:EE_
-X-MS-Office365-Filtering-Correlation-Id: f501a0e5-1e22-4433-c043-08dbaaa853ee
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE32:EE_|DM4PR12MB7719:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1b0c34c5-a605-4f58-26ca-08dbaaa85346
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	L0RiqoHbUAXBiQXKngOBAEYk8huoJjUHKDssVxDMWg0j6Hrilp0n+HYctAR4gw42huHltIQ1EPXD6zZEWCsJyfywkyfSaMbnzz5plYB772Yjm1BRDEeC1CQ56ms3o7b8NQ86vZYp0CjIIj6Lq7py0b0ziSLRp2FXF44y5f9miA6P7AHmgPJYaZzTts3rTfLUJkFyV8+9t+85YRzIiYNGVFt7BRO68qzwQ1uSaFElvDP2HsBb+Ubg4qcBSh6zE/RKXd1NmraABJYOjCYGzIAdwOZxH97WVlIPO3414q5qYu0HWvfFFD6b7mlmjBNt9g48uSCCA/O1iDZ/S7QThuyAn9QeewHf5WvEy7HacT6EI4SfpzdZXINIwXsrPirg+fLTOrKVAhsETfw+CCrauoxqgHmtDeibvSOBbv82EMrFeWgCi6UwmoiqnQaIPkfX3dtrVCqFol6Izn45l2GgdEg52LrT8SvAirtXDu/PZ7Xoq29MzDyZQqDqP2IIy8ygb0zZAYdxPGcxGoS6vt8InsYhFtxTnMi5RIXfMzUs3HeAJb4JMNKkOAQ9azPqLKIuT0J28PoLtpDsLbOfNQa8/QEfiL29Qp0HcJHMpkn51dQg6Qg3zQbTqt9pNxszfTWphoKq5ht3NDH+Wpx9JZew60enARBs7CsIJ8K/QcUAEWzc4vr/DG7Mv2IFIjHLRlZ+Jzv7OTWYXZbmp5LVXFlPb1BG5LxbuyS+L70xudCTvGG/8cQ2llQ4/0qFGRBt/p1H3K/2pnrD8VYaxXb4q67kongdag==
+	zc79sxi8OJuMpM/rX1j8GrYByhB1hj7WWoCMsp3RbOOX+bXhThN4pjrApz2IjjympqCdghaJxB0egtrbY71LAWbka010sSJXdvckhG3Fo+XMXUTeaUOJR4ukFPXRrlGR4Bzzb7WL+5cknsH1imujtNJZnQHZceqd9eoK1Yzg1+rw1Cppiw6FGYE/PTfDOvpeLFDNZimyDTmqbqDLjWQvyYqV01MEyhpAcmw16FwazGgcWWwrt314tp+MNhkaX1L0INyw5PVYV78QyOoyHJKvppO3JlND9pWsO3ISLg23ojUPlpkTIogTbct2apIMBaalntVxNa2YM2SJ/d4eAcbT5wcgDPpkZ73PkWXjcFfsoySxNBJfTsVXaJFXluk9Vt9QmptG+NTmzZ0PR+IsWicRnfrW1yf3wpYVhdkccPaIom2I8LQVJmJ7anaCJqy49jmB6BFX0P3WTBB61Mlgi5Kr5XvPHqXFgn1TYI+SPdyUeXa2QJ5gb+0d/yDprTN7fg6X9LJTQ9P27r60Sw4U0HGDnI7EfEKQYG4tMAN+3eiG4RSDkBdRG3LlaX7+SzjLwwV2OKcVSAMuJeye5SPp24o59TeWIqYjcOlmKCGgxGolzGfCUvM4F53Mkulri+3ufp44wpmAm4MpDCAuehb+FA5DGYcBr8mBv0vXam7F5gZ9Jt+jvyfkioKcvNZyr02k0S3aWSr3+naRLSrYW4ahcETsjlKUIzkzX/1jwMWINYHFtqu98+AjGafcVxwB+QFQQwmVVe37imDXkDI8vmp43vfPlvRhLOxUMVujO+YFm9TEkMk=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(136003)(346002)(376002)(39860400002)(82310400011)(451199024)(186009)(1800799009)(40470700004)(46966006)(36840700001)(6666004)(478600001)(83380400001)(1076003)(2616005)(336012)(426003)(26005)(2906002)(44832011)(6916009)(54906003)(316002)(41300700001)(70586007)(70206006)(5660300002)(8936002)(8676002)(4326008)(40460700003)(36756003)(40480700001)(47076005)(36860700001)(86362001)(81166007)(356005)(82740400003)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(376002)(346002)(39860400002)(136003)(396003)(82310400011)(186009)(1800799009)(451199024)(40470700004)(46966006)(36840700001)(40480700001)(82740400003)(36756003)(41300700001)(336012)(426003)(26005)(1076003)(40460700003)(54906003)(356005)(70586007)(70206006)(81166007)(83380400001)(316002)(6916009)(478600001)(6666004)(2906002)(5660300002)(86362001)(44832011)(8936002)(2616005)(36860700001)(8676002)(47076005)(4326008)(37363002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:14.1503
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:12.9672
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f501a0e5-1e22-4433-c043-08dbaaa853ee
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b0c34c5-a605-4f58-26ca-08dbaaa85346
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EDD7.namprd03.prod.outlook.com
+	CY4PEPF0000EE32.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5330
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7719
 
-Add remove_device callback for removing the device entry from smmu-master using
-following steps:
-1. Find if SMMU master exists for the device node.
-2. Check if device is currently in use.
-3. Remove the SMMU master.
+Add dt_find_node_by_path_from() to find a matching node with path for a
+dt_device_node.
+
+Reason behind this function:
+    Each time overlay nodes are added using .dtbo, a new fdt (memcpy of
+    device_tree_flattened) is created and updated with overlay nodes. This
+    updated fdt is further unflattened to a dt_host_new. Next, we need to find
+    the overlay nodes in dt_host_new, find the overlay node's parent in dt_host
+    and add the nodes as child under their parent in the dt_host. Thus we need
+    this function to search for node in different unflattened device trees.
+
+Also, make dt_find_node_by_path() static inline.
 
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 
 ---
- Changes from v9:
-    Remove iommu_dt_device_is_assigned_locked().
-    Add comment regarding caller holding the locks to protect concurrent access.
- Changes from v7:
-        Added comments on arm_smmu_dt_remove_device_generic().
----
----
- xen/drivers/passthrough/arm/smmu.c | 60 ++++++++++++++++++++++++++++++
- 1 file changed, 60 insertions(+)
+Changes from v10:
+    Fix commit message with right function name.
+Changes from v9:
+    Fix indentation issues.
 
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index c37fa9af13..71799064f8 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -815,6 +815,19 @@ static int insert_smmu_master(struct arm_smmu_device *smmu,
- 	return 0;
+Changes from v7:
+    Rename device_tree_find_node_by_path() to dt_find_node_by_path_from().
+    Fix indentation.
+---
+---
+ xen/common/device_tree.c      |  5 +++--
+ xen/include/xen/device_tree.h | 17 +++++++++++++++--
+ 2 files changed, 18 insertions(+), 4 deletions(-)
+
+diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
+index b8ef1c7ae2..f38f51ec0b 100644
+--- a/xen/common/device_tree.c
++++ b/xen/common/device_tree.c
+@@ -358,11 +358,12 @@ struct dt_device_node *dt_find_node_by_type(struct dt_device_node *from,
+     return np;
  }
  
-+static int remove_smmu_master(struct arm_smmu_device *smmu,
-+			      struct arm_smmu_master *master)
-+{
-+	if (!smmu->masters.rb_node) {
-+		ASSERT_UNREACHABLE();
-+		return -ENOENT;
-+	}
-+
-+	rb_erase(&master->node, &smmu->masters);
-+
-+	return 0;
-+}
-+
- static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
- 					 struct device *dev,
- 					 struct iommu_fwspec *fwspec)
-@@ -852,6 +865,32 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
- 	return insert_smmu_master(smmu, master);
- }
- 
-+static int arm_smmu_dt_remove_device_legacy(struct arm_smmu_device *smmu,
-+					 struct device *dev)
-+{
-+	struct arm_smmu_master *master;
-+	struct device_node *dev_node = dev_get_dev_node(dev);
-+	int ret;
-+
-+	master = find_smmu_master(smmu, dev_node);
-+	if (master == NULL) {
-+		dev_err(dev,
-+			"No registrations found for master device %s\n",
-+			dev_node->name);
-+		return -EINVAL;
-+	}
-+
-+	ret = remove_smmu_master(smmu, master);
-+	if (ret)
-+		return ret;
-+
-+	/* Protected by dt_host_lock and dtdevs_lock as caller holds these locks. */
-+	dev_node->is_protected = false;
-+
-+	kfree(master);
-+	return 0;
-+}
-+
- static int register_smmu_master(struct arm_smmu_device *smmu,
- 				struct device *dev,
- 				struct of_phandle_args *masterspec)
-@@ -875,6 +914,26 @@ static int register_smmu_master(struct arm_smmu_device *smmu,
- 					     fwspec);
- }
- 
-+/*
-+ * The driver which supports generic IOMMU DT bindings must have this
-+ * callback implemented.
-+ */
-+static int arm_smmu_dt_remove_device_generic(u8 devfn, struct device *dev)
-+{
-+	struct arm_smmu_device *smmu;
-+	struct iommu_fwspec *fwspec;
-+
-+	fwspec = dev_iommu_fwspec_get(dev);
-+	if (fwspec == NULL)
-+		return -ENXIO;
-+
-+	smmu = find_smmu(fwspec->iommu_dev);
-+	if (smmu == NULL)
-+		return -ENXIO;
-+
-+	return arm_smmu_dt_remove_device_legacy(smmu, dev);
-+}
-+
- static int arm_smmu_dt_add_device_generic(u8 devfn, struct device *dev)
+-struct dt_device_node *dt_find_node_by_path(const char *path)
++struct dt_device_node *dt_find_node_by_path_from(struct dt_device_node *from,
++                                                 const char *path)
  {
- 	struct arm_smmu_device *smmu;
-@@ -2859,6 +2918,7 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
-     .init = arm_smmu_iommu_domain_init,
-     .hwdom_init = arch_iommu_hwdom_init,
-     .add_device = arm_smmu_dt_add_device_generic,
-+    .remove_device = arm_smmu_dt_remove_device_generic,
-     .teardown = arm_smmu_iommu_domain_teardown,
-     .iotlb_flush = arm_smmu_iotlb_flush,
-     .assign_device = arm_smmu_assign_dev,
+     struct dt_device_node *np;
+ 
+-    dt_for_each_device_node(dt_host, np)
++    dt_for_each_device_node(from, np)
+         if ( np->full_name && (dt_node_cmp(np->full_name, path) == 0) )
+             break;
+ 
+diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
+index a518310a62..44d315c8ba 100644
+--- a/xen/include/xen/device_tree.h
++++ b/xen/include/xen/device_tree.h
+@@ -570,13 +570,26 @@ struct dt_device_node *dt_find_node_by_type(struct dt_device_node *from,
+ struct dt_device_node *dt_find_node_by_alias(const char *alias);
+ 
+ /**
+- * dt_find_node_by_path - Find a node matching a full DT path
++ * dt_find_node_by_path_from - Generic function to find a node matching the
++ * full DT path for any given unflatten device tree
++ * @from: The device tree node to start searching from
+  * @path: The full path to match
+  *
+  * Returns a node pointer.
+  */
+-struct dt_device_node *dt_find_node_by_path(const char *path);
++struct dt_device_node *dt_find_node_by_path_from(struct dt_device_node *from,
++                                                 const char *path);
+ 
++/**
++ * dt_find_node_by_path - Find a node matching a full DT path in dt_host
++ * @path: The full path to match
++ *
++ * Returns a node pointer.
++ */
++static inline struct dt_device_node *dt_find_node_by_path(const char *path)
++{
++    return dt_find_node_by_path_from(dt_host, path);
++}
+ 
+ /**
+  * dt_find_node_by_gpath - Same as dt_find_node_by_path but retrieve the
 -- 
 2.17.1
 
