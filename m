@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7EF2CA0FEE
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 17:53:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.594720.928130 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58693CA0FEF
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 18:25:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.594731.928176 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qc8K7-0004tu-Sg; Fri, 01 Sep 2023 17:52:47 +0000
+	id 1qc8px-00011p-7M; Fri, 01 Sep 2023 18:25:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 594720.928130; Fri, 01 Sep 2023 17:52:47 +0000
+Received: by outflank-mailman (output) from mailman id 594731.928176; Fri, 01 Sep 2023 18:25:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qc8K7-0004tn-Pl; Fri, 01 Sep 2023 17:52:47 +0000
-Received: by outflank-mailman (input) for mailman id 594720;
- Fri, 01 Sep 2023 17:52:46 +0000
+	id 1qc8px-00011g-31; Fri, 01 Sep 2023 18:25:41 +0000
+Received: by outflank-mailman (input) for mailman id 594731;
+ Fri, 01 Sep 2023 18:25:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dN/X=ER=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qc8K6-0004th-0z
- for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 17:52:46 +0000
+ id 1qc8pv-0000IZ-OL
+ for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 18:25:39 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 588107ae-48f0-11ee-9b0d-b553b5be7939;
- Fri, 01 Sep 2023 19:52:41 +0200 (CEST)
+ id f1aa62e4-48f4-11ee-9b0d-b553b5be7939;
+ Fri, 01 Sep 2023 20:25:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 65C4682869BC;
- Fri,  1 Sep 2023 12:52:40 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id A92D282854A4;
+ Fri,  1 Sep 2023 13:25:35 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id kJz7m8L4079d; Fri,  1 Sep 2023 12:52:39 -0500 (CDT)
+ with ESMTP id cyQ6ZOzmALu4; Fri,  1 Sep 2023 13:25:34 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id AF61582869C3;
- Fri,  1 Sep 2023 12:52:39 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 3557D82869BA;
+ Fri,  1 Sep 2023 13:25:34 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id BOqYLJSJWTBC; Fri,  1 Sep 2023 12:52:39 -0500 (CDT)
-Received: from [10.11.0.2] (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 4FEF882869BC;
- Fri,  1 Sep 2023 12:52:39 -0500 (CDT)
+ with ESMTP id 9ylQYT-ju3v2; Fri,  1 Sep 2023 13:25:34 -0500 (CDT)
+Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id DD7498285A00;
+ Fri,  1 Sep 2023 13:25:33 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,45 +53,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 588107ae-48f0-11ee-9b0d-b553b5be7939
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com AF61582869C3
+X-Inumbo-ID: f1aa62e4-48f4-11ee-9b0d-b553b5be7939
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 3557D82869BA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1693590759; bh=0XDFDG0Pvv2a9icifvrij9NIn+EyWrsgWkSPj6li4Yk=;
-	h=Message-ID:Date:MIME-Version:From:To;
-	b=dte33sEVpLOPK3XthDxt5YGLGjce8vJ6t3fZ9qPHe70KWqmgt3wh+/f9aIFgwBCCo
-	 AaoQqaRKOm0PIIe55Jh+iS+JaDu0mRwk21k824VbUUgR1IcmU4ILM5Ch2AOFCkDIHW
-	 9W4cLwOZd/VNcc+batKD5SQjzD6fdCOHK5sLNgUY=
+	t=1693592734; bh=Q4fNHeOLiiVVS7Deb7ZBxNvaJPUUM5xGRRAG6kuerFA=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=iE7m+uSedeoIhN1P9ioDrhx1SzdeUF0IIQoIsMA/94UG6dKJTDSHCAfUg1FDk6zkk
+	 3QvCWkHp+E5xUY2xK5NER5YxHYCvsqNgYHxNnpdlkYv54laUW5nlC2F/R1n/HZekxg
+	 KhqogMcSaWPz/FbXT828eqL3caeGZ2vn/l5NJqLY=
 X-Virus-Scanned: amavisd-new at rptsys.com
-Message-ID: <cbcf7cff-5832-dcb6-4050-26f5fb10cd02@raptorengineering.com>
-Date: Fri, 1 Sep 2023 12:52:38 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v4 3/3] xen/ppc: Implement initial Radix MMU support
-Content-Language: en-US
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
-To: Jan Beulich <jbeulich@suse.com>
+To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-References: <cover.1692744718.git.sanastasio@raptorengineering.com>
- <7cebc2962002c36ecfe712bf1bcb251e083910b8.1692744718.git.sanastasio@raptorengineering.com>
- <e942f853-3536-2033-f214-1beccdfc8240@suse.com>
- <8a9c0fba-132b-1245-caf7-d4a3a670e9d9@raptorengineering.com>
-In-Reply-To: <8a9c0fba-132b-1245-caf7-d4a3a670e9d9@raptorengineering.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+	Jan Beulich <jbeulich@suse.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v3 5/5] xen/ppc: Enable full Xen build
+Date: Fri,  1 Sep 2023 13:25:18 -0500
+Message-Id: <2dabc6da215a7270eaed060390a7720b3a63b901.1693591462.git.sanastasio@raptorengineering.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1693591462.git.sanastasio@raptorengineering.com>
+References: <cover.1693591462.git.sanastasio@raptorengineering.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 
-On 8/23/23 12:36 PM, Shawn Anastasio wrote:
-> On 8/23/23 9:04 AM, Jan Beulich wrote:
->> On 23.08.2023 01:03, Shawn Anastasio wrote:
->>> Add code to construct early identity-mapped page tables as well as the
->>> required process and partition tables to enable the MMU.
->>>
->>> Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
->>
->> Acked-by: Jan Beulich <jbeulich@suse.com>
+Bring ppc's Makefile and arch.mk in line with arm and x86 to disable the
+build overrides and enable the full Xen build.
 
-Just a quick ping to see if you are still good to merge this patch. If
-you'd like me to submit a new revision let me know.
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+ xen/arch/ppc/Makefile | 16 +++++++++++++++-
+ xen/arch/ppc/arch.mk  |  3 ---
+ 2 files changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
+index 969910b3b6..7b68b5ace2 100644
+--- a/xen/arch/ppc/Makefile
++++ b/xen/arch/ppc/Makefile
+@@ -12,10 +12,24 @@ $(TARGET): $(TARGET)-syms
+ 	cp -f $< $@
+=20
+ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) -o $@
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(objtree)/common/symbols-dummy.o -o $(dot-target).0
++	$(NM) -pa --format=3Dsysv $(dot-target).0 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).0.S
++	$(MAKE) $(build)=3D$(@D) $(dot-target).0.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(dot-target).0.o -o $(dot-target).1
++	$(NM) -pa --format=3Dsysv $(dot-target).1 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).1.S
++	$(MAKE) $(build)=3D$(@D) $(dot-target).1.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
++	    $(dot-target).1.o -o $@
+ 	$(NM) -pa --format=3Dsysv $@ \
+ 		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		> $@.map
++	rm -f $(@D)/.$(@F).[0-9]*
+=20
+ $(obj)/xen.lds: $(src)/xen.lds.S FORCE
+ 	$(call if_changed_dep,cpp_lds_S)
+diff --git a/xen/arch/ppc/arch.mk b/xen/arch/ppc/arch.mk
+index d05cbf1df5..917ad0e6a8 100644
+--- a/xen/arch/ppc/arch.mk
++++ b/xen/arch/ppc/arch.mk
+@@ -7,6 +7,3 @@ CFLAGS +=3D -m64 -mlittle-endian -mcpu=3D$(ppc-march-y)
+ CFLAGS +=3D -mstrict-align -mcmodel=3Dmedium -mabi=3Delfv2 -fPIC -mno-al=
+tivec -mno-vsx -msoft-float
+=20
+ LDFLAGS +=3D -m elf64lppc
+-
+-# TODO: Drop override when more of the build is working
+-override ALL_OBJS-y =3D arch/$(SRCARCH)/built_in.o common/libfdt/built_i=
+n.o lib/built_in.o
+--=20
+2.30.2
+
 
