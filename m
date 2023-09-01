@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D681CA0FE6
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:11:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.594260.927546 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44526CA0FE1
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:11:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.594262.927561 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwR3-00016u-2P; Fri, 01 Sep 2023 05:11:09 +0000
+	id 1qbwR8-0001TY-K2; Fri, 01 Sep 2023 05:11:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 594260.927546; Fri, 01 Sep 2023 05:11:09 +0000
+Received: by outflank-mailman (output) from mailman id 594262.927561; Fri, 01 Sep 2023 05:11:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwR2-00016n-UE; Fri, 01 Sep 2023 05:11:08 +0000
-Received: by outflank-mailman (input) for mailman id 594260;
- Fri, 01 Sep 2023 05:11:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qbwR8-0001Sh-ET; Fri, 01 Sep 2023 05:11:14 +0000
+Received: by outflank-mailman (input) for mailman id 594262;
+ Fri, 01 Sep 2023 05:11:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JvPm=ER=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1qbwGY-0001Hn-6H
- for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:18 +0000
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20602.outbound.protection.outlook.com
- [2a01:111:f400:7eab::602])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7032be93-4884-11ee-9b0d-b553b5be7939;
- Fri, 01 Sep 2023 07:00:16 +0200 (CEST)
-Received: from CY5PR15CA0006.namprd15.prod.outlook.com (2603:10b6:930:14::9)
- by DM4PR12MB7719.namprd12.prod.outlook.com (2603:10b6:8:101::13) with
+ <SRS0=am4h=ER=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1qbwGz-0000Nr-Fi
+ for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:45 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2062e.outbound.protection.outlook.com
+ [2a01:111:f400:fe5a::62e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 802edf13-4884-11ee-8783-cb3800f73035;
+ Fri, 01 Sep 2023 07:00:43 +0200 (CEST)
+Received: from CYXPR03CA0024.namprd03.prod.outlook.com (2603:10b6:930:d0::6)
+ by SA3PR12MB9228.namprd12.prod.outlook.com (2603:10b6:806:39c::5) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22; Fri, 1 Sep
- 2023 05:00:13 +0000
-Received: from CY4PEPF0000EE32.namprd05.prod.outlook.com
- (2603:10b6:930:14:cafe::fb) by CY5PR15CA0006.outlook.office365.com
- (2603:10b6:930:14::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.21 via Frontend
- Transport; Fri, 1 Sep 2023 05:00:13 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.21; Fri, 1 Sep
+ 2023 05:00:39 +0000
+Received: from CY4PEPF0000EE36.namprd05.prod.outlook.com
+ (2603:10b6:930:d0:cafe::e0) by CYXPR03CA0024.outlook.office365.com
+ (2603:10b6:930:d0::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.26 via Frontend
+ Transport; Fri, 1 Sep 2023 05:00:38 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EE32.mail.protection.outlook.com (10.167.242.38) with Microsoft
+ CY4PEPF0000EE36.mail.protection.outlook.com (10.167.242.42) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.16 via Frontend Transport; Fri, 1 Sep 2023 05:00:12 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ 15.20.6745.17 via Frontend Transport; Fri, 1 Sep 2023 05:00:38 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
- 2023 00:00:09 -0500
-Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Fri, 1 Sep 2023 00:00:09 -0500
+ 2023 00:00:37 -0500
+Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
+ Transport; Fri, 1 Sep 2023 00:00:36 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,148 +61,294 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7032be93-4884-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 802edf13-4884-11ee-8783-cb3800f73035
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K89iQoFiEFSf0bqsEWd6uzDbDH/mfon3zokUzk7FcE5tydUT7CV2KTJCCNIoRxdh+biJMEworTi+m6W8DMbAuPmvOqyzTu0dUFssyIDTseJEoxNXoOBNfj5N4KQaNnpWGRkl57bGjDR6EDUI94FHEw5xc4ZPyB9ZxQDz/mOLD4nF+tw596aYs+vOE0g8ufwuky6IMGkSPLco6pIrH+JQ0wkV3eVpoFESilzvVKf5L7a1AklSyk/1Zb4CaF8SXCRrcQIS665uj2TDW6JfpbZaeoVDAEeeErRs7xC7bIT0T0YYGs69HqLe4f/82bFxf6ykuLJdiqnvTJ5KZMMM+bPmLg==
+ b=ALwvTiVUKP2LQF75EQ4M+lHRB/TQENH+gIgDX76ZiF3WdchiZtCEWONgYCBp6eUfXpGTJTjWBwvPO8BNjkYB+MYd85ypUKh/EYePIF3Cph25ndvf68REvGA1QyxKqbpxeTk2g/MCMTOJhbLDdZSTwn6y9BVbs8V6DGObQ3p8o0wMq4sa6KwSWiKMRFMQBH/bOHLcScMtVDnWxxlZf9hcav+tDSiYC5FqEzZtA3NgwIVX6hj8wA0tBr0NkYV0KEL3y0cFoGYeGMzOhVebn6HlS0FUdtdKpP11muS/gl8XqOxeeLpOt60YQpfgVSG/Mgoh4IooEXWO1tM8B756CGb6Bg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JIgawtLTJDYclMTRziV6+ukrPXqF+ozH3iEpHoQmI6c=;
- b=Z/w6AMB1A8+3B8OzZy71juf5K2/KzMsJm9oYqLZ8O+L/oDZlG/7sShD2Wly+C+W7nuVyrJB3wAnVKTLGwTS++aETrA5w3qsgPV1/iRSEPpHX1u7kKXGxWmnyoAaNiREsnRaXNibnbvsYr9CjmQoItBgHvGD9O/DMvR6X4gGAdanfxCsAgmsULkopBmuhGAqBR4CgFtSkSZ1KSMGc7LLKN6Ink75Zni3RQt2gpptQs5dutGrgkX3nSfV3BINO1VmBhC6dDPvlcPrvFAIW05+lTJKyjNs1eI0zyT7WkzPNFYLGaqWfzve/0iQLLUM3Rd/kImKWRxAQyIFPfAYc99K1kQ==
+ bh=8KaFay1YX9Z8ga1iLYKzEiksiXOhKppKo65QZoKXwB8=;
+ b=NuFS3lhaCNw/RU0x1VS53d920Ag+6pL+O2N9GsrIzA59Rq0Q5vX5iHeWvKRnFzKvNkepR7uWpXO7TEAoeNeKCZLtjs6U0sOPNiJ8C7mW7fo85qWWDlPzFU3yhehRznSiQ1JUhqhHvraPwUo7WzxdzBnGG91SwSFtKBWKG5vyRDujAPjvx6HQvbit0FEwLcS7CbogXoeyu57+tKGi3JSmUqfFrCFHWbCI2ObkEnkEjzJlFiYlwhHfeHH14VwTLOTucLyy9XG9sa6xW8o/u0AJnmVxQnrH6Mirz7si6A9YZvJ9xEuIA8pzlizCzJTQSbOB1rhxFQRfmbgRfyn6EtghJw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JIgawtLTJDYclMTRziV6+ukrPXqF+ozH3iEpHoQmI6c=;
- b=27/PiAWhzMgPwauVdDVn7zfLiIo9Cv5Q9YNhIqBX4P8uZFZFKP7QtkREDNRvBidQewuifvZ8K75ZbhALEWJp0tQ8pw/n4s7SzIt6layvuNh6MxijnTSjGpjP6IBy5OedqvPGnSl2WBPQDdTiRhpDFgkiIuZY94Ns+0/OlkcpsYI=
+ bh=8KaFay1YX9Z8ga1iLYKzEiksiXOhKppKo65QZoKXwB8=;
+ b=2+xToq1c3rldSz2P2GatSA9a9MZgg3TC2zQ32xI9auzwxzfiiYwsSQCx0ZDTNTZTswRO2tHN+a53ExaUakjeXx9Za+2q+TctHrY+hi/5gMfH+ywieBp3HkjvBEFTSSK04sKYDVyS14B6H6DpsXnZxQ2Bd9sT7SPEcqP1kNzHfTc=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Vikram Garhwal <vikram.garhwal@amd.com>
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <vikram.garhwal@amd.com>, <julien@xen.org>, <michal.orzel@amd.com>,
-	<sstabellini@kernel.org>
-Subject: [XEN][PATCH v11 08/20] xen/device-tree: Add dt_find_node_by_path_from() to find nodes in device tree
-Date: Thu, 31 Aug 2023 21:59:35 -0700
-Message-ID: <20230901045947.32351-9-vikram.garhwal@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230901045947.32351-1-vikram.garhwal@amd.com>
-References: <20230901045947.32351-1-vikram.garhwal@amd.com>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v5 4/5] xen/vpci: header: status register handler
+Date: Fri, 1 Sep 2023 00:57:31 -0400
+Message-ID: <20230901045742.235975-5-stewart.hildebrand@amd.com>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20230901045742.235975-1-stewart.hildebrand@amd.com>
+References: <20230901045742.235975-1-stewart.hildebrand@amd.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE32:EE_|DM4PR12MB7719:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1b0c34c5-a605-4f58-26ca-08dbaaa85346
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE36:EE_|SA3PR12MB9228:EE_
+X-MS-Office365-Filtering-Correlation-Id: b2c3caae-94ad-4aa0-0895-08dbaaa86291
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	zc79sxi8OJuMpM/rX1j8GrYByhB1hj7WWoCMsp3RbOOX+bXhThN4pjrApz2IjjympqCdghaJxB0egtrbY71LAWbka010sSJXdvckhG3Fo+XMXUTeaUOJR4ukFPXRrlGR4Bzzb7WL+5cknsH1imujtNJZnQHZceqd9eoK1Yzg1+rw1Cppiw6FGYE/PTfDOvpeLFDNZimyDTmqbqDLjWQvyYqV01MEyhpAcmw16FwazGgcWWwrt314tp+MNhkaX1L0INyw5PVYV78QyOoyHJKvppO3JlND9pWsO3ISLg23ojUPlpkTIogTbct2apIMBaalntVxNa2YM2SJ/d4eAcbT5wcgDPpkZ73PkWXjcFfsoySxNBJfTsVXaJFXluk9Vt9QmptG+NTmzZ0PR+IsWicRnfrW1yf3wpYVhdkccPaIom2I8LQVJmJ7anaCJqy49jmB6BFX0P3WTBB61Mlgi5Kr5XvPHqXFgn1TYI+SPdyUeXa2QJ5gb+0d/yDprTN7fg6X9LJTQ9P27r60Sw4U0HGDnI7EfEKQYG4tMAN+3eiG4RSDkBdRG3LlaX7+SzjLwwV2OKcVSAMuJeye5SPp24o59TeWIqYjcOlmKCGgxGolzGfCUvM4F53Mkulri+3ufp44wpmAm4MpDCAuehb+FA5DGYcBr8mBv0vXam7F5gZ9Jt+jvyfkioKcvNZyr02k0S3aWSr3+naRLSrYW4ahcETsjlKUIzkzX/1jwMWINYHFtqu98+AjGafcVxwB+QFQQwmVVe37imDXkDI8vmp43vfPlvRhLOxUMVujO+YFm9TEkMk=
+	xmVTJfwepUxRAI4b5u7VJxt9BSNe9tL+3Hi6kSQrHajETJ7SW5WWJ6D0DdPDh7Fnxv6baRpww+DbhLkjuw5vgXLYqJ6jOJmwM0VTNmM28+V3ySBp1w4aIhQWFrJyB9EVxSAY8sjeenZys3d44vidsqIFNZUtALYBN0L2sZrP4CeLQg+YxZEULc2GchuTSjE5djW4WK4CCbAuVaoGfGDjzlXmhqCVfhvKDctR1nYm9cXBHdnoltlLV93ErnCKM3q2oUO/LYwp/E9ieLtVBA/28IFpM32j7EYHicUeSaDj7XgEXaLetz/vyvB3g+1FfIaz0FdupgkpObPvJ8J8jouUAA2g8deeqHj8n/xAnTvwVd7iPPfUD/bFY8Tv0at9MXrQZpSEk/q4JxYw9ONAQCPUxzqU+hyM31wnoW0b9Pd2tTeL6/voN4L+5HopHqwIFT3J2IAPah55ykOlR+tXasxJsr8+qENxRU13NjVVgY1Qa3eiYwK4v80bR9Woqxpc+xlUe6dbUCOz/q2Ws9kBRvcHbaOfF/WRFILkusGxrNblv5bSTomr3oESdBBjISfPnDVYD/PPvDaTmD9b+M+Smq0txGiaxixE2AaOFEyI54n5FPfZIdH17vwe3eFNuFjuBbTFFocexkLMFx+nHbWQstC1/WX7ZdZUQqBacRaVXXQfiL1ClHGalhFCB/iSC8iimN2RDzmr6GUAgCa9/OqPW/O2dSQ8CtSDoSU04xNaiTZAfSBz/JbLHezdrimGvqeWlkVyXBSsW+NdrGx6c2Gaazwt6HBscKthfM7jdnCL9acAMfs=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(376002)(346002)(39860400002)(136003)(396003)(82310400011)(186009)(1800799009)(451199024)(40470700004)(46966006)(36840700001)(40480700001)(82740400003)(36756003)(41300700001)(336012)(426003)(26005)(1076003)(40460700003)(54906003)(356005)(70586007)(70206006)(81166007)(83380400001)(316002)(6916009)(478600001)(6666004)(2906002)(5660300002)(86362001)(44832011)(8936002)(2616005)(36860700001)(8676002)(47076005)(4326008)(37363002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(39860400002)(396003)(376002)(136003)(1800799009)(186009)(451199024)(82310400011)(36840700001)(40470700004)(46966006)(82740400003)(66899024)(356005)(6666004)(40460700003)(36756003)(86362001)(81166007)(36860700001)(40480700001)(47076005)(2616005)(1076003)(2906002)(426003)(336012)(26005)(83380400001)(478600001)(8936002)(70586007)(70206006)(54906003)(8676002)(4326008)(44832011)(5660300002)(41300700001)(6916009)(316002)(36900700001)(357404004);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:12.9672
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:38.6863
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1b0c34c5-a605-4f58-26ca-08dbaaa85346
+X-MS-Exchange-CrossTenant-Network-Message-Id: b2c3caae-94ad-4aa0-0895-08dbaaa86291
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE32.namprd05.prod.outlook.com
+	CY4PEPF0000EE36.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7719
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9228
 
-Add dt_find_node_by_path_from() to find a matching node with path for a
-dt_device_node.
+Introduce a handler for the PCI status register, with ability to mask the
+capabilities bit. The status register contains reserved bits, read-only bits,
+and write-1-to-clear bits, so introduce bitmasks to handle these in vPCI. If a
+bit in the bitmask is set, then the special meaning applies:
 
-Reason behind this function:
-    Each time overlay nodes are added using .dtbo, a new fdt (memcpy of
-    device_tree_flattened) is created and updated with overlay nodes. This
-    updated fdt is further unflattened to a dt_host_new. Next, we need to find
-    the overlay nodes in dt_host_new, find the overlay node's parent in dt_host
-    and add the nodes as child under their parent in the dt_host. Thus we need
-    this function to search for node in different unflattened device trees.
+  res_mask: read as zero, write ignore
+  ro_mask: read normal, write ignore
+  rw1c_mask: read normal, write 1 to clear
 
-Also, make dt_find_node_by_path() static inline.
+The mask_cap_list flag will be set in a follow-on patch.
 
-Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
-
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 ---
-Changes from v10:
-    Fix commit message with right function name.
-Changes from v9:
-    Fix indentation issues.
+v4->v5:
+* add support for res_mask
+* add support for ro_mask (squash ro_mask patch)
+* add constants for reserved, read-only, and rw1c masks
 
-Changes from v7:
-    Rename device_tree_find_node_by_path() to dt_find_node_by_path_from().
-    Fix indentation.
----
----
- xen/common/device_tree.c      |  5 +++--
- xen/include/xen/device_tree.h | 17 +++++++++++++++--
- 2 files changed, 18 insertions(+), 4 deletions(-)
+v3->v4:
+* move mask_cap_list setting to the capabilities patch
+* single pci_conf_read16 in status_read
+* align mask_cap_list bitfield in struct vpci_header
+* change to rw1c bit mask instead of treating whole register as rw1c
+* drop subsystem prefix on renamed add_register function
 
-diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-index b8ef1c7ae2..f38f51ec0b 100644
---- a/xen/common/device_tree.c
-+++ b/xen/common/device_tree.c
-@@ -358,11 +358,12 @@ struct dt_device_node *dt_find_node_by_type(struct dt_device_node *from,
-     return np;
+v2->v3:
+* new patch
+---
+ xen/drivers/vpci/header.c  | 18 +++++++++++++++
+ xen/drivers/vpci/vpci.c    | 46 +++++++++++++++++++++++++++++++-------
+ xen/include/xen/pci_regs.h |  8 +++++++
+ xen/include/xen/vpci.h     | 10 +++++++++
+ 4 files changed, 74 insertions(+), 8 deletions(-)
+
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index 767c1ba718d7..791791e6c9b6 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -413,6 +413,18 @@ static void cf_check cmd_write(
+         pci_conf_write16(pdev->sbdf, reg, cmd);
  }
  
--struct dt_device_node *dt_find_node_by_path(const char *path)
-+struct dt_device_node *dt_find_node_by_path_from(struct dt_device_node *from,
-+                                                 const char *path)
- {
-     struct dt_device_node *np;
- 
--    dt_for_each_device_node(dt_host, np)
-+    dt_for_each_device_node(from, np)
-         if ( np->full_name && (dt_node_cmp(np->full_name, path) == 0) )
-             break;
- 
-diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index a518310a62..44d315c8ba 100644
---- a/xen/include/xen/device_tree.h
-+++ b/xen/include/xen/device_tree.h
-@@ -570,13 +570,26 @@ struct dt_device_node *dt_find_node_by_type(struct dt_device_node *from,
- struct dt_device_node *dt_find_node_by_alias(const char *alias);
- 
- /**
-- * dt_find_node_by_path - Find a node matching a full DT path
-+ * dt_find_node_by_path_from - Generic function to find a node matching the
-+ * full DT path for any given unflatten device tree
-+ * @from: The device tree node to start searching from
-  * @path: The full path to match
-  *
-  * Returns a node pointer.
-  */
--struct dt_device_node *dt_find_node_by_path(const char *path);
-+struct dt_device_node *dt_find_node_by_path_from(struct dt_device_node *from,
-+                                                 const char *path);
- 
-+/**
-+ * dt_find_node_by_path - Find a node matching a full DT path in dt_host
-+ * @path: The full path to match
-+ *
-+ * Returns a node pointer.
-+ */
-+static inline struct dt_device_node *dt_find_node_by_path(const char *path)
++static uint32_t cf_check status_read(const struct pci_dev *pdev,
++                                     unsigned int reg, void *data)
 +{
-+    return dt_find_node_by_path_from(dt_host, path);
++    struct vpci_header *header = data;
++    uint32_t status = pci_conf_read16(pdev->sbdf, reg);
++
++    if ( header->mask_cap_list )
++        status &= ~PCI_STATUS_CAP_LIST;
++
++    return status;
 +}
++
+ static void cf_check bar_write(
+     const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+@@ -544,6 +556,12 @@ static int cf_check init_bars(struct pci_dev *pdev)
+     if ( rc )
+         return rc;
  
- /**
-  * dt_find_node_by_gpath - Same as dt_find_node_by_path but retrieve the
++    rc = vpci_add_register_mask(pdev->vpci, status_read, vpci_hw_write16,
++                                PCI_STATUS, 2, header, PCI_STATUS_RESERVED_MASK,
++                                PCI_STATUS_RO_MASK, PCI_STATUS_RW1C_MASK);
++    if ( rc )
++        return rc;
++
+     if ( pdev->ignore_bars )
+         return 0;
+ 
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 3bec9a4153da..6e6ad4b80a0d 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -29,6 +29,9 @@ struct vpci_register {
+     unsigned int offset;
+     void *private;
+     struct list_head node;
++    uint32_t res_mask;
++    uint32_t ro_mask;
++    uint32_t rw1c_mask;
+ };
+ 
+ #ifdef __XEN__
+@@ -145,9 +148,16 @@ uint32_t cf_check vpci_hw_read32(
+     return pci_conf_read32(pdev->sbdf, reg);
+ }
+ 
+-int vpci_add_register(struct vpci *vpci, vpci_read_t *read_handler,
+-                      vpci_write_t *write_handler, unsigned int offset,
+-                      unsigned int size, void *data)
++void cf_check vpci_hw_write16(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
++{
++    pci_conf_write16(pdev->sbdf, reg, val);
++}
++
++static int add_register(struct vpci *vpci, vpci_read_t *read_handler,
++                        vpci_write_t *write_handler, unsigned int offset,
++                        unsigned int size, void *data, uint32_t res_mask,
++                        uint32_t ro_mask, uint32_t rw1c_mask)
+ {
+     struct list_head *prev;
+     struct vpci_register *r;
+@@ -167,6 +177,9 @@ int vpci_add_register(struct vpci *vpci, vpci_read_t *read_handler,
+     r->size = size;
+     r->offset = offset;
+     r->private = data;
++    r->res_mask = res_mask & (0xffffffffU >> (32 - 8 * size));
++    r->ro_mask = ro_mask & (0xffffffffU >> (32 - 8 * size));
++    r->rw1c_mask = rw1c_mask & (0xffffffffU >> (32 - 8 * size));
+ 
+     spin_lock(&vpci->lock);
+ 
+@@ -193,6 +206,23 @@ int vpci_add_register(struct vpci *vpci, vpci_read_t *read_handler,
+     return 0;
+ }
+ 
++int vpci_add_register(struct vpci *vpci, vpci_read_t *read_handler,
++                      vpci_write_t *write_handler, unsigned int offset,
++                      unsigned int size, void *data)
++{
++    return add_register(vpci, read_handler, write_handler, offset, size, data,
++                        0, 0, 0);
++}
++
++int vpci_add_register_mask(struct vpci *vpci, vpci_read_t *read_handler,
++                           vpci_write_t *write_handler, unsigned int offset,
++                           unsigned int size, void *data, uint32_t res_mask,
++                           uint32_t ro_mask, uint32_t rw1c_mask)
++{
++    return add_register(vpci, read_handler, write_handler, offset, size, data,
++                        res_mask, ro_mask, rw1c_mask);
++}
++
+ int vpci_remove_register(struct vpci *vpci, unsigned int offset,
+                          unsigned int size)
+ {
+@@ -376,6 +406,7 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
+         }
+ 
+         val = r->read(pdev, r->offset, r->private);
++        val &= ~r->res_mask;
+ 
+         /* Check if the read is in the middle of a register. */
+         if ( r->offset < emu.offset )
+@@ -407,11 +438,6 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
+ 
+ /*
+  * Perform a maybe partial write to a register.
+- *
+- * Note that this will only work for simple registers, if Xen needs to
+- * trap accesses to rw1c registers (like the status PCI header register)
+- * the logic in vpci_write will have to be expanded in order to correctly
+- * deal with them.
+  */
+ static void vpci_write_helper(const struct pci_dev *pdev,
+                               const struct vpci_register *r, unsigned int size,
+@@ -424,9 +450,13 @@ static void vpci_write_helper(const struct pci_dev *pdev,
+         uint32_t val;
+ 
+         val = r->read(pdev, r->offset, r->private);
++        val &= ~r->res_mask;
++        val &= ~r->rw1c_mask;
+         data = merge_result(val, data, size, offset);
+     }
+ 
++    data &= ~r->res_mask;
++    data &= ~r->ro_mask;
+     r->write(pdev, r->offset, data & (0xffffffffU >> (32 - 8 * r->size)),
+              r->private);
+ }
+diff --git a/xen/include/xen/pci_regs.h b/xen/include/xen/pci_regs.h
+index 84b18736a85d..b7cb200969c6 100644
+--- a/xen/include/xen/pci_regs.h
++++ b/xen/include/xen/pci_regs.h
+@@ -66,6 +66,14 @@
+ #define  PCI_STATUS_REC_MASTER_ABORT	0x2000 /* Set on master abort */
+ #define  PCI_STATUS_SIG_SYSTEM_ERROR	0x4000 /* Set when we drive SERR */
+ #define  PCI_STATUS_DETECTED_PARITY	0x8000 /* Set on parity error */
++#define  PCI_STATUS_RESERVED_MASK	0x06
++#define  PCI_STATUS_RO_MASK (PCI_STATUS_IMM_READY | PCI_STATUS_INTERRUPT | \
++    PCI_STATUS_CAP_LIST | PCI_STATUS_CAP_LIST | PCI_STATUS_66MHZ | \
++    PCI_STATUS_UDF | PCI_STATUS_FAST_BACK | PCI_STATUS_DEVSEL_MASK)
++#define  PCI_STATUS_RW1C_MASK (PCI_STATUS_PARITY | \
++    PCI_STATUS_SIG_TARGET_ABORT | PCI_STATUS_REC_TARGET_ABORT | \
++    PCI_STATUS_REC_MASTER_ABORT | PCI_STATUS_SIG_SYSTEM_ERROR | \
++    PCI_STATUS_DETECTED_PARITY)
+ 
+ #define PCI_CLASS_REVISION	0x08	/* High 24 bits are class, low 8 revision */
+ #define PCI_REVISION_ID		0x08	/* Revision ID */
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 0b8a2a3c745b..0a6c9e19b399 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -37,6 +37,12 @@ int __must_check vpci_add_register(struct vpci *vpci,
+                                    vpci_write_t *write_handler,
+                                    unsigned int offset, unsigned int size,
+                                    void *data);
++int __must_check vpci_add_register_mask(struct vpci *vpci,
++                                        vpci_read_t *read_handler,
++                                        vpci_write_t *write_handler,
++                                        unsigned int offset, unsigned int size,
++                                        void *data, uint32_t res_mask,
++                                        uint32_t ro_mask, uint32_t rw1c_mask);
+ int __must_check vpci_remove_register(struct vpci *vpci, unsigned int offset,
+                                       unsigned int size);
+ 
+@@ -50,6 +56,8 @@ uint32_t cf_check vpci_hw_read16(
+     const struct pci_dev *pdev, unsigned int reg, void *data);
+ uint32_t cf_check vpci_hw_read32(
+     const struct pci_dev *pdev, unsigned int reg, void *data);
++void cf_check vpci_hw_write16(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
+ 
+ /*
+  * Check for pending vPCI operations on this vcpu. Returns true if the vcpu
+@@ -94,6 +102,8 @@ struct vpci {
+          * upon to know whether BARs are mapped into the guest p2m.
+          */
+         bool bars_mapped      : 1;
++        /* Store whether to hide all capabilities from the guest. */
++        bool mask_cap_list    : 1;
+         /* FIXME: currently there's no support for SR-IOV. */
+     } header;
+ 
 -- 
-2.17.1
+2.42.0
 
 
