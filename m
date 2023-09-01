@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5347CA0FE1
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:12:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.594329.927672 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED339CA0FE1
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:12:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.594328.927666 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwS5-0007R9-W9; Fri, 01 Sep 2023 05:12:13 +0000
+	id 1qbwS5-0007Mp-Gw; Fri, 01 Sep 2023 05:12:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 594329.927672; Fri, 01 Sep 2023 05:12:13 +0000
+Received: by outflank-mailman (output) from mailman id 594328.927666; Fri, 01 Sep 2023 05:12:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwS5-0007QV-OG; Fri, 01 Sep 2023 05:12:13 +0000
-Received: by outflank-mailman (input) for mailman id 594329;
+	id 1qbwS5-0007Mc-CI; Fri, 01 Sep 2023 05:12:13 +0000
+Received: by outflank-mailman (input) for mailman id 594328;
  Fri, 01 Sep 2023 05:12:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JvPm=ER=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1qbwGt-0000Nr-EI
- for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:39 +0000
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on20615.outbound.protection.outlook.com
- [2a01:111:f400:7e83::615])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7e21e25c-4884-11ee-8783-cb3800f73035;
- Fri, 01 Sep 2023 07:00:38 +0200 (CEST)
-Received: from DS7PR03CA0162.namprd03.prod.outlook.com (2603:10b6:5:3b2::17)
- by SJ1PR12MB6338.namprd12.prod.outlook.com (2603:10b6:a03:455::19) with
+ id 1qbwGr-0001Hn-Er
+ for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:37 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2062c.outbound.protection.outlook.com
+ [2a01:111:f400:7e8a::62c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7afcc685-4884-11ee-9b0d-b553b5be7939;
+ Fri, 01 Sep 2023 07:00:33 +0200 (CEST)
+Received: from DM6PR11CA0005.namprd11.prod.outlook.com (2603:10b6:5:190::18)
+ by PH7PR12MB6740.namprd12.prod.outlook.com (2603:10b6:510:1ab::7) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20; Fri, 1 Sep
- 2023 05:00:32 +0000
-Received: from CY4PEPF0000EE3C.namprd03.prod.outlook.com
- (2603:10b6:5:3b2:cafe::f6) by DS7PR03CA0162.outlook.office365.com
- (2603:10b6:5:3b2::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.25 via Frontend
- Transport; Fri, 1 Sep 2023 05:00:32 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.18; Fri, 1 Sep
+ 2023 05:00:28 +0000
+Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
+ (2603:10b6:5:190:cafe::25) by DM6PR11CA0005.outlook.office365.com
+ (2603:10b6:5:190::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22 via Frontend
+ Transport; Fri, 1 Sep 2023 05:00:28 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EE3C.mail.protection.outlook.com (10.167.242.16) with Microsoft
+ CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.17) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.17 via Frontend Transport; Fri, 1 Sep 2023 05:00:32 +0000
+ 15.20.6745.17 via Frontend Transport; Fri, 1 Sep 2023 05:00:28 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
- 2023 00:00:30 -0500
+ 2023 00:00:27 -0500
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Fri, 1 Sep 2023 00:00:30 -0500
+ Transport; Fri, 1 Sep 2023 00:00:26 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7e21e25c-4884-11ee-8783-cb3800f73035
+X-Inumbo-ID: 7afcc685-4884-11ee-9b0d-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QqAEX/Aia6VR6eHcLHNQ4K4Bfpc1cFBzh/TycvhH1Ei/DFNzO/ctL2TyOi4DQnhE9dDSrWN10koo5fAx2BMEC5nrBJiPMcfDx1nBJXy0EREG5888qAM1UlF3X/qOg2BRZPMtN0cd1y8VjL6cX1ZMAkMzDvHgko4sp6gZ3T0Pbv+Bzh1TF01DIHLF+tssJLB9dWDh+FReWr2QFtjbxf7/eylOzHCWnZwBLSNjoeZ1iBOxg5M5JRJfg9QSApoAAaPZz04rs8iRiPqf6CNqmDS/6V45mkR0+OMKXPUVL+XRD9Te7L2obMGckqg7zV7WRx/qBl0Q98OMuT/g+/YqYMWsfA==
+ b=eimMht/BIbCOaf4Ab03L1N9il/aUNePqR6JzU/ebpvo5l3ZqoHsY6GBTzE5LwUS7a8tZnpH7AC/dEfu6J6gREhdBHncIlIXyNq6cfhlKpKQSTDMw/BFcLLiPXm+E3cTyC3YPVHctmyeITnHB50DY1C3vAnYxiea98uI/+60kH6AknCm9ETcvSojiVTN5AwR0yibyG2UNk0fe9Q/whb0PIv277QYw+CmSjaCWKjBtjrh8AA0hwUGm2t5jYcqbTSdrHrAO4wiRrvPTx1IBXghBM47oXU9Buo7u8XCt5bX2nD47i/6wjnfLzRFidg0wP/sh4CCakrrRt7KnLHrRdxEsgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mTCPtQBNjoIyHEJsEb7hqin0hShKQ1om1xTixiBsYZA=;
- b=UL+uajtCXEF8s+UfOdk+0K4L4cfmh2KXdQye6aoagTBiY114zW94lF3vqxOlsK78eWdq7hXFQMOOVp5Em95X/ShHo2tf4l3efJQw09ErXlYo24J2wBeWpuMfdqXXMpWcAbcZ8Gd4SFdAwJAEqYHi9U+BoyQk6MYhu2dY2nOweS46ABlKp4dDJsToIHD1xtiOnBCXbInoJN72JAgaykqdXUSBvBevKiYHxgeZTqfON/SHlF0smIsAFcOlqFsSiLLaoBPvDfCGhpbumTKLfJ4BYZSShhXhmdMI+KN7jr20dZeWJJvhRZbYNGxdrNb0alEQXiiPLSfNWe1xBfKwumU2ew==
+ bh=y81wVIygGPJh0Ydvh/80eu9K2SfjYwEv+GVsIT2ZkAI=;
+ b=WscnBkmj25k8sndAXPLH4wTyEd6XndZui0vF8E8+RY9LaOQYpwfVU+/N1lVo9D3AG9bOxyaUrLZzNyecRt8JDVK6rZTVx9nswzwiC8DVHebHGzdMqNJl9j9q/ZJYnDDRv15TUQTo/3RB3Zbmo3wDJsXF2boWYdIJQotjcq8wtHvsyPUc/Y5jgfmtRus9shNy6SKMr4CJK4e7xQ5J2JRiEk48FGHFVZvKoPovKdLtQMweCuuRxrfMi+/a243g3INwIFqfRal35G+5fiF5xkN2lYAJ3R7J2pZEfmIdouTwVwXnfCeRWRMCUK6kEi/4bg4JvlnOj0BPXvNyZ0Iid9DKcQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mTCPtQBNjoIyHEJsEb7hqin0hShKQ1om1xTixiBsYZA=;
- b=C7pNEwTj7YlLGY5iutzDUK9P+6dDmxWvdYcCesM/vhscApPjnyLc9ucAmVYpfasG7uapgb3KAtyUfyVjVps/C1v3YVWjC79ybetYvw+D5hDWK8VVqznGDo0gDc1WtAv0A2jwwSxUQ3E3LyYI2Gf7R17kzlWfNKO83UGnnv0P/CA=
+ bh=y81wVIygGPJh0Ydvh/80eu9K2SfjYwEv+GVsIT2ZkAI=;
+ b=NBpNAVxSMHznO3GuBJYlw/rXwu2ca+1x8hBrDZMr19ZHjkZDur6kVO5EtkPcT0TYlXFeDzZDnOPwFtOkUaTZCT9phnnLEFX5noDDWreS4Tqn/zo2RgFaOUWLhjOOgVjL6apXkvxWcTqvKkvhk/JlIcFXyTvMzZvvf9F4/092qRM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,11 +86,11 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <vikram.garhwal@amd.com>, <julien@xen.org>, <michal.orzel@amd.com>,
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>
-Subject: [XEN][PATCH v11 19/20] tools/libs/light: Implement new libxl functions for device tree overlay ops
-Date: Thu, 31 Aug 2023 21:59:46 -0700
-Message-ID: <20230901045947.32351-20-vikram.garhwal@amd.com>
+	<sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN][PATCH v11 15/20] arm/asm/setup.h: Update struct map_range_data to add rangeset.
+Date: Thu, 31 Aug 2023 21:59:42 -0700
+Message-ID: <20230901045947.32351-16-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230901045947.32351-1-vikram.garhwal@amd.com>
 References: <20230901045947.32351-1-vikram.garhwal@amd.com>
@@ -98,156 +98,207 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3C:EE_|SJ1PR12MB6338:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d21bdfd-7d6d-449d-cf04-08dbaaa85ea9
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|PH7PR12MB6740:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7a558305-c284-4366-c0af-08dbaaa85c66
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	ejNHlH2jMBZEeXTHwY/5N/u3gBFXbpvNSt4TMFbC1SrVDeGjKzKykuFfy8T4l63BBmt5d16BEkeiVUf5oGgywnJ+z5NjCeioeT6G+ONgr0CbrRuEYwy/qg6Q9IThD6x7uXD5bOUCPLz2cNAqv9j0bcJo4pk8CxgDBZO54c9vlIlQLBJWaoJ4uORSEIXas9mmPUPuLDLLfDHdfBarfAV5mb1PjT1Se2k853fBzggaBUCFK+mrXfeME3enYWn5sEszTOc9zDT0tUQHVSXt5Yi3TRej8K5c4bWmh4/H6MyyARlK/uzyOhSxGzbfkOct2MhQ/VZTHri0X/JtgP68Fv0LCoff+YXgr0Etz0hcmRNX5ycQnpOa1/w5/RLgUbshY+6z/dvdW1slrGOHc7Y7AKO5R3wiQgiDCZ/U+ajbTmZFVZEgmAZooEXiM3nnnTK0pcsSsAH4nKG2wraLN2aDEM/tSLYZTAgfCL8+eqZVyTM5EZVjLWdd0W5726ghONR7pTQtoaAmnJ+xM2Zeukr4IYXryj5GjeW1Xbm8qgARpr6c+uWZFhBSKaquYQb9yYULA3KbIRyCAz5Acs1UJxp7b8sGJe8KHLCpS/qs/rS8UdziTbrUk7QmZzBiTSGqqY+cM50WmrW7MU8JgvDnQfgaep6yLc1My1VPkPzKhTMk7KmyRUgP0HSQfFOELScPVHJyksXf9RkOMmMGibb4omAYc2XP6M/HZwEQKNsG1rInX+5PEk1MsTdVrjn8nmlXzgkL2i1RYYHZdbfFbFLh46rpfsjtGFAksABZOc9nxqcAtlHvxIQ=
+	xQ5sVp8HbXryancRsEbIf5Q07n0zB/qU6d56xod1I0uBQmu84z0MyC21x5lkWgfFUYyfp0xypEGfQZBiUU/eGUy6k+TD3ss4Xf74PfpR+OGq/ybXGYgyjU0ik0ukD6fHLh1iRiliyHxF2SAfrZvXBD20TBDumszO9YDBN0HXbCW+MIgNx3pm9fWfAV4FWMpU5xXpIDviDwKXgGwCf++EOExbJCzlnkBQ8yzAGh9Ozso16sAZpLEcPYhm+uHu2Lp0iQruMvOUhNO2Nnyz7a0bvqKTMq9VUp2fooKwNEKUVI8VUZmtXsgcw/pkHdWT0XBx8m/zOe5XRCYZMUINZbwnwdHWftEZftqNV76/QGXi+oRdy5AHX/zlQzG4eTor5kqZHVHqs2a/AfiekLxCVsD8fgC/myF5SDctlWadz1yGhkgRvW7COIXNiaCqAU0iXcPLGr8KJF17EdjQrzwQxdVmRpW9jBcivIMsyNkhBT2OfzQqlnvQP29bVH7sa5tlp2AMwR/+ZepyGEoSMUQWbiWpKjBUftWMtkZNshymH0hb8qHgNWiatvTpb2T//w8MXk5q63tALNDEb1+mZNOj7PTx6S7uTCeaHGKJG0Se2SEKZqJpwJf7lKaGRWOQbjAuHYtTmYyd+BhfI7jjcZUJLz4pPrri0+KMwVkof54sN6iOyEOHFsrdFiw2QBQ+daFxjbJfyyKEOyTtjhLVLeiQ8MiSSsdT85QdTbqGwTn7IuQMPivCfzReP9rRFqfiGYkBkVAcNI+GfMQZHYeXjY9Jx3aTRw==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(396003)(376002)(39860400002)(136003)(451199024)(1800799009)(186009)(82310400011)(40470700004)(46966006)(36840700001)(70206006)(2906002)(36756003)(5660300002)(86362001)(44832011)(40460700003)(82740400003)(356005)(81166007)(40480700001)(36860700001)(47076005)(4326008)(8676002)(336012)(41300700001)(8936002)(426003)(1076003)(2616005)(26005)(316002)(54906003)(6666004)(478600001)(70586007)(6916009)(2004002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(396003)(376002)(346002)(136003)(186009)(82310400011)(451199024)(1800799009)(36840700001)(46966006)(40470700004)(26005)(1076003)(426003)(336012)(47076005)(36860700001)(5660300002)(44832011)(6666004)(82740400003)(356005)(478600001)(8936002)(8676002)(81166007)(4326008)(86362001)(2616005)(83380400001)(70586007)(54906003)(2906002)(6916009)(36756003)(316002)(70206006)(41300700001)(40460700003)(40480700001)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:32.1377
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:28.3428
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d21bdfd-7d6d-449d-cf04-08dbaaa85ea9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7a558305-c284-4366-c0af-08dbaaa85c66
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE3C.namprd03.prod.outlook.com
+	CY4PEPF0000EE3D.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6338
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6740
+
+Add rangesets for IRQs and IOMEMs. This was done to accommodate dynamic overlay
+node addition/removal operations. With overlay operations, new IRQs and IOMEMs
+are added in dt_host and routed. While removing overlay nodes, nodes are removed
+from dt_host and their IRQs and IOMEMs routing is also removed. Storing IRQs and
+IOMEMs in the rangeset will avoid re-parsing the device tree nodes to get the
+IOMEM and IRQ ranges for overlay remove ops.
+
+Dynamic overlay node add/remove will be introduced in follow-up patches.
 
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
----
- tools/include/libxl.h               | 11 +++++
- tools/libs/light/Makefile           |  3 ++
- tools/libs/light/libxl_dt_overlay.c | 71 +++++++++++++++++++++++++++++
- 3 files changed, 85 insertions(+)
- create mode 100644 tools/libs/light/libxl_dt_overlay.c
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 82b764ff57..abc5fd52da 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -259,6 +259,12 @@
+---
+Changes from v10:
+    Replace paddr_to_pfn(PAGE_ALIGN()) with paddr_to_pfn_aligned().
+    Change data type of irq.
+    fix function change for handle_device().
+    Remove unnecessary change .d = d in mr_data.
+---
+---
+ xen/arch/arm/device.c            | 43 +++++++++++++++++++++++++-------
+ xen/arch/arm/domain_build.c      |  4 +--
+ xen/arch/arm/include/asm/setup.h |  9 ++++---
+ 3 files changed, 42 insertions(+), 14 deletions(-)
+
+diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
+index 327e4d24fb..1f631d3274 100644
+--- a/xen/arch/arm/device.c
++++ b/xen/arch/arm/device.c
+@@ -165,6 +165,15 @@ int map_range_to_domain(const struct dt_device_node *dev,
+     dt_dprintk("  - MMIO: %010"PRIx64" - %010"PRIx64" P2MType=%x\n",
+                addr, addr + len, mr_data->p2mt);
+ 
++    if ( mr_data->iomem_ranges )
++    {
++        res = rangeset_add_range(mr_data->iomem_ranges,
++                                 paddr_to_pfn(addr),
++                                 paddr_to_pfn_aligned(addr + len - 1));
++        if ( res )
++            return res;
++    }
++
+     return 0;
+ }
+ 
+@@ -178,10 +187,11 @@ int map_range_to_domain(const struct dt_device_node *dev,
   */
- #define LIBXL_HAVE_DEVICETREE_PASSTHROUGH 1
+ int map_device_irqs_to_domain(struct domain *d,
+                               struct dt_device_node *dev,
+-                              bool need_mapping)
++                              bool need_mapping,
++                              struct rangeset *irq_ranges)
+ {
+     unsigned int i, nirq;
+-    int res;
++    int res, irq;
+     struct dt_raw_irq rirq;
  
-+#if defined(__arm__) || defined(__aarch64__)
-+/**
-+ * This means Device Tree Overlay is supported.
-+ */
-+#define LIBXL_HAVE_DT_OVERLAY 1
-+#endif
- /*
-  * libxl_domain_build_info has device_model_user to specify the user to
-  * run the device model with. See docs/misc/qemu-deprivilege.txt.
-@@ -2498,6 +2504,11 @@ libxl_device_pci *libxl_device_pci_list(libxl_ctx *ctx, uint32_t domid,
-                                         int *num);
- void libxl_device_pci_list_free(libxl_device_pci* list, int num);
+     nirq = dt_number_of_irq(dev);
+@@ -208,17 +218,24 @@ int map_device_irqs_to_domain(struct domain *d,
+             continue;
+         }
  
-+#if defined(__arm__) || defined(__aarch64__)
-+int libxl_dt_overlay(libxl_ctx *ctx, void *overlay,
-+                     uint32_t overlay_size, uint8_t overlay_op);
-+#endif
-+
- /*
-  * Turns the current process into a backend device service daemon
-  * for a driver domain.
-diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index 5d7ff94b05..ba4c1b7933 100644
---- a/tools/libs/light/Makefile
-+++ b/tools/libs/light/Makefile
-@@ -112,6 +112,9 @@ OBJS-y += _libxl_types.o
- OBJS-y += libxl_flask.o
- OBJS-y += _libxl_types_internal.o
+-        res = platform_get_irq(dev, i);
+-        if ( res < 0 )
++        irq = platform_get_irq(dev, i);
++        if ( irq < 0 )
+         {
+             printk(XENLOG_ERR "Unable to get irq %u for %s\n",
+                    i, dt_node_full_name(dev));
+-            return res;
++            return irq;
+         }
  
-+# Device tree overlay is enabled only for ARM architecture.
-+OBJS-$(CONFIG_ARM) += libxl_dt_overlay.o
+-        res = map_irq_to_domain(d, res, need_mapping, dt_node_name(dev));
++        res = map_irq_to_domain(d, irq, need_mapping, dt_node_name(dev));
+         if ( res )
+             return res;
 +
- ifeq ($(CONFIG_LIBNL),y)
- CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
- endif
-diff --git a/tools/libs/light/libxl_dt_overlay.c b/tools/libs/light/libxl_dt_overlay.c
-new file mode 100644
-index 0000000000..a6c709a6dc
---- /dev/null
-+++ b/tools/libs/light/libxl_dt_overlay.c
-@@ -0,0 +1,71 @@
-+/*
-+ * Copyright (C) 2021 Xilinx Inc.
-+ * Author Vikram Garhwal <fnu.vikram@xilinx.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License as published
-+ * by the Free Software Foundation; version 2.1 only. with the special
-+ * exception on linking described in file LICENSE.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU Lesser General Public License for more details.
-+ */
++        if ( irq_ranges )
++        {
++            res = rangeset_add_singleton(irq_ranges, irq);
++            if ( res )
++                return res;
++        }
+     }
+ 
+     return 0;
+@@ -249,6 +266,11 @@ static int map_dt_irq_to_domain(const struct dt_device_node *dev,
+     }
+ 
+     res = map_irq_to_domain(d, irq, !mr_data->skip_mapping, dt_node_name(dev));
++    if ( res )
++        return res;
 +
-+#include "libxl_osdeps.h" /* must come before any other headers */
-+#include "libxl_internal.h"
-+#include <libfdt.h>
-+#include <xenctrl.h>
-+
-+static int check_overlay_fdt(libxl__gc *gc, void *fdt, size_t size)
-+{
-+    int r;
-+
-+    if (fdt_magic(fdt) != FDT_MAGIC) {
-+        LOG(ERROR, "Overlay FDT is not a valid Flat Device Tree");
-+        return ERROR_FAIL;
-+    }
-+
-+    r = fdt_check_header(fdt);
-+    if (r) {
-+        LOG(ERROR, "Failed to check the overlay FDT (%d)", r);
-+        return ERROR_FAIL;
-+    }
-+
-+    if (fdt_totalsize(fdt) > size) {
-+        LOG(ERROR, "Overlay FDT totalsize is too big");
-+        return ERROR_FAIL;
-+    }
-+
-+    return 0;
-+}
-+
-+int libxl_dt_overlay(libxl_ctx *ctx, void *overlay_dt, uint32_t overlay_dt_size,
-+                     uint8_t overlay_op)
-+{
-+    int rc;
-+    int r;
-+    GC_INIT(ctx);
-+
-+    if (check_overlay_fdt(gc, overlay_dt, overlay_dt_size)) {
-+        LOG(ERROR, "Overlay DTB check failed");
-+        rc = ERROR_FAIL;
-+        goto out;
-+    } else {
-+        LOG(DEBUG, "Overlay DTB check passed");
-+        rc = 0;
-+    }
-+
-+    r = xc_dt_overlay(ctx->xch, overlay_dt, overlay_dt_size, overlay_op);
-+
-+    if (r) {
-+        LOG(ERROR, "%s: Adding/Removing overlay dtb failed.", __func__);
-+        rc = ERROR_FAIL;
-+    }
-+
-+out:
-+    GC_FREE;
-+    return rc;
-+}
-+
++    if ( mr_data->irq_ranges )
++        res = rangeset_add_singleton(mr_data->irq_ranges, irq);
+ 
+     return res;
+ }
+@@ -289,7 +311,8 @@ static int map_device_children(const struct dt_device_node *dev,
+  *  - Assign the device to the guest if it's protected by an IOMMU
+  *  - Map the IRQs and iomem regions to DOM0
+  */
+-int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt)
++int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
++                  struct rangeset *iomem_ranges, struct rangeset *irq_ranges)
+ {
+     unsigned int naddr;
+     unsigned int i;
+@@ -308,7 +331,9 @@ int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt)
+         .p2mt = p2mt,
+         .skip_mapping = !own_device ||
+                         (is_pci_passthrough_enabled() &&
+-                        (device_get_class(dev) == DEVICE_PCI_HOSTBRIDGE))
++                        (device_get_class(dev) == DEVICE_PCI_HOSTBRIDGE)),
++        .iomem_ranges = iomem_ranges,
++        .irq_ranges = irq_ranges
+     };
+ 
+     naddr = dt_number_of_address(dev);
+@@ -342,7 +367,7 @@ int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt)
+         }
+     }
+ 
+-    res = map_device_irqs_to_domain(d, dev, own_device);
++    res = map_device_irqs_to_domain(d, dev, own_device, irq_ranges);
+     if ( res < 0 )
+         return res;
+ 
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index ff4fc30769..29dcbb8a2e 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2402,7 +2402,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
+                "WARNING: Path %s is reserved, skip the node as we may re-use the path.\n",
+                path);
+ 
+-    res = handle_device(d, node, p2mt);
++    res = handle_device(d, node, p2mt, NULL, NULL);
+     if ( res)
+         return res;
+ 
+@@ -2745,7 +2745,7 @@ static int __init handle_passthrough_prop(struct kernel_info *kinfo,
+         return -EINVAL;
+     }
+ 
+-    res = map_device_irqs_to_domain(kinfo->d, node, true);
++    res = map_device_irqs_to_domain(kinfo->d, node, true, NULL);
+     if ( res < 0 )
+         return res;
+ 
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 6cda3e4039..b8866c20f4 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -113,6 +113,9 @@ struct map_range_data
+     p2m_type_t p2mt;
+     /* Set if mapping of the memory ranges must be skipped. */
+     bool skip_mapping;
++    /* Rangeset to store IRQs and IOMEM for overlay nodes. */
++    struct rangeset *iomem_ranges;
++    struct rangeset *irq_ranges;
+ };
+ 
+ extern struct bootinfo bootinfo;
+@@ -165,11 +168,11 @@ void device_tree_get_reg(const __be32 **cell, uint32_t address_cells,
+ u32 device_tree_get_u32(const void *fdt, int node,
+                         const char *prop_name, u32 dflt);
+ 
+-int handle_device(struct domain *d, struct dt_device_node *dev,
+-                  p2m_type_t p2mt);
++int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
++                  struct rangeset *iomem_ranges, struct rangeset *irq_ranges);
+ 
+ int map_device_irqs_to_domain(struct domain *d, struct dt_device_node *dev,
+-                              bool need_mapping);
++                              bool need_mapping, struct rangeset *irq_ranges);
+ 
+ int map_irq_to_domain(struct domain *d, unsigned int irq,
+                       bool need_mapping, const char *devname);
 -- 
 2.17.1
 
