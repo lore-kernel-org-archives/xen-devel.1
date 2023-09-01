@@ -4,52 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F38CA0FE6
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:12:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.594325.927652 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E1FCA0FE6
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Sep 2023 05:12:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.594324.927646 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwS2-0006lY-4W; Fri, 01 Sep 2023 05:12:10 +0000
+	id 1qbwS1-0006hi-Og; Fri, 01 Sep 2023 05:12:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 594325.927652; Fri, 01 Sep 2023 05:12:10 +0000
+Received: by outflank-mailman (output) from mailman id 594324.927646; Fri, 01 Sep 2023 05:12:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qbwS1-0006jy-TB; Fri, 01 Sep 2023 05:12:09 +0000
-Received: by outflank-mailman (input) for mailman id 594325;
+	id 1qbwS1-0006hX-Ky; Fri, 01 Sep 2023 05:12:09 +0000
+Received: by outflank-mailman (input) for mailman id 594324;
  Fri, 01 Sep 2023 05:12:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JvPm=ER=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1qbwGt-0001Hn-FD
- for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:39 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2060c.outbound.protection.outlook.com
- [2a01:111:f400:7e88::60c])
+ id 1qbwGo-0001Hn-E4
+ for xen-devel@lists.xenproject.org; Fri, 01 Sep 2023 05:00:34 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20602.outbound.protection.outlook.com
+ [2a01:111:f400:fe5b::602])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7b152e34-4884-11ee-9b0d-b553b5be7939;
- Fri, 01 Sep 2023 07:00:34 +0200 (CEST)
-Received: from DS7PR03CA0168.namprd03.prod.outlook.com (2603:10b6:5:3b2::23)
- by CYYPR12MB8921.namprd12.prod.outlook.com (2603:10b6:930:c7::14) with
+ id 796f3ef0-4884-11ee-9b0d-b553b5be7939;
+ Fri, 01 Sep 2023 07:00:31 +0200 (CEST)
+Received: from DM6PR11CA0013.namprd11.prod.outlook.com (2603:10b6:5:190::26)
+ by SJ2PR12MB8010.namprd12.prod.outlook.com (2603:10b6:a03:4c7::14) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.23; Fri, 1 Sep
- 2023 05:00:30 +0000
-Received: from CY4PEPF0000EE3C.namprd03.prod.outlook.com
- (2603:10b6:5:3b2:cafe::5a) by DS7PR03CA0168.outlook.office365.com
- (2603:10b6:5:3b2::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22 via Frontend
- Transport; Fri, 1 Sep 2023 05:00:30 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20; Fri, 1 Sep
+ 2023 05:00:27 +0000
+Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
+ (2603:10b6:5:190:cafe::eb) by DM6PR11CA0013.outlook.office365.com
+ (2603:10b6:5:190::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.25 via Frontend
+ Transport; Fri, 1 Sep 2023 05:00:27 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EE3C.mail.protection.outlook.com (10.167.242.16) with Microsoft
+ CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.17) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.17 via Frontend Transport; Fri, 1 Sep 2023 05:00:30 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ 15.20.6745.17 via Frontend Transport; Fri, 1 Sep 2023 05:00:26 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
- 2023 00:00:29 -0500
+ 2023 00:00:14 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
+ 2023 00:00:13 -0500
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Fri, 1 Sep 2023 00:00:29 -0500
+ Transport; Fri, 1 Sep 2023 00:00:13 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b152e34-4884-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 796f3ef0-4884-11ee-9b0d-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=br+vnSfFGe89wBRfE1hfe9zveK1u9F1Iq8b0lCb/nbOKksW5AheSyhg0LiOSS+2XPFpA+jBvWSe+jHuMRhxXixc0Ar91uXnO4LU+QU4qmelF0jzb9THMjFxgIOs4GT1glEuuhCpg6B6oiRCkOZxxZRUygyg7VaMH8TGX3141o+IT+Q/NLVSOzNjKhYv0Q8VGzMcJ30CrQgRAaASgdcIT9jZvzquLnMf9uwMPnJDm4CK/Z5ql+MLXejX0gB7GJjm2SFm9g9jrSWC6bEMipEGefpDWMocuGNlBgDSCMOWDLHDsbK4Glgyz7SykFwOdxc6Z8sy+gor8W2DBcLjYkLZTTw==
+ b=ABMb5caoFTHdGE90hdcC1LS27NfKX+6tsf9efu9pI6wnqLuVE1Kv7tvadcp7dvGKxttrBSeLVDdHTE5Dv1hbmwMo0DrsTIrGwQNfqRb2NOi8tBB5eifh1UDX/HPRnaQGy4n7ZOOV73s9ULVQ45Nvvhy33JC8pH4yvZKUWEcdaCsxd9NSaJZmYfi/gWWvZ9JTrBwUdmjIJUfZoB+TyuE+tUnM3wgvOi91U1bv2FTZAiAiCS220vSkTWFeO8Yi5h+OioHeCwy/oR+kaPQQ1DxR3KMVSijmHJOpBrLKzkub2yBk/VWsVnzdQolGmnXkdBuIJWzTb8ddXCuJc25umnFB4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=f3CXFnL+4aLIWZtU9p5mMJcpke4wuyPy6FqvOY6YZ1o=;
- b=ZYQ4qbXcuRQ5T2XIbqn4ApBVIoRq9noZWlen+q+VBeIcpoH1xMV9BzdV2rYR1l9yaFJVPTWy+nhd7uxFAccef9c9YB8RjyXZgc35jNa3Q7v0u/Db9Ve1njSuazr0C+uRapfJO5evYLHw3hOC15a70QcI6FUjFT2sj/T6RaryT2m3uULwBwfRe77DEJysIOYTvRow1v15S4w5kYjwFZOa42rhIj+v7UQ58VhEo1Gpznq5b9BFArQqfR1WGITK62+QKiF7tysheZIoR4G1R+5+730Ja7TDyIyGsLLTDto+uE/+qS8C8WajQ1UdqGjfYibaDP8kXmfYhIGBv+uFloZbsg==
+ bh=TDhW7f5w3p+/XHERjQf4wWurMSkKNLV2sxdzRwRCMQk=;
+ b=WGEDvkUmdOMpVH14woCHDpQF7a55A2xKmXLfqMGsqtLgXgoaNfryumvI7E4CA1m7vPA+aV23stgIFD/VJ8wJx83SXWnitZbnlrByjrSvhBhU9cQYCLA5hHBxs7ZZ1rUdV7GlkVsCah9W37IVIX4RM+HKEOI9sK98yQVi/MEWHoNwKV21fpRSwd8F5ILX8m8qQDsKo4aKoGNU4kprvheh2vOT3yHJKYi+G1QOu22PsyEd31nb4n9U4edXQPGKlJg9cOb2Z3nq1EcsJwBYJ8dOzg2/Lxk7J1AguufP8zTjcbRwkl2ByNaqhQ7gHvGHWAnNAjZSI32KLPMp300JVdYxew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f3CXFnL+4aLIWZtU9p5mMJcpke4wuyPy6FqvOY6YZ1o=;
- b=GguLGdsVWl7X/nGtZ1nYh0L/CIk92WxYRzCYP5aSrdmUALqURTuiDlvOB58jIZyU+GTaaGOwm0hs5r0iuf7ZTE37dYIuMjCQR54BT3vlqgjvdsNW2xSz1Q4jM/VqF1+OsB941r9rIkGWP7u/uixAvjF5ITz8WRAZzaT1hgtsCkg=
+ bh=TDhW7f5w3p+/XHERjQf4wWurMSkKNLV2sxdzRwRCMQk=;
+ b=lmcDpSLY/D7Ar+F1Vtnkm+MbuYRjkAJzvO6MAAUbPAQeBZBkTDsaeo4WgFO/BNvykh/nQyEIVWMfiq2DI/I/+ckPtLux5LhT99QY1h8krn1AUmS8OiaD7ILzDeQMQKMFcxUfagf6eunTEWpGsaQZYGOAsKg9MzSkpPPrOG8E0Cs=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,11 +90,11 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <vikram.garhwal@amd.com>, <julien@xen.org>, <michal.orzel@amd.com>,
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>
-Subject: [XEN][PATCH v11 18/20] tools/libs/ctrl: Implement new xc interfaces for dt overlay
-Date: Thu, 31 Aug 2023 21:59:45 -0700
-Message-ID: <20230901045947.32351-19-vikram.garhwal@amd.com>
+	<sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN][PATCH v11 13/20] asm/smp.h: Fix circular dependency for device_tree.h and rwlock.h
+Date: Thu, 31 Aug 2023 21:59:40 -0700
+Message-ID: <20230901045947.32351-14-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230901045947.32351-1-vikram.garhwal@amd.com>
 References: <20230901045947.32351-1-vikram.garhwal@amd.com>
@@ -98,123 +102,83 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3C:EE_|CYYPR12MB8921:EE_
-X-MS-Office365-Filtering-Correlation-Id: ac2dd0b3-e953-4150-3d3d-08dbaaa85db4
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|SJ2PR12MB8010:EE_
+X-MS-Office365-Filtering-Correlation-Id: c4adddf8-0b03-43df-a3c5-08dbaaa85b86
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	MvRa/6J4rDug4nsKud19NijEpszhflc0hexeCt0gli0S3WpmOEdsyImkaLc34KHmeCwABDsDgbfx5qu6cF5/vyskpahSzfuC4BiTIgTqf3iIObGAqhhKdssmcqJeMvbyypW9wcdPSLocspjEDFTpDR3RxYd/EQ3k9Gtx0sBAOHSx+a6UWhQpGwdDsnucdc+8iFlGyaVbTA5n3VIWSQBqu1POSZNLp/2VpApunUqPf5TMvISJ8e+H4lxFlyTbYZWntq3wHnRtYzKijIjSqn4IoTof9vrsIafrsjJLA5/FZk9WA8+R7LnOjmxpYCNxo8boQ6rRSODCfbMKnHPlu0meFea/Sv7HdovP50Xgq4H20KQ8lIhFeiNNNFphcholy684ur02+kuqaK4tNgojJlFvg/x+ATbsyXT4GTY90nUizFgaADsEeU+xHEEmd3NDjoCxAktfAWdvb9IoE7hHnmoN1hR5QKX1V3CtqUwXPcngJNBphG+h8QehK0OpvmF0Y0bki2pEBWR/41rJdxcOXm2BnAA5YeDYPwkCpaBXitwVen+BhJibexgSK+TaYz5eLZ428HghDwWeFdinILpYYbSohKRLJBBUYhVd18ZMUb8Z0WtR2ekNz/i0e2l6vT6RLDb01yWsKAQnLG78cdjAK7xmT05MKJy3xJkPSovU4mg+DStg4exY8xGvz8//6+H0ZAXAGvzVNfi7b9nu5CCBJYuNrEJ+MCzceXK/yRNXR62b6pB/pMWpSfYp36+F0IUIDin6oBXWMn4M7rsA9f66ok1Ia8boTaMmjNx9aUhmBzPEVTQ=
+	PH23t3earyBwOkWZYWC9RGyr/2+0hhZ6KnZIVNcCGvmiKJhUjmWi5sOFrLu1Utue0z5NlwmAZL1MCyXwCTdnUZ6W3ODJcXUPPdQGqMD9AaXhRkUPANgJfRdJ2yP41+U5N6lNzTeQnPefVSf4lY+DB68JfRHuCh0Sv0sFPjKyKKCr8wy96jhKVeFIt+TJhAf9i+pSu0STzYl3dmCd+jRKFDsVQQPSXLt2ZENtz2zT8rzIWrI28RdlkH13vqzqr5g1MljehlOmQI08x1LqaiupkTYOhgKXI/jaYwsXkenOYgUpnUbNQnHCzz7FrWN//ZLRUkbuOC12wWPj8G5l/3bdC2rR9jDsls0hNzLFx3wU9o73qW5IFZrjWbWnUUjpnK0P1iWa+S5V/C3Npq7m6KKW9jKNnOo4hG9vc6YcbZhDQbh4k1kMbAHzyuti2+nzII37zznzdigYWoscd6PTxNgMCwuJ5UUDF+9JFJngr03St9HdySowbWMElVnVfNvDa5ihZH87Fd5X/I8Ra4DPgKlmSCpqm3/ZDQaMjRIdCqi3jRoKB8ISkSPrFbbwlX7OQ+Vb4pQDkW5ylkEJVqA+PIdidHcDbbig1+zbGPxNWhjHRiiuyemsJ43iAUFk1vs+nbh+A9D/Y0dFq2VgE7ex7MMMjpmvjdqW77468+TutfDROzMPtC4yDdehYTfkWxJADEWd+v5IbqIIA5Rs5WH+bG4I4t2sUqly7HWodLhilL2H1j6ouCSVU1hwghFNXGALc9Zgiy7Mp4B1ZGDe/M5g3a61Lw==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(376002)(136003)(39860400002)(451199024)(186009)(82310400011)(1800799009)(36840700001)(40470700004)(46966006)(356005)(82740400003)(6666004)(36756003)(40460700003)(86362001)(81166007)(40480700001)(47076005)(36860700001)(2616005)(2906002)(426003)(336012)(26005)(1076003)(478600001)(5660300002)(8936002)(70586007)(70206006)(8676002)(4326008)(6916009)(44832011)(41300700001)(316002)(54906003)(2004002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(376002)(136003)(396003)(346002)(1800799009)(451199024)(82310400011)(186009)(36840700001)(40470700004)(46966006)(40480700001)(40460700003)(2906002)(316002)(6916009)(70586007)(70206006)(356005)(82740400003)(81166007)(478600001)(54906003)(5660300002)(8936002)(86362001)(8676002)(4326008)(83380400001)(41300700001)(44832011)(2616005)(36860700001)(47076005)(6666004)(336012)(26005)(1076003)(426003)(36756003)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:30.5284
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 05:00:26.8741
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac2dd0b3-e953-4150-3d3d-08dbaaa85db4
+X-MS-Exchange-CrossTenant-Network-Message-Id: c4adddf8-0b03-43df-a3c5-08dbaaa85b86
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE3C.namprd03.prod.outlook.com
+	CY4PEPF0000EE3D.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB8921
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8010
 
-xc_dt_overlay() sends the device tree binary overlay, size of .dtbo and overlay
-operation type i.e. add or remove to xen.
+Dynamic programming ops will modify the dt_host and there might be other
+function which are browsing the dt_host at the same time. To avoid the race
+conditions, we will need to add a rwlock to protect access to the dt_host.
+However, adding rwlock in device_tree.h causes following circular dependency:
+    device_tree.h->rwlock.h->smp.h->asm/smp.h->device_tree.h
+
+To fix this, removed the "#include <xen/device_tree.h> and forward declared
+"struct dt_device_node".
 
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Henry Wang <Henry.Wang@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/include/xenctrl.h         |  5 ++++
- tools/libs/ctrl/Makefile.common |  1 +
- tools/libs/ctrl/xc_dt_overlay.c | 50 +++++++++++++++++++++++++++++++++
- 3 files changed, 56 insertions(+)
- create mode 100644 tools/libs/ctrl/xc_dt_overlay.c
+    Changes from v7:
+        Move struct dt_device_node declaration just above arch_cpu_init().
+---
+---
+ xen/arch/arm/include/asm/smp.h | 4 +++-
+ xen/arch/arm/smpboot.c         | 1 +
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 12dca13b69..2ef8b4e054 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -2653,6 +2653,11 @@ int xc_livepatch_replace(xc_interface *xch, char *name, uint32_t timeout, uint32
- int xc_domain_cacheflush(xc_interface *xch, uint32_t domid,
-                          xen_pfn_t start_pfn, xen_pfn_t nr_pfns);
+diff --git a/xen/arch/arm/include/asm/smp.h b/xen/arch/arm/include/asm/smp.h
+index a37ca55bff..4fabdf5310 100644
+--- a/xen/arch/arm/include/asm/smp.h
++++ b/xen/arch/arm/include/asm/smp.h
+@@ -3,7 +3,6 @@
  
-+#if defined(__arm__) || defined(__aarch64__)
-+int xc_dt_overlay(xc_interface *xch, void *overlay_fdt,
-+                  uint32_t overlay_fdt_size, uint8_t overlay_op);
-+#endif
-+
- /* Compat shims */
- #include "xenctrl_compat.h"
+ #ifndef __ASSEMBLY__
+ #include <xen/cpumask.h>
+-#include <xen/device_tree.h>
+ #include <asm/current.h>
+ #endif
  
-diff --git a/tools/libs/ctrl/Makefile.common b/tools/libs/ctrl/Makefile.common
-index 0a09c28fd3..247afbe5f9 100644
---- a/tools/libs/ctrl/Makefile.common
-+++ b/tools/libs/ctrl/Makefile.common
-@@ -24,6 +24,7 @@ OBJS-y       += xc_hcall_buf.o
- OBJS-y       += xc_foreign_memory.o
- OBJS-y       += xc_kexec.o
- OBJS-y       += xc_resource.o
-+OBJS-$(CONFIG_ARM)  += xc_dt_overlay.o
- OBJS-$(CONFIG_X86) += xc_psr.o
- OBJS-$(CONFIG_X86) += xc_pagetab.o
- OBJS-$(CONFIG_Linux) += xc_linux.o
-diff --git a/tools/libs/ctrl/xc_dt_overlay.c b/tools/libs/ctrl/xc_dt_overlay.c
-new file mode 100644
-index 0000000000..c2224c4d15
---- /dev/null
-+++ b/tools/libs/ctrl/xc_dt_overlay.c
-@@ -0,0 +1,50 @@
-+/*
-+ *
-+ * Device Tree Overlay functions.
-+ * Copyright (C) 2021 Xilinx Inc.
-+ * Author Vikram Garhwal <fnu.vikram@xilinx.com>
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation;
-+ * version 2.1 of the License.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-+ */
+@@ -23,6 +22,9 @@ DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
+ extern void noreturn stop_cpu(void);
+ 
+ extern int arch_smp_init(void);
 +
-+#include "xc_private.h"
++struct dt_device_node;
 +
-+int xc_dt_overlay(xc_interface *xch, void *overlay_fdt,
-+                  uint32_t overlay_fdt_size, uint8_t overlay_op)
-+{
-+    int err;
-+    struct xen_sysctl sysctl = {
-+        .cmd = XEN_SYSCTL_dt_overlay,
-+        .u.dt_overlay = {
-+            .overlay_op = overlay_op,
-+            .overlay_fdt_size = overlay_fdt_size,
-+        }
-+    };
-+
-+    DECLARE_HYPERCALL_BOUNCE(overlay_fdt, overlay_fdt_size,
-+                             XC_HYPERCALL_BUFFER_BOUNCE_IN);
-+
-+    if ( (err = xc_hypercall_bounce_pre(xch, overlay_fdt)) )
-+        goto err;
-+
-+    set_xen_guest_handle(sysctl.u.dt_overlay.overlay_fdt, overlay_fdt);
-+
-+    if ( (err = do_sysctl(xch, &sysctl)) != 0 )
-+        PERROR("%s failed", __func__);
-+
-+err:
-+    xc_hypercall_bounce_post(xch, overlay_fdt);
-+
-+    return err;
-+}
+ extern int arch_cpu_init(int cpu, struct dt_device_node *dn);
+ extern int arch_cpu_up(int cpu);
+ extern void arch_cpu_up_finish(void);
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index e107b86b7b..eeb76cd551 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -10,6 +10,7 @@
+ #include <xen/cpu.h>
+ #include <xen/cpumask.h>
+ #include <xen/delay.h>
++#include <xen/device_tree.h>
+ #include <xen/domain_page.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
 -- 
 2.17.1
 
