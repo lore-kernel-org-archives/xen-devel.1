@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 883FDC83F33
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Sep 2023 09:15:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.595023.928492 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE9CC83F2C
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Sep 2023 09:23:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.595044.928517 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qd5fH-0004Wj-Ez; Mon, 04 Sep 2023 09:14:35 +0000
+	id 1qd5o0-0007MH-LT; Mon, 04 Sep 2023 09:23:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 595023.928492; Mon, 04 Sep 2023 09:14:35 +0000
+Received: by outflank-mailman (output) from mailman id 595044.928517; Mon, 04 Sep 2023 09:23:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qd5fH-0004VN-9I; Mon, 04 Sep 2023 09:14:35 +0000
-Received: by outflank-mailman (input) for mailman id 595023;
- Mon, 04 Sep 2023 09:14:33 +0000
+	id 1qd5o0-0007MA-IN; Mon, 04 Sep 2023 09:23:36 +0000
+Received: by outflank-mailman (input) for mailman id 595044;
+ Mon, 04 Sep 2023 09:23:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ceyR=EU=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1qd5fF-0004Sj-Ad
- for xen-devel@lists.xenproject.org; Mon, 04 Sep 2023 09:14:33 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2061a.outbound.protection.outlook.com
- [2a01:111:f400:7e89::61a])
+ <SRS0=LKCA=EU=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1qd5nz-0007Ll-BU
+ for xen-devel@lists.xenproject.org; Mon, 04 Sep 2023 09:23:35 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 73ede4e1-4b03-11ee-8783-cb3800f73035;
- Mon, 04 Sep 2023 11:14:31 +0200 (CEST)
-Received: from DM6PR21CA0018.namprd21.prod.outlook.com (2603:10b6:5:174::28)
- by BY5PR12MB4098.namprd12.prod.outlook.com (2603:10b6:a03:205::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.32; Mon, 4 Sep
- 2023 09:14:27 +0000
-Received: from SN1PEPF0002636D.namprd02.prod.outlook.com
- (2603:10b6:5:174:cafe::87) by DM6PR21CA0018.outlook.office365.com
- (2603:10b6:5:174::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.5 via Frontend
- Transport; Mon, 4 Sep 2023 09:14:27 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002636D.mail.protection.outlook.com (10.167.241.138) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Mon, 4 Sep 2023 09:14:25 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 4 Sep
- 2023 04:14:22 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 4 Sep
- 2023 02:14:21 -0700
-Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27
- via Frontend Transport; Mon, 4 Sep 2023 04:14:20 -0500
+ id b87feced-4b04-11ee-8783-cb3800f73035;
+ Mon, 04 Sep 2023 11:23:34 +0200 (CEST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4018af103bcso7399605e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Sep 2023 02:23:34 -0700 (PDT)
+Received: from EMEAENGAAD19049. ([66.81.173.62])
+ by smtp.gmail.com with ESMTPSA id
+ s16-20020adfecd0000000b0030ada01ca78sm13967281wro.10.2023.09.04.02.23.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Sep 2023 02:23:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,78 +47,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 73ede4e1-4b03-11ee-8783-cb3800f73035
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lSYFUR2g+6UrsbsS2mVbOGZ7jGCEPohaVyjcDcfgDbb01Ka/G2yLlQbcuWaSMM8VlYVp69Q3skaWqXKojtQZpE5WZdyJrZ6hc46gdbUqE/aPu1rg6Fc3PBM+r25hucIIdg4vHnIy7d4AWEc2zpeyrCWL/4+5+yu87kGKyElRdYpLDfh3ehAjcp2HSXhmUKy+hy5qfYD1XQEHJuJm2dQxNHqE9hfuavdDzGirA109esUm7Ky4tUduOKz8SPtRr8xSClpISIZsHp3hlVyB5l4KJ3F1ZdZOw8VcGDV3d7Z2eg22BGru6CGUlFI/a8yEyRy4J1ysI/xuGfyf6xh02tpYcA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+0uRhGXuIgZxSQy/zEQcePI+/liKzQjmWhxoOnLxvTI=;
- b=KstMVevoXrc3vSoQIWTQRLYblYoWGthwjbwU1AO5+xWQO+JEYChL1JfeOpAts90GkG7zSjHw+oIVLlN1LyDx6wpFue+jxf2ZWirAN95mU2+XXcPxN8xIVwGu/VuZph5Chrfc4xCv4QYuojx56Tl27mbILJh1+rRzGOaVIt1jUn/l9Ao/B9Eow6YSD5jH+rmiyT0xNBvHGOmfGiidbsJkYbnnoSjVJSYaKEy8bOBX1o9ty7FWWOU4fFGHHIVzV18qv+rJn5+/TZ/OAvquP7+d/oE14ZS9q96GFaiYqLjZLTeMxB2iWy/9vCcFkfAW5d21tiknS0gC43X6oeULSBMVpA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+0uRhGXuIgZxSQy/zEQcePI+/liKzQjmWhxoOnLxvTI=;
- b=5pDpjHJVaEtODoT1NNPR6SeKhR6QLo7W3S9CyuuQELMk+8cQtPNNlQGMgkzdDrc+grOONQLejAwf0BcbKmFxDwF5DZkU3dxL8E8N7UGFYTXrOIbuGLiBbE3JvAlql07GkXRD5aOBqclp1XS4rKRL+vDH6Ab6Jh+UgLCcsRqKAeA=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu
-	<wl@xen.org>
-Subject: [PATCH 0/2] xen: fixes for UBSAN findings with SMMUv3 enabled
-Date: Mon, 4 Sep 2023 11:14:04 +0200
-Message-ID: <20230904091406.942-1-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: b87feced-4b04-11ee-8783-cb3800f73035
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1693819414; x=1694424214; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=WHihUs1L790Rl4FSQ4WCI66SEc83+rw0NOyAyMvGEnY=;
+        b=Oc7/cCGczDjI9MLDwCmVSJBY0r6qg2v1NKj/Fb6J7p4+JZhBdfPxFZs3E7f1g2Ta4A
+         ngL+Q7p6SlLF4MQs4zQ3TOymwPr9z3U5Cvy5muNrXihjJ8zflTtfyjL2QRGsRo2NvjwF
+         PqJg9EJ+ZGU9ecOPK0jKjnZIDE0TyOvbQ4IXw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1693819414; x=1694424214;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WHihUs1L790Rl4FSQ4WCI66SEc83+rw0NOyAyMvGEnY=;
+        b=UrnYkhxNSwqDYjqI9ufcXos86z6yM+Fb/FXF04N9v1H/8rQt/ykxaOTThOL5cr/gVe
+         4sX/isltSOiiSfeQnPMCTeajut7aoQ9ndhzpk54zzVzw1DZVTSwLl0EpBXdf2Md4XjUk
+         Kjl+9t+S0foYGqu0+UHkvohxkxAft+hF2cZMDLM8U4JG9dD/naJbPuEyFNykascIRIAB
+         Cnc3hVoU0wIKDl2+ANAXVQ1sd7arL0iFh4+DRx1hm8zeRd02c8auYXhPfccmqbrMXy3u
+         UaZUtwYFB9YEooKvB0rCuxOHB1kFl8uXfQt/ml9HPk5UlqUv/TbiBo0J2wFvpm4YaXj2
+         bmmw==
+X-Gm-Message-State: AOJu0Yz7FhuhdkM9ZnqSzfg+euTVnUmtoITWpodJV+9nGEIqJoBMon0f
+	6cQIOy4mjyvYbLXNikeJsoDSmw==
+X-Google-Smtp-Source: AGHT+IFiNNzhj3UM1g9hNaFppljbFyM7x8ig5Bs48+uka2x84d8TfdFed/PnycavvrN3SFpy2lgZug==
+X-Received: by 2002:a05:600c:3b8b:b0:400:140c:6083 with SMTP id n11-20020a05600c3b8b00b00400140c6083mr9583482wms.2.1693819413826;
+        Mon, 04 Sep 2023 02:23:33 -0700 (PDT)
+Message-ID: <64f5a215.df0a0220.8c475.b1b4@mx.google.com>
+X-Google-Original-Message-ID: <ZPWiE8u/GhGmoYmu@EMEAENGAAD19049.>
+Date: Mon, 4 Sep 2023 10:23:31 +0100
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Javi Merino <javi.merino@cloud.com>, Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] tools/misc/xencov_split: Add python 3 compatibility
+References: <20230902162246.15672-1-javi.merino@cloud.com>
+ <44f0ee82-2a84-d4fb-15e0-fb74ed1ad2c3@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636D:EE_|BY5PR12MB4098:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b49431e-ab82-489d-a5c0-08dbad2755f2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	chVx5QRoHwFZQc/08Mkp9q7NPFLLBey85CjfHkJcubbbqkJUGBJknO0Zc1pG9Z9JCXjVD+BP9e1pQQTL3v+1lGBgJpn4epI2//3t5DWbppptEoClA5pOP4wHM62Vy872h4159Jl5etZHW/IdfOzTll7NvcAhNyefEwHSjOur4hMRW3WlhkoODQ8uHmyMeTtcXhN2MYmFUMOZ8LCzOll6su+ZCL5xvARagSgJHgyYOWtr4yCfbLiuyeQ8XbYU6/4ARNc7Ur45kuF83MkHQlAIXOt9slXatVivFT+rQt9H7+DTvsAZS27A0V4O2QcmDSWiZcKGboFGxYrXNoHO4tPFVAUReMqLQRTtNYLZFBdOvjkf3WkI5nApqzWUYN0T/n0OsNWwBDHA8eRWI5GTKSubMjzp5fa30s/UzB29I3SgFewDW01/QilKDqwPOC5+TNpzIvwJLF5IYwxZcHLkRCAa2rjrxa0/dEVhXRCE207UWI0Li0jBh7JQm4ePz2SphiXxN1nnnazNy/cH1dYtcCIITIap7bblAzTDWsNXasXDx6wvcityFiDDTJmn5wpEU8yhVQFXdzlJsNuJu4MEtweGfLa50aMGuse/XsRXHrJxC3mQharpxe3o1yHSej5LwsDtwbWtD2XsepT6LeUEOKq+8hvGCS1pRO5op3Y7tB8309+Z3kn5r8fF19ZNS0FIgM+PlpSo+F/yR38OeR0vWwMOxEEqe3j4pl7Jf37DyhBz2GZAUBiAo9GVOMlIqKc/I6a6WLP46GDNg2ogpbLe5Z5onw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(39860400002)(346002)(376002)(136003)(451199024)(186009)(1800799009)(82310400011)(40470700004)(36840700001)(46966006)(316002)(70586007)(36756003)(2906002)(6916009)(70206006)(86362001)(54906003)(40480700001)(8936002)(5660300002)(44832011)(8676002)(4326008)(41300700001)(40460700003)(1076003)(36860700001)(2616005)(83380400001)(426003)(26005)(336012)(47076005)(4744005)(356005)(81166007)(478600001)(82740400003)(6666004)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2023 09:14:25.9727
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b49431e-ab82-489d-a5c0-08dbad2755f2
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF0002636D.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4098
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <44f0ee82-2a84-d4fb-15e0-fb74ed1ad2c3@suse.com>
 
-This series contains fixes for UBSAN findings reported when running
-with SMMUv3 enabled.
+Hi,
 
-Michal Orzel (2):
-  xen/arm: smmuv3: Add missing U for shifted constant
-  xen: Change parameter of generic_fls() to unsigned int
+On Mon, Sep 04, 2023 at 08:51:31AM +0200, Jan Beulich wrote:
+> On 02.09.2023 18:21, Javi Merino wrote:
+> > Closes #154
+> > 
+> > Signed-off-by: Javi Merino <javi.merino@cloud.com>
+> 
+> The title isn't really in line with ...
+> 
+> > --- a/tools/misc/xencov_split
+> > +++ b/tools/misc/xencov_split
+> > @@ -1,5 +1,7 @@
+> > -#!/usr/bin/env python
+> > +#!/usr/bin/env python3
+> 
+> ... this part of the change, and making Py3 a requirement here (assuming
+> that's indeed necessary) surely wants adding a few words as description.
+> Grep-ing the tools/ sub-tree I notice that so far we've avoided explicit
+> uses of "python3", and I assume we would better continue doing so as on
+> a distro with only Py3 a "python3" alias may legitimately not exist.
+> 
+> Jan
+> 
+The only credible reason for doing that would be to have scripts compatible
+with both python2 and python3. Python2 has been deprecated since 2020 and
+it's no longer security supported[1]. No one should be even remotely
+encouraged to use that interpreter. The libs it uses are also in similar
+positions. The recommended approach is to migrate as much as possible to
+python3 and live happily ever after.
 
- xen/drivers/passthrough/arm/smmu-v3.h | 4 ++--
- xen/include/xen/bitops.h              | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+On that topic, the official PEP states:
 
--- 
-2.25.1
+(From https://peps.python.org/pep-0394/)
 
+  Some Linux distributions will not provide a python command at all by
+  default, but will provide a python3 command by default.
+
+Which seems to imply the correct shebang is indeed `/usr/bin/env python3`
+
+Thanks,
+Alejandro
 
