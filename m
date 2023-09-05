@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F79CA101B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Sep 2023 21:47:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.595840.929473 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3FB6CA101B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Sep 2023 21:58:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.595863.929493 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qddt3-0005Ku-CQ; Tue, 05 Sep 2023 21:47:05 +0000
+	id 1qde3z-0008Mj-Rq; Tue, 05 Sep 2023 21:58:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 595840.929473; Tue, 05 Sep 2023 21:47:05 +0000
+Received: by outflank-mailman (output) from mailman id 595863.929493; Tue, 05 Sep 2023 21:58:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qddt3-0005Kn-97; Tue, 05 Sep 2023 21:47:05 +0000
-Received: by outflank-mailman (input) for mailman id 595840;
- Tue, 05 Sep 2023 21:47:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qde3z-0008Mc-PD; Tue, 05 Sep 2023 21:58:23 +0000
+Received: by outflank-mailman (input) for mailman id 595863;
+ Tue, 05 Sep 2023 21:58:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rZRj=EV=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qddt1-00055o-Vh
- for xen-devel@lists.xenproject.org; Tue, 05 Sep 2023 21:47:03 +0000
+ id 1qde3y-0008MU-Gs
+ for xen-devel@lists.xenproject.org; Tue, 05 Sep 2023 21:58:22 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id be74d2e3-4c35-11ee-9b0d-b553b5be7939;
- Tue, 05 Sep 2023 23:47:01 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 53bdf52b-4c37-11ee-8783-cb3800f73035;
+ Tue, 05 Sep 2023 23:58:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 21CA3828594E;
- Tue,  5 Sep 2023 16:47:00 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 373C6828589F;
+ Tue,  5 Sep 2023 16:58:20 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 44OJQRfMxJsK; Tue,  5 Sep 2023 16:46:59 -0500 (CDT)
+ with ESMTP id kBsS9qQE-Whb; Tue,  5 Sep 2023 16:58:19 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 0AE408285A0F;
- Tue,  5 Sep 2023 16:46:59 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 678C68285BDA;
+ Tue,  5 Sep 2023 16:58:19 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id lWkGi50jjqcD; Tue,  5 Sep 2023 16:46:58 -0500 (CDT)
-Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 6F2AA828594E;
- Tue,  5 Sep 2023 16:46:58 -0500 (CDT)
+ with ESMTP id eCbTsi8njBLC; Tue,  5 Sep 2023 16:58:19 -0500 (CDT)
+Received: from [10.11.0.2] (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id F0093828589F;
+ Tue,  5 Sep 2023 16:58:18 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,66 +53,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be74d2e3-4c35-11ee-9b0d-b553b5be7939
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 0AE408285A0F
+X-Inumbo-ID: 53bdf52b-4c37-11ee-8783-cb3800f73035
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 678C68285BDA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1693950419; bh=VBTFxnUIx5sJRKdW6+PlziDn8S/ThoaIwZyWuny0Llw=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=eRcF/ZGWZB3eBtpgtWQ8ctbamafU2wqCSEAg2aHs35rc6Vce0Two3gzpuGEvUXDNW
-	 apKOnmecN9euDYyg2HE2PFU2Q+7rwhWThP4jEn/FR5Ge4BMD1KKxKx0gwLnsyxOEcc
-	 RRwOzTLKbiGlFr1Vhv7VFowm4Dyp7s14ThNS1w3Y=
+	t=1693951099; bh=4GMVTYQepYNE09Uj10ENke0DdRuzsOylQKmMxm0GlBE=;
+	h=Message-ID:Date:MIME-Version:From:To;
+	b=NwjUztGWb8OkVHUyMLMxNZtr2fYv14vfWx1yjkgZ4jqVI8UFQXwafVz3LZrkt2LTh
+	 5Z7Bpv+KGtgT9q9eAdvqyT+6fIJbE8WCzX++dns3kg7TPXRbQOE85J3onKDyUIXyOI
+	 XBbuG4OtBtuPh0FaIjQGy2Af+25fntUiz4hk0l1k=
 X-Virus-Scanned: amavisd-new at rptsys.com
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
-To: xen-devel@lists.xenproject.org
-Cc: Timothy Pearson <tpearson@raptorengineering.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 0/2] ppc: Drop support for QEMU pseries
-Date: Tue,  5 Sep 2023 16:46:48 -0500
-Message-Id: <cover.1693949731.git.sanastasio@raptorengineering.com>
-X-Mailer: git-send-email 2.30.2
+Message-ID: <ee4a88cb-3692-a0b2-1389-b60080de0bd9@raptorengineering.com>
+Date: Tue, 5 Sep 2023 16:58:18 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH v3 0/5] ppc: Enable full Xen build
+Content-Language: en-US
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Timothy Pearson <tpearson@raptorengineering.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1693590982.git.sanastasio@raptorengineering.com>
+ <332a7462-d0cb-154e-415b-e7f40b9b1421@suse.com>
+ <7f0582cf-e78b-a62d-3f1e-b446acc82cf6@raptorengineering.com>
+In-Reply-To: <7f0582cf-e78b-a62d-3f1e-b446acc82cf6@raptorengineering.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello all,
+On 9/5/23 4:02 PM, Shawn Anastasio wrote:
+> On 9/5/23 11:07 AM, Jan Beulich wrote:
+>> On 01.09.2023 20:25, Shawn Anastasio wrote:
+>> Another thing I wanted to ask: Would it be possible to configure
+>> whatever mail client you use for sending patches to send plain ASCII or
+>> UTF-8 text, not quoted-printable ones? At least for me, so far having
+>> shoveled in most of your patches, that encoding gets in the way of
+>> running a pre-apply-test with plain "patch --dry-run -F0" on all
+>> patches (from a script I use for committing). I can help myself with
+>> plain "git am", but sooner or later some patch will end up having a
+>> collision with something else having gone in, and then I'll need to
+>> manually clean up after the failed / incomplete command.
+>>
+> 
+> If I'm understanding correctly, it looks like git send-email's
+> --transfer-encoding=8bit [1] should do what you're asking. I'll do this
+> for future submissions.
 
-This small series drops support for the QEMU paravirtualized pseries
-machine type in favor of the bare metal PowerNV platform.
+I've done this for my latest series dropping pseries support, but it
+seems the messages that reached the mailing list are still encoded as
+quoted-printable, despite git reporting that they were sent as 8bit.
 
-pseries was originally targeted for initial bringup since it has
-historically been much better supported by QEMU, but PowerNV support in
-QEMU has recently developed to the point where this is no longer a
-concern.  Since I can think of very little practical use for running Xen
-under pseries, and supporting it requires non-trivial duplication of
-effort, drop support for it entirely.
-
-This also requires a change to the ppc64le CI dockerfile to build a
-newer version of QEMU than is available in the bullseye repository.
+I suppose my SMTP server is mangling the encoding, then. I'll look into
+this some more, but hopefully the quoted-printable patches I send in the
+meantime won't pose too much of an inconvenience.
 
 Thanks,
 Shawn
-
-Shawn Anastasio (2):
-  automation: Switch ppc64le tests to PowerNV machine type
-  xen/ppc: Drop support for pseries/OpenFirmware
-
- .../build/debian/bullseye-ppc64le.dockerfile  |  37 +++++-
- automation/gitlab-ci/test.yaml                |   2 +-
- xen/arch/ppc/Makefile                         |   1 -
- xen/arch/ppc/boot-of.c                        | 113 ------------------
- xen/arch/ppc/include/asm/boot.h               |  19 ---
- xen/arch/ppc/ppc64/Makefile                   |   1 -
- xen/arch/ppc/ppc64/of-call.S                  |  83 -------------
- xen/arch/ppc/setup.c                          |  11 +-
- 8 files changed, 39 insertions(+), 228 deletions(-)
- delete mode 100644 xen/arch/ppc/boot-of.c
- delete mode 100644 xen/arch/ppc/ppc64/of-call.S
-
---
-2.30.2
-
 
