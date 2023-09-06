@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12CB1EE14C3
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Sep 2023 19:44:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.596798.930842 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40092EE14C3
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Sep 2023 19:46:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.596817.930872 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qdyRx-000748-Bv; Wed, 06 Sep 2023 19:44:29 +0000
+	id 1qdyTB-0000Bz-5c; Wed, 06 Sep 2023 19:45:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 596798.930842; Wed, 06 Sep 2023 19:44:29 +0000
+Received: by outflank-mailman (output) from mailman id 596817.930872; Wed, 06 Sep 2023 19:45:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qdyRx-000741-9A; Wed, 06 Sep 2023 19:44:29 +0000
-Received: by outflank-mailman (input) for mailman id 596798;
- Wed, 06 Sep 2023 19:44:28 +0000
+	id 1qdyTB-0000Bs-35; Wed, 06 Sep 2023 19:45:45 +0000
+Received: by outflank-mailman (input) for mailman id 596817;
+ Wed, 06 Sep 2023 19:45:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UMkA=EW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qdyRw-00073p-04
- for xen-devel@lists.xenproject.org; Wed, 06 Sep 2023 19:44:28 +0000
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [2a00:1450:4864:20::22d])
+ <SRS0=kbfT=EW=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
+ id 1qdyT9-0000Ac-27
+ for xen-devel@lists.xenproject.org; Wed, 06 Sep 2023 19:45:43 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20600.outbound.protection.outlook.com
+ [2a01:111:f400:fe59::600])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c96a7b75-4ced-11ee-8783-cb3800f73035;
- Wed, 06 Sep 2023 21:44:26 +0200 (CEST)
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2b9338e4695so4081461fa.2
- for <xen-devel@lists.xenproject.org>; Wed, 06 Sep 2023 12:44:26 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- x26-20020a19e01a000000b00500d1f67be9sm2895825lfg.43.2023.09.06.12.44.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Sep 2023 12:44:25 -0700 (PDT)
+ id f55441ca-4ced-11ee-8783-cb3800f73035;
+ Wed, 06 Sep 2023 21:45:41 +0200 (CEST)
+Received: from MW3PR12MB4409.namprd12.prod.outlook.com (2603:10b6:303:2d::23)
+ by LV2PR12MB5893.namprd12.prod.outlook.com (2603:10b6:408:175::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.33; Wed, 6 Sep
+ 2023 19:45:36 +0000
+Received: from MW3PR12MB4409.namprd12.prod.outlook.com
+ ([fe80::8931:6349:9a02:48c1]) by MW3PR12MB4409.namprd12.prod.outlook.com
+ ([fe80::8931:6349:9a02:48c1%4]) with mapi id 15.20.6745.034; Wed, 6 Sep 2023
+ 19:45:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,213 +49,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c96a7b75-4ced-11ee-8783-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694029466; x=1694634266; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ag/DXDi9KifLSP4rHOgHN27smY2BH4uwqsjc5RshQu8=;
-        b=DTCANIPzBrdRsaspw5WQWEgsJFjDyWRtD4S5xVKvVHFEAbfYA+wes74iAlbc4Y3SxX
-         Ry80UFoTT2BQxX4yzKPvqCMKUyNAVkburTWTNFubKct/IyxlFzXRGNQK2VDpaHd4Zktr
-         t5w3iVm6D7IMAcFm3pJMUSndljcv0TXnBZn2CBnY1QX669MkOKVaDDt1SZ7Hwj3F8mfw
-         gANZNeLtEzuhiES/nH60j+kaA3CStuC2LnBrCFbfRN38Bo0jRo9Z6O9TNtMJgBQp23Vs
-         bQ4D2+ZgW3vlaIEHim+OLQEg+mvsfgGi85rysu7b+pfBdrxP5eMjzRkSZIVBUxewQHw9
-         v2qA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1694029466; x=1694634266;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Ag/DXDi9KifLSP4rHOgHN27smY2BH4uwqsjc5RshQu8=;
-        b=JSP81xAwAIuqpLZU1lApvt1+5pz5d0vwGw4idjybdMQZvFeJY1z9Jay+UsByWSX3SP
-         Jif3C4P6Mgm3pLx4/Ud3A+t2A3yFLIkEs2h+abXkVD5Z9fT0QtvSLzRAlvBfEYrP+0CG
-         hcqrzfPS9rhLrdYx/coEoaA9+wZ1aVdHSpdHQBHBFWvjDJ8Ep2/KRMJTnqEoPKEyO5Aw
-         GAJF+8nt43CxpqhDY/mCLKeEeNJ80/TaglJ9SDoDjdZWSRFw+CHsrqbSRb2It7zK/PRK
-         Cc6G/OOBaXT0swgMlnlPBnyRsL/R1wEmApDt9w6txV/JG8Zyn9sL+ZOsdqDLB4L/lZJ8
-         p+WA==
-X-Gm-Message-State: AOJu0Ywyzv+b/MtcfaJaw3BogZvkwfPRmS/U0lpBc45VrbKg9cBWIcKz
-	3vBVjLkRG2ldJ0dZJsmxXah0Wzl9dL4=
-X-Google-Smtp-Source: AGHT+IGRBht1lhtK1OMEEj50GvHmT1e0A5rPXLll/lZSMCg4cF0DLQelAHhqMmAgHD3dgz2EPb0iCA==
-X-Received: by 2002:ac2:4ecc:0:b0:4f8:586a:8af6 with SMTP id p12-20020ac24ecc000000b004f8586a8af6mr2935163lfr.4.1694029465722;
-        Wed, 06 Sep 2023 12:44:25 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+X-Inumbo-ID: f55441ca-4ced-11ee-8783-cb3800f73035
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=cHPWVqRBJ0H07IFjWy7dzN1I6L4YK/32o/03bo1Qkbsie4ANwbxaQLdQydlw/sPuakQ752a90gTofCadwVVDYI/TmnvHcp2fremMzSU8qD17nGjrr97/TfRqZc+pwfDNZnTve6rn/kfrAfo+SET5UUKf97Adl4+pazg3eCygrN0zuDWqi9za7+LamTlWXlZJbJrVwbGoXSB/Y2Vr0nuLqkF7XZPugbk6BsdY9X5mU9Z2ZxgzSEKLySsNIAxE9/wz6rWOeQWrXlgY75p+D5BJYNH58S7Rq0W/nI07kKGMiq1gr7FQLAKnezeiQ8IN5A6Gbn193Nr81HSMMpvVtjg5Lg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=liQSn8oQZDNju6irM+DbgNgx5ZCZNQwHsDjmZWd08L4=;
+ b=N43qqB+V5gZMrnVTqgs8fmajsx6ioTSxPIFX6QSoWSBgNxvZnNKwSi6G3yLjwSuyyqeRfcKnnzwiak1YCbO4nElASQsYll9fYMHqRaW74zg6jyfmDTN30dvI0RIjr21LqlWDOTAbzICTNp0oX0C2zLkmMqaXYOWOS8u9VZy5EZne7Zf8OfCfI3BZxnwgdWXcNXOIChNC7wdkxvvwER9SCJbiMoTG3VWuenG/a13BlVwSRVXlseSncFQ/okTgvcUSNNROEWUdwT8m7RNpHYMYHIV1mJ9tHUDfpBEqIx4RSjPmY1xzE3KlJ5LiiB2wubFpX2I7VI4A04AdyNNPHQE6Qw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=liQSn8oQZDNju6irM+DbgNgx5ZCZNQwHsDjmZWd08L4=;
+ b=34dvJMrzYHXf7n0AeOQ+Jqbowmu8Aw/bGKn2XbytRBBGARoThWG5BCmCHJkTNtSjTvPKVc1SPLe1lzJCPTtKd7/qbEK4qe95Pz/bcj1AvLdA3FidvKQEJsu11L2f/2ZizSI5CCjPzHr3A9NUzZS3d00ezu0WVEdwfvuAcvTxifo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Date: Wed, 6 Sep 2023 15:45:32 -0400
+From: Vikram Garhwal <vikram.garhwal@amd.com>
+To: Michal Orzel <michal.orzel@amd.com>
+Cc: xen-devel@lists.xenproject.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v5 1/2] xen: asm-generic support
-Date: Wed,  6 Sep 2023 22:44:21 +0300
-Message-ID: <f5a959bf4a28f2c77e7330b4c441e2628acfa7d4.1694024884.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1694024884.git.oleksii.kurochko@gmail.com>
-References: <cover.1694024884.git.oleksii.kurochko@gmail.com>
-MIME-Version: 1.0
+	Julien Grall <julien@xen.org>
+Subject: Re: [PATCH] xen/arm: Fix printk specifiers and arguments in
+ iomem_remove_cb()
+Message-ID: <ZPjW3LT9S5af_1Im@amd.com>
+References: <20230906103014.19574-1-michal.orzel@amd.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230906103014.19574-1-michal.orzel@amd.com>
+X-ClientProxiedBy: SJ0PR03CA0389.namprd03.prod.outlook.com
+ (2603:10b6:a03:3a1::34) To MW3PR12MB4409.namprd12.prod.outlook.com
+ (2603:10b6:303:2d::23)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW3PR12MB4409:EE_|LV2PR12MB5893:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2fe97952-45dc-4a6a-7d16-08dbaf11d6f4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Euuz5Gexzah4MZGVWgqOW6PUoK7bOsnJc0GKr+P1+qxQosh4cZByKiLnQF6Ifoe42+tJM++4XHOo5n1H3nVHA8A39/bQeolp94per5Zgj0D1BTvkaF5flKJJhgbQ70JlL/XGYzLqqT6jte87sleAcNYRlIEUg2b4XTv853ZB/UCuxyzGvtdbNjML6luydEilG96Nn0ZHPnWWaozKflYFq67aQ93WLYWbZQlVXCDQSD+fTN4nPOgC+8mEVWaWrxAPKi5Ng5Z5tfCj+6rIXnKmQIgXa9WCB/KRvw0ktCId6Kro3hyTaGHhF2DbjJ5wdROITeRiuQfD940K3QBAeFldFlQBbvEhLlLvjXaKTkNtWJ8oUUnOcaCe6GmE/bzcOcuNW4waeb85Bkouv1L1+WptfcB5ab5VpwU2Gb9Toi/wvFmYU3bZgEQ+iBTvqSuIZjm/ZVcankxnpyhGlkWwxpWDDIxD3YXRDdTh5PS50sgN8P+bkHXDEHF6MYpeFRxhpjerpzpmf72WcL1+i5OtkMKvoNslfePwoXqBM3KHTN4BaWHpojZ1fn9/6QMVnN06y8rZ7VUoyz+nGZ/StYMXZfJjAlrsSULGSO0PNzyQh09Y5WU=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4409.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(396003)(136003)(376002)(39860400002)(346002)(1800799009)(186009)(451199024)(41300700001)(478600001)(6666004)(86362001)(38100700002)(83380400001)(2616005)(966005)(6512007)(6506007)(6486002)(26005)(66556008)(66946007)(2906002)(316002)(37006003)(66476007)(36756003)(54906003)(8936002)(6636002)(5660300002)(8676002)(44832011)(4326008)(6862004)(25096002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?R1h1cHhabEt1TnIyR1Vwa0c2amkvUTBXSHBpaVdCcGNjS3J5b0hhbVB2T3pa?=
+ =?utf-8?B?ZS9tZFlwZ3R2Rm1LNkNXcWFIdHNwWFMvbWFhbjF2S3pUQUJTSTRiN1BxZEhk?=
+ =?utf-8?B?VnhsWXR6bG9MUytJYXUvTEh4QWo0MkVENys4R0ljN1ZxYmJHTzF2V0JUZDNw?=
+ =?utf-8?B?clFKbE1peVJHQUlFTWpka3FPM3AyV0l6ZG40c0YrUENiaUJuMHhBam9uL0NS?=
+ =?utf-8?B?ODVoM2ltUUJuWUcyWGdlQ3R1MWJteW1UcDBPNjc5OTZvQUJiMVZiN2NBK2N1?=
+ =?utf-8?B?UlNLdEFOMU1xL0Z2SVQxZFpQMXpobFdWMUY0a1N0VldVQ2dTN0pSc3FIN2gy?=
+ =?utf-8?B?NGhLZk40aStmVGNKRjJHbCtyck1ubyt0L2c2RUxtUTA5TDZPdy8zQWlQU0lp?=
+ =?utf-8?B?RERoTHcxMHZ4VGRYMUxPYVhUcXJDZy8ydTBVYnJNS2RnRUV5WFEzc3BtL3VR?=
+ =?utf-8?B?bFYzY3laSFF6aFA4UjV1RHhoZXI5Q0x3UWpndG4zMGpyd0xURWw3MTBxK1Fs?=
+ =?utf-8?B?QXpBcFpsMGdIN2VyVmVPM290SG1xYUZFdTV4eHJwdnh6QWlEZkVQdm5OZEZV?=
+ =?utf-8?B?SXIzVHN4OUJsbUx4TFdVa0E2OEVqc2RDZDNUNlBUYXh3aVpxdEtnZFNRZ2E1?=
+ =?utf-8?B?dlZ3T1Z3ajNnWVgrcFJZT0pUL2FYYnFKaWZBT2xMTkNnVHhPSWx6ZHhDdjhI?=
+ =?utf-8?B?WE1jZk9oR0pHaDVSRlY4N0xUZlBxakZZZ2lJU09NU0NTTnhRaXdQTnpYdWpE?=
+ =?utf-8?B?Zzd6L3BqN3F6cDFNcDRXNHozN1A3SDU5QjhvYXRZaFJVeTIyOG5QUlZQeGRU?=
+ =?utf-8?B?QTNXTm01Ti9NSmdqVTNWM0NQcVZkM3BPL3ZiTXJqSzNDSnZEZWJnd1RieGRV?=
+ =?utf-8?B?aTZ5OGI2NUtGcnJNTnFPRDdWbVRnTm1pdjM2TUVjOE5Nb1NVbFU2Q2JHZndC?=
+ =?utf-8?B?NVMrOTc2TkVqS1FZS1BUV3hyaGF0RDhvTWNDUWVDbXU3eWhGaEdPaDQ2a2Fo?=
+ =?utf-8?B?V21sRjNDUDBpL3l6RWVxL292ZVpUajRWS0ZPT0hFbGYwZ21UQ0o0clBkdWtB?=
+ =?utf-8?B?UVpPQ0ZxNk5lQkd0QjhsbXd3bk05MUxQUnhMVDZMTFVLMnNiUEtIY1BkMWF3?=
+ =?utf-8?B?YUgweW9veFlEMlEvSzBaL055UWdabUM2UHZwc2xiME1MVndHZ0lrZE5NclRp?=
+ =?utf-8?B?SHJWLzdHcWpaN2pGR29KalB0MWdhbWlCU0w2Y2FJYjVRQjhUWmNraS9pZGFZ?=
+ =?utf-8?B?MHZNNFFzS2xFTmZWbTI1eFNsK0kwL3k5clR1WnhTKzd3eFlWRytSUzl6QUF0?=
+ =?utf-8?B?K1MxZTBXTGh0SFZQcmJwZ2hsQUlSdk16T3IzZXJHcWw0N1BZcHFFMC91T212?=
+ =?utf-8?B?SDJHb0hGc2tUcEtLUStGZnVacXZucmJTcDNCQVlWVnhmTHJJVEg0T215RDhK?=
+ =?utf-8?B?UFZ1YkVNcFdjLzVRSG9tVmRXR0lUUkVZWWIwL0pMZnF3QjNuNVphT2dXSWpR?=
+ =?utf-8?B?OVVQcjI5Y05JVFpJZ3RGWUp6MnJqeW5aNG41Vy9LdmF6MER6OE1XV3dxQ2kz?=
+ =?utf-8?B?MzZEbFRrTXZob2xVTWc4amNFN2xkSGZoanovQ1duZC9aVzltSkNIL3FTc3dT?=
+ =?utf-8?B?NkphUEJJV0IzR1BiQmVZTGNjZWdBOVJCeVZ2YUdSVy9UOUxwNUp2dWFVU25G?=
+ =?utf-8?B?Vm05OTFnbDR6b0FWeDJYODMwWXQwR0VFYWpJZEk4M2N0dWh5eEhDK2pPWWcw?=
+ =?utf-8?B?WEJaNXZIMFR1RnBVUTduUnZib0lqUm9qT21mVFQ1SzFRdExsYTlKMEFOVTAz?=
+ =?utf-8?B?Ry8vZG80UGxQU05YV2FQMENSdFI2c01lV3VaTjU0NTdobnFSL1RTa2s1NGRU?=
+ =?utf-8?B?MkZxVVpYdVRHRFF2cmlJWWRSS2lDVER4Y1VxSFovOHU2SU8xV2FBM0FtMFAv?=
+ =?utf-8?B?SkdXanMzcURsZm1zellsS2RpOS9Pc2NtcXdTWTJoaVFUY011MndkQWg0VWRE?=
+ =?utf-8?B?cFNkUkFIMlNneEs5K1k2U04xWXg1UFdwT3RPdENVNGNVS0ZDN3ptNVYyTjNr?=
+ =?utf-8?B?azB6N2ZtcnNBekxlYnd2M1MwNFZGWE9RdGx5Y3daNzhpTWhGSDB6b0phTGw2?=
+ =?utf-8?Q?2T2i72juRj6WkZIJq01O0l94k?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2fe97952-45dc-4a6a-7d16-08dbaf11d6f4
+X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4409.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2023 19:45:36.1305
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6l8VJzKabJcXAov18S/5VTfvhOVncg5Y1nZBJkTZNHLO6i/fPmMwaD4TsoixSOecurYE2H6Lrrfy4bOAIBAvlQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5893
 
-Some headers are shared between individual architectures or are empty.
-To avoid duplication of these headers, asm-generic is introduced.
-
-With the following patch, an architecture uses generic headers
-mentioned in the file arch/$(ARCH)/include/asm/Makefile
-
-To use a generic header is needed to add to
-arch/$(ARCH)/include/asm/Makefile :
-        generic-y += <name-of-header-file.h>
-
-For each mentioned header in arch/$(ARCH)/include/asm/Makefile,
-the necessary wrapper in arch/$(ARCH)/include/generated/asm will be
-generated.
-
-As the base Makefile.asm-generic from Linux kernel was taken.
-( 06c2afb862f9da8 "Linux 6.5-rc1" ).
-
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V5:
- - Update the commit message
- - Update SPDX license in Makefile.
- - Remove code related to UML
- - Include $(src)/Makefile instead of $(kbuild-file) 
- - Update comment message in Makefile.asm-generic
- - Update .gitignore
- - Update path to generated headers in CFLAGS.
- - Use the latest version of Linux's Makefile.asm-generic
----
-Changes in V4:
- - introduce asm-generic support
- - update commit message
----
-Changes in V3:
- - Rename stubs dir to asm-generic
----
-Changes in V2:
- - Nothing changed.
----
- .gitignore                       |  1 +
- xen/Makefile                     | 10 +++++-
- xen/scripts/Makefile.asm-generic | 53 ++++++++++++++++++++++++++++++++
- 3 files changed, 63 insertions(+), 1 deletion(-)
- create mode 100644 xen/scripts/Makefile.asm-generic
-
-diff --git a/.gitignore b/.gitignore
-index 50273adb8d..287166f8fc 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -267,6 +267,7 @@ xen/arch/*/efi/efi.h
- xen/arch/*/efi/pe.c
- xen/arch/*/efi/runtime.c
- xen/arch/*/include/asm/asm-offsets.h
-+xen/arch/*/include/generated
- xen/build-dir-cppcheck/
- xen/common/config_data.S
- xen/common/config.gz
-diff --git a/xen/Makefile b/xen/Makefile
-index f57e5a596c..a86b64303d 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -438,6 +438,7 @@ ifdef building_out_of_srctree
- endif
- CFLAGS += -I$(srctree)/include
- CFLAGS += -I$(srctree)/arch/$(SRCARCH)/include
-+CFLAGS += -I$(objtree)/arch/$(SRCARCH)/include/generated
- 
- # Note that link order matters!
- ALL_OBJS-y                := common/built_in.o
-@@ -580,6 +581,7 @@ _clean:
- 	rm -f $(TARGET).efi $(TARGET).efi.map $(TARGET).efi.elf $(TARGET).efi.stripped
- 	rm -f asm-offsets.s arch/*/include/asm/asm-offsets.h
- 	rm -f .banner .allconfig.tmp include/xen/compile.h
-+	rm -rf $(objtree)/arch/*/include/generated
- 
- .PHONY: _distclean
- _distclean: clean
-@@ -589,7 +591,7 @@ $(TARGET).gz: $(TARGET)
- 	gzip -n -f -9 < $< > $@.new
- 	mv $@.new $@
- 
--$(TARGET): outputmakefile FORCE
-+$(TARGET): outputmakefile asm-generic FORCE
- 	$(Q)$(MAKE) $(build)=tools
- 	$(Q)$(MAKE) $(build)=. include/xen/compile.h
- 	$(Q)$(MAKE) $(build)=include all
-@@ -667,6 +669,12 @@ endif # need-sub-make
- PHONY += FORCE
- FORCE:
- 
-+# Support for using generic headers in asm-generic
-+PHONY += asm-generic
-+asm-generic:
-+	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.asm-generic \
-+	            obj=arch/$(SRCARCH)/include/generated/asm
-+
- # Declare the contents of the PHONY variable as phony.  We keep that
- # information in a variable so we can use it in if_changed and friends.
- .PHONY: $(PHONY)
-diff --git a/xen/scripts/Makefile.asm-generic b/xen/scripts/Makefile.asm-generic
-new file mode 100644
-index 0000000000..92a3a741c5
---- /dev/null
-+++ b/xen/scripts/Makefile.asm-generic
-@@ -0,0 +1,53 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+# include/asm-generic contains a lot of files that are used
-+# verbatim by several architectures.
-+#
-+# This Makefile reads the file arch/$(SRCARCH)/include/asm/Makefile
-+# and for each file listed in this file with generic-y creates
-+# a small wrapper file in arch/$(SRCARCH)/include/generated/asm.
-+
-+PHONY := all
-+all:
-+
-+src := $(subst /generated,,$(obj))
-+
-+include $(srctree)/scripts/Kbuild.include
-+-include $(src)/Makefile
-+
-+redundant := $(filter $(mandatory-y) $(generated-y), $(generic-y))
-+redundant += $(foreach f, $(generic-y), $(if $(wildcard $(srctree)/$(src)/$(f)),$(f)))
-+redundant := $(sort $(redundant))
-+$(if $(redundant),\
-+	$(warning redundant generic-y found in $(src)/Kbuild: $(redundant)))
-+
-+# If arch does not implement mandatory headers, fallback to asm-generic ones.
-+mandatory-y := $(filter-out $(generated-y), $(mandatory-y))
-+generic-y   += $(foreach f, $(mandatory-y), $(if $(wildcard $(srctree)/$(src)/$(f)),,$(f)))
-+
-+generic-y   := $(addprefix $(obj)/, $(generic-y))
-+generated-y := $(addprefix $(obj)/, $(generated-y))
-+
-+# Remove stale wrappers when the corresponding files are removed from generic-y
-+old-headers := $(wildcard $(obj)/*.h)
-+unwanted    := $(filter-out $(generic-y) $(generated-y),$(old-headers))
-+
-+quiet_cmd_wrap = WRAP    $@
-+      cmd_wrap = echo "\#include <asm-generic/$*.h>" > $@
-+
-+quiet_cmd_remove = REMOVE  $(unwanted)
-+      cmd_remove = rm -f $(unwanted)
-+
-+all: $(generic-y)
-+	$(if $(unwanted),$(call cmd,remove))
-+	@:
-+
-+$(obj)/%.h:
-+	$(call cmd,wrap)
-+
-+# Create output directory. Skip it if at least one old header exists
-+# since we know the output directory already exists.
-+ifeq ($(old-headers),)
-+$(shell mkdir -p $(obj))
-+endif
-+
-+.PHONY: $(PHONY)
--- 
-2.41.0
-
+On Wed, Sep 06, 2023 at 12:30:14PM +0200, Michal Orzel wrote:
+> When building Xen for arm32 with CONFIG_DTB_OVERLAY, the following
+> error is printed:
+> 
+> common/dt-overlay.c: In function ‘iomem_remove_cb’:
+> ././include/xen/config.h:55:24: error: format ‘%llx’ expects argument of type ‘long long unsigned int’, but argument 3 has type ‘long unsigned int’ [-Werror=format=]
+> 
+> Function parameters s and e (denoting MMIO region) are of type unsigned
+> long and indicate frame numbers and not addresses. This also means that
+> the arguments passed to printk() are incorrect (using PAGE_ALIGN() or
+> PAGE_MASK ANDed with a frame number results in unwanted output). Fix it.
+> 
+> Take the opportunity to switch to %pd specifier to print domain id in
+> a consolidated way.
+> 
+> Fixes: 7e5c4a8b86f1 ("xen/arm: Implement device tree node removal functionalities")
+> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Vikram Garhwal <vikram.garhwal@amd.com>
+> ---
+> After this patch (and the one for xl), we are left with one issue breaking CI:
+> https://gitlab.com/xen-project/patchew/xen/-/jobs/5026938514
+> ---
+>  xen/common/dt-overlay.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> diff --git a/xen/common/dt-overlay.c b/xen/common/dt-overlay.c
+> index b07a6128dc99..5663a049e90a 100644
+> --- a/xen/common/dt-overlay.c
+> +++ b/xen/common/dt-overlay.c
+> @@ -251,10 +251,8 @@ static int iomem_remove_cb(unsigned long s, unsigned long e, void *dom,
+>      rc = iomem_deny_access(d, s, e);
+>      if ( rc )
+>      {
+> -        printk(XENLOG_ERR "Unable to remove dom%d access to"
+> -               " 0x%"PRIx64" - 0x%"PRIx64"\n",
+> -               d->domain_id,
+> -               s & PAGE_MASK, PAGE_ALIGN(e) - 1);
+> +        printk(XENLOG_ERR "Unable to remove %pd access to %#lx - %#lx\n",
+> +               d, s, e);
+>      }
+>      else
+>          *c += e - s + 1;
+> -- 
+> 2.25.1
+> 
 
