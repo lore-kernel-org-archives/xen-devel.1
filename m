@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16965EB8FAF
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Sep 2023 11:00:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.596473.930387 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194C8EB8FAF
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Sep 2023 11:09:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.596484.930417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qdqG7-0003Ex-UL; Wed, 06 Sep 2023 10:59:43 +0000
+	id 1qdqPZ-0005my-Ff; Wed, 06 Sep 2023 11:09:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 596473.930387; Wed, 06 Sep 2023 10:59:43 +0000
+Received: by outflank-mailman (output) from mailman id 596484.930417; Wed, 06 Sep 2023 11:09:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qdqG7-0003Eq-RR; Wed, 06 Sep 2023 10:59:43 +0000
-Received: by outflank-mailman (input) for mailman id 596473;
- Wed, 06 Sep 2023 10:59:43 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qdqG7-0003Ed-3Y; Wed, 06 Sep 2023 10:59:43 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qdqG6-0001d2-VT; Wed, 06 Sep 2023 10:59:42 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qdqG6-000212-OB; Wed, 06 Sep 2023 10:59:42 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1qdqG6-000558-Nl; Wed, 06 Sep 2023 10:59:42 +0000
+	id 1qdqPZ-0005mp-CU; Wed, 06 Sep 2023 11:09:29 +0000
+Received: by outflank-mailman (input) for mailman id 596484;
+ Wed, 06 Sep 2023 11:09:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=T1xS=EW=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qdqPX-0005Hp-E2
+ for xen-devel@lists.xenproject.org; Wed, 06 Sep 2023 11:09:27 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d726772e-4ca5-11ee-9b0d-b553b5be7939;
+ Wed, 06 Sep 2023 13:09:25 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id 183954EE073A;
+ Wed,  6 Sep 2023 13:09:25 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +41,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=7OCPcNpB0YCyO4L4FSDQjIAopSo8WU/HvNxHErpkP/c=; b=YtmK8nCSU6xT1vNTV5xdPYQZgb
-	3ypw4X5IKdcUMMia9HhUjklDJdvw3WI4f3vr8CywPG0oXxt09+Us1Ux2FA+kq3HytU1VWuiPKHIc1
-	9dNIxqUwiu7yn0WTwPU/3d83f330YF03AtQKTiujpMrlIScKCLUAGoL5MDAncMmdgZQw=;
+X-Inumbo-ID: d726772e-4ca5-11ee-9b0d-b553b5be7939
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-182654-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [XEN PATCH v2 2/2] automation: execute SAF translation before the analysis with ECLAIR
+Date: Wed,  6 Sep 2023 13:09:09 +0200
+Message-Id: <8d4dba44bf70de642d3128cd11785ebdf1fce421.1693998375.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1693998375.git.nicola.vetrini@bugseng.com>
+References: <cover.1693998375.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 182654: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=d1e4a16f868fb1ccfa8bed8eaba5f9617ec8382d
-X-Osstest-Versions-That:
-    ovmf=f008890ae55929f7f17e7d2f8aff929255007d33
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 06 Sep 2023 10:59:42 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 182654 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/182654/
+This allows local MISRA deviation comments to be translated into
+the format recognized by ECLAIR.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 d1e4a16f868fb1ccfa8bed8eaba5f9617ec8382d
-baseline version:
- ovmf                 f008890ae55929f7f17e7d2f8aff929255007d33
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+ automation/eclair_analysis/prepare.sh | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Last test of basis   182640  2023-09-05 22:41:46 Z    0 days
-Testing same since   182654  2023-09-06 08:12:34 Z    0 days    1 attempts
+diff --git a/automation/eclair_analysis/prepare.sh b/automation/eclair_analysis/prepare.sh
+index 275a1a3f517c..0cac5eba00ae 100755
+--- a/automation/eclair_analysis/prepare.sh
++++ b/automation/eclair_analysis/prepare.sh
+@@ -38,5 +38,8 @@ fi
+     cd xen
+     cp "${CONFIG_FILE}" .config
+     make clean
++    find . -type f -name "*.safparse" -print -delete
+     make -f ${script_dir}/Makefile.prepare prepare
++    # Translate the /* SAF-n-safe */ comments into ECLAIR CBTs
++    scripts/xen-analysis.py --run-eclair --no-build --no-clean
+ )
+-- 
+2.34.1
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Yin Wang <yin.wang@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   f008890ae5..d1e4a16f86  d1e4a16f868fb1ccfa8bed8eaba5f9617ec8382d -> xen-tested-master
 
