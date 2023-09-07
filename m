@@ -4,44 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 308AFEE14C3
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Sep 2023 00:02:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.596922.931057 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C19EE14A9
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Sep 2023 00:14:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.596944.931083 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qe2TD-0000wC-Fl; Thu, 07 Sep 2023 00:02:03 +0000
+	id 1qe2eR-0003vK-N2; Thu, 07 Sep 2023 00:13:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 596922.931057; Thu, 07 Sep 2023 00:02:03 +0000
+Received: by outflank-mailman (output) from mailman id 596944.931083; Thu, 07 Sep 2023 00:13:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qe2TD-0000uL-BZ; Thu, 07 Sep 2023 00:02:03 +0000
-Received: by outflank-mailman (input) for mailman id 596922;
- Thu, 07 Sep 2023 00:02:02 +0000
+	id 1qe2eR-0003vD-K0; Thu, 07 Sep 2023 00:13:39 +0000
+Received: by outflank-mailman (input) for mailman id 596944;
+ Thu, 07 Sep 2023 00:13:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=myun=EX=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qe2TC-0000nY-5g
- for xen-devel@lists.xenproject.org; Thu, 07 Sep 2023 00:02:02 +0000
-Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c429057b-4d11-11ee-8783-cb3800f73035;
- Thu, 07 Sep 2023 02:02:00 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 4435E82854B3;
- Wed,  6 Sep 2023 19:01:59 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id md8U0ps7x769; Wed,  6 Sep 2023 19:01:57 -0500 (CDT)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id B6A9A82857F5;
- Wed,  6 Sep 2023 19:01:57 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id b8aXadSV1Hv9; Wed,  6 Sep 2023 19:01:57 -0500 (CDT)
-Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 1E0508285589;
- Wed,  6 Sep 2023 19:01:56 -0500 (CDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lXo+=EX=intel.com=lkp@srs-se1.protection.inumbo.net>)
+ id 1qe2eQ-0003v7-5k
+ for xen-devel@lists.xenproject.org; Thu, 07 Sep 2023 00:13:38 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.93])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6194314e-4d13-11ee-8783-cb3800f73035;
+ Thu, 07 Sep 2023 02:13:34 +0200 (CEST)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Sep 2023 17:13:26 -0700
+Received: from lkp-server01.sh.intel.com (HELO 59b3c6e06877) ([10.239.97.150])
+ by fmsmga002.fm.intel.com with ESMTP; 06 Sep 2023 17:13:22 -0700
+Received: from kbuild by 59b3c6e06877 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1qe2e8-0000j1-0U;
+ Thu, 07 Sep 2023 00:13:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,115 +46,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c429057b-4d11-11ee-8783-cb3800f73035
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com B6A9A82857F5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1694044917; bh=7sBp8XJ8KbdQFCiJLgArYXVYw6X5ajJplyaE4vmYOEQ=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=a8BZw41BRx2U9iLwXzb68v3xF88CVjhEM+njjcg/fmi8iT3f6HRtvfjmoQpuyXbzX
-	 bWYLOtk+0bwOFUQiFMGsKAy/WdkThxBXPm2kaxl+6PUAMRwdMV/swnMiSalraDaIS1
-	 lp38uXKzSNeGU3j4+gX2gvw/iyq9UOEVBpnM/HmY=
-X-Virus-Scanned: amavisd-new at rptsys.com
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
-To: xen-devel@lists.xenproject.org
-Cc: Timothy Pearson <tpearson@raptorengineering.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 1/2] automation: Switch ppc64le tests to PowerNV machine type
-Date: Wed,  6 Sep 2023 19:01:45 -0500
-Message-Id: <85b53762ba04a349ba099cf5629e7ac24f496d69.1694044614.git.sanastasio@raptorengineering.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <cover.1694044614.git.sanastasio@raptorengineering.com>
-References: <cover.1694044614.git.sanastasio@raptorengineering.com>
+X-Inumbo-ID: 6194314e-4d13-11ee-8783-cb3800f73035
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1694045615; x=1725581615;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=WlkbumebDoiqA7h5lGLoCyy+L33WG8FJ86yAFQBnwlo=;
+  b=F0cwzkkhC8Mhzq7bA/w7jXKXMqNxRUZWZD33h2OmUmdg/1O9sOIoFmHy
+   awIRDw8ucA8SrC7QClQBT7BySVHIa9W+8CZzTCkotYqF6bJMAphaa6Rg+
+   r1h5mDK0SPw0tWMjZ12QMd0ryW8q7tz1n2xdJXs4Qdzx/IeiqX86EiTMk
+   kVpjycmIecV9dA2ZIebQRZ2mn+VcduxJD3d/y+LYu4nAn7VzveptT76+Z
+   3FiU7zcCIXIJIBSFHaC3m14OlJfANqV+Db6VbpyLVa4ehtX/ldtPPvvNU
+   Jy5bbCmIxnA/Yzp7OIO6vXC9c6lR3rW4TJkvrUOOJeBhjBCEbOrutu9Ih
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10825"; a="374613200"
+X-IronPort-AV: E=Sophos;i="6.02,233,1688454000"; 
+   d="scan'208";a="374613200"
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10825"; a="856680657"
+X-IronPort-AV: E=Sophos;i="6.02,233,1688454000"; 
+   d="scan'208";a="856680657"
+Date: Thu, 7 Sep 2023 08:12:57 +0800
+From: kernel test robot <lkp@intel.com>
+To: Jason Andryuk <jandryuk@gmail.com>, Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Len Brown <lenb@kernel.org>
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	Roger Pau Monne <roger.pau@citrix.com>, stable@vger.kernel.org,
+	Jason Andryuk <jandryuk@gmail.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org
+Subject: Re: [PATCH v2] acpi/processor: sanitize _PDC buffer bits when
+ running as Xen dom0
+Message-ID: <202309070741.2n0k8FjN-lkp@intel.com>
+References: <20230906182125.48642-1-jandryuk@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230906182125.48642-1-jandryuk@gmail.com>
 
-Run ppc64le tests with the PowerNV machine type (bare metal) instead of
-the paravirtualized pseries machine. This requires a more modern version
-of QEMU than is present in debian bullseye's repository, so update the
-dockerfile to build QEMU from source.
+Hi Jason,
 
-Support for booting on pseries was broken by 74b725a64d80 ('xen/ppc:
-Implement initial Radix MMU support') which resulted in CI failures. In
-preparation for removing pseries support entirely, switch the CI
-infrastructure to the PowerNV machine type.
+kernel test robot noticed the following build errors:
 
-Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
----
- .../build/debian/bullseye-ppc64le.dockerfile  | 37 ++++++++++++++++++-
- automation/gitlab-ci/test.yaml                |  2 +-
- 2 files changed, 36 insertions(+), 3 deletions(-)
+[auto build test ERROR on tip/x86/core]
+[also build test ERROR on v6.5]
+[cannot apply to rafael-pm/linux-next linus/master next-20230906]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-diff --git a/automation/build/debian/bullseye-ppc64le.dockerfile b/automation/build/debian/bullseye-ppc64le.dockerfile
-index 8fad26e903..15827bbcf4 100644
---- a/automation/build/debian/bullseye-ppc64le.dockerfile
-+++ b/automation/build/debian/bullseye-ppc64le.dockerfile
-@@ -1,4 +1,36 @@
-+FROM debian:bullseye-slim AS builder
-+
-+ENV DEBIAN_FRONTEND=noninteractive
-+ENV QEMU_TAG=stable-8.1
-+ENV USER root
-+
-+# dependencies for qemu build
-+RUN apt-get update && \
-+    apt-get --quiet --yes install \
-+        git \
-+        build-essential \
-+        python3-minimal \
-+        python3-elementpath \
-+        python3-pip \
-+        ninja-build \
-+        libglib2.0-dev \
-+        libpixman-1-dev
-+
-+RUN mkdir /build
-+WORKDIR /build
-+
-+# QEMU build from git
-+RUN git clone --depth 1 --branch "${QEMU_TAG}" https://github.com/qemu/qemu && \
-+    mkdir qemu/build && \
-+    cd qemu/build && \
-+    ../configure --target-list=ppc64-softmmu && \
-+    ninja && \
-+    ninja install
-+
- FROM debian:bullseye-slim
-+COPY --from=builder /usr/local/bin/qemu-system-ppc64 /usr/local/bin/qemu-system-ppc64
-+COPY --from=builder /usr/local/share/qemu/skiboot.lid /usr/local/share/qemu/skiboot.lid
-+
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-@@ -22,8 +54,9 @@ RUN apt-get update && \
-         gcc-powerpc64le-linux-gnu \
-         make \
-         python3-minimal \
--        # for test phase
--        qemu-system-ppc \
-+        # QEMU runtime dependencies
-+        libglib2.0-0 \
-+        libpixman-1-0 \
-         && \
-         apt-get autoremove -y && \
-         apt-get clean && \
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 9aa8deabea..9b26ccd907 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -457,6 +457,6 @@ qemu-smoke-riscv64-gcc:
- qemu-smoke-ppc64le-pseries-gcc:
-   extends: .qemu-ppc64le
-   script:
--    - ./automation/scripts/qemu-smoke-ppc64le.sh pseries-5.2 2>&1 | tee ${LOGFILE}
-+    - ./automation/scripts/qemu-smoke-ppc64le.sh powernv9 2>&1 | tee ${LOGFILE}
-   needs:
-     - debian-bullseye-gcc-ppc64le-debug
+url:    https://github.com/intel-lab-lkp/linux/commits/Jason-Andryuk/acpi-processor-sanitize-_PDC-buffer-bits-when-running-as-Xen-dom0/20230907-022235
+base:   tip/x86/core
+patch link:    https://lore.kernel.org/r/20230906182125.48642-1-jandryuk%40gmail.com
+patch subject: [PATCH v2] acpi/processor: sanitize _PDC buffer bits when running as Xen dom0
+config: i386-randconfig-003-20230907 (https://download.01.org/0day-ci/archive/20230907/202309070741.2n0k8FjN-lkp@intel.com/config)
+compiler: clang version 16.0.4 (https://github.com/llvm/llvm-project.git ae42196bc493ffe877a7e3dff8be32035dea4d07)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20230907/202309070741.2n0k8FjN-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202309070741.2n0k8FjN-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/acpi/processor_pdc.c:147:3: error: call to undeclared function 'xen_sanitize_pdc'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                   xen_sanitize_pdc(buffer);
+                   ^
+   1 error generated.
+
+
+vim +/xen_sanitize_pdc +147 drivers/acpi/processor_pdc.c
+
+   116	
+   117	/*
+   118	 * _PDC is required for a BIOS-OS handshake for most of the newer
+   119	 * ACPI processor features.
+   120	 */
+   121	static acpi_status
+   122	acpi_processor_eval_pdc(acpi_handle handle, struct acpi_object_list *pdc_in)
+   123	{
+   124		acpi_status status = AE_OK;
+   125		union acpi_object *obj;
+   126		u32 *buffer = NULL;
+   127	
+   128		obj = pdc_in->pointer;
+   129		buffer = (u32 *)(obj->buffer.pointer);
+   130	
+   131		if (boot_option_idle_override == IDLE_NOMWAIT) {
+   132			/*
+   133			 * If mwait is disabled for CPU C-states, the C2C3_FFH access
+   134			 * mode will be disabled in the parameter of _PDC object.
+   135			 * Of course C1_FFH access mode will also be disabled.
+   136			 */
+   137			buffer[2] &= ~(ACPI_PDC_C_C2C3_FFH | ACPI_PDC_C_C1_FFH);
+   138		}
+   139	
+   140		if (xen_initial_domain()) {
+   141			/*
+   142			 * When Linux is running as Xen dom0, the hypervisor is the
+   143			 * entity in charge of the processor power management, and so
+   144			 * Xen needs to check the OS capabilities reported in the _PDC
+   145			 * buffer matches what the hypervisor driver supports.
+   146			 */
+ > 147			xen_sanitize_pdc(buffer);
+   148		}
+   149	
+   150		status = acpi_evaluate_object(handle, "_PDC", pdc_in, NULL);
+   151	
+   152		if (ACPI_FAILURE(status))
+   153			acpi_handle_debug(handle,
+   154			    "Could not evaluate _PDC, using legacy perf control\n");
+   155	
+   156		return status;
+   157	}
+   158	
+
 -- 
-2.30.2
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
