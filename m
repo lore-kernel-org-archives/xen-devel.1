@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32EDAEEB574
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 544C2EEB576
 	for <xen-devel@archiver.kernel.org>; Fri,  8 Sep 2023 22:50:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.598235.932889 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.598234.932875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qekJK-0000hi-JB; Fri, 08 Sep 2023 22:50:46 +0000
+	id 1qekJJ-0000Es-7z; Fri, 08 Sep 2023 22:50:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 598235.932889; Fri, 08 Sep 2023 22:50:46 +0000
+Received: by outflank-mailman (output) from mailman id 598234.932875; Fri, 08 Sep 2023 22:50:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qekJK-0000hX-Fs; Fri, 08 Sep 2023 22:50:46 +0000
-Received: by outflank-mailman (input) for mailman id 598235;
- Fri, 08 Sep 2023 22:50:44 +0000
+	id 1qekJJ-0000Dz-1F; Fri, 08 Sep 2023 22:50:45 +0000
+Received: by outflank-mailman (input) for mailman id 598234;
+ Fri, 08 Sep 2023 22:50:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6LDZ=EY=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qekJI-000864-QI
- for xen-devel@lists.xenproject.org; Fri, 08 Sep 2023 22:50:44 +0000
+ id 1qekJH-000864-QF
+ for xen-devel@lists.xenproject.org; Fri, 08 Sep 2023 22:50:43 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 222faf61-4e9a-11ee-8783-cb3800f73035;
- Sat, 09 Sep 2023 00:50:40 +0200 (CEST)
+ id 21bcfb2a-4e9a-11ee-8783-cb3800f73035;
+ Sat, 09 Sep 2023 00:50:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id D05988286A47;
+ by mail.rptsys.com (Postfix) with ESMTP id 16E2A82853EE;
  Fri,  8 Sep 2023 17:50:39 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 33xKeN1cNL1p; Fri,  8 Sep 2023 17:50:38 -0500 (CDT)
+ with ESMTP id X5kNCrl-LKta; Fri,  8 Sep 2023 17:50:37 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 608D182866CF;
- Fri,  8 Sep 2023 17:50:38 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 6E785828541B;
+ Fri,  8 Sep 2023 17:50:37 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id jeVgxL9x-9cG; Fri,  8 Sep 2023 17:50:38 -0500 (CDT)
+ with ESMTP id IOlJolNIcmXG; Fri,  8 Sep 2023 17:50:37 -0500 (CDT)
 Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id F1CA58286A47;
+ by mail.rptsys.com (Postfix) with ESMTPSA id 2081E8286A2F;
  Fri,  8 Sep 2023 17:50:37 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,487 +53,414 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 222faf61-4e9a-11ee-8783-cb3800f73035
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 608D182866CF
+X-Inumbo-ID: 21bcfb2a-4e9a-11ee-8783-cb3800f73035
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 6E785828541B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1694213438; bh=+pOxvbpau0ld00J1X81GVrATbLAt9UIwtH6FV5a/tJ8=;
+	t=1694213437; bh=bUHO4IoACeFGDfz60+dzzV18CdcSW770+RnrYX+US4A=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=qBzJ11CovegdEDSxSwIvAwGBEfSkNFCbITPY3J2/eVfsgrxNqv/zmhd60sf0l0MN1
-	 mObpzy2N9Hie9d7hNJ745hI5BtHpz+2h4ef+aXT7M/iTmReGj2EMnn8y3g5eKBwoLA
-	 mPzQzwbPAUIi/3SoqhUe62vlhOReo3Gygn8iACiM=
+	b=eX/iKpy8QTejBJE+iGQeXE0oviXZI3yIOO4bvDlc6Y4DiflthQQcVdUd5qyBrHrsH
+	 OtDsH0NRIity2dhjjnEoo/ZuPVv8orTXgcmx+12nKvC06v2V5R6BkqgJK84FD85dPZ
+	 KGiCrk17xeojVHzsUmgCXaoawXqkWhn7Do1QoqJw=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v4 4/5] xen/ppc: Add stub function and symbol definitions
-Date: Fri,  8 Sep 2023 17:50:17 -0500
-Message-Id: <fc4c93343acb17939439ba43ba1bbde63eee3a64.1694211900.git.sanastasio@raptorengineering.com>
+Subject: [PATCH v4 2/5] xen/ppc: Implement bitops.h
+Date: Fri,  8 Sep 2023 17:50:15 -0500
+Message-Id: <31292b9b259a401045646d50a7237364640bc85b.1694211900.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1694211900.git.sanastasio@raptorengineering.com>
 References: <cover.1694211900.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Add stub function and symbol definitions required by common code. If the
-file that the definition is supposed to be located in doesn't already
-exist yet, temporarily place its definition in the new stubs.c
+Implement bitops.h, based on Linux's implementation as of commit
+5321d1b1afb9a17302c6cec79f0cbf823eb0d3fc. Though it is based off of
+Linux's implementation, this code diverges significantly in a number of
+ways:
+  - Bitmap entries changed to 32-bit words to match X86 and Arm on Xen
+  - PPC32-specific code paths dropped
+  - Formatting completely re-done to more closely line up with Xen.
+    Including 4 space indentation.
+  - Use GCC's __builtin_popcount* for hweight* implementation
 
 Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v4: No changes.
+v4:
+  - Mention __builtin_popcount impelmentation of hweight* in message
+  - Change type of BITOP_MASK expression from unsigned long to unsigned
+    int
+  - Fix remaining underscore-prefixed macro params/vars
+  - Fix line wrapping in test_and_clear_bit{,s}
+  - Change type of test_and_clear_bits' pointer parameter from void *
+    to unsigned int *. This was already done for other functions but
+    missed here.
+  - De-macroize test_and_set_bits.
+  - Fix formatting of ffs{,l} macro's unary operators
+  - Drop extra blank in ffz() macro definition
 
 v3:
-  - (stubs.c) Drop ack_none hook definition
+  - Fix style of inline asm blocks.
+  - Fix underscore-prefixed macro parameters/variables
+  - Use __builtin_popcount for hweight* implementation
+  - Update C functions to use proper Xen coding style
 
 v2:
-  - Use BUG_ON("unimplemented") instead of BUG() for unimplemented functions
-    to make searching easier.
-  - (mm-radix.c) Drop total_pages definition
-  - (mm-radix.c) Move __read_mostly from after variable name to before it in
-    declaration of `frametable_base_pdx`
-  - (setup.c) Fix include order
-  - (stubs.c) Drop stub .end hw_irq_controller hook
+  - Clarify changes from Linux implementation in commit message
+  - Use PPC_ATOMIC_{ENTRY,EXIT}_BARRIER macros from <asm/memory.h> instead
+    of hardcoded "sync" instructions in inline assembly blocks.
+  - Fix macro line-continuing backslash spacing
+  - Fix hard-tab usage in find_*_bit C functions.
 
- xen/arch/ppc/Makefile   |   1 +
- xen/arch/ppc/mm-radix.c |  42 +++++
- xen/arch/ppc/setup.c    |   8 +
- xen/arch/ppc/stubs.c    | 339 ++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 390 insertions(+)
- create mode 100644 xen/arch/ppc/stubs.c
+ xen/arch/ppc/include/asm/bitops.h | 332 +++++++++++++++++++++++++++++-
+ 1 file changed, 329 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
-index b3205b8f7a..6d5569ff64 100644
---- a/xen/arch/ppc/Makefile
-+++ b/xen/arch/ppc/Makefile
-@@ -4,6 +4,7 @@ obj-$(CONFIG_EARLY_PRINTK) += early_printk.init.o
- obj-y += mm-radix.o
- obj-y += opal.o
- obj-y += setup.o
-+obj-y += stubs.o
- obj-y += tlb-radix.o
+diff --git a/xen/arch/ppc/include/asm/bitops.h b/xen/arch/ppc/include/asm/bitops.h
+index 548e97b414..3e50778c4d 100644
+--- a/xen/arch/ppc/include/asm/bitops.h
++++ b/xen/arch/ppc/include/asm/bitops.h
+@@ -1,9 +1,335 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Adapted from Linux's arch/powerpc/include/asm/bitops.h.
++ *
++ * Merged version by David Gibson <david@gibson.dropbear.id.au>.
++ * Based on ppc64 versions by: Dave Engebretsen, Todd Inglett, Don
++ * Reed, Pat McCarthy, Peter Bergner, Anton Blanchard.  They
++ * originally took it from the ppc32 code.
++ */
+ #ifndef _ASM_PPC_BITOPS_H
+ #define _ASM_PPC_BITOPS_H
 
- $(TARGET): $(TARGET)-syms
-diff --git a/xen/arch/ppc/mm-radix.c b/xen/arch/ppc/mm-radix.c
-index 06129cef9c..11d0f27b60 100644
---- a/xen/arch/ppc/mm-radix.c
-+++ b/xen/arch/ppc/mm-radix.c
-@@ -265,3 +265,45 @@ void __init setup_initial_pagetables(void)
-     /* Turn on the MMU */
-     enable_mmu();
- }
++#include <asm/memory.h>
++
++#define __set_bit(n, p)         set_bit(n, p)
++#define __clear_bit(n, p)       clear_bit(n, p)
++
++#define BITOP_BITS_PER_WORD     32
++#define BITOP_MASK(nr)          (1U << ((nr) % BITOP_BITS_PER_WORD))
++#define BITOP_WORD(nr)          ((nr) / BITOP_BITS_PER_WORD)
++#define BITS_PER_BYTE           8
++
+ /* PPC bit number conversion */
+-#define PPC_BITLSHIFT(be)	(BITS_PER_LONG - 1 - (be))
+-#define PPC_BIT(bit)		(1UL << PPC_BITLSHIFT(bit))
+-#define PPC_BITMASK(bs, be)	((PPC_BIT(bs) - PPC_BIT(be)) | PPC_BIT(bs))
++#define PPC_BITLSHIFT(be)    (BITS_PER_LONG - 1 - (be))
++#define PPC_BIT(bit)         (1UL << PPC_BITLSHIFT(bit))
++#define PPC_BITMASK(bs, be)  ((PPC_BIT(bs) - PPC_BIT(be)) | PPC_BIT(bs))
++
++/* Macro for generating the ***_bits() functions */
++#define DEFINE_BITOP(fn, op, prefix)                                           \
++static inline void fn(unsigned long mask,                                      \
++                      volatile unsigned int *p_)                               \
++{                                                                              \
++    unsigned long old;                                                         \
++    unsigned int *p = (unsigned int *)p_;                                      \
++    asm volatile ( prefix                                                      \
++                   "1: lwarx %0,0,%3,0\n"                                      \
++                   #op "%I2 %0,%0,%2\n"                                        \
++                   "stwcx. %0,0,%3\n"                                          \
++                   "bne- 1b\n"                                                 \
++                   : "=&r" (old), "+m" (*p)                                    \
++                   : "rK" (mask), "r" (p)                                      \
++                   : "cc", "memory" );                                         \
++}
++
++DEFINE_BITOP(set_bits, or, "")
++DEFINE_BITOP(change_bits, xor, "")
++
++#define DEFINE_CLROP(fn, prefix)                                               \
++static inline void fn(unsigned long mask, volatile unsigned int *p_)           \
++{                                                                              \
++    unsigned long old;                                                         \
++    unsigned int *p = (unsigned int *)p_;                                      \
++    asm volatile ( prefix                                                      \
++                   "1: lwarx %0,0,%3,0\n"                                      \
++                   "andc %0,%0,%2\n"                                           \
++                   "stwcx. %0,0,%3\n"                                          \
++                   "bne- 1b\n"                                                 \
++                   : "=&r" (old), "+m" (*p)                                    \
++                   : "r" (mask), "r" (p)                                       \
++                   : "cc", "memory" );                                         \
++}
++
++DEFINE_CLROP(clear_bits, "")
++
++static inline void set_bit(int nr, volatile void *addr)
++{
++    set_bits(BITOP_MASK(nr), (volatile unsigned int *)addr + BITOP_WORD(nr));
++}
++static inline void clear_bit(int nr, volatile void *addr)
++{
++    clear_bits(BITOP_MASK(nr), (volatile unsigned int *)addr + BITOP_WORD(nr));
++}
++
++/**
++ * test_bit - Determine whether a bit is set
++ * @nr: bit number to test
++ * @addr: Address to start counting from
++ */
++static inline int test_bit(int nr, const volatile void *addr)
++{
++    const volatile unsigned long *p = (const volatile unsigned long *)addr;
++    return 1 & (p[BITOP_WORD(nr)] >> (nr & (BITOP_BITS_PER_WORD - 1)));
++}
++
++static inline unsigned long test_and_clear_bits(
++    unsigned long mask,
++    volatile unsigned int *p)
++{
++    unsigned long old, t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%3,0\n"
++                   "andc %1,%0,%2\n"
++                   "stwcx. %1,0,%3\n"
++                   "bne- 1b\n"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=&r" (old), "=&r" (t)
++                   : "r" (mask), "r" (p)
++                   : "cc", "memory" );
++
++    return (old & mask);
++}
++
++static inline int test_and_clear_bit(unsigned int nr,
++                                     volatile void *addr)
++{
++    return test_and_clear_bits(BITOP_MASK(nr), (volatile unsigned int *)addr +
++                               BITOP_WORD(nr)) != 0;
++}
++
++static inline unsigned long test_and_set_bits(
++    unsigned long mask,
++    volatile unsigned int *p)
++{
++    unsigned long old, t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%3,0\n"
++                   "or%I2 %1,%0,%2\n"
++                   "stwcx. %1,0,%3\n"
++                   "bne- 1b\n"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=&r" (old), "=&r" (t)
++                   : "rK" (mask), "r" (p)
++                   : "cc", "memory" );
++
++    return (old & mask);
++}
++
++static inline int test_and_set_bit(unsigned long nr, volatile void *addr)
++{
++    return test_and_set_bits(BITOP_MASK(nr), (volatile unsigned int *)addr +
++                                             BITOP_WORD(nr)) != 0;
++}
++
++/**
++ * __test_and_set_bit - Set a bit and return its old value
++ * @nr: Bit to set
++ * @addr: Address to count from
++ *
++ * This operation is non-atomic and can be reordered.
++ * If two examples of this operation race, one can appear to succeed
++ * but actually fail.  You must protect multiple accesses with a lock.
++ */
++static inline int __test_and_set_bit(int nr, volatile void *addr)
++{
++    unsigned int mask = BITOP_MASK(nr);
++    volatile unsigned int *p = ((volatile unsigned int *)addr) + BITOP_WORD(nr);
++    unsigned int old = *p;
++
++    *p = old | mask;
++    return (old & mask) != 0;
++}
++
++/**
++ * __test_and_clear_bit - Clear a bit and return its old value
++ * @nr: Bit to clear
++ * @addr: Address to count from
++ *
++ * This operation is non-atomic and can be reordered.
++ * If two examples of this operation race, one can appear to succeed
++ * but actually fail.  You must protect multiple accesses with a lock.
++ */
++static inline int __test_and_clear_bit(int nr, volatile void *addr)
++{
++    unsigned int mask = BITOP_MASK(nr);
++    volatile unsigned int *p = ((volatile unsigned int *)addr) + BITOP_WORD(nr);
++    unsigned int old = *p;
++
++    *p = old & ~mask;
++    return (old & mask) != 0;
++}
++
++#define flsl(x) generic_flsl(x)
++#define fls(x) generic_fls(x)
++#define ffs(x) ({ unsigned int t_ = (x); fls(t_ & -t_); })
++#define ffsl(x) ({ unsigned long t_ = (x); flsl(t_ & -t_); })
++
++/* Based on linux/include/asm-generic/bitops/ffz.h */
++/*
++ * ffz - find first zero in word.
++ * @word: The word to search
++ *
++ * Undefined if no zero exists, so code should check against ~0UL first.
++ */
++#define ffz(x) __ffs(~(x))
++
++/**
++ * hweightN - returns the hamming weight of a N-bit word
++ * @x: the word to weigh
++ *
++ * The Hamming Weight of a number is the total number of bits set in it.
++ */
++#define hweight64(x) __builtin_popcountll(x)
++#define hweight32(x) __builtin_popcount(x)
++#define hweight16(x) __builtin_popcount((uint16_t)(x))
++#define hweight8(x)  __builtin_popcount((uint8_t)(x))
++
++/* Based on linux/include/asm-generic/bitops/builtin-__ffs.h */
++/**
++ * __ffs - find first bit in word.
++ * @word: The word to search
++ *
++ * Undefined if no bit exists, so code should check against 0 first.
++ */
++static always_inline unsigned long __ffs(unsigned long word)
++{
++    return __builtin_ctzl(word);
++}
++
++/**
++ * find_first_set_bit - find the first set bit in @word
++ * @word: the word to search
++ *
++ * Returns the bit-number of the first set bit (first bit being 0).
++ * The input must *not* be zero.
++ */
++#define find_first_set_bit(x) (ffsl(x) - 1)
 +
 +/*
-+ * TODO: Implement the functions below
++ * Find the first set bit in a memory region.
 + */
-+unsigned long __read_mostly frametable_base_pdx;
-+
-+void put_page(struct page_info *p)
++static inline unsigned long find_first_bit(const unsigned long *addr,
++                                           unsigned long size)
 +{
-+    BUG_ON("unimplemented");
++    const unsigned long *p = addr;
++    unsigned long result = 0;
++    unsigned long tmp;
++
++    while ( size & ~(BITS_PER_LONG - 1) )
++    {
++        if ( (tmp = *(p++)) )
++            goto found;
++        result += BITS_PER_LONG;
++        size -= BITS_PER_LONG;
++    }
++    if ( !size )
++        return result;
++
++    tmp = (*p) & (~0UL >> (BITS_PER_LONG - size));
++    if ( tmp == 0UL )         /* Are any bits set? */
++        return result + size; /* Nope. */
++ found:
++    return result + __ffs(tmp);
 +}
 +
-+void arch_dump_shared_mem_info(void)
++static inline unsigned long find_next_bit(const unsigned long *addr,
++                                          unsigned long size,
++                                          unsigned long offset)
 +{
-+    BUG_ON("unimplemented");
++    const unsigned long *p = addr + BITOP_WORD(offset);
++    unsigned long result = offset & ~(BITS_PER_LONG - 1);
++    unsigned long tmp;
++
++    if ( offset >= size )
++        return size;
++    size -= result;
++    offset %= BITS_PER_LONG;
++    if ( offset )
++    {
++        tmp = *(p++);
++        tmp &= (~0UL << offset);
++        if ( size < BITS_PER_LONG )
++            goto found_first;
++        if ( tmp )
++            goto found_middle;
++        size -= BITS_PER_LONG;
++        result += BITS_PER_LONG;
++    }
++    while ( size & ~(BITS_PER_LONG - 1) )
++    {
++        if ( (tmp = *(p++)) )
++            goto found_middle;
++        result += BITS_PER_LONG;
++        size -= BITS_PER_LONG;
++    }
++    if ( !size )
++        return result;
++    tmp = *p;
++
++ found_first:
++    tmp &= (~0UL >> (BITS_PER_LONG - size));
++    if ( tmp == 0UL )         /* Are any bits set? */
++        return result + size; /* Nope. */
++ found_middle:
++    return result + __ffs(tmp);
 +}
 +
-+int xenmem_add_to_physmap_one(struct domain *d,
-+                              unsigned int space,
-+                              union add_to_physmap_extra extra,
-+                              unsigned long idx,
-+                              gfn_t gfn)
++/*
++ * This implementation of find_{first,next}_zero_bit was stolen from
++ * Linus' asm-alpha/bitops.h.
++ */
++static inline unsigned long find_next_zero_bit(const unsigned long *addr,
++                                               unsigned long size,
++                                               unsigned long offset)
 +{
-+    BUG_ON("unimplemented");
-+}
++    const unsigned long *p = addr + BITOP_WORD(offset);
++    unsigned long result = offset & ~(BITS_PER_LONG - 1);
++    unsigned long tmp;
 +
-+int destroy_xen_mappings(unsigned long s, unsigned long e)
-+{
-+    BUG_ON("unimplemented");
-+}
++    if ( offset >= size )
++        return size;
++    size -= result;
++    offset %= BITS_PER_LONG;
++    if ( offset )
++    {
++        tmp = *(p++);
++        tmp |= ~0UL >> (BITS_PER_LONG - offset);
++        if ( size < BITS_PER_LONG )
++            goto found_first;
++        if ( ~tmp )
++            goto found_middle;
++        size -= BITS_PER_LONG;
++        result += BITS_PER_LONG;
++    }
++    while ( size & ~(BITS_PER_LONG - 1) )
++    {
++        if ( ~(tmp = *(p++)) )
++            goto found_middle;
++        result += BITS_PER_LONG;
++        size -= BITS_PER_LONG;
++    }
++    if ( !size )
++        return result;
++    tmp = *p;
 +
-+int map_pages_to_xen(unsigned long virt,
-+                     mfn_t mfn,
-+                     unsigned long nr_mfns,
-+                     unsigned int flags)
-+{
-+    BUG_ON("unimplemented");
++ found_first:
++    tmp |= ~0UL << size;
++    if ( tmp == ~0UL )        /* Are any bits zero? */
++        return result + size; /* Nope. */
++ found_middle:
++    return result + ffz(tmp);
 +}
-+
-+int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-+{
-+    BUG_ON("unimplemented");
-+}
-diff --git a/xen/arch/ppc/setup.c b/xen/arch/ppc/setup.c
-index 3fc7705d9b..959c1454a0 100644
---- a/xen/arch/ppc/setup.c
-+++ b/xen/arch/ppc/setup.c
-@@ -1,5 +1,8 @@
- /* SPDX-License-Identifier: GPL-2.0-or-later */
- #include <xen/init.h>
-+#include <xen/lib.h>
-+#include <xen/mm.h>
-+#include <public/version.h>
- #include <asm/boot.h>
- #include <asm/early_printk.h>
- #include <asm/mm.h>
-@@ -33,3 +36,8 @@ void __init noreturn start_xen(unsigned long r3, unsigned long r4,
 
-     unreachable();
- }
-+
-+void arch_get_xen_caps(xen_capabilities_info_t *info)
-+{
-+    BUG_ON("unimplemented");
-+}
-diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
-new file mode 100644
-index 0000000000..4c276b0e39
---- /dev/null
-+++ b/xen/arch/ppc/stubs.c
-@@ -0,0 +1,339 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#include <xen/cpumask.h>
-+#include <xen/domain.h>
-+#include <xen/irq.h>
-+#include <xen/nodemask.h>
-+#include <xen/time.h>
-+#include <public/domctl.h>
-+#include <public/vm_event.h>
-+
-+#include <asm/current.h>
-+
-+/* smpboot.c */
-+
-+cpumask_t cpu_online_map;
-+cpumask_t cpu_present_map;
-+cpumask_t cpu_possible_map;
-+
-+/* ID of the PCPU we're running on */
-+DEFINE_PER_CPU(unsigned int, cpu_id);
-+/* XXX these seem awfully x86ish... */
-+/* representing HT siblings of each logical CPU */
-+DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_sibling_mask);
-+/* representing HT and core siblings of each logical CPU */
-+DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_core_mask);
-+
-+nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
-+
-+/* time.c */
-+
-+s_time_t get_s_time(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int reprogram_timer(s_time_t timeout)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void send_timer_event(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* traps.c */
-+
-+void show_execution_state(const struct cpu_user_regs *regs)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_hypercall_tasklet_result(struct vcpu *v, long res)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_show_execution_state(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* shutdown.c */
-+
-+void machine_restart(unsigned int delay_millisecs)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void machine_halt(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* vm_event.c */
-+
-+void vm_event_fill_regs(vm_event_request_t *req)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vm_event_set_registers(struct vcpu *v, vm_event_response_t *rsp)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vm_event_monitor_next_interrupt(struct vcpu *v)
-+{
-+    /* Not supported on PPC. */
-+}
-+
-+/* domctl.c */
-+void arch_get_domain_info(const struct domain *d,
-+                          struct xen_domctl_getdomaininfo *info)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* monitor.c */
-+
-+int arch_monitor_domctl_event(struct domain *d,
-+                              struct xen_domctl_monitor_op *mop)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* smp.c */
-+
-+void arch_flush_tlb_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_event_check_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_call_function_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* irq.c */
-+
-+struct pirq *alloc_pirq_struct(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void pirq_guest_unbind(struct domain *d, struct pirq *pirq)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void pirq_set_affinity(struct domain *d, int pirq, const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+hw_irq_controller no_irq_type = {
-+    .typename = "none",
-+    .startup = irq_startup_none,
-+    .shutdown = irq_shutdown_none,
-+    .enable = irq_enable_none,
-+    .disable = irq_disable_none,
-+};
-+
-+int arch_init_one_irq_desc(struct irq_desc *desc)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_state_dump(unsigned int cpu)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* domain.c */
-+
-+DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
-+unsigned long __per_cpu_offset[NR_CPUS];
-+
-+void context_switch(struct vcpu *prev, struct vcpu *next)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void continue_running(struct vcpu *same)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void sync_local_execstate(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void sync_vcpu_execstate(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void startup_cpu_idle_loop(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void free_domain_struct(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void dump_pageframe_info(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void free_vcpu_struct(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_vcpu_create(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_vcpu_destroy(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_switch_to_aarch64_mode(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_create(struct domain *d,
-+                       struct xen_domctl_createdomain *config,
-+                       unsigned int flags)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_teardown(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_destroy(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_shutdown(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_pause(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_unpause(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_soft_reset(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_creation_finished(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_initialise_vcpu(struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_vcpu_reset(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int domain_relinquish_resources(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_dump_domain_info(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_dump_vcpu_info(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_mark_events_pending(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_update_evtchn_irq(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_block_unless_event_pending(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_kick(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+struct domain *alloc_domain_struct(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+struct vcpu *alloc_vcpu_struct(const struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+unsigned long
-+hypercall_create_continuation(unsigned int op, const char *format, ...)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int __init parse_arch_dom0_param(const char *s, const char *e)
-+{
-+    BUG_ON("unimplemented");
-+}
+ #endif /* _ASM_PPC_BITOPS_H */
 --
 2.30.2
 
