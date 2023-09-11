@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C62DEE7FF4
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Sep 2023 16:52:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.599656.935180 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9541EE57DF
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Sep 2023 16:53:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.599662.935191 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfk9N-0006pZ-OT; Mon, 11 Sep 2023 16:52:37 +0000
+	id 1qfk9Y-0007Lc-1G; Mon, 11 Sep 2023 16:52:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 599656.935180; Mon, 11 Sep 2023 16:52:37 +0000
+Received: by outflank-mailman (output) from mailman id 599662.935191; Mon, 11 Sep 2023 16:52:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfk9N-0006pN-Lf; Mon, 11 Sep 2023 16:52:37 +0000
-Received: by outflank-mailman (input) for mailman id 599656;
- Mon, 11 Sep 2023 16:52:37 +0000
+	id 1qfk9X-0007LR-Uh; Mon, 11 Sep 2023 16:52:47 +0000
+Received: by outflank-mailman (input) for mailman id 599662;
+ Mon, 11 Sep 2023 16:52:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zO6f=E3=cloud.com=javi.merino@srs-se1.protection.inumbo.net>)
- id 1qfk9M-0005g0-WE
- for xen-devel@lists.xenproject.org; Mon, 11 Sep 2023 16:52:37 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ id 1qfk9W-0005g0-Be
+ for xen-devel@lists.xenproject.org; Mon, 11 Sep 2023 16:52:46 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9c20fdec-50c3-11ee-8785-cb3800f73035;
- Mon, 11 Sep 2023 18:52:36 +0200 (CEST)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40061928e5aso53549715e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 11 Sep 2023 09:52:36 -0700 (PDT)
+ id a1855e22-50c3-11ee-8785-cb3800f73035;
+ Mon, 11 Sep 2023 18:52:45 +0200 (CEST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-31f6ddb3047so4536273f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Sep 2023 09:52:45 -0700 (PDT)
 Received: from EMEAENG6DZjqCfH.citrite.net
  (default-46-102-197-194.interdsl.co.uk. [46.102.197.194])
  by smtp.gmail.com with ESMTPSA id
- b13-20020a05600c11cd00b003fefcbe7fa8sm10578124wmi.28.2023.09.11.09.52.35
+ b13-20020a05600c11cd00b003fefcbe7fa8sm10578124wmi.28.2023.09.11.09.52.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Sep 2023 09:52:35 -0700 (PDT)
+ Mon, 11 Sep 2023 09:52:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,119 +48,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9c20fdec-50c3-11ee-8785-cb3800f73035
+X-Inumbo-ID: a1855e22-50c3-11ee-8785-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1694451156; x=1695055956; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1694451165; x=1695055965; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uWR3yQmcKWDwWpf/I8JOHNwbnGjcKvY7WPldaM6ij1o=;
-        b=UnDFuBzVwIiL0zjptQVPXdQM75uq/gQ7nO34vRXYwU/AzYYCGvJxstL2dkE7X0hUlD
-         UwbYYe6l9IbQkFG87v8PsNrq8+Dld4XRug3Q8y9UNVLJiYPT7IXBPn8WoRtc1ccQZZMO
-         hS/1jgXyhRU2xs7nltCdCZi0I1HG3ZbX5TH3g=
+        bh=TkRR/xJIMJPUUYAon5vdXYf6WC9lWsytp6TbHgmeAz8=;
+        b=IyoCH9s8YEfQUzAGz8wS9Qz/nWObiViatHfdSjlAHrmytbpA1R/X4sxo9pptJOb0cL
+         qB/kRaZbZoFZ7kmsvpD6hihcWmvQLHz4bUOK4MThpLL86VARIg2a3VtjeJ56c5yEUJBe
+         JicXqFFGCeBkX/DrkVluOXmV+FSYCynK/eVR8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694451156; x=1695055956;
+        d=1e100.net; s=20230601; t=1694451165; x=1695055965;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uWR3yQmcKWDwWpf/I8JOHNwbnGjcKvY7WPldaM6ij1o=;
-        b=B9YOwVBAkwCSSmAdWWiL9hVZnQ5sgnJaw8XtqP6Q0hA9NEnP+aoLNodP7At2VSp1yd
-         GmRFF1K1Y3NfOxgdek64FpswSw2A+T0cQeCvOMie+afa1O9YMvGfRavtIpAKmaY3mSV/
-         lrqH9mkvqBhhzwoeIcmJ8xYtmfutlw5JnfI39Ha58ZsRWnebqzwftxML8Fm2AMD8/xno
-         J/x8dSWGXLkKVtEAYgCrD01YgjlJgLPNc5YPrnBSNnLxxaQW4CcuXRQgwHMtV0tImIsN
-         MP6mVoXk8ka0qvezQ7kmpFFVc18WhgBNvszTIX21Nl896tADMh4fNoFJ7hRQuimX6MRy
-         SmBA==
-X-Gm-Message-State: AOJu0Yx/uLnuFwlcbEodpiHYxvbiraSNT+1RoRykb18b88oJrDV+m6t+
-	cxHkf30tQOQCkg0QVZXl5b+AC7EYSM0/iZ8JQ20=
-X-Google-Smtp-Source: AGHT+IGynlsdxSx0n9nKQMoLGfszC3U0usQq/40SvyrYxDrncH8NI7OwUIA4E8qeWqIKxlIdJ/SBJA==
-X-Received: by 2002:a1c:ed08:0:b0:3fe:2a98:a24c with SMTP id l8-20020a1ced08000000b003fe2a98a24cmr7875975wmh.26.1694451155696;
-        Mon, 11 Sep 2023 09:52:35 -0700 (PDT)
+        bh=TkRR/xJIMJPUUYAon5vdXYf6WC9lWsytp6TbHgmeAz8=;
+        b=QqtiRlvU0TqYcRslUju5zSyo9gwmwANdme6y5nUc4rz0EpAc3E0Z2KiD68gMvNmZqS
+         /3Bq7ZeNvaopi3QUOCdYvVOZkjBUzMus1KHk/Tc8hCAtnRDYZwvEuOEfUmBb31FrISKh
+         yu9KsUXWzdyP1ddr0wkRvovWGKySQ/aZozNtyhamuyC/Cm/lfVYMsg/M1W+owPVhEOqy
+         1ih9SoKXi035qmVHRcVbmaVhAInXSXIAntQMIvFVIxbaUxGWO1aWArNZg5+ruDwrVnXp
+         f9zcyp2dNJh0hqRSuze+UuadfHkW926kPoz9qmXbYc/H9utLdBg7KYp4BeOYzMdHGYu9
+         QrwA==
+X-Gm-Message-State: AOJu0YwJW/sTpymG4uWFso4OjlPnWhObV/CS0e6h8xmXUj2xRi9JkQmB
+	T59FuzAisoncWDkxEtmtuAu7w7s7MnOPKaXIH98=
+X-Google-Smtp-Source: AGHT+IF3jSa2/clS/+JfUHL/kl4y4efKdPkk1TJ7WgT8zAfnE7tpWz1wECAW/EuY0dd4wt60f3e8BA==
+X-Received: by 2002:adf:fe8c:0:b0:317:c2a9:9b0c with SMTP id l12-20020adffe8c000000b00317c2a99b0cmr8688278wrr.50.1694451164673;
+        Mon, 11 Sep 2023 09:52:44 -0700 (PDT)
 From: Javi Merino <javi.merino@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	George Dunlap <george.dunlap@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH v2 3/5] tools: don't use distutils in configure nor Makefile
-Date: Mon, 11 Sep 2023 17:51:02 +0100
-Message-ID: <7b3ecf211f60e0d6f7a4d146b62f9c28eff003f5.1694450145.git.javi.merino@cloud.com>
+	Javi Merino <javi.merino@cloud.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 5/5] README: update to remove old note about the build system's python expectation
+Date: Mon, 11 Sep 2023 17:51:04 +0100
+Message-ID: <2b98d4409f0220c5b24517c5b230344228717eb8.1694450145.git.javi.merino@cloud.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1694450145.git.javi.merino@cloud.com>
 References: <cover.1694450145.git.javi.merino@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+The configure script tests for the availability of python3, python and
+python2 in that order and sets PYTHON to the first one found in path.
+You don't need to have a symlink to python.
 
-Python distutils is deprecated and is going to be removed in Python
-3.12. The distutils.sysconfig is available as sysconfig module in
-stdlib since Python 3.2, so use that directly.
-
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Signed-off-by: Javi Merino <javi.merino@cloud.com>
 ---
- m4/python_devel.m4       | 28 ++++++++++++++--------------
- tools/libs/stat/Makefile |  4 ++--
- 2 files changed, 16 insertions(+), 16 deletions(-)
+ README | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/m4/python_devel.m4 b/m4/python_devel.m4
-index bbf1e0354b..bb60857b03 100644
---- a/m4/python_devel.m4
-+++ b/m4/python_devel.m4
-@@ -5,21 +5,21 @@ ac_previous_libs=$LIBS
- AC_PATH_PROG([pyconfig], [$PYTHON-config], [no])
- AS_IF([test x"$pyconfig" = x"no"], [
-     dnl For those that don't have python-config
--    CPPFLAGS="$CFLAGS `$PYTHON -c 'import distutils.sysconfig; \
--        print("-I" + distutils.sysconfig.get_config_var("INCLUDEPY"))'`"
--    CPPFLAGS="$CPPFLAGS `$PYTHON -c 'import distutils.sysconfig; \
--        print(distutils.sysconfig.get_config_var("CFLAGS"))'`"
--    LDFLAGS="$LDFLAGS `$PYTHON -c 'import distutils.sysconfig; \
--        print("-L" + distutils.sysconfig.get_python_lib(plat_specific=1,\
-+    CPPFLAGS="$CFLAGS `$PYTHON -c 'import sysconfig; \
-+        print("-I" + sysconfig.get_config_var("INCLUDEPY"))'`"
-+    CPPFLAGS="$CPPFLAGS `$PYTHON -c 'import sysconfig; \
-+        print(sysconfig.get_config_var("CFLAGS"))'`"
-+    LDFLAGS="$LDFLAGS `$PYTHON -c 'import sysconfig; \
-+        print("-L" + sysconfig.get_python_lib(plat_specific=1,\
-         standard_lib=1) + "/config")'`"
--    LDFLAGS="$LDFLAGS `$PYTHON -c 'import distutils.sysconfig; \
--        print(distutils.sysconfig.get_config_var("LINKFORSHARED"))'`"
--    LDFLAGS="$LDFLAGS `$PYTHON -c 'import distutils.sysconfig; \
--        print(distutils.sysconfig.get_config_var("LDFLAGS"))'`"
--    LIBS="$LIBS `$PYTHON -c 'import distutils.sysconfig; \
--        print(distutils.sysconfig.get_config_var("LIBS"))'`"
--    LIBS="$LIBS `$PYTHON -c 'import distutils.sysconfig; \
--        print(distutils.sysconfig.get_config_var("SYSLIBS"))'`"
-+    LDFLAGS="$LDFLAGS `$PYTHON -c 'import sysconfig; \
-+        print(sysconfig.get_config_var("LINKFORSHARED"))'`"
-+    LDFLAGS="$LDFLAGS `$PYTHON -c 'import sysconfig; \
-+        print(sysconfig.get_config_var("LDFLAGS"))'`"
-+    LIBS="$LIBS `$PYTHON -c 'import sysconfig; \
-+        print(sysconfig.get_config_var("LIBS"))'`"
-+    LIBS="$LIBS `$PYTHON -c 'import sysconfig; \
-+        print(sysconfig.get_config_var("SYSLIBS"))'`"
- ], [
-     dnl If python-config is found use it
-     CPPFLAGS="$CFLAGS `$PYTHON-config --cflags`"
-diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
-index ee5c42bf7b..a968eaff48 100644
---- a/tools/libs/stat/Makefile
-+++ b/tools/libs/stat/Makefile
-@@ -73,8 +73,8 @@ $(PYLIB): $(PYSRC)
- python-bindings: $(PYLIB) $(PYMOD)
+diff --git a/README b/README
+index f8cc426f78..6212a3a9c5 100644
+--- a/README
++++ b/README
+@@ -184,13 +184,6 @@ Various tools, such as pygrub, have the following runtime dependencies:
+           URL:    https://www.python.org/
+           Debian: python
  
- pythonlibdir = $(shell $(PYTHON) -c \
--	       'import distutils.sysconfig as cfg; \
--	        print(cfg.get_python_lib(False, False, prefix="$(prefix)"))')
-+	       'import sysconfig; \
-+	        print(sysconfig.get_python_lib("platlib", vars={"platbase": "$(prefix)"}))')
+-Note that the build system expects `python` to be available. If your system
+-only has `python2` or `python3` but not `python` (as in Linux From Scratch),
+-you will need to create a symlink for it, or specify PYTHON= when invoking
+-make, like (note the position of PYTHON= matters):
+-
+-    # make PYTHON=/usr/bin/python3
+-
+ Intel(R) Trusted Execution Technology Support
+ =============================================
  
- .PHONY: install-python-bindings
- install-python-bindings: $(PYLIB) $(PYMOD)
 -- 
 2.41.0
 
