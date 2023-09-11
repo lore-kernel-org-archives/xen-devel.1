@@ -4,41 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71965EE57DF
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Sep 2023 15:52:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.599602.935085 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7635EE57DF
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Sep 2023 15:57:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.599609.935096 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfjDG-0003ai-FF; Mon, 11 Sep 2023 15:52:34 +0000
+	id 1qfjHM-0004zA-2u; Mon, 11 Sep 2023 15:56:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 599602.935085; Mon, 11 Sep 2023 15:52:34 +0000
+Received: by outflank-mailman (output) from mailman id 599609.935096; Mon, 11 Sep 2023 15:56:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfjDG-0003ab-Bb; Mon, 11 Sep 2023 15:52:34 +0000
-Received: by outflank-mailman (input) for mailman id 599602;
- Mon, 11 Sep 2023 15:52:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qfjHL-0004z3-UV; Mon, 11 Sep 2023 15:56:47 +0000
+Received: by outflank-mailman (input) for mailman id 599609;
+ Mon, 11 Sep 2023 15:56:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0Yi3=E3=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
- id 1qfjDF-0003ZB-7c
- for xen-devel@lists.xenproject.org; Mon, 11 Sep 2023 15:52:33 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 37273e7c-50bb-11ee-9b0d-b553b5be7939;
- Mon, 11 Sep 2023 17:52:31 +0200 (CEST)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-3ff7d73a6feso48977625e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 11 Sep 2023 08:52:31 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
- by smtp.gmail.com with ESMTPSA id
- v11-20020a1cf70b000000b00401d8810c8bsm13620840wmh.15.2023.09.11.08.52.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Sep 2023 08:52:30 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id A24441FFBB;
- Mon, 11 Sep 2023 16:52:29 +0100 (BST)
+ <SRS0=erTg=E3=nureva.com=anthonychan@srs-se1.protection.inumbo.net>)
+ id 1qfjHK-0004yv-Cb
+ for xen-devel@lists.xenproject.org; Mon, 11 Sep 2023 15:56:46 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2070a.outbound.protection.outlook.com
+ [2a01:111:f400:fe59::70a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ce0ec9d9-50bb-11ee-8785-cb3800f73035;
+ Mon, 11 Sep 2023 17:56:45 +0200 (CEST)
+Received: from DM6PR20MB2779.namprd20.prod.outlook.com (2603:10b6:5:140::30)
+ by PH0PR20MB4517.namprd20.prod.outlook.com (2603:10b6:510:147::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.31; Mon, 11 Sep
+ 2023 15:56:39 +0000
+Received: from DM6PR20MB2779.namprd20.prod.outlook.com
+ ([fe80::c3:998a:f69:190e]) by DM6PR20MB2779.namprd20.prod.outlook.com
+ ([fe80::c3:998a:f69:190e%7]) with mapi id 15.20.6768.029; Mon, 11 Sep 2023
+ 15:56:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,185 +49,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 37273e7c-50bb-11ee-9b0d-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1694447550; x=1695052350; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zb1+wi30CnuBBhAaP6rYq/qdnkDNBGUjT1rxgMg7Os4=;
-        b=F9yz8QXD6hXM8j6DlRhN25sNRT2BpXGWa0edgfO011TT8Y2TRb2Qqi/H5a4zBP3FoR
-         zBBAUSn354d4TCvW0TgpEFkFyxquw1YulTv9YCGqEKU6PKFJGEftPzGkUDIEFf7QMqiN
-         8lJE2iE+yfyrr5XSTawhCltTu6ZkGzdokicSSbLFSFdqjjAA6sOnzVvt2CI8w3kNLRwG
-         trDkd5VxnJerEOvd9AybrJ81kxjRksIDhTSmLNYnuLF602YooRBbkTZkBqj4pqPTMX/7
-         mSKbMh9978QiI1D/zwhfULAjGwzhraLiZ+JTOS1+XqAd0QmVTBrGcf2/KNC9NLVbw/f/
-         NFrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694447550; x=1695052350;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=zb1+wi30CnuBBhAaP6rYq/qdnkDNBGUjT1rxgMg7Os4=;
-        b=PqjZZw8TX8dAVG6tuof6WY6nQ+j9SIrxEV4u5PrivmRVytZ0j+cH07p0o6N5ZStwiM
-         uWwpZgCKabFM4TXBASinQc60G7eB3OHMbVXmVPjR3EN1ZvuJCTn1HovFf33b/LXL4JVT
-         FukWxIuV2GUmeYoPGeMCOqyJlzvSZ/ok1PLHTTN4PZ8Qzv7fGH4gOLDd/4iyGlLtCOMF
-         2NFEvejbPd7GJ+oUP1AkWH5L8/etPhPvKgGy+xR2LDD8HFj5Mto4pfY5u95aE1+g4Ggw
-         0H1mp1cdMZQuC62WP+lHJAeGgHO/i3OxriBX0bBBeAKBZwnbnN7YxvqQbDdJsgKqELbJ
-         5gYQ==
-X-Gm-Message-State: AOJu0YzFdBHsTfWcCT1mFoXghk/alcbe9HXB3fkzW7Ei4jLjgyw9pA0Q
-	MhMAn9ZE3d4xkH6c7MOFLq1+rQ==
-X-Google-Smtp-Source: AGHT+IFwVy2Io7j/R9zTW3T811BVaUE+NHklEDhN5YUZ5MT+CJRW5HJcyon+UDrFG1J42TWENVYkZg==
-X-Received: by 2002:a05:600c:2483:b0:401:d2cb:e6f3 with SMTP id 3-20020a05600c248300b00401d2cbe6f3mr9640429wms.1.1694447550469;
-        Mon, 11 Sep 2023 08:52:30 -0700 (PDT)
-References: <20230902151351.10325-1-javi.merino@cloud.com>
- <ce6e7abd-40ee-dd9e-b17c-10c39ca0e422@suse.com>
-User-agent: mu4e 1.11.17; emacs 29.1.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Javi Merino <javi.merino@cloud.com>, Henry Wang <Henry.Wang@arm.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
- <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] coverage: update gcov info for newer versions of gcc
-Date: Mon, 11 Sep 2023 16:26:01 +0100
-In-reply-to: <ce6e7abd-40ee-dd9e-b17c-10c39ca0e422@suse.com>
-Message-ID: <87y1hcogg2.fsf@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+X-Inumbo-ID: ce0ec9d9-50bb-11ee-8785-cb3800f73035
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EIPlyATCJ9JthHZuzXUW2GKPblf8OdliJssjNwjetvNF4Y0Uh9ji9ki2eUTiA12FGTqanZygM+btVtgvxgxcFZ/sld3h7zAdJ5DCxf+A/8ZvB7DDPwIr8gB8OwWhgrClWgo4VL1usdKt49CRd2TbrxOlSBYWnykOqK7n6OIr5MbovLYIFKEt+nTfFVIrQ6bQ6VJXKDBgGhJHzVlOqryDg5sY6lCxSDBnVTr4V1d0/J1C0K5ApDrFgaCxinoU8EwxOFvTgm0nXeN0yxpA2RGw/JGA3eQYEG3vBMN0CIc43H9Mbv4P3T/gCPwkoPsbMWCNZSbAh8Aoa5WqX6PU0k2xQA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0ZYzElY3T5DAD2dcgUGFseEmujyc7gzex3NjNjoczEU=;
+ b=bl7Zb/of9sxP9jqx5hlvlBJt63sPkzsb/RrbWn1iKRs/K0iFdXYzQtNb+09iWDTJdQQ2FsuLj0ck6y5LJJ1uXY/af6xDsufHUDE+NHlLk1fPjLRgwgWC1hYwm/iJV9pF5HCYKJzSy7H4o6ZQceEqs4LO60R18OI0rGQOKi1ZV7KXOCdz459QIziLE70cRODSKJkmirqfoShM7mVAlfpI0dOIQb9DfqdaWkQATCeewb2ZgvMw+aeYhd/8u0zKhTox7z488HunpBKM/4UJ1X9h9lttFs4CMLiWGkqYmJHMuWaHU++gIq5nLvt9o/oZCLUA1LAEhVANpUuAkB8UMUkp6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nureva.com; dmarc=pass action=none header.from=nureva.com;
+ dkim=pass header.d=nureva.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nureva.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0ZYzElY3T5DAD2dcgUGFseEmujyc7gzex3NjNjoczEU=;
+ b=HPp4/yLFnJvvwHOgD4w8qP65/8PDNWjAtYVj/gQHtQn+QWijkGgRcSnR9ZtIAQaJZWmj2rduFO/pQFAk2hef9a22cxOeCSiEl1YVOqJR6nZimbdLLuagnd6KzhAPJpQIAu4CN2a2LksFfkBBcv/8pjRj+kRy/gpUu2kaebeWRSE=
+From: Anthony Chan <anthonychan@nureva.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"bertrand.marquis@arm.com" <bertrand.marquis@arm.com>, "julien@xen.org"
+	<julien@xen.org>, "Volodymyr_Babchuk@epam.com" <Volodymyr_Babchuk@epam.com>,
+	"michal.orzel@amd.com" <michal.orzel@amd.com>, Dan Waqar
+	<danwaqar@nureva.com>
+Subject: RE: [EXT] Re: xen arm64 low power sleep support
+Thread-Topic: [EXT] Re: xen arm64 low power sleep support
+Thread-Index:
+ AdnanCj70Orzia5aQfSER7H0AUNnzgAKb5uAACL7QIAAFccGAAAoRLpQAQalgwAAJhokEAAI5CkAACis4mA=
+Date: Mon, 11 Sep 2023 15:56:38 +0000
+Message-ID:
+ <DM6PR20MB2779BA8D352E566A350844FCC1F2A@DM6PR20MB2779.namprd20.prod.outlook.com>
+References:
+ <DM6PR20MB277971712E5415CB231AEB37C1E7A@DM6PR20MB2779.namprd20.prod.outlook.com>
+ <alpine.DEB.2.22.394.2308291512271.6458@ubuntu-linux-20-04-desktop>
+ <DM6PR20MB27795F4B6C327F7F031BABB0C1E6A@DM6PR20MB2779.namprd20.prod.outlook.com>
+ <alpine.DEB.2.22.394.2308301814580.6458@ubuntu-linux-20-04-desktop>
+ <DM6PR20MB2779E6DD63DC5CC9A1FE161AC1E5A@DM6PR20MB2779.namprd20.prod.outlook.com>
+ <alpine.DEB.2.22.394.2309051848590.6458@ubuntu-linux-20-04-desktop>
+ <DM6PR20MB2779A22E8CA641F0B2BBF038C1EFA@DM6PR20MB2779.namprd20.prod.outlook.com>
+ <alpine.DEB.2.22.394.2309061629460.6458@ubuntu-linux-20-04-desktop>
+In-Reply-To:
+ <alpine.DEB.2.22.394.2309061629460.6458@ubuntu-linux-20-04-desktop>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nureva.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM6PR20MB2779:EE_|PH0PR20MB4517:EE_
+x-ms-office365-filtering-correlation-id: 023f4e8d-1007-4876-0446-08dbb2dfaf1a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ TMm4YbGUh7HIXkp9Rne/eJiEBrbwlKB3eiRRsTEXCtsSAO/QRUKb1qbG+8RQUsvcFCqPi6UX1zUOke2TWSpyam3TgSybFsd7VmtY1VVTAU90djKMx37igdCwyyUbSgm0tYmjHWS29jo9/TzJbwrmAT4MxKEPOku+ExaerLHHvvspSWVcfmUQaxHI/3PoC/7qCiSCeebAQjEZ70ZIxgmFQbCG6kQlT1k/kmQd4Dit3nBXpxH14KyMCgEC5CMczYpy+GUREeopMHsxxWYnjYCiwU1iRPAuz4yUHXt6fC6iueGnLPLAIP3qd4G0gA14Kp6EdXDjBkOeqi5hxQYKS7H8qfdbvAdF57r4RmDliS7kS0j5POXK9RN+embg6NRf1P0g1HpAKPn7lx1Qe34An0VbWDLDExlpNCMu6Mbb9X5QMDPYZIljN9+9i9C5z0oPkl1RSiVNlhIpaKb611bA+GymNvY5pwWpF6ISUJUzKqsx9dPC8l120fKtluD4yZKx+i7GS8fIrrkZSGJlbRAlZ0uNA2uLvL3WJKWROt2fe5EciTtL7lzQDg4iTJRCkm89QZCRMETSZuV7xn4C11+siQQGX76L+fkwQbX01cN8K3dFLcKcKNHhdtN4jtOeAO9/+7aV
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR20MB2779.namprd20.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(39840400004)(396003)(376002)(346002)(366004)(186009)(1800799009)(451199024)(83380400001)(9686003)(52536014)(71200400001)(5660300002)(4326008)(33656002)(6916009)(8676002)(54906003)(8936002)(76116006)(66946007)(64756008)(41300700001)(66476007)(2906002)(66556008)(66446008)(316002)(7696005)(6506007)(55016003)(38100700002)(86362001)(122000001)(38070700005)(478600001)(107886003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?zzWYQJu8HARaVQ9102KKYBzPF5jqQJ0NCDY9/fIQzd3cFXFL4p2ig35mBrXw?=
+ =?us-ascii?Q?T4ID3TmHP2dQratsk/Jj8Lk2Y0LgsgGOk3lumSDGtxIth1Ap9mL8m/qq4Ak2?=
+ =?us-ascii?Q?xIXPgHQUsyVfbqLBoXLTAML0S2wLToGo8ZOlqagvq4Rc+jCHAKI7Z7NuhH/V?=
+ =?us-ascii?Q?Uplfy0MyEAC/01BjUuy30LKsuR5BM2vtyJEWI713U1bWsaH/gU8X2gGrz98h?=
+ =?us-ascii?Q?pJZdJ1yvzJXlNDVthNJ6Y2R8KSlySyw0ozQzVoDINUdvjoYOUrIA1mD+fvlO?=
+ =?us-ascii?Q?HyVpGJtEuIKMQkWyE9xmE+2rcdNwmhiC/q1II5CJ3wKFAUtGkfjrRiMNxn7N?=
+ =?us-ascii?Q?H+qUh6/sLRA/f37HTRmUXnXO0S+G0WDIcFfU7a076G+ywtSvC+CuueonHlij?=
+ =?us-ascii?Q?0rnvxUbnIYPe2//WVTFzmJMj2oOr3+3keM3kVf2V4I27tIR28OG9slR1RDBp?=
+ =?us-ascii?Q?xHq4VQQOGTNlEZll5O+vRD2SJKkbyMaoqhz6cP0FIsRfePwm6uNrjaDXyz6z?=
+ =?us-ascii?Q?Qb5lryBsz9SimfmL/JEV6jVvnZhre3nWJ+/S/lLmbLTsF9Im6n0zM1AoYyFD?=
+ =?us-ascii?Q?juUNgrpm51NZVWWnZw0ltwD5ggUOaHfkjzf7RznRa6F9jEgfGzp3X1G2Bo7I?=
+ =?us-ascii?Q?5pVI9mMSZAVCP3Wo1Q9E7jR1YSlV9y5OTzGId9OC8QYGFL/27fl5DKMTkJjH?=
+ =?us-ascii?Q?N5DE9sHjLGfVJauHW8OfTm0R4hIqj3YqYX/K/uMvBLTYktUSZMLcPJ6al2Ai?=
+ =?us-ascii?Q?t8BlYLTbIG6yuhgtVHMmvoBVSr9RHWtWP/yZx+7raaBqFCjHaFUK/RyzOykJ?=
+ =?us-ascii?Q?zUTcqnC6pcZ5Ho/x+Mq6/V1wIQ6N/xVNw/ZNsj4O51mz3km0sYFfa+Wn075n?=
+ =?us-ascii?Q?y0ENAHcEmaiaWCE0eeSGjUsgiuuud2RY0Z4jjrheZBjNjAkl3JlQlOnPcg9X?=
+ =?us-ascii?Q?7iuHdJUjjSwnM88HmH+/kZeRLQv3RjZDV0vcZHx2puZ0bpc/04PVCjw0dt7s?=
+ =?us-ascii?Q?qdrCDuPD+70Lfy/QBESVj6F1JwHQErzHrBtXCEFgvIXKYP4wj2EFhklpPMRo?=
+ =?us-ascii?Q?hFXVOCVnFMQ4B2YNvDAzQOngdn3KpdcZRxGC7aLBS2WTjPepkVCY90EmMqyv?=
+ =?us-ascii?Q?RXelLbS746KzeyKTxAmByKlt4/F/Zv39eaJghuI5VYU1ExjtgHcZq6UBIa4p?=
+ =?us-ascii?Q?L6fcVwoJY/kzds3/4cK6qk6vF0whkAZ8mWMP5pexDIci5zqQixoj1uKHyinf?=
+ =?us-ascii?Q?lXuqb74T5/QX9uhTuPd3caj5sZ7Tqw9pUMml9J0ppu3zjNy1si2z3+VsSRhF?=
+ =?us-ascii?Q?rR/qy6hRD5kwzhN+2aaBQFzb6yEegNcttckY6+z4o0PMJMTyRLHaQ8ny1M3v?=
+ =?us-ascii?Q?f9pwY7j9kdLpy/kDfkWwGt4l1SRWbLtZP2j6dR8IqrGjUDpML5rMKiHODGlH?=
+ =?us-ascii?Q?1ClZT/MGBB/BI9YKcqvhhL8StY3G4h4BtrWRjVxEdmOwwSAnQxcf2gNmFXPl?=
+ =?us-ascii?Q?5HcGLE6dhJWTEN6wPII+TuzYBfsMsA8VX/PAE8fW0CPXgj/NUA5/QNmTNNZB?=
+ =?us-ascii?Q?yYPRGV/JqlHo3mFvZUR0zGNcGjxqTVxExiVitDafFOdMYfDaoXsonA9txgpp?=
+ =?us-ascii?Q?Vl9XU3Y30DiQi0+hlisQl211ZAOvKd6VKNMgM1HL03H5?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: nureva.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR20MB2779.namprd20.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 023f4e8d-1007-4876-0446-08dbb2dfaf1a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2023 15:56:38.7903
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 5aeb77fa-643b-473e-aee0-cb54a11ccba3
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: VvQEaQwoPcCIRlGx6wPbuutIFazwFR/lv1tFHolKNUBTf+9aiA3iYu8m/A0eRxE+43eg0XfHjxM813NRKDdQYA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR20MB4517
 
-
-Jan Beulich <jbeulich@suse.com> writes:
-
-> On 02.09.2023 17:11, Javi Merino wrote:
->> --- a/xen/common/coverage/Makefile
->> +++ b/xen/common/coverage/Makefile
->> @@ -5,7 +5,9 @@ obj-y +=3D $(call cc-ifversion,-lt,0407, \
->>  		gcc_3_4.o, $(call cc-ifversion,-lt,0409, \
-
-This isn't even supported, see below:
-
->>  		gcc_4_7.o, $(call cc-ifversion,-lt,0500, \
->>  		gcc_4_9.o, $(call cc-ifversion,-lt,0700, \
->> -		gcc_5.o, gcc_7.o))))
->> +		gcc_5.o, $(call cc-ifversion,-lt,1000, \
->> +		gcc_7.o,  $(call cc-ifversion,-lt,1200, \
->> +		gcc_10.o, gcc_12.o))))))
+On Wed, 6 Sep 2023, Stefano Stabellini wrote:
+> On Wed, 6 Sep 2023, Anthony Chan wrote:
+> > Thanks, I've tried patches that stemmed from that discussion but
+> > unfortunately, doesn't resolve the issue.  In fact, the s2idle_loop
+> > branch might not be the problem at all.  I experimented with Xen to all=
+ow the
+> > 'idle-states' into the FDT and prevented xen_guest_init on Linux from d=
+isabling
+> > the 'cpuidle' driver (arch/arm/xen/enlighten.c).  When I trigger a susp=
+end, I
+> > can see now another thread (believe it's the idle thread) call into
+> > drivers/firmware/psci/psci.c:__psci_cpu_suspend and then the Xen
+> > counterpart at xen/arch/arm/vpsci.c:do_psci_0_2_cpu_suspend.
 >
-> This is getting unwieldy, so I think we ought to try to limit the number
-> of different files we have. Already gcc_4_9.c and gcc_7.c specify the
-> same GCOV_COUNTERS and differ only in the version checks (which could be
-> combined). Therefore ...
-
-You may want to consider your policy on supported GCC versions. I see
-you still support:
-
-    * C compiler and linker:
-      - For x86:
-        - GCC 4.1.2_20070115 or later
-        - GNU Binutils 2.16.91.0.5 or later
-        or
-        - Clang/LLVM 3.5 or later
-      - For ARM 32-bit:
-        - GCC 4.9 or later
-        - GNU Binutils 2.24 or later
-      - For ARM 64-bit:
-        - GCC 5.1 or later
-        - GNU Binutils 2.24 or later
-
-While also having some commented out warnings because the base GCC is so ol=
-d:
-
-  CFLAGS   +=3D -Wmissing-prototypes
-  # (gcc 4.3x and later)   -Wconversion -Wno-sign-conversion
-
-For reference QEMU's minimum GCC is 7.4
-
-  if compiler.get_id() =3D=3D 'gcc' and compiler.version().version_compare(=
-'>=3D7.4')
-
-and while our support cycle is based off distro LTS releases I have to
-wonder do you actually need to support users building the
-latest/greatest version of the hypervisor on ancient user-spaces with
-old compilers?
-
-I think the oldest distro you have in your CI is jessie (still hanging
-on with extended LTS support) and that uses GCC 4.9.
-
-I see there are various scripts to gather support status into the
-documentation but I couldn't find a general statement on the projects
-overall approach to supported versions of components.
-
+> OK but remember that Xen is not implementing do_psci_0_2_cpu_suspend
+> correctly at the moment. Either we need to fix the Xen implementation, or=
+ we
+> need to configure Linux so that it calls WFI instead of __psci_cpu_suspen=
+d.
 >
->> --- /dev/null
->> +++ b/xen/common/coverage/gcc_10.c
->> @@ -0,0 +1,31 @@
->> +/*
->> + *  This code provides functions to handle gcc's profiling data format
->> + *  introduced with gcc 10.
->> + *
->> + *  For a better understanding, refer to gcc source:
->> + *  gcc/gcov-io.h
->> + *  libgcc/libgcov.c
->> + *
->> + *  Uses gcc-internal data definitions.
->> + */
->> +
->> +#include "gcov.h"
->> +
->> +#if GCC_VERSION < 100000 || GCC_VERSION > 120000
->> +#error "Wrong version of GCC used to compile gcov"
->> +#endif
->> +
->> +#define GCOV_COUNTERS 8
->> +#define GCOV_UNIT_SIZE 1
->> +
->> +#include "gcc_4_7.c"
->
-> ... this could simply re-use gcc_4_7.c directly, with just the version
-> check there suitably tweaked.
->
->> --- a/xen/common/coverage/gcc_4_7.c
->> +++ b/xen/common/coverage/gcc_4_7.c
->> @@ -27,6 +27,7 @@
->>  #  error "Wrong version of GCC used to compile gcov"
->>  # endif
->>  #define GCOV_COUNTERS 8
->> +#define GCOV_UNIT_SIZE 1
->>  #endif
->
-> If further this became a separate #ifdef, ...
->
->> --- a/xen/common/coverage/gcc_4_9.c
->> +++ b/xen/common/coverage/gcc_4_9.c
->> @@ -19,6 +19,7 @@
->>  #endif
->>=20=20
->>  #define GCOV_COUNTERS 9
->> +#define GCOV_UNIT_SIZE 1
->>=20=20
->>  #include "gcc_4_7.c"
->>=20=20
->> --- a/xen/common/coverage/gcc_5.c
->> +++ b/xen/common/coverage/gcc_5.c
->> @@ -19,6 +19,7 @@
->>  #endif
->>=20=20
->>  #define GCOV_COUNTERS 10
->> +#define GCOV_UNIT_SIZE 1
->>=20=20
->>  #include "gcc_4_7.c"
->>=20=20
->
-> ... touching these two files could be avoided altogether.
->
-> Henry - afaict this was submitted after the feature submission deadline,
-> so you may want to consider giving it an exception.
->
-> Jan
+> As a test, can you try to apply the attached patch to Xen as a tenative f=
+ix?  Or
+> you could change drivers/firmware/psci/psci.c:__psci_cpu_suspend to call
+> WFI instead of the PSCI operation (making sure to go to the entry_point
+> instead of returning).
 
+Tried the patch and substituting a WFI for a PSCI op, but Xen still watchdo=
+gs on the VMs in both cases.  I noticed the other Linux generic arm 'cpu-id=
+le' driver which used to do issue a WFI/cpu_do_idle isn't useable anymore e=
+ither.  I'm not sure if Xen may have used to rely on this generic driver to=
+ get the WFI.
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+CONFIDENTIALITY NOTICE: This e-mail, including any attachments, may contain=
+ information that is confidential and privileged. Any unauthorized disclosu=
+re, reproduction or use of this e-mail is prohibited. If you are not the in=
+tended recipient, please notify the sender by reply e-mail or telephone and=
+ permanently delete this e-mail and any reproductions immediately.
 
