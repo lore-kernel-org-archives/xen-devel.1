@@ -4,36 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B04EEB58C
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Sep 2023 04:10:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.598965.934182 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB5BEE7FF4
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Sep 2023 04:19:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.598988.934191 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfYFa-0003R4-2Y; Mon, 11 Sep 2023 04:10:14 +0000
+	id 1qfYNt-0004w4-0P; Mon, 11 Sep 2023 04:18:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 598965.934182; Mon, 11 Sep 2023 04:10:14 +0000
+Received: by outflank-mailman (output) from mailman id 598988.934191; Mon, 11 Sep 2023 04:18:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfYFZ-0003Qs-Vt; Mon, 11 Sep 2023 04:10:13 +0000
-Received: by outflank-mailman (input) for mailman id 598965;
- Mon, 11 Sep 2023 04:10:12 +0000
+	id 1qfYNs-0004vx-U6; Mon, 11 Sep 2023 04:18:48 +0000
+Received: by outflank-mailman (input) for mailman id 598988;
+ Mon, 11 Sep 2023 04:18:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ExPs=E3=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qfYBH-0005nR-EU
- for xen-devel@lists.xenproject.org; Mon, 11 Sep 2023 04:05:47 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 7c0a0fbe-5058-11ee-8784-cb3800f73035;
- Mon, 11 Sep 2023 06:05:46 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1B09ED75;
- Sun, 10 Sep 2023 21:06:23 -0700 (PDT)
-Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
- [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id F20B53F67D;
- Sun, 10 Sep 2023 21:05:42 -0700 (PDT)
+ id 1qfYNr-0004vr-KL
+ for xen-devel@lists.xenproject.org; Mon, 11 Sep 2023 04:18:47 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on2042.outbound.protection.outlook.com [40.107.7.42])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4cb8d38f-505a-11ee-8784-cb3800f73035;
+ Mon, 11 Sep 2023 06:18:46 +0200 (CEST)
+Received: from DB3PR06CA0024.eurprd06.prod.outlook.com (2603:10a6:8:1::37) by
+ AS2PR08MB9428.eurprd08.prod.outlook.com (2603:10a6:20b:5e8::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6745.33; Mon, 11 Sep 2023 04:18:16 +0000
+Received: from DBAEUR03FT050.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:8:1:cafe::e5) by DB3PR06CA0024.outlook.office365.com
+ (2603:10a6:8:1::37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30 via Frontend
+ Transport; Mon, 11 Sep 2023 04:18:16 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DBAEUR03FT050.mail.protection.outlook.com (100.127.142.250) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6792.16 via Frontend Transport; Mon, 11 Sep 2023 04:18:16 +0000
+Received: ("Tessian outbound b5a0f4347031:v175");
+ Mon, 11 Sep 2023 04:18:15 +0000
+Received: from 08ace606f104.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 92106C58-F443-4D9B-A41B-B1A2B9005D10.1; 
+ Mon, 11 Sep 2023 04:15:00 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 08ace606f104.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Mon, 11 Sep 2023 04:15:00 +0000
+Received: from DB8PR04CA0001.eurprd04.prod.outlook.com (2603:10a6:10:110::11)
+ by DU0PR08MB7542.eurprd08.prod.outlook.com (2603:10a6:10:321::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30; Mon, 11 Sep
+ 2023 04:14:58 +0000
+Received: from DBAEUR03FT043.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:110:cafe::71) by DB8PR04CA0001.outlook.office365.com
+ (2603:10a6:10:110::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.35 via Frontend
+ Transport; Mon, 11 Sep 2023 04:14:58 +0000
+Received: from nebula.arm.com (40.67.248.234) by
+ DBAEUR03FT043.mail.protection.outlook.com (100.127.143.24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6792.16 via Frontend Transport; Mon, 11 Sep 2023 04:14:58 +0000
+Received: from AZ-NEU-EX02.Emea.Arm.com (10.251.26.5) by AZ-NEU-EX04.Arm.com
+ (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Sep
+ 2023 04:14:57 +0000
+Received: from AZ-NEU-EX03.Arm.com (10.251.24.31) by AZ-NEU-EX02.Emea.Arm.com
+ (10.251.26.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Sep
+ 2023 04:14:57 +0000
+Received: from [10.169.172.145] (10.169.172.145) by mail.arm.com
+ (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
+ Transport; Mon, 11 Sep 2023 04:14:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,161 +90,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7c0a0fbe-5058-11ee-8784-cb3800f73035
-From: Penny Zheng <Penny.Zheng@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: michal.orzel@amd.com,
-	wei.chen@arm.com,
-	Penny Zheng <Penny.Zheng@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v4 08/10] xen/docs: refine docs about static shared memory
-Date: Mon, 11 Sep 2023 12:04:40 +0800
-Message-Id: <20230911040442.2541398-9-Penny.Zheng@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230911040442.2541398-1-Penny.Zheng@arm.com>
-References: <20230911040442.2541398-1-Penny.Zheng@arm.com>
+X-Inumbo-ID: 4cb8d38f-505a-11ee-8784-cb3800f73035
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D1ZJui2Jmux++Nj0HJAVH9Qx/6TLBaErSeyJMq3z8DU=;
+ b=38erBBqIiH5CrNABxqHl2BFNg3zCLnJm757DhpLGBSzm+VUn5NZK2WTLebMzzkOXsPt2AjtXQr+T9zGQYYoFtwqB5pg5r3DAjOPy2665PmSvu7uak6uSxcHYMCzez6ZAkD03UTsvOkAZb38Z0AArNy6T36wrxoj0MZOcxnN5AJo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: b5a9e206c34cf8b7
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=k+DLEgDqn950mLUF4Kg5NRzRt8/4ArDrX1a11AIsdfqeT7YSGJ8d9TFd/LUZGGL08uYvgy+FDeuhkxN8QjD/fSHvz2hH51CqjkTq6doooQToDCiFijTF40RpSeQSDRNJdYOtnAnlRYkov+GkmEhA6VGPzacke7QiWfY4UzNAxoNFM0ExDmFkYCvjLbHCQvqDTEb0MaI7QtpGvM6nx8p261Tz3jyTwkGbVdBS4KoOYZ3S0KS7u8VNCSt8938nITzvDQQrzXpLBqA2NlbHZLvqfpZAzJdFdCSgDZnU0WhfoGuSpPieeB0aRjElxAoRLl2Aeha7vQUBjlcf3N2ipQKbQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=D1ZJui2Jmux++Nj0HJAVH9Qx/6TLBaErSeyJMq3z8DU=;
+ b=a5WFoAy/s26RXTIe7pXMY7B2XRjGwbbQ8a3hZ949+x/TtyBDyWXVGMHep65o71hQxfM8qqQ7cbJiUGJXZXdx0xvD6yPeiOQ6YcOEG/ep19Vr07xT7sKId2TC1AlkPVFUgvf3XR6a+8Y4IiRNrng7m+vNo5ZPNFrBwSvUDC8ODJsJivocuoCeIFgFve290hmJWuI8O+x1SS0IKTRWIvHGIqX+tptMc6bIGNbJY1E+wyMSY6SOXxok/fi5UeiSHxYj9XoHJgOoCpKYuRy5ZZlLXmFmEjz6ZIKsq+h5BL1bLKrIkKkaXsBDJJd4vxCT5N3NntCkXOi9/s51NPlApgtd/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 40.67.248.234) smtp.rcpttodomain=amd.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=none (message
+ not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D1ZJui2Jmux++Nj0HJAVH9Qx/6TLBaErSeyJMq3z8DU=;
+ b=38erBBqIiH5CrNABxqHl2BFNg3zCLnJm757DhpLGBSzm+VUn5NZK2WTLebMzzkOXsPt2AjtXQr+T9zGQYYoFtwqB5pg5r3DAjOPy2665PmSvu7uak6uSxcHYMCzez6ZAkD03UTsvOkAZb38Z0AArNy6T36wrxoj0MZOcxnN5AJo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
+ smtp.mailfrom=arm.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 40.67.248.234 as permitted sender) receiver=protection.outlook.com;
+ client-ip=40.67.248.234; helo=nebula.arm.com; pr=C
+Message-ID: <561ca37f-0d6e-7dbf-9f62-75020d3865a4@arm.com>
+Date: Mon, 11 Sep 2023 12:14:52 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.14.0
+Subject: Re: [PATCH v3 0/8] Follow-up static shared memory PART I
+Content-Language: en-US
+To: Michal Orzel <michal.orzel@amd.com>, <xen-devel@lists.xenproject.org>
+CC: <wei.chen@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, "Julien
+ Grall" <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20230821040046.2965665-1-Penny.Zheng@arm.com>
+ <6fcbab6a-7126-21ee-e1bc-aa7ba2b07fc0@amd.com>
+ <1fae4dde-f1b5-fa13-d021-3bdde7184fbe@arm.com>
+ <c26aeffa-9d41-ad7d-b006-bd4ea8ab7f40@amd.com>
+From: Penny Zheng <penny.zheng@arm.com>
+In-Reply-To: <c26aeffa-9d41-ad7d-b006-bd4ea8ab7f40@amd.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 1
+X-MS-TrafficTypeDiagnostic:
+	DBAEUR03FT043:EE_|DU0PR08MB7542:EE_|DBAEUR03FT050:EE_|AS2PR08MB9428:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9b57825-9769-4764-635b-08dbb27e1f17
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ pfZN4+5g1/qsxReIOgKM1Z9rSEnccv0rIW7pcGXkbMCPgM9ZCu3Dh0cKKvtdaPkcnlDbLzR/OXAkRdqSi19YtZckpjLKxJ6jOezWYFwVc99b8CUJX7zq5OE09eWXx10NRFLD/CEfTU9AJ92pVDAe36KG2Mxt4QCmbwwTOgvwSUhcbYVSBYtjppFUwzlF8iFfPUWaijFWHnw73iDdG8sebUQ9ZaZliWAbm1PBy8ZJ3bIt3gnnXaFDOUvrDCejU4RZnkC3oW7GSWq2vg3fkUw+QoI1b7UstBl7Y9j8UEldIcx2WzeypuAQcKmGmdAwjmEasG6nc+TYNW2J5Xychq6XRf2WsMKQgz15uq7AI06Kw1bK91mzEbhQd+xo0rFpbBu9gisoCBO5BplW++IUikweg0DSizZvG1N8OJCX8J7e+0qJch2ZsKm4nCbI/FHAUWF7JF/wIGrvanJQDE2k6fy3k+x0ixEGTz8HgYQjtPFHXf6C5kOwj+xW4pGfBt2zBsQ97dZ9KgrrHubOUeCPEainHG2qty7rey6EAHusky2RMoYJi7GcwooPUHtEE5uJk0uzER4Ugf0JriQZ/1N1oAtk70+GSz/esuumxjEB74Mpb7mj6VEi5ETlAmsDqEDTdym0oIn+X4gGjQDEPHwXTr5zQFRW140FE+M0rhdco9qemgQlCM3TYnUZSku9chF+aBAbYVYfD5hdOt75mTypQ+/CMiFnfMTsec7jrMAt+cAa4JUZXg+n641957nS/q7sOO4z5U8+anGVJy3JN9TmYpiD7K/0GOVd4bMk8hBim/DwuuSb/YWsXYLtYb7SwHMfIGi6ri+gGH+Bwgu8/5N5qLyDcSwdI85XM1Wxkcg0JAG88Iw=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(346002)(396003)(39860400002)(376002)(1800799009)(186009)(82310400011)(451199024)(36840700001)(40470700004)(46966006)(53546011)(83380400001)(478600001)(966005)(26005)(2616005)(16576012)(70206006)(4326008)(336012)(41300700001)(2906002)(426003)(54906003)(44832011)(316002)(110136005)(5660300002)(8936002)(8676002)(70586007)(31696002)(86362001)(40460700003)(82740400003)(47076005)(40480700001)(36860700001)(36756003)(81166007)(31686004)(356005)(3940600001)(36900700001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB7542
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DBAEUR03FT050.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	fd33bb66-b624-4a33-7a59-08dbb27da959
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	xyVqhtryX2kgZLI6drXCkPbOQ6sHqibBf/8iI3M5kqYuRwuhrOYp++H2+NSclpWRo/pj/IA6wZGZOtuAjCikuMwykQy7E4fwxWkqJaE2MTILhX9LXtQ02s9yn5VbL/Qxduh3ZNHd0uyn6OwrKwOI8zZ3jgcrqC6QAGZOzRsrfkCGKtvfwB1CN3vnNcCJW5VW8dsdgKkXewZ9NB2MX45l3nbSEOBn2//dhbsJ6/8ygGTF6J9TmGfVPxnG/IpQGYfFA50lW0UpJYXXZiiFrfe6mWVJy7LWW6EHKKkEYDIOPFZn3PyPhXnGh020cN/EsQQLX+Es6+0Qbg9PIv6VtE+AmIdZ5jSGa6zxujk1yRyr/utaE75hA8IypfxKcBheGK2m5n5QxEuclhaedt60pS+Lt48OmXkjfAYfvkuDv76D4oUdf/y9+Ps2s9qxr+fM8dQRfghTFFWyEreFyF+scNw6WBp5/OK8FyS5HVuzssam3vfYPgoDR6UvNn0lf7mafVp5qzA5uPnh2T+AcgvddQI0CSIH36MMqvtSpqf/v5AcfVJwxSHwFJTz7sFgxMGVRud0T3uSVbsooVbyFI8/jaaeJEiVcSO9LWztjtYnHZOIbEWICwjOcqqsg6BvCBlzXabhEGFvqBKLoE6UiC4nBn5lUFxEtprFUVrTbSXAxqPUTf5fP443E9Eqjorl/YeNEegIs2UdEWai8fyylh5iIQVehZiBKfVCWJheUYc9KMKPxjFd2WpMndRA27TKLeH6i9Cdw+d8yFmuDTf0JsLqDNm2Ld/ZiHbMs18lA4ysfhZiP8GbrRqlAeLlh5sMrZdwqPOatRxPjhtjABQbi0sfapo/aA==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(136003)(396003)(346002)(376002)(186009)(451199024)(1800799009)(82310400011)(40470700004)(46966006)(36840700001)(8936002)(70206006)(47076005)(966005)(478600001)(316002)(8676002)(83380400001)(40480700001)(41300700001)(4326008)(26005)(54906003)(70586007)(53546011)(16576012)(107886003)(336012)(110136005)(86362001)(40460700003)(44832011)(82740400003)(426003)(5660300002)(2906002)(81166007)(2616005)(31696002)(36860700001)(36756003)(31686004)(3940600001)(43740500002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2023 04:18:16.0307
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9b57825-9769-4764-635b-08dbb27e1f17
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DBAEUR03FT050.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9428
 
-This commit amends docs(docs/misc/arm/device-tree/booting.txt) to include the
-new scenario where host address is not provided in "xen,shared-mem" property,
-and we also add a new example to explain in detail.
+Hi Michal
 
-We also fix some buggy info in the docs, like SHMID is "my-shared-mem-1",
-not "0x1".
+Sorry for the delayed response, caught up in internal release lately. :\
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
----
-v1 -> v2:
-- no new changes
----
-v2 -> v3
-- rebase and no change
----
-v3 -> v4:
-rebase and no change
----
- docs/misc/arm/device-tree/booting.txt | 52 ++++++++++++++++++++-------
- 1 file changed, 39 insertions(+), 13 deletions(-)
+On 2023/8/22 16:57, Michal Orzel wrote:
+> Hi Penny,
+> 
+> On 22/08/2023 07:32, Penny Zheng wrote:
+>>
+>>
+>> Hi, michal
+>>
+>> On 2023/8/21 18:49, Michal Orzel wrote:
+>>> Hi Penny,
+>>>
+>>> On 21/08/2023 06:00, Penny Zheng wrote:
+>>>>
+>>>>
+>>>> There are some unsolving issues on current 4.17 static shared memory
+>>>> feature[1], including:
+>>>> - In order to avoid keeping growing 'membank', having the shared memory
+>>>> info in separate structures is preferred.
+>>>> - Missing implementation on having the host address optional in
+>>>> "xen,shared-mem" property
+>>>> - Removing static shared memory from extended regions
+>>>> - Missing reference release on foreign superpage
+>>>> - Missing "xen,offset" feature, which is introduced in Linux DOC[2]
+>>>>
+>>>> All above objects have been divided into two parts to complete. And this
+>>>> patch serie is PART I.
+>>>>
+>>>> [1] https://lore.kernel.org/all/20220908135513.1800511-1-Penny.Zheng@arm.com/
+>>>> [2] https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/xen%2Cshared-memory.txt
+>>>
+>>> It looks like there is a problem with the changes introduced in this series.
+>>> The gitlab static shared memory tests failed:
+>>> https://gitlab.com/xen-project/patchew/xen/-/pipelines/973985190
+>>> No Xen logs meaning the failure occurred before serial console initialization.
+>>>
+>>> Now, I would like to share some observations after playing around with the current static shared mem code today.
+>>> 1) Static shared memory region is advertised to a domain by creating a child node under reserved-memory.
+>>> /reserved-memory is nothing but a way to carve out a region from the normal memory specified in /memory node.
+>>> For me, such regions should be described in domain's /memory node as well. This is not the case at the moment
+>>> for static shm unlike to other sub-nodes of /reserved-memory (present in host dtb) for which Xen creates separate
+>>> /memory nodes.
+>>>
+>>
+>> Hmm, correct me if I'm wrong,
+>> If we describe twice in domain's /memory node too, it will be treated as
+>> normal memory, then any application could use it. The reason why we put
+>> static shm under /reserved-memory is that we only hope special driver,
+>> like static shm linux driver, could access it.
+>>
+>> If you track down in make_memory_node(), only memory range that is
+>> reserved for device (or firmware) will be described twice as normal
+>> memory in Dom0. Memory like static shm, will get passed.
+> 
+> Reserved memory is a region of RAM (not MMIO) carved out for a special purpose which can be used by a driver for e.g. shared dma pool.
+> Therefore, such region shall be described both under /memory (used to present the total RAM and reserved memory is in RAM)
+> and under /reserved-memory. The OS parses /memory and then parses /reserved-memory to exclude the regions from normal usage
+> (there is also no-map property to tell OS not to create virtual mapping). So you do not need to worry about OS making use of something we marked as reserved.
+> This is exactly what Xen does if there are regions described as reserved in the host dtb:
+> 1. Xen parses host dtb, adds reserved regions into bootinfo.reserved_mem so that it will not be used e.g. for allocator
+> 2. While copying nodes from host dtb, Xen copies reserved memory nodes to dom0 dtb and only maps the regions in p2m without permitting iomem access
+> 3. Xen creates another /memory node to contain the reserved memory ranges
+> 
+> I guess static shm is not exception to this flow. It is part of RAM suited for memory sharing.
+> 
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index bbd955e9c2..ac4bad6fe5 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -590,7 +590,7 @@ communication.
-     An array takes a physical address, which is the base address of the
-     shared memory region in host physical address space, a size, and a guest
-     physical address, as the target address of the mapping.
--    e.g. xen,shared-mem = < [host physical address] [guest address] [size] >
-+    e.g. xen,shared-mem = < [host physical address] [guest address] [size] >;
- 
-     It shall also meet the following criteria:
-     1) If the SHM ID matches with an existing region, the address range of the
-@@ -601,8 +601,8 @@ communication.
-     The number of cells for the host address (and size) is the same as the
-     guest pseudo-physical address and they are inherited from the parent node.
- 
--    Host physical address is optional, when missing Xen decides the location
--    (currently unimplemented).
-+    Host physical address is optional, when missing Xen decides the location.
-+    e.g. xen,shared-mem = < [guest address] [size] >;
- 
- - role (Optional)
- 
-@@ -629,7 +629,7 @@ chosen {
-         role = "owner";
-         xen,shm-id = "my-shared-mem-0";
-         xen,shared-mem = <0x10000000 0x10000000 0x10000000>;
--    }
-+    };
- 
-     domU1 {
-         compatible = "xen,domain";
-@@ -640,25 +640,36 @@ chosen {
-         vpl011;
- 
-         /*
--         * shared memory region identified as 0x0(xen,shm-id = <0x0>)
--         * is shared between Dom0 and DomU1.
-+         * shared memory region "my-shared-mem-0" is shared
-+         * between Dom0 and DomU1.
-          */
-         domU1-shared-mem@10000000 {
-             compatible = "xen,domain-shared-memory-v1";
-             role = "borrower";
-             xen,shm-id = "my-shared-mem-0";
-             xen,shared-mem = <0x10000000 0x50000000 0x10000000>;
--        }
-+        };
- 
-         /*
--         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
--         * is shared between DomU1 and DomU2.
-+         * shared memory region "my-shared-mem-1" is shared between
-+         * DomU1 and DomU2.
-          */
-         domU1-shared-mem@50000000 {
-             compatible = "xen,domain-shared-memory-v1";
-             xen,shm-id = "my-shared-mem-1";
-             xen,shared-mem = <0x50000000 0x60000000 0x20000000>;
--        }
-+        };
-+
-+        /*
-+         * shared memory region "my-shared-mem-2" is shared between
-+         * DomU1 and DomU2.
-+         */
-+        domU1-shared-mem-2 {
-+            compatible = "xen,domain-shared-memory-v1";
-+            xen,shm-id = "my-shared-mem-2";
-+            role = "owner";
-+            xen,shared-mem = <0x80000000 0x20000000>;
-+        };
- 
-         ......
- 
-@@ -672,14 +683,21 @@ chosen {
-         cpus = <1>;
- 
-         /*
--         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
--         * is shared between domU1 and domU2.
-+         * shared memory region "my-shared-mem-1" is shared between
-+         * domU1 and domU2.
-          */
-         domU2-shared-mem@50000000 {
-             compatible = "xen,domain-shared-memory-v1";
-             xen,shm-id = "my-shared-mem-1";
-             xen,shared-mem = <0x50000000 0x70000000 0x20000000>;
--        }
-+        };
-+
-+        domU2-shared-mem-2 {
-+            compatible = "xen,domain-shared-memory-v1";
-+            xen,shm-id = "my-shared-mem-2";
-+            role = "borrower";
-+            xen,shared-mem = <0x90000000 0x20000000>;
-+        };
- 
-         ......
-     };
-@@ -699,3 +717,11 @@ shared between DomU1 and DomU2. It will get mapped at 0x60000000 in DomU1 guest
- physical address space, and at 0x70000000 in DomU2 guest physical address space.
- DomU1 and DomU2 are both the borrower domain, the owner domain is the default
- owner domain DOMID_IO.
-+
-+For the static shared memory region "my-shared-mem-2", since host physical
-+address is not provided by user, Xen will automatically allocate 512MB
-+from heap as static shared memory to be shared between DomU1 and DomU2.
-+The automatically allocated static shared memory will get mapped at
-+0x80000000 in DomU1 guest physical address space, and at 0x90000000 in DomU2
-+guest physical address space. DomU1 is explicitly defined as the owner domain,
-+and DomU2 is the borrower domain.
--- 
-2.25.1
+Understood!!! thanks for the detailed explanation.
+I've created a new commit "xen/arm: fix duplicate /reserved-memory node 
+in Dom0" to fix this problem in v4[1], plz feel free to review.
 
+>>
+>>> 2) Domain dtb parsing issue with two /reserved-memory nodes present.
+>>> In case there is a /reserved-memory node already present in the host dtb, Xen would create yet another /reserved-memory
+>>> node for the static shm (to be observed in case of dom0). This is a bug as there can be only one /reserved-memory node.
+>>> This leads to an error when dumping with dtc and leads to a shm node not being visible to a domain (guest OS relies on
+>>> a presence of a single /reserved-memory node). The issue is because in make_resv_memory_node(), you are not checking if
+>>> such node already exists.
+>>
+>> Yes, you're true.
+>> In Dom0, we could see two /reserved-memory nodes. I think, if there is a
+>> /reserved-memory node already present in the host dtb, we shall reserve
+>> it in kinfo for make_resv_memory_node().
+> This way you will only take the reference of a region but what about all the properties, node names, etc. that you need to copy?
+> This is why Xen first copies the reserved memory nodes from host dtb and then adds ranges to /memory.
+> In our shm case, we would need to insert the shm node into existing reserved memory node. This is a bit tricky as you can no longer
+> make use of fdt_{begin,end}_node and instead use the helpers operating on offsets.
+> 
+
+I've also created a new commit "xen/arm: create another /memory node for 
+static shm" to fix this problem in v4[1] too, plz feel free to review.
+
+[1] 
+https://lore.kernel.org/xen-devel/20230911040442.2541398-1-Penny.Zheng@arm.com/
+
+> ~Michal
+> 
 
