@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3D35CA0EF5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D82CA0EF2
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 15:40:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.600550.936280 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.600546.936240 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg5Us-0007tD-5C; Tue, 12 Sep 2023 15:40:14 +0000
+	id 1qg5Ue-0005yT-1V; Tue, 12 Sep 2023 15:40:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 600550.936280; Tue, 12 Sep 2023 15:40:14 +0000
+Received: by outflank-mailman (output) from mailman id 600546.936240; Tue, 12 Sep 2023 15:40:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg5Us-0007sz-1t; Tue, 12 Sep 2023 15:40:14 +0000
-Received: by outflank-mailman (input) for mailman id 600550;
- Tue, 12 Sep 2023 15:40:12 +0000
+	id 1qg5Ud-0005yM-Ug; Tue, 12 Sep 2023 15:39:59 +0000
+Received: by outflank-mailman (input) for mailman id 600546;
+ Tue, 12 Sep 2023 15:39:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=V3Pz=E4=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qg5Uq-0005yG-Di
- for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 15:40:12 +0000
+ id 1qg5Uc-0005yG-7n
+ for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 15:39:58 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a85f01ac-5182-11ee-9b0d-b553b5be7939;
- Tue, 12 Sep 2023 17:40:10 +0200 (CEST)
+ id 9f50888a-5182-11ee-9b0d-b553b5be7939;
+ Tue, 12 Sep 2023 17:39:55 +0200 (CEST)
 Received: from beta.station (net-93-66-137-131.cust.vodafonedsl.it
  [93.66.137.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 4A4244EE074F;
- Tue, 12 Sep 2023 17:40:10 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id E3F5D4EE0749;
+ Tue, 12 Sep 2023 17:39:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,96 +42,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a85f01ac-5182-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9f50888a-5182-11ee-9b0d-b553b5be7939
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Gianluca Luparini <gianluca.luparini@bugseng.com>
-Subject: [XEN PATCH v6 4/7] xen/lib: address violations of MISRA C:2012 Rule 7.2
-Date: Tue, 12 Sep 2023 17:39:01 +0200
-Message-Id: <f92e8ae0d980779bd7dd4b21b70ad779f2e2488b.1694532795.git.simone.ballarin@bugseng.com>
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v6 0/7] xen/x86: address violations of MISRA C:2012 Rule 7.2
+Date: Tue, 12 Sep 2023 17:38:57 +0200
+Message-Id: <cover.1694532795.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1694532795.git.simone.ballarin@bugseng.com>
-References: <cover.1694532795.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The xen sources contains violations of MISRA C:2012 Rule 7.2 whose
-headline states:
-"A 'u' or 'U' suffix shall be applied to all integer constants
-that are represented in an unsigned type".
+The xen sources contains violations of MISRA C:2012 Rule 7.2 whose headline
+states:
+"A 'u' or 'U' suffix shall be applied to all integer constants that are
+represented in an unsigned type".
 
-Add the 'U' suffix to integers literals with unsigned type.
+These violations are caused by the missing "u" or "U" suffix in unsigned
+integer constants, such as:
 
-For the sake of uniformity, the following change is made:
-- add the 'U' suffix to switch cases in 'cpuid.c'
+xen/arch/x86/hvm/hypercall.c:132.17-132.26
+if ( (eax & 0x80000000) && is_viridian_domain(currd) )
 
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
-Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
+If a rule is not met, changes are needed in order to achieve compliance.
+The patches in this series achieve compliance for MISRA C:2012 Rule 7.2 by
+adding the 'U' suffix to integers literals with unsigned type and also to
+other
+literals used in the same contexts or near violations, when their positive
+nature is immediately clear. The latter changes are done for the sake of
+uniformity.
 
----
-Changes in v6:
-- new patch obtained by splitting LIB related changes from
-"xen/x86: address violations of MISRA C:2012 Rule 7.2 (v5)"
----
- xen/lib/x86/cpuid.c  | 8 ++++----
- xen/lib/x86/policy.c | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
+This series splits "xen/x86: address violations of MISRA C:2012 Rule 7.2 (v5)"
+in several patches, and fixes some issues in v5.
 
-diff --git a/xen/lib/x86/cpuid.c b/xen/lib/x86/cpuid.c
-index 2006cbaa1c..eb7698dc73 100644
---- a/xen/lib/x86/cpuid.c
-+++ b/xen/lib/x86/cpuid.c
-@@ -217,10 +217,10 @@ void x86_cpu_policy_fill_native(struct cpu_policy *p)
-     }
- 
-     /* Extended leaves. */
--    cpuid_leaf(0x80000000, &p->extd.raw[0]);
-+    cpuid_leaf(0x80000000U, &p->extd.raw[0]);
-     for ( i = 1; i <= MIN(p->extd.max_leaf & 0xffffU,
-                           ARRAY_SIZE(p->extd.raw) - 1); ++i )
--        cpuid_leaf(0x80000000 + i, &p->extd.raw[i]);
-+        cpuid_leaf(0x80000000U + i, &p->extd.raw[i]);
- 
-     /* Don't report leaves from possible lower level hypervisor, for now. */
-     p->hv_limit = 0;
-@@ -421,7 +421,7 @@ int x86_cpuid_copy_to_buffer(const struct cpu_policy *p,
-     /* Extended leaves. */
-     for ( leaf = 0; leaf <= MIN(p->extd.max_leaf & 0xffffUL,
-                                 ARRAY_SIZE(p->extd.raw) - 1); ++leaf )
--        COPY_LEAF(0x80000000 | leaf, XEN_CPUID_NO_SUBLEAF, &p->extd.raw[leaf]);
-+        COPY_LEAF(0x80000000U | leaf, XEN_CPUID_NO_SUBLEAF, &p->extd.raw[leaf]);
- 
- #undef COPY_LEAF
- 
-@@ -521,7 +521,7 @@ int x86_cpuid_copy_from_buffer(struct cpu_policy *p,
-             p->hv2_limit = l.a;
-             break;
- 
--        case 0x80000000 ... 0x80000000 + ARRAY_SIZE(p->extd.raw) - 1:
-+        case 0x80000000U ... 0x80000000U + ARRAY_SIZE(p->extd.raw) - 1:
-             if ( data.subleaf != XEN_CPUID_NO_SUBLEAF )
-                 goto out_of_range;
- 
-diff --git a/xen/lib/x86/policy.c b/xen/lib/x86/policy.c
-index a9c60000af..f033d22785 100644
---- a/xen/lib/x86/policy.c
-+++ b/xen/lib/x86/policy.c
-@@ -22,7 +22,7 @@ int x86_cpu_policies_are_compatible(const struct cpu_policy *host,
-         FAIL_CPUID(7, 0);
- 
-     if ( guest->extd.max_leaf > host->extd.max_leaf )
--        FAIL_CPUID(0x80000000, NA);
-+        FAIL_CPUID(0x80000000U, NA);
- 
-     /* TODO: Audit more CPUID data. */
- 
+Gianluca Luparini (1):
+  x86/vmx: address violations of MISRA C:2012 Rule 7.2
+
+Simone Ballarin (6):
+  x86/hvm: address violations of MISRA C:2012 Rule 7.2
+  x86/asm: address violations of MISRA C:2012 Rule 7.2
+  xen/lib: address violations of MISRA C:2012 Rule 7.2
+  xen/x86: address violations of MISRA C:2012 Rule 7.2
+  xen/mcheck: address violations of MISRA C:2012 Rule 7.2
+  x86/efi: address violations of MISRA C:2012 Rule 7.2
+
+ xen/arch/x86/apic.c                     |   2 +-
+ xen/arch/x86/cpu-policy.c               |  18 +--
+ xen/arch/x86/cpu/mcheck/mce-apei.c      |   4 +-
+ xen/arch/x86/cpu/vpmu_intel.c           |   2 +-
+ xen/arch/x86/cpuid.c                    |   8 +-
+ xen/arch/x86/efi/efi-boot.h             |   6 +-
+ xen/arch/x86/extable.c                  |   2 +-
+ xen/arch/x86/hvm/hypercall.c            |   2 +-
+ xen/arch/x86/hvm/pmtimer.c              |   4 +-
+ xen/arch/x86/hvm/stdvga.c               |  32 ++---
+ xen/arch/x86/hvm/vlapic.c               |   6 +-
+ xen/arch/x86/hvm/vmx/vmcs.c             |   6 +-
+ xen/arch/x86/hvm/vmx/vvmx.c             |   8 +-
+ xen/arch/x86/include/asm/apicdef.h      |   2 +-
+ xen/arch/x86/include/asm/config.h       |   2 +-
+ xen/arch/x86/include/asm/hpet.h         |   2 +-
+ xen/arch/x86/include/asm/hvm/trace.h    |   4 +-
+ xen/arch/x86/include/asm/hvm/vioapic.h  |   2 +-
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  84 +++++------
+ xen/arch/x86/include/asm/hvm/vmx/vmx.h  |  16 +--
+ xen/arch/x86/include/asm/msi.h          |   2 +-
+ xen/arch/x86/include/asm/msr-index.h    | 182 ++++++++++++------------
+ xen/arch/x86/include/asm/pci.h          |   8 +-
+ xen/arch/x86/include/asm/x86-defns.h    |  22 +--
+ xen/arch/x86/percpu.c                   |   2 +-
+ xen/arch/x86/psr.c                      |   2 +-
+ xen/arch/x86/spec_ctrl.c                |  12 +-
+ xen/lib/x86/cpuid.c                     |   8 +-
+ xen/lib/x86/policy.c                    |   2 +-
+ 29 files changed, 226 insertions(+), 226 deletions(-)
+
 -- 
 2.34.1
 
