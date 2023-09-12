@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F9EECA0EC3
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 06:22:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.599926.935534 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A268CA0EC3
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 06:23:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.599937.935554 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfwmM-0002AN-4d; Tue, 12 Sep 2023 06:21:42 +0000
+	id 1qfwo9-0003Gx-MQ; Tue, 12 Sep 2023 06:23:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 599926.935534; Tue, 12 Sep 2023 06:21:42 +0000
+Received: by outflank-mailman (output) from mailman id 599937.935554; Tue, 12 Sep 2023 06:23:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qfwmM-0002AG-12; Tue, 12 Sep 2023 06:21:42 +0000
-Received: by outflank-mailman (input) for mailman id 599926;
- Tue, 12 Sep 2023 06:21:41 +0000
+	id 1qfwo9-0003Gq-JW; Tue, 12 Sep 2023 06:23:33 +0000
+Received: by outflank-mailman (input) for mailman id 599937;
+ Tue, 12 Sep 2023 06:23:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lhkB=E4=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
- id 1qfwmL-0002AA-3D
- for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 06:21:41 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
+ id 1qfwo7-0003Gg-Hp
+ for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 06:23:31 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a1369e76-5134-11ee-9b0d-b553b5be7939;
- Tue, 12 Sep 2023 08:21:38 +0200 (CEST)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-31c65820134so4830233f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 11 Sep 2023 23:21:38 -0700 (PDT)
+ id e3b47fe3-5134-11ee-9b0d-b553b5be7939;
+ Tue, 12 Sep 2023 08:23:29 +0200 (CEST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-401d6f6b2e0so39381815e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Sep 2023 23:23:29 -0700 (PDT)
 Received: from [10.5.2.12] ([15.248.2.224]) by smtp.gmail.com with ESMTPSA id
- e14-20020adfa44e000000b0031c5d74ecd8sm5173965wra.84.2023.09.11.23.21.36
+ bs11-20020a056000070b00b0031fbbe347ebsm602603wrb.22.2023.09.11.23.23.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Sep 2023 23:21:36 -0700 (PDT)
+ Mon, 11 Sep 2023 23:23:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,88 +46,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1369e76-5134-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: e3b47fe3-5134-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694499697; x=1695104497; darn=lists.xenproject.org;
+        d=gmail.com; s=20221208; t=1694499809; x=1695104609; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:organization:references:cc:to
          :content-language:subject:reply-to:user-agent:mime-version:date
          :message-id:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Pmc1im2jRUUJY70q+gaCtMdNgClASrd4LE2h9eP6ZpI=;
-        b=szdlKhLK78sufsAMbJlsTm6QAOeopr+IHnyyTXHFN1Gog5Jt5FEGPiiLqd2RscuXrB
-         ITGmWJ1segE2GQMpx9qHtoNbXaFsPegv2x1jqtWYufGHhFRgk/b+bU7NMronoDGBb7Dd
-         nK0tctRtZ6tj7uB5MHDTYGZP9cgR6WWiz6QhgAk4b6TcrqvIZGxbyNBKLGP7VL3M9v9q
-         iGBEe0aNZYgGYDQIYcAwfhVf+HQi9AwUTrZMtRovT74MPWMyWC87JlqFBSTV5LY2WJcD
-         c2+t1kSnyqJpybxL84ApEvY/wDENiy7J6N0RnlkKDv3ab6wdCV/lCcLxS6li0AMOMU9r
-         C9dA==
+        bh=VrBLkgo2WY6KpVXj/Wo7T0oMCvgXinsixbl861VxIIk=;
+        b=qOBJsLpSTovVdl2VMbKf0knNGZuZFGTzn/8HbtXDhFBT9voi+FvCDSWVMbTJXSgoXE
+         U2XTdEzfrt8MMNGOgjWwzN7sWpKpf5b/5mTL3dxdgoln5DW0rh7Kb5+ev91rdq5D4H1T
+         095MaTw/dkvV2VtSGzgtPr5DxFeykGVYHbDmdJ0WKySRmUrKmKVycY11egJDST9vP3lP
+         Arb+lqWlPCbUoWeP7jFINDk1n2pUFnI+zfPG175o/u2KmKzXbwfgtBA1t4yhEx5VeppN
+         r9nNXj4W3AKXNeqy2HKU2mqCnspbKmhMVoE/31XyH5DDavXwPw73FnfFrV4lat4mfUwH
+         QJGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694499697; x=1695104497;
+        d=1e100.net; s=20230601; t=1694499809; x=1695104609;
         h=content-transfer-encoding:in-reply-to:organization:references:cc:to
          :content-language:subject:reply-to:user-agent:mime-version:date
          :message-id:from:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Pmc1im2jRUUJY70q+gaCtMdNgClASrd4LE2h9eP6ZpI=;
-        b=Yc2MlviHXwu4Ep6KjTf0svmQueDRq8OHJWbrM5V3E4Fl+gUzq3E73dVdyzRGw7BFyS
-         Ba16Iq7ZQV+qi9LSvUxA6vkzMC+OZuLkfpHhc0pb6Q055NCnAIycdcyHlSh62+T+HH9P
-         Evam2QaGQkIEg0Y25zIPj2a8l+A42lx0xlrg8Jr9oNlhHS5H3LiRO6bBneumC7KjO1H+
-         v891ZJTeCuaudu4IN36X8ZLihINTvLYykmDCLzTEscIVJjn5DbFwGM8W+bJlXV4u7DlE
-         gV/+yVzxM+c7CoIQiwrd+gohz8CBqHMRJeNEPkoiILr4kyRUen7HjrGAeO+ZlE11VV98
-         1HZg==
-X-Gm-Message-State: AOJu0YwdhCcPMpmuVemkn270vJ0EQEAvEAL9DcxkxgMKI0b7x2INZxat
-	pWZUs28R4AbFfVJe6dV/Gqs=
-X-Google-Smtp-Source: AGHT+IGXC2G3F3EJNOB0gm9/RMy7O7032wa51U6ZuXNZU8RGJ7haiIqqUbaLjzGywTyetiQx7ccQMw==
-X-Received: by 2002:adf:e48c:0:b0:319:6e5b:c7d7 with SMTP id i12-20020adfe48c000000b003196e5bc7d7mr9791751wrm.30.1694499697219;
-        Mon, 11 Sep 2023 23:21:37 -0700 (PDT)
+        bh=VrBLkgo2WY6KpVXj/Wo7T0oMCvgXinsixbl861VxIIk=;
+        b=hPygH7FW5YCwGtv2aZpYBtFNx6F1piiJIRhRLSu9NfNrtgmwM+zQwGBfiR4HWb4bJI
+         GAgwofFK3GPVpuov08m/WQKzswwQ3PeJ0kaggO794yjcsKO5ENOn0lOPMEsk6vyR9vED
+         y1jVzG8q7m/V4D5JI6e+clpip/o79YQkBgCBOWaFIOYKRXEzHu/uq+b+oH7Aexybkq5R
+         cbpX0cCh6UIKeXFVaH2pc3OitOpgpQQ1Iy7yQk06aDswlBK5moXWZYKCnN0mdAExNWcI
+         wNParB6BRJSBtr50k4Tr9kdmnZZN6SGNZEXlHhakklY2oHksJ+RKX75ssHBoGt0uB5nu
+         5NcA==
+X-Gm-Message-State: AOJu0Yz3ZK3M0peLq9jOpckLE2Tx0fpBCWctKcAKe76oV0x1qez+MTss
+	m6Egm9XR3wP5ysdvmVUwAM0=
+X-Google-Smtp-Source: AGHT+IFsxggATDO3/WXN4NlkqQ+XGwbCfK3FYInd9FMii5Gwa2SHQvLjRYF77W4QFvgD++0bB0mi1g==
+X-Received: by 2002:a05:600c:205a:b0:3fe:1fd9:bedf with SMTP id p26-20020a05600c205a00b003fe1fd9bedfmr1074271wmg.11.1694499808912;
+        Mon, 11 Sep 2023 23:23:28 -0700 (PDT)
 From: Paul Durrant <xadimgnik@gmail.com>
 X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <22cf127f-9348-d449-cc6c-7f87c4d01de4@xen.org>
-Date: Tue, 12 Sep 2023 08:21:34 +0200
+Message-ID: <e260dddb-8479-e011-d679-a985979cb3a6@xen.org>
+Date: Tue, 12 Sep 2023 08:23:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
 Reply-To: paul@xen.org
-Subject: Re: [XEN PATCH v5 3/4] x86/viridian: address violations of MISRA
- C:2012 Rule 7.2
+Subject: Re: [XEN PATCH 10/13] x86/viridian: address violations of MISRA
+ C:2012 Rule 7.3
 Content-Language: en-US
 To: Simone Ballarin <simone.ballarin@bugseng.com>,
  xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com, sstabellini@kernel.org,
- Gianluca Luparini <gianluca.luparini@bugseng.com>, Wei Liu <wl@xen.org>,
+Cc: consulting@bugseng.com, Gianluca Luparini
+ <gianluca.luparini@bugseng.com>, Wei Liu <wl@xen.org>,
  Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <cover.1693219887.git.simone.ballarin@bugseng.com>
- <4581fc2e3292f761336639a1881e05775e681874.1693219887.git.simone.ballarin@bugseng.com>
+References: <cover.1691053438.git.simone.ballarin@bugseng.com>
+ <63f0d6385f302517244604af5536ffebd74ba589.1691053438.git.simone.ballarin@bugseng.com>
 Organization: Xen Project
-In-Reply-To: <4581fc2e3292f761336639a1881e05775e681874.1693219887.git.simone.ballarin@bugseng.com>
+In-Reply-To: <63f0d6385f302517244604af5536ffebd74ba589.1691053438.git.simone.ballarin@bugseng.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 28/08/2023 12:03, Simone Ballarin wrote:
+On 03/08/2023 11:22, Simone Ballarin wrote:
 > From: Gianluca Luparini <gianluca.luparini@bugseng.com>
 > 
-> The xen sources contains violations of MISRA C:2012 Rule 7.2 whose
-> headline states:
-> "A 'u' or 'U' suffix shall be applied to all integer constants
-> that are represented in an unsigned type".
+> The xen sources contain violations of MISRA C:2012 Rule 7.3 whose headline
+> states:
+> "The lowercase character 'l' shall not be used in a literal suffix".
 > 
-> Add the 'U' suffix to integers literals with unsigned type and also to other
-> literals used in the same contexts or near violations, when their positive
-> nature is immediately clear. The latter changes are done for the sake of
-> uniformity.
+> Use the "L" suffix instead of the "l" suffix, to avoid potential ambiguity.
+> If the "u" suffix is used near "L", use the "U" suffix instead, for consistency.
+> 
+> The changes in this patch are mechanical.
 > 
 > Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
 > Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
-> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 > ---
-> Changes in v4:
-> - change commit headline
-> - add Reviewed-by
-> 
-> Changes in v3:
-> - create this commit for 'viridian.c' and 'hyperv-tlfs.h'
-> ---
->   xen/arch/x86/hvm/viridian/viridian.c         |  2 +-
->   xen/arch/x86/include/asm/guest/hyperv-tlfs.h | 28 ++++++++++----------
->   2 files changed, 15 insertions(+), 15 deletions(-)
+>   xen/arch/x86/hvm/viridian/synic.c |  2 +-
+>   xen/arch/x86/hvm/viridian/time.c  | 10 +++++-----
+>   2 files changed, 6 insertions(+), 6 deletions(-)
 > 
 
 Reviewed-by: Paul Durrant <paul@xen.org>
