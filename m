@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 349A4EE3F10
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 18:36:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.600739.936529 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334D1EE3F0E
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 18:36:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.600735.936494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg8F8-0005E4-P5; Tue, 12 Sep 2023 18:36:10 +0000
+	id 1qg8F5-0004O5-GT; Tue, 12 Sep 2023 18:36:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 600739.936529; Tue, 12 Sep 2023 18:36:10 +0000
+Received: by outflank-mailman (output) from mailman id 600735.936494; Tue, 12 Sep 2023 18:36:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg8F8-0005DL-KA; Tue, 12 Sep 2023 18:36:10 +0000
-Received: by outflank-mailman (input) for mailman id 600739;
- Tue, 12 Sep 2023 18:36:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qg8F5-0004Ny-DJ; Tue, 12 Sep 2023 18:36:07 +0000
+Received: by outflank-mailman (input) for mailman id 600735;
+ Tue, 12 Sep 2023 18:36:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YY/q=E4=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qg8F7-0004gy-Es
- for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 18:36:09 +0000
+ id 1qg8F4-0004Nn-9M
+ for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 18:36:06 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3aef5145-519b-11ee-8786-cb3800f73035;
- Tue, 12 Sep 2023 20:36:05 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3a25b1da-519b-11ee-9b0d-b553b5be7939;
+ Tue, 12 Sep 2023 20:36:03 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 56062828588C;
- Tue, 12 Sep 2023 13:36:04 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id BEE5D82869BC;
+ Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id UyJ4rMT5KA0S; Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
+ with ESMTP id GDklFJAO7xyW; Tue, 12 Sep 2023 13:36:01 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 675458286999;
- Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 31EF28285806;
+ Tue, 12 Sep 2023 13:36:01 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 28PoQVfEyAXc; Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
+ with ESMTP id c4ciP5Lb7hBL; Tue, 12 Sep 2023 13:36:01 -0500 (CDT)
 Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 1207C82869A9;
- Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id C6B978285940;
+ Tue, 12 Sep 2023 13:36:00 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,489 +53,481 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3aef5145-519b-11ee-8786-cb3800f73035
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 675458286999
+X-Inumbo-ID: 3a25b1da-519b-11ee-9b0d-b553b5be7939
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 31EF28285806
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1694543762; bh=6LM95rrDoqCiSn6LemOLiswbsaDeEh5eaAd90MA8xic=;
+	t=1694543761; bh=OMNtHSpQqn89e74CYNhsjMflaiQYP4Sf+eSGFc6n1/U=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=I8kABtDzdiCGYaKXRW+75tPCf/60BW7gNz2jXOBceZiShezZv0TPCEk7lYeLff1Pg
-	 mXAGyspx8qBci3qd9Bpm4tvybIX0a2xmirIoHO2FGAJd2tPci31MkhlhlB99wYbKN/
-	 aQGgLMmqqV3ai6pqWq+7BxIdpLiYH6RDXAq8nOhc=
+	b=YXqsiTDFFOv+trEt+vp8Kdr10QxIxGE9qsC34/undmjI3u/QhGkfcW9AS5LBtSMgI
+	 BjAewnbFUKcLb2kFIti1eWtAG5pjAhOPiCLELCQd31D31vHrpJ5pTw1LryxuhyfPuB
+	 ZTPM7ENLOt/vCMBtS9PSVehjRDXeXgr7rxEGdNBc=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v5 4/5] xen/ppc: Add stub function and symbol definitions
-Date: Tue, 12 Sep 2023 13:35:53 -0500
-Message-Id: <26d561b1878082a1666935fd8c9d477de423e8ed.1694543103.git.sanastasio@raptorengineering.com>
+Subject: [PATCH v5 1/5] xen/ppc: Implement atomic.h
+Date: Tue, 12 Sep 2023 13:35:50 -0500
+Message-Id: <bfc40a7499b39d9ff8c9c287ebf1525d99c0cc70.1694543103.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1694543103.git.sanastasio@raptorengineering.com>
 References: <cover.1694543103.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Add stub function and symbol definitions required by common code. If the
-file that the definition is supposed to be located in doesn't already
-exist yet, temporarily place its definition in the new stubs.c
+Implement atomic.h for PPC, based off of the original Xen 3.2
+implementation. This implementation depends on some functions that are
+not yet defined (notably __cmpxchg), so it can't yet be used.
 
 Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 v5: No changes.
 
-v4: No changes.
+v4:
+  - Clarify dependency on __cmpxchg which doesn't get implemented until
+    future patch
+  - Drop !CONFIG_SMP case for PPC_ATOMIC_{ENTRY,EXIT}_BARRIER macro
+    definitions
+  - Add missing newlines to inline asm instructions preceeding
+    PPC_ATOMIC_EXIT_BARRIER. This was only discovered by the change
+    to drop the !CONFIG_SMP definitions of those macros.
+  - Fix line wrapping in atomic_compareandswap
+  - Fix formatting of arch_cmpxchg macro
 
 v3:
-  - (stubs.c) Drop ack_none hook definition
+  - Drop full copyright text headers
+  - Drop unnecessary spaces after casts
+  - const-ize write_atomic_size
+  - Don't use GNU 0-length array extension in read_atomic
+  - Use "+m" asm constraint instead of separate "=m" and "m"
+  - Fix line-continuing backslash formatting in arch_cmpxchg
 
 v2:
-  - Use BUG_ON("unimplemented") instead of BUG() for unimplemented functions
-    to make searching easier.
-  - (mm-radix.c) Drop total_pages definition
-  - (mm-radix.c) Move __read_mostly from after variable name to before it in
-    declaration of `frametable_base_pdx`
-  - (setup.c) Fix include order
-  - (stubs.c) Drop stub .end hw_irq_controller hook
+  - Fix style of asm block constraints to include required spaces
+  - Fix macro local variable naming (use trailing underscore instead of
+    leading)
+  - Drop unnecessary parens in __atomic_add_unless
 
- xen/arch/ppc/Makefile   |   1 +
- xen/arch/ppc/mm-radix.c |  42 +++++
- xen/arch/ppc/setup.c    |   8 +
- xen/arch/ppc/stubs.c    | 339 ++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 390 insertions(+)
- create mode 100644 xen/arch/ppc/stubs.c
+ xen/arch/ppc/include/asm/atomic.h | 385 ++++++++++++++++++++++++++++++
+ xen/arch/ppc/include/asm/memory.h |  14 ++
+ 2 files changed, 399 insertions(+)
+ create mode 100644 xen/arch/ppc/include/asm/atomic.h
+ create mode 100644 xen/arch/ppc/include/asm/memory.h
 
-diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
-index b3205b8f7a..6d5569ff64 100644
---- a/xen/arch/ppc/Makefile
-+++ b/xen/arch/ppc/Makefile
-@@ -4,6 +4,7 @@ obj-$(CONFIG_EARLY_PRINTK) += early_printk.init.o
- obj-y += mm-radix.o
- obj-y += opal.o
- obj-y += setup.o
-+obj-y += stubs.o
- obj-y += tlb-radix.o
-
- $(TARGET): $(TARGET)-syms
-diff --git a/xen/arch/ppc/mm-radix.c b/xen/arch/ppc/mm-radix.c
-index 06129cef9c..11d0f27b60 100644
---- a/xen/arch/ppc/mm-radix.c
-+++ b/xen/arch/ppc/mm-radix.c
-@@ -265,3 +265,45 @@ void __init setup_initial_pagetables(void)
-     /* Turn on the MMU */
-     enable_mmu();
- }
+diff --git a/xen/arch/ppc/include/asm/atomic.h b/xen/arch/ppc/include/asm/atomic.h
+new file mode 100644
+index 0000000000..64168aa3f1
+--- /dev/null
++++ b/xen/arch/ppc/include/asm/atomic.h
+@@ -0,0 +1,385 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * PowerPC64 atomic operations
++ *
++ * Copyright (C) 2001 Paul Mackerras <paulus@au.ibm.com>, IBM
++ * Copyright (C) 2001 Anton Blanchard <anton@au.ibm.com>, IBM
++ * Copyright Raptor Engineering LLC
++ */
++
++#ifndef _ASM_PPC64_ATOMIC_H_
++#define _ASM_PPC64_ATOMIC_H_
++
++#include <xen/atomic.h>
++
++#include <asm/memory.h>
++
++static inline int atomic_read(const atomic_t *v)
++{
++    return *(volatile int *)&v->counter;
++}
++
++static inline int _atomic_read(atomic_t v)
++{
++    return v.counter;
++}
++
++static inline void atomic_set(atomic_t *v, int i)
++{
++    v->counter = i;
++}
++
++static inline void _atomic_set(atomic_t *v, int i)
++{
++    v->counter = i;
++}
++
++void __bad_atomic_read(const volatile void *p, void *res);
++void __bad_atomic_size(void);
++
++#define build_atomic_read(name, insn, type)                                    \
++    static inline type name(const volatile type *addr)                         \
++    {                                                                          \
++        type ret;                                                              \
++        asm volatile ( insn "%U1%X1 %0,%1" : "=r" (ret) : "m<>" (*addr) );     \
++        return ret;                                                            \
++    }
++
++#define build_atomic_write(name, insn, type)                                   \
++    static inline void name(volatile type *addr, type val)                     \
++    {                                                                          \
++        asm volatile ( insn "%U0%X0 %1,%0" : "=m<>" (*addr) : "r" (val) );     \
++    }
++
++#define build_add_sized(name, ldinsn, stinsn, type)                            \
++    static inline void name(volatile type *addr, type val)                     \
++    {                                                                          \
++        type t;                                                                \
++        asm volatile ( "1: " ldinsn " %0,0,%3\n"                               \
++                       "add%I2 %0,%0,%2\n"                                     \
++                       stinsn " %0,0,%3 \n"                                    \
++                       "bne- 1b\n"                                             \
++                       : "=&r" (t), "+m" (*addr)                               \
++                       : "r" (val), "r" (addr)                                 \
++                       : "cc" );                                               \
++    }
++
++build_atomic_read(read_u8_atomic, "lbz", uint8_t)
++build_atomic_read(read_u16_atomic, "lhz", uint16_t)
++build_atomic_read(read_u32_atomic, "lwz", uint32_t)
++build_atomic_read(read_u64_atomic, "ldz", uint64_t)
++
++build_atomic_write(write_u8_atomic, "stb", uint8_t)
++build_atomic_write(write_u16_atomic, "sth", uint16_t)
++build_atomic_write(write_u32_atomic, "stw", uint32_t)
++build_atomic_write(write_u64_atomic, "std", uint64_t)
++
++build_add_sized(add_u8_sized, "lbarx", "stbcx.",uint8_t)
++build_add_sized(add_u16_sized, "lharx", "sthcx.", uint16_t)
++build_add_sized(add_u32_sized, "lwarx", "stwcx.", uint32_t)
++
++#undef build_atomic_read
++#undef build_atomic_write
++#undef build_add_sized
++
++static always_inline void read_atomic_size(const volatile void *p, void *res,
++                                           unsigned int size)
++{
++    ASSERT(IS_ALIGNED((vaddr_t)p, size));
++    switch ( size )
++    {
++    case 1:
++        *(uint8_t *)res = read_u8_atomic(p);
++        break;
++    case 2:
++        *(uint16_t *)res = read_u16_atomic(p);
++        break;
++    case 4:
++        *(uint32_t *)res = read_u32_atomic(p);
++        break;
++    case 8:
++        *(uint64_t *)res = read_u64_atomic(p);
++        break;
++    default:
++        __bad_atomic_read(p, res);
++        break;
++    }
++}
++
++static always_inline void write_atomic_size(volatile void *p, const void *val,
++                                            unsigned int size)
++{
++    ASSERT(IS_ALIGNED((vaddr_t)p, size));
++    switch ( size )
++    {
++    case 1:
++        write_u8_atomic(p, *(const uint8_t *)val);
++        break;
++    case 2:
++        write_u16_atomic(p, *(const uint16_t *)val);
++        break;
++    case 4:
++        write_u32_atomic(p, *(const uint32_t *)val);
++        break;
++    case 8:
++        write_u64_atomic(p, *(const uint64_t *)val);
++        break;
++    default:
++        __bad_atomic_size();
++        break;
++    }
++}
++
++#define read_atomic(p)                                                         \
++    ({                                                                         \
++        union {                                                                \
++            typeof(*(p)) val;                                                  \
++            char c[sizeof(*(p))];                                              \
++        } x_;                                                                  \
++        read_atomic_size(p, x_.c, sizeof(*(p)));                               \
++        x_.val;                                                                \
++    })
++
++#define write_atomic(p, x)                                                     \
++    do                                                                         \
++    {                                                                          \
++        typeof(*(p)) x_ = (x);                                                 \
++        write_atomic_size(p, &x_, sizeof(*(p)));                               \
++    } while ( 0 )
++
++#define add_sized(p, x)                                                        \
++    ({                                                                         \
++        typeof(*(p)) x_ = (x);                                                 \
++        switch ( sizeof(*(p)) )                                                \
++        {                                                                      \
++        case 1:                                                                \
++            add_u8_sized((uint8_t *)(p), x_);                                  \
++            break;                                                             \
++        case 2:                                                                \
++            add_u16_sized((uint16_t *)(p), x_);                                \
++            break;                                                             \
++        case 4:                                                                \
++            add_u32_sized((uint32_t *)(p), x_);                                \
++            break;                                                             \
++        default:                                                               \
++            __bad_atomic_size();                                               \
++            break;                                                             \
++        }                                                                      \
++    })
++
++static inline void atomic_add(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%3\n"
++                   "add %0,%2,%0\n"
++                   "stwcx. %0,0,%3\n"
++                   "bne- 1b"
++                   : "=&r" (t), "+m" (v->counter)
++                   : "r" (a), "r" (&v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_add_return(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%2\n"
++                   "add %0,%1,%0\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b\n"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=&r" (t)
++                   : "r" (a), "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
++
++static inline void atomic_sub(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%3\n"
++                   "subf %0,%2,%0\n"
++                   "stwcx. %0,0,%3\n"
++                   "bne- 1b"
++                   : "=&r" (t), "+m" (v->counter)
++                   : "r" (a), "r" (&v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_sub_return(int a, atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%2\n"
++                   "subf %0,%1,%0\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b\n"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=&r" (t)
++                   : "r" (a), "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
++
++static inline void atomic_inc(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%2\n"
++                   "addic %0,%0,1\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b"
++                   : "=&r" (t), "+m" (v->counter)
++                   : "r" (&v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_inc_return(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%1\n"
++                   "addic %0,%0,1\n"
++                   "stwcx. %0,0,%1\n"
++                   "bne- 1b\n"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=&r" (t)
++                   : "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
++
++static inline void atomic_dec(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( "1: lwarx %0,0,%2\n"
++                   "addic %0,%0,-1\n"
++                   "stwcx. %0,0,%2\n"
++                   "bne- 1b"
++                   : "=&r" (t), "+m" (v->counter)
++                   : "r" (&v->counter)
++                   : "cc" );
++}
++
++static inline int atomic_dec_return(atomic_t *v)
++{
++    int t;
++
++    asm volatile ( PPC_ATOMIC_ENTRY_BARRIER
++                   "1: lwarx %0,0,%1\n"
++                   "addic %0,%0,-1\n"
++                   "stwcx. %0,0,%1\n"
++                   "bne- 1b\n"
++                   PPC_ATOMIC_EXIT_BARRIER
++                   : "=&r" (t)
++                   : "r" (&v->counter)
++                   : "cc", "memory" );
++
++    return t;
++}
 +
 +/*
-+ * TODO: Implement the functions below
++ * Atomically test *v and decrement if it is greater than 0.
++ * The function returns the old value of *v minus 1.
 + */
-+unsigned long __read_mostly frametable_base_pdx;
-+
-+void put_page(struct page_info *p)
++static inline int atomic_dec_if_positive(atomic_t *v)
 +{
-+    BUG_ON("unimplemented");
++    int t;
++
++    asm volatile( PPC_ATOMIC_ENTRY_BARRIER
++                  "1: lwarx %0,0,%1 # atomic_dec_if_positive\n"
++                  "addic. %0,%0,-1\n"
++                  "blt- 2f\n"
++                  "stwcx. %0,0,%1\n"
++                  "bne- 1b\n"
++                  PPC_ATOMIC_EXIT_BARRIER
++                  "2:"
++                  : "=&r" (t)
++                  : "r" (&v->counter)
++                  : "cc", "memory" );
++
++    return t;
 +}
 +
-+void arch_dump_shared_mem_info(void)
++static inline atomic_t atomic_compareandswap(atomic_t old, atomic_t new,
++                                             atomic_t *v)
 +{
-+    BUG_ON("unimplemented");
++    atomic_t rc;
++    rc.counter = __cmpxchg(&v->counter, old.counter, new.counter,
++                           sizeof(v->counter));
++    return rc;
 +}
 +
-+int xenmem_add_to_physmap_one(struct domain *d,
-+                              unsigned int space,
-+                              union add_to_physmap_extra extra,
-+                              unsigned long idx,
-+                              gfn_t gfn)
++#define arch_cmpxchg(ptr, o, n)                                                \
++    ({                                                                         \
++        __typeof__(*(ptr)) o_ = (o);                                           \
++        __typeof__(*(ptr)) n_ = (n);                                           \
++        (__typeof__(*(ptr))) __cmpxchg((ptr), (unsigned long)o_,               \
++                                       (unsigned long)n_, sizeof(*(ptr)));     \
++    })
++
++static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
 +{
-+    BUG_ON("unimplemented");
++    return arch_cmpxchg(&v->counter, old, new);
 +}
 +
-+int destroy_xen_mappings(unsigned long s, unsigned long e)
++#define ATOMIC_OP(op, insn, suffix, sign) \
++    static inline void atomic_##op(int a, atomic_t *v)                           \
++    {                                                                            \
++        int t;                                                                   \
++        asm volatile ( "1: lwarx %0,0,%3\n"                                      \
++                       insn "%I2" suffix " %0,%0,%2\n"                           \
++                       "stwcx. %0,0,%3 \n"                                       \
++                       "bne- 1b\n"                                               \
++                       : "=&r" (t), "+m" (v->counter)                            \
++                       : "r" #sign (a), "r" (&v->counter)                        \
++                       : "cc" );                                                 \
++    }
++
++ATOMIC_OP(and, "and", ".", K)
++
++static inline int atomic_sub_and_test(int i, atomic_t *v)
 +{
-+    BUG_ON("unimplemented");
++    return atomic_sub_return(i, v) == 0;
 +}
 +
-+int map_pages_to_xen(unsigned long virt,
-+                     mfn_t mfn,
-+                     unsigned long nr_mfns,
-+                     unsigned int flags)
++static inline int atomic_inc_and_test(atomic_t *v)
 +{
-+    BUG_ON("unimplemented");
++    return atomic_add_return(1, v) == 0;
 +}
 +
-+int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
++static inline int atomic_dec_and_test(atomic_t *v)
 +{
-+    BUG_ON("unimplemented");
++    return atomic_sub_return(1, v) == 0;
 +}
-diff --git a/xen/arch/ppc/setup.c b/xen/arch/ppc/setup.c
-index 3fc7705d9b..959c1454a0 100644
---- a/xen/arch/ppc/setup.c
-+++ b/xen/arch/ppc/setup.c
-@@ -1,5 +1,8 @@
- /* SPDX-License-Identifier: GPL-2.0-or-later */
- #include <xen/init.h>
-+#include <xen/lib.h>
-+#include <xen/mm.h>
-+#include <public/version.h>
- #include <asm/boot.h>
- #include <asm/early_printk.h>
- #include <asm/mm.h>
-@@ -33,3 +36,8 @@ void __init noreturn start_xen(unsigned long r3, unsigned long r4,
-
-     unreachable();
- }
 +
-+void arch_get_xen_caps(xen_capabilities_info_t *info)
++static inline int atomic_add_negative(int i, atomic_t *v)
 +{
-+    BUG_ON("unimplemented");
++    return atomic_add_return(i, v) < 0;
 +}
-diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
++
++static inline int __atomic_add_unless(atomic_t *v, int a, int u)
++{
++	int c, old;
++
++	c = atomic_read(v);
++	while (c != u && (old = atomic_cmpxchg(v, c, c + a)) != c)
++		c = old;
++	return c;
++}
++
++static inline int atomic_add_unless(atomic_t *v, int a, int u)
++{
++    return __atomic_add_unless(v, a, u);
++}
++
++#endif /* _ASM_PPC64_ATOMIC_H_ */
+diff --git a/xen/arch/ppc/include/asm/memory.h b/xen/arch/ppc/include/asm/memory.h
 new file mode 100644
-index 0000000000..4c276b0e39
+index 0000000000..57310eb690
 --- /dev/null
-+++ b/xen/arch/ppc/stubs.c
-@@ -0,0 +1,339 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#include <xen/cpumask.h>
-+#include <xen/domain.h>
-+#include <xen/irq.h>
-+#include <xen/nodemask.h>
-+#include <xen/time.h>
-+#include <public/domctl.h>
-+#include <public/vm_event.h>
-+
-+#include <asm/current.h>
-+
-+/* smpboot.c */
-+
-+cpumask_t cpu_online_map;
-+cpumask_t cpu_present_map;
-+cpumask_t cpu_possible_map;
-+
-+/* ID of the PCPU we're running on */
-+DEFINE_PER_CPU(unsigned int, cpu_id);
-+/* XXX these seem awfully x86ish... */
-+/* representing HT siblings of each logical CPU */
-+DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_sibling_mask);
-+/* representing HT and core siblings of each logical CPU */
-+DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_core_mask);
-+
-+nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
-+
-+/* time.c */
-+
-+s_time_t get_s_time(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int reprogram_timer(s_time_t timeout)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void send_timer_event(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* traps.c */
-+
-+void show_execution_state(const struct cpu_user_regs *regs)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_hypercall_tasklet_result(struct vcpu *v, long res)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_show_execution_state(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* shutdown.c */
-+
-+void machine_restart(unsigned int delay_millisecs)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void machine_halt(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* vm_event.c */
-+
-+void vm_event_fill_regs(vm_event_request_t *req)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vm_event_set_registers(struct vcpu *v, vm_event_response_t *rsp)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vm_event_monitor_next_interrupt(struct vcpu *v)
-+{
-+    /* Not supported on PPC. */
-+}
-+
-+/* domctl.c */
-+void arch_get_domain_info(const struct domain *d,
-+                          struct xen_domctl_getdomaininfo *info)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* monitor.c */
-+
-+int arch_monitor_domctl_event(struct domain *d,
-+                              struct xen_domctl_monitor_op *mop)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* smp.c */
-+
-+void arch_flush_tlb_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_event_check_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_call_function_mask(const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* irq.c */
-+
-+struct pirq *alloc_pirq_struct(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void pirq_guest_unbind(struct domain *d, struct pirq *pirq)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void pirq_set_affinity(struct domain *d, int pirq, const cpumask_t *mask)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+hw_irq_controller no_irq_type = {
-+    .typename = "none",
-+    .startup = irq_startup_none,
-+    .shutdown = irq_shutdown_none,
-+    .enable = irq_enable_none,
-+    .disable = irq_disable_none,
-+};
-+
-+int arch_init_one_irq_desc(struct irq_desc *desc)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void smp_send_state_dump(unsigned int cpu)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+/* domain.c */
-+
-+DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
-+unsigned long __per_cpu_offset[NR_CPUS];
-+
-+void context_switch(struct vcpu *prev, struct vcpu *next)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void continue_running(struct vcpu *same)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void sync_local_execstate(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void sync_vcpu_execstate(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void startup_cpu_idle_loop(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void free_domain_struct(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void dump_pageframe_info(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void free_vcpu_struct(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_vcpu_create(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_vcpu_destroy(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_switch_to_aarch64_mode(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_create(struct domain *d,
-+                       struct xen_domctl_createdomain *config,
-+                       unsigned int flags)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_teardown(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_destroy(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_shutdown(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_pause(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_unpause(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_domain_soft_reset(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_domain_creation_finished(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_initialise_vcpu(struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int arch_vcpu_reset(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int domain_relinquish_resources(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_dump_domain_info(struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void arch_dump_vcpu_info(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_mark_events_pending(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_update_evtchn_irq(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_block_unless_event_pending(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+void vcpu_kick(struct vcpu *v)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+struct domain *alloc_domain_struct(void)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+struct vcpu *alloc_vcpu_struct(const struct domain *d)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+unsigned long
-+hypercall_create_continuation(unsigned int op, const char *format, ...)
-+{
-+    BUG_ON("unimplemented");
-+}
-+
-+int __init parse_arch_dom0_param(const char *s, const char *e)
-+{
-+    BUG_ON("unimplemented");
-+}
++++ b/xen/arch/ppc/include/asm/memory.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (C) IBM Corp. 2005
++ *
++ * Authors: Jimi Xenidis <jimix@watson.ibm.com>
++ */
++
++#ifndef _ASM_MEMORY_H_
++#define _ASM_MEMORY_H_
++
++#define PPC_ATOMIC_ENTRY_BARRIER "sync\n"
++#define PPC_ATOMIC_EXIT_BARRIER  "sync\n"
++
++#endif
 --
 2.30.2
 
