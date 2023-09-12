@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D82CA0EF2
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 15:40:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.600546.936240 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22568CA0EF4
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 15:40:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.600548.936255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg5Ue-0005yT-1V; Tue, 12 Sep 2023 15:40:00 +0000
+	id 1qg5Um-00079q-KY; Tue, 12 Sep 2023 15:40:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 600546.936240; Tue, 12 Sep 2023 15:40:00 +0000
+Received: by outflank-mailman (output) from mailman id 600548.936255; Tue, 12 Sep 2023 15:40:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg5Ud-0005yM-Ug; Tue, 12 Sep 2023 15:39:59 +0000
-Received: by outflank-mailman (input) for mailman id 600546;
- Tue, 12 Sep 2023 15:39:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qg5Um-000791-HV; Tue, 12 Sep 2023 15:40:08 +0000
+Received: by outflank-mailman (input) for mailman id 600548;
+ Tue, 12 Sep 2023 15:40:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=V3Pz=E4=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qg5Uc-0005yG-7n
- for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 15:39:58 +0000
+ id 1qg5Ul-00073d-T7
+ for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 15:40:07 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9f50888a-5182-11ee-9b0d-b553b5be7939;
- Tue, 12 Sep 2023 17:39:55 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a5dba450-5182-11ee-8786-cb3800f73035;
+ Tue, 12 Sep 2023 17:40:06 +0200 (CEST)
 Received: from beta.station (net-93-66-137-131.cust.vodafonedsl.it
  [93.66.137.131])
- by support.bugseng.com (Postfix) with ESMTPSA id E3F5D4EE0749;
- Tue, 12 Sep 2023 17:39:54 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 170364EE074C;
+ Tue, 12 Sep 2023 17:40:06 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,89 +42,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9f50888a-5182-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: a5dba450-5182-11ee-8786-cb3800f73035
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v6 0/7] xen/x86: address violations of MISRA C:2012 Rule 7.2
-Date: Tue, 12 Sep 2023 17:38:57 +0200
-Message-Id: <cover.1694532795.git.simone.ballarin@bugseng.com>
+	Wei Liu <wl@xen.org>,
+	Gianluca Luparini <gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH v6 2/7] x86/hvm: address violations of MISRA C:2012 Rule 7.2
+Date: Tue, 12 Sep 2023 17:38:59 +0200
+Message-Id: <1231f5eeebf6f2e30b91780e92dc4d6015cefdb7.1694532795.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1694532795.git.simone.ballarin@bugseng.com>
+References: <cover.1694532795.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The xen sources contains violations of MISRA C:2012 Rule 7.2 whose headline
-states:
-"A 'u' or 'U' suffix shall be applied to all integer constants that are
-represented in an unsigned type".
+The xen sources contains violations of MISRA C:2012 Rule 7.2 whose
+headline states:
+"A 'u' or 'U' suffix shall be applied to all integer constants
+that are represented in an unsigned type".
 
-These violations are caused by the missing "u" or "U" suffix in unsigned
-integer constants, such as:
+Add the 'U' suffix to integers literals with unsigned type.
 
-xen/arch/x86/hvm/hypercall.c:132.17-132.26
-if ( (eax & 0x80000000) && is_viridian_domain(currd) )
+For the sake of uniformity, the following change is made:
+- add 'U' suffixes to 'mask16' in 'stdvga.c'
 
-If a rule is not met, changes are needed in order to achieve compliance.
-The patches in this series achieve compliance for MISRA C:2012 Rule 7.2 by
-adding the 'U' suffix to integers literals with unsigned type and also to
-other
-literals used in the same contexts or near violations, when their positive
-nature is immediately clear. The latter changes are done for the sake of
-uniformity.
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
+---
+Changes in v6:
+- new patch obtained by splitting HVM related changes from
+"xen/x86: address violations of MISRA C:2012 Rule 7.2 (v5)"
+- fix inadvertent changes to "sr_mask"
+---
+ xen/arch/x86/hvm/hypercall.c           |  2 +-
+ xen/arch/x86/hvm/pmtimer.c             |  4 ++--
+ xen/arch/x86/hvm/stdvga.c              | 32 +++++++++++++-------------
+ xen/arch/x86/hvm/vlapic.c              |  6 ++---
+ xen/arch/x86/include/asm/hvm/trace.h   |  4 ++--
+ xen/arch/x86/include/asm/hvm/vioapic.h |  2 +-
+ 6 files changed, 25 insertions(+), 25 deletions(-)
 
-This series splits "xen/x86: address violations of MISRA C:2012 Rule 7.2 (v5)"
-in several patches, and fixes some issues in v5.
-
-Gianluca Luparini (1):
-  x86/vmx: address violations of MISRA C:2012 Rule 7.2
-
-Simone Ballarin (6):
-  x86/hvm: address violations of MISRA C:2012 Rule 7.2
-  x86/asm: address violations of MISRA C:2012 Rule 7.2
-  xen/lib: address violations of MISRA C:2012 Rule 7.2
-  xen/x86: address violations of MISRA C:2012 Rule 7.2
-  xen/mcheck: address violations of MISRA C:2012 Rule 7.2
-  x86/efi: address violations of MISRA C:2012 Rule 7.2
-
- xen/arch/x86/apic.c                     |   2 +-
- xen/arch/x86/cpu-policy.c               |  18 +--
- xen/arch/x86/cpu/mcheck/mce-apei.c      |   4 +-
- xen/arch/x86/cpu/vpmu_intel.c           |   2 +-
- xen/arch/x86/cpuid.c                    |   8 +-
- xen/arch/x86/efi/efi-boot.h             |   6 +-
- xen/arch/x86/extable.c                  |   2 +-
- xen/arch/x86/hvm/hypercall.c            |   2 +-
- xen/arch/x86/hvm/pmtimer.c              |   4 +-
- xen/arch/x86/hvm/stdvga.c               |  32 ++---
- xen/arch/x86/hvm/vlapic.c               |   6 +-
- xen/arch/x86/hvm/vmx/vmcs.c             |   6 +-
- xen/arch/x86/hvm/vmx/vvmx.c             |   8 +-
- xen/arch/x86/include/asm/apicdef.h      |   2 +-
- xen/arch/x86/include/asm/config.h       |   2 +-
- xen/arch/x86/include/asm/hpet.h         |   2 +-
- xen/arch/x86/include/asm/hvm/trace.h    |   4 +-
- xen/arch/x86/include/asm/hvm/vioapic.h  |   2 +-
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  84 +++++------
- xen/arch/x86/include/asm/hvm/vmx/vmx.h  |  16 +--
- xen/arch/x86/include/asm/msi.h          |   2 +-
- xen/arch/x86/include/asm/msr-index.h    | 182 ++++++++++++------------
- xen/arch/x86/include/asm/pci.h          |   8 +-
- xen/arch/x86/include/asm/x86-defns.h    |  22 +--
- xen/arch/x86/percpu.c                   |   2 +-
- xen/arch/x86/psr.c                      |   2 +-
- xen/arch/x86/spec_ctrl.c                |  12 +-
- xen/lib/x86/cpuid.c                     |   8 +-
- xen/lib/x86/policy.c                    |   2 +-
- 29 files changed, 226 insertions(+), 226 deletions(-)
-
+diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
+index 20d266ffd5..eeb73e1aa5 100644
+--- a/xen/arch/x86/hvm/hypercall.c
++++ b/xen/arch/x86/hvm/hypercall.c
+@@ -129,7 +129,7 @@ int hvm_hypercall(struct cpu_user_regs *regs)
+         break;
+     }
+ 
+-    if ( (eax & 0x80000000) && is_viridian_domain(currd) )
++    if ( (eax & 0x80000000U) && is_viridian_domain(currd) )
+     {
+         int ret;
+ 
+diff --git a/xen/arch/x86/hvm/pmtimer.c b/xen/arch/x86/hvm/pmtimer.c
+index 2145c531b6..eb4a455763 100644
+--- a/xen/arch/x86/hvm/pmtimer.c
++++ b/xen/arch/x86/hvm/pmtimer.c
+@@ -40,8 +40,8 @@
+ #define SCI_IRQ 9
+ 
+ /* We provide a 32-bit counter (must match the TMR_VAL_EXT bit in the FADT) */
+-#define TMR_VAL_MASK  (0xffffffff)
+-#define TMR_VAL_MSB   (0x80000000)
++#define TMR_VAL_MASK  (0xffffffffU)
++#define TMR_VAL_MSB   (0x80000000U)
+ 
+ /* Dispatch SCIs based on the PM1a_STS and PM1a_EN registers */
+ static void pmt_update_sci(PMTState *s)
+diff --git a/xen/arch/x86/hvm/stdvga.c b/xen/arch/x86/hvm/stdvga.c
+index 2586891863..8da07ff8a2 100644
+--- a/xen/arch/x86/hvm/stdvga.c
++++ b/xen/arch/x86/hvm/stdvga.c
+@@ -39,22 +39,22 @@
+ 
+ #define PAT(x) (x)
+ static const uint32_t mask16[16] = {
+-    PAT(0x00000000),
+-    PAT(0x000000ff),
+-    PAT(0x0000ff00),
+-    PAT(0x0000ffff),
+-    PAT(0x00ff0000),
+-    PAT(0x00ff00ff),
+-    PAT(0x00ffff00),
+-    PAT(0x00ffffff),
+-    PAT(0xff000000),
+-    PAT(0xff0000ff),
+-    PAT(0xff00ff00),
+-    PAT(0xff00ffff),
+-    PAT(0xffff0000),
+-    PAT(0xffff00ff),
+-    PAT(0xffffff00),
+-    PAT(0xffffffff),
++    PAT(0x00000000U),
++    PAT(0x000000ffU),
++    PAT(0x0000ff00U),
++    PAT(0x0000ffffU),
++    PAT(0x00ff0000U),
++    PAT(0x00ff00ffU),
++    PAT(0x00ffff00U),
++    PAT(0x00ffffffU),
++    PAT(0xff000000U),
++    PAT(0xff0000ffU),
++    PAT(0xff00ff00U),
++    PAT(0xff00ffffU),
++    PAT(0xffff0000U),
++    PAT(0xffff00ffU),
++    PAT(0xffffff00U),
++    PAT(0xffffffffU),
+ };
+ 
+ /* force some bits to zero */
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index c7ce82d064..a8e87c4446 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -237,7 +237,7 @@ bool_t vlapic_match_dest(
+     case APIC_DEST_NOSHORT:
+         if ( dest_mode )
+             return vlapic_match_logical_addr(target, dest);
+-        return (dest == _VLAPIC_ID(target, 0xffffffff)) ||
++        return (dest == _VLAPIC_ID(target, 0xffffffffU)) ||
+                (dest == VLAPIC_ID(target));
+ 
+     case APIC_DEST_SELF:
+@@ -467,7 +467,7 @@ static bool_t is_multicast_dest(struct vlapic *vlapic, unsigned int short_hand,
+         return short_hand != APIC_DEST_SELF;
+ 
+     if ( vlapic_x2apic_mode(vlapic) )
+-        return dest_mode ? hweight16(dest) > 1 : dest == 0xffffffff;
++        return dest_mode ? hweight16(dest) > 1 : dest == 0xffffffffU;
+ 
+     if ( dest_mode )
+         return hweight8(dest &
+@@ -831,7 +831,7 @@ void vlapic_reg_write(struct vcpu *v, unsigned int reg, uint32_t val)
+         break;
+ 
+     case APIC_ICR2:
+-        vlapic_set_reg(vlapic, APIC_ICR2, val & 0xff000000);
++        vlapic_set_reg(vlapic, APIC_ICR2, val & 0xff000000U);
+         break;
+ 
+     case APIC_LVTT:         /* LVT Timer Reg */
+diff --git a/xen/arch/x86/include/asm/hvm/trace.h b/xen/arch/x86/include/asm/hvm/trace.h
+index 696e42eb94..22eadbdd47 100644
+--- a/xen/arch/x86/include/asm/hvm/trace.h
++++ b/xen/arch/x86/include/asm/hvm/trace.h
+@@ -58,7 +58,7 @@
+ #define DO_TRC_HVM_VLAPIC           DEFAULT_HVM_MISC
+ 
+ 
+-#define TRC_PAR_LONG(par) ((par)&0xFFFFFFFF),((par)>>32)
++#define TRC_PAR_LONG(par) ((uint32_t)(par)), ((par) >> 32)
+ 
+ #define TRACE_2_LONG_2D(_e, d1, d2, ...) \
+     TRACE_4D(_e, d1, d2)
+@@ -93,7 +93,7 @@
+     HVMTRACE_ND(evt, 0, 0)
+ 
+ #define HVMTRACE_LONG_1D(evt, d1)                  \
+-                   HVMTRACE_2D(evt ## 64, (d1) & 0xFFFFFFFF, (d1) >> 32)
++                   HVMTRACE_2D(evt ## 64, (uint32_t)(d1), (d1) >> 32)
+ #define HVMTRACE_LONG_2D(evt, d1, d2, ...)              \
+                    HVMTRACE_3D(evt ## 64, d1, d2)
+ #define HVMTRACE_LONG_3D(evt, d1, d2, d3, ...)      \
+diff --git a/xen/arch/x86/include/asm/hvm/vioapic.h b/xen/arch/x86/include/asm/hvm/vioapic.h
+index 2944ec20dd..68af6dce79 100644
+--- a/xen/arch/x86/include/asm/hvm/vioapic.h
++++ b/xen/arch/x86/include/asm/hvm/vioapic.h
+@@ -32,7 +32,7 @@
+ #define VIOAPIC_EDGE_TRIG  0
+ #define VIOAPIC_LEVEL_TRIG 1
+ 
+-#define VIOAPIC_DEFAULT_BASE_ADDRESS  0xfec00000
++#define VIOAPIC_DEFAULT_BASE_ADDRESS  0xfec00000U
+ #define VIOAPIC_MEM_LENGTH            0x100
+ 
+ /* Direct registers. */
 -- 
 2.34.1
 
