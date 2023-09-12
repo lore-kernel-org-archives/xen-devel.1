@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 209D3EE3F0C
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 18:36:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.600736.936504 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 250BEEE3F0B
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 18:36:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.600738.936523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg8F6-0004eV-Sr; Tue, 12 Sep 2023 18:36:08 +0000
+	id 1qg8F8-0005AR-Ei; Tue, 12 Sep 2023 18:36:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 600736.936504; Tue, 12 Sep 2023 18:36:08 +0000
+Received: by outflank-mailman (output) from mailman id 600738.936523; Tue, 12 Sep 2023 18:36:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qg8F6-0004eO-PE; Tue, 12 Sep 2023 18:36:08 +0000
-Received: by outflank-mailman (input) for mailman id 600736;
- Tue, 12 Sep 2023 18:36:06 +0000
+	id 1qg8F8-0005AC-BH; Tue, 12 Sep 2023 18:36:10 +0000
+Received: by outflank-mailman (input) for mailman id 600738;
+ Tue, 12 Sep 2023 18:36:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YY/q=E4=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qg8F4-0004Nn-U5
- for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 18:36:06 +0000
+ id 1qg8F6-0004Nn-UC
+ for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 18:36:08 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a1b561c-519b-11ee-9b0d-b553b5be7939;
- Tue, 12 Sep 2023 20:36:03 +0200 (CEST)
+ id 3ad72a20-519b-11ee-9b0d-b553b5be7939;
+ Tue, 12 Sep 2023 20:36:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 80C37828697F;
- Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 34E8E8285940;
+ Tue, 12 Sep 2023 13:36:04 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id T0X8Xem0JTh0; Tue, 12 Sep 2023 13:36:01 -0500 (CDT)
+ with ESMTP id wiCnQFjRUYTc; Tue, 12 Sep 2023 13:36:03 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 07B55828588C;
- Tue, 12 Sep 2023 13:36:01 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id CB83A828588C;
+ Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id ZTvoJhhH5VJj; Tue, 12 Sep 2023 13:36:00 -0500 (CDT)
+ with ESMTP id G-6wvpSRwke5; Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
 Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 076D78285806;
- Tue, 12 Sep 2023 13:36:00 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id 5489882869AC;
+ Tue, 12 Sep 2023 13:36:02 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,148 +53,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a1b561c-519b-11ee-9b0d-b553b5be7939
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 07B55828588C
+X-Inumbo-ID: 3ad72a20-519b-11ee-9b0d-b553b5be7939
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com CB83A828588C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1694543761; bh=2o7EmQggelACz3Tjq1xm4clN9hmNJf8xEaJhD960+0I=;
+	t=1694543762; bh=cF5IvHr5u7imGadcwYNiu5y563SLZGH4suAc9S6xZk0=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=BXkjtmhcaaD/0sjlTtkKprdqZd280Pmk7nbHcNwl24rWIBQudyhZnJzw8QlamPnjk
-	 Ll3uAl7Zl//WP4md2GjVywo+wAYBu+nVfR/r21bqwOx34U8Jtg75Eh7+EBeXa8O8z2
-	 Lm4INlxtUMtE9/56X1YuknwkJ0GpCqYfF/2a/GRM=
+	b=sRurfK0c/cp+pmQdGiETrI7rVpVS3xanOQQqk86LrHVno6CDvUHZWxe+OXpg0/w5S
+	 xOseXb95hE87vAwsi+mIfErvx98ChQw2f5VnT5zUpvyPdsZIAOj2ffpQknGzlaZKDz
+	 18dQIUmIMGwTix7YCkDDdnYAWgi7y3vX7/eiFAbY=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>
-Subject: [PATCH v5 0/5] ppc: Enable full Xen build
-Date: Tue, 12 Sep 2023 13:35:49 -0500
-Message-Id: <cover.1694543103.git.sanastasio@raptorengineering.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v5 5/5] xen/ppc: Enable full Xen build
+Date: Tue, 12 Sep 2023 13:35:54 -0500
+Message-Id: <98a4fe2a4a2aee0a33b6b2110cd6ee906d4e0fe1.1694543103.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1694543103.git.sanastasio@raptorengineering.com>
+References: <cover.1694543103.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Hello all,
+Bring ppc's Makefile and arch.mk in line with arm and x86 to disable the
+build overrides and enable the full Xen build.
 
-This patch series performs all of the additions necessary to drop the
-build overrides for PPC and enable the full Xen build. Except in cases
-where compatibile implementations already exist (e.g. atomic.h and
-bitops.h), the newly added definitions are simple, unimplemented stubs
-that just call BUG_ON("unimplemented").
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+ xen/arch/ppc/Makefile | 16 +++++++++++++++-
+ xen/arch/ppc/arch.mk  |  3 ---
+ 2 files changed, 15 insertions(+), 4 deletions(-)
 
-Thanks,
-Shawn
-
-Shawn Anastasio (5):
-  xen/ppc: Implement atomic.h
-  xen/ppc: Implement bitops.h
-  xen/ppc: Define minimal stub headers required for full build
-  xen/ppc: Add stub function and symbol definitions
-  xen/ppc: Enable full Xen build
-
- xen/arch/ppc/Kconfig                     |   1 +
- xen/arch/ppc/Makefile                    |  17 +-
- xen/arch/ppc/arch.mk                     |   3 -
- xen/arch/ppc/include/asm/Makefile        |   2 +
- xen/arch/ppc/include/asm/altp2m.h        |  25 ++
- xen/arch/ppc/include/asm/atomic.h        | 385 +++++++++++++++++++++++
- xen/arch/ppc/include/asm/bitops.h        | 332 ++++++++++++++++++-
- xen/arch/ppc/include/asm/bug.h           |   9 +
- xen/arch/ppc/include/asm/cache.h         |   2 +
- xen/arch/ppc/include/asm/config.h        |  10 +
- xen/arch/ppc/include/asm/cpufeature.h    |  10 +
- xen/arch/ppc/include/asm/current.h       |  43 +++
- xen/arch/ppc/include/asm/delay.h         |  12 +
- xen/arch/ppc/include/asm/device.h        |  53 ++++
- xen/arch/ppc/include/asm/div64.h         |  14 +
- xen/arch/ppc/include/asm/domain.h        |  47 +++
- xen/arch/ppc/include/asm/event.h         |  36 +++
- xen/arch/ppc/include/asm/flushtlb.h      |  24 ++
- xen/arch/ppc/include/asm/grant_table.h   |   5 +
- xen/arch/ppc/include/asm/guest_access.h  |  68 ++++
- xen/arch/ppc/include/asm/guest_atomics.h |  23 ++
- xen/arch/ppc/include/asm/hardirq.h       |  19 ++
- xen/arch/ppc/include/asm/hypercall.h     |   5 +
- xen/arch/ppc/include/asm/io.h            |  16 +
- xen/arch/ppc/include/asm/iocap.h         |   8 +
- xen/arch/ppc/include/asm/iommu.h         |   8 +
- xen/arch/ppc/include/asm/irq.h           |  33 ++
- xen/arch/ppc/include/asm/mem_access.h    |   5 +
- xen/arch/ppc/include/asm/memory.h        |  14 +
- xen/arch/ppc/include/asm/mm.h            | 243 +++++++++++++-
- xen/arch/ppc/include/asm/monitor.h       |  43 +++
- xen/arch/ppc/include/asm/nospec.h        |  15 +
- xen/arch/ppc/include/asm/numa.h          |  26 ++
- xen/arch/ppc/include/asm/p2m.h           |  95 ++++++
- xen/arch/ppc/include/asm/page.h          |  18 ++
- xen/arch/ppc/include/asm/paging.h        |   7 +
- xen/arch/ppc/include/asm/pci.h           |   7 +
- xen/arch/ppc/include/asm/percpu.h        |  24 ++
- xen/arch/ppc/include/asm/processor.h     |  10 +
- xen/arch/ppc/include/asm/random.h        |   9 +
- xen/arch/ppc/include/asm/setup.h         |   6 +
- xen/arch/ppc/include/asm/smp.h           |  18 ++
- xen/arch/ppc/include/asm/softirq.h       |   8 +
- xen/arch/ppc/include/asm/spinlock.h      |  15 +
- xen/arch/ppc/include/asm/system.h        | 219 ++++++++++++-
- xen/arch/ppc/include/asm/time.h          |  23 ++
- xen/arch/ppc/include/asm/xenoprof.h      |   0
- xen/arch/ppc/mm-radix.c                  |  44 ++-
- xen/arch/ppc/setup.c                     |   8 +
- xen/arch/ppc/stubs.c                     | 339 ++++++++++++++++++++
- xen/arch/ppc/tlb-radix.c                 |   2 +-
- xen/include/public/hvm/save.h            |   2 +
- xen/include/public/pmu.h                 |   2 +
- xen/include/public/xen.h                 |   2 +
- 54 files changed, 2403 insertions(+), 11 deletions(-)
- create mode 100644 xen/arch/ppc/include/asm/Makefile
- create mode 100644 xen/arch/ppc/include/asm/altp2m.h
- create mode 100644 xen/arch/ppc/include/asm/atomic.h
- create mode 100644 xen/arch/ppc/include/asm/cpufeature.h
- create mode 100644 xen/arch/ppc/include/asm/current.h
- create mode 100644 xen/arch/ppc/include/asm/delay.h
- create mode 100644 xen/arch/ppc/include/asm/device.h
- create mode 100644 xen/arch/ppc/include/asm/div64.h
- create mode 100644 xen/arch/ppc/include/asm/domain.h
- create mode 100644 xen/arch/ppc/include/asm/event.h
- create mode 100644 xen/arch/ppc/include/asm/flushtlb.h
- create mode 100644 xen/arch/ppc/include/asm/grant_table.h
- create mode 100644 xen/arch/ppc/include/asm/guest_access.h
- create mode 100644 xen/arch/ppc/include/asm/guest_atomics.h
- create mode 100644 xen/arch/ppc/include/asm/hardirq.h
- create mode 100644 xen/arch/ppc/include/asm/hypercall.h
- create mode 100644 xen/arch/ppc/include/asm/io.h
- create mode 100644 xen/arch/ppc/include/asm/iocap.h
- create mode 100644 xen/arch/ppc/include/asm/iommu.h
- create mode 100644 xen/arch/ppc/include/asm/irq.h
- create mode 100644 xen/arch/ppc/include/asm/mem_access.h
- create mode 100644 xen/arch/ppc/include/asm/memory.h
- create mode 100644 xen/arch/ppc/include/asm/monitor.h
- create mode 100644 xen/arch/ppc/include/asm/nospec.h
- create mode 100644 xen/arch/ppc/include/asm/numa.h
- create mode 100644 xen/arch/ppc/include/asm/p2m.h
- create mode 100644 xen/arch/ppc/include/asm/paging.h
- create mode 100644 xen/arch/ppc/include/asm/pci.h
- create mode 100644 xen/arch/ppc/include/asm/percpu.h
- create mode 100644 xen/arch/ppc/include/asm/random.h
- create mode 100644 xen/arch/ppc/include/asm/setup.h
- create mode 100644 xen/arch/ppc/include/asm/smp.h
- create mode 100644 xen/arch/ppc/include/asm/softirq.h
- create mode 100644 xen/arch/ppc/include/asm/spinlock.h
- create mode 100644 xen/arch/ppc/include/asm/time.h
- create mode 100644 xen/arch/ppc/include/asm/xenoprof.h
- create mode 100644 xen/arch/ppc/stubs.c
-
---
+diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
+index 6d5569ff64..71feb5e2c4 100644
+--- a/xen/arch/ppc/Makefile
++++ b/xen/arch/ppc/Makefile
+@@ -11,10 +11,24 @@ $(TARGET): $(TARGET)-syms
+ 	cp -f $< $@
+ 
+ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) -o $@
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(objtree)/common/symbols-dummy.o -o $(dot-target).0
++	$(NM) -pa --format=sysv $(dot-target).0 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).0.S
++	$(MAKE) $(build)=$(@D) $(dot-target).0.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(dot-target).0.o -o $(dot-target).1
++	$(NM) -pa --format=sysv $(dot-target).1 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).1.S
++	$(MAKE) $(build)=$(@D) $(dot-target).1.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
++	    $(dot-target).1.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
+ 		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		> $@.map
++	rm -f $(@D)/.$(@F).[0-9]*
+ 
+ $(obj)/xen.lds: $(src)/xen.lds.S FORCE
+ 	$(call if_changed_dep,cpp_lds_S)
+diff --git a/xen/arch/ppc/arch.mk b/xen/arch/ppc/arch.mk
+index d05cbf1df5..917ad0e6a8 100644
+--- a/xen/arch/ppc/arch.mk
++++ b/xen/arch/ppc/arch.mk
+@@ -7,6 +7,3 @@ CFLAGS += -m64 -mlittle-endian -mcpu=$(ppc-march-y)
+ CFLAGS += -mstrict-align -mcmodel=medium -mabi=elfv2 -fPIC -mno-altivec -mno-vsx -msoft-float
+ 
+ LDFLAGS += -m elf64lppc
+-
+-# TODO: Drop override when more of the build is working
+-override ALL_OBJS-y = arch/$(SRCARCH)/built_in.o common/libfdt/built_in.o lib/built_in.o
+-- 
 2.30.2
 
 
