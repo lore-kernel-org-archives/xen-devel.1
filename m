@@ -4,56 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EE9EE3F22
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 20:44:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.600803.936586 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099DEEE49A4
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Sep 2023 23:21:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.600822.936649 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgAEp-0005E8-Vx; Tue, 12 Sep 2023 20:43:59 +0000
+	id 1qgChL-0000tL-Iz; Tue, 12 Sep 2023 23:21:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 600803.936586; Tue, 12 Sep 2023 20:43:59 +0000
+Received: by outflank-mailman (output) from mailman id 600822.936649; Tue, 12 Sep 2023 23:21:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgAEp-0005E1-T8; Tue, 12 Sep 2023 20:43:59 +0000
-Received: by outflank-mailman (input) for mailman id 600803;
- Tue, 12 Sep 2023 20:43:58 +0000
+	id 1qgChL-0000r3-Dh; Tue, 12 Sep 2023 23:21:35 +0000
+Received: by outflank-mailman (input) for mailman id 600822;
+ Tue, 12 Sep 2023 23:21:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jqqM=E4=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1qgAEo-0005Dv-F9
- for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 20:43:58 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20615.outbound.protection.outlook.com
- [2a01:111:f400:7e89::615])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1655c2a0-51ad-11ee-9b0d-b553b5be7939;
- Tue, 12 Sep 2023 22:43:55 +0200 (CEST)
-Received: from CY5PR04CA0017.namprd04.prod.outlook.com (2603:10b6:930:1e::16)
- by PH7PR12MB6562.namprd12.prod.outlook.com (2603:10b6:510:212::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30; Tue, 12 Sep
- 2023 20:43:50 +0000
-Received: from CY4PEPF0000EE3C.namprd03.prod.outlook.com
- (2603:10b6:930:1e:cafe::18) by CY5PR04CA0017.outlook.office365.com
- (2603:10b6:930:1e::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.19 via Frontend
- Transport; Tue, 12 Sep 2023 20:43:50 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EE3C.mail.protection.outlook.com (10.167.242.16) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.17 via Frontend Transport; Tue, 12 Sep 2023 20:43:49 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 12 Sep
- 2023 15:43:49 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 12 Sep
- 2023 13:43:49 -0700
-Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Tue, 12 Sep 2023 15:43:47 -0500
+ <SRS0=qLIb=E4=citrix.com=prvs=612d1dac3=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1qgChK-0000Tq-OZ
+ for xen-devel@lists.xenproject.org; Tue, 12 Sep 2023 23:21:34 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 19dcf772-51c3-11ee-9b0d-b553b5be7939;
+ Wed, 13 Sep 2023 01:21:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,115 +38,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1655c2a0-51ad-11ee-9b0d-b553b5be7939
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=M0XXuVWa+EWHGxI9VdUVhjLHjh8RNtz7plZDqUgGYkWo5P6EayWb9DcpUNtlg6avuDShxpGJ2lhgVGF6UQN0nRBtWqUVNqj9tL8D520/JWJ2fjCGkDyQ4HOSMN0xR6wDXjr7CtI5PkP22NqeY1hhdvc7IADiLShDnZo+Sdj8KaU6FFfPpek0ltCrc0VRect4uvSZzQ+zCMKD8Czpk0ayEq2MpCUQPue5G7b8QXlwVopkqVGgsMCGR3BIW15HSWdmUfPTRwwYAAoK0bh3gfuHO3fyNqjRTj549erAEGydVMIuETYIY6SRj8jph/+W6OZGCCHKo74Ln0+rgUxy0p+yzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E65VnSANYBFDqkpFLBD79cPDJZqCboAo43zfwK5Jn18=;
- b=BGvOmAJVMGcYydUzMMi3jJ9SudK130NYYbSHtyClqDsxhkxsxy+47MPlZ80vYEadx9/cP1Z6AGLreexpJZyuMQ5XiMq7P4BB+1BaXzqHUoO4g3fmM7BOmtU1Daso18mR3vhSYeYuB5t3nyFZ75incwUVgV8Hxg9nOB2ndKz5XE7+QBqF1dBsqiHs9N5O6eoLjWvtYi4ax25fqwks7n/GFHqZZA+Q8ZYZ86g0U8GnLw7sfHAgOdUuwsVMTuR1+EuFVkW9R/girhFSLvSLOa6GYye9E99smKbmaWWXxlzXi+HT9ubYbOQmufJ4qMBOJ0hdJQL1tna/TgfxUXJnNujKyA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E65VnSANYBFDqkpFLBD79cPDJZqCboAo43zfwK5Jn18=;
- b=2xSgEkwlyb/1OsMW5lDAZUk72Sl68V3rsriOhQhIXjuSTR+5GQiAPV7CIUwTnxfCMvSrjP4vhgqx9uQnHieWLh1GxU5UilROnvCEFgffIQffRe0WtgLKGcBrC6TuidpH2c/61Ov6zdfLDuykoL3JfyBoNCInAZnAGoYkR4PCG3I=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Michal Orzel <michal.orzel@amd.com>
-Subject: [ImageBuilder PATCH v2] uboot-script-gen: use size from arm64 Image header
-Date: Tue, 12 Sep 2023 16:43:44 -0400
-Message-ID: <20230912204345.7271-1-stewart.hildebrand@amd.com>
-X-Mailer: git-send-email 2.42.0
+X-Inumbo-ID: 19dcf772-51c3-11ee-9b0d-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1694560891;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=I+t08q4edjlX+Xq8TCZHZvBTk0F1uFlqxmMDbLaf4mY=;
+  b=hqp3EJWCNXKrQZik1o0b5axZ2r91hzESwjcAsyKUMQxGGrEF1EcjW3j+
+   KRNmdWBU1iUM0w4laBiPEAbbgukNd4oobFd8YlsD8lSqo4jPP/8NkV7h3
+   ryd1gEyO2uHCpPLtjOChR9a+QG7AqFjexDP3JL8wqh7ut0ToOC73JWbjl
+   4=;
+X-CSE-ConnectionGUID: +h1fXvQHQkmwDB2eMJUqUg==
+X-CSE-MsgGUID: FJMcmrPeQn6tryP3ZGVlgA==
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 121104892
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.123
+X-Policy: $RELAYED
+X-ThreatScanner-Verdict: Negative
+IronPort-Data: A9a23:3vWIxaxEq/v/DVkj61F6t+cfxirEfRIJ4+MujC+fZmUNrF6WrkUEy
+ WRJWDyCa/uDZWGne4h2a43j8UkCsZWEn9dgTwc6/yAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjPzOHvykTrecZkidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw/zF8EkHUMja4mtC5QRvPKoT4TcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KSJOr
+ PIoNgktVxOGmM6cmr+eaNR1u8t2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwPxx/A+
+ jKXpQwVBDk0FvmUzCC9/0uq2PPVjBugaq0sELKRo6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
+ 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0efBdDuk74wGl0bfP7kCSAW1sZiFFQMwrsokxXzNC/
+ l2ImdTpQz9mtrLTSmi1+bKdrDf0Mi8QRVLufgddE1FDuYO65thu0FSWFI0L/LOJYsPdWjGpz
+ QCUlQgHhLAMoeRR2oCZwEn6jGf5znTWdTId6gLSV2Ojywp2Yo+5eoClgWTmAeZ8wJWxFQfY4
+ iVd8ySKxKVXVMzWynTRKAkYNOvxj8tpJgEwlrKG83MJ0z22s0CucolLiN2VDBc4a51UEdMFj
+ aK6hO+w2HOxFCH6BUOUS9jrYyjP8UQHPY2/Ps04lvIUPvBMmPavpUmCn3K40WH3i1QLmqoiI
+ 5qdesvEJS9EWPg6kGHoGr5AjOZDKsUCKYT7H8yT8vha+eDGOC79pUktYDNikdzVHIvb+V6Io
+ r6zxuOByglFUf2WX8Uk2dd7ELz+FlBiXcqeg5UOJoa+zv9ORDlJ5wn5nelwJOSIXs19yo/1w
+ 51KchYBlgGn1SSZcVTih7IKQOqHYKuTZEkTZUQEVWtEEVB6CWpzxM/zr6cKQIQ=
+IronPort-HdrOrdr: A9a23:rI8Wo6qbu7TY2S9WSVKJK30aV5r9eYIsimQD101hICG9Ffbo9P
+ xG/c5rtyMc7QxwZJhOo6H7BEC/ewK6yXcY2/hvAV7AZniBhILLFvAa0WKK+VSJcBEWkNQtqZ
+ uIGJIOc+EYY2IK8PoTmGODYrIdKN7uys6VbbC39RtQpdoDUdAZ0+9qYjz7LqVkLDMoOXIofK
+ D32iJczwDMRZxvBP7LY0U4Yw==
+X-Talos-CUID: 9a23:AiiQX2y2KlyC2++E1hVkBgVXGpkrQmPk7E7TJlCUIzxkbZ+oUGKfrfY=
+X-Talos-MUID: 9a23:39MKXAoItbwxmzAnilYezx9AEcxt+ZyjMUZTjY8Xg5K2GhJ0NB7I2Q==
+X-IronPort-AV: E=Sophos;i="6.02,141,1688443200"; 
+   d="scan'208";a="121104892"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Jinoh Kang
+	<jinoh.kang.kr@gmail.com>
+Subject: [PATCH 3/5] x86/emul: Add a pending_dbg field to x86_emulate_ctxt.retire
+Date: Wed, 13 Sep 2023 00:21:11 +0100
+Message-ID: <20230912232113.402347-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230912232113.402347-1-andrew.cooper3@citrix.com>
+References: <20230912232113.402347-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3C:EE_|PH7PR12MB6562:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d774baf-8e33-4831-6c9e-08dbb3d0f824
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	KKYCTJ9XcwuNSOk8WTCTyq0WwCrCxQ4vY10P2s0mqCRVdNwKVUiVpIJbm1ip72pGrUzVPVOimOSN/98MBGqimRnMvMj92VM+1sZstdkiHpssRcChDGK67d0BHaRCrn+2MHIA+qayP8+pMXRhgHmAPR6anhy7WI8JDn1OrUN9Halcs4GM1p1iCOBaeSRbJzVQBsZwEPuKuw9cGVV3ImsOERorWiK39zBlYl3HEif3SP3dHu/7L0cG0gv6wgFTozJsBEdAlzAAftcGJIzkS56kE4nGUXhN7e1iOGJhKdEZru0bnLwhzB29ON4cJL3J8NBtXNkN1/Reb/vgdI9qN7+j6ie6gtlrjZ8VtlVgn42NV+MR81CeSzqiFKfR/YpE3lzktrw01jwVknjS+5Irb8Ow620H6Kxu5v2RKepen9YAC/GR8MkmGbgrnG52JSc5JRUlHXgWKJhysyK4bYqcYwMPAY4BStAOFI7yMfHkR4F6B/EpBtRhBWwaq6feOK5bKQAOvlh1bqsEW68SmMEBbNL+lvEbGw1w5mtNa9EibQbMPmzFA4Uyje7pW4AcxB2Jy2TnJ0VMryOh4PocTvzMX3RNk6W0FOA+O3ELKnEbOFIMFtNsXy2bb4Y4rEKCHbK/5i1nWNF2pSSmw+g8yscsKy5ydYzl4YntC+KCdhRK6hK0nXnT2cQ8pYT0NQePI+TR+G0pJXpP8Y01WtdLRWIdVLQXkTZytuNdgmqLcXjrLh2/DiQDSCnhwiwB+5BFV8QWo/2C
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(346002)(396003)(136003)(376002)(451199024)(82310400011)(1800799009)(186009)(36840700001)(46966006)(40470700004)(81166007)(82740400003)(356005)(40480700001)(86362001)(36756003)(40460700003)(478600001)(2906002)(316002)(6666004)(8936002)(6916009)(44832011)(5660300002)(41300700001)(54906003)(4326008)(70586007)(47076005)(8676002)(70206006)(36860700001)(83380400001)(1076003)(426003)(26005)(336012)(2616005)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Sep 2023 20:43:49.9669
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d774baf-8e33-4831-6c9e-08dbb3d0f824
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE3C.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6562
 
-There is a corner case where the filesizes of the xen and Linux kernel images
-are not sufficient. These binaries likely contain NOLOAD sections (e.g. bss),
-which are not accounted in the filesize.
+Lots of this is very very broken, but we need to start somewhere.
 
-Check for the presence of an arm64 kernel image header, and get the effective
-image size from the header. Use the effective image size for calculating the
-next load address and for populating the size in the /chosen/dom*/reg property.
+PENDING_DBG, INTERRUPTIBILITY and ACTIVITY are internal pipeline registers
+which Intel exposed to software in the VMCS, and AMD exposed a subset of in
+the VMCB.  Importantly, bits set in PENDING_DBG can survive across multiple
+instruction boundaries if e.g. delivery of #DB is delayed by a MovSS.
 
-Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+For now, introduce a full pending_dbg field into the retire union.  This keeps
+the sh_page_fault() and init_context() paths working but in due course the
+field will want to lose the "retire" infix.
+
+In addition, set singlestep into pending_dbg as appropriate.  Leave the old
+singlestep bitfield in place until we can adjust the callers to handle it
+properly.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-v1->v2:
-* add in-code comments
-* use variables more
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Jinoh Kang <jinoh.kang.kr@gmail.com>
 ---
- scripts/uboot-script-gen | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+ xen/arch/x86/x86_emulate/x86_emulate.c |  6 +++++-
+ xen/arch/x86/x86_emulate/x86_emulate.h | 17 ++++++++++++++---
+ 2 files changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
-index 9656a458ac00..f0972d983017 100755
---- a/scripts/uboot-script-gen
-+++ b/scripts/uboot-script-gen
-@@ -2,7 +2,7 @@
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
+index e88245eae9fb..de707c8ec211 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -8379,7 +8379,10 @@ x86_emulate(
+     if ( !mode_64bit() )
+         _regs.r(ip) = (uint32_t)_regs.r(ip);
  
- offset=$((2*1024*1024))
- filesize=0
--prog_req=(mkimage file fdtput mktemp awk)
-+prog_req=(mkimage file fdtput mktemp awk od)
+-    /* Should a singlestep #DB be raised? */
++    if ( singlestep )
++        ctxt->retire.pending_dbg |= X86_DR6_BS;
++
++    /* Should a singlestep #DB be raised? (BROKEN - TODO, merge into pending_dbg) */
+     if ( rc == X86EMUL_OKAY && singlestep && !ctxt->retire.mov_ss )
+     {
+         ctxt->retire.singlestep = true;
+@@ -8659,6 +8662,7 @@ int x86_emulate_wrapper(
+     {
+         typeof(ctxt->retire) retire = ctxt->retire;
  
- function cleanup_and_return_err()
- {
-@@ -435,6 +435,21 @@ function add_size()
- {
-     local filename=$1
-     local size=`stat -L --printf="%s" $filename`
-+    # Read arm64 header magic (https://www.kernel.org/doc/Documentation/arm64/booting.txt)
-+    local arm64_header_magic=$(od -j 56 -N 4 -t x4 ${filename} | head -n 1 | awk -F' ' '{ print $2 }')
++        retire.pending_dbg = 0;
+         retire.unblock_nmi = false;
+         ASSERT(!retire.raw);
+     }
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
+index 698750267a90..f0e74d23c378 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -588,15 +588,26 @@ struct x86_emulate_ctxt
+     /* Canonical opcode (see below) (valid only on X86EMUL_OKAY). */
+     unsigned int opcode;
+ 
+-    /* Retirement state, set by the emulator (valid only on X86EMUL_OKAY). */
++    /*
++     * Retirement state, set by the emulator (valid only on X86EMUL_OKAY/DONE).
++     *
++     * TODO: all this state should be input/output from the VMCS PENDING_DBG,
++     * INTERRUPTIBILITY and ACTIVITIY fields.
++     */
+     union {
+-        uint8_t raw;
++        unsigned long raw;
+         struct {
++            /*
++             * Accumulated %dr6 trap bits, positive polarity.  Should only be
++             * interpreted in the case of X86EMUL_OKAY/DONE.
++             */
++            unsigned int pending_dbg;
 +
-+    # Check for valid arm64 header magic value 0x644d5241
-+    if [ "${arm64_header_magic}" = "644d5241" ]
-+    then
-+        # Read effective size, which may be larger than the filesize due to noload sections, e.g. bss
-+        local arm64_header_size=$(od -j 16 -N 8 -t u8 ${filename} | head -n 1 | awk -F' ' '{ print $2 }')
-+
-+        if [ "${arm64_header_size}" -gt "${size}" ]
-+        then
-+            size=${arm64_header_size}
-+        fi
-+    fi
-+
-     memaddr=$(( $memaddr + $size + $offset - 1))
-     memaddr=$(( $memaddr & ~($offset - 1) ))
-     memaddr=`printf "0x%X\n" $memaddr`
+             bool hlt:1;          /* Instruction HLTed. */
+             bool mov_ss:1;       /* Instruction sets MOV-SS irq shadow. */
+             bool sti:1;          /* Instruction sets STI irq shadow. */
+             bool unblock_nmi:1;  /* Instruction clears NMI blocking. */
+-            bool singlestep:1;   /* Singlestepping was active. */
++            bool singlestep:1;   /* Singlestepping was active. (TODO, merge into pending_dbg) */
+         };
+     } retire;
+ 
 -- 
-2.42.0
+2.30.2
 
 
