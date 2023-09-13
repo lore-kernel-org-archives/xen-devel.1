@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 146BAEE020C
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 20:28:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601586.937656 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DFA8EE020D
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 20:28:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601590.937685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgWTL-0005vE-JF; Wed, 13 Sep 2023 20:28:27 +0000
+	id 1qgWTN-0006Wj-SX; Wed, 13 Sep 2023 20:28:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601586.937656; Wed, 13 Sep 2023 20:28:27 +0000
+Received: by outflank-mailman (output) from mailman id 601590.937685; Wed, 13 Sep 2023 20:28:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgWTL-0005v5-Ff; Wed, 13 Sep 2023 20:28:27 +0000
-Received: by outflank-mailman (input) for mailman id 601586;
- Wed, 13 Sep 2023 20:28:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qgWTN-0006Tp-G3; Wed, 13 Sep 2023 20:28:29 +0000
+Received: by outflank-mailman (input) for mailman id 601590;
+ Wed, 13 Sep 2023 20:28:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Z4av=E5=citrix.com=prvs=613b8bbe6=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qgWTJ-0004yg-UM
- for xen-devel@lists.xenproject.org; Wed, 13 Sep 2023 20:28:25 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 15412c50-5274-11ee-9b0d-b553b5be7939;
- Wed, 13 Sep 2023 22:28:23 +0200 (CEST)
+ id 1qgWTM-0004dA-0e
+ for xen-devel@lists.xenproject.org; Wed, 13 Sep 2023 20:28:28 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1768456a-5274-11ee-8787-cb3800f73035;
+ Wed, 13 Sep 2023 22:28:26 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,59 +38,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 15412c50-5274-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 1768456a-5274-11ee-8787-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1694636903;
+  d=citrix.com; s=securemail; t=1694636905;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=6Uh1DvjUFaFWcf8oaS6mdJk87ZcViax08R9IgITT/VU=;
-  b=XMNdKkEffjgAfXJXib7+MVRpcYUavQSHTykGpCrmuBYLRRXLZjzQuws6
-   cvgXZu/Yh7Nhl198BMuuwNPgp7wgTkbXWUMnvzw0GnS3QzFGKVligb7Wu
-   b09MTW+PJb9cToefyXNRhmOLTRfL60tZtMNc5r64qOoG5hjWvBaxkaTx5
-   A=;
-X-CSE-ConnectionGUID: OTY/1Nd8T/+vvQCCeXLd1A==
-X-CSE-MsgGUID: C11+nIAcQkOzLcw8YJc38g==
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=jx4SOK+9S/IjqodWIlucBKoLHCAUVljbJYSnUX0zZyE=;
+  b=KqoALMNqnBHPFSEGzbk7Z0Yy0R6I55TxlI4L7yUE634VynszxbZ1fW5c
+   Jkq3KOfXLzcJNRqCRcMpJ3Etdo0hvZ8DSVggPgKgtZ7zhc59DR3oatP2M
+   ALqe9jcaNQOx3HB8ypV3Sx+I2TAQiU8JonG6ca4qHXfIPQj0hUGTdmD94
+   w=;
+X-CSE-ConnectionGUID: tqLoj7ejQSK+P4DSBC/0tA==
+X-CSE-MsgGUID: Ve2Ajt9KQAWORAnfabEMKg==
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 121213282
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 125280891
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:mbX+UKxiLCk3CFAANtF6t+chxirEfRIJ4+MujC+fZmUNrF6WrkVUz
- GdNDG2Ab/mIMGWjfdt1atm2oE5VscfTnd81GgE5rSAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+IronPort-Data: A9a23:9AOFYqwl9Z0HFCInghd6t+chxirEfRIJ4+MujC+fZmUNrF6WrkUEz
+ WcbXGyGb/iCNDOhL9h2O4yzpB9Sup6HyIMxGwVtpCAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
  ppEOrEsCOhuExcwcz/0auCJQUFUjPzOHvykTrecZkidfCc8IA85kxVvhuUltYBhhNm9Emult
  Mj75sbSIzdJ4RYtWo4vw/zF8EkHUMja4mtC5QRvPKsT5zcyqlFOZH4hDfDpR5fHatE88t6SH
  47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
- Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KUZyx
- LtBDjxdUlfAmfyP65m2es1g3+12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
- ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwPxxzB/
- TiWpQwVBDkxbYXczxus+Uuvof3rljyraaAZT+23o6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KX1X0
+ fsadz0PVyugxNrq7ImRYa40mu12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwPwxzI/
+ jKXpgwVBDkkOYa2yybU0UuFucj1tCX1UYg/MZ63o6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
  2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0efBdDuk74wGl0bfP7kCSAW1sZiFFQMwrsokxXzNC6
- 7OSt4q3X3o16uTTEC/DsO7O9lteJBT5M0clWR5DFC0Js+Wk458ttznkQ+ZHHPec24id9S7L/
+ 7OSt4q3X3o16uTTEC/DsO7O9lteJBT5M0cefAsDT1QI4eDYg8IL0j70ZP0kSLKc24id9S7L/
  xiGqy03hrM2hMEN1rmm8V2vvw9AtqQlXSZuuFyJAzvNAhdRIdf8Otf2sQSzAeNodt7xc7WXg
  JQTdyFyBsgqBIrFqiGCSf5l8FqBt6fca220bbKC8vAcG9WRF5yLJ9A4DNJWfh0B3iM4ldjBO
  RW7hO+pzMUPVEZGlIcuC25LN+wkzLL7CfPuXe3OY9xFb/BZLVHWoH81PRbMgT2zwSDAdJ3T3
  r/BLa6R4YsyU/w7nFJauc9DuVPU+szO7TyKHs2qp/hW+bGfeGSUWd843KimN4gEAFe/iFyNq
  b53bpLaoyizpcWiOkE7B6ZPdwFVRZX6bLiqw/FqmhmrflY5QDx4W6+JqV7jEqQ895loei7z1
- inVcidlJJDX3xUr9S3ihqhfVY7S
-IronPort-HdrOrdr: A9a23:aArYoqFfQ+SCHEtQpLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5r
- mTdZUgpHnJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YZT0EUMrzN5DZB4voSmDPIceod/A==
-X-Talos-CUID: =?us-ascii?q?9a23=3AKoX2Y2kUoehyM3vgS5IWtFX+hyHXOVrh/TCJBUP?=
- =?us-ascii?q?oNSEqVqOsYnSdyIdoyuM7zg=3D=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3ArPcumw8rV7iMmZ8qEZUM9OiQf+wxuueoKWkGqJY?=
- =?us-ascii?q?hqe2PKnxBGTzG3DviFw=3D=3D?=
+ inVcidlJJDX1BUr9S3ihqhfVY7S
+IronPort-HdrOrdr: A9a23:zYTrlK1FUvlG6PzvXu3uKQqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
+X-Talos-CUID: =?us-ascii?q?9a23=3ACoiE/GrCSoCEODMpS+izFZXmUdw8Vnrfk3rSGnS?=
+ =?us-ascii?q?bSl41ZIa/YhjI5Ioxxg=3D=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3A/ObK0A0TCPcZP15Y9NPuwlvItTUj3an0IUIRwLY?=
+ =?us-ascii?q?/kvajDwV2NT6XoRGUTdpy?=
 X-IronPort-AV: E=Sophos;i="6.02,144,1688443200"; 
-   d="scan'208";a="121213282"
+   d="scan'208";a="125280891"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 8/8] x86/spec-ctrl: Mitigate the Zen1 DIV leakge
-Date: Wed, 13 Sep 2023 21:27:58 +0100
-Message-ID: <20230913202758.508225-9-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/8] x86/spec-ctrl: Fold DO_SPEC_CTRL_EXIT_TO_XEN into it's single user
+Date: Wed, 13 Sep 2023 21:27:52 +0100
+Message-ID: <20230913202758.508225-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230913202758.508225-1-andrew.cooper3@citrix.com>
 References: <20230913202758.508225-1-andrew.cooper3@citrix.com>
@@ -98,223 +98,84 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-In the Zen1 microarchitecure, there is one divider in the pipeline which
-services uops from both threads.  In the case of #DE, the latched result from
-the previous DIV to execute will be forwarded speculatively.
+With the SPEC_CTRL_EXIT_TO_XEN{,_IST} confusion fixed, it's now obvious that
+there's only a single EXIT_TO_XEN path.  Fold DO_SPEC_CTRL_EXIT_TO_XEN into
+SPEC_CTRL_EXIT_TO_XEN to simplify further fixes.
 
-This is an interesting covert channel that allows two threads to communicate
-without any system calls.  In also allows userspace to obtain the result of
-the most recent DIV instruction executed (even speculatively) in the core,
-which can be from a higher privilege context.
+When merging labels, switch the name to .L\@_skip_sc_msr as "skip" on its own
+is going to be too generic shortly.
 
-Scrub the buffers in the divider unit by executing a non-faulting divide.
-This needs performing on the exit-to-guest paths, and ist_exit-to-Xen.
-
-This is XSA-439 / CVE-2023-20588.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-
-No embargo - this is already public.  XSA paperwork to follow.
 ---
- docs/misc/xen-command-line.pandoc        |  6 +++-
- xen/arch/x86/hvm/svm/entry.S             |  1 +
- xen/arch/x86/include/asm/cpufeatures.h   |  2 +-
- xen/arch/x86/include/asm/spec_ctrl_asm.h | 16 +++++++++
- xen/arch/x86/spec_ctrl.c                 | 45 ++++++++++++++++++++++--
- 5 files changed, 66 insertions(+), 4 deletions(-)
+ xen/arch/x86/include/asm/spec_ctrl_asm.h | 40 ++++++++++--------------
+ 1 file changed, 16 insertions(+), 24 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index f88e6a70aed6..7acd68885656 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2353,7 +2353,7 @@ By default SSBD will be mitigated at runtime (i.e `ssbd=runtime`).
- >              {msr-sc,rsb,md-clear,ibpb-entry}=<bool>|{pv,hvm}=<bool>,
- >              bti-thunk=retpoline|lfence|jmp, {ibrs,ibpb,ssbd,psfd,
- >              eager-fpu,l1d-flush,branch-harden,srb-lock,
-->              unpriv-mmio,gds-mit}=<bool> ]`
-+>              unpriv-mmio,gds-mit,div-scrub}=<bool> ]`
- 
- Controls for speculative execution sidechannel mitigations.  By default, Xen
- will pick the most appropriate mitigations based on compiled in support,
-@@ -2475,6 +2475,10 @@ has elected not to lock the configuration, Xen will use GDS_CTRL to mitigate
- GDS with.  Otherwise, Xen will mitigate by disabling AVX, which blocks the use
- of the AVX2 Gather instructions.
- 
-+On all hardware, the `div-scrub=` option can be used to force or prevent Xen
-+from mitigating the DIV-leakage vulnerability.  By default, Xen will mitigate
-+DIV-leakage on hardware believed to be vulnerable.
-+
- ### sync_console
- > `= <boolean>`
- 
-diff --git a/xen/arch/x86/hvm/svm/entry.S b/xen/arch/x86/hvm/svm/entry.S
-index 9effd2199ba0..c52528fed4cf 100644
---- a/xen/arch/x86/hvm/svm/entry.S
-+++ b/xen/arch/x86/hvm/svm/entry.S
-@@ -72,6 +72,7 @@ __UNLIKELY_END(nsvm_hap)
- 1:          /* No Spectre v1 concerns.  Execution will hit VMRUN imminently. */
-         .endm
-         ALTERNATIVE "", svm_vmentry_spec_ctrl, X86_FEATURE_SC_MSR_HVM
-+        ALTERNATIVE "", DO_SPEC_CTRL_DIV, X86_FEATURE_SC_DIV
- 
-         pop  %r15
-         pop  %r14
-diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
-index da0593de8542..724de2e11db4 100644
---- a/xen/arch/x86/include/asm/cpufeatures.h
-+++ b/xen/arch/x86/include/asm/cpufeatures.h
-@@ -35,7 +35,7 @@ XEN_CPUFEATURE(SC_RSB_HVM,        X86_SYNTH(19)) /* RSB overwrite needed for HVM
- XEN_CPUFEATURE(XEN_SELFSNOOP,     X86_SYNTH(20)) /* SELFSNOOP gets used by Xen itself */
- XEN_CPUFEATURE(SC_MSR_IDLE,       X86_SYNTH(21)) /* Clear MSR_SPEC_CTRL on idle */
- XEN_CPUFEATURE(XEN_LBR,           X86_SYNTH(22)) /* Xen uses MSR_DEBUGCTL.LBR */
--/* Bits 23 unused. */
-+XEN_CPUFEATURE(SC_DIV,            X86_SYNTH(25)) /* DIV scrub needed */
- XEN_CPUFEATURE(SC_RSB_IDLE,       X86_SYNTH(24)) /* RSB overwrite needed for idle. */
- XEN_CPUFEATURE(SC_VERW_IDLE,      X86_SYNTH(25)) /* VERW used by Xen for idle */
- XEN_CPUFEATURE(XEN_SHSTK,         X86_SYNTH(26)) /* Xen uses CET Shadow Stacks */
 diff --git a/xen/arch/x86/include/asm/spec_ctrl_asm.h b/xen/arch/x86/include/asm/spec_ctrl_asm.h
-index 9740697114ad..10e57780f08b 100644
+index 14ec40e8d32f..dd7c5e8bfc79 100644
 --- a/xen/arch/x86/include/asm/spec_ctrl_asm.h
 +++ b/xen/arch/x86/include/asm/spec_ctrl_asm.h
-@@ -165,6 +165,18 @@
- .L\@_verw_skip:
+@@ -199,27 +199,6 @@
+     wrmsr
  .endm
  
-+.macro DO_SPEC_CTRL_DIV
-+/*
-+ * Requires nothing
-+ * Clobbers %rax
-+ *
-+ * Issue a DIV for its flushing side effect (Zen1 uarch specific).  Any
-+ * non-faulting DIV will do, and a byte DIV has least latency.
-+ */
-+    mov $1, %eax
-+    div %al
-+.endm
-+
- .macro DO_SPEC_CTRL_ENTRY maybexen:req
+-.macro DO_SPEC_CTRL_EXIT_TO_XEN
+-/*
+- * Requires %rbx=stack_end
+- * Clobbers %rax, %rcx, %rdx
+- *
+- * When returning to Xen context, look to see whether SPEC_CTRL shadowing is
+- * in effect, and reload the shadow value.  This covers race conditions which
+- * exist with an NMI/MCE/etc hitting late in the return-to-guest path.
+- */
+-    xor %edx, %edx
+-
+-    testb $SCF_use_shadow, STACK_CPUINFO_FIELD(spec_ctrl_flags)(%rbx)
+-    jz .L\@_skip
+-
+-    mov STACK_CPUINFO_FIELD(shadow_spec_ctrl)(%rbx), %eax
+-    mov $MSR_SPEC_CTRL, %ecx
+-    wrmsr
+-
+-.L\@_skip:
+-.endm
+-
+ .macro DO_SPEC_CTRL_EXIT_TO_GUEST
  /*
-  * Requires %rsp=regs (also cpuinfo if !maybexen)
-@@ -267,6 +279,8 @@
-     ALTERNATIVE "", DO_SPEC_CTRL_EXIT_TO_GUEST, X86_FEATURE_SC_MSR_PV
+  * Requires %eax=spec_ctrl, %rsp=regs/cpuinfo
+@@ -328,11 +307,24 @@ UNLIKELY_DISPATCH_LABEL(\@_serialise):
+  * Clobbers %rax, %rcx, %rdx
+  */
+     testb $SCF_ist_sc_msr, STACK_CPUINFO_FIELD(spec_ctrl_flags)(%rbx)
+-    jz .L\@_skip
++    jz .L\@_skip_sc_msr
  
-     DO_SPEC_CTRL_COND_VERW
+-    DO_SPEC_CTRL_EXIT_TO_XEN
++    /*
++     * When returning to Xen context, look to see whether SPEC_CTRL shadowing
++     * is in effect, and reload the shadow value.  This covers race conditions
++     * which exist with an NMI/MCE/etc hitting late in the return-to-guest
++     * path.
++     */
++    xor %edx, %edx
+ 
+-.L\@_skip:
++    testb $SCF_use_shadow, STACK_CPUINFO_FIELD(spec_ctrl_flags)(%rbx)
++    jz .L\@_skip_sc_msr
 +
-+    ALTERNATIVE "", DO_SPEC_CTRL_DIV, X86_FEATURE_SC_DIV
++    mov STACK_CPUINFO_FIELD(shadow_spec_ctrl)(%rbx), %eax
++    mov $MSR_SPEC_CTRL, %ecx
++    wrmsr
++
++.L\@_skip_sc_msr:
  .endm
  
- /*
-@@ -378,6 +392,8 @@ UNLIKELY_DISPATCH_LABEL(\@_serialise):
-     verw STACK_CPUINFO_FIELD(verw_sel)(%r14)
- .L\@_verw_skip:
- 
-+    ALTERNATIVE "", DO_SPEC_CTRL_DIV, X86_FEATURE_SC_DIV
-+
- .L\@_skip_ist_exit:
- .endm
- 
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index 9b8fdb5303ad..5332dba3f659 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -67,6 +67,7 @@ static int8_t __initdata opt_srb_lock = -1;
- static bool __initdata opt_unpriv_mmio;
- static bool __ro_after_init opt_fb_clear_mmio;
- static int8_t __initdata opt_gds_mit = -1;
-+static int8_t __initdata opt_div_scrub = -1;
- 
- static int __init cf_check parse_spec_ctrl(const char *s)
- {
-@@ -121,6 +122,7 @@ static int __init cf_check parse_spec_ctrl(const char *s)
-             opt_srb_lock = 0;
-             opt_unpriv_mmio = false;
-             opt_gds_mit = 0;
-+            opt_div_scrub = 0;
-         }
-         else if ( val > 0 )
-             rc = -EINVAL;
-@@ -273,6 +275,8 @@ static int __init cf_check parse_spec_ctrl(const char *s)
-             opt_unpriv_mmio = val;
-         else if ( (val = parse_boolean("gds-mit", s, ss)) >= 0 )
-             opt_gds_mit = val;
-+        else if ( (val = parse_boolean("div-scrub", s, ss)) >= 0 )
-+            opt_div_scrub = val;
-         else
-             rc = -EINVAL;
- 
-@@ -473,7 +477,7 @@ static void __init print_details(enum ind_thunk thunk)
-                "\n");
- 
-     /* Settings for Xen's protection, irrespective of guests. */
--    printk("  Xen settings: BTI-Thunk %s, SPEC_CTRL: %s%s%s%s%s, Other:%s%s%s%s%s\n",
-+    printk("  Xen settings: BTI-Thunk %s, SPEC_CTRL: %s%s%s%s%s, Other:%s%s%s%s%s%s\n",
-            thunk == THUNK_NONE      ? "N/A" :
-            thunk == THUNK_RETPOLINE ? "RETPOLINE" :
-            thunk == THUNK_LFENCE    ? "LFENCE" :
-@@ -498,7 +502,8 @@ static void __init print_details(enum ind_thunk thunk)
-            opt_l1d_flush                             ? " L1D_FLUSH" : "",
-            opt_md_clear_pv || opt_md_clear_hvm ||
-            opt_fb_clear_mmio                         ? " VERW"  : "",
--           opt_branch_harden                         ? " BRANCH_HARDEN" : "");
-+           opt_branch_harden                         ? " BRANCH_HARDEN" : "",
-+           opt_div_scrub                             ? " DIV" : "");
- 
-     /* L1TF diagnostics, printed if vulnerable or PV shadowing is in use. */
-     if ( cpu_has_bug_l1tf || opt_pv_l1tf_hwdom || opt_pv_l1tf_domu )
-@@ -955,6 +960,40 @@ static void __init srso_calculations(bool hw_smt_enabled)
-         setup_force_cpu_cap(X86_FEATURE_SRSO_NO);
- }
- 
-+/*
-+ * Div leakage is specific to the AMD Zen1 microarchitecure.  Use STIBP as a
-+ * heuristic to select between Zen1 and Zen2 uarches.
-+ */
-+static bool __init has_div_vuln(void)
-+{
-+    if ( !(boot_cpu_data.x86_vendor &
-+           (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
-+        return false;
-+
-+    if ( (boot_cpu_data.x86 != 0x17 && boot_cpu_data.x86 != 0x18) ||
-+         !boot_cpu_has(X86_FEATURE_AMD_STIBP) )
-+        return false;
-+
-+    return true;
-+}
-+
-+static void __init div_calculations(bool hw_smt_enabled)
-+{
-+    bool cpu_bug_div = has_div_vuln();
-+
-+    if ( opt_div_scrub == -1 )
-+        opt_div_scrub = cpu_bug_div;
-+
-+    if ( opt_div_scrub )
-+        setup_force_cpu_cap(X86_FEATURE_SC_DIV);
-+
-+    if ( opt_smt == -1 && cpu_bug_div && hw_smt_enabled )
-+        warning_add(
-+            "Booted on leaky-DIV hardware with SMT/Hyperthreading\n"
-+            "enabled.  Please assess your configuration and choose an\n"
-+            "explicit 'smt=<bool>' setting.  See XSA-439.\n");
-+}
-+
- static void __init ibpb_calculations(void)
- {
-     bool def_ibpb_entry = false;
-@@ -1714,6 +1753,8 @@ void __init init_speculation_mitigations(void)
- 
-     ibpb_calculations();
- 
-+    div_calculations(hw_smt_enabled);
-+
-     /* Check whether Eager FPU should be enabled by default. */
-     if ( opt_eager_fpu == -1 )
-         opt_eager_fpu = should_use_eager_fpu();
+ #endif /* __ASSEMBLY__ */
 -- 
 2.30.2
 
