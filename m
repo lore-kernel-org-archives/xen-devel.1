@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2167EE020C
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 20:28:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601589.937674 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA42BEE020E
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 20:28:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601587.937660 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgWTM-0006Dx-TT; Wed, 13 Sep 2023 20:28:28 +0000
+	id 1qgWTL-0005zA-T5; Wed, 13 Sep 2023 20:28:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601589.937674; Wed, 13 Sep 2023 20:28:28 +0000
+Received: by outflank-mailman (output) from mailman id 601587.937660; Wed, 13 Sep 2023 20:28:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgWTM-0006Cl-JL; Wed, 13 Sep 2023 20:28:28 +0000
-Received: by outflank-mailman (input) for mailman id 601589;
- Wed, 13 Sep 2023 20:28:27 +0000
+	id 1qgWTL-0005yE-Pd; Wed, 13 Sep 2023 20:28:27 +0000
+Received: by outflank-mailman (input) for mailman id 601587;
+ Wed, 13 Sep 2023 20:28:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Z4av=E5=citrix.com=prvs=613b8bbe6=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qgWTL-0004dA-0L
- for xen-devel@lists.xenproject.org; Wed, 13 Sep 2023 20:28:27 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 16309a95-5274-11ee-8787-cb3800f73035;
- Wed, 13 Sep 2023 22:28:25 +0200 (CEST)
+ id 1qgWTK-0004dA-0L
+ for xen-devel@lists.xenproject.org; Wed, 13 Sep 2023 20:28:26 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1695771d-5274-11ee-8787-cb3800f73035;
+ Wed, 13 Sep 2023 22:28:24 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,91 +38,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 16309a95-5274-11ee-8787-cb3800f73035
+X-Inumbo-ID: 1695771d-5274-11ee-8787-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1694636904;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=E+h+v4bt4jUOs5MOxa+tFxGF/9LxGqNV0dJqFrllWuI=;
-  b=WG5EO7zlDcYebsc4YuCjGQr9m+mT+IDKJp5L61g4WMuTBeGLEuaqfUqE
-   UrVzIRo4BfOaoR/5FSuqbe5s1UxbPNezw01u5vtuZhb1mkbskMjWnlu/m
-   uKBHUz+kMk6hu8yAe3MhmLDZnx7yZL7I1pUMH3vg88lZ1+AKQQI3n349p
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=EAYwPucKCgFfpPtFZ5OzqdU5toziSCvVykYftRRfIdA=;
+  b=ZfMMRej2INx492TkPHB1KBJeDDTJuGBKZBlP1zZpcyDGpBg0MJ6BRUNJ
+   Y/QfDz/HYnbSw3Z/ubB81eY5BNnAcOdAtQoifT3AqvyDUz1KMCikZc8p3
+   BikipgQPTAvAgEESJ3znnIQKAMJdSKgz6eemxCX2CY6/uOcZthz3tJOb+
    Q=;
-X-CSE-ConnectionGUID: tqLoj7ejQSK+P4DSBC/0tA==
-X-CSE-MsgGUID: XVEXRFZxRcidLwrm+Vs7Sw==
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-CSE-ConnectionGUID: hN7dthOmQouNNVMZfTFHmw==
+X-CSE-MsgGUID: woHOhxVzToi4V/sI0hrRwg==
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 125280890
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 121213283
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:B4Tn7aPorHFncWDvrR2zl8FynXyQoLVcMsEvi/4bfWQNrUp21WQHn
- 2AdCGCHa/aDZDP2KdF/Ooi3/E9Qu5DSzdRkHQto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
- 63yTvGacajYm1eF/k/F3oDJ9CQ6jefQAOOkVIYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
- Nj/uKUzAnf8s9JPGjxSs/jrRC9H5qyo42tJ5wdmPpingXeF/5UrJMNHTU2OByOQrrl8RoaSW
- +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
- HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0vpuJWZMq
- vEaEQsuLSjfq9mc6/XjVsA506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
- ZNEN3w2Nk+ojx5nYz/7DLoXmuuyi2a5WDpfsF+P/oI84nTJzRw327/oWDbQUoXQGJ8FxhbJ/
- goq+UzJPDwqDvKt2QCO836ImfXK3h3gB7kNQejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
- lcI4Ww+oK4q7kupQ9LhGRqirxasnDQRRt5RGO0S8xyWx+zf5APxLncAZi5MbpohrsBeeNAx/
- gbXxZWzX2Up6eDLDyvHrd94sA9eJwAJNEsFZ3AJTzI+wJrb/K0IpDmIFspKRfvdYsLOJRn8x
- DWDrS4bjroVjNIW26jTwW0rkw5AtbCSEFdru1y/snaNq1ogOdX7P9DABU3zt64oEWqPcrWWU
- JHoceC65ftGM5yCnTflrA4lTODwvKbt3NExbDdS83gdG9aFoS7LkWN4umsWyKJV3iEsIGWBX
- aMrkVkNjKK/xVPzBUONX6q/Ct4x0Y/rHsn/W/bfY7JmO8YgKFHcpHkyOxPOjggBdXTAdollZ
- f+mnTuEVy5GWcyLMhLoLwvi7VPb7n9nnj6CLXwK5x+mzaCfdBaopUQtaTOzghQCxPrc+m39q
- o8PX/ZmPj0DCIUSlAGLq99MRb3LRFBnba3LRzt/KrLcelc/SDF5YxITqJt4E7FYc21uvr+g1
- hmAtoVwmDITWVWvxd22V01e
-IronPort-HdrOrdr: A9a23:EfUkcaFlA/GyOoMxpLqE5MeALOsnbusQ8zAXP0AYc3Jom6uj5q
- eTdZUgpHvJYVkqOE3I9ertBEDiewK4yXcW2/hzAV7KZmCP0wHEEGgL1/qF/9SKIUzDH4Bmup
- uIC5IOauHNMQ==
-X-Talos-CUID: 9a23:DvCYvWBDzYURAzz6EzV+0EkWRc0nS0b+j0+MD3SSIiExVJTAHA==
-X-Talos-MUID: 9a23:HqnvEgnuhWjZ9z9aAG6qdnpSCupY2YqcGHoGkJkipNOBdhJrZAyC2WE=
+IronPort-Data: A9a23:7aegra46JQllLXF5vj2pDgxRtCTHchMFZxGqfqrLsTDasY5as4F+v
+ jAXXTyOPPzZMGv9fNskbI+19kICusLRx9dhSgJs/iE8Hi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+ plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRG/ykTraCY3gtLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9lU35pwehBtC5gZlPaES5weF/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m9
+ dpHJCwNSRW6gP+Q5oyeeOdQqOQmM5y+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJUQVYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xxzB/
+ DudpTSiav0cHMOY6R2F4ky+uujOwR28Q6NKFKeC6fE/1TV/wURMUUZLBDNXu8KRmkO4Ht5SN
+ UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JyOeAn7ACGyoLP/h2UQGMDS1Zpd9gOpMIwAzsw2
+ Te0c8jBXGI19ufPEDTEq+nS9GnpUcQIEYMcTS8iEgcZ4/7mmYYuqDTxa+RtLICVi8KgTFkc3
+ Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6JBzz4t2uVcKbgPtX1sgaDsZ6sOa7DFjG8U
+ G44d99yBQzkJbWEj2SzTeoEB9lFDN7VYWSH0TaD83TMnglBGkJPn6gKsFmSx28zaK7onAMFh
+ 2eK4mtsCGd7ZifCUEOOS9vZ5z4W5abhD8/5cfvfc8BDZJN8HCfeonAyPBfJgzC1yxR0+U3aB
+ Xt9WZz8ZZr9If47pAdaus9HieN7rszA7Ty7qW/HI+SPjuPFOS/9pUYtO1qSdOEphJ5oUy2Mm
+ +uzw/Cikk0FOMWnO3m/zGLmBQxSRZTNLcys+pM/my/qClYOJVzN/NeNnex5JtU1z/w9eyWh1
+ ijVZ3K0AWHX3RXvQThmoFg5AF8zdf6TdU4GABE=
+IronPort-HdrOrdr: A9a23:HUJxKa7Oz8A1nM8TKQPXwOnXdLJyesId70hD6qkRc20vTiX8ra
+ qTdZsgpHvJYVoqKRQdcLO7Scq9qBHnhPhICOAqVN/IPWnbUUSTXeNfBODZskTd8kPFh5ZgPG
+ RbH5SWyuecMXFKyej95ge8H5IbzN6L/LvtrfvCzh5WPGZXgm1bgDuRwzz0LnFL
+X-Talos-CUID: =?us-ascii?q?9a23=3AO82ACWh9hFkAae30pIinBlfwajJucluCwGvQBEq?=
+ =?us-ascii?q?BDntPboOwe1Gs1oNhjJ87?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AXb4ANw2hs1kQgb1r2phz+h7ljjUj/KOOL0Adr4c?=
+ =?us-ascii?q?6vMjYC2trGm+dlg6oTdpy?=
 X-IronPort-AV: E=Sophos;i="6.02,144,1688443200"; 
-   d="scan'208";a="125280890"
+   d="scan'208";a="121213283"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 0/8] x86/spec-ctrl: AMD DIV fix, and VERW prerequisite bugfixes
-Date: Wed, 13 Sep 2023 21:27:50 +0100
-Message-ID: <20230913202758.508225-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/8] x86/entry: Adjust restore_all_xen to hold stack_end in %r14
+Date: Wed, 13 Sep 2023 21:27:55 +0100
+Message-ID: <20230913202758.508225-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230913202758.508225-1-andrew.cooper3@citrix.com>
+References: <20230913202758.508225-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Patch 8 is the XSA-439 fix for the AMD DIV issue, disclosed insufficiently
-ahead of August 8th for us to prepare a fix for the embargo.
+All other SPEC_CTRL_{ENTRY,EXIT}_* helpers hold stack_end in %r14.  Adjust it
+for consistency, freeing up %rbx to be used differently.
 
-Patches 1 thru 7 are prerequisites, identified while trying to write patch 8.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+---
+ xen/arch/x86/include/asm/spec_ctrl_asm.h | 8 ++++----
+ xen/arch/x86/x86_64/entry.S              | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-All 8 patches are for all security trees.
-
-Andrew Cooper (8):
-  x86/spec-ctrl: Fix confusion between SPEC_CTRL_EXIT_TO_XEN{,_IST}
-  x86/spec-ctrl: Fold DO_SPEC_CTRL_EXIT_TO_XEN into it's single user
-  x86/spec-ctrl: Turn the remaining SPEC_CTRL_{ENTRY,EXIT}_* into asm macros
-  x86/spec-ctrl: Extend all SPEC_CTRL_{ENTER,EXIT}_* comments
-  x86/entry: Adjust restore_all_xen to hold stack_end in %r14
-  x86/entry: Track the IST-ness of an entry for the exit paths
-  x86/spec-ctrl: Issue VERW during IST exit to Xen
-  x86/spec-ctrl: Mitigate the Zen1 DIV leakge
-
- docs/misc/xen-command-line.pandoc        |   6 +-
- xen/arch/x86/hvm/svm/entry.S             |   1 +
- xen/arch/x86/include/asm/cpufeatures.h   |   2 +-
- xen/arch/x86/include/asm/spec_ctrl_asm.h | 150 ++++++++++++++++-------
- xen/arch/x86/spec_ctrl.c                 |  45 ++++++-
- xen/arch/x86/traps.c                     |  13 ++
- xen/arch/x86/x86_64/compat/entry.S       |   9 +-
- xen/arch/x86/x86_64/entry.S              |  31 +++--
- 8 files changed, 198 insertions(+), 59 deletions(-)
-
-
-base-commit: 6aa25c32180ab59081c73bae4c568367d9133a1f
+diff --git a/xen/arch/x86/include/asm/spec_ctrl_asm.h b/xen/arch/x86/include/asm/spec_ctrl_asm.h
+index 77f6c35bb9c5..acdb526d292d 100644
+--- a/xen/arch/x86/include/asm/spec_ctrl_asm.h
++++ b/xen/arch/x86/include/asm/spec_ctrl_asm.h
+@@ -344,10 +344,10 @@ UNLIKELY_DISPATCH_LABEL(\@_serialise):
+  */
+ .macro SPEC_CTRL_EXIT_TO_XEN
+ /*
+- * Requires %rbx=stack_end
++ * Requires %r14=stack_end
+  * Clobbers %rax, %rcx, %rdx
+  */
+-    testb $SCF_ist_sc_msr, STACK_CPUINFO_FIELD(spec_ctrl_flags)(%rbx)
++    testb $SCF_ist_sc_msr, STACK_CPUINFO_FIELD(spec_ctrl_flags)(%r14)
+     jz .L\@_skip_sc_msr
+ 
+     /*
+@@ -358,10 +358,10 @@ UNLIKELY_DISPATCH_LABEL(\@_serialise):
+      */
+     xor %edx, %edx
+ 
+-    testb $SCF_use_shadow, STACK_CPUINFO_FIELD(spec_ctrl_flags)(%rbx)
++    testb $SCF_use_shadow, STACK_CPUINFO_FIELD(spec_ctrl_flags)(%r14)
+     jz .L\@_skip_sc_msr
+ 
+-    mov STACK_CPUINFO_FIELD(shadow_spec_ctrl)(%rbx), %eax
++    mov STACK_CPUINFO_FIELD(shadow_spec_ctrl)(%r14), %eax
+     mov $MSR_SPEC_CTRL, %ecx
+     wrmsr
+ 
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index a1c860f56949..525877e97330 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -665,15 +665,15 @@ restore_all_xen:
+          * Check whether we need to switch to the per-CPU page tables, in
+          * case we return to late PV exit code (from an NMI or #MC).
+          */
+-        GET_STACK_END(bx)
+-        cmpb  $0, STACK_CPUINFO_FIELD(use_pv_cr3)(%rbx)
++        GET_STACK_END(14)
++        cmpb  $0, STACK_CPUINFO_FIELD(use_pv_cr3)(%r14)
+ UNLIKELY_START(ne, exit_cr3)
+-        mov   STACK_CPUINFO_FIELD(pv_cr3)(%rbx), %rax
++        mov   STACK_CPUINFO_FIELD(pv_cr3)(%r14), %rax
+         mov   %rax, %cr3
+ UNLIKELY_END(exit_cr3)
+ 
+         /* WARNING! `ret`, `call *`, `jmp *` not safe beyond this point. */
+-        SPEC_CTRL_EXIT_TO_XEN     /* Req: %rbx=end, Clob: acd */
++        SPEC_CTRL_EXIT_TO_XEN     /* Req: %r14=end, Clob: acd */
+ 
+         RESTORE_ALL adj=8
+         iretq
 -- 
 2.30.2
 
