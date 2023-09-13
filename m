@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E55CA5537
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 11:02:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601200.937154 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBEBFCA5538
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 11:08:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601211.937163 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgNdV-00038e-T2; Wed, 13 Sep 2023 11:02:21 +0000
+	id 1qgNj8-00048f-Fn; Wed, 13 Sep 2023 11:08:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601200.937154; Wed, 13 Sep 2023 11:02:21 +0000
+Received: by outflank-mailman (output) from mailman id 601211.937163; Wed, 13 Sep 2023 11:08:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgNdV-00038X-PH; Wed, 13 Sep 2023 11:02:21 +0000
-Received: by outflank-mailman (input) for mailman id 601200;
- Wed, 13 Sep 2023 11:02:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Mepq=E5=invisiblethingslab.com=simon@srs-se1.protection.inumbo.net>)
- id 1qgNdU-00037c-Ar
- for xen-devel@lists.xenproject.org; Wed, 13 Sep 2023 11:02:20 +0000
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ffe3fa96-5224-11ee-8786-cb3800f73035;
- Wed, 13 Sep 2023 13:02:18 +0200 (CEST)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id AEC375C01AA;
- Wed, 13 Sep 2023 07:02:15 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Wed, 13 Sep 2023 07:02:15 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 13 Sep 2023 07:02:12 -0400 (EDT)
+	id 1qgNj8-00048Y-D6; Wed, 13 Sep 2023 11:08:10 +0000
+Received: by outflank-mailman (input) for mailman id 601211;
+ Wed, 13 Sep 2023 11:08:09 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgNj7-00048O-MZ; Wed, 13 Sep 2023 11:08:09 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgNj7-0003nN-KV; Wed, 13 Sep 2023 11:08:09 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgNj7-0005so-9G; Wed, 13 Sep 2023 11:08:09 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgNj7-0008RE-8s; Wed, 13 Sep 2023 11:08:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,219 +44,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ffe3fa96-5224-11ee-8786-cb3800f73035
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm1; t=
-	1694602935; x=1694689335; bh=ybp8mdw57do83PPlQuFWgagWRBAQrwYZ84m
-	OuzqG5TA=; b=4TvEtiL5gvRyLcrB5j3RK6dzRMsW92jdu3omBY+w+BRnmcr0BI2
-	zRLAQd9Csic4v6ubzj5m58f8Q+E730lpvRe9s+uSHbA6FlvSqOlpk6EBQTByOg6u
-	ZonUR/+fHvPlK7BJ+jgOu7wujpHAoF0/4XOc2bVVqWKZZfo6CEwK1YWvkwvWG+P1
-	O3Xsotrmmprm6xjZy6ctn3UPIjwYRyh/udN+Fg0NxPtyMRBOph5CAaWMYmpBSVwH
-	gk7xNDbN7eQZG3JtRF//7g0ENilh1l6JVFHqYCMdV8P2Y6We4TCKnYhWE0DPwMgf
-	jpCqHiL3aVSAVvyWocFZ6HKawsPf4I4gOTw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1694602935; x=1694689335; bh=ybp8mdw57do83
-	PPlQuFWgagWRBAQrwYZ84mOuzqG5TA=; b=KRJZncrTUu4eE3VdrU2FhlyssU3K4
-	wIuuCyj1QnlF70ZpTSX3PPGJX3VQTMtt5dLmqyRvHGMLn2C/bHe5SxqddVZeZs46
-	RG1ymparWIo8dvjutjTiad0YQAF6zdvO+W0I7xOB/9Ph3Q7sAX/tJjlw+/Cxa2IV
-	1GFQ9ZURIO4E5qzl0uWoA2iVoWei3l6yZ859r9grWnxXL0p0wbGw60VoNFwaKeod
-	1WQlA22P4bh/GCBtJWWTm50SdNmeFjxEMUvAzqIaqocLBA6TvPxCMw5AfPkk70My
-	RIQL5kpy7Ke9pOEHvcfzx++mMlNbE0FctCifvlt9b3ksk6TbL/UKXvsYQ==
-X-ME-Sender: <xms:t5YBZVzRuI7driHgscuq5n5Ek9FBKFjdhqpAzitQrNzHIIytzorTFQ>
-    <xme:t5YBZVToj-EzhTdPQbw-f8fZSq-j9QtiEfPDiESyH857Jp7r24TvjMkwk-mNLBFNW
-    VoNvMKbp-1DyNw>
-X-ME-Received: <xmr:t5YBZfW70VHkJGa-IYX3JAjhM5gGZkBP5K0dT4qEN3U8hoMYOPCwjCp_l5bLY_g>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrudeikedgfeehucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepkfffggfuvfevfhfhjggtsehgtderredttdejnecuhfhrohhmpefuihhmohhn
-    ucfirghishgvrhcuoehsihhmohhnsehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtg
-    homheqnecuggftrfgrthhtvghrnhepgeefteejvdeugfehtdelveegvddtvdffkeetgfdv
-    jefhvdffheetgfevudejjeefnecuffhomhgrihhnpehuvghfihdrohhrghdpkhgvrhhnvg
-    hlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhho
-    mhepshhimhhonhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:t5YBZXiR6kWzt0g_VArN0bOI0qf1PEubr8kUpxprm3TWnC5H1IlN2Q>
-    <xmx:t5YBZXCEdergEzDoPbfjTokA7suYgKs9TCmcZ7loK3B5z0MGyH1yEA>
-    <xmx:t5YBZQKgLCFXmKBZvRdkDkFzMzDAf1H-N3WHicdaoOLnLRVs2HpPUQ>
-    <xmx:t5YBZeNDFEKBdyleW0W1scfPaM6GYyi0EFNp82L5Ijp3iiVYlGwmWw>
-Feedback-ID: idc5945a3:Fastmail
-Message-ID: <68147114-080c-1e30-f3e4-f6ad049cb2af@invisiblethingslab.com>
-Date: Wed, 13 Sep 2023 13:01:39 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=dioXlvd0yIqTwalwoBfIq4rHxhHn9WjROxpBMra8wwg=; b=26tWFSPOTbgDWuBzNvl4/Hzr2N
+	fOG8vEdGFbWqsWt6LcpP20we3xEiWukPCQx/ifKx2dtWKn8xmyxoKF1Td1hEG1fDEz0XV3gcyULif
+	UPehoQNJmb+0Y3IMiE8vX/YRL8LlVtEOQbQpci8S9km28E7gkyb6B2T7CgUgwA8JXrDw=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-182993-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: Re: [XEN PATCH] x86/ACPI: Ignore entries marked as unusable when
- parsing MADT
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>
-References: <20230911101238.18005-1-simon@invisiblethingslab.com>
- <ZQBc4qccWlRJoDqQ@MacBook-MacBook-Pro-de-Roger.local>
-Content-Language: en-US
-From: Simon Gaiser <simon@invisiblethingslab.com>
-In-Reply-To: <ZQBc4qccWlRJoDqQ@MacBook-MacBook-Pro-de-Roger.local>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------ZkQ0EavWkoSKICkB6h2NXCKW"
+Subject: [ovmf test] 182993: trouble: blocked/broken/pass
+X-Osstest-Failures:
+    ovmf:build-i386:<job status>:broken:regression
+    ovmf:build-i386-pvops:<job status>:broken:regression
+    ovmf:build-i386-xsm:<job status>:broken:regression
+    ovmf:build-i386:host-install(4):broken:regression
+    ovmf:build-i386-xsm:host-install(4):broken:regression
+    ovmf:build-i386-pvops:host-install(4):broken:regression
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=cdfe4310dda2a30b0ca05c8ede6896edce37a656
+X-Osstest-Versions-That:
+    ovmf=b844b106e2a20c709ece1b2b89b2ae0e84a0e401
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 13 Sep 2023 11:08:09 +0000
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------ZkQ0EavWkoSKICkB6h2NXCKW
-Content-Type: multipart/mixed; boundary="------------V0WcUxLcF4lTb94GI8nN3oi9";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>
-Message-ID: <68147114-080c-1e30-f3e4-f6ad049cb2af@invisiblethingslab.com>
-Subject: Re: [XEN PATCH] x86/ACPI: Ignore entries marked as unusable when
- parsing MADT
-References: <20230911101238.18005-1-simon@invisiblethingslab.com>
- <ZQBc4qccWlRJoDqQ@MacBook-MacBook-Pro-de-Roger.local>
-In-Reply-To: <ZQBc4qccWlRJoDqQ@MacBook-MacBook-Pro-de-Roger.local>
+flight 182993 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/182993/
 
---------------V0WcUxLcF4lTb94GI8nN3oi9
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Failures and problems with tests :-(
 
-Roger Pau Monn=C3=A9:
-> On Mon, Sep 11, 2023 at 12:12:38PM +0200, Simon Gaiser wrote:
->> Up to version 6.2 Errata B [2] the ACPI spec only defines
->> ACPI_MADT_ENABLE as:
->>
->>     If zero, this processor is unusable, and the operating system
->>     support will not attempt to use it.
->>
->> The bit that later will be ACPI_MADT_ONLINE_CAPABLE is reserved with
->> "Must be zero".
->>
->> Version 6.3 [3] then adds ACPI_MADT_ONLINE_CAPABLE and changes the
->> meaning of ACPI_MADT_ENABLE:
->>
->>     Enabled
->>         If this bit is set the processor is ready for use. If this bit=
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-i386                      <job status>                 broken
+ build-i386-pvops                <job status>                 broken
+ build-i386-xsm                  <job status>                 broken
+ build-i386                    4 host-install(4)        broken REGR. vs. 182988
+ build-i386-xsm                4 host-install(4)        broken REGR. vs. 182988
+ build-i386-pvops              4 host-install(4)        broken REGR. vs. 182988
 
->>         is clear and the Online Capable bit is set, system hardware
->>         supports enabling this processor during OS runtime. If this bi=
-t
->>         is clear and the Online Capable bit is also clear, this
->>         processor is unusable, and OSPM shall ignore the contents of t=
-he
->>         Processor Local APIC Structure.
->>
->>     Online Capbable
->>         The information conveyed by this bit depends on the value of t=
-he
->>         Enabled bit. If the Enabled bit is set, this bit is reserved a=
-nd
->>         must be zero. Otherwise, if this this bit is set, system
->>         hardware supports enabling this processor during OS runtime.
->>
->> So with conforming firmwares it should be safe to simply ignore the
->> entry if !ACPI_MADT_ENABLED && !ACPI_MADT_ONLINE_CAPABLE
->>
->> As a precaution against buggy firmwares this change, like Linux [4],
->> ignores ACPI_MADT_ONLINE_CAPABLE completely if MADT revision < 5. Note=
+Tests which did not succeed, but are not blocking:
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
->> that the MADT revision was already increased to 5 with spec version 6.=
-2
->> Errata A [1], so before introducing the online capable flag. But it
->> wasn't changed for the new flag, so this is the best we can do here.
->>
->> For previous discussion see thread [5].
->>
->> Link: http://www.uefi.org/sites/default/files/resources/ACPI%206_2_A_S=
-ept29.pdf # [1]
->> Link: https://uefi.org/sites/default/files/resources/ACPI_6_2_B_final_=
-Jan30.pdf # [2]
->> Link: https://uefi.org/sites/default/files/resources/ACPI_6_3_May16.pd=
-f # [3]
->> Link: https://git.kernel.org/torvalds/c/e2869bd7af608c343988429ceb1c2f=
-e99644a01f # [4]
->> Link: https://lore.kernel.org/xen-devel/80bae614-052e-0f90-cf13-0e5e4e=
-d1a5cd@invisiblethingslab.com/ # [5]
->> Signed-off-by: Simon Gaiser <simon@invisiblethingslab.com>
->> ---
->>  xen/arch/x86/acpi/boot.c | 19 +++++++++++++------
->>  1 file changed, 13 insertions(+), 6 deletions(-)
->>
->> diff --git a/xen/arch/x86/acpi/boot.c b/xen/arch/x86/acpi/boot.c
->> index 4a62822fa9..2d0b8a9afc 100644
->> --- a/xen/arch/x86/acpi/boot.c
->> +++ b/xen/arch/x86/acpi/boot.c
->> @@ -77,6 +77,17 @@ static int __init cf_check acpi_parse_madt(struct a=
-cpi_table_header *table)
->>  	return 0;
->>  }
->> =20
->> +static bool __init acpi_is_processor_usable(uint32_t lapic_flags)
->> +{
->> +	if (lapic_flags & ACPI_MADT_ENABLED)
->> +		return true;
->> +
->> +	if (madt_revision >=3D 5 && (lapic_flags & ACPI_MADT_ONLINE_CAPABLE)=
-)
->> +		return true;
->> +
->> +	return false;
->=20
-> So this means that Xen would only support ACPI CPU Hotplug with
-> versions of the MADT >=3D 5?  Because with the proposed code non enable=
-d
-> entries on MADT versions < 5 will be reported as unusable.
->=20
-> Will this work with QEMU?  (ie: does QEMU expose a MADT table with
-> version >=3D 5)  Otherwise we will loose all possible ways of testing
-> ACPI CPU Hotplug.
+version targeted for testing:
+ ovmf                 cdfe4310dda2a30b0ca05c8ede6896edce37a656
+baseline version:
+ ovmf                 b844b106e2a20c709ece1b2b89b2ae0e84a0e401
 
-That's a good question. I just had a look and it looks like QEMU doesn't
-use the new revision (and the new flag) (yet?). (But QEMU assigns a
-valid APIC ID from the start.)
+Last test of basis   182988  2023-09-13 02:42:26 Z    0 days
+Failing since        182990  2023-09-13 06:12:22 Z    0 days    2 attempts
+Testing same since   182993  2023-09-13 08:10:41 Z    0 days    1 attempts
 
-So why does hotplugging works in Linux then? Turns out that I missed a
-later change:
+------------------------------------------------------------
+People who touched revisions under test:
+  Linus Liu <linus.liu@intel.com>
+  Nickle Wang <nicklew@nvidia.com>
 
-https://git.kernel.org/torvalds/c/fed8d8773b8ea68ad99d9eee8c8343bef9da2c2=
-c
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               broken  
+ build-amd64                                                  pass    
+ build-i386                                                   broken  
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             broken  
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
 
-So they went back to (mostly) the old logic. So then the above change
-isn't a good idea. It's only "mostly" the old logic because in the
-meantime Linux also improved the version check, to accurately match the
-version that introduced the new flag:
 
-https://git.kernel.org/torvalds/c/a74fabfbd1b7013045afc8cc541e6cab3360ccb=
-5
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Simon
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
---------------V0WcUxLcF4lTb94GI8nN3oi9--
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
---------------ZkQ0EavWkoSKICkB6h2NXCKW
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
------BEGIN PGP SIGNATURE-----
+broken-job build-i386 broken
+broken-job build-i386-pvops broken
+broken-job build-i386-xsm broken
+broken-step build-i386 host-install(4)
+broken-step build-i386-xsm host-install(4)
+broken-step build-i386-pvops host-install(4)
 
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAmUBlpYACgkQkO9xfO/x
-ly+Vjw/8DmnSmZMfqBD+TpZi5aztYC9mNnl/ODu0B927CjzuBfhHLEErGbWu5BoC
-tPTc1tezbt3Ve3dRzKI06JHgrjDt4VfxMhtHwQegdnPqkOAbU38IjBTqPv2ryvyv
-CRMcgQ2u5P8S68o6iQr4wZq3HsuWlgz3Fw1Z15ws7c6SUlimBE0kb5nx52buQqaM
-aUdUvvEW5WiGcU8w0I+kKq+tjYEczQA73K5TUybbHn2TNSHks+YhMFHo4QrXgbIa
-Vi6+BKrGfbJsBehdCfk8ApxakUkessVjtO0zbIRNyGuqtcNsWpxKLg8eODbddeGa
-FUhZKbHblGOA221W5O+GZ4gmRc9VMV2IUbVYQuk3PtRejGrrdw183xfNa0RKGzSe
-jH2GveZU2fxWQskwvJxxe+fNKe/8TzSOjQ7xTkrkw+I2gc3zVVVuk7j8TooofNsk
-1R/5UEzV+D/rW52Gr8KXzzTA/u6byjpyNSCkSleS0AHoCcyfZ2luXeJ7nNAvAq/K
-Mkswj69JPi4XnILXMz1LKEZh7UOvGwlva0L68YwO0h8uxIqKfhWFjemmzmSlRxZr
-07nPVspbSzSCljgqjbIbwYzqCUUli9FsyfbiDiAAayPKqxWyHLKZkqnItihnWekU
-ykkbhAa3xQYL5yUzqLd0zC8FfLZ9FcNwRJhJQ0rRFKNV0sR+US8=
-=icWL
------END PGP SIGNATURE-----
+Not pushing.
 
---------------ZkQ0EavWkoSKICkB6h2NXCKW--
+------------------------------------------------------------
+commit cdfe4310dda2a30b0ca05c8ede6896edce37a656
+Author: Linus Liu <linus.liu@intel.com>
+Date:   Tue Sep 12 09:41:59 2023 +0800
+
+    Pyrite support - Secure erase is only available if encryption is supported.
+    
+    https://bugzilla.tianocore.org/show_bug.cgi?id=3004
+    
+    Cc: Qi Zhang    <qi1.zhang@intel.com>
+    Cc: Rahul Kumar <rahul1.kumar@intel.com>
+    Cc: Jiewen Yao  <jiewen.yao@intel.com>
+    Cc: Tina Chen   <tina.chen@intel.com>
+    Cc: Xiao X Chen <xiao.x.chen@intel.com>
+    Signed-off-by: Linus Liu <linus.liu@intel.com>
+    Reviewed-by: Jiewen Yao  <jiewen.yao@intel.com>
+
+commit 4a1afea6f7361fd65e9d4ba34eaac48ec8bb2867
+Author: Nickle Wang <nicklew@nvidia.com>
+Date:   Fri Jul 21 21:39:10 2023 +0800
+
+    RedfishPkg/RedfishPlatformConfigDxe: fix can not set one-of option issue.
+    
+    StatementValue->Buffer is converted from ASCII to Unicode by caller
+    already so we don't have to convert it again.
+    
+    Signed-off-by: Nickle Wang <nicklew@nvidia.com>
+    Cc: Abner Chang <abner.chang@amd.com>
+    Cc: Igor Kulchytskyy <igork@ami.com>
+    Cc: Nick Ramirez <nramirez@nvidia.com>
+    Reviewed-by: Igor Kulchytskyy <igork@ami.com>
 
