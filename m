@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96BA7CA5537
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 10:51:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601194.937133 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85395CA5538
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Sep 2023 11:02:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601199.937144 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgNSM-0007hH-I7; Wed, 13 Sep 2023 10:50:50 +0000
+	id 1qgNdP-0002ro-IV; Wed, 13 Sep 2023 11:02:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601194.937133; Wed, 13 Sep 2023 10:50:50 +0000
+Received: by outflank-mailman (output) from mailman id 601199.937144; Wed, 13 Sep 2023 11:02:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgNSM-0007hA-FV; Wed, 13 Sep 2023 10:50:50 +0000
-Received: by outflank-mailman (input) for mailman id 601194;
- Wed, 13 Sep 2023 10:50:48 +0000
+	id 1qgNdP-0002rh-FL; Wed, 13 Sep 2023 11:02:15 +0000
+Received: by outflank-mailman (input) for mailman id 601199;
+ Wed, 13 Sep 2023 11:02:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VJSs=E5=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1qgNSK-0007h4-Lf
- for xen-devel@lists.xenproject.org; Wed, 13 Sep 2023 10:50:48 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ id 1qgNdO-0002rb-T3
+ for xen-devel@lists.xenproject.org; Wed, 13 Sep 2023 11:02:14 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 63a28926-5223-11ee-9b0d-b553b5be7939;
- Wed, 13 Sep 2023 12:50:44 +0200 (CEST)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4018af1038cso72334035e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 13 Sep 2023 03:50:44 -0700 (PDT)
+ id fdcbb7f3-5224-11ee-9b0d-b553b5be7939;
+ Wed, 13 Sep 2023 13:02:12 +0200 (CEST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-401d80f4ef8so72369655e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Sep 2023 04:02:12 -0700 (PDT)
 Received: from [10.80.67.28] (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- h18-20020a05600c351200b003fed8e12d62sm1752227wmq.27.2023.09.13.03.50.43
+ y13-20020adffa4d000000b0031f5f0d0be0sm15097709wrr.31.2023.09.13.04.02.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Sep 2023 03:50:43 -0700 (PDT)
+ Wed, 13 Sep 2023 04:02:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,64 +47,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 63a28926-5223-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: fdcbb7f3-5224-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1694602244; x=1695207044; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1694602932; x=1695207732; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:references:cc:to
          :content-language:subject:from:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=7Fp6B4FU3tZPD3HBfRkwMjH5MFqJ2hG2FkfumC+klfk=;
-        b=OkrMZJVCPEWMGIUc9NowA7sSdaTO/rXBoZyQ+e98/M/0uMNBmrhuq4XxFKe0Vu13zZ
-         m2fcziKwfc6xmC46oh/8SjTRFkldpmp64jvDHzBQq5uXHxrWVRofhBCqNBBIg1u/+6IO
-         E2EpwjkvlpIPw0puSYyiX2lh11RuyS4u3Ej/M=
+        bh=gOQlyMg+xT3Fe92J4JQw8w6Xevu0DIcUn6vz/vBhwyo=;
+        b=jmvhgHMiWlyQCg0/w7Tyym/5xCf/eYaiDT381YHAA5nwJ9BpZ82GriTdBpHYdfHL2f
+         8ZDB+2NhN0hZYkIhGfa1a38AFnpNn/+jEu5a6qVGxcD/lhOEOyg3RCUUI8Z2BUo1uZM2
+         8vw5kbYsQ6mb4XR+JLze1nMNKJSCsRtkOsmUQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694602244; x=1695207044;
+        d=1e100.net; s=20230601; t=1694602932; x=1695207732;
         h=content-transfer-encoding:in-reply-to:references:cc:to
          :content-language:subject:from:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7Fp6B4FU3tZPD3HBfRkwMjH5MFqJ2hG2FkfumC+klfk=;
-        b=r5MU/7NuvH+txVKGwpLlenw9c8Yr1YxveC9ZgAXbvrZxPGpXffRZSSUnkbrt4ZqibC
-         OmL5ZWK/RaTPx1LkcJriMCrZWNDw6PnBWyv1CBZ3T0vmO2v92DPkqWB/1/MxcwOGWUsS
-         4nXS39WdQoqhTouqdkRfnGUm3tv9ELRwCwKanXe1wDvud+1Fp3f7zsAfGXqW6NW8FPzL
-         tU9NM3drP3O/9ervQf86ymaN2cY1b9i48BpiGxC3z27RXC9THjkESb9dxe6LWGjB7jfE
-         GTDytePmdjTpOPmFFIUY070Yn+5GTMKE1aWHOPabS+OrW3wQpdaj2RySj8aEhcXPVUI7
-         ja3g==
-X-Gm-Message-State: AOJu0YxFV67/3ad0ZKoLOPvS5vIe2LIaJogeMmsiwre5DB3ZsAmY+lMy
-	ON31CDS6tsmlBwdtrcBD35ct9A==
-X-Google-Smtp-Source: AGHT+IFa1NhGV8kfuwY3+tvrCqKJgh/d7TsVHLyo/tO/iMGMsi2Xv3JvfcmH/EwTTG9oWDGk3UkHgw==
-X-Received: by 2002:a1c:4c1a:0:b0:400:57d1:4915 with SMTP id z26-20020a1c4c1a000000b0040057d14915mr1838566wmf.37.1694602243922;
-        Wed, 13 Sep 2023 03:50:43 -0700 (PDT)
-Message-ID: <4b3138ce-8605-6c9b-0cd2-d7dfc8b04b07@citrix.com>
-Date: Wed, 13 Sep 2023 11:50:43 +0100
+        bh=gOQlyMg+xT3Fe92J4JQw8w6Xevu0DIcUn6vz/vBhwyo=;
+        b=qBhkJdKVT+9ZcTnxD20W0PUv1huDiwk8kxD1/yT4WyYHQhHb8EPN5S2oUhSfFNPv35
+         2XL8Ln95pLgQQtJHbz1MLWxXFaCA5MlOWW8dZlh3laDLxCRNHL/MIBWCp8aOXQbc3Yq+
+         QD3tfOoqwgcv/fvN+EwZGMYthh/RsbVuiTitlyRLQXZG5qzlkCxmFQoj9xPhajoFmpvO
+         whLJvNZqEOP9kFOAHs+hXu79q/I0sJ6K7uX39IxLfQABDs+dejvWJ5ARIiiCN0GZfI6a
+         EF3bN8n6H2ZWSkVuKQIEg27XjmmOl+13rNRaMO49l1sG592x2AyG9cQJcLHO0UMJ1pLI
+         swQQ==
+X-Gm-Message-State: AOJu0Yy7V+c+ErsU5FnAKHDRRYDQg/otH5B2aSg/iw8lMfjLgYUepzPh
+	JWocp/ghJqk2xEglqQ8QsL72WA==
+X-Google-Smtp-Source: AGHT+IGJCL9Yil3JhsMmRfziQP/rqfvGrGn2jAuj73r9RhoAOw//CRvS9ukVJtZThaMqykRu5bmyqg==
+X-Received: by 2002:a05:600c:3794:b0:3fe:d71a:d84e with SMTP id o20-20020a05600c379400b003fed71ad84emr1884842wmr.1.1694602932094;
+        Wed, 13 Sep 2023 04:02:12 -0700 (PDT)
+Message-ID: <fca202a8-2716-6ed1-c2ce-707deeddb3ab@citrix.com>
+Date: Wed, 13 Sep 2023 12:02:11 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/amd: do not expose HWCR.TscFreqSel to guests
+Subject: Re: [Xen PATCH] x86/amd: do not expose HWCR.TscFreqSel to guests
 Content-Language: en-GB
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
- Wei Liu <wl@xen.org>, solene@openbsd.org,
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Wei Liu <wl@xen.org>, solene@openbsd.org,
  =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
  <marmarek@invisiblethingslab.com>,
- Demi Marie Obenour <demi@invisiblethingslab.com>
+ Demi Marie Obenour <demi@invisiblethingslab.com>,
+ Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org,
+ the arch/x86 maintainers <x86@kernel.org>
 References: <20230912162305.34339-1-roger.pau@citrix.com>
  <fc91c802-5f71-4ec9-8c11-68fd2c4ae672@citrix.com>
- <ZQFpr5nIZtRLPNhp@MacBook-MacBook-Pro-de-Roger.local>
-In-Reply-To: <ZQFpr5nIZtRLPNhp@MacBook-MacBook-Pro-de-Roger.local>
+ <2cfcda8f-bd51-085b-997a-0ff31434d460@suse.com>
+In-Reply-To: <2cfcda8f-bd51-085b-997a-0ff31434d460@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 13/09/2023 8:50 am, Roger Pau Monné wrote:
-> On Tue, Sep 12, 2023 at 05:35:15PM +0100, Andrew Cooper wrote:
+On 13/09/2023 7:18 am, Jan Beulich wrote:
+> On 12.09.2023 18:35, Andrew Cooper wrote:
 >> On 12/09/2023 5:23 pm, Roger Pau Monne wrote:
->>> ---
->>>  xen/arch/x86/msr.c | 8 ++++++--
->>>  1 file changed, 6 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
->>> index 3f0450259cdf..964d500ff8a1 100644
 >>> --- a/xen/arch/x86/msr.c
 >>> +++ b/xen/arch/x86/msr.c
 >>> @@ -240,8 +240,12 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
@@ -125,35 +120,24 @@ On 13/09/2023 8:50 am, Roger Pau Monné wrote:
 >> bogus irrespective of the specifics of the bit.
 >>
 >> I'm still of the opinion that it's buggy for OpenBSD to be looking at
->> model specific bits when virtualised,
-> Well, I think we can argue that an OS is free to ignore the CPUID HV
-> bit and still boot on Xen (even if that leads to non-ideal decisions).
-
-An OS which keeps itself to architectural details that we do our very
-best to be correct with, ought to function even if it ignores the HV bit.
-
-But we're (deliberately) not doing model-specific-accurate emulations of
-a specific platform.  An OS which ignores details about the environment
-it is operating in gets to keep the faults/malfunctions when it does
-something illegal.
-
->> but given my latest reading of the
+>> model specific bits when virtualised, but given my latest reading of the
 >> AMD manuals, I think OpenBSD *is* well behaved looking at PSTATE0 if it
 >> can see TSC_FREQ_SEL.
-> Hm, there's no written down note that TSC_FREQ_SEL implies PSTATE0 to
-> be available (and PSTATE0 is not an architectural MSR), but I can see
-> how a guest can expect to fetch the P0 frequency if it sees
-> TSC_FREQ_SEL.
+> I'm afraid I'm still at a loss seeing what wording in which PPR makes you
+> see a connection. If there was a connection, I'd like to ask that we at
+> least properly consider exposing PSTATE0 (or if necessary all PSTATEn) as
+> well, with zero value (i.e. in particular with the valid bit clear),
+> rather than exposing a r/o bit with the wrong value, upsetting Linux.
 
-The PPR is a reference of mostly autogenerated details and misc notes,
-put together in a non- hand-write way, unlike the older BKWGs.
+This mess is caused by the erroneous advertising of a model specific
+bit, and there's no way in hell that giving the guest even more model
+specific data is going to fix it.
 
-Lots of the information elided from public and partner-NDA versions is
-"see TICKET/LINK for rational" type comments.
+The PSTATE MSRs are entirely model specific, fully read/write, and the
+Enable bit is not an enable bit; its a "not valid yet" bit that firmware
+is required to adjust to be consistent across the coherency fabric.
 
-It is not a spec - it is a reference (the clue is even in the name)
-aimed at people already familiar with the area.  Do not fall into the
-trap of thinking it it can be read as a spec.
+Linux is simply wrong with it's printk() under virt, and wants adjusting.
 
 ~Andrew
 
