@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5B7EDE980
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:31:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601869.938188 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F03AEDE981
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:31:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601878.938197 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgewO-0000pQ-Pa; Thu, 14 Sep 2023 05:31:00 +0000
+	id 1qgewV-000194-0s; Thu, 14 Sep 2023 05:31:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601869.938188; Thu, 14 Sep 2023 05:31:00 +0000
+Received: by outflank-mailman (output) from mailman id 601878.938197; Thu, 14 Sep 2023 05:31:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgewO-0000pJ-Mr; Thu, 14 Sep 2023 05:31:00 +0000
-Received: by outflank-mailman (input) for mailman id 601869;
- Thu, 14 Sep 2023 05:30:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qgewU-00018x-Tx; Thu, 14 Sep 2023 05:31:06 +0000
+Received: by outflank-mailman (input) for mailman id 601878;
+ Thu, 14 Sep 2023 05:31:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IZLI=E6=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qgelE-0001X7-RU
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:28 +0000
+ id 1qgelU-0001XI-2i
+ for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:44 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 46938adc-52be-11ee-8787-cb3800f73035;
- Thu, 14 Sep 2023 07:19:27 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4de96d02-52be-11ee-9b0d-b553b5be7939;
+ Thu, 14 Sep 2023 07:19:40 +0200 (CEST)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Sep 2023 22:17:40 -0700
+ 13 Sep 2023 22:17:49 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:39 -0700
+ by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:48 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46938adc-52be-11ee-8787-cb3800f73035
+X-Inumbo-ID: 4de96d02-52be-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1694668768; x=1726204768;
+  t=1694668780; x=1726204780;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=daicXFK30tmpTUp95RTD2ZQAe5K9xY8zuW1WSEbSaqA=;
-  b=IZ3fDdlobGpN06FbjcdFiP9FpheyP5cyVJPDH8xjeX49jBnNSlyP7UGW
-   kPtUcIgIGsO2RE2rfkIt2N5bWehy6lUlRO20VmAjTfMfI34MpNlnI0Euf
-   RDWrqarKs1HwU/MusuRg3yHfZI2gD4eVWMff0seugKGTQCl4IvR/dyycU
-   6qRMta/dkaC92O0VIss3q3KOy1jdozi5oKM3OnCOFvOCntLm9sfaT+MRO
-   IberLtrRd6zaR1JOCWi0Te4HbU2OQWEO62AG/PspS82oNdSJVILfhrh8Y
-   p2sAQnaaLcGLBmDCWeJvuhCFOJRKTVCyqO6Qs7PxgnR7JpwOOd0iYdVCU
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661342"
+  bh=24bZxrNwN6mEn31ObZA79OqggozStalI8dlLgDZYX38=;
+  b=FO89w6xg33atRTsEhmJjdf3C42wrlw1Sy7UGjU8+VsW9ELNeQun3Z5w0
+   OKQ5TNpZLx06GgWOl2eTvH8eksg8HpxpKN8NXF50BOTwu4pWBcxabxQGc
+   iV7sD4A9o3WT0n1jCSSy4Bi77LdIcuF4q2yrYV1h0glOnVboSQhzs8zR3
+   oRtrY+uCKOP1339MoIyV2DIXvwWxUXwBcRmAQAm6k3q/bu3/PVLQxMJAP
+   NvdJiC9m9T6wgTRzKnRJ+9z2rstUsuxqHmMA05Q9Od1MaaG3cnm81UvJz
+   WQO99EU1uDUuXvV8cYkWhW1kuMU4iAh8ems2rH3MK6FATrXhS9kBF3WDQ
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661562"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="382661342"
+   d="scan'208";a="382661562"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488802"
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488853"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="779488802"
+   d="scan'208";a="779488853"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -86,9 +86,9 @@ Cc: tglx@linutronix.de,
 	mhiramat@kernel.org,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com
-Subject: [PATCH v10 21/38] x86/fred: No ESPFIX needed when FRED is enabled
-Date: Wed, 13 Sep 2023 21:47:48 -0700
-Message-Id: <20230914044805.301390-22-xin3.li@intel.com>
+Subject: [PATCH v10 38/38] x86/fred: Invoke FRED initialization code to enable FRED
+Date: Wed, 13 Sep 2023 21:48:05 -0700
+Message-Id: <20230914044805.301390-39-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230914044805.301390-1-xin3.li@intel.com>
 References: <20230914044805.301390-1-xin3.li@intel.com>
@@ -97,42 +97,115 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Because FRED always restores the full value of %rsp, ESPFIX is
-no longer needed when it's enabled.
+Let cpu_init_exception_handling() call cpu_init_fred_exceptions() to
+initialize FRED. However if FRED is unavailable or disabled, it falls
+back to set up TSS IST and initialize IDT.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Co-developed-by: Xin Li <xin3.li@intel.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/kernel/espfix_64.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
 
-diff --git a/arch/x86/kernel/espfix_64.c b/arch/x86/kernel/espfix_64.c
-index 16f9814c9be0..6726e0473d0b 100644
---- a/arch/x86/kernel/espfix_64.c
-+++ b/arch/x86/kernel/espfix_64.c
-@@ -106,6 +106,10 @@ void __init init_espfix_bsp(void)
- 	pgd_t *pgd;
- 	p4d_t *p4d;
+Changes since v8:
+* Move this patch after all required changes are in place (Thomas
+  Gleixner).
+---
+ arch/x86/kernel/cpu/common.c | 17 ++++++++++++-----
+ arch/x86/kernel/irqinit.c    |  7 ++++++-
+ arch/x86/kernel/traps.c      |  5 ++++-
+ 3 files changed, 22 insertions(+), 7 deletions(-)
+
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index 4cb36e241c9a..e230d3f4c556 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -61,6 +61,7 @@
+ #include <asm/microcode.h>
+ #include <asm/intel-family.h>
+ #include <asm/cpu_device_id.h>
++#include <asm/fred.h>
+ #include <asm/uv/uv.h>
+ #include <asm/set_memory.h>
+ #include <asm/traps.h>
+@@ -2128,7 +2129,10 @@ void syscall_init(void)
+ 	/* The default user and kernel segments */
+ 	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
  
-+	/* FRED systems always restore the full value of %rsp */
+-	idt_syscall_init();
 +	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		return;
-+
- 	/* Install the espfix pud into the kernel page directory */
- 	pgd = &init_top_pgt[pgd_index(ESPFIX_BASE_ADDR)];
- 	p4d = p4d_alloc(&init_mm, pgd, ESPFIX_BASE_ADDR);
-@@ -129,6 +133,10 @@ void init_espfix_ap(int cpu)
- 	void *stack_page;
- 	pteval_t ptemask;
++		fred_syscall_init();
++	else
++		idt_syscall_init();
+ }
  
-+	/* FRED systems always restore the full value of %rsp */
+ #else	/* CONFIG_X86_64 */
+@@ -2244,8 +2248,9 @@ void cpu_init_exception_handling(void)
+ 	/* paranoid_entry() gets the CPU number from the GDT */
+ 	setup_getcpu(cpu);
+ 
+-	/* IST vectors need TSS to be set up. */
+-	tss_setup_ist(tss);
++	/* For IDT mode, IST vectors need to be set in TSS. */
++	if (!cpu_feature_enabled(X86_FEATURE_FRED))
++		tss_setup_ist(tss);
+ 	tss_setup_io_bitmap(tss);
+ 	set_tss_desc(cpu, &get_cpu_entry_area(cpu)->tss.x86_tss);
+ 
+@@ -2254,8 +2259,10 @@ void cpu_init_exception_handling(void)
+ 	/* GHCB needs to be setup to handle #VC. */
+ 	setup_ghcb();
+ 
+-	/* Finally load the IDT */
+-	load_current_idt();
 +	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		return;
++		cpu_init_fred_exceptions();
++	else
++		load_current_idt();
+ }
+ 
+ /*
+diff --git a/arch/x86/kernel/irqinit.c b/arch/x86/kernel/irqinit.c
+index c683666876f1..f79c5edc0b89 100644
+--- a/arch/x86/kernel/irqinit.c
++++ b/arch/x86/kernel/irqinit.c
+@@ -28,6 +28,7 @@
+ #include <asm/setup.h>
+ #include <asm/i8259.h>
+ #include <asm/traps.h>
++#include <asm/fred.h>
+ #include <asm/prom.h>
+ 
+ /*
+@@ -96,7 +97,11 @@ void __init native_init_IRQ(void)
+ 	/* Execute any quirks before the call gates are initialised: */
+ 	x86_init.irqs.pre_vector_init();
+ 
+-	idt_setup_apic_and_irq_gates();
++	if (cpu_feature_enabled(X86_FEATURE_FRED))
++		fred_complete_exception_setup();
++	else
++		idt_setup_apic_and_irq_gates();
 +
- 	/* We only have to do this once... */
- 	if (likely(per_cpu(espfix_stack, cpu)))
- 		return;		/* Already initialized */
+ 	lapic_assign_system_vectors();
+ 
+ 	if (!acpi_ioapic && !of_ioapic && nr_legacy_irqs()) {
+diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
+index 848c85208a57..0ee78a30e14a 100644
+--- a/arch/x86/kernel/traps.c
++++ b/arch/x86/kernel/traps.c
+@@ -1411,7 +1411,10 @@ void __init trap_init(void)
+ 
+ 	/* Initialize TSS before setting up traps so ISTs work */
+ 	cpu_init_exception_handling();
++
+ 	/* Setup traps as cpu_init() might #GP */
+-	idt_setup_traps();
++	if (!cpu_feature_enabled(X86_FEATURE_FRED))
++		idt_setup_traps();
++
+ 	cpu_init();
+ }
 -- 
 2.34.1
 
