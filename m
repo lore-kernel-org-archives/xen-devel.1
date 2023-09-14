@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B88FEEAA4F
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 14:57:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.602352.938872 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240E1EEAA4F
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 14:57:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.602356.938906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgnmI-0002WQ-P4; Thu, 14 Sep 2023 14:57:10 +0000
+	id 1qgnmM-0003PE-5V; Thu, 14 Sep 2023 14:57:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 602352.938872; Thu, 14 Sep 2023 14:57:10 +0000
+Received: by outflank-mailman (output) from mailman id 602356.938906; Thu, 14 Sep 2023 14:57:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgnmI-0002WJ-LY; Thu, 14 Sep 2023 14:57:10 +0000
-Received: by outflank-mailman (input) for mailman id 602352;
- Thu, 14 Sep 2023 14:57:09 +0000
+	id 1qgnmL-0003OC-W4; Thu, 14 Sep 2023 14:57:13 +0000
+Received: by outflank-mailman (input) for mailman id 602356;
+ Thu, 14 Sep 2023 14:57:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9rCx=E6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qgnmH-0002W4-N9
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 14:57:09 +0000
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [2a00:1450:4864:20::232])
+ id 1qgnmK-0002W4-7t
+ for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 14:57:12 +0000
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [2a00:1450:4864:20::234])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fa27e246-530e-11ee-8787-cb3800f73035;
- Thu, 14 Sep 2023 16:57:08 +0200 (CEST)
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2bfc1d8f2d2so13631031fa.0
- for <xen-devel@lists.xenproject.org>; Thu, 14 Sep 2023 07:57:08 -0700 (PDT)
+ id fc029670-530e-11ee-8787-cb3800f73035;
+ Thu, 14 Sep 2023 16:57:11 +0200 (CEST)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2bfc2b26437so16160121fa.0
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Sep 2023 07:57:11 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a14-20020a2e860e000000b002b6ffa50896sm309828lji.128.2023.09.14.07.57.06
+ a14-20020a2e860e000000b002b6ffa50896sm309828lji.128.2023.09.14.07.57.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 07:57:07 -0700 (PDT)
+ Thu, 14 Sep 2023 07:57:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,35 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa27e246-530e-11ee-8787-cb3800f73035
+X-Inumbo-ID: fc029670-530e-11ee-8787-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694703428; x=1695308228; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3ZrPnKm+pxtZ7ttDn5NZNYB+em8nxoRhhDh6ogzCMSw=;
-        b=nsLiy74pCrHuEGxN/MjT0dA3hQfJHsOlOXGTlILDn2WNfuvDuFMB0GeviU+7XRZSg8
-         IXP3hEHIhrBkLlFEfYM+U0Xz0oO41L8Q8xV7VYr4p+oedPUnB4BEFuNiFb5NniF7gKwS
-         iY7YXwR6MFEuhfTlzoyY7zgUcl2bk1OBDW2Qkg6UIMumrQVgxcj6LxR8/N91YU0MZETS
-         0XVkNTNT1JLPHLTAhgNfDNbl8BNER7iOvaDfFVpm5gouXaDnP/WUSuTx1ruy0rH8m0gM
-         Pd7URFVVCjgoLqlrbYOKqF/DdrHH8eH3Te12bEIvLlJ0o0+Y6KPkxm2IBnuekbFVaIXn
-         ycPQ==
+        d=gmail.com; s=20221208; t=1694703431; x=1695308231; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=svTWqdPYc3ftSZpDKuUWuYkTn6Vp//dh2r2RtkrDP2E=;
+        b=XUy1GQBbwZr909HCD9mH92fQ2n9A+WQsYRO1ca2syYNuftSzrw9HWM9fscbnH7CPtl
+         h0YvhgqnfN+UFHto8xsrCPvM3oOyzT0CjZoR1McCOXVjap2IiF8BHsiOYiXd+AmaxD4j
+         qHUppktg3cHWIx5lGU5r/Q+N4dzUnvG7/SdPjm0EEaWtBb8ErVXakwRnK6C/EPJ+qjER
+         vtz700BabUI8xW8Whos4yphk3lO0sZ7EpArGMNay+WJthIf+5vWrYPnEDzjF5x0qRN4P
+         y9N/xXlUFwI5Ioz0a6i0Ox7/9bg0ou3rnclsnxeHWVamPO/c47ftvCxrhvYu0ht9oW7O
+         ubIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694703428; x=1695308228;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3ZrPnKm+pxtZ7ttDn5NZNYB+em8nxoRhhDh6ogzCMSw=;
-        b=BfGyxLTYmQoaZCdUpYP9ySxeiQ+g6OLaaxUH45w0hf2UTdLDz0DvRkPbqkmZ31Y2gw
-         HEOwuAgzcwdi13NcE56+W6zjJRS1XN0IxnsOtN3ToBIWYDJIR8V+8Zj1NQRUo8STxTxt
-         wcmb40A0HM1QtmzSmQ8PQXfv6QjnyCfLNUUoePkHSJl5Y62UmfjTqb8tm6ce96zApeKO
-         Kn2DKRZYlhDfzYfIhnuDrqalWXYAVFVVHspxQ33ku3p4QzGDZDTiRjetVno8EgZvpPUL
-         EnmKUZWi/EeUCT+Akw0rhk2LwdMlAR/KUym4L3ZIVpdB21wDpH49RpVb9GWOb8WV6bO4
-         vekA==
-X-Gm-Message-State: AOJu0YxBylRtGQDjjLUpOldRwr8m+5FMvOV4ffm1EY6OJm8dKIcRP472
-	OI0gIzUmjf4JOULLoM7WjE8XxymI44Q=
-X-Google-Smtp-Source: AGHT+IG53vroW09WePi55W98dUXgz5o9HApAVDopP02Ub3+zcmuKXc0ltS75iHFO+fxGwG9nrz2mkQ==
-X-Received: by 2002:a2e:a372:0:b0:2bf:af6e:9420 with SMTP id i18-20020a2ea372000000b002bfaf6e9420mr649001ljn.19.1694703427617;
-        Thu, 14 Sep 2023 07:57:07 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1694703431; x=1695308231;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=svTWqdPYc3ftSZpDKuUWuYkTn6Vp//dh2r2RtkrDP2E=;
+        b=UY+m5NhZLMR5sq6SjqQwI+cibe2D6qjaxpsNwyPbrleMaAnmMbtFf55Rsu1/T4X4nt
+         oo7ik+u7tsUBzMzd0eXQ6ZvW1SXRqbF1Yt7xb/d2zzd1fVlPx+aWQAtsoucx5uTsyQUH
+         9czGvEObQVhKRp/BCmI2dxRfczHeopU1Dv3bn4PVQ/5WHg6U3pEkhVKbnxmFPy7QwttK
+         5K1QIv3DCHZw4iXJuYUsTWzphHqZ2yW6wgD6hC81PDyxo46FxbuNqDlDdP0/KGGHvREw
+         xsXUxsJe+dfgJMJuzUWK95DAnIcxPm3y/pdxK2otHiTijDq+947lbjHRbGRwSAoMq5pm
+         9x/Q==
+X-Gm-Message-State: AOJu0YxVJIZIYgJAXGThlKXRNra+EtcEtW+WNQ7vAjauYEgMB+bdYjEt
+	iavckPQIPxbKesp64NckXRI/TqT+QkI=
+X-Google-Smtp-Source: AGHT+IGSzGN+thgWV5HA2e1EpC6tTCT3RVL7noSwopFanb0rR30SRaZ7g6RhKSuz6ZkzQh56VdH+sg==
+X-Received: by 2002:a2e:93d7:0:b0:2bb:9781:1a4c with SMTP id p23-20020a2e93d7000000b002bb97811a4cmr5066743ljh.27.1694703431205;
+        Thu, 14 Sep 2023 07:57:11 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -83,118 +84,69 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>
-Subject: [PATCH v1 00/29] Introduce stub headers necessary for full Xen build
-Date: Thu, 14 Sep 2023 17:56:21 +0300
-Message-ID: <cover.1694702259.git.oleksii.kurochko@gmail.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v1 05/29] xen/asm-generic: introduce stub header event.h
+Date: Thu, 14 Sep 2023 17:56:26 +0300
+Message-ID: <69563e3f41cb6971f93630d9df59395f159bd3c4.1694702259.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <cover.1694702259.git.oleksii.kurochko@gmail.com>
+References: <cover.1694702259.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Based on two patch series [1] and [2], the idea of which is to provide minimal
-amount of things for a complete Xen build, a large amount of headers are the same
-or almost the same, so it makes sense to move them to asm-generic.
+The patch introduces stub header needed for full Xen build.
 
-Also, providing such stub headers should help future architectures to add
-a full Xen build.
-
-[1] https://lore.kernel.org/xen-devel/cover.1694543103.git.sanastasio@raptorengineering.com/
-[2] https://lore.kernel.org/xen-devel/cover.1692181079.git.oleksii.kurochko@gmail.com/
-
-Oleksii Kurochko (29):
-  xen/asm-generic: introduce stub header spinlock.h
-  xen/asm-generic: introduce stub header paging.h
-  xen/asm-generic: introduce stub header cpufeature.h
-  xen/asm-generic: introduce stub header device.h
-  xen/asm-generic: introduce stub header event.h
-  xen/asm-generic: introduce stub header grant_table.h
-  xen/asm-generic: introduce stub header guest_atomics.h
-  xen/asm-generic: introduce stub hypercall.h
-  xen/asm-generic: introduce stub header iocap.h
-  xen/asm-generic: introduce stub header iommu.h
-  xen/asm-generic: introduce stub header mem_access.h
-  xen/asm-generic: introduce stub header pci.h
-  xen/asm-generic: introduce stub header random.h
-  xen/asm-generic: introduce stub header setup.h
-  xen/asm-generic: introduce stub header xenoprof.h
-  xen/asm-generic: introduce stub header flushtlb.h
-  xen/asm-generic: introduce stub header percpu.h
-  xen/asm-generic: introduce stub header smp.h
-  xen/asm-generic: introduce stub header hardirq.h
-  xen/asm-generic: introduce stub header div64.h
-  xen/asm-generic: introduce stub header altp2m.h
-  xen/asm-generic: introduce stub header delay.h
-  xen/asm-generic: introduce stub header domain.h
-  xen/asm-generic: introduce stub header guest_access.h
-  xen/asm-generic: introduce stub header irq.h
-  xen/asm-generic: introduce stub header monitor.h
-  xen/asm-generic: introduce stub header numa.h
-  xen/asm-generic: introduce stub header p2m.h
-  xen/asm-generic: introduce stub header softirq.h
-
- xen/include/asm-generic/altp2m.h        |  34 +++++++
- xen/include/asm-generic/cpufeature.h    |  23 +++++
- xen/include/asm-generic/delay.h         |  21 +++++
- xen/include/asm-generic/device.h        |  65 ++++++++++++++
- xen/include/asm-generic/div64.h         |  24 +++++
- xen/include/asm-generic/domain.h        |  53 +++++++++++
- xen/include/asm-generic/event.h         |  39 ++++++++
- xen/include/asm-generic/flushtlb.h      |  42 +++++++++
- xen/include/asm-generic/grant_table.h   |  14 +++
- xen/include/asm-generic/guest_access.h  |  31 +++++++
- xen/include/asm-generic/guest_atomics.h |  47 ++++++++++
- xen/include/asm-generic/hardirq.h       |  27 ++++++
- xen/include/asm-generic/hypercall.h     |  14 +++
- xen/include/asm-generic/iocap.h         |  17 ++++
- xen/include/asm-generic/iommu.h         |  17 ++++
- xen/include/asm-generic/irq.h           |  44 +++++++++
- xen/include/asm-generic/mem_access.h    |  14 +++
- xen/include/asm-generic/monitor.h       |  64 +++++++++++++
- xen/include/asm-generic/numa.h          |  35 ++++++++
- xen/include/asm-generic/p2m.h           | 115 ++++++++++++++++++++++++
- xen/include/asm-generic/paging.h        |  17 ++++
- xen/include/asm-generic/pci.h           |  18 ++++
- xen/include/asm-generic/percpu.h        |  35 ++++++++
- xen/include/asm-generic/random.h        |  20 +++++
- xen/include/asm-generic/setup.h         |  16 ++++
- xen/include/asm-generic/smp.h           |  30 +++++++
- xen/include/asm-generic/softirq.h       |  17 ++++
- xen/include/asm-generic/spinlock.h      |  23 +++++
- xen/include/asm-generic/xenoprof.h      |  14 +++
- 29 files changed, 930 insertions(+)
- create mode 100644 xen/include/asm-generic/altp2m.h
- create mode 100644 xen/include/asm-generic/cpufeature.h
- create mode 100644 xen/include/asm-generic/delay.h
- create mode 100644 xen/include/asm-generic/device.h
- create mode 100644 xen/include/asm-generic/div64.h
- create mode 100644 xen/include/asm-generic/domain.h
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/include/asm-generic/event.h | 39 +++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
  create mode 100644 xen/include/asm-generic/event.h
- create mode 100644 xen/include/asm-generic/flushtlb.h
- create mode 100644 xen/include/asm-generic/grant_table.h
- create mode 100644 xen/include/asm-generic/guest_access.h
- create mode 100644 xen/include/asm-generic/guest_atomics.h
- create mode 100644 xen/include/asm-generic/hardirq.h
- create mode 100644 xen/include/asm-generic/hypercall.h
- create mode 100644 xen/include/asm-generic/iocap.h
- create mode 100644 xen/include/asm-generic/iommu.h
- create mode 100644 xen/include/asm-generic/irq.h
- create mode 100644 xen/include/asm-generic/mem_access.h
- create mode 100644 xen/include/asm-generic/monitor.h
- create mode 100644 xen/include/asm-generic/numa.h
- create mode 100644 xen/include/asm-generic/p2m.h
- create mode 100644 xen/include/asm-generic/paging.h
- create mode 100644 xen/include/asm-generic/pci.h
- create mode 100644 xen/include/asm-generic/percpu.h
- create mode 100644 xen/include/asm-generic/random.h
- create mode 100644 xen/include/asm-generic/setup.h
- create mode 100644 xen/include/asm-generic/smp.h
- create mode 100644 xen/include/asm-generic/softirq.h
- create mode 100644 xen/include/asm-generic/spinlock.h
- create mode 100644 xen/include/asm-generic/xenoprof.h
 
+diff --git a/xen/include/asm-generic/event.h b/xen/include/asm-generic/event.h
+new file mode 100644
+index 0000000000..d25ba36aad
+--- /dev/null
++++ b/xen/include/asm-generic/event.h
+@@ -0,0 +1,39 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_GENERIC_EVENT_H__
++#define __ASM_GENERIC_EVENT_H__
++
++#include <xen/sched.h>
++
++static inline void vcpu_mark_events_pending(struct vcpu *v)
++{
++}
++
++static inline int vcpu_event_delivery_is_enabled(struct vcpu *v)
++{
++    return 0;
++}
++
++static inline int local_events_need_delivery(void)
++{
++    return 0;
++}
++
++static inline void local_event_delivery_enable(void)
++{
++}
++
++static inline bool arch_virq_is_global(unsigned int virq)
++{
++    return true;
++}
++
++#endif /* __ASM_GENERIC_EVENT_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.41.0
 
