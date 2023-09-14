@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D34EDE980
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:28:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601844.938168 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32C8BEDE980
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:30:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601861.938178 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgeuF-0006sH-4Q; Thu, 14 Sep 2023 05:28:47 +0000
+	id 1qgevy-0000J7-Hd; Thu, 14 Sep 2023 05:30:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601844.938168; Thu, 14 Sep 2023 05:28:47 +0000
+Received: by outflank-mailman (output) from mailman id 601861.938178; Thu, 14 Sep 2023 05:30:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgeuF-0006sA-1d; Thu, 14 Sep 2023 05:28:47 +0000
-Received: by outflank-mailman (input) for mailman id 601844;
- Thu, 14 Sep 2023 05:28:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qgevy-0000J0-F4; Thu, 14 Sep 2023 05:30:34 +0000
+Received: by outflank-mailman (input) for mailman id 601861;
+ Thu, 14 Sep 2023 05:30:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IZLI=E6=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qgelS-0001XI-2e
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:42 +0000
+ id 1qgelK-0001X7-6R
+ for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:34 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4c4be9c6-52be-11ee-9b0d-b553b5be7939;
- Thu, 14 Sep 2023 07:19:37 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 48dffcb6-52be-11ee-8787-cb3800f73035;
+ Thu, 14 Sep 2023 07:19:32 +0200 (CEST)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Sep 2023 22:17:46 -0700
+ 13 Sep 2023 22:17:43 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:46 -0700
+ by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:42 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c4be9c6-52be-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 48dffcb6-52be-11ee-8787-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1694668777; x=1726204777;
+  t=1694668772; x=1726204772;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=q3Z+nMXlKl4d8APy8tB7Jrc++CPbfQFwd1zn6dKyIm8=;
-  b=En/bAZS/Mp1URluVBEzqkeLlAhr9oQYbb2hIR+wvsIIGfJUCraJEsW7k
-   Zmqhjv30cKUWnu+/h5fjj86f+GgSnelMeI2KTg0gFUt9S07xDEhX8eTMt
-   FBfynh3L2PL9j5GrUaMoJ9qP6N0CjOcR6b2uejrrJPWhyT68vtEVWPsqA
-   vKxlOWqkOMLXo4mVznXL/fI3dOqM/GYOv2iUQhLvDUDAxJDidzJRQG7nK
-   71cSh0Xd7TK4Cj0jfcS457STL6KpshcU5ROvF5aT6qDumTEAvTWCLieYU
-   rNlQKWq6YNAz1vjvuoX7rt2g8LSokLv3QcxR0c3xCr7nEF77xsEdYtXIE
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661498"
+  bh=bNtEfhEic2/4eI6U3F6LZD3GtdQN7TZ08d/4AOd+L9I=;
+  b=b6EDn/D/dMSWGnToVFlQMYDKR3uxkHgP4zsLVmMsMMErPuCoNI9UGGQg
+   JMgtPur/S/9LG+ix8SKY88e3oPE5f5AE1EiKbL6z9y0fXGd/7WHhN//ii
+   fBiWdqo/j888+Yw8Zvr0ugFZnjtQxcztP3NPJy/Bwatk2lxJr6zSF9XZ9
+   5nCCALGZK6G8ZQ4gCVLi6MFeliEYgr0bAYx4uGijZQEjg44LsT0IqBxA0
+   R/0iyhZasr+bQ9dMLRxGwvit9J5yqgXBoqShoeFib5rowtUVbWnWUES5O
+   bhTKprW+YdpqxxYMzJh05fZAK14REd8p/A9HPT8DImiPV7b6RHXMAJ4ka
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661420"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="382661498"
+   d="scan'208";a="382661420"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488838"
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488820"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="779488838"
+   d="scan'208";a="779488820"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -86,207 +86,78 @@ Cc: tglx@linutronix.de,
 	mhiramat@kernel.org,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com
-Subject: [PATCH v10 33/38] x86/entry: Add fred_entry_from_kvm() for VMX to handle IRQ/NMI
-Date: Wed, 13 Sep 2023 21:48:00 -0700
-Message-Id: <20230914044805.301390-34-xin3.li@intel.com>
+Subject: [PATCH v10 27/38] x86/fred: Add a machine check entry stub for FRED
+Date: Wed, 13 Sep 2023 21:47:54 -0700
+Message-Id: <20230914044805.301390-28-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230914044805.301390-1-xin3.li@intel.com>
 References: <20230914044805.301390-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In IRQ/NMI induced VM exits, KVM VMX needs to execute the respective
-handlers, which requires the software to create a FRED stack frame,
-and use it to invoke the handlers. Add fred_irq_entry_from_kvm() for
-this job.
+Like #DB, when occurred on different ring level, i.e., from user or kernel
+context, #MCE needs to be handled on different stack: User #MCE on current
+task stack, while kernel #MCE on a dedicated stack.
 
-Export fred_entry_from_kvm() because VMX can be compiled as a module.
+This is exactly how FRED event delivery invokes an exception handler: ring
+3 event on level 0 stack, i.e., current task stack; ring 0 event on the
+#MCE dedicated stack specified in the IA32_FRED_STKLVLS MSR. So unlike IDT,
+the FRED machine check entry stub doesn't do stack switch.
 
-Suggested-by: Sean Christopherson <seanjc@google.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Changes since v9:
-* Shove the whole thing into arch/x86/entry/entry_64_fred.S for invoking
-  external_interrupt() and fred_exc_nmi() (Sean Christopherson).
-* Correct and improve a few comments (Sean Christopherson).
-* Merge the two IRQ/NMI asm entries into one as it's fine to invoke
-  noinstr code from regular code (Thomas Gleixner).
-* Setup the long mode and NMI flags in the augmented SS field of FRED
-  stack frame in C instead of asm (Thomas Gleixner).
-* Add UNWIND_HINT_{SAVE,RESTORE} to get rid of the warning: "objtool:
-  asm_fred_entry_from_kvm+0x0: unreachable instruction" (Peter Zijlstra).
-
-Changes since v8:
-* Add a new macro VMX_DO_FRED_EVENT_IRQOFF for FRED instead of
-  refactoring VMX_DO_EVENT_IRQOFF (Sean Christopherson).
-* Do NOT use a trampoline, just LEA+PUSH the return RIP, PUSH the error
-  code, and jump to the FRED kernel entry point for NMI or call
-  external_interrupt() for IRQs (Sean Christopherson).
-* Call external_interrupt() only when FRED is enabled, and convert the
-  non-FRED handling to external_interrupt() after FRED lands (Sean
-  Christopherson).
+Changes since v5:
+* Disallow #DB inside #MCE for robustness sake (Peter Zijlstra).
 ---
- arch/x86/entry/entry_64_fred.S | 73 ++++++++++++++++++++++++++++++++++
- arch/x86/entry/entry_fred.c    | 14 +++++++
- arch/x86/include/asm/fred.h    | 18 +++++++++
- 3 files changed, 105 insertions(+)
+ arch/x86/kernel/cpu/mce/core.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/arch/x86/entry/entry_64_fred.S b/arch/x86/entry/entry_64_fred.S
-index d1c2fc4af8ae..f1088d6f2054 100644
---- a/arch/x86/entry/entry_64_fred.S
-+++ b/arch/x86/entry/entry_64_fred.S
-@@ -4,7 +4,9 @@
-  */
+diff --git a/arch/x86/kernel/cpu/mce/core.c b/arch/x86/kernel/cpu/mce/core.c
+index 6f35f724cc14..da0a4a102afe 100644
+--- a/arch/x86/kernel/cpu/mce/core.c
++++ b/arch/x86/kernel/cpu/mce/core.c
+@@ -52,6 +52,7 @@
+ #include <asm/mce.h>
+ #include <asm/msr.h>
+ #include <asm/reboot.h>
++#include <asm/fred.h>
  
- #include <asm/asm.h>
-+#include <asm/export.h>
- #include <asm/fred.h>
-+#include <asm/segment.h>
+ #include "internal.h"
  
- #include "calling.h"
- 
-@@ -54,3 +56,74 @@ SYM_CODE_START_NOALIGN(asm_fred_entrypoint_kernel)
- 	FRED_EXIT
- 	ERETS
- SYM_CODE_END(asm_fred_entrypoint_kernel)
-+
-+#if IS_ENABLED(CONFIG_KVM_INTEL)
-+SYM_FUNC_START(asm_fred_entry_from_kvm)
-+	push %rbp
-+	mov %rsp, %rbp
-+
-+	UNWIND_HINT_SAVE
-+
-+	/*
-+	 * Don't check the FRED stack level, the call stack leading to this
-+	 * helper is effectively constant and shallow (relatively speaking).
-+	 *
-+	 * Emulate the FRED-defined redzone and stack alignment.
-+	 */
-+	sub $(FRED_CONFIG_REDZONE_AMOUNT << 6), %rsp
-+	and $FRED_STACK_FRAME_RSP_MASK, %rsp
-+
-+	/*
-+	 * Start to push a FRED stack frame, which is always 64 bytes:
-+	 *
-+	 * +--------+-----------------+
-+	 * | Bytes  | Usage           |
-+	 * +--------+-----------------+
-+	 * | 63:56  | Reserved        |
-+	 * | 55:48  | Event Data      |
-+	 * | 47:40  | SS + Event Info |
-+	 * | 39:32  | RSP             |
-+	 * | 31:24  | RFLAGS          |
-+	 * | 23:16  | CS + Aux Info   |
-+	 * |  15:8  | RIP             |
-+	 * |   7:0  | Error Code      |
-+	 * +--------+-----------------+
-+	 */
-+	push $0				/* Reserved, must be 0 */
-+	push $0				/* Event data, 0 for IRQ/NMI */
-+	push %rdi			/* fred_ss handed in by the caller */
-+	push %rbp
-+	pushf
-+	mov $__KERNEL_CS, %rax
-+	push %rax
-+
-+	/*
-+	 * Unlike the IDT event delivery, FRED _always_ pushes an error code
-+	 * after pushing the return RIP, thus the CALL instruction CANNOT be
-+	 * used here to push the return RIP, otherwise there is no chance to
-+	 * push an error code before invoking the IRQ/NMI handler.
-+	 *
-+	 * Use LEA to get the return RIP and push it, then push an error code.
-+	 */
-+	lea 1f(%rip), %rax
-+	push %rax				/* Return RIP */
-+	push $0					/* Error code, 0 for IRQ/NMI */
-+
-+	PUSH_AND_CLEAR_REGS clear_bp=0 unwind_hint=0
-+	movq %rsp, %rdi				/* %rdi -> pt_regs */
-+	call __fred_entry_from_kvm		/* Call the C entry point */
-+	POP_REGS
-+	ERETS
-+1:
-+	/*
-+	 * Objtool doesn't understand what ERETS does, this hint tells it that
-+	 * yes, we'll reach here and with what stack state. A save/restore pair
-+	 * isn't strictly needed, but it's the simplest form.
-+	 */
-+	UNWIND_HINT_RESTORE
-+	pop %rbp
-+	RET
-+
-+SYM_FUNC_END(asm_fred_entry_from_kvm)
-+EXPORT_SYMBOL_GPL(asm_fred_entry_from_kvm);
-+#endif
-diff --git a/arch/x86/entry/entry_fred.c b/arch/x86/entry/entry_fred.c
-index 2fd3e421e066..f8774611af80 100644
---- a/arch/x86/entry/entry_fred.c
-+++ b/arch/x86/entry/entry_fred.c
-@@ -242,3 +242,17 @@ __visible noinstr void fred_entry_from_kernel(struct pt_regs *regs)
- 		return fred_bad_type(regs, error_code);
- 	}
+@@ -2144,6 +2145,31 @@ DEFINE_IDTENTRY_MCE_USER(exc_machine_check)
+ 	exc_machine_check_user(regs);
+ 	local_db_restore(dr7);
  }
 +
-+#if IS_ENABLED(CONFIG_KVM_INTEL)
-+__visible noinstr void __fred_entry_from_kvm(struct pt_regs *regs)
++#ifdef CONFIG_X86_FRED
++/*
++ * When occurred on different ring level, i.e., from user or kernel
++ * context, #MCE needs to be handled on different stack: User #MCE
++ * on current task stack, while kernel #MCE on a dedicated stack.
++ *
++ * This is exactly how FRED event delivery invokes an exception
++ * handler: ring 3 event on level 0 stack, i.e., current task stack;
++ * ring 0 event on the #MCE dedicated stack specified in the
++ * IA32_FRED_STKLVLS MSR. So unlike IDT, the FRED machine check entry
++ * stub doesn't do stack switch.
++ */
++DEFINE_FREDENTRY_MCE(exc_machine_check)
 +{
-+	switch (regs->fred_ss.type) {
-+	case EVENT_TYPE_EXTINT:
-+		return fred_extint(regs);
-+	case EVENT_TYPE_NMI:
-+		return fred_exc_nmi(regs);
-+	default:
-+		WARN_ON_ONCE(1);
-+	}
++	unsigned long dr7;
++
++	dr7 = local_db_save();
++	if (user_mode(regs))
++		exc_machine_check_user(regs);
++	else
++		exc_machine_check_kernel(regs);
++	local_db_restore(dr7);
 +}
 +#endif
-diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-index 16a64ffecbf8..2fa9f34e5c95 100644
---- a/arch/x86/include/asm/fred.h
-+++ b/arch/x86/include/asm/fred.h
-@@ -9,6 +9,7 @@
- #include <linux/const.h>
- 
- #include <asm/asm.h>
-+#include <asm/trapnr.h>
- 
- /*
-  * FRED event return instruction opcodes for ERET{S,U}; supported in
-@@ -62,12 +63,29 @@ static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
- 
- void asm_fred_entrypoint_user(void);
- void asm_fred_entrypoint_kernel(void);
-+void asm_fred_entry_from_kvm(struct fred_ss);
- 
- __visible void fred_entry_from_user(struct pt_regs *regs);
- __visible void fred_entry_from_kernel(struct pt_regs *regs);
-+__visible void __fred_entry_from_kvm(struct pt_regs *regs);
-+
-+/* Can be called from noinstr code, thus __always_inline */
-+static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int vector)
-+{
-+	struct fred_ss ss = {
-+		.ss     =__KERNEL_DS,
-+		.type   = type,
-+		.vector = vector,
-+		.nmi    = type == EVENT_TYPE_NMI,
-+		.lm     = 1,
-+	};
-+
-+	asm_fred_entry_from_kvm(ss);
-+}
- 
- #else /* CONFIG_X86_FRED */
- static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
-+static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int vector) { }
- #endif /* CONFIG_X86_FRED */
- #endif /* !__ASSEMBLY__ */
- 
+ #else
+ /* 32bit unified entry point */
+ DEFINE_IDTENTRY_RAW(exc_machine_check)
 -- 
 2.34.1
 
