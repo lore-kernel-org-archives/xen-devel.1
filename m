@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EE79EDE981
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:33:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601919.938278 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5498DEDE980
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:33:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601922.938288 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgeyk-0006nP-GB; Thu, 14 Sep 2023 05:33:26 +0000
+	id 1qgeyn-00079K-On; Thu, 14 Sep 2023 05:33:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601919.938278; Thu, 14 Sep 2023 05:33:26 +0000
+Received: by outflank-mailman (output) from mailman id 601922.938288; Thu, 14 Sep 2023 05:33:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgeyk-0006mf-D2; Thu, 14 Sep 2023 05:33:26 +0000
-Received: by outflank-mailman (input) for mailman id 601919;
- Thu, 14 Sep 2023 05:33:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qgeyn-00079B-LA; Thu, 14 Sep 2023 05:33:29 +0000
+Received: by outflank-mailman (input) for mailman id 601922;
+ Thu, 14 Sep 2023 05:33:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IZLI=E6=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qgelS-0001X7-7p
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:42 +0000
+ id 1qgelT-0001XI-2f
+ for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:43 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c41eca4-52be-11ee-8787-cb3800f73035;
- Thu, 14 Sep 2023 07:19:37 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4db2f59c-52be-11ee-9b0d-b553b5be7939;
+ Thu, 14 Sep 2023 07:19:39 +0200 (CEST)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Sep 2023 22:17:46 -0700
+ 13 Sep 2023 22:17:48 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:45 -0700
+ by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:47 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c41eca4-52be-11ee-8787-cb3800f73035
+X-Inumbo-ID: 4db2f59c-52be-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1694668777; x=1726204777;
+  t=1694668780; x=1726204780;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/UldAmuJEnsflYS2+cyLAQ4E+J1yAKX8pToUnF0eneI=;
-  b=A/aF772sHdKlHef4Ll8zpLQ1ehmNDZSFlKmMtVOlj59LJXx3EbER3yyv
-   WGhiX8Hzw3hfoPifbvO9dje+fw8NxoeJOFJHRjRO64mJLH0cTE2G0nG7e
-   az5Pcw2Xur16RAY48iZy2yyFVHE05PSuDczLTbqu/BDQublwqd0RebuLr
-   SeAculT6Ugxpqx+Xwi7rxlTUjlbBI8k5OWXzI7bVVb/MGmz0DXFsQjXF6
-   5OQj+/iaimv6wpM54C3tiB3748uWcDTk491sAjvOkjikHo0uJ8kDPgFZz
-   ecU/uFPe1eAl5p/cu7B5TwGHdMV1rVP4BK/QRJoDe/KDrtukeg+RtYIoY
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661485"
+  bh=DfU6e7Lxi3caIgHaas3RwgcYA9izTEYulGU0upU0hWQ=;
+  b=C2qSgSliymajvEnf/caBa0OMsph2kLxROcw2fpnHpdbIeXh1YLgG6gvc
+   JFZKVBUXx+5neaXw/Nl+HS9iqsNLYFHP5E56NwhAiZwRQguabQ60XgEB4
+   iUlSLIbPZrU74Mp8O/ltxGGviX7WlMQGSSHXwHPXyXyPp/BYgBs+7zJAL
+   dsVkh2SThVsspdP/UJ3YHfLPgFtg/HWIk4XF+jWMMqkj3fiL39Z3i2Rvm
+   h0nR9Dygy1ElvA8RHkFMldYhZvgdj9Z0jmyATSXuLK0oDW4uPJng5PuE6
+   f1no63Z4sCBxwfcBbNlOz0CP9Ca0lB86uFUVmRBvCiyHCj7v4F/B+d/6z
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661536"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="382661485"
+   d="scan'208";a="382661536"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488835"
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488847"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="779488835"
+   d="scan'208";a="779488847"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -86,83 +86,59 @@ Cc: tglx@linutronix.de,
 	mhiramat@kernel.org,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com
-Subject: [PATCH v10 32/38] x86/entry/calling: Allow PUSH_AND_CLEAR_REGS being used beyond actual entry code
-Date: Wed, 13 Sep 2023 21:47:59 -0700
-Message-Id: <20230914044805.301390-33-xin3.li@intel.com>
+Subject: [PATCH v10 36/38] x86/fred: Add fred_syscall_init()
+Date: Wed, 13 Sep 2023 21:48:03 -0700
+Message-Id: <20230914044805.301390-37-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230914044805.301390-1-xin3.li@intel.com>
 References: <20230914044805.301390-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "Peter Zijlstra (Intel)" <peterz@infradead.org>
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-PUSH_AND_CLEAR_REGS could be used besides actual entry code; in that case
-%rbp shouldn't be cleared (otherwise the frame pointer is destroyed) and
-UNWIND_HINT shouldn't be added.
+Add a syscall initialization function fred_syscall_init() for FRED,
+and this is really just to skip setting up SYSCALL/SYSENTER related
+MSRs, e.g., MSR_LSTAR and invalidate SYSENTER configurations, because
+FRED uses the ring 3 FRED entrypoint for SYSCALL and SYSENTER, and
+ERETU is the only legit instruction to return to ring 3 per FRED spec
+5.0.
 
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/entry/calling.h | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+ arch/x86/kernel/cpu/common.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/arch/x86/entry/calling.h b/arch/x86/entry/calling.h
-index f6907627172b..eb57c023d5df 100644
---- a/arch/x86/entry/calling.h
-+++ b/arch/x86/entry/calling.h
-@@ -65,7 +65,7 @@ For 32-bit we have the following conventions - kernel is built with
-  * for assembly code:
-  */
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index d960b7276008..4cb36e241c9a 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -2105,6 +2105,23 @@ static inline void idt_syscall_init(void)
+ 	       X86_EFLAGS_AC|X86_EFLAGS_ID);
+ }
  
--.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
-+.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 unwind_hint=1
- 	.if \save_ret
- 	pushq	%rsi		/* pt_regs->si */
- 	movq	8(%rsp), %rsi	/* temporarily store the return address in %rsi */
-@@ -87,14 +87,17 @@ For 32-bit we have the following conventions - kernel is built with
- 	pushq	%r13		/* pt_regs->r13 */
- 	pushq	%r14		/* pt_regs->r14 */
- 	pushq	%r15		/* pt_regs->r15 */
++static inline void fred_syscall_init(void)
++{
++	/*
++	 * Per FRED spec 5.0, FRED uses the ring 3 FRED entrypoint for SYSCALL
++	 * and SYSENTER, and ERETU is the only legit instruction to return to
++	 * ring 3, as a result there is _no_ need to setup the SYSCALL and
++	 * SYSENTER MSRs.
++	 *
++	 * Note, both sysexit and sysret cause #UD when FRED is enabled.
++	 */
++	wrmsrl(MSR_LSTAR, 0ULL);
++	wrmsrl_cstar(0ULL);
++	wrmsrl_safe(MSR_IA32_SYSENTER_CS, (u64)GDT_ENTRY_INVALID_SEG);
++	wrmsrl_safe(MSR_IA32_SYSENTER_ESP, 0ULL);
++	wrmsrl_safe(MSR_IA32_SYSENTER_EIP, 0ULL);
++}
 +
-+	.if \unwind_hint
- 	UNWIND_HINT_REGS
-+	.endif
- 
- 	.if \save_ret
- 	pushq	%rsi		/* return address on top of stack */
- 	.endif
- .endm
- 
--.macro CLEAR_REGS
-+.macro CLEAR_REGS clear_bp=1
- 	/*
- 	 * Sanitize registers of values that a speculation attack might
- 	 * otherwise want to exploit. The lower registers are likely clobbered
-@@ -109,7 +112,9 @@ For 32-bit we have the following conventions - kernel is built with
- 	xorl	%r10d, %r10d	/* nospec r10 */
- 	xorl	%r11d, %r11d	/* nospec r11 */
- 	xorl	%ebx,  %ebx	/* nospec rbx */
-+	.if \clear_bp
- 	xorl	%ebp,  %ebp	/* nospec rbp */
-+	.endif
- 	xorl	%r12d, %r12d	/* nospec r12 */
- 	xorl	%r13d, %r13d	/* nospec r13 */
- 	xorl	%r14d, %r14d	/* nospec r14 */
-@@ -117,9 +122,9 @@ For 32-bit we have the following conventions - kernel is built with
- 
- .endm
- 
--.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
--	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret
--	CLEAR_REGS
-+.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 clear_bp=1 unwind_hint=1
-+	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret unwind_hint=\unwind_hint
-+	CLEAR_REGS clear_bp=\clear_bp
- .endm
- 
- .macro POP_REGS pop_rdi=1
+ /* May not be marked __init: used by software suspend */
+ void syscall_init(void)
+ {
 -- 
 2.34.1
 
