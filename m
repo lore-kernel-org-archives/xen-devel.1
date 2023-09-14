@@ -4,37 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE67EEAA4E
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 15:17:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.602464.939132 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D73DAEEAA51
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 15:18:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.602474.939141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgo5S-0004jp-01; Thu, 14 Sep 2023 15:16:58 +0000
+	id 1qgo73-0005iT-AX; Thu, 14 Sep 2023 15:18:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 602464.939132; Thu, 14 Sep 2023 15:16:57 +0000
+Received: by outflank-mailman (output) from mailman id 602474.939141; Thu, 14 Sep 2023 15:18:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgo5R-0004ji-T9; Thu, 14 Sep 2023 15:16:57 +0000
-Received: by outflank-mailman (input) for mailman id 602464;
- Thu, 14 Sep 2023 15:16:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9rCx=E6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qgnmi-0002WX-6y
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 14:57:36 +0000
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [2a00:1450:4864:20::234])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 07e06a6f-530f-11ee-9b0d-b553b5be7939;
- Thu, 14 Sep 2023 16:57:31 +0200 (CEST)
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2bfc5218dd8so16475161fa.2
- for <xen-devel@lists.xenproject.org>; Thu, 14 Sep 2023 07:57:31 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a14-20020a2e860e000000b002b6ffa50896sm309828lji.128.2023.09.14.07.57.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 07:57:30 -0700 (PDT)
+	id 1qgo73-0005iM-7z; Thu, 14 Sep 2023 15:18:37 +0000
+Received: by outflank-mailman (input) for mailman id 602474;
+ Thu, 14 Sep 2023 15:18:35 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgo71-0005h0-L6; Thu, 14 Sep 2023 15:18:35 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgo71-0003WS-IZ; Thu, 14 Sep 2023 15:18:35 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgo71-0002oN-3v; Thu, 14 Sep 2023 15:18:35 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1qgo71-0007jV-3T; Thu, 14 Sep 2023 15:18:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,184 +44,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 07e06a6f-530f-11ee-9b0d-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694703451; x=1695308251; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RuqIAdHXsDV1gv+OkVBVoXy1cs3PJPdYw0WDDR79HMM=;
-        b=GOXmlu/ik9fYJHZrAbV7RryN/CiVdykY+Pob0MBpTg1sJMRD3lFwq9N1Oidq6P2MNk
-         G4XhA+X+pY0M4PAsb4lJAF3Y2yoBKkb+Goe012NG9OE1XugaAmrqKAAicpM3yRPINtDQ
-         4fQVQtO8/qKWY1XoLUqGCsiCgpa2OGtIYlcPMzHB675t2/gEk5BQYEu++BW5w8zqu3SX
-         GKOYKgwvTz2UdUzWeCOpQVRxyWmbQ2lI2MFL9qcW9SQS/pnvlpTB40BASVyJpEafnjbY
-         rztDQUv/9FBeuRqkGLLvkbDglNhbnZuquFxgnmCVYoqcjzyXbPCiXJA+u9fINsMo/Xjz
-         bjWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694703451; x=1695308251;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=RuqIAdHXsDV1gv+OkVBVoXy1cs3PJPdYw0WDDR79HMM=;
-        b=X3DqIYS3HFwZyvrAzomQlsJTGXOjULHTEDI0QxsKJc6FXvYfZLvl3NYs9Bc/VdPczO
-         TxagfosyNkDeKeeyUsJ29h971sjL10D5tkz6eEEWt/3/dF7QSGQKOiEu3Qod1ct81eIy
-         N6ESHFZ4DsCJScbxG4vyRDLMULLbtkHMOSJC5J33FvAHCanFCBh531Z0ZEkYzg82Sn38
-         FIwlgCRNSOdt/iRmCfcJH0plxgWu8/LSqQ6yuyB924HYyjT2uZXvXSnPPlKymFINuq9P
-         hCx4+1FAqmQPHhpDnZjlbFLqDewDqpHTzq4x7ogl8mWvZTrzLeBWRheZqJkKI5QPT/Xj
-         kURg==
-X-Gm-Message-State: AOJu0YyCWggvMwNYrsEbB4ASAeRZ1Gk7/5/evi9Y7TtMksgaaCO5/4Cx
-	gIOiDdLzPZHDdUikJgZmFB8lqT7RjqM=
-X-Google-Smtp-Source: AGHT+IE63MvqY04Bfh3l9boON9/lvcHwlW19O2BdKdsC8dDQCa0ilk469q04ilR7cR4p8M5UL2Q/ag==
-X-Received: by 2002:a2e:8092:0:b0:2bc:f5a0:cc25 with SMTP id i18-20020a2e8092000000b002bcf5a0cc25mr5204702ljg.2.1694703451058;
-        Thu, 14 Sep 2023 07:57:31 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=qiupbSxsinwgWgaJDNdCoNRwmEfWOflLEMbikW1qjEk=; b=hIgBoz3Z2Xa22qePskswJK0LYz
+	xKwCAV8YggPTvkJQoYNTOcwAUHwdh9uCqLG2bR26FJJ1NsOMS+0WG8B10qqnHn7+obzR53+OiaF/7
+	I2uzlcuXT+OugWaz6q0AlQhDaCXl38mHkTWYlw9vSbmHWWCm2dFDRQsUuEMcPgHIN19c=;
 To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v1 28/29] xen/asm-generic: introduce stub header p2m.h
-Date: Thu, 14 Sep 2023 17:56:49 +0300
-Message-ID: <161b123e70e1bad65c3c64c2ffab09a3669f9e42.1694702259.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1694702259.git.oleksii.kurochko@gmail.com>
-References: <cover.1694702259.git.oleksii.kurochko@gmail.com>
-MIME-Version: 1.0
+Message-ID: <osstest-183001-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [libvirt test] 183001: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    libvirt=1f85f0967b12521f3d7321cb8469393e72d0ce7a
+X-Osstest-Versions-That:
+    libvirt=ca40725a2101c597c03661771a4e546001f629cc
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 14 Sep 2023 15:18:35 +0000
 
-The patch introduces header stub necessry for full Xen build.
+flight 183001 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/183001/
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/include/asm-generic/p2m.h | 115 ++++++++++++++++++++++++++++++++++
- 1 file changed, 115 insertions(+)
- create mode 100644 xen/include/asm-generic/p2m.h
+Failures :-/ but no regressions.
 
-diff --git a/xen/include/asm-generic/p2m.h b/xen/include/asm-generic/p2m.h
-new file mode 100644
-index 0000000000..554fd46608
---- /dev/null
-+++ b/xen/include/asm-generic/p2m.h
-@@ -0,0 +1,115 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_P2M_H__
-+#define __ASM_GENERIC_P2M_H__
-+
-+#include <asm/page-bits.h>
-+
-+#define paddr_bits PADDR_BITS
-+
-+/*
-+ * List of possible type for each page in the p2m entry.
-+ * The number of available bit per page in the pte for this purpose is 4 bits.
-+ * So it's possible to only have 16 fields. If we run out of value in the
-+ * future, it's possible to use higher value for pseudo-type and don't store
-+ * them in the p2m entry.
-+ */
-+typedef enum {
-+    p2m_invalid = 0,    /* Nothing mapped here */
-+    p2m_ram_rw,         /* Normal read/write guest RAM */
-+    p2m_ram_ro,         /* Read-only; writes are silently dropped */
-+    p2m_mmio_direct_dev,/* Read/write mapping of genuine Device MMIO area */
-+    p2m_mmio_direct_nc, /* Read/write mapping of genuine MMIO area non-cacheable */
-+    p2m_mmio_direct_c,  /* Read/write mapping of genuine MMIO area cacheable */
-+    p2m_map_foreign_rw, /* Read/write RAM pages from foreign domain */
-+    p2m_map_foreign_ro, /* Read-only RAM pages from foreign domain */
-+    p2m_grant_map_rw,   /* Read/write grant mapping */
-+    p2m_grant_map_ro,   /* Read-only grant mapping */
-+    /* The types below are only used to decide the page attribute in the P2M */
-+    p2m_iommu_map_rw,   /* Read/write iommu mapping */
-+    p2m_iommu_map_ro,   /* Read-only iommu mapping */
-+    p2m_max_real_type,  /* Types after this won't be store in the p2m */
-+} p2m_type_t;
-+
-+#include <xen/p2m-common.h>
-+
-+static inline int get_page_and_type(struct page_info *page,
-+                                    struct domain *domain,
-+                                    unsigned long type)
-+{
-+    BUG();
-+    return 1;
-+}
-+
-+/* Look up a GFN and take a reference count on the backing page. */
-+typedef unsigned int p2m_query_t;
-+#define P2M_ALLOC    (1u<<0)   /* Populate PoD and paged-out entries */
-+#define P2M_UNSHARE  (1u<<1)   /* Break CoW sharing */
-+
-+static inline struct page_info *get_page_from_gfn(
-+    struct domain *d, unsigned long gfn, p2m_type_t *t, p2m_query_t q)
-+{
-+    BUG();
-+    return NULL;
-+}
-+
-+static inline void memory_type_changed(struct domain *d)
-+{
-+    BUG();
-+}
-+
-+
-+static inline int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
-+                                                        unsigned int order)
-+{
-+    BUG();
-+    return 1;
-+}
-+
-+static inline int guest_physmap_add_entry(struct domain *d,
-+                            gfn_t gfn,
-+                            mfn_t mfn,
-+                            unsigned long page_order,
-+                            p2m_type_t t)
-+{
-+    BUG();
-+    return 1;
-+}
-+
-+/* Untyped version for RAM only, for compatibility */
-+static inline int __must_check
-+guest_physmap_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
-+                       unsigned int page_order)
-+{
-+    return guest_physmap_add_entry(d, gfn, mfn, page_order, p2m_ram_rw);
-+}
-+
-+static inline mfn_t gfn_to_mfn(struct domain *d, gfn_t gfn)
-+{
-+    BUG();
-+    return _mfn(0);
-+}
-+
-+static inline bool arch_acquire_resource_check(struct domain *d)
-+{
-+    /*
-+     * The reference counting of foreign entries in set_foreign_p2m_entry()
-+     * is supported on GENERIC.
-+     */
-+    return true;
-+}
-+
-+static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
-+{
-+    /* Not supported on GENERIC. */
-+}
-+
-+#endif /* __ASM_GENERIC_P2M_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: BSD
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
--- 
-2.41.0
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 182958
+ test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 182958
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 182958
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
+ test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
 
+version targeted for testing:
+ libvirt              1f85f0967b12521f3d7321cb8469393e72d0ce7a
+baseline version:
+ libvirt              ca40725a2101c597c03661771a4e546001f629cc
+
+Last test of basis   182958  2023-09-12 04:18:50 Z    2 days
+Failing since        182989  2023-09-13 04:18:52 Z    1 days    2 attempts
+Testing same since   183001  2023-09-14 04:18:45 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Erik Skultety <eskultet@redhat.com>
+  Jonathon Jongsma <jjongsma@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-libvirt-raw                                  pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/libvirt.git
+   ca40725a21..1f85f0967b  1f85f0967b12521f3d7321cb8469393e72d0ce7a -> xen-tested-master
 
