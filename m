@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F64FEEAA50
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 14:57:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.602371.939028 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC01AEEAA4E
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 14:57:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.602357.938919 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgnmd-0007gY-Eu; Thu, 14 Sep 2023 14:57:31 +0000
+	id 1qgnmN-0003vt-GT; Thu, 14 Sep 2023 14:57:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 602371.939028; Thu, 14 Sep 2023 14:57:31 +0000
+Received: by outflank-mailman (output) from mailman id 602357.938919; Thu, 14 Sep 2023 14:57:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgnmc-0007c1-HD; Thu, 14 Sep 2023 14:57:30 +0000
-Received: by outflank-mailman (input) for mailman id 602371;
- Thu, 14 Sep 2023 14:57:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qgnmN-0003u9-8D; Thu, 14 Sep 2023 14:57:15 +0000
+Received: by outflank-mailman (input) for mailman id 602357;
+ Thu, 14 Sep 2023 14:57:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9rCx=E6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qgnmY-0002WX-5w
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 14:57:26 +0000
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [2a00:1450:4864:20::230])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 03a6980d-530f-11ee-9b0d-b553b5be7939;
- Thu, 14 Sep 2023 16:57:24 +0200 (CEST)
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2bcd7a207f7so16659921fa.3
- for <xen-devel@lists.xenproject.org>; Thu, 14 Sep 2023 07:57:24 -0700 (PDT)
+ id 1qgnmL-0002W4-0W
+ for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 14:57:13 +0000
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [2a00:1450:4864:20::22f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fc74587a-530e-11ee-8787-cb3800f73035;
+ Thu, 14 Sep 2023 16:57:12 +0200 (CEST)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2bcb89b476bso17524671fa.1
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Sep 2023 07:57:12 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a14-20020a2e860e000000b002b6ffa50896sm309828lji.128.2023.09.14.07.57.23
+ a14-20020a2e860e000000b002b6ffa50896sm309828lji.128.2023.09.14.07.57.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 07:57:23 -0700 (PDT)
+ Thu, 14 Sep 2023 07:57:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 03a6980d-530f-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: fc74587a-530e-11ee-8787-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694703444; x=1695308244; darn=lists.xenproject.org;
+        d=gmail.com; s=20221208; t=1694703432; x=1695308232; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8T7F67gdUCk5RxXzpIuqhSSFrgC4kIPj+C7zkKjIZjk=;
-        b=MYZAZMANLfF6jA6b6WgMbOEPjhY0xSrcMFQyuCLJJnLIwR/jch+NoGkBVAtBARYoCb
-         v4sWMHZQL0XsKmd4MexLU9ySjoxiGMdSeCrezOkFDzgLIzVM8ySrUj7d6FcSLehYikKp
-         dt+k1d0Ss9pQx1ZKDn8XjR6aJpXbCT9jkv/7E+GWJwaNsaUUn1aqD191EdEx1TnPjFTN
-         ohKzfcgH0jWzTsqItx4jfkDhYsH9rufUNGQCHLUKKPtqtEMsicFBUK3fMMaHNyg5ji15
-         AaTAwij8hAgIqcEJvdEiWly64tGmzfTkAIOUw5TLuimnn2lOdS8P2p2JyD9o/MA/Km9g
-         Oe4g==
+        bh=DnrZ/AmdCqfNq1dsaQTi3pnInRO1wYchAayEqPy5DtU=;
+        b=SWPezd5cwS4hEBDJFtPlbCCbghk6ER0/ae5v26Y+e8MMJfvHhMLQ2NE3D253qM8E4f
+         kl0CcXpr1Fj+KApTLA4fJwxVOUuUPW7z4UI6ykM1Roe9kLV6NEGfSQu92qs3O77wBVY0
+         Yf+4c3oeg80vseQc88E43OI0aNThy1of1TdHphY21st+pvBLszcWxLU/lAj9XBFeshu5
+         2xc0JG3XNgtBXweN7GfkiWWuCE9yGUqFfI4JXTapwLSuNzdSVi85XM5QfdGGx5ZOzGxI
+         cY/AFrkg2NvK0iNXh7yFaf0a77ettmFJFJJUu/59LlD61LUSv6YMTbd8IG2YGcAe/Zc9
+         J34g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694703444; x=1695308244;
+        d=1e100.net; s=20230601; t=1694703432; x=1695308232;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8T7F67gdUCk5RxXzpIuqhSSFrgC4kIPj+C7zkKjIZjk=;
-        b=ezfoYaluxT9tF1gLlDiE3y2URBcWvLibsHAlGCzaY5T6YFjk2IkkEjIGcVWqN3UZom
-         SnvZYoyboS8ro6vEVmr1E2MmYsuZpbGjhZhNynf2Wmz723RD56Nus/EPJVeYbpBdcj/H
-         X7j3dynoLLtLw98K4C5U0Vv+yM8nD9pjk+LX1PfI2CM6hjIFWiKzchi+hErqCoGvQcuL
-         CwuW7EPARQ653mQjA0p1K7fheREWVm+PkkaFlTTcMVRQmZx7dype88E+p2cHdL8Hab0H
-         KwbNaZxJ7ij17vnGqb41MD4XyTiKMijzjPm+8oA3oT1jO1xDxB88tjyK+w/pnqso08x1
-         d9Aw==
-X-Gm-Message-State: AOJu0Yy6smKTtUXxD09hQ8mDrTRmrNRj2K+c8OZYBkgkPuo6UGggX2vE
-	IS73Ql5EMHnfVQV9hohyl/R3tvCK/e8=
-X-Google-Smtp-Source: AGHT+IE5hnkQJ/YBRz2XLkfxGXCOOALx/sf4bFP8n2YRPE2LtDydSYrRsL4Y2XSyuCPA2LsCZrI/5g==
-X-Received: by 2002:a2e:501d:0:b0:2bf:b770:ac2e with SMTP id e29-20020a2e501d000000b002bfb770ac2emr4391412ljb.33.1694703443933;
-        Thu, 14 Sep 2023 07:57:23 -0700 (PDT)
+        bh=DnrZ/AmdCqfNq1dsaQTi3pnInRO1wYchAayEqPy5DtU=;
+        b=hy1ilJIQLz3DNqRrJOPHxV9KBwx12VUdvi8JBLWAyHCbIArFQKUAHBkB3xph9dk0Xp
+         wWUC9izHNJGUA/HoB3stYy2XwDeuPS0wLT6RuX4vE90pktbd0haLtNTnBFuCVeP0HJtH
+         9D+h1ozrXJkoOgrB7woY0NSs3fJmdMezFf9Wbo+zLXzXyp5UAEqWcoU+r3kGaJiJ38jK
+         fvO3ALRhXD10t42XagmcKC5SG5k6HL78Z2Wpq5v9fA046QK2lNV8z8eOarhfp+Ympv1x
+         j78JI81XDPFuMmh0VRTdIRHey0Mb0jCFSIuHqZNhIyoEtbjQvmjqNd2JSC1zBioiKcZk
+         Y2kA==
+X-Gm-Message-State: AOJu0YzycRyE7fPbSftVjYogdQmD8wLcofO80vNN6S5mD7Y+RXF0TdfN
+	PUoaZcY9DTMvZgsjMJji6JfyLQwOmfM=
+X-Google-Smtp-Source: AGHT+IGLaHC2tTJhb9pwr5tg/S3L9996rR8Rg4Lyo8UK7mYY3EfyvA05BRF1zgwyQZhTJBhS9HtegA==
+X-Received: by 2002:a2e:3514:0:b0:2bc:f439:b5a5 with SMTP id z20-20020a2e3514000000b002bcf439b5a5mr5133368ljz.14.1694703431925;
+        Thu, 14 Sep 2023 07:57:11 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -85,59 +85,39 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v1 21/29] xen/asm-generic: introduce stub header altp2m.h
-Date: Thu, 14 Sep 2023 17:56:42 +0300
-Message-ID: <619b24fbd568f439baf1941a972c6943f423b4ad.1694702259.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 06/29] xen/asm-generic: introduce stub header grant_table.h
+Date: Thu, 14 Sep 2023 17:56:27 +0300
+Message-ID: <f3efdfc93780b62be93fecec68860e12026fe66c.1694702259.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1694702259.git.oleksii.kurochko@gmail.com>
 References: <cover.1694702259.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The patch introduces header stub necessry for full Xen build.
+The patch introduces stub header needed for full Xen build.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/include/asm-generic/altp2m.h | 34 ++++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 xen/include/asm-generic/altp2m.h
+ xen/include/asm-generic/grant_table.h | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 xen/include/asm-generic/grant_table.h
 
-diff --git a/xen/include/asm-generic/altp2m.h b/xen/include/asm-generic/altp2m.h
+diff --git a/xen/include/asm-generic/grant_table.h b/xen/include/asm-generic/grant_table.h
 new file mode 100644
-index 0000000000..e73cc8a04f
+index 0000000000..bd8d85f1ff
 --- /dev/null
-+++ b/xen/include/asm-generic/altp2m.h
-@@ -0,0 +1,34 @@
++++ b/xen/include/asm-generic/grant_table.h
+@@ -0,0 +1,14 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_ALTP2M_H
-+#define __ASM_GENERIC_ALTP2M_H
++#ifndef __ASM_GENERIC_GRANTTABLE_H__
++#define __ASM_GENERIC_GRANTTABLE_H__
 +
-+#include <xen/bug.h>
-+
-+struct domain;
-+struct vcpu;
-+
-+/* Alternate p2m on/off per domain */
-+static inline bool altp2m_active(const struct domain *d)
-+{
-+    /* Not implemented on GENERIC. */
-+    return false;
-+}
-+
-+/* Alternate p2m VCPU */
-+static inline uint16_t altp2m_vcpu_idx(const struct vcpu *v)
-+{
-+    /* Not implemented on GENERIC, should not be reached. */
-+    BUG();
-+    return 0;
-+}
-+
-+#endif /* __ASM_GENERIC_ALTP2M_H */
++#endif /* __ASM_GENERIC_GRANTTABLE_H__ */
 +
 +/*
 + * Local variables:
 + * mode: C
-+ * c-file-style: BSD
++ * c-file-style: "BSD"
 + * c-basic-offset: 4
 + * indent-tabs-mode: nil
 + * End:
