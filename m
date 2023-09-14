@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4D2EDE987
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:19:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.601775.937982 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CD6EDE99E
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 05:19:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.601786.938078 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgel7-0002LA-QV; Thu, 14 Sep 2023 05:19:21 +0000
+	id 1qgelH-0004rS-DN; Thu, 14 Sep 2023 05:19:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 601775.937982; Thu, 14 Sep 2023 05:19:21 +0000
+Received: by outflank-mailman (output) from mailman id 601786.938078; Thu, 14 Sep 2023 05:19:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgel7-0002Je-Lq; Thu, 14 Sep 2023 05:19:21 +0000
-Received: by outflank-mailman (input) for mailman id 601775;
- Thu, 14 Sep 2023 05:19:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qgelG-0004mf-Ry; Thu, 14 Sep 2023 05:19:30 +0000
+Received: by outflank-mailman (input) for mailman id 601786;
+ Thu, 14 Sep 2023 05:19:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IZLI=E6=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qgel5-0001X7-O3
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:19 +0000
+ id 1qgelB-0001XI-Hc
+ for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 05:19:25 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4137d9eb-52be-11ee-8787-cb3800f73035;
- Thu, 14 Sep 2023 07:19:18 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 43eb30c1-52be-11ee-9b0d-b553b5be7939;
+ Thu, 14 Sep 2023 07:19:23 +0200 (CEST)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Sep 2023 22:17:33 -0700
+ 13 Sep 2023 22:17:37 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:32 -0700
+ by orsmga001.jf.intel.com with ESMTP; 13 Sep 2023 22:17:36 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4137d9eb-52be-11ee-8787-cb3800f73035
+X-Inumbo-ID: 43eb30c1-52be-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1694668759; x=1726204759;
+  t=1694668763; x=1726204763;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=AT3+uEfHqtt3VE+RUnzzRXk1GicJbCzWRed9aBLhDUA=;
-  b=XPDghk5I4x97LdKu8z0HkNRPqkzJW8WqcRAyRfsxao+XO+59X+sr3fpn
-   eH/zQ+ESAVsgubQysZhibsnyosmFFRo/baPgtGUCinaahrlITDHbsIWRB
-   sc61yyWB7PcFaE8/dDRRfy2Lmwa3BgsoQLUclSdOIw8XpyHEuEx8y+Xvr
-   yqbUI53ymZgs1WouLLg9RpT09aj+MvTLKefA5kwpY9lO3anY0f/FcGXk0
-   iHtzdzxEQ2MUydi8k9GpeqVBeLxW9ZmbyWUuBkdO3qAa7+eUy7J71eM1A
-   OECAzgdo0lL5ymNpSuHngVC3pTz6XPJN9ZF2DkRCGFbpf4VRqwQNGXF8b
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661156"
+  bh=yFOHuHE47yU8Pv3f7vyK1KueQKaw2/ZJmrjuiwmDzLE=;
+  b=HqrPmQwy4sRhqAbFo3G610gZeBtUJFY4MMXsl/KHWR7hPtT/5HRpJ5Qs
+   2b0qDZ0vGhjBhY3qAA33P3bMHswQKBahKfR77n//C0Mce4xWd+5J54VAZ
+   ioGcBTTwjQ5RmupBVHgA701h5RFZefBo+A2AdSooS2NtJ41JSP+CrIvLD
+   J772AGUbG+3El/wUkMPSznDEOJVPWTZIqPfooOXPMuKrd+bfHE/ncLMY4
+   Fsn7vsJJJtFCrGYr6fbxnxSxNoAOQ6+4wCQyrzcvWheps04Xvp9GgsiVz
+   /Rr5WgETTpsDkga5EDJHzQs3aILP69Lu9LCqOmnxYvCqCCUpy5vA6bNVl
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="382661261"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="382661156"
+   d="scan'208";a="382661261"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488756"
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="779488784"
 X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; 
-   d="scan'208";a="779488756"
+   d="scan'208";a="779488784"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -86,46 +86,138 @@ Cc: tglx@linutronix.de,
 	mhiramat@kernel.org,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com
-Subject: [PATCH v10 07/38] x86/fred: Add Kconfig option for FRED (CONFIG_X86_FRED)
-Date: Wed, 13 Sep 2023 21:47:34 -0700
-Message-Id: <20230914044805.301390-8-xin3.li@intel.com>
+Subject: [PATCH v10 15/38] x86/ptrace: Cleanup the definition of the pt_regs structure
+Date: Wed, 13 Sep 2023 21:47:42 -0700
+Message-Id: <20230914044805.301390-16-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230914044805.301390-1-xin3.li@intel.com>
 References: <20230914044805.301390-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+struct pt_regs is hard to read because the member or section related
+comments are not aligned with the members.
 
-Add the configuration option CONFIG_X86_FRED to enable FRED.
+The 'cs' and 'ss' members of pt_regs are type of 'unsigned long' while
+in reality they are only 16-bit wide. This works so far as the
+remaining space is unused, but FRED will use the remaining bits for
+other purposes.
+
+To prepare for FRED:
+
+  - Cleanup the formatting
+  - Convert 'cs' and 'ss' to u16 and embed them into an union
+    with a u64
+  - Fixup the related printk() format strings
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/Kconfig | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/x86/entry/vsyscall/vsyscall_64.c |  2 +-
+ arch/x86/include/asm/ptrace.h         | 44 +++++++++++++++++++--------
+ arch/x86/kernel/process_64.c          |  2 +-
+ 3 files changed, 33 insertions(+), 15 deletions(-)
 
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 3b3594f96330..cae126417427 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -496,6 +496,15 @@ config X86_CPU_RESCTRL
+diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
+index e0ca8120aea8..a3c0df11d0e6 100644
+--- a/arch/x86/entry/vsyscall/vsyscall_64.c
++++ b/arch/x86/entry/vsyscall/vsyscall_64.c
+@@ -76,7 +76,7 @@ static void warn_bad_vsyscall(const char *level, struct pt_regs *regs,
+ 	if (!show_unhandled_signals)
+ 		return;
  
- 	  Say N if unsure.
+-	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%lx sp:%lx ax:%lx si:%lx di:%lx\n",
++	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%x sp:%lx ax:%lx si:%lx di:%lx\n",
+ 			   level, current->comm, task_pid_nr(current),
+ 			   message, regs->ip, regs->cs,
+ 			   regs->sp, regs->ax, regs->si, regs->di);
+diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
+index f4db78b09c8f..f08ea073edd6 100644
+--- a/arch/x86/include/asm/ptrace.h
++++ b/arch/x86/include/asm/ptrace.h
+@@ -57,17 +57,19 @@ struct pt_regs {
+ #else /* __i386__ */
  
-+config X86_FRED
-+	bool "Flexible Return and Event Delivery"
-+	depends on X86_64
-+	help
-+	  When enabled, try to use Flexible Return and Event Delivery
-+	  instead of the legacy SYSCALL/SYSENTER/IDT architecture for
-+	  ring transitions and exception/interrupt handling if the
-+	  system supports.
+ struct pt_regs {
+-/*
+- * C ABI says these regs are callee-preserved. They aren't saved on kernel entry
+- * unless syscall needs a complete, fully filled "struct pt_regs".
+- */
++	/*
++	 * C ABI says these regs are callee-preserved. They aren't saved on
++	 * kernel entry unless syscall needs a complete, fully filled
++	 * "struct pt_regs".
++	 */
+ 	unsigned long r15;
+ 	unsigned long r14;
+ 	unsigned long r13;
+ 	unsigned long r12;
+ 	unsigned long bp;
+ 	unsigned long bx;
+-/* These regs are callee-clobbered. Always saved on kernel entry. */
 +
- if X86_32
- config X86_BIGSMP
- 	bool "Support for big SMP systems with more than 8 CPUs"
++	/* These regs are callee-clobbered. Always saved on kernel entry. */
+ 	unsigned long r11;
+ 	unsigned long r10;
+ 	unsigned long r9;
+@@ -77,18 +79,34 @@ struct pt_regs {
+ 	unsigned long dx;
+ 	unsigned long si;
+ 	unsigned long di;
+-/*
+- * On syscall entry, this is syscall#. On CPU exception, this is error code.
+- * On hw interrupt, it's IRQ number:
+- */
++
++	/*
++	 * orig_ax is used on entry for:
++	 * - the syscall number (syscall, sysenter, int80)
++	 * - error_code stored by the CPU on traps and exceptions
++	 * - the interrupt number for device interrupts
++	 */
+ 	unsigned long orig_ax;
+-/* Return frame for iretq */
++
++	/* The IRETQ return frame starts here */
+ 	unsigned long ip;
+-	unsigned long cs;
++
++	union {
++		u64	csx;	// The full 64-bit data slot containing CS
++		u16	cs;	// CS selector
++	};
++
+ 	unsigned long flags;
+ 	unsigned long sp;
+-	unsigned long ss;
+-/* top of stack page */
++
++	union {
++		u64	ssx;	// The full 64-bit data slot containing SS
++		u16	ss;	// SS selector
++	};
++
++	/*
++	 * Top of stack on IDT systems.
++	 */
+ };
+ 
+ #endif /* !__i386__ */
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 33b268747bb7..0f78b58021bb 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -117,7 +117,7 @@ void __show_regs(struct pt_regs *regs, enum show_regs_mode mode,
+ 
+ 	printk("%sFS:  %016lx(%04x) GS:%016lx(%04x) knlGS:%016lx\n",
+ 	       log_lvl, fs, fsindex, gs, gsindex, shadowgs);
+-	printk("%sCS:  %04lx DS: %04x ES: %04x CR0: %016lx\n",
++	printk("%sCS:  %04x DS: %04x ES: %04x CR0: %016lx\n",
+ 		log_lvl, regs->cs, ds, es, cr0);
+ 	printk("%sCR2: %016lx CR3: %016lx CR4: %016lx\n",
+ 		log_lvl, cr2, cr3, cr4);
 -- 
 2.34.1
 
