@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6724EEAA51
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 15:22:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.602494.939168 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66D16EEAA4E
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Sep 2023 15:22:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.602493.939162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgoAn-0008Pj-HE; Thu, 14 Sep 2023 15:22:29 +0000
+	id 1qgoAn-0008MZ-6G; Thu, 14 Sep 2023 15:22:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 602494.939168; Thu, 14 Sep 2023 15:22:29 +0000
+Received: by outflank-mailman (output) from mailman id 602493.939162; Thu, 14 Sep 2023 15:22:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qgoAn-0008Og-Av; Thu, 14 Sep 2023 15:22:29 +0000
-Received: by outflank-mailman (input) for mailman id 602494;
+	id 1qgoAn-0008MS-35; Thu, 14 Sep 2023 15:22:29 +0000
+Received: by outflank-mailman (input) for mailman id 602493;
  Thu, 14 Sep 2023 15:22:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9rCx=E6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qgnmX-0002W4-N5
- for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 14:57:25 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 032ce7ed-530f-11ee-8787-cb3800f73035;
- Thu, 14 Sep 2023 16:57:23 +0200 (CEST)
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2bfc1d8f2d2so13634341fa.0
- for <xen-devel@lists.xenproject.org>; Thu, 14 Sep 2023 07:57:23 -0700 (PDT)
+ id 1qgnmf-0002WX-6I
+ for xen-devel@lists.xenproject.org; Thu, 14 Sep 2023 14:57:33 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 06f4e01f-530f-11ee-9b0d-b553b5be7939;
+ Thu, 14 Sep 2023 16:57:30 +0200 (CEST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2bb9a063f26so17209521fa.2
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Sep 2023 07:57:30 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a14-20020a2e860e000000b002b6ffa50896sm309828lji.128.2023.09.14.07.57.22
+ a14-20020a2e860e000000b002b6ffa50896sm309828lji.128.2023.09.14.07.57.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 07:57:22 -0700 (PDT)
+ Thu, 14 Sep 2023 07:57:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,48 +46,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 032ce7ed-530f-11ee-8787-cb3800f73035
+X-Inumbo-ID: 06f4e01f-530f-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694703443; x=1695308243; darn=lists.xenproject.org;
+        d=gmail.com; s=20221208; t=1694703449; x=1695308249; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NGJnL2nL418M5/uszjX/GlUjvflTtKGWfxAcKAqqexc=;
-        b=jNUQvqOeBMSDGD+JgOdSUqCfVApGuGjZ2qLOV+1Y1GBdbZao6bYyuugJJliXdpuraL
-         JFcQkdznxowmut/aQnMPnB4n0Rl23/1IHbD9DByKHoCt6ccH36BEo1PdoPSym2RsiP1U
-         gr44pzwSSaKOmM3i/2cwoHUD3Fx3jEscx95OyiW/pF+4AsvsUlVEMGUtDgY9qWBkFKN8
-         m5UrcX6oCdNUG9SaQ9P0fjER/eoSn3RfhHWPRYml1EHt6+WBZBor35mu8x8LLOfQTTxR
-         dD3xLsm0m7VKMpXUIJrpR4OC1lNBbsCYk1G9cN5Rcr/z6lw6XWwoSWWG3azxSAQPAExg
-         0i2g==
+        bh=aI25daj2NtPhBXJcnFkuOhkb6xig5qy+VaAN6xNV3YY=;
+        b=sLoueh5xm6NI2/JswBlXd2H8rSxg9mTHexilQxNd8qlPZrR6poE8xdP7iVs3J9JD+G
+         U6ehwlvmhOPWeooeEla/kZwSQsnWNb8ir7ZwWwit9pK7E0llc6Wf7Xt18P3ctaVfaxvx
+         s0wXbNhyPsuDauIEqUFDsavwVYLxOq/wiql4JgOP7jH+viZHmzW9Aa6BaAWGquehHdF6
+         xnB5/HnstM3hzNQHERJS4B2D9pbmrGFxgiAYGdA5z2H8iQga+TKPIi6xiYND6ZVvlzkF
+         nuv4xPBih2z7Q5rT4UmFEKJesezwv65nKbZZbE0RdIMLgp5MPKs66+jgDLnlyD7eqVbx
+         jxqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694703443; x=1695308243;
+        d=1e100.net; s=20230601; t=1694703449; x=1695308249;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NGJnL2nL418M5/uszjX/GlUjvflTtKGWfxAcKAqqexc=;
-        b=cY0VRaIIGCElNItWEMdHtFkRvoGk2QbxyJh3DT/Bzf7wpnLjlk7YozCYdX/pULqpN3
-         bxRWGWMInLIjodNLfK+H90uGO6P5FfgMIu2x0gWpsgzK7w4I8k9l22Gj/ztlaBgC/t3N
-         0Q94uNm+9ClzcHkH18NeIMp57gqA8sOpjtE6kBVfKWjaGOWkLUCFZ8dmXDfoJoyVx5tT
-         +MZEKCxXVeCiAJxz1HRn7ElTOuzVeii9Vj8gBRDAjVV13t6yJflPc0xeCY34BgMHe2we
-         GzuLtUpY3yB0M2MwRxjR6FDM5qOS8qFs3ivVT90Hi8pd9giZqjyycqc7Q8nrZB76tj8K
-         Rxog==
-X-Gm-Message-State: AOJu0Yw32jnysGeCMCybnl0G/YyQTXNaQiDMRW7/aA2HT9kqcD+xdeZI
-	TRV0mKnnsAkg2QljrQjfhQ6xMd7sT7Y=
-X-Google-Smtp-Source: AGHT+IGpK0E7SuflPXItoYH5tWLeY7McAC9Nf7YsdmHOvtwG74oWQuABe3GYNz3ubbaUUW4mz2J0tg==
-X-Received: by 2002:a05:651c:1250:b0:2bc:d2a6:3083 with SMTP id h16-20020a05651c125000b002bcd2a63083mr778572ljh.18.1694703443185;
-        Thu, 14 Sep 2023 07:57:23 -0700 (PDT)
+        bh=aI25daj2NtPhBXJcnFkuOhkb6xig5qy+VaAN6xNV3YY=;
+        b=DZSfk75Mx2lY7ReMqgHZbaDxj2e+OzRnMzWfMiuDhifPgk0pNN7WF8AQxbwyx/1cQQ
+         G1ZZP2WzbOZ8Vko3nFLUGs47zUTnx5iPwy9zI1k0HwILgivpZGdzYYr6ODgy8/FidNSS
+         ZS/dZGjwxSAm78k4OcfNfnsZIxeNRzAOi8rLiecFjYvXfNlQ8bemsmw05NF+Ub2Gc13d
+         W9/zn2pgHTVKO5mvajiSUuXL3I64eq1W25yNgQvYETv3T52v9+DAVMdqt9WOOXypI3Uv
+         PAc9morluTnOywrBTEhHhuV1px+YsZyE72EJ7k9NDrW8by0y2zTAJeqYmtwOffo8s0EI
+         kr/w==
+X-Gm-Message-State: AOJu0Yx1Knq9KMj0TUi6qsNHRqZzsXDoQ25IWIXqmQR5YwmScOL7QW0c
+	XkEMU5JHPSSCpbkcQo9SB/9/rHcwrjA=
+X-Google-Smtp-Source: AGHT+IGnKszfioWrlfMrI9gyb0uSnnGj8/VweY7O6m6x/47xY0ZnbZJaTiNbDfFi+s88Q4iTIIytIw==
+X-Received: by 2002:a2e:9b0a:0:b0:2bc:c326:54a2 with SMTP id u10-20020a2e9b0a000000b002bcc32654a2mr4624540lji.50.1694703449525;
+        Thu, 14 Sep 2023 07:57:29 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v1 20/29] xen/asm-generic: introduce stub header div64.h
-Date: Thu, 14 Sep 2023 17:56:41 +0300
-Message-ID: <0c006d03b917924c411e563dcdc8043498be48b3.1694702259.git.oleksii.kurochko@gmail.com>
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: [PATCH v1 26/29] xen/asm-generic: introduce stub header monitor.h
+Date: Thu, 14 Sep 2023 17:56:47 +0300
+Message-ID: <a2663ba600f468bc4d6544bb64354a77c86a40b3.1694702259.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1694702259.git.oleksii.kurochko@gmail.com>
 References: <cover.1694702259.git.oleksii.kurochko@gmail.com>
@@ -98,36 +95,76 @@ The patch introduces header stub necessry for full Xen build.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/include/asm-generic/div64.h | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 xen/include/asm-generic/div64.h
+ xen/include/asm-generic/monitor.h | 64 +++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
+ create mode 100644 xen/include/asm-generic/monitor.h
 
-diff --git a/xen/include/asm-generic/div64.h b/xen/include/asm-generic/div64.h
+diff --git a/xen/include/asm-generic/monitor.h b/xen/include/asm-generic/monitor.h
 new file mode 100644
-index 0000000000..9f9c20878b
+index 0000000000..c61fe738a8
 --- /dev/null
-+++ b/xen/include/asm-generic/div64.h
-@@ -0,0 +1,24 @@
++++ b/xen/include/asm-generic/monitor.h
+@@ -0,0 +1,64 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_DIV64
-+#define __ASM_GENERIC_DIV64
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * include/asm-GENERIC/monitor.h
++ *
++ * Arch-specific monitor_op domctl handler.
++ *
++ * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
++ * Copyright (c) 2016, Bitdefender S.R.L.
++ *
++ */
 +
-+#include <xen/types.h>
++#ifndef __ASM_GENERIC_MONITOR_H__
++#define __ASM_GENERIC_MONITOR_H__
 +
-+# define do_div(n,base) ({                                      \
-+        uint32_t __base = (base);                               \
-+        uint32_t __rem;                                         \
-+        __rem = ((uint64_t)(n)) % __base;                       \
-+        (n) = ((uint64_t)(n)) / __base;                         \
-+        __rem;                                                  \
-+ })
++#include <xen/sched.h>
++#include <public/domctl.h>
 +
-+#endif
++static inline
++void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
++{
++}
++
++static inline
++int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
++{
++    /* No arch-specific monitor ops on GENERIC. */
++    return -EOPNOTSUPP;
++}
++
++int arch_monitor_domctl_event(struct domain *d,
++                              struct xen_domctl_monitor_op *mop);
++
++static inline
++int arch_monitor_init_domain(struct domain *d)
++{
++    /* No arch-specific domain initialization on GENERIC. */
++    return 0;
++}
++
++static inline
++void arch_monitor_cleanup_domain(struct domain *d)
++{
++    /* No arch-specific domain cleanup on GENERIC. */
++}
++
++static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
++{
++    uint32_t capabilities = 0;
++
++    return capabilities;
++}
++
++#endif /* __ASM_GENERIC_MONITOR_H__ */
++
 +
 +/*
 + * Local variables:
 + * mode: C
-+ * c-file-style: "BSD"
++ * c-file-style: BSD
 + * c-basic-offset: 4
 + * indent-tabs-mode: nil
 + * End:
