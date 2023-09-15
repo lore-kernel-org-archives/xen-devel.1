@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC956EE6457
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 11:12:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.603003.939892 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D096EE6456
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 11:12:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.603000.939862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qh6ka-0003qk-SV; Fri, 15 Sep 2023 11:12:40 +0000
+	id 1qh6kM-0002xo-19; Fri, 15 Sep 2023 11:12:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 603003.939892; Fri, 15 Sep 2023 11:12:40 +0000
+Received: by outflank-mailman (output) from mailman id 603000.939862; Fri, 15 Sep 2023 11:12:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qh6ka-0003qd-P0; Fri, 15 Sep 2023 11:12:40 +0000
-Received: by outflank-mailman (input) for mailman id 603003;
- Fri, 15 Sep 2023 11:12:39 +0000
+	id 1qh6kL-0002xh-Uj; Fri, 15 Sep 2023 11:12:25 +0000
+Received: by outflank-mailman (input) for mailman id 603000;
+ Fri, 15 Sep 2023 11:12:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGil=E7=amd.com=Ray.Huang@srs-se1.protection.inumbo.net>)
- id 1qh6kZ-0002xb-4h
- for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 11:12:39 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20629.outbound.protection.outlook.com
- [2a01:111:f400:7eaa::629])
+ id 1qh6kK-0002xb-A2
+ for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 11:12:24 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20606.outbound.protection.outlook.com
+ [2a01:111:f400:7e8c::606])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c6fd21d4-53b8-11ee-8788-cb3800f73035;
- Fri, 15 Sep 2023 13:12:38 +0200 (CEST)
-Received: from DS0PR17CA0020.namprd17.prod.outlook.com (2603:10b6:8:191::27)
- by PH7PR12MB8427.namprd12.prod.outlook.com (2603:10b6:510:242::8) with
+ id bd6076f3-53b8-11ee-8788-cb3800f73035;
+ Fri, 15 Sep 2023 13:12:22 +0200 (CEST)
+Received: from DM5PR07CA0066.namprd07.prod.outlook.com (2603:10b6:4:ad::31) by
+ CH3PR12MB8880.namprd12.prod.outlook.com (2603:10b6:610:17b::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.19; Fri, 15 Sep
- 2023 11:12:34 +0000
-Received: from DS1PEPF0001709D.namprd05.prod.outlook.com
- (2603:10b6:8:191:cafe::40) by DS0PR17CA0020.outlook.office365.com
- (2603:10b6:8:191::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.21 via Frontend
- Transport; Fri, 15 Sep 2023 11:12:34 +0000
+ 2023 11:12:16 +0000
+Received: from DS1PEPF0001709C.namprd05.prod.outlook.com
+ (2603:10b6:4:ad:cafe::bd) by DM5PR07CA0066.outlook.office365.com
+ (2603:10b6:4:ad::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.20 via Frontend
+ Transport; Fri, 15 Sep 2023 11:12:16 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0001709D.mail.protection.outlook.com (10.167.18.107) with Microsoft
+ DS1PEPF0001709C.mail.protection.outlook.com (10.167.18.106) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.19 via Frontend Transport; Fri, 15 Sep 2023 11:12:34 +0000
+ 15.20.6792.20 via Frontend Transport; Fri, 15 Sep 2023 11:12:16 +0000
 Received: from hr-test6.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Sep
- 2023 06:12:27 -0500
+ 2023 06:12:09 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6fd21d4-53b8-11ee-8788-cb3800f73035
+X-Inumbo-ID: bd6076f3-53b8-11ee-8788-cb3800f73035
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eLu1JnPLyb2+xU5JoNHWlZFepPe9qnHKo/I7v3YOB/CpzRSWa8F3DL9aKRDy8DFH0BLEK1617GSJxr8lui175M7gBAbQTRlRTL/tEQtaqbA2Z+RSDORwho7V+MUqp411e7hUPNcbLjCU6FVEOzKZCjbGgp7EDt+yRI3NSH6x3srAV7WDxGd/cfcBQyIm5ceTwmgPqn0OovahDuafFqd+lx1W/xBH6vdGaKMnVh72c1YBXV5VmUlEBoO7vMrZw6d84/ohFoqHefD69Hq34Z0t8aYyNY5Bbzax4402bI2lwJZXAcFosNal0+3Q5NoszYRl0jc7JzOTTgoOfhftghMNzA==
+ b=iapucUr2vlsSieZWHSWhgcM0TK9cVn0Nmkc99XtKkpxHGX60lLJtTgq1txWaL8T5n++BqOkO1AMRoFalUOuxRFXJ9VS6vS1m3QN4LJZjbi/7eKrkPuY/ElRD2DJtEb8i9cYoXePSVK1kipBiWFl6/QDJvGQWPQL8BHssEw6mcUdz7m8B+N7WP59vrXr30CnrJihVTS5i6tIx/1210Kvbj7rpdrInccKT0SgcGgA0PhA9QLnsUGrjBeQNWf8Qp6buMAhElMGl7YmNMVWvU2s8i0wEVgjgxMeqR6xfYBR+2tw6/J8exv+o38NUzYu6LVW8pUD7C5yfQV2YR/v5p2x7wQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Qr3RAYeUheQV33MWIVHkExHj4snVaxR01Xv6+3mdj/Q=;
- b=MwlmwrpB72kgTs5A0HmocC0X16sXyuqf786Rp9/DIlpk9YwDzSzDWpPCCGHMc5PBdxo1AJKEI3TrW4/MuEqJgAmeScUD4L1qhWljXKkipwr2Hb3uXCU7p2HjCU1YDHt7d14K0B12sGFhoqmC3w01nRR9/BiCDSK7KwmIcWWayjh74YmDhWOXMtowTYP86EgXP+OsoTJeqVozhjqMY+dyuPfcu6OIEdNSJrPrHMGP4cQcf4bXmKRlGRijgSVDOgnR9AnF2p5bikGchG1daRq3kPH3JcT/o0K76GBL8TnN/xoCXizWKx1XxU+rMNlK0L8MBicYfaZ8QoH3LpuK3z99DQ==
+ bh=cJxBlYZ1zS11ui7pIdit0J45GPJ0moHkIBTnw8ZAyRY=;
+ b=Qg7WF3GEdM1ARipxW25qj3dPS4zdAXmpT34L4k8ToAqjeCfurJKAm4710MKRAqUflkmmzjtVQJQOOXGYS98cRjccYWM1xGquQVdSXrfTIq/raI8l326gKz0mOC8dY3roLK8QmI8PtmwRtPiiem6Yrxgxaj2VmZjclyrxcMP3oan81/TmBxrirMSGa0GLezPRxgK1Dyx6YzmeKbnjfkxLMhPjFJvcsBcW6fwWY1aN8+ryuVauA+ErmB17mGo0m8uEJzoKZ09PE3IU3hJK3LRcSvlYHfhsBBcOvqIw9IAlIaPWoiNhOAPF281pIIkEJkSueGgx/PyGfBw9SSUpV1752w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Qr3RAYeUheQV33MWIVHkExHj4snVaxR01Xv6+3mdj/Q=;
- b=FLwnviJVEHgsy7qao54dFWJLzRtPhy7bU54ld0b264aitTa/T7DsDJIex5vAq0tblEpJrBzNg+bKGaUbfpHVRGrkvNasFJ3jJiZP1aB3+K2F5hpxgofsA12wO3af0kmwlXSG9yThTiCWMXerPB7oTLHqaaQ5tZK5r9GBDIyK8vw=
+ bh=cJxBlYZ1zS11ui7pIdit0J45GPJ0moHkIBTnw8ZAyRY=;
+ b=3pqC6TilCH98HHxsLGJ4di2F/HSFs83Gu5XSQuj4AOWD0Nc4g+3Wc3jNXelaw/8g0zzb3YjtAAJwfB8XsLIcqTIcr6Z+AIMruAT76d/LbHY8VfVg9paCp4+QcY9KxYWaC131FN89q/mZWtgH/HwRUH1oNWvPYOQ+dodUKlv+NHg=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -97,178 +97,172 @@ CC: <xen-devel@lists.xenproject.org>, Gurchetan Singh
 	<christian.koenig@amd.com>, Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
 	Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, "Honglei
  Huang" <honglei1.huang@amd.com>, Julia Zhang <julia.zhang@amd.com>, "Chen
- Jiqian" <Jiqian.Chen@amd.com>, Antonio Caggiano
-	<antonio.caggiano@collabora.com>, Huang Rui <ray.huang@amd.com>
-Subject: [QEMU PATCH v5 03/13] virtio-gpu: hostmem
-Date: Fri, 15 Sep 2023 19:11:20 +0800
-Message-ID: <20230915111130.24064-4-ray.huang@amd.com>
+ Jiqian" <Jiqian.Chen@amd.com>, Huang Rui <ray.huang@amd.com>
+Subject: [QEMU PATCH v5 00/13] Support blob memory and venus on qemu
+Date: Fri, 15 Sep 2023 19:11:17 +0800
+Message-ID: <20230915111130.24064-1-ray.huang@amd.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230915111130.24064-1-ray.huang@amd.com>
-References: <20230915111130.24064-1-ray.huang@amd.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-Originating-IP: [10.180.168.240]
 X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001709D:EE_|PH7PR12MB8427:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92af8e65-8bb8-411a-4b71-08dbb5dca952
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709C:EE_|CH3PR12MB8880:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2a58cfa1-f60d-4701-bd6f-08dbb5dc9e92
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	T/8zGYpfvegyyEORgClCllv3L4xzWi2bSuOpAY2WctE2jxVaBKT38l8bzchHrtS3e0IHZe7ntiNk/1swDXj6BPEZYMJB8D5yXfL/ihdmctJXk9n9o5AMm5/oV+gjnHokzc0a35jYfqfe4Q6GlQYscp5DahQfNRRuZh0ggO3Yg1XLr35Npo4gQ74EtUXOd2tdUW+5DX1BlcUr6HHE+9vFK6C3jLPSik35lkH4quVYl0uC6YCUh7QY/6FpAi15+yz9/goAIbGGpwtlAWWpYiHW1OeW+uEqjR4PpLDhKUSD6GUoMM6iQ6LqYbrOemy6OeLNfSAXtrzJ6gV7iZHQNKTVg2Wy6YFuHsRhKj8YEdU2o8Yzc1JsajBFNDQeVYMH5F4AYS35tWeVJu4UutAK0jOcZmAyvm7cwf35jt2DT3G+4wTsS4OM35IetQC1GCdqlKRKoKAACgisXdJuJVtdZIsorle3noYRb88r2xxgEZRhYD66m3hy5kuTliqgSqdSmOs/1sP6ibySHzezn50qd2QIwfus0ek/sEQGnHdXEVv521MmkbOgfhaAvDNS3fPDWV0geehO+tNR3s3VY5ZYbKS5VmzuXFHq5rTIa/Qcdj79dCCrAUvlFa1kpcKANt5rZZ7CVRZKPQcBmeLx1hstX+8dQXKtkTa0nS9s/w9SDHUPafArPjqUYy/on1wRiIxlPufaNNNJJCs8oAKlpDJSfWnLpk4dWjosctFkJ/yidcmxKGZf7l75iZ/JfBbRRmTDxnMwa6o5x1O7kacj7vdaNvUvLVUE7cYnkbvVbEGU1CmtKrM=
+	pV9KmmlUeBWPjtOnAukKAdAT1sVRM68b3XvvENsucR8iNuS0Sz85+pzRLbecU2QdMUmveo6buuw99qQTzZH0l1uEVMSFcP4iztnpHtnlBB2Qw0FtHaJckkMGrH5rxKCUwh84ypb504A/gflCvra/STzL1rJczFGW620xtVqc/s3++tAFL9b8nmK570ZytPdnlYj4qwOuglz18NV8GdyZnj4p/uMmwFUsxB8MnBUrRQxWtQHYyxF7dLApeIU3WV9D4J64xu1Iq42OIJVJ6r/L3d1mx/JC6MdlLpzS82HQTr+763eNOTCcVoWTP2ymSfF1beMMChIQZi8Cw3zNTWZppxZWAQifcja1EAjppEFiIfHqhhgnFf/nGQ1O9YKydoGf7sUv0OPBNafOEjgLozuBTTGSpID7yr6eILi8VuKuNvrS9FogTryh/7N0xSfcNl4cc9ON3n6fXOy7UBfoG1KP41cG6Thc7iWLzsKVJbEBc0DSqStf0arA+ykBmUlkIpowsJ5uQCaEFDJi4yduC6n9rya4yMpHjGVZWPxhfk6Fa3l2qX/DLVOAHFLyl23Um3Fi8aALJfgJquihhG6mtC7hSTnIlAjwmPWhbSiNz71aMcLFtuqvS/QOYbhUDFzA/wdOBACclJyIb3eQKcIWFlcyIRwXhcDTsyFnWK+cRKqb0RRa/hH0q7L0pK+zjWJIslKh4fLsDgC8LjqnKSkpnIlnlVUd1bS0AkXksVP0wolw75hj0C2eIRfeWEZC1njKxH+I2IZIMdGPD7L23iTW3y2+HhrAnRo+UDsRe7qhbbXiE8TBZx9VHKQGOiBb96Nhi6Fz
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(136003)(346002)(376002)(39860400002)(82310400011)(1800799009)(451199024)(186009)(40470700004)(36840700001)(46966006)(8676002)(5660300002)(16526019)(316002)(54906003)(70586007)(110136005)(70206006)(4326008)(2616005)(7696005)(40480700001)(356005)(82740400003)(921005)(81166007)(8936002)(1076003)(83380400001)(426003)(336012)(6666004)(41300700001)(26005)(478600001)(7416002)(47076005)(2906002)(36860700001)(40460700003)(86362001)(36756003)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(376002)(39860400002)(136003)(346002)(1800799009)(451199024)(82310400011)(186009)(40470700004)(36840700001)(46966006)(40460700003)(66899024)(7696005)(110136005)(2616005)(70206006)(966005)(6666004)(1076003)(478600001)(82740400003)(47076005)(16526019)(83380400001)(70586007)(356005)(86362001)(36860700001)(426003)(921005)(26005)(81166007)(336012)(2906002)(54906003)(41300700001)(7416002)(5660300002)(8936002)(8676002)(36756003)(4326008)(316002)(40480700001)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 11:12:34.0451
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 11:12:16.0125
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92af8e65-8bb8-411a-4b71-08dbb5dca952
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2a58cfa1-f60d-4701-bd6f-08dbb5dc9e92
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DS1PEPF0001709D.namprd05.prod.outlook.com
+	DS1PEPF0001709C.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8427
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8880
 
-From: Gerd Hoffmann <kraxel@redhat.com>
+Hi all,
 
-Use VIRTIO_GPU_SHM_ID_HOST_VISIBLE as id for virtio-gpu.
+Antonio Caggiano made the venus with QEMU on KVM platform last
+September[1]. This series are inherited from his original work to support
+the features of context init, hostmem, resource uuid, and blob resources
+for venus.
+At March of this year, we sent out the V1 version[2] for the review. But
+those series are included both xen and virtio gpu. Right now, we would like
+to divide into two parts, one is to continue the Antonio's work to upstream
+virtio-gpu support for blob memory and venus, and another is to upstream
+xen specific patches. This series is focusing on virtio-gpu, so we are
+marking as V4 version here to continue Antonio's patches[1]. And we will
+send xen specific patches separately, because they are hypervisor specific.
+Besides of QEMU, these supports also included virglrenderer[3][4] and
+mesa[5][6] as well. Right now, virglrenderer and mesa parts are all
+accepted by upstream. In this qemu version, we try to address the concerns
+around not proper cleanup during blob resource unmap and unref. Appreciate
+it if you have any commments.
 
-Signed-off-by: Antonio Caggiano <antonio.caggiano@collabora.com>
-Tested-by: Alyssa Ross <hi@alyssa.is>
-Tested-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Tested-by: Huang Rui <ray.huang@amd.com>
-Acked-by: Huang Rui <ray.huang@amd.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Signed-off-by: Huang Rui <ray.huang@amd.com>
----
+[1] https://lore.kernel.org/qemu-devel/20220926142422.22325-1-antonio.caggiano@collabora.com/
+[2] V1: https://lore.kernel.org/qemu-devel/20230312092244.451465-1-ray.huang@amd.com
+[3] https://gitlab.freedesktop.org/virgl/virglrenderer/-/merge_requests/1068
+[4] https://gitlab.freedesktop.org/virgl/virglrenderer/-/merge_requests/1180
+[5] https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22108
+[6] https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/23680
 
-This patch is already under review as part of the "rutabaga_gfx + gfxstream"
-series (already in v13) and has been included here because of dependency.
+Please note the first 4 patches 1 -> 4 are inlcuded in these series because
+the series depends on them and not because we want them to be reviewed
+since they are already in the process of review through the "rutabaga_gfx +
+gfxstream" series.
+- https://lore.kernel.org/qemu-devel/20230829003629.410-1-gurchetansingh@chromium.org/
 
- hw/display/virtio-gpu-pci.c    | 14 ++++++++++++++
- hw/display/virtio-gpu.c        |  1 +
- hw/display/virtio-vga.c        | 33 ++++++++++++++++++++++++---------
- include/hw/virtio/virtio-gpu.h |  5 +++++
- 4 files changed, 44 insertions(+), 9 deletions(-)
+V4: https://lore.kernel.org/qemu-devel/20230831093252.2461282-1-ray.huang@amd.com
 
-diff --git a/hw/display/virtio-gpu-pci.c b/hw/display/virtio-gpu-pci.c
-index 93f214ff58..da6a99f038 100644
---- a/hw/display/virtio-gpu-pci.c
-+++ b/hw/display/virtio-gpu-pci.c
-@@ -33,6 +33,20 @@ static void virtio_gpu_pci_base_realize(VirtIOPCIProxy *vpci_dev, Error **errp)
-     DeviceState *vdev = DEVICE(g);
-     int i;
- 
-+    if (virtio_gpu_hostmem_enabled(g->conf)) {
-+        vpci_dev->msix_bar_idx = 1;
-+        vpci_dev->modern_mem_bar_idx = 2;
-+        memory_region_init(&g->hostmem, OBJECT(g), "virtio-gpu-hostmem",
-+                           g->conf.hostmem);
-+        pci_register_bar(&vpci_dev->pci_dev, 4,
-+                         PCI_BASE_ADDRESS_SPACE_MEMORY |
-+                         PCI_BASE_ADDRESS_MEM_PREFETCH |
-+                         PCI_BASE_ADDRESS_MEM_TYPE_64,
-+                         &g->hostmem);
-+        virtio_pci_add_shm_cap(vpci_dev, 4, 0, g->conf.hostmem,
-+                               VIRTIO_GPU_SHM_ID_HOST_VISIBLE);
-+    }
-+
-     virtio_pci_force_virtio_1(vpci_dev);
-     if (!qdev_realize(vdev, BUS(&vpci_dev->bus), errp)) {
-         return;
-diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
-index bbd5c6561a..48ef0d9fad 100644
---- a/hw/display/virtio-gpu.c
-+++ b/hw/display/virtio-gpu.c
-@@ -1509,6 +1509,7 @@ static Property virtio_gpu_properties[] = {
-                      256 * MiB),
-     DEFINE_PROP_BIT("blob", VirtIOGPU, parent_obj.conf.flags,
-                     VIRTIO_GPU_FLAG_BLOB_ENABLED, false),
-+    DEFINE_PROP_SIZE("hostmem", VirtIOGPU, parent_obj.conf.hostmem, 0),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-diff --git a/hw/display/virtio-vga.c b/hw/display/virtio-vga.c
-index e6fb0aa876..c8552ff760 100644
---- a/hw/display/virtio-vga.c
-+++ b/hw/display/virtio-vga.c
-@@ -115,17 +115,32 @@ static void virtio_vga_base_realize(VirtIOPCIProxy *vpci_dev, Error **errp)
-     pci_register_bar(&vpci_dev->pci_dev, 0,
-                      PCI_BASE_ADDRESS_MEM_PREFETCH, &vga->vram);
- 
--    /*
--     * Configure virtio bar and regions
--     *
--     * We use bar #2 for the mmio regions, to be compatible with stdvga.
--     * virtio regions are moved to the end of bar #2, to make room for
--     * the stdvga mmio registers at the start of bar #2.
--     */
--    vpci_dev->modern_mem_bar_idx = 2;
--    vpci_dev->msix_bar_idx = 4;
-     vpci_dev->modern_io_bar_idx = 5;
- 
-+    if (!virtio_gpu_hostmem_enabled(g->conf)) {
-+        /*
-+         * Configure virtio bar and regions
-+         *
-+         * We use bar #2 for the mmio regions, to be compatible with stdvga.
-+         * virtio regions are moved to the end of bar #2, to make room for
-+         * the stdvga mmio registers at the start of bar #2.
-+         */
-+        vpci_dev->modern_mem_bar_idx = 2;
-+        vpci_dev->msix_bar_idx = 4;
-+    } else {
-+        vpci_dev->msix_bar_idx = 1;
-+        vpci_dev->modern_mem_bar_idx = 2;
-+        memory_region_init(&g->hostmem, OBJECT(g), "virtio-gpu-hostmem",
-+                           g->conf.hostmem);
-+        pci_register_bar(&vpci_dev->pci_dev, 4,
-+                         PCI_BASE_ADDRESS_SPACE_MEMORY |
-+                         PCI_BASE_ADDRESS_MEM_PREFETCH |
-+                         PCI_BASE_ADDRESS_MEM_TYPE_64,
-+                         &g->hostmem);
-+        virtio_pci_add_shm_cap(vpci_dev, 4, 0, g->conf.hostmem,
-+                               VIRTIO_GPU_SHM_ID_HOST_VISIBLE);
-+    }
-+
-     if (!(vpci_dev->flags & VIRTIO_PCI_FLAG_PAGE_PER_VQ)) {
-         /*
-          * with page-per-vq=off there is no padding space we can use
-diff --git a/include/hw/virtio/virtio-gpu.h b/include/hw/virtio/virtio-gpu.h
-index 8377c365ef..de4f624e94 100644
---- a/include/hw/virtio/virtio-gpu.h
-+++ b/include/hw/virtio/virtio-gpu.h
-@@ -108,12 +108,15 @@ enum virtio_gpu_base_conf_flags {
-     (_cfg.flags & (1 << VIRTIO_GPU_FLAG_BLOB_ENABLED))
- #define virtio_gpu_context_init_enabled(_cfg) \
-     (_cfg.flags & (1 << VIRTIO_GPU_FLAG_CONTEXT_INIT_ENABLED))
-+#define virtio_gpu_hostmem_enabled(_cfg) \
-+    (_cfg.hostmem > 0)
- 
- struct virtio_gpu_base_conf {
-     uint32_t max_outputs;
-     uint32_t flags;
-     uint32_t xres;
-     uint32_t yres;
-+    uint64_t hostmem;
- };
- 
- struct virtio_gpu_ctrl_command {
-@@ -137,6 +140,8 @@ struct VirtIOGPUBase {
-     int renderer_blocked;
-     int enable;
- 
-+    MemoryRegion hostmem;
-+
-     struct virtio_gpu_scanout scanout[VIRTIO_GPU_MAX_SCANOUTS];
- 
-     int enabled_output_bitmask;
+Changes from V4 (virtio gpu V4) to V5
+
+- Inverted patch 5 and 6 because we should configure
+  HAVE_VIRGL_CONTEXT_INIT firstly.
+
+- Validate owner of memory region to avoid slowing down DMA.
+
+- Use memory_region_init_ram_ptr() instead of
+  memory_region_init_ram_device_ptr().
+
+- Adjust sequence to allocate gpu resource before virglrender resource
+  creation
+
+- Add virtio migration handling for uuid.
+
+- Send kernel patch to define VIRTIO_GPU_CAPSET_VENUS.
+  https://lore.kernel.org/lkml/20230915105918.3763061-1-ray.huang@amd.com/
+
+- Add meson check to make sure unstable APIs defined from 0.9.0.
+
+Changes from V1 to V2 (virtio gpu V4)
+
+- Remove unused #include "hw/virtio/virtio-iommu.h"
+
+- Add a local function, called virgl_resource_destroy(), that is used
+  to release a vgpu resource on error paths and in resource_unref.
+
+- Remove virtio_gpu_virgl_resource_unmap from
+  virtio_gpu_cleanup_mapping(),
+  since this function won't be called on blob resources and also because
+  blob resources are unmapped via virgl_cmd_resource_unmap_blob().
+
+- In virgl_cmd_resource_create_blob(), do proper cleanup in error paths
+  and move QTAILQ_INSERT_HEAD(&g->reslist, res, next) after the resource
+  has been fully initialized.
+
+- Memory region has a different life-cycle from virtio gpu resources
+  i.e. cannot be released synchronously along with the vgpu resource.
+  So, here the field "region" was changed to a pointer and is allocated
+  dynamically when the blob is mapped.
+  Also, since the pointer can be used to indicate whether the blob
+  is mapped, the explicite field "mapped" was removed.
+
+- In virgl_cmd_resource_map_blob(), add check on the value of
+  res->region, to prevent beeing called twice on the same resource.
+
+- Add a patch to enable automatic deallocation of memory regions to resolve
+  use-after-free memory corruption with a reference.
+
+References
+
+Demo with Venus:
+- https://static.sched.com/hosted_files/xen2023/3f/xen_summit_2023_virtgpu_demo.mp4
+QEMU repository:
+- https://gitlab.freedesktop.org/rui/qemu-xen/-/commits/upstream-for-virtio-gpu
+
+Thanks,
+Ray
+
+Antonio Caggiano (6):
+  virtio-gpu: CONTEXT_INIT feature
+  virtio-gpu: blob prep
+  virtio-gpu: Handle resource blob commands
+  virtio-gpu: Resource UUID
+  virtio-gpu: Support Venus capset
+  virtio-gpu: Initialize Venus
+
+Dmitry Osipenko (1):
+  virtio-gpu: Don't require udmabuf when blobs and virgl are enabled
+
+Dr. David Alan Gilbert (1):
+  virtio: Add shared memory capability
+
+Gerd Hoffmann (1):
+  virtio-gpu: hostmem
+
+Huang Rui (3):
+  virtio-gpu: Configure context init for virglrenderer
+  virtio-gpu: Support context init feature with virglrenderer
+  virtio-gpu: Enable virglrenderer render server flag for venus
+
+Xenia Ragiadakou (1):
+  softmmu/memory: enable automatic deallocation of memory regions
+
+ hw/display/trace-events              |   1 +
+ hw/display/virtio-gpu-base.c         |   5 +
+ hw/display/virtio-gpu-pci.c          |  14 ++
+ hw/display/virtio-gpu-virgl.c        | 272 ++++++++++++++++++++++++++-
+ hw/display/virtio-gpu.c              |  78 +++++++-
+ hw/display/virtio-vga.c              |  33 +++-
+ hw/virtio/virtio-pci.c               |  18 ++
+ include/hw/virtio/virtio-gpu-bswap.h |  15 ++
+ include/hw/virtio/virtio-gpu.h       |  24 +++
+ include/hw/virtio/virtio-pci.h       |   4 +
+ meson.build                          |  13 ++
+ softmmu/memory.c                     |   5 +
+ 12 files changed, 458 insertions(+), 24 deletions(-)
+
 -- 
 2.34.1
 
