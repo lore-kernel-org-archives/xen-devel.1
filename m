@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC88CD379F
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 20:37:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.603361.940342 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA11CD37A9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 20:37:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.603364.940361 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qhFYW-0001VQ-51; Fri, 15 Sep 2023 20:36:48 +0000
+	id 1qhFYc-00028b-KK; Fri, 15 Sep 2023 20:36:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 603361.940342; Fri, 15 Sep 2023 20:36:48 +0000
+Received: by outflank-mailman (output) from mailman id 603364.940361; Fri, 15 Sep 2023 20:36:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qhFYW-0001VH-1i; Fri, 15 Sep 2023 20:36:48 +0000
-Received: by outflank-mailman (input) for mailman id 603361;
- Fri, 15 Sep 2023 20:36:46 +0000
+	id 1qhFYc-00028U-Hd; Fri, 15 Sep 2023 20:36:54 +0000
+Received: by outflank-mailman (input) for mailman id 603364;
+ Fri, 15 Sep 2023 20:36:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zf2R=E7=citrix.com=prvs=615989724=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qhFYU-0001T8-5e
- for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 20:36:46 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 94e8f95e-5407-11ee-8788-cb3800f73035;
- Fri, 15 Sep 2023 22:36:44 +0200 (CEST)
+ id 1qhFYb-0001T8-Ar
+ for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 20:36:53 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 99829174-5407-11ee-8788-cb3800f73035;
+ Fri, 15 Sep 2023 22:36:52 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,173 +38,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94e8f95e-5407-11ee-8788-cb3800f73035
+X-Inumbo-ID: 99829174-5407-11ee-8788-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1694810204;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=ff/2EofbVuWE4xzAF9UfYfZVRYEZrCslF2ClKTfM04U=;
-  b=RFSfLxzTJr4D0sPrH8BtnfT0VLMFyxgo6ItOgPgA5zFusk44NnCrW8Er
-   jqjQZ2nl0v+jSznsG2fdnwQlt7FhNISk1GFMh5o/0doQvqxm/Je3S+4vv
-   8tT3FyryjWA0eGRwM4/HISRnQe85gRjYsZNOX6ULB5TQGQ0kUl1or5I1S
-   I=;
-X-CSE-ConnectionGUID: yX2361nNQWCUBRY66Zgs3Q==
-X-CSE-MsgGUID: gGehqQ37Tya7O0+Nb3lSjw==
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1694810212;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=6WDc7zyoVsjtMjW1jLq2dlxmIWqlGJOcjLcAUEyxqAo=;
+  b=c8aICIqQedDR1EHGCaTle+OYk6o/VUY9KiNiKhcnSss2TsTZnHBMzAkw
+   aUWaPRN2wTl3C5F901Yp3KKcUsm6Z4ovKuWLDAlLlkAIyMULyOeGLnFkC
+   LVhpJOg/qttxo724a8ct+NGqLEFAgCtOxW6QJyD7g6jaZXEG8eM1TpGSw
+   s=;
+X-CSE-ConnectionGUID: kAevLBhUSueOHby+POGfdA==
+X-CSE-MsgGUID: LNRwdEl4ScWMeCrdwisn/A==
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 121464505
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 125538998
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:xRZ9MaryxRbzLJ9BFoOKXBfp4xZeBmIuZRIvgKrLsJaIsI4StFCzt
- garIBnVOP/eZjHxKd5/YI7loU9Q75+Hy9dkTgto+yg1EHsUoJuZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbOCYmYpA1Y8FE/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKq04GlwUmAWP6gR5wePziRNV/rzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXACE9NEvd3uSQ+Y2Qd8NWt5p9HsbwZ7pK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSZBFOUslWcOSA3xETdxVxrl6PqLVxyG/U1AFri5DmMcbPe8zMTsJQ9qqdj
- jucpjinXkxCabRzzxKK3X+sn9aUwh/qUd01TP6e/KVuu1+Mkzl75Bo+CgLg/KjRZlSFc8JSL
- QkY9zQjqYA29Ve3VZ/tUhugunmGsxUAHd1KHIUS6guA167V6AaxHXUfQ3hKb9lOnNAybSwn0
- BmOhdyBLT5utrqVD3GU8LjSrimaNi0cLGtEbigBJTbp+PG6/tt11EiWCI8+Tujs1Iad9SzML
- y6ivRhk3OtKi+gy6I6G12r23WyeqYOSd1tgjunIZV6N4gR8bY+jQoWn71nH8PpNRLqkokm9U
- GsswJbHsr1XZX2ZvGnUGbhWQun1jxqQGGeE6WODCaXN4NhEF5SLWYlLqA9zK05yWirvUW+4O
- RSD0e+9CXI6AZdLUUOVS9jhYyjJ5fK6fTgAahwzRoMUCqWdjCfdoElTibe4hggBanQEn6AlI
- ou8es2xF3scAqkP5GPoFrtNieV0ln1umDq7qXXHI/KPi+L2iJm9E+xtDbdzRrphsPPsTPv9r
- L6zyPdmOz0ACbajM0E7AKYYLEwQLGhTOHwFg5U/SwJ3GSI/QDtJI6aIkdscl3lNw/w9ehHgo
- ivsBSe1CTPX2RX6FOl9Qis6Mem3AMcu8SpT0O5FFQ/A5kXPqL2HtM83H6bbt5F9nAC/5ZaYl
- 8U4Rvg=
-IronPort-HdrOrdr: A9a23:NPWp3q1JvOk65HR1HvB/9gqjBHYkLtp133Aq2lEZdPU0SKGlfq
- GV7ZEmPHrP4gr5N0tOpTntAse9qBDnhPxICOsqXYtKNTOO0AeVxelZhrcKqAeQeBEWmNQ96U
- 9hGZIOcuEZDzJB/LvHCN/TKadd/DGFmprY+ts31x1WPGVXgzkL1XYANu6ceHcGIzVuNN4CO7
- e3wNFInDakcWR/VLXBOpFUN9KzweEijfjdEGc7OyI=
-X-Talos-CUID: =?us-ascii?q?9a23=3AT2KxqWh2nv5e3hC51210I5aTfzJuY02HlymJJWm?=
- =?us-ascii?q?BNk1UYoekFwGi97g/qp87?=
-X-Talos-MUID: 9a23:Br8lPAbkRHvgAOBTuBDhhChbb5hU8q3xLxhOt59dv/KGKnkl
+IronPort-Data: A9a23:zFtGdqh0zv5rZufLDF5Yi4mEX161VhAKZh0ujC45NGQN5FlHY01je
+ htvUTqGO/7YYmTxKdEkYYnipEgDupbWmoA2HQVqqX89Fisb9cadCdqndUqhZCn6wu8v7q5Ex
+ 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOhTraCYmYoHVMMpB4J0XpLg/Q+jpNjne+3CgaMv
+ cKai8DEMRqu1iUc3lg8sspvkzsx+qyo0N8klgZmP6sT7QaDzyJ94K83fsldEVOpGuG4IcbiL
+ wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
+ OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
+ tQbAT0TSjqDutmrzZWbQPgvvuMMIsXCadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
+ pRDL2A1NVKZPkMJYw1MYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27B/
+ D+bpDSoU0Fy2Nq37Ry/7X6BgrP0lhzeVakIGKK57fgtqQjGroAUIEJPDgbqyRWjsWauVtQaJ
+ 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O88Q5RyJy6HUyx2EHWVCRTlEAPQ5sOcmSDps0
+ UWG9/vrBDposPuWQHSSsLSOhTy3MCkRa2QFYEc5oRAtuoe55ttp11SWE4glSfTu5jHoJd3u6
+ zOjoTYarbUuttMG8IWx7BP/pB2iqrGcG2bZ+T7rdm6i6wp4YqusaIqp9UXX4J58EWqJcrWSl
+ CNawpbDtYjiGbnIzXXQG7tVQNlF8t7faFXhbUhT847NHthH01qqZshu7T53Py+F2e5UKGayM
+ Cc/Ve68jaK/3UdGj4ctM+pd6Oxwl8AM8OgJsdiNNLJzjmBZLlPvwc2XTRf4M5rRuEYti7ojH
+ pyQbNyhC30XYYw+kmvqF79Hju92ln1nrY82eXwd507/uVZ5TCTOIYrpzXPUNrxphE96iFq9H
+ ylj2zuilEwEDbyWjtj/+o8PN1EaRUXX9rivw/G7gtWre1I8cEl4Uq+5/F/UU9A990ijvruSr
+ y7Vt44x4AaXuEAr3i3RMyk5MO6+DMonxZ/5VAR1VWuVN7EYSd7HxM8im1EfI9HLKMQLISZIc
+ sQ4
+IronPort-HdrOrdr: A9a23:ps+9m6CySadCT8blHemg55DYdb4zR+YMi2TC1yhKJyC9Ffbo8P
+ xG/c5rsSMc5wxwZJhNo7y90cq7MBbhHPxOkOos1N6ZNWGM0gaVxelZnO3fKlbbehEWmNQz6U
+ 4ZSdkdNOHN
+X-Talos-CUID: 9a23:B31/BmMIklbQI+5DWwBq6mo+Gv0eb3D67H3BYHefJmhlYejA
+X-Talos-MUID: =?us-ascii?q?9a23=3AZSJV/gxIrx0FK7MqkymBujuqHx+aqICIMl8BvJF?=
+ =?us-ascii?q?agMK7ECFbITuCjS+xBaZyfw=3D=3D?=
 X-IronPort-AV: E=Sophos;i="6.02,150,1688443200"; 
-   d="scan'208";a="121464505"
+   d="scan'208";a="125538998"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jinoh Kang <jinoh.kang.kr@gmail.com>
-Subject: [PATCH 4/7] x86/pv: Drop priv_op_ctxt.bpmatch and use pending_dbg instead
-Date: Fri, 15 Sep 2023 21:36:25 +0100
-Message-ID: <20230915203628.837732-5-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Jinoh Kang
+	<jinoh.kang.kr@gmail.com>
+Subject: [PATCH v2 0/7] x86/pv: #DB vs %dr6 fixes, part 2
+Date: Fri, 15 Sep 2023 21:36:21 +0100
+Message-ID: <20230915203628.837732-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230915203628.837732-1-andrew.cooper3@citrix.com>
-References: <20230915203628.837732-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-With a full pending_dbg field in x86_emulate_ctxt, use it rather than using a
-local bpmatch field.
+This time with a bit of sanity testing.  See patches for details.
 
-This simplifies the X86EMUL_OKAY path as singlestep is already accumulated by
-x86_emulate() when appropriate.
+Andrew Cooper (7):
+  x86/emul: ASSERT that X86EMUL_DONE doesn't escape to callers
+  x86/emul: Fix and extend #DB trap handling
+  x86/pv: Fix the determiniation of whether to inject #DB
+  x86/pv: Drop priv_op_ctxt.bpmatch and use pending_dbg instead
+  x86: Introduce x86_merge_dr6()
+  x86: Extend x86_event with a pending_dbg field
+  x86/pv: Rewrite %dr6 handling
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Jinoh Kang <jinoh.kang.kr@gmail.com>
+ xen/arch/x86/debug.c                   | 20 +++++++++++++++++
+ xen/arch/x86/include/asm/debugreg.h    |  7 ++++++
+ xen/arch/x86/include/asm/domain.h      | 18 ++++++++++++++--
+ xen/arch/x86/include/asm/hvm/hvm.h     |  3 ++-
+ xen/arch/x86/include/asm/x86-defns.h   |  7 ++++++
+ xen/arch/x86/pv/emul-priv-op.c         | 30 +++++++++++++-------------
+ xen/arch/x86/pv/emulate.c              |  9 ++++++--
+ xen/arch/x86/pv/ro-page-fault.c        |  4 ++--
+ xen/arch/x86/pv/traps.c                | 17 +++++++++++----
+ xen/arch/x86/traps.c                   | 23 ++++++++++----------
+ xen/arch/x86/x86_emulate/x86_emulate.c | 26 ++++++++++++++++------
+ xen/arch/x86/x86_emulate/x86_emulate.h | 19 ++++++++++++----
+ 12 files changed, 134 insertions(+), 49 deletions(-)
 
-v2:
- * Tweak commit message to avoid referencing X86EMUL_DONE.
----
- xen/arch/x86/pv/emul-priv-op.c | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
-
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 0d9f84f458ba..2f73ed0682e1 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -34,7 +34,6 @@ struct priv_op_ctxt {
-         unsigned long base, limit;
-     } cs;
-     char *io_emul_stub;
--    unsigned int bpmatch;
- };
- 
- /* I/O emulation helpers.  Use non-standard calling conventions. */
-@@ -367,7 +366,8 @@ static int cf_check read_io(
-     if ( !guest_io_okay(port, bytes, curr, ctxt->regs) )
-         return X86EMUL_UNHANDLEABLE;
- 
--    poc->bpmatch = check_guest_io_breakpoint(curr, port, bytes);
-+    poc->ctxt.retire.pending_dbg |=
-+        check_guest_io_breakpoint(curr, port, bytes);
- 
-     if ( admin_io_okay(port, bytes, currd) )
-     {
-@@ -472,7 +472,8 @@ static int cf_check write_io(
-     if ( !guest_io_okay(port, bytes, curr, ctxt->regs) )
-         return X86EMUL_UNHANDLEABLE;
- 
--    poc->bpmatch = check_guest_io_breakpoint(curr, port, bytes);
-+    poc->ctxt.retire.pending_dbg |=
-+        check_guest_io_breakpoint(curr, port, bytes);
- 
-     if ( admin_io_okay(port, bytes, currd) )
-     {
-@@ -636,7 +637,8 @@ static int cf_check rep_ins(
-         return X86EMUL_EXCEPTION;
-     }
- 
--    poc->bpmatch = check_guest_io_breakpoint(curr, port, bytes_per_rep);
-+    poc->ctxt.retire.pending_dbg |=
-+        check_guest_io_breakpoint(curr, port, bytes_per_rep);
- 
-     while ( *reps < goal )
-     {
-@@ -658,7 +660,7 @@ static int cf_check rep_ins(
- 
-         ++*reps;
- 
--        if ( poc->bpmatch || hypercall_preempt_check() )
-+        if ( poc->ctxt.retire.pending_dbg || hypercall_preempt_check() )
-             break;
- 
-         /* x86_emulate() clips the repetition count to ensure we don't wrap. */
-@@ -703,7 +705,8 @@ static int cf_check rep_outs(
-         return X86EMUL_EXCEPTION;
-     }
- 
--    poc->bpmatch = check_guest_io_breakpoint(curr, port, bytes_per_rep);
-+    poc->ctxt.retire.pending_dbg |=
-+        check_guest_io_breakpoint(curr, port, bytes_per_rep);
- 
-     while ( *reps < goal )
-     {
-@@ -726,7 +729,7 @@ static int cf_check rep_outs(
- 
-         ++*reps;
- 
--        if ( poc->bpmatch || hypercall_preempt_check() )
-+        if ( poc->ctxt.retire.pending_dbg || hypercall_preempt_check() )
-             break;
- 
-         /* x86_emulate() clips the repetition count to ensure we don't wrap. */
-@@ -1360,12 +1363,9 @@ int pv_emulate_privileged_op(struct cpu_user_regs *regs)
-     case X86EMUL_OKAY:
-         ASSERT(!curr->arch.pv.trap_bounce.flags);
- 
--        if ( ctxt.ctxt.retire.singlestep )
--            ctxt.bpmatch |= DR_STEP;
--
--        if ( ctxt.bpmatch )
-+        if ( ctxt.ctxt.retire.pending_dbg )
-         {
--            curr->arch.dr6 |= ctxt.bpmatch | DR_STATUS_RESERVED_ONE;
-+            curr->arch.dr6 |= ctxt.ctxt.retire.pending_dbg | DR_STATUS_RESERVED_ONE;
-             pv_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
-         }
- 
 -- 
 2.30.2
 
