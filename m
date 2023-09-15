@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4659EED603
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 15:01:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.603210.940171 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88486EED600
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 15:01:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.603212.940182 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qhAJa-0005sL-AV; Fri, 15 Sep 2023 15:01:02 +0000
+	id 1qhAJb-0006AG-P4; Fri, 15 Sep 2023 15:01:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 603210.940171; Fri, 15 Sep 2023 15:01:02 +0000
+Received: by outflank-mailman (output) from mailman id 603212.940182; Fri, 15 Sep 2023 15:01:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qhAJa-0005sB-7h; Fri, 15 Sep 2023 15:01:02 +0000
-Received: by outflank-mailman (input) for mailman id 603210;
- Fri, 15 Sep 2023 15:01:00 +0000
+	id 1qhAJb-0006A7-Km; Fri, 15 Sep 2023 15:01:03 +0000
+Received: by outflank-mailman (input) for mailman id 603212;
+ Fri, 15 Sep 2023 15:01:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zf2R=E7=citrix.com=prvs=615989724=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qhAJY-0004UV-S2
- for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 15:01:00 +0000
+ id 1qhAJa-0004UV-8S
+ for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 15:01:02 +0000
 Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
  [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ae4d3cbc-53d8-11ee-8788-cb3800f73035;
- Fri, 15 Sep 2023 17:01:00 +0200 (CEST)
+ id af01a903-53d8-11ee-8788-cb3800f73035;
+ Fri, 15 Sep 2023 17:01:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae4d3cbc-53d8-11ee-8788-cb3800f73035
+X-Inumbo-ID: af01a903-53d8-11ee-8788-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1694790059;
+  d=citrix.com; s=securemail; t=1694790061;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/u8QeVsYfOmIrdRheduf3X7k6ZQUSH9FsIiCo9BxkLA=;
-  b=CfPY0ppBplhvOvn7O3J2038gUwCE4xWlYCNw9VpjcInUavq+VLrj2ryk
-   8qQId048x1w22aFZHteyy3Jp74luL9+fytw++zBXRW7T5D/w3Gnrc633X
-   D5GLVGl31/VqRHgpUIV02Pjrf0wOW/ye+5mNbNdLU5yMKdtGfBmJfPhyI
-   4=;
+  bh=iqRrxOP3pxe6jZWttoS6DHQOzltrAeSnz0bv2Vp0Iyo=;
+  b=eQQAFigzmhqxVeht+7Agb10UcXChbBH4VJ2Z+8oyCHf/kEAqeadxW9Xm
+   ++cK0Lnn31fMQ9VT1Jyw5pytyCxjTZqkQbR6jU7g/l6WncEFLziA2olvg
+   G2m6jdF7LvQlQbjTutNZZKYKGTSsTBEt13YVVyksisVh10kcJQyigstGJ
+   I=;
 X-CSE-ConnectionGUID: T6/GhXioRSe6SFi4s144KQ==
-X-CSE-MsgGUID: XGE2t4/OQE6ysVOHiFaVsg==
+X-CSE-MsgGUID: CDhin9m1QGyvT2GKHUBMJQ==
 Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 125509277
+X-MesageID: 125509279
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:gtXlvas+kuKMG4dtr5Z9gtnTD+fnVEleMUV32f8akzHdYApBsoF/q
- tZmKT3TOKuPY2vxKt4iPY22oUlXvJHRn4UwSgFoqX9jFiNE+JbJXdiXEBz9bniYRiHhoOCLz
- O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVaicfHg3HFc4IMsYoUoLs/YjhYJ1isSODQqIu
- Nfjy+XSI1bg0DNvWo4uw/vrRChH4rKq4lv0gnRkPaoQ5A6HyiFPZH4iDfrZw0XQE9E88tGSH
- 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
- Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
- fMwFG5KQRCzhuWM+7/lccdt2t96cJXIBdZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
- 5NHM3w1Nk2GOkARfA5NU/rSn8/x7pX7WxRepEiYuuwc5G/LwRYq+LPsLMDUapqBQsA9ckOw/
- zibojyoWE5FXDCZ4Qqq3yiw2qjopA6lSZksM5252PdUm1LGkwT/DzVJDADm8JFVkHWWS99Zb
- kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8U44gyQzqvf4y6CG3MJCDVGbbQOq8seVTEsk
- FiTkLvU6SdH6ePPDyjHr/HN8G30YHJORYMfWcMaZTdbpPbjkIA0tCnCEO1NEfKu14GpOgill
- lhmsxMCr7kUiMcK0YCy8lbGny+gq/D1c+Il2unEdjn7t10kPeZJc6TtsAGGtqgYcO51W3Hb5
- BA5d96iAPfi5H1nvAiEW60zEb6g/J5p2xWM0Ac0T/HNG9lAkkNPnLy8AhkkdC+F0e5eI1cFh
- XM/XisIv/du0IOCN/MfXm5II51CIVLcPdrkTOvISdFFf4J8cgSKlAk3Ox/Mhjm0zBh0yv1nU
- Xt+TSpKJSxKYUiA5GDqL9rxLJdxnnxurY8tbc+TI+ubPUq2OyfOFOZt3KqmZeEl9qKUyDg5A
- P4GX/ZmPy53CbWkCgGOqN57ELz/BSRjbXwAg5ANJ7Hrz8sPMD1JNsI9Npt6J9Q/xf0EzLaYl
- px/M2cBoGfCabT8AV3iQhhehHnHAP6TcVpT0fQQAGuV
-IronPort-HdrOrdr: A9a23:7VgBSaiZwza4JWTwWCan3Gf5x3BQXiUji2hC6mlwRA09TyX4rb
- HWoB11726QtN98YgBDpTniAtjifZq/z+8Q3WB5B97LN2OKhILCFvAE0WKN+UyHJ8Q8zIFgPG
- VbH5SWxOeQMXFKyf/Axi+WKvAB5+TvytHRuc7ui053Swdkcqdh6Bo8JDq6PyRNNXJ7LKt8LY
- Gb4MVfoTqmZDAwVeSUQlc4f8WrnaywqHrBCSR2eyLPLDP+8A9AIYSVcySl4g==
-X-Talos-CUID: =?us-ascii?q?9a23=3A0tIXV2j2HNmrEu3yvd0dKEr+WTJuTiOa43fgIki?=
+IronPort-Data: A9a23:D5UCQ6ysCzvRT1q0Qv16t+coxirEfRIJ4+MujC+fZmUNrF6WrkVRy
+ jdOXGrXaareZWfxfd11atvn/E8DvpDUm99mHgdv+SAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjPzOHvykTrecZkidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw/zF8EkHUMja4mtC5QRvPK0T5jcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KV0Qs
+ tMYGDEKVCuO2dmYwe6gE7Uwpf12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwPwxvA9
+ ziZrgwVBDkxGNyez2uAq0uDl/HzxwzYeL84MZ+Bo6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
+ 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0efBdDuk74wGl0bfP7kCSAW1sZiFFQMwrsokxXzNC6
+ 7OSt4q3X3o16uTTEC/DsO7O9lteJBT5M0c+O2grTTsE5OPYrd8IoBOTVY8/TI2M24id9S7L/
+ xiGqy03hrM2hMEN1rmm8V2vvw9AtqQlXSZuuFyJAzvNAhdRIdf8Otf2sQSzAeNodt7xc7WXg
+ JQTdyFyBsgqBIrFqiGCSf5l8FqBt6fca220bbKC8vAcG9WRF5yLJ9A4DNJWfh0B3iM4ldjBO
+ RS7hO+pzMUPVEZGlIcuC25LN+wkzLL7CfPuXe3OY9xFb/BZLVHWoHg3PBLAhzuxyCDAdJ3T3
+ 7/BIa5A6l5AVcxaIMeeHb9BgdfHOAhhrY8seXwL50v+iufPDJJkYbwELEGPfogEAFCs+W3oH
+ yJkH5LSkX13CbSuChQ7BKZPdTjm21BnX8GpwyGWH8bfSjdb9JYJUKOJm+l4KtY0z8y4VI7gp
+ xmAZ6OR83Kn7VWvFOlAQi0LhG/HNXqnkU8GAA==
+IronPort-HdrOrdr: A9a23:QNS2g63KRC48Pi88Pt/udgqjBJ0kLtp133Aq2lEZdPU1SL37qy
+ nKpp536faaslossR0b9uxoQZPwJE80rKQFhbX5Xo3SPzUO2lHIEGgK1+KLqAEIfReOkNK1vp
+ 0BT0ERMrPN5BdB/KHHCPrTKadY/DD+ytHTuQ4o9QYRcenTAZsQlDuRozzranFLeA==
+X-Talos-CUID: =?us-ascii?q?9a23=3AeDw+oGhb2Wh7EEo6TBnavLAYpzJuTiOa43fgIki?=
  =?us-ascii?q?CMms3c5OUFUTJpP9Hqp87?=
-X-Talos-MUID: 9a23:jhIdBwoixFhryifEX3cezwFNGZ10v+OJMW1TgI44nOmFGyVOIDjI2Q==
+X-Talos-MUID: 9a23:h0P4rAiCZpFCuxOzQEOpc8MpH+to4qL/DRk0voQYh5OrFgxNERK/tWHi
 X-IronPort-AV: E=Sophos;i="6.02,149,1688443200"; 
-   d="scan'208";a="125509277"
+   d="scan'208";a="125509279"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>
-Subject: [PATCH 3/9] x86/spec-ctrl: Turn the remaining SPEC_CTRL_{ENTRY,EXIT}_* into asm macros
-Date: Fri, 15 Sep 2023 16:00:32 +0100
-Message-ID: <20230915150038.602577-4-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 8/9] x86/amd: Introduce is_zen{1,2}_uarch() predicates
+Date: Fri, 15 Sep 2023 16:00:37 +0100
+Message-ID: <20230915150038.602577-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230915150038.602577-1-andrew.cooper3@citrix.com>
 References: <20230915150038.602577-1-andrew.cooper3@citrix.com>
@@ -99,83 +97,94 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-These have grown more complex over time, with some already having been
-converted.
-
-Provide full Requires/Clobbers comments, otherwise missing at this level of
-indirection.
-
-No functional change.
+We already have 3 cases using STIBP as a Zen1/2 heuristic, and are about to
+introduce a 4th.  Wrap the heuristic into a pair of predictes rather than
+opencoding it, and the explaination of the heursitic, at each usage site.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/include/asm/spec_ctrl_asm.h | 37 ++++++++++++++++++------
- 1 file changed, 28 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/spec_ctrl_asm.h b/xen/arch/x86/include/asm/spec_ctrl_asm.h
-index 72e7046f70d6..f768b0f48a0b 100644
---- a/xen/arch/x86/include/asm/spec_ctrl_asm.h
-+++ b/xen/arch/x86/include/asm/spec_ctrl_asm.h
-@@ -219,26 +219,45 @@
- .endm
+v2:
+ * New
+---
+ xen/arch/x86/cpu/amd.c         | 18 ++++--------------
+ xen/arch/x86/include/asm/amd.h | 11 +++++++++++
+ 2 files changed, 15 insertions(+), 14 deletions(-)
+
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index bbf7887f2e1d..4f27187f92ec 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -882,15 +882,13 @@ void amd_set_legacy_ssbd(bool enable)
+  * non-branch instructions to be ignored.  It is to be set unilaterally in
+  * newer microcode.
+  *
+- * This chickenbit is something unrelated on Zen1, and Zen1 vs Zen2 isn't a
+- * simple model number comparison, so use STIBP as a heuristic to separate the
+- * two uarches in Fam17h(AMD)/18h(Hygon).
++ * This chickenbit is something unrelated on Zen1.
+  */
+ void amd_init_spectral_chicken(void)
+ {
+ 	uint64_t val, chickenbit = 1 << 1;
  
- /* Use after an entry from PV context (syscall/sysenter/int80/int82/etc). */
--#define SPEC_CTRL_ENTRY_FROM_PV                                         \
-+.macro SPEC_CTRL_ENTRY_FROM_PV
+-	if (cpu_has_hypervisor || !boot_cpu_has(X86_FEATURE_AMD_STIBP))
++	if (cpu_has_hypervisor || !is_zen2_uarch())
+ 		return;
+ 
+ 	if (rdmsr_safe(MSR_AMD64_DE_CFG2, val) == 0 && !(val & chickenbit))
+@@ -939,11 +937,8 @@ void amd_check_zenbleed(void)
+ 		 * With the Fam17h check above, most parts getting here are
+ 		 * Zen1.  They're not affected.  Assume Zen2 ones making it
+ 		 * here are affected regardless of microcode version.
+-		 *
+-		 * Zen1 vs Zen2 isn't a simple model number comparison, so use
+-		 * STIBP as a heuristic to distinguish.
+ 		 */
+-		if (!boot_cpu_has(X86_FEATURE_AMD_STIBP))
++		if (is_zen1_uarch())
+ 			return;
+ 		good_rev = ~0U;
+ 		break;
+@@ -1298,12 +1293,7 @@ static int __init cf_check zen2_c6_errata_check(void)
+ 	 */
+ 	s_time_t delta;
+ 
+-	/*
+-	 * Zen1 vs Zen2 isn't a simple model number comparison, so use STIBP as
+-	 * a heuristic to separate the two uarches in Fam17h.
+-	 */
+-	if (cpu_has_hypervisor || boot_cpu_data.x86 != 0x17 ||
+-	    !boot_cpu_has(X86_FEATURE_AMD_STIBP))
++	if (cpu_has_hypervisor || boot_cpu_data.x86 != 0x17 || !is_zen2_uarch())
+ 		return 0;
+ 
+ 	/*
+diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
+index 09ee52dc1c09..d862cb7972a1 100644
+--- a/xen/arch/x86/include/asm/amd.h
++++ b/xen/arch/x86/include/asm/amd.h
+@@ -140,6 +140,17 @@
+                        AMD_MODEL_RANGE(0x11, 0x0, 0x0, 0xff, 0xf),	\
+                        AMD_MODEL_RANGE(0x12, 0x0, 0x0, 0xff, 0xf))
+ 
 +/*
-+ * Requires %rsp=regs/cpuinfo, %rdx=0
-+ * Clobbers %rax, %rcx, %rdx
++ * The Zen1 and Zen2 microarchitectures are implemented by AMD (Fam17h) and
++ * Hygon (Fam18h) but without simple model number rules.  Instead, use STIBP
++ * as a heuristic that distinguishes the two.
++ *
++ * The caller is required to perform the appropriate vendor/family checks
++ * first.
 + */
-     ALTERNATIVE "", __stringify(DO_SPEC_CTRL_COND_IBPB maybexen=0),     \
--        X86_FEATURE_IBPB_ENTRY_PV;                                      \
--    ALTERNATIVE "", DO_OVERWRITE_RSB, X86_FEATURE_SC_RSB_PV;            \
-+        X86_FEATURE_IBPB_ENTRY_PV
++#define is_zen1_uarch() (!boot_cpu_has(X86_FEATURE_AMD_STIBP))
++#define is_zen2_uarch()   boot_cpu_has(X86_FEATURE_AMD_STIBP)
 +
-+    ALTERNATIVE "", DO_OVERWRITE_RSB, X86_FEATURE_SC_RSB_PV
-+
-     ALTERNATIVE "", __stringify(DO_SPEC_CTRL_ENTRY maybexen=0),         \
-         X86_FEATURE_SC_MSR_PV
-+.endm
+ struct cpuinfo_x86;
+ int cpu_has_amd_erratum(const struct cpuinfo_x86 *, int, ...);
  
- /* Use in interrupt/exception context.  May interrupt Xen or PV context. */
--#define SPEC_CTRL_ENTRY_FROM_INTR                                       \
-+.macro SPEC_CTRL_ENTRY_FROM_INTR
-+/*
-+ * Requires %rsp=regs, %r14=stack_end, %rdx=0
-+ * Clobbers %rax, %rcx, %rdx
-+ */
-     ALTERNATIVE "", __stringify(DO_SPEC_CTRL_COND_IBPB maybexen=1),     \
--        X86_FEATURE_IBPB_ENTRY_PV;                                      \
--    ALTERNATIVE "", DO_OVERWRITE_RSB, X86_FEATURE_SC_RSB_PV;            \
-+        X86_FEATURE_IBPB_ENTRY_PV
-+
-+    ALTERNATIVE "", DO_OVERWRITE_RSB, X86_FEATURE_SC_RSB_PV
-+
-     ALTERNATIVE "", __stringify(DO_SPEC_CTRL_ENTRY maybexen=1),         \
-         X86_FEATURE_SC_MSR_PV
-+.endm
- 
- /* Use when exiting to PV guest context. */
--#define SPEC_CTRL_EXIT_TO_PV                                            \
--    ALTERNATIVE "",                                                     \
--        DO_SPEC_CTRL_EXIT_TO_GUEST, X86_FEATURE_SC_MSR_PV;              \
-+.macro SPEC_CTRL_EXIT_TO_PV
-+/*
-+ * Requires %rax=spec_ctrl, %rsp=regs/info
-+ * Clobbers %rcx, %rdx
-+ */
-+    ALTERNATIVE "", DO_SPEC_CTRL_EXIT_TO_GUEST, X86_FEATURE_SC_MSR_PV
-+
-     DO_SPEC_CTRL_COND_VERW
-+.endm
- 
- /*
-  * Use in IST interrupt/exception context.  May interrupt Xen or PV context.
 -- 
 2.30.2
 
