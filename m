@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F06A0CD379F
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 20:36:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.603362.940348 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 134D9CD37AA
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Sep 2023 20:36:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.603359.940321 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qhFYW-0001YQ-HA; Fri, 15 Sep 2023 20:36:48 +0000
+	id 1qhFYO-0000xw-Mv; Fri, 15 Sep 2023 20:36:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 603362.940348; Fri, 15 Sep 2023 20:36:48 +0000
+Received: by outflank-mailman (output) from mailman id 603359.940321; Fri, 15 Sep 2023 20:36:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qhFYW-0001XY-9E; Fri, 15 Sep 2023 20:36:48 +0000
-Received: by outflank-mailman (input) for mailman id 603362;
- Fri, 15 Sep 2023 20:36:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qhFYO-0000xp-KG; Fri, 15 Sep 2023 20:36:40 +0000
+Received: by outflank-mailman (input) for mailman id 603359;
+ Fri, 15 Sep 2023 20:36:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zf2R=E7=citrix.com=prvs=615989724=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qhFYU-0001T8-QQ
- for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 20:36:46 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 96400495-5407-11ee-8788-cb3800f73035;
- Fri, 15 Sep 2023 22:36:46 +0200 (CEST)
+ id 1qhFYN-0000xj-6k
+ for xen-devel@lists.xenproject.org; Fri, 15 Sep 2023 20:36:39 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8eb97a50-5407-11ee-9b0d-b553b5be7939;
+ Fri, 15 Sep 2023 22:36:35 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,61 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96400495-5407-11ee-8788-cb3800f73035
+X-Inumbo-ID: 8eb97a50-5407-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1694810205;
+  d=citrix.com; s=securemail; t=1694810195;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=dnP+oePB0vRmA7Ftd/dfzOPN8MOvJT2QivCpHSwftUo=;
-  b=NnwB3GwOnO8SvjmeYphhRsOJSoHZLkBM2bPEUwVlcZIS4F18H6udfgJ7
-   WGzTRVkdU6Gcv42pW4gZclg6h94DLQAfjU7ljhZTZCelyTzLhTW4NV5Q6
-   hxMWaYRKSR4t+bwtDP73V+7X9S8cjhMS7sU12MiCYEr8MmB5IrX391jSR
-   o=;
-X-CSE-ConnectionGUID: eus45eGnS1utRCA1wDu4og==
-X-CSE-MsgGUID: Tom/6qoBRv24WmLJKJR2AQ==
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=iVvBxcmH9/frdKV3USiWYWpvNhtBBf3353lMt0BYDpE=;
+  b=Y3n1u3phZdSG7QQuZ+fKxnD+ejHHv38oRp1AZcE1VMxwZWDeSUEiL9CU
+   0xqqGlNnisJnHsdXew5yokEzmidktkBvNNMVYZL/2zMG7+lAqW3DswWwd
+   FMR4v4iaNnyc49GTITnYz0iiJ/g/yhcgWnwjD0jj3zQs3UjjT9U0YN3Uu
+   A=;
+X-CSE-ConnectionGUID: 40xdC7HJRICoFGlJfSNwcw==
+X-CSE-MsgGUID: cCkTKcjLTiaOoIrGwy9qpw==
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 121464506
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 122825024
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:CyQJ2ao/F8zo5JUaNgPskv6+nh9eBmIuZRIvgKrLsJaIsI4StFCzt
- garIBmFPfaCZWSke90lOY3j9E1XvsOByYUwHAY+qSBmESoSopuZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbOCYmYpA1Y8FE/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKq04GlwUmAWP6gR5wePziRNV/rzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXAD0QdUzeis2w++umVtNHr508ANS3O4xK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSZBFOUslWcOSA3xETdxVxrl6PqLVxyG/U1AFri5DmMcbPe8zMTsJQ9qqdj
- jucpjinXkxCarRzzxK59Xfr2PbItxnlAt4tEZma1dxQ2nSqkzl75Bo+CgLg/KjRZlSFc8JSL
- QkY9zQjqYA29Ve3VZ/tUhugunmGsxUAHd1KHIUS6guA167V6AaxHXUfQ3hKb9lOnNAybSwn0
- BmOhdyBLT5utrqVD3GU8LjSrimaNi0cLGtEbigBJTbp+PG6/tt11EiWCI8+Tujs1Iad9SzML
- y6ioTUl2+geosgwjrinx3vu2i2Au8TOQVtgjunIZV6N4gR8bY+jQoWn71nH8PpNRLqkokm9U
- GsswJbHsr1XZX2ZvGnUGbhWQun1jxqQGGeE6WODCaXN4NhEF5SLWYlLqA9zK05yWirvUW+4O
- RSD0e+9CXI6AZdLUUOVS9jhYyjJ5fK6fTgAahwzRoMUCqWdjCfdoElTibe4hggBanQEn6AlI
- ou8es2xF3scAqkP5GPoFrtNieV0ln1umDq7qXXHI/KPi+L2iJm9E+xtDbdzRrphsPPsTPv9r
- L6zyPdmOz0ACbajM0E7AKYYLEwQLGhTOHwFg5U/SwJ3GSI/QDtJI6aIkdscl3lNw/w9ehHgo
- ivsBSe1CTPX2RX6FOl9Qis6Mem3AMcu8SpT0O5FFQ/A5kXPqL2HtM83H6bbt5F+nAC/5ZaYl
- 8U4Rvg=
-IronPort-HdrOrdr: A9a23:JEtqhKg8ylCL99lmw4/nszRHU3BQXh4ji2hC6mlwRA09TyX5ra
- 2TdZUgpHrJYVMqMk3I9uruBEDtex3hHP1OkOss1NWZPDUO0VHARO1fBOPZqAEIcBeOldK1u5
- 0AT0B/YueAd2STj6zBkXSF+wBL+qj6zEiq792usEuEVWtRGsVdB58SMHfiLqVxLjM2YqYRJd
- 6nyedsgSGvQngTZtTTPAh/YwCSz+e78q4PeHQ9dmca1DU=
-X-Talos-CUID: 9a23:6+ZrEW+WPlrdylHpoqiVv0MJAZx4f1Lb9y7NP3WTID92ZKDJTlDFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3ABSAEngwHvJFWDn6KbdPFtN7oKgyaqJipDQdTiJI?=
- =?us-ascii?q?sgdfeaRN1HxW+rg7ta7Zyfw=3D=3D?=
+IronPort-Data: A9a23:b+Mhb61bLWR7HYCtVvbD5eVxkn2cJEfYwER7XKvMYLTBsI5bpzZWn
+ 2QYX2jSaKrcYmH0ctx1PNzn9k1UsZ+Dx4dlQAM5pC1hF35El5HIVI+TRqvS04F+DeWYFR46s
+ J9OAjXkBJppJpMJjk71atANlVEliOfQAOK6UbaYUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
+ tq3qMDEULOf82cc3lk8teTb8nuDgNyo4GlD5g1nOKgQ1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
+ 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
+ OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfXTle+
+ ddHCBI3TzuEqc2y4ryAbPZnmZF2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
+ ZNfMGcxKk2aOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiHJ8PzhzF/
+ jial4j/KhoxN+C8wjihznOloejuhwzkSdMLDKLto5aGh3XMnzdOWXX6T2CTsfS/z0KzRd9bA
+ 0gV4TY167g/8lSxSdvwVAH+p2SL1jY+cddNF+wx6CmW17HZpQ2eAwAsUTppeNEg8sgsSlQC1
+ F6PmNOvBjVpv/uWU1qS876VqXW5Pi19EIMZTXZaF01fuYCl+dxtyEuVFb6PDZJZkPWpQSH86
+ G+qjhIfrLI9osop2Z6d4lvY1mfESofyciY54QDeX2SA5wx/ZZK4a4HA1WU3/cqsP67CEADf4
+ SFsd9y2qblXUMrTzHDlrPAlRunB2hqTDNHLbbeD9bEF/i/lxXOsdJs4DNpWdBYwaZZsldMEj
+ SbuVeJtCH17ZivCgUxfOdjZ5yEWIU/ITI6NaxwsRoASCqWdjSfelM2UWWae3nr2jG8nmrwlN
+ JGQfK6EVChLVfQ/lmXmGrdAiNfHIxzSI0uJHfgXKDz9itKjiIO9E+9ZYDNikMhmhE97nOkl2
+ 4kGbJbbo/mueOb/fjPW4eYuwaMidBAG6WTNg5UPLIare1M2cFzN/teNmdvNjaQ5xfUK/goJl
+ 1nhMnJlJK3X3iSec13XOyE/MNsCn/9X9BoGAMDlBn7ws1BLXGplxP53m0cfFVX/yNFe8A==
+IronPort-HdrOrdr: A9a23:j5UfjK3YOid3pkFeCKv7ZwqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
+X-Talos-CUID: =?us-ascii?q?9a23=3ALlzQHGu/hD9h44L5WVnVX3Ge6It5Km3R5yjwAXW?=
+ =?us-ascii?q?ZImFHZ7m3R2S256h7xp8=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3ATaxKyw58tRk5AM7E+Ux2NeaxxoxjyKeSK0sPtak?=
+ =?us-ascii?q?Hsu6DFDZfJCbMlSyoF9o=3D?=
 X-IronPort-AV: E=Sophos;i="6.02,150,1688443200"; 
-   d="scan'208";a="121464506"
+   d="scan'208";a="122825024"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jinoh Kang <jinoh.kang.kr@gmail.com>
-Subject: [PATCH 3/7] x86/pv: Fix the determiniation of whether to inject #DB
-Date: Fri, 15 Sep 2023 21:36:24 +0100
-Message-ID: <20230915203628.837732-4-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Jinoh Kang
+	<jinoh.kang.kr@gmail.com>
+Subject: [PATCH 1/7] x86/emul: ASSERT that X86EMUL_DONE doesn't escape to callers
+Date: Fri, 15 Sep 2023 21:36:22 +0100
+Message-ID: <20230915203628.837732-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230915203628.837732-1-andrew.cooper3@citrix.com>
 References: <20230915203628.837732-1-andrew.cooper3@citrix.com>
@@ -100,13 +99,9 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-We long ago fixed the emulator to not inject exceptions behind our back.
-Therefore, assert that that a PV event (including interrupts, because that
-would be buggy too) isn't pending, rather than skipping the #DB injection if
-one is.
+This property is far from clear.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
@@ -114,35 +109,28 @@ CC: Wei Liu <wl@xen.org>
 CC: Jinoh Kang <jinoh.kang.kr@gmail.com>
 
 v2:
- * Drop X86EMUL_DONE adjustment.
+ * New
 ---
- xen/arch/x86/pv/emul-priv-op.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ xen/arch/x86/x86_emulate/x86_emulate.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 142bc4818cb5..0d9f84f458ba 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -1358,14 +1358,17 @@ int pv_emulate_privileged_op(struct cpu_user_regs *regs)
-     switch ( rc )
-     {
-     case X86EMUL_OKAY:
-+        ASSERT(!curr->arch.pv.trap_bounce.flags);
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
+index e88245eae9fb..94caec1d142c 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -8651,6 +8651,12 @@ int x86_emulate_wrapper(
+ 
+     rc = x86_emulate(ctxt, ops);
+ 
++    /*
++     * X86EMUL_DONE is an internal signal in the emulator, and is not expected
++     * to ever escape out to callers.
++     */
++    ASSERT(rc != X86EMUL_DONE);
 +
-         if ( ctxt.ctxt.retire.singlestep )
-             ctxt.bpmatch |= DR_STEP;
-+
-         if ( ctxt.bpmatch )
-         {
-             curr->arch.dr6 |= ctxt.bpmatch | DR_STATUS_RESERVED_ONE;
--            if ( !(curr->arch.pv.trap_bounce.flags & TBF_EXCEPTION) )
--                pv_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
-+            pv_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
-         }
-+
-         /* fall through */
-     case X86EMUL_RETRY:
-         return EXCRET_fault_fixed;
+     /*
+      * Most retire flags should only be set for successful instruction
+      * emulation.
 -- 
 2.30.2
 
