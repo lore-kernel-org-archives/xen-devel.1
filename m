@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BCC0CD37B0
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Sep 2023 16:54:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.604148.941375 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7414DC46CA1
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Sep 2023 17:27:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.604154.941386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qiHVf-0003Xt-Ja; Mon, 18 Sep 2023 16:54:07 +0000
+	id 1qiI1q-0000IW-2c; Mon, 18 Sep 2023 17:27:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 604148.941375; Mon, 18 Sep 2023 16:54:07 +0000
+Received: by outflank-mailman (output) from mailman id 604154.941386; Mon, 18 Sep 2023 17:27:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qiHVf-0003Xm-H4; Mon, 18 Sep 2023 16:54:07 +0000
-Received: by outflank-mailman (input) for mailman id 604148;
- Mon, 18 Sep 2023 16:54:05 +0000
+	id 1qiI1q-0000IP-02; Mon, 18 Sep 2023 17:27:22 +0000
+Received: by outflank-mailman (input) for mailman id 604154;
+ Mon, 18 Sep 2023 17:27:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fCDX=FC=cloud.com=javi.merino@srs-se1.protection.inumbo.net>)
- id 1qiHVd-0003Xe-M8
- for xen-devel@lists.xenproject.org; Mon, 18 Sep 2023 16:54:05 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f8fd1386-5643-11ee-9b0d-b553b5be7939;
- Mon, 18 Sep 2023 18:54:03 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-31ff1f3cde5so3320079f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 18 Sep 2023 09:54:03 -0700 (PDT)
-Received: from EMEAENG6DZjqCfH.citrite.net
- (default-46-102-197-194.interdsl.co.uk. [46.102.197.194])
- by smtp.gmail.com with ESMTPSA id
- j5-20020a5d6045000000b0032008f99216sm6376269wrt.96.2023.09.18.09.54.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 09:54:02 -0700 (PDT)
+ <SRS0=D6qG=FC=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
+ id 1qiI1p-0000IE-39
+ for xen-devel@lists.xenproject.org; Mon, 18 Sep 2023 17:27:21 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9bfb9e38-5648-11ee-9b0d-b553b5be7939;
+ Mon, 18 Sep 2023 19:27:16 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 61326828563B;
+ Mon, 18 Sep 2023 12:27:14 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id YszbF0qGjcGP; Mon, 18 Sep 2023 12:27:13 -0500 (CDT)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 912E58285708;
+ Mon, 18 Sep 2023 12:27:13 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id bfHTCTc1wiXn; Mon, 18 Sep 2023 12:27:13 -0500 (CDT)
+Received: from [10.11.0.3] (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id AD494828563B;
+ Mon, 18 Sep 2023 12:27:12 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,88 +53,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f8fd1386-5643-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9bfb9e38-5648-11ee-9b0d-b553b5be7939
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 912E58285708
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1695056043; x=1695660843; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=s7yqEkZbpgMkxgWhqF/6axGdM3IiKqD4/BtizMbfhzY=;
-        b=Bz4UsMkC1nZDxnf/fInWIRSIUh4SqfIrLGrCeqmYDNGw7PCkrCXk5DjZMv3zjyvh3t
-         ocV8K1kuCuYlcfIQhRftJ5lhHSNVGowpwdC8ZOWSm0UHFfho3cMjfCpb2TWuWC5orCEB
-         zFad/iYmO+kMYRXliHFEJNc/2P8HfRlhMnaD0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695056043; x=1695660843;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=s7yqEkZbpgMkxgWhqF/6axGdM3IiKqD4/BtizMbfhzY=;
-        b=LCtd2nJdZRZVra1BA4UAldwsup+YEh9nwbTRk28IEQdBVh0TQpAB2ilbKTFzMbawdu
-         VHuH0f0rAT8mMSJ9qjRbdrXasM3wX011ZgZOVbVVkPpO6XBTy6Fta6LOSTRToISajH3F
-         8uyEpeb3cGT2nz5q+fIzWRktRKn9b3n/jAV+M6TrsPx6NLaJ2uGLanc7EwrDMvmpTzdw
-         RSKsRoUDdW4Ca/lEAJqMYBXFzrf15bHJOlsaFZX57zP+8+rofBCzinkzJVzDxQhftKUR
-         E5w0RUY6nMaOM1AzDVM6X5ubUuoGLORhyFJ/bavuySSXdf74p749YABL0iyR/o/K5Vdq
-         cupQ==
-X-Gm-Message-State: AOJu0YwLRL9SkTBJFlQuIOVHVyzMWH8d+DxyQbK238ZxTPL3n5xBliY/
-	y2jbwJc7unoerJtJ5Z/px5+jUA==
-X-Google-Smtp-Source: AGHT+IExmRNfQei7uhB1yd8QzggWHbkw7XRdbTXTJ6L/PyHhRHE3Mj2HNrFy8IEw6qyIDdHPnjdVdw==
-X-Received: by 2002:adf:f741:0:b0:317:f714:3be6 with SMTP id z1-20020adff741000000b00317f7143be6mr8027624wrp.61.1695056043102;
-        Mon, 18 Sep 2023 09:54:03 -0700 (PDT)
-Date: Mon, 18 Sep 2023 17:24:16 +0100
-From: Javi Merino <javi.merino@cloud.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, Jan Beulich <jbeulich@suse.com>, 
-	George Dunlap <george.dunlap@cloud.com>
-Subject: Re: [XEN PATCH v2 0/5] python: Use setuptools instead of the
- deprecated distutils
-Message-ID: <dgiwbuxtmdu6tn4u3pz52pzqrtm7dsxkqtkdoynskoyrsppfs4@grjqnaqowydd>
-References: <cover.1694450145.git.javi.merino@cloud.com>
- <06fbfb18-cc1e-4f73-bdf7-8b2be1f92de5@citrix.com>
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1695058033; bh=sUVH4tDCN4+gu6lquUx2ptWAO9cS/I0muY3URWeoBJY=;
+	h=Message-ID:Date:MIME-Version:To:From;
+	b=YOzTi3k9f8l+bNqt614JJzGOVh0XrGR95NO2U/RjyZvRTU71F06GZIbGR2AUXbEBm
+	 fGe4hNZAYmTHrrdEZ4CBmoewSX2YMWwsVIfdHwhie8uiZQXWlpy7TQj17a1yPw3cwK
+	 KXs1IDqON0Fzz6/GKu87Ut5idDsTVdgv0RvzRxgM=
+X-Virus-Scanned: amavisd-new at rptsys.com
+Message-ID: <daaff015-6da1-8daa-d8b3-3618c89bc799@raptorengineering.com>
+Date: Mon, 18 Sep 2023 12:27:12 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <06fbfb18-cc1e-4f73-bdf7-8b2be1f92de5@citrix.com>
+User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH v6 0/4] ppc: Enable full Xen build
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Timothy Pearson <tpearson@raptorengineering.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Tamas K Lengyel <tamas@tklengyel.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>, xen-devel@lists.xenproject.org
+References: <cover.1694717278.git.sanastasio@raptorengineering.com>
+ <d3f04552-28d3-8745-3def-b7c341f8b76b@suse.com>
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
+In-Reply-To: <d3f04552-28d3-8745-3def-b7c341f8b76b@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Sep 12, 2023 at 08:49:04AM +0100, Andrew Cooper wrote:
-> On 11/09/2023 5:50 pm, Javi Merino wrote:
-> > This series picks up Marek's v1 from
-> > https://lore.kernel.org/xen-devel/20230316171634.320626-1-marmarek@invisiblethingslab.com/
-> > Changes since v1:
-> >   - Update all containers to have setuptools, as python 3.12 depecrates distutils in favour of setuptools
-> >   - Keep python2's support by falling back to distutils if setuptools is not installed
-> >   - Drop the commit about raising the baseline requirement for python, as we keep supporting python2
-> >
-> > Javi Merino (2):
-> >   automation: add python3's setuptools to containers
-> >   README: update to remove old note about the build system's python
-> >     expectation
-> >
-> > Marek Marczykowski-Górecki (3):
-> >   tools: convert setup.py to use setuptools
-> >   tools: don't use distutils in configure nor Makefile
-> >   tools: regenerate configure
+On 9/18/23 8:19 AM, Jan Beulich wrote:
+> On 14.09.2023 21:03, Shawn Anastasio wrote:
+>> Shawn Anastasio (4):
+>>   xen/ppc: Implement bitops.h
+>>   xen/ppc: Define minimal stub headers required for full build
 > 
-> Two general notes.
+> Compilation fails after applying this.
 > 
-> First, because you've (re)arranged and posted this series, you need to
-> add your own Signed-off-by line to all patches, even unmodified ones
-> Marek's that you've included.  SoB needs to be from everyone involved in
-> handling the patch.
+>>   xen/ppc: Add stub function and symbol definitions
+> 
+> Continuing nevertheless, linking fails after this.
+> 
+>>   xen/ppc: Enable full Xen build
+> 
+> Things build okay for me when the full series is applied. Generally we
+> wouldn't deliberately break the build between any two patches; doing so
+> may be okay here (except I guest CI's build-each-commit would be upset),
+> but I'll do so only upon explicit request (and with no-one else objecting).
+>
 
-Sure.
+Sorry about that. Going forward I'll take more care to ensure that
+partially-applied series still build correctly. For this series though,
+if you could make an exception it would be appreciated.
 
-> Second, patch 4 should be dropped, and a note put in patch 2 to the
-> committer, who will use autoconf 2.69 and have a far far smaller delta
-> to include.
+> Jan
 
-I have regenerated it with 2.69 and the diff for tools/configure is
-reduced to:
-
- tools/configure | 52 ++++++++++++++++++++--------------------------------
- 1 file changed, 20 insertions(+), 32 deletions(-)
-
-Cheers,
-Javi
+Thanks,
+Shawn
 
