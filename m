@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9835CD5BBD
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Sep 2023 13:52:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.604773.942276 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5C6CD5BC8
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Sep 2023 14:10:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.604781.942288 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qib8t-0000Us-PU; Tue, 19 Sep 2023 13:51:55 +0000
+	id 1qibQR-000404-Ch; Tue, 19 Sep 2023 14:10:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 604773.942276; Tue, 19 Sep 2023 13:51:55 +0000
+Received: by outflank-mailman (output) from mailman id 604781.942288; Tue, 19 Sep 2023 14:10:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qib8t-0000Ul-MM; Tue, 19 Sep 2023 13:51:55 +0000
-Received: by outflank-mailman (input) for mailman id 604773;
- Tue, 19 Sep 2023 13:51:54 +0000
+	id 1qibQR-0003zx-94; Tue, 19 Sep 2023 14:10:03 +0000
+Received: by outflank-mailman (input) for mailman id 604781;
+ Tue, 19 Sep 2023 14:10:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Lmoc=FD=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qib8s-0000TN-I7
- for xen-devel@lists.xenproject.org; Tue, 19 Sep 2023 13:51:54 +0000
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on060b.outbound.protection.outlook.com
- [2a01:111:f400:fe02::60b])
+ id 1qibQP-0003gN-He
+ for xen-devel@lists.xenproject.org; Tue, 19 Sep 2023 14:10:01 +0000
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20612.outbound.protection.outlook.com
+ [2a01:111:f400:fe1a::612])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b02ac858-56f3-11ee-8789-cb3800f73035;
- Tue, 19 Sep 2023 15:51:53 +0200 (CEST)
+ id 381ef2b6-56f6-11ee-8789-cb3800f73035;
+ Tue, 19 Sep 2023 16:10:00 +0200 (CEST)
 Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by PAXPR04MB8173.eurprd04.prod.outlook.com (2603:10a6:102:1ca::20)
+ by AS8PR04MB8995.eurprd04.prod.outlook.com (2603:10a6:20b:42e::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.27; Tue, 19 Sep
- 2023 13:51:50 +0000
+ 2023 14:09:55 +0000
 Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
  ([fe80::f749:b27f:2187:6654]) by DU2PR04MB8790.eurprd04.prod.outlook.com
  ([fe80::f749:b27f:2187:6654%6]) with mapi id 15.20.6792.026; Tue, 19 Sep 2023
- 13:51:50 +0000
+ 14:09:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,29 +49,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b02ac858-56f3-11ee-8789-cb3800f73035
+X-Inumbo-ID: 381ef2b6-56f6-11ee-8789-cb3800f73035
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hebtk4cyoeAUAxhjmx6Sl2ee2H2DGIJuF8Xmf8LqoHylzdeaAD0D3ehILgcuJUsD03iIKGTvfSFCkeIsk8oPYsBPUaWfyYAV6gdiCpYBWgCfo6MknuTbueRZ34ypbc5JVzOms7U7drDKykSJMjPs1bpBlbsWkTqYWoEZ4GTRdONe9CeYK5tM0JqmNhCCnnbGeb9/y7j01Bta0Whz3S8pb71OTOhzgcEa8xqDSem4Dk2imQ1EUYrB+Lcq0+r4/M9f5iEyVSEHPi+TDuQ+QQ6w6BJcoyxstSGIoGnSBorzpO5jIc8r4rz+Ud0pp20L+6KtaQcN7xRPcY1Q3BgpC9Hv6A==
+ b=BAFMzOVDvb6NxRag1LgYuOeHAF8vaAu0Ugx3cJo+hh8C+YeSd0NDc+aLWOLl28OfwBaNgpT6J5JndEC9xh1sB1h6aUCW5fVoVoCwEq0urN6bz1f+uttTUd8q3inaueFi4hapdsoDPF0rrV2sDosmkHFwJEXQYexvw6FkZYmx2/AMr5N+D5zTugTntjFq9NVKTUoqf1ZM14OvCy5bklmYqXRtwh74q7GBfsap2/lWU3rkK+yFCiI6VizH9BKVd+zNw34N12qNNhoK0H7GFct2me5Uf+t5XkxYXZ6ICngTFhHdXDDvxDMiydLLPeQ4jU/SYCmEKDjEJj4kEJdEB1n39g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MTtWIWgqYS5XpeR+XCcErzNBzEjcrGPaQrGDrSJ9sDg=;
- b=dTTMbpqjdO62u3W9pFRo7vKvhQiDNuCKYhBkGiCfJsZ8mHiv7WRxJciPDBgvBQeZp8/yNdA7E5/DrJH8DjMFlUxegAn8utgOYlJ4B8FoTzLTSmr3GFAzEGLJoj1x5toGW2APbWR0qAn/FuuSMCmgMFkmbJ+0RYLCvyHgJAHhhCT/qlb7zvSalXSwqcK3M8itn5K2Fd1/mBC1E72iVOCTtSCYa9nm7qqiYtxns1Qoo+2mL4X6fKfHQoCs6J8vIRPtbFHWYvtPcdk9MAerHwd6wQfWpKRbVIPdYCSgQxC5Rin3ek9ki+Aq/h9W+HxLSqeMqob+7AxYMY7mDWZuAf2+zw==
+ bh=6D1HEJl/uoWwIh9nm6xb2KWhWxCzcX5yqwyKUCxnNLU=;
+ b=g3VRmhJ6m/AW6u7DRZKo2NJ+FYBJ+2uWRSMsjt1k9HZAttfM7GTl5fn9RDFXYVPExwrWNKGkAbh131lzSkn0mFOYmu+Z+AZ8m5Cdy0oVJmH335K6+u/xxsxtoAlvZmgxoZIYJUUlXxOB2O8g/ai671gpKOopBKsvj8vPEdpzN3RJLo1E1tWI6U14pdF0f+LEXfsOHZmqzcTe6M0Whh1mVcYjuwb/6y1zFUyURHuVtAKQSnWQDzpwVtUdwrAnUZvDgGJw73pMhbn5dU24I11GbzBHO/h3PNFFiYy2MTU8puRP1iLhehV2LDL7pTZoVleq4KKr6PJr69UD0kXqqotEZw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MTtWIWgqYS5XpeR+XCcErzNBzEjcrGPaQrGDrSJ9sDg=;
- b=WREoc44HYI4PGbpmNCUxpwAvIvbOy9aLSdz5nx+agSKT3k8Hes1BnMZeke7ZeEkzAjrg5EURfLJTLknt7rABGNxji100s6oi92/lSaSckP0MatekOgi1obFwYv6F4gDwBZKc5vhuLsT+6ZqnCH8Ox0JAvt3xj5cWO/Gpv+1VgcPYv54GuzIsMG/vUfFOvGUsZuiGyWLqrRXKMAE+7wy5pBJvSUHHznAbpo1lCMBGTb2apqi4YeVBtO3hM2Jlc3TY9PYVNeNBYKP9a2H0egwuYRlgblfVACZervsvhVvhKlU7maOhJktweyFF2ieIQgJWGLVxpbaBz+F6fMTMo1MZPA==
+ bh=6D1HEJl/uoWwIh9nm6xb2KWhWxCzcX5yqwyKUCxnNLU=;
+ b=yVVRMW9dQ9fk/4P//MUOsENEUzEl5ByMvVWmdEa2qfD1Ipc8hsbvMD0mS86RDt0Sx4D/9l3dvRlIlgFJ0EInEXsEK5+YZH7TEmS2yIgi2wHa6HbRuVty7vt8eNODQNyHh7xtTdp7ikVgmquh/tAy4fV64FlX4PWnh2wE2bre9J2P8uQGy2/XXkB8l6GSIpub9VF3/yLv4L0jgb5TAexXW8DfNFWBoEnqHLF2Ep4zrON/dUIIUPWLvNuqpswRDFcwfMjXCyIFniX1SXwWs023s/aNfd+BddbmJ0v7pN8WnU/D8ALH990uvpU7FrB4E75XRe05eDYjfxvarXYfA51xNg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <f343f3be-c42d-7007-2d65-3465dad03969@suse.com>
-Date: Tue, 19 Sep 2023 15:51:47 +0200
+Message-ID: <920e0bde-7381-32ef-9fba-bbf058590870@suse.com>
+Date: Tue, 19 Sep 2023 16:09:52 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 03/10] x86 setup: change bootstrap map to accept new boot
- module structures
+Subject: Re: [PATCH 06/10] x86 setup, microcode: switch to the new bootinfo
+ structures
 Content-Language: en-US
 To: Christopher Clark <christopher.w.clark@gmail.com>
 Cc: Daniel Smith <dpsmith@apertussolutions.com>, stefano.stabellini@amd.com,
@@ -83,95 +83,295 @@ Cc: Daniel Smith <dpsmith@apertussolutions.com>, stefano.stabellini@amd.com,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  Rich Persaud <persaur@gmail.com>, xen-devel@lists.xenproject.org
 References: <20230701071835.41599-1-christopher.w.clark@gmail.com>
- <20230701071835.41599-4-christopher.w.clark@gmail.com>
+ <20230701071835.41599-7-christopher.w.clark@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20230701071835.41599-4-christopher.w.clark@gmail.com>
+In-Reply-To: <20230701071835.41599-7-christopher.w.clark@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0075.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1f::23) To DU2PR04MB8790.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR3P281CA0072.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:4b::23) To DU2PR04MB8790.eurprd04.prod.outlook.com
  (2603:10a6:10:2e1::23)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|PAXPR04MB8173:EE_
-X-MS-Office365-Filtering-Correlation-Id: 35c94f78-e1da-46a1-23bf-08dbb91792c9
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|AS8PR04MB8995:EE_
+X-MS-Office365-Filtering-Correlation-Id: b548a99c-9f36-4390-dfae-08dbb91a1965
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	mq8+AANnwy7nC/MnJBAhAUsWltZY1JW9K5ay9wF6r1lycNiBEneXQM7WA1oYiX3sd6ZqKp/GE1f0UU2AVBFpPGoAhbUG9xe+DqEHD9K0mOGSEfHvHTFy4bmI3dQsbAk6/7sHyZkC1ctAuyzWlw4764L6B5LaKCL0d7845tVSQaan7gMuKHPLBrh9Ca/vhdXCXe1Z6GMLXFkoBqU3i3lUIbYlQMA5Ou2bgmWD4c0KDe1ZOBxe9S01vpSM8VpIuSWohWIahNKoNKWMoFreHV2LQBG8MV8E7zIsG7oHheu1IDrssktHV+zKEiHNkOREyyRgnkd99wj4rOPC1wMP0tPkhwhPmfdBwI+0rNMXaNxVcU0FI1+10CzPKq0WzKOh8UO85l6UNW8JazxA8cfLSbD5HBbshcO2mY971uwBWl/gQ2PQEg8+0Ae5VU3v3yB/v457Pa/REUqGgJKdhYv2TWgA6Qhki5wFT79T8KYt1dwGJLpZRITS5QcWPA180htXglRuVsnedxKjEYYNWf4EEjf8FRt19IWPntEuJZBR0hOrhkHolqgnHFiNZcctsTS/R5GSHgk0Qfqg3xxNwgS3zRcyUE9HEmv7jSqW+eEzYunVvwaUT2s3NDrnNVMt7D34Ur9CQ9Xy1t40qoJ4xlUAoXNwhg==
+	N58+8zWuUm5V5dR/o1yttgeFesAjfigvmYMYoQWzpGrdRYo4WZOQ+EBu3oKkh0yoBMoHDjesslJtPx9foeg5i0/mMgGyXDc2OPMeVWMFGLV89g0/aPlZXM0Kx0BU05L2KpEgwoXFQTtu1Mrl9aztxTsZHidX4Dvefle7nJIs9UFdC6MezFjKkB1i9wV8BYd2ZKhaGt7UC4Uj8KxLMvF0Gn3RVBOx4zexvjJ3TEW+/RFMZXzXQ/G3EodSyh5ZNhORUK9wosFfgBacQB4XGSbgRudNzyrEVXlvWJUmr2wVP8D2q3hEDrRVxqZbNCAkpJUIHNmJpkoEHTG/+8nkWJ1IKg9V51eWW/YzCRTtJHWIFJYTd3YsWE/xWUNMdtCPlewy7tMB85baf7iy+2PUUOot4uyivmXNFa+8LhibGjO8CjUrM3M+l2vKqwluNO8iF+G+fJLNbKX0f8v3eFAJ7L5S8HFaVqsWoNupqSpr4aNONBqMooUjm/WioKLCSC3NrvyE85eDI76GtURkUuCKUsPkxbu/Ulx3d9Ck4bGvjK39L1N02Zids7u7lHF7HF8U655Tz36PDGXEwGVO9LtlWh5DJj9t6tWp6AHAID476ffmDf3+XhLyixpBt6YpV9JxAL+D/011n5wsqlzeNQOW+sDmfg==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(396003)(346002)(366004)(376002)(39860400002)(451199024)(1800799009)(186009)(4744005)(2906002)(7416002)(31686004)(5660300002)(8936002)(8676002)(66899024)(41300700001)(54906003)(6916009)(316002)(66476007)(66946007)(66556008)(478600001)(53546011)(6666004)(6486002)(36756003)(6506007)(2616005)(26005)(6512007)(38100700002)(4326008)(31696002)(86362001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(346002)(136003)(39860400002)(396003)(366004)(451199024)(1800799009)(186009)(36756003)(38100700002)(31696002)(86362001)(31686004)(478600001)(6486002)(53546011)(54906003)(2906002)(66476007)(66556008)(5660300002)(66946007)(8936002)(6666004)(8676002)(4326008)(6506007)(6512007)(83380400001)(26005)(316002)(41300700001)(7416002)(6916009)(2616005)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?WWdKRS8rT1dEVWhkMFg0TVdHY01zU1ZGUVNSWnpqWWxYQm9JM2plQkkwTXha?=
- =?utf-8?B?dCtqRndjTlNFelFwME9tTGhFTTh5SldHNE5DSFUwdklYUE5mcnBGdjI5L0I5?=
- =?utf-8?B?U2dSWGhYdDhIWGl5amUySHBvUkwrNk9ncEpVWUd3WlZsaUNLbUM2MFR0T00w?=
- =?utf-8?B?WThwa1YxeTYrc3Y5MlFOdmlRMzBwMzczRnNQVDVySGJrSm84VEZzQlRhQ1Bl?=
- =?utf-8?B?Z1hqc1NVWnI4VEh4eFNkS29oU1BIRXYwU0VmNEpYNmZRZWNLc3ZHc3ZhYVRn?=
- =?utf-8?B?bld1Q2Z0UERTbDI3S2plREVDWlI3bTRtRTdORmNHSC9XZm9SQUhRUVh1R2FX?=
- =?utf-8?B?Sy9BNVdzVENlZVF0Mk5Mb2t1ZW5HK2R2dHRBRFlVNzJMM3JuY3BUOFdJSjUv?=
- =?utf-8?B?V3l6ZGQzeENFWmF5ZzBwZFREMEdTaUt0akl1d2t2cHpNNnVtWE9CZmlSS2U2?=
- =?utf-8?B?MDAvWWExUFIySTNmYkx1NFdBWlVTdytNdU5EcU1GVEVoWHV1Vllob1hjVUVa?=
- =?utf-8?B?SFRNWXhiRkRHcG50ZzAxKzlGMmdMWGJHc01BT2lnS2UzN1o1UHVmNHpPTHd2?=
- =?utf-8?B?blNMRE5rRVZaaTQvdVNBandVTjNBM05vTU5nVUIrdDY5TFE5aG9LcmZwSWNW?=
- =?utf-8?B?L0tLbmgyUDVQV1ovQ3Vyd3RvQnNLZkdhZTd4empBeDVkTllOblFLbGdVUmN4?=
- =?utf-8?B?bjNMdmFOQThqbDJVM05YdmQ5TDRNNmtPUUs0WS94b3hPVTBuMjJ3cnFxTmNT?=
- =?utf-8?B?SURra2Rad2FkMzF1VC9DTVZ4MFoxSXpXWHBXR0Nvc2hqM1hQZmp2em8wZWdI?=
- =?utf-8?B?dEIrZnUvMmNqb0pSRGl1L3ZDK0pzM0NNL3RkaVk0bnozbzdheXEweFduVEtp?=
- =?utf-8?B?elRqTUtRc0FZUFNFL1FtRFIyQ2FWT1BJR1FXVlhlZ0pIVmxFRXNtemtCcU9k?=
- =?utf-8?B?ZWdJempwMlhNRE9WaUpXN2FZWXI2ekNmZDlhNHVXN0xhQ3h1aElKbklXSWxL?=
- =?utf-8?B?RmpZZDl6cEhUaXA5eFhNVENJRlhBOTNmWFhYR28zeDdGYmRmSUZYYjFLSWhp?=
- =?utf-8?B?RFhRRzNSdDNuUWwwdzYxWk9kWDk0SWpub1lBRFBNc04wKzBmLzJqY0xVRWEw?=
- =?utf-8?B?M0FCR1phOHRZa1RkWjVxS1JOZ21jd09SbC9GMGs2VWxUTzdJM1hLVTEvemhn?=
- =?utf-8?B?UGNUNGJxblIzK3dEL0EyUlFTM0dUZEc1UjRJb2VQSVNWYkY3eS80SEREZFVh?=
- =?utf-8?B?VXBENHJzNEdtdjNZZ2k5bVdHZ1NxVDdZMkhiK0JIVWV4MEVBNTk1QzQwVitL?=
- =?utf-8?B?Y2JYZStOeXlaeGk5U3o1QzgzOWtDWktTVXNOR3k4ekhsZmRmd0E2cmVPSTYy?=
- =?utf-8?B?cnZ1SWswbS9QVS9JNE1Tc0srUi9RUlJLWVFiZm90TCtQVy81UWpCdy9SYWRw?=
- =?utf-8?B?cEdvdGl0UGJrRXlPK0NhZzFRb1lQVnZVNjQ5S0N0SmlnbXN2NW5tajNZOVhB?=
- =?utf-8?B?NmZkRTJqcG5DbC8xcVlvOE41MEFTRFRqb0JmT0Z2MmxxYndaUDB2VTF1ZHor?=
- =?utf-8?B?SVlod3V3b0ltaTJLdHArdHN4UkFsdzZFVjVsbjJwUzRUZlFTdjJreVp2a2Qw?=
- =?utf-8?B?UnpMbFRkbG9yT3ZtQTQxNGRWNU1Mc2J2OTlQQWhoOHVJUHY5MDJ1MS9vek1Q?=
- =?utf-8?B?dDN0bkhrZVlyTVNyL0N0YmpSUEcwTzcrMDNOTTduSzdxM3dRWWZXcXZXQ0JK?=
- =?utf-8?B?Slcwd3l5VEoyUE9XSWZaT3RCRGNqMWxwdHNzNHF2UjJyVDZQK1BXYlg4VEs5?=
- =?utf-8?B?d2tMTktmQVI3SGp2QklTb2NuVDl0ZmVEdG95ZHZxc3Q2SUR0bUE3dGJPQ1pz?=
- =?utf-8?B?eE8ySDMxeFJyRUtneTZLZVZ6djVhMnJFYnRTbnVDYXZkeWRUVjBTejRVT0do?=
- =?utf-8?B?dUpydFJxTHluQzJKZWZ5SmU2azBPWEt4SWxEbjdOZ2FDdzE0VitWZFB5N2t0?=
- =?utf-8?B?MGNXTnQraWNzd1ZDQjFyUzBNT3ltNk8vUlM2MmJ4dWxJQVpqclIwa1M5NG1m?=
- =?utf-8?B?TjhDYVcwTXdsYWpmTERGL2Q4TFhrYmU0UytWbCtOS0ZUcWRBWjY4WGpvSnlt?=
- =?utf-8?Q?UuhQ8zguNEUWS5gqczxWJpRej?=
+	=?utf-8?B?OXZNL0tHbitiSTYwajd3MEI3T0gzS1VmTnoybXQ0bEFvWWhVK2JrV2Q0UHJp?=
+ =?utf-8?B?YkxIMmZwWnY0WFN0V0NaVTZMNzBHL2taVzhYay84eFc2OVB0N285Qk5FMit2?=
+ =?utf-8?B?VWk3cFpLc3g2eU5LMDNWM2xzNnJOeXlKbFRYaGFIeGVpaDVyUWJyME41YUR6?=
+ =?utf-8?B?UFhGejdHQXlMRkNPdk5LR2w1TDlENG1tdUJVSHg0QlVhUUIwZDU5SmVkZTBE?=
+ =?utf-8?B?TjIxNzdEdXo1bm5MRVF0RUR5SDhFTldQYVNXNHFaM1o0RFRPNTJkWnc3dGx1?=
+ =?utf-8?B?RkE5TmFjS0lUZTBqSGt1MzY2YWp5RkVqVVJGY1U3RGlrL1R6dUF0NkRNRXJG?=
+ =?utf-8?B?RHU2WTJPMVo3SmV4WnhpdUY1a3RXN3dHRjVxdnRMT0FYK2luYUZZNnFra1pN?=
+ =?utf-8?B?SHI5ZHBieTJFOWxxbUJZSjVoTTFJV2xhYk11M3hTaHJTekkwV1YxSEJSb2wv?=
+ =?utf-8?B?T2x1ZWNKdEpYUWVjeUtDWDB2MlM4eExSazdiSnBOOEtURWo3UXh6RFlXQnpl?=
+ =?utf-8?B?S2RvYURZOW42SWRjWTdhVE9CYVM1RzArTVVKNUwrZ2VZZ0ZrQWEyZitBT09Z?=
+ =?utf-8?B?RXFpb0R1Vm12QjhQZkZ2MlRmNCtjcTlSMnNKbWQ0R052VXlPTDRzamxCQ3JZ?=
+ =?utf-8?B?dXVnWkh0Tm9GSUtRWXM0SmNTWXozMmpZKzhndjluTXhpWWEzRXNVaStLd3d4?=
+ =?utf-8?B?OVdrZWZLWjJHa2JIYWI5RUlEWG82YW9zcStvQjhlaHo4NzR3NGRrWW92Zk5X?=
+ =?utf-8?B?cUJXYmlkWDJ3QTk5cUc2a3JWVkFHcFA3Z1FhM2YzTzBQVVRIYThRYzB1MEpu?=
+ =?utf-8?B?d0xrNCtaOWVYSUQ2a2p3a01IOUhhTG1tdUEwUXJ6M1IySC9HWXlrY3Q5and5?=
+ =?utf-8?B?ZGVBdlIyNlBoRGJEbzNDTFVIamVhalppb0p1eFBCL1c2V0FDTHNscGFjSnJz?=
+ =?utf-8?B?QjBLVnp5VWVmSVBucGF5VnJUTWJuWUZvMUM1VWtHZlc3Sm1ONllONGRkQmhB?=
+ =?utf-8?B?aGVPT3Z3cTZkd0FhMy9lUGtDbUxmMldpWk5vblN6UUV1azdqN09WbVZhV0Nl?=
+ =?utf-8?B?UDkyYnpRWmZ0MFNueE1LWFNGMWJBZ3hMVnVQM0pZU0Q1QnRrYldKRmhKbThG?=
+ =?utf-8?B?cXZXQzRvTnhSbzUzZ2k3cEEwZVRTb20zdE4veXFNT1A1eC94aWlYcmt2RW9X?=
+ =?utf-8?B?bzZ4TUZxRFNBNDBQOTE5aDNJSDB0V3VZMUQ5RU5BZEQzZ1pvZXdrelJlV3NH?=
+ =?utf-8?B?Mm1oZDRqN0pMcjExOUhSYkFZWTljMXYzRG5qdTduOW43RktrbndiSXhJUzBr?=
+ =?utf-8?B?bjhnV0E5djg5UW5YZDFKOHBCVng3RkxKNDhkeE9GdUk0cWNMSzFBTHQ3ZHNE?=
+ =?utf-8?B?Ui9TUnFtWG5KTUM2NXd3dXlqZzJRYjdKWkZDZjVOWEY1MElWNHJGWU5tZDQ1?=
+ =?utf-8?B?cUhVN3pKTkdBZWhUS2ZjT0VGdHU0cVF3clE4YWpHc1ViR0FscW9VV0Z6TnFy?=
+ =?utf-8?B?UW83OS94amxMbHFQd0tjZXRjK01FRk4yRHE3eHhrb3Z1M2NvNjJaUkR6Nis2?=
+ =?utf-8?B?dDhKd29qV1pzMjg4bk1BZ0E5NXVNRHpiaTJ3T25LbTVXMjh0ZjFvSkVHbjZu?=
+ =?utf-8?B?czVobFZHS1QvR3NlZVJoTTF4SXhNN3ZQWnU5UGdPVTd5YjFQdERBT2Z6ZE1I?=
+ =?utf-8?B?ZXNSUnFpSitPNWhDbUhoK2tjT2JLSk9QQllWeFE4UXBXUHp2MzhvM1prYlpF?=
+ =?utf-8?B?Q2ZMeWM4emNRcHczb1pJZStHcnhlNm1heFprWnZXZzNsQkdQb29zMWFiY2R4?=
+ =?utf-8?B?cHdOTWJpdlpXaW5UbDFOaysxUnFTWTZpMzYzTmw5Y1VjNzZCMkVldVV2NUgw?=
+ =?utf-8?B?MEQrcThuNS80VUF6dU5MOHArclhHR0FvaWJxbXQ0MDNYWEJkc0xkczFKMWFH?=
+ =?utf-8?B?ZXpSdThXbW5lVlFXYWZHY0R2c1V0L1YyT1FOYzBtUG9iQ1NsdHRLVVN2WTdq?=
+ =?utf-8?B?RXFCTllMWmlyRGpWei85aHFCN3lIN2p5ZncyZFRpZmgrSkZrNDduTHlXeXRB?=
+ =?utf-8?B?SHVnZUhwdzU1Y2Jhb3dzRTVRMVdjSGczcWx4TmVIdkhjU2RpM0lsdjRORzVy?=
+ =?utf-8?Q?lLJeoq3hGslawXcZ3s8BevjLq?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 35c94f78-e1da-46a1-23bf-08dbb91792c9
+X-MS-Exchange-CrossTenant-Network-Message-Id: b548a99c-9f36-4390-dfae-08dbb91a1965
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2023 13:51:50.2741
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2023 14:09:55.0353
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ibd+UpYX36qyz9CS9+Znv8VJkx96i7wi2j3Q/ByryvU/lUWCo+j0N0Cb24DYQ9OGdxFx4tmPmqSmKZBcont7Uw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8173
+X-MS-Exchange-CrossTenant-UserPrincipalName: l9Vxcrm0RNVHrBkAkq3uRns+xIsuWPmO1N4gx2sVJoJ8ASpi5MsvNGtWk+Cb8FHR7sDs0vLCGC1XpWGGFKXTvA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8995
 
 On 01.07.2023 09:18, Christopher Clark wrote:
-> To convert the x86 boot logic from multiboot to boot module structures,
-> change the bootstrap map function to accept a boot module parameter.
+> Next step in incremental work towards adding a non-multiboot internal
+> representation of boot modules, converting the fields being accessed for
+> the startup calculations.
 > 
-> To allow incremental change from multiboot to boot modules across all
-> x86 setup logic, provide a temporary inline wrapper that still accepts a
-> multiboot module parameter and use it where necessary.
+> Move the per-module scan logic into a dedicated function from the
+> iteration loop and set the BOOTMOD_UCODE module type when microcode is found.
 
-And all uses of the original function are converted to the new wrapper,
-except when passing NULL - am I getting this right? Plus down the road
-you'll change all of them back? Too much code churn for my taste, to be
-honest, not the least because this undermines easy use of "git blame".
+It's not really clear to me why the split (and the associated code churn)
+is needed.
 
-If the above observation is right, and since passing NULL to the wrapper
-is fine too, why don't you deal with this by using a macro wrapper
-instead, without needing to touch all the call sites:
+> @@ -150,75 +149,109 @@ static int __init cf_check parse_ucode(const char *s)
+>  }
+>  custom_param("ucode", parse_ucode);
+>  
+> -void __init microcode_scan_module(
+> -    unsigned long *module_map,
+> -    const multiboot_info_t *mbi)
+> +#define MICROCODE_MODULE_MATCH 1
+> +#define MICROCODE_MODULE_NONMATCH 0
+> +
+> +static int __init microcode_check_module(struct boot_module *mod)
+>  {
+> -    module_t *mod = (module_t *)__va(mbi->mods_addr);
+>      uint64_t *_blob_start;
+>      unsigned long _blob_size;
+> -    struct cpio_data cd;
+> +    struct cpio_data cd = { NULL, 0 };
 
-#define bootstrap_map(m) bootstrap_map_multiboot(m)
+Why? You don't ...
 
-Misra won't like that, but as you say it's temporary.
+>      long offset;
+>      const char *p = NULL;
+> -    int i;
+> -
+> -    ucode_blob.size = 0;
+> -    if ( !ucode_scan )
+> -        return;
+>  
+>      if ( boot_cpu_data.x86_vendor == X86_VENDOR_AMD )
+>          p = "kernel/x86/microcode/AuthenticAMD.bin";
+>      else if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
+>          p = "kernel/x86/microcode/GenuineIntel.bin";
+>      else
+> +        return -EFAULT;
+> +
+> +    _blob_start = bootstrap_map(mod);
+> +    _blob_size = mod->size;
+> +    if ( !_blob_start )
+> +    {
+> +        printk("Could not map multiboot module (0x%lx) (size: %ld)\n",
+> +               mod->start, _blob_size);
+> +        /* Non-fatal error, so just say no match */
+> +        return MICROCODE_MODULE_NONMATCH;
+> +    }
+> +
+> +    cd = find_cpio_data(p, _blob_start, _blob_size, &offset /* ignore */);
+
+... use the variable ahead of this assignment.
+
+> +    if ( cd.data )
+> +    {
+> +        ucode_blob.size = cd.size;
+> +        ucode_blob.data = cd.data;
+> +
+> +        mod->bootmod_type = BOOTMOD_UCODE;
+> +        return MICROCODE_MODULE_MATCH;
+> +    }
+> +
+> +    bootstrap_map(NULL);
+> +
+> +    return MICROCODE_MODULE_NONMATCH;
+> +}
+> +
+> +void __init microcode_scan_module(struct boot_info *bootinfo)
+> +{
+> +    int i;
+
+No plain int please for variables holding only non-negative values.
+
+> +    if ( !ucode_scan )
+>          return;
+>  
+> -    /*
+> -     * Try all modules and see whichever could be the microcode blob.
+> -     */
+> -    for ( i = 1 /* Ignore dom0 kernel */; i < mbi->mods_count; i++ )
+> +    i = bootmodule_index(bootinfo, BOOTMOD_UNKNOWN, 0);
+> +    while ( i < bootinfo->nr_mods )
+
+Why is the comment going away?
+
+>      {
+> -        if ( !test_bit(i, module_map) )
+> -            continue;
+> +        int ret = microcode_check_module(&bootinfo->mods[i]);
+>  
+> -        _blob_start = bootstrap_map_multiboot(&mod[i]);
+> -        _blob_size = mod[i].mod_end;
+> -        if ( !_blob_start )
+> +        switch ( ret )
+>          {
+> -            printk("Could not map multiboot module #%d (size: %ld)\n",
+> -                   i, _blob_size);
+> +        case MICROCODE_MODULE_MATCH:
+> +            return;
+> +        case MICROCODE_MODULE_NONMATCH:
+> +            i = bootmodule_index(bootinfo, BOOTMOD_UNKNOWN, ++i);
+>              continue;
+> +        default:
+> +            printk("%s: (err: %d) unable to check microcode\n",
+> +                   __func__, ret);
+> +            return;
+>          }
+> -        cd.data = NULL;
+> -        cd.size = 0;
+> -        cd = find_cpio_data(p, _blob_start, _blob_size, &offset /* ignore */);
+> -        if ( cd.data )
+> -        {
+> -            ucode_blob.size = cd.size;
+> -            ucode_blob.data = cd.data;
+> -            break;
+> -        }
+> -        bootstrap_map(NULL);
+>      }
+>  }
+>  
+> -static void __init microcode_grab_module(
+> -    unsigned long *module_map,
+> -    const multiboot_info_t *mbi)
+> +static void __init microcode_grab_module(struct boot_info *bootinfo)
+>  {
+> -    module_t *mod = (module_t *)__va(mbi->mods_addr);
+> +    ucode_blob.size = 0;
+>  
+>      if ( ucode_mod_idx < 0 )
+> -        ucode_mod_idx += mbi->mods_count;
+> -    if ( ucode_mod_idx <= 0 || ucode_mod_idx >= mbi->mods_count ||
+> -         !__test_and_clear_bit(ucode_mod_idx, module_map) )
+> -        goto scan;
+> -    ucode_mod = mod[ucode_mod_idx];
+> -scan:
+> +        ucode_mod_idx += bootinfo->nr_mods;
+> +    if ( ucode_mod_idx >= 0 &&  ucode_mod_idx <= bootinfo->nr_mods &&
+> +         bootinfo->mods[ucode_mod_idx].bootmod_type == BOOTMOD_UNKNOWN )
+> +    {
+> +        int ret = microcode_check_module(&bootinfo->mods[ucode_mod_idx]);
+> +
+> +        switch ( ret )
+> +        {
+> +        case MICROCODE_MODULE_MATCH:
+> +            return;
+> +        case MICROCODE_MODULE_NONMATCH:
+> +            break;
+> +        default:
+> +            printk("%s: (err: %d) unable to check microcode\n",
+> +                   __func__, ret);
+> +            return;
+> +        }
+> +    }
+> +
+>      if ( ucode_scan )
+> -        microcode_scan_module(module_map, mbi);
+> +        microcode_scan_module(bootinfo);
+>  }
+>  
+> +/* Undefining as they are not needed anymore */
+> +#undef MICROCODE_MODULE_MATCH
+> +#undef MICROCODE_MODULE_NONMATCH
+
+No need to comment this; we do so elsewhere as well.
+
+> @@ -738,11 +771,6 @@ static int __init cf_check microcode_init(void)
+>          ucode_blob.size = 0;
+>          ucode_blob.data = NULL;
+>      }
+> -    else if ( ucode_mod.mod_end )
+> -    {
+> -        bootstrap_map(NULL);
+> -        ucode_mod.mod_end = 0;
+> -    }
+
+I can spot why this and ...
+
+> @@ -786,8 +814,7 @@ static int __init early_update_cache(const void *data, size_t len)
+>      return rc;
+>  }
+>  
+> -int __init microcode_init_cache(unsigned long *module_map,
+> -                                const struct multiboot_info *mbi)
+> +int __init microcode_init_cache(struct boot_info *bootinfo)
+>  {
+>      int rc = 0;
+>  
+> @@ -796,12 +823,9 @@ int __init microcode_init_cache(unsigned long *module_map,
+>  
+>      if ( ucode_scan )
+>          /* Need to rescan the modules because they might have been relocated */
+> -        microcode_scan_module(module_map, mbi);
+> +        microcode_scan_module(bootinfo);
+>  
+> -    if ( ucode_mod.mod_end )
+> -        rc = early_update_cache(bootstrap_map_multiboot(&ucode_mod),
+> -                                ucode_mod.mod_end);
+> -    else if ( ucode_blob.size )
+> +    if ( ucode_blob.size )
+>          rc = early_update_cache(ucode_blob.data, ucode_blob.size);
+>  
+>      return rc;
+> @@ -819,11 +843,6 @@ static int __init early_microcode_update_cpu(void)
+>          len = ucode_blob.size;
+>          data = ucode_blob.data;
+>      }
+> -    else if ( ucode_mod.mod_end )
+> -    {
+> -        len = ucode_mod.mod_end;
+> -        data = bootstrap_map_multiboot(&ucode_mod);
+> -    }
+
+... this isn't needed anymore. The code doesn't appear to move elsewhere.
 
 Jan
 
