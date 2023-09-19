@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F686CD343F
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Sep 2023 06:31:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.604372.941719 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBAABCD3441
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Sep 2023 06:31:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.604374.941740 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qiUGA-00049m-Bn; Tue, 19 Sep 2023 06:30:58 +0000
+	id 1qiUGD-0004j0-4S; Tue, 19 Sep 2023 06:31:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 604372.941719; Tue, 19 Sep 2023 06:30:58 +0000
+Received: by outflank-mailman (output) from mailman id 604374.941740; Tue, 19 Sep 2023 06:31:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qiUGA-00049d-8i; Tue, 19 Sep 2023 06:30:58 +0000
-Received: by outflank-mailman (input) for mailman id 604372;
- Tue, 19 Sep 2023 06:30:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qiUGD-0004it-18; Tue, 19 Sep 2023 06:31:01 +0000
+Received: by outflank-mailman (input) for mailman id 604374;
+ Tue, 19 Sep 2023 06:30:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=72lO=FD=cloud.com=javi.merino@srs-se1.protection.inumbo.net>)
- id 1qiUG8-000365-7E
- for xen-devel@lists.xenproject.org; Tue, 19 Sep 2023 06:30:56 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 15f4f1f1-56b6-11ee-8789-cb3800f73035;
- Tue, 19 Sep 2023 08:30:54 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-403012f276dso57094825e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 18 Sep 2023 23:30:55 -0700 (PDT)
+ id 1qiUGB-0003Oo-MV
+ for xen-devel@lists.xenproject.org; Tue, 19 Sep 2023 06:30:59 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 17d562e5-56b6-11ee-9b0d-b553b5be7939;
+ Tue, 19 Sep 2023 08:30:58 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-401da71b85eso58487245e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Sep 2023 23:30:58 -0700 (PDT)
 Received: from EMEAENG6DZjqCfH.citrite.net
  (cpc92302-cmbg19-2-0-cust781.5-4.cable.virginm.net. [82.1.211.14])
  by smtp.gmail.com with ESMTPSA id
- 26-20020a05600c229a00b003fe17901fcdsm17068780wmf.32.2023.09.18.23.30.53
+ 26-20020a05600c229a00b003fe17901fcdsm17068780wmf.32.2023.09.18.23.30.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 23:30:54 -0700 (PDT)
+ Mon, 18 Sep 2023 23:30:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,99 +48,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 15f4f1f1-56b6-11ee-8789-cb3800f73035
+X-Inumbo-ID: 17d562e5-56b6-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1695105054; x=1695709854; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1695105057; x=1695709857; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5qAv5TR4Jv8y9/IqrcBV7oAsUEo56bvO6XuiR+P26ck=;
-        b=Dj4Uba0/uO3kgF+0WJkf3KThH9xm58sFemj2Au4nLUjCVFGLZteoMYfNn6D4sQaSwk
-         QvB7rdSU7+g5m0aJNqa/MToZKE+PFqVkfEXtN1SF6LApMzSZA5Ta3hQGkJhqymIVU1UH
-         Vz/AfrF2fWcTb+6cgYCW9SvjeByX5rctAiJjA=
+        bh=g919MIKAx5+o9AO35iGPbruaS4fHlMldEN8yav8BWcE=;
+        b=hpratWt2hxDKzaAwAL7070sUHJgWEwWM4F8+d7yHVZr7ejLJniIhy1j7yuspk3vJGl
+         7QtssuUQBuxy0Q5v3ojjoKwmYSr4xF1QCWKPkQd+dC9/KaFaksRVuINaPLi3ldyOX4hh
+         HHvkOhlK8p92xN5Fla9ju3r7/YxFTRenleVy8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695105054; x=1695709854;
+        d=1e100.net; s=20230601; t=1695105057; x=1695709857;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5qAv5TR4Jv8y9/IqrcBV7oAsUEo56bvO6XuiR+P26ck=;
-        b=jXEipjwQUf21wtZqTKb+yqrYG41kn+S7w+gf9xWFq3BZkDbq3LrznSommJmWYlI6V4
-         dVNPB5W3S1G7YOT13yICcRfJ5Dp+4Uf8z/dWpb5zMt/sFr4+V7PmWcRW/EdLSlHrPXgF
-         lcYKLYp6L/6je9nZO8296Po4z4tPvkKzFI7naOm6glWh6/j+aBtphr/K/uWZMUUSg3ZX
-         JMZmaokij0hy7VEGkevk7rO033aTxRBJTvNLPXGiHpOmbuPFLTtxygDmpZMZcW2mDCDr
-         qkVlhJmNG9lXjess1292yZRGakAW2mHR94NpY4TLOMpVEfYfFp9nPwlxpfE2Zv8XH1xV
-         nhCA==
-X-Gm-Message-State: AOJu0YxMjwz2jJ6dVeaqGE7Ykymg3x6KKr225Zcyw/uAAskPMP8Z315O
-	9RsAxvus+Sg425BopDsDM+ymafSnKls9S2ivXOo=
-X-Google-Smtp-Source: AGHT+IF3F5TicFY2bZaPPfxI3vbGtjet1LnUeRlgKhqZkuTP7saiA9lgz54eojjPaWL++bqqsbFuOA==
-X-Received: by 2002:a05:600c:c8:b0:402:f5c2:c6d9 with SMTP id u8-20020a05600c00c800b00402f5c2c6d9mr10181859wmm.37.1695105054480;
-        Mon, 18 Sep 2023 23:30:54 -0700 (PDT)
+        bh=g919MIKAx5+o9AO35iGPbruaS4fHlMldEN8yav8BWcE=;
+        b=wMS95TIz6pV0myGZvA1oScUcAWmwQvsOPc/kbojYlekxGwfwLzatR0Mf0caofr9Oly
+         OUtAmvqxMr+iJ/utKLEOWzooVQPjUz22d9TvuILpDSVFcU/Fu0Hgpkg+Et27sv3Xpx6v
+         X1NRE5HdyakUWtXNUJdxD4tfirfLFj79YwMY2K0R7THEl4h14GSSHo+Fb1hjnonmBSpz
+         5Cso/99Eh6kEWidqJK+2m/QijC/MV6yK5nS5rHkCAbcmo5EkGZuKwIFHfH9U9CQ26k/m
+         9k5FapuIL+/Bt/ELnZaYuHdUGjdol2Chc98nB4KZ2S8nEVT9EZK0WOR8SfMX9AvH4m8k
+         Msmg==
+X-Gm-Message-State: AOJu0YxEmEUiEQdFO+crmAaVIYoaqCi5tOvC4OjOB3XCIX5RFbRJ9J9B
+	75DvSm9NuHbkQEDCa3TucL+w9eu58T83kr6RmP8=
+X-Google-Smtp-Source: AGHT+IEoOuhldT/ru27XY4+XrosqgpSchXwnBkCf6HQeFWZOdoSoVccmrFmpW4UMah+9ZSKGVPijIg==
+X-Received: by 2002:a1c:f204:0:b0:3fe:d57e:d933 with SMTP id s4-20020a1cf204000000b003fed57ed933mr9861362wmc.15.1695105057145;
+        Mon, 18 Sep 2023 23:30:57 -0700 (PDT)
 From: Javi Merino <javi.merino@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Javi Merino <javi.merino@cloud.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [XEN PATCH v3 2/4] tools: convert setup.py to use setuptools if available
-Date: Tue, 19 Sep 2023 07:30:27 +0100
-Message-ID: <761d876ad8755a98824ed7705afaed2cdb545dd8.1695104399.git.javi.merino@cloud.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v3 4/4] README: remove old note about the build system's python expectation
+Date: Tue, 19 Sep 2023 07:30:29 +0100
+Message-ID: <83e6857f16eb000f8368fcd9995e0411f0177c2e.1695104399.git.javi.merino@cloud.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <cover.1695104399.git.javi.merino@cloud.com>
 References: <cover.1695104399.git.javi.merino@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+5852ca485263 (build: fix tools/configure in case only python3 exists,
+2019-12-11) changed the configure script to test for the availability
+of python3, python and python2 in that order.  It sets PYTHON to the
+first one found in path.  You don't need to have a symlink to python.
 
-Python distutils is deprecated and is going to be removed in Python
-3.12. Add support for setuptools.
+Remove the outdated note from the README.
 
-Setuptools in Python 3.11 complains:
-
-  SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
-
-Keep using setup.py anyway to build the C extension.
-
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 Signed-off-by: Javi Merino <javi.merino@cloud.com>
 ---
- tools/pygrub/setup.py | 7 +++++--
- tools/python/setup.py | 7 +++++--
- 2 files changed, 10 insertions(+), 4 deletions(-)
+ README | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/tools/pygrub/setup.py b/tools/pygrub/setup.py
-index 502aa4df2d..c9cac47eee 100644
---- a/tools/pygrub/setup.py
-+++ b/tools/pygrub/setup.py
-@@ -1,5 +1,8 @@
--from distutils.core import setup, Extension
--from distutils.ccompiler import new_compiler
-+# Prefer setuptools, fall back to distutils
-+try:
-+    from setuptools import setup, Extension
-+except ImportError:
-+    from distutils.core import setup, Extension
- import os
- import sys
+diff --git a/README b/README
+index f75fa536d9..a491c8dce5 100644
+--- a/README
++++ b/README
+@@ -184,13 +184,6 @@ Various tools, such as pygrub, have the following runtime dependencies:
+           URL:    https://www.python.org/
+           Debian: python
  
-diff --git a/tools/python/setup.py b/tools/python/setup.py
-index 721a3141d7..02354f6986 100644
---- a/tools/python/setup.py
-+++ b/tools/python/setup.py
-@@ -1,5 +1,8 @@
+-Note that the build system expects `python` to be available. If your system
+-only has `python2` or `python3` but not `python` (as in Linux From Scratch),
+-you will need to create a symlink for it, or specify PYTHON= when invoking
+-make, like (note the position of PYTHON= matters):
 -
--from distutils.core import setup, Extension
-+# Prefer setuptools, fall back to distutils
-+try:
-+    from setuptools import setup, Extension
-+except ImportError:
-+    from distutils.core import setup, Extension
- import os, sys
+-    # make PYTHON=/usr/bin/python3
+-
+ Intel(R) Trusted Execution Technology Support
+ =============================================
  
- XEN_ROOT = "../.."
 -- 
 2.42.0
 
