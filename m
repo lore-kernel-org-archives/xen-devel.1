@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB86C04FE4
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Sep 2023 18:32:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.605891.943558 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8298EC04FE5
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Sep 2023 18:32:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.605890.943549 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qj1zY-0000eC-FO; Wed, 20 Sep 2023 18:32:04 +0000
+	id 1qj1zX-0000VE-RD; Wed, 20 Sep 2023 18:32:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 605891.943558; Wed, 20 Sep 2023 18:32:04 +0000
+Received: by outflank-mailman (output) from mailman id 605890.943549; Wed, 20 Sep 2023 18:32:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qj1zY-0000cn-6f; Wed, 20 Sep 2023 18:32:04 +0000
-Received: by outflank-mailman (input) for mailman id 605891;
- Wed, 20 Sep 2023 18:32:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qj1zX-0000Tq-NC; Wed, 20 Sep 2023 18:32:03 +0000
+Received: by outflank-mailman (input) for mailman id 605890;
+ Wed, 20 Sep 2023 18:32:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=wKQE=FE=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1qj1zV-0007WV-Vy
+ id 1qj1zV-0007W9-Mu
  for xen-devel@lists.xenproject.org; Wed, 20 Sep 2023 18:32:01 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fc059d0c-57e3-11ee-9b0d-b553b5be7939;
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fc14cb8e-57e3-11ee-8789-cb3800f73035;
  Wed, 20 Sep 2023 20:32:00 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-588-xMfiEogbMbSUk9DdrqY6Qw-1; Wed, 20 Sep 2023 14:31:52 -0400
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-427-808l8HYfOgienFfKcIOyhQ-1; Wed, 20 Sep 2023 14:31:53 -0400
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 54CE91C09A47;
- Wed, 20 Sep 2023 18:31:51 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8CF9E803499;
+ Wed, 20 Sep 2023 18:31:52 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 5ECE2711282;
- Wed, 20 Sep 2023 18:31:50 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 640F710F1BE7;
+ Wed, 20 Sep 2023 18:31:52 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 3207221E6900; Wed, 20 Sep 2023 20:31:49 +0200 (CEST)
+ id 42D7721E690B; Wed, 20 Sep 2023 20:31:49 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,17 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc059d0c-57e3-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: fc14cb8e-57e3-11ee-8789-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	s=mimecast20190719; t=1695234719;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=xM3wAYFzQP3gxuYWUEVSWgPQWfxSd8/nVZzQqU4x75o=;
-	b=dKogQBXSULDZf12xC/TE84VsjhDPWSV3+ixJxIsNBtUDUHLbIte53WL/iJoAkKxbmgy8aJ
-	vRfJeq79bsXc2EEX9p0vpQAtQkO+tG8nsOhareTPzeQwEcgWVvLuwOA8YT8AGxsmnI28AK
-	9u/dwjnQj6Hs3G1/RvGOmU8MCJcZZAk=
-X-MC-Unique: xMfiEogbMbSUk9DdrqY6Qw-1
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+5HnhXslRnnQFRfuqW4Y4SlAYwtvks6K50kIclYSCcI=;
+	b=eXAeWvcT4XRzVCzWScztHqouVvfBTe7WeJWmiu/hDHh6O1pNWLHJCh0qcIJdpuJwxIXlbT
+	3Fc8Ip+M7BAUG8vrrBodxIIDOEQGlRCcL2G+HNj68RiRavfDmfFumdtWEXuSzIoLWynZtA
+	/nd5A4qRrOVG+QLnjh1x+IlzLkF+rLM=
+X-MC-Unique: 808l8HYfOgienFfKcIOyhQ-1
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: kwolf@redhat.com,
@@ -93,92 +94,62 @@ Cc: kwolf@redhat.com,
 	xen-devel@lists.xenproject.org,
 	alex.bennee@linaro.org,
 	peter.maydell@linaro.org
-Subject: [PATCH v2 0/7] Steps towards enabling -Wshadow=local
-Date: Wed, 20 Sep 2023 20:31:42 +0200
-Message-ID: <20230920183149.1105333-1-armbru@redhat.com>
+Subject: [PATCH v2 5/7] block/vdi: Clean up local variable shadowing
+Date: Wed, 20 Sep 2023 20:31:47 +0200
+Message-ID: <20230920183149.1105333-6-armbru@redhat.com>
+In-Reply-To: <20230920183149.1105333-1-armbru@redhat.com>
+References: <20230920183149.1105333-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
 
 Local variables shadowing other local variables or parameters make the
-code needlessly hard to understand.  Bugs love to hide in such code.
-Evidence: PATCH 1.
+code needlessly hard to understand.  Tracked down with -Wshadow=local.
+Clean up: delete inner declarations when they are actually redundant,
+else rename variables.
 
-Enabling -Wshadow would prevent bugs like this one.  But we'd have to
-clean up all the offenders first.  We got a lot of them.
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+---
+ block/vdi.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-Enabling -Wshadow=local should be less work for almost as much gain.
-I took a stab at it.  There's a small, exciting part, and a large,
-boring part.
-
-The exciting part is dark preprocessor sorcery to let us nest macro
-calls without shadowing: PATCH 7.
-
-The boring part is cleaning up all the other warnings.  I did some
-[PATCH 2-6], but ran out of steam long before finishing the job.  Some
-160 unique warnings remain.
-
-To see them, enable -Wshadow=local like so:
-
-diff --git a/meson.build b/meson.build
-index 98e68ef0b1..9fc4c7ac9d 100644
---- a/meson.build
-+++ b/meson.build
-@@ -466,6 +466,9 @@ warn_flags = [
-   '-Wno-tautological-type-limit-compare',
-   '-Wno-psabi',
-   '-Wno-gnu-variable-sized-type-not-at-end',
-+  '-Wshadow=local',
-+  '-Wno-error=shadow=local',
-+  '-Wno-error=shadow=compatible-local',
- ]
+diff --git a/block/vdi.c b/block/vdi.c
+index 6c35309e04..934e1b849b 100644
+--- a/block/vdi.c
++++ b/block/vdi.c
+@@ -634,7 +634,6 @@ vdi_co_pwritev(BlockDriverState *bs, int64_t offset, int64_t bytes,
+         bmap_entry = le32_to_cpu(s->bmap[block_index]);
+         if (!VDI_IS_ALLOCATED(bmap_entry)) {
+             /* Allocate new block and write to it. */
+-            uint64_t data_offset;
+             qemu_co_rwlock_upgrade(&s->bmap_lock);
+             bmap_entry = le32_to_cpu(s->bmap[block_index]);
+             if (VDI_IS_ALLOCATED(bmap_entry)) {
+@@ -700,7 +699,7 @@ nonallocating_write:
+         /* One or more new blocks were allocated. */
+         VdiHeader *header;
+         uint8_t *base;
+-        uint64_t offset;
++        uint64_t bmap_offset;
+         uint32_t n_sectors;
  
- if targetos != 'darwin'
-
-You may want to drop the -Wno-error lines.
-
-v2:
-* PATCH 3+6: Mollify checkpatch
-* PATCH 4: Redo for clearer code, R-bys dropped [Kevin]
-* PATCH 5: Rename tweaked [Kevin]
-* PATCH 6: Rename local @tran instead of the parameter [Kevin]
-* PATCH 7: Drop PASTE(), use glue() instead [Richard]; pass
-  identifiers instead of __COUNTER__ for readability [Eric]; add
-  comments
-
-Markus Armbruster (7):
-  migration/rdma: Fix save_page method to fail on polling error
-  migration: Clean up local variable shadowing
-  ui: Clean up local variable shadowing
-  block/dirty-bitmap: Clean up local variable shadowing
-  block/vdi: Clean up local variable shadowing
-  block: Clean up local variable shadowing
-  qobject atomics osdep: Make a few macros more hygienic
-
- include/qapi/qmp/qobject.h      | 11 +++++++++--
- include/qemu/atomic.h           | 17 +++++++++++-----
- include/qemu/compiler.h         |  3 +++
- include/qemu/osdep.h            | 31 +++++++++++++++++++++--------
- block.c                         |  9 +++++----
- block/monitor/bitmap-qmp-cmds.c | 19 +++++++++---------
- block/qcow2-bitmap.c            |  3 +--
- block/rbd.c                     |  2 +-
- block/stream.c                  |  1 -
- block/vdi.c                     |  7 +++----
- block/vvfat.c                   | 35 +++++++++++++++++----------------
- hw/block/xen-block.c            |  6 +++---
- migration/block.c               |  4 ++--
- migration/ram.c                 |  8 +++-----
- migration/rdma.c                | 14 ++++++++-----
- migration/vmstate.c             |  2 +-
- ui/gtk.c                        | 14 ++++++-------
- ui/spice-display.c              |  9 +++++----
- ui/vnc-palette.c                |  2 --
- ui/vnc.c                        | 12 +++++------
- ui/vnc-enc-zrle.c.inc           |  9 ++++-----
- 21 files changed, 125 insertions(+), 93 deletions(-)
-
+         g_free(block);
+@@ -723,11 +722,11 @@ nonallocating_write:
+         bmap_first /= (SECTOR_SIZE / sizeof(uint32_t));
+         bmap_last /= (SECTOR_SIZE / sizeof(uint32_t));
+         n_sectors = bmap_last - bmap_first + 1;
+-        offset = s->bmap_sector + bmap_first;
++        bmap_offset = s->bmap_sector + bmap_first;
+         base = ((uint8_t *)&s->bmap[0]) + bmap_first * SECTOR_SIZE;
+         logout("will write %u block map sectors starting from entry %u\n",
+                n_sectors, bmap_first);
+-        ret = bdrv_co_pwrite(bs->file, offset * SECTOR_SIZE,
++        ret = bdrv_co_pwrite(bs->file, bmap_offset * SECTOR_SIZE,
+                              n_sectors * SECTOR_SIZE, base, 0);
+     }
+ 
 -- 
 2.41.0
 
