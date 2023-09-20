@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F40AC04FEA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9967C04FE4
 	for <xen-devel@archiver.kernel.org>; Wed, 20 Sep 2023 18:32:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.605889.943531 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.605887.943517 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qj1zW-0008Ke-IP; Wed, 20 Sep 2023 18:32:02 +0000
+	id 1qj1zV-00087r-Kk; Wed, 20 Sep 2023 18:32:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 605889.943531; Wed, 20 Sep 2023 18:32:02 +0000
+Received: by outflank-mailman (output) from mailman id 605887.943517; Wed, 20 Sep 2023 18:32:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qj1zW-0008Hp-77; Wed, 20 Sep 2023 18:32:02 +0000
-Received: by outflank-mailman (input) for mailman id 605889;
+	id 1qj1zV-00086y-Fe; Wed, 20 Sep 2023 18:32:01 +0000
+Received: by outflank-mailman (input) for mailman id 605887;
  Wed, 20 Sep 2023 18:32:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=wKQE=FE=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1qj1zU-0007W9-Me
+ id 1qj1zU-0007WV-03
  for xen-devel@lists.xenproject.org; Wed, 20 Sep 2023 18:32:00 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fbee1a60-57e3-11ee-8789-cb3800f73035;
- Wed, 20 Sep 2023 20:31:59 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fa143f16-57e3-11ee-9b0d-b553b5be7939;
+ Wed, 20 Sep 2023 20:31:57 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-461-hrEPizR0PjKkhEZ8z8iLZA-1; Wed, 20 Sep 2023 14:31:54 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
+ us-mta-483-9l76hlgDNpCT7j8zv7yFEw-1; Wed, 20 Sep 2023 14:31:52 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AC7CE28EC10E;
- Wed, 20 Sep 2023 18:31:52 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 77E0E1C09A4C;
+ Wed, 20 Sep 2023 18:31:51 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 64D8A40C6EBF;
- Wed, 20 Sep 2023 18:31:52 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5E968215670B;
+ Wed, 20 Sep 2023 18:31:50 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 4A41521E690E; Wed, 20 Sep 2023 20:31:49 +0200 (CEST)
+ id 3BBC921E6905; Wed, 20 Sep 2023 20:31:49 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fbee1a60-57e3-11ee-8789-cb3800f73035
+X-Inumbo-ID: fa143f16-57e3-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1695234718;
+	s=mimecast20190719; t=1695234715;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=4d8o9jVLRrQAC/C156ADyMbZ06/G9fhC8Of9ewcXqM0=;
-	b=ZzpS1voN6BMlmA59e3w/qgCeAJucXXblcAJrlVOpu4y6grOPlr8NNW9lgqq0IaHDjim0Gk
-	sABq3ZNzcWiW/LO2+caenfahGCFeCbjEzvpFWH1uNsxhqHLgdy8mkW99YaPNp/yyLD8VGB
-	FX+TJPxex0ve/vvktKcA5lgbHuovSME=
-X-MC-Unique: hrEPizR0PjKkhEZ8z8iLZA-1
+	bh=eRiwxpdA+MVBek+OK2IN4IV4BhmaUPfwd9cfv4fQ8qc=;
+	b=YDOHGUngq6hM8w2uBMvMCx3GTD0da+upE+M2LQDA4OTEB2/xKBxaUuKUAE5rXAEz+X3qOG
+	iyOHyoW9arlMCG18vwBW4jdzhhO6sJC+ayV1i9YTOAPnoIEV8UFWB6w3Y8Nttj6x1zprS+
+	AwAO0UPa13je8lft7HB0s+RCCAuVrls=
+X-MC-Unique: 9l76hlgDNpCT7j8zv7yFEw-1
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: kwolf@redhat.com,
@@ -94,246 +94,175 @@ Cc: kwolf@redhat.com,
 	xen-devel@lists.xenproject.org,
 	alex.bennee@linaro.org,
 	peter.maydell@linaro.org
-Subject: [PATCH v2 7/7] qobject atomics osdep: Make a few macros more hygienic
-Date: Wed, 20 Sep 2023 20:31:49 +0200
-Message-ID: <20230920183149.1105333-8-armbru@redhat.com>
+Subject: [PATCH v2 3/7] ui: Clean up local variable shadowing
+Date: Wed, 20 Sep 2023 20:31:45 +0200
+Message-ID: <20230920183149.1105333-4-armbru@redhat.com>
 In-Reply-To: <20230920183149.1105333-1-armbru@redhat.com>
 References: <20230920183149.1105333-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
 
-Variables declared in macros can shadow other variables.  Much of the
-time, this is harmless, e.g.:
-
-    #define _FDT(exp)                                                  \
-        do {                                                           \
-            int ret = (exp);                                           \
-            if (ret < 0) {                                             \
-                error_report("error creating device tree: %s: %s",   \
-                        #exp, fdt_strerror(ret));                      \
-                exit(1);                                               \
-            }                                                          \
-        } while (0)
-
-Harmless shadowing in h_client_architecture_support():
-
-        target_ulong ret;
-
-        [...]
-
-        ret = do_client_architecture_support(cpu, spapr, vec, fdt_bufsize);
-        if (ret == H_SUCCESS) {
-            _FDT((fdt_pack(spapr->fdt_blob)));
-            [...]
-        }
-
-        return ret;
-
-However, we can get in trouble when the shadowed variable is used in a
-macro argument:
-
-    #define QOBJECT(obj) ({                                 \
-        typeof(obj) o = (obj);                              \
-        o ? container_of(&(o)->base, QObject, base) : NULL; \
-     })
-
-QOBJECT(o) expands into
-
-    ({
---->    typeof(o) o = (o);
-        o ? container_of(&(o)->base, QObject, base) : NULL;
-    })
-
-Unintended variable name capture at --->.  We'd be saved by
--Winit-self.  But I could certainly construct more elaborate death
-traps that don't trigger it.
-
-To reduce the risk of trapping ourselves, we use variable names in
-macros that no sane person would use elsewhere.  Here's our actual
-definition of QOBJECT():
-
-    #define QOBJECT(obj) ({                                         \
-        typeof(obj) _obj = (obj);                                   \
-        _obj ? container_of(&(_obj)->base, QObject, base) : NULL;   \
-    })
-
-Works well enough until we nest macro calls.  For instance, with
-
-    #define qobject_ref(obj) ({                     \
-        typeof(obj) _obj = (obj);                   \
-        qobject_ref_impl(QOBJECT(_obj));            \
-        _obj;                                       \
-    })
-
-the expression qobject_ref(obj) expands into
-
-    ({
-        typeof(obj) _obj = (obj);
-        qobject_ref_impl(
-            ({
---->            typeof(_obj) _obj = (_obj);
-                _obj ? container_of(&(_obj)->base, QObject, base) : NULL;
-            }));
-        _obj;
-    })
-
-Unintended variable name capture at --->.
-
-The only reliable way to prevent unintended variable name capture is
--Wshadow.
-
-One blocker for enabling it is shadowing hiding in function-like
-macros like
-
-     qdict_put(dict, "name", qobject_ref(...))
-
-qdict_put() wraps its last argument in QOBJECT(), and the last
-argument here contains another QOBJECT().
-
-Use dark preprocessor sorcery to make the macros that give us this
-problem use different variable names on every call.
+Local variables shadowing other local variables or parameters make the
+code needlessly hard to understand.  Tracked down with -Wshadow=local.
+Clean up: delete inner declarations when they are actually redundant,
+else rename variables.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Eric Blake <eblake@redhat.com>
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 ---
- include/qapi/qmp/qobject.h | 11 +++++++++--
- include/qemu/atomic.h      | 17 ++++++++++++-----
- include/qemu/compiler.h    |  3 +++
- include/qemu/osdep.h       | 31 +++++++++++++++++++++++--------
- 4 files changed, 47 insertions(+), 15 deletions(-)
+ ui/gtk.c              | 14 +++++++-------
+ ui/spice-display.c    |  9 +++++----
+ ui/vnc-palette.c      |  2 --
+ ui/vnc.c              | 12 ++++++------
+ ui/vnc-enc-zrle.c.inc |  9 ++++-----
+ 5 files changed, 22 insertions(+), 24 deletions(-)
 
-diff --git a/include/qapi/qmp/qobject.h b/include/qapi/qmp/qobject.h
-index 9003b71fd3..d36cc97805 100644
---- a/include/qapi/qmp/qobject.h
-+++ b/include/qapi/qmp/qobject.h
-@@ -45,10 +45,17 @@ struct QObject {
-     struct QObjectBase_ base;
- };
+diff --git a/ui/gtk.c b/ui/gtk.c
+index e09f97a86b..3373427c9b 100644
+--- a/ui/gtk.c
++++ b/ui/gtk.c
+@@ -930,8 +930,8 @@ static gboolean gd_motion_event(GtkWidget *widget, GdkEventMotion *motion,
+         GdkMonitor *monitor = gdk_display_get_monitor_at_window(dpy, win);
+         GdkRectangle geometry;
  
--#define QOBJECT(obj) ({                                         \
-+/*
-+ * Preprocessory sorcery ahead: use a different identifier for the
-+ * local variable in each expansion, so we can nest macro calls
-+ * without shadowing variables.
-+ */
-+#define QOBJECT_INTERNAL(obj, _obj) ({                          \
-     typeof(obj) _obj = (obj);                                   \
--    _obj ? container_of(&(_obj)->base, QObject, base) : NULL;   \
-+    _obj                                                        \
-+        ? container_of(&(_obj)->base, QObject, base) : NULL;    \
- })
-+#define QOBJECT(obj) QOBJECT_INTERNAL((obj), MAKE_IDENTFIER(_obj))
+-        int x = (int)motion->x_root;
+-        int y = (int)motion->y_root;
++        int xr = (int)motion->x_root;
++        int yr = (int)motion->y_root;
  
- /* Required for qobject_to() */
- #define QTYPE_CAST_TO_QNull     QTYPE_QNULL
-diff --git a/include/qemu/atomic.h b/include/qemu/atomic.h
-index d95612f7a0..d4cbd01909 100644
---- a/include/qemu/atomic.h
-+++ b/include/qemu/atomic.h
-@@ -157,13 +157,20 @@
-     smp_read_barrier_depends();
- #endif
+         gdk_monitor_get_geometry(monitor, &geometry);
  
--#define qatomic_rcu_read(ptr)                          \
--    ({                                                 \
-+/*
-+ * Preprocessory sorcery ahead: use a different identifier for the
-+ * local variable in each expansion, so we can nest macro calls
-+ * without shadowing variables.
-+ */
-+#define qatomic_rcu_read_internal(ptr, _val)            \
-+    ({                                                  \
-     qemu_build_assert(sizeof(*ptr) <= ATOMIC_REG_SIZE); \
--    typeof_strip_qual(*ptr) _val;                      \
--    qatomic_rcu_read__nocheck(ptr, &_val);             \
--    _val;                                              \
-+    typeof_strip_qual(*ptr) _val;                       \
-+    qatomic_rcu_read__nocheck(ptr, &_val);              \
-+    _val;                                               \
-     })
-+#define qatomic_rcu_read(ptr) \
-+    qatomic_rcu_read_internal((ptr), MAKE_IDENTFIER(_val))
+@@ -942,13 +942,13 @@ static gboolean gd_motion_event(GtkWidget *widget, GdkEventMotion *motion,
+          * may still be only half way across the screen. Without
+          * this warp, the server pointer would thus appear to hit
+          * an invisible wall */
+-        if (x <= geometry.x || x - geometry.x >= geometry.width - 1 ||
+-            y <= geometry.y || y - geometry.y >= geometry.height - 1) {
++        if (xr <= geometry.x || xr - geometry.x >= geometry.width - 1 ||
++            yr <= geometry.y || yr - geometry.y >= geometry.height - 1) {
+             GdkDevice *dev = gdk_event_get_device((GdkEvent *)motion);
+-            x = geometry.x + geometry.width / 2;
+-            y = geometry.y + geometry.height / 2;
++            xr = geometry.x + geometry.width / 2;
++            yr = geometry.y + geometry.height / 2;
  
- #define qatomic_rcu_set(ptr, i) do {                   \
-     qemu_build_assert(sizeof(*ptr) <= ATOMIC_REG_SIZE); \
-diff --git a/include/qemu/compiler.h b/include/qemu/compiler.h
-index a309f90c76..03236d830c 100644
---- a/include/qemu/compiler.h
-+++ b/include/qemu/compiler.h
-@@ -37,6 +37,9 @@
- #define tostring(s) #s
- #endif
+-            gdk_device_warp(dev, screen, x, y);
++            gdk_device_warp(dev, screen, xr, yr);
+             s->last_set = FALSE;
+             return FALSE;
+         }
+diff --git a/ui/spice-display.c b/ui/spice-display.c
+index 5cc47bd668..6eb98a5a5c 100644
+--- a/ui/spice-display.c
++++ b/ui/spice-display.c
+@@ -1081,15 +1081,16 @@ static void qemu_spice_gl_update(DisplayChangeListener *dcl,
+     }
  
-+/* Expands into an identifier stemN, where N is another number each time */
-+#define MAKE_IDENTFIER(stem) glue(stem, __COUNTER__)
+     if (render_cursor) {
+-        int x, y;
++        int ptr_x, ptr_y;
 +
- #ifndef likely
- #define likely(x)   __builtin_expect(!!(x), 1)
- #define unlikely(x)   __builtin_expect(!!(x), 0)
-diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
-index 2897720fac..0d39bb1876 100644
---- a/include/qemu/osdep.h
-+++ b/include/qemu/osdep.h
-@@ -383,19 +383,28 @@ void QEMU_ERROR("code path is reachable")
-  * determined by the pre-processor instead of the compiler, you'll
-  * have to open-code it.  Sadly, Coverity is severely confused by the
-  * constant variants, so we have to dumb things down there.
-+ *
-+ * Preprocessory sorcery ahead: use different identifiers for the
-+ * local variables in each expansion, so we can nest macro calls
-+ * without shadowing variables.
+         qemu_mutex_lock(&ssd->lock);
+-        x = ssd->ptr_x;
+-        y = ssd->ptr_y;
++        ptr_x = ssd->ptr_x;
++        ptr_y = ssd->ptr_y;
+         qemu_mutex_unlock(&ssd->lock);
+         egl_texture_blit(ssd->gls, &ssd->blit_fb, &ssd->guest_fb,
+                          !y_0_top);
+         egl_texture_blend(ssd->gls, &ssd->blit_fb, &ssd->cursor_fb,
+-                          !y_0_top, x, y, 1.0, 1.0);
++                          !y_0_top, ptr_x, ptr_y, 1.0, 1.0);
+         glFlush();
+     }
+ 
+diff --git a/ui/vnc-palette.c b/ui/vnc-palette.c
+index dc7c0ba997..4e88c412f0 100644
+--- a/ui/vnc-palette.c
++++ b/ui/vnc-palette.c
+@@ -86,8 +86,6 @@ int palette_put(VncPalette *palette, uint32_t color)
+         return 0;
+     }
+     if (!entry) {
+-        VncPaletteEntry *entry;
+-
+         entry = &palette->pool[palette->size];
+         entry->color = color;
+         entry->idx = idx;
+diff --git a/ui/vnc.c b/ui/vnc.c
+index 6fd86996a5..ecb75ff8c8 100644
+--- a/ui/vnc.c
++++ b/ui/vnc.c
+@@ -1584,15 +1584,15 @@ static void vnc_jobs_bh(void *opaque)
   */
--#undef MIN
--#define MIN(a, b)                                       \
-+#define MIN_INTERNAL(a, b, _a, _b)                      \
-     ({                                                  \
-         typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
-         _a < _b ? _a : _b;                              \
-     })
--#undef MAX
--#define MAX(a, b)                                       \
-+#undef MIN
-+#define MIN(a, b) \
-+    MIN_INTERNAL((a), (b), MAKE_IDENTFIER(_a), MAKE_IDENTFIER(_b))
+ static int vnc_client_read(VncState *vs)
+ {
+-    size_t ret;
++    size_t sz;
+ 
+ #ifdef CONFIG_VNC_SASL
+     if (vs->sasl.conn && vs->sasl.runSSF)
+-        ret = vnc_client_read_sasl(vs);
++        sz = vnc_client_read_sasl(vs);
+     else
+ #endif /* CONFIG_VNC_SASL */
+-        ret = vnc_client_read_plain(vs);
+-    if (!ret) {
++        sz = vnc_client_read_plain(vs);
++    if (!sz) {
+         if (vs->disconnecting) {
+             vnc_disconnect_finish(vs);
+             return -1;
+@@ -3118,8 +3118,8 @@ static int vnc_refresh_server_surface(VncDisplay *vd)
+     cmp_bytes = MIN(VNC_DIRTY_PIXELS_PER_BIT * VNC_SERVER_FB_BYTES,
+                     server_stride);
+     if (vd->guest.format != VNC_SERVER_FB_FORMAT) {
+-        int width = pixman_image_get_width(vd->server);
+-        tmpbuf = qemu_pixman_linebuf_create(VNC_SERVER_FB_FORMAT, width);
++        int w = pixman_image_get_width(vd->server);
++        tmpbuf = qemu_pixman_linebuf_create(VNC_SERVER_FB_FORMAT, w);
+     } else {
+         int guest_bpp =
+             PIXMAN_FORMAT_BPP(pixman_image_get_format(vd->guest.fb));
+diff --git a/ui/vnc-enc-zrle.c.inc b/ui/vnc-enc-zrle.c.inc
+index a8ca37d05e..2ef7501d52 100644
+--- a/ui/vnc-enc-zrle.c.inc
++++ b/ui/vnc-enc-zrle.c.inc
+@@ -153,11 +153,12 @@ static void ZRLE_ENCODE_TILE(VncState *vs, ZRLE_PIXEL *data, int w, int h,
+     }
+ 
+     if (use_rle) {
+-        ZRLE_PIXEL *ptr = data;
+-        ZRLE_PIXEL *end = ptr + w * h;
+         ZRLE_PIXEL *run_start;
+         ZRLE_PIXEL pix;
+ 
++        ptr = data;
++        end = ptr + w * h;
 +
-+#define MAX_INTERNAL(a, b, _a, _b)                      \
-     ({                                                  \
-         typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
-         _a > _b ? _a : _b;                              \
-     })
-+#undef MAX
-+#define MAX(a, b) \
-+    MAX_INTERNAL((a), (b), MAKE_IDENTFIER(_a), MAKE_IDENTFIER(_b))
+         while (ptr < end) {
+             int len;
+             int index = 0;
+@@ -198,7 +199,7 @@ static void ZRLE_ENCODE_TILE(VncState *vs, ZRLE_PIXEL *data, int w, int h,
+         }
+     } else if (use_palette) { /* no RLE */
+         int bppp;
+-        ZRLE_PIXEL *ptr = data;
++        ptr = data;
  
- #ifdef __COVERITY__
- # define MIN_CONST(a, b) ((a) < (b) ? (a) : (b))
-@@ -416,14 +425,20 @@ void QEMU_ERROR("code path is reachable")
- /*
-  * Minimum function that returns zero only if both values are zero.
-  * Intended for use with unsigned values only.
-+ *
-+ * Preprocessory sorcery ahead: use different identifiers for the
-+ * local variables in each expansion, so we can nest macro calls
-+ * without shadowing variables.
-  */
--#ifndef MIN_NON_ZERO
--#define MIN_NON_ZERO(a, b)                              \
-+#define MIN_NON_ZERO_INTERNAL(a, b, _a, _b)             \
-     ({                                                  \
-         typeof(1 ? (a) : (b)) _a = (a), _b = (b);       \
--        _a == 0 ? _b : (_b == 0 || _b > _a) ? _a : _b;  \
-+        _a == 0 ? _b                                    \
-+        : (_b == 0 || _b > _a) ? _a                     \
-+        : _b;                                           \
-     })
--#endif
-+#define MIN_NON_ZERO(a, b) \
-+    MIN_NON_ZERO_INTERNAL((a), (b), MAKE_IDENTFIER(_a), MAKE_IDENTFIER(_b))
+         /* packed pixels */
  
- /*
-  * Round number down to multiple. Safe when m is not a power of 2 (see
+@@ -241,8 +242,6 @@ static void ZRLE_ENCODE_TILE(VncState *vs, ZRLE_PIXEL *data, int w, int h,
+ #endif
+         {
+ #ifdef ZRLE_COMPACT_PIXEL
+-            ZRLE_PIXEL *ptr;
+-
+             for (ptr = data; ptr < data + w * h; ptr++) {
+                 ZRLE_WRITE_PIXEL(vs, *ptr);
+             }
 -- 
 2.41.0
 
