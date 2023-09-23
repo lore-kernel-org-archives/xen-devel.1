@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 581D8CE7A89
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:18:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607198.945593 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1007ECE7A88
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:18:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607194.945566 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjziA-00031s-P8; Sat, 23 Sep 2023 10:18:06 +0000
+	id 1qjzi8-0002Ia-JO; Sat, 23 Sep 2023 10:18:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607198.945593; Sat, 23 Sep 2023 10:18:06 +0000
+Received: by outflank-mailman (output) from mailman id 607194.945566; Sat, 23 Sep 2023 10:18:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjziA-000317-JH; Sat, 23 Sep 2023 10:18:06 +0000
-Received: by outflank-mailman (input) for mailman id 607198;
- Sat, 23 Sep 2023 10:18:05 +0000
+	id 1qjzi8-0002IN-Ep; Sat, 23 Sep 2023 10:18:04 +0000
+Received: by outflank-mailman (input) for mailman id 607194;
+ Sat, 23 Sep 2023 10:18:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzcH-0000Pn-6j
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:01 +0000
+ id 1qjzcX-0000Pn-9D
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:17 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9e874eda-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:11:54 +0200 (CEST)
+ id a4181977-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:12:03 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:44 -0700
+ 23 Sep 2023 03:11:52 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:44 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:51 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e874eda-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: a4181977-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463914; x=1726999914;
+  t=1695463923; x=1726999923;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=SbR2wCTkousO/IPIjdDUqT7zLHmXpw3IGG9LN/Z2MXU=;
-  b=gq9qLy8bGuL9FwiBanYKu0uClUnyDXCiQ3y5bvYBHZSAdhKu7JtWxPXO
-   sockky4RA8e572y3rtJ5CelI2nldddOUoOXg8jmpk6frXNUyODsvQJIiM
-   ZF5T5RjX2zSrbw9cj872O2T3Y9u+4LbvznPiRALzL0X3BPAkeunSDy5o9
-   Fp2gyc+rY5Nq4MmeMRK6l/vgcL6Nz14ALYjoww+O+9mFU13x1eV3lMLa6
-   j5+d2TpoRFw3E+iAbcaQruzmGsmI3kUom+sCdbIdS7MBpsZtGretWkbu4
-   cRC1XjAgfjpWRiG+4NSZQt54LmIjLFijkLdMZh4SRlmrdSOE2I+E4Q2OH
+  bh=/UldAmuJEnsflYS2+cyLAQ4E+J1yAKX8pToUnF0eneI=;
+  b=F35hjlCODUs/qp7bTxalUqp1QBwojhkEnhIPxZQoVcz23mcfcQ6XNZyI
+   fvNrNJshi0I5MaEkcvZLSIbaHaFFQRHAz+sT/TmAt7fpyltmTQ2nuWJz4
+   gmkz/z6ROC88JiLlQeaKWoH74UOr3nbmloiAQDESHm0cfQSMin99rUSNg
+   Lqio8mQDF/qPrBwE5EP+rid2dZVrXT+PdSLMZJ6e8oYBpYk7rVRgwyI1d
+   d8eHdxhgyhMVwYltV4ETJ+oBtvXDKoZWi9Y1BNVj2jQDoDZcMnBXxzxNR
+   MiMIMWmL6sSom+oGPqFnlepEzKRx7vuGBPxO9HvoWSrJPXN6Jn2Ap33U8
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492278"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492462"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492278"
+   d="scan'208";a="447492462"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388157"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388214"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388157"
+   d="scan'208";a="813388214"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,105 +87,83 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 17/37] x86/fred: Add a new header file for FRED definitions
-Date: Sat, 23 Sep 2023 02:41:52 -0700
-Message-Id: <20230923094212.26520-18-xin3.li@intel.com>
+Subject: [PATCH v11 32/37] x86/entry/calling: Allow PUSH_AND_CLEAR_REGS being used beyond actual entry code
+Date: Sat, 23 Sep 2023 02:42:07 -0700
+Message-Id: <20230923094212.26520-33-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+From: "Peter Zijlstra (Intel)" <peterz@infradead.org>
 
-Add a header file for FRED prototypes and definitions.
+PUSH_AND_CLEAR_REGS could be used besides actual entry code; in that case
+%rbp shouldn't be cleared (otherwise the frame pointer is destroyed) and
+UNWIND_HINT shouldn't be added.
 
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/entry/calling.h | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
-Changes since v6:
-* Replace pt_regs csx flags prefix FRED_CSL_ with FRED_CSX_.
----
- arch/x86/include/asm/fred.h | 68 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 68 insertions(+)
- create mode 100644 arch/x86/include/asm/fred.h
-
-diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-new file mode 100644
-index 000000000000..f514fdb5a39f
---- /dev/null
-+++ b/arch/x86/include/asm/fred.h
-@@ -0,0 +1,68 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Macros for Flexible Return and Event Delivery (FRED)
-+ */
+diff --git a/arch/x86/entry/calling.h b/arch/x86/entry/calling.h
+index f6907627172b..eb57c023d5df 100644
+--- a/arch/x86/entry/calling.h
++++ b/arch/x86/entry/calling.h
+@@ -65,7 +65,7 @@ For 32-bit we have the following conventions - kernel is built with
+  * for assembly code:
+  */
+ 
+-.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
++.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 unwind_hint=1
+ 	.if \save_ret
+ 	pushq	%rsi		/* pt_regs->si */
+ 	movq	8(%rsp), %rsi	/* temporarily store the return address in %rsi */
+@@ -87,14 +87,17 @@ For 32-bit we have the following conventions - kernel is built with
+ 	pushq	%r13		/* pt_regs->r13 */
+ 	pushq	%r14		/* pt_regs->r14 */
+ 	pushq	%r15		/* pt_regs->r15 */
 +
-+#ifndef ASM_X86_FRED_H
-+#define ASM_X86_FRED_H
-+
-+#include <linux/const.h>
-+
-+#include <asm/asm.h>
-+
-+/*
-+ * FRED event return instruction opcodes for ERET{S,U}; supported in
-+ * binutils >= 2.41.
-+ */
-+#define ERETS			_ASM_BYTES(0xf2,0x0f,0x01,0xca)
-+#define ERETU			_ASM_BYTES(0xf3,0x0f,0x01,0xca)
-+
-+/*
-+ * RSP is aligned to a 64-byte boundary before used to push a new stack frame
-+ */
-+#define FRED_STACK_FRAME_RSP_MASK	_AT(unsigned long, (~0x3f))
-+
-+/*
-+ * Used for the return address for call emulation during code patching,
-+ * and measured in 64-byte cache lines.
-+ */
-+#define FRED_CONFIG_REDZONE_AMOUNT	1
-+#define FRED_CONFIG_REDZONE		(_AT(unsigned long, FRED_CONFIG_REDZONE_AMOUNT) << 6)
-+#define FRED_CONFIG_INT_STKLVL(l)	(_AT(unsigned long, l) << 9)
-+#define FRED_CONFIG_ENTRYPOINT(p)	_AT(unsigned long, (p))
-+
-+#ifndef __ASSEMBLY__
-+
-+#ifdef CONFIG_X86_FRED
-+#include <linux/kernel.h>
-+
-+#include <asm/ptrace.h>
-+
-+struct fred_info {
-+	/* Event data: CR2, DR6, ... */
-+	unsigned long edata;
-+	unsigned long resv;
-+};
-+
-+/* Full format of the FRED stack frame */
-+struct fred_frame {
-+	struct pt_regs   regs;
-+	struct fred_info info;
-+};
-+
-+static __always_inline struct fred_info *fred_info(struct pt_regs *regs)
-+{
-+	return &container_of(regs, struct fred_frame, regs)->info;
-+}
-+
-+static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
-+{
-+	return fred_info(regs)->edata;
-+}
-+
-+#else /* CONFIG_X86_FRED */
-+static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
-+#endif /* CONFIG_X86_FRED */
-+#endif /* !__ASSEMBLY__ */
-+
-+#endif /* ASM_X86_FRED_H */
++	.if \unwind_hint
+ 	UNWIND_HINT_REGS
++	.endif
+ 
+ 	.if \save_ret
+ 	pushq	%rsi		/* return address on top of stack */
+ 	.endif
+ .endm
+ 
+-.macro CLEAR_REGS
++.macro CLEAR_REGS clear_bp=1
+ 	/*
+ 	 * Sanitize registers of values that a speculation attack might
+ 	 * otherwise want to exploit. The lower registers are likely clobbered
+@@ -109,7 +112,9 @@ For 32-bit we have the following conventions - kernel is built with
+ 	xorl	%r10d, %r10d	/* nospec r10 */
+ 	xorl	%r11d, %r11d	/* nospec r11 */
+ 	xorl	%ebx,  %ebx	/* nospec rbx */
++	.if \clear_bp
+ 	xorl	%ebp,  %ebp	/* nospec rbp */
++	.endif
+ 	xorl	%r12d, %r12d	/* nospec r12 */
+ 	xorl	%r13d, %r13d	/* nospec r13 */
+ 	xorl	%r14d, %r14d	/* nospec r14 */
+@@ -117,9 +122,9 @@ For 32-bit we have the following conventions - kernel is built with
+ 
+ .endm
+ 
+-.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
+-	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret
+-	CLEAR_REGS
++.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 clear_bp=1 unwind_hint=1
++	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret unwind_hint=\unwind_hint
++	CLEAR_REGS clear_bp=\clear_bp
+ .endm
+ 
+ .macro POP_REGS pop_rdi=1
 -- 
 2.34.1
 
