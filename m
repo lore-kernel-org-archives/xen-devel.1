@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 919D0CE7A88
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:17:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607165.945496 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23CBECE7A89
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:17:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607173.945510 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzgy-0004kp-07; Sat, 23 Sep 2023 10:16:52 +0000
+	id 1qjzh2-0005a1-Q8; Sat, 23 Sep 2023 10:16:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607165.945496; Sat, 23 Sep 2023 10:16:51 +0000
+Received: by outflank-mailman (output) from mailman id 607173.945510; Sat, 23 Sep 2023 10:16:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzgx-0004jD-Qk; Sat, 23 Sep 2023 10:16:51 +0000
-Received: by outflank-mailman (input) for mailman id 607165;
- Sat, 23 Sep 2023 10:16:50 +0000
+	id 1qjzh2-0005ZR-Jw; Sat, 23 Sep 2023 10:16:56 +0000
+Received: by outflank-mailman (input) for mailman id 607173;
+ Sat, 23 Sep 2023 10:16:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzca-0000Pn-9S
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:20 +0000
+ id 1qjzcF-0000Pn-6N
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:11:59 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a47542a8-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:12:03 +0200 (CEST)
+ id 9e3f9737-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:53 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:52 -0700
+ 23 Sep 2023 03:11:43 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:52 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:43 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a47542a8-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9e3f9737-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463923; x=1726999923;
+  t=1695463913; x=1726999913;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=VloAwH9oCchhYDbjf1WOu4unTMxJzsUhKvR9qovigv0=;
-  b=hIzNn8P7wlgk6aJx9Qc06O5dytqVmBAVDBvSRp9tG35GSt33vEcWmZ5G
-   fwYSVx5L2ffizcX5kK3IAkjBPXb780a0RzlvUEdNuwdByb7arnqz9ggF/
-   6A0dDM64o+LmJPlgSHNE3VVVBfv4knGjj3bDPUrUvJVrihFEzWPQkRula
-   qZIGVg40RN4akgKqJBXbcgaVNEQifenzLEcOPUNLuF7ORQKj/+4dHj38z
-   0gWsRV2pES12newpov61z2zRjlKqixjLffX0Zzpyl4T03LWuJx42MlLcu
-   j07yZ1BKtHWmVoZxw47QLIjwQEAh+hrEDgsMUiMmljhbJGEuDNdHQFfMt
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492474"
+  bh=yFOHuHE47yU8Pv3f7vyK1KueQKaw2/ZJmrjuiwmDzLE=;
+  b=Fcs75br/pFd4rF1kHIKDEmjvc6JGW90s21ZBC6Q3QkM0KzIYiCJXxdhL
+   bs0jORKTQGqiLBr3dQv7zyfeQ37D1U0OM3ISefdf4HWz+JBGOdYLZLWEL
+   7EuZdEqqYk/TmplhU6fQ7dlNUjj7MCnLBCG0E/gkgXGZvltAeFv9VNSOG
+   QE7vnX+kR7PdriJH8qWc2xrSFjYNewiDd38YMVIfo7VtN3mdcjhrlkrP+
+   25cqLzdEQMcEojsj/0EIdt8i+OfVZUayxE3aBRo5ZNiFLgLd4jI7c1u6W
+   SK9d2X8CJIfwSkP0bx+4u+An+LlARKkB/JRVPNiRBhUn5RkD4laW00sRh
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492253"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492474"
+   d="scan'208";a="447492253"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388218"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388151"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388218"
+   d="scan'208";a="813388151"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,214 +87,138 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 33/37] x86/entry: Add fred_entry_from_kvm() for VMX to handle IRQ/NMI
-Date: Sat, 23 Sep 2023 02:42:08 -0700
-Message-Id: <20230923094212.26520-34-xin3.li@intel.com>
+Subject: [PATCH v11 15/37] x86/ptrace: Cleanup the definition of the pt_regs structure
+Date: Sat, 23 Sep 2023 02:41:50 -0700
+Message-Id: <20230923094212.26520-16-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In IRQ/NMI induced VM exits, KVM VMX needs to execute the respective
-handlers, which requires the software to create a FRED stack frame,
-and use it to invoke the handlers. Add fred_irq_entry_from_kvm() for
-this job.
+struct pt_regs is hard to read because the member or section related
+comments are not aligned with the members.
 
-Export fred_entry_from_kvm() because VMX can be compiled as a module.
+The 'cs' and 'ss' members of pt_regs are type of 'unsigned long' while
+in reality they are only 16-bit wide. This works so far as the
+remaining space is unused, but FRED will use the remaining bits for
+other purposes.
 
-Suggested-by: Sean Christopherson <seanjc@google.com>
+To prepare for FRED:
+
+  - Cleanup the formatting
+  - Convert 'cs' and 'ss' to u16 and embed them into an union
+    with a u64
+  - Fixup the related printk() format strings
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/entry/vsyscall/vsyscall_64.c |  2 +-
+ arch/x86/include/asm/ptrace.h         | 44 +++++++++++++++++++--------
+ arch/x86/kernel/process_64.c          |  2 +-
+ 3 files changed, 33 insertions(+), 15 deletions(-)
 
-Changes since v10:
-* Better explain the reason why no need to check current stack level
-  (Paolo Bonzini).
-
-Changes since v9:
-* Shove the whole thing into arch/x86/entry/entry_64_fred.S for invoking
-  external_interrupt() and fred_exc_nmi() (Sean Christopherson).
-* Correct and improve a few comments (Sean Christopherson).
-* Merge the two IRQ/NMI asm entries into one as it's fine to invoke
-  noinstr code from regular code (Thomas Gleixner).
-* Setup the long mode and NMI flags in the augmented SS field of FRED
-  stack frame in C instead of asm (Thomas Gleixner).
-* Add UNWIND_HINT_{SAVE,RESTORE} to get rid of the warning: "objtool:
-  asm_fred_entry_from_kvm+0x0: unreachable instruction" (Peter Zijlstra).
-
-Changes since v8:
-* Add a new macro VMX_DO_FRED_EVENT_IRQOFF for FRED instead of
-  refactoring VMX_DO_EVENT_IRQOFF (Sean Christopherson).
-* Do NOT use a trampoline, just LEA+PUSH the return RIP, PUSH the error
-  code, and jump to the FRED kernel entry point for NMI or call
-  external_interrupt() for IRQs (Sean Christopherson).
-* Call external_interrupt() only when FRED is enabled, and convert the
-  non-FRED handling to external_interrupt() after FRED lands (Sean
-  Christopherson).
----
- arch/x86/entry/entry_64_fred.S | 76 ++++++++++++++++++++++++++++++++++
- arch/x86/entry/entry_fred.c    | 14 +++++++
- arch/x86/include/asm/fred.h    | 18 ++++++++
- 3 files changed, 108 insertions(+)
-
-diff --git a/arch/x86/entry/entry_64_fred.S b/arch/x86/entry/entry_64_fred.S
-index d1c2fc4af8ae..9917b4ea1543 100644
---- a/arch/x86/entry/entry_64_fred.S
-+++ b/arch/x86/entry/entry_64_fred.S
-@@ -4,7 +4,9 @@
-  */
+diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
+index e0ca8120aea8..a3c0df11d0e6 100644
+--- a/arch/x86/entry/vsyscall/vsyscall_64.c
++++ b/arch/x86/entry/vsyscall/vsyscall_64.c
+@@ -76,7 +76,7 @@ static void warn_bad_vsyscall(const char *level, struct pt_regs *regs,
+ 	if (!show_unhandled_signals)
+ 		return;
  
- #include <asm/asm.h>
-+#include <asm/export.h>
- #include <asm/fred.h>
-+#include <asm/segment.h>
+-	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%lx sp:%lx ax:%lx si:%lx di:%lx\n",
++	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%x sp:%lx ax:%lx si:%lx di:%lx\n",
+ 			   level, current->comm, task_pid_nr(current),
+ 			   message, regs->ip, regs->cs,
+ 			   regs->sp, regs->ax, regs->si, regs->di);
+diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
+index f4db78b09c8f..f08ea073edd6 100644
+--- a/arch/x86/include/asm/ptrace.h
++++ b/arch/x86/include/asm/ptrace.h
+@@ -57,17 +57,19 @@ struct pt_regs {
+ #else /* __i386__ */
  
- #include "calling.h"
- 
-@@ -54,3 +56,77 @@ SYM_CODE_START_NOALIGN(asm_fred_entrypoint_kernel)
- 	FRED_EXIT
- 	ERETS
- SYM_CODE_END(asm_fred_entrypoint_kernel)
+ struct pt_regs {
+-/*
+- * C ABI says these regs are callee-preserved. They aren't saved on kernel entry
+- * unless syscall needs a complete, fully filled "struct pt_regs".
+- */
++	/*
++	 * C ABI says these regs are callee-preserved. They aren't saved on
++	 * kernel entry unless syscall needs a complete, fully filled
++	 * "struct pt_regs".
++	 */
+ 	unsigned long r15;
+ 	unsigned long r14;
+ 	unsigned long r13;
+ 	unsigned long r12;
+ 	unsigned long bp;
+ 	unsigned long bx;
+-/* These regs are callee-clobbered. Always saved on kernel entry. */
 +
-+#if IS_ENABLED(CONFIG_KVM_INTEL)
-+SYM_FUNC_START(asm_fred_entry_from_kvm)
-+	push %rbp
-+	mov %rsp, %rbp
-+
-+	UNWIND_HINT_SAVE
++	/* These regs are callee-clobbered. Always saved on kernel entry. */
+ 	unsigned long r11;
+ 	unsigned long r10;
+ 	unsigned long r9;
+@@ -77,18 +79,34 @@ struct pt_regs {
+ 	unsigned long dx;
+ 	unsigned long si;
+ 	unsigned long di;
+-/*
+- * On syscall entry, this is syscall#. On CPU exception, this is error code.
+- * On hw interrupt, it's IRQ number:
+- */
 +
 +	/*
-+	 * Both IRQ and NMI from VMX can be handled on current task stack
-+	 * because there is no need to protect from reentrancy and the call
-+	 * stack leading to this helper is effectively constant and shallow
-+	 * (relatively speaking). Do the same when FRED is active, i.e., no
-+	 * need to check current stack level for a stack switch.
-+	 *
-+	 * Emulate the FRED-defined redzone and stack alignment.
++	 * orig_ax is used on entry for:
++	 * - the syscall number (syscall, sysenter, int80)
++	 * - error_code stored by the CPU on traps and exceptions
++	 * - the interrupt number for device interrupts
 +	 */
-+	sub $(FRED_CONFIG_REDZONE_AMOUNT << 6), %rsp
-+	and $FRED_STACK_FRAME_RSP_MASK, %rsp
+ 	unsigned long orig_ax;
+-/* Return frame for iretq */
 +
-+	/*
-+	 * Start to push a FRED stack frame, which is always 64 bytes:
-+	 *
-+	 * +--------+-----------------+
-+	 * | Bytes  | Usage           |
-+	 * +--------+-----------------+
-+	 * | 63:56  | Reserved        |
-+	 * | 55:48  | Event Data      |
-+	 * | 47:40  | SS + Event Info |
-+	 * | 39:32  | RSP             |
-+	 * | 31:24  | RFLAGS          |
-+	 * | 23:16  | CS + Aux Info   |
-+	 * |  15:8  | RIP             |
-+	 * |   7:0  | Error Code      |
-+	 * +--------+-----------------+
-+	 */
-+	push $0				/* Reserved, must be 0 */
-+	push $0				/* Event data, 0 for IRQ/NMI */
-+	push %rdi			/* fred_ss handed in by the caller */
-+	push %rbp
-+	pushf
-+	mov $__KERNEL_CS, %rax
-+	push %rax
++	/* The IRETQ return frame starts here */
+ 	unsigned long ip;
+-	unsigned long cs;
 +
-+	/*
-+	 * Unlike the IDT event delivery, FRED _always_ pushes an error code
-+	 * after pushing the return RIP, thus the CALL instruction CANNOT be
-+	 * used here to push the return RIP, otherwise there is no chance to
-+	 * push an error code before invoking the IRQ/NMI handler.
-+	 *
-+	 * Use LEA to get the return RIP and push it, then push an error code.
-+	 */
-+	lea 1f(%rip), %rax
-+	push %rax				/* Return RIP */
-+	push $0					/* Error code, 0 for IRQ/NMI */
-+
-+	PUSH_AND_CLEAR_REGS clear_bp=0 unwind_hint=0
-+	movq %rsp, %rdi				/* %rdi -> pt_regs */
-+	call __fred_entry_from_kvm		/* Call the C entry point */
-+	POP_REGS
-+	ERETS
-+1:
-+	/*
-+	 * Objtool doesn't understand what ERETS does, this hint tells it that
-+	 * yes, we'll reach here and with what stack state. A save/restore pair
-+	 * isn't strictly needed, but it's the simplest form.
-+	 */
-+	UNWIND_HINT_RESTORE
-+	pop %rbp
-+	RET
-+
-+SYM_FUNC_END(asm_fred_entry_from_kvm)
-+EXPORT_SYMBOL_GPL(asm_fred_entry_from_kvm);
-+#endif
-diff --git a/arch/x86/entry/entry_fred.c b/arch/x86/entry/entry_fred.c
-index 97e2552d6951..4c0398010e04 100644
---- a/arch/x86/entry/entry_fred.c
-+++ b/arch/x86/entry/entry_fred.c
-@@ -242,3 +242,17 @@ __visible noinstr void fred_entry_from_kernel(struct pt_regs *regs)
- 		return fred_bad_type(regs, error_code);
- 	}
- }
-+
-+#if IS_ENABLED(CONFIG_KVM_INTEL)
-+__visible noinstr void __fred_entry_from_kvm(struct pt_regs *regs)
-+{
-+	switch (regs->fred_ss.type) {
-+	case EVENT_TYPE_EXTINT:
-+		return fred_extint(regs);
-+	case EVENT_TYPE_NMI:
-+		return fred_exc_nmi(regs);
-+	default:
-+		WARN_ON_ONCE(1);
-+	}
-+}
-+#endif
-diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-index 16a64ffecbf8..2fa9f34e5c95 100644
---- a/arch/x86/include/asm/fred.h
-+++ b/arch/x86/include/asm/fred.h
-@@ -9,6 +9,7 @@
- #include <linux/const.h>
- 
- #include <asm/asm.h>
-+#include <asm/trapnr.h>
- 
- /*
-  * FRED event return instruction opcodes for ERET{S,U}; supported in
-@@ -62,12 +63,29 @@ static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
- 
- void asm_fred_entrypoint_user(void);
- void asm_fred_entrypoint_kernel(void);
-+void asm_fred_entry_from_kvm(struct fred_ss);
- 
- __visible void fred_entry_from_user(struct pt_regs *regs);
- __visible void fred_entry_from_kernel(struct pt_regs *regs);
-+__visible void __fred_entry_from_kvm(struct pt_regs *regs);
-+
-+/* Can be called from noinstr code, thus __always_inline */
-+static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int vector)
-+{
-+	struct fred_ss ss = {
-+		.ss     =__KERNEL_DS,
-+		.type   = type,
-+		.vector = vector,
-+		.nmi    = type == EVENT_TYPE_NMI,
-+		.lm     = 1,
++	union {
++		u64	csx;	// The full 64-bit data slot containing CS
++		u16	cs;	// CS selector
 +	};
 +
-+	asm_fred_entry_from_kvm(ss);
-+}
+ 	unsigned long flags;
+ 	unsigned long sp;
+-	unsigned long ss;
+-/* top of stack page */
++
++	union {
++		u64	ssx;	// The full 64-bit data slot containing SS
++		u16	ss;	// SS selector
++	};
++
++	/*
++	 * Top of stack on IDT systems.
++	 */
+ };
  
- #else /* CONFIG_X86_FRED */
- static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
-+static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int vector) { }
- #endif /* CONFIG_X86_FRED */
- #endif /* !__ASSEMBLY__ */
+ #endif /* !__i386__ */
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 33b268747bb7..0f78b58021bb 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -117,7 +117,7 @@ void __show_regs(struct pt_regs *regs, enum show_regs_mode mode,
  
+ 	printk("%sFS:  %016lx(%04x) GS:%016lx(%04x) knlGS:%016lx\n",
+ 	       log_lvl, fs, fsindex, gs, gsindex, shadowgs);
+-	printk("%sCS:  %04lx DS: %04x ES: %04x CR0: %016lx\n",
++	printk("%sCS:  %04x DS: %04x ES: %04x CR0: %016lx\n",
+ 		log_lvl, regs->cs, ds, es, cr0);
+ 	printk("%sCR2: %016lx CR3: %016lx CR4: %016lx\n",
+ 		log_lvl, cr2, cr3, cr4);
 -- 
 2.34.1
 
