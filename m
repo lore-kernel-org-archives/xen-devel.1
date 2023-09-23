@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1CFECE7AA2
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:12:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607091.945331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41CB0CE7AA5
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:12:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607085.945276 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzcA-0002fT-Ng; Sat, 23 Sep 2023 10:11:54 +0000
+	id 1qjzc4-000191-CI; Sat, 23 Sep 2023 10:11:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607091.945331; Sat, 23 Sep 2023 10:11:54 +0000
+Received: by outflank-mailman (output) from mailman id 607085.945276; Sat, 23 Sep 2023 10:11:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzcA-0002dk-J3; Sat, 23 Sep 2023 10:11:54 +0000
-Received: by outflank-mailman (input) for mailman id 607091;
- Sat, 23 Sep 2023 10:11:53 +0000
+	id 1qjzc4-00018m-8l; Sat, 23 Sep 2023 10:11:48 +0000
+Received: by outflank-mailman (input) for mailman id 607085;
+ Sat, 23 Sep 2023 10:11:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzc9-0000Pn-5Y
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:11:53 +0000
+ id 1qjzc3-0000Pn-4s
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:11:47 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9b86a226-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:11:48 +0200 (CEST)
+ id 98d7b2ed-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:44 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:41 -0700
+ 23 Sep 2023 03:11:37 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:40 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:37 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b86a226-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 98d7b2ed-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463908; x=1726999908;
+  t=1695463904; x=1726999904;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=8L4dZHWPEow2ZsckWCTENKztBfQe3j0MHQV1pASC0Y8=;
-  b=lL1xZ85NSL8Gwct/7lwhDiZukUN9gEsZ/DQ+VT5BtJ/sy83tGtLaXe3u
-   spSfvNutpZleO/02PlypJSR0Ojgr/C5qvOMSjc+SU+rlOwxpCEYPs3UCh
-   m0RufCJDT+J3JroRva7JmSIHipf+FHvyA+5gC7WJDn8xpLd8n0El08fk6
-   d1Ahksldiw8Psll9ctj/xjWDB1WB6gxNDauYBE5W023D/k36t68WxKxNS
-   JtYjPM6CwuuYfrHC/5pFpRvikDjwwzDCaKqPMAMbO6NJzEn8OhPm5hG3v
-   0sXkwi4CuKWKdQRGJpFdwUMS1fRZYZQ2jwbFn3fqOjEa3y7aAvss0hULX
+  bh=9qsPaAmdkqHl0KD85EKfAfnheAb+UY4gBzEbjksg7Tw=;
+  b=fv0ZQs1QUktfRChCuvv9I9Cq0z5P02C58rdfW7HU9pZVWCM6fY6tSr6k
+   sAs1D34MPJmCEpTgExc4BhK7WJThcoACO4TZJPIhB9EzWZmxKACYT4Sjj
+   FHsXqTuSS6CpevI1h+YPPbAp9Gi9X/EXigiFQ5wZpdkjbMJ2599VW60Fb
+   hyaQLbmjbzAD1LWTY+tSBHfG50aNbzS29NiKf3qDo2LkXvq2Wp6LTU4cj
+   VEQlDOryOeLautz9q5Tyyp4vSSIAYN9hWsq04cel//8kzSdcnEafDrkSR
+   I+AtyGlh6abJGwgQ0v5JMrV4WJaZLaFKZqwColi21wNi8g2n6IqnJfUcj
    A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492192"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492107"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492192"
+   d="scan'208";a="447492107"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388135"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388107"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388135"
+   d="scan'208";a="813388107"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,52 +87,60 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 10/37] x86/fred: Disable FRED by default in its early stage
-Date: Sat, 23 Sep 2023 02:41:45 -0700
-Message-Id: <20230923094212.26520-11-xin3.li@intel.com>
+Subject: [PATCH v11 03/37] x86/msr: Add the WRMSRNS instruction support
+Date: Sat, 23 Sep 2023 02:41:38 -0700
+Message-Id: <20230923094212.26520-4-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-To enable FRED, a new kernel command line option "fred" needs to be added.
+Add an always inline API __wrmsrns() to embed the WRMSRNS instruction
+into the code.
 
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- Documentation/admin-guide/kernel-parameters.txt | 3 +++
- arch/x86/kernel/cpu/common.c                    | 3 +++
- 2 files changed, 6 insertions(+)
+ arch/x86/include/asm/msr.h | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 45e34be4ed56..ee939ea00458 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1525,6 +1525,9 @@
- 			Warning: use of this parameter will taint the kernel
- 			and may cause unknown problems.
+diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
+index 65ec1965cd28..c284ff9ebe67 100644
+--- a/arch/x86/include/asm/msr.h
++++ b/arch/x86/include/asm/msr.h
+@@ -97,6 +97,19 @@ static __always_inline void __wrmsr(unsigned int msr, u32 low, u32 high)
+ 		     : : "c" (msr), "a"(low), "d" (high) : "memory");
+ }
  
-+	fred		[X86-64]
-+			Enable flexible return and event delivery
++/*
++ * WRMSRNS behaves exactly like WRMSR with the only difference being
++ * that it is not a serializing instruction by default.
++ */
++static __always_inline void __wrmsrns(u32 msr, u32 low, u32 high)
++{
++	/* Instruction opcode for WRMSRNS; supported in binutils >= 2.40. */
++	asm volatile("1: .byte 0x0f,0x01,0xc6\n"
++		     "2:\n"
++		     _ASM_EXTABLE_TYPE(1b, 2b, EX_TYPE_WRMSR)
++		     : : "c" (msr), "a"(low), "d" (high));
++}
 +
- 	ftrace=[tracer]
- 			[FTRACE] will set and start the specified tracer
- 			as early as possible in order to facilitate early
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index afa755e06ae9..4dec7822a291 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -1487,6 +1487,9 @@ static void __init cpu_parse_early_param(void)
- 	char *argptr = arg, *opt;
- 	int arglen, taint = 0;
+ #define native_rdmsr(msr, val1, val2)			\
+ do {							\
+ 	u64 __val = __rdmsr((msr));			\
+@@ -297,6 +310,11 @@ do {							\
  
-+	if (!cmdline_find_option_bool(boot_command_line, "fred"))
-+		setup_clear_cpu_cap(X86_FEATURE_FRED);
+ #endif	/* !CONFIG_PARAVIRT_XXL */
+ 
++static __always_inline void wrmsrns(u32 msr, u64 val)
++{
++	__wrmsrns(msr, val, val >> 32);
++}
 +
- #ifdef CONFIG_X86_32
- 	if (cmdline_find_option_bool(boot_command_line, "no387"))
- #ifdef CONFIG_MATH_EMULATION
+ /*
+  * 64-bit version of wrmsr_safe():
+  */
 -- 
 2.34.1
 
