@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A8BBCE7A8C
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607145.945444 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96695CE7A8B
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607156.945476 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzgj-0001dz-2l; Sat, 23 Sep 2023 10:16:37 +0000
+	id 1qjzgs-0003as-Ju; Sat, 23 Sep 2023 10:16:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607145.945444; Sat, 23 Sep 2023 10:16:36 +0000
+Received: by outflank-mailman (output) from mailman id 607156.945476; Sat, 23 Sep 2023 10:16:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzgi-0001cD-Hx; Sat, 23 Sep 2023 10:16:36 +0000
-Received: by outflank-mailman (input) for mailman id 607145;
- Sat, 23 Sep 2023 10:16:34 +0000
+	id 1qjzgs-0003aW-F8; Sat, 23 Sep 2023 10:16:46 +0000
+Received: by outflank-mailman (input) for mailman id 607156;
+ Sat, 23 Sep 2023 10:16:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzcN-0000Pn-88
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:07 +0000
+ id 1qjzcI-0000Pn-6q
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:02 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a0f1299a-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:11:58 +0200 (CEST)
+ id 9f9ba5ba-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:55 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:47 -0700
+ 23 Sep 2023 03:11:45 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:47 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:44 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0f1299a-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9f9ba5ba-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463918; x=1726999918;
+  t=1695463915; x=1726999915;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=vZ6vels66+tC8YRpSCj8dEsAAUPLXovJkO1WpIp9s0Y=;
-  b=AFqvCfZkFb/pODH9AwBSemowNfELdQF2UjfQHH9TDPUYKuePXrEYnpK2
-   O0H5EiVFYYBgucNjSO3E0DqUEuVXmgIgL1/RtC1W9M1CNLl665v0tiTny
-   IxFAHrBNLXxn8q+cSh6iFsy4wXCUuyMZ/7MHqasdbD3H5ORYNVNoldFpX
-   cMNhXP2SFdZgSL05Cs9QOnw2WqJdThS7o1Ms7wq3RjSfeywcPyIQH+xyQ
-   RpZv+F6dKLbjLguHLymuKeFhD29UqBO1aovpBOkiB90cTQViAAbu73Foj
-   fxyyzCMkZ8Vzb5hEIPeaY0HbFHY8SMC3VF+xxqVS814ifXCg9qoDKoTep
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492351"
+  bh=f4gesqgoemAM7gLIVW0tfHuShJv23oH28+TguMOULZ8=;
+  b=Gms+3kSAqztITFbFmScUqVkK4drwiykn3nDHKZeq8K6+Qs0bc1cp1oNu
+   f9eUbSdK8B4p6HY8zKOS36W0AZVJhjYAfEJiTbNXvORJqO6J1XfXVbfsx
+   4/RBdQTcwNAKkoLrRlO41u2FAE6xXFpOERamSQT0RSwBUp7O0+d0Zlmtc
+   QqevykXCnNfdVj2JlKhS23vg6C454HpDitIPmRL6yI3fiAmVWMMPj4OkJ
+   Ys+G5ph6WrZp970RXvGJL8q6irKgLnrqCNOgye4PSjQ4xkQVhlpisQGmC
+   pr5SwSJG+TqMGRDxLYsBCZ48rZcFaNx0LEfBQR6CDVuGI68cNWixdwKly
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492291"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492351"
+   d="scan'208";a="447492291"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388183"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388160"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388183"
+   d="scan'208";a="813388160"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,9 +87,9 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 23/37] x86/fred: Make exc_page_fault() work for FRED
-Date: Sat, 23 Sep 2023 02:41:58 -0700
-Message-Id: <20230923094212.26520-24-xin3.li@intel.com>
+Subject: [PATCH v11 18/37] x86/fred: Reserve space for the FRED stack frame
+Date: Sat, 23 Sep 2023 02:41:53 -0700
+Message-Id: <20230923094212.26520-19-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
@@ -98,42 +98,46 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-On a FRED system, the faulting address (CR2) is passed on the stack,
-to avoid the problem of transient state. Thus we get the page fault
-address from the stack instead of CR2.
+When using FRED, reserve space at the top of the stack frame, just
+like i386 does.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/mm/fault.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ arch/x86/include/asm/thread_info.h | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/mm/fault.c b/arch/x86/mm/fault.c
-index ab778eac1952..7675bc067153 100644
---- a/arch/x86/mm/fault.c
-+++ b/arch/x86/mm/fault.c
-@@ -34,6 +34,7 @@
- #include <asm/kvm_para.h>		/* kvm_handle_async_pf		*/
- #include <asm/vdso.h>			/* fixup_vdso_exception()	*/
- #include <asm/irq_stack.h>
-+#include <asm/fred.h>
+diff --git a/arch/x86/include/asm/thread_info.h b/arch/x86/include/asm/thread_info.h
+index d63b02940747..12da7dfd5ef1 100644
+--- a/arch/x86/include/asm/thread_info.h
++++ b/arch/x86/include/asm/thread_info.h
+@@ -31,7 +31,9 @@
+  * In vm86 mode, the hardware frame is much longer still, so add 16
+  * bytes to make room for the real-mode segments.
+  *
+- * x86_64 has a fixed-length stack frame.
++ * x86-64 has a fixed-length stack frame, but it depends on whether
++ * or not FRED is enabled. Future versions of FRED might make this
++ * dynamic, but for now it is always 2 words longer.
+  */
+ #ifdef CONFIG_X86_32
+ # ifdef CONFIG_VM86
+@@ -39,8 +41,12 @@
+ # else
+ #  define TOP_OF_KERNEL_STACK_PADDING 8
+ # endif
+-#else
+-# define TOP_OF_KERNEL_STACK_PADDING 0
++#else /* x86-64 */
++# ifdef CONFIG_X86_FRED
++#  define TOP_OF_KERNEL_STACK_PADDING (2 * 8)
++# else
++#  define TOP_OF_KERNEL_STACK_PADDING 0
++# endif
+ #endif
  
- #define CREATE_TRACE_POINTS
- #include <asm/trace/exceptions.h>
-@@ -1516,8 +1517,10 @@ handle_page_fault(struct pt_regs *regs, unsigned long error_code,
- 
- DEFINE_IDTENTRY_RAW_ERRORCODE(exc_page_fault)
- {
--	unsigned long address = read_cr2();
- 	irqentry_state_t state;
-+	unsigned long address;
-+
-+	address = cpu_feature_enabled(X86_FEATURE_FRED) ? fred_event_data(regs) : read_cr2();
- 
- 	prefetchw(&current->mm->mmap_lock);
- 
+ /*
 -- 
 2.34.1
 
