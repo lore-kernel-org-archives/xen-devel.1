@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC152CE7A89
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607121.945361 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F53CE7A88
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607132.945376 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzg9-0006bp-Us; Sat, 23 Sep 2023 10:16:01 +0000
+	id 1qjzgZ-0007u3-4x; Sat, 23 Sep 2023 10:16:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607121.945361; Sat, 23 Sep 2023 10:16:01 +0000
+Received: by outflank-mailman (output) from mailman id 607132.945376; Sat, 23 Sep 2023 10:16:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzg9-0006bF-Om; Sat, 23 Sep 2023 10:16:01 +0000
-Received: by outflank-mailman (input) for mailman id 607121;
- Sat, 23 Sep 2023 10:16:00 +0000
+	id 1qjzgZ-0007tw-1s; Sat, 23 Sep 2023 10:16:27 +0000
+Received: by outflank-mailman (input) for mailman id 607132;
+ Sat, 23 Sep 2023 10:16:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzcG-0000Pn-6Q
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:00 +0000
+ id 1qjzcE-0000Pn-6J
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:11:58 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9e3f9c52-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:11:53 +0200 (CEST)
+ id 9d33871c-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:51 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:44 -0700
+ 23 Sep 2023 03:11:43 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:43 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:42 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e3f9c52-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9d33871c-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463913; x=1726999913;
+  t=1695463911; x=1726999911;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/vulkjS/nAxN+RJ3C7R6J4h15cqNiAED/GUC9x16vUQ=;
-  b=XZ0wyf07X9QgU06AFO9YVmybjKox37R1fAA6rbkHwo4kZkpzIEUlnVZF
-   tzsr2xXsqVZ14AoJ8ioZllYLAQ46UgL1QifBNedYlZnuS7exOE6o2IBdz
-   rjkm3Qm69hcB7zbeJMrSYU4x4xnliUsj94kkXHieXoCvk/9aMi9GbDRlC
-   oGvZiDW7MqUijIy5/k78W6DqX2jeH57Hz2o6D3LeCXoKF/peE+AlsV+Da
-   h6eiNJSOTwCkoaW1ienbSSycWlFWNnslzsQFohd8C/NxuE8CInxnnmCjK
-   Y0pA2o+rSLqXsw3f+ZkGJwv3SoGhPicKfGUSvwoFySZVYskB2aKuyML0R
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492266"
+  bh=szPt1r95a6G9RGqQRcu9cfSwmWMFMGoo6TuZWPez9pk=;
+  b=Wph0zYRjo/Mjhkpo9STRRCaIF1mZf7jXXIHF+Y5oa+5F25Jbu6sKraYP
+   H8Bog6AQr/KkZmZ9gnlNu//5V29UY3FJM2KSQ6+SOCNTSk0z1kx+Eesj4
+   Qgj1ogO+BVJThw5lZ03wqg4DAl9G/2sdz3d1f7PXJ9c9aEzR9RWX3S7fB
+   N6PRDjbn5lNMdnIN4xEiwltpG2qVhNO0emAyWDy3Q9i4hkAl5G9MA3Akr
+   fZ8Ve0hc4YTz6deI425/oLEecDD7AQxAC/PMeK9zdY0CFV/2nhr8hSbCQ
+   LvfFLk3CNUoucWQOgiqIpMEWP/vyUtT3WRouRxnucvEncxLXYDWB0IxkS
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492241"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492266"
+   d="scan'208";a="447492241"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388154"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388148"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388154"
+   d="scan'208";a="813388148"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,134 +87,78 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 16/37] x86/ptrace: Add FRED additional information to the pt_regs structure
-Date: Sat, 23 Sep 2023 02:41:51 -0700
-Message-Id: <20230923094212.26520-17-xin3.li@intel.com>
+Subject: [PATCH v11 14/37] x86/cpu: Add MSR numbers for FRED configuration
+Date: Sat, 23 Sep 2023 02:41:49 -0700
+Message-Id: <20230923094212.26520-15-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-FRED defines additional information in the upper 48 bits of cs/ss
-fields. Therefore add the information definitions into the pt_regs
-structure.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Specially introduce a new structure fred_ss to denote the FRED flags
-above SS selector, which avoids FRED_SSX_ macros and makes the code
-simpler and easier to read.
+Add MSR numbers for the FRED configuration registers per FRED spec 5.0.
 
+Originally-by: Megha Dey <megha.dey@intel.com>
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/include/asm/msr-index.h       | 13 ++++++++++++-
+ tools/arch/x86/include/asm/msr-index.h | 13 ++++++++++++-
+ 2 files changed, 24 insertions(+), 2 deletions(-)
 
-Changes since v9:
-* Introduce a new structure fred_ss to denote the FRED flags above SS
-  selector, which avoids FRED_SSX_ macros and makes the code simpler
-  and easier to read (Thomas Gleixner).
-* Use type u64 to define FRED bit fields instead of type unsigned int
-  (Thomas Gleixner).
-
-Changes since v8:
-* Reflect stack frame definition changes from FRED spec 3.0 to 5.0.
-* Use __packed instead of __attribute__((__packed__)) (Borislav Petkov).
-* Put all comments above the members, like the rest of the file does
-  (Borislav Petkov).
-
-Changes since v3:
-* Rename csl/ssl of the pt_regs structure to csx/ssx (x for extended)
-  (Andrew Cooper).
----
- arch/x86/include/asm/ptrace.h | 51 +++++++++++++++++++++++++++++++----
- 1 file changed, 46 insertions(+), 5 deletions(-)
-
-diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
-index f08ea073edd6..5786c8ca5f4c 100644
---- a/arch/x86/include/asm/ptrace.h
-+++ b/arch/x86/include/asm/ptrace.h
-@@ -56,6 +56,25 @@ struct pt_regs {
+diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-index.h
+index 6a6b0f763f67..200d7715696d 100644
+--- a/arch/x86/include/asm/msr-index.h
++++ b/arch/x86/include/asm/msr-index.h
+@@ -36,8 +36,19 @@
+ #define EFER_FFXSR		(1<<_EFER_FFXSR)
+ #define EFER_AUTOIBRS		(1<<_EFER_AUTOIBRS)
  
- #else /* __i386__ */
+-/* Intel MSRs. Some also available on other CPUs */
++/* FRED MSRs */
++#define MSR_IA32_FRED_RSP0	0x1cc			/* Level 0 stack pointer */
++#define MSR_IA32_FRED_RSP1	0x1cd			/* Level 1 stack pointer */
++#define MSR_IA32_FRED_RSP2	0x1ce			/* Level 2 stack pointer */
++#define MSR_IA32_FRED_RSP3	0x1cf			/* Level 3 stack pointer */
++#define MSR_IA32_FRED_STKLVLS	0x1d0			/* Exception stack levels */
++#define MSR_IA32_FRED_SSP0	MSR_IA32_PL0_SSP	/* Level 0 shadow stack pointer */
++#define MSR_IA32_FRED_SSP1	0x1d1			/* Level 1 shadow stack pointer */
++#define MSR_IA32_FRED_SSP2	0x1d2			/* Level 2 shadow stack pointer */
++#define MSR_IA32_FRED_SSP3	0x1d3			/* Level 3 shadow stack pointer */
++#define MSR_IA32_FRED_CONFIG	0x1d4			/* Entrypoint and interrupt stack level */
  
-+struct fred_ss {
-+	u64	ss	: 16,	// SS selector
-+		sti	:  1,	// STI state
-+		swevent	:  1,	// Set if syscall, sysenter or INT n
-+		nmi	:  1,	// Event is NMI type
-+			: 13,
-+		vector	:  8,	// Event vector
-+			:  8,
-+		type	:  4,	// Event type
-+			:  4,
-+		enclave	:  1,	// Event was incident to enclave execution
-+		lm	:  1,	// CPU was in long mode
-+		nested	:  1,	// Nested exception during FRED delivery
-+				// not set for #DF
-+			:  1,
-+		insnlen	:  4;	// The length of the instruction causing the event
-+				// Only set for INT0, INT1, INT3, INT n, SYSCALL
-+};				// and SYSENTER. 0 otherwise.
-+
- struct pt_regs {
- 	/*
- 	 * C ABI says these regs are callee-preserved. They aren't saved on
-@@ -85,6 +104,12 @@ struct pt_regs {
- 	 * - the syscall number (syscall, sysenter, int80)
- 	 * - error_code stored by the CPU on traps and exceptions
- 	 * - the interrupt number for device interrupts
-+	 *
-+	 * A FRED stack frame starts here:
-+	 *   1) It _always_ includes an error code;
-+	 *
-+	 *   2) The return frame for ERET[US] starts here, but
-+	 *	the content of orig_ax is ignored.
- 	 */
- 	unsigned long orig_ax;
++/* Intel MSRs. Some also available on other CPUs */
+ #define MSR_TEST_CTRL				0x00000033
+ #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT	29
+ #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT		BIT(MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT)
+diff --git a/tools/arch/x86/include/asm/msr-index.h b/tools/arch/x86/include/asm/msr-index.h
+index a00a53e15ab7..fc75e3ca47d9 100644
+--- a/tools/arch/x86/include/asm/msr-index.h
++++ b/tools/arch/x86/include/asm/msr-index.h
+@@ -36,8 +36,19 @@
+ #define EFER_FFXSR		(1<<_EFER_FFXSR)
+ #define EFER_AUTOIBRS		(1<<_EFER_AUTOIBRS)
  
-@@ -92,20 +117,36 @@ struct pt_regs {
- 	unsigned long ip;
+-/* Intel MSRs. Some also available on other CPUs */
++/* FRED MSRs */
++#define MSR_IA32_FRED_RSP0	0x1cc			/* Level 0 stack pointer */
++#define MSR_IA32_FRED_RSP1	0x1cd			/* Level 1 stack pointer */
++#define MSR_IA32_FRED_RSP2	0x1ce			/* Level 2 stack pointer */
++#define MSR_IA32_FRED_RSP3	0x1cf			/* Level 3 stack pointer */
++#define MSR_IA32_FRED_STKLVLS	0x1d0			/* Exception stack levels */
++#define MSR_IA32_FRED_SSP0	MSR_IA32_PL0_SSP	/* Level 0 shadow stack pointer */
++#define MSR_IA32_FRED_SSP1	0x1d1			/* Level 1 shadow stack pointer */
++#define MSR_IA32_FRED_SSP2	0x1d2			/* Level 2 shadow stack pointer */
++#define MSR_IA32_FRED_SSP3	0x1d3			/* Level 3 shadow stack pointer */
++#define MSR_IA32_FRED_CONFIG	0x1d4			/* Entrypoint and interrupt stack level */
  
- 	union {
--		u64	csx;	// The full 64-bit data slot containing CS
--		u16	cs;	// CS selector
-+		u64	csx;		// The full data for FRED
-+		/*
-+		 * The 'cs' member should be defined as a 16-bit bit-field
-+		 * along with the 'sl' and 'wfe' members, which however
-+		 * breaks compiling REG_OFFSET_NAME(cs), because compilers
-+		 * disallow calculating the address of a bit-field.
-+		 *
-+		 * Therefore 'cs" is defined as an individual member with
-+		 * type u16.
-+		 */
-+		u16	cs;		// CS selector
-+		u64		: 16,
-+			sl	:  2,	// Stack level at event time
-+			wfe	:  1,	// IBT is in WAIT_FOR_BRANCH_STATE
-+				: 45;
- 	};
- 
- 	unsigned long flags;
- 	unsigned long sp;
- 
- 	union {
--		u64	ssx;	// The full 64-bit data slot containing SS
--		u16	ss;	// SS selector
-+		u64		ssx;		// The full data for FRED
-+		u16		ss;		// SS selector
-+		struct fred_ss	fred_ss;	// The fred extension
- 	};
- 
- 	/*
--	 * Top of stack on IDT systems.
-+	 * Top of stack on IDT systems, while FRED systems have extra fields
-+	 * defined above for storing exception related information, e.g. CR2 or
-+	 * DR6.
- 	 */
- };
- 
++/* Intel MSRs. Some also available on other CPUs */
+ #define MSR_TEST_CTRL				0x00000033
+ #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT	29
+ #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT		BIT(MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT)
 -- 
 2.34.1
 
