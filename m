@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F53CE7A88
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607132.945376 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1530CE7A8C
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607135.945396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzgZ-0007u3-4x; Sat, 23 Sep 2023 10:16:27 +0000
+	id 1qjzga-0008Vd-VB; Sat, 23 Sep 2023 10:16:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607132.945376; Sat, 23 Sep 2023 10:16:27 +0000
+Received: by outflank-mailman (output) from mailman id 607135.945396; Sat, 23 Sep 2023 10:16:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzgZ-0007tw-1s; Sat, 23 Sep 2023 10:16:27 +0000
-Received: by outflank-mailman (input) for mailman id 607132;
- Sat, 23 Sep 2023 10:16:25 +0000
+	id 1qjzga-0008Ty-Q3; Sat, 23 Sep 2023 10:16:28 +0000
+Received: by outflank-mailman (input) for mailman id 607135;
+ Sat, 23 Sep 2023 10:16:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzcE-0000Pn-6J
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:11:58 +0000
+ id 1qjzcM-0000Pn-7p
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:06 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9d33871c-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:11:51 +0200 (CEST)
+ id a0e595f3-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:57 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:43 -0700
+ 23 Sep 2023 03:11:47 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:42 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:46 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d33871c-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: a0e595f3-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463911; x=1726999911;
+  t=1695463917; x=1726999917;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=szPt1r95a6G9RGqQRcu9cfSwmWMFMGoo6TuZWPez9pk=;
-  b=Wph0zYRjo/Mjhkpo9STRRCaIF1mZf7jXXIHF+Y5oa+5F25Jbu6sKraYP
-   H8Bog6AQr/KkZmZ9gnlNu//5V29UY3FJM2KSQ6+SOCNTSk0z1kx+Eesj4
-   Qgj1ogO+BVJThw5lZ03wqg4DAl9G/2sdz3d1f7PXJ9c9aEzR9RWX3S7fB
-   N6PRDjbn5lNMdnIN4xEiwltpG2qVhNO0emAyWDy3Q9i4hkAl5G9MA3Akr
-   fZ8Ve0hc4YTz6deI425/oLEecDD7AQxAC/PMeK9zdY0CFV/2nhr8hSbCQ
-   LvfFLk3CNUoucWQOgiqIpMEWP/vyUtT3WRouRxnucvEncxLXYDWB0IxkS
+  bh=m7R91mzhAyMwuxf88uvtu3V1UGcA6vznqDxNdL57F/c=;
+  b=Sopz7iOj5WMz1qjeOb/W9Aw7vn9zQFujFQRPg3cFRjVYKOuxnIL3OrlY
+   gDRE7K8GcVnOxpUdyAnc/O7ETKAN1nexbT6apgzP8narhMqcatihWUP5j
+   gm+p14OWgb9/I2KP3vlIJcaVeoxyYddzb8mWkzyCMUVd3DW4DORZaj44+
+   WMVHh8HhDIs6m6uIETZ39i+ziRmi4f8MJDgp2tGyZfrE6KG600UBujVub
+   xjRlCsGVCoGlJ6sX4VMOWh468JJxIhQZr3prF4limjj9QVYUH6B808upa
+   Br7DhSE2JndEmIbehuJ8jhl/dN9lb4yQiPND5cnyvlIxnoQTB/pDz4ZHq
    g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492241"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492339"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492241"
+   d="scan'208";a="447492339"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388148"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388180"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388148"
+   d="scan'208";a="813388180"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,9 +87,9 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 14/37] x86/cpu: Add MSR numbers for FRED configuration
-Date: Sat, 23 Sep 2023 02:41:49 -0700
-Message-Id: <20230923094212.26520-15-xin3.li@intel.com>
+Subject: [PATCH v11 22/37] x86/fred: Allow single-step trap and NMI when starting a new task
+Date: Sat, 23 Sep 2023 02:41:57 -0700
+Message-Id: <20230923094212.26520-23-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
@@ -98,67 +98,93 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add MSR numbers for the FRED configuration registers per FRED spec 5.0.
+Entering a new task is logically speaking a return from a system call
+(exec, fork, clone, etc.). As such, if ptrace enables single stepping
+a single step exception should be allowed to trigger immediately upon
+entering user space. This is not optional.
 
-Originally-by: Megha Dey <megha.dey@intel.com>
+NMI should *never* be disabled in user space. As such, this is an
+optional, opportunistic way to catch errors.
+
+Allow single-step trap and NMI when starting a new task, thus once
+the new task enters user space, single-step trap and NMI are both
+enabled immediately.
+
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/include/asm/msr-index.h       | 13 ++++++++++++-
- tools/arch/x86/include/asm/msr-index.h | 13 ++++++++++++-
- 2 files changed, 24 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-index.h
-index 6a6b0f763f67..200d7715696d 100644
---- a/arch/x86/include/asm/msr-index.h
-+++ b/arch/x86/include/asm/msr-index.h
-@@ -36,8 +36,19 @@
- #define EFER_FFXSR		(1<<_EFER_FFXSR)
- #define EFER_AUTOIBRS		(1<<_EFER_AUTOIBRS)
+Changes since v8:
+* Use high-order 48 bits above the lowest 16 bit SS only when FRED
+  is enabled (Thomas Gleixner).
+---
+ arch/x86/kernel/process_64.c | 38 ++++++++++++++++++++++++++++++------
+ 1 file changed, 32 insertions(+), 6 deletions(-)
+
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 4f87f5987ae8..c075591b7b46 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -56,6 +56,7 @@
+ #include <asm/resctrl.h>
+ #include <asm/unistd.h>
+ #include <asm/fsgsbase.h>
++#include <asm/fred.h>
+ #ifdef CONFIG_IA32_EMULATION
+ /* Not included via unistd.h */
+ #include <asm/unistd_32_ia32.h>
+@@ -528,7 +529,7 @@ void x86_gsbase_write_task(struct task_struct *task, unsigned long gsbase)
+ static void
+ start_thread_common(struct pt_regs *regs, unsigned long new_ip,
+ 		    unsigned long new_sp,
+-		    unsigned int _cs, unsigned int _ss, unsigned int _ds)
++		    u16 _cs, u16 _ss, u16 _ds)
+ {
+ 	WARN_ON_ONCE(regs != current_pt_regs());
  
--/* Intel MSRs. Some also available on other CPUs */
-+/* FRED MSRs */
-+#define MSR_IA32_FRED_RSP0	0x1cc			/* Level 0 stack pointer */
-+#define MSR_IA32_FRED_RSP1	0x1cd			/* Level 1 stack pointer */
-+#define MSR_IA32_FRED_RSP2	0x1ce			/* Level 2 stack pointer */
-+#define MSR_IA32_FRED_RSP3	0x1cf			/* Level 3 stack pointer */
-+#define MSR_IA32_FRED_STKLVLS	0x1d0			/* Exception stack levels */
-+#define MSR_IA32_FRED_SSP0	MSR_IA32_PL0_SSP	/* Level 0 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP1	0x1d1			/* Level 1 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP2	0x1d2			/* Level 2 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP3	0x1d3			/* Level 3 shadow stack pointer */
-+#define MSR_IA32_FRED_CONFIG	0x1d4			/* Entrypoint and interrupt stack level */
+@@ -545,11 +546,36 @@ start_thread_common(struct pt_regs *regs, unsigned long new_ip,
+ 	loadsegment(ds, _ds);
+ 	load_gs_index(0);
  
-+/* Intel MSRs. Some also available on other CPUs */
- #define MSR_TEST_CTRL				0x00000033
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT	29
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT		BIT(MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT)
-diff --git a/tools/arch/x86/include/asm/msr-index.h b/tools/arch/x86/include/asm/msr-index.h
-index a00a53e15ab7..fc75e3ca47d9 100644
---- a/tools/arch/x86/include/asm/msr-index.h
-+++ b/tools/arch/x86/include/asm/msr-index.h
-@@ -36,8 +36,19 @@
- #define EFER_FFXSR		(1<<_EFER_FFXSR)
- #define EFER_AUTOIBRS		(1<<_EFER_AUTOIBRS)
+-	regs->ip		= new_ip;
+-	regs->sp		= new_sp;
+-	regs->cs		= _cs;
+-	regs->ss		= _ss;
+-	regs->flags		= X86_EFLAGS_IF;
++	regs->ip	= new_ip;
++	regs->sp	= new_sp;
++	regs->csx	= _cs;
++	regs->ssx	= _ss;
++	/*
++	 * Allow single-step trap and NMI when starting a new task, thus
++	 * once the new task enters user space, single-step trap and NMI
++	 * are both enabled immediately.
++	 *
++	 * Entering a new task is logically speaking a return from a
++	 * system call (exec, fork, clone, etc.). As such, if ptrace
++	 * enables single stepping a single step exception should be
++	 * allowed to trigger immediately upon entering user space.
++	 * This is not optional.
++	 *
++	 * NMI should *never* be disabled in user space. As such, this
++	 * is an optional, opportunistic way to catch errors.
++	 *
++	 * Paranoia: High-order 48 bits above the lowest 16 bit SS are
++	 * discarded by the legacy IRET instruction on all Intel, AMD,
++	 * and Cyrix/Centaur/VIA CPUs, thus can be set unconditionally,
++	 * even when FRED is not enabled. But we choose the safer side
++	 * to use these bits only when FRED is enabled.
++	 */
++	if (cpu_feature_enabled(X86_FEATURE_FRED)) {
++		regs->fred_ss.swevent	= true;
++		regs->fred_ss.nmi	= true;
++	}
++
++	regs->flags	= X86_EFLAGS_IF | X86_EFLAGS_FIXED;
+ }
  
--/* Intel MSRs. Some also available on other CPUs */
-+/* FRED MSRs */
-+#define MSR_IA32_FRED_RSP0	0x1cc			/* Level 0 stack pointer */
-+#define MSR_IA32_FRED_RSP1	0x1cd			/* Level 1 stack pointer */
-+#define MSR_IA32_FRED_RSP2	0x1ce			/* Level 2 stack pointer */
-+#define MSR_IA32_FRED_RSP3	0x1cf			/* Level 3 stack pointer */
-+#define MSR_IA32_FRED_STKLVLS	0x1d0			/* Exception stack levels */
-+#define MSR_IA32_FRED_SSP0	MSR_IA32_PL0_SSP	/* Level 0 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP1	0x1d1			/* Level 1 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP2	0x1d2			/* Level 2 shadow stack pointer */
-+#define MSR_IA32_FRED_SSP3	0x1d3			/* Level 3 shadow stack pointer */
-+#define MSR_IA32_FRED_CONFIG	0x1d4			/* Entrypoint and interrupt stack level */
- 
-+/* Intel MSRs. Some also available on other CPUs */
- #define MSR_TEST_CTRL				0x00000033
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT	29
- #define MSR_TEST_CTRL_SPLIT_LOCK_DETECT		BIT(MSR_TEST_CTRL_SPLIT_LOCK_DETECT_BIT)
+ void
 -- 
 2.34.1
 
