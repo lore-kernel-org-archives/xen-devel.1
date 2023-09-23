@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E083ACE7A88
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:18:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607201.945606 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47DF7CE7A89
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:18:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607205.945616 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjziF-0003e6-4b; Sat, 23 Sep 2023 10:18:11 +0000
+	id 1qjziQ-0004ZA-FP; Sat, 23 Sep 2023 10:18:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607201.945606; Sat, 23 Sep 2023 10:18:11 +0000
+Received: by outflank-mailman (output) from mailman id 607205.945616; Sat, 23 Sep 2023 10:18:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjziF-0003dt-1M; Sat, 23 Sep 2023 10:18:11 +0000
-Received: by outflank-mailman (input) for mailman id 607201;
- Sat, 23 Sep 2023 10:18:10 +0000
+	id 1qjziQ-0004Ys-B1; Sat, 23 Sep 2023 10:18:22 +0000
+Received: by outflank-mailman (input) for mailman id 607205;
+ Sat, 23 Sep 2023 10:18:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzcR-0000Pn-8X
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:11 +0000
+ id 1qjzcJ-0000Pn-78
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:03 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a23b9b89-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:12:00 +0200 (CEST)
+ id 9fa922c9-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:55 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:49 -0700
+ 23 Sep 2023 03:11:45 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:49 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:44 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a23b9b89-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9fa922c9-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463920; x=1726999920;
+  t=1695463915; x=1726999915;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=bNtEfhEic2/4eI6U3F6LZD3GtdQN7TZ08d/4AOd+L9I=;
-  b=Rt0zsDyJHjfvmDn4jENCKULsFcR4vk4HdUdBnh7htuEG05/tzI3yzbnM
-   quTYVGv3NCqFVI4thXj6hB9dgKDTA7I89E2p+0xBpvmoiIQUTgac4bLuu
-   HQ4LyaMrTQeQVCMfb/tKmS/IEvk2oQZVK9OcKe9tOn/EmUOgASwcLqr/i
-   C7XsBUl/XxNmbFene1VP8AxLqGYB3ym4xsbikSL5BWtGlkvZ+cvvq4IsF
-   7lVWoC/02iLk6s9uiQiJA+dsxeAc3Hi0ygaWIcJn9r8ETmj7/+PjAyqV5
-   fuAebLg9JT293A4AYSJkXiP7va5M+Tx05Qd1PsiW2sGAE3xEKrzZmuzUp
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492400"
+  bh=U5v5FfPZcbv+kEeu4BDXYc9n8fkslqM+14uJJDiLwkk=;
+  b=WPfB7UKtiEuFbXEXqidrWzrv0G2GfmJptzDs8I3fMn0Y0Tnfp1vczppZ
+   zWufH1uJHyDPN9w8d9WtBYyEFyX+cIAbsxKhvmh2+TTNXTJlLEJ9wxZdB
+   Ckv+XSRpbnjPrAVxKm3MNk0jSS9wF7gc8W25g4C9YXXllyAWNWloLGK3q
+   DNuxllCA7qK4pSXhyPxetQhwobTUzDwIbRd2hEpFYHibdgFe6v8QC8269
+   MloJLMpCGMzVJnpqKsKq/xC3KUSqQpqweUqiQtZdICn1c9F2p/5a0Pocz
+   23UTQafWj5mAEQcDYPXXDiZeyvPaAKyURfsO75pO+76gmvqNEbfs1KTiR
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492303"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492400"
+   d="scan'208";a="447492303"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388196"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388168"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388196"
+   d="scan'208";a="813388168"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,78 +87,47 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 27/37] x86/fred: Add a machine check entry stub for FRED
-Date: Sat, 23 Sep 2023 02:42:02 -0700
-Message-Id: <20230923094212.26520-28-xin3.li@intel.com>
+Subject: [PATCH v11 19/37] x86/fred: Update MSR_IA32_FRED_RSP0 during task switch
+Date: Sat, 23 Sep 2023 02:41:54 -0700
+Message-Id: <20230923094212.26520-20-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Like #DB, when occurred on different ring level, i.e., from user or kernel
-context, #MCE needs to be handled on different stack: User #MCE on current
-task stack, while kernel #MCE on a dedicated stack.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-This is exactly how FRED event delivery invokes an exception handler: ring
-3 event on level 0 stack, i.e., current task stack; ring 0 event on the
-#MCE dedicated stack specified in the IA32_FRED_STKLVLS MSR. So unlike IDT,
-the FRED machine check entry stub doesn't do stack switch.
+MSR_IA32_FRED_RSP0 is used during ring 3 event delivery, and needs to
+be updated to point to the top of next task stack during task switch.
 
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/include/asm/switch_to.h | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-Changes since v5:
-* Disallow #DB inside #MCE for robustness sake (Peter Zijlstra).
----
- arch/x86/kernel/cpu/mce/core.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
-
-diff --git a/arch/x86/kernel/cpu/mce/core.c b/arch/x86/kernel/cpu/mce/core.c
-index 6f35f724cc14..da0a4a102afe 100644
---- a/arch/x86/kernel/cpu/mce/core.c
-+++ b/arch/x86/kernel/cpu/mce/core.c
-@@ -52,6 +52,7 @@
- #include <asm/mce.h>
- #include <asm/msr.h>
- #include <asm/reboot.h>
-+#include <asm/fred.h>
- 
- #include "internal.h"
- 
-@@ -2144,6 +2145,31 @@ DEFINE_IDTENTRY_MCE_USER(exc_machine_check)
- 	exc_machine_check_user(regs);
- 	local_db_restore(dr7);
- }
-+
-+#ifdef CONFIG_X86_FRED
-+/*
-+ * When occurred on different ring level, i.e., from user or kernel
-+ * context, #MCE needs to be handled on different stack: User #MCE
-+ * on current task stack, while kernel #MCE on a dedicated stack.
-+ *
-+ * This is exactly how FRED event delivery invokes an exception
-+ * handler: ring 3 event on level 0 stack, i.e., current task stack;
-+ * ring 0 event on the #MCE dedicated stack specified in the
-+ * IA32_FRED_STKLVLS MSR. So unlike IDT, the FRED machine check entry
-+ * stub doesn't do stack switch.
-+ */
-+DEFINE_FREDENTRY_MCE(exc_machine_check)
-+{
-+	unsigned long dr7;
-+
-+	dr7 = local_db_save();
-+	if (user_mode(regs))
-+		exc_machine_check_user(regs);
-+	else
-+		exc_machine_check_kernel(regs);
-+	local_db_restore(dr7);
-+}
-+#endif
+diff --git a/arch/x86/include/asm/switch_to.h b/arch/x86/include/asm/switch_to.h
+index f42dbf17f52b..c3bd0c0758c9 100644
+--- a/arch/x86/include/asm/switch_to.h
++++ b/arch/x86/include/asm/switch_to.h
+@@ -70,9 +70,13 @@ static inline void update_task_stack(struct task_struct *task)
+ #ifdef CONFIG_X86_32
+ 	this_cpu_write(cpu_tss_rw.x86_tss.sp1, task->thread.sp0);
  #else
- /* 32bit unified entry point */
- DEFINE_IDTENTRY_RAW(exc_machine_check)
+-	/* Xen PV enters the kernel on the thread stack. */
+-	if (cpu_feature_enabled(X86_FEATURE_XENPV))
++	if (cpu_feature_enabled(X86_FEATURE_FRED)) {
++		/* WRMSRNS is a baseline feature for FRED. */
++		wrmsrns(MSR_IA32_FRED_RSP0, (unsigned long)task_stack_page(task) + THREAD_SIZE);
++	} else if (cpu_feature_enabled(X86_FEATURE_XENPV)) {
++		/* Xen PV enters the kernel on the thread stack. */
+ 		load_sp0(task_top_of_stack(task));
++	}
+ #endif
+ }
+ 
 -- 
 2.34.1
 
