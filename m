@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E5B7CE7A88
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:18:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607195.945572 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 581D8CE7A89
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:18:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607198.945593 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzi9-0002Qp-4i; Sat, 23 Sep 2023 10:18:05 +0000
+	id 1qjziA-00031s-P8; Sat, 23 Sep 2023 10:18:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607195.945572; Sat, 23 Sep 2023 10:18:05 +0000
+Received: by outflank-mailman (output) from mailman id 607198.945593; Sat, 23 Sep 2023 10:18:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzi8-0002NY-Se; Sat, 23 Sep 2023 10:18:04 +0000
-Received: by outflank-mailman (input) for mailman id 607195;
- Sat, 23 Sep 2023 10:18:04 +0000
+	id 1qjziA-000317-JH; Sat, 23 Sep 2023 10:18:06 +0000
+Received: by outflank-mailman (input) for mailman id 607198;
+ Sat, 23 Sep 2023 10:18:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzce-0000Pn-9w
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:24 +0000
+ id 1qjzcH-0000Pn-6j
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:01 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a4eb96da-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:12:04 +0200 (CEST)
+ id 9e874eda-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:54 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:53 -0700
+ 23 Sep 2023 03:11:44 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:53 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:44 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4eb96da-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9e874eda-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463924; x=1726999924;
+  t=1695463914; x=1726999914;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=kgfFMDbJiu5q1BDcTkBjlFfGWj3DWiVrEUdh+fgWCfs=;
-  b=hMUQY4SsiMDV1sTWLNHLkiC7dWH+tV1TUFgPqV0cizeFVKgpcjc/ox/H
-   DxkZvzxowt2mQ2fy24L/LvOWVG8TnQu8LMwLy1lmRaCqRWed24a08mBjv
-   +rXqMn2KsmVzmJcLmnp34AahKVqQADtJGM59sfJT8cGHrWshLSttA0a2c
-   PW3xV2yKLWx2T0NqXYyhj0CRyr3lSHmQupbCza0LVh7+4tUVmbhNEONeT
-   y+Y0Fb/PIfVX3QC4uNzcE5A4eDC2mSBDhWnHszQDAtCqy5XJC4raNdXZa
-   WI2JLZJRZo6tILV/BzYiMNywjstm1EBMRZqKNXFdwUlmANDq/FLN7N6zq
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492498"
+  bh=SbR2wCTkousO/IPIjdDUqT7zLHmXpw3IGG9LN/Z2MXU=;
+  b=gq9qLy8bGuL9FwiBanYKu0uClUnyDXCiQ3y5bvYBHZSAdhKu7JtWxPXO
+   sockky4RA8e572y3rtJ5CelI2nldddOUoOXg8jmpk6frXNUyODsvQJIiM
+   ZF5T5RjX2zSrbw9cj872O2T3Y9u+4LbvznPiRALzL0X3BPAkeunSDy5o9
+   Fp2gyc+rY5Nq4MmeMRK6l/vgcL6Nz14ALYjoww+O+9mFU13x1eV3lMLa6
+   j5+d2TpoRFw3E+iAbcaQruzmGsmI3kUom+sCdbIdS7MBpsZtGretWkbu4
+   cRC1XjAgfjpWRiG+4NSZQt54LmIjLFijkLdMZh4SRlmrdSOE2I+E4Q2OH
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492278"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492498"
+   d="scan'208";a="447492278"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388236"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388157"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388236"
+   d="scan'208";a="813388157"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,61 +87,105 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 35/37] x86/syscall: Split IDT syscall setup code into idt_syscall_init()
-Date: Sat, 23 Sep 2023 02:42:10 -0700
-Message-Id: <20230923094212.26520-36-xin3.li@intel.com>
+Subject: [PATCH v11 17/37] x86/fred: Add a new header file for FRED definitions
+Date: Sat, 23 Sep 2023 02:41:52 -0700
+Message-Id: <20230923094212.26520-18-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Because FRED uses the ring 3 FRED entrypoint for SYSCALL and SYSENTER and
-ERETU is the only legit instruction to return to ring 3, there is NO need
-to setup SYSCALL and SYSENTER MSRs for FRED, except the IA32_STAR MSR.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Split IDT syscall setup code into idt_syscall_init() to make it easy to
-skip syscall setup code when FRED is enabled.
+Add a header file for FRED prototypes and definitions.
 
-Suggested-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/kernel/cpu/common.c | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 20bbedbf6dcb..2ee4e7b597a3 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -2071,10 +2071,8 @@ static void wrmsrl_cstar(unsigned long val)
- 		wrmsrl(MSR_CSTAR, val);
- }
- 
--/* May not be marked __init: used by software suspend */
--void syscall_init(void)
-+static inline void idt_syscall_init(void)
- {
--	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
- 	wrmsrl(MSR_LSTAR, (unsigned long)entry_SYSCALL_64);
- 
- 	if (ia32_enabled()) {
-@@ -2108,6 +2106,15 @@ void syscall_init(void)
- 	       X86_EFLAGS_AC|X86_EFLAGS_ID);
- }
- 
-+/* May not be marked __init: used by software suspend */
-+void syscall_init(void)
-+{
-+	/* The default user and kernel segments */
-+	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
+Changes since v6:
+* Replace pt_regs csx flags prefix FRED_CSL_ with FRED_CSX_.
+---
+ arch/x86/include/asm/fred.h | 68 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
+ create mode 100644 arch/x86/include/asm/fred.h
+
+diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
+new file mode 100644
+index 000000000000..f514fdb5a39f
+--- /dev/null
++++ b/arch/x86/include/asm/fred.h
+@@ -0,0 +1,68 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Macros for Flexible Return and Event Delivery (FRED)
++ */
 +
-+	idt_syscall_init();
++#ifndef ASM_X86_FRED_H
++#define ASM_X86_FRED_H
++
++#include <linux/const.h>
++
++#include <asm/asm.h>
++
++/*
++ * FRED event return instruction opcodes for ERET{S,U}; supported in
++ * binutils >= 2.41.
++ */
++#define ERETS			_ASM_BYTES(0xf2,0x0f,0x01,0xca)
++#define ERETU			_ASM_BYTES(0xf3,0x0f,0x01,0xca)
++
++/*
++ * RSP is aligned to a 64-byte boundary before used to push a new stack frame
++ */
++#define FRED_STACK_FRAME_RSP_MASK	_AT(unsigned long, (~0x3f))
++
++/*
++ * Used for the return address for call emulation during code patching,
++ * and measured in 64-byte cache lines.
++ */
++#define FRED_CONFIG_REDZONE_AMOUNT	1
++#define FRED_CONFIG_REDZONE		(_AT(unsigned long, FRED_CONFIG_REDZONE_AMOUNT) << 6)
++#define FRED_CONFIG_INT_STKLVL(l)	(_AT(unsigned long, l) << 9)
++#define FRED_CONFIG_ENTRYPOINT(p)	_AT(unsigned long, (p))
++
++#ifndef __ASSEMBLY__
++
++#ifdef CONFIG_X86_FRED
++#include <linux/kernel.h>
++
++#include <asm/ptrace.h>
++
++struct fred_info {
++	/* Event data: CR2, DR6, ... */
++	unsigned long edata;
++	unsigned long resv;
++};
++
++/* Full format of the FRED stack frame */
++struct fred_frame {
++	struct pt_regs   regs;
++	struct fred_info info;
++};
++
++static __always_inline struct fred_info *fred_info(struct pt_regs *regs)
++{
++	return &container_of(regs, struct fred_frame, regs)->info;
 +}
 +
- #else	/* CONFIG_X86_64 */
- 
- #ifdef CONFIG_STACKPROTECTOR
++static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
++{
++	return fred_info(regs)->edata;
++}
++
++#else /* CONFIG_X86_FRED */
++static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
++#endif /* CONFIG_X86_FRED */
++#endif /* !__ASSEMBLY__ */
++
++#endif /* ASM_X86_FRED_H */
 -- 
 2.34.1
 
