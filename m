@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D49EECE7A88
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.607117.945356 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BC2CE7A8B
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Sep 2023 10:16:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.607116.945346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzg9-0006YM-JO; Sat, 23 Sep 2023 10:16:01 +0000
+	id 1qjzg8-0006BD-B6; Sat, 23 Sep 2023 10:16:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 607117.945356; Sat, 23 Sep 2023 10:16:01 +0000
+Received: by outflank-mailman (output) from mailman id 607116.945346; Sat, 23 Sep 2023 10:16:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qjzg9-0006YE-Ea; Sat, 23 Sep 2023 10:16:01 +0000
-Received: by outflank-mailman (input) for mailman id 607117;
- Sat, 23 Sep 2023 10:15:59 +0000
+	id 1qjzg8-0006Av-6o; Sat, 23 Sep 2023 10:16:00 +0000
+Received: by outflank-mailman (input) for mailman id 607116;
+ Sat, 23 Sep 2023 10:15:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xNi6=FH=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qjzcO-0000Pn-8T
- for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:08 +0000
+ id 1qjzcK-0000Pn-7L
+ for xen-devel@lists.xenproject.org; Sat, 23 Sep 2023 10:12:04 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a12f7f1f-59f9-11ee-9b0d-b553b5be7939;
- Sat, 23 Sep 2023 12:11:58 +0200 (CEST)
+ id 9fdf983c-59f9-11ee-9b0d-b553b5be7939;
+ Sat, 23 Sep 2023 12:11:56 +0200 (CEST)
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Sep 2023 03:11:48 -0700
+ 23 Sep 2023 03:11:46 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:47 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:45 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a12f7f1f-59f9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 9fdf983c-59f9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463918; x=1726999918;
+  t=1695463916; x=1726999916;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=aB9X6AvBbEVqHF8pDqD66jUIoaqA7x/kswu7ifFPwEo=;
-  b=Pl/jMWpGe5BgllVJLcOuhCqSnV+uzMexhfDsOxZumWNrkOMkQY2LmLjZ
-   PeaVzk7UGwB9PDbqciPwoVQK9UrCzZhS8ys+t4B0mAI06LNhyqXzehNO4
-   ObZHpfOZdQUCnVyTITTiotRyk4S/rNxWXeyyCfzvphSNvSHJhtiLRjFEi
-   m+PxeRCQwqi5WhG6uFzQex9bfbuRnJ9xVz36B69/zwRZp+Z0kL6go5ssH
-   QG5tdlGMDMAgdLzlPU5F/gd2QdKMUDhG1TL6vuJNRfOwlQt90xLM2qHpX
-   5Wk3xZhbJM9PC5ZFTsZWqmTxsESWFHBOFUOvDw7k3iI1zT7WzPGbCrOlJ
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492363"
+  bh=HaNFd9+f6o42v45n40NutGcoZldX+CMRVlEU3cDygtg=;
+  b=QRzqKUpogmHpwjiM8MAeLo+oO5fs2Y42gjsBJShG3WsoBluhAd34mkzf
+   /nNX8XwB7kYB5YuxA3NlNCNGvvgU1/AvFkTGJg7+cblnwJBs5G7ywwYbk
+   kOy9ok2ue0fRTYFW4ACxxuxpba+Lk1pItMrfs+Sg+g6xG5RXfWtbKZybe
+   tAx/T7AOiP9mBrP+FVhafuQFt5jnXlOeg6aEnpbC/hoVJqbOnrAhYrfm9
+   s3Chu9PV+qWPI7qoApNvE2hxETIczPQPO77mN3Mwsvv9P7JHQqmIBFk5A
+   fG2uykSmoty76w5/dc+kz5Xf8fyWPBQFR1/JF0pilw3E/ndimFAFbOAE8
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492315"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492363"
+   d="scan'208";a="447492315"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388187"
+X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388171"
 X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388187"
+   d="scan'208";a="813388171"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,230 +87,95 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v11 24/37] x86/idtentry: Incorporate definitions/declarations of the FRED entries
-Date: Sat, 23 Sep 2023 02:41:59 -0700
-Message-Id: <20230923094212.26520-25-xin3.li@intel.com>
+Subject: [PATCH v11 20/37] x86/fred: Disallow the swapgs instruction when FRED is enabled
+Date: Sat, 23 Sep 2023 02:41:55 -0700
+Message-Id: <20230923094212.26520-21-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
 References: <20230923094212.26520-1-xin3.li@intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-FRED and IDT can share most of the definitions and declarations so
-that in the majority of cases the actual handler implementation is the
-same.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-The differences are the exceptions where FRED stores exception related
-information on the stack and the sysvec implementations as FRED can
-handle irqentry/exit() in the dispatcher instead of having it in each
-handler.
+SWAPGS is no longer needed thus NOT allowed with FRED because FRED
+transitions ensure that an operating system can _always_ operate
+with its own GS base address:
+- For events that occur in ring 3, FRED event delivery swaps the GS
+  base address with the IA32_KERNEL_GS_BASE MSR.
+- ERETU (the FRED transition that returns to ring 3) also swaps the
+  GS base address with the IA32_KERNEL_GS_BASE MSR.
 
-Also add stub defines for vectors which are not used due to Kconfig
-decisions to spare the ifdeffery in the actual FRED dispatch code.
+And the operating system can still setup the GS segment for a user
+thread without the need of loading a user thread GS with:
+- Using LKGS, available with FRED, to modify other attributes of the
+  GS segment without compromising its ability always to operate with
+  its own GS base address.
+- Accessing the GS segment base address for a user thread as before
+  using RDMSR or WRMSR on the IA32_KERNEL_GS_BASE MSR.
 
+Note, LKGS loads the GS base address into the IA32_KERNEL_GS_BASE MSR
+instead of the GS segment’s descriptor cache. As such, the operating
+system never changes its runtime GS base address.
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Changes since v9:
-* Except NMI/#DB/#MCE, FRED really should share the exception handlers
-  with IDT (Thomas Gleixner).
-
 Changes since v8:
-* Put IDTENTRY changes in a separate patch (Thomas Gleixner).
+* Explain why writing directly to the IA32_KERNEL_GS_BASE MSR is
+  doing the right thing (Thomas Gleixner).
 ---
- arch/x86/include/asm/idtentry.h | 71 +++++++++++++++++++++++++++++----
- 1 file changed, 63 insertions(+), 8 deletions(-)
+ arch/x86/kernel/process_64.c | 27 +++++++++++++++++++++++++--
+ 1 file changed, 25 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index cfca68f6cb84..4f26ee9b8b74 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -13,15 +13,18 @@
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 0f78b58021bb..4f87f5987ae8 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -166,7 +166,29 @@ static noinstr unsigned long __rdgsbase_inactive(void)
  
- #include <asm/irq_stack.h>
+ 	lockdep_assert_irqs_disabled();
  
-+typedef void (*idtentry_t)(struct pt_regs *regs);
-+
- /**
-  * DECLARE_IDTENTRY - Declare functions for simple IDT entry points
-  *		      No error code pushed by hardware
-  * @vector:	Vector number (ignored for C)
-  * @func:	Function name of the entry point
-  *
-- * Declares three functions:
-+ * Declares four functions:
-  * - The ASM entry point: asm_##func
-  * - The XEN PV trap entry point: xen_##func (maybe unused)
-+ * - The C handler called from the FRED event dispatcher (maybe unused)
-  * - The C handler called from the ASM entry point
-  *
-  * Note: This is the C variant of DECLARE_IDTENTRY(). As the name says it
-@@ -31,6 +34,7 @@
- #define DECLARE_IDTENTRY(vector, func)					\
- 	asmlinkage void asm_##func(void);				\
- 	asmlinkage void xen_asm_##func(void);				\
-+	void fred_##func(struct pt_regs *regs);				\
- 	__visible void func(struct pt_regs *regs)
+-	if (!cpu_feature_enabled(X86_FEATURE_XENPV)) {
++	/*
++	 * SWAPGS is no longer needed thus NOT allowed with FRED because
++	 * FRED transitions ensure that an operating system can _always_
++	 * operate with its own GS base address:
++	 * - For events that occur in ring 3, FRED event delivery swaps
++	 *   the GS base address with the IA32_KERNEL_GS_BASE MSR.
++	 * - ERETU (the FRED transition that returns to ring 3) also swaps
++	 *   the GS base address with the IA32_KERNEL_GS_BASE MSR.
++	 *
++	 * And the operating system can still setup the GS segment for a
++	 * user thread without the need of loading a user thread GS with:
++	 * - Using LKGS, available with FRED, to modify other attributes
++	 *   of the GS segment without compromising its ability always to
++	 *   operate with its own GS base address.
++	 * - Accessing the GS segment base address for a user thread as
++	 *   before using RDMSR or WRMSR on the IA32_KERNEL_GS_BASE MSR.
++	 *
++	 * Note, LKGS loads the GS base address into the IA32_KERNEL_GS_BASE
++	 * MSR instead of the GS segment’s descriptor cache. As such, the
++	 * operating system never changes its runtime GS base address.
++	 */
++	if (!cpu_feature_enabled(X86_FEATURE_FRED) &&
++	    !cpu_feature_enabled(X86_FEATURE_XENPV)) {
+ 		native_swapgs();
+ 		gsbase = rdgsbase();
+ 		native_swapgs();
+@@ -191,7 +213,8 @@ static noinstr void __wrgsbase_inactive(unsigned long gsbase)
+ {
+ 	lockdep_assert_irqs_disabled();
  
- /**
-@@ -137,6 +141,17 @@ static __always_inline void __##func(struct pt_regs *regs,		\
- #define DEFINE_IDTENTRY_RAW(func)					\
- __visible noinstr void func(struct pt_regs *regs)
- 
-+/**
-+ * DEFINE_FREDENTRY_RAW - Emit code for raw FRED entry points
-+ * @func:	Function name of the entry point
-+ *
-+ * @func is called from the FRED event dispatcher with interrupts disabled.
-+ *
-+ * See @DEFINE_IDTENTRY_RAW for further details.
-+ */
-+#define DEFINE_FREDENTRY_RAW(func)					\
-+noinstr void fred_##func(struct pt_regs *regs)
-+
- /**
-  * DECLARE_IDTENTRY_RAW_ERRORCODE - Declare functions for raw IDT entry points
-  *				    Error code pushed by hardware
-@@ -233,17 +248,27 @@ static noinline void __##func(struct pt_regs *regs, u32 vector)
- #define DEFINE_IDTENTRY_SYSVEC(func)					\
- static void __##func(struct pt_regs *regs);				\
- 									\
-+static __always_inline void instr_##func(struct pt_regs *regs)		\
-+{									\
-+	kvm_set_cpu_l1tf_flush_l1d();					\
-+	run_sysvec_on_irqstack_cond(__##func, regs);			\
-+}									\
-+									\
- __visible noinstr void func(struct pt_regs *regs)			\
- {									\
- 	irqentry_state_t state = irqentry_enter(regs);			\
- 									\
- 	instrumentation_begin();					\
--	kvm_set_cpu_l1tf_flush_l1d();					\
--	run_sysvec_on_irqstack_cond(__##func, regs);			\
-+	instr_##func (regs);						\
- 	instrumentation_end();						\
- 	irqentry_exit(regs, state);					\
- }									\
- 									\
-+void fred_##func(struct pt_regs *regs)					\
-+{									\
-+	instr_##func (regs);						\
-+}									\
-+									\
- static noinline void __##func(struct pt_regs *regs)
- 
- /**
-@@ -260,19 +285,29 @@ static noinline void __##func(struct pt_regs *regs)
- #define DEFINE_IDTENTRY_SYSVEC_SIMPLE(func)				\
- static __always_inline void __##func(struct pt_regs *regs);		\
- 									\
--__visible noinstr void func(struct pt_regs *regs)			\
-+static __always_inline void instr_##func(struct pt_regs *regs)		\
- {									\
--	irqentry_state_t state = irqentry_enter(regs);			\
--									\
--	instrumentation_begin();					\
- 	__irq_enter_raw();						\
- 	kvm_set_cpu_l1tf_flush_l1d();					\
- 	__##func (regs);						\
- 	__irq_exit_raw();						\
-+}									\
-+									\
-+__visible noinstr void func(struct pt_regs *regs)			\
-+{									\
-+	irqentry_state_t state = irqentry_enter(regs);			\
-+									\
-+	instrumentation_begin();					\
-+	instr_##func (regs);						\
- 	instrumentation_end();						\
- 	irqentry_exit(regs, state);					\
- }									\
- 									\
-+void fred_##func(struct pt_regs *regs)					\
-+{									\
-+	instr_##func (regs);						\
-+}									\
-+									\
- static __always_inline void __##func(struct pt_regs *regs)
- 
- /**
-@@ -410,15 +445,18 @@ __visible noinstr void func(struct pt_regs *regs,			\
- /* C-Code mapping */
- #define DECLARE_IDTENTRY_NMI		DECLARE_IDTENTRY_RAW
- #define DEFINE_IDTENTRY_NMI		DEFINE_IDTENTRY_RAW
-+#define DEFINE_FREDENTRY_NMI		DEFINE_FREDENTRY_RAW
- 
- #ifdef CONFIG_X86_64
- #define DECLARE_IDTENTRY_MCE		DECLARE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_MCE		DEFINE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_MCE_USER	DEFINE_IDTENTRY_NOIST
-+#define DEFINE_FREDENTRY_MCE		DEFINE_FREDENTRY_RAW
- 
- #define DECLARE_IDTENTRY_DEBUG		DECLARE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_DEBUG		DEFINE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_DEBUG_USER	DEFINE_IDTENTRY_NOIST
-+#define DEFINE_FREDENTRY_DEBUG		DEFINE_FREDENTRY_RAW
- #endif
- 
- #else /* !__ASSEMBLY__ */
-@@ -651,23 +689,36 @@ DECLARE_IDTENTRY(RESCHEDULE_VECTOR,			sysvec_reschedule_ipi);
- DECLARE_IDTENTRY_SYSVEC(REBOOT_VECTOR,			sysvec_reboot);
- DECLARE_IDTENTRY_SYSVEC(CALL_FUNCTION_SINGLE_VECTOR,	sysvec_call_function_single);
- DECLARE_IDTENTRY_SYSVEC(CALL_FUNCTION_VECTOR,		sysvec_call_function);
-+#else
-+# define fred_sysvec_reschedule_ipi			NULL
-+# define fred_sysvec_reboot				NULL
-+# define fred_sysvec_call_function_single		NULL
-+# define fred_sysvec_call_function			NULL
- #endif
- 
- #ifdef CONFIG_X86_LOCAL_APIC
- # ifdef CONFIG_X86_MCE_THRESHOLD
- DECLARE_IDTENTRY_SYSVEC(THRESHOLD_APIC_VECTOR,		sysvec_threshold);
-+# else
-+# define fred_sysvec_threshold				NULL
- # endif
- 
- # ifdef CONFIG_X86_MCE_AMD
- DECLARE_IDTENTRY_SYSVEC(DEFERRED_ERROR_VECTOR,		sysvec_deferred_error);
-+# else
-+# define fred_sysvec_deferred_error			NULL
- # endif
- 
- # ifdef CONFIG_X86_THERMAL_VECTOR
- DECLARE_IDTENTRY_SYSVEC(THERMAL_APIC_VECTOR,		sysvec_thermal);
-+# else
-+# define fred_sysvec_thermal				NULL
- # endif
- 
- # ifdef CONFIG_IRQ_WORK
- DECLARE_IDTENTRY_SYSVEC(IRQ_WORK_VECTOR,		sysvec_irq_work);
-+# else
-+# define fred_sysvec_irq_work				NULL
- # endif
- #endif
- 
-@@ -675,12 +726,16 @@ DECLARE_IDTENTRY_SYSVEC(IRQ_WORK_VECTOR,		sysvec_irq_work);
- DECLARE_IDTENTRY_SYSVEC(POSTED_INTR_VECTOR,		sysvec_kvm_posted_intr_ipi);
- DECLARE_IDTENTRY_SYSVEC(POSTED_INTR_WAKEUP_VECTOR,	sysvec_kvm_posted_intr_wakeup_ipi);
- DECLARE_IDTENTRY_SYSVEC(POSTED_INTR_NESTED_VECTOR,	sysvec_kvm_posted_intr_nested_ipi);
-+#else
-+# define fred_sysvec_kvm_posted_intr_ipi		NULL
-+# define fred_sysvec_kvm_posted_intr_wakeup_ipi		NULL
-+# define fred_sysvec_kvm_posted_intr_nested_ipi		NULL
- #endif
- 
- #if IS_ENABLED(CONFIG_HYPERV)
- DECLARE_IDTENTRY_SYSVEC(HYPERVISOR_CALLBACK_VECTOR,	sysvec_hyperv_callback);
- DECLARE_IDTENTRY_SYSVEC(HYPERV_REENLIGHTENMENT_VECTOR,	sysvec_hyperv_reenlightenment);
--DECLARE_IDTENTRY_SYSVEC(HYPERV_STIMER0_VECTOR,	sysvec_hyperv_stimer0);
-+DECLARE_IDTENTRY_SYSVEC(HYPERV_STIMER0_VECTOR,		sysvec_hyperv_stimer0);
- #endif
- 
- #if IS_ENABLED(CONFIG_ACRN_GUEST)
+-	if (!cpu_feature_enabled(X86_FEATURE_XENPV)) {
++	if (!cpu_feature_enabled(X86_FEATURE_FRED) &&
++	    !cpu_feature_enabled(X86_FEATURE_XENPV)) {
+ 		native_swapgs();
+ 		wrgsbase(gsbase);
+ 		native_swapgs();
 -- 
 2.34.1
 
