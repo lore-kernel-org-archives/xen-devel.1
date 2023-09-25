@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C3ECE79A7
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Sep 2023 22:43:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.608149.946460 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9658E6FE31
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Sep 2023 22:43:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.608151.946481 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qkuHt-0006eL-8Z; Mon, 25 Sep 2023 22:42:45 +0000
+	id 1qkuHv-0007BB-NX; Mon, 25 Sep 2023 22:42:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 608149.946460; Mon, 25 Sep 2023 22:42:45 +0000
+Received: by outflank-mailman (output) from mailman id 608151.946481; Mon, 25 Sep 2023 22:42:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qkuHt-0006eE-62; Mon, 25 Sep 2023 22:42:45 +0000
-Received: by outflank-mailman (input) for mailman id 608149;
- Mon, 25 Sep 2023 22:42:44 +0000
+	id 1qkuHv-0007B0-KB; Mon, 25 Sep 2023 22:42:47 +0000
+Received: by outflank-mailman (input) for mailman id 608151;
+ Mon, 25 Sep 2023 22:42:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jxCo=FJ=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qkuHs-0006e1-Al
- for xen-devel@lists.xenproject.org; Mon, 25 Sep 2023 22:42:44 +0000
+ id 1qkuHu-0006e1-0Q
+ for xen-devel@lists.xenproject.org; Mon, 25 Sep 2023 22:42:46 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d6a985b1-5bf4-11ee-878a-cb3800f73035;
- Tue, 26 Sep 2023 00:42:43 +0200 (CEST)
+ id d7c9fbcb-5bf4-11ee-878a-cb3800f73035;
+ Tue, 26 Sep 2023 00:42:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 4398F828562B;
- Mon, 25 Sep 2023 17:42:42 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 52A33828558A;
+ Mon, 25 Sep 2023 17:42:44 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 0GI1UFaH0A4L; Mon, 25 Sep 2023 17:42:41 -0500 (CDT)
+ with ESMTP id swcRR5RQMj6u; Mon, 25 Sep 2023 17:42:43 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 6B5918285640;
- Mon, 25 Sep 2023 17:42:41 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 2CE3D82867A9;
+ Mon, 25 Sep 2023 17:42:43 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id C24nnOLqsfs2; Mon, 25 Sep 2023 17:42:41 -0500 (CDT)
+ with ESMTP id t6R6dDD_VBP4; Mon, 25 Sep 2023 17:42:42 -0500 (CDT)
 Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id C2CDD828558A;
- Mon, 25 Sep 2023 17:42:40 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id 219B78285B83;
+ Mon, 25 Sep 2023 17:42:42 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,53 +53,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6a985b1-5bf4-11ee-878a-cb3800f73035
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 6B5918285640
+X-Inumbo-ID: d7c9fbcb-5bf4-11ee-878a-cb3800f73035
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 2CE3D82867A9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1695681761; bh=KzJBYh4Ckh5yuJq8bIq+BDM2miqytFWcHal4Xa9U6ug=;
+	t=1695681763; bh=n7RbV6HKhggR9ZKikSDWaAYhJWp3wDDzOjNqYprqXEk=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=TEkHgkmtykC32CRyqrsbP6AX5yY9UoWJey4mn0WwabDeHXuF9uZEznrIYRpTxUzKX
-	 5IWHZsh2cX0GUZbyb0IiGG8Tps25RkoaikbzNhugOmerEZZZ0bI11Frv2EPLnWeO7a
-	 2Bn67vy1RVo62yK1DxdeEh4rGgiiIb6cdUR/yby0=
+	b=vLmBfBYe+KOv7Okxx7jFjFzyykpd0C/YFf6cCSqqAXQV5Bk4tJLmnG76eYtUxyADq
+	 3qfBn5UxwkX3O7TYjqrsnc4dAtswk6vrEbrsLz33Nvdw3Vvv3OcBt9Mr2u6Nm0jU8g
+	 qASTBWDfE7gL5LXuZ0m9gg0DPn1h43qWZXT/jKPg=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: Timothy Pearson <tpearson@raptorengineering.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 0/3] Fix Power CI build
-Date: Mon, 25 Sep 2023 17:42:27 -0500
-Message-Id: <cover.1695681330.git.sanastasio@raptorengineering.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 3/3] xen/common: Add NUMA node id bounds check to page_alloc.c/node_to_scrub
+Date: Mon, 25 Sep 2023 17:42:30 -0500
+Message-Id: <a47962a573eab38991a8aa3e09ca6b8bd3193b6c.1695681330.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1695681330.git.sanastasio@raptorengineering.com>
+References: <cover.1695681330.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Hello all,
+When building for Power with CONFIG_DEBUG unset, a compiler error gets
+raised inside page_alloc.c's node_to_scrub function, likely due to the
+increased optimization level:
 
-This series contains a few minor fixes to the CI config and one
-additional patch to common/ that resolve ppc64-specific CI failures
-that Jan discovered.
+common/page_alloc.c: In function 'node_to_scrub.part.0':
+common/page_alloc.c:1217:29: error: array subscript 1 is above array
+            bounds of 'long unsigned int[1]' [-Werror=array-bounds]
+ 1217 |         if ( node_need_scrub[node] )
 
-Thanks,
+It appears that this is a false positive, given that in practice
+cycle_node should never return a node ID >= MAX_NUMNODES as long as the
+architecture's node_online_map is properly defined and initialized, so
+this additional bounds check is only to satisfy GCC.
 
-Shawn Anastasio (3):
-  automation: Drop ppc64le-*randconfig jobs
-  automation: Change build script to use arch defconfig
-  xen/common: Add NUMA node id bounds check to
-    page_alloc.c/node_to_scrub
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+ xen/common/page_alloc.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
- automation/gitlab-ci/build.yaml | 18 ------------------
- automation/scripts/build        |  7 ++++++-
- xen/common/page_alloc.c         |  3 +++
- 3 files changed, 9 insertions(+), 19 deletions(-)
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 35d9a26fa6..6df2a223e1 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1211,6 +1211,9 @@ static unsigned int node_to_scrub(bool get_node)
+         } while ( !cpumask_empty(&node_to_cpumask(node)) &&
+                   (node != local_node) );
+
++        if ( node >= MAX_NUMNODES )
++            break;
++
+         if ( node == local_node )
+             break;
 
 --
 2.30.2
