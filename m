@@ -4,35 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D16EAE80AAC
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Sep 2023 14:02:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.608951.947810 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863DDE80AAC
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Sep 2023 14:05:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.608968.947836 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qlV6t-0007TN-Sc; Wed, 27 Sep 2023 14:01:51 +0000
+	id 1qlVAM-0001vy-7t; Wed, 27 Sep 2023 14:05:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 608951.947810; Wed, 27 Sep 2023 14:01:51 +0000
+Received: by outflank-mailman (output) from mailman id 608968.947836; Wed, 27 Sep 2023 14:05:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qlV6t-0007S9-O3; Wed, 27 Sep 2023 14:01:51 +0000
-Received: by outflank-mailman (input) for mailman id 608951;
- Wed, 27 Sep 2023 14:01:50 +0000
+	id 1qlVAM-0001vr-5D; Wed, 27 Sep 2023 14:05:26 +0000
+Received: by outflank-mailman (input) for mailman id 608968;
+ Wed, 27 Sep 2023 14:05:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Xec+=FL=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1qlV6s-0006eS-7S
- for xen-devel@lists.xenproject.org; Wed, 27 Sep 2023 14:01:50 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 65fd9b5f-5d3e-11ee-878a-cb3800f73035;
- Wed, 27 Sep 2023 16:01:47 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5377CDA7;
- Wed, 27 Sep 2023 07:02:25 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 43FE43F59C;
- Wed, 27 Sep 2023 07:01:46 -0700 (PDT)
+ <SRS0=WUTS=FL=citrix.com=prvs=6275c33bf=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1qlVAK-0001uJ-PQ
+ for xen-devel@lists.xenproject.org; Wed, 27 Sep 2023 14:05:24 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e48b0447-5d3e-11ee-878a-cb3800f73035;
+ Wed, 27 Sep 2023 16:05:21 +0200 (CEST)
+Received: from mail-mw2nam10lp2107.outbound.protection.outlook.com (HELO
+ NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.107])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 27 Sep 2023 10:05:18 -0400
+Received: from SJ0PR03MB6423.namprd03.prod.outlook.com (2603:10b6:a03:38d::21)
+ by MN2PR03MB5216.namprd03.prod.outlook.com (2603:10b6:208:1e8::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Wed, 27 Sep
+ 2023 14:05:14 +0000
+Received: from SJ0PR03MB6423.namprd03.prod.outlook.com
+ ([fe80::86fe:5402:9485:35c3]) by SJ0PR03MB6423.namprd03.prod.outlook.com
+ ([fe80::86fe:5402:9485:35c3%5]) with mapi id 15.20.6813.024; Wed, 27 Sep 2023
+ 14:05:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,1983 +51,278 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65fd9b5f-5d3e-11ee-878a-cb3800f73035
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: wei.chen@arm.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
+X-Inumbo-ID: e48b0447-5d3e-11ee-878a-cb3800f73035
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1695823521;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=bId/R5AcRuBPskvSnradQMBGg/Ic7MLDd7+Ah9kx4uo=;
+  b=efPN3SxnXUg92iejcf2Vw5D7h+mckBHKBKw//o2LYYxgWixv+1REzjst
+   OiJQN6eDmd1yBWgfFRTsshxrIal1dUu4GYS2MIpnudkPYpgDv/WFoDUz2
+   RuaTFrWm/jcy1m6e++SWq5nRmh6LdNJKUaNCRS6lqPLK4y0FAPtVvkFRR
+   A=;
+X-CSE-ConnectionGUID: 2DihEJlYQF2lACKiLh0XFA==
+X-CSE-MsgGUID: 4bDrnj6sQ1iOLrq2F9tSCQ==
+X-IronPort-RemoteIP: 104.47.55.107
+X-IronPort-MID: 123967447
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+X-ThreatScanner-Verdict: Negative
+IronPort-Data: A9a23:rbl8E6sZmYEZ7PTxqZhA+/nR1efnVLNfMUV32f8akzHdYApBsoF/q
+ tZmKWqBOPfeYWD9Ltx2aIiz8xwA65OHmNdgSwo5/y48ESkW+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVaicfHg3HFc4IMsYoUoLs/YjhYJ1isSODQqIu
+ Nfjy+XSI1bg0DNvWo4uw/vrRChH4rKq41v0gnRkPaoQ5A6EyCFPZH4iDfrZw0XQE9E88tGSH
+ 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
+ Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
+ fMwchwMbj2hg9OP7ui/Y8JPh+AjdPnFFdZK0p1g5Wmx4fcOZ7nmGv2PwOACmTA6i4ZJAOrUY
+ NcfZXx3dhPcbhZTO1ARTpUjgOOvgXq5eDpdwL6XjfNvvy6Pk0osjf60aIW9lt+iHK25mm6Co
+ W3L5SLhCwwyP92D0zuVtHmrg4cjmAuiAtlDSuLkqqECbFu7mmY/EhsUC0CC+PierlSnAfwON
+ 3c/w397xUQ13AnxJjXnZDW6qnOZuh8XW/JLDvY3rgqKz8L88wufQ2QJUDNFQNgnr9MtAywn0
+ EeTmNHkDiApt6eaIVqf67OVoDWaKSUTa2gYakcsVhAZ6tPupIUyiBPnTdt5FqOxyNrvFlnY3
+ DSivCU4wbIJgqYjy6y+9EvvnzGoq57GXwMxoA7QWwqYAhhRYYekY8mt9gLd5PMZdIKBFADZ4
+ z4DhtSU6/0IAdeVjiuRTe4RHbavofGYLDnbhl0pFJ4kn9iwx0OekUlryGkWDC9U3gwsI1cFv
+ Ge7Vdtt2aJu
+IronPort-HdrOrdr: A9a23:EQD7W6NTIaS2o8BcT4T155DYdb4zR+YMi2TDtnoBPCC9F/by+f
+ xG88566faKskdsZJhNo7G90cq7MADhHOBOkOss1N6ZNWGNhILCFvAA0WKN+UyEJ8X0ntQtqp
+ uJG8JFZOEZZjJB4voTL2ODfuoI8Z2/1OSNuM+b9nFqSGhRGtNdB8USMHfkLqWzLjM2dabQ0f
+ Cnl7t6TkGbCBAqR/X+PGABQ+/A4/XTjfvdEGc7Li9i0hCKkTSrrJXnEx2Uty1uLg9n8PMZ6G
+ 3YlA68wa2mv5iAu3jh/l6W1Y1ShNzijv1cA8CW4/JlTAnEu0KTfYF8XL/HhhAZydvfkGoCoZ
+ 33uhI9OMY20X/LYW2vhhPo12DboU0Twk6n80acnXzg5fP0Xyg7Dc0pv/MiTifk
+X-Talos-CUID: =?us-ascii?q?9a23=3Avq4HfWkosu3DETk171WopuvBxJbXOSfxzXf9AUu?=
+ =?us-ascii?q?JMEgzTJS+al60+PtUveM7zg=3D=3D?=
+X-Talos-MUID: 9a23:mc1RWQZ7WrYuHOBT6zXAnjdgatxRuqWJLFoUy7tXp/KvDHkl
+X-IronPort-AV: E=Sophos;i="6.03,181,1694750400"; 
+   d="scan'208";a="123967447"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=g7mIBRJOMVSrp54mgTOfTBzDcgbUdIYBxe2rCVFzuha9EyzEifYeQvZ12pLxMyxmT0rAZ3q7UYLyq/Tr0Dyi6NyJ7SSkwpQYnhSDTdJkZv4uJjEt4sWLFU0wRnn170N10omB0Cg13G3WTi4eWe+e4/6Hz5cHV8IjgwWWNKD4WP5HXnnAojO4JN1xbbbpOQA7ICOgLnYzADrtt21/G6/FNYXKXARU1SSZg+4YNxKITVH6e428RzJK2QNQlo4hPbQoyTsRpGmazJkHgZ7auIq/9B4bkdH3Po3GWf9YAmH0jDYtjtNEi0uu5aa+hyeeJQkLY6dNUJ8ro2clpdygGYZnSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/ZCpo1kYmrtGA7YUPTTNRPeaWU/m5QXz0Aotta5mofc=;
+ b=VSANVzZNexma0OKMT42CSI0KfOk/xnYbLFDM1x7Stk3NpkkTCHHlGyV9EIm03ABh6dzkicsdXLdPtur1Hqm+0xjFY1BUwZAukrbmUZmCQf6s8E4vbLDq0QMZ27zMpFSSg0LdU/0OPel5CF/W7SeeBC8etCLsHDQOt/0lR9bweiI7tKQAn0lFm3t2mPhThbEM6w3q45whI0eeyAe3gLXF+B66emRlwvq+N35eKMxYNRI5nXXE0mTmKamjmdIhb/RvHKWYSF2N0peT9DXy/yBiIN3ksZzRaKstfkHJvU+Z9o8s+SrF0KWGWN3Fvs/nO1uBEE67p9psl6uMuwFCmFpKBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/ZCpo1kYmrtGA7YUPTTNRPeaWU/m5QXz0Aotta5mofc=;
+ b=jy8Cjy5//domi6JEEY4+EZ4/b8kX4vJf1xrGWbYgVS3modDMI6JWtK949otFtqQ/ZGF688IkaJiTE3lo2HdqHrXfpnLzl6jT9b57Zd0gl+ykWXb1SaosjGSsxk9RP9hGYZEn7JiIOCtm29Qp9GS3O8M3VeiuEO4Sfcui0yyEbik=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Date: Wed, 27 Sep 2023 16:05:08 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 4/5] xen/arm: Move static memory build code in separate modules
-Date: Wed, 27 Sep 2023 15:01:32 +0100
-Message-Id: <20230927140133.631192-5-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230927140133.631192-1-luca.fancellu@arm.com>
-References: <20230927140133.631192-1-luca.fancellu@arm.com>
-MIME-Version: 1.0
+	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+	Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH v3 4/8] x86/mem-sharing: copy GADDR based shared guest
+ areas
+Message-ID: <ZRQ2lHBHDlHJKYzp@MacBookPdeRoger>
+References: <472f8314-9ad7-523a-32dc-d5c2138c2c8c@suse.com>
+ <a79d2a8b-6d6e-bd31-b079-a30b555e5fd0@suse.com>
+ <ZRQNHyggOFD1FuMD@MacBookPdeRoger>
+ <6b55a773-c005-f524-531c-45247cac1d55@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <6b55a773-c005-f524-531c-45247cac1d55@suse.com>
+X-ClientProxiedBy: LO4P123CA0429.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18b::20) To SJ0PR03MB6423.namprd03.prod.outlook.com
+ (2603:10b6:a03:38d::21)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB6423:EE_|MN2PR03MB5216:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6e343fcd-6b53-480d-f080-08dbbf62c530
+X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	W6o6NpfY6sUfHMBTc9qZILHBTBJDQaBa1q2gUjinjEp/eQKDIPID9h7faGaP+8XRgSLlCmkWMDtiLfICPPzB8HQ0gimasu+O6puTqy8c3d00atn9D9EwEFrPUoNb9tkgz/MGEVLccVK/3viLz3PvJ1LddCryOaSu/9WCGzRIH5tPK5iTd1QK8lgyyjDxNQgcp5COXc4y5KYqizCSX+E4K0SQM9l1Px+AI23HT/aNwhXylBGksihIHE4Qmj0wC/akFZ95VY6VV4rywFL1osibcMgkBvZjR0/Q90EHHZm9cJr7U5t9kYXisU9yVy5yNEx5wCb4P1Sq5HG5btfngAfAimS86TdN56cnL6sYkQMjIBFofmS5/d7YCajZOU+WbZq+CbTJUxyvaFJShiTquC2c0hHy4Y8ElXDLT7aqcotsHEu4kfndqQ3NALueVtP/FMqLIjL2ftOmKo+XfKrmsYbCdLOoo88mKuuct+Ty9v1QaQ8s28QWKtjqwRWReofifhJbaSuAuvvx70sY9GxACxfvIUQyGHC0MZN+gQUFbGqZ1MIkzIsPlabZ9xqV0D36e2Sw
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6423.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(7916004)(346002)(376002)(366004)(396003)(39860400002)(136003)(230922051799003)(451199024)(186009)(1800799009)(8676002)(8936002)(41300700001)(2906002)(26005)(4326008)(478600001)(66476007)(316002)(66946007)(5660300002)(54906003)(6916009)(66556008)(6506007)(6666004)(53546011)(6486002)(6512007)(9686003)(85182001)(33716001)(86362001)(83380400001)(38100700002)(82960400001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?aFd5QUZqTUxrMzdjYm8ySW5ocWJpdklCVnNzdHJVYlRnZWZNR0krSzNUbEYr?=
+ =?utf-8?B?ZmE4M2swOXFaUXNma0RRRFppdllLRVJXN0ZYV3F5cSt1YWhrVW5pYldrL0ZN?=
+ =?utf-8?B?dEZhQmVWQmlKaGRxbkVJOGJMYnZaYUk1S01ibHc5TXdidGFMejlqNjFvTHVo?=
+ =?utf-8?B?RUlFQlVRUFg1c2FFL043N2t0Y3VwdTZYWi9GSytaUlBSeE9wWVEveDVicGxM?=
+ =?utf-8?B?QVh0ckp0dlg0RHcrWDVnOWRlWmhJM1NJWEpxSGZnaVdxOTM1Ly8vMk13dFN4?=
+ =?utf-8?B?REJCSGo3ZFFQM3Q3UUphejMwNW1hcTJ0NXJYM3RTYVhxYzhodG5oV3FGTGt3?=
+ =?utf-8?B?Z0Fya0VjL2Rpc1ZMOG5FcnFUTVFjSUZqdlVNNWZHN1plRnRDRUtlaHZXSXR5?=
+ =?utf-8?B?Yy9MbURHanppSUo1cEdac2JzZ2hWaG44SGlUUmRPT04rT2wzd25kUTJrd0dG?=
+ =?utf-8?B?QWNLTlBRSllpS3B2UmFVZjEvL29Yc3NnekRWL1E3QlA2YU5ZVG5NSnVlTEtV?=
+ =?utf-8?B?RXpwS0R1ZHBsdVNUL005MFYvVTF2V1h3ZFhqRno3VHBISDRVQWs1RjBKMU1q?=
+ =?utf-8?B?UDJUUWZFem5VUWc4MzgzanNsUUxTdXE0dHg2VXBMVkhXL1pWOUg2c2NFcXB5?=
+ =?utf-8?B?bTcxQlJXNDQwakxCaWR1YWtoTjBBaW5IeWp1OG4wd3h0ajRBZ0hnZStYKzZF?=
+ =?utf-8?B?U1p1aGdQVGNoWlNxMHJFMlRzNUdtb3NiRjhNVUNVaHI1eU12YnQwZFVxdGkx?=
+ =?utf-8?B?V3JzUmVYODJKdXpOTzF1NDJyWG94cVRUdU5SbGNhZUxVc1ZkSHh2TTNzQmFt?=
+ =?utf-8?B?dEVIaFJIazhzem9xUmxTS3Z0ejJBQVlRaDRsOVJzRjJwSWFGUE5NZnRNQkMx?=
+ =?utf-8?B?SGlEbWxjeXlRR3ZraWZwUHp2SXJvekorbXVtVjlVeTQ1ejhpTzl2M1VHYU00?=
+ =?utf-8?B?bm8wemxCU3Mwc2w4eVo1eWlRY2lNU3lEbFBqMGdDQVBKTzBmc1BlOGpyWk5E?=
+ =?utf-8?B?c2dDUVVzK3BwV0UxK2hxd3haZE9UcEV6TUxmb1NuQjNPTnpFem1RRHRaYlVZ?=
+ =?utf-8?B?cTZqYUVpdTBpYjN0ZXN1QU4zaWI4TGJIOThBekJSNnBrUU5OQ0lWd1dWMnph?=
+ =?utf-8?B?bnE1L2I2NVNROEdJUVVYWWVWZkQ4OHZMMjFiUEpWdGlMMWIycUsyK1haMGVi?=
+ =?utf-8?B?ZHp1Wnp5ZXZTMDlFSHlCK3dacVNUNVhmc2FlVG90YnZxMFBWNmtkS292WkNS?=
+ =?utf-8?B?SW80STBXcVhLcVU2L3djQ1IyemtyOGM3M0d4MzhTeXVIb3pya0piNzl2VXRr?=
+ =?utf-8?B?YmdEVmwxTWRGT2swZ1cra052YU9OaksxY2d0YUpOU3JCaERTNVo2WkNPaDB0?=
+ =?utf-8?B?T2V0djRVcTdYYnhLWGtoNHRzNnVheXo2cGhoSVI3cmIya0s5YTJTVngrd2F3?=
+ =?utf-8?B?aForU0xZYjZyNWZaT2ZVSlhyMXUzZmo3bm5FQlF3Z2dMcjllamdhaHRLd25h?=
+ =?utf-8?B?WU5HT0tNcnVhYkZGd3NtdHdFOHAwd2duaVJCZmtjNDVBUHJhUXFkT3c0RkpK?=
+ =?utf-8?B?Tis4U1VtUUlqNWJLb2tacG5FSDBxM0JHUTJQVTFUNzQrczJOQTdTdDNYMjZ2?=
+ =?utf-8?B?TXpoNGRKbXMwQ2JoNXFIS0ZVZUhxUE5mMVlxaXdsT1lROXQxQmpJSkFSNkNN?=
+ =?utf-8?B?a09zWHdVRlJsYlo0cDJoaU1JUGRJYzlkbTNHY1RuRlpQWHdFekJnMjJHODVr?=
+ =?utf-8?B?T1Y4UGp6c0Jpa3NuNTdSVFpkVFhySlNFczg0U0pubjJrd0dUeEw3QzBSMU0r?=
+ =?utf-8?B?Vlp2ZzF0bGIwbXVLVXdmSSswaXM3RHNrRnNrYmhCR3RLWGJDMWNSL1NoWmtR?=
+ =?utf-8?B?bERZMjNJVjN6N05YeUNJSGdsNU1PNU5NU1JYNVZkNklVK3g1ZndrMXFTdVVZ?=
+ =?utf-8?B?QlNVdlJONFNZRjNwaFhRRmFmZ1ltMk5QV2Nra05vYXVTWFo0VEMxdzFibUVs?=
+ =?utf-8?B?MzFTSWRhWGxVakNKUU8zemNhZWdTRjl5Ny9OZ2pHVTdMNTJFak44NXY2MjN4?=
+ =?utf-8?B?Y25NSnJ1dWwxaWJvb1hPdDZJZDVjVmVqdDVNalNkdU9ud1N6RzhZTFhxZnlj?=
+ =?utf-8?B?aWlRdXY5c2lxaUtDQVprMXVzOXptbUs3b0RzNjM2ako4SG1rRjRxRkdaclZI?=
+ =?utf-8?B?b2c9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	o4qPEMpSLWd+M73KuRRI4LsFImUigSnqcYjgooPrYGMxr8RzIG1z5IhWWZ3v6fKWf77WMF225XRBeWiKwooybvC/m3NuWKbtCt1lU5kzaMYwQI+nP2ferMg8cY88kc7Lr4lJEPK30yivIJEy2PXKSoP0dvML03psPnjEa7BjZVMQ9TUcFpAKMJJ3jxCrAutZuMZLBDt7s5r5G7ElHm6YB+oG8zDyqO1SgWZ+l2BcSjFj96BcW8n2Dh/kcExEYfc8CHlRXZ+rmAL+bsgC04kF828qthNfHRY/MTXDPXqz6IDJFKg7/ie/CoQL91AE65Umk/6l+FnB6rM6sU9MoOU1eDjX4Gt+bQq0mZUqOBi2d+4iIsMT6LGCgdntcz2U8Kl0IQ6fqnkQ5Ag/x/rC08jbEC2qYEIsYbWeIUbK/A1htiR1oSG9sFkKtQx62bUIzKXV9r2Ubvo/gx3qiOAkYac4gqpcaDwjD/BvEmfJwEeepzhQaQlDsXOX8kz+T5Tzg4Vfo3o0URm7INQs1Rn3Ax5uh/tF4Lp4Hy7PmgS3Kmrgdox+TnsOJY6jlPISo8jvAobX8XT6XvQGjus9keHArSf2ns8iAUDDKTrnNQUAIXDQF+83JeSPbRAfQTNxVkVbLDoKWtP72/Sl/vOcbq1BNe5tgtyu59R9UKuFoZi2mc7dGfp6o3a6PmpJceDDebaZ54jrPgOXkuk2htCNjeatLhdCZfysPgkKFWZyo3Xk4G7S2/YaGxptyc7YdG7IoMXFShp0Ieb73mdoJN9gWb+QVbVml/PJ5Z7iUOni29GJxquv/eJfyuaZbslcbqXlWztU8kGhmdJ58af8SZlkvJhVV97QkljAcRU/EtdpHoeXBtSEJVuv7KG6LJKLer16KEJyPE9QCYZMlfA/zyP5PoCT2H044Q==
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6e343fcd-6b53-480d-f080-08dbbf62c530
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB6423.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2023 14:05:14.1625
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: W8s1l0BPj1GgCgItkk4uzUTelV/PiTMsW2TXlXwfLeVhjltYAPomdsE49zemwc6F8KDQlfZR5JpK+l56Bio8Yw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR03MB5216
 
-Move static memory and static shared memory code in separate modules
-so that they are included only when the corresponding feature is
-enabled, doing that we modularise the features and we remove some
-ifdefs from the code to improve readability.
+On Wed, Sep 27, 2023 at 02:06:47PM +0200, Jan Beulich wrote:
+> On 27.09.2023 13:08, Roger Pau Monné wrote:
+> > On Wed, May 03, 2023 at 05:56:46PM +0200, Jan Beulich wrote:
+> >> In preparation of the introduction of new vCPU operations allowing to
+> >> register the respective areas (one of the two is x86-specific) by
+> >> guest-physical address, add the necessary fork handling (with the
+> >> backing function yet to be filled in).
+> >>
+> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> > 
+> > Given the very limited and specific usage of the current Xen forking
+> > code, do we really need to bother about copying such areas?
+> > 
+> > IOW: I doubt that not updating the runstate/time areas will make any
+> > difference to the forking code ATM.
+> 
+> I expect Tamas'es reply has sufficiently addressed this question.
 
-Move process_shm_node function from bootfdt module and make it
-externally visible.
+Seeing the TODO in copy_vcpu_settings() makes me wonder how well we
+copy information for PV interfaces for forks.  Timers are not
+migrated, neither runstate areas for example.
 
-A static inline helper called process_shm_chosen is introduced, it
-will call the process_shm function for the '/chosen' node, and will
-be used by the function construct_dom0 instead of using directly
-process_shm, allowing some #ifdef to be removed.
+Which is all fine, but I expect VMs this is currently tested against
+don't use (a lot of) PV interfaces, or else I don't know how they can
+survive.
 
-No functional changes are intended.
+> >> --- a/xen/arch/x86/mm/mem_sharing.c
+> >> +++ b/xen/arch/x86/mm/mem_sharing.c
+> >> @@ -1641,6 +1641,68 @@ static void copy_vcpu_nonreg_state(struc
+> >>      hvm_set_nonreg_state(cd_vcpu, &nrs);
+> >>  }
+> >>  
+> >> +static int copy_guest_area(struct guest_area *cd_area,
+> >> +                           const struct guest_area *d_area,
+> >> +                           struct vcpu *cd_vcpu,
+> >> +                           const struct domain *d)
+> >> +{
+> >> +    mfn_t d_mfn, cd_mfn;
+> >> +
+> >> +    if ( !d_area->pg )
+> >> +        return 0;
+> >> +
+> >> +    d_mfn = page_to_mfn(d_area->pg);
+> >> +
+> >> +    /* Allocate & map a page for the area if it hasn't been already. */
+> >> +    if ( !cd_area->pg )
+> >> +    {
+> >> +        gfn_t gfn = mfn_to_gfn(d, d_mfn);
+> >> +        struct p2m_domain *p2m = p2m_get_hostp2m(cd_vcpu->domain);
+> >> +        p2m_type_t p2mt;
+> >> +        p2m_access_t p2ma;
+> >> +        unsigned int offset;
+> >> +        int ret;
+> >> +
+> >> +        cd_mfn = p2m->get_entry(p2m, gfn, &p2mt, &p2ma, 0, NULL, NULL);
+> >> +        if ( mfn_eq(cd_mfn, INVALID_MFN) )
+> >> +        {
+> >> +            struct page_info *pg = alloc_domheap_page(cd_vcpu->domain, 0);
+> >> +
+> >> +            if ( !pg )
+> >> +                return -ENOMEM;
+> >> +
+> >> +            cd_mfn = page_to_mfn(pg);
+> >> +            set_gpfn_from_mfn(mfn_x(cd_mfn), gfn_x(gfn));
+> >> +
+> >> +            ret = p2m->set_entry(p2m, gfn, cd_mfn, PAGE_ORDER_4K, p2m_ram_rw,
+> >> +                                 p2m->default_access, -1);
+> >> +            if ( ret )
+> >> +                return ret;
+> >> +        }
+> >> +        else if ( p2mt != p2m_ram_rw )
+> >> +            return -EBUSY;
+> > 
+> > Shouldn't the populate of the underlying gfn in the fork case
+> > be done by map_guest_area itself?
+> 
+> I've used the existing logic for the info area to base my code on. As
+> noted in the patch switching the info area logic to use the generalize
+> infrastructure, I've taken the liberty to address an issue in the
+> original logic. But it was never a goal to re-write things from scratch.
+> If, as Tamas appears to agree, there a better way of layering things
+> here, then please as a follow-on patch.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
- xen/arch/arm/Makefile                     |   2 +
- xen/arch/arm/bootfdt.c                    | 161 +-----
- xen/arch/arm/dom0less-build.c             |   4 +-
- xen/arch/arm/domain_build.c               | 614 +---------------------
- xen/arch/arm/include/asm/dom0less-build.h |   2 -
- xen/arch/arm/include/asm/domain_build.h   |  24 -
- xen/arch/arm/include/asm/static-memory.h  |  50 ++
- xen/arch/arm/include/asm/static-shmem.h   |  72 +++
- xen/arch/arm/setup.c                      |  25 +-
- xen/arch/arm/static-memory.c              | 294 +++++++++++
- xen/arch/arm/static-shmem.c               | 515 ++++++++++++++++++
- 11 files changed, 939 insertions(+), 824 deletions(-)
- create mode 100644 xen/arch/arm/include/asm/static-memory.h
- create mode 100644 xen/arch/arm/include/asm/static-shmem.h
- create mode 100644 xen/arch/arm/static-memory.c
- create mode 100644 xen/arch/arm/static-shmem.c
+Hm, I'm unsure the code that allocates the page and adds it to the p2m
+for the vcpu_info area is required?  map_vcpu_info() should already be
+able to handle this case and fork the page from the previous VM.
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 70dd7201ef30..89ef0c9075b5 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -50,6 +50,8 @@ obj-y += setup.o
- obj-y += shutdown.o
- obj-y += smp.o
- obj-y += smpboot.o
-+obj-$(CONFIG_STATIC_MEMORY) += static-memory.init.o
-+obj-$(CONFIG_STATIC_SHM) += static-shmem.init.o
- obj-y += sysctl.o
- obj-y += time.o
- obj-y += traps.o
-diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index 2673ad17a1e1..fcf851b4c99b 100644
---- a/xen/arch/arm/bootfdt.c
-+++ b/xen/arch/arm/bootfdt.c
-@@ -15,6 +15,7 @@
- #include <xen/sort.h>
- #include <xsm/xsm.h>
- #include <asm/setup.h>
-+#include <asm/static-shmem.h>
- 
- static bool __init device_tree_node_matches(const void *fdt, int node,
-                                             const char *match)
-@@ -402,166 +403,6 @@ static int __init process_domain_node(const void *fdt, int node,
-                                    MEMBANK_STATIC_DOMAIN);
- }
- 
--#ifdef CONFIG_STATIC_SHM
--static int __init process_shm_node(const void *fdt, int node,
--                                   uint32_t address_cells, uint32_t size_cells)
--{
--    const struct fdt_property *prop, *prop_id, *prop_role;
--    const __be32 *cell;
--    paddr_t paddr, gaddr, size;
--    struct meminfo *mem = &bootinfo.reserved_mem;
--    unsigned int i;
--    int len;
--    bool owner = false;
--    const char *shm_id;
--
--    if ( address_cells < 1 || size_cells < 1 )
--    {
--        printk("fdt: invalid #address-cells or #size-cells for static shared memory node.\n");
--        return -EINVAL;
--    }
--
--    /*
--     * "xen,shm-id" property holds an arbitrary string with a strict limit
--     * on the number of characters, MAX_SHM_ID_LENGTH
--     */
--    prop_id = fdt_get_property(fdt, node, "xen,shm-id", NULL);
--    if ( !prop_id )
--        return -ENOENT;
--    shm_id = (const char *)prop_id->data;
--    if ( strnlen(shm_id, MAX_SHM_ID_LENGTH) == MAX_SHM_ID_LENGTH )
--    {
--        printk("fdt: invalid xen,shm-id %s, it must be limited to %u characters\n",
--               shm_id, MAX_SHM_ID_LENGTH);
--        return -EINVAL;
--    }
--
--    /*
--     * "role" property is optional and if it is defined explicitly,
--     * it must be either `owner` or `borrower`.
--     */
--    prop_role = fdt_get_property(fdt, node, "role", NULL);
--    if ( prop_role )
--    {
--        if ( !strcmp(prop_role->data, "owner") )
--            owner = true;
--        else if ( strcmp(prop_role->data, "borrower") )
--        {
--            printk("fdt: invalid `role` property for static shared memory node.\n");
--            return -EINVAL;
--        }
--    }
--
--    /*
--     * xen,shared-mem = <paddr, gaddr, size>;
--     * Memory region starting from physical address #paddr of #size shall
--     * be mapped to guest physical address #gaddr as static shared memory
--     * region.
--     */
--    prop = fdt_get_property(fdt, node, "xen,shared-mem", &len);
--    if ( !prop )
--        return -ENOENT;
--
--    if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
--    {
--        if ( len == dt_cells_to_size(size_cells + address_cells) )
--            printk("fdt: host physical address must be chosen by users at the moment.\n");
--
--        printk("fdt: invalid `xen,shared-mem` property.\n");
--        return -EINVAL;
--    }
--
--    cell = (const __be32 *)prop->data;
--    device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
--    size = dt_next_cell(size_cells, &cell);
--
--    if ( !size )
--    {
--        printk("fdt: the size for static shared memory region can not be zero\n");
--        return -EINVAL;
--    }
--
--    for ( i = 0; i < mem->nr_banks; i++ )
--    {
--        /*
--         * Meet the following check:
--         * 1) The shm ID matches and the region exactly match
--         * 2) The shm ID doesn't match and the region doesn't overlap
--         * with an existing one
--         */
--        if ( paddr == mem->bank[i].start && size == mem->bank[i].size )
--        {
--            if ( strncmp(shm_id, mem->bank[i].shm_id, MAX_SHM_ID_LENGTH) == 0 )
--                break;
--            else
--            {
--                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
--                       shm_id);
--                return -EINVAL;
--            }
--        }
--        else
--        {
--            paddr_t end = paddr + size;
--            paddr_t bank_end = mem->bank[i].start + mem->bank[i].size;
--
--            if ( (end <= paddr) || (bank_end <= mem->bank[i].start) )
--            {
--                printk("fdt: static shared memory region %s overflow\n", shm_id);
--                return -EINVAL;
--            }
--
--            if ( check_reserved_regions_overlap(paddr, size) )
--                return -EINVAL;
--            else
--            {
--                if ( strcmp(shm_id, mem->bank[i].shm_id) != 0 )
--                    continue;
--                else
--                {
--                    printk("fdt: different shared memory region could not share the same shm ID %s\n",
--                           shm_id);
--                    return -EINVAL;
--                }
--            }
--        }
--    }
--
--    if ( i == mem->nr_banks )
--    {
--        if ( i < NR_MEM_BANKS )
--        {
--            /* Static shared memory shall be reserved from any other use. */
--            safe_strcpy(mem->bank[mem->nr_banks].shm_id, shm_id);
--            mem->bank[mem->nr_banks].start = paddr;
--            mem->bank[mem->nr_banks].size = size;
--            mem->bank[mem->nr_banks].type = MEMBANK_STATIC_DOMAIN;
--            mem->nr_banks++;
--        }
--        else
--        {
--            printk("Warning: Max number of supported memory regions reached.\n");
--            return -ENOSPC;
--        }
--    }
--    /*
--     * keep a count of the number of borrowers, which later may be used
--     * to calculate the reference count.
--     */
--    if ( !owner )
--        mem->bank[i].nr_shm_borrowers++;
--
--    return 0;
--}
--#else
--static int __init process_shm_node(const void *fdt, int node,
--                                   uint32_t address_cells, uint32_t size_cells)
--{
--    printk("CONFIG_STATIC_SHM must be enabled for parsing static shared memory nodes\n");
--    return -EINVAL;
--}
--#endif
--
- static int __init early_scan_node(const void *fdt,
-                                   int node, const char *name, int depth,
-                                   u32 address_cells, u32 size_cells,
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index dc9c90cf00a7..a401501fd70c 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -21,6 +21,8 @@
- #include <asm/arm64/sve.h>
- #include <asm/dom0less-build.h>
- #include <asm/domain_build.h>
-+#include <asm/static-memory.h>
-+#include <asm/static-shmem.h>
- 
- bool __init is_dom0less_mode(void)
- {
-@@ -875,11 +877,9 @@ static int __init construct_domU(struct domain *d,
-     else
-         assign_static_memory_11(d, &kinfo, node);
- 
--#ifdef CONFIG_STATIC_SHM
-     rc = process_shm(d, &kinfo, node);
-     if ( rc < 0 )
-         return rc;
--#endif
- 
-     /*
-      * Base address and irq number are needed when creating vpl011 device
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index a0d656b33629..9ffe498a434c 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -30,6 +30,7 @@
- #include <asm/cpufeature.h>
- #include <asm/dom0less-build.h>
- #include <asm/domain_build.h>
-+#include <asm/static-shmem.h>
- #include <xen/event.h>
- 
- #include <xen/irq.h>
-@@ -414,533 +415,6 @@ static void __init allocate_memory_11(struct domain *d,
-     }
- }
- 
--#ifdef CONFIG_STATIC_MEMORY
--static bool __init append_static_memory_to_bank(struct domain *d,
--                                                struct membank *bank,
--                                                mfn_t smfn,
--                                                paddr_t size)
--{
--    int res;
--    unsigned int nr_pages = PFN_DOWN(size);
--    gfn_t sgfn;
--
--    /*
--     * For direct-mapped domain, the GFN match the MFN.
--     * Otherwise, this is inferred on what has already been allocated
--     * in the bank.
--     */
--    if ( !is_domain_direct_mapped(d) )
--        sgfn = gaddr_to_gfn(bank->start + bank->size);
--    else
--        sgfn = gaddr_to_gfn(mfn_to_maddr(smfn));
--
--    res = guest_physmap_add_pages(d, sgfn, smfn, nr_pages);
--    if ( res )
--    {
--        dprintk(XENLOG_ERR, "Failed to map pages to DOMU: %d", res);
--        return false;
--    }
--
--    bank->size = bank->size + size;
--
--    return true;
--}
--
--static mfn_t __init acquire_static_memory_bank(struct domain *d,
--                                               const __be32 **cell,
--                                               u32 addr_cells, u32 size_cells,
--                                               paddr_t *pbase, paddr_t *psize)
--{
--    mfn_t smfn;
--    int res;
--
--    device_tree_get_reg(cell, addr_cells, size_cells, pbase, psize);
--    ASSERT(IS_ALIGNED(*pbase, PAGE_SIZE) && IS_ALIGNED(*psize, PAGE_SIZE));
--    if ( PFN_DOWN(*psize) > UINT_MAX )
--    {
--        printk(XENLOG_ERR "%pd: static memory size too large: %#"PRIpaddr,
--               d, *psize);
--        return INVALID_MFN;
--    }
--
--    smfn = maddr_to_mfn(*pbase);
--    res = acquire_domstatic_pages(d, smfn, PFN_DOWN(*psize), 0);
--    if ( res )
--    {
--        printk(XENLOG_ERR
--               "%pd: failed to acquire static memory: %d.\n", d, res);
--        return INVALID_MFN;
--    }
--
--    return smfn;
--}
--
--static int __init parse_static_mem_prop(const struct dt_device_node *node,
--                                        u32 *addr_cells, u32 *size_cells,
--                                        int *length, const __be32 **cell)
--{
--    const struct dt_property *prop;
--
--    prop = dt_find_property(node, "xen,static-mem", NULL);
--
--    *addr_cells = dt_n_addr_cells(node);
--    *size_cells = dt_n_size_cells(node);
--
--    *cell = (const __be32 *)prop->value;
--    *length = prop->length;
--
--    return 0;
--}
--
--/* Allocate memory from static memory as RAM for one specific domain d. */
--void __init allocate_static_memory(struct domain *d, struct kernel_info *kinfo,
--                                   const struct dt_device_node *node)
--{
--    u32 addr_cells, size_cells, reg_cells;
--    unsigned int nr_banks, gbank, bank = 0;
--    const uint64_t rambase[] = GUEST_RAM_BANK_BASES;
--    const uint64_t ramsize[] = GUEST_RAM_BANK_SIZES;
--    const __be32 *cell;
--    u64 tot_size = 0;
--    paddr_t pbase, psize, gsize;
--    mfn_t smfn;
--    int length;
--
--    if ( parse_static_mem_prop(node, &addr_cells, &size_cells, &length, &cell) )
--        goto fail;
--    reg_cells = addr_cells + size_cells;
--
--    /*
--     * The static memory will be mapped in the guest at the usual guest memory
--     * addresses (GUEST_RAM0_BASE, GUEST_RAM1_BASE) defined by
--     * xen/include/public/arch-arm.h.
--     */
--    gbank = 0;
--    gsize = ramsize[gbank];
--    kinfo->mem.bank[gbank].start = rambase[gbank];
--    nr_banks = length / (reg_cells * sizeof (u32));
--
--    for ( ; bank < nr_banks; bank++ )
--    {
--        smfn = acquire_static_memory_bank(d, &cell, addr_cells, size_cells,
--                                          &pbase, &psize);
--        if ( mfn_eq(smfn, INVALID_MFN) )
--            goto fail;
--
--        printk(XENLOG_INFO "%pd: STATIC BANK[%u] %#"PRIpaddr"-%#"PRIpaddr"\n",
--               d, bank, pbase, pbase + psize);
--
--        while ( 1 )
--        {
--            /* Map as much as possible the static range to the guest bank */
--            if ( !append_static_memory_to_bank(d, &kinfo->mem.bank[gbank], smfn,
--                                               min(psize, gsize)) )
--                goto fail;
--
--            /*
--             * The current physical bank is fully mapped.
--             * Handle the next physical bank.
--             */
--            if ( gsize >= psize )
--            {
--                gsize = gsize - psize;
--                break;
--            }
--            /*
--             * When current guest bank is not enough to map, exhaust
--             * the current one and seek to the next.
--             * Before seeking to the next, check if we still have available
--             * guest bank.
--             */
--            else if ( (gbank + 1) >= GUEST_RAM_BANKS )
--            {
--                printk(XENLOG_ERR "Exhausted all possible guest banks.\n");
--                goto fail;
--            }
--            else
--            {
--                psize = psize - gsize;
--                smfn = mfn_add(smfn, gsize >> PAGE_SHIFT);
--                /* Update to the next guest bank. */
--                gbank++;
--                gsize = ramsize[gbank];
--                kinfo->mem.bank[gbank].start = rambase[gbank];
--            }
--        }
--
--        tot_size += psize;
--    }
--
--    kinfo->mem.nr_banks = ++gbank;
--
--    kinfo->unassigned_mem -= tot_size;
--    /*
--     * The property 'memory' should match the amount of memory given to the
--     * guest.
--     * Currently, it is only possible to either acquire static memory or let
--     * Xen allocate. *Mixing* is not supported.
--     */
--    if ( kinfo->unassigned_mem )
--    {
--        printk(XENLOG_ERR
--               "Size of \"memory\" property doesn't match up with the sum-up of \"xen,static-mem\". Unsupported configuration.\n");
--        goto fail;
--    }
--
--    return;
--
-- fail:
--    panic("Failed to allocate requested static memory for domain %pd.\n", d);
--}
--
--/*
-- * Allocate static memory as RAM for one specific domain d.
-- * The static memory will be directly mapped in the guest(Guest Physical
-- * Address == Physical Address).
-- */
--void __init assign_static_memory_11(struct domain *d, struct kernel_info *kinfo,
--                                    const struct dt_device_node *node)
--{
--    u32 addr_cells, size_cells, reg_cells;
--    unsigned int nr_banks, bank = 0;
--    const __be32 *cell;
--    paddr_t pbase, psize;
--    mfn_t smfn;
--    int length;
--
--    if ( parse_static_mem_prop(node, &addr_cells, &size_cells, &length, &cell) )
--    {
--        printk(XENLOG_ERR
--               "%pd: failed to parse \"xen,static-mem\" property.\n", d);
--        goto fail;
--    }
--    reg_cells = addr_cells + size_cells;
--    nr_banks = length / (reg_cells * sizeof(u32));
--
--    if ( nr_banks > NR_MEM_BANKS )
--    {
--        printk(XENLOG_ERR
--               "%pd: exceed max number of supported guest memory banks.\n", d);
--        goto fail;
--    }
--
--    for ( ; bank < nr_banks; bank++ )
--    {
--        smfn = acquire_static_memory_bank(d, &cell, addr_cells, size_cells,
--                                          &pbase, &psize);
--        if ( mfn_eq(smfn, INVALID_MFN) )
--            goto fail;
--
--        printk(XENLOG_INFO "%pd: STATIC BANK[%u] %#"PRIpaddr"-%#"PRIpaddr"\n",
--               d, bank, pbase, pbase + psize);
--
--        /* One guest memory bank is matched with one physical memory bank. */
--        kinfo->mem.bank[bank].start = pbase;
--        if ( !append_static_memory_to_bank(d, &kinfo->mem.bank[bank],
--                                           smfn, psize) )
--            goto fail;
--
--        kinfo->unassigned_mem -= psize;
--    }
--
--    kinfo->mem.nr_banks = nr_banks;
--
--    /*
--     * The property 'memory' should match the amount of memory given to
--     * the guest.
--     * Currently, it is only possible to either acquire static memory or
--     * let Xen allocate. *Mixing* is not supported.
--     */
--    if ( kinfo->unassigned_mem != 0 )
--    {
--        printk(XENLOG_ERR
--               "Size of \"memory\" property doesn't match up with the sum-up of \"xen,static-mem\".\n");
--        goto fail;
--    }
--
--    return;
--
-- fail:
--    panic("Failed to assign requested static memory for direct-map domain %pd.\n",
--          d);
--}
--
--#ifdef CONFIG_STATIC_SHM
--static int __init acquire_nr_borrower_domain(struct domain *d,
--                                             paddr_t pbase, paddr_t psize,
--                                             unsigned long *nr_borrowers)
--{
--    unsigned int bank;
--
--    /* Iterate reserved memory to find requested shm bank. */
--    for ( bank = 0 ; bank < bootinfo.reserved_mem.nr_banks; bank++ )
--    {
--        paddr_t bank_start = bootinfo.reserved_mem.bank[bank].start;
--        paddr_t bank_size = bootinfo.reserved_mem.bank[bank].size;
--
--        if ( (pbase == bank_start) && (psize == bank_size) )
--            break;
--    }
--
--    if ( bank == bootinfo.reserved_mem.nr_banks )
--        return -ENOENT;
--
--    *nr_borrowers = bootinfo.reserved_mem.bank[bank].nr_shm_borrowers;
--
--    return 0;
--}
--
--/*
-- * This function checks whether the static shared memory region is
-- * already allocated to dom_io.
-- */
--static bool __init is_shm_allocated_to_domio(paddr_t pbase)
--{
--    struct page_info *page;
--    struct domain *d;
--
--    page = maddr_to_page(pbase);
--    d = page_get_owner_and_reference(page);
--    if ( d == NULL )
--        return false;
--    put_page(page);
--
--    if ( d != dom_io )
--    {
--        printk(XENLOG_ERR
--               "shm memory node has already been allocated to a specific owner %pd, Please check your configuration\n",
--               d);
--        return false;
--    }
--
--    return true;
--}
--
--static mfn_t __init acquire_shared_memory_bank(struct domain *d,
--                                               paddr_t pbase, paddr_t psize)
--{
--    mfn_t smfn;
--    unsigned long nr_pfns;
--    int res;
--
--    /*
--     * Pages of statically shared memory shall be included
--     * into domain_tot_pages().
--     */
--    nr_pfns = PFN_DOWN(psize);
--    if ( (UINT_MAX - d->max_pages) < nr_pfns )
--    {
--        printk(XENLOG_ERR "%pd: Over-allocation for d->max_pages: %lu.\n",
--               d, nr_pfns);
--        return INVALID_MFN;
--    }
--    d->max_pages += nr_pfns;
--
--    smfn = maddr_to_mfn(pbase);
--    res = acquire_domstatic_pages(d, smfn, nr_pfns, 0);
--    if ( res )
--    {
--        printk(XENLOG_ERR
--               "%pd: failed to acquire static memory: %d.\n", d, res);
--        d->max_pages -= nr_pfns;
--        return INVALID_MFN;
--    }
--
--    return smfn;
--}
--
--static int __init assign_shared_memory(struct domain *d,
--                                       uint32_t addr_cells, uint32_t size_cells,
--                                       paddr_t pbase, paddr_t psize,
--                                       paddr_t gbase)
--{
--    mfn_t smfn;
--    int ret = 0;
--    unsigned long nr_pages, nr_borrowers, i;
--    struct page_info *page;
--
--    printk("%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
--           d, pbase, pbase + psize);
--
--    smfn = acquire_shared_memory_bank(d, pbase, psize);
--    if ( mfn_eq(smfn, INVALID_MFN) )
--        return -EINVAL;
--
--    /*
--     * DOMID_IO is not auto-translated (i.e. it sees RAM 1:1). So we do not need
--     * to create mapping in the P2M.
--     */
--    nr_pages = PFN_DOWN(psize);
--    if ( d != dom_io )
--    {
--        ret = guest_physmap_add_pages(d, gaddr_to_gfn(gbase), smfn,
--                                      PFN_DOWN(psize));
--        if ( ret )
--        {
--            printk(XENLOG_ERR "Failed to map shared memory to %pd.\n", d);
--            return ret;
--        }
--    }
--
--    /*
--     * Get the right amount of references per page, which is the number of
--     * borrower domains.
--     */
--    ret = acquire_nr_borrower_domain(d, pbase, psize, &nr_borrowers);
--    if ( ret )
--        return ret;
--
--    /*
--     * Instead of letting borrower domain get a page ref, we add as many
--     * additional reference as the number of borrowers when the owner
--     * is allocated, since there is a chance that owner is created
--     * after borrower.
--     * So if the borrower is created first, it will cause adding pages
--     * in the P2M without reference.
--     */
--    page = mfn_to_page(smfn);
--    for ( i = 0; i < nr_pages; i++ )
--    {
--        if ( !get_page_nr(page + i, d, nr_borrowers) )
--        {
--            printk(XENLOG_ERR
--                   "Failed to add %lu references to page %"PRI_mfn".\n",
--                   nr_borrowers, mfn_x(smfn) + i);
--            goto fail;
--        }
--    }
--
--    return 0;
--
-- fail:
--    while ( --i >= 0 )
--        put_page_nr(page + i, nr_borrowers);
--    return ret;
--}
--
--static int __init append_shm_bank_to_domain(struct kernel_info *kinfo,
--                                            paddr_t start, paddr_t size,
--                                            const char *shm_id)
--{
--    if ( kinfo->shm_mem.nr_banks >= NR_MEM_BANKS )
--        return -ENOMEM;
--
--    kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].start = start;
--    kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].size = size;
--    safe_strcpy(kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].shm_id, shm_id);
--    kinfo->shm_mem.nr_banks++;
--
--    return 0;
--}
--
--int __init process_shm(struct domain *d, struct kernel_info *kinfo,
--                       const struct dt_device_node *node)
--{
--    struct dt_device_node *shm_node;
--
--    dt_for_each_child_node(node, shm_node)
--    {
--        const struct dt_property *prop;
--        const __be32 *cells;
--        uint32_t addr_cells, size_cells;
--        paddr_t gbase, pbase, psize;
--        int ret = 0;
--        unsigned int i;
--        const char *role_str;
--        const char *shm_id;
--        bool owner_dom_io = true;
--
--        if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
--            continue;
--
--        /*
--         * xen,shared-mem = <pbase, gbase, size>;
--         * TODO: pbase is optional.
--         */
--        addr_cells = dt_n_addr_cells(shm_node);
--        size_cells = dt_n_size_cells(shm_node);
--        prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
--        BUG_ON(!prop);
--        cells = (const __be32 *)prop->value;
--        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, &gbase);
--        psize = dt_read_paddr(cells, size_cells);
--        if ( !IS_ALIGNED(pbase, PAGE_SIZE) || !IS_ALIGNED(gbase, PAGE_SIZE) )
--        {
--            printk("%pd: physical address 0x%"PRIpaddr", or guest address 0x%"PRIpaddr" is not suitably aligned.\n",
--                   d, pbase, gbase);
--            return -EINVAL;
--        }
--        if ( !IS_ALIGNED(psize, PAGE_SIZE) )
--        {
--            printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
--                   d, psize);
--            return -EINVAL;
--        }
--
--        for ( i = 0; i < PFN_DOWN(psize); i++ )
--            if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
--            {
--                printk("%pd: invalid physical address 0x%"PRI_mfn"\n",
--                       d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
--                return -EINVAL;
--            }
--
--        /*
--         * "role" property is optional and if it is defined explicitly,
--         * then the owner domain is not the default "dom_io" domain.
--         */
--        if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
--            owner_dom_io = false;
--
--        if ( dt_property_read_string(shm_node, "xen,shm-id", &shm_id) )
--        {
--            printk("%pd: invalid \"xen,shm-id\" property", d);
--            return -EINVAL;
--        }
--        BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
--
--        /*
--         * DOMID_IO is a fake domain and is not described in the Device-Tree.
--         * Therefore when the owner of the shared region is DOMID_IO, we will
--         * only find the borrowers.
--         */
--        if ( (owner_dom_io && !is_shm_allocated_to_domio(pbase)) ||
--             (!owner_dom_io && strcmp(role_str, "owner") == 0) )
--        {
--            /*
--             * We found the first borrower of the region, the owner was not
--             * specified, so they should be assigned to dom_io.
--             */
--            ret = assign_shared_memory(owner_dom_io ? dom_io : d,
--                                       addr_cells, size_cells,
--                                       pbase, psize, gbase);
--            if ( ret )
--                return ret;
--        }
--
--        if ( owner_dom_io || (strcmp(role_str, "borrower") == 0) )
--        {
--            /* Set up P2M foreign mapping for borrower domain. */
--            ret = map_regions_p2mt(d, _gfn(PFN_UP(gbase)), PFN_DOWN(psize),
--                                   _mfn(PFN_UP(pbase)), p2m_map_foreign_rw);
--            if ( ret )
--                return ret;
--        }
--
--        /*
--         * Record static shared memory region info for later setting
--         * up shm-node in guest device tree.
--         */
--        ret = append_shm_bank_to_domain(kinfo, gbase, psize, shm_id);
--        if ( ret )
--            return ret;
--    }
--
--    return 0;
--}
--#endif /* CONFIG_STATIC_SHM */
--#endif
--
- /*
-  * When PCI passthrough is available we want to keep the
-  * "linux,pci-domain" in sync for every host bridge.
-@@ -1274,85 +748,6 @@ int __init make_memory_node(const struct domain *d,
-     return res;
- }
- 
--#ifdef CONFIG_STATIC_SHM
--static int __init make_shm_memory_node(const struct domain *d,
--                                       void *fdt,
--                                       int addrcells, int sizecells,
--                                       const struct meminfo *mem)
--{
--    unsigned int i = 0;
--    int res = 0;
--
--    if ( mem->nr_banks == 0 )
--        return -ENOENT;
--
--    /*
--     * For each shared memory region, a range is exposed under
--     * the /reserved-memory node as a child node. Each range sub-node is
--     * named xen-shmem@<address>.
--     */
--    dt_dprintk("Create xen-shmem node\n");
--
--    for ( ; i < mem->nr_banks; i++ )
--    {
--        uint64_t start = mem->bank[i].start;
--        uint64_t size = mem->bank[i].size;
--        const char compat[] = "xen,shared-memory-v1";
--        /* Worst case addrcells + sizecells */
--        __be32 reg[GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS];
--        __be32 *cells;
--        unsigned int len = (addrcells + sizecells) * sizeof(__be32);
--
--        res = domain_fdt_begin_node(fdt, "xen-shmem", mem->bank[i].start);
--        if ( res )
--            return res;
--
--        res = fdt_property(fdt, "compatible", compat, sizeof(compat));
--        if ( res )
--            return res;
--
--        cells = reg;
--        dt_child_set_range(&cells, addrcells, sizecells, start, size);
--
--        res = fdt_property(fdt, "reg", reg, len);
--        if ( res )
--            return res;
--
--        dt_dprintk("Shared memory bank %u: %#"PRIx64"->%#"PRIx64"\n",
--                   i, start, start + size);
--
--        res = fdt_property_string(fdt, "xen,id", mem->bank[i].shm_id);
--        if ( res )
--            return res;
--
--        /*
--         * TODO:
--         * - xen,offset: (borrower VMs only)
--         *   64 bit integer offset within the owner virtual machine's shared
--         *   memory region used for the mapping in the borrower VM
--         */
--        res = fdt_property_u64(fdt, "xen,offset", 0);
--        if ( res )
--            return res;
--
--        res = fdt_end_node(fdt);
--        if ( res )
--            return res;
--    }
--
--    return res;
--}
--#else
--static int __init make_shm_memory_node(const struct domain *d,
--                                       void *fdt,
--                                       int addrcells, int sizecells,
--                                       const struct meminfo *mem)
--{
--    ASSERT_UNREACHABLE();
--    return -EOPNOTSUPP;
--}
--#endif
--
- int __init make_resv_memory_node(const struct domain *d,
-                                  void *fdt,
-                                  int addrcells, int sizecells,
-@@ -2765,9 +2160,6 @@ static int __init construct_dom0(struct domain *d)
- {
-     struct kernel_info kinfo = {};
-     int rc;
--#ifdef CONFIG_STATIC_SHM
--    const struct dt_device_node *chosen = dt_find_node_by_path("/chosen");
--#endif
- 
-     /* Sanity! */
-     BUG_ON(d->domain_id != 0);
-@@ -2802,11 +2194,9 @@ static int __init construct_dom0(struct domain *d)
-     allocate_memory_11(d, &kinfo);
-     find_gnttab_region(d, &kinfo);
- 
--#ifdef CONFIG_STATIC_SHM
--    rc = process_shm(d, &kinfo, chosen);
-+    rc = process_shm_chosen(d, &kinfo);
-     if ( rc < 0 )
-         return rc;
--#endif
- 
-     /* Map extra GIC MMIO, irqs and other hw stuffs to dom0. */
-     rc = gic_map_hwdom_extra_mappings(d);
-diff --git a/xen/arch/arm/include/asm/dom0less-build.h b/xen/arch/arm/include/asm/dom0less-build.h
-index 0d28fa1bee46..d95cb6234b62 100644
---- a/xen/arch/arm/include/asm/dom0less-build.h
-+++ b/xen/arch/arm/include/asm/dom0less-build.h
-@@ -8,8 +8,6 @@
- #ifndef __ARM_DOM0LESS_BUILD_H_
- #define __ARM_DOM0LESS_BUILD_H_
- 
--#include <asm/kernel.h>
--
- void create_domUs(void);
- bool is_dom0less_mode(void);
- 
-diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
-index d95cf376048f..b192bdadf3d8 100644
---- a/xen/arch/arm/include/asm/domain_build.h
-+++ b/xen/arch/arm/include/asm/domain_build.h
-@@ -40,9 +40,6 @@ int handle_device_interrupts(struct domain *d, struct dt_device_node *dev,
- void set_interrupt(gic_interrupt_t interrupt, unsigned int irq,
-                    unsigned int cpumask, unsigned int level);
- 
--int process_shm(struct domain *d, struct kernel_info *kinfo,
--                const struct dt_device_node *node);
--
- #ifndef CONFIG_ACPI
- static inline int prepare_acpi(struct domain *d, struct kernel_info *kinfo)
- {
-@@ -54,27 +51,6 @@ static inline int prepare_acpi(struct domain *d, struct kernel_info *kinfo)
- int prepare_acpi(struct domain *d, struct kernel_info *kinfo);
- #endif
- 
--#ifdef CONFIG_STATIC_MEMORY
--void allocate_static_memory(struct domain *d, struct kernel_info *kinfo,
--                            const struct dt_device_node *node);
--void assign_static_memory_11(struct domain *d, struct kernel_info *kinfo,
--                             const struct dt_device_node *node);
--#else
--static inline void allocate_static_memory(struct domain *d,
--                                          struct kernel_info *kinfo,
--                                          const struct dt_device_node *node)
--{
--    ASSERT_UNREACHABLE();
--}
--
--static inline void assign_static_memory_11(struct domain *d,
--                                           struct kernel_info *kinfo,
--                                           const struct dt_device_node *node)
--{
--    ASSERT_UNREACHABLE();
--}
--#endif
--
- #endif
- 
- /*
-diff --git a/xen/arch/arm/include/asm/static-memory.h b/xen/arch/arm/include/asm/static-memory.h
-new file mode 100644
-index 000000000000..0fe193b36861
---- /dev/null
-+++ b/xen/arch/arm/include/asm/static-memory.h
-@@ -0,0 +1,50 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * xen/arch/arm/include/asm/static-memory.h
-+ *
-+ * Copyright (C) 2023 Arm Ltd.
-+ */
-+
-+#ifndef __ARM_STATIC_MEMORY_H_
-+#define __ARM_STATIC_MEMORY_H_
-+
-+#include <asm/kernel.h>
-+
-+#ifdef CONFIG_STATIC_MEMORY
-+
-+void allocate_static_memory(struct domain *d, struct kernel_info *kinfo,
-+                            const struct dt_device_node *node);
-+void assign_static_memory_11(struct domain *d, struct kernel_info *kinfo,
-+                             const struct dt_device_node *node);
-+void init_staticmem_pages(void);
-+
-+#else /* !CONFIG_STATIC_MEMORY */
-+
-+static inline void allocate_static_memory(struct domain *d,
-+                                          struct kernel_info *kinfo,
-+                                          const struct dt_device_node *node)
-+{
-+    ASSERT_UNREACHABLE();
-+}
-+
-+static inline void assign_static_memory_11(struct domain *d,
-+                                           struct kernel_info *kinfo,
-+                                           const struct dt_device_node *node)
-+{
-+    ASSERT_UNREACHABLE();
-+}
-+
-+static inline void init_staticmem_pages(void) {};
-+
-+#endif /* CONFIG_STATIC_MEMORY */
-+
-+#endif  /* __ARM_STATIC_MEMORY_H_ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:b
-+ */
-diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
-new file mode 100644
-index 000000000000..5a8075fbee55
---- /dev/null
-+++ b/xen/arch/arm/include/asm/static-shmem.h
-@@ -0,0 +1,72 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * xen/arch/arm/include/asm/static-shmem.h
-+ *
-+ * Copyright (C) 2023 Arm Ltd.
-+ */
-+
-+#ifndef __ARM_STATIC_SHMEM_H_
-+#define __ARM_STATIC_SHMEM_H_
-+
-+#include <asm/kernel.h>
-+
-+#ifdef CONFIG_STATIC_SHM
-+
-+int make_shm_memory_node(const struct domain *d, void *fdt, int addrcells,
-+                         int sizecells, const struct meminfo *mem);
-+
-+int process_shm(struct domain *d, struct kernel_info *kinfo,
-+                const struct dt_device_node *node);
-+
-+static inline int process_shm_chosen(struct domain *d,
-+                                     struct kernel_info *kinfo)
-+{
-+    const struct dt_device_node *node = dt_find_node_by_path("/chosen");
-+
-+    return process_shm(d, kinfo, node);
-+}
-+
-+int process_shm_node(const void *fdt, int node, uint32_t address_cells,
-+                     uint32_t size_cells);
-+
-+#else /* !CONFIG_STATIC_SHM */
-+
-+static inline int make_shm_memory_node(const struct domain *d, void *fdt,
-+                                       int addrcells, int sizecells,
-+                                       const struct meminfo *mem)
-+{
-+    ASSERT_UNREACHABLE();
-+    return -EOPNOTSUPP;
-+}
-+
-+static inline int process_shm(struct domain *d, struct kernel_info *kinfo,
-+                              const struct dt_device_node *node)
-+{
-+    return 0;
-+}
-+
-+static inline int process_shm_chosen(struct domain *d,
-+                                     struct kernel_info *kinfo)
-+{
-+    return 0;
-+}
-+
-+static inline int process_shm_node(const void *fdt, int node,
-+                                   uint32_t address_cells, uint32_t size_cells)
-+{
-+    printk("CONFIG_STATIC_SHM must be enabled for parsing static shared memory nodes\n");
-+    return -EINVAL;
-+}
-+
-+#endif /* CONFIG_STATIC_SHM */
-+
-+#endif  /* __ARM_STATIC_SHMEM_H_ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:b
-+ */
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index db0299d540dc..f7de7170bacd 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -44,6 +44,7 @@
- #include <asm/platform.h>
- #include <asm/procinfo.h>
- #include <asm/setup.h>
-+#include <asm/static-memory.h>
- #include <xsm/xsm.h>
- #include <asm/acpi.h>
- 
-@@ -758,30 +759,6 @@ static void __init init_pdx(void)
-     }
- }
- 
--/* Static memory initialization */
--static void __init init_staticmem_pages(void)
--{
--#ifdef CONFIG_STATIC_MEMORY
--    unsigned int bank;
--
--    for ( bank = 0 ; bank < bootinfo.reserved_mem.nr_banks; bank++ )
--    {
--        if ( bootinfo.reserved_mem.bank[bank].type == MEMBANK_STATIC_DOMAIN )
--        {
--            mfn_t bank_start = _mfn(PFN_UP(bootinfo.reserved_mem.bank[bank].start));
--            unsigned long bank_pages = PFN_DOWN(bootinfo.reserved_mem.bank[bank].size);
--            mfn_t bank_end = mfn_add(bank_start, bank_pages);
--
--            if ( mfn_x(bank_end) <= mfn_x(bank_start) )
--                return;
--
--            unprepare_staticmem_pages(mfn_to_page(bank_start),
--                                      bank_pages, false);
--        }
--    }
--#endif
--}
--
- /*
-  * Populate the boot allocator.
-  * If a static heap was not provided by the admin, all the RAM but the
-diff --git a/xen/arch/arm/static-memory.c b/xen/arch/arm/static-memory.c
-new file mode 100644
-index 000000000000..9aecdae28846
---- /dev/null
-+++ b/xen/arch/arm/static-memory.c
-@@ -0,0 +1,294 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * xen/arch/arm/static-memory.c
-+ *
-+ * Code related to the static memory functionality
-+ *
-+ * Copyright (C) 2023 Arm Ltd.
-+ */
-+
-+#include <xen/sched.h>
-+
-+#include <asm/static-memory.h>
-+
-+static bool __init append_static_memory_to_bank(struct domain *d,
-+                                                struct membank *bank,
-+                                                mfn_t smfn,
-+                                                paddr_t size)
-+{
-+    int res;
-+    unsigned int nr_pages = PFN_DOWN(size);
-+    gfn_t sgfn;
-+
-+    /*
-+     * For direct-mapped domain, the GFN match the MFN.
-+     * Otherwise, this is inferred on what has already been allocated
-+     * in the bank.
-+     */
-+    if ( !is_domain_direct_mapped(d) )
-+        sgfn = gaddr_to_gfn(bank->start + bank->size);
-+    else
-+        sgfn = gaddr_to_gfn(mfn_to_maddr(smfn));
-+
-+    res = guest_physmap_add_pages(d, sgfn, smfn, nr_pages);
-+    if ( res )
-+    {
-+        dprintk(XENLOG_ERR, "Failed to map pages to DOMU: %d", res);
-+        return false;
-+    }
-+
-+    bank->size = bank->size + size;
-+
-+    return true;
-+}
-+
-+static mfn_t __init acquire_static_memory_bank(struct domain *d,
-+                                               const __be32 **cell,
-+                                               u32 addr_cells, u32 size_cells,
-+                                               paddr_t *pbase, paddr_t *psize)
-+{
-+    mfn_t smfn;
-+    int res;
-+
-+    device_tree_get_reg(cell, addr_cells, size_cells, pbase, psize);
-+    ASSERT(IS_ALIGNED(*pbase, PAGE_SIZE) && IS_ALIGNED(*psize, PAGE_SIZE));
-+    if ( PFN_DOWN(*psize) > UINT_MAX )
-+    {
-+        printk(XENLOG_ERR "%pd: static memory size too large: %#"PRIpaddr,
-+               d, *psize);
-+        return INVALID_MFN;
-+    }
-+
-+    smfn = maddr_to_mfn(*pbase);
-+    res = acquire_domstatic_pages(d, smfn, PFN_DOWN(*psize), 0);
-+    if ( res )
-+    {
-+        printk(XENLOG_ERR
-+               "%pd: failed to acquire static memory: %d.\n", d, res);
-+        return INVALID_MFN;
-+    }
-+
-+    return smfn;
-+}
-+
-+static int __init parse_static_mem_prop(const struct dt_device_node *node,
-+                                        u32 *addr_cells, u32 *size_cells,
-+                                        int *length, const __be32 **cell)
-+{
-+    const struct dt_property *prop;
-+
-+    prop = dt_find_property(node, "xen,static-mem", NULL);
-+
-+    *addr_cells = dt_n_addr_cells(node);
-+    *size_cells = dt_n_size_cells(node);
-+
-+    *cell = (const __be32 *)prop->value;
-+    *length = prop->length;
-+
-+    return 0;
-+}
-+
-+/* Allocate memory from static memory as RAM for one specific domain d. */
-+void __init allocate_static_memory(struct domain *d, struct kernel_info *kinfo,
-+                                   const struct dt_device_node *node)
-+{
-+    u32 addr_cells, size_cells, reg_cells;
-+    unsigned int nr_banks, gbank, bank = 0;
-+    const uint64_t rambase[] = GUEST_RAM_BANK_BASES;
-+    const uint64_t ramsize[] = GUEST_RAM_BANK_SIZES;
-+    const __be32 *cell;
-+    u64 tot_size = 0;
-+    paddr_t pbase, psize, gsize;
-+    mfn_t smfn;
-+    int length;
-+
-+    if ( parse_static_mem_prop(node, &addr_cells, &size_cells, &length, &cell) )
-+        goto fail;
-+    reg_cells = addr_cells + size_cells;
-+
-+    /*
-+     * The static memory will be mapped in the guest at the usual guest memory
-+     * addresses (GUEST_RAM0_BASE, GUEST_RAM1_BASE) defined by
-+     * xen/include/public/arch-arm.h.
-+     */
-+    gbank = 0;
-+    gsize = ramsize[gbank];
-+    kinfo->mem.bank[gbank].start = rambase[gbank];
-+    nr_banks = length / (reg_cells * sizeof (u32));
-+
-+    for ( ; bank < nr_banks; bank++ )
-+    {
-+        smfn = acquire_static_memory_bank(d, &cell, addr_cells, size_cells,
-+                                          &pbase, &psize);
-+        if ( mfn_eq(smfn, INVALID_MFN) )
-+            goto fail;
-+
-+        printk(XENLOG_INFO "%pd: STATIC BANK[%u] %#"PRIpaddr"-%#"PRIpaddr"\n",
-+               d, bank, pbase, pbase + psize);
-+
-+        while ( 1 )
-+        {
-+            /* Map as much as possible the static range to the guest bank */
-+            if ( !append_static_memory_to_bank(d, &kinfo->mem.bank[gbank], smfn,
-+                                               min(psize, gsize)) )
-+                goto fail;
-+
-+            /*
-+             * The current physical bank is fully mapped.
-+             * Handle the next physical bank.
-+             */
-+            if ( gsize >= psize )
-+            {
-+                gsize = gsize - psize;
-+                break;
-+            }
-+            /*
-+             * When current guest bank is not enough to map, exhaust
-+             * the current one and seek to the next.
-+             * Before seeking to the next, check if we still have available
-+             * guest bank.
-+             */
-+            else if ( (gbank + 1) >= GUEST_RAM_BANKS )
-+            {
-+                printk(XENLOG_ERR "Exhausted all possible guest banks.\n");
-+                goto fail;
-+            }
-+            else
-+            {
-+                psize = psize - gsize;
-+                smfn = mfn_add(smfn, gsize >> PAGE_SHIFT);
-+                /* Update to the next guest bank. */
-+                gbank++;
-+                gsize = ramsize[gbank];
-+                kinfo->mem.bank[gbank].start = rambase[gbank];
-+            }
-+        }
-+
-+        tot_size += psize;
-+    }
-+
-+    kinfo->mem.nr_banks = ++gbank;
-+
-+    kinfo->unassigned_mem -= tot_size;
-+    /*
-+     * The property 'memory' should match the amount of memory given to the
-+     * guest.
-+     * Currently, it is only possible to either acquire static memory or let
-+     * Xen allocate. *Mixing* is not supported.
-+     */
-+    if ( kinfo->unassigned_mem )
-+    {
-+        printk(XENLOG_ERR
-+               "Size of \"memory\" property doesn't match up with the sum-up of \"xen,static-mem\". Unsupported configuration.\n");
-+        goto fail;
-+    }
-+
-+    return;
-+
-+ fail:
-+    panic("Failed to allocate requested static memory for domain %pd.\n", d);
-+}
-+
-+/*
-+ * Allocate static memory as RAM for one specific domain d.
-+ * The static memory will be directly mapped in the guest(Guest Physical
-+ * Address == Physical Address).
-+ */
-+void __init assign_static_memory_11(struct domain *d, struct kernel_info *kinfo,
-+                                    const struct dt_device_node *node)
-+{
-+    u32 addr_cells, size_cells, reg_cells;
-+    unsigned int nr_banks, bank = 0;
-+    const __be32 *cell;
-+    paddr_t pbase, psize;
-+    mfn_t smfn;
-+    int length;
-+
-+    if ( parse_static_mem_prop(node, &addr_cells, &size_cells, &length, &cell) )
-+    {
-+        printk(XENLOG_ERR
-+               "%pd: failed to parse \"xen,static-mem\" property.\n", d);
-+        goto fail;
-+    }
-+    reg_cells = addr_cells + size_cells;
-+    nr_banks = length / (reg_cells * sizeof(u32));
-+
-+    if ( nr_banks > NR_MEM_BANKS )
-+    {
-+        printk(XENLOG_ERR
-+               "%pd: exceed max number of supported guest memory banks.\n", d);
-+        goto fail;
-+    }
-+
-+    for ( ; bank < nr_banks; bank++ )
-+    {
-+        smfn = acquire_static_memory_bank(d, &cell, addr_cells, size_cells,
-+                                          &pbase, &psize);
-+        if ( mfn_eq(smfn, INVALID_MFN) )
-+            goto fail;
-+
-+        printk(XENLOG_INFO "%pd: STATIC BANK[%u] %#"PRIpaddr"-%#"PRIpaddr"\n",
-+               d, bank, pbase, pbase + psize);
-+
-+        /* One guest memory bank is matched with one physical memory bank. */
-+        kinfo->mem.bank[bank].start = pbase;
-+        if ( !append_static_memory_to_bank(d, &kinfo->mem.bank[bank],
-+                                           smfn, psize) )
-+            goto fail;
-+
-+        kinfo->unassigned_mem -= psize;
-+    }
-+
-+    kinfo->mem.nr_banks = nr_banks;
-+
-+    /*
-+     * The property 'memory' should match the amount of memory given to
-+     * the guest.
-+     * Currently, it is only possible to either acquire static memory or
-+     * let Xen allocate. *Mixing* is not supported.
-+     */
-+    if ( kinfo->unassigned_mem != 0 )
-+    {
-+        printk(XENLOG_ERR
-+               "Size of \"memory\" property doesn't match up with the sum-up of \"xen,static-mem\".\n");
-+        goto fail;
-+    }
-+
-+    return;
-+
-+ fail:
-+    panic("Failed to assign requested static memory for direct-map domain %pd.\n",
-+          d);
-+}
-+
-+/* Static memory initialization */
-+void __init init_staticmem_pages(void)
-+{
-+    unsigned int bank;
-+
-+    for ( bank = 0 ; bank < bootinfo.reserved_mem.nr_banks; bank++ )
-+    {
-+        if ( bootinfo.reserved_mem.bank[bank].type == MEMBANK_STATIC_DOMAIN )
-+        {
-+            mfn_t bank_start = _mfn(PFN_UP(bootinfo.reserved_mem.bank[bank].start));
-+            unsigned long bank_pages = PFN_DOWN(bootinfo.reserved_mem.bank[bank].size);
-+            mfn_t bank_end = mfn_add(bank_start, bank_pages);
-+
-+            if ( mfn_x(bank_end) <= mfn_x(bank_start) )
-+                return;
-+
-+            unprepare_staticmem_pages(mfn_to_page(bank_start),
-+                                      bank_pages, false);
-+        }
-+    }
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-new file mode 100644
-index 000000000000..fd826f486e8a
---- /dev/null
-+++ b/xen/arch/arm/static-shmem.c
-@@ -0,0 +1,515 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * xen/arch/arm/static-shmem.c
-+ *
-+ * Code related to the static shared memory functionality
-+ *
-+ * Copyright (C) 2023 Arm Ltd.
-+ */
-+
-+#include <xen/libfdt/libfdt.h>
-+#include <xen/sched.h>
-+
-+#include <asm/domain_build.h>
-+#include <asm/static-shmem.h>
-+
-+static int __init acquire_nr_borrower_domain(struct domain *d,
-+                                             paddr_t pbase, paddr_t psize,
-+                                             unsigned long *nr_borrowers)
-+{
-+    unsigned int bank;
-+
-+    /* Iterate reserved memory to find requested shm bank. */
-+    for ( bank = 0 ; bank < bootinfo.reserved_mem.nr_banks; bank++ )
-+    {
-+        paddr_t bank_start = bootinfo.reserved_mem.bank[bank].start;
-+        paddr_t bank_size = bootinfo.reserved_mem.bank[bank].size;
-+
-+        if ( (pbase == bank_start) && (psize == bank_size) )
-+            break;
-+    }
-+
-+    if ( bank == bootinfo.reserved_mem.nr_banks )
-+        return -ENOENT;
-+
-+    *nr_borrowers = bootinfo.reserved_mem.bank[bank].nr_shm_borrowers;
-+
-+    return 0;
-+}
-+
-+/*
-+ * This function checks whether the static shared memory region is
-+ * already allocated to dom_io.
-+ */
-+static bool __init is_shm_allocated_to_domio(paddr_t pbase)
-+{
-+    struct page_info *page;
-+    struct domain *d;
-+
-+    page = maddr_to_page(pbase);
-+    d = page_get_owner_and_reference(page);
-+    if ( d == NULL )
-+        return false;
-+    put_page(page);
-+
-+    if ( d != dom_io )
-+    {
-+        printk(XENLOG_ERR
-+               "shm memory node has already been allocated to a specific owner %pd, Please check your configuration\n",
-+               d);
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static mfn_t __init acquire_shared_memory_bank(struct domain *d,
-+                                               paddr_t pbase, paddr_t psize)
-+{
-+    mfn_t smfn;
-+    unsigned long nr_pfns;
-+    int res;
-+
-+    /*
-+     * Pages of statically shared memory shall be included
-+     * into domain_tot_pages().
-+     */
-+    nr_pfns = PFN_DOWN(psize);
-+    if ( (UINT_MAX - d->max_pages) < nr_pfns )
-+    {
-+        printk(XENLOG_ERR "%pd: Over-allocation for d->max_pages: %lu.\n",
-+               d, nr_pfns);
-+        return INVALID_MFN;
-+    }
-+    d->max_pages += nr_pfns;
-+
-+    smfn = maddr_to_mfn(pbase);
-+    res = acquire_domstatic_pages(d, smfn, nr_pfns, 0);
-+    if ( res )
-+    {
-+        printk(XENLOG_ERR
-+               "%pd: failed to acquire static memory: %d.\n", d, res);
-+        d->max_pages -= nr_pfns;
-+        return INVALID_MFN;
-+    }
-+
-+    return smfn;
-+}
-+
-+static int __init assign_shared_memory(struct domain *d,
-+                                       uint32_t addr_cells, uint32_t size_cells,
-+                                       paddr_t pbase, paddr_t psize,
-+                                       paddr_t gbase)
-+{
-+    mfn_t smfn;
-+    int ret = 0;
-+    unsigned long nr_pages, nr_borrowers, i;
-+    struct page_info *page;
-+
-+    printk("%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
-+           d, pbase, pbase + psize);
-+
-+    smfn = acquire_shared_memory_bank(d, pbase, psize);
-+    if ( mfn_eq(smfn, INVALID_MFN) )
-+        return -EINVAL;
-+
-+    /*
-+     * DOMID_IO is not auto-translated (i.e. it sees RAM 1:1). So we do not need
-+     * to create mapping in the P2M.
-+     */
-+    nr_pages = PFN_DOWN(psize);
-+    if ( d != dom_io )
-+    {
-+        ret = guest_physmap_add_pages(d, gaddr_to_gfn(gbase), smfn,
-+                                      PFN_DOWN(psize));
-+        if ( ret )
-+        {
-+            printk(XENLOG_ERR "Failed to map shared memory to %pd.\n", d);
-+            return ret;
-+        }
-+    }
-+
-+    /*
-+     * Get the right amount of references per page, which is the number of
-+     * borrower domains.
-+     */
-+    ret = acquire_nr_borrower_domain(d, pbase, psize, &nr_borrowers);
-+    if ( ret )
-+        return ret;
-+
-+    /*
-+     * Instead of letting borrower domain get a page ref, we add as many
-+     * additional reference as the number of borrowers when the owner
-+     * is allocated, since there is a chance that owner is created
-+     * after borrower.
-+     * So if the borrower is created first, it will cause adding pages
-+     * in the P2M without reference.
-+     */
-+    page = mfn_to_page(smfn);
-+    for ( i = 0; i < nr_pages; i++ )
-+    {
-+        if ( !get_page_nr(page + i, d, nr_borrowers) )
-+        {
-+            printk(XENLOG_ERR
-+                   "Failed to add %lu references to page %"PRI_mfn".\n",
-+                   nr_borrowers, mfn_x(smfn) + i);
-+            goto fail;
-+        }
-+    }
-+
-+    return 0;
-+
-+ fail:
-+    while ( --i >= 0 )
-+        put_page_nr(page + i, nr_borrowers);
-+    return ret;
-+}
-+
-+static int __init append_shm_bank_to_domain(struct kernel_info *kinfo,
-+                                            paddr_t start, paddr_t size,
-+                                            const char *shm_id)
-+{
-+    if ( kinfo->shm_mem.nr_banks >= NR_MEM_BANKS )
-+        return -ENOMEM;
-+
-+    kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].start = start;
-+    kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].size = size;
-+    safe_strcpy(kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].shm_id, shm_id);
-+    kinfo->shm_mem.nr_banks++;
-+
-+    return 0;
-+}
-+
-+int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-+                       const struct dt_device_node *node)
-+{
-+    struct dt_device_node *shm_node;
-+
-+    dt_for_each_child_node(node, shm_node)
-+    {
-+        const struct dt_property *prop;
-+        const __be32 *cells;
-+        uint32_t addr_cells, size_cells;
-+        paddr_t gbase, pbase, psize;
-+        int ret = 0;
-+        unsigned int i;
-+        const char *role_str;
-+        const char *shm_id;
-+        bool owner_dom_io = true;
-+
-+        if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
-+            continue;
-+
-+        /*
-+         * xen,shared-mem = <pbase, gbase, size>;
-+         * TODO: pbase is optional.
-+         */
-+        addr_cells = dt_n_addr_cells(shm_node);
-+        size_cells = dt_n_size_cells(shm_node);
-+        prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
-+        BUG_ON(!prop);
-+        cells = (const __be32 *)prop->value;
-+        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, &gbase);
-+        psize = dt_read_paddr(cells, size_cells);
-+        if ( !IS_ALIGNED(pbase, PAGE_SIZE) || !IS_ALIGNED(gbase, PAGE_SIZE) )
-+        {
-+            printk("%pd: physical address 0x%"PRIpaddr", or guest address 0x%"PRIpaddr" is not suitably aligned.\n",
-+                   d, pbase, gbase);
-+            return -EINVAL;
-+        }
-+        if ( !IS_ALIGNED(psize, PAGE_SIZE) )
-+        {
-+            printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
-+                   d, psize);
-+            return -EINVAL;
-+        }
-+
-+        for ( i = 0; i < PFN_DOWN(psize); i++ )
-+            if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
-+            {
-+                printk("%pd: invalid physical address 0x%"PRI_mfn"\n",
-+                       d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
-+                return -EINVAL;
-+            }
-+
-+        /*
-+         * "role" property is optional and if it is defined explicitly,
-+         * then the owner domain is not the default "dom_io" domain.
-+         */
-+        if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
-+            owner_dom_io = false;
-+
-+        if ( dt_property_read_string(shm_node, "xen,shm-id", &shm_id) )
-+        {
-+            printk("%pd: invalid \"xen,shm-id\" property", d);
-+            return -EINVAL;
-+        }
-+        BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
-+
-+        /*
-+         * DOMID_IO is a fake domain and is not described in the Device-Tree.
-+         * Therefore when the owner of the shared region is DOMID_IO, we will
-+         * only find the borrowers.
-+         */
-+        if ( (owner_dom_io && !is_shm_allocated_to_domio(pbase)) ||
-+             (!owner_dom_io && strcmp(role_str, "owner") == 0) )
-+        {
-+            /*
-+             * We found the first borrower of the region, the owner was not
-+             * specified, so they should be assigned to dom_io.
-+             */
-+            ret = assign_shared_memory(owner_dom_io ? dom_io : d,
-+                                       addr_cells, size_cells,
-+                                       pbase, psize, gbase);
-+            if ( ret )
-+                return ret;
-+        }
-+
-+        if ( owner_dom_io || (strcmp(role_str, "borrower") == 0) )
-+        {
-+            /* Set up P2M foreign mapping for borrower domain. */
-+            ret = map_regions_p2mt(d, _gfn(PFN_UP(gbase)), PFN_DOWN(psize),
-+                                   _mfn(PFN_UP(pbase)), p2m_map_foreign_rw);
-+            if ( ret )
-+                return ret;
-+        }
-+
-+        /*
-+         * Record static shared memory region info for later setting
-+         * up shm-node in guest device tree.
-+         */
-+        ret = append_shm_bank_to_domain(kinfo, gbase, psize, shm_id);
-+        if ( ret )
-+            return ret;
-+    }
-+
-+    return 0;
-+}
-+
-+int __init make_shm_memory_node(const struct domain *d, void *fdt,
-+                                int addrcells, int sizecells,
-+                                const struct meminfo *mem)
-+{
-+    unsigned int i = 0;
-+    int res = 0;
-+
-+    if ( mem->nr_banks == 0 )
-+        return -ENOENT;
-+
-+    /*
-+     * For each shared memory region, a range is exposed under
-+     * the /reserved-memory node as a child node. Each range sub-node is
-+     * named xen-shmem@<address>.
-+     */
-+    dt_dprintk("Create xen-shmem node\n");
-+
-+    for ( ; i < mem->nr_banks; i++ )
-+    {
-+        uint64_t start = mem->bank[i].start;
-+        uint64_t size = mem->bank[i].size;
-+        const char compat[] = "xen,shared-memory-v1";
-+        /* Worst case addrcells + sizecells */
-+        __be32 reg[GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS];
-+        __be32 *cells;
-+        unsigned int len = (addrcells + sizecells) * sizeof(__be32);
-+
-+        res = domain_fdt_begin_node(fdt, "xen-shmem", mem->bank[i].start);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property(fdt, "compatible", compat, sizeof(compat));
-+        if ( res )
-+            return res;
-+
-+        cells = reg;
-+        dt_child_set_range(&cells, addrcells, sizecells, start, size);
-+
-+        res = fdt_property(fdt, "reg", reg, len);
-+        if ( res )
-+            return res;
-+
-+        dt_dprintk("Shared memory bank %u: %#"PRIx64"->%#"PRIx64"\n",
-+                   i, start, start + size);
-+
-+        res = fdt_property_string(fdt, "xen,id", mem->bank[i].shm_id);
-+        if ( res )
-+            return res;
-+
-+        /*
-+         * TODO:
-+         * - xen,offset: (borrower VMs only)
-+         *   64 bit integer offset within the owner virtual machine's shared
-+         *   memory region used for the mapping in the borrower VM
-+         */
-+        res = fdt_property_u64(fdt, "xen,offset", 0);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_end_node(fdt);
-+        if ( res )
-+            return res;
-+    }
-+
-+    return res;
-+}
-+
-+int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-+                            uint32_t size_cells)
-+{
-+    const struct fdt_property *prop, *prop_id, *prop_role;
-+    const __be32 *cell;
-+    paddr_t paddr, gaddr, size;
-+    struct meminfo *mem = &bootinfo.reserved_mem;
-+    unsigned int i;
-+    int len;
-+    bool owner = false;
-+    const char *shm_id;
-+
-+    if ( address_cells < 1 || size_cells < 1 )
-+    {
-+        printk("fdt: invalid #address-cells or #size-cells for static shared memory node.\n");
-+        return -EINVAL;
-+    }
-+
-+    /*
-+     * "xen,shm-id" property holds an arbitrary string with a strict limit
-+     * on the number of characters, MAX_SHM_ID_LENGTH
-+     */
-+    prop_id = fdt_get_property(fdt, node, "xen,shm-id", NULL);
-+    if ( !prop_id )
-+        return -ENOENT;
-+    shm_id = (const char *)prop_id->data;
-+    if ( strnlen(shm_id, MAX_SHM_ID_LENGTH) == MAX_SHM_ID_LENGTH )
-+    {
-+        printk("fdt: invalid xen,shm-id %s, it must be limited to %u characters\n",
-+               shm_id, MAX_SHM_ID_LENGTH);
-+        return -EINVAL;
-+    }
-+
-+    /*
-+     * "role" property is optional and if it is defined explicitly,
-+     * it must be either `owner` or `borrower`.
-+     */
-+    prop_role = fdt_get_property(fdt, node, "role", NULL);
-+    if ( prop_role )
-+    {
-+        if ( !strcmp(prop_role->data, "owner") )
-+            owner = true;
-+        else if ( strcmp(prop_role->data, "borrower") )
-+        {
-+            printk("fdt: invalid `role` property for static shared memory node.\n");
-+            return -EINVAL;
-+        }
-+    }
-+
-+    /*
-+     * xen,shared-mem = <paddr, gaddr, size>;
-+     * Memory region starting from physical address #paddr of #size shall
-+     * be mapped to guest physical address #gaddr as static shared memory
-+     * region.
-+     */
-+    prop = fdt_get_property(fdt, node, "xen,shared-mem", &len);
-+    if ( !prop )
-+        return -ENOENT;
-+
-+    if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
-+    {
-+        if ( len == dt_cells_to_size(size_cells + address_cells) )
-+            printk("fdt: host physical address must be chosen by users at the moment.\n");
-+
-+        printk("fdt: invalid `xen,shared-mem` property.\n");
-+        return -EINVAL;
-+    }
-+
-+    cell = (const __be32 *)prop->data;
-+    device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
-+    size = dt_next_cell(size_cells, &cell);
-+
-+    if ( !size )
-+    {
-+        printk("fdt: the size for static shared memory region can not be zero\n");
-+        return -EINVAL;
-+    }
-+
-+    for ( i = 0; i < mem->nr_banks; i++ )
-+    {
-+        /*
-+         * Meet the following check:
-+         * 1) The shm ID matches and the region exactly match
-+         * 2) The shm ID doesn't match and the region doesn't overlap
-+         * with an existing one
-+         */
-+        if ( paddr == mem->bank[i].start && size == mem->bank[i].size )
-+        {
-+            if ( strncmp(shm_id, mem->bank[i].shm_id, MAX_SHM_ID_LENGTH) == 0 )
-+                break;
-+            else
-+            {
-+                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
-+                       shm_id);
-+                return -EINVAL;
-+            }
-+        }
-+        else
-+        {
-+            paddr_t end = paddr + size;
-+            paddr_t bank_end = mem->bank[i].start + mem->bank[i].size;
-+
-+            if ( (end <= paddr) || (bank_end <= mem->bank[i].start) )
-+            {
-+                printk("fdt: static shared memory region %s overflow\n", shm_id);
-+                return -EINVAL;
-+            }
-+
-+            if ( check_reserved_regions_overlap(paddr, size) )
-+                return -EINVAL;
-+            else
-+            {
-+                if ( strcmp(shm_id, mem->bank[i].shm_id) != 0 )
-+                    continue;
-+                else
-+                {
-+                    printk("fdt: different shared memory region could not share the same shm ID %s\n",
-+                           shm_id);
-+                    return -EINVAL;
-+                }
-+            }
-+        }
-+    }
-+
-+    if ( i == mem->nr_banks )
-+    {
-+        if ( i < NR_MEM_BANKS )
-+        {
-+            /* Static shared memory shall be reserved from any other use. */
-+            safe_strcpy(mem->bank[mem->nr_banks].shm_id, shm_id);
-+            mem->bank[mem->nr_banks].start = paddr;
-+            mem->bank[mem->nr_banks].size = size;
-+            mem->bank[mem->nr_banks].type = MEMBANK_STATIC_DOMAIN;
-+            mem->nr_banks++;
-+        }
-+        else
-+        {
-+            printk("Warning: Max number of supported memory regions reached.\n");
-+            return -ENOSPC;
-+        }
-+    }
-+    /*
-+     * keep a count of the number of borrowers, which later may be used
-+     * to calculate the reference count.
-+     */
-+    if ( !owner )
-+        mem->bank[i].nr_shm_borrowers++;
-+
-+    return 0;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
--- 
-2.34.1
+> > What if a forked guest attempts to register a new runstate/time info
+> > against an address not yet populated?
+> 
+> What if the same happened for the info area? Again, I'm not trying to
+> invent anything new here. But hopefully Tamas'es reply has helped here
+> as well.
 
+Yes, I don't think we should need to allocate and map a page for the
+vcpu_info area before calling map_vcpu_info().
+
+> >> --- a/xen/common/domain.c
+> >> +++ b/xen/common/domain.c
+> >> @@ -1572,6 +1572,13 @@ void unmap_vcpu_info(struct vcpu *v)
+> >>      put_page_and_type(mfn_to_page(mfn));
+> >>  }
+> >>  
+> >> +int map_guest_area(struct vcpu *v, paddr_t gaddr, unsigned int size,
+> >> +                   struct guest_area *area,
+> >> +                   void (*populate)(void *dst, struct vcpu *v))
+> > 
+> > Oh, the prototype for this is added in patch 1, almost missed it.
+> > 
+> > Why not also add this dummy implementation in patch 1 then?
+> 
+> The prototype isn't dead code, but the function would be until it gains
+> users here. If anything, I'd move the prototype introduction here; it
+> merely seemed desirable to me to touch xen/include/xen/domain.h no
+> more frequently than necessary.
+> 
+> Also, to be quite frank, I find this kind of nitpicking odd after the
+> series has been pending for almost a year.
+
+TBH when I saw this I was about to comment that the patch won't build
+because the prototypes was missing, but then I remembered about patch
+1.  I don't think it's obvious, but anyway.
+
+Thanks, Roger.
 
