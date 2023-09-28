@@ -4,44 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B61A1E743D1
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 23:20:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.610076.949324 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A0DE743CE
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 23:20:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.610088.949365 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qm0IM-00037S-3I; Thu, 28 Sep 2023 23:19:46 +0000
+	id 1qm0Il-0005g1-Bw; Thu, 28 Sep 2023 23:20:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 610076.949324; Thu, 28 Sep 2023 23:19:46 +0000
+Received: by outflank-mailman (output) from mailman id 610088.949365; Thu, 28 Sep 2023 23:20:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qm0IM-00037L-0k; Thu, 28 Sep 2023 23:19:46 +0000
-Received: by outflank-mailman (input) for mailman id 610076;
- Thu, 28 Sep 2023 23:19:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qm0Il-0005fu-8E; Thu, 28 Sep 2023 23:20:11 +0000
+Received: by outflank-mailman (input) for mailman id 610088;
+ Thu, 28 Sep 2023 23:20:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Pu57=FM=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qm0IL-0002sR-2t
- for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 23:19:45 +0000
-Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7ffe708f-5e55-11ee-878b-cb3800f73035;
- Fri, 29 Sep 2023 01:19:42 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id A703E8284D90;
- Thu, 28 Sep 2023 18:19:39 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id w6jUswYTHsPN; Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 2FD6082853BD;
- Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id j6S8hQ2P1Xir; Thu, 28 Sep 2023 18:19:37 -0500 (CDT)
-Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id AE1018284D90;
- Thu, 28 Sep 2023 18:19:37 -0500 (CDT)
+ <SRS0=NjmF=FM=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1qm0Ik-0003MQ-Az
+ for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 23:20:10 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [2604:1380:4601:e00::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8ff880c7-5e55-11ee-9b0d-b553b5be7939;
+ Fri, 29 Sep 2023 01:20:07 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 4C843B81E16;
+ Thu, 28 Sep 2023 23:20:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 441C6C433C7;
+ Thu, 28 Sep 2023 23:20:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,59 +44,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ffe708f-5e55-11ee-878b-cb3800f73035
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 2FD6082853BD
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1695943178; bh=GkMCrT7OHafY6FbubsKZsxllbhsBSWueAlw69PuDHXQ=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=eUQcW3UraTUZ7nzSyESt7BmZo4mGA7FXigenvV1BSMrHuYnM5K3RXt8ZANlMG2Hrn
-	 O3kR1XboTq22cniR0IwYkVkYjq48o9OBV8n0azI/8kq5ur1r1tvlNUh1N2oPkPXbjP
-	 XnJtivZfww/pqa7Y7OvRfSgP1PxDEceNygqeznIQ=
-X-Virus-Scanned: amavisd-new at rptsys.com
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
-To: xen-devel@lists.xenproject.org
-Cc: Timothy Pearson <tpearson@raptorengineering.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 0/3] Early exception handlers on Power
-Date: Thu, 28 Sep 2023 18:19:26 -0500
-Message-Id: <cover.1695942864.git.sanastasio@raptorengineering.com>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: 8ff880c7-5e55-11ee-9b0d-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1695943206;
+	bh=P9oQEpp660p+W181qm5R/e3m+TprZ/k4G/1Ywu6oqu4=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=EMhWPWUc71GnJCG8/NXr0RSXB2IvYoFMrBw+hxLIhHzJ5fzDiAOQ6MinO0NfQfQpL
+	 vJU1mcojHkaH4Km+AByXxGSg0828TJcNQ22nxFsN0MwH9Y/veLmieq/UCCmHSlOb3O
+	 tqoYelSv+E2FIKeHM9dGiW/0tysUYPW8v80DbfbU0Yzx1mGrEKMPcyU8FwSj+4McLQ
+	 ZWMhj6gEiJZafc6U3WkHofJpF+H4EWP5kljjxQwwYpiZ1CoE58TuSxb/Y+Yhad8OC3
+	 Ml3mDKaninu2pqG7+IUs/ilxv4eVsh1TAkrPi9kfB2XrV91z3IUyXYTeBesEHRoJ42
+	 pqr0nxoinP67A==
+Date: Thu, 28 Sep 2023 16:20:03 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Luca Fancellu <Luca.Fancellu@arm.com>
+cc: Xen-devel <xen-devel@lists.xenproject.org>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, 
+    George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
+    Julien Grall <julien@xen.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>, 
+    nicola.vetrini@bugseng.com, simone.ballarin@bugseng.com, 
+    federico.serafini@bugseng.com
+Subject: Re: Misra rule 10.3 violations report script
+In-Reply-To: <D36FE722-43D5-4A93-B725-AD4157A1BA61@arm.com>
+Message-ID: <alpine.DEB.2.22.394.2309281609360.1996340@ubuntu-linux-20-04-desktop>
+References: <D36FE722-43D5-4A93-B725-AD4157A1BA61@arm.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; BOUNDARY="8323329-963039786-1695942939=:1996340"
+Content-ID: <alpine.DEB.2.22.394.2309281615450.1996340@ubuntu-linux-20-04-desktop>
 
-Hello all,
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-This series implements a basic exception handler and the required
-support infrastructure on Power. Currently the handler just dumps all
-registers to the serial console and nothing else, but even this is
-useful for debugging during early bring-up.
+--8323329-963039786-1695942939=:1996340
+Content-Type: text/plain; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.22.394.2309281615451.1996340@ubuntu-linux-20-04-desktop>
 
-An additional patch to fix the stack setup code in head.S is also
-included.
+On Thu, 28 Sep 2023, Luca Fancellu wrote:
+> Hi all,
+> 
+> In the last MISRA meeting Stefano told me about the Rule 10.3 and that we have a lot of violations,
+> but GCC has a way to list them as written in rules.rst.
+> 
+> So the issue was just that we have a lot of violations, most of them coming from headers and the
+> Developer might feel a bit lost since the number is very high, so I’ve developed this script to take
+> the GCC build log and create a list of unique occurrences of the violations sorted in descending
+> order, so that who has a bit of time can try to fix some of those and maybe can start from the top
+> of the list to fix as many as possible occurrences.
+> 
+> I attach the script as patch file.
 
-Thanks,
+Thanks Luca! Actually I think this is great! The script makes it much
+easier to use the GCC output to address 10.3 violations. I think we
+should have it in the xen.git tree.
 
-Shawn Anastasio (3):
-  xen/ppc: Fix stack initialization in head.S
-  xen/ppc: Add .text.exceptions section for exception vectors
-  xen/ppc: Implement a basic exception handler
-
- xen/arch/ppc/include/asm/config.h    |   3 +
- xen/arch/ppc/include/asm/processor.h |  31 +++++++
- xen/arch/ppc/ppc64/Makefile          |   2 +
- xen/arch/ppc/ppc64/asm-offsets.c     |   1 +
- xen/arch/ppc/ppc64/exceptions-asm.S  | 122 +++++++++++++++++++++++++++
- xen/arch/ppc/ppc64/exceptions.c      | 102 ++++++++++++++++++++++
- xen/arch/ppc/ppc64/head.S            |   2 +-
- xen/arch/ppc/setup.c                 |  11 +++
- xen/arch/ppc/xen.lds.S               |   7 ++
- 9 files changed, 280 insertions(+), 1 deletion(-)
- create mode 100644 xen/arch/ppc/ppc64/exceptions-asm.S
- create mode 100644 xen/arch/ppc/ppc64/exceptions.c
-
---
-2.30.2
-
+Thanks to the script I was able to quickly address the top violation in
+bitmap.h.
+--8323329-963039786-1695942939=:1996340--
 
