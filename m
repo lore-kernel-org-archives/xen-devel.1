@@ -4,34 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC3BE743CE
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 23:20:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.610079.949349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2433E743CF
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 23:20:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.610075.949315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qm0IQ-0003hZ-Tk; Thu, 28 Sep 2023 23:19:50 +0000
+	id 1qm0IK-0002se-Tr; Thu, 28 Sep 2023 23:19:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 610079.949349; Thu, 28 Sep 2023 23:19:50 +0000
+Received: by outflank-mailman (output) from mailman id 610075.949315; Thu, 28 Sep 2023 23:19:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qm0IQ-0003gp-OK; Thu, 28 Sep 2023 23:19:50 +0000
-Received: by outflank-mailman (input) for mailman id 610079;
- Thu, 28 Sep 2023 23:19:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qm0IK-0002sX-Pv; Thu, 28 Sep 2023 23:19:44 +0000
+Received: by outflank-mailman (input) for mailman id 610075;
+ Thu, 28 Sep 2023 23:19:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NjmF=FM=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1qm0IP-0003MQ-HA
- for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 23:19:49 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 83802657-5e55-11ee-9b0d-b553b5be7939;
- Fri, 29 Sep 2023 01:19:47 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4330A61DA0;
- Thu, 28 Sep 2023 23:19:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B483FC433C7;
- Thu, 28 Sep 2023 23:19:44 +0000 (UTC)
+ <SRS0=Pu57=FM=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
+ id 1qm0IK-0002sR-DA
+ for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 23:19:44 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 80e37062-5e55-11ee-878b-cb3800f73035;
+ Fri, 29 Sep 2023 01:19:42 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id B139D82856BA;
+ Thu, 28 Sep 2023 18:19:41 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id kpdzDgLxv7cd; Thu, 28 Sep 2023 18:19:39 -0500 (CDT)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 0B06B82856A3;
+ Thu, 28 Sep 2023 18:19:39 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id aFswkOKDHXrZ; Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
+Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id 6651D8284D90;
+ Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,52 +53,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 83802657-5e55-11ee-9b0d-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1695943185;
-	bh=N3bxzgJ1s2K6v+njeepztZaSboFqG44A04jELbAY81w=;
-	h=Date:From:To:cc:Subject:From;
-	b=YfaBnK07AZJvJvc8X0IpNQl1JJqdCsvG0+pLxfxyslw1frmyLEWvd/eV76YRWtrbo
-	 eYfhkz2+kwyBeHiRrEe8PWY+qWp8q6NoerFdVmdNUkEYcNPnjo1j56W1y8BslQ+01z
-	 aamioCiuavD0b5tni6ba83RV4iexyZAqHkZ7uF/EQVwEufkU4MbXt4Z7AaxFjxfuzu
-	 5P5fAWsq7SwKt7aEIVM9uV7txCkZoX7a0/tr/gWk3OHdc8gtnKYf2gNCkvTMEg9HI0
-	 lVGfO5JTZQvGVLKrh/IgAM7cZ5qLWs+j3SF2FiJUbyM3icRU6epocRXRkxCNsT6fiV
-	 b1NbfJk0k+GHg==
-Date: Thu, 28 Sep 2023 16:19:43 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+X-Inumbo-ID: 80e37062-5e55-11ee-878b-cb3800f73035
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 0B06B82856A3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1695943179; bh=WMnR/C+eSXX7X3ub66zwiAaYNV2V3FLjeRwKCWkfcKI=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=dHYb9QEidfv4o3XuTsIdia8HCBvDOUo1Rm9h2eMv2nFnWi/LVzI7x/9BTm74awf3y
+	 ABxH4u/8ZHSiRiLEd72Q+qaGCa+ueJXuIKPMV7lm949p7iG6WCECGdQd+/dfyuEiue
+	 qGMb03rzWjV/71/Tftxl67vS0B32CGhc54urHpco=
+X-Virus-Scanned: amavisd-new at rptsys.com
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
-cc: sstabellini@kernel.org, jbeulich@suse.com, andrew.cooper3@citrix.com, 
-    roger.pau@citrix.com, julien@xen.org, bertrand.marquis@arm.com, 
-    george.dunlap@citrix.com, wl@xen.org
-Subject: [PATCH] bitmap: fix n__ signess 
-Message-ID: <alpine.DEB.2.22.394.2309281616200.1996340@ubuntu-linux-20-04-desktop>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+Cc: Timothy Pearson <tpearson@raptorengineering.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH 2/3] xen/ppc: Add .text.exceptions section for exception vectors
+Date: Thu, 28 Sep 2023 18:19:28 -0500
+Message-Id: <de5b99d79671a7fe11c5720797aaa6e3207661d1.1695942864.git.sanastasio@raptorengineering.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1695942864.git.sanastasio@raptorengineering.com>
+References: <cover.1695942864.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-All callers of the bitmap_switch macro (which are all within bitmap.h)
-pass an int as first parameter. Do not assign it to an unsigned int
-potentially introducing errors.
+On Power, the exception vectors must lie at a fixed address, depending
+on the state of the Alternate Interrupt Location (AIL) field of the
+Logical Partition Control Register (LPCR). Create a .text.exceptions
+section in the linker script at an address suitable for AIL=3 plus an
+accompanying assertion to pave the way for implementing exception
+support.
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
+ xen/arch/ppc/include/asm/config.h | 3 +++
+ xen/arch/ppc/xen.lds.S            | 7 +++++++
+ 2 files changed, 10 insertions(+)
 
-We could also have gone the other way and change all the callers and the
-callers' callers to use an unsigned int instead, but I went for the path
-of least resistance.
-
-diff --git a/xen/include/xen/bitmap.h b/xen/include/xen/bitmap.h
-index 3caf92c76d..7caec098d7 100644
---- a/xen/include/xen/bitmap.h
-+++ b/xen/include/xen/bitmap.h
-@@ -101,7 +101,7 @@ extern int bitmap_allocate_region(unsigned long *bitmap, int pos, int order);
- #define bitmap_bytes(nbits) (BITS_TO_LONGS(nbits) * sizeof(unsigned long))
+diff --git a/xen/arch/ppc/include/asm/config.h b/xen/arch/ppc/include/asm/config.h
+index a11a09c570..e012b75beb 100644
+--- a/xen/arch/ppc/include/asm/config.h
++++ b/xen/arch/ppc/include/asm/config.h
+@@ -42,6 +42,9 @@
  
- #define bitmap_switch(nbits, zero, small, large)			  \
--	unsigned int n__ = (nbits);					  \
-+	int n__ = (nbits);					  \
- 	if (__builtin_constant_p(nbits) && !n__) {			  \
- 		zero;							  \
- 	} else if (__builtin_constant_p(nbits) && n__ <= BITS_PER_LONG) { \
+ #define XEN_VIRT_START _AC(0xc000000000000000, UL)
+ 
++/* Fixed address for start of the section containing exception vectors */
++#define EXCEPTION_VECTORS_START _AC(0xc000000000000100, UL)
++
+ #define VMAP_VIRT_START (XEN_VIRT_START + GB(1))
+ #define VMAP_VIRT_SIZE  GB(1)
+ 
+diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
+index 9e46035155..9e888d7383 100644
+--- a/xen/arch/ppc/xen.lds.S
++++ b/xen/arch/ppc/xen.lds.S
+@@ -24,6 +24,10 @@ SECTIONS
+         _stext = .;            /* Text section */
+         *(.text.header)
+ 
++        . = ALIGN(256);
++        _stext_exceptions = .;
++        *(.text.exceptions)
++
+         *(.text.cold)
+         *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+ 
+@@ -184,3 +188,6 @@ ASSERT(IS_ALIGNED(__bss_end,        POINTER_ALIGN), "__bss_end is misaligned")
+ 
+ ASSERT(!SIZEOF(.got),      ".got non-empty")
+ ASSERT(!SIZEOF(.got.plt),  ".got.plt non-empty")
++
++ASSERT(_stext_exceptions == EXCEPTION_VECTORS_START, \
++       ".text.exceptions not at expected location -- .text.header too big?");
+-- 
+2.30.2
+
 
