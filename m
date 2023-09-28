@@ -4,33 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E29E732E7
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 15:25:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.609920.949124 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46327E732E6
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 15:33:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.609945.949135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qlssz-0003zP-Tc; Thu, 28 Sep 2023 15:25:05 +0000
+	id 1qlt0r-000708-RN; Thu, 28 Sep 2023 15:33:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 609920.949124; Thu, 28 Sep 2023 15:25:05 +0000
+Received: by outflank-mailman (output) from mailman id 609945.949135; Thu, 28 Sep 2023 15:33:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qlssz-0003wZ-Op; Thu, 28 Sep 2023 15:25:05 +0000
-Received: by outflank-mailman (input) for mailman id 609920;
- Thu, 28 Sep 2023 15:25:04 +0000
+	id 1qlt0r-000701-OP; Thu, 28 Sep 2023 15:33:13 +0000
+Received: by outflank-mailman (input) for mailman id 609945;
+ Thu, 28 Sep 2023 15:33:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QRba=FM=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qlssx-000335-UB
- for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 15:25:04 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=LMSP=FM=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qlt0q-0006yi-Sm
+ for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 15:33:12 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 31157516-5e13-11ee-9b0d-b553b5be7939;
- Thu, 28 Sep 2023 17:25:01 +0200 (CEST)
-Received: from beta.station (net-188-218-250-245.cust.vodafonedsl.it
- [188.218.250.245])
- by support.bugseng.com (Postfix) with ESMTPSA id 272334EE0C88;
- Thu, 28 Sep 2023 17:25:01 +0200 (CEST)
+ id 547b95db-5e14-11ee-9b0d-b553b5be7939;
+ Thu, 28 Sep 2023 17:33:10 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E0B96218E6;
+ Thu, 28 Sep 2023 15:33:09 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 96E44138E9;
+ Thu, 28 Sep 2023 15:33:09 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id tL2aI7WcFWUbMQAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 28 Sep 2023 15:33:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,432 +53,203 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31157516-5e13-11ee-9b0d-b553b5be7939
-From: Simone Ballarin <simone.ballarin@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	sstabellini@kernel.org,
-	jbeulich@suse.com,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Gianluca Luparini <gianluca.luparini@bugseng.com>
-Subject: [XEN PATCH v7 3/4] x86/include: address violations of MISRA C:2012 Rule 7.2
-Date: Thu, 28 Sep 2023 17:23:03 +0200
-Message-Id: <6f0ac778edc5de8cf079a657917696ceae919e8b.1695913900.git.simone.ballarin@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1695913900.git.simone.ballarin@bugseng.com>
-References: <cover.1695913900.git.simone.ballarin@bugseng.com>
+X-Inumbo-ID: 547b95db-5e14-11ee-9b0d-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1695915189; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=R4vy0zU0Pr1f3U56GuNDaWODiU85Wy0KJE3fHb1+eWo=;
+	b=em9roNfYcAkpdHg8RN8J4aS5lXXniLVeSqcg4TDUGnKLURMJEdPh7eUUdOMoonDbfVMlAI
+	++XAUtLrwdmvCjlJ+o/CmGQMdJGCaaqEflLLfL2yhlw6N1TPK1HzVFQWEWb0GrLLCqSPyU
+	JHwy8itCmB/fEt0RHTONGRfvXWoffnc=
+Message-ID: <8c0f3255-83ea-4108-847f-63b895997577@suse.com>
+Date: Thu, 28 Sep 2023 17:33:08 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] xen: evtchn: Allow shared registration of IRQ handers
+Content-Language: en-US
+To: Viresh Kumar <viresh.kumar@linaro.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Vincent Guittot <vincent.guittot@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ stratos-dev@op-lists.linaro.org, Erik Schilling <erik.schilling@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>,
+ xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+References: <cover.1693311370.git.viresh.kumar@linaro.org>
+ <fc6d47de76a8b77d0a1b4bc8204694c079715f2e.1693311370.git.viresh.kumar@linaro.org>
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <fc6d47de76a8b77d0a1b4bc8204694c079715f2e.1693311370.git.viresh.kumar@linaro.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------JVTR8m52YxNgV4MDl5HMuc3s"
 
-The xen sources contains violations of MISRA C:2012 Rule 7.2 whose
-headline states:
-"A 'u' or 'U' suffix shall be applied to all integer constants
-that are represented in an unsigned type".
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------JVTR8m52YxNgV4MDl5HMuc3s
+Content-Type: multipart/mixed; boundary="------------fh0Fr5pHK4fHyrXGogPynGTi";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Viresh Kumar <viresh.kumar@linaro.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Vincent Guittot <vincent.guittot@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ stratos-dev@op-lists.linaro.org, Erik Schilling <erik.schilling@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>,
+ xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Message-ID: <8c0f3255-83ea-4108-847f-63b895997577@suse.com>
+Subject: Re: [PATCH 1/2] xen: evtchn: Allow shared registration of IRQ handers
+References: <cover.1693311370.git.viresh.kumar@linaro.org>
+ <fc6d47de76a8b77d0a1b4bc8204694c079715f2e.1693311370.git.viresh.kumar@linaro.org>
+In-Reply-To: <fc6d47de76a8b77d0a1b4bc8204694c079715f2e.1693311370.git.viresh.kumar@linaro.org>
 
-Add the 'U' suffix to integers literals with unsigned type.
-Use _AC() for macro costants that are used also in assembly files.
+--------------fh0Fr5pHK4fHyrXGogPynGTi
+Content-Type: multipart/mixed; boundary="------------S0lyxxAH05x0JFhaooIfch0M"
 
-For the sake of uniformity, the following changes are made:
-- add the 'U' suffix to macros in 'pci.h'
-- use _AC() for macros near 'X86_CR0_PG'
+--------------S0lyxxAH05x0JFhaooIfch0M
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Gianluca Luparini <gianluca.luparini@bugseng.com>
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
----
-Changes in v7:
-- switch order of Signed-off-by tags
-- change tag from x86/arm to x86/include
-Changes in v6:
-- new patch obtained by splitting ASM related changes from
-"xen/x86: address violations of MISRA C:2012 Rule 7.2 (v5)"
-- use UL suffix for X86_CR0_* macros
----
- xen/arch/x86/include/asm/apicdef.h   |   2 +-
- xen/arch/x86/include/asm/config.h    |   2 +-
- xen/arch/x86/include/asm/hpet.h      |   2 +-
- xen/arch/x86/include/asm/msi.h       |   2 +-
- xen/arch/x86/include/asm/msr-index.h | 182 +++++++++++++--------------
- xen/arch/x86/include/asm/pci.h       |   8 +-
- xen/arch/x86/include/asm/x86-defns.h |  22 ++--
- 7 files changed, 110 insertions(+), 110 deletions(-)
+T24gMjkuMDguMjMgMTQ6MjksIFZpcmVzaCBLdW1hciB3cm90ZToNCj4gQ3VycmVudGx5IHRo
+ZSBoYW5kbGluZyBvZiBldmVudHMgaXMgc3VwcG9ydGVkIGVpdGhlciBpbiB0aGUga2VybmVs
+IG9yDQo+IHVzZXJzcGFjZSwgYnV0IG5vdCBib3RoLg0KPiANCj4gSW4gb3JkZXIgdG8gc3Vw
+cG9ydCBmYXN0IGRlbGl2ZXJ5IG9mIGludGVycnVwdHMgZnJvbSB0aGUgZ3Vlc3QgdG8gdGhl
+DQo+IGJhY2tlbmQsIHdlIG5lZWQgdG8gaGFuZGxlIHRoZSBRdWV1ZSBub3RpZnkgcGFydCBv
+ZiBWaXJ0aW8gcHJvdG9jb2wgaW4NCj4ga2VybmVsIGFuZCB0aGUgcmVzdCBpbiB1c2Vyc3Bh
+Y2UuDQo+IA0KPiBVcGRhdGUgdGhlIGludGVycnVwdCBoYW5kbGVyIHJlZ2lzdHJhdGlvbiBm
+bGFnIHRvIElSUUZfU0hBUkVEIGZvciBldmVudA0KPiBjaGFubmVscywgd2hpY2ggd291bGQg
+YWxsb3cgbXVsdGlwbGUgZW50aXRpZXMgdG8gYmluZCB0aGVpciBpbnRlcnJ1cHQNCj4gaGFu
+ZGxlciBmb3IgdGhlIHNhbWUgZXZlbnQgY2hhbm5lbCBwb3J0Lg0KPiANCj4gQWxzbyBpbmNy
+ZW1lbnQgdGhlIHJlZmVyZW5jZSBjb3VudCBvZiBpcnFfaW5mbyB3aGVuIG11bHRpcGxlIGVu
+dGl0aWVzDQo+IHRyeSB0byBiaW5kIGV2ZW50IGNoYW5uZWwgdG8gaXJxY2hpcCwgc28gdGhl
+IHVuYmluZGluZyBoYXBwZW5zIG9ubHkNCj4gYWZ0ZXIgYWxsIHRoZSB1c2VycyBhcmUgZ29u
+ZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IFZpcmVzaCBLdW1hciA8dmlyZXNoLmt1bWFyQGxp
+bmFyby5vcmc+DQo+IC0tLQ0KPiAgIGRyaXZlcnMveGVuL2V2ZW50cy9ldmVudHNfYmFzZS5j
+IHwgMSArDQo+ICAgZHJpdmVycy94ZW4vZXZ0Y2huLmMgICAgICAgICAgICAgfCAyICstDQo+
+ICAgMiBmaWxlcyBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4g
+DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRzX2Jhc2UuYyBiL2Ry
+aXZlcnMveGVuL2V2ZW50cy9ldmVudHNfYmFzZS5jDQo+IGluZGV4IGM3NzE1ZjhiZDQ1Mi4u
+MDE4MjY4MGRhYjNhIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRz
+X2Jhc2UuYw0KPiArKysgYi9kcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRzX2Jhc2UuYw0KPiBA
+QCAtMTIzOSw2ICsxMjM5LDcgQEAgc3RhdGljIGludCBiaW5kX2V2dGNobl90b19pcnFfY2hp
+cChldnRjaG5fcG9ydF90IGV2dGNobiwgc3RydWN0IGlycV9jaGlwICpjaGlwLA0KPiAgIAl9
+IGVsc2Ugew0KPiAgIAkJc3RydWN0IGlycV9pbmZvICppbmZvID0gaW5mb19mb3JfaXJxKGly
+cSk7DQo+ICAgCQlXQVJOX09OKGluZm8gPT0gTlVMTCB8fCBpbmZvLT50eXBlICE9IElSUVRf
+RVZUQ0hOKTsNCj4gKwkJaW5mby0+cmVmY250Kys7DQoNClRoaXMgc2hvdWxkIGJlIGNvbmRp
+dGlvbmFsIG9uIHRoZSBXQVJOX09OKCkgbm90IHRyaWdnZXJpbmcuDQoNCj4gICAJfQ0KPiAg
+IA0KPiAgIG91dDoNCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL2V2dGNobi5jIGIvZHJp
+dmVycy94ZW4vZXZ0Y2huLmMNCj4gaW5kZXggYzk5NDE1YTcwMDUxLi40M2Y3NzkxNWZlYjUg
+MTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMveGVuL2V2dGNobi5jDQo+ICsrKyBiL2RyaXZlcnMv
+eGVuL2V2dGNobi5jDQo+IEBAIC0zOTcsNyArMzk3LDcgQEAgc3RhdGljIGludCBldnRjaG5f
+YmluZF90b191c2VyKHN0cnVjdCBwZXJfdXNlcl9kYXRhICp1LCBldnRjaG5fcG9ydF90IHBv
+cnQpDQo+ICAgCWlmIChyYyA8IDApDQo+ICAgCQlnb3RvIGVycjsNCj4gICANCj4gLQlyYyA9
+IGJpbmRfZXZ0Y2huX3RvX2lycWhhbmRsZXJfbGF0ZWVvaShwb3J0LCBldnRjaG5faW50ZXJy
+dXB0LCAwLA0KPiArCXJjID0gYmluZF9ldnRjaG5fdG9faXJxaGFuZGxlcl9sYXRlZW9pKHBv
+cnQsIGV2dGNobl9pbnRlcnJ1cHQsIElSUUZfU0hBUkVELA0KPiAgIAkJCQkJICAgICAgIHUt
+Pm5hbWUsIGV2dGNobik7DQo+ICAgCWlmIChyYyA8IDApDQo+ICAgCQlnb3RvIGVycjsNCg0K
+DQpKdWVyZ2VuDQo=
+--------------S0lyxxAH05x0JFhaooIfch0M
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/xen/arch/x86/include/asm/apicdef.h b/xen/arch/x86/include/asm/apicdef.h
-index a261436993..8d1b0087d4 100644
---- a/xen/arch/x86/include/asm/apicdef.h
-+++ b/xen/arch/x86/include/asm/apicdef.h
-@@ -8,7 +8,7 @@
-  * Ingo Molnar <mingo@redhat.com>, 1999, 2000
-  */
- 
--#define		APIC_DEFAULT_PHYS_BASE	0xfee00000
-+#define		APIC_DEFAULT_PHYS_BASE	0xfee00000U
-  
- #define		APIC_ID		0x20
- #define			APIC_ID_MASK		(0xFFu<<24)
-diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
-index fbc4bb3416..bbced338be 100644
---- a/xen/arch/x86/include/asm/config.h
-+++ b/xen/arch/x86/include/asm/config.h
-@@ -257,7 +257,7 @@ extern unsigned char boot_edid_info[128];
- #endif /* CONFIG_PV32 */
- 
- #define MACH2PHYS_COMPAT_VIRT_START    HYPERVISOR_COMPAT_VIRT_START
--#define MACH2PHYS_COMPAT_VIRT_END      0xFFE00000
-+#define MACH2PHYS_COMPAT_VIRT_END      0xFFE00000U
- #define MACH2PHYS_COMPAT_NR_ENTRIES(d) \
-     ((MACH2PHYS_COMPAT_VIRT_END-MACH2PHYS_COMPAT_VIRT_START(d))>>2)
- 
-diff --git a/xen/arch/x86/include/asm/hpet.h b/xen/arch/x86/include/asm/hpet.h
-index 9919f74730..c5e8e9c8db 100644
---- a/xen/arch/x86/include/asm/hpet.h
-+++ b/xen/arch/x86/include/asm/hpet.h
-@@ -41,7 +41,7 @@
- #define HPET_TN_ROUTE		0x3e00
- #define HPET_TN_FSB		0x4000
- #define HPET_TN_FSB_CAP		0x8000
--#define HPET_TN_RESERVED	0xffff0081
-+#define HPET_TN_RESERVED	0xffff0081U
- #define HPET_TN_INT_ROUTE_CAP	(0xffffffffULL << 32)
- 
- 
-diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
-index a53ade95c9..d89723d009 100644
---- a/xen/arch/x86/include/asm/msi.h
-+++ b/xen/arch/x86/include/asm/msi.h
-@@ -37,7 +37,7 @@
-  */
- 
- #define MSI_ADDR_BASE_HI            0
--#define MSI_ADDR_BASE_LO            0xfee00000
-+#define MSI_ADDR_BASE_LO            0xfee00000U
- #define MSI_ADDR_BASE_MASK          (~0xfffff)
- #define MSI_ADDR_HEADER             MSI_ADDR_BASE_LO
- 
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 11ffed543a..718f8f860d 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -22,7 +22,7 @@
- #define  APIC_BASE_BSP                      (_AC(1, ULL) <<  8)
- #define  APIC_BASE_EXTD                     (_AC(1, ULL) << 10)
- #define  APIC_BASE_ENABLE                   (_AC(1, ULL) << 11)
--#define  APIC_BASE_ADDR_MASK                0x000ffffffffff000ULL
-+#define  APIC_BASE_ADDR_MASK                _AC(0x000ffffffffff000, ULL)
- 
- #define MSR_TEST_CTRL                       0x00000033
- #define  TEST_CTRL_SPLITLOCK_DETECT         (_AC(1, ULL) << 29)
-@@ -30,7 +30,7 @@
- 
- #define MSR_INTEL_CORE_THREAD_COUNT         0x00000035
- #define  MSR_CTC_THREAD_MASK                0x0000ffff
--#define  MSR_CTC_CORE_MASK                  0xffff0000
-+#define  MSR_CTC_CORE_MASK                  _AC(0xffff0000, U)
- 
- #define MSR_SPEC_CTRL                       0x00000048
- #define  SPEC_CTRL_IBRS                     (_AC(1, ULL) <<  0)
-@@ -186,7 +186,7 @@
- #define MSR_UARCH_MISC_CTRL                 0x00001b01
- #define  UARCH_CTRL_DOITM                   (_AC(1, ULL) <<  0)
- 
--#define MSR_EFER                            0xc0000080 /* Extended Feature Enable Register */
-+#define MSR_EFER                            _AC(0xc0000080, U) /* Extended Feature Enable Register */
- #define  EFER_SCE                           (_AC(1, ULL) <<  0) /* SYSCALL Enable */
- #define  EFER_LME                           (_AC(1, ULL) <<  8) /* Long Mode Enable */
- #define  EFER_LMA                           (_AC(1, ULL) << 10) /* Long Mode Active */
-@@ -199,35 +199,35 @@
-     (EFER_SCE | EFER_LME | EFER_LMA | EFER_NXE | EFER_SVME | EFER_FFXSE | \
-      EFER_AIBRSE)
- 
--#define MSR_STAR                            0xc0000081 /* legacy mode SYSCALL target */
--#define MSR_LSTAR                           0xc0000082 /* long mode SYSCALL target */
--#define MSR_CSTAR                           0xc0000083 /* compat mode SYSCALL target */
--#define MSR_SYSCALL_MASK                    0xc0000084 /* EFLAGS mask for syscall */
--#define MSR_FS_BASE                         0xc0000100 /* 64bit FS base */
--#define MSR_GS_BASE                         0xc0000101 /* 64bit GS base */
--#define MSR_SHADOW_GS_BASE                  0xc0000102 /* SwapGS GS shadow */
--#define MSR_TSC_AUX                         0xc0000103 /* Auxiliary TSC */
-+#define MSR_STAR                            _AC(0xc0000081, U) /* legacy mode SYSCALL target */
-+#define MSR_LSTAR                           _AC(0xc0000082, U) /* long mode SYSCALL target */
-+#define MSR_CSTAR                           _AC(0xc0000083, U) /* compat mode SYSCALL target */
-+#define MSR_SYSCALL_MASK                    _AC(0xc0000084, U) /* EFLAGS mask for syscall */
-+#define MSR_FS_BASE                         _AC(0xc0000100, U) /* 64bit FS base */
-+#define MSR_GS_BASE                         _AC(0xc0000101, U) /* 64bit GS base */
-+#define MSR_SHADOW_GS_BASE                  _AC(0xc0000102, U) /* SwapGS GS shadow */
-+#define MSR_TSC_AUX                         _AC(0xc0000103, U) /* Auxiliary TSC */
- 
--#define MSR_K8_SYSCFG                       0xc0010010
-+#define MSR_K8_SYSCFG                       _AC(0xc0010010, U)
- #define  SYSCFG_MTRR_FIX_DRAM_EN            (_AC(1, ULL) << 18)
- #define  SYSCFG_MTRR_FIX_DRAM_MOD_EN        (_AC(1, ULL) << 19)
- #define  SYSCFG_MTRR_VAR_DRAM_EN            (_AC(1, ULL) << 20)
- #define  SYSCFG_MTRR_TOM2_EN                (_AC(1, ULL) << 21)
- #define  SYSCFG_TOM2_FORCE_WB               (_AC(1, ULL) << 22)
- 
--#define MSR_K8_IORR_BASE0                   0xc0010016
--#define MSR_K8_IORR_MASK0                   0xc0010017
--#define MSR_K8_IORR_BASE1                   0xc0010018
--#define MSR_K8_IORR_MASK1                   0xc0010019
-+#define MSR_K8_IORR_BASE0                   _AC(0xc0010016, U)
-+#define MSR_K8_IORR_MASK0                   _AC(0xc0010017, U)
-+#define MSR_K8_IORR_BASE1                   _AC(0xc0010018, U)
-+#define MSR_K8_IORR_MASK1                   _AC(0xc0010019, U)
- 
--#define MSR_K8_TSEG_BASE                    0xc0010112 /* AMD doc: SMMAddr */
--#define MSR_K8_TSEG_MASK                    0xc0010113 /* AMD doc: SMMMask */
-+#define MSR_K8_TSEG_BASE                    _AC(0xc0010112, U) /* AMD doc: SMMAddr */
-+#define MSR_K8_TSEG_MASK                    _AC(0xc0010113, U) /* AMD doc: SMMMask */
- 
--#define MSR_K8_VM_CR                        0xc0010114
-+#define MSR_K8_VM_CR                        _AC(0xc0010114, U)
- #define  VM_CR_INIT_REDIRECTION             (_AC(1, ULL) <<  1)
- #define  VM_CR_SVM_DISABLE                  (_AC(1, ULL) <<  4)
- 
--#define MSR_VIRT_SPEC_CTRL                  0xc001011f /* Layout matches MSR_SPEC_CTRL */
-+#define MSR_VIRT_SPEC_CTRL                  _AC(0xc001011f, U) /* Layout matches MSR_SPEC_CTRL */
- 
- #define MSR_AMD_CSTATE_CFG                  0xc0010296
- 
-@@ -313,7 +313,7 @@
- #define CMCI_EN 			(1UL<<30)
- #define CMCI_THRESHOLD_MASK		0x7FFF
- 
--#define MSR_AMD64_MC0_MASK		0xc0010044
-+#define MSR_AMD64_MC0_MASK		0xc0010044U
- 
- #define MSR_IA32_MCx_CTL(x)		(MSR_IA32_MC0_CTL + 4*(x))
- #define MSR_IA32_MCx_STATUS(x)		(MSR_IA32_MC0_STATUS + 4*(x))
-@@ -345,82 +345,82 @@
- 
- /* K7/K8 MSRs. Not complete. See the architecture manual for a more
-    complete list. */
--#define MSR_K7_EVNTSEL0			0xc0010000
--#define MSR_K7_PERFCTR0			0xc0010004
--#define MSR_K7_EVNTSEL1			0xc0010001
--#define MSR_K7_PERFCTR1			0xc0010005
--#define MSR_K7_EVNTSEL2			0xc0010002
--#define MSR_K7_PERFCTR2			0xc0010006
--#define MSR_K7_EVNTSEL3			0xc0010003
--#define MSR_K7_PERFCTR3			0xc0010007
--#define MSR_K8_TOP_MEM1			0xc001001a
--#define MSR_K8_TOP_MEM2			0xc001001d
--
--#define MSR_K8_HWCR			0xc0010015
-+#define MSR_K7_EVNTSEL0			0xc0010000U
-+#define MSR_K7_PERFCTR0			0xc0010004U
-+#define MSR_K7_EVNTSEL1			0xc0010001U
-+#define MSR_K7_PERFCTR1			0xc0010005U
-+#define MSR_K7_EVNTSEL2			0xc0010002U
-+#define MSR_K7_PERFCTR2			0xc0010006U
-+#define MSR_K7_EVNTSEL3			0xc0010003U
-+#define MSR_K7_PERFCTR3			0xc0010007U
-+#define MSR_K8_TOP_MEM1			0xc001001aU
-+#define MSR_K8_TOP_MEM2			0xc001001dU
-+
-+#define MSR_K8_HWCR			0xc0010015U
- #define K8_HWCR_TSC_FREQ_SEL		(1ULL << 24)
- #define K8_HWCR_CPUID_USER_DIS		(1ULL << 35)
- 
--#define MSR_K7_FID_VID_CTL		0xc0010041
--#define MSR_K7_FID_VID_STATUS		0xc0010042
--#define MSR_K8_PSTATE_LIMIT		0xc0010061
--#define MSR_K8_PSTATE_CTRL		0xc0010062
--#define MSR_K8_PSTATE_STATUS		0xc0010063
--#define MSR_K8_PSTATE0			0xc0010064
--#define MSR_K8_PSTATE1			0xc0010065
--#define MSR_K8_PSTATE2			0xc0010066
--#define MSR_K8_PSTATE3			0xc0010067
--#define MSR_K8_PSTATE4			0xc0010068
--#define MSR_K8_PSTATE5			0xc0010069
--#define MSR_K8_PSTATE6			0xc001006A
--#define MSR_K8_PSTATE7			0xc001006B
--#define MSR_K8_ENABLE_C1E		0xc0010055
--#define MSR_K8_VM_HSAVE_PA		0xc0010117
--
--#define MSR_AMD_FAM15H_EVNTSEL0		0xc0010200
--#define MSR_AMD_FAM15H_PERFCTR0		0xc0010201
--#define MSR_AMD_FAM15H_EVNTSEL1		0xc0010202
--#define MSR_AMD_FAM15H_PERFCTR1		0xc0010203
--#define MSR_AMD_FAM15H_EVNTSEL2		0xc0010204
--#define MSR_AMD_FAM15H_PERFCTR2		0xc0010205
--#define MSR_AMD_FAM15H_EVNTSEL3		0xc0010206
--#define MSR_AMD_FAM15H_PERFCTR3		0xc0010207
--#define MSR_AMD_FAM15H_EVNTSEL4		0xc0010208
--#define MSR_AMD_FAM15H_PERFCTR4		0xc0010209
--#define MSR_AMD_FAM15H_EVNTSEL5		0xc001020a
--#define MSR_AMD_FAM15H_PERFCTR5		0xc001020b
--
--#define MSR_AMD_L7S0_FEATURE_MASK	0xc0011002
--#define MSR_AMD_THRM_FEATURE_MASK	0xc0011003
--#define MSR_K8_FEATURE_MASK		0xc0011004
--#define MSR_K8_EXT_FEATURE_MASK		0xc0011005
-+#define MSR_K7_FID_VID_CTL		0xc0010041U
-+#define MSR_K7_FID_VID_STATUS		0xc0010042U
-+#define MSR_K8_PSTATE_LIMIT		0xc0010061U
-+#define MSR_K8_PSTATE_CTRL		0xc0010062U
-+#define MSR_K8_PSTATE_STATUS		0xc0010063U
-+#define MSR_K8_PSTATE0			0xc0010064U
-+#define MSR_K8_PSTATE1			0xc0010065U
-+#define MSR_K8_PSTATE2			0xc0010066U
-+#define MSR_K8_PSTATE3			0xc0010067U
-+#define MSR_K8_PSTATE4			0xc0010068U
-+#define MSR_K8_PSTATE5			0xc0010069U
-+#define MSR_K8_PSTATE6			0xc001006AU
-+#define MSR_K8_PSTATE7			0xc001006BU
-+#define MSR_K8_ENABLE_C1E		0xc0010055U
-+#define MSR_K8_VM_HSAVE_PA		0xc0010117U
-+
-+#define MSR_AMD_FAM15H_EVNTSEL0		0xc0010200U
-+#define MSR_AMD_FAM15H_PERFCTR0		0xc0010201U
-+#define MSR_AMD_FAM15H_EVNTSEL1		0xc0010202U
-+#define MSR_AMD_FAM15H_PERFCTR1		0xc0010203U
-+#define MSR_AMD_FAM15H_EVNTSEL2		0xc0010204U
-+#define MSR_AMD_FAM15H_PERFCTR2		0xc0010205U
-+#define MSR_AMD_FAM15H_EVNTSEL3		0xc0010206U
-+#define MSR_AMD_FAM15H_PERFCTR3		0xc0010207U
-+#define MSR_AMD_FAM15H_EVNTSEL4		0xc0010208U
-+#define MSR_AMD_FAM15H_PERFCTR4		0xc0010209U
-+#define MSR_AMD_FAM15H_EVNTSEL5		0xc001020aU
-+#define MSR_AMD_FAM15H_PERFCTR5		0xc001020bU
-+
-+#define MSR_AMD_L7S0_FEATURE_MASK	0xc0011002U
-+#define MSR_AMD_THRM_FEATURE_MASK	0xc0011003U
-+#define MSR_K8_FEATURE_MASK			0xc0011004U
-+#define MSR_K8_EXT_FEATURE_MASK		0xc0011005U
- 
- /* AMD64 MSRs */
--#define MSR_AMD64_NB_CFG		0xc001001f
-+#define MSR_AMD64_NB_CFG		0xc001001fU
- #define AMD64_NB_CFG_CF8_EXT_ENABLE_BIT	46
--#define MSR_AMD64_LS_CFG		0xc0011020
--#define MSR_AMD64_IC_CFG		0xc0011021
--#define MSR_AMD64_DC_CFG		0xc0011022
--#define MSR_AMD64_DE_CFG		0xc0011029
-+#define MSR_AMD64_LS_CFG		0xc0011020U
-+#define MSR_AMD64_IC_CFG		0xc0011021U
-+#define MSR_AMD64_DC_CFG		0xc0011022U
-+#define MSR_AMD64_DE_CFG		0xc0011029U
- #define AMD64_DE_CFG_LFENCE_SERIALISE	(_AC(1, ULL) << 1)
--#define MSR_AMD64_EX_CFG		0xc001102c
--#define MSR_AMD64_DE_CFG2		0xc00110e3
-+#define MSR_AMD64_EX_CFG		0xc001102cU
-+#define MSR_AMD64_DE_CFG2		0xc00110e3U
- 
--#define MSR_AMD64_DR0_ADDRESS_MASK	0xc0011027
--#define MSR_AMD64_DR1_ADDRESS_MASK	0xc0011019
--#define MSR_AMD64_DR2_ADDRESS_MASK	0xc001101a
--#define MSR_AMD64_DR3_ADDRESS_MASK	0xc001101b
-+#define MSR_AMD64_DR0_ADDRESS_MASK	0xc0011027U
-+#define MSR_AMD64_DR1_ADDRESS_MASK	0xc0011019U
-+#define MSR_AMD64_DR2_ADDRESS_MASK	0xc001101aU
-+#define MSR_AMD64_DR3_ADDRESS_MASK	0xc001101bU
- 
- /* AMD Family10h machine check MSRs */
--#define MSR_F10_MC4_MISC1		0xc0000408
--#define MSR_F10_MC4_MISC2		0xc0000409
--#define MSR_F10_MC4_MISC3		0xc000040A
-+#define MSR_F10_MC4_MISC1		0xc0000408U
-+#define MSR_F10_MC4_MISC2		0xc0000409U
-+#define MSR_F10_MC4_MISC3		0xc000040AU
- 
- /* AMD Family10h Bus Unit MSRs */
--#define MSR_F10_BU_CFG 		0xc0011023
--#define MSR_F10_BU_CFG2		0xc001102a
-+#define MSR_F10_BU_CFG 		0xc0011023U
-+#define MSR_F10_BU_CFG2		0xc001102aU
- 
- /* Other AMD Fam10h MSRs */
--#define MSR_FAM10H_MMIO_CONF_BASE	0xc0010058
-+#define MSR_FAM10H_MMIO_CONF_BASE	0xc0010058U
- #define FAM10H_MMIO_CONF_ENABLE         (1<<0)
- #define FAM10H_MMIO_CONF_BUSRANGE_MASK	0xf
- #define FAM10H_MMIO_CONF_BUSRANGE_SHIFT 2
-@@ -429,22 +429,22 @@
- 
- /* AMD Microcode MSRs */
- #define MSR_AMD_PATCHLEVEL		0x0000008b
--#define MSR_AMD_PATCHLOADER		0xc0010020
-+#define MSR_AMD_PATCHLOADER		0xc0010020U
- 
- /* AMD TSC RATE MSR */
--#define MSR_AMD64_TSC_RATIO		0xc0000104
-+#define MSR_AMD64_TSC_RATIO		0xc0000104U
- 
- /* AMD Lightweight Profiling MSRs */
--#define MSR_AMD64_LWP_CFG		0xc0000105
--#define MSR_AMD64_LWP_CBADDR		0xc0000106
-+#define MSR_AMD64_LWP_CFG		0xc0000105U
-+#define MSR_AMD64_LWP_CBADDR		0xc0000106U
- 
- /* AMD OS Visible Workaround MSRs */
--#define MSR_AMD_OSVW_ID_LENGTH          0xc0010140
--#define MSR_AMD_OSVW_STATUS             0xc0010141
-+#define MSR_AMD_OSVW_ID_LENGTH          0xc0010140U
-+#define MSR_AMD_OSVW_STATUS             0xc0010141U
- 
- /* AMD Protected Processor Inventory Number */
--#define MSR_AMD_PPIN_CTL                0xc00102f0
--#define MSR_AMD_PPIN                    0xc00102f1
-+#define MSR_AMD_PPIN_CTL                0xc00102f0U
-+#define MSR_AMD_PPIN                    0xc00102f1U
- 
- /* VIA Cyrix defined MSRs*/
- #define MSR_VIA_FCR			0x00001107
-diff --git a/xen/arch/x86/include/asm/pci.h b/xen/arch/x86/include/asm/pci.h
-index f4a58c8acf..e1dd12eb19 100644
---- a/xen/arch/x86/include/asm/pci.h
-+++ b/xen/arch/x86/include/asm/pci.h
-@@ -3,10 +3,10 @@
- 
- #include <xen/mm.h>
- 
--#define CF8_BDF(cf8)     (  ((cf8) & 0x00ffff00) >> 8)
--#define CF8_ADDR_LO(cf8) (   (cf8) & 0x000000fc)
--#define CF8_ADDR_HI(cf8) (  ((cf8) & 0x0f000000) >> 16)
--#define CF8_ENABLED(cf8) (!!((cf8) & 0x80000000))
-+#define CF8_BDF(cf8)     (  ((cf8) & 0x00ffff00U) >> 8)
-+#define CF8_ADDR_LO(cf8) (   (cf8) & 0x000000fcU)
-+#define CF8_ADDR_HI(cf8) (  ((cf8) & 0x0f000000U) >> 16)
-+#define CF8_ENABLED(cf8) (!!((cf8) & 0x80000000U))
- 
- #define IS_SNB_GFX(id) (id == 0x01068086 || id == 0x01168086 \
-                         || id == 0x01268086 || id == 0x01028086 \
-diff --git a/xen/arch/x86/include/asm/x86-defns.h b/xen/arch/x86/include/asm/x86-defns.h
-index 5838631ef6..48d7a3b7af 100644
---- a/xen/arch/x86/include/asm/x86-defns.h
-+++ b/xen/arch/x86/include/asm/x86-defns.h
-@@ -30,17 +30,17 @@
- /*
-  * Intel CPU flags in CR0
-  */
--#define X86_CR0_PE              0x00000001 /* Enable Protected Mode    (RW) */
--#define X86_CR0_MP              0x00000002 /* Monitor Coprocessor      (RW) */
--#define X86_CR0_EM              0x00000004 /* Require FPU Emulation    (RO) */
--#define X86_CR0_TS              0x00000008 /* Task Switched            (RW) */
--#define X86_CR0_ET              0x00000010 /* Extension type           (RO) */
--#define X86_CR0_NE              0x00000020 /* Numeric Error Reporting  (RW) */
--#define X86_CR0_WP              0x00010000 /* Supervisor Write Protect (RW) */
--#define X86_CR0_AM              0x00040000 /* Alignment Checking       (RW) */
--#define X86_CR0_NW              0x20000000 /* Not Write-Through        (RW) */
--#define X86_CR0_CD              0x40000000 /* Cache Disable            (RW) */
--#define X86_CR0_PG              0x80000000 /* Paging                   (RW) */
-+#define X86_CR0_PE              _AC(0x00000001, UL) /* Enable Protected Mode    (RW) */
-+#define X86_CR0_MP              _AC(0x00000002, UL) /* Monitor Coprocessor      (RW) */
-+#define X86_CR0_EM              _AC(0x00000004, UL) /* Require FPU Emulation    (RO) */
-+#define X86_CR0_TS              _AC(0x00000008, UL) /* Task Switched            (RW) */
-+#define X86_CR0_ET              _AC(0x00000010, UL) /* Extension type           (RO) */
-+#define X86_CR0_NE              _AC(0x00000020, UL) /* Numeric Error Reporting  (RW) */
-+#define X86_CR0_WP              _AC(0x00010000, UL) /* Supervisor Write Protect (RW) */
-+#define X86_CR0_AM              _AC(0x00040000, UL) /* Alignment Checking       (RW) */
-+#define X86_CR0_NW              _AC(0x20000000, UL) /* Not Write-Through        (RW) */
-+#define X86_CR0_CD              _AC(0x40000000, UL) /* Cache Disable            (RW) */
-+#define X86_CR0_PG              _AC(0x80000000, UL) /* Paging                   (RW) */
- 
- /*
-  * Intel CPU flags in CR3
--- 
-2.34.1
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------S0lyxxAH05x0JFhaooIfch0M--
+
+--------------fh0Fr5pHK4fHyrXGogPynGTi--
+
+--------------JVTR8m52YxNgV4MDl5HMuc3s
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmUVnLUFAwAAAAAACgkQsN6d1ii/Ey/3
+KQf+IET6cM4Bo9o34kH8hoFxRF9K2Dbi0YZXC7NdlDK9OVrbqJ9SruSDaoo/z65Jaz3HGdX6uyXC
+eGC8JwcRUyrc+SWUTb6sm776y83CykA9SPXY3FizGjBv97X1t87Xdez4fudFELKSljdhU1IQimDz
+aAi6ekhfGP2iCV1r/jDqCRnQb9Rv/FZ8VDVDnURV3HrudhNmWeL2q9hYww/ZovU4YcDJNUoTJz+9
+PnXMwuLuZVq9BguAkiQevecjs+OXfFEgZN8CcnoqvE6SZlCoqKbrudaajYZwzniyHPihI1ZOVFzx
+OXGaMiGVUQLB3HKbb+u/IL0VEs5xVGZGTIMkRcNllA==
+=H/n6
+-----END PGP SIGNATURE-----
+
+--------------JVTR8m52YxNgV4MDl5HMuc3s--
 
