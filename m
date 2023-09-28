@@ -4,44 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C60DE743CD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC3BE743CE
 	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 23:20:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.610077.949335 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.610079.949349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qm0IP-0003NV-B3; Thu, 28 Sep 2023 23:19:49 +0000
+	id 1qm0IQ-0003hZ-Tk; Thu, 28 Sep 2023 23:19:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 610077.949335; Thu, 28 Sep 2023 23:19:49 +0000
+Received: by outflank-mailman (output) from mailman id 610079.949349; Thu, 28 Sep 2023 23:19:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qm0IP-0003NM-7z; Thu, 28 Sep 2023 23:19:49 +0000
-Received: by outflank-mailman (input) for mailman id 610077;
- Thu, 28 Sep 2023 23:19:47 +0000
+	id 1qm0IQ-0003gp-OK; Thu, 28 Sep 2023 23:19:50 +0000
+Received: by outflank-mailman (input) for mailman id 610079;
+ Thu, 28 Sep 2023 23:19:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Pu57=FM=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qm0IN-0003MQ-Ri
- for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 23:19:47 +0000
-Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 80a0531a-5e55-11ee-9b0d-b553b5be7939;
- Fri, 29 Sep 2023 01:19:44 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 9C44282853BD;
- Thu, 28 Sep 2023 18:19:41 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id W-RDBVAdorpd; Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 677D382856BA;
- Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 7oh06pz4SJAY; Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
-Received: from raptor-ewks-026.rptsys.com (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 116AD82856A3;
- Thu, 28 Sep 2023 18:19:38 -0500 (CDT)
+ <SRS0=NjmF=FM=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1qm0IP-0003MQ-HA
+ for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 23:19:49 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 83802657-5e55-11ee-9b0d-b553b5be7939;
+ Fri, 29 Sep 2023 01:19:47 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4330A61DA0;
+ Thu, 28 Sep 2023 23:19:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B483FC433C7;
+ Thu, 28 Sep 2023 23:19:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,54 +43,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 80a0531a-5e55-11ee-9b0d-b553b5be7939
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 677D382856BA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1695943178; bh=yq32tJnjVPi0z2MoxNzoP3nmP/w0YsbUxnmfU/xjCrc=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=OcDVyObeeEUYxXGFJnYIeEtpA8HetstdTgrgltg70dOZdVrQGVDD56vsKgK4LuErM
-	 nM9/aN/NLpj5mdaML3wefZaqMbRmze1Y1U7TXAtvAmMmB/j4+VBB1n3TxWuXbCPWEm
-	 9vnFMKWKajjKr9XJr6U8kO+VAN2QsALORwMoA+0U=
-X-Virus-Scanned: amavisd-new at rptsys.com
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
+X-Inumbo-ID: 83802657-5e55-11ee-9b0d-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1695943185;
+	bh=N3bxzgJ1s2K6v+njeepztZaSboFqG44A04jELbAY81w=;
+	h=Date:From:To:cc:Subject:From;
+	b=YfaBnK07AZJvJvc8X0IpNQl1JJqdCsvG0+pLxfxyslw1frmyLEWvd/eV76YRWtrbo
+	 eYfhkz2+kwyBeHiRrEe8PWY+qWp8q6NoerFdVmdNUkEYcNPnjo1j56W1y8BslQ+01z
+	 aamioCiuavD0b5tni6ba83RV4iexyZAqHkZ7uF/EQVwEufkU4MbXt4Z7AaxFjxfuzu
+	 5P5fAWsq7SwKt7aEIVM9uV7txCkZoX7a0/tr/gWk3OHdc8gtnKYf2gNCkvTMEg9HI0
+	 lVGfO5JTZQvGVLKrh/IgAM7cZ5qLWs+j3SF2FiJUbyM3icRU6epocRXRkxCNsT6fiV
+	 b1NbfJk0k+GHg==
+Date: Thu, 28 Sep 2023 16:19:43 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: xen-devel@lists.xenproject.org
-Cc: Timothy Pearson <tpearson@raptorengineering.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 1/3] xen/ppc: Fix stack initialization in head.S
-Date: Thu, 28 Sep 2023 18:19:27 -0500
-Message-Id: <4d733b1f17215616b7ab00f0e44d2f483436b1d6.1695942864.git.sanastasio@raptorengineering.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <cover.1695942864.git.sanastasio@raptorengineering.com>
-References: <cover.1695942864.git.sanastasio@raptorengineering.com>
+cc: sstabellini@kernel.org, jbeulich@suse.com, andrew.cooper3@citrix.com, 
+    roger.pau@citrix.com, julien@xen.org, bertrand.marquis@arm.com, 
+    george.dunlap@citrix.com, wl@xen.org
+Subject: [PATCH] bitmap: fix n__ signess 
+Message-ID: <alpine.DEB.2.22.394.2309281616200.1996340@ubuntu-linux-20-04-desktop>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
 
-The code to set up the stack in head.S erroneously loads the bottom of
-the stack (the symbol cpu0_boot_stack) into r1 instead of the top of the
-stack (cpu0_boot_stack + STACK_SIZE).
+All callers of the bitmap_switch macro (which are all within bitmap.h)
+pass an int as first parameter. Do not assign it to an unsigned int
+potentially introducing errors.
 
-Fixes: 3a4e6f67bc68 ("xen/ppc: Set up a basic C environment")
-Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
 ---
- xen/arch/ppc/ppc64/head.S | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/ppc/ppc64/head.S b/xen/arch/ppc/ppc64/head.S
-index e600ddb05f..6ce313aff8 100644
---- a/xen/arch/ppc/ppc64/head.S
-+++ b/xen/arch/ppc/ppc64/head.S
-@@ -46,7 +46,7 @@ ENTRY(start)
- .L_correct_address:
- 
-     /* set up the initial stack */
--    LOAD_REG_ADDR(%r1, cpu0_boot_stack)
-+    LOAD_REG_ADDR(%r1, cpu0_boot_stack + STACK_SIZE)
-     li      %r11, 0
-     stdu    %r11, -STACK_FRAME_OVERHEAD(%r1)
- 
--- 
-2.30.2
+We could also have gone the other way and change all the callers and the
+callers' callers to use an unsigned int instead, but I went for the path
+of least resistance.
 
+diff --git a/xen/include/xen/bitmap.h b/xen/include/xen/bitmap.h
+index 3caf92c76d..7caec098d7 100644
+--- a/xen/include/xen/bitmap.h
++++ b/xen/include/xen/bitmap.h
+@@ -101,7 +101,7 @@ extern int bitmap_allocate_region(unsigned long *bitmap, int pos, int order);
+ #define bitmap_bytes(nbits) (BITS_TO_LONGS(nbits) * sizeof(unsigned long))
+ 
+ #define bitmap_switch(nbits, zero, small, large)			  \
+-	unsigned int n__ = (nbits);					  \
++	int n__ = (nbits);					  \
+ 	if (__builtin_constant_p(nbits) && !n__) {			  \
+ 		zero;							  \
+ 	} else if (__builtin_constant_p(nbits) && n__ <= BITS_PER_LONG) { \
 
