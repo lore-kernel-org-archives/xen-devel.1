@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99FD3E732D9
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 13:23:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.609729.948918 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 962A0E732D0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Sep 2023 13:23:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.609737.948948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qlqyg-0002Sp-MY; Thu, 28 Sep 2023 13:22:50 +0000
+	id 1qlqyk-0003YG-Aj; Thu, 28 Sep 2023 13:22:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 609729.948918; Thu, 28 Sep 2023 13:22:50 +0000
+Received: by outflank-mailman (output) from mailman id 609737.948948; Thu, 28 Sep 2023 13:22:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qlqyf-0002Pi-UR; Thu, 28 Sep 2023 13:22:49 +0000
-Received: by outflank-mailman (input) for mailman id 609729;
- Thu, 28 Sep 2023 13:20:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qlqyj-0003TQ-Mw; Thu, 28 Sep 2023 13:22:53 +0000
+Received: by outflank-mailman (input) for mailman id 609737;
+ Thu, 28 Sep 2023 13:20:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c6vw=FM=kernel.org=devnull+j.granados.samsung.com@srs-se1.protection.inumbo.net>)
- id 1qlqwg-00087E-0H
- for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 13:20:46 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d1edb375-5e01-11ee-9b0d-b553b5be7939;
- Thu, 28 Sep 2023 15:20:41 +0200 (CEST)
+ id 1qlqwi-000873-NH
+ for xen-devel@lists.xenproject.org; Thu, 28 Sep 2023 13:20:48 +0000
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [2604:1380:40e1:4800::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d3ddcd6d-5e01-11ee-878a-cb3800f73035;
+ Thu, 28 Sep 2023 15:20:45 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D863961C67;
- Thu, 28 Sep 2023 13:20:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 28DEAC3277C;
+ by sin.source.kernel.org (Postfix) with ESMTP id 681E5CE21D7;
+ Thu, 28 Sep 2023 13:20:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7D24DC3278F;
  Thu, 28 Sep 2023 13:20:37 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0F863E732D0;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 65ACDE732D0;
  Thu, 28 Sep 2023 13:20:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,26 +48,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1edb375-5e01-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: d3ddcd6d-5e01-11ee-878a-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1695907237;
-	bh=WESDWSBIxBgTV46NKfEUHelTwfrWg95I2h4/Iqr/LRM=;
+	bh=ZUiksl6W6uAlLzfzmV82mN2ZY2mOo2/OdWLFk3qByI8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=X1KG2CslKyXTmAHOE9ut19dU3D1ndZDLDdqUloNr92yULn+YqrPZji2xw2INBYpUm
-	 6F9yTU649cXeMkhlXPNSEgx9CZEqSU2KI7nIVnuEAcHdctqE7BBYS5qhtEf2yOfQnG
-	 R1mpQOonF6UvHW7ScvUsXX6PuQxhn8SfiZiDQ0St7xAhbhnYOBS6MvxU2R0XUDnGt/
-	 DBV2CmPFYybbpaGP/rLAB1yXMe/SnzrzBKC0su2BZmK87DmShTLpzxZCLR/mQ4v1pN
-	 8cUsQWYemfXRz8FCPMeF9hl3BfYwspIRCViLCTG6Pj0iu6BAbtFCXNuyprY8KmJO9t
-	 qJcclRkDU4adA==
+	b=XAmlR43N6LnlJWcxBRfJ4bGYX3efFf3VyDERCl9d9561sagPAB7JBOqTCKHhzbBws
+	 Co5bW1LR04BRjXSzgqgigGnspcMgU7Ay7e7Dswa57sw5pcE6eLuRpRmV0qB9dyFpJo
+	 ePxhk5Q1d+Wg4yRBouhE37dS8A8LHGsGW/jjgvFD4QC1wFaogI1GXyCa0PQV4OCVRC
+	 NjTSXs4ab4JtUkPvyk3A/6ypSj1z8UEtEd2jT17geAa3bVI7XSijzJ/y7ZPKJM3mfw
+	 JCFOFie1GX3MB32wgsEqQ9dPhxu5u+5L3oj+Gz6KUuq2yEeQEVLF6JScdvZYV7FKaD
+	 tL3TGuj7xNI7w==
 From: Joel Granados via B4 Relay <devnull+j.granados.samsung.com@kernel.org>
-Date: Thu, 28 Sep 2023 15:21:36 +0200
-Subject: [PATCH 11/15] sgi-xp: Remove the now superfluous sentinel element
+Date: Thu, 28 Sep 2023 15:21:40 +0200
+Subject: [PATCH 15/15] intel drm: Remove now superfluous sentinel element
  from ctl_table array
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Message-Id: =?utf-8?q?=3C20230928-jag-sysctl=5Fremove=5Fempty=5Felem=5Fdrive?=
- =?utf-8?q?rs-v1-11-e59120fca9f9=40samsung=2Ecom=3E?=
+ =?utf-8?q?rs-v1-15-e59120fca9f9=40samsung=2Ecom=3E?=
 References:
  <20230928-jag-sysctl_remove_empty_elem_drivers-v1-0-e59120fca9f9@samsung.com>
 In-Reply-To:
@@ -107,18 +108,18 @@ Cc: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
  intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
  Joel Granados <j.granados@samsung.com>
 X-Mailer: b4 0.13-dev-86aa5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1399;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1010;
  i=j.granados@samsung.com; h=from:subject:message-id;
- bh=pY2XyujxOt+Rj6u6+44+o009/nkYZtGGPZk9nN2iFyE=;
- b=owEB7QES/pANAwAKAbqXzVK3lkFPAcsmYgBlFX3fe3sdkuVX/cH9+wfjrH5ueAgUPjamrIOH4
- /3zyIkdfAqJAbMEAAEKAB0WIQSuRwlXJeYxJc7LJ5C6l81St5ZBTwUCZRV93wAKCRC6l81St5ZB
- TwpRC/4lSj5L+OahMU8+3S1fvTtKAyIY/uKM1bPNHdispZZPQR1Rd3tvqJTptup1mzRuFuO8L1m
- 8PJXRwGmMWlfPnW6wWYP/M4Aqq1CITeSckvnMuyUa9IAlZg0a3oKSGu5yX6zSvvAQ0+k7mBAb3y
- UBqDMmlaWuIsDoJskRRHROj9+KwmhMmsEKZWwN5UGxnjSX57Ws5oYdteVXY5AI8Zp7Hy8Tx0heX
- FCndhRyQrnj2jq8I3cC94HaHBQ+r/FbCmV0KJSg5xqjdEy9VmQiEja6TCN2IAUta6kgV5r3iSsz
- uRL2Spqp9oaZW9r25KtgCboTiH5fnCIkTB16pgKJEydjH49JsnKqmlAleVwBd/WjEU86E4be+/t
- V9Kx7iqRDYUo2aZWNOMBizEJlyYBMYHFFIiSdMNx4xMMW78VnCfWmHYPolywQlOL/IO7kdASIva
- qz9zA7cr0tjD3lcLzXnQuXIHAhNUbhz37de0+vmc7TtbbfZaFsJe0s2ItUEMGxrc4UUuo=
+ bh=Z9ZtfK3DEA99EXZ7fr8sV5mKU3DvB0mjVyvX0TU3lCI=;
+ b=owEB7QES/pANAwAKAbqXzVK3lkFPAcsmYgBlFX3gFlneS4Mf90CaCbyJH1c7W29aNmmDMi/fY
+ CLHmU/OGzqJAbMEAAEKAB0WIQSuRwlXJeYxJc7LJ5C6l81St5ZBTwUCZRV94AAKCRC6l81St5ZB
+ T+SdC/9jFG0RUkuS7dLpAVcMO6D7jlVD+ZtX/jfu+rwthZV8WGVLtJ8kcAR7BPdgAWXivaJ86Dp
+ P8HoauS68D0RI9Rl9X/gHaLDOKz2eejqJOE8LOTNyc5oeWYoHn33YzNJbhBnz6UoWV0vUdddE34
+ GRQqY6MKoVxUSV4CWxcsjFchdIDzBQiMIwUqspGaJghb9FT9hzSCLfXyl5vJzx8A+y2J8mT49k2
+ Zu4B/1iFwUdke4OebC6tbh93+vu6byFilf9UV3QNKYcRyJ5GGOmA8VWdq1U89/l+7ecOpeI+39E
+ VAvGXaumDhZWUpNQ1QcR6XhGrFL3IBE/XkZwVuXcVyY6NfbR19/0xgBykkluiUglYLyjlLnmfcl
+ 5XmrIaXdLBsIKU3e2gt+wdTGHqGSyzFDdbp0RF2kkLOO1GnpNivaGGSl8okOViY6fb1bAGKWSZM
+ FhB8ybdTYNi+IqN7tj+lwciJDUGicuxAJy3KGeA8aLCwF3Lo29sNp5FS7A428ifTZoZbQ=
 X-Developer-Key: i=j.granados@samsung.com; a=openpgp;
  fpr=F1F8E46D30F0F6C4A45FF4465895FAAC338C6E77
 X-Endpoint-Received:
@@ -134,37 +135,27 @@ will reduce the overall build time size of the kernel and run time
 memory bloat by ~64 bytes per sentinel (further information Link :
 https://lore.kernel.org/all/ZO5Yx5JFogGi%2FcBo@bombadil.infradead.org/)
 
-Remove sentinel from xpc_sys_xpc_hb and xpc_sys_xpc
+Remove sentinel from oa_table
 
 Signed-off-by: Joel Granados <j.granados@samsung.com>
 ---
- drivers/misc/sgi-xp/xpc_main.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/i915/i915_perf.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/misc/sgi-xp/xpc_main.c b/drivers/misc/sgi-xp/xpc_main.c
-index 6da509d692bb..c898092ff3ac 100644
---- a/drivers/misc/sgi-xp/xpc_main.c
-+++ b/drivers/misc/sgi-xp/xpc_main.c
-@@ -109,8 +109,7 @@ static struct ctl_table xpc_sys_xpc_hb[] = {
- 	 .mode = 0644,
+diff --git a/drivers/gpu/drm/i915/i915_perf.c b/drivers/gpu/drm/i915/i915_perf.c
+index 04bc1f4a1115..97ef6d2ad037 100644
+--- a/drivers/gpu/drm/i915/i915_perf.c
++++ b/drivers/gpu/drm/i915/i915_perf.c
+@@ -4895,8 +4895,7 @@ static struct ctl_table oa_table[] = {
  	 .proc_handler = proc_dointvec_minmax,
- 	 .extra1 = &xpc_hb_check_min_interval,
--	 .extra2 = &xpc_hb_check_max_interval},
+ 	 .extra1 = SYSCTL_ZERO,
+ 	 .extra2 = &oa_sample_rate_hard_limit,
+-	 },
 -	{}
-+	 .extra2 = &xpc_hb_check_max_interval}
- };
- static struct ctl_table xpc_sys_xpc[] = {
- 	{
-@@ -120,8 +119,7 @@ static struct ctl_table xpc_sys_xpc[] = {
- 	 .mode = 0644,
- 	 .proc_handler = proc_dointvec_minmax,
- 	 .extra1 = &xpc_disengage_min_timelimit,
--	 .extra2 = &xpc_disengage_max_timelimit},
--	{}
-+	 .extra2 = &xpc_disengage_max_timelimit}
++	}
  };
  
- static struct ctl_table_header *xpc_sysctl;
+ static u32 num_perf_groups_per_gt(struct intel_gt *gt)
 
 -- 
 2.30.2
