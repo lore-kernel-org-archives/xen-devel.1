@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1253E7849A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2FD4E784AF
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 07:50:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611146.950598 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.611142.950564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDgu-0007MM-FT; Mon, 02 Oct 2023 07:50:08 +0000
+	id 1qnDgq-0006KI-Ad; Mon, 02 Oct 2023 07:50:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611146.950598; Mon, 02 Oct 2023 07:50:08 +0000
+Received: by outflank-mailman (output) from mailman id 611142.950564; Mon, 02 Oct 2023 07:50:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDgu-0007LN-8k; Mon, 02 Oct 2023 07:50:08 +0000
-Received: by outflank-mailman (input) for mailman id 611146;
- Mon, 02 Oct 2023 07:50:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qnDgq-0006Jl-4l; Mon, 02 Oct 2023 07:50:04 +0000
+Received: by outflank-mailman (input) for mailman id 611142;
+ Mon, 02 Oct 2023 07:50:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uL8T=FQ=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qnDgt-0006dn-0e
- for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:50:07 +0000
+ id 1qnDgp-00065N-Dk
+ for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:50:03 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4c3b0e9e-60f8-11ee-9b0d-b553b5be7939;
- Mon, 02 Oct 2023 09:50:04 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4aec55c6-60f8-11ee-878e-cb3800f73035;
+ Mon, 02 Oct 2023 09:50:02 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 2E6414EE0C81;
- Mon,  2 Oct 2023 09:50:04 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id B4AA14EE0739;
+ Mon,  2 Oct 2023 09:50:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c3b0e9e-60f8-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 4aec55c6-60f8-11ee-878e-cb3800f73035
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -54,54 +54,63 @@ Cc: sstabellini@kernel.org,
 	roger.pau@citrix.com,
 	Henry.Wang@arm.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 4/7] x86/grant: switch included header to make declarations visible
-Date: Mon,  2 Oct 2023 09:49:47 +0200
-Message-Id: <ec3179df569d3e2b392360539bddfb3adc726a5e.1696232393.git.nicola.vetrini@bugseng.com>
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: [XEN PATCH 0/7] Fix or deviate various instances of missing declarations
+Date: Mon,  2 Oct 2023 09:49:43 +0200
+Message-Id: <cover.1696232393.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1696232393.git.nicola.vetrini@bugseng.com>
-References: <cover.1696232393.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The declarations for {create,replace}_grant_p2m_mapping are
-not visible when these functions are defined, therefore the right
-header needs to be included to allow them to be visible.
+The patches in this series aim to fix or deviate various instances where a
+function or variable do not have a declaration visible when such entity is
+defined (in violation of MISRA C:2012 Rule 8.4).
+An exception listed under docs/misra/rules.rst allows asm-only functions and
+variables to be exempted, while the other instances are either changed
+(e.g., making them static) or a missing header inclusion is added.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/arch/x86/hvm/grant_table.c             | 3 +--
- xen/arch/x86/include/asm/hvm/grant_table.h | 2 ++
- 2 files changed, 3 insertions(+), 2 deletions(-)
+Some of the patches in this series are potential candidates for bug fixes, or
+just general improvements that may be suited for inclusion in the next rc.
 
-diff --git a/xen/arch/x86/hvm/grant_table.c b/xen/arch/x86/hvm/grant_table.c
-index 30d51d54a949..afe449d8882c 100644
---- a/xen/arch/x86/hvm/grant_table.c
-+++ b/xen/arch/x86/hvm/grant_table.c
-@@ -9,8 +9,7 @@
- 
- #include <xen/types.h>
- 
--#include <public/grant_table.h>
--
-+#include <asm/hvm/grant_table.h>
- #include <asm/p2m.h>
- 
- int create_grant_p2m_mapping(uint64_t addr, mfn_t frame,
-diff --git a/xen/arch/x86/include/asm/hvm/grant_table.h b/xen/arch/x86/include/asm/hvm/grant_table.h
-index 33c1da1a25f3..576aeb50adf4 100644
---- a/xen/arch/x86/include/asm/hvm/grant_table.h
-+++ b/xen/arch/x86/include/asm/hvm/grant_table.h
-@@ -10,6 +10,8 @@
- #ifndef __X86_HVM_GRANT_TABLE_H__
- #define __X86_HVM_GRANT_TABLE_H__
- 
-+#include <asm/paging.h>
-+
- #ifdef CONFIG_HVM
- 
- int create_grant_p2m_mapping(uint64_t addr, mfn_t frame,
--- 
+Nicola Vetrini (7):
+  xen: add declarations for variables where needed
+  x86: add deviations for variables only used in asm code
+  x86: add deviation comments for  asm-only functions
+  x86/grant: switch included header to make declarations visible
+  x86/vm_event: add missing include for hvm_vm_event_do_resume
+  xen/console: make function static inline
+  x86/mem_access: make function static
+
+ xen/arch/arm/include/asm/setup.h           |  3 +++
+ xen/arch/arm/include/asm/smp.h             |  3 +++
+ xen/arch/x86/cpu/mcheck/mce.c              |  6 +++---
+ xen/arch/x86/hvm/grant_table.c             |  3 +--
+ xen/arch/x86/hvm/svm/intr.c                |  1 +
+ xen/arch/x86/hvm/svm/nestedsvm.c           |  1 +
+ xen/arch/x86/hvm/svm/svm.c                 |  2 ++
+ xen/arch/x86/hvm/vm_event.c                |  1 +
+ xen/arch/x86/include/asm/asm_defns.h       |  1 +
+ xen/arch/x86/include/asm/hvm/grant_table.h |  2 ++
+ xen/arch/x86/include/asm/setup.h           |  3 +++
+ xen/arch/x86/irq.c                         |  2 +-
+ xen/arch/x86/mm/mem_access.c               |  2 +-
+ xen/arch/x86/platform_hypercall.c          |  3 ---
+ xen/arch/x86/setup.c                       |  1 +
+ xen/arch/x86/traps.c                       |  1 +
+ xen/arch/x86/x86_64/traps.c                |  1 +
+ xen/common/symbols.c                       | 17 -----------------
+ xen/include/xen/consoled.h                 |  2 +-
+ xen/include/xen/hypercall.h                |  3 +++
+ xen/include/xen/symbols.h                  | 18 ++++++++++++++++++
+ 21 files changed, 48 insertions(+), 28 deletions(-)
+
+--
 2.34.1
-
 
