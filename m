@@ -4,32 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CC49E784B1
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 07:50:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611144.950584 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6430E784A5
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 07:57:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611187.950644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDgs-00072p-Pc; Mon, 02 Oct 2023 07:50:06 +0000
+	id 1qnDo8-0003gL-Bw; Mon, 02 Oct 2023 07:57:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611144.950584; Mon, 02 Oct 2023 07:50:06 +0000
+Received: by outflank-mailman (output) from mailman id 611187.950644; Mon, 02 Oct 2023 07:57:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDgs-00072i-Jo; Mon, 02 Oct 2023 07:50:06 +0000
-Received: by outflank-mailman (input) for mailman id 611144;
- Mon, 02 Oct 2023 07:50:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uL8T=FQ=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qnDgr-0006dn-CO
- for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:50:05 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4aface3c-60f8-11ee-9b0d-b553b5be7939;
- Mon, 02 Oct 2023 09:50:02 +0200 (CEST)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id DC7B84EE073E;
- Mon,  2 Oct 2023 09:50:01 +0200 (CEST)
+	id 1qnDo8-0003gE-77; Mon, 02 Oct 2023 07:57:36 +0000
+Received: by outflank-mailman (input) for mailman id 611187;
+ Mon, 02 Oct 2023 07:57:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=MVD8=FQ=suse.cz=jack@srs-se1.protection.inumbo.net>)
+ id 1qnDo7-0003fi-8n
+ for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:57:35 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5850ed9e-60f9-11ee-878e-cb3800f73035;
+ Mon, 02 Oct 2023 09:57:34 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id AB8121F459;
+ Mon,  2 Oct 2023 07:57:32 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 83FA513434;
+ Mon,  2 Oct 2023 07:57:32 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id JLsgIOx3GmUuEgAAMHmgww
+ (envelope-from <jack@suse.cz>); Mon, 02 Oct 2023 07:57:32 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id 27D44A07C9; Mon,  2 Oct 2023 09:57:32 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,223 +55,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4aface3c-60f8-11ee-9b0d-b553b5be7939
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	Henry.Wang@arm.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 1/7] xen: add declarations for variables where needed
-Date: Mon,  2 Oct 2023 09:49:44 +0200
-Message-Id: <357a35c3035d0f8659a64d767791bc41d57494d3.1696232393.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1696232393.git.nicola.vetrini@bugseng.com>
-References: <cover.1696232393.git.nicola.vetrini@bugseng.com>
+X-Inumbo-ID: 5850ed9e-60f9-11ee-878e-cb3800f73035
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1696233452; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HRtvvsbDRmaIGA2qlEwuFNnN4SG9to1RwhMyTnDS1Ek=;
+	b=AelUG9FSlQyUcQTA9I9qRJmPzMA6mvk2OLx4Qv2PacqmgU2FkeI54uQfwuwk8GDISDrHf1
+	K6okkr5Yua+jK8r2TTOukY7745vay4e4z1caiTsHAigkH18O5VWdMY9s+0PKMe8/Ta1ITc
+	H4lySULw9TgNQsjwAFd513U/tj8Iifc=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1696233452;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HRtvvsbDRmaIGA2qlEwuFNnN4SG9to1RwhMyTnDS1Ek=;
+	b=4yX5F6ZD5YaXQ1SgLuHClpbWfxc1xKg7esoSW59wSh/oO7HSeTROmd590v4TgEevJu81R5
+	RAceDQWhH8NjA0AQ==
+Date: Mon, 2 Oct 2023 09:57:32 +0200
+From: Jan Kara <jack@suse.cz>
+To: Christian Brauner <brauner@kernel.org>
+Cc: Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org,
+	linux-block@vger.kernel.org, Christoph Hellwig <hch@infradead.org>,
+	Alasdair Kergon <agk@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Anna Schumaker <anna@kernel.org>, Chao Yu <chao@kernel.org>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	Dave Kleikamp <shaggy@kernel.org>, David Sterba <dsterba@suse.com>,
+	dm-devel@redhat.com, drbd-dev@lists.linbit.com,
+	Gao Xiang <xiang@kernel.org>, Jack Wang <jinpu.wang@ionos.com>,
+	Jaegeuk Kim <jaegeuk@kernel.org>,
+	jfs-discussion@lists.sourceforge.net,
+	Joern Engel <joern@lazybastard.org>,
+	Joseph Qi <joseph.qi@linux.alibaba.com>,
+	Kent Overstreet <kent.overstreet@gmail.com>,
+	linux-bcache@vger.kernel.org, linux-btrfs@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
+	linux-mtd@lists.infradead.org, linux-nfs@vger.kernel.org,
+	linux-nilfs@vger.kernel.org, linux-nvme@lists.infradead.org,
+	linux-pm@vger.kernel.org, linux-raid@vger.kernel.org,
+	linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org,
+	linux-xfs@vger.kernel.org,
+	"Md. Haris Iqbal" <haris.iqbal@ionos.com>,
+	Mike Snitzer <snitzer@kernel.org>, Minchan Kim <minchan@kernel.org>,
+	ocfs2-devel@oss.oracle.com, reiserfs-devel@vger.kernel.org,
+	Sergey Senozhatsky <senozhatsky@chromium.org>,
+	Song Liu <song@kernel.org>, Sven Schnelle <svens@linux.ibm.com>,
+	target-devel@vger.kernel.org, Ted Tso <tytso@mit.edu>,
+	Trond Myklebust <trond.myklebust@hammerspace.com>,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v4 0/29] block: Make blkdev_get_by_*() return handle
+Message-ID: <20231002075732.4c5oslpabrmw3niz@quack3>
+References: <20230818123232.2269-1-jack@suse.cz>
+ <20230927-prahlen-reintreten-93706074e58d@brauner>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230927-prahlen-reintreten-93706074e58d@brauner>
 
-Some variables with external linkage used in C code do not have
-a visible declaration where they are defined. Providing such
-declaration also resolves violations of MISRA C:2012 Rule 8.4.
+On Wed 27-09-23 18:21:19, Christian Brauner wrote:
+> On Wed, 27 Sep 2023 11:34:07 +0200, Jan Kara wrote:
+> > Create struct bdev_handle that contains all parameters that need to be
+> > passed to blkdev_put() and provide bdev_open_* functions that return
+> > this structure instead of plain bdev pointer. This will eventually allow
+> > us to pass one more argument to blkdev_put() (renamed to bdev_release())
+> > without too much hassle.
+> > 
+> > 
+> > [...]
+> 
+> > to ease review / testing. Christian, can you pull the patches to your tree
+> > to get some exposure in linux-next as well? Thanks!
+> 
+> Yep. So I did it slighly differently. I pulled in the btrfs prereqs and
+> then applied your series on top of it so we get all the Link: tags right.
+> I'm running tests right now. Please double-check.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/arch/arm/include/asm/setup.h  |  3 +++
- xen/arch/arm/include/asm/smp.h    |  3 +++
- xen/arch/x86/cpu/mcheck/mce.c     |  6 +++---
- xen/arch/x86/include/asm/setup.h  |  3 +++
- xen/arch/x86/irq.c                |  2 +-
- xen/arch/x86/platform_hypercall.c |  3 ---
- xen/common/symbols.c              | 17 -----------------
- xen/include/xen/hypercall.h       |  3 +++
- xen/include/xen/symbols.h         | 18 ++++++++++++++++++
- 9 files changed, 34 insertions(+), 24 deletions(-)
+Thanks for picking patches up! I've checked the branch and it looks good to
+me. 
 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index b8866c20f462..8806a74b216d 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -183,9 +183,12 @@ int map_range_to_domain(const struct dt_device_node *dev,
- extern lpae_t boot_pgtable[XEN_PT_LPAE_ENTRIES];
- 
- #ifdef CONFIG_ARM_64
-+extern lpae_t boot_first[XEN_PT_LPAE_ENTRIES];
- extern lpae_t boot_first_id[XEN_PT_LPAE_ENTRIES];
- #endif
-+extern lpae_t boot_second[XEN_PT_LPAE_ENTRIES];
- extern lpae_t boot_second_id[XEN_PT_LPAE_ENTRIES];
-+extern lpae_t boot_third[XEN_PT_LPAE_ENTRIES * XEN_NR_ENTRIES(2)];
- extern lpae_t boot_third_id[XEN_PT_LPAE_ENTRIES];
- 
- /* Find where Xen will be residing at runtime and return a PT entry */
-diff --git a/xen/arch/arm/include/asm/smp.h b/xen/arch/arm/include/asm/smp.h
-index 4fabdf5310d8..28bf24a01d95 100644
---- a/xen/arch/arm/include/asm/smp.h
-+++ b/xen/arch/arm/include/asm/smp.h
-@@ -6,6 +6,9 @@
- #include <asm/current.h>
- #endif
- 
-+extern struct init_info init_data;
-+extern unsigned long smp_up_cpu;
-+
- DECLARE_PER_CPU(cpumask_var_t, cpu_sibling_mask);
- DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
- 
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index 6141b7eb9cf1..e855f958030d 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -1682,13 +1682,13 @@ long do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc)
-     return ret;
- }
- 
--int mcinfo_dumpped;
-+static int mcinfo_dumped;
- static int cf_check x86_mcinfo_dump_panic(mctelem_cookie_t mctc)
- {
-     struct mc_info *mcip = mctelem_dataptr(mctc);
- 
-     x86_mcinfo_dump(mcip);
--    mcinfo_dumpped++;
-+    mcinfo_dumped++;
- 
-     return 0;
- }
-@@ -1702,7 +1702,7 @@ static void mc_panic_dump(void)
-     for_each_online_cpu(cpu)
-         mctelem_process_deferred(cpu, x86_mcinfo_dump_panic,
-                                  mctelem_has_deferred_lmce(cpu));
--    dprintk(XENLOG_ERR, "End dump mc_info, %x mcinfo dumped\n", mcinfo_dumpped);
-+    dprintk(XENLOG_ERR, "End dump mc_info, %x mcinfo dumped\n", mcinfo_dumped);
- }
- 
- void mc_panic(const char *s)
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index dfdd9e555149..3c27fe915ed4 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -13,8 +13,11 @@ extern char __2M_rwdata_start[], __2M_rwdata_end[];
- extern unsigned long xenheap_initial_phys_start;
- extern uint64_t boot_tsc_stamp;
- 
-+extern char cpu0_stack[STACK_SIZE];
- extern void *stack_start;
- 
-+extern unsigned long cr4_pv32_mask;
-+
- void early_cpu_init(void);
- void early_time_init(void);
- 
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index 6abfd8162120..604dba94b052 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -43,7 +43,7 @@ int __read_mostly opt_irq_vector_map = OPT_IRQ_VECTOR_MAP_DEFAULT;
- static unsigned char __read_mostly irq_max_guests;
- integer_param("irq-max-guests", irq_max_guests);
- 
--vmask_t global_used_vector_map;
-+static vmask_t global_used_vector_map;
- 
- struct irq_desc __read_mostly *irq_desc = NULL;
- 
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 9469de9045c7..e4dbec73d784 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -36,9 +36,6 @@
- #include "cpu/mtrr/mtrr.h"
- #include <xsm/xsm.h>
- 
--/* Declarations for items shared with the compat mode handler. */
--extern spinlock_t xenpf_lock;
--
- #define RESOURCE_ACCESS_MAX_ENTRIES 3
- struct resource_access {
-     unsigned int nr_done;
-diff --git a/xen/common/symbols.c b/xen/common/symbols.c
-index 691e61792506..7c3514c65f2e 100644
---- a/xen/common/symbols.c
-+++ b/xen/common/symbols.c
-@@ -21,23 +21,6 @@
- #include <xen/guest_access.h>
- #include <xen/errno.h>
- 
--#ifdef SYMBOLS_ORIGIN
--extern const unsigned int symbols_offsets[];
--#define symbols_address(n) (SYMBOLS_ORIGIN + symbols_offsets[n])
--#else
--extern const unsigned long symbols_addresses[];
--#define symbols_address(n) symbols_addresses[n]
--#endif
--extern const unsigned int symbols_num_syms;
--extern const u8 symbols_names[];
--
--extern const struct symbol_offset symbols_sorted_offsets[];
--
--extern const u8 symbols_token_table[];
--extern const u16 symbols_token_index[];
--
--extern const unsigned int symbols_markers[];
--
- /* expand a compressed symbol data into the resulting uncompressed string,
-    given the offset to where the symbol is in the compressed stream */
- static unsigned int symbols_expand_symbol(unsigned int off, char *result)
-diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index f307dfb59760..12de5a69b5b1 100644
---- a/xen/include/xen/hypercall.h
-+++ b/xen/include/xen/hypercall.h
-@@ -24,6 +24,9 @@
- /* Needs to be after asm/hypercall.h. */
- #include <xen/hypercall-defs.h>
- 
-+/* Declarations for items shared with the compat mode handler. */
-+extern spinlock_t xenpf_lock;
-+
- extern long
- arch_do_domctl(
-     struct xen_domctl *domctl, struct domain *d,
-diff --git a/xen/include/xen/symbols.h b/xen/include/xen/symbols.h
-index 20bbb28ef226..92540409265e 100644
---- a/xen/include/xen/symbols.h
-+++ b/xen/include/xen/symbols.h
-@@ -33,4 +33,22 @@ struct symbol_offset {
-     uint32_t stream; /* .. in the compressed stream.*/
-     uint32_t addr;   /* .. and in the fixed size address array. */
- };
-+
-+#ifdef SYMBOLS_ORIGIN
-+extern const unsigned int symbols_offsets[];
-+#define symbols_address(n) (SYMBOLS_ORIGIN + symbols_offsets[n])
-+#else
-+extern const unsigned long symbols_addresses[];
-+#define symbols_address(n) symbols_addresses[n]
-+#endif
-+extern const unsigned int symbols_num_syms;
-+extern const u8 symbols_names[];
-+
-+extern const struct symbol_offset symbols_sorted_offsets[];
-+
-+extern const u8 symbols_token_table[];
-+extern const u16 symbols_token_index[];
-+
-+extern const unsigned int symbols_markers[];
-+
- #endif /*_XEN_SYMBOLS_H*/
+								Honza
+
+> 
+> ---
+> 
+> Applied to the vfs.super branch of the vfs/vfs.git tree.
+> Patches in the vfs.super branch should appear in linux-next soon.
+> 
+> Please report any outstanding bugs that were missed during review in a
+> new review to the original patch series allowing us to drop it.
+> 
+> It's encouraged to provide Acked-bys and Reviewed-bys even though the
+> patch has now been applied. If possible patch trailers will be updated.
+> 
+> Note that commit hashes shown below are subject to change due to rebase,
+> trailer updates or similar. If in doubt, please check the listed branch.
+> 
+> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
+> branch: vfs.super
+> 
+> [01/29] block: Provide bdev_open_* functions
+>        https://git.kernel.org/vfs/vfs/c/b7c828aa0b3c
+> [02/29] block: Use bdev_open_by_dev() in blkdev_open()
+>         https://git.kernel.org/vfs/vfs/c/d4e36f27b45a
+> [03/29] block: Use bdev_open_by_dev() in disk_scan_partitions() and blkdev_bszset()
+>         https://git.kernel.org/vfs/vfs/c/5f9bd6764c7a
+> [04/29] drdb: Convert to use bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/0220ca8e443d
+> [05/29] pktcdvd: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/7af10b889789
+> [06/29] rnbd-srv: Convert to use bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/3d27892a4be7
+> [07/29] xen/blkback: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/26afb0ed10b3
+> [08/29] zram: Convert to use bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/efc8e3f4c6dc
+> [09/29] bcache: Convert to bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/dc893f51d24a
+> [10/29] dm: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/80c2267c6d07
+> [11/29] md: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/15db36126ca6
+> [12/29] mtd: block2mtd: Convert to bdev_open_by_dev/path()
+>         https://git.kernel.org/vfs/vfs/c/4c27234bf3ce
+> [13/29] nvmet: Convert to bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/70cffddcc300
+> [14/29] s390/dasd: Convert to bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/5581d03457f8
+> [15/29] scsi: target: Convert to bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/43de7d844d47
+> [16/29] PM: hibernate: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/105ea4a2fd18
+> [17/29] PM: hibernate: Drop unused snapshot_test argument
+>         https://git.kernel.org/vfs/vfs/c/b589a66e3688
+> [18/29] mm/swap: Convert to use bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/615af8e29233
+> [19/29] fs: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/5173192bcfe6
+> [20/29] btrfs: Convert to bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/8cf64782764f
+> [21/29] erofs: Convert to use bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/4d41880bf249
+> [22/29] ext4: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/f7507612395e
+> [23/29] f2fs: Convert to bdev_open_by_dev/path()
+>         https://git.kernel.org/vfs/vfs/c/d9ff8e3b6498
+> [24/29] jfs: Convert to bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/459dc6376338
+> [25/29] nfs/blocklayout: Convert to use bdev_open_by_dev/path()
+>         https://git.kernel.org/vfs/vfs/c/5b1df9a40929
+> [26/29] ocfs2: Convert to use bdev_open_by_dev()
+>         https://git.kernel.org/vfs/vfs/c/b6b95acbd943
+> [27/29] reiserfs: Convert to bdev_open_by_dev/path()
+>         https://git.kernel.org/vfs/vfs/c/7e3615ff6119
+> [28/29] xfs: Convert to bdev_open_by_path()
+>         https://git.kernel.org/vfs/vfs/c/176ccb99e207
+> [29/29] block: Remove blkdev_get_by_*() functions
+>         https://git.kernel.org/vfs/vfs/c/953863a5a2ff
 -- 
-2.34.1
-
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
