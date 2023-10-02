@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3897E784AF
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 08:53:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611254.950799 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B9CE748F3
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 08:53:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611253.950794 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnEgA-0006ET-V1; Mon, 02 Oct 2023 08:53:26 +0000
+	id 1qnEgA-00066f-Dk; Mon, 02 Oct 2023 08:53:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611254.950799; Mon, 02 Oct 2023 08:53:26 +0000
+Received: by outflank-mailman (output) from mailman id 611253.950794; Mon, 02 Oct 2023 08:53:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnEgA-0006A2-9v; Mon, 02 Oct 2023 08:53:26 +0000
-Received: by outflank-mailman (input) for mailman id 611254;
+	id 1qnEg9-00063l-Pi; Mon, 02 Oct 2023 08:53:25 +0000
+Received: by outflank-mailman (input) for mailman id 611253;
  Mon, 02 Oct 2023 08:53:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=y3Nz=FQ=kernel.org=devnull+j.granados.samsung.com@srs-se1.protection.inumbo.net>)
- id 1qnEg7-0004Uc-Ng
+ id 1qnEg7-0004XI-6j
  for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 08:53:23 +0000
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [2604:1380:4601:e00::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 221dc5f8-6101-11ee-9b0d-b553b5be7939;
- Mon, 02 Oct 2023 10:53:19 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 22bf5f6f-6101-11ee-878e-cb3800f73035;
+ Mon, 02 Oct 2023 10:53:21 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 52642B80E58;
- Mon,  2 Oct 2023 08:53:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0D5DBC32789;
- Mon,  2 Oct 2023 08:53:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id D86B260D39;
+ Mon,  2 Oct 2023 08:53:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BF60FC3277B;
+ Mon,  2 Oct 2023 08:53:15 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E3695E784B2;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id A6BFDE784A5;
  Mon,  2 Oct 2023 08:53:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,26 +48,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 221dc5f8-6101-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 22bf5f6f-6101-11ee-878e-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1696236796;
-	bh=hrtUSBUCIyA9Xh0J2iqcV4rs/NRa5ErFNI1zyion65E=;
+	s=k20201202; t=1696236795;
+	bh=UrT6qFU01UuJnw1on3XWxUGJuijnLYQO/DZrjXeRvo4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=igvGXr7OERaYZNfGyUIFtp2Q7kMPNrHAWsrMMnl5p7MsQtKv9Po/DSZFJ5uPrgpJ3
-	 v/qQil/ibb6NbmpzeMSq/8El/gUPR0ioHl8RGNv4b9t5idX2rSzd6qX6u8urBFNKNc
-	 0M0ZL8l9JPtiD/iUxNsiutTpOe3P8QZ38ay43bihunK/z4g4ZahiyRoK33sPyQ9xJb
-	 UTdffDYaP87PUvPbYytP7teBFUaSkwU5X8iVs9zp3r/iaUSB6UrhUBf6AlvsH097eu
-	 QojU9Xh8Pl58kl0FzCcARVvO+csbyxxGFKkkpayKuL6S4NvjsZrH4wziwddy9JFjil
-	 nBj4ko+yP1xAg==
+	b=REb+bphyh9qkQZyNKwrmSauRwNcqJjzzCSht5YPIFFtd0hF5HQixpMoZA+Q/GcBtZ
+	 T1ZY3FGofKg8shHAVt9pHSmeSjq1opArIWx7tRZ9OwlcGG5cwHEs2uZSdgRy0s35FI
+	 tXCc0YagUUKuYH5EnZR6cxM3MUgcV9gxAhg1EMW4wE4MzkEDwDsVyDCPkCJpu7pRlf
+	 iBySai/SM0BQW4BLrHockZbM5wn55KwPLIIyl3Kzim4hxiGLwfN5kMCJ/idNzy6PfW
+	 OS+aK5t8IiinP5Y65qHPfSYwTdmz5xSaHp9ZQkanw+rs8S9+w1va+gO8Xb4Fp+TWV2
+	 aXLqCkSz754nA==
 From: Joel Granados via B4 Relay <devnull+j.granados.samsung.com@kernel.org>
-Date: Mon, 02 Oct 2023 10:55:30 +0200
-Subject: [PATCH v2 13/15] raid: Remove now superfluous sentinel element
+Date: Mon, 02 Oct 2023 10:55:27 +0200
+Subject: [PATCH v2 10/15] vrf: Remove the now superfluous sentinel element
  from ctl_table array
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Message-Id: =?utf-8?q?=3C20231002-jag-sysctl=5Fremove=5Fempty=5Felem=5Fdrive?=
- =?utf-8?q?rs-v2-13-02dd0d46f71e=40samsung=2Ecom=3E?=
+ =?utf-8?q?rs-v2-10-02dd0d46f71e=40samsung=2Ecom=3E?=
 References:
  <20231002-jag-sysctl_remove_empty_elem_drivers-v2-0-02dd0d46f71e@samsung.com>
 In-Reply-To:
@@ -108,17 +108,17 @@ Cc: Joel Granados <j.granados@samsung.com>, linux-kernel@vger.kernel.org,
  linux-hyperv@vger.kernel.org, intel-gfx@lists.freedesktop.org, 
  dri-devel@lists.freedesktop.org
 X-Mailer: b4 0.13-dev-86aa5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=829; i=j.granados@samsung.com;
- h=from:subject:message-id; bh=e2yFW2EFHsQwkB5PotCjZgXoqNEEyAhbQnmUD5zfaNQ=;
- b=owEB7QES/pANAwAKAbqXzVK3lkFPAcsmYgBlGoV/Vs6zaJYkusRcda3GvHqHD8FkD0XllyxOR
- gpkY40Yv/6JAbMEAAEKAB0WIQSuRwlXJeYxJc7LJ5C6l81St5ZBTwUCZRqFfwAKCRC6l81St5ZB
- T+5+C/9PG7Hu/Q+dsKCXDvY5Iy6CwCHH/JFsZ4t/aJUGwdfzUbDixMixD2mtLH27N3jGk6EsP+f
- TuT8qWNicQP6gZrT5r/weMxtSLFJObHVzSmm7laysrDcBw992wSR/bSaa22COnNEBPqIC8esU0Q
- pGb1W4km4w2r1wQCyP4ciYMGGrzDlkkP9Ftg7+PrhQgUzqHwcgNSiQkAYaMrHNx9aUE7pN65eqW
- S6r5qG3U+doLXvkDZyRHPifN3KC63mSs2PpDc/NX3fp5y86xBczeVNYidlNzguQK2QuZ+FROlNb
- xakkCrxK6U7rjUfK5FHvHYSSOStbsSOmjPmzhbCIYDHB/I8zWeGPGIKRJzP1C4yRCEl77u49B/h
- Suqp6Db8KacQipTzrj5zKGnSXTTwjMaoljlvWzrd0uCEgyFiJEbdb/BYb8M0GeDb+Kf8+KLxzWD
- Q6+VM9vMi9hHwjythRlXiqljd0T1YtM5HwY8rmd392dMC+XgoD9p38YjDqsyBZSkPCk04=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=887; i=j.granados@samsung.com;
+ h=from:subject:message-id; bh=XxeHsAq6JKBX5gFQdKtkOwMDqj3k6LdRrwtSDoG13Qk=;
+ b=owEB7QES/pANAwAKAbqXzVK3lkFPAcsmYgBlGoV+Y6Cm3LhCKnSHOjCZ2v2gHofq/C47K5T/3
+ Jb7xTkN9KiJAbMEAAEKAB0WIQSuRwlXJeYxJc7LJ5C6l81St5ZBTwUCZRqFfgAKCRC6l81St5ZB
+ T6gPC/48wscQhiW7NUFTOR5UQHPuSRPo/W1iU5eo0e4HVHau6IgCW3NQNU+ljioKG8j8vjwyl0B
+ eJLH8LvK98LFTDps1N4GMWDUW7M8ef27MYnRvU+2bZIsDiOmKFzjmY2cYDKTGsRvt1wKtYpbPO1
+ r+H+B6TU+Np3A7wF0s30M82uN7P/OYHbVwaaX5NjK7wblqTYSu44tf+GprefUEvn2sg6+fm54jr
+ hV5XFvzYAMsGRN6izfCFRaBkLZHcbmqYjOkI5EhCzxL/ZZwja2TyFKm2WQyFGgq3VYdrT7ZGDVv
+ WeylYoFcNGDPKgqsyDoHi0mVwyjdzClwycDhQ5DvciuWPkt+Ly0lkWJfex7a6fge05zTF+M/zej
+ Fn7WWsbDkDL/u/6r9slGqPZcUv1gZE+eaTbnIjoALtIhnaD44hrJ1DAuNJxKWOugdshBDx0uNAy
+ 8aLnlv5VzYQ8R+Yt/6mQDnXXVnrUe1DhXBYtQjMz54uSUSNfyV0lGXXDIxJar8WWFl34o=
 X-Developer-Key: i=j.granados@samsung.com; a=openpgp;
  fpr=F1F8E46D30F0F6C4A45FF4465895FAAC338C6E77
 X-Endpoint-Received:
@@ -134,25 +134,25 @@ will reduce the overall build time size of the kernel and run time
 memory bloat by ~64 bytes per sentinel (further information Link :
 https://lore.kernel.org/all/ZO5Yx5JFogGi%2FcBo@bombadil.infradead.org/)
 
-Remove sentinel from raid_table
+Remove sentinel from vrf_table
 
 Signed-off-by: Joel Granados <j.granados@samsung.com>
 ---
- drivers/md/md.c | 1 -
+ drivers/net/vrf.c | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/drivers/md/md.c b/drivers/md/md.c
-index a104a025084d..3bdff9e03188 100644
---- a/drivers/md/md.c
-+++ b/drivers/md/md.c
-@@ -305,7 +305,6 @@ static struct ctl_table raid_table[] = {
- 		.mode		= S_IRUGO|S_IWUSR,
- 		.proc_handler	= proc_dointvec,
+diff --git a/drivers/net/vrf.c b/drivers/net/vrf.c
+index a3408e4e1491..db766941b78f 100644
+--- a/drivers/net/vrf.c
++++ b/drivers/net/vrf.c
+@@ -1963,7 +1963,6 @@ static const struct ctl_table vrf_table[] = {
+ 		/* set by the vrf_netns_init */
+ 		.extra1		= NULL,
  	},
--	{ }
+-	{ },
  };
  
- static int start_readonly;
+ static int vrf_netns_init_sysctl(struct net *net, struct netns_vrf *nn_vrf)
 
 -- 
 2.30.2
