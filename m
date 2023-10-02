@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 379E7E784BC
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 08:53:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611260.950855 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F0DE7849A
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 08:58:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611276.950886 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnEgJ-000891-9S; Mon, 02 Oct 2023 08:53:35 +0000
+	id 1qnEkm-0005ho-EP; Mon, 02 Oct 2023 08:58:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611260.950855; Mon, 02 Oct 2023 08:53:34 +0000
+Received: by outflank-mailman (output) from mailman id 611276.950886; Mon, 02 Oct 2023 08:58:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnEgI-00082b-0H; Mon, 02 Oct 2023 08:53:34 +0000
-Received: by outflank-mailman (input) for mailman id 611260;
- Mon, 02 Oct 2023 08:53:27 +0000
+	id 1qnEkm-0005hh-BV; Mon, 02 Oct 2023 08:58:12 +0000
+Received: by outflank-mailman (input) for mailman id 611276;
+ Mon, 02 Oct 2023 08:58:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=y3Nz=FQ=kernel.org=devnull+j.granados.samsung.com@srs-se1.protection.inumbo.net>)
- id 1qnEgA-0004Uc-Ny
- for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 08:53:26 +0000
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2261e0a5-6101-11ee-9b0d-b553b5be7939;
- Mon, 02 Oct 2023 10:53:21 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 2F82CCE0EDB;
- Mon,  2 Oct 2023 08:53:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 88FECC32776;
- Mon,  2 Oct 2023 08:53:15 +0000 (UTC)
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 6E722E784A4;
- Mon,  2 Oct 2023 08:53:15 +0000 (UTC)
+ <SRS0=ZW1X=FQ=gmail.com=jirislaby@srs-se1.protection.inumbo.net>)
+ id 1qnEkk-0005hb-Jh
+ for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 08:58:10 +0000
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ce9e10a6-6101-11ee-9b0d-b553b5be7939;
+ Mon, 02 Oct 2023 10:58:08 +0200 (CEST)
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-32483535e51so4252646f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Oct 2023 01:58:08 -0700 (PDT)
+Received: from ?IPV6:2a0b:e7c0:0:107::aaaa:59? ([2a0b:e7c0:0:107::aaaa:59])
+ by smtp.gmail.com with ESMTPSA id
+ w11-20020adff9cb000000b00326c952716esm5441244wrr.61.2023.10.02.01.58.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Oct 2023 01:58:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,127 +46,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2261e0a5-6101-11ee-9b0d-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1696236795;
-	bh=amz0lmR6ktjSFYbXFf8SJ/rD/LGezf37esDcBUcG4VA=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Ivo+qQiovpQQJq0vFwPkgisug1Pppm96a/bVqga8oaV4kgvEby500kN2Dhw1ukZNg
-	 +q/m0XC+RByxKFw1CgR1L/RGthyJyQCHLdTbejDTWXaxQuqYA7Zcxa4zich+rCjo53
-	 Ak/b8FhOqr3Nd/0oKFNdytahECQM3W04/BwpLjss74/NFOWkqovAALiGP5i3mWn/7p
-	 68dCoKFe1ZkRjyjhHlua+jyGPELXpRm/+3tI9gcKKD9fhW+wmFz/FLNZRsvjfnd1yR
-	 gfZeyuxKySJXmB+tspGrEdZn4VULNRVO6fRSbJPTuJ90m/yelcjvEL0MAGNFxyf46o
-	 8pYt9MzyjQQBQ==
-From: Joel Granados via B4 Relay <devnull+j.granados.samsung.com@kernel.org>
-Date: Mon, 02 Oct 2023 10:55:25 +0200
-Subject: [PATCH v2 08/15] infiniband: Remove the now superfluous sentinel
- element from ctl_table array
+X-Inumbo-ID: ce9e10a6-6101-11ee-9b0d-b553b5be7939
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1696237088; x=1696841888;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=BA0erWjrRdMrGzi5ZNBknNRu9czNXtMxnytZ4Rmj09w=;
+        b=Xgx1PXqvif6zWbG5+m8kbJ29p9RDFon3WrGpkVo5SVxXAWVjSs5nByUpfybpbNkp9M
+         EIQ5RI46v5nvIGE9cyrQ9QGnZDw0znkO/1quTp7pi8qzGggpvBOIydPtylGfnWXRzlp5
+         dUcnk3ZEfwrWY40hl1uOIXUSKVlryYZDn8xxvFiKaHXxWrmWbbTv7U5eLcpZzVecUs7e
+         SEW2mrI4cOnUIBJbMy7i061eYv3YAwepalDVMLOuUq264G/ovfdZAljGGPAE9jOZ1XSV
+         AEutRqw0oZtSnERtVPuBoCl1WENLOFNygwiTmJUVZtrV53nw6R1xD9o41Pt+Dctu9bD0
+         Jbww==
+X-Gm-Message-State: AOJu0YyhoJPA4e6ek6DlJtJpKdMQUE/44VJaw8Lw3oTtiZQ//wh9fm7c
+	3zCTT5g3ewt8egk8ZkZesY8=
+X-Google-Smtp-Source: AGHT+IFX1CH2yaFZ4DPjG0iRefZg6vNuBJleSj/4R9NuvQPLd/nkpUID7AsNvsjaQ8C58nXw2EwbTg==
+X-Received: by 2002:adf:fd10:0:b0:317:69d2:35be with SMTP id e16-20020adffd10000000b0031769d235bemr9508091wrr.30.1696237087773;
+        Mon, 02 Oct 2023 01:58:07 -0700 (PDT)
+Message-ID: <3ff36799-534d-47a6-9feb-3ae3c3d488e2@kernel.org>
+Date: Mon, 2 Oct 2023 10:58:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id:
- <20231002-jag-sysctl_remove_empty_elem_drivers-v2-8-02dd0d46f71e@samsung.com>
-References:
- <20231002-jag-sysctl_remove_empty_elem_drivers-v2-0-02dd0d46f71e@samsung.com>
-In-Reply-To:
- <20231002-jag-sysctl_remove_empty_elem_drivers-v2-0-02dd0d46f71e@samsung.com>
-To: Luis Chamberlain <mcgrof@kernel.org>, willy@infradead.org, 
- josh@joshtriplett.org, Kees Cook <keescook@chromium.org>, 
- Phillip Potter <phil@philpotter.co.uk>, 
- Clemens Ladisch <clemens@ladisch.de>, Arnd Bergmann <arnd@arndb.de>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Juergen Gross <jgross@suse.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
- Jiri Slaby <jirislaby@kernel.org>, 
- "James E.J. Bottomley" <jejb@linux.ibm.com>, 
- "Martin K. Petersen" <martin.petersen@oracle.com>, 
- Doug Gilbert <dgilbert@interlog.com>, 
- Sudip Mukherjee <sudipm.mukherjee@gmail.com>, 
- Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>, 
- Corey Minyard <minyard@acm.org>, Theodore Ts'o <tytso@mit.edu>, 
- "Jason A. Donenfeld" <Jason@zx2c4.com>, David Ahern <dsahern@kernel.org>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Robin Holt <robinmholt@gmail.com>, Steve Wahl <steve.wahl@hpe.com>, 
- Russ Weight <russell.h.weight@intel.com>, 
- "Rafael J. Wysocki" <rafael@kernel.org>, Song Liu <song@kernel.org>, 
- "K. Y. Srinivasan" <kys@microsoft.com>, 
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
- Dexuan Cui <decui@microsoft.com>, Jani Nikula <jani.nikula@linux.intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 04/15] tty: Remove now superfluous sentinel element
+ from ctl_table array
+Content-Language: en-US
+To: j.granados@samsung.com, Luis Chamberlain <mcgrof@kernel.org>,
+ willy@infradead.org, josh@joshtriplett.org, Kees Cook
+ <keescook@chromium.org>, Phillip Potter <phil@philpotter.co.uk>,
+ Clemens Ladisch <clemens@ladisch.de>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ "James E.J. Bottomley" <jejb@linux.ibm.com>,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ Doug Gilbert <dgilbert@interlog.com>,
+ Sudip Mukherjee <sudipm.mukherjee@gmail.com>, Jason Gunthorpe
+ <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>,
+ Corey Minyard <minyard@acm.org>, Theodore Ts'o <tytso@mit.edu>,
+ "Jason A. Donenfeld" <Jason@zx2c4.com>, David Ahern <dsahern@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Robin Holt <robinmholt@gmail.com>, Steve Wahl <steve.wahl@hpe.com>,
+ Russ Weight <russell.h.weight@intel.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Song Liu <song@kernel.org>,
+ "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Dexuan Cui <decui@microsoft.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
-Cc: Joel Granados <j.granados@samsung.com>, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, linux-serial@vger.kernel.org, 
- linux-scsi@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
- linux-rdma@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
- netdev@vger.kernel.org, linux-raid@vger.kernel.org, 
- linux-hyperv@vger.kernel.org, intel-gfx@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org
-X-Mailer: b4 0.13-dev-86aa5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1292;
- i=j.granados@samsung.com; h=from:subject:message-id;
- bh=gz7T61c3mpYSXDkYtspjqyukqPQ8G3NAC15+ZhhmUg8=;
- b=owEB7QES/pANAwAKAbqXzVK3lkFPAcsmYgBlGoV9Z1pjf+iYaTcrpDqomSqDrWKWFayUHCWw9
- +AUAffywyqJAbMEAAEKAB0WIQSuRwlXJeYxJc7LJ5C6l81St5ZBTwUCZRqFfQAKCRC6l81St5ZB
- T/JFC/9TTtJdLb2PgHoU/qPORU0LWDxrdSEgO8uCjljCKGZhuFpPUKZbEd0rpHrNpki2b8pKynT
- MLcOr1s9ad+5SDCpUH/yLdJliUTWWvOtoMlXpO48uDR59mZX0//MP5HkHzjmetk/8lTfgT5BO6l
- Qn5dUfYq+irkQRBRjgRMHwVyc4A4crKuZEE9Tct8092ObCV3YvfOgQm7zQMbfR29PHrnL+uPHE5
- sNi3FYH38aLdW399HO1ONj4ssyAcOKq5nEXFzCmX/u6dgWVruM+h4AvbhaWsrIDITXM6MNBdwUf
- i5spcncMQQ11S0U8mtiKNH/7XHqmJBSGNBCVX9VtvpUNfvHMRDpShUTcduVGg4Vs9IR8Im+0yuT
- fMV19bF+hlgs7vNHYDKVGZe+h9vlbcMsvnQZWkrlFVvlUj6yUxi9sw+K1QrW4UaCo6f7vt/1i46
- Q/Fu7wsyyGFTQAHbDASRb4cCDdYx7GuUIvwS4VXhlHj3fhXILPrJcYZfg3+CsF5zKhFfA=
-X-Developer-Key: i=j.granados@samsung.com; a=openpgp;
- fpr=F1F8E46D30F0F6C4A45FF4465895FAAC338C6E77
-X-Endpoint-Received:
- by B4 Relay for j.granados@samsung.com/default with auth_id=70
-X-Original-From: Joel Granados <j.granados@samsung.com>
-Reply-To: <j.granados@samsung.com>
+Cc: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-serial@vger.kernel.org, linux-scsi@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-rdma@vger.kernel.org,
+ openipmi-developer@lists.sourceforge.net, netdev@vger.kernel.org,
+ linux-raid@vger.kernel.org, linux-hyperv@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+References: <20231002-jag-sysctl_remove_empty_elem_drivers-v2-0-02dd0d46f71e@samsung.com>
+ <20231002-jag-sysctl_remove_empty_elem_drivers-v2-4-02dd0d46f71e@samsung.com>
+From: Jiri Slaby <jirislaby@kernel.org>
+Autocrypt: addr=jirislaby@kernel.org; keydata=
+ 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
+In-Reply-To: <20231002-jag-sysctl_remove_empty_elem_drivers-v2-4-02dd0d46f71e@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Joel Granados <j.granados@samsung.com>
+On 02. 10. 23, 10:55, Joel Granados via B4 Relay wrote:
+> From: Joel Granados <j.granados@samsung.com>
+> 
+> This commit comes at the tail end of a greater effort to remove the
+> empty elements at the end of the ctl_table arrays (sentinels) which
+> will reduce the overall build time size of the kernel and run time
+> memory bloat by ~64 bytes per sentinel (further information Link :
+> https://lore.kernel.org/all/ZO5Yx5JFogGi%2FcBo@bombadil.infradead.org/)
+> 
+> Remove sentinel from tty_table
+> 
+> Signed-off-by: Joel Granados <j.granados@samsung.com>
 
-This commit comes at the tail end of a greater effort to remove the
-empty elements at the end of the ctl_table arrays (sentinels) which
-will reduce the overall build time size of the kernel and run time
-memory bloat by ~64 bytes per sentinel (further information Link :
-https://lore.kernel.org/all/ZO5Yx5JFogGi%2FcBo@bombadil.infradead.org/)
+Reviewed-by: Jiri Slaby <jirislaby@kernel.org>
 
-Remove sentinel from iwcm_ctl_table and ucma_ctl_table
-
-Signed-off-by: Joel Granados <j.granados@samsung.com>
----
- drivers/infiniband/core/iwcm.c | 1 -
- drivers/infiniband/core/ucma.c | 1 -
- 2 files changed, 2 deletions(-)
-
-diff --git a/drivers/infiniband/core/iwcm.c b/drivers/infiniband/core/iwcm.c
-index 2b47073c61a6..0301fcad4b48 100644
---- a/drivers/infiniband/core/iwcm.c
-+++ b/drivers/infiniband/core/iwcm.c
-@@ -111,7 +111,6 @@ static struct ctl_table iwcm_ctl_table[] = {
- 		.mode		= 0644,
- 		.proc_handler	= proc_dointvec,
- 	},
--	{ }
- };
- 
- /*
-diff --git a/drivers/infiniband/core/ucma.c b/drivers/infiniband/core/ucma.c
-index bf42650f125b..5f5ad8faf86e 100644
---- a/drivers/infiniband/core/ucma.c
-+++ b/drivers/infiniband/core/ucma.c
-@@ -71,7 +71,6 @@ static struct ctl_table ucma_ctl_table[] = {
- 		.mode		= 0644,
- 		.proc_handler	= proc_dointvec,
- 	},
--	{ }
- };
- 
- struct ucma_file {
-
+thanks,
 -- 
-2.30.2
+js
+suse labs
 
 
