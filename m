@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE04FE7849A
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 08:53:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611256.950816 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB85BE784B5
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 08:53:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611255.950805 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnEgD-0006qa-11; Mon, 02 Oct 2023 08:53:29 +0000
+	id 1qnEgB-0006Pk-KR; Mon, 02 Oct 2023 08:53:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611256.950816; Mon, 02 Oct 2023 08:53:28 +0000
+Received: by outflank-mailman (output) from mailman id 611255.950805; Mon, 02 Oct 2023 08:53:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnEgC-0006mp-KY; Mon, 02 Oct 2023 08:53:28 +0000
-Received: by outflank-mailman (input) for mailman id 611256;
- Mon, 02 Oct 2023 08:53:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qnEgB-0006MY-8Q; Mon, 02 Oct 2023 08:53:27 +0000
+Received: by outflank-mailman (input) for mailman id 611255;
+ Mon, 02 Oct 2023 08:53:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=y3Nz=FQ=kernel.org=devnull+j.granados.samsung.com@srs-se1.protection.inumbo.net>)
- id 1qnEg8-0004Uc-Ni
+ id 1qnEg8-0004XI-6g
  for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 08:53:24 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 22b987dd-6101-11ee-9b0d-b553b5be7939;
- Mon, 02 Oct 2023 10:53:20 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 230265cf-6101-11ee-878e-cb3800f73035;
+ Mon, 02 Oct 2023 10:53:21 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E359E60D3D;
- Mon,  2 Oct 2023 08:53:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D5543C32781;
- Mon,  2 Oct 2023 08:53:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 40E8160DC5;
+ Mon,  2 Oct 2023 08:53:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 233BCC32791;
+ Mon,  2 Oct 2023 08:53:16 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id BB085E784AF;
- Mon,  2 Oct 2023 08:53:15 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 0BF3CE784B4;
+ Mon,  2 Oct 2023 08:53:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,26 +48,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22b987dd-6101-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 230265cf-6101-11ee-878e-cb3800f73035
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1696236795;
-	bh=7IWRTGCcHSZcJzQ9+CQB1q8u0SSRDwfa1ILU59ULK2s=;
+	s=k20201202; t=1696236796;
+	bh=CWlJL9Lw1/ldMKMXIXxw/hUhoDe/0uo8LXE4rcCIDvg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=oGcOGSdFN01g9tO0zq1jWZxxY5eHTEK6Ieh32g8Zl/2u76GNVZiQplz+70dwM408C
-	 xjGlLWU9svr3ba5PnteRqLQfz0+/I37zpSxnNv1EoOGbS4xjDcu/B9evHnXvTA8j7v
-	 d7BQmq6BXC7iZHS906y/XkAV5W/lOuNd4ZfYBZNpclFo6eOLGpnNk7uNvGblazVEHf
-	 os8uOGrLIInyl8EPMHRpCflKVwdVNnAKpOvp5OB+K6OLgI8MJQzgp/5rAIMjY36OfD
-	 3H/N/aFfLHnF8zbVNeIF9+kNw12/GhyMqXUJ4Ex2+CIwPcnwWQrSlYs4vgLjPwpQuh
-	 /R3FAf3MQKt6g==
+	b=dr780/9OgUcsdtC82ja0MVSV0MPcrkXtIHn1pfiy0bouUWxiebn11JLyTjawcIz1B
+	 ACtOMw8UJL7kZBt4+Lypa11r9YIbBL2pUR4tV7r3QIOnCIuJuaBBW/9q4JfKHjx1rO
+	 6DzPgfGQxmcnE3sD8DWla26vXCXsl+oyLhwVGCFiYwBOrRxzVfX7ROfuVdzYIv7UN4
+	 DLxNvEoWgw3dN2cyVkNUBQeJlZ7BFF4dfqBAUktV8qF7Fxq4p/dDrq364NaHDDdMbT
+	 HPQK4lMcdLy+TTpsVeHkfkPs0w8oUjzfHoz+Rpqcu+CKTvTQz3xFFRsIiD83pD1xv0
+	 sGtUhoGU9ETOw==
 From: Joel Granados via B4 Relay <devnull+j.granados.samsung.com@kernel.org>
-Date: Mon, 02 Oct 2023 10:55:28 +0200
-Subject: [PATCH v2 11/15] sgi-xp: Remove the now superfluous sentinel
+Date: Mon, 02 Oct 2023 10:55:31 +0200
+Subject: [PATCH v2 14/15] Drivers: hv: Remove now superfluous sentinel
  element from ctl_table array
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Message-Id: =?utf-8?q?=3C20231002-jag-sysctl=5Fremove=5Fempty=5Felem=5Fdrive?=
- =?utf-8?q?rs-v2-11-02dd0d46f71e=40samsung=2Ecom=3E?=
+ =?utf-8?q?rs-v2-14-02dd0d46f71e=40samsung=2Ecom=3E?=
 References:
  <20231002-jag-sysctl_remove_empty_elem_drivers-v2-0-02dd0d46f71e@samsung.com>
 In-Reply-To:
@@ -107,18 +108,17 @@ Cc: Joel Granados <j.granados@samsung.com>, linux-kernel@vger.kernel.org,
  linux-hyperv@vger.kernel.org, intel-gfx@lists.freedesktop.org, 
  dri-devel@lists.freedesktop.org
 X-Mailer: b4 0.13-dev-86aa5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1256;
- i=j.granados@samsung.com; h=from:subject:message-id;
- bh=ePmiIBkulMk2J0Hn3yd3SHNfMVzMlB72hhtExcVcV3k=;
- b=owEB7QES/pANAwAKAbqXzVK3lkFPAcsmYgBlGoV+aKXagxwn9FWH6ZTWvhVjY34ucdd7w4DTR
- 2dN5LSnfq+JAbMEAAEKAB0WIQSuRwlXJeYxJc7LJ5C6l81St5ZBTwUCZRqFfgAKCRC6l81St5ZB
- T1upC/0f07DfBkp9sG4MGPmaJMzGlZZGiOnSzrgySbn+KY4QlvVmzeCW1RNh4/SI3qUvFnRH36B
- HBgmh4yFhDu4q+nFYCARsivwe8aPPp1SDmgVepBn+ew8CtGedybiL+3GVk+plFOmzUKyXRqAKon
- nl6r/yKeTppABClVqoKzfvgqLzNdwZ1N0/hKaxCvpE3bXE8C738wQoCchtxfzSD/xxKTcP3goQ9
- RcUh/CLFpuWwPYKkhhje8q2K9Kuag3MAUHMxqTBKjQxCHsRQoM6bMQBD2HAZv/dnO7CIzJlXrG1
- DMp+Kj8HcvmcGue1narnsl/PUBnvXc6MHPZjyHedBOfa4+ZohotYOHCdLnRsB4tbge4IwuYE0Ju
- MRVv3O66uFsRuysv/tf6I/ai86ZsmS9bXTFhF3IKs1z75FxvjZH8a228UoQ5l+88yppXQR7bEK9
- 7kXy21jdGYBzOOmBMhIg6MzwCUczClJJAyH8bUbGA9Uew0qK+QE+XeevXulpo/4D6CW2o=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=895; i=j.granados@samsung.com;
+ h=from:subject:message-id; bh=aRo7NVdYCvLdNgGSBgQ6l0+E6oBOdQJH07rUCLQlR94=;
+ b=owEB7QES/pANAwAKAbqXzVK3lkFPAcsmYgBlGoV/RVrZ++DlZt66bGmFv2tACCjFtyc9bKCyt
+ Xh72+xBYa2JAbMEAAEKAB0WIQSuRwlXJeYxJc7LJ5C6l81St5ZBTwUCZRqFfwAKCRC6l81St5ZB
+ T9wCC/9S9uDWtQoaUtTyJySq/BwgMLnAny2OrneSlhO0UKqMZFvbOgUuQGiJNs8VyC7IlWrxHVm
+ 2gbT3WD/mQhI9WX/B0z4TarGuU+BJmzwoPPun5D3G6oUedf0JdyIZLs9TJwZyL4KbQHIhVQ8skt
+ 9d2ELBqWveNmV8f+e8MKgjsdagi/9I77W0Dlj2eujgXgyIiPLQ/ZS+2g+heBSUicyN16ibHEu82
+ LllVj4x/NiItYuyLOncHEA6dI2/PYrOmYAHIkg5yUqWOhwDEKS4RmcYq0Y0lzUl8APdk06uQkJb
+ FFdVwsBnc3/rIeI8WobAqGTPjJ+p7k6APq5wq2IG+SuGmix2X7nozc7PdKVDApIkihzXIqIdVzt
+ YXt3lgmdjZI5hmlPt6RyTPvW/lX88Ru+QtyDLF7HtMgyQnjyq5zqqu1URjGJnly2oy19F7wlilb
+ AGIwY7o8qjN9C7sQC6yGWy2cGGyxw/g56tiwhVyVidw8uSz1wSXK/WM5kW7C0TiW0R8hQ=
 X-Developer-Key: i=j.granados@samsung.com; a=openpgp;
  fpr=F1F8E46D30F0F6C4A45FF4465895FAAC338C6E77
 X-Endpoint-Received:
@@ -134,33 +134,25 @@ will reduce the overall build time size of the kernel and run time
 memory bloat by ~64 bytes per sentinel (further information Link :
 https://lore.kernel.org/all/ZO5Yx5JFogGi%2FcBo@bombadil.infradead.org/)
 
-Remove sentinel from xpc_sys_xpc_hb and xpc_sys_xpc
+Remove sentinel from hv_ctl_table
 
 Signed-off-by: Joel Granados <j.granados@samsung.com>
 ---
- drivers/misc/sgi-xp/xpc_main.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/hv/hv_common.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/misc/sgi-xp/xpc_main.c b/drivers/misc/sgi-xp/xpc_main.c
-index 6da509d692bb..3186421e82c3 100644
---- a/drivers/misc/sgi-xp/xpc_main.c
-+++ b/drivers/misc/sgi-xp/xpc_main.c
-@@ -110,7 +110,6 @@ static struct ctl_table xpc_sys_xpc_hb[] = {
- 	 .proc_handler = proc_dointvec_minmax,
- 	 .extra1 = &xpc_hb_check_min_interval,
- 	 .extra2 = &xpc_hb_check_max_interval},
--	{}
- };
- static struct ctl_table xpc_sys_xpc[] = {
- 	{
-@@ -121,7 +120,6 @@ static struct ctl_table xpc_sys_xpc[] = {
- 	 .proc_handler = proc_dointvec_minmax,
- 	 .extra1 = &xpc_disengage_min_timelimit,
- 	 .extra2 = &xpc_disengage_max_timelimit},
+diff --git a/drivers/hv/hv_common.c b/drivers/hv/hv_common.c
+index ccad7bca3fd3..4372f5d146ab 100644
+--- a/drivers/hv/hv_common.c
++++ b/drivers/hv/hv_common.c
+@@ -148,7 +148,6 @@ static struct ctl_table hv_ctl_table[] = {
+ 		.extra1		= SYSCTL_ZERO,
+ 		.extra2		= SYSCTL_ONE
+ 	},
 -	{}
  };
  
- static struct ctl_table_header *xpc_sysctl;
+ static int hv_die_panic_notify_crash(struct notifier_block *self,
 
 -- 
 2.30.2
