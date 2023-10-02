@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D085FE784A4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB675E784A5
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 07:35:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611115.950513 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.611117.950533 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDSQ-0000vM-0J; Mon, 02 Oct 2023 07:35:10 +0000
+	id 1qnDSS-0001QP-HM; Mon, 02 Oct 2023 07:35:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611115.950513; Mon, 02 Oct 2023 07:35:09 +0000
+Received: by outflank-mailman (output) from mailman id 611117.950533; Mon, 02 Oct 2023 07:35:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDSP-0000vE-TW; Mon, 02 Oct 2023 07:35:09 +0000
-Received: by outflank-mailman (input) for mailman id 611115;
- Mon, 02 Oct 2023 07:35:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qnDSS-0001QH-E7; Mon, 02 Oct 2023 07:35:12 +0000
+Received: by outflank-mailman (input) for mailman id 611117;
+ Mon, 02 Oct 2023 07:35:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uL8T=FQ=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qnDSO-0000v6-Kc
- for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:35:08 +0000
+ id 1qnDSQ-0000vL-U3
+ for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:35:10 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3574bc30-60f6-11ee-878e-cb3800f73035;
- Mon, 02 Oct 2023 09:35:07 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 35fe485f-60f6-11ee-9b0d-b553b5be7939;
+ Mon, 02 Oct 2023 09:35:08 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id AB3BC4EE0739;
- Mon,  2 Oct 2023 09:35:05 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id AEA9F4EE073E;
+ Mon,  2 Oct 2023 09:35:07 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3574bc30-60f6-11ee-878e-cb3800f73035
+X-Inumbo-ID: 35fe485f-60f6-11ee-9b0d-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,50 +53,104 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
 	Henry Wang <Henry.Wang@arm.com>
-Subject: [XEN PATCH v3 0/3] docs/misra: add documentation skeleton to address MISRA C:2012 Dir 4.1
-Date: Mon,  2 Oct 2023 09:34:47 +0200
-Message-Id: <cover.1696231870.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v3 2/3] docs: make the docs for MISRA C:2012 Dir 4.1 visible to ECLAIR
+Date: Mon,  2 Oct 2023 09:34:49 +0200
+Message-Id: <fd60f0f3c777652bd305a97b559cb7ee23293e8d.1696231870.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1696231870.git.nicola.vetrini@bugseng.com>
+References: <cover.1696231870.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The headline of Directive 4.1 states: "Run-time failures shall be minimized".
-Thus, it requires the project to supply documentation that pertains the measures
-and techinques used to prevent run-time failures from happening. For ease of
-reading, the documentation is in RST format, but since ECLAIR needs a source file
-to check that the needed subsections and their format is the one expected, the
-Makefiles for the docs/ are amended to generate such a file.
+To be able to check for the existence of the necessary subsections in
+the documentation for MISRA C:2012 Dir 4.1, ECLAIR needs to have a source
+file that is built.
 
-The format and categories of the subsections in the .rst file can be
-customized based on feedback from the community: the one provided is just a
-basic skeleton that should be tailored to the project.
+This file is generated from 'C-runtime-failures.rst' in docs/misra
+and the configuration is updated accordingly.
 
-Note: The previous version of this series already had a release ack from Henry,
-which I didn't add in each commit message since I see in the commit history that
-tag being the last.
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+Changes from RFC:
+- Dropped unused/useless code
+- Revised the sed command
+- Revised the clean target
 
-Nicola Vetrini (3):
-  docs/misra: add documentation skeleton for MISRA C:2012 Dir 4.1
-  docs: make the docs for MISRA C:2012 Dir 4.1 visible to ECLAIR
-  automation/eclair: build docs/misra to address MISRA C:2012 Dir 4.1
+Changes in v2:
+- Added explanative comment to the makefile
+- printf instead of echo
 
- automation/eclair_analysis/build.sh   |   6 +-
- automation/eclair_analysis/prepare.sh |   7 +-
- docs/Makefile                         |   7 +-
- docs/misra/C-runtime-failures.rst     | 210 ++++++++++++++++++++++++++
- docs/misra/Makefile                   |  22 +++
- docs/misra/rules.rst                  |   7 +
- 6 files changed, 252 insertions(+), 7 deletions(-)
- create mode 100644 docs/misra/C-runtime-failures.rst
+Changes in v3:
+- Terminate the generated file with a newline
+- Build it with -std=c99, so that the documentation
+  for D1.1 applies.
+---
+ docs/Makefile       |  7 ++++++-
+ docs/misra/Makefile | 22 ++++++++++++++++++++++
+ 2 files changed, 28 insertions(+), 1 deletion(-)
  create mode 100644 docs/misra/Makefile
 
+diff --git a/docs/Makefile b/docs/Makefile
+index 966a104490ac..ff991a0c3ca2 100644
+--- a/docs/Makefile
++++ b/docs/Makefile
+@@ -43,7 +43,7 @@ DOC_PDF  := $(patsubst %.pandoc,pdf/%.pdf,$(PANDOCSRC-y)) \
+ all: build
+ 
+ .PHONY: build
+-build: html txt pdf man-pages figs
++build: html txt pdf man-pages figs misra
+ 
+ .PHONY: sphinx-html
+ sphinx-html:
+@@ -66,9 +66,14 @@ endif
+ .PHONY: pdf
+ pdf: $(DOC_PDF)
+ 
++.PHONY: misra
++misra:
++	$(MAKE) -C misra
++
+ .PHONY: clean
+ clean: clean-man-pages
+ 	$(MAKE) -C figs clean
++	$(MAKE) -C misra clean
+ 	rm -rf .word_count *.aux *.dvi *.bbl *.blg *.glo *.idx *~
+ 	rm -rf *.ilg *.log *.ind *.toc *.bak *.tmp core
+ 	rm -rf html txt pdf sphinx/html
+diff --git a/docs/misra/Makefile b/docs/misra/Makefile
+new file mode 100644
+index 000000000000..949458ff9e15
+--- /dev/null
++++ b/docs/misra/Makefile
+@@ -0,0 +1,22 @@
++TARGETS := C-runtime-failures.o
++
++all: $(TARGETS)
++
++# This Makefile will generate the object files indicated in TARGETS by taking
++# the corresponding .rst file, converting its content to a C block comment and
++# then compiling the resulting .c file. This is needed for the file's content to
++# be available when performing static analysis with ECLAIR on the project.
++
++# sed is used in place of cat to prevent occurrences of '*/'
++# in the .rst from breaking the compilation
++$(TARGETS:.o=.c): %.c: %.rst
++	printf "/*\n\n" > $@.tmp
++	sed -e 's|\*/|*//*|g' $< >> $@.tmp
++	printf "\n\n*/\n" >> $@.tmp
++	mv $@.tmp $@
++
++%.o: %.c
++	$(CC) -std=c99 -c $< -o $@
++
++clean:
++	rm -f C-runtime-failures.c *.o *.tmp
 -- 
 2.34.1
 
