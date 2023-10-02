@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E96E784A5
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 07:35:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611118.950543 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D085FE784A4
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Oct 2023 07:35:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611115.950513 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDST-0001ft-Pu; Mon, 02 Oct 2023 07:35:13 +0000
+	id 1qnDSQ-0000vM-0J; Mon, 02 Oct 2023 07:35:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611118.950543; Mon, 02 Oct 2023 07:35:13 +0000
+Received: by outflank-mailman (output) from mailman id 611115.950513; Mon, 02 Oct 2023 07:35:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnDST-0001fi-Kg; Mon, 02 Oct 2023 07:35:13 +0000
-Received: by outflank-mailman (input) for mailman id 611118;
- Mon, 02 Oct 2023 07:35:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qnDSP-0000vE-TW; Mon, 02 Oct 2023 07:35:09 +0000
+Received: by outflank-mailman (input) for mailman id 611115;
+ Mon, 02 Oct 2023 07:35:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uL8T=FQ=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qnDSR-0000vL-U6
- for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:35:11 +0000
+ id 1qnDSO-0000v6-Kc
+ for xen-devel@lists.xenproject.org; Mon, 02 Oct 2023 07:35:08 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 367b23e2-60f6-11ee-9b0d-b553b5be7939;
- Mon, 02 Oct 2023 09:35:08 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3574bc30-60f6-11ee-878e-cb3800f73035;
+ Mon, 02 Oct 2023 09:35:07 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 9261B4EE074E;
- Mon,  2 Oct 2023 09:35:08 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id AB3BC4EE0739;
+ Mon,  2 Oct 2023 09:35:05 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 367b23e2-60f6-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: 3574bc30-60f6-11ee-878e-cb3800f73035
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,70 +53,50 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Henry Wang <Henry.Wang@arm.com>
-Subject: [XEN PATCH v3 3/3] automation/eclair: build docs/misra to address MISRA C:2012 Dir 4.1
-Date: Mon,  2 Oct 2023 09:34:50 +0200
-Message-Id: <ac00d0259530ac895e7260ff7f64833c58053983.1696231870.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v3 0/3] docs/misra: add documentation skeleton to address MISRA C:2012 Dir 4.1
+Date: Mon,  2 Oct 2023 09:34:47 +0200
+Message-Id: <cover.1696231870.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1696231870.git.nicola.vetrini@bugseng.com>
-References: <cover.1696231870.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The documentation pertaining Directive 4.1 is contained in docs/misra.
-The build script driving the analysis is amended to allow ECLAIR to
-analyze such file.
+The headline of Directive 4.1 states: "Run-time failures shall be minimized".
+Thus, it requires the project to supply documentation that pertains the measures
+and techinques used to prevent run-time failures from happening. For ease of
+reading, the documentation is in RST format, but since ECLAIR needs a source file
+to check that the needed subsections and their format is the one expected, the
+Makefiles for the docs/ are amended to generate such a file.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-Changes in v3:
-- amended prepare script.
----
- automation/eclair_analysis/build.sh   | 6 +++---
- automation/eclair_analysis/prepare.sh | 7 ++++---
- 2 files changed, 7 insertions(+), 6 deletions(-)
+The format and categories of the subsections in the .rst file can be
+customized based on feedback from the community: the one provided is just a
+basic skeleton that should be tailored to the project.
 
-diff --git a/automation/eclair_analysis/build.sh b/automation/eclair_analysis/build.sh
-index ec087dd822fa..ea7a1e5a59b0 100755
---- a/automation/eclair_analysis/build.sh
-+++ b/automation/eclair_analysis/build.sh
-@@ -34,11 +34,11 @@ else
- fi
- 
- (
--  cd xen
--
-+  make -C docs misra
-   make "-j${PROCESSORS}" "-l${PROCESSORS}.0"    \
-        "CROSS_COMPILE=${CROSS_COMPILE}"         \
-        "CC=${CROSS_COMPILE}gcc-12"              \
-        "CXX=${CROSS_COMPILE}g++-12"             \
--       "XEN_TARGET_ARCH=${XEN_TARGET_ARCH}"
-+       "XEN_TARGET_ARCH=${XEN_TARGET_ARCH}"     \
-+       -C xen
- )
-diff --git a/automation/eclair_analysis/prepare.sh b/automation/eclair_analysis/prepare.sh
-index 0cac5eba00ae..fe9d16e48ecc 100755
---- a/automation/eclair_analysis/prepare.sh
-+++ b/automation/eclair_analysis/prepare.sh
-@@ -35,11 +35,12 @@ else
- fi
- 
- (
--    cd xen
--    cp "${CONFIG_FILE}" .config
-+    ./configure
-+    cp "${CONFIG_FILE}" xen/.config
-     make clean
-     find . -type f -name "*.safparse" -print -delete
--    make -f ${script_dir}/Makefile.prepare prepare
-+    cd xen
-+    make -f "${script_dir}/Makefile.prepare" prepare
-     # Translate the /* SAF-n-safe */ comments into ECLAIR CBTs
-     scripts/xen-analysis.py --run-eclair --no-build --no-clean
- )
+Note: The previous version of this series already had a release ack from Henry,
+which I didn't add in each commit message since I see in the commit history that
+tag being the last.
+
+Nicola Vetrini (3):
+  docs/misra: add documentation skeleton for MISRA C:2012 Dir 4.1
+  docs: make the docs for MISRA C:2012 Dir 4.1 visible to ECLAIR
+  automation/eclair: build docs/misra to address MISRA C:2012 Dir 4.1
+
+ automation/eclair_analysis/build.sh   |   6 +-
+ automation/eclair_analysis/prepare.sh |   7 +-
+ docs/Makefile                         |   7 +-
+ docs/misra/C-runtime-failures.rst     | 210 ++++++++++++++++++++++++++
+ docs/misra/Makefile                   |  22 +++
+ docs/misra/rules.rst                  |   7 +
+ 6 files changed, 252 insertions(+), 7 deletions(-)
+ create mode 100644 docs/misra/C-runtime-failures.rst
+ create mode 100644 docs/misra/Makefile
+
 -- 
 2.34.1
 
