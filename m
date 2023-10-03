@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35F8BE75428
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:05:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611953.951805 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A144CE7542D
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:06:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611976.951820 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZTU-0003pA-T6; Tue, 03 Oct 2023 07:05:44 +0000
+	id 1qnZU8-0006PQ-6c; Tue, 03 Oct 2023 07:06:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611953.951805; Tue, 03 Oct 2023 07:05:44 +0000
+Received: by outflank-mailman (output) from mailman id 611976.951820; Tue, 03 Oct 2023 07:06:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZTU-0003oC-NI; Tue, 03 Oct 2023 07:05:44 +0000
-Received: by outflank-mailman (input) for mailman id 611953;
- Tue, 03 Oct 2023 07:05:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qnZU8-0006PJ-3q; Tue, 03 Oct 2023 07:06:24 +0000
+Received: by outflank-mailman (input) for mailman id 611976;
+ Tue, 03 Oct 2023 07:06:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZJ2-00047B-7Q
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:56 +0000
+ id 1qnZJ3-00040o-Mx
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:57 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c113f886-61b9-11ee-9b0d-b553b5be7939;
- Tue, 03 Oct 2023 08:54:53 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c2ece9aa-61b9-11ee-98d2-6d05b1d4d9a1;
+ Tue, 03 Oct 2023 08:54:56 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:46 -0700
+ 02 Oct 2023 23:54:48 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:45 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:48 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c113f886-61b9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: c2ece9aa-61b9-11ee-98d2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316093; x=1727852093;
+  t=1696316096; x=1727852096;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=m7R91mzhAyMwuxf88uvtu3V1UGcA6vznqDxNdL57F/c=;
-  b=F5FpvxBubZqnZ0OcQhp02TE6epmuTopvBhB6ToaG9p+EIIM17ocEW1YE
-   JiXrpav3fAnJyHALTdL655THdhf1YF/g+kbzyIhCbGrLY8Qj/2ww1ZKKU
-   E2srR/VwxEbsV2kyjevxcl8NgWd5xytmlcsWF9Y38FjksIW1XyounB4cT
-   KA2r/vU6Y4TDxmqVtTz9SRcvRDqZXLaLaR1aJ47Bqkge12HEAuUZhO3vU
-   GsseUxImxzZUdcSgAk2srUZmkwjbIV8BmFJl2WoG2VC2XC2d2J+PeGjxd
-   cTQJH0yQisXZ0jGYDDxYcNwo2gPIZo4/SzOCljh++Z1+RMISwFNgwRZQz
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858170"
+  bh=bNtEfhEic2/4eI6U3F6LZD3GtdQN7TZ08d/4AOd+L9I=;
+  b=dr3UUKE1SbYVPTA1Yv2xUwDgwbdQCx8JrILEbopf1zq5+dnaOeCqbNK1
+   K6mtrBNcFIJZLcvw2vKu1Y34ru/Oy3F0vGivqntDtWJ00kY6ESFHQN/rv
+   TYHxC7enjahgw9MSYR1d5IJfOR95Eh0sHPpTB+SC3vrahdr5n5pGmScOL
+   MFkqiRbW51yYJbDevWYwSNT84i6WnLhX3lRRdIaG/R7Rt/oFFqD39lteS
+   hHayjAJ5CsyvfYJKs94hHXrG5jHuCTIqJz0lMxnEqb+wHHxRvzk6bIS/5
+   4q+PLOLIYRJJUa/gXdkjKs+7LdRbaMuoVnfKCrnIQLSkjE1vi7mq2xWUu
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858242"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858170"
+   d="scan'208";a="367858242"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900966"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900986"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900966"
+   d="scan'208";a="1081900986"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,104 +87,78 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 22/37] x86/fred: Allow single-step trap and NMI when starting a new task
-Date: Mon,  2 Oct 2023 23:24:43 -0700
-Message-Id: <20231003062458.23552-23-xin3.li@intel.com>
+Subject: [PATCH v12 27/37] x86/fred: Add a machine check entry stub for FRED
+Date: Mon,  2 Oct 2023 23:24:48 -0700
+Message-Id: <20231003062458.23552-28-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+Like #DB, when occurred on different ring level, i.e., from user or kernel
+context, #MCE needs to be handled on different stack: User #MCE on current
+task stack, while kernel #MCE on a dedicated stack.
 
-Entering a new task is logically speaking a return from a system call
-(exec, fork, clone, etc.). As such, if ptrace enables single stepping
-a single step exception should be allowed to trigger immediately upon
-entering user space. This is not optional.
+This is exactly how FRED event delivery invokes an exception handler: ring
+3 event on level 0 stack, i.e., current task stack; ring 0 event on the
+#MCE dedicated stack specified in the IA32_FRED_STKLVLS MSR. So unlike IDT,
+the FRED machine check entry stub doesn't do stack switch.
 
-NMI should *never* be disabled in user space. As such, this is an
-optional, opportunistic way to catch errors.
-
-Allow single-step trap and NMI when starting a new task, thus once
-the new task enters user space, single-step trap and NMI are both
-enabled immediately.
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Changes since v8:
-* Use high-order 48 bits above the lowest 16 bit SS only when FRED
-  is enabled (Thomas Gleixner).
+Changes since v5:
+* Disallow #DB inside #MCE for robustness sake (Peter Zijlstra).
 ---
- arch/x86/kernel/process_64.c | 38 ++++++++++++++++++++++++++++++------
- 1 file changed, 32 insertions(+), 6 deletions(-)
+ arch/x86/kernel/cpu/mce/core.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
-index 4f87f5987ae8..c075591b7b46 100644
---- a/arch/x86/kernel/process_64.c
-+++ b/arch/x86/kernel/process_64.c
-@@ -56,6 +56,7 @@
- #include <asm/resctrl.h>
- #include <asm/unistd.h>
- #include <asm/fsgsbase.h>
+diff --git a/arch/x86/kernel/cpu/mce/core.c b/arch/x86/kernel/cpu/mce/core.c
+index 6f35f724cc14..da0a4a102afe 100644
+--- a/arch/x86/kernel/cpu/mce/core.c
++++ b/arch/x86/kernel/cpu/mce/core.c
+@@ -52,6 +52,7 @@
+ #include <asm/mce.h>
+ #include <asm/msr.h>
+ #include <asm/reboot.h>
 +#include <asm/fred.h>
- #ifdef CONFIG_IA32_EMULATION
- /* Not included via unistd.h */
- #include <asm/unistd_32_ia32.h>
-@@ -528,7 +529,7 @@ void x86_gsbase_write_task(struct task_struct *task, unsigned long gsbase)
- static void
- start_thread_common(struct pt_regs *regs, unsigned long new_ip,
- 		    unsigned long new_sp,
--		    unsigned int _cs, unsigned int _ss, unsigned int _ds)
-+		    u16 _cs, u16 _ss, u16 _ds)
- {
- 	WARN_ON_ONCE(regs != current_pt_regs());
  
-@@ -545,11 +546,36 @@ start_thread_common(struct pt_regs *regs, unsigned long new_ip,
- 	loadsegment(ds, _ds);
- 	load_gs_index(0);
+ #include "internal.h"
  
--	regs->ip		= new_ip;
--	regs->sp		= new_sp;
--	regs->cs		= _cs;
--	regs->ss		= _ss;
--	regs->flags		= X86_EFLAGS_IF;
-+	regs->ip	= new_ip;
-+	regs->sp	= new_sp;
-+	regs->csx	= _cs;
-+	regs->ssx	= _ss;
-+	/*
-+	 * Allow single-step trap and NMI when starting a new task, thus
-+	 * once the new task enters user space, single-step trap and NMI
-+	 * are both enabled immediately.
-+	 *
-+	 * Entering a new task is logically speaking a return from a
-+	 * system call (exec, fork, clone, etc.). As such, if ptrace
-+	 * enables single stepping a single step exception should be
-+	 * allowed to trigger immediately upon entering user space.
-+	 * This is not optional.
-+	 *
-+	 * NMI should *never* be disabled in user space. As such, this
-+	 * is an optional, opportunistic way to catch errors.
-+	 *
-+	 * Paranoia: High-order 48 bits above the lowest 16 bit SS are
-+	 * discarded by the legacy IRET instruction on all Intel, AMD,
-+	 * and Cyrix/Centaur/VIA CPUs, thus can be set unconditionally,
-+	 * even when FRED is not enabled. But we choose the safer side
-+	 * to use these bits only when FRED is enabled.
-+	 */
-+	if (cpu_feature_enabled(X86_FEATURE_FRED)) {
-+		regs->fred_ss.swevent	= true;
-+		regs->fred_ss.nmi	= true;
-+	}
-+
-+	regs->flags	= X86_EFLAGS_IF | X86_EFLAGS_FIXED;
+@@ -2144,6 +2145,31 @@ DEFINE_IDTENTRY_MCE_USER(exc_machine_check)
+ 	exc_machine_check_user(regs);
+ 	local_db_restore(dr7);
  }
- 
- void
++
++#ifdef CONFIG_X86_FRED
++/*
++ * When occurred on different ring level, i.e., from user or kernel
++ * context, #MCE needs to be handled on different stack: User #MCE
++ * on current task stack, while kernel #MCE on a dedicated stack.
++ *
++ * This is exactly how FRED event delivery invokes an exception
++ * handler: ring 3 event on level 0 stack, i.e., current task stack;
++ * ring 0 event on the #MCE dedicated stack specified in the
++ * IA32_FRED_STKLVLS MSR. So unlike IDT, the FRED machine check entry
++ * stub doesn't do stack switch.
++ */
++DEFINE_FREDENTRY_MCE(exc_machine_check)
++{
++	unsigned long dr7;
++
++	dr7 = local_db_save();
++	if (user_mode(regs))
++		exc_machine_check_user(regs);
++	else
++		exc_machine_check_kernel(regs);
++	local_db_restore(dr7);
++}
++#endif
+ #else
+ /* 32bit unified entry point */
+ DEFINE_IDTENTRY_RAW(exc_machine_check)
 -- 
 2.34.1
 
