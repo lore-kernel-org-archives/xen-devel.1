@@ -4,34 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D864E75430
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:05:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611942.951771 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69BC4E75428
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:05:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611946.951790 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZTI-0002L1-B5; Tue, 03 Oct 2023 07:05:32 +0000
+	id 1qnZTM-00031k-9S; Tue, 03 Oct 2023 07:05:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611942.951771; Tue, 03 Oct 2023 07:05:32 +0000
+Received: by outflank-mailman (output) from mailman id 611946.951790; Tue, 03 Oct 2023 07:05:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZTI-0002Ku-5S; Tue, 03 Oct 2023 07:05:32 +0000
-Received: by outflank-mailman (input) for mailman id 611942;
- Tue, 03 Oct 2023 07:05:31 +0000
+	id 1qnZTM-00031T-4t; Tue, 03 Oct 2023 07:05:36 +0000
+Received: by outflank-mailman (input) for mailman id 611946;
+ Tue, 03 Oct 2023 07:05:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZJ6-00040o-NX
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:55:00 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=g4lE=FR=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qnZTL-0002Gx-JJ
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 07:05:35 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c4896b33-61b9-11ee-98d2-6d05b1d4d9a1;
- Tue, 03 Oct 2023 08:54:59 +0200 (CEST)
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:50 -0700
-Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:50 -0700
+ id 3f5e65b4-61bb-11ee-98d2-6d05b1d4d9a1;
+ Tue, 03 Oct 2023 09:05:34 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id 589604EE0737;
+ Tue,  3 Oct 2023 09:05:34 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,233 +41,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4896b33-61b9-11ee-98d2-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316099; x=1727852099;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=t7LG5n12hETRnrxNhjk5swu4X1wUVGmoU9KoK3uS4dI=;
-  b=BB5mJkIbYCJPZ5GT5H4DTa9RJbz2ghaGCSNf4QePKmiGjbQJV+0cNSxC
-   wK8DI71dLl7tph74qCdUm3VMaGSnMNu4bQpqJb2ELOmihZ1VqaaJ6P8km
-   hKUTwByhV0Bg3zK2sryKh0mVPPR4YPFmAaQBF0cwlHpU9hQMffCg5R1v6
-   ogQmRG8vfP9gj1l88tofT83gO5wTP5Y2pLHsUyxXngiZCgfCfYwH2J2XG
-   HLp2XNPyJtNiIfU9eWtgeSOr3qO73SUmdoGE9ZauVmpmoXU8lDlxVNCap
-   WqIUcwpHx6lkZGWPLxtTmA7Ynb/FVqRaJq2o8lD6Ke4a3bahPnKeaoqtC
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858292"
-X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858292"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081901001"
-X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081901001"
-From: Xin Li <xin3.li@intel.com>
-To: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-edac@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Cc: tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	x86@kernel.org,
-	hpa@zytor.com,
-	luto@kernel.org,
-	pbonzini@redhat.com,
-	seanjc@google.com,
-	peterz@infradead.org,
-	jgross@suse.com,
-	ravi.v.shankar@intel.com,
-	mhiramat@kernel.org,
-	andrew.cooper3@citrix.com,
-	jiangshanlai@gmail.com,
-	nik.borisov@suse.com
-Subject: [PATCH v12 31/37] x86/fred: Fixup fault on ERETU by jumping to fred_entrypoint_user
-Date: Mon,  2 Oct 2023 23:24:52 -0700
-Message-Id: <20231003062458.23552-32-xin3.li@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
-References: <20231003062458.23552-1-xin3.li@intel.com>
+X-Inumbo-ID: 3f5e65b4-61bb-11ee-98d2-6d05b1d4d9a1
 MIME-Version: 1.0
+Date: Tue, 03 Oct 2023 09:05:34 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org,
+ michal.orzel@amd.com, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com,
+ consulting@bugseng.com, jbeulich@suse.com, andrew.cooper3@citrix.com,
+ Henry.Wang@arm.com, Julien Grall <julien@xen.org>, Bertrand Marquis
+ <bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>
+Subject: Re: [XEN PATCH 1/7] xen: add declarations for variables where needed
+In-Reply-To: <ZRqkbeVUZbjizjNv@MacBookPdeRoger>
+References: <cover.1696232393.git.nicola.vetrini@bugseng.com>
+ <357a35c3035d0f8659a64d767791bc41d57494d3.1696232393.git.nicola.vetrini@bugseng.com>
+ <ZRqkbeVUZbjizjNv@MacBookPdeRoger>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <872f44542c8df6dab79965375376010d@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
 
-If the stack frame contains an invalid user context (e.g. due to invalid SS,
-a non-canonical RIP, etc.) the ERETU instruction will trap (#SS or #GP).
+On 02/10/2023 13:07, Roger Pau Monné wrote:
+> On Mon, Oct 02, 2023 at 09:49:44AM +0200, Nicola Vetrini wrote:
+>> Some variables with external linkage used in C code do not have
+>> a visible declaration where they are defined. Providing such
+>> declaration also resolves violations of MISRA C:2012 Rule 8.4.
+>> 
+>> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+>> ---
+>>  xen/arch/arm/include/asm/setup.h  |  3 +++
+>>  xen/arch/arm/include/asm/smp.h    |  3 +++
+>>  xen/arch/x86/cpu/mcheck/mce.c     |  6 +++---
+>>  xen/arch/x86/include/asm/setup.h  |  3 +++
+>>  xen/arch/x86/irq.c                |  2 +-
+>>  xen/arch/x86/platform_hypercall.c |  3 ---
+>>  xen/common/symbols.c              | 17 -----------------
+>>  xen/include/xen/hypercall.h       |  3 +++
+>>  xen/include/xen/symbols.h         | 18 ++++++++++++++++++
+>>  9 files changed, 34 insertions(+), 24 deletions(-)
+>> 
 
-From a Linux point of view, this really should be considered a user space
-failure, so use the standard fault fixup mechanism to intercept the fault,
-fix up the exception frame, and redirect execution to fred_entrypoint_user.
-The end result is that it appears just as if the hardware had taken the
-exception immediately after completing the transition to user space.
+>> diff --git a/xen/arch/x86/include/asm/setup.h 
+>> b/xen/arch/x86/include/asm/setup.h
+>> index dfdd9e555149..3c27fe915ed4 100644
+>> --- a/xen/arch/x86/include/asm/setup.h
+>> +++ b/xen/arch/x86/include/asm/setup.h
+>> @@ -13,8 +13,11 @@ extern char __2M_rwdata_start[], __2M_rwdata_end[];
+>>  extern unsigned long xenheap_initial_phys_start;
+>>  extern uint64_t boot_tsc_stamp;
+>> 
+>> +extern char cpu0_stack[STACK_SIZE];
+>>  extern void *stack_start;
+>> 
+>> +extern unsigned long cr4_pv32_mask;
+> 
+> This one might better go in compat.h, albeit that would require it's
+> setting to be gated to CONFIG_PV32.  setup.h is IMO for init time
+> stuff.
+> 
 
-Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Xin Li <xin3.li@intel.com>
----
+Ok
 
-Changes since v8:
-* Reflect the FRED spec 5.0 change that ERETS and ERETU add 8 to %rsp
-  before popping the return context from the stack.
+>> +
+>>  void early_cpu_init(void);
+>>  void early_time_init(void);
+>> 
+>> diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+>> index 6abfd8162120..604dba94b052 100644
+>> --- a/xen/arch/x86/irq.c
+>> +++ b/xen/arch/x86/irq.c
+>> @@ -43,7 +43,7 @@ int __read_mostly opt_irq_vector_map = 
+>> OPT_IRQ_VECTOR_MAP_DEFAULT;
+>>  static unsigned char __read_mostly irq_max_guests;
+>>  integer_param("irq-max-guests", irq_max_guests);
+>> 
+>> -vmask_t global_used_vector_map;
+>> +static vmask_t global_used_vector_map;
+>> 
+>>  struct irq_desc __read_mostly *irq_desc = NULL;
+>> 
+>> diff --git a/xen/arch/x86/platform_hypercall.c 
+>> b/xen/arch/x86/platform_hypercall.c
+>> index 9469de9045c7..e4dbec73d784 100644
+>> --- a/xen/arch/x86/platform_hypercall.c
+>> +++ b/xen/arch/x86/platform_hypercall.c
+>> @@ -36,9 +36,6 @@
+>>  #include "cpu/mtrr/mtrr.h"
+>>  #include <xsm/xsm.h>
+>> 
+>> -/* Declarations for items shared with the compat mode handler. */
+>> -extern spinlock_t xenpf_lock;
+>> -
+>>  #define RESOURCE_ACCESS_MAX_ENTRIES 3
+>>  struct resource_access {
+>>      unsigned int nr_done;
+>> diff --git a/xen/common/symbols.c b/xen/common/symbols.c
+>> index 691e61792506..7c3514c65f2e 100644
+>> --- a/xen/common/symbols.c
+>> +++ b/xen/common/symbols.c
+>> @@ -21,23 +21,6 @@
+>>  #include <xen/guest_access.h>
+>>  #include <xen/errno.h>
+>> 
+>> -#ifdef SYMBOLS_ORIGIN
+>> -extern const unsigned int symbols_offsets[];
+>> -#define symbols_address(n) (SYMBOLS_ORIGIN + symbols_offsets[n])
+>> -#else
+>> -extern const unsigned long symbols_addresses[];
+>> -#define symbols_address(n) symbols_addresses[n]
+>> -#endif
+>> -extern const unsigned int symbols_num_syms;
+>> -extern const u8 symbols_names[];
+>> -
+>> -extern const struct symbol_offset symbols_sorted_offsets[];
+>> -
+>> -extern const u8 symbols_token_table[];
+>> -extern const u16 symbols_token_index[];
+>> -
+>> -extern const unsigned int symbols_markers[];
+>> -
+>>  /* expand a compressed symbol data into the resulting uncompressed 
+>> string,
+>>     given the offset to where the symbol is in the compressed stream 
+>> */
+>>  static unsigned int symbols_expand_symbol(unsigned int off, char 
+>> *result)
+>> diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
+>> index f307dfb59760..12de5a69b5b1 100644
+>> --- a/xen/include/xen/hypercall.h
+>> +++ b/xen/include/xen/hypercall.h
+>> @@ -24,6 +24,9 @@
+>>  /* Needs to be after asm/hypercall.h. */
+>>  #include <xen/hypercall-defs.h>
+>> 
+>> +/* Declarations for items shared with the compat mode handler. */
+>> +extern spinlock_t xenpf_lock;
+> 
+> I'm confused about why this needs to be moved, AFAICT xenpf_lock is
+> only used in platform_hypercall.c, and the declaration is
+> unconditional, so there's no definition without declaration issue.
+> 
 
-Changes since v6:
-* Add a comment to explain why it is safe to write to the previous FRED stack
-  frame. (Lai Jiangshan).
+The violation was on ARM code, because of a slight inconsistency:
+xen/arch/arm/platform_hypercall.c:DEFINE_SPINLOCK(xenpf_lock);
 
-Changes since v5:
-* Move the NMI bit from an invalid stack frame, which caused ERETU to fault,
-  to the fault handler's stack frame, thus to unblock NMI ASAP if NMI is blocked
-  (Lai Jiangshan).
----
- arch/x86/entry/entry_64_fred.S             |  5 +-
- arch/x86/include/asm/extable_fixup_types.h |  4 +-
- arch/x86/mm/extable.c                      | 79 ++++++++++++++++++++++
- 3 files changed, 86 insertions(+), 2 deletions(-)
+xen/arch/x86/platform_hypercall.c:extern spinlock_t xenpf_lock;
+xen/arch/x86/platform_hypercall.c:DEFINE_SPINLOCK(xenpf_lock);
 
-diff --git a/arch/x86/entry/entry_64_fred.S b/arch/x86/entry/entry_64_fred.S
-index 5781c3411b44..d1c2fc4af8ae 100644
---- a/arch/x86/entry/entry_64_fred.S
-+++ b/arch/x86/entry/entry_64_fred.S
-@@ -3,6 +3,7 @@
-  * The actual FRED entry points.
-  */
- 
-+#include <asm/asm.h>
- #include <asm/fred.h>
- 
- #include "calling.h"
-@@ -34,7 +35,9 @@ SYM_CODE_START_NOALIGN(asm_fred_entrypoint_user)
- 	call	fred_entry_from_user
- SYM_INNER_LABEL(asm_fred_exit_user, SYM_L_GLOBAL)
- 	FRED_EXIT
--	ERETU
-+1:	ERETU
-+
-+	_ASM_EXTABLE_TYPE(1b, asm_fred_entrypoint_user, EX_TYPE_ERETU)
- SYM_CODE_END(asm_fred_entrypoint_user)
- 
- .fill asm_fred_entrypoint_kernel - ., 1, 0xcc
-diff --git a/arch/x86/include/asm/extable_fixup_types.h b/arch/x86/include/asm/extable_fixup_types.h
-index 991e31cfde94..1585c798a02f 100644
---- a/arch/x86/include/asm/extable_fixup_types.h
-+++ b/arch/x86/include/asm/extable_fixup_types.h
-@@ -64,6 +64,8 @@
- #define	EX_TYPE_UCOPY_LEN4		(EX_TYPE_UCOPY_LEN | EX_DATA_IMM(4))
- #define	EX_TYPE_UCOPY_LEN8		(EX_TYPE_UCOPY_LEN | EX_DATA_IMM(8))
- 
--#define EX_TYPE_ZEROPAD			20 /* longword load with zeropad on fault */
-+#define	EX_TYPE_ZEROPAD			20 /* longword load with zeropad on fault */
-+
-+#define	EX_TYPE_ERETU			21
- 
- #endif
-diff --git a/arch/x86/mm/extable.c b/arch/x86/mm/extable.c
-index 271dcb2deabc..fc40a4e12f3a 100644
---- a/arch/x86/mm/extable.c
-+++ b/arch/x86/mm/extable.c
-@@ -6,6 +6,7 @@
- #include <xen/xen.h>
- 
- #include <asm/fpu/api.h>
-+#include <asm/fred.h>
- #include <asm/sev.h>
- #include <asm/traps.h>
- #include <asm/kdebug.h>
-@@ -223,6 +224,80 @@ static bool ex_handler_ucopy_len(const struct exception_table_entry *fixup,
- 	return ex_handler_uaccess(fixup, regs, trapnr, fault_address);
- }
- 
-+#ifdef CONFIG_X86_FRED
-+static bool ex_handler_eretu(const struct exception_table_entry *fixup,
-+			     struct pt_regs *regs, unsigned long error_code)
-+{
-+	struct pt_regs *uregs = (struct pt_regs *)
-+		(regs->sp - offsetof(struct pt_regs, orig_ax));
-+	unsigned short ss = uregs->ss;
-+	unsigned short cs = uregs->cs;
-+
-+	/*
-+	 * Move the NMI bit from the invalid stack frame, which caused ERETU
-+	 * to fault, to the fault handler's stack frame, thus to unblock NMI
-+	 * with the fault handler's ERETS instruction ASAP if NMI is blocked.
-+	 */
-+	regs->fred_ss.nmi = uregs->fred_ss.nmi;
-+
-+	/*
-+	 * Sync event information to uregs, i.e., the ERETU return frame, but
-+	 * is it safe to write to the ERETU return frame which is just above
-+	 * current event stack frame?
-+	 *
-+	 * The RSP used by FRED to push a stack frame is not the value in %rsp,
-+	 * it is calculated from %rsp with the following 2 steps:
-+	 * 1) RSP = %rsp - (IA32_FRED_CONFIG & 0x1c0)	// Reserve N*64 bytes
-+	 * 2) RSP = RSP & ~0x3f		// Align to a 64-byte cache line
-+	 * when an event delivery doesn't trigger a stack level change.
-+	 *
-+	 * Here is an example with N*64 (N=1) bytes reserved:
-+	 *
-+	 *  64-byte cache line ==>  ______________
-+	 *                         |___Reserved___|
-+	 *                         |__Event_data__|
-+	 *                         |_____SS_______|
-+	 *                         |_____RSP______|
-+	 *                         |_____FLAGS____|
-+	 *                         |_____CS_______|
-+	 *                         |_____IP_______|
-+	 *  64-byte cache line ==> |__Error_code__| <== ERETU return frame
-+	 *                         |______________|
-+	 *                         |______________|
-+	 *                         |______________|
-+	 *                         |______________|
-+	 *                         |______________|
-+	 *                         |______________|
-+	 *                         |______________|
-+	 *  64-byte cache line ==> |______________| <== RSP after step 1) and 2)
-+	 *                         |___Reserved___|
-+	 *                         |__Event_data__|
-+	 *                         |_____SS_______|
-+	 *                         |_____RSP______|
-+	 *                         |_____FLAGS____|
-+	 *                         |_____CS_______|
-+	 *                         |_____IP_______|
-+	 *  64-byte cache line ==> |__Error_code__| <== ERETS return frame
-+	 *
-+	 * Thus a new FRED stack frame will always be pushed below a previous
-+	 * FRED stack frame ((N*64) bytes may be reserved between), and it is
-+	 * safe to write to a previous FRED stack frame as they never overlap.
-+	 */
-+	fred_info(uregs)->edata = fred_event_data(regs);
-+	uregs->ssx = regs->ssx;
-+	uregs->fred_ss.ss = ss;
-+	/* The NMI bit was moved away above */
-+	uregs->fred_ss.nmi = 0;
-+	uregs->csx = regs->csx;
-+	uregs->fred_cs.sl = 0;
-+	uregs->fred_cs.wfe = 0;
-+	uregs->cs = cs;
-+	uregs->orig_ax = error_code;
-+
-+	return ex_handler_default(fixup, regs);
-+}
-+#endif
-+
- int ex_get_fixup_type(unsigned long ip)
- {
- 	const struct exception_table_entry *e = search_exception_tables(ip);
-@@ -300,6 +375,10 @@ int fixup_exception(struct pt_regs *regs, int trapnr, unsigned long error_code,
- 		return ex_handler_ucopy_len(e, regs, trapnr, fault_addr, reg, imm);
- 	case EX_TYPE_ZEROPAD:
- 		return ex_handler_zeropad(e, regs, fault_addr);
-+#ifdef CONFIG_X86_FRED
-+	case EX_TYPE_ERETU:
-+		return ex_handler_eretu(e, regs, error_code);
-+#endif
- 	}
- 	BUG();
- }
+therefore, by moving the extern declaration to the common header there 
+should be no issue.
+
+>> +
+>>  extern long
+>>  arch_do_domctl(
+>>      struct xen_domctl *domctl, struct domain *d,
+>> diff --git a/xen/include/xen/symbols.h b/xen/include/xen/symbols.h
+>> index 20bbb28ef226..92540409265e 100644
+>> --- a/xen/include/xen/symbols.h
+>> +++ b/xen/include/xen/symbols.h
+>> @@ -33,4 +33,22 @@ struct symbol_offset {
+>>      uint32_t stream; /* .. in the compressed stream.*/
+>>      uint32_t addr;   /* .. and in the fixed size address array. */
+>>  };
+>> +
+>> +#ifdef SYMBOLS_ORIGIN
+>> +extern const unsigned int symbols_offsets[];
+>> +#define symbols_address(n) (SYMBOLS_ORIGIN + symbols_offsets[n])
+>> +#else
+>> +extern const unsigned long symbols_addresses[];
+>> +#define symbols_address(n) symbols_addresses[n]
+>> +#endif
+>> +extern const unsigned int symbols_num_syms;
+>> +extern const u8 symbols_names[];
+>> +
+>> +extern const struct symbol_offset symbols_sorted_offsets[];
+>> +
+>> +extern const u8 symbols_token_table[];
+>> +extern const u16 symbols_token_index[];
+>> +
+>> +extern const unsigned int symbols_markers[];
+>> +
+>>  #endif /*_XEN_SYMBOLS_H*/
+> 
+> This one is ugly, but I can't see a better way immediately.
+> 
+> Thanks, Roger.
+
 -- 
-2.34.1
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
