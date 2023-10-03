@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D47CFE75435
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:06:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611991.951870 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56DFBE7542F
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:06:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611995.951880 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZUV-0000LV-Qs; Tue, 03 Oct 2023 07:06:47 +0000
+	id 1qnZUZ-0000so-Co; Tue, 03 Oct 2023 07:06:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611991.951870; Tue, 03 Oct 2023 07:06:47 +0000
+Received: by outflank-mailman (output) from mailman id 611995.951880; Tue, 03 Oct 2023 07:06:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZUV-0000LI-O2; Tue, 03 Oct 2023 07:06:47 +0000
-Received: by outflank-mailman (input) for mailman id 611991;
- Tue, 03 Oct 2023 07:06:46 +0000
+	id 1qnZUZ-0000sc-7W; Tue, 03 Oct 2023 07:06:51 +0000
+Received: by outflank-mailman (input) for mailman id 611995;
+ Tue, 03 Oct 2023 07:06:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZJ6-00047B-7x
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:55:00 +0000
+ id 1qnZJ1-00047B-7N
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:55 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c27dbca9-61b9-11ee-9b0d-b553b5be7939;
- Tue, 03 Oct 2023 08:54:55 +0200 (CEST)
+ id c0e0a640-61b9-11ee-9b0d-b553b5be7939;
+ Tue, 03 Oct 2023 08:54:53 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:48 -0700
+ 02 Oct 2023 23:54:45 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:47 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:45 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c27dbca9-61b9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: c0e0a640-61b9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316095; x=1727852095;
+  t=1696316093; x=1727852093;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=FcZc1QeKj2isPTwOBVaGNTy+si5WeOaciLFU4yv7EQo=;
-  b=BbKo73uHCaX15YH0ctt3j322eQ06JhpfZQ9/5Fo1y90aTmJYBxMPrsAw
-   x4rXECJjPlD/a8Q4auFabXlgoYUoi2bqHOOclKOYIurqsamqinrSCAvLZ
-   1UenzrzHzPbWTDn7zV6lwGKGKmyNqpDh0VRaHTKNS91CDwy0ZXk2XeeGp
-   tdXHK76RYOmAsMCvrb1sy21gSIEw3vLTYRCXEsp2ywOh50teYPo9fcaBs
-   6O185UvWGaGw4OH3Q5IEY0NHPpX2TFB1iZFu+MddI3SjgMEO37jKeTe8/
-   tUreHJbPP2s3uDF/9mzsu2G1MabltB2rs8rSYeZOCScx+fXy607C1D/25
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858230"
+  bh=daicXFK30tmpTUp95RTD2ZQAe5K9xY8zuW1WSEbSaqA=;
+  b=SiRqV/fnee4/m5V7mIYkJ8lBXaAFPrP8JRjT7c0cxyytECNbyI3XYSwz
+   e5x6cIFFThU/LCu22A4bI9/qSOrMm4imfP7LPZGyPU8nGCSOhRDPG4eWK
+   1IMcUYs7pIA/8O33BBbrWvZ+Q2ZAK5CXY3m8ttFDEO6164r46aVUWYMRz
+   no/PUkRwLtT0kd/qKaLnAEbJKeyTgErEUFyZttQ4oC1LIz2Jdw2K1ktx0
+   2Clo5uUyzVZhdrs6phW77s647YDQas0onIQhpiQsaAyYlqf4f7t4wQzdd
+   U88UMjSiwijk3RjYqhKJO7q6xHL+xmzmYGxHSBJgnLcFQLVpEdlbE4xOf
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858155"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858230"
+   d="scan'208";a="367858155"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900982"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900963"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900982"
+   d="scan'208";a="1081900963"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,9 +87,9 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 26/37] x86/fred: Add a NMI entry stub for FRED
-Date: Mon,  2 Oct 2023 23:24:47 -0700
-Message-Id: <20231003062458.23552-27-xin3.li@intel.com>
+Subject: [PATCH v12 21/37] x86/fred: No ESPFIX needed when FRED is enabled
+Date: Mon,  2 Oct 2023 23:24:42 -0700
+Message-Id: <20231003062458.23552-22-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
@@ -98,65 +98,42 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-On a FRED system, NMIs nest both with themselves and faults, transient
-information is saved into the stack frame, and NMI unblocking only
-happens when the stack frame indicates that so should happen.
-
-Thus, the NMI entry stub for FRED is really quite small...
+Because FRED always restores the full value of %rsp, ESPFIX is
+no longer needed when it's enabled.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/kernel/nmi.c | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ arch/x86/kernel/espfix_64.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/arch/x86/kernel/nmi.c b/arch/x86/kernel/nmi.c
-index a0c551846b35..58843fdf5cd0 100644
---- a/arch/x86/kernel/nmi.c
-+++ b/arch/x86/kernel/nmi.c
-@@ -34,6 +34,7 @@
- #include <asm/cache.h>
- #include <asm/nospec-branch.h>
- #include <asm/sev.h>
-+#include <asm/fred.h>
+diff --git a/arch/x86/kernel/espfix_64.c b/arch/x86/kernel/espfix_64.c
+index 16f9814c9be0..6726e0473d0b 100644
+--- a/arch/x86/kernel/espfix_64.c
++++ b/arch/x86/kernel/espfix_64.c
+@@ -106,6 +106,10 @@ void __init init_espfix_bsp(void)
+ 	pgd_t *pgd;
+ 	p4d_t *p4d;
  
- #define CREATE_TRACE_POINTS
- #include <trace/events/nmi.h>
-@@ -643,6 +644,33 @@ void nmi_backtrace_stall_check(const struct cpumask *btp)
- 
- #endif
- 
-+#ifdef CONFIG_X86_FRED
-+/*
-+ * With FRED, CR2/DR6 is pushed to #PF/#DB stack frame during FRED
-+ * event delivery, i.e., there is no problem of transient states.
-+ * And NMI unblocking only happens when the stack frame indicates
-+ * that so should happen.
-+ *
-+ * Thus, the NMI entry stub for FRED is really straightforward and
-+ * as simple as most exception handlers. As such, #DB is allowed
-+ * during NMI handling.
-+ */
-+DEFINE_FREDENTRY_NMI(exc_nmi)
-+{
-+	irqentry_state_t irq_state;
-+
-+	if (IS_ENABLED(CONFIG_SMP) && arch_cpu_is_offline(smp_processor_id()))
++	/* FRED systems always restore the full value of %rsp */
++	if (cpu_feature_enabled(X86_FEATURE_FRED))
 +		return;
 +
-+	irq_state = irqentry_nmi_enter(regs);
+ 	/* Install the espfix pud into the kernel page directory */
+ 	pgd = &init_top_pgt[pgd_index(ESPFIX_BASE_ADDR)];
+ 	p4d = p4d_alloc(&init_mm, pgd, ESPFIX_BASE_ADDR);
+@@ -129,6 +133,10 @@ void init_espfix_ap(int cpu)
+ 	void *stack_page;
+ 	pteval_t ptemask;
+ 
++	/* FRED systems always restore the full value of %rsp */
++	if (cpu_feature_enabled(X86_FEATURE_FRED))
++		return;
 +
-+	inc_irq_stat(__nmi_count);
-+	default_do_nmi(regs);
-+
-+	irqentry_nmi_exit(regs, irq_state);
-+}
-+#endif
-+
- void stop_nmi(void)
- {
- 	ignore_nmis++;
+ 	/* We only have to do this once... */
+ 	if (likely(per_cpu(espfix_stack, cpu)))
+ 		return;		/* Already initialized */
 -- 
 2.34.1
 
