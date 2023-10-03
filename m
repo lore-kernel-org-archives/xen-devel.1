@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EB7FE7543E
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611897.951600 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D22E75433
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611896.951585 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIw-00068m-Hk; Tue, 03 Oct 2023 06:54:50 +0000
+	id 1qnZIv-0005hw-2p; Tue, 03 Oct 2023 06:54:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611897.951600; Tue, 03 Oct 2023 06:54:50 +0000
+Received: by outflank-mailman (output) from mailman id 611896.951585; Tue, 03 Oct 2023 06:54:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIw-00067c-8Q; Tue, 03 Oct 2023 06:54:50 +0000
-Received: by outflank-mailman (input) for mailman id 611897;
- Tue, 03 Oct 2023 06:54:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qnZIu-0005fe-P0; Tue, 03 Oct 2023 06:54:48 +0000
+Received: by outflank-mailman (input) for mailman id 611896;
+ Tue, 03 Oct 2023 06:54:46 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZIt-00040o-UD
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:47 +0000
+ id 1qnZIs-00047B-QR
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:46 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bd44dbdd-61b9-11ee-98d2-6d05b1d4d9a1;
- Tue, 03 Oct 2023 08:54:47 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bb899e94-61b9-11ee-9b0d-b553b5be7939;
+ Tue, 03 Oct 2023 08:54:44 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:41 -0700
+ 02 Oct 2023 23:54:38 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:40 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:37 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd44dbdd-61b9-11ee-98d2-6d05b1d4d9a1
+X-Inumbo-ID: bb899e94-61b9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316087; x=1727852087;
+  t=1696316084; x=1727852084;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=nnaiSfOR32UqURagnGQyKATdoHKyxN7QZzCa/h9+/jY=;
-  b=K7J43ENcKXjVGxOPe5R6Gz5slG4qObfYzZjs3UyWlC/0eTbSLaFkYKvi
-   6n9God6f4bv4smcHC5azeQ7MEyjbvleJM3tScboJlByXsFst/JR/BGaxN
-   vDomCJNcLAGwdavZJTjXcMCY3D7I8Wjq2n2Uvji9NgsCM0Hm030ygVCHK
-   nQaQOcPW/QDsfPVWL8OUqaf2TrVffnlmKgjczbKP5eIRMJNaugaP0peNR
-   VN2oRu8KYGhjMpiWuxVBIEOUzZjhD352v4OnHliti4vQttMWFsz5C1pm0
-   jDfATlKXslbP0KB5m34jXq7IwYCtknU/w+x3INVqLoQ+reYXwRb5dSbPW
+  bh=Z2I9XuVKzLs7Gkjt7VvwoncwktLr23Bll2CpTX5dzXE=;
+  b=WRGo1LmfTzchv/zGaf1PhdyXLf1nFrZB7pJ1rAQEn4Ec0X7WcZ7tuhE/
+   HG3N8WF4pEeG6Hic55H4oit3nlB6eQCzdostElyySJAQEtdo0OloBXPTR
+   lPTvc6rC06RoYveEHl7uURKONN5Irh/tTm+sHWO2IuDPKi/8kdV+uNMhX
+   p5bPapXu6WHXDpxlY9UMDCWuQ1j6vqb3gPJyjvfE7KL+6cSDLE96ibAsx
+   vNW5i18/2RXLJOcczYDXP9zOt7gwMPYLUQ1Rv5TJJWWZzoG33+AeUG5BO
+   sfzStAMx8nuNV/omWKY0kppffQToPwQkXb/ypPKNplEAqsoCs1x1omPYH
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858040"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367857979"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858040"
+   d="scan'208";a="367857979"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900931"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900916"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900931"
+   d="scan'208";a="1081900916"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,9 +87,9 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 12/37] x86/objtool: Teach objtool about ERET[US]
-Date: Mon,  2 Oct 2023 23:24:33 -0700
-Message-Id: <20231003062458.23552-13-xin3.li@intel.com>
+Subject: [PATCH v12 07/37] x86/fred: Add Kconfig option for FRED (CONFIG_X86_FRED)
+Date: Mon,  2 Oct 2023 23:24:28 -0700
+Message-Id: <20231003062458.23552-8-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
@@ -98,46 +98,35 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Update the objtool decoder to know about the ERET[US] instructions
-(type INSN_CONTEXT_SWITCH).
+Add the configuration option CONFIG_X86_FRED to enable FRED.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- tools/objtool/arch/x86/decode.c | 19 ++++++++++++++-----
- 1 file changed, 14 insertions(+), 5 deletions(-)
+ arch/x86/Kconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/tools/objtool/arch/x86/decode.c b/tools/objtool/arch/x86/decode.c
-index c0f25d00181e..6999f478c155 100644
---- a/tools/objtool/arch/x86/decode.c
-+++ b/tools/objtool/arch/x86/decode.c
-@@ -509,11 +509,20 @@ int arch_decode_instruction(struct objtool_file *file, const struct section *sec
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 433f5e1906d1..5ef2f6fe0681 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -496,6 +496,15 @@ config X86_CPU_RESCTRL
  
- 		if (op2 == 0x01) {
+ 	  Say N if unsure.
  
--			if (modrm == 0xca)
--				insn->type = INSN_CLAC;
--			else if (modrm == 0xcb)
--				insn->type = INSN_STAC;
--
-+			switch (insn_last_prefix_id(&ins)) {
-+			case INAT_PFX_REPE:
-+			case INAT_PFX_REPNE:
-+				if (modrm == 0xca)
-+					/* eretu/erets */
-+					insn->type = INSN_CONTEXT_SWITCH;
-+				break;
-+			default:
-+				if (modrm == 0xca)
-+					insn->type = INSN_CLAC;
-+				else if (modrm == 0xcb)
-+					insn->type = INSN_STAC;
-+				break;
-+			}
- 		} else if (op2 >= 0x80 && op2 <= 0x8f) {
- 
- 			insn->type = INSN_JUMP_CONDITIONAL;
++config X86_FRED
++	bool "Flexible Return and Event Delivery"
++	depends on X86_64
++	help
++	  When enabled, try to use Flexible Return and Event Delivery
++	  instead of the legacy SYSCALL/SYSENTER/IDT architecture for
++	  ring transitions and exception/interrupt handling if the
++	  system supports.
++
+ if X86_32
+ config X86_BIGSMP
+ 	bool "Support for big SMP systems with more than 8 CPUs"
 -- 
 2.34.1
 
