@@ -4,34 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA97E75433
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611906.951682 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB2F8E7542D
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:01:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611913.951709 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZJ9-0000cS-HC; Tue, 03 Oct 2023 06:55:03 +0000
+	id 1qnZOi-0007fQ-2y; Tue, 03 Oct 2023 07:00:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611906.951682; Tue, 03 Oct 2023 06:55:03 +0000
+Received: by outflank-mailman (output) from mailman id 611913.951709; Tue, 03 Oct 2023 07:00:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZJ8-0000Xi-LF; Tue, 03 Oct 2023 06:55:02 +0000
-Received: by outflank-mailman (input) for mailman id 611906;
- Tue, 03 Oct 2023 06:54:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZIz-00047B-2C
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:53 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bfb52fdb-61b9-11ee-9b0d-b553b5be7939;
- Tue, 03 Oct 2023 08:54:51 +0200 (CEST)
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:44 -0700
-Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:44 -0700
+	id 1qnZOi-0007fJ-0I; Tue, 03 Oct 2023 07:00:48 +0000
+Received: by outflank-mailman (input) for mailman id 611913;
+ Tue, 03 Oct 2023 07:00:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=g4lE=FR=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qnZOg-0007fD-QI
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 07:00:46 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 92c8bd04-61ba-11ee-98d2-6d05b1d4d9a1;
+ Tue, 03 Oct 2023 09:00:45 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id A05994EE0737;
+ Tue,  3 Oct 2023 09:00:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,92 +41,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bfb52fdb-61b9-11ee-9b0d-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316091; x=1727852091;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=U5v5FfPZcbv+kEeu4BDXYc9n8fkslqM+14uJJDiLwkk=;
-  b=Teo8HzN2KBDGzwjKVhitsOGQOb07xvXZFvgRIrmWO9uvFHaciAYWWK6S
-   bttQu0acdifZvI/1kBXZw3Ebrz3TKWLjZQs0vmzqapX8BH0BT1gxPUnT6
-   lPBCHGKyiLTBkTd2cUWMwRZ4/bA8AMHpN8QczJHjZtO1WT6kzUGWYVHIj
-   dkgzegiTOAzijNdhJw/Y+aLsKdw1olmNSsb22J2fXk4VwRhJRyUsl6Zan
-   +VsMZI8A4glYRFOhiQewGTFQB9XIM8CQETkp7mr1xLjVKSBsRAC9cXS6d
-   KRcyHg2lkVQQnHFhzAEN2E8IFHxS6G2p1tZ44GJZT1XTh13hZ878kcs47
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858126"
-X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858126"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900954"
-X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900954"
-From: Xin Li <xin3.li@intel.com>
-To: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-edac@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Cc: tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	x86@kernel.org,
-	hpa@zytor.com,
-	luto@kernel.org,
-	pbonzini@redhat.com,
-	seanjc@google.com,
-	peterz@infradead.org,
-	jgross@suse.com,
-	ravi.v.shankar@intel.com,
-	mhiramat@kernel.org,
-	andrew.cooper3@citrix.com,
-	jiangshanlai@gmail.com,
-	nik.borisov@suse.com
-Subject: [PATCH v12 19/37] x86/fred: Update MSR_IA32_FRED_RSP0 during task switch
-Date: Mon,  2 Oct 2023 23:24:40 -0700
-Message-Id: <20231003062458.23552-20-xin3.li@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
-References: <20231003062458.23552-1-xin3.li@intel.com>
+X-Inumbo-ID: 92c8bd04-61ba-11ee-98d2-6d05b1d4d9a1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Tue, 03 Oct 2023 09:00:44 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org, michal.orzel@amd.com,
+ xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, consulting@bugseng.com,
+ jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com,
+ Henry.Wang@arm.com, Wei Liu <wl@xen.org>
+Subject: Re: [XEN PATCH 4/7] x86/grant: switch included header to make
+ declarations visible
+In-Reply-To: <alpine.DEB.2.22.394.2310021541230.2348112@ubuntu-linux-20-04-desktop>
+References: <cover.1696232393.git.nicola.vetrini@bugseng.com>
+ <ec3179df569d3e2b392360539bddfb3adc726a5e.1696232393.git.nicola.vetrini@bugseng.com>
+ <alpine.DEB.2.22.394.2310021541230.2348112@ubuntu-linux-20-04-desktop>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <7dcb6b040d0fab33553dac18e9080465@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+On 03/10/2023 00:42, Stefano Stabellini wrote:
+> On Mon, 2 Oct 2023, Nicola Vetrini wrote:
+>> The declarations for {create,replace}_grant_p2m_mapping are
+>> not visible when these functions are defined, therefore the right
+>> header needs to be included to allow them to be visible.
+>> 
+>> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+>> ---
+>>  xen/arch/x86/hvm/grant_table.c             | 3 +--
+>>  xen/arch/x86/include/asm/hvm/grant_table.h | 2 ++
+>>  2 files changed, 3 insertions(+), 2 deletions(-)
+>> 
+>> diff --git a/xen/arch/x86/hvm/grant_table.c 
+>> b/xen/arch/x86/hvm/grant_table.c
+>> index 30d51d54a949..afe449d8882c 100644
+>> --- a/xen/arch/x86/hvm/grant_table.c
+>> +++ b/xen/arch/x86/hvm/grant_table.c
+>> @@ -9,8 +9,7 @@
+>> 
+>>  #include <xen/types.h>
+>> 
+>> -#include <public/grant_table.h>
+>> -
+>> +#include <asm/hvm/grant_table.h>
+>>  #include <asm/p2m.h>
+> 
+> This makes sense...
+> 
+> 
+>>  int create_grant_p2m_mapping(uint64_t addr, mfn_t frame,
+>> diff --git a/xen/arch/x86/include/asm/hvm/grant_table.h 
+>> b/xen/arch/x86/include/asm/hvm/grant_table.h
+>> index 33c1da1a25f3..576aeb50adf4 100644
+>> --- a/xen/arch/x86/include/asm/hvm/grant_table.h
+>> +++ b/xen/arch/x86/include/asm/hvm/grant_table.h
+>> @@ -10,6 +10,8 @@
+>>  #ifndef __X86_HVM_GRANT_TABLE_H__
+>>  #define __X86_HVM_GRANT_TABLE_H__
+>> 
+>> +#include <asm/paging.h>
+> 
+> ... but I don't understand this one. It doesn't look like
+> asm/hvm/grant_table.h actually needs asm/paging.h ? Maybe it should be
+> included in xen/arch/x86/hvm/grant_table.c instead ?
+> 
+> 
+>>  #ifdef CONFIG_HVM
+>> 
+>>  int create_grant_p2m_mapping(uint64_t addr, mfn_t frame,
+>> --
+>> 2.34.1
+>> 
 
-MSR_IA32_FRED_RSP0 is used during ring 3 event delivery, and needs to
-be updated to point to the top of next task stack during task switch.
+See this thread [1] for more context. There was no response, so I went 
+for the route that
+made more sense to me. I guess you could say that only <xen/mm-frame.h> 
+is actually needed
+to get a definition of mfn_t, but I put <asm/paging.h> as in the 
+<asm/grant_table.h> header.
 
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Xin Li <xin3.li@intel.com>
----
- arch/x86/include/asm/switch_to.h | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+[1] 
+https://lore.kernel.org/xen-devel/a4b6710b66ed05292388ac6882b940ec@bugseng.com/
 
-diff --git a/arch/x86/include/asm/switch_to.h b/arch/x86/include/asm/switch_to.h
-index f42dbf17f52b..c3bd0c0758c9 100644
---- a/arch/x86/include/asm/switch_to.h
-+++ b/arch/x86/include/asm/switch_to.h
-@@ -70,9 +70,13 @@ static inline void update_task_stack(struct task_struct *task)
- #ifdef CONFIG_X86_32
- 	this_cpu_write(cpu_tss_rw.x86_tss.sp1, task->thread.sp0);
- #else
--	/* Xen PV enters the kernel on the thread stack. */
--	if (cpu_feature_enabled(X86_FEATURE_XENPV))
-+	if (cpu_feature_enabled(X86_FEATURE_FRED)) {
-+		/* WRMSRNS is a baseline feature for FRED. */
-+		wrmsrns(MSR_IA32_FRED_RSP0, (unsigned long)task_stack_page(task) + THREAD_SIZE);
-+	} else if (cpu_feature_enabled(X86_FEATURE_XENPV)) {
-+		/* Xen PV enters the kernel on the thread stack. */
- 		load_sp0(task_top_of_stack(task));
-+	}
- #endif
- }
- 
 -- 
-2.34.1
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
