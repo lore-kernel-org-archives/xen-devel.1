@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC31AE7542C
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611904.951661 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F8A7E75432
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611903.951655 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZJ4-000858-Qo; Tue, 03 Oct 2023 06:54:58 +0000
+	id 1qnZJ4-0007t0-4Q; Tue, 03 Oct 2023 06:54:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611904.951661; Tue, 03 Oct 2023 06:54:58 +0000
+Received: by outflank-mailman (output) from mailman id 611903.951655; Tue, 03 Oct 2023 06:54:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZJ4-000814-9z; Tue, 03 Oct 2023 06:54:58 +0000
-Received: by outflank-mailman (input) for mailman id 611904;
- Tue, 03 Oct 2023 06:54:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qnZJ3-0007qM-8g; Tue, 03 Oct 2023 06:54:57 +0000
+Received: by outflank-mailman (input) for mailman id 611903;
+ Tue, 03 Oct 2023 06:54:51 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZIx-00040o-L2
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:51 +0000
+ id 1qnZIw-00047B-R7
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:50 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bf8079c7-61b9-11ee-98d2-6d05b1d4d9a1;
- Tue, 03 Oct 2023 08:54:50 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id be3d3865-61b9-11ee-9b0d-b553b5be7939;
+ Tue, 03 Oct 2023 08:54:48 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:43 -0700
+ 02 Oct 2023 23:54:42 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:43 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:42 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bf8079c7-61b9-11ee-98d2-6d05b1d4d9a1
+X-Inumbo-ID: be3d3865-61b9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316090; x=1727852090;
+  t=1696316088; x=1727852088;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=SbR2wCTkousO/IPIjdDUqT7zLHmXpw3IGG9LN/Z2MXU=;
-  b=mtnWsN+WvqOK9u7cpe0J63AqtxYQBMljfrGx2V/IoIGOLK97ACSRdPoG
-   naISuhHgbpMo83c/VHrdm6JMAZdAqLVjtjD51qRzFWaaZy0oOpC8E+koE
-   /6z8IDcul4Q0VImIxs2D0/wjjog9KOviPdFaPg4m3jgfpQvXOe+y8xyEw
-   23HZ3FPimumFgusicsebWLmVes/ljo41KLZYWJUtQwgXoIKuOUHvgojjU
-   ywEKnJSCRTd7ejydpg/N2aP9sD8rO6x721pAhF7suOErJ9THyOmuNNU9F
-   jXvpg2DSQP2IPgm4nwbURwhz3FwXPXzkC7IIziLv7BUHjTeLfKgmlhtG2
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858100"
+  bh=yFOHuHE47yU8Pv3f7vyK1KueQKaw2/ZJmrjuiwmDzLE=;
+  b=F0G3UGdKu9RpMUYK0QbP68JFzJIBnlWtImWqVoR7o7ZxcCVnjnXnAYbe
+   odT6zqY43idf1bMGh3hAfvkc8zBPY+Orpy10UOvH9NK7EYhw0TNM4GRg0
+   DPZtoPuIfG1kRex7+6yW9Hc8t252cKZ2FPL9CGztNuo0as+yaHJchksIm
+   5xqPTtsQ29S2GzW26L7rCbCSpQ//uM1F0fBuVe3X8fcRePeuYeYu7quh5
+   aPhOakH+4PKDt0UJJ8jGMcYYWBOSkMfK30g+IsgQ2xHwfg7ZVuOtFh8Rp
+   694mQZddbFETjmGxjGIKxP8L2Qk3/VKsf9sCpwcvVE5l7ak1Y317qMO1f
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858076"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858100"
+   d="scan'208";a="367858076"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900946"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900940"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900946"
+   d="scan'208";a="1081900940"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,105 +87,138 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 17/37] x86/fred: Add a new header file for FRED definitions
-Date: Mon,  2 Oct 2023 23:24:38 -0700
-Message-Id: <20231003062458.23552-18-xin3.li@intel.com>
+Subject: [PATCH v12 15/37] x86/ptrace: Cleanup the definition of the pt_regs structure
+Date: Mon,  2 Oct 2023 23:24:36 -0700
+Message-Id: <20231003062458.23552-16-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+struct pt_regs is hard to read because the member or section related
+comments are not aligned with the members.
 
-Add a header file for FRED prototypes and definitions.
+The 'cs' and 'ss' members of pt_regs are type of 'unsigned long' while
+in reality they are only 16-bit wide. This works so far as the
+remaining space is unused, but FRED will use the remaining bits for
+other purposes.
+
+To prepare for FRED:
+
+  - Cleanup the formatting
+  - Convert 'cs' and 'ss' to u16 and embed them into an union
+    with a u64
+  - Fixup the related printk() format strings
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/entry/vsyscall/vsyscall_64.c |  2 +-
+ arch/x86/include/asm/ptrace.h         | 44 +++++++++++++++++++--------
+ arch/x86/kernel/process_64.c          |  2 +-
+ 3 files changed, 33 insertions(+), 15 deletions(-)
 
-Changes since v6:
-* Replace pt_regs csx flags prefix FRED_CSL_ with FRED_CSX_.
----
- arch/x86/include/asm/fred.h | 68 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 68 insertions(+)
- create mode 100644 arch/x86/include/asm/fred.h
-
-diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-new file mode 100644
-index 000000000000..f514fdb5a39f
---- /dev/null
-+++ b/arch/x86/include/asm/fred.h
-@@ -0,0 +1,68 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Macros for Flexible Return and Event Delivery (FRED)
-+ */
+diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
+index e0ca8120aea8..a3c0df11d0e6 100644
+--- a/arch/x86/entry/vsyscall/vsyscall_64.c
++++ b/arch/x86/entry/vsyscall/vsyscall_64.c
+@@ -76,7 +76,7 @@ static void warn_bad_vsyscall(const char *level, struct pt_regs *regs,
+ 	if (!show_unhandled_signals)
+ 		return;
+ 
+-	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%lx sp:%lx ax:%lx si:%lx di:%lx\n",
++	printk_ratelimited("%s%s[%d] %s ip:%lx cs:%x sp:%lx ax:%lx si:%lx di:%lx\n",
+ 			   level, current->comm, task_pid_nr(current),
+ 			   message, regs->ip, regs->cs,
+ 			   regs->sp, regs->ax, regs->si, regs->di);
+diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
+index f4db78b09c8f..f08ea073edd6 100644
+--- a/arch/x86/include/asm/ptrace.h
++++ b/arch/x86/include/asm/ptrace.h
+@@ -57,17 +57,19 @@ struct pt_regs {
+ #else /* __i386__ */
+ 
+ struct pt_regs {
+-/*
+- * C ABI says these regs are callee-preserved. They aren't saved on kernel entry
+- * unless syscall needs a complete, fully filled "struct pt_regs".
+- */
++	/*
++	 * C ABI says these regs are callee-preserved. They aren't saved on
++	 * kernel entry unless syscall needs a complete, fully filled
++	 * "struct pt_regs".
++	 */
+ 	unsigned long r15;
+ 	unsigned long r14;
+ 	unsigned long r13;
+ 	unsigned long r12;
+ 	unsigned long bp;
+ 	unsigned long bx;
+-/* These regs are callee-clobbered. Always saved on kernel entry. */
 +
-+#ifndef ASM_X86_FRED_H
-+#define ASM_X86_FRED_H
++	/* These regs are callee-clobbered. Always saved on kernel entry. */
+ 	unsigned long r11;
+ 	unsigned long r10;
+ 	unsigned long r9;
+@@ -77,18 +79,34 @@ struct pt_regs {
+ 	unsigned long dx;
+ 	unsigned long si;
+ 	unsigned long di;
+-/*
+- * On syscall entry, this is syscall#. On CPU exception, this is error code.
+- * On hw interrupt, it's IRQ number:
+- */
 +
-+#include <linux/const.h>
++	/*
++	 * orig_ax is used on entry for:
++	 * - the syscall number (syscall, sysenter, int80)
++	 * - error_code stored by the CPU on traps and exceptions
++	 * - the interrupt number for device interrupts
++	 */
+ 	unsigned long orig_ax;
+-/* Return frame for iretq */
 +
-+#include <asm/asm.h>
++	/* The IRETQ return frame starts here */
+ 	unsigned long ip;
+-	unsigned long cs;
 +
-+/*
-+ * FRED event return instruction opcodes for ERET{S,U}; supported in
-+ * binutils >= 2.41.
-+ */
-+#define ERETS			_ASM_BYTES(0xf2,0x0f,0x01,0xca)
-+#define ERETU			_ASM_BYTES(0xf3,0x0f,0x01,0xca)
++	union {
++		u64	csx;	// The full 64-bit data slot containing CS
++		u16	cs;	// CS selector
++	};
 +
-+/*
-+ * RSP is aligned to a 64-byte boundary before used to push a new stack frame
-+ */
-+#define FRED_STACK_FRAME_RSP_MASK	_AT(unsigned long, (~0x3f))
+ 	unsigned long flags;
+ 	unsigned long sp;
+-	unsigned long ss;
+-/* top of stack page */
 +
-+/*
-+ * Used for the return address for call emulation during code patching,
-+ * and measured in 64-byte cache lines.
-+ */
-+#define FRED_CONFIG_REDZONE_AMOUNT	1
-+#define FRED_CONFIG_REDZONE		(_AT(unsigned long, FRED_CONFIG_REDZONE_AMOUNT) << 6)
-+#define FRED_CONFIG_INT_STKLVL(l)	(_AT(unsigned long, l) << 9)
-+#define FRED_CONFIG_ENTRYPOINT(p)	_AT(unsigned long, (p))
++	union {
++		u64	ssx;	// The full 64-bit data slot containing SS
++		u16	ss;	// SS selector
++	};
 +
-+#ifndef __ASSEMBLY__
-+
-+#ifdef CONFIG_X86_FRED
-+#include <linux/kernel.h>
-+
-+#include <asm/ptrace.h>
-+
-+struct fred_info {
-+	/* Event data: CR2, DR6, ... */
-+	unsigned long edata;
-+	unsigned long resv;
-+};
-+
-+/* Full format of the FRED stack frame */
-+struct fred_frame {
-+	struct pt_regs   regs;
-+	struct fred_info info;
-+};
-+
-+static __always_inline struct fred_info *fred_info(struct pt_regs *regs)
-+{
-+	return &container_of(regs, struct fred_frame, regs)->info;
-+}
-+
-+static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
-+{
-+	return fred_info(regs)->edata;
-+}
-+
-+#else /* CONFIG_X86_FRED */
-+static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
-+#endif /* CONFIG_X86_FRED */
-+#endif /* !__ASSEMBLY__ */
-+
-+#endif /* ASM_X86_FRED_H */
++	/*
++	 * Top of stack on IDT systems.
++	 */
+ };
+ 
+ #endif /* !__i386__ */
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 33b268747bb7..0f78b58021bb 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -117,7 +117,7 @@ void __show_regs(struct pt_regs *regs, enum show_regs_mode mode,
+ 
+ 	printk("%sFS:  %016lx(%04x) GS:%016lx(%04x) knlGS:%016lx\n",
+ 	       log_lvl, fs, fsindex, gs, gsindex, shadowgs);
+-	printk("%sCS:  %04lx DS: %04x ES: %04x CR0: %016lx\n",
++	printk("%sCS:  %04x DS: %04x ES: %04x CR0: %016lx\n",
+ 		log_lvl, regs->cs, ds, es, cr0);
+ 	printk("%sCR2: %016lx CR3: %016lx CR4: %016lx\n",
+ 		log_lvl, cr2, cr3, cr4);
 -- 
 2.34.1
 
