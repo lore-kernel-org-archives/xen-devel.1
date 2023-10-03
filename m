@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE5EBE75431
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 591D1E7542C
 	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611891.951545 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.611899.951614 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIr-0004mR-Pk; Tue, 03 Oct 2023 06:54:45 +0000
+	id 1qnZIy-0006WF-1i; Tue, 03 Oct 2023 06:54:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611891.951545; Tue, 03 Oct 2023 06:54:45 +0000
+Received: by outflank-mailman (output) from mailman id 611899.951614; Tue, 03 Oct 2023 06:54:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIr-0004lo-KW; Tue, 03 Oct 2023 06:54:45 +0000
-Received: by outflank-mailman (input) for mailman id 611891;
- Tue, 03 Oct 2023 06:54:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qnZIx-0006UD-Lj; Tue, 03 Oct 2023 06:54:51 +0000
+Received: by outflank-mailman (input) for mailman id 611899;
+ Tue, 03 Oct 2023 06:54:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZIq-00040o-DM
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:44 +0000
+ id 1qnZIu-00047B-Qi
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:48 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bb2d8c7e-61b9-11ee-98d2-6d05b1d4d9a1;
- Tue, 03 Oct 2023 08:54:43 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bcddf705-61b9-11ee-9b0d-b553b5be7939;
+ Tue, 03 Oct 2023 08:54:46 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:37 -0700
+ 02 Oct 2023 23:54:40 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:36 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:39 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb2d8c7e-61b9-11ee-98d2-6d05b1d4d9a1
+X-Inumbo-ID: bcddf705-61b9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316083; x=1727852083;
+  t=1696316086; x=1727852086;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=peVjyb58aU5czBXdVg55hBuRdCD6fg7woOPGVcAZ2Yw=;
-  b=NkX+WIvIe6VCcfNwqDrMew4au/xF95gJ9q7J48JZJ0nMR3Ov5l7DQYbu
-   nwxfA56Xxt4EndLD51Gd17IENzYKY57bn8+Jhq5QoKzV2lj0UnjOHbTKw
-   3jGq0uO6H455+tI+hSYa9qpXqSx6JuHaZIckJ3jRX2zdf36VGGsu3V6mJ
-   faGxymO5AizRe1X9km3dTYHXy6fsaujW8uC+0GI5CNEvPlgfS9ntUcQp/
-   B2Y/hWLdhyRR3i6lN4BVF27dUUjeY8XtalcjNPsWJzv3UGnfL5xlvoqYr
-   mMYHdbxUrkoU7ox/HUmFc1oayhWPA7VI711aUCncXvm5Im8rW7vIBOjeG
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367857955"
+  bh=aQdiRWsnt6AKxUkiRSvWlc5kg1W+wRYx8vYlgG3sGOg=;
+  b=jQMHxIr1oVjfOZtw/8jMxocgpY2cAuYuyM/rAeFx3lUNmwBJXTexx4we
+   aFWhbRCxnbLXKj9IpWB8Rt/jeY3cEwMcJCEaReVHG0PM6qThJ7dTR7Eip
+   8uPf0E0dvvPQasuEMww97/okLMnLnuBitQddurSzwCeD/936bcgwhZhoC
+   QMCdRWD7YaBQ1MwlZ28m8S3ksY0KYDKGX7IpjmwDdqrknVP2VGyqQ9ixN
+   D2CTAFHgrwTbvVhMBW/3KqaRKlGCM7Vvmh3jeVGATlljOQdpzQlrb+pxh
+   r3FEwotvAMX71fTkpFs5Tiz3kQ88GD6LdbRkx+xgAdykiWJ1Vd7PmD/fC
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858016"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367857955"
+   d="scan'208";a="367858016"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900910"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900925"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900910"
+   d="scan'208";a="1081900925"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,92 +87,52 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 05/37] x86/trapnr: Add event type macros to <asm/trapnr.h>
-Date: Mon,  2 Oct 2023 23:24:26 -0700
-Message-Id: <20231003062458.23552-6-xin3.li@intel.com>
+Subject: [PATCH v12 10/37] x86/fred: Disable FRED by default in its early stage
+Date: Mon,  2 Oct 2023 23:24:31 -0700
+Message-Id: <20231003062458.23552-11-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Intel VT-x classifies events into eight different types, which is
-inherited by FRED for event identification. As such, event type
-becomes a common x86 concept, and should be defined in a common x86
-header.
+To enable FRED, a new kernel command line option "fred" needs to be added.
 
-Add event type macros to <asm/trapnr.h>, and use it in <asm/vmx.h>.
-
-Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ Documentation/admin-guide/kernel-parameters.txt | 3 +++
+ arch/x86/kernel/cpu/common.c                    | 3 +++
+ 2 files changed, 6 insertions(+)
 
-Changes since v10:
-* A few comment fixes and improvements (Andrew Cooper).
----
- arch/x86/include/asm/trapnr.h | 12 ++++++++++++
- arch/x86/include/asm/vmx.h    | 17 +++++++++--------
- 2 files changed, 21 insertions(+), 8 deletions(-)
-
-diff --git a/arch/x86/include/asm/trapnr.h b/arch/x86/include/asm/trapnr.h
-index f5d2325aa0b7..8d1154cdf787 100644
---- a/arch/x86/include/asm/trapnr.h
-+++ b/arch/x86/include/asm/trapnr.h
-@@ -2,6 +2,18 @@
- #ifndef _ASM_X86_TRAPNR_H
- #define _ASM_X86_TRAPNR_H
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 45e34be4ed56..ee939ea00458 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -1525,6 +1525,9 @@
+ 			Warning: use of this parameter will taint the kernel
+ 			and may cause unknown problems.
  
-+/*
-+ * Event type codes used by FRED, Intel VT-x and AMD SVM
-+ */
-+#define EVENT_TYPE_EXTINT	0	// External interrupt
-+#define EVENT_TYPE_RESERVED	1
-+#define EVENT_TYPE_NMI		2	// NMI
-+#define EVENT_TYPE_HWEXC	3	// Hardware originated traps, exceptions
-+#define EVENT_TYPE_SWINT	4	// INT n
-+#define EVENT_TYPE_PRIV_SWEXC	5	// INT1
-+#define EVENT_TYPE_SWEXC	6	// INTO, INT3
-+#define EVENT_TYPE_OTHER	7	// FRED SYSCALL/SYSENTER, VT-x MTF
++	fred		[X86-64]
++			Enable flexible return and event delivery
 +
- /* Interrupts/Exceptions */
+ 	ftrace=[tracer]
+ 			[FTRACE] will set and start the specified tracer
+ 			as early as possible in order to facilitate early
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index 7131074433f9..736d38abfc5a 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -1502,6 +1502,9 @@ static void __init cpu_parse_early_param(void)
+ 	char *argptr = arg, *opt;
+ 	int arglen, taint = 0;
  
- #define X86_TRAP_DE		 0	/* Divide-by-zero */
-diff --git a/arch/x86/include/asm/vmx.h b/arch/x86/include/asm/vmx.h
-index 0e73616b82f3..4dba17363008 100644
---- a/arch/x86/include/asm/vmx.h
-+++ b/arch/x86/include/asm/vmx.h
-@@ -17,6 +17,7 @@
- #include <linux/types.h>
- 
- #include <uapi/asm/vmx.h>
-+#include <asm/trapnr.h>
- #include <asm/vmxfeatures.h>
- 
- #define VMCS_CONTROL_BIT(x)	BIT(VMX_FEATURE_##x & 0x1f)
-@@ -374,14 +375,14 @@ enum vmcs_field {
- #define VECTORING_INFO_DELIVER_CODE_MASK    	INTR_INFO_DELIVER_CODE_MASK
- #define VECTORING_INFO_VALID_MASK       	INTR_INFO_VALID_MASK
- 
--#define INTR_TYPE_EXT_INTR              (0 << 8) /* external interrupt */
--#define INTR_TYPE_RESERVED              (1 << 8) /* reserved */
--#define INTR_TYPE_NMI_INTR		(2 << 8) /* NMI */
--#define INTR_TYPE_HARD_EXCEPTION	(3 << 8) /* processor exception */
--#define INTR_TYPE_SOFT_INTR             (4 << 8) /* software interrupt */
--#define INTR_TYPE_PRIV_SW_EXCEPTION	(5 << 8) /* ICE breakpoint - undocumented */
--#define INTR_TYPE_SOFT_EXCEPTION	(6 << 8) /* software exception */
--#define INTR_TYPE_OTHER_EVENT           (7 << 8) /* other event */
-+#define INTR_TYPE_EXT_INTR		(EVENT_TYPE_EXTINT << 8)	/* external interrupt */
-+#define INTR_TYPE_RESERVED		(EVENT_TYPE_RESERVED << 8)	/* reserved */
-+#define INTR_TYPE_NMI_INTR		(EVENT_TYPE_NMI << 8)		/* NMI */
-+#define INTR_TYPE_HARD_EXCEPTION	(EVENT_TYPE_HWEXC << 8)		/* processor exception */
-+#define INTR_TYPE_SOFT_INTR		(EVENT_TYPE_SWINT << 8)		/* software interrupt */
-+#define INTR_TYPE_PRIV_SW_EXCEPTION	(EVENT_TYPE_PRIV_SWEXC << 8)	/* ICE breakpoint */
-+#define INTR_TYPE_SOFT_EXCEPTION	(EVENT_TYPE_SWEXC << 8)		/* software exception */
-+#define INTR_TYPE_OTHER_EVENT		(EVENT_TYPE_OTHER << 8)		/* other event */
- 
- /* GUEST_INTERRUPTIBILITY_INFO flags. */
- #define GUEST_INTR_STATE_STI		0x00000001
++	if (!cmdline_find_option_bool(boot_command_line, "fred"))
++		setup_clear_cpu_cap(X86_FEATURE_FRED);
++
+ #ifdef CONFIG_X86_32
+ 	if (cmdline_find_option_bool(boot_command_line, "no387"))
+ #ifdef CONFIG_MATH_EMULATION
 -- 
 2.34.1
 
