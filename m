@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A144CE7542D
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:06:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611976.951820 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB516E7542F
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 07:06:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611982.951835 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZU8-0006PQ-6c; Tue, 03 Oct 2023 07:06:24 +0000
+	id 1qnZUG-00074U-Ut; Tue, 03 Oct 2023 07:06:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611976.951820; Tue, 03 Oct 2023 07:06:24 +0000
+Received: by outflank-mailman (output) from mailman id 611982.951835; Tue, 03 Oct 2023 07:06:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZU8-0006PJ-3q; Tue, 03 Oct 2023 07:06:24 +0000
-Received: by outflank-mailman (input) for mailman id 611976;
- Tue, 03 Oct 2023 07:06:22 +0000
+	id 1qnZUG-00073y-PJ; Tue, 03 Oct 2023 07:06:32 +0000
+Received: by outflank-mailman (input) for mailman id 611982;
+ Tue, 03 Oct 2023 07:06:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZJ3-00040o-Mx
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:57 +0000
+ id 1qnZJ1-00040o-Ml
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:55 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c2ece9aa-61b9-11ee-98d2-6d05b1d4d9a1;
- Tue, 03 Oct 2023 08:54:56 +0200 (CEST)
+ id c16f407c-61b9-11ee-98d2-6d05b1d4d9a1;
+ Tue, 03 Oct 2023 08:54:54 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:48 -0700
+ 02 Oct 2023 23:54:46 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:48 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:46 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2ece9aa-61b9-11ee-98d2-6d05b1d4d9a1
+X-Inumbo-ID: c16f407c-61b9-11ee-98d2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316096; x=1727852096;
+  t=1696316094; x=1727852094;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=bNtEfhEic2/4eI6U3F6LZD3GtdQN7TZ08d/4AOd+L9I=;
-  b=dr3UUKE1SbYVPTA1Yv2xUwDgwbdQCx8JrILEbopf1zq5+dnaOeCqbNK1
-   K6mtrBNcFIJZLcvw2vKu1Y34ru/Oy3F0vGivqntDtWJ00kY6ESFHQN/rv
-   TYHxC7enjahgw9MSYR1d5IJfOR95Eh0sHPpTB+SC3vrahdr5n5pGmScOL
-   MFkqiRbW51yYJbDevWYwSNT84i6WnLhX3lRRdIaG/R7Rt/oFFqD39lteS
-   hHayjAJ5CsyvfYJKs94hHXrG5jHuCTIqJz0lMxnEqb+wHHxRvzk6bIS/5
-   4q+PLOLIYRJJUa/gXdkjKs+7LdRbaMuoVnfKCrnIQLSkjE1vi7mq2xWUu
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858242"
+  bh=vZ6vels66+tC8YRpSCj8dEsAAUPLXovJkO1WpIp9s0Y=;
+  b=aRR3S1LIt2CdLqsFzvgishhnCPpIpbMVF6iZvGeaniPUeJ5JXtmELUg3
+   V0Fo0AkMMj851vAZ2WGpimqdn68EU8++sknXnq+qc0VqDV+zusIHwcvIu
+   Zw8rgZtzz+QWgDiKk0Ujq6Kzv8XyO+GeXqt8OlUQ/62dfzz49ukJVuv/E
+   D6oxhUylh5BVCLRgACAzX3Nj7xvMq61u9rmgX0M/MTfbhfP5dy+KmeOdV
+   ZAEahm7BecIFh1rFUP+B8js6TpOABvYCXp9YHA/hLHY2pyqr2AonYeKW6
+   aODlvCsYP38yl1Ky0n/IEcfZUo3gWJ/cDKSlM2vDqOYBZ7wW3ymc2Vt+0
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858183"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858242"
+   d="scan'208";a="367858183"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900986"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900971"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900986"
+   d="scan'208";a="1081900971"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,78 +87,53 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 27/37] x86/fred: Add a machine check entry stub for FRED
-Date: Mon,  2 Oct 2023 23:24:48 -0700
-Message-Id: <20231003062458.23552-28-xin3.li@intel.com>
+Subject: [PATCH v12 23/37] x86/fred: Make exc_page_fault() work for FRED
+Date: Mon,  2 Oct 2023 23:24:44 -0700
+Message-Id: <20231003062458.23552-24-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Like #DB, when occurred on different ring level, i.e., from user or kernel
-context, #MCE needs to be handled on different stack: User #MCE on current
-task stack, while kernel #MCE on a dedicated stack.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-This is exactly how FRED event delivery invokes an exception handler: ring
-3 event on level 0 stack, i.e., current task stack; ring 0 event on the
-#MCE dedicated stack specified in the IA32_FRED_STKLVLS MSR. So unlike IDT,
-the FRED machine check entry stub doesn't do stack switch.
+On a FRED system, the faulting address (CR2) is passed on the stack,
+to avoid the problem of transient state. Thus we get the page fault
+address from the stack instead of CR2.
 
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/mm/fault.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Changes since v5:
-* Disallow #DB inside #MCE for robustness sake (Peter Zijlstra).
----
- arch/x86/kernel/cpu/mce/core.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
-
-diff --git a/arch/x86/kernel/cpu/mce/core.c b/arch/x86/kernel/cpu/mce/core.c
-index 6f35f724cc14..da0a4a102afe 100644
---- a/arch/x86/kernel/cpu/mce/core.c
-+++ b/arch/x86/kernel/cpu/mce/core.c
-@@ -52,6 +52,7 @@
- #include <asm/mce.h>
- #include <asm/msr.h>
- #include <asm/reboot.h>
+diff --git a/arch/x86/mm/fault.c b/arch/x86/mm/fault.c
+index ab778eac1952..7675bc067153 100644
+--- a/arch/x86/mm/fault.c
++++ b/arch/x86/mm/fault.c
+@@ -34,6 +34,7 @@
+ #include <asm/kvm_para.h>		/* kvm_handle_async_pf		*/
+ #include <asm/vdso.h>			/* fixup_vdso_exception()	*/
+ #include <asm/irq_stack.h>
 +#include <asm/fred.h>
  
- #include "internal.h"
+ #define CREATE_TRACE_POINTS
+ #include <asm/trace/exceptions.h>
+@@ -1516,8 +1517,10 @@ handle_page_fault(struct pt_regs *regs, unsigned long error_code,
  
-@@ -2144,6 +2145,31 @@ DEFINE_IDTENTRY_MCE_USER(exc_machine_check)
- 	exc_machine_check_user(regs);
- 	local_db_restore(dr7);
- }
+ DEFINE_IDTENTRY_RAW_ERRORCODE(exc_page_fault)
+ {
+-	unsigned long address = read_cr2();
+ 	irqentry_state_t state;
++	unsigned long address;
 +
-+#ifdef CONFIG_X86_FRED
-+/*
-+ * When occurred on different ring level, i.e., from user or kernel
-+ * context, #MCE needs to be handled on different stack: User #MCE
-+ * on current task stack, while kernel #MCE on a dedicated stack.
-+ *
-+ * This is exactly how FRED event delivery invokes an exception
-+ * handler: ring 3 event on level 0 stack, i.e., current task stack;
-+ * ring 0 event on the #MCE dedicated stack specified in the
-+ * IA32_FRED_STKLVLS MSR. So unlike IDT, the FRED machine check entry
-+ * stub doesn't do stack switch.
-+ */
-+DEFINE_FREDENTRY_MCE(exc_machine_check)
-+{
-+	unsigned long dr7;
-+
-+	dr7 = local_db_save();
-+	if (user_mode(regs))
-+		exc_machine_check_user(regs);
-+	else
-+		exc_machine_check_kernel(regs);
-+	local_db_restore(dr7);
-+}
-+#endif
- #else
- /* 32bit unified entry point */
- DEFINE_IDTENTRY_RAW(exc_machine_check)
++	address = cpu_feature_enabled(X86_FEATURE_FRED) ? fred_event_data(regs) : read_cr2();
+ 
+ 	prefetchw(&current->mm->mmap_lock);
+ 
 -- 
 2.34.1
 
