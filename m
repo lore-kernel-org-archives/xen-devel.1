@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B02E7542D
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611901.951644 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E8C3E75428
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611898.951608 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZJ2-0007Y6-C2; Tue, 03 Oct 2023 06:54:56 +0000
+	id 1qnZIx-0006Kg-HW; Tue, 03 Oct 2023 06:54:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611901.951644; Tue, 03 Oct 2023 06:54:56 +0000
+Received: by outflank-mailman (output) from mailman id 611898.951608; Tue, 03 Oct 2023 06:54:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZJ2-0007UP-11; Tue, 03 Oct 2023 06:54:56 +0000
-Received: by outflank-mailman (input) for mailman id 611901;
- Tue, 03 Oct 2023 06:54:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qnZIw-0006Ia-VQ; Tue, 03 Oct 2023 06:54:50 +0000
+Received: by outflank-mailman (input) for mailman id 611898;
+ Tue, 03 Oct 2023 06:54:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZIw-00040o-FI
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:50 +0000
+ id 1qnZIu-00047B-7i
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:48 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bec28676-61b9-11ee-98d2-6d05b1d4d9a1;
- Tue, 03 Oct 2023 08:54:49 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bce155d6-61b9-11ee-9b0d-b553b5be7939;
+ Tue, 03 Oct 2023 08:54:46 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:43 -0700
+ 02 Oct 2023 23:54:40 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:42 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:40 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bec28676-61b9-11ee-98d2-6d05b1d4d9a1
+X-Inumbo-ID: bce155d6-61b9-11ee-9b0d-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316089; x=1727852089;
+  t=1696316086; x=1727852086;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=V+OPmxsacyHhQwU2DRsayMn8eLFfcoR2lqYdblOZ50U=;
-  b=XIzcJhQ+T0tLJPMlmnGh2I06x8zitwPbQv/EVe6ztW8TTXzTt7GQF2Vk
-   ajUiWKw6w6WGH+XYwKYDENBrw2Jan89xR2vGvo8wt26SzHJm22ztZFhlJ
-   b9YjDYeyeyR7bp3OTvxLJCjKMacReMeKgOnZMEQ9DYFg/im1ODWS1d7oG
-   V9vLLCP3uVZ8XJPRDoEzO7hI5B/fPQVpvk4B9zkXZ5YfvE9AIMwNdHQwf
-   p5DD4leqxJ5TzYMJiDMAf1nVnF++DhMTk16iKDPNoRIcLAUfUhRRtMYhg
-   JxRFgERfmv9z+PBThV6qrQZMQ/AA81i0uk1tPrgWAJubcoVrbVapR1rbW
+  bh=i5VPM7WJy8QX3AfDJPn+y86GzsjxiQoeNBcvUeRwUoQ=;
+  b=aCWiTG6n8Q1hGGBVkpSEGOPWHYd1a56i3jypHiVmVuWkpQ1RQCGfA8Fz
+   Irq8cr1Kj8awf/6vOQLhEjtTefvfejzhU70s++DmnaYmRERJvFTlZUE8W
+   7I18SFInUB3DZTC/9X2u6FVTdnDJf+nIFlMDDAxYkUStfEgbsDGil32Eq
+   UvWpySc9mUE7rN0FFaFhSf3x3vSTzWTsBikRCEJL6AdRdh+GcRmQKtGRr
+   0AguiK5uOToJkdNg4F/BGKoIwX7ZMmkDon3KdR7cYqmZHXkV/XLTFN7c3
+   t9OcEEXiQuv69Z48Tw+qcL2pk9XCPXFlz6TIQ61dEj+6dhFZMYXrdoquW
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858088"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858028"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367858088"
+   d="scan'208";a="367858028"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900943"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900928"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900943"
+   d="scan'208";a="1081900928"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,157 +87,58 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 16/37] x86/ptrace: Add FRED additional information to the pt_regs structure
-Date: Mon,  2 Oct 2023 23:24:37 -0700
-Message-Id: <20231003062458.23552-17-xin3.li@intel.com>
+Subject: [PATCH v12 11/37] x86/opcode: Add ERET[US] instructions to the x86 opcode map
+Date: Mon,  2 Oct 2023 23:24:32 -0700
+Message-Id: <20231003062458.23552-12-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-FRED defines additional information in the upper 48 bits of cs/ss
-fields. Therefore add the information definitions into the pt_regs
-structure.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Specially introduce a new structure fred_ss to denote the FRED flags
-above SS selector, which avoids FRED_SSX_ macros and makes the code
-simpler and easier to read.
+ERETU returns from an event handler while making a transition to ring 3,
+and ERETS returns from an event handler while staying in ring 0.
+
+Add instruction opcodes used by ERET[US] to the x86 opcode map; opcode
+numbers are per FRED spec v5.0.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
+Reviewed-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 ---
+ arch/x86/lib/x86-opcode-map.txt       | 2 +-
+ tools/arch/x86/lib/x86-opcode-map.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Changes since v11:
-* Add a new structure fred_cs to denote the FRED flags above CS
-  selector as what is done for SS (H. Peter Anvin).
-
-Changes since v9:
-* Introduce a new structure fred_ss to denote the FRED flags above SS
-  selector, which avoids FRED_SSX_ macros and makes the code simpler
-  and easier to read (Thomas Gleixner).
-* Use type u64 to define FRED bit fields instead of type unsigned int
-  (Thomas Gleixner).
-
-Changes since v8:
-* Reflect stack frame definition changes from FRED spec 3.0 to 5.0.
-* Use __packed instead of __attribute__((__packed__)) (Borislav Petkov).
-* Put all comments above the members, like the rest of the file does
-  (Borislav Petkov).
-
-Changes since v3:
-* Rename csl/ssl of the pt_regs structure to csx/ssx (x for extended)
-  (Andrew Cooper).
----
- arch/x86/include/asm/ptrace.h | 70 ++++++++++++++++++++++++++++++++---
- 1 file changed, 65 insertions(+), 5 deletions(-)
-
-diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
-index f08ea073edd6..5a83fbd9bc0b 100644
---- a/arch/x86/include/asm/ptrace.h
-+++ b/arch/x86/include/asm/ptrace.h
-@@ -56,6 +56,50 @@ struct pt_regs {
+diff --git a/arch/x86/lib/x86-opcode-map.txt b/arch/x86/lib/x86-opcode-map.txt
+index 1efe1d9bf5ce..12af572201a2 100644
+--- a/arch/x86/lib/x86-opcode-map.txt
++++ b/arch/x86/lib/x86-opcode-map.txt
+@@ -1052,7 +1052,7 @@ EndTable
  
- #else /* __i386__ */
+ GrpTable: Grp7
+ 0: SGDT Ms | VMCALL (001),(11B) | VMLAUNCH (010),(11B) | VMRESUME (011),(11B) | VMXOFF (100),(11B) | PCONFIG (101),(11B) | ENCLV (000),(11B) | WRMSRNS (110),(11B)
+-1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B)
++1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B) | ERETU (F3),(010),(11B) | ERETS (F2),(010),(11B)
+ 2: LGDT Ms | XGETBV (000),(11B) | XSETBV (001),(11B) | VMFUNC (100),(11B) | XEND (101)(11B) | XTEST (110)(11B) | ENCLU (111),(11B)
+ 3: LIDT Ms
+ 4: SMSW Mw/Rv
+diff --git a/tools/arch/x86/lib/x86-opcode-map.txt b/tools/arch/x86/lib/x86-opcode-map.txt
+index 1efe1d9bf5ce..12af572201a2 100644
+--- a/tools/arch/x86/lib/x86-opcode-map.txt
++++ b/tools/arch/x86/lib/x86-opcode-map.txt
+@@ -1052,7 +1052,7 @@ EndTable
  
-+struct fred_cs {
-+		/* CS selector */
-+	u64	cs	: 16,
-+		/* Stack level at event time */
-+		sl	:  2,
-+		/* IBT in WAIT_FOR_ENDBRANCH state */
-+		wfe	:  1,
-+			: 45;
-+};
-+
-+struct fred_ss {
-+		/* SS selector */
-+	u64	ss	: 16,
-+		/* STI state */
-+		sti	:  1,
-+		/* Set if syscall, sysenter or INT n */
-+		swevent	:  1,
-+		/* Event is NMI type */
-+		nmi	:  1,
-+			: 13,
-+		/* Event vector */
-+		vector	:  8,
-+			:  8,
-+		/* Event type */
-+		type	:  4,
-+			:  4,
-+		/* Event was incident to enclave execution */
-+		enclave	:  1,
-+		/* CPU was in long mode */
-+		lm	:  1,
-+		/*
-+		 * Nested exception during FRED delivery, not set
-+		 * for #DF.
-+		 */
-+		nested	:  1,
-+			:  1,
-+		/*
-+		 * The length of the instruction causing the event.
-+		 * Only set for INTO, INT1, INT3, INT n, SYSCALL
-+		 * and SYSENTER.  0 otherwise.
-+		 */
-+		insnlen	:  4;
-+};
-+
- struct pt_regs {
- 	/*
- 	 * C ABI says these regs are callee-preserved. They aren't saved on
-@@ -85,6 +129,12 @@ struct pt_regs {
- 	 * - the syscall number (syscall, sysenter, int80)
- 	 * - error_code stored by the CPU on traps and exceptions
- 	 * - the interrupt number for device interrupts
-+	 *
-+	 * A FRED stack frame starts here:
-+	 *   1) It _always_ includes an error code;
-+	 *
-+	 *   2) The return frame for ERET[US] starts here, but
-+	 *      the content of orig_ax is ignored.
- 	 */
- 	unsigned long orig_ax;
- 
-@@ -92,20 +142,30 @@ struct pt_regs {
- 	unsigned long ip;
- 
- 	union {
--		u64	csx;	// The full 64-bit data slot containing CS
--		u16	cs;	// CS selector
-+		/* CS selector */
-+		u16		cs;
-+		/* The extended 64-bit data slot containing CS */
-+		u64		csx;
-+		/* The FRED CS extension */
-+		struct fred_cs	fred_cs;
- 	};
- 
- 	unsigned long flags;
- 	unsigned long sp;
- 
- 	union {
--		u64	ssx;	// The full 64-bit data slot containing SS
--		u16	ss;	// SS selector
-+		/* SS selector */
-+		u16		ss;
-+		/* The extended 64-bit data slot containing SS */
-+		u64		ssx;
-+		/* The FRED SS extension */
-+		struct fred_ss	fred_ss;
- 	};
- 
- 	/*
--	 * Top of stack on IDT systems.
-+	 * Top of stack on IDT systems, while FRED systems have extra fields
-+	 * defined above for storing exception related information, e.g. CR2 or
-+	 * DR6.
- 	 */
- };
- 
+ GrpTable: Grp7
+ 0: SGDT Ms | VMCALL (001),(11B) | VMLAUNCH (010),(11B) | VMRESUME (011),(11B) | VMXOFF (100),(11B) | PCONFIG (101),(11B) | ENCLV (000),(11B) | WRMSRNS (110),(11B)
+-1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B)
++1: SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B) | ERETU (F3),(010),(11B) | ERETS (F2),(010),(11B)
+ 2: LGDT Ms | XGETBV (000),(11B) | XSETBV (001),(11B) | VMFUNC (100),(11B) | XEND (101)(11B) | XTEST (110)(11B) | ENCLU (111),(11B)
+ 3: LIDT Ms
+ 4: SMSW Mw/Rv
 -- 
 2.34.1
 
