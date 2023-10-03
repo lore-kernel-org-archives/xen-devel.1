@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C743CE7543F
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611894.951573 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B02E7542D
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611901.951644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIu-0005Ua-2y; Tue, 03 Oct 2023 06:54:48 +0000
+	id 1qnZJ2-0007Y6-C2; Tue, 03 Oct 2023 06:54:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611894.951573; Tue, 03 Oct 2023 06:54:48 +0000
+Received: by outflank-mailman (output) from mailman id 611901.951644; Tue, 03 Oct 2023 06:54:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIt-0005SH-SW; Tue, 03 Oct 2023 06:54:47 +0000
-Received: by outflank-mailman (input) for mailman id 611894;
- Tue, 03 Oct 2023 06:54:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qnZJ2-0007UP-11; Tue, 03 Oct 2023 06:54:56 +0000
+Received: by outflank-mailman (input) for mailman id 611901;
+ Tue, 03 Oct 2023 06:54:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZIs-00047B-11
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:46 +0000
+ id 1qnZIw-00040o-FI
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:50 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bb6a3d28-61b9-11ee-9b0d-b553b5be7939;
- Tue, 03 Oct 2023 08:54:43 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bec28676-61b9-11ee-98d2-6d05b1d4d9a1;
+ Tue, 03 Oct 2023 08:54:49 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:38 -0700
+ 02 Oct 2023 23:54:43 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:37 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:42 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb6a3d28-61b9-11ee-9b0d-b553b5be7939
+X-Inumbo-ID: bec28676-61b9-11ee-98d2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316084; x=1727852084;
+  t=1696316089; x=1727852089;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=bNeoh4I4zABONAQfik1sKjrzvYgDVMEQH0uLYFn+NlU=;
-  b=mVGLmP0ozzRUlwtus3tkReD8TWL3Q9JKph5Ep80nnQStbbgyHOyshdbB
-   0C9m3xy0bUKOjiVnvXkjSnnf6wlcof/9WcI2sFoEx074PVd5SqhNdiqiJ
-   xGSo+yvhVehtxhES2wLLu6Cti56FZDm05O3ZH1Vr6wsLe5W0VvkbM2tQJ
-   lxtq585cE/peYByJPUWeZklpup2XZqzBMq+g63LKdr9nrEMaSrhmI1tdy
-   3e+7LKfP1vu4V2VF4mypWRqfeDicjtrKHa/7i3sERLdLA8kq1laDNJuQ1
-   hitn7hl6fOkbG/3f6YKP8m968RT2JtJBk0t171/3k7T6kPhIcL1ZLg2yI
+  bh=V+OPmxsacyHhQwU2DRsayMn8eLFfcoR2lqYdblOZ50U=;
+  b=XIzcJhQ+T0tLJPMlmnGh2I06x8zitwPbQv/EVe6ztW8TTXzTt7GQF2Vk
+   ajUiWKw6w6WGH+XYwKYDENBrw2Jan89xR2vGvo8wt26SzHJm22ztZFhlJ
+   b9YjDYeyeyR7bp3OTvxLJCjKMacReMeKgOnZMEQ9DYFg/im1ODWS1d7oG
+   V9vLLCP3uVZ8XJPRDoEzO7hI5B/fPQVpvk4B9zkXZ5YfvE9AIMwNdHQwf
+   p5DD4leqxJ5TzYMJiDMAf1nVnF++DhMTk16iKDPNoRIcLAUfUhRRtMYhg
+   JxRFgERfmv9z+PBThV6qrQZMQ/AA81i0uk1tPrgWAJubcoVrbVapR1rbW
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367857967"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367858088"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367857967"
+   d="scan'208";a="367858088"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900913"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900943"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900913"
+   d="scan'208";a="1081900943"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,140 +87,157 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 06/37] Documentation/x86/64: Add a documentation for FRED
-Date: Mon,  2 Oct 2023 23:24:27 -0700
-Message-Id: <20231003062458.23552-7-xin3.li@intel.com>
+Subject: [PATCH v12 16/37] x86/ptrace: Add FRED additional information to the pt_regs structure
+Date: Mon,  2 Oct 2023 23:24:37 -0700
+Message-Id: <20231003062458.23552-17-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Briefly introduce FRED, and its advantages compared to IDT.
+FRED defines additional information in the upper 48 bits of cs/ss
+fields. Therefore add the information definitions into the pt_regs
+structure.
 
+Specially introduce a new structure fred_ss to denote the FRED flags
+above SS selector, which avoids FRED_SSX_ macros and makes the code
+simpler and easier to read.
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Tested-by: Shan Kang <shan.kang@intel.com>
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Changes since v10:
-* Reword a sentence to improve readability (Nikolay Borisov).
----
- Documentation/arch/x86/x86_64/fred.rst  | 96 +++++++++++++++++++++++++
- Documentation/arch/x86/x86_64/index.rst |  1 +
- 2 files changed, 97 insertions(+)
- create mode 100644 Documentation/arch/x86/x86_64/fred.rst
+Changes since v11:
+* Add a new structure fred_cs to denote the FRED flags above CS
+  selector as what is done for SS (H. Peter Anvin).
 
-diff --git a/Documentation/arch/x86/x86_64/fred.rst b/Documentation/arch/x86/x86_64/fred.rst
-new file mode 100644
-index 000000000000..9f57e7b91f7e
---- /dev/null
-+++ b/Documentation/arch/x86/x86_64/fred.rst
-@@ -0,0 +1,96 @@
-+.. SPDX-License-Identifier: GPL-2.0
+Changes since v9:
+* Introduce a new structure fred_ss to denote the FRED flags above SS
+  selector, which avoids FRED_SSX_ macros and makes the code simpler
+  and easier to read (Thomas Gleixner).
+* Use type u64 to define FRED bit fields instead of type unsigned int
+  (Thomas Gleixner).
+
+Changes since v8:
+* Reflect stack frame definition changes from FRED spec 3.0 to 5.0.
+* Use __packed instead of __attribute__((__packed__)) (Borislav Petkov).
+* Put all comments above the members, like the rest of the file does
+  (Borislav Petkov).
+
+Changes since v3:
+* Rename csl/ssl of the pt_regs structure to csx/ssx (x for extended)
+  (Andrew Cooper).
+---
+ arch/x86/include/asm/ptrace.h | 70 ++++++++++++++++++++++++++++++++---
+ 1 file changed, 65 insertions(+), 5 deletions(-)
+
+diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
+index f08ea073edd6..5a83fbd9bc0b 100644
+--- a/arch/x86/include/asm/ptrace.h
++++ b/arch/x86/include/asm/ptrace.h
+@@ -56,6 +56,50 @@ struct pt_regs {
+ 
+ #else /* __i386__ */
+ 
++struct fred_cs {
++		/* CS selector */
++	u64	cs	: 16,
++		/* Stack level at event time */
++		sl	:  2,
++		/* IBT in WAIT_FOR_ENDBRANCH state */
++		wfe	:  1,
++			: 45;
++};
 +
-+=========================================
-+Flexible Return and Event Delivery (FRED)
-+=========================================
++struct fred_ss {
++		/* SS selector */
++	u64	ss	: 16,
++		/* STI state */
++		sti	:  1,
++		/* Set if syscall, sysenter or INT n */
++		swevent	:  1,
++		/* Event is NMI type */
++		nmi	:  1,
++			: 13,
++		/* Event vector */
++		vector	:  8,
++			:  8,
++		/* Event type */
++		type	:  4,
++			:  4,
++		/* Event was incident to enclave execution */
++		enclave	:  1,
++		/* CPU was in long mode */
++		lm	:  1,
++		/*
++		 * Nested exception during FRED delivery, not set
++		 * for #DF.
++		 */
++		nested	:  1,
++			:  1,
++		/*
++		 * The length of the instruction causing the event.
++		 * Only set for INTO, INT1, INT3, INT n, SYSCALL
++		 * and SYSENTER.  0 otherwise.
++		 */
++		insnlen	:  4;
++};
 +
-+Overview
-+========
-+
-+The FRED architecture defines simple new transitions that change
-+privilege level (ring transitions). The FRED architecture was
-+designed with the following goals:
-+
-+1) Improve overall performance and response time by replacing event
-+   delivery through the interrupt descriptor table (IDT event
-+   delivery) and event return by the IRET instruction with lower
-+   latency transitions.
-+
-+2) Improve software robustness by ensuring that event delivery
-+   establishes the full supervisor context and that event return
-+   establishes the full user context.
-+
-+The new transitions defined by the FRED architecture are FRED event
-+delivery and, for returning from events, two FRED return instructions.
-+FRED event delivery can effect a transition from ring 3 to ring 0, but
-+it is used also to deliver events incident to ring 0. One FRED
-+instruction (ERETU) effects a return from ring 0 to ring 3, while the
-+other (ERETS) returns while remaining in ring 0. Collectively, FRED
-+event delivery and the FRED return instructions are FRED transitions.
-+
-+In addition to these transitions, the FRED architecture defines a new
-+instruction (LKGS) for managing the state of the GS segment register.
-+The LKGS instruction can be used by 64-bit operating systems that do
-+not use the new FRED transitions.
-+
-+Furthermore, the FRED architecture is easy to extend for future CPU
-+architectures.
-+
-+Software based event dispatching
-+================================
-+
-+FRED operates differently from IDT in terms of event handling. Instead
-+of directly dispatching an event to its handler based on the event
-+vector, FRED requires the software to dispatch an event to its handler
-+based on both the event's type and vector. Therefore, an event dispatch
-+framework must be implemented to facilitate the event-to-handler
-+dispatch process. The FRED event dispatch framework takes control
-+once an event is delivered, and employs a two-level dispatch.
-+
-+The first level dispatching is event type based, and the second level
-+dispatching is event vector based.
-+
-+Full supervisor/user context
-+============================
-+
-+FRED event delivery atomically save and restore full supervisor/user
-+context upon event delivery and return. Thus it avoids the problem of
-+transient states due to %cr2 and/or %dr6, and it is no longer needed
-+to handle all the ugly corner cases caused by half baked entry states.
-+
-+FRED allows explicit unblock of NMI with new event return instructions
-+ERETS/ERETU, avoiding the mess caused by IRET which unconditionally
-+unblocks NMI, e.g., when an exception happens during NMI handling.
-+
-+FRED always restores the full value of %rsp, thus ESPFIX is no longer
-+needed when FRED is enabled.
-+
-+LKGS
-+====
-+
-+LKGS behaves like the MOV to GS instruction except that it loads the
-+base address into the IA32_KERNEL_GS_BASE MSR instead of the GS
-+segment’s descriptor cache. With LKGS, it ends up with avoiding
-+mucking with kernel GS, i.e., an operating system can always operate
-+with its own GS base address.
-+
-+Because FRED event delivery from ring 3 and ERETU both swap the value
-+of the GS base address and that of the IA32_KERNEL_GS_BASE MSR, plus
-+the introduction of LKGS instruction, the SWAPGS instruction is no
-+longer needed when FRED is enabled, thus is disallowed (#UD).
-+
-+Stack levels
-+============
-+
-+4 stack levels 0~3 are introduced to replace the nonreentrant IST for
-+event handling, and each stack level should be configured to use a
-+dedicated stack.
-+
-+The current stack level could be unchanged or go higher upon FRED
-+event delivery. If unchanged, the CPU keeps using the current event
-+stack. If higher, the CPU switches to a new event stack specified by
-+the MSR of the new stack level, i.e., MSR_IA32_FRED_RSP[123].
-+
-+Only execution of a FRED return instruction ERET[US], could lower the
-+current stack level, causing the CPU to switch back to the stack it was
-+on before a previous event delivery that promoted the stack level.
-diff --git a/Documentation/arch/x86/x86_64/index.rst b/Documentation/arch/x86/x86_64/index.rst
-index a56070fc8e77..ad15e9bd623f 100644
---- a/Documentation/arch/x86/x86_64/index.rst
-+++ b/Documentation/arch/x86/x86_64/index.rst
-@@ -15,3 +15,4 @@ x86_64 Support
-    cpu-hotplug-spec
-    machinecheck
-    fsgs
-+   fred
+ struct pt_regs {
+ 	/*
+ 	 * C ABI says these regs are callee-preserved. They aren't saved on
+@@ -85,6 +129,12 @@ struct pt_regs {
+ 	 * - the syscall number (syscall, sysenter, int80)
+ 	 * - error_code stored by the CPU on traps and exceptions
+ 	 * - the interrupt number for device interrupts
++	 *
++	 * A FRED stack frame starts here:
++	 *   1) It _always_ includes an error code;
++	 *
++	 *   2) The return frame for ERET[US] starts here, but
++	 *      the content of orig_ax is ignored.
+ 	 */
+ 	unsigned long orig_ax;
+ 
+@@ -92,20 +142,30 @@ struct pt_regs {
+ 	unsigned long ip;
+ 
+ 	union {
+-		u64	csx;	// The full 64-bit data slot containing CS
+-		u16	cs;	// CS selector
++		/* CS selector */
++		u16		cs;
++		/* The extended 64-bit data slot containing CS */
++		u64		csx;
++		/* The FRED CS extension */
++		struct fred_cs	fred_cs;
+ 	};
+ 
+ 	unsigned long flags;
+ 	unsigned long sp;
+ 
+ 	union {
+-		u64	ssx;	// The full 64-bit data slot containing SS
+-		u16	ss;	// SS selector
++		/* SS selector */
++		u16		ss;
++		/* The extended 64-bit data slot containing SS */
++		u64		ssx;
++		/* The FRED SS extension */
++		struct fred_ss	fred_ss;
+ 	};
+ 
+ 	/*
+-	 * Top of stack on IDT systems.
++	 * Top of stack on IDT systems, while FRED systems have extra fields
++	 * defined above for storing exception related information, e.g. CR2 or
++	 * DR6.
+ 	 */
+ };
+ 
 -- 
 2.34.1
 
