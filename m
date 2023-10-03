@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CFDE75435
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.611889.951523 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C5BFE75438
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Oct 2023 06:55:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.611893.951566 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIq-0004DU-9J; Tue, 03 Oct 2023 06:54:44 +0000
+	id 1qnZIt-0005I1-Fx; Tue, 03 Oct 2023 06:54:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 611889.951523; Tue, 03 Oct 2023 06:54:44 +0000
+Received: by outflank-mailman (output) from mailman id 611893.951566; Tue, 03 Oct 2023 06:54:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qnZIq-0004CF-4m; Tue, 03 Oct 2023 06:54:44 +0000
-Received: by outflank-mailman (input) for mailman id 611889;
- Tue, 03 Oct 2023 06:54:43 +0000
+	id 1qnZIt-0005Fz-7J; Tue, 03 Oct 2023 06:54:47 +0000
+Received: by outflank-mailman (input) for mailman id 611893;
+ Tue, 03 Oct 2023 06:54:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XwHy=FR=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1qnZIp-00040o-3J
- for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:43 +0000
+ id 1qnZIr-00040o-Hy
+ for xen-devel@lists.xenproject.org; Tue, 03 Oct 2023 06:54:45 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ba688412-61b9-11ee-98d2-6d05b1d4d9a1;
- Tue, 03 Oct 2023 08:54:42 +0200 (CEST)
+ id bbe59e88-61b9-11ee-98d2-6d05b1d4d9a1;
+ Tue, 03 Oct 2023 08:54:44 +0200 (CEST)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Oct 2023 23:54:37 -0700
+ 02 Oct 2023 23:54:39 -0700
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:36 -0700
+ by fmsmga005.fm.intel.com with ESMTP; 02 Oct 2023 23:54:38 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba688412-61b9-11ee-98d2-6d05b1d4d9a1
+X-Inumbo-ID: bbe59e88-61b9-11ee-98d2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696316082; x=1727852082;
+  t=1696316084; x=1727852084;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=IaxeoNWuhGDXlIm0wMB8nNslGvpF2+LIDATl0KgTQLA=;
-  b=NfB/fRiqcfMsba6vsRr/mORbMHrcu3fZXKzmKXOFYt1urrbgkhFLbNdT
-   KV4UBX2W+0m8mVcGU0h4OHGIWAIyqE1Oq8VOo/N9J4zN22TI+Wmjyjta1
-   hC6ERHsafuuo47CfP527Vk5zWcdep3PE+WDCShfiDhSFtUqUMKfRiWERl
-   zJxoqq7wqmBt0Pmn6lJRwTkBHzPxkYSzrg/rq/Uo4YML3lyHxfKCg2hNO
-   KZ9/PyRF8j3wxHCD/x84W3uhYZ8DLhwpE2FWKPR3dxqywcmEPx7893ynv
-   n63/2KRHtN/nWoGfnWMKImSHRjOlMTK5PvycI9KV/HoyD6AsfaEKd/L+8
+  bh=ZlGESG1ZjbxHp/2vGEpu7uzY2F9a0taEPQgxug8c1Qc=;
+  b=StNvbsNHd69jd0whAtLu4WWPEYVyXfnD7YGScEn7XnI/m/TM9cNERwMs
+   L4CTNOoL1W/p1NBGHxFjSnFf054XMyeX99i79UTFbr08YQOcOU7qkUG00
+   +/gUTbFzIGa46BPixVwl+cEWKDk8zAi31qEtRxUJtKyFfu6RYA1Qs8VVh
+   TeLq8k0o15sFAwf4M+8z0ymCLl/Oq/hzq2x1cin/+E77WW4Hu9Y3a9iL7
+   IuH90S774yBv6oxZb/+Qy1tNb0VoJVW/UL8zzPjJKv1vGVC3+8olah8Tu
+   1ta+XjaENxbYTgMsNOFu0hoO+fXgRU/b4QXR8d8pqBIjlK2Bh19+FH+x8
    g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367857939"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="367857992"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="367857939"
+   d="scan'208";a="367857992"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900906"
+X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="1081900919"
 X-IronPort-AV: E=Sophos;i="6.03,196,1694761200"; 
-   d="scan'208";a="1081900906"
+   d="scan'208";a="1081900919"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -87,73 +87,70 @@ Cc: tglx@linutronix.de,
 	andrew.cooper3@citrix.com,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com
-Subject: [PATCH v12 04/37] x86/entry: Remove idtentry_sysvec from entry_{32,64}.S
-Date: Mon,  2 Oct 2023 23:24:25 -0700
-Message-Id: <20231003062458.23552-5-xin3.li@intel.com>
+Subject: [PATCH v12 08/37] x86/cpufeatures: Add the cpu feature bit for FRED
+Date: Mon,  2 Oct 2023 23:24:29 -0700
+Message-Id: <20231003062458.23552-9-xin3.li@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231003062458.23552-1-xin3.li@intel.com>
 References: <20231003062458.23552-1-xin3.li@intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-idtentry_sysvec is really just DECLARE_IDTENTRY defined in
-<asm/idtentry.h>, no need to define it separately.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
+Any FRED CPU will always have the following features as its baseline:
+  1) LKGS, load attributes of the GS segment but the base address into
+     the IA32_KERNEL_GS_BASE MSR instead of the GS segment’s descriptor
+     cache.
+  2) WRMSRNS, non-serializing WRMSR for faster MSR writes.
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/entry/entry_32.S       | 4 ----
- arch/x86/entry/entry_64.S       | 8 --------
- arch/x86/include/asm/idtentry.h | 2 +-
- 3 files changed, 1 insertion(+), 13 deletions(-)
+ arch/x86/include/asm/cpufeatures.h       | 1 +
+ arch/x86/kernel/cpu/cpuid-deps.c         | 2 ++
+ tools/arch/x86/include/asm/cpufeatures.h | 1 +
+ 3 files changed, 4 insertions(+)
 
-diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index 6e6af42e044a..e0f22ad8ff7e 100644
---- a/arch/x86/entry/entry_32.S
-+++ b/arch/x86/entry/entry_32.S
-@@ -649,10 +649,6 @@ SYM_CODE_START_LOCAL(asm_\cfunc)
- SYM_CODE_END(asm_\cfunc)
- .endm
+diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
+index 330876d34b68..57ae93dc1e52 100644
+--- a/arch/x86/include/asm/cpufeatures.h
++++ b/arch/x86/include/asm/cpufeatures.h
+@@ -321,6 +321,7 @@
+ #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
+ #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
+ #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
++#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
+ #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
+ #define X86_FEATURE_WRMSRNS		(12*32+19) /* "" Non-Serializing Write to Model Specific Register instruction */
+ #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
+diff --git a/arch/x86/kernel/cpu/cpuid-deps.c b/arch/x86/kernel/cpu/cpuid-deps.c
+index e462c1d3800a..b7174209d855 100644
+--- a/arch/x86/kernel/cpu/cpuid-deps.c
++++ b/arch/x86/kernel/cpu/cpuid-deps.c
+@@ -82,6 +82,8 @@ static const struct cpuid_dep cpuid_deps[] = {
+ 	{ X86_FEATURE_XFD,			X86_FEATURE_XGETBV1   },
+ 	{ X86_FEATURE_AMX_TILE,			X86_FEATURE_XFD       },
+ 	{ X86_FEATURE_SHSTK,			X86_FEATURE_XSAVES    },
++	{ X86_FEATURE_FRED,			X86_FEATURE_LKGS      },
++	{ X86_FEATURE_FRED,			X86_FEATURE_WRMSRNS   },
+ 	{}
+ };
  
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /*
-  * Include the defines which emit the idt entries which are shared
-  * shared between 32 and 64 bit and emit the __irqentry_text_* markers
-diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-index 9b4b512f2a75..aa4214703091 100644
---- a/arch/x86/entry/entry_64.S
-+++ b/arch/x86/entry/entry_64.S
-@@ -432,14 +432,6 @@ SYM_CODE_END(\asmsym)
- 	idtentry \vector asm_\cfunc \cfunc has_error_code=1
- .endm
- 
--/*
-- * System vectors which invoke their handlers directly and are not
-- * going through the regular common device interrupt handling code.
-- */
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /**
-  * idtentry_mce_db - Macro to generate entry stubs for #MC and #DB
-  * @vector:		Vector number
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index 05fd175cec7d..cfca68f6cb84 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -447,7 +447,7 @@ __visible noinstr void func(struct pt_regs *regs,			\
- 
- /* System vector entries */
- #define DECLARE_IDTENTRY_SYSVEC(vector, func)				\
--	idtentry_sysvec vector func
-+	DECLARE_IDTENTRY(vector, func)
- 
- #ifdef CONFIG_X86_64
- # define DECLARE_IDTENTRY_MCE(vector, func)				\
+diff --git a/tools/arch/x86/include/asm/cpufeatures.h b/tools/arch/x86/include/asm/cpufeatures.h
+index 1b9d86ba5bc2..18bab7987d7f 100644
+--- a/tools/arch/x86/include/asm/cpufeatures.h
++++ b/tools/arch/x86/include/asm/cpufeatures.h
+@@ -317,6 +317,7 @@
+ #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
+ #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
+ #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
++#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
+ #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
+ #define X86_FEATURE_WRMSRNS		(12*32+19) /* "" Non-Serializing Write to Model Specific Register instruction */
+ #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
 -- 
 2.34.1
 
