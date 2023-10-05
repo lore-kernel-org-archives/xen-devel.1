@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE373E92725
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Oct 2023 18:17:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.613092.953374 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21BD3E92729
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Oct 2023 18:59:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.613114.953414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qoSuP-0004k2-Rx; Thu, 05 Oct 2023 18:17:13 +0000
+	id 1qoTYl-0006xR-1v; Thu, 05 Oct 2023 18:58:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 613092.953374; Thu, 05 Oct 2023 18:17:13 +0000
+Received: by outflank-mailman (output) from mailman id 613114.953414; Thu, 05 Oct 2023 18:58:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qoSuP-0004jv-O4; Thu, 05 Oct 2023 18:17:13 +0000
-Received: by outflank-mailman (input) for mailman id 613092;
- Thu, 05 Oct 2023 18:17:11 +0000
+	id 1qoTYk-0006x1-To; Thu, 05 Oct 2023 18:58:54 +0000
+Received: by outflank-mailman (input) for mailman id 613114;
+ Thu, 05 Oct 2023 18:58:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JwJB=FT=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1qoSuN-0004jk-KY
- for xen-devel@lists.xenproject.org; Thu, 05 Oct 2023 18:17:11 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20602.outbound.protection.outlook.com
- [2a01:111:f400:7e8a::602])
+ <SRS0=mY76=FT=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1qoTYj-0006w4-Ir
+ for xen-devel@lists.xenproject.org; Thu, 05 Oct 2023 18:58:53 +0000
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [2a00:1450:4864:20::433])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 65402e04-63ab-11ee-98d3-6d05b1d4d9a1;
- Thu, 05 Oct 2023 20:17:09 +0200 (CEST)
-Received: from MN2PR06CA0022.namprd06.prod.outlook.com (2603:10b6:208:23d::27)
- by DM6PR12MB4123.namprd12.prod.outlook.com (2603:10b6:5:21f::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.29; Thu, 5 Oct
- 2023 18:17:05 +0000
-Received: from BL6PEPF0001AB4F.namprd04.prod.outlook.com
- (2603:10b6:208:23d:cafe::4b) by MN2PR06CA0022.outlook.office365.com
- (2603:10b6:208:23d::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.33 via Frontend
- Transport; Thu, 5 Oct 2023 18:17:05 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF0001AB4F.mail.protection.outlook.com (10.167.242.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Thu, 5 Oct 2023 18:17:05 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 5 Oct
- 2023 13:17:04 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 5 Oct
- 2023 13:17:04 -0500
-Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Thu, 5 Oct 2023 13:17:03 -0500
+ id 3932bf1c-63b1-11ee-98d3-6d05b1d4d9a1;
+ Thu, 05 Oct 2023 20:58:51 +0200 (CEST)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-323168869daso1317830f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Oct 2023 11:58:52 -0700 (PDT)
+Received: from [10.80.67.28] (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ y17-20020a5d6151000000b0031f82743e25sm2392982wrt.67.2023.10.05.11.58.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Oct 2023 11:58:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,316 +47,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65402e04-63ab-11ee-98d3-6d05b1d4d9a1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EuUlFVxVhzxoLqFVFIqGK4wCc1UuWG4jN/R684+bClcCwhqLpq//KeJx5JROGKAHDSckIDxZZh0hEIK+mgT5yvKnDqc5Woa8omX7Y/gX7F+ICrBvshJ52Xh/oJAHGnaKkx8wJo2eaF979dQjtMxr1diSjGu27GoKPWgJaWKWdzHsER+vBX0k4ypbRkw7qAn8/K/QBHp1Kbb1MJAUjwIJOXd5JK+k9bpEsr840oixLaMBPpdX5vB7IVwZ4KY3IXT3e0ZmY6w4y54IZXM34dc7uc14tE0IrEWaKVcJJwyh1nVM8ku1Yr4IkYMuYaObWdABAkr7KwWhCGguKoO0Okm/Mw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8oqi3a0IooPX4pzHpvJYv6+eY6o0O3Q2hpb0iqszOV0=;
- b=GC5YTPrq0ciUDJlcHBERhJBt8roP4NpmNOqdBWWQb1TZhVZZy90xrh2v4su8Wr3YCiaU8Yfz4umx93AvC3VAJ2c0E3vypDGwLKJQ/eBT6r2qGOtcK3RROwKXDqpf5r7vAAIoyLNpDP3N4clC5D43qxSBTJuQhr6aBER2JHQPWX+RfL20UU44vp9CSHeyX9VmQnD0/LPh7Vc5zF2WrrWTzcnRNayurVd2pCrvjEAT5Rt8jn5eXTRGAFCTpWpvFTte9ZNFCZ5FFgy5ucNR7LhkvJF3I5PsptbmEQro2IT/dvCz08wImOun9rzr0Y5NzMmuzuA6PO05x8RALzgoppkwdA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8oqi3a0IooPX4pzHpvJYv6+eY6o0O3Q2hpb0iqszOV0=;
- b=fva/QJ+j5EN0FncYL29OFhxoCQw/At32xz9UzVQP+zd7BXrIUSfYLYAiQoMwfZWaAOvHvKG+qULVUj+1hW1yxDH3PdMthJgp6C24cdWXY2rmD8i+RZ9/zs5jX2uwPqei0z7xn2uS96Yddo0Cjn0V0TeUUis9KPYAnyV7QoltpgY=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Vikram Garhwal <vikram.garhwal@amd.com>
-To: <qemu-devel@nongnu.org>
-CC: <sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>, Vikram Garhwal
-	<vikram.garhwal@amd.com>, Anthony Perard <anthony.perard@citrix.com>, "Paul
- Durrant" <paul@xen.org>, "Michael S. Tsirkin" <mst@redhat.com>, "Marcel
- Apfelbaum" <marcel.apfelbaum@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
-	Richard Henderson <richard.henderson@linaro.org>, Eduardo Habkost
-	<eduardo@habkost.net>, Peter Xu <peterx@redhat.com>, David Hildenbrand
-	<david@redhat.com>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?=
-	<philmd@linaro.org>, "open list:X86 Xen CPUs"
-	<xen-devel@lists.xenproject.org>
-Subject: [QEMU][PATCH v1 2/7] xen: add pseudo RAM region for grant mappings
-Date: Thu, 5 Oct 2023 11:16:24 -0700
-Message-ID: <20231005181629.4046-3-vikram.garhwal@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20231005181629.4046-1-vikram.garhwal@amd.com>
-References: <20231005181629.4046-1-vikram.garhwal@amd.com>
+X-Inumbo-ID: 3932bf1c-63b1-11ee-98d3-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1696532331; x=1697137131; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
+         :content-language:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=NUvzy2QXL43QsYHWb7CyR5rWFH2Ox3pxbiimOpqgg3w=;
+        b=RI1H6wmIxbwOHIEZNpNO1bTucFVvENNu9pj5XnwXqQR6zqVrHPArDKj7CZJlri0sr+
+         jpWYd32sZ8XRR9trmiKuXFu9rZDaSld1MJ7HQE4rWQIo2OqGBoBhuMeOnejGHjG3CzA6
+         0mnD205M+3YnF+TLNTiyPcPsb0XFSETIYh0O4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1696532331; x=1697137131;
+        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
+         :content-language:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NUvzy2QXL43QsYHWb7CyR5rWFH2Ox3pxbiimOpqgg3w=;
+        b=JfL4lDfVuMWLtZdam2FbBfsMdfkRso7Ao3nZH3523k0Kli+6mCPM0JFm1QcTVGNpDd
+         3A2iE4wxt1s3AbZuUeNmCDqjvzA7m3Y1YqTxEPVjHyWX4ZwQhWannH2Tzo9Ge8+hGuh6
+         bx9tf9CGZrGP2caokaLKTfVxjfXymfPbOQltxAp7Vxlel6z9ClqTA6shOcKyNzBCAZqu
+         aOxZ6yGohFiSH8lYIwUf3ACFS8jnWxEGB0aFgf095/h/nddN/ajGHn8XxRKNXoT4ZrXN
+         wzxpSal/vyc7dtmjvOUNQ02R7tLmybk0kH/u9gVo593Fr5j4TTnRF4wNeXDkmvzydtU/
+         GqxA==
+X-Gm-Message-State: AOJu0YwqSTTMtyVEeoalvhxVkWm5U08UAgUudWVTeWZrUu70o1kn5EAL
+	orjL1Oapcx0phOQSBDE9gjxKej2GuHtm1oJxJShsdA==
+X-Google-Smtp-Source: AGHT+IFOEQQeKNJgqEXa8J+4ey4i182D7xcOGOuq+v1DKaxLyuY10MG8jbbjUYUjx6DRfq+eYyJ0Ug==
+X-Received: by 2002:adf:e80f:0:b0:31f:fb02:4dcd with SMTP id o15-20020adfe80f000000b0031ffb024dcdmr5391779wrm.4.1696532331586;
+        Thu, 05 Oct 2023 11:58:51 -0700 (PDT)
+Message-ID: <ff8994eb-968d-4bbb-a960-e5ca78ef658e@citrix.com>
+Date: Thu, 5 Oct 2023 19:58:50 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4F:EE_|DM6PR12MB4123:EE_
-X-MS-Office365-Filtering-Correlation-Id: c13242fa-ee1e-4ee0-3643-08dbc5cf478b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	3wZ2BXBgho+mMEzE0AGW5OrYHztNM8hM4p2d99E/QdEShzgFo8OLnQR9SjPSH7pXbqUDgHYYP2CwfEsg/WtC31VvRmTQa2yTYKJcdsGOKHzRe23TYCYsNAA9IM/sHfpLGslJYSioGQ6qENtAndKkuRbLCcFLoE6IlSsaF15D2y2zTc2edFxulH185qck7wmPqCKbfWWcjPEfgYLkNhgU2OM4uc1q71rCWW8OzmkFs3K2JkZ09nocW73Qk8JyVSrLHTgpP7GPjenp8c2gKYFQwH0XIfJpueXtYfoAjB1bvyPvLozQ253O6DGTqY7v6Ii+3ntsthh3XE+Pfermo1KSwInpyDU1FVr6BXBlQAgzU/hHkN5uOS32+2oU8tfkJzrSVtW/DueHOMeNMmHqh3rPDlDoqmuzfB1NBBWmCWU7+Jq06wgxaNav1fbSl8YY6D6S65aJIXJ2ciMe/ULIb2+4EnxOcif9TldEdmTwYdz8/pDQuzvvRAXc1O8JD7dJLZNQu46by1YzZtjy8E6aD47vPnI+rtBI66LFwssbKgsbuQwLBIdL37mCOKn1ZZ9Wv49PKyPLtatEvHqrNbvvnj7l2LrLi6w+Aoaiv9JkKusdDdmMpaoPcepeXA1EZiNEY2ITBoG6t3KdUOvKRHraboTw6IW4nRabnUXJdKIknoU3H1QY3qdaUtwlthsXBGbvsi0Ywg9fdMpgFaKlezs3QOngsROQshOdJtPqKrcFnujTNh7A+rCEAzxeyNU2b8HHq0Q+CvIowbgtlCDXVvn+XsomGQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(376002)(136003)(39860400002)(230922051799003)(451199024)(82310400011)(64100799003)(1800799009)(186009)(40470700004)(46966006)(36840700001)(40460700003)(40480700001)(83380400001)(336012)(426003)(4326008)(81166007)(44832011)(356005)(82740400003)(5660300002)(86362001)(36756003)(7416002)(36860700001)(6916009)(316002)(54906003)(478600001)(70206006)(70586007)(8676002)(8936002)(47076005)(2906002)(2616005)(26005)(6666004)(41300700001)(1076003)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2023 18:17:05.1796
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c13242fa-ee1e-4ee0-3643-08dbc5cf478b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB4F.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4123
+User-Agent: Mozilla Thunderbird
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [CRITICAL for 4.18] Re: [PATCH v5 00/10] runstate/time area
+ registration by (guest) physical address
+Content-Language: en-GB
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org,
+ henry.wang@arm.com
+Cc: Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20231002151127.71020-1-roger.pau@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20231002151127.71020-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Juergen Gross <jgross@suse.com>
+I see this series has been committed.  But it's broken in a really
+fundamental way.
 
-Add a memory region which can be used to automatically map granted
-memory. It is starting at 0x8000000000000000ULL in order to be able to
-distinguish it from normal RAM.
 
-For this reason the xen.ram memory region is expanded, which has no
-further impact as it is used just as a container of the real RAM
-regions and now the grant region.
+This is a new extension with persistent side effects to an existing part
+of the guest ABI.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
----
- hw/i386/xen/xen-hvm.c           |  3 ++
- hw/xen/xen-hvm-common.c         |  4 +--
- hw/xen/xen-mapcache.c           | 27 ++++++++++++++
- include/exec/ram_addr.h         |  1 +
- include/hw/xen/xen-hvm-common.h |  2 ++
- include/hw/xen/xen_pvdev.h      |  3 ++
- include/sysemu/xen-mapcache.h   |  3 ++
- softmmu/physmem.c               | 62 +++++++++++++++++++++------------
- 8 files changed, 80 insertions(+), 25 deletions(-)
+Yet there doesn't appear to be any enumeration that the interface is
+available to begin with.  Requiring the guest to probe subops, and
+having no way to disable it on a per-domain basis is unacceptable, and
+has exploded on us more times than I care to count in security fixes
+alone, and that doesn't even cover the issues Amazon have reported over
+the years.
 
-diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
-index f42621e674..67a55558a6 100644
---- a/hw/i386/xen/xen-hvm.c
-+++ b/hw/i386/xen/xen-hvm.c
-@@ -172,6 +172,9 @@ static void xen_ram_init(PCMachineState *pcms,
-                                  x86ms->above_4g_mem_size);
-         memory_region_add_subregion(sysmem, 0x100000000ULL, &ram_hi);
-     }
-+
-+    /* Add grant mappings as a pseudo RAM region. */
-+    ram_grants = *xen_init_grant_ram();
- }
- 
- static XenPhysmap *get_physmapping(hwaddr start_addr, ram_addr_t size)
-diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
-index 565dc39c8f..b7255977a5 100644
---- a/hw/xen/xen-hvm-common.c
-+++ b/hw/xen/xen-hvm-common.c
-@@ -9,7 +9,7 @@
- #include "hw/boards.h"
- #include "hw/xen/arch_hvm.h"
- 
--MemoryRegion ram_memory;
-+MemoryRegion ram_memory, ram_grants;
- 
- void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
-                    Error **errp)
-@@ -26,7 +26,7 @@ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
-         return;
-     }
- 
--    if (mr == &ram_memory) {
-+    if (mr == &ram_memory || mr == &ram_grants) {
-         return;
-     }
- 
-diff --git a/hw/xen/xen-mapcache.c b/hw/xen/xen-mapcache.c
-index f7d974677d..8115c44c00 100644
---- a/hw/xen/xen-mapcache.c
-+++ b/hw/xen/xen-mapcache.c
-@@ -14,7 +14,9 @@
- 
- #include <sys/resource.h>
- 
-+#include "hw/xen/xen-hvm-common.h"
- #include "hw/xen/xen_native.h"
-+#include "hw/xen/xen_pvdev.h"
- #include "qemu/bitmap.h"
- 
- #include "sysemu/runstate.h"
-@@ -597,3 +599,28 @@ uint8_t *xen_replace_cache_entry(hwaddr old_phys_addr,
-     mapcache_unlock();
-     return p;
- }
-+
-+MemoryRegion *xen_init_grant_ram(void)
-+{
-+    RAMBlock *block;
-+
-+    memory_region_init(&ram_grants, NULL, "xen.grants",
-+                       XEN_MAX_VIRTIO_GRANTS * XC_PAGE_SIZE);
-+    block = g_malloc0(sizeof(*block));
-+    block->mr = &ram_grants;
-+    block->used_length = XEN_MAX_VIRTIO_GRANTS * XC_PAGE_SIZE;
-+    block->max_length = XEN_MAX_VIRTIO_GRANTS * XC_PAGE_SIZE;
-+    block->fd = -1;
-+    block->page_size = XC_PAGE_SIZE;
-+    block->host = (void *)XEN_GRANT_ADDR_OFF;
-+    block->offset = XEN_GRANT_ADDR_OFF;
-+    block->flags = RAM_PREALLOC;
-+    ram_grants.ram_block = block;
-+    ram_grants.ram = true;
-+    ram_grants.terminates = true;
-+    ram_block_add_list(block);
-+    memory_region_add_subregion(get_system_memory(), XEN_GRANT_ADDR_OFF,
-+                                &ram_grants);
-+
-+    return &ram_grants;
-+}
-diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
-index 90676093f5..c0b5f9a7d0 100644
---- a/include/exec/ram_addr.h
-+++ b/include/exec/ram_addr.h
-@@ -139,6 +139,7 @@ void qemu_ram_free(RAMBlock *block);
- int qemu_ram_resize(RAMBlock *block, ram_addr_t newsize, Error **errp);
- 
- void qemu_ram_msync(RAMBlock *block, ram_addr_t start, ram_addr_t length);
-+void ram_block_add_list(RAMBlock *new_block);
- 
- /* Clear whole block of mem */
- static inline void qemu_ram_block_writeback(RAMBlock *block)
-diff --git a/include/hw/xen/xen-hvm-common.h b/include/hw/xen/xen-hvm-common.h
-index 4e9904f1a6..0d300ba898 100644
---- a/include/hw/xen/xen-hvm-common.h
-+++ b/include/hw/xen/xen-hvm-common.h
-@@ -17,6 +17,8 @@
- #include <xen/hvm/ioreq.h>
- 
- extern MemoryRegion ram_memory;
-+
-+extern MemoryRegion ram_grants;
- extern MemoryListener xen_io_listener;
- extern DeviceListener xen_device_listener;
- 
-diff --git a/include/hw/xen/xen_pvdev.h b/include/hw/xen/xen_pvdev.h
-index ddad4b9f36..0f1b5edfa9 100644
---- a/include/hw/xen/xen_pvdev.h
-+++ b/include/hw/xen/xen_pvdev.h
-@@ -80,4 +80,7 @@ int xen_pv_send_notify(struct XenLegacyDevice *xendev);
- void xen_pv_printf(struct XenLegacyDevice *xendev, int msg_level,
-                    const char *fmt, ...)  G_GNUC_PRINTF(3, 4);
- 
-+#define XEN_GRANT_ADDR_OFF    0x8000000000000000ULL
-+#define XEN_MAX_VIRTIO_GRANTS 65536
-+
- #endif /* QEMU_HW_XEN_PVDEV_H */
-diff --git a/include/sysemu/xen-mapcache.h b/include/sysemu/xen-mapcache.h
-index c8e7c2f6cf..f4bedb1c11 100644
---- a/include/sysemu/xen-mapcache.h
-+++ b/include/sysemu/xen-mapcache.h
-@@ -10,6 +10,7 @@
- #define XEN_MAPCACHE_H
- 
- #include "exec/cpu-common.h"
-+#include "exec/ram_addr.h"
- 
- typedef hwaddr (*phys_offset_to_gaddr_t)(hwaddr phys_offset,
-                                          ram_addr_t size);
-@@ -25,6 +26,8 @@ void xen_invalidate_map_cache(void);
- uint8_t *xen_replace_cache_entry(hwaddr old_phys_addr,
-                                  hwaddr new_phys_addr,
-                                  hwaddr size);
-+MemoryRegion *xen_init_grant_ram(void);
-+
- #else
- 
- static inline void xen_map_cache_init(phys_offset_to_gaddr_t f,
-diff --git a/softmmu/physmem.c b/softmmu/physmem.c
-index 309653c722..e182a2fa07 100644
---- a/softmmu/physmem.c
-+++ b/softmmu/physmem.c
-@@ -1803,12 +1803,47 @@ static void dirty_memory_extend(ram_addr_t old_ram_size,
-     }
- }
- 
-+static void ram_block_add_list_locked(RAMBlock *new_block)
-+ {
-+     RAMBlock *block;
-+     RAMBlock *last_block = NULL;
-+
-+    /*
-+     * Keep the list sorted from biggest to smallest block.  Unlike QTAILQ,
-+     * QLIST (which has an RCU-friendly variant) does not have insertion at
-+     * tail, so save the last element in last_block.
-+     */
-+    RAMBLOCK_FOREACH(block) {
-+        last_block = block;
-+        if (block->max_length < new_block->max_length) {
-+            break;
-+        }
-+    }
-+    if (block) {
-+        QLIST_INSERT_BEFORE_RCU(block, new_block, next);
-+    } else if (last_block) {
-+        QLIST_INSERT_AFTER_RCU(last_block, new_block, next);
-+    } else { /* list is empty */
-+        QLIST_INSERT_HEAD_RCU(&ram_list.blocks, new_block, next);
-+    }
-+    ram_list.mru_block = NULL;
-+
-+    /* Write list before version */
-+    smp_wmb();
-+    ram_list.version++;
-+}
-+
-+void ram_block_add_list(RAMBlock *new_block)
-+{
-+    qemu_mutex_lock_ramlist();
-+    ram_block_add_list_locked(new_block);
-+    qemu_mutex_unlock_ramlist();
-+}
-+
- static void ram_block_add(RAMBlock *new_block, Error **errp)
- {
-     const bool noreserve = qemu_ram_is_noreserve(new_block);
-     const bool shared = qemu_ram_is_shared(new_block);
--    RAMBlock *block;
--    RAMBlock *last_block = NULL;
-     ram_addr_t old_ram_size, new_ram_size;
-     Error *err = NULL;
- 
-@@ -1846,28 +1881,9 @@ static void ram_block_add(RAMBlock *new_block, Error **errp)
-     if (new_ram_size > old_ram_size) {
-         dirty_memory_extend(old_ram_size, new_ram_size);
-     }
--    /* Keep the list sorted from biggest to smallest block.  Unlike QTAILQ,
--     * QLIST (which has an RCU-friendly variant) does not have insertion at
--     * tail, so save the last element in last_block.
--     */
--    RAMBLOCK_FOREACH(block) {
--        last_block = block;
--        if (block->max_length < new_block->max_length) {
--            break;
--        }
--    }
--    if (block) {
--        QLIST_INSERT_BEFORE_RCU(block, new_block, next);
--    } else if (last_block) {
--        QLIST_INSERT_AFTER_RCU(last_block, new_block, next);
--    } else { /* list is empty */
--        QLIST_INSERT_HEAD_RCU(&ram_list.blocks, new_block, next);
--    }
--    ram_list.mru_block = NULL;
- 
--    /* Write list before version */
--    smp_wmb();
--    ram_list.version++;
-+    ram_block_add_list_locked(new_block);
-+
-     qemu_mutex_unlock_ramlist();
- 
-     cpu_physical_memory_set_dirty_range(new_block->offset,
--- 
-2.17.1
 
+Henry: Blocker for 4.18.   The absolutely bare minimum necessary to
+avoid reversion is some kind of positive enumeration that the two new
+hypercalls are available.
+
+Otherwise I will be #if 0'ing out the new hypercalls before this ABI
+mistake gets set in stone.
+
+
+If this were x86-only it would need to be a CPUID flag, but it will need
+to be something arch-agnostic in this case.  The series should not have
+come without a proper per-domain control and toolstack integration, but
+everything else can be retrofitted in an emergency.
+
+And on a related note, where is the documentation describing this new
+feature?  Some tests perhaps, or any single implementation of the guest
+side interface?
+
+This is engineering principles so basic that they do go without saying.
+
+~Andrew
 
