@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B25EEE95A91
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Oct 2023 12:52:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.614362.955396 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5417E95A91
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Oct 2023 14:23:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.614394.955426 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qppjn-0007ve-2V; Mon, 09 Oct 2023 12:51:55 +0000
+	id 1qprAN-0000jq-CX; Mon, 09 Oct 2023 14:23:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 614362.955396; Mon, 09 Oct 2023 12:51:55 +0000
+Received: by outflank-mailman (output) from mailman id 614394.955426; Mon, 09 Oct 2023 14:23:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qppjm-0007vX-Ve; Mon, 09 Oct 2023 12:51:54 +0000
-Received: by outflank-mailman (input) for mailman id 614362;
- Mon, 09 Oct 2023 12:51:53 +0000
+	id 1qprAN-0000jj-9x; Mon, 09 Oct 2023 14:23:27 +0000
+Received: by outflank-mailman (input) for mailman id 614394;
+ Mon, 09 Oct 2023 14:23:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nTJG=FX=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1qppjl-0007s6-7M
- for xen-devel@lists.xenproject.org; Mon, 09 Oct 2023 12:51:53 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
+ <SRS0=PXv8=FX=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1qprAL-0000jd-ML
+ for xen-devel@lists.xenproject.org; Mon, 09 Oct 2023 14:23:25 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9c46ed85-66a2-11ee-9b0d-b553b5be7939;
- Mon, 09 Oct 2023 14:51:48 +0200 (CEST)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-31c5cac3ae2so4057909f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Oct 2023 05:51:48 -0700 (PDT)
-Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- c16-20020a5d4f10000000b00324ae863ac1sm9589576wru.35.2023.10.09.05.51.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 05:51:47 -0700 (PDT)
+ id 662f4008-66af-11ee-9b0d-b553b5be7939;
+ Mon, 09 Oct 2023 16:23:22 +0200 (CEST)
+Received: from Dell.bugseng.com (unknown [37.161.82.74])
+ by support.bugseng.com (Postfix) with ESMTPSA id 2EBA54EE0740;
+ Mon,  9 Oct 2023 16:23:20 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,121 +41,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9c46ed85-66a2-11ee-9b0d-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1696855908; x=1697460708; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Nhjljp1hIYeTK8QNgAPsHEKUsnXQ5nu3twtO4N6FJQ8=;
-        b=g6KASNx/Bog4uPepRD/A2p29Ni5PXtZQviC9mw0jQ2FyEbJqgBIC4ef3Uwqfy4pyTV
-         czQzXvOl+qI+ZHjdojQfSTd6GHw0IVWjdJJdMVKlrXYCRFpzX+M+aKvzYo2OHuC35HfI
-         lyk0DSYZ1FHt9RbRFMT35t0UFm6XXPa9zhJFQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696855908; x=1697460708;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Nhjljp1hIYeTK8QNgAPsHEKUsnXQ5nu3twtO4N6FJQ8=;
-        b=KwlOSQJl4I22deEogY5S3beZyF2+H/MQVb9i6efWRMVKqA48VotPzYVGm7GLlyh8sk
-         YnNOQmJLnzBe5masAmzhura8jeOnAc3ZQF5/9KQMKu10F0UkzATsD7mkLZ4OWxfvRqcM
-         Btu/zzMlvM137Niv+Ahn5Y8CIRAhymvwJXSLEVno5Bq45LpSPH2Fdbmgoy1LyWmgecru
-         Pby8NUOGXD55xFB5Srqxnbvx4F+vTWLpWrzQTgNbWODSHxWHdQY4ODYkT7y1RCFdA0k0
-         ax43WNztJSDcACdy1JlohYHxNaMVXAMStmwhtSzeJ1klevumwHaYp7SBWxiDp6Q+Sk7h
-         sSug==
-X-Gm-Message-State: AOJu0YyA+wPP4G4HLerib43CoLIFWl182OJkrrjfBuftCqI6IKzVcPRA
-	LeHXyJc08JK0cHno6U2nkvJtwvuZygTvVxCjNU0=
-X-Google-Smtp-Source: AGHT+IGAIWOrXAv49CGPWktBV8PFQWL29FrsyRsuJ2gKs92LU+0NH/i0uCDvwzkLHmCwqrXMt+hN3Q==
-X-Received: by 2002:a05:6000:110b:b0:31f:a259:73c with SMTP id z11-20020a056000110b00b0031fa259073cmr13213365wrw.27.1696855908096;
-        Mon, 09 Oct 2023 05:51:48 -0700 (PDT)
-From: George Dunlap <george.dunlap@cloud.com>
+X-Inumbo-ID: 662f4008-66af-11ee-9b0d-b553b5be7939
+From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>,
-	Henry Wang <Henry.Wang@arm.com>,
-	George Dunlap <george.dunlap@cloud.com>,
-	Anthony Perard <anthony.perard@cloud.com>,
+Cc: consulting@bugseng.com,
+	Federico Serafini <federico.serafini@bugseng.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Xenia Ragiodakou <xenia.ragiadakou@amd.com>
-Subject: [PATCH for-4.18 4/5] xenalyze: Fix interrupt EIP reporting
-Date: Mon,  9 Oct 2023 13:51:36 +0100
-Message-Id: <20231009125137.1329146-5-george.dunlap@cloud.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231009125137.1329146-1-george.dunlap@cloud.com>
-References: <20231009125137.1329146-1-george.dunlap@cloud.com>
+	Henry Wang <henry.wang@arm.com>
+Subject: [XEN PATCH v2] xen/sched: address violations of MISRA C:2012 Rule 8.2
+Date: Mon,  9 Oct 2023 16:23:13 +0200
+Message-Id: <033b6f5f10e17409650dc438b22a0f0e0d5918a7.1696598833.git.federico.serafini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-EIP lists are generalized across several use cases.  For many of them,
-it make sense to have a cycle per sample; but not really for interrupt
-EIP lists.  For this reason, it normally just passes 0 as for the tsc
-value, which will in turn down at the bottom of update_cycles(),
-update only the summary.event_count, but nothing else.
+Add missing parameter names. No functional change.
 
-The dump_eip() function attempted to handle this by calling the generic
-cycle print handler if the summary contained *any* cycles, and by collecting
-and printing its own stats, based solely on counts, if not.
-
-Unfortunately, it used the wrong element for this: it collected the
-total from samples.count rather samples.event_count; in the case that
-there are no cycles, this will always be zero.  It then divided by
-this zero value.  This results in output that looked like this:
-
-```
-  ffff89d29656                                             :        0  -nan%
-  ffff89d298b6                                             :        0  -nan%
-  ffff89d298c0                                             :        0  -nan%
-```
-
-It's better than nothing, but a lot less informative than one would
-like.
-
-Use event_count rather than count for collecting the total, and the
-reporting when there are no cycles in the summary information.  This results
-in output that looks like this:
-
-```
-   ffff89d29656                                             :        2  1.21%
-   ffff89d298b6                                             :        1  0.61%
-   ffff89d298c0                                             :        1  0.61%
-```
-
-Signed-off-by: George Dunlap <george.dunlap@cloud.com>
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
-Rationale: This is a bug fix.  It's a minor one, but it's also in a
-non-critical part of the code.
-
-CC: Anthony Perard <anthony.perard@cloud.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Xenia Ragiodakou <xenia.ragiadakou@amd.com>
+Changes in v2:
+- added parameter names in accordance with schedulers in xen/common/sched/*;
+- improved comment format.
 ---
- tools/xentrace/xenalyze.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/common/sched/private.h | 99 ++++++++++++++++++++------------------
+ 1 file changed, 53 insertions(+), 46 deletions(-)
 
-diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
-index 2faf66500d..4b6db59d87 100644
---- a/tools/xentrace/xenalyze.c
-+++ b/tools/xentrace/xenalyze.c
-@@ -2866,7 +2866,7 @@ void dump_eip(struct eip_list_struct *head) {
+diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
+index c516976c37..79e3f56c5a 100644
+--- a/xen/common/sched/private.h
++++ b/xen/common/sched/private.h
+@@ -37,10 +37,11 @@ enum sched_gran {
+  * locks.  The generic schedule init code will point each schedule lock
+  * pointer to the schedule lock; if the scheduler wants to remap them,
+  * it can simply modify the schedule locks.
+- * 
++ *
+  * For cache betterness, keep the actual lock in the same cache area
+  * as the rest of the struct.  Just have the scheduler point to the
+- * one it wants (This may be the one right in front of it).*/
++ * one it wants (This may be the one right in front of it).
++ */
+ struct sched_resource {
+     struct scheduler   *scheduler;
+     struct cpupool     *cpupool;
+@@ -280,59 +281,65 @@ struct scheduler {
  
-     for(p=head; p; p=p->next)
-     {
--        total += p->summary.count;
-+        total += p->summary.event_count;
-         N++;
-     }
+     int          (*global_init)    (void);
  
-@@ -2901,8 +2901,8 @@ void dump_eip(struct eip_list_struct *head) {
-                           p->eip,
-                           find_symbol(p->eip));
-             printf(" %7d %5.2lf%%\n",
--                   p->summary.count,
--                   ((double)p->summary.count*100)/total);
-+                   p->summary.event_count,
-+                   ((double)p->summary.event_count*100)/total);
-         }
+-    int          (*init)           (struct scheduler *);
+-    void         (*deinit)         (struct scheduler *);
++    int          (*init)           (struct scheduler *ops);
++    void         (*deinit)         (struct scheduler *ops);
++
++    void         (*free_udata)     (const struct scheduler *ops, void *priv);
++    void *       (*alloc_udata)    (const struct scheduler *ops,
++                                    struct sched_unit *unit, void *dd);
  
+-    void         (*free_udata)     (const struct scheduler *, void *);
+-    void *       (*alloc_udata)    (const struct scheduler *,
+-                                    struct sched_unit *, void *);
+-    void         (*free_pdata)     (const struct scheduler *, void *, int);
+-    void *       (*alloc_pdata)    (const struct scheduler *, int);
+-    void         (*deinit_pdata)   (const struct scheduler *, void *, int);
++    void         (*free_pdata)     (const struct scheduler *ops,
++                                    void *pcpu, int cpu);
++    void *       (*alloc_pdata)    (const struct scheduler *ops, int cpu);
++    void         (*deinit_pdata)   (const struct scheduler *ops,
++                                    void *pcpu, int cpu);
  
+     /* Returns ERR_PTR(-err) for error, NULL for 'nothing needed'. */
+-    void *       (*alloc_domdata)  (const struct scheduler *, struct domain *);
++    void *       (*alloc_domdata)  (const struct scheduler *ops,
++                                    struct domain *dom);
+     /* Idempotent. */
+-    void         (*free_domdata)   (const struct scheduler *, void *);
++    void         (*free_domdata)   (const struct scheduler *ops, void *data);
+ 
+-    spinlock_t * (*switch_sched)   (struct scheduler *, unsigned int,
+-                                    void *, void *);
++    spinlock_t * (*switch_sched)   (struct scheduler *new_ops, unsigned int cpu,
++                                    void *pdata, void *vdata);
+ 
+     /* Activate / deactivate units in a cpu pool */
+-    void         (*insert_unit)    (const struct scheduler *,
+-                                    struct sched_unit *);
+-    void         (*remove_unit)    (const struct scheduler *,
+-                                    struct sched_unit *);
+-
+-    void         (*sleep)          (const struct scheduler *,
+-                                    struct sched_unit *);
+-    void         (*wake)           (const struct scheduler *,
+-                                    struct sched_unit *);
+-    void         (*yield)          (const struct scheduler *,
+-                                    struct sched_unit *);
+-    void         (*context_saved)  (const struct scheduler *,
+-                                    struct sched_unit *);
+-
+-    void         (*do_schedule)    (const struct scheduler *,
+-                                    struct sched_unit *, s_time_t,
++    void         (*insert_unit)    (const struct scheduler *ops,
++                                    struct sched_unit *unit);
++    void         (*remove_unit)    (const struct scheduler *ops,
++                                    struct sched_unit *unit);
++
++    void         (*sleep)          (const struct scheduler *ops,
++                                    struct sched_unit *unit);
++    void         (*wake)           (const struct scheduler *ops,
++                                    struct sched_unit *unit);
++    void         (*yield)          (const struct scheduler *ops,
++                                    struct sched_unit *unit);
++    void         (*context_saved)  (const struct scheduler *ops,
++                                    struct sched_unit *unit);
++
++    void         (*do_schedule)    (const struct scheduler *ops,
++                                    struct sched_unit *currunit, s_time_t now,
+                                     bool tasklet_work_scheduled);
+ 
+-    struct sched_resource *(*pick_resource)(const struct scheduler *,
+-                                            const struct sched_unit *);
+-    void         (*migrate)        (const struct scheduler *,
+-                                    struct sched_unit *, unsigned int);
+-    int          (*adjust)         (const struct scheduler *, struct domain *,
+-                                    struct xen_domctl_scheduler_op *);
+-    void         (*adjust_affinity)(const struct scheduler *,
+-                                    struct sched_unit *,
+-                                    const struct cpumask *,
+-                                    const struct cpumask *);
+-    int          (*adjust_global)  (const struct scheduler *,
+-                                    struct xen_sysctl_scheduler_op *);
+-    void         (*dump_settings)  (const struct scheduler *);
+-    void         (*dump_cpu_state) (const struct scheduler *, int);
+-    void         (*move_timers)    (const struct scheduler *,
+-                                    struct sched_resource *);
++    struct sched_resource *(*pick_resource)(const struct scheduler *ops,
++                                            const struct sched_unit *unit);
++    void         (*migrate)        (const struct scheduler *ops,
++                                    struct sched_unit *unit,
++                                    unsigned int new_cpu);
++    int          (*adjust)         (const struct scheduler *ops,
++                                    struct domain *d,
++                                    struct xen_domctl_scheduler_op *op);
++    void         (*adjust_affinity)(const struct scheduler *ops,
++                                    struct sched_unit *unit,
++                                    const struct cpumask *hard,
++                                    const struct cpumask *soft);
++    int          (*adjust_global)  (const struct scheduler *ops,
++                                    struct xen_sysctl_scheduler_op *sc);
++    void         (*dump_settings)  (const struct scheduler *ops);
++    void         (*dump_cpu_state) (const struct scheduler *ops, int cpu);
++    void         (*move_timers)    (const struct scheduler *ops,
++                                    struct sched_resource *sr);
+ };
+ 
+ static inline int sched_init(struct scheduler *s)
 -- 
-2.25.1
+2.34.1
 
 
