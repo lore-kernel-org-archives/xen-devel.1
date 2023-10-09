@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3784E95A91
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Oct 2023 11:30:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.614316.955326 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB26CE95A96
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Oct 2023 11:30:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.614331.955346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qpoSF-0006Ye-As; Mon, 09 Oct 2023 11:29:43 +0000
+	id 1qpoSz-0000FV-Vo; Mon, 09 Oct 2023 11:30:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 614316.955326; Mon, 09 Oct 2023 11:29:43 +0000
+Received: by outflank-mailman (output) from mailman id 614331.955346; Mon, 09 Oct 2023 11:30:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qpoSF-0006YX-6n; Mon, 09 Oct 2023 11:29:43 +0000
-Received: by outflank-mailman (input) for mailman id 614316;
- Mon, 09 Oct 2023 11:29:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qkxv=FX=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1qpoSE-0006Jg-Nk
- for xen-devel@lists.xenproject.org; Mon, 09 Oct 2023 11:29:42 +0000
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [2607:f8b0:4864:20::435])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 23413e81-6697-11ee-98d3-6d05b1d4d9a1;
- Mon, 09 Oct 2023 13:29:42 +0200 (CEST)
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-694f3444f94so3593243b3a.2
- for <xen-devel@lists.xenproject.org>; Mon, 09 Oct 2023 04:29:42 -0700 (PDT)
-Received: from localhost ([122.172.81.92]) by smtp.gmail.com with ESMTPSA id
- a21-20020a62bd15000000b00693498a846esm6129376pff.80.2023.10.09.04.29.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 04:29:40 -0700 (PDT)
+	id 1qpoSz-0000FO-T5; Mon, 09 Oct 2023 11:30:29 +0000
+Received: by outflank-mailman (input) for mailman id 614331;
+ Mon, 09 Oct 2023 11:30:28 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1qpoSy-0000FA-Ik
+ for xen-devel@lists.xenproject.org; Mon, 09 Oct 2023 11:30:28 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qpoSy-0005VX-0S; Mon, 09 Oct 2023 11:30:28 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qpoSx-0001ap-Ov; Mon, 09 Oct 2023 11:30:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,107 +41,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23413e81-6697-11ee-98d3-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1696850980; x=1697455780; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VA2GT8eqbiQpihVq6IatV7jxO70qnqwP/ImeaPQmFQY=;
-        b=c9oM6zsol6JCwa4xxFuBsBG/UuQZYKKj/y+jp9pD2P7U2m+YT1oqqYbQrioiEKROA4
-         FhC1vXcdUEECD76bK/GaMaxUCNFR/i/wY32NzDkMxdHHNpRQBaruase9cgOjVwjD4b4L
-         9DlOfOcE4wHviKGTGK71och7M/ZgQ/vwnI0WC7wjssJuDryPO15pcTObmljzUXC9hPgP
-         AveV5/QnVKZyj1qYGbknKJk8Lc1SSkEDPcTPG9JrMmXZHS64sUzS571mBEmpx8sBGnxj
-         fbfURCqKFU2aYCIYRVXcK6HsmqIi9alIqovYTkAeUyuXl9mh/ZQfwauwx/ZJ9kL/CPTG
-         +GAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696850980; x=1697455780;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VA2GT8eqbiQpihVq6IatV7jxO70qnqwP/ImeaPQmFQY=;
-        b=IB3zrEVBXSAizmza9OPXaXotGdJCod7j1i7WUpCjP+3i8MrX2amX9hInZiZmFBODfc
-         H5mTEGXaEvj/7aVyyuSIwogeuTkNtUg01xd1onfCYizdnhUisdBBbiNs9BXy74p7yxMf
-         +vENGaVChkQBrhMGIkiLlwAoa5cozKfKX7tFgEqy+1tIRWqiBSFafcNs2oXSN/8cv00z
-         cSRnfEqgxXCnsF7RNsVm0pz3X3NI2KJ6y4zQ7DEa1yNn6rY6dW2fyHYfkp8PxBacahIi
-         fDqU6vm6Hi+Edzwu/MFpVQIFhfFf+fJq5gt0bFi3IGe/OOnZNiK9rm8IdPaxZAw3x7HW
-         6Qhg==
-X-Gm-Message-State: AOJu0YzbIm2rVCidbEJ2piXxu3H3ZwC6KP72UYjQusyfqEIF8Gt1f8/q
-	U0dwzaXF3kSy9oha4+nriM8sCA==
-X-Google-Smtp-Source: AGHT+IGb6yho3N2vKqm69w/2J2A7jX8tPga8/bSYK0Z0iBic3N7lSd2HTvgeG7X2IAqd1oF0NoQoWA==
-X-Received: by 2002:a05:6a00:22c9:b0:690:2ecd:a593 with SMTP id f9-20020a056a0022c900b006902ecda593mr19268889pfj.26.1696850980690;
-        Mon, 09 Oct 2023 04:29:40 -0700 (PDT)
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	stratos-dev@op-lists.linaro.org,
-	Erik Schilling <erik.schilling@linaro.org>,
-	Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH V3 1/2] xen: evtchn: Allow shared registration of IRQ handers
-Date: Mon,  9 Oct 2023 16:59:24 +0530
-Message-Id: <8380c7b1c8cd9edb2e45e9a204650b34df3458a7.1696850733.git.viresh.kumar@linaro.org>
-X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
-In-Reply-To: <cover.1696850733.git.viresh.kumar@linaro.org>
-References: <cover.1696850733.git.viresh.kumar@linaro.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=wOW9OmiIK/DjWo6WXfbdZcIP+vtPhlOcm0qAiXzHG20=; b=VFeU9LC91jjS1RPDGKEHm/50Su
+	RV0uk6sr2/LYjkHpve4N3pitb/gHAWGp3AsrXZbnq/r+nlQUREz4BoJNHme+zbpZXEz5fGYzsQKq3
+	aUOesBQqwT/xkxNv/PHx85RfZA88Q/3Kus2Fkblfd9oM4Ne/WRpM4kl0uMLVKRehEpVg=;
+Message-ID: <cc403bb2-2f32-4696-a248-7e8680ff4823@xen.org>
+Date: Mon, 9 Oct 2023 12:30:25 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.18 v5] xen/pdx: Make CONFIG_PDX_COMPRESSION a common
+ Kconfig option
+Content-Language: en-GB
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+ Julien Grall <jgrall@amazon.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Shawn Anastasio <sanastasio@raptorengineering.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Henry Wang <Henry.Wang@arm.com>, George Dunlap
+ <George.Dunlap@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <20231006144405.1078260-1-andrew.cooper3@citrix.com>
+ <efc2b22e-6650-4c1f-b4cf-9971d4d08b49@xen.org>
+ <b95fa9cd-2534-4d7a-9843-2bc71695655d@citrix.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <b95fa9cd-2534-4d7a-9843-2bc71695655d@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Currently the handling of events is supported either in the kernel or
-userspace, but not both.
 
-In order to support fast delivery of interrupts from the guest to the
-backend, we need to handle the Queue notify part of Virtio protocol in
-kernel and the rest in userspace.
 
-Update the interrupt handler registration flag to IRQF_SHARED for event
-channels, which would allow multiple entities to bind their interrupt
-handler for the same event channel port.
+On 06/10/2023 17:01, Andrew Cooper wrote:
+> On 06/10/2023 4:09 pm, Julien Grall wrote:
+>>
+>>
+>> On 06/10/2023 15:44, Andrew Cooper wrote:
+>>> From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+>>>
+>>> Adds a new compile-time flag to allow disabling PDX compression and
+>>> compiles out compression-related code/data. It also shorts the pdx<->pfn
+>>> conversion macros and creates stubs for masking functions.
+>>>
+>>> While at it, removes the old arch-defined CONFIG_HAS_PDX flag.
+>>> Despite the
+>>> illusion of choice, it was not optional.
+>>>
+>>> There are ARM and PPC platforms with sparse RAM banks - leave compression
+>>> active by default there.  OTOH, there are no known production x86
+>>> systems with
+>>> sparse RAM banks, so disable compression.  This decision can be
+>>> revisited if
+>>> such a platform comes along.
+>>
+>> (Process remarks rather than the code itself)
+>>
+>> Jan is away this week so I want to make sure this doesn't go in without
+>> him having a say.
+>>
+>> While I don't particularly care about the approach taken for x86, Jan
+>> voiced concerned with this approach and so far I didn't see any
+>> conclusion. If there is any, then please point me to them.
+>>
+>> For the record, the objections from Jan are in [1]. If we want to ignore
+>> them, then I think we need a vote. Possibly only from the x86 folks (?).
+> 
+> 
+> What do you think the 2 x86 maintainer tags on this patch in this exact
+> form, 
 
-Also increment the reference count of irq_info when multiple entities
-try to bind event channel to irqchip, so the unbinding happens only
-after all the users are gone.
+Have you actually looked at the timeline before writing this e-mail?
 
-Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
----
- drivers/xen/events/events_base.c | 3 ++-
- drivers/xen/evtchn.c             | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+15:44 -> You sent the series
+16:09 -> I have asked for a vote/second review
+16:18 -> Roger provided a second reviewed-by
 
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index c7715f8bd452..d72fb26cc051 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -1238,7 +1238,8 @@ static int bind_evtchn_to_irq_chip(evtchn_port_t evtchn, struct irq_chip *chip,
- 		bind_evtchn_to_cpu(evtchn, 0, false);
- 	} else {
- 		struct irq_info *info = info_for_irq(irq);
--		WARN_ON(info == NULL || info->type != IRQT_EVTCHN);
-+		if (!WARN_ON(!info || info->type != IRQT_EVTCHN))
-+			info->refcnt++;
- 	}
- 
- out:
-diff --git a/drivers/xen/evtchn.c b/drivers/xen/evtchn.c
-index c99415a70051..43f77915feb5 100644
---- a/drivers/xen/evtchn.c
-+++ b/drivers/xen/evtchn.c
-@@ -397,7 +397,7 @@ static int evtchn_bind_to_user(struct per_user_data *u, evtchn_port_t port)
- 	if (rc < 0)
- 		goto err;
- 
--	rc = bind_evtchn_to_irqhandler_lateeoi(port, evtchn_interrupt, 0,
-+	rc = bind_evtchn_to_irqhandler_lateeoi(port, evtchn_interrupt, IRQF_SHARED,
- 					       u->name, evtchn);
- 	if (rc < 0)
- 		goto err;
+ > The vote has already concluded.
+
+Indeed. But this was only after my e-mail was sent. I would have replied 
+differently if Roger had replied before hand.
+
+I am merely trying to make sure we are following the process and don't 
+get things committed without unnaddressed objections (you likely 
+remember the series I am talking about...).
+
+Next time, I suggest to check the timeline before implying that I am 
+putting roadblocks.
+
+Cheers,
+
 -- 
-2.31.1.272.g89b43f80a514
-
+Julien Grall
 
