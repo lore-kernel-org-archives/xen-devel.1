@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C495FCD80BA
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Oct 2023 12:16:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.614846.956114 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA329CD80BA
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Oct 2023 12:19:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.614912.956158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqBfG-0008Nm-He; Tue, 10 Oct 2023 12:16:42 +0000
+	id 1qqBi7-0002y8-3I; Tue, 10 Oct 2023 12:19:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 614846.956114; Tue, 10 Oct 2023 12:16:42 +0000
+Received: by outflank-mailman (output) from mailman id 614912.956158; Tue, 10 Oct 2023 12:19:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqBfG-0008Nf-F5; Tue, 10 Oct 2023 12:16:42 +0000
-Received: by outflank-mailman (input) for mailman id 614846;
- Tue, 10 Oct 2023 12:16:40 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qqBi7-0002y1-0e; Tue, 10 Oct 2023 12:19:39 +0000
+Received: by outflank-mailman (input) for mailman id 614912;
+ Tue, 10 Oct 2023 12:19:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Rlhl=FY=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1qqBZk-00044v-CP
- for xen-devel@lists.xenproject.org; Tue, 10 Oct 2023 12:11:00 +0000
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 12ee1d84-6766-11ee-98d3-6d05b1d4d9a1;
- Tue, 10 Oct 2023 14:10:59 +0200 (CEST)
-Received: from [192.168.2.166] (109-252-153-31.dynamic.spd-mgts.ru
- [109.252.153.31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- (Authenticated sender: dmitry.osipenko)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id BF11966072B6;
- Tue, 10 Oct 2023 13:10:57 +0100 (BST)
+ <SRS0=c+X1=FY=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qqBWH-0006hr-St
+ for xen-devel@lists.xenproject.org; Tue, 10 Oct 2023 12:07:25 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8bf94520-6765-11ee-9b0d-b553b5be7939;
+ Tue, 10 Oct 2023 14:07:13 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id E77114EE0737;
+ Tue, 10 Oct 2023 14:07:12 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,67 +41,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12ee1d84-6766-11ee-98d3-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1696939859;
-	bh=rkoxdkzpBRiLsu+HZW222Ci6VJ4ZbNZnvJKASj8v+Qk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=YJrAlLGQX7F5DItOeK9lDB4Rmq9LJ+dEuwNIqgU04qOPIEGYr8l8yqJaajzXd675O
-	 CzGdif2PMURe7hVi7LTVvyng3h1YKcKjIf2bwgCH6yk/xCAFNOA3FVOcuUxeYY5Qa0
-	 SjB5iETgnSpSGV/YFDPQsdgHzO9RVvtGbtlCQWoOoupb4LboKZv0Uc2wmpAtLS0c9q
-	 eJeBeDes60d8mxTT+FAmhY6XbX5bD5DM81/VGf8Fsm5Hhzc0He9vxPH7LdsY2tgBLb
-	 Jc02QCURXNBUMhyLSFeJxJyUbRneWqN80Zcc12Qa6RzjjlGQV8h/6yIrQgIyKBksEA
-	 aZJQSDsC2PnyA==
-Message-ID: <c5f04687-160b-08e7-1366-c29cba69f929@collabora.com>
-Date: Tue, 10 Oct 2023 15:10:55 +0300
+X-Inumbo-ID: 8bf94520-6765-11ee-9b0d-b553b5be7939
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [QEMU PATCH v5 12/13] virtio-gpu: Initialize Venus
-Content-Language: en-US
-To: Huang Rui <ray.huang@amd.com>, Gerd Hoffmann <kraxel@redhat.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Antonio Caggiano <quic_acaggian@quicinc.com>,
- "Dr . David Alan Gilbert" <dgilbert@redhat.com>,
- Robert Beckett <bob.beckett@collabora.com>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>, qemu-devel@nongnu.org
-Cc: xen-devel@lists.xenproject.org,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Albert Esteve <aesteve@redhat.com>, ernunes@redhat.com,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- Alyssa Ross <hi@alyssa.is>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
- Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
- Honglei Huang <honglei1.huang@amd.com>, Julia Zhang <julia.zhang@amd.com>,
- Chen Jiqian <Jiqian.Chen@amd.com>
-References: <20230915111130.24064-1-ray.huang@amd.com>
- <20230915111130.24064-13-ray.huang@amd.com>
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <20230915111130.24064-13-ray.huang@amd.com>
-Content-Type: text/plain; charset=UTF-8
+Date: Tue, 10 Oct 2023 14:07:12 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org, michal.orzel@amd.com,
+ xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, consulting@bugseng.com,
+ jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com, Paul
+ Durrant <paul@xen.org>, George Dunlap <george.dunlap@citrix.com>, Wei Liu
+ <wl@xen.org>
+Subject: Re: [XEN PATCH][for-4.19 8/9] xen/types: address Rule 10.1 for
+ DECLARE_BITMAP use
+In-Reply-To: <f9a24504-97e7-4a2e-8601-8e4672b45f88@xen.org>
+References: <cover.1696514677.git.nicola.vetrini@bugseng.com>
+ <9642dcb4ab51ec9eaeedf16056fbcd946a3efbea.1696514677.git.nicola.vetrini@bugseng.com>
+ <80101145-1958-457a-8c80-cae816ae74aa@xen.org>
+ <4b144869407871011c538af48b311c31@bugseng.com>
+ <354c6138-509e-4106-9a27-3c75c85b85e5@xen.org>
+ <alpine.DEB.2.22.394.2310061746190.3431292@ubuntu-linux-20-04-desktop>
+ <d90524b8-70ee-457e-8d6a-9e69f135b81d@xen.org>
+ <alpine.DEB.2.22.394.2310091803060.3431292@ubuntu-linux-20-04-desktop>
+ <f9a24504-97e7-4a2e-8601-8e4672b45f88@xen.org>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <eda6269602e89abf5bd1e23cc81d0528@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 9/15/23 14:11, Huang Rui wrote:
-> +  if virgl.version().version_compare('>= 0.9.0') and virgl.version().version_compare('< 1.0.0')
-> +    message('Enabling virglrenderer unstable APIs')
-> +    virgl = declare_dependency(compile_args: '-DVIRGL_RENDERER_UNSTABLE_APIS',
-> +                               dependencies: virgl)
-> +  endif
 
-All the required APIs has been stabilized in virglrenderer 1.0, we
-shouldn't use the VIRGL_RENDERER_UNSTABLE_APIS anymore. The unstable
-APIs were used for development purposes and shouldn't present in the
-final version.
+>>>> 
+>>>> I agree on everything Julien's wrote and I was about to suggest to 
+>>>> use a
+>>>> SAF comment to suppress the warning because it is clearer than a int
+>>>> cast.
+>>>> 
+>>>> But then I realized that even if BITS_TO_LONGS was fixed, wouldn't 
+>>>> still
+>>>> we have a problem because IOMMU_FEAT_count is an enum?
+>>>> 
+>>>> Is it the case that IOMMU_FEAT_count would have to be cast 
+>>>> regardless,
+>>>> either to int or unsigned int or whatever to be used in 
+>>>> DECLARE_BITMAP?
+>>>> 
+>>>> 
+>>>> So we have 2 problems here: one problem is DECLARE_BITMAP taking int
+>>>> instead of unsigned int, and another problem is IOMMU_FEAT_count 
+>>>> being
+>>>> an enum.
+>>>> 
+>>>> If I got it right, then I would go with the cast to int (like done 
+>>>> in
+>>>> this patch) with a decent comment on top of it.
+>>> 
+>>> I might be missing something here. But why should we use cast rather 
+>>> than /*
+>>> SAF-X */ just above? I would have expected we wanted to highlight the
+>>> violation rather than hiding it.
+>> 
+>> My understanding is that the cast is required when converting an enum
+>> type to an integer type and vice versa. The idea is that we shouldn't 
+>> do
+>> implicit conversions as they are error prone, only explicit 
+>> conversions
+>> are allowed between enum and integers.
+> 
+> We have a lot of places in Xen using implicit conversion from enum to
+> integer (for instance in the P2M code for p2m_type_t). Does ECLAIR
+> report all of them? If not, then why?
+> 
 
-Please remove the VIRGL_RENDERER_UNSTABLE_APIS in v6.
+Can you give some pointers as to where this enum is used in arithmetic 
+operations?
+ From a cursory glace I can see equality comparisons and
+as arguments to the array subscript operator, which are both compliant.
+
+>> 
+>> So we need either (int) or (unsigned int). The question is which one
+>> between the two, and theoretically (unsigned int) is better but due to
+>> the reasons above (int) is the simplest choice.
+>> 
+>> Yes, instead of the cast we can also add a SAF-x comment, which refers
+>> to a deviation that says something along the lines "we could fix this
+>> with a cast but we prefer a deviation because it makes the code easier
+>> to read".
+>> 
+>> In general my personal preference would be to use a cast, because we
+>> shouldn't implicitly convert enums to integers.
+> 
+> See above. I'd like to understand whether we are going to sprinkle the
+> code with cast. If so, I am afraid I am against this solution.
+> 
+> Cheers,
 
 -- 
-Best regards,
-Dmitry
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
