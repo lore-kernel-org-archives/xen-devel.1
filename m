@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0220FCDB47E
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 15:29:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.615846.957392 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D760ACDB46E
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 15:29:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.615841.957353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxcb-00087N-A9; Thu, 12 Oct 2023 15:29:09 +0000
+	id 1qqxcW-00079L-Es; Thu, 12 Oct 2023 15:29:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 615846.957392; Thu, 12 Oct 2023 15:29:09 +0000
+Received: by outflank-mailman (output) from mailman id 615841.957353; Thu, 12 Oct 2023 15:29:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxcb-00085x-25; Thu, 12 Oct 2023 15:29:09 +0000
-Received: by outflank-mailman (input) for mailman id 615846;
- Thu, 12 Oct 2023 15:29:07 +0000
+	id 1qqxcW-00079E-Bv; Thu, 12 Oct 2023 15:29:04 +0000
+Received: by outflank-mailman (input) for mailman id 615841;
+ Thu, 12 Oct 2023 15:29:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oWZW=F2=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qqxcZ-0006QI-No
- for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:07 +0000
+ id 1qqxcV-0006QI-C9
+ for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:03 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1532993c-6914-11ee-98d4-6d05b1d4d9a1;
- Thu, 12 Oct 2023 17:29:07 +0200 (CEST)
+ id 128e930c-6914-11ee-98d4-6d05b1d4d9a1;
+ Thu, 12 Oct 2023 17:29:02 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 434474EE074C;
- Thu, 12 Oct 2023 17:29:06 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 2DBBF4EE0747;
+ Thu, 12 Oct 2023 17:29:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1532993c-6914-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 128e930c-6914-11ee-98d4-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -56,59 +56,37 @@ Cc: sstabellini@kernel.org,
 	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-4.19 v2 8/8] xen/compat: use BUILD_BUG_ON in CHECK_SIZE macros
-Date: Thu, 12 Oct 2023 17:28:52 +0200
-Message-Id: <6138e02935236afd51a5db98d3527e5e2602468d.1697123806.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH][for-4.19 v2 3/8] xen/pdx: amend definition of PDX_GROUP_COUNT
+Date: Thu, 12 Oct 2023 17:28:47 +0200
+Message-Id: <62f8b9c36ad78352fc796878fd9759307ec3e380.1697123806.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 References: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-BUILD_BUG_ON is the preferred way to induce a build error
-upon statically determined incorrect conditions.
-
-This also fixes a MISRA C:2012 Rule 10.1 violation in the
-previous formulation.
+The definition of PDX_GROUP_COUNT causes violations of
+MISRA C:2012 Rule 10.1, therefore the problematic part now uses
+the LOWEST_BIT macro, which encapsulates the pattern.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
-Changes in v2:
-- replace the construct with a BUILD_BUG_ON.
----
- xen/include/xen/compat.h | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ xen/include/xen/pdx.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/include/xen/compat.h b/xen/include/xen/compat.h
-index f2ce5bb3580a..4daa04183eac 100644
---- a/xen/include/xen/compat.h
-+++ b/xen/include/xen/compat.h
-@@ -151,12 +151,20 @@ CHECK_NAME_(k, n, T)(k xen_ ## n *x, \
-     return x == c; \
- }
+diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
+index f3fbc4273aa4..36d618a8ba7d 100644
+--- a/xen/include/xen/pdx.h
++++ b/xen/include/xen/pdx.h
+@@ -72,7 +72,7 @@
+ extern unsigned long max_pdx;
  
--#define CHECK_SIZE(name) \
--    typedef int CHECK_NAME(name, S)[1 - (sizeof(xen_ ## name ## _t) != \
--                                         sizeof(compat_ ## name ## _t)) * 2]
-+#define CHECK_SIZE(name)                                  \
-+static inline void __maybe_unused CHECK_SIZE_##name(void) \
-+{                                                         \
-+    typedef int CHECK_NAME(name, S)[1];                   \
-+    BUILD_BUG_ON(sizeof(xen_ ## name ## _t) !=            \
-+                 sizeof(compat_ ## name ## _t));          \
-+}
- #define CHECK_SIZE_(k, n) \
--    typedef int CHECK_NAME_(k, n, S)[1 - (sizeof(k xen_ ## n) != \
--                                          sizeof(k compat_ ## n)) * 2]
-+static inline void __maybe_unused CHECK_SIZE_##k_##n(void) \
-+{                                                          \
-+    typedef int CHECK_NAME_(k, n, S)[1];                   \
-+    BUILD_BUG_ON(sizeof(k xen_ ## n) !=                    \
-+                 sizeof(k compat_ ## n));                  \
-+}
+ #define PDX_GROUP_COUNT ((1 << PDX_GROUP_SHIFT) / \
+-                         (sizeof(*frame_table) & -sizeof(*frame_table)))
++                         (LOWEST_BIT(sizeof(*frame_table))))
+ extern unsigned long pdx_group_valid[];
  
- #define CHECK_FIELD_COMMON(name, t, f) \
- static inline int __maybe_unused name(xen_ ## t ## _t *x, compat_ ## t ## _t *c) \
+ /**
 -- 
 2.34.1
 
