@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54F9BCDB486
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 20:18:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616002.957649 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D9B8CDB486
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 20:18:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616001.957643 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qr286-00069T-7C; Thu, 12 Oct 2023 20:17:58 +0000
+	id 1qr285-00065o-R5; Thu, 12 Oct 2023 20:17:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616002.957649; Thu, 12 Oct 2023 20:17:58 +0000
+Received: by outflank-mailman (output) from mailman id 616001.957643; Thu, 12 Oct 2023 20:17:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qr285-000696-Vb; Thu, 12 Oct 2023 20:17:57 +0000
-Received: by outflank-mailman (input) for mailman id 616002;
+	id 1qr285-00065h-Ns; Thu, 12 Oct 2023 20:17:57 +0000
+Received: by outflank-mailman (input) for mailman id 616001;
  Thu, 12 Oct 2023 20:17:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Qqh1=F2=gmail.com=ubizjak@srs-se1.protection.inumbo.net>)
- id 1qr284-00065W-Tk
+ id 1qr284-00065W-9G
  for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 20:17:56 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6e02db8e-693c-11ee-98d4-6d05b1d4d9a1;
- Thu, 12 Oct 2023 22:17:56 +0200 (CEST)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-9b9faf05f51so211927066b.2
- for <xen-devel@lists.xenproject.org>; Thu, 12 Oct 2023 13:17:56 -0700 (PDT)
+ id 6d80738e-693c-11ee-98d4-6d05b1d4d9a1;
+ Thu, 12 Oct 2023 22:17:55 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-9936b3d0286so230652866b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Oct 2023 13:17:55 -0700 (PDT)
 Received: from localhost.localdomain ([46.248.82.114])
  by smtp.gmail.com with ESMTPSA id
- i3-20020a1709064ec300b00997d7aa59fasm11692552ejv.14.2023.10.12.13.17.55
+ i3-20020a1709064ec300b00997d7aa59fasm11692552ejv.14.2023.10.12.13.17.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 13:17:55 -0700 (PDT)
+ Thu, 12 Oct 2023 13:17:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,128 +47,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e02db8e-693c-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 6d80738e-693c-11ee-98d4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1697141875; x=1697746675; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hDMSEbE6Ie84T5BkOrHBUuyCR3ToRtFXIBnMpzsN9Bo=;
-        b=HKW2VW07oRHR+EE7e693Prw/yDl9jPk7xnPtRYI0DpEScXozacnbJ7+dMsAzUvv8uj
-         WFFyYC+hmAJdtDdR5skipow80yxnD0tIarn5ndnnGwVs4nOaYI3pPfZjEzm91i1mGp2C
-         agN30yoTnce4OWGXIamrGovRaHkYIZSzVTDEF6R7kiHstOezPuApZGzlj6b6GZ0WgJEy
-         7jnDxVoyw3oCly+aypNIGqily1JAUWJO+65Hb43R6WHFe72aRLiuBKwcqNYic3Psxocc
-         CXaqIavRjboMlIVzGKcdlqU7A9pitLAVD4K4/4ESSIZA/0tF8wJRfKWfVCU6KK5R49BK
-         RJXg==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WEFicMsW4s3skYy4mNr+LHCDs51WUiGt3MBVpKqJRSI=;
+        b=J8unfYQ81dUQvqq9Fn2m++xjFelS3IwDbLDZ4qjrb0ss9KCn7bqWU0x6Tog5o4Ltya
+         hAevEPswrUCFgsXLcnAprS38leDEPC4P/rEFDWmkWNkcSFbu/hcyRhIUGdqRIGe4MmeQ
+         uiw9lRuZlcKq+w54jCKtBvh5u9umKJ3eskoV6pQ27xTF2LtgJI09fCRC9elOkXsly695
+         PRWWEABCVJZbKN14BEEHW7W+gI3Ry5B4bVR9qFYf3wZ3yp2so7eWCAsmJdwOcUAszukA
+         vm77XVhccuCFtIyk2mBV6LZS6PqJI+2az4GR/d6HYJSUXL/J+9ZAqJ36NiXUnZRxLxIc
+         641A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1697141875; x=1697746675;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hDMSEbE6Ie84T5BkOrHBUuyCR3ToRtFXIBnMpzsN9Bo=;
-        b=O8td+M1m9qgZab606f/N3QSWcJw/FuOSIRY+ZddtYQu8otYl2324BP6uhCsL7gkZDq
-         bBlZpekkAIkgiEMUEeYEHC1GkdTyYZhHuSCmum5iwIkE/mBRy4pWJgufrJ2yigfDQruR
-         r5qw/R5zzmEZCi4SAIYkhbqTR+qDqRJi7vLmQssNK5VNN3zRSWYCVPZ9kaXoHV+bX93w
-         GJTAGdITb2hZh2mzPhQvUnQN4bnVUTD5GjNo9xEty//LW4Dl05LoEMZ6yopbc0AYO5eX
-         Y2D78dJq/stxZau/b0sXcISRt6Y7UsJY/bIZ2oQQ+FCTGrGWvH4IFl09D16isb77j7St
-         uqLw==
-X-Gm-Message-State: AOJu0Yxht8tI3o5tIahsoQT0advc6fJYTygw199L/kzg9EVRUAUtk5V2
-	gNLGTt6D5ppU3mrJGVyLiek=
-X-Google-Smtp-Source: AGHT+IGhoWha4M/ka8e2JRhDL76Q3hwso5VE/0ZSrUJ5K72lB/D3qkiWMd0b7LflyD+sVTpFdiWVHw==
-X-Received: by 2002:a17:906:3e52:b0:9b2:aa2f:ab69 with SMTP id t18-20020a1709063e5200b009b2aa2fab69mr24396120eji.30.1697141875609;
-        Thu, 12 Oct 2023 13:17:55 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WEFicMsW4s3skYy4mNr+LHCDs51WUiGt3MBVpKqJRSI=;
+        b=aRIaTx069VUuJWQx0bj5a0fZhyJQOprd84QQqQ2CmAkWjzpCG40N4DTTAQtUKDTPb1
+         D9jUFuFh3mi4dZD0SghoI5ugD8rJ5QO0eAFPm2GShmM7hOqkyB8LJGdL1fwG7qKRXgVa
+         Nn5r5T2yMKDaECFVukkOKUY2RM3rbsh9u8G7FMVoxbwclzHdTh5U/p5Xb5xov6hP4wqT
+         8xXcptOOqgTq1WiuPRbxTU8vI8M71HDj1dBFg81VrNJNn25YZGLAtLrQvtUA0G7Qmud4
+         SWpEfRZ9ZVMocRGTanEI8/nL6H0SlF/TGE6sejWfmo9sgSTNc0bX7vFD2qsseN693d1i
+         A88A==
+X-Gm-Message-State: AOJu0Yzwzj7XWF+1h0QuPWQh2RBBHUZjcFb3j9JStsdlc0rYTKxf4DDe
+	ld450dzcmgkZnZNjL/dine0=
+X-Google-Smtp-Source: AGHT+IHCzOG5Qj1uWOXe+fHsuoCjTwSpfunPEUadKxQrsehhq/m4xv7XrF8ve3tA1LAlh7XjukB2Ww==
+X-Received: by 2002:a17:906:73db:b0:9ae:6a9b:274e with SMTP id n27-20020a17090673db00b009ae6a9b274emr24705973ejl.8.1697141874375;
+        Thu, 12 Oct 2023 13:17:54 -0700 (PDT)
 From: Uros Bizjak <ubizjak@gmail.com>
 To: x86@kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org
 Cc: Uros Bizjak <ubizjak@gmail.com>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>
-Subject: [PATCH v2 2/4] x86/percpu: Correct PER_CPU_VAR usage to include symbol and its addend
-Date: Thu, 12 Oct 2023 22:12:05 +0200
-Message-ID: <20231012201743.292149-3-ubizjak@gmail.com>
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v2 0/4]  Introduce %rip-relative addressing to PER_CPU_VAR macro
+Date: Thu, 12 Oct 2023 22:12:03 +0200
+Message-ID: <20231012201743.292149-1-ubizjak@gmail.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231012201743.292149-1-ubizjak@gmail.com>
-References: <20231012201743.292149-1-ubizjak@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-PER_CPU_VAR macro should be applied to a symbol and its addend.
-Inconsistent usage is currently harmless, but needs to be corrected
-before %rip-relative addressing is introduced to PER_CPU_VAR macro.
+The following patch series introduces %rip-relative addressing to
+PER_CPU_VAR macro. Instruction with %rip-relative address operand is
+one byte shorter than its absolute address counterpart and is also
+compatible with position independent executable (-fpie) build.
 
-No functional changes intended.
+The first three patches are cleanups that fix various inconsistencies
+throughout the assembly code.
 
+The last patch introduces (%rip) suffix and uses it for x86_64 target,
+resulting in a small code size decrease:
+
+   text    data     bss     dec     hex filename
+25510677        4386685  808388 30705750        1d48856 vmlinux-new.o
+25510629        4386685  808388 30705702        1d48826 vmlinux-old.o
+
+Patch series is against current mainline and can be applied independently
+of ongoing percpu work.
+
+v2: Introduce PER_CPU_ARG macro to conditionally enable
+    segment registers in cmpxchg{8,16}b_emu.S for CONFIG_SMP.
+
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: Ingo Molnar <mingo@redhat.com>
 Cc: Borislav Petkov <bp@alien8.de>
 Cc: Dave Hansen <dave.hansen@linux.intel.com>
 Cc: "H. Peter Anvin" <hpa@zytor.com>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Signed-off-by: Uros Bizjak <ubizjak@gmail.com>
----
- arch/x86/entry/calling.h  | 2 +-
- arch/x86/entry/entry_32.S | 2 +-
- arch/x86/entry/entry_64.S | 2 +-
- arch/x86/kernel/head_64.S | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/x86/entry/calling.h b/arch/x86/entry/calling.h
-index f6907627172b..47368ab0bda0 100644
---- a/arch/x86/entry/calling.h
-+++ b/arch/x86/entry/calling.h
-@@ -173,7 +173,7 @@ For 32-bit we have the following conventions - kernel is built with
- .endm
- 
- #define THIS_CPU_user_pcid_flush_mask   \
--	PER_CPU_VAR(cpu_tlbstate) + TLB_STATE_user_pcid_flush_mask
-+	PER_CPU_VAR(cpu_tlbstate + TLB_STATE_user_pcid_flush_mask)
- 
- .macro SWITCH_TO_USER_CR3_NOSTACK scratch_reg:req scratch_reg2:req
- 	ALTERNATIVE "jmp .Lend_\@", "", X86_FEATURE_PTI
-diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index 6e6af42e044a..d4e094b2c877 100644
---- a/arch/x86/entry/entry_32.S
-+++ b/arch/x86/entry/entry_32.S
-@@ -305,7 +305,7 @@
- .macro CHECK_AND_APPLY_ESPFIX
- #ifdef CONFIG_X86_ESPFIX32
- #define GDT_ESPFIX_OFFSET (GDT_ENTRY_ESPFIX_SS * 8)
--#define GDT_ESPFIX_SS PER_CPU_VAR(gdt_page) + GDT_ESPFIX_OFFSET
-+#define GDT_ESPFIX_SS PER_CPU_VAR(gdt_page + GDT_ESPFIX_OFFSET)
- 
- 	ALTERNATIVE	"jmp .Lend_\@", "", X86_BUG_ESPFIX
- 
-diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-index 43606de22511..3d6770b87b87 100644
---- a/arch/x86/entry/entry_64.S
-+++ b/arch/x86/entry/entry_64.S
-@@ -252,7 +252,7 @@ SYM_FUNC_START(__switch_to_asm)
- 
- #ifdef CONFIG_STACKPROTECTOR
- 	movq	TASK_stack_canary(%rsi), %rbx
--	movq	%rbx, PER_CPU_VAR(fixed_percpu_data) + FIXED_stack_canary
-+	movq	%rbx, PER_CPU_VAR(fixed_percpu_data + FIXED_stack_canary)
- #endif
- 
- 	/*
-diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index ea6995920b7a..bfe5ec2f4f83 100644
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -449,7 +449,7 @@ SYM_CODE_START(soft_restart_cpu)
- 	UNWIND_HINT_END_OF_STACK
- 
- 	/* Find the idle task stack */
--	movq	PER_CPU_VAR(pcpu_hot) + X86_current_task, %rcx
-+	movq	PER_CPU_VAR(pcpu_hot + X86_current_task), %rcx
- 	movq	TASK_threadsp(%rcx), %rsp
- 
- 	jmp	.Ljump_to_C_code
+Uros Bizjak (4):
+  x86/percpu: Introduce PER_CPU_ARG and use it in cmpxchg{8,16}b_emu.S
+  x86/percpu: Correct PER_CPU_VAR usage to include symbol and its addend
+  x86/percpu, xen: Correct PER_CPU_VAR usage to include symbol and its
+    addend
+  x86/percpu: Introduce %rip-relative addressing to PER_CPU_VAR macro
+
+ arch/x86/entry/calling.h      |  2 +-
+ arch/x86/entry/entry_32.S     |  2 +-
+ arch/x86/entry/entry_64.S     |  2 +-
+ arch/x86/include/asm/percpu.h | 10 +++++++---
+ arch/x86/kernel/head_64.S     |  2 +-
+ arch/x86/lib/cmpxchg16b_emu.S | 12 ++++++------
+ arch/x86/lib/cmpxchg8b_emu.S  | 24 ++++++++++++++++++------
+ arch/x86/xen/xen-asm.S        | 10 +++++-----
+ 8 files changed, 40 insertions(+), 24 deletions(-)
+
 -- 
 2.41.0
 
