@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C55ECDB47E
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 15:29:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.615842.957363 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0220FCDB47E
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 15:29:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.615846.957392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxcX-0007Ph-OK; Thu, 12 Oct 2023 15:29:05 +0000
+	id 1qqxcb-00087N-A9; Thu, 12 Oct 2023 15:29:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 615842.957363; Thu, 12 Oct 2023 15:29:05 +0000
+Received: by outflank-mailman (output) from mailman id 615846.957392; Thu, 12 Oct 2023 15:29:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxcX-0007PS-JY; Thu, 12 Oct 2023 15:29:05 +0000
-Received: by outflank-mailman (input) for mailman id 615842;
- Thu, 12 Oct 2023 15:29:04 +0000
+	id 1qqxcb-00085x-25; Thu, 12 Oct 2023 15:29:09 +0000
+Received: by outflank-mailman (input) for mailman id 615846;
+ Thu, 12 Oct 2023 15:29:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oWZW=F2=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qqxcW-0006QI-Iq
- for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:04 +0000
+ id 1qqxcZ-0006QI-No
+ for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:07 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 134e2440-6914-11ee-98d4-6d05b1d4d9a1;
- Thu, 12 Oct 2023 17:29:04 +0200 (CEST)
+ id 1532993c-6914-11ee-98d4-6d05b1d4d9a1;
+ Thu, 12 Oct 2023 17:29:07 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id CB0064EE0748;
- Thu, 12 Oct 2023 17:29:02 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 434474EE074C;
+ Thu, 12 Oct 2023 17:29:06 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 134e2440-6914-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 1532993c-6914-11ee-98d4-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,72 +53,63 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-next v2 4/8] x86_64/mm: express macro CNT using LOWEST_BIT
-Date: Thu, 12 Oct 2023 17:28:48 +0200
-Message-Id: <eb05327a3af71c883c3ff5ed3b4501a8859403d3.1697123806.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH][for-4.19 v2 8/8] xen/compat: use BUILD_BUG_ON in CHECK_SIZE macros
+Date: Thu, 12 Oct 2023 17:28:52 +0200
+Message-Id: <6138e02935236afd51a5db98d3527e5e2602468d.1697123806.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 References: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The various definitions of macro CNT (and the related BUILD_BUG_ON)
-can be rewritten using LOWEST_BIT, encapsulating a violation of
-MISRA C:2012 Rule 10.1.
+BUILD_BUG_ON is the preferred way to induce a build error
+upon statically determined incorrect conditions.
+
+This also fixes a MISRA C:2012 Rule 10.1 violation in the
+previous formulation.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/x86_64/mm.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Changes in v2:
+- replace the construct with a BUILD_BUG_ON.
+---
+ xen/include/xen/compat.h | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index c3ebb777144a..0eb7b71124f5 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -351,9 +351,9 @@ static int setup_compat_m2p_table(struct mem_hotadd_info *info)
-                 ~((1UL << (L2_PAGETABLE_SHIFT - 2)) - 1) );
-
- #define MFN(x) (((x) << L2_PAGETABLE_SHIFT) / sizeof(unsigned int))
--#define CNT ((sizeof(*frame_table) & -sizeof(*frame_table)) / \
-+#define CNT (LOWEST_BIT(sizeof(*frame_table)) / \
-              sizeof(*compat_machine_to_phys_mapping))
--    BUILD_BUG_ON((sizeof(*frame_table) & -sizeof(*frame_table)) % \
-+    BUILD_BUG_ON(LOWEST_BIT(sizeof(*frame_table)) % \
-                  sizeof(*compat_machine_to_phys_mapping));
-
-     for ( i = smap; i < emap; i += (1UL << (L2_PAGETABLE_SHIFT - 2)) )
-@@ -410,10 +410,10 @@ static int setup_m2p_table(struct mem_hotadd_info *info)
-     va = RO_MPT_VIRT_START + smap * sizeof(*machine_to_phys_mapping);
-
- #define MFN(x) (((x) << L2_PAGETABLE_SHIFT) / sizeof(unsigned long))
--#define CNT ((sizeof(*frame_table) & -sizeof(*frame_table)) / \
-+#define CNT (LOWEST_BIT(sizeof(*frame_table)) / \
-              sizeof(*machine_to_phys_mapping))
-
--    BUILD_BUG_ON((sizeof(*frame_table) & -sizeof(*frame_table)) % \
-+    BUILD_BUG_ON(LOWEST_BIT(sizeof(*frame_table)) % \
-                  sizeof(*machine_to_phys_mapping));
-
-     i = smap;
-@@ -539,7 +539,7 @@ void __init paging_init(void)
-     mpt_size  = (max_page * BYTES_PER_LONG) + (1UL << L2_PAGETABLE_SHIFT) - 1;
-     mpt_size &= ~((1UL << L2_PAGETABLE_SHIFT) - 1UL);
- #define MFN(x) (((x) << L2_PAGETABLE_SHIFT) / sizeof(unsigned long))
--#define CNT ((sizeof(*frame_table) & -sizeof(*frame_table)) / \
-+#define CNT (LOWEST_BIT(sizeof(*frame_table)) / \
-              sizeof(*machine_to_phys_mapping))
-     BUILD_BUG_ON((sizeof(*frame_table) & ~sizeof(*frame_table)) % \
-                  sizeof(*machine_to_phys_mapping));
-@@ -666,7 +666,7 @@ void __init paging_init(void)
-         mpt_size = 0;
-
- #define MFN(x) (((x) << L2_PAGETABLE_SHIFT) / sizeof(unsigned int))
--#define CNT ((sizeof(*frame_table) & -sizeof(*frame_table)) / \
-+#define CNT (LOWEST_BIT(sizeof(*frame_table)) / \
-              sizeof(*compat_machine_to_phys_mapping))
-     BUILD_BUG_ON((sizeof(*frame_table) & ~sizeof(*frame_table)) % \
-                  sizeof(*compat_machine_to_phys_mapping));
---
+diff --git a/xen/include/xen/compat.h b/xen/include/xen/compat.h
+index f2ce5bb3580a..4daa04183eac 100644
+--- a/xen/include/xen/compat.h
++++ b/xen/include/xen/compat.h
+@@ -151,12 +151,20 @@ CHECK_NAME_(k, n, T)(k xen_ ## n *x, \
+     return x == c; \
+ }
+ 
+-#define CHECK_SIZE(name) \
+-    typedef int CHECK_NAME(name, S)[1 - (sizeof(xen_ ## name ## _t) != \
+-                                         sizeof(compat_ ## name ## _t)) * 2]
++#define CHECK_SIZE(name)                                  \
++static inline void __maybe_unused CHECK_SIZE_##name(void) \
++{                                                         \
++    typedef int CHECK_NAME(name, S)[1];                   \
++    BUILD_BUG_ON(sizeof(xen_ ## name ## _t) !=            \
++                 sizeof(compat_ ## name ## _t));          \
++}
+ #define CHECK_SIZE_(k, n) \
+-    typedef int CHECK_NAME_(k, n, S)[1 - (sizeof(k xen_ ## n) != \
+-                                          sizeof(k compat_ ## n)) * 2]
++static inline void __maybe_unused CHECK_SIZE_##k_##n(void) \
++{                                                          \
++    typedef int CHECK_NAME_(k, n, S)[1];                   \
++    BUILD_BUG_ON(sizeof(k xen_ ## n) !=                    \
++                 sizeof(k compat_ ## n));                  \
++}
+ 
+ #define CHECK_FIELD_COMMON(name, t, f) \
+ static inline int __maybe_unused name(xen_ ## t ## _t *x, compat_ ## t ## _t *c) \
+-- 
 2.34.1
+
 
