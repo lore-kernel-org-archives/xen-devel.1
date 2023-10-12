@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABCFCDB47E
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 13:44:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.615788.957207 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 662E6C41513
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 13:52:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.615792.957216 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqvyR-0006T3-8G; Thu, 12 Oct 2023 13:43:35 +0000
+	id 1qqw74-0007yB-39; Thu, 12 Oct 2023 13:52:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 615788.957207; Thu, 12 Oct 2023 13:43:35 +0000
+Received: by outflank-mailman (output) from mailman id 615792.957216; Thu, 12 Oct 2023 13:52:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqvyR-0006Sw-52; Thu, 12 Oct 2023 13:43:35 +0000
-Received: by outflank-mailman (input) for mailman id 615788;
- Thu, 12 Oct 2023 13:43:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qqw73-0007y4-W3; Thu, 12 Oct 2023 13:52:29 +0000
+Received: by outflank-mailman (input) for mailman id 615792;
+ Thu, 12 Oct 2023 13:52:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6Y9O=F2=cloud.com=javi.merino@srs-se1.protection.inumbo.net>)
- id 1qqvyQ-0006Sk-Eq
- for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 13:43:34 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 55cb38e5-6905-11ee-98d4-6d05b1d4d9a1;
- Thu, 12 Oct 2023 15:43:33 +0200 (CEST)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-53da72739c3so1712926a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Oct 2023 06:43:33 -0700 (PDT)
+ id 1qqw72-0007xy-L0
+ for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 13:52:28 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 93946b19-6906-11ee-9b0e-b553b5be7939;
+ Thu, 12 Oct 2023 15:52:26 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9b96c3b4be4so154045566b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Oct 2023 06:52:26 -0700 (PDT)
 Received: from EMEAENG6DZjqCfH.citrite.net
  (default-46-102-197-194.interdsl.co.uk. [46.102.197.194])
  by smtp.gmail.com with ESMTPSA id
- r15-20020aa7c14f000000b0053448f23b33sm10107895edp.93.2023.10.12.06.43.32
+ lc11-20020a170906f90b00b009b9aa8fffdasm11038954ejb.131.2023.10.12.06.52.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 06:43:32 -0700 (PDT)
+ Thu, 12 Oct 2023 06:52:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,66 +48,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55cb38e5-6905-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 93946b19-6906-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1697118212; x=1697723012; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=71q/hEK3izRxQ+ggRh4p9lQ6o4Aa135thdYxQxhrZYU=;
-        b=c+/UIJHyKOXHTVRzWfHUj+n/aye7NGfB0XA45XkOaXXBT6lQBCUBLve4zNhK2aa/8U
-         DIHDaKKffKTHFrT59mJF5ymyeCf1uoznh/jG82PgPLcOxDFNDtMm1Z+J+kMdW8Rn1TJN
-         uc+B0hK+RapsY/FP5TQWIEBvH91rkIkef0tKU=
+        d=cloud.com; s=cloud; t=1697118746; x=1697723546; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=NcL6JSviC6YZf7YuV65cuTS2dEqFCTe/yN7wJWGmdeM=;
+        b=TqTjBAIilchyWpHWf+35U5EJiYT/Lwth25bmBP86duTnJkvRDeykBpuDbkLGlR1Rwf
+         7UIqmhQdtp22ioJpPzh4+tzljDuXXLuT3i7+yNHWv5YjEqzkpZTJN+p2zT2dpCyR548j
+         xRs/ojskwrPOhCF5A4gD0fhCrIlLfJX7XqL70=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697118212; x=1697723012;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=71q/hEK3izRxQ+ggRh4p9lQ6o4Aa135thdYxQxhrZYU=;
-        b=xAdcVjWC5F5d9CFTPYBR7W52f4qya5FOtoNEJWqyrQnshW1RP7KHCxdS0JE5Ouc7Vo
-         Y33ItUpIzJn2FBqvLGI1KoKgmUoPq7RwZb9xMqMolwMUwp4QTlCTR0tWXK3c1yMrhzco
-         vERs//1e0BOw7m52bFO/PTs13FvK12fqkLTj4Xens1EBZ/7Dxo4FJioyZbiYaKQbrdSw
-         /jy0y/EK5laHDMgkKQJKuYa9gG57790jCQbpF/ljBdycgboYraHRsJRfmfl92HETpAIh
-         9cjshFspGKQep4hgam09is/jfeaClzHUiwapQQL/fh5OOIcLLJW1G1xAeBDhT0M7p3Cq
-         QDfg==
-X-Gm-Message-State: AOJu0YziINYlWj+2wY1shHqcRpFl/t81wD/IUov7cxFOU56ULkHlx8oU
-	rZ6WKCb7CPmRH5tYXnNZ+wG6pw==
-X-Google-Smtp-Source: AGHT+IFsgSDNVbTcaKb9H+efkZ6eKL74+8pvpEOUbdcyruOs7//orClJABpLLD2O9xcu7d1rZpc8GQ==
-X-Received: by 2002:aa7:cd74:0:b0:52a:6497:d02b with SMTP id ca20-20020aa7cd74000000b0052a6497d02bmr22477521edb.16.1697118212649;
-        Thu, 12 Oct 2023 06:43:32 -0700 (PDT)
-Date: Thu, 12 Oct 2023 13:54:29 +0100
+        d=1e100.net; s=20230601; t=1697118746; x=1697723546;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NcL6JSviC6YZf7YuV65cuTS2dEqFCTe/yN7wJWGmdeM=;
+        b=nf/SHBaGQyEiKi2GZ8dzxA5I5OZ88Lm1aAwEU77VwjsM5aju6/STU6CfeR5JSX5S4h
+         QsUv2f+69B9lBi5EGqGbiYRowQRt8k65jf+8G9DzyR9m8o89mwBJo6eh8g86opvhniSF
+         IIlYwyryLrba/5p//NUexP+UT9y94qxgAbrwPf5HKfZ2DwKToRB5ZADINSuth3BbeEUB
+         Hwx3TAJ5gIAAdyzCL34HrwcIuhtavFvjtMUjF5uDlubw7pyBVyuAHjDnGCkaIWlEvU6N
+         XSsQZspL+GpdfB/wh7Z+S50Ee2Px00+7ikvwlnABqGgHtRMxCTXQwIq17LlyRfA0VLir
+         yDpQ==
+X-Gm-Message-State: AOJu0Yzu7XKMBn7bebaRjxJsM3KZz8mNRcaokh3U/uDJLCm960HI4iJX
+	HPfPBBSMtaX7XMS0RW1MBLEUoQ==
+X-Google-Smtp-Source: AGHT+IHmhCep1PaCawTk8YLG4yYXJMLOnyrIaYIXGKG4JmR1bsamrlAHACZKFuYieDWn/5Yf74mMCQ==
+X-Received: by 2002:a17:907:778b:b0:9b2:df16:851d with SMTP id ky11-20020a170907778b00b009b2df16851dmr19904123ejc.57.1697118745711;
+        Thu, 12 Oct 2023 06:52:25 -0700 (PDT)
+Date: Thu, 12 Oct 2023 14:04:06 +0100
 From: Javi Merino <javi.merino@cloud.com>
-To: 
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>, 
-	Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
 Subject: Re: [XEN PATCH v1] tools/python: Add python3 compatibility
-Message-ID: <2c3hczqthfsg3lvv3sbrz7cdq4umgzxby4esiwoo6axgqvxciz@xdacvkdip4vv>
+Message-ID: <6oqpexjqm4hbt7sqndfu7iowtcjynec74nmlrrxolr6blpod4o@6rdriz7tixda>
 References: <efb10e537e37df1995dd8f87c28a8eb64ec9b61e.1696947009.git.javi.merino@cloud.com>
- <ZSVtR1ct4Hik4XM8@mail-itl>
+ <2ef1f6b6-9b50-4e77-abad-fa046eb2ca0a@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <ZSVtR1ct4Hik4XM8@mail-itl>
+In-Reply-To: <2ef1f6b6-9b50-4e77-abad-fa046eb2ca0a@citrix.com>
 
-On Tue, Oct 10, 2023 at 05:27:03PM +0200, Marek Marczykowski-Górecki wrote:
-> On Tue, Oct 10, 2023 at 03:18:45PM +0100, Javi Merino wrote:
+On Wed, Oct 11, 2023 at 12:34:27AM +0800, Andrew Cooper wrote:
+> On 10/10/2023 10:18 pm, Javi Merino wrote:
 > > Most of the work for python3 compatibility was done in
 > > 1430c5a8cad4 (tools/python: Python 3 compatibility, 2019-12-18).  This
 > > just adds a few builtins needed for python3.
-> > 
+> >
 > > Resolves: xen-project/xen#156
-> > 
+> >
 > > Signed-off-by: Javi Merino <javi.merino@cloud.com>
 > > ---
-> > 
+> >
 > > I haven't tested it.
-> > 
+> >
 > >  README                                     | 1 +
 > >  tools/python/scripts/convert-legacy-stream | 3 +++
 > >  2 files changed, 4 insertions(+)
-> > 
+> >
 > > diff --git a/README b/README
 > > index 855db01d36..44ed88c392 100644
 > > --- a/README
@@ -132,24 +129,22 @@ On Tue, Oct 10, 2023 at 05:27:03PM +0200, Marek Marczykowski-Górecki wrote:
 > > +from builtins import range
 > > +from builtins import object
 > 
-> In which python version it's needed? The thing about builtins is they
-> are available without explicit import.
+> It can't be object because most other scripts use it just fine in py2
+> and py3.
 
-In python3, this change is a noop.  In python2, this change makes zip,
-range and object be consistent with its python3 counterparts:
+This just makes the VM() class behave like python3: str(vm) will
+return a unicode string.  After a quick glance at the code I don't
+think the code currently does this, but at least the behaviour will
+now be consistent between the two versions.
 
-- zip: with the change, zip returns an iterator in python2,
-  like it does in python3.  It's equivalent to izip from itertools or
-  `from future_builtins import zip`[0]
+> There's only one single use of zip and range in this script, and range
+> is clearly fine (although it wants to be xrange() on py2 and we do
+> opencode that places), so I'm guessing the problem is with zip(), but
+> it's not exactly clear why?
 
-- range: with the change, in python2 range behaves like xrange() used
-  to. It returns an object instead of returning the list.[1]
-
-- object: with the change, in python2 the string representation of
-  VM() is in unicode, as it is for python3.
-
-[0] https://stackless.readthedocs.io/en/2.7-slp/library/future_builtins.html#future_builtins.zip
-[1] https://docs.python.org/3/library/stdtypes.html#ranges
+These changes just make the code be more consistent between python2
+and python3.  As I said under the commit message, I have not tested
+the changes.
 
 Cheers,
 Javi
