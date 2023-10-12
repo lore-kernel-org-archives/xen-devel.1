@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C3DCDB482
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 153F8CDB46E
 	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 15:29:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.615844.957383 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.615838.957323 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxca-0007ys-I7; Thu, 12 Oct 2023 15:29:08 +0000
+	id 1qqxcT-0006QV-OP; Thu, 12 Oct 2023 15:29:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 615844.957383; Thu, 12 Oct 2023 15:29:08 +0000
+Received: by outflank-mailman (output) from mailman id 615838.957323; Thu, 12 Oct 2023 15:29:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxca-0007yl-ER; Thu, 12 Oct 2023 15:29:08 +0000
-Received: by outflank-mailman (input) for mailman id 615844;
- Thu, 12 Oct 2023 15:29:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qqxcT-0006QO-LN; Thu, 12 Oct 2023 15:29:01 +0000
+Received: by outflank-mailman (input) for mailman id 615838;
+ Thu, 12 Oct 2023 15:29:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oWZW=F2=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qqxcY-0006QI-SX
- for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:06 +0000
+ id 1qqxcS-0006QC-Hf
+ for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:00 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 14ade131-6914-11ee-98d4-6d05b1d4d9a1;
- Thu, 12 Oct 2023 17:29:06 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0fb19b70-6914-11ee-9b0e-b553b5be7939;
+ Thu, 12 Oct 2023 17:28:58 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 657A04EE074A;
- Thu, 12 Oct 2023 17:29:05 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 8C4EB4EE0739;
+ Thu, 12 Oct 2023 17:28:55 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14ade131-6914-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 0fb19b70-6914-11ee-9b0e-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,85 +53,60 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Paul Durrant <paul@xen.org>
-Subject: [XEN PATCH][for-4.19 v2 7/8] xen/types: address Rule 10.1 for DECLARE_BITMAP use
-Date: Thu, 12 Oct 2023 17:28:51 +0200
-Message-Id: <f94b0c9411937a4003b86b5850b6d4ad91dff5d5.1697123806.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v2 0/8] address violations of MISRA C:2012 Rule 10.1
+Date: Thu, 12 Oct 2023 17:28:44 +0200
+Message-Id: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1697123806.git.nicola.vetrini@bugseng.com>
-References: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Given its use in the declaration
-'DECLARE_BITMAP(features, IOMMU_FEAT_count)' the argument
-'bits' has essential type 'enum iommu_feature', which is not
-allowed by the Rule as an operand to the addition operator
-in macro 'BITS_TO_LONGS'.
+The widely-used construct
+(x & -x), where x is an unsigned integer quantity represented in 2's complement,
+does yield the expected result. Since all architectures that are targets for
+compliance do fulfill such requirements, the construct is deemed safe and
+deviated.
 
-This construct is deviated with a deviation comment.
+The use of 'DECLARE_BITMAP(features, IOMMU_FEAT_count);' is deviated, to avoid
+harming code readability.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- docs/misra/safe.json    | 8 ++++++++
- xen/include/xen/iommu.h | 1 +
- xen/include/xen/types.h | 8 ++++++++
- 3 files changed, 17 insertions(+)
+On the contrary, other uses of inappropriate types are changed.
 
-diff --git a/docs/misra/safe.json b/docs/misra/safe.json
-index 39c5c056c7d4..952324f85cf9 100644
---- a/docs/misra/safe.json
-+++ b/docs/misra/safe.json
-@@ -20,6 +20,14 @@
-         },
-         {
-             "id": "SAF-2-safe",
-+            "analyser": {
-+                "eclair": "MC3R1.R10.1"
-+            },
-+            "name": "MC3R1.R10.1: use of an enumeration constant in an arithmetic operation",
-+            "text": "This violation can be fixed with a cast to (int) of the enumeration constant, but a deviation was chosen due to code readability (see also the comment in BITS_TO_LONGS)."
-+        },
-+        {
-+            "id": "SAF-3-safe",
-             "analyser": {},
-             "name": "Sentinel",
-             "text": "Next ID to be used"
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 0e747b0bbc1c..d5c25770915b 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -360,6 +360,7 @@ struct domain_iommu {
- #endif
- 
-     /* Features supported by the IOMMU */
-+    /* SAF-2-safe enum constant in arithmetic operation */
-     DECLARE_BITMAP(features, IOMMU_FEAT_count);
- 
-     /* Does the guest share HAP mapping with the IOMMU? */
-diff --git a/xen/include/xen/types.h b/xen/include/xen/types.h
-index aea259db1ef2..50171ea1ad28 100644
---- a/xen/include/xen/types.h
-+++ b/xen/include/xen/types.h
-@@ -22,6 +22,14 @@ typedef signed long ssize_t;
- 
- typedef __PTRDIFF_TYPE__ ptrdiff_t;
- 
-+/*
-+ * Users of this macro are expected to pass a positive value.
-+ *
-+ * Eventually, this should become an unsigned quantity, but this
-+ * requires fixing various uses of this macro and BITS_PER_LONG in signed
-+ * contexts, such as type-safe 'min' macro uses, which give rise to build errors
-+ * when the arguments have differing signedness, due to the build flags used.
-+ */
- #define BITS_TO_LONGS(bits) \
-     (((bits)+BITS_PER_LONG-1)/BITS_PER_LONG)
- #define DECLARE_BITMAP(name,bits) \
--- 
+Changes in v2:
+- the patch 'x86/cpu-policy' has been dropped, in favour of the patch submitted
+  by Andrew Cooper.
+
+Nicola Vetrini (8):
+  xen/include: add macro LOWEST_BIT
+  arm/bitops: encapsulate violation of MISRA C:2012 Rule 10.1
+  xen/pdx: amend definition of PDX_GROUP_COUNT
+  x86_64/mm: express macro CNT using LOWEST_BIT
+  x86/io_apic: address violation of MISRA C:2012 Rule 10.1
+  x86/mce: Move MC_NCLASSES into the enum mctelem_class
+  xen/types: address Rule 10.1 for DECLARE_BITMAP use
+  xen/compat: use BUILD_BUG_ON in CHECK_SIZE macros
+
+ .../eclair_analysis/ECLAIR/deviations.ecl      |  6 ++++++
+ docs/misra/safe.json                           |  8 ++++++++
+ xen/arch/arm/include/asm/bitops.h              |  6 ++++--
+ xen/arch/x86/cpu/mcheck/mctelem.c              |  2 --
+ xen/arch/x86/cpu/mcheck/mctelem.h              |  5 +++--
+ xen/arch/x86/include/asm/io_apic.h             |  7 ++++---
+ xen/arch/x86/x86_64/mm.c                       | 12 ++++++------
+ xen/include/xen/compat.h                       | 18 +++++++++++++-----
+ xen/include/xen/iommu.h                        |  1 +
+ xen/include/xen/macros.h                       |  6 ++++--
+ xen/include/xen/pdx.h                          |  2 +-
+ xen/include/xen/types.h                        |  8 ++++++++
+ 12 files changed, 58 insertions(+), 23 deletions(-)
+
+--
 2.34.1
-
 
