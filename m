@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30CBECDB488
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 22:09:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616070.957832 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF93EC41513
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 22:09:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616069.957816 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qr3s5-0002WM-MB; Thu, 12 Oct 2023 22:09:33 +0000
+	id 1qr3s4-0001yR-Fj; Thu, 12 Oct 2023 22:09:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616070.957832; Thu, 12 Oct 2023 22:09:33 +0000
+Received: by outflank-mailman (output) from mailman id 616069.957816; Thu, 12 Oct 2023 22:09:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qr3s5-0002WE-ID; Thu, 12 Oct 2023 22:09:33 +0000
-Received: by outflank-mailman (input) for mailman id 616070;
- Thu, 12 Oct 2023 22:09:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qr3s4-0001xq-63; Thu, 12 Oct 2023 22:09:32 +0000
+Received: by outflank-mailman (input) for mailman id 616069;
+ Thu, 12 Oct 2023 22:09:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Hhgq=F2=epam.com=prvs=4649fa389a=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1qr3s3-00016s-Lq
- for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 22:09:31 +0000
+ id 1qr3s2-00016v-Qw
+ for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 22:09:30 +0000
 Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
- [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 036dea3c-694c-11ee-9b0e-b553b5be7939;
- Fri, 13 Oct 2023 00:09:29 +0200 (CEST)
+ [148.163.137.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 038fa9a2-694c-11ee-98d4-6d05b1d4d9a1;
+ Fri, 13 Oct 2023 00:09:30 +0200 (CEST)
 Received: from pps.filterd (m0174682.ppops.net [127.0.0.1])
  by mx0b-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39CKqmlC008371; Thu, 12 Oct 2023 22:09:25 GMT
+ 39CKqml4008371; Thu, 12 Oct 2023 22:09:18 GMT
 Received: from eur01-db5-obe.outbound.protection.outlook.com
  (mail-db5eur01lp2050.outbound.protection.outlook.com [104.47.2.50])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3tpr7cr8dp-9
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3tpr7cr8dp-2
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Oct 2023 22:09:25 +0000
+ Thu, 12 Oct 2023 22:09:18 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
  by DBAPR03MB6376.eurprd03.prod.outlook.com (2603:10a6:10:193::6) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.45; Thu, 12 Oct
- 2023 22:09:18 +0000
+ 2023 22:09:15 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::f606:63f7:5875:6076]) by VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::f606:63f7:5875:6076%4]) with mapi id 15.20.6863.043; Thu, 12 Oct 2023
- 22:09:18 +0000
+ 22:09:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,38 +55,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 036dea3c-694c-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 038fa9a2-694c-11ee-98d4-6d05b1d4d9a1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K01p0D6CTf1gJqbojqphmWFrqYpv3U2b5T130F9+y8xPt8mmHhLcS/g38NSfVCgVjJau+wJwcQScJiBUmgnbaseBHByBel2MgcMABUzoZ0BTjXmClUETTHRwXEpmGzcf0jA87HU3hFlm3jl8p2yniFkHIFiMebWBxpDX8YTrhFK6G2Bv186fuIO0m72nAxLYjPH7GH9tI1mtc8QS+f5vCxwEyZ2HJLZKlD6nePDuKtT2dqdiGW7FqC43ZkbDjoiBMBZNVhUN3mowySjGjkY+/0nNl0FvUydcfG42DJXPuVNVZnXiEXyUaBgURYDhns8vvLoAdEAKZFyVAgvKI0DVXA==
+ b=HCVX/2lqseYlqrTNVPwrAyVuvhlRLLg/hegDl11cpLjnCiujJxRxVa19fu9nc4Wlf8TQVU2jh6p/9kkDyg+v2HFohG1O8fxVZiIBQ/0DUZAVdM6HKa6IQNrFobPgtsgtBrxUROhBsS1f5Tn1wz4C0QqSvOPfKd24LMV/02BN1tl83KR0Y7/5TzHSN7zX53hD/BI5UZuLvJfMlPmfBOHrflLZIE0Zg7ZsmE45t4WMkhCDv5mwv4W5VpUe/i0yULIx4BqFZ4rwTqwk8wItndi/ZIdG80MwFTVkYpb3s0cc0hAo7GO+XpfnOpX0+ppEhuJdwCdOjwmpbvJS/26BNTO1KQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3CXc+8tX6pBxxfJFpCA5LYlgxAC78/KBYrjedW2YSTs=;
- b=aAR2gCzjmxBMHzjEyAMQnk6E5fnrRTbS4q0ULpDxzKFjsHj7s1RdJjqEliG1Byl+EyQ3cnbSVHLh8ohTMJOg9utnl7rUe3VLr7pbf0jtKKOU73LaFkFF/XY/2CL4Da8DmdxKalx1f/9bm4oSPzNN1uEiB61mOY3BMw00rPcNo+OAowjbR6JvRaceENDE1TibDZEnvzUiUe7RNPKD7Ss1245uIhuIq5oLyQ2gTeqOCeLX68jcmXYiAE/x3denuWc2ueObD0+irbwN7eT39C0G2KakW709Y37wWutDb4GY1nd4VWpBxR+nuLfkFAlpEQ3WdJx6T0SVMK+gEKEj7Ec6Mg==
+ bh=nUbdmISXespujyGMhnqpZyFZ9IBb/MEFeA/aVd7WW+s=;
+ b=mVCvwanMMS3gWHTNPG5cMEQziX3sJ7Qk6d0+Uz06dHftVlsJ+tRVBO5MZ8c8ET5ZybR38oeJ0Nj1QiaE81q7Epz88i18m9sfgnpr/DoqYvaciV7qMR7K/eA1i0uXZLM9VawvTUYhAHFNb2XSWT26LIdhdkINPelNGounp/R28V+JGtY/u/vvnCzgXFsYwjnlIYGEWdP4Lxot5/znc415bBt2FPKApnSDm/ZxeDeA4B6nfp0OkDFghTaZnDQJmelbxXd0BdOqS4RJUIFlsZzs5tbZy3NFYwqaseOgI3cZlp61rdoqMiFvOVzZvrkWvWMiN6GaL68HSFgqHJPHj4kHZQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3CXc+8tX6pBxxfJFpCA5LYlgxAC78/KBYrjedW2YSTs=;
- b=mFsLeuqU5CVV0qamOsO0ew1vbsWymMJ96rbk3rEiwtJUm+wqe9MSqZQEmoxytRFDp/iORH8DDEEEKRlAVQlh3wzOuYo+pOdjBDdVMlkx8km67C5JvOEB5tO5pHp4LYBD2YcN/BbB+b/gJXhnoytcH5R1xZaSWXdsZpyfdhq+GCmuAilWbmWkIEH/GQcpiF150YyGp422ZF61Ht/O/X41tEuEF89hP9LgKds9iwYpzL3une9AgCngmEhOYJ2vaUqe2PIpvwHrJief2PNqAJK4LcPUIYB8BgPlbD23iNERnE6t9KQDL7pkNOs/5VAQf0Dtl3inaU6nKDWdXArE4j5w7A==
+ bh=nUbdmISXespujyGMhnqpZyFZ9IBb/MEFeA/aVd7WW+s=;
+ b=lpPZlM1yKu+nbUsMNnz+qLHhrt2nrbr73jEJgtgsh4XGBjLJvwAggbGiCJMg5/Uiufk6pZqvwKrGMJqLE627/TOZ7WpPjZNbzxZSuxUULb339FBBAJMwJ/RrSX6FyFsJeCRpw3Oo15L8nVFRlMIVMDYR4VgWXKLzS9rvKV/bwyClExpRwy46vytiJDgd9/yM2YVW/R/6MNseSvGvqbKU/sW7QGXkxnI7C/b7wX/37rN8ZGVzm1f1apLfdCkkvVuV8QBDCGRkFvFQPTzbJIIMlJDhMesX03sge4y3xEDjHCfmZcPx1/Pw23O+X6rQhJAypzXeLPEB12O3Bw5ojoWQPQ==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
-        Oleksandr Andrushchenko
-	<Oleksandr_Andrushchenko@epam.com>,
+        Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>,
+        Jan Beulich <jbeulich@suse.com>,
         Andrew Cooper
 	<andrew.cooper3@citrix.com>,
-        George Dunlap <george.dunlap@citrix.com>,
-        Jan
- Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-        Stefano
- Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v10 08/17] rangeset: add RANGESETF_no_print flag
-Thread-Topic: [PATCH v10 08/17] rangeset: add RANGESETF_no_print flag
-Thread-Index: AQHZ/Vi9FGz7fvuB1UuuzM8p/4QjlA==
-Date: Thu, 12 Oct 2023 22:09:16 +0000
-Message-ID: <20231012220854.2736994-9-volodymyr_babchuk@epam.com>
+        =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>,
+        Wei Liu <wl@xen.org>, George Dunlap
+	<george.dunlap@citrix.com>,
+        Julien Grall <julien@xen.org>,
+        Stefano Stabellini
+	<sstabellini@kernel.org>
+Subject: [PATCH v10 01/17] pci: msi: pass pdev to pci_enable_msi() function
+Thread-Topic: [PATCH v10 01/17] pci: msi: pass pdev to pci_enable_msi()
+ function
+Thread-Index: AQHZ/Vi8+1vtmDC560CdrPPIvL4UuQ==
+Date: Thu, 12 Oct 2023 22:09:14 +0000
+Message-ID: <20231012220854.2736994-2-volodymyr_babchuk@epam.com>
 References: <20231012220854.2736994-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20231012220854.2736994-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -96,45 +100,45 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.42.0
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|DBAPR03MB6376:EE_
-x-ms-office365-filtering-correlation-id: 50804346-9409-4745-3ece-08dbcb6fe110
+x-ms-office365-filtering-correlation-id: 9385d259-8333-464f-e543-08dbcb6fdf48
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- WbdXn/iWcHUfvCky1h5v0IRMQybWxeH5I6vc7/G6AieH4buFhCm6x4z5Vrxyq6JI9StcvHXd+pCSK+B0X9eoo8SoJtubeyZ+ftwm+qQcbMvxeXoRWMisZrzhbO8IjrW9MMafR/Y941WGgiuVYV1jOL7yJTm3Us/i8vAgaVVVj4mn2DWjLR3Z4y/dWHjfuWoMhhbIlbdyYuYuZDW6Kz3VolWSpKffCjhgZaEPTnP6uLbvmCehAdVNy3s4tHX1BWq3lye4tvihu3+9nSKmW506rUjux1eh2mACvK/tiMnXjnDFuolSiBKftUmMNlCVD24LwWxSN5i2FB0R4X3u4yhuVDBGLOeA/U+sfekPBah+wbW0W2cPkE756dmMJG41VdL2b32d030hBmfTw8w9XbaqktRadfwnzTuBiMy24laOQRBV6ukyGZdNmnLbdSn9EgqJR/+jYuPg9Ro+W1UWrjBCtLYmCm8x+XF5FlcerUnFy9sv6LbJaFrals03EjloOFAUlEpx+HRARldTsD8NF4VQVriHbDlgd+BprElAb4mbd36+H245He+nUxDsQpBUvxFerhj5p/Qn1WVIRV4vn+O6uGugCymwViCfqub4VYQIrTJfuUwwMHDqwoH4MNS6weid
+ if2bpCTT6R5djnnp24r325/p4Ni3LFzDfiigZrGdmD2YfbpCcbzfA1AeSgODRB46Cp9VhdRVSWdBY3yn0j0x+X1/1aFL6IA/QrxPQjsKDrmhFcmnMrs2QsyjjMYlT8ho0QK6Pl+uZgDnT890xiLORbJAuQR5aWAnJq0Lbb9gtEVvyQMzQ5HeW+e018z/Bn3+JmNAky6dr45tKN3lHP5m54bVEvjrhtT7E6BQEevs2oh3L7IakkoDZh/Lqy02CdzskzvTAQb2KLAtZI2RAjyCFVXa4sU6vnt0TzJnz/BJLWl+/ialLGfQqui6WDNPCRhZzuNR3lV+0KaVLKDxH7wzWFtBAvKafen5yRAaeGh+wVPQmKdUJALAj8iU0l/46JGssLLO9rO0KNC6zvRgEOrP0Y2BU9TwN5BdmxI2v4kSDtBTFdODlpvn5l4kGAEIFOX0tAX8/WQEq3WWS0VDcYQLaDb0LDpb9Ga0mATl/Am+J/i2SwJxu5ix7rry4NuX7SC8XnnbZE9lD3+hZR60cd/GK98ZZtGLjOhTRMOkXJjFu3HDzUXHWkBaNdzYRDJY6gQFezGWKIyIh3oC+e+9L+GOtclGg/csBl4afaginXoy7wiiAHEox9lCgSBasbZre+V4
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(39860400002)(396003)(346002)(366004)(136003)(230922051799003)(451199024)(64100799003)(186009)(1800799009)(2616005)(71200400001)(26005)(6512007)(6506007)(55236004)(36756003)(86362001)(38100700002)(38070700005)(122000001)(1076003)(83380400001)(91956017)(41300700001)(64756008)(316002)(76116006)(54906003)(66946007)(66446008)(6916009)(66556008)(66476007)(2906002)(8936002)(5660300002)(8676002)(4326008)(6486002)(478600001);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?xyc9xJ94f5mYD7PnywC1qW9i3uRG+HqKKAW8XWZ5aGSXlOYEOP1WiNaAMG?=
- =?iso-8859-1?Q?ytDC6rF1hFlUT81J0D/9VHsgh/ygyQRN3sOg3fvWeu3qFKLYlHMxOS+1U4?=
- =?iso-8859-1?Q?GDIHiuyoaGKUtnXoGJjg5dlwfSNf23edL5CjuTwP+smvph7DUYMQ4uliJr?=
- =?iso-8859-1?Q?M1Q0sW5NAsZmBbYEnRx2yB1seLmH4YXOOcrxYo8/6+Pwg8HhKukR308wJi?=
- =?iso-8859-1?Q?Q8Tc7EikwPv7eCtUdTZz5jWm1LeZb575vF3swYYGIg6IipsG3S7ecrT5Bh?=
- =?iso-8859-1?Q?+FrIattLK1X3UipRl+y49HwPce2bXQhggRl4VKknnYs2KScRh4oVyk8Umr?=
- =?iso-8859-1?Q?5UMBvQ0KAzGW62fWBw1mCxl86p9lxDCZWv0dpyckbod/GlutiPA00Vtk4c?=
- =?iso-8859-1?Q?161/lFCebIyMJrTa9udwV2QlTK7qYiYcPeIdHG/pX/bWo83FtKR/rAFLjT?=
- =?iso-8859-1?Q?REPDqr7YhmvVOlupWcgp4K4AUBRBzc2O18pKsYZ712PXAbkzeMcseUs/SM?=
- =?iso-8859-1?Q?kEReWbLb8cWAMH2A4n8MZzo2tdeOzuaE5BCjs12VGg4LUyPepVXvYexe/8?=
- =?iso-8859-1?Q?No/ttF1+wwTv5He4GDmCiUVxBHLHdrKz/GT0/wOIVIS7s3s5AQ1FT/r7zy?=
- =?iso-8859-1?Q?JsOSFS3KwOy/VtDcCzbGTswsfUInQsbxsvUc7LUnUlJXZowwagfTSdHCIO?=
- =?iso-8859-1?Q?Z7o46s6beniJoNLI4bPEJCVd6xaNQbgNTarSNrZUycsMFOYbYerEXcVh85?=
- =?iso-8859-1?Q?gBLJa+FQPM5vbZbI7J4Fg14Q4qpen7eP8wE9Jx8D70CnkHgtMH5jah7FR8?=
- =?iso-8859-1?Q?Jy3jfcdheHte74sPwUtTfERODgyVFZMi8dUOUOrxwMx1ASwjRvIZdsA5nn?=
- =?iso-8859-1?Q?UYCxMvc5BSRwtmfGwyDcmf3sBF3BeXyNlIMn/mGfP7TbbDJjnYEoj8xGXG?=
- =?iso-8859-1?Q?zaOZKTWUUsJyYBiaJcTg+TxKi3vLIer6XqltilWY+4NP0s2BfA07Q58ONx?=
- =?iso-8859-1?Q?BfkYI6NW5hwWmTgeLgpkRztz7WpkYZP1eusnpGr/5S5XY4eq8XiHk8+4it?=
- =?iso-8859-1?Q?DNYzbTHZs8/hqkndQXQOTy7MJuPR3FgURWnceA/fZ+NX8rrv6mg5GmhF1s?=
- =?iso-8859-1?Q?pSivPI3R4dXD3+imyiwxqnitB1GW2F2mjOKiEdm9eTi/z5vraxAR0lYQU8?=
- =?iso-8859-1?Q?MVpn9qc7PYNQXySp1tOXT6429trdQBCzJNmOxkn4q0WaAtrUXxluQDI9ZJ?=
- =?iso-8859-1?Q?W6MA4aNcmNGmpBFsmS7ZIw/5D9u1REC14MlKCOW4/S/BjJ4AuouxD2cE7y?=
- =?iso-8859-1?Q?k0R52Tw3smOAbh+iDNGMIwXZ70mzCA+aPmhldShl3NZpsYMVHq8ur6dqxO?=
- =?iso-8859-1?Q?oKMYlFf9w27A2T47EOnI+yk6oLoe3i51vu4B/z34RAHxVqIoN5KiVctku1?=
- =?iso-8859-1?Q?jLwWTJjz90i1SVAJ1lEQdmXJx2p3lg0w/4HdJcqTk26cBaBxC7tMtxnP5l?=
- =?iso-8859-1?Q?dPW0N8/pUZsOD97GSiHc2h44Buh7yjYEVSVFCAWarqeTy9nqHhFwse7Iwd?=
- =?iso-8859-1?Q?gCEVIUt2qNLpa/TQynmPG3D0o8AD/ZptRrBP8pSPXQwSUXfQlWMA35PVS1?=
- =?iso-8859-1?Q?5kgPRiWhUCaNdmLnCqOa+ximZaJBvK2igIOTQ9qmPRF/blMFDl+asaXA?=
+ =?iso-8859-1?Q?/Iz9Pg2fBp+lj8rwpOs4fb0hCEImxuUhFtNj0OfmpkEto3yyybeUeEt0iK?=
+ =?iso-8859-1?Q?BdLc9OAmCQjeRcNyxLnvn+3hcZ3DqC7355PNn7SA2I9oDK7uIxgFhZht4z?=
+ =?iso-8859-1?Q?DgH22CJNBwQNqXQd6/m1eO0Ysc5MWmI9GI3lWh9gEJ4CsM/5B1C/iJzIrt?=
+ =?iso-8859-1?Q?xek9qHAc686OerriC15KSJjQgNe0LMrTO5fLJ9UfN5CpLzlRXDBtLttFsH?=
+ =?iso-8859-1?Q?RgF0kZkuaBtLxzUUq0aijea63ugmydiUY4jdxHONdarS/yjdw0xDTZnIKI?=
+ =?iso-8859-1?Q?rcziGi5Vy3g5hHSsTG7qHBFar1Ux/DHDLaBuVdir8e17CihXZtjLDCQE7W?=
+ =?iso-8859-1?Q?nvHhBAupybIo/a6phdkUnXiIscew2n4JbrOt+hX3xeOwNRCOG56SCFxxo9?=
+ =?iso-8859-1?Q?oygrciHIsH4IbrLV8GDOE3VUZWair6oj3+Ztj3Wh4M+Xxeln8de82yZt7D?=
+ =?iso-8859-1?Q?miv6sRr/4IIyIQ3VetH2m5xbQHSJPDbSH5TFilV++8hCSZlyxd6dN0uSgQ?=
+ =?iso-8859-1?Q?clDe09EOA0SEMNLmnLNbH5OxMLxNqaZFvnmy9ZU9zRjfixxkt/nFGiC2WT?=
+ =?iso-8859-1?Q?f5glpCtzSwjsLWMjam39dLxep8D5tOj/x0xALN1eexC9Ump/dz4EyrQ1a/?=
+ =?iso-8859-1?Q?KBBDPRfgTkk7aPzVoo74OrKvQLbhLDXbv9AMsbBL3N9l1UHXySM9JNDMTH?=
+ =?iso-8859-1?Q?KYr66UUFBXTbar7tO1sxacqGX4NHASZHjLG16IuaWoC5dGIcj3BEx+8YB0?=
+ =?iso-8859-1?Q?jyOXpvbV6Rit6HavvNFlFd4uwJm0pjK/k3ZnL6xHMR5widCV18q2P1sva3?=
+ =?iso-8859-1?Q?na7L4Ccw6bi04ODWe7hBYs0kjTVy82zWzxeg2rSNLeM7PCzp2x3zyqVqI0?=
+ =?iso-8859-1?Q?BXRqUnpFad0p4BM6U+0eqPdYTTmLXz8xPv2JO+7c5jB7FKcfXKKkvkBIPX?=
+ =?iso-8859-1?Q?YhsKAwS7GhNUNVDgLT0tMOsmJMUq6OFC0z75astU5w7pWbvinkmSwSlV8K?=
+ =?iso-8859-1?Q?Nv2OUEnVsvJ0Sde4kxw1NZ1Et+Ef3saqko0agapPCL3uG8qq5kGETQv70O?=
+ =?iso-8859-1?Q?+e6o8mwLcxr11xn3W39jgkPHTG6Rq3HwPqUYSMlgo16SwKFo2BZPtzZqKc?=
+ =?iso-8859-1?Q?PMcBctozf7yuS8TgzgTd31Snuj0ZruPVMeFadp9Aoe4bITwHlumvClCW0k?=
+ =?iso-8859-1?Q?vCGzm6VYNeH38vCatW1M30//k7LnBCnolhH9zUfulXJwTBU8gpJF4D3Ubz?=
+ =?iso-8859-1?Q?LJMLeMbCUM1c9cCay9j18/EOyxY5lyOEiCzPu1xSlKiMnXSGK16Qi7jbjk?=
+ =?iso-8859-1?Q?eoG3aFYi/HeOQOAa0NrRfT5rlOkyV3EgelGzOk6LVirEpF+7Fu7idGNoqZ?=
+ =?iso-8859-1?Q?RBAeK6G3Q/lmvQqVq13lbJbsZB9xs461rw6T3Vx9f8061z7DVxIWVPkqZP?=
+ =?iso-8859-1?Q?6FEzdarBH5utkxaywjMoCLhEpjj5aA3ydru70Cy4Kb59MFTJaKSFHilOu5?=
+ =?iso-8859-1?Q?gyhufBfndVNa5e1/Tt23tx4SHuV8fU0vD34Y8DnHxQicv4IGr6ahSTNbCf?=
+ =?iso-8859-1?Q?uFOYydCZLmKOHAScowx8gkeq4etCOQq1R7TBkJOD6PbLI8ASkcxzdCuafX?=
+ =?iso-8859-1?Q?vmmfcdsfioOaivI82t37xQKAFX5Jf3UMIxhE3vB8EA2eR5iVxA8XV6QA?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -142,87 +146,153 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 50804346-9409-4745-3ece-08dbcb6fe110
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Oct 2023 22:09:16.9516
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9385d259-8333-464f-e543-08dbcb6fdf48
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Oct 2023 22:09:14.5076
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: athmZe0YnSiUKlKOx/JaNiwB/22yXYb5ojlolh2IbIqs/Z0xfyUd9g4BfdIcz/6BwtBoskeCJ1WH8vLP5ODlrgjSW/CLXM1R19E38cX8Li0=
+X-MS-Exchange-CrossTenant-userprincipalname: iK/voxAwtiw+7wIxak+45MttHbuarMe2lCVNroGC85TNgBLTalS7ZH/HkIFdyKHF5qkfyV9zp6G9FYJE8rhzfwleU+v6RP1ifS9rR/XUb40=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR03MB6376
-X-Proofpoint-GUID: 3FMKdQ3tyOgELXzpi1gM4MVpENRkgynf
-X-Proofpoint-ORIG-GUID: 3FMKdQ3tyOgELXzpi1gM4MVpENRkgynf
+X-Proofpoint-GUID: oWPZhzSBKvDFZcijyL9aFYhlavcIPxAL
+X-Proofpoint-ORIG-GUID: oWPZhzSBKvDFZcijyL9aFYhlavcIPxAL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-12_14,2023-10-12_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 spamscore=0
  mlxscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501
- impostorscore=0 clxscore=1015 malwarescore=0 bulkscore=0 mlxlogscore=999
+ impostorscore=0 clxscore=1015 malwarescore=0 bulkscore=0 mlxlogscore=574
  phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2309180000 definitions=main-2310120186
 
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Previously pci_enable_msi() function obtained pdev pointer by itself,
+but taking into account upcoming changes to PCI locking, it is better
+when caller passes already acquired pdev pointer to the function.
 
-There are range sets which should not be printed, so introduce a flag
-which allows marking those as such. Implement relevant logic to skip
-such entries while printing.
+Note that ns16550 driver does not check validity of obtained pdev
+pointer because pci_enable_msi() already does this.
 
-While at it also simplify the definition of the flags by directly
-defining those without helpers.
+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Since v5:
-- comment indentation (Jan)
-Since v1:
-- update BUG_ON with new flag
-- simplify the definition of the flags
----
- xen/common/rangeset.c      | 5 ++++-
- xen/include/xen/rangeset.h | 5 +++--
- 2 files changed, 7 insertions(+), 3 deletions(-)
+Changes in v10:
 
-diff --git a/xen/common/rangeset.c b/xen/common/rangeset.c
-index f3baf52ab6..35c3420885 100644
---- a/xen/common/rangeset.c
-+++ b/xen/common/rangeset.c
-@@ -433,7 +433,7 @@ struct rangeset *rangeset_new(
-     INIT_LIST_HEAD(&r->range_list);
-     r->nr_ranges =3D -1;
+ - New in v10. This is the result of discussion in "vpci: add initial
+ support for virtual PCI bus topology"
+---
+ xen/arch/x86/include/asm/msi.h |  3 ++-
+ xen/arch/x86/irq.c             |  2 +-
+ xen/arch/x86/msi.c             | 19 ++++++++++---------
+ xen/drivers/char/ns16550.c     |  4 +++-
+ 4 files changed, 16 insertions(+), 12 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.=
+h
+index a53ade95c9..836c8cd4ba 100644
+--- a/xen/arch/x86/include/asm/msi.h
++++ b/xen/arch/x86/include/asm/msi.h
+@@ -81,7 +81,8 @@ struct irq_desc;
+ struct hw_interrupt_type;
+ struct msi_desc;
+ /* Helper functions */
+-extern int pci_enable_msi(struct msi_info *msi, struct msi_desc **desc);
++extern int pci_enable_msi(struct msi_info *msi, struct msi_desc **desc,
++			  struct pci_dev *pdev);
+ extern void pci_disable_msi(struct msi_desc *desc);
+ extern int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool off);
+ extern void pci_cleanup_msi(struct pci_dev *pdev);
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 6abfd81621..68b788c42e 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -2167,7 +2167,7 @@ int map_domain_pirq(
+         if ( !pdev )
+             goto done;
 =20
--    BUG_ON(flags & ~RANGESETF_prettyprint_hex);
-+    BUG_ON(flags & ~(RANGESETF_prettyprint_hex | RANGESETF_no_print));
-     r->flags =3D flags;
+-        ret =3D pci_enable_msi(msi, &msi_desc);
++        ret =3D pci_enable_msi(msi, &msi_desc, pdev);
+         if ( ret )
+         {
+             if ( ret > 0 )
+diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
+index a78367d7cf..20275260b3 100644
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -983,13 +983,13 @@ static int msix_capability_init(struct pci_dev *dev,
+  * irq or non-zero for otherwise.
+  **/
 =20
-     safe_strcpy(r->name, name ?: "(no name)");
-@@ -575,6 +575,9 @@ void rangeset_domain_printk(
+-static int __pci_enable_msi(struct msi_info *msi, struct msi_desc **desc)
++static int __pci_enable_msi(struct msi_info *msi, struct msi_desc **desc,
++			    struct pci_dev *pdev)
+ {
+-    struct pci_dev *pdev;
+     struct msi_desc *old_desc;
 =20
-     list_for_each_entry ( r, &d->rangesets, rangeset_list )
-     {
-+        if ( r->flags & RANGESETF_no_print )
-+            continue;
+     ASSERT(pcidevs_locked());
+-    pdev =3D pci_get_pdev(NULL, msi->sbdf);
 +
-         printk("    ");
-         rangeset_printk(r);
-         printk("\n");
-diff --git a/xen/include/xen/rangeset.h b/xen/include/xen/rangeset.h
-index 135f33f606..f7c69394d6 100644
---- a/xen/include/xen/rangeset.h
-+++ b/xen/include/xen/rangeset.h
-@@ -49,8 +49,9 @@ void rangeset_limit(
+     if ( !pdev )
+         return -ENODEV;
 =20
- /* Flags for passing to rangeset_new(). */
-  /* Pretty-print range limits in hexadecimal. */
--#define _RANGESETF_prettyprint_hex 0
--#define RANGESETF_prettyprint_hex  (1U << _RANGESETF_prettyprint_hex)
-+#define RANGESETF_prettyprint_hex   (1U << 0)
-+ /* Do not print entries marked with this flag. */
-+#define RANGESETF_no_print          (1U << 1)
+@@ -1038,13 +1038,13 @@ static void __pci_disable_msi(struct msi_desc *entr=
+y)
+  * of irqs available. Driver should use the returned value to re-send
+  * its request.
+  **/
+-static int __pci_enable_msix(struct msi_info *msi, struct msi_desc **desc)
++static int __pci_enable_msix(struct msi_info *msi, struct msi_desc **desc,
++			     struct pci_dev *pdev)
+ {
+-    struct pci_dev *pdev;
+     struct msi_desc *old_desc;
 =20
- bool_t __must_check rangeset_is_empty(
-     const struct rangeset *r);
+     ASSERT(pcidevs_locked());
+-    pdev =3D pci_get_pdev(NULL, msi->sbdf);
++
+     if ( !pdev || !pdev->msix )
+         return -ENODEV;
+=20
+@@ -1151,15 +1151,16 @@ int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, boo=
+l off)
+  * Notice: only construct the msi_desc
+  * no change to irq_desc here, and the interrupt is masked
+  */
+-int pci_enable_msi(struct msi_info *msi, struct msi_desc **desc)
++int pci_enable_msi(struct msi_info *msi, struct msi_desc **desc,
++		   struct pci_dev *pdev)
+ {
+     ASSERT(pcidevs_locked());
+=20
+     if ( !use_msi )
+         return -EPERM;
+=20
+-    return msi->table_base ? __pci_enable_msix(msi, desc) :
+-                             __pci_enable_msi(msi, desc);
++    return msi->table_base ? __pci_enable_msix(msi, desc, pdev) :
++			     __pci_enable_msi(msi, desc, pdev);
+ }
+=20
+ /*
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index 28ddedd50d..1856b72e63 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -452,10 +452,12 @@ static void __init cf_check ns16550_init_postirq(stru=
+ct serial_port *port)
+             if ( rc > 0 )
+             {
+                 struct msi_desc *msi_desc =3D NULL;
++                struct pci_dev *pdev;
+=20
+                 pcidevs_lock();
+=20
+-                rc =3D pci_enable_msi(&msi, &msi_desc);
++                pdev =3D pci_get_pdev(NULL, msi.sbdf);
++                rc =3D pci_enable_msi(&msi, &msi_desc, pdev);
+                 if ( !rc )
+                 {
+                     struct irq_desc *desc =3D irq_to_desc(msi.irq);
 --=20
 2.42.0
 
