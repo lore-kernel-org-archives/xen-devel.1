@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A2E3CDB484
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2355C41513
 	for <xen-devel@archiver.kernel.org>; Thu, 12 Oct 2023 15:29:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.615843.957370 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.615839.957329 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxcY-0007Yh-9l; Thu, 12 Oct 2023 15:29:06 +0000
+	id 1qqxcU-0006UV-3m; Thu, 12 Oct 2023 15:29:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 615843.957370; Thu, 12 Oct 2023 15:29:06 +0000
+Received: by outflank-mailman (output) from mailman id 615839.957329; Thu, 12 Oct 2023 15:29:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qqxcY-0007Xp-4a; Thu, 12 Oct 2023 15:29:06 +0000
-Received: by outflank-mailman (input) for mailman id 615843;
- Thu, 12 Oct 2023 15:29:05 +0000
+	id 1qqxcT-0006TY-Ty; Thu, 12 Oct 2023 15:29:01 +0000
+Received: by outflank-mailman (input) for mailman id 615839;
+ Thu, 12 Oct 2023 15:29:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oWZW=F2=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qqxcX-0006QI-6e
- for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:05 +0000
+ id 1qqxcT-0006QI-1J
+ for xen-devel@lists.xenproject.org; Thu, 12 Oct 2023 15:29:01 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 13b50218-6914-11ee-98d4-6d05b1d4d9a1;
- Thu, 12 Oct 2023 17:29:04 +0200 (CEST)
+ id 109d92c0-6914-11ee-98d4-6d05b1d4d9a1;
+ Thu, 12 Oct 2023 17:28:59 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id EC4F64EE0749;
- Thu, 12 Oct 2023 17:29:03 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id E020B4EE0744;
+ Thu, 12 Oct 2023 17:28:57 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13b50218-6914-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 109d92c0-6914-11ee-98d4-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,45 +53,69 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-next v2 5/8] x86/io_apic: address violation of MISRA C:2012 Rule 10.1
-Date: Thu, 12 Oct 2023 17:28:49 +0200
-Message-Id: <1fe7602b48cabb7710025f6b4e32e9b99a1faacd.1697123806.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH][for-next][for-4.19 v2 1/8] xen/include: add macro LOWEST_BIT
+Date: Thu, 12 Oct 2023 17:28:45 +0200
+Message-Id: <bb0ba44f8a3944c22a1c7cf19196c7060e8adb4b.1697123806.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 References: <cover.1697123806.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The definition of IO_APIC_BASE contains a sum of an essentially enum
-value (FIX_IO_APIC_BASE_0) that is positive with an index that, in all
-instances, is unsigned, therefore the former is cast to unsigned, so that
-the operands are of the same essential type.
+The purpose of this macro is to encapsulate the well-known expression
+'x & -x', that in 2's complement architectures on unsigned integers will
+give 2^ffs(x), where ffs(x) is the position of the lowest set bit in x.
 
-No functional change.
+A deviation for ECLAIR is also introduced.
+
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/include/asm/io_apic.h | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Changes in v2:
+- rename to LOWEST_BIT
+---
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 6 ++++++
+ xen/include/xen/macros.h                         | 6 ++++--
+ 2 files changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/io_apic.h b/xen/arch/x86/include/asm/io_apic.h
-index a7e4c9e146de..a0fc50d601fe 100644
---- a/xen/arch/x86/include/asm/io_apic.h
-+++ b/xen/arch/x86/include/asm/io_apic.h
-@@ -14,9 +14,10 @@
-  * Copyright (C) 1997, 1998, 1999, 2000 Ingo Molnar
-  */
- 
--#define IO_APIC_BASE(idx)                                               \
--    ((volatile uint32_t *)(__fix_to_virt(FIX_IO_APIC_BASE_0 + (idx))    \
--                           + (mp_ioapics[idx].mpc_apicaddr & ~PAGE_MASK)))
-+#define IO_APIC_BASE(idx)                                     \
-+    ((volatile uint32_t *)                                    \
-+     (__fix_to_virt((unsigned int)FIX_IO_APIC_BASE_0 + (idx)) \
-+      + (mp_ioapics[idx].mpc_apicaddr & ~PAGE_MASK)))
- 
- #define IO_APIC_ID(idx) (mp_ioapics[idx].mpc_apicid)
- 
--- 
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index d8170106b449..b8e1155ee49d 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -274,6 +274,12 @@ still non-negative."
+ -config=MC3R1.R10.1,etypes+={safe, "stmt(operator(logical)||node(conditional_operator||binary_conditional_operator))", "dst_type(ebool||boolean)"}
+ -doc_end
+
++-doc_begin="The macro LOWEST_BIT encapsulates a well-known pattern to obtain the value
++2^ffs(x) for unsigned integers on two's complement architectures
++(all the architectures supported by Xen satisfy this requirement)."
++-config=MC3R1.R10.1,reports+={safe, "any_area(any_loc(any_exp(macro(^LOWEST_BIT$))))"}
++-doc_end
++
+ ### Set 3 ###
+
+ #
+diff --git a/xen/include/xen/macros.h b/xen/include/xen/macros.h
+index d0caae7db298..af47179d1056 100644
+--- a/xen/include/xen/macros.h
++++ b/xen/include/xen/macros.h
+@@ -8,8 +8,10 @@
+ #define DIV_ROUND(n, d) (((n) + (d) / 2) / (d))
+ #define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
+
+-#define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
+-#define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
++#define LOWEST_BIT(x) ((x) & -(x))
++
++#define MASK_EXTR(v, m) (((v) & (m)) / LOWEST_BIT(m))
++#define MASK_INSR(v, m) (((v) * LOWEST_BIT(m)) & (m))
+
+ #define count_args_(dot, a1, a2, a3, a4, a5, a6, a7, a8, x, ...) x
+ #define count_args(args...) \
+--
 2.34.1
-
 
