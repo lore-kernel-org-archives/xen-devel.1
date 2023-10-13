@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8FACCDB47E
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 10:15:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616379.958343 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96624CDB482
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 10:16:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616393.958363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrFCD-0004KX-N5; Fri, 13 Oct 2023 10:15:05 +0000
+	id 1qrFDV-0005jV-E1; Fri, 13 Oct 2023 10:16:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616379.958343; Fri, 13 Oct 2023 10:15:05 +0000
+Received: by outflank-mailman (output) from mailman id 616393.958363; Fri, 13 Oct 2023 10:16:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrFCD-0004KQ-Jm; Fri, 13 Oct 2023 10:15:05 +0000
-Received: by outflank-mailman (input) for mailman id 616379;
- Fri, 13 Oct 2023 10:15:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qrFDV-0005jO-9v; Fri, 13 Oct 2023 10:16:25 +0000
+Received: by outflank-mailman (input) for mailman id 616393;
+ Fri, 13 Oct 2023 10:16:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RqNf=F3=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qrFCB-00045Q-RL
- for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 10:15:03 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5e3d5dc7-69b1-11ee-9b0e-b553b5be7939;
- Fri, 13 Oct 2023 12:15:00 +0200 (CEST)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 199FB4EE073D;
- Fri, 13 Oct 2023 12:14:59 +0200 (CEST)
+ <SRS0=36VQ=F3=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
+ id 1qrFDT-0005j6-Vk
+ for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 10:16:24 +0000
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [2a00:1450:4864:20::22b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8f331551-69b1-11ee-98d4-6d05b1d4d9a1;
+ Fri, 13 Oct 2023 12:16:22 +0200 (CEST)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2c50305c5c4so12627081fa.1
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Oct 2023 03:16:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,281 +42,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e3d5dc7-69b1-11ee-9b0e-b553b5be7939
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [XEN PATCH][for-4.19 v3 1/2] automation/eclair: update deviations and accepted guidelines
-Date: Fri, 13 Oct 2023 12:14:52 +0200
-Message-Id: <c67293c3351287a218d4e3df3cc3ef2cf937fc2a.1697191850.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1697191850.git.nicola.vetrini@bugseng.com>
-References: <cover.1697191850.git.nicola.vetrini@bugseng.com>
+X-Inumbo-ID: 8f331551-69b1-11ee-98d4-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1697192182; x=1697796982; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=VL/OWh/DzPzw/Gw1t3arje36iohI3iQRyvwNcUDAQHA=;
+        b=CwzUvwVMKub1/wOycuce1Fq/rX7fm/F+VjHk9nJwj2do7CH1Wc2sLxC/j9i4M9B6C2
+         f2R5kYA/xKA0tFYZP+8L97tStkC2I5d8bkYvewKal7pTLPYu45/JAoSsNa8qA9ZadmTq
+         CeHrE6CoV5KvY8o7vxek18LO97yobE4kiQ3aY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697192182; x=1697796982;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VL/OWh/DzPzw/Gw1t3arje36iohI3iQRyvwNcUDAQHA=;
+        b=gWBPG2KRwL/p5tgKoJlRCHBcDKuGPBZuXCcDNBid0EEsoovwrcF9r+TciWpXnRikIa
+         9RoPzUiwJ+49ygJjeTmA8prNmwVgR8Rpt13nawvtaI4+drRx2vZvKU8vOVOCZdu3Ezwj
+         BpY3QhBVsmwQyOL0YpZIy1iGfGetXX+otPQjH6UsHuEJhYIsMMQWa1OrSto1qlH7IDdQ
+         g14NUUerICYZ5LGHkB7j0l7i0idghudMSHOOvYhZIH6dWIZhTCyqz8UA/tZwFueiCsap
+         XqStnRzRuO8009Q0BSFhRcdfGxki6mC2dwOyBpvmMW/sMkHL+6YR+8/WQi7Lqn01y0gM
+         Q74w==
+X-Gm-Message-State: AOJu0Ywpu1foxj0iDb7H51C0h3uunXv//Ce8L9MC+rI90BAq+KYD9TjS
+	eR4Yh7Xzby+MH681COLurFRruBJXKUMXsd7xIUqynQ==
+X-Google-Smtp-Source: AGHT+IHsngRznFlRb2agXcaKE4TcpzCxP+Ks4r3/EOTXacORCngfCZTfibpuyyUycgsuU526Z4YNbHKnvx2dtxTlSCU=
+X-Received: by 2002:a2e:b893:0:b0:2c5:634:b45e with SMTP id
+ r19-20020a2eb893000000b002c50634b45emr1397197ljp.36.1697192182279; Fri, 13
+ Oct 2023 03:16:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <AS8PR08MB7991D1099E32CC9F03B0E0F692FCA@AS8PR08MB7991.eurprd08.prod.outlook.com>
+ <alpine.DEB.2.22.394.2309271603590.1403502@ubuntu-linux-20-04-desktop>
+ <a31ce6cb-6234-5e7f-5cd4-ed190f029811@citrix.com> <alpine.DEB.2.22.394.2309271658500.1403502@ubuntu-linux-20-04-desktop>
+ <CA+zSX=ZbeUFrfAUJShooJFJ+d89f4xdXfJJ9HoJKRh4UStkTFQ@mail.gmail.com> <alpine.DEB.2.22.394.2310121535580.3431292@ubuntu-linux-20-04-desktop>
+In-Reply-To: <alpine.DEB.2.22.394.2310121535580.3431292@ubuntu-linux-20-04-desktop>
+From: George Dunlap <george.dunlap@cloud.com>
+Date: Fri, 13 Oct 2023 11:16:11 +0100
+Message-ID: <CA+zSX=Y5dMVFM6dVNgBRHxKc0C1e5WGgweQ0FaXXCfAFGH1aPA@mail.gmail.com>
+Subject: Re: Xen 4.18 release: Reminder about code freeze
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Henry Wang <Henry.Wang@arm.com>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <Bertrand.Marquis@arm.com>, Jan Beulich <jbeulich@suse.com>, 
+	"jgross@suse.com" <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Anthony PERARD <anthony.perard@citrix.com>, 
+	"community.manager@xenproject.org" <community.manager@xenproject.org>
+Content-Type: multipart/mixed; boundary="0000000000002423b3060796591a"
 
-From: Simone Ballarin <simone.ballarin@bugseng.com>
+--0000000000002423b3060796591a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Remove deviations for ERROR_EXIT, ERROR_EXIT_DOM and PIN_FAIL:
-the aforementioned macros have been removed.
-Add deviation for Rule 2.1 for pure declarations.
-Remove legacy text-based deviations: these are now implemented
-with SAF comments.
-Add deviations for Rules 8.4, 10.1, 13.5, 14.2, 14.3.
-Remove deviations for guidelines not yet accepted or rejected.
+On Thu, Oct 12, 2023 at 11:36=E2=80=AFPM Stefano Stabellini
+<sstabellini@kernel.org> wrote:
+>
+> On Thu, 12 Oct 2023, George Dunlap wrote:
+> > > > Stop tinkering in the hope that it hides the problem.  You're only
+> > > > making it harder to fix properly.
+> > >
+> > > Making it harder to fix properly would be a valid reason not to commi=
+t
+> > > the (maybe partial) fix. But looking at the fix again:
+> > >
+> > > diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
+> > > index a6cd199fdc..9cd6678015 100644
+> > > --- a/tools/xenstored/domain.c
+> > > +++ b/tools/xenstored/domain.c
+> > > @@ -989,6 +989,7 @@ static struct domain *introduce_domain(const void=
+ *ctx,
+> > >                 talloc_steal(domain->conn, domain);
+> > >
+> > >                 if (!restore) {
+> > > +                       domain_conn_reset(domain);
+> > >                         /* Notify the domain that xenstore is availab=
+le */
+> > >                         interface->connection =3D XENSTORE_CONNECTED;
+> > >                         xenevtchn_notify(xce_handle, domain->port);
+> > > @@ -1031,8 +1032,6 @@ int do_introduce(const void *ctx, struct connec=
+tion *conn,
+> > >         if (!domain)
+> > >                 return errno;
+> > >
+> > > -       domain_conn_reset(domain);
+> > > -
+> > >         send_ack(conn, XS_INTRODUCE);
+> > >
+> > > It is a 1-line movement. Textually small. Easy to understand and to
+> > > revert. It doesn't seem to be making things harder to fix? We could
+> > > revert it any time if a better fix is offered.
+> > >
+> > > Maybe we could have a XXX note in the commit message or in-code
+> > > comment?
+> >
+> > It moves a line from one function (do_domain_introduce()) into a
+> > completely different function (introduce_domain()), nested inside two
+> > if() statements; with no analysis on how the change will impact
+> > things.
+>
+> I am not the original author of the patch, and I am not the maintainer
+> of the code, so I don't feel I have the qualifications to give you the
+> answers you are seeking. Julien as author of the patch and xenstore
+> reviewer might be in a better position to answer. Or Juergen as xenstore
+> maintainer.
 
-Add MC3R1.R11.7, MC3R1.R11.8, MC3R1.R11.9, MC3R1.R15.3 and MC3R1.R14.2
-to the accepted guidelines selector.
+I understand that; my main point is that the change is more complex
+than you're characterizing it.  This is information necessary to
+understand whether the patch is correct, but it's not in the patch
+description, nor in the subsequent thread back in May.
 
-Update clean guidelines selector.
+> > Are there any paths through do_domain_introduce() that now *won't* get
+> > a domain_conn_reset() call?  Is that OK?
+>
+> Yes, the already-introduced and the restore code paths. The operations in
+> the already-introduced or the restore code paths seem simple enough not
+> to require a domain_conn_reset. Julien and Juergen should confirm.
 
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
----
- .../eclair_analysis/ECLAIR/deviations.ecl     | 135 ++++++++----------
- automation/eclair_analysis/ECLAIR/tagging.ecl |   4 +-
- 2 files changed, 64 insertions(+), 75 deletions(-)
+There is no "restore" codepath through do_domain_introduce(); it
+passes "false" for the "restore" argument.  So we  only have two paths
+to consider through do_domain_introduce(): The "not introduced and not
+restoring" path, and the "already-introduced" path.
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index d8170106b449..fa56e5c00a27 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -15,14 +15,19 @@ Constant expressions and unreachable branches of if and switch statements are ex
- -doc_end
+I'm not sure what the "simple" elements on the branch in
+introduce_domain() have to do with whether the content of the page
+needs to be cleaned up.  As I said, I don't 100% understand this code,
+but it seems like if anything, the reset would be *more* important to
+have in the "reintroduce" case than in the "initial introduction"
+case, since I'd expect the "initial introduction" case to be empty
+already.
 
- -doc_begin="Unreachability caused by calls to the following functions or macros is deliberate and there is no risk of code being unexpectedly left out."
---config=MC3R1.R2.1,statements+={deliberate,"macro(name(BUG||assert_failed||ERROR_EXIT||ERROR_EXIT_DOM||PIN_FAIL))"}
-+-config=MC3R1.R2.1,statements+={deliberate,"macro(name(BUG||assert_failed))"}
- -config=MC3R1.R2.1,statements+={deliberate, "call(decl(name(__builtin_unreachable||panic||do_unexpected_trap||machine_halt||machine_restart||maybe_reboot)))"}
- -doc_end
+> Doesn't it seem weird to you that we set a connection to CONNECTED,
+> notify the domain that it is ready to go, and only *after* that we reset
+> the connection to zero?
+>
+> What happens if a domain starts using the connection as soon as it
+> receives the event channel notification and before domain_conn_reset is
+> called?
 
---doc_begin="Unreachability of an ASSERT_UNREACHABLE() and analogous macro calls is deliberate and safe."
-+-doc_begin="Unreachability inside an ASSERT_UNREACHABLE() and analogous macro calls is deliberate and safe."
- -config=MC3R1.R2.1,reports+={deliberate, "any_area(any_loc(any_exp(macro(name(ASSERT_UNREACHABLE||PARSE_ERR_RET||PARSE_ERR||FAIL_MSR||FAIL_CPUID)))))"}
- -doc_end
+Yes, it does seem weird, which is why I said the following. :-)
 
-+-doc_begin="Pure declarations (i.e., declarations without initialization) are
-+not executable, and therefore it is safe for them to be unreachable."
-+-config=MC3R1.R2.1,ignored_stmts+={"any()", "pure_decl()"}
-+-doc_end
-+
- -doc_begin="Proving compliance with respect to Rule 2.2 is generally impossible:
- see https://arxiv.org/abs/2212.13933 for details. Moreover, peer review gives us
- confidence that no evidence of errors in the program's logic has been missed due
-@@ -49,35 +54,6 @@ they are not instances of commented-out code."
- -config=MC3R1.D4.3,reports+={disapplied,"!(any_area(any_loc(file(^xen/arch/arm/arm64/.*$))))"}
- -doc_end
+> > I mean, it certainly seems strange to set the state to CONNECTED, send
+> > off an event channel, and then after that delete all watches /
+> > transactions / buffered data and so on;
 
---doc_begin="Depending on the compiler, rewriting the following function-like
--macros as inline functions is not guaranteed to have the same effect."
---config=MC3R1.D4.9,macros+={deliberate,"name(likely)"}
---config=MC3R1.D4.9,macros+={deliberate,"name(unlikely)"}
---config=MC3R1.D4.9,macros+={deliberate,"name(unreachable)"}
---doc_end
--
---doc_begin="These macros can be used on both pointers and unsigned long type values."
---config=MC3R1.D4.9,macros+={safe,"name(virt_to_maddr)"}
---config=MC3R1.D4.9,macros+={safe,"name(virt_to_mfn)"}
---doc_end
--
---doc_begin="Rewriting variadic macros as variadic functions might have a negative impact on safety."
---config=MC3R1.D4.9,macros+={deliberate,"variadic()"}
---doc_end
--
---doc_begin="Rewriting macros with arguments that are, in turn, arguments of
--__builtin_constant_p() can change the behavior depending on the optimization
--level."
---config=MC3R1.D4.9,macro_argument_context+="skip_to(class(type||expr||decl,any),
--                                            call(name(__builtin_constant_p)))"
---doc_end
--
---doc_begin="Function-like macros defined in public headers are meant to be
--usable in C89 mode without any extensions. Hence they cannot be replaced by
--inline functions."
---config=MC3R1.D4.9,macros+={deliberate, "loc(file(api:public))"}
---doc_end
--
- -doc_begin="This header file is autogenerated or empty, therefore it poses no
- risk if included more than once."
- -file_tag+={empty_header, "^xen/arch/arm/efi/runtime\\.h$"}
-@@ -105,29 +81,6 @@ conform to the directive."
- -config=MC3R1.R5.3,reports+={safe, "any_area(any_loc(any_exp(macro(^read_debugreg$))&&any_exp(macro(^write_debugreg$))))"}
- -doc_end
+But just because the current code is probably wrong, doesn't mean that
+the modified code is probably correct.
 
---doc_begin="Function-like macros cannot be confused with identifiers that are
--neither functions nor pointers to functions."
---config=MC3R1.R5.5,reports={safe,"all_area(decl(node(enum_decl||record_decl||field_decl||param_decl||var_decl)&&!type(canonical(address((node(function||function_no_proto))))))||macro(function_like()))"}
---doc_end
--
---doc_begin="The use of these identifiers for both macro names and other entities
--is deliberate and does not generate developer confusion."
---config=MC3R1.R5.5,reports+={safe, "any_area(text(^\\s*/\\*\\s+SAF-[0-9]+-safe\\s+MC3R1\\.R5\\.5.*$, begin-1))"}
---doc_end
--
---doc_begin="The definition of macros and functions ending in '_bit' that use the
--same identifier in 'bitops.h' is deliberate and safe."
---file_tag+={bitops_h, "^xen/arch/x86/include/asm/bitops\\.h$"}
---config=MC3R1.R5.5,reports+={safe, "all_area((decl(^.*_bit\\(.*$)||macro(^.*_bit$))&&all_loc(file(bitops_h)))"}
---doc_end
--
---doc_begin="The definition of macros and functions beginning in 'str' or 'mem'
--that use the same identifier in 'xen/include/xen/string.h' is deliberate and
--safe."
---file_tag+={string_h, "^xen/include/xen/string\\.h$"}
---config=MC3R1.R5.5,reports+={safe, "any_area((decl(^(mem|str).*$)||macro(^(mem|str).*$))&&all_loc(file(string_h)))"}
---doc_end
--
- #
- # Series 7.
- #
-@@ -156,11 +109,6 @@ particular use of it done in xen_mk_ulong."
- -config=MC3R1.R7.2,reports+={deliberate,"any_area(any_loc(macro(name(BUILD_BUG_ON))))"}
- -doc_end
+If the problem is the delay between the xenevtchn_notify() in
+introduce_domain() and the domain_conn_reset() afterwards in
+do_domain(), would it make sense instead to move the notification into
+do_introduce(), after the domain_conn_reset()?  It is, after all, in
+response to XS_INTRODUCE that we want to send the notification, not in
+dom0_init() or read_state_connection() (which seems to be more about
+restoring a domain).
 
---doc_begin="The following string literals are assigned to pointers to non
--const-qualified char."
---config=MC3R1.R7.4,reports+={safe, "any_area(text(^\\s*/\\*\\s+SAF-[0-9]+-safe\\s+MC3R1\\.R7\\.4.*$, begin-1))"}
---doc_end
--
- -doc_begin="Allow pointers of non-character type as long as the pointee is
- const-qualified."
- -config=MC3R1.R7.4,same_pointee=false
-@@ -204,6 +152,17 @@ const-qualified."
- -config=MC3R1.R8.3,reports+={deliberate,"any_area(any_loc(file(adopted_mpparse_r8_3)))&&any_area(any_loc(file(^xen/arch/x86/include/asm/mpspec\\.h$)))"}
- -doc_end
+What about something like the attached? (NB not even compile tested)
 
-+-doc_begin="The definitions present in this file are meant to generate definitions for asm modules, and are not called by C code. Therefore the absence of prior declarations is safe."
-+-file_tag+={asm_offsets, "^xen/arch/(arm|x86)/(arm32|arm64|x86_64)/asm-offsets\\.c$"}
-+-config=MC3R1.R8.4,reports+={safe, "first_area(any_loc(file(asm_offsets)))"}
-+-doc_end
-+
-+-doc_begin="The functions defined in this file are meant to be called from gcc-generated code in a non-release build configuration.
-+Therefore the absence of prior declarations is safe."
-+-file_tag+={gcov, "^xen/common/coverage/gcov_base\\.c$"}
-+-config=MC3R1.R8.4,reports+={safe, "first_area(any_loc(file(gcov)))"}
-+-doc_end
-+
- -doc_begin="The following variables are compiled in multiple translation units
- belonging to different executables and therefore are safe."
- -config=MC3R1.R8.6,declarations+={safe, "name(current_stack_pointer||bsearch||sort)"}
-@@ -222,12 +181,6 @@ definition is compiled-out or optimized-out by the compiler)"
- # Series 9.
- #
+ -George
 
---doc_begin="The following variables are written before being set, therefore no
--access to uninitialized memory locations happens, as explained in the deviation
--comment."
---config=MC3R1.R9.1,reports+={safe, "any_area(text(^\\s*/\\*\\s+SAF-[0-9]+-safe\\s+MC3R1\\.R9\\.1.*$, begin-1))"}
---doc_end
--
- -doc_begin="Violations in files that maintainers have asked to not modify in the
- context of R9.1."
- -file_tag+={adopted_r9_1,"^xen/arch/arm/arm64/lib/find_next_bit\\.c$"}
-@@ -274,22 +227,47 @@ still non-negative."
- -config=MC3R1.R10.1,etypes+={safe, "stmt(operator(logical)||node(conditional_operator||binary_conditional_operator))", "dst_type(ebool||boolean)"}
- -doc_end
+--0000000000002423b3060796591a
+Content-Type: application/octet-stream; 
+	name="0001-cxenstored-Wait-until-after-reset-to-notify-dom0less.patch"
+Content-Disposition: attachment; 
+	filename="0001-cxenstored-Wait-until-after-reset-to-notify-dom0less.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_lnoge6k40>
+X-Attachment-Id: f_lnoge6k40
 
--### Set 3 ###
-+-doc_begin="XEN only supports architectures where signed integers are
-+representend using two's complement and all the XEN developers are aware of
-+this."
-+-config=MC3R1.R10.1,etypes+={safe,
-+  "stmt(operator(and||or||xor||not||and_assign||or_assign||xor_assign))",
-+  "any()"}
-+-doc_end
-+
-+-doc_begin="See Section \"4.5 Integers\" of \"GCC_MANUAL\", where it says that
-+\"Signed `>>' acts on negative numbers by sign extension. As an extension to the
-+C language, GCC does not use the latitude given in C99 and C11 only to treat
-+certain aspects of signed `<<' as undefined. However, -fsanitize=shift (and
-+-fsanitize=undefined) will diagnose such cases. They are also diagnosed where
-+constant expressions are required.\""
-+-config=MC3R1.R10.1,etypes+={safe,
-+  "stmt(operator(shl||shr||shl_assign||shr_assign))",
-+  "any()"}
-+-doc_end
-
- #
--# Series 18.
-+# Series 13
- #
-
---doc_begin="FIXME: explain why pointer differences involving this macro are safe."
---config=MC3R1.R18.2,reports+={safe,"all_area(all_loc(any_exp(macro(^ACPI_PTR_DIFF$))))"}
-+-doc_begin="All developers and reviewers can be safely assumed to be well aware
-+of the short-circuit evaluation strategy of such logical operators."
-+-config=MC3R1.R13.5,reports+={disapplied,"any()"}
- -doc_end
-
---doc_begin="FIXME: explain why pointer differences involving this macro are safe."
---config=MC3R1.R18.2,reports+={safe,"all_area(all_loc(any_exp(macro(^page_to_mfn$))))"}
-+#
-+# Series 14
-+#
-+
-+-doc_begin="The severe restrictions imposed by this rule on the use of for
-+statements are not balanced by the presumed facilitation of the peer review
-+activity."
-+-config=MC3R1.R14.2,reports+={disapplied,"any()"}
- -doc_end
-
---doc_begin="FIXME: explain why pointer differences involving this macro are safe."
---config=MC3R1.R18.2,reports+={safe,"all_area(all_loc(any_exp(macro(^page_to_pdx$))))"}
-+-doc_begin="The XEN team relies on the fact that invariant conditions of 'if'
-+statements are deliberate"
-+-config=MC3R1.R14.3,statements={deliberate , "wrapped(any(),node(if_stmt))" }
- -doc_end
-
- #
-@@ -306,6 +284,17 @@ in assignments."
- {safe, "left_right(^[(,\\[]$,^[),\\]]$)"}
- -doc_end
-
-+#
-+# General
-+#
-+
-+-doc_begin="do-while-0 is a well recognized loop idiom by the xen community."
-+-loop_idioms={do_stmt, "literal(0)"}
-+-doc_end
-+-doc_begin="while-[01] is a well recognized loop idiom by the xen community."
-+-loop_idioms+={while_stmt, "literal(0)||literal(1)"}
-+-doc_end
-+
- #
- # Developer confusion
- #
-diff --git a/automation/eclair_analysis/ECLAIR/tagging.ecl b/automation/eclair_analysis/ECLAIR/tagging.ecl
-index 78a0bc948ba5..e82277fea3c1 100644
---- a/automation/eclair_analysis/ECLAIR/tagging.ecl
-+++ b/automation/eclair_analysis/ECLAIR/tagging.ecl
-@@ -19,7 +19,7 @@
-
- -doc="Accepted guidelines as reported in XEN/docs/misra/rules.rst"
- -service_selector={accepted_guidelines,
--    "MC3R1.D1.1||MC3R1.D2.1||MC3R1.D4.1||MC3R1.D4.3||MC3R1.D4.7||MC3R1.D4.10||MC3R1.D4.11||MC3R1.D4.14||MC3R1.R1.1||MC3R1.R1.3||MC3R1.R1.4||MC3R1.R2.1||MC3R1.R2.2||MC3R1.R2.6||MC3R1.R2.2||MC3R1.R3.1||MC3R1.R3.2||MC3R1.R4.1||MC3R1.R4.2||MC3R1.R5.1||MC3R1.R5.2||MC3R1.R5.3||MC3R1.R5.4||MC3R1.R5.6||MC3R1.R6.1||MC3R1.R6.2||MC3R1.R7.1||MC3R1.R7.2||MC3R1.R7.3||MC3R1.R7.4||MC3R1.R8.1||MC3R1.R8.2||MC3R1.R8.3||MC3R1.R8.4||MC3R1.R8.5||MC3R1.R8.6||MC3R1.R8.8||MC3R1.R8.10||MC3R1.R8.12||MC3R1.R8.14||MC3R1.R9.1||MC3R1.R9.2||MC3R1.R9.3||MC3R1.R9.4||MC3R1.R9.5||MC3R1.R10.1||MC3R1.R10.2||MC3R1.R10.3||MC3R1.R10.4||MC3R1.R12.5||MC3R1.R13.6||MC3R1.R13.1||MC3R1.R14.1||MC3R1.R14.3||MC3R1.R16.7||MC3R1.R17.3||MC3R1.R17.4||MC3R1.R17.6||MC3R1.R18.3||MC3R1.R19.1||MC3R1.R20.7||MC3R1.R20.13||MC3R1.R20.14||MC3R1.R21.13||MC3R1.R21.17||MC3R1.R21.18||MC3R1.R21.19||MC3R1.R21.20||MC3R1.R21.21||MC3R1.R22.2||MC3R1.R22.4||MC3R1.R22.5||MC3R1.R22.6"
-+    "MC3R1.D1.1||MC3R1.D2.1||MC3R1.D4.1||MC3R1.D4.3||MC3R1.D4.7||MC3R1.D4.10||MC3R1.D4.11||MC3R1.D4.14||MC3R1.R1.1||MC3R1.R1.3||MC3R1.R1.4||MC3R1.R2.1||MC3R1.R2.2||MC3R1.R2.6||MC3R1.R3.1||MC3R1.R3.2||MC3R1.R4.1||MC3R1.R4.2||MC3R1.R5.1||MC3R1.R5.2||MC3R1.R5.3||MC3R1.R5.4||MC3R1.R5.6||MC3R1.R6.1||MC3R1.R6.2||MC3R1.R7.1||MC3R1.R7.2||MC3R1.R7.3||MC3R1.R7.4||MC3R1.R8.1||MC3R1.R8.2||MC3R1.R8.3||MC3R1.R8.4||MC3R1.R8.5||MC3R1.R8.6||MC3R1.R8.8||MC3R1.R8.10||MC3R1.R8.12||MC3R1.R8.14||MC3R1.R9.1||MC3R1.R9.2||MC3R1.R9.3||MC3R1.R9.4||MC3R1.R9.5||MC3R1.R10.1||MC3R1.R10.2||MC3R1.R10.3||MC3R1.R10.4||MC3R1.R11.7||MC3R1.R11.8||MC3R1.R11.9||MC3R1.R12.5||MC3R1.R13.1||MC3R1.R13.5||MC3R1.R13.6||MC3R1.R14.1||MC3R1.R14.2||MC3R1.R14.3||MC3R1.R16.7||MC3R1.R17.3||MC3R1.R17.4||MC3R1.R17.6||MC3R1.R18.3||MC3R1.R19.1||MC3R1.R20.7||MC3R1.R20.13||MC3R1.R20.14||MC3R1.R21.13||MC3R1.R21.17||MC3R1.R21.18||MC3R1.R21.19||MC3R1.R21.20||MC3R1.R21.21||MC3R1.R22.2||MC3R1.R22.4||MC3R1.R22.5||MC3R1.R22.6"
- }
- -doc="All reports of accepted guidelines are tagged as accepted."
- -reports+={status:accepted,"service(accepted_guidelines)"}
-@@ -30,7 +30,7 @@
-
- -doc_begin="Clean guidelines: new violations for these guidelines are not accepted."
-
---service_selector={clean_guidelines_common,"MC3R1.D1.1||MC3R1.D2.1||MC3R1.D4.11||MC3R1.D4.14||MC3R1.R1.1||MC3R1.R1.3||MC3R1.R1.4||MC3R1.R2.2||MC3R1.R3.1||MC3R1.R3.2||MC3R1.R4.1||MC3R1.R5.1||MC3R1.R5.2||MC3R1.R5.4||MC3R1.R6.1||MC3R1.R6.2||MC3R1.R7.1||MC3R1.R8.1||MC3R1.R8.5||MC3R1.R8.8||MC3R1.R8.10||MC3R1.R8.12||MC3R1.R8.14||MC3R1.R9.2||MC3R1.R9.4||MC3R1.R9.5||MC3R1.R12.5||MC3R1.R17.3||MC3R1.R17.4||MC3R1.R17.6||MC3R1.R21.13||MC3R1.R21.19||MC3R1.R21.21||MC3R1.R22.2||MC3R1.R22.4||MC3R1.R22.5||MC3R1.R22.6"
-+-service_selector={clean_guidelines_common,"MC3R1.D1.1||MC3R1.D2.1||MC3R1.D4.11||MC3R1.D4.14||MC3R1.R1.1||MC3R1.R1.3||MC3R1.R1.4||MC3R1.R2.2||MC3R1.R3.1||MC3R1.R3.2||MC3R1.R4.1||MC3R1.R4.2||MC3R1.R5.1||MC3R1.R5.2||MC3R1.R5.4||MC3R1.R6.1||MC3R1.R6.2||MC3R1.R7.1||MC3R1.R8.1||MC3R1.R8.5||MC3R1.R8.8||MC3R1.R8.10||MC3R1.R8.12||MC3R1.R8.14||MC3R1.R9.2||MC3R1.R9.4||MC3R1.R9.5||MC3R1.R12.5||MC3R1.R17.3||MC3R1.R17.4||MC3R1.R17.6||MC3R1.R20.13||MC3R1.R20.14||MC3R1.R21.13||MC3R1.R21.19||MC3R1.R21.21||MC3R1.R22.2||MC3R1.R22.4||MC3R1.R22.5||MC3R1.R22.6"
- }
-
- -setq=target,getenv("XEN_TARGET_ARCH")
---
-2.34.1
+RnJvbSBkNmE2NDg4MmEwNmMzNjRlZjE3YjU0YjI1OTAwN2U1YjA3ZDRkN2YwIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNsb3VkLmNv
+bT4KRGF0ZTogRnJpLCAxMyBPY3QgMjAyMyAxMDo1NTo1MyArMDEwMApTdWJqZWN0OiBbUEFUQ0hd
+IGN4ZW5zdG9yZWQ6IFdhaXQgdW50aWwgYWZ0ZXIgcmVzZXQgdG8gbm90aWZ5IGRvbTBsZXNzIGRv
+bWFpbnMKCkNvbW1pdCBmYzJiNTdjOWEgKCJ4ZW5zdG9yZWQ6IHNlbmQgYW4gZXZ0Y2huIG5vdGlm
+aWNhdGlvbiBvbgppbnRyb2R1Y2VfZG9tYWluIikgaW50cm9kdWNlZCB0aGUgc2VuZGluZyBvZiBh
+biBldmVudCBjaGFubmVsIHRvIHRoZQpndWVzdCB3aGVuIGZpcnN0IGludHJvZHVjZWQsIHNvIHRo
+YXQgZG9tMGxlc3MgZG9tYWlucyB3YWl0aW5nIGZvciB0aGUKY29ubmVjdGlvbiB3b3VsZCBrbm93
+IHRoYXQgeGVuc3RvcmUgd2FzIHJlYWR5IHRvIHVzZS4KClVuZm9ydHVuYXRlbHksIGl0IHdhcyBp
+bnRyb2R1Y2VkIGluIGludHJvZHVjZV9kb21haW4oKSwgd2hpY2ggMSkgaXMKY2FsbGVkIGJ5IG90
+aGVyIGZ1bmN0aW9ucywgd2hlcmUgc3VjaCBmdW5jdGlvbmFsaXR5IGlzIHVubmVlZGVkLCBhbmQK
+MikgYWZ0ZXIgdGhlIG1haW4gWFNfSU5UUk9EVUNFIGNhbGwsIGNhbGxzIGRvbWFpbl9jb25uX3Jl
+c2V0KCkuICBUaGlzCmludHJvZHVjZXMgYSByYWNlIGNvbmRpdGlvbiwgd2hlcmVieSBpZiB4ZW5z
+dG9yZWQgaXMgZGVsYXllZCwgYSBkb21haW4KY2FuIHdha2UgdXAsIHNlbmQgbWVzc2FnZXMgdG8g
+dGhlIGJ1ZmZlciwgb25seSB0byBoYXZlIHRoZW0gZGVsZXRlZCBieQp4ZW5zdG9yZSBiZWZvcmUg
+ZmluaXNoaW5nIGl0cyBwcm9jZXNzaW5nIG9mIHRoZSBYU19JTlRST0RVQ0UgbWVzc2FnZS4KCk1v
+dmUgdGhlIGNvbm5lY3QtYW5kLW5vdGZ5IGNhbGwgaW50byBkb19pbnRyb2R1Y2UoKSBpbnN0ZWFk
+LCBhZnRlciB0aGUKZG9tYWluX2Nvbm5fcmVzdCgpOyBwcmVkaWNhdGVkIG9uIHRoZSBzdGF0ZSBi
+ZWluZyBpbiB0aGUKWEVOU1RPUkVfUkVDT05ORUNUIHN0YXRlLgoKKFdlIGRvbid0IG5lZWQgdG8g
+Y2hlY2sgZm9yICJyZXN0b3JpbmciLCBzaW5jZSB0aGF0IHZhbHVlIGlzIGFsd2F5cwpwYXNzZWQg
+YXMgImZhbHNlIiBmcm9tIGRvX2RvbWFpbl9pbnRyb2R1Y2UoKSkuCgpTaWduZWQtb2ZmLWJ5OiBH
+ZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNsb3VkLmNvbT4KLS0tCkknbSBub3QgZmFtaWxp
+YXIgd2l0aCB0aGlzIGNvZGUsIHNvIHRoaXMgY29tbWl0IG1lc3NhZ2UgaGFzIGJlZW4Kd3JpdHRl
+biB1c2luZyB0aGUgInRoZSBmYXN0ZXN0IHdheSB0byBnZXQgdGhlIHJpZ2h0IGFuc3dlciBpcyB0
+byBwb3N0CnRoZSB3cm9uZyBhbnN3ZXIiIG1ldGhvZC4gIElmIHlvdSBrbm93IHhlbnN0b3JlZCAm
+IHRoZSBwcm90b2NvbCwKcGxlYXNlIHJldmlldyBpZiBjYXJlZnVsbHkgZm9yIGFjY3VyYWN5Lgot
+LS0KIHRvb2xzL3hlbnN0b3JlZC9kb21haW4uYyB8IDEyICsrKysrKy0tLS0tLQogMSBmaWxlIGNo
+YW5nZWQsIDYgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS90b29s
+cy94ZW5zdG9yZWQvZG9tYWluLmMgYi90b29scy94ZW5zdG9yZWQvZG9tYWluLmMKaW5kZXggYTZj
+ZDE5OWZkYy4uYWRkYzM0ZjVmOCAxMDA2NDQKLS0tIGEvdG9vbHMveGVuc3RvcmVkL2RvbWFpbi5j
+CisrKyBiL3Rvb2xzL3hlbnN0b3JlZC9kb21haW4uYwpAQCAtOTg4LDEyICs5ODgsNiBAQCBzdGF0
+aWMgc3RydWN0IGRvbWFpbiAqaW50cm9kdWNlX2RvbWFpbihjb25zdCB2b2lkICpjdHgsCiAJCS8q
+IE5vdyBkb21haW4gYmVsb25ncyB0byBpdHMgY29ubmVjdGlvbi4gKi8KIAkJdGFsbG9jX3N0ZWFs
+KGRvbWFpbi0+Y29ubiwgZG9tYWluKTsKIAotCQlpZiAoIXJlc3RvcmUpIHsKLQkJCS8qIE5vdGlm
+eSB0aGUgZG9tYWluIHRoYXQgeGVuc3RvcmUgaXMgYXZhaWxhYmxlICovCi0JCQlpbnRlcmZhY2Ut
+PmNvbm5lY3Rpb24gPSBYRU5TVE9SRV9DT05ORUNURUQ7Ci0JCQl4ZW5ldnRjaG5fbm90aWZ5KHhj
+ZV9oYW5kbGUsIGRvbWFpbi0+cG9ydCk7Ci0JCX0KLQogCQlpZiAoIWlzX21hc3Rlcl9kb21haW4g
+JiYgIXJlc3RvcmUpCiAJCQlmaXJlX3NwZWNpYWxfd2F0Y2hlcygiQGludHJvZHVjZURvbWFpbiIp
+OwogCX0gZWxzZSB7CkBAIC0xMDMzLDYgKzEwMjcsMTIgQEAgaW50IGRvX2ludHJvZHVjZShjb25z
+dCB2b2lkICpjdHgsIHN0cnVjdCBjb25uZWN0aW9uICpjb25uLAogCiAJZG9tYWluX2Nvbm5fcmVz
+ZXQoZG9tYWluKTsKIAorCWlmIChpbnRlcmZhY2UtPmNvbm5lY3Rpb24gPT0gWEVOU1RPUkVfUkVD
+T05ORUNUKSB7CisJCS8qIE5vdGlmeSB0aGUgZG9tYWluIHRoYXQgeGVuc3RvcmUgaXMgYXZhaWxh
+YmxlICovCisJCWludGVyZmFjZS0+Y29ubmVjdGlvbiA9IFhFTlNUT1JFX0NPTk5FQ1RFRDsKKwkJ
+eGVuZXZ0Y2huX25vdGlmeSh4Y2VfaGFuZGxlLCBkb21haW4tPnBvcnQpOworCX0KKwogCXNlbmRf
+YWNrKGNvbm4sIFhTX0lOVFJPRFVDRSk7CiAKIAlyZXR1cm4gMDsKLS0gCjIuNDIuMAoK
+--0000000000002423b3060796591a--
 
