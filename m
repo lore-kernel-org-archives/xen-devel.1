@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07BE7CDB482
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 10:32:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616404.958383 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E0A1CDB482
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 10:36:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616412.958399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrFSj-0001s6-5F; Fri, 13 Oct 2023 10:32:09 +0000
+	id 1qrFWc-0002tm-Ut; Fri, 13 Oct 2023 10:36:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616404.958383; Fri, 13 Oct 2023 10:32:09 +0000
+Received: by outflank-mailman (output) from mailman id 616412.958399; Fri, 13 Oct 2023 10:36:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrFSj-0001rz-0w; Fri, 13 Oct 2023 10:32:09 +0000
-Received: by outflank-mailman (input) for mailman id 616404;
- Fri, 13 Oct 2023 10:32:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Ujq9=F3=linaro.org=leo.yan@srs-se1.protection.inumbo.net>)
- id 1qrFSh-0001rt-VO
- for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 10:32:08 +0000
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [2607:f8b0:4864:20::435])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c1603b62-69b3-11ee-98d4-6d05b1d4d9a1;
- Fri, 13 Oct 2023 12:32:06 +0200 (CEST)
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-690fe10b6a4so1547173b3a.3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Oct 2023 03:32:06 -0700 (PDT)
-Received: from leoy-huanghe.lan ([98.98.49.106])
- by smtp.gmail.com with ESMTPSA id
- s14-20020a056a00178e00b00690d7da743dsm11569450pfg.161.2023.10.13.03.32.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 03:32:05 -0700 (PDT)
+	id 1qrFWc-0002tN-Pf; Fri, 13 Oct 2023 10:36:10 +0000
+Received: by outflank-mailman (input) for mailman id 616412;
+ Fri, 13 Oct 2023 10:36:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=U36v=F3=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qrFWc-0002pr-4j
+ for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 10:36:10 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 51c8b73c-69b4-11ee-9b0e-b553b5be7939;
+ Fri, 13 Oct 2023 12:36:08 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1396F219DC;
+ Fri, 13 Oct 2023 10:36:08 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BDBDE138EF;
+ Fri, 13 Oct 2023 10:36:07 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id BTUYLZcdKWUdNgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 13 Oct 2023 10:36:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,67 +53,247 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1603b62-69b3-11ee-98d4-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1697193125; x=1697797925; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=QT8JDS4d48Jv9Iw7CxbI81UddAFIE1jRso45ubnb8DM=;
-        b=SA6hN32jDccDddh9VexbSRYPFx+xkPzqkVPYilQGq7HeKisfy7sTjByN2UrJnoT0Gn
-         Rk6M20vVAsJxXsv4ifUS/A5o43ML0yCTUdb1yx4JzkoR8CXPGPaPeEuAGme9Kt54+kqj
-         +xbZyc3Hto/UVObmqTX/TZO0jxNRCm+x8/XJMXgiIIh5oKxipvLh6grhDhWP/ogTvYcu
-         O1Z1//klMNU3euyyA1dXGp0PstPrOMpFYeLCogo5oLDnQXpIAzNXzZy06nCxBj2YYrhf
-         7Bbnkb1JPntvH//4qghWTjkhtiqoJcTriS6mI0adFZQWjb9QwQWteCCge/Xw1VPizKXC
-         IZmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697193125; x=1697797925;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QT8JDS4d48Jv9Iw7CxbI81UddAFIE1jRso45ubnb8DM=;
-        b=mrlGYXL47uHIH3MEmJvHUR9mc2Qbg7JWg2wLL1fJGL2JLMnZibj9NnwG18d2TtcbOY
-         DPbTuXOuu8+C8B0tCY5wd9dwXX/jPPWzjWwBwgTxqlmBlu21BaGljo6UcGn7k1EiE62M
-         yKQ3HvcM+3zwnIRu1QE6TpGAieQQ6QIKeVxzB7QbK82aTnoEUPI9RJIIvjC0E5k9VBDm
-         hU6ClfoDWMu52SvACcumSCSF+xo8So8X/hBQdgrpUDt3mgYswofwKb/Qs/FdU0d3x5n3
-         aOhHcJdctJfvykIk9BD4js3gz+nvzCuG1qGLfTVV7MPriDSqmOY44Gbr1TsB6hKxJCv6
-         dsbw==
-X-Gm-Message-State: AOJu0YwsRKC9ke9GsCXV7kTkGK83UWzH3qd37XIO9LQ1YA456KR/nghg
-	l+enl0DH6hZnfPKQWdwvncWslA==
-X-Google-Smtp-Source: AGHT+IH1eMBiIrM/xbdNKZeiDIp3diA8eBl2NiBmBUKGJI+m+MKU60zDZoKUbfLQMNEPpQ8iRH/W3A==
-X-Received: by 2002:a05:6a00:1989:b0:68f:e121:b37c with SMTP id d9-20020a056a00198900b0068fe121b37cmr31024332pfl.4.1697193125454;
-        Fri, 13 Oct 2023 03:32:05 -0700 (PDT)
-Date: Fri, 13 Oct 2023 18:32:01 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Michal Orzel <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
+X-Inumbo-ID: 51c8b73c-69b4-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1697193368; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FH84hSjIS+ofUGFtDCVLLQDs+m1Iz62wX5oKrJ5EKyc=;
+	b=U+Dpm1Dlslsrqrt5EefX3q0KZ9i3CLHjJcz/u07kTRC3jbU/O+mwr8M81yZBsiXFbwff01
+	NGMkr2ZBS6BFKm1hweZ2zg0CAG+qwJFgGanE2QoHBcejiOu5TEmMhjiV87C5LGrQ6V22kb
+	vNUUdpOXAmp4SRqBEVUf7wOfpJFqrvU=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: javi.merino@cloud.com,
+	Juergen Gross <jgross@suse.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v2] xen/arm: Skip memory nodes if not enabled
-Message-ID: <20231013103201.GA928468@leoy-huanghe.lan>
-References: <20230928143110.248221-1-leo.yan@linaro.org>
- <a8d87efe-908b-8eed-dc42-550037051492@amd.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 06/13] xen/spinlock: add rspin_[un]lock_irq[save|restore]()
+Date: Fri, 13 Oct 2023 11:42:17 +0200
+Message-Id: <20231013094224.7060-7-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231013094224.7060-1-jgross@suse.com>
+References: <20231013094224.7060-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a8d87efe-908b-8eed-dc42-550037051492@amd.com>
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spamd-Result: default: False [-6.10 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 REPLY(-4.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 NEURAL_HAM_LONG(-3.00)[-1.000];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-1.00)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[10];
+	 MID_CONTAINS_FROM(1.00)[];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_COUNT_TWO(0.00)[2];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-3.00)[100.00%]
 
-Hi Michal,
+Instead of special casing rspin_lock_irqsave() and
+rspin_unlock_irqrestore() for the console lock, add those functions
+to spinlock handling and use them where needed.
 
-On Fri, Sep 29, 2023 at 10:11:19AM +0200, Michal Orzel wrote:
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch
+---
+ xen/arch/x86/traps.c       | 14 ++++++++------
+ xen/common/spinlock.c      | 16 ++++++++++++++++
+ xen/drivers/char/console.c | 18 +-----------------
+ xen/include/xen/console.h  |  5 +++--
+ xen/include/xen/spinlock.h |  7 +++++++
+ 5 files changed, 35 insertions(+), 25 deletions(-)
 
-[...]
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index e1356f696a..f72769e79b 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -647,13 +647,15 @@ void show_stack_overflow(unsigned int cpu, const struct cpu_user_regs *regs)
+ void show_execution_state(const struct cpu_user_regs *regs)
+ {
+     /* Prevent interleaving of output. */
+-    unsigned long flags = console_lock_recursive_irqsave();
++    unsigned long flags;
++
++    rspin_lock_irqsave(&console_lock, flags);
+ 
+     show_registers(regs);
+     show_code(regs);
+     show_stack(regs);
+ 
+-    console_unlock_recursive_irqrestore(flags);
++    rspin_unlock_irqrestore(&console_lock, flags);
+ }
+ 
+ void cf_check show_execution_state_nonconst(struct cpu_user_regs *regs)
+@@ -663,7 +665,7 @@ void cf_check show_execution_state_nonconst(struct cpu_user_regs *regs)
+ 
+ void vcpu_show_execution_state(struct vcpu *v)
+ {
+-    unsigned long flags = 0;
++    unsigned long flags;
+ 
+     if ( test_bit(_VPF_down, &v->pause_flags) )
+     {
+@@ -698,7 +700,7 @@ void vcpu_show_execution_state(struct vcpu *v)
+ #endif
+ 
+     /* Prevent interleaving of output. */
+-    flags = console_lock_recursive_irqsave();
++    rspin_lock_irqsave(&console_lock, flags);
+ 
+     vcpu_show_registers(v);
+ 
+@@ -708,7 +710,7 @@ void vcpu_show_execution_state(struct vcpu *v)
+          * Stop interleaving prevention: The necessary P2M lookups involve
+          * locking, which has to occur with IRQs enabled.
+          */
+-        console_unlock_recursive_irqrestore(flags);
++        rspin_unlock_irqrestore(&console_lock, flags);
+ 
+         show_hvm_stack(v, &v->arch.user_regs);
+     }
+@@ -717,7 +719,7 @@ void vcpu_show_execution_state(struct vcpu *v)
+         if ( guest_kernel_mode(v, &v->arch.user_regs) )
+             show_guest_stack(v, &v->arch.user_regs);
+ 
+-        console_unlock_recursive_irqrestore(flags);
++        rspin_unlock_irqrestore(&console_lock, flags);
+     }
+ 
+ #ifdef CONFIG_HVM
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index 58d19ea12c..3b1d1fd8d5 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -475,6 +475,16 @@ void rspin_lock(rspinlock_t *lock)
+     lock->recurse_cnt++;
+ }
+ 
++unsigned long __rspin_lock_irqsave(rspinlock_t *lock)
++{
++    unsigned long flags;
++
++    local_irq_save(flags);
++    rspin_lock(lock);
++
++    return flags;
++}
++
+ void rspin_unlock(rspinlock_t *lock)
+ {
+     if ( likely(--lock->recurse_cnt == 0) )
+@@ -484,6 +494,12 @@ void rspin_unlock(rspinlock_t *lock)
+     }
+ }
+ 
++void rspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags)
++{
++    rspin_unlock(lock);
++    local_irq_restore(flags);
++}
++
+ #ifdef CONFIG_DEBUG_LOCK_PROFILE
+ 
+ struct lock_profile_anc {
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 394c01d097..360c2afbf3 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -120,7 +120,7 @@ static int __read_mostly sercon_handle = -1;
+ int8_t __read_mostly opt_console_xen; /* console=xen */
+ #endif
+ 
+-static DEFINE_RSPINLOCK(console_lock);
++DEFINE_RSPINLOCK(console_lock);
+ 
+ /*
+  * To control the amount of printing, thresholds are added.
+@@ -1149,22 +1149,6 @@ void console_end_log_everything(void)
+     atomic_dec(&print_everything);
+ }
+ 
+-unsigned long console_lock_recursive_irqsave(void)
+-{
+-    unsigned long flags;
+-
+-    local_irq_save(flags);
+-    rspin_lock(&console_lock);
+-
+-    return flags;
+-}
+-
+-void console_unlock_recursive_irqrestore(unsigned long flags)
+-{
+-    rspin_unlock(&console_lock);
+-    local_irq_restore(flags);
+-}
+-
+ void console_force_unlock(void)
+ {
+     watchdog_disable();
+diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
+index ab5c30c0da..dff0096b27 100644
+--- a/xen/include/xen/console.h
++++ b/xen/include/xen/console.h
+@@ -8,8 +8,11 @@
+ #define __CONSOLE_H__
+ 
+ #include <xen/inttypes.h>
++#include <xen/spinlock.h>
+ #include <public/xen.h>
+ 
++extern rspinlock_t console_lock;
++
+ struct xen_sysctl_readconsole;
+ long read_console_ring(struct xen_sysctl_readconsole *op);
+ 
+@@ -20,8 +23,6 @@ void console_init_postirq(void);
+ void console_endboot(void);
+ int console_has(const char *device);
+ 
+-unsigned long console_lock_recursive_irqsave(void);
+-void console_unlock_recursive_irqrestore(unsigned long flags);
+ void console_force_unlock(void);
+ 
+ void console_start_sync(void);
+diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
+index c99ee52458..53f0f72ac4 100644
+--- a/xen/include/xen/spinlock.h
++++ b/xen/include/xen/spinlock.h
+@@ -218,7 +218,14 @@ void _spin_barrier(spinlock_t *lock);
+  */
+ int rspin_trylock(rspinlock_t *lock);
+ void rspin_lock(rspinlock_t *lock);
++#define rspin_lock_irqsave(l, f)                                \
++    ({                                                          \
++        BUILD_BUG_ON(sizeof(f) != sizeof(unsigned long));       \
++        ((f) = __rspin_lock_irqsave(l));                        \
++    })
++unsigned long __rspin_lock_irqsave(rspinlock_t *lock);
+ void rspin_unlock(rspinlock_t *lock);
++void rspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags);
+ 
+ #define spin_lock(l)                  _spin_lock(l)
+ #define spin_lock_cb(l, c, d)         _spin_lock_cb(l, c, d)
+-- 
+2.35.3
 
-> > +static bool __init device_tree_node_is_available(const void *fdt, int node)
-> > +{
-> > +    const char *status = fdt_getprop(fdt, node, "status", NULL);
-> Please see Julien's comment for v1. To save some jumps,instructions
-> we should also check for length of the property to be > 0, just like we do in dt_device_is_available().
-
-Sorry for I missed Julien's comment.  Have sent patch v3 for review.
-
-And apologize for late replying.
-
-Leo
 
