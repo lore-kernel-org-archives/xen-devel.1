@@ -4,39 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6F26CDB47E
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 13:19:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616556.958652 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F653CDB47E
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 13:31:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616569.958675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrI4T-0000iw-VL; Fri, 13 Oct 2023 13:19:17 +0000
+	id 1qrIFX-0006EX-Bw; Fri, 13 Oct 2023 13:30:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616556.958652; Fri, 13 Oct 2023 13:19:17 +0000
+Received: by outflank-mailman (output) from mailman id 616569.958675; Fri, 13 Oct 2023 13:30:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrI4T-0000ip-Sn; Fri, 13 Oct 2023 13:19:17 +0000
-Received: by outflank-mailman (input) for mailman id 616556;
- Fri, 13 Oct 2023 13:19:16 +0000
+	id 1qrIFX-0006EQ-8t; Fri, 13 Oct 2023 13:30:43 +0000
+Received: by outflank-mailman (input) for mailman id 616569;
+ Fri, 13 Oct 2023 13:30:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NVAw=F3=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1qrI4R-0000hW-Vb
- for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 13:19:15 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
+ <SRS0=36VQ=F3=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
+ id 1qrIFV-0006EK-Ni
+ for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 13:30:41 +0000
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [2a00:1450:4864:20::22b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1b046e92-69cb-11ee-98d4-6d05b1d4d9a1;
- Fri, 13 Oct 2023 15:19:14 +0200 (CEST)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-9ae75ece209so338501066b.3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Oct 2023 06:19:14 -0700 (PDT)
-Received: from EMEAENGAAD19049.citrite.net
- (default-46-102-197-194.interdsl.co.uk. [46.102.197.194])
- by smtp.gmail.com with ESMTPSA id
- ov19-20020a170906fc1300b009a193a5acffsm12307018ejb.121.2023.10.13.06.19.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 06:19:13 -0700 (PDT)
+ id b3d4328a-69cc-11ee-98d4-6d05b1d4d9a1;
+ Fri, 13 Oct 2023 15:30:40 +0200 (CEST)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2c5071165d5so9373701fa.0
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Oct 2023 06:30:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,117 +42,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1b046e92-69cb-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: b3d4328a-69cc-11ee-98d4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1697203154; x=1697807954; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I+DuKjX5C9PwQVcUxHpVUuL1o002ypO3N0jFU9aQ36Y=;
-        b=QLGfuoB+PDjw0M+CJo2VCLDNy6DeONIAsxdqoyxfuIr9KWegwGtmzDxkQiaSfbdTWP
-         TGyMnOLcWcUjeRXPYuBKNNcI9Yst78/vcdgEO2YYYhbb9npEGkxy6oKqs6mc8bN7TP9R
-         /pKEn/r9c4nlgoNuqaYPrF3mly8qG/vu8l2ss=
+        d=cloud.com; s=cloud; t=1697203840; x=1697808640; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JzSat+oeKuBgLVqZInaoLkxyZPP8RM1UbxTnmNQOsbU=;
+        b=XtdmzWGjgg/zCw0BbUthiQMvwhfHmbdt1rs5YOETmtFmEIZgYvjaBy2IeloBLj4nK+
+         Ue0+68Bs6JsvbQFgsrpVyJHCAyLyoBctcwn9bJRRc5pl8K19rJVZyUlRJ2XX28HPP/I7
+         7vDnvp6Qp6Kn5tl2XSwTZTmVeH3euVzdHNJVY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697203154; x=1697807954;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=I+DuKjX5C9PwQVcUxHpVUuL1o002ypO3N0jFU9aQ36Y=;
-        b=w5CVqE3nPu91oQ/ZOFfuP0Ne1DWwiG5QAm9uevUuizv4zXyvuRZSlrC9UjKGcjqFHh
-         W592ZoJQ/DMbsqJZLwx+y5nmbDIwT4wNUvMVC9nZRd9xqUVvaV4om/djpkRfTZ7CdL5a
-         zoHOXuhFjiRNWPEys/hnUDfAWBzAUJj4yll2eFUg+djgMhf96LEmHEiiH1+5zUADoU0A
-         On8Zghk1IHRP2o5sl4nIeQvUhS42PsYmSirCSEZACL0yeW+FNzG2u4TpdxEXOTWXKnEB
-         BM3i0eg6fBEz0kj/lbB24aTLc45JAvMlGOHC7I347An92xqSyw2wy8PEAOk1k8QEi05u
-         FHfw==
-X-Gm-Message-State: AOJu0YyuOZYVHeC9OaH9OYPk8sS2KpAwXHqAjjtNt2RizWsNdcdGUoIR
-	JC5VqJL+PZNF7NzroKgkwuM68mKUpnYy6eJwZCI=
-X-Google-Smtp-Source: AGHT+IFUyKugnft07NlB3AEM8nPwOjonrh/9cbNG1uNsbKxZIdNvSRf7UCOFg3djSafUsndiObVoWw==
-X-Received: by 2002:a17:906:8e:b0:9a9:d5f4:1a0d with SMTP id 14-20020a170906008e00b009a9d5f41a0dmr20331729ejc.45.1697203154163;
-        Fri, 13 Oct 2023 06:19:14 -0700 (PDT)
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Henry Wang <Henry.Wang@arm.com>
-Subject: [for-4.18][PATCH v2] x86/amd: Address AMD erratum #1485
-Date: Fri, 13 Oct 2023 14:18:46 +0100
-Message-Id: <20231013131846.175702-1-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1697203840; x=1697808640;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JzSat+oeKuBgLVqZInaoLkxyZPP8RM1UbxTnmNQOsbU=;
+        b=I6MOHerH9WiU5irMIHcpUxwxUKwgJ5Rd8w1i2y8vF8OZ+c8lGhsSYefJRGWW97NoKZ
+         sVlDBOp4k+M/EbqZ1kCvak2BpiQUsyuQ9QWbZxec9Oqoh2SOciJa2pb5n6sntgWT+KqQ
+         XVV2elIoLt/BEc7w85pU89u5EP1foyiYtxY29IMRm+LrmQ25dmC34yNNA2PpIfxvZP6e
+         7TZhmlkl44W9MxRofLW1wzVETSZMMzPo211RngQ6D8JUzaPyBJUslsuX1/Q/LISzMfOW
+         zGnbfdbQJ271pfJ9WvDUBydYpLeMWXmK+tQisxZK1KPAEFfy8GtbIlCeEE/+UiIWVy6G
+         yz2Q==
+X-Gm-Message-State: AOJu0YyciLrA4lmsUIIlLHSPS4/t99WFQf9CrteL3hY/BlyZu781/kF7
+	DmOs7Fwm5npgXmSi/w939k1w2vC7tKfPVx/PqqIZhQ==
+X-Google-Smtp-Source: AGHT+IHf3UB/XnGTtJbyXHkP+f2JXkNQJjAPMb9/21ggwVn1tSeK0Eem4YB33Hb+8UExPnFgtfkI58qTrFjpnqvI6tE=
+X-Received: by 2002:a2e:bc21:0:b0:2c5:38d:f80b with SMTP id
+ b33-20020a2ebc21000000b002c5038df80bmr2993721ljf.6.1697203840182; Fri, 13 Oct
+ 2023 06:30:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <AS8PR08MB7991D1099E32CC9F03B0E0F692FCA@AS8PR08MB7991.eurprd08.prod.outlook.com>
+ <alpine.DEB.2.22.394.2309271603590.1403502@ubuntu-linux-20-04-desktop>
+ <a31ce6cb-6234-5e7f-5cd4-ed190f029811@citrix.com> <alpine.DEB.2.22.394.2309271658500.1403502@ubuntu-linux-20-04-desktop>
+ <CA+zSX=ZbeUFrfAUJShooJFJ+d89f4xdXfJJ9HoJKRh4UStkTFQ@mail.gmail.com>
+ <alpine.DEB.2.22.394.2310121535580.3431292@ubuntu-linux-20-04-desktop>
+ <CA+zSX=Y5dMVFM6dVNgBRHxKc0C1e5WGgweQ0FaXXCfAFGH1aPA@mail.gmail.com>
+ <a93839b8-932a-4634-9549-081df950afb2@xen.org> <CA+zSX=a972GC=_FKK2eGkArPb6RszCHDN0+6JKFJiMjoMpAySQ@mail.gmail.com>
+ <f973db5f-da72-4aa2-a35e-1e6652b181bf@xen.org>
+In-Reply-To: <f973db5f-da72-4aa2-a35e-1e6652b181bf@xen.org>
+From: George Dunlap <george.dunlap@cloud.com>
+Date: Fri, 13 Oct 2023 14:30:28 +0100
+Message-ID: <CA+zSX=bpq6sJmP7TzC+3vgTJyZcCdZc5M-BGEaOkkXt7BoQZJg@mail.gmail.com>
+Subject: Re: Xen 4.18 release: Reminder about code freeze
+To: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Henry Wang <Henry.Wang@arm.com>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Bertrand Marquis <Bertrand.Marquis@arm.com>, Jan Beulich <jbeulich@suse.com>, 
+	"jgross@suse.com" <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Anthony PERARD <anthony.perard@citrix.com>, 
+	"community.manager@xenproject.org" <community.manager@xenproject.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Fix adapted off Linux's mailing list:
-  https://lore.kernel.org/lkml/D99589F4-BC5D-430B-87B2-72C20370CF57@exactcode.com/T/#u
+On Fri, Oct 13, 2023 at 2:00=E2=80=AFPM Julien Grall <julien@xen.org> wrote=
+:
+> >>> If the problem is the delay between the xenevtchn_notify() in
+> >>> introduce_domain() and the domain_conn_reset() afterwards in
+> >>> do_domain(), would it make sense instead to move the notification int=
+o
+> >>> do_introduce(), after the domain_conn_reset()?  It is, after all, in
+> >>> response to XS_INTRODUCE that we want to send the notification, not i=
+n
+> >>> dom0_init() or read_state_connection() (which seems to be more about
+> >>> restoring a domain).
+> >>
+> >> I understand that the event channel notification was specifically adde=
+d
+> >> for dom0less. But I don't see why we don't want to send it to dom0 as =
+well.
+> >>
+> >> Technically, dom0 has exactly the same problem as dom0less domains it
+> >> boots before Xenstored is running and therefore it may need to know wh=
+en
+> >> it is ready to receive commands.
+> >
+> > It seemed to work fine before 2022, when the notification was
+> > introduced.
+>
+> Indeed. But my point is that in theory the behavior between dom0 and
+> dom0less domain should not be different. With your proposal we would
+> continue to diverge with seems rather strange.
+>
+> Do you at least agree that on the paper, Xenstored should notify it is
+> ready to accept commands the same way for every domain?
 
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Release-acked-by: Henry Wang <Henry.Wang@arm.com>
----
-v2:
-  * Removed v1/patch1, as it proved to be contentious
-    * Also changed is_zen[34]_uarch() into a heuristic check only
-  * Streamlined comments and commit message
+I don't know enough about the start-of-day to know why dom0 did fine
+without a notification for nearly 20 years, but dom0less domUs don't.
+To answer your question I'd need the documentation that Andrew wants;
+or at least the answers to the two questions which you deferred to
+Juergen.  I assume that dom0 doesn't really need it, because it did
+fine without it; I assume that dom0less domUs do really need it,
+because otherwise people wouldn't have spent the effort to introduce
+it.
 
----
- xen/arch/x86/cpu/amd.c               | 8 ++++++++
- xen/arch/x86/include/asm/amd.h       | 5 +++++
- xen/arch/x86/include/asm/msr-index.h | 1 +
- 3 files changed, 14 insertions(+)
+> > Personally I'd just take the patch as I wrote it, restoring dom0's
+> > pre-2022 behavior (after review and testing of course); but if you
+> > wanted to test & resubmit with a similar notification inside
+> > dom0_init(), I wouldn't object to it.
+>
+> Just to clarify, you suggest the revert because you are concerned that
+> it could break dom0. Is that correct?
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 4f27187f92..085c4772d7 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -1167,6 +1167,14 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
- 	if (c->x86 == 0x10)
- 		__clear_bit(X86_FEATURE_MONITOR, c->x86_capability);
- 
-+	/* Fix for AMD erratum #1485 */
-+	if (!cpu_has_hypervisor && c->x86 == 0x19 && is_zen4_uarch()) {
-+		rdmsrl(MSR_AMD64_BP_CFG, value);
-+		#define ZEN4_BP_CFG_SHARED_BTB_FIX (1ull << 5)
-+		wrmsrl(MSR_AMD64_BP_CFG,
-+		       value | ZEN4_BP_CFG_SHARED_BTB_FIX);
-+	}
-+
- 	if (!cpu_has_amd_erratum(c, AMD_ERRATUM_121))
- 		opt_allow_unsafe = 1;
- 	else if (opt_allow_unsafe < 0)
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index d862cb7972..0700827561 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -145,11 +145,16 @@
-  * Hygon (Fam18h) but without simple model number rules.  Instead, use STIBP
-  * as a heuristic that distinguishes the two.
-  *
-+ * For Zen3 and Zen4 (Fam19h) the heuristic is the presence of AutoIBRS, as
-+ * it's Zen4-specific.
-+ *
-  * The caller is required to perform the appropriate vendor/family checks
-  * first.
-  */
- #define is_zen1_uarch() (!boot_cpu_has(X86_FEATURE_AMD_STIBP))
- #define is_zen2_uarch()   boot_cpu_has(X86_FEATURE_AMD_STIBP)
-+#define is_zen3_uarch() (!boot_cpu_has(X86_FEATURE_AUTO_IBRS))
-+#define is_zen4_uarch()   boot_cpu_has(X86_FEATURE_AUTO_IBRS)
- 
- struct cpuinfo_x86;
- int cpu_has_amd_erratum(const struct cpuinfo_x86 *, int, ...);
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 11ffed543a..7b3490bfb1 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -403,6 +403,7 @@
- #define MSR_AMD64_DE_CFG		0xc0011029
- #define AMD64_DE_CFG_LFENCE_SERIALISE	(_AC(1, ULL) << 1)
- #define MSR_AMD64_EX_CFG		0xc001102c
-+#define MSR_AMD64_BP_CFG		0xc001102e
- #define MSR_AMD64_DE_CFG2		0xc00110e3
- 
- #define MSR_AMD64_DR0_ADDRESS_MASK	0xc0011027
--- 
-2.34.1
+I'm not sure why you're calling it a revert.  The initial patch that
+introduced it didn't mention wanting to include dom0 specifically; on
+the contrary it said:
 
+"The extra notification is harmless for domains that don't require it."
+
+My reasons for leaving dom0 notification out of my patch were:
+
+1. It's awkward to keep the dom0 notification without doing a lot of
+refactoring (which should be avoided at this point in the release) or
+making things kind of ugly and difficult to maintain (lots of specific
+if statements)
+
+2. Since dom0 did fine for 20 years without it, it seemed that it
+wasn't necessary
+
+3. Since nobody seems to actually know what's going on, there's a
+chance it's actually harmful (although that chance is relatively
+small, given the amount of time the extra notification has been in the
+tree).
+
+> > Naturally it would be ideal if we could avoid the code duplication;
+> > but that's not possible without a lot more refactoring, which I don't
+> > think we should be doing at this stage in the release.
+>
+> You can by moving the code just at the end of introduce_domain().
+
+At the end of introduce_domain(), your if statement would have to look
+like this:
+
+if (!restore) {
+   if (!is_master_domain)
+    domain_conn_reset():
+  interface->connection =3D XENSTORE_CONNECTED;
+  xenevtchn_notify(...);
+}
+
+This is all not terribly maintainable; you're hoisting the
+domain_conn_reset() thing into a shared codepath, where the other two
+callers don't need it, just to avoid potentially duplicating two
+probably unnecessary lines in dom0_init().  Given the kinds of bugs
+that have already arisen because of putting things into this
+multiplexed function (the current one we're trying to fix, as well as
+49dd52fb131), I'd prefer to keep things simple.
+
+I wouldn't nack such a patch.  But I would have a harder time arguing
+in favor of such a patch, than a patch like the one I've written
+(perhaps with a duplicated notification in dom0_init() if you really
+think it's necessary).
+
+ -George
 
