@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F069CDB47E
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 09:30:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616344.958272 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5EC2CDB483
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 09:42:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616351.958292 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrEV2-0006Ao-UF; Fri, 13 Oct 2023 09:30:28 +0000
+	id 1qrEgn-0000tJ-A1; Fri, 13 Oct 2023 09:42:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616344.958272; Fri, 13 Oct 2023 09:30:28 +0000
+Received: by outflank-mailman (output) from mailman id 616351.958292; Fri, 13 Oct 2023 09:42:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrEV2-0006Ah-Rh; Fri, 13 Oct 2023 09:30:28 +0000
-Received: by outflank-mailman (input) for mailman id 616344;
- Fri, 13 Oct 2023 09:30:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9owW=F3=kernel.org=patchwork-bot+netdevbpf@srs-se1.protection.inumbo.net>)
- id 1qrEV2-0006Ab-0a
- for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 09:30:28 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2350b3d6-69ab-11ee-9b0e-b553b5be7939;
- Fri, 13 Oct 2023 11:30:25 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 546F76203B;
- Fri, 13 Oct 2023 09:30:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id EADFAC433C7;
- Fri, 13 Oct 2023 09:30:23 +0000 (UTC)
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- C7684C73FEA; Fri, 13 Oct 2023 09:30:23 +0000 (UTC)
+	id 1qrEgn-0000tC-7D; Fri, 13 Oct 2023 09:42:37 +0000
+Received: by outflank-mailman (input) for mailman id 616351;
+ Fri, 13 Oct 2023 09:42:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=U36v=F3=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qrEgm-0000sq-79
+ for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 09:42:36 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d694204a-69ac-11ee-98d4-6d05b1d4d9a1;
+ Fri, 13 Oct 2023 11:42:35 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id C43C91FD8B;
+ Fri, 13 Oct 2023 09:42:34 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3DA3B1358F;
+ Fri, 13 Oct 2023 09:42:34 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id lPKpDQoRKWUTGwAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 13 Oct 2023 09:42:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +53,218 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2350b3d6-69ab-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1697189424;
-	bh=zfKLiUU/AufCJHwWSWrzPG7oidZX9KQ3FzwTiUS/QeQ=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=ESFd132eq0rgvM1vQqVC1SPnM6aEpKXWoBHDvCGj/tSGkIeohsRVbh4OVBmgNR0oo
-	 dJiYncP0ndiyM9JTsWjfYQ+gu2jDMtWbMgu3MDoABkfdiJg6tW7EoVaSXZNKNpo5Xg
-	 UvdCRRJNGaS8Xc7SfO+Nr9SskHnNyYkHYcP1J96lpLpfPpz6WjV1HOE+ksvDTNIzph
-	 G+rd66Xbx93ggz3oY0oIhxJpMukDIu5qclR8+NARJFmjqaRC90CnlBBmyddzbNSz5r
-	 UxhKR08dNbmm9wAtIDN/v0QThdqI71d12lcHIvL24RmnDXHL1nYhI99RQSWsZXSsYo
-	 snarzUSSufkdA==
-Content-Type: text/plain; charset="utf-8"
+X-Inumbo-ID: d694204a-69ac-11ee-98d4-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1697190154; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=/gZ6bKELR+LuVa6bHV+UgFATKWCcd1ls6viJ4JvpsO0=;
+	b=vWDKM77cJf9LX1PCuBmjkJXoJgSS1RVql0Gn4Dc+70qvx39sFn+0ldTxMNwK5Zp5ODBJOF
+	AZMVHFuavdKCfFCWtLezkocKX2YefGk8mQGSFReAWwknjXt8f4f1jTy0x1hjTkxus0w6K3
+	BOS5vyPjx4ytGyrbgC9RKSD9O5abH3w=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: javi.merino@cloud.com,
+	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 01/13] xen/spinlock: fix coding style issues
+Date: Fri, 13 Oct 2023 11:42:12 +0200
+Message-Id: <20231013094224.7060-2-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231013094224.7060-1-jgross@suse.com>
+References: <20231013094224.7060-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH 0/1] Add software timestamp capabilities to xen-netback device
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <169718942381.12102.14938354463321505614.git-patchwork-notify@kernel.org>
-Date: Fri, 13 Oct 2023 09:30:23 +0000
-References: <20231010142630.984585-1-luca.fancellu@arm.com>
-In-Reply-To: <20231010142630.984585-1-luca.fancellu@arm.com>
-To: Luca Fancellu <luca.fancellu@arm.com>
-Cc: linux-kernel@vger.kernel.org, wei.liu@kernel.org, paul@xen.org,
- xen-devel@lists.xenproject.org, netdev@vger.kernel.org, rahul.singh@arm.com
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [-6.10 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 REPLY(-4.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 NEURAL_HAM_LONG(-3.00)[-1.000];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-1.00)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[9];
+	 MID_CONTAINS_FROM(1.00)[];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_COUNT_TWO(0.00)[2];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-3.00)[99.99%]
 
-Hello:
+Fix some coding style issues in spinlock coding:
 
-This patch was applied to netdev/net-next.git (main)
-by David S. Miller <davem@davemloft.net>:
+- Instead of u64 etc. use the preferred uint64_t etc. types
+- Remove some trailing spaces
+- Add missing spaces in "if" statements
+- Add some missing blank lines
 
-On Tue, 10 Oct 2023 15:26:29 +0100 you wrote:
-> Hi all,
-> 
-> during some experiment using PTP (ptp4l) between a Dom0 domain and a DomU guest,
-> I noticed that the virtual interface brought up by the toolstack was not able
-> to be used as ptp4l interface on the Dom0 side, a brief investigation on the
-> drivers revealed that the backend driver doesn't have the SW timestamp
-> capabilities, so in order to provide them, I'm sending this patch.
-> 
-> [...]
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch
+---
+ xen/common/spinlock.c      | 20 +++++++++++---------
+ xen/include/xen/spinlock.h | 16 ++++++++--------
+ 2 files changed, 19 insertions(+), 17 deletions(-)
 
-Here is the summary with links:
-  - [1/1] xen-netback: add software timestamp capabilities
-    https://git.kernel.org/netdev/net-next/c/0b38d2ec2282
-
-You are awesome, thank you!
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index 7f453234a9..202c707540 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -100,7 +100,7 @@ void check_lock(union lock_debug *debug, bool try)
+      * every lock must be consistently observed else we can deadlock in
+      * IRQ-context rendezvous functions (a rendezvous which gets every CPU
+      * into IRQ context before any CPU is released from the rendezvous).
+-     * 
++     *
+      * If we can mix IRQ-disabled and IRQ-enabled callers, the following can
+      * happen:
+      *  * Lock is held by CPU A, with IRQs enabled
+@@ -108,7 +108,7 @@ void check_lock(union lock_debug *debug, bool try)
+      *  * Rendezvous starts -- CPU A takes interrupt and enters rendezbous spin
+      *  * DEADLOCK -- CPU B will never enter rendezvous, CPU A will never exit
+      *                the rendezvous, and will hence never release the lock.
+-     * 
++     *
+      * To guard against this subtle bug we latch the IRQ safety of every
+      * spinlock in the system, on first use.
+      *
+@@ -151,12 +151,12 @@ static void check_barrier(union lock_debug *debug)
+ 
+     /*
+      * For a barrier, we have a relaxed IRQ-safety-consistency check.
+-     * 
++     *
+      * It is always safe to spin at the barrier with IRQs enabled -- that does
+      * not prevent us from entering an IRQ-context rendezvous, and nor are
+      * we preventing anyone else from doing so (since we do not actually
+      * acquire the lock during a barrier operation).
+-     * 
++     *
+      * However, if we spin on an IRQ-unsafe lock with IRQs disabled then that
+      * is clearly wrong, for the same reason outlined in check_lock() above.
+      */
+@@ -262,7 +262,7 @@ void spin_debug_disable(void)
+ #ifdef CONFIG_DEBUG_LOCK_PROFILE
+ 
+ #define LOCK_PROFILE_REL                                                     \
+-    if (lock->profile)                                                       \
++    if ( lock->profile )                                                     \
+     {                                                                        \
+         lock->profile->time_hold += NOW() - lock->profile->time_locked;      \
+         lock->profile->lock_cnt++;                                           \
+@@ -270,10 +270,10 @@ void spin_debug_disable(void)
+ #define LOCK_PROFILE_VAR    s_time_t block = 0
+ #define LOCK_PROFILE_BLOCK  block = block ? : NOW();
+ #define LOCK_PROFILE_GOT                                                     \
+-    if (lock->profile)                                                       \
++    if ( lock->profile )                                                     \
+     {                                                                        \
+         lock->profile->time_locked = NOW();                                  \
+-        if (block)                                                           \
++        if ( block )                                                         \
+         {                                                                    \
+             lock->profile->time_block += lock->profile->time_locked - block; \
+             lock->profile->block_cnt++;                                      \
+@@ -298,7 +298,7 @@ static always_inline spinlock_tickets_t observe_lock(spinlock_tickets_t *t)
+     return v;
+ }
+ 
+-static always_inline u16 observe_head(spinlock_tickets_t *t)
++static always_inline uint16_t observe_head(spinlock_tickets_t *t)
+ {
+     smp_rmb();
+     return read_atomic(&t->head);
+@@ -412,7 +412,7 @@ int _spin_trylock(spinlock_t *lock)
+      */
+     got_lock(&lock->debug);
+ #ifdef CONFIG_DEBUG_LOCK_PROFILE
+-    if (lock->profile)
++    if ( lock->profile )
+         lock->profile->time_locked = NOW();
+ #endif
+     return 1;
+@@ -616,6 +616,7 @@ int spinlock_profile_control(struct xen_sysctl_lockprof_op *pc)
+     case XEN_SYSCTL_LOCKPROF_reset:
+         spinlock_profile_reset('\0');
+         break;
++
+     case XEN_SYSCTL_LOCKPROF_query:
+         pc->nr_elem = 0;
+         par.rc = 0;
+@@ -624,6 +625,7 @@ int spinlock_profile_control(struct xen_sysctl_lockprof_op *pc)
+         pc->time = NOW() - lock_profile_start;
+         rc = par.rc;
+         break;
++
+     default:
+         rc = -EINVAL;
+         break;
+diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
+index e7a1c1aa89..4b82739083 100644
+--- a/xen/include/xen/spinlock.h
++++ b/xen/include/xen/spinlock.h
+@@ -81,8 +81,8 @@ struct lock_profile {
+     struct lock_profile *next;       /* forward link */
+     const char          *name;       /* lock name */
+     struct spinlock     *lock;       /* the lock itself */
+-    u64                 lock_cnt;    /* # of complete locking ops */
+-    u64                 block_cnt;   /* # of complete wait for lock */
++    uint64_t            lock_cnt;    /* # of complete locking ops */
++    uint64_t            block_cnt;   /* # of complete wait for lock */
+     s_time_t            time_hold;   /* cumulated lock time */
+     s_time_t            time_block;  /* cumulated wait time */
+     s_time_t            time_locked; /* system time of last locking */
+@@ -122,7 +122,7 @@ struct lock_profile_qhead {
+         prof->lock = &(s)->l;                                                 \
+         prof->next = (s)->profile_head.elem_q;                                \
+         (s)->profile_head.elem_q = prof;                                      \
+-    } while(0)
++    } while( 0 )
+ 
+ void _lock_profile_register_struct(
+     int32_t type, struct lock_profile_qhead *qhead, int32_t idx);
+@@ -153,10 +153,10 @@ struct lock_profile_qhead { };
+ #endif
+ 
+ typedef union {
+-    u32 head_tail;
++    uint32_t head_tail;
+     struct {
+-        u16 head;
+-        u16 tail;
++        uint16_t head;
++        uint16_t tail;
+     };
+ } spinlock_tickets_t;
+ 
+@@ -164,10 +164,10 @@ typedef union {
+ 
+ typedef struct spinlock {
+     spinlock_tickets_t tickets;
+-    u16 recurse_cpu:SPINLOCK_CPU_BITS;
++    uint16_t recurse_cpu:SPINLOCK_CPU_BITS;
+ #define SPINLOCK_NO_CPU        ((1u << SPINLOCK_CPU_BITS) - 1)
+ #define SPINLOCK_RECURSE_BITS  (16 - SPINLOCK_CPU_BITS)
+-    u16 recurse_cnt:SPINLOCK_RECURSE_BITS;
++    uint16_t recurse_cnt:SPINLOCK_RECURSE_BITS;
+ #define SPINLOCK_MAX_RECURSE   ((1u << SPINLOCK_RECURSE_BITS) - 1)
+     union lock_debug debug;
+ #ifdef CONFIG_DEBUG_LOCK_PROFILE
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+2.35.3
 
 
