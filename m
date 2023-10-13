@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 556C8CDB482
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 15:25:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616666.958867 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 788A9CDB47E
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 15:25:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616668.958891 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrK28-0003vP-9l; Fri, 13 Oct 2023 15:25:00 +0000
+	id 1qrK2C-0004ja-RV; Fri, 13 Oct 2023 15:25:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616666.958867; Fri, 13 Oct 2023 15:25:00 +0000
+Received: by outflank-mailman (output) from mailman id 616668.958891; Fri, 13 Oct 2023 15:25:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrK28-0003uS-2u; Fri, 13 Oct 2023 15:25:00 +0000
-Received: by outflank-mailman (input) for mailman id 616666;
- Fri, 13 Oct 2023 15:24:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qrK2C-0004jA-NS; Fri, 13 Oct 2023 15:25:04 +0000
+Received: by outflank-mailman (input) for mailman id 616668;
+ Fri, 13 Oct 2023 15:25:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1cw9=F3=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qrK27-0002kj-Iq
- for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 15:24:59 +0000
+ id 1qrK2A-0002kz-SM
+ for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 15:25:02 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ab17a39d-69dc-11ee-9b0e-b553b5be7939;
- Fri, 13 Oct 2023 17:24:58 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ad7bdd30-69dc-11ee-98d4-6d05b1d4d9a1;
+ Fri, 13 Oct 2023 17:25:02 +0200 (CEST)
 Received: from Dell.bugseng.com (unknown [37.161.222.93])
- by support.bugseng.com (Postfix) with ESMTPSA id DB3C94EE073C;
- Fri, 13 Oct 2023 17:24:56 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 7F18C4EE0744;
+ Fri, 13 Oct 2023 17:25:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab17a39d-69dc-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: ad7bdd30-69dc-11ee-98d4-6d05b1d4d9a1
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -51,9 +51,9 @@ Cc: consulting@bugseng.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Henry Wang <henry.wang@arm.com>
-Subject: [XEN PATCH 05/10] arm/p2m: address a violation of MISRA C:2012 Rule 8.2
-Date: Fri, 13 Oct 2023 17:24:35 +0200
-Message-Id: <b8dcbbbe9e6546f03ecc6e6a0c617cf98da9786a.1697207038.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 07/10] arm/traps: address a violation of MISRA C:2012 Rule 8.2
+Date: Fri, 13 Oct 2023 17:24:37 +0200
+Message-Id: <dbc0e965cd9f93848d27e7ebf0ffcfca05499d58.1697207038.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1697207038.git.federico.serafini@bugseng.com>
 References: <cover.1697207038.git.federico.serafini@bugseng.com>
@@ -64,22 +64,22 @@ Add missing parameter name, no functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/arch/arm/include/asm/p2m.h | 2 +-
+ xen/arch/arm/traps.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
-index 940495d42b..9ad312bfb5 100644
---- a/xen/arch/arm/include/asm/p2m.h
-+++ b/xen/arch/arm/include/asm/p2m.h
-@@ -21,7 +21,7 @@ extern unsigned int p2m_root_level;
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index ce89f16404..5aa14d4707 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -1236,7 +1236,7 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
  
- struct domain;
+     if ( id == BUGFRAME_run_fn )
+     {
+-        void (*fn)(const struct cpu_user_regs *) = (void *)regs->BUG_FN_REG;
++        void (*fn)(const struct cpu_user_regs *regs) = (void *)regs->BUG_FN_REG;
  
--extern void memory_type_changed(struct domain *);
-+extern void memory_type_changed(struct domain *d);
- 
- /* Per-p2m-table state */
- struct p2m_domain {
+         fn(regs);
+         return 0;
 -- 
 2.34.1
 
