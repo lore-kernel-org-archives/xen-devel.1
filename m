@@ -4,44 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3805CDB47E
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 09:43:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616355.958323 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04420CDB483
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 10:15:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616380.958348 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrEh4-0001pI-62; Fri, 13 Oct 2023 09:42:54 +0000
+	id 1qrFCD-0004Nv-Vd; Fri, 13 Oct 2023 10:15:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616355.958323; Fri, 13 Oct 2023 09:42:54 +0000
+Received: by outflank-mailman (output) from mailman id 616380.958348; Fri, 13 Oct 2023 10:15:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrEh4-0001p9-2n; Fri, 13 Oct 2023 09:42:54 +0000
-Received: by outflank-mailman (input) for mailman id 616355;
- Fri, 13 Oct 2023 09:42:53 +0000
+	id 1qrFCD-0004NJ-Rl; Fri, 13 Oct 2023 10:15:05 +0000
+Received: by outflank-mailman (input) for mailman id 616380;
+ Fri, 13 Oct 2023 10:15:04 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=U36v=F3=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qrEh3-0000sq-8z
- for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 09:42:53 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=RqNf=F3=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qrFCC-00045Y-1v
+ for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 10:15:04 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e0fe7fce-69ac-11ee-98d4-6d05b1d4d9a1;
- Fri, 13 Oct 2023 11:42:52 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4DFAF1F37E;
- Fri, 13 Oct 2023 09:42:52 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E7F4F1358F;
- Fri, 13 Oct 2023 09:42:51 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id xOoyNxsRKWUwGwAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 13 Oct 2023 09:42:51 +0000
+ id 5f451c43-69b1-11ee-98d4-6d05b1d4d9a1;
+ Fri, 13 Oct 2023 12:15:02 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id B4B944EE0744;
+ Fri, 13 Oct 2023 12:15:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,271 +41,314 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0fe7fce-69ac-11ee-98d4-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1697190172; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=LHF1xuiYotPfjKN7P4bpn8D81ViTE3mKclEf20GtXRI=;
-	b=S3wV6FNS9VWP3C1AjphPDYbRHt1TMXDgWd1ixF3dL/J718Tfv8+RxikY+QwYpfMGTHl5Fv
-	giyFz3ly+CIsyhwpBisz38vpH9CHLgeSqYxFyyY5uheHD+7tkLcsi+5ljCKjXA8XL7WRW6
-	qN/EUhNGNz/pUIvppuD5DNRTfkTJ0xY=
-From: Juergen Gross <jgross@suse.com>
+X-Inumbo-ID: 5f451c43-69b1-11ee-98d4-6d05b1d4d9a1
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
-Cc: javi.merino@cloud.com,
-	Juergen Gross <jgross@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger.pau@citrix.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v2 04/13] xen/spinlock: introduce new type for recursive spinlocks
-Date: Fri, 13 Oct 2023 11:42:15 +0200
-Message-Id: <20231013094224.7060-5-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231013094224.7060-1-jgross@suse.com>
-References: <20231013094224.7060-1-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	Henry Wang <Henry.Wang@arm.com>
+Subject: [XEN PATCH v3 2/2] docs/misra: add deviations.rst to document additional deviations.
+Date: Fri, 13 Oct 2023 12:14:53 +0200
+Message-Id: <36464fe1db154454548d19bf437a7838e519512a.1697191850.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1697191850.git.nicola.vetrini@bugseng.com>
+References: <cover.1697191850.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out2.suse.de;
-	none
-X-Spamd-Result: default: False [-6.10 / 50.00];
-	 ARC_NA(0.00)[];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 FROM_HAS_DN(0.00)[];
-	 TO_DN_SOME(0.00)[];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 R_MISSING_CHARSET(2.50)[];
-	 MIME_GOOD(-0.10)[text/plain];
-	 REPLY(-4.00)[];
-	 BROKEN_CONTENT_TYPE(1.50)[];
-	 NEURAL_HAM_LONG(-3.00)[-1.000];
-	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 NEURAL_HAM_SHORT(-1.00)[-1.000];
-	 RCPT_COUNT_SEVEN(0.00)[11];
-	 MID_CONTAINS_FROM(1.00)[];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 RCVD_COUNT_TWO(0.00)[2];
-	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
 
-Introduce a new type "rspinlock_t" to be used for recursive spinlocks.
+This file contains the deviation that are not marked by
+a deviation comment, as specified in
+docs/misra/documenting-violations.rst.
 
-For now it is only an alias of spinlock_t, so both types can still be
-used for recursive spinlocks. This will be changed later, though.
-
-Switch all recursive spinlocks to the new type.
-
-Define the initializer helpers and use them where appropriate.
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Release-acked-by: Henry Wang <Henry.Wang@arm.com>
 ---
-V2:
-- carved out from V1 patch
+Changes in v3:
+- clarified an entry
 ---
- xen/arch/x86/include/asm/mm.h |  2 +-
- xen/arch/x86/mm/mm-locks.h    |  2 +-
- xen/common/domain.c           |  4 ++--
- xen/common/ioreq.c            |  2 +-
- xen/drivers/char/console.c    |  4 ++--
- xen/drivers/passthrough/pci.c |  2 +-
- xen/include/xen/sched.h       |  6 +++---
- xen/include/xen/spinlock.h    | 19 +++++++++++++++----
- 8 files changed, 26 insertions(+), 15 deletions(-)
+ docs/index.rst            |   1 +
+ docs/misra/deviations.rst | 236 ++++++++++++++++++++++++++++++++++++++
+ docs/misra/rules.rst      |   2 +-
+ 3 files changed, 238 insertions(+), 1 deletion(-)
+ create mode 100644 docs/misra/deviations.rst
 
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 05dfe35502..8a6e0c283f 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -596,7 +596,7 @@ unsigned long domain_get_maximum_gpfn(struct domain *d);
- 
- /* Definition of an mm lock: spinlock with extra fields for debugging */
- typedef struct mm_lock {
--    spinlock_t         lock;
-+    rspinlock_t        lock;
-     int                unlock_level;
-     int                locker;          /* processor which holds the lock */
-     const char        *locker_function; /* func that took it */
-diff --git a/xen/arch/x86/mm/mm-locks.h b/xen/arch/x86/mm/mm-locks.h
-index 5a3f96fbaa..b2c0467024 100644
---- a/xen/arch/x86/mm/mm-locks.h
-+++ b/xen/arch/x86/mm/mm-locks.h
-@@ -20,7 +20,7 @@ DECLARE_PERCPU_RWLOCK_GLOBAL(p2m_percpu_rwlock);
- 
- static inline void mm_lock_init(mm_lock_t *l)
- {
--    spin_lock_init(&l->lock);
-+    rspin_lock_init(&l->lock);
-     l->locker = -1;
-     l->locker_function = "nobody";
-     l->unlock_level = 0;
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 8f9ab01c0c..604f70ff5a 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -627,8 +627,8 @@ struct domain *domain_create(domid_t domid,
- 
-     atomic_set(&d->refcnt, 1);
-     RCU_READ_LOCK_INIT(&d->rcu_lock);
--    spin_lock_init_prof(d, domain_lock);
--    spin_lock_init_prof(d, page_alloc_lock);
-+    rspin_lock_init_prof(d, domain_lock);
-+    rspin_lock_init_prof(d, page_alloc_lock);
-     spin_lock_init(&d->hypercall_deadlock_mutex);
-     INIT_PAGE_LIST_HEAD(&d->page_list);
-     INIT_PAGE_LIST_HEAD(&d->extra_page_list);
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index 62b907f4c4..652c18a9b5 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -1331,7 +1331,7 @@ unsigned int ioreq_broadcast(ioreq_t *p, bool buffered)
- 
- void ioreq_domain_init(struct domain *d)
- {
--    spin_lock_init(&d->ioreq_server.lock);
-+    rspin_lock_init(&d->ioreq_server.lock);
- 
-     arch_ioreq_domain_init(d);
- }
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index f81b8b6b47..826f45b922 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -120,7 +120,7 @@ static int __read_mostly sercon_handle = -1;
- int8_t __read_mostly opt_console_xen; /* console=xen */
- #endif
- 
--static DEFINE_SPINLOCK(console_lock);
-+static DEFINE_RSPINLOCK(console_lock);
- 
- /*
-  * To control the amount of printing, thresholds are added.
-@@ -1169,7 +1169,7 @@ void console_force_unlock(void)
- {
-     watchdog_disable();
-     spin_debug_disable();
--    spin_lock_init(&console_lock);
-+    rspin_lock_init(&console_lock);
-     serial_force_unlock(sercon_handle);
-     console_locks_busted = 1;
-     console_start_sync();
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 04d00c7c37..61be34e75f 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -50,7 +50,7 @@ struct pci_seg {
-     } bus2bridge[MAX_BUSES];
- };
- 
--static spinlock_t _pcidevs_lock = SPIN_LOCK_UNLOCKED;
-+static DEFINE_RSPINLOCK(_pcidevs_lock);
- 
- void pcidevs_lock(void)
- {
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 3609ef88c4..c6604aef78 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -376,9 +376,9 @@ struct domain
- 
-     rcu_read_lock_t  rcu_lock;
- 
--    spinlock_t       domain_lock;
-+    rspinlock_t      domain_lock;
- 
--    spinlock_t       page_alloc_lock; /* protects all the following fields  */
-+    rspinlock_t      page_alloc_lock; /* protects all the following fields  */
-     struct page_list_head page_list;  /* linked list */
-     struct page_list_head extra_page_list; /* linked list (size extra_pages) */
-     struct page_list_head xenpage_list; /* linked list (size xenheap_pages) */
-@@ -597,7 +597,7 @@ struct domain
- #ifdef CONFIG_IOREQ_SERVER
-     /* Lock protects all other values in the sub-struct */
-     struct {
--        spinlock_t              lock;
-+        rspinlock_t             lock;
-         struct ioreq_server     *server[MAX_NR_IOREQ_SERVERS];
-     } ioreq_server;
- #endif
-diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
-index bbe1472571..19561d5e61 100644
---- a/xen/include/xen/spinlock.h
-+++ b/xen/include/xen/spinlock.h
-@@ -45,7 +45,7 @@ union lock_debug { };
-     lock profiling on:
- 
-     Global locks which should be subject to profiling must be declared via
--    DEFINE_SPINLOCK.
-+    DEFINE_[R]SPINLOCK.
- 
-     For locks in structures further measures are necessary:
-     - the structure definition must include a profile_head with exactly this
-@@ -56,7 +56,7 @@ union lock_debug { };
-     - the single locks which are subject to profiling have to be initialized
-       via
- 
--      spin_lock_init_prof(ptr, lock);
-+      [r]spin_lock_init_prof(ptr, lock);
- 
-       with ptr being the main structure pointer and lock the spinlock field
- 
-@@ -109,12 +109,16 @@ struct lock_profile_qhead {
-     spinlock_t l = _SPIN_LOCK_UNLOCKED(NULL);                                 \
-     static struct lock_profile __lock_profile_data_##l = _LOCK_PROFILE(l);    \
-     _LOCK_PROFILE_PTR(l)
-+#define DEFINE_RSPINLOCK(l)                                                   \
-+    rspinlock_t l = _SPIN_LOCK_UNLOCKED(NULL);                                \
-+    static struct lock_profile __lock_profile_data_##l = _LOCK_PROFILE(l);    \
-+    _LOCK_PROFILE_PTR(l)
- 
--#define spin_lock_init_prof(s, l)                                             \
-+#define __spin_lock_init_prof(s, l, locktype)                                 \
-     do {                                                                      \
-         struct lock_profile *prof;                                            \
-         prof = xzalloc(struct lock_profile);                                  \
--        (s)->l = (spinlock_t)_SPIN_LOCK_UNLOCKED(prof);                       \
-+        (s)->l = (locktype)_SPIN_LOCK_UNLOCKED(prof);                         \
-         if ( !prof )                                                          \
-         {                                                                     \
-             printk(XENLOG_WARNING                                             \
-@@ -128,6 +132,9 @@ struct lock_profile_qhead {
-         (s)->profile_head.elem_q = prof;                                      \
-     } while( 0 )
- 
-+#define spin_lock_init_prof(s, l) __spin_lock_init_prof(s, l, spinlock_t)
-+#define rspin_lock_init_prof(s, l) __spin_lock_init_prof(s, l, rspinlock_t)
+diff --git a/docs/index.rst b/docs/index.rst
+index 2c47cfa999f2..f3f779f89ce5 100644
+--- a/docs/index.rst
++++ b/docs/index.rst
+@@ -63,6 +63,7 @@ Xen hypervisor code.
+    :maxdepth: 2
+
+    misra/rules
++   misra/deviations
+
+
+ Miscellanea
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+new file mode 100644
+index 000000000000..8511a189253b
+--- /dev/null
++++ b/docs/misra/deviations.rst
+@@ -0,0 +1,236 @@
++.. SPDX-License-Identifier: CC-BY-4.0
 +
- void _lock_profile_register_struct(
-     int32_t type, struct lock_profile_qhead *qhead, int32_t idx);
- void _lock_profile_deregister_struct(int32_t type,
-@@ -151,8 +158,10 @@ struct lock_profile_qhead { };
-     .debug =_LOCK_DEBUG,                                                      \
- }
- #define DEFINE_SPINLOCK(l) spinlock_t l = SPIN_LOCK_UNLOCKED
-+#define DEFINE_RSPINLOCK(l) rspinlock_t l = SPIN_LOCK_UNLOCKED
- 
- #define spin_lock_init_prof(s, l) spin_lock_init(&((s)->l))
-+#define rspin_lock_init_prof(s, l) rspin_lock_init(&((s)->l))
- #define lock_profile_register_struct(type, ptr, idx)
- #define lock_profile_deregister_struct(type, ptr)
- #define spinlock_profile_printall(key)
-@@ -182,8 +191,10 @@ typedef struct spinlock {
- #endif
- } spinlock_t;
- 
-+typedef spinlock_t rspinlock_t;
- 
- #define spin_lock_init(l) (*(l) = (spinlock_t)SPIN_LOCK_UNLOCKED)
-+#define rspin_lock_init(l) (*(l) = (rspinlock_t)SPIN_LOCK_UNLOCKED)
- 
- void _spin_lock(spinlock_t *lock);
- void _spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data);
--- 
-2.35.3
++MISRA C deviations for Xen
++==========================
++
++The following is the list of MISRA C:2012 deviations for the Xen codebase that
++are not covered by a `SAF-x-safe` or `SAF-x-false-positive-<tool>` comment, as
++specified in docs/misra/documenting-violations.rst; the lack of
++such comments is usually due to the excessive clutter they would bring to the
++codebase or the impossibility to express such a deviation (e.g., if it's
++composed of several conditions).
++
++Deviations related to MISRA C:2012 Directives:
++----------------------------------------------
++
++.. list-table::
++   :header-rows: 1
++
++   * - Directive identifier
++     - Justification
++     - Notes
++
++   * - D4.3
++     - Accepted for the ARM64 codebase
++     - Tagged as `disapplied` for ECLAIR on any other violation report.
++
++   * - D4.3
++     - The inline asm in 'xen/arch/arm/arm64/lib/bitops.c' is tightly coupled
++       with the surronding C code that acts as a wrapper, so it has been decided
++       not to add an additional encapsulation layer.
++     - Tagged as `deliberate` for ECLAIR.
++
++Deviations related to MISRA C:2012 Rules:
++-----------------------------------------
++
++.. list-table::
++   :header-rows: 1
++
++   * - Rule identifier
++     - Justification
++     - Notes
++
++   * - R2.1
++     - The compiler implementation guarantees that the unreachable code is
++       removed. Constant expressions and unreachable branches of if and switch
++       statements are expected.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R2.1
++     - Unreachability caused by calls to the following functions or macros is
++       deliberate and there is no risk of code being unexpectedly left out.
++     - Tagged as `deliberate` for ECLAIR. Such macros are:
++        - BUG
++        - assert_failed
++        - __builtin_unreachable
++        - ASSERT_UNREACHABLE
++
++   * - R2.1
++     - Pure declarations, that is, declarations without initializations are not
++       executable, and therefore it is safe for them to be unreachable. The most
++       notable example of such a pattern being used in the codebase is that of
++       a variable declaration that should be available in all the clauses of a
++       switch statement.
++     - ECLAIR has been configured to ignore those statements.
++
++   * - R2.2
++     - Proving compliance with respect to Rule 2.2 is generally impossible:
++       see `<https://arxiv.org/abs/2212.13933>`_ for details. Moreover, peer
++       review gives us confidence that no evidence of errors in the program's
++       logic has been missed due to undetected violations of Rule 2.2, if any.
++       Testing on time behavior gives us confidence on the fact that, should the
++       program contain dead code that is not removed by the compiler, the
++       resulting slowdown is negligible.
++     - Project-wide deviation, tagged as `disapplied` for ECLAIR.
++
++   * - R3.1
++     - Comments starting with '/\*' and containing hyperlinks are safe as they
++       are not instances of commented-out code.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R5.3
++     - As specified in rules.rst, shadowing due to macros being used as macro
++       arguments is allowed, as it's deemed not at risk of causing developer
++       confusion.
++     - Tagged as `safe` for ECLAIR. So far, the following macros are deviated:
++         - READ_SYSREG and WRITE_SYSREG
++         - max_{t}? and min_{t}?
++         - read_[bwlq] and read_[bwlq]_relaxed
++         - per_cpu and this_cpu
++         - __emulate_2op and __emulate_2op_nobyte
++         - read_debugreg and write_debugreg
++
++   * - R7.2
++     - Violations caused by __HYPERVISOR_VIRT_START are related to the
++       particular use of it done in xen_mk_ulong.
++     - Tagged as `deliberate` for ECLAIR.
++
++   * - R7.4
++     - Allow pointers of non-character type as long as the pointee is
++       const-qualified.
++     - ECLAIR has been configured to ignore these assignments.
++
++   * - R8.3
++     - The type ret_t is deliberately used and defined as int or long depending
++       on the architecture.
++     - Tagged as `deliberate` for ECLAIR.
++
++   * - R8.3
++     - Some files are not subject to respect MISRA rules at
++       the moment, but some entity from a file in scope is used; therefore
++       ECLAIR does report a violation, since not all the files involved in the
++       violation are excluded from the analysis.
++     - Tagged as `deliberate` for ECLAIR. Such excluded files are:
++         - xen/arch/x86/time.c
++         - xen/arch/x86/acpi/cpu_idle.c
++         - xen/arch/x86/mpparse.c
++         - xen/common/bunzip2.c
++         - xen/common/unlz4.c
++         - xen/common/unlzma.c
++         - xen/common/unlzo.c
++         - xen/common/unxz.c
++         - xen/common/unzstd.c
++
++   * - R8.4
++     - The definitions present in the files 'asm-offsets.c' for any architecture
++       are used to generate definitions for asm modules, and are not called by
++       C code. Therefore the absence of prior declarations is safe.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R8.4
++     - The functions defined in the file xen/common/coverage/gcov_base.c are
++       meant to be called from gcc-generated code in a non-release build
++       configuration. Therefore, the absence of prior declarations is safe.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R8.6
++     - The following variables are compiled in multiple translation units
++       belonging to different executables and therefore are safe.
++
++       - current_stack_pointer
++       - bsearch
++       - sort
++     - Tagged as `safe` for ECLAIR.
++
++   * - R8.6
++     - Declarations without definitions are allowed (specifically when the
++       definition is compiled-out or optimized-out by the compiler).
++     - Tagged as `deliberate` in ECLAIR.
++
++   * - R8.10
++     - The gnu_inline attribute without static is deliberately allowed.
++     - Tagged as `deliberate` for ECLAIR.
++
++   * - R9.5
++     - The possibility of committing mistakes by specifying an explicit
++       dimension is higher than omitting the dimension, therefore all such
++       instances of violations are deviated.
++     - Project-wide deviation, tagged as `deliberate` for ECLAIR.
++
++   * - R10.1, R10.3, R10.4
++     - The value-preserving conversions of integer constants are safe.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R10.1
++     - Shifting non-negative integers to the right is safe.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R10.1
++     - Shifting non-negative integers to the left is safe if the result is still
++       non-negative.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R10.1
++     - Bitwise logical operations on non-negative integers are safe.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R10.1
++     - The implicit conversion to Boolean for logical operator arguments is
++       well-known to all Xen developers to be a comparison with 0.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R10.1
++     - Xen only supports architectures where signed integers are representend
++       using two's complement and all the Xen developers are aware of this. For
++       this reason, bitwise operations are safe.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R10.1
++     - Given the assumptions on the toolchain detailed in
++       docs/misra/C-language-toolchain.rst and the build flags used by the
++       project, it is deemed safe to use bitwise shift operators.
++       See automation/eclair_analysis/deviations.ecl for the full explanation.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R13.5
++     - All developers and reviewers can be safely assumed to be well aware of
++       the short-circuit evaluation strategy for logical operators.
++     - Project-wide deviation; tagged as `disapplied` for ECLAIR.
++
++   * - R14.2
++     - The severe restrictions imposed by this rule on the use of 'for'
++       statements are not counterbalanced by the presumed facilitation of the
++       peer review activity.
++     - Project-wide deviation; tagged as `disapplied` for ECLAIR.
++
++   * - R14.3
++     - The Xen team relies on the fact that invariant conditions of 'if'
++       statements are deliberate.
++     - Project-wide deviation; tagged as `disapplied` for ECLAIR.
++
++   * - R20.7
++     - Code violating Rule 20.7 is safe when macro parameters are used:
++       (1) as function arguments;
++       (2) as macro arguments;
++       (3) as array indices;
++       (4) as lhs in assignments.
++     - Tagged as `safe` for ECLAIR.
++
++Other deviations:
++-----------------
++
++.. list-table::
++   :header-rows: 1
++
++   * - Deviation
++     - Justification
++
++   * - do-while-0 loops
++     - The do-while-0 is a well-recognized loop idiom used by the Xen community
++       and can therefore be used, even though it would cause a number of
++       violations in some instances.
++
++   * - while-0 and while-1 loops
++     - while-0 and while-1 are well-recognized loop idioms used by the Xen
++       community and can therefore be used, even though they would cause a
++       number of violations in some instances.
+diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+index 3139ca7ae6dd..6efe66195de3 100644
+--- a/docs/misra/rules.rst
++++ b/docs/misra/rules.rst
+@@ -18,7 +18,7 @@ It is possible that in specific circumstances it is best not to follow a
+ rule because it is not possible or because the alternative leads to
+ better code quality. Those cases are called "deviations". They are
+ permissible as long as they are documented. For details, please refer to
+-docs/misra/documenting-violations.rst
++docs/misra/documenting-violations.rst and docs/misra/deviations.rst
 
+ Other documentation mechanisms are work-in-progress.
+
+--
+2.34.1
 
