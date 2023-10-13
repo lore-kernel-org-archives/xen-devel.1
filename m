@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC62CDB47E
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 10:43:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.616439.958472 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A08BCDB47E
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Oct 2023 10:45:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.616448.958483 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrFda-00017r-Mi; Fri, 13 Oct 2023 10:43:22 +0000
+	id 1qrFfW-0002eL-2x; Fri, 13 Oct 2023 10:45:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 616439.958472; Fri, 13 Oct 2023 10:43:22 +0000
+Received: by outflank-mailman (output) from mailman id 616448.958483; Fri, 13 Oct 2023 10:45:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qrFda-00017k-Jz; Fri, 13 Oct 2023 10:43:22 +0000
-Received: by outflank-mailman (input) for mailman id 616439;
- Fri, 13 Oct 2023 10:43:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RqNf=F3=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qrFdZ-000153-EU
- for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 10:43:21 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5366ba0e-69b5-11ee-98d4-6d05b1d4d9a1;
- Fri, 13 Oct 2023 12:43:20 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id 4C0354EE073A;
- Fri, 13 Oct 2023 12:43:20 +0200 (CEST)
+	id 1qrFfV-0002eE-VC; Fri, 13 Oct 2023 10:45:21 +0000
+Received: by outflank-mailman (input) for mailman id 616448;
+ Fri, 13 Oct 2023 10:45:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=U36v=F3=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qrFXB-0002pr-TP
+ for xen-devel@lists.xenproject.org; Fri, 13 Oct 2023 10:36:45 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 66d52e32-69b4-11ee-9b0e-b553b5be7939;
+ Fri, 13 Oct 2023 12:36:43 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5BE061FD94;
+ Fri, 13 Oct 2023 10:36:43 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 19065138EF;
+ Fri, 13 Oct 2023 10:36:43 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id XI/JBLsdKWVtNgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 13 Oct 2023 10:36:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,103 +53,244 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5366ba0e-69b5-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 66d52e32-69b4-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1697193403; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nz51Qlpuj2Tl/kYO3yBEFcQPwvVcconkys6izklRADs=;
+	b=iQSg7MhMVf8Ml7Qzqvn5NKW0oBixUtk/gl+kyjLiijTws24A5IcOXlcptgzlFkqDfK3Ncc
+	VNs03qyRCYjqpJSmYz4pUy9QoggqmaQuurAq0PXx72RxuNs8d3wzWH1tQzLQ4SVooIKOFw
+	R7iLMKxNalmqP7KP7dFK68e0MOvFZ2g=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: javi.merino@cloud.com,
+	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 12/13] xen/spinlock: remove indirection through macros for spin_*() functions
+Date: Fri, 13 Oct 2023 11:42:23 +0200
+Message-Id: <20231013094224.7060-13-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231013094224.7060-1-jgross@suse.com>
+References: <20231013094224.7060-1-jgross@suse.com>
 MIME-Version: 1.0
-Date: Fri, 13 Oct 2023 12:43:20 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org,
- michal.orzel@amd.com, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com,
- consulting@bugseng.com, jbeulich@suse.com, andrew.cooper3@citrix.com,
- roger.pau@citrix.com, Simone Ballarin <simone.ballarin@bugseng.com>, Doug
- Goldstein <cardoe@cardoe.com>, George Dunlap <george.dunlap@citrix.com>, Wei
- Liu <wl@xen.org>
-Subject: Re: [XEN PATCH][for-next][for-4.19 v2 1/8] xen/include: add macro
- LOWEST_BIT
-In-Reply-To: <f62ad310-0f9a-4b28-9592-023d6a98c0dd@xen.org>
-References: <cover.1697123806.git.nicola.vetrini@bugseng.com>
- <bb0ba44f8a3944c22a1c7cf19196c7060e8adb4b.1697123806.git.nicola.vetrini@bugseng.com>
- <f62ad310-0f9a-4b28-9592-023d6a98c0dd@xen.org>
-User-Agent: Roundcube Webmail/1.4.3
-Message-ID: <022106b550e8303d554e557bf6c23651@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [-6.10 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 REPLY(-4.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 NEURAL_HAM_LONG(-3.00)[-1.000];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-1.00)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[9];
+	 MID_CONTAINS_FROM(1.00)[];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_COUNT_TWO(0.00)[2];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-3.00)[100.00%]
 
-On 13/10/2023 10:25, Julien Grall wrote:
-> Hi Nicola,
-> 
-> On 12/10/2023 16:28, Nicola Vetrini wrote:
->> The purpose of this macro is to encapsulate the well-known expression
->> 'x & -x', that in 2's complement architectures on unsigned integers 
->> will
->> give 2^ffs(x), where ffs(x) is the position of the lowest set bit in 
->> x.
-> 
-> In the commit message it is clear that the macro will return the
-> lowest set bit. But...
-> 
->> 
->> A deviation for ECLAIR is also introduced.
->> 
->> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
->> ---
->> Changes in v2:
->> - rename to LOWEST_BIT
->> ---
->>   automation/eclair_analysis/ECLAIR/deviations.ecl | 6 ++++++
->>   xen/include/xen/macros.h                         | 6 ++++--
->>   2 files changed, 10 insertions(+), 2 deletions(-)
->> 
->> diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl 
->> b/automation/eclair_analysis/ECLAIR/deviations.ecl
->> index d8170106b449..b8e1155ee49d 100644
->> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
->> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
->> @@ -274,6 +274,12 @@ still non-negative."
->>   -config=MC3R1.R10.1,etypes+={safe, 
->> "stmt(operator(logical)||node(conditional_operator||binary_conditional_operator))", 
->> "dst_type(ebool||boolean)"}
->>   -doc_end
->> 
->> +-doc_begin="The macro LOWEST_BIT encapsulates a well-known pattern to 
->> obtain the value
->> +2^ffs(x) for unsigned integers on two's complement architectures
->> +(all the architectures supported by Xen satisfy this requirement)."
->> +-config=MC3R1.R10.1,reports+={safe, 
->> "any_area(any_loc(any_exp(macro(^LOWEST_BIT$))))"}
->> +-doc_end
->> +
->>   ### Set 3 ###
->> 
->>   #
->> diff --git a/xen/include/xen/macros.h b/xen/include/xen/macros.h
->> index d0caae7db298..af47179d1056 100644
->> --- a/xen/include/xen/macros.h
->> +++ b/xen/include/xen/macros.h
->> @@ -8,8 +8,10 @@
->>   #define DIV_ROUND(n, d) (((n) + (d) / 2) / (d))
->>   #define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
->> 
->> -#define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
->> -#define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
->> +#define LOWEST_BIT(x) ((x) & -(x))
-> 
-> ... this is not reflected in the name of the macro. So it is not
-> obvious if it will return the lowest bit set or clear.
-> 
-> Can you at least add a comment on top explaining what it returns?
-> Something like:
-> 
-> /* Return the lowest bit set */
-> 
-> Cheers,
+In reality all spin_*() functions are macros which are defined to just
+call a related real function.
 
-No problem
+Remove this macro layer, as it is adding complexity without any gain.
 
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch
+---
+ xen/common/spinlock.c      | 28 +++++++++---------
+ xen/include/xen/spinlock.h | 58 +++++++++++++++-----------------------
+ 2 files changed, 36 insertions(+), 50 deletions(-)
+
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index cff3f126e6..5fa5c1890a 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -332,30 +332,30 @@ static void always_inline spin_lock_common(spinlock_tickets_t *t,
+     LOCK_PROFILE_GOT(block);
+ }
+ 
+-void _spin_lock(spinlock_t *lock)
++void spin_lock(spinlock_t *lock)
+ {
+     spin_lock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR, NULL,
+                      NULL);
+ }
+ 
+-void _spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data)
++void spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data)
+ {
+     spin_lock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR, cb, data);
+ }
+ 
+-void _spin_lock_irq(spinlock_t *lock)
++void spin_lock_irq(spinlock_t *lock)
+ {
+     ASSERT(local_irq_is_enabled());
+     local_irq_disable();
+-    _spin_lock(lock);
++    spin_lock(lock);
+ }
+ 
+-unsigned long _spin_lock_irqsave(spinlock_t *lock)
++unsigned long __spin_lock_irqsave(spinlock_t *lock)
+ {
+     unsigned long flags;
+ 
+     local_irq_save(flags);
+-    _spin_lock(lock);
++    spin_lock(lock);
+     return flags;
+ }
+ 
+@@ -371,20 +371,20 @@ static void always_inline spin_unlock_common(spinlock_tickets_t *t,
+     preempt_enable();
+ }
+ 
+-void _spin_unlock(spinlock_t *lock)
++void spin_unlock(spinlock_t *lock)
+ {
+     spin_unlock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
+ }
+ 
+-void _spin_unlock_irq(spinlock_t *lock)
++void spin_unlock_irq(spinlock_t *lock)
+ {
+-    _spin_unlock(lock);
++    spin_unlock(lock);
+     local_irq_enable();
+ }
+ 
+-void _spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
++void spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
+ {
+-    _spin_unlock(lock);
++    spin_unlock(lock);
+     local_irq_restore(flags);
+ }
+ 
+@@ -393,7 +393,7 @@ static int always_inline spin_is_locked_common(const spinlock_tickets_t *t)
+     return t->head != t->tail;
+ }
+ 
+-int _spin_is_locked(const spinlock_t *lock)
++int spin_is_locked(const spinlock_t *lock)
+ {
+     return spin_is_locked_common(&lock->tickets);
+ }
+@@ -429,7 +429,7 @@ static int always_inline spin_trylock_common(spinlock_tickets_t *t,
+     return 1;
+ }
+ 
+-int _spin_trylock(spinlock_t *lock)
++int spin_trylock(spinlock_t *lock)
+ {
+     return spin_trylock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
+ }
+@@ -453,7 +453,7 @@ static void always_inline spin_barrier_common(spinlock_tickets_t *t,
+     smp_mb();
+ }
+ 
+-void _spin_barrier(spinlock_t *lock)
++void spin_barrier(spinlock_t *lock)
+ {
+     spin_barrier_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
+ }
+diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
+index a2b1bb2df6..e4f2e36e4f 100644
+--- a/xen/include/xen/spinlock.h
++++ b/xen/include/xen/spinlock.h
+@@ -224,18 +224,30 @@ typedef struct rspinlock {
+ #define spin_lock_init(l) (*(l) = (spinlock_t)SPIN_LOCK_UNLOCKED)
+ #define rspin_lock_init(l) (*(l) = (rspinlock_t)RSPIN_LOCK_UNLOCKED)
+ 
+-void _spin_lock(spinlock_t *lock);
+-void _spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data);
+-void _spin_lock_irq(spinlock_t *lock);
+-unsigned long _spin_lock_irqsave(spinlock_t *lock);
++void spin_lock(spinlock_t *lock);
++void spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data);
++void spin_lock_irq(spinlock_t *lock);
++#define spin_lock_irqsave(l, f)                                 \
++    ({                                                          \
++        BUILD_BUG_ON(sizeof(f) != sizeof(unsigned long));       \
++        ((f) = __spin_lock_irqsave(l));                         \
++    })
++unsigned long __spin_lock_irqsave(spinlock_t *lock);
+ 
+-void _spin_unlock(spinlock_t *lock);
+-void _spin_unlock_irq(spinlock_t *lock);
+-void _spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags);
++void spin_unlock(spinlock_t *lock);
++void spin_unlock_irq(spinlock_t *lock);
++void spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags);
+ 
+-int _spin_is_locked(const spinlock_t *lock);
+-int _spin_trylock(spinlock_t *lock);
+-void _spin_barrier(spinlock_t *lock);
++int spin_is_locked(const spinlock_t *lock);
++int spin_trylock(spinlock_t *lock);
++#define spin_trylock_irqsave(lock, flags)       \
++({                                              \
++    local_irq_save(flags);                      \
++    spin_trylock(lock) ?                        \
++    1 : ({ local_irq_restore(flags); 0; });     \
++})
++/* Ensure a lock is quiescent between two critical operations. */
++void spin_barrier(spinlock_t *lock);
+ 
+ /*
+  * rspin_[un]lock(): Use these forms when the lock can (safely!) be
+@@ -270,32 +282,6 @@ void nrspin_unlock_irq(rspinlock_t *lock);
+ unsigned long __nrspin_lock_irqsave(rspinlock_t *lock);
+ void nrspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags);
+ 
+-#define spin_lock(l)                  _spin_lock(l)
+-#define spin_lock_cb(l, c, d)         _spin_lock_cb(l, c, d)
+-#define spin_lock_irq(l)              _spin_lock_irq(l)
+-#define spin_lock_irqsave(l, f)                                 \
+-    ({                                                          \
+-        BUILD_BUG_ON(sizeof(f) != sizeof(unsigned long));       \
+-        ((f) = _spin_lock_irqsave(l));                          \
+-    })
+-
+-#define spin_unlock(l)                _spin_unlock(l)
+-#define spin_unlock_irq(l)            _spin_unlock_irq(l)
+-#define spin_unlock_irqrestore(l, f)  _spin_unlock_irqrestore(l, f)
+-
+-#define spin_is_locked(l)             _spin_is_locked(l)
+-#define spin_trylock(l)               _spin_trylock(l)
+-
+-#define spin_trylock_irqsave(lock, flags)       \
+-({                                              \
+-    local_irq_save(flags);                      \
+-    spin_trylock(lock) ?                        \
+-    1 : ({ local_irq_restore(flags); 0; });     \
+-})
+-
+ #define spin_lock_kick(l)             arch_lock_signal_wmb()
+ 
+-/* Ensure a lock is quiescent between two critical operations. */
+-#define spin_barrier(l)               _spin_barrier(l)
+-
+ #endif /* __SPINLOCK_H__ */
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+2.35.3
+
 
