@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00CECDB465
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 06:29:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.617223.959635 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7124CDB465
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 06:29:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.617225.959655 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsH5j-0005Uj-V7; Mon, 16 Oct 2023 06:28:39 +0000
+	id 1qsH5u-000633-DP; Mon, 16 Oct 2023 06:28:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 617223.959635; Mon, 16 Oct 2023 06:28:39 +0000
+Received: by outflank-mailman (output) from mailman id 617225.959655; Mon, 16 Oct 2023 06:28:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsH5j-0005Uc-RW; Mon, 16 Oct 2023 06:28:39 +0000
-Received: by outflank-mailman (input) for mailman id 617223;
- Mon, 16 Oct 2023 06:28:37 +0000
+	id 1qsH5u-00062w-AL; Mon, 16 Oct 2023 06:28:50 +0000
+Received: by outflank-mailman (input) for mailman id 617225;
+ Mon, 16 Oct 2023 06:28:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4t3W=F6=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qsH5h-0005UW-UI
- for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 06:28:37 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1qsH5s-0005UW-Ui
+ for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 06:28:48 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3c2a21cd-6bed-11ee-9b0e-b553b5be7939;
- Mon, 16 Oct 2023 08:28:35 +0200 (CEST)
+ id 4307737b-6bed-11ee-9b0e-b553b5be7939;
+ Mon, 16 Oct 2023 08:28:47 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 1FE3D21ADB;
- Mon, 16 Oct 2023 06:28:35 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D6A6F1FEAB;
+ Mon, 16 Oct 2023 06:28:46 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E1534138EF;
- Mon, 16 Oct 2023 06:28:34 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AAE61138EF;
+ Mon, 16 Oct 2023 06:28:46 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id mYXBNRLYLGV9QQAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 16 Oct 2023 06:28:34 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id guxNKB7YLGWMQQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 16 Oct 2023 06:28:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,37 +53,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c2a21cd-6bed-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 4307737b-6bed-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1697437715; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=3S4X3hdCR3jWGjnnYmala4Nsas/lYtTIdqglFRoFwTs=;
-	b=BXY2UEMNMmZbcu5VmPlkaN3XoDtUO+bHshdurIZmVdRxBXthi5XMSQ+Xm8Qo3a51IwZxG7
-	/bEbscpzxopICtv18k3fgreAOhWiwnV8BLH+xb7LlolAQSQV24heKvLm7CQIYqb4s0WOEZ
-	XFwjdTSR/YN7oHHjFQO0ZmcQQhGV6o0=
+	t=1697437726; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=rNX0BHA06/8Nsdx4Ml8n47rtnGq7y7Ylo5Rine36zkk=;
+	b=ed1mpfG/OdNtnERvr+u0c/5UTTxcVdh9dCockRC8xxBjDyYoXSxtc546veqFCMPuApPqyY
+	yQFuoDELuRLH4GV7uBNq23liBMDD8kapEMMsmP9CFILss5qIpbHjsVEokdBaq9Nn/lrxRi
+	f1Q7JXSosDLutEXExiXohxy2p2r/7Tk=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 0/7] xen/events: do some cleanups in events_base.c
-Date: Mon, 16 Oct 2023 08:28:24 +0200
-Message-Id: <20231016062831.20630-1-jgross@suse.com>
+Subject: [PATCH 2/7] xen/events: remove unused functions
+Date: Mon, 16 Oct 2023 08:28:26 +0200
+Message-Id: <20231016062831.20630-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231016062831.20630-1-jgross@suse.com>
+References: <20231016062831.20630-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out1.suse.de;
+Authentication-Results: smtp-out2.suse.de;
 	none
-X-Spamd-Result: default: False [0.90 / 50.00];
+X-Spamd-Result: default: False [-3.10 / 50.00];
 	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 BAYES_SPAM(0.00)[19.76%];
 	 FROM_HAS_DN(0.00)[];
 	 TO_DN_SOME(0.00)[];
 	 TO_MATCH_ENVRCPT_ALL(0.00)[];
 	 R_MISSING_CHARSET(2.50)[];
 	 MIME_GOOD(-0.10)[text/plain];
+	 REPLY(-4.00)[];
 	 BROKEN_CONTENT_TYPE(1.50)[];
 	 RCPT_COUNT_FIVE(0.00)[5];
 	 NEURAL_HAM_LONG(-3.00)[-1.000];
@@ -93,27 +97,89 @@ X-Spamd-Result: default: False [0.90 / 50.00];
 	 FROM_EQ_ENVFROM(0.00)[];
 	 MIME_TRACE(0.00)[0:+];
 	 RCVD_COUNT_TWO(0.00)[2];
-	 RCVD_TLS_ALL(0.00)[]
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-0.00)[11.11%]
 
-As a followup to the XSA-441 patch this series is doing a minor bug fix
-and some cleanups of events_base.c (with some minor effects outside of
-it).
+There are no users of xen_irq_from_pirq() and xen_set_irq_pending().
 
-Juergen Gross (7):
-  xen/events: fix delayed eoi list handling
-  xen/events: remove unused functions
-  xen/events: reduce externally visible helper functions
-  xen/events: remove some simple helpers from events_base.c
-  xen/events: drop xen_allocate_irqs_dynamic()
-  xen/events: modify internal [un]bind interfaces
-  xen/events: remove some info_for_irq() calls in pirq handling
+Remove those functions.
 
- drivers/xen/events/events_2l.c       |   8 +-
- drivers/xen/events/events_base.c     | 557 +++++++++++++--------------
- drivers/xen/events/events_internal.h |   1 -
- include/xen/events.h                 |   8 +-
- 4 files changed, 276 insertions(+), 298 deletions(-)
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/xen/events/events_base.c | 30 ------------------------------
+ include/xen/events.h             |  4 ----
+ 2 files changed, 34 deletions(-)
 
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index 0e458b1c0c8c..1d797dd85d0e 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -1165,29 +1165,6 @@ int xen_destroy_irq(int irq)
+ 	return rc;
+ }
+ 
+-int xen_irq_from_pirq(unsigned pirq)
+-{
+-	int irq;
+-
+-	struct irq_info *info;
+-
+-	mutex_lock(&irq_mapping_update_lock);
+-
+-	list_for_each_entry(info, &xen_irq_list_head, list) {
+-		if (info->type != IRQT_PIRQ)
+-			continue;
+-		irq = info->irq;
+-		if (info->u.pirq.pirq == pirq)
+-			goto out;
+-	}
+-	irq = -1;
+-out:
+-	mutex_unlock(&irq_mapping_update_lock);
+-
+-	return irq;
+-}
+-
+-
+ int xen_pirq_from_irq(unsigned irq)
+ {
+ 	return pirq_from_irq(irq);
+@@ -2026,13 +2003,6 @@ void xen_clear_irq_pending(int irq)
+ 		event_handler_exit(info);
+ }
+ EXPORT_SYMBOL(xen_clear_irq_pending);
+-void xen_set_irq_pending(int irq)
+-{
+-	evtchn_port_t evtchn = evtchn_from_irq(irq);
+-
+-	if (VALID_EVTCHN(evtchn))
+-		set_evtchn(evtchn);
+-}
+ 
+ bool xen_test_irq_pending(int irq)
+ {
+diff --git a/include/xen/events.h b/include/xen/events.h
+index 23932b0673dc..a129cafa80ed 100644
+--- a/include/xen/events.h
++++ b/include/xen/events.h
+@@ -88,7 +88,6 @@ void xen_irq_resume(void);
+ 
+ /* Clear an irq's pending state, in preparation for polling on it */
+ void xen_clear_irq_pending(int irq);
+-void xen_set_irq_pending(int irq);
+ bool xen_test_irq_pending(int irq);
+ 
+ /* Poll waiting for an irq to become pending.  In the usual case, the
+@@ -122,9 +121,6 @@ int xen_bind_pirq_msi_to_irq(struct pci_dev *dev, struct msi_desc *msidesc,
+ /* De-allocates the above mentioned physical interrupt. */
+ int xen_destroy_irq(int irq);
+ 
+-/* Return irq from pirq */
+-int xen_irq_from_pirq(unsigned pirq);
+-
+ /* Return the pirq allocated to the irq. */
+ int xen_pirq_from_irq(unsigned irq);
+ 
 -- 
 2.35.3
 
