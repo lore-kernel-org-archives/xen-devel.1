@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7124CDB465
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 06:29:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.617225.959655 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4644DCDB465
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 06:29:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.617231.959685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsH5u-000633-DP; Mon, 16 Oct 2023 06:28:50 +0000
+	id 1qsH6A-0007Hf-8N; Mon, 16 Oct 2023 06:29:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 617225.959655; Mon, 16 Oct 2023 06:28:50 +0000
+Received: by outflank-mailman (output) from mailman id 617231.959685; Mon, 16 Oct 2023 06:29:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsH5u-00062w-AL; Mon, 16 Oct 2023 06:28:50 +0000
-Received: by outflank-mailman (input) for mailman id 617225;
- Mon, 16 Oct 2023 06:28:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qsH6A-0007HY-4d; Mon, 16 Oct 2023 06:29:06 +0000
+Received: by outflank-mailman (input) for mailman id 617231;
+ Mon, 16 Oct 2023 06:29:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4t3W=F6=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qsH5s-0005UW-Ui
- for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 06:28:48 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4307737b-6bed-11ee-9b0e-b553b5be7939;
- Mon, 16 Oct 2023 08:28:47 +0200 (CEST)
+ id 1qsH68-0005jO-DV
+ for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 06:29:04 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4cefc80b-6bed-11ee-98d4-6d05b1d4d9a1;
+ Mon, 16 Oct 2023 08:29:03 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id D6A6F1FEAB;
- Mon, 16 Oct 2023 06:28:46 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 868CC218B5;
+ Mon, 16 Oct 2023 06:29:03 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AAE61138EF;
- Mon, 16 Oct 2023 06:28:46 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5E04F138EF;
+ Mon, 16 Oct 2023 06:29:03 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id guxNKB7YLGWMQQAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 16 Oct 2023 06:28:46 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id wMHDFS/YLGWsQQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 16 Oct 2023 06:29:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,33 +53,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4307737b-6bed-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 4cefc80b-6bed-11ee-98d4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1697437726; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1697437743; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=rNX0BHA06/8Nsdx4Ml8n47rtnGq7y7Ylo5Rine36zkk=;
-	b=ed1mpfG/OdNtnERvr+u0c/5UTTxcVdh9dCockRC8xxBjDyYoXSxtc546veqFCMPuApPqyY
-	yQFuoDELuRLH4GV7uBNq23liBMDD8kapEMMsmP9CFILss5qIpbHjsVEokdBaq9Nn/lrxRi
-	f1Q7JXSosDLutEXExiXohxy2p2r/7Tk=
+	bh=EWxH6yY84p2rrj1E4gaItaAI46eHq+VAxQuigKOuHGo=;
+	b=smLwHIHrpwYN5Ii4lwvKUk9sXb8cvuf5BlEueI3/bZyX1v4SepjiBMC1gazlnz6Ew6mIok
+	BzxcYQje8gm1frKAVuVhZx6OQQIXko8LI3Uy+u/gN7pQzWtaDUC9aUZSdrsyhbhQLMs/5j
+	IuxyQQMHXLyCzldgzs2bQ50eIjucq2w=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 2/7] xen/events: remove unused functions
-Date: Mon, 16 Oct 2023 08:28:26 +0200
-Message-Id: <20231016062831.20630-3-jgross@suse.com>
+Subject: [PATCH 5/7] xen/events: drop xen_allocate_irqs_dynamic()
+Date: Mon, 16 Oct 2023 08:28:29 +0200
+Message-Id: <20231016062831.20630-6-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231016062831.20630-1-jgross@suse.com>
 References: <20231016062831.20630-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out2.suse.de;
+Authentication-Results: smtp-out1.suse.de;
 	none
-X-Spamd-Result: default: False [-3.10 / 50.00];
+X-Spamd-Result: default: False [-6.10 / 50.00];
 	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
@@ -98,88 +98,180 @@ X-Spamd-Result: default: False [-3.10 / 50.00];
 	 MIME_TRACE(0.00)[0:+];
 	 RCVD_COUNT_TWO(0.00)[2];
 	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-0.00)[11.11%]
+	 BAYES_HAM(-3.00)[100.00%]
 
-There are no users of xen_irq_from_pirq() and xen_set_irq_pending().
+Instead of having a common function for allocating a single IRQ or a
+consecutive number of IRQs, split up the functionality into the callers
+of xen_allocate_irqs_dynamic().
 
-Remove those functions.
+This allows to handle any allocation error in xen_irq_init() gracefully
+instead of panicing the system. Let xen_irq_init() return the irq_info
+pointer or NULL in case of an allocation error.
+
+Additionally set the IRQ into irq_info already at allocation time, as
+otherwise the IRQ would be '0' (which is a valid IRQ number) until
+being set.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- drivers/xen/events/events_base.c | 30 ------------------------------
- include/xen/events.h             |  4 ----
- 2 files changed, 34 deletions(-)
+ drivers/xen/events/events_base.c | 74 +++++++++++++++++++-------------
+ 1 file changed, 44 insertions(+), 30 deletions(-)
 
 diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index 0e458b1c0c8c..1d797dd85d0e 100644
+index 4ada3b6a4164..58e5549ee1db 100644
 --- a/drivers/xen/events/events_base.c
 +++ b/drivers/xen/events/events_base.c
-@@ -1165,29 +1165,6 @@ int xen_destroy_irq(int irq)
- 	return rc;
+@@ -302,6 +302,13 @@ static void channels_on_cpu_inc(struct irq_info *info)
+ 	info->is_accounted = 1;
  }
  
--int xen_irq_from_pirq(unsigned pirq)
--{
--	int irq;
--
--	struct irq_info *info;
--
--	mutex_lock(&irq_mapping_update_lock);
--
--	list_for_each_entry(info, &xen_irq_list_head, list) {
--		if (info->type != IRQT_PIRQ)
--			continue;
--		irq = info->irq;
--		if (info->u.pirq.pirq == pirq)
--			goto out;
--	}
--	irq = -1;
--out:
--	mutex_unlock(&irq_mapping_update_lock);
--
--	return irq;
--}
--
--
- int xen_pirq_from_irq(unsigned irq)
++static void xen_irq_free_desc(unsigned int irq)
++{
++	/* Legacy IRQ descriptors are managed by the arch. */
++	if (irq >= nr_legacy_irqs())
++		irq_free_desc(irq);
++}
++
+ static void delayed_free_irq(struct work_struct *work)
  {
- 	return pirq_from_irq(irq);
-@@ -2026,13 +2003,6 @@ void xen_clear_irq_pending(int irq)
- 		event_handler_exit(info);
+ 	struct irq_info *info = container_of(to_rcu_work(work), struct irq_info,
+@@ -313,9 +320,7 @@ static void delayed_free_irq(struct work_struct *work)
+ 
+ 	kfree(info);
+ 
+-	/* Legacy IRQ descriptors are managed by the arch. */
+-	if (irq >= nr_legacy_irqs())
+-		irq_free_desc(irq);
++	xen_irq_free_desc(irq);
  }
- EXPORT_SYMBOL(xen_clear_irq_pending);
--void xen_set_irq_pending(int irq)
--{
--	evtchn_port_t evtchn = evtchn_from_irq(irq);
--
--	if (VALID_EVTCHN(evtchn))
--		set_evtchn(evtchn);
--}
  
- bool xen_test_irq_pending(int irq)
+ /* Constructors for packed IRQ information. */
+@@ -330,7 +335,6 @@ static int xen_irq_info_common_setup(struct irq_info *info,
+ 	BUG_ON(info->type != IRQT_UNBOUND && info->type != type);
+ 
+ 	info->type = type;
+-	info->irq = irq;
+ 	info->evtchn = evtchn;
+ 	info->cpu = cpu;
+ 	info->mask_reason = EVT_MASK_REASON_EXPLICIT;
+@@ -730,47 +734,45 @@ void xen_irq_lateeoi(unsigned int irq, unsigned int eoi_flags)
+ }
+ EXPORT_SYMBOL_GPL(xen_irq_lateeoi);
+ 
+-static void xen_irq_init(unsigned irq)
++static struct irq_info *xen_irq_init(unsigned int irq)
  {
-diff --git a/include/xen/events.h b/include/xen/events.h
-index 23932b0673dc..a129cafa80ed 100644
---- a/include/xen/events.h
-+++ b/include/xen/events.h
-@@ -88,7 +88,6 @@ void xen_irq_resume(void);
+ 	struct irq_info *info;
  
- /* Clear an irq's pending state, in preparation for polling on it */
- void xen_clear_irq_pending(int irq);
--void xen_set_irq_pending(int irq);
- bool xen_test_irq_pending(int irq);
+ 	info = kzalloc(sizeof(*info), GFP_KERNEL);
+-	if (info == NULL)
+-		panic("Unable to allocate metadata for IRQ%d\n", irq);
++	if (info) {
++		info->irq = irq;
++		info->type = IRQT_UNBOUND;
++		info->refcnt = -1;
++		INIT_RCU_WORK(&info->rwork, delayed_free_irq);
  
- /* Poll waiting for an irq to become pending.  In the usual case, the
-@@ -122,9 +121,6 @@ int xen_bind_pirq_msi_to_irq(struct pci_dev *dev, struct msi_desc *msidesc,
- /* De-allocates the above mentioned physical interrupt. */
- int xen_destroy_irq(int irq);
+-	info->type = IRQT_UNBOUND;
+-	info->refcnt = -1;
+-	INIT_RCU_WORK(&info->rwork, delayed_free_irq);
++		set_info_for_irq(irq, info);
++		/*
++		 * Interrupt affinity setting can be immediate. No point
++		 * in delaying it until an interrupt is handled.
++		 */
++		irq_set_status_flags(irq, IRQ_MOVE_PCNTXT);
  
--/* Return irq from pirq */
--int xen_irq_from_pirq(unsigned pirq);
+-	set_info_for_irq(irq, info);
+-	/*
+-	 * Interrupt affinity setting can be immediate. No point
+-	 * in delaying it until an interrupt is handled.
+-	 */
+-	irq_set_status_flags(irq, IRQ_MOVE_PCNTXT);
++		INIT_LIST_HEAD(&info->eoi_list);
++		list_add_tail(&info->list, &xen_irq_list_head);
++	}
+ 
+-	INIT_LIST_HEAD(&info->eoi_list);
+-	list_add_tail(&info->list, &xen_irq_list_head);
++	return info;
+ }
+ 
+-static int __must_check xen_allocate_irqs_dynamic(int nvec)
++static inline int __must_check xen_allocate_irq_dynamic(void)
+ {
+-	int i, irq = irq_alloc_descs(-1, 0, nvec, -1);
++	int irq = irq_alloc_desc_from(0, -1);
+ 
+ 	if (irq >= 0) {
+-		for (i = 0; i < nvec; i++)
+-			xen_irq_init(irq + i);
++		if (!xen_irq_init(irq)) {
++			xen_irq_free_desc(irq);
++			irq = -1;
++		}
+ 	}
+ 
+ 	return irq;
+ }
+ 
+-static inline int __must_check xen_allocate_irq_dynamic(void)
+-{
 -
- /* Return the pirq allocated to the irq. */
- int xen_pirq_from_irq(unsigned irq);
+-	return xen_allocate_irqs_dynamic(1);
+-}
+-
+ static int __must_check xen_allocate_irq_gsi(unsigned gsi)
+ {
+ 	int irq;
+@@ -790,7 +792,10 @@ static int __must_check xen_allocate_irq_gsi(unsigned gsi)
+ 	else
+ 		irq = irq_alloc_desc_at(gsi, -1);
  
+-	xen_irq_init(irq);
++	if (!xen_irq_init(irq)) {
++		xen_irq_free_desc(irq);
++		irq = -1;
++	}
+ 
+ 	return irq;
+ }
+@@ -960,6 +965,11 @@ static void __unbind_from_irq(unsigned int irq)
+ 	evtchn_port_t evtchn = evtchn_from_irq(irq);
+ 	struct irq_info *info = info_for_irq(irq);
+ 
++	if (!info) {
++		xen_irq_free_desc(irq);
++		return;
++	}
++
+ 	if (info->refcnt > 0) {
+ 		info->refcnt--;
+ 		if (info->refcnt != 0)
+@@ -1097,11 +1107,14 @@ int xen_bind_pirq_msi_to_irq(struct pci_dev *dev, struct msi_desc *msidesc,
+ 
+ 	mutex_lock(&irq_mapping_update_lock);
+ 
+-	irq = xen_allocate_irqs_dynamic(nvec);
++	irq = irq_alloc_descs(-1, 0, nvec, -1);
+ 	if (irq < 0)
+ 		goto out;
+ 
+ 	for (i = 0; i < nvec; i++) {
++		if (!xen_irq_init(irq + i))
++			goto error_irq;
++
+ 		irq_set_chip_and_handler_name(irq + i, &xen_pirq_chip, handle_edge_irq, name);
+ 
+ 		ret = xen_irq_info_pirq_setup(irq + i, 0, pirq + i, 0, domid,
+@@ -1725,6 +1738,7 @@ void rebind_evtchn_irq(evtchn_port_t evtchn, int irq)
+ 	   so there should be a proper type */
+ 	BUG_ON(info->type == IRQT_UNBOUND);
+ 
++	info->irq = irq;
+ 	(void)xen_irq_info_evtchn_setup(irq, evtchn, NULL);
+ 
+ 	mutex_unlock(&irq_mapping_update_lock);
 -- 
 2.35.3
 
