@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CB1CDB465
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 07:12:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.617260.959724 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6152CDB482
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 07:13:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.617279.959765 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsHlX-0002N2-5Y; Mon, 16 Oct 2023 07:11:51 +0000
+	id 1qsHnD-00058E-Fc; Mon, 16 Oct 2023 07:13:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 617260.959724; Mon, 16 Oct 2023 07:11:51 +0000
+Received: by outflank-mailman (output) from mailman id 617279.959765; Mon, 16 Oct 2023 07:13:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsHlX-0002Mt-2U; Mon, 16 Oct 2023 07:11:51 +0000
-Received: by outflank-mailman (input) for mailman id 617260;
- Mon, 16 Oct 2023 07:11:49 +0000
+	id 1qsHnD-000587-Cn; Mon, 16 Oct 2023 07:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 617279;
+ Mon, 16 Oct 2023 07:13:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hqiJ=F6=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1qsHlV-000281-08
- for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 07:11:49 +0000
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [2607:f8b0:4864:20::52c])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=4t3W=F6=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qsHnC-00056J-5q
+ for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 07:13:34 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 41c6bd0a-6bf3-11ee-9b0e-b553b5be7939;
- Mon, 16 Oct 2023 09:11:43 +0200 (CEST)
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-578e33b6fb7so2409141a12.3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Oct 2023 00:11:42 -0700 (PDT)
-Received: from localhost ([122.172.80.14]) by smtp.gmail.com with ESMTPSA id
- lb18-20020a17090b4a5200b002636dfcc6f5sm4069757pjb.3.2023.10.16.00.11.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 00:11:40 -0700 (PDT)
+ id 833d4ad6-6bf3-11ee-9b0e-b553b5be7939;
+ Mon, 16 Oct 2023 09:13:32 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id ED0F921BDA;
+ Mon, 16 Oct 2023 07:13:30 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8F32E138EF;
+ Mon, 16 Oct 2023 07:13:30 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id oyaNIZriLGViWwAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 16 Oct 2023 07:13:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,107 +53,209 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41c6bd0a-6bf3-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1697440301; x=1698045101; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=d9BgW3N7fBm3L3q4onC3IgvyssbSs3COoJlmjYvy67c=;
-        b=jConirPWhXO5zfbTdR4kGgqwO/C966C7xHwTqDS22mpuoO3uHML9yio38tL2VVHy/N
-         d70gGsOcVIUmBTK5NW9hUoeErLAKwuGCQnojLtMmZy1JxhBaIhwno646Jt2qxI5lgbIg
-         ZSWCMzfSZ6KEWbzfsdEraal5oY4r7J6OmC5lC4tme7k8AzTzWamp0pkO3ZHcSPIZ+u21
-         dKQ20AIhjb1W6f/v6oDtM3/Ie+97r32ussLE1qkTFU3WBBz8VPGGI84fZlSlo42XYaG3
-         Bf2giFVKyyR1kxDC+pTCqIqH9jaApa/kG7zJ7yYHmqfH9toOhrD/2SzwoyhIW3p7u9NM
-         oldw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697440301; x=1698045101;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=d9BgW3N7fBm3L3q4onC3IgvyssbSs3COoJlmjYvy67c=;
-        b=ipk3P36ZGROWXKIUd0TMEf5UYBQDQ8jcfLDAFyA9r5UsgUmGKpMMk3zCgW+wgfx6Iz
-         +wl04xGu0seIKGn8F++2r7PC+mQbI3GsGu1TOBby2NyeFsGRc7mnLpPF23e7PP6p0Mys
-         74oNzQ0JkbvCu1QfqjoJzUeB7VMU1IA6w19wfpd3h3A6rrzhMizFuv81ZbjxbVW2tBRn
-         Ikl0UbO0UrBLHqwlZUE4zOGEfe/DJ5WDP86C3whzeJj/V+0FOEsD40xzcL/ty8aBYLhU
-         76Da4iVCrVEUP3zoYB7oSv1JM4SniSY11euS2W7H0ZkpGzx66s9VmFfoiHxXtuFTuBRn
-         auSQ==
-X-Gm-Message-State: AOJu0YwOGNlfy4MAYT+iLDB7gSxldBbgZu9/0j52gcNfJZQ9dnFFkadg
-	kf9SPzX5/E3M5ZZpKdne1wotvA==
-X-Google-Smtp-Source: AGHT+IEIs6XIz4BcgrL6UjHqZ7eccrdQBeHu6/iJs/nkUOuVV60OXfEgZzK/h9q3JanneEdJ0Z+E/A==
-X-Received: by 2002:a05:6a20:244f:b0:152:be08:b013 with SMTP id t15-20020a056a20244f00b00152be08b013mr34042875pzc.42.1697440301401;
-        Mon, 16 Oct 2023 00:11:41 -0700 (PDT)
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Juergen Gross <jgross@suse.com>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Viresh Kumar <viresh.kumar@linaro.org>
-Cc: Vincent Guittot <vincent.guittot@linaro.org>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	stratos-dev@op-lists.linaro.org,
-	Erik Schilling <erik.schilling@linaro.org>,
-	Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Arnd Bergmann <arnd@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH V4 0/4] xen: privcmd: Add ioeventfd and fix irqfd support
-Date: Mon, 16 Oct 2023 12:41:23 +0530
-Message-Id: <cover.1697439990.git.viresh.kumar@linaro.org>
-X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
+X-Inumbo-ID: 833d4ad6-6bf3-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1697440410; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=jcr2pDzYHZNy1Dda0U8UKlceiaygu42ICVwNg5qTdP4=;
+	b=HkoSc49ltxf8lbg2XOBGuFdQttxATY7y6c5S9nwDNSGGNwyHrceLUR1NLN1Swm1OtEBUsy
+	+obXwR7iM7tCx5/UFxB33ouYMFHJw53hJ4JsyPKBLLgFt6WzxcaAzvx9viHA/MCeyTT5IB
+	iKHibz8YrlQhtqpoKgMZtHlCOcJdXzw=
+Message-ID: <ca0690eb-1f3b-4508-9cf2-079b5ad12e26@suse.com>
+Date: Mon, 16 Oct 2023 09:13:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V4 1/4] xen: Make struct privcmd_irqfd's layout
+ architecture independent
+Content-Language: en-US
+To: Viresh Kumar <viresh.kumar@linaro.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Vincent Guittot <vincent.guittot@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ stratos-dev@op-lists.linaro.org, Erik Schilling <erik.schilling@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>, Arnd Bergmann
+ <arnd@kernel.org>, xen-devel@lists.xenproject.org,
+ linux-kernel@vger.kernel.org
+References: <cover.1697439990.git.viresh.kumar@linaro.org>
+ <a4ef0d4a68fc858b34a81fd3f9877d9b6898eb77.1697439990.git.viresh.kumar@linaro.org>
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <a4ef0d4a68fc858b34a81fd3f9877d9b6898eb77.1697439990.git.viresh.kumar@linaro.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------7bLopMXjoU08ZRDMZp9FmC0c"
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spamd-Result: default: False [-5.43 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 XM_UA_NO_VERSION(0.01)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 BAYES_HAM(-2.44)[97.42%];
+	 MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	 HAS_ATTACHMENT(0.00)[];
+	 REPLY(-4.00)[];
+	 MIME_BASE64_TEXT_BOGUS(1.00)[];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-1.00)[-1.000];
+	 MIME_BASE64_TEXT(0.10)[];
+	 RCPT_COUNT_TWELVE(0.00)[12];
+	 NEURAL_SPAM_LONG(3.00)[1.000];
+	 SIGNED_PGP(-2.00)[];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
+	 RCVD_COUNT_TWO(0.00)[2];
+	 RCVD_TLS_ALL(0.00)[];
+	 MID_RHS_MATCH_FROM(0.00)[];
+	 MIME_UNKNOWN(0.10)[application/pgp-keys]
 
-Hello,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------7bLopMXjoU08ZRDMZp9FmC0c
+Content-Type: multipart/mixed; boundary="------------umSM8HtNLj3BsM5giQwzqchk";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Viresh Kumar <viresh.kumar@linaro.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Vincent Guittot <vincent.guittot@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ stratos-dev@op-lists.linaro.org, Erik Schilling <erik.schilling@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>, Arnd Bergmann
+ <arnd@kernel.org>, xen-devel@lists.xenproject.org,
+ linux-kernel@vger.kernel.org
+Message-ID: <ca0690eb-1f3b-4508-9cf2-079b5ad12e26@suse.com>
+Subject: Re: [PATCH V4 1/4] xen: Make struct privcmd_irqfd's layout
+ architecture independent
+References: <cover.1697439990.git.viresh.kumar@linaro.org>
+ <a4ef0d4a68fc858b34a81fd3f9877d9b6898eb77.1697439990.git.viresh.kumar@linaro.org>
+In-Reply-To: <a4ef0d4a68fc858b34a81fd3f9877d9b6898eb77.1697439990.git.viresh.kumar@linaro.org>
 
-Now that irqfd support (backend to guest interrupt) is already merged, this
-series solves the other part of the problem, i.e. ioeventfd (guest to
-backend interrupt).
+--------------umSM8HtNLj3BsM5giQwzqchk
+Content-Type: multipart/mixed; boundary="------------hUjQwV6LWjai1LUbmHHPvEqX"
 
-More details inside the commits.
+--------------hUjQwV6LWjai1LUbmHHPvEqX
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Arnd reported few issues with the ioctl macro usage and argument's layout, fixed
-them for irqfd too, which was added recently.
+T24gMTYuMTAuMjMgMDk6MTEsIFZpcmVzaCBLdW1hciB3cm90ZToNCj4gVXNpbmcgaW5kaXJl
+Y3QgcG9pbnRlcnMgaW4gYW4gaW9jdGwgY29tbWFuZCBhcmd1bWVudCBtZWFucyB0aGF0IHRo
+ZQ0KPiBsYXlvdXQgaXMgYXJjaGl0ZWN0dXJlIHNwZWNpZmljLCBpbiBwYXJ0aWN1bGFyIHdl
+IGNhbid0IHVzZSB0aGUgc2FtZSBvbmUNCj4gZnJvbSAzMi1iaXQgY29tcGF0IHRhc2tzLiBU
+aGUgZ2VuZXJhbCByZWNvbW1lbmRhdGlvbiBpcyB0byBoYXZlIF9fdTY0DQo+IG1lbWJlcnMg
+YW5kIHVzZSB1NjRfdG9fdXNlcl9wdHIoKSB0byBhY2Nlc3MgaXQgZnJvbSB0aGUga2VybmVs
+IGlmIHdlIGFyZQ0KPiB1bmFibGUgdG8gYXZvaWQgdGhlIHBvaW50ZXJzIGFsdG9nZXRoZXIu
+DQo+IA0KPiBGaXhlczogZjg5NDFlNmM0YzcxICgieGVuOiBwcml2Y21kOiBBZGQgc3VwcG9y
+dCBmb3IgaXJxZmQiKQ0KPiBSZXBvcnRlZC1ieTogQXJuZCBCZXJnbWFubiA8YXJuZEBrZXJu
+ZWwub3JnPg0KPiBDbG9zZXM6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yNjhhMjAz
+MS02M2I4LTRjN2QtYjFlNS04YWI4M2NhODBiNGFAYXBwLmZhc3RtYWlsLmNvbS8NCj4gU2ln
+bmVkLW9mZi1ieTogVmlyZXNoIEt1bWFyIDx2aXJlc2gua3VtYXJAbGluYXJvLm9yZz4NCg0K
+UmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCg0KDQpKdWVy
+Z2VuDQoNCg==
+--------------hUjQwV6LWjai1LUbmHHPvEqX
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
---
-Viresh
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-V3->V4:
-- Use __u64 for indirect pointers in an ioctl command's arguments.
-- Use u64_to_user_ptr() in kernel driver to access the same.
-- Use _IOW() macro instead of the internal one: _IOC().
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
 
-V2->V3:
-- Remove explicit barriers and depend on spin lock instead to take care of it.
-- Move check for empty ioeventfds list to privcmd_ioeventfd_deassign(), which
-  could earlier call ioreq_free() even when the list wasn't empty and so we
-  returned without printing a warning in v1 earlier. V2 implemented it
-  incorrectly.
+--------------hUjQwV6LWjai1LUbmHHPvEqX--
 
-V1->V2:
-- Increment irq_info refcnt only for valid info.
-- Use u64 type for addr.
-- Add comments for use of barriers.
-- Use spin lock instead of mutex as we need to use them in irq handler.
-- Add a warning when kioreq is getting freed and ioeventfds list isn't empty.
-- Use struct_size().
-- Validate number of vcpus as well.
+--------------umSM8HtNLj3BsM5giQwzqchk--
 
-Viresh Kumar (4):
-  xen: Make struct privcmd_irqfd's layout architecture independent
-  xen: irqfd: Use _IOW instead of the internal _IOC() macro
-  xen: evtchn: Allow shared registration of IRQ handers
-  xen: privcmd: Add support for ioeventfd
+--------------7bLopMXjoU08ZRDMZp9FmC0c
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
- drivers/xen/Kconfig               |   8 +-
- drivers/xen/events/events_base.c  |   3 +-
- drivers/xen/evtchn.c              |   2 +-
- drivers/xen/privcmd.c             | 407 +++++++++++++++++++++++++++++-
- include/uapi/xen/privcmd.h        |  22 +-
- include/xen/interface/hvm/ioreq.h |  51 ++++
- 6 files changed, 482 insertions(+), 11 deletions(-)
- create mode 100644 include/xen/interface/hvm/ioreq.h
+-----BEGIN PGP SIGNATURE-----
 
--- 
-2.31.1.272.g89b43f80a514
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmUs4poFAwAAAAAACgkQsN6d1ii/Ey9K
+wgf/TbpWKyNtveS6quHg7N2m6zlLWaudPfTwKyHTKSNBnwL6drVyRBWCy4nCqHkVG47Mwki8jgdV
+XfNGx4EEfGM+tSxjJJRMt4ZqVSD1GV5cnXO0n97jzqx+4PkdK5iscLDkSOJK6MvxjXQ0toxITqzq
+U65b0zVBY7ZUY65Je4PKBCjzqh5swFN245ZD5lWkV8skCXn/U6YKT29zDtO1AP7HavNg9uTglVC/
+zxU8ncWxtduLJzfnV3ebVJ5/tTRTeFr6mE99ciKlWf888xJPLDzY3HKh/LwEFahxSFNOU2J7VEfi
+twLH75i/6Y6L1mYpzCq65Z7AkW7IeEj30xE290p8rQ==
+=zwoM
+-----END PGP SIGNATURE-----
 
+--------------7bLopMXjoU08ZRDMZp9FmC0c--
 
