@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 774BFCDB483
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26A6C46CA1
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 15:19:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.617756.960758 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.617750.960694 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsPNe-0003eq-Jk; Mon, 16 Oct 2023 15:19:42 +0000
+	id 1qsPNa-000239-3g; Mon, 16 Oct 2023 15:19:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 617756.960758; Mon, 16 Oct 2023 15:19:42 +0000
+Received: by outflank-mailman (output) from mailman id 617750.960694; Mon, 16 Oct 2023 15:19:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsPNe-0003bu-5k; Mon, 16 Oct 2023 15:19:42 +0000
-Received: by outflank-mailman (input) for mailman id 617756;
- Mon, 16 Oct 2023 15:19:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qsPNZ-00022P-V5; Mon, 16 Oct 2023 15:19:37 +0000
+Received: by outflank-mailman (input) for mailman id 617750;
+ Mon, 16 Oct 2023 15:19:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XUCO=F6=desiato.srs.infradead.org=BATV+1bdf71eab2d76d13073e+7358+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qsPNb-0001wj-GF
- for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 15:19:39 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6a8034e5-6c37-11ee-9b0e-b553b5be7939;
- Mon, 16 Oct 2023 17:19:36 +0200 (CEST)
+ <SRS0=yi9k=F6=casper.srs.infradead.org=BATV+ffd15938eba190e275bf+7358+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qsPNY-0001wi-A7
+ for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 15:19:36 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6953712c-6c37-11ee-98d4-6d05b1d4d9a1;
+ Mon, 16 Oct 2023 17:19:34 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qsPNB-0067AI-2H; Mon, 16 Oct 2023 15:19:15 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1qsPNC-006lqd-K5; Mon, 16 Oct 2023 15:19:14 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qsPNC-0005na-07; Mon, 16 Oct 2023 16:19:14 +0100
+ Linux)) id 1qsPNC-0005nm-0O; Mon, 16 Oct 2023 16:19:14 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 6a8034e5-6c37-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 6953712c-6c37-11ee-98d4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=MzyeUS8+Q6DyGG1BYkZOM8Vo8wKa2UEntgjHbKC7sqQ=; b=GJb2yG67l2i9wJHfLSPli4NmiV
-	+WTJ+STZ9PvEtXrFika2dLjRUrokj2hMR900jok8EpQMettPN7gS3FHyPQKoznf647TUOpQSYHY87
-	7NhsXIonFGtW9kxXtw/WrFVNq3USbXjMFevv9C8aamNvWluW8r5OoAlCDIqIh2MY7r95iGlt3LwPy
-	5WsUY2qda44FfRXdd6nB2ta+X7WWj3YG/9DdMeQ3M++iT+3xJ8ubaNHJ4hpP0CAXaBOr6HpHe17qm
-	Dw1r3eL81en6tel9bQMu5Y3fvInjNbKvWsdnZNPfP0uvJdUrEuS9xLq5kA/UMXrbV4xTXsKUFPxUa
-	fbe12+bQ==;
+	bh=CKGyyzKxuGsuwvI9v9sDpTYzNulOlzm/j1apww1tl2E=; b=uA3k1jxFkJRBbPY6r9+ROrl9xB
+	Ed1eunSvi3H/KfvrxrT9lP5H2djfPrnFHcFygKZj4VcGF52CxaRrHRDnTZjj+UZ4Vmx3fme2ifd+8
+	jLrO4NXss7pNWzjoHdrAHJMckswmA04WATXDPBzFy1GB/kwDx0q70Asa+juNKTadNvBADrARDRpaq
+	qED7epYAiAoHEZ4Mc691xWO7fHvrFofp1UauU0/ULASJmdaKqcMU8KUj1WRBkHIk/dO85a0houl97
+	suKAGPYQ0Sa9d51Ix6QAOP2so7mLXRySlKD02UAH/xsCQG0QNTs9AMYKlBF2zNqslKh21c7iwIGu8
+	1TscSXxA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -72,124 +72,105 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	qemu-block@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org
-Subject: [PATCH 08/12] hw/xen: do not repeatedly try to create a failing backend device
-Date: Mon, 16 Oct 2023 16:19:05 +0100
-Message-Id: <20231016151909.22133-9-dwmw2@infradead.org>
+Subject: [PATCH 11/12] hw/xen: automatically assign device index to block devices
+Date: Mon, 16 Oct 2023 16:19:08 +0100
+Message-Id: <20231016151909.22133-12-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231016151909.22133-1-dwmw2@infradead.org>
 References: <20231016151909.22133-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-If xen_backend_device_create() fails to instantiate a device, the XenBus
-code will just keep trying over and over again each time the bus is
-re-enumerated, as long as the backend appears online and in
-XenbusStateInitialising.
+There's no need to force the user to assign a vdev. We can automatically
+assign one, starting at xvda and searching until we find the first disk
+name that's unused.
 
-The only thing which prevents the XenBus code from recreating duplicates
-of devices which already exist, is the fact that xen_device_realize()
-sets the backend state to XenbusStateInitWait. If the attempt to create
-the device doesn't get *that* far, that's when it will keep getting
-retried.
-
-My first thought was to handle errors by setting the backend state to
-XenbusStateClosed, but that doesn't work for XenConsole which wants to
-*ignore* any device of type != "ioemu" completely.
-
-So, make xen_backend_device_create() *keep* the XenBackendInstance for a
-failed device, and provide a new xen_backend_exists() function to allow
-xen_bus_type_enumerate() to check whether one already exists before
-creating a new one.
+This means we can now allow '-drive if=xen,file=xxx' to work without an
+explicit separate -driver argument, just like if=virtio.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/xen/xen-backend.c         | 27 +++++++++++++++++++++------
- hw/xen/xen-bus.c             |  3 ++-
- include/hw/xen/xen-backend.h |  1 +
- 3 files changed, 24 insertions(+), 7 deletions(-)
+ blockdev.c           | 15 ++++++++++++---
+ hw/block/xen-block.c | 25 +++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+), 3 deletions(-)
 
-diff --git a/hw/xen/xen-backend.c b/hw/xen/xen-backend.c
-index 5b0fb76eae..b9bf70a9f5 100644
---- a/hw/xen/xen-backend.c
-+++ b/hw/xen/xen-backend.c
-@@ -101,6 +101,24 @@ static XenBackendInstance *xen_backend_list_find(XenDevice *xendev)
-     return NULL;
- }
- 
-+bool xen_backend_exists(const char *type, const char *name)
-+{
-+    const XenBackendImpl *impl = xen_backend_table_lookup(type);
-+    XenBackendInstance *backend;
-+
-+    if (!impl) {
-+        return false;
-+    }
-+
-+    QLIST_FOREACH(backend, &backend_list, entry) {
-+        if (backend->impl == impl && !strcmp(backend->name, name)) {
-+            return true;
-+        }
-+    }
-+
-+    return false;
-+}
-+
- static void xen_backend_list_remove(XenBackendInstance *backend)
- {
-     QLIST_REMOVE(backend, entry);
-@@ -122,11 +140,6 @@ void xen_backend_device_create(XenBus *xenbus, const char *type,
-     backend->name = g_strdup(name);
- 
-     impl->create(backend, opts, errp);
--    if (*errp) {
--        g_free(backend->name);
--        g_free(backend);
--        return;
--    }
- 
-     backend->impl = impl;
-     xen_backend_list_add(backend);
-@@ -165,7 +178,9 @@ bool xen_backend_try_device_destroy(XenDevice *xendev, Error **errp)
+diff --git a/blockdev.c b/blockdev.c
+index 325b7a3bef..9dec4c9c74 100644
+--- a/blockdev.c
++++ b/blockdev.c
+@@ -255,13 +255,13 @@ void drive_check_orphaned(void)
+          * Ignore default drives, because we create certain default
+          * drives unconditionally, then leave them unclaimed.  Not the
+          * users fault.
+-         * Ignore IF_VIRTIO, because it gets desugared into -device,
+-         * so we can leave failing to -device.
++         * Ignore IF_VIRTIO or IF_XEN, because it gets desugared into
++         * -device, so we can leave failing to -device.
+          * Ignore IF_NONE, because leaving unclaimed IF_NONE remains
+          * available for device_add is a feature.
+          */
+         if (dinfo->is_default || dinfo->type == IF_VIRTIO
+-            || dinfo->type == IF_NONE) {
++            || dinfo->type == IF_XEN || dinfo->type == IF_NONE) {
+             continue;
+         }
+         if (!blk_get_attached_dev(blk)) {
+@@ -977,6 +977,15 @@ DriveInfo *drive_new(QemuOpts *all_opts, BlockInterfaceType block_default_type,
+         qemu_opt_set(devopts, "driver", "virtio-blk", &error_abort);
+         qemu_opt_set(devopts, "drive", qdict_get_str(bs_opts, "id"),
+                      &error_abort);
++    } else if (type == IF_XEN) {
++        QemuOpts *devopts;
++        devopts = qemu_opts_create(qemu_find_opts("device"), NULL, 0,
++                                   &error_abort);
++        qemu_opt_set(devopts, "driver",
++                     (media == MEDIA_CDROM) ? "xen-cdrom" : "xen-disk",
++                     &error_abort);
++        qemu_opt_set(devopts, "drive", qdict_get_str(bs_opts, "id"),
++                     &error_abort);
      }
  
-     impl = backend->impl;
--    impl->destroy(backend, errp);
-+    if (backend->xendev) {
-+        impl->destroy(backend, errp);
+     filename = qemu_opt_get(legacy_opts, "file");
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index 9262338535..20fa783cbe 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -34,6 +34,31 @@ static char *xen_block_get_name(XenDevice *xendev, Error **errp)
+     XenBlockDevice *blockdev = XEN_BLOCK_DEVICE(xendev);
+     XenBlockVdev *vdev = &blockdev->props.vdev;
+ 
++    if (blockdev->props.vdev.type == XEN_BLOCK_VDEV_TYPE_INVALID) {
++        char name[11];
++        int disk = 0;
++        unsigned long idx;
++
++        /* Find an unoccupied device name */
++        while (disk < (1 << 20)) {
++            if (disk < (1 << 4)) {
++                idx = (202 << 8) | (disk << 4);
++            } else {
++                idx = (1 << 28) | (disk << 8);
++            }
++            snprintf(name, sizeof(name), "%lu", idx);
++            if (!xen_backend_exists("qdisk", name)) {
++                vdev->type = XEN_BLOCK_VDEV_TYPE_XVD;
++                vdev->partition = 0;
++                vdev->disk = disk;
++                vdev->number = idx;
++                return g_strdup(name);
++            }
++            disk++;
++        }
++        error_setg(errp, "cannot find device vdev for block device");
++        return NULL;
 +    }
+     return g_strdup_printf("%lu", vdev->number);
+ }
  
-     xen_backend_list_remove(backend);
-     g_free(backend->name);
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index cc524ed92c..0da2aa219a 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -209,7 +209,8 @@ static void xen_bus_type_enumerate(XenBus *xenbus, const char *type)
-                           NULL, "%u", &online) != 1)
-             online = 0;
- 
--        if (online && state == XenbusStateInitialising) {
-+        if (online && state == XenbusStateInitialising &&
-+            !xen_backend_exists(type, backend[i])) {
-             Error *local_err = NULL;
- 
-             xen_bus_backend_create(xenbus, type, backend[i], backend_path,
-diff --git a/include/hw/xen/xen-backend.h b/include/hw/xen/xen-backend.h
-index aac2fd454d..0f01631ae7 100644
---- a/include/hw/xen/xen-backend.h
-+++ b/include/hw/xen/xen-backend.h
-@@ -33,6 +33,7 @@ XenDevice *xen_backend_get_device(XenBackendInstance *backend);
- void xen_backend_register(const XenBackendInfo *info);
- const char **xen_backend_get_types(unsigned int *nr);
- 
-+bool xen_backend_exists(const char *type, const char *name);
- void xen_backend_device_create(XenBus *xenbus, const char *type,
-                                const char *name, QDict *opts, Error **errp);
- bool xen_backend_try_device_destroy(XenDevice *xendev, Error **errp);
 -- 
 2.40.1
 
