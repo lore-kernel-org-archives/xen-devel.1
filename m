@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F4FCDB465
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 07:12:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.617261.959731 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5D0CDB465
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 07:12:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.617263.959754 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsHlX-0002QR-Ft; Mon, 16 Oct 2023 07:11:51 +0000
+	id 1qsHlf-0003EF-2C; Mon, 16 Oct 2023 07:11:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 617261.959731; Mon, 16 Oct 2023 07:11:51 +0000
+Received: by outflank-mailman (output) from mailman id 617263.959754; Mon, 16 Oct 2023 07:11:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsHlX-0002Pl-AO; Mon, 16 Oct 2023 07:11:51 +0000
-Received: by outflank-mailman (input) for mailman id 617261;
- Mon, 16 Oct 2023 07:11:49 +0000
+	id 1qsHle-0003E6-VA; Mon, 16 Oct 2023 07:11:58 +0000
+Received: by outflank-mailman (input) for mailman id 617263;
+ Mon, 16 Oct 2023 07:11:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hqiJ=F6=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1qsHlV-00027t-MD
- for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 07:11:49 +0000
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [2607:f8b0:4864:20::430])
+ id 1qsHld-00027t-81
+ for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 07:11:57 +0000
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [2607:f8b0:4864:20::42d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 458c391b-6bf3-11ee-98d4-6d05b1d4d9a1;
- Mon, 16 Oct 2023 09:11:49 +0200 (CEST)
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6b77ab73c6fso1465181b3a.1
- for <xen-devel@lists.xenproject.org>; Mon, 16 Oct 2023 00:11:49 -0700 (PDT)
+ id 49b61870-6bf3-11ee-98d4-6d05b1d4d9a1;
+ Mon, 16 Oct 2023 09:11:56 +0200 (CEST)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-692c02adeefso2859800b3a.3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Oct 2023 00:11:56 -0700 (PDT)
 Received: from localhost ([122.172.80.14]) by smtp.gmail.com with ESMTPSA id
- 4-20020aa79104000000b0069305627491sm17212825pfh.159.2023.10.16.00.11.46
+ v3-20020aa799c3000000b006934a1c69f8sm395088pfi.24.2023.10.16.00.11.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 00:11:47 -0700 (PDT)
+ Mon, 16 Oct 2023 00:11:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,86 +46,678 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 458c391b-6bf3-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 49b61870-6bf3-11ee-98d4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1697440308; x=1698045108; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1697440315; x=1698045115; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=c/E6/GLx6ZozVsglJmVw75Y9W/GS8DVZN69OPx54uAk=;
-        b=Of6WYEJyFGhwPjKURhPqofzOduV/V1G344mR+1L5MDhbsaGaNIRvlVqcVXTFZGtlFF
-         TGNn2ZAalRIgpnGcPzCb2f9+EYHg5q2yo89sLD17Mpk5gR67Tolt8BSoSPgaYhztvNoQ
-         YPyV2zhLCoZnRom9Fv+uV30xKECk8l5NkHoU6V+iXw2i+G/wqd9c0eqCbbLGdf70iA6r
-         4tOwQ/QsM/skzffC1AaYh2PuxPmQztT/pyuPLYNhnz7k+SnpbvOgGnRfZqskJSdmUFHK
-         uyJNWMaG84CFlbZemmBW3cOHeDYeKbR6bsfg5KhweECXkXSqTfQIqrEo6gtDlGRsBG9S
-         vKjQ==
+        bh=r48g5ldbE+VNNgtF7EF4RNcr/h91kprDVvs75p8vKSI=;
+        b=Jo9CnEzQePUxs4UnCs4e73oE80EmWaRwplGxGIDPRwS022rFiwC2++jaZrO+tGaAQd
+         Sp+aPk6vrYz5gKY5UksVBZMt7EqzGaD6xPWtJNdXK0am7iOXfp2x8rM/hhRZpB44YwUu
+         jeS1Gxuwt81eF23fgpUYq31VixDpgXPTNapY/r+xl9PcLCqxkrFzoIj9EVaHW0RhwTkx
+         +w9xLpOI9upKXpGvSuAoB/5mcN3YJ/OOAJaedyrXrsqA4essctv4CbgQJLJm1nUpos9w
+         UZ1RIPVgcoG2wQiZpt4mJzH4L+5DOxrbeeql6Lzy3ou2jRVZ33kd8TvzlvK4K8k1rY1f
+         8ZfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697440308; x=1698045108;
+        d=1e100.net; s=20230601; t=1697440315; x=1698045115;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=c/E6/GLx6ZozVsglJmVw75Y9W/GS8DVZN69OPx54uAk=;
-        b=L2OI0x0/+w6VaJ46ppcINUQeRQ+btvF5j+DbQaedWPixtqexnTOIKhtrjjmB41bgOX
-         KzXsrEeKh0wJhVk9dRQugSNNhnrGk9mLKCtif2Jw6AMi1J7l+4ScntHh/QnEMYuOxR6k
-         2hG565wvDpgodlJSLGTmLeaPS3XGrms5BC4qUi7TRbrjfdVTxGTeb/GlwLBw27Cm8L5/
-         iITOBoY/ggSR7H3ugKvINc7odPs2e6AUVLu9Un4fhJ4041l1DP/NiUgczn3r1sECg6L6
-         2fHc5rsaMfJUQN8s/shwByDo7443Ux237c7R7JiPFdTObKSELoJAmidGrpDHQi3+rXUl
-         SZhg==
-X-Gm-Message-State: AOJu0YzUvusDcUfqcRBtGmYX1NnkiTHE2klWemUFBh8HfXWgLEu9SGeK
-	RM9+XwUUv4EpLI67NNh3+ulNUA==
-X-Google-Smtp-Source: AGHT+IE4MLkjnBefAElzY+bdBEEt2z+P5us27ZF3QfmSrVEbRNd3DDmAZ96JnRzreQ+qrlXMVJ0vpw==
-X-Received: by 2002:a05:6a00:1819:b0:68f:d44c:22f8 with SMTP id y25-20020a056a00181900b0068fd44c22f8mr10614696pfa.1.1697440307784;
-        Mon, 16 Oct 2023 00:11:47 -0700 (PDT)
+        bh=r48g5ldbE+VNNgtF7EF4RNcr/h91kprDVvs75p8vKSI=;
+        b=TC5/eTrNlCCxMRIYN5RzOobZnn7qGfUSRzK+fxY+3aHz+XHAwSrQs+/+rtTqjGx15f
+         /vGAeFaB9/4hy7h1DjT4NbI6sEwbIRHBoIHuBvYeJTOjQGd3H5xIRIVZVXU1XiuXqB54
+         csHQNgxgNsvhlKM/SyV2GDh0e0F9jKrwYiPZaUgccZj3p5Hy7zS3p6N94JOLTWqVsIyj
+         W9DRufWLbehzRcRGfJXiw8X7VWveaCt6PuiTbZ5pI8vLfLRE/pt0acQeXcCIUvoQE36F
+         FDdfNL71YsPFZW7+5Z0WiXD40wwBk0OYiwlX5cY6n9VXJboF9e2B7wJFpxaNwDBYeMi9
+         VWsA==
+X-Gm-Message-State: AOJu0YxnRE8wb8fqTYbtiEVjEuneCGtyttqp/ILDPU75YC2sGzwIH/UG
+	qbINERbvLiqNBcT7wGF3x9MIWg==
+X-Google-Smtp-Source: AGHT+IHHB66MC7xOk5/qdWrNfLmijUWBRPM1EZhOtYwehRCFf1OuZEmS/MMv65bWMHlR1aOg1Du7lw==
+X-Received: by 2002:a05:6a00:23ca:b0:6be:4228:6970 with SMTP id g10-20020a056a0023ca00b006be42286970mr486317pfc.21.1697440314607;
+        Mon, 16 Oct 2023 00:11:54 -0700 (PDT)
 From: Viresh Kumar <viresh.kumar@linaro.org>
 To: Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Viresh Kumar <viresh.kumar@linaro.org>
-Cc: Vincent Guittot <vincent.guittot@linaro.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Viresh Kumar <viresh.kumar@linaro.org>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
 	stratos-dev@op-lists.linaro.org,
 	Erik Schilling <erik.schilling@linaro.org>,
 	Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
 	Mathieu Poirier <mathieu.poirier@linaro.org>,
 	Arnd Bergmann <arnd@kernel.org>,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH V4 2/4] xen: irqfd: Use _IOW instead of the internal _IOC() macro
-Date: Mon, 16 Oct 2023 12:41:25 +0530
-Message-Id: <599ca6f1b9dd2f0e6247ea37bee3ea6827404b6d.1697439990.git.viresh.kumar@linaro.org>
+	linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH V4 4/4] xen: privcmd: Add support for ioeventfd
+Date: Mon, 16 Oct 2023 12:41:27 +0530
+Message-Id: <b20d83efba6453037d0c099912813c79c81f7714.1697439990.git.viresh.kumar@linaro.org>
 X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
 In-Reply-To: <cover.1697439990.git.viresh.kumar@linaro.org>
 References: <cover.1697439990.git.viresh.kumar@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-_IOC() an internal helper that we should not use in driver code.  In
-particular, we got the data direction wrong here, which breaks a number
-of tools, as having "_IOC_NONE" should never be paired with a nonzero
-size.
+Virtio guests send VIRTIO_MMIO_QUEUE_NOTIFY notification when they need
+to notify the backend of an update to the status of the virtqueue. The
+backend or another entity, polls the MMIO address for updates to know
+when the notification is sent.
 
-Use _IOW() instead.
+It works well if the backend does this polling by itself. But as we move
+towards generic backend implementations, we end up implementing this in
+a separate user-space program.
 
-Fixes: f8941e6c4c71 ("xen: privcmd: Add support for irqfd")
-Reported-by: Arnd Bergmann <arnd@kernel.org>
-Closes: https://lore.kernel.org/all/268a2031-63b8-4c7d-b1e5-8ab83ca80b4a@app.fastmail.com/
+Generally, the Virtio backends are implemented to work with the Eventfd
+based mechanism. In order to make such backends work with Xen, another
+software layer needs to do the polling and send an event via eventfd to
+the backend once the notification from guest is received. This results
+in an extra context switch.
+
+This is not a new problem in Linux though. It is present with other
+hypervisors like KVM, etc. as well. The generic solution implemented in
+the kernel for them is to provide an IOCTL call to pass the address to
+poll and eventfd, which lets the kernel take care of polling and raise
+an event on the eventfd, instead of handling this in user space (which
+involves an extra context switch).
+
+This patch adds similar support for xen.
+
+Inspired by existing implementations for KVM, etc..
+
+This also copies ioreq.h header file (only struct ioreq and related
+macros) from Xen's source tree (Top commit 5d84f07fe6bf ("xen/pci: drop
+remaining uses of bool_t")).
+
 Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
 ---
- include/uapi/xen/privcmd.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/xen/Kconfig               |   8 +-
+ drivers/xen/privcmd.c             | 405 +++++++++++++++++++++++++++++-
+ include/uapi/xen/privcmd.h        |  18 ++
+ include/xen/interface/hvm/ioreq.h |  51 ++++
+ 4 files changed, 476 insertions(+), 6 deletions(-)
+ create mode 100644 include/xen/interface/hvm/ioreq.h
 
+diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
+index d43153fec18e..d5989871dd5d 100644
+--- a/drivers/xen/Kconfig
++++ b/drivers/xen/Kconfig
+@@ -269,12 +269,12 @@ config XEN_PRIVCMD
+ 	  disaggregated Xen setups this driver might be needed for other
+ 	  domains, too.
+ 
+-config XEN_PRIVCMD_IRQFD
+-	bool "Xen irqfd support"
++config XEN_PRIVCMD_EVENTFD
++	bool "Xen Ioeventfd and irqfd support"
+ 	depends on XEN_PRIVCMD && XEN_VIRTIO && EVENTFD
+ 	help
+-	  Using the irqfd mechanism a virtio backend running in a daemon can
+-	  speed up interrupt injection into a guest.
++	  Using the ioeventfd / irqfd mechanism a virtio backend running in a
++	  daemon can speed up interrupt delivery from / to a guest.
+ 
+ config XEN_ACPI_PROCESSOR
+ 	tristate "Xen ACPI processor"
+diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
+index 5095bd1abea5..121e258077ea 100644
+--- a/drivers/xen/privcmd.c
++++ b/drivers/xen/privcmd.c
+@@ -29,15 +29,18 @@
+ #include <linux/seq_file.h>
+ #include <linux/miscdevice.h>
+ #include <linux/moduleparam.h>
++#include <linux/virtio_mmio.h>
+ 
+ #include <asm/xen/hypervisor.h>
+ #include <asm/xen/hypercall.h>
+ 
+ #include <xen/xen.h>
++#include <xen/events.h>
+ #include <xen/privcmd.h>
+ #include <xen/interface/xen.h>
+ #include <xen/interface/memory.h>
+ #include <xen/interface/hvm/dm_op.h>
++#include <xen/interface/hvm/ioreq.h>
+ #include <xen/features.h>
+ #include <xen/page.h>
+ #include <xen/xen-ops.h>
+@@ -782,6 +785,7 @@ static long privcmd_ioctl_mmap_resource(struct file *file,
+ 			goto out;
+ 
+ 		pages = vma->vm_private_data;
++
+ 		for (i = 0; i < kdata.num; i++) {
+ 			xen_pfn_t pfn =
+ 				page_to_xen_pfn(pages[i / XEN_PFN_PER_PAGE]);
+@@ -838,7 +842,7 @@ static long privcmd_ioctl_mmap_resource(struct file *file,
+ 	return rc;
+ }
+ 
+-#ifdef CONFIG_XEN_PRIVCMD_IRQFD
++#ifdef CONFIG_XEN_PRIVCMD_EVENTFD
+ /* Irqfd support */
+ static struct workqueue_struct *irqfd_cleanup_wq;
+ static DEFINE_MUTEX(irqfds_lock);
+@@ -1079,6 +1083,389 @@ static void privcmd_irqfd_exit(void)
+ 
+ 	destroy_workqueue(irqfd_cleanup_wq);
+ }
++
++/* Ioeventfd Support */
++#define QUEUE_NOTIFY_VQ_MASK 0xFFFF
++
++static DEFINE_MUTEX(ioreq_lock);
++static LIST_HEAD(ioreq_list);
++
++/* per-eventfd structure */
++struct privcmd_kernel_ioeventfd {
++	struct eventfd_ctx *eventfd;
++	struct list_head list;
++	u64 addr;
++	unsigned int addr_len;
++	unsigned int vq;
++};
++
++/* per-guest CPU / port structure */
++struct ioreq_port {
++	int vcpu;
++	unsigned int port;
++	struct privcmd_kernel_ioreq *kioreq;
++};
++
++/* per-guest structure */
++struct privcmd_kernel_ioreq {
++	domid_t dom;
++	unsigned int vcpus;
++	u64 uioreq;
++	struct ioreq *ioreq;
++	spinlock_t lock; /* Protects ioeventfds list */
++	struct list_head ioeventfds;
++	struct list_head list;
++	struct ioreq_port ports[0];
++};
++
++static irqreturn_t ioeventfd_interrupt(int irq, void *dev_id)
++{
++	struct ioreq_port *port = dev_id;
++	struct privcmd_kernel_ioreq *kioreq = port->kioreq;
++	struct ioreq *ioreq = &kioreq->ioreq[port->vcpu];
++	struct privcmd_kernel_ioeventfd *kioeventfd;
++	unsigned int state = STATE_IOREQ_READY;
++
++	if (ioreq->state != STATE_IOREQ_READY ||
++	    ioreq->type != IOREQ_TYPE_COPY || ioreq->dir != IOREQ_WRITE)
++		return IRQ_NONE;
++
++	/*
++	 * We need a barrier, smp_mb(), here to ensure reads are finished before
++	 * `state` is updated. Since the lock implementation ensures that
++	 * appropriate barrier will be added anyway, we can avoid adding
++	 * explicit barrier here.
++	 *
++	 * Ideally we don't need to update `state` within the locks, but we do
++	 * that here to avoid adding explicit barrier.
++	 */
++
++	spin_lock(&kioreq->lock);
++	ioreq->state = STATE_IOREQ_INPROCESS;
++
++	list_for_each_entry(kioeventfd, &kioreq->ioeventfds, list) {
++		if (ioreq->addr == kioeventfd->addr + VIRTIO_MMIO_QUEUE_NOTIFY &&
++		    ioreq->size == kioeventfd->addr_len &&
++		    (ioreq->data & QUEUE_NOTIFY_VQ_MASK) == kioeventfd->vq) {
++			eventfd_signal(kioeventfd->eventfd, 1);
++			state = STATE_IORESP_READY;
++			break;
++		}
++	}
++	spin_unlock(&kioreq->lock);
++
++	/*
++	 * We need a barrier, smp_mb(), here to ensure writes are finished
++	 * before `state` is updated. Since the lock implementation ensures that
++	 * appropriate barrier will be added anyway, we can avoid adding
++	 * explicit barrier here.
++	 */
++
++	ioreq->state = state;
++
++	if (state == STATE_IORESP_READY) {
++		notify_remote_via_evtchn(port->port);
++		return IRQ_HANDLED;
++	}
++
++	return IRQ_NONE;
++}
++
++static void ioreq_free(struct privcmd_kernel_ioreq *kioreq)
++{
++	struct ioreq_port *ports = kioreq->ports;
++	int i;
++
++	lockdep_assert_held(&ioreq_lock);
++
++	list_del(&kioreq->list);
++
++	for (i = kioreq->vcpus - 1; i >= 0; i--)
++		unbind_from_irqhandler(irq_from_evtchn(ports[i].port), &ports[i]);
++
++	kfree(kioreq);
++}
++
++static
++struct privcmd_kernel_ioreq *alloc_ioreq(struct privcmd_ioeventfd *ioeventfd)
++{
++	struct privcmd_kernel_ioreq *kioreq;
++	struct mm_struct *mm = current->mm;
++	struct vm_area_struct *vma;
++	struct page **pages;
++	unsigned int *ports;
++	int ret, size, i;
++
++	lockdep_assert_held(&ioreq_lock);
++
++	size = struct_size(kioreq, ports, ioeventfd->vcpus);
++	kioreq = kzalloc(size, GFP_KERNEL);
++	if (!kioreq)
++		return ERR_PTR(-ENOMEM);
++
++	kioreq->dom = ioeventfd->dom;
++	kioreq->vcpus = ioeventfd->vcpus;
++	kioreq->uioreq = ioeventfd->ioreq;
++	spin_lock_init(&kioreq->lock);
++	INIT_LIST_HEAD(&kioreq->ioeventfds);
++
++	/* The memory for ioreq server must have been mapped earlier */
++	mmap_write_lock(mm);
++	vma = find_vma(mm, (unsigned long)ioeventfd->ioreq);
++	if (!vma) {
++		pr_err("Failed to find vma for ioreq page!\n");
++		mmap_write_unlock(mm);
++		ret = -EFAULT;
++		goto error_kfree;
++	}
++
++	pages = vma->vm_private_data;
++	kioreq->ioreq = (struct ioreq *)(page_to_virt(pages[0]));
++	mmap_write_unlock(mm);
++
++	size = sizeof(*ports) * kioreq->vcpus;
++	ports = kzalloc(size, GFP_KERNEL);
++	if (!ports) {
++		ret = -ENOMEM;
++		goto error_kfree;
++	}
++
++	if (copy_from_user(ports, u64_to_user_ptr(ioeventfd->ports), size)) {
++		ret = -EFAULT;
++		goto error_kfree_ports;
++	}
++
++	for (i = 0; i < kioreq->vcpus; i++) {
++		kioreq->ports[i].vcpu = i;
++		kioreq->ports[i].port = ports[i];
++		kioreq->ports[i].kioreq = kioreq;
++
++		ret = bind_evtchn_to_irqhandler_lateeoi(ports[i],
++				ioeventfd_interrupt, IRQF_SHARED, "ioeventfd",
++				&kioreq->ports[i]);
++		if (ret < 0)
++			goto error_unbind;
++	}
++
++	kfree(ports);
++
++	list_add_tail(&kioreq->list, &ioreq_list);
++
++	return kioreq;
++
++error_unbind:
++	while (--i >= 0)
++		unbind_from_irqhandler(irq_from_evtchn(ports[i]), &kioreq->ports[i]);
++error_kfree_ports:
++	kfree(ports);
++error_kfree:
++	kfree(kioreq);
++	return ERR_PTR(ret);
++}
++
++static struct privcmd_kernel_ioreq *
++get_ioreq(struct privcmd_ioeventfd *ioeventfd, struct eventfd_ctx *eventfd)
++{
++	struct privcmd_kernel_ioreq *kioreq;
++	unsigned long flags;
++
++	list_for_each_entry(kioreq, &ioreq_list, list) {
++		struct privcmd_kernel_ioeventfd *kioeventfd;
++
++		/*
++		 * kioreq fields can be accessed here without a lock as they are
++		 * never updated after being added to the ioreq_list.
++		 */
++		if (kioreq->uioreq != ioeventfd->ioreq) {
++			continue;
++		} else if (kioreq->dom != ioeventfd->dom ||
++			   kioreq->vcpus != ioeventfd->vcpus) {
++			pr_err("Invalid ioeventfd configuration mismatch, dom (%u vs %u), vcpus (%u vs %u)\n",
++			       kioreq->dom, ioeventfd->dom, kioreq->vcpus,
++			       ioeventfd->vcpus);
++			return ERR_PTR(-EINVAL);
++		}
++
++		/* Look for a duplicate eventfd for the same guest */
++		spin_lock_irqsave(&kioreq->lock, flags);
++		list_for_each_entry(kioeventfd, &kioreq->ioeventfds, list) {
++			if (eventfd == kioeventfd->eventfd) {
++				spin_unlock_irqrestore(&kioreq->lock, flags);
++				return ERR_PTR(-EBUSY);
++			}
++		}
++		spin_unlock_irqrestore(&kioreq->lock, flags);
++
++		return kioreq;
++	}
++
++	/* Matching kioreq isn't found, allocate a new one */
++	return alloc_ioreq(ioeventfd);
++}
++
++static void ioeventfd_free(struct privcmd_kernel_ioeventfd *kioeventfd)
++{
++	list_del(&kioeventfd->list);
++	eventfd_ctx_put(kioeventfd->eventfd);
++	kfree(kioeventfd);
++}
++
++static int privcmd_ioeventfd_assign(struct privcmd_ioeventfd *ioeventfd)
++{
++	struct privcmd_kernel_ioeventfd *kioeventfd;
++	struct privcmd_kernel_ioreq *kioreq;
++	unsigned long flags;
++	struct fd f;
++	int ret;
++
++	/* Check for range overflow */
++	if (ioeventfd->addr + ioeventfd->addr_len < ioeventfd->addr)
++		return -EINVAL;
++
++	/* Vhost requires us to support length 1, 2, 4, and 8 */
++	if (!(ioeventfd->addr_len == 1 || ioeventfd->addr_len == 2 ||
++	      ioeventfd->addr_len == 4 || ioeventfd->addr_len == 8))
++		return -EINVAL;
++
++	/* 4096 vcpus limit enough ? */
++	if (!ioeventfd->vcpus || ioeventfd->vcpus > 4096)
++		return -EINVAL;
++
++	kioeventfd = kzalloc(sizeof(*kioeventfd), GFP_KERNEL);
++	if (!kioeventfd)
++		return -ENOMEM;
++
++	f = fdget(ioeventfd->event_fd);
++	if (!f.file) {
++		ret = -EBADF;
++		goto error_kfree;
++	}
++
++	kioeventfd->eventfd = eventfd_ctx_fileget(f.file);
++	fdput(f);
++
++	if (IS_ERR(kioeventfd->eventfd)) {
++		ret = PTR_ERR(kioeventfd->eventfd);
++		goto error_kfree;
++	}
++
++	kioeventfd->addr = ioeventfd->addr;
++	kioeventfd->addr_len = ioeventfd->addr_len;
++	kioeventfd->vq = ioeventfd->vq;
++
++	mutex_lock(&ioreq_lock);
++	kioreq = get_ioreq(ioeventfd, kioeventfd->eventfd);
++	if (IS_ERR(kioreq)) {
++		mutex_unlock(&ioreq_lock);
++		ret = PTR_ERR(kioreq);
++		goto error_eventfd;
++	}
++
++	spin_lock_irqsave(&kioreq->lock, flags);
++	list_add_tail(&kioeventfd->list, &kioreq->ioeventfds);
++	spin_unlock_irqrestore(&kioreq->lock, flags);
++
++	mutex_unlock(&ioreq_lock);
++
++	return 0;
++
++error_eventfd:
++	eventfd_ctx_put(kioeventfd->eventfd);
++
++error_kfree:
++	kfree(kioeventfd);
++	return ret;
++}
++
++static int privcmd_ioeventfd_deassign(struct privcmd_ioeventfd *ioeventfd)
++{
++	struct privcmd_kernel_ioreq *kioreq, *tkioreq;
++	struct eventfd_ctx *eventfd;
++	unsigned long flags;
++	int ret = 0;
++
++	eventfd = eventfd_ctx_fdget(ioeventfd->event_fd);
++	if (IS_ERR(eventfd))
++		return PTR_ERR(eventfd);
++
++	mutex_lock(&ioreq_lock);
++	list_for_each_entry_safe(kioreq, tkioreq, &ioreq_list, list) {
++		struct privcmd_kernel_ioeventfd *kioeventfd, *tmp;
++		/*
++		 * kioreq fields can be accessed here without a lock as they are
++		 * never updated after being added to the ioreq_list.
++		 */
++		if (kioreq->dom != ioeventfd->dom ||
++		    kioreq->uioreq != ioeventfd->ioreq ||
++		    kioreq->vcpus != ioeventfd->vcpus)
++			continue;
++
++		spin_lock_irqsave(&kioreq->lock, flags);
++		list_for_each_entry_safe(kioeventfd, tmp, &kioreq->ioeventfds, list) {
++			if (eventfd == kioeventfd->eventfd) {
++				ioeventfd_free(kioeventfd);
++				spin_unlock_irqrestore(&kioreq->lock, flags);
++
++				if (list_empty(&kioreq->ioeventfds))
++					ioreq_free(kioreq);
++				goto unlock;
++			}
++		}
++		spin_unlock_irqrestore(&kioreq->lock, flags);
++		break;
++	}
++
++	pr_err("Ioeventfd isn't already assigned, dom: %u, addr: %llu\n",
++	       ioeventfd->dom, ioeventfd->addr);
++	ret = -ENODEV;
++
++unlock:
++	mutex_unlock(&ioreq_lock);
++	eventfd_ctx_put(eventfd);
++
++	return ret;
++}
++
++static long privcmd_ioctl_ioeventfd(struct file *file, void __user *udata)
++{
++	struct privcmd_data *data = file->private_data;
++	struct privcmd_ioeventfd ioeventfd;
++
++	if (copy_from_user(&ioeventfd, udata, sizeof(ioeventfd)))
++		return -EFAULT;
++
++	/* No other flags should be set */
++	if (ioeventfd.flags & ~PRIVCMD_IOEVENTFD_FLAG_DEASSIGN)
++		return -EINVAL;
++
++	/* If restriction is in place, check the domid matches */
++	if (data->domid != DOMID_INVALID && data->domid != ioeventfd.dom)
++		return -EPERM;
++
++	if (ioeventfd.flags & PRIVCMD_IOEVENTFD_FLAG_DEASSIGN)
++		return privcmd_ioeventfd_deassign(&ioeventfd);
++
++	return privcmd_ioeventfd_assign(&ioeventfd);
++}
++
++static void privcmd_ioeventfd_exit(void)
++{
++	struct privcmd_kernel_ioreq *kioreq, *tmp;
++	unsigned long flags;
++
++	mutex_lock(&ioreq_lock);
++	list_for_each_entry_safe(kioreq, tmp, &ioreq_list, list) {
++		struct privcmd_kernel_ioeventfd *kioeventfd, *tmp;
++
++		spin_lock_irqsave(&kioreq->lock, flags);
++		list_for_each_entry_safe(kioeventfd, tmp, &kioreq->ioeventfds, list)
++			ioeventfd_free(kioeventfd);
++		spin_unlock_irqrestore(&kioreq->lock, flags);
++
++		ioreq_free(kioreq);
++	}
++	mutex_unlock(&ioreq_lock);
++}
+ #else
+ static inline long privcmd_ioctl_irqfd(struct file *file, void __user *udata)
+ {
+@@ -1093,7 +1480,16 @@ static inline int privcmd_irqfd_init(void)
+ static inline void privcmd_irqfd_exit(void)
+ {
+ }
+-#endif /* CONFIG_XEN_PRIVCMD_IRQFD */
++
++static inline long privcmd_ioctl_ioeventfd(struct file *file, void __user *udata)
++{
++	return -EOPNOTSUPP;
++}
++
++static inline void privcmd_ioeventfd_exit(void)
++{
++}
++#endif /* CONFIG_XEN_PRIVCMD_EVENTFD */
+ 
+ static long privcmd_ioctl(struct file *file,
+ 			  unsigned int cmd, unsigned long data)
+@@ -1134,6 +1530,10 @@ static long privcmd_ioctl(struct file *file,
+ 		ret = privcmd_ioctl_irqfd(file, udata);
+ 		break;
+ 
++	case IOCTL_PRIVCMD_IOEVENTFD:
++		ret = privcmd_ioctl_ioeventfd(file, udata);
++		break;
++
+ 	default:
+ 		break;
+ 	}
+@@ -1278,6 +1678,7 @@ static int __init privcmd_init(void)
+ 
+ static void __exit privcmd_exit(void)
+ {
++	privcmd_ioeventfd_exit();
+ 	privcmd_irqfd_exit();
+ 	misc_deregister(&privcmd_dev);
+ 	misc_deregister(&xen_privcmdbuf_dev);
 diff --git a/include/uapi/xen/privcmd.h b/include/uapi/xen/privcmd.h
-index b143fafce84d..e145bca5105c 100644
+index e145bca5105c..8b8c5d1420fe 100644
 --- a/include/uapi/xen/privcmd.h
 +++ b/include/uapi/xen/privcmd.h
-@@ -138,6 +138,6 @@ struct privcmd_irqfd {
- #define IOCTL_PRIVCMD_MMAP_RESOURCE				\
+@@ -110,6 +110,22 @@ struct privcmd_irqfd {
+ 	__u8 pad[2];
+ };
+ 
++/* For privcmd_ioeventfd::flags */
++#define PRIVCMD_IOEVENTFD_FLAG_DEASSIGN (1 << 0)
++
++struct privcmd_ioeventfd {
++	__u64 ioreq;
++	__u64 ports;
++	__u64 addr;
++	__u32 addr_len;
++	__u32 event_fd;
++	__u32 vcpus;
++	__u32 vq;
++	__u32 flags;
++	domid_t dom;
++	__u8 pad[2];
++};
++
+ /*
+  * @cmd: IOCTL_PRIVCMD_HYPERCALL
+  * @arg: &privcmd_hypercall_t
+@@ -139,5 +155,7 @@ struct privcmd_irqfd {
  	_IOC(_IOC_NONE, 'P', 7, sizeof(struct privcmd_mmap_resource))
  #define IOCTL_PRIVCMD_IRQFD					\
--	_IOC(_IOC_NONE, 'P', 8, sizeof(struct privcmd_irqfd))
-+	_IOW('P', 8, struct privcmd_irqfd)
+ 	_IOW('P', 8, struct privcmd_irqfd)
++#define IOCTL_PRIVCMD_IOEVENTFD					\
++	_IOW('P', 9, struct privcmd_ioeventfd)
  
  #endif /* __LINUX_PUBLIC_PRIVCMD_H__ */
+diff --git a/include/xen/interface/hvm/ioreq.h b/include/xen/interface/hvm/ioreq.h
+new file mode 100644
+index 000000000000..b02cfeae7eb5
+--- /dev/null
++++ b/include/xen/interface/hvm/ioreq.h
+@@ -0,0 +1,51 @@
++/* SPDX-License-Identifier: MIT */
++/*
++ * ioreq.h: I/O request definitions for device models
++ * Copyright (c) 2004, Intel Corporation.
++ */
++
++#ifndef __XEN_PUBLIC_HVM_IOREQ_H__
++#define __XEN_PUBLIC_HVM_IOREQ_H__
++
++#define IOREQ_READ      1
++#define IOREQ_WRITE     0
++
++#define STATE_IOREQ_NONE        0
++#define STATE_IOREQ_READY       1
++#define STATE_IOREQ_INPROCESS   2
++#define STATE_IORESP_READY      3
++
++#define IOREQ_TYPE_PIO          0 /* pio */
++#define IOREQ_TYPE_COPY         1 /* mmio ops */
++#define IOREQ_TYPE_PCI_CONFIG   2
++#define IOREQ_TYPE_TIMEOFFSET   7
++#define IOREQ_TYPE_INVALIDATE   8 /* mapcache */
++
++/*
++ * VMExit dispatcher should cooperate with instruction decoder to
++ * prepare this structure and notify service OS and DM by sending
++ * virq.
++ *
++ * For I/O type IOREQ_TYPE_PCI_CONFIG, the physical address is formatted
++ * as follows:
++ *
++ * 63....48|47..40|39..35|34..32|31........0
++ * SEGMENT |BUS   |DEV   |FN    |OFFSET
++ */
++struct ioreq {
++	uint64_t addr;          /* physical address */
++	uint64_t data;          /* data (or paddr of data) */
++	uint32_t count;         /* for rep prefixes */
++	uint32_t size;          /* size in bytes */
++	uint32_t vp_eport;      /* evtchn for notifications to/from device model */
++	uint16_t _pad0;
++	uint8_t state:4;
++	uint8_t data_is_ptr:1;  /* if 1, data above is the guest paddr
++				 * of the real data to use. */
++	uint8_t dir:1;          /* 1=read, 0=write */
++	uint8_t df:1;
++	uint8_t _pad1:1;
++	uint8_t type;           /* I/O type */
++};
++
++#endif /* __XEN_PUBLIC_HVM_IOREQ_H__ */
 -- 
 2.31.1.272.g89b43f80a514
 
