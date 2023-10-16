@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0990CDB484
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 15:19:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.617752.960709 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55548CDB487
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 15:19:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.617755.960745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsPNa-0002P6-UZ; Mon, 16 Oct 2023 15:19:38 +0000
+	id 1qsPNd-0003OM-JZ; Mon, 16 Oct 2023 15:19:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 617752.960709; Mon, 16 Oct 2023 15:19:38 +0000
+Received: by outflank-mailman (output) from mailman id 617755.960745; Mon, 16 Oct 2023 15:19:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsPNa-0002Jd-Na; Mon, 16 Oct 2023 15:19:38 +0000
-Received: by outflank-mailman (input) for mailman id 617752;
- Mon, 16 Oct 2023 15:19:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qsPNd-0003L9-DM; Mon, 16 Oct 2023 15:19:41 +0000
+Received: by outflank-mailman (input) for mailman id 617755;
+ Mon, 16 Oct 2023 15:19:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yi9k=F6=casper.srs.infradead.org=BATV+ffd15938eba190e275bf+7358+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qsPNY-0001wi-S1
- for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 15:19:36 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6a0a8dc3-6c37-11ee-98d4-6d05b1d4d9a1;
+ <SRS0=XUCO=F6=desiato.srs.infradead.org=BATV+1bdf71eab2d76d13073e+7358+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qsPNb-0001wj-3Y
+ for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 15:19:39 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6a187ae1-6c37-11ee-9b0e-b553b5be7939;
  Mon, 16 Oct 2023 17:19:35 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qsPNC-006lqY-2R; Mon, 16 Oct 2023 15:19:14 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qsPNB-0067AH-2I; Mon, 16 Oct 2023 15:19:15 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qsPNB-0005n8-27; Mon, 16 Oct 2023 16:19:13 +0100
+ Linux)) id 1qsPNB-0005nK-2S; Mon, 16 Oct 2023 16:19:13 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 6a0a8dc3-6c37-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 6a187ae1-6c37-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=vtO5N+wDv4TrwwTv9zLMoxCNzI1zqbUwBjGBebK9mtU=; b=VytKiJSn6jDj/vFvhCOH+pzA+G
-	hNoBp0fpQwayhvdjr2fGGMYnebOK+W9bolWMK3n10K6ocwhz7jBgMf10Dp4DKZgQWM24VmEvfTIsE
-	BZb05ZDYRAQ2flMzqF/Wpj+6ewIlRuJG5zXq1par0JIOpljTKHvpNrC8EohvEaqA+jbnW5LlQEdqC
-	TMs9W7hXJxB0RczoRR+VMHhxzhgqntDLNFLucvRN+++GPz7esDSR48LH0HkiDfuQDozgqbnwlx3EG
-	GObBhsnpZgllt6nksabXqe90NabHtijgMAggzFnDlDfBwqXFegA1Rr1sdawRi/6Q7Ls9L3W7875C/
-	CDyI0V6A==;
+	bh=iXDULQVzCobMyEZ4WUylbwZd7CUi+M/tuPLUTKt/3jw=; b=l1d5jbcw6JNVUwXd23LtcOWIrz
+	awoQAWR2TcM4l7zFuNYfHDL5IW5doK4mER0sDrz9GFfi7g/6TGn1GKF7Nh4SXaBj7lExkZqV/6OBu
+	BFw1UTrhAyKXsOt9PwCTU2pMxqKJdP2htFgualbxn+lvN/uSw/zpRypzgvobUd3b+niKIDlRnOUN0
+	y25iFrORunLd1zKmTJ4gAmMrkYqYU3tM4LCEhYMpEqbeBcCd11W2GY5HtBdadVn3PG+6tuK2XfGfg
+	nLsgelc99k1Us9mOk0LZPdAD9438EocKtKfbD+cMKYAq2PLkAUu3jedsBUI2LXJKDiK3BJ8DZHlBK
+	82Uotnsw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -72,56 +72,42 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	qemu-block@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org
-Subject: [PATCH 01/12] i386/xen: fix per-vCPU upcall vector for Xen emulation
-Date: Mon, 16 Oct 2023 16:18:58 +0100
-Message-Id: <20231016151909.22133-2-dwmw2@infradead.org>
+Subject: [PATCH 04/12] i386/xen: advertise XEN_HVM_CPUID_UPCALL_VECTOR in CPUID
+Date: Mon, 16 Oct 2023 16:19:01 +0100
+Message-Id: <20231016151909.22133-5-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231016151909.22133-1-dwmw2@infradead.org>
 References: <20231016151909.22133-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The per-vCPU upcall vector support had two problems. Firstly it was
-using the wrong hypercall argument and would always return -EFAULT.
-And secondly it was using the wrong ioctl() to pass the vector to
-the kernel and thus the *kernel* would always return -EINVAL.
+This will allow Linux guests (since v6.0) to use the per-vCPU upcall
+vector delivered as MSI through the local APIC.
 
-Linux doesn't (yet) use this mode so it went without decent testing
-for a while.
-
-Fixes: 105b47fdf2d0 ("i386/xen: implement HVMOP_set_evtchn_upcall_vector")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- target/i386/kvm/xen-emu.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ target/i386/kvm/kvm.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
-index c4fa84a982..b49a840438 100644
---- a/target/i386/kvm/xen-emu.c
-+++ b/target/i386/kvm/xen-emu.c
-@@ -306,7 +306,7 @@ static int kvm_xen_set_vcpu_callback_vector(CPUState *cs)
+diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+index f6c7f7e268..8bdbdcdffe 100644
+--- a/target/i386/kvm/kvm.c
++++ b/target/i386/kvm/kvm.c
+@@ -1887,6 +1887,10 @@ int kvm_arch_init_vcpu(CPUState *cs)
+                 c->eax |= XEN_HVM_CPUID_VCPU_ID_PRESENT;
+                 c->ebx = cs->cpu_index;
+             }
++
++            if (cs->kvm_state->xen_version >= XEN_VERSION(4, 17)) {
++                c->eax |= XEN_HVM_CPUID_UPCALL_VECTOR;
++            }
+         }
  
-     trace_kvm_xen_set_vcpu_callback(cs->cpu_index, vector);
- 
--    return kvm_vcpu_ioctl(cs, KVM_XEN_HVM_SET_ATTR, &xva);
-+    return kvm_vcpu_ioctl(cs, KVM_XEN_VCPU_SET_ATTR, &xva);
- }
- 
- static void do_set_vcpu_callback_vector(CPUState *cs, run_on_cpu_data data)
-@@ -849,8 +849,7 @@ static bool kvm_xen_hcall_hvm_op(struct kvm_xen_exit *exit, X86CPU *cpu,
-     int ret = -ENOSYS;
-     switch (cmd) {
-     case HVMOP_set_evtchn_upcall_vector:
--        ret = kvm_xen_hcall_evtchn_upcall_vector(exit, cpu,
--                                                 exit->u.hcall.params[0]);
-+        ret = kvm_xen_hcall_evtchn_upcall_vector(exit, cpu, arg);
-         break;
- 
-     case HVMOP_pagetable_dying:
+         r = kvm_xen_init_vcpu(cs);
 -- 
 2.40.1
 
