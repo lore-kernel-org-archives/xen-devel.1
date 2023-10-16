@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E48ACDB474
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 15:20:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.617749.960689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB522CDB474
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Oct 2023 15:20:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.617757.960762 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsPNZ-0001zi-RI; Mon, 16 Oct 2023 15:19:37 +0000
+	id 1qsPNf-0003sy-6D; Mon, 16 Oct 2023 15:19:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 617749.960689; Mon, 16 Oct 2023 15:19:37 +0000
+Received: by outflank-mailman (output) from mailman id 617757.960762; Mon, 16 Oct 2023 15:19:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qsPNZ-0001zF-OM; Mon, 16 Oct 2023 15:19:37 +0000
-Received: by outflank-mailman (input) for mailman id 617749;
- Mon, 16 Oct 2023 15:19:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qsPNf-0003qr-0b; Mon, 16 Oct 2023 15:19:43 +0000
+Received: by outflank-mailman (input) for mailman id 617757;
+ Mon, 16 Oct 2023 15:19:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yi9k=F6=casper.srs.infradead.org=BATV+ffd15938eba190e275bf+7358+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qsPNX-0001wi-6Q
- for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 15:19:36 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 68b73170-6c37-11ee-98d4-6d05b1d4d9a1;
- Mon, 16 Oct 2023 17:19:34 +0200 (CEST)
+ <SRS0=XUCO=F6=desiato.srs.infradead.org=BATV+1bdf71eab2d76d13073e+7358+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qsPNc-0001wj-GK
+ for xen-devel@lists.xenproject.org; Mon, 16 Oct 2023 15:19:40 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6b0e86a4-6c37-11ee-9b0e-b553b5be7939;
+ Mon, 16 Oct 2023 17:19:37 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qsPNC-006lqX-62; Mon, 16 Oct 2023 15:19:14 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qsPNB-0067AJ-2F; Mon, 16 Oct 2023 15:19:15 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qsPNB-0005n5-1t; Mon, 16 Oct 2023 16:19:13 +0100
+ Linux)) id 1qsPNC-0005ne-0D; Mon, 16 Oct 2023 16:19:14 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 68b73170-6c37-11ee-98d4-6d05b1d4d9a1
+X-Inumbo-ID: 6b0e86a4-6c37-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=F3UjuhE2FBKcmgLerw1NnKKsKaQ1Vv0F+THBpoMNMME=; b=RUe0h4t2PDLQe/PbrYmnoJGzBv
-	XpnXvqi6OUXrxehffQ1Zf3iom+dmkFdob8j4mg/Fas49lSB23CT9QoY4sPBHT4gD/sj7ySvs5Vrf1
-	YlBGiPXcApj99d7zg4CiWufTxxd6zJETNOAbQpUZHP7JI/G6hkT4XxZ/Vg0SWIAYmhNl6AkpgMA63
-	e2cWIx2oNICYJZFTgnao0HZdGFu0FriQCdSWlVoDiXrgJFb4ucufo8yvmCSkO1VpYxIYLfrsie/tz
-	29KhaPmM8aD222XRsxlZECZiMS8rBg9NJydMRO9W4S4Ltm38AFPXw/MPQ+HkcdEr5AesYJTRLYIP9
-	SYkllKNQ==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=TdW7pWLHlLv278eB+Yc1VQQLRAc6P36ZNDdKDPh28m0=; b=RGDymOaeG8K1D/v44ruA5TZh8q
+	yIisakCcpuamBOij8UlBgpYUEpR1D1wEBLaWOSU+ss27q//FiVgfKJeg7VS8pbyC9PsQmXmwnrOmW
+	o5iVb9ww1iBkPJhyOi7Sc43Xfr7YBbFVdfusAPOOwRATZNOM2ObJhyC7K66YjP+S5gUOdMo0pr9mK
+	Jo+USZWvusMx/TNmvhcGTcsrSwDS5+1Z1bYJmgYpEilt7n2HkBGrvg+D7T8zHfi73sb2dEblB7LX2
+	iNt0YZiJQwK3W1lkbDeL4VfcIg9XkLaUoqSE48WawQUxp9Q87L69aiRbTfJZJYSkjK1T/tBHXRNPD
+	lvQikPAQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -72,75 +72,234 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	qemu-block@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org
-Subject: [PATCH 0/12] Get Xen PV shim running in qemu
-Date: Mon, 16 Oct 2023 16:18:57 +0100
-Message-Id: <20231016151909.22133-1-dwmw2@infradead.org>
+Subject: [PATCH 09/12] hw/xen: prevent duplicate device registrations
+Date: Mon, 16 Oct 2023 16:19:06 +0100
+Message-Id: <20231016151909.22133-10-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231016151909.22133-1-dwmw2@infradead.org>
+References: <20231016151909.22133-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-I hadn't got round to getting the PV shim running yet; I thought it would
-need work on the multiboot loader. Turns out it doesn't. I *did* need to
-fix a couple of brown-paper-bag bugs in the per-vCPU upcall vector support,
-and implement Xen console support though. Now I can test PV guests:
+From: David Woodhouse <dwmw@amazon.co.uk>
 
- $ qemu-system-x86_64 --accel kvm,xen-version=0x40011,kernel-irqchip=split \
-   -chardev stdio,mux=on,id=char0 -device xen-console,chardev=char0 \
-   -drive file=${GUEST_IMAGE},if=xen -display none -m 1G \
-   -kernel ~/git/xen/xen/xen -initrd ~/git/linux/arch/x86/boot/bzImage \
-   -append "loglvl=all -- console=hvc0 root=/dev/xvda1"
+Ensure that we have a XenBackendInstance for every device regardless
+of whether it was "discovered" in XenStore or created directly in QEMU.
 
- blockdev.c                                     |  15 +++-
- hw/block/xen-block.c                           |  26 +++++-
- hw/char/trace-events                           |   8 ++
- hw/char/xen_console.c                          | 522 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--------------------------
- hw/i386/kvm/meson.build                        |   1 +
- hw/i386/kvm/trace-events                       |   2 +
- hw/i386/kvm/xen-stubs.c                        |   5 ++
- hw/i386/kvm/xen_evtchn.c                       |   6 ++
- hw/i386/kvm/xen_gnttab.c                       |  32 ++++++-
- hw/i386/kvm/xen_primary_console.c              | 167 ++++++++++++++++++++++++++++++++++
- hw/i386/kvm/xen_primary_console.h              |  22 +++++
- hw/i386/kvm/xen_xenstore.c                     |  21 ++++-
- hw/xen/xen-backend.c                           |  81 +++++++++++++----
- hw/xen/xen-bus.c                               |  21 ++++-
- hw/xen/xen-legacy-backend.c                    |   1 -
- include/hw/xen/interface/arch-arm.h            |  37 ++++----
- include/hw/xen/interface/arch-x86/cpuid.h      |  31 +++----
- include/hw/xen/interface/arch-x86/xen-x86_32.h |  19 +---
- include/hw/xen/interface/arch-x86/xen-x86_64.h |  19 +---
- include/hw/xen/interface/arch-x86/xen.h        |  26 +-----
- include/hw/xen/interface/event_channel.h       |  19 +---
- include/hw/xen/interface/features.h            |  19 +---
- include/hw/xen/interface/grant_table.h         |  19 +---
- include/hw/xen/interface/hvm/hvm_op.h          |  19 +---
- include/hw/xen/interface/hvm/params.h          |  19 +---
- include/hw/xen/interface/io/blkif.h            |  27 ++----
- include/hw/xen/interface/io/console.h          |  19 +---
- include/hw/xen/interface/io/fbif.h             |  19 +---
- include/hw/xen/interface/io/kbdif.h            |  19 +---
- include/hw/xen/interface/io/netif.h            |  25 ++----
- include/hw/xen/interface/io/protocols.h        |  19 +---
- include/hw/xen/interface/io/ring.h             |  49 +++++-----
- include/hw/xen/interface/io/usbif.h            |  19 +---
- include/hw/xen/interface/io/xenbus.h           |  19 +---
- include/hw/xen/interface/io/xs_wire.h          |  36 ++++----
- include/hw/xen/interface/memory.h              |  30 +++----
- include/hw/xen/interface/physdev.h             |  23 +----
- include/hw/xen/interface/sched.h               |  19 +---
- include/hw/xen/interface/trace.h               |  19 +---
- include/hw/xen/interface/vcpu.h                |  19 +---
- include/hw/xen/interface/version.h             |  19 +---
- include/hw/xen/interface/xen-compat.h          |  19 +---
- include/hw/xen/interface/xen.h                 |  19 +---
- include/hw/xen/xen-backend.h                   |   4 +
- include/hw/xen/xen-bus.h                       |   2 +
- include/sysemu/kvm_xen.h                       |   1 +
- target/i386/kvm/kvm.c                          |   4 +
- target/i386/kvm/xen-emu.c                      |  35 ++++++--
- 48 files changed, 941 insertions(+), 680 deletions(-)
+This allows the backend_list to be a source of truth about whether a
+given backend exists, and allows us to reject duplicates.
 
+This also cleans up the fact that backend drivers were calling
+xen_backend_set_device() with a XenDevice immediately after calling
+qdev_realize_and_unref() on it, when it wasn't theirs to play with any
+more.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ hw/block/xen-block.c         |  1 -
+ hw/char/xen_console.c        |  2 +-
+ hw/xen/xen-backend.c         | 78 ++++++++++++++++++++++++++----------
+ hw/xen/xen-bus.c             |  8 ++++
+ include/hw/xen/xen-backend.h |  3 ++
+ 5 files changed, 69 insertions(+), 23 deletions(-)
+
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index a07cd7eb5d..9262338535 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -975,7 +975,6 @@ static void xen_block_device_create(XenBackendInstance *backend,
+         goto fail;
+     }
+ 
+-    xen_backend_set_device(backend, xendev);
+     return;
+ 
+ fail:
+diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
+index bd20be116c..2825b8c511 100644
+--- a/hw/char/xen_console.c
++++ b/hw/char/xen_console.c
+@@ -468,7 +468,7 @@ static void xen_console_device_create(XenBackendInstance *backend,
+     Chardev *cd = NULL;
+     struct qemu_xs_handle *xsh = xenbus->xsh;
+ 
+-    if (qemu_strtoul(name, NULL, 10, &number)) {
++    if (qemu_strtoul(name, NULL, 10, &number) || number >= INT_MAX) {
+         error_setg(errp, "failed to parse name '%s'", name);
+         goto fail;
+     }
+diff --git a/hw/xen/xen-backend.c b/hw/xen/xen-backend.c
+index b9bf70a9f5..dcb4329258 100644
+--- a/hw/xen/xen-backend.c
++++ b/hw/xen/xen-backend.c
+@@ -101,22 +101,28 @@ static XenBackendInstance *xen_backend_list_find(XenDevice *xendev)
+     return NULL;
+ }
+ 
+-bool xen_backend_exists(const char *type, const char *name)
++static XenBackendInstance *xen_backend_lookup(const XenBackendImpl *impl, const char *name)
+ {
+-    const XenBackendImpl *impl = xen_backend_table_lookup(type);
+     XenBackendInstance *backend;
+ 
+-    if (!impl) {
+-        return false;
+-    }
+-
+     QLIST_FOREACH(backend, &backend_list, entry) {
+         if (backend->impl == impl && !strcmp(backend->name, name)) {
+-            return true;
++            return backend;
+         }
+     }
+ 
+-    return false;
++    return NULL;
++}
++
++bool xen_backend_exists(const char *type, const char *name)
++{
++    const XenBackendImpl *impl = xen_backend_table_lookup(type);
++
++    if (!impl) {
++        return false;
++    }
++
++    return !!xen_backend_lookup(impl, name);
+ }
+ 
+ static void xen_backend_list_remove(XenBackendInstance *backend)
+@@ -138,11 +144,10 @@ void xen_backend_device_create(XenBus *xenbus, const char *type,
+     backend = g_new0(XenBackendInstance, 1);
+     backend->xenbus = xenbus;
+     backend->name = g_strdup(name);
+-
+-    impl->create(backend, opts, errp);
+-
+     backend->impl = impl;
+     xen_backend_list_add(backend);
++
++    impl->create(backend, opts, errp);
+ }
+ 
+ XenBus *xen_backend_get_bus(XenBackendInstance *backend)
+@@ -155,13 +160,6 @@ const char *xen_backend_get_name(XenBackendInstance *backend)
+     return backend->name;
+ }
+ 
+-void xen_backend_set_device(XenBackendInstance *backend,
+-                            XenDevice *xendev)
+-{
+-    g_assert(!backend->xendev);
+-    backend->xendev = xendev;
+-}
+-
+ XenDevice *xen_backend_get_device(XenBackendInstance *backend)
+ {
+     return backend->xendev;
+@@ -178,9 +176,7 @@ bool xen_backend_try_device_destroy(XenDevice *xendev, Error **errp)
+     }
+ 
+     impl = backend->impl;
+-    if (backend->xendev) {
+-        impl->destroy(backend, errp);
+-    }
++    impl->destroy(backend, errp);
+ 
+     xen_backend_list_remove(backend);
+     g_free(backend->name);
+@@ -188,3 +184,43 @@ bool xen_backend_try_device_destroy(XenDevice *xendev, Error **errp)
+ 
+     return true;
+ }
++
++bool xen_backend_device_realized(XenDevice *xendev, Error **errp)
++{
++    XenDeviceClass *xendev_class = XEN_DEVICE_GET_CLASS(xendev);
++    const char *type = xendev_class->backend ? : object_get_typename(OBJECT(xendev));
++    const XenBackendImpl *impl = xen_backend_table_lookup(type);
++    XenBackendInstance *backend;
++
++    if (!impl) {
++        return false;
++    }
++
++    backend = xen_backend_lookup(impl, xendev->name);
++    if (backend) {
++        if (backend->xendev && backend->xendev != xendev) {
++            error_setg(errp, "device %s/%s already exists", type, xendev->name);
++            return false;
++        }
++        backend->xendev = xendev;
++        return true;
++    }
++
++    backend = g_new0(XenBackendInstance, 1);
++    backend->xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
++    backend->xendev = xendev;
++    backend->name = g_strdup(xendev->name);
++    backend->impl = impl;
++
++    xen_backend_list_add(backend);
++    return true;
++}
++
++void xen_backend_device_unrealized(XenDevice *xendev)
++{
++    XenBackendInstance *backend = xen_backend_list_find(xendev);
++
++    if (backend) {
++        backend->xendev = NULL;
++    }
++}
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index 0da2aa219a..0b232d1f94 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -359,6 +359,8 @@ static void xen_bus_realize(BusState *bus, Error **errp)
+ 
+     g_free(type);
+     g_free(key);
++
++    xen_bus_enumerate(xenbus);
+     return;
+ 
+ fail:
+@@ -958,6 +960,8 @@ static void xen_device_unrealize(DeviceState *dev)
+ 
+     trace_xen_device_unrealize(type, xendev->name);
+ 
++    xen_backend_device_unrealized(xendev);
++
+     if (xendev->exit.notify) {
+         qemu_remove_exit_notifier(&xendev->exit);
+         xendev->exit.notify = NULL;
+@@ -1024,6 +1028,10 @@ static void xen_device_realize(DeviceState *dev, Error **errp)
+         goto unrealize;
+     }
+ 
++    if (!xen_backend_device_realized(xendev, errp)) {
++        goto unrealize;
++    }
++
+     trace_xen_device_realize(type, xendev->name);
+ 
+     xendev->xsh = qemu_xen_xs_open();
+diff --git a/include/hw/xen/xen-backend.h b/include/hw/xen/xen-backend.h
+index 0f01631ae7..3f1e764c51 100644
+--- a/include/hw/xen/xen-backend.h
++++ b/include/hw/xen/xen-backend.h
+@@ -38,4 +38,7 @@ void xen_backend_device_create(XenBus *xenbus, const char *type,
+                                const char *name, QDict *opts, Error **errp);
+ bool xen_backend_try_device_destroy(XenDevice *xendev, Error **errp);
+ 
++bool xen_backend_device_realized(XenDevice *xendev, Error **errp);
++void xen_backend_device_unrealized(XenDevice *xendev);
++
+ #endif /* HW_XEN_BACKEND_H */
+-- 
+2.40.1
 
 
