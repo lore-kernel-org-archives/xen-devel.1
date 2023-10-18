@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A16D4CDB484
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Oct 2023 14:19:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.618594.962431 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B26CDB482
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Oct 2023 14:19:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.618597.962454 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qt7Nx-0005E9-JB; Wed, 18 Oct 2023 14:18:57 +0000
+	id 1qt7Nz-0005fX-O1; Wed, 18 Oct 2023 14:18:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 618594.962431; Wed, 18 Oct 2023 14:18:57 +0000
+Received: by outflank-mailman (output) from mailman id 618597.962454; Wed, 18 Oct 2023 14:18:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qt7Nx-0005E1-GZ; Wed, 18 Oct 2023 14:18:57 +0000
-Received: by outflank-mailman (input) for mailman id 618594;
- Wed, 18 Oct 2023 14:18:56 +0000
+	id 1qt7Nz-0005eA-HF; Wed, 18 Oct 2023 14:18:59 +0000
+Received: by outflank-mailman (input) for mailman id 618597;
+ Wed, 18 Oct 2023 14:18:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7etD=GA=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qt7Nw-0004vw-Az
- for xen-devel@lists.xenproject.org; Wed, 18 Oct 2023 14:18:56 +0000
+ id 1qt7Ny-0004vw-BC
+ for xen-devel@lists.xenproject.org; Wed, 18 Oct 2023 14:18:58 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 44b87780-6dc1-11ee-9b0e-b553b5be7939;
- Wed, 18 Oct 2023 16:18:54 +0200 (CEST)
+ id 4527c161-6dc1-11ee-9b0e-b553b5be7939;
+ Wed, 18 Oct 2023 16:18:55 +0200 (CEST)
 Received: from beta.station (net-188-218-250-245.cust.vodafonedsl.it
  [188.218.250.245])
- by support.bugseng.com (Postfix) with ESMTPSA id 8F5DB4EE0739;
- Wed, 18 Oct 2023 16:18:53 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id A47764EE0743;
+ Wed, 18 Oct 2023 16:18:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,59 +42,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 44b87780-6dc1-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 4527c161-6dc1-11ee-9b0e-b553b5be7939
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Dario Faggioli <dfaggioli@suse.com>
-Subject: [XEN PATCH 0/4][for-4.19] xen: address violations of Rule 13.1
-Date: Wed, 18 Oct 2023 16:18:47 +0200
-Message-Id: <cover.1697638210.git.simone.ballarin@bugseng.com>
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 2/4] automation/eclair: add deviations and call properties.
+Date: Wed, 18 Oct 2023 16:18:49 +0200
+Message-Id: <8f426cc761c734d457a74416dd5b83fd10128c26.1697638210.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1697638210.git.simone.ballarin@bugseng.com>
+References: <cover.1697638210.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series contains some changes and deviation to address
-reports of MISRA C:2012 Rule 13.1:
-Initializer lists shall not contain persistent side effects
+Deviate violations of MISRA C:2012 Rule 13.1 caused by
+functions vcpu_runnable and __bad_atomic_size. These functions
+contain side-effects such as debugging logs, assertions and
+failures that cannot cause unexpected behaviors.
 
-Some expressions with side-effects have been moved outside the
-initializer lists, others have been deviated.
+Add "noeffect" call property to functions read_u.*_atomic and
+get_cycles.
 
-Function calls do not necessarily have side-effects, in these cases this
-path propose to add GCC pure or const attributes whenever possible.
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+---
+ .../eclair_analysis/ECLAIR/call_properties.ecl      | 10 ++++++++++
+ automation/eclair_analysis/ECLAIR/deviations.ecl    | 13 +++++++++++++
+ docs/misra/deviations.rst                           | 11 +++++++++++
+ 3 files changed, 34 insertions(+)
 
-Function attributes pure and const do not need to be added as GCC
-attributes, they can be added using ECLAIR configurations.
-
-Simone Ballarin (4):
-  xen/arm: address violations of MISRA C:2012 Rule 13.1
-  automation/eclair: add deviations and call properties.
-  xen/include: add pure and const attributes
-  xen: address violations of MISRA C:2012 Rule 13.1
-
- .../eclair_analysis/ECLAIR/call_properties.ecl   | 10 ++++++++++
- automation/eclair_analysis/ECLAIR/deviations.ecl | 13 +++++++++++++
- docs/misra/deviations.rst                        | 11 +++++++++++
- xen/arch/arm/device.c                            |  6 +++---
- xen/arch/arm/guestcopy.c                         | 12 ++++++++----
- xen/arch/arm/include/asm/current.h               |  2 +-
- xen/common/sched/core.c                          | 16 ++++++++++++----
- xen/drivers/char/ns16550.c                       |  4 +++-
- xen/include/xen/pdx.h                            |  2 +-
- xen/include/xen/typesafe.h                       |  4 ++--
- 10 files changed, 64 insertions(+), 16 deletions(-)
-
+diff --git a/automation/eclair_analysis/ECLAIR/call_properties.ecl b/automation/eclair_analysis/ECLAIR/call_properties.ecl
+index 3f7794bf8b..f410a6aa58 100644
+--- a/automation/eclair_analysis/ECLAIR/call_properties.ecl
++++ b/automation/eclair_analysis/ECLAIR/call_properties.ecl
+@@ -104,3 +104,13 @@ Furthermore, their uses do initialize the involved variables as needed by futher
+ -call_properties+={"macro(^(__)?(raw_)?copy_from_(paddr|guest|compat)(_offset)?$)", {"pointee_write(1=always)", "pointee_read(1=never)", "taken()"}}
+ -call_properties+={"macro(^(__)?copy_to_(guest|compat)(_offset)?$)", {"pointee_write(2=always)", "pointee_read(2=never)", "taken()"}}
+ -doc_end
++
++-doc_begin="Functions generated by build_atomic_read cannot be considered pure
++since the input pointer is volatile."
++-call_properties+={"^read_u(8|16|32|64|int)_atomic.*$", {"noeffect"}}
++-doc_end
++
++-doc_begin="get_cycles does not perform visible side-effects "
++-call_property+={"name(get_cycles)", {"noeffect"}}
++-doc_end
++
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index fa56e5c00a..b80ccea7bc 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -233,6 +233,19 @@ this."
+ -config=MC3R1.R10.1,etypes+={safe,
+   "stmt(operator(and||or||xor||not||and_assign||or_assign||xor_assign))",
+   "any()"}
++#
++# Series 13.
++#
++
++-doc_begin="Function __bad_atomic_size is intended to generate a linkage error
++if invoked. Calling it in intentionally unreachable switch cases is safe even
++in a initializer list."
++-config=MC3R1.R13.1,reports+={safe, "first_area(^.*__bad_atomic_size.*$)"}
++-doc_end
++
++-doc_begin="Function vcpu_runnable contains pragmas and other side-effects for
++debugging purposes, their invocation is safe even in a initializer list."
++-config=MC3R1.R13.1,reports+={safe, "first_area(^.*vcpu_runnable.*$)"}
+ -doc_end
+ 
+ -doc_begin="See Section \"4.5 Integers\" of \"GCC_MANUAL\", where it says that
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+index 8511a18925..2fcdb8da58 100644
+--- a/docs/misra/deviations.rst
++++ b/docs/misra/deviations.rst
+@@ -192,6 +192,17 @@ Deviations related to MISRA C:2012 Rules:
+        See automation/eclair_analysis/deviations.ecl for the full explanation.
+      - Tagged as `safe` for ECLAIR.
+ 
++   * - R13.1
++     - Function __bad_atomic_size is intended to generate a linkage error if
++       invoked. Calling it in intentionally unreachable switch cases is
++       safe even in a initializer list.
++     - Tagged as `safe` for ECLAIR.
++
++   * - R13.1
++     - Function vcpu_runnable contains pragmas and other side-effects for
++       debugging purposes, their invocation is safe even in a initializer list.
++     - Tagged as `safe` for ECLAIR.
++
+    * - R13.5
+      - All developers and reviewers can be safely assumed to be well aware of
+        the short-circuit evaluation strategy for logical operators.
 -- 
 2.34.1
 
