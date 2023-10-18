@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD67DCDB484
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Oct 2023 14:19:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.618598.962470 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AD4DCDB47E
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Oct 2023 14:26:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.618618.962487 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qt7O0-0006C5-U0; Wed, 18 Oct 2023 14:19:00 +0000
+	id 1qt7V9-0001bL-0e; Wed, 18 Oct 2023 14:26:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 618598.962470; Wed, 18 Oct 2023 14:19:00 +0000
+Received: by outflank-mailman (output) from mailman id 618618.962487; Wed, 18 Oct 2023 14:26:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qt7O0-0006Al-Qa; Wed, 18 Oct 2023 14:19:00 +0000
-Received: by outflank-mailman (input) for mailman id 618598;
- Wed, 18 Oct 2023 14:18:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qt7V8-0001ax-SL; Wed, 18 Oct 2023 14:26:22 +0000
+Received: by outflank-mailman (input) for mailman id 618618;
+ Wed, 18 Oct 2023 14:26:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7etD=GA=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qt7Nz-0004vw-BS
- for xen-devel@lists.xenproject.org; Wed, 18 Oct 2023 14:18:59 +0000
+ <SRS0=MOie=GA=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1qt7V7-0001YJ-EN
+ for xen-devel@lists.xenproject.org; Wed, 18 Oct 2023 14:26:21 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4570c89c-6dc1-11ee-9b0e-b553b5be7939;
- Wed, 18 Oct 2023 16:18:55 +0200 (CEST)
-Received: from beta.station (net-188-218-250-245.cust.vodafonedsl.it
- [188.218.250.245])
- by support.bugseng.com (Postfix) with ESMTPSA id 2CA834EE0741;
- Wed, 18 Oct 2023 16:18:55 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4e887e8c-6dc2-11ee-98d4-6d05b1d4d9a1;
+ Wed, 18 Oct 2023 16:26:20 +0200 (CEST)
+Received: from Dell.bugseng.com (unknown [37.161.127.233])
+ by support.bugseng.com (Postfix) with ESMTPSA id 309214EE0740;
+ Wed, 18 Oct 2023 16:26:19 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,75 +41,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4570c89c-6dc1-11ee-9b0e-b553b5be7939
-From: Simone Ballarin <simone.ballarin@bugseng.com>
+X-Inumbo-ID: 4e887e8c-6dc2-11ee-98d4-6d05b1d4d9a1
+From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
-	sstabellini@kernel.org,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
+	Federico Serafini <federico.serafini@bugseng.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 3/4] xen/include: add pure and const attributes
-Date: Wed, 18 Oct 2023 16:18:50 +0200
-Message-Id: <fd5421162a00aa782e0776324ff6497193c1e3d3.1697638210.git.simone.ballarin@bugseng.com>
+Subject: [XEN PATCH 1/7] x86/mctelem: address violations of MISRA C:2012 Rule 8.2
+Date: Wed, 18 Oct 2023 16:25:54 +0200
+Message-Id: <3e811e830f6f49af6cc5abf4fec3c8c74b72256c.1697638486.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1697638210.git.simone.ballarin@bugseng.com>
-References: <cover.1697638210.git.simone.ballarin@bugseng.com>
+In-Reply-To: <cover.1697638486.git.federico.serafini@bugseng.com>
+References: <cover.1697638486.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add const and pure attributes to address reports
-of MISRA C:2012 Rule 13.1: Initializer lists shall
-not contain persistent side effects
+Add missing parameter names. No functional change.
 
-Add pure attribute to function pdx_to_pfn.
-Add const attribute to functions generated by TYPE_SAFE.
-
-These functions are used in initializer lists: adding
-the attributes ensures that no effect will be performed
-by them.
-
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
-
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
-Function attributes pure and const do not need to be added as GCC
-attributes, they can be added using ECLAIR configurations.
----
- xen/include/xen/pdx.h      | 2 +-
- xen/include/xen/typesafe.h | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ xen/arch/x86/cpu/mcheck/mctelem.c |  2 +-
+ xen/arch/x86/cpu/mcheck/mctelem.h | 25 +++++++++++++------------
+ 2 files changed, 14 insertions(+), 13 deletions(-)
 
-diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
-index f3fbc4273a..5d1050967a 100644
---- a/xen/include/xen/pdx.h
-+++ b/xen/include/xen/pdx.h
-@@ -164,7 +164,7 @@ static inline unsigned long pfn_to_pdx(unsigned long pfn)
-  * @param pdx Page index
-  * @return Obtained pfn after decompressing the pdx
+diff --git a/xen/arch/x86/cpu/mcheck/mctelem.c b/xen/arch/x86/cpu/mcheck/mctelem.c
+index 77a4d1d5ff..b8d0368a7d 100644
+--- a/xen/arch/x86/cpu/mcheck/mctelem.c
++++ b/xen/arch/x86/cpu/mcheck/mctelem.c
+@@ -208,7 +208,7 @@ void mctelem_defer(mctelem_cookie_t cookie, bool lmce)
+  *  @lmce: indicate which pending list on @cpu is handled
   */
--static inline unsigned long pdx_to_pfn(unsigned long pdx)
-+static inline __attribute_pure__ unsigned long pdx_to_pfn(unsigned long pdx)
+ void mctelem_process_deferred(unsigned int cpu,
+-			      int (*fn)(mctelem_cookie_t),
++			      int (*fn)(mctelem_cookie_t mctc),
+ 			      bool lmce)
  {
-     return (pdx & pfn_pdx_bottom_mask) |
-            ((pdx << pfn_pdx_hole_shift) & pfn_top_mask);
-diff --git a/xen/include/xen/typesafe.h b/xen/include/xen/typesafe.h
-index 7ecd3b4a8d..615df6f944 100644
---- a/xen/include/xen/typesafe.h
-+++ b/xen/include/xen/typesafe.h
-@@ -21,8 +21,8 @@
+ 	struct mctelem_ent *tep;
+diff --git a/xen/arch/x86/cpu/mcheck/mctelem.h b/xen/arch/x86/cpu/mcheck/mctelem.h
+index 21b251847b..f4c5ff848d 100644
+--- a/xen/arch/x86/cpu/mcheck/mctelem.h
++++ b/xen/arch/x86/cpu/mcheck/mctelem.h
+@@ -60,18 +60,19 @@ typedef enum mctelem_class {
+     MC_NCLASSES
+ } mctelem_class_t;
  
- #define TYPE_SAFE(_type, _name)                                         \
-     typedef struct { _type _name; } _name##_t;                          \
--    static inline _name##_t _##_name(_type n) { return (_name##_t) { n }; } \
--    static inline _type _name##_x(_name##_t n) { return n._name; }
-+    static inline __attribute_const__ _name##_t _##_name(_type n) { return (_name##_t) { n }; } \
-+    static inline __attribute_const__ _type _name##_x(_name##_t n) { return n._name; }
+-extern void mctelem_init(unsigned int);
+-extern mctelem_cookie_t mctelem_reserve(mctelem_class_t);
+-extern void *mctelem_dataptr(mctelem_cookie_t);
+-extern void mctelem_commit(mctelem_cookie_t);
+-extern void mctelem_dismiss(mctelem_cookie_t);
+-extern mctelem_cookie_t mctelem_consume_oldest_begin(mctelem_class_t);
+-extern void mctelem_consume_oldest_end(mctelem_cookie_t);
+-extern void mctelem_ack(mctelem_class_t, mctelem_cookie_t);
+-extern void mctelem_defer(mctelem_cookie_t, bool lmce);
+-extern void mctelem_process_deferred(unsigned int,
+-                                     int (*)(mctelem_cookie_t), bool lmce);
+-bool mctelem_has_deferred(unsigned int);
++extern void mctelem_init(unsigned int datasz);
++extern mctelem_cookie_t mctelem_reserve(mctelem_class_t which);
++extern void *mctelem_dataptr(mctelem_cookie_t cookie);
++extern void mctelem_commit(mctelem_cookie_t cookie);
++extern void mctelem_dismiss(mctelem_cookie_t cookie);
++extern mctelem_cookie_t mctelem_consume_oldest_begin(mctelem_class_t which);
++extern void mctelem_consume_oldest_end(mctelem_cookie_t cookie);
++extern void mctelem_ack(mctelem_class_t which, mctelem_cookie_t cookie);
++extern void mctelem_defer(mctelem_cookie_t cookie, bool lmce);
++extern void mctelem_process_deferred(unsigned int cpu,
++                                     int (*fn)(mctelem_cookie_t mctc),
++                                     bool lmce);
++bool mctelem_has_deferred(unsigned int cpu);
+ bool mctelem_has_deferred_lmce(unsigned int cpu);
  
- #else
- 
+ #endif
 -- 
 2.34.1
 
