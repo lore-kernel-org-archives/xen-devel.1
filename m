@@ -4,29 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1795CDB465
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 17:15:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619540.964779 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4E6CDB465
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 17:27:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619544.964790 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtWc6-0004NV-Ub; Thu, 19 Oct 2023 17:15:14 +0000
+	id 1qtWo2-0007rt-1w; Thu, 19 Oct 2023 17:27:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619540.964779; Thu, 19 Oct 2023 17:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 619544.964790; Thu, 19 Oct 2023 17:27:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtWc6-0004NO-S8; Thu, 19 Oct 2023 17:15:14 +0000
-Received: by outflank-mailman (input) for mailman id 619540;
- Thu, 19 Oct 2023 17:15:13 +0000
+	id 1qtWo1-0007rm-UF; Thu, 19 Oct 2023 17:27:33 +0000
+Received: by outflank-mailman (input) for mailman id 619544;
+ Thu, 19 Oct 2023 17:27:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bypV=GB=citrix.com=prvs=649365d7d=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qtWc4-0004NI-V9
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 17:15:13 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0cbb3e46-6ea3-11ee-9b0e-b553b5be7939;
- Thu, 19 Oct 2023 19:15:10 +0200 (CEST)
+ <SRS0=JNdL=GB=tklengyel.com=tamas@srs-se1.protection.inumbo.net>)
+ id 1qtWo0-0007rg-LX
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 17:27:32 +0000
+Received: from sender3-op-o19.zoho.com (sender3-op-o19.zoho.com
+ [136.143.184.19]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c6b6ea66-6ea4-11ee-9b0e-b553b5be7939;
+ Thu, 19 Oct 2023 19:27:30 +0200 (CEST)
+Received: from localhost.localdomain (c-174-169-89-112.hsd1.ma.comcast.net
+ [174.169.89.112]) by mx.zohomail.com
+ with SMTPS id 169773644253087.09436354385764;
+ Thu, 19 Oct 2023 10:27:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,103 +42,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0cbb3e46-6ea3-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1697735710;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=rmbtg4VTUyTGdO3MRQHKlPX6zE1mEMJt6imj33FjLKo=;
-  b=TsBXjnpFbQqU5FPyR2DQTRaUsR+wti/uKSvLaoyZ/XV295n90pFrqYy5
-   MsZiNWMVB/zMG2hwkvpSTFqowYEqqp8TY7AcARj36R3LIBnOW2D8k+cQT
-   biVDGgPjVT91nDdlKFtiDPZXxi+WFkdF5ncIZFoJmLAB0TLTi9UmAnORc
-   I=;
-X-CSE-ConnectionGUID: rDc7S6lhTguwiUA6YPjaCg==
-X-CSE-MsgGUID: s7hnxXQGQwqood7BdlFAcQ==
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 5.1
-X-MesageID: 124689196
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.159.70
-X-Policy: $RELAYED
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:4ZO4yqoFjB9TrwvUL/LldQY4aZFeBmIrZRIvgKrLsJaIsI4StFCzt
- garIBnVbv7eYTamfNhxad/ipkwB6J+AytZiTQBkpX1mQSMa95uZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbOCYmYpA1Y8FE/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKq04GhwUmAWP6gR5waGzihNVfrzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXACohZU+42ea2/L2mVehRr5oSFMviF4xK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSaxFIUPrSn8/x7pX7WxRepEiYuuwc5G/LwRYq+LPsLMDUapqBQsA9ckOw/
- ziaoTSoW0BEXDCZ4SHa8nS8ttbgpDziX4UeS5e08tBDi2TGkwT/DzVJDADm8JFVkHWWS99Zb
- kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8Uh8x2EwKfQ5wefB0AHQyRHZdhgs9U5LRQv1
- 1SJltevAiZ9vbm9QHeRsLyTqFuaMiEPIWgPTSQNVwcC7p/op4RbpjLCSMxyVpG8iNLdECv1h
- TuNqUADa6471JBRkf/hpBae3mPq+cChohMJChv/RE6usTgnYI6ZaJG36GXys8d4Lo+yQQzU1
- JQboPRy/NziHLnUyn3SGrhRRuv5jxqWGGeC2wMzQfHN4xzoqyb6It4KiN1rDB0xWvvobwMFd
- 6M6Vel53JhWJHKsauddbou6C6zGJoC7Toy7CJg4gjdUC6WdlTNrHwk0PyZ8J0i3zCARfVgXY
- P93i/qEA3cAErhAxzGrXeob2rJD7nlglDyNGMyilUn+ieL2iJuppVAtaQPmUwzExPnc/FW9H
- yh3bKNmNCmzoMWhO3KKoOb/3HgBLGQhBICelvG7gtWre1I8cEl4Uqe56ep4J+RYc1F9y76gE
- oeVARQDljISRBTvdG23V5yUQO+1B8cm9ythZX1E0JTB8yFLXLtDJZw3L/MfFYTLPsQ6pRKoZ
- 5Hpo/m9P8k=
-IronPort-HdrOrdr: A9a23:DAqJiK7+H5smgYpFtAPXwPPXdLJyesId70hD6qkRc20tTiX8ra
- uTdZsgpHjJYVoqKRIdcKm7WJVoIkmsk6Kdg7N9AV7KZmCP0ldASrsSj7cKqAeQfxEWmNQtsJ
- uIRJITNDQgNzlHZZeT2meF+4hJ+ra6zJw=
-X-Talos-CUID: =?us-ascii?q?9a23=3AUuSuGWjtvj3eI68EqfbSvfSbCDJuaFHWk0yOJ0+?=
- =?us-ascii?q?EBnt2SYC8F26o+qpPnJ87?=
-X-Talos-MUID: =?us-ascii?q?9a23=3A9G3o1w40nQhkxb8MgOfjrUMVxoxzvKSoGHA0vqw?=
- =?us-ascii?q?Zos6DOXNaNzOzpT+OF9o=3D?=
-X-IronPort-AV: E=Sophos;i="6.03,237,1694750400"; 
-   d="scan'208";a="124689196"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
-	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH for-4.18] CI: (More) Always pull base image when building a container
-Date: Thu, 19 Oct 2023 18:14:52 +0100
-Message-ID: <20231019171452.1704276-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: c6b6ea66-6ea4-11ee-9b0e-b553b5be7939
+ARC-Seal: i=1; a=rsa-sha256; t=1697736444; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=RjYl6r+MuhbiXz2QlrmkKPzizkgb27HA9OTvhFPy5UhJw/XIGIaiC/jlVy1AaC5T1sTp0N5AgX8CFaZQcKW3mqcyfuDKOEDRQPzH7s2NYh0u4qe9QPqwM8ZHUXyAPjjRTRR54W8cmN4s2XjpnyLhc0ulAD05h78JjAuCCEGvuUQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1697736444; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=2cUdy2EjT3oE/tz9MxRYlrZhTYSHPwH21W1FCL9DulM=; 
+	b=HbHb+PZ1ukQd+a7+GzdvAYteJenhfREh/E34hYI5KLu3gAkvxrYKb/NEecH6MaZzB3Dbz1OVJMon6L2qVFCvBh+ajpIjNtRMOztpBylxE0Ao0aobFUx5OdkAN4gUjyVk9qCDmRC4hTdTJduWm/ZeqS+zWjUTmY/2txWxQ4uf2YY=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=tklengyel.com;
+	spf=pass  smtp.mailfrom=tamas@tklengyel.com;
+	dmarc=pass header.from=<tamas@tklengyel.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1697736444;
+	s=zmail; d=tklengyel.com; i=tamas@tklengyel.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Transfer-Encoding:Reply-To;
+	bh=2cUdy2EjT3oE/tz9MxRYlrZhTYSHPwH21W1FCL9DulM=;
+	b=DTnp/aYp6lv51ErfnR9dGju7TqGtG8FyMnr80fLTMshzMYUT6d1xpi1foWYlJ8KU
+	DEmVuzjZddQ2PjSdkMBj3nzaaERwcqjIZMTRXrf8G3kSld4ILMrmMdc/yCg6Dy0BH3G
+	6/YyX23p9Gq9w0XZ/BQL5/VccGNrajneTcfYM7Ck=
+From: Tamas K Lengyel <tamas@tklengyel.com>
+To: xen-devel@lists.xenproject.org
+Cc: Tamas K Lengyel <tamas@tklengyel.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH for-4.18] x86/mem_sharing: add missing m2p entry when mapping shared_info page
+Date: Wed, 18 Oct 2023 04:02:42 -0400
+Message-Id: <20231018080242.1213-1-tamas@tklengyel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Repeat c/s 26ecc08b98fc ("automation: Always pull base image when building a
-container") for the other makefile we've got building containers.
+When mapping in the shared_info page to a fork the m2p entry wasn't set
+resulting in the shared_info being reset even when the fork reset was called
+with only reset_state and not reset_memory. This results in an extra
+unnecessary TLB flush.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Fixes: 1a0000ac775 ("mem_sharing: map shared_info page to same gfn during fork")
+Signed-off-by: Tamas K Lengyel <tamas@tklengyel.com>
 ---
-CC: Anthony PERARD <anthony.perard@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Doug Goldstein <cardoe@cardoe.com>
-CC: Henry Wang <Henry.Wang@arm.com>
+ xen/arch/x86/mm/mem_sharing.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-For 4.18.  This is CI infrastructure, not part of the regular build.
----
- automation/tests-artifacts/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/automation/tests-artifacts/Makefile b/automation/tests-artifacts/Makefile
-index 8ca71b78adbd..d055cd696bed 100644
---- a/automation/tests-artifacts/Makefile
-+++ b/automation/tests-artifacts/Makefile
-@@ -10,7 +10,7 @@ help:
- 	@echo "To push container builds, set the env var PUSH"
+diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
+index 94b6b782ef..142258f16a 100644
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -1847,6 +1847,8 @@ static int copy_special_pages(struct domain *cd, struct domain *d)
+                                 p2m_ram_rw, p2m->default_access, -1);
+             if ( rc )
+                 return rc;
++
++            set_gpfn_from_mfn(mfn_x(new_mfn), gfn_x(old_gfn));
+         }
+     }
  
- %: %.dockerfile ## Builds containers
--	docker build -t $(REGISTRY)/$(@D):$(@F) -f $< $(<D)
-+	docker build --pull -t $(REGISTRY)/$(@D):$(@F) -f $< $(<D)
- 	@if [ ! -z $${PUSH+x} ]; then \
- 		docker push $(REGISTRY)/$(@D):$(@F); \
- 	fi
-
-base-commit: 698b0f5031c6083401234a9b9415175cc5855a0a
-prerequisite-patch-id: 94c86c1b3eb7aeda8eeef91241cdc8fa2691e2bc
-prerequisite-patch-id: 728853399bfbaf972317a0d35ecd695f65026844
-prerequisite-patch-id: 5a145a4decd44ace43a37b0315773e0abc6d54c6
-prerequisite-patch-id: 24fad994d25558a45bbd3ead38120c154a974e9a
-prerequisite-patch-id: a2a69b5382a293809a03633fd0513c371f9cf668
 -- 
-2.30.2
+2.34.1
 
 
