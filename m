@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA87FCDB47E
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Oct 2023 21:53:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.618783.962879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE52CDB47E
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Oct 2023 22:17:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.618788.962890 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtETq-0005yd-J5; Wed, 18 Oct 2023 21:53:30 +0000
+	id 1qtEqK-0001mg-AL; Wed, 18 Oct 2023 22:16:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 618783.962879; Wed, 18 Oct 2023 21:53:30 +0000
+Received: by outflank-mailman (output) from mailman id 618788.962890; Wed, 18 Oct 2023 22:16:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtETq-0005yW-GQ; Wed, 18 Oct 2023 21:53:30 +0000
-Received: by outflank-mailman (input) for mailman id 618783;
- Wed, 18 Oct 2023 21:53:29 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qtETp-0005yM-Qg; Wed, 18 Oct 2023 21:53:29 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qtETp-0002a9-NT; Wed, 18 Oct 2023 21:53:29 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qtETp-0003PX-53; Wed, 18 Oct 2023 21:53:29 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1qtETp-0007fy-4Y; Wed, 18 Oct 2023 21:53:29 +0000
+	id 1qtEqK-0001mZ-7S; Wed, 18 Oct 2023 22:16:44 +0000
+Received: by outflank-mailman (input) for mailman id 618788;
+ Wed, 18 Oct 2023 22:16:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1DIN=GA=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1qtEqI-0001mD-9z
+ for xen-devel@lists.xenproject.org; Wed, 18 Oct 2023 22:16:42 +0000
+Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
+ [64.147.123.19]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 015cc59d-6e04-11ee-98d5-6d05b1d4d9a1;
+ Thu, 19 Oct 2023 00:16:39 +0200 (CEST)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.west.internal (Postfix) with ESMTP id 0B2763200A7F;
+ Wed, 18 Oct 2023 18:16:35 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute1.internal (MEProxy); Wed, 18 Oct 2023 18:16:36 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 18 Oct 2023 18:16:34 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,86 +45,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=9cWjrm7Q1Yeb+fJTda+V/TXApi9T5TGM294rE/qXXMs=; b=lPrEvG/8JXJJ/qzNkhrqs0cfg9
-	zg8EFaHr0yWwljlv1hqZYBqbBmiU/MBVi33oJXHTQfa52MW7xz5YrVP76tpI/dttUVyyxzaMAdfXP
-	PdySZDtwHNtdLnr9wK2TaCplFvm/+h8DBOvoBOnicb9QFd+s9vcmSuh9+hZFWWMP36qs=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-183419-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 015cc59d-6e04-11ee-98d5-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
+	1697667395; x=1697753795; bh=gqt7w3BtC5yBlDumOlLKLClmvzl6B4YY55b
+	AtjOMMCo=; b=S84qF8bjDzfBXCNi5IBi6wptrLkIu7Wy1GpJgA0THLC6MdEm1NU
+	qRNCLXDJb/GIOQfnNK3/M5ndkrrci97YR1ZKY5ddAKWLn17Zyuq0I/8TOoowSSy7
+	bcoFYUx6q9+Z2WSpcGC0LaJF/7HWPHs3Avej8api8mU9CevzSX1DMOgOCS8+Jn5/
+	ArC14S6n1tPAKc4vkGI048nGkLgRl65Tu1Z5q48ltnopCG2uhlAUbBuWE65Tj6vW
+	Q6VaOcraFHdLQNCOM8ckNKbU2RrV9Vazq8YQDVMSxEMefHMHggXUoC304LUgRQS9
+	XcpkNvrbcq9ZulHcJ4T6JWg8uydralYUdqg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1697667395; x=1697753795; bh=gqt7w3BtC5yBl
+	DumOlLKLClmvzl6B4YY55bAtjOMMCo=; b=LduNQjsAmMLZvd3g+2/tmxl40Lw9C
+	rmHfxtUOAc37Lk+jKY27moqqbNH4nybqxaTZ9Fc67ab2Mn/XjydnN7RDkQ7yqLlU
+	Fg3hffXflbhzF+wSnaMfGX2fAXqfmSOlGLz15KSlNaaT6yapLBqe3n0ygjzu+Tzg
+	q5Jerp7Cl33fK3sV0Gk2EmNE0m3+OYuIY7TxFROTaF1Enc0nv5glPf/tkYhxTXo7
+	kSzvSgQ8QtKTwKBQOVanCLRSzEsoUkoFpTQzVT+ikRMoId5FRv/55+auP5TVn6F8
+	UVKg8yf/tKf/TNIJTakSe48iIvS9tGLbGWoX2JWsdnmtGkXTc1IGx82XQ==
+X-ME-Sender: <xms:Q1kwZTG3TAT9SiY1lzLpflhdzLmfeuwFgoLews5Zjb96_YcY_kvvbw>
+    <xme:Q1kwZQUiYmjwqzzSwgzkrdrj8cXn4fHNoQfs3mU4DsjFVQRvnhYEQF-k-8BjZ9jjA
+    8IA9D9Qa_quqw>
+X-ME-Received: <xmr:Q1kwZVJSVUa9AKVJHihKOvpzK6T-Lg0DiQBZQ7J2ApONHatOib3fqY_E53JrgzEv5fU0ya6lejgzWJD2mBj4gPAYbBBI6f8r7fs>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeehgddtkecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
+    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
+    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevueej
+    teegleelteduueevhfetgfffjeevtddvgfeiveehteehleegueelvdejveenucffohhmrg
+    hinhepghhithhlrggsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghm
+    pehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslh
+    grsgdrtghomh
+X-ME-Proxy: <xmx:Q1kwZRElxd48Jye_IbQ8ZRscjy4TWOjTi-Lq8t0vQCtK7HgjD296aQ>
+    <xmx:Q1kwZZXSLR_QkK1x2q9i2gufNKQrOO6jhSxIkTqnWEryPCUW8WDnhA>
+    <xmx:Q1kwZcMj90nKVuRh4ScIR6XPIIM-tVqX9-pKNVHArrHxV1gbis8SbA>
+    <xmx:Q1kwZWi9BjJfQm77agGD4Nq5ccR_F78WU1-dOmOMWQum4zy55AYYmw>
+Feedback-ID: i1568416f:Fastmail
+Date: Thu, 19 Oct 2023 00:16:31 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Henry Wang <Henry.Wang@arm.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 2/5] automation: hide timeout countdown in log
+Message-ID: <ZTBZQGS91FfSeClt@mail-itl>
+References: <cover.550599c54c91da4f8417fde358992e75bf8163c0.1696557834.git-series.marmarek@invisiblethingslab.com>
+ <126f25fd791aa1f3e32463e600c59967504e19b6.1696557834.git-series.marmarek@invisiblethingslab.com>
+ <9bcd8476-2a3f-43a3-8576-1e31d0df4bd3@citrix.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 183419: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=7c3616e6f1aa541884410c6430e3c8986cf0973c
-X-Osstest-Versions-That:
-    xen=f51c92383b8dc76233481e2814aa2e905fb9b501
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 18 Oct 2023 21:53:29 +0000
-
-flight 183419 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/183419/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  7c3616e6f1aa541884410c6430e3c8986cf0973c
-baseline version:
- xen                  f51c92383b8dc76233481e2814aa2e905fb9b501
-
-Last test of basis   183404  2023-10-17 22:02:08 Z    0 days
-Testing same since   183419  2023-10-18 19:02:05 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Alejandro Vallejo <alejandro.vallejo@cloud.com>
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ry7Y1FzsF4tVHVJM"
+Content-Disposition: inline
+In-Reply-To: <9bcd8476-2a3f-43a3-8576-1e31d0df4bd3@citrix.com>
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+--ry7Y1FzsF4tVHVJM
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 19 Oct 2023 00:16:31 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Henry Wang <Henry.Wang@arm.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 2/5] automation: hide timeout countdown in log
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+On Wed, Oct 18, 2023 at 06:45:03PM +0100, Andrew Cooper wrote:
+> On 06/10/2023 3:05 am, Marek Marczykowski-G=C3=B3recki wrote:
+> > grep+sleep message every 1s makes job log unnecessary hard to read.
+> >
+> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
+slab.com>
+> > ---
+> > I know I can download serial log file, but that's 3 more clicks...
+> > ---
+> >  automation/scripts/qubes-x86-64.sh | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qu=
+bes-x86-64.sh
+> > index 1e84e40a4afc..5464d10fc343 100755
+> > --- a/automation/scripts/qubes-x86-64.sh
+> > +++ b/automation/scripts/qubes-x86-64.sh
+> > @@ -222,10 +222,12 @@ if [ -n "$wait_and_wakeup" ]; then
+> >      ssh $CONTROLLER wake
+> >  fi
+> > =20
+> > +set +x
+> >  until grep "^Welcome to Alpine Linux" smoke.serial || [ $timeout -le 0=
+ ]; do
+> >      sleep 1;
+> >      : $((--timeout))
+> >  done
+> > +set -x
+> > =20
+> >  tail -n 100 smoke.serial
+> > =20
+>=20
+> This wants repeating in dom0_check=3D when looking for "Welcome to Alpine"
+> in guest-domU.log because the scrool is still visible in
+>=20
+> https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/5235487317
+>=20
+> Happy to fix on commit, as this is the only comment I have on the series.
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+Fine with me, thanks!
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+> Alternatively, would it be worth writing a "wait_until $msg $file"
+> function to abstract this away?
 
+Can refactor it later, maybe when adding more tests.
 
-Pushing revision :
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
-To xenbits.xen.org:/home/xen/git/xen.git
-   f51c92383b..7c3616e6f1  7c3616e6f1aa541884410c6430e3c8986cf0973c -> smoke
+--ry7Y1FzsF4tVHVJM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmUwWUAACgkQ24/THMrX
+1yxtFwf/fUxQGg2TSO0t3Rkj7VkhGb2lCoL2G9uLCUGKTIdkSGdIDL22hrlbabPl
+tFag0fKUmypvq6H7mEyiWIB0jxf+lhS6qu5JEG0avNoGo6KCwSy5zn4MvCwLrn1p
+uH9CCWJge7BHfeqRdiC7O43Zacm7K6auELHzKiokGO9Y1e6ACvYLoPqA7sqarm9w
+u4dLju4/YiRhAuxnQKOMgMez+xkIdZwYenKqZpnQ+/S4kBj0iW6/+G8jTRXbbf1b
+i/2/ktc4OYNdHAZTtI5rT0n6cbsO35enEWXFbz2yoemqZu7ShgTw/cC6l/3jbiwU
+sxzk7i+ZI0INae8oojfCCb2WEwgVLw==
+=bnaM
+-----END PGP SIGNATURE-----
+
+--ry7Y1FzsF4tVHVJM--
 
