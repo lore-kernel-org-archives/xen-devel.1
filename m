@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0677CDB483
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 13:40:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619346.964305 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA90CDB482
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 13:40:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619339.964239 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtTG9-0001Bu-IH; Thu, 19 Oct 2023 13:40:21 +0000
+	id 1qtTG2-000804-3c; Thu, 19 Oct 2023 13:40:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619346.964305; Thu, 19 Oct 2023 13:40:21 +0000
+Received: by outflank-mailman (output) from mailman id 619339.964239; Thu, 19 Oct 2023 13:40:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtTG9-0001Ai-AC; Thu, 19 Oct 2023 13:40:21 +0000
-Received: by outflank-mailman (input) for mailman id 619346;
- Thu, 19 Oct 2023 13:40:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qtTG2-0007zw-0q; Thu, 19 Oct 2023 13:40:14 +0000
+Received: by outflank-mailman (input) for mailman id 619339;
+ Thu, 19 Oct 2023 13:40:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cQIi=GB=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qtTG7-0008Uq-Bp
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 13:40:19 +0000
+ id 1qtTG0-0007zm-EW
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 13:40:12 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0a457ac3-6e85-11ee-9b0e-b553b5be7939;
- Thu, 19 Oct 2023 15:40:17 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 066503f9-6e85-11ee-98d5-6d05b1d4d9a1;
+ Thu, 19 Oct 2023 15:40:11 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id E3FA24EE0740;
- Thu, 19 Oct 2023 15:40:16 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 391554EE073D;
+ Thu, 19 Oct 2023 15:40:09 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0a457ac3-6e85-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 066503f9-6e85-11ee-98d5-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,51 +53,64 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-4.19 v3 6/8] xen/console: remove stub definition in consoled.h
-Date: Thu, 19 Oct 2023 15:40:04 +0200
-Message-Id: <d354aad8c58fd97058ed84751266562c12feb622.1697722648.git.nicola.vetrini@bugseng.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: [XEN PATCH][for-4.19 v3 0/8] Fix or deviate various instances of missing declarations
+Date: Thu, 19 Oct 2023 15:39:58 +0200
+Message-Id: <cover.1697722648.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1697722648.git.nicola.vetrini@bugseng.com>
-References: <cover.1697722648.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The stub  definition of 'consoled_guest_tx' can be removed, since its
-its single caller uses the implementation built with PV_SHIM enabled.
+The patches in this series aim to fix or deviate various instances where a
+function or variable do not have a declaration visible when such entity is
+defined (in violation of MISRA C:2012 Rule 8.4).
+An exception listed under docs/misra/rules.rst allows asm-only functions and
+variables to be exempted, while the other instances are either changed
+(e.g., making them static) or a missing header inclusion is added.
 
-Fixes: 5ef49f185c2d ("x86/pv-shim: shadow PV console's page for L2 DomU")
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/include/xen/consoled.h | 7 -------
- 1 file changed, 7 deletions(-)
+Nicola Vetrini (8):
+  xen: add declarations for variables where needed
+  x86: add deviations for variables only used in asm code
+  x86: add deviation comments for  asm-only functions
+  x86/grant: switch included header to make declarations visible
+  x86/vm_event: add missing include for hvm_vm_event_do_resume
+  xen/console: remove stub definition in consoled.h
+  x86/mem_access: make function static
+  docs/misra: exclude three more files
 
-diff --git a/xen/include/xen/consoled.h b/xen/include/xen/consoled.h
-index fd5d220a8aca..2b30516b3a0a 100644
---- a/xen/include/xen/consoled.h
-+++ b/xen/include/xen/consoled.h
-@@ -3,18 +3,11 @@
- 
- #include <public/io/console.h>
- 
--#ifdef CONFIG_PV_SHIM
--
- void consoled_set_ring_addr(struct xencons_interface *ring);
- struct xencons_interface *consoled_get_ring_addr(void);
- size_t consoled_guest_rx(void);
- size_t consoled_guest_tx(char c);
- 
--#else
--
--size_t consoled_guest_tx(char c) { return 0; }
--
--#endif /* !CONFIG_PV_SHIM */
- #endif /* __XEN_CONSOLED_H__ */
- /*
-  * Local variables:
--- 
+ docs/misra/exclude-list.json               | 12 ++++++++++++
+ xen/arch/arm/include/asm/setup.h           |  3 +++
+ xen/arch/arm/include/asm/smp.h             |  3 +++
+ xen/arch/arm/platform_hypercall.c          |  2 +-
+ xen/arch/x86/cpu/mcheck/mce.c              |  6 +++---
+ xen/arch/x86/hvm/grant_table.c             |  3 +--
+ xen/arch/x86/hvm/svm/intr.c                |  1 +
+ xen/arch/x86/hvm/svm/nestedsvm.c           |  1 +
+ xen/arch/x86/hvm/svm/svm.c                 |  2 ++
+ xen/arch/x86/hvm/vm_event.c                |  1 +
+ xen/arch/x86/hvm/vmx/intr.c                |  1 +
+ xen/arch/x86/hvm/vmx/vmx.c                 |  2 ++
+ xen/arch/x86/hvm/vmx/vvmx.c                |  1 +
+ xen/arch/x86/include/asm/asm_defns.h       |  1 +
+ xen/arch/x86/include/asm/hvm/grant_table.h |  2 ++
+ xen/arch/x86/irq.c                         |  2 +-
+ xen/arch/x86/mm/mem_access.c               |  6 +++---
+ xen/arch/x86/setup.c                       |  4 +++-
+ xen/arch/x86/traps.c                       |  1 +
+ xen/arch/x86/x86_64/traps.c                |  1 +
+ xen/include/xen/consoled.h                 |  7 -------
+ xen/include/xen/symbols.h                  |  1 +
+ 22 files changed, 45 insertions(+), 18 deletions(-)
+
+--
 2.34.1
-
 
