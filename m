@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4E6CDB465
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 17:27:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619544.964790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17519CDB465
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 17:33:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619546.964801 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtWo2-0007rt-1w; Thu, 19 Oct 2023 17:27:34 +0000
+	id 1qtWts-00025J-NB; Thu, 19 Oct 2023 17:33:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619544.964790; Thu, 19 Oct 2023 17:27:34 +0000
+Received: by outflank-mailman (output) from mailman id 619546.964801; Thu, 19 Oct 2023 17:33:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtWo1-0007rm-UF; Thu, 19 Oct 2023 17:27:33 +0000
-Received: by outflank-mailman (input) for mailman id 619544;
- Thu, 19 Oct 2023 17:27:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qtWts-00025C-IQ; Thu, 19 Oct 2023 17:33:36 +0000
+Received: by outflank-mailman (input) for mailman id 619546;
+ Thu, 19 Oct 2023 17:33:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JNdL=GB=tklengyel.com=tamas@srs-se1.protection.inumbo.net>)
- id 1qtWo0-0007rg-LX
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 17:27:32 +0000
-Received: from sender3-op-o19.zoho.com (sender3-op-o19.zoho.com
- [136.143.184.19]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c6b6ea66-6ea4-11ee-9b0e-b553b5be7939;
- Thu, 19 Oct 2023 19:27:30 +0200 (CEST)
-Received: from localhost.localdomain (c-174-169-89-112.hsd1.ma.comcast.net
- [174.169.89.112]) by mx.zohomail.com
- with SMTPS id 169773644253087.09436354385764;
- Thu, 19 Oct 2023 10:27:22 -0700 (PDT)
+ <SRS0=gyPq=GB=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1qtWtq-000250-6p
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 17:33:34 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9f69904c-6ea5-11ee-98d5-6d05b1d4d9a1;
+ Thu, 19 Oct 2023 19:33:33 +0200 (CEST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5384975e34cso14417088a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Oct 2023 10:33:32 -0700 (PDT)
+Received: from perard.uk.xensource.com (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ b7-20020a170906660700b009a5f1d1564dsm3802118ejp.126.2023.10.19.10.33.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Oct 2023 10:33:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,65 +47,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6b6ea66-6ea4-11ee-9b0e-b553b5be7939
-ARC-Seal: i=1; a=rsa-sha256; t=1697736444; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=RjYl6r+MuhbiXz2QlrmkKPzizkgb27HA9OTvhFPy5UhJw/XIGIaiC/jlVy1AaC5T1sTp0N5AgX8CFaZQcKW3mqcyfuDKOEDRQPzH7s2NYh0u4qe9QPqwM8ZHUXyAPjjRTRR54W8cmN4s2XjpnyLhc0ulAD05h78JjAuCCEGvuUQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1697736444; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=2cUdy2EjT3oE/tz9MxRYlrZhTYSHPwH21W1FCL9DulM=; 
-	b=HbHb+PZ1ukQd+a7+GzdvAYteJenhfREh/E34hYI5KLu3gAkvxrYKb/NEecH6MaZzB3Dbz1OVJMon6L2qVFCvBh+ajpIjNtRMOztpBylxE0Ao0aobFUx5OdkAN4gUjyVk9qCDmRC4hTdTJduWm/ZeqS+zWjUTmY/2txWxQ4uf2YY=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=tklengyel.com;
-	spf=pass  smtp.mailfrom=tamas@tklengyel.com;
-	dmarc=pass header.from=<tamas@tklengyel.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1697736444;
-	s=zmail; d=tklengyel.com; i=tamas@tklengyel.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=2cUdy2EjT3oE/tz9MxRYlrZhTYSHPwH21W1FCL9DulM=;
-	b=DTnp/aYp6lv51ErfnR9dGju7TqGtG8FyMnr80fLTMshzMYUT6d1xpi1foWYlJ8KU
-	DEmVuzjZddQ2PjSdkMBj3nzaaERwcqjIZMTRXrf8G3kSld4ILMrmMdc/yCg6Dy0BH3G
-	6/YyX23p9Gq9w0XZ/BQL5/VccGNrajneTcfYM7Ck=
-From: Tamas K Lengyel <tamas@tklengyel.com>
-To: xen-devel@lists.xenproject.org
-Cc: Tamas K Lengyel <tamas@tklengyel.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH for-4.18] x86/mem_sharing: add missing m2p entry when mapping shared_info page
-Date: Wed, 18 Oct 2023 04:02:42 -0400
-Message-Id: <20231018080242.1213-1-tamas@tklengyel.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 9f69904c-6ea5-11ee-98d5-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1697736811; x=1698341611; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=TNNdwNAyFLKq8WMgyakYbwr7XSBrEHOFQd3jTAYLzT8=;
+        b=vrbi4TEqrol/CU0gbwO3kYef/qUpPrOMxdXey3JePi8sTf+iS+rMW2QQa+sUycda6A
+         XXDnA1yeDd5v6g3H7mF9n63Ivhdt3fIRBzx00YCwZGJ+s3wJUGXq5iDpW7O/nqwF4ihY
+         3XHFZwNG11akg7AnG18IHPj+kUTNdBK3YfOdE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697736811; x=1698341611;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TNNdwNAyFLKq8WMgyakYbwr7XSBrEHOFQd3jTAYLzT8=;
+        b=UWmfREm2LQkkk0KbC7rHnJd5uL0hwopgmSiAkcglk+72WEGHDZsecESe3PfjPODlUv
+         +Q8XEVmtfnUwJcKgd6nrMPFJKO47SOO8m7Nyi5Rc0nW6X4pDBlgyFrUGvuNbsc6CYtOG
+         OrLHYndH1oSkOrtdLojzuFxqc9CBGL2a3mq1DEIqQ6EXxFBJdJa7uCXmO32NX1NDTH7u
+         MCOezSVUWacvp7MF6d+bl1gSRSP4w5djCouV9AxG07LGpp6lINRpK08jBPRFQlvIgp+8
+         tH8HFA8iD1wvPQSvL2rxFPV//m++TagfjcBOV3M6KYyslmAppFATTss3Dg/reAUV6puQ
+         VC+g==
+X-Gm-Message-State: AOJu0Yyy1jtT4eJ07w3W1iY12ZER8+eBTDrG1oh+JX3fr2M4btW5Al03
+	wkPn/j9pO60ianUJIsMtgnLbiKNtluV9hAdGrK4=
+X-Google-Smtp-Source: AGHT+IHX8c8lbk5uYQqu6RWN18DMC0I7nxXFmu8RsTQd4syzOjMis9Bt2K3jG1pQxf/eU0eVXpo+SA==
+X-Received: by 2002:a17:907:7e91:b0:9a5:7f99:be54 with SMTP id qb17-20020a1709077e9100b009a57f99be54mr2529984ejc.67.1697736811407;
+        Thu, 19 Oct 2023 10:33:31 -0700 (PDT)
+Date: Thu, 19 Oct 2023 18:33:30 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Doug Goldstein <cardoe@cardoe.com>, Henry Wang <Henry.Wang@arm.com>
+Subject: Re: [PATCH for-4.18] CI: (More) Always pull base image when building
+ a container
+Message-ID: <f8cb1c63-b634-4bd2-9bce-54d2e3e6dbe3@perard>
+References: <20231019171452.1704276-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231019171452.1704276-1-andrew.cooper3@citrix.com>
 
-When mapping in the shared_info page to a fork the m2p entry wasn't set
-resulting in the shared_info being reset even when the fork reset was called
-with only reset_state and not reset_memory. This results in an extra
-unnecessary TLB flush.
+On Thu, Oct 19, 2023 at 06:14:52PM +0100, Andrew Cooper wrote:
+> Repeat c/s 26ecc08b98fc ("automation: Always pull base image when building a
+> container") for the other makefile we've got building containers.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> 
+> For 4.18.  This is CI infrastructure, not part of the regular build.
 
-Fixes: 1a0000ac775 ("mem_sharing: map shared_info page to same gfn during fork")
-Signed-off-by: Tamas K Lengyel <tamas@tklengyel.com>
----
- xen/arch/x86/mm/mem_sharing.c | 2 ++
- 1 file changed, 2 insertions(+)
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 
-diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
-index 94b6b782ef..142258f16a 100644
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -1847,6 +1847,8 @@ static int copy_special_pages(struct domain *cd, struct domain *d)
-                                 p2m_ram_rw, p2m->default_access, -1);
-             if ( rc )
-                 return rc;
-+
-+            set_gpfn_from_mfn(mfn_x(new_mfn), gfn_x(old_gfn));
-         }
-     }
- 
+Thanks,
+
 -- 
-2.34.1
-
+Anthony PERARD
 
