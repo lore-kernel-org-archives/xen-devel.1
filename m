@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D43D1CDB465
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619417.964456 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3296BCDB482
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619428.964559 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8p-0007RB-67; Thu, 19 Oct 2023 15:40:55 +0000
+	id 1qtV90-0001v3-FQ; Thu, 19 Oct 2023 15:41:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619417.964456; Thu, 19 Oct 2023 15:40:55 +0000
+Received: by outflank-mailman (output) from mailman id 619428.964559; Thu, 19 Oct 2023 15:41:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8p-0007Q8-0J; Thu, 19 Oct 2023 15:40:55 +0000
-Received: by outflank-mailman (input) for mailman id 619417;
- Thu, 19 Oct 2023 15:40:53 +0000
+	id 1qtV8z-0001nr-LM; Thu, 19 Oct 2023 15:41:05 +0000
+Received: by outflank-mailman (input) for mailman id 619428;
+ Thu, 19 Oct 2023 15:41:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=b9Lg=GB=casper.srs.infradead.org=BATV+06ae5fa416ae820d9d5a+7361+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qtV8n-0006dc-Jh
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:53 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=m+UH=GB=desiato.srs.infradead.org=BATV+298c059cf2aa39b7dc34+7361+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qtV8w-0006dc-6k
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:41:02 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id df715722-6e95-11ee-9b0e-b553b5be7939;
- Thu, 19 Oct 2023 17:40:48 +0200 (CEST)
+ id e6311328-6e95-11ee-9b0e-b553b5be7939;
+ Thu, 19 Oct 2023 17:40:58 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qtV8M-007osp-TI; Thu, 19 Oct 2023 15:40:26 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qtV8M-009yCm-2X; Thu, 19 Oct 2023 15:40:27 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qtV8M-000PuO-1b; Thu, 19 Oct 2023 16:40:26 +0100
+ Linux)) id 1qtV8M-000Pu2-04; Thu, 19 Oct 2023 16:40:26 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: df715722-6e95-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: e6311328-6e95-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=YiCYoQ74dUkz+/Yw6CbN6HlBrhYYc3OdkjhDV5gESs0=; b=GXhFdhy/z+aIbY/iYsIiOAlfI5
-	lHmr8No/KBo7JHtk+f4Y7hin/kTcgjMWRdOZvFYaiPCRvW9JKOiEbJBa/P8wl4QqDU2gCaRwdSS/Z
-	WZhqK2E7gBhb8a1vtH06wnAQfaf4pE1w4fP7MFv5acAPdeY8Q+fXsUF4WcNSECZTUPJWX+4JW5/KS
-	RGx7n0OSqnRnT5uVPuR3dW2fK92QSbwyAvknxlfjqWM/K71GuJB3Ibd2mg/8I8HZ/QAGiUKSsdfVe
-	vyvgVC+0zC4A0k/de7T5EB/cUD0DTOrf4IE5ySm0ocl54PZlNBDLeL/KovBRe21dDx3vH+2ACmN9J
-	c+qtwl2g==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=I94165DVF5UqmBmDscBFuMqRd0gjhG/yUz/GC+u3DZo=; b=b27pRvnBGhO8GBTyfkDGo1zlxb
+	TSesogQRQ2g+1BMqrLQKVS9a1UqGgeO/k1J331Y59qHD6EVut4zvVV0M1qgLrVRf/A+ir9G1MTQIF
+	+0LXsZFDA3t1dM3upyUzwFNy8/FI5lxM+jDPhgc6FHQ22juT+DVHJ5pgPyGW8jgeW4rYxJpx3mDrp
+	tUF1mVG428hFe9nSdcOJQqPLzDalaf0abHj0KqsdEIjy9c4f5HO701r8YI3m544Pe0l7kkTTLJf/o
+	E74nIaxdkPhY7DJpjUTycGAcq0iMv+uHDvW6J9oEfLAz0orGmRTHzAcAbZuMvJ1c2hkl8UCHuriwd
+	2+mw3Qig==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -78,211 +78,89 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v2 11/24] hw/xen: automatically assign device index to block devices
-Date: Thu, 19 Oct 2023 16:40:07 +0100
-Message-Id: <20231019154020.99080-12-dwmw2@infradead.org>
+Subject: [PATCH v2 06/24] i386/xen: Ignore VCPU_SSHOTTMR_future flag in set_singleshot_timer()
+Date: Thu, 19 Oct 2023 16:40:02 +0100
+Message-Id: <20231019154020.99080-7-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231019154020.99080-1-dwmw2@infradead.org>
 References: <20231019154020.99080-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-There's no need to force the user to assign a vdev. We can automatically
-assign one, starting at xvda and searching until we find the first disk
-name that's unused.
+Upstream Xen now ignores this flag¹, since the only guest kernel ever to
+use it was buggy.
 
-This means we can now allow '-drive if=xen,file=xxx' to work without an
-explicit separate -driver argument, just like if=virtio.
-
-Rip out the legacy handling from the xenpv machine, which was scribbling
-over any disks configured by the toolstack, and didn't work with anything
-but raw images.
+¹ https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=19c6cbd909
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Acked-by: Kevin Wolf <kwolf@redhat.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- blockdev.c                          | 15 +++++++++---
- hw/block/xen-block.c                | 38 +++++++++++++++++++++++++++++
- hw/xen/xen_devconfig.c              | 28 ---------------------
- hw/xenpv/xen_machine_pv.c           |  9 -------
- include/hw/xen/xen-legacy-backend.h |  1 -
- 5 files changed, 50 insertions(+), 41 deletions(-)
+ target/i386/kvm/xen-emu.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/blockdev.c b/blockdev.c
-index a01c62596b..5d9f2e5395 100644
---- a/blockdev.c
-+++ b/blockdev.c
-@@ -255,13 +255,13 @@ void drive_check_orphaned(void)
-          * Ignore default drives, because we create certain default
-          * drives unconditionally, then leave them unclaimed.  Not the
-          * users fault.
--         * Ignore IF_VIRTIO, because it gets desugared into -device,
--         * so we can leave failing to -device.
-+         * Ignore IF_VIRTIO or IF_XEN, because it gets desugared into
-+         * -device, so we can leave failing to -device.
-          * Ignore IF_NONE, because leaving unclaimed IF_NONE remains
-          * available for device_add is a feature.
-          */
-         if (dinfo->is_default || dinfo->type == IF_VIRTIO
--            || dinfo->type == IF_NONE) {
-+            || dinfo->type == IF_XEN || dinfo->type == IF_NONE) {
-             continue;
-         }
-         if (!blk_get_attached_dev(blk)) {
-@@ -977,6 +977,15 @@ DriveInfo *drive_new(QemuOpts *all_opts, BlockInterfaceType block_default_type,
-         qemu_opt_set(devopts, "driver", "virtio-blk", &error_abort);
-         qemu_opt_set(devopts, "drive", qdict_get_str(bs_opts, "id"),
-                      &error_abort);
-+    } else if (type == IF_XEN) {
-+        QemuOpts *devopts;
-+        devopts = qemu_opts_create(qemu_find_opts("device"), NULL, 0,
-+                                   &error_abort);
-+        qemu_opt_set(devopts, "driver",
-+                     (media == MEDIA_CDROM) ? "xen-cdrom" : "xen-disk",
-+                     &error_abort);
-+        qemu_opt_set(devopts, "drive", qdict_get_str(bs_opts, "id"),
-+                     &error_abort);
-     }
- 
-     filename = qemu_opt_get(legacy_opts, "file");
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index a07cd7eb5d..f490b24ec8 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -27,6 +27,7 @@
- #include "sysemu/block-backend.h"
- #include "sysemu/iothread.h"
- #include "dataplane/xen-block.h"
-+#include "hw/xen/interface/io/xs_wire.h"
- #include "trace.h"
- 
- static char *xen_block_get_name(XenDevice *xendev, Error **errp)
-@@ -34,6 +35,43 @@ static char *xen_block_get_name(XenDevice *xendev, Error **errp)
-     XenBlockDevice *blockdev = XEN_BLOCK_DEVICE(xendev);
-     XenBlockVdev *vdev = &blockdev->props.vdev;
- 
-+    if (blockdev->props.vdev.type == XEN_BLOCK_VDEV_TYPE_INVALID) {
-+        XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
-+        char fe_path[XENSTORE_ABS_PATH_MAX + 1];
-+        char *value;
-+        int disk = 0;
-+        unsigned long idx;
-+
-+        /* Find an unoccupied device name */
-+        while (disk < (1 << 20)) {
-+            if (disk < (1 << 4)) {
-+                idx = (202 << 8) | (disk << 4);
-+            } else {
-+                idx = (1 << 28) | (disk << 8);
-+            }
-+            snprintf(fe_path, sizeof(fe_path),
-+                     "/local/domain/%u/device/vbd/%lu",
-+                     xendev->frontend_id, idx);
-+            value = qemu_xen_xs_read(xenbus->xsh, XBT_NULL, fe_path, NULL);
-+            if (!value) {
-+                if (errno == ENOENT) {
-+                    vdev->type = XEN_BLOCK_VDEV_TYPE_XVD;
-+                    vdev->partition = 0;
-+                    vdev->disk = disk;
-+                    vdev->number = idx;
-+                    goto found;
-+                }
-+                error_setg(errp, "cannot read %s: %s", fe_path,
-+                           strerror(errno));
-+                return NULL;
-+            }
-+            free(value);
-+            disk++;
-+        }
-+        error_setg(errp, "cannot find device vdev for block device");
-+        return NULL;
-+    }
-+ found:
-     return g_strdup_printf("%lu", vdev->number);
- }
- 
-diff --git a/hw/xen/xen_devconfig.c b/hw/xen/xen_devconfig.c
-index 9b7304e544..3f77c675c6 100644
---- a/hw/xen/xen_devconfig.c
-+++ b/hw/xen/xen_devconfig.c
-@@ -46,34 +46,6 @@ static int xen_config_dev_all(char *fe, char *be)
- 
- /* ------------------------------------------------------------- */
- 
--int xen_config_dev_blk(DriveInfo *disk)
--{
--    char fe[256], be[256], device_name[32];
--    int vdev = 202 * 256 + 16 * disk->unit;
--    int cdrom = disk->media_cd;
--    const char *devtype = cdrom ? "cdrom" : "disk";
--    const char *mode    = cdrom ? "r"     : "w";
--    const char *filename = qemu_opt_get(disk->opts, "file");
--
--    snprintf(device_name, sizeof(device_name), "xvd%c", 'a' + disk->unit);
--    xen_pv_printf(NULL, 1, "config disk %d [%s]: %s\n",
--                  disk->unit, device_name, filename);
--    xen_config_dev_dirs("vbd", "qdisk", vdev, fe, be, sizeof(fe));
--
--    /* frontend */
--    xenstore_write_int(fe, "virtual-device",  vdev);
--    xenstore_write_str(fe, "device-type",     devtype);
--
--    /* backend */
--    xenstore_write_str(be, "dev",             device_name);
--    xenstore_write_str(be, "type",            "file");
--    xenstore_write_str(be, "params",          filename);
--    xenstore_write_str(be, "mode",            mode);
--
--    /* common stuff */
--    return xen_config_dev_all(fe, be);
--}
--
- int xen_config_dev_nic(NICInfo *nic)
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index 3ba636b09a..477e93cd92 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -1076,17 +1076,13 @@ static int vcpuop_stop_periodic_timer(CPUState *target)
+  * Must always be called with xen_timers_lock held.
+  */
+ static int do_set_singleshot_timer(CPUState *cs, uint64_t timeout_abs,
+-                                   bool future, bool linux_wa)
++                                   bool linux_wa)
  {
-     char fe[256], be[256];
-diff --git a/hw/xenpv/xen_machine_pv.c b/hw/xenpv/xen_machine_pv.c
-index 17cda5ec13..1533f5dfb4 100644
---- a/hw/xenpv/xen_machine_pv.c
-+++ b/hw/xenpv/xen_machine_pv.c
-@@ -32,7 +32,6 @@
+     CPUX86State *env = &X86_CPU(cs)->env;
+     int64_t now = kvm_get_current_ns();
+     int64_t qemu_now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+     int64_t delta = timeout_abs - now;
  
- static void xen_init_pv(MachineState *machine)
- {
--    DriveInfo *dinfo;
-     int i;
- 
-     setup_xen_backend_ops();
-@@ -64,14 +63,6 @@ static void xen_init_pv(MachineState *machine)
-         vga_interface_created = true;
-     }
- 
--    /* configure disks */
--    for (i = 0; i < 16; i++) {
--        dinfo = drive_get(IF_XEN, 0, i);
--        if (!dinfo)
--            continue;
--        xen_config_dev_blk(dinfo);
+-    if (future && timeout_abs < now) {
+-        return -ETIME;
 -    }
 -
-     /* configure nics */
-     for (i = 0; i < nb_nics; i++) {
-         if (!nd_table[i].model || 0 != strcmp(nd_table[i].model, "xen"))
-diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
-index 6c307c5f2c..fc42146bc2 100644
---- a/include/hw/xen/xen-legacy-backend.h
-+++ b/include/hw/xen/xen-legacy-backend.h
-@@ -81,7 +81,6 @@ extern struct XenDevOps xen_usb_ops;          /* xen-usb.c         */
+     if (linux_wa && unlikely((int64_t)timeout_abs < 0 ||
+                              (delta > 0 && (uint32_t)(delta >> 50) != 0))) {
+         /*
+@@ -1128,9 +1124,13 @@ static int vcpuop_set_singleshot_timer(CPUState *cs, uint64_t arg)
+     }
  
- /* configuration (aka xenbus setup) */
- void xen_config_cleanup(void);
--int xen_config_dev_blk(DriveInfo *disk);
- int xen_config_dev_nic(NICInfo *nic);
- int xen_config_dev_vfb(int vdev, const char *type);
- int xen_config_dev_vkbd(int vdev);
+     QEMU_LOCK_GUARD(&X86_CPU(cs)->env.xen_timers_lock);
+-    return do_set_singleshot_timer(cs, sst.timeout_abs_ns,
+-                                   !!(sst.flags & VCPU_SSHOTTMR_future),
+-                                   false);
++
++    /*
++     * We ignore the VCPU_SSHOTTMR_future flag, just as Xen now does.
++     * The only guest that ever used it, got it wrong.
++     * https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=19c6cbd909
++     */
++    return do_set_singleshot_timer(cs, sst.timeout_abs_ns, false);
+ }
+ 
+ static int vcpuop_stop_singleshot_timer(CPUState *cs)
+@@ -1155,7 +1155,7 @@ static bool kvm_xen_hcall_set_timer_op(struct kvm_xen_exit *exit, X86CPU *cpu,
+         err = vcpuop_stop_singleshot_timer(CPU(cpu));
+     } else {
+         QEMU_LOCK_GUARD(&X86_CPU(cpu)->env.xen_timers_lock);
+-        err = do_set_singleshot_timer(CPU(cpu), timeout, false, true);
++        err = do_set_singleshot_timer(CPU(cpu), timeout, true);
+     }
+     exit->u.hcall.result = err;
+     return true;
+@@ -1843,7 +1843,7 @@ int kvm_put_xen_state(CPUState *cs)
+         QEMU_LOCK_GUARD(&env->xen_timers_lock);
+         if (env->xen_singleshot_timer_ns) {
+             ret = do_set_singleshot_timer(cs, env->xen_singleshot_timer_ns,
+-                                    false, false);
++                                          false);
+             if (ret < 0) {
+                 return ret;
+             }
 -- 
 2.40.1
 
