@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A4E4CDB482
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 13:40:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619343.964272 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D02CDB483
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 13:40:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619345.964300 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtTG6-0000FM-Hb; Thu, 19 Oct 2023 13:40:18 +0000
+	id 1qtTG9-000178-3Y; Thu, 19 Oct 2023 13:40:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619343.964272; Thu, 19 Oct 2023 13:40:18 +0000
+Received: by outflank-mailman (output) from mailman id 619345.964300; Thu, 19 Oct 2023 13:40:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtTG6-0000E1-An; Thu, 19 Oct 2023 13:40:18 +0000
-Received: by outflank-mailman (input) for mailman id 619343;
- Thu, 19 Oct 2023 13:40:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qtTG8-00016v-V8; Thu, 19 Oct 2023 13:40:20 +0000
+Received: by outflank-mailman (input) for mailman id 619345;
+ Thu, 19 Oct 2023 13:40:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cQIi=GB=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qtTG5-0008Uq-3n
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 13:40:17 +0000
+ id 1qtTG7-0007zm-7f
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 13:40:19 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 08cbf97f-6e85-11ee-9b0e-b553b5be7939;
- Thu, 19 Oct 2023 15:40:15 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0aa9d556-6e85-11ee-98d5-6d05b1d4d9a1;
+ Thu, 19 Oct 2023 15:40:18 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 85C4A4EE0744;
- Thu, 19 Oct 2023 15:40:14 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id C03604EE0741;
+ Thu, 19 Oct 2023 15:40:17 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08cbf97f-6e85-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 0aa9d556-6e85-11ee-98d5-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,151 +53,50 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Wei Liu <wl@xen.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>
-Subject: [XEN PATCH][for-4.19 v3 3/8] x86: add deviation comments for  asm-only functions
-Date: Thu, 19 Oct 2023 15:40:01 +0200
-Message-Id: <2e7d4a55c3b6c317fd00e8ce32f992af423193f1.1697722648.git.nicola.vetrini@bugseng.com>
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH][for-4.19 v3 7/8] x86/mem_access: make function static
+Date: Thu, 19 Oct 2023 15:40:05 +0200
+Message-Id: <c7a9058c31f3b46ae81d63bf8715b7ee4b69008e.1697722648.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1697722648.git.nicola.vetrini@bugseng.com>
 References: <cover.1697722648.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As stated in rules.rst, functions used only in asm code
-are allowed to have no prior declaration visible when being
-defined, hence these functions are deviated.
-This also fixes violations of MISRA C:2012 Rule 8.4.
+The function is used only within this file, and therefore can be static.
+
+No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
 ---
 Changes in v3:
-- added SAF deviations for vmx counterparts to svm functions.
+- style fix
 ---
- xen/arch/x86/hvm/svm/intr.c      | 1 +
- xen/arch/x86/hvm/svm/nestedsvm.c | 1 +
- xen/arch/x86/hvm/svm/svm.c       | 2 ++
- xen/arch/x86/hvm/vmx/intr.c      | 1 +
- xen/arch/x86/hvm/vmx/vmx.c       | 2 ++
- xen/arch/x86/hvm/vmx/vvmx.c      | 1 +
- xen/arch/x86/traps.c             | 1 +
- xen/arch/x86/x86_64/traps.c      | 1 +
- 8 files changed, 10 insertions(+)
+ xen/arch/x86/mm/mem_access.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
-index 192e17ebbfbb..bd9dc560bbc6 100644
---- a/xen/arch/x86/hvm/svm/intr.c
-+++ b/xen/arch/x86/hvm/svm/intr.c
-@@ -123,6 +123,7 @@ static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
-         vmcb, general1_intercepts | GENERAL1_INTERCEPT_VINTR);
+diff --git a/xen/arch/x86/mm/mem_access.c b/xen/arch/x86/mm/mem_access.c
+index c472fa1ee58b..d3dd5ab5ef8b 100644
+--- a/xen/arch/x86/mm/mem_access.c
++++ b/xen/arch/x86/mm/mem_access.c
+@@ -249,9 +249,9 @@ bool p2m_mem_access_check(paddr_t gpa, unsigned long gla,
+     return (p2ma != p2m_access_n2rwx);
  }
  
-+/* SAF-1-safe */
- void svm_intr_assist(void)
+-int p2m_set_altp2m_mem_access(struct domain *d, struct p2m_domain *hp2m,
+-                              struct p2m_domain *ap2m, p2m_access_t a,
+-                              gfn_t gfn)
++static int p2m_set_altp2m_mem_access(struct domain *d, struct p2m_domain *hp2m,
++                                     struct p2m_domain *ap2m, p2m_access_t a,
++                                     gfn_t gfn)
  {
-     struct vcpu *v = current;
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index a09b6abaaeaf..c80d59e0728e 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1441,6 +1441,7 @@ nestedsvm_vcpu_vmexit(struct vcpu *v, struct cpu_user_regs *regs,
- }
- 
- /* VCPU switch */
-+/* SAF-1-safe */
- void nsvm_vcpu_switch(void)
- {
-     struct cpu_user_regs *regs = guest_cpu_user_regs();
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 24c417ca7199..40ba69bcdfa1 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1056,6 +1056,7 @@ static void noreturn cf_check svm_do_resume(void)
-     reset_stack_and_jump(svm_asm_do_resume);
- }
- 
-+/* SAF-1-safe */
- void svm_vmenter_helper(void)
- {
-     const struct cpu_user_regs *regs = guest_cpu_user_regs();
-@@ -2586,6 +2587,7 @@ const struct hvm_function_table * __init start_svm(void)
-     return &svm_function_table;
- }
- 
-+/* SAF-1-safe */
- void svm_vmexit_handler(void)
- {
-     struct cpu_user_regs *regs = guest_cpu_user_regs();
-diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
-index fd719c4c01d2..1805aafb086d 100644
---- a/xen/arch/x86/hvm/vmx/intr.c
-+++ b/xen/arch/x86/hvm/vmx/intr.c
-@@ -224,6 +224,7 @@ void vmx_sync_exit_bitmap(struct vcpu *v)
-     }
- }
- 
-+/* SAF-1-safe */
- void vmx_intr_assist(void)
- {
-     struct hvm_intack intack;
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 1edc7f1e919f..0936a263154e 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4035,6 +4035,7 @@ static void undo_nmis_unblocked_by_iret(void)
-               guest_info | VMX_INTR_SHADOW_NMI);
- }
- 
-+/* SAF-1-safe */
- void vmx_vmexit_handler(struct cpu_user_regs *regs)
- {
-     unsigned long exit_qualification, exit_reason, idtv_info, intr_info = 0;
-@@ -4787,6 +4788,7 @@ static void lbr_fixup(void)
- }
- 
- /* Returns false if the vmentry has to be restarted */
-+/* SAF-1-safe */
- bool vmx_vmenter_helper(const struct cpu_user_regs *regs)
- {
-     struct vcpu *curr = current;
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 16b0ef82b6c8..99d93b869307 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1490,6 +1490,7 @@ static void nvmx_eptp_update(void)
-     __vmwrite(EPT_POINTER, get_shadow_eptp(curr));
- }
- 
-+/* SAF-1-safe */
- void nvmx_switch_guest(void)
- {
-     struct vcpu *v = current;
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index e1356f696aba..6af35a468199 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -2265,6 +2265,7 @@ void asm_domain_crash_synchronous(unsigned long addr)
- }
- 
- #ifdef CONFIG_DEBUG
-+/* SAF-1-safe */
- void check_ist_exit(const struct cpu_user_regs *regs, bool ist_exit)
- {
-     const unsigned int ist_mask =
-diff --git a/xen/arch/x86/x86_64/traps.c b/xen/arch/x86/x86_64/traps.c
-index e03e80813e36..5963d26d7848 100644
---- a/xen/arch/x86/x86_64/traps.c
-+++ b/xen/arch/x86/x86_64/traps.c
-@@ -266,6 +266,7 @@ void show_page_walk(unsigned long addr)
-            l1_table_offset(addr), l1e_get_intpte(l1e), pfn);
- }
- 
-+/* SAF-1-safe */
- void do_double_fault(struct cpu_user_regs *regs)
- {
-     unsigned int cpu;
+     mfn_t mfn;
+     p2m_type_t t;
 -- 
 2.34.1
 
