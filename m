@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D4FCCDB487
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58E97C41513
 	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619426.964539 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.619410.964400 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8x-0001Ct-Tt; Thu, 19 Oct 2023 15:41:03 +0000
+	id 1qtV8k-0006A9-LV; Thu, 19 Oct 2023 15:40:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619426.964539; Thu, 19 Oct 2023 15:41:03 +0000
+Received: by outflank-mailman (output) from mailman id 619410.964400; Thu, 19 Oct 2023 15:40:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8x-00018J-3n; Thu, 19 Oct 2023 15:41:03 +0000
-Received: by outflank-mailman (input) for mailman id 619426;
- Thu, 19 Oct 2023 15:40:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qtV8k-0006A2-Iv; Thu, 19 Oct 2023 15:40:50 +0000
+Received: by outflank-mailman (input) for mailman id 619410;
+ Thu, 19 Oct 2023 15:40:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m+UH=GB=desiato.srs.infradead.org=BATV+298c059cf2aa39b7dc34+7361+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qtV8s-0006dc-SC
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:58 +0000
+ id 1qtV8i-0005v1-KU
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:49 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e35e1947-6e95-11ee-9b0e-b553b5be7939;
- Thu, 19 Oct 2023 17:40:55 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id de2f3353-6e95-11ee-98d5-6d05b1d4d9a1;
+ Thu, 19 Oct 2023 17:40:46 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qtV8O-009yD7-0P; Thu, 19 Oct 2023 15:40:28 +0000
+ id 1qtV8M-009yCr-2Y; Thu, 19 Oct 2023 15:40:27 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qtV8N-000PvR-1m; Thu, 19 Oct 2023 16:40:27 +0100
+ Linux)) id 1qtV8M-000PuS-1s; Thu, 19 Oct 2023 16:40:26 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: e35e1947-6e95-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: de2f3353-6e95-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=DyY8I/ZKbCu/w/L7sfs0qQaOI3alzNFdd8No8uZAwJY=; b=poV1WGsApzadUT0xdj1lGj07Ks
-	IIjmyFgyyhHHCCa4ppA7c3EQcnUM8KZHHQBeW/ta/PnFbfeVmW8WJYyEFhxgqunegGZQFI7xbD1/7
-	fPB4Yk2ZzuW8AcHkoFs3T9n+3rkqi+i8aAB+lpJyNQkcsIVG+tH0I8kSL4/8hilNGyqXxt4nKc4F2
-	1VYruLsoyPt9sV7drShBs2y4THHGaJUyrvKdv6jl+1jv58sLf+4BCkRLWbDjZmOpshREMjTG1A2K+
-	gLfK01j5TZVqkaR5DV0hssWj6h3UaFyg+QWj3v0veF2O6ukerNiljYRn81Xjatg7EQZWYHHVwm/lz
-	kfBK08xg==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=j10esoq0FJNH76opTx2Ikt3KjCQW6JceQg/cwlpclKs=; b=VayzCs3Jcr5zFnMxp7BlQilagI
+	tXNgRu8R6rL8iIho5a0FncN8I4SUIY7Pm5o0Vjtx0f4nExokqzOz/NEkiNNlht5FyKWMGDt96nV3J
+	Wch5nB2MVR5Xh5Y01vGCYPAtCfRQXpciDPobqK0KJ3+VXXhLxqbrDRbbk1rz50m8yi1+53qLPLdQf
+	LucVSSC+oHKdiyo9XTTwWqvueeBcscIN9lgwQsG7+S1VDTQLhq64Nco/Tu01+1fjHy1g+pj3TeBo1
+	QHf96QTc6Sxrqe8pi5HQg/QurZqCAqIe538GeKsecG0hNqut8aYw9DSSk3twWpfmXAvKd55LUhbhX
+	JMyavWmA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -78,168 +78,78 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v2 24/24] docs: update Xen-on-KVM documentation
-Date: Thu, 19 Oct 2023 16:40:20 +0100
-Message-Id: <20231019154020.99080-25-dwmw2@infradead.org>
+Subject: [PATCH v2 12/24] hw/xen: add get_frontend_path() method to XenDeviceClass
+Date: Thu, 19 Oct 2023 16:40:08 +0100
+Message-Id: <20231019154020.99080-13-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231019154020.99080-1-dwmw2@infradead.org>
 References: <20231019154020.99080-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Add notes about console and network support, and how to launch PV guests.
-Clean up the disk configuration examples now that that's simpler, and
-remove the comment about IDE unplug on q35/AHCI now that it's fixed.
+The primary Xen console is special. The guest's side is set up for it by
+the toolstack automatically and not by the standard PV init sequence.
+
+Accordingly, its *frontend* doesn't appear in …/device/console/0 either;
+instead it appears under …/console in the guest's XenStore node.
+
+To allow the Xen console driver to override the frontend path for the
+primary console, add a method to the XenDeviceClass which can be used
+instead of the standard xen_device_get_frontend_path()
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- docs/system/i386/xen.rst | 100 ++++++++++++++++++++++++++++-----------
- 1 file changed, 72 insertions(+), 28 deletions(-)
+ hw/xen/xen-bus.c         | 10 +++++++++-
+ include/hw/xen/xen-bus.h |  2 ++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/docs/system/i386/xen.rst b/docs/system/i386/xen.rst
-index f06765e88c..6214c4571e 100644
---- a/docs/system/i386/xen.rst
-+++ b/docs/system/i386/xen.rst
-@@ -15,46 +15,24 @@ Setup
- -----
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index ece8ec40cd..cc524ed92c 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -711,8 +711,16 @@ static void xen_device_frontend_create(XenDevice *xendev, Error **errp)
+ {
+     ERRP_GUARD();
+     XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
++    XenDeviceClass *xendev_class = XEN_DEVICE_GET_CLASS(xendev);
  
- Xen mode is enabled by setting the ``xen-version`` property of the KVM
--accelerator, for example for Xen 4.10:
-+accelerator, for example for Xen 4.17:
+-    xendev->frontend_path = xen_device_get_frontend_path(xendev);
++    if (xendev_class->get_frontend_path) {
++        xendev->frontend_path = xendev_class->get_frontend_path(xendev, errp);
++        if (!xendev->frontend_path) {
++            return;
++        }
++    } else {
++        xendev->frontend_path = xen_device_get_frontend_path(xendev);
++    }
  
- .. parsed-literal::
+     /*
+      * The frontend area may have already been created by a legacy
+diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
+index f435898164..eb440880b5 100644
+--- a/include/hw/xen/xen-bus.h
++++ b/include/hw/xen/xen-bus.h
+@@ -33,6 +33,7 @@ struct XenDevice {
+ };
+ typedef struct XenDevice XenDevice;
  
--  |qemu_system| --accel kvm,xen-version=0x4000a,kernel-irqchip=split
-+  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split
- 
- Additionally, virtual APIC support can be advertised to the guest through the
- ``xen-vapic`` CPU flag:
- 
- .. parsed-literal::
- 
--  |qemu_system| --accel kvm,xen-version=0x4000a,kernel-irqchip=split --cpu host,+xen_vapic
-+  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split --cpu host,+xen-vapic
- 
- When Xen support is enabled, QEMU changes hypervisor identification (CPUID
- 0x40000000..0x4000000A) to Xen. The KVM identification and features are not
- advertised to a Xen guest. If Hyper-V is also enabled, the Xen identification
- moves to leaves 0x40000100..0x4000010A.
- 
--The Xen platform device is enabled automatically for a Xen guest. This allows
--a guest to unplug all emulated devices, in order to use Xen PV block and network
--drivers instead. Under Xen, the boot disk is typically available both via IDE
--emulation, and as a PV block device. Guest bootloaders typically use IDE to load
--the guest kernel, which then unplugs the IDE and continues with the Xen PV block
--device.
--
--This configuration can be achieved as follows
--
--.. parsed-literal::
--
--  |qemu_system| -M pc --accel kvm,xen-version=0x4000a,kernel-irqchip=split \\
--       -drive file=${GUEST_IMAGE},if=none,id=disk,file.locking=off -device xen-disk,drive=disk,vdev=xvda \\
--       -drive file=${GUEST_IMAGE},index=2,media=disk,file.locking=off,if=ide
--
--It is necessary to use the pc machine type, as the q35 machine uses AHCI instead
--of legacy IDE, and AHCI disks are not unplugged through the Xen PV unplug
--mechanism.
--
--VirtIO devices can also be used; Linux guests may need to be dissuaded from
--umplugging them by adding 'xen_emul_unplug=never' on their command line.
--
- Properties
- ----------
- 
-@@ -63,7 +41,10 @@ The following properties exist on the KVM accelerator object:
- ``xen-version``
-   This property contains the Xen version in ``XENVER_version`` form, with the
-   major version in the top 16 bits and the minor version in the low 16 bits.
--  Setting this property enables the Xen guest support.
-+  Setting this property enables the Xen guest support. If Xen version 4.5 or
-+  greater is specified, the HVM leaf in Xen CPUID is populated. Xen version
-+  4.6 enables the vCPU ID in CPUID, and version 4.17 advertises vCPU upcall
-+  vector support to the guest.
- 
- ``xen-evtchn-max-pirq``
-   Xen PIRQs represent an emulated physical interrupt, either GSI or MSI, which
-@@ -83,8 +64,71 @@ The following properties exist on the KVM accelerator object:
-   through simultaneous grants. For guests with large numbers of PV devices and
-   high throughput, it may be desirable to increase this value.
- 
--OS requirements
-----------------
-+Xen paravirtual devices
-+-----------------------
-+
-+The Xen PCI platform device is enabled automatically for a Xen guest. This
-+allows a guest to unplug all emulated devices, in order to use paravirtual
-+block and network drivers instead.
-+
-+Those paravirtual Xen block, network (and console) devices can be created
-+through the command line, and/or hot-plugged.
-+
-+To provide a Xen console device, define a character device and then a device
-+of type ``xen-console`` to connect to it. For the Xen console equivalent of
-+the handy ``-serial mon:stdio`` option, for example:
-+
-+.. parsed-literal::
-+   -chardev -chardev stdio,mux=on,id=char0,signal=off -mon char0 \\
-+   -device xen-console,chardev=char0
-+
-+The Xen network device is ``xen-net-device``, which becomes the default NIC
-+model for emulated Xen guests, meaning that just the default ``-nic user``
-+should automatically work and present a Xen network device to the guest.
-+
-+Disks can be configured with '``-drive file=${GUEST_IMAGE},if=xen``' and will
-+appear to the guest as ``xvda`` onwards.
-+
-+Under Xen, the boot disk is typically available both via IDE emulation, and
-+as a PV block device. Guest bootloaders typically use IDE to load the guest
-+kernel, which then unplugs the IDE and continues with the Xen PV block device.
-+
-+This configuration can be achieved as follows:
-+
-+.. parsed-literal::
-+
-+  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split \\
-+       -drive file=${GUEST_IMAGE},if=xen \\
-+       -drive file=${GUEST_IMAGE},file.locking=off,if=ide
-+
-+VirtIO devices can also be used; Linux guests may need to be dissuaded from
-+umplugging them by adding '``xen_emul_unplug=never``' on their command line.
-+
-+Booting Xen PV guests
-+---------------------
-+
-+Booting PV guest kernels is possible by using the Xen PV shim (a version of Xen
-+itself, designed to run inside a Xen HVM guest and provide memory management
-+services for one guest alone).
-+
-+The Xen binary is provided as the ``-kernel`` and the guest kernel itself (or
-+PV Grub image) as the ``-initrd`` image, which actually just means the first
-+multiboot "module". For example:
-+
-+.. parsed-literal::
-+
-+  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split \\
-+       -chardev stdio,id=char0 -device xen-console,chardev=char0 \\
-+       -display none  -m 1G  -kernel xen -initrd bzImage \\
-+       -append "pv-shim console=xen,pv -- console=hvc0 root=/dev/xvda1" \\
-+       -drive file=${GUEST_IMAGE},if=xen
-+
-+The Xen image must be built with the ``CONFIG_XEN_GUEST`` and ``CONFIG_PV_SHIM``
-+options, and as of Xen 4.17, Xen's PV shim mode does not support using a serial
-+port; it must have a Xen console or it will panic.
-+
-+Host OS requirements
-+--------------------
- 
- The minimal Xen support in the KVM accelerator requires the host to be running
- Linux v5.12 or newer. Later versions add optimisations: Linux v5.17 added
++typedef char *(*XenDeviceGetFrontendPath)(XenDevice *xendev, Error **errp);
+ typedef char *(*XenDeviceGetName)(XenDevice *xendev, Error **errp);
+ typedef void (*XenDeviceRealize)(XenDevice *xendev, Error **errp);
+ typedef void (*XenDeviceFrontendChanged)(XenDevice *xendev,
+@@ -46,6 +47,7 @@ struct XenDeviceClass {
+     /*< public >*/
+     const char *backend;
+     const char *device;
++    XenDeviceGetFrontendPath get_frontend_path;
+     XenDeviceGetName get_name;
+     XenDeviceRealize realize;
+     XenDeviceFrontendChanged frontend_changed;
 -- 
 2.40.1
 
