@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B944CDB48B
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619412.964414 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D43D1CDB465
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619417.964456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8l-0006NB-DF; Thu, 19 Oct 2023 15:40:51 +0000
+	id 1qtV8p-0007RB-67; Thu, 19 Oct 2023 15:40:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619412.964414; Thu, 19 Oct 2023 15:40:51 +0000
+Received: by outflank-mailman (output) from mailman id 619417.964456; Thu, 19 Oct 2023 15:40:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8l-0006Iw-6Z; Thu, 19 Oct 2023 15:40:51 +0000
-Received: by outflank-mailman (input) for mailman id 619412;
- Thu, 19 Oct 2023 15:40:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qtV8p-0007Q8-0J; Thu, 19 Oct 2023 15:40:55 +0000
+Received: by outflank-mailman (input) for mailman id 619417;
+ Thu, 19 Oct 2023 15:40:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=b9Lg=GB=casper.srs.infradead.org=BATV+06ae5fa416ae820d9d5a+7361+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qtV8k-0005v1-7B
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:50 +0000
+ id 1qtV8n-0006dc-Jh
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:53 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e099c087-6e95-11ee-98d5-6d05b1d4d9a1;
- Thu, 19 Oct 2023 17:40:49 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id df715722-6e95-11ee-9b0e-b553b5be7939;
+ Thu, 19 Oct 2023 17:40:48 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qtV8M-007osg-1i; Thu, 19 Oct 2023 15:40:26 +0000
+ id 1qtV8M-007osp-TI; Thu, 19 Oct 2023 15:40:26 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qtV8L-000Ptg-23; Thu, 19 Oct 2023 16:40:25 +0100
+ Linux)) id 1qtV8M-000PuO-1b; Thu, 19 Oct 2023 16:40:26 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: e099c087-6e95-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: df715722-6e95-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=QOmUYFl3LA5suJXP4FpVRY+eqhPYL8puoFjgeKxcxDM=; b=E/u0777Zbg/YBnlGZ6fL2Uibu9
-	owPVLGamrIj5OCflE4FDlBiEJsUenhYlVTQdIlizriBxANMrHpZA7QeQkqiDwhPLom/ygF0bUONAU
-	IDImPrmUPKJ2pNxZCLGGonhArbQgkof+VP/G6a/ZsG9Bm2qdQ3BX0HDpqm1oYhYk2iL8XJTCQMjEc
-	fRH2qzotdj+OM0RNfXMVpfLwY36sCyYKRa5F+RrGDo8Z+rL+hmqm/bBpM6Xv6ste2MA1d39iW5som
-	kX1caHIaW/N68g68EgY2NWB/p2EB62ZTSNp32+q6U/TVZ5KEfXUL5rLGGOQ7ziO6a5gAY0mvLMQOR
-	6UbUDdPw==;
+	bh=YiCYoQ74dUkz+/Yw6CbN6HlBrhYYc3OdkjhDV5gESs0=; b=GXhFdhy/z+aIbY/iYsIiOAlfI5
+	lHmr8No/KBo7JHtk+f4Y7hin/kTcgjMWRdOZvFYaiPCRvW9JKOiEbJBa/P8wl4QqDU2gCaRwdSS/Z
+	WZhqK2E7gBhb8a1vtH06wnAQfaf4pE1w4fP7MFv5acAPdeY8Q+fXsUF4WcNSECZTUPJWX+4JW5/KS
+	RGx7n0OSqnRnT5uVPuR3dW2fK92QSbwyAvknxlfjqWM/K71GuJB3Ibd2mg/8I8HZ/QAGiUKSsdfVe
+	vyvgVC+0zC4A0k/de7T5EB/cUD0DTOrf4IE5ySm0ocl54PZlNBDLeL/KovBRe21dDx3vH+2ACmN9J
+	c+qtwl2g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -78,9 +78,9 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v2 01/24] i386/xen: Don't advertise XENFEAT_supervisor_mode_kernel
-Date: Thu, 19 Oct 2023 16:39:57 +0100
-Message-Id: <20231019154020.99080-2-dwmw2@infradead.org>
+Subject: [PATCH v2 11/24] hw/xen: automatically assign device index to block devices
+Date: Thu, 19 Oct 2023 16:40:07 +0100
+Message-Id: <20231019154020.99080-12-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231019154020.99080-1-dwmw2@infradead.org>
 References: <20231019154020.99080-1-dwmw2@infradead.org>
@@ -91,27 +91,198 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This confuses lscpu into thinking it's running in PVH mode.
+There's no need to force the user to assign a vdev. We can automatically
+assign one, starting at xvda and searching until we find the first disk
+name that's unused.
 
-Fixes: bedcc139248 ("i386/xen: implement HYPERVISOR_xen_version")
+This means we can now allow '-drive if=xen,file=xxx' to work without an
+explicit separate -driver argument, just like if=virtio.
+
+Rip out the legacy handling from the xenpv machine, which was scribbling
+over any disks configured by the toolstack, and didn't work with anything
+but raw images.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
+Acked-by: Kevin Wolf <kwolf@redhat.com>
 ---
- target/i386/kvm/xen-emu.c | 1 -
- 1 file changed, 1 deletion(-)
+ blockdev.c                          | 15 +++++++++---
+ hw/block/xen-block.c                | 38 +++++++++++++++++++++++++++++
+ hw/xen/xen_devconfig.c              | 28 ---------------------
+ hw/xenpv/xen_machine_pv.c           |  9 -------
+ include/hw/xen/xen-legacy-backend.h |  1 -
+ 5 files changed, 50 insertions(+), 41 deletions(-)
 
-diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
-index 76348f9d5d..0055441b2e 100644
---- a/target/i386/kvm/xen-emu.c
-+++ b/target/i386/kvm/xen-emu.c
-@@ -267,7 +267,6 @@ static bool kvm_xen_hcall_xen_version(struct kvm_xen_exit *exit, X86CPU *cpu,
-             fi.submap |= 1 << XENFEAT_writable_page_tables |
-                          1 << XENFEAT_writable_descriptor_tables |
-                          1 << XENFEAT_auto_translated_physmap |
--                         1 << XENFEAT_supervisor_mode_kernel |
-                          1 << XENFEAT_hvm_callback_vector |
-                          1 << XENFEAT_hvm_safe_pvclock |
-                          1 << XENFEAT_hvm_pirqs;
+diff --git a/blockdev.c b/blockdev.c
+index a01c62596b..5d9f2e5395 100644
+--- a/blockdev.c
++++ b/blockdev.c
+@@ -255,13 +255,13 @@ void drive_check_orphaned(void)
+          * Ignore default drives, because we create certain default
+          * drives unconditionally, then leave them unclaimed.  Not the
+          * users fault.
+-         * Ignore IF_VIRTIO, because it gets desugared into -device,
+-         * so we can leave failing to -device.
++         * Ignore IF_VIRTIO or IF_XEN, because it gets desugared into
++         * -device, so we can leave failing to -device.
+          * Ignore IF_NONE, because leaving unclaimed IF_NONE remains
+          * available for device_add is a feature.
+          */
+         if (dinfo->is_default || dinfo->type == IF_VIRTIO
+-            || dinfo->type == IF_NONE) {
++            || dinfo->type == IF_XEN || dinfo->type == IF_NONE) {
+             continue;
+         }
+         if (!blk_get_attached_dev(blk)) {
+@@ -977,6 +977,15 @@ DriveInfo *drive_new(QemuOpts *all_opts, BlockInterfaceType block_default_type,
+         qemu_opt_set(devopts, "driver", "virtio-blk", &error_abort);
+         qemu_opt_set(devopts, "drive", qdict_get_str(bs_opts, "id"),
+                      &error_abort);
++    } else if (type == IF_XEN) {
++        QemuOpts *devopts;
++        devopts = qemu_opts_create(qemu_find_opts("device"), NULL, 0,
++                                   &error_abort);
++        qemu_opt_set(devopts, "driver",
++                     (media == MEDIA_CDROM) ? "xen-cdrom" : "xen-disk",
++                     &error_abort);
++        qemu_opt_set(devopts, "drive", qdict_get_str(bs_opts, "id"),
++                     &error_abort);
+     }
+ 
+     filename = qemu_opt_get(legacy_opts, "file");
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index a07cd7eb5d..f490b24ec8 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -27,6 +27,7 @@
+ #include "sysemu/block-backend.h"
+ #include "sysemu/iothread.h"
+ #include "dataplane/xen-block.h"
++#include "hw/xen/interface/io/xs_wire.h"
+ #include "trace.h"
+ 
+ static char *xen_block_get_name(XenDevice *xendev, Error **errp)
+@@ -34,6 +35,43 @@ static char *xen_block_get_name(XenDevice *xendev, Error **errp)
+     XenBlockDevice *blockdev = XEN_BLOCK_DEVICE(xendev);
+     XenBlockVdev *vdev = &blockdev->props.vdev;
+ 
++    if (blockdev->props.vdev.type == XEN_BLOCK_VDEV_TYPE_INVALID) {
++        XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
++        char fe_path[XENSTORE_ABS_PATH_MAX + 1];
++        char *value;
++        int disk = 0;
++        unsigned long idx;
++
++        /* Find an unoccupied device name */
++        while (disk < (1 << 20)) {
++            if (disk < (1 << 4)) {
++                idx = (202 << 8) | (disk << 4);
++            } else {
++                idx = (1 << 28) | (disk << 8);
++            }
++            snprintf(fe_path, sizeof(fe_path),
++                     "/local/domain/%u/device/vbd/%lu",
++                     xendev->frontend_id, idx);
++            value = qemu_xen_xs_read(xenbus->xsh, XBT_NULL, fe_path, NULL);
++            if (!value) {
++                if (errno == ENOENT) {
++                    vdev->type = XEN_BLOCK_VDEV_TYPE_XVD;
++                    vdev->partition = 0;
++                    vdev->disk = disk;
++                    vdev->number = idx;
++                    goto found;
++                }
++                error_setg(errp, "cannot read %s: %s", fe_path,
++                           strerror(errno));
++                return NULL;
++            }
++            free(value);
++            disk++;
++        }
++        error_setg(errp, "cannot find device vdev for block device");
++        return NULL;
++    }
++ found:
+     return g_strdup_printf("%lu", vdev->number);
+ }
+ 
+diff --git a/hw/xen/xen_devconfig.c b/hw/xen/xen_devconfig.c
+index 9b7304e544..3f77c675c6 100644
+--- a/hw/xen/xen_devconfig.c
++++ b/hw/xen/xen_devconfig.c
+@@ -46,34 +46,6 @@ static int xen_config_dev_all(char *fe, char *be)
+ 
+ /* ------------------------------------------------------------- */
+ 
+-int xen_config_dev_blk(DriveInfo *disk)
+-{
+-    char fe[256], be[256], device_name[32];
+-    int vdev = 202 * 256 + 16 * disk->unit;
+-    int cdrom = disk->media_cd;
+-    const char *devtype = cdrom ? "cdrom" : "disk";
+-    const char *mode    = cdrom ? "r"     : "w";
+-    const char *filename = qemu_opt_get(disk->opts, "file");
+-
+-    snprintf(device_name, sizeof(device_name), "xvd%c", 'a' + disk->unit);
+-    xen_pv_printf(NULL, 1, "config disk %d [%s]: %s\n",
+-                  disk->unit, device_name, filename);
+-    xen_config_dev_dirs("vbd", "qdisk", vdev, fe, be, sizeof(fe));
+-
+-    /* frontend */
+-    xenstore_write_int(fe, "virtual-device",  vdev);
+-    xenstore_write_str(fe, "device-type",     devtype);
+-
+-    /* backend */
+-    xenstore_write_str(be, "dev",             device_name);
+-    xenstore_write_str(be, "type",            "file");
+-    xenstore_write_str(be, "params",          filename);
+-    xenstore_write_str(be, "mode",            mode);
+-
+-    /* common stuff */
+-    return xen_config_dev_all(fe, be);
+-}
+-
+ int xen_config_dev_nic(NICInfo *nic)
+ {
+     char fe[256], be[256];
+diff --git a/hw/xenpv/xen_machine_pv.c b/hw/xenpv/xen_machine_pv.c
+index 17cda5ec13..1533f5dfb4 100644
+--- a/hw/xenpv/xen_machine_pv.c
++++ b/hw/xenpv/xen_machine_pv.c
+@@ -32,7 +32,6 @@
+ 
+ static void xen_init_pv(MachineState *machine)
+ {
+-    DriveInfo *dinfo;
+     int i;
+ 
+     setup_xen_backend_ops();
+@@ -64,14 +63,6 @@ static void xen_init_pv(MachineState *machine)
+         vga_interface_created = true;
+     }
+ 
+-    /* configure disks */
+-    for (i = 0; i < 16; i++) {
+-        dinfo = drive_get(IF_XEN, 0, i);
+-        if (!dinfo)
+-            continue;
+-        xen_config_dev_blk(dinfo);
+-    }
+-
+     /* configure nics */
+     for (i = 0; i < nb_nics; i++) {
+         if (!nd_table[i].model || 0 != strcmp(nd_table[i].model, "xen"))
+diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
+index 6c307c5f2c..fc42146bc2 100644
+--- a/include/hw/xen/xen-legacy-backend.h
++++ b/include/hw/xen/xen-legacy-backend.h
+@@ -81,7 +81,6 @@ extern struct XenDevOps xen_usb_ops;          /* xen-usb.c         */
+ 
+ /* configuration (aka xenbus setup) */
+ void xen_config_cleanup(void);
+-int xen_config_dev_blk(DriveInfo *disk);
+ int xen_config_dev_nic(NICInfo *nic);
+ int xen_config_dev_vfb(int vdev, const char *type);
+ int xen_config_dev_vkbd(int vdev);
 -- 
 2.40.1
 
