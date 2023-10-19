@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAA64CDB488
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619418.964466 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B944CDB48B
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619412.964414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8p-0007dL-Vg; Thu, 19 Oct 2023 15:40:55 +0000
+	id 1qtV8l-0006NB-DF; Thu, 19 Oct 2023 15:40:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619418.964466; Thu, 19 Oct 2023 15:40:55 +0000
+Received: by outflank-mailman (output) from mailman id 619412.964414; Thu, 19 Oct 2023 15:40:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8p-0007ay-IF; Thu, 19 Oct 2023 15:40:55 +0000
-Received: by outflank-mailman (input) for mailman id 619418;
- Thu, 19 Oct 2023 15:40:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qtV8l-0006Iw-6Z; Thu, 19 Oct 2023 15:40:51 +0000
+Received: by outflank-mailman (input) for mailman id 619412;
+ Thu, 19 Oct 2023 15:40:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=b9Lg=GB=casper.srs.infradead.org=BATV+06ae5fa416ae820d9d5a+7361+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qtV8n-0006dc-S2
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:53 +0000
+ id 1qtV8k-0005v1-7B
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:50 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e0ae2758-6e95-11ee-9b0e-b553b5be7939;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e099c087-6e95-11ee-98d5-6d05b1d4d9a1;
  Thu, 19 Oct 2023 17:40:49 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qtV8M-007osl-TV; Thu, 19 Oct 2023 15:40:26 +0000
+ id 1qtV8M-007osg-1i; Thu, 19 Oct 2023 15:40:26 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qtV8M-000PuJ-1F; Thu, 19 Oct 2023 16:40:26 +0100
+ Linux)) id 1qtV8L-000Ptg-23; Thu, 19 Oct 2023 16:40:25 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: e0ae2758-6e95-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: e099c087-6e95-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=myF4kySQnt1R/jNl7y+DJzz8cGVKJ4FVkI+b72NBJHs=; b=motVjdfWE1GstniTdCu1wyhH13
-	qEBExY7YPMY43dkg0DEqqvbr9P7356o1yb6boWXyNWqMcVVx/4OPNZcbnpslzrsbD7zzZjOP7aYu9
-	TCZ1oeIaBkooBoOYWR3KPNh4kRyJ+oHJN6nm5S+GIb7EsvBYP44PDwj1osnfpYv85OJ3oFzZoUpgq
-	VQlR3J8D0afyD12EnD8A7t+S3o2mmRJuAQHycDcUTMaD3CLWvyh+bGwGV4YFBzoIEOevNkv5p7G3r
-	IuUA237noQcqX9vza0iCbsgnWJCR5mhcQJKpi0PUmZBjG6pbJVYE5xyvNSBgXvjg/E9MTjWhlnVuE
-	VnFlJCiA==;
+	bh=QOmUYFl3LA5suJXP4FpVRY+eqhPYL8puoFjgeKxcxDM=; b=E/u0777Zbg/YBnlGZ6fL2Uibu9
+	owPVLGamrIj5OCflE4FDlBiEJsUenhYlVTQdIlizriBxANMrHpZA7QeQkqiDwhPLom/ygF0bUONAU
+	IDImPrmUPKJ2pNxZCLGGonhArbQgkof+VP/G6a/ZsG9Bm2qdQ3BX0HDpqm1oYhYk2iL8XJTCQMjEc
+	fRH2qzotdj+OM0RNfXMVpfLwY36sCyYKRa5F+RrGDo8Z+rL+hmqm/bBpM6Xv6ste2MA1d39iW5som
+	kX1caHIaW/N68g68EgY2NWB/p2EB62ZTSNp32+q6U/TVZ5KEfXUL5rLGGOQ7ziO6a5gAY0mvLMQOR
+	6UbUDdPw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -78,9 +78,9 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v2 10/24] hw/xen: populate store frontend nodes with XenStore PFN/port
-Date: Thu, 19 Oct 2023 16:40:06 +0100
-Message-Id: <20231019154020.99080-11-dwmw2@infradead.org>
+Subject: [PATCH v2 01/24] i386/xen: Don't advertise XENFEAT_supervisor_mode_kernel
+Date: Thu, 19 Oct 2023 16:39:57 +0100
+Message-Id: <20231019154020.99080-2-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231019154020.99080-1-dwmw2@infradead.org>
 References: <20231019154020.99080-1-dwmw2@infradead.org>
@@ -91,45 +91,27 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This is kind of redundant since without being able to get these through
-some other method (HVMOP_get_param) the guest wouldn't be able to access
-XenStore in order to find them. But Xen populates them, and it does
-allow guests to *rebind* to the event channel port after a reset.
+This confuses lscpu into thinking it's running in PVH mode.
 
+Fixes: bedcc139248 ("i386/xen: implement HYPERVISOR_xen_version")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/kvm/xen_xenstore.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ target/i386/kvm/xen-emu.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
-index ef8aaa4c42..61692d4489 100644
---- a/hw/i386/kvm/xen_xenstore.c
-+++ b/hw/i386/kvm/xen_xenstore.c
-@@ -1434,6 +1434,7 @@ static void alloc_guest_port(XenXenstoreState *s)
- int xen_xenstore_reset(void)
- {
-     XenXenstoreState *s = xen_xenstore_singleton;
-+    GList *perms;
-     int err;
- 
-     if (!s) {
-@@ -1461,6 +1462,16 @@ int xen_xenstore_reset(void)
-     }
-     s->be_port = err;
- 
-+    /* Create frontend store nodes */
-+    perms = g_list_append(NULL, xs_perm_as_string(XS_PERM_NONE, DOMID_QEMU));
-+    perms = g_list_append(perms, xs_perm_as_string(XS_PERM_READ, xen_domid));
-+
-+    relpath_printf(s, perms, "store/port", "%u", s->guest_port);
-+    relpath_printf(s, perms, "store/ring-ref", "%lu",
-+                   XEN_SPECIAL_PFN(XENSTORE));
-+
-+    g_list_free_full(perms, g_free);
-+
-     /*
-      * We don't actually access the guest's page through the grant, because
-      * this isn't real Xen, and we can just use the page we gave it in the
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index 76348f9d5d..0055441b2e 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -267,7 +267,6 @@ static bool kvm_xen_hcall_xen_version(struct kvm_xen_exit *exit, X86CPU *cpu,
+             fi.submap |= 1 << XENFEAT_writable_page_tables |
+                          1 << XENFEAT_writable_descriptor_tables |
+                          1 << XENFEAT_auto_translated_physmap |
+-                         1 << XENFEAT_supervisor_mode_kernel |
+                          1 << XENFEAT_hvm_callback_vector |
+                          1 << XENFEAT_hvm_safe_pvclock |
+                          1 << XENFEAT_hvm_pirqs;
 -- 
 2.40.1
 
