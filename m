@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58E97C41513
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619410.964400 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0DDCDB484
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Oct 2023 15:41:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619424.964519 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8k-0006A9-LV; Thu, 19 Oct 2023 15:40:50 +0000
+	id 1qtV8v-0000cv-Cu; Thu, 19 Oct 2023 15:41:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619410.964400; Thu, 19 Oct 2023 15:40:50 +0000
+Received: by outflank-mailman (output) from mailman id 619424.964519; Thu, 19 Oct 2023 15:41:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtV8k-0006A2-Iv; Thu, 19 Oct 2023 15:40:50 +0000
-Received: by outflank-mailman (input) for mailman id 619410;
- Thu, 19 Oct 2023 15:40:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qtV8v-0000Zm-0t; Thu, 19 Oct 2023 15:41:01 +0000
+Received: by outflank-mailman (input) for mailman id 619424;
+ Thu, 19 Oct 2023 15:40:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m+UH=GB=desiato.srs.infradead.org=BATV+298c059cf2aa39b7dc34+7361+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qtV8i-0005v1-KU
- for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:49 +0000
+ id 1qtV8q-0006dc-Rx
+ for xen-devel@lists.xenproject.org; Thu, 19 Oct 2023 15:40:56 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id de2f3353-6e95-11ee-98d5-6d05b1d4d9a1;
- Thu, 19 Oct 2023 17:40:46 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e25ba781-6e95-11ee-9b0e-b553b5be7939;
+ Thu, 19 Oct 2023 17:40:52 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qtV8M-009yCr-2Y; Thu, 19 Oct 2023 15:40:27 +0000
+ id 1qtV8M-009yCh-2Y; Thu, 19 Oct 2023 15:40:27 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qtV8M-000PuS-1s; Thu, 19 Oct 2023 16:40:26 +0100
+ Linux)) id 1qtV8L-000Ptk-2O; Thu, 19 Oct 2023 16:40:25 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: de2f3353-6e95-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: e25ba781-6e95-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=j10esoq0FJNH76opTx2Ikt3KjCQW6JceQg/cwlpclKs=; b=VayzCs3Jcr5zFnMxp7BlQilagI
-	tXNgRu8R6rL8iIho5a0FncN8I4SUIY7Pm5o0Vjtx0f4nExokqzOz/NEkiNNlht5FyKWMGDt96nV3J
-	Wch5nB2MVR5Xh5Y01vGCYPAtCfRQXpciDPobqK0KJ3+VXXhLxqbrDRbbk1rz50m8yi1+53qLPLdQf
-	LucVSSC+oHKdiyo9XTTwWqvueeBcscIN9lgwQsG7+S1VDTQLhq64Nco/Tu01+1fjHy1g+pj3TeBo1
-	QHf96QTc6Sxrqe8pi5HQg/QurZqCAqIe538GeKsecG0hNqut8aYw9DSSk3twWpfmXAvKd55LUhbhX
-	JMyavWmA==;
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=2nqUTV3vUpOx9clV41PRsXO9Zf0sXlL57tnkVmGApug=; b=IxYegd780SmdgDUUbQTnWSd/ai
+	wuPPAJoA515FdGO8tU1vSZrNsyj+Eu6YIkOsX/w4u33wqDnGK/ZwF1FZAXaacLiotME7DJPR6U/Jt
+	OuDfbp0EviQEM+jKnxB2735BGSNGjQPB5fQO0QhthLqzSiUxPJRE6nEg1YISAF7SGMMqZmiK5VeSg
+	dzR41WsF4hHTtOF4Yx+UDPvs6VQbtX5ykHz8fZztlFt0rXHlMPaiXHGv2MgylP5snh0qflWdWsndn
+	GcidSGgVKwpcNJ7umDEr2Y0Ng2MicE/qap/rao+XOsK2w46sGJSmaj6tItgKWDiX6XExPu+61OUBD
+	r/Ld6nOw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -78,78 +78,56 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v2 12/24] hw/xen: add get_frontend_path() method to XenDeviceClass
-Date: Thu, 19 Oct 2023 16:40:08 +0100
-Message-Id: <20231019154020.99080-13-dwmw2@infradead.org>
+Subject: [PATCH v2 02/24] i386/xen: fix per-vCPU upcall vector for Xen emulation
+Date: Thu, 19 Oct 2023 16:39:58 +0100
+Message-Id: <20231019154020.99080-3-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231019154020.99080-1-dwmw2@infradead.org>
 References: <20231019154020.99080-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The primary Xen console is special. The guest's side is set up for it by
-the toolstack automatically and not by the standard PV init sequence.
+The per-vCPU upcall vector support had two problems. Firstly it was
+using the wrong hypercall argument and would always return -EFAULT.
+And secondly it was using the wrong ioctl() to pass the vector to
+the kernel and thus the *kernel* would always return -EINVAL.
 
-Accordingly, its *frontend* doesn't appear in …/device/console/0 either;
-instead it appears under …/console in the guest's XenStore node.
+Linux doesn't (yet) use this mode so it went without decent testing
+for a while.
 
-To allow the Xen console driver to override the frontend path for the
-primary console, add a method to the XenDeviceClass which can be used
-instead of the standard xen_device_get_frontend_path()
-
+Fixes: 105b47fdf2d0 ("i386/xen: implement HVMOP_set_evtchn_upcall_vector")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/xen/xen-bus.c         | 10 +++++++++-
- include/hw/xen/xen-bus.h |  2 ++
- 2 files changed, 11 insertions(+), 1 deletion(-)
+ target/i386/kvm/xen-emu.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index ece8ec40cd..cc524ed92c 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -711,8 +711,16 @@ static void xen_device_frontend_create(XenDevice *xendev, Error **errp)
- {
-     ERRP_GUARD();
-     XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
-+    XenDeviceClass *xendev_class = XEN_DEVICE_GET_CLASS(xendev);
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index 0055441b2e..619240398a 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -306,7 +306,7 @@ static int kvm_xen_set_vcpu_callback_vector(CPUState *cs)
  
--    xendev->frontend_path = xen_device_get_frontend_path(xendev);
-+    if (xendev_class->get_frontend_path) {
-+        xendev->frontend_path = xendev_class->get_frontend_path(xendev, errp);
-+        if (!xendev->frontend_path) {
-+            return;
-+        }
-+    } else {
-+        xendev->frontend_path = xen_device_get_frontend_path(xendev);
-+    }
+     trace_kvm_xen_set_vcpu_callback(cs->cpu_index, vector);
  
-     /*
-      * The frontend area may have already been created by a legacy
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index f435898164..eb440880b5 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -33,6 +33,7 @@ struct XenDevice {
- };
- typedef struct XenDevice XenDevice;
+-    return kvm_vcpu_ioctl(cs, KVM_XEN_HVM_SET_ATTR, &xva);
++    return kvm_vcpu_ioctl(cs, KVM_XEN_VCPU_SET_ATTR, &xva);
+ }
  
-+typedef char *(*XenDeviceGetFrontendPath)(XenDevice *xendev, Error **errp);
- typedef char *(*XenDeviceGetName)(XenDevice *xendev, Error **errp);
- typedef void (*XenDeviceRealize)(XenDevice *xendev, Error **errp);
- typedef void (*XenDeviceFrontendChanged)(XenDevice *xendev,
-@@ -46,6 +47,7 @@ struct XenDeviceClass {
-     /*< public >*/
-     const char *backend;
-     const char *device;
-+    XenDeviceGetFrontendPath get_frontend_path;
-     XenDeviceGetName get_name;
-     XenDeviceRealize realize;
-     XenDeviceFrontendChanged frontend_changed;
+ static void do_set_vcpu_callback_vector(CPUState *cs, run_on_cpu_data data)
+@@ -849,8 +849,7 @@ static bool kvm_xen_hcall_hvm_op(struct kvm_xen_exit *exit, X86CPU *cpu,
+     int ret = -ENOSYS;
+     switch (cmd) {
+     case HVMOP_set_evtchn_upcall_vector:
+-        ret = kvm_xen_hcall_evtchn_upcall_vector(exit, cpu,
+-                                                 exit->u.hcall.params[0]);
++        ret = kvm_xen_hcall_evtchn_upcall_vector(exit, cpu, arg);
+         break;
+ 
+     case HVMOP_pagetable_dying:
 -- 
 2.40.1
 
