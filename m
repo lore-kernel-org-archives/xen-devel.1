@@ -4,34 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADEF2C001DF
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:20:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619824.965530 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3232CC001DF
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:22:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619827.965540 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrIa-0003Y1-L8; Fri, 20 Oct 2023 15:20:28 +0000
+	id 1qtrK2-00044n-VN; Fri, 20 Oct 2023 15:21:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619824.965530; Fri, 20 Oct 2023 15:20:28 +0000
+Received: by outflank-mailman (output) from mailman id 619827.965540; Fri, 20 Oct 2023 15:21:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrIa-0003Xu-HB; Fri, 20 Oct 2023 15:20:28 +0000
-Received: by outflank-mailman (input) for mailman id 619824;
- Fri, 20 Oct 2023 15:20:27 +0000
+	id 1qtrK2-00044c-ST; Fri, 20 Oct 2023 15:21:58 +0000
+Received: by outflank-mailman (input) for mailman id 619827;
+ Fri, 20 Oct 2023 15:21:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fjAU=GC=casper.srs.infradead.org=BATV+5f4592396010e9e3c002+7362+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qtrIY-0003Xo-EY
- for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:20:27 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=84aa=GC=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
+ id 1qtrK1-00044S-H3
+ for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:21:57 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3143be13-6f5c-11ee-98d5-6d05b1d4d9a1;
- Fri, 20 Oct 2023 17:20:25 +0200 (CEST)
-Received: from [2001:8b0:10b:5:f7e9:453b:fc3b:2f6]
- (helo=u3832b3a9db3152.ant.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qtrIT-00DoUp-BR; Fri, 20 Oct 2023 15:20:21 +0000
+ id 675d0ca6-6f5c-11ee-98d5-6d05b1d4d9a1;
+ Fri, 20 Oct 2023 17:21:56 +0200 (CEST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4083f61322fso7565645e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Oct 2023 08:21:56 -0700 (PDT)
+Received: from zen.linaroharston ([85.9.250.243])
+ by smtp.gmail.com with ESMTPSA id
+ c16-20020a05600c0ad000b004063c9f68f2sm2381004wmr.26.2023.10.20.08.21.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Oct 2023 08:21:54 -0700 (PDT)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 3B1221FFBB;
+ Fri, 20 Oct 2023 16:21:54 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,250 +50,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3143be13-6f5c-11ee-98d5-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=Lf+ERlE3zkgan4NebSxp76b8lHlffbXcgMiAMIBm1Ds=; b=hNgXR7VpvaP7WKZiKWyYg/pwM9
-	Pkw1gWL1XPBx7I1GpUr5dyjU6xcu8PSdLD/Vn5K1hoBdAjyT3tkosiWIBJAP/gTGfwmbAhC2ytsAG
-	YaedU+QiX3w5+Lc/WxUUmfGbjHtpGdh6QMThS7S4/3A8tUQm2Iz2c9DAWOthXxfoIfelGY5u1UoTx
-	IIfBgvfwYLKURqFSbiV8ljVS0LiNsriOTAArHOAOFf+5TbeQF1fId1S9/6XNhzhiHgEScb9Z6j/6D
-	fEwjFzy+WV88zNOd2UOgzqyCZw4o8lCDnyG12iixojHw9p4G5o275S6DBkVJfNM3qjwursGispI49
-	xSn//EzQ==;
-Message-ID: <55b87d75e13f1b888d90b03ea4bebe044b305e6a.camel@infradead.org>
-Subject: Re: [PATCH] hvc/xen: fix event channel handling for secondary
- consoles
-From: David Woodhouse <dwmw2@infradead.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel
- <xen-devel@lists.xenproject.org>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby
- <jirislaby@kernel.org>, Roger Pau Monne <roger.pau@citrix.com>, Stefano
- Stabellini <sstabellini@kernel.org>, Dawei Li <set_pte_at@outlook.com>,
- linuxppc-dev@lists.ozlabs.org,  linux-kernel@vger.kernel.org,
- linux-serial@vger.kernel.org, Paul Durrant <paul@xen.org>
-Date: Fri, 20 Oct 2023 16:20:20 +0100
-In-Reply-To: <36c9298d-2052-42de-9ef4-135c120a2417@suse.com>
-References: <72609f999d9451c13240acb8e4a4e54f8c62f542.camel@infradead.org>
-	 <36c9298d-2052-42de-9ef4-135c120a2417@suse.com>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-xVW8ksiJEPKn31o3CewY"
-User-Agent: Evolution 3.44.4-0ubuntu2 
+X-Inumbo-ID: 675d0ca6-6f5c-11ee-98d5-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1697815315; x=1698420115; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+         :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jbelIcZTS0juyOFnjn4MTy2vl3K16qAnjzUU98VyDMY=;
+        b=qnMTca4aijWMsT5fqn/wVKdqN90y351+KI4ts7Ppm27VVnd/PV1UNTaGfOaaXH3I28
+         Pjg6xKvRGR5RLfEbGxHudZcm0yKuyVpdeoSmYd15U+PrQvzX+wPixFwDWrqvsQAXrlLl
+         oknRjDZBR3L8LZJnbeZW3CrxcJ2nvL4L8sDq5OvVyEvXhV738egAJ+cB7qcnyvXzwZMM
+         W6uclUk/p5C0C2sWFnndagJIJn9nmUms7LSuNN1GGhhaN2pSvzDic068FZ29jKPGkxoT
+         u0XW5OI+S0DkJ31l9YKxA7tDQ6CEMh7iqRc/wMavc0+xF6drfTSIHbQWnrvEbEeTEYnI
+         IFPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697815315; x=1698420115;
+        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+         :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=jbelIcZTS0juyOFnjn4MTy2vl3K16qAnjzUU98VyDMY=;
+        b=gdUvorFsvAKrlYgcE1ELAhn1r90/+2mKikWUhN3CjQLxiy/XZmRB18bWLOaBgnqhG/
+         i8yQjBJtPwSc9+RjTB2qudjDwX4Ohy/zI2PFrovKwWKfKL08d8bLvP6+sCIhxMqdrsNV
+         TVTVDnst+FpJOsX0LEsq1VSZET83WVhLC04teXwgcItLa/qOYv83E/zHu8UFG/dldZFX
+         msHs+c3CpA+4WwZjh65nIVtHTS+X7PiNPjPQ95Q0WjYeT2XERh1aCDGPTUMIYt5SVOfZ
+         mCr0yB2/sT1JpEApxv38R8PPJBMdfGG5TXelZux6mei4uv1IZAhw9ClN+o3wfooEzAN2
+         QEaA==
+X-Gm-Message-State: AOJu0YzU4dUxYoNeMiQEFMD9DnQI7BlfWJBwpNHj+e6rLEXg/qqxhnxN
+	Y2dk5Ufm+KALfERi0UNY1Y06hA==
+X-Google-Smtp-Source: AGHT+IHRLcFuOS3PeMTohe8jPOVqCX3X8WLS40JtSHcRyp1EElg3mXgLoTxLa68r4F7PYOX7lpzTvg==
+X-Received: by 2002:a05:600c:c84:b0:406:8494:f684 with SMTP id fj4-20020a05600c0c8400b004068494f684mr1687044wmb.23.1697815315141;
+        Fri, 20 Oct 2023 08:21:55 -0700 (PDT)
+References: <87y1hspiyh.fsf@linaro.org>
+ <alpine.DEB.2.22.394.2308301745530.6458@ubuntu-linux-20-04-desktop>
+ <CAFEAcA8Ziov9vA9dW+4vzFE=KkSUqfMNNMZOtvQhqCXyjRytzQ@mail.gmail.com>
+ <87cyz3pmgz.fsf@linaro.org>
+ <CAFEAcA-m8G1kfTw52kOGPEvQwWPph0NWc0URVY1aQ2WwVeB_OQ@mail.gmail.com>
+ <799b1754-7529-0538-1b5a-d94a362eb74d@amd.com>
+User-agent: mu4e 1.11.22; emacs 29.1.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Ayan Kumar Halder <ayankuma@amd.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xenproject.org>,
+ Stewart Hildebrand <stewart.hildebrand@amd.com>, Viresh Kumar
+ <viresh.kumar@linaro.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Sergiy Kibrik <Sergiy_Kibrik@epam.com>, QEMU Developers
+ <qemu-devel@nongnu.org>, Vikram Garhwal <vikram.garhwal@amd.com>, Stefano
+ Stabellini <stefano.stabellini@amd.com>, Marcin Juszkiewicz
+ <marcin.juszkiewicz@linaro.org>, Jonathan Cameron
+ <jonathan.cameron@huawei.com>
+Subject: Re: QEMU features useful for Xen development?
+Date: Fri, 20 Oct 2023 16:15:19 +0100
+In-reply-to: <799b1754-7529-0538-1b5a-d94a362eb74d@amd.com>
+Message-ID: <87r0lp720d.fsf@linaro.org>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-
-
---=-xVW8ksiJEPKn31o3CewY
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2023-10-20 at 10:51 +0200, Juergen Gross wrote:
->=20
-> > (qemu) device_del con1
-> > [=C2=A0=C2=A0 32.050919] ------------[ cut here ]------------
-> > [=C2=A0=C2=A0 32.050942] Trying to free already-free IRQ 33
-> > [=C2=A0=C2=A0 32.050990] WARNING: CPU: 0 PID: 51 at kernel/irq/manage.c=
-:1895 __free_irq+0x1d4/0x330
-> >=20
-> > Fix that by calling notifier_del_irq() first, which only calls
-> > free_irq() if the irq was requested in the first place. Then use
->=20
-> I don't think the "if the irq was requested in the first place" is the co=
-rrect
-> reasoning.
->=20
-> I think the problem is that notifier_del_irq() will be called another tim=
-e
-> through the .notifier_del hook. Two calls of notifier_del_irq() are fine,=
- but
-> one call of it and another call of free_irq() via unbind_from_irqhandler(=
-) is
-> a problem.
 
-Er... yes, the HVC tty device still exists, can still be open and in
-use by userspace during the time that xencons_disconnect_backend() is
-running.
+Ayan Kumar Halder <ayankuma@amd.com> writes:
 
-Why does xencons_disconnect_backend() do all the evtchn and gnttab
-teardown *first* and then only call hvc_remove() at the end. That seems
-weird.
+> Hi Peter/Alex,
+>
+> Appreciate your help. :)
+>
+> On 31/08/2023 11:03, Peter Maydell wrote:
+>> CAUTION: This message has originated from an External Source. Please
+>> use proper judgment and caution when opening attachments, clicking
+>> links, or responding to this email.
+>>
+>>
+>> On Thu, 31 Aug 2023 at 10:53, Alex Benn=C3=A9e <alex.bennee@linaro.org> =
+wrote:
+>>>
+>>> Peter Maydell <peter.maydell@linaro.org> writes:
+>>>
+>>>> On Thu, 31 Aug 2023 at 01:57, Stefano Stabellini <sstabellini@kernel.o=
+rg> wrote:
+>>>>> As Xen is gaining R52 and R82 support, it would be great to be able to
+>>>>> use QEMU for development and testing there as well, but I don't think
+>>>>> QEMU can emulate EL2 properly for the Cortex-R architecture. We would
+>>>>> need EL2 support in the GIC/timer for R52/R82 as well.
+>>>> We do actually have a Cortex-R52 model which at least in theory
+>>>> should include EL2 support, though as usual with newer QEMU
+>>>> stuff it quite likely has lurking bugs; I'm not sure how much
+>>>> testing it's had. Also there is currently no board model which
+>>>> will work with the Cortex-R52 so it's a bit tricky to use in practice.
+>>>> (What sort of board model would Xen want to use it with?)
+>>> We already model a bunch of the mps2/mps3 images so I'm assuming adding
+>>> the mps3-an536 would be a fairly simple step to do (mps2tz.c is mostly
+>>> tweaking config values). The question is would it be a useful target for
+>>> Xen?
+>> All our MPS2/MPS3 boards are M-profile. That means we have the
+>> device models for all the interesting devices on the board, but
+>> it would be simpler to write the an536 board model separately.
+>> (In particular, the M-profile boards are wrappers around an
+>> "ARMSSE" sort-of-like-an-SoC component; there's no equivalent
+>> for the Cortex-R52.)
+>>
+>>>    https://developer.arm.com/documentation/dai0536/latest/
+>
+> Yes, it will be helpful if Qemu can model this board. We have a
+> downstream port of Xen on R52 (upstreaming is in progress).
+>
+> So, we can test the Qemu model with Xen.
+>
+> Also if all works fine, we might consider adding this to the upstream
+> Xen CI docker.
 
-So if I do 'dd if=3D/dev/zero of=3D/dev/hvc1' while I remove the device
-from qemu... yep, that seems to have filled the ring after the evtchn
-was torn down, and it's waiting for ever in domU_write_console().
+We wrote up whats required on our JIRA:
 
-In fact, that isn't *even* because of the race within
-xencons_disconnect_backend(). In xencons_backend_changed() when the
-backend goes into state XenbusStateClos{ing,ed} for the disconnect, we
-just set the frontend state directly to XenbusStateClosed without even
-*calling* xencons_disconnect_backend().
+  https://linaro.atlassian.net/browse/QEMU-598
 
-So we were *told* of the impending unplug. We fail to actually stop
-using the device, but we tell the backend that it's OK to go away.
+Given we have most of the bits already it shouldn't take long to build a
+model for it. However I want to draw every ones attention to the notes:
 
-Oops :)
+  The real FPGA image does not have a global monitor that can support
+  LDREX/STREX between the two CPUs for accesses in the DDR4 RAM or BRAM.
+  This means that effectively guest software will only be able to use
+  one CPU (the local monitor within the CPU works fine). This
+  restriction won=E2=80=99t apply to the QEMU model, but is important to be
+  aware of if you=E2=80=99re writing guest software on the QEMU model that =
+you
+  also want to be able to run on the FPGA board.
 
-The incremental patch below makes it work if I unplug a console while
-writing /dev/zero to it.
+However if that meets the requirements for Xen testing and no one tries
+to run SMP loads on real HW then I can try and find space on our roadmap
+to do it (rough guess 9.1 or 9.2?).
 
-But I suspect instead of calling xencons_disconnect_backend() when the
-backend changes to XenbusStateClos{ing,ed}, it should actually *just*
-do the hvc_close() part? The evtchn and gnttab cleanup should wait
-until the backend has actually finished closing?
-
-And what locking is there around xencons_disconnect_backend() anyway?
-Do we rely on the fact that it can all only happen from the xenstore
-watch thread?
-
-diff --git a/drivers/tty/hvc/hvc_xen.c b/drivers/tty/hvc/hvc_xen.c
-index f0376612b267..0806078835f6 100644
---- a/drivers/tty/hvc/hvc_xen.c
-+++ b/drivers/tty/hvc/hvc_xen.c
-@@ -377,8 +377,10 @@ void xen_console_resume(void)
- #ifdef CONFIG_HVC_XEN_FRONTEND
- static void xencons_disconnect_backend(struct xencons_info *info)
- {
-+	if (info->hvc !=3D NULL)
-+		hvc_remove(info->hvc);
-+	info->hvc =3D NULL;
- 	if (info->irq > 0) {
--		notifier_del_irq(info->hvc, info->irq);=20
- 		evtchn_put(info->evtchn);
- 		info->irq =3D 0;
- 		info->evtchn =3D 0;
-@@ -390,9 +392,6 @@ static void xencons_disconnect_backend(struct xencons_i=
-nfo *info)
- 	if (info->gntref > 0)
- 		gnttab_free_grant_references(info->gntref);
- 	info->gntref =3D 0;
--	if (info->hvc !=3D NULL)
--		hvc_remove(info->hvc);
--	info->hvc =3D NULL;
- }
-=20
- static void xencons_free(struct xencons_info *info)
-@@ -558,6 +557,7 @@ static void xencons_backend_changed(struct xenbus_devic=
-e *dev,
- 			break;
- 		fallthrough;	/* Missed the backend's CLOSING state */
- 	case XenbusStateClosing:
-+		xencons_disconnect_backend(dev_get_drvdata(&dev->dev));
- 		xenbus_frontend_closed(dev);
- 		break;
- 	}
-
-
---=-xVW8ksiJEPKn31o3CewY
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEkQw
-ggYQMIID+KADAgECAhBNlCwQ1DvglAnFgS06KwZPMA0GCSqGSIb3DQEBDAUAMIGIMQswCQYDVQQG
-EwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEUMBIGA1UEBxMLSmVyc2V5IENpdHkxHjAcBgNVBAoT
-FVRoZSBVU0VSVFJVU1QgTmV0d29yazEuMCwGA1UEAxMlVVNFUlRydXN0IFJTQSBDZXJ0aWZpY2F0
-aW9uIEF1dGhvcml0eTAeFw0xODExMDIwMDAwMDBaFw0zMDEyMzEyMzU5NTlaMIGWMQswCQYDVQQG
-EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYD
-VQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50
-aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-AQEAyjztlApB/975Rrno1jvm2pK/KxBOqhq8gr2+JhwpKirSzZxQgT9tlC7zl6hn1fXjSo5MqXUf
-ItMltrMaXqcESJuK8dtK56NCSrq4iDKaKq9NxOXFmqXX2zN8HHGjQ2b2Xv0v1L5Nk1MQPKA19xeW
-QcpGEGFUUd0kN+oHox+L9aV1rjfNiCj3bJk6kJaOPabPi2503nn/ITX5e8WfPnGw4VuZ79Khj1YB
-rf24k5Ee1sLTHsLtpiK9OjG4iQRBdq6Z/TlVx/hGAez5h36bBJMxqdHLpdwIUkTqT8se3ed0PewD
-ch/8kHPo5fZl5u1B0ecpq/sDN/5sCG52Ds+QU5O5EwIDAQABo4IBZDCCAWAwHwYDVR0jBBgwFoAU
-U3m/WqorSs9UgOHYm8Cd8rIDZsswHQYDVR0OBBYEFAnA8vwL2pTbX/4r36iZQs/J4K0AMA4GA1Ud
-DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEF
-BQcDBDARBgNVHSAECjAIMAYGBFUdIAAwUAYDVR0fBEkwRzBFoEOgQYY/aHR0cDovL2NybC51c2Vy
-dHJ1c3QuY29tL1VTRVJUcnVzdFJTQUNlcnRpZmljYXRpb25BdXRob3JpdHkuY3JsMHYGCCsGAQUF
-BwEBBGowaDA/BggrBgEFBQcwAoYzaHR0cDovL2NydC51c2VydHJ1c3QuY29tL1VTRVJUcnVzdFJT
-QUFkZFRydXN0Q0EuY3J0MCUGCCsGAQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMA0G
-CSqGSIb3DQEBDAUAA4ICAQBBRHUAqznCFfXejpVtMnFojADdF9d6HBA4kMjjsb0XMZHztuOCtKF+
-xswhh2GqkW5JQrM8zVlU+A2VP72Ky2nlRA1GwmIPgou74TZ/XTarHG8zdMSgaDrkVYzz1g3nIVO9
-IHk96VwsacIvBF8JfqIs+8aWH2PfSUrNxP6Ys7U0sZYx4rXD6+cqFq/ZW5BUfClN/rhk2ddQXyn7
-kkmka2RQb9d90nmNHdgKrwfQ49mQ2hWQNDkJJIXwKjYA6VUR/fZUFeCUisdDe/0ABLTI+jheXUV1
-eoYV7lNwNBKpeHdNuO6Aacb533JlfeUHxvBz9OfYWUiXu09sMAviM11Q0DuMZ5760CdO2VnpsXP4
-KxaYIhvqPqUMWqRdWyn7crItNkZeroXaecG03i3mM7dkiPaCkgocBg0EBYsbZDZ8bsG3a08LwEsL
-1Ygz3SBsyECa0waq4hOf/Z85F2w2ZpXfP+w8q4ifwO90SGZZV+HR/Jh6rEaVPDRF/CEGVqR1hiuQ
-OZ1YL5ezMTX0ZSLwrymUE0pwi/KDaiYB15uswgeIAcA6JzPFf9pLkAFFWs1QNyN++niFhsM47qod
-x/PL+5jR87myx5uYdBEQkkDc+lKB1Wct6ucXqm2EmsaQ0M95QjTmy+rDWjkDYdw3Ms6mSWE3Bn7i
-5ZgtwCLXgAIe5W8mybM2JzCCBhQwggT8oAMCAQICEQDGvhmWZ0DEAx0oURL6O6l+MA0GCSqGSIb3
-DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
-VQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28g
-UlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTIyMDEwNzAw
-MDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9y
-ZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3GpC2bomUqk+91wLYBzDMcCj5C9m6
-oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZHh7htyAkWYVoFsFPrwHounto8xTsy
-SSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT9YgcBqKCo65pTFmOnR/VVbjJk4K2
-xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNjP+qDrh0db7PAjO1D4d5ftfrsf+kd
-RR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy2U+eITZ5LLE5s45mX2oPFknWqxBo
-bQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3BgBEmfsYWlBXO8rVXfvPgLs32VdV
-NZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/7auNVRmPB3v5SWEsH8xi4Bez2V9U
-KxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmdlFYhAflWKQ03Ufiu8t3iBE3VJbc2
-5oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9aelIl6vtbhMA+l0nfrsORMa4kobqQ5
-C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMBAAGjggHMMIIByDAfBgNVHSMEGDAW
-gBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeDMcimo0oz8o1R1Nver3ZVpSkwDgYD
-VR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYBBQUHAgEWF2h0dHBzOi8vc2VjdGln
-by5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9jcmwuc2VjdGlnby5jb20vU2VjdGln
-b1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYoGCCsGAQUFBwEB
-BH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBQ2xpZW50
-QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29j
-c3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkqhkiG9w0B
-AQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQvQ/fzPXmtR9t54rpmI2TfyvcKgOXp
-qa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvIlSPrzIB4Z2wyIGQpaPLlYflrrVFK
-v9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9ChWFfgSXvrWDZspnU3Gjw/rMHrGnql
-Htlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0whpBtXdyDjzBtQTaZJ7zTT/vlehc/
-tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9IzCCBhQwggT8oAMCAQICEQDGvhmW
-Z0DEAx0oURL6O6l+MA0GCSqGSIb3DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3Jl
-YXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0
-ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
-IEVtYWlsIENBMB4XDTIyMDEwNzAwMDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJ
-ARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3
-GpC2bomUqk+91wLYBzDMcCj5C9m6oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZH
-h7htyAkWYVoFsFPrwHounto8xTsySSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT
-9YgcBqKCo65pTFmOnR/VVbjJk4K2xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNj
-P+qDrh0db7PAjO1D4d5ftfrsf+kdRR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy
-2U+eITZ5LLE5s45mX2oPFknWqxBobQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3
-BgBEmfsYWlBXO8rVXfvPgLs32VdVNZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/
-7auNVRmPB3v5SWEsH8xi4Bez2V9UKxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmd
-lFYhAflWKQ03Ufiu8t3iBE3VJbc25oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9ae
-lIl6vtbhMA+l0nfrsORMa4kobqQ5C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMB
-AAGjggHMMIIByDAfBgNVHSMEGDAWgBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeD
-Mcimo0oz8o1R1Nver3ZVpSkwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw
-FAYIKwYBBQUHAwQGCCsGAQUFBwMCMEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYB
-BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9j
-cmwuc2VjdGlnby5jb20vU2VjdGlnb1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1h
-aWxDQS5jcmwwgYoGCCsGAQUFBwEBBH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdv
-LmNvbS9TZWN0aWdvUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAj
-BggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
-cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQv
-Q/fzPXmtR9t54rpmI2TfyvcKgOXpqa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvI
-lSPrzIB4Z2wyIGQpaPLlYflrrVFKv9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9Ch
-WFfgSXvrWDZspnU3Gjw/rMHrGnqlHtlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0w
-hpBtXdyDjzBtQTaZJ7zTT/vlehc/tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9
-IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
-dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
-NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
-xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
-DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMxMDIwMTUyMDIwWjAvBgkqhkiG9w0BCQQxIgQgaadtD8zI
-3wa7x1BpGRAw2NJGeQmHMxVvY3dEu0N4TJIwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
-BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
-A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
-dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
-DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
-MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
-Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
-lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgCp8dboLZcPE6xQmWjVmMgAO3BlFt+42POq
-pxPF8NM+XI3rNdQGIMh8/xQqPYcYSoDKwoWQmAGfxoeNnbg87eleHKcw/xWjBhvpEFBKtejemqrd
-8tS80Fq/zaPvNJQurK0LcbpHQyeBFBOEWZaM9vPvAVCa0DcobFvefwqhscYKBnU70S+wqnZzkhYL
-yL6gUXc7Bc/M5ypqjq1WL5E3rMIIKS0zXlyx3+T5/w/FdPNJGnl/dJg6k/jc5jVVrl/PhY5eNR/L
-FhVoZa13rzGfmdFCt18yQjg0c8B0fHYJnQZQOEI29446Dec7x/KbU4RpoGKre4/H0crOuZWoZw6O
-4EamR2nb8p9P5K3mjA/QHimOjlykn2HwldTDQXchlYR5NXBOIz1AFNK4yckE1u6/YKXWB1pT65AY
-2nq4qjvVzGJJc3yzOZT0XtK70yaCKYfjUod++5SmNJje4KpE6T09Bw1PnFf/5uI0dZ43KPZYL1lL
-qhWhOY9Xy0zalnj9fU+lcXh0b7GAfj6VGiTcqEC5GIG7gW5STbTV5SA/rI0fWCGJi90C+BSaIrFA
-9xZJ7VIF0KBO3Png5KYmurxnozw/WR6q9r0omlUImlnrJ2McD3pxry5xRuX50L6utVkzCzt/0/UE
-h1DE+RMAmDgpAjEkIBaiMf2zeoz7jZGj1LUZqGsMUwAAAAAAAA==
-
-
---=-xVW8ksiJEPKn31o3CewY--
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
