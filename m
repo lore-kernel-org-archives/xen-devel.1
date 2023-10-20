@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C71FCDB474
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:28:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619832.965550 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71344C0032E
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:29:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619834.965570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrQb-0005kC-O6; Fri, 20 Oct 2023 15:28:45 +0000
+	id 1qtrQh-0006Gn-6C; Fri, 20 Oct 2023 15:28:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619832.965550; Fri, 20 Oct 2023 15:28:45 +0000
+Received: by outflank-mailman (output) from mailman id 619834.965570; Fri, 20 Oct 2023 15:28:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrQb-0005k5-Kt; Fri, 20 Oct 2023 15:28:45 +0000
-Received: by outflank-mailman (input) for mailman id 619832;
- Fri, 20 Oct 2023 15:28:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qtrQh-0006Gd-2O; Fri, 20 Oct 2023 15:28:51 +0000
+Received: by outflank-mailman (input) for mailman id 619834;
+ Fri, 20 Oct 2023 15:28:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SYNS=GC=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qtrQa-0005jz-Mq
- for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:28:44 +0000
+ id 1qtrQf-0006F5-Io
+ for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:28:49 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5a7d6fb6-6f5d-11ee-98d5-6d05b1d4d9a1;
- Fri, 20 Oct 2023 17:28:43 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5cda470a-6f5d-11ee-9b0e-b553b5be7939;
+ Fri, 20 Oct 2023 17:28:47 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 303064EE073C;
- Fri, 20 Oct 2023 17:28:41 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id A755F4EE0744;
+ Fri, 20 Oct 2023 17:28:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a7d6fb6-6f5d-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 5cda470a-6f5d-11ee-9b0e-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,60 +53,54 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [XEN PATCH][for-4.19 v3 0/8] address violations of MISRA C:2012 Rule 10.1
-Date: Fri, 20 Oct 2023 17:28:29 +0200
-Message-Id: <cover.1697815135.git.nicola.vetrini@bugseng.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH][for-4.19 v3 2/8] arm/bitops: encapsulate violation of MISRA C:2012 Rule 10.1
+Date: Fri, 20 Oct 2023 17:28:31 +0200
+Message-Id: <097fbfb19084bf1278f249c5653609ba1990cc23.1697815135.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1697815135.git.nicola.vetrini@bugseng.com>
+References: <cover.1697815135.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The widely-used construct
-(x & -x), where x is an unsigned integer quantity represented in 2's complement,
-does yield the expected result. Since all architectures that are targets for
-compliance do fulfill such requirements, the construct is deemed safe and
-deviated.
+The definitions of ffs{l}? violate Rule 10.1, by using the well-known
+pattern (x & -x); its usage is wrapped by the LOWEST_BIT macro.
 
-The use of 'DECLARE_BITMAP(features, IOMMU_FEAT_count);' is deviated, to avoid
-harming code readability.
+No functional change.
 
-On the contrary, other uses of inappropriate types are changed.
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+ xen/arch/arm/include/asm/bitops.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Changes in v3:
-- Patch [6/8] has already been picked up in Andrew's for-next tree
-
-Nicola Vetrini (8):
-  xen/include: add macro LOWEST_BIT
-  arm/bitops: encapsulate violation of MISRA C:2012 Rule 10.1
-  xen/pdx: amend definition of PDX_GROUP_COUNT
-  x86_64/mm: express macro CNT using LOWEST_BIT
-  x86/io_apic: address violation of MISRA C:2012 Rule 10.1
-  x86/mce: Move MC_NCLASSES into the enum mctelem_class
-  xen/types: address Rule 10.1 for DECLARE_BITMAP use
-  xen/compat: use BUILD_BUG_ON in CHECK_SIZE macros
-
- automation/eclair_analysis/ECLAIR/deviations.ecl |  6 ++++++
- docs/misra/deviations.rst                        |  7 +++++++
- docs/misra/safe.json                             |  8 ++++++++
- xen/arch/arm/include/asm/bitops.h                |  6 ++++--
- xen/arch/x86/cpu/mcheck/mctelem.c                |  2 --
- xen/arch/x86/cpu/mcheck/mctelem.h                |  5 +++--
- xen/arch/x86/include/asm/io_apic.h               |  7 ++++---
- xen/arch/x86/x86_64/mm.c                         | 12 ++++++------
- xen/include/xen/compat.h                         | 16 +++++++++++-----
- xen/include/xen/iommu.h                          |  1 +
- xen/include/xen/macros.h                         |  7 +++++--
- xen/include/xen/pdx.h                            |  2 +-
- xen/include/xen/types.h                          | 15 ++++++++++-----
- 13 files changed, 66 insertions(+), 28 deletions(-)
-
---
+diff --git a/xen/arch/arm/include/asm/bitops.h b/xen/arch/arm/include/asm/bitops.h
+index 71ae14cab355..8b5d61545e19 100644
+--- a/xen/arch/arm/include/asm/bitops.h
++++ b/xen/arch/arm/include/asm/bitops.h
+@@ -9,6 +9,8 @@
+ #ifndef _ARM_BITOPS_H
+ #define _ARM_BITOPS_H
+ 
++#include <xen/macros.h>
++
+ #include <asm/asm_defns.h>
+ 
+ /*
+@@ -155,8 +157,8 @@ static inline int fls(unsigned int x)
+ }
+ 
+ 
+-#define ffs(x) ({ unsigned int __t = (x); fls(__t & -__t); })
+-#define ffsl(x) ({ unsigned long __t = (x); flsl(__t & -__t); })
++#define ffs(x) ({ unsigned int __t = (x); fls(LOWEST_BIT(__t)); })
++#define ffsl(x) ({ unsigned long __t = (x); flsl(LOWEST_BIT(__t)); })
+ 
+ /**
+  * find_first_set_bit - find the first set bit in @word
+-- 
 2.34.1
+
 
