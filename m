@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E8F6C07480
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:29:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619835.965580 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DC9C0032E
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:29:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619838.965611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrQi-0006Wv-CA; Fri, 20 Oct 2023 15:28:52 +0000
+	id 1qtrQn-0007NW-9h; Fri, 20 Oct 2023 15:28:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619835.965580; Fri, 20 Oct 2023 15:28:52 +0000
+Received: by outflank-mailman (output) from mailman id 619838.965611; Fri, 20 Oct 2023 15:28:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrQi-0006Wm-9S; Fri, 20 Oct 2023 15:28:52 +0000
-Received: by outflank-mailman (input) for mailman id 619835;
- Fri, 20 Oct 2023 15:28:51 +0000
+	id 1qtrQn-0007MV-3e; Fri, 20 Oct 2023 15:28:57 +0000
+Received: by outflank-mailman (input) for mailman id 619838;
+ Fri, 20 Oct 2023 15:28:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SYNS=GC=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qtrQh-0006F5-1R
- for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:28:51 +0000
+ id 1qtrQl-0006F5-Pf
+ for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:28:55 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5df5289a-6f5d-11ee-9b0e-b553b5be7939;
- Fri, 20 Oct 2023 17:28:49 +0200 (CEST)
+ id 60c1a75f-6f5d-11ee-9b0e-b553b5be7939;
+ Fri, 20 Oct 2023 17:28:54 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id B211E4EE0745;
- Fri, 20 Oct 2023 17:28:47 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 853374EE0746;
+ Fri, 20 Oct 2023 17:28:52 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5df5289a-6f5d-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 60c1a75f-6f5d-11ee-9b0e-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,41 +53,60 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-4.19 v3 3/8] xen/pdx: amend definition of PDX_GROUP_COUNT
-Date: Fri, 20 Oct 2023 17:28:32 +0200
-Message-Id: <3e088f3551a8c2058154d09552ca215c94b321ae.1697815135.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH][for-4.19 v3 6/8] x86/mce: Move MC_NCLASSES into the enum mctelem_class
+Date: Fri, 20 Oct 2023 17:28:35 +0200
+Message-Id: <3e1f28494f0080e7bf3c31de8cefaf12e653710b.1697815135.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1697815135.git.nicola.vetrini@bugseng.com>
 References: <cover.1697815135.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The definition of PDX_GROUP_COUNT causes violations of
-MISRA C:2012 Rule 10.1, therefore the problematic part now uses
-the LOWEST_BIT macro, which encapsulates the pattern.
+The definition of MC_NCLASSES contained a violation of MISRA C:2012
+Rule 10.1, therefore by moving it as an enumeration constant resolves the
+violation and makes it more resilient to possible additions to that enum.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/include/xen/pdx.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This patch has already been picked up in Andrew's for-next tree.
 
-diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
-index f3fbc4273aa4..36d618a8ba7d 100644
---- a/xen/include/xen/pdx.h
-+++ b/xen/include/xen/pdx.h
-@@ -72,7 +72,7 @@
- extern unsigned long max_pdx;
+Note that the use of an enum constant as operand to [ ] and != is allowed
+by the Rule.
+---
+ xen/arch/x86/cpu/mcheck/mctelem.c | 2 --
+ xen/arch/x86/cpu/mcheck/mctelem.h | 5 +++--
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/xen/arch/x86/cpu/mcheck/mctelem.c b/xen/arch/x86/cpu/mcheck/mctelem.c
+index 329ac20faf96..77a4d1d5ff48 100644
+--- a/xen/arch/x86/cpu/mcheck/mctelem.c
++++ b/xen/arch/x86/cpu/mcheck/mctelem.c
+@@ -64,8 +64,6 @@ struct mctelem_ent {
  
- #define PDX_GROUP_COUNT ((1 << PDX_GROUP_SHIFT) / \
--                         (sizeof(*frame_table) & -sizeof(*frame_table)))
-+                         (LOWEST_BIT(sizeof(*frame_table))))
- extern unsigned long pdx_group_valid[];
+ #define MC_NENT (MC_URGENT_NENT + MC_NONURGENT_NENT)
  
- /**
+-#define	MC_NCLASSES		(MC_NONURGENT + 1)
+-
+ #define	COOKIE2MCTE(c)		((struct mctelem_ent *)(c))
+ #define	MCTE2COOKIE(tep)	((mctelem_cookie_t)(tep))
+ 
+diff --git a/xen/arch/x86/cpu/mcheck/mctelem.h b/xen/arch/x86/cpu/mcheck/mctelem.h
+index d4eba53ae0e5..21b251847bc0 100644
+--- a/xen/arch/x86/cpu/mcheck/mctelem.h
++++ b/xen/arch/x86/cpu/mcheck/mctelem.h
+@@ -55,8 +55,9 @@
+ typedef struct mctelem_cookie *mctelem_cookie_t;
+ 
+ typedef enum mctelem_class {
+-	MC_URGENT,
+-	MC_NONURGENT
++    MC_URGENT,
++    MC_NONURGENT,
++    MC_NCLASSES
+ } mctelem_class_t;
+ 
+ extern void mctelem_init(unsigned int);
 -- 
 2.34.1
 
