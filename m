@@ -4,41 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3232CC001DF
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:22:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.619827.965540 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C71FCDB474
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Oct 2023 15:28:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.619832.965550 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrK2-00044n-VN; Fri, 20 Oct 2023 15:21:58 +0000
+	id 1qtrQb-0005kC-O6; Fri, 20 Oct 2023 15:28:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 619827.965540; Fri, 20 Oct 2023 15:21:58 +0000
+Received: by outflank-mailman (output) from mailman id 619832.965550; Fri, 20 Oct 2023 15:28:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qtrK2-00044c-ST; Fri, 20 Oct 2023 15:21:58 +0000
-Received: by outflank-mailman (input) for mailman id 619827;
- Fri, 20 Oct 2023 15:21:57 +0000
+	id 1qtrQb-0005k5-Kt; Fri, 20 Oct 2023 15:28:45 +0000
+Received: by outflank-mailman (input) for mailman id 619832;
+ Fri, 20 Oct 2023 15:28:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=84aa=GC=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
- id 1qtrK1-00044S-H3
- for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:21:57 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ <SRS0=SYNS=GC=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qtrQa-0005jz-Mq
+ for xen-devel@lists.xenproject.org; Fri, 20 Oct 2023 15:28:44 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 675d0ca6-6f5c-11ee-98d5-6d05b1d4d9a1;
- Fri, 20 Oct 2023 17:21:56 +0200 (CEST)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4083f61322fso7565645e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 20 Oct 2023 08:21:56 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
- by smtp.gmail.com with ESMTPSA id
- c16-20020a05600c0ad000b004063c9f68f2sm2381004wmr.26.2023.10.20.08.21.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Oct 2023 08:21:54 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 3B1221FFBB;
- Fri, 20 Oct 2023 16:21:54 +0100 (BST)
+ id 5a7d6fb6-6f5d-11ee-98d5-6d05b1d4d9a1;
+ Fri, 20 Oct 2023 17:28:43 +0200 (CEST)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id 303064EE073C;
+ Fri, 20 Oct 2023 17:28:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,134 +41,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 675d0ca6-6f5c-11ee-98d5-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1697815315; x=1698420115; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jbelIcZTS0juyOFnjn4MTy2vl3K16qAnjzUU98VyDMY=;
-        b=qnMTca4aijWMsT5fqn/wVKdqN90y351+KI4ts7Ppm27VVnd/PV1UNTaGfOaaXH3I28
-         Pjg6xKvRGR5RLfEbGxHudZcm0yKuyVpdeoSmYd15U+PrQvzX+wPixFwDWrqvsQAXrlLl
-         oknRjDZBR3L8LZJnbeZW3CrxcJ2nvL4L8sDq5OvVyEvXhV738egAJ+cB7qcnyvXzwZMM
-         W6uclUk/p5C0C2sWFnndagJIJn9nmUms7LSuNN1GGhhaN2pSvzDic068FZ29jKPGkxoT
-         u0XW5OI+S0DkJ31l9YKxA7tDQ6CEMh7iqRc/wMavc0+xF6drfTSIHbQWnrvEbEeTEYnI
-         IFPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697815315; x=1698420115;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=jbelIcZTS0juyOFnjn4MTy2vl3K16qAnjzUU98VyDMY=;
-        b=gdUvorFsvAKrlYgcE1ELAhn1r90/+2mKikWUhN3CjQLxiy/XZmRB18bWLOaBgnqhG/
-         i8yQjBJtPwSc9+RjTB2qudjDwX4Ohy/zI2PFrovKwWKfKL08d8bLvP6+sCIhxMqdrsNV
-         TVTVDnst+FpJOsX0LEsq1VSZET83WVhLC04teXwgcItLa/qOYv83E/zHu8UFG/dldZFX
-         msHs+c3CpA+4WwZjh65nIVtHTS+X7PiNPjPQ95Q0WjYeT2XERh1aCDGPTUMIYt5SVOfZ
-         mCr0yB2/sT1JpEApxv38R8PPJBMdfGG5TXelZux6mei4uv1IZAhw9ClN+o3wfooEzAN2
-         QEaA==
-X-Gm-Message-State: AOJu0YzU4dUxYoNeMiQEFMD9DnQI7BlfWJBwpNHj+e6rLEXg/qqxhnxN
-	Y2dk5Ufm+KALfERi0UNY1Y06hA==
-X-Google-Smtp-Source: AGHT+IHRLcFuOS3PeMTohe8jPOVqCX3X8WLS40JtSHcRyp1EElg3mXgLoTxLa68r4F7PYOX7lpzTvg==
-X-Received: by 2002:a05:600c:c84:b0:406:8494:f684 with SMTP id fj4-20020a05600c0c8400b004068494f684mr1687044wmb.23.1697815315141;
-        Fri, 20 Oct 2023 08:21:55 -0700 (PDT)
-References: <87y1hspiyh.fsf@linaro.org>
- <alpine.DEB.2.22.394.2308301745530.6458@ubuntu-linux-20-04-desktop>
- <CAFEAcA8Ziov9vA9dW+4vzFE=KkSUqfMNNMZOtvQhqCXyjRytzQ@mail.gmail.com>
- <87cyz3pmgz.fsf@linaro.org>
- <CAFEAcA-m8G1kfTw52kOGPEvQwWPph0NWc0URVY1aQ2WwVeB_OQ@mail.gmail.com>
- <799b1754-7529-0538-1b5a-d94a362eb74d@amd.com>
-User-agent: mu4e 1.11.22; emacs 29.1.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Ayan Kumar Halder <ayankuma@amd.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Stefano Stabellini
- <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xenproject.org>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>, Viresh Kumar
- <viresh.kumar@linaro.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Sergiy Kibrik <Sergiy_Kibrik@epam.com>, QEMU Developers
- <qemu-devel@nongnu.org>, Vikram Garhwal <vikram.garhwal@amd.com>, Stefano
- Stabellini <stefano.stabellini@amd.com>, Marcin Juszkiewicz
- <marcin.juszkiewicz@linaro.org>, Jonathan Cameron
- <jonathan.cameron@huawei.com>
-Subject: Re: QEMU features useful for Xen development?
-Date: Fri, 20 Oct 2023 16:15:19 +0100
-In-reply-to: <799b1754-7529-0538-1b5a-d94a362eb74d@amd.com>
-Message-ID: <87r0lp720d.fsf@linaro.org>
+X-Inumbo-ID: 5a7d6fb6-6f5d-11ee-98d5-6d05b1d4d9a1
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger.pau@citrix.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [XEN PATCH][for-4.19 v3 0/8] address violations of MISRA C:2012 Rule 10.1
+Date: Fri, 20 Oct 2023 17:28:29 +0200
+Message-Id: <cover.1697815135.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
+The widely-used construct
+(x & -x), where x is an unsigned integer quantity represented in 2's complement,
+does yield the expected result. Since all architectures that are targets for
+compliance do fulfill such requirements, the construct is deemed safe and
+deviated.
 
-Ayan Kumar Halder <ayankuma@amd.com> writes:
+The use of 'DECLARE_BITMAP(features, IOMMU_FEAT_count);' is deviated, to avoid
+harming code readability.
 
-> Hi Peter/Alex,
->
-> Appreciate your help. :)
->
-> On 31/08/2023 11:03, Peter Maydell wrote:
->> CAUTION: This message has originated from an External Source. Please
->> use proper judgment and caution when opening attachments, clicking
->> links, or responding to this email.
->>
->>
->> On Thu, 31 Aug 2023 at 10:53, Alex Benn=C3=A9e <alex.bennee@linaro.org> =
-wrote:
->>>
->>> Peter Maydell <peter.maydell@linaro.org> writes:
->>>
->>>> On Thu, 31 Aug 2023 at 01:57, Stefano Stabellini <sstabellini@kernel.o=
-rg> wrote:
->>>>> As Xen is gaining R52 and R82 support, it would be great to be able to
->>>>> use QEMU for development and testing there as well, but I don't think
->>>>> QEMU can emulate EL2 properly for the Cortex-R architecture. We would
->>>>> need EL2 support in the GIC/timer for R52/R82 as well.
->>>> We do actually have a Cortex-R52 model which at least in theory
->>>> should include EL2 support, though as usual with newer QEMU
->>>> stuff it quite likely has lurking bugs; I'm not sure how much
->>>> testing it's had. Also there is currently no board model which
->>>> will work with the Cortex-R52 so it's a bit tricky to use in practice.
->>>> (What sort of board model would Xen want to use it with?)
->>> We already model a bunch of the mps2/mps3 images so I'm assuming adding
->>> the mps3-an536 would be a fairly simple step to do (mps2tz.c is mostly
->>> tweaking config values). The question is would it be a useful target for
->>> Xen?
->> All our MPS2/MPS3 boards are M-profile. That means we have the
->> device models for all the interesting devices on the board, but
->> it would be simpler to write the an536 board model separately.
->> (In particular, the M-profile boards are wrappers around an
->> "ARMSSE" sort-of-like-an-SoC component; there's no equivalent
->> for the Cortex-R52.)
->>
->>>    https://developer.arm.com/documentation/dai0536/latest/
->
-> Yes, it will be helpful if Qemu can model this board. We have a
-> downstream port of Xen on R52 (upstreaming is in progress).
->
-> So, we can test the Qemu model with Xen.
->
-> Also if all works fine, we might consider adding this to the upstream
-> Xen CI docker.
+On the contrary, other uses of inappropriate types are changed.
 
-We wrote up whats required on our JIRA:
+Changes in v3:
+- Patch [6/8] has already been picked up in Andrew's for-next tree
 
-  https://linaro.atlassian.net/browse/QEMU-598
+Nicola Vetrini (8):
+  xen/include: add macro LOWEST_BIT
+  arm/bitops: encapsulate violation of MISRA C:2012 Rule 10.1
+  xen/pdx: amend definition of PDX_GROUP_COUNT
+  x86_64/mm: express macro CNT using LOWEST_BIT
+  x86/io_apic: address violation of MISRA C:2012 Rule 10.1
+  x86/mce: Move MC_NCLASSES into the enum mctelem_class
+  xen/types: address Rule 10.1 for DECLARE_BITMAP use
+  xen/compat: use BUILD_BUG_ON in CHECK_SIZE macros
 
-Given we have most of the bits already it shouldn't take long to build a
-model for it. However I want to draw every ones attention to the notes:
+ automation/eclair_analysis/ECLAIR/deviations.ecl |  6 ++++++
+ docs/misra/deviations.rst                        |  7 +++++++
+ docs/misra/safe.json                             |  8 ++++++++
+ xen/arch/arm/include/asm/bitops.h                |  6 ++++--
+ xen/arch/x86/cpu/mcheck/mctelem.c                |  2 --
+ xen/arch/x86/cpu/mcheck/mctelem.h                |  5 +++--
+ xen/arch/x86/include/asm/io_apic.h               |  7 ++++---
+ xen/arch/x86/x86_64/mm.c                         | 12 ++++++------
+ xen/include/xen/compat.h                         | 16 +++++++++++-----
+ xen/include/xen/iommu.h                          |  1 +
+ xen/include/xen/macros.h                         |  7 +++++--
+ xen/include/xen/pdx.h                            |  2 +-
+ xen/include/xen/types.h                          | 15 ++++++++++-----
+ 13 files changed, 66 insertions(+), 28 deletions(-)
 
-  The real FPGA image does not have a global monitor that can support
-  LDREX/STREX between the two CPUs for accesses in the DDR4 RAM or BRAM.
-  This means that effectively guest software will only be able to use
-  one CPU (the local monitor within the CPU works fine). This
-  restriction won=E2=80=99t apply to the QEMU model, but is important to be
-  aware of if you=E2=80=99re writing guest software on the QEMU model that =
-you
-  also want to be able to run on the FPGA board.
-
-However if that meets the requirements for Xen testing and no one tries
-to run SMP loads on real HW then I can try and find space on our roadmap
-to do it (rough guess 9.1 or 9.2?).
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+--
+2.34.1
 
