@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B7CC001DF
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:08:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620758.966604 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45679CDB474
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:08:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620760.966614 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qub0E-0004RJ-Nq; Sun, 22 Oct 2023 16:08:34 +0000
+	id 1qub0N-00050e-07; Sun, 22 Oct 2023 16:08:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620758.966604; Sun, 22 Oct 2023 16:08:34 +0000
+Received: by outflank-mailman (output) from mailman id 620760.966614; Sun, 22 Oct 2023 16:08:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qub0E-0004R8-Je; Sun, 22 Oct 2023 16:08:34 +0000
-Received: by outflank-mailman (input) for mailman id 620758;
- Sun, 22 Oct 2023 16:08:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qub0M-00050X-S2; Sun, 22 Oct 2023 16:08:42 +0000
+Received: by outflank-mailman (input) for mailman id 620760;
+ Sun, 22 Oct 2023 16:08:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RY1I=GE=desiato.srs.infradead.org=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quamk-0007Cq-Rp
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:38 +0000
+ id 1quamf-0006wY-Oi
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:33 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4c7c9cde-70f3-11ee-9b0e-b553b5be7939;
- Sun, 22 Oct 2023 17:54:36 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 47ec7c89-70f3-11ee-98d5-6d05b1d4d9a1;
+ Sun, 22 Oct 2023 17:54:28 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakI-00DCmh-0V; Sun, 22 Oct 2023 15:52:51 +0000
+ id 1quakM-00DCn3-0R; Sun, 22 Oct 2023 15:52:34 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakG-001qYN-2W; Sun, 22 Oct 2023 16:52:04 +0100
+ Linux)) id 1quakK-001qb8-2W; Sun, 22 Oct 2023 16:52:08 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 4c7c9cde-70f3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 47ec7c89-70f3-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=gAqi4IHvyxyTJg+N0Ik5PY/rM2q46ZCGuyPvahYwG5k=; b=cRbRpczYlxtrJ0EMdutYGeIBIl
-	3V4CpMaDhfBqINOapf2F/gKHf+PgU3iwVQeTm5lVX9xNdGoH8TYMteH/nQcGNcNI3BcKh+CWUiWpL
-	LbtNiAJsgwEHdMVmuNmfyuyVAP7f0W7JkbsxhMiWqH4q+bbsarvrWtE9jVRGnI/EHRbx/G70Etxbw
-	CZ30nG0gPXyVMUtzmvYFCv0b3+Z/+jCGDk7YmUkeRkcus/I/rRzABdQ4ucyfQQTqz6/rNkXeSHqbM
-	Nlndu5rdkCTQv6mErcA0WRVLKeTqjLVQkMDovzpLxKNVo2R0CpNPRyZH7ke5ogJ7cesaOLN3L/iWq
-	6Ar0Y1oA==;
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=aSG9ptzFZSzDP3PLBh4znK+L7SNawIVOSjaK/AVfxuM=; b=aHFO4AqkbJUOCpJgaMXo89wubf
+	1RzpIUsLumuIgIJyV7SxT3fuvmHTKYBy5cEbCN5Aht/xc+qvQ8yliL3IjJSMn6aphQJ/o2/0M9wSU
+	J0G/UyJ1U9resQCjKRosAIaBtIf72KFquG3Dd03PPPpAbNSNWAPKG2klfUBgSeCD+Xj0oH24U9niC
+	4b6dyxZ60enQu0h3w6QhRMMaWVb11hWjixu+wWqrWxRTc+95KBjZNbMxpMSSlWhyATnTMN1aZkYdP
+	jVXbVRLrFJfZlnDLqFVgercQAUWwxhsQUTyiV0UHjetAhrIKFsZVIBEhPXB19+rq+6Jy3X0ZnWxoh
+	mDtqIJiw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,109 +120,53 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 03/45] net: add qemu_create_nic_bus_devices()
-Date: Sun, 22 Oct 2023 16:51:18 +0100
-Message-Id: <20231022155200.436340-4-dwmw2@infradead.org>
+Subject: [PATCH 41/45] hw/xtensa/xtfpga: use qemu_create_nic_device()
+Date: Sun, 22 Oct 2023 16:51:56 +0100
+Message-Id: <20231022155200.436340-42-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This will instantiate any NICs which live on a given bus type. Each bus
-is allowed *one* substitution (for PCI it's virtio → virtio-net-pci, for
-Xen it's xen → xen-net-device; no point in overengineering it unless we
-actually want more).
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- include/net/net.h |  3 +++
- net/net.c         | 53 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
+ hw/xtensa/xtfpga.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 56be694c75..ce830a47d0 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -211,6 +211,9 @@ bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-                                const char *alias);
- DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-                                     const char *alias);
-+void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
-+                                 const char *default_model,
-+                                 const char *alias, const char *alias_target);
- void print_net_client(Monitor *mon, NetClientState *nc);
- void net_socket_rs_init(SocketReadState *rs,
-                         SocketReadStateFinalize *finalize,
-diff --git a/net/net.c b/net/net.c
-index 6e20f9d2e9..23fd716b98 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1207,6 +1207,59 @@ DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-     return dev;
- }
+diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
+index fbad1c83a3..519e461354 100644
+--- a/hw/xtensa/xtfpga.c
++++ b/hw/xtensa/xtfpga.c
+@@ -147,8 +147,10 @@ static void xtfpga_net_init(MemoryRegion *address_space,
+     SysBusDevice *s;
+     MemoryRegion *ram;
  
-+void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
-+                                 const char *default_model,
-+                                 const char *alias, const char *alias_target)
-+{
-+    GPtrArray *nic_models = qemu_get_nic_models(parent_type);
-+    const char *model;
-+    DeviceState *dev;
-+    NICInfo *nd;
-+    int i;
-+
-+    if (nic_model_help) {
-+        if (alias_target) {
-+            add_nic_model_help(alias_target, alias);
-+        }
-+        for (i = 0; i < nic_models->len - 1; i++) {
-+            add_nic_model_help(nic_models->pdata[i], NULL);
-+        }
+-    dev = qdev_new("open_eth");
+-    qdev_set_nic_properties(dev, nd);
++    dev = qemu_create_nic_device("open_eth", true, NULL);
++    if (!dev) {
++        return;
 +    }
-+
-+    /* Drop the NULL terminator which would make g_str_equal() unhappy */
-+    nic_models->len--;
-+
-+    for (i = 0; i < nb_nics; i++) {
-+        nd = &nd_table[i];
-+
-+        if (!nd->used || nd->instantiated) {
-+            continue;
-+        }
-+
-+        model = nd->model ? nd->model : default_model;
-+        if (!model) {
-+            continue;
-+        }
-+
-+        /* Each bus type is allowed *one* substitution */
-+        if (g_str_equal(model, alias)) {
-+            model = alias_target;
-+        }
-+
-+        if (!g_ptr_array_find_with_equal_func(nic_models, model,
-+                                              g_str_equal, NULL)) {
-+            /* This NIC does not live on this bus. */
-+            continue;
-+        }
-+
-+        dev = qdev_new(model);
-+        qdev_set_nic_properties(dev, nd);
-+        qdev_realize_and_unref(dev, bus, &error_fatal);
-+    }
-+
-+    g_ptr_array_free(nic_models, true);
-+}
-+
- static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
-     const Netdev *netdev,
-     const char *name,
+ 
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+@@ -301,10 +303,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
+         memory_region_add_subregion(system_memory, board->io[1], io);
+     }
+     xtfpga_fpga_init(system_io, 0x0d020000, freq);
+-    if (nd_table[0].used) {
+-        xtfpga_net_init(system_io, 0x0d030000, 0x0d030400, 0x0d800000,
+-                        extints[1], nd_table);
+-    }
++    xtfpga_net_init(system_io, 0x0d030000, 0x0d030400, 0x0d800000, extints[1]);
+ 
+     serial_mm_init(system_io, 0x0d050020, 2, extints[0],
+                    115200, serial_hd(0), DEVICE_NATIVE_ENDIAN);
 -- 
 2.40.1
 
