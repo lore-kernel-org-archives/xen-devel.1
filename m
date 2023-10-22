@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE55CDB474
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:05:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620712.966464 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A50C001DF
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:05:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620713.966469 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quawo-0004Yt-48; Sun, 22 Oct 2023 16:05:02 +0000
+	id 1quawo-0004bQ-EC; Sun, 22 Oct 2023 16:05:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620712.966464; Sun, 22 Oct 2023 16:05:02 +0000
+Received: by outflank-mailman (output) from mailman id 620713.966469; Sun, 22 Oct 2023 16:05:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quawo-0004Ym-1V; Sun, 22 Oct 2023 16:05:02 +0000
-Received: by outflank-mailman (input) for mailman id 620712;
+	id 1quawo-0004at-9H; Sun, 22 Oct 2023 16:05:02 +0000
+Received: by outflank-mailman (input) for mailman id 620713;
  Sun, 22 Oct 2023 16:05:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RY1I=GE=desiato.srs.infradead.org=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quamj-0006wY-AJ
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:37 +0000
+ id 1quamT-0006wY-MV
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:21 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d0c44fc-70f3-11ee-98d5-6d05b1d4d9a1;
- Sun, 22 Oct 2023 17:54:36 +0200 (CEST)
+ id 420312c8-70f3-11ee-98d5-6d05b1d4d9a1;
+ Sun, 22 Oct 2023 17:54:18 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakJ-00DCmu-24; Sun, 22 Oct 2023 15:53:09 +0000
+ id 1quakM-00DCn2-0R; Sun, 22 Oct 2023 15:52:37 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakJ-001qZj-00; Sun, 22 Oct 2023 16:52:07 +0100
+ Linux)) id 1quakK-001qb4-2G; Sun, 22 Oct 2023 16:52:08 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 4d0c44fc-70f3-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 420312c8-70f3-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=4+Mc5UoIk/j59DxPJr9/Bba3Ss0BlZ5eJh5qSsyPoYw=; b=jKJ5VvWEyZleEXgoeqEjZyi1L3
-	F2uGIPRfZhpHac7DvT8dcH7gIWxpe/tRYcLh6a531myfO27mcnhfiU46UoKaXiCyX8XLGtR1CdiVj
-	lCTsZg/ufvzJ5E1RjmOZ+bxSSWGgzoA5UbRs3K8EgeRsYod3r5vMmhKZ3EkWUbwXIyjj/7PuP3qzW
-	rWINlK9wlyTwfAizsWoIWwhkaEp4EraKyMOG38tO68U98yl5KCKzvK08FpngEcsQfD3GNtneUfIMD
-	/xfCnoqcaHNm5gZTtBehY1MvpMR+RyFE4tIdKv3DoushzbI5KZMsI8qV49iJYhVF3DJ61ye4Oaacl
-	p2ZI+F2Q==;
+	bh=2pDGewIOozNTKyf2OldMVVayi4C1vxF7TkMEapx75UM=; b=Saf3H/Ddo4P2X21+F943q20V9E
+	IH4TqcgjTFsjy6FVNIy55caMRuYY1nRP+BtW/RvvyJgr0UoPbIHZFEwW4uHroFPneBHdJIm2hTJeQ
+	EfgBJ/nEz1ZUf7fJVSAjQ4uW4Zs3vcf9EJReL0aqNSAHD6M5W9PRr+NZqTh6NUN7wp3jiP2XR4ahd
+	oXwXUMPUjXZdIWZ/vpg7DFiR4nLoRJRJaGt7pDSgzTYCF8H9+CQxzcuRd/XUQ7qxCrT7C+gQ+cjHQ
+	VTHNMfJt2Uy7rTARhSrMQ1IsuYak9yrxEIsGUvuzkT92etZY8lfFqZsNNTNOuW4CE24mb5G7+L+hG
+	kTnCqj+g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 22/45] hw/arm/aspeed: use qemu_configure_nic_device()
-Date: Sun, 22 Oct 2023 16:51:37 +0100
-Message-Id: <20231022155200.436340-23-dwmw2@infradead.org>
+Subject: [PATCH 40/45] hw/sparc/sun4m: use qemu_configure_nic_device()
+Date: Sun, 22 Oct 2023 16:51:55 +0100
+Message-Id: <20231022155200.436340-41-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -135,36 +135,51 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/aspeed.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ hw/sparc/sun4m.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
-index f8ba67531a..945ad97835 100644
---- a/hw/arm/aspeed.c
-+++ b/hw/arm/aspeed.c
-@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
-     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
-     AspeedSoCClass *sc;
-     int i;
+diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+index 17bf5f2879..259cf2f383 100644
+--- a/hw/sparc/sun4m.c
++++ b/hw/sparc/sun4m.c
+@@ -299,7 +299,7 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
+ 
+ static void *sparc32_dma_init(hwaddr dma_base,
+                               hwaddr esp_base, qemu_irq espdma_irq,
+-                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
++                              hwaddr le_base, qemu_irq ledma_irq)
+ {
+     DeviceState *dma;
+     ESPDMADeviceState *espdma;
+@@ -320,7 +320,7 @@ static void *sparc32_dma_init(hwaddr dma_base,
+ 
+     lance = SYSBUS_PCNET(object_resolve_path_component(
+                          OBJECT(ledma), "lance"));
+-    qdev_set_nic_properties(DEVICE(lance), nd);
++    qemu_configure_nic_device(DEVICE(lance), true, NULL);
+ 
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
+@@ -832,7 +832,6 @@ static void sun4m_hw_init(MachineState *machine)
+     unsigned int smp_cpus = machine->smp.cpus;
+     unsigned int max_cpus = machine->smp.max_cpus;
+     HostMemoryBackend *ram_memdev = machine->memdev;
 -    NICInfo *nd = &nd_table[0];
  
-     object_initialize_child(OBJECT(machine), "soc", &bmc->soc, amc->soc_name);
- 
-@@ -370,10 +369,10 @@ static void aspeed_machine_init(MachineState *machine)
-                              &error_fatal);
- 
-     for (i = 0; i < sc->macs_num; i++) {
--        if ((amc->macs_mask & (1 << i)) && nd->used) {
--            qemu_check_nic_model(nd, TYPE_FTGMAC100);
--            qdev_set_nic_properties(DEVICE(&bmc->soc.ftgmac100[i]), nd);
--            nd++;
-+        if ((amc->macs_mask & (1 << i)) &&
-+            !qemu_configure_nic_device(DEVICE(&bmc->soc.ftgmac100[i]),
-+                                       true, NULL)) {
-+            break; /* No configs left; stop asking */
-         }
+     if (machine->ram_size > hwdef->max_mem) {
+         error_report("Too much memory for this machine: %" PRId64 ","
+@@ -893,10 +892,9 @@ static void sun4m_hw_init(MachineState *machine)
+                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
      }
  
+-    qemu_check_nic_model(nd, TYPE_LANCE);
+     sparc32_dma_init(hwdef->dma_base,
+                      hwdef->esp_base, slavio_irq[18],
+-                     hwdef->le_base, slavio_irq[16], nd);
++                     hwdef->le_base, slavio_irq[16]);
+ 
+     if (graphic_depth != 8 && graphic_depth != 24) {
+         error_report("Unsupported depth: %d", graphic_depth);
 -- 
 2.40.1
 
