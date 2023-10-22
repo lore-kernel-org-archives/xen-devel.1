@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7C6C001DF
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620665.966273 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9733FC25B42
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620677.966377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qualx-0007t6-Q6; Sun, 22 Oct 2023 15:53:49 +0000
+	id 1quam8-0002Co-Pb; Sun, 22 Oct 2023 15:54:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620665.966273; Sun, 22 Oct 2023 15:53:49 +0000
+Received: by outflank-mailman (output) from mailman id 620677.966377; Sun, 22 Oct 2023 15:54:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qualx-0007rf-KF; Sun, 22 Oct 2023 15:53:49 +0000
-Received: by outflank-mailman (input) for mailman id 620665;
- Sun, 22 Oct 2023 15:53:48 +0000
+	id 1quam8-00027V-10; Sun, 22 Oct 2023 15:54:00 +0000
+Received: by outflank-mailman (input) for mailman id 620677;
+ Sun, 22 Oct 2023 15:53:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zZR7=GE=casper.srs.infradead.org=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qualw-0007Cq-6T
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:48 +0000
+ id 1quam3-0007Cq-Bx
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:55 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2cea58ba-70f3-11ee-9b0e-b553b5be7939;
- Sun, 22 Oct 2023 17:53:44 +0200 (CEST)
+ id 32921ea7-70f3-11ee-9b0e-b553b5be7939;
+ Sun, 22 Oct 2023 17:53:52 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakL-008TGq-DL; Sun, 22 Oct 2023 15:52:09 +0000
+ id 1quakH-008TGE-6H; Sun, 22 Oct 2023 15:52:05 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakK-001qap-1B; Sun, 22 Oct 2023 16:52:08 +0100
+ Linux)) id 1quakG-001qYJ-2G; Sun, 22 Oct 2023 16:52:04 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 2cea58ba-70f3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 32921ea7-70f3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=hC+8OBLQ6TWPZEybs0lVPrKizh4726sFY9u4hhRhbIY=; b=fDPPVNgKahIXw2sWosyOS59B6U
-	aezjPTyZg5+fu5TplWvw6F75WoG6fhRhbhZo1tvgknB8gYmGw4BH5gqwZ1FSJ7xGNQXfgAjX5RMNw
-	nbosUg8Rp1mLUvZjTqpkM0EHKwUy0mSfSCGcRoVYyA6oNfZCv04l1UV+mFHxifHvTDhQJYWVvGWIO
-	oTo5iVr7igGWHO9HWPwDPaWGbIcqeJ9840vpOlZWiSZ7cKqSqf8KOHheAaApZbRaKU/6H8GE28ddR
-	oGEUu/qQNaOhxyiIUnoJX1LNpVrHVx982edPVIFgPPedlOSJRvLFg2MWaIiVfudXKxHk1X055MMhl
-	HKli6jRg==;
+	bh=jiJokkAd+xFdnQ5u2oAofZ5wGwg1JXjEJQz9TEy2l7Q=; b=fnKS23KVp+Jq2Us1+mVC4C7LWL
+	9TTKXsX/mF6OW9aMxjPdN8+8QgpNwBOYNiYFv7Npnyv9hTrJqnwnWlP56lTrGNkm4PAeXyLg9wc7j
+	wjo6qfGtVVFdhLQEMVbUfXTaVlMvXVeIJM9FuPSXahJw2JdhiARnBGsmBtyxaPgiYjNDdSEbmDQA6
+	Wi2mTu4FfszMUQDsybU9Iuuzfp23oThWzCRzGBKaMAag0YT3a/oMrz9gbNq0BCkJYP6YqG0wz2ssi
+	UWSyOGQK79+yF+C2h03XsEzHER1t/zSjKOPruuHqSAt/JJgrHz+3K9MSDb0KIe0qHFjlp4984OPdN
+	LJTUIo1A==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 37/45] hw/openrisc/openrisc_sim: use qemu_create_nic_device()
-Date: Sun, 22 Oct 2023 16:51:52 +0100
-Message-Id: <20231022155200.436340-38-dwmw2@infradead.org>
+Subject: [PATCH 02/45] net: report list of available models according to platform
+Date: Sun, 22 Oct 2023 16:51:17 +0100
+Message-Id: <20231022155200.436340-3-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -133,54 +133,147 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+By noting the models for which a configuration was requested, we can give
+the user an accurate list of which NIC models were actually available on
+the platform/configuration that was otherwise chosen.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/openrisc/openrisc_sim.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ net/net.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 94 insertions(+)
 
-diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
-index 35da123aef..bffd6f721f 100644
---- a/hw/openrisc/openrisc_sim.c
-+++ b/hw/openrisc/openrisc_sim.c
-@@ -170,7 +170,7 @@ static void openrisc_create_fdt(Or1ksimState *state,
+diff --git a/net/net.c b/net/net.c
+index 606816a3b3..6e20f9d2e9 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -75,6 +75,8 @@ typedef QSIMPLEQ_HEAD(, NetdevQueueEntry) NetdevQueue;
  
- static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-                                   int num_cpus, OpenRISCCPU *cpus[],
--                                  int irq_pin, NICInfo *nd)
-+                                  int irq_pin)
+ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
+ 
++static GHashTable *nic_model_help;
++
+ /***********************************************************/
+ /* network device redirectors */
+ 
+@@ -1072,12 +1074,94 @@ static int net_init_nic(const Netdev *netdev, const char *name,
+     return idx;
+ }
+ 
++static gboolean add_nic_result(gpointer key, gpointer value, gpointer user_data)
++{
++    GPtrArray *results = user_data;
++    GPtrArray *alias_list = value;
++    const char *model = key;
++    char *result;
++
++    if (!alias_list) {
++        result = g_strdup(model);
++    } else {
++        GString *result_str = g_string_new(model);
++        int i;
++
++        g_string_append(result_str, " (aka ");
++        for (i = 0; i < alias_list->len; i++) {
++            if (i) {
++                g_string_append(result_str, ", ");
++            }
++            g_string_append(result_str, alias_list->pdata[i]);
++        }
++        g_string_append(result_str, ")");
++        result = result_str->str;
++        g_string_free(result_str, false);
++        g_ptr_array_unref(alias_list);
++    }
++    g_ptr_array_add(results, result);
++    return true;
++}
++
++static int model_cmp(char **a, char **b)
++{
++    return strcmp(*a, *b);
++}
++
++static void show_nic_models(void)
++{
++    GPtrArray *results = g_ptr_array_new();
++    int i;
++
++    g_hash_table_foreach_remove(nic_model_help, add_nic_result, results);
++    g_ptr_array_sort(results, (GCompareFunc)model_cmp);
++
++    printf("Available NIC models for this configuration:\n");
++    for (i = 0 ; i < results->len; i++) {
++        printf("%s\n", (char *)results->pdata[i]);
++    }
++    g_hash_table_unref(nic_model_help);
++    nic_model_help = NULL;
++}
++
++static void add_nic_model_help(const char *model, const char *alias)
++{
++    GPtrArray *alias_list = NULL;
++
++    if (g_hash_table_lookup_extended(nic_model_help, model, NULL,
++                                     (gpointer *)&alias_list)) {
++        /* Already exists, no alias to add: return */
++        if (!alias) {
++            return;
++        }
++        if (alias_list) {
++            /* Check if this alias is already in the list. Add if not. */
++            if (!g_ptr_array_find_with_equal_func(alias_list, alias,
++                                                  g_str_equal, NULL)) {
++                g_ptr_array_add(alias_list, g_strdup(alias));
++            }
++            return;
++        }
++    }
++    /* Either this model wasn't in the list already, or a first alias added */
++    if (alias) {
++        alias_list = g_ptr_array_new();
++        g_ptr_array_set_free_func(alias_list, g_free);
++        g_ptr_array_add(alias_list, g_strdup(alias));
++    }
++    g_hash_table_replace(nic_model_help, g_strdup(model), alias_list);
++}
++
+ NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+                             const char *alias)
  {
-     void *fdt = state->fdt;
-     DeviceState *dev;
-@@ -178,8 +178,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-     char *nodename;
+     NICInfo *nd;
      int i;
  
--    dev = qdev_new("open_eth");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("open_eth", true, NULL);
-+    if (!dev) {
-+        return;
++    if (nic_model_help) {
++        add_nic_model_help(typename, alias);
 +    }
++
+     for (i = 0; i < nb_nics; i++) {
+         nd = &nd_table[i];
  
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -313,12 +315,10 @@ static void openrisc_sim_init(MachineState *machine)
-     openrisc_create_fdt(state, or1ksim_memmap, smp_cpus, machine->ram_size,
-                         machine->kernel_cmdline);
+@@ -1590,6 +1674,10 @@ void net_check_clients(void)
+     NetClientState *nc;
+     int i;
  
--    if (nd_table[0].used) {
--        openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
--                              or1ksim_memmap[OR1KSIM_ETHOC].size,
--                              smp_cpus, cpus,
--                              OR1KSIM_ETHOC_IRQ, nd_table);
--    }
-+    openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
-+                          or1ksim_memmap[OR1KSIM_ETHOC].size,
-+                          smp_cpus, cpus,
-+                          OR1KSIM_ETHOC_IRQ);
++    if (nic_model_help) {
++        show_nic_models();
++        exit(0);
++    }
+     net_hub_check_clients();
  
-     if (smp_cpus > 1) {
-         openrisc_sim_ompic_init(state, or1ksim_memmap[OR1KSIM_OMPIC].base,
+     QTAILQ_FOREACH(nc, &net_clients, next) {
+@@ -1669,6 +1757,12 @@ static int net_param_nic(void *dummy, QemuOpts *opts, Error **errp)
+     memset(ni, 0, sizeof(*ni));
+     ni->model = qemu_opt_get_del(opts, "model");
+ 
++    if (!nic_model_help && !g_strcmp0(ni->model, "help")) {
++        nic_model_help = g_hash_table_new_full(g_str_hash, g_str_equal,
++                                               g_free, NULL);
++        return 0;
++    }
++
+     /* Create an ID if the user did not specify one */
+     nd_id = g_strdup(qemu_opts_id(opts));
+     if (!nd_id) {
 -- 
 2.40.1
 
