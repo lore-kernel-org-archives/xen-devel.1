@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A50C001DF
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:05:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620713.966469 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EE27CDB474
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:05:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620717.966484 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quawo-0004bQ-EC; Sun, 22 Oct 2023 16:05:02 +0000
+	id 1quaxM-0005dD-Oo; Sun, 22 Oct 2023 16:05:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620713.966469; Sun, 22 Oct 2023 16:05:02 +0000
+Received: by outflank-mailman (output) from mailman id 620717.966484; Sun, 22 Oct 2023 16:05:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quawo-0004at-9H; Sun, 22 Oct 2023 16:05:02 +0000
-Received: by outflank-mailman (input) for mailman id 620713;
- Sun, 22 Oct 2023 16:05:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1quaxM-0005d6-KR; Sun, 22 Oct 2023 16:05:36 +0000
+Received: by outflank-mailman (input) for mailman id 620717;
+ Sun, 22 Oct 2023 16:05:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RY1I=GE=desiato.srs.infradead.org=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quamT-0006wY-MV
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:21 +0000
+ id 1quama-0007Cq-M0
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:28 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 420312c8-70f3-11ee-98d5-6d05b1d4d9a1;
- Sun, 22 Oct 2023 17:54:18 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4692bdf9-70f3-11ee-9b0e-b553b5be7939;
+ Sun, 22 Oct 2023 17:54:26 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakM-00DCn2-0R; Sun, 22 Oct 2023 15:52:37 +0000
+ id 1quakI-00DCmi-0T; Sun, 22 Oct 2023 15:52:10 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakK-001qb4-2G; Sun, 22 Oct 2023 16:52:08 +0100
+ Linux)) id 1quakG-001qYR-2u; Sun, 22 Oct 2023 16:52:04 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 420312c8-70f3-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 4692bdf9-70f3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=2pDGewIOozNTKyf2OldMVVayi4C1vxF7TkMEapx75UM=; b=Saf3H/Ddo4P2X21+F943q20V9E
-	IH4TqcgjTFsjy6FVNIy55caMRuYY1nRP+BtW/RvvyJgr0UoPbIHZFEwW4uHroFPneBHdJIm2hTJeQ
-	EfgBJ/nEz1ZUf7fJVSAjQ4uW4Zs3vcf9EJReL0aqNSAHD6M5W9PRr+NZqTh6NUN7wp3jiP2XR4ahd
-	oXwXUMPUjXZdIWZ/vpg7DFiR4nLoRJRJaGt7pDSgzTYCF8H9+CQxzcuRd/XUQ7qxCrT7C+gQ+cjHQ
-	VTHNMfJt2Uy7rTARhSrMQ1IsuYak9yrxEIsGUvuzkT92etZY8lfFqZsNNTNOuW4CE24mb5G7+L+hG
-	kTnCqj+g==;
+	bh=9qWbK+XlQ4g+snp8vZ6Q76nLv7WCuuiJelCPcWERw+E=; b=TH0DfNv+/GkrIUofo1aPAcDDb4
+	PG7p3nn76qfe5trIKXpIKgCOdMA7VCkEXLmPHf6YAhBLZiWfHtUY5SMAmXIeAltfrEMfIpKFBvNh0
+	BqfK3W7wLO8py6AAGGLc7xbtTtbVmZFiiaUPKaqvFT/MVb6qkqawlYDRoO3ivslXPp34+KDjV9dVj
+	V1E7zn3zD3cZZQ4Af7UTo4anky3ZvbSDaeyCXNX/Yvjb2mqXqGofbI/DtnGjKPYVUqliSPUjUxOki
+	AQOrEbXCu2H7uV9fodBW1G6PursGXHXvyzoxZFEOvfq9MqMmuizPfSimjBbTRs28WxLdc+BeHmnyS
+	Co3VHILg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 40/45] hw/sparc/sun4m: use qemu_configure_nic_device()
-Date: Sun, 22 Oct 2023 16:51:55 +0100
-Message-Id: <20231022155200.436340-41-dwmw2@infradead.org>
+Subject: [PATCH 04/45] hw/pci: add pci_init_nic_devices(), pci_init_nic_in_slot()
+Date: Sun, 22 Oct 2023 16:51:19 +0100
+Message-Id: <20231022155200.436340-5-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -133,53 +133,90 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+The loop over nd_table[] to add PCI NICs is repeated in quite a few
+places. Add a helper function to do it.
+
+Some platforms also try to instantiate a specific model in a specific
+slot, to match the real hardware. Add pci_init_nic_in_slot() for that
+purpose.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/sparc/sun4m.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ hw/pci/pci.c         | 45 ++++++++++++++++++++++++++++++++++++++++++++
+ include/hw/pci/pci.h |  4 +++-
+ 2 files changed, 48 insertions(+), 1 deletion(-)
 
-diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
-index 17bf5f2879..259cf2f383 100644
---- a/hw/sparc/sun4m.c
-+++ b/hw/sparc/sun4m.c
-@@ -299,7 +299,7 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index b0d21bf43a..904f189d30 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -1932,6 +1932,51 @@ PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+     return pci_dev;
+ }
  
- static void *sparc32_dma_init(hwaddr dma_base,
-                               hwaddr esp_base, qemu_irq espdma_irq,
--                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
-+                              hwaddr le_base, qemu_irq ledma_irq)
++void pci_init_nic_devices(PCIBus *bus, const char *default_model)
++{
++    qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
++                                "virtio", "virtio-net-pci");
++}
++
++bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
++                          const char *alias, const char *devaddr)
++{
++    NICInfo *nd = qemu_find_nic_info(model, true, alias);
++    int dom, busnr, devfn;
++    PCIDevice *pci_dev;
++    unsigned slot;
++    PCIBus *bus;
++
++    if (!nd) {
++        return false;
++    }
++
++    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
++        error_report("Invalid PCI device address %s for device %s",
++                     devaddr, model);
++        exit(1);
++    }
++
++    if (dom != 0) {
++        error_report("No support for non-zero PCI domains");
++        exit(1);
++    }
++
++    devfn = PCI_DEVFN(slot, 0);
++
++    bus = pci_find_bus_nr(rootbus, busnr);
++    if (!bus) {
++        error_report("Invalid PCI device address %s for device %s",
++                     devaddr, model);
++        exit(1);
++    }
++
++    pci_dev = pci_new(devfn, model);
++    qdev_set_nic_properties(&pci_dev->qdev, nd);
++    pci_realize_and_unref(pci_dev, bus, &error_fatal);
++    return true;
++}
++
+ PCIDevice *pci_vga_init(PCIBus *bus)
  {
-     DeviceState *dma;
-     ESPDMADeviceState *espdma;
-@@ -320,7 +320,7 @@ static void *sparc32_dma_init(hwaddr dma_base,
+     vga_interface_created = true;
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index b70a0b95ff..76d3ddab25 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -320,7 +320,9 @@ void pci_device_reset(PCIDevice *dev);
+ PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+                                const char *default_model,
+                                const char *default_devaddr);
+-
++void pci_init_nic_devices(PCIBus *bus, const char *default_model);
++bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
++                          const char *alias, const char *devaddr);
+ PCIDevice *pci_vga_init(PCIBus *bus);
  
-     lance = SYSBUS_PCNET(object_resolve_path_component(
-                          OBJECT(ledma), "lance"));
--    qdev_set_nic_properties(DEVICE(lance), nd);
-+    qemu_configure_nic_device(DEVICE(lance), true, NULL);
- 
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
-@@ -832,7 +832,6 @@ static void sun4m_hw_init(MachineState *machine)
-     unsigned int smp_cpus = machine->smp.cpus;
-     unsigned int max_cpus = machine->smp.max_cpus;
-     HostMemoryBackend *ram_memdev = machine->memdev;
--    NICInfo *nd = &nd_table[0];
- 
-     if (machine->ram_size > hwdef->max_mem) {
-         error_report("Too much memory for this machine: %" PRId64 ","
-@@ -893,10 +892,9 @@ static void sun4m_hw_init(MachineState *machine)
-                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
-     }
- 
--    qemu_check_nic_model(nd, TYPE_LANCE);
-     sparc32_dma_init(hwdef->dma_base,
-                      hwdef->esp_base, slavio_irq[18],
--                     hwdef->le_base, slavio_irq[16], nd);
-+                     hwdef->le_base, slavio_irq[16]);
- 
-     if (graphic_depth != 8 && graphic_depth != 24) {
-         error_report("Unsupported depth: %d", graphic_depth);
+ static inline PCIBus *pci_get_bus(const PCIDevice *dev)
 -- 
 2.40.1
 
