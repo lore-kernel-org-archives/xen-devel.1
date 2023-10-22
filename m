@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AAF7C001DF
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:07:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620727.966513 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B72DC001DF
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:08:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620739.966544 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quaz9-0007Gp-L3; Sun, 22 Oct 2023 16:07:27 +0000
+	id 1quaze-0000qM-GQ; Sun, 22 Oct 2023 16:07:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620727.966513; Sun, 22 Oct 2023 16:07:27 +0000
+Received: by outflank-mailman (output) from mailman id 620739.966544; Sun, 22 Oct 2023 16:07:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quaz9-0007GL-Hy; Sun, 22 Oct 2023 16:07:27 +0000
-Received: by outflank-mailman (input) for mailman id 620727;
- Sun, 22 Oct 2023 16:07:26 +0000
+	id 1quaze-0000qD-Di; Sun, 22 Oct 2023 16:07:58 +0000
+Received: by outflank-mailman (input) for mailman id 620739;
+ Sun, 22 Oct 2023 16:07:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RY1I=GE=desiato.srs.infradead.org=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quamX-0007Cq-TK
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:25 +0000
+ id 1quan9-0007Cq-6H
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:55:03 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 43fc1095-70f3-11ee-9b0e-b553b5be7939;
- Sun, 22 Oct 2023 17:54:22 +0200 (CEST)
+ id 5b0b3ed8-70f3-11ee-9b0e-b553b5be7939;
+ Sun, 22 Oct 2023 17:55:00 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakI-00DCmk-0T; Sun, 22 Oct 2023 15:52:09 +0000
+ id 1quakJ-00DCmq-21; Sun, 22 Oct 2023 15:53:37 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakH-001qYf-0m; Sun, 22 Oct 2023 16:52:05 +0100
+ Linux)) id 1quakI-001qZD-0e; Sun, 22 Oct 2023 16:52:06 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 43fc1095-70f3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 5b0b3ed8-70f3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=LSOT+i68QAXGw5nmfqnaPDMSr2L9t1MExAWbfT8YrMc=; b=ijBcck6ioqdEnU4sTrfyFOY5N2
-	ZVKetmVBXzhhypRTvqbWn8w7j3+924tcPja/EREQWaQZxiBlVlRIY1zJj+83h0cHvU5vXlXzrrUgG
-	qbXwmSptBmEgxUcAWDbvOi7V9h55IoqA7ftNsiQ3+ilne2HQzjYEl6r9KmuT0shkk3Ro/a+33GP0d
-	riKTACqWHz+JKVwiRng40Iou3FlDpLk1p0O8LTVrixLSoO7thP93piqFETzFUaS1+TVjfUwGgtoP/
-	DqQiw9ykRUCZ31B+0nTsET4RQCijsTMsc4XG0XMUv9czp3pz02o74sgVpQurf1z6xvpldcwygH0yr
-	ncDJw5aA==;
+	bh=zpmWGfDJ4p47YbRsENJiPMvNNVfWBSj9DDCQL7if7Xs=; b=rJQSdHp7neRWdzDMIbjE2Zjypv
+	NjPr8rhGdb3D/xMBkHChvhKzva/Hb0vatOBd4vj+sHprPyL3A2lG26OzZQAMzDGQUYKBqozMOkUW1
+	Jd3tMTeIPV3NuYNI5VfrMGpi2wFnruhQLJLr8kQ5SUsQBiu3pvZNlPPL+vqwzvizOyNk/bFiB3H0g
+	NhH05Um2d33Epcqk2+d8nle+kwoHD8TyASBLJUnxRuc/BILJiNAmL4PNDYzGbflS2jzPO2LTduqKy
+	Yay1jg5/nZ5UdWTxshF6kqD22VbrTA+7eQRI8EY5V0fiRJT7MLBsYAxxCZowr3goq/qL/5+9SpQAA
+	FLB1oMjQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 07/45] hw/alpha/dp264: use pci_init_nic_devices()
-Date: Sun, 22 Oct 2023 16:51:22 +0100
-Message-Id: <20231022155200.436340-8-dwmw2@infradead.org>
+Subject: [PATCH 15/45] hw/ppc/prep: use pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:30 +0100
+Message-Id: <20231022155200.436340-16-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -133,26 +133,38 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Previously, the first PCI NIC would be placed in PCI slot 3 and the rest
+would be dynamically assigned. Even if the user overrode the default NIC
+type and made it something other than PCNet.
+
+Now, the first PCNet NIC (that is, anything not explicitly specified
+to be anything different) will go to slot 3 even if it isn't the first
+NIC specified on the commnd line. And anything else will be dynamically
+assigned.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/alpha/dp264.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/ppc/prep.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
-index 03495e1e60..52a1fa310b 100644
---- a/hw/alpha/dp264.c
-+++ b/hw/alpha/dp264.c
-@@ -124,9 +124,7 @@ static void clipper_init(MachineState *machine)
-     pci_vga_init(pci_bus);
+diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
+index 137276bcb9..1a08e74945 100644
+--- a/hw/ppc/prep.c
++++ b/hw/ppc/prep.c
+@@ -336,10 +336,9 @@ static void ibm_40p_init(MachineState *machine)
+         /* XXX: s3-trio at PCI_DEVFN(2, 0) */
+         pci_vga_init(pci_bus);
  
-     /* Network setup.  e1000 is good enough, failing Tulip support.  */
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic,
+-                                i == 0 ? "3" : NULL);
+-        }
++        /* First PCNET device at PCI_DEVFN(3, 0) */
++        pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "3");
++        pci_init_nic_devices(pci_bus, mc->default_nic);
+     }
  
-     /* Super I/O */
-     isa_create_simple(isa_bus, TYPE_SMC37C669_SUPERIO);
+     /* Prepare firmware configuration for OpenBIOS */
 -- 
 2.40.1
 
