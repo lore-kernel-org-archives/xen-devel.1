@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC8FC001DF
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:09:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620770.966644 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BAC5C00A8F
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:11:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620788.966654 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qub1Q-0007XV-Qt; Sun, 22 Oct 2023 16:09:48 +0000
+	id 1qub2W-0000ue-9z; Sun, 22 Oct 2023 16:10:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620770.966644; Sun, 22 Oct 2023 16:09:48 +0000
+Received: by outflank-mailman (output) from mailman id 620788.966654; Sun, 22 Oct 2023 16:10:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qub1Q-0007XO-Na; Sun, 22 Oct 2023 16:09:48 +0000
-Received: by outflank-mailman (input) for mailman id 620770;
- Sun, 22 Oct 2023 16:09:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qub2W-0000uX-6B; Sun, 22 Oct 2023 16:10:56 +0000
+Received: by outflank-mailman (input) for mailman id 620788;
+ Sun, 22 Oct 2023 16:10:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RY1I=GE=desiato.srs.infradead.org=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quamc-0006wY-Ny
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:30 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 449c59a1-70f3-11ee-98d5-6d05b1d4d9a1;
- Sun, 22 Oct 2023 17:54:22 +0200 (CEST)
+ <SRS0=zZR7=GE=casper.srs.infradead.org=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1quamD-0007Cq-VQ
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:05 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 38de8c29-70f3-11ee-9b0e-b553b5be7939;
+ Sun, 22 Oct 2023 17:54:03 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakI-00DCmj-0W; Sun, 22 Oct 2023 15:52:12 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1quakG-008TGC-UF; Sun, 22 Oct 2023 15:52:04 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakH-001qYZ-0P; Sun, 22 Oct 2023 16:52:05 +0100
+ Linux)) id 1quakG-001qYC-1V; Sun, 22 Oct 2023 16:52:04 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 449c59a1-70f3-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 38de8c29-70f3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=yNOslSLwNSZBz1nMauOOhKrz2V+jkfbo6C3leUlOjxc=; b=qCMQkmcTP7rb3M8bOB3UFupqpN
-	tRwB+ghhJpyaQEmzOaJeQ1dP79XOqNqfg0huvnM7ow26NKfUXmic5uKS+/YvO1tMolo5yzgObmLCe
-	VSAxjdAx6YUb1w+luQhfAGo52Qa30yqlc/KjeDetNpVw7yDkMLkTnPPGGqA+dNakoE0/p0tl5guOj
-	sEHBTY1HtLImAXCpdZes3hwZufPdxn/8j/L/aNB473sTCrZ8PsusFl6VzzPK18uP40liO0Vz/bLSM
-	47MDpU1FqJMgoKghkaCkt79j62+opUuK6BHsyvJDBldhDjBzU6XdYrg3OvhQAsIERmrgeXFMw6oSx
-	i+qkp3/Q==;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=2ozELbKHkKHeNb6bnWRyBsoC9+/E0sXiWudbUWInik4=; b=jcnzNmszPyaB124Gx0UWtLrs3X
+	bYojddjEskTFHs6cEv0HtIX9voAJJ6SdYknNtP0aDxdF8+UHaj91KXy3vt+8IOqVlsh0vhdZ4ASc/
+	0ugSvkjXXV9s3DKzJXKFPcjbb16VPRejRJ3J8DzSGRLuy0Z/0Q55uEj216c3eA/GHwiMco3MMz3so
+	Uar3JBlJG6kopv8j5w+nAqs8vcwmhE+Ku9VDi3DIvl+uUbmTF5mR2/zpM7BgdkfK4OULstoLI4OrN
+	By6lz6SgNEE+D5sAtezMpGcB7uqjwXPx7d7w0ofTnxHX9plbhDMMxdiddmE3JE1qQ3YorVYEa3scA
+	z5OejpZw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,131 +120,194 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 06/45] hw/xen: use qemu_create_nic_bus_devices() to instantiate Xen NICs
-Date: Sun, 22 Oct 2023 16:51:21 +0100
-Message-Id: <20231022155200.436340-7-dwmw2@infradead.org>
+Subject: [PATCH 0/45] Rework matching of network devices to -nic options
+Date: Sun, 22 Oct 2023 16:51:15 +0100
+Message-Id: <20231022155200.436340-1-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
-References: <20231022155200.436340-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+In https://lore.kernel.org/qemu-devel/20231019154020.99080-20-dwmw2@infradead.org/
+I lamented that the default NIC creation seemed fairly hackish but "that
+isn't a yak I want to shave today."
 
-When instantiating XenBus itself, for each NIC which is configured with
-either the model unspecified, or set to to "xen" or "xen-net-device",
-create a corresponding xen-net-device for it.
+Yet here we are...
 
-Now we can launch emulated Xen guests with '-nic user', and this fixes
-the setup for Xen PV guests, which was previously broken in various
-ways and never actually managed to peer with the netdev.
+Most platforms iterating directly over the nd_table[] are doing one of 
+two things. Either they are creating the NIC for their platform and want
+to find a matching -nic configuration for it, if such exists. Or they
+are only going to create that platform NIC if a matching config *does*
+exist.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- hw/xen/xen-bus.c                    |  4 ++++
- hw/xen/xen_devconfig.c              | 25 -------------------------
- hw/xenpv/xen_machine_pv.c           |  9 ---------
- include/hw/xen/xen-legacy-backend.h |  1 -
- 4 files changed, 4 insertions(+), 35 deletions(-)
+All of those can be converted to the new qemu_configure_nic_device()
+and qemu_create_nic_device() functions. The latter of which will call
+qdev_new() to create the device (and apply the config) if a matching
+NIC config does exist for it. The existing behaviour of each platform
+has been preserved for now, despite it being apparently fairly random.
 
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index 0da2aa219a..194c1b7311 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -19,6 +19,7 @@
- #include "qapi/error.h"
- #include "qapi/qmp/qdict.h"
- #include "sysemu/sysemu.h"
-+#include "net/net.h"
- #include "trace.h"
- 
- static char *xen_device_get_backend_path(XenDevice *xendev)
-@@ -1134,4 +1135,7 @@ void xen_bus_init(void)
- 
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-     qbus_set_bus_hotplug_handler(bus);
-+
-+    qemu_create_nic_bus_devices(bus, TYPE_XEN_DEVICE, "xen-net-device",
-+                                "xen", "xen-net-device");
- }
-diff --git a/hw/xen/xen_devconfig.c b/hw/xen/xen_devconfig.c
-index 3f77c675c6..2150869f60 100644
---- a/hw/xen/xen_devconfig.c
-+++ b/hw/xen/xen_devconfig.c
-@@ -46,31 +46,6 @@ static int xen_config_dev_all(char *fe, char *be)
- 
- /* ------------------------------------------------------------- */
- 
--int xen_config_dev_nic(NICInfo *nic)
--{
--    char fe[256], be[256];
--    char mac[20];
--    int vlan_id = -1;
--
--    net_hub_id_for_client(nic->netdev, &vlan_id);
--    snprintf(mac, sizeof(mac), "%02x:%02x:%02x:%02x:%02x:%02x",
--             nic->macaddr.a[0], nic->macaddr.a[1], nic->macaddr.a[2],
--             nic->macaddr.a[3], nic->macaddr.a[4], nic->macaddr.a[5]);
--    xen_pv_printf(NULL, 1, "config nic %d: mac=\"%s\"\n", vlan_id, mac);
--    xen_config_dev_dirs("vif", "qnic", vlan_id, fe, be, sizeof(fe));
--
--    /* frontend */
--    xenstore_write_int(fe, "handle",     vlan_id);
--    xenstore_write_str(fe, "mac",        mac);
--
--    /* backend */
--    xenstore_write_int(be, "handle",     vlan_id);
--    xenstore_write_str(be, "mac",        mac);
--
--    /* common stuff */
--    return xen_config_dev_all(fe, be);
--}
--
- int xen_config_dev_vfb(int vdev, const char *type)
- {
-     char fe[256], be[256];
-diff --git a/hw/xenpv/xen_machine_pv.c b/hw/xenpv/xen_machine_pv.c
-index 9f9f137f99..1130d1a147 100644
---- a/hw/xenpv/xen_machine_pv.c
-+++ b/hw/xenpv/xen_machine_pv.c
-@@ -32,8 +32,6 @@
- 
- static void xen_init_pv(MachineState *machine)
- {
--    int i;
--
-     setup_xen_backend_ops();
- 
-     /* Initialize backend core & drivers */
-@@ -62,13 +60,6 @@ static void xen_init_pv(MachineState *machine)
-         vga_interface_created = true;
-     }
- 
--    /* configure nics */
--    for (i = 0; i < nb_nics; i++) {
--        if (!nd_table[i].model || 0 != strcmp(nd_table[i].model, "xen"))
--            continue;
--        xen_config_dev_nic(nd_table + i);
--    }
--
-     xen_bus_init();
- 
-     /* config cleanup hook */
-diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
-index fc42146bc2..2cca174778 100644
---- a/include/hw/xen/xen-legacy-backend.h
-+++ b/include/hw/xen/xen-legacy-backend.h
-@@ -81,7 +81,6 @@ extern struct XenDevOps xen_usb_ops;          /* xen-usb.c         */
- 
- /* configuration (aka xenbus setup) */
- void xen_config_cleanup(void);
--int xen_config_dev_nic(NICInfo *nic);
- int xen_config_dev_vfb(int vdev, const char *type);
- int xen_config_dev_vkbd(int vdev);
- int xen_config_dev_console(int vdev);
--- 
-2.40.1
+PCI and indeed XenBus can use a qemu_create_nic_bus_devices() which will 
+create all NICs that live on a given bus type. That covers most 
+platforms, but some PCI platforms do something special with the first 
+NIC of a given type, placing it in the slot where it would have been on 
+the real hardware. There were various inconsistencies in the way the 
+platforms did so, and whether they cared what model the NIC was. Those 
+subtle behavioural changes I *have* allowed to change, and now the 
+pci_init_nic_slot() function will pick the first NIC that the user 
+specified which isn't explicitly *not* the default type, and put that
+in  the specified slot.
+
+The tests for npcm7xx used to lament that they had to instantiate both
+NICs even when they wanted to test only the second, because there was
+no way to specify which hardware devices gets which configuration. I
+made that untrue, by allowing 'emc0' and 'emc1' aliases, and fixed up
+the test accordingly.
+
+There are one or two special cases which want to do special things with
+the MAC address of the primary NIC, to set up a system identification
+(or force it to use an Apple OUI, in the case of m68k/q400). All those
+work out relatively cleanly too.
+
+And I can ditch the two ugly patches which fixed up the Xen network
+device handling, and replace them with a simple call to the new
+qemu_create_nic_bus_devices() function.
+
+I suspect that we can remove the pci_init_nic_devices() from platform
+code and just do it later, except for platforms which *care* which
+PCI bus the dynamic devices go on (is that just sun4u which puts its
+primary NIC onto a different bus?).
+
+Finally, while we're at it, clean up -nic model=help to only print
+the device models which are actually usable on the given platform
+rather than just listing them *all*.
+
+And now we can make nd_table[] and nb_nics static in net/net.c because
+nothing else has any business poking at them directly.
+
+David Woodhouse (45):
+      net: add qemu_{configure,create}_nic_device(), qemu_find_nic_info()
+      net: report list of available models according to platform
+      net: add qemu_create_nic_bus_devices()
+      hw/pci: add pci_init_nic_devices(), pci_init_nic_in_slot()
+      hw/i386/pc: use qemu_get_nic_info() and pci_init_nic_devices()
+      hw/xen: use qemu_create_nic_bus_devices() to instantiate Xen NICs
+      hw/alpha/dp264: use pci_init_nic_devices()
+      hw/arm/sbsa-ref: use pci_init_nic_devices()
+      hw/arm/virt: use pci_init_nic_devices()
+      hw/hppa: use pci_init_nic_devices()
+      hw/loongarch: use pci_init_nic_devices()
+      hw/mips/fuloong2e: use pci_init_nic_devices()
+      hw/mips/malta: use pci_init_nic_devices()
+      hw/mips/loongson3_virt: use pci_init_nic_devices()
+      hw/ppc/prep: use pci_init_nic_devices()
+      hw/ppc/spapr: use qemu_get_nic_info() and pci_init_nic_devices()
+      hw/ppc: use pci_init_nic_devices()
+      hw/sh4/r2d: use pci_init_nic_devices()
+      hw/sparc64/sun4u: use pci_init_nic_devices()
+      hw/xtensa/virt: use pci_init_nic_devices()
+      hw/arm/allwinner: use qemu_configure_nic_device()
+      hw/arm/aspeed: use qemu_configure_nic_device()
+      hw/arm/exynos4: use qemu_create_nic_device()
+      hw/arm/fsl: use qemu_configure_nic_device()
+      hw/net/smc91c111: use qemu_configure_nic_device()
+      hw/net/lan9118: use qemu_configure_nic_device()
+      hw/arm/highbank: use qemu_create_nic_device()
+      hw/arm/npcm7xx: use qemu_configure_nic_device, allow emc0/emc1 as aliases
+      hw/arm/stellaris: use qemu_find_nic_info()
+      hw/arm: use qemu_configure_nic_device()
+      hw/net/etraxfs-eth: use qemu_configure_nic_device()
+      hw/m68k/mcf5208: use qemu_create_nic_device()
+      hw/m68k/q800: use qemu_configure_nic_device()
+      hw/microblaze: use qemu_configure_nic_device()
+      hw/mips: use qemu_create_nic_device()
+      hw/net/lasi_i82596: use qemu_configure_nic_device()
+      hw/openrisc/openrisc_sim: use qemu_create_nic_device()
+      hw/riscv: use qemu_configure_nic_device()
+      hw/s390x/s390-virtio-ccw: use qemu_create_nic_device()
+      hw/sparc/sun4m: use qemu_configure_nic_device()
+      hw/xtensa/xtfpga: use qemu_create_nic_device()
+      net: remove qemu_check_nic_model()
+      hw/pci: remove pci_nic_init_nofail()
+      net: remove qemu_show_nic_models(), qemu_find_nic_model()
+      net: make nb_nics and nd_table[] static in net/net.c
+
+ hw/alpha/dp264.c                         |   4 +-
+ hw/arm/allwinner-a10.c                   |   6 +-
+ hw/arm/allwinner-h3.c                    |   6 +-
+ hw/arm/allwinner-r40.c                   |  27 +---
+ hw/arm/aspeed.c                          |   9 +-
+ hw/arm/exynos4_boards.c                  |   6 +-
+ hw/arm/fsl-imx25.c                       |   2 +-
+ hw/arm/fsl-imx6.c                        |   2 +-
+ hw/arm/fsl-imx6ul.c                      |   2 +-
+ hw/arm/fsl-imx7.c                        |   2 +-
+ hw/arm/gumstix.c                         |   6 +-
+ hw/arm/highbank.c                        |  12 +-
+ hw/arm/integratorcp.c                    |   5 +-
+ hw/arm/kzm.c                             |   4 +-
+ hw/arm/mainstone.c                       |   3 +-
+ hw/arm/mps2-tz.c                         |   8 +-
+ hw/arm/mps2.c                            |   2 +-
+ hw/arm/msf2-soc.c                        |   6 +-
+ hw/arm/musicpal.c                        |   3 +-
+ hw/arm/npcm7xx.c                         |  16 +-
+ hw/arm/realview.c                        |  25 ++-
+ hw/arm/sbsa-ref.c                        |   4 +-
+ hw/arm/stellaris.c                       |  30 +++-
+ hw/arm/versatilepb.c                     |  15 +-
+ hw/arm/vexpress.c                        |   4 +-
+ hw/arm/virt.c                            |   4 +-
+ hw/arm/xilinx_zynq.c                     |  11 +-
+ hw/arm/xlnx-versal.c                     |   7 +-
+ hw/arm/xlnx-zynqmp.c                     |   8 +-
+ hw/cris/axis_dev88.c                     |   9 +-
+ hw/hppa/machine.c                        |   6 +-
+ hw/i386/pc.c                             |  20 +--
+ hw/loongarch/virt.c                      |   4 +-
+ hw/m68k/mcf5208.c                        |  20 +--
+ hw/m68k/q800.c                           |  28 ++--
+ hw/microblaze/petalogix_ml605_mmu.c      |   3 +-
+ hw/microblaze/petalogix_s3adsp1800_mmu.c |   3 +-
+ hw/mips/fuloong2e.c                      |  16 +-
+ hw/mips/jazz.c                           |  16 +-
+ hw/mips/loongson3_virt.c                 |   4 +-
+ hw/mips/malta.c                          |  15 +-
+ hw/mips/mipssim.c                        |  13 +-
+ hw/net/etraxfs_eth.c                     |   5 +-
+ hw/net/lan9118.c                         |   5 +-
+ hw/net/lasi_i82596.c                     |   3 +-
+ hw/net/smc91c111.c                       |   5 +-
+ hw/openrisc/openrisc_sim.c               |  18 +--
+ hw/pci/pci.c                             |  73 +++------
+ hw/ppc/e500.c                            |   4 +-
+ hw/ppc/mac_newworld.c                    |   4 +-
+ hw/ppc/mac_oldworld.c                    |   4 +-
+ hw/ppc/ppc440_bamboo.c                   |  13 +-
+ hw/ppc/prep.c                            |   7 +-
+ hw/ppc/spapr.c                           |  18 +--
+ hw/riscv/microchip_pfsoc.c               |  13 +-
+ hw/riscv/sifive_u.c                      |   7 +-
+ hw/s390x/s390-virtio-ccw.c               |  11 +-
+ hw/sh4/r2d.c                             |   6 +-
+ hw/sparc/sun4m.c                         |   8 +-
+ hw/sparc64/sun4u.c                       |  27 +---
+ hw/xen/xen-bus.c                         |   4 +
+ hw/xen/xen_devconfig.c                   |  25 ---
+ hw/xenpv/xen_machine_pv.c                |   9 --
+ hw/xtensa/virt.c                         |   4 +-
+ hw/xtensa/xtfpga.c                       |  11 +-
+ include/hw/cris/etraxfs.h                |   2 +-
+ include/hw/net/lan9118.h                 |   2 +-
+ include/hw/net/ne2000-isa.h              |   2 -
+ include/hw/net/smc91c111.h               |   2 +-
+ include/hw/pci/pci.h                     |   7 +-
+ include/hw/xen/xen-legacy-backend.h      |   1 -
+ include/net/net.h                        |  18 +--
+ net/net.c                                | 252 +++++++++++++++++++++++++------
+ system/globals.c                         |   2 -
+ tests/qtest/npcm7xx_emc-test.c           |  18 +--
+ 75 files changed, 455 insertions(+), 531 deletions(-)
+
 
 
