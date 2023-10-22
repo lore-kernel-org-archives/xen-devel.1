@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B92EC25B45
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620679.966392 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 067ECC25B42
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620672.966326 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quamB-0002lF-HM; Sun, 22 Oct 2023 15:54:03 +0000
+	id 1quam2-0000di-L4; Sun, 22 Oct 2023 15:53:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620679.966392; Sun, 22 Oct 2023 15:54:03 +0000
+Received: by outflank-mailman (output) from mailman id 620672.966326; Sun, 22 Oct 2023 15:53:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quamA-0002fi-8Z; Sun, 22 Oct 2023 15:54:02 +0000
-Received: by outflank-mailman (input) for mailman id 620679;
- Sun, 22 Oct 2023 15:53:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1quam2-0000bC-2w; Sun, 22 Oct 2023 15:53:54 +0000
+Received: by outflank-mailman (input) for mailman id 620672;
+ Sun, 22 Oct 2023 15:53:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zZR7=GE=casper.srs.infradead.org=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quam6-0007Cq-Ae
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:58 +0000
+ id 1qualz-0006wY-Jo
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:51 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 346cf61a-70f3-11ee-9b0e-b553b5be7939;
- Sun, 22 Oct 2023 17:53:55 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 304069e3-70f3-11ee-98d5-6d05b1d4d9a1;
+ Sun, 22 Oct 2023 17:53:48 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakL-008TGx-DB; Sun, 22 Oct 2023 15:52:09 +0000
+ id 1quakL-008TGu-DD; Sun, 22 Oct 2023 15:52:09 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakL-001qbP-03; Sun, 22 Oct 2023 16:52:09 +0100
+ Linux)) id 1quakK-001qay-20; Sun, 22 Oct 2023 16:52:08 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 346cf61a-70f3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 304069e3-70f3-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=lW4zrMtqp+RmpNoA/oVWXnLHObLrSyX00MNJ9BrDmtw=; b=IryzMNIYbd8IySEDjNh5QyewtC
-	qktZ7fkA02qfNdewjcf15ujZ4dLWZbd4PEihsWEpzILqPDuXalN9tf+4Htj6ipOmDe3pZbRCKp1Uf
-	8pwpN36n83U2XrZIwCgHdjUjxVn9OGcE3RAwj6DymgrXGFQjXqNmZeeKVyngfLSUVQIYjD+PWLN6m
-	4rFpwdMXLu06iCJjIftgD9sAAsi5XFn/XxWs/yJXjOjTws9O8D1F/fbOzv+ThL8070sWL/sdZ9nWj
-	08f3AsF8wASbJ0JpZu9RGXFijUoDB0PXrLFsc/7VZeZa8BZhUBDkAnsCgyJC0vaaCiMR7bfpwRGLq
-	9SmmFdKA==;
+	bh=MzNB1kB+MKKgmKuvdGyjwRqbOWNmdCGP24EVU4gbBKs=; b=BOTpbmEhw9k8na/d3I1AbUe9b0
+	E6G1Hj4USM9BvQ+F5xHHrxW1V2tmkvERcHo7d3FZ0Tv/uakTSMvIgZQqIcBtApttgEXq386rStogT
+	NGtg59PSjG5qFluXSFVO+sAKemnE8U5ELEDGh1lS2gmYwSKkiPgrS55f2AofdoM6u3I1bGJrXl5ba
+	xtTsjXmpZ4r05MqdxLNIFbmAxC8Uesnf2zu3wqnZtY34+ASHLO5qR+YC6Q8NgyQalK6K8L4i9FDzq
+	dcEGLBKoVLWBDlgqQzAibSQxsnFGGMY+PV30dzPBeZf1vCuuNDbk+0qYFREsNCyFY8a1BTbrIBcce
+	DMLchh8Q==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 44/45] net: remove qemu_show_nic_models(), qemu_find_nic_model()
-Date: Sun, 22 Oct 2023 16:51:59 +0100
-Message-Id: <20231022155200.436340-45-dwmw2@infradead.org>
+Subject: [PATCH 39/45] hw/s390x/s390-virtio-ccw: use qemu_create_nic_device()
+Date: Sun, 22 Oct 2023 16:51:54 +0100
+Message-Id: <20231022155200.436340-40-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -133,90 +133,34 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-These old functions can be removed now too. Let net_param_nic() print
-the full set of network devices directly, and also make it note that a
-list more specific to this platform/config will be available by using
-'-nic model=help' instead.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- include/net/net.h |  3 ---
- net/net.c         | 39 ++++++---------------------------------
- 2 files changed, 6 insertions(+), 36 deletions(-)
+ hw/s390x/s390-virtio-ccw.c | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 1512650190..290e604f03 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -201,9 +201,6 @@ void qemu_set_vnet_hdr_len(NetClientState *nc, int len);
- int qemu_set_vnet_le(NetClientState *nc, bool is_le);
- int qemu_set_vnet_be(NetClientState *nc, bool is_be);
- void qemu_macaddr_default_if_unset(MACAddr *macaddr);
--int qemu_show_nic_models(const char *arg, const char *const *models);
--int qemu_find_nic_model(NICInfo *nd, const char * const *models,
--                        const char *default_model);
- NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-                             const char *alias);
- bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-diff --git a/net/net.c b/net/net.c
-index bdb31dcb27..ed0d638454 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -962,38 +962,6 @@ GPtrArray *qemu_get_nic_models(const char *device_type)
-     return nic_models;
- }
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index 2d75f2131f..b8b8a2a201 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -217,16 +217,9 @@ static void s390_init_ipl_dev(const char *kernel_filename,
  
--int qemu_show_nic_models(const char *arg, const char *const *models)
--{
--    int i;
--
--    if (!arg || !is_help_option(arg)) {
--        return 0;
--    }
--
--    printf("Available NIC models:\n");
--    for (i = 0 ; models[i]; i++) {
--        printf("%s\n", models[i]);
--    }
--    return 1;
--}
--
--int qemu_find_nic_model(NICInfo *nd, const char * const *models,
--                        const char *default_model)
--{
--    int i;
--
--    if (!nd->model)
--        nd->model = g_strdup(default_model);
--
--    for (i = 0 ; models[i]; i++) {
--        if (strcmp(nd->model, models[i]) == 0)
--            return i;
--    }
--
--    error_report("Unsupported NIC model: %s", nd->model);
--    return -1;
--}
--
- static int net_init_nic(const Netdev *netdev, const char *name,
-                         NetClientState *peer, Error **errp)
+ static void s390_create_virtio_net(BusState *bus, const char *name)
  {
-@@ -1775,9 +1743,14 @@ static int net_param_nic(void *dummy, QemuOpts *opts, Error **errp)
-         }
-         if (is_help_option(type)) {
-             GPtrArray *nic_models = qemu_get_nic_models(TYPE_DEVICE);
-+            int i;
-             show_netdevs();
-             printf("\n");
--            qemu_show_nic_models(type, (const char **)nic_models->pdata);
-+            printf("Supported NIC models "
-+                   "(use -nic model=help for a filtered list):\n");
-+            for (i = 0 ; nic_models->pdata[i]; i++) {
-+                printf("%s\n", (char *)nic_models->pdata[i]);
-+            }
-             g_ptr_array_free(nic_models, true);
-             exit(0);
-         }
+-    int i;
+-
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-        DeviceState *dev;
+-
+-        qemu_check_nic_model(nd, "virtio");
++    DeviceState *dev;
+ 
+-        dev = qdev_new(name);
+-        qdev_set_nic_properties(dev, nd);
++    while ((dev = qemu_create_nic_device(name, true, "virtio")) {
+         qdev_realize_and_unref(dev, bus, &error_fatal);
+     }
+ }
 -- 
 2.40.1
 
