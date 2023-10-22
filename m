@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E38CBC25B43
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8911C00A8F
 	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620666.966278 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.620662.966244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qualy-0007vt-6w; Sun, 22 Oct 2023 15:53:50 +0000
+	id 1qualv-0007Bw-R3; Sun, 22 Oct 2023 15:53:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620666.966278; Sun, 22 Oct 2023 15:53:50 +0000
+Received: by outflank-mailman (output) from mailman id 620662.966244; Sun, 22 Oct 2023 15:53:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qualx-0007v8-Tg; Sun, 22 Oct 2023 15:53:49 +0000
-Received: by outflank-mailman (input) for mailman id 620666;
- Sun, 22 Oct 2023 15:53:48 +0000
+	id 1qualv-0007Bp-N7; Sun, 22 Oct 2023 15:53:47 +0000
+Received: by outflank-mailman (input) for mailman id 620662;
+ Sun, 22 Oct 2023 15:53:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zZR7=GE=casper.srs.infradead.org=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qualw-0006wY-JJ
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:48 +0000
+ id 1qualt-0006wY-Oj
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:45 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e07923c-70f3-11ee-98d5-6d05b1d4d9a1;
- Sun, 22 Oct 2023 17:53:44 +0200 (CEST)
+ id 2cb7e936-70f3-11ee-98d5-6d05b1d4d9a1;
+ Sun, 22 Oct 2023 17:53:43 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakJ-008TGT-9k; Sun, 22 Oct 2023 15:52:07 +0000
+ id 1quakK-008TGo-RQ; Sun, 22 Oct 2023 15:52:08 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakI-001qZf-2u; Sun, 22 Oct 2023 16:52:06 +0100
+ Linux)) id 1quakK-001qah-0a; Sun, 22 Oct 2023 16:52:08 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 2e07923c-70f3-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 2cb7e936-70f3-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=HOx5IwxtS1QVSZAtDVm2t9NNNk95b57VMhnZXGvMKg0=; b=rv55j5Z641+WrDbx2SDJ+G8W45
-	ThK6O4QWd2R0tV3yylW9YX1BXTxHa+mzeJkXR3A3lKH0df493zAkJ57mL6jU/7u3XoKA1fJ5J6RbG
-	JVvj656r/q0nxqtOFKzVdvDWQLWqjkAcRuTaBBUudP4j+dIWu7mbkjlrsTtBW3YC+wKLwA3RTjIaD
-	v49jTAZqT73USsFXBw5JEDBBkzdTGKOoJ3DfDPDL5PzhuC0Gw9+A4MMSb8zqN5msTNe7q+nFcnLq0
-	d4hOSSRteS05EP/2apLcmjh0HV0eP6CmINCKAM1M9gvQb1cAGRkkK+EO2RPDbPza9dZ054UgstUPg
-	EHKEbNRQ==;
+	bh=KdVChXDyi4Lsk1+zy1mbsIif8KhkEel9PKnAsGBznGU=; b=vNnsctZ71nBlYPw/cwYJqzmKQl
+	+4LnT94jVeyGtjJWUdI2onxOdZCqkhNeaRi+pRy6cUhbFLb0u2J+I5IpJsZPGAA8W1Vq5k5DhT7Cm
+	U8/waeBSWRqUPZIkY4LVSzsIhFxstb48frzkyqqrseGjUSCwPwNNhW7ukPjq1qNgRUfKoHFnj37zN
+	hitcYfFQvtcthqdZkIPa5oVCItjRv9+BhnIQ5L3xgykuS10AwVNEOMQgPSm/g+YJxYB6ZZ4dAXR7S
+	Kzf5l34VwI/VdqTKImNsJOPSEIh6UmoX0cc+mBEX2LKmJvzUsOeM398BfMIW+CPJfqp/ujh2wTuUY
+	fm5z52MQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 21/45] hw/arm/allwinner: use qemu_configure_nic_device()
-Date: Sun, 22 Oct 2023 16:51:36 +0100
-Message-Id: <20231022155200.436340-22-dwmw2@infradead.org>
+Subject: [PATCH 35/45] hw/mips: use qemu_create_nic_device()
+Date: Sun, 22 Oct 2023 16:51:50 +0100
+Message-Id: <20231022155200.436340-36-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -133,100 +133,93 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+The Jazz and MIPS SIM platforms both instantiate their NIC only if a
+corresponding configuration exists for it. Convert them to use the
+qemu_create_nic_device() function for that.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/allwinner-a10.c |  6 +-----
- hw/arm/allwinner-h3.c  |  6 +-----
- hw/arm/allwinner-r40.c | 27 ++-------------------------
- 3 files changed, 4 insertions(+), 35 deletions(-)
+ hw/mips/jazz.c    | 16 ++++++----------
+ hw/mips/mipssim.c | 13 +++++++------
+ 2 files changed, 13 insertions(+), 16 deletions(-)
 
-diff --git a/hw/arm/allwinner-a10.c b/hw/arm/allwinner-a10.c
-index b0ea3f7f66..57f52871ec 100644
---- a/hw/arm/allwinner-a10.c
-+++ b/hw/arm/allwinner-a10.c
-@@ -142,11 +142,7 @@ static void aw_a10_realize(DeviceState *dev, Error **errp)
-     sysbus_realize(SYS_BUS_DEVICE(&s->dramc), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 0, AW_A10_DRAMC_BASE);
+diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
+index c32d2b0b0a..b0f4aa2763 100644
+--- a/hw/mips/jazz.c
++++ b/hw/mips/jazz.c
+@@ -114,7 +114,7 @@ static const MemoryRegionOps dma_dummy_ops = {
+     .endianness = DEVICE_NATIVE_ENDIAN,
+ };
  
--    /* FIXME use qdev NIC properties instead of nd_table[] */
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], TYPE_AW_EMAC);
--        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
--    }
-+    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->emac), errp)) {
-         return;
-     }
-diff --git a/hw/arm/allwinner-h3.c b/hw/arm/allwinner-h3.c
-index f05afddf7e..4f102ad082 100644
---- a/hw/arm/allwinner-h3.c
-+++ b/hw/arm/allwinner-h3.c
-@@ -369,11 +369,7 @@ static void allwinner_h3_realize(DeviceState *dev, Error **errp)
-                               "sd-bus");
- 
-     /* EMAC */
--    /* FIXME use qdev NIC properties instead of nd_table[] */
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], TYPE_AW_SUN8I_EMAC);
--        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
--    }
-+    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
-     object_property_set_link(OBJECT(&s->emac), "dma-memory",
-                              OBJECT(get_system_memory()), &error_fatal);
-     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
-diff --git a/hw/arm/allwinner-r40.c b/hw/arm/allwinner-r40.c
-index a0d367c60d..4d5661b014 100644
---- a/hw/arm/allwinner-r40.c
-+++ b/hw/arm/allwinner-r40.c
-@@ -294,7 +294,6 @@ static void allwinner_r40_init(Object *obj)
- 
- static void allwinner_r40_realize(DeviceState *dev, Error **errp)
+-static void mips_jazz_init_net(NICInfo *nd, IOMMUMemoryRegion *rc4030_dma_mr,
++static void mips_jazz_init_net(IOMMUMemoryRegion *rc4030_dma_mr,
+                                DeviceState *rc4030, MemoryRegion *dp8393x_prom)
  {
--    const char *r40_nic_models[] = { "gmac", "emac", NULL };
-     AwR40State *s = AW_R40(dev);
+     DeviceState *dev;
+@@ -122,10 +122,11 @@ static void mips_jazz_init_net(NICInfo *nd, IOMMUMemoryRegion *rc4030_dma_mr,
+     int checksum, i;
+     uint8_t *prom;
  
-     /* CPUs */
-@@ -454,31 +453,8 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 2,
-                     s->memmap[AW_R40_DEV_DRAMPHY]);
+-    qemu_check_nic_model(nd, "dp83932");
++    dev = qemu_create_nic_device("dp8393x", true, "dp82932");
++    if (!dev) {
++        return;
++    }
  
--    /* nic support gmac and emac */
--    for (int i = 0; i < ARRAY_SIZE(r40_nic_models) - 1; i++) {
--        NICInfo *nic = &nd_table[i];
--
--        if (!nic->used) {
--            continue;
--        }
--        if (qemu_show_nic_models(nic->model, r40_nic_models)) {
--            exit(0);
--        }
--
--        switch (qemu_find_nic_model(nic, r40_nic_models, r40_nic_models[0])) {
--        case 0: /* gmac */
--            qdev_set_nic_properties(DEVICE(&s->gmac), nic);
--            break;
--        case 1: /* emac */
--            qdev_set_nic_properties(DEVICE(&s->emac), nic);
--            break;
--        default:
--            exit(1);
--            break;
--        }
+-    dev = qdev_new("dp8393x");
+-    qdev_set_nic_properties(dev, nd);
+     qdev_prop_set_uint8(dev, "it_shift", 2);
+     qdev_prop_set_bit(dev, "big_endian", TARGET_BIG_ENDIAN);
+     object_property_set_link(OBJECT(dev), "dma_mr",
+@@ -314,12 +315,7 @@ static void mips_jazz_init(MachineState *machine,
+     }
+ 
+     /* Network controller */
+-    if (nb_nics == 1) {
+-        mips_jazz_init_net(&nd_table[0], rc4030_dma_mr, rc4030, dp8393x_prom);
+-    } else if (nb_nics > 1) {
+-        error_report("This machine only supports one NIC");
+-        exit(1);
 -    }
--
-     /* GMAC */
-+    qemu_configure_nic_device(DEVICE(&s->gmac), true, "gmac");
-     object_property_set_link(OBJECT(&s->gmac), "dma-memory",
-                                      OBJECT(get_system_memory()), &error_fatal);
-     sysbus_realize(SYS_BUS_DEVICE(&s->gmac), &error_fatal);
-@@ -487,6 +463,7 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
-                        qdev_get_gpio_in(DEVICE(&s->gic), AW_R40_GIC_SPI_GMAC));
++    mips_jazz_init_net(rc4030_dma_mr, rc4030, dp8393x_prom);
  
-     /* EMAC */
-+    qemu_configure_nic_device(DEVICE(&s->emac), true, "emac");
-     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->emac), 0, s->memmap[AW_R40_DEV_EMAC]);
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->emac), 0,
+     /* SCSI adapter */
+     dev = qdev_new(TYPE_SYSBUS_ESP);
+diff --git a/hw/mips/mipssim.c b/hw/mips/mipssim.c
+index 2f951f7fc6..072864f539 100644
+--- a/hw/mips/mipssim.c
++++ b/hw/mips/mipssim.c
+@@ -111,13 +111,15 @@ static void main_cpu_reset(void *opaque)
+     }
+ }
+ 
+-static void mipsnet_init(int base, qemu_irq irq, NICInfo *nd)
++static void mipsnet_init(int base, qemu_irq irq)
+ {
+     DeviceState *dev;
+     SysBusDevice *s;
+ 
+-    dev = qdev_new("mipsnet");
+-    qdev_set_nic_properties(dev, nd);
++    dev = qemu_create_nic_device("mipsnet", true, NULL);
++    if (!dev) {
++        return;
++    }
+ 
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+@@ -218,9 +220,8 @@ mips_mipssim_init(MachineState *machine)
+                       sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
+     }
+ 
+-    if (nd_table[0].used)
+-        /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
+-        mipsnet_init(0x4200, env->irq[2], &nd_table[0]);
++    /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
++    mipsnet_init(0x4200, env->irq[2]);
+ }
+ 
+ static void mips_mipssim_machine_init(MachineClass *mc)
 -- 
 2.40.1
 
