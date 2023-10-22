@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AADFC25B42
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:11:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620789.966664 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB339C001DF
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:11:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620796.966674 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qub2g-0001G1-HM; Sun, 22 Oct 2023 16:11:06 +0000
+	id 1qub3F-00027q-Sk; Sun, 22 Oct 2023 16:11:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620789.966664; Sun, 22 Oct 2023 16:11:06 +0000
+Received: by outflank-mailman (output) from mailman id 620796.966674; Sun, 22 Oct 2023 16:11:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qub2g-0001Fs-E3; Sun, 22 Oct 2023 16:11:06 +0000
-Received: by outflank-mailman (input) for mailman id 620789;
- Sun, 22 Oct 2023 16:11:05 +0000
+	id 1qub3F-00027j-OR; Sun, 22 Oct 2023 16:11:41 +0000
+Received: by outflank-mailman (input) for mailman id 620796;
+ Sun, 22 Oct 2023 16:11:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RY1I=GE=desiato.srs.infradead.org=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quamY-0007Cq-TU
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:26 +0000
+ id 1quamd-0007Cq-F8
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:31 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 44290cb1-70f3-11ee-9b0e-b553b5be7939;
- Sun, 22 Oct 2023 17:54:22 +0200 (CEST)
+ id 483e1329-70f3-11ee-9b0e-b553b5be7939;
+ Sun, 22 Oct 2023 17:54:28 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakK-00DCn1-2s; Sun, 22 Oct 2023 15:52:29 +0000
+ id 1quakM-00DCn6-0P; Sun, 22 Oct 2023 15:52:43 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakK-001qac-0C; Sun, 22 Oct 2023 16:52:08 +0100
+ Linux)) id 1quakL-001qbT-0K; Sun, 22 Oct 2023 16:52:09 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 44290cb1-70f3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 483e1329-70f3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=U+6sg4mLN1SbL87FQ6lU5ArebVuIAWz70s1SJZ0up+s=; b=C+1jCv8a2E5NH5EGDgCXnwY2uI
-	L87za9N87Dj5WdkL1kX7mBtgJ2qk1muuGfDyjXed1LtX+BLrjSXo8jjwTjH+G1dczB07nFtr3CGVr
-	tIiWv0q15BIPEcQmCuNR7PmVGaT18VcgoaEcngDVtZHbohpy7wHJETwaJ+fDn79uFhvDw63w/0t7j
-	+IFLd7pimtNUSVrSi6B0p1vO3htbTiPzcjS2xUsruZuqwep/+DVqXHCMYKgTwUvA/f7NEaHA3Nap1
-	n2Lqy1WS9hznvu9cKone/O0L3V/0SZJ6r2RIixHJCSCyS5Oiw2/NJAvafSQDg72WLAns//dFir7hV
-	cAO5a46w==;
+	bh=R0yNrkS6frW1oQZmkTvRWBHiXdaYx7yNfr+oe+nR9G0=; b=Yl+NqLLs1Fpsi7bTrer2mD8J7/
+	0fK/W746uQD3qH+Al5qXrecLeGkQ6NFVzzPH0iYrDQ2QqiqZQGWEBSwT/k/Ukyhkw2ZW3A5KkzCfw
+	kKXFJhRub4AyxX858qHi2hfSmAx4PnTZBqfyU51SpVV34XrZT/m/aFrtrCfPwk+ggYGiDvRnRUWWl
+	G7Jht0AI/58jorLgrkrBQ0BVzX+lVDpc11a7+zGDGs/QRGQXQTLQwtAJU+Tp6nfIcoWrv9VytkfYv
+	tXFsfbEIpYKgC/bArWMRQzALeF4wamM9OLEZY/jLDkZG/T/f90xV0gy6LqcjDpg/XTPNnx6BPJvvL
+	RsAbWdPA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 34/45] hw/microblaze: use qemu_configure_nic_device()
-Date: Sun, 22 Oct 2023 16:51:49 +0100
-Message-Id: <20231022155200.436340-35-dwmw2@infradead.org>
+Subject: [PATCH 45/45] net: make nb_nics and nd_table[] static in net/net.c
+Date: Sun, 22 Oct 2023 16:52:00 +0100
+Message-Id: <20231022155200.436340-46-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -135,46 +135,53 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/microblaze/petalogix_ml605_mmu.c      | 3 +--
- hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ include/net/net.h | 4 ----
+ net/net.c         | 3 +++
+ system/globals.c  | 2 --
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-index fb7889cf67..0f5fabc32e 100644
---- a/hw/microblaze/petalogix_ml605_mmu.c
-+++ b/hw/microblaze/petalogix_ml605_mmu.c
-@@ -133,7 +133,6 @@ petalogix_ml605_init(MachineState *machine)
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+diff --git a/include/net/net.h b/include/net/net.h
+index 290e604f03..5a38766942 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -245,10 +245,6 @@ struct NICInfo {
+     int nvectors;
+ };
  
-     /* axi ethernet and dma initialization. */
--    qemu_check_nic_model(&nd_table[0], "xlnx.axi-ethernet");
-     eth0 = qdev_new("xlnx.axi-ethernet");
-     dma = qdev_new("xlnx.axi-dma");
+-extern int nb_nics;
+-extern NICInfo nd_table[MAX_NICS];
+-extern const char *host_net_devices[];
+-
+ /* from net.c */
+ extern NetClientStateList net_clients;
+ bool netdev_is_modern(const char *optstr);
+diff --git a/net/net.c b/net/net.c
+index ed0d638454..9043566abf 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -77,6 +77,9 @@ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
  
-@@ -145,7 +144,7 @@ petalogix_ml605_init(MachineState *machine)
-                                   "axistream-connected-target", NULL);
-     cs = object_property_get_link(OBJECT(dma),
-                                   "axistream-control-connected-target", NULL);
--    qdev_set_nic_properties(eth0, &nd_table[0]);
-+    qemu_configure_nic_device(eth0, true, NULL);
-     qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
-     qdev_prop_set_uint32(eth0, "txmem", 0x1000);
-     object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
-diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-index 505639c298..dad46bd7f9 100644
---- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
-+++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-@@ -114,9 +114,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+ static GHashTable *nic_model_help;
  
--    qemu_check_nic_model(&nd_table[0], "xlnx.xps-ethernetlite");
-     dev = qdev_new("xlnx.xps-ethernetlite");
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, NULL);
-     qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
-     qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++static int nb_nics;
++static NICInfo nd_table[MAX_NICS];
++
+ /***********************************************************/
+ /* network device redirectors */
+ 
+diff --git a/system/globals.c b/system/globals.c
+index e83b5428d1..b6d4e72530 100644
+--- a/system/globals.c
++++ b/system/globals.c
+@@ -36,8 +36,6 @@ int display_opengl;
+ const char* keyboard_layout;
+ bool enable_mlock;
+ bool enable_cpu_pm;
+-int nb_nics;
+-NICInfo nd_table[MAX_NICS];
+ int autostart = 1;
+ int vga_interface_type = VGA_NONE;
+ bool vga_interface_created;
 -- 
 2.40.1
 
