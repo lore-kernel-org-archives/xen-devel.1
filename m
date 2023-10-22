@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7B6EC00A8F
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620663.966250 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C82EC25B42
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620673.966330 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qualw-0007FP-3Y; Sun, 22 Oct 2023 15:53:48 +0000
+	id 1quam3-0000qa-B6; Sun, 22 Oct 2023 15:53:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620663.966250; Sun, 22 Oct 2023 15:53:48 +0000
+Received: by outflank-mailman (output) from mailman id 620673.966330; Sun, 22 Oct 2023 15:53:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qualv-0007Ep-Uv; Sun, 22 Oct 2023 15:53:47 +0000
-Received: by outflank-mailman (input) for mailman id 620663;
- Sun, 22 Oct 2023 15:53:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1quam2-0000iz-TG; Sun, 22 Oct 2023 15:53:54 +0000
+Received: by outflank-mailman (input) for mailman id 620673;
+ Sun, 22 Oct 2023 15:53:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zZR7=GE=casper.srs.infradead.org=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qualu-0006wY-Iy
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:46 +0000
+ id 1qualz-0007Cq-Si
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:51 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2da379db-70f3-11ee-98d5-6d05b1d4d9a1;
- Sun, 22 Oct 2023 17:53:44 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 304aabf9-70f3-11ee-9b0e-b553b5be7939;
+ Sun, 22 Oct 2023 17:53:48 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakJ-008TGa-O6; Sun, 22 Oct 2023 15:52:07 +0000
+ id 1quakI-008TGN-Fa; Sun, 22 Oct 2023 15:52:06 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakJ-001qa4-1M; Sun, 22 Oct 2023 16:52:07 +0100
+ Linux)) id 1quakI-001qZ9-0E; Sun, 22 Oct 2023 16:52:06 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 2da379db-70f3-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 304aabf9-70f3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=igB1IK5oOoSe3ijCAJ2HgjOiVoli+QlUFi6e7XmNINs=; b=EREf3ovqvwxCLDPAJdSSJGo8hb
-	jFWw5V+pv/dxOYxNE09cjQlFBYkZRiGNFEaNq0xWoMQ8ukbD17hJCPgxQhrfS9FOuBNDYI88H4n0g
-	qvQ4qZEbVHh4bReqjkqvACKdqT1egEvJ9wjfWr+zaiO1aEoAo9xZ2ly5p28dOU5L29B9fOUBuOoMk
-	faBExO4JLM8DLFu9WEWhkqi9Ge/6ET2MEVMCHwwTiE/hbsPDKhfB9R+8PNUBiR9QWMaY5rS8L9kUQ
-	4xneIGLTe36E0mmAyrXHmj55UnX+36ZPbc2Giyp+nwg6bccD0bdYIGd5tebvlzGZaWR7/SX/I2PDq
-	20Fb1Mmg==;
+	bh=EEprMiQFf2yiszoqkaPkPmN8nomXIq9mKJSWnsahnUg=; b=nPbfsthL1v3JooATXcEUeGqX7g
+	FTNYixJKg9bIDNABcPWLl8tIAscTUp9MfnVQwM46fBG6noyfrICfQqoc1SCGA7lQbbf/CzrbVgWLw
+	YC3WoWqxYe9HtzTYJUTvI2dniCFeBTBUTb9EalB2MNebFRo8MuDUhvekvDKahDhIlT3r/q/S7XRv2
+	mFJbSZJoaq2rNrztifBSX5IpjJkA2PMFSqqqU5Mjsh+Dl27reNGJoizxFPLXQ53aJMAu0BL1Da2eE
+	amYzb/nghkxUMuB7f5y/lRZzP4HUycIIeX0AwX+ky16lcEo6gsWSO3s85pn/iMT73Qh0IE90XRnEX
+	ePABIhpw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 27/45] hw/arm/highbank: use qemu_create_nic_device()
-Date: Sun, 22 Oct 2023 16:51:42 +0100
-Message-Id: <20231022155200.436340-28-dwmw2@infradead.org>
+Subject: [PATCH 14/45] hw/mips/loongson3_virt: use pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:29 +0100
+Message-Id: <20231022155200.436340-15-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -135,38 +135,24 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/highbank.c | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ hw/mips/loongson3_virt.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
-index f12aacea6b..798e5391dc 100644
---- a/hw/arm/highbank.c
-+++ b/hw/arm/highbank.c
-@@ -296,19 +296,17 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
+diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
+index b74b358874..d9d6d4f5b6 100644
+--- a/hw/mips/loongson3_virt.c
++++ b/hw/mips/loongson3_virt.c
+@@ -452,9 +452,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
+         usb_create_simple(usb_bus_find(-1), "usb-tablet");
+     }
  
-     sysbus_create_simple(TYPE_SYSBUS_AHCI, 0xffe08000, pic[83]);
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ }
  
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[0]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff50000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[77]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 1, pic[78]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 2, pic[79]);
-+    }
- 
--        qemu_check_nic_model(&nd_table[1], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[1]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff51000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[80]);
+ static void mips_loongson3_virt_init(MachineState *machine)
 -- 
 2.40.1
 
