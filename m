@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 529BDCDB474
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620680.966412 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17AD9C001DF
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 16:03:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620701.966433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quamF-0003iP-2t; Sun, 22 Oct 2023 15:54:07 +0000
+	id 1quavG-0002og-9q; Sun, 22 Oct 2023 16:03:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620680.966412; Sun, 22 Oct 2023 15:54:06 +0000
+Received: by outflank-mailman (output) from mailman id 620701.966433; Sun, 22 Oct 2023 16:03:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quamE-0003eF-Gr; Sun, 22 Oct 2023 15:54:06 +0000
-Received: by outflank-mailman (input) for mailman id 620680;
- Sun, 22 Oct 2023 15:54:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1quavG-0002oZ-78; Sun, 22 Oct 2023 16:03:26 +0000
+Received: by outflank-mailman (input) for mailman id 620701;
+ Sun, 22 Oct 2023 16:03:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zZR7=GE=casper.srs.infradead.org=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1quamB-0007Cq-KA
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:03 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 378da265-70f3-11ee-9b0e-b553b5be7939;
- Sun, 22 Oct 2023 17:54:00 +0200 (CEST)
+ <SRS0=RY1I=GE=desiato.srs.infradead.org=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1quan1-0006wY-Vr
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:54:55 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 581da5e5-70f3-11ee-98d5-6d05b1d4d9a1;
+ Sun, 22 Oct 2023 17:54:55 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakH-008TGD-0E; Sun, 22 Oct 2023 15:52:05 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1quakI-00DCml-0V; Sun, 22 Oct 2023 15:53:38 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakG-001qYF-1u; Sun, 22 Oct 2023 16:52:04 +0100
+ Linux)) id 1quakH-001qYo-1T; Sun, 22 Oct 2023 16:52:05 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 378da265-70f3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 581da5e5-70f3-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=VNjlOw9Lzpr/68VPEyhUsosbr0JH0Sj3vnXB3DE2UGU=; b=Y2hRKEOH6Ds9uWxRws1Kg6CNFB
-	ApE/teelN4H4OaNS9SQyP6hMJyNh5wzEHc/mxxFC/mF7+Yil0HSYonuHR2elCqZUFRnE2/3tlS/ir
-	SGCOUNcLXiH5W0stnzpO5SKOX5qvHUi0NU8yS/OCoIdjPmwn8zWLmHXM2GxOwk+Iq2UY9Gq1MLArr
-	L2NtTPwvAVvaZLyk9HDhDW9X2aDOgglCeSAm+s7Tf0sYj+fUMsuYAJj/AgxM8mB3dxetwKRF37WOU
-	CG6oi5QSvtGxisnwoqD0lwgdOMH9nLTI1ajWWIwT6cilePhtUwNhUvXHpo6tUUikL07Gu1qhfb0yR
-	vRXNieaA==;
+	bh=W0adFdXMEbi8j4klLNUE97TjOqmUyikyi07uSfzF8bk=; b=qpLAo7x6BHsqRoyzs5LkZJVNpU
+	rTqiz5+Kq2oN/1n+kFGKWDDux3umF5SQIwtEJ9v7BBHiQVLR1Rs0LiuNG7KzjEORDAW18ZjsxHFx1
+	msfIqKZXpZQ6XCKXgGFOx0UssR8BTar+zheMXWCYmiI0eKjaP0RFd3ihZBF8VvbZFIQDWgCAT53Nr
+	WIvL1++L7kuTZhujt3SbsK364oiN7GCurcqrSj1+0kBuQrk774oS0IKc8QvVEF3E8T9w41pygkm7U
+	IkTBTSrjRSFNyGb1MkrMrvWdF6sIRhZbA9j//JaP7l1yDFWkVrcjaRZSkCT9kmW7nK1/1t/vDswLw
+	Qu/TrZKg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,118 +120,39 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 01/45] net: add qemu_{configure,create}_nic_device(), qemu_find_nic_info()
-Date: Sun, 22 Oct 2023 16:51:16 +0100
-Message-Id: <20231022155200.436340-2-dwmw2@infradead.org>
+Subject: [PATCH 09/45] hw/arm/virt: use pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:24 +0100
+Message-Id: <20231022155200.436340-10-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Most code which directly accesses nd_table[] and nb_nics uses them for
-one of two things. Either "I have created a NIC device and I'd like a
-configuration for it", or "I will create a NIC device *if* there is a
-configuration for it".  With some variants on the theme around whether
-they actually *check* if the model specified in the configuration is
-the right one.
-
-Provide functions which perform both of those, allowing platforms to
-be a little more consistent and as a step towards making nd_table[]
-and nb_nics private to the net code.
-
-Also export the qemu_find_nic_info() helper, as some platforms have
-special cases they need to handle.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- include/net/net.h |  7 ++++++-
- net/net.c         | 50 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+), 1 deletion(-)
+ hw/arm/virt.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 2fb1c9181c..56be694c75 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -205,7 +205,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
- void qemu_check_nic_model(NICInfo *nd, const char *model);
- int qemu_find_nic_model(NICInfo *nd, const char * const *models,
-                         const char *default_model);
--
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias);
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias);
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias);
- void print_net_client(Monitor *mon, NetClientState *nc);
- void net_socket_rs_init(SocketReadState *rs,
-                         SocketReadStateFinalize *finalize,
-diff --git a/net/net.c b/net/net.c
-index bbe33da176..606816a3b3 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1072,6 +1072,56 @@ static int net_init_nic(const Netdev *netdev, const char *name,
-     return idx;
- }
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 15e74249f9..6b43b92b89 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -1477,9 +1477,7 @@ static void create_pcie(VirtMachineState *vms)
+     pci->bypass_iommu = vms->default_bus_bypass_iommu;
+     vms->bus = pci->bus;
+     if (vms->bus) {
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
+-        }
++        pci_init_nic_devices(pci->bus, mc->default_nic);
+     }
  
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias)
-+{
-+    NICInfo *nd;
-+    int i;
-+
-+    for (i = 0; i < nb_nics; i++) {
-+        nd = &nd_table[i];
-+
-+        if (!nd->used || nd->instantiated)
-+            continue;
-+
-+        if ((match_default && !nd->model) || !g_strcmp0(nd->model, typename)
-+            || (alias && !g_strcmp0(nd->model, alias))) {
-+            return nd;
-+        }
-+    }
-+    return NULL;
-+}
-+
-+
-+/* "I have created a device. Please configure it if you can" */
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(object_get_typename(OBJECT(dev)),
-+                                     match_default, alias);
-+
-+    if (nd) {
-+        qdev_set_nic_properties(dev, nd);
-+        return true;
-+    }
-+    return false;
-+}
-+
-+/* "Please create a device, if you have a configuration for it" */
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
-+    DeviceState *dev;
-+
-+    if (!nd) {
-+        return NULL;
-+    }
-+
-+    dev = qdev_new(typename);
-+    qdev_set_nic_properties(dev, nd);
-+    return dev;
-+}
- 
- static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
-     const Netdev *netdev,
+     nodename = vms->pciehb_nodename = g_strdup_printf("/pcie@%" PRIx64, base);
 -- 
 2.40.1
 
