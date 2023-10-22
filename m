@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDB5C25B41
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620669.966299 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 368EAC00A8F
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Oct 2023 15:54:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.620675.966350 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quam0-0008R2-1H; Sun, 22 Oct 2023 15:53:52 +0000
+	id 1quam5-0001NP-HT; Sun, 22 Oct 2023 15:53:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620669.966299; Sun, 22 Oct 2023 15:53:51 +0000
+Received: by outflank-mailman (output) from mailman id 620675.966350; Sun, 22 Oct 2023 15:53:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qualz-0008Mz-IG; Sun, 22 Oct 2023 15:53:51 +0000
-Received: by outflank-mailman (input) for mailman id 620669;
- Sun, 22 Oct 2023 15:53:50 +0000
+	id 1quam4-0001GY-UD; Sun, 22 Oct 2023 15:53:56 +0000
+Received: by outflank-mailman (input) for mailman id 620675;
+ Sun, 22 Oct 2023 15:53:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zZR7=GE=casper.srs.infradead.org=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qualx-0007Cq-SG
- for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:49 +0000
+ id 1quam0-0007Cq-Sm
+ for xen-devel@lists.xenproject.org; Sun, 22 Oct 2023 15:53:52 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2daffbe2-70f3-11ee-9b0e-b553b5be7939;
- Sun, 22 Oct 2023 17:53:44 +0200 (CEST)
+ id 30cade49-70f3-11ee-9b0e-b553b5be7939;
+ Sun, 22 Oct 2023 17:53:49 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakJ-008TGW-Gu; Sun, 22 Oct 2023 15:52:07 +0000
+ id 1quakH-008TGH-DY; Sun, 22 Oct 2023 15:52:05 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakJ-001qZr-0Z; Sun, 22 Oct 2023 16:52:07 +0100
+ Linux)) id 1quakH-001qYV-01; Sun, 22 Oct 2023 16:52:05 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 2daffbe2-70f3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 30cade49-70f3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=EKjUCJKBd59P5cxJriDQFHF8sC3eB1BsnLW5Qch037k=; b=e2JwP3XOgcXNON2SV6S2by6iep
-	34RgR39w+QTHdRpz5G3wLXbMGlpp2OwdWSD9zMC6mvvrB+qLY51mUjqzSevFFcVGrhD5lLVASVd+M
-	TocwJShtBzKiZHJc8O405sOaERHgF8FZ/coOBR9VscvMhBhNr3m6mdkbeSgbTvkqfR2f2A9zY3bJm
-	PHYRa4R7Ch6xFN3DXVUBzsitmK3COPKihJsAOj1x1FaOnhGhUow5RVvQKUAdbH1amNQ0Sksw++I22
-	kolSa9ChKkx/F2TH+Omzll1cVli0qmDpwvXmwqaq8rcnknRrbhxXZfKL8gAkqdsZXrcy9isSlQO1A
-	UbLogmLQ==;
+	bh=FMouo7QQ2KXBuiMSmFA+4AfL0Ua1HAyBapVBTrY+ccg=; b=E0MEqNTVEqlo96r8WBTGAVzqqM
+	WOKcOlQeHsyeBbKjvLocphxD2lv+IUnbo81qo4Gi8Ktprvj7QIsyonsqWnzpb6OOPkO6/ISjmBAUT
+	3cOR4aeWvSKwvGx1bye1Sj1ciosiHzjrp3Uw4rmtGQzaE3FyA3smV1/12tjUNgzq7XqBPVZWalOVt
+	zBBQ1o1LCIK5OLWeBP+Gg+KhKs+xHPxXY5rvoK8+6ZPH+Fgf0LmxVxU5NvjwvXiYbRqF/dSoVrff7
+	J74lSXT7XFrvvrI1CNgBtAVzSR4Re5OKPzgXMgsJdWI1d9DTkWHZUlToq6Yq1BeKTuuVpT9FIp0qK
+	5C/gpQSg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 24/45] hw/arm/fsl: use qemu_configure_nic_device()
-Date: Sun, 22 Oct 2023 16:51:39 +0100
-Message-Id: <20231022155200.436340-25-dwmw2@infradead.org>
+Subject: [PATCH 05/45] hw/i386/pc: use qemu_get_nic_info() and pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:20 +0100
+Message-Id: <20231022155200.436340-6-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -133,66 +133,75 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Eliminate direct access to nd_table[] and nb_nics by processing the the
+ISA NICs first and then calling pci_init_nic_devices() for the test.
+
+It's important to do this *before* the subsequent patch which registers
+the Xen PV network devices, because the code being remove here didn't
+check whether nd->instantiated was already set before using each entry.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/fsl-imx25.c  | 2 +-
- hw/arm/fsl-imx6.c   | 2 +-
- hw/arm/fsl-imx6ul.c | 2 +-
- hw/arm/fsl-imx7.c   | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ hw/i386/pc.c                | 20 ++++++++++----------
+ include/hw/net/ne2000-isa.h |  2 --
+ 2 files changed, 10 insertions(+), 12 deletions(-)
 
-diff --git a/hw/arm/fsl-imx25.c b/hw/arm/fsl-imx25.c
-index 24c4374590..28084d2e5a 100644
---- a/hw/arm/fsl-imx25.c
-+++ b/hw/arm/fsl-imx25.c
-@@ -170,7 +170,7 @@ static void fsl_imx25_realize(DeviceState *dev, Error **errp)
-     }
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index bb3854d1d0..e08600cbb3 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -652,8 +652,10 @@ static void pc_init_ne2k_isa(ISABus *bus, NICInfo *nd)
+ {
+     static int nb_ne2k = 0;
  
-     object_property_set_uint(OBJECT(&s->fec), "phy-num", s->phy_num, &err);
--    qdev_set_nic_properties(DEVICE(&s->fec), &nd_table[0]);
-+    qemu_configure_nic_device(DEVICE(&s->fec), true, NULL);
- 
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->fec), errp)) {
+-    if (nb_ne2k == NE2000_NB_MAX)
++    if (nb_ne2k == NE2000_NB_MAX) {
++        error_setg(&error_fatal, "maximum number of ISA NE2000 devices exceeded");
          return;
-diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
-index 4fa7f0b95e..273bc79283 100644
---- a/hw/arm/fsl-imx6.c
-+++ b/hw/arm/fsl-imx6.c
-@@ -380,7 +380,7 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
++    }
+     isa_ne2000_init(bus, ne2000_io[nb_ne2k],
+                     ne2000_irq[nb_ne2k], nd);
+     nb_ne2k++;
+@@ -1294,19 +1296,17 @@ void pc_basic_device_init(struct PCMachineState *pcms,
+ void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus)
+ {
+     MachineClass *mc = MACHINE_CLASS(pcmc);
+-    int i;
++    bool default_is_ne2k = g_str_equal(mc->default_nic, TYPE_ISA_NE2000);
++    NICInfo *nd;
+ 
+     rom_set_order_override(FW_CFG_ORDER_OVERRIDE_NIC);
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-        const char *model = nd->model ? nd->model : mc->default_nic;
+ 
+-        if (g_str_equal(model, "ne2k_isa")) {
+-            pc_init_ne2k_isa(isa_bus, nd);
+-        } else {
+-            pci_nic_init_nofail(nd, pci_bus, model, NULL);
+-        }
++    while ((nd = qemu_find_nic_info(TYPE_ISA_NE2000, default_is_ne2k, NULL))) {
++        pc_init_ne2k_isa(isa_bus, nd);
      }
++
++    pci_init_nic_devices(pci_bus, mc->default_nic);
++
+     rom_reset_order_override();
+ }
  
-     object_property_set_uint(OBJECT(&s->eth), "phy-num", s->phy_num, &err);
--    qdev_set_nic_properties(DEVICE(&s->eth), &nd_table[0]);
-+    qemu_configure_nic_device(DEVICE(&s->eth), true, NULL);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->eth), errp)) {
-         return;
-     }
-diff --git a/hw/arm/fsl-imx6ul.c b/hw/arm/fsl-imx6ul.c
-index e37b69a5e1..ca3dd439ec 100644
---- a/hw/arm/fsl-imx6ul.c
-+++ b/hw/arm/fsl-imx6ul.c
-@@ -442,7 +442,7 @@ static void fsl_imx6ul_realize(DeviceState *dev, Error **errp)
-                                  s->phy_num[i], &error_abort);
-         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
-                                  FSL_IMX6UL_ETH_NUM_TX_RINGS, &error_abort);
--        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
-+        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
-         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
+diff --git a/include/hw/net/ne2000-isa.h b/include/hw/net/ne2000-isa.h
+index af59ee0b02..73bae10ad1 100644
+--- a/include/hw/net/ne2000-isa.h
++++ b/include/hw/net/ne2000-isa.h
+@@ -22,8 +22,6 @@ static inline ISADevice *isa_ne2000_init(ISABus *bus, int base, int irq,
+ {
+     ISADevice *d;
  
-         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0,
-diff --git a/hw/arm/fsl-imx7.c b/hw/arm/fsl-imx7.c
-index 474cfdc87c..1acbe065db 100644
---- a/hw/arm/fsl-imx7.c
-+++ b/hw/arm/fsl-imx7.c
-@@ -446,7 +446,7 @@ static void fsl_imx7_realize(DeviceState *dev, Error **errp)
-                                  s->phy_num[i], &error_abort);
-         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
-                                  FSL_IMX7_ETH_NUM_TX_RINGS, &error_abort);
--        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
-+        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
-         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
- 
-         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0, FSL_IMX7_ENETn_ADDR[i]);
+-    qemu_check_nic_model(nd, "ne2k_isa");
+-
+     d = isa_try_new(TYPE_ISA_NE2000);
+     if (d) {
+         DeviceState *dev = DEVICE(d);
 -- 
 2.40.1
 
