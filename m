@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C44F5CDB474
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:21:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.621124.967227 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A68BC25B41
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:22:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.621128.967258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qur7y-0000Hg-J8; Mon, 23 Oct 2023 09:21:38 +0000
+	id 1qur8D-0001Da-Fm; Mon, 23 Oct 2023 09:21:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 621124.967227; Mon, 23 Oct 2023 09:21:38 +0000
+Received: by outflank-mailman (output) from mailman id 621128.967258; Mon, 23 Oct 2023 09:21:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qur7y-0000HZ-GL; Mon, 23 Oct 2023 09:21:38 +0000
-Received: by outflank-mailman (input) for mailman id 621124;
- Mon, 23 Oct 2023 09:21:37 +0000
+	id 1qur8D-0001DR-CW; Mon, 23 Oct 2023 09:21:53 +0000
+Received: by outflank-mailman (input) for mailman id 621128;
+ Mon, 23 Oct 2023 09:21:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JdWI=GF=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qur7x-0000HT-Ku
- for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:21:37 +0000
+ id 1qur8C-0000HT-OE
+ for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:21:52 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 8f7990c5-7185-11ee-9b0e-b553b5be7939;
- Mon, 23 Oct 2023 11:21:35 +0200 (CEST)
+ id 991458ef-7185-11ee-9b0e-b553b5be7939;
+ Mon, 23 Oct 2023 11:21:51 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2F87F2F4;
- Mon, 23 Oct 2023 02:22:15 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5B5A82F4;
+ Mon, 23 Oct 2023 02:22:31 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 3A49B3F64C;
- Mon, 23 Oct 2023 02:21:29 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 7CAE43F64C;
+ Mon, 23 Oct 2023 02:21:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f7990c5-7185-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 991458ef-7185-11ee-9b0e-b553b5be7939
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Henry Wang <Henry.Wang@arm.com>,
@@ -59,40 +59,36 @@ Cc: Henry Wang <Henry.Wang@arm.com>,
 	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 0/4] Final CHANGELOG changes for 4.18
-Date: Mon, 23 Oct 2023 17:21:19 +0800
-Message-Id: <20231023092123.1756426-1-Henry.Wang@arm.com>
+Subject: [PATCH v3 3/4] CHANGELOG.md: Set 4.18 release date and tag
+Date: Mon, 23 Oct 2023 17:21:22 +0800
+Message-Id: <20231023092123.1756426-4-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231023092123.1756426-1-Henry.Wang@arm.com>
+References: <20231023092123.1756426-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi all,
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+---
+v3:
+- Don't set the release date.
+---
+ CHANGELOG.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This series should be the final CHANGELOG changes for 4.18.
-
-The first patch is mentioning the MISRA-C improvement during the
-4.18 dev cycle, second patch is added as a clean-up patch during
-the review of this series, so these should be committed before
-we branch.
-
-The third patch sets the release date and tag of 4.18 release
-and should be included in both the staging and stable-4.18 once
-we branch.
-
-The fourth patch starts a new unstable section, so should be in
-unstable master/staging only.
-
-Thanks.
-
-Henry Wang (4):
-  CHANGELOG.md: Mention the MISRA-C improvement in 4.18 dev cycle
-  CHANGELOG.md: Use "xenbits.xenproject.org" in links
-  CHANGELOG.md: Set 4.18 release date and tag
-  CHANGELOG.md: Start new "unstable" section
-
- CHANGELOG.md | 21 +++++++++++++++------
- 1 file changed, 15 insertions(+), 6 deletions(-)
-
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 25d29fe59d..3ca7969699 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -4,7 +4,7 @@ Notable changes to Xen will be documented in this file.
+ 
+ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+ 
+-## [unstable UNRELEASED](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
++## [4.18.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.18.0) - 2023-XX-XX
+ 
+ ### Changed
+  - Repurpose command line gnttab_max_{maptrack_,}frames options so they don't
 -- 
 2.25.1
 
