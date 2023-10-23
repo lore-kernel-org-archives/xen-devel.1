@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B14ECDB474
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:20:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.621121.967217 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF99C001E0
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:21:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.621125.967238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qur6O-0007K2-8D; Mon, 23 Oct 2023 09:20:00 +0000
+	id 1qur83-0000YB-RJ; Mon, 23 Oct 2023 09:21:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 621121.967217; Mon, 23 Oct 2023 09:20:00 +0000
+Received: by outflank-mailman (output) from mailman id 621125.967238; Mon, 23 Oct 2023 09:21:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qur6O-0007Jv-5g; Mon, 23 Oct 2023 09:20:00 +0000
-Received: by outflank-mailman (input) for mailman id 621121;
- Mon, 23 Oct 2023 09:19:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qur83-0000Y4-NO; Mon, 23 Oct 2023 09:21:43 +0000
+Received: by outflank-mailman (input) for mailman id 621125;
+ Mon, 23 Oct 2023 09:21:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gXaf=GF=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qur6N-0007Jp-Gd
- for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:19:59 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 556d3b58-7185-11ee-98d5-6d05b1d4d9a1;
- Mon, 23 Oct 2023 11:19:57 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id C68D14EE0740;
- Mon, 23 Oct 2023 11:19:57 +0200 (CEST)
+ <SRS0=JdWI=GF=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
+ id 1qur82-0000HT-NW
+ for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:21:42 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 931f595a-7185-11ee-9b0e-b553b5be7939;
+ Mon, 23 Oct 2023 11:21:41 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 58C332F4;
+ Mon, 23 Oct 2023 02:22:21 -0700 (PDT)
+Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
+ [10.169.190.5])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 7897B3F64C;
+ Mon, 23 Oct 2023 02:21:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,118 +45,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 556d3b58-7185-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 931f595a-7185-11ee-9b0e-b553b5be7939
+From: Henry Wang <Henry.Wang@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Henry Wang <Henry.Wang@arm.com>,
+	Community Manager <community.manager@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Chen <wei.chen@arm.com>
+Subject: [PATCH v3 1/4] CHANGELOG.md: Mention the MISRA-C improvement in 4.18 dev cycle
+Date: Mon, 23 Oct 2023 17:21:20 +0800
+Message-Id: <20231023092123.1756426-2-Henry.Wang@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231023092123.1756426-1-Henry.Wang@arm.com>
+References: <20231023092123.1756426-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
-Date: Mon, 23 Oct 2023 11:19:57 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
- ayan.kumar.halder@amd.com, consulting@bugseng.com,
- andrew.cooper3@citrix.com, roger.pau@citrix.com, Simone Ballarin
- <simone.ballarin@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, George
- Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Wei Liu
- <wl@xen.org>, xen-devel@lists.xenproject.org
-Subject: Re: [XEN PATCH][for-4.19 v3 1/8] xen/include: add macro LOWEST_BIT
-In-Reply-To: <f504772a-68b4-fbfa-e7d4-8d22992c7944@suse.com>
-References: <cover.1697815135.git.nicola.vetrini@bugseng.com>
- <546cf30aa43d6d0687a9a6c6d23b11128e5783e8.1697815135.git.nicola.vetrini@bugseng.com>
- <f504772a-68b4-fbfa-e7d4-8d22992c7944@suse.com>
-User-Agent: Roundcube Webmail/1.4.3
-Message-ID: <f23a1f95916bd61ddcd5002428d8876c@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 23/10/2023 09:48, Jan Beulich wrote:
-> On 20.10.2023 17:28, Nicola Vetrini wrote:
->> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
->> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
->> @@ -246,6 +246,12 @@ constant expressions are required.\""
->>    "any()"}
->>  -doc_end
->> 
->> +-doc_begin="The macro LOWEST_BIT encapsulates a well-known pattern to 
->> obtain the value
->> +2^ffs(x) for unsigned integers on two's complement architectures
->> +(all the architectures supported by Xen satisfy this requirement)."
->> +-config=MC3R1.R10.1,reports+={safe, 
->> "any_area(any_loc(any_exp(macro(^LOWEST_BIT$))))"}
->> +-doc_end
-> 
-> This being deviated this way (rather than by SAF-* comments) wants
-> justifying in the description. You did reply to my respective
-> comment on v2, but such then (imo) needs propagating into the actual
-> patch as well.
-> 
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+v3:
+- No change.
+v2:
+- Rewording to be more specific, correct the number of rules.
+- Add Stefano's Acked-by tag.
+---
+ CHANGELOG.md | 1 +
+ 1 file changed, 1 insertion(+)
 
-Sure, will do.
-
->> --- a/docs/misra/deviations.rst
->> +++ b/docs/misra/deviations.rst
->> @@ -192,6 +192,13 @@ Deviations related to MISRA C:2012 Rules:
->>         See automation/eclair_analysis/deviations.ecl for the full 
->> explanation.
->>       - Tagged as `safe` for ECLAIR.
->> 
->> +   * - R10.1
->> +     - The well-known pattern (x & -x) applied to unsigned integer 
->> values on 2's
->> +       complement architectures (i.e., all architectures supported by 
->> Xen), used
->> +       to obtain the value 2^ffs(x), where ffs(x) is the position of 
->> the first
->> +       bit set. If no bits are set, zero is returned.
->> +     - Tagged as `safe` for ECLAIR.
-> 
-> In such an explanation there shall not be any ambiguity. Here I see
-> an issue with ffs() returning 1-based bit position numbers, which
-> isn't in line with the use in 2^ffs(x). (Arguably use of ^ itself is
-> also problematic, as that's XOR in C, not POW. I'd suggest 2^^ffs(x)
-> or 2**ffs(x).)
-> 
-
-Makes sense, I think I'll use an plain english explanation to avoid any 
-confusion
-about notation.
-
->> --- a/xen/include/xen/macros.h
->> +++ b/xen/include/xen/macros.h
->> @@ -8,8 +8,11 @@
->>  #define DIV_ROUND(n, d) (((n) + (d) / 2) / (d))
->>  #define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
->> 
->> -#define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
->> -#define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
->> +/* Returns the 2^ffs(x) or 0, where ffs(x) is the index of the lowest 
->> set bit */
->> +#define LOWEST_BIT(x) ((x) & -(x))
-> 
-> I'm afraid my concern regarding this new macro's name (voiced on v2) 
-> hasn't
-> been addressed (neither verbally nor by finding a more suitable name).
-> 
-> Jan
-
-I didn't come up with much better names, so I left it as is. Here's a 
-few ideas:
-
-- LOWEST_SET
-- MASK_LOWEST_SET
-- MASK_LOWEST_BIT
-- MASK_FFS_0
-- LOWEST_ONE
-
-and also yours, included here for convenience, even though you felt it 
-was too long:
-
-- ISOLATE_LOW_BIT()
-
-All maintainers from THE REST are CC-ed, so we can see if anyone has any 
-suggestion.
-
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 5f2694afbe..394a92400a 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+    physical rather than linear/virtual addresses.
+  - On x86, support for enforcing system-wide operation in Data Operand
+    Independent Timing Mode.
++ - The project has now officially adopted 6 directives and 65 rules of MISRA-C.
+ 
+ ### Removed
+  - On x86, the "pku" command line option has been removed.  It has never
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+2.25.1
+
 
