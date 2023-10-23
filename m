@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EB47C25B42
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9083C25B41
 	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 07:23:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.620992.966938 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.620990.966913 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qupHQ-00047L-8t; Mon, 23 Oct 2023 07:23:16 +0000
+	id 1qupHO-0003Rc-Pd; Mon, 23 Oct 2023 07:23:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 620992.966938; Mon, 23 Oct 2023 07:23:16 +0000
+Received: by outflank-mailman (output) from mailman id 620990.966913; Mon, 23 Oct 2023 07:23:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qupHQ-00046Q-4B; Mon, 23 Oct 2023 07:23:16 +0000
-Received: by outflank-mailman (input) for mailman id 620992;
- Mon, 23 Oct 2023 07:23:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qupHO-0003Qu-KG; Mon, 23 Oct 2023 07:23:14 +0000
+Received: by outflank-mailman (input) for mailman id 620990;
+ Mon, 23 Oct 2023 07:23:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=iWHG=GF=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qupHO-0003Or-Ia
- for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 07:23:14 +0000
+ id 1qupHN-0003Om-N7
+ for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 07:23:13 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 06712156-7175-11ee-9b0e-b553b5be7939;
- Mon, 23 Oct 2023 09:23:13 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 055ad1be-7175-11ee-98d5-6d05b1d4d9a1;
+ Mon, 23 Oct 2023 09:23:12 +0200 (CEST)
 Received: from Dell.homenet.telecomitalia.it
  (host-95-247-204-25.retail.telecomitalia.it [95.247.204.25])
- by support.bugseng.com (Postfix) with ESMTPSA id 5B78B4EE0744;
- Mon, 23 Oct 2023 09:23:12 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 52DBC4EE0740;
+ Mon, 23 Oct 2023 09:23:10 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,44 +42,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06712156-7175-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 055ad1be-7175-11ee-98d5-6d05b1d4d9a1
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Paul Durrant <paul@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 4/8] x86/smp: address a violation of MISRA C:2012 Rule 8.2
-Date: Mon, 23 Oct 2023 09:22:59 +0200
-Message-Id: <e36afb831557c91d4a61967293799e189c83b2dd.1698045505.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 0/8] x86: address some violations of MISRA C:2012 Rule 8.2
+Date: Mon, 23 Oct 2023 09:22:55 +0200
+Message-Id: <cover.1698045505.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1698045505.git.federico.serafini@bugseng.com>
-References: <cover.1698045505.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing parameter name. No functional change.
+This patch series addresses some of the violations of Rule 8.2 adding the
+missing parameter names.
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
- xen/arch/x86/include/asm/smp.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Federico Serafini (8):
+  x86/hvm: address violations of MISRA C:2012 Rule 8.2
+  x86/mmconfig: address violations of MISRA C:2012 Rule 8.2
+  x86/vpmu: address a violation of MISRA C:2012 Rule 8.2
+  x86/smp: address a violation of MISRA C:2012 Rule 8.2
+  x86/pci: address a violation of MISRA C:2012 Rule 8.2
+  x86/physdev: address violations of MISRA C:2012 Rule 8.2
+  x86/platform_hypercall: address violations of MISRA C:2012 Rule 8.2
+  x86/sysctl: address a violation of MISRA C:2012 Rule 8.2
 
-diff --git a/xen/arch/x86/include/asm/smp.h b/xen/arch/x86/include/asm/smp.h
-index 41a3b6a0da..5c2de4920f 100644
---- a/xen/arch/x86/include/asm/smp.h
-+++ b/xen/arch/x86/include/asm/smp.h
-@@ -32,7 +32,7 @@ extern bool park_offline_cpus;
- 
- void smp_send_nmi_allbutself(void);
- 
--void send_IPI_mask(const cpumask_t *, int vector);
-+void send_IPI_mask(const cpumask_t *mask, int vector);
- void send_IPI_self(int vector);
- 
- extern void (*mtrr_hook) (void);
+ xen/arch/x86/include/asm/pci.h    | 2 +-
+ xen/arch/x86/include/asm/smp.h    | 2 +-
+ xen/arch/x86/include/asm/vpmu.h   | 2 +-
+ xen/arch/x86/physdev.c            | 6 +++---
+ xen/arch/x86/platform_hypercall.c | 6 +++---
+ xen/arch/x86/sysctl.c             | 2 +-
+ xen/arch/x86/x86_64/mmconfig.h    | 4 ++--
+ xen/drivers/passthrough/x86/hvm.c | 4 ++--
+ 8 files changed, 14 insertions(+), 14 deletions(-)
+
 -- 
 2.34.1
 
