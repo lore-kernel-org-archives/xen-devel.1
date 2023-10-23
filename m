@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A295C25B44
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:57:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.621180.967392 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 999FBC25B46
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:57:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.621184.967433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qurgA-0008KY-9g; Mon, 23 Oct 2023 09:56:58 +0000
+	id 1qurgD-0000uO-EN; Mon, 23 Oct 2023 09:57:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 621180.967392; Mon, 23 Oct 2023 09:56:58 +0000
+Received: by outflank-mailman (output) from mailman id 621184.967433; Mon, 23 Oct 2023 09:57:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qurgA-0008KK-67; Mon, 23 Oct 2023 09:56:58 +0000
-Received: by outflank-mailman (input) for mailman id 621180;
- Mon, 23 Oct 2023 09:56:56 +0000
+	id 1qurgD-0000su-6T; Mon, 23 Oct 2023 09:57:01 +0000
+Received: by outflank-mailman (input) for mailman id 621184;
+ Mon, 23 Oct 2023 09:56:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gXaf=GF=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qurg8-0007mv-0l
- for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:56:56 +0000
+ id 1qurgB-0007mv-52
+ for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:56:59 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7ed1ce23-718a-11ee-98d5-6d05b1d4d9a1;
- Mon, 23 Oct 2023 11:56:54 +0200 (CEST)
+ id 8154b5fc-718a-11ee-98d5-6d05b1d4d9a1;
+ Mon, 23 Oct 2023 11:56:58 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 6F4CA4EE0746;
- Mon, 23 Oct 2023 11:56:53 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id A2AA54EE0744;
+ Mon, 23 Oct 2023 11:56:57 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ed1ce23-718a-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 8154b5fc-718a-11ee-98d5-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,151 +53,62 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Wei Liu <wl@xen.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>
-Subject: [XEN PATCH][for-4.19 v4 3/8] x86: add deviation comments for  asm-only functions
-Date: Mon, 23 Oct 2023 11:56:40 +0200
-Message-Id: <36d24b3a3e264f0e0b265b4f68d6432a143d64cd.1698053876.git.nicola.vetrini@bugseng.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH][for-4.19 v4 8/8] docs/misra: exclude three more files
+Date: Mon, 23 Oct 2023 11:56:45 +0200
+Message-Id: <741b3eee4c25296bc114cfcc0f38d7e7c2bef667.1698053876.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1698053876.git.nicola.vetrini@bugseng.com>
 References: <cover.1698053876.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As stated in rules.rst, functions used only in asm code
-are allowed to have no prior declaration visible when being
-defined, hence these functions are deviated.
-This also fixes violations of MISRA C:2012 Rule 8.4.
+These files should not conform to MISRA guidelines at the moment,
+therefore they are added to the exclusion list.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-Changes in v3:
-- added SAF deviations for vmx counterparts to svm functions.
----
- xen/arch/x86/hvm/svm/intr.c      | 1 +
- xen/arch/x86/hvm/svm/nestedsvm.c | 1 +
- xen/arch/x86/hvm/svm/svm.c       | 2 ++
- xen/arch/x86/hvm/vmx/intr.c      | 1 +
- xen/arch/x86/hvm/vmx/vmx.c       | 2 ++
- xen/arch/x86/hvm/vmx/vvmx.c      | 1 +
- xen/arch/x86/traps.c             | 1 +
- xen/arch/x86/x86_64/traps.c      | 1 +
- 8 files changed, 10 insertions(+)
+These exclusions are automatically picked up by ECLAIR's automation
+to hide reports originating from these files.
 
-diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
-index 192e17ebbfbb..bd9dc560bbc6 100644
---- a/xen/arch/x86/hvm/svm/intr.c
-+++ b/xen/arch/x86/hvm/svm/intr.c
-@@ -123,6 +123,7 @@ static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
-         vmcb, general1_intercepts | GENERAL1_INTERCEPT_VINTR);
- }
- 
-+/* SAF-1-safe */
- void svm_intr_assist(void)
- {
-     struct vcpu *v = current;
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index a09b6abaaeaf..c80d59e0728e 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1441,6 +1441,7 @@ nestedsvm_vcpu_vmexit(struct vcpu *v, struct cpu_user_regs *regs,
- }
- 
- /* VCPU switch */
-+/* SAF-1-safe */
- void nsvm_vcpu_switch(void)
- {
-     struct cpu_user_regs *regs = guest_cpu_user_regs();
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 24c417ca7199..40ba69bcdfa1 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1056,6 +1056,7 @@ static void noreturn cf_check svm_do_resume(void)
-     reset_stack_and_jump(svm_asm_do_resume);
- }
- 
-+/* SAF-1-safe */
- void svm_vmenter_helper(void)
- {
-     const struct cpu_user_regs *regs = guest_cpu_user_regs();
-@@ -2586,6 +2587,7 @@ const struct hvm_function_table * __init start_svm(void)
-     return &svm_function_table;
- }
- 
-+/* SAF-1-safe */
- void svm_vmexit_handler(void)
- {
-     struct cpu_user_regs *regs = guest_cpu_user_regs();
-diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
-index fd719c4c01d2..1805aafb086d 100644
---- a/xen/arch/x86/hvm/vmx/intr.c
-+++ b/xen/arch/x86/hvm/vmx/intr.c
-@@ -224,6 +224,7 @@ void vmx_sync_exit_bitmap(struct vcpu *v)
-     }
- }
- 
-+/* SAF-1-safe */
- void vmx_intr_assist(void)
- {
-     struct hvm_intack intack;
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 1edc7f1e919f..0936a263154e 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4035,6 +4035,7 @@ static void undo_nmis_unblocked_by_iret(void)
-               guest_info | VMX_INTR_SHADOW_NMI);
- }
- 
-+/* SAF-1-safe */
- void vmx_vmexit_handler(struct cpu_user_regs *regs)
- {
-     unsigned long exit_qualification, exit_reason, idtv_info, intr_info = 0;
-@@ -4787,6 +4788,7 @@ static void lbr_fixup(void)
- }
- 
- /* Returns false if the vmentry has to be restarted */
-+/* SAF-1-safe */
- bool vmx_vmenter_helper(const struct cpu_user_regs *regs)
- {
-     struct vcpu *curr = current;
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 16b0ef82b6c8..99d93b869307 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1490,6 +1490,7 @@ static void nvmx_eptp_update(void)
-     __vmwrite(EPT_POINTER, get_shadow_eptp(curr));
- }
- 
-+/* SAF-1-safe */
- void nvmx_switch_guest(void)
- {
-     struct vcpu *v = current;
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index e1356f696aba..6af35a468199 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -2265,6 +2265,7 @@ void asm_domain_crash_synchronous(unsigned long addr)
- }
- 
- #ifdef CONFIG_DEBUG
-+/* SAF-1-safe */
- void check_ist_exit(const struct cpu_user_regs *regs, bool ist_exit)
- {
-     const unsigned int ist_mask =
-diff --git a/xen/arch/x86/x86_64/traps.c b/xen/arch/x86/x86_64/traps.c
-index e03e80813e36..5963d26d7848 100644
---- a/xen/arch/x86/x86_64/traps.c
-+++ b/xen/arch/x86/x86_64/traps.c
-@@ -266,6 +266,7 @@ void show_page_walk(unsigned long addr)
-            l1_table_offset(addr), l1e_get_intpte(l1e), pfn);
- }
- 
-+/* SAF-1-safe */
- void do_double_fault(struct cpu_user_regs *regs)
- {
-     unsigned int cpu;
+Changes in v4:
+- Fixed typo
+---
+ docs/misra/exclude-list.json | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
+index 575ed22a7f67..b858a0baa106 100644
+--- a/docs/misra/exclude-list.json
++++ b/docs/misra/exclude-list.json
+@@ -145,6 +145,10 @@
+             "rel_path": "common/zstd/*",
+             "comment": "Imported from Linux, ignore for now"
+         },
++        {
++            "rel_path": "common/symbols-dummy.c",
++            "comment": "The resulting code is not included in the final Xen binary, ignore for now"
++        },
+         {
+             "rel_path": "crypto/*",
+             "comment": "Origin is external and documented in crypto/README.source"
+@@ -189,6 +193,14 @@
+             "rel_path": "include/acpi/acpixf.h",
+             "comment": "Imported from Linux, ignore for now"
+         },
++        {
++          "rel_path": "include/acpi/acexcep.h",
++          "comment": "Imported from Linux, ignore for now"
++        },
++        {
++          "rel_path": "include/acpi/acglobal.h",
++          "comment": "Imported from Linux, ignore for now"
++        },
+         {
+             "rel_path": "include/xen/acpi.h",
+             "comment": "Imported from Linux, ignore for now"
 -- 
 2.34.1
 
