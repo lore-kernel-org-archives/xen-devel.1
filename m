@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E95DAC25B41
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:10:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.621108.967208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B14ECDB474
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Oct 2023 09:20:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.621121.967217 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quqwy-0004op-CF; Mon, 23 Oct 2023 09:10:16 +0000
+	id 1qur6O-0007K2-8D; Mon, 23 Oct 2023 09:20:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 621108.967208; Mon, 23 Oct 2023 09:10:16 +0000
+Received: by outflank-mailman (output) from mailman id 621121.967217; Mon, 23 Oct 2023 09:20:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1quqwy-0004og-92; Mon, 23 Oct 2023 09:10:16 +0000
-Received: by outflank-mailman (input) for mailman id 621108;
- Mon, 23 Oct 2023 09:10:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qur6O-0007Jv-5g; Mon, 23 Oct 2023 09:20:00 +0000
+Received: by outflank-mailman (input) for mailman id 621121;
+ Mon, 23 Oct 2023 09:19:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DOxK=GF=antgroup.com=houwenlong.hwl@srs-se1.protection.inumbo.net>)
- id 1quqww-0003eK-N7
- for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:10:14 +0000
-Received: from out0-198.mail.aliyun.com (out0-198.mail.aliyun.com
- [140.205.0.198]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f1fe0707-7183-11ee-9b0e-b553b5be7939;
- Mon, 23 Oct 2023 11:10:12 +0200 (CEST)
-Received: from localhost(mailfrom:houwenlong.hwl@antgroup.com
- fp:SMTPD_---.V5qfj3u_1698052197) by smtp.aliyun-inc.com;
- Mon, 23 Oct 2023 17:09:58 +0800
+ <SRS0=gXaf=GF=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qur6N-0007Jp-Gd
+ for xen-devel@lists.xenproject.org; Mon, 23 Oct 2023 09:19:59 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 556d3b58-7185-11ee-98d5-6d05b1d4d9a1;
+ Mon, 23 Oct 2023 11:19:57 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id C68D14EE0740;
+ Mon, 23 Oct 2023 11:19:57 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,64 +41,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f1fe0707-7183-11ee-9b0e-b553b5be7939
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R621e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047194;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=14;SR=0;TI=SMTPD_---.V5qfj3u_1698052197;
-From: "Hou Wenlong" <houwenlong.hwl@antgroup.com>
-To: linux-kernel@vger.kernel.org
-Cc: "Hou Wenlong" <houwenlong.hwl@antgroup.com>,
-  "Juergen Gross" <jgross@suse.com>,
-  "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
-  "Darren Hart" <dvhart@infradead.org>,
-  "Andy Shevchenko" <andy@infradead.org>,
-  "Thomas Gleixner" <tglx@linutronix.de>,
-  "Ingo Molnar" <mingo@redhat.com>,
-  "Borislav Petkov" <bp@alien8.de>,
-  "Dave Hansen" <dave.hansen@linux.intel.com>,
-  "=?UTF-8?B?bWFpbnRhaW5lcjpYODYgQVJDSElURUNUVVJFIDMyLUJJVCBBTkQgNjQtQklU?=" <x86@kernel.org>,
-  "H. Peter Anvin" <hpa@zytor.com>,
-  "=?UTF-8?B?bW9kZXJhdGVkIGxpc3Q6WEVOIEhZUEVSVklTT1IgWDg2?=" <xen-devel@lists.xenproject.org>,
-  "=?UTF-8?B?b3BlbiBsaXN0Olg4NiBQTEFURk9STSBEUklWRVJTIC0gQVJDSA==?=" <platform-driver-x86@vger.kernel.org>
-Subject: [PATCH 2/2] x86/xen/pvh: Use fixed_percpu_data to set up GS base
-Date: Mon, 23 Oct 2023 17:09:39 +0800
-Message-Id: <f3943c3bbcdfea836064d3556a979ad6f015c835.1698051454.git.houwenlong.hwl@antgroup.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1698051454.git.houwenlong.hwl@antgroup.com>
-References: <cover.1698051454.git.houwenlong.hwl@antgroup.com>
+X-Inumbo-ID: 556d3b58-7185-11ee-98d5-6d05b1d4d9a1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Mon, 23 Oct 2023 11:19:57 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
+ ayan.kumar.halder@amd.com, consulting@bugseng.com,
+ andrew.cooper3@citrix.com, roger.pau@citrix.com, Simone Ballarin
+ <simone.ballarin@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, George
+ Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Wei Liu
+ <wl@xen.org>, xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH][for-4.19 v3 1/8] xen/include: add macro LOWEST_BIT
+In-Reply-To: <f504772a-68b4-fbfa-e7d4-8d22992c7944@suse.com>
+References: <cover.1697815135.git.nicola.vetrini@bugseng.com>
+ <546cf30aa43d6d0687a9a6c6d23b11128e5783e8.1697815135.git.nicola.vetrini@bugseng.com>
+ <f504772a-68b4-fbfa-e7d4-8d22992c7944@suse.com>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <f23a1f95916bd61ddcd5002428d8876c@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-startup_64() and startup_xen() both use "fixed_percpu_data" to set up GS
-base. So for consitency, use it too in PVH entry and remove the
-temporary variable "canary".
+On 23/10/2023 09:48, Jan Beulich wrote:
+> On 20.10.2023 17:28, Nicola Vetrini wrote:
+>> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+>> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+>> @@ -246,6 +246,12 @@ constant expressions are required.\""
+>>    "any()"}
+>>  -doc_end
+>> 
+>> +-doc_begin="The macro LOWEST_BIT encapsulates a well-known pattern to 
+>> obtain the value
+>> +2^ffs(x) for unsigned integers on two's complement architectures
+>> +(all the architectures supported by Xen satisfy this requirement)."
+>> +-config=MC3R1.R10.1,reports+={safe, 
+>> "any_area(any_loc(any_exp(macro(^LOWEST_BIT$))))"}
+>> +-doc_end
+> 
+> This being deviated this way (rather than by SAF-* comments) wants
+> justifying in the description. You did reply to my respective
+> comment on v2, but such then (imo) needs propagating into the actual
+> patch as well.
+> 
 
-Signed-off-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
----
- arch/x86/platform/pvh/head.S | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+Sure, will do.
 
-diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
-index cee4dadf5344..591ba165215f 100644
---- a/arch/x86/platform/pvh/head.S
-+++ b/arch/x86/platform/pvh/head.S
-@@ -96,7 +96,7 @@ SYM_CODE_START_LOCAL(pvh_start_xen)
- 1:
- 	/* Set base address in stack canary descriptor. */
- 	mov $MSR_GS_BASE,%ecx
--	mov $_pa(canary), %eax
-+	mov $_pa(INIT_PER_CPU_VAR(fixed_percpu_data)), %eax
- 	xor %edx, %edx
- 	wrmsr
- 
-@@ -160,8 +160,6 @@ SYM_DATA_START_LOCAL(gdt_start)
- SYM_DATA_END_LABEL(gdt_start, SYM_L_LOCAL, gdt_end)
- 
- 	.balign 16
--SYM_DATA_LOCAL(canary, .fill 48, 1, 0)
--
- SYM_DATA_START_LOCAL(early_stack)
- 	.fill BOOT_STACK_SIZE, 1, 0
- SYM_DATA_END_LABEL(early_stack, SYM_L_LOCAL, early_stack_end)
+>> --- a/docs/misra/deviations.rst
+>> +++ b/docs/misra/deviations.rst
+>> @@ -192,6 +192,13 @@ Deviations related to MISRA C:2012 Rules:
+>>         See automation/eclair_analysis/deviations.ecl for the full 
+>> explanation.
+>>       - Tagged as `safe` for ECLAIR.
+>> 
+>> +   * - R10.1
+>> +     - The well-known pattern (x & -x) applied to unsigned integer 
+>> values on 2's
+>> +       complement architectures (i.e., all architectures supported by 
+>> Xen), used
+>> +       to obtain the value 2^ffs(x), where ffs(x) is the position of 
+>> the first
+>> +       bit set. If no bits are set, zero is returned.
+>> +     - Tagged as `safe` for ECLAIR.
+> 
+> In such an explanation there shall not be any ambiguity. Here I see
+> an issue with ffs() returning 1-based bit position numbers, which
+> isn't in line with the use in 2^ffs(x). (Arguably use of ^ itself is
+> also problematic, as that's XOR in C, not POW. I'd suggest 2^^ffs(x)
+> or 2**ffs(x).)
+> 
+
+Makes sense, I think I'll use an plain english explanation to avoid any 
+confusion
+about notation.
+
+>> --- a/xen/include/xen/macros.h
+>> +++ b/xen/include/xen/macros.h
+>> @@ -8,8 +8,11 @@
+>>  #define DIV_ROUND(n, d) (((n) + (d) / 2) / (d))
+>>  #define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
+>> 
+>> -#define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
+>> -#define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
+>> +/* Returns the 2^ffs(x) or 0, where ffs(x) is the index of the lowest 
+>> set bit */
+>> +#define LOWEST_BIT(x) ((x) & -(x))
+> 
+> I'm afraid my concern regarding this new macro's name (voiced on v2) 
+> hasn't
+> been addressed (neither verbally nor by finding a more suitable name).
+> 
+> Jan
+
+I didn't come up with much better names, so I left it as is. Here's a 
+few ideas:
+
+- LOWEST_SET
+- MASK_LOWEST_SET
+- MASK_LOWEST_BIT
+- MASK_FFS_0
+- LOWEST_ONE
+
+and also yours, included here for convenience, even though you felt it 
+was too long:
+
+- ISOLATE_LOW_BIT()
+
+All maintainers from THE REST are CC-ed, so we can see if anyone has any 
+suggestion.
+
 -- 
-2.31.1
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
