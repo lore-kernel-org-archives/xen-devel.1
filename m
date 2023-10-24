@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD7F5C25B48
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Oct 2023 15:22:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.622113.969327 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A04EC25B48
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Oct 2023 15:27:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.622118.969338 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvJEq-0008I4-0d; Tue, 24 Oct 2023 15:22:36 +0000
+	id 1qvJJR-0002Bp-MK; Tue, 24 Oct 2023 15:27:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 622113.969327; Tue, 24 Oct 2023 15:22:35 +0000
+Received: by outflank-mailman (output) from mailman id 622118.969338; Tue, 24 Oct 2023 15:27:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvJEp-0008Hx-UC; Tue, 24 Oct 2023 15:22:35 +0000
-Received: by outflank-mailman (input) for mailman id 622113;
- Tue, 24 Oct 2023 15:22:35 +0000
+	id 1qvJJR-0002Bi-JB; Tue, 24 Oct 2023 15:27:21 +0000
+Received: by outflank-mailman (input) for mailman id 622118;
+ Tue, 24 Oct 2023 15:27:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jXWl=GG=casper.srs.infradead.org=BATV+e2898748ca55db067849+7366+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvJEp-0007lz-0d
- for xen-devel@lists.xenproject.org; Tue, 24 Oct 2023 15:22:35 +0000
+ id 1qvJJQ-0002Bc-Cf
+ for xen-devel@lists.xenproject.org; Tue, 24 Oct 2023 15:27:20 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 26c36a9a-7281-11ee-9b0e-b553b5be7939;
- Tue, 24 Oct 2023 17:22:32 +0200 (CEST)
+ id d096f00e-7281-11ee-9b0e-b553b5be7939;
+ Tue, 24 Oct 2023 17:27:17 +0200 (CEST)
 Received: from [2001:8b0:10b:5:758e:a1c4:bc7:e7a7]
  (helo=u3832b3a9db3152.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qvJEl-003ERB-MI; Tue, 24 Oct 2023 15:22:31 +0000
+ id 1qvJJL-003Ed2-K7; Tue, 24 Oct 2023 15:27:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,84 +43,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 26c36a9a-7281-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: d096f00e-7281-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=JlWO6RgVPGd8M61ZGob0FmKUMzP8OvgxEpu1tN6QSyY=; b=hP/8A+nbVK64Ypy4/i0/KnUdkd
-	AeYPMQxRl/oWxCcSujRqYqqqeNjqoi7Ib3lFXLFK+8bOv9lFyGap4cLMJ9voAlaNtSFJWmMcXs/db
-	jztBXH7gc0IjbbPbb3Rv7rERq3EfbezJ1yJWPnzLfLq6oYdyVzRsaH0lgzbJVBdYGwFILEziB3nzZ
-	/oRNOx41L7s2+jAZKC7yO2kbe8INnpbhW8dDmh3u/qTe+x0kvDjn3A5iLAZtDjgvpcg3DIYxMIv2F
-	yGI92KLJo8UTi1McQ2mfQ8dyeiedr0oRlJgjIyHgDM/zzuIbVmq2hUQauEDavLBAV4cl+IfPWYFzN
-	B/P4CWtA==;
-Message-ID: <7231ce3df7a3872b87e092bd3ed79bc5aa0f1484.camel@infradead.org>
-Subject: Re: [PATCH 1/4] hw/xen: only remove peers of PCI NICs on unplug
+	bh=KLE/Xc5LkxDP7tqp8Scuf6XzC5qoEmLxTvjv6+a4mmM=; b=frdrKy/FIloDFfcMDlIkcSYLTj
+	sAod02Nos1o8MtuwIEMIbX19xYhncuyVsp0AOIsnYYj89tnYZVXyrrNbrgF6MkOWxZx9tFbnmjQo6
+	Po6dTxMxlfjWlr/mvtxx4rG1N2suGqkNUWEmtF8cRmzyQrNPJ082/g8ySdAZJTEyqi0Y/vYfmJ2jP
+	pcZ6zdt1p14oP/Ky8iZNs+r/HOMrfgcPnkrD6DXwxCJCxCgwgh9Ah6v2UvwIv5c0BST7P3R9OPF+N
+	ydNf2aT5hNqKtbong1mhM8MNRK1NhRIZNsqU1N0PojhCVAgdQv6DeMIh2Y4At4WyuhgEwa6WAKJW1
+	C1mQRl7Q==;
+Message-ID: <66d977d982978aff20aade4d3150957fcfa418b7.camel@infradead.org>
+Subject: Re: [PATCH v2 05/24] hw/xen: fix XenStore watch delivery to guest
 From: David Woodhouse <dwmw2@infradead.org>
 To: paul@xen.org, qemu-devel@nongnu.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>, Richard
+Cc: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Anthony Perard
+ <anthony.perard@citrix.com>,  =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau
+ <marcandre.lureau@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Richard
  Henderson <richard.henderson@linaro.org>, Eduardo Habkost
- <eduardo@habkost.net>, Stefano Stabellini <sstabellini@kernel.org>, Anthony
- Perard <anthony.perard@citrix.com>, Jason Wang <jasowang@redhat.com>,
- xen-devel@lists.xenproject.org
-Date: Tue, 24 Oct 2023 16:22:31 +0100
-In-Reply-To: <1408fb32-3d91-4eb2-b0e7-4eba0f449906@xen.org>
-References: <20231017182545.97973-1-dwmw2@infradead.org>
-	 <20231017182545.97973-2-dwmw2@infradead.org>
-	 <1408fb32-3d91-4eb2-b0e7-4eba0f449906@xen.org>
+ <eduardo@habkost.net>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel
+ Apfelbaum <marcel.apfelbaum@gmail.com>, Jason Wang <jasowang@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, Wainer dos
+ Santos Moschetta <wainersm@redhat.com>,  Beraldo Leal <bleal@redhat.com>,
+ qemu-block@nongnu.org, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
+  Bernhard Beschow <shentey@gmail.com>, Joel Upham <jupham125@gmail.com>
+Date: Tue, 24 Oct 2023 16:27:14 +0100
+In-Reply-To: <88ce2b55-c933-4c72-933f-c8cd10470c7f@xen.org>
+References: <20231019154020.99080-1-dwmw2@infradead.org>
+	 <20231019154020.99080-6-dwmw2@infradead.org>
+	 <88ce2b55-c933-4c72-933f-c8cd10470c7f@xen.org>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-8AqSwZNUIqYzq2jVXXzA"
+	boundary="=-iuqxs7xR0Hz5L923fliC"
 User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 
---=-8AqSwZNUIqYzq2jVXXzA
+--=-iuqxs7xR0Hz5L923fliC
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2023-10-24 at 15:32 +0100, Paul Durrant wrote:
-> On 17/10/2023 19:25, David Woodhouse wrote:
+On Tue, 2023-10-24 at 16:19 +0100, Paul Durrant wrote:
+> On 19/10/2023 16:40, David Woodhouse wrote:
 > > From: David Woodhouse <dwmw@amazon.co.uk>
 > >=20
-> > When the Xen guest asks to unplug *emulated* NICs, it's kind of unhelpf=
-ul
-> > also to unplug the peer of the *Xen* PV NIC.
+> > When fire_watch_cb() found the response buffer empty, it would call
+> > deliver_watch() to generate the XS_WATCH_EVENT message in the response
+> > buffer and send an event channel notification to the guest=E2=80=A6 wit=
+hout
+> > actually *copying* the response buffer into the ring. So there was
+> > nothing for the guest to see. The pending response didn't actually get
+> > processed into the ring until the guest next triggered some activity
+> > from its side.
 > >=20
+> > Add the missing call to put_rsp().
+> >=20
+> > It might have been slightly nicer to call xen_xenstore_event() here,
+> > which would *almost* have worked. Except for the fact that it calls
+> > xen_be_evtchn_pending() to check that it really does have an event
+> > pending (and clear the eventfd for next time). And under Xen it's
+> > defined that setting that fd to O_NONBLOCK isn't guaranteed to work,
+> > so the emu implementation follows suit.
+> >=20
+> > This fixes Xen device hot-unplug.
+> >=20
+> > Fixes: 0254c4d19df ("hw/xen: Add xenstore wire implementation and imple=
+mentation stubs")
 > > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > > ---
-> > =C2=A0=C2=A0 hw/i386/xen/xen_platform.c | 9 +++++++--
-> > =C2=A0=C2=A0 1 file changed, 7 insertions(+), 2 deletions(-)
+> > =C2=A0 hw/i386/kvm/xen_xenstore.c | 8 +++++---
+> > =C2=A0 1 file changed, 5 insertions(+), 3 deletions(-)
 > >=20
-> > diff --git a/hw/i386/xen/xen_platform.c b/hw/i386/xen/xen_platform.c
-> > index 17457ff3de..e2dd1b536a 100644
-> > --- a/hw/i386/xen/xen_platform.c
-> > +++ b/hw/i386/xen/xen_platform.c
-> > @@ -140,9 +140,14 @@ static void unplug_nic(PCIBus *b, PCIDevice *d, vo=
-id *o)
-> > =C2=A0=C2=A0 /* Remove the peer of the NIC device. Normally, this would=
- be a tap device. */
-> > =C2=A0=C2=A0 static void del_nic_peer(NICState *nic, void *opaque)
-> > =C2=A0=C2=A0 {
-> > -=C2=A0=C2=A0=C2=A0 NetClientState *nc;
-> > +=C2=A0=C2=A0=C2=A0 NetClientState *nc =3D qemu_get_queue(nic);
-> > +=C2=A0=C2=A0=C2=A0 ObjectClass *klass =3D module_object_class_by_name(=
-nc->model);
-> > +
-> > +=C2=A0=C2=A0=C2=A0 /* Only delete peers of PCI NICs that we're about t=
-o delete */
-> > +=C2=A0=C2=A0=C2=A0 if (!klass || !object_class_dynamic_cast(klass, TYP=
-E_PCI_DEVICE)) {
+> > diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
+> > index 660d0b72f9..82a215058a 100644
+> > --- a/hw/i386/kvm/xen_xenstore.c
+> > +++ b/hw/i386/kvm/xen_xenstore.c
+> > @@ -1357,10 +1357,12 @@ static void fire_watch_cb(void *opaque, const c=
+har *path, const char *token)
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 deliver_watch(s,=
+ path, token);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * If the message was =
+queued because there was already ring activity,
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * no need to wake the=
+ guest. But if not, we need to send the evtchn.
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Attempt to queue th=
+e message into the actual ring, and send
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * the event channel n=
+otification if any bytes are copied.
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xen_be_evtchn_notify(s->eh,=
+ s->be_port);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (put_rsp(s) > 0) {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xen=
+_be_evtchn_notify(s->eh, s->be_port);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
 >=20
-> Would it not be better to test for object_class_dynamic_cast(klass,=20
-> TYPE_XEN_DEVICE)?
+> There's actually the potential for an assertion failure there; if the
+> guest has specified an oversize token then deliver_watch() will not set=
+=20
+> rsp_pending... then put_rsp() will fail its assertion that the flag is tr=
+ue.
+>=20
 
-Only if we also change the actual unplug to destroy non-PCI devices too.
 
-The only non-PCI device you could have here is an ISA NE2000, I think.
+Meh, I *already* had a whole paragraph in the commit message about how
+it would have been nicer to just call xen_xenstore_event() :)
 
---=-8AqSwZNUIqYzq2jVXXzA
+Thanks for spotting that; will fix it to check s->rsp_pending.
+
+
+
+--=-iuqxs7xR0Hz5L923fliC
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -212,25 +250,25 @@ IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
 dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
 NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
 xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
-DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMxMDI0MTUyMjMxWjAvBgkqhkiG9w0BCQQxIgQgwt6djrXv
-wJCpoK+au8BOIJfs9h91P8ZiT76vXzYrVo4wgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
+DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMxMDI0MTUyNzE0WjAvBgkqhkiG9w0BCQQxIgQgHi4tIAUd
+Med7ap5G1Qhj8jFYStO/ArLY+Bn0RcGpyfEwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
 BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
 A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
 dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
 DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
 MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
 Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
-lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgAeaiStWe3Sm1mTFINlX7di9PVJ016mvhq4
-uKTn5gyg6RFb6/+IIA/tpRRK+8VhIK7s/1V6rWxkrblQbg4uIIHMD+OG01AmQ9SFcgBW9QKXB1P7
-56/2xAUEZaJ9sgU3d+ldOWvnDKs2rg9MRIYbUsyNBeBKvfbo1Cj3H318vGKF2PEQnHDcEtujpc9t
-6rs7vtwWlDMY//siT2kwGu/o8RurHGWnmh4pvWeLrTq6c019Fh9+tmYOrDuUYaibJh6bYLSkTuH8
-orlMxHi4etIgJkyzxowAFj68TNWw9cQJZ7G5E/rfe25mHDkz8kZI6U7dIJHhEDBIlqvIfuBkUQTx
-mWyjkZ6Qm8WA/q/WBowPD4XdAI5l87yyxKq9FA2PJ0fAyXvmaSazfgrai4/EtkuOYifAHm63DCPd
-D+367pA7WAMPj6VzURxHdeZVPqbaxVCUhJW/w5psRkOJtdCIK73XCOrYmtjM8alvEwVLSXT/zx7l
-u/y6xz3DEXPDGQ14Ul9LdbBfCy4rueoalptMxQOWSgeGS2tDAJdrNALtBSQ4yjQ3UUy7mdxAYYUh
-LiH58BhVdJyEQQeM1MGLXM2iVHvVGqUoFgqOpnzPM/H1rD1YiNzo3Wn1wDlxhrbiq6QfkHHMDSH/
-LiV5tSUPxqPaUWwpAKiId7++f5+kw/vZBS1cGB5z5gAAAAAAAA==
+lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgAg1+sfbdvPlLXZJbjLOypwb/iKCK16TxEg
+inLwZVmuygfHibd8ko2RnKcNUq7MnM5zHa6KVQzheEAWFx1oqd+4L78fSHxezjf2ZhciP1wTrRo5
+nsXLkXH+qMVooo3At+x/EOza9DeqMX39z7AdT2zwP+ggD7K1+ZdLIbYP1tl2wdsCpld0GNdwUN9D
+BPpTnQgwG3QcB0rSUh/mJE8G8ZCltLNXpE7V5qJT4xA+vOpYYj1twUSwWr+GMRVoK89C2FEkdElA
+5B43QhDNNMegHo1QRYd2TptJ0RKFJUdZ2huDMuNgxXwhbyQmCIPG3xKvsMxT+fqzkaD0Ayy8mSiq
+OX1tsi264cqd9iKDNo90NwMxj0/xxBnJNJAk/xjHu50PaE5HxV9eHUk65pMB27Xhr46wYE4mDXRo
+LrAbInSrbzyWw/aUxQV9oMtwmNYOqCjVHGYJ/uWv7eWbpFfrZwbFndSf3oNPmWx+fFEbhhSsNct+
+GVnQTT9YyyinDvSo8OQkgZrWByTxrD6XbWvKynDOJFOI8ZEs2wHRvyq5bxchT5COOZ4dD3H3oxyC
+SWAr9c24nAbXZj+06JIWQAwfxkVVSsKHMg9t37hhiLrnXVHjrNZb9NT3FXFYCBniRJKVobh/CF8I
+Ri2aIBZz2U8R+aWclbg2L/Ud0TwNPW4MLY6qyQhDrgAAAAAAAA==
 
 
---=-8AqSwZNUIqYzq2jVXXzA--
+--=-iuqxs7xR0Hz5L923fliC--
 
