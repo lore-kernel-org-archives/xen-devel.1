@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93658C07545
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Oct 2023 14:32:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.622036.969148 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A471C00A8F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Oct 2023 14:32:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.622033.969117 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvIRk-0006ZG-Jp; Tue, 24 Oct 2023 14:31:52 +0000
+	id 1qvIRd-0005kz-Lf; Tue, 24 Oct 2023 14:31:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 622036.969148; Tue, 24 Oct 2023 14:31:52 +0000
+Received: by outflank-mailman (output) from mailman id 622033.969117; Tue, 24 Oct 2023 14:31:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvIRk-0006Z3-Fz; Tue, 24 Oct 2023 14:31:52 +0000
-Received: by outflank-mailman (input) for mailman id 622036;
- Tue, 24 Oct 2023 14:31:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qvIRd-0005ks-Iu; Tue, 24 Oct 2023 14:31:45 +0000
+Received: by outflank-mailman (input) for mailman id 622033;
+ Tue, 24 Oct 2023 14:31:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9CvU=GG=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qvIRj-0006O8-90
- for xen-devel@lists.xenproject.org; Tue, 24 Oct 2023 14:31:51 +0000
+ id 1qvIRc-0005kh-D9
+ for xen-devel@lists.xenproject.org; Tue, 24 Oct 2023 14:31:44 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0f8711dd-727a-11ee-9b0e-b553b5be7939;
- Tue, 24 Oct 2023 16:31:46 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0d584cb5-727a-11ee-98d5-6d05b1d4d9a1;
+ Tue, 24 Oct 2023 16:31:43 +0200 (CEST)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id CA8294EE0749;
- Tue, 24 Oct 2023 16:31:45 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 9E3B54EE0739;
+ Tue, 24 Oct 2023 16:31:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f8711dd-727a-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 0d584cb5-727a-11ee-98d5-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -54,82 +54,51 @@ Cc: sstabellini@kernel.org,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC 3/4] x86/hvm: quirks: address MISRA C:2012 Rule 9.3
-Date: Tue, 24 Oct 2023 16:31:37 +0200
-Message-Id: <2ba4ba50b7460ff03f7c4e38aca17c9c24bcad39.1698155925.git.nicola.vetrini@bugseng.com>
+Subject: [RFC 0/4] address violations of MISRA C Rule 9.3
+Date: Tue, 24 Oct 2023 16:31:34 +0200
+Message-Id: <cover.1698155925.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1698155925.git.nicola.vetrini@bugseng.com>
-References: <cover.1698155925.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Partially explicitly initalized .matches arrays result in violations
-of Rule 9.3; this is resolved by using designated initializers,
-which is permitted by the Rule.
+This series addresses some of the violations of Rule 9.3, which is about
+partially initialized arrays. The resolution strategy proposed in these patches
+uses designated initializers, except in patch 4, allowed by MISRA for
+sparse initialization. The reason why I chose this method is that, given that
+most of the violations are about the 'matches' field of struct
+'struct dmi_system_id', which is a sized array of structs:
 
-Mechanical changes.
+struct dmi_strmatch matches[4];
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/arch/x86/hvm/quirks.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+Since the initialization is already partially implicit, using designated
+initalizers is convenient because, if the lenght of the matches array changes,
+no adjustment is needed
 
-diff --git a/xen/arch/x86/hvm/quirks.c b/xen/arch/x86/hvm/quirks.c
-index bd30b0f881cb..75c3fdc87749 100644
---- a/xen/arch/x86/hvm/quirks.c
-+++ b/xen/arch/x86/hvm/quirks.c
-@@ -37,40 +37,40 @@ static int __init cf_check check_port80(void)
-             .callback = dmi_hvm_deny_port80,
-             .ident    = "Compaq Presario V6000",
+Another, stricter, resolution strategy is the following:
+
              .matches  = {
--                DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
--                DMI_MATCH(DMI_BOARD_NAME,   "30B7")
-+                [0] = DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
-+                [1] = DMI_MATCH(DMI_BOARD_NAME,   "30B7")
+                 DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
+-                DMI_MATCH(DMI_BOARD_NAME,   "30B7"),
++                DMI_MATCH(DMI_BOARD_NAME,   "30B7"),
++                {}, {}
              }
-         },
-         {
-             .callback = dmi_hvm_deny_port80,
-             .ident    = "HP Pavilion dv9000z",
-             .matches  = {
--                DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
--                DMI_MATCH(DMI_BOARD_NAME,   "30B9")
-+                [0] = DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
-+                [1] = DMI_MATCH(DMI_BOARD_NAME,   "30B9")
-             }
-         },
-         {
-             .callback = dmi_hvm_deny_port80,
-             .ident    = "HP Pavilion dv6000",
-             .matches  = {
--                DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
--                DMI_MATCH(DMI_BOARD_NAME,   "30B8")
-+                [0] = DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
-+                [1] = DMI_MATCH(DMI_BOARD_NAME,   "30B8")
-             }
-         },
-         {
-             .callback = dmi_hvm_deny_port80,
-             .ident    = "HP Pavilion tx1000",
-             .matches  = {
--                DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
--                DMI_MATCH(DMI_BOARD_NAME,   "30BF")
-+                [0] = DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
-+                [1] = DMI_MATCH(DMI_BOARD_NAME,   "30BF")
-             }
-         },
-         {
-             .callback = dmi_hvm_deny_port80,
-             .ident    = "Presario F700",
-             .matches  = {
--                DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
--                DMI_MATCH(DMI_BOARD_NAME,   "30D3")
-+                [0] = DMI_MATCH(DMI_BOARD_VENDOR, "Quanta"),
-+                [1] = DMI_MATCH(DMI_BOARD_NAME,   "30D3")
-             }
-         },
-         { }
--- 
+
+Note that Rule 9.3 is not about array elements that may be uninitialized, but
+the fact of having some explicitly initialized elements and some implicitly
+initialized elements.
+
+Nicola Vetrini (4):
+  x86/ioemul: address MISRA C:2012 Rule 9.3
+  x86/shutdown: address MISRA C:2012 Rule 9.3
+  x86/hvm: quirks: address MISRA C:2012 Rule 9.3
+  amd/iommu: fully initialize array in 'flush_command_buffer'
+
+ xen/arch/x86/hvm/quirks.c               |  20 ++--
+ xen/arch/x86/ioport_emulate.c           |  32 ++---
+ xen/arch/x86/shutdown.c                 | 152 ++++++++++++------------
+ xen/drivers/passthrough/amd/iommu_cmd.c |   3 +-
+ 4 files changed, 104 insertions(+), 103 deletions(-)
+
+--
 2.34.1
-
 
