@@ -4,41 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1924C00A8F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Oct 2023 15:34:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.622121.969347 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA960C07545
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Oct 2023 15:37:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.622123.969358 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvJPa-0004Y5-AJ; Tue, 24 Oct 2023 15:33:42 +0000
+	id 1qvJSo-0005m8-PL; Tue, 24 Oct 2023 15:37:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 622121.969347; Tue, 24 Oct 2023 15:33:42 +0000
+Received: by outflank-mailman (output) from mailman id 622123.969358; Tue, 24 Oct 2023 15:37:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvJPa-0004Xy-7o; Tue, 24 Oct 2023 15:33:42 +0000
-Received: by outflank-mailman (input) for mailman id 622121;
- Tue, 24 Oct 2023 15:33:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qvJSo-0005m1-MS; Tue, 24 Oct 2023 15:37:02 +0000
+Received: by outflank-mailman (input) for mailman id 622123;
+ Tue, 24 Oct 2023 15:37:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oRW6=GG=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
- id 1qvJPY-0004Xm-60
- for xen-devel@lists.xenproject.org; Tue, 24 Oct 2023 15:33:40 +0000
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [2a00:1450:4864:20::134])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b2ea32ab-7282-11ee-9b0e-b553b5be7939;
- Tue, 24 Oct 2023 17:33:36 +0200 (CEST)
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-507a98517f3so6453450e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 24 Oct 2023 08:33:36 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
+ <SRS0=+b+W=GG=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
+ id 1qvJSn-0005lv-A4
+ for xen-devel@lists.xenproject.org; Tue, 24 Oct 2023 15:37:01 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2bdd2cbb-7283-11ee-98d5-6d05b1d4d9a1;
+ Tue, 24 Oct 2023 17:37:00 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4084f682d31so34104955e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Oct 2023 08:36:59 -0700 (PDT)
+Received: from [192.168.6.66] (54-240-197-238.amazon.com. [54.240.197.238])
  by smtp.gmail.com with ESMTPSA id
- s3-20020adfea83000000b0031980783d78sm10119502wrm.54.2023.10.24.08.33.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 08:33:35 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 5E4B91FFBB;
- Tue, 24 Oct 2023 16:33:35 +0100 (BST)
+ x24-20020a05600c179800b0040523bef620sm785126wmo.0.2023.10.24.08.36.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 24 Oct 2023 08:36:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,89 +47,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2ea32ab-7282-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 2bdd2cbb-7283-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1698161616; x=1698766416; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pgn7DZOjqiLKpDeJIAWXRIPQaKWXfmUlyU40rW5Vul0=;
-        b=lZTAuIRGi2zwNvQ2gPVdbAwAJXKjf9lnSpyfysRVnLqU/GipPZWCGsUL1iTyTU5Qgj
-         wVuzoHmgL3j06vxoVrOLsP6C9+XPAuh8U2zNdjHO3anrQ9YrLtehS8WVN2g0ncvqU8Ro
-         OKAawuOue5uvSrsgZik37yLrkq6vHOo6JNr9SLlrFu/kU4y4gKCr1p0kQ1JNTCiCghjV
-         OmBeOo56r2sL8IISeT9mMI3Tssj96JjG6/jqvUdn6Ug2R1wNJ5NV2K7WN+6Dnw7W8ob3
-         kvJLrKAMNV6T+54S2yiPc2HNwjtrwOY4j34pD3SgBHSXtUisyPROuS2mokJxcHJutb3B
-         Vk8Q==
+        d=gmail.com; s=20230601; t=1698161819; x=1698766619; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
+         :content-language:subject:reply-to:user-agent:mime-version:date
+         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=A8ZSzBnis7KNXr8T2w9cXrHfqOor5r4c/mfSgp7VlQs=;
+        b=duo9hkwr4MZqsOR9kzWZSv9E66z7eVfnA/Pymi0qwVQkVTf3N7EkYAyrdA5GCpqbRH
+         SsJITyeLvG6SK0BQXgtQdSMt7WFK2271TiuSZdXDEnGOGbFFCnyKjG7DoSIzAolKy7RM
+         95Sb8p/pNs0XR3D507DiMSnE7QewFCagQSiIAHFkT3+l+QYDKPK69FGblm/jF3kh8sPb
+         9uQgqgiLb8E69xIT8JUFfoDnpP5IVozHjjS8LHGnwzTjuiu6ccoJRyuPOY/G/Mrj7caw
+         mRdxAM+yBDAfFZh533WO7vSWig6lvEp6UhvAWo2y3zfFBjnFE/pLP1xWM0ARU7JsvKHa
+         Oi4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698161616; x=1698766416;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=pgn7DZOjqiLKpDeJIAWXRIPQaKWXfmUlyU40rW5Vul0=;
-        b=V1P34hwdg1Zl8Klo3tL8WnpB6VclRceQ/AJJd9Cl6xPqAa7U26XGKWU1iOP5nG8Kju
-         Q1ossX3AK3ODXloyavaBsJuwI/CPHgmGi41p4n2euby7YL2qBa1t5dSshe6pJ5QJ7p2h
-         Eg2/QBGm0uFANzfFK8yDXO5jpijP9Vd+4IEJeI7uO3UEKhRpksD63iOC8TQ2CpZjWOgt
-         20JLCwpC7L1FkabzJJY+dnpLvPQCGUpiulpXODadmlGhkqXMAkloG2M5SqYp6OWzkW5u
-         gBgSgMEZw5djMcI70UqESlIQtlyE3JNG1Px+BlW7abDt2x2X07mXWLWglFnbhRPtBRNN
-         ocaA==
-X-Gm-Message-State: AOJu0YyLHCQ37sgykU1XTu7820g4RN1rCRxZngfJODOYt5SKg7pnpYY/
-	nNQvDcY5Mj4eyaQ0wMTa7R2sGg==
-X-Google-Smtp-Source: AGHT+IERaAXJZu/NEaGGq5i9CuYFrG2wQ65+x8yTDScZaEY7DCl2PsKOOkex2LHV25CK2hUsLxDFYA==
-X-Received: by 2002:a05:6512:3156:b0:507:a3ae:3252 with SMTP id s22-20020a056512315600b00507a3ae3252mr8565102lfi.27.1698161616310;
-        Tue, 24 Oct 2023 08:33:36 -0700 (PDT)
-References: <20231016151909.22133-1-dwmw2@infradead.org>
-User-agent: mu4e 1.11.22; emacs 29.1.90
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: David Woodhouse <dwmw2@infradead.org>
-Cc: qemu-devel@nongnu.org, Kevin Wolf <kwolf@redhat.com>, Hanna Reitz
- <hreitz@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Anthony
- Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>, Paolo
- Bonzini
- <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel
- Apfelbaum <marcel.apfelbaum@gmail.com>, Richard Henderson
- <richard.henderson@linaro.org>, Eduardo Habkost <eduardo@habkost.net>,
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-block@nongnu.org,
- xen-devel@lists.xenproject.org, kvm@vger.kernel.org
-Subject: Re: [PATCH 0/12] Get Xen PV shim running in qemu
-Date: Tue, 24 Oct 2023 16:24:48 +0100
-In-reply-to: <20231016151909.22133-1-dwmw2@infradead.org>
-Message-ID: <877cnc2fxs.fsf@linaro.org>
+        d=1e100.net; s=20230601; t=1698161819; x=1698766619;
+        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
+         :content-language:subject:reply-to:user-agent:mime-version:date
+         :message-id:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=A8ZSzBnis7KNXr8T2w9cXrHfqOor5r4c/mfSgp7VlQs=;
+        b=KJT4YkXxbNeM3maVK+1O/+8NN3zjgFGtThBWo6Z/k4K+tmRXXj7vdQK/f2vgwdDvZ+
+         4TCR6lH+hscdqzkERdtiaWbNve3tGfZS0NdUe/ZUOkaRrbDPMszTlIjxpMaqNVV1yVyp
+         3XQyO/xumjfQZzCxzyK1uLiVH9SJ5Zoxg2MQZo+IuOnMmjokEp6FTQAmCCZT6mFZy5lD
+         M4jB0lvbuTdY+Ru2TErziXGOoCd0xXjGOI93pKCyvYcFJ8IHj4/cmZYmqs/k2YP+kbQb
+         rIrxKbdTj51LKpwOdJy5yReBtaov/EFnJD2A9a+MGaFx5Z+WGPQvXqtcsHEMbiJ4P3iQ
+         cNGw==
+X-Gm-Message-State: AOJu0YyjnYWOVd5rMR7JJQuC/YkzC9mCx5XocU1rfBaAT5hkEEUdccfo
+	V+A6Z3C2EJNqWB1g1oy3+qg=
+X-Google-Smtp-Source: AGHT+IF1dcmYSOIBAYhyDN+rJjDUtbiR7bpGX9yxUQ7nJ0qnc13saq8mF6pQ7QGMUfeqrZmcr7qgJw==
+X-Received: by 2002:a05:600c:1d19:b0:401:b2c7:349b with SMTP id l25-20020a05600c1d1900b00401b2c7349bmr9736055wms.7.1698161819005;
+        Tue, 24 Oct 2023 08:36:59 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Message-ID: <979ce4f2-195c-4488-869e-72c9abed1339@xen.org>
+Date: Tue, 24 Oct 2023 16:36:56 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Reply-To: paul@xen.org
+Subject: Re: [PATCH v2 10/24] hw/xen: populate store frontend nodes with
+ XenStore PFN/port
+Content-Language: en-US
+To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
+Cc: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Jason Wang <jasowang@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ Cleber Rosa <crosa@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Beraldo Leal <bleal@redhat.com>, qemu-block@nongnu.org,
+ xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
+ Bernhard Beschow <shentey@gmail.com>, Joel Upham <jupham125@gmail.com>
+References: <20231019154020.99080-1-dwmw2@infradead.org>
+ <20231019154020.99080-11-dwmw2@infradead.org>
+Organization: Xen Project
+In-Reply-To: <20231019154020.99080-11-dwmw2@infradead.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 19/10/2023 16:40, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
+> 
+> This is kind of redundant since without being able to get these through
+> some other method (HVMOP_get_param) the guest wouldn't be able to access
+> XenStore in order to find them. But Xen populates them, and it does
+> allow guests to *rebind* to the event channel port after a reset.
+> 
+> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+> ---
+>   hw/i386/kvm/xen_xenstore.c | 11 +++++++++++
+>   1 file changed, 11 insertions(+)
+> 
 
-David Woodhouse <dwmw2@infradead.org> writes:
+Reviewed-by: Paul Durrant <paul@xen.org>
 
-> I hadn't got round to getting the PV shim running yet; I thought it would
-> need work on the multiboot loader. Turns out it doesn't. I *did* need to
-> fix a couple of brown-paper-bag bugs in the per-vCPU upcall vector suppor=
-t,
-> and implement Xen console support though. Now I can test PV guests:
->
->  $ qemu-system-x86_64 --accel kvm,xen-version=3D0x40011,kernel-irqchip=3D=
-split \
->    -chardev stdio,mux=3Don,id=3Dchar0 -device xen-console,chardev=3Dchar0=
- \
->    -drive file=3D${GUEST_IMAGE},if=3Dxen -display none -m 1G \
->    -kernel ~/git/xen/xen/xen -initrd ~/git/linux/arch/x86/boot/bzImage
->  \
-
-So this is a KVM guest running the Xen hypervisor (via -kernel) and a
-Dom0 Linux guest (via -initrd)?
-
-Should this work for any Xen architecture or is this x86 specific? Does
-the -M machine model matter?
-
-Would it be possible to have some sort of overview document in our
-manual for how Xen guests are supported under KVM?
-
->    -append "loglvl=3Dall -- console=3Dhvc0 root=3D/dev/xvda1"
->
-<snip>
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
