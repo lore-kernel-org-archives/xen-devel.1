@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99B90C25B6D
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:51:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.622968.970333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D297C25B47
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:51:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.622970.970346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfDx-00026t-C8; Wed, 25 Oct 2023 14:51:09 +0000
+	id 1qvfDy-0002IP-DE; Wed, 25 Oct 2023 14:51:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 622968.970333; Wed, 25 Oct 2023 14:51:09 +0000
+Received: by outflank-mailman (output) from mailman id 622970.970346; Wed, 25 Oct 2023 14:51:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfDx-00024C-6n; Wed, 25 Oct 2023 14:51:09 +0000
-Received: by outflank-mailman (input) for mailman id 622968;
- Wed, 25 Oct 2023 14:51:06 +0000
+	id 1qvfDx-0002Gs-Vm; Wed, 25 Oct 2023 14:51:09 +0000
+Received: by outflank-mailman (input) for mailman id 622970;
+ Wed, 25 Oct 2023 14:51:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LJSz=GH=casper.srs.infradead.org=BATV+85b1c44ac99574f3713d+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvfDu-0000WU-O4
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:06 +0000
+ id 1qvfDw-0000WU-OJ
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:08 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e91671fe-7345-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 16:50:59 +0200 (CEST)
+ id ea359a73-7345-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 16:51:01 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qvfDZ-009Nmm-FK; Wed, 25 Oct 2023 14:50:45 +0000
+ id 1qvfDb-009NnL-Gt; Wed, 25 Oct 2023 14:50:47 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qvfDY-002dF5-39; Wed, 25 Oct 2023 15:50:44 +0100
+ Linux)) id 1qvfDZ-002dFt-2r; Wed, 25 Oct 2023 15:50:45 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: e91671fe-7345-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: ea359a73-7345-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=XhsYSfIQYSBmCatJUPtQ3cCtM2z0F6a5Ae6S/654rl8=; b=bebDdC3UkVjTaxQCkZRKhYfreU
-	Pi4BJykRwkqs2h7q4xklzUF5qaigSUJXfV0Q0z6OPCrW9Om6Sw/kfpxb/HVz/f4tJt1duma6/0Oyk
-	MdntSYjSMjWbHzix9vXpcAW5h+rsHAVjxO8L9mZmfp10stYQ7nLxhyZrJdyGBQgDEMGZiTxb1UMzm
-	xSLiV52M6aauG6qMFnLHqIZeBlJYJYLEjl8q2Jf11w/fJzELUVvQXy8XXBolaxZOPs4d19+TYYMT3
-	j7txOIhizMddoSuBqwI4MgqN3IcWDmMEEt9gMQ9PyoPW3aV5m3EL89n4kUjoEr/7Ov6WM4oYMahVA
-	nITjymYg==;
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=j1Dn7q6Qaq7MnCa855VhKvMLvN78EtjWJTTcd6S4txs=; b=rRulWpO/m0gfiN0feKRMJZSGn5
+	hRb9Vhn0bdyIvk8sj9Nt8PrmsB+acuGZEgM7FOw8AsoyxXxHygnhWbexOYTZSNvolWwwRcUpY7hjN
+	XU24Q1mO6Z+auWuq84CoUAajkyrw/NRboHyl27cTjafRF6CgAJ9ul4iipKrpoBn0P3JGvvga1AXmv
+	QxxoqHWiJGigYp5z+gD7lgnCjxs+fGVFEcVdbQbvAv6KVjR1H8moKw2mVAHvZ2E9c75IQppZnUuAi
+	VRF1jA9gaRSwI4R/1xFcs4XD/lxEjotJUrUjcOw2BevIt2NNd/X3xQnnKAs5Y7sw7WIP62A7xqAxL
+	pPIINzNw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -74,623 +74,184 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v3 17/28] hw/xen: add support for Xen primary console in emulated mode
-Date: Wed, 25 Oct 2023 15:50:31 +0100
-Message-Id: <20231025145042.627381-18-dwmw2@infradead.org>
+Subject: [PATCH v3 28/28] docs: update Xen-on-KVM documentation
+Date: Wed, 25 Oct 2023 15:50:42 +0100
+Message-Id: <20231025145042.627381-29-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025145042.627381-1-dwmw2@infradead.org>
 References: <20231025145042.627381-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The primary console is special because the toolstack maps a page into
-the guest for its ring, and also allocates the guest-side event channel.
-The guest's grant table is even primed to export that page using a known
-grant ref#. Add support for all that in emulated mode, so that we can
-have a primary console.
+Add notes about console and network support, and how to launch PV guests.
+Clean up the disk configuration examples now that that's simpler, and
+remove the comment about IDE unplug on q35/AHCI now that it's fixed.
 
-For reasons unclear, the backends running under real Xen don't just use
-a mapping of the well-known GNTTAB_RESERVED_CONSOLE grant ref (which
-would also be in the ring-ref node in XenStore). Instead, the toolstack
-sets the ring-ref node of the primary console to the GFN of the guest
-page. The backend is expected to handle that special case and map it
-with foreignmem operations instead.
-
-We don't have an implementation of foreignmem ops for emulated Xen mode,
-so just make it map GNTTAB_RESERVED_CONSOLE instead. This would probably
-work for real Xen too, but we can't work out how to make real Xen create
-a primary console of type "ioemu" to make QEMU drive it, so we can't
-test that; might as well leave it as it is for now under Xen.
-
-Now at last we can boot the Xen PV shim and run PV kernels in QEMU.
+Also update stale avocado test filename in MAINTAINERS.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/char/xen_console.c             |  78 ++++++++----
- hw/i386/kvm/meson.build           |   1 +
- hw/i386/kvm/trace-events          |   2 +
- hw/i386/kvm/xen-stubs.c           |   8 ++
- hw/i386/kvm/xen_gnttab.c          |   7 +-
- hw/i386/kvm/xen_primary_console.c | 193 ++++++++++++++++++++++++++++++
- hw/i386/kvm/xen_primary_console.h |  23 ++++
- hw/i386/kvm/xen_xenstore.c        |  10 ++
- hw/xen/xen-bus.c                  |   5 +
- include/hw/xen/xen-bus.h          |   1 +
- target/i386/kvm/xen-emu.c         |  23 +++-
- 11 files changed, 328 insertions(+), 23 deletions(-)
- create mode 100644 hw/i386/kvm/xen_primary_console.c
- create mode 100644 hw/i386/kvm/xen_primary_console.h
+ MAINTAINERS              |   2 +-
+ docs/system/i386/xen.rst | 100 ++++++++++++++++++++++++++++-----------
+ 2 files changed, 73 insertions(+), 29 deletions(-)
 
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index 4a419dc287..5cbee2f184 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -33,6 +33,8 @@
- #include "hw/qdev-properties-system.h"
- #include "hw/xen/interface/io/console.h"
- #include "hw/xen/interface/io/xs_wire.h"
-+#include "hw/xen/interface/grant_table.h"
-+#include "hw/i386/kvm/xen_primary_console.h"
- #include "trace.h"
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d36aa44661..0fcc454ccd 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -490,7 +490,7 @@ S: Supported
+ F: include/sysemu/kvm_xen.h
+ F: target/i386/kvm/xen*
+ F: hw/i386/kvm/xen*
+-F: tests/avocado/xen_guest.py
++F: tests/avocado/kvm_xen_guest.py
  
- struct buffer {
-@@ -230,24 +232,47 @@ static bool xen_console_connect(XenDevice *xendev, Error **errp)
-         return false;
-     }
+ Guest CPU Cores (other accelerators)
+ ------------------------------------
+diff --git a/docs/system/i386/xen.rst b/docs/system/i386/xen.rst
+index f06765e88c..6214c4571e 100644
+--- a/docs/system/i386/xen.rst
++++ b/docs/system/i386/xen.rst
+@@ -15,46 +15,24 @@ Setup
+ -----
  
--    if (!con->dev) {
--        xen_pfn_t mfn = (xen_pfn_t)con->ring_ref;
--        con->sring = qemu_xen_foreignmem_map(xendev->frontend_id, NULL,
--                                             PROT_READ | PROT_WRITE,
--                                             1, &mfn, NULL);
--        if (!con->sring) {
--            error_setg(errp, "failed to map console page");
--            return false;
-+    switch (con->dev) {
-+    case 0:
-+        /*
-+         * The primary console is special. For real Xen the ring-ref is
-+         * actually a GFN which needs to be mapped as foreignmem.
-+         */
-+        if (xen_mode != XEN_EMULATE) {
-+            xen_pfn_t mfn = (xen_pfn_t)con->ring_ref;
-+            con->sring = qemu_xen_foreignmem_map(xendev->frontend_id, NULL,
-+                                                 PROT_READ | PROT_WRITE,
-+                                                 1, &mfn, NULL);
-+            if (!con->sring) {
-+                error_setg(errp, "failed to map console page");
-+                return false;
-+            }
-+            break;
-         }
--    } else {
-+
-+        /*
-+         * For Xen emulation, we still follow the convention of ring-ref
-+         * holding the GFN, but we map the fixed GNTTAB_RESERVED_CONSOLE
-+         * grant ref because there is no implementation of foreignmem
-+         * operations for emulated mode. The emulation code which handles
-+         * the guest-side page and event channel also needs to be informed
-+         * of the backend event channel port, in order to reconnect to it
-+         * after a soft reset.
-+         */
-+        xen_primary_console_set_be_port(
-+            xen_event_channel_get_local_port(con->event_channel));
-+        con->ring_ref = GNTTAB_RESERVED_CONSOLE;
-+        /* fallthrough */
-+    default:
-         con->sring = xen_device_map_grant_refs(xendev,
-                                                &con->ring_ref, 1,
-                                                PROT_READ | PROT_WRITE,
-                                                errp);
-         if (!con->sring) {
--            error_prepend(errp, "failed to map grant ref: ");
-+            error_prepend(errp, "failed to map console grant ref: ");
-             return false;
-         }
-+        break;
-     }
+ Xen mode is enabled by setting the ``xen-version`` property of the KVM
+-accelerator, for example for Xen 4.10:
++accelerator, for example for Xen 4.17:
  
-     trace_xen_console_connect(con->dev, con->ring_ref, port,
-@@ -272,10 +297,14 @@ static void xen_console_disconnect(XenDevice *xendev, Error **errp)
-         xen_device_unbind_event_channel(xendev, con->event_channel,
-                                         errp);
-         con->event_channel = NULL;
-+
-+        if (xen_mode == XEN_EMULATE && !con->dev) {
-+            xen_primary_console_set_be_port(0);
-+        }
-     }
+ .. parsed-literal::
  
-     if (con->sring) {
--        if (!con->dev) {
-+        if (!con->dev && xen_mode != XEN_EMULATE) {
-             qemu_xen_foreignmem_unmap(con->sring, 1);
-         } else {
-             xen_device_unmap_grant_refs(xendev, con->sring,
-@@ -338,14 +367,19 @@ static char *xen_console_get_name(XenDevice *xendev, Error **errp)
-     if (con->dev == -1) {
-         XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
-         char fe_path[XENSTORE_ABS_PATH_MAX + 1];
-+        int idx = (xen_mode == XEN_EMULATE) ? 0 : 1;
-         char *value;
--        int idx = 1;
+-  |qemu_system| --accel kvm,xen-version=0x4000a,kernel-irqchip=split
++  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split
  
-         /* Theoretically we could go up to INT_MAX here but that's overkill */
-         while (idx < 100) {
--            snprintf(fe_path, sizeof(fe_path),
--                     "/local/domain/%u/device/console/%u",
--                     xendev->frontend_id, idx);
-+            if (!idx) {
-+                snprintf(fe_path, sizeof(fe_path),
-+                         "/local/domain/%u/console", xendev->frontend_id);
-+            } else {
-+                snprintf(fe_path, sizeof(fe_path),
-+                         "/local/domain/%u/device/console/%u",
-+                         xendev->frontend_id, idx);
-+            }
-             value = qemu_xen_xs_read(xenbus->xsh, XBT_NULL, fe_path, NULL);
-             if (!value) {
-                 if (errno == ENOENT) {
-@@ -400,11 +434,15 @@ static void xen_console_realize(XenDevice *xendev, Error **errp)
-      * be mapped directly as foreignmem (not a grant ref), and the guest port
-      * was allocated *for* the guest by the toolstack. The guest gets these
-      * through HVMOP_get_param and can use the console long before it's got
--     * XenStore up and running. We cannot create those for a Xen guest.
-+     * XenStore up and running. We cannot create those for a true Xen guest,
-+     * but we can for Xen emulation.
-      */
-     if (!con->dev) {
--        if (xen_device_frontend_scanf(xendev, "ring-ref", "%u", &u) != 1 ||
--            xen_device_frontend_scanf(xendev, "port", "%u", &u) != 1) {
-+        if (xen_mode == XEN_EMULATE) {
-+            xen_primary_console_create();
-+        } else if (xen_device_frontend_scanf(xendev, "ring-ref", "%u", &u)
-+                   != 1 ||
-+                   xen_device_frontend_scanf(xendev, "port", "%u", &u) != 1) {
-             error_setg(errp, "cannot create primary Xen console");
-             return;
-         }
-@@ -417,8 +455,8 @@ static void xen_console_realize(XenDevice *xendev, Error **errp)
-         xen_device_frontend_printf(xendev, "tty", "%s", cs->filename + 4);
-     }
+ Additionally, virtual APIC support can be advertised to the guest through the
+ ``xen-vapic`` CPU flag:
  
--    /* No normal PV driver initialization for the primary console */
--    if (!con->dev) {
-+    /* No normal PV driver initialization for the primary console under Xen */
-+    if (!con->dev && xen_mode != XEN_EMULATE) {
-         xen_console_connect(xendev, errp);
-     }
- }
-diff --git a/hw/i386/kvm/meson.build b/hw/i386/kvm/meson.build
-index ab143d6474..a4a2e23c06 100644
---- a/hw/i386/kvm/meson.build
-+++ b/hw/i386/kvm/meson.build
-@@ -9,6 +9,7 @@ i386_kvm_ss.add(when: 'CONFIG_XEN_EMU', if_true: files(
-   'xen_evtchn.c',
-   'xen_gnttab.c',
-   'xen_xenstore.c',
-+  'xen_primary_console.c',
-   'xenstore_impl.c',
-   ))
+ .. parsed-literal::
  
-diff --git a/hw/i386/kvm/trace-events b/hw/i386/kvm/trace-events
-index e4c82de6f3..67bf7f174e 100644
---- a/hw/i386/kvm/trace-events
-+++ b/hw/i386/kvm/trace-events
-@@ -18,3 +18,5 @@ xenstore_watch(const char *path, const char *token) "path %s token %s"
- xenstore_unwatch(const char *path, const char *token) "path %s token %s"
- xenstore_reset_watches(void) ""
- xenstore_watch_event(const char *path, const char *token) "path %s token %s"
-+xen_primary_console_create(void) ""
-+xen_primary_console_reset(int port) "port %u"
-diff --git a/hw/i386/kvm/xen-stubs.c b/hw/i386/kvm/xen-stubs.c
-index ae406e0b02..d03131e686 100644
---- a/hw/i386/kvm/xen-stubs.c
-+++ b/hw/i386/kvm/xen-stubs.c
-@@ -15,6 +15,7 @@
- #include "qapi/qapi-commands-misc-target.h"
+-  |qemu_system| --accel kvm,xen-version=0x4000a,kernel-irqchip=split --cpu host,+xen_vapic
++  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split --cpu host,+xen-vapic
  
- #include "xen_evtchn.h"
-+#include "xen_primary_console.h"
+ When Xen support is enabled, QEMU changes hypervisor identification (CPUID
+ 0x40000000..0x4000000A) to Xen. The KVM identification and features are not
+ advertised to a Xen guest. If Hyper-V is also enabled, the Xen identification
+ moves to leaves 0x40000100..0x4000010A.
  
- void xen_evtchn_snoop_msi(PCIDevice *dev, bool is_msix, unsigned int vector,
-                           uint64_t addr, uint32_t data, bool is_masked)
-@@ -30,6 +31,13 @@ bool xen_evtchn_deliver_pirq_msi(uint64_t address, uint32_t data)
-     return false;
- }
- 
-+void xen_primary_console_create(void)
-+{
-+}
-+
-+void xen_primary_console_set_be_port(uint16_t port)
-+{
-+}
- #ifdef TARGET_I386
- EvtchnInfoList *qmp_xen_event_list(Error **errp)
- {
-diff --git a/hw/i386/kvm/xen_gnttab.c b/hw/i386/kvm/xen_gnttab.c
-index 839ec920a1..0a24f53f20 100644
---- a/hw/i386/kvm/xen_gnttab.c
-+++ b/hw/i386/kvm/xen_gnttab.c
-@@ -25,6 +25,7 @@
- #include "hw/xen/xen_backend_ops.h"
- #include "xen_overlay.h"
- #include "xen_gnttab.h"
-+#include "xen_primary_console.h"
- 
- #include "sysemu/kvm.h"
- #include "sysemu/kvm_xen.h"
-@@ -537,9 +538,13 @@ int xen_gnttab_reset(void)
-     s->nr_frames = 0;
- 
-     memset(s->entries.v1, 0, XEN_PAGE_SIZE * s->max_frames);
+-The Xen platform device is enabled automatically for a Xen guest. This allows
+-a guest to unplug all emulated devices, in order to use Xen PV block and network
+-drivers instead. Under Xen, the boot disk is typically available both via IDE
+-emulation, and as a PV block device. Guest bootloaders typically use IDE to load
+-the guest kernel, which then unplugs the IDE and continues with the Xen PV block
+-device.
 -
-     s->entries.v1[GNTTAB_RESERVED_XENSTORE].flags = GTF_permit_access;
-     s->entries.v1[GNTTAB_RESERVED_XENSTORE].frame = XEN_SPECIAL_PFN(XENSTORE);
+-This configuration can be achieved as follows
+-
+-.. parsed-literal::
+-
+-  |qemu_system| -M pc --accel kvm,xen-version=0x4000a,kernel-irqchip=split \\
+-       -drive file=${GUEST_IMAGE},if=none,id=disk,file.locking=off -device xen-disk,drive=disk,vdev=xvda \\
+-       -drive file=${GUEST_IMAGE},index=2,media=disk,file.locking=off,if=ide
+-
+-It is necessary to use the pc machine type, as the q35 machine uses AHCI instead
+-of legacy IDE, and AHCI disks are not unplugged through the Xen PV unplug
+-mechanism.
+-
+-VirtIO devices can also be used; Linux guests may need to be dissuaded from
+-umplugging them by adding 'xen_emul_unplug=never' on their command line.
+-
+ Properties
+ ----------
  
-+    if (xen_primary_console_get_pfn()) {
-+        s->entries.v1[GNTTAB_RESERVED_CONSOLE].flags = GTF_permit_access;
-+        s->entries.v1[GNTTAB_RESERVED_CONSOLE].frame = XEN_SPECIAL_PFN(CONSOLE);
-+    }
-+
-     return 0;
- }
-diff --git a/hw/i386/kvm/xen_primary_console.c b/hw/i386/kvm/xen_primary_console.c
-new file mode 100644
-index 0000000000..abe79f565b
---- /dev/null
-+++ b/hw/i386/kvm/xen_primary_console.c
-@@ -0,0 +1,193 @@
-+/*
-+ * QEMU Xen emulation: Primary console support
-+ *
-+ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+ *
-+ * Authors: David Woodhouse <dwmw2@infradead.org>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ */
-+
-+#include "qemu/osdep.h"
-+
-+#include "qapi/error.h"
-+
-+#include "hw/sysbus.h"
-+#include "hw/xen/xen.h"
-+#include "hw/xen/xen_backend_ops.h"
-+#include "xen_evtchn.h"
-+#include "xen_overlay.h"
-+#include "xen_primary_console.h"
-+
-+#include "sysemu/kvm.h"
-+#include "sysemu/kvm_xen.h"
-+
-+#include "trace.h"
-+
-+#include "hw/xen/interface/event_channel.h"
-+#include "hw/xen/interface/grant_table.h"
-+
-+#define TYPE_XEN_PRIMARY_CONSOLE "xen-primary-console"
-+OBJECT_DECLARE_SIMPLE_TYPE(XenPrimaryConsoleState, XEN_PRIMARY_CONSOLE)
-+
-+struct XenPrimaryConsoleState {
-+    /*< private >*/
-+    SysBusDevice busdev;
-+    /*< public >*/
-+
-+    MemoryRegion console_page;
-+    void *cp;
-+
-+    evtchn_port_t guest_port;
-+    evtchn_port_t be_port;
-+
-+    struct xengntdev_handle *gt;
-+    void *granted_xs;
-+};
-+
-+struct XenPrimaryConsoleState *xen_primary_console_singleton;
-+
-+static void xen_primary_console_realize(DeviceState *dev, Error **errp)
-+{
-+    XenPrimaryConsoleState *s = XEN_PRIMARY_CONSOLE(dev);
-+
-+    if (xen_mode != XEN_EMULATE) {
-+        error_setg(errp, "Xen primary console support is for Xen emulation");
-+        return;
-+    }
-+
-+    memory_region_init_ram(&s->console_page, OBJECT(dev), "xen:console_page",
-+                           XEN_PAGE_SIZE, &error_abort);
-+    memory_region_set_enabled(&s->console_page, true);
-+    s->cp = memory_region_get_ram_ptr(&s->console_page);
-+    memset(s->cp, 0, XEN_PAGE_SIZE);
-+
-+    /* We can't map it this early as KVM isn't ready */
-+    xen_primary_console_singleton = s;
-+}
-+
-+static void xen_primary_console_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    dc->realize = xen_primary_console_realize;
-+}
-+
-+static const TypeInfo xen_primary_console_info = {
-+    .name          = TYPE_XEN_PRIMARY_CONSOLE,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(XenPrimaryConsoleState),
-+    .class_init    = xen_primary_console_class_init,
-+};
-+
-+
-+void xen_primary_console_create(void)
-+{
-+    DeviceState *dev = sysbus_create_simple(TYPE_XEN_PRIMARY_CONSOLE, -1, NULL);
-+
-+    trace_xen_primary_console_create();
-+
-+    xen_primary_console_singleton = XEN_PRIMARY_CONSOLE(dev);
-+
-+    /*
-+     * Defer the init (xen_primary_console_reset()) until KVM is set up and the
-+     * overlay page can be mapped.
-+     */
-+}
-+
-+static void xen_primary_console_register_types(void)
-+{
-+    type_register_static(&xen_primary_console_info);
-+}
-+
-+type_init(xen_primary_console_register_types)
-+
-+uint16_t xen_primary_console_get_port(void)
-+{
-+    XenPrimaryConsoleState *s = xen_primary_console_singleton;
-+    if (!s) {
-+        return 0;
-+    }
-+    return s->guest_port;
-+}
-+
-+void xen_primary_console_set_be_port(uint16_t port)
-+{
-+    XenPrimaryConsoleState *s = xen_primary_console_singleton;
-+    if (s) {
-+        s->be_port = port;
-+    }
-+}
-+
-+uint64_t xen_primary_console_get_pfn(void)
-+{
-+    XenPrimaryConsoleState *s = xen_primary_console_singleton;
-+    if (!s) {
-+        return 0;
-+    }
-+    return XEN_SPECIAL_PFN(CONSOLE);
-+}
-+
-+void *xen_primary_console_get_map(void)
-+{
-+    XenPrimaryConsoleState *s = xen_primary_console_singleton;
-+    if (!s) {
-+        return 0;
-+    }
-+    return s->cp;
-+}
-+
-+static void alloc_guest_port(XenPrimaryConsoleState *s)
-+{
-+    struct evtchn_alloc_unbound alloc = {
-+        .dom = DOMID_SELF,
-+        .remote_dom = DOMID_QEMU,
-+    };
-+
-+    if (!xen_evtchn_alloc_unbound_op(&alloc)) {
-+        s->guest_port = alloc.port;
-+    }
-+}
-+
-+static void rebind_guest_port(XenPrimaryConsoleState *s)
-+{
-+    struct evtchn_bind_interdomain inter = {
-+        .remote_dom = DOMID_QEMU,
-+        .remote_port = s->be_port,
-+    };
-+
-+    if (!xen_evtchn_bind_interdomain_op(&inter)) {
-+        s->guest_port = inter.local_port;
-+    }
-+
-+    s->be_port = 0;
-+}
-+
-+int xen_primary_console_reset(void)
-+{
-+    XenPrimaryConsoleState *s = xen_primary_console_singleton;
-+    if (!s) {
-+        return 0;
-+    }
-+
-+    if (!memory_region_is_mapped(&s->console_page)) {
-+        uint64_t gpa = XEN_SPECIAL_PFN(CONSOLE) << TARGET_PAGE_BITS;
-+        xen_overlay_do_map_page(&s->console_page, gpa);
-+    }
-+
-+    if (s->be_port) {
-+        rebind_guest_port(s);
-+    } else {
-+        alloc_guest_port(s);
-+    }
-+
-+    trace_xen_primary_console_reset(s->guest_port);
-+
-+    s->gt = qemu_xen_gnttab_open();
-+    uint32_t xs_gntref = GNTTAB_RESERVED_CONSOLE;
-+    s->granted_xs = qemu_xen_gnttab_map_refs(s->gt, 1, xen_domid, &xs_gntref,
-+                                             PROT_READ | PROT_WRITE);
-+
-+    return 0;
-+}
-diff --git a/hw/i386/kvm/xen_primary_console.h b/hw/i386/kvm/xen_primary_console.h
-new file mode 100644
-index 0000000000..7e2989ea0d
---- /dev/null
-+++ b/hw/i386/kvm/xen_primary_console.h
-@@ -0,0 +1,23 @@
-+/*
-+ * QEMU Xen emulation: Primary console support
-+ *
-+ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+ *
-+ * Authors: David Woodhouse <dwmw2@infradead.org>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ */
-+
-+#ifndef QEMU_XEN_PRIMARY_CONSOLE_H
-+#define QEMU_XEN_PRIMARY_CONSOLE_H
-+
-+void xen_primary_console_create(void);
-+int xen_primary_console_reset(void);
-+
-+uint16_t xen_primary_console_get_port(void);
-+void xen_primary_console_set_be_port(uint16_t port);
-+uint64_t xen_primary_console_get_pfn(void);
-+void *xen_primary_console_get_map(void);
-+
-+#endif /* QEMU_XEN_PRIMARY_CONSOLE_H */
-diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
-index b7c0407765..6e651960b3 100644
---- a/hw/i386/kvm/xen_xenstore.c
-+++ b/hw/i386/kvm/xen_xenstore.c
-@@ -25,6 +25,7 @@
- #include "hw/xen/xen_backend_ops.h"
- #include "xen_overlay.h"
- #include "xen_evtchn.h"
-+#include "xen_primary_console.h"
- #include "xen_xenstore.h"
+@@ -63,7 +41,10 @@ The following properties exist on the KVM accelerator object:
+ ``xen-version``
+   This property contains the Xen version in ``XENVER_version`` form, with the
+   major version in the top 16 bits and the minor version in the low 16 bits.
+-  Setting this property enables the Xen guest support.
++  Setting this property enables the Xen guest support. If Xen version 4.5 or
++  greater is specified, the HVM leaf in Xen CPUID is populated. Xen version
++  4.6 enables the vCPU ID in CPUID, and version 4.17 advertises vCPU upcall
++  vector support to the guest.
  
- #include "sysemu/kvm.h"
-@@ -1434,6 +1435,7 @@ static void alloc_guest_port(XenXenstoreState *s)
- int xen_xenstore_reset(void)
- {
-     XenXenstoreState *s = xen_xenstore_singleton;
-+    int console_port;
-     GList *perms;
-     int err;
+ ``xen-evtchn-max-pirq``
+   Xen PIRQs represent an emulated physical interrupt, either GSI or MSI, which
+@@ -83,8 +64,71 @@ The following properties exist on the KVM accelerator object:
+   through simultaneous grants. For guests with large numbers of PV devices and
+   high throughput, it may be desirable to increase this value.
  
-@@ -1470,6 +1472,14 @@ int xen_xenstore_reset(void)
-     relpath_printf(s, perms, "store/ring-ref", "%lu",
-                    XEN_SPECIAL_PFN(XENSTORE));
- 
-+    console_port = xen_primary_console_get_port();
-+    if (console_port) {
-+        relpath_printf(s, perms, "console/ring-ref", "%lu",
-+                       XEN_SPECIAL_PFN(CONSOLE));
-+        relpath_printf(s, perms, "console/port", "%u", console_port);
-+        relpath_printf(s, perms, "console/state", "%u", XenbusStateInitialised);
-+    }
+-OS requirements
+----------------
++Xen paravirtual devices
++-----------------------
 +
-     g_list_free_full(perms, g_free);
- 
-     /*
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index 3ffd1a5333..cc6f1b362f 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -922,6 +922,11 @@ void xen_device_notify_event_channel(XenDevice *xendev,
-     }
- }
- 
-+unsigned int xen_event_channel_get_local_port(XenEventChannel *channel)
-+{
-+    return channel->local_port;
-+}
++The Xen PCI platform device is enabled automatically for a Xen guest. This
++allows a guest to unplug all emulated devices, in order to use paravirtual
++block and network drivers instead.
 +
- void xen_device_unbind_event_channel(XenDevice *xendev,
-                                      XenEventChannel *channel,
-                                      Error **errp)
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index eb440880b5..38d40afa37 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -131,5 +131,6 @@ void xen_device_notify_event_channel(XenDevice *xendev,
- void xen_device_unbind_event_channel(XenDevice *xendev,
-                                      XenEventChannel *channel,
-                                      Error **errp);
-+unsigned int xen_event_channel_get_local_port(XenEventChannel *channel);
- 
- #endif /* HW_XEN_BUS_H */
-diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
-index 1dc9ab0d91..c0631f9cf4 100644
---- a/target/i386/kvm/xen-emu.c
-+++ b/target/i386/kvm/xen-emu.c
-@@ -28,6 +28,7 @@
- #include "hw/i386/kvm/xen_overlay.h"
- #include "hw/i386/kvm/xen_evtchn.h"
- #include "hw/i386/kvm/xen_gnttab.h"
-+#include "hw/i386/kvm/xen_primary_console.h"
- #include "hw/i386/kvm/xen_xenstore.h"
- 
- #include "hw/xen/interface/version.h"
-@@ -182,7 +183,8 @@ int kvm_xen_init(KVMState *s, uint32_t hypercall_msr)
-         return ret;
-     }
- 
--    /* The page couldn't be overlaid until KVM was initialized */
-+    /* The pages couldn't be overlaid until KVM was initialized */
-+    xen_primary_console_reset();
-     xen_xenstore_reset();
- 
-     return 0;
-@@ -812,11 +814,23 @@ static bool handle_get_param(struct kvm_xen_exit *exit, X86CPU *cpu,
-     case HVM_PARAM_STORE_EVTCHN:
-         hp.value = xen_xenstore_get_port();
-         break;
-+    case HVM_PARAM_CONSOLE_PFN:
-+        hp.value = xen_primary_console_get_pfn();
-+        if (!hp.value) {
-+            err = -EINVAL;
-+        }
-+        break;
-+    case HVM_PARAM_CONSOLE_EVTCHN:
-+        hp.value = xen_primary_console_get_port();
-+        if (!hp.value) {
-+            err = -EINVAL;
-+        }
-+        break;
-     default:
-         return false;
-     }
- 
--    if (kvm_copy_to_gva(cs, arg, &hp, sizeof(hp))) {
-+    if (!err && kvm_copy_to_gva(cs, arg, &hp, sizeof(hp))) {
-         err = -EFAULT;
-     }
- out:
-@@ -1427,6 +1441,11 @@ int kvm_xen_soft_reset(void)
-         return err;
-     }
- 
-+    err = xen_primary_console_reset();
-+    if (err) {
-+        return err;
-+    }
++Those paravirtual Xen block, network (and console) devices can be created
++through the command line, and/or hot-plugged.
 +
-     err = xen_xenstore_reset();
-     if (err) {
-         return err;
++To provide a Xen console device, define a character device and then a device
++of type ``xen-console`` to connect to it. For the Xen console equivalent of
++the handy ``-serial mon:stdio`` option, for example:
++
++.. parsed-literal::
++   -chardev -chardev stdio,mux=on,id=char0,signal=off -mon char0 \\
++   -device xen-console,chardev=char0
++
++The Xen network device is ``xen-net-device``, which becomes the default NIC
++model for emulated Xen guests, meaning that just the default ``-nic user``
++should automatically work and present a Xen network device to the guest.
++
++Disks can be configured with '``-drive file=${GUEST_IMAGE},if=xen``' and will
++appear to the guest as ``xvda`` onwards.
++
++Under Xen, the boot disk is typically available both via IDE emulation, and
++as a PV block device. Guest bootloaders typically use IDE to load the guest
++kernel, which then unplugs the IDE and continues with the Xen PV block device.
++
++This configuration can be achieved as follows:
++
++.. parsed-literal::
++
++  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split \\
++       -drive file=${GUEST_IMAGE},if=xen \\
++       -drive file=${GUEST_IMAGE},file.locking=off,if=ide
++
++VirtIO devices can also be used; Linux guests may need to be dissuaded from
++umplugging them by adding '``xen_emul_unplug=never``' on their command line.
++
++Booting Xen PV guests
++---------------------
++
++Booting PV guest kernels is possible by using the Xen PV shim (a version of Xen
++itself, designed to run inside a Xen HVM guest and provide memory management
++services for one guest alone).
++
++The Xen binary is provided as the ``-kernel`` and the guest kernel itself (or
++PV Grub image) as the ``-initrd`` image, which actually just means the first
++multiboot "module". For example:
++
++.. parsed-literal::
++
++  |qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split \\
++       -chardev stdio,id=char0 -device xen-console,chardev=char0 \\
++       -display none  -m 1G  -kernel xen -initrd bzImage \\
++       -append "pv-shim console=xen,pv -- console=hvc0 root=/dev/xvda1" \\
++       -drive file=${GUEST_IMAGE},if=xen
++
++The Xen image must be built with the ``CONFIG_XEN_GUEST`` and ``CONFIG_PV_SHIM``
++options, and as of Xen 4.17, Xen's PV shim mode does not support using a serial
++port; it must have a Xen console or it will panic.
++
++Host OS requirements
++--------------------
+ 
+ The minimal Xen support in the KVM accelerator requires the host to be running
+ Linux v5.12 or newer. Later versions add optimisations: Linux v5.17 added
 -- 
 2.40.1
 
