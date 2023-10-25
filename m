@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A90B2C07545
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:58:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623063.970534 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E87C07545
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:59:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623065.970545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfLL-00018R-6o; Wed, 25 Oct 2023 14:58:47 +0000
+	id 1qvfLW-0001ZE-Fr; Wed, 25 Oct 2023 14:58:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623063.970534; Wed, 25 Oct 2023 14:58:47 +0000
+Received: by outflank-mailman (output) from mailman id 623065.970545; Wed, 25 Oct 2023 14:58:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfLL-00018K-3v; Wed, 25 Oct 2023 14:58:47 +0000
-Received: by outflank-mailman (input) for mailman id 623063;
- Wed, 25 Oct 2023 14:58:45 +0000
+	id 1qvfLW-0001Z7-Am; Wed, 25 Oct 2023 14:58:58 +0000
+Received: by outflank-mailman (input) for mailman id 623065;
+ Wed, 25 Oct 2023 14:58:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w7q9=GH=desiato.srs.infradead.org=BATV+fe87d11d956b9f6f1554+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvfEJ-0000WU-Ei
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:31 +0000
+ id 1qvfE9-0000WU-Di
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:21 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f96a9349-7345-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 16:51:27 +0200 (CEST)
+ id f3d09816-7345-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 16:51:17 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qvfDZ-00GPLz-00; Wed, 25 Oct 2023 14:50:52 +0000
+ id 1qvfDZ-00GPLx-01; Wed, 25 Oct 2023 14:50:52 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qvfDY-002dEe-1i; Wed, 25 Oct 2023 15:50:44 +0100
+ Linux)) id 1qvfDY-002dEF-06; Wed, 25 Oct 2023 15:50:44 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f96a9349-7345-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: f3d09816-7345-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=3ol/nIDXbsJDFoVLEuQ1afcMOMk6Tbtz3hrJIXJZBzY=; b=NFNK6k1K2fwKP7Ocg+F7iiwScE
-	G0hoCGS6u4vyAMHIPvezrI8DEw/b9DGG3KWI2GSeG63nYSvAU5oVobvdrxD+wwKz+9P6PaJC/SaQ5
-	mYNdvDv+InJs82hkPJ+9clbUM9Ko2hDQb35OCg6149Mw9Ioar6ATzO6+CTanCbjudKYK+HHlwEkWv
-	xfHpwHiIA9XDtWJ0deiMHNEUuu/CrzXdy1mN2k9BPitoNbt7OKPcvRhTo8Z0nj1vmvJKOa3nrKRfl
-	r1CwhZVWJW77Cim7VL7UBUjXPm5P+XQVhgUAAWxEA3HOsImeW52PfGmuNr8sqrD9dtlAOcnf5zNjR
-	S2yC23jw==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=RxBAjsQ+mysvOozFK2bkVeJvxuxKEpOcW9P4vMvsaUw=; b=kWEwCVesu3RU1Gi+zD5e+MXOzL
+	TI6NwMrSRoAQx1N/L//K4TlUXhKgj7PQrl+DuBhCNNSDgpxlC7tv6T7Eclwqo3JB/3jdzRkNzQ9qF
+	quoMMtl9n21EtXIqLbI9iMJAqKE5Ob4RUIz7XAD1NO24I6Wwr+QeGorNW5GKyAU6AJbWDsEToPZSu
+	XMKIpWSZ84bjXrvQIeIKE++0nq8nOdav05MHqaccNURQ/24YIQufkFSp5KZYBu8Or7scgLcu/6cHU
+	UsvgICpmvIfuJWV3/+UaFP9GBwV1+sI8ZM3NKS1yiX/c3qj/QciOq9QyDey+tRL/JUEb9G4h67r4c
+	sMq+tCFA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -74,43 +74,65 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v3 11/28] i386/xen: advertise XEN_HVM_CPUID_UPCALL_VECTOR in CPUID
-Date: Wed, 25 Oct 2023 15:50:25 +0100
-Message-Id: <20231025145042.627381-12-dwmw2@infradead.org>
+Subject: [PATCH v3 05/28] hw/xen: fix XenStore watch delivery to guest
+Date: Wed, 25 Oct 2023 15:50:19 +0100
+Message-Id: <20231025145042.627381-6-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025145042.627381-1-dwmw2@infradead.org>
 References: <20231025145042.627381-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This will allow Linux guests (since v6.0) to use the per-vCPU upcall
-vector delivered as MSI through the local APIC.
+When fire_watch_cb() found the response buffer empty, it would call
+deliver_watch() to generate the XS_WATCH_EVENT message in the response
+buffer and send an event channel notification to the guest… without
+actually *copying* the response buffer into the ring. So there was
+nothing for the guest to see. The pending response didn't actually get
+processed into the ring until the guest next triggered some activity
+from its side.
 
+Add the missing call to put_rsp().
+
+It might have been slightly nicer to call xen_xenstore_event() here,
+which would *almost* have worked. Except for the fact that it calls
+xen_be_evtchn_pending() to check that it really does have an event
+pending (and clear the eventfd for next time). And under Xen it's
+defined that setting that fd to O_NONBLOCK isn't guaranteed to work,
+so the emu implementation follows suit.
+
+This fixes Xen device hot-unplug.
+
+Fixes: 0254c4d19df ("hw/xen: Add xenstore wire implementation and implementation stubs")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- target/i386/kvm/kvm.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ hw/i386/kvm/xen_xenstore.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index e7c054cc16..8f93a0b5fc 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -1889,6 +1889,10 @@ int kvm_arch_init_vcpu(CPUState *cs)
-                 c->eax |= XEN_HVM_CPUID_VCPU_ID_PRESENT;
-                 c->ebx = cs->cpu_index;
-             }
-+
-+            if (cs->kvm_state->xen_version >= XEN_VERSION(4, 17)) {
-+                c->eax |= XEN_HVM_CPUID_UPCALL_VECTOR;
-+            }
-         }
+diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
+index 660d0b72f9..8e716a7009 100644
+--- a/hw/i386/kvm/xen_xenstore.c
++++ b/hw/i386/kvm/xen_xenstore.c
+@@ -1357,10 +1357,12 @@ static void fire_watch_cb(void *opaque, const char *path, const char *token)
+     } else {
+         deliver_watch(s, path, token);
+         /*
+-         * If the message was queued because there was already ring activity,
+-         * no need to wake the guest. But if not, we need to send the evtchn.
++         * Attempt to queue the message into the actual ring, and send
++         * the event channel notification if any bytes are copied.
+          */
+-        xen_be_evtchn_notify(s->eh, s->be_port);
++        if (s->rsp_pending && put_rsp(s) > 0) {
++            xen_be_evtchn_notify(s->eh, s->be_port);
++        }
+     }
+ }
  
-         r = kvm_xen_init_vcpu(cs);
 -- 
 2.40.1
 
