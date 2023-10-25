@@ -4,35 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5270BC25B6B
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 21:12:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623318.971074 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F97C25B6B
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 21:25:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623326.971109 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvlB0-0007VA-Sb; Wed, 25 Oct 2023 21:12:30 +0000
+	id 1qvlMw-0003CN-RX; Wed, 25 Oct 2023 21:24:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623318.971074; Wed, 25 Oct 2023 21:12:30 +0000
+Received: by outflank-mailman (output) from mailman id 623326.971109; Wed, 25 Oct 2023 21:24:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvlB0-0007V3-PO; Wed, 25 Oct 2023 21:12:30 +0000
-Received: by outflank-mailman (input) for mailman id 623318;
- Wed, 25 Oct 2023 21:12:29 +0000
+	id 1qvlMw-0003Aa-Lz; Wed, 25 Oct 2023 21:24:50 +0000
+Received: by outflank-mailman (input) for mailman id 623326;
+ Wed, 25 Oct 2023 21:24:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/NE+=GH=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1qvlAz-0007Ux-Gn
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 21:12:29 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ <SRS0=sdGm=GH=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
+ id 1qvlMv-0002mN-G3
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 21:24:49 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2061b.outbound.protection.outlook.com
+ [2a01:111:f400:7eaa::61b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 327ed7d1-737b-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 23:12:26 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7D84E63175;
- Wed, 25 Oct 2023 21:12:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74883C433C7;
- Wed, 25 Oct 2023 21:12:23 +0000 (UTC)
+ id eb7d77fe-737c-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 23:24:47 +0200 (CEST)
+Received: from DS7PR03CA0293.namprd03.prod.outlook.com (2603:10b6:5:3ad::28)
+ by PH7PR12MB8015.namprd12.prod.outlook.com (2603:10b6:510:26a::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.33; Wed, 25 Oct
+ 2023 21:24:43 +0000
+Received: from DS3PEPF000099DF.namprd04.prod.outlook.com
+ (2603:10b6:5:3ad:cafe::50) by DS7PR03CA0293.outlook.office365.com
+ (2603:10b6:5:3ad::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.35 via Frontend
+ Transport; Wed, 25 Oct 2023 21:24:43 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS3PEPF000099DF.mail.protection.outlook.com (10.167.17.202) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6933.15 via Frontend Transport; Wed, 25 Oct 2023 21:24:43 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Wed, 25 Oct
+ 2023 16:24:38 -0500
+Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.32 via Frontend
+ Transport; Wed, 25 Oct 2023 16:24:37 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,80 +61,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 327ed7d1-737b-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1698268345;
-	bh=n2OfcSoTropCqj3leuEOQlb1rpQJCAsO6RcUYwIZyMw=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=AexPsLRd3b99QKj3ZymM1hK8dgxYuAAtQahYMRIarlsyIu/PCJEwmhQtzZl0vuLDO
-	 EBLS8xCbRGrMjQcS3nQYyx4PL+vqfymk+4wf6KTsGk4mNd1hrXAky43dBWFccuSrSl
-	 Asc6WUK8IajoKkhVLPpElu0fkwt10KfzVvuHxsW8e8Jqsn/0oyCjrupvgEcfgc/mRm
-	 I6+/Ubuc44XMOOUbSyeyKvXrj3zkx+v2MdQWEeAz0GgaOCPdhzV0bagMESyqDfiNUy
-	 Rx7RXdcxyaDgtscSkFUvaPpsNWuUx5oVbQKcKOE0yA00/EzwoBZXZWkgm36uX9oppv
-	 VthaWpuk/Eeaw==
-Date: Wed, 25 Oct 2023 14:12:22 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Julien Grall <julien@xen.org>
-cc: Jan Beulich <jbeulich@suse.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Stefano Stabellini <stefano.stabellini@amd.com>, 
-    Simone Ballarin <simone.ballarin@bugseng.com>, consulting@bugseng.com, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    Doug Goldstein <cardoe@cardoe.com>, 
-    Bertrand Marquis <bertrand.marquis@arm.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-    xen-devel@lists.xenproject.org
-Subject: Re: [XEN PATCH v2 00/10] address violations of MISRA C:2012 Directive
- 4.10
-In-Reply-To: <1fc2c191-79b7-43fc-9068-5605e741c243@xen.org>
-Message-ID: <alpine.DEB.2.22.394.2310251408030.271731@ubuntu-linux-20-04-desktop>
-References: <cover.1694510856.git.simone.ballarin@bugseng.com> <alpine.DEB.2.22.394.2310171709310.965337@ubuntu-linux-20-04-desktop> <ead797ed-84cc-fb70-5259-7e11211d049e@suse.com> <alpine.DEB.2.22.394.2310181739270.965337@ubuntu-linux-20-04-desktop>
- <e642bc2a-cefa-4ee4-6394-3c10102e8164@suse.com> <alpine.DEB.2.22.394.2310190915590.1945130@ubuntu-linux-20-04-desktop> <6374f0f4-d58f-83ca-6eb3-d5a9fcbac525@suse.com> <alpine.DEB.2.22.394.2310201622160.2356865@ubuntu-linux-20-04-desktop>
- <36e6dd08-918c-9791-0dab-ca75d4b98d7e@suse.com> <alpine.DEB.2.22.394.2310231346370.3516@ubuntu-linux-20-04-desktop> <af4a86bc-40d3-4363-adc8-30981652cd2b@xen.org> <c1fa350f-6f49-e2b1-0cda-dec99df415ae@suse.com> <alpine.DEB.2.22.394.2310241254480.271731@ubuntu-linux-20-04-desktop>
- <f546b8dc-baa8-c178-12be-70f7c1a8fec8@suse.com> <50b3a500-aa7d-4d3d-8bcf-220f8ee69b0e@xen.org> <f6b207c6-4bc2-e172-428c-a2e3294cc490@suse.com> <1fc2c191-79b7-43fc-9068-5605e741c243@xen.org>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: eb7d77fe-737c-11ee-9b0e-b553b5be7939
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HUzVRk8IJpwny3AyZpJiV+E7xu124CDPe2cFG54n9/stCYaP+u5UdG1JBC7hKDjKIj/8LYQaZu3ungmZ5kX3V6XYtCK6x3IsViZwiAk8N9eFOA6wPoC1UzFD4Kr5UIX5wdBo6Ku8AQn7XB8dtTXYnwK4XG2YyE1JYme/8s/Zzuena5mHVqh/tNxRVPiArenrrD2649ErILgcUbPEwrQ1M9U05XOp9rU8/e22VJDS5yNoIf0gFCoGFNmQQEOybv4CuBtBOvLPw6QUHaio0umcAGD7mX/ZzidxmFisr9hscrKTK3A55xNz1Q8UMYUx45/dBrWDm35ZZGS9GuxRM33kjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mET7kcl9UXXPRp5J6MoXxeoteODqvxROwm3Ecdt2YHM=;
+ b=L54Gsgu9lvYQuOOiRH3Lnd4vuIckJkm63+8Wh8ADL0G84BGqZ+iPu5V9ymyC/QOWjiTpjoEdKG4FacfqYa37ox8EvzDLsVXGCXXtnQZdX9DaDQNKC9ct3o8IZ9k9jphKQBzx8HKzii9rXx9I5G++5gQDDfwKvOADQ3G9ICCIrqmppfP72j1GxAbbmMcuQd+sGhcFxVbQZ11nL86fZ3MNWK+4mh+RGX/Ts5w3ItBCmYycEdhMflVHNxGtVeRViz9u9bFg0xGaQJx4UfhUWfvGw8tLzzvjI8QYMg08FJmog347VQMdnlz2xwmghwGd7ZbXtQSLv1Y4w2S7MeRCq93IKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mET7kcl9UXXPRp5J6MoXxeoteODqvxROwm3Ecdt2YHM=;
+ b=LPKxhpH3He1LUk5nz5kJkkKDwXxyR2IkcDmHfhH8BeSDxjm47uqwbstdvzEgXSBVtPc5s06MPVfjKIqVuh7EAE90RJw7m6J2Hd1jNwxbbuGtmP7Z/NefpGegWCtOUH+DImPF7zY5FvlL7B7tSHAbuiaBLjmyu0WuU0YEuETLfow=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Vikram Garhwal <vikram.garhwal@amd.com>
+To: <qemu-devel@nongnu.org>
+CC: <sstabellini@kernel.org>, <vikram.garhwal@amd.com>, <jgross@suse.com>,
+	Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+	"open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
+Subject: [QEMU][PATCHv2 5/8] xen: let xen_ram_addr_from_mapcache() return -1 in case of not found entry
+Date: Wed, 25 Oct 2023 14:24:18 -0700
+Message-ID: <20231025212422.30371-6-vikram.garhwal@amd.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20231025212422.30371-1-vikram.garhwal@amd.com>
+References: <20231025212422.30371-1-vikram.garhwal@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DF:EE_|PH7PR12MB8015:EE_
+X-MS-Office365-Filtering-Correlation-Id: eb251ac1-76e0-4082-da4f-08dbd5a0ce6c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	sBM53jdzwRhG04qo8BJM7dlxyvUqIZpGeYp5zQq+HPm6t1UAJYh4X3NDFrh9tShD87nZ+KfOqgwTe6NCP7uKeMcCehVd/XrhYgv93sdHeQpfX6OsnjuJOtnVsyACsgZhOY8d9Z6qCYd4xKDjOXY42rarB4mXn+S6MLAkfERZBpFcSDxbKOv/voegP80vadrU7VNlKsduMzF1Pe10ynMUXrEePbIiAsM9a1SuJxcy41Oiybz+Sl+fS9orHYT8/SmSm6YwhdwFspctKK9mHeqaySzW1DJSedpL0ENAOQ83jtp9j4cPtAFaaZvIwDK9VKXU50EQwjeMfZYykLB3MhNitlnB9nKfHOmzk8X5/ntvS/5OIBEfvRTy8gt1MkbGPosbTWgw3pRlKXoOd9MeF6IqcCt2jO+sS8kAOKpu2XFsSUvlqb34KOTl0Uy+QqsJLUG/zEAmG8aMNu332FEik0VhiRjoNVkY/pWGI1ilOt/ZhVOpMSn1UznpecgQ69HUWDDpvr3mxlpzJrp1vNi4TcEuYfNS4BUe6uQn/rVs3h6kIpZCYieFxmwdN+As8eKAKoPrmjAZ/jBEc+irkh9LjzoNMgqDg4pLgc79tevsA9osOiFiQvVxc0PrQR/rBxdVDXAr0TqUP1LEiLlJDkdDhpscRRE6ci5r5DxqRDJF3h7/LFjklGlUDRNz4xoRnSzpNgw1gZ51mY6qIvSue7KgFbzuBD4FjEDo9/9ptxK1OvfjNDX0n3Hf7yzK/u6A2zzlJUtEp6Q4aX2qijOv3y40LQOdFw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(376002)(346002)(39860400002)(396003)(230922051799003)(82310400011)(186009)(64100799003)(1800799009)(451199024)(46966006)(36840700001)(40470700004)(26005)(41300700001)(2906002)(44832011)(40460700003)(36756003)(5660300002)(4326008)(86362001)(8676002)(8936002)(478600001)(2616005)(6916009)(1076003)(36860700001)(356005)(82740400003)(316002)(70206006)(70586007)(54906003)(6666004)(83380400001)(40480700001)(336012)(47076005)(81166007)(426003)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2023 21:24:43.5749
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb251ac1-76e0-4082-da4f-08dbd5a0ce6c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS3PEPF000099DF.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8015
 
-On Wed, 25 Oct 2023, Julien Grall wrote:
-> On 25/10/2023 17:01, Jan Beulich wrote:
-> > On 25.10.2023 17:58, Julien Grall wrote:
-> > > On 25/10/2023 09:18, Jan Beulich wrote:
-> > > > On 24.10.2023 21:59, Stefano Stabellini wrote:
-> > > > > If I understood correctly I am fine with that. To make sure we are all
-> > > > > on the same page, can you provide a couple of samples?
-> > > > 
-> > > > Taking the earlier example, instead of DRIVERS_PASSTHROUGH_VTD_DMAR_H it
-> > > > would then be VTD_DMAR_H. arch/x86/pv/mm.h would use PV_MM_H, but then
-> > > > you can already see that a hypothetical arch/x86/mm.h would use
-> > > > X86_MM_H,
-> > > > thus colliding with what your proposal would also yield for
-> > > > arch/x86/include/asm/mm.h. So maybe private header guards should come
-> > > > with e.g. a trailing underscore? Or double underscores as component
-> > > > separators, where .../include/... use only single underscores? Or
-> > > > headers in arch/*/include/asm/ use ASM_<name>_H (i.e. not making the
-> > > > architecture explicit in the guard name, on the grounds that headers
-> > > > from multiple architectures shouldn't be included at the same time)?
-> > > Thanks for providing some details.  The proposal for private headers
-> > > make sense. For arch/.../include/asm/ headers, I would strongly prefer
-> > > if we use prefix them with ASM_*.
-> > > 
-> > > As a side note, I am guessing for asm-generic, we would want to use
-> > > ASM_GENERIC_* for the guard prefix. Is that correct?
-> > 
-> > That was an assumption I was working from, yes. Could also be just
-> > GENERIC_ afaic.
-> 
-> Thanks for the confirmation. I am fine with either GENERIC_ or ASM_GENERIC_.
+From: Juergen Gross <jgross@suse.com>
 
-OK. So in summary:
-- arch/.../include/asm/ headers would use ASM_<filename>_H
-- private headers would use <dir>_<filename>_H
-- asm-generic headers would use ASM_GENERIC_<filename>_H
+Today xen_ram_addr_from_mapcache() will either abort() or return 0 in
+case it can't find a matching entry for a pointer value. Both cases
+are bad, so change that to return an invalid address instead.
 
-If that's agreed, we can move forward with the patch following this
-scheme.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+ hw/xen/xen-mapcache.c | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
+
+diff --git a/hw/xen/xen-mapcache.c b/hw/xen/xen-mapcache.c
+index 8115c44c00..8a61c7dde6 100644
+--- a/hw/xen/xen-mapcache.c
++++ b/hw/xen/xen-mapcache.c
+@@ -404,13 +404,8 @@ ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
+         }
+     }
+     if (!found) {
+-        fprintf(stderr, "%s, could not find %p\n", __func__, ptr);
+-        QTAILQ_FOREACH(reventry, &mapcache->locked_entries, next) {
+-            DPRINTF("   "HWADDR_FMT_plx" -> %p is present\n", reventry->paddr_index,
+-                    reventry->vaddr_req);
+-        }
+-        abort();
+-        return 0;
++        mapcache_unlock();
++        return RAM_ADDR_INVALID;
+     }
+ 
+     entry = &mapcache->entry[paddr_index % mapcache->nr_buckets];
+@@ -418,8 +413,7 @@ ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
+         entry = entry->next;
+     }
+     if (!entry) {
+-        DPRINTF("Trying to find address %p that is not in the mapcache!\n", ptr);
+-        raddr = 0;
++        raddr = RAM_ADDR_INVALID;
+     } else {
+         raddr = (reventry->paddr_index << MCACHE_BUCKET_SHIFT) +
+              ((unsigned long) ptr - (unsigned long) entry->vaddr_base);
+-- 
+2.17.1
+
 
