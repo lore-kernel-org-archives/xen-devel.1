@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26495C25B6D
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:51:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.622976.970404 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E99BCC25B47
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:54:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.622995.970414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfE9-0004kk-Tz; Wed, 25 Oct 2023 14:51:21 +0000
+	id 1qvfGd-0000yD-ET; Wed, 25 Oct 2023 14:53:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 622976.970404; Wed, 25 Oct 2023 14:51:21 +0000
+Received: by outflank-mailman (output) from mailman id 622995.970414; Wed, 25 Oct 2023 14:53:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfE9-0004kL-Pf; Wed, 25 Oct 2023 14:51:21 +0000
-Received: by outflank-mailman (input) for mailman id 622976;
- Wed, 25 Oct 2023 14:51:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qvfGd-0000y6-By; Wed, 25 Oct 2023 14:53:55 +0000
+Received: by outflank-mailman (input) for mailman id 622995;
+ Wed, 25 Oct 2023 14:53:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w7q9=GH=desiato.srs.infradead.org=BATV+fe87d11d956b9f6f1554+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvfE8-0008W8-BO
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:20 +0000
+ id 1qvfEI-0000WU-Ec
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:30 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f518d2eb-7345-11ee-98d5-6d05b1d4d9a1;
- Wed, 25 Oct 2023 16:51:19 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f877121b-7345-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 16:51:25 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qvfDa-00GPM3-1E; Wed, 25 Oct 2023 14:50:59 +0000
+ id 1qvfDZ-00GPLu-00; Wed, 25 Oct 2023 14:51:04 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qvfDZ-002dFB-0E; Wed, 25 Oct 2023 15:50:45 +0100
+ Linux)) id 1qvfDX-002dE3-2b; Wed, 25 Oct 2023 15:50:43 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f518d2eb-7345-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: f877121b-7345-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=ASyx27ABg/WdxWXFMwdeXHtm2HUFOe8n8pbrbgV+R1U=; b=KSw3c28aYsIp9zBAi8cllWWDpi
-	K8vfkVYz6/oGDNu+k4/VRrApYRSLjOfuKlvOwBUVg9jYOF+gWouYRyma5JLfDxUpY1onGCtNGKQpF
-	zBsNj3EUDXg0QWtWYUPvY8uBRIl54dJgWQvWuC8EvuOKw6VRy1J5bsJjkNwyijb/fI6mRiUfwhjVr
-	OvRtBYcurzH/qFdJ06Lnsu0ODcytGK3P/g3Yqk3V1hxBDbf4R/qHZHjO+ItsHl7JrxZ/wE1tPEl0Q
-	SroVpabcjcZWsiltYy0DIQdggLoMb/3M7L35Jlh++igC9qdxOa4z4pbQiGOsgSw1X5wI0fL9zweFf
-	32KoOv9A==;
+	bh=c1KnGQGfi3x53zdFBlcTqfnMwSbqzHUr3v6mm/A0vwE=; b=MTOqGgH08Ha9n5op96rLk0cUN1
+	wrSDL9Zs8TWudFgFJacVmoXeWHuZuMM25p9iLuSAJRwni4Pp8vZVd2wVwJG/jYJ5YXI+hMPkbPV23
+	btkqGYMy6rjvy8XJJq2oIK6of/Lli+tTc9jNmWYGDBGuMYkFGWN71sFXw9nPnDhlGT6EoEFjh3jbX
+	fl3uNsNgDdRUXagpX6nvaN6UtMjLhKSuVWo/ScfKujBJlhWsB3MGDFgDNuL5vNukoz5A8blcT8EyH
+	6fweryHNiDOKzm24bkI5E9w/ZJAWQ4sPR3DB95dMIlz1DwCOUJDMp1Z7GV/zznFcI5Nu4ztjVEpwQ
+	WphupaaQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -74,9 +74,9 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v3 18/28] hw/xen: only remove peers of PCI NICs on unplug
-Date: Wed, 25 Oct 2023 15:50:32 +0100
-Message-Id: <20231025145042.627381-19-dwmw2@infradead.org>
+Subject: [PATCH v3 02/28] i386/xen: fix per-vCPU upcall vector for Xen emulation
+Date: Wed, 25 Oct 2023 15:50:16 +0100
+Message-Id: <20231025145042.627381-3-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025145042.627381-1-dwmw2@infradead.org>
 References: <20231025145042.627381-1-dwmw2@infradead.org>
@@ -87,35 +87,57 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-When the Xen guest asks to unplug *emulated* NICs, it's kind of unhelpful
-also to unplug the peer of the *Xen* PV NIC.
+The per-vCPU upcall vector support had three problems. Firstly it was
+using the wrong hypercall argument and would always return -EFAULT when
+the guest tried to set it up. Secondly it was using the wrong ioctl() to
+pass the vector to the kernel and thus the *kernel* would always return
+-EINVAL. Finally, even when delivering the event directly from userspace
+with an MSI, it put the destination CPU ID into the wrong bits of the
+MSI address.
 
+Linux doesn't (yet) use this mode so it went without decent testing
+for a while.
+
+Fixes: 105b47fdf2d0 ("i386/xen: implement HVMOP_set_evtchn_upcall_vector")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/xen/xen_platform.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ target/i386/kvm/xen-emu.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/hw/i386/xen/xen_platform.c b/hw/i386/xen/xen_platform.c
-index 17457ff3de..e2dd1b536a 100644
---- a/hw/i386/xen/xen_platform.c
-+++ b/hw/i386/xen/xen_platform.c
-@@ -140,9 +140,14 @@ static void unplug_nic(PCIBus *b, PCIDevice *d, void *o)
- /* Remove the peer of the NIC device. Normally, this would be a tap device. */
- static void del_nic_peer(NICState *nic, void *opaque)
- {
--    NetClientState *nc;
-+    NetClientState *nc = qemu_get_queue(nic);
-+    ObjectClass *klass = module_object_class_by_name(nc->model);
-+
-+    /* Only delete peers of PCI NICs that we're about to delete */
-+    if (!klass || !object_class_dynamic_cast(klass, TYPE_PCI_DEVICE)) {
-+        return;
-+    }
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index 0055441b2e..7c504d9fa4 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -306,7 +306,7 @@ static int kvm_xen_set_vcpu_callback_vector(CPUState *cs)
  
--    nc = qemu_get_queue(nic);
-     if (nc->peer)
-         qemu_del_net_client(nc->peer);
+     trace_kvm_xen_set_vcpu_callback(cs->cpu_index, vector);
+ 
+-    return kvm_vcpu_ioctl(cs, KVM_XEN_HVM_SET_ATTR, &xva);
++    return kvm_vcpu_ioctl(cs, KVM_XEN_VCPU_SET_ATTR, &xva);
  }
+ 
+ static void do_set_vcpu_callback_vector(CPUState *cs, run_on_cpu_data data)
+@@ -440,7 +440,8 @@ void kvm_xen_inject_vcpu_callback_vector(uint32_t vcpu_id, int type)
+          * deliver it as an MSI.
+          */
+         MSIMessage msg = {
+-            .address = APIC_DEFAULT_ADDRESS | X86_CPU(cs)->apic_id,
++            .address = APIC_DEFAULT_ADDRESS |
++                       (X86_CPU(cs)->apic_id << MSI_ADDR_DEST_ID_SHIFT),
+             .data = vector | (1UL << MSI_DATA_LEVEL_SHIFT),
+         };
+         kvm_irqchip_send_msi(kvm_state, msg);
+@@ -849,8 +850,7 @@ static bool kvm_xen_hcall_hvm_op(struct kvm_xen_exit *exit, X86CPU *cpu,
+     int ret = -ENOSYS;
+     switch (cmd) {
+     case HVMOP_set_evtchn_upcall_vector:
+-        ret = kvm_xen_hcall_evtchn_upcall_vector(exit, cpu,
+-                                                 exit->u.hcall.params[0]);
++        ret = kvm_xen_hcall_evtchn_upcall_vector(exit, cpu, arg);
+         break;
+ 
+     case HVMOP_pagetable_dying:
 -- 
 2.40.1
 
