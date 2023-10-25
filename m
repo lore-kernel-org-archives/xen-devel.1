@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A4EAC0032E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:56:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623029.970454 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 318E7C0032E
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:56:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623035.970463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfJ6-0004FF-O9; Wed, 25 Oct 2023 14:56:28 +0000
+	id 1qvfJT-0004vz-Vj; Wed, 25 Oct 2023 14:56:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623029.970454; Wed, 25 Oct 2023 14:56:28 +0000
+Received: by outflank-mailman (output) from mailman id 623035.970463; Wed, 25 Oct 2023 14:56:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfJ6-0004F8-LU; Wed, 25 Oct 2023 14:56:28 +0000
-Received: by outflank-mailman (input) for mailman id 623029;
- Wed, 25 Oct 2023 14:56:28 +0000
+	id 1qvfJT-0004vq-TD; Wed, 25 Oct 2023 14:56:51 +0000
+Received: by outflank-mailman (input) for mailman id 623035;
+ Wed, 25 Oct 2023 14:56:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w7q9=GH=desiato.srs.infradead.org=BATV+fe87d11d956b9f6f1554+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvfE8-0000WU-Da
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:20 +0000
+ id 1qvfEF-0000WU-EF
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:27 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f3d0b1d2-7345-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 16:51:17 +0200 (CEST)
+ id f5afbd6d-7345-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 16:51:21 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qvfDa-00GPM6-1D; Wed, 25 Oct 2023 14:50:52 +0000
+ id 1qvfDZ-00GPLy-00; Wed, 25 Oct 2023 14:50:52 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qvfDZ-002dFU-1H; Wed, 25 Oct 2023 15:50:45 +0100
+ Linux)) id 1qvfDY-002dER-0t; Wed, 25 Oct 2023 15:50:44 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f3d0b1d2-7345-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: f5afbd6d-7345-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=SKjWRXIgiNg5ff3bqQvSLiVcvlPitO7cHPHfc8XhUXU=; b=i2fwrV8zZ2vjfC4alhYHqho5Kg
-	69ItbcjuoufZl6Gv9FMYnIEB1jR+EI2qtRRyqdOFgFYEK1LzG6KxP647hv5/G6my2/D3e1Nf518Bs
-	bpsvnspf+G1TgFmvc69VdUs+xMWSbH3w/d4GIgFwg5c42Bt8j3HQ0PB1C/Uw/bTNjij8N3BLhn+ME
-	sAQG8vSqxTsmOj0rSVeluMyopsAtLcdgMvZEUnRoZLqQP3/BB165JjV78qWqWj2nFaH3b3IQwlvyc
-	qdKCIT24XkYpjsTqPbsyzvjsef9hJe/F4fTkTDMQPAPKlnUOqPmS4ZrhiS0hKFMIO3E4buVrrQeEB
-	WiLXn9OQ==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=whwrxQfu34eIg/PcGjcBAI/B4Oo/UALoBhuUlK3a190=; b=KDzGOyRparAnnjvPQuEd8zIi5K
+	k7eb8lLOjHiB0WgXqvHuzQDwCGSF8SeNp3WXmidEbK2bWXOc8w6x3TD6K+UXDO4sPnW2qMxW/v5SM
+	JkSb1Z2JTnWnr0HgbFIP0bx5OGzSEiK94Vb17zrb+YHVm0KZ7bymHP1u6UIhnhK+Bc6wUnU6y7Tcd
+	QiEF0/VJRFk98yveKudVwc1RUon2pG3PxUld5/P+sDKlYT/AT53ZbUp+UowXdbZhIXvkNmCB2PEB1
+	nhKcb/KtHS5HnBx5aIdzj2GaTnYdKhVRfmjK8CnHDLlElncrHUR+DaNttogg600wZhp3rq1/l+3G0
+	urtNKg8g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -74,119 +74,89 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v3 22/28] net: add qemu_{configure,create}_nic_device(), qemu_find_nic_info()
-Date: Wed, 25 Oct 2023 15:50:36 +0100
-Message-Id: <20231025145042.627381-23-dwmw2@infradead.org>
+Subject: [PATCH v3 08/28] i386/xen: Ignore VCPU_SSHOTTMR_future flag in set_singleshot_timer()
+Date: Wed, 25 Oct 2023 15:50:22 +0100
+Message-Id: <20231025145042.627381-9-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025145042.627381-1-dwmw2@infradead.org>
 References: <20231025145042.627381-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Most code which directly accesses nd_table[] and nb_nics uses them for
-one of two things. Either "I have created a NIC device and I'd like a
-configuration for it", or "I will create a NIC device *if* there is a
-configuration for it".  With some variants on the theme around whether
-they actually *check* if the model specified in the configuration is
-the right one.
+Upstream Xen now ignores this flag¹, since the only guest kernel ever to
+use it was buggy.
 
-Provide functions which perform both of those, allowing platforms to
-be a little more consistent and as a step towards making nd_table[]
-and nb_nics private to the net code.
-
-Also export the qemu_find_nic_info() helper, as some platforms have
-special cases they need to handle.
+¹ https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=19c6cbd909
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- include/net/net.h |  7 ++++++-
- net/net.c         | 51 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 57 insertions(+), 1 deletion(-)
+ target/i386/kvm/xen-emu.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 2fb1c9181c..56be694c75 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -205,7 +205,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
- void qemu_check_nic_model(NICInfo *nd, const char *model);
- int qemu_find_nic_model(NICInfo *nd, const char * const *models,
-                         const char *default_model);
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index 75b2c557b9..1dc9ab0d91 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -1077,17 +1077,13 @@ static int vcpuop_stop_periodic_timer(CPUState *target)
+  * Must always be called with xen_timers_lock held.
+  */
+ static int do_set_singleshot_timer(CPUState *cs, uint64_t timeout_abs,
+-                                   bool future, bool linux_wa)
++                                   bool linux_wa)
+ {
+     CPUX86State *env = &X86_CPU(cs)->env;
+     int64_t now = kvm_get_current_ns();
+     int64_t qemu_now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+     int64_t delta = timeout_abs - now;
+ 
+-    if (future && timeout_abs < now) {
+-        return -ETIME;
+-    }
 -
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias);
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias);
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias);
- void print_net_client(Monitor *mon, NetClientState *nc);
- void net_socket_rs_init(SocketReadState *rs,
-                         SocketReadStateFinalize *finalize,
-diff --git a/net/net.c b/net/net.c
-index bbe33da176..f8b4973a1e 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1072,6 +1072,57 @@ static int net_init_nic(const Netdev *netdev, const char *name,
-     return idx;
+     if (linux_wa && unlikely((int64_t)timeout_abs < 0 ||
+                              (delta > 0 && (uint32_t)(delta >> 50) != 0))) {
+         /*
+@@ -1129,9 +1125,13 @@ static int vcpuop_set_singleshot_timer(CPUState *cs, uint64_t arg)
+     }
+ 
+     QEMU_LOCK_GUARD(&X86_CPU(cs)->env.xen_timers_lock);
+-    return do_set_singleshot_timer(cs, sst.timeout_abs_ns,
+-                                   !!(sst.flags & VCPU_SSHOTTMR_future),
+-                                   false);
++
++    /*
++     * We ignore the VCPU_SSHOTTMR_future flag, just as Xen now does.
++     * The only guest that ever used it, got it wrong.
++     * https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=19c6cbd909
++     */
++    return do_set_singleshot_timer(cs, sst.timeout_abs_ns, false);
  }
  
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias)
-+{
-+    NICInfo *nd;
-+    int i;
-+
-+    for (i = 0; i < nb_nics; i++) {
-+        nd = &nd_table[i];
-+
-+        if (!nd->used || nd->instantiated) {
-+            continue;
-+        }
-+
-+        if ((match_default && !nd->model) || !g_strcmp0(nd->model, typename)
-+            || (alias && !g_strcmp0(nd->model, alias))) {
-+            return nd;
-+        }
-+    }
-+    return NULL;
-+}
-+
-+
-+/* "I have created a device. Please configure it if you can" */
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(object_get_typename(OBJECT(dev)),
-+                                     match_default, alias);
-+
-+    if (nd) {
-+        qdev_set_nic_properties(dev, nd);
-+        return true;
-+    }
-+    return false;
-+}
-+
-+/* "Please create a device, if you have a configuration for it" */
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
-+    DeviceState *dev;
-+
-+    if (!nd) {
-+        return NULL;
-+    }
-+
-+    dev = qdev_new(typename);
-+    qdev_set_nic_properties(dev, nd);
-+    return dev;
-+}
- 
- static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
-     const Netdev *netdev,
+ static int vcpuop_stop_singleshot_timer(CPUState *cs)
+@@ -1156,7 +1156,7 @@ static bool kvm_xen_hcall_set_timer_op(struct kvm_xen_exit *exit, X86CPU *cpu,
+         err = vcpuop_stop_singleshot_timer(CPU(cpu));
+     } else {
+         QEMU_LOCK_GUARD(&X86_CPU(cpu)->env.xen_timers_lock);
+-        err = do_set_singleshot_timer(CPU(cpu), timeout, false, true);
++        err = do_set_singleshot_timer(CPU(cpu), timeout, true);
+     }
+     exit->u.hcall.result = err;
+     return true;
+@@ -1844,7 +1844,7 @@ int kvm_put_xen_state(CPUState *cs)
+         QEMU_LOCK_GUARD(&env->xen_timers_lock);
+         if (env->xen_singleshot_timer_ns) {
+             ret = do_set_singleshot_timer(cs, env->xen_singleshot_timer_ns,
+-                                    false, false);
++                                          false);
+             if (ret < 0) {
+                 return ret;
+             }
 -- 
 2.40.1
 
