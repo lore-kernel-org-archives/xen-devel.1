@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3073C0032E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:55:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623024.970443 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A4EAC0032E
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:56:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623029.970454 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfIL-0003Ky-FM; Wed, 25 Oct 2023 14:55:41 +0000
+	id 1qvfJ6-0004FF-O9; Wed, 25 Oct 2023 14:56:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623024.970443; Wed, 25 Oct 2023 14:55:41 +0000
+Received: by outflank-mailman (output) from mailman id 623029.970454; Wed, 25 Oct 2023 14:56:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfIL-0003Kr-Cr; Wed, 25 Oct 2023 14:55:41 +0000
-Received: by outflank-mailman (input) for mailman id 623024;
- Wed, 25 Oct 2023 14:55:41 +0000
+	id 1qvfJ6-0004F8-LU; Wed, 25 Oct 2023 14:56:28 +0000
+Received: by outflank-mailman (input) for mailman id 623029;
+ Wed, 25 Oct 2023 14:56:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=w7q9=GH=desiato.srs.infradead.org=BATV+fe87d11d956b9f6f1554+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvfE3-0000WU-E4
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:15 +0000
+ id 1qvfE8-0000WU-Da
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:20 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f043ff82-7345-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 16:51:12 +0200 (CEST)
+ id f3d0b1d2-7345-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 16:51:17 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qvfDa-00GPM5-1F; Wed, 25 Oct 2023 14:50:51 +0000
+ id 1qvfDa-00GPM6-1D; Wed, 25 Oct 2023 14:50:52 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qvfDZ-002dFL-0k; Wed, 25 Oct 2023 15:50:45 +0100
+ Linux)) id 1qvfDZ-002dFU-1H; Wed, 25 Oct 2023 15:50:45 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f043ff82-7345-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: f3d0b1d2-7345-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=iaeDXSTaoWdCm87GDHXDzDikArDTOfszjp92r6YPQM0=; b=Fpo2lDHmkFJFrEzTxCnYSHMQc+
-	H+POf4RpTDXrqfi7zmTI2kpkXiZEJ/4ikVugJbl/UXMyulJnl8bxTi7gdq+Xlhe/NOsdTz353nXNS
-	skhnTvQvc19bBykXDJLHjeBVQ97kJvOEjCn3zBqYb/BH5rDtwk6NqQC0EyXGhRuEVDofWOrIuQUbH
-	eDXBfUYpNVxLjOjbdUpmFPsWWBCjffiEX876q5ArcW6FdlTHX93HUMDbaBkhxtxYaZxt/fpHXCNkE
-	Ko/NceL/1GypeXooX+xxhcNkWMbOUUaDd3BrGGwo4s3+7LbNRB/e9K7vIixU+dnx+7J2jpuR7mvKp
-	dd1Vd6Hw==;
+	bh=SKjWRXIgiNg5ff3bqQvSLiVcvlPitO7cHPHfc8XhUXU=; b=i2fwrV8zZ2vjfC4alhYHqho5Kg
+	69ItbcjuoufZl6Gv9FMYnIEB1jR+EI2qtRRyqdOFgFYEK1LzG6KxP647hv5/G6my2/D3e1Nf518Bs
+	bpsvnspf+G1TgFmvc69VdUs+xMWSbH3w/d4GIgFwg5c42Bt8j3HQ0PB1C/Uw/bTNjij8N3BLhn+ME
+	sAQG8vSqxTsmOj0rSVeluMyopsAtLcdgMvZEUnRoZLqQP3/BB165JjV78qWqWj2nFaH3b3IQwlvyc
+	qdKCIT24XkYpjsTqPbsyzvjsef9hJe/F4fTkTDMQPAPKlnUOqPmS4ZrhiS0hKFMIO3E4buVrrQeEB
+	WiLXn9OQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -74,9 +74,9 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v3 20/28] net: do not delete nics in net_cleanup()
-Date: Wed, 25 Oct 2023 15:50:34 +0100
-Message-Id: <20231025145042.627381-21-dwmw2@infradead.org>
+Subject: [PATCH v3 22/28] net: add qemu_{configure,create}_nic_device(), qemu_find_nic_info()
+Date: Wed, 25 Oct 2023 15:50:36 +0100
+Message-Id: <20231025145042.627381-23-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025145042.627381-1-dwmw2@infradead.org>
 References: <20231025145042.627381-1-dwmw2@infradead.org>
@@ -87,73 +87,106 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-In net_cleanup() we only need to delete the netdevs, as those may have
-state which outlives Qemu when it exits, and thus may actually need to
-be cleaned up on exit.
+Most code which directly accesses nd_table[] and nb_nics uses them for
+one of two things. Either "I have created a NIC device and I'd like a
+configuration for it", or "I will create a NIC device *if* there is a
+configuration for it".  With some variants on the theme around whether
+they actually *check* if the model specified in the configuration is
+the right one.
 
-The nics, on the other hand, are owned by the device which created them.
-Most devices don't bother to clean up on exit because they don't have
-any state which will outlive Qemu... but XenBus devices do need to clean
-up their nodes in XenStore, and do have an exit handler to delete them.
+Provide functions which perform both of those, allowing platforms to
+be a little more consistent and as a step towards making nd_table[]
+and nb_nics private to the net code.
 
-When the XenBus exit handler destroys the xen-net-device, it attempts
-to delete its nic after net_cleanup() had already done so. And crashes.
-
-Fix this by only deleting netdevs as we walk the list. As the comment
-notes, we can't use QTAILQ_FOREACH_SAFE() as each deletion may remove
-*multiple* entries, including the "safely" saved 'next' pointer. But
-we can store the *previous* entry, since nics are safe.
+Also export the qemu_find_nic_info() helper, as some platforms have
+special cases they need to handle.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- net/net.c | 28 ++++++++++++++++++++++------
- 1 file changed, 22 insertions(+), 6 deletions(-)
+ include/net/net.h |  7 ++++++-
+ net/net.c         | 51 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 57 insertions(+), 1 deletion(-)
 
+diff --git a/include/net/net.h b/include/net/net.h
+index 2fb1c9181c..56be694c75 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -205,7 +205,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
+ void qemu_check_nic_model(NICInfo *nd, const char *model);
+ int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+                         const char *default_model);
+-
++NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
++                            const char *alias);
++bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
++                               const char *alias);
++DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
++                                    const char *alias);
+ void print_net_client(Monitor *mon, NetClientState *nc);
+ void net_socket_rs_init(SocketReadState *rs,
+                         SocketReadStateFinalize *finalize,
 diff --git a/net/net.c b/net/net.c
-index c0c0cbe99e..bbe33da176 100644
+index bbe33da176..f8b4973a1e 100644
 --- a/net/net.c
 +++ b/net/net.c
-@@ -1499,18 +1499,34 @@ static void net_vm_change_state_handler(void *opaque, bool running,
+@@ -1072,6 +1072,57 @@ static int net_init_nic(const Netdev *netdev, const char *name,
+     return idx;
+ }
  
- void net_cleanup(void)
- {
--    NetClientState *nc;
-+    NetClientState *nc, **p = &QTAILQ_FIRST(&net_clients);
++NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
++                            const char *alias)
++{
++    NICInfo *nd;
++    int i;
++
++    for (i = 0; i < nb_nics; i++) {
++        nd = &nd_table[i];
++
++        if (!nd->used || nd->instantiated) {
++            continue;
++        }
++
++        if ((match_default && !nd->model) || !g_strcmp0(nd->model, typename)
++            || (alias && !g_strcmp0(nd->model, alias))) {
++            return nd;
++        }
++    }
++    return NULL;
++}
++
++
++/* "I have created a device. Please configure it if you can" */
++bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
++                               const char *alias)
++{
++    NICInfo *nd = qemu_find_nic_info(object_get_typename(OBJECT(dev)),
++                                     match_default, alias);
++
++    if (nd) {
++        qdev_set_nic_properties(dev, nd);
++        return true;
++    }
++    return false;
++}
++
++/* "Please create a device, if you have a configuration for it" */
++DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
++                                    const char *alias)
++{
++    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
++    DeviceState *dev;
++
++    if (!nd) {
++        return NULL;
++    }
++
++    dev = qdev_new(typename);
++    qdev_set_nic_properties(dev, nd);
++    return dev;
++}
  
-     /*cleanup colo compare module for COLO*/
-     colo_compare_cleanup();
- 
--    /* We may del multiple entries during qemu_del_net_client(),
--     * so QTAILQ_FOREACH_SAFE() is also not safe here.
-+    /*
-+     * Walk the net_clients list and remove the netdevs but *not* any
-+     * NET_CLIENT_DRIVER_NIC entries. The latter are owned by the device
-+     * model which created them, and in some cases (e.g. xen-net-device)
-+     * the device itself may do cleanup at exit and will be upset if we
-+     * just delete its NIC from underneath it.
-+     *
-+     * Since qemu_del_net_client() may delete multiple entries, using
-+     * QTAILQ_FOREACH_SAFE() is not safe here. The only safe pointer
-+     * to keep as a bookmark is a NET_CLIENT_DRIVER_NIC entry, so keep
-+     * 'p' pointing to either the head of the list, or the 'next' field
-+     * of the latest NET_CLIENT_DRIVER_NIC, and operate on *p as we walk
-+     * the list.
-+     *
-+     * The 'nc' variable isn't part of the list traversal; it's purely
-+     * for convenience as too much '(*p)->' has a tendency to make the
-+     * readers' eyes bleed.
-      */
--    while (!QTAILQ_EMPTY(&net_clients)) {
--        nc = QTAILQ_FIRST(&net_clients);
-+    while (*p) {
-+        nc = *p;
-         if (nc->info->type == NET_CLIENT_DRIVER_NIC) {
--            qemu_del_nic(qemu_get_nic(nc));
-+            /* Skip NET_CLIENT_DRIVER_NIC entries */
-+            p = &QTAILQ_NEXT(nc, next);
-         } else {
-             qemu_del_net_client(nc);
-         }
+ static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
+     const Netdev *netdev,
 -- 
 2.40.1
 
