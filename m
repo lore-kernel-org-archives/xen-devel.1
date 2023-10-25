@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B46C0032E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 19:33:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623250.970984 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CACC7C07545
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 19:34:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623264.970993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvjd4-0004nL-2i; Wed, 25 Oct 2023 19:33:22 +0000
+	id 1qvjdx-000695-Dg; Wed, 25 Oct 2023 19:34:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623250.970984; Wed, 25 Oct 2023 19:33:22 +0000
+Received: by outflank-mailman (output) from mailman id 623264.970993; Wed, 25 Oct 2023 19:34:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvjd3-0004nE-Vn; Wed, 25 Oct 2023 19:33:21 +0000
-Received: by outflank-mailman (input) for mailman id 623250;
- Wed, 25 Oct 2023 19:33:20 +0000
+	id 1qvjdx-00068y-B2; Wed, 25 Oct 2023 19:34:17 +0000
+Received: by outflank-mailman (input) for mailman id 623264;
+ Wed, 25 Oct 2023 19:34:16 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xaZJ=GH=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1qvja3-0001Lv-Hr
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 19:30:15 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
+ id 1qvja5-0001Lv-UO
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 19:30:17 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eaf13bc0-736c-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 21:30:13 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9bf86b77a2aso22697366b.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Oct 2023 12:30:13 -0700 (PDT)
+ id ecdd8edd-736c-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 21:30:16 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-9becde9ea7bso271631566b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Oct 2023 12:30:16 -0700 (PDT)
 Received: from edvint-x-u.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- hv6-20020a17090760c600b00985ed2f1584sm10408710ejc.187.2023.10.25.12.30.11
+ hv6-20020a17090760c600b00985ed2f1584sm10408710ejc.187.2023.10.25.12.30.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 12:30:12 -0700 (PDT)
+ Wed, 25 Oct 2023 12:30:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,45 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eaf13bc0-736c-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: ecdd8edd-736c-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1698262212; x=1698867012; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1698262216; x=1698867016; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=szWwPrhRVQ5NEr0HTjBSWKJZPscEP7xbO0kPy1jcKl0=;
-        b=BbdPFSkwhGMXJ+3yByYkH2XkVD5zbtBKkFaxJEH31hunMVtG6luBCjF3L0ekOYYkWB
-         t0a4lF4O9SKrNQYUyCnKgM9LEVoUHj78Bf9mJaG5o1ZTex6bB4DLL8A2bQVTh1yWAgxS
-         5RWZB5TFKpPoJjSye5cW85alZNDXiAXHkodBY=
+        bh=J6zd+9X3SvJrgztNDFGOA9xCp41IYKJ6RL7GRTOSekc=;
+        b=fWv8EQ7gfmEWz3qLqEtoSEo3D8036NuJJ5QMYew0epgOXETkaAX0VYuXeKnKqrmKHY
+         /V6DWplNXFtHSv4jwdjXPcXlGkGjJUa54ur0ceCRCd7ImmmUcuFgW4Fstj69+Gas5yIp
+         sqG0Owbon6BviNyy/sWWTN2vPZ95cTLwZzf2U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698262212; x=1698867012;
+        d=1e100.net; s=20230601; t=1698262216; x=1698867016;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=szWwPrhRVQ5NEr0HTjBSWKJZPscEP7xbO0kPy1jcKl0=;
-        b=TPKjtmzJ6MzY2YkRblR+l0q8v/EA45SN0kv98MIr7oGgRl5nSJUhxLONqXSTA8TXS8
-         fU91VVXOabLJehDzqpo6uuUIihWfQ9jHpofOoA92PX5CsDMeqoGv/nhSk3CUh8IaX+Qo
-         13y+Ao2BqsfiUWAhhR8rXmlPgBM526caDxsQVFFDgmJs20/SMoetj8yAp0HxCQojuUK3
-         dfPT0acQ0THcPOhaEYmtB4kty+Ozs7p36F89sbSZVdIlrVMuIfCydjNU0QIFzr6lzrAL
-         /rd5yw0NuWPG2S0ln/ojZRZ8oqTtw+QDsvYeFeEKatyaOJPY8+QQteZSfDKt882R8UKp
-         jZ7Q==
-X-Gm-Message-State: AOJu0Yx6HcugS2kYbqnSVHAwxRHS+XASi7w1i7z29syoAZR8kyeAy0/e
-	fcvYrYAyAeX9DTLyjMjhA7RO0ZiADLDJBCKA5uw8jQ==
-X-Google-Smtp-Source: AGHT+IH1Df6VfyiYXZUnnyFiE2b8zlT9ZC3eG4XHBSndaqVZArI6AToPuwzZbTQJS3WoT53YXNXNeQ==
-X-Received: by 2002:a17:907:3d92:b0:9b2:b71f:83be with SMTP id he18-20020a1709073d9200b009b2b71f83bemr10365431ejc.1.1698262212590;
-        Wed, 25 Oct 2023 12:30:12 -0700 (PDT)
+        bh=J6zd+9X3SvJrgztNDFGOA9xCp41IYKJ6RL7GRTOSekc=;
+        b=f23N8POuoy2A7aGwrB0/W6ln4uPrprzHNL2xi4bRLuImjpnRKKvl70c9Cn2dwywp/b
+         7AxVfVDaIMMsI/bD+USq5KJvOjTqhgmW8BAcU5OEzozspSWOnQJFucdP5KYthOnfIhY7
+         hqSMXuGbu/LTAedSl5xUsrvWOX/PJ1VVNmQLyT43AxGVE3ydTgQDqP96KdJhrq3h6fn4
+         VqSrWm8KF3ChW8zwYvfRm2AEYb8IpwHP/jhGMeJQyswICfyJQwbgUsHIrRjPcKa5fK3m
+         fjrDDNtKKw71fhvMRaTLXOnnKu4IkF6WGuDshcAh+d77CLe6HpqsBsFEqiPtNh3OP9Di
+         l0PQ==
+X-Gm-Message-State: AOJu0YymSg+yTOfPts4dA7gHB69tfONOb1Lw5mDSYwN2l1h+W9YFB02n
+	y/vXFMBVy9oJnZooTXzMTTy/Gjgyk0PhZDlpMiN0nQ==
+X-Google-Smtp-Source: AGHT+IG04jYEJpTiyADhr6u1GGQaT3N85oLVt59loHsRCQW4fkF5dyz5tXCImSbU31L/d8xtpNsBRg==
+X-Received: by 2002:a17:907:9492:b0:9ad:8a9e:23ee with SMTP id dm18-20020a170907949200b009ad8a9e23eemr565135ejc.13.1698262215834;
+        Wed, 25 Oct 2023 12:30:15 -0700 (PDT)
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH 18/22] x86/PMUv4: disable intercept for PERF_GLOBAL_STATUS
-Date: Wed, 25 Oct 2023 20:29:48 +0100
-Message-Id: <37b346bcfc47ed514822fd6565f63df57a8c7c5f.1698261255.git.edwin.torok@cloud.com>
+Subject: [RFC PATCH 22/22] x86/AMD: add IRPerf support
+Date: Wed, 25 Oct 2023 20:29:52 +0100
+Message-Id: <6cd765e98fa4888b9e94215f3572a94e95fe2a4b.1698261255.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1698261255.git.edwin.torok@cloud.com>
 References: <cover.1698261255.git.edwin.torok@cloud.com>
@@ -95,86 +93,58 @@ Content-Transfer-Encoding: 8bit
 
 From: Edwin Török <edvin.torok@citrix.com>
 
-Now that we have a way to set PERF_GLOBAL_STATUS by writing to
-PERF_GLOBAL_STATUS_RESET (== PERF_GLOBAL_OVF_CTRL) and
-PERF_GLOBAL_STATUS_SET we do not need to intercept this MSR anymore.
-
-We can save/restore its state when saving/loading vPMU state, and
-otherwise let the guest read it directly.
-
-This is an optimization, perhaps it'd need a flag to disable it for
-debugging purposes.
+Instruction retired perf counter, enabled by writing to a bit in HWCR.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- xen/arch/x86/cpu/vpmu_intel.c | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ xen/arch/x86/include/asm/msr-index.h        | 1 +
+ xen/arch/x86/msr.c                          | 7 +++++++
+ xen/include/public/arch-x86/cpufeatureset.h | 2 +-
+ 3 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
-index 5e660af395..59d0b2ca36 100644
---- a/xen/arch/x86/cpu/vpmu_intel.c
-+++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -67,6 +67,7 @@ static bool_t __read_mostly full_width_write;
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index 061b07c7ae..1d94fe3a5b 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -393,6 +393,7 @@
  
- /* Number of general-purpose and fixed performance counters */
- unsigned int __read_mostly arch_pmc_cnt, fixed_pmc_cnt;
-+static unsigned int __read_mostly vpmu_version;
+ #define MSR_K8_HWCR			0xc0010015
+ #define K8_HWCR_TSC_FREQ_SEL		(1ULL << 24)
++#define K8_HWCR_IRPERF_EN		(1ULL << 30)
+ #define K8_HWCR_CPUID_USER_DIS		(1ULL << 35)
  
- /* Masks used for testing whether and MSR is valid */
- #define ARCH_CTRL_MASK  (~((1ull << 32) - 1) | (1ull << 21) | ARCH_CNTR_PIN_CONTROL)
-@@ -228,6 +229,9 @@ static void core2_vpmu_set_msr_bitmap(struct vcpu *v)
+ #define MSR_K7_FID_VID_CTL		0xc0010041
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index 483b5e4f70..b3cd851d9d 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -584,6 +584,13 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+         }
+         break;
  
-     vmx_clear_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR_CTRL, VMX_MSR_R);
-     vmx_clear_msr_intercept(v, MSR_IA32_DS_AREA, VMX_MSR_R);
++    case MSR_K8_HWCR:
++        if ( !(cp->x86_vendor & X86_VENDOR_AMD) ||
++             (val & ~K8_HWCR_IRPERF_EN) ||
++             wrmsr_safe(msr, val) != 0 )
++            goto gp_fault;
++        break;
 +
-+    if ( vpmu_version >= 4 )
-+        vmx_clear_msr_intercept(v, MSR_CORE_PERF_GLOBAL_STATUS, VMX_MSR_R);
- }
+     case MSR_AMD64_DE_CFG:
+         /*
+          * OpenBSD 6.7 will panic if writing to DE_CFG triggers a #GP:
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 5faca0bf7a..40f74cd5e8 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -241,7 +241,7 @@ XEN_CPUFEATURE(EFRO,          7*32+10) /*   APERF/MPERF Read Only interface */
  
- static void core2_vpmu_unset_msr_bitmap(struct vcpu *v)
-@@ -250,6 +254,9 @@ static void core2_vpmu_unset_msr_bitmap(struct vcpu *v)
- 
-     vmx_set_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR_CTRL, VMX_MSR_R);
-     vmx_set_msr_intercept(v, MSR_IA32_DS_AREA, VMX_MSR_R);
-+
-+    if ( vpmu_version >= 4 )
-+        vmx_set_msr_intercept(v, MSR_CORE_PERF_GLOBAL_STATUS, VMX_MSR_R);
- }
- 
- static inline void __core2_vpmu_save(struct vcpu *v)
-@@ -268,7 +275,7 @@ static inline void __core2_vpmu_save(struct vcpu *v)
-         rdmsrl(MSR_P6_EVNTSEL(i), xen_pmu_cntr_pair[i].control);
-     }
- 
--    if ( !is_hvm_vcpu(v) )
-+    if ( !is_hvm_vcpu(v) || vpmu_version >= 4 )
-         rdmsrl(MSR_CORE_PERF_GLOBAL_STATUS, core2_vpmu_cxt->global_status);
-     /* Save MSR to private context to make it fork-friendly */
-     else if ( mem_sharing_enabled(v->domain) )
-@@ -338,6 +345,15 @@ static inline void __core2_vpmu_load(struct vcpu *v)
-     else if ( mem_sharing_is_fork(v->domain) )
-         vmx_write_guest_msr(v, MSR_CORE_PERF_GLOBAL_CTRL,
-                             core2_vpmu_cxt->global_ctrl);
-+
-+    if ( vpmu_version >= 4 ) {
-+        const uint64_t global_status = core2_vpmu_cxt->global_status;
-+        const uint64_t reset = (~global_status) & global_ovf_ctrl_mask ;
-+        if ( reset )
-+            wrmsrl(MSR_CORE_PERF_GLOBAL_OVF_CTRL, reset);
-+        if ( global_status )
-+            wrmsrl(MSR_CORE_PERF_GLOBAL_STATUS_SET, global_status);
-+    }
- }
- 
- static int core2_vpmu_verify(struct vcpu *v)
-@@ -917,6 +933,7 @@ const struct arch_vpmu_ops *__init core2_vpmu_init(void)
-         printk(XENLOG_INFO "VPMU: PMU version %u is not fully supported. "
-                "Emulating version %d\n", version, VPMU_VERSION_MAX);
-     }
-+    vpmu_version = version;
- 
-     if ( current_cpu_data.x86 != 6 )
-     {
+ /* AMD-defined CPU features, CPUID level 0x80000008.ebx, word 8 */
+ XEN_CPUFEATURE(CLZERO,        8*32+ 0) /*A  CLZERO instruction */
+-XEN_CPUFEATURE(IRPERF,        8*32+ 1) /* Instruction Retired Performance Counter */
++XEN_CPUFEATURE(IRPERF,        8*32+ 1) /*A! Instruction Retired Performance Counter */
+ XEN_CPUFEATURE(RSTR_FP_ERR_PTRS, 8*32+ 2) /*A  (F)X{SAVE,RSTOR} always saves/restores FPU Error pointers */
+ XEN_CPUFEATURE(WBNOINVD,      8*32+ 9) /*   WBNOINVD instruction */
+ XEN_CPUFEATURE(IBPB,          8*32+12) /*A  IBPB support only (no IBRS, used by AMD) */
 -- 
 2.41.0
 
