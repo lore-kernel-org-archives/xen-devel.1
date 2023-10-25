@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BE6C25B47
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:54:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623016.970424 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90565C07545
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:55:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623020.970433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfHM-00020F-S7; Wed, 25 Oct 2023 14:54:40 +0000
+	id 1qvfHo-0002dY-35; Wed, 25 Oct 2023 14:55:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623016.970424; Wed, 25 Oct 2023 14:54:40 +0000
+Received: by outflank-mailman (output) from mailman id 623020.970433; Wed, 25 Oct 2023 14:55:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfHM-000208-O0; Wed, 25 Oct 2023 14:54:40 +0000
-Received: by outflank-mailman (input) for mailman id 623016;
- Wed, 25 Oct 2023 14:54:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qvfHo-0002dR-0V; Wed, 25 Oct 2023 14:55:08 +0000
+Received: by outflank-mailman (input) for mailman id 623020;
+ Wed, 25 Oct 2023 14:55:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LJSz=GH=casper.srs.infradead.org=BATV+85b1c44ac99574f3713d+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvfE1-0000WU-VX
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:14 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id efaeffb1-7345-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 16:51:10 +0200 (CEST)
+ <SRS0=w7q9=GH=desiato.srs.infradead.org=BATV+fe87d11d956b9f6f1554+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qvfEB-0008W8-C4
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:23 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f55cd67e-7345-11ee-98d5-6d05b1d4d9a1;
+ Wed, 25 Oct 2023 16:51:20 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qvfDY-009Nmc-PU; Wed, 25 Oct 2023 14:50:44 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qvfDa-00GPM2-1E; Wed, 25 Oct 2023 14:50:52 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qvfDY-002dEV-19; Wed, 25 Oct 2023 15:50:44 +0100
+ Linux)) id 1qvfDY-002dF1-2x; Wed, 25 Oct 2023 15:50:44 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: efaeffb1-7345-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: f55cd67e-7345-11ee-98d5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=53WomBMSQD6O08ryGIJ2Z7YE0izoAIIrgQty4UEWxiA=; b=rQcsVgd+7mP32wjXgrSCr6EOdY
-	OHW7FEMVWCbgL3UhQXk0g+wObsk1DmThItrfxumad8S2DKR/SAy6pUZ3p/BHGZwOEXCRo0z2rCNDT
-	owvcq0YIN4uAfTLkk1JEM/kVA4TgOyRlxY0raLHu9hnCjGEyq5CIIh+nVVhcE9jU3X7x+j2pU+d0C
-	NhngvdA+i75zJ4Wa5qI5Djnh+O50utL/3zI8TXAjkOs82l1fVUOmPi+penG1RRESMtr3h9N8I12lP
-	Ebw/OxLzBh+9y67LdxJk5svKxZuXesBQCs5pxnpZ7gXtM5B6CoscEmNoqdIEppjCxg0nA8AC2jXiB
-	qKskIlbw==;
+	bh=auoyj1xEgaC8bMi0O7YUpQ0rx3BFjT2lyRCJL3y5wnE=; b=f9MCdDvLs+qhwkY0BLNlfs14jT
+	yrufAYA9JVI6q35igUctpZ6mzrMYX7I5p9/s6ghbctBLFRaMt/6qiW7JclxMDG8Q1UnjnvEaWzbAg
+	YN4r3n/mx+izvC/7zFhlKoaYMdVN5utuEXqi09ru8grPMQrP1B5UsCNbiLaR/C6mBBGpd2rjMig2J
+	H3xaLdbmoQUfqN4wMM9ZuzOJXVF358Nug7RCgfVzNBsGiH8aM9hCh3VKZ74Xbau3LKG4qSvXEdaFb
+	L/Lu1nKwEOPY1Pt9RFQxjKQNPSCuly+xtT5J3Vq1Dyyr2b8emQVdjD2Lkx9zslYfVFoTFsX+hP+L7
+	6bV63/wA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -74,422 +74,729 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v3 09/28] hw/xen: Clean up event channel 'type_val' handling to use union
-Date: Wed, 25 Oct 2023 15:50:23 +0100
-Message-Id: <20231025145042.627381-10-dwmw2@infradead.org>
+Subject: [PATCH v3 16/28] hw/xen: update Xen console to XenDevice model
+Date: Wed, 25 Oct 2023 15:50:30 +0100
+Message-Id: <20231025145042.627381-17-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025145042.627381-1-dwmw2@infradead.org>
 References: <20231025145042.627381-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-A previous implementation of this stuff used a 64-bit field for all of
-the port information (vcpu/type/type_val) and did atomic exchanges on
-them. When I implemented that in Qemu I regretted my life choices and
-just kept it simple with locking instead.
-
-So there's no need for the XenEvtchnPort to be so simplistic. We can
-use a union for the pirq/virq/interdomain information, which lets us
-keep a separate bit for the 'remote domain' in interdomain ports. A
-single bit is enough since the only possible targets are loopback or
-qemu itself.
-
-So now we can ditch PORT_INFO_TYPEVAL_REMOTE_QEMU and the horrid
-manual masking, although the in-memory representation is identical
-so there's no change in the saved state ABI.
+This allows (non-primary) console devices to be created on the command
+line and hotplugged.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/kvm/xen_evtchn.c | 151 ++++++++++++++++++---------------------
- 1 file changed, 70 insertions(+), 81 deletions(-)
+ hw/char/trace-events        |   8 +
+ hw/char/xen_console.c       | 532 +++++++++++++++++++++++++++---------
+ hw/xen/xen-legacy-backend.c |   1 -
+ 3 files changed, 411 insertions(+), 130 deletions(-)
 
-diff --git a/hw/i386/kvm/xen_evtchn.c b/hw/i386/kvm/xen_evtchn.c
-index b2b4be9983..02b8cbf8df 100644
---- a/hw/i386/kvm/xen_evtchn.c
-+++ b/hw/i386/kvm/xen_evtchn.c
-@@ -58,7 +58,15 @@ OBJECT_DECLARE_SIMPLE_TYPE(XenEvtchnState, XEN_EVTCHN)
- typedef struct XenEvtchnPort {
-     uint32_t vcpu;      /* Xen/ACPI vcpu_id */
-     uint16_t type;      /* EVTCHNSTAT_xxxx */
--    uint16_t type_val;  /* pirq# / virq# / remote port according to type */
-+    union {
-+        uint16_t val;  /* raw value for serialization etc. */
-+        uint16_t pirq;
-+        uint16_t virq;
-+        struct {
-+            uint16_t port:15;
-+            uint16_t to_qemu:1; /* Only two targets; qemu or loopback */
-+        } interdomain;
-+    } u;
- } XenEvtchnPort;
- 
- /* 32-bit compatibility definitions, also used natively in 32-bit build */
-@@ -105,14 +113,6 @@ struct xenevtchn_handle {
-     int fd;
- };
- 
--/*
-- * For unbound/interdomain ports there are only two possible remote
-- * domains; self and QEMU. Use a single high bit in type_val for that,
-- * and the low bits for the remote port number (or 0 for unbound).
-- */
--#define PORT_INFO_TYPEVAL_REMOTE_QEMU           0x8000
--#define PORT_INFO_TYPEVAL_REMOTE_PORT_MASK      0x7FFF
--
- /*
-  * These 'emuirq' values are used by Xen in the LM stream... and yes, I am
-  * insane enough to think about guest-transparent live migration from actual
-@@ -210,16 +210,16 @@ static int xen_evtchn_post_load(void *opaque, int version_id)
-         XenEvtchnPort *p = &s->port_table[i];
- 
-         if (p->type == EVTCHNSTAT_pirq) {
--            assert(p->type_val);
--            assert(p->type_val < s->nr_pirqs);
-+            assert(p->u.pirq);
-+            assert(p->u.pirq < s->nr_pirqs);
- 
-             /*
-              * Set the gsi to IRQ_UNBOUND; it may be changed to an actual
-              * GSI# below, or to IRQ_MSI_EMU when the MSI table snooping
-              * catches up with it.
-              */
--            s->pirq[p->type_val].gsi = IRQ_UNBOUND;
--            s->pirq[p->type_val].port = i;
-+            s->pirq[p->u.pirq].gsi = IRQ_UNBOUND;
-+            s->pirq[p->u.pirq].port = i;
-         }
-     }
-     /* Rebuild s->pirq[].gsi mapping */
-@@ -243,7 +243,7 @@ static const VMStateDescription xen_evtchn_port_vmstate = {
-     .fields = (VMStateField[]) {
-         VMSTATE_UINT32(vcpu, XenEvtchnPort),
-         VMSTATE_UINT16(type, XenEvtchnPort),
--        VMSTATE_UINT16(type_val, XenEvtchnPort),
-+        VMSTATE_UINT16(u.val, XenEvtchnPort),
-         VMSTATE_END_OF_LIST()
-     }
- };
-@@ -605,14 +605,13 @@ static void unbind_backend_ports(XenEvtchnState *s)
- 
-     for (i = 1; i < s->nr_ports; i++) {
-         p = &s->port_table[i];
--        if (p->type == EVTCHNSTAT_interdomain &&
--            (p->type_val & PORT_INFO_TYPEVAL_REMOTE_QEMU)) {
--            evtchn_port_t be_port = p->type_val & PORT_INFO_TYPEVAL_REMOTE_PORT_MASK;
-+        if (p->type == EVTCHNSTAT_interdomain && p->u.interdomain.to_qemu) {
-+            evtchn_port_t be_port = p->u.interdomain.port;
- 
-             if (s->be_handles[be_port]) {
-                 /* This part will be overwritten on the load anyway. */
-                 p->type = EVTCHNSTAT_unbound;
--                p->type_val = PORT_INFO_TYPEVAL_REMOTE_QEMU;
-+                p->u.interdomain.port = 0;
- 
-                 /* Leave the backend port open and unbound too. */
-                 if (kvm_xen_has_cap(EVTCHN_SEND)) {
-@@ -650,30 +649,22 @@ int xen_evtchn_status_op(struct evtchn_status *status)
- 
-     switch (p->type) {
-     case EVTCHNSTAT_unbound:
--        if (p->type_val & PORT_INFO_TYPEVAL_REMOTE_QEMU) {
--            status->u.unbound.dom = DOMID_QEMU;
--        } else {
--            status->u.unbound.dom = xen_domid;
--        }
-+        status->u.unbound.dom = p->u.interdomain.to_qemu ? DOMID_QEMU
-+                                                         : xen_domid;
-         break;
- 
-     case EVTCHNSTAT_interdomain:
--        if (p->type_val & PORT_INFO_TYPEVAL_REMOTE_QEMU) {
--            status->u.interdomain.dom = DOMID_QEMU;
--        } else {
--            status->u.interdomain.dom = xen_domid;
--        }
--
--        status->u.interdomain.port = p->type_val &
--            PORT_INFO_TYPEVAL_REMOTE_PORT_MASK;
-+        status->u.interdomain.dom = p->u.interdomain.to_qemu ? DOMID_QEMU
-+                                                             : xen_domid;
-+        status->u.interdomain.port = p->u.interdomain.port;
-         break;
- 
-     case EVTCHNSTAT_pirq:
--        status->u.pirq = p->type_val;
-+        status->u.pirq = p->u.pirq;
-         break;
- 
-     case EVTCHNSTAT_virq:
--        status->u.virq = p->type_val;
-+        status->u.virq = p->u.virq;
-         break;
-     }
- 
-@@ -989,7 +980,7 @@ static int clear_port_pending(XenEvtchnState *s, evtchn_port_t port)
- static void free_port(XenEvtchnState *s, evtchn_port_t port)
- {
-     s->port_table[port].type = EVTCHNSTAT_closed;
--    s->port_table[port].type_val = 0;
-+    s->port_table[port].u.val = 0;
-     s->port_table[port].vcpu = 0;
- 
-     if (s->nr_ports == port + 1) {
-@@ -1012,7 +1003,7 @@ static int allocate_port(XenEvtchnState *s, uint32_t vcpu, uint16_t type,
-         if (s->port_table[p].type == EVTCHNSTAT_closed) {
-             s->port_table[p].vcpu = vcpu;
-             s->port_table[p].type = type;
--            s->port_table[p].type_val = val;
-+            s->port_table[p].u.val = val;
- 
-             *port = p;
- 
-@@ -1053,15 +1044,15 @@ static int close_port(XenEvtchnState *s, evtchn_port_t port,
-         return -ENOENT;
- 
-     case EVTCHNSTAT_pirq:
--        s->pirq[p->type_val].port = 0;
--        if (s->pirq[p->type_val].is_translated) {
-+        s->pirq[p->u.pirq].port = 0;
-+        if (s->pirq[p->u.pirq].is_translated) {
-             *flush_kvm_routes = true;
-         }
-         break;
- 
-     case EVTCHNSTAT_virq:
--        kvm_xen_set_vcpu_virq(virq_is_global(p->type_val) ? 0 : p->vcpu,
--                              p->type_val, 0);
-+        kvm_xen_set_vcpu_virq(virq_is_global(p->u.virq) ? 0 : p->vcpu,
-+                              p->u.virq, 0);
-         break;
- 
-     case EVTCHNSTAT_ipi:
-@@ -1071,8 +1062,8 @@ static int close_port(XenEvtchnState *s, evtchn_port_t port,
-         break;
- 
-     case EVTCHNSTAT_interdomain:
--        if (p->type_val & PORT_INFO_TYPEVAL_REMOTE_QEMU) {
--            uint16_t be_port = p->type_val & ~PORT_INFO_TYPEVAL_REMOTE_QEMU;
-+        if (p->u.interdomain.to_qemu) {
-+            uint16_t be_port = p->u.interdomain.port;
-             struct xenevtchn_handle *xc = s->be_handles[be_port];
-             if (xc) {
-                 if (kvm_xen_has_cap(EVTCHN_SEND)) {
-@@ -1082,14 +1073,15 @@ static int close_port(XenEvtchnState *s, evtchn_port_t port,
-             }
-         } else {
-             /* Loopback interdomain */
--            XenEvtchnPort *rp = &s->port_table[p->type_val];
--            if (!valid_port(p->type_val) || rp->type_val != port ||
-+            XenEvtchnPort *rp = &s->port_table[p->u.interdomain.port];
-+            if (!valid_port(p->u.interdomain.port) ||
-+                rp->u.interdomain.port != port ||
-                 rp->type != EVTCHNSTAT_interdomain) {
-                 error_report("Inconsistent state for interdomain unbind");
-             } else {
-                 /* Set the other end back to unbound */
-                 rp->type = EVTCHNSTAT_unbound;
--                rp->type_val = 0;
-+                rp->u.interdomain.port = 0;
-             }
-         }
-         break;
-@@ -1214,7 +1206,7 @@ int xen_evtchn_bind_vcpu_op(struct evtchn_bind_vcpu *vcpu)
-     if (p->type == EVTCHNSTAT_interdomain ||
-         p->type == EVTCHNSTAT_unbound ||
-         p->type == EVTCHNSTAT_pirq ||
--        (p->type == EVTCHNSTAT_virq && virq_is_global(p->type_val))) {
-+        (p->type == EVTCHNSTAT_virq && virq_is_global(p->u.virq))) {
-         /*
-          * unmask_port() with do_unmask==false will just raise the event
-          * on the new vCPU if the port was already pending.
-@@ -1359,19 +1351,15 @@ int xen_evtchn_bind_ipi_op(struct evtchn_bind_ipi *ipi)
- int xen_evtchn_bind_interdomain_op(struct evtchn_bind_interdomain *interdomain)
- {
-     XenEvtchnState *s = xen_evtchn_singleton;
--    uint16_t type_val;
-     int ret;
- 
-     if (!s) {
-         return -ENOTSUP;
-     }
- 
--    if (interdomain->remote_dom == DOMID_QEMU) {
--        type_val = PORT_INFO_TYPEVAL_REMOTE_QEMU;
--    } else if (interdomain->remote_dom == DOMID_SELF ||
--               interdomain->remote_dom == xen_domid) {
--        type_val = 0;
--    } else {
-+    if (interdomain->remote_dom != DOMID_QEMU &&
-+        interdomain->remote_dom != DOMID_SELF &&
-+        interdomain->remote_dom != xen_domid) {
-         return -ESRCH;
-     }
- 
-@@ -1382,8 +1370,8 @@ int xen_evtchn_bind_interdomain_op(struct evtchn_bind_interdomain *interdomain)
-     qemu_mutex_lock(&s->port_lock);
- 
-     /* The newly allocated port starts out as unbound */
--    ret = allocate_port(s, 0, EVTCHNSTAT_unbound, type_val,
--                        &interdomain->local_port);
-+    ret = allocate_port(s, 0, EVTCHNSTAT_unbound, 0, &interdomain->local_port);
+diff --git a/hw/char/trace-events b/hw/char/trace-events
+index babf4d35ea..7a398c82a5 100644
+--- a/hw/char/trace-events
++++ b/hw/char/trace-events
+@@ -105,3 +105,11 @@ cadence_uart_baudrate(unsigned baudrate) "baudrate %u"
+ # sh_serial.c
+ sh_serial_read(char *id, unsigned size, uint64_t offs, uint64_t val) " %s size %d offs 0x%02" PRIx64 " -> 0x%02" PRIx64
+ sh_serial_write(char *id, unsigned size, uint64_t offs, uint64_t val) "%s size %d offs 0x%02" PRIx64 " <- 0x%02" PRIx64
 +
-     if (ret) {
-         goto out;
++# xen_console.c
++xen_console_connect(unsigned int idx, unsigned int ring_ref, unsigned int port, unsigned int limit) "idx %u ring_ref %u port %u limit %u"
++xen_console_disconnect(unsigned int idx) "idx %u"
++xen_console_unrealize(unsigned int idx) "idx %u"
++xen_console_realize(unsigned int idx, const char *chrdev) "idx %u chrdev %s"
++xen_console_device_create(unsigned int idx) "idx %u"
++xen_console_device_destroy(unsigned int idx) "idx %u"
+diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
+index 810dae3f44..4a419dc287 100644
+--- a/hw/char/xen_console.c
++++ b/hw/char/xen_console.c
+@@ -20,15 +20,20 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu/cutils.h"
+ #include <sys/select.h>
+ #include <termios.h>
+ 
+ #include "qapi/error.h"
+ #include "sysemu/sysemu.h"
+ #include "chardev/char-fe.h"
+-#include "hw/xen/xen-legacy-backend.h"
+-
++#include "hw/xen/xen-backend.h"
++#include "hw/xen/xen-bus-helper.h"
++#include "hw/qdev-properties.h"
++#include "hw/qdev-properties-system.h"
+ #include "hw/xen/interface/io/console.h"
++#include "hw/xen/interface/io/xs_wire.h"
++#include "trace.h"
+ 
+ struct buffer {
+     uint8_t *data;
+@@ -39,16 +44,22 @@ struct buffer {
+ };
+ 
+ struct XenConsole {
+-    struct XenLegacyDevice  xendev;  /* must be first */
++    struct XenDevice  xendev;  /* must be first */
++    XenEventChannel   *event_channel;
++    int               dev;
+     struct buffer     buffer;
+-    char              console[XEN_BUFSIZE];
+-    int               ring_ref;
++    char              *fe_path;
++    unsigned int      ring_ref;
+     void              *sring;
+     CharBackend       chr;
+     int               backlog;
+ };
++typedef struct XenConsole XenConsole;
++
++#define TYPE_XEN_CONSOLE_DEVICE "xen-console"
++OBJECT_DECLARE_SIMPLE_TYPE(XenConsole, XEN_CONSOLE_DEVICE)
+ 
+-static void buffer_append(struct XenConsole *con)
++static bool buffer_append(XenConsole *con)
+ {
+     struct buffer *buffer = &con->buffer;
+     XENCONS_RING_IDX cons, prod, size;
+@@ -60,7 +71,7 @@ static void buffer_append(struct XenConsole *con)
+ 
+     size = prod - cons;
+     if ((size == 0) || (size > sizeof(intf->out)))
+-        return;
++        return false;
+ 
+     if ((buffer->capacity - buffer->size) < size) {
+         buffer->capacity += (size + 1024);
+@@ -73,7 +84,7 @@ static void buffer_append(struct XenConsole *con)
+ 
+     xen_mb();
+     intf->out_cons = cons;
+-    xen_pv_send_notify(&con->xendev);
++    xen_device_notify_event_channel(XEN_DEVICE(con), con->event_channel, NULL);
+ 
+     if (buffer->max_capacity &&
+         buffer->size > buffer->max_capacity) {
+@@ -89,6 +100,7 @@ static void buffer_append(struct XenConsole *con)
+         if (buffer->consumed > buffer->max_capacity - over)
+             buffer->consumed = buffer->max_capacity - over;
      }
-@@ -1408,7 +1396,8 @@ int xen_evtchn_bind_interdomain_op(struct evtchn_bind_interdomain *interdomain)
-             assign_kernel_eventfd(lp->type, xc->guest_port, xc->fd);
++    return true;
+ }
+ 
+ static void buffer_advance(struct buffer *buffer, size_t len)
+@@ -100,7 +112,7 @@ static void buffer_advance(struct buffer *buffer, size_t len)
+     }
+ }
+ 
+-static int ring_free_bytes(struct XenConsole *con)
++static int ring_free_bytes(XenConsole *con)
+ {
+     struct xencons_interface *intf = con->sring;
+     XENCONS_RING_IDX cons, prod, space;
+@@ -118,13 +130,13 @@ static int ring_free_bytes(struct XenConsole *con)
+ 
+ static int xencons_can_receive(void *opaque)
+ {
+-    struct XenConsole *con = opaque;
++    XenConsole *con = opaque;
+     return ring_free_bytes(con);
+ }
+ 
+ static void xencons_receive(void *opaque, const uint8_t *buf, int len)
+ {
+-    struct XenConsole *con = opaque;
++    XenConsole *con = opaque;
+     struct xencons_interface *intf = con->sring;
+     XENCONS_RING_IDX prod;
+     int i, max;
+@@ -141,10 +153,10 @@ static void xencons_receive(void *opaque, const uint8_t *buf, int len)
+     }
+     xen_wmb();
+     intf->in_prod = prod;
+-    xen_pv_send_notify(&con->xendev);
++    xen_device_notify_event_channel(XEN_DEVICE(con), con->event_channel, NULL);
+ }
+ 
+-static void xencons_send(struct XenConsole *con)
++static bool xencons_send(XenConsole *con)
+ {
+     ssize_t len, size;
+ 
+@@ -159,174 +171,436 @@ static void xencons_send(struct XenConsole *con)
+     if (len < 1) {
+         if (!con->backlog) {
+             con->backlog = 1;
+-            xen_pv_printf(&con->xendev, 1,
+-                          "backlog piling up, nobody listening?\n");
          }
-         lp->type = EVTCHNSTAT_interdomain;
--        lp->type_val = PORT_INFO_TYPEVAL_REMOTE_QEMU | interdomain->remote_port;
-+        lp->u.interdomain.to_qemu = 1;
-+        lp->u.interdomain.port = interdomain->remote_port;
-         ret = 0;
      } else {
-         /* Loopback */
-@@ -1416,19 +1405,18 @@ int xen_evtchn_bind_interdomain_op(struct evtchn_bind_interdomain *interdomain)
-         XenEvtchnPort *lp = &s->port_table[interdomain->local_port];
- 
-         /*
--         * The 'remote' port for loopback must be an unbound port allocated for
--         * communication with the local domain (as indicated by rp->type_val
--         * being zero, not PORT_INFO_TYPEVAL_REMOTE_QEMU), and must *not* be
--         * the port that was just allocated for the local end.
-+         * The 'remote' port for loopback must be an unbound port allocated
-+         * for communication with the local domain, and must *not* be the
-+         * port that was just allocated for the local end.
-          */
-         if (interdomain->local_port != interdomain->remote_port &&
--            rp->type == EVTCHNSTAT_unbound && rp->type_val == 0) {
-+            rp->type == EVTCHNSTAT_unbound && !rp->u.interdomain.to_qemu) {
- 
-             rp->type = EVTCHNSTAT_interdomain;
--            rp->type_val = interdomain->local_port;
-+            rp->u.interdomain.port = interdomain->local_port;
- 
-             lp->type = EVTCHNSTAT_interdomain;
--            lp->type_val = interdomain->remote_port;
-+            lp->u.interdomain.port = interdomain->remote_port;
-         } else {
-             ret = -EINVAL;
+         buffer_advance(&con->buffer, len);
+         if (con->backlog && len == size) {
+             con->backlog = 0;
+-            xen_pv_printf(&con->xendev, 1, "backlog is gone\n");
          }
-@@ -1447,7 +1435,6 @@ int xen_evtchn_bind_interdomain_op(struct evtchn_bind_interdomain *interdomain)
- int xen_evtchn_alloc_unbound_op(struct evtchn_alloc_unbound *alloc)
+     }
++    return len > 0;
+ }
+ 
+ /* -------------------------------------------------------------------- */
+ 
+-static int store_con_info(struct XenConsole *con)
++static bool con_event(void *_xendev)
  {
-     XenEvtchnState *s = xen_evtchn_singleton;
--    uint16_t type_val;
-     int ret;
- 
-     if (!s) {
-@@ -1458,18 +1445,20 @@ int xen_evtchn_alloc_unbound_op(struct evtchn_alloc_unbound *alloc)
-         return -ESRCH;
-     }
- 
--    if (alloc->remote_dom == DOMID_QEMU) {
--        type_val = PORT_INFO_TYPEVAL_REMOTE_QEMU;
--    } else if (alloc->remote_dom == DOMID_SELF ||
--               alloc->remote_dom == xen_domid) {
--        type_val = 0;
--    } else {
-+    if (alloc->remote_dom != DOMID_QEMU &&
-+        alloc->remote_dom != DOMID_SELF &&
-+        alloc->remote_dom != xen_domid) {
-         return -EPERM;
-     }
- 
-     qemu_mutex_lock(&s->port_lock);
- 
--    ret = allocate_port(s, 0, EVTCHNSTAT_unbound, type_val, &alloc->port);
-+    ret = allocate_port(s, 0, EVTCHNSTAT_unbound, 0, &alloc->port);
+-    Chardev *cs = qemu_chr_fe_get_driver(&con->chr);
+-    char *pts = NULL;
+-    char *dom_path;
+-    g_autoptr(GString) path = NULL;
++    XenConsole *con = XEN_CONSOLE_DEVICE(_xendev);
++    bool done_something;
 +
-+    if (!ret && alloc->remote_dom == DOMID_QEMU) {
-+        XenEvtchnPort *p = &s->port_table[alloc->port];
-+        p->u.interdomain.to_qemu = 1;
++    if (xen_device_backend_get_state(&con->xendev) != XenbusStateConnected) {
++        return false;
++    }
++
++    done_something = buffer_append(con);
++
++    if (con->buffer.size - con->buffer.consumed) {
++        done_something |= xencons_send(con);
++    }
++    return done_something;
++}
++
++/* -------------------------------------------------------------------- */
++
++static bool xen_console_connect(XenDevice *xendev, Error **errp)
++{
++    XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
++    unsigned int port, limit;
++
++    if (xen_device_frontend_scanf(xendev, "ring-ref", "%u",
++                                  &con->ring_ref) != 1) {
++        error_setg(errp, "failed to read ring-ref");
++        return false;
 +    }
  
-     qemu_mutex_unlock(&s->port_lock);
- 
-@@ -1496,12 +1485,12 @@ int xen_evtchn_send_op(struct evtchn_send *send)
- 
-     switch (p->type) {
-     case EVTCHNSTAT_interdomain:
--        if (p->type_val & PORT_INFO_TYPEVAL_REMOTE_QEMU) {
-+        if (p->u.interdomain.to_qemu) {
-             /*
-              * This is an event from the guest to qemu itself, which is
-              * serving as the driver domain.
-              */
--            uint16_t be_port = p->type_val & ~PORT_INFO_TYPEVAL_REMOTE_QEMU;
-+            uint16_t be_port = p->u.interdomain.port;
-             struct xenevtchn_handle *xc = s->be_handles[be_port];
-             if (xc) {
-                 eventfd_write(xc->fd, 1);
-@@ -1511,7 +1500,7 @@ int xen_evtchn_send_op(struct evtchn_send *send)
-             }
-         } else {
-             /* Loopback interdomain ports; just a complex IPI */
--            set_port_pending(s, p->type_val);
-+            set_port_pending(s, p->u.interdomain.port);
-         }
-         break;
- 
-@@ -1553,8 +1542,7 @@ int xen_evtchn_set_port(uint16_t port)
- 
-     /* QEMU has no business sending to anything but these */
-     if (p->type == EVTCHNSTAT_virq ||
--        (p->type == EVTCHNSTAT_interdomain &&
--         (p->type_val & PORT_INFO_TYPEVAL_REMOTE_QEMU))) {
-+        (p->type == EVTCHNSTAT_interdomain && p->u.interdomain.to_qemu)) {
-         set_port_pending(s, port);
-         ret = 0;
+-    /* Only continue if we're talking to a pty. */
+-    if (!CHARDEV_IS_PTY(cs)) {
+-        return 0;
++    if (xen_device_frontend_scanf(xendev, "port", "%u", &port) != 1) {
++        error_setg(errp, "failed to read remote port");
++        return false;
      }
-@@ -2064,7 +2052,7 @@ int xen_be_evtchn_bind_interdomain(struct xenevtchn_handle *xc, uint32_t domid,
-     switch (gp->type) {
-     case EVTCHNSTAT_interdomain:
-         /* Allow rebinding after migration, preserve port # if possible */
--        be_port = gp->type_val & ~PORT_INFO_TYPEVAL_REMOTE_QEMU;
-+        be_port = gp->u.interdomain.port;
-         assert(be_port != 0);
-         if (!s->be_handles[be_port]) {
-             s->be_handles[be_port] = xc;
-@@ -2085,7 +2073,8 @@ int xen_be_evtchn_bind_interdomain(struct xenevtchn_handle *xc, uint32_t domid,
-         }
+-    pts = cs->filename + 4;
  
-         gp->type = EVTCHNSTAT_interdomain;
--        gp->type_val = be_port | PORT_INFO_TYPEVAL_REMOTE_QEMU;
-+        gp->u.interdomain.to_qemu = 1;
-+        gp->u.interdomain.port = be_port;
-         xc->guest_port = guest_port;
-         if (kvm_xen_has_cap(EVTCHN_SEND)) {
-             assign_kernel_eventfd(gp->type, guest_port, xc->fd);
-@@ -2130,7 +2119,7 @@ int xen_be_evtchn_unbind(struct xenevtchn_handle *xc, evtchn_port_t port)
-         /* This should never *not* be true */
-         if (gp->type == EVTCHNSTAT_interdomain) {
-             gp->type = EVTCHNSTAT_unbound;
--            gp->type_val = PORT_INFO_TYPEVAL_REMOTE_QEMU;
-+            gp->u.interdomain.port = 0;
-         }
+-    dom_path = qemu_xen_xs_get_domain_path(xenstore, xen_domid);
+-    if (!dom_path) {
+-        return 0;
++    if (xen_device_frontend_scanf(xendev, "limit", "%u", &limit) == 1) {
++        con->buffer.max_capacity = limit;
+     }
  
-         if (kvm_xen_has_cap(EVTCHN_SEND)) {
-@@ -2284,11 +2273,11 @@ EvtchnInfoList *qmp_xen_event_list(Error **errp)
+-    path = g_string_new(dom_path);
+-    free(dom_path);
++    con->event_channel = xen_device_bind_event_channel(xendev, port,
++                                                       con_event,
++                                                       con,
++                                                       errp);
++    if (!con->event_channel) {
++        return false;
++    }
  
-         info->type = p->type;
-         if (p->type == EVTCHNSTAT_interdomain) {
--            info->remote_domain = g_strdup((p->type_val & PORT_INFO_TYPEVAL_REMOTE_QEMU) ?
-+            info->remote_domain = g_strdup(p->u.interdomain.to_qemu ?
-                                            "qemu" : "loopback");
--            info->target = p->type_val & PORT_INFO_TYPEVAL_REMOTE_PORT_MASK;
-+            info->target = p->u.interdomain.port;
-         } else {
--            info->target = p->type_val;
-+            info->target = p->u.val; /* pirq# or virq# */
+-    if (con->xendev.dev) {
+-        g_string_append_printf(path, "/device/console/%d", con->xendev.dev);
++    if (!con->dev) {
++        xen_pfn_t mfn = (xen_pfn_t)con->ring_ref;
++        con->sring = qemu_xen_foreignmem_map(xendev->frontend_id, NULL,
++                                             PROT_READ | PROT_WRITE,
++                                             1, &mfn, NULL);
++        if (!con->sring) {
++            error_setg(errp, "failed to map console page");
++            return false;
++        }
+     } else {
+-        g_string_append(path, "/console");
++        con->sring = xen_device_map_grant_refs(xendev,
++                                               &con->ring_ref, 1,
++                                               PROT_READ | PROT_WRITE,
++                                               errp);
++        if (!con->sring) {
++            error_prepend(errp, "failed to map grant ref: ");
++            return false;
++        }
+     }
+-    g_string_append(path, "/tty");
+ 
+-    if (xenstore_write_str(con->console, path->str, pts)) {
+-        fprintf(stderr, "xenstore_write_str for '%s' fail", path->str);
+-        return -1;
++    trace_xen_console_connect(con->dev, con->ring_ref, port,
++                              con->buffer.max_capacity);
++
++    qemu_chr_fe_set_handlers(&con->chr, xencons_can_receive,
++                             xencons_receive, NULL, NULL, con, NULL,
++                             true);
++    return true;
++}
++
++static void xen_console_disconnect(XenDevice *xendev, Error **errp)
++{
++    XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
++
++    trace_xen_console_disconnect(con->dev);
++
++    qemu_chr_fe_set_handlers(&con->chr, NULL, NULL, NULL, NULL,
++                             con, NULL, true);
++
++    if (con->event_channel) {
++        xen_device_unbind_event_channel(xendev, con->event_channel,
++                                        errp);
++        con->event_channel = NULL;
++    }
++
++    if (con->sring) {
++        if (!con->dev) {
++            qemu_xen_foreignmem_unmap(con->sring, 1);
++        } else {
++            xen_device_unmap_grant_refs(xendev, con->sring,
++                                        &con->ring_ref, 1, errp);
++        }
++        con->sring = NULL;
+     }
+-    return 0;
+ }
+ 
+-static int con_init(struct XenLegacyDevice *xendev)
++static void xen_console_frontend_changed(XenDevice *xendev,
++                                         enum xenbus_state frontend_state,
++                                         Error **errp)
+ {
+-    struct XenConsole *con = container_of(xendev, struct XenConsole, xendev);
+-    char *type, *dom, label[32];
+-    int ret = 0;
+-    const char *output;
+-
+-    /* setup */
+-    dom = qemu_xen_xs_get_domain_path(xenstore, con->xendev.dom);
+-    if (!xendev->dev) {
+-        snprintf(con->console, sizeof(con->console), "%s/console", dom);
+-    } else {
+-        snprintf(con->console, sizeof(con->console), "%s/device/console/%d", dom, xendev->dev);
++    ERRP_GUARD();
++    enum xenbus_state backend_state = xen_device_backend_get_state(xendev);
++
++    switch (frontend_state) {
++    case XenbusStateInitialised:
++    case XenbusStateConnected:
++        if (backend_state == XenbusStateConnected) {
++            break;
++        }
++
++        xen_console_disconnect(xendev, errp);
++        if (*errp) {
++            break;
++        }
++
++        if (!xen_console_connect(xendev, errp)) {
++            xen_device_backend_set_state(xendev, XenbusStateClosing);
++            break;
++        }
++
++        xen_device_backend_set_state(xendev, XenbusStateConnected);
++        break;
++
++    case XenbusStateClosing:
++        xen_device_backend_set_state(xendev, XenbusStateClosing);
++        break;
++
++    case XenbusStateClosed:
++    case XenbusStateUnknown:
++        xen_console_disconnect(xendev, errp);
++        if (*errp) {
++            break;
++        }
++
++        xen_device_backend_set_state(xendev, XenbusStateClosed);
++        break;
++
++    default:
++        break;
+     }
+-    free(dom);
++}
+ 
+-    type = xenstore_read_str(con->console, "type");
+-    if (!type || strcmp(type, "ioemu") != 0) {
+-        xen_pv_printf(xendev, 1, "not for me (type=%s)\n", type);
+-        ret = -1;
+-        goto out;
++static char *xen_console_get_name(XenDevice *xendev, Error **errp)
++{
++    XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
++
++    if (con->dev == -1) {
++        XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
++        char fe_path[XENSTORE_ABS_PATH_MAX + 1];
++        char *value;
++        int idx = 1;
++
++        /* Theoretically we could go up to INT_MAX here but that's overkill */
++        while (idx < 100) {
++            snprintf(fe_path, sizeof(fe_path),
++                     "/local/domain/%u/device/console/%u",
++                     xendev->frontend_id, idx);
++            value = qemu_xen_xs_read(xenbus->xsh, XBT_NULL, fe_path, NULL);
++            if (!value) {
++                if (errno == ENOENT) {
++                    con->dev = idx;
++                    goto found;
++                }
++                error_setg(errp, "cannot read %s: %s", fe_path,
++                           strerror(errno));
++                return NULL;
++            }
++            free(value);
++            idx++;
++        }
++        error_setg(errp, "cannot find device index for console device");
++        return NULL;
+     }
++ found:
++    return g_strdup_printf("%u", con->dev);
++}
++
++static void xen_console_unrealize(XenDevice *xendev)
++{
++    XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
++
++    trace_xen_console_unrealize(con->dev);
+ 
+-    output = xenstore_read_str(con->console, "output");
++    /* Disconnect from the frontend in case this has not already happened */
++    xen_console_disconnect(xendev, NULL);
+ 
+-    /* no Xen override, use qemu output device */
+-    if (output == NULL) {
+-        if (con->xendev.dev) {
+-            qemu_chr_fe_init(&con->chr, serial_hd(con->xendev.dev),
+-                             &error_abort);
++    qemu_chr_fe_deinit(&con->chr, false);
++}
++
++static void xen_console_realize(XenDevice *xendev, Error **errp)
++{
++    ERRP_GUARD();
++    XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
++    Chardev *cs = qemu_chr_fe_get_driver(&con->chr);
++    unsigned int u;
++
++    if (!cs) {
++        error_setg(errp, "no backing character device");
++        return;
++    }
++
++    if (con->dev == -1) {
++        error_setg(errp, "no device index provided");
++        return;
++    }
++
++    /*
++     * The Xen primary console is special. The ring-ref is actually a GFN to
++     * be mapped directly as foreignmem (not a grant ref), and the guest port
++     * was allocated *for* the guest by the toolstack. The guest gets these
++     * through HVMOP_get_param and can use the console long before it's got
++     * XenStore up and running. We cannot create those for a Xen guest.
++     */
++    if (!con->dev) {
++        if (xen_device_frontend_scanf(xendev, "ring-ref", "%u", &u) != 1 ||
++            xen_device_frontend_scanf(xendev, "port", "%u", &u) != 1) {
++            error_setg(errp, "cannot create primary Xen console");
++            return;
          }
-         info->vcpu = p->vcpu;
-         info->pending = test_bit(i, pending);
++    }
++
++    trace_xen_console_realize(con->dev, object_get_typename(OBJECT(cs)));
++
++    if (CHARDEV_IS_PTY(cs)) {
++        /* Strip the leading 'pty:' */
++        xen_device_frontend_printf(xendev, "tty", "%s", cs->filename + 4);
++    }
++
++    /* No normal PV driver initialization for the primary console */
++    if (!con->dev) {
++        xen_console_connect(xendev, errp);
++    }
++}
++
++static char *console_frontend_path(struct qemu_xs_handle *xenstore,
++                                   unsigned int dom_id, unsigned int dev)
++{
++    if (!dev) {
++        return g_strdup_printf("/local/domain/%u/console", dom_id);
+     } else {
+-        snprintf(label, sizeof(label), "xencons%d", con->xendev.dev);
+-        qemu_chr_fe_init(&con->chr,
+-                         /*
+-                          * FIXME: sure we want to support implicit
+-                          * muxed monitors here?
+-                          */
+-                         qemu_chr_new_mux_mon(label, output, NULL),
+-                         &error_abort);
++        return g_strdup_printf("/local/domain/%u/device/console/%u", dom_id,
++                               dev);
+     }
++}
+ 
+-    store_con_info(con);
++static char *xen_console_get_frontend_path(XenDevice *xendev, Error **errp)
++{
++    XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
++    XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
++    char *ret = console_frontend_path(xenbus->xsh, xendev->frontend_id,
++                                      con->dev);
+ 
+-out:
+-    g_free(type);
++    if (!ret) {
++        error_setg(errp, "failed to create frontend path");
++    }
+     return ret;
+ }
+ 
+-static int con_initialise(struct XenLegacyDevice *xendev)
++
++static Property xen_console_properties[] = {
++    DEFINE_PROP_CHR("chardev", XenConsole, chr),
++    DEFINE_PROP_INT32("idx", XenConsole, dev, -1),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static void xen_console_class_init(ObjectClass *class, void *data)
+ {
+-    struct XenConsole *con = container_of(xendev, struct XenConsole, xendev);
+-    int limit;
+-
+-    if (xenstore_read_int(con->console, "ring-ref", &con->ring_ref) == -1)
+-        return -1;
+-    if (xenstore_read_int(con->console, "port", &con->xendev.remote_port) == -1)
+-        return -1;
+-    if (xenstore_read_int(con->console, "limit", &limit) == 0)
+-        con->buffer.max_capacity = limit;
++    DeviceClass *dev_class = DEVICE_CLASS(class);
++    XenDeviceClass *xendev_class = XEN_DEVICE_CLASS(class);
++
++    xendev_class->backend = "console";
++    xendev_class->device = "console";
++    xendev_class->get_name = xen_console_get_name;
++    xendev_class->realize = xen_console_realize;
++    xendev_class->frontend_changed = xen_console_frontend_changed;
++    xendev_class->unrealize = xen_console_unrealize;
++    xendev_class->get_frontend_path = xen_console_get_frontend_path;
++
++    device_class_set_props(dev_class, xen_console_properties);
++}
+ 
+-    if (!xendev->dev) {
+-        xen_pfn_t mfn = con->ring_ref;
+-        con->sring = qemu_xen_foreignmem_map(con->xendev.dom, NULL,
+-                                             PROT_READ | PROT_WRITE,
+-                                             1, &mfn, NULL);
+-    } else {
+-        con->sring = xen_be_map_grant_ref(xendev, con->ring_ref,
+-                                          PROT_READ | PROT_WRITE);
+-    }
+-    if (!con->sring)
+-        return -1;
++static const TypeInfo xen_console_type_info = {
++    .name = TYPE_XEN_CONSOLE_DEVICE,
++    .parent = TYPE_XEN_DEVICE,
++    .instance_size = sizeof(XenConsole),
++    .class_init = xen_console_class_init,
++};
+ 
+-    xen_be_bind_evtchn(&con->xendev);
+-    qemu_chr_fe_set_handlers(&con->chr, xencons_can_receive,
+-                             xencons_receive, NULL, NULL, con, NULL, true);
+-
+-    xen_pv_printf(xendev, 1,
+-                  "ring mfn %d, remote port %d, local port %d, limit %zd\n",
+-                  con->ring_ref,
+-                  con->xendev.remote_port,
+-                  con->xendev.local_port,
+-                  con->buffer.max_capacity);
+-    return 0;
++static void xen_console_register_types(void)
++{
++    type_register_static(&xen_console_type_info);
+ }
+ 
+-static void con_disconnect(struct XenLegacyDevice *xendev)
++type_init(xen_console_register_types)
++
++/* Called to instantiate a XenConsole when the backend is detected. */
++static void xen_console_device_create(XenBackendInstance *backend,
++                                      QDict *opts, Error **errp)
+ {
+-    struct XenConsole *con = container_of(xendev, struct XenConsole, xendev);
++    ERRP_GUARD();
++    XenBus *xenbus = xen_backend_get_bus(backend);
++    const char *name = xen_backend_get_name(backend);
++    unsigned long number;
++    char *fe = NULL, *type = NULL, *output = NULL;
++    char label[32];
++    XenDevice *xendev = NULL;
++    XenConsole *con;
++    Chardev *cd = NULL;
++    struct qemu_xs_handle *xsh = xenbus->xsh;
++
++    if (qemu_strtoul(name, NULL, 10, &number) || number > INT_MAX) {
++        error_setg(errp, "failed to parse name '%s'", name);
++        goto fail;
++    }
+ 
+-    qemu_chr_fe_deinit(&con->chr, false);
+-    xen_pv_unbind_evtchn(&con->xendev);
++    trace_xen_console_device_create(number);
+ 
+-    if (con->sring) {
+-        if (!xendev->dev) {
+-            qemu_xen_foreignmem_unmap(con->sring, 1);
+-        } else {
+-            xen_be_unmap_grant_ref(xendev, con->sring, con->ring_ref);
++    fe = console_frontend_path(xsh, xen_domid, number);
++    if (fe == NULL) {
++        error_setg(errp, "failed to generate frontend path");
++        goto fail;
++    }
++
++    if (xs_node_scanf(xsh, XBT_NULL, fe, "type", errp, "%ms", &type) != 1) {
++        error_prepend(errp, "failed to read console device type: ");
++        goto fail;
++    }
++
++    if (strcmp(type, "ioemu")) {
++        error_setg(errp, "declining to handle console type '%s'",
++                   type);
++        goto fail;
++    }
++
++    xendev = XEN_DEVICE(qdev_new(TYPE_XEN_CONSOLE_DEVICE));
++    con = XEN_CONSOLE_DEVICE(xendev);
++
++    con->dev = number;
++
++    snprintf(label, sizeof(label), "xencons%ld", number);
++
++    if (xs_node_scanf(xsh, XBT_NULL, fe, "output", NULL, "%ms", &output) == 1) {
++        /*
++         * FIXME: sure we want to support implicit
++         * muxed monitors here?
++         */
++        cd = qemu_chr_new_mux_mon(label, output, NULL);
++        if (!cd) {
++            error_setg(errp, "console: No valid chardev found at '%s': ",
++                       output);
++            goto fail;
+         }
+-        con->sring = NULL;
++    } else if (number) {
++        cd = serial_hd(number);
++        if (!cd) {
++            error_prepend(errp, "console: No serial device #%ld found: ",
++                          number);
++            goto fail;
++        }
++    } else {
++        /* No 'output' node on primary console: use null. */
++        cd = qemu_chr_new(label, "null", NULL);
++        if (!cd) {
++            error_setg(errp, "console: failed to create null device");
++            goto fail;
++        }
++    }
++
++    if (!qemu_chr_fe_init(&con->chr, cd, errp)) {
++        error_prepend(errp, "console: failed to initialize backing chardev: ");
++        goto fail;
++    }
++
++    if (qdev_realize_and_unref(DEVICE(xendev), BUS(xenbus), errp)) {
++        xen_backend_set_device(backend, xendev);
++        goto done;
++    }
++
++    error_prepend(errp, "realization of console device %lu failed: ",
++                  number);
++
++ fail:
++    if (xendev) {
++        object_unparent(OBJECT(xendev));
+     }
++ done:
++    g_free(fe);
++    free(type);
++    free(output);
+ }
+ 
+-static void con_event(struct XenLegacyDevice *xendev)
++static void xen_console_device_destroy(XenBackendInstance *backend,
++                                       Error **errp)
+ {
+-    struct XenConsole *con = container_of(xendev, struct XenConsole, xendev);
++    ERRP_GUARD();
++    XenDevice *xendev = xen_backend_get_device(backend);
++    XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
+ 
+-    buffer_append(con);
+-    if (con->buffer.size - con->buffer.consumed)
+-        xencons_send(con);
+-}
++    trace_xen_console_device_destroy(con->dev);
+ 
+-/* -------------------------------------------------------------------- */
++    object_unparent(OBJECT(xendev));
++}
+ 
+-struct XenDevOps xen_console_ops = {
+-    .size       = sizeof(struct XenConsole),
+-    .flags      = DEVOPS_FLAG_IGNORE_STATE|DEVOPS_FLAG_NEED_GNTDEV,
+-    .init       = con_init,
+-    .initialise = con_initialise,
+-    .event      = con_event,
+-    .disconnect = con_disconnect,
++static const XenBackendInfo xen_console_backend_info  = {
++    .type = "console",
++    .create = xen_console_device_create,
++    .destroy = xen_console_device_destroy,
+ };
++
++static void xen_console_register_backend(void)
++{
++    xen_backend_register(&xen_console_backend_info);
++}
++
++xen_backend_init(xen_console_register_backend);
+diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
+index 4ded3cec23..124dd5f3d6 100644
+--- a/hw/xen/xen-legacy-backend.c
++++ b/hw/xen/xen-legacy-backend.c
+@@ -623,7 +623,6 @@ void xen_be_init(void)
+ 
+     xen_set_dynamic_sysbus();
+ 
+-    xen_be_register("console", &xen_console_ops);
+     xen_be_register("vkbd", &xen_kbdmouse_ops);
+ #ifdef CONFIG_VIRTFS
+     xen_be_register("9pfs", &xen_9pfs_ops);
 -- 
 2.40.1
 
