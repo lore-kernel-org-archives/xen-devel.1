@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB42CC07545
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:58:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623045.970494 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62197C07545
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 14:58:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623048.970504 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfKN-0006vW-VN; Wed, 25 Oct 2023 14:57:47 +0000
+	id 1qvfKf-0007Se-6n; Wed, 25 Oct 2023 14:58:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623045.970494; Wed, 25 Oct 2023 14:57:47 +0000
+Received: by outflank-mailman (output) from mailman id 623048.970504; Wed, 25 Oct 2023 14:58:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvfKN-0006vP-S8; Wed, 25 Oct 2023 14:57:47 +0000
-Received: by outflank-mailman (input) for mailman id 623045;
- Wed, 25 Oct 2023 14:57:46 +0000
+	id 1qvfKf-0007SX-47; Wed, 25 Oct 2023 14:58:05 +0000
+Received: by outflank-mailman (input) for mailman id 623048;
+ Wed, 25 Oct 2023 14:58:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LJSz=GH=casper.srs.infradead.org=BATV+85b1c44ac99574f3713d+7367+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qvfDz-0000WU-W6
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:11 +0000
+ id 1qvfE1-0000WU-F8
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 14:51:13 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eecab8f1-7345-11ee-9b0e-b553b5be7939;
- Wed, 25 Oct 2023 16:51:09 +0200 (CEST)
+ id efab6865-7345-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 16:51:10 +0200 (CEST)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qvfDb-009Nmv-GY; Wed, 25 Oct 2023 14:50:47 +0000
+ id 1qvfDa-009Nms-1e; Wed, 25 Oct 2023 14:50:46 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qvfDZ-002dFp-2d; Wed, 25 Oct 2023 15:50:45 +0100
+ Linux)) id 1qvfDZ-002dFg-23; Wed, 25 Oct 2023 15:50:45 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: eecab8f1-7345-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: efab6865-7345-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=xzkyRUM7nQfBrePX87BOU/AjGHoWHaL/QraAYhiDuVA=; b=BL58INjOUPmq2JMYOeuvydyhAU
-	tPTn/p80t5Eh08H3gRlleRlgP+tgQWGq7N5wXJH7X/mlOScXTpOEWnbOuRpXEPuP6qVNRYaSGOugd
-	6tcXeJgK3mLtMIaVmwTi4STOuz6ondMNTsb2Dj73DZe37n6idaDQJsRGljufaBfSmbEuV49teBrTx
-	m/FgIqkMEwtqCXoCcT8ymUrb/NGT1pJYZuYZbwQtSluK2yb0iTICekflP2IJA3Gpi9MMvtZg5uGSH
-	wfGZq2vvHZM4qZ/snaUefgRQOvq1JM0TDWen5C41IvSrdS9pyW1ej5/6MqLtxrfa64loaDy8AXSPz
-	05GH0pzA==;
+	bh=yQfwtPbREGreJZVtftdMEfHE+iyAsm6cKl0Oh4POK+Q=; b=Mip1iYJSsW63MhtMiW7lLRRtcN
+	ur5UxOh/K0bhJvgyuwL3anhrKnfHaqrYx5ZJMdFB5jGn+RMD+HS7wtiHcoklHoFvdv2I43TTgm4TN
+	kbQMmZY/q2QwvkEfSnvyMGAeZsQKkHKyqXNtvLtoA1o6dpir3gCSx6zkRP/hgW+wVh0OdOIXsuUYe
+	+74CUSSgTmHxS5NFl3qIuMTHyLzhGKDdzUo9JKEtFq0vxXU9zdIfzsD8r79TPKaOSKhqd+hJpJhsQ
+	6ol8uqebpxD+CZwrgZBC26MmQdHCy/53gOLmG5HnyAqdEDJdxy72SrwmzynaKS5u9rW9ksT7Dyte/
+	F/41VQRA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -74,9 +74,9 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	kvm@vger.kernel.org,
 	Bernhard Beschow <shentey@gmail.com>,
 	Joel Upham <jupham125@gmail.com>
-Subject: [PATCH v3 27/28] hw/xen: use qemu_create_nic_bus_devices() to instantiate Xen NICs
-Date: Wed, 25 Oct 2023 15:50:41 +0100
-Message-Id: <20231025145042.627381-28-dwmw2@infradead.org>
+Subject: [PATCH v3 25/28] hw/pci: add pci_init_nic_devices(), pci_init_nic_in_slot()
+Date: Wed, 25 Oct 2023 15:50:39 +0100
+Message-Id: <20231025145042.627381-26-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025145042.627381-1-dwmw2@infradead.org>
 References: <20231025145042.627381-1-dwmw2@infradead.org>
@@ -87,117 +87,90 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-When instantiating XenBus itself, for each NIC which is configured with
-either the model unspecified, or set to to "xen" or "xen-net-device",
-create a corresponding xen-net-device for it.
+The loop over nd_table[] to add PCI NICs is repeated in quite a few
+places. Add a helper function to do it.
 
-Now we can launch emulated Xen guests with '-nic user', and this fixes
-the setup for Xen PV guests, which was previously broken in various
-ways and never actually managed to peer with the netdev.
+Some platforms also try to instantiate a specific model in a specific
+slot, to match the real hardware. Add pci_init_nic_in_slot() for that
+purpose.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/xen/xen-bus.c                    |  4 ++++
- hw/xen/xen_devconfig.c              | 25 -------------------------
- hw/xenpv/xen_machine_pv.c           |  9 ---------
- include/hw/xen/xen-legacy-backend.h |  1 -
- 4 files changed, 4 insertions(+), 35 deletions(-)
+ hw/pci/pci.c         | 45 ++++++++++++++++++++++++++++++++++++++++++++
+ include/hw/pci/pci.h |  4 +++-
+ 2 files changed, 48 insertions(+), 1 deletion(-)
 
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index cc6f1b362f..fb82cc33e4 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -19,6 +19,7 @@
- #include "qapi/error.h"
- #include "qapi/qmp/qdict.h"
- #include "sysemu/sysemu.h"
-+#include "net/net.h"
- #include "trace.h"
- 
- static char *xen_device_get_backend_path(XenDevice *xendev)
-@@ -1140,4 +1141,7 @@ void xen_bus_init(void)
- 
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-     qbus_set_bus_hotplug_handler(bus);
-+
-+    qemu_create_nic_bus_devices(bus, TYPE_XEN_DEVICE, "xen-net-device",
-+                                "xen", "xen-net-device");
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 7d09e1a39d..51b0be3972 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -1925,6 +1925,51 @@ PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+     return pci_dev;
  }
-diff --git a/hw/xen/xen_devconfig.c b/hw/xen/xen_devconfig.c
-index 3f77c675c6..2150869f60 100644
---- a/hw/xen/xen_devconfig.c
-+++ b/hw/xen/xen_devconfig.c
-@@ -46,31 +46,6 @@ static int xen_config_dev_all(char *fe, char *be)
  
- /* ------------------------------------------------------------- */
- 
--int xen_config_dev_nic(NICInfo *nic)
--{
--    char fe[256], be[256];
--    char mac[20];
--    int vlan_id = -1;
--
--    net_hub_id_for_client(nic->netdev, &vlan_id);
--    snprintf(mac, sizeof(mac), "%02x:%02x:%02x:%02x:%02x:%02x",
--             nic->macaddr.a[0], nic->macaddr.a[1], nic->macaddr.a[2],
--             nic->macaddr.a[3], nic->macaddr.a[4], nic->macaddr.a[5]);
--    xen_pv_printf(NULL, 1, "config nic %d: mac=\"%s\"\n", vlan_id, mac);
--    xen_config_dev_dirs("vif", "qnic", vlan_id, fe, be, sizeof(fe));
--
--    /* frontend */
--    xenstore_write_int(fe, "handle",     vlan_id);
--    xenstore_write_str(fe, "mac",        mac);
--
--    /* backend */
--    xenstore_write_int(be, "handle",     vlan_id);
--    xenstore_write_str(be, "mac",        mac);
--
--    /* common stuff */
--    return xen_config_dev_all(fe, be);
--}
--
- int xen_config_dev_vfb(int vdev, const char *type)
++void pci_init_nic_devices(PCIBus *bus, const char *default_model)
++{
++    qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
++                                "virtio", "virtio-net-pci");
++}
++
++bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
++                          const char *alias, const char *devaddr)
++{
++    NICInfo *nd = qemu_find_nic_info(model, true, alias);
++    int dom, busnr, devfn;
++    PCIDevice *pci_dev;
++    unsigned slot;
++    PCIBus *bus;
++
++    if (!nd) {
++        return false;
++    }
++
++    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
++        error_report("Invalid PCI device address %s for device %s",
++                     devaddr, model);
++        exit(1);
++    }
++
++    if (dom != 0) {
++        error_report("No support for non-zero PCI domains");
++        exit(1);
++    }
++
++    devfn = PCI_DEVFN(slot, 0);
++
++    bus = pci_find_bus_nr(rootbus, busnr);
++    if (!bus) {
++        error_report("Invalid PCI device address %s for device %s",
++                     devaddr, model);
++        exit(1);
++    }
++
++    pci_dev = pci_new(devfn, model);
++    qdev_set_nic_properties(&pci_dev->qdev, nd);
++    pci_realize_and_unref(pci_dev, bus, &error_fatal);
++    return true;
++}
++
+ PCIDevice *pci_vga_init(PCIBus *bus)
  {
-     char fe[256], be[256];
-diff --git a/hw/xenpv/xen_machine_pv.c b/hw/xenpv/xen_machine_pv.c
-index 9f9f137f99..1130d1a147 100644
---- a/hw/xenpv/xen_machine_pv.c
-+++ b/hw/xenpv/xen_machine_pv.c
-@@ -32,8 +32,6 @@
- 
- static void xen_init_pv(MachineState *machine)
- {
--    int i;
+     vga_interface_created = true;
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index ea5aff118b..684d49bdcd 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -317,7 +317,9 @@ void pci_device_reset(PCIDevice *dev);
+ PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+                                const char *default_model,
+                                const char *default_devaddr);
 -
-     setup_xen_backend_ops();
++void pci_init_nic_devices(PCIBus *bus, const char *default_model);
++bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
++                          const char *alias, const char *devaddr);
+ PCIDevice *pci_vga_init(PCIBus *bus);
  
-     /* Initialize backend core & drivers */
-@@ -62,13 +60,6 @@ static void xen_init_pv(MachineState *machine)
-         vga_interface_created = true;
-     }
- 
--    /* configure nics */
--    for (i = 0; i < nb_nics; i++) {
--        if (!nd_table[i].model || 0 != strcmp(nd_table[i].model, "xen"))
--            continue;
--        xen_config_dev_nic(nd_table + i);
--    }
--
-     xen_bus_init();
- 
-     /* config cleanup hook */
-diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
-index fc42146bc2..2cca174778 100644
---- a/include/hw/xen/xen-legacy-backend.h
-+++ b/include/hw/xen/xen-legacy-backend.h
-@@ -81,7 +81,6 @@ extern struct XenDevOps xen_usb_ops;          /* xen-usb.c         */
- 
- /* configuration (aka xenbus setup) */
- void xen_config_cleanup(void);
--int xen_config_dev_nic(NICInfo *nic);
- int xen_config_dev_vfb(int vdev, const char *type);
- int xen_config_dev_vkbd(int vdev);
- int xen_config_dev_console(int vdev);
+ static inline PCIBus *pci_get_bus(const PCIDevice *dev)
 -- 
 2.40.1
 
