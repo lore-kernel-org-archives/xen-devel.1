@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09CC8C25B70
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF8FCC0032E
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Oct 2023 19:30:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623204.970910 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.623193.970823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvja5-00053h-Uf; Wed, 25 Oct 2023 19:30:17 +0000
+	id 1qvjZu-0002My-Kf; Wed, 25 Oct 2023 19:30:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623204.970910; Wed, 25 Oct 2023 19:30:17 +0000
+Received: by outflank-mailman (output) from mailman id 623193.970823; Wed, 25 Oct 2023 19:30:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvja5-00050G-6T; Wed, 25 Oct 2023 19:30:17 +0000
-Received: by outflank-mailman (input) for mailman id 623204;
- Wed, 25 Oct 2023 19:30:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qvjZu-0002Kv-DY; Wed, 25 Oct 2023 19:30:06 +0000
+Received: by outflank-mailman (input) for mailman id 623193;
+ Wed, 25 Oct 2023 19:30:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xaZJ=GH=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1qvja0-0000YO-PY
- for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 19:30:12 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ea6845ae-736c-11ee-98d5-6d05b1d4d9a1;
- Wed, 25 Oct 2023 21:30:12 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9b95622c620so24457066b.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Oct 2023 12:30:12 -0700 (PDT)
+ id 1qvjZs-0001Lv-QD
+ for xen-devel@lists.xenproject.org; Wed, 25 Oct 2023 19:30:04 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e4840e10-736c-11ee-9b0e-b553b5be7939;
+ Wed, 25 Oct 2023 21:30:02 +0200 (CEST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-9b95622c620so24431766b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Oct 2023 12:30:02 -0700 (PDT)
 Received: from edvint-x-u.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- hv6-20020a17090760c600b00985ed2f1584sm10408710ejc.187.2023.10.25.12.30.11
+ hv6-20020a17090760c600b00985ed2f1584sm10408710ejc.187.2023.10.25.12.30.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 12:30:11 -0700 (PDT)
+ Wed, 25 Oct 2023 12:30:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea6845ae-736c-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: e4840e10-736c-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1698262211; x=1698867011; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1698262202; x=1698867002; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0nnj94eBCueSGzdSoAmtrm7fV0B+qdR+A2YxTRCOPiA=;
-        b=kCbNBmAjp6mYFPR1sBLeqwdtzZ5mHWEvtQAyrVojFttpVpmxiqW8gir9pSjybZNxAl
-         rvQAAOAwuSdbA2f9ZD6+zWRIVaDZMBHn0vQWMLiRwRNYdHWC9hv1dY2JQLdPlXrhpZae
-         EZgzw5eUtJP6+/RT7rxg4JUsnyE+KIHi9hOCE=
+        bh=+4Ugom2BHWfSCQHaZ15aBTStdezniWO/0GIfarrnvRY=;
+        b=G41IVVsNTjuJuI25uQ+S8ZI+6uaSBM+X0OQUVuFP55E7xqx+bipBRsMuJURzQk8/u3
+         SyNLZb2zWPFF7iLO43mrUEwdmRXQPRaFJjQOaRCKyjmr4/vcXJ07yOP1KkU4toczYsUR
+         Oc7O7mUbhx9wTi+C4B3kvwN1GS2Wk3NcQYNXM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698262211; x=1698867011;
+        d=1e100.net; s=20230601; t=1698262202; x=1698867002;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0nnj94eBCueSGzdSoAmtrm7fV0B+qdR+A2YxTRCOPiA=;
-        b=h3Abpx2VuWm6qaR9QWU9nVlw8gdTw6b7hCmSzyxW1Up4wXnxH6ZABzfFROfZGHKeYo
-         WM22GEC+ktvtlNJraryqNGAlMdVQeSseViOO1HjryKBhN8wIad75IoHwJ5AG7JEgl9pg
-         lM1m97kSlyLnL0vQEGWo8RuFKflIxrqE2LiSvRGcdAqqDuJHOFXX8gVjCXKpw/Fd9Ylt
-         oPQ+eEa7W0ApkWrSCLkSYMSrID80vjOzoB/OuoLEHo/0E1ZxXhuPF6J4PbWCLQlkA70T
-         n2Mnwn7xokZOMfH0uoQA/bQf9Ru8leeE6H+5DMfvNeEPBJh30JRm6B4Nk+aLMqEey0ve
-         0V3w==
-X-Gm-Message-State: AOJu0Yy/Eb/jUZvw4khWfmOnAg0BW/6bjvxmK4UnSMNR0aoT1XnhtMUw
-	1Q12qbcZRtEkmuAern6qliNM7Z5QTbG4dpy6YQ0xsA==
-X-Google-Smtp-Source: AGHT+IEpDexz4pu9AN7h/Al6z/4coqxRpbpAap8jC+a2WblgSDzd8wrU1Mnw0oODEMQUOaDbuG4GsA==
-X-Received: by 2002:a17:907:3f85:b0:9be:6ff7:128a with SMTP id hr5-20020a1709073f8500b009be6ff7128amr13011659ejc.67.1698262211740;
-        Wed, 25 Oct 2023 12:30:11 -0700 (PDT)
+        bh=+4Ugom2BHWfSCQHaZ15aBTStdezniWO/0GIfarrnvRY=;
+        b=ILn+uP2EHgrdFC4Aq2UnVS3HYngjOAS1sr2N1mtHOwopE/cEunLKPmRSeRqxLgyQOj
+         mcaCNKNmhBL9spala2WXnJL2JYgg8yIym/iKF2HkdapIqftrd+U1c9HGD+YTncee/J7u
+         MMZwQSUtWqlStQONPFksbitZ3LP/rD2d4nUNGAJ/rmzXA6i8ML0ZRzgd4lMvcCbapfKg
+         tQBzlUIx5tmFCDhV495s+wJMSnhjbwhdFBwh6xEV4TyBMrmj4y2IpLYRAYoLYlCnOux0
+         a3RsPGBqMlRDmGdJdeJXHJ/u48Nbz49VpZWEJJlvsjb6M8cXpMIteZK3rM3FAgqqCQMA
+         CbFQ==
+X-Gm-Message-State: AOJu0YwnU57yRXJw0xWOVKNd6udXW73t0yQnsJqBz+2ig5pZQ7SOdH4F
+	/efIkOMr2HzCJFZpDGMw6BnPUbSRXmIhkRNzOOJyQHwr
+X-Google-Smtp-Source: AGHT+IHlyeNic58eWA6AVEhtXnW5b2tNaVHDqvEIfpVl/o8VVXuxMwbs+BxoU7A+kDntpz0Nz79TiA==
+X-Received: by 2002:a17:906:c14b:b0:9ad:a59f:331a with SMTP id dp11-20020a170906c14b00b009ada59f331amr13625243ejc.57.1698262201789;
+        Wed, 25 Oct 2023 12:30:01 -0700 (PDT)
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>,
@@ -83,9 +83,9 @@ Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH 17/22] x86/PMUv4: IA32_PERF_GLOBAL_{STATUS_SET, INUSE} support
-Date: Wed, 25 Oct 2023 20:29:47 +0100
-Message-Id: <586661cb0604d638972e57de039456c85371ed97.1698261255.git.edwin.torok@cloud.com>
+Subject: [RFC PATCH 05/22] x86/PMUv1: report correct information in 0xa CPUID
+Date: Wed, 25 Oct 2023 20:29:35 +0100
+Message-Id: <4a00165999a0cc250f097fc8eaab0649f1c05ac0.1698261255.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1698261255.git.edwin.torok@cloud.com>
 References: <cover.1698261255.git.edwin.torok@cloud.com>
@@ -95,117 +95,111 @@ Content-Transfer-Encoding: 8bit
 
 From: Edwin Török <edvin.torok@citrix.com>
 
-Expose thse MSRs to the guest when PMU version is >= 4.
+The 0xa CPUID leaf has to report supported number of:
+- fixed performance counters
+- general purpose performance counters
+- architectural predefined events
+
+And the PMU version (which was already limited to 3).
+
+Type punning is used, which should be safe due to -fno-strict-aliasing.
+
+This limits the number of arch events supported when vpmu=arch on Icelake.
+
+Backport: 4.0+
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- xen/arch/x86/cpu/vpmu_intel.c  | 20 +++++++++++++++++++-
- xen/arch/x86/hvm/vmx/vmx.c     |  5 +++++
- xen/arch/x86/pv/emul-priv-op.c |  5 +++++
- 3 files changed, 29 insertions(+), 1 deletion(-)
+ xen/arch/x86/cpu/vpmu_intel.c   |  2 +-
+ xen/arch/x86/cpuid.c            | 39 ++++++++++++++++++++++++++++++---
+ xen/arch/x86/include/asm/vpmu.h |  4 ++++
+ 3 files changed, 41 insertions(+), 4 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
-index 923fe42a0b..5e660af395 100644
+index fa5b40c65c..9602728f1b 100644
 --- a/xen/arch/x86/cpu/vpmu_intel.c
 +++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -171,6 +171,8 @@ static int is_core2_vpmu_msr(u32 msr_index, int *type, int *index)
-     case MSR_CORE_PERF_GLOBAL_CTRL:
-     case MSR_CORE_PERF_GLOBAL_STATUS:
-     case MSR_CORE_PERF_GLOBAL_OVF_CTRL:
-+    case MSR_CORE_PERF_GLOBAL_STATUS_SET:
-+    case MSR_CORE_PERF_GLOBAL_INUSE:
-         *type = MSR_TYPE_GLOBAL;
-         return 1;
+@@ -66,7 +66,7 @@ static bool_t __read_mostly full_width_write;
+ #define ARCH_CNTR_PIN_CONTROL (1ULL << 19)
  
-@@ -545,10 +547,21 @@ static int cf_check core2_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
-         core2_vpmu_cxt->global_status &= ~msr_content;
-         wrmsrl(MSR_CORE_PERF_GLOBAL_OVF_CTRL, msr_content);
-         return 0;
-+    case MSR_CORE_PERF_GLOBAL_STATUS_SET:
-+        if ( (v->domain->arch.cpuid->basic.pmu_version < 4) ||
-+             (msr_content & global_ovf_ctrl_mask) )
-+            return -EINVAL;
-+        core2_vpmu_cxt->global_status |= msr_content;
-+        wrmsrl(MSR_CORE_PERF_GLOBAL_STATUS_SET, msr_content);
-+        return 0;
-     case MSR_CORE_PERF_GLOBAL_STATUS:
-         gdprintk(XENLOG_INFO, "Can not write readonly MSR: "
-                  "MSR_PERF_GLOBAL_STATUS(0x38E)!\n");
-         return -EINVAL;
-+    case MSR_CORE_PERF_GLOBAL_INUSE:
-+        gdprintk(XENLOG_INFO, "Can not write readonly MSR: "
-+                 "MSR_PERF_GLOBAL_INUSE(0x392)!\n");
-+        return -EINVAL;
-     case MSR_IA32_PEBS_ENABLE:
-         if ( vpmu_features & (XENPMU_FEATURE_IPC_ONLY |
-                               XENPMU_FEATURE_ARCH_ONLY) )
-@@ -688,7 +701,8 @@ static int cf_check core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
-         core2_vpmu_cxt = vpmu->context;
-         switch ( msr )
+ /* Number of general-purpose and fixed performance counters */
+-static unsigned int __read_mostly arch_pmc_cnt, fixed_pmc_cnt;
++unsigned int __read_mostly arch_pmc_cnt, fixed_pmc_cnt;
+ 
+ /* Masks used for testing whether and MSR is valid */
+ #define ARCH_CTRL_MASK  (~((1ull << 32) - 1) | (1ull << 21) | ARCH_CNTR_PIN_CONTROL)
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index 455a09b2dd..dfbcd1b3a4 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -304,9 +304,42 @@ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
+             *res = EMPTY_LEAF;
+         else
          {
--        case MSR_CORE_PERF_GLOBAL_OVF_CTRL:
-+        case MSR_CORE_PERF_GLOBAL_OVF_CTRL: /* FALLTHROUGH */
-+        case MSR_CORE_PERF_GLOBAL_STATUS_SET:
-             *msr_content = 0;
-             break;
-         case MSR_CORE_PERF_GLOBAL_STATUS:
-@@ -700,6 +714,10 @@ static int cf_check core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
-             else
-                 rdmsrl(MSR_CORE_PERF_GLOBAL_CTRL, *msr_content);
-             break;
-+        case MSR_CORE_PERF_GLOBAL_INUSE:
-+            if ( v->domain->arch.cpuid->basic.pmu_version < 4 )
-+                return -EINVAL;
-+            /* FALLTHROUGH */
-         default:
-             rdmsrl(msr, *msr_content);
+-            /* Report at most v3 since that's all we currently emulate. */
+-            if ( (res->a & 0xff) > 3 )
+-                res->a = (res->a & ~0xff) | 3;
++            union {
++                uint32_t eax;
++                struct {
++                    uint8_t version;
++                    uint8_t general_nr;
++                    uint8_t general_width;
++                    uint8_t arch_nr;
++                };
++            } u;
++            u.eax = res->a;
++
++            /* Report at most VPMU_VERSION_MAX since that's all we currently emulate. */
++            if ( u.version >  VPMU_VERSION_MAX ) {
++                gdprintk(XENLOG_WARNING, "Limiting PMU version to %d (actual %d)", VPMU_VERSION_MAX, u.version);
++                u.version = VPMU_VERSION_MAX;
++            }
++
++            if ( u.general_nr > arch_pmc_cnt ) {
++                gdprintk(XENLOG_WARNING, "Limiting general purpose PMU count to %d (actual %d)", arch_pmc_cnt, u.general_nr);
++                u.general_nr = arch_pmc_cnt;
++            }
++
++            if ( vpmu_features & (XENPMU_FEATURE_IPC_ONLY |
++                                  XENPMU_FEATURE_ARCH_ONLY) ) {
++                unsigned limit = ( vpmu_features & XENPMU_FEATURE_ARCH_ONLY ) ? 7 : 3;
++                if (limit < u.arch_nr) {
++                    gdprintk(XENLOG_WARNING, "Limiting architectural PMU events to %d (actual %d)", limit, u.arch_nr);
++                    u.arch_nr = limit;
++                }
++            }
++
++            res->a = u.eax;
++
++            /* We only implement 3 fixed function counters */
++            if ( (res->d & 0x1f) > fixed_pmc_cnt )
++                res->d = (res->d & ~0x1f) | fixed_pmc_cnt;
          }
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index cd772585fe..af70ed8f30 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -3375,6 +3375,8 @@ static int cf_check vmx_msr_read_intercept(
-     case MSR_CORE_PERF_FIXED_CTR_CTRL...MSR_CORE_PERF_GLOBAL_OVF_CTRL:
-     case MSR_IA32_PEBS_ENABLE:
-     case MSR_IA32_DS_AREA:
-+    case MSR_CORE_PERF_GLOBAL_STATUS_SET:
-+    case MSR_CORE_PERF_GLOBAL_INUSE:
-         if ( vpmu_do_rdmsr(msr, msr_content) )
-             goto gp_fault;
-         break;
-@@ -3698,6 +3700,9 @@ static int cf_check vmx_msr_write_intercept(
-     case MSR_IA32_PEBS_ENABLE:
-     case MSR_IA32_DS_AREA:
-          if ( vpmu_do_wrmsr(msr, msr_content) )
-+    case MSR_CORE_PERF_GLOBAL_STATUS_SET:
-+    case MSR_CORE_PERF_GLOBAL_INUSE:
-+         if ( vpmu_do_wrmsr(msr, msr_content) )
-             goto gp_fault;
          break;
  
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 09bfde1060..105485bb1e 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -968,6 +968,9 @@ static int cf_check read_msr(
-     case MSR_P6_EVNTSEL(0) ... MSR_P6_EVNTSEL_LAST:
-     case MSR_CORE_PERF_FIXED_CTR0 ... MSR_CORE_PERF_FIXED_CTRn:
-     case MSR_CORE_PERF_FIXED_CTR_CTRL ... MSR_CORE_PERF_GLOBAL_OVF_CTRL:
-+    case MSR_IA32_PEBS_ENABLE:
-+    case MSR_CORE_PERF_GLOBAL_STATUS_SET:
-+    case MSR_CORE_PERF_GLOBAL_INUSE:
-         if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
-         {
-             vpmu_msr = true;
-@@ -1148,6 +1151,8 @@ static int cf_check write_msr(
-     case MSR_P6_EVNTSEL(0) ... MSR_P6_EVNTSEL_LAST:
-     case MSR_CORE_PERF_FIXED_CTR0 ... MSR_CORE_PERF_FIXED_CTRn:
-     case MSR_CORE_PERF_FIXED_CTR_CTRL ... MSR_CORE_PERF_GLOBAL_OVF_CTRL:
-+    case MSR_CORE_PERF_GLOBAL_STATUS_SET:
-+    case MSR_CORE_PERF_GLOBAL_INUSE:
-         if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
-         {
-             vpmu_msr = true;
+diff --git a/xen/arch/x86/include/asm/vpmu.h b/xen/arch/x86/include/asm/vpmu.h
+index b165acc6c2..1ef6089ccb 100644
+--- a/xen/arch/x86/include/asm/vpmu.h
++++ b/xen/arch/x86/include/asm/vpmu.h
+@@ -74,6 +74,8 @@ struct vpmu_struct {
+ #define VPMU_CPU_HAS_DS                     0x1000 /* Has Debug Store */
+ #define VPMU_CPU_HAS_BTS                    0x2000 /* Has Branch Trace Store */
+ 
++#define VPMU_VERSION_MAX                    0x3
++
+ static inline void vpmu_set(struct vpmu_struct *vpmu, const u32 mask)
+ {
+     vpmu->flags |= mask;
+@@ -118,6 +120,8 @@ static inline int vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+ 
+ extern unsigned int vpmu_mode;
+ extern unsigned int vpmu_features;
++extern unsigned int arch_pmc_cnt;
++extern unsigned int fixed_pmc_cnt;
+ 
+ /* Context switch */
+ static inline void vpmu_switch_from(struct vcpu *prev)
 -- 
 2.41.0
 
