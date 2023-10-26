@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92A7C25B6B
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Oct 2023 10:32:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.623674.971740 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEC54C25B48
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Oct 2023 10:33:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.623677.971756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvxfU-0006My-5n; Thu, 26 Oct 2023 10:32:48 +0000
+	id 1qvxff-0006kS-NT; Thu, 26 Oct 2023 10:32:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 623674.971740; Thu, 26 Oct 2023 10:32:48 +0000
+Received: by outflank-mailman (output) from mailman id 623677.971756; Thu, 26 Oct 2023 10:32:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qvxfU-0006Mr-26; Thu, 26 Oct 2023 10:32:48 +0000
-Received: by outflank-mailman (input) for mailman id 623674;
- Thu, 26 Oct 2023 10:32:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qvxff-0006j5-HJ; Thu, 26 Oct 2023 10:32:59 +0000
+Received: by outflank-mailman (input) for mailman id 623677;
+ Thu, 26 Oct 2023 10:32:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=VqC+=GI=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qvxfS-0006Mj-Ma
- for xen-devel@lists.xenproject.org; Thu, 26 Oct 2023 10:32:46 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 00572945-73eb-11ee-98d5-6d05b1d4d9a1;
- Thu, 26 Oct 2023 12:32:45 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id 47B1C4EE0742;
- Thu, 26 Oct 2023 12:32:45 +0200 (CEST)
+ <SRS0=Oycl=GI=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1qvxfe-0006fs-RS
+ for xen-devel@lists.xenproject.org; Thu, 26 Oct 2023 10:32:58 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 068e4182-73eb-11ee-9b0e-b553b5be7939;
+ Thu, 26 Oct 2023 12:32:56 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B3C91424;
+ Thu, 26 Oct 2023 03:33:37 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E64103F738;
+ Thu, 26 Oct 2023 03:32:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,74 +44,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 00572945-73eb-11ee-98d5-6d05b1d4d9a1
+X-Inumbo-ID: 068e4182-73eb-11ee-9b0e-b553b5be7939
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [for-4.19 PATCH 1/2] cppcheck: rework exclusion_file_list.py code
+Date: Thu, 26 Oct 2023 11:32:42 +0100
+Message-Id: <20231026103243.2077516-2-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231026103243.2077516-1-luca.fancellu@arm.com>
+References: <20231026103243.2077516-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-Date: Thu, 26 Oct 2023 12:32:45 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, michal.orzel@amd.com,
- xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, consulting@bugseng.com,
- andrew.cooper3@citrix.com, roger.pau@citrix.com, Simone Ballarin
- <simone.ballarin@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, George
- Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Wei Liu
- <wl@xen.org>, xen-devel@lists.xenproject.org
-Subject: Re: [XEN PATCH][for-4.19 v3 1/8] xen/include: add macro LOWEST_BIT
-In-Reply-To: <3cc22b2d-fbcf-899e-1d7d-036a53bd0f7f@suse.com>
-References: <cover.1697815135.git.nicola.vetrini@bugseng.com>
- <546cf30aa43d6d0687a9a6c6d23b11128e5783e8.1697815135.git.nicola.vetrini@bugseng.com>
- <f504772a-68b4-fbfa-e7d4-8d22992c7944@suse.com>
- <f23a1f95916bd61ddcd5002428d8876c@bugseng.com>
- <6d113a237846c7a41aa083e806f172e7@bugseng.com>
- <5475d9e5-ec1c-7f71-ee77-59ec2e6ee01e@suse.com>
- <alpine.DEB.2.22.394.2310231340320.3516@ubuntu-linux-20-04-desktop>
- <dd33e92f-03aa-cf3c-23d7-dcf9cce23c8e@suse.com>
- <2f88afb2383b5fdecf83d311ebe69bb4@bugseng.com>
- <96dd7efb-c214-2155-c5d1-3b9a47c10d33@suse.com>
- <alpine.DEB.2.22.394.2310251537460.271731@ubuntu-linux-20-04-desktop>
- <3cc22b2d-fbcf-899e-1d7d-036a53bd0f7f@suse.com>
-User-Agent: Roundcube Webmail/1.4.3
-Message-ID: <ff395b4eab2e79a901516e0958647f8b@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 26/10/2023 08:52, Jan Beulich wrote:
-> On 26.10.2023 00:38, Stefano Stabellini wrote:
->> On Wed, 25 Oct 2023, Jan Beulich wrote:
->>> On 25.10.2023 16:50, Nicola Vetrini wrote:
->>>> Ok, I'll send a revised version using MASK_LOWEST_BIT, taking into
->>>> account also the
->>>> other comments about the explanation on the macro definition
->>>> (which some IDEs even show when hovering on its usage, which could
->>>> partially address
->>>> the latter concern).
->>> 
->>> You're of course free to do so, but since - as indicated before -
->>> MASK_LOWEST_BIT() imo isn't a better name than LOWEST_BIT(), I'll
->>> continue to object.
->> 
->> Jan if you are OK with that I'll ask Julien to break the tie and pick
->> the name to use. Julien can you please help us move forward?
-> 
-> Hmm, I'm having trouble seeing us at the point of breaking ties yet.
-> First we need naming suggestions which actually unambiguously
-> describe what's being done by the macro. I gave one suggestion which
-> I think fulfills this property, but is a little too long for my
-> taste. I gave another suggestion with a far-off but shorter name,
-> which I can appreciate isn't liked. I've not seen other suggestions
-> fulfilling this base criteria.
-> 
-> Jan
+Rework the exclusion_file_list.py code to have the function
+load_exclusion_file_list() detached from the xen-analysis.py tool,
+in a way so that other modules can use the function.
+The xen-analysis tool and in particular its module cppcheck_analysis.py
+will use a new function cppcheck_exclusion_file_list().
 
-Any name is fine with me. ISOLATE_LOW_BIT may be longish, but the macro 
-would be used
-in just a few places for a specific reason, so the loss in readability 
-is probably not
-that high.
+No functional changes are intended.
 
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+ xen/scripts/xen_analysis/cppcheck_analysis.py |  6 ++--
+ .../xen_analysis/exclusion_file_list.py       | 31 ++++++++++---------
+ 2 files changed, 19 insertions(+), 18 deletions(-)
+
+diff --git a/xen/scripts/xen_analysis/cppcheck_analysis.py b/xen/scripts/xen_analysis/cppcheck_analysis.py
+index 8dc45e653b79..e54848aa5339 100644
+--- a/xen/scripts/xen_analysis/cppcheck_analysis.py
++++ b/xen/scripts/xen_analysis/cppcheck_analysis.py
+@@ -2,7 +2,8 @@
+ 
+ import os, re, shutil
+ from . import settings, utils, cppcheck_report_utils, exclusion_file_list
+-from .exclusion_file_list import ExclusionFileListError
++from .exclusion_file_list import (ExclusionFileListError,
++                                  cppcheck_exclusion_file_list)
+ 
+ class GetMakeVarsPhaseError(Exception):
+     pass
+@@ -54,8 +55,7 @@ def __generate_suppression_list(out_file):
+             try:
+                 exclusion_file = \
+                     "{}/docs/misra/exclude-list.json".format(settings.repo_dir)
+-                exclusion_list = \
+-                    exclusion_file_list.load_exclusion_file_list(exclusion_file)
++                exclusion_list = cppcheck_exclusion_file_list(exclusion_file)
+             except ExclusionFileListError as e:
+                 raise CppcheckDepsPhaseError(
+                     "Issue with reading file {}: {}".format(exclusion_file, e)
+diff --git a/xen/scripts/xen_analysis/exclusion_file_list.py b/xen/scripts/xen_analysis/exclusion_file_list.py
+index 871e480586bb..79ebd34f55ec 100644
+--- a/xen/scripts/xen_analysis/exclusion_file_list.py
++++ b/xen/scripts/xen_analysis/exclusion_file_list.py
+@@ -7,16 +7,24 @@ class ExclusionFileListError(Exception):
+     pass
+ 
+ 
+-def __cppcheck_path_exclude_syntax(path):
+-    # Prepending * to the relative path to match every path where the Xen
+-    # codebase could be
+-    path = "*" + path
++def cppcheck_exclusion_file_list(input_file):
++    ret = []
++    excl_list = load_exclusion_file_list(input_file)
++
++    for entry in excl_list:
++        # Prepending * to the relative path to match every path where the Xen
++        # codebase could be
++        ret.append("*" + entry[0])
+ 
+-    return path
++    return ret
+ 
+ 
+-# Reads the exclusion file list and returns a list of relative path to be
+-# excluded.
++# Reads the exclusion file list and returns an array containing a set where the
++# first entry is what was listed in the exclusion list file, and the second
++# entry is the absolute path of the first entry.
++# If the first entry contained a wildcard '*', the second entry will have an
++# array of the solved absolute path for that entry.
++# Returns [('path',[path,path,...]), ('path',[path,path,...]), ...]
+ def load_exclusion_file_list(input_file):
+     ret = []
+     try:
+@@ -58,13 +66,6 @@ def load_exclusion_file_list(input_file):
+                     .format(path, filepath_object)
+                 )
+ 
+-        if settings.analysis_tool == "cppcheck":
+-            path = __cppcheck_path_exclude_syntax(path)
+-        else:
+-            raise ExclusionFileListError(
+-                "Unimplemented for {}!".format(settings.analysis_tool)
+-            )
+-
+-        ret.append(path)
++        ret.append((path, check_path))
+ 
+     return ret
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+2.34.1
+
 
