@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29323C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Oct 2023 09:12:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625000.973810 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C6DFC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Oct 2023 09:12:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625002.973824 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxOJF-0008OR-3e; Mon, 30 Oct 2023 09:11:45 +0000
+	id 1qxOJG-0000EY-Iu; Mon, 30 Oct 2023 09:11:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625000.973810; Mon, 30 Oct 2023 09:11:45 +0000
+Received: by outflank-mailman (output) from mailman id 625002.973824; Mon, 30 Oct 2023 09:11:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxOJF-0008OK-0M; Mon, 30 Oct 2023 09:11:45 +0000
-Received: by outflank-mailman (input) for mailman id 625000;
- Mon, 30 Oct 2023 09:11:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qxOJG-0000EF-E1; Mon, 30 Oct 2023 09:11:46 +0000
+Received: by outflank-mailman (input) for mailman id 625002;
+ Mon, 30 Oct 2023 09:11:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nz7O=GM=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qxOJE-0008OE-Jl
- for xen-devel@lists.xenproject.org; Mon, 30 Oct 2023 09:11:44 +0000
+ id 1qxOJF-0008Uy-L8
+ for xen-devel@lists.xenproject.org; Mon, 30 Oct 2023 09:11:45 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 57e6ee74-7704-11ee-98d6-6d05b1d4d9a1;
- Mon, 30 Oct 2023 10:11:43 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 55f69ec4-7704-11ee-9b0e-b553b5be7939;
+ Mon, 30 Oct 2023 10:11:40 +0100 (CET)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id DF1BF4EE0740;
- Mon, 30 Oct 2023 10:11:42 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id ECF734EE073C;
+ Mon, 30 Oct 2023 10:11:36 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 57e6ee74-7704-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: 55f69ec4-7704-11ee-9b0e-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,64 +53,68 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-4.19 v5 3/8] x86: add asmlinkage macro to variables only used in asm code
-Date: Mon, 30 Oct 2023 10:11:28 +0100
-Message-Id: <9a157bace0442919d21a3379ab36938a8059ae8f.1698655374.git.nicola.vetrini@bugseng.com>
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: [XEN PATCH][for-4.19 v5 0/8] Fix or deviate various instances of missing declarations
+Date: Mon, 30 Oct 2023 10:11:25 +0100
+Message-Id: <cover.1698655374.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1698655374.git.nicola.vetrini@bugseng.com>
-References: <cover.1698655374.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-To avoid a violation of MISRA C:2012 Rule 8.4, as permitted
-by docs/misra/rules.rst.
+The patches in this series aim to fix or deviate various instances where a
+function or variable do not have a declaration visible when such entity is
+defined (in violation of MISRA C:2012 Rule 8.4).
+An exception listed under docs/misra/rules.rst allows asm-only functions and
+variables to be exempted, while the other instances are either changed
+(e.g., making them static) or a missing header inclusion is added.
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-Changes in v3:
-- Edited commit message
-- Add two new variables
-Changes in v5:
-- Mark current_stack_pointer as a declaration.
-- Use asmlinkage instead of SAF.
----
- xen/arch/x86/setup.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+Nicola Vetrini (8):
+  xen: modify or add declarations for variables where needed
+  x86: add deviation for asm-only functions
+  x86: add asmlinkage macro to variables only used in asm code
+  x86/grant: switch included header to make declarations visible
+  x86/vm_event: add missing include for hvm_vm_event_do_resume
+  xen/console: remove stub definition in consoled.h
+  x86/mem_access: make function static
+  docs/misra: exclude three more files
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index a3d3f797bb1e..272fd6f2ad3c 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -75,7 +75,8 @@ static bool __initdata opt_invpcid = true;
- boolean_param("invpcid", opt_invpcid);
- bool __read_mostly use_invpcid;
- 
--unsigned long __read_mostly cr4_pv32_mask;
-+/* Only used in asm code and within this source file */
-+asmlinkage unsigned long __read_mostly cr4_pv32_mask;
- 
- /* **** Linux config option: propagated to domain0. */
- /* "acpi=off":    Sisables both ACPI table parsing and interpreter. */
-@@ -146,14 +147,15 @@ cpumask_t __read_mostly cpu_present_map;
- 
- unsigned long __read_mostly xen_phys_start;
- 
--char __section(".init.bss.stack_aligned") __aligned(STACK_SIZE)
-+/* Only used in asm code and within this source file */
-+asmlinkage char __section(".init.bss.stack_aligned") __aligned(STACK_SIZE)
-     cpu0_stack[STACK_SIZE];
- 
- /* Used by the BSP/AP paths to find the higher half stack mapping to use. */
- void *stack_start = cpu0_stack + STACK_SIZE - sizeof(struct cpu_info);
- 
- /* Used by the boot asm to stash the relocated multiboot info pointer. */
--unsigned int __initdata multiboot_ptr;
-+asmlinkage unsigned int __initdata multiboot_ptr;
- 
- struct cpuinfo_x86 __read_mostly boot_cpu_data = { 0, 0, 0, 0, -1 };
- 
+ automation/eclair_analysis/ECLAIR/deviations.ecl |  9 +++++++++
+ docs/misra/deviations.rst                        |  6 ++++++
+ docs/misra/exclude-list.json                     | 12 ++++++++++++
+ xen/arch/arm/include/asm/setup.h                 |  3 +++
+ xen/arch/arm/include/asm/smp.h                   |  3 +++
+ xen/arch/arm/platform_hypercall.c                |  2 +-
+ xen/arch/x86/cpu/mcheck/mce.c                    |  7 ++++---
+ xen/arch/x86/hvm/grant_table.c                   |  3 +--
+ xen/arch/x86/hvm/svm/intr.c                      |  2 +-
+ xen/arch/x86/hvm/svm/nestedsvm.c                 |  2 +-
+ xen/arch/x86/hvm/svm/svm.c                       |  4 ++--
+ xen/arch/x86/hvm/vm_event.c                      |  1 +
+ xen/arch/x86/hvm/vmx/intr.c                      |  2 +-
+ xen/arch/x86/hvm/vmx/vmx.c                       |  4 ++--
+ xen/arch/x86/hvm/vmx/vvmx.c                      |  2 +-
+ xen/arch/x86/include/asm/hvm/grant_table.h       |  2 ++
+ xen/arch/x86/irq.c                               |  2 +-
+ xen/arch/x86/mm/mem_access.c                     |  6 +++---
+ xen/arch/x86/setup.c                             |  8 +++++---
+ xen/arch/x86/traps.c                             |  2 +-
+ xen/arch/x86/x86_64/traps.c                      |  2 +-
+ xen/include/xen/compiler.h                       |  3 +++
+ xen/include/xen/consoled.h                       |  7 -------
+ xen/include/xen/symbols.h                        |  1 +
+ 24 files changed, 65 insertions(+), 30 deletions(-)
+
 -- 
 2.34.1
-
 
