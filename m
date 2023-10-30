@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6BA7C4167D
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Oct 2023 09:12:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625008.973888 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D44FC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Oct 2023 09:43:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625049.973900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxOJM-0001zV-Ix; Mon, 30 Oct 2023 09:11:52 +0000
+	id 1qxOnN-0000gT-EU; Mon, 30 Oct 2023 09:42:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625008.973888; Mon, 30 Oct 2023 09:11:52 +0000
+Received: by outflank-mailman (output) from mailman id 625049.973900; Mon, 30 Oct 2023 09:42:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxOJM-0001yG-E3; Mon, 30 Oct 2023 09:11:52 +0000
-Received: by outflank-mailman (input) for mailman id 625008;
- Mon, 30 Oct 2023 09:11:52 +0000
+	id 1qxOnN-0000gM-AM; Mon, 30 Oct 2023 09:42:53 +0000
+Received: by outflank-mailman (input) for mailman id 625049;
+ Mon, 30 Oct 2023 09:42:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Nz7O=GM=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qxOJL-0008Uy-TI
- for xen-devel@lists.xenproject.org; Mon, 30 Oct 2023 09:11:51 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=8Ooz=GM=bounce.vates.tech=bounce-md_30504962.653f7a97.v1-ecab575db48a446ab11c8dcd4b8e7f2c@srs-se1.protection.inumbo.net>)
+ id 1qxOnL-0000gG-Qz
+ for xen-devel@lists.xenproject.org; Mon, 30 Oct 2023 09:42:52 +0000
+Received: from mail137-22.atl71.mandrillapp.com
+ (mail137-22.atl71.mandrillapp.com [198.2.137.22])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5a7aafa7-7704-11ee-9b0e-b553b5be7939;
- Mon, 30 Oct 2023 10:11:47 +0100 (CET)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 92C2C4EE074E;
- Mon, 30 Oct 2023 10:11:46 +0100 (CET)
+ id afb1032d-7708-11ee-9b0e-b553b5be7939;
+ Mon, 30 Oct 2023 10:42:49 +0100 (CET)
+Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail137-22.atl71.mandrillapp.com (Mailchimp) with ESMTP id
+ 4SJpGc02FwzFCWZZZ
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Oct 2023 09:42:48 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ ecab575db48a446ab11c8dcd4b8e7f2c; Mon, 30 Oct 2023 09:42:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,63 +45,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a7aafa7-7704-11ee-9b0e-b553b5be7939
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+X-Inumbo-ID: afb1032d-7708-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+	s=mandrill; t=1698658968; x=1698919468;
+	i=vaishali.thakkar@vates.tech;
+	bh=27kZKJ+F0MRA8fErAYHLDoQcxLR9bNNuPu5Or1KKmHM=;
+	h=From:Subject:Message-Id:To:Cc:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=Y0o3cTJYDHgjAUzLOrn2Ed24icOHCyBET24wpf/kJsEKGymvxMz0V5QiL8AwyRlVt
+	 pnWR7erOrUhnGkZ1vaiAo2Tg4E2QHxUGslGDx82sguBnCTAOZdoZ9ASwUJleUyqlxR
+	 4jmiaC4xUOSAuwHoMhyJQclglRuugHjWqirYf5nA=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+ i=@mandrillapp.com; q=dns/txt; s=mandrill; t=1698658967; h=from :
+ subject : message-id : to : cc : date : mime-version : content-type :
+ content-transfer-encoding : from : x-mandrill-user : list-unsubscribe;
+ bh=27kZKJ+F0MRA8fErAYHLDoQcxLR9bNNuPu5Or1KKmHM=;
+ b=JLzk6lBhwnqEX8Dfvvb3z50M7guHCcVA8sSuyBs6OAD5fi9OmXVAYMqLOCbRmprwRdjrY
+ 80es8qkjuPLpa2QdQj4IJSMKnOCzf1NhJOjDaHW5EvZR+4+DykPFIQI3rp/UHzMTOoKXK4H
+ mhlsgrbNRIVo4FxLP0a2dDbK8mPHDvs=
+From: Vaishali Thakkar <vaishali.thakkar@vates.tech>
+Subject: =?utf-8?Q?AMD=20SEV=20Enablement=20plans=20in=20Xen?=
+X-Bm-Milter-Handled: a6f8c62a-75f8-4756-90d1-92e0b788484c
+X-Bm-Transport-Timestamp: 1698658967179
+Message-Id: <1dceb501-1502-4621-a6c6-5e9e90e20280@vates.tech>
 To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-4.19 v5 7/8] x86/mem_access: make function static
-Date: Mon, 30 Oct 2023 10:11:32 +0100
-Message-Id: <819cdbf2c7d1c3aff771a871aa5a00124f4883c6.1698655374.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1698655374.git.nicola.vetrini@bugseng.com>
-References: <cover.1698655374.git.nicola.vetrini@bugseng.com>
+Cc: andrei.semenov@vates.tech, olivier.lambert@vates.tech
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.ecab575db48a446ab11c8dcd4b8e7f2c?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20231030:md
+Date: Mon, 30 Oct 2023 09:42:47 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The function is used only within this file, and therefore can be static.
+Hi All,
 
-No functional change.
+This is an informational post about our plans for the enablement of AMD SEV 
+support in Xen. This work will be done as part of the Hyper OpenX project[1].
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
----
-Changes in v3:
-- style fix
----
- xen/arch/x86/mm/mem_access.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Phase Zero:
+----------------
 
-diff --git a/xen/arch/x86/mm/mem_access.c b/xen/arch/x86/mm/mem_access.c
-index 3449e0ee85ff..60a0cce68aa3 100644
---- a/xen/arch/x86/mm/mem_access.c
-+++ b/xen/arch/x86/mm/mem_access.c
-@@ -249,9 +249,9 @@ bool p2m_mem_access_check(paddr_t gpa, unsigned long gla,
-     return (p2ma != p2m_access_n2rwx);
- }
- 
--int p2m_set_altp2m_mem_access(struct domain *d, struct p2m_domain *hp2m,
--                              struct p2m_domain *ap2m, p2m_access_t a,
--                              gfn_t gfn)
-+static int p2m_set_altp2m_mem_access(struct domain *d, struct p2m_domain *hp2m,
-+                                     struct p2m_domain *ap2m, p2m_access_t a,
-+                                     gfn_t gfn)
- {
-     mfn_t mfn;
-     p2m_type_t t;
--- 
-2.34.1
+Our primary intention is to gather the necessary information required to 
+commence the upstream work for this project. This phase also encompasses 
+the development of a small demo to demonstrate the SME technology itself.
 
+Please note, this small demo won't be part of the upstream, as its primary 
+purpose is to demonstrate the SME technology as part of Hyper OpenX 
+project. And it is not integral to the enablement work in Xen. Although the 
+demo code will be open source, so feel free to keep an eye on this repo[2] 
+as we'll add the related links there.
+
+Phase One:
+----------------
+The main goal of this phase is to achieve basic SEV support using XTF 
+guests. This work will entail:
+- Xen adaptations to make it compliant with SEV technology. (For example: 
+how Xen currently manages multiple ASIDs for a single VM)
+- An ASP/PSP driver for platform and key management.
+- ASID allocation mechanism
+
+Dom0:
+
+- Introduction of a security hypercall and an ASP sub-op
+- Support for enabling SEV during guest creation
+
+DomU XTF:
+
+- Support for the security hypercall and ASP sub-op
+- Support for the C bit
+- Test cases for OSS-Test to launch the XTF guest
+
+Phase Two:
+----------------
+
+This phase emphasizes achieving full support for the PVH VM with 
+paravirtualized devices capable of running in the SEV-ES environment. The 
+primary tasks include:
+
+- SEV-ES support addition
+- GHCB MSR protocol implementation and #vc handler
+- Enhancements in PV protocol related to PV devices framework (Xenstore/Xen 
+console)
+- Adjustments in VMEXIT handling
+- Establishing ABI rules for the HVM ABI redesign
+- Dom0 developments concerning the HVM ABI redesign
+- OSS Test: PVH Linux+initrd+metadata+signature mimicking phase one XTF test
+- XTF(testing): comprehensive test cases for the new HVM ABI
+
+Phase Three:
+-----------------
+This phase revolves around enabling SEV-SNP support for PVH Linux guests. 
+Predominantly, this will require:
+
+- Addition of alternative SNP commands supporting the API and extending the 
+flow in the PSP/ASP driver
+- Hypercall expansion for domain creation
+- Developments in RMP Management
+- Dom0 and DomU developments related to the enablement of SNP in guests
+- Testing that includes support for guest RMP instructions
+
+We're also looking forward to integrating CI and documenting the various 
+project stages. Like any significant upstream project, implementation 
+details may change as we advance. However, we are committed to 
+collaborating and communicating with the Xen community regarding any 
+modifications.
+
+We would also like to thank Andrew and folks from Apertus solutions , in 
+doing the early research with regards to defining the tasks for the AMD 
+SEV-SNP enablement in Xen.
+
+Please don't hesitate to reply here or email me & Andrei (CC'ed here) if 
+you have any further inquiries.
+
+Thank you,
+Vaishali
+
+[1] 
+https://www.lemondeinformatique.fr/actualites/lire-hyper-open-x-sort-de-terre-avec-10-meteuro-de-financements-90954.html
+
+[2] https://github.com/xcp-ng/hyper-sev-project
 
