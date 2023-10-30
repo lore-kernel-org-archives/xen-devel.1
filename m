@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF16CC4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Oct 2023 09:12:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625006.973870 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6BA7C4167D
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Oct 2023 09:12:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625008.973888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxOJK-0001Vn-UV; Mon, 30 Oct 2023 09:11:50 +0000
+	id 1qxOJM-0001zV-Ix; Mon, 30 Oct 2023 09:11:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625006.973870; Mon, 30 Oct 2023 09:11:50 +0000
+Received: by outflank-mailman (output) from mailman id 625008.973888; Mon, 30 Oct 2023 09:11:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxOJK-0001Ut-Po; Mon, 30 Oct 2023 09:11:50 +0000
-Received: by outflank-mailman (input) for mailman id 625006;
- Mon, 30 Oct 2023 09:11:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qxOJM-0001yG-E3; Mon, 30 Oct 2023 09:11:52 +0000
+Received: by outflank-mailman (input) for mailman id 625008;
+ Mon, 30 Oct 2023 09:11:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nz7O=GM=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qxOJJ-0008OE-7M
- for xen-devel@lists.xenproject.org; Mon, 30 Oct 2023 09:11:49 +0000
+ id 1qxOJL-0008Uy-TI
+ for xen-devel@lists.xenproject.org; Mon, 30 Oct 2023 09:11:51 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5ad9684f-7704-11ee-98d6-6d05b1d4d9a1;
- Mon, 30 Oct 2023 10:11:48 +0100 (CET)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id BD8B64EE0C81;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5a7aafa7-7704-11ee-9b0e-b553b5be7939;
  Mon, 30 Oct 2023 10:11:47 +0100 (CET)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id 92C2C4EE074E;
+ Mon, 30 Oct 2023 10:11:46 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ad9684f-7704-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: 5a7aafa7-7704-11ee-9b0e-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,63 +53,50 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-4.19 v5 8/8] docs/misra: exclude three more files
-Date: Mon, 30 Oct 2023 10:11:33 +0100
-Message-Id: <87000126f64cb4d8acc0351be08b9aabbbac7d56.1698655374.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH][for-4.19 v5 7/8] x86/mem_access: make function static
+Date: Mon, 30 Oct 2023 10:11:32 +0100
+Message-Id: <819cdbf2c7d1c3aff771a871aa5a00124f4883c6.1698655374.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1698655374.git.nicola.vetrini@bugseng.com>
 References: <cover.1698655374.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These files should not conform to MISRA guidelines at the moment,
-therefore they are added to the exclusion list.
+The function is used only within this file, and therefore can be static.
+
+No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
 ---
-These exclusions are automatically picked up by ECLAIR's automation
-to hide reports originating from these files.
-
-Changes in v4:
-- Fixed typo
+Changes in v3:
+- style fix
 ---
- docs/misra/exclude-list.json | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ xen/arch/x86/mm/mem_access.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
-index 575ed22a7f67..b858a0baa106 100644
---- a/docs/misra/exclude-list.json
-+++ b/docs/misra/exclude-list.json
-@@ -145,6 +145,10 @@
-             "rel_path": "common/zstd/*",
-             "comment": "Imported from Linux, ignore for now"
-         },
-+        {
-+            "rel_path": "common/symbols-dummy.c",
-+            "comment": "The resulting code is not included in the final Xen binary, ignore for now"
-+        },
-         {
-             "rel_path": "crypto/*",
-             "comment": "Origin is external and documented in crypto/README.source"
-@@ -189,6 +193,14 @@
-             "rel_path": "include/acpi/acpixf.h",
-             "comment": "Imported from Linux, ignore for now"
-         },
-+        {
-+          "rel_path": "include/acpi/acexcep.h",
-+          "comment": "Imported from Linux, ignore for now"
-+        },
-+        {
-+          "rel_path": "include/acpi/acglobal.h",
-+          "comment": "Imported from Linux, ignore for now"
-+        },
-         {
-             "rel_path": "include/xen/acpi.h",
-             "comment": "Imported from Linux, ignore for now"
+diff --git a/xen/arch/x86/mm/mem_access.c b/xen/arch/x86/mm/mem_access.c
+index 3449e0ee85ff..60a0cce68aa3 100644
+--- a/xen/arch/x86/mm/mem_access.c
++++ b/xen/arch/x86/mm/mem_access.c
+@@ -249,9 +249,9 @@ bool p2m_mem_access_check(paddr_t gpa, unsigned long gla,
+     return (p2ma != p2m_access_n2rwx);
+ }
+ 
+-int p2m_set_altp2m_mem_access(struct domain *d, struct p2m_domain *hp2m,
+-                              struct p2m_domain *ap2m, p2m_access_t a,
+-                              gfn_t gfn)
++static int p2m_set_altp2m_mem_access(struct domain *d, struct p2m_domain *hp2m,
++                                     struct p2m_domain *ap2m, p2m_access_t a,
++                                     gfn_t gfn)
+ {
+     mfn_t mfn;
+     p2m_type_t t;
 -- 
 2.34.1
 
