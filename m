@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18D8EC4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 13:20:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625699.975255 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5985C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 13:23:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625714.975272 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxofF-0002Ns-Er; Tue, 31 Oct 2023 13:20:13 +0000
+	id 1qxoiJ-0003yV-Bi; Tue, 31 Oct 2023 13:23:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625699.975255; Tue, 31 Oct 2023 13:20:13 +0000
+Received: by outflank-mailman (output) from mailman id 625714.975272; Tue, 31 Oct 2023 13:23:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxofF-0002Nj-Bv; Tue, 31 Oct 2023 13:20:13 +0000
-Received: by outflank-mailman (input) for mailman id 625699;
- Tue, 31 Oct 2023 13:20:11 +0000
+	id 1qxoiJ-0003wE-6F; Tue, 31 Oct 2023 13:23:23 +0000
+Received: by outflank-mailman (input) for mailman id 625714;
+ Tue, 31 Oct 2023 13:23:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=N8KE=GN=citrix.com=prvs=661c0debb=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qxofD-0001bo-I6
- for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 13:20:11 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 361c5d0f-77f0-11ee-9b0e-b553b5be7939;
- Tue, 31 Oct 2023 14:20:09 +0100 (CET)
+ <SRS0=k1/u=GN=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1qxoiI-0003rs-95
+ for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 13:23:22 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id a8173501-77f0-11ee-9b0e-b553b5be7939;
+ Tue, 31 Oct 2023 14:23:19 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6EA2DDA7;
+ Tue, 31 Oct 2023 06:24:00 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 428CF3F738;
+ Tue, 31 Oct 2023 06:23:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,94 +44,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 361c5d0f-77f0-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1698758409;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=H+Q30HMrWjJaZC00sLj+OmZFAlKnx4f9E66ZOhOBbQQ=;
-  b=CpJcJoue0UK9cPQSM3y4NHZON9Kc2SeEyYlIkpWjD2fdCl2JpMpIrDAC
-   7FxwHa2G3N1C0jNbjaJ+feyVNWJVg5NGEZx5ZQGymYgO6xPE2MYqSg00s
-   1BUK7XyIHVuQpmV1Hg0o0ByGC0CZxtHmLUIA6pPwUpE4iPx72aHwURjVp
-   g=;
-X-CSE-ConnectionGUID: 6pNHE+2jTxipSSOO/9v0tA==
-X-CSE-MsgGUID: E3PqqUTuQKqVsIwXMsxBuA==
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 127136997
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.159.70
-X-Policy: $RELAYED
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:pH9dy6JWbTUWkDmaFE+R4pUlxSXFcZb7ZxGr2PjKsXjdYENShjdVz
- WAbDG2FafnfMGGgeo1yYI+z80tSsJ7WmNBhTwJlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAhk/nOHvylULKs1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpKrfrYwP9TlK6q4mhB5gdnPakjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c4pGUdu2
- L9CKgwdbwi4vMWRh+OlEvVF05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGspM0yojx5nYz/7DLoXmuuyi2a5WDpfsF+P/oI84nTJzRw327/oWDbQUoXQGpwOwBfJ+
- Qoq+UzUWSkDLeGj1AOm60y3p/D/uDjrcp87QejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
- lcI4Ww+oK4q7kupQ9LhGRqirxasnDQRRt5RGO0S8xyWx+zf5APxLnMfUjdLZdgitck3bT8nz
- FmEm5XuHzMHmKKRYWKQ8PGTtzzaESoIKW4PYwcUQA1D5MPsyKkTgxTVX5BcGai6ptTvHHf7x
- DXikcQlr+xN14hRjfz9pA2WxW30znTUcuIrzlvPeEKIrVl7WJ6kf7eTzn+cvOgYMK/MGzFto
- 0M4d9iiAPEmVM/cxHPXG7hcR9lF9N7fbmeA3wQH840JsmT1oSD+J+i89RkkfC9U3tA4lSgFi
- aM5kShW/pZXdECyd65xbJnZ5y8ClvO4So2Nuhw5dLNzjnlNmOyvpnoGiba4hTyFraTVufhX1
- W2nWcitF20GLq9s0SC7QewQuZdymHFumzKLFc+klE76uVZ7WJJyYe5aWGZik8hgsfjayOkr2
- 4032zS2J+V3D7SlP3i/HX87JlEWN3krba3LRzhsXrfbeGJOQThxY8I9NJt9I+SJaYwJzLaXl
- px8M2cEoGfCaYrvcFzTOyg4M+u+NXu9xFpiVRER0Z+T8yBLSe6SAG03K/PboZFPGDRf8MNJ
-IronPort-HdrOrdr: A9a23:Xwo54q7mEvTygqkR8gPXwP7XdLJyesId70hD6qkXc20vTiX4rb
- HXoB1/73XJYVkqOU3I5urwXpVoLUmyyXcN2/h3AV7AZniFhILLFvAH0WK4+UyYJ8SWzIc0uZ
- uIFZIOa+EYZWIQsS+Q2meF+rgboOVvoJrEuQ+dp00dKD1XVw==
-X-Talos-CUID: 9a23:9g9VH2A3zE2ZAV36E3d/0m45WZonTm3c1EzrBGj/WHgxVJTAHA==
-X-Talos-MUID: =?us-ascii?q?9a23=3ABQa+2Q/zDXMP0vxDR6/WHiiQf+oz2723NXwQqLY?=
- =?us-ascii?q?fhdKlKhxVICe3kR3iFw=3D=3D?=
-X-IronPort-AV: E=Sophos;i="6.03,265,1694750400"; 
-   d="scan'208";a="127136997"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<George.Dunlap@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Julien Grall
-	<julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH for-4.19 3/3] CHANGELOG: Keep unstable section
-Date: Tue, 31 Oct 2023 13:19:54 +0000
-Message-ID: <20231031131954.3310725-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20231031131954.3310725-1-andrew.cooper3@citrix.com>
-References: <20231031131954.3310725-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: a8173501-77f0-11ee-9b0e-b553b5be7939
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Subject: [RFC PATCH v2 1/8] cppcheck: rework exclusion_file_list.py code
+Date: Tue, 31 Oct 2023 13:22:57 +0000
+Message-Id: <20231031132304.2573924-2-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231031132304.2573924-1-luca.fancellu@arm.com>
+References: <20231031132304.2573924-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Henry Wang <Henry.Wang@arm.com>
----
- CHANGELOG.md | 2 ++
- 1 file changed, 2 insertions(+)
+Rework the exclusion_file_list.py code to have the function
+load_exclusion_file_list() detached from the xen-analysis.py tool,
+in a way so that other modules can use the function.
+The xen-analysis tool and in particular its module cppcheck_analysis.py
+will use a new function cppcheck_exclusion_file_list().
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index a827054cf27d..cf0c9c3f8cb9 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -4,6 +4,8 @@ Notable changes to Xen will be documented in this file.
+No functional changes are intended.
+
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+ xen/scripts/xen_analysis/cppcheck_analysis.py |  6 ++--
+ .../xen_analysis/exclusion_file_list.py       | 31 ++++++++++---------
+ 2 files changed, 19 insertions(+), 18 deletions(-)
+
+diff --git a/xen/scripts/xen_analysis/cppcheck_analysis.py b/xen/scripts/xen_analysis/cppcheck_analysis.py
+index 8dc45e653b79..e54848aa5339 100644
+--- a/xen/scripts/xen_analysis/cppcheck_analysis.py
++++ b/xen/scripts/xen_analysis/cppcheck_analysis.py
+@@ -2,7 +2,8 @@
  
- The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+ import os, re, shutil
+ from . import settings, utils, cppcheck_report_utils, exclusion_file_list
+-from .exclusion_file_list import ExclusionFileListError
++from .exclusion_file_list import (ExclusionFileListError,
++                                  cppcheck_exclusion_file_list)
  
-+## [unstable UNRELEASED](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
+ class GetMakeVarsPhaseError(Exception):
+     pass
+@@ -54,8 +55,7 @@ def __generate_suppression_list(out_file):
+             try:
+                 exclusion_file = \
+                     "{}/docs/misra/exclude-list.json".format(settings.repo_dir)
+-                exclusion_list = \
+-                    exclusion_file_list.load_exclusion_file_list(exclusion_file)
++                exclusion_list = cppcheck_exclusion_file_list(exclusion_file)
+             except ExclusionFileListError as e:
+                 raise CppcheckDepsPhaseError(
+                     "Issue with reading file {}: {}".format(exclusion_file, e)
+diff --git a/xen/scripts/xen_analysis/exclusion_file_list.py b/xen/scripts/xen_analysis/exclusion_file_list.py
+index 871e480586bb..79ebd34f55ec 100644
+--- a/xen/scripts/xen_analysis/exclusion_file_list.py
++++ b/xen/scripts/xen_analysis/exclusion_file_list.py
+@@ -7,16 +7,24 @@ class ExclusionFileListError(Exception):
+     pass
+ 
+ 
+-def __cppcheck_path_exclude_syntax(path):
+-    # Prepending * to the relative path to match every path where the Xen
+-    # codebase could be
+-    path = "*" + path
++def cppcheck_exclusion_file_list(input_file):
++    ret = []
++    excl_list = load_exclusion_file_list(input_file)
 +
- ## [4.18.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.18.0) - 2023-XX-XX
++    for entry in excl_list:
++        # Prepending * to the relative path to match every path where the Xen
++        # codebase could be
++        ret.append("*" + entry[0])
  
- ### Changed
+-    return path
++    return ret
+ 
+ 
+-# Reads the exclusion file list and returns a list of relative path to be
+-# excluded.
++# Reads the exclusion file list and returns an array containing a set where the
++# first entry is what was listed in the exclusion list file, and the second
++# entry is the absolute path of the first entry.
++# If the first entry contained a wildcard '*', the second entry will have an
++# array of the solved absolute path for that entry.
++# Returns [('path',[path,path,...]), ('path',[path,path,...]), ...]
+ def load_exclusion_file_list(input_file):
+     ret = []
+     try:
+@@ -58,13 +66,6 @@ def load_exclusion_file_list(input_file):
+                     .format(path, filepath_object)
+                 )
+ 
+-        if settings.analysis_tool == "cppcheck":
+-            path = __cppcheck_path_exclude_syntax(path)
+-        else:
+-            raise ExclusionFileListError(
+-                "Unimplemented for {}!".format(settings.analysis_tool)
+-            )
+-
+-        ret.append(path)
++        ret.append((path, check_path))
+ 
+     return ret
 -- 
-2.30.2
+2.34.1
 
 
