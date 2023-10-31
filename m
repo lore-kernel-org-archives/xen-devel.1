@@ -4,29 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04585C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 12:02:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625652.975134 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA30C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 12:07:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625659.975145 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxnS2-0006wi-96; Tue, 31 Oct 2023 12:02:30 +0000
+	id 1qxnWS-0007pG-RL; Tue, 31 Oct 2023 12:07:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625652.975134; Tue, 31 Oct 2023 12:02:30 +0000
+Received: by outflank-mailman (output) from mailman id 625659.975145; Tue, 31 Oct 2023 12:07:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxnS2-0006wb-65; Tue, 31 Oct 2023 12:02:30 +0000
-Received: by outflank-mailman (input) for mailman id 625652;
- Tue, 31 Oct 2023 12:02:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qxnWS-0007p9-NN; Tue, 31 Oct 2023 12:07:04 +0000
+Received: by outflank-mailman (input) for mailman id 625659;
+ Tue, 31 Oct 2023 12:07:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=N8KE=GN=citrix.com=prvs=661c0debb=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qxnS1-0006wT-BD
- for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 12:02:29 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5ae58dc5-77e5-11ee-9b0e-b553b5be7939;
- Tue, 31 Oct 2023 13:02:26 +0100 (CET)
+ <SRS0=TgTD=GN=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qxnWR-0007p3-NG
+ for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 12:07:03 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fffdb8f3-77e5-11ee-98d6-6d05b1d4d9a1;
+ Tue, 31 Oct 2023 13:07:02 +0100 (CET)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id B60864EE073F;
+ Tue, 31 Oct 2023 13:07:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,106 +41,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ae58dc5-77e5-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1698753746;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=jp5vE5wCHfEYuloOa15nRVv8FboPWyr4raV5pQHa31M=;
-  b=TeSbfgHS2CNc/8ergxRLzUfwoqUvIG8/qg3DYNLWf23GsGBHaeVIkQ/M
-   6R/SiRlKN2gQFskM7QRYaNrxtltz2nDaYOqhd70k0a1JZPeFLAJqhDO/j
-   E/QCFeioD0Jzdp6+B0OQd7E9+FQyMzBJ86ZvRhaX3YiNFbi8ZbooB5kpX
-   c=;
-X-CSE-ConnectionGUID: 9Trui3+mStyi52p/sZsRpA==
-X-CSE-MsgGUID: hWCYK9liSMizljwk4UyJ+g==
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 127129590
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.159.70
-X-Policy: $RELAYED
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:3Zxni64dCp4CQX1APmYPIAxRtBLHchMFZxGqfqrLsTDasY5as4F+v
- jQfWGnSbP+JZjH8Ltt0ao3n9h4CupeEnIBlSgZtri1gHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
- plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRG/ykTraCY3gtLeNdYH9JoQp5nOIkiZJfj9G8Agec0
- fv/uMSaM1K+s9JOGjt8B5mr9lU355wehBtC5gZlPKgQ5QeH/5UoJMl3yZ+ZfiOQrrZ8RoZWd
- 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
- I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5mp
- MACNTFWLRW4m/O3neijDfJenf47BZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
- YxDM2MpNUmRJUIXUrsUIMtWcOOAr3/zaTBH7nmSorI6+TP7xw1tyrn9dtHSf7RmQO0MxBnB/
- DObrjyR7hcyNOO0+BnU9nOXo+7dmSHkW94vBZ/7+as/6LGU7jNKU0BHPbehmtGph0j7V99BJ
- kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c/h6HvA+6QqN4rHJ+AvfDW8BJhZebPQ2uclwQiYlv
- neMlsnsDCZis5WUT2yc7baeqT6uOSkTInQGbCVCRgwAi/HDrYcpn1TwR9BsOKevi5v+HjSY/
- tyRhHFg3fNJ15dNjvjquw+f696xmnTXZl8J/BjWBSGg1R9oZdP/f8uz20Ph9d8Vee51UWK9U
- Gg4d9m2tb5fXc7Xz3HcG43hD5nzuazZbme0bUpHWsl5rWrwoRZPaKgKuFlDyFFV3tHokNMDS
- GTUowpVrKRLJnqsYrQfj2mZUJ9ykvGI+TgITJnpgjtyjntZLlTvENlGPxL44owUuBFEfVsDE
- Zmaa92wKn0RFL5qyjG7L89Ej+57mHFmlTyMHsqmp/hC7VZ5TCfKIYrpzXPXM7tnhE96iF69H
- ylj2zuilEwEDbyWjtj/+o8PN1EaRUUG6WTNg5UPLIare1M2cFzN/teNmdvNjaQ5xfUK/goJl
- 1nhMnJlJK3X3CSeeF3RMSgyAF4tNL4mxU8G0eUXFQ7A8xAejUyHs8/zq7NfkWEbydFe
-IronPort-HdrOrdr: A9a23:yjb18q6wTqnOBmABjgPXwMzXdLJyesId70hD6qkRc3Bom6mj/P
- xG88516faZslgssRMb+exoSZPgfZq0z/cci+Qs1NyZLWrbUQWTXeVfxLqn7zr8GzDvss5xvJ
- 0QFJSW0eeAb2SSW/yKhTWFLw==
-X-Talos-CUID: 9a23:Zc1G8286kWQxLA6Jl/iVvx8oAN0kKT7Y92vBIhLiESFyeqavUXbFrQ==
-X-Talos-MUID: 9a23:OLloCQW4FAHjJH7q/D/TrwBBZcNp2IGvGkQPjpZahtimdiMlbg==
-X-IronPort-AV: E=Sophos;i="6.03,265,1694750400"; 
-   d="scan'208";a="127129590"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>, Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH for-4.18] docs: Fix IOMMU command line docs some more
-Date: Tue, 31 Oct 2023 12:02:15 +0000
-Message-ID: <20231031120215.3307356-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: fffdb8f3-77e5-11ee-98d6-6d05b1d4d9a1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Date: Tue, 31 Oct 2023 13:07:01 +0100
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, michal.orzel@amd.com,
+ xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, consulting@bugseng.com,
+ andrew.cooper3@citrix.com, roger.pau@citrix.com, Simone Ballarin
+ <simone.ballarin@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, George
+ Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Wei Liu
+ <wl@xen.org>, xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH][for-4.19 v4 1/8] xen/include: add macro
+ ISOLATE_LOW_BIT
+In-Reply-To: <1178b79c-d6a3-a46c-5556-3fb5964dc051@suse.com>
+References: <cover.1698410970.git.nicola.vetrini@bugseng.com>
+ <dca236bf9199f596bafb35eb48d81adc280d8cca.1698410970.git.nicola.vetrini@bugseng.com>
+ <f88edc35-6b1b-0136-aa1f-6429652c4016@suse.com>
+ <alpine.DEB.2.22.394.2310301536390.1625118@ubuntu-linux-20-04-desktop>
+ <7c26fb70-6a8c-58a3-6a1d-300dd57b5827@suse.com>
+ <817fab34432c854ce585aba80db77f7c@bugseng.com>
+ <8b4e0da82930375b2a95387a9031c73f@bugseng.com>
+ <1178b79c-d6a3-a46c-5556-3fb5964dc051@suse.com>
+Message-ID: <f6c499316d9c619627cdbd72e02417b1@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-Make the command line docs match the actual implementation, and state that the
-default behaviour is selected at compile time.
+On 2023-10-31 11:20, Jan Beulich wrote:
+> On 31.10.2023 11:03, Nicola Vetrini wrote:
+>> On 2023-10-31 09:28, Nicola Vetrini wrote:
+>>> On 2023-10-31 08:43, Jan Beulich wrote:
+>>>> On 30.10.2023 23:44, Stefano Stabellini wrote:
+>>>>> On Mon, 30 Oct 2023, Jan Beulich wrote:
+>>>>>> On 27.10.2023 15:34, Nicola Vetrini wrote:
+>>>>>>> --- a/xen/include/xen/macros.h
+>>>>>>> +++ b/xen/include/xen/macros.h
+>>>>>>> @@ -8,8 +8,14 @@
+>>>>>>>  #define DIV_ROUND(n, d) (((n) + (d) / 2) / (d))
+>>>>>>>  #define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
+>>>>>>> 
+>>>>>>> -#define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
+>>>>>>> -#define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
+>>>>>>> +/*
+>>>>>>> + * Given an unsigned integer argument, expands to a mask where
+>>>>>>> just the least
+>>>>>>> + * significant nonzero bit of the argument is set, or 0 if no 
+>>>>>>> bits
+>>>>>>> are set.
+>>>>>>> + */
+>>>>>>> +#define ISOLATE_LOW_BIT(x) ((x) & -(x))
+>>>>>> 
+>>>>>> Not even considering future Misra changes (which aiui may require
+>>>>>> that
+>>>>>> anyway), this generalization of the macro imo demands that its
+>>>>>> argument
+>>>>>> now be evaluated only once.
+>>>>> 
+>>>>> Fur sure that would be an improvement, but I don't see a trivial 
+>>>>> way
+>>>>> to
+>>>>> do it and this issue is also present today before the patch.
+>>>> 
+>>>> This was an issue here for MASK_EXTR() and MASK_INSR(), yes, but the
+>>>> new
+>>>> macro has wider use, and there was no issue elsewhere so far.
+>>>> 
+>>>>> I think it
+>>>>> would be better to avoid scope-creeping this patch as we are 
+>>>>> already
+>>>>> at
+>>>>> v4 for something that was expected to be a trivial mechanical 
+>>>>> change.
+>>>>> I
+>>>>> would rather review the fix as a separate patch, maybe sent by you 
+>>>>> as
+>>>>> you probably have a specific implementation in mind?
+>>>> 
+>>>> #define ISOLATE_LOW_BIT(x) ({ \
+>>>>     typeof(x) x_ = (x); \
+>>>>     x_ & -x_; \
+>>>> })
+>>>> 
+>>>> Hard to see the scope creep here. What I would consider scope creep 
+>>>> I
+>>>> specifically didn't even ask for: I'd like this macro to be
+>>>> overridable
+>>>> by an arch. Specifically (see my earlier naming hint) I'd like to 
+>>>> use
+>>>> x86's BMI insn BLSI in the context of "x86: allow Kconfig control 
+>>>> over
+>>>> psABI level", when ABI v2 or higher is in use.
+>>> 
+>>> I appreciate you suggesting an implementation; I'll send a v5
+>>> incorporating it.
+>> 
+>> There's an issue with this approach, though: since the macro is used
+>> indirectly
+>> in expressions that are e.g. case labels or array sizes, the build 
+>> fails
+>> (see [1] for instance).
+>> Perhaps it's best to leave it as is?
+> 
+> Hmm. I'm afraid it's not an option to "leave as is", not the least 
+> because
+> - as said - I'm under the impression that another Misra rule requires
+> macro arguments to be evaluated exactly once. Best I can think of right
+> away is to have a macro for limited use (to address such build issues)
+> plus an inline function (for general use). But yes, maybe that then 
+> indeed
+> needs to be a 2nd step.
+> 
+> Jan
+> 
+>> [1] 
+>> https://gitlab.com/xen-project/people/bugseng/xen/-/jobs/5423693947
+>> 
 
-Fixes: 980d6acf1517 ("IOMMU: make DMA containment of quarantined devices optional")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-CC: Henry Wang <Henry.Wang@arm.com>
----
- docs/misc/xen-command-line.pandoc | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+There is no such MISRA Rule afaik: R23.7 is similar, but only for C11 
+generic selections.
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 6b07d0f3a17f..9a19a04157cb 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -1480,7 +1480,8 @@ detection of systems known to misbehave upon accesses to that port.
- > Default: `new` unless directed-EOI is supported
- 
- ### iommu
--    = List of [ <bool>, verbose, debug, force, required, quarantine[=scratch-page],
-+    = List of [ <bool>, verbose, debug, force, required,
-+                quarantine=<bool>|scratch-page,
-                 sharept, superpages, intremap, intpost, crash-disable,
-                 snoop, qinval, igfx, amd-iommu-perdev-intremap,
-                 dom0-{passthrough,strict} ]
-@@ -1519,7 +1520,8 @@ boolean (e.g. `iommu=no`) can override this and leave the IOMMUs disabled.
-     successfully.
- 
- *   The `quarantine` option can be used to control Xen's behavior when
--    de-assigning devices from guests.
-+    de-assigning devices from guests.  The default behaviour is chosen at
-+    compile time, and is one of `CONFIG_IOMMU_QUARANTINE_{NONE,BASIC,SCRATCH_PAGE}`.
- 
-     When a PCI device is assigned to an untrusted domain, it is possible
-     for that domain to program the device to DMA to an arbitrary address.
-
-base-commit: 9659b2a6d73b14620e187f9c626a09323853c459
 -- 
-2.30.2
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
