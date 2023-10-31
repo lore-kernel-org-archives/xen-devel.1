@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 239D8C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 13:23:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625719.975324 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D284C001B0
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 13:23:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625721.975339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxoiO-0005OW-3q; Tue, 31 Oct 2023 13:23:28 +0000
+	id 1qxoiQ-0005rp-VE; Tue, 31 Oct 2023 13:23:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625719.975324; Tue, 31 Oct 2023 13:23:28 +0000
+Received: by outflank-mailman (output) from mailman id 625721.975339; Tue, 31 Oct 2023 13:23:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxoiN-0005Nf-Vv; Tue, 31 Oct 2023 13:23:27 +0000
-Received: by outflank-mailman (input) for mailman id 625719;
- Tue, 31 Oct 2023 13:23:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qxoiQ-0005rL-M8; Tue, 31 Oct 2023 13:23:30 +0000
+Received: by outflank-mailman (input) for mailman id 625721;
+ Tue, 31 Oct 2023 13:23:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k1/u=GN=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1qxoiM-0003uy-5o
- for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 13:23:26 +0000
+ id 1qxoiP-0003rs-TX
+ for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 13:23:29 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id ab9b930d-77f0-11ee-98d6-6d05b1d4d9a1;
- Tue, 31 Oct 2023 14:23:25 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id ad206158-77f0-11ee-9b0e-b553b5be7939;
+ Tue, 31 Oct 2023 14:23:27 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7958A139F;
- Tue, 31 Oct 2023 06:24:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EF6F7DA7;
+ Tue, 31 Oct 2023 06:24:08 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BF1343F738;
- Tue, 31 Oct 2023 06:23:23 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 40DC03F738;
+ Tue, 31 Oct 2023 06:23:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab9b930d-77f0-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: ad206158-77f0-11ee-9b0e-b553b5be7939
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -53,48 +53,46 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH v2 6/8] [WIP]x86/exclude-list: protect mm_type_tbl in mtrr from being formatted
-Date: Tue, 31 Oct 2023 13:23:02 +0000
-Message-Id: <20231031132304.2573924-7-luca.fancellu@arm.com>
+Subject: [RFC PATCH v2 8/8] feedback from the community
+Date: Tue, 31 Oct 2023 13:23:04 +0000
+Message-Id: <20231031132304.2573924-9-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231031132304.2573924-1-luca.fancellu@arm.com>
 References: <20231031132304.2573924-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The array mm_type_tbl initialization is formatted in a way that
-the formatting tool can't keep, so disable the formatting on that
-array initialization.
-
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- docs/misra/exclude-list.json | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ xen/.clang-format | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
-index d48dcf3ac971..b8976bc671a4 100644
---- a/docs/misra/exclude-list.json
-+++ b/docs/misra/exclude-list.json
-@@ -99,6 +99,19 @@
-             "rel_path": "arch/x86/cpu/mwait-idle.c",
-             "comment": "Imported from Linux, ignore for now"
-         },
-+        {
-+            "rel_path": "arch/x86/hvm/mtrr.c",
-+            "comment": "Contains structure formatted in a particular way",
-+            "checkers": "codestyle",
-+            "codestyle": {
-+                "protect": [
-+                    {
-+                        "syntax_opening": "static const uint8_t mm_type_tbl",
-+                        "syntax_closing": "};"
-+                    }
-+                ]
-+            }
-+        },
-         {
-             "rel_path": "arch/x86/include/asm/alternative-asm.h",
-             "comment": "Includes mostly assembly macro and it's meant to be included only in assembly code",
+diff --git a/xen/.clang-format b/xen/.clang-format
+index 7880709fe1fd..bfc1d104af84 100644
+--- a/xen/.clang-format
++++ b/xen/.clang-format
+@@ -29,8 +29,8 @@ AlignArrayOfStructures: Left
+ # [not specified]
+ # Align consecutive assignments (supported in clang-format 3.8)
+ AlignConsecutiveAssignments:
+-  Enabled: true
+-  AcrossEmptyLines: true
++  Enabled: false
++  AcrossEmptyLines: false
+   AcrossComments: false
+ 
+ # [not specified]
+@@ -46,8 +46,8 @@ AlignConsecutiveDeclarations: None
+ # Align values of consecutive macros (supported in clang-format 9)
+ AlignConsecutiveMacros:
+   Enabled: true
+-  AcrossEmptyLines: true
+-  AcrossComments: true
++  AcrossEmptyLines: false
++  AcrossComments: false
+ 
+ # [not specified]
+ # Align escaped newlines to the right (supported in clang-format 5)
 -- 
 2.34.1
 
