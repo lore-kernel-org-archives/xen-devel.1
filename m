@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBF06C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 14:50:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625849.975565 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F236DC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 14:53:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625863.975584 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxq3t-0002dW-Dt; Tue, 31 Oct 2023 14:49:45 +0000
+	id 1qxq6o-0004v6-1c; Tue, 31 Oct 2023 14:52:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625849.975565; Tue, 31 Oct 2023 14:49:45 +0000
+Received: by outflank-mailman (output) from mailman id 625863.975584; Tue, 31 Oct 2023 14:52:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxq3t-0002dP-A6; Tue, 31 Oct 2023 14:49:45 +0000
-Received: by outflank-mailman (input) for mailman id 625849;
- Tue, 31 Oct 2023 14:49:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kxST=GN=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qxq3s-0002d0-FN
- for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 14:49:44 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id b945da58-77fc-11ee-9b0e-b553b5be7939;
- Tue, 31 Oct 2023 15:49:42 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4CED52F4;
- Tue, 31 Oct 2023 07:50:23 -0700 (PDT)
-Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
- [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 9E9A13F738;
- Tue, 31 Oct 2023 07:49:37 -0700 (PDT)
+	id 1qxq6n-0004uz-VM; Tue, 31 Oct 2023 14:52:45 +0000
+Received: by outflank-mailman (input) for mailman id 625863;
+ Tue, 31 Oct 2023 14:52:44 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1qxq6m-0004ur-Qe
+ for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 14:52:44 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qxq6j-0005kw-QT; Tue, 31 Oct 2023 14:52:41 +0000
+Received: from 54-240-197-239.amazon.com ([54.240.197.239]
+ helo=[192.168.9.249]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qxq6j-00031U-IX; Tue, 31 Oct 2023 14:52:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,51 +41,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b945da58-77fc-11ee-9b0e-b553b5be7939
-From: Henry Wang <Henry.Wang@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Henry Wang <Henry.Wang@arm.com>,
-	Community Manager <community.manager@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v5 1/2] CHANGELOG.md: Finalize the 4.18 release date
-Date: Tue, 31 Oct 2023 22:49:24 +0800
-Message-Id: <20231031144925.2416266-2-Henry.Wang@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231031144925.2416266-1-Henry.Wang@arm.com>
-References: <20231031144925.2416266-1-Henry.Wang@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=i+o9xNOUQwP/1uw4PqDICiGsoJ7ABp2Z37PRV7kBtIE=; b=W75Y9uoIYRcyj/T2lbaMpjj20Y
+	5Vpxv+09u/xMt1TaAZ44BOPx0OOi9fjJSVAUKFUBvokse1Fv9WiBxwzGn0EWYDQgfdq8/bsYZTSrg
+	NfBO4Yk1mp2krkY15LCzrleNbPtuVjuy+DUAEXvmOJ5ye3Scp1s2Rt2IfrMQeCcgeC/A=;
+Message-ID: <4f8b3eb4-2765-40e6-8979-ccfebd81e37d@xen.org>
+Date: Tue, 31 Oct 2023 14:52:38 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/2] CHANGELOG.md: Finalize the 4.18 release date
+Content-Language: en-GB
+To: Henry Wang <Henry.Wang@arm.com>, xen-devel@lists.xenproject.org
+Cc: Community Manager <community.manager@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Wei Chen <wei.chen@arm.com>
+References: <20231031144925.2416266-1-Henry.Wang@arm.com>
+ <20231031144925.2416266-2-Henry.Wang@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20231031144925.2416266-2-Henry.Wang@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Henry Wang <Henry.Wang@arm.com>
----
-v5:
-- New patch
----
- CHANGELOG.md | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 3ca7969699..94dbd83894 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -4,7 +4,7 @@ Notable changes to Xen will be documented in this file.
- 
- The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
- 
--## [4.18.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.18.0) - 2023-XX-XX
-+## [4.18.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.18.0) - 2023-11-16
- 
- ### Changed
-  - Repurpose command line gnttab_max_{maptrack_,}frames options so they don't
+
+On 31/10/2023 14:49, Henry Wang wrote:
+> Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+Cheers,
+
 -- 
-2.25.1
-
+Julien Grall
 
