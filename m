@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8691C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 14:49:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625848.975555 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA069C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 14:49:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625850.975575 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxq3n-0002Nm-6o; Tue, 31 Oct 2023 14:49:39 +0000
+	id 1qxq3x-0002vL-Jw; Tue, 31 Oct 2023 14:49:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625848.975555; Tue, 31 Oct 2023 14:49:39 +0000
+Received: by outflank-mailman (output) from mailman id 625850.975575; Tue, 31 Oct 2023 14:49:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxq3n-0002Nf-3P; Tue, 31 Oct 2023 14:49:39 +0000
-Received: by outflank-mailman (input) for mailman id 625848;
- Tue, 31 Oct 2023 14:49:37 +0000
+	id 1qxq3x-0002vC-HA; Tue, 31 Oct 2023 14:49:49 +0000
+Received: by outflank-mailman (input) for mailman id 625850;
+ Tue, 31 Oct 2023 14:49:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kxST=GN=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1qxq3l-0002NZ-Qq
- for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 14:49:37 +0000
+ id 1qxq3w-0002NZ-0n
+ for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 14:49:48 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id b5e5dc61-77fc-11ee-98d6-6d05b1d4d9a1;
- Tue, 31 Oct 2023 15:49:36 +0100 (CET)
+ id bc52d934-77fc-11ee-98d6-6d05b1d4d9a1;
+ Tue, 31 Oct 2023 15:49:47 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9652B2F4;
- Tue, 31 Oct 2023 07:50:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 73DBB2F4;
+ Tue, 31 Oct 2023 07:50:28 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E66723F738;
- Tue, 31 Oct 2023 07:49:31 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C5BFC3F738;
+ Tue, 31 Oct 2023 07:49:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b5e5dc61-77fc-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: bc52d934-77fc-11ee-98d6-6d05b1d4d9a1
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Henry Wang <Henry.Wang@arm.com>,
@@ -59,27 +59,42 @@ Cc: Henry Wang <Henry.Wang@arm.com>,
 	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v5 0/2] Finalize the 4.18 release date
-Date: Tue, 31 Oct 2023 22:49:23 +0800
-Message-Id: <20231031144925.2416266-1-Henry.Wang@arm.com>
+Subject: [PATCH v5 2/2] CHANGELOG.md: Start new "unstable" section
+Date: Tue, 31 Oct 2023 22:49:25 +0800
+Message-Id: <20231031144925.2416266-3-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231031144925.2416266-1-Henry.Wang@arm.com>
+References: <20231031144925.2416266-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi all,
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+---
+v5:
+- Rebase on previous patches.
+---
+ CHANGELOG.md | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-This series finializes the 4.18 release date and starts a
-new unstable release after branching.
-
-Thanks.
-
-Henry Wang (2):
-  CHANGELOG.md: Finalize the 4.18 release date
-  CHANGELOG.md: Start new "unstable" section
-
- CHANGELOG.md | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 94dbd83894..cbdc9bceac 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -4,6 +4,14 @@ Notable changes to Xen will be documented in this file.
+ 
+ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+ 
++## [unstable UNRELEASED](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
++
++### Changed
++
++### Added
++
++### Removed
++
+ ## [4.18.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.18.0) - 2023-11-16
+ 
+ ### Changed
 -- 
 2.25.1
 
