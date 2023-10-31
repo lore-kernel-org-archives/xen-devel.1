@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3BE9C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 13:23:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.625718.975312 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7869FC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Oct 2023 13:23:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.625720.975335 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxoiM-00050m-Rx; Tue, 31 Oct 2023 13:23:26 +0000
+	id 1qxoiQ-0005mp-FC; Tue, 31 Oct 2023 13:23:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 625718.975312; Tue, 31 Oct 2023 13:23:26 +0000
+Received: by outflank-mailman (output) from mailman id 625720.975335; Tue, 31 Oct 2023 13:23:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qxoiM-0004y6-KK; Tue, 31 Oct 2023 13:23:26 +0000
-Received: by outflank-mailman (input) for mailman id 625718;
- Tue, 31 Oct 2023 13:23:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qxoiQ-0005mL-9x; Tue, 31 Oct 2023 13:23:30 +0000
+Received: by outflank-mailman (input) for mailman id 625720;
+ Tue, 31 Oct 2023 13:23:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k1/u=GN=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1qxoiL-0003uy-EU
- for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 13:23:25 +0000
+ id 1qxoiO-0003rs-TU
+ for xen-devel@lists.xenproject.org; Tue, 31 Oct 2023 13:23:29 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id ab0187b6-77f0-11ee-98d6-6d05b1d4d9a1;
- Tue, 31 Oct 2023 14:23:24 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id ac52eaf9-77f0-11ee-9b0e-b553b5be7939;
+ Tue, 31 Oct 2023 14:23:26 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6F97CDA7;
- Tue, 31 Oct 2023 06:24:05 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C213C1474;
+ Tue, 31 Oct 2023 06:24:07 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9171F3F738;
- Tue, 31 Oct 2023 06:23:22 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id ED7BF3F738;
+ Tue, 31 Oct 2023 06:23:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab0187b6-77f0-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: ac52eaf9-77f0-11ee-9b0e-b553b5be7939
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -53,309 +53,723 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH v2 5/8] [WIP]codestyle.py: Protect generic piece of code
-Date: Tue, 31 Oct 2023 13:23:01 +0000
-Message-Id: <20231031132304.2573924-6-luca.fancellu@arm.com>
+Subject: [RFC PATCH v2 7/8] xen: Add clang-format configuration
+Date: Tue, 31 Oct 2023 13:23:03 +0000
+Message-Id: <20231031132304.2573924-8-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231031132304.2573924-1-luca.fancellu@arm.com>
 References: <20231031132304.2573924-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add a way to protect generic piece of code from being formatted.
-
-Use the exclude-list to pass also a structure to the scripts,
-that structure will be used from the codestyle.py script to
-understand which piece of code of which file needs to be left
-with the original format.
-
-Update exclude-list.rst documentation.
+Add a clang format configuration for the Xen Hypervisor.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- docs/misra/exclude-list.rst                   |  6 +-
- xen/scripts/codestyle.py                      | 96 ++++++++++++-------
- .../xen_analysis/exclusion_file_list.py       | 15 ++-
- 3 files changed, 76 insertions(+), 41 deletions(-)
+ xen/.clang-format | 693 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 693 insertions(+)
+ create mode 100644 xen/.clang-format
 
-diff --git a/docs/misra/exclude-list.rst b/docs/misra/exclude-list.rst
-index ade314100663..946f3793aad7 100644
---- a/docs/misra/exclude-list.rst
-+++ b/docs/misra/exclude-list.rst
-@@ -25,7 +25,8 @@ Here is an example of the exclude-list.json file::
- |        {
- |            "rel_path": "relative/path/from/xen/folder/*",
- |            "comment": "This folder is a library",
--|            "checkers": "xen-analysis some-checker"
-+|            "checkers": "xen-analysis some-checker",
-+|            "xen-analysis": {...}
- |        },
- |        {
- |            "rel_path": "relative/path/from/xen/mem*.c",
-@@ -48,6 +49,9 @@ Here is an explanation of the fields inside an object of the "content" array:
-       and static analysis scan. (Implemented only for Cppcheck tool)
-     - codestyle: the codestyle.py script exclude this entry from the formatting
-       tool.
-+ - <checker>: an optional parameter to pass a configuration to the checker about
-+   this entry. The parameter to be specified is one of the value listed for the
-+   "checkers" value.
- 
- To ease the review and the modifications of the entries, they shall be listed in
- alphabetical order referring to the rel_path field.
-diff --git a/xen/scripts/codestyle.py b/xen/scripts/codestyle.py
-index ab3df66fc2e2..92482d586f7a 100755
---- a/xen/scripts/codestyle.py
-+++ b/xen/scripts/codestyle.py
-@@ -36,36 +36,36 @@ def action_protect_asm(filename, file_lines, protect):
-     opening_asm = False
-     cf_off_comment = '/* clang-format off */'
-     cf_on_comment = '/* clang-format on */'
--    asm_stx = '(?:asm|__asm__)(?:\s(?:volatile|__volatile__))?\s?\('
--    asm_stx_close = ');'
+diff --git a/xen/.clang-format b/xen/.clang-format
+new file mode 100644
+index 000000000000..7880709fe1fd
+--- /dev/null
++++ b/xen/.clang-format
+@@ -0,0 +1,693 @@
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# clang-format configuration file. Intended for clang-format >= 15.
++#
++# For more information, see:
++#
++#   Documentation/process/clang-format.rst
++#   https://clang.llvm.org/docs/ClangFormat.html
++#   https://clang.llvm.org/docs/ClangFormatStyleOptions.html
++#
++---
 +
-+    config = filename[1]["protect"]
- 
-     if protect:
-         # Look for closing parenthesis with semicolon ');'
--        closing_asm_rgx_rule = rf'^.*{re.escape(asm_stx_close)}.*$'
-+        closing_asm_rgx_rule = lambda cl_stx: rf'^.*{re.escape(cl_stx)}.*$'
-         # Look for opening asm syntax
--        opening_asm_rgx_rule = rf'^\s*{asm_stx}.*$'
-+        opening_asm_rgx_rule = lambda op_stx: rf'^\s*{op_stx}.*$'
-         macro_start_rgx_rule = r'^\s?#\s?define.*\\$'
--        opening_asm_find = rf'({asm_stx})'
-+        opening_asm_find = lambda op_stx: rf'({op_stx})'
-         opening_asm_replace = cf_off_comment + r'\1'
-         opening_def_find = r'#\s?define'
-         opening_def_replace = f'{cf_off_comment}#define'
--        closing_asm_find    = re.escape(asm_stx_close)
--        closing_asm_replace = asm_stx_close + cf_on_comment
-+        closing_asm_find    = lambda cl_stx: re.escape(cl_stx)
-+        closing_asm_replace = lambda cl_stx: cl_stx + cf_on_comment
-         closing_def_find    = '\n'
-         closing_def_replace = cf_on_comment + '\n'
-     else:
-         # Look for closing parenthesis with semicolon ');' and with the
-         # special clang-format comment
--        closing_asm_rgx_rule = \
--            rf'^.*{re.escape(asm_stx_close)}.*{re.escape(cf_on_comment)}.*$'
-+        closing_asm_rgx_rule = lambda cl_stx: \
-+            rf'^.*{re.escape(cl_stx)}.*{re.escape(cf_on_comment)}.*$'
-         # Look for opening asm syntax preceded by the special clang-format
-         # comment, the comment is optional to generalise the algorithm to
-         # un-protect asm outside and inside macros. The case outside is easy
-         # because we will find '/* clang-format off */asm', instead the case
-         # inside is more tricky and we are going to find only 'asm' and then
-         # go backwards until we find '/* clang-format off */#define'
--        opening_asm_rgx_rule = \
--            rf'^\s*({re.escape(cf_off_comment)})?{asm_stx}.*$'
-+        opening_asm_rgx_rule = lambda op_stx: \
-+            rf'^\s*({re.escape(cf_off_comment)})?{op_stx}.*$'
-         # Look for the define just before the asm invocation, here we look for
-         # '/* clang-format off */#define' or '#define', this is to handle a rare
-         # corner case where an asm invocation is inside a macro, but was not
-@@ -76,24 +76,27 @@ def action_protect_asm(filename, file_lines, protect):
-         # comments, but at least the tool won't complain
-         macro_start_rgx_rule = \
-             rf'^\s?(?:{re.escape(cf_off_comment)})?#\s?define.*\\$'
--        opening_asm_find = rf'({re.escape(cf_off_comment)}({asm_stx}))'
-+        opening_asm_find = \
-+            lambda op_stx: rf'({re.escape(cf_off_comment)}({op_stx}))'
-         opening_asm_replace = r'\2'
-         opening_def_find = rf'(?:{re.escape(cf_off_comment)})?#\s?define'
-         opening_def_replace = '#define'
--        closing_asm_find \
--            = rf'{re.escape(asm_stx_close)}.*{re.escape(cf_on_comment)}'
--        closing_asm_replace = asm_stx_close
-+        closing_asm_find = lambda cl_stx: \
-+            rf'{re.escape(cl_stx)}.*{re.escape(cf_on_comment)}'
-+        closing_asm_replace = lambda cl_stx: cl_stx
-         closing_def_find    = cf_on_comment + '\n'
-         closing_def_replace = '\n'
- 
--    opening_asm_rgx = re.compile(opening_asm_rgx_rule)
--    closing_asm_rgx = re.compile(closing_asm_rgx_rule)
-+    closing_asm_rgx = None
-     macro_start_rgx = re.compile(macro_start_rgx_rule)
-+    regx_open = ""
-+    regx_close = ""
- 
-     i = 0
-     i_max = len(file_lines)
-     macro_begin = -1
-     while i < i_max:
-+        opening_match = False
-         # Keep track of the last define we found
-         if macro_start_rgx.match(file_lines[i]):
-             macro_begin = i
-@@ -101,7 +104,17 @@ def action_protect_asm(filename, file_lines, protect):
-         # touch asm syntax inside macros that usually have the line ended by
-         # a backslash, this is because insert stuff in them will have issues
-         # when later clang-format will format the macro itself
--        if (not opening_asm) and opening_asm_rgx.match(file_lines[i]):
-+        if (not opening_asm):
-+            for elem in config:
-+                regx_open = elem["syntax_opening"]
-+                if re.match(opening_asm_rgx_rule(regx_open), file_lines[i]):
-+                    regx_close = elem["syntax_closing"]
-+                    closing_asm_rgx = \
-+                        re.compile(closing_asm_rgx_rule(regx_close))
-+                    opening_match = True
-+                    break
++# [not specified]
++# Align function parameter that goes into a new line, under the open bracket
++# (supported in clang-format 3.8)
++AlignAfterOpenBracket: Align
 +
-+        if (not opening_asm) and opening_match:
-             line_before = (i > 0) and file_lines[i-1].endswith('\\\n')
-             if file_lines[i].endswith('\\\n') or line_before:
-                 # This should never happen, but if it does, it means an
-@@ -109,7 +122,7 @@ def action_protect_asm(filename, file_lines, protect):
-                 if macro_begin < 0:
-                     raise Exception("Begin of macro not found in {}\n"
-                                     "The asm invocation is on line {}"
--                                    .format(filename, i))
-+                                    .format(filename[0], i))
- 
-                 # asm invocation inside macro, need to protect the entire macro,
-                 # macro_begin should point to this define
-@@ -148,14 +161,15 @@ def action_protect_asm(filename, file_lines, protect):
-             else:
-                 # asm invocation is not inside a macro, protect the asm syntax
-                 opening_asm = True
--                file_lines[i] = re.sub(opening_asm_find, opening_asm_replace,
--                                       file_lines[i])
-+                file_lines[i] = re.sub(opening_asm_find(regx_open),
-+                                       opening_asm_replace, file_lines[i])
- 
-         # Try to find in the current line the asm closing syntax, only if a
-         # previous line already found an opening asm syntax
-         if opening_asm and closing_asm_rgx.match(file_lines[i]):
-             opening_asm = False
--            file_lines[i] = re.sub(closing_asm_find, closing_asm_replace,
-+            file_lines[i] = re.sub(closing_asm_find(regx_close),
-+                                   closing_asm_replace(regx_close),
-                                    file_lines[i])
- 
-         i += 1
-@@ -163,7 +177,7 @@ def action_protect_asm(filename, file_lines, protect):
-     # This should never happen, but if it does, it means an unexpected syntax
-     # is found in the file
-     if opening_asm:
--        raise Exception("Unbalanced asm parenthesis in {}".format(filename))
-+        raise Exception("Unbalanced asm parenthesis in {}".format(filename[0]))
- 
-     return file_lines
- 
-@@ -180,19 +194,19 @@ def stage(filename, actions):
-         return
- 
-     try:
--        with open(filename, "rt") as infile:
-+        with open(filename[0], "rt") as infile:
-             file_lines = infile.readlines()
-     except OSError as e:
--        raise Exception("Issue with reading file {}: {}".format(filename, e))
-+        raise Exception("Issue with reading file {}: {}".format(filename[0], e))
- 
-     for task in actions:
-         file_lines = task(filename, file_lines)
- 
-     try:
--        with open(filename, "wt") as outfile:
-+        with open(filename[0], "wt") as outfile:
-             outfile.writelines(file_lines)
-     except OSError as e:
--        raise Exception("Issue writing file {}: {}".format(filename, e))
-+        raise Exception("Issue writing file {}: {}".format(filename[0], e))
- 
- 
- def main(argv):
-@@ -236,27 +250,37 @@ def main(argv):
- 
-     # Transform the lists of absolute path in the second element of the
-     # exclusion_list into a plain list of absolute path to be exluded
--    excluded_c_files = [j for i in exclusion_list for j in i[1]]
-+    excluded_c_files = [(j, i[2]) for i in exclusion_list for j in i[1]]
- 
-     file_to_format = []
-+    default_config = {
-+        "syntax_opening": "(?:asm|__asm__)(?:\s(?:volatile|__volatile__))?\s?\(",
-+        "syntax_closing": ");"
-+    }
-     for file in c_files:
-         add_to_list = True
-+        cfg = {"protect": [default_config]}
-         for excl in excluded_c_files:
--            if excl in file:
--                add_to_list = False
-+            if excl[0] in file:
-+                if excl[1] is not None and "protect" in excl[1]:
-+                    excl[1]["protect"].append(default_config)
-+                    cfg = excl[1]
-+                else:
-+                    add_to_list = False
-                 break
-         if add_to_list:
--            file_to_format.append(file)
-+            file_to_format.append((file, cfg))
-         elif len_args > 0:
-             print("ERROR: file {} is excluded!".format(file))
-             sys.exit(1)
- 
--    for file in file_to_format:
-+    for file_entry in file_to_format:
-         try:
--            stage(file, pre_stage_actions)
--            utils.invoke_command("clang-format -i {}".format(file), False,
--                                 Exception, "Error occured invoking: {}\n")
--            stage(file, post_stage_actions)
-+            stage(file_entry, pre_stage_actions)
-+            utils.invoke_command("clang-format -i {}".format(file_entry[0]),
-+                                 False, Exception,
-+                                 "Error occured invoking: {}\n")
-+            stage(file_entry, post_stage_actions)
-         except Exception as e:
-             print("ERROR: {}\n".format(e))
- 
-diff --git a/xen/scripts/xen_analysis/exclusion_file_list.py b/xen/scripts/xen_analysis/exclusion_file_list.py
-index 8b10665a19e8..340c25f876fd 100644
---- a/xen/scripts/xen_analysis/exclusion_file_list.py
-+++ b/xen/scripts/xen_analysis/exclusion_file_list.py
-@@ -20,11 +20,12 @@ def cppcheck_exclusion_file_list(input_file):
- 
- 
- # Reads the exclusion file list and returns an array containing a set where the
--# first entry is what was listed in the exclusion list file, and the second
--# entry is the absolute path of the first entry.
-+# first entry is what was listed in the exclusion list file, the second
-+# entry is the absolute path of the first entry, the third entry is a checker
-+# specific configuration if provided otherwise it will be None.
- # If the first entry contained a wildcard '*', the second entry will have an
- # array of the solved absolute path for that entry.
--# Returns [('path',[path,path,...]), ('path',[path,path,...]), ...]
-+# Returns [('path',[path,path,...],<obj>), ('path',[path,path,...],<obj>), ...]
- def load_exclusion_file_list(input_file, checker=""):
-     ret = []
-     try:
-@@ -63,6 +64,12 @@ def load_exclusion_file_list(input_file, checker=""):
-         if checker not in entry_checkers:
-             continue
- 
-+        # Get checker specific configuration if any
-+        try:
-+            checker_config = entry[checker] if checker != "" else None
-+        except KeyError:
-+            checker_config = None
++# [not specified]
++# Align array of struct's elements by column and justify
++# struct test demo[] =
++# {
++#     {56, 23,    "hello"},
++#     {-1, 93463, "world"},
++#     {7,  5,     "!!"   }
++# };
++# (supported in clang-format 13)
++AlignArrayOfStructures: Left
 +
-         abs_path = settings.xen_dir + "/" + path
-         check_path = [abs_path]
- 
-@@ -78,6 +85,6 @@ def load_exclusion_file_list(input_file, checker=""):
-                     .format(path, filepath_object)
-                 )
- 
--        ret.append((path, check_path))
-+        ret.append((path, check_path, checker_config))
- 
-     return ret
++# [not specified]
++# Align consecutive assignments (supported in clang-format 3.8)
++AlignConsecutiveAssignments:
++  Enabled: true
++  AcrossEmptyLines: true
++  AcrossComments: false
++
++# [not specified]
++# Do not align consecutive bit fields (supported in clang-format 11)
++AlignConsecutiveBitFields: None
++
++# [not specified]
++# Do not align values of consecutive declarations
++# (supported in clang-format 3.8)
++AlignConsecutiveDeclarations: None
++
++# [not specified]
++# Align values of consecutive macros (supported in clang-format 9)
++AlignConsecutiveMacros:
++  Enabled: true
++  AcrossEmptyLines: true
++  AcrossComments: true
++
++# [not specified]
++# Align escaped newlines to the right (supported in clang-format 5)
++AlignEscapedNewlines: Right
++
++# [not specified]
++# Aligns operands of a single expression that needs to be split over multiple
++# lines (supported in clang-format 3.5)
++AlignOperands: Align
++
++# Do not align trailing consecutive comments (It helps to make clang-format
++# reproduce the same output when it runs on an already formatted file)
++# (supported in clang-format 3.7)
++AlignTrailingComments: false
++
++# [not specified]
++# Do not put all function call arguments on a new line, try to have at least
++# the first one close to the opening parenthesis (supported in clang-format 9)
++AllowAllArgumentsOnNextLine: false
++
++# [not specified]
++# Do not put all function declaration parameters on a new line, try to have at
++# least the first one close to the opening parenthesis
++# (supported in clang-format 3.3)
++AllowAllParametersOfDeclarationOnNextLine: false
++
++# Bracing condition needs to be respected even if the line is so short that the
++# final block brace can stay on a single line
++# (supported in clang-format 3.5)
++AllowShortBlocksOnASingleLine: Never
++
++# (supported in clang-format 3.6)
++AllowShortCaseLabelsOnASingleLine: false
++
++# (supported in clang-format 3.5)
++AllowShortFunctionsOnASingleLine: None
++
++# (supported in clang-format 3.3)
++AllowShortIfStatementsOnASingleLine: Never
++
++# (supported in clang-format 3.7)
++AllowShortLoopsOnASingleLine: false
++
++# [not specified]
++# Do not add a break after the definition return type
++# (supported in clang-format 3.8)
++AlwaysBreakAfterReturnType: None
++
++# [not specified]
++# There is no need to use a break after an assigment to a multiline string
++# (supported in clang-format 3.4)
++AlwaysBreakBeforeMultilineStrings: false
++
++# (supported in clang-format 3.4)
++AlwaysBreakTemplateDeclarations: false
++
++# Specify Xen's macro attributes (supported in clang-format 12)
++AttributeMacros:
++  - '__init'
++  - '__exit'
++  - '__initdata'
++  - '__initconst'
++  - '__initconstrel'
++  - '__initdata_cf_clobber'
++  - '__initconst_cf_clobber'
++  - '__hwdom_init'
++  - '__hwdom_initdata'
++  - '__maybe_unused'
++  - '__packed'
++  - '__stdcall'
++  - '__vfp_aligned'
++  - '__alt_call_maybe_initdata'
++  - '__cacheline_aligned'
++  - '__ro_after_init'
++  - 'always_inline'
++  - 'noinline'
++  - 'noreturn'
++  - '__weak'
++  - '__inline__'
++  - '__attribute_const__'
++  - '__transparent__'
++  - '__used'
++  - '__must_check'
++  - '__kprobes'
++
++# [not specified]
++# Try always to pack function call arguments on the same line before breaking
++# (supported in clang-format 3.7)
++BinPackArguments: true
++
++# [not specified]
++# Try always to pack function declaration parameters on the same line before
++# breaking (supported in clang-format 3.7)
++BinPackParameters: true
++
++# [not specified]
++# Do not add a spaces on bitfield 'unsigned bf:2;'
++# (supported in clang-format 12)
++BitFieldColonSpacing: None
++
++# Xen's coding style does not follow clang-format already available profiles for
++# breaking before braces, so set it to Custom and specify each case separately
++# (supported in clang-format 3.8)
++BraceWrapping:
++  # Braces ('{' and '}') are usually placed on a line of their own
++  AfterCaseLabel: true
++  AfterFunction: true
++  BeforeElse: true
++  AfterExternBlock: true
++  # except for the opening brace in definitions of enum, struct, and union
++  AfterEnum: false
++  AfterStruct: false
++  AfterUnion: false
++  # This is unlike the Linux coding style and unlike K&R.
++  #
++  # if ( condition )
++  # {
++  #     /* Do stuff. */
++  # }
++  # else
++  # {
++  #     /* Other stuff. */
++  # }
++  #
++  # while ( condition )
++  # {
++  #     /* Do stuff. */
++  # }
++  #
++  # [non-compliant]
++  # do-while is not compliant with CODING_STYLE because clang format doesn't
++  # support different styles for every control statement
++  # do
++  # {
++  #     /* Do stuff. */
++  # } while ( condition );
++  AfterControlStatement: Always
++  BeforeWhile: false
++  IndentBraces: false
++  # [not specified]
++  # Keep empty functions with braces style like this: 'void func() {}' instead
++  # of breaking the braces
++  SplitEmptyFunction: false
++  # Not related to C language, but specified for completeness
++  AfterClass: false
++  AfterNamespace: false
++  AfterObjCDeclaration: false
++  BeforeCatch: false
++  BeforeLambdaBody: false
++  SplitEmptyRecord: true
++  SplitEmptyNamespace: true
++
++# [not specified]
++# Break only after the operator in case of a long expression
++# (supported in clang-format 3.6)
++BreakBeforeBinaryOperators: None
++
++# Xen's coding style does not follow clang-format already available profiles for
++# breaking before braces, so set it to Custom and specify each case separately
++# (supported in clang-format 3.7)
++BreakBeforeBraces: Custom
++
++# [not specified]
++# Break before inline ASM colon if the line length is longer than column limit.
++# (This is a new feature upstreamed by EPAM during its work on clang-format for
++# Xen)
++# (supported in clang-format 16)
++# BreakBeforeInlineASMColon: OnlyMultiline
++
++# [not specified]
++# Ternary operators '?, :' can be put after a line break
++# (supported in clang-format 3.7)
++BreakBeforeTernaryOperators: true
++
++# (supported in clang-format 5)
++BreakConstructorInitializers: BeforeComma
++
++# User visible strings (e.g., printk() messages) should not be split so they can
++# be searched for more easily. (supported in clang-format 3.9)
++BreakStringLiterals: false
++
++# Lines should be less than 80 characters in length
++# (supported in clang-format 3.7)
++ColumnLimit: 80
++
++# (supported in clang-format 3.7)
++CommentPragmas: '^ IWYU pragma:'
++
++# Code within blocks is indented by one extra indent level
++# (supported in clang-format 3.7)
++ContinuationIndentWidth: 4
++
++# Do not derive pointer alignment style from the file
++# (supported in clang-format 3.7)
++DerivePointerAlignment: false
++
++# Taken from:
++# git grep -h -i '^#define [^[:space:]]*for_each[^[:space:]]*(' xen/ \
++# | sed "s,^#define \([^[:space:]]*for_each[^[:space:]]*\)(.*$,  - '\1',i" \
++# | LC_ALL=C sort -u
++# A vector of macros that should be interpreted as foreach loops instead of as
++# function calls.
++# (supported in clang-format 3.7)
++ForEachMacros:
++  - 'FOR_EACH_IOREQ_SERVER'
++  - '__list_for_each_rcu'
++  - 'dt_for_each_child_node'
++  - 'dt_for_each_device_node'
++  - 'dt_for_each_property_node'
++  - 'ebitmap_for_each_positive_bit'
++  - 'expr_list_for_each_sym'
++  - 'fdt_for_each_property_offset'
++  - 'fdt_for_each_subnode'
++  - 'for_each_affinity_balance_step'
++  - 'for_each_amd_iommu'
++  - 'for_each_cfg_sme'
++  - 'for_each_cpu'
++  - 'for_each_domain'
++  - 'for_each_domain_in_cpupool'
++  - 'for_each_drhd_unit'
++  - 'for_each_kimage_entry'
++  - 'for_each_node_mask'
++  - 'for_each_online_cpu'
++  - 'for_each_online_node'
++  - 'for_each_pdev'
++  - 'for_each_possible_cpu'
++  - 'for_each_present_cpu'
++  - 'for_each_rmrr_device'
++  - 'for_each_sched_unit'
++  - 'for_each_sched_unit_vcpu'
++  - 'for_each_set_bit'
++  - 'for_each_vcpu'
++  - 'for_each_vp'
++  - 'hlist_for_each'
++  - 'hlist_for_each_entry'
++  - 'hlist_for_each_entry_continue'
++  - 'hlist_for_each_entry_from'
++  - 'hlist_for_each_entry_rcu'
++  - 'hlist_for_each_entry_safe'
++  - 'hlist_for_each_safe'
++  - 'list_for_each'
++  - 'list_for_each_backwards_safe'
++  - 'list_for_each_continue_rcu'
++  - 'list_for_each_entry'
++  - 'list_for_each_entry_continue'
++  - 'list_for_each_entry_from'
++  - 'list_for_each_entry_rcu'
++  - 'list_for_each_entry_reverse'
++  - 'list_for_each_entry_safe'
++  - 'list_for_each_entry_safe_continue'
++  - 'list_for_each_entry_safe_from'
++  - 'list_for_each_entry_safe_reverse'
++  - 'list_for_each_prev'
++  - 'list_for_each_rcu'
++  - 'list_for_each_safe'
++  - 'list_for_each_safe_rcu'
++  - 'page_list_for_each'
++  - 'page_list_for_each_safe'
++  - 'page_list_for_each_safe_reverse'
++
++# A vector of macros that should be interpreted as conditionals instead of as
++# function calls. (supported in clang-format 13)
++#IfMacros:
++#  - ''
++
++# Sort include files by block of includes and not as only one group
++# (supported in clang-format 6)
++IncludeBlocks: Preserve
++
++# [not specified]
++# Regular expressions denoting the different #include categories used for
++# ordering #includes. (supported in clang-format 3.8)
++#IncludeCategories:
++#  - Regex: '.*'
++#    Priority: 1
++
++# When guessing whether a #include is the “main” include (to assign category 0,
++# see above), use this regex of allowed suffixes to the header stem. A partial
++# match is done, so that: - “” means “arbitrary suffix” - “$” means “no suffix”
++# For example, if configured to “(_test)?$”, then a header a.h would be seen as
++# the “main” include in both a.cc and a_test.cc.
++# (Do we have a main include in Xen?)
++# (supported in clang-format 3.9)
++#IncludeIsMainRegex: '(Test)?$'
++
++# Non-case labels inside switch() bodies are preferred to be indented the same
++# as the block's case labels (supported in clang-format 11)
++IndentCaseBlocks: false
++
++# [not specified]
++# Do not indent case labels in the switch block (supported in clang-format 3.3)
++IndentCaseLabels: false
++
++# [not specified]
++# Do not indent extern "C" block
++# (supported in clang-format 11)
++IndentExternBlock: NoIndent
++
++# Due to the behavior of GNU diffutils "diff -p", labels should be indented by
++# at least one blank (supported in clang-format 10)
++IndentGotoLabels: true
++
++# [not specified]
++# Do not create indentation for the preprocessor directives
++# (supported in clang-format 6)
++IndentPPDirectives: None
++
++# An indent level consists of four spaces (supported in clang-format 3.7)
++IndentWidth: 4
++
++# [not specified]
++# In case a function definition or declaration needs to be wrapped after the
++# type, do not indent the new line (supported in clang-format 3.7)
++IndentWrappedFunctionNames: false
++
++# Braces should be omitted for blocks with a single statement. e.g.,
++# if ( condition )
++#     single_statement();
++# (supported in clang-format 15)
++InsertBraces: false
++
++# [not specified]
++# Every file needs to end with a new line
++# (supported in clang-format 16)
++# InsertNewlineAtEOF: true
++
++# [not specified]
++# Keep empty lines (up to MaxEmptyLinesToKeep) at end of file
++# (supported in clang-format 17)
++# KeepEmptyLinesAtEOF: true
++
++# [not specified]
++# Do not add a new empty line at the start of the block
++# (supported in clang-format 3.7)
++KeepEmptyLinesAtTheStartOfBlocks: false
++
++# The Xen Hypervisor is written in C language (supported in clang-format 3.5)
++Language: Cpp
++
++# [not specified]
++# Line ending style is '\n' (supported in clang-format 16)
++# LineEnding: LF
++
++# Specify Xen's macro that starts a block of code
++# (supported in clang-format 3.7)
++MacroBlockBegin: '^PLATFORM_START|^DT_DEVICE_START|^ACPI_DEVICE_START'
++
++# Specify Xen's macro that ends a block of code (supported in clang-format 3.7)
++MacroBlockEnd: '^PLATFORM_END|^DT_DEVICE_END|^ACPI_DEVICE_END'
++
++# [not specified]
++# Maximum consecutive empty lines allowed (supported in clang-format 3.7)
++MaxEmptyLinesToKeep: 1
++
++# Parameters to tweak to discourage clang-format to break something
++# (supported in clang-format 5)
++PenaltyBreakAssignment: 30
++# (supported in clang-format 3.7)
++PenaltyBreakBeforeFirstCallParameter: 30
++# (supported in clang-format 3.7)
++PenaltyBreakComment: 10
++# (supported in clang-format 3.7)
++PenaltyBreakFirstLessLess: 0
++# (supported in clang-format 14)
++PenaltyBreakOpenParenthesis: 100
++# (supported in clang-format 3.7)
++PenaltyBreakString: 10
++# (supported in clang-format 3.7)
++PenaltyExcessCharacter: 100
++# (supported in clang-format 12)
++PenaltyIndentedWhitespace: 0
++# (supported in clang-format 3.7)
++PenaltyReturnTypeOnItsOwnLine: 60
++
++# [not specified]
++# Pointer alignment style is on the right 'void *var'
++# (supported in clang-format 3.7)
++PointerAlignment: Right
++
++# [not specified]
++# The number of columns to use for indentation of preprocessor statements
++# When set to -1 (default) IndentWidth is used also for preprocessor statements.
++# (supported in clang-format 13)
++PPIndentWidth: -1
++
++# [not specified]
++# (supported in clang-format 14)
++QualifierAlignment: Custom
++
++# Specify in which order the qualifiers should appear 'static const int *var'
++# (supported in clang-format 14)
++QualifierOrder: ['static', 'inline', 'const', 'volatile', 'type']
++
++# Don't try to reflow comments to respect the column limit (It helps to make
++# clang-format reproduce the same output when it runs on an already formatted
++# file)
++# (supported in clang-format 3.8)
++ReflowComments: false
++
++# [not specified]
++# Specifies the use of empty lines to separate definition blocks, including
++# structs, enums, and functions
++# (supported in clang-format 14)
++SeparateDefinitionBlocks: Always
++
++# [not specified]
++# Sort the include files by name (supported in clang-format 3.8)
++# TODO: enabling this will currently break the compilation, maybe fix?
++SortIncludes: Never
++
++# [not specified]
++# Do not allow a space after a type cast '(type)var'
++# (supported in clang-format 3.5)
++SpaceAfterCStyleCast: false
++
++# [not specified]
++# Do not allow a space after the not operator '!var'
++# (supported in clang-format 9)
++SpaceAfterLogicalNot: false
++
++# Ensure that there is a space after pointer qualifiers, when used with
++# PointerAlignment of value Right it means 'void *const *x = NULL;'
++# (supported in clang-format 12)
++SpaceAroundPointerQualifiers: After
++
++# [not specified]
++# Always have a space after an assign operator or a compound operator, for
++# example '+=' (supported in clang-format 3.7)
++SpaceBeforeAssignmentOperators: true
++
++# [not specified]
++# Do not allow a space between the case argument and the final colon 'case 0:'
++# (supported in clang-format 12)
++SpaceBeforeCaseColon: false
++
++# [not specified]
++# Have a space before the parenthesis of a control statement, do an exception
++# for ForEach and If macros
++SpaceBeforeParens: ControlStatementsExceptForEachMacros
++
++# (supported in clang-format 7)
++SpaceBeforeRangeBasedForLoopColon: true
++
++# [not specified]
++# Do not add a spaces before square brackets 'int a[5];'
++# (supported in clang-format 10)
++SpaceBeforeSquareBrackets: false
++
++# [not specified]
++# Do not add a space inside empty parenthesis '()'
++# (supported in clang-format 3.7)
++SpaceInEmptyParentheses: false
++
++# (supported in clang-format 3.7)
++SpacesBeforeTrailingComments: 1
++
++# Space characters are used to spread out logical statements, such as in the
++# condition of an if or while 'if ( a )' 'while ( i < 5 )'
++# (supported in clang-format 10)
++SpacesInConditionalStatement: true
++
++# (supported in clang-format 3.7)
++SpacesInContainerLiterals: false
++
++# [not specified]
++# Do not add a spaces inside a type cast parenthesis '(int)var'
++# (supported in clang-format 3.7)
++SpacesInCStyleCastParentheses: false
++
++# [not specified]
++# Do not insert spaces in empty block '{}'
++# (supported in clang-format 3.5)
++SpaceInEmptyBlock: false
++
++# Only one space is allowed at the start of a line comment
++# (supported in clang-format 13)
++SpacesInLineCommentPrefix:
++  Minimum: 1
++  Maximum: -1
++
++# [not specified]
++# Do not add a spaces inside parenthesis '(var & var)'
++# (supported in clang-format 3.7)
++SpacesInParentheses: false
++
++# [not specified]
++# Do not add spaces inside square brakets 'int a[5];'
++# (supported in clang-format 3.7)
++SpacesInSquareBrackets: false
++
++# (supported in clang-format 3.7)
++Standard: C++03
++
++# Macros which are ignored in front of a statement, as if they were an
++# attribute. So that they are not parsed as identifier
++# (supported in clang-format 12)
++# StatementAttributeLikeMacros: ['']
++
++# A vector of macros that should be interpreted as complete statements.
++# Typical macros are expressions, and require a semi-colon to be added;
++# sometimes this is not the case, and this allows to make clang-format aware of
++# such cases. (supported in clang-format 8)
++StatementMacros:
++  - 'PROGRESS'
++  - 'PROGRESS_VCPU'
++  - 'bitop'
++  - 'guest_bitop'
++  - 'testop'
++  - 'guest_testop'
++  - 'DEFINE_XEN_GUEST_HANDLE'
++  - '__DEFINE_XEN_GUEST_HANDLE'
++  - '___DEFINE_XEN_GUEST_HANDLE'
++  - 'presmp_initcall'
++  - '__initcall'
++  - '__exitcall'
++
++# An indent level consists of four spaces (supported in clang-format 3.7)
++TabWidth: 4
++
++# A vector of macros that should be interpreted as type declarations instead of
++# as function calls (supported in clang-format 9)
++TypenameMacros:
++  - 'XEN_GUEST_HANDLE'
++  - 'XEN_GUEST_HANDLE_64'
++  - 'XEN_GUEST_HANDLE_PARAM'
++  - 'ELF_HANDLE_DECL'
++
++# Indentation is done using spaces, not tabs (supported in clang-format 3.7)
++UseTab: Never
++
++# A vector of macros which are whitespace-sensitive and should not be touched
++# (supported in clang-format 11)
++WhitespaceSensitiveMacros:
++  - '__stringify'
++
++## Not related to C language ###################################################
++
++# (supported in clang-format 3.3)
++AccessModifierOffset: -4
++
++# (supported in clang-format 9)
++AllowShortLambdasOnASingleLine: None
++
++# (supported in clang-format 16)
++# BreakAfterAttributes: Never
++
++# (supported in clang-format 3.8)
++BreakAfterJavaFieldAnnotations: false
++
++# (supported in clang-format 16)
++# BreakArrays: false
++
++# (supported in clang-format 12)
++BreakBeforeConceptDeclarations: Never
++
++# (supported in clang-format 7)
++BreakInheritanceList: BeforeColon
++
++# (supported in clang-format 5)
++CompactNamespaces: false
++
++# (supported in clang-format 3.7)
++ConstructorInitializerAllOnOneLineOrOnePerLine: false
++
++# (supported in clang-format 3.7)
++ConstructorInitializerIndentWidth: 4
++
++# (supported in clang-format 3.4)
++Cpp11BracedListStyle: false
++
++# (supported in clang-format 13)
++EmptyLineAfterAccessModifier: Leave
++
++# (supported in clang-format 12)
++EmptyLineBeforeAccessModifier: Leave
++
++# (supported in clang-format 5)
++FixNamespaceComments: false
++
++# (supported in clang-format 13)
++IndentAccessModifiers: false
++
++# (supported in clang-format 15)
++IndentRequiresClause: false
++
++# (supported in clang-format 11)
++InsertTrailingCommas: None
++
++# (supported in clang-format 3.9)
++JavaScriptQuotes: Leave
++
++# (supported in clang-format 3.9)
++JavaScriptWrapImports: true
++
++# (supported in clang-format 3.7)
++NamespaceIndentation: None
++
++# (supported in clang-format 7)
++ObjCBinPackProtocolList: Auto
++
++# (supported in clang-format 3.7)
++ObjCBlockIndentWidth: 4
++
++# (supported in clang-format 11)
++ObjCBreakBeforeNestedBlockParam: false
++
++# (supported in clang-format 3.7)
++ObjCSpaceAfterProperty: true
++
++# (supported in clang-format 3.7)
++ObjCSpaceBeforeProtocolList: true
++
++# (supported in clang-format 14)
++PackConstructorInitializers: Never
++
++# (supported in clang-format 7)
++PenaltyBreakTemplateDeclaration: 0
++
++# (supported in clang-format 13)
++ReferenceAlignment: Right
++
++# (supported in clang-format 16)
++# RemoveSemicolon: false
++
++# (supported in clang-format 5)
++SortUsingDeclarations: false
++
++# (supported in clang-format 4)
++SpaceAfterTemplateKeyword: true
++
++# (supported in clang-format 7)
++SpaceBeforeCpp11BracedList: false
++
++# (supported in clang-format 7)
++SpaceBeforeCtorInitializerColon: false
++
++# (supported in clang-format 7)
++SpaceBeforeInheritanceColon: true
++
++# (supported in clang-format 3.4)
++SpacesInAngles: false
++
++...
 -- 
 2.34.1
 
