@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA53C4167B
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:34:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626241.976349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF49C4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:34:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626252.976380 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7bl-0007T0-Aj; Wed, 01 Nov 2023 09:33:53 +0000
+	id 1qy7cV-0001Ic-4i; Wed, 01 Nov 2023 09:34:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626241.976349; Wed, 01 Nov 2023 09:33:53 +0000
+Received: by outflank-mailman (output) from mailman id 626252.976380; Wed, 01 Nov 2023 09:34:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7bl-0007Sp-6X; Wed, 01 Nov 2023 09:33:53 +0000
-Received: by outflank-mailman (input) for mailman id 626241;
- Wed, 01 Nov 2023 09:33:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qy7cV-0001IT-00; Wed, 01 Nov 2023 09:34:39 +0000
+Received: by outflank-mailman (input) for mailman id 626252;
+ Wed, 01 Nov 2023 09:34:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy7bk-0005E0-0o
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:33:52 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c4480c77-7899-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 10:33:51 +0100 (CET)
+ id 1qy7cT-0005sN-J8
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:34:37 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id deb7cebc-7899-11ee-9b0e-b553b5be7939;
+ Wed, 01 Nov 2023 10:34:35 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 318C521835;
- Wed,  1 Nov 2023 09:33:51 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 9A3AE1F74D;
+ Wed,  1 Nov 2023 09:34:35 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0901713460;
- Wed,  1 Nov 2023 09:33:51 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7555613460;
+ Wed,  1 Nov 2023 09:34:35 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id XsLtAH8bQmW9CAAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:33:51 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id oid6G6sbQmURCQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:34:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,273 +53,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4480c77-7899-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: deb7cebc-7899-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698831231; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1698831275; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=SG/cdYRJD2CfQyplx7RLCTyqvUsFZjaC4L9HFaUzmyI=;
-	b=nm1HWMddpIPSTRB10ydlf/RkKXoJxNeTkikN2LhqLodq01RH9XEpFhbfwd7IHKrIwXP3/I
-	OCcbXvctBNWeutYYOsT4P0KQVRBc/b4X/lpnulacS3+VhvGgJfOrEeWtw2Ks2XcDKqagp0
-	vsrONSBNwhNZk4AT6QOhUGKSA4tJw0Y=
+	bh=QJbdIr85qdX7H1mLMVKcVj+vNBSvf/s3S7aCwRXLZlQ=;
+	b=FjGW66jTUk03x2O8LiH/g+o33zHciSnG4/T4VUzdZmrKM7aA0soKNvBrmSdn2by8i4U6rN
+	iBf176Wiu1lrug9lUff6Qd18AcHNP1YU7HCIFmpAxCopK+AJZUi85e1ZCcRjBJgEt9VGhC
+	QxR3G6DkI9FzhVDximIimoZlhQL/Wgg=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 04/29] tools/xenlogd: add transport layer
-Date: Wed,  1 Nov 2023 10:33:00 +0100
-Message-Id: <20231101093325.30302-5-jgross@suse.com>
+Subject: [PATCH 12/29] tools/xenlogd: add 9pfs stat request support
+Date: Wed,  1 Nov 2023 10:33:08 +0100
+Message-Id: <20231101093325.30302-13-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231101093325.30302-1-jgross@suse.com>
 References: <20231101093325.30302-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the transport layer of 9pfs. This is basically the infrastructure
-to receive requests from the frontend and to send the related answers
-via the rings.
-
-In order to avoid unaligned accesses e.g. on Arm, add the definition of
-__packed to the common-macros.h header.
+Add the stat request of the 9pfs protocol.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/include/xen-tools/common-macros.h |   4 +
- tools/xenlogd/io.c                      | 142 +++++++++++++++++++++++-
- tools/xenlogd/xenlogd.h                 |  16 +++
- 3 files changed, 160 insertions(+), 2 deletions(-)
+ tools/xenlogd/io.c | 89 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
 
-diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
-index e5ed603904..c3fd7d2a30 100644
---- a/tools/include/xen-tools/common-macros.h
-+++ b/tools/include/xen-tools/common-macros.h
-@@ -79,6 +79,10 @@
- #define __must_check __attribute__((__warn_unused_result__))
- #endif
- 
-+#ifndef __packed
-+#define __packed __attribute__((__packed__))
-+#endif
-+
- #define container_of(ptr, type, member) ({              \
-     typeof(((type *)0)->member) *mptr__ = (ptr);        \
-     (type *)((char *)mptr__ - offsetof(type, member));  \
 diff --git a/tools/xenlogd/io.c b/tools/xenlogd/io.c
-index ef0954d69d..590d06e906 100644
+index 34f137be1b..6e92667fab 100644
 --- a/tools/xenlogd/io.c
 +++ b/tools/xenlogd/io.c
-@@ -6,24 +6,115 @@
-  * Copyright (C) 2023 Juergen Gross <jgross@suse.com>
-  *
-  * I/O thread handling.
-+ *
-+ * Only handle one request at a time, pushing out the complete response
-+ * before looking for the next request.
-  */
+@@ -33,6 +33,7 @@
+ #define P9_CMD_OPEN       112
+ #define P9_CMD_CREATE     114
+ #define P9_CMD_CLUNK      120
++#define P9_CMD_STAT       124
  
- #include <stdbool.h>
-+#include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
-+#include <xenctrl.h>           /* For cpu barriers. */
-+#include <xen-tools/common-macros.h>
+ /* P9 protocol open flags. */
+ #define P9_OREAD            0   /* read */
+@@ -59,6 +60,25 @@ struct p9_qid {
+     uint64_t path;
+ };
  
- #include "xenlogd.h"
- 
-+/*
-+ * Note that the ring names "in" and "out" are from the frontend's
-+ * perspective, so the "in" ring will be used for responses to the frontend,
-+ * while the "out" ring is used for requests from the frontend to the
-+ * backend.
-+ */
-+static unsigned int ring_in_free(device *device)
-+{
-+    unsigned int queued;
++struct p9_stat {
++    uint16_t size;
++    uint16_t type;
++    uint32_t dev;
++    struct p9_qid qid;
++    uint32_t mode;
++    uint32_t atime;
++    uint32_t mtime;
++    uint64_t length;
++    const char *name;
++    const char *uid;
++    const char *gid;
++    const char *muid;
++    const char *extension;
++    uint32_t n_uid;
++    uint32_t n_gid;
++    uint32_t n_muid;
++};
 +
-+    queued = xen_9pfs_queued(device->prod_pvt_in, device->intf->in_cons,
-+                             device->ring_size);
-+    xen_rmb();
-+
-+    return device->ring_size - queued;
-+}
-+
-+static unsigned int ring_out_data(device *device)
-+{
-+    unsigned int queued;
-+
-+    queued = xen_9pfs_queued(device->intf->out_prod, device->cons_pvt_out,
-+                             device->ring_size);
-+    xen_rmb();
-+
-+    return queued;
-+}
-+
-+static unsigned int get_request_bytes(device *device, unsigned int off,
-+                                      unsigned int len)
-+{
-+    unsigned int size;
-+    unsigned int out_data = ring_out_data(device);
-+    RING_IDX prod, cons;
-+
-+    size = min(len - off, out_data);
-+    prod = xen_9pfs_mask(device->intf->out_prod, device->ring_size);
-+    cons = xen_9pfs_mask(device->cons_pvt_out, device->ring_size);
-+    xen_9pfs_read_packet(device->buffer + off, device->data.out, size,
-+                         prod, &cons, device->ring_size);
-+
-+    xen_rmb();           /* Read data out before setting visible consumer. */
-+    device->cons_pvt_out += size;
-+    device->intf->out_cons = device->cons_pvt_out;
-+
-+    /* Signal that more space is available now. */
-+    xenevtchn_notify(xe, device->evtchn);
-+
-+    return size;
-+}
-+
-+static unsigned int put_request_bytes(device *device, unsigned int off,
-+                                      unsigned int len)
-+{
-+    unsigned int size;
-+    unsigned int in_data = ring_in_free(device);
-+    RING_IDX prod, cons;
-+
-+    size = min(len - off, in_data);
-+    prod = xen_9pfs_mask(device->prod_pvt_in, device->ring_size);
-+    cons = xen_9pfs_mask(device->intf->in_cons, device->ring_size);
-+    xen_9pfs_write_packet(device->data.in, device->buffer + off, size,
-+                          &prod, cons, device->ring_size);
-+
-+    xen_wmb();           /* Write data out before setting visible producer. */
-+    device->prod_pvt_in += size;
-+    device->intf->in_prod = device->prod_pvt_in;
-+
-+    return size;
-+}
-+
- static bool io_work_pending(device *device)
- {
-     if ( device->stop_thread )
-         return true;
--    return false;
-+    if ( device->error )
-+        return false;
-+    return device->handle_response ? ring_in_free(device)
-+                                   : ring_out_data(device);
+ /*
+  * Note that the ring names "in" and "out" are from the frontend's
+  * perspective, so the "in" ring will be used for responses to the frontend,
+@@ -1022,6 +1042,71 @@ static void p9_clunk(device *device, struct p9_header *hdr)
+     fill_buffer(device, hdr->cmd + 1, hdr->tag, "");
  }
  
++static void fill_p9_stat(struct p9_stat *p9s, struct stat *st, const char *name)
++{
++    memset(p9s, 0, sizeof(*p9s));
++    fill_qid(NULL, &p9s->qid, st);
++    p9s->mode = st->st_mode & 0777;
++    if ( S_ISDIR(st->st_mode) )
++        p9s->mode |= P9_CREATE_PERM_DIR;
++    p9s->atime = st->st_atime;
++    p9s->mtime = st->st_mtime;
++    p9s->length = st->st_size;
++    p9s->name = name;
++    p9s->uid = "";
++    p9s->gid = "";
++    p9s->muid = "";
++    p9s->extension = "";
++    p9s->n_uid = 0;
++    p9s->n_gid = 0;
++    p9s->n_muid = 0;
++
++    /*
++     * Size of individual fields without the size field, including 5 2-byte
++     * string length fields.
++     */
++    p9s->size = 71 + strlen(p9s->name);
++}
++
++static void p9_stat(device *device, struct p9_header *hdr)
++{
++    uint32_t fid;
++    struct p9_fid *fidp;
++    struct p9_stat p9s;
++    struct stat st;
++    uint16_t total_length;
++    int ret;
++
++    ret = fill_data(device, "U", &fid);
++    if ( ret != 1 )
++    {
++        p9_error(device, hdr->tag, EINVAL);
++        return;
++    }
++
++    fidp = find_fid(device, fid);
++    if ( !fidp )
++    {
++        p9_error(device, hdr->tag, ENOENT);
++        return;
++    }
++
++    if ( stat(fidp->path, &st) < 0 )
++    {
++        p9_error(device, hdr->tag, errno);
++        return;
++    }
++    fill_p9_stat(&p9s, &st, strrchr(fidp->path, '/') + 1);
++
++    total_length = p9s.size + sizeof(p9s.size);
++    fill_buffer(device, hdr->cmd + 1, hdr->tag, "uuuUQUUULSSSSSUUU",
++                &total_length, &p9s.size, &p9s.type, &p9s.dev, &p9s.qid,
++                &p9s.mode, &p9s.atime, &p9s.mtime, &p9s.length, p9s.name,
++                p9s.uid, p9s.gid, p9s.muid, p9s.extension, &p9s.n_uid,
++                &p9s.n_gid, &p9s.n_muid);
++
++}
++
  void *io_thread(void *arg)
  {
      device *device = arg;
-+    unsigned int count = 0;
-+    struct p9_header hdr;
-+    bool in_hdr = true;
-+
-+    device->max_size = device->ring_size;
-+    device->buffer = malloc(device->max_size);
-+    if ( !device->buffer )
-+    {
-+        syslog(LOG_CRIT, "memory allocation failure!");
-+        return NULL;
-+    }
+@@ -1101,6 +1186,10 @@ void *io_thread(void *arg)
+                 p9_clunk(device, &hdr);
+                 break;
  
-     while ( !device->stop_thread )
-     {
-@@ -36,9 +127,56 @@ void *io_thread(void *arg)
-         }
-         pthread_mutex_unlock(&device->mutex);
- 
--        /* TODO: I/O handling. */
-+        if ( device->stop_thread || device->error )
-+            continue;
++            case P9_CMD_STAT:
++                p9_stat(device, &hdr);
++                break;
 +
-+        if ( !device->handle_response )
-+        {
-+            if ( in_hdr )
-+            {
-+                count += get_request_bytes(device, count, sizeof(hdr));
-+                if ( count != sizeof(hdr) )
-+                    continue;
-+                hdr = *(struct p9_header *)device->buffer;
-+                if ( hdr.size > device->max_size || hdr.size < sizeof(hdr) )
-+                {
-+                    syslog(LOG_ERR, "%u.%u specified illegal request length %u",
-+                           device->domid, device->devid, hdr.size);
-+                    device->error = true;
-+                    continue;
-+                }
-+                in_hdr = false;
-+            }
-+
-+            count += get_request_bytes(device, count, hdr.size);
-+            if ( count < hdr.size )
-+                continue;
-+
-+            /* TODO: handle request. */
-+
-+            device->handle_response = true;
-+            hdr.size = ((struct p9_header *)device->buffer)->size;
-+            count = 0;
-+        }
-+
-+        if ( device->handle_response )
-+        {
-+            count += put_request_bytes(device, count, hdr.size);
-+
-+            if ( count == hdr.size )
-+            {
-+                /* Signal presence of response. */
-+                xenevtchn_notify(xe, device->evtchn);
-+
-+                device->handle_response = false;
-+                in_hdr = true;
-+                count = 0;
-+            }
-+        }
-     }
- 
-+    free(device->buffer);
-+
-     device->thread_active = false;
- 
-     return NULL;
-diff --git a/tools/xenlogd/xenlogd.h b/tools/xenlogd/xenlogd.h
-index a8e9f9ca22..40aa7cd03a 100644
---- a/tools/xenlogd/xenlogd.h
-+++ b/tools/xenlogd/xenlogd.h
-@@ -13,6 +13,12 @@
- 
- #define MAX_OPEN_FILES_DEFAULT   5
- 
-+struct p9_header {
-+    uint32_t size;
-+    uint8_t cmd;
-+    uint16_t tag;
-+} __attribute__((packed));
-+
- typedef struct device device;
- struct device {
-     /* Admin data. */
-@@ -40,7 +46,17 @@ struct device {
-     struct xen_9pfs_data_intf *intf;
-     unsigned int ring_order;
-     RING_IDX ring_size;
-+
-+    /* Transport layer data. */
-     struct xen_9pfs_data data;
-+    RING_IDX prod_pvt_in;
-+    RING_IDX cons_pvt_out;
-+
-+    /* Request and response handling. */
-+    uint32_t max_size;
-+    bool error;             /* Protocol error - stop processing. */
-+    bool handle_response;   /* Main loop now handling response. */
-+    void *buffer;           /* Request/response buffer. */
- };
- 
- extern xenevtchn_handle *xe;
+             default:
+                 syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
+                        device->domid, device->devid, hdr.cmd);
 -- 
 2.35.3
 
