@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B829EC4167D
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:33:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626224.976299 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785ECC4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:33:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626228.976319 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7al-0005EQ-Nj; Wed, 01 Nov 2023 09:32:51 +0000
+	id 1qy7bV-0006C0-CB; Wed, 01 Nov 2023 09:33:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626224.976299; Wed, 01 Nov 2023 09:32:51 +0000
+Received: by outflank-mailman (output) from mailman id 626228.976319; Wed, 01 Nov 2023 09:33:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7al-0005EJ-Kw; Wed, 01 Nov 2023 09:32:51 +0000
-Received: by outflank-mailman (input) for mailman id 626224;
- Wed, 01 Nov 2023 09:32:50 +0000
+	id 1qy7bV-0006Bt-9O; Wed, 01 Nov 2023 09:33:37 +0000
+Received: by outflank-mailman (input) for mailman id 626228;
+ Wed, 01 Nov 2023 09:33:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QJn5=GO=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qy7ak-0005E0-IC
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:32:50 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1qy7bT-0005E0-9T
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:33:35 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9f8234f4-7899-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 10:32:49 +0100 (CET)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id 66D9A4EE0741;
- Wed,  1 Nov 2023 10:32:49 +0100 (CET)
+ id ba4e3bae-7899-11ee-98d6-6d05b1d4d9a1;
+ Wed, 01 Nov 2023 10:33:34 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 6F5481F74A;
+ Wed,  1 Nov 2023 09:33:34 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5593113460;
+ Wed,  1 Nov 2023 09:33:34 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id HrKPE24bQmWgCAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:33:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,83 +53,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9f8234f4-7899-11ee-98d6-6d05b1d4d9a1
-MIME-Version: 1.0
-Date: Wed, 01 Nov 2023 10:32:49 +0100
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+X-Inumbo-ID: ba4e3bae-7899-11ee-98d6-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1698831214; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=KX1+eDPCalxeEFEgNKEP+cxmDRb/81lwwxJPAyo97p8=;
+	b=WSXsFID7DYLhmnxGXvKweUBY3i7yGXby1zTK3AGZr86Zo8taPPKPldaKwHeQsyU4nOxmrc
+	+reDoRvzVt0rgkQer482r4vayPWu+gbIDirL4jJS7YCNHE951FOyqSL+M6FtdfrJWfS7Qz
+	Q+IztHn/l618cpy1VAGAJKOTxte2xLY=
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
- ayan.kumar.halder@amd.com, consulting@bugseng.com, jbeulich@suse.com,
- andrew.cooper3@citrix.com, roger.pau@citrix.com, Julien Grall
- <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, George Dunlap
- <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, Simone Ballarin
- <simone.ballarin@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, Jun
- Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Tamas
- K Lengyel <tamas@tklengyel.com>, Alexandru Isaila <aisaila@bitdefender.com>,
- Petre Pircalabu <ppircalabu@bitdefender.com>
-Subject: Re: [XEN PATCH][for-4.19 v6 0/8] Fix or deviate various instances of
- missing declarations
-In-Reply-To: <cover.1698829473.git.nicola.vetrini@bugseng.com>
-References: <cover.1698829473.git.nicola.vetrini@bugseng.com>
-Message-ID: <5f196a27a1b188db5bea4f5fad381033@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Juergen Gross <jgross@suse.com>
+Subject: [PATCH 01/29] xen/public: add some more 9pfs xenstore paths
+Date: Wed,  1 Nov 2023 10:32:57 +0100
+Message-Id: <20231101093325.30302-2-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231101093325.30302-1-jgross@suse.com>
+References: <20231101093325.30302-1-jgross@suse.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On 2023-11-01 10:15, Nicola Vetrini wrote:
-> The patches in this series aim to fix or deviate various instances 
-> where a
-> function or variable do not have a declaration visible when such entity 
-> is
-> defined (in violation of MISRA C:2012 Rule 8.4).
-> An exception listed under docs/misra/rules.rst allows asm-only 
-> functions and
-> variables to be exempted, while the other instances are either changed
-> (e.g., making them static) or a missing header inclusion is added.
-> 
-> Nicola Vetrini (8):
->   xen: modify or add declarations for variables where needed
->   x86: add deviation for asm-only functions
->   x86: add asmlinkage macro to variables only used in asm code
->   x86/grant: switch included header to make declarations visible
->   x86/vm_event: add missing include for hvm_vm_event_do_resume
->   xen/console: remove stub definition in consoled.h
->   x86/mem_access: make function static
->   docs/misra: exclude three more files
-> 
->  automation/eclair_analysis/ECLAIR/deviations.ecl |  9 +++++++++
->  docs/misra/deviations.rst                        |  6 ++++++
->  docs/misra/exclude-list.json                     | 12 ++++++++++++
->  xen/arch/arm/include/asm/setup.h                 |  3 +++
->  xen/arch/arm/include/asm/smp.h                   |  3 +++
->  xen/arch/arm/platform_hypercall.c                |  2 +-
->  xen/arch/x86/cpu/mcheck/mce.c                    |  7 ++++---
->  xen/arch/x86/hvm/grant_table.c                   |  3 +--
->  xen/arch/x86/hvm/svm/intr.c                      |  2 +-
->  xen/arch/x86/hvm/svm/nestedsvm.c                 |  2 +-
->  xen/arch/x86/hvm/svm/svm.c                       |  4 ++--
->  xen/arch/x86/hvm/vm_event.c                      |  1 +
->  xen/arch/x86/hvm/vmx/intr.c                      |  2 +-
->  xen/arch/x86/hvm/vmx/vmx.c                       |  4 ++--
->  xen/arch/x86/hvm/vmx/vvmx.c                      |  2 +-
->  xen/arch/x86/include/asm/hvm/grant_table.h       |  2 ++
->  xen/arch/x86/irq.c                               |  2 +-
->  xen/arch/x86/mm/mem_access.c                     |  6 +++---
->  xen/arch/x86/setup.c                             |  8 +++++---
->  xen/arch/x86/traps.c                             |  2 +-
->  xen/arch/x86/x86_64/traps.c                      |  2 +-
->  xen/include/xen/compiler.h                       |  5 +++++
->  xen/include/xen/consoled.h                       |  7 -------
->  xen/include/xen/symbols.h                        |  1 +
->  24 files changed, 67 insertions(+), 30 deletions(-)
+Add some optional additional backend paths for 9pfs PV devices. Those
+paths will be supported by the new xenlogd 9pfs backend.
 
-Please ignore this email; the patch series v6 has been sent fully in a 
-different email
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xen/include/public/io/9pfs.h | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
+diff --git a/xen/include/public/io/9pfs.h b/xen/include/public/io/9pfs.h
+index 9ad2773082..ac4bf0434b 100644
+--- a/xen/include/public/io/9pfs.h
++++ b/xen/include/public/io/9pfs.h
+@@ -71,6 +71,40 @@
+  *                 created on the guest (no user ownership squash or remap)
+  *         Only "none" is supported in this version of the protocol.
+  *
++ *    max-files
++ *         Values:        <uint32_t>
++ *
++ *         The maximum number of files (including directories) allowed for
++ *         this device. Backend support of this node is optional. If the node
++ *         is not present or the value is zero the number of files is not
++ *         limited.
++ *
++ *    max-open-files
++ *         Values:        <uint32_t>
++ *
++ *         The maximum number of files the guest is allowed to have opened
++ *         concurrently. Multiple concurrent opens of the same file are counted
++ *         individually. Backend support of this node is optional. If the node
++ *         is not present or the value is zero a backend specific default is
++ *         applied.
++ *
++ *    max-space
++ *         Values:        <uint32_t>
++ *
++ *         The maximum file space in MiBs the guest is allowed to use for this
++ *         device. Backend support of this node is optional. If the node is
++ *         not present or the value is zero the space is not limited.
++ *
++ *    auto-delete
++ *         Values:        <bool>
++ *
++ *         When set to "1" the backend will delete the file with the oldest
++ *         modification date below <path> in case the allowed maximum file
++ *         space (see <max-space>) or file number (see <max-files>) is being
++ *         exceeded due to guest activity (creation or extension of files).
++ *         Files currently opened by the guest won't be deleted. Backend
++ *         support of this node is optional.
++ *
+  ******************************************************************************
+  *                            Frontend XenBus Nodes
+  ******************************************************************************
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+2.35.3
+
 
