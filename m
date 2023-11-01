@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C37ADC4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:51:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626318.976488 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84ADAC4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:51:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626322.976499 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7sl-0003dg-Sd; Wed, 01 Nov 2023 09:51:27 +0000
+	id 1qy7t3-00045T-7c; Wed, 01 Nov 2023 09:51:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626318.976488; Wed, 01 Nov 2023 09:51:27 +0000
+Received: by outflank-mailman (output) from mailman id 626322.976499; Wed, 01 Nov 2023 09:51:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7sl-0003dZ-Px; Wed, 01 Nov 2023 09:51:27 +0000
-Received: by outflank-mailman (input) for mailman id 626318;
- Wed, 01 Nov 2023 09:51:26 +0000
+	id 1qy7t3-00045M-4o; Wed, 01 Nov 2023 09:51:45 +0000
+Received: by outflank-mailman (input) for mailman id 626322;
+ Wed, 01 Nov 2023 09:51:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy7cj-0005E0-4t
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:34:53 +0000
+ id 1qy7cB-0005E0-On
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:34:19 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e8b1f2cb-7899-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 10:34:52 +0100 (CET)
+ id d4d612ca-7899-11ee-98d6-6d05b1d4d9a1;
+ Wed, 01 Nov 2023 10:34:19 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4815E21A34;
- Wed,  1 Nov 2023 09:34:52 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id ECD8D21835;
+ Wed,  1 Nov 2023 09:34:18 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 224B113460;
- Wed,  1 Nov 2023 09:34:52 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BC2C713460;
+ Wed,  1 Nov 2023 09:34:18 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id gzoMB7wbQmUuCQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:34:52 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id bjaTLJobQmXzCAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:34:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,301 +53,216 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e8b1f2cb-7899-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: d4d612ca-7899-11ee-98d6-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698831292; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1698831258; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=w3PBNBB3kJ9bivxGczmEg6Y0kCgbJHQRQkdhIETfwqU=;
-	b=Cna131tUSW3IdHlOx4FSuIUfpI+8J3oyqRhdPU4V/Fgfz9pxj4/+HDyNKawmLm7vg8oYQM
-	xvK5gz7tGU3qsfMEf+9pUVcnY5AUzfFBGS+q+EEXK0wlHeboAGoTGiFlR2JrLFPgVBobMw
-	owbCLPaZU2xc7wmJKchG7lrQ+PcA5qA=
+	bh=+E0nJLTyclf5CJbKX/5YoRErJSYEG/DI6e1oQaOsog8=;
+	b=AxiGrL9PBABzKDpoI3x/ry2nsJSvs/tZRvn9MxfY3oQ40chYOcrIm3bhEJTGiKeIW+PEO0
+	Y8KSjYxrKt/H32nVQHIKOWQp57xW1W1yKJFkiFot+zoWY6xNP2elypLxy9Qg9Dwo2gqeKj
+	+3xYoPYT39SmKmqe7983V+pzydJhuPY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 15/29] tools/libs/light: add backend type for 9pfs PV devices
-Date: Wed,  1 Nov 2023 10:33:11 +0100
-Message-Id: <20231101093325.30302-16-jgross@suse.com>
+Subject: [PATCH 09/29] tools/xenlogd: add 9pfs open request support
+Date: Wed,  1 Nov 2023 10:33:05 +0100
+Message-Id: <20231101093325.30302-10-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231101093325.30302-1-jgross@suse.com>
 References: <20231101093325.30302-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Make the backend type of 9pfs PV devices configurable. The default is
-"qemu" with the related Xenstore backend-side directory being "9pfs".
-
-Add another type "xenlogd" with the related Xenstore backend-side
-directory "xen_9pfs".
-
-As additional security features it is possible to specify:
-- "max-space" for limiting the maximum space consumed on the filesystem
-  in MBs
-- "max-files" for limiting the maximum number of files in the
-  filesystem
-- "max-open-files" for limiting the maximum number of concurrent open
-  files
-
-For convenience "auto-delete" is available to let the backend delete the
-oldest file of the guest in case otherwise "max-space" or "max-files"
-would be violated.
-
-The xenlogd daemon will be started by libxenlight automatically when
-the first "xen_9pfs" device is being created.
+Add the open request of the 9pfs protocol.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/light/libxl_9pfs.c             | 143 +++++++++++++++++++++-
- tools/libs/light/libxl_create.c           |   4 +-
- tools/libs/light/libxl_dm.c               |   2 +-
- tools/libs/light/libxl_types.idl          |  11 ++
- tools/libs/light/libxl_types_internal.idl |   1 +
- 5 files changed, 154 insertions(+), 7 deletions(-)
+ tools/xenlogd/io.c      | 130 ++++++++++++++++++++++++++++++++++++++++
+ tools/xenlogd/xenlogd.h |   4 ++
+ 2 files changed, 134 insertions(+)
 
-diff --git a/tools/libs/light/libxl_9pfs.c b/tools/libs/light/libxl_9pfs.c
-index 5ab0d3aa21..0b9d84dce9 100644
---- a/tools/libs/light/libxl_9pfs.c
-+++ b/tools/libs/light/libxl_9pfs.c
-@@ -33,20 +33,157 @@ static int libxl__set_xenstore_p9(libxl__gc *gc, uint32_t domid,
+diff --git a/tools/xenlogd/io.c b/tools/xenlogd/io.c
+index 778e1dc2c9..c2b259f42e 100644
+--- a/tools/xenlogd/io.c
++++ b/tools/xenlogd/io.c
+@@ -18,6 +18,8 @@
+ #include <syslog.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <dirent.h>
++#include <fcntl.h>
+ #include <xenctrl.h>           /* For cpu barriers. */
+ #include <xen-tools/common-macros.h>
  
-     flexarray_append_pair(front, "tag", p9->tag);
+@@ -28,6 +30,15 @@
+ #define P9_CMD_ATTACH     104
+ #define P9_CMD_ERROR      107
+ #define P9_CMD_WALK       110
++#define P9_CMD_OPEN       112
++
++/* P9 protocol open flags. */
++#define P9_OREAD            0   /* read */
++#define P9_OWRITE           1   /* write */
++#define P9_ORDWR            2   /* read and write */
++#define P9_OMODEMASK     0x03
++#define P9_OTRUNC        0x10   /* or'ed in, truncate file first */
++#define P9_OREMOVE       0x40   /* or'ed in, remove file after clunk */
  
-+    if (p9->type == LIBXL_P9_TYPE_XENLOGD) {
-+        flexarray_append_pair(back, "max-space",
-+                              GCSPRINTF("%u", p9->max_space));
-+        flexarray_append_pair(back, "max-files",
-+                              GCSPRINTF("%u", p9->max_files));
-+        flexarray_append_pair(back, "max-open-files",
-+                              GCSPRINTF("%u", p9->max_open_files));
-+        flexarray_append_pair(back, "auto-delete",
-+                              p9->auto_delete ? "1" : "0");
-+    }
-+
-+    return 0;
-+}
-+
-+static int libxl__device_from_p9(libxl__gc *gc, uint32_t domid,
-+                                 libxl_device_p9 *type, libxl__device *device)
-+{
-+    device->backend_devid   = type->devid;
-+    device->backend_domid   = type->backend_domid;
-+    device->backend_kind    = type->type == LIBXL_P9_TYPE_QEMU
-+                              ? LIBXL__DEVICE_KIND_9PFS
-+                              : LIBXL__DEVICE_KIND_XEN_9PFS;
-+    device->devid           = type->devid;
-+    device->domid           = domid;
-+    device->kind            = LIBXL__DEVICE_KIND_9PFS;
-+
-     return 0;
+ #define P9_MIN_MSIZE      2048
+ #define P9_VERSION        "9P2000.u"
+@@ -734,6 +745,121 @@ static void p9_walk(device *device, struct p9_header *hdr)
+     free(names);
  }
  
--#define libxl__add_p9s NULL
-+static int libxl_device_p9_dm_needed(void *e, unsigned domid)
++static int open_flags_from_mode(uint8_t mode)
 +{
-+    libxl_device_p9 *elem = e;
++    int flags;
 +
-+    return elem->type == LIBXL_P9_TYPE_QEMU && elem->backend_domid == domid;
-+}
++    switch ( mode & P9_OMODEMASK )
++    {
++    case P9_OREAD:
++        flags = O_RDONLY;
++        break;
 +
-+typedef struct libxl__aop9_state libxl__aop9_state;
++    case P9_OWRITE:
++        flags = O_WRONLY;
++        break;
 +
-+struct libxl__aop9_state {
-+    libxl__spawn_state spawn;
-+    libxl__ao_device *aodev;
-+    libxl_device_p9 *p9;
-+    uint32_t domid;
-+    void (*callback)(libxl__egc *, libxl__aop9_state *, int);
-+};
++    case P9_ORDWR:
++        flags = O_RDWR;
++        break;
 +
-+static void xenlogd_spawn_outcome(libxl__egc *egc, libxl__aop9_state *aop9,
-+                                  int rc)
-+{
-+    aop9->aodev->rc = rc;
-+    if (rc)
-+        aop9->aodev->callback(egc, aop9->aodev);
-+    else
-+        libxl__device_add_async(egc, aop9->domid, &libxl__p9_devtype,
-+                                aop9->p9, aop9->aodev);
-+}
-+
-+static void xenlogd_confirm(libxl__egc *egc, libxl__spawn_state *spawn,
-+                            const char *xsdata)
-+{
-+    STATE_AO_GC(spawn->ao);
-+
-+    if (!xsdata)
-+        return;
-+
-+    if (strcmp(xsdata, "running"))
-+        return;
-+
-+    libxl__spawn_initiate_detach(gc, spawn);
-+}
-+
-+static void xenlogd_failed(libxl__egc *egc, libxl__spawn_state *spawn, int rc)
-+{
-+    libxl__aop9_state *aop9 = CONTAINER_OF(spawn, *aop9, spawn);
-+
-+    xenlogd_spawn_outcome(egc, aop9, rc);
-+}
-+
-+static void xenlogd_detached(libxl__egc *egc, libxl__spawn_state *spawn)
-+{
-+    libxl__aop9_state *aop9 = CONTAINER_OF(spawn, *aop9, spawn);
-+
-+    xenlogd_spawn_outcome(egc, aop9, 0);
-+}
-+
-+static int xenlogd_spawn(libxl__egc *egc, uint32_t domid, libxl_device_p9 *p9,
-+                         libxl__ao_device *aodev)
-+{
-+    STATE_AO_GC(aodev->ao);
-+    struct libxl__aop9_state *aop9;
-+    int rc;
-+    char *args[] = { "xenlogd", NULL };
-+
-+    if (p9->type != LIBXL_P9_TYPE_XENLOGD ||
-+        libxl__xs_read(gc, XBT_NULL, "/tool/xenlog/state"))
-+        return 0;
-+
-+    GCNEW(aop9);
-+    aop9->aodev = aodev;
-+    aop9->p9 = p9;
-+    aop9->domid = domid;
-+    aop9->callback = xenlogd_spawn_outcome;
-+
-+    aop9->spawn.ao = aodev->ao;
-+    aop9->spawn.what = "xenlog daemon";
-+    aop9->spawn.xspath = "/tool/xenlog/state";
-+    aop9->spawn.timeout_ms = LIBXL_DEVICE_MODEL_START_TIMEOUT * 1000;
-+    aop9->spawn.pidpath = "/tool/xenlog/pid";
-+    aop9->spawn.midproc_cb = libxl__spawn_record_pid;
-+    aop9->spawn.confirm_cb = xenlogd_confirm;
-+    aop9->spawn.failure_cb = xenlogd_failed;
-+    aop9->spawn.detached_cb = xenlogd_detached;
-+    rc = libxl__spawn_spawn(egc, &aop9->spawn);
-+    if (rc < 0)
-+        return rc;
-+    if (!rc) {
-+        setsid();
-+        libxl__exec(gc, -1, -1, -1, LIBEXEC_BIN "/xenlogd", args, NULL);
++    default:
++        return -1;
 +    }
 +
-+    return 1;
++    if ( mode & P9_OTRUNC )
++        flags |= O_TRUNC;
++
++    return flags;
 +}
 +
-+static void libxl__device_p9_add(libxl__egc *egc, uint32_t domid,
-+                                 libxl_device_p9 *p9,
-+                                 libxl__ao_device *aodev)
++static unsigned int get_iounit(device *device, struct stat *st)
 +{
-+    int rc;
-+
-+    rc = xenlogd_spawn(egc, domid, p9, aodev);
-+    if (rc == 1)
-+        return;
-+
-+    if (rc == 0)
-+        libxl__device_add_async(egc, domid, &libxl__p9_devtype, p9, aodev);
-+
-+    aodev->rc = rc;
-+    if (rc)
-+        aodev->callback(egc, aodev);
++    return (device->max_size - st->st_blksize) & ~(st->st_blksize - 1);
 +}
 +
- #define libxl_device_p9_list NULL
- #define libxl_device_p9_compare NULL
++static void p9_open(device *device, struct p9_header *hdr)
++{
++    uint32_t fid;
++    uint8_t mode;
++    struct p9_fid *fidp;
++    struct stat st;
++    struct p9_qid qid;
++    uint32_t iounit;
++    int flags;
++    int ret;
++
++    ret = fill_data(device, "Ub", &fid, &mode);
++    if ( ret != 2 )
++    {
++        p9_error(device, hdr->tag, EINVAL);
++        return;
++    }
++    if ( mode & ~(P9_OMODEMASK | P9_OTRUNC | P9_OREMOVE) )
++    {
++        p9_error(device, hdr->tag, EINVAL);
++        return;
++    }
++
++    fidp = find_fid(device, fid);
++    if ( !fidp )
++    {
++        p9_error(device, hdr->tag, ENOENT);
++        return;
++    }
++    if ( fidp->opened )
++    {
++        p9_error(device, hdr->tag, EINVAL);
++        return;
++    }
++
++    if ( stat(fidp->path, &st) < 0 )
++    {
++        p9_error(device, hdr->tag, ENOENT);
++        return;
++    }
++
++    fidp->isdir = S_ISDIR(st.st_mode);
++    fidp->mode = mode;
++    if ( fidp->isdir )
++    {
++        if ( mode != P9_OREAD )
++        {
++            p9_error(device, hdr->tag, EINVAL);
++            return;
++        }
++        fidp->data = opendir(fidp->path);
++        if ( !fidp->data )
++        {
++            p9_error(device, hdr->tag, errno);
++            return;
++        }
++        fidp->fd = dirfd(fidp->data);
++    }
++    else
++    {
++        flags = open_flags_from_mode(mode);
++        if ( flags < 0 )
++        {
++            p9_error(device, hdr->tag, EINVAL);
++            return;
++        }
++
++        fidp->fd = open(fidp->path, flags);
++        if ( fidp->fd < 0 )
++        {
++            p9_error(device, hdr->tag, errno);
++            return;
++        }
++    }
++
++    fill_qid(fidp->path, &qid, &st);
++    iounit = get_iounit(device, &st);
++    fidp->opened = true;
++
++    fill_buffer(device, hdr->cmd + 1, hdr->tag, "QU", &qid, &iounit);
++}
++
+ void *io_thread(void *arg)
+ {
+     device *device = arg;
+@@ -801,6 +927,10 @@ void *io_thread(void *arg)
+                 p9_walk(device, &hdr);
+                 break;
  
- static LIBXL_DEFINE_UPDATE_DEVID(p9)
--static LIBXL_DEFINE_DEVICE_FROM_TYPE(p9)
-+static LIBXL_DEFINE_DEVICES_ADD(p9)
- 
- LIBXL_DEFINE_DEVICE_REMOVE(p9)
- 
- DEFINE_DEVICE_TYPE_STRUCT(p9, 9PFS, p9s,
--    .skip_attach = 1,
-     .set_xenstore_config = (device_set_xenstore_config_fn_t)
-                            libxl__set_xenstore_p9,
-+    .dm_needed = libxl_device_p9_dm_needed,
- );
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index ce1d431103..b19e9379b6 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -1760,9 +1760,6 @@ static void domcreate_launch_dm(libxl__egc *egc, libxl__multidev *multidev,
-         libxl__device_console_dispose(&console);
-     }
- 
--    for (i = 0; i < d_config->num_p9s; i++)
--        libxl__device_add(gc, domid, &libxl__p9_devtype, &d_config->p9s[i]);
--
-     for (i = 0; i < d_config->num_pvcallsifs; i++)
-         libxl__device_add(gc, domid, &libxl__pvcallsif_devtype,
-                           &d_config->pvcallsifs[i]);
-@@ -1899,6 +1896,7 @@ const libxl__device_type *device_type_tbl[] = {
-     &libxl__vdispl_devtype,
-     &libxl__vsnd_devtype,
-     &libxl__virtio_devtype,
-+    &libxl__p9_devtype,
-     NULL
++            case P9_CMD_OPEN:
++                p9_open(device, &hdr);
++                break;
++
+             default:
+                 syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
+                        device->domid, device->devid, hdr.cmd);
+diff --git a/tools/xenlogd/xenlogd.h b/tools/xenlogd/xenlogd.h
+index 23f013af9e..6b7b5e2b91 100644
+--- a/tools/xenlogd/xenlogd.h
++++ b/tools/xenlogd/xenlogd.h
+@@ -22,7 +22,11 @@ struct p9_header {
+ struct p9_fid {
+     XEN_TAILQ_ENTRY(struct p9_fid) list;
+     unsigned int fid;
++    int fd;
++    uint8_t mode;
+     bool opened;
++    bool isdir;
++    void *data;    /* File type specific. */
+     char path[];
  };
  
-diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 14b593110f..2aaaeb5aa7 100644
---- a/tools/libs/light/libxl_dm.c
-+++ b/tools/libs/light/libxl_dm.c
-@@ -3761,7 +3761,7 @@ int libxl__need_xenpv_qemu(libxl__gc *gc, libxl_domain_config *d_config)
-         goto out;
-     }
- 
--    if (d_config->num_vfbs > 0 || d_config->num_p9s > 0) {
-+    if (d_config->num_vfbs > 0) {
-         ret = 1;
-         goto out;
-     }
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 7d8bd5d216..e910bf1621 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -150,6 +150,12 @@ libxl_nic_type = Enumeration("nic_type", [
-     (2, "VIF"),
-     ])
- 
-+libxl_p9_type = Enumeration("p9_type", [
-+    (0, "unknown"),
-+    (1, "qemu"),
-+    (2, "xenlogd"),
-+    ])
-+
- libxl_action_on_shutdown = Enumeration("action_on_shutdown", [
-     (1, "DESTROY"),
- 
-@@ -942,6 +948,11 @@ libxl_device_p9 = Struct("device_p9", [
-     ("path",             string),
-     ("security_model",   string),
-     ("devid",            libxl_devid),
-+    ("type",             libxl_p9_type),
-+    ("max_space",        integer),
-+    ("max_files",        integer),
-+    ("max_open_files",   integer),
-+    ("auto_delete",      bool),
- ])
- 
- libxl_device_pvcallsif = Struct("device_pvcallsif", [
-diff --git a/tools/libs/light/libxl_types_internal.idl b/tools/libs/light/libxl_types_internal.idl
-index e24288f1a5..39da71cef5 100644
---- a/tools/libs/light/libxl_types_internal.idl
-+++ b/tools/libs/light/libxl_types_internal.idl
-@@ -34,6 +34,7 @@ libxl__device_kind = Enumeration("device_kind", [
-     (16, "VINPUT"),
-     (17, "VIRTIO_DISK"),
-     (18, "VIRTIO"),
-+    (19, "XEN_9PFS"),
-     ])
- 
- libxl__console_backend = Enumeration("console_backend", [
 -- 
 2.35.3
 
