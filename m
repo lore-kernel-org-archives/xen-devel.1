@@ -4,44 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC3A3C4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:54:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626357.976599 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D831C4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 10:16:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626374.976609 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7vw-0002Cr-8Q; Wed, 01 Nov 2023 09:54:44 +0000
+	id 1qy8GB-00020A-0f; Wed, 01 Nov 2023 10:15:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626357.976599; Wed, 01 Nov 2023 09:54:44 +0000
+Received: by outflank-mailman (output) from mailman id 626374.976609; Wed, 01 Nov 2023 10:15:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7vw-0002Ck-4y; Wed, 01 Nov 2023 09:54:44 +0000
-Received: by outflank-mailman (input) for mailman id 626357;
- Wed, 01 Nov 2023 09:54:43 +0000
+	id 1qy8GA-000203-Sd; Wed, 01 Nov 2023 10:15:38 +0000
+Received: by outflank-mailman (input) for mailman id 626374;
+ Wed, 01 Nov 2023 10:15:37 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy7c0-0005E0-LA
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:34:08 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=xZQ6=GO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1qy8G9-0001zx-GJ
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 10:15:37 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ce330d39-7899-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 10:34:08 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id CCAC721846;
- Wed,  1 Nov 2023 09:34:07 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A8A4513460;
- Wed,  1 Nov 2023 09:34:07 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id DT/6J48bQmXfCAAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:34:07 +0000
+ id 992c6597-789f-11ee-98d6-6d05b1d4d9a1;
+ Wed, 01 Nov 2023 11:15:36 +0100 (CET)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2c6b30acacdso57454601fa.2
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Nov 2023 03:15:36 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ s16-20020ac25fb0000000b004fe2f085d5csm172870lfe.299.2023.11.01.03.15.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Nov 2023 03:15:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,255 +46,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ce330d39-7899-11ee-98d6-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698831247; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=clPD8bKrjSItRh9+J5fvt9orEmlHmagPq1GlV/FwboY=;
-	b=D9zW62sR92TOA5HFFrtOsYmlL7GuRQ/rDUKePCyhjT1JNbadVW38EdE/kU/aKfH4t3VnLt
-	abq5QUf/XX4358xfp4zwFWDK2UIhGDqZvlc/Le4idc0kx/9ehwPKBGBOyy6UWX2ZyMJ7aO
-	86Ean3ncbL739Wv611m+LwA+2+3gKmE=
-From: Juergen Gross <jgross@suse.com>
+X-Inumbo-ID: 992c6597-789f-11ee-98d6-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1698833735; x=1699438535; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=d3LKsTwr8NYl8OkY+753xCgq+RDBzVLZZQcnCl8u+GI=;
+        b=OVlk18ehqqSMksbKVDoK4TU5hEKSA5zm14xXKF1Y3CCOqYDWGsk0Q4F+0c9dZwTlly
+         n16uGuMS05uxOl0LTmwBoA6RiHpWO0JEYVhscn2r2Fba3AvNtLcxyyFwz/TZG8XzUmyG
+         8VMZzy2vsUZiHdcHTvXQpY++QMBdtPNinI9/LXB9lbxaegxmuCEIYiUDlakNX6DMMoih
+         PdN7mn84qajZootd1/O9l61s3kfn42MbFZ5yPxk6tQOdTutfW/Qw9Lsd6gRdodsHohQw
+         EbrvOiuc1IONEco7//SGJEYS067E+uRQhiubl2ZEI5KuCwRKcgGrfvDk7/n0LyBkh4T+
+         pI5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698833735; x=1699438535;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=d3LKsTwr8NYl8OkY+753xCgq+RDBzVLZZQcnCl8u+GI=;
+        b=Vgubty8j7V36yP32KL32f79L5uHFSHq5zZy8+V6cuW8l1/Zs7rWcgUBjB4IylCk/6L
+         gaX5n+11o0pMwgNfo8RXfvf1+YMhjADb616u4W+bUdguJavqWTWV9S86M6VbVrWL4Wth
+         75iEliQMjef9dT3MB29i4SQrMWp2MsEOur0VL/jPWP37a/8XqNqQ4RmX3j7KevtCVvNK
+         hnuoXe80/WUdyiPgunn6d4hwnLYA3V/pNwA4EudHB0IUgWQSQGMkboEGexp7YI+pOnKS
+         R3Y7ZrJFSDBI3YT4LJ6hQseS0nngxE38f/bVThU0ntTd9qnuLFxjGYfs3zIdXgMP6koB
+         NOPQ==
+X-Gm-Message-State: AOJu0YxqdX4MnuvvFP7xxnBvFYwHVxqpkt2hk496eGKV3dAjw4GeRooL
+	o1URvvBNaiRDhtW91S3QEnCn4n7iGa0=
+X-Google-Smtp-Source: AGHT+IEdKuhcxVDeTqZa6mSCYsk0VcdRAxVazRx7xwRylybZDiNTdXUec39J7Oy42skYr0wvUog7ug==
+X-Received: by 2002:ac2:4895:0:b0:503:3421:4ebd with SMTP id x21-20020ac24895000000b0050334214ebdmr10501351lfc.63.1698833734536;
+        Wed, 01 Nov 2023 03:15:34 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 07/29] tools/xenlogd: add 9pfs attach request support
-Date: Wed,  1 Nov 2023 10:33:03 +0100
-Message-Id: <20231101093325.30302-8-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231101093325.30302-1-jgross@suse.com>
-References: <20231101093325.30302-1-jgross@suse.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH] xen: avoid generation of stub <asm/pci.h> header
+Date: Wed,  1 Nov 2023 12:15:09 +0200
+Message-ID: <f3fff005a4f9af419144d768afcf2fd4de3f21a4.1698833709.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the attach request of the 9pfs protocol. This introduces the "fid"
-scheme of the 9pfs protocol.
+Platforms which doesn't have HAS_PCI enabled it is needed to
+have <asm/pci.h>, which contains only an empty definition of
+struct arch_pci_dev ( except ARM, it introduces several
+ARM-specific functions ).
 
-As this will be needed later, use a dedicated memory allocation
-function in alloc_fid().
+Also, for architectures ( such as PPC or RISC-V ) on initial
+stages of adding support, it is needed to generate <asm/pci.h>
+for only define the mentioned above arch_pci_dev structure.
 
-For filling the qid data take the approach from the qemu 9pfs backend
-implementation.
+For the Arm-only stubs ( mentioned in <asm/pci.h> for disabled
+HAS_PCI and ARM-specific) will be needed
+to add <asm/pci.h> directly alongside <xen/pci.h>. Only to
+<arm/domain.c> <asm/pci.h> was added.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- tools/xenlogd/io.c      | 128 ++++++++++++++++++++++++++++++++++++++++
- tools/xenlogd/xenlogd.c |   1 +
- tools/xenlogd/xenlogd.h |  11 ++++
- 3 files changed, 140 insertions(+)
+ xen/arch/arm/domain_build.c    |  1 +
+ xen/arch/arm/include/asm/pci.h |  7 -------
+ xen/arch/ppc/include/asm/pci.h |  7 -------
+ xen/include/xen/pci.h          | 11 +++++++++++
+ 4 files changed, 12 insertions(+), 14 deletions(-)
+ delete mode 100644 xen/arch/ppc/include/asm/pci.h
 
-diff --git a/tools/xenlogd/io.c b/tools/xenlogd/io.c
-index f35520018f..fa825c9f39 100644
---- a/tools/xenlogd/io.c
-+++ b/tools/xenlogd/io.c
-@@ -16,6 +16,8 @@
- #include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
-+#include <sys/types.h>
-+#include <sys/stat.h>
- #include <xenctrl.h>           /* For cpu barriers. */
- #include <xen-tools/common-macros.h>
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 49792dd590..2dd2926b41 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -23,6 +23,7 @@
+ #include <asm/kernel.h>
+ #include <asm/setup.h>
+ #include <asm/tee/tee.h>
++#include <asm/pci.h>
+ #include <asm/platform.h>
+ #include <asm/psci.h>
+ #include <asm/setup.h>
+diff --git a/xen/arch/arm/include/asm/pci.h b/xen/arch/arm/include/asm/pci.h
+index 8cb46f6b71..7f77226c9b 100644
+--- a/xen/arch/arm/include/asm/pci.h
++++ b/xen/arch/arm/include/asm/pci.h
+@@ -130,13 +130,6 @@ bool pci_check_bar(const struct pci_dev *pdev, mfn_t start, mfn_t end);
  
-@@ -23,6 +25,7 @@
+ #else   /*!CONFIG_HAS_PCI*/
  
- /* P9 protocol commands (response is either cmd+1 or P9_CMD_ERROR). */
- #define P9_CMD_VERSION    100
-+#define P9_CMD_ATTACH     104
- #define P9_CMD_ERROR      107
+-struct arch_pci_dev { };
+-
+-static always_inline bool is_pci_passthrough_enabled(void)
+-{
+-    return false;
+-}
+-
+ struct pci_dev;
  
- #define P9_MIN_MSIZE      2048
-@@ -434,6 +437,92 @@ static int fill_data(device *device, const char *fmt, ...)
-     return pars;
- }
+ static inline void arch_pci_init_pdev(struct pci_dev *pdev) {}
+diff --git a/xen/arch/ppc/include/asm/pci.h b/xen/arch/ppc/include/asm/pci.h
+deleted file mode 100644
+index e76c8e5475..0000000000
+--- a/xen/arch/ppc/include/asm/pci.h
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#ifndef __ASM_PPC_PCI_H__
+-#define __ASM_PPC_PCI_H__
+-
+-struct arch_pci_dev {
+-};
+-
+-#endif /* __ASM_PPC_PCI_H__ */
+diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
+index 251b8761a8..168ca320ce 100644
+--- a/xen/include/xen/pci.h
++++ b/xen/include/xen/pci.h
+@@ -68,7 +68,18 @@ typedef union {
+     };
+ } pci_sbdf_t;
  
-+static struct p9_fid *find_fid(device *device, unsigned int fid)
++#ifdef CONFIG_HAS_PCI
+ #include <asm/pci.h>
++#else
++
++struct arch_pci_dev { };
++
++static always_inline bool is_pci_passthrough_enabled(void)
 +{
-+    struct p9_fid *fidp;
-+
-+    XEN_TAILQ_FOREACH(fidp, &device->fids, list)
-+    {
-+        if ( fidp->fid == fid )
-+            return fidp;
-+    }
-+
-+    return NULL;
++    return false;
 +}
 +
-+static struct p9_fid *alloc_fid_mem(device *device, unsigned int fid,
-+                                    const char *path)
-+{
-+    struct p9_fid *fidp;
-+    size_t pathlen;
-+
-+    pathlen = strlen(device->host_path) + strlen(path) + 1;
-+    fidp = calloc(sizeof(*fidp) + pathlen, 1);
-+    if ( !fidp )
-+        return NULL;
-+
-+    fidp->fid = fid;
-+    snprintf(fidp->path, pathlen, "%s%s", device->host_path, path);
-+
-+    return fidp;
-+}
-+
-+static struct p9_fid *alloc_fid(device *device, unsigned int fid,
-+                                const char *path)
-+{
-+    struct p9_fid *fidp;
-+
-+    if ( find_fid(device, fid) )
-+    {
-+        errno = EBADFD;
-+        return NULL;
-+    }
-+
-+    if ( device->n_fids >= device->max_open_files )
-+    {
-+        errno = EMFILE;
-+        return NULL;
-+    }
-+
-+    fidp = alloc_fid_mem(device, fid, path);
-+    if ( !fidp )
-+        return NULL;
-+
-+    XEN_TAILQ_INSERT_HEAD(&device->fids, fidp, list);
-+    device->n_fids++;
-+
-+    return fidp;
-+}
-+
-+static void free_fid(device *device, struct p9_fid *fidp)
-+{
-+    if ( !fidp )
-+        return;
-+
-+    device->n_fids--;
-+    XEN_TAILQ_REMOVE(&device->fids, fidp, list);
-+    free(fidp);
-+}
-+
-+static int fill_qid(const char *path, struct p9_qid *qid, struct stat *stbuf)
-+{
-+    struct stat st;
-+
-+    if ( !stbuf )
-+    {
-+        if ( stat(path, &st) )
-+            return errno;
-+
-+        stbuf = &st;
-+    }
-+
-+    qid->type = S_ISDIR(stbuf->st_mode) ? QID_TYPE_DIR : 0;
-+    qid->version = stbuf->st_mtime ^ (stbuf->st_size << 8);
-+    qid->path = stbuf->st_ino;
-+
-+    return 0;
-+}
-+
- static void p9_error(device *device, uint16_t tag, uint32_t err)
- {
-     unsigned int erroff;
-@@ -476,6 +565,41 @@ static void p9_version(device *device, struct p9_header *hdr)
-                 version);
- }
++#endif
  
-+static void p9_attach(device *device, struct p9_header *hdr)
-+{
-+    uint32_t fid;
-+    uint32_t dummy_u32;
-+    unsigned int dummy_uint;
-+    struct p9_qid qid;
-+    int ret;
-+
-+    ret = fill_data(device, "UUSSU", &fid, &dummy_u32, &dummy_uint, &dummy_uint,
-+                    &dummy_u32);
-+    if ( ret != 5 )
-+    {
-+        p9_error(device, hdr->tag, errno);
-+        return;
-+    }
-+
-+    device->root_fid = alloc_fid(device, fid, "");
-+    if ( !device->root_fid )
-+    {
-+        p9_error(device, hdr->tag, errno);
-+        return;
-+    }
-+
-+    ret = fill_qid(device->host_path, &qid, NULL);
-+    if ( ret )
-+    {
-+        free_fid(device, device->root_fid);
-+        device->root_fid = NULL;
-+        p9_error(device, hdr->tag, ret);
-+        return;
-+    }
-+
-+    fill_buffer(device, hdr->cmd + 1, hdr->tag, "Q", &qid);
-+}
-+
- void *io_thread(void *arg)
- {
-     device *device = arg;
-@@ -535,6 +659,10 @@ void *io_thread(void *arg)
-                 p9_version(device, &hdr);
-                 break;
- 
-+            case P9_CMD_ATTACH:
-+                p9_attach(device, &hdr);
-+                break;
-+
-             default:
-                 syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
-                        device->domid, device->devid, hdr.cmd);
-diff --git a/tools/xenlogd/xenlogd.c b/tools/xenlogd/xenlogd.c
-index da0a09a122..d2de7bfbf2 100644
---- a/tools/xenlogd/xenlogd.c
-+++ b/tools/xenlogd/xenlogd.c
-@@ -274,6 +274,7 @@ static device *new_device(unsigned int domid, unsigned int devid)
- 
-     pthread_cond_init(&device->cond, NULL);
-     pthread_mutex_init(&device->mutex, NULL);
-+    XEN_TAILQ_INIT(&device->fids);
- 
-     val = read_backend_node(device, "security_model");
-     if ( !val || strcmp(val, "none") )
-diff --git a/tools/xenlogd/xenlogd.h b/tools/xenlogd/xenlogd.h
-index c10c6aa9e5..bd2a283ccb 100644
---- a/tools/xenlogd/xenlogd.h
-+++ b/tools/xenlogd/xenlogd.h
-@@ -19,6 +19,12 @@ struct p9_header {
-     uint16_t tag;
- } __attribute__((packed));
- 
-+struct p9_fid {
-+    XEN_TAILQ_ENTRY(struct p9_fid) list;
-+    unsigned int fid;
-+    char path[];
-+};
-+
- typedef struct device device;
- struct device {
-     /* Admin data. */
-@@ -60,6 +66,11 @@ struct device {
-     char *str;              /* String work space. */
-     unsigned int str_size;  /* Size of *str. */
-     unsigned int str_used;  /* Currently used size of *str. */
-+
-+    /* File system handling. */
-+    XEN_TAILQ_HEAD(fidhead, struct p9_fid) fids;
-+    struct p9_fid *root_fid;
-+    unsigned int n_fids;
- };
- 
- extern xenevtchn_handle *xe;
+ struct pci_dev_info {
+     /*
 -- 
-2.35.3
+2.41.0
 
 
