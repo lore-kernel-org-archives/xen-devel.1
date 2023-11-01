@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4294CC4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:25:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626192.976199 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07836C4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:31:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626197.976219 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7TN-0006Vm-07; Wed, 01 Nov 2023 09:25:13 +0000
+	id 1qy7Yo-0000aF-R1; Wed, 01 Nov 2023 09:30:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626192.976199; Wed, 01 Nov 2023 09:25:12 +0000
+Received: by outflank-mailman (output) from mailman id 626197.976219; Wed, 01 Nov 2023 09:30:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7TM-0006Vf-Ti; Wed, 01 Nov 2023 09:25:12 +0000
-Received: by outflank-mailman (input) for mailman id 626192;
- Wed, 01 Nov 2023 09:25:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qy7Yo-0000a6-Nk; Wed, 01 Nov 2023 09:30:50 +0000
+Received: by outflank-mailman (input) for mailman id 626197;
+ Wed, 01 Nov 2023 09:30:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4cZ7=GO=cloud.com=christian.lindig@srs-se1.protection.inumbo.net>)
- id 1qy7TL-0006VZ-Ok
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:25:11 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8cd9c3ec-7898-11ee-9b0e-b553b5be7939;
- Wed, 01 Nov 2023 10:25:09 +0100 (CET)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-32db188e254so4398208f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 01 Nov 2023 02:25:09 -0700 (PDT)
-Received: from smtpclient.apple (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- v7-20020a5d6107000000b0032da49e18fasm3665450wrt.23.2023.11.01.02.25.08
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 01 Nov 2023 02:25:08 -0700 (PDT)
+ <SRS0=QJn5=GO=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1qy7Ym-0000L5-K5
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:30:48 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 568fed83-7899-11ee-98d6-6d05b1d4d9a1;
+ Wed, 01 Nov 2023 10:30:47 +0100 (CET)
+Received: from nico.bugseng.com (unknown [147.123.100.131])
+ by support.bugseng.com (Postfix) with ESMTPSA id 4A9874EE0747;
+ Wed,  1 Nov 2023 10:30:46 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,142 +41,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8cd9c3ec-7898-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1698830709; x=1699435509; darn=lists.xenproject.org;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZzZEhREAwlJcPojly8EStzKRFf+8Id9IQlGRUuni3EA=;
-        b=gyjaiF2gQz9o6N2zc9EqKPZlTXlf/AU7P6zvJCs6/dTeYot5HaUnY2U3L8eo+H0NU/
-         YA2pNLeZy8hyU3x/YCZvdiPxkiZc0T+w0OJpQ6EjMfVXEKa0dKCXWqvdfd5TuXae8dd5
-         abr5W2O8jCsiJpLSwpB8j313AIxebD/O6Cc3o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698830709; x=1699435509;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZzZEhREAwlJcPojly8EStzKRFf+8Id9IQlGRUuni3EA=;
-        b=Aob2CjWGabvCc68HycbVDIny1N5BsPn2yzZEBb+TwQ/RfYwYJluSjnmnrosBuzSH4+
-         Wh5JGbUozn8MtSHREFKctMlWRidCHXVr45j7qtcklSQUB5BVXO+iUpZlK1CuQOdmiY1j
-         fqBdFmgiCwSRCOKe4d1BqtfvEvyjWP0QoiIvZUvhhdsbxADIZ8+CpviCsyYWm5wfadum
-         MpgWl6lj4jaoDECEEG5RHFB5zqLrPrXo8W4WmspuVPJxN609JnnVetJlhjnUhCUk8pYD
-         AAAA1gpba4AIOuGtZ8aQGkQRJuhBZxJEwo4zwjxX1VsclrgfzCej4JNvhFs0Op46l3Dm
-         sUSQ==
-X-Gm-Message-State: AOJu0YwxYiPCSx2d1q6nNgJD6o17SI0dlreUXT7gbY/LiTjTAy9fK4hh
-	/UwWIk71k7iMQFtnNQQefDzZow==
-X-Google-Smtp-Source: AGHT+IF5effs5dM+sbAW5iV8s6e5BK4fLf+eakIhy1McclStEk0y71tqqfkSrVt13zM5YCl+JXoQkA==
-X-Received: by 2002:a5d:43c3:0:b0:32d:a476:5285 with SMTP id v3-20020a5d43c3000000b0032da4765285mr10972089wrr.31.1698830709099;
-        Wed, 01 Nov 2023 02:25:09 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3696.120.41.1.3\))
-Subject: Re: [PATCH v4 0/5] Kconfig for PCI passthrough on ARM
-From: Christian Lindig <christian.lindig@cloud.com>
-In-Reply-To: <20231030235240.106998-1-stewart.hildebrand@amd.com>
-Date: Wed, 1 Nov 2023 09:25:07 +0000
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Juergen Gross <jgross@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>,
- Christian Lindig <christian.lindig@citrix.com>,
- David Scott <dave@recoil.org>,
- =?utf-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
- =?utf-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Paul Durrant <paul@xen.org>,
- Edwin Torok <edwin.torok@cloud.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <AF82D7D3-7745-475E-97C6-54016D40980D@cloud.com>
-References: <20231030235240.106998-1-stewart.hildebrand@amd.com>
-To: Stewart Hildebrand <stewart.hildebrand@amd.com>
-X-Mailer: Apple Mail (2.3696.120.41.1.3)
+X-Inumbo-ID: 568fed83-7899-11ee-98d6-6d05b1d4d9a1
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger.pau@citrix.com,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH][for-4.19 v6 1/8] xen: modify or add declarations for variables where needed
+Date: Wed,  1 Nov 2023 10:30:30 +0100
+Message-Id: <03ff750e9580c2de8ce3d1211562a03f663d678c.1698829473.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1698829473.git.nicola.vetrini@bugseng.com>
+References: <cover.1698829473.git.nicola.vetrini@bugseng.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
+Some variables with external linkage used in C code do not have
+a visible declaration where they are defined. Other variables
+can be made static, thereby eliminating the need for a declaration.
+Doing so also resolves violations of MISRA C:2012 Rule 8.4.
 
+Fix typo s/mcinfo_dumpped/mcinfo_dumped/ while making
+the variable static.
 
-> On 30 Oct 2023, at 23:52, Stewart Hildebrand =
-<stewart.hildebrand@amd.com> wrote:
->=20
-> There are multiple series in development/review [1], [2] that will =
-benefit from
-> having a Kconfig option for PCI passthrough on ARM. Hence I have sent =
-this
-> series independent from any other series.
->=20
-> v3->v4:
-> * rename ("xen/arm: pci: plumb xen_arch_domainconfig with pci info")
->  to ("xen/vpci: move xen_domctl_createdomain vPCI flag to common")
-> * fold ("xen/arm: make has_vpci() depend on d->arch.has_vpci")
->  into ("xen/vpci: move xen_domctl_createdomain vPCI flag to common")
-> * split ("xen/arm: enable vPCI for domUs") into separate hypervisor =
-and
->  tools patches
->=20
-> v2->v3:
-> * add ("xen/arm: pci: plumb xen_arch_domainconfig with pci info")
-> * rename ("xen/arm: make has_vpci depend on CONFIG_HAS_VPCI")
->      to ("xen/arm: make has_vpci() depend on d->arch.has_vpci")
-> * add ("xen/arm: enable vPCI for dom0")
->=20
-> v1->v2:
-> * add ("[FUTURE] xen/arm: enable vPCI for domUs")
->=20
-> [1] =
-https://lists.xenproject.org/archives/html/xen-devel/2023-08/msg02361.html=
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Jan's ack is for the x86 part, but no other concerns have been
+raised for the arm files.
 
-> [2] =
-https://lists.xenproject.org/archives/html/xen-devel/2023-10/msg00210.html=
+Changes in v2:
+- make xenpf_lock static on ARM
+Changes in v3:
+- moved back code from symbols.h to symbols.c
+- dropped two declarations, now deviated
+Changes in v4:
+- revise commit message
+---
+ xen/arch/arm/include/asm/setup.h  | 3 +++
+ xen/arch/arm/include/asm/smp.h    | 3 +++
+ xen/arch/arm/platform_hypercall.c | 2 +-
+ xen/arch/x86/cpu/mcheck/mce.c     | 7 ++++---
+ xen/arch/x86/irq.c                | 2 +-
+ xen/include/xen/symbols.h         | 1 +
+ 6 files changed, 13 insertions(+), 5 deletions(-)
 
->=20
-> Rahul Singh (1):
->  xen/arm: pci: introduce PCI_PASSTHROUGH Kconfig option
->=20
-> Stewart Hildebrand (4):
->  xen/vpci: move xen_domctl_createdomain vPCI flag to common
->  xen/arm: enable vPCI for dom0
->  [FUTURE] xen/arm: enable vPCI for domUs
->  [FUTURE] tools/arm: enable vPCI for domUs
->=20
-> tools/libs/light/libxl_arm.c       |  3 +++
-> tools/libs/light/libxl_x86.c       |  5 ++++-
-> tools/ocaml/libs/xc/xenctrl.ml     |  2 +-
-> tools/ocaml/libs/xc/xenctrl.mli    |  2 +-
-> tools/python/xen/lowlevel/xc/xc.c  |  5 ++++-
-> xen/arch/arm/Kconfig               | 10 ++++++++++
-> xen/arch/arm/domain.c              |  3 ++-
-> xen/arch/arm/domain_build.c        |  6 ++++++
-> xen/arch/arm/include/asm/domain.h  |  3 ---
-> xen/arch/arm/include/asm/pci.h     |  9 +++++++++
-> xen/arch/arm/pci/pci-host-common.c | 11 ++++++++---
-> xen/arch/arm/vpci.c                |  8 ++++++++
-> xen/arch/x86/domain.c              | 16 ++++++++++------
-> xen/arch/x86/include/asm/domain.h  |  6 +-----
-> xen/arch/x86/setup.c               |  5 +++--
-> xen/common/domain.c                | 10 +++++++++-
-> xen/drivers/passthrough/pci.c      | 10 ++++++++++
-> xen/include/public/arch-x86/xen.h  |  5 +----
-> xen/include/public/domctl.h        |  7 +++++--
-> xen/include/xen/domain.h           |  2 ++
-> 20 files changed, 97 insertions(+), 31 deletions(-)
->=20
->=20
-> base-commit: 9659b2a6d73b14620e187f9c626a09323853c459
-> --=20
-> 2.42.0
->=20
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 98af6f55f5a0..2a2d6114f2eb 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -184,9 +184,12 @@ int map_range_to_domain(const struct dt_device_node *dev,
+ extern lpae_t boot_pgtable[XEN_PT_LPAE_ENTRIES];
+ 
+ #ifdef CONFIG_ARM_64
++extern lpae_t boot_first[XEN_PT_LPAE_ENTRIES];
+ extern lpae_t boot_first_id[XEN_PT_LPAE_ENTRIES];
+ #endif
++extern lpae_t boot_second[XEN_PT_LPAE_ENTRIES];
+ extern lpae_t boot_second_id[XEN_PT_LPAE_ENTRIES];
++extern lpae_t boot_third[XEN_PT_LPAE_ENTRIES * XEN_NR_ENTRIES(2)];
+ extern lpae_t boot_third_id[XEN_PT_LPAE_ENTRIES];
+ 
+ /* Find where Xen will be residing at runtime and return a PT entry */
+diff --git a/xen/arch/arm/include/asm/smp.h b/xen/arch/arm/include/asm/smp.h
+index 4fabdf5310d8..28bf24a01d95 100644
+--- a/xen/arch/arm/include/asm/smp.h
++++ b/xen/arch/arm/include/asm/smp.h
+@@ -6,6 +6,9 @@
+ #include <asm/current.h>
+ #endif
+ 
++extern struct init_info init_data;
++extern unsigned long smp_up_cpu;
++
+ DECLARE_PER_CPU(cpumask_var_t, cpu_sibling_mask);
+ DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
+ 
+diff --git a/xen/arch/arm/platform_hypercall.c b/xen/arch/arm/platform_hypercall.c
+index 743687a30390..fde4bc3e5809 100644
+--- a/xen/arch/arm/platform_hypercall.c
++++ b/xen/arch/arm/platform_hypercall.c
+@@ -17,7 +17,7 @@
+ #include <asm/current.h>
+ #include <asm/event.h>
+ 
+-DEFINE_SPINLOCK(xenpf_lock);
++static DEFINE_SPINLOCK(xenpf_lock);
+ 
+ long do_platform_op(XEN_GUEST_HANDLE_PARAM(xen_platform_op_t) u_xenpf_op)
+ {
+diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
+index 6141b7eb9cf1..779a458cd88f 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -1682,13 +1682,14 @@ long do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc)
+     return ret;
+ }
+ 
+-int mcinfo_dumpped;
++static int mcinfo_dumped;
++
+ static int cf_check x86_mcinfo_dump_panic(mctelem_cookie_t mctc)
+ {
+     struct mc_info *mcip = mctelem_dataptr(mctc);
+ 
+     x86_mcinfo_dump(mcip);
+-    mcinfo_dumpped++;
++    mcinfo_dumped++;
+ 
+     return 0;
+ }
+@@ -1702,7 +1703,7 @@ static void mc_panic_dump(void)
+     for_each_online_cpu(cpu)
+         mctelem_process_deferred(cpu, x86_mcinfo_dump_panic,
+                                  mctelem_has_deferred_lmce(cpu));
+-    dprintk(XENLOG_ERR, "End dump mc_info, %x mcinfo dumped\n", mcinfo_dumpped);
++    dprintk(XENLOG_ERR, "End dump mc_info, %x mcinfo dumped\n", mcinfo_dumped);
+ }
+ 
+ void mc_panic(const char *s)
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index f42ad539dcd5..ecd67f7f8416 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -43,7 +43,7 @@ int __read_mostly opt_irq_vector_map = OPT_IRQ_VECTOR_MAP_DEFAULT;
+ static unsigned char __read_mostly irq_max_guests;
+ integer_param("irq-max-guests", irq_max_guests);
+ 
+-vmask_t global_used_vector_map;
++static vmask_t global_used_vector_map;
+ 
+ struct irq_desc __read_mostly *irq_desc = NULL;
+ 
+diff --git a/xen/include/xen/symbols.h b/xen/include/xen/symbols.h
+index 20bbb28ef226..1b2863663aa0 100644
+--- a/xen/include/xen/symbols.h
++++ b/xen/include/xen/symbols.h
+@@ -33,4 +33,5 @@ struct symbol_offset {
+     uint32_t stream; /* .. in the compressed stream.*/
+     uint32_t addr;   /* .. and in the fixed size address array. */
+ };
++
+ #endif /*_XEN_SYMBOLS_H*/
+-- 
+2.34.1
 
-
-Acked-by: Christian Lindig <christian.lindig@cloud.com>
-
-
-The changes for the OCaml part are incremental; is someone using the =
-OCaml bindings on ARM seriously?=20
-
-=E2=80=94 C=
 
