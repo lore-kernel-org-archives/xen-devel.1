@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C058AC4167D
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:33:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626237.976329 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B1B1C4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:34:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626243.976359 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7ba-0006Z0-K8; Wed, 01 Nov 2023 09:33:42 +0000
+	id 1qy7br-0007yD-HP; Wed, 01 Nov 2023 09:33:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626237.976329; Wed, 01 Nov 2023 09:33:42 +0000
+Received: by outflank-mailman (output) from mailman id 626243.976359; Wed, 01 Nov 2023 09:33:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7ba-0006Yr-HP; Wed, 01 Nov 2023 09:33:42 +0000
-Received: by outflank-mailman (input) for mailman id 626237;
- Wed, 01 Nov 2023 09:33:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qy7br-0007y4-Dv; Wed, 01 Nov 2023 09:33:59 +0000
+Received: by outflank-mailman (input) for mailman id 626243;
+ Wed, 01 Nov 2023 09:33:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy7bZ-0005sN-W9
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:33:41 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bd92e289-7899-11ee-9b0e-b553b5be7939;
- Wed, 01 Nov 2023 10:33:40 +0100 (CET)
+ id 1qy7bp-0005E0-Mr
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:33:57 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c79872cf-7899-11ee-98d6-6d05b1d4d9a1;
+ Wed, 01 Nov 2023 10:33:57 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 063D921835;
- Wed,  1 Nov 2023 09:33:40 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B9FBB1F74A;
+ Wed,  1 Nov 2023 09:33:56 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D607413460;
- Wed,  1 Nov 2023 09:33:39 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9053313460;
+ Wed,  1 Nov 2023 09:33:56 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id ttESM3MbQmWpCAAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:33:39 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id R162IYQbQmXDCAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:33:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,262 +53,294 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd92e289-7899-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: c79872cf-7899-11ee-98d6-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698831220; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1698831236; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6PS/B4Q2Vo5wSif1LySkXXDYKmcLHmew3UeAfGM1754=;
-	b=LahJQ7AYFfYHpbMQyR4BIp13vK/OpGZ8Yv3ohtloNscXyy1IAs59lN10gBGxq09bfHFQ1C
-	cyozIzBuGI6kDb22YkYc5Mkes7IIbdlokshXUgy5d9z9vnyK80rjXGt82skhYoBCY7HjV4
-	PB/PublIvSGlwhkrpKGrX2/Hx7oHqp0=
+	bh=9twQoG8Ni5j7s6nNRlwgs8V2w4vbElXCXWFZkZ1OasA=;
+	b=fVRInW4p0CstzpGkfVb6dpeZF9twhiYqF0nnpSnCxFEUfdj2kjR+AayNgF65z20uKO6ZvZ
+	SYY23ROOirCYGHcypuQfl0tdWn5B3Guoxzmn3fNORbOiL/gvU+jOJc3+kDDEZrE7r0RAAo
+	C+WD1T9gtgrW2+LuzoPqCyzoAd1hyDA=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 02/29] tools: add a new xen logging daemon
-Date: Wed,  1 Nov 2023 10:32:58 +0100
-Message-Id: <20231101093325.30302-3-jgross@suse.com>
+Subject: [PATCH 05/29] tools/xenlogd: add 9pfs response generation support
+Date: Wed,  1 Nov 2023 10:33:01 +0100
+Message-Id: <20231101093325.30302-6-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231101093325.30302-1-jgross@suse.com>
 References: <20231101093325.30302-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add "xenlogd", a new logging daemon meant to support infrastructure
-domains (e.g. xenstore-stubdom) to write log files in dom0.
+Add support for generation a 9pfs protocol response via a format based
+approach.
 
-For now only add the code needed for starting the daemon and
-registering it with Xenstore via a new "/tool/xenlog/state" node by
-writing the "running" state to it.
+Strings are stored in a per device string buffer and they are
+referenced via their offset in this buffer. This allows to avoid
+having to dynamically allocate memory for each single string.
+
+As a first user of the response handling add a generic p9_error()
+function which will be used to return any error to the client.
+
+Add all format parsing variants in order to avoid additional code churn
+later when adding the users of those variants. Prepare a special case
+for the "read" case already (format character 'D'): in order to avoid
+adding another buffer for read data support doing the read I/O directly
+into the response buffer.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/Makefile           |   1 +
- tools/xenlogd/.gitignore |   1 +
- tools/xenlogd/Makefile   |  38 ++++++++++
- tools/xenlogd/xenlogd.c  | 145 +++++++++++++++++++++++++++++++++++++++
- 4 files changed, 185 insertions(+)
- create mode 100644 tools/xenlogd/.gitignore
- create mode 100644 tools/xenlogd/Makefile
- create mode 100644 tools/xenlogd/xenlogd.c
+ tools/xenlogd/io.c      | 189 +++++++++++++++++++++++++++++++++++++++-
+ tools/xenlogd/xenlogd.h |   3 +
+ 2 files changed, 191 insertions(+), 1 deletion(-)
 
-diff --git a/tools/Makefile b/tools/Makefile
-index 3a510663a0..0225020416 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -32,6 +32,7 @@ SUBDIRS-y += xenpmd
- SUBDIRS-$(CONFIG_GOLANG) += golang
- SUBDIRS-y += xl
- SUBDIRS-y += helpers
-+SUBDIRS-y += xenlogd
- SUBDIRS-$(CONFIG_X86) += xenpaging
- SUBDIRS-$(CONFIG_X86) += debugger
- SUBDIRS-$(CONFIG_TESTS) += tests
-diff --git a/tools/xenlogd/.gitignore b/tools/xenlogd/.gitignore
-new file mode 100644
-index 0000000000..a0305ae096
---- /dev/null
-+++ b/tools/xenlogd/.gitignore
-@@ -0,0 +1 @@
-+/xenlogd
-diff --git a/tools/xenlogd/Makefile b/tools/xenlogd/Makefile
-new file mode 100644
-index 0000000000..550e914f59
---- /dev/null
-+++ b/tools/xenlogd/Makefile
-@@ -0,0 +1,38 @@
-+#
-+# tools/helpers/Makefile
-+#
-+
-+XEN_ROOT = $(CURDIR)/../..
-+include $(XEN_ROOT)/tools/Rules.mk
-+
-+CFLAGS += $(PTHREAD_CFLAGS)
-+LDFLAGS += $(PTHREAD_LDFLAGS)
-+
-+TARGETS := xenlogd
-+
-+XENLOGD_OBJS = xenlogd.o
-+$(XENLOGD_OBJS): CFLAGS += $(CFLAGS_libxenstore)
-+$(XENLOGD_OBJS): CFLAGS += $(CFLAGS_libxenevtchn)
-+$(XENLOGD_OBJS): CFLAGS += $(CFLAGS_libxengnttab)
-+xenlogd: LDLIBS += $(call xenlibs-ldlibs,store evtchn gnttab)
-+
-+.PHONY: all
-+all: $(TARGETS)
-+
-+xenlogd: $(XENLOGD_OBJS)
-+	$(CC) $(LDFLAGS) -o $@ $(XENLOGD_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
-+
-+.PHONY: install
-+install: all
-+	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
-+	for i in $(TARGETS); do $(INSTALL_PROG) $$i $(DESTDIR)$(LIBEXEC_BIN); done
-+
-+.PHONY: uninstall
-+uninstall:
-+	for i in $(TARGETS); do rm -f $(DESTDIR)$(LIBEXEC_BIN)/$$i; done
-+
-+.PHONY: clean
-+clean:
-+	$(RM) *.o $(TARGETS) $(DEPS_RM)
-+
-+distclean: clean
-diff --git a/tools/xenlogd/xenlogd.c b/tools/xenlogd/xenlogd.c
-new file mode 100644
-index 0000000000..792d1026a3
---- /dev/null
-+++ b/tools/xenlogd/xenlogd.c
-@@ -0,0 +1,145 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+/*
-+ * xenlogd - Xen logging daemon
-+ *
-+ * Copyright (C) 2023 Juergen Gross <jgross@suse.com>
-+ *
-+ * Daemon to enable guests to access a directory of the dom0 file system.
-+ * Access is made via the 9pfs protocol (xenlogd acts as a PV 9pfs backend).
-+ *
-+ * Usage: xenlogd
-+ *
-+ * xenlogd does NOT support writing any links (neither soft links nor hard
-+ * links), and it is accepting only canonicalized file paths in order to
-+ * avoid the possibility to "escape" from the guest specific directory.
-+ *
-+ * The backend device string is "xen_9pfs", the tag used for mounting the
-+ * 9pfs device is "Xen".
-+ *
-+ * As an additional security measure the maximum file space used by the guest
-+ * can be limited by the backend Xenstore node "max-size" specifying the size
-+ * in MBytes. This size includes the size of the root directory of the guest.
-+ */
-+
-+#include <err.h>
+diff --git a/tools/xenlogd/io.c b/tools/xenlogd/io.c
+index 590d06e906..5a06f72338 100644
+--- a/tools/xenlogd/io.c
++++ b/tools/xenlogd/io.c
+@@ -11,6 +11,7 @@
+  * before looking for the next request.
+  */
+ 
 +#include <errno.h>
-+#include <signal.h>
-+#include <stdbool.h>
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <syslog.h>
-+#include <sys/types.h>
-+#include <sys/stat.h>
-+#include <unistd.h>
-+#include <xenevtchn.h>
-+#include <xengnttab.h>
-+#include <xenstore.h>
+ #include <stdbool.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -20,6 +21,16 @@
+ 
+ #include "xenlogd.h"
+ 
++/* P9 protocol commands (response is either cmd+1 or P9_CMD_ERROR). */
++#define P9_CMD_ERROR      107
 +
-+static bool stop_me;
-+static bool daemon_running;
-+static struct xs_handle *xs;
-+static xengnttab_handle *xg;
-+static xenevtchn_handle *xe;
++struct p9_qid {
++    uint8_t type;
++#define QID_TYPE_DIR      0x80
++    uint32_t version;
++    uint64_t path;
++};
 +
-+static void handle_stop(int sig)
+ /*
+  * Note that the ring names "in" and "out" are from the frontend's
+  * perspective, so the "in" ring will be used for responses to the frontend,
+@@ -101,6 +112,172 @@ static bool io_work_pending(device *device)
+                                    : ring_out_data(device);
+ }
+ 
++static void fmt_err(const char *fmt)
 +{
-+    stop_me = true;
-+}
-+
-+static void close_all(void)
-+{
-+    if ( daemon_running )
-+        xs_rm(xs, XBT_NULL, "/tool/xenlog");
-+    if ( xe )
-+        xenevtchn_close(xe);
-+    if ( xg )
-+        xengnttab_close(xg);
-+    if ( xs )
-+        xs_close(xs);
-+    closelog();
-+}
-+
-+static void do_err(const char *msg)
-+{
-+    syslog(LOG_ALERT, "%s, errno = %d", msg, errno);
-+    close_all();
++    syslog(LOG_CRIT, "illegal format %s passed to fill_buffer()", fmt);
 +    exit(1);
 +}
 +
-+static void xen_connect(void)
++/*
++ * Fill buffer with response data.
++ * fmt is a sequence of format characters. Supported characters are:
++ * a: an array (2 bytes number of elements + the following format as elements)
++ *    The number of elements is passed in the first unsigned int parameter, the
++ *    next parameter is a pointer to an array of elements as denoted by the next
++ *    format character.
++ * b: 2 byte unsigned integer
++ *    The parameter is a pointer to a uint16_t value
++ * D: Data blob (4 byte length + <length> bytes)
++ *    2 parameters are consumed, first an unsigned int for the length, then a
++ *    pointer to the first uint8_t value.
++ *    No array support.
++ * L: 8 byte unsigned integer
++ *    The parameter is a pointer to a uint64_t value
++ * Q: Qid (struct p9_qid)
++ * S: String (2 byte length + <length> characters)
++ *    The length is obtained via strlen() of the parameter, being a pointer
++ *    to the first character of the string
++ * U: 4 byte unsigned integer
++ *    The parameter is a pointer to a uint32_t value
++ */
++static void fill_buffer(device *device, uint8_t cmd, uint16_t tag,
++                        const char *fmt, ...)
 +{
-+    xs_transaction_t t;
-+    char *val;
++    struct p9_header *hdr = device->buffer;
++    void *data = hdr + 1;
++    const char *f;
++    const void *par;
++    const char *str_val;
++    const struct p9_qid *qid;
 +    unsigned int len;
++    va_list ap;
++    unsigned int array_sz = 0;
++    unsigned int elem_sz = 0;
 +
-+    xs = xs_open(0);
-+    if ( xs == NULL )
-+        do_err("xs_open() failed");
++    hdr->cmd = cmd;
++    hdr->tag = tag;
 +
-+    xg = xengnttab_open(NULL, 0);
-+    if ( xg == NULL )
-+        do_err("xengnttab_open() failed");
++    va_start(ap, fmt);
 +
-+    xe = xenevtchn_open(NULL, 0);
-+    if ( xe == NULL )
-+        do_err("xenevtchn_open() failed");
-+
-+    while ( true )
++    for ( f = fmt; *f; f++ )
 +    {
-+        t = xs_transaction_start(xs);
-+        if ( t == XBT_NULL )
-+            do_err("xs_transaction_start() failed");
-+
-+        val = xs_read(xs, t, "/tool/xenlog/state", &len);
-+        if ( val )
++        if ( !array_sz )
++            par = va_arg(ap, const void *);
++        else
 +        {
-+            free(val);
-+            xs_transaction_end(xs, t, true);
-+            do_err("daemon already running");
++            par += elem_sz;
++            array_sz--;
 +        }
 +
-+        if ( !xs_write(xs, t, "/tool/xenlog/state", "running",
-+                       strlen("running")) )
++        switch ( *f )
 +        {
-+            xs_transaction_end(xs, t, true);
-+            do_err("xs_write() failed writing state");
-+        }
-+
-+        if ( xs_transaction_end(xs, t, false) )
++        case 'a':
++            f++;
++            if ( !*f || array_sz )
++                fmt_err(fmt);
++            array_sz = *(const unsigned int *)par;
++            *(__packed uint16_t *)data = array_sz;
++            data += sizeof(uint16_t);
++            par = va_arg(ap, const void *);
++            elem_sz = 0;
 +            break;
-+        if ( errno != EAGAIN )
-+            do_err("xs_transaction_end() failed");
++
++        case 'u':
++            *(__packed uint16_t *)data = *(const uint16_t *)par;
++            elem_sz = sizeof(uint16_t);
++            data += sizeof(uint16_t);
++            break;
++
++        case 'D':
++            if ( array_sz )
++                fmt_err(fmt);
++            len = *(const unsigned int *)par;
++            *(__packed uint32_t *)data = len;
++            data += sizeof(uint32_t);
++            par = va_arg(ap, const void *);
++            if ( data != par )
++                memcpy(data, par, len);
++            data += len;
++            break;
++
++        case 'L':
++            *(__packed uint64_t *)data = *(const uint64_t *)par;
++            elem_sz = sizeof(uint64_t);
++            data += sizeof(uint64_t);
++            break;
++
++        case 'Q':
++            qid = par;
++            elem_sz = sizeof(*qid);
++            *(uint8_t *)data = qid->type;
++            data += sizeof(uint8_t);
++            *(__packed uint32_t *)data = qid->version;
++            data += sizeof(uint32_t);
++            *(__packed uint64_t *)data = qid->path;
++            data += sizeof(uint64_t);
++            break;
++
++        case 'S':
++            str_val = par;
++            elem_sz = sizeof(str_val);
++            len = strlen(str_val);
++            *(__packed uint16_t *)data = len;
++            data += sizeof(uint16_t);
++            memcpy(data, str_val, len);
++            data += len;
++            break;
++
++        case 'U':
++            *(__packed uint32_t *)data = *(const uint32_t *)par;
++            elem_sz = sizeof(uint32_t);
++            data += sizeof(uint32_t);
++            break;
++
++        default:
++            fmt_err(fmt);
++        }
++
++        if ( array_sz )
++            f--;
 +    }
 +
-+    daemon_running = true;
++    hdr->size = data - device->buffer;
 +}
 +
-+int main(int argc, char *argv[])
++static unsigned int add_string(device *device, const char *str,
++                               unsigned int len)
 +{
-+    struct sigaction act = { .sa_handler = handle_stop, };
-+    int syslog_mask = LOG_MASK(LOG_WARNING) | LOG_MASK(LOG_ERR) |
-+                      LOG_MASK(LOG_CRIT) | LOG_MASK(LOG_ALERT) |
-+                      LOG_MASK(LOG_EMERG);
++    char *tmp;
++    unsigned int ret;
 +
-+    umask(027);
-+    if ( getenv("XENLOGD_VERBOSE") )
-+        syslog_mask |= LOG_MASK(LOG_NOTICE) | LOG_MASK(LOG_INFO);
-+    openlog("xenlogd", LOG_CONS, LOG_DAEMON);
-+    setlogmask(syslog_mask);
-+
-+    sigemptyset(&act.sa_mask);
-+    sigaction(SIGHUP, &act, NULL);
-+
-+    xen_connect();
-+
-+    while ( !stop_me )
++    if ( device->str_used + len + 1 > device->str_size )
 +    {
-+        sleep(60);
++        tmp = realloc(device->str, device->str_used + len + 1);
++        if ( !tmp )
++            return ~0;
++        device->str = tmp;
++        device->str_size = device->str_used + len + 1;
 +    }
 +
-+    close_all();
++    ret = device->str_used;
++    memcpy(device->str + ret, str, len);
++    device->str_used += len;
++    device->str[device->str_used++] = 0;
 +
-+    return 0;
++    return ret;
 +}
++
++static void p9_error(device *device, uint16_t tag, uint32_t err)
++{
++    unsigned int erroff;
++
++    strerror_r(err, device->buffer, device->ring_size);
++    erroff = add_string(device, device->buffer, strlen(device->buffer));
++    fill_buffer(device, P9_CMD_ERROR, tag, "SU",
++                erroff != ~0 ? device->str + erroff : "cannot allocate memory",
++                &err);
++}
++
+ void *io_thread(void *arg)
+ {
+     device *device = arg;
+@@ -152,7 +329,16 @@ void *io_thread(void *arg)
+             if ( count < hdr.size )
+                 continue;
+ 
+-            /* TODO: handle request. */
++            device->str_used = 0;
++
++            switch ( hdr.cmd )
++            {
++            default:
++                syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
++                       device->domid, device->devid, hdr.cmd);
++                p9_error(device, hdr.tag, EOPNOTSUPP);
++                break;
++            }
+ 
+             device->handle_response = true;
+             hdr.size = ((struct p9_header *)device->buffer)->size;
+@@ -175,6 +361,7 @@ void *io_thread(void *arg)
+         }
+     }
+ 
++    free(device->str);
+     free(device->buffer);
+ 
+     device->thread_active = false;
+diff --git a/tools/xenlogd/xenlogd.h b/tools/xenlogd/xenlogd.h
+index 40aa7cd03a..c10c6aa9e5 100644
+--- a/tools/xenlogd/xenlogd.h
++++ b/tools/xenlogd/xenlogd.h
+@@ -57,6 +57,9 @@ struct device {
+     bool error;             /* Protocol error - stop processing. */
+     bool handle_response;   /* Main loop now handling response. */
+     void *buffer;           /* Request/response buffer. */
++    char *str;              /* String work space. */
++    unsigned int str_size;  /* Size of *str. */
++    unsigned int str_used;  /* Currently used size of *str. */
+ };
+ 
+ extern xenevtchn_handle *xe;
 -- 
 2.35.3
 
