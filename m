@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07836C4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:31:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626197.976219 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85B6C4167D
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:31:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626199.976239 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7Yo-0000aF-R1; Wed, 01 Nov 2023 09:30:50 +0000
+	id 1qy7Yq-00015K-LM; Wed, 01 Nov 2023 09:30:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626197.976219; Wed, 01 Nov 2023 09:30:50 +0000
+Received: by outflank-mailman (output) from mailman id 626199.976239; Wed, 01 Nov 2023 09:30:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7Yo-0000a6-Nk; Wed, 01 Nov 2023 09:30:50 +0000
-Received: by outflank-mailman (input) for mailman id 626197;
- Wed, 01 Nov 2023 09:30:48 +0000
+	id 1qy7Yq-00015B-IN; Wed, 01 Nov 2023 09:30:52 +0000
+Received: by outflank-mailman (input) for mailman id 626199;
+ Wed, 01 Nov 2023 09:30:50 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QJn5=GO=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1qy7Ym-0000L5-K5
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:30:48 +0000
+ id 1qy7Yo-0000L5-T5
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:30:50 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 568fed83-7899-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 10:30:47 +0100 (CET)
+ id 586456d0-7899-11ee-98d6-6d05b1d4d9a1;
+ Wed, 01 Nov 2023 10:30:50 +0100 (CET)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 4A9874EE0747;
- Wed,  1 Nov 2023 10:30:46 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id D4F5A4EE0C81;
+ Wed,  1 Nov 2023 10:30:48 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 568fed83-7899-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: 586456d0-7899-11ee-98d6-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -53,148 +53,68 @@ Cc: sstabellini@kernel.org,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH][for-4.19 v6 1/8] xen: modify or add declarations for variables where needed
-Date: Wed,  1 Nov 2023 10:30:30 +0100
-Message-Id: <03ff750e9580c2de8ce3d1211562a03f663d678c.1698829473.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH][for-4.19 v6 3/8] x86: add asmlinkage macro to variables only used in asm code
+Date: Wed,  1 Nov 2023 10:30:32 +0100
+Message-Id: <8e7762db94449c18e88171658c758a227e1fae9b.1698829473.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1698829473.git.nicola.vetrini@bugseng.com>
 References: <cover.1698829473.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some variables with external linkage used in C code do not have
-a visible declaration where they are defined. Other variables
-can be made static, thereby eliminating the need for a declaration.
-Doing so also resolves violations of MISRA C:2012 Rule 8.4.
+To avoid a violation of MISRA C:2012 Rule 8.4, as permitted
+by docs/misra/rules.rst.
 
-Fix typo s/mcinfo_dumpped/mcinfo_dumped/ while making
-the variable static.
+The current_stack_pointer is a declaration: mark it as such
+for ECLAIR.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Jan's ack is for the x86 part, but no other concerns have been
-raised for the arm files.
-
-Changes in v2:
-- make xenpf_lock static on ARM
 Changes in v3:
-- moved back code from symbols.h to symbols.c
-- dropped two declarations, now deviated
-Changes in v4:
-- revise commit message
+- Edited commit message
+- Add two new variables
+Changes in v5:
+- Mark current_stack_pointer as a declaration.
+- Use asmlinkage instead of SAF.
+Changes in v6:
+- moved asmlinkage after the type
 ---
- xen/arch/arm/include/asm/setup.h  | 3 +++
- xen/arch/arm/include/asm/smp.h    | 3 +++
- xen/arch/arm/platform_hypercall.c | 2 +-
- xen/arch/x86/cpu/mcheck/mce.c     | 7 ++++---
- xen/arch/x86/irq.c                | 2 +-
- xen/include/xen/symbols.h         | 1 +
- 6 files changed, 13 insertions(+), 5 deletions(-)
+ xen/arch/x86/setup.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 98af6f55f5a0..2a2d6114f2eb 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -184,9 +184,12 @@ int map_range_to_domain(const struct dt_device_node *dev,
- extern lpae_t boot_pgtable[XEN_PT_LPAE_ENTRIES];
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index a3d3f797bb1e..d70ad1e44a60 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -75,7 +75,8 @@ static bool __initdata opt_invpcid = true;
+ boolean_param("invpcid", opt_invpcid);
+ bool __read_mostly use_invpcid;
  
- #ifdef CONFIG_ARM_64
-+extern lpae_t boot_first[XEN_PT_LPAE_ENTRIES];
- extern lpae_t boot_first_id[XEN_PT_LPAE_ENTRIES];
- #endif
-+extern lpae_t boot_second[XEN_PT_LPAE_ENTRIES];
- extern lpae_t boot_second_id[XEN_PT_LPAE_ENTRIES];
-+extern lpae_t boot_third[XEN_PT_LPAE_ENTRIES * XEN_NR_ENTRIES(2)];
- extern lpae_t boot_third_id[XEN_PT_LPAE_ENTRIES];
+-unsigned long __read_mostly cr4_pv32_mask;
++/* Only used in asm code and within this source file */
++unsigned long asmlinkage __read_mostly cr4_pv32_mask;
  
- /* Find where Xen will be residing at runtime and return a PT entry */
-diff --git a/xen/arch/arm/include/asm/smp.h b/xen/arch/arm/include/asm/smp.h
-index 4fabdf5310d8..28bf24a01d95 100644
---- a/xen/arch/arm/include/asm/smp.h
-+++ b/xen/arch/arm/include/asm/smp.h
-@@ -6,6 +6,9 @@
- #include <asm/current.h>
- #endif
+ /* **** Linux config option: propagated to domain0. */
+ /* "acpi=off":    Sisables both ACPI table parsing and interpreter. */
+@@ -146,14 +147,15 @@ cpumask_t __read_mostly cpu_present_map;
  
-+extern struct init_info init_data;
-+extern unsigned long smp_up_cpu;
-+
- DECLARE_PER_CPU(cpumask_var_t, cpu_sibling_mask);
- DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
+ unsigned long __read_mostly xen_phys_start;
  
-diff --git a/xen/arch/arm/platform_hypercall.c b/xen/arch/arm/platform_hypercall.c
-index 743687a30390..fde4bc3e5809 100644
---- a/xen/arch/arm/platform_hypercall.c
-+++ b/xen/arch/arm/platform_hypercall.c
-@@ -17,7 +17,7 @@
- #include <asm/current.h>
- #include <asm/event.h>
+-char __section(".init.bss.stack_aligned") __aligned(STACK_SIZE)
++/* Only used in asm code and within this source file */
++char asmlinkage __section(".init.bss.stack_aligned") __aligned(STACK_SIZE)
+     cpu0_stack[STACK_SIZE];
  
--DEFINE_SPINLOCK(xenpf_lock);
-+static DEFINE_SPINLOCK(xenpf_lock);
+ /* Used by the BSP/AP paths to find the higher half stack mapping to use. */
+ void *stack_start = cpu0_stack + STACK_SIZE - sizeof(struct cpu_info);
  
- long do_platform_op(XEN_GUEST_HANDLE_PARAM(xen_platform_op_t) u_xenpf_op)
- {
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index 6141b7eb9cf1..779a458cd88f 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -1682,13 +1682,14 @@ long do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc)
-     return ret;
- }
+ /* Used by the boot asm to stash the relocated multiboot info pointer. */
+-unsigned int __initdata multiboot_ptr;
++unsigned int asmlinkage __initdata multiboot_ptr;
  
--int mcinfo_dumpped;
-+static int mcinfo_dumped;
-+
- static int cf_check x86_mcinfo_dump_panic(mctelem_cookie_t mctc)
- {
-     struct mc_info *mcip = mctelem_dataptr(mctc);
+ struct cpuinfo_x86 __read_mostly boot_cpu_data = { 0, 0, 0, 0, -1 };
  
-     x86_mcinfo_dump(mcip);
--    mcinfo_dumpped++;
-+    mcinfo_dumped++;
- 
-     return 0;
- }
-@@ -1702,7 +1703,7 @@ static void mc_panic_dump(void)
-     for_each_online_cpu(cpu)
-         mctelem_process_deferred(cpu, x86_mcinfo_dump_panic,
-                                  mctelem_has_deferred_lmce(cpu));
--    dprintk(XENLOG_ERR, "End dump mc_info, %x mcinfo dumped\n", mcinfo_dumpped);
-+    dprintk(XENLOG_ERR, "End dump mc_info, %x mcinfo dumped\n", mcinfo_dumped);
- }
- 
- void mc_panic(const char *s)
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index f42ad539dcd5..ecd67f7f8416 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -43,7 +43,7 @@ int __read_mostly opt_irq_vector_map = OPT_IRQ_VECTOR_MAP_DEFAULT;
- static unsigned char __read_mostly irq_max_guests;
- integer_param("irq-max-guests", irq_max_guests);
- 
--vmask_t global_used_vector_map;
-+static vmask_t global_used_vector_map;
- 
- struct irq_desc __read_mostly *irq_desc = NULL;
- 
-diff --git a/xen/include/xen/symbols.h b/xen/include/xen/symbols.h
-index 20bbb28ef226..1b2863663aa0 100644
---- a/xen/include/xen/symbols.h
-+++ b/xen/include/xen/symbols.h
-@@ -33,4 +33,5 @@ struct symbol_offset {
-     uint32_t stream; /* .. in the compressed stream.*/
-     uint32_t addr;   /* .. and in the fixed size address array. */
- };
-+
- #endif /*_XEN_SYMBOLS_H*/
 -- 
 2.34.1
 
