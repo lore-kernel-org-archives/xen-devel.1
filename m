@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6400AC4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:45:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626284.976409 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A37EC4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:46:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626287.976425 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7mZ-0005cY-Iw; Wed, 01 Nov 2023 09:45:03 +0000
+	id 1qy7nS-0006MB-5W; Wed, 01 Nov 2023 09:45:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626284.976409; Wed, 01 Nov 2023 09:45:03 +0000
+Received: by outflank-mailman (output) from mailman id 626287.976425; Wed, 01 Nov 2023 09:45:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7mZ-0005cR-Fc; Wed, 01 Nov 2023 09:45:03 +0000
-Received: by outflank-mailman (input) for mailman id 626284;
- Wed, 01 Nov 2023 09:45:02 +0000
+	id 1qy7nR-0006Ls-Uw; Wed, 01 Nov 2023 09:45:57 +0000
+Received: by outflank-mailman (input) for mailman id 626287;
+ Wed, 01 Nov 2023 09:45:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy7dY-0005sN-B4
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:35:44 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1qy7dH-0005sN-J1
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:35:27 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 069ec3a6-789a-11ee-9b0e-b553b5be7939;
- Wed, 01 Nov 2023 10:35:42 +0100 (CET)
+ id fc9c9d34-7899-11ee-9b0e-b553b5be7939;
+ Wed, 01 Nov 2023 10:35:26 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 8D7911F74A;
- Wed,  1 Nov 2023 09:35:42 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C002521A34;
+ Wed,  1 Nov 2023 09:35:25 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6359013460;
- Wed,  1 Nov 2023 09:35:42 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 94B2A13460;
+ Wed,  1 Nov 2023 09:35:25 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id BLzeFu4bQmWVCQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:35:42 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 9JLwIt0bQmV3CQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:35:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,125 +53,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 069ec3a6-789a-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: fc9c9d34-7899-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698831342; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1698831325; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=9rPMG1ixXzf2IlhhL0e9vKDBwC7X+7yW2VUn/FHK77E=;
-	b=MadOtAbpasQPT2UQvChyyZIE/nnC/GeBOEC1jTkR6TzwzKHoqkVynqAQ2Lku8WndMgos2c
-	/6Mo6jTOOebpyEu29GYd5k7pssWFMe2KhCYMe95cX8qlZsJ06C/MtVXwPKA3KByELVOxLH
-	REO/4aH7P4DMV7mjQfg8hD2QpStUnyM=
+	bh=8BjSz724hO0UHJzaR9rl8p5uGL31/PkIonv1NOwSIio=;
+	b=fo8fYOp99g80x3D+Weo/P6nTROfs8yQHVNg3vlyLtfzZX1WG1a4mgB+93JkQ1CZ9LfxjiZ
+	um2SA8Y4U2lvp6S3iD1d96DaUvT0VL7gcd3/+Mg9ocvrV1ggmSgl/hdFYJPnLdsS5jWvvN
+	pKzjvgHwY3uqgul3P5lo+iebH2pJVZQ=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 24/29] tools/xenstored: map stubdom interface
-Date: Wed,  1 Nov 2023 10:33:20 +0100
-Message-Id: <20231101093325.30302-25-jgross@suse.com>
+Subject: [PATCH 21/29] tools: tell xenstore-stubdom its own domid
+Date: Wed,  1 Nov 2023 10:33:17 +0100
+Message-Id: <20231101093325.30302-22-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231101093325.30302-1-jgross@suse.com>
 References: <20231101093325.30302-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When running as stubdom, map the stubdom's Xenstore ring page in order
-to support using the 9pfs frontend.
+Pass the domid as a boot parameter when starting xenstore-stubdom.
+It will be needed to administrate its own Xenstore entries.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstored/core.c   |  2 ++
- tools/xenstored/domain.c | 27 ++++++++++++++++++++++++++-
- tools/xenstored/domain.h |  1 +
- 3 files changed, 29 insertions(+), 1 deletion(-)
+ tools/helpers/init-xenstore-domain.c | 4 ++--
+ tools/xenstored/core.c               | 9 +++++++++
+ tools/xenstored/core.h               | 1 +
+ 3 files changed, 12 insertions(+), 2 deletions(-)
 
+diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
+index a65abae2ac..718cb3ba4e 100644
+--- a/tools/helpers/init-xenstore-domain.c
++++ b/tools/helpers/init-xenstore-domain.c
+@@ -240,9 +240,9 @@ static int build(xc_interface *xch)
+     }
+ 
+     if ( param )
+-        snprintf(cmdline, 512, "--event %d %s", rv, param);
++        snprintf(cmdline, 512, "--event %d --domid %u %s", rv, domid, param);
+     else
+-        snprintf(cmdline, 512, "--event %d", rv);
++        snprintf(cmdline, 512, "--event %d --domid %u", rv, domid);
+ 
+     dom->guest_domid = domid;
+     dom->cmdline = xc_dom_strdup(dom, cmdline);
 diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index 42a848e098..1764b1af4e 100644
+index edd07711db..bb4612455d 100644
 --- a/tools/xenstored/core.c
 +++ b/tools/xenstored/core.c
-@@ -3003,6 +3003,8 @@ int main(int argc, char *argv[])
- 		lu_read_state();
+@@ -2732,12 +2732,16 @@ static struct option options[] = {
+ 	{ "watch-nb", 1, NULL, 'W' },
+ #ifndef NO_LIVE_UPDATE
+ 	{ "live-update", 0, NULL, 'U' },
++#endif
++#ifdef __MINIOS__
++	{ "domid", 1, NULL, 2 },
  #endif
+ 	{ NULL, 0, NULL, 0 } };
  
-+	stubdom_init();
-+
- 	check_store();
+ int dom0_domid = 0;
+ int dom0_event = 0;
+ int priv_domid = 0;
++int stub_domid = -1;
  
- 	/* Get ready to listen to the tools. */
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index fa17f68618..162b87b460 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -37,6 +37,10 @@
- #include <xenctrl.h>
- #include <xen/grant_table.h>
- 
-+#ifdef __MINIOS__
-+#include <mini-os/xenbus.h>
-+#endif
-+
- static xc_interface **xc_handle;
- xengnttab_handle **xgt_handle;
- static evtchn_port_t virq_port;
-@@ -500,6 +504,11 @@ static void *map_interface(domid_t domid)
- 	if (domid == xenbus_master_domid())
- 		return xenbus_map();
- 
-+#ifdef __MINIOS__
-+	if (domid == stub_domid)
-+		return xenstore_buf;
-+#endif
-+
- 	return xengnttab_map_grant_ref(*xgt_handle, domid,
- 				       GNTTAB_RESERVED_XENSTORE,
- 				       PROT_READ|PROT_WRITE);
-@@ -509,7 +518,7 @@ static void unmap_interface(domid_t domid, void *interface)
+ static unsigned int get_optval_uint(const char *arg)
  {
- 	if (domid == xenbus_master_domid())
- 		unmap_xenbus(interface);
--	else
-+	else if (domid != stub_domid)
- 		xengnttab_unmap(*xgt_handle, interface, 1);
- }
- 
-@@ -1214,6 +1223,22 @@ void dom0_init(void)
- 	xenevtchn_notify(xce_handle, dom0->port);
- }
- 
-+void stubdom_init(void)
-+{
-+#ifdef __MINIOS__
-+	struct domain *stubdom;
-+
-+	if (stub_domid < 0)
-+		return;
-+
-+	stubdom = introduce_domain(NULL, stub_domid, xenbus_evtchn, false);
-+	if (!stubdom)
-+		barf_perror("Failed to initialize stubdom");
-+
-+	xenevtchn_notify(xce_handle, stubdom->port);
+@@ -2927,6 +2931,11 @@ int main(int argc, char *argv[])
+ 		case 'U':
+ 			live_update = true;
+ 			break;
 +#endif
-+}
-+
- static unsigned int domhash_fn(const void *k)
- {
- 	return *(const unsigned int *)k;
-diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
-index 6c00540311..49c60c56bf 100644
---- a/tools/xenstored/domain.h
-+++ b/tools/xenstored/domain.h
-@@ -85,6 +85,7 @@ int do_reset_watches(const void *ctx, struct connection *conn,
- void domain_static_init(void);
- void domain_init(int evtfd);
- void dom0_init(void);
-+void stubdom_init(void);
- void domain_deinit(void);
- void ignore_connection(struct connection *conn, unsigned int err);
++#ifdef __MINIOS__
++		case 2:
++			stub_domid = get_optval_uint(optarg);
++			break;
+ #endif
+ 		}
+ 	}
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index 480b0f5f7b..f7a27a4131 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -359,6 +359,7 @@ do {						\
+ extern int dom0_domid;
+ extern int dom0_event;
+ extern int priv_domid;
++extern int stub_domid;
+ extern bool keep_orphans;
  
+ extern unsigned int timeout_watch_event_msec;
 -- 
 2.35.3
 
