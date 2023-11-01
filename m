@@ -4,29 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA8CC4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 19:21:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626622.977042 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A4FC4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 19:21:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626627.977052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qyGmD-0005bo-FG; Wed, 01 Nov 2023 19:21:17 +0000
+	id 1qyGmg-0006ON-OC; Wed, 01 Nov 2023 19:21:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626622.977042; Wed, 01 Nov 2023 19:21:17 +0000
+Received: by outflank-mailman (output) from mailman id 626627.977052; Wed, 01 Nov 2023 19:21:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qyGmD-0005bh-Bh; Wed, 01 Nov 2023 19:21:17 +0000
-Received: by outflank-mailman (input) for mailman id 626622;
- Wed, 01 Nov 2023 19:21:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qyGmg-0006OD-Lb; Wed, 01 Nov 2023 19:21:46 +0000
+Received: by outflank-mailman (input) for mailman id 626627;
+ Wed, 01 Nov 2023 19:21:44 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uHih=GO=citrix.com=prvs=662d42e6f=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qyGmB-0005LP-Om
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 19:21:15 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d2f092c5-78eb-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 20:21:14 +0100 (CET)
+ <SRS0=R8ij=GO=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
+ id 1qyGme-000558-RR
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 19:21:44 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e3dc3a3a-78eb-11ee-9b0e-b553b5be7939;
+ Wed, 01 Nov 2023 20:21:43 +0100 (CET)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5431614d90eso202267a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Nov 2023 12:21:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,149 +42,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d2f092c5-78eb-11ee-98d6-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1698866474;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Y4mUXFwEkYVV4PPcEwyjahUDfbyqiOJzsv7ADOUi+tI=;
-  b=HZI4gRZyooFiHBoucUJueaOB74xKS6T8uht5HP1ekxdh3/wF+W7MBD6R
-   Sw1f5KOSa3kZFLfNfIocr9OyIBZQ43nRtIDyLrgg4mWlpUPnuc2HyWSmm
-   qyPm1cNxPUhtB1NRjdplTSVXHSfHDlhFrmkdAK2rKflbZCxST4HdF0S/S
-   s=;
-X-CSE-ConnectionGUID: Gul5WXPuT/mnsoAh0qSvvQ==
-X-CSE-MsgGUID: Ocga0upYTMWL6C4tl9Gy+A==
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 130083863
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.159.70
-X-Policy: $RELAYED
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:zh75Aa9pgIP2QHgt6eYoDrUDcH6TJUtcMsCJ2f8bNWPcYEJGY0x3m
- 2sWDGnXO/bbN2Lyfd5+PY6/8B8HuZDUmt9kSQU+rCA8E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
- 5hBMImowOQcFCK0SsKFa+C5xZVE/fjVAOK6UKidYnwZqTZMEE8JkQhkl/MynrlmiN24BxLlk
- d7pqojUNUTNNwRcawr40Ird7ks01BjOkGlA5AdnPKgS5AS2e0Q9V/rzG4ngdxMUfaEMdgKKb
- 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
- 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDklh6
- PhFFwA1cyzEguStx5u7EvBXmNoaeZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
- ZBDMHw2MUWGPEUn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwOxh7I/
- TKYpAwVBDk9P9OWkSedw06JucuRtn/nXNM9Bf6Ro6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
- 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0WsFQEuwgwA7Lx6HfpRvcGm8HXzkHYddgttdebR4A2
- 0KNntjpLSdyq7DTQnWYnp+LqRuiNC5TKnUNDQcGUA1D5dDgqYMyixvnT9B/HarzhdrwcRnzz
- i6Lqm4ihrwVpc8Ny6i/u1vAhlqEupHMRxUd+gbTU2Sq/w59IoWiYuSA8lja6/9oIY2SCETEo
- H8His/Y5etID4nlqcCWaLxTRvfzva/DaWCNxwE3d3U8y9iz01G+ed1v0AljGABsNN0DUD+xe
- XTNpzoEsfe/I0CWgb9Lj5OZUpp7nfi5TYy/Bpg4ffIUPMItKlXvEDVGIB7IhT6wyiDAhIlmY
- c/DGftAG0r2HkiOINCebOAH2Ltj/TgkxGXcXvgXJDz8iuLBPRZ5pVofWWZij9zVD4ve+205C
- /4Fa6O3J+x3CYUSmBX//48JNkwtJnMmH53woME/Xrfdc1o2Rjp/VaGBmONJl2lZc0N9z7mgw
- 51AchYFkwSXaYPvcm1mlUyPmJuwBM0i/BrXzAQnPEqy2mhLXLtDGJw3LsNtFZF+rbwL8BKBZ
- 6VdEyl2KqgVG2uvFvV0RcWVkbGOgzzx1VzRZHf5MWRjF3OiLiSQkuLZksLU3HFmJkKKWQEW+
- tVMCiuzrUI/ejlf
-IronPort-HdrOrdr: A9a23:pLFJka5eB7qgJqGoMgPXwP7XdLJyesId70hD6qm+c20zTiX+rb
- HXoB17726MtN91YhodcL+7VJVoLUmyyXcX2/hzAV7BZmjbUQKTRekJgLcKpQeQeREWndQy6U
- 4PSdkbNPTASXR8kMbm8E2ZPr8bsb+6GdiT5ds2Fk0dKD1XVw==
-X-Talos-CUID: =?us-ascii?q?9a23=3A8eUugGhnWThP9kjRsK0n3O1QxDJuXWDZkUjgG1K?=
- =?us-ascii?q?ETmNvU7q8SQeJw716qp87?=
-X-Talos-MUID: 9a23:0jps1AbS76HDFeBTkDTjjWl/LPZUxpuKVmtRjZFXlNjHHHkl
-X-IronPort-AV: E=Sophos;i="6.03,269,1694750400"; 
-   d="scan'208";a="130083863"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Reima ISHII
-	<ishiir@g.ecc.u-tokyo.ac.jp>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, "Takahiro
- Shinagawa" <shina@ecc.u-tokyo.ac.jp>
-Subject: [PATCH 1/2] x86/vmx: Fix IRQ handling for EXIT_REASON_INIT
-Date: Wed, 1 Nov 2023 19:20:57 +0000
-Message-ID: <20231101192058.3419310-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20231101192058.3419310-1-andrew.cooper3@citrix.com>
-References: <20231101192058.3419310-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: e3dc3a3a-78eb-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1698866502; x=1699471302; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PM6NSJbEOt/BWPfPXXP/ZRQsx7UC5F6txXiOpzlIsus=;
+        b=jh6NYUwqd4xqHVByD39ukbUai0yy3b+pP0JYzddCDk1zygr1bCn6YVjwcItF7VrZ3+
+         lWqQofIh54leW4jwTitSNry6d4q/MJDPAhl8l/HoSlC0Dxlg0HoqjToJYKVEmk0o94H2
+         eKzIzYBya0XbrqjgNEKvE48oXYqwELqFFnXjGPJflgx+BYNh1Wlt3HaxP3qfvVotJxW/
+         Xemax0QHKlULbEsCxRReXRh5c3kP0D0fKGp8Zoym1XwQICL/vnt2B1ld4hza1TDi6SXj
+         iuPzQpaF0Yu9vO4brfh4RMEID9cUx1P2YrSBm1r+XeDYGdUMb7/BYck0oHD5Xx3RMB3i
+         LeHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698866502; x=1699471302;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=PM6NSJbEOt/BWPfPXXP/ZRQsx7UC5F6txXiOpzlIsus=;
+        b=RsS/7RNQZzwB+8pkMwcA6StTB1g6WBKYWbZHnzmuU+SrANgWV9b7lrxjwO8RtBqh/+
+         sTBHXkDfjQOam5CmAVU9bJ72xB+bmhNshPND+D2sSKW7VFR+K5SJepT1n40dTOG8xELP
+         DChLFMzyNOVVmbhrpp9rUMvNLUecoRm0Jen0i5UwIWkKQeQXBslEXLb+pSSuuq8F5286
+         6MJHZlUBHFFW9xW3HXZI6RuYMPDlQSFGxEVuv2Ua4e46yu6GEyqYXirxP0mGwv7xFrHG
+         vjYgQmYQy4U1suJqAeC0JUmQWaHVWKNs4mEgdSKdDjXeiEZdq1/O2L8LMtOwYAZVA8aT
+         YNNA==
+X-Gm-Message-State: AOJu0YxHycWerCtpbVb67l9+fHDrFpg3UwOP6hvIzGx48DUgN46qfkdF
+	RvDyLc9mRgpn4ifwfEjd6NAkR/a7hmGTa2Hw24LugH2AxIM=
+X-Google-Smtp-Source: AGHT+IHEcOa31KFeqYTGei+JGVgjKavwUcDjmUd7n6zhdQJX9pieWlPPP2XGb2hfQ4Fnd1xeUkXZf+su5NhZA5x1TV0=
+X-Received: by 2002:a50:8d12:0:b0:543:5886:71c3 with SMTP id
+ s18-20020a508d12000000b00543588671c3mr5141648eds.25.1698866502340; Wed, 01
+ Nov 2023 12:21:42 -0700 (PDT)
 MIME-Version: 1.0
+References: <20231101093325.30302-1-jgross@suse.com> <20231101093325.30302-4-jgross@suse.com>
+In-Reply-To: <20231101093325.30302-4-jgross@suse.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Wed, 1 Nov 2023 15:21:29 -0400
+Message-ID: <CAKf6xptkUPBSTsij=CAWaiYxTCtGH4zpZWiLuvb=teX3i_sjrA@mail.gmail.com>
+Subject: Re: [PATCH 03/29] tools/xenlogd: connect to frontend
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>, 
+	Anthony PERARD <anthony.perard@citrix.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-When receiving an INIT, a prior bugfix tried to ignore the INIT and continue
-onwards.
+On Wed, Nov 1, 2023 at 5:34=E2=80=AFAM Juergen Gross <jgross@suse.com> wrot=
+e:
+>
+> Add the code for connecting to frontends to xenlogd.
+>
+> Signed-off-by: Juergen Gross <jgross@suse.com>
 
-Unfortunately it's not safe to return at that point in vmx_vmexit_handler().
-Just out of context in the first hunk is a local_irqs_enabled() which is
-depended-upon by the return-to-guest path, causing the following checklock
-failure in debug builds:
+> diff --git a/tools/xenlogd/xenlogd.c b/tools/xenlogd/xenlogd.c
+> index 792d1026a3..da0a09a122 100644
+> --- a/tools/xenlogd/xenlogd.c
+> +++ b/tools/xenlogd/xenlogd.c
 
-  (XEN) Error: INIT received - ignoring
-  (XEN) CHECKLOCK FAILURE: prev irqsafe: 0, curr irqsafe 1
-  (XEN) Xen BUG at common/spinlock.c:132
-  (XEN) ----[ Xen-4.19-unstable  x86_64  debug=y  Tainted:     H  ]----
-  ...
-  (XEN) Xen call trace:
-  (XEN)    [<ffff82d040238e10>] R check_lock+0xcd/0xe1
-  (XEN)    [<ffff82d040238fe3>] F _spin_lock+0x1b/0x60
-  (XEN)    [<ffff82d0402ed6a8>] F pt_update_irq+0x32/0x3bb
-  (XEN)    [<ffff82d0402b9632>] F vmx_intr_assist+0x3b/0x51d
-  (XEN)    [<ffff82d040206447>] F vmx_asm_vmexit_handler+0xf7/0x210
+> +static void connect_device(device *device)
+> +{
+> +    unsigned int val;
+> +    xenevtchn_port_or_error_t evtchn;
+1.> +
+> +    val =3D read_frontend_node_uint(device, "version", 0);
+> +    if ( val !=3D 1 )
+> +        return connect_err(device, "frontend specifies illegal version")=
+;
+> +    val =3D read_frontend_node_uint(device, "num-rings", 0);
+> +    if ( val !=3D 1 )
+> +        return connect_err(device, "frontend specifies illegal ring numb=
+er");
 
-Luckily, this is benign in release builds.  Accidentally having IRQs disabled
-when trying to take an IRQs-on lock isn't a deadlock-vulnerable pattern.
+Linux uses 2 rings (XEN_9PFS_NUM_RINGS), and it doesn't connect when
+max-rings is less than that.
 
-Move the INIT handling into the main switch statement.  In hindsight, it's
-wrong to skip other normal VMExit steps.
+max_rings =3D xenbus_read_unsigned(dev->otherend, "max-rings", 0);
+if (max_rings < XEN_9PFS_NUM_RINGS)
+    return -EINVAL;
 
-Fixes: b1f11273d5a7 ("x86/vmx: Don't spuriously crash the domain when INIT is received")
-Reported-by: Reima ISHII <ishiir@g.ecc.u-tokyo.ac.jp>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
-CC: Tamas K Lengyel <tamas@tklengyel.com>
-CC: Reima ISHII <ishiir@g.ecc.u-tokyo.ac.jp>
-CC: Takahiro Shinagawa <shina@ecc.u-tokyo.ac.jp>
+new_device() writes max-rings as 1.  So this works for mini-os, but
+not Linux.  I'm not requesting you to change it - just noting it.
 
-With this patch in place, the INIT is ignored and the guest continues:
+> +
+> +    val =3D read_frontend_node_uint(device, "event-channel-0", 0);
+> +    if ( val =3D=3D 0 )
+> +        return connect_err(device, "frontend specifies illegal evtchn");
+> +    evtchn =3D xenevtchn_bind_interdomain(xe, device->domid, val);
+> +    if ( evtchn < 0 )
+> +        return connect_err(device, "could not bind to event channel");
+> +    device->evtchn =3D evtchn;
+> +
+> +    val =3D read_frontend_node_uint(device, "ring-ref0", 0);
+> +    if ( val =3D=3D 0 )
+> +        return connect_err(device, "frontend specifies illegal grant for=
+ ring");
+> +    device->intf =3D xengnttab_map_grant_ref(xg, device->domid, val,
+> +                                           PROT_READ | PROT_WRITE);
+> +    if ( !device->intf )
+> +        return connect_err(device, "could not map interface page");
+> +    device->ring_order =3D device->intf->ring_order;
+> +    if ( device->ring_order > 9 || device->ring_order < 1 )
+> +        return connect_err(device, "frontend specifies illegal ring orde=
+r");
+> +    device->ring_size =3D XEN_FLEX_RING_SIZE(device->ring_order);
+> +    device->data.in =3D xengnttab_map_domain_grant_refs(xg,
+> +                                                      1 << device->ring_=
+order,
+> +                                                      device->domid,
+> +                                                      device->intf->ref,
+> +                                                      PROT_READ | PROT_W=
+RITE);
+> +    if ( !device->data.in )
+> +        return connect_err(device, "could not map ring pages");
+> +    device->data.out =3D device->data.in + device->ring_size;
+> +
+> +    if ( pthread_create(&device->thread, NULL, io_thread, device) )
+> +       return connect_err(device, "could not start I/O thread");
+> +    device->thread_active =3D true;
+> +
+> +    write_backend_state(device, XenbusStateConnected);
+> +}
+> +
 
-  (XEN) HVM1 restore: CPU 0
-  (d1) --- Xen Test Framework ---
-  (d1) Environment: HVM 64bit (Long mode 4 levels)
-  (XEN) Error: INIT received - ignoring
-  (d1) Test result: SUCCESS
----
- xen/arch/x86/hvm/vmx/vmx.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+> @@ -122,6 +669,11 @@ int main(int argc, char *argv[])
+>      int syslog_mask =3D LOG_MASK(LOG_WARNING) | LOG_MASK(LOG_ERR) |
+>                        LOG_MASK(LOG_CRIT) | LOG_MASK(LOG_ALERT) |
+>                        LOG_MASK(LOG_EMERG);
+> +    char **watch;
+> +    struct pollfd p[2] =3D {
+> +        { .events =3D POLLIN, .revents =3D POLLIN },
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 1edc7f1e919f..d26920d03bbc 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4097,10 +4097,6 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
-     case EXIT_REASON_MCE_DURING_VMENTRY:
-         do_machine_check(regs);
-         break;
--
--    case EXIT_REASON_INIT:
--        printk(XENLOG_ERR "Error: INIT received - ignoring\n");
--        return; /* Renter the guest without further processing */
-     }
- 
-     /* Now enable interrupts so it's safe to take locks. */
-@@ -4390,6 +4386,12 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
-     case EXIT_REASON_TRIPLE_FAULT:
-         hvm_triple_fault();
-         break;
-+
-+    case EXIT_REASON_INIT:
-+        /* TODO: Turn into graceful shutdown. */
-+        printk(XENLOG_ERR "Error: INIT received - ignoring\n");
-+        break;
-+
-     case EXIT_REASON_PENDING_VIRT_INTR:
-         /* Disable the interrupt window. */
-         v->arch.hvm.vmx.exec_control &= ~CPU_BASED_VIRTUAL_INTR_PENDING;
--- 
-2.30.2
+Are you intentionally setting revents to enter the loop initially?
+Shouldn't the watch registration trigger it to fire anyway?
 
+> +        { .events =3D POLLIN }
+> +    };
+>
+>      umask(027);
+>      if ( getenv("XENLOGD_VERBOSE") )
+> @@ -134,9 +686,26 @@ int main(int argc, char *argv[])
+>
+>      xen_connect();
+>
+> +    if ( !xs_watch(xs, "backend/xen_9pfs", "main") )
+> +        do_err("xs_watch() in main thread failed");
+> +    p[0].fd =3D xs_fileno(xs);
+> +    p[1].fd =3D xenevtchn_fd(xe);
+> +
+> +    scan_backend();
+> +
+>      while ( !stop_me )
+>      {
+> -        sleep(60);
+> +        while ( (p[0].revents & POLLIN) &&
+> +                (watch =3D xs_check_watch(xs)) !=3D NULL )
+> +        {
+> +            handle_watch(watch[XS_WATCH_PATH], watch[XS_WATCH_TOKEN]);
+> +            free(watch);
+> +        }
+> +
+> +        if ( p[1].revents & POLLIN )
+> +            handle_event();
+> +
+> +        poll(p, 2, 10000);
+
+Can you just use an infinite timeout and rely on the signal
+interrupting the system call?
+
+Regards,
+Jason
 
