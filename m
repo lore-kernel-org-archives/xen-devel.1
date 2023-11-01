@@ -4,44 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA91C4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:01:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626149.976141 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0058EC4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:14:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626178.976168 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy75c-0006T5-Uc; Wed, 01 Nov 2023 09:00:40 +0000
+	id 1qy7Iz-0002sl-Fx; Wed, 01 Nov 2023 09:14:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626149.976141; Wed, 01 Nov 2023 09:00:40 +0000
+Received: by outflank-mailman (output) from mailman id 626178.976168; Wed, 01 Nov 2023 09:14:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy75c-0006Sk-R7; Wed, 01 Nov 2023 09:00:40 +0000
-Received: by outflank-mailman (input) for mailman id 626149;
- Wed, 01 Nov 2023 09:00:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qy7Iz-0002se-DO; Wed, 01 Nov 2023 09:14:29 +0000
+Received: by outflank-mailman (input) for mailman id 626178;
+ Wed, 01 Nov 2023 09:14:27 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy75b-0005dE-DC
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:00:39 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2082a0ac-7895-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 10:00:38 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 71AB821862;
- Wed,  1 Nov 2023 09:00:38 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4548C13460;
- Wed,  1 Nov 2023 09:00:38 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id CKqxD7YTQmWeeQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:00:38 +0000
+ (envelope-from <julien@xen.org>) id 1qy7Ix-0002rO-9u
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:14:27 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qy7Iv-0003yV-1H; Wed, 01 Nov 2023 09:14:25 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qy7Iu-0006zs-Rh; Wed, 01 Nov 2023 09:14:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,76 +41,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2082a0ac-7895-11ee-98d6-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698829238; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BBCYYLq8RLRTC07yvHLcGeOw7lLnh2hUZttfKIwKhhk=;
-	b=kmvqIvyZZbyed7wfK0z8dsqPN9cEhkgdaSxvM8FaTMZpp3gpQsfOkvn8lUqV+c3r7lpafG
-	GW8iPSd7PGh454KuPgwiYRSYzhAkzNGbZqil6jR0hecUowX45BSF9offJrvY9fKFLsKfZ/
-	n1sW3HxwvzuFnJykVodU1BWGf1CMTXY=
-From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	wl@xen.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 2/3] Mini-OS: don't crash if no shutdown node is available
-Date: Wed,  1 Nov 2023 10:00:23 +0100
-Message-Id: <20231101090024.28934-3-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231101090024.28934-1-jgross@suse.com>
-References: <20231101090024.28934-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=IJy7ohh2P80trrurzNDpJ9gaIXCG3I2f9gcqC5joIvw=; b=T/L2zBp6/xhQ3p33R3NIKcOJEA
+	tX1A69g5VIQyu9a9AxRRibPY8T6IE2G6ATGYrYWtPJIrZHhKL/K1w8knJt/8lJomYCfkdmjKSgu6s
+	e10U588u9facBkGyv8eT6pmBnWRoc1svZZsCYI7cTUMg8S5DoQfNMPnCZU0tRLGQHsLM=;
+Message-ID: <ad8c3c99-135c-425c-a0e9-f74c6cadbc78@xen.org>
+Date: Wed, 1 Nov 2023 09:14:22 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: exynos-mixer 14450000.mixer: [drm:exynos_drm_register_dma]
+ *ERROR* Device 14450000.mixer lacks support for IOMMU
+Content-Language: en-GB
+To: Chuck Zmudzinski <brchuckz@netscape.net>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Cc: Mario Marietto <marietto2008@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Marek Szyprowski <m.szyprowski@samsung.com>
+References: <CA+1FSiip1U0_EskJNgV3pSZPTCNOiTbpHosRLsy-6t1QQGd8Dw@mail.gmail.com>
+ <alpine.DEB.2.22.394.2310311557520.1795129@ubuntu-linux-20-04-desktop>
+ <CA+1FSih0hORYZf6Hfmf=nY4jkHPvFSgGfc1tJfzN6smnKxcsxA@mail.gmail.com>
+ <alpine.DEB.2.22.394.2310311625260.1795129@ubuntu-linux-20-04-desktop>
+ <d7d353b6-8d98-4bfa-8f45-1cb56fcea1f8@netscape.net>
+ <08d50d8e-00bc-4bd0-be64-49639028eca8@xen.org>
+ <5b3f5d86-1499-4dbb-934e-2006a3dc108e@netscape.net>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <5b3f5d86-1499-4dbb-934e-2006a3dc108e@netscape.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-It might be perfectly fine not to have a control/shutdown Xenstore
-node. If this is the case, don't crash, but just terminate the
-shutdown thread after issuing a message that shutdown isn't available.
 
-In fini_shutdown() clearing the watch can result in an error now, in
-case the early exit above was taken. Just ignore this error now.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- shutdown.c | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+On 01/11/2023 08:45, Chuck Zmudzinski wrote:
+> On 11/1/2023 4:27 AM, Julien Grall wrote:
+>> Hi,
+>>
+>> @Stefano, as you pointed out, there is already a thread on xen-users for
+>> this discussion. Could we use this thread for any discussion? This would
+>> make easier to follow.
+>>
+>> Some high level comment below.
+> 
+> I agree to keep the discussion here and not at other places.
 
-diff --git a/shutdown.c b/shutdown.c
-index bb2c6f11..ded6b64d 100644
---- a/shutdown.c
-+++ b/shutdown.c
-@@ -75,7 +75,9 @@ static void shutdown_thread(void *p)
-         xenbus_wait_for_watch(&events);
-         if ((err = xenbus_read(XBT_NIL, path, &shutdown))) {
-             free(err);
--            do_exit();
-+            free(xenbus_unwatch_path_token(XBT_NIL, path, token));
-+            printk("Shutdown Xenstore node not available.\n");
-+            return;
-         }
- 
-         if (end_shutdown_thread)
-@@ -117,15 +119,9 @@ void init_shutdown(void)
- 
- void fini_shutdown(void)
- {
--    char *err;
--
-     end_shutdown_thread = 1;
-     xenbus_release_wait_for_watch(&events);
--    err = xenbus_unwatch_path_token(XBT_NIL, path, token);
--    if (err) {
--        free(err);
--        do_exit();
--    }
-+    free(xenbus_unwatch_path_token(XBT_NIL, path, token));
- }
- #endif
- 
+I was meant to suggest the other thread :). But either is fine with me. 
+I just want to avoid avoid multiple seperate threads for the discussion.
+
+> 
+> I just want to add that the best results for Xen dom0 so far are
+> by implementing Marek's suggestion to disable these two settings
+> in the 6.1.59 kernel config, but leaving everything else the same,
+> including keeping the EXYNOS_IOMMU support enabled:
+That's good news! I would be interested to hear how this works once you 
+start to have PV backend in dom0 (I expect that the IOMMU will get 
+confused with grant mapping).
+
+Also, do you plan to passthrough any of the devices protected by IOMMU?
+
+> 
+> # CONFIG_DRM_EXYNOS_MIXER is not set
+> 
+> Disabling the mixer also makes this unavailable:
+> 
+> # CONFIG_HDMI
+> 
+> With this change, the GPU is working well enough to allow the display
+> manager and an X11 session to run normally on the built-in display of the
+> Chromebook. The Wifi also works well.
+
+I saw your other answer about the Wifi not working when the IOMMU is not 
+used. I was about to reply there, but instead I will do it here.
+
+TBH, I am quite surprised this is the case. The only difference with 
+baremetal would be the RAM regions. Do you know if the Wifi dongle only 
+accept certain physical address?
+
+Cheers,
+
 -- 
-2.35.3
-
+Julien Grall
 
