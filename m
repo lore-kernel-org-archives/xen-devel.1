@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CFFC4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:54:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626349.976569 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2986CC4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:54:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626351.976584 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7vZ-0000SR-8L; Wed, 01 Nov 2023 09:54:21 +0000
+	id 1qy7vg-00012N-R8; Wed, 01 Nov 2023 09:54:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626349.976569; Wed, 01 Nov 2023 09:54:21 +0000
+Received: by outflank-mailman (output) from mailman id 626351.976584; Wed, 01 Nov 2023 09:54:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy7vZ-0000SK-5A; Wed, 01 Nov 2023 09:54:21 +0000
-Received: by outflank-mailman (input) for mailman id 626349;
- Wed, 01 Nov 2023 09:54:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qy7vg-00010a-Kq; Wed, 01 Nov 2023 09:54:28 +0000
+Received: by outflank-mailman (input) for mailman id 626351;
+ Wed, 01 Nov 2023 09:54:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy7cX-0005E0-RO
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:34:41 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e20f467e-7899-11ee-98d6-6d05b1d4d9a1;
- Wed, 01 Nov 2023 10:34:41 +0100 (CET)
+ id 1qy7e0-0005sN-Bj
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:36:12 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 17487220-789a-11ee-9b0e-b553b5be7939;
+ Wed, 01 Nov 2023 10:36:10 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 287401F74D;
- Wed,  1 Nov 2023 09:34:41 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 822601F750;
+ Wed,  1 Nov 2023 09:36:10 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 02A2913460;
- Wed,  1 Nov 2023 09:34:40 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4D36F13460;
+ Wed,  1 Nov 2023 09:36:10 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id DAT3OrAbQmUZCQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:34:40 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id UXV4EQocQmXRCQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:36:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,112 +53,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e20f467e-7899-11ee-98d6-6d05b1d4d9a1
+X-Inumbo-ID: 17487220-789a-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698831281; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1698831370; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=3GExNKp/yhu+n6P2BIY5jfXZkhxU99CKU37BbtunsSk=;
-	b=MppCvh+L8QO/WnZb70zdnCMROQq+m03SnlwSi2B8zsq7VvpsfxRwRzoa00hFBPd64pUJ6A
-	FZGNhOZjZp9r9/AORC30jIYPaq+MBY4VA83H/ETdfTaIRn/ofphTyrrAi36CYy9/WMuu5m
-	T3p1LWPe58VjNh+En1lplnIM7bpF/D8=
+	bh=nYvyegEExGxpVyVevuNtSzRpcmdIFE44ODgb8U4L3Mw=;
+	b=IvRzd0LiiImU0mfBCuFuNDX9S6iSYQ2NjakQUD61tGb8Oll4NzPwXb9+5PrhXvZv4jUY2u
+	fAIKcDR6kxhpyU2dRg8nZwHhasA0+yUeqapcA+JCOX340TRuu4i3saqa1vLs2jQkGC6G6p
+	lZUHlnUEvT1nXLjBJZcC6uMdg5bEkSI=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 13/29] tools/xenlogd: add 9pfs write request support
-Date: Wed,  1 Nov 2023 10:33:09 +0100
-Message-Id: <20231101093325.30302-14-jgross@suse.com>
+Subject: [PATCH 29/29] tools/xenstored: have a single do_control_memreport()
+Date: Wed,  1 Nov 2023 10:33:25 +0100
+Message-Id: <20231101093325.30302-30-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231101093325.30302-1-jgross@suse.com>
 References: <20231101093325.30302-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the write request of the 9pfs protocol.
+With 9pfs now available in Xenstore-stubdom, there is no reason to
+have distinct do_control_memreport() variants for the daemon and the
+stubdom implementations.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenlogd/io.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
+ tools/xenstored/control.c | 27 +++++++--------------------
+ 1 file changed, 7 insertions(+), 20 deletions(-)
 
-diff --git a/tools/xenlogd/io.c b/tools/xenlogd/io.c
-index 6e92667fab..6b4692ca67 100644
---- a/tools/xenlogd/io.c
-+++ b/tools/xenlogd/io.c
-@@ -32,6 +32,7 @@
- #define P9_CMD_WALK       110
- #define P9_CMD_OPEN       112
- #define P9_CMD_CREATE     114
-+#define P9_CMD_WRITE      118
- #define P9_CMD_CLUNK      120
- #define P9_CMD_STAT       124
- 
-@@ -1010,6 +1011,51 @@ static void p9_create(device *device, struct p9_header *hdr)
-     fill_buffer(device, hdr->cmd + 1, hdr->tag, "QU", &qid, &iounit);
+diff --git a/tools/xenstored/control.c b/tools/xenstored/control.c
+index dae23a5ac0..7db2c4703b 100644
+--- a/tools/xenstored/control.c
++++ b/tools/xenstored/control.c
+@@ -216,23 +216,11 @@ static int do_control_logfile(const void *ctx, struct connection *conn,
+ 	return 0;
  }
  
-+static void p9_write(device *device, struct p9_header *hdr)
-+{
-+    uint32_t fid;
-+    uint64_t off;
-+    unsigned int len;
-+    uint32_t written;
-+    void *buf;
-+    struct p9_fid *fidp;
-+    int ret;
-+
-+    ret = fill_data(device, "ULD", &fid, &off, &len, device->buffer);
-+    if ( ret != 3 )
-+    {
-+        p9_error(device, hdr->tag, EINVAL);
-+        return;
-+    }
-+
-+    fidp = find_fid(device, fid);
-+    if ( !fidp || !fidp->opened || fidp->isdir )
-+    {
-+        p9_error(device, hdr->tag, EBADF);
-+        return;
-+    }
-+
-+    buf = device->buffer;
-+
-+    while ( len != 0 )
-+    {
-+        ret = pwrite(fidp->fd, buf, len, off);
-+        if ( ret < 0 )
-+            break;
-+        len -= ret;
-+        buf += ret;
-+        off += ret;
-+    }
-+
-+    written = buf - device->buffer;
-+    if ( written == 0 )
-+    {
-+        p9_error(device, hdr->tag, errno);
-+        return;
-+    }
-+    fill_buffer(device, hdr->cmd + 1, hdr->tag, "U", &written);
-+}
-+
- static void p9_clunk(device *device, struct p9_header *hdr)
+-#ifdef __MINIOS__
+-static int do_control_memreport(const void *ctx, struct connection *conn,
+-				const char **vec, int num)
+-{
+-	if (num)
+-		return EINVAL;
+-
+-	talloc_report_full(NULL, stdout);
+-
+-	send_ack(conn, XS_CONTROL);
+-	return 0;
+-}
+-#else
+ static int do_control_memreport(const void *ctx, struct connection *conn,
+ 				const char **vec, int num)
  {
-     uint32_t fid;
-@@ -1182,6 +1228,10 @@ void *io_thread(void *arg)
-                 p9_create(device, &hdr);
-                 break;
+ 	FILE *fp;
++	char *filename;
+ 	int fd;
  
-+            case P9_CMD_WRITE:
-+                p9_write(device, &hdr);
-+                break;
-+
-             case P9_CMD_CLUNK:
-                 p9_clunk(device, &hdr);
-                 break;
+ 	if (num > 1)
+@@ -255,8 +243,12 @@ static int do_control_memreport(const void *ctx, struct connection *conn,
+ 			if (!fp)
+ 				close(fd);
+ 		}
+-	} else
+-		fp = fopen(vec[0], "a");
++	} else {
++		filename = absolute_filename(ctx, vec[0]);
++		if (!filename)
++			return ENOMEM;
++		fp = fopen(filename, "a");
++	}
+ 
+ 	if (!fp)
+ 		return EBADF;
+@@ -267,7 +259,6 @@ static int do_control_memreport(const void *ctx, struct connection *conn,
+ 	send_ack(conn, XS_CONTROL);
+ 	return 0;
+ }
+-#endif
+ 
+ static int do_control_print(const void *ctx, struct connection *conn,
+ 			    const char **vec, int num)
+@@ -310,11 +301,7 @@ static struct cmd_s cmds[] = {
+ 		"    Default timeout is 60 seconds.", 5 },
+ #endif
+ 	{ "logfile", do_control_logfile, "<file>" },
+-#ifdef __MINIOS__
+-	{ "memreport", do_control_memreport, "" },
+-#else
+ 	{ "memreport", do_control_memreport, "[<file>]" },
+-#endif
+ 	{ "print", do_control_print, "<string>" },
+ 	{ "quota", do_control_quota,
+ 		"[set <name> <val>|<domid>|max [-r]]" },
 -- 
 2.35.3
 
