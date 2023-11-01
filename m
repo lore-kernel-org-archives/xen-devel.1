@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45643C4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:00:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.626145.976106 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF3AC4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Nov 2023 09:01:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.626152.976159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy75X-0005do-98; Wed, 01 Nov 2023 09:00:35 +0000
+	id 1qy75j-0006v8-9y; Wed, 01 Nov 2023 09:00:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 626145.976106; Wed, 01 Nov 2023 09:00:35 +0000
+Received: by outflank-mailman (output) from mailman id 626152.976159; Wed, 01 Nov 2023 09:00:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qy75X-0005dU-2P; Wed, 01 Nov 2023 09:00:35 +0000
-Received: by outflank-mailman (input) for mailman id 626145;
- Wed, 01 Nov 2023 09:00:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qy75j-0006uz-7B; Wed, 01 Nov 2023 09:00:47 +0000
+Received: by outflank-mailman (input) for mailman id 626152;
+ Wed, 01 Nov 2023 09:00:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qFMy=GO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1qy75V-0005d2-Ig
- for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:00:33 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1a05d8ca-7895-11ee-9b0e-b553b5be7939;
- Wed, 01 Nov 2023 10:00:28 +0100 (CET)
+ id 1qy75h-0005dE-NO
+ for xen-devel@lists.xenproject.org; Wed, 01 Nov 2023 09:00:45 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 23d72a20-7895-11ee-98d6-6d05b1d4d9a1;
+ Wed, 01 Nov 2023 10:00:44 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4B76821847;
- Wed,  1 Nov 2023 09:00:27 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0D1D621A58;
+ Wed,  1 Nov 2023 09:00:44 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1396A13460;
- Wed,  1 Nov 2023 09:00:27 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D407313460;
+ Wed,  1 Nov 2023 09:00:43 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 0BZdA6sTQmWDeQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:00:27 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id fZEZMrsTQmWqeQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 01 Nov 2023 09:00:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,41 +53,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a05d8ca-7895-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 23d72a20-7895-11ee-98d6-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1698829227; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=YzQsLmITRJfUXeZeVQgCKsJDMXDnG8wcEgTkWn0P5Nw=;
-	b=sgVHMRw0sPqx0AhdUi+3Oj4zpYS39aIsGE8Sq3vHMeCS0oBCSBmurHZWrFWMewHAm51RDp
-	jGiVQ08ec67Y0q3W59MauGuOvNwUvcPaq/Ob698YHbO2Ynwwg9FIn1EuQe5EPDdlvsDE2b
-	nkWMWT/oMBZYpz2mFoGDg6TXPQFm7N0=
+	t=1698829244; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Or0tPQphNoLGGIqgePeOLJ1T+klAnj6lGdQ0f802gDQ=;
+	b=NiwXEXSwOFrCzwRHIGYZEMFP/XfdMwMiudIEejCjpT4hEWFD6FJk1eX4RnZo54pZ9I/ABh
+	1twigO1mFwK1zNp5ItPXkelsJmEbBDQ5GB3BGoLsufaYnCJmrpphchSQL/YTrynQczl1pf
+	Ov8pdFWbW2zNJ3jw5irqJSA4nFV1uOA=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 0/3] Mini-OS: preparations for 9pfs in xenstore-stubdom
-Date: Wed,  1 Nov 2023 10:00:21 +0100
-Message-Id: <20231101090024.28934-1-jgross@suse.com>
+Subject: [PATCH 3/3] Mini-OS: fix 9pfs stat receive format
+Date: Wed,  1 Nov 2023 10:00:24 +0100
+Message-Id: <20231101090024.28934-4-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231101090024.28934-1-jgross@suse.com>
+References: <20231101090024.28934-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This small patch series is doing some preparations for being able to
-use 9pfs in Xenstore-stubdom.
+The format string of the received data for the 9pfs stat command is
+missing the initial 2 byte total length specifier. Add it.
 
-Juergen Gross (3):
-  Mini-OS: make xenstore_buf externally visible
-  Mini-OS: don't crash if no shutdown node is available
-  Mini-OS: fix 9pfs stat receive format
+Fixes: 2d1dfccd3aa3 ("Mini-OS: add read and write support to 9pfsfront")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ 9pfront.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
- 9pfront.c        |  9 +++++----
- include/xenbus.h |  2 ++
- shutdown.c       | 12 ++++--------
- xenbus.c         |  2 +-
- 4 files changed, 12 insertions(+), 13 deletions(-)
-
+diff --git a/9pfront.c b/9pfront.c
+index 5da8a365..43c7409f 100644
+--- a/9pfront.c
++++ b/9pfront.c
+@@ -711,6 +711,7 @@ static int p9_create(struct dev_9pfs *dev, uint32_t fid, char *path,
+ static int p9_stat(struct dev_9pfs *dev, uint32_t fid, struct p9_stat *stat)
+ {
+     struct req *req = get_free_req(dev);
++    uint16_t total;
+     int ret;
+ 
+     if ( !req )
+@@ -719,10 +720,10 @@ static int p9_stat(struct dev_9pfs *dev, uint32_t fid, struct p9_stat *stat)
+     memset(stat, 0, sizeof(*stat));
+     req->cmd = P9_CMD_STAT;
+     send_9p(dev, req, "U", fid);
+-    rcv_9p(dev, req, "uuUQUUULSSSSSUUU", &stat->size, &stat->type, &stat->dev,
+-           stat->qid, &stat->mode, &stat->atime, &stat->mtime, &stat->length,
+-           &stat->name, &stat->uid, &stat->gid, &stat->muid, &stat->extension,
+-           &stat->n_uid, &stat->n_gid, &stat->n_muid);
++    rcv_9p(dev, req, "uuuUQUUULSSSSSUUU", &total, &stat->size, &stat->type,
++           &stat->dev, stat->qid, &stat->mode, &stat->atime, &stat->mtime,
++           &stat->length, &stat->name, &stat->uid, &stat->gid, &stat->muid,
++           &stat->extension, &stat->n_uid, &stat->n_gid, &stat->n_muid);
+ 
+     ret = req->result;
+ 
 -- 
 2.35.3
 
