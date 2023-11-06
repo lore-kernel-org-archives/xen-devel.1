@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E67C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:10:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628434.979950 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9834C4167D
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:10:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628433.979945 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vA-0002Hq-Ot; Mon, 06 Nov 2023 20:10:04 +0000
+	id 1r05vA-0002Dk-Fs; Mon, 06 Nov 2023 20:10:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628434.979950; Mon, 06 Nov 2023 20:10:04 +0000
+Received: by outflank-mailman (output) from mailman id 628433.979945; Mon, 06 Nov 2023 20:10:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vA-0002Gp-Iy; Mon, 06 Nov 2023 20:10:04 +0000
-Received: by outflank-mailman (input) for mailman id 628434;
+	id 1r05vA-0002CN-CJ; Mon, 06 Nov 2023 20:10:04 +0000
+Received: by outflank-mailman (input) for mailman id 628433;
  Mon, 06 Nov 2023 20:10:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hQ-0001Ig-Fd
+ id 1r05hQ-00024f-Ot
  for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:52 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 79ca66fb-7cde-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 20:55:46 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 785e257f-7cde-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 20:55:44 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fc-007tas-W0; Mon, 06 Nov 2023 19:54:01 +0000
+ id 1r05fd-007tb4-AH; Mon, 06 Nov 2023 19:54:02 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fd-001GPh-0e; Mon, 06 Nov 2023 19:54:01 +0000
+ Hat Linux)) id 1r05fd-001GPy-1n; Mon, 06 Nov 2023 19:54:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 79ca66fb-7cde-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 785e257f-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=3IJgWxMmUdLOBVuYUZ4BO4uyS9hEOvqvAglyEu5N/aM=; b=j6KlICENR/MCVSKkvWFpHlDir2
-	SJpTd6hXGivub3V8Rz710ZQhhjzcIYKyHLqI4xBbKgJlXCMQUtDDjojU3CtRwaOyojn2drQl74kTH
-	Kcola95OJDvw1AiBtg+MWnNHBl6subOMR5K8WmYvQway11zNxqyPfd7dY/I+/T7J8Bnj6qcnIDRwg
-	UXPppJ5I9BsnvVnqy7e0KHwUcjjRNae1sgCvkXqLn7Q6wLNZAyGNSsLC3bLNadONxLFNKND0u0332
-	1VsdAXPFzU2KF+iIIkDrImtJZ2ad2Rl8ciGW6sNehFhqZZiXTVLM9if5CUSEg4+qs0cSblZv2qdiV
-	DXZo9Nsw==;
+	bh=Z8O29x0pWQhZMVbX+dyJJms7pdOJv3y/EsgO2DOPUaY=; b=teESO/RtJYYuQVVx1IuFV0fYHO
+	QYkJ+WGnPXZGnQb1cse22y5yOxa7n7e0Kz9gFUDvPXwOrQ9QSYu4Ovjg0hvBHAzorWNmcxX8W8dC0
+	x87OOZSgAuxGCv05xk2sxU/hWkqL0IJNMWnplS8QUNwg4DDtGsMhPKdCNYRhSn6/w/mEAsw80nSGO
+	Yhpresf2n6tgaRnolyiqGAYkjI4+MQu9W54FKMH8udpcer0iA4y8o8+GsniLtFQBClqEJHf0SN35I
+	Qc3+cijtHnuNn01n3lUiCUsvyaNlcvNMpoPx6tLeT2rU/MhC43rFjcvlYrZ+/d5dzyzaxOxLw8cOS
+	2rB2sH3w==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 42/46] hw/xtensa/xtfpga: use qemu_create_nic_device()
-Date: Mon,  6 Nov 2023 19:49:47 +0000
-Message-ID: <20231106195352.301038-43-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 46/46] net: make nb_nics and nd_table[] static in net/net.c
+Date: Mon,  6 Nov 2023 19:49:51 +0000
+Message-ID: <20231106195352.301038-47-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -135,45 +135,53 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/xtensa/xtfpga.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ include/net/net.h | 4 ----
+ net/net.c         | 3 +++
+ system/globals.c  | 2 --
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
-index fbad1c83a3..f49e6591dc 100644
---- a/hw/xtensa/xtfpga.c
-+++ b/hw/xtensa/xtfpga.c
-@@ -141,14 +141,16 @@ static void xtfpga_net_init(MemoryRegion *address_space,
-         hwaddr base,
-         hwaddr descriptors,
-         hwaddr buffers,
--        qemu_irq irq, NICInfo *nd)
-+        qemu_irq irq)
- {
-     DeviceState *dev;
-     SysBusDevice *s;
-     MemoryRegion *ram;
+diff --git a/include/net/net.h b/include/net/net.h
+index 290e604f03..5a38766942 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -245,10 +245,6 @@ struct NICInfo {
+     int nvectors;
+ };
  
--    dev = qdev_new("open_eth");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("open_eth", true, NULL);
-+    if (!dev) {
-+        return;
-+    }
+-extern int nb_nics;
+-extern NICInfo nd_table[MAX_NICS];
+-extern const char *host_net_devices[];
+-
+ /* from net.c */
+ extern NetClientStateList net_clients;
+ bool netdev_is_modern(const char *optstr);
+diff --git a/net/net.c b/net/net.c
+index a3532a71a5..957daad58d 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -77,6 +77,9 @@ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
  
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -301,10 +303,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-         memory_region_add_subregion(system_memory, board->io[1], io);
-     }
-     xtfpga_fpga_init(system_io, 0x0d020000, freq);
--    if (nd_table[0].used) {
--        xtfpga_net_init(system_io, 0x0d030000, 0x0d030400, 0x0d800000,
--                        extints[1], nd_table);
--    }
-+    xtfpga_net_init(system_io, 0x0d030000, 0x0d030400, 0x0d800000, extints[1]);
+ static GHashTable *nic_model_help;
  
-     serial_mm_init(system_io, 0x0d050020, 2, extints[0],
-                    115200, serial_hd(0), DEVICE_NATIVE_ENDIAN);
++static int nb_nics;
++static NICInfo nd_table[MAX_NICS];
++
+ /***********************************************************/
+ /* network device redirectors */
+ 
+diff --git a/system/globals.c b/system/globals.c
+index e83b5428d1..b6d4e72530 100644
+--- a/system/globals.c
++++ b/system/globals.c
+@@ -36,8 +36,6 @@ int display_opengl;
+ const char* keyboard_layout;
+ bool enable_mlock;
+ bool enable_cpu_pm;
+-int nb_nics;
+-NICInfo nd_table[MAX_NICS];
+ int autostart = 1;
+ int vga_interface_type = VGA_NONE;
+ bool vga_interface_created;
 -- 
 2.41.0
 
