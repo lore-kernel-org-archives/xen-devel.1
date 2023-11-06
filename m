@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CCEDC0018C
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 15:05:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628132.979244 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FB77C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 15:17:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628163.979314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r01AE-00089a-3O; Mon, 06 Nov 2023 15:05:18 +0000
+	id 1r01LJ-0006HR-Bg; Mon, 06 Nov 2023 15:16:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628132.979244; Mon, 06 Nov 2023 15:05:18 +0000
+Received: by outflank-mailman (output) from mailman id 628163.979314; Mon, 06 Nov 2023 15:16:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r01AE-00089S-0r; Mon, 06 Nov 2023 15:05:18 +0000
-Received: by outflank-mailman (input) for mailman id 628132;
- Mon, 06 Nov 2023 15:05:16 +0000
+	id 1r01LJ-0006HK-8n; Mon, 06 Nov 2023 15:16:45 +0000
+Received: by outflank-mailman (input) for mailman id 628163;
+ Mon, 06 Nov 2023 15:16:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9eGT=GT=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1r01AC-000892-Bq
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 15:05:16 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=0/lM=GT=kernel.org=kbusch@srs-se1.protection.inumbo.net>)
+ id 1r01LH-0006HA-IU
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 15:16:43 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e36e36cb-7cb5-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 16:05:14 +0100 (CET)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2c6b30acacdso61666331fa.2
- for <xen-devel@lists.xenproject.org>; Mon, 06 Nov 2023 07:05:14 -0800 (PST)
-Received: from EMEAENGAAD19049.citrite.net ([2.223.46.215])
- by smtp.gmail.com with ESMTPSA id
- q8-20020a05600c46c800b0040776008abdsm12507392wmo.40.2023.11.06.07.05.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 07:05:12 -0800 (PST)
+ id 7aac92d1-7cb7-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 16:16:38 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1393660F89;
+ Mon,  6 Nov 2023 15:16:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97714C433BC;
+ Mon,  6 Nov 2023 15:16:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,95 +43,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e36e36cb-7cb5-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1699283113; x=1699887913; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kZ5iPIHVMmyDKXCEcRpB1PLVr212+b0o2RYlwTZzSbw=;
-        b=csuCPZXd8b4Xwft6rsJxnLhaNQewbwuGCBeMBGfCJ9mxnm551isON1hmF+/s/646Wd
-         oVt6gBsxWVkDySX7YBT++h6qw6nVaiq2cKTAxuA5Rnm5TJX28FtfobX+uUxHlk18K7Hj
-         ao4lWz1RF39KAMx7sTA0b3JM2ovOfJYpxkrLg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699283113; x=1699887913;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kZ5iPIHVMmyDKXCEcRpB1PLVr212+b0o2RYlwTZzSbw=;
-        b=njDFPHig4Mdu2ZfahCW3n1fSOSxD/iv1QeQwaZMH3FR6ZY1LX1EgdXQO2+w9lx8g5O
-         +X4LbriwlCIlOFaQqpTeTwU7GVOQVF0BXHhqy51AKlpkjn3zlULjoXBmqZjExDCbTZjd
-         FXGZNwy9j+rDUSsI/bcl+kquDeL3U6DDc3SXDwt7gfIsZ3l0RfDUZexhu/vMbUi1M3su
-         z0YDle1yNtbChRnVJKF9ilLiSMn5keTzoZDzpPZufzmV+XZC3X7a6pLa+RUxCP5p4yE7
-         V3VcHa0UF+L8xyFxIPMEuEVVPLpEkmDQ7aDmBZtB+R7uhGKrVVQemr1vWDO2ur6A2GXt
-         MVgQ==
-X-Gm-Message-State: AOJu0YzSmNhPdHnCSjb4g3wXwVv3vrohu0YRi323i0gFn/9vf91VwWo7
-	8hYmDocHUmQ0J6jvMdLLt+IOUp9BX2+iQQbVanU=
-X-Google-Smtp-Source: AGHT+IGyi2S6KzVl8/CIZkXikN4EfOvMJITc61jW9uBr9shg1jkD0ewUerNvzJkP1A1yAoxpi6SJcQ==
-X-Received: by 2002:a05:651c:39a:b0:2c5:ee7:b322 with SMTP id e26-20020a05651c039a00b002c50ee7b322mr22221290ljp.18.1699283112985;
-        Mon, 06 Nov 2023 07:05:12 -0800 (PST)
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 0/6] Pygrub security enhancements and bugfixes
-Date: Mon,  6 Nov 2023 15:05:02 +0000
-Message-Id: <20231106150508.22665-1-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 7aac92d1-7cb7-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1699283796;
+	bh=/HAwmovzMZdoeZvZsHcdokGslREftSrFRuxNINmZTNE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=p1efQTYvGf8rVFkUIm2klEwzrW2mtKPa5EF8rwprtr9zH5WwvnNajfJl+shtHJF50
+	 /ZnBBtxAYwFDXG51JGihfmCzTaX4OxyMbmJEk3SUsAA17/dTb9U9/QQvh52VD84FTM
+	 VfEN6nj25Eenlmdmzjt6BJwNVvI+dgDFpIybQyLD9c+5Ee4exOLb3CTy9naiQDXXhU
+	 Cw/TfswQygCrntLmNHPTMdYdv3g15hW+NIhMfAYqmc2HfwvR4gsKunhB1q+pSmO1C1
+	 Pz32FeIJO3uX+B6Vw1z/QG9JVxwaQX4FzOdrrkHTjHSL4DFDV5YjUDxfCNKfOStlS5
+	 LYvEnkgAbPC1A==
+Date: Mon, 6 Nov 2023 08:16:33 -0700
+From: Keith Busch <kbusch@kernel.org>
+To: Mikulas Patocka <mpatocka@redhat.com>
+Cc: Christoph Hellwig <hch@lst.de>, Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
+	Marek Marczykowski-G'orecki <marmarek@invisiblethingslab.com>,
+	Jens Axboe <axboe@fb.com>, Sagi Grimberg <sagi@grimberg.me>,
+	Jan Kara <jack@suse.cz>, Vlastimil Babka <vbabka@suse.cz>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	Michal Hocko <mhocko@suse.com>, stable@vger.kernel.org,
+	regressions@lists.linux.dev, Alasdair Kergon <agk@redhat.com>,
+	Mike Snitzer <snitzer@kernel.org>, dm-devel@lists.linux.dev,
+	linux-mm@kvack.org
+Subject: Re: [PATCH] swiotlb-xen: provide the "max_mapping_size" method
+Message-ID: <ZUkDUXDF6g4P86F3@kbusch-mbp.dhcp.thefacebook.com>
+References: <ZUOL8kXVTF1OngeN@mail-itl>
+ <3cb4133c-b6db-9187-a678-11ed8c9456e@redhat.com>
+ <ZUUctamEFtAlSnSV@mail-itl>
+ <ZUUlqJoS6_1IznzT@kbusch-mbp.dhcp.thefacebook.com>
+ <ZUVYT1Xp4+hFT27W@mail-itl>
+ <ZUV3TApYYoh_oiRR@kbusch-mbp.dhcp.thefacebook.com>
+ <11a9886d-316c-edcd-d6da-24ad0b9a2b4@redhat.com>
+ <ZUZOKitOAqqKiJ4n@kbusch-mbp.dhcp.thefacebook.com>
+ <20231106071008.GB17022@lst.de>
+ <928b5df7-fada-cf2f-6f6a-257a84547c3@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <928b5df7-fada-cf2f-6f6a-257a84547c3@redhat.com>
 
-A few extra bugfixes and security enhancements for pygrub.
+On Mon, Nov 06, 2023 at 03:59:40PM +0100, Mikulas Patocka wrote:
+> There's a bug that when using the XEN hypervisor with dm-crypt on NVMe, 
+> the kernel deadlocks [1].
+> 
+> The deadlocks are caused by inability to map a large bio vector -
+> dma_map_sgtable always returns an error, this gets propagated to the block
+> layer as BLK_STS_RESOURCE and the block layer retries the request
+> indefinitely.
+> 
+> XEN uses the swiotlb framework to map discontiguous pages into contiguous
+> runs that are submitted to the PCIe device. The swiotlb framework has a
+> limitation on the length of a mapping - this needs to be announced with
+> the max_mapping_size method to make sure that the hardware drivers do not
+> create larger mappings.
+> 
+> Without max_mapping_size, the NVMe block driver would create large
+> mappings that overrun the maximum mapping size.
+> 
+> [1] https://lore.kernel.org/stable/ZTNH0qtmint%2FzLJZ@mail-itl/
 
-The biggest security enhacement is the removal of filesystem permissions
-from the depriv thread of pygrub. This is possible on newer versions of
-e2fsprogs, as it has an interface to consume file descriptors rather than
-file paths.
+This should be a "Link:" tag.
 
-Bug fixes
-=========
+> Signed-off-by: Mikulas Patocka <mpatocka@redhat.com>
+> Reported-by: Marek Marczykowski-G'orecki <marmarek@invisiblethingslab.com>
+> Tested-by: Marek Marczykowski-G'orecki <marmarek@invisiblethingslab.com>
+> Suggested-by: Keith Busch <kbusch@kernel.org>
 
-Patch 1: Properly confines the mount namespace in Linux systems and
-         corrects an incorrect statement about older Linux kernels being
-         buggy with them. With this patch, mounts done inside the namespace
-         disappear altogether after the last process is killed.
-Patch 2: Fixes a bug preventing setting the LIMIT_FSIZE override
+I was about to send the same thing. I did a little more than suggest
+this: it's is the very patch I wrote for testing, minus the redundant
+nvme bits! But since you already have a commit message for it...
 
-Security enhancements
-=====================
+Acked-by: Keith Busch <kbusch@kernel.org>
 
-Patch 3: Limits the amount of memory pygrub can chew
-Patch 4: Tweaks libfsimage to support a new interface ( fdopen() ) which
-         allows passing file descriptors rather than paths
-Patch 5: Modifies the python bindings to grant access to the new interface
-Patch 6: Modifies pygrub to open every required file before depriv.
-
-Alejandro Vallejo (6):
-  tools/pygrub: Set mount propagation to private recursively
-  tools/pygrub: Fix bug in LIMIT_FSIZE env variable override
-  tools/pygrub: Restrict depriv operation with RLIMIT_AS
-  tools/libfsimage: Add an fdopen() interface to libfsimage
-  tools/pygrub: Expose libfsimage's fdopen() to python
-  tools/pygrub: Hook libfsimage's fdopen() to pygrub
-
- docs/man/xl.cfg.5.pod.in                    |   6 +-
- tools/libfsimage/common/fsimage.c           |  42 ++++++--
- tools/libfsimage/common/fsimage_grub.c      |   2 +-
- tools/libfsimage/common/fsimage_plugin.c    |   4 +-
- tools/libfsimage/common/fsimage_priv.h      |   3 +-
- tools/libfsimage/common/mapfile-GNU         |   2 +
- tools/libfsimage/common/mapfile-SunOS       |   2 +
- tools/libfsimage/common/xenfsimage.h        |   3 +
- tools/libfsimage/common/xenfsimage_plugin.h |   2 +-
- tools/libfsimage/ext2fs-lib/ext2fs-lib.c    |  14 ++-
- tools/pygrub/src/ExtLinuxConf.py            |  20 ++--
- tools/pygrub/src/GrubConf.py                |  29 ++---
- tools/pygrub/src/LiloConf.py                |  20 ++--
- tools/pygrub/src/fsimage/fsimage.c          |  33 ++++++
- tools/pygrub/src/pygrub                     | 113 +++++++-------------
- 15 files changed, 173 insertions(+), 122 deletions(-)
-
--- 
-2.34.1
+> Suggested-by: Christoph Hellwig <hch@lst.de>
+> Cc: stable@vger.kernel.org
+> 
+> ---
+>  drivers/xen/swiotlb-xen.c |    1 +
+>  1 file changed, 1 insertion(+)
+> 
+> Index: linux-stable/drivers/xen/swiotlb-xen.c
+> ===================================================================
+> --- linux-stable.orig/drivers/xen/swiotlb-xen.c	2023-11-03 17:57:18.000000000 +0100
+> +++ linux-stable/drivers/xen/swiotlb-xen.c	2023-11-06 15:30:59.000000000 +0100
+> @@ -405,4 +405,5 @@ const struct dma_map_ops xen_swiotlb_dma
+>  	.get_sgtable = dma_common_get_sgtable,
+>  	.alloc_pages = dma_common_alloc_pages,
+>  	.free_pages = dma_common_free_pages,
+> +	.max_mapping_size = swiotlb_max_mapping_size,
+>  };
 
 
