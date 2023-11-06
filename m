@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA792C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628374.979814 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AFBCC4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:08:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628382.979825 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05sf-0001a3-ER; Mon, 06 Nov 2023 20:07:29 +0000
+	id 1r05t9-0002Tv-SF; Mon, 06 Nov 2023 20:07:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628374.979814; Mon, 06 Nov 2023 20:07:29 +0000
+Received: by outflank-mailman (output) from mailman id 628382.979825; Mon, 06 Nov 2023 20:07:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05sf-0001Zw-Be; Mon, 06 Nov 2023 20:07:29 +0000
-Received: by outflank-mailman (input) for mailman id 628374;
- Mon, 06 Nov 2023 20:07:28 +0000
+	id 1r05t9-0002To-Ol; Mon, 06 Nov 2023 20:07:59 +0000
+Received: by outflank-mailman (input) for mailman id 628382;
+ Mon, 06 Nov 2023 20:07:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hN-0001Ig-FK
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:49 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1r05hq-0001Ig-MZ
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:56:18 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7797d83a-7cde-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 20:55:42 +0100 (CET)
+ id 8b4b9d71-7cde-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 20:56:16 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fc-00AkG3-38; Mon, 06 Nov 2023 19:54:02 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1r05fd-007tb0-50; Mon, 06 Nov 2023 19:54:02 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GOj-0X; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fd-001GPq-1J; Mon, 06 Nov 2023 19:54:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 7797d83a-7cde-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 8b4b9d71-7cde-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Jxij+S2rfNvx9smk2rq4E6p1vQ2IBZRLtKjjuNaESe0=; b=J6F/YyAH/jx1Xnu0nwmkVlLLZR
-	pEswynx78j+BxXrSprmpbB98QVZpHz5coTHg+rJye7skkR4cRnVBzVqPYFPCDGeFeGzhnKaMLTU3I
-	Na1KhproVJR0IY0PcJxyikz2ngGannldbG4kvqAY/Yvi8jUrenBSzQkHJ4yDz0BKxOkJeDBE7fZKD
-	7+mL/Nwc4AkGo9+OD7G3ww/v9KhV6/qaNWLOGw443LVqSWsZIXgysaC7vx2n7x2p6SXSkQ1lau6d7
-	1mQfWYIIRrGXl+afi28C//fzxyDmM63NpAifDYm5YjOFpOY2n5VvZP6W0LiAVPOZYnRQI+CT3dUFF
-	YYYIYP6w==;
+	bh=rm/pmqYI6mjjqqrOLmrc9x1lSoz+dJDC9gj42DRuQk0=; b=cu1GrDIiiNZSYoZ345aCg6DSo1
+	5BMiXQroAAhwpbCaUDnLB8Q0LNaJRZnP9h4Skn+gKHvDif78f/8+MPLyfoivx+ee7LTUdTv/Oznen
+	EjATyhIYuQKLJ/2kh6QnKX82u1VT2V6Hucs8vfcP5FVMnyGZZBKevhKIH/vw60+GjFuZIZrDAr9hu
+	KVnLqlvzYHKCJdpaCa7gregdtGgPPRne6UTtmOza/4qCAVsVHdstYnTd5W3+JtOMBMpYdX8jONzWY
+	aEO3ZNrFD6CM+ckLYrViJ5Ovh0fHLrTcS8q9s7SH3IdQ7qw4ZzIRABEmF00EaBpqNM+lee7i9OlsJ
+	QtTJmxhw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,178 +120,124 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 30/46] hw/arm: use qemu_configure_nic_device()
-Date: Mon,  6 Nov 2023 19:49:35 +0000
-Message-ID: <20231106195352.301038-31-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 44/46] hw/pci: remove pci_nic_init_nofail()
+Date: Mon,  6 Nov 2023 19:49:49 +0000
+Message-ID: <20231106195352.301038-45-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+This function is no longer used.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/mps2-tz.c     |  8 ++------
- hw/arm/msf2-soc.c    |  6 +-----
- hw/arm/musicpal.c    |  3 +--
- hw/arm/xilinx_zynq.c | 11 ++++-------
- hw/arm/xlnx-versal.c |  7 +------
- hw/arm/xlnx-zynqmp.c |  8 +-------
- 6 files changed, 10 insertions(+), 33 deletions(-)
+ hw/pci/pci.c         | 72 --------------------------------------------
+ include/hw/pci/pci.h |  3 --
+ 2 files changed, 75 deletions(-)
 
-diff --git a/hw/arm/mps2-tz.c b/hw/arm/mps2-tz.c
-index eae3639da2..6808143a07 100644
---- a/hw/arm/mps2-tz.c
-+++ b/hw/arm/mps2-tz.c
-@@ -499,14 +499,12 @@ static MemoryRegion *make_eth_dev(MPS2TZMachineState *mms, void *opaque,
-                                   const PPCExtraData *extradata)
- {
-     SysBusDevice *s;
--    NICInfo *nd = &nd_table[0];
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 5703266c0b..097609ca54 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -1853,78 +1853,6 @@ const pci_class_desc *get_class_desc(int class)
+     return desc;
+ }
  
-     /* In hardware this is a LAN9220; the LAN9118 is software compatible
-      * except that it doesn't support the checksum-offload feature.
-      */
--    qemu_check_nic_model(nd, "lan9118");
-     mms->lan9118 = qdev_new(TYPE_LAN9118);
--    qdev_set_nic_properties(mms->lan9118, nd);
-+    qemu_configure_nic_device(mms->lan9118, true, NULL);
- 
-     s = SYS_BUS_DEVICE(mms->lan9118);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -524,7 +522,6 @@ static MemoryRegion *make_eth_usb(MPS2TZMachineState *mms, void *opaque,
-      * irqs[] is the ethernet IRQ.
-      */
-     SysBusDevice *s;
--    NICInfo *nd = &nd_table[0];
- 
-     memory_region_init(&mms->eth_usb_container, OBJECT(mms),
-                        "mps2-tz-eth-usb-container", 0x200000);
-@@ -533,9 +530,8 @@ static MemoryRegion *make_eth_usb(MPS2TZMachineState *mms, void *opaque,
-      * In hardware this is a LAN9220; the LAN9118 is software compatible
-      * except that it doesn't support the checksum-offload feature.
-      */
--    qemu_check_nic_model(nd, "lan9118");
-     mms->lan9118 = qdev_new(TYPE_LAN9118);
--    qdev_set_nic_properties(mms->lan9118, nd);
-+    qemu_configure_nic_device(mms->lan9118, true, NULL);
- 
-     s = SYS_BUS_DEVICE(mms->lan9118);
-     sysbus_realize_and_unref(s, &error_fatal);
-diff --git a/hw/arm/msf2-soc.c b/hw/arm/msf2-soc.c
-index b5fe9f364d..35bf1d64e1 100644
---- a/hw/arm/msf2-soc.c
-+++ b/hw/arm/msf2-soc.c
-@@ -197,12 +197,8 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
-         g_free(bus_name);
-     }
- 
--    /* FIXME use qdev NIC properties instead of nd_table[] */
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], TYPE_MSS_EMAC);
--        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
--    }
-     dev = DEVICE(&s->emac);
-+    qemu_configure_nic_device(dev, true, NULL);
-     object_property_set_link(OBJECT(&s->emac), "ahb-bus",
-                              OBJECT(get_system_memory()), &error_abort);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->emac), errp)) {
-diff --git a/hw/arm/musicpal.c b/hw/arm/musicpal.c
-index 9703bfb97f..a60139ce53 100644
---- a/hw/arm/musicpal.c
-+++ b/hw/arm/musicpal.c
-@@ -1286,9 +1286,8 @@ static void musicpal_init(MachineState *machine)
-     }
-     sysbus_create_simple(TYPE_MV88W8618_FLASHCFG, MP_FLASHCFG_BASE, NULL);
- 
--    qemu_check_nic_model(&nd_table[0], "mv88w8618");
-     dev = qdev_new(TYPE_MV88W8618_ETH);
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, "mv88w8618");
-     object_property_set_link(OBJECT(dev), "dma-memory",
-                              OBJECT(get_system_memory()), &error_fatal);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
-index dbb9793aa1..73a6472b91 100644
---- a/hw/arm/xilinx_zynq.c
-+++ b/hw/arm/xilinx_zynq.c
-@@ -108,16 +108,13 @@ static void zynq_write_board_setup(ARMCPU *cpu,
- 
- static struct arm_boot_info zynq_binfo = {};
- 
--static void gem_init(NICInfo *nd, uint32_t base, qemu_irq irq)
-+static void gem_init(uint32_t base, qemu_irq irq)
- {
-     DeviceState *dev;
-     SysBusDevice *s;
- 
-     dev = qdev_new(TYPE_CADENCE_GEM);
--    if (nd->used) {
--        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
--        qdev_set_nic_properties(dev, nd);
--    }
-+    qemu_configure_nic_device(dev, true, NULL);
-     object_property_set_int(OBJECT(dev), "phy-addr", 7, &error_abort);
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -279,8 +276,8 @@ static void zynq_init(MachineState *machine)
-     sysbus_create_varargs("cadence_ttc", 0xF8002000,
-             pic[69-IRQ_OFFSET], pic[70-IRQ_OFFSET], pic[71-IRQ_OFFSET], NULL);
- 
--    gem_init(&nd_table[0], 0xE000B000, pic[54-IRQ_OFFSET]);
--    gem_init(&nd_table[1], 0xE000C000, pic[77-IRQ_OFFSET]);
-+    gem_init(0xE000B000, pic[54 - IRQ_OFFSET]);
-+    gem_init(0xE000C000, pic[77 - IRQ_OFFSET]);
- 
-     for (n = 0; n < 2; n++) {
-         int hci_irq = n ? 79 : 56;
-diff --git a/hw/arm/xlnx-versal.c b/hw/arm/xlnx-versal.c
-index 4f74a64a0d..c9561995ae 100644
---- a/hw/arm/xlnx-versal.c
-+++ b/hw/arm/xlnx-versal.c
-@@ -249,18 +249,13 @@ static void versal_create_gems(Versal *s, qemu_irq *pic)
-         static const int irqs[] = { VERSAL_GEM0_IRQ_0, VERSAL_GEM1_IRQ_0};
-         static const uint64_t addrs[] = { MM_GEM0, MM_GEM1 };
-         char *name = g_strdup_printf("gem%d", i);
--        NICInfo *nd = &nd_table[i];
-         DeviceState *dev;
-         MemoryRegion *mr;
- 
-         object_initialize_child(OBJECT(s), name, &s->lpd.iou.gem[i],
-                                 TYPE_CADENCE_GEM);
-         dev = DEVICE(&s->lpd.iou.gem[i]);
--        /* FIXME use qdev NIC properties instead of nd_table[] */
--        if (nd->used) {
--            qemu_check_nic_model(nd, "cadence_gem");
--            qdev_set_nic_properties(dev, nd);
--        }
-+        qemu_configure_nic_device(dev, true, NULL);
-         object_property_set_int(OBJECT(dev), "phy-addr", 23, &error_abort);
-         object_property_set_int(OBJECT(dev), "num-priority-queues", 2,
-                                 &error_abort);
-diff --git a/hw/arm/xlnx-zynqmp.c b/hw/arm/xlnx-zynqmp.c
-index 5905a33015..4f1714e4a1 100644
---- a/hw/arm/xlnx-zynqmp.c
-+++ b/hw/arm/xlnx-zynqmp.c
-@@ -616,13 +616,7 @@ static void xlnx_zynqmp_realize(DeviceState *dev, Error **errp)
-     }
- 
-     for (i = 0; i < XLNX_ZYNQMP_NUM_GEMS; i++) {
--        NICInfo *nd = &nd_table[i];
+-/* Initialize a PCI NIC.  */
+-PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+-                               const char *default_model,
+-                               const char *default_devaddr)
+-{
+-    const char *devaddr = nd->devaddr ? nd->devaddr : default_devaddr;
+-    GPtrArray *pci_nic_models;
+-    PCIBus *bus;
+-    PCIDevice *pci_dev;
+-    DeviceState *dev;
+-    int devfn;
+-    int i;
+-    int dom, busnr;
+-    unsigned slot;
 -
--        /* FIXME use qdev NIC properties instead of nd_table[] */
--        if (nd->used) {
--            qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
--            qdev_set_nic_properties(DEVICE(&s->gem[i]), nd);
+-    if (nd->model && !strcmp(nd->model, "virtio")) {
+-        g_free(nd->model);
+-        nd->model = g_strdup("virtio-net-pci");
+-    }
+-
+-    pci_nic_models = qemu_get_nic_models(TYPE_PCI_DEVICE);
+-
+-    if (qemu_show_nic_models(nd->model, (const char **)pci_nic_models->pdata)) {
+-        exit(0);
+-    }
+-
+-    i = qemu_find_nic_model(nd, (const char **)pci_nic_models->pdata,
+-                            default_model);
+-    if (i < 0) {
+-        exit(1);
+-    }
+-
+-    if (!rootbus) {
+-        error_report("No primary PCI bus");
+-        exit(1);
+-    }
+-
+-    assert(!rootbus->parent_dev);
+-
+-    if (!devaddr) {
+-        devfn = -1;
+-        busnr = 0;
+-    } else {
+-        if (pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
+-            error_report("Invalid PCI device address %s for device %s",
+-                         devaddr, nd->model);
+-            exit(1);
 -        }
-+        qemu_configure_nic_device(DEVICE(&s->gem[i]), true, NULL);
-         object_property_set_int(OBJECT(&s->gem[i]), "revision", GEM_REVISION,
-                                 &error_abort);
-         object_property_set_int(OBJECT(&s->gem[i]), "phy-addr", 23,
+-
+-        if (dom != 0) {
+-            error_report("No support for non-zero PCI domains");
+-            exit(1);
+-        }
+-
+-        devfn = PCI_DEVFN(slot, 0);
+-    }
+-
+-    bus = pci_find_bus_nr(rootbus, busnr);
+-    if (!bus) {
+-        error_report("Invalid PCI device address %s for device %s",
+-                     devaddr, nd->model);
+-        exit(1);
+-    }
+-
+-    pci_dev = pci_new(devfn, nd->model);
+-    dev = &pci_dev->qdev;
+-    qdev_set_nic_properties(dev, nd);
+-    pci_realize_and_unref(pci_dev, bus, &error_fatal);
+-    g_ptr_array_free(pci_nic_models, true);
+-    return pci_dev;
+-}
+-
+ void pci_init_nic_devices(PCIBus *bus, const char *default_model)
+ {
+     qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index 684d49bdcd..420cfbb5f8 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -314,9 +314,6 @@ void pci_device_set_intx_routing_notifier(PCIDevice *dev,
+                                           PCIINTxRoutingNotifier notifier);
+ void pci_device_reset(PCIDevice *dev);
+ 
+-PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+-                               const char *default_model,
+-                               const char *default_devaddr);
+ void pci_init_nic_devices(PCIBus *bus, const char *default_model);
+ bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
+                           const char *alias, const char *devaddr);
 -- 
 2.41.0
 
