@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F16AC4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:56:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628293.979628 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A2B0C4167B
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:56:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628299.979692 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hI-0003Lu-BM; Mon, 06 Nov 2023 19:55:44 +0000
+	id 1r05hR-0005Up-DY; Mon, 06 Nov 2023 19:55:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628293.979628; Mon, 06 Nov 2023 19:55:44 +0000
+Received: by outflank-mailman (output) from mailman id 628299.979692; Mon, 06 Nov 2023 19:55:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hH-0003Gu-PV; Mon, 06 Nov 2023 19:55:43 +0000
-Received: by outflank-mailman (input) for mailman id 628293;
- Mon, 06 Nov 2023 19:55:41 +0000
+	id 1r05hQ-0005OW-Po; Mon, 06 Nov 2023 19:55:52 +0000
+Received: by outflank-mailman (input) for mailman id 628299;
+ Mon, 06 Nov 2023 19:55:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hF-00024f-ND
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:41 +0000
+ id 1r05hI-00024f-Nj
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:44 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 753ec876-7cde-11ee-98da-6d05b1d4d9a1;
+ id 7587d4b8-7cde-11ee-98da-6d05b1d4d9a1;
  Mon, 06 Nov 2023 20:55:39 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fc-007tag-Lr; Mon, 06 Nov 2023 19:54:01 +0000
+ id 1r05fa-007taN-LN; Mon, 06 Nov 2023 19:53:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GP1-1f; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fa-001GNj-2g; Mon, 06 Nov 2023 19:53:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 753ec876-7cde-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 7587d4b8-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=wozYunS9mL+E+NW7be8DLpB1Vtj79zSyr6dMjYfNaXI=; b=IoLpE9gkE9J0qJIMBKoLN90jlx
-	dKMP44wh/kmWLVGWQCMB36Wv1ZZxqGgjjpQRZKpKfNoKjUQp6AKep39tQtJrYYYL1KXOun27Tm2GN
-	QPhq6Anifsq/JrWLTIvLeUf8+PeQuWGUxsCYIVdofOeqgT/Y3R2i7Ceuqu+p5rEqsxbFErCJgRe8l
-	tjPGWVxf4PIHCp702jkTJGOC7W3uGhRjs7Dmu2eHpX8TfsYQ1Z9Dy665uJkun4qXq4HIkqgvzKhbm
-	E16+bEzNUcXzYTZFZQCI8g9JOuLpX6dxzYS4NTMTL6BBFggj2Zc8r1GjsfOAnydeobZejFaVVLxr4
-	k55ywrFg==;
+	bh=5bcCMvV82e1Sve2BVcG15Kkp2UpIXLhocOoMJ70sRvM=; b=MkbWAP53t45zN+J3OWeTYLRWqY
+	IxlT+triXTTst7xf9SvNcu8e8o7Y0xaQ4Ne6iu1sC6cAx4OcKM5enOL97HpiQYuuSwPUIVIF+5TdK
+	MtcKcGgKJ3l5ADxs/LybZam94ZFFFa9iaUGNCykVTVjEFYxwZuyI4Bqgmtz7xhrpJh8nXM7ojZdSr
+	uoG91AJ6DjX9JRGuYnwh0gBz5OP/QET0xcxH8+d91nQT+Z0g5ZEonDhQuPKD5idwhniGeKgJcqRRZ
+	qBTybWjW24MrUYxXRNdxTR2jofI8qvQoAw3+ygenrcCyriRs/Lu1txhaK9XjnuhVc+hfjrtDrBAd3
+	91AbXCAA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 34/46] hw/microblaze: use qemu_configure_nic_device()
-Date: Mon,  6 Nov 2023 19:49:39 +0000
-Message-ID: <20231106195352.301038-35-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 17/46] hw/ppc: use pci_init_nic_devices()
+Date: Mon,  6 Nov 2023 19:49:22 +0000
+Message-ID: <20231106195352.301038-18-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -135,46 +135,89 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/microblaze/petalogix_ml605_mmu.c      | 3 +--
- hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ hw/ppc/e500.c          |  4 +---
+ hw/ppc/mac_newworld.c  |  4 +---
+ hw/ppc/mac_oldworld.c  |  4 +---
+ hw/ppc/ppc440_bamboo.c | 14 +++++---------
+ 4 files changed, 8 insertions(+), 18 deletions(-)
 
-diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-index fb7889cf67..0f5fabc32e 100644
---- a/hw/microblaze/petalogix_ml605_mmu.c
-+++ b/hw/microblaze/petalogix_ml605_mmu.c
-@@ -133,7 +133,6 @@ petalogix_ml605_init(MachineState *machine)
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
+index e04114fb3c..f62eeb3411 100644
+--- a/hw/ppc/e500.c
++++ b/hw/ppc/e500.c
+@@ -1075,9 +1075,7 @@ void ppce500_init(MachineState *machine)
  
-     /* axi ethernet and dma initialization. */
--    qemu_check_nic_model(&nd_table[0], "xlnx.axi-ethernet");
-     eth0 = qdev_new("xlnx.axi-ethernet");
-     dma = qdev_new("xlnx.axi-dma");
+     if (pci_bus) {
+         /* Register network interfaces. */
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-        }
++        pci_init_nic_devices(pci_bus, mc->default_nic);
+     }
  
-@@ -145,7 +144,7 @@ petalogix_ml605_init(MachineState *machine)
-                                   "axistream-connected-target", NULL);
-     cs = object_property_get_link(OBJECT(dma),
-                                   "axistream-control-connected-target", NULL);
--    qdev_set_nic_properties(eth0, &nd_table[0]);
-+    qemu_configure_nic_device(eth0, true, NULL);
-     qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
-     qdev_prop_set_uint32(eth0, "txmem", 0x1000);
-     object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
-diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-index 505639c298..dad46bd7f9 100644
---- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
-+++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-@@ -114,9 +114,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+     /* Register spinning region */
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index 535710314a..b36dbaf2b6 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
+         graphic_depth = 15;
+     }
  
--    qemu_check_nic_model(&nd_table[0], "xlnx.xps-ethernetlite");
-     dev = qdev_new("xlnx.xps-ethernetlite");
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, NULL);
-     qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
-     qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* The NewWorld NVRAM is not located in the MacIO device */
+     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index 9acc7adfc9..1981d3d8f6 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
+ 
+     pci_vga_init(pci_bus);
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* MacIO IDE */
+     ide_drive_get(hd, ARRAY_SIZE(hd));
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index a189942de4..c75c3083e6 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
+     DeviceState *uicdev;
+     SysBusDevice *uicsbd;
+     int success;
+-    int i;
+ 
+     if (kvm_enabled()) {
+         error_report("machine %s does not support the KVM accelerator",
+@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
+     }
+ 
+     if (pcibus) {
+-        /* Register network interfaces. */
+-        for (i = 0; i < nb_nics; i++) {
+-            /*
+-             * There are no PCI NICs on the Bamboo board, but there are
+-             * PCI slots, so we can pick whatever default model we want.
+-             */
+-            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
+-        }
++        /*
++         * There are no PCI NICs on the Bamboo board, but there are
++         * PCI slots, so we can pick whatever default model we want.
++         */
++        pci_init_nic_devices(pcibus, mc->default_nic);
+     }
+ 
+     /* Load kernel. */
 -- 
 2.41.0
 
