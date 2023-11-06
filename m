@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 490A4C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:09:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628423.979934 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE1AC4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:09:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628421.979925 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05ug-0000EA-2b; Mon, 06 Nov 2023 20:09:34 +0000
+	id 1r05ub-0008Gs-Qt; Mon, 06 Nov 2023 20:09:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628423.979934; Mon, 06 Nov 2023 20:09:34 +0000
+Received: by outflank-mailman (output) from mailman id 628421.979925; Mon, 06 Nov 2023 20:09:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05uf-0000E3-Ve; Mon, 06 Nov 2023 20:09:33 +0000
-Received: by outflank-mailman (input) for mailman id 628423;
- Mon, 06 Nov 2023 20:09:32 +0000
+	id 1r05ub-0008Gl-NR; Mon, 06 Nov 2023 20:09:29 +0000
+Received: by outflank-mailman (input) for mailman id 628421;
+ Mon, 06 Nov 2023 20:09:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hM-0001Ig-Ex
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:48 +0000
+ id 1r05hL-0001Ig-Ei
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:47 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 775f5d78-7cde-11ee-9b0e-b553b5be7939;
+ id 777748b8-7cde-11ee-9b0e-b553b5be7939;
  Mon, 06 Nov 2023 20:55:42 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fa-00AkFd-1p; Mon, 06 Nov 2023 19:53:58 +0000
+ id 1r05fe-00AkGF-0J; Mon, 06 Nov 2023 19:54:03 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fZ-001GMw-2O; Mon, 06 Nov 2023 19:53:57 +0000
+ Hat Linux)) id 1r05fd-001GPd-0F; Mon, 06 Nov 2023 19:54:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 775f5d78-7cde-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 777748b8-7cde-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=udFQWarJn+hEJgz2ZpM+rMCQmr2oQkjwNUAfu2C/g0c=; b=m+mvt0iBoqp36d4xmxonPeSMsr
-	F812/mq4W1OECg+8jFEzI/RIr5PILlCWSlJleBGLINYomXUm1eOlLurzG7cNRgSZrct3Af/5gs49Q
-	+UuzWqNCu2e2oQAhmBYcgLhUqbYXVdTrsBZIaOw923YVo0gbIeDChkloZgySxkRbAbrft0hJU43Vh
-	0CrD6u56IBLuWxT3KclSCBlRkZqXebOg/LwUfXXK9IhVWpxZ9qnidqLNmnalb2cS7RwxfDIduIIP+
-	W/3NXOhLwC1SBGdO4UQitet2UTqfB1hG19ZOu7xcKsHPPINvm3npSnyy43TA916uWXsNCvBCscHed
-	+y5FSF6w==;
+	bh=6llESs8/oOse6Qm5wJ5lTY9fMB0QkZmfTge4Rjf6G8M=; b=buYUSYgObmiJkgEwvOBOxICL5m
+	Bu6dMQKL5r8EhzkrGEb6+QQLWhg4/ivpdi4hYISAKXzzl84UBkMxM8nA9pLswCfwEoDVSPEJMtJPS
+	EobPO3/gZvrfN7EDLA3nJRcnsc1B+SNMzoJ9gpDbQOgvvyxCdFzM821lKBfrfAv9Epn/H0ylfjXsX
+	o1vuclcKrn33Xg2SnDEzyMrNKJghJcdDfgLR69P38aiPUYnxsOieXhd8i91CuR4hgZoSLvwd20pBa
+	UJKSMbQ3YOL87CNsct14MZJgcgnyv4BHk+8Mbr8CZLSJajVwO26WGABsw3+99noLxbwxJqhY2MbC2
+	+d5TIpng==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 06/46] hw/xen: use qemu_create_nic_bus_devices() to instantiate Xen NICs
-Date: Mon,  6 Nov 2023 19:49:11 +0000
-Message-ID: <20231106195352.301038-7-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 41/46] hw/sparc/sun4m: use qemu_find_nic_info()
+Date: Mon,  6 Nov 2023 19:49:46 +0000
+Message-ID: <20231106195352.301038-42-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -133,234 +133,81 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-When instantiating XenBus itself, for each NIC which is configured with
-either the model unspecified, or set to to "xen" or "xen-net-device",
-create a corresponding xen-net-device for it.
-
-Now we can revert the previous more hackish version which relied on the
-platform code explicitly registering the NICs on its own XenBus, having
-returned the BusState* from xen_bus_init() itself.
-
-This also fixes the setup for Xen PV guests, which was previously broken
-in various ways and never actually managed to peer with the netdev.
+Obtain the MAC address from the NIC configuration if there is one, or
+generate one explicitly so that it can be placed in the PROM.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/pc.c                        | 13 ++-----------
- hw/i386/pc_piix.c                   |  2 +-
- hw/i386/pc_q35.c                    |  2 +-
- hw/xen/xen-bus.c                    |  6 ++++--
- hw/xen/xen_devconfig.c              | 25 -------------------------
- hw/xenpv/xen_machine_pv.c           |  9 ---------
- include/hw/i386/pc.h                |  4 +---
- include/hw/xen/xen-bus.h            |  2 +-
- include/hw/xen/xen-legacy-backend.h |  1 -
- 9 files changed, 10 insertions(+), 54 deletions(-)
+ hw/sparc/sun4m.c | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 4078d2d231..86abba61c0 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -1262,7 +1262,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-         if (pcms->bus) {
-             pci_create_simple(pcms->bus, -1, "xen-platform");
-         }
--        pcms->xenbus = xen_bus_init();
-+        xen_bus_init();
-         xen_be_init();
-     }
- #endif
-@@ -1290,8 +1290,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-                     pcms->vmport != ON_OFF_AUTO_ON);
- }
+diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+index 17bf5f2879..75b0c0ff7a 100644
+--- a/hw/sparc/sun4m.c
++++ b/hw/sparc/sun4m.c
+@@ -299,13 +299,15 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
  
--void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
--                 BusState *xen_bus)
-+void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus)
+ static void *sparc32_dma_init(hwaddr dma_base,
+                               hwaddr esp_base, qemu_irq espdma_irq,
+-                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
++                              hwaddr le_base, qemu_irq ledma_irq,
++                              MACAddr *mac)
  {
-     MachineClass *mc = MACHINE_CLASS(pcmc);
-     bool default_is_ne2k = g_str_equal(mc->default_nic, TYPE_ISA_NE2000);
-@@ -1299,14 +1298,6 @@ void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
+     DeviceState *dma;
+     ESPDMADeviceState *espdma;
+     LEDMADeviceState *ledma;
+     SysBusESPState *esp;
+     SysBusPCNetState *lance;
++    NICInfo *nd = qemu_find_nic_info("lance", true, NULL);
  
-     rom_set_order_override(FW_CFG_ORDER_OVERRIDE_NIC);
+     dma = qdev_new(TYPE_SPARC32_DMA);
+     espdma = SPARC32_ESPDMA_DEVICE(object_resolve_path_component(
+@@ -320,7 +322,14 @@ static void *sparc32_dma_init(hwaddr dma_base,
  
--    if (xen_bus) {
--        while (nc = qemu_find_nic_info("xen-net-device", true, NULL)) {
--            DeviceState *dev = qdev_new("xen-net-device");
--            qdev_set_nic_properties(dev, nd);
--            qdev_realize_and_unref(dev, xen_bus, &error_fatal);
--        }
--    }
--
-     while ((nd = qemu_find_nic_info(TYPE_ISA_NE2000, default_is_ne2k, NULL))) {
-         pc_init_ne2k_isa(isa_bus, nd);
-     }
-diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index eace854335..26e161beb9 100644
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -342,7 +342,7 @@ static void pc_init1(MachineState *machine,
-     pc_basic_device_init(pcms, isa_bus, x86ms->gsi, rtc_state, true,
-                          0x4);
+     lance = SYSBUS_PCNET(object_resolve_path_component(
+                          OBJECT(ledma), "lance"));
+-    qdev_set_nic_properties(DEVICE(lance), nd);
++
++    if (nd) {
++        qdev_set_nic_properties(DEVICE(lance), nd);
++        memcpy(mac->a, nd->macaddr.a, sizeof(mac->a));
++    } else {
++        qemu_macaddr_default_if_unset(mac);
++        qdev_prop_set_macaddr(DEVICE(lance), "mac", mac->a);
++    }
  
--    pc_nic_init(pcmc, isa_bus, pci_bus, pcms->xenbus);
-+    pc_nic_init(pcmc, isa_bus, pci_bus);
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
+@@ -832,7 +841,7 @@ static void sun4m_hw_init(MachineState *machine)
+     unsigned int smp_cpus = machine->smp.cpus;
+     unsigned int max_cpus = machine->smp.max_cpus;
+     HostMemoryBackend *ram_memdev = machine->memdev;
+-    NICInfo *nd = &nd_table[0];
++    MACAddr hostid;
  
-     if (pcmc->pci_enabled) {
-         pc_cmos_init(pcms, idebus[0], idebus[1], rtc_state);
-diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
-index 4f3e5412f6..597943ff1b 100644
---- a/hw/i386/pc_q35.c
-+++ b/hw/i386/pc_q35.c
-@@ -340,7 +340,7 @@ static void pc_q35_init(MachineState *machine)
- 
-     /* the rest devices to which pci devfn is automatically assigned */
-     pc_vga_init(isa_bus, host_bus);
--    pc_nic_init(pcmc, isa_bus, host_bus, pcms->xenbus);
-+    pc_nic_init(pcmc, isa_bus, host_bus);
- 
-     if (machine->nvdimms_state->is_enabled) {
-         nvdimm_init_acpi_state(machine->nvdimms_state, system_io,
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index 4973e7d9c9..fb82cc33e4 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -19,6 +19,7 @@
- #include "qapi/error.h"
- #include "qapi/qmp/qdict.h"
- #include "sysemu/sysemu.h"
-+#include "net/net.h"
- #include "trace.h"
- 
- static char *xen_device_get_backend_path(XenDevice *xendev)
-@@ -1133,7 +1134,7 @@ static void xen_register_types(void)
- 
- type_init(xen_register_types)
- 
--BusState *xen_bus_init(void)
-+void xen_bus_init(void)
- {
-     DeviceState *dev = qdev_new(TYPE_XEN_BRIDGE);
-     BusState *bus = qbus_new(TYPE_XEN_BUS, dev, NULL);
-@@ -1141,5 +1142,6 @@ BusState *xen_bus_init(void)
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-     qbus_set_bus_hotplug_handler(bus);
- 
--    return bus;
-+    qemu_create_nic_bus_devices(bus, TYPE_XEN_DEVICE, "xen-net-device",
-+                                "xen", "xen-net-device");
- }
-diff --git a/hw/xen/xen_devconfig.c b/hw/xen/xen_devconfig.c
-index 3f77c675c6..2150869f60 100644
---- a/hw/xen/xen_devconfig.c
-+++ b/hw/xen/xen_devconfig.c
-@@ -46,31 +46,6 @@ static int xen_config_dev_all(char *fe, char *be)
- 
- /* ------------------------------------------------------------- */
- 
--int xen_config_dev_nic(NICInfo *nic)
--{
--    char fe[256], be[256];
--    char mac[20];
--    int vlan_id = -1;
--
--    net_hub_id_for_client(nic->netdev, &vlan_id);
--    snprintf(mac, sizeof(mac), "%02x:%02x:%02x:%02x:%02x:%02x",
--             nic->macaddr.a[0], nic->macaddr.a[1], nic->macaddr.a[2],
--             nic->macaddr.a[3], nic->macaddr.a[4], nic->macaddr.a[5]);
--    xen_pv_printf(NULL, 1, "config nic %d: mac=\"%s\"\n", vlan_id, mac);
--    xen_config_dev_dirs("vif", "qnic", vlan_id, fe, be, sizeof(fe));
--
--    /* frontend */
--    xenstore_write_int(fe, "handle",     vlan_id);
--    xenstore_write_str(fe, "mac",        mac);
--
--    /* backend */
--    xenstore_write_int(be, "handle",     vlan_id);
--    xenstore_write_str(be, "mac",        mac);
--
--    /* common stuff */
--    return xen_config_dev_all(fe, be);
--}
--
- int xen_config_dev_vfb(int vdev, const char *type)
- {
-     char fe[256], be[256];
-diff --git a/hw/xenpv/xen_machine_pv.c b/hw/xenpv/xen_machine_pv.c
-index 9f9f137f99..1130d1a147 100644
---- a/hw/xenpv/xen_machine_pv.c
-+++ b/hw/xenpv/xen_machine_pv.c
-@@ -32,8 +32,6 @@
- 
- static void xen_init_pv(MachineState *machine)
- {
--    int i;
--
-     setup_xen_backend_ops();
- 
-     /* Initialize backend core & drivers */
-@@ -62,13 +60,6 @@ static void xen_init_pv(MachineState *machine)
-         vga_interface_created = true;
+     if (machine->ram_size > hwdef->max_mem) {
+         error_report("Too much memory for this machine: %" PRId64 ","
+@@ -893,10 +902,9 @@ static void sun4m_hw_init(MachineState *machine)
+                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
      }
  
--    /* configure nics */
--    for (i = 0; i < nb_nics; i++) {
--        if (!nd_table[i].model || 0 != strcmp(nd_table[i].model, "xen"))
--            continue;
--        xen_config_dev_nic(nd_table + i);
--    }
--
-     xen_bus_init();
+-    qemu_check_nic_model(nd, TYPE_LANCE);
+     sparc32_dma_init(hwdef->dma_base,
+                      hwdef->esp_base, slavio_irq[18],
+-                     hwdef->le_base, slavio_irq[16], nd);
++                     hwdef->le_base, slavio_irq[16], &hostid);
  
-     /* config cleanup hook */
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index a10ceeabbf..29a9724524 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -33,7 +33,6 @@ typedef struct PCMachineState {
+     if (graphic_depth != 8 && graphic_depth != 24) {
+         error_report("Unsupported depth: %d", graphic_depth);
+@@ -1048,7 +1056,7 @@ static void sun4m_hw_init(MachineState *machine)
+                                     machine->initrd_filename,
+                                     machine->ram_size, &initrd_size);
  
-     /* Pointers to devices and objects: */
-     PCIBus *bus;
--    BusState *xenbus;
-     I2CBus *smbus;
-     PFlashCFI01 *flash[2];
-     ISADevice *pcspk;
-@@ -185,8 +184,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
- void pc_cmos_init(PCMachineState *pcms,
-                   BusState *ide0, BusState *ide1,
-                   ISADevice *s);
--void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
--                 BusState *xen_bus);
-+void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus);
- 
- void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs);
- 
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index 334ddd1ff6..38d40afa37 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -75,7 +75,7 @@ struct XenBusClass {
- OBJECT_DECLARE_TYPE(XenBus, XenBusClass,
-                     XEN_BUS)
- 
--BusState *xen_bus_init(void);
-+void xen_bus_init(void);
- 
- void xen_device_backend_set_state(XenDevice *xendev,
-                                   enum xenbus_state state);
-diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
-index fc42146bc2..2cca174778 100644
---- a/include/hw/xen/xen-legacy-backend.h
-+++ b/include/hw/xen/xen-legacy-backend.h
-@@ -81,7 +81,6 @@ extern struct XenDevOps xen_usb_ops;          /* xen-usb.c         */
- 
- /* configuration (aka xenbus setup) */
- void xen_config_cleanup(void);
--int xen_config_dev_nic(NICInfo *nic);
- int xen_config_dev_vfb(int vdev, const char *type);
- int xen_config_dev_vkbd(int vdev);
- int xen_config_dev_console(int vdev);
+-    nvram_init(nvram, (uint8_t *)&nd->macaddr, machine->kernel_cmdline,
++    nvram_init(nvram, hostid.a, machine->kernel_cmdline,
+                machine->boot_config.order, machine->ram_size, kernel_size,
+                graphic_width, graphic_height, graphic_depth,
+                hwdef->nvram_machine_id, "Sun4m");
 -- 
 2.41.0
 
