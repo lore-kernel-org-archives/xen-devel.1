@@ -4,48 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E86C4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 14:44:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628110.979235 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6EAEC4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 15:05:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628133.979250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r00q6-0003ns-Cl; Mon, 06 Nov 2023 14:44:30 +0000
+	id 1r01AE-0008BY-DP; Mon, 06 Nov 2023 15:05:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628110.979235; Mon, 06 Nov 2023 14:44:30 +0000
+Received: by outflank-mailman (output) from mailman id 628133.979250; Mon, 06 Nov 2023 15:05:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r00q6-0003nh-9X; Mon, 06 Nov 2023 14:44:30 +0000
-Received: by outflank-mailman (input) for mailman id 628110;
- Mon, 06 Nov 2023 14:44:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r01AE-0008BE-9A; Mon, 06 Nov 2023 15:05:18 +0000
+Received: by outflank-mailman (input) for mailman id 628133;
+ Mon, 06 Nov 2023 15:05:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wwoJ=GT=infradead.org=prvs=667a8cc2a=dwmw2@srs-se1.protection.inumbo.net>)
- id 1r00hy-0008Lv-7H
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 14:36:06 +0000
-Received: from smtp-fw-9105.amazon.com (smtp-fw-9105.amazon.com
- [207.171.188.204]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d035709b-7cb1-11ee-98da-6d05b1d4d9a1;
- Mon, 06 Nov 2023 15:36:04 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-pdx-2b-m6i4x-ed19f671.us-west-2.amazon.com)
- ([10.25.36.210]) by smtp-border-fw-9105.sea19.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2023 14:36:04 +0000
-Received: from smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev
- (pdx2-ws-svc-p26-lb5-vlan3.pdx.amazon.com [10.39.38.70])
- by email-inbound-relay-pdx-2b-m6i4x-ed19f671.us-west-2.amazon.com (Postfix)
- with ESMTPS id 57FFA8AE35; Mon,  6 Nov 2023 14:36:01 +0000 (UTC)
-Received: from EX19MTAUWA001.ant.amazon.com [10.0.7.35:51494]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.21.17:2525]
- with esmtp (Farcaster)
- id 4a8f9d97-7809-40e0-a295-df935d3adabd; Mon, 6 Nov 2023 14:36:00 +0000 (UTC)
-Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
- EX19MTAUWA001.ant.amazon.com (10.250.64.217) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.39; Mon, 6 Nov 2023 14:35:54 +0000
-Received: from u3832b3a9db3152.ant.amazon.com (10.106.83.6) by
- mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP Server id
- 15.2.1118.39 via Frontend Transport; Mon, 6 Nov 2023 14:35:51 +0000
+ <SRS0=9eGT=GT=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1r01AD-000892-0u
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 15:05:17 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e39219c9-7cb5-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 16:05:14 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40891d38e3fso32313555e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Nov 2023 07:05:14 -0800 (PST)
+Received: from EMEAENGAAD19049.citrite.net ([2.223.46.215])
+ by smtp.gmail.com with ESMTPSA id
+ q8-20020a05600c46c800b0040776008abdsm12507392wmo.40.2023.11.06.07.05.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Nov 2023 07:05:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,177 +45,93 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d035709b-7cb1-11ee-98da-6d05b1d4d9a1
-X-IronPort-AV: E=Sophos;i="6.03,281,1694736000"; 
-   d="scan'208";a="683074547"
-X-Farcaster-Flow-ID: 4a8f9d97-7809-40e0-a295-df935d3adabd
-From: David Woodhouse <dwmw2@infradead.org>
-To: <qemu-devel@nongnu.org>
-CC: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, Peter
- Maydell <peter.maydell@linaro.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, Paul
- Durrant <paul@xen.org>, =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?=
-	<marcandre.lureau@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Richard
- Henderson <richard.henderson@linaro.org>, Eduardo Habkost
-	<eduardo@habkost.net>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel
- Apfelbaum <marcel.apfelbaum@gmail.com>, Jason Wang <jasowang@redhat.com>,
-	Marcelo Tosatti <mtosatti@redhat.com>, <qemu-block@nongnu.org>,
-	<xen-devel@lists.xenproject.org>, <kvm@vger.kernel.org>
-Subject: [PATCH v4 13/17] hw/i386/pc: support '-nic' for xen-net-device
-Date: Mon, 6 Nov 2023 14:35:03 +0000
-Message-ID: <20231106143507.1060610-14-dwmw2@infradead.org>
+X-Inumbo-ID: e39219c9-7cb5-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1699283114; x=1699887914; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DxkVS4hBSJv6X7HlZm/O6maHe61jzX44hOr03J+Zv60=;
+        b=Hp5fJYZqVFhKh1upbu/mARsyNOFDsVIsXDG4i2cllh2xoZyr9D0wuJ4DgqXbZqU+KQ
+         vLvmqOO++8DubvoEQq+Ay7GnyDYefyTDd/7/E0LwTMAmHBwMTK9xOVKhQ36dhUHVG7A0
+         3pW3eq6qloksvX7Ge3xXRBOwD/t92SXdKvhrw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699283114; x=1699887914;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=DxkVS4hBSJv6X7HlZm/O6maHe61jzX44hOr03J+Zv60=;
+        b=vqDp8FzflJrY0LzqRMdifTRY9Wo0dqM9lK1gu+sNKPJ/eQR1FXYcKWaFh6xf5EMkbR
+         TiZ1zjuMMT+64XC43DBYBlCpDPKGaqq97upuS834Rm/pTuGsRmqgrqbPXxsnLZzNaaU2
+         U7xj2O1EGQh4wVKzxH/DW5g5Su5MDCg9SdmxJFz3vdn7UgqIcSGzNP5sb3qpzAEYpa6P
+         BrRX2NtCjkNoiHYl4nxOIckcGX3NE1Oiw8n4wjpUXr3IKehlUDHVZ15Arq9rx6HuAt0q
+         WTduexXb/OjdN0avakyTC6QrD9wWM3MjZcLMhdbDMONhcXr4pLRldFw7Z2QNDD31EY4A
+         8l0g==
+X-Gm-Message-State: AOJu0YwqzbrBRDtNk3Wx6niMaAis0XlCVE/JVrDLxaWeCFuz1wZuRA7q
+	whrsgKjCNEmIjNPP297u4W51L59cak9ENoZ4k3I=
+X-Google-Smtp-Source: AGHT+IHK5/VVMvkWkg0o/sGZuDH2oGFdVWlv421KRFLy61nmtP55QYZaQVd3uX7wVa/c5bsIloEYnA==
+X-Received: by 2002:a05:600c:470e:b0:408:4f50:9602 with SMTP id v14-20020a05600c470e00b004084f509602mr25649437wmo.12.1699283113467;
+        Mon, 06 Nov 2023 07:05:13 -0800 (PST)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH 1/6] tools/pygrub: Set mount propagation to private recursively
+Date: Mon,  6 Nov 2023 15:05:03 +0000
+Message-Id: <20231106150508.22665-2-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231106143507.1060610-1-dwmw2@infradead.org>
-References: <20231106143507.1060610-1-dwmw2@infradead.org>
+In-Reply-To: <20231106150508.22665-1-alejandro.vallejo@cloud.com>
+References: <20231106150508.22665-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Precedence: Bulk
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+This is important in order for every mount done inside a mount namespace to
+go away after the namespace itself goes away. The comment referring to
+unreliability in Linux 4.19 was just wrong.
 
-The default NIC creation seems a bit hackish to me. I don't understand
-why each platform has to call pci_nic_init_nofail() from a point in the
-code where it actually has a pointer to the PCI bus, and then we have
-the special cases for things like ne2k_isa.
+This patch sets the story straight and makes the depriv pygrub a bit more
+confined should a layer of the onion be vulnerable.
 
-If qmp_device_add() can *find* the appropriate bus and instantiate
-the device on it, why can't we just do that from generic code for
-creating the default NICs too?
-
-But that isn't a yak I want to shave today. Add a xenbus field to the
-PCMachineState so that it can make its way from pc_basic_device_init()
-to pc_nic_init() and be handled as a special case like ne2k_isa is.
-
-Now we can launch emulated Xen guests with '-nic user'.
-
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- hw/i386/pc.c             | 11 ++++++++---
- hw/i386/pc_piix.c        |  2 +-
- hw/i386/pc_q35.c         |  2 +-
- hw/xen/xen-bus.c         |  4 +++-
- include/hw/i386/pc.h     |  4 +++-
- include/hw/xen/xen-bus.h |  2 +-
- 6 files changed, 17 insertions(+), 8 deletions(-)
+ tools/pygrub/src/pygrub | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 6031234a73..c2bc3fa52d 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -1259,7 +1259,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-         if (pcms->bus) {
-             pci_create_simple(pcms->bus, -1, "xen-platform");
-         }
--        xen_bus_init();
-+        pcms->xenbus = xen_bus_init();
-         xen_be_init();
-     }
- #endif
-@@ -1287,7 +1287,8 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-                     pcms->vmport != ON_OFF_AUTO_ON);
- }
+diff --git a/tools/pygrub/src/pygrub b/tools/pygrub/src/pygrub
+index 541e562327..08540ad288 100755
+--- a/tools/pygrub/src/pygrub
++++ b/tools/pygrub/src/pygrub
+@@ -55,6 +55,12 @@ def unshare(flags):
+     if unshare(flags) < 0:
+         raise OSError(ctypes.get_errno(), os.strerror(ctypes.get_errno()))
  
--void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus)
-+void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
-+                 BusState *xen_bus)
- {
-     MachineClass *mc = MACHINE_CLASS(pcmc);
-     int i;
-@@ -1297,7 +1298,11 @@ void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus)
-         NICInfo *nd = &nd_table[i];
-         const char *model = nd->model ? nd->model : mc->default_nic;
- 
--        if (g_str_equal(model, "ne2k_isa")) {
-+        if (xen_bus && (!nd->model || g_str_equal(model, "xen-net-device"))) {
-+            DeviceState *dev = qdev_new("xen-net-device");
-+            qdev_set_nic_properties(dev, nd);
-+            qdev_realize_and_unref(dev, xen_bus, &error_fatal);
-+        } else if (g_str_equal(model, "ne2k_isa")) {
-             pc_init_ne2k_isa(isa_bus, nd);
-         } else {
-             pci_nic_init_nofail(nd, pci_bus, model, NULL);
-diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index 26e161beb9..eace854335 100644
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -342,7 +342,7 @@ static void pc_init1(MachineState *machine,
-     pc_basic_device_init(pcms, isa_bus, x86ms->gsi, rtc_state, true,
-                          0x4);
- 
--    pc_nic_init(pcmc, isa_bus, pci_bus);
-+    pc_nic_init(pcmc, isa_bus, pci_bus, pcms->xenbus);
- 
-     if (pcmc->pci_enabled) {
-         pc_cmos_init(pcms, idebus[0], idebus[1], rtc_state);
-diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
-index 597943ff1b..4f3e5412f6 100644
---- a/hw/i386/pc_q35.c
-+++ b/hw/i386/pc_q35.c
-@@ -340,7 +340,7 @@ static void pc_q35_init(MachineState *machine)
- 
-     /* the rest devices to which pci devfn is automatically assigned */
-     pc_vga_init(isa_bus, host_bus);
--    pc_nic_init(pcmc, isa_bus, host_bus);
-+    pc_nic_init(pcmc, isa_bus, host_bus, pcms->xenbus);
- 
-     if (machine->nvdimms_state->is_enabled) {
-         nvdimm_init_acpi_state(machine->nvdimms_state, system_io,
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index cc6f1b362f..4973e7d9c9 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -1133,11 +1133,13 @@ static void xen_register_types(void)
- 
- type_init(xen_register_types)
- 
--void xen_bus_init(void)
-+BusState *xen_bus_init(void)
- {
-     DeviceState *dev = qdev_new(TYPE_XEN_BRIDGE);
-     BusState *bus = qbus_new(TYPE_XEN_BUS, dev, NULL);
- 
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-     qbus_set_bus_hotplug_handler(bus);
++    # It's very typical for systemd to mount / with MS_SHARED. That means
++    # any events in the new namespace get propagated back to the parent.
++    #
++    # Undo it so that every mount done in the NS stay confined within it.
++    subprocess.check_output(["mount", "--make-rprivate", "/"])
 +
-+    return bus;
- }
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index 29a9724524..a10ceeabbf 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -33,6 +33,7 @@ typedef struct PCMachineState {
+ def bind_mount(src, dst, options):
+     open(dst, "a").close() # touch
  
-     /* Pointers to devices and objects: */
-     PCIBus *bus;
-+    BusState *xenbus;
-     I2CBus *smbus;
-     PFlashCFI01 *flash[2];
-     ISADevice *pcspk;
-@@ -184,7 +185,8 @@ void pc_basic_device_init(struct PCMachineState *pcms,
- void pc_cmos_init(PCMachineState *pcms,
-                   BusState *ide0, BusState *ide1,
-                   ISADevice *s);
--void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus);
-+void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
-+                 BusState *xen_bus);
+@@ -113,11 +119,9 @@ def depriv(output_directory, output, device, uid, path_kernel, path_ramdisk):
+             if rc != 0 or os.path.getsize(path) == 0:
+                 os.unlink(path)
  
- void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs);
- 
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index 38d40afa37..334ddd1ff6 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -75,7 +75,7 @@ struct XenBusClass {
- OBJECT_DECLARE_TYPE(XenBus, XenBusClass,
-                     XEN_BUS)
- 
--void xen_bus_init(void);
-+BusState *xen_bus_init(void);
- 
- void xen_device_backend_set_state(XenDevice *xendev,
-                                   enum xenbus_state state);
+-        # Normally, unshare(CLONE_NEWNS) will ensure this is not required.
+-        # However, this syscall doesn't exist in *BSD systems and doesn't
+-        # auto-unmount everything on older Linux kernels (At least as of
+-        # Linux 4.19, but it seems fixed in 5.15). Either way,
+-        # recursively unmount everything if needed. Quietly.
++        # Unshare(CLONE_NEWNS) ensures this is not required, but that's not
++        # present on *BSD, so recursively unmount everything if needed.
++        # Quietly.
+         with open('/dev/null', 'w') as devnull:
+             subprocess.call(["umount", "-f", chroot + device_path],
+                             stdout=devnull, stderr=devnull)
 -- 
 2.34.1
 
