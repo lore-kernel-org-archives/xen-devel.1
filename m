@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 944ACC4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:55:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628282.979544 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04621C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:55:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628284.979561 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05h1-0001Ix-Vw; Mon, 06 Nov 2023 19:55:27 +0000
+	id 1r05hA-0001ft-Jx; Mon, 06 Nov 2023 19:55:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628282.979544; Mon, 06 Nov 2023 19:55:27 +0000
+Received: by outflank-mailman (output) from mailman id 628284.979561; Mon, 06 Nov 2023 19:55:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05h1-0001Iq-T5; Mon, 06 Nov 2023 19:55:27 +0000
-Received: by outflank-mailman (input) for mailman id 628282;
- Mon, 06 Nov 2023 19:55:26 +0000
+	id 1r05hA-0001ed-EX; Mon, 06 Nov 2023 19:55:36 +0000
+Received: by outflank-mailman (input) for mailman id 628284;
+ Mon, 06 Nov 2023 19:55:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05gy-0001Ig-JE
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:26 +0000
+ id 1r05h9-0001Ig-SM
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:35 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6af681b7-7cde-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 20:55:21 +0100 (CET)
+ id 716d20eb-7cde-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 20:55:32 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fe-00AkGA-0M; Mon, 06 Nov 2023 19:54:03 +0000
+ id 1r05fb-00AkFg-2j; Mon, 06 Nov 2023 19:54:00 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GPF-2Q; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fa-001GNP-1V; Mon, 06 Nov 2023 19:53:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 6af681b7-7cde-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 716d20eb-7cde-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Q6WJzrf/gsQj4hekd5E3jTDYvSsFsIQ40+J5PbVDAlw=; b=hN6jXJARRmz2GcvDSca7kv1iBF
-	MD6IM83m3OlMumoHTu1tfa5Hh5TNwVAO2zuzdBV7ya9YTeAksrYH2KAvYWnvU5vZc9PtViL6FYuLD
-	4rVMwVE/8xp2ESjC7pSdGhtZQW+Racktv0Jg7A9rDfvVCHY0fIMZ1JypA3E44pMAOX3VMdt2PSWfU
-	M2S/w5oq+ePOvVJq+1b+kHHcURRQ4CafaKAjihmSN/viVnhW+oLS/NDdiSmLhxkF316u0LnDdceA6
-	3GnYTj3WXakTIuiyW6b2gdCJ2powAIsP/BxehtWnuN5+wA/bsvIwgA1DgVBkiJqDtFpodoETq8VrF
-	szF2/wkA==;
+	bh=uI6218d08/cSOBxZVhTlSem5C3AVIU6Zm5P1V+8LsMo=; b=WtaXpx9cIFo6D4kvZ4SvG6Jpwi
+	huHya+dPj7gspQwnLSmS8IcuiymPUGIbVtWUYp+tn2sSPqQ39hpf8NKj5Fv4Qn4Xh2X1KpqyBuy6N
+	UgLyt6y3hKX34eMU751rQvNIeLwCW5sWc+e/M3L//QoEc6ix/gqGabboJtdpAfVxeXqUwBGM+O2Pj
+	3l+9UfAjMgVHmMxuOQ6FqzlCWIDup1I1lkXLmfK4w+/AipVM+FmSdbLcZ/YAPzEphLZpMS+0gY1nd
+	h83gKCHLz8HoPJ00cC8OkRQx+R/d2X0CcVy6RUzEW6YdS3kp7omu4vE181J99lrxG+KMKclsPcC1I
+	SUBIG5vQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 37/46] hw/net/lasi_i82596: use qemu_configure_nic_device()
-Date: Mon,  6 Nov 2023 19:49:42 +0000
-Message-ID: <20231106195352.301038-38-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 13/46] hw/mips/malta: use pci_init_nic_devices()
+Date: Mon,  6 Nov 2023 19:49:18 +0000
+Message-ID: <20231106195352.301038-14-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -133,28 +133,44 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+The Malta board setup code would previously place the first NIC into PCI
+slot 11 if was a PCNet card, and the rest (including the first if it was
+anything other than a PCNet card) would be dynamically assigned.
+
+Now it will place any PCNet NIC into slot 11, and then anything else will
+be dynamically assigned.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/net/lasi_i82596.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ hw/mips/malta.c | 15 +++------------
+ 1 file changed, 3 insertions(+), 12 deletions(-)
 
-diff --git a/hw/net/lasi_i82596.c b/hw/net/lasi_i82596.c
-index e37f7fabe9..c4c197aaa8 100644
---- a/hw/net/lasi_i82596.c
-+++ b/hw/net/lasi_i82596.c
-@@ -125,11 +125,10 @@ SysBusI82596State *lasi_82596_init(MemoryRegion *addr_space,
-     static const MACAddr HP_MAC = {
-         .a = { 0x08, 0x00, 0x09, 0xef, 0x34, 0xf6 } };
+diff --git a/hw/mips/malta.c b/hw/mips/malta.c
+index 049de46a9e..0998d94053 100644
+--- a/hw/mips/malta.c
++++ b/hw/mips/malta.c
+@@ -605,18 +605,9 @@ static MaltaFPGAState *malta_fpga_init(MemoryRegion *address_space,
+ /* Network support */
+ static void network_init(PCIBus *pci_bus)
+ {
+-    int i;
+-
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-        const char *default_devaddr = NULL;
+-
+-        if (i == 0 && (!nd->model || strcmp(nd->model, "pcnet") == 0))
+-            /* The malta board has a PCNet card using PCI SLOT 11 */
+-            default_devaddr = "0b";
+-
+-        pci_nic_init_nofail(nd, pci_bus, "pcnet", default_devaddr);
+-    }
++    /* The malta board has a PCNet card using PCI SLOT 11 */
++    pci_init_nic_in_slot(pci_bus, "pcnet", NULL, "0b");
++    pci_init_nic_devices(pci_bus, "pcnet");
+ }
  
--    qemu_check_nic_model(&nd_table[0], TYPE_LASI_82596);
-     dev = qdev_new(TYPE_LASI_82596);
-     s = SYSBUS_I82596(dev);
-     s->state.irq = lan_irq;
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, NULL);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-     s->state.conf.macaddr = HP_MAC; /* set HP MAC prefix */
- 
+ static void bl_setup_gt64120_jump_kernel(void **p, uint64_t run_addr,
 -- 
 2.41.0
 
