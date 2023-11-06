@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFDCDC4167D
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 15:05:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628136.979269 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E7A9C0018A
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 15:05:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628137.979295 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r01AF-00007x-CI; Mon, 06 Nov 2023 15:05:19 +0000
+	id 1r01AG-0000wO-VF; Mon, 06 Nov 2023 15:05:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628136.979269; Mon, 06 Nov 2023 15:05:19 +0000
+Received: by outflank-mailman (output) from mailman id 628137.979295; Mon, 06 Nov 2023 15:05:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r01AF-00005z-5n; Mon, 06 Nov 2023 15:05:19 +0000
-Received: by outflank-mailman (input) for mailman id 628136;
- Mon, 06 Nov 2023 15:05:18 +0000
+	id 1r01AG-0000vz-PO; Mon, 06 Nov 2023 15:05:20 +0000
+Received: by outflank-mailman (input) for mailman id 628137;
+ Mon, 06 Nov 2023 15:05:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9eGT=GT=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1r01AE-000892-14
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 15:05:18 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
+ id 1r01AF-000892-Sy
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 15:05:20 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e467330d-7cb5-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 16:05:16 +0100 (CET)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4083740f92dso33829815e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 06 Nov 2023 07:05:16 -0800 (PST)
+ id e571f82d-7cb5-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 16:05:17 +0100 (CET)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40838915cecso33861875e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Nov 2023 07:05:17 -0800 (PST)
 Received: from EMEAENGAAD19049.citrite.net ([2.223.46.215])
  by smtp.gmail.com with ESMTPSA id
- q8-20020a05600c46c800b0040776008abdsm12507392wmo.40.2023.11.06.07.05.14
+ q8-20020a05600c46c800b0040776008abdsm12507392wmo.40.2023.11.06.07.05.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 06 Nov 2023 07:05:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -47,325 +47,468 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e467330d-7cb5-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: e571f82d-7cb5-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1699283115; x=1699887915; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1699283117; x=1699887917; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kUl/YemLBar/By9ea/qJ8DP9EY4pMDlEHPma04eJp64=;
-        b=aa7gL0Zr/oz7ZM11Nv1NtlDtXfHKFTd5MpV9hOheAkn3oF/nvcNmDTJKK+x+n2dqJy
-         Esh2/jKMjAbD97HUwEn4SlfYwpIyXvBnkoXA55oqyzZ7DXnchD4OzB4xC4d5odj3piYP
-         6dZ2M8GlUWtWciCCjZfGIvwYU3d19yZ6gvuUE=
+        bh=yowsapQA+Hk3t7pzlY0dGZgRSDLtI+G/ZK19XU66m/8=;
+        b=TGgk+CMOf9kZwnz5k96Jk3ZwvCMd4VreUA0K1BwF6pVYBisELmB+e98AMRMYxOHPaf
+         sdq+dHPUs47hrLi0es5d8vyPq3+c0Dy1um8GIrQIhcQdctgpRNnnGehXDAF3lXcN1NR0
+         UB6D56zOAKvnWoN6YsjNV7ByqzHgPWhWifiC0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699283115; x=1699887915;
+        d=1e100.net; s=20230601; t=1699283117; x=1699887917;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kUl/YemLBar/By9ea/qJ8DP9EY4pMDlEHPma04eJp64=;
-        b=EV++YPxEulF/hc1ZvL3kuwI2/RF+2tY4egjptXdCDjRsrSCz0bxAewEbnPl92Z2hoJ
-         ajNqzGwIrUPfvhCsgAWkp2PPydkJRFYcAF3jwq5uQAnCpWq4HLEmkR7xrjp+y/U3TZbt
-         Ga2a07NCOhvdSpDNBAuY+MkXbS5ro3xtXstTX8+EGfXlwNKx5rZcEsvYwpQk86qRMzH9
-         fLjSpHA2XjWrhZjAt4m51D516QN3CXYpAxvc5ph+owRa2lpx7pZ66xZg5ja7ibcJepsS
-         bz+HIvGig15UVfQrNRhJF52ycnLgD6mM03crCrPddUr49eOufee9hUBU2rgop5veGif2
-         hbyw==
-X-Gm-Message-State: AOJu0YwNu/55egELo6bH6HfUoRxmf+iguSc+cTalR+MwOTPUsltJRn2e
-	ywdImMYQlb+cfEQUXALW24dPdAsoHf3vseZMBiA=
-X-Google-Smtp-Source: AGHT+IFiYrJniTDE0DlNzldrdMGBp1AMlFw3FlzGj3VRdyqCtM3fEF3dtfiPOzWteyxQ0kvPGlFgyA==
-X-Received: by 2002:a05:600c:358a:b0:408:59d4:f3d8 with SMTP id p10-20020a05600c358a00b0040859d4f3d8mr24447779wmq.18.1699283115286;
-        Mon, 06 Nov 2023 07:05:15 -0800 (PST)
+        bh=yowsapQA+Hk3t7pzlY0dGZgRSDLtI+G/ZK19XU66m/8=;
+        b=wWC9zdpXV2DKO9VAJmDdb/yeZ4hMypckRaRajpOpTaX6KB5sCKy4dSHcOMzrR0WM5M
+         Pdx+I1XyAhk6zufEg/zZYekFaSpVUEpwpiXGRqebtfENLAZpqwNCPGecL8ZOW/+VoX4K
+         /Dl9TLiNLaXDHnaizEJJBAOpU8DbM/ICHOuuPTa9OMaYz3voxk4jbR9nHRusjavrvil9
+         JtDP7yL74e+cIAu8s+PuM0nCSVFMdWnaQNUCI468Fy9ZXr2sy/bIBhimo3PrIPmCtd6e
+         QfveQU2qZZKYKRjKHeDjm42T5PRB4lWqyKfovmOhsGERbPOvckd1aUEew2Cv9nsOVRMW
+         /lsQ==
+X-Gm-Message-State: AOJu0Yw3MnIOIKeF/JhiFiSVC4G/MwXCCgCi0SUd9zEh1yatTXkKqfhb
+	lt4tOh3z/uIJu9D1u8PJTRppwn4QvI7oQiZK6jA=
+X-Google-Smtp-Source: AGHT+IGnVq4XQdzv37lduWCcsMnjRT/Dj0YkahdBsVtH52O+w5UUdeRpX50hKpxt9wyKM61zcglBcw==
+X-Received: by 2002:a05:600c:4fcb:b0:401:b204:3b97 with SMTP id o11-20020a05600c4fcb00b00401b2043b97mr24125222wmq.4.1699283116697;
+        Mon, 06 Nov 2023 07:05:16 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 4/6] tools/libfsimage: Add an fdopen() interface to libfsimage
-Date: Mon,  6 Nov 2023 15:05:06 +0000
-Message-Id: <20231106150508.22665-5-alejandro.vallejo@cloud.com>
+Subject: [PATCH 6/6] tools/pygrub: Hook libfsimage's fdopen() to pygrub
+Date: Mon,  6 Nov 2023 15:05:08 +0000
+Message-Id: <20231106150508.22665-7-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231106150508.22665-1-alejandro.vallejo@cloud.com>
 References: <20231106150508.22665-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently libfsimage requires taking a path so it can open a file itself.
-This needs not to be the case and is, as far as I've gathered, a side
-effect of the ext2fs-lib's optional dependency because it couldn't cope
-directly with FDs until e2fsprogs-1.43.2. That was 2016, so it's safe to
-make use of this feature in order to improve the security stance of pygrub.
+This patch increases the security posture by removing the need to grant
+filesystem access to the depriv pygrub. Using libfsimage's fdopen(), the
+parent thread in the depriv procedure can simply ensure all the appropriate
+file descriptors are present before revoking permissions to the filesystem.
 
-  https://github.com/tytso/e2fsprogs/commit/4ccf9e4fe165cfa966c8af0f3d310230aa5c3a1e
-
-This patch modifies the internals of libfsimage to:
-  * Expose a new fdopen() function
-    * Mirrors open(), except we pass an fd rather than a path
-  * Refactor open() to use fdopen() internally
-  * Rewire libfsimage so paths are not passed around
-  * Rewire ext2fs-lib shim to use unixfd_io_manager
-
-Note that while fdopen() takes an FD, close() will still close it. Clients
-of libfsimage must ensure they duplicate any file descriptor they want to
-preserve past the lifetime of the fsi_t* objects that use them.
+A convenient usability side-effect is that it's no longer required for the
+restricted user to have access to the disk, because the depriv thread
+already has the file descriptor open by its parent.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
- tools/libfsimage/common/fsimage.c           | 42 +++++++++++++++------
- tools/libfsimage/common/fsimage_grub.c      |  2 +-
- tools/libfsimage/common/fsimage_plugin.c    |  4 +-
- tools/libfsimage/common/fsimage_priv.h      |  3 +-
- tools/libfsimage/common/mapfile-GNU         |  2 +
- tools/libfsimage/common/mapfile-SunOS       |  2 +
- tools/libfsimage/common/xenfsimage.h        |  3 ++
- tools/libfsimage/common/xenfsimage_plugin.h |  2 +-
- tools/libfsimage/ext2fs-lib/ext2fs-lib.c    | 14 ++++++-
- 9 files changed, 56 insertions(+), 18 deletions(-)
+ docs/man/xl.cfg.5.pod.in         |  6 +-
+ tools/pygrub/src/ExtLinuxConf.py | 20 ++++---
+ tools/pygrub/src/GrubConf.py     | 29 ++++++----
+ tools/pygrub/src/LiloConf.py     | 20 ++++---
+ tools/pygrub/src/pygrub          | 95 ++++++++------------------------
+ 5 files changed, 68 insertions(+), 102 deletions(-)
 
-diff --git a/tools/libfsimage/common/fsimage.c b/tools/libfsimage/common/fsimage.c
-index 5cfa56a84d..1fd302e506 100644
---- a/tools/libfsimage/common/fsimage.c
-+++ b/tools/libfsimage/common/fsimage.c
-@@ -38,15 +38,32 @@ static pthread_mutex_t fsi_lock = PTHREAD_MUTEX_INITIALIZER;
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 2e234b450e..e3fd2e37eb 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -1704,8 +1704,7 @@ See docs/features/qemu-deprivilege.pandoc for more information
+ on how to setup the unprivileged users.
  
- fsi_t *fsi_open_fsimage(const char *path, uint64_t off, const char *options)
- {
--	fsi_t *fsi = NULL;
-+	fsi_t *fsi;
- 	int fd;
- 	int err;
+ Note that running the bootloader in restricted mode also implies using
+-non-interactive mode, and the disk image must be readable by the
+-restricted user.
++non-interactive mode.
  
- 	if ((fd = open(path, O_RDONLY)) == -1)
--		goto fail;
-+		return NULL;
+ =item B<bootloader_user=USERNAME>
+ 
+@@ -2768,8 +2767,7 @@ See docs/features/qemu-deprivilege.pandoc for more information
+ on how to setup the unprivileged users.
+ 
+ Note that running the bootloader in restricted mode also implies using
+-non-interactive mode, and the disk image must be readable by the
+-restricted user.
++non-interactive mode.
+ 
+ =item B<bootloader_user=USERNAME>
+ 
+diff --git a/tools/pygrub/src/ExtLinuxConf.py b/tools/pygrub/src/ExtLinuxConf.py
+index 4e990a9304..f2e9a81013 100644
+--- a/tools/pygrub/src/ExtLinuxConf.py
++++ b/tools/pygrub/src/ExtLinuxConf.py
+@@ -123,6 +123,7 @@ class ExtLinuxImage(object):
+ class ExtLinuxConfigFile(object):
+     def __init__(self, fn = None):
+         self.filename = fn
++        self.file = None
+         self.images = []
+         self.timeout = -1
+         self._default = 0
+@@ -138,16 +139,21 @@ class ExtLinuxConfigFile(object):
+ 
+     def parse(self, buf = None):
+         if buf is None:
+-            if self.filename is None:
++            if not self.filename and not self.file:
+                 raise ValueError("No config file defined to parse!")
+ 
+-            f = open(self.filename, 'r')
+-            lines = f.readlines()
+-            f.close()
+-        else:
+-            lines = buf.split("\n")
++            if self.file:
++                buf = file.read()
++                path = self.file.name
++            else:
++                f = open(self.filename, 'r')
++                buf = f.read()
++                f.close()
++        lines = buf.split("\n")
 +
-+	fsi = fsi_fdopen_fsimage(fd, off, options);
++        if not path:
++            path = os.path.dirname(self.filename)
+ 
+-        path = os.path.dirname(self.filename)
+         img = []
+         for l in lines:
+             l = l.strip()
+diff --git a/tools/pygrub/src/GrubConf.py b/tools/pygrub/src/GrubConf.py
+index 580c9628ca..96b79b89a7 100644
+--- a/tools/pygrub/src/GrubConf.py
++++ b/tools/pygrub/src/GrubConf.py
+@@ -170,6 +170,7 @@ class GrubImage(_GrubImage):
+ class _GrubConfigFile(object):
+     def __init__(self, fn = None):
+         self.filename = fn
++        self.file = None
+         self.images = []
+         self.timeout = -1
+         self._default = 0
+@@ -271,14 +272,16 @@ class GrubConfigFile(_GrubConfigFile):
+ 
+     def parse(self, buf = None):
+         if buf is None:
+-            if self.filename is None:
++            if not self.filename and not self.file:
+                 raise ValueError("No config file defined to parse!")
+ 
+-            f = open(self.filename, 'r')
+-            lines = f.readlines()
+-            f.close()
+-        else:
+-            lines = buf.split("\n")
++            if self.file:
++                buf = file.read()
++            else:
++                f = open(self.filename, 'r')
++                buf = f.read()
++                f.close()
++        lines = buf.split("\n")
+ 
+         img = None
+         title = ""
+@@ -370,14 +373,16 @@ class Grub2ConfigFile(_GrubConfigFile):
+ 
+     def parse(self, buf = None):
+         if buf is None:
+-            if self.filename is None:
++            if not self.filename and not self.file:
+                 raise ValueError("No config file defined to parse!")
+ 
+-            f = open(self.filename, 'r')
+-            lines = f.readlines()
+-            f.close()
+-        else:
+-            lines = buf.split("\n")
++            if self.file:
++                buf = file.read()
++            else:
++                f = open(self.filename, 'r')
++                buf = f.read()
++                f.close()
++        lines = buf.split("\n")
+ 
+         in_function = False
+         img = None
+diff --git a/tools/pygrub/src/LiloConf.py b/tools/pygrub/src/LiloConf.py
+index e3bfcb5244..73f8fcb214 100644
+--- a/tools/pygrub/src/LiloConf.py
++++ b/tools/pygrub/src/LiloConf.py
+@@ -90,6 +90,7 @@ class LiloImage(object):
+ class LiloConfigFile(object):
+     def __init__(self, fn = None):
+         self.filename = fn
++        self.file = None
+         self.images = []
+         self.timeout = -1
+         self._default = 0
+@@ -99,16 +100,21 @@ class LiloConfigFile(object):
+ 
+     def parse(self, buf = None):
+         if buf is None:
+-            if self.filename is None:
++            if not self.filename and not self.file:
+                 raise ValueError("No config file defined to parse!")
+ 
+-            f = open(self.filename, 'r')
+-            lines = f.readlines()
+-            f.close()
+-        else:
+-            lines = buf.split("\n")
++            if self.file:
++                buf = file.read()
++                path = self.file.name
++            else:
++                f = open(self.filename, 'r')
++                buf = f.read()
++                f.close()
++        lines = buf.split("\n")
 +
-+	if (fsi)
-+		return fsi;
++        if not path:
++            path = os.path.dirname(self.filename)
+ 
+-        path = os.path.dirname(self.filename)
+         img = []
+         for l in lines:
+             l = l.strip()
+diff --git a/tools/pygrub/src/pygrub b/tools/pygrub/src/pygrub
+index b96bdfd849..123e9c40ad 100755
+--- a/tools/pygrub/src/pygrub
++++ b/tools/pygrub/src/pygrub
+@@ -66,14 +66,6 @@ def unshare(flags):
+     # Undo it so that every mount done in the NS stay confined within it.
+     subprocess.check_output(["mount", "--make-rprivate", "/"])
+ 
+-def bind_mount(src, dst, options):
+-    open(dst, "a").close() # touch
+-
+-    rc = subprocess.call(["mount", "--bind", "-o", options, src, dst])
+-    if rc != 0:
+-        raise RuntimeError("bad_mount: src=%s dst=%s opts=%s" %
+-                           (src, dst, options))
+-
+ def downgrade_rlimits():
+     # Wipe the authority to use unrequired resources
+     resource.setrlimit(resource.RLIMIT_NPROC,    (0, 0))
+@@ -103,7 +95,7 @@ def downgrade_rlimits():
+ 
+     resource.setrlimit(resource.RLIMIT_FSIZE, (fsize, fsize))
+ 
+-def depriv(output_directory, output, device, uid, path_kernel, path_ramdisk):
++def depriv(output_directory, uid, path_kernel, path_ramdisk):
+     # The only point of this call is to force the loading of libfsimage.
+     # That way, we don't need to bind-mount it into the chroot
+     rc = xenfsimage.init()
+@@ -114,7 +106,7 @@ def depriv(output_directory, output, device, uid, path_kernel, path_ramdisk):
+ 
+     # Create a temporary directory for the chroot
+     chroot = tempfile.mkdtemp(prefix=str(uid)+'-', dir=output_directory) + '/'
+-    device_path = '/device'
++    os.chmod(chroot, 0o700)
+ 
+     pid = os.fork()
+     if pid:
+@@ -129,16 +121,7 @@ def depriv(output_directory, output, device, uid, path_kernel, path_ramdisk):
+             if rc != 0 or os.path.getsize(path) == 0:
+                 os.unlink(path)
+ 
+-        # Unshare(CLONE_NEWNS) ensures this is not required, but that's not
+-        # present on *BSD, so recursively unmount everything if needed.
+-        # Quietly.
+-        with open('/dev/null', 'w') as devnull:
+-            subprocess.call(["umount", "-f", chroot + device_path],
+-                            stdout=devnull, stderr=devnull)
+-            subprocess.call(["umount", "-f", chroot],
+-                            stdout=devnull, stderr=devnull)
+         os.rmdir(chroot)
+-
+         sys.exit(rc)
+ 
+     # By unsharing the namespace we're making sure it's all bulk-released
+@@ -150,20 +133,6 @@ def depriv(output_directory, output, device, uid, path_kernel, path_ramdisk):
+     # Set sensible limits using the setrlimit interface
+     downgrade_rlimits()
+ 
+-    # We'll mount tmpfs on the chroot to ensure the deprivileged child
+-    # cannot affect the persistent state. It's RW now in order to
+-    # bind-mount the device, but note it's remounted RO after that.
+-    rc = subprocess.call(["mount", "-t", "tmpfs", "none", chroot])
+-    if rc != 0:
+-        raise RuntimeError("mount_tmpfs rc=%d dst=\"%s\"" % (rc, chroot))
+-
+-    # Bind the untrusted device RO
+-    bind_mount(device, chroot + device_path, "ro,nosuid,noexec")
+-
+-    rc = subprocess.call(["mount", "-t", "tmpfs", "-o", "remount,ro,nosuid,noexec,nodev", "none", chroot])
+-    if rc != 0:
+-        raise RuntimeError("remount_tmpfs rc=%d dst=\"%s\"" % (rc, chroot))
+-
+     # Drop superpowers!
+     os.chroot(chroot)
+     os.chdir('/')
+@@ -171,15 +140,7 @@ def depriv(output_directory, output, device, uid, path_kernel, path_ramdisk):
+     os.setgroups([uid])
+     os.setuid(uid)
+ 
+-    return device_path
+-
+-def read_size_roundup(fd, size):
+-    if platform.system() != 'FreeBSD':
+-        return size
+-    st = os.fstat(fd)
+-    if (not stat.S_ISCHR(st.st_mode)):
+-        return size
+-    # Round up to sector size if it's a raw character device
++def round_up_to_sectorsize(size):
+     return (((size)+((SECTOR_SIZE)-1))&(~((SECTOR_SIZE)-1)))
+ 
+ def enable_cursor(ison):
+@@ -196,9 +157,8 @@ def enable_cursor(ison):
+ DISK_TYPE_RAW, DISK_TYPE_HYBRIDISO, DISK_TYPE_DOS = range(3)
+ def identify_disk_image(file):
+     """Detect DOS partition table or HybridISO format."""
+-    fd = os.open(file, os.O_RDONLY)
+-    buf = os.read(fd, read_size_roundup(fd, 0x8006))
+-    os.close(fd)
++    file.seek(0, 0)
++    buf = file.read(0x8200)
+ 
+     if len(buf) >= 512 and \
+            struct.unpack("H", buf[0x1fe: 0x200]) == (0xaa55,):
+@@ -215,10 +175,8 @@ V_ROOT=0x2
+ def get_solaris_slice(file, offset):
+     """Find the root slice in a Solaris VTOC."""
+ 
+-    fd = os.open(file, os.O_RDONLY)
+-    os.lseek(fd, offset + (DK_LABEL_LOC * SECTOR_SIZE), 0)
+-    buf = os.read(fd, 512)
+-    os.close(fd)
++    file.seek(offset + (DK_LABEL_LOC * SECTOR_SIZE), 0)
++    buf = file.read(512)
+     if struct.unpack("<H", buf[508:510])[0] != DKL_MAGIC:
+         raise RuntimeError("Invalid disklabel magic")
+ 
+@@ -234,9 +192,8 @@ def get_solaris_slice(file, offset):
+     raise RuntimeError("No root slice found")
+ 
+ def get_fs_offset_gpt(file):
+-    fd = os.open(file, os.O_RDONLY)
+-    os.lseek(fd, SECTOR_SIZE, 0)
+-    buf = os.read(fd, 512)
++    file.seek(512, 0)
++    buf = file.read(512)
+     partcount = struct.unpack("<L", buf[80:84])[0]
+     partsize = struct.unpack("<L", buf[84:88])[0]
+     i = partcount
+@@ -267,9 +224,8 @@ def get_partition_offsets(file):
+     else:
+         raise ValueError('Unhandled image type returnd by identify_disk_image(): %d' % (image_type,))
+ 
+-    fd = os.open(file, os.O_RDONLY)
+-    buf = os.read(fd, 512)
+-    os.close(fd)
++    file.seek(0, 0)
++    buf = file.read(512)
+     for poff in (446, 462, 478, 494): # partition offsets
+ 
+         # MBR contains a 16 byte descriptor per partition
+@@ -565,9 +521,6 @@ class Grub:
+         """Read the given file to parse the config.  If fs = None, then
+         we're being given a raw config file rather than a disk image."""
+ 
+-        if not os.access(fn, os.R_OK):
+-            raise RuntimeError("Unable to access %s" %(fn,))
+-
+         cfg_list = [(x,grub.GrubConf.Grub2ConfigFile) for x in ["/boot/grub/grub.cfg", "/grub/grub.cfg",
+                         "/boot/grub2/grub.cfg", "/grub2/grub.cfg"]] + \
+                    [(x,grub.ExtLinuxConf.ExtLinuxConfigFile) for x in ["/boot/isolinux/isolinux.cfg",
+@@ -582,7 +535,8 @@ class Grub:
+             # set the config file and parse it
+             for f,parser in cfg_list:
+                 self.cf = parser()
+-                self.cf.filename = fn
++                self.cf.filename = None
++                self.cf.fd = file
+                 self.cf.parse()
+                 return
+ 
+@@ -591,6 +545,7 @@ class Grub:
+                 print("Using %s to parse %s" % (parser,f), file=sys.stderr)
+                 self.cf = parser()
+                 self.cf.filename = f
++                self.cf.fd = None
+                 break
+         if self.__dict__.get('cf', None) is None:
+             raise RuntimeError("couldn't find bootloader config file in the image provided.")
+@@ -880,7 +835,7 @@ if __name__ == "__main__":
+     def usage():
+         print("Usage: %s [-q|--quiet] [-i|--interactive] [-l|--list-entries] [-n|--not-really] [--output=] [--kernel=] [--ramdisk=] [--args=] [--entry=] [--output-directory=] [--output-format=sxp|simple|simple0] [--runas=] [--offset=] <image>" %(sys.argv[0],), file=sys.stderr)
+ 
+-    def copy_from_image(fs, file_to_read, file_type, fd_dst, path_dst, not_really):
++    def copy_from_image(fs, file_to_read, file_type, fd_dst, not_really):
+         if not_really:
+             if fs.file_exists(file_to_read):
+                 return "<%s:%s>" % (file_type, file_to_read)
+@@ -898,14 +853,7 @@ if __name__ == "__main__":
+                 os.close(fd_dst)
+                 del datafile
+                 return
+-            try:
+-                os.write(fd_dst, data)
+-            except Exception as e:
+-                print(e, file=sys.stderr)
+-                if path_dst:
+-                    os.unlink(path_dst)
+-                del datafile
+-                sys.exit("Error writing temporary copy of "+file_type)
++            os.write(fd_dst, data)
+             dataoff += len(data)
+ 
+     try:
+@@ -1020,13 +968,15 @@ if __name__ == "__main__":
+         (fd_ramdisk, path_ramdisk) = tempfile.mkstemp(prefix="boot_ramdisk.",
+                                                       dir=output_directory)
+ 
++    file = open(file, 'rb')
 +
-+	err = errno;
-+	(void) close(fd);
-+	errno = err;
-+
-+	return NULL;
-+}
-+
-+fsi_t *fsi_fdopen_fsimage(int fd, uint64_t off, const char *options)
-+{
-+	fsi_t *fsi = NULL;
-+	int err;
+     if output is None:
+         fd = sys.stdout.fileno()
+     else:
+         fd = os.open(output, os.O_WRONLY)
  
- 	if ((fsi = malloc(sizeof(*fsi))) == NULL)
--		goto fail;
-+		return NULL;
+     if uid:
+-        file = depriv(output_directory, output, file, uid, path_kernel, path_ramdisk)
++        depriv(output_directory, uid, path_kernel, path_ramdisk)
  
- 	fsi->f_fd = fd;
- 	fsi->f_off = off;
-@@ -54,20 +71,17 @@ fsi_t *fsi_open_fsimage(const char *path, uint64_t off, const char *options)
- 	fsi->f_bootstring = NULL;
+     # debug
+     if isconfig:
+@@ -1049,9 +999,10 @@ if __name__ == "__main__":
+     if part_offs is None:
+         part_offs = get_partition_offsets(file)
  
- 	pthread_mutex_lock(&fsi_lock);
--	err = find_plugin(fsi, path, options);
-+	err = find_plugin(fsi, options);
- 	pthread_mutex_unlock(&fsi_lock);
--	if (err != 0)
--		goto fail;
++    file.seek(0, 0)
+     for offset in part_offs:
+         try:
+-            fs = xenfsimage.open(file, offset, bootfsoptions)
++            fs = xenfsimage.fdopen(os.dup(file.fileno()), offset, bootfsoptions)
  
--	return (fsi);
-+	if (!err)
-+		return fsi;
+             chosencfg = sniff_solaris(fs, incfg)
  
--fail:
- 	err = errno;
--	if (fd != -1)
--		(void) close(fd);
- 	free(fsi);
- 	errno = err;
--	return (NULL);
-+
-+	return NULL;
- }
+@@ -1083,13 +1034,13 @@ if __name__ == "__main__":
+         raise RuntimeError("Unable to find partition containing kernel")
  
- void fsi_close_fsimage(fsi_t *fsi)
-@@ -167,3 +181,9 @@ fsi_fs_bootstring(fsi_t *fsi)
- {
- 	return (fsi->f_bootstring);
- }
-+
-+int
-+fsi_fd(fsi_t *fsi)
-+{
-+	return (fsi->f_fd);
-+}
-diff --git a/tools/libfsimage/common/fsimage_grub.c b/tools/libfsimage/common/fsimage_grub.c
-index 258d48bfbb..04397235f7 100644
---- a/tools/libfsimage/common/fsimage_grub.c
-+++ b/tools/libfsimage/common/fsimage_grub.c
-@@ -221,7 +221,7 @@ fsig_substring(const char *s1, const char *s2)
- }
+     copy_from_image(fs, chosencfg["kernel"], "kernel",
+-                    fd_kernel, None if uid else path_kernel, not_really)
++                    fd_kernel, not_really)
+     bootcfg["kernel"] = path_kernel
  
- static int
--fsig_mount(fsi_t *fsi, const char *path, const char *options)
-+fsig_mount(fsi_t *fsi, const char *options)
- {
- 	fsig_plugin_ops_t *ops = fsi->f_plugin->fp_data;
- 	fsi_file_t *ffi;
-diff --git a/tools/libfsimage/common/fsimage_plugin.c b/tools/libfsimage/common/fsimage_plugin.c
-index d0cb9e96a6..6645ce3bfe 100644
---- a/tools/libfsimage/common/fsimage_plugin.c
-+++ b/tools/libfsimage/common/fsimage_plugin.c
-@@ -175,7 +175,7 @@ fail:
- 	return (ret);
- }
- 
--int find_plugin(fsi_t *fsi, const char *path, const char *options)
-+int find_plugin(fsi_t *fsi, const char *options)
- {
- 	fsi_plugin_t *fp;
- 	int ret = 0;
-@@ -185,7 +185,7 @@ int find_plugin(fsi_t *fsi, const char *path, const char *options)
- 
- 	for (fp = plugins; fp != NULL; fp = fp->fp_next) {
- 		fsi->f_plugin = fp;
--		if (fp->fp_ops->fpo_mount(fsi, path, options) == 0)
-+		if (fp->fp_ops->fpo_mount(fsi, options) == 0)
- 			goto out;
- 	}
- 
-diff --git a/tools/libfsimage/common/fsimage_priv.h b/tools/libfsimage/common/fsimage_priv.h
-index 2274403557..779e433b37 100644
---- a/tools/libfsimage/common/fsimage_priv.h
-+++ b/tools/libfsimage/common/fsimage_priv.h
-@@ -29,6 +29,7 @@ extern C {
- #endif
- 
- #include <sys/types.h>
-+#include <stdbool.h>
- 
- #include "xenfsimage.h"
- #include "xenfsimage_plugin.h"
-@@ -54,7 +55,7 @@ struct fsi_file {
- 	void *ff_data;
- };
- 
--int find_plugin(fsi_t *, const char *, const char *);
-+int find_plugin(fsi_t *, const char *);
- 
- #ifdef __cplusplus
- };
-diff --git a/tools/libfsimage/common/mapfile-GNU b/tools/libfsimage/common/mapfile-GNU
-index 2d54d527d7..658f313315 100644
---- a/tools/libfsimage/common/mapfile-GNU
-+++ b/tools/libfsimage/common/mapfile-GNU
-@@ -3,6 +3,7 @@ VERSION {
- 		global:
- 			fsi_init;
- 			fsi_open_fsimage;
-+			fsi_fdopen_fsimage;
- 			fsi_close_fsimage;
- 			fsi_file_exists;
- 			fsi_open_file;
-@@ -12,6 +13,7 @@ VERSION {
- 			fsi_bootstring_alloc;
- 			fsi_bootstring_free;
- 			fsi_fs_bootstring;
-+			fsi_fd;
- 	
- 			fsip_fs_set_data;
- 			fsip_file_alloc;
-diff --git a/tools/libfsimage/common/mapfile-SunOS b/tools/libfsimage/common/mapfile-SunOS
-index 48deedb425..a03646ff73 100644
---- a/tools/libfsimage/common/mapfile-SunOS
-+++ b/tools/libfsimage/common/mapfile-SunOS
-@@ -2,6 +2,7 @@ libfsimage.so.1.0 {
- 	global:
- 		fsi_init;
- 		fsi_open_fsimage;
-+		fsi_fdopen_fsimage;
- 		fsi_close_fsimage;
- 		fsi_file_exists;
- 		fsi_open_file;
-@@ -11,6 +12,7 @@ libfsimage.so.1.0 {
- 		fsi_bootstring_alloc;
- 		fsi_bootstring_free;
- 		fsi_fs_bootstring;
-+		fsi_fd;
- 
- 		fsip_fs_set_data;
- 		fsip_file_alloc;
-diff --git a/tools/libfsimage/common/xenfsimage.h b/tools/libfsimage/common/xenfsimage.h
-index 341883b2d7..8048cc7470 100644
---- a/tools/libfsimage/common/xenfsimage.h
-+++ b/tools/libfsimage/common/xenfsimage.h
-@@ -44,6 +44,7 @@ typedef struct fsi_file fsi_file_t;
- int fsi_init(void);
- 
- fsi_t *fsi_open_fsimage(const char *, uint64_t, const char *);
-+fsi_t *fsi_fdopen_fsimage(int, uint64_t, const char *);
- void fsi_close_fsimage(fsi_t *);
- 
- int fsi_file_exists(fsi_t *, const char *);
-@@ -57,6 +58,8 @@ char *fsi_bootstring_alloc(fsi_t *, size_t);
- void fsi_bootstring_free(fsi_t *);
- char *fsi_fs_bootstring(fsi_t *);
- 
-+int fsi_fd(fsi_t *);
-+
- #ifdef __cplusplus
- };
- #endif
-diff --git a/tools/libfsimage/common/xenfsimage_plugin.h b/tools/libfsimage/common/xenfsimage_plugin.h
-index 4135769018..996ea5ecbb 100644
---- a/tools/libfsimage/common/xenfsimage_plugin.h
-+++ b/tools/libfsimage/common/xenfsimage_plugin.h
-@@ -38,7 +38,7 @@ typedef struct fsi_plugin fsi_plugin_t;
- 
- typedef struct fsi_plugin_ops {
- 	int fpo_version;
--	int (*fpo_mount)(fsi_t *, const char *, const char *);
-+	int (*fpo_mount)(fsi_t *, const char *);
- 	int (*fpo_umount)(fsi_t *);
- 	fsi_file_t *(*fpo_open)(fsi_t *, const char *);
- 	ssize_t (*fpo_read)(fsi_file_t *, void *, size_t);
-diff --git a/tools/libfsimage/ext2fs-lib/ext2fs-lib.c b/tools/libfsimage/ext2fs-lib/ext2fs-lib.c
-index 864a15b349..9f07ea288f 100644
---- a/tools/libfsimage/ext2fs-lib/ext2fs-lib.c
-+++ b/tools/libfsimage/ext2fs-lib/ext2fs-lib.c
-@@ -25,15 +25,25 @@
- #include INCLUDE_EXTFS_H
- #include <errno.h>
- #include <inttypes.h>
-+#include <stdio.h>
- 
- static int
--ext2lib_mount(fsi_t *fsi, const char *name, const char *options)
-+ext2lib_mount(fsi_t *fsi, const char *options)
- {
- 	int err;
- 	char opts[30] = "";
- 	ext2_filsys *fs;
- 	uint64_t offset = fsip_fs_offset(fsi);
- 
-+	/*
-+	 * We must choose unixfd_io_manager rather than unix_io_manager in
-+	 * order for the library to accept fd strings instead of paths. It
-+	 * still means we must pass a string representing an fd rather than
-+	 * an int, but at least this way we don't need to pass paths around
-+	 */
-+	char name[32] = {0};
-+	(void)snprintf(name, sizeof(name) - 1, "%d", fsi_fd(fsi));
-+
- 	if (offset)
- 		snprintf(opts, 29, "offset=%" PRId64, offset);
- 
-@@ -41,7 +51,7 @@ ext2lib_mount(fsi_t *fsi, const char *name, const char *options)
- 	if (fs == NULL)
- 		return (-1);
- 
--	err = ext2fs_open2(name, opts, 0, 0, 0, unix_io_manager, fs);
-+	err = ext2fs_open2(name, opts, 0, 0, 0, unixfd_io_manager, fs);
- 
- 	if (err != 0) {
- 		free(fs);
+     if chosencfg["ramdisk"]:
+         try:
+             copy_from_image(fs, chosencfg["ramdisk"], "ramdisk",
+-                            fd_ramdisk, None if uid else path_ramdisk, not_really)
++                            fd_ramdisk, not_really)
+         except:
+             if not uid and not not_really:
+                     os.unlink(path_kernel)
 -- 
 2.34.1
 
