@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85095C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:16:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628478.979995 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C04C6C4167D
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:16:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628479.980004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r060v-0006XF-4v; Mon, 06 Nov 2023 20:16:01 +0000
+	id 1r0612-0006vC-AR; Mon, 06 Nov 2023 20:16:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628478.979995; Mon, 06 Nov 2023 20:16:01 +0000
+Received: by outflank-mailman (output) from mailman id 628479.980004; Mon, 06 Nov 2023 20:16:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r060v-0006X8-1A; Mon, 06 Nov 2023 20:16:01 +0000
-Received: by outflank-mailman (input) for mailman id 628478;
- Mon, 06 Nov 2023 20:16:00 +0000
+	id 1r0612-0006v5-7l; Mon, 06 Nov 2023 20:16:08 +0000
+Received: by outflank-mailman (input) for mailman id 628479;
+ Mon, 06 Nov 2023 20:16:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hJ-0001Ig-EN
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:45 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1r05hI-0001Ig-EF
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:44 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7636bf0b-7cde-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 20:55:41 +0100 (CET)
+ id 761632ae-7cde-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 20:55:40 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fa-00AkFb-1y; Mon, 06 Nov 2023 19:53:59 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1r05fZ-007taE-M3; Mon, 06 Nov 2023 19:53:58 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fZ-001GMo-1x; Mon, 06 Nov 2023 19:53:57 +0000
+ Hat Linux)) id 1r05fZ-001GN4-37; Mon, 06 Nov 2023 19:53:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 7636bf0b-7cde-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 761632ae-7cde-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=U9HaIssH58wcf3kdA9UwHwQ4m5fDVnktA3V3gnm0GPk=; b=STONSx2GTmWGB8ZjHot2dssO0q
-	ZMbNmU2Aj1xfjeFjVptjUHGMDCNfmHEeHiXWrQOeGrnuu4lIAPs47AXJus1Mdu1b/yvv7nkzLbvVK
-	ggOliQYM8trHhpghqfnshlFXUBurYa15bwTXwDV3BE3QNhUM1RRXjsaCYdWvCD577kfCxiuN2aO+f
-	7v+SVNTdzneSbb6q+s9U7CQeQGjFztXIms64KzOd+TeG2LGgs++svtU2rYaqkr8euM4niKQ5dRvxP
-	LQ5G8dnY53KfUZOUICk7e70f4dliDqjMJTJK4taT0nTYbxVOhd16CEO1gqhuq4IYh+zPQX7anYyVG
-	WQAnuMWQ==;
+	bh=54+9O4MqgKMWNsVDV15P7KT3O3JFiZ0ZmbsNt5OSIo4=; b=uNNnb4D/Jn1NaKTOnlwcXQoBXr
+	a7fpJfDZDugOPHlTeDJm5R48ox/KWkG8Kq4VkoW7MrTotDiXX/DNpR8Lx0OIXTa/wlniktk7vXmfZ
+	dHj8fjR/z8Yert6javbL8WnB15z9bB7adrZkTchjktVEBMCdmcasEitmq3xKy5xZoKnog4LvVBdId
+	gVI2G1ARrSNVDtX1PsfPalbOtKhwBGGDEjoobpG7heQ4S3MtgTVZP7KUMi9uX7qnJBCY4WT97Q0hh
+	U8N4avC/qXHuGQuPqJSQ2fsHmTqLfcJSfOEFwq8K+TIzHHPFbtH22DRt5MHxbLdfAwAEyyUd639pH
+	CmTmGuNw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,104 +120,40 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 04/46] hw/pci: add pci_init_nic_devices(), pci_init_nic_in_slot()
-Date: Mon,  6 Nov 2023 19:49:09 +0000
-Message-ID: <20231106195352.301038-5-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 08/46] hw/arm/sbsa-ref: use pci_init_nic_devices()
+Date: Mon,  6 Nov 2023 19:49:13 +0000
+Message-ID: <20231106195352.301038-9-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The loop over nd_table[] to add PCI NICs is repeated in quite a few
-places. Add a helper function to do it.
-
-Some platforms also try to instantiate a specific model in a specific
-slot, to match the real hardware. Add pci_init_nic_in_slot() for that
-purpose.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
+Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
 ---
- hw/pci/pci.c         | 45 ++++++++++++++++++++++++++++++++++++++++++++
- include/hw/pci/pci.h |  4 +++-
- 2 files changed, 48 insertions(+), 1 deletion(-)
+ hw/arm/sbsa-ref.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index 885c04b6f5..5703266c0b 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -1925,6 +1925,51 @@ PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
-     return pci_dev;
- }
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index bce44690e5..7ad8e1fcea 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -689,9 +689,7 @@ static void create_pcie(SBSAMachineState *sms)
  
-+void pci_init_nic_devices(PCIBus *bus, const char *default_model)
-+{
-+    qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
-+                                "virtio", "virtio-net-pci");
-+}
-+
-+bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
-+                          const char *alias, const char *devaddr)
-+{
-+    NICInfo *nd = qemu_find_nic_info(model, true, alias);
-+    int dom, busnr, devfn;
-+    PCIDevice *pci_dev;
-+    unsigned slot;
-+    PCIBus *bus;
-+
-+    if (!nd) {
-+        return false;
-+    }
-+
-+    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
-+        error_report("Invalid PCI device address %s for device %s",
-+                     devaddr, model);
-+        exit(1);
-+    }
-+
-+    if (dom != 0) {
-+        error_report("No support for non-zero PCI domains");
-+        exit(1);
-+    }
-+
-+    devfn = PCI_DEVFN(slot, 0);
-+
-+    bus = pci_find_bus_nr(rootbus, busnr);
-+    if (!bus) {
-+        error_report("Invalid PCI device address %s for device %s",
-+                     devaddr, model);
-+        exit(1);
-+    }
-+
-+    pci_dev = pci_new(devfn, model);
-+    qdev_set_nic_properties(&pci_dev->qdev, nd);
-+    pci_realize_and_unref(pci_dev, bus, &error_fatal);
-+    return true;
-+}
-+
- PCIDevice *pci_vga_init(PCIBus *bus)
- {
-     vga_interface_created = true;
-diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
-index ea5aff118b..684d49bdcd 100644
---- a/include/hw/pci/pci.h
-+++ b/include/hw/pci/pci.h
-@@ -317,7 +317,9 @@ void pci_device_reset(PCIDevice *dev);
- PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
-                                const char *default_model,
-                                const char *default_devaddr);
--
-+void pci_init_nic_devices(PCIBus *bus, const char *default_model);
-+bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
-+                          const char *alias, const char *devaddr);
- PCIDevice *pci_vga_init(PCIBus *bus);
+     pci = PCI_HOST_BRIDGE(dev);
+     if (pci->bus) {
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
+-        }
++        pci_init_nic_devices(pci->bus, mc->default_nic);
+     }
  
- static inline PCIBus *pci_get_bus(const PCIDevice *dev)
+     pci_create_simple(pci->bus, -1, "bochs-display");
 -- 
 2.41.0
 
