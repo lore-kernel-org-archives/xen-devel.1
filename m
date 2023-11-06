@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC10C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:32:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.627870.978724 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6507DC4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:40:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.627877.978737 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzwu5-0007AG-G6; Mon, 06 Nov 2023 10:32:21 +0000
+	id 1qzx1g-00014j-F8; Mon, 06 Nov 2023 10:40:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 627870.978724; Mon, 06 Nov 2023 10:32:21 +0000
+Received: by outflank-mailman (output) from mailman id 627877.978737; Mon, 06 Nov 2023 10:40:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzwu5-0007A9-Cu; Mon, 06 Nov 2023 10:32:21 +0000
-Received: by outflank-mailman (input) for mailman id 627870;
- Mon, 06 Nov 2023 10:32:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qzx1g-00013Y-CJ; Mon, 06 Nov 2023 10:40:12 +0000
+Received: by outflank-mailman (input) for mailman id 627877;
+ Mon, 06 Nov 2023 10:40:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4FDE=GT=linaro.org=leo.yan@srs-se1.protection.inumbo.net>)
- id 1qzwu4-0007A3-34
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:32:20 +0000
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [2607:f8b0:4864:20::234])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c21c3f8d-7c8f-11ee-98da-6d05b1d4d9a1;
- Mon, 06 Nov 2023 11:32:18 +0100 (CET)
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3b3f55e1bbbso2792481b6e.2
- for <xen-devel@lists.xenproject.org>; Mon, 06 Nov 2023 02:32:18 -0800 (PST)
-Received: from leoy-huanghe.lan ([98.98.115.250])
- by smtp.gmail.com with ESMTPSA id
- s12-20020a056a00194c00b006979f70fdd5sm5260934pfk.219.2023.11.06.02.32.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 02:32:16 -0800 (PST)
+ <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qzx1f-00010s-1h
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:11 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d9cf4d07-7c90-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 11:40:07 +0100 (CET)
+Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1qzx1P-005R1j-Rh; Mon, 06 Nov 2023 10:39:56 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
+ Hat Linux)) id 1qzx1Q-000qGL-0i; Mon, 06 Nov 2023 10:39:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,78 +43,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c21c3f8d-7c8f-11ee-98da-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1699266737; x=1699871537; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=3Glr2SFL0YBMIuUBsQl3elw2fY+LCwHpY+w6UQc49Lw=;
-        b=CXXz+OpYIAUvxGB5vVM0OXnn5hFXJQ8YWELVc2tA1uh8pDLrH4hcK7IGLxNJhjrEG9
-         KE6taWiTd/q3FKrA0xEQYefijSunh/9vpbbTNfMO7TAaL9Ggwtn4oSM709Bsx8AAlN06
-         KCBTBCe04BUS4JUKsoQ+Sgwxui7zYC/9ZLLzZI6JRi9P//SwMHuf6v2cad2bFi+aoJzj
-         V+DExx/w5J2c1p80LCqOOPZWGIqrTTiOPrdy3yDS35kJaAnfuagrXzfgfW+yKSI2Iz/3
-         UOpNPdT9QJcuIBxn7MpjaDyU0ypnqxjrF041Ew+SHxWyoeHvrJuA3Jh1VlX6iLPOXeFf
-         LENg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699266737; x=1699871537;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3Glr2SFL0YBMIuUBsQl3elw2fY+LCwHpY+w6UQc49Lw=;
-        b=kYCH7U8dpc4w8z6RkhlLaP7JuzoiaLwiI1SAVA64M+w2+ScPah6dxQ0ulldAuIBXP2
-         MfI0Iz9PaNXGA4Kg7oSWMddK5L2Z7H4kzk3BnVQqkw3Eb14Mag/ynR7H3er92Wp4y3Mb
-         eAbeQs0XYwMZN1m+Pp47HiK7MxxUkspesTTkYvHzv6FbsuQGTXQqIdFi6vJoKv4PK+UE
-         ucBHgusjfYu1iFA1sf8uouIoeKqlJR0Vop3oFa6O+ZCJ4BHcqp3yxAacmk6qULOPaB12
-         QfZsSZhTuLZoF2Ql3wgQl4k5lA+osTk7LwU80ZbR5zkh0oZhljMB1i6Pn/AbeL1bBxNi
-         LfKw==
-X-Gm-Message-State: AOJu0YwTQH5zVw6vCpnPmFqVgiQ2+NFyTv5Yqge6GoCOkscSF5tJ2591
-	Bg6Y/xR2MTLzmrpedFlCXNr/nQ==
-X-Google-Smtp-Source: AGHT+IE4QzQKpNqlC/4uXIcoEWj1FRMWDCdQkrCDDpEdbaTq0K26Bj6WMrp/1R8uuU4XsnIKnN8E/w==
-X-Received: by 2002:a05:6808:4189:b0:3a7:6d4a:fd78 with SMTP id dj9-20020a056808418900b003a76d4afd78mr27230415oib.24.1699266736813;
-        Mon, 06 Nov 2023 02:32:16 -0800 (PST)
-Date: Mon, 6 Nov 2023 18:32:12 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH v4] xen/arm: Skip memory nodes if not enabled
-Message-ID: <20231106103212.GE90848@leoy-huanghe.lan>
-References: <20231013120442.1267488-1-leo.yan@linaro.org>
- <20231106021742.GA90848@leoy-huanghe.lan>
- <191b5aa4-182f-4b2e-8430-e605de592890@xen.org>
+X-Inumbo-ID: d9cf4d07-7c90-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=4uz818AY0/m+FRzGeIhGz1ZTqpxzLihnWApmCN46dps=; b=fKwQs5UAJQKDc4KMhJikM8x0P+
+	jPOTGf+YxCgZTG/biDh3QzX3JwAbu0gE40tBY8XR/RZ3HilkTvWvdgtoMbVM/GryZUjrqPv/srYx4
+	+ipkc9VhfDcYvAyXEPUXUUHSwPPlvgV05kdutHUN0YQWlbfVFPhtzdPr9P3gzllPa+c2RQrgYl6xO
+	6BYbsvGDvWMmLVvsAho+MJkjTcjB/wbjsPkkpXi882fTxrvbre3s1QCQSJw92wKxWoLxH0GOWQ49U
+	osQBPzD5cm4z9Xb9QrnOHQjCv0800KW3Xgu428Cxh5JoUgybYy4O1wohQagI+6cxYjmo5Ua7CiFYT
+	qbjp+IOg==;
+From: David Woodhouse <dwmw2@infradead.org>
+To: qemu-devel@nongnu.org,
+	qemu-stable@nongnu.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	Kevin Wolf <kwolf@redhat.com>,
+	Hanna Reitz <hreitz@redhat.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	xen-devel@lists.xenproject.org,
+	qemu-block@nongnu.org,
+	kvm@vger.kernel.org
+Subject: [PULL 7/7] hw/xen: use correct default protocol for xen-block on x86
+Date: Mon,  6 Nov 2023 10:39:55 +0000
+Message-ID: <20231106103955.200867-8-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231106103955.200867-1-dwmw2@infradead.org>
+References: <20231106103955.200867-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <191b5aa4-182f-4b2e-8430-e605de592890@xen.org>
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Hi Julien,
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-On Mon, Nov 06, 2023 at 09:52:45AM +0000, Julien Grall wrote:
+Even on x86_64 the default protocol is the x86-32 one if the guest doesn't
+specifically ask for x86-64.
 
-[...]
+Cc: qemu-stable@nongnu.org
+Fixes: b6af8926fb85 ("xen: add implementations of xen-block connect and disconnect functions...")
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+ hw/block/xen-block.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-> > Gentle ping.
-> > 
-> > I don't see this patch is landed in Xen master or staging branch, should
-> > anything I need to follow up?
-> 
-> The tree has been frozen for the past few weeks for any patches that are not
-> meant for 4.18. We branched for 4.18 last week so staging is now in
-> soft-reopening until 4.18 is released.
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index a07cd7eb5d..bfa53960c3 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -115,9 +115,13 @@ static void xen_block_connect(XenDevice *xendev, Error **errp)
+         return;
+     }
+ 
+-    if (xen_device_frontend_scanf(xendev, "protocol", "%ms",
+-                                  &str) != 1) {
+-        protocol = BLKIF_PROTOCOL_NATIVE;
++    if (xen_device_frontend_scanf(xendev, "protocol", "%ms", &str) != 1) {
++        /* x86 defaults to the 32-bit protocol even for 64-bit guests. */
++        if (object_dynamic_cast(OBJECT(qdev_get_machine()), "x86-machine")) {
++            protocol = BLKIF_PROTOCOL_X86_32;
++        } else {
++            protocol = BLKIF_PROTOCOL_NATIVE;
++        }
+     } else {
+         if (strcmp(str, XEN_IO_PROTO_ABI_X86_32) == 0) {
+             protocol = BLKIF_PROTOCOL_X86_32;
+-- 
+2.41.0
 
-Thank you for the info.
-
-> I am aware of few patches that are ready to be merged. But I haven't yet
-> gone through all of them and merge to 4.19. It will probably be done once
-> 4.18 is released.
-
-Sure, good to know this.  I will wait a bit and just let me know if
-I need to follow up anything.
-
-Thanks,
-Leo
 
