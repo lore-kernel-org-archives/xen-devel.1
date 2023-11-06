@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52950C4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:40:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.627882.978779 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97203C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:59:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.627910.978814 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1i-0001uk-QL; Mon, 06 Nov 2023 10:40:14 +0000
+	id 1qzxJx-0001UQ-M8; Mon, 06 Nov 2023 10:59:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 627882.978779; Mon, 06 Nov 2023 10:40:14 +0000
+Received: by outflank-mailman (output) from mailman id 627910.978814; Mon, 06 Nov 2023 10:59:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1i-0001t7-IK; Mon, 06 Nov 2023 10:40:14 +0000
-Received: by outflank-mailman (input) for mailman id 627882;
- Mon, 06 Nov 2023 10:40:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qzx1h-00010s-1n
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:13 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id db3f9ead-7c90-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 11:40:09 +0100 (CET)
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qzx1R-00ARzt-0U; Mon, 06 Nov 2023 10:39:57 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1qzx1P-000qFu-2O; Mon, 06 Nov 2023 10:39:55 +0000
+	id 1qzxJx-0001UJ-JM; Mon, 06 Nov 2023 10:59:05 +0000
+Received: by outflank-mailman (input) for mailman id 627910;
+ Mon, 06 Nov 2023 10:59:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=DhA2=GT=aepfle.de=olaf@srs-se1.protection.inumbo.net>)
+ id 1qzxJw-0001U5-Gq
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:59:04 +0000
+Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
+ [85.215.255.24]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7f10d95c-7c93-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 11:59:03 +0100 (CET)
+Received: from sender by smtp.strato.de (RZmta 49.9.1 AUTH)
+ with ESMTPSA id 0b3125zA6Ax2mGc
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Mon, 6 Nov 2023 11:59:02 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,87 +42,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: db3f9ead-7c90-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=8hFASJ6FJkP5+9JiryopkqrFh+wE1Upzc1d8akCwXKw=; b=HsrZzoi7oxWmojvdJbVOfncH0N
-	LbE/oaY1cF3jW518bYSyd7CXECURPhDuOuFEE8NyoL8eFV3GGox+Hzctzdk+/TrfqieRU1enW9yFr
-	9QS6NRkLSjfqmAQLbcdxS3Gb1+iD4xJilLEbyoaeMSg2pJ4JawL966SDpIEVrq04r+qmKAXrLxj4e
-	ZX45hY+bYHsbjDE//upJSGdIXJBW9tqgCeakGBy0fTLvjj0NoQi92EG8h6lsFZHgKf7HrBEqMiegB
-	Myb8iENcsbB7PG7qHQYJleGczojpxfri7o1i2f3titfD/eMwazbQ+Pf+kPbTTzWI8D2JtXw0NnvD8
-	By83/WAw==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org,
-	qemu-stable@nongnu.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Kevin Wolf <kwolf@redhat.com>,
-	Hanna Reitz <hreitz@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Marcelo Tosatti <mtosatti@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	qemu-block@nongnu.org,
-	kvm@vger.kernel.org
-Subject: [PULL 0/7] xenfv-stable queue
-Date: Mon,  6 Nov 2023 10:39:48 +0000
-Message-ID: <20231106103955.200867-1-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.41.0
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: 7f10d95c-7c93-11ee-98da-6d05b1d4d9a1
+ARC-Seal: i=1; a=rsa-sha256; t=1699268342; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=bFuA7owH4v+A2nizifOQqXwr6xMdGPWSCAv3xhb6ArTYl6oEoE+Us51pksvJ04C9Vo
+    CHpkLeCUnet6O5l40eoQrKgh0yl5QeYg2BMapKOYYs0XjgZnG7QBTaj2D2+ANPxKVDG/
+    JaaER43Um1u7tNBkAjsxU2BFc8iGyoByPlUGR84S7OENmjC+PuBSnvqrF68RYxSzWft7
+    kRFOfnUBVg5PSMKXvCEBSkUsieekWPWoS+weCRA38ChtoGNWgDfnTwQJQKi1J45NxZCw
+    6zfB4oeD/Wz3yBxLVB5ogDTNCcIm7ZKjluwLhZBvsfoG9BILUje1vE5L+rR+hsvD9SAh
+    3G4A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1699268342;
+    s=strato-dkim-0002; d=strato.com;
+    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+    From:Subject:Sender;
+    bh=s1opiu+sP0b9Q9aml9+moy2gSuLh4TtEsvY0kONdsBQ=;
+    b=NGADdmYeQ6v0TSqvgxWdKd14V9EKtSWyVPg1jEv/jlVLGPNRttr2cLojqFLRsPMBIF
+    tUDvFUzSexA9oge1PZREKHOPhVBFVMZuzTSQx6t9HgQZmJSFi96/UI/0Gu2Ga9L+ry8w
+    3sGtJzft0koFAGqPy4HOJnwPM6vqoybVjPc/VeMKpM/FHzAZ5ULtvdFnpFnCH8hEK1Ey
+    VIe7as52vonEtL3BNrxqZQSMJ3eTuVsvV1XnbAAKr/TIn/AoUCIA81Dp7c99/v7D85xW
+    C7NwXBlLB/ABJHXDkTH4I880sRxmwhztdaW+eA6sqWRByvlAHnSptC1c5S2/zQurg4bn
+    ooxA==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo00
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1699268342;
+    s=strato-dkim-0002; d=aepfle.de;
+    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+    From:Subject:Sender;
+    bh=s1opiu+sP0b9Q9aml9+moy2gSuLh4TtEsvY0kONdsBQ=;
+    b=j0vPn3AoyiC/1PdOay2hQVsxRNAp0enEPtGLtpxmY6k74E2duaBOvVZWMQrfphUsjs
+    RgKa8Pco/DjfjtmOX/w2/NENdbTo3D/ER5U8RsPXbBdO2Vmu7G+h8p24xB0UhaOQ0LZW
+    A0eWlrmOJl4/CrqNAfWTe8oU6EzhCo1dLexf4cLNiN4rHaF7R7YhiQUKKE6YRkCWKTHX
+    mYdv12OQRWHfWaciFUDraCL9zVrVVXByjFjTQdVQrMQip6kzrFg+NoI9M4gFQ+yzfpci
+    dFYrFJoSNrHBGqwXPJQGDnwbwO8N5K/67V5Es96TLOm64JU96+Got3fsERgHdLAaViNp
+    y2tw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1699268342;
+    s=strato-dkim-0003; d=aepfle.de;
+    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+    From:Subject:Sender;
+    bh=s1opiu+sP0b9Q9aml9+moy2gSuLh4TtEsvY0kONdsBQ=;
+    b=i28BquZQotovZpBHgNDVmfrdl2QYgv1Aa6HD3xBDXIV+3sP/d4ogMKGOAxEPrX1sJB
+    nrjyWl6KkheGwiS8I4AA==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisR5BhaIaRnsNaqJN2h0dTFZeqQ89seVgD7Tlo9gNQ=="
+Date: Mon, 6 Nov 2023 11:58:52 +0100
+From: Olaf Hering <olaf@aepfle.de>
+To: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] tools: Remove all DECLARE_* op macros in xc
+Message-ID: <20231106115852.31df968d.olaf@aepfle.de>
+In-Reply-To: <20231106081946.1055-1-alejandro.vallejo@cloud.com>
+References: <20231106081946.1055-1-alejandro.vallejo@cloud.com>
+X-Mailer: Claws Mail 20230817T113819.a897c59c hat ein Softwareproblem, kann man nichts machen.
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+Content-Type: multipart/signed; boundary="Sig_/8tl.52dIfAi_EQHgOYW1sh0";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+Content-Transfer-Encoding: 7bit
 
-The following changes since commit d762bf97931b58839316b68a570eecc6143c9e3e:
+--Sig_/8tl.52dIfAi_EQHgOYW1sh0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-  Merge tag 'pull-target-arm-20231102' of https://git.linaro.org/people/pmaydell/qemu-arm into staging (2023-11-03 10:04:12 +0800)
+Mon,  6 Nov 2023 08:19:46 +0000 Alejandro Vallejo <alejandro.vallejo@cloud.=
+com>:
 
-are available in the Git repository at:
+> +    struct xen_sysctl sysctl =3D {0};
 
-  git://git.infradead.org/users/dwmw2/qemu.git tags/pull-xenfv-stable-20231106
+What is that zero doing here? I think a plain {} will do it as well.
 
-for you to fetch changes up to a1c1082908dde4867b1ac55f546bea0c17d52318:
 
-  hw/xen: use correct default protocol for xen-block on x86 (2023-11-06 10:03:45 +0000)
+Olaf
 
-----------------------------------------------------------------
-Bugfixes for emulated Xen support
+--Sig_/8tl.52dIfAi_EQHgOYW1sh0
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
 
-Selected bugfixes for mainline and stable, especially to the per-vCPU
-local APIC vector delivery mode for event channel notifications, which
-was broken in a number of ways.
+-----BEGIN PGP SIGNATURE-----
 
-The xen-block driver has been defaulting to the wrong protocol for x86
-guest, and this fixes that — which is technically an incompatible change
-but I'm fairly sure nobody relies on the broken behaviour (and in
-production I *have* seen guests which rely on the correct behaviour,
-which now matches the blkback driver in the Linux kernel).
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmVIxuwACgkQ86SN7mm1
+DoDeWA/+L5jKXs81KmCTEY/W1wbM0Y0XFKF+0HtMGMg8N/9i9DQ6a17TkW+NU/3i
+QksXhp7PgyqK+yxkNNFxCw9UUyUePc77sMatbstGOri5MiSYth30ufMADvzo1a/o
+Z+Yq9ur4qvpL8oqqoKbSqzuj4hG+Yh5BulgTzW3DmsqKiObMql1HBp0f8WTVtURK
+vz/MWMHK1g6DGVP8otHRK4s1QT84uxTCLUScUWQlCivuzVUm5sYImJ0Zhs9B+SjP
+t7V+DtT8iTQGaYvI4qjIrCHzsvwNH4W2aRUALu1gutd8g4Xqb4YGXqqQ3ki4VNo1
+RDBLhJ7sZsY//Bbwqd6+IJT3UqUxE+V8VRKjeugk61QeCZV1Hd5jU5uJE6INQi4c
+OfRf5kkofYBgMLhagXvII1S9XXLqbpu+Ia2HgpR+qiD+m4cBtKWo+WbfQTJ6GvCb
+KV0rO0cuUpTP0OrcV6Oqj6ptUze7IHUiVJFsHNoaGGA2JxeUuPdSj/vJ5ehzjnza
+wJzZrr5QH10OLheCa7jystWfdeCsrMzWmX/kpYgRnM6O3XMmmO/l67XdF9z1pLDE
+AwMdIb+DiZ2AdAKzFlnuyO1QsHPLQHqf0sYP0LDs2UBOBfPkbcVpnav+9FsyuUNm
+gZBkIvTzfDc8RfJKmNca1tf+vix4Qnugp084pZEdOgrxxuzc5ec=
+=h/VO
+-----END PGP SIGNATURE-----
 
-A handful of other simple fixes for issues which came to light as new
-features (qv) were being developed.
-
-----------------------------------------------------------------
-David Woodhouse (7):
-      i386/xen: Don't advertise XENFEAT_supervisor_mode_kernel
-      i386/xen: fix per-vCPU upcall vector for Xen emulation
-      hw/xen: select kernel mode for per-vCPU event channel upcall vector
-      hw/xen: don't clear map_track[] in xen_gnttab_reset()
-      hw/xen: fix XenStore watch delivery to guest
-      hw/xen: take iothread mutex in xen_evtchn_reset_op()
-      hw/xen: use correct default protocol for xen-block on x86
-
- hw/block/xen-block.c       | 10 +++++++---
- hw/i386/kvm/xen_evtchn.c   |  7 +++++++
- hw/i386/kvm/xen_gnttab.c   |  2 --
- hw/i386/kvm/xen_xenstore.c |  8 +++++---
- include/sysemu/kvm_xen.h   |  1 +
- target/i386/kvm/xen-emu.c  | 16 +++++++++++-----
- 6 files changed, 31 insertions(+), 13 deletions(-)
+--Sig_/8tl.52dIfAi_EQHgOYW1sh0--
 
