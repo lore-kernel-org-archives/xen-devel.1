@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07590C4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:56:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628301.979714 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700F0C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:04:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628346.979745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hV-0006QS-NO; Mon, 06 Nov 2023 19:55:57 +0000
+	id 1r05pe-0005Pb-Ml; Mon, 06 Nov 2023 20:04:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628301.979714; Mon, 06 Nov 2023 19:55:57 +0000
+Received: by outflank-mailman (output) from mailman id 628346.979745; Mon, 06 Nov 2023 20:04:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hU-0006Km-Fe; Mon, 06 Nov 2023 19:55:56 +0000
-Received: by outflank-mailman (input) for mailman id 628301;
- Mon, 06 Nov 2023 19:55:47 +0000
+	id 1r05pe-0005PU-Ic; Mon, 06 Nov 2023 20:04:22 +0000
+Received: by outflank-mailman (input) for mailman id 628346;
+ Mon, 06 Nov 2023 20:04:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hK-00024f-Nx
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:46 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1r05hU-00024f-PT
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:56 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 760f8356-7cde-11ee-98da-6d05b1d4d9a1;
- Mon, 06 Nov 2023 20:55:40 +0100 (CET)
+ id 7a6b3313-7cde-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 20:55:47 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fZ-007taH-Tz; Mon, 06 Nov 2023 19:53:58 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1r05fc-00AkG0-33; Mon, 06 Nov 2023 19:54:01 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fa-001GNC-0Y; Mon, 06 Nov 2023 19:53:58 +0000
+ Hat Linux)) id 1r05fb-001GOW-2o; Mon, 06 Nov 2023 19:53:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 760f8356-7cde-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 7a6b3313-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Z4wmNoHv5HpsnaTauDJ4KT56/93LmHuykc4Xtvki9Sg=; b=okUsf/dbtKaDDR4uvBRKlfksBe
-	mOsew+y19pPxm6WkzBeZQmIsCkMkrCRZPh4wQAqznMOq479Kv1X/XeZhBsuMpmzcqlqyBjhvuv7mc
-	X3zHNT5gbkXIAeyZO/ki5Nn+oNQNcMigOyb78lXLViYKwd+1mKFkf2UcndTYkLY8zfSKT1Z+XcsRT
-	YH6QR0tAmfggF3h75IKoC5fWNsE0yXOaS+f7bDC+81/gHpZlpc6JprIODCd72otABCMpT9fs+1amf
-	ISabgUU5mXohO05dJGhI4O4ERYg+PMOMS4pHdOPKLW7zsv6y6gg1wvxDg1HYR/fI+GErAkGYu1A3I
-	fcO8OPOw==;
+	bh=CwrcftsMNPuPT4LX6xWfoQshSKeiy5wRc7ZmctS6KKk=; b=dEGvR06KP0y4apTEU1yjiPEPOc
+	kpKKLIyCjS6YI/yS9dc5pWcbRmkOU/Dav0mBmqcS5mUmsVn+RiYPn4dnGqSRdP4qBeSqRCmHGQEvA
+	I8LuIGoJCq3BEX7GEI/6xYRZWRxHlG40RXDYR0dS+ry/epAQ8ZyPxx8EOoLoWyFDoT7rfu4GVj0QD
+	Wwl9NmeKPPaJQZRnfXOe2lneNGMDoQTLfTBFpOMiDQWdbid/1p0ASecZwTixO3sgt3maGhzE3Oew0
+	oh3HP5CJNhQbnYgCdJf0PAR1WYf+848zw2bMgK4n0NwFb6snrmBz9ZRz8lJFiEV8rmBRMLswyWHiq
+	qDltYN6Q==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,49 +120,53 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 10/46] hw/hppa: use pci_init_nic_devices()
-Date: Mon,  6 Nov 2023 19:49:15 +0000
-Message-ID: <20231106195352.301038-11-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 27/46] hw/arm/highbank: use qemu_create_nic_device()
+Date: Mon,  6 Nov 2023 19:49:32 +0000
+Message-ID: <20231106195352.301038-28-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/hppa/machine.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ hw/arm/highbank.c | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index 67d4d1b5e0..d7cee6e49e 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -309,7 +309,6 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus)
-     uint64_t kernel_entry = 0, kernel_low, kernel_high;
-     MemoryRegion *addr_space = get_system_memory();
-     MemoryRegion *rom_region;
--    long i;
-     unsigned int smp_cpus = machine->smp.cpus;
-     SysBusDevice *s;
+diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
+index f12aacea6b..798e5391dc 100644
+--- a/hw/arm/highbank.c
++++ b/hw/arm/highbank.c
+@@ -296,19 +296,17 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
  
-@@ -333,10 +332,8 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus)
-                         qdev_get_gpio_in(lasi_dev, LASI_IRQ_LAN_HPA));
-     }
+     sysbus_create_simple(TYPE_SYSBUS_AHCI, 0xffe08000, pic[83]);
  
--    for (i = 0; i < nb_nics; i++) {
--        if (!enable_lasi_lan()) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+    if (!enable_lasi_lan()) {
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
-     }
+-    if (nd_table[0].used) {
+-        qemu_check_nic_model(&nd_table[0], "xgmac");
+-        dev = qdev_new("xgmac");
+-        qdev_set_nic_properties(dev, &nd_table[0]);
++    dev = qemu_create_nic_device("xgmac", true, NULL);
++    if (dev) {
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff50000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[77]);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 1, pic[78]);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 2, pic[79]);
++    }
  
-     /* BMC board: HP Powerbar SP2 Diva (with console only) */
+-        qemu_check_nic_model(&nd_table[1], "xgmac");
+-        dev = qdev_new("xgmac");
+-        qdev_set_nic_properties(dev, &nd_table[1]);
++    dev = qemu_create_nic_device("xgmac", true, NULL);
++    if (dev) {
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff51000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[80]);
 -- 
 2.41.0
 
