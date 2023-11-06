@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A28AC001B2
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:56:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628289.979601 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B41DC001DB
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:56:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628298.979687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hF-0002if-LT; Mon, 06 Nov 2023 19:55:41 +0000
+	id 1r05hQ-0005Dc-9z; Mon, 06 Nov 2023 19:55:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628289.979601; Mon, 06 Nov 2023 19:55:41 +0000
+Received: by outflank-mailman (output) from mailman id 628298.979687; Mon, 06 Nov 2023 19:55:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hF-0002fm-9V; Mon, 06 Nov 2023 19:55:41 +0000
-Received: by outflank-mailman (input) for mailman id 628289;
- Mon, 06 Nov 2023 19:55:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r05hP-000588-Iz; Mon, 06 Nov 2023 19:55:51 +0000
+Received: by outflank-mailman (input) for mailman id 628298;
+ Mon, 06 Nov 2023 19:55:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hC-0001Ig-Sy
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:39 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 736924cb-7cde-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 20:55:35 +0100 (CET)
+ <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1r05hH-00024f-NK
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:43 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7589314a-7cde-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 20:55:39 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fc-007tal-Ke; Mon, 06 Nov 2023 19:54:01 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1r05fb-00AkFq-2b; Mon, 06 Nov 2023 19:54:00 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GPL-2d; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fa-001GNd-2K; Mon, 06 Nov 2023 19:53:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 736924cb-7cde-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 7589314a-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=AhJIqQ4JvGd0KYjdhY7u9mp0ZZRVDk/M4nuhh3LTnPc=; b=V9EgTCJo/9IUxzcjTxQ4eFZZSm
-	Ek6V7ePz+KGtWWGQNNARR+vI/mCIf9Q/gnaNJBBwPHNjdliCmaBx4KRTkOjCKTbSIpwVNub1LwcPA
-	0lMqOy/iKe54l12rVjL2iut9OXpYLDrsKUCeCtLvsc7mdr+RsOjsuF8h9efzma3fdwXOb6ofTL0AW
-	/Hsffv6lw4wXFeqhC5py2TQEdYhFxrbEBaixDii3zP35BNgJPG6w3kUpgJhVWuXEocKxpqVebCscz
-	kYG+lo69p+fjtLHJHrfOIeykzGmf9r54SF20igEQUBX5z8ihKTL1rIdS1YMBCNcvJR6O8uU9pmUCw
-	ICKcfI8A==;
+	bh=O7+HX3w6XyECWcZnAzqqwZKvx1qj71QgIwZtZm02KnA=; b=FYb1RUmFgC2o88t7cCEf/HK/k+
+	xkOfAXzqneBS6o/ywK5HQaFPcCwcjcU7pTseyg6U7f0hvbWH1XdOXoCN9Db3kssQWHUTPgVeJ3UaX
+	l9vRtYto0dT+2vRCliOYN05Jm0EnGuBMRSeAD6Rv6L5QQSKVaCn5xRMo4gI8GdDu4APmWCfwr3NlQ
+	c4eiGjOG9KoBH/9Nj6q1vK7uNP2l/v+21L7oK4P5Y8mxkACz/c3ixumWvjQu5hW9YluKHnK3rLpM+
+	bHdHiyy6YOdTMckCWVzCw0dR5aB+o1dTEsh9ZegMTqnhTiKmkaMX2twqS6fG8UhU1qQxTzdiP7spC
+	rwzZiV3g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,67 +120,68 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 38/46] hw/openrisc/openrisc_sim: use qemu_create_nic_device()
-Date: Mon,  6 Nov 2023 19:49:43 +0000
-Message-ID: <20231106195352.301038-39-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 16/46] hw/ppc/spapr: use qemu_get_nic_info() and pci_init_nic_devices()
+Date: Mon,  6 Nov 2023 19:49:21 +0000
+Message-ID: <20231106195352.301038-17-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Avoid directly referencing nd_table[] by first instantiating any
+spapr-vlan devices using a qemu_get_nic_info() loop, then calling
+pci_init_nic_devices() to do the rest.
+
+No functional change intended.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/openrisc/openrisc_sim.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ hw/ppc/spapr.c | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
 
-diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
-index 35da123aef..bffd6f721f 100644
---- a/hw/openrisc/openrisc_sim.c
-+++ b/hw/openrisc/openrisc_sim.c
-@@ -170,7 +170,7 @@ static void openrisc_create_fdt(Or1ksimState *state,
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index df09aa9d6a..3d8ad75790 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -2796,6 +2796,7 @@ static void spapr_machine_init(MachineState *machine)
+     MemoryRegion *sysmem = get_system_memory();
+     long load_limit, fw_size;
+     Error *resize_hpt_err = NULL;
++    NICInfo *nd;
  
- static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-                                   int num_cpus, OpenRISCCPU *cpus[],
--                                  int irq_pin, NICInfo *nd)
-+                                  int irq_pin)
- {
-     void *fdt = state->fdt;
-     DeviceState *dev;
-@@ -178,8 +178,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-     char *nodename;
-     int i;
+     if (!filename) {
+         error_report("Could not find LPAR firmware '%s'", bios_name);
+@@ -2996,21 +2997,12 @@ static void spapr_machine_init(MachineState *machine)
  
--    dev = qdev_new("open_eth");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("open_eth", true, NULL);
-+    if (!dev) {
-+        return;
-+    }
+     phb = spapr_create_default_phb();
  
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -313,12 +315,10 @@ static void openrisc_sim_init(MachineState *machine)
-     openrisc_create_fdt(state, or1ksim_memmap, smp_cpus, machine->ram_size,
-                         machine->kernel_cmdline);
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-
+-        if (!nd->model) {
+-            nd->model = g_strdup("spapr-vlan");
+-        }
+-
+-        if (g_str_equal(nd->model, "spapr-vlan") ||
+-            g_str_equal(nd->model, "ibmveth")) {
+-            spapr_vlan_create(spapr->vio_bus, nd);
+-        } else {
+-            pci_nic_init_nofail(&nd_table[i], phb->bus, nd->model, NULL);
+-        }
++    while ((nd = qemu_find_nic_info("spapr-vlan", true, "ibmveth"))) {
++        spapr_vlan_create(spapr->vio_bus, nd);
+     }
  
--    if (nd_table[0].used) {
--        openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
--                              or1ksim_memmap[OR1KSIM_ETHOC].size,
--                              smp_cpus, cpus,
--                              OR1KSIM_ETHOC_IRQ, nd_table);
--    }
-+    openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
-+                          or1ksim_memmap[OR1KSIM_ETHOC].size,
-+                          smp_cpus, cpus,
-+                          OR1KSIM_ETHOC_IRQ);
- 
-     if (smp_cpus > 1) {
-         openrisc_sim_ompic_init(state, or1ksim_memmap[OR1KSIM_OMPIC].base,
++    pci_init_nic_devices(phb->bus, NULL);
++
+     for (i = 0; i <= drive_get_max_bus(IF_SCSI); i++) {
+         spapr_vscsi_create(spapr->vio_bus);
+     }
 -- 
 2.41.0
 
