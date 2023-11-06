@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF05C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:08:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628394.979855 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C47C4167B
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:08:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628395.979864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05to-0004Di-L0; Mon, 06 Nov 2023 20:08:40 +0000
+	id 1r05tp-0004a4-W3; Mon, 06 Nov 2023 20:08:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628394.979855; Mon, 06 Nov 2023 20:08:40 +0000
+Received: by outflank-mailman (output) from mailman id 628395.979864; Mon, 06 Nov 2023 20:08:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05to-0004Db-Ho; Mon, 06 Nov 2023 20:08:40 +0000
-Received: by outflank-mailman (input) for mailman id 628394;
- Mon, 06 Nov 2023 20:08:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r05tp-0004Yw-T0; Mon, 06 Nov 2023 20:08:41 +0000
+Received: by outflank-mailman (input) for mailman id 628395;
+ Mon, 06 Nov 2023 20:08:40 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hR-0001Ig-Fi
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:53 +0000
+ id 1r05hZ-00024f-Qw
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:56:01 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 79fb1c10-7cde-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 20:55:46 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7e79ebd2-7cde-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 20:55:54 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fd-007tb3-6F; Mon, 06 Nov 2023 19:54:02 +0000
+ id 1r05fb-007taR-5p; Mon, 06 Nov 2023 19:53:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fd-001GPu-1Y; Mon, 06 Nov 2023 19:54:01 +0000
+ Hat Linux)) id 1r05fb-001GO5-1B; Mon, 06 Nov 2023 19:53:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 79fb1c10-7cde-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 7e79ebd2-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=vZowVkCjMFbp95UJRr5lu+JPxdNb9doXjcXZRlmZdv8=; b=Y/rkI5F0NcvCFoLbktSjr9lD+p
-	JghtzoFzu1jDfHij1/EbcuKd66GBWDMTanBgalqLdoTiZOA/Vs2zIKMhAwjpEWhC+ogI3P5/QnQCW
-	ee3GrAB/elUOQ5ZswbLXnTB04HdYuoyZ0IZ7KB3LfvtHV92kmes+GTH4SFL+BHuFQiu3iKxL3hk09
-	ao5Od0E02mZsu2PxliLHdwYKYf7QvlXUrSJLbvKvuGmlm4k6bho2IPdG20Ysp2YAFS9TM3WOSH94j
-	0W9WhgZJl96jwmHF+1r7uuYiuvxpYSbQ3efgbg4ED59wjEdGIKiLh2g8faL+E72DdJnyM+9+xJoXV
-	9yAC6hug==;
+	bh=6GcIfEqXlcnmmpl6cCrOJJoCYIHAK8lem5JXl9qMtnE=; b=QgCulFrknk++puvIc8xv05TqtR
+	ADnGU4Ge42C6n3KqRuee9qIvAs4ZgXlXooWWLWMPSbZ/lpLi9+wE9xe6GVO/4BsLlBskszEcJDK6u
+	b3d3S2TxMQMhgXjUfJSAK3IwaTpeS/1SRYzaDnHN9cZiwTGqPEWhM1EqUxQvMij3D08njv1hf5zLa
+	E/lM25PmshZs8n2z0u4s3k7l0k1+QXsNOATEHgXW/QoH3JjQt3ZgoUN3i4Gchyr+zQsq5GJvdqmij
+	X3sRfxM531p1pPRUzK4tX06o2kILA2Ha9sZbaHB9lPivmaGLCN9QJ0WqbYR+xL7WDMzqWR4T7rmwY
+	KJ2AyMOQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 45/46] net: remove qemu_show_nic_models(), qemu_find_nic_model()
-Date: Mon,  6 Nov 2023 19:49:50 +0000
-Message-ID: <20231106195352.301038-46-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 22/46] hw/arm/aspeed: use qemu_configure_nic_device()
+Date: Mon,  6 Nov 2023 19:49:27 +0000
+Message-ID: <20231106195352.301038-23-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -133,90 +133,38 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-These old functions can be removed now too. Let net_param_nic() print
-the full set of network devices directly, and also make it note that a
-list more specific to this platform/config will be available by using
-'-nic model=help' instead.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- include/net/net.h |  3 ---
- net/net.c         | 39 ++++++---------------------------------
- 2 files changed, 6 insertions(+), 36 deletions(-)
+ hw/arm/aspeed.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 1512650190..290e604f03 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -201,9 +201,6 @@ void qemu_set_vnet_hdr_len(NetClientState *nc, int len);
- int qemu_set_vnet_le(NetClientState *nc, bool is_le);
- int qemu_set_vnet_be(NetClientState *nc, bool is_be);
- void qemu_macaddr_default_if_unset(MACAddr *macaddr);
--int qemu_show_nic_models(const char *arg, const char *const *models);
--int qemu_find_nic_model(NICInfo *nd, const char * const *models,
--                        const char *default_model);
- NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-                             const char *alias);
- bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-diff --git a/net/net.c b/net/net.c
-index ffc722069f..a3532a71a5 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -962,38 +962,6 @@ GPtrArray *qemu_get_nic_models(const char *device_type)
-     return nic_models;
- }
+diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
+index cc59176563..bed5e4f40b 100644
+--- a/hw/arm/aspeed.c
++++ b/hw/arm/aspeed.c
+@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
+     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
+     AspeedSoCClass *sc;
+     int i;
+-    NICInfo *nd = &nd_table[0];
  
--int qemu_show_nic_models(const char *arg, const char *const *models)
--{
--    int i;
--
--    if (!arg || !is_help_option(arg)) {
--        return 0;
--    }
--
--    printf("Available NIC models:\n");
--    for (i = 0 ; models[i]; i++) {
--        printf("%s\n", models[i]);
--    }
--    return 1;
--}
--
--int qemu_find_nic_model(NICInfo *nd, const char * const *models,
--                        const char *default_model)
--{
--    int i;
--
--    if (!nd->model)
--        nd->model = g_strdup(default_model);
--
--    for (i = 0 ; models[i]; i++) {
--        if (strcmp(nd->model, models[i]) == 0)
--            return i;
--    }
--
--    error_report("Unsupported NIC model: %s", nd->model);
--    return -1;
--}
--
- static int net_init_nic(const Netdev *netdev, const char *name,
-                         NetClientState *peer, Error **errp)
- {
-@@ -1776,9 +1744,14 @@ static int net_param_nic(void *dummy, QemuOpts *opts, Error **errp)
+     bmc->soc = ASPEED_SOC(object_new(amc->soc_name));
+     object_property_add_child(OBJECT(machine), "soc", OBJECT(bmc->soc));
+@@ -371,10 +370,10 @@ static void aspeed_machine_init(MachineState *machine)
+                              &error_fatal);
+ 
+     for (i = 0; i < sc->macs_num; i++) {
+-        if ((amc->macs_mask & (1 << i)) && nd->used) {
+-            qemu_check_nic_model(nd, TYPE_FTGMAC100);
+-            qdev_set_nic_properties(DEVICE(&bmc->soc->ftgmac100[i]), nd);
+-            nd++;
++        if ((amc->macs_mask & (1 << i)) &&
++            !qemu_configure_nic_device(DEVICE(&bmc->soc->ftgmac100[i]),
++                                       true, NULL)) {
++            break; /* No configs left; stop asking */
          }
-         if (is_help_option(type)) {
-             GPtrArray *nic_models = qemu_get_nic_models(TYPE_DEVICE);
-+            int i;
-             show_netdevs();
-             printf("\n");
--            qemu_show_nic_models(type, (const char **)nic_models->pdata);
-+            printf("Supported NIC models "
-+                   "(use -nic model=help for a filtered list):\n");
-+            for (i = 0 ; nic_models->pdata[i]; i++) {
-+                printf("%s\n", (char *)nic_models->pdata[i]);
-+            }
-             g_ptr_array_free(nic_models, true);
-             exit(0);
-         }
+     }
+ 
 -- 
 2.41.0
 
