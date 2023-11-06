@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A2B0C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CFEC4167D
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 19:56:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628299.979692 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.628300.979707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hR-0005Up-DY; Mon, 06 Nov 2023 19:55:53 +0000
+	id 1r05hT-0005rb-NW; Mon, 06 Nov 2023 19:55:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628299.979692; Mon, 06 Nov 2023 19:55:53 +0000
+Received: by outflank-mailman (output) from mailman id 628300.979707; Mon, 06 Nov 2023 19:55:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05hQ-0005OW-Po; Mon, 06 Nov 2023 19:55:52 +0000
-Received: by outflank-mailman (input) for mailman id 628299;
- Mon, 06 Nov 2023 19:55:45 +0000
+	id 1r05hS-0005mw-DF; Mon, 06 Nov 2023 19:55:54 +0000
+Received: by outflank-mailman (input) for mailman id 628300;
+ Mon, 06 Nov 2023 19:55:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hI-00024f-Nj
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:44 +0000
+ id 1r05hJ-00024f-Ng
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:45 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7587d4b8-7cde-11ee-98da-6d05b1d4d9a1;
+ id 75c2a6bf-7cde-11ee-98da-6d05b1d4d9a1;
  Mon, 06 Nov 2023 20:55:39 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fa-007taN-LN; Mon, 06 Nov 2023 19:53:59 +0000
+ id 1r05fZ-007taC-BY; Mon, 06 Nov 2023 19:53:58 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fa-001GNj-2g; Mon, 06 Nov 2023 19:53:58 +0000
+ Hat Linux)) id 1r05fZ-001GMj-1Z; Mon, 06 Nov 2023 19:53:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 7587d4b8-7cde-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 75c2a6bf-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=5bcCMvV82e1Sve2BVcG15Kkp2UpIXLhocOoMJ70sRvM=; b=MkbWAP53t45zN+J3OWeTYLRWqY
-	IxlT+triXTTst7xf9SvNcu8e8o7Y0xaQ4Ne6iu1sC6cAx4OcKM5enOL97HpiQYuuSwPUIVIF+5TdK
-	MtcKcGgKJ3l5ADxs/LybZam94ZFFFa9iaUGNCykVTVjEFYxwZuyI4Bqgmtz7xhrpJh8nXM7ojZdSr
-	uoG91AJ6DjX9JRGuYnwh0gBz5OP/QET0xcxH8+d91nQT+Z0g5ZEonDhQuPKD5idwhniGeKgJcqRRZ
-	qBTybWjW24MrUYxXRNdxTR2jofI8qvQoAw3+ygenrcCyriRs/Lu1txhaK9XjnuhVc+hfjrtDrBAd3
-	91AbXCAA==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=WZmVL1uI/KotgdQhXO/qrZTP/dohS1pm8NaUzNrIdIE=; b=nv6FvVLjCIrbFr+0UrcGp1qnHZ
+	j8eZtUiloNyLV0p1HBnbUW3cQA8b3Ad9kga46jhIwPt+7DNjSjq91AetVDsNzVWurXkc032ybq1cE
+	ndRNvWJ4wo7eQLok0W4yWtMBv7cdAqvtge6WiUHZ3UyrQBo44ihqFXo7OxqI7PWDGPNoc7p9WQYme
+	4PQJtIywrHXUUkH4K+Ssyufegy11RZx/ogCOTJ06D4svHb90SfbDwab44b5ZV0YXbhjXOUbC9uQuU
+	QL4J2f8mqAaxsJJJyZz0JvhN+OETvwULHgUoTDvqyODAJb8821GAXA9ZUr78ZA2sv3chD4cHetanC
+	Zkp1ElpQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,104 +120,110 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 17/46] hw/ppc: use pci_init_nic_devices()
-Date: Mon,  6 Nov 2023 19:49:22 +0000
-Message-ID: <20231106195352.301038-18-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 03/46] net: add qemu_create_nic_bus_devices()
+Date: Mon,  6 Nov 2023 19:49:08 +0000
+Message-ID: <20231106195352.301038-4-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- hw/ppc/e500.c          |  4 +---
- hw/ppc/mac_newworld.c  |  4 +---
- hw/ppc/mac_oldworld.c  |  4 +---
- hw/ppc/ppc440_bamboo.c | 14 +++++---------
- 4 files changed, 8 insertions(+), 18 deletions(-)
+This will instantiate any NICs which live on a given bus type. Each bus
+is allowed *one* substitution (for PCI it's virtio → virtio-net-pci, for
+Xen it's xen → xen-net-device; no point in overengineering it unless we
+actually want more).
 
-diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
-index e04114fb3c..f62eeb3411 100644
---- a/hw/ppc/e500.c
-+++ b/hw/ppc/e500.c
-@@ -1075,9 +1075,7 @@ void ppce500_init(MachineState *machine)
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+ include/net/net.h |  3 +++
+ net/net.c         | 53 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+)
+
+diff --git a/include/net/net.h b/include/net/net.h
+index 56be694c75..ce830a47d0 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -211,6 +211,9 @@ bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
+                                const char *alias);
+ DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
+                                     const char *alias);
++void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
++                                 const char *default_model,
++                                 const char *alias, const char *alias_target);
+ void print_net_client(Monitor *mon, NetClientState *nc);
+ void net_socket_rs_init(SocketReadState *rs,
+                         SocketReadStateFinalize *finalize,
+diff --git a/net/net.c b/net/net.c
+index 807220e630..73621795cb 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -1208,6 +1208,59 @@ DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
+     return dev;
+ }
  
-     if (pci_bus) {
-         /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
-     }
- 
-     /* Register spinning region */
-diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
-index 535710314a..b36dbaf2b6 100644
---- a/hw/ppc/mac_newworld.c
-+++ b/hw/ppc/mac_newworld.c
-@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
-         graphic_depth = 15;
-     }
- 
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* The NewWorld NVRAM is not located in the MacIO device */
-     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
-diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
-index 9acc7adfc9..1981d3d8f6 100644
---- a/hw/ppc/mac_oldworld.c
-+++ b/hw/ppc/mac_oldworld.c
-@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
- 
-     pci_vga_init(pci_bus);
- 
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* MacIO IDE */
-     ide_drive_get(hd, ARRAY_SIZE(hd));
-diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
-index a189942de4..c75c3083e6 100644
---- a/hw/ppc/ppc440_bamboo.c
-+++ b/hw/ppc/ppc440_bamboo.c
-@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
-     DeviceState *uicdev;
-     SysBusDevice *uicsbd;
-     int success;
--    int i;
- 
-     if (kvm_enabled()) {
-         error_report("machine %s does not support the KVM accelerator",
-@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
-     }
- 
-     if (pcibus) {
--        /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            /*
--             * There are no PCI NICs on the Bamboo board, but there are
--             * PCI slots, so we can pick whatever default model we want.
--             */
--            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
--        }
-+        /*
-+         * There are no PCI NICs on the Bamboo board, but there are
-+         * PCI slots, so we can pick whatever default model we want.
-+         */
-+        pci_init_nic_devices(pcibus, mc->default_nic);
-     }
- 
-     /* Load kernel. */
++void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
++                                 const char *default_model,
++                                 const char *alias, const char *alias_target)
++{
++    GPtrArray *nic_models = qemu_get_nic_models(parent_type);
++    const char *model;
++    DeviceState *dev;
++    NICInfo *nd;
++    int i;
++
++    if (nic_model_help) {
++        if (alias_target) {
++            add_nic_model_help(alias_target, alias);
++        }
++        for (i = 0; i < nic_models->len - 1; i++) {
++            add_nic_model_help(nic_models->pdata[i], NULL);
++        }
++    }
++
++    /* Drop the NULL terminator which would make g_str_equal() unhappy */
++    nic_models->len--;
++
++    for (i = 0; i < nb_nics; i++) {
++        nd = &nd_table[i];
++
++        if (!nd->used || nd->instantiated) {
++            continue;
++        }
++
++        model = nd->model ? nd->model : default_model;
++        if (!model) {
++            continue;
++        }
++
++        /* Each bus type is allowed *one* substitution */
++        if (g_str_equal(model, alias)) {
++            model = alias_target;
++        }
++
++        if (!g_ptr_array_find_with_equal_func(nic_models, model,
++                                              g_str_equal, NULL)) {
++            /* This NIC does not live on this bus. */
++            continue;
++        }
++
++        dev = qdev_new(model);
++        qdev_set_nic_properties(dev, nd);
++        qdev_realize_and_unref(dev, bus, &error_fatal);
++    }
++
++    g_ptr_array_free(nic_models, true);
++}
++
+ static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
+     const Netdev *netdev,
+     const char *name,
 -- 
 2.41.0
 
