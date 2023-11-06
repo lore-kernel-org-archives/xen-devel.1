@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94373C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:10:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628437.979964 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A62BAC4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:10:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628446.979975 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vH-0003EN-Tg; Mon, 06 Nov 2023 20:10:11 +0000
+	id 1r05vl-0004TA-6A; Mon, 06 Nov 2023 20:10:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628437.979964; Mon, 06 Nov 2023 20:10:11 +0000
+Received: by outflank-mailman (output) from mailman id 628446.979975; Mon, 06 Nov 2023 20:10:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vH-0003EA-Qc; Mon, 06 Nov 2023 20:10:11 +0000
-Received: by outflank-mailman (input) for mailman id 628437;
- Mon, 06 Nov 2023 20:10:11 +0000
+	id 1r05vl-0004T3-2Y; Mon, 06 Nov 2023 20:10:41 +0000
+Received: by outflank-mailman (input) for mailman id 628446;
+ Mon, 06 Nov 2023 20:10:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hM-00024f-OZ
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:48 +0000
+ id 1r05hP-00024f-Om
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:51 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7731e206-7cde-11ee-98da-6d05b1d4d9a1;
- Mon, 06 Nov 2023 20:55:42 +0100 (CET)
+ id 785a8523-7cde-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 20:55:44 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fb-007tac-T3; Mon, 06 Nov 2023 19:54:00 +0000
+ id 1r05fc-007tap-QA; Mon, 06 Nov 2023 19:54:01 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GOn-0l; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fc-001GPX-35; Mon, 06 Nov 2023 19:54:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 7731e206-7cde-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 785a8523-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=zmRxefaOlZ1QCUdKZwdqB/DEaAmsXLMPcBmPIeG+a8A=; b=CULtrOgTvy2P+uj3GUT44YcvX5
-	Oa6Y9aiFioc+wiiL3dwrqXBdUNnksVq5ypvQ8/iMRfKOBx30TQhHQ4xdg8TcHy3QzBAAzuWa5p5E6
-	nAIseoMtwSdN7oulDwRDgsx4hWFaqLK5k21qgGeYz33T+m+tv9KF+lE8wc6IX/1xdg+bkhfP7LsXT
-	vj6e+cD+9NazieNKE7mcE+KO7hcPrgfrRPO9WXY1UF5Z3DYohZxea8vDJmI0JNHzzwwWHoEFHJIfy
-	/kpmpy6SbXnR/74ud8Czsbx3eS7b9jlYt0PS+b1R9fy6omZBi0VOBU5iT8gXsk8z74k/wRowc2fWB
-	KZa17tGQ==;
+	bh=gF9acMYW8IKLrRRq9sLrR6j7pHNgn6jgFhPV981Epmk=; b=iMqGFzb1iZ6zDzbxEiqOxE4h/M
+	Ezsel84Uh0IKL/u2eWooTe7azkHFwbVCSnEv4G6BlGdhvV7cuDJBN7ABxSiUo1u+05rJIT1Hdmu2H
+	xquye/LNQ2Y6lK5A3AOJio4QcfmFeRcfU5YCk9dQVgfQHyuGv9CgCgfNvxb4GaMS+XfcaBL8/Ao2o
+	rqgSG3ZHK9AY6CXVI1l9HOLW0bbKrs974cQ5q9p3VNurTXB/Tilja2hOcVuQ4nnGchEz49P6zidU6
+	6KVJaJFGpJYBj7K/aUnq/kNZg6MmJ4g2Bv9+up8Vm6GhE+/R7utSmV/ImClJfINyGcKuO7QVZNXb5
+	GbbmSeEA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 31/46] hw/net/etraxfs-eth: use qemu_configure_nic_device()
-Date: Mon,  6 Nov 2023 19:49:36 +0000
-Message-ID: <20231106195352.301038-32-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 40/46] hw/s390x/s390-virtio-ccw: use qemu_create_nic_device()
+Date: Mon,  6 Nov 2023 19:49:45 +0000
+Message-ID: <20231106195352.301038-41-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -135,70 +135,32 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/cris/axis_dev88.c      | 9 ++++-----
- hw/net/etraxfs_eth.c      | 5 ++---
- include/hw/cris/etraxfs.h | 2 +-
- 3 files changed, 7 insertions(+), 9 deletions(-)
+ hw/s390x/s390-virtio-ccw.c | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
 
-diff --git a/hw/cris/axis_dev88.c b/hw/cris/axis_dev88.c
-index d82050d927..5556634921 100644
---- a/hw/cris/axis_dev88.c
-+++ b/hw/cris/axis_dev88.c
-@@ -308,15 +308,14 @@ void axisdev88_init(MachineState *machine)
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index 7262725d2e..69d6852840 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -221,16 +221,9 @@ static void s390_init_ipl_dev(const char *kernel_filename,
  
-     /* Add the two ethernet blocks.  */
-     dma_eth = g_malloc0(sizeof dma_eth[0] * 4); /* Allocate 4 channels.  */
--    etraxfs_eth_init(&nd_table[0], 0x30034000, 1, &dma_eth[0], &dma_eth[1]);
--    if (nb_nics > 1) {
--        etraxfs_eth_init(&nd_table[1], 0x30036000, 2, &dma_eth[2], &dma_eth[3]);
--    }
- 
-+    etraxfs_eth_init(0x30034000, 1, &dma_eth[0], &dma_eth[1]);
-     /* The DMA Connector block is missing, hardwire things for now.  */
-     etraxfs_dmac_connect_client(etraxfs_dmac, 0, &dma_eth[0]);
-     etraxfs_dmac_connect_client(etraxfs_dmac, 1, &dma_eth[1]);
--    if (nb_nics > 1) {
-+
-+    if (qemu_find_nic_info("etraxfs-eth", true, "fseth")) {
-+        etraxfs_eth_init(0x30036000, 2, &dma_eth[2], &dma_eth[3]);
-         etraxfs_dmac_connect_client(etraxfs_dmac, 6, &dma_eth[2]);
-         etraxfs_dmac_connect_client(etraxfs_dmac, 7, &dma_eth[3]);
-     }
-diff --git a/hw/net/etraxfs_eth.c b/hw/net/etraxfs_eth.c
-index 1b82aec794..ab60eaac04 100644
---- a/hw/net/etraxfs_eth.c
-+++ b/hw/net/etraxfs_eth.c
-@@ -646,15 +646,14 @@ static void etraxfs_eth_class_init(ObjectClass *klass, void *data)
- 
- /* Instantiate an ETRAXFS Ethernet MAC.  */
- DeviceState *
--etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
-+etraxfs_eth_init(hwaddr base, int phyaddr,
-                  struct etraxfs_dma_client *dma_out,
-                  struct etraxfs_dma_client *dma_in)
+ static void s390_create_virtio_net(BusState *bus, const char *name)
  {
-     DeviceState *dev;
--    qemu_check_nic_model(nd, "fseth");
+-    int i;
+-
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-        DeviceState *dev;
+-
+-        qemu_check_nic_model(nd, "virtio");
++    DeviceState *dev;
  
-     dev = qdev_new("etraxfs-eth");
--    qdev_set_nic_properties(dev, nd);
-+    qemu_configure_nic_device(dev, true, "fseth");
-     qdev_prop_set_uint32(dev, "phyaddr", phyaddr);
- 
-     /*
-diff --git a/include/hw/cris/etraxfs.h b/include/hw/cris/etraxfs.h
-index 467b529dc0..012c4e9974 100644
---- a/include/hw/cris/etraxfs.h
-+++ b/include/hw/cris/etraxfs.h
-@@ -31,7 +31,7 @@
- #include "hw/sysbus.h"
- #include "qapi/error.h"
- 
--DeviceState *etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
-+DeviceState *etraxfs_eth_init(hwaddr base, int phyaddr,
-                               struct etraxfs_dma_client *dma_out,
-                               struct etraxfs_dma_client *dma_in);
- 
+-        dev = qdev_new(name);
+-        qdev_set_nic_properties(dev, nd);
++    while ((dev = qemu_create_nic_device(name, true, "virtio"))) {
+         qdev_realize_and_unref(dev, bus, &error_fatal);
+     }
+ }
 -- 
 2.41.0
 
