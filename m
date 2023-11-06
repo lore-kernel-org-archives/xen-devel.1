@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AAC2C001B2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D7CC001B5
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:40:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.627876.978736 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.627879.978753 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1g-00011K-A1; Mon, 06 Nov 2023 10:40:12 +0000
+	id 1qzx1h-0001I4-AN; Mon, 06 Nov 2023 10:40:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 627876.978736; Mon, 06 Nov 2023 10:40:12 +0000
+Received: by outflank-mailman (output) from mailman id 627879.978753; Mon, 06 Nov 2023 10:40:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1g-00011C-4t; Mon, 06 Nov 2023 10:40:12 +0000
-Received: by outflank-mailman (input) for mailman id 627876;
- Mon, 06 Nov 2023 10:40:10 +0000
+	id 1qzx1g-0001FD-Vr; Mon, 06 Nov 2023 10:40:12 +0000
+Received: by outflank-mailman (input) for mailman id 627879;
+ Mon, 06 Nov 2023 10:40:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qzx1e-00010s-CZ
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:10 +0000
+ id 1qzx1g-00010s-1d
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:12 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d9d8e9b5-7c90-11ee-9b0e-b553b5be7939;
+ id d9838fad-7c90-11ee-9b0e-b553b5be7939;
  Mon, 06 Nov 2023 11:40:07 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qzx1P-005R1g-J6; Mon, 06 Nov 2023 10:39:56 +0000
+ id 1qzx1P-005R1h-Og; Mon, 06 Nov 2023 10:39:56 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1qzx1P-000qFx-2a; Mon, 06 Nov 2023 10:39:55 +0000
+ Hat Linux)) id 1qzx1Q-000qG9-09; Mon, 06 Nov 2023 10:39:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: d9d8e9b5-7c90-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: d9838fad-7c90-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=wOMw/UywJs8oL1LQQcgtToi+dJjeH7aP4AFa7EtnSbM=; b=lUwHxNJ1U1La7N7HYHVdJ5UMsn
-	L8ZcNKscZiT57bK7PQz2qfH1Pug1s7gtF1UB9Qji6aLEC9gfsjAsIdOJwPdRy/F/k3F+ce++T32+8
-	eE8N+RrSBOuq4MsSShJMGOSb6Q3bcuJnlVvYQKyOrcA3rJs6NAUto8yac1SEV/F5Jt9e/NH8i0Nwq
-	Bah8ewkbmFCtdlxyGBAdeceVBaU4xgbna65iOtV4uDZE61AVW3WnewCx3ytOYQhaM/pjG9CDl+Nue
-	klanfVjqoByXh3jztUzwBeZGiNvXkPVtDz/JOFUWbgLTFQ49tyAiDj3KaV89rMjfyTMuFmzaIu19O
-	nK5wZ4Zg==;
+	bh=UEnjaXF9IbVpfGR6pVwSlj7B+44LHx3n6ww2MVgkTpA=; b=v9GGJRYSotjmH5aMKb615be3Wh
+	A1SIx3pqMqmeGy+3oNTCGKnqFJdb5KIGg/zpCYxMEK7EBG7CvNqv+7uzJTgzNZhqT0p2zeACSmuQA
+	AE9Kr3tGyv2X7LVTKZOoFBHE46N3ry/HY7XkMw5A+oxo7NStJih00MnU/DfEkCStM2lAuuFIbtAo8
+	Spa3GytWn1hjEQUXwjU6P8Y23QDIdFc+5uHZFRkSkz0ARD998Lnm06p8S8FoaQUDm1amp/qKAkVpx
+	9pHknZWs5urn5hg6GhsU81PlAY/6Iu3JLqi8s6vVBCnHktWnbr8Ks22660tRwpyHG5cuC/T6JHDQ5
+	N2C6zWEA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org,
 	qemu-stable@nongnu.org
@@ -71,9 +71,9 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	xen-devel@lists.xenproject.org,
 	qemu-block@nongnu.org,
 	kvm@vger.kernel.org
-Subject: [PULL 1/7] i386/xen: Don't advertise XENFEAT_supervisor_mode_kernel
-Date: Mon,  6 Nov 2023 10:39:49 +0000
-Message-ID: <20231106103955.200867-2-dwmw2@infradead.org>
+Subject: [PULL 4/7] hw/xen: don't clear map_track[] in xen_gnttab_reset()
+Date: Mon,  6 Nov 2023 10:39:52 +0000
+Message-ID: <20231106103955.200867-5-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106103955.200867-1-dwmw2@infradead.org>
 References: <20231106103955.200867-1-dwmw2@infradead.org>
@@ -84,28 +84,37 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This confuses lscpu into thinking it's running in PVH mode.
+The refcounts actually correspond to 'active_ref' structures stored in a
+GHashTable per "user" on the backend side (mostly, per XenDevice).
+
+If we zero map_track[] on reset, then when the backend drivers get torn
+down and release their mapping we hit the assert(s->map_track[ref] != 0)
+in gnt_unref().
+
+So leave them in place. Each backend driver will disconnect and reconnect
+as the guest comes back up again and reconnects, and it all works out OK
+in the end as the old refs get dropped.
 
 Cc: qemu-stable@nongnu.org
-Fixes: bedcc139248 ("i386/xen: implement HYPERVISOR_xen_version")
+Fixes: de26b2619789 ("hw/xen: Implement soft reset for emulated gnttab")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- target/i386/kvm/xen-emu.c | 1 -
- 1 file changed, 1 deletion(-)
+ hw/i386/kvm/xen_gnttab.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
-index 76348f9d5d..0055441b2e 100644
---- a/target/i386/kvm/xen-emu.c
-+++ b/target/i386/kvm/xen-emu.c
-@@ -267,7 +267,6 @@ static bool kvm_xen_hcall_xen_version(struct kvm_xen_exit *exit, X86CPU *cpu,
-             fi.submap |= 1 << XENFEAT_writable_page_tables |
-                          1 << XENFEAT_writable_descriptor_tables |
-                          1 << XENFEAT_auto_translated_physmap |
--                         1 << XENFEAT_supervisor_mode_kernel |
-                          1 << XENFEAT_hvm_callback_vector |
-                          1 << XENFEAT_hvm_safe_pvclock |
-                          1 << XENFEAT_hvm_pirqs;
+diff --git a/hw/i386/kvm/xen_gnttab.c b/hw/i386/kvm/xen_gnttab.c
+index 21c30e3659..839ec920a1 100644
+--- a/hw/i386/kvm/xen_gnttab.c
++++ b/hw/i386/kvm/xen_gnttab.c
+@@ -541,7 +541,5 @@ int xen_gnttab_reset(void)
+     s->entries.v1[GNTTAB_RESERVED_XENSTORE].flags = GTF_permit_access;
+     s->entries.v1[GNTTAB_RESERVED_XENSTORE].frame = XEN_SPECIAL_PFN(XENSTORE);
+ 
+-    memset(s->map_track, 0, s->max_frames * ENTRIES_PER_FRAME_V1);
+-
+     return 0;
+ }
 -- 
 2.41.0
 
