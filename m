@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A62BAC4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:10:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628446.979975 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E107C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:11:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628458.979984 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vl-0004TA-6A; Mon, 06 Nov 2023 20:10:41 +0000
+	id 1r05wQ-0005FR-Dq; Mon, 06 Nov 2023 20:11:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628446.979975; Mon, 06 Nov 2023 20:10:41 +0000
+Received: by outflank-mailman (output) from mailman id 628458.979984; Mon, 06 Nov 2023 20:11:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vl-0004T3-2Y; Mon, 06 Nov 2023 20:10:41 +0000
-Received: by outflank-mailman (input) for mailman id 628446;
- Mon, 06 Nov 2023 20:10:40 +0000
+	id 1r05wQ-0005FI-BN; Mon, 06 Nov 2023 20:11:22 +0000
+Received: by outflank-mailman (input) for mailman id 628458;
+ Mon, 06 Nov 2023 20:11:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hP-00024f-Om
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:51 +0000
+ id 1r05hR-00024f-Ou
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:53 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 785a8523-7cde-11ee-98da-6d05b1d4d9a1;
+ id 788de5bf-7cde-11ee-98da-6d05b1d4d9a1;
  Mon, 06 Nov 2023 20:55:44 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fc-007tap-QA; Mon, 06 Nov 2023 19:54:01 +0000
+ id 1r05fc-007taq-QU; Mon, 06 Nov 2023 19:54:01 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GPX-35; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fb-001GOa-32; Mon, 06 Nov 2023 19:53:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 785a8523-7cde-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 788de5bf-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=gF9acMYW8IKLrRRq9sLrR6j7pHNgn6jgFhPV981Epmk=; b=iMqGFzb1iZ6zDzbxEiqOxE4h/M
-	Ezsel84Uh0IKL/u2eWooTe7azkHFwbVCSnEv4G6BlGdhvV7cuDJBN7ABxSiUo1u+05rJIT1Hdmu2H
-	xquye/LNQ2Y6lK5A3AOJio4QcfmFeRcfU5YCk9dQVgfQHyuGv9CgCgfNvxb4GaMS+XfcaBL8/Ao2o
-	rqgSG3ZHK9AY6CXVI1l9HOLW0bbKrs974cQ5q9p3VNurTXB/Tilja2hOcVuQ4nnGchEz49P6zidU6
-	6KVJaJFGpJYBj7K/aUnq/kNZg6MmJ4g2Bv9+up8Vm6GhE+/R7utSmV/ImClJfINyGcKuO7QVZNXb5
-	GbbmSeEA==;
+	bh=5FFKf2juZuA0ARVGIdD/KabCPqMDr3tXXa+7Wjm6OEc=; b=nhLStgriurSl+95ZJ1bV99z/fM
+	Q6SCSmnzLUSaREzhe3y9/2DM+GKQ5RASwtLQKq2/Fd7WgDMsMG+YNGcJdFFy+Cs2t9MiYjrtS1GTC
+	AWyV+C+RlGJu4uwZpCnoSbFXEX14ZROMFKHpdS3epeh0plxxrMI1Dur0RKZxTyMdjrgNBOAMHth34
+	DmFlIpPbX6Ak7e9FVX+FXbu5bW/AJcvtDsRT+Hnxc6/qVNI0LvtWlkMYTjZUvkP8G1Uh5tNHAGz2Y
+	YxXDn12xt97z0jX2U0KSdwTk0YU2BR3+OKN+jEoegbBIvsOLe8fS3Y+Dh/ByqY4HO1XrTlX+uYcDX
+	z+M2OUEA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 40/46] hw/s390x/s390-virtio-ccw: use qemu_create_nic_device()
-Date: Mon,  6 Nov 2023 19:49:45 +0000
-Message-ID: <20231106195352.301038-41-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 28/46] hw/arm/npcm7xx: use qemu_configure_nic_device, allow emc0/emc1 as aliases
+Date: Mon,  6 Nov 2023 19:49:33 +0000
+Message-ID: <20231106195352.301038-29-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -133,34 +133,80 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Also update the test to specify which device to attach the test socket
+to, and remove the comment lamenting the fact that we can't do so.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/s390x/s390-virtio-ccw.c | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+ hw/arm/npcm7xx.c               | 16 +++++++++-------
+ tests/qtest/npcm7xx_emc-test.c | 18 ++++--------------
+ 2 files changed, 13 insertions(+), 21 deletions(-)
 
-diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
-index 7262725d2e..69d6852840 100644
---- a/hw/s390x/s390-virtio-ccw.c
-+++ b/hw/s390x/s390-virtio-ccw.c
-@@ -221,16 +221,9 @@ static void s390_init_ipl_dev(const char *kernel_filename,
+diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c
+index 15ff21d047..ee395864e4 100644
+--- a/hw/arm/npcm7xx.c
++++ b/hw/arm/npcm7xx.c
+@@ -655,8 +655,9 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
  
- static void s390_create_virtio_net(BusState *bus, const char *name)
- {
--    int i;
--
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--        DeviceState *dev;
--
--        qemu_check_nic_model(nd, "virtio");
-+    DeviceState *dev;
+     /*
+      * EMC Modules. Cannot fail.
+-     * The mapping of the device to its netdev backend works as follows:
+-     * emc[i] = nd_table[i]
++     * Use the available NIC configurations in order, allowing 'emc0' and
++     * 'emc1' to by used as aliases for the model= parameter to override.
++     *
+      * This works around the inability to specify the netdev property for the
+      * emc device: it's not pluggable and thus the -device option can't be
+      * used.
+@@ -664,12 +665,13 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(npcm7xx_emc_addr) != ARRAY_SIZE(s->emc));
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(s->emc) != 2);
+     for (i = 0; i < ARRAY_SIZE(s->emc); i++) {
+-        s->emc[i].emc_num = i;
+         SysBusDevice *sbd = SYS_BUS_DEVICE(&s->emc[i]);
+-        if (nd_table[i].used) {
+-            qemu_check_nic_model(&nd_table[i], TYPE_NPCM7XX_EMC);
+-            qdev_set_nic_properties(DEVICE(sbd), &nd_table[i]);
+-        }
++        char alias[6];
++
++        s->emc[i].emc_num = i;
++        snprintf(alias, sizeof(alias), "emc%u", i);
++        qemu_configure_nic_device(DEVICE(sbd), true, alias);
++
+         /*
+          * The device exists regardless of whether it's connected to a QEMU
+          * netdev backend. So always instantiate it even if there is no
+diff --git a/tests/qtest/npcm7xx_emc-test.c b/tests/qtest/npcm7xx_emc-test.c
+index b046f1d76a..f7646fae2c 100644
+--- a/tests/qtest/npcm7xx_emc-test.c
++++ b/tests/qtest/npcm7xx_emc-test.c
+@@ -225,21 +225,11 @@ static int *packet_test_init(int module_num, GString *cmd_line)
+     g_assert_cmpint(ret, != , -1);
  
--        dev = qdev_new(name);
--        qdev_set_nic_properties(dev, nd);
-+    while ((dev = qemu_create_nic_device(name, true, "virtio"))) {
-         qdev_realize_and_unref(dev, bus, &error_fatal);
-     }
- }
+     /*
+-     * KISS and use -nic. We specify two nics (both emc{0,1}) because there's
+-     * currently no way to specify only emc1: The driver implicitly relies on
+-     * emc[i] == nd_table[i].
++     * KISS and use -nic. The driver accepts 'emc0' and 'emc1' as aliases
++     * in the 'model' field to specify the device to match.
+      */
+-    if (module_num == 0) {
+-        g_string_append_printf(cmd_line,
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
+-    } else {
+-        g_string_append_printf(cmd_line,
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
+-    }
++    g_string_append_printf(cmd_line, " -nic socket,fd=%d,model=emc%d ",
++                           test_sockets[1], module_num);
+ 
+     g_test_queue_destroy(packet_test_clear, test_sockets);
+     return test_sockets;
 -- 
 2.41.0
 
