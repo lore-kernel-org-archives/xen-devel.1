@@ -4,32 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D696DC4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 14:31:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628040.979055 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A1F0C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 14:35:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628047.979064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r00cx-0007Vm-Bz; Mon, 06 Nov 2023 14:30:55 +0000
+	id 1r00hI-0008M8-Rh; Mon, 06 Nov 2023 14:35:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628040.979055; Mon, 06 Nov 2023 14:30:55 +0000
+Received: by outflank-mailman (output) from mailman id 628047.979064; Mon, 06 Nov 2023 14:35:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r00cx-0007Vf-93; Mon, 06 Nov 2023 14:30:55 +0000
-Received: by outflank-mailman (input) for mailman id 628040;
- Mon, 06 Nov 2023 14:30:54 +0000
+	id 1r00hI-0008M1-PA; Mon, 06 Nov 2023 14:35:24 +0000
+Received: by outflank-mailman (input) for mailman id 628047;
+ Mon, 06 Nov 2023 14:35:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=y50s=GT=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1r00cw-0007VX-Ag
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 14:30:54 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=wwoJ=GT=infradead.org=prvs=667a8cc2a=dwmw2@srs-se1.protection.inumbo.net>)
+ id 1r00hH-0008Lv-Fk
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 14:35:23 +0000
+Received: from smtp-fw-2101.amazon.com (smtp-fw-2101.amazon.com [72.21.196.25])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 16f20ac4-7cb1-11ee-98da-6d05b1d4d9a1;
- Mon, 06 Nov 2023 15:30:53 +0100 (CET)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id AA4234EE0740;
- Mon,  6 Nov 2023 15:30:52 +0100 (CET)
+ id b6b29fda-7cb1-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 15:35:22 +0100 (CET)
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-pdx-2b-m6i4x-189d700f.us-west-2.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-2101.iad2.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2023 14:35:19 +0000
+Received: from smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev
+ (pdx2-ws-svc-p26-lb5-vlan3.pdx.amazon.com [10.39.38.70])
+ by email-inbound-relay-pdx-2b-m6i4x-189d700f.us-west-2.amazon.com (Postfix)
+ with ESMTPS id 85A1640D84; Mon,  6 Nov 2023 14:35:16 +0000 (UTC)
+Received: from EX19MTAUWC001.ant.amazon.com [10.0.38.20:34329]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.34.186:2525]
+ with esmtp (Farcaster)
+ id 76d34537-32d9-44b2-b563-58d436590f5f; Mon, 6 Nov 2023 14:35:16 +0000 (UTC)
+Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.39; Mon, 6 Nov 2023 14:35:15 +0000
+Received: from u3832b3a9db3152.ant.amazon.com (10.106.83.6) by
+ mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP Server id
+ 15.2.1118.39 via Frontend Transport; Mon, 6 Nov 2023 14:35:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,72 +55,106 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
-Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 16f20ac4-7cb1-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: b6b29fda-7cb1-11ee-98da-6d05b1d4d9a1
+X-IronPort-AV: E=Sophos;i="6.03,281,1694736000"; 
+   d="scan'208";a="361122546"
+X-Farcaster-Flow-ID: 76d34537-32d9-44b2-b563-58d436590f5f
+From: David Woodhouse <dwmw2@infradead.org>
+To: <qemu-devel@nongnu.org>
+CC: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, Peter
+ Maydell <peter.maydell@linaro.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, Paul
+ Durrant <paul@xen.org>, =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?=
+	<marcandre.lureau@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Richard
+ Henderson <richard.henderson@linaro.org>, Eduardo Habkost
+	<eduardo@habkost.net>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel
+ Apfelbaum <marcel.apfelbaum@gmail.com>, Jason Wang <jasowang@redhat.com>,
+	Marcelo Tosatti <mtosatti@redhat.com>, <qemu-block@nongnu.org>,
+	<xen-devel@lists.xenproject.org>, <kvm@vger.kernel.org>
+Subject: [PATCH v4 01/17] i386/xen: Ignore VCPU_SSHOTTMR_future flag in set_singleshot_timer()
+Date: Mon, 6 Nov 2023 14:34:51 +0000
+Message-ID: <20231106143507.1060610-2-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231106143507.1060610-1-dwmw2@infradead.org>
+References: <20231106143507.1060610-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Date: Mon, 06 Nov 2023 15:30:52 +0100
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
- ayan.kumar.halder@amd.com, consulting@bugseng.com,
- andrew.cooper3@citrix.com, roger.pau@citrix.com, Simone Ballarin
- <simone.ballarin@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, George
- Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Wei Liu
- <wl@xen.org>, xen-devel@lists.xenproject.org
-Subject: Re: [XEN PATCH][for-4.19 v4] xen: address violations of Rule 11.9
-In-Reply-To: <fc56aa7c-9931-cadf-53cd-0f1f482a953d@suse.com>
-References: <b8a82daf5862287bda9545d7e672ce98e49004a2.1697701358.git.nicola.vetrini@bugseng.com>
- <fe9f04781ea1ad9bc5f9b92bf58cd09b@bugseng.com>
- <fc56aa7c-9931-cadf-53cd-0f1f482a953d@suse.com>
-Message-ID: <b09d120e531c626a97fccda4b248204f@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Precedence: Bulk
 
-On 2023-11-06 15:27, Jan Beulich wrote:
-> On 06.11.2023 15:24, Nicola Vetrini wrote:
->> On 2023-10-19 09:55, Nicola Vetrini wrote:
->>> The constant 0 is used instead of NULL in '__ACCESS_ONCE' as a
->>> compile-time check to detect non-scalar types; its usage for this
->>> purpose is deviated.
->>> 
->>> Furthermore, the 'typeof_field' macro is introduced as a general way
->>> to access the type of a struct member without declaring a variable
->>> of struct type. Both this macro and 'sizeof_field' are moved to
->>> 'xen/macros.h'.
->>> 
->>> No functional change intended.
->>> 
->>> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
->>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
->>> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
->>> ---
->>> Changes in v2:
->>> - added entry in deviations.rst
->>> Changes in v3:
->>> - dropped access_field
->>> - moved macro to macros.h
->>> ---
->>> Changes in v4:
->>> - Amend deviation record.
->>> ---
->> 
->> This patch has received some R-by-s, but no acks at the moment.
->> Perhaps at least one is needed to get this into 4.19?
-> 
-> I didn't think it does, and I have it marked as ready to go in. But
-> from an earlier email from Stefano I inferred that it might be
-> preferable to commit larger sets of Misra changes only once the tree
-> is fully open again.
-> 
-> Jan
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Ok, thanks for the clarification.
+Upstream Xen now ignores this flag¹, since the only guest kernel ever to
+use it was buggy.
 
+¹ https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=19c6cbd909
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+ target/i386/kvm/xen-emu.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index 75b2c557b9..1dc9ab0d91 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -1077,17 +1077,13 @@ static int vcpuop_stop_periodic_timer(CPUState *target)
+  * Must always be called with xen_timers_lock held.
+  */
+ static int do_set_singleshot_timer(CPUState *cs, uint64_t timeout_abs,
+-                                   bool future, bool linux_wa)
++                                   bool linux_wa)
+ {
+     CPUX86State *env = &X86_CPU(cs)->env;
+     int64_t now = kvm_get_current_ns();
+     int64_t qemu_now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+     int64_t delta = timeout_abs - now;
+ 
+-    if (future && timeout_abs < now) {
+-        return -ETIME;
+-    }
+-
+     if (linux_wa && unlikely((int64_t)timeout_abs < 0 ||
+                              (delta > 0 && (uint32_t)(delta >> 50) != 0))) {
+         /*
+@@ -1129,9 +1125,13 @@ static int vcpuop_set_singleshot_timer(CPUState *cs, uint64_t arg)
+     }
+ 
+     QEMU_LOCK_GUARD(&X86_CPU(cs)->env.xen_timers_lock);
+-    return do_set_singleshot_timer(cs, sst.timeout_abs_ns,
+-                                   !!(sst.flags & VCPU_SSHOTTMR_future),
+-                                   false);
++
++    /*
++     * We ignore the VCPU_SSHOTTMR_future flag, just as Xen now does.
++     * The only guest that ever used it, got it wrong.
++     * https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=19c6cbd909
++     */
++    return do_set_singleshot_timer(cs, sst.timeout_abs_ns, false);
+ }
+ 
+ static int vcpuop_stop_singleshot_timer(CPUState *cs)
+@@ -1156,7 +1156,7 @@ static bool kvm_xen_hcall_set_timer_op(struct kvm_xen_exit *exit, X86CPU *cpu,
+         err = vcpuop_stop_singleshot_timer(CPU(cpu));
+     } else {
+         QEMU_LOCK_GUARD(&X86_CPU(cpu)->env.xen_timers_lock);
+-        err = do_set_singleshot_timer(CPU(cpu), timeout, false, true);
++        err = do_set_singleshot_timer(CPU(cpu), timeout, true);
+     }
+     exit->u.hcall.result = err;
+     return true;
+@@ -1844,7 +1844,7 @@ int kvm_put_xen_state(CPUState *cs)
+         QEMU_LOCK_GUARD(&env->xen_timers_lock);
+         if (env->xen_singleshot_timer_ns) {
+             ret = do_set_singleshot_timer(cs, env->xen_singleshot_timer_ns,
+-                                    false, false);
++                                          false);
+             if (ret < 0) {
+                 return ret;
+             }
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+2.34.1
+
 
