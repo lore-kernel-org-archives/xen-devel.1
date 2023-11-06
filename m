@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5F0C001DB
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:40:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.627878.978746 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52950C4167B
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:40:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.627882.978779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1g-00019R-Ta; Mon, 06 Nov 2023 10:40:12 +0000
+	id 1qzx1i-0001uk-QL; Mon, 06 Nov 2023 10:40:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 627878.978746; Mon, 06 Nov 2023 10:40:12 +0000
+Received: by outflank-mailman (output) from mailman id 627882.978779; Mon, 06 Nov 2023 10:40:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1g-00016R-Kp; Mon, 06 Nov 2023 10:40:12 +0000
-Received: by outflank-mailman (input) for mailman id 627878;
- Mon, 06 Nov 2023 10:40:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qzx1i-0001t7-IK; Mon, 06 Nov 2023 10:40:14 +0000
+Received: by outflank-mailman (input) for mailman id 627882;
+ Mon, 06 Nov 2023 10:40:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qzx1d-00010q-16
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:11 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d9d0841d-7c90-11ee-98da-6d05b1d4d9a1;
- Mon, 06 Nov 2023 11:40:07 +0100 (CET)
+ <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qzx1h-00010s-1n
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:13 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id db3f9ead-7c90-11ee-9b0e-b553b5be7939;
+ Mon, 06 Nov 2023 11:40:09 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qzx1P-005R1i-Rt; Mon, 06 Nov 2023 10:39:56 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qzx1R-00ARzt-0U; Mon, 06 Nov 2023 10:39:57 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1qzx1Q-000qGH-0X; Mon, 06 Nov 2023 10:39:56 +0000
+ Hat Linux)) id 1qzx1P-000qFu-2O; Mon, 06 Nov 2023 10:39:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: d9d0841d-7c90-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: db3f9ead-7c90-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=oTzSlnwFiwNNyo9+XLJSozlV3tES1c1DD/ZmREeHw24=; b=AFLH666BhTE9iLsKwkcxfjYYVk
-	EK1GRnKx1eeQSIv4t+AlzQ51FcOiV4PCFI+D9tzyDeaMe6dga8PYsEugIJlk8ThSR6cXwK2AKXIxM
-	vYAXj7UM09WBHcehjYNl+F4q/IdDbIauXkudVIoN/MgOzhWFA+Pyh9VobKDkjCaBQ0r3+ac+bZ7f4
-	vjf/MzboSSR81s4957qqdvrSVWv9ufNI6hAQ3y8jvHLmnO/b1ZYN4vlIQa8/WUDuCtsOyPoL13Siu
-	1oguA+OYtjBq95Y5Tnq77a8QjdpITiik2VpWIa7KX8H7aNQBgSFdL60drlP/vZ+JFZUNtSuxNPsF8
-	R+CngbmA==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=8hFASJ6FJkP5+9JiryopkqrFh+wE1Upzc1d8akCwXKw=; b=HsrZzoi7oxWmojvdJbVOfncH0N
+	LbE/oaY1cF3jW518bYSyd7CXECURPhDuOuFEE8NyoL8eFV3GGox+Hzctzdk+/TrfqieRU1enW9yFr
+	9QS6NRkLSjfqmAQLbcdxS3Gb1+iD4xJilLEbyoaeMSg2pJ4JawL966SDpIEVrq04r+qmKAXrLxj4e
+	ZX45hY+bYHsbjDE//upJSGdIXJBW9tqgCeakGBy0fTLvjj0NoQi92EG8h6lsFZHgKf7HrBEqMiegB
+	Myb8iENcsbB7PG7qHQYJleGczojpxfri7o1i2f3titfD/eMwazbQ+Pf+kPbTTzWI8D2JtXw0NnvD8
+	By83/WAw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org,
 	qemu-stable@nongnu.org
@@ -71,44 +71,59 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	xen-devel@lists.xenproject.org,
 	qemu-block@nongnu.org,
 	kvm@vger.kernel.org
-Subject: [PULL 6/7] hw/xen: take iothread mutex in xen_evtchn_reset_op()
-Date: Mon,  6 Nov 2023 10:39:54 +0000
-Message-ID: <20231106103955.200867-7-dwmw2@infradead.org>
+Subject: [PULL 0/7] xenfv-stable queue
+Date: Mon,  6 Nov 2023 10:39:48 +0000
+Message-ID: <20231106103955.200867-1-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231106103955.200867-1-dwmw2@infradead.org>
-References: <20231106103955.200867-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+The following changes since commit d762bf97931b58839316b68a570eecc6143c9e3e:
 
-The xen_evtchn_soft_reset() function requires the iothread mutex, but is
-also called for the EVTCHNOP_reset hypercall. Ensure the mutex is taken
-in that case.
+  Merge tag 'pull-target-arm-20231102' of https://git.linaro.org/people/pmaydell/qemu-arm into staging (2023-11-03 10:04:12 +0800)
 
-Cc: qemu-stable@nongnu.org
-Fixes: a15b10978fe6 ("hw/xen: Implement EVTCHNOP_reset")
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
- hw/i386/kvm/xen_evtchn.c | 1 +
- 1 file changed, 1 insertion(+)
+are available in the Git repository at:
 
-diff --git a/hw/i386/kvm/xen_evtchn.c b/hw/i386/kvm/xen_evtchn.c
-index 3d6f4b4a0a..b2b4be9983 100644
---- a/hw/i386/kvm/xen_evtchn.c
-+++ b/hw/i386/kvm/xen_evtchn.c
-@@ -1135,6 +1135,7 @@ int xen_evtchn_reset_op(struct evtchn_reset *reset)
-         return -ESRCH;
-     }
- 
-+    QEMU_IOTHREAD_LOCK_GUARD();
-     return xen_evtchn_soft_reset();
- }
- 
--- 
-2.41.0
+  git://git.infradead.org/users/dwmw2/qemu.git tags/pull-xenfv-stable-20231106
 
+for you to fetch changes up to a1c1082908dde4867b1ac55f546bea0c17d52318:
+
+  hw/xen: use correct default protocol for xen-block on x86 (2023-11-06 10:03:45 +0000)
+
+----------------------------------------------------------------
+Bugfixes for emulated Xen support
+
+Selected bugfixes for mainline and stable, especially to the per-vCPU
+local APIC vector delivery mode for event channel notifications, which
+was broken in a number of ways.
+
+The xen-block driver has been defaulting to the wrong protocol for x86
+guest, and this fixes that — which is technically an incompatible change
+but I'm fairly sure nobody relies on the broken behaviour (and in
+production I *have* seen guests which rely on the correct behaviour,
+which now matches the blkback driver in the Linux kernel).
+
+A handful of other simple fixes for issues which came to light as new
+features (qv) were being developed.
+
+----------------------------------------------------------------
+David Woodhouse (7):
+      i386/xen: Don't advertise XENFEAT_supervisor_mode_kernel
+      i386/xen: fix per-vCPU upcall vector for Xen emulation
+      hw/xen: select kernel mode for per-vCPU event channel upcall vector
+      hw/xen: don't clear map_track[] in xen_gnttab_reset()
+      hw/xen: fix XenStore watch delivery to guest
+      hw/xen: take iothread mutex in xen_evtchn_reset_op()
+      hw/xen: use correct default protocol for xen-block on x86
+
+ hw/block/xen-block.c       | 10 +++++++---
+ hw/i386/kvm/xen_evtchn.c   |  7 +++++++
+ hw/i386/kvm/xen_gnttab.c   |  2 --
+ hw/i386/kvm/xen_xenstore.c |  8 +++++---
+ include/sysemu/kvm_xen.h   |  1 +
+ target/i386/kvm/xen-emu.c  | 16 +++++++++++-----
+ 6 files changed, 31 insertions(+), 13 deletions(-)
 
