@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9834C4167D
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:10:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628433.979945 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94373C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 20:10:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628437.979964 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vA-0002Dk-Fs; Mon, 06 Nov 2023 20:10:04 +0000
+	id 1r05vH-0003EN-Tg; Mon, 06 Nov 2023 20:10:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628433.979945; Mon, 06 Nov 2023 20:10:04 +0000
+Received: by outflank-mailman (output) from mailman id 628437.979964; Mon, 06 Nov 2023 20:10:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r05vA-0002CN-CJ; Mon, 06 Nov 2023 20:10:04 +0000
-Received: by outflank-mailman (input) for mailman id 628433;
- Mon, 06 Nov 2023 20:10:03 +0000
+	id 1r05vH-0003EA-Qc; Mon, 06 Nov 2023 20:10:11 +0000
+Received: by outflank-mailman (input) for mailman id 628437;
+ Mon, 06 Nov 2023 20:10:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r05hQ-00024f-Ot
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:52 +0000
+ id 1r05hM-00024f-OZ
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 19:55:48 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 785e257f-7cde-11ee-98da-6d05b1d4d9a1;
- Mon, 06 Nov 2023 20:55:44 +0100 (CET)
+ id 7731e206-7cde-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 20:55:42 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fd-007tb4-AH; Mon, 06 Nov 2023 19:54:02 +0000
+ id 1r05fb-007tac-T3; Mon, 06 Nov 2023 19:54:00 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fd-001GPy-1n; Mon, 06 Nov 2023 19:54:01 +0000
+ Hat Linux)) id 1r05fc-001GOn-0l; Mon, 06 Nov 2023 19:54:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 785e257f-7cde-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 7731e206-7cde-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Z8O29x0pWQhZMVbX+dyJJms7pdOJv3y/EsgO2DOPUaY=; b=teESO/RtJYYuQVVx1IuFV0fYHO
-	QYkJ+WGnPXZGnQb1cse22y5yOxa7n7e0Kz9gFUDvPXwOrQ9QSYu4Ovjg0hvBHAzorWNmcxX8W8dC0
-	x87OOZSgAuxGCv05xk2sxU/hWkqL0IJNMWnplS8QUNwg4DDtGsMhPKdCNYRhSn6/w/mEAsw80nSGO
-	Yhpresf2n6tgaRnolyiqGAYkjI4+MQu9W54FKMH8udpcer0iA4y8o8+GsniLtFQBClqEJHf0SN35I
-	Qc3+cijtHnuNn01n3lUiCUsvyaNlcvNMpoPx6tLeT2rU/MhC43rFjcvlYrZ+/d5dzyzaxOxLw8cOS
-	2rB2sH3w==;
+	bh=zmRxefaOlZ1QCUdKZwdqB/DEaAmsXLMPcBmPIeG+a8A=; b=CULtrOgTvy2P+uj3GUT44YcvX5
+	Oa6Y9aiFioc+wiiL3dwrqXBdUNnksVq5ypvQ8/iMRfKOBx30TQhHQ4xdg8TcHy3QzBAAzuWa5p5E6
+	nAIseoMtwSdN7oulDwRDgsx4hWFaqLK5k21qgGeYz33T+m+tv9KF+lE8wc6IX/1xdg+bkhfP7LsXT
+	vj6e+cD+9NazieNKE7mcE+KO7hcPrgfrRPO9WXY1UF5Z3DYohZxea8vDJmI0JNHzzwwWHoEFHJIfy
+	/kpmpy6SbXnR/74ud8Czsbx3eS7b9jlYt0PS+b1R9fy6omZBi0VOBU5iT8gXsk8z74k/wRowc2fWB
+	KZa17tGQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -120,9 +120,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 46/46] net: make nb_nics and nd_table[] static in net/net.c
-Date: Mon,  6 Nov 2023 19:49:51 +0000
-Message-ID: <20231106195352.301038-47-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 31/46] hw/net/etraxfs-eth: use qemu_configure_nic_device()
+Date: Mon,  6 Nov 2023 19:49:36 +0000
+Message-ID: <20231106195352.301038-32-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -135,53 +135,70 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- include/net/net.h | 4 ----
- net/net.c         | 3 +++
- system/globals.c  | 2 --
- 3 files changed, 3 insertions(+), 6 deletions(-)
+ hw/cris/axis_dev88.c      | 9 ++++-----
+ hw/net/etraxfs_eth.c      | 5 ++---
+ include/hw/cris/etraxfs.h | 2 +-
+ 3 files changed, 7 insertions(+), 9 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 290e604f03..5a38766942 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -245,10 +245,6 @@ struct NICInfo {
-     int nvectors;
- };
+diff --git a/hw/cris/axis_dev88.c b/hw/cris/axis_dev88.c
+index d82050d927..5556634921 100644
+--- a/hw/cris/axis_dev88.c
++++ b/hw/cris/axis_dev88.c
+@@ -308,15 +308,14 @@ void axisdev88_init(MachineState *machine)
  
--extern int nb_nics;
--extern NICInfo nd_table[MAX_NICS];
--extern const char *host_net_devices[];
--
- /* from net.c */
- extern NetClientStateList net_clients;
- bool netdev_is_modern(const char *optstr);
-diff --git a/net/net.c b/net/net.c
-index a3532a71a5..957daad58d 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -77,6 +77,9 @@ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
+     /* Add the two ethernet blocks.  */
+     dma_eth = g_malloc0(sizeof dma_eth[0] * 4); /* Allocate 4 channels.  */
+-    etraxfs_eth_init(&nd_table[0], 0x30034000, 1, &dma_eth[0], &dma_eth[1]);
+-    if (nb_nics > 1) {
+-        etraxfs_eth_init(&nd_table[1], 0x30036000, 2, &dma_eth[2], &dma_eth[3]);
+-    }
  
- static GHashTable *nic_model_help;
- 
-+static int nb_nics;
-+static NICInfo nd_table[MAX_NICS];
++    etraxfs_eth_init(0x30034000, 1, &dma_eth[0], &dma_eth[1]);
+     /* The DMA Connector block is missing, hardwire things for now.  */
+     etraxfs_dmac_connect_client(etraxfs_dmac, 0, &dma_eth[0]);
+     etraxfs_dmac_connect_client(etraxfs_dmac, 1, &dma_eth[1]);
+-    if (nb_nics > 1) {
 +
- /***********************************************************/
- /* network device redirectors */
++    if (qemu_find_nic_info("etraxfs-eth", true, "fseth")) {
++        etraxfs_eth_init(0x30036000, 2, &dma_eth[2], &dma_eth[3]);
+         etraxfs_dmac_connect_client(etraxfs_dmac, 6, &dma_eth[2]);
+         etraxfs_dmac_connect_client(etraxfs_dmac, 7, &dma_eth[3]);
+     }
+diff --git a/hw/net/etraxfs_eth.c b/hw/net/etraxfs_eth.c
+index 1b82aec794..ab60eaac04 100644
+--- a/hw/net/etraxfs_eth.c
++++ b/hw/net/etraxfs_eth.c
+@@ -646,15 +646,14 @@ static void etraxfs_eth_class_init(ObjectClass *klass, void *data)
  
-diff --git a/system/globals.c b/system/globals.c
-index e83b5428d1..b6d4e72530 100644
---- a/system/globals.c
-+++ b/system/globals.c
-@@ -36,8 +36,6 @@ int display_opengl;
- const char* keyboard_layout;
- bool enable_mlock;
- bool enable_cpu_pm;
--int nb_nics;
--NICInfo nd_table[MAX_NICS];
- int autostart = 1;
- int vga_interface_type = VGA_NONE;
- bool vga_interface_created;
+ /* Instantiate an ETRAXFS Ethernet MAC.  */
+ DeviceState *
+-etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
++etraxfs_eth_init(hwaddr base, int phyaddr,
+                  struct etraxfs_dma_client *dma_out,
+                  struct etraxfs_dma_client *dma_in)
+ {
+     DeviceState *dev;
+-    qemu_check_nic_model(nd, "fseth");
+ 
+     dev = qdev_new("etraxfs-eth");
+-    qdev_set_nic_properties(dev, nd);
++    qemu_configure_nic_device(dev, true, "fseth");
+     qdev_prop_set_uint32(dev, "phyaddr", phyaddr);
+ 
+     /*
+diff --git a/include/hw/cris/etraxfs.h b/include/hw/cris/etraxfs.h
+index 467b529dc0..012c4e9974 100644
+--- a/include/hw/cris/etraxfs.h
++++ b/include/hw/cris/etraxfs.h
+@@ -31,7 +31,7 @@
+ #include "hw/sysbus.h"
+ #include "qapi/error.h"
+ 
+-DeviceState *etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
++DeviceState *etraxfs_eth_init(hwaddr base, int phyaddr,
+                               struct etraxfs_dma_client *dma_out,
+                               struct etraxfs_dma_client *dma_in);
+ 
 -- 
 2.41.0
 
