@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6507DC4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:40:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.627877.978737 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BBC2C4167B
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Nov 2023 10:40:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.627881.978768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1g-00014j-F8; Mon, 06 Nov 2023 10:40:12 +0000
+	id 1qzx1i-0001dg-2C; Mon, 06 Nov 2023 10:40:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 627877.978737; Mon, 06 Nov 2023 10:40:12 +0000
+Received: by outflank-mailman (output) from mailman id 627881.978768; Mon, 06 Nov 2023 10:40:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qzx1g-00013Y-CJ; Mon, 06 Nov 2023 10:40:12 +0000
-Received: by outflank-mailman (input) for mailman id 627877;
- Mon, 06 Nov 2023 10:40:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qzx1h-0001a9-QM; Mon, 06 Nov 2023 10:40:13 +0000
+Received: by outflank-mailman (input) for mailman id 627881;
+ Mon, 06 Nov 2023 10:40:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OHvK=GT=casper.srs.infradead.org=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1qzx1f-00010s-1h
- for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:11 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d9cf4d07-7c90-11ee-9b0e-b553b5be7939;
- Mon, 06 Nov 2023 11:40:07 +0100 (CET)
+ <SRS0=nwd5=GT=desiato.srs.infradead.org=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1qzx1g-00010q-CY
+ for xen-devel@lists.xenproject.org; Mon, 06 Nov 2023 10:40:12 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id db10bb24-7c90-11ee-98da-6d05b1d4d9a1;
+ Mon, 06 Nov 2023 11:40:09 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1qzx1P-005R1j-Rh; Mon, 06 Nov 2023 10:39:56 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qzx1R-00ARzw-0T; Mon, 06 Nov 2023 10:39:57 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1qzx1Q-000qGL-0i; Mon, 06 Nov 2023 10:39:56 +0000
+ Hat Linux)) id 1qzx1Q-000qGD-0J; Mon, 06 Nov 2023 10:39:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: d9cf4d07-7c90-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: db10bb24-7c90-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=4uz818AY0/m+FRzGeIhGz1ZTqpxzLihnWApmCN46dps=; b=fKwQs5UAJQKDc4KMhJikM8x0P+
-	jPOTGf+YxCgZTG/biDh3QzX3JwAbu0gE40tBY8XR/RZ3HilkTvWvdgtoMbVM/GryZUjrqPv/srYx4
-	+ipkc9VhfDcYvAyXEPUXUUHSwPPlvgV05kdutHUN0YQWlbfVFPhtzdPr9P3gzllPa+c2RQrgYl6xO
-	6BYbsvGDvWMmLVvsAho+MJkjTcjB/wbjsPkkpXi882fTxrvbre3s1QCQSJw92wKxWoLxH0GOWQ49U
-	osQBPzD5cm4z9Xb9QrnOHQjCv0800KW3Xgu428Cxh5JoUgybYy4O1wohQagI+6cxYjmo5Ua7CiFYT
-	qbjp+IOg==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=2aX82uZpC1qyK8a13DdVvtrvr4nDdAxx84xCzWlWkQE=; b=Lsa03UYsBW/tPFhN+jMR5L26U/
+	TVzIcfwnVOKWq5iVAbYsqR6CCu2/cqD2aOvhXmFK94xOl7AaqnrWzCxnvgNIK+qbGL3dSymFt2T1w
+	TxnN1TH0mJkh1qzM/BhXXPzV7ivfJRv24SyfrEi9Wn71X/x5BxUf3616HSSSnHGXSzY5RLRicYzGq
+	7YwIXlaz/0icDCQWAP1xDbdRgUrI64/oY3c6TeFVPJwinCYCKUzxgRZ0K+HaQk+yAufoKx5SztD5n
+	PuPTmD1h8oBzywh7Jh1H9fiiYouwogazRnsvbqM526NkjyZpNfe1bEFjOBIPG7UHC0kDEpTVLKQW6
+	aL2RWHyQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org,
 	qemu-stable@nongnu.org
@@ -71,51 +71,67 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	xen-devel@lists.xenproject.org,
 	qemu-block@nongnu.org,
 	kvm@vger.kernel.org
-Subject: [PULL 7/7] hw/xen: use correct default protocol for xen-block on x86
-Date: Mon,  6 Nov 2023 10:39:55 +0000
-Message-ID: <20231106103955.200867-8-dwmw2@infradead.org>
+Subject: [PULL 5/7] hw/xen: fix XenStore watch delivery to guest
+Date: Mon,  6 Nov 2023 10:39:53 +0000
+Message-ID: <20231106103955.200867-6-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106103955.200867-1-dwmw2@infradead.org>
 References: <20231106103955.200867-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Even on x86_64 the default protocol is the x86-32 one if the guest doesn't
-specifically ask for x86-64.
+When fire_watch_cb() found the response buffer empty, it would call
+deliver_watch() to generate the XS_WATCH_EVENT message in the response
+buffer and send an event channel notification to the guest… without
+actually *copying* the response buffer into the ring. So there was
+nothing for the guest to see. The pending response didn't actually get
+processed into the ring until the guest next triggered some activity
+from its side.
+
+Add the missing call to put_rsp().
+
+It might have been slightly nicer to call xen_xenstore_event() here,
+which would *almost* have worked. Except for the fact that it calls
+xen_be_evtchn_pending() to check that it really does have an event
+pending (and clear the eventfd for next time). And under Xen it's
+defined that setting that fd to O_NONBLOCK isn't guaranteed to work,
+so the emu implementation follows suit.
+
+This fixes Xen device hot-unplug.
 
 Cc: qemu-stable@nongnu.org
-Fixes: b6af8926fb85 ("xen: add implementations of xen-block connect and disconnect functions...")
+Fixes: 0254c4d19df ("hw/xen: Add xenstore wire implementation and implementation stubs")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/block/xen-block.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ hw/i386/kvm/xen_xenstore.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index a07cd7eb5d..bfa53960c3 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -115,9 +115,13 @@ static void xen_block_connect(XenDevice *xendev, Error **errp)
-         return;
-     }
- 
--    if (xen_device_frontend_scanf(xendev, "protocol", "%ms",
--                                  &str) != 1) {
--        protocol = BLKIF_PROTOCOL_NATIVE;
-+    if (xen_device_frontend_scanf(xendev, "protocol", "%ms", &str) != 1) {
-+        /* x86 defaults to the 32-bit protocol even for 64-bit guests. */
-+        if (object_dynamic_cast(OBJECT(qdev_get_machine()), "x86-machine")) {
-+            protocol = BLKIF_PROTOCOL_X86_32;
-+        } else {
-+            protocol = BLKIF_PROTOCOL_NATIVE;
-+        }
+diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
+index 660d0b72f9..8e716a7009 100644
+--- a/hw/i386/kvm/xen_xenstore.c
++++ b/hw/i386/kvm/xen_xenstore.c
+@@ -1357,10 +1357,12 @@ static void fire_watch_cb(void *opaque, const char *path, const char *token)
      } else {
-         if (strcmp(str, XEN_IO_PROTO_ABI_X86_32) == 0) {
-             protocol = BLKIF_PROTOCOL_X86_32;
+         deliver_watch(s, path, token);
+         /*
+-         * If the message was queued because there was already ring activity,
+-         * no need to wake the guest. But if not, we need to send the evtchn.
++         * Attempt to queue the message into the actual ring, and send
++         * the event channel notification if any bytes are copied.
+          */
+-        xen_be_evtchn_notify(s->eh, s->be_port);
++        if (s->rsp_pending && put_rsp(s) > 0) {
++            xen_be_evtchn_notify(s->eh, s->be_port);
++        }
+     }
+ }
+ 
 -- 
 2.41.0
 
