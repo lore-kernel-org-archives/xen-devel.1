@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4485C4167D
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Nov 2023 15:49:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628910.980841 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27BEAC41535
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Nov 2023 15:49:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628911.980849 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r0OKX-0004iU-QN; Tue, 07 Nov 2023 15:49:29 +0000
+	id 1r0OKY-0004pe-6M; Tue, 07 Nov 2023 15:49:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628910.980841; Tue, 07 Nov 2023 15:49:29 +0000
+Received: by outflank-mailman (output) from mailman id 628911.980849; Tue, 07 Nov 2023 15:49:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r0OKX-0004h7-N8; Tue, 07 Nov 2023 15:49:29 +0000
-Received: by outflank-mailman (input) for mailman id 628910;
- Tue, 07 Nov 2023 15:49:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r0OKX-0004o2-Vy; Tue, 07 Nov 2023 15:49:29 +0000
+Received: by outflank-mailman (input) for mailman id 628911;
+ Tue, 07 Nov 2023 15:49:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=l2M1=GU=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1r0OKW-0004f2-F9
+ id 1r0OKW-0004f1-Vp
  for xen-devel@lists.xenproject.org; Tue, 07 Nov 2023 15:49:28 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a6180d2-7d85-11ee-9b0e-b553b5be7939;
- Tue, 07 Nov 2023 16:49:26 +0100 (CET)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-407da05f05aso40732825e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 07 Nov 2023 07:49:26 -0800 (PST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3b954827-7d85-11ee-98da-6d05b1d4d9a1;
+ Tue, 07 Nov 2023 16:49:28 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-40839652b97so43425785e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Nov 2023 07:49:28 -0800 (PST)
 Received: from EMEAENGAAD19049.citrite.net ([2.223.46.215])
  by smtp.gmail.com with ESMTPSA id
- n26-20020a1c721a000000b0040849ce7116sm15809852wmc.43.2023.11.07.07.49.24
+ n26-20020a1c721a000000b0040849ce7116sm15809852wmc.43.2023.11.07.07.49.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 07:49:24 -0800 (PST)
+ Tue, 07 Nov 2023 07:49:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,93 +47,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a6180d2-7d85-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 3b954827-7d85-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1699372165; x=1699976965; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7QLYmYWtMJ62e0JFgj800/8nLr0ylkXl7+nFaCaFD6M=;
-        b=Y1NhyE380SQb7GYcXK9wrPsTIYBSry3Cj9D1grWAaqdmprALxjWR5riPGhfIhTlrQL
-         v7GL8t7vT1atsR+hV4le+7SqBOk96Q4R6zH49HTetwRCtoR9sPw9D0D+AGOpU8deYNfo
-         GLyPBuhTEkm4UE7u+k+eRuGVHvhLT4Sf4N6hQ=
+        d=cloud.com; s=cloud; t=1699372167; x=1699976967; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4PH+ltmnAqqEVilWJSYQVlpn9gAh+kNEqLJKqQ8kDow=;
+        b=F1rw5aUbAnsg3ci/ltsmy72UzPYihqy5pKD0OuAiPDyx1+XV2jNnm5hR+uOnzUDXwy
+         adrcNEcKd2mgJJiJEiijqJYWgNSGGL9HldNHjxbLpEk/O+MAJSO5YLU6cLFi9teQv8+F
+         rBsDzFla/v5kV458L14alaxpNMjiYBqjQQ/2w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699372165; x=1699976965;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7QLYmYWtMJ62e0JFgj800/8nLr0ylkXl7+nFaCaFD6M=;
-        b=gcyQlNlekjBNXdXZE2hUTiYRU2N/KagG1/WZNFmkWwpL3x8d50xO+iBsAOIN3t86Yn
-         LqtMl+0vJbpPqJ4Rfae7PlPkHlTvmR3bkf/O85L7yWKRkYN9yf4hCPpZS0YmyLhVvFF8
-         rzvd+ByPzSmD7mY17XUp04oKu8AchnJmhN3bGqtdIIE87euw7LljxAPgmtQDPBqN9qvO
-         7KMUSuN8uOKpY4qvaa5Xo46NNCGhBQa7q/LYsnzUN6Fqv7EC4iAnW3kkoGgFCy0mxceT
-         rPQy+GX5yNC8IDa2CYp1nIN5FzNVXQUPq2epj4U58rEky6l6lSy0pDHzZYd9dos8CwKS
-         hwEQ==
-X-Gm-Message-State: AOJu0YzDHR7fqXotVk1zaZ/h7RpCIzF8fBzWHrnJ8JmXQ0wJuUBkBjH/
-	4jnyKbtTK4yrde0EeCjn6jKqt6c+kTEEhvZw+iQ=
-X-Google-Smtp-Source: AGHT+IGzHLC6XZxItKAQbIOb9FG4NXEkVbirOPLd4+1V+M6DMxzLsw+ximlZaNVOzhIZqGnykuLeVw==
-X-Received: by 2002:a05:600c:2109:b0:407:3b6d:b561 with SMTP id u9-20020a05600c210900b004073b6db561mr3002422wml.9.1699372164771;
-        Tue, 07 Nov 2023 07:49:24 -0800 (PST)
+        d=1e100.net; s=20230601; t=1699372167; x=1699976967;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=4PH+ltmnAqqEVilWJSYQVlpn9gAh+kNEqLJKqQ8kDow=;
+        b=hFaRYxZrl5p47fE9IaYTDjyGY6rC/DhBPPmTPL3YmyY4mD8oekN4W4Pv0UwjqmHJsg
+         e4GBhx9Vhd/FUF9kpq0pmsOBh1GkM7Fmmd5rxAE4X6NgyaBiCdpwLvhlDD4TIMb/80SH
+         m2XTyQ09pSIlPT0ClcWNJ0xTzMGonxYBwjooUY2TUlO7VqLz5OQTTXoHSVNO0dVexCsE
+         O3YRcPoao0YcesoMxe4xIMNW1C/18JUHfo0XAp9PI1X3D05pcCsBsT+9tHrr6b5IXRlx
+         S19ykp1fjTX04mGiV3wWWedXNrbbwN+5PcqEfVp+OryRys+rmAp1HbNmzwf+PHYVMq1p
+         DX8w==
+X-Gm-Message-State: AOJu0YwngIF2Lw+J9crY8jA89Pqy14YAGeOih480bHgN24Mnp5hD60kE
+	ERWvPqnFiQisJe342SlMgejfzsQNxtzLj+f+xYc=
+X-Google-Smtp-Source: AGHT+IHbGl1ImjqsJJC/LtJ/XxrNw1Yq7Y39EFnxTRFMDZvidth2gihrppp3vxakaCZKl4LTvY/Ykg==
+X-Received: by 2002:a05:600c:3112:b0:408:575e:f24f with SMTP id g18-20020a05600c311200b00408575ef24fmr2701397wmo.28.1699372166576;
+        Tue, 07 Nov 2023 07:49:26 -0800 (PST)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 0/7] Cleanup and code duplication removal in xenguest
-Date: Tue,  7 Nov 2023 15:49:14 +0000
-Message-Id: <20231107154921.54979-1-alejandro.vallejo@cloud.com>
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH 2/7] tools/xg: Simplify write_x86_cpu_policy_records()
+Date: Tue,  7 Nov 2023 15:49:16 +0000
+Message-Id: <20231107154921.54979-3-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231107154921.54979-1-alejandro.vallejo@cloud.com>
+References: <20231107154921.54979-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-NOTE: This series is still under test
+With the policy automatically getting appropriate serialised buffer sizes,
+we can remove boilerplate from this function. Furthermore, the extra
+dynamic allocations aren't needed anymore as the serialised buffers inside
+the policy can be used instead.
 
-This series tries to bind the current xc_cpu_policy_t and its serialization
-buffers. Having them separate makes it hard to extend of modify the
-serialized policy structure and needlessly leaks details in places that
-don't need them, causing a lot of boilerplate and code duplication. The
-resulting code is >100LoC leaner.
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+ tools/libs/guest/xg_sr_common_x86.c | 55 +++++++++--------------------
+ 1 file changed, 17 insertions(+), 38 deletions(-)
 
-The series is not as aggressive as it could be, but it's enough to unlock
-future work regarding cpu policy extensions and ought to make toolstack
-interactions a lot faster.
-
-Patch 1: Remove the fixed buffers in xc_cpu_policy_t and create pointers
-         populated during xc_cpu_policy_init() instead.
-Patch 2: Removes boilerplate by making use of the newly created buffers
-Patch 3: Adds a couple of helpers to keep the 2 forms inside the
-         xc_cpu_policy_t object consistently in sync.
-Patch 4: Splits the common set_cpu_policy wrapper in 2. One to send the
-         deserialized form of the policy object (after serializing it
-         internally first) and another to send the serialized form
-         directly.
-Patch 5: Uses the previous patches to avoid a lot of boilerplate in the
-         main policy manipulation routine.
-Patch 6: Remove code duplication in the xend-style override setters
-Patch 7: Final cleanup so the get_cpu_policy wrappers can operate on policy
-         objects directly
-
-Alejandro Vallejo (7):
-  tools/xenguest: Dynamically allocate xc_cpu_policy_t contents
-  tools/xg: Simplify write_x86_cpu_policy_records()
-  tools/xg: Add self-(de)serialisation functions for cpu_policy
-  tools/xg: Split xc_cpu_policy_set_domain()
-  tools/xg: Streamline xc_cpuid_apply_policy()
-  tools/xg: Simplify xc_cpuid_xend_policy() and xc_msr_policy()
-  tools/xg: Simplify hypercall stubs
-
- tools/include/xenguest.h             |  11 +-
- tools/libs/guest/xg_cpuid_x86.c      | 626 +++++++++++----------------
- tools/libs/guest/xg_private.h        |  17 +-
- tools/libs/guest/xg_sr_common_x86.c  |  55 +--
- tools/misc/xen-cpuid.c               |   2 +-
- tools/tests/tsx/test-tsx.c           |  61 +--
- xen/include/xen/lib/x86/cpu-policy.h |   2 +-
- 7 files changed, 318 insertions(+), 456 deletions(-)
-
+diff --git a/tools/libs/guest/xg_sr_common_x86.c b/tools/libs/guest/xg_sr_common_x86.c
+index ad63c675ed..c8fd64775f 100644
+--- a/tools/libs/guest/xg_sr_common_x86.c
++++ b/tools/libs/guest/xg_sr_common_x86.c
+@@ -44,55 +44,36 @@ int handle_x86_tsc_info(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+ 
+ int write_x86_cpu_policy_records(struct xc_sr_context *ctx)
+ {
++    int rc = -1;
+     xc_interface *xch = ctx->xch;
+-    struct xc_sr_record cpuid = { .type = REC_TYPE_X86_CPUID_POLICY, };
+-    struct xc_sr_record msrs  = { .type = REC_TYPE_X86_MSR_POLICY, };
+-    uint32_t nr_leaves = 0, nr_msrs = 0;
+-    xc_cpu_policy_t *policy = NULL;
+-    int rc;
+-
+-    if ( xc_cpu_policy_get_size(xch, &nr_leaves, &nr_msrs) < 0 )
+-    {
+-        PERROR("Unable to get CPU Policy size");
+-        return -1;
+-    }
++    struct xc_sr_record record;
++    xc_cpu_policy_t *policy = xc_cpu_policy_init(xch);
+ 
+-    cpuid.data = malloc(nr_leaves * sizeof(xen_cpuid_leaf_t));
+-    msrs.data  = malloc(nr_msrs   * sizeof(xen_msr_entry_t));
+-    policy = xc_cpu_policy_init(xch);
+-    if ( !cpuid.data || !msrs.data || !policy )
+-    {
+-        ERROR("Cannot allocate memory for CPU Policy");
+-        rc = -1;
+-        goto out;
+-    }
+-
+-    if ( xc_cpu_policy_get_domain(xch, ctx->domid, policy) )
++    if ( !policy ||
++         (rc = xc_cpu_policy_get_domain(xch, ctx->domid, policy)) )
+     {
+         PERROR("Unable to get d%d CPU Policy", ctx->domid);
+-        rc = -1;
+-        goto out;
+-    }
+-    if ( xc_cpu_policy_serialise(xch, policy, cpuid.data, &nr_leaves,
+-                                 msrs.data, &nr_msrs) )
+-    {
+-        PERROR("Unable to serialize d%d CPU Policy", ctx->domid);
+-        rc = -1;
+         goto out;
+     }
+ 
+-    cpuid.length = nr_leaves * sizeof(xen_cpuid_leaf_t);
+-    if ( cpuid.length )
++    record = (struct xc_sr_record){
++        .type = REC_TYPE_X86_CPUID_POLICY, .data = policy->leaves.buf,
++        .length = policy->leaves.len * sizeof(*policy->leaves.buf),
++    };
++    if ( record.length )
+     {
+-        rc = write_record(ctx, &cpuid);
++        rc = write_record(ctx, &record);
+         if ( rc )
+             goto out;
+     }
+ 
+-    msrs.length = nr_msrs * sizeof(xen_msr_entry_t);
+-    if ( msrs.length )
++    record = (struct xc_sr_record){
++        .type = REC_TYPE_X86_MSR_POLICY, .data = policy->msrs.buf,
++        .length = policy->msrs.len * sizeof(*policy->msrs.buf),
++    };
++    if ( record.length )
+     {
+-        rc = write_record(ctx, &msrs);
++        rc = write_record(ctx, &record);
+         if ( rc )
+             goto out;
+     }
+@@ -100,8 +81,6 @@ int write_x86_cpu_policy_records(struct xc_sr_context *ctx)
+     rc = 0;
+ 
+  out:
+-    free(cpuid.data);
+-    free(msrs.data);
+     xc_cpu_policy_destroy(policy);
+ 
+     return rc;
 -- 
 2.34.1
 
