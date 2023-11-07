@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E185C4332F
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Nov 2023 09:22:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.628629.980267 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D06C4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Nov 2023 09:22:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.628640.980381 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r0IHq-0001Z9-7v; Tue, 07 Nov 2023 09:22:18 +0000
+	id 1r0II4-0004yX-Hb; Tue, 07 Nov 2023 09:22:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 628629.980267; Tue, 07 Nov 2023 09:22:18 +0000
+Received: by outflank-mailman (output) from mailman id 628640.980381; Tue, 07 Nov 2023 09:22:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r0IHq-0001Y5-4T; Tue, 07 Nov 2023 09:22:18 +0000
-Received: by outflank-mailman (input) for mailman id 628629;
- Tue, 07 Nov 2023 09:22:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r0II4-0004xH-7X; Tue, 07 Nov 2023 09:22:32 +0000
+Received: by outflank-mailman (input) for mailman id 628640;
+ Tue, 07 Nov 2023 09:22:30 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vjcX=GU=casper.srs.infradead.org=BATV+0fd401c0b30749933da3+7380+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r0IHp-0001Vh-5T
- for xen-devel@lists.xenproject.org; Tue, 07 Nov 2023 09:22:17 +0000
+ id 1r0II2-0001o6-Ew
+ for xen-devel@lists.xenproject.org; Tue, 07 Nov 2023 09:22:30 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 23fb82cd-7d4f-11ee-98da-6d05b1d4d9a1;
- Tue, 07 Nov 2023 10:22:15 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2a84d693-7d4f-11ee-9b0e-b553b5be7939;
+ Tue, 07 Nov 2023 10:22:26 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r0IHN-00BPkW-UH; Tue, 07 Nov 2023 09:21:50 +0000
+ id 1r0IHN-00BPkH-8E; Tue, 07 Nov 2023 09:21:50 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r0IHO-001hKg-0o; Tue, 07 Nov 2023 09:21:50 +0000
+ Hat Linux)) id 1r0IHN-001hJr-1M; Tue, 07 Nov 2023 09:21:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 23fb82cd-7d4f-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 2a84d693-7d4f-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=kWdbDjeYz0afnZnwtIhprW3R32uFeN2KMkLsabrtTH8=; b=Cw1GeOn4kpo8cW2cKosb3qe9MO
-	dyfGbnQtiq55C/Sw5Cvina+fKES9cSV1XfsFJKhXJ8bfrclHP+3L26I7mgvzz36dYJllEEnQVMFsF
-	HoV0m5bq0JsQl3wDWE5ikNkzgPrAOk2jazWS6AWFEzKvMquaosPtu882fXTRAIxIGqEUyNlJ36lK8
-	73fT2RuvI8EN9w/U/J7MLWSnVhqkU01k8NGlVQJcCpkFdGpvaMLJAoJ3YqsH3oyip60Pp8NsU4Znu
-	kxLCpOt+uhIAe47HC6/wZ/m+fAP8JC3j4vMJILoOf02sh1d0Nu5BWz4neZVPHvWNLeYVLXgUeQCiN
-	hD6B72zA==;
+	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=ucdObmILc+svUFlf4s5gX1kFp4HY4wFKGOFMUEIZPls=; b=m+6KCPtfywuMzy0JoQbV+w7wmx
+	f7rodZuTJgm0KJbtmp/wN+QtcVXg+E8CDbH9YBcHNyNsPTeHgHjGttf72Y5StBlCBkJeFuJKeJGXb
+	cl9bQVwLyEbA2dkQiy/UIc8G8lw7//JhMhp6ofCqa2KKM8uNoJimYu3m+xyrv2zXcGKrY/EhpQuvB
+	C0PHzW/axS3b2NdJD9/M0JoZOkny5KUgMK+k5qEvWgypdKO1FtPt97zCe1s88WY1PEioJciMuFWP8
+	6DxNZS0fu17GIhvk7inm5TktSxQGHv4u7H/pOcO5ddtUJ2cFCVuvdzOOQYUlMSgJqol+xfuGi5f5t
+	SewKbTpw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org,
 	Stefan Hajnoczi <stefanha@redhat.com>
@@ -73,162 +73,123 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	qemu-block@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org
-Subject: [PULL 13/15] hw/i386/pc: support '-nic' for xen-net-device
-Date: Tue,  7 Nov 2023 09:21:45 +0000
-Message-ID: <20231107092149.404842-14-dwmw2@infradead.org>
+Subject: [PULL 00/15] xenfv.for-upstream queue
+Date: Tue,  7 Nov 2023 09:21:32 +0000
+Message-ID: <20231107092149.404842-1-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231107092149.404842-1-dwmw2@infradead.org>
-References: <20231107092149.404842-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+The following changes since commit 8aba939e77daca10eac99d9d467f65ba7df5ab3e:
 
-The default NIC creation seems a bit hackish to me. I don't understand
-why each platform has to call pci_nic_init_nofail() from a point in the
-code where it actually has a pointer to the PCI bus, and then we have
-the special cases for things like ne2k_isa.
+  Merge tag 'pull-riscv-to-apply-20231107' of https://github.com/alistair23/qemu into staging (2023-11-07 11:08:16 +0800)
 
-If qmp_device_add() can *find* the appropriate bus and instantiate
-the device on it, why can't we just do that from generic code for
-creating the default NICs too?
+are available in the Git repository at:
 
-But that isn't a yak I want to shave today. Add a xenbus field to the
-PCMachineState so that it can make its way from pc_basic_device_init()
-to pc_nic_init() and be handled as a special case like ne2k_isa is.
+  git://git.infradead.org/users/dwmw2/qemu.git tags/pull-xenfv.for-upstream-20231107
 
-Now we can launch emulated Xen guests with '-nic user'.
+for you to fetch changes up to cc9d10b9e89f0325c1a14955534d6b28ea586fba:
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
- hw/i386/pc.c             | 11 ++++++++---
- hw/i386/pc_piix.c        |  2 +-
- hw/i386/pc_q35.c         |  2 +-
- hw/xen/xen-bus.c         |  4 +++-
- include/hw/i386/pc.h     |  4 +++-
- include/hw/xen/xen-bus.h |  2 +-
- 6 files changed, 17 insertions(+), 8 deletions(-)
+  docs: update Xen-on-KVM documentation (2023-11-07 08:58:02 +0000)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 1aef21aa2c..188bc9d0f8 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -1261,7 +1261,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-         if (pcms->bus) {
-             pci_create_simple(pcms->bus, -1, "xen-platform");
-         }
--        xen_bus_init();
-+        pcms->xenbus = xen_bus_init();
-         xen_be_init();
-     }
- #endif
-@@ -1289,7 +1289,8 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-                     pcms->vmport != ON_OFF_AUTO_ON);
- }
- 
--void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus)
-+void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
-+                 BusState *xen_bus)
- {
-     MachineClass *mc = MACHINE_CLASS(pcmc);
-     int i;
-@@ -1299,7 +1300,11 @@ void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus)
-         NICInfo *nd = &nd_table[i];
-         const char *model = nd->model ? nd->model : mc->default_nic;
- 
--        if (g_str_equal(model, "ne2k_isa")) {
-+        if (xen_bus && (!nd->model || g_str_equal(model, "xen-net-device"))) {
-+            DeviceState *dev = qdev_new("xen-net-device");
-+            qdev_set_nic_properties(dev, nd);
-+            qdev_realize_and_unref(dev, xen_bus, &error_fatal);
-+        } else if (g_str_equal(model, "ne2k_isa")) {
-             pc_init_ne2k_isa(isa_bus, nd);
-         } else {
-             pci_nic_init_nofail(nd, pci_bus, model, NULL);
-diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index 26e161beb9..eace854335 100644
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -342,7 +342,7 @@ static void pc_init1(MachineState *machine,
-     pc_basic_device_init(pcms, isa_bus, x86ms->gsi, rtc_state, true,
-                          0x4);
- 
--    pc_nic_init(pcmc, isa_bus, pci_bus);
-+    pc_nic_init(pcmc, isa_bus, pci_bus, pcms->xenbus);
- 
-     if (pcmc->pci_enabled) {
-         pc_cmos_init(pcms, idebus[0], idebus[1], rtc_state);
-diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
-index 597943ff1b..4f3e5412f6 100644
---- a/hw/i386/pc_q35.c
-+++ b/hw/i386/pc_q35.c
-@@ -340,7 +340,7 @@ static void pc_q35_init(MachineState *machine)
- 
-     /* the rest devices to which pci devfn is automatically assigned */
-     pc_vga_init(isa_bus, host_bus);
--    pc_nic_init(pcmc, isa_bus, host_bus);
-+    pc_nic_init(pcmc, isa_bus, host_bus, pcms->xenbus);
- 
-     if (machine->nvdimms_state->is_enabled) {
-         nvdimm_init_acpi_state(machine->nvdimms_state, system_io,
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index cc6f1b362f..4973e7d9c9 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -1133,11 +1133,13 @@ static void xen_register_types(void)
- 
- type_init(xen_register_types)
- 
--void xen_bus_init(void)
-+BusState *xen_bus_init(void)
- {
-     DeviceState *dev = qdev_new(TYPE_XEN_BRIDGE);
-     BusState *bus = qbus_new(TYPE_XEN_BUS, dev, NULL);
- 
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-     qbus_set_bus_hotplug_handler(bus);
-+
-+    return bus;
- }
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index 29a9724524..a10ceeabbf 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -33,6 +33,7 @@ typedef struct PCMachineState {
- 
-     /* Pointers to devices and objects: */
-     PCIBus *bus;
-+    BusState *xenbus;
-     I2CBus *smbus;
-     PFlashCFI01 *flash[2];
-     ISADevice *pcspk;
-@@ -184,7 +185,8 @@ void pc_basic_device_init(struct PCMachineState *pcms,
- void pc_cmos_init(PCMachineState *pcms,
-                   BusState *ide0, BusState *ide1,
-                   ISADevice *s);
--void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus);
-+void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
-+                 BusState *xen_bus);
- 
- void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs);
- 
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index 38d40afa37..334ddd1ff6 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -75,7 +75,7 @@ struct XenBusClass {
- OBJECT_DECLARE_TYPE(XenBus, XenBusClass,
-                     XEN_BUS)
- 
--void xen_bus_init(void);
-+BusState *xen_bus_init(void);
- 
- void xen_device_backend_set_state(XenDevice *xendev,
-                                   enum xenbus_state state);
--- 
-2.41.0
+----------------------------------------------------------------
+Xen PV guest support for 8.2
 
+Add Xen PV console and network support, the former of which enables the
+Xen "PV shim" to be used to support PV guests.
+
+Also clean up the block support and make it work when the user passes
+just 'drive file=IMAGE,if=xen' on the command line.
+
+Update the documentation to reflect all of these, taking the opportunity
+to simplify what it says about q35 by making unplug work for AHCI.
+
+Ignore the VCPU_SSHOTTMR_future timer flag, and advertise the 'fixed'
+per-vCPU upcall vector support, as newer upstream Xen do.
+
+----------------------------------------------------------------
+David Woodhouse (15):
+      i386/xen: Ignore VCPU_SSHOTTMR_future flag in set_singleshot_timer()
+      hw/xen: Clean up event channel 'type_val' handling to use union
+      include: update Xen public headers to Xen 4.17.2 release
+      i386/xen: advertise XEN_HVM_CPUID_UPCALL_VECTOR in CPUID
+      hw/xen: populate store frontend nodes with XenStore PFN/port
+      hw/xen: automatically assign device index to block devices
+      hw/xen: add get_frontend_path() method to XenDeviceClass
+      hw/xen: do not repeatedly try to create a failing backend device
+      hw/xen: update Xen console to XenDevice model
+      hw/xen: add support for Xen primary console in emulated mode
+      hw/xen: only remove peers of PCI NICs on unplug
+      hw/xen: update Xen PV NIC to XenDevice model
+      hw/i386/pc: support '-nic' for xen-net-device
+      xen-platform: unplug AHCI disks
+      docs: update Xen-on-KVM documentation
+
+ MAINTAINERS                                    |   2 +-
+ blockdev.c                                     |  15 +-
+ docs/system/i386/xen.rst                       | 107 +++--
+ hw/block/xen-block.c                           | 118 ++++-
+ hw/char/trace-events                           |   8 +
+ hw/char/xen_console.c                          | 572 +++++++++++++++++++------
+ hw/i386/kvm/meson.build                        |   1 +
+ hw/i386/kvm/trace-events                       |   2 +
+ hw/i386/kvm/xen-stubs.c                        |   8 +
+ hw/i386/kvm/xen_evtchn.c                       | 151 +++----
+ hw/i386/kvm/xen_gnttab.c                       |   7 +-
+ hw/i386/kvm/xen_primary_console.c              | 193 +++++++++
+ hw/i386/kvm/xen_primary_console.h              |  23 +
+ hw/i386/kvm/xen_xenstore.c                     |  23 +-
+ hw/i386/pc.c                                   |  11 +-
+ hw/i386/pc_piix.c                              |   2 +-
+ hw/i386/pc_q35.c                               |   2 +-
+ hw/i386/xen/xen_platform.c                     |  77 ++--
+ hw/net/meson.build                             |   2 +-
+ hw/net/trace-events                            |  11 +
+ hw/net/xen_nic.c                               | 484 ++++++++++++++++-----
+ hw/xen/xen-backend.c                           |  27 +-
+ hw/xen/xen-bus.c                               |  23 +-
+ hw/xen/xen-legacy-backend.c                    |   1 -
+ hw/xen/xen_devconfig.c                         |  28 --
+ hw/xenpv/xen_machine_pv.c                      |  10 -
+ include/hw/i386/pc.h                           |   4 +-
+ include/hw/xen/interface/arch-arm.h            |  37 +-
+ include/hw/xen/interface/arch-x86/cpuid.h      |  31 +-
+ include/hw/xen/interface/arch-x86/xen-x86_32.h |  19 +-
+ include/hw/xen/interface/arch-x86/xen-x86_64.h |  19 +-
+ include/hw/xen/interface/arch-x86/xen.h        |  26 +-
+ include/hw/xen/interface/event_channel.h       |  19 +-
+ include/hw/xen/interface/features.h            |  19 +-
+ include/hw/xen/interface/grant_table.h         |  19 +-
+ include/hw/xen/interface/hvm/hvm_op.h          |  19 +-
+ include/hw/xen/interface/hvm/params.h          |  19 +-
+ include/hw/xen/interface/io/blkif.h            |  27 +-
+ include/hw/xen/interface/io/console.h          |  19 +-
+ include/hw/xen/interface/io/fbif.h             |  19 +-
+ include/hw/xen/interface/io/kbdif.h            |  19 +-
+ include/hw/xen/interface/io/netif.h            |  25 +-
+ include/hw/xen/interface/io/protocols.h        |  19 +-
+ include/hw/xen/interface/io/ring.h             |  49 +--
+ include/hw/xen/interface/io/usbif.h            |  19 +-
+ include/hw/xen/interface/io/xenbus.h           |  19 +-
+ include/hw/xen/interface/io/xs_wire.h          |  36 +-
+ include/hw/xen/interface/memory.h              |  30 +-
+ include/hw/xen/interface/physdev.h             |  23 +-
+ include/hw/xen/interface/sched.h               |  19 +-
+ include/hw/xen/interface/trace.h               |  19 +-
+ include/hw/xen/interface/vcpu.h                |  19 +-
+ include/hw/xen/interface/version.h             |  19 +-
+ include/hw/xen/interface/xen-compat.h          |  19 +-
+ include/hw/xen/interface/xen.h                 |  19 +-
+ include/hw/xen/xen-backend.h                   |   1 +
+ include/hw/xen/xen-bus.h                       |   5 +-
+ include/hw/xen/xen-legacy-backend.h            |   1 -
+ qemu-options.hx                                |  12 +-
+ target/i386/kvm/kvm.c                          |   4 +
+ target/i386/kvm/xen-emu.c                      |  43 +-
+ 61 files changed, 1640 insertions(+), 983 deletions(-)
+ create mode 100644 hw/i386/kvm/xen_primary_console.c
+ create mode 100644 hw/i386/kvm/xen_primary_console.h
 
