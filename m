@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24CFAC4167B
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Nov 2023 09:06:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.629505.981789 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 299CDC4332F
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Nov 2023 09:06:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.629506.981799 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r10zb-0005GC-9u; Thu, 09 Nov 2023 09:06:27 +0000
+	id 1r10ze-0005Vn-J2; Thu, 09 Nov 2023 09:06:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 629505.981789; Thu, 09 Nov 2023 09:06:27 +0000
+Received: by outflank-mailman (output) from mailman id 629506.981799; Thu, 09 Nov 2023 09:06:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r10zb-0005G5-6s; Thu, 09 Nov 2023 09:06:27 +0000
-Received: by outflank-mailman (input) for mailman id 629505;
- Thu, 09 Nov 2023 09:06:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r10ze-0005Vf-DX; Thu, 09 Nov 2023 09:06:30 +0000
+Received: by outflank-mailman (input) for mailman id 629506;
+ Thu, 09 Nov 2023 09:06:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T6cS=GW=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1r10za-0005ED-TL
- for xen-devel@lists.xenproject.org; Thu, 09 Nov 2023 09:06:26 +0000
+ id 1r10zd-0005V5-P9
+ for xen-devel@lists.xenproject.org; Thu, 09 Nov 2023 09:06:29 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 424d2d67-7edf-11ee-98da-6d05b1d4d9a1;
- Thu, 09 Nov 2023 10:06:25 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 43ba1a51-7edf-11ee-9b0e-b553b5be7939;
+ Thu, 09 Nov 2023 10:06:27 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 12DB812FC;
- Thu,  9 Nov 2023 01:07:09 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6E25115BF;
+ Thu,  9 Nov 2023 01:07:11 -0800 (PST)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id ADBC23F703;
- Thu,  9 Nov 2023 01:06:23 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F1B963F703;
+ Thu,  9 Nov 2023 01:06:25 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,69 +44,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 424d2d67-7edf-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 43ba1a51-7edf-11ee-9b0e-b553b5be7939
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 0/5] Fine granular configuration
-Date: Thu,  9 Nov 2023 09:06:10 +0000
-Message-Id: <20231109090615.3878767-1-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v3 2/5] xen/arm: Add asm/domain.h include to kernel.h
+Date: Thu,  9 Nov 2023 09:06:12 +0000
+Message-Id: <20231109090615.3878767-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231109090615.3878767-1-luca.fancellu@arm.com>
+References: <20231109090615.3878767-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This serie aims to add more modularity to some feature that can be excluded
-without issues from the build.
+The 'enum domain_type' is defined by 'asm/domain.h' which is not
+included (directly or indirectly) by 'asm/kernel.h'.
 
-The first patch is already reviewed.
+This currently doesn't break the compilation because asm/domain.h will
+included by the user of 'kernel.h'. But it would be better to avoid
+relying on it. So add the include in 'asm/domain.h'.
 
-v2 update: So I've tried to see how to put the dom0less code in the common code,
-but the amount of modifications are not trivial, even putting only the common
-part and protecting them with ARM, leaving the ARM specific stuff under arch/
-like gic etc... will leave a status that is not very nice, so I've decided for
-now to keep everything on the arm architecture so that who is going to work
-on unifying the code in common can just take from there and do the proper
-rework.
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
+---
+Changes from v2:
+ - add Ack-by Julien
+Changes from v1:
+ - Rephrased commit message (Julien)
+---
+ xen/arch/arm/include/asm/kernel.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-This serie is not targeting 4.18.
-
-Luca Fancellu (5):
-  arm/gicv2: make GICv2 driver and vGICv2 optional
-  xen/arm: Add asm/domain.h include to kernel.h
-  arm/dom0less: put dom0less feature code in a separate module
-  xen/arm: Move static memory build code in separate modules
-  arm/dom0less: introduce Kconfig for dom0less feature
-
- xen/arch/arm/Kconfig                      |   28 +
- xen/arch/arm/Makefile                     |    7 +-
- xen/arch/arm/bootfdt.c                    |  161 +-
- xen/arch/arm/dom0less-build.c             | 1018 ++++++
- xen/arch/arm/domain_build.c               | 3623 ++++++---------------
- xen/arch/arm/efi/efi-boot.h               |    4 +
- xen/arch/arm/gic-v3.c                     |    4 +
- xen/arch/arm/include/asm/dom0less-build.h |   35 +
- xen/arch/arm/include/asm/domain_build.h   |   38 +
- xen/arch/arm/include/asm/kernel.h         |    1 +
- xen/arch/arm/include/asm/setup.h          |    1 -
- xen/arch/arm/include/asm/static-memory.h  |   50 +
- xen/arch/arm/include/asm/static-shmem.h   |   72 +
- xen/arch/arm/setup.c                      |   58 +-
- xen/arch/arm/static-memory.c              |  294 ++
- xen/arch/arm/static-shmem.c               |  515 +++
- xen/arch/arm/vgic.c                       |    2 +
- xen/arch/arm/vgic/Makefile                |    4 +-
- 18 files changed, 3088 insertions(+), 2827 deletions(-)
- create mode 100644 xen/arch/arm/dom0less-build.c
- create mode 100644 xen/arch/arm/include/asm/dom0less-build.h
- create mode 100644 xen/arch/arm/include/asm/static-memory.h
- create mode 100644 xen/arch/arm/include/asm/static-shmem.h
- create mode 100644 xen/arch/arm/static-memory.c
- create mode 100644 xen/arch/arm/static-shmem.c
-
+diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+index 4617cdc83bac..0a23e86c2d37 100644
+--- a/xen/arch/arm/include/asm/kernel.h
++++ b/xen/arch/arm/include/asm/kernel.h
+@@ -7,6 +7,7 @@
+ #define __ARCH_ARM_KERNEL_H__
+ 
+ #include <xen/device_tree.h>
++#include <asm/domain.h>
+ #include <asm/setup.h>
+ 
+ /*
 -- 
 2.34.1
 
