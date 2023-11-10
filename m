@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC7DDC4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:19:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630555.983510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78DBC4167B
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:19:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630557.983520 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UDY-0002pj-D3; Fri, 10 Nov 2023 16:18:48 +0000
+	id 1r1UDg-0003Hu-L8; Fri, 10 Nov 2023 16:18:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630555.983510; Fri, 10 Nov 2023 16:18:48 +0000
+Received: by outflank-mailman (output) from mailman id 630557.983520; Fri, 10 Nov 2023 16:18:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UDY-0002pc-AR; Fri, 10 Nov 2023 16:18:48 +0000
-Received: by outflank-mailman (input) for mailman id 630555;
- Fri, 10 Nov 2023 16:18:47 +0000
+	id 1r1UDg-0003Hl-I1; Fri, 10 Nov 2023 16:18:56 +0000
+Received: by outflank-mailman (input) for mailman id 630557;
+ Fri, 10 Nov 2023 16:18:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ap16=GX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r1U4g-0004cS-Bf
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:09:38 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1r1U4K-0004cS-1U
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:09:16 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8b3d1eae-7fe3-11ee-9b0e-b553b5be7939;
- Fri, 10 Nov 2023 17:09:36 +0100 (CET)
+ id 7df34bcb-7fe3-11ee-9b0e-b553b5be7939;
+ Fri, 10 Nov 2023 17:09:14 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 71E0A219B7;
- Fri, 10 Nov 2023 16:09:36 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 28C94219B3;
+ Fri, 10 Nov 2023 16:09:14 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4C18413398;
- Fri, 10 Nov 2023 16:09:36 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E819913398;
+ Fri, 10 Nov 2023 16:09:13 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id vEssEcBVTmUaCQAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 10 Nov 2023 16:09:36 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id Q45VN6lVTmXdCAAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 10 Nov 2023 16:09:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,159 +53,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b3d1eae-7fe3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 7df34bcb-7fe3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1699632576; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1699632554; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=HGxfpQnBGmt7EKeO4ArwxOs8iM93M39A7iQXembmjjI=;
-	b=ItLkvdPbSYVmVg2RKKPMhP0bA5pLRolTC6Auheiox9RWlqF8iOnW41BOaJGB7pCGSHbLz0
-	9JAD8SpDR0KxovXammuDVjsxoepjPdZlNDA4GM6A0+bdTKk8XQZEVmIg14ujTehE8SAdsm
-	WrtoCn61aD2yUd/ay5ad2c9c7MLrTHA=
+	bh=ci5L/DBfOaTU/puLQPxWUNYgGysJWDyG7t97Oi0b76s=;
+	b=cphz9qwIUvQcq3vzGbkm0nskov+53Ye/t9dubrPcPRqB2dM1o52GzdSQqU9AH2hB7UhHt/
+	KbSLXQZGSGatmv7NmJuCV1RnSXAvqN0Z1OJKu8B7iE0nG/8nyPVgQSo8otLK6Yauu4F5ya
+	uuTMK/xBvlaU9sr+vVLrFTQCbhleBk4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 16/29] tools/xl: support new 9pfs backend xen-9pfsd
-Date: Fri, 10 Nov 2023 17:07:51 +0100
-Message-Id: <20231110160804.29021-17-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Jason Andryuk <jandryuk@gmail.com>
+Subject: [PATCH v2 12/29] tools/xenlogd: add 9pfs stat request support
+Date: Fri, 10 Nov 2023 17:07:47 +0100
+Message-Id: <20231110160804.29021-13-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231110160804.29021-1-jgross@suse.com>
 References: <20231110160804.29021-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add support for the new 9pfs backend "xen-9pfsd". For this backend type
-the tag defaults to "Xen" and the host side path to
-"/var/log/xen/guests/<dom-name>".
+Add the stat request of the 9pfs protocol.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
 ---
-V2:
-- test max_files and max_open_files, too (Jason Andryuk)
----
- docs/man/xl.cfg.5.pod.in | 36 ++++++++++++++++++++++++++++++++++--
- tools/xl/xl_parse.c      | 36 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 70 insertions(+), 2 deletions(-)
+ tools/xen-9pfsd/io.c | 92 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 92 insertions(+)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 2e234b450e..80011adbf3 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -772,10 +772,16 @@ settings, from the following list:
+diff --git a/tools/xen-9pfsd/io.c b/tools/xen-9pfsd/io.c
+index a605f51dc6..e5abd25857 100644
+--- a/tools/xen-9pfsd/io.c
++++ b/tools/xen-9pfsd/io.c
+@@ -33,6 +33,7 @@
+ #define P9_CMD_OPEN       112
+ #define P9_CMD_CREATE     114
+ #define P9_CMD_CLUNK      120
++#define P9_CMD_STAT       124
  
- =over 4
+ /* P9 protocol open flags. */
+ #define P9_OREAD            0   /* read */
+@@ -59,6 +60,25 @@ struct p9_qid {
+     uint64_t path;
+ };
  
-+=item B<type=TYPE>
++struct p9_stat {
++    uint16_t size;
++    uint16_t type;
++    uint32_t dev;
++    struct p9_qid qid;
++    uint32_t mode;
++    uint32_t atime;
++    uint32_t mtime;
++    uint64_t length;
++    const char *name;
++    const char *uid;
++    const char *gid;
++    const char *muid;
++    const char *extension;
++    uint32_t n_uid;
++    uint32_t n_gid;
++    uint32_t n_muid;
++};
 +
-+The backendtype for the PV device. Supported values are B<qemu> and
-+B<xen-9pfsd>.  The default is B<qemu>.
-+
- =item B<tag=STRING>
+ /*
+  * Note that the ring names "in" and "out" are from the frontend's
+  * perspective, so the "in" ring will be used for responses to the frontend,
+@@ -1136,6 +1156,74 @@ static void p9_clunk(struct ring *ring, struct p9_header *hdr)
+     fill_buffer(ring, hdr->cmd + 1, hdr->tag, "");
+ }
  
- 9pfs tag to identify the filesystem share. The tag is needed on the
--guest side to mount it.
-+guest side to mount it. For the backendtype of B<xen-9pfsd> the tag defaults to
-+"Xen".
- 
- =item B<security_model="none">
- 
-@@ -785,12 +791,38 @@ squash or remap).
- 
- =item B<path=STRING>
- 
--Filesystem path on the backend to export.
-+Filesystem path on the backend to export. For the backendtype of B<xen-9pfsd>
-+the path defaults to "@XEN_LOG_DIR@/guests/<guest-name>".
- 
- =item B<backend=domain-id>
- 
- Specify the backend domain name or id, defaults to dom0.
- 
-+=item B<max-files=NUMBER>
++static void fill_p9_stat(struct p9_stat *p9s, struct stat *st, const char *name)
++{
++    memset(p9s, 0, sizeof(*p9s));
++    fill_qid(NULL, &p9s->qid, st);
++    p9s->mode = st->st_mode & 0777;
++    if ( S_ISDIR(st->st_mode) )
++        p9s->mode |= P9_CREATE_PERM_DIR;
++    p9s->atime = st->st_atime;
++    p9s->mtime = st->st_mtime;
++    p9s->length = st->st_size;
++    p9s->name = name;
++    p9s->uid = "";
++    p9s->gid = "";
++    p9s->muid = "";
++    p9s->extension = "";
++    p9s->n_uid = 0;
++    p9s->n_gid = 0;
++    p9s->n_muid = 0;
 +
-+Specify the maximum number of files below B<path>. A value of 0 (which
-+is the default) doesn't limit the number of files. Only valid for
-+B<type=xen-9pfsd>.
++    /*
++     * Size of individual fields without the size field, including 5 2-byte
++     * string length fields.
++     */
++    p9s->size = 71 + strlen(p9s->name);
++}
 +
-+=item B<max-open-files=NUMBER>
++static void p9_stat(struct ring *ring, struct p9_header *hdr)
++{
++    device *device = ring->device;
++    uint32_t fid;
++    struct p9_fid *fidp;
++    struct p9_stat p9s;
++    struct stat st;
++    uint16_t total_length;
++    int ret;
 +
-+Specify the maximum number of concurrently opened files below B<path>.
-+Multiple opens of the same file are counted individually. Only valid for
-+B<type=xen-9pfsd>, which has a default of B<max-open-files=5>.
++    ret = fill_data(ring, "U", &fid);
++    if ( ret != 1 )
++    {
++        p9_error(ring, hdr->tag, EINVAL);
++        return;
++    }
 +
-+=item B<max-space=NUMBER>
++    fidp = get_fid_ref(device, fid);
++    if ( !fidp )
++    {
++        p9_error(ring, hdr->tag, ENOENT);
++        return;
++    }
 +
-+Specify the maximum used disk space in MiB below B<path>. A value of 0 (which
-+is the default) doesn't limit the usable disk space. Only valid for
-+B<type=xen-9pfsd>.
++    if ( stat(fidp->path, &st) < 0 )
++    {
++        p9_error(ring, hdr->tag, errno);
++        goto out;
++    }
++    fill_p9_stat(&p9s, &st, strrchr(fidp->path, '/') + 1);
 +
-+=item B<auto-delete=BOOLEAN>
++    total_length = p9s.size + sizeof(p9s.size);
++    fill_buffer(ring, hdr->cmd + 1, hdr->tag, "uuuUQUUULSSSSSUUU",
++                &total_length, &p9s.size, &p9s.type, &p9s.dev, &p9s.qid,
++                &p9s.mode, &p9s.atime, &p9s.mtime, &p9s.length, p9s.name,
++                p9s.uid, p9s.gid, p9s.muid, p9s.extension, &p9s.n_uid,
++                &p9s.n_gid, &p9s.n_muid);
 +
-+When set the backend will delete the oldest file which is currently not
-+opened by the guest in case the disk space limit set via B<max-space> or the
-+file limit set via B<max-files> is being reached. Only valid for
-+B<type=xen-9pfsd>.
++ out:
++    free_fid(device, fidp);
++}
 +
- =back
+ void *io_thread(void *arg)
+ {
+     struct ring *ring = arg;
+@@ -1215,6 +1303,10 @@ void *io_thread(void *arg)
+                 p9_clunk(ring, &hdr);
+                 break;
  
- =item B<pvcalls=[ "backend=domain-id", ... ]>
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index ed983200c3..3ded557ebc 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2232,6 +2232,20 @@ void parse_config_data(const char *config_source,
-                     replace_string(&p9->tag, value);
-                 } else if (!strcmp(key, "backend")) {
-                     replace_string(&p9->backend_domname, value);
-+                } else if (!strcmp(key, "type")) {
-+                    if (libxl_p9_type_from_string(value, &p9->type)) {
-+                        fprintf(stderr, "failed to parse 9pfs type: %s\n",
-+                                value);
-+                        exit(1);
-+                    }
-+                } else if (!strcmp(key, "max-files")) {
-+                    p9->max_files = parse_ulong(value);
-+                } else if (!strcmp(key, "max-open-files")) {
-+                    p9->max_open_files = parse_ulong(value);
-+                } else if (!strcmp(key, "max-space")) {
-+                    p9->max_space = parse_ulong(value);
-+                } else if (!strcmp(key, "auto-delete")) {
-+                    p9->auto_delete = strtoul(value, NULL, 0);
-                 } else {
-                     fprintf(stderr, "Unknown 9pfs parameter '%s'\n", key);
-                     exit(1);
-@@ -2242,6 +2256,28 @@ void parse_config_data(const char *config_source,
- 
-             libxl_string_list_dispose(&pairs);
- 
-+            if (p9->type == LIBXL_P9_TYPE_UNKNOWN) {
-+                p9->type = LIBXL_P9_TYPE_QEMU;
-+            }
-+            if (p9->type == LIBXL_P9_TYPE_QEMU &&
-+                (p9->max_files || p9->max_open_files || p9->max_space ||
-+                 p9->auto_delete)) {
-+                fprintf(stderr, "Illegal 9pfs parameter combination\n");
-+                exit(1);
-+            }
-+            if (p9->type == LIBXL_P9_TYPE_XEN_9PFSD) {
-+                if (!p9->tag) {
-+                    replace_string(&p9->tag, "Xen");
-+                }
-+                if (!p9->path) {
-+                    char *path;
++            case P9_CMD_STAT:
++                p9_stat(ring, &hdr);
++                break;
 +
-+                    xasprintf(&path, XEN_LOG_DIR "/guests/%s", c_info->name);
-+                    replace_string(&p9->path, path);
-+                    free(path);
-+                }
-+            }
-+
-             if (!p9->path || !p9->security_model || !p9->tag) {
-                 fprintf(stderr, "9pfs spec missing required field!\n");
-                 exit(1);
+             default:
+                 syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
+                        ring->device->domid, ring->device->devid, hdr.cmd);
 -- 
 2.35.3
 
