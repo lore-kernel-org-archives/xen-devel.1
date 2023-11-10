@@ -4,37 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9714C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 07:41:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.629923.982483 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C3EC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 07:42:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.629926.982498 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1M8A-0005AJ-Mj; Fri, 10 Nov 2023 07:40:42 +0000
+	id 1r1M9y-0005oh-Il; Fri, 10 Nov 2023 07:42:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 629923.982483; Fri, 10 Nov 2023 07:40:42 +0000
+Received: by outflank-mailman (output) from mailman id 629926.982498; Fri, 10 Nov 2023 07:42:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1M8A-0005AC-Jt; Fri, 10 Nov 2023 07:40:42 +0000
-Received: by outflank-mailman (input) for mailman id 629923;
- Fri, 10 Nov 2023 07:40:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=huas=GX=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1r1M88-0005A6-SE
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 07:40:40 +0000
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 70956109-7f9c-11ee-9b0e-b553b5be7939;
- Fri, 10 Nov 2023 08:40:37 +0100 (CET)
-Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-9ae2cc4d17eso291923266b.1
- for <xen-devel@lists.xenproject.org>; Thu, 09 Nov 2023 23:40:37 -0800 (PST)
-Received: from [192.168.69.115] ([176.187.194.109])
- by smtp.gmail.com with ESMTPSA id
- qt19-20020a170906ecf300b009a1be9c29d7sm3567178ejb.179.2023.11.09.23.40.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Nov 2023 23:40:29 -0800 (PST)
+	id 1r1M9y-0005nS-CX; Fri, 10 Nov 2023 07:42:34 +0000
+Received: by outflank-mailman (input) for mailman id 629926;
+ Fri, 10 Nov 2023 07:41:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=9sgQ=GX=amd.com=Julia.Zhang@srs-se1.protection.inumbo.net>)
+ id 1r1M8U-0005U5-Uu
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 07:41:02 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2061a.outbound.protection.outlook.com
+ [2a01:111:f400:fe5a::61a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7dcfa7e4-7f9c-11ee-98da-6d05b1d4d9a1;
+ Fri, 10 Nov 2023 08:41:01 +0100 (CET)
+Received: from CH0PR13CA0032.namprd13.prod.outlook.com (2603:10b6:610:b2::7)
+ by MW3PR12MB4460.namprd12.prod.outlook.com (2603:10b6:303:2f::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28; Fri, 10 Nov
+ 2023 07:40:55 +0000
+Received: from DS2PEPF00003448.namprd04.prod.outlook.com
+ (2603:10b6:610:b2:cafe::3d) by CH0PR13CA0032.outlook.office365.com
+ (2603:10b6:610:b2::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.10 via Frontend
+ Transport; Fri, 10 Nov 2023 07:40:55 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS2PEPF00003448.mail.protection.outlook.com (10.167.17.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6977.16 via Frontend Transport; Fri, 10 Nov 2023 07:40:55 +0000
+Received: from jenkins-julia.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Fri, 10 Nov
+ 2023 01:40:49 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,167 +58,254 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 70956109-7f9c-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1699602030; x=1700206830; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=w1cQVy8Tdk0u30Y5Hhr0erXikh+ihShfX7wQfHbqGoc=;
-        b=LC1YOOjp9uOpE+Ua8eWUDBjZxKdUWpdkV89r+pTxj7EL2X8+boMDTIatoTgglT/WsG
-         F9GZuUYyPfQMInMxmgN2ud5tFJSeGyMUL9J5aV7wKz6pk45DfEKDrMBJ7D9o0HTCeraP
-         FfofyfbWwUsopSZE4V1zE400XX+9bMcPPVOfic28C7kUp0FtPkJ1w8yiqtO1Nl97R0o9
-         YvCcwYEELaNQ0culPVSStHsFxYQOGU57ZQPLgxOOtjdayKx1ab9tgPtrsd6nAdBYN/LW
-         Jm4diRFHak/ZAFTqiM8nyL9XJ4oGW7C/5E/DJBsSnVoJi1/O452DbPnKwQfUeIZ/1lKV
-         kyvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699602030; x=1700206830;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=w1cQVy8Tdk0u30Y5Hhr0erXikh+ihShfX7wQfHbqGoc=;
-        b=ng4WfHzA2BTpnHUj7MQB2ZacItXgjWiMYesjxvGZOrVovf79eXccjQhZFKidCrUV3U
-         2+dFL5DdWvxGz+bbequ4IkUEnxN8CoaQ768sWXQfRMjhv7RZOLjEqFRmRixQFZedJnKv
-         4rc5dJ5P6CxQlSoIbs3umpzls0ulnSnsyKYUDtCf0aSaAqAygDGJkbvy4P78z5n37E38
-         4He+vtx0oZV2pKym6s4VLUbKJJ+IBhOL98u9ESMln9KN44sqrz53fi3Kps1YWL+Wr0Fw
-         O0OzJk9xfMq26j7t0NU1mJ19ueApVX1HqdMIWDNVV3OJ+/VmYdOff7SRsI1TUVfzd4zv
-         dmXg==
-X-Gm-Message-State: AOJu0YxiXwLNvi4GpofAeI/8RPQFfgHEnbi1TahxYvYFRnnr9T+IpJce
-	ZnfT/SXoepklMVpGZYiZoXWrUw==
-X-Google-Smtp-Source: AGHT+IFiynhjKq3A77rBORXMoLsYOtp3N+GMcbcfs+ylkUNpnOvZIjAqXdE960vvYQGNOoGt3u62WQ==
-X-Received: by 2002:a17:907:9287:b0:9c7:5a01:ffec with SMTP id bw7-20020a170907928700b009c75a01ffecmr6368674ejc.0.1699602029914;
-        Thu, 09 Nov 2023 23:40:29 -0800 (PST)
-Message-ID: <34e2c0c6-4e04-486a-8e1f-4afdc461a5d4@linaro.org>
-Date: Fri, 10 Nov 2023 08:40:23 +0100
+X-Inumbo-ID: 7dcfa7e4-7f9c-11ee-98da-6d05b1d4d9a1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PvJHzzDsr9rxlQYkyovyhC6hW7jT0JDxtmOSZJkwpqqRUI4o5njlf1F0aOLTgsy1124GBN2P1GyM5CJ/YaSdOjSL/shD/2C4ls6RcjAm8ZT7Oqf46IqYxRxj8V2B13ryYn0KVuQZZ97c8KCtidtDMEQkp6uRvbcu3cp0gqRIBYdfsAsxfMs8i/KufKUZOQv/dmTz7jJl2F6kJPLv02vrWQ+xwbBUI6AwAJssISJFMDu0SHuwhYSuowIw0G0cmq+Y+FsKQeUiZDFm8jMwMJ7YQX6HeoUCh+KRcu8c5T+jqpzQETHV+dt9v6GagaVAPC8s4Teei6wDhQBkCWH/9GSFAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XntG1E0uj8N6zad76P/32qeRpwpbBJx1Tke7x6cAJhI=;
+ b=Ww6XzYopI1t/JblGGPpo4S3esBRVSKHUJxAjCOY5LH6t3mfhzHnP0+8Ou0NIQKIOSHpGPDjOM9eXgCeGSr6GOfw87fy4FWp0sNQpK6nADFiSvdXZXf6byZLUO4CJZI1YeaZUBsXxfr4rbUD7cxcgB5/YTJN1dzKHYePxNI9B1nNujcxc4rbdIvYHJ9KRwup3ii77cZfv8fpmi4boVvva/OvlU49vV03tAYkefiLFzxffUCdluYuWQmNSG2sieyZRG/KIb/jDnqd3hmiXfXk1KfcLq4pAh0krmLdPwIpsMKZh+fA65n/ev1XX/rub2/QervbTSDA861dv9MHASAupGQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XntG1E0uj8N6zad76P/32qeRpwpbBJx1Tke7x6cAJhI=;
+ b=H9ZUIQxyTeMBSk/9E+9hPg52zMPIMj2zBY66CmR6WTJFZPOYM90sTCbo0cmyGD1v2OOt2ZxiE/GL8D6CNcnat6KBHXvTp1bf9TnqJ/T9mR0woCN6BNkX7C5Cyeo65i1H3Rqxhgfh4UGCHI44a17TAiQiTAM0yJPK3wHG61ULST8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Julia Zhang <julia.zhang@amd.com>
+To: Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD
+	<anthony.perard@citrix.com>, Antonio Caggiano
+	<antonio.caggiano@collabora.com>, "Dr . David Alan Gilbert"
+	<dgilbert@redhat.com>, Robert Beckett <bob.beckett@collabora.com>,
+	<qemu-devel@nongnu.org>
+CC: <xen-devel@lists.xenproject.org>, Alex Deucher
+	<alexander.deucher@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?=
+	<christian.koenig@amd.com>, Xenia Ragiadakou <burzalodowa@gmail.com>,
+	"Honglei Huang" <honglei1.huang@amd.com>, Julia Zhang <julia.zhang@amd.com>,
+	"Chen Jiqian" <Jiqian.Chen@amd.com>, Daniel Stone <daniels@collabora.com>
+Subject: [PATCH 1/2] virgl: Implement resource_query_layout
+Date: Fri, 10 Nov 2023 15:40:26 +0800
+Message-ID: <20231110074027.24862-2-julia.zhang@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231110074027.24862-1-julia.zhang@amd.com>
+References: <20231110074027.24862-1-julia.zhang@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-8.3 v2 05/46] hw/i386/pc: use qemu_get_nic_info() and
- pci_init_nic_devices()
-Content-Language: en-US
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org,
- Bernhard Beschow <shentey@gmail.com>, Markus Armbruster <armbru@redhat.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
- <clg@kaod.org>, Andrew Jeffery <andrew@codeconstruct.com.au>,
- Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>, Rob Herring <robh@kernel.org>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, Jan Kiszka <jan.kiszka@web.de>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Radoslaw Biernacki <rad@semihalf.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Song Gao <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
- Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
- Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Bin Meng
- <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
-References: <20231106195352.301038-1-dwmw2@infradead.org>
- <20231106195352.301038-6-dwmw2@infradead.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231106195352.301038-6-dwmw2@infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003448:EE_|MW3PR12MB4460:EE_
+X-MS-Office365-Filtering-Correlation-Id: 42ae4815-2f44-4877-ba54-08dbe1c05f50
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	9BJDQy8Fa5HnkabUM8uEhEFh4/vpFxiRUftmaFPFJJau0pm5Cf+km4HROU97tN7DKmPHhM4VG8MWx/FZWZvX+tNe/sPRYCjmavewxaY3VnwFaRRtOcSNCm1XBLVPBDqshW+b0kCWXpB6+YbCGaZv8Dyc4iJznDGTg6ylm8YWGifAMK7cM3hdobfGwFj5SIg6gzAGrJNbLpaeuSKyqDmGIjPtDkEBP1hcgdp8l8s/ZpgnE0/XClfYjemWtOs0mDBOoAICE34f6DD/0c7ha+eXYbDznxuFByszZsZcg3rHcizzvLykAfD01vpgT7GE3qiJ8TwyYRo+ZmEpYcwLkV7+frI4C8pCSZGEShTTOWCTq+WdUSia9SHcyDHlhV4US1u/UoRJw/lpmBtvtafvzAMER3bFci73+938BD1mXUI2qWsqfJ9jiuc3CdodQJFnFN+ouBPbGkAOdhFTr5mk2VrphjFM1Fd4VVy07Z+yyXUZAi3hbnuqvh6d8B76lJQZvpmz+CvsUqnwcRKmDN181kFCOlx55tpXXtK1g5UgSZwSqjDn6QWh0CyvWky+pRfS0evGWmprmazIi7vEVCnloYwsg2L9ddDJW1GS0L+CN8YhK+Z1VD9s5C+Do1VceC0jIp9aaZtbply2SPh3OJ7ZvZcvZE8U+Gpi4HL1Y+g8po38kOTX8Ix+DrAM0Mlw6YvsVrsKkUpeDDttjrn9JLx/CF9dcWw++lwnDnOnWqaev8Jh78AGTnPrbC2oU5tvUHa0icVDfNRVHOVnvcs/gls2wzswZRs7hV6zHa61laQ1o5uyXFKayD3Js9KDLE8b97UmOJPM
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(376002)(136003)(39860400002)(396003)(230922051799003)(230273577357003)(230173577357003)(1800799009)(64100799003)(451199024)(82310400011)(186009)(40470700004)(36840700001)(46966006)(40480700001)(40460700003)(2616005)(6666004)(478600001)(7416002)(36860700001)(356005)(7696005)(82740400003)(86362001)(41300700001)(81166007)(36756003)(70206006)(5660300002)(4326008)(54906003)(70586007)(2906002)(44832011)(1076003)(16526019)(336012)(110136005)(426003)(47076005)(83380400001)(26005)(316002)(8936002)(8676002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2023 07:40:55.1372
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42ae4815-2f44-4877-ba54-08dbe1c05f50
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS2PEPF00003448.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4460
 
-Hi David,
+From: Daniel Stone <daniels@collabora.com>
 
-+Markus/Bernhard
+A new ioctl to shuttle information between host and guest about the
+actual buffer allocation, which can be used for interop between GL and
+Vulkan when supporting standard window systems.
+---
+ hw/display/virtio-gpu-base.c                |  4 ++
+ hw/display/virtio-gpu-virgl.c               | 49 +++++++++++++++++++++
+ include/hw/virtio/virtio-gpu-bswap.h        |  7 +++
+ include/standard-headers/linux/virtio_gpu.h | 29 ++++++++++++
+ meson.build                                 |  4 ++
+ 5 files changed, 93 insertions(+)
 
-On 6/11/23 20:49, David Woodhouse wrote:
-> From: David Woodhouse <dwmw@amazon.co.uk>
-> 
-> Eliminate direct access to nd_table[] and nb_nics by processing the the
-> Xen and ISA NICs first and then calling pci_init_nic_devices() for the
-> rest.
-> 
-> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> Reviewed-by: Paul Durrant <paul@xen.org>
-> ---
->   hw/i386/pc.c                | 26 ++++++++++++++++----------
->   include/hw/net/ne2000-isa.h |  2 --
->   2 files changed, 16 insertions(+), 12 deletions(-)
-> 
-> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-> index c2bc3fa52d..4078d2d231 100644
-> --- a/hw/i386/pc.c
-> +++ b/hw/i386/pc.c
-> @@ -652,8 +652,11 @@ static void pc_init_ne2k_isa(ISABus *bus, NICInfo *nd)
->   {
->       static int nb_ne2k = 0;
->   
-> -    if (nb_ne2k == NE2000_NB_MAX)
-> +    if (nb_ne2k == NE2000_NB_MAX) {
-> +        error_setg(&error_fatal,
+diff --git a/hw/display/virtio-gpu-base.c b/hw/display/virtio-gpu-base.c
+index 8d8aa2c88f..efaa681e54 100644
+--- a/hw/display/virtio-gpu-base.c
++++ b/hw/display/virtio-gpu-base.c
+@@ -246,6 +246,10 @@ virtio_gpu_base_get_features(VirtIODevice *vdev, uint64_t features,
+     features |= (1 << VIRTIO_GPU_F_RESOURCE_UUID);
+     features |= (1 << VIRTIO_GPU_F_CONTEXT_FENCE_WAIT);
+ 
++#ifdef HAVE_VIRGL_RESOURCE_QUERY_LAYOUT
++    features |= (1 << VIRTIO_GPU_F_RESOURCE_QUERY_LAYOUT);
++#endif /* HAVE_VIRGL_RESOURCE_QUERY_LAYOUT */
++
+     return features;
+ }
+ 
+diff --git a/hw/display/virtio-gpu-virgl.c b/hw/display/virtio-gpu-virgl.c
+index 2ac9a8b864..9c5a07cef1 100644
+--- a/hw/display/virtio-gpu-virgl.c
++++ b/hw/display/virtio-gpu-virgl.c
+@@ -715,6 +715,55 @@ static void virgl_cmd_resource_unmap_blob(VirtIOGPU *g,
+     virtio_gpu_virgl_resource_unmap(g, cmd->cmd_hdr.ctx_id, res);
+ }
+ 
++#ifdef HAVE_VIRGL_RESOURCE_QUERY_LAYOUT
++static void virgl_cmd_resource_query_layout(VirtIOGPU *g,
++					    struct virtio_gpu_ctrl_command *cmd)
++{
++    struct virtio_gpu_simple_resource *res;
++    struct virtio_gpu_resource_query_layout qlayout;
++    struct virtio_gpu_resp_resource_layout resp;
++    struct virgl_renderer_resource_layout rlayout;
++    int ret;
++    int i;
++    VIRTIO_GPU_FILL_CMD(qlayout);
++    virtio_gpu_resource_query_layout_bswap(&qlayout);
++
++    if (qlayout.resource_id == 0) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: resource id 0 is not allowed\n",
++                      __func__);
++        cmd->error = VIRTIO_GPU_RESP_ERR_INVALID_RESOURCE_ID;
++        return;
++    }
++
++    res = virtio_gpu_find_resource(g, qlayout.resource_id);
++    if (!res) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: resource does not exist %d\n",
++                      __func__, qlayout.resource_id);
++        cmd->error = VIRTIO_GPU_RESP_ERR_INVALID_RESOURCE_ID;
++        return;
++    }
++
++    ret = virgl_renderer_resource_query_layout(qlayout.resource_id, &rlayout);
++    if (ret != 0) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: resource %d is not externally-allocated\n",
++                      __func__, qlayout.resource_id);
++        cmd->error = VIRTIO_GPU_RESP_ERR_INVALID_RESOURCE_ID;
++        return;
++    }
++
++    memset(&resp, 0, sizeof(resp));
++    resp.hdr.type = VIRTIO_GPU_RESP_OK_RESOURCE_LAYOUT;
++    resp.num_planes = rlayout.num_planes;
++    resp.modifier = rlayout.modifier;
++    for (i = 0; i < resp.num_planes; i++) {
++        resp.planes[i].offset = rlayout.planes[i].offset;
++        resp.planes[i].stride = rlayout.planes[i].stride;
++	resp.planes[i].size = rlayout.planes[i].size;
++    }
++    virtio_gpu_ctrl_response(g, cmd, &resp.hdr, sizeof(resp));
++}
++#endif /* HAVE_VIRGL_RESOURCE_QUERY_LAYOUT */
++
+ void virtio_gpu_virgl_process_cmd(VirtIOGPU *g,
+                                       struct virtio_gpu_ctrl_command *cmd)
+ {
+diff --git a/include/hw/virtio/virtio-gpu-bswap.h b/include/hw/virtio/virtio-gpu-bswap.h
+index 8bbca1e751..49316758cc 100644
+--- a/include/hw/virtio/virtio-gpu-bswap.h
++++ b/include/hw/virtio/virtio-gpu-bswap.h
+@@ -99,4 +99,11 @@ virtio_gpu_host_wait_bswap(struct virtio_gpu_cmd_host_wait *host_wait)
+     le64_to_cpus(&host_wait->fence_id);
+ }
+ 
++static inline void
++virtio_gpu_resource_query_layout_bswap(struct virtio_gpu_resource_query_layout *rql)
++{
++    virtio_gpu_ctrl_hdr_bswap(&rql->hdr);
++    le32_to_cpus(&rql->resource_id);
++}
++
+ #endif
+diff --git a/include/standard-headers/linux/virtio_gpu.h b/include/standard-headers/linux/virtio_gpu.h
+index a04419757f..734fdb6beb 100644
+--- a/include/standard-headers/linux/virtio_gpu.h
++++ b/include/standard-headers/linux/virtio_gpu.h
+@@ -70,6 +70,11 @@
+  */
+ #define VIRTIO_GPU_F_CONTEXT_FENCE_WAIT  5
+ 
++/*
++ * VIRTIO_GPU_CMD_RESOURCE_QUERY_LAYOUT
++ */
++#define VIRTIO_GPU_F_RESOURCE_QUERY_LAYOUT 6
++
+ enum virtio_gpu_ctrl_type {
+ 	VIRTIO_GPU_UNDEFINED = 0,
+ 
+@@ -102,6 +107,7 @@ enum virtio_gpu_ctrl_type {
+ 	VIRTIO_GPU_CMD_RESOURCE_MAP_BLOB,
+ 	VIRTIO_GPU_CMD_RESOURCE_UNMAP_BLOB,
+ 	VIRTIO_GPU_CMD_WAIT_FENCE,
++	VIRTIO_GPU_CMD_RESOURCE_QUERY_LAYOUT,
+ 
+ 	/* cursor commands */
+ 	VIRTIO_GPU_CMD_UPDATE_CURSOR = 0x0300,
+@@ -115,6 +121,7 @@ enum virtio_gpu_ctrl_type {
+ 	VIRTIO_GPU_RESP_OK_EDID,
+ 	VIRTIO_GPU_RESP_OK_RESOURCE_UUID,
+ 	VIRTIO_GPU_RESP_OK_MAP_INFO,
++	VIRTIO_GPU_RESP_OK_RESOURCE_LAYOUT,
+ 
+ 	/* error responses */
+ 	VIRTIO_GPU_RESP_ERR_UNSPEC = 0x1200,
+@@ -495,4 +502,26 @@ struct virtio_gpu_status_freezing {
+ 	__u32 freezing;
+ };
+ 
++/* VIRTIO_GPU_CMD_RESOURCE_QUERY_LAYOUT */
++struct virtio_gpu_resource_query_layout {
++	struct virtio_gpu_ctrl_hdr hdr;
++	uint32_t resource_id;
++	uint32_t padding;
++};
++
++/* VIRTIO_GPU_RESP_OK_RESOURCE_LAYOUT */
++#define VIRTIO_GPU_RES_MAX_PLANES 4
++struct virtio_gpu_resp_resource_layout {
++	struct virtio_gpu_ctrl_hdr hdr;
++	uint64_t modifier;
++	uint32_t num_planes;
++	uint32_t padding;
++	struct virtio_gpu_resource_plane {
++		uint64_t offset;
++		uint64_t size;
++		uint32_t stride;
++		uint32_t padding;
++	} planes[VIRTIO_GPU_RES_MAX_PLANES];
++};
++
+ #endif
+diff --git a/meson.build b/meson.build
+index 59235aff28..0c20a00daa 100644
+--- a/meson.build
++++ b/meson.build
+@@ -790,6 +790,10 @@ if not get_option('virglrenderer').auto() or have_system or have_vhost_user_gpu
+                                      'get_egl_display',
+                                      prefix: '#include <virglrenderer.h>',
+                                      dependencies: virgl))
++  config_host_data.set('HAVE_VIRGL_RESOURCE_QUERY_LAYOUT',
++                       cc.has_function('virgl_renderer_resource_query_layout',
++                                       prefix: '#include <virglrenderer.h>',
++                                       dependencies: virgl))
+ endif
+ blkio = not_found
+ if not get_option('blkio').auto() or have_block
+-- 
+2.34.1
 
-In the context of dynamically created machines I'd rather have
-this function,
-
-> +                   "maximum number of ISA NE2000 devices exceeded");
->           return;
-> +    }
->       isa_ne2000_init(bus, ne2000_io[nb_ne2k],
->                       ne2000_irq[nb_ne2k], nd);
->       nb_ne2k++;
-> @@ -1291,23 +1294,26 @@ void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
->                    BusState *xen_bus)
->   {
->       MachineClass *mc = MACHINE_CLASS(pcmc);
-> -    int i;
-> +    bool default_is_ne2k = g_str_equal(mc->default_nic, TYPE_ISA_NE2000);
-> +    NICInfo *nd;
->   
->       rom_set_order_override(FW_CFG_ORDER_OVERRIDE_NIC);
-> -    for (i = 0; i < nb_nics; i++) {
-> -        NICInfo *nd = &nd_table[i];
-> -        const char *model = nd->model ? nd->model : mc->default_nic;
->   
-> -        if (xen_bus && (!nd->model || g_str_equal(model, "xen-net-device"))) {
-> +    if (xen_bus) {
-> +        while (nc = qemu_find_nic_info("xen-net-device", true, NULL)) {
->               DeviceState *dev = qdev_new("xen-net-device");
->               qdev_set_nic_properties(dev, nd);
->               qdev_realize_and_unref(dev, xen_bus, &error_fatal);
-
-and this one non-fatal (primarily for API example). But this is pending
-on a discussion on another thread, see:
-https://lore.kernel.org/qemu-devel/c1322f3b-2ae2-4ca7-9a76-a2a434dc8315@linaro.org/
-so no changed requested so far.
-
-> -        } else if (g_str_equal(model, "ne2k_isa")) {
-> -            pc_init_ne2k_isa(isa_bus, nd);
-> -        } else {
-> -            pci_nic_init_nofail(nd, pci_bus, model, NULL);
->           }
->       }
-
-Regards,
-
-Phil.
 
