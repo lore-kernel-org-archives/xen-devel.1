@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D39CAC4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 12:57:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630311.983161 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD844C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 12:57:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630313.983181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1R4A-0005zY-Ow; Fri, 10 Nov 2023 12:56:54 +0000
+	id 1r1R4E-0006bc-0q; Fri, 10 Nov 2023 12:56:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630311.983161; Fri, 10 Nov 2023 12:56:54 +0000
+Received: by outflank-mailman (output) from mailman id 630313.983181; Fri, 10 Nov 2023 12:56:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1R49-0005uQ-TB; Fri, 10 Nov 2023 12:56:53 +0000
-Received: by outflank-mailman (input) for mailman id 630311;
- Fri, 10 Nov 2023 12:56:45 +0000
+	id 1r1R4D-0006VU-6X; Fri, 10 Nov 2023 12:56:57 +0000
+Received: by outflank-mailman (input) for mailman id 630313;
+ Fri, 10 Nov 2023 12:56:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sssJ=GX=epam.com=prvs=567869e99b=mykyta_poturai@srs-se1.protection.inumbo.net>)
- id 1r1R41-0001y0-6Z
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 12:56:45 +0000
+ id 1r1R42-0001y0-6a
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 12:56:46 +0000
 Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
  [148.163.133.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 969e15bc-7fc8-11ee-9b0e-b553b5be7939;
+ id 96ed9a6d-7fc8-11ee-9b0e-b553b5be7939;
  Fri, 10 Nov 2023 13:56:40 +0100 (CET)
 Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
  by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3AACIeef019156; Fri, 10 Nov 2023 12:56:26 GMT
+ 3AACIeee019156; Fri, 10 Nov 2023 12:56:25 GMT
 Received: from eur01-db5-obe.outbound.protection.outlook.com
  (mail-db5eur01lp2051.outbound.protection.outlook.com [104.47.2.51])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3u9kkyram6-2
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3u9kkyram6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 10 Nov 2023 12:56:26 +0000
+ Fri, 10 Nov 2023 12:56:25 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by DB3PR0302MB9063.eurprd03.prod.outlook.com
  (2603:10a6:10:43d::17) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Fri, 10 Nov
- 2023 12:56:20 +0000
+ 2023 12:56:17 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::f172:7877:386b:8dc0]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::f172:7877:386b:8dc0%6]) with mapi id 15.20.6954.029; Fri, 10 Nov 2023
- 12:56:20 +0000
+ 12:56:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,21 +55,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 969e15bc-7fc8-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 96ed9a6d-7fc8-11ee-9b0e-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RDoMlsltv1Id5HvBr6cJHeq4tVbHIE0zBAXvg5Qfy/oidW93shzwlOyqDmik3oRqdi29W16GlJngUIeWkg2ya62JDWAB94QN2UDKWmZMyPRDJ2mCFqmvF6HU9N1v6mgPUgQ41aP4cFenJDvaE4/j+FCFaAlOPrBi1K7YWNaToHDZKmhOFEXbxj/D6Ba9MlM56xDZf/deDqgmsoPaU2iDTDHVXGeFE/aPVknurNJUuV0N1W614ONSOI9T7yvZI8Thnp1yQkYgFmPON+TkV45KyL10PK4ZzqKLib/Ycjaepy6KHYAxW0IuA2xYHahjxkPsK+O3kHzNbEkf3LwcMFqJ3A==
+ b=JsIFmvozHm0rQeX4BQM1f2BEgzG+WHXglKe4qcKEk4v5QaFDxdQlxDqU0GOyktKEBlyMETCTege3Y5a0aFksJZeLds74XrcXQrhYzYqj9xnzz15mkpJFEu3bNf8XzYdshDl5AXnlXafwsYmm28AxusAbZuP3oJSg5DTv1buUeBfHeza/nso9FeMJUkVWVBXeOqOEWYOM/QiVJjb1O4v9krAZSKko9J9syDBgtAs9IxrfCYbW+BtpK0cGacaNgzyIBsMwxgmURd++IyXGMu4tzbTszKSNmX6tnqpHQwutm9WotlchzWb0BCLDpZjeTJLH4xsKEhqMk/Owdtbue+3xrg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CsuUkMvf5gI06/kh6Aitv9g+GlzsqEZAOIWBAFgXeMY=;
- b=bZxCZQy/qzCEKWnbvx2bGBXUxp6XfIMBiVn5vKUByHC7Le5zVjGXewyAlPIKAsVdmgsJywZsZRUj6NCS0Ohhf8sdpROWEZjN+G3yybbuDo617Md0NVmLbw42XWpOBuzW822XutQTEpzPqL2TiIOzd98WrAxU2JTRuGjhNTf+Qe3jQN3V2rScBgSoDk2Y/MOxfEdWadgeznd0owZFkkDdcchCi7o1ZY3E8Gs22PwiI+4T7G8FfbG2fl/yit8mi3NYf7wGNQH1Matuck8INIKc/QsJvq1qUw5sBg2xsoEOKudlaOIODqp6ZLemeVeckuY9cOcM0PO0U1A+SPCeEJXoGA==
+ bh=u2jlDSOb6c9i5jMeBlUZxpDiIGDmoeGu3EM5435sgIM=;
+ b=cPCUTN/VjXCndL+UAznvrUqQmfbvQjBSCgqy7BzcFGJITJPG8erobEqEGrVgFKv+K2/xE0NxNYRGCWby5ttwnDqyL3l1nCehxr1Aa8Eo26zSSkTz9homofmSqoZziNi+1XJHy9GtytzhdyRUouPrLAX7s2eqpszkfk18mMx3Ni1o9pUaqQ1fI+z92ctXz/25b8JNvY1Er2/7kgGl2Fma34j1v3D6Hum395ri3s3Bk1eps8lyPhhhQ2KYBPMP15UExmisqHTDJNXCAdRybAYgno4HGzL3kDkZF2v945mNkaI5EPsAsLZLud1ubEAd6jthHImaSIHxM51kX0DfwqIUsw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CsuUkMvf5gI06/kh6Aitv9g+GlzsqEZAOIWBAFgXeMY=;
- b=jaHFayV9G2AsrzkbQk3JXidD97APvOKlPa8GrBZB7FXbCeYk3+acbv3FvdmybI6VKl2Tosh+Pdd+R3O6ySSET+F+E+YA9hk843l6QN0S8ymzU31uamD4ZBM9xMZro/9eB2BH45EoAfdZk5e6VOD0cKuF3O8LftwQwtXRGkdsAiDqtOombBPceiIW1xIDCoI5BXONr/yXoBEM/vr3jWUM3MpxgXz/vDbVGE7HTO/RliOff5GWmMZq0zIfgEQjd6IIviv6o0agBFoSeMBkN/pUqDXnz4H+cROeEqk4+Nl02Let88FW2WRZEFBlErJ4hh94R6q06ENPzQn8uhZfw8Z5vA==
+ bh=u2jlDSOb6c9i5jMeBlUZxpDiIGDmoeGu3EM5435sgIM=;
+ b=BfD6mW23sBJv10+uDbM3Bgf08lsMbsc2KNUkskxf2K3SOEPLpmjDfTBiTiKWtVY2NauD4rQdIDcGEqrAYV9Xmr479Ux7XA9G772PGmfAzuknSPzJFD0/9MxZwH1CzhR7dD8rdWx++tru9rh4gXgrqsvbLbWiRiEb46/fItTliCsaXscWaaYshR3H+/mjot2ulqb1C6VaowIPpHk8fQGaIJ/06XL/B0nldRr2+GI/KusuTUsV8QgphYblI7u0b//sSihOeIr23dTDIU7rpGA4GuVF4SZAXszOuI/IfccE6NY1bc/Qz4XvSBV8Gb5iH7/1SjMnQH4kNjO3XYYKFc5Ynw==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Mykyta Poturai <Mykyta_Poturai@epam.com>,
@@ -80,14 +80,13 @@ CC: Mykyta Poturai <Mykyta_Poturai@epam.com>,
 	<bertrand.marquis@arm.com>,
         Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
         Michal Orzel <michal.orzel@amd.com>
-Subject: [XEN PATCH v2 08/25] arm: new VGIC: Add GICv3 SGI system register
- trap handler
-Thread-Topic: [XEN PATCH v2 08/25] arm: new VGIC: Add GICv3 SGI system
- register trap handler
-Thread-Index: AQHaE9VMyTFmCIij9kWiuYpeUQUfzA==
-Date: Fri, 10 Nov 2023 12:56:18 +0000
+Subject: [XEN PATCH v2 03/25] arm: new VGIC: Add GICv3 MMIO handling framework
+Thread-Topic: [XEN PATCH v2 03/25] arm: new VGIC: Add GICv3 MMIO handling
+ framework
+Thread-Index: AQHaE9VLDiAyPu1VFkGDdkAk4XVJMQ==
+Date: Fri, 10 Nov 2023 12:56:16 +0000
 Message-ID: 
- <8819e1bd76ea4ef2c7057e3d91badd476921c1b0.1699618395.git.mykyta_poturai@epam.com>
+ <cfd46345ad96a447c0dccc371f074a47ed612259.1699618395.git.mykyta_poturai@epam.com>
 References: <cover.1699618395.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1699618395.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -96,45 +95,45 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DB3PR0302MB9063:EE_
-x-ms-office365-filtering-correlation-id: b67e61ff-d329-415f-a27d-08dbe1ec6f88
+x-ms-office365-filtering-correlation-id: 4df896b0-e089-4403-186a-08dbe1ec6dba
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- eR9KgbFXUe54FBb92xOc4XYQb7oIXU7MCcObfCZ7hj72K3GXGa74SarO5oagGC7ovLEq0dVSCpPJDcgNsDIkRxZ0m2Zh29c5rV7VlVkr7jQODXwrWzDjX4z8srgHao2cUg28Ql+XEgn8ZogrbfaEEEudpaiezFA/AfGPWu4z7NUUy19mqY4pP5W4RS0oq6x6P3VMIZjNmdfg7eGPnDmv2qEG1DgvJxxGOm0prLZ2UF3M3NAngxjYFSp4CfG+/w6z8iBihQB+e48v++x/NakFEqTNIeV+GOdWX66BHQu+rA2sqnr6QONkDFBsoJOVKJo6lt5PFBwLk3C+fnmXlNNPiFOzJDR/dIWS7yqqkkGm4MKulVkSENPv+13q1z4qJKq4NqSc/89hVYkiMvRp2Dfega3z1kGuzgXTtfSvxbfMsa/SsvQClZfPsNyTTgXlugziHOdnvRvdu5gEiuTkNhSOUq3GUtfH3dudOqUuB9R/ih2ecdG8HjkhYqRlWBHJ+GBrrHeUY9YGiXLIkhUuhBuM4006Y499owGCi4todKPPgX9ibrn6ZrzRoHTITVOFWHLh2RBwyZYnQmqar+hE1eaE2KfoWs1uQ1p3o4WYplusZmT21sSqMrfnSiD+eTXg+9m6IvbzjDYlYgV5U94SH8j5CpjaP+8hncf9Ld/tKO31TeM=
+ CxnlTOxuaZEk7MAN/We4yQQrEM9waDUvPWoZQMJBkhzvo5mMiMFexr7p8xyl5hmFtdFHr1K8owyi1krK//D3vbV2VeehrwRd7imFpQlWjwCX7icMWXYaLaWv1rbS3BHUDlHsqMDYmsnpv7jNNz+XBMy0aiOcmNj519AOPMh1DXaInEls4CI/X1BAbXHLvrXde1xMTRoHY0jVWNL01Yz9ukJAvEfv9LaHeKvjf3BuheeD6VjrhDPfnLIyy+SElflvgs9I4MR+ph0zsu0EOfuxP0F2Ut5wkWD9R+69CrpNWoKwlR+zWq8tJCuW1a4CoSIh4y+ZrgMBuco6S+YfrQt2uke4b2t6cV2paoxb30afz7kfrV/vZzITZtXkhv7JaOpfxstkF9EdU5oCgYhtX//RtuTHXlLPihUjqTq1XoKt99WV5Dbjhe8Ov1eif1yVt8gaqgcZE6OkoxP/M0OxmoSEar6tWhFnYCnyO4S9c2PuwsS6QepVd4DcTqnDBHFaJPr19ATD4JMoqxtu5fPm7QpnI4khDm3mVgGYYJiS8UBuEQGiCejw4VGywUvh0Ho+YCrN1OmDy7ngf6P+WDOWsFEgpvk1FGCFyd3vYDk2sLh6RI4XGwHpSYllfEn2dC3rLsI9oG5vTbiJtLOL+R9dS0QFqA==
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(346002)(396003)(366004)(376002)(39860400002)(230922051799003)(230173577357003)(230273577357003)(451199024)(1800799009)(186009)(64100799003)(66556008)(86362001)(6512007)(6506007)(66946007)(66446008)(36756003)(66476007)(8936002)(76116006)(91956017)(8676002)(71200400001)(38100700002)(4326008)(26005)(5660300002)(6916009)(2616005)(6486002)(64756008)(316002)(478600001)(54906003)(2906002)(122000001)(41300700001)(66899024)(83380400001)(38070700009);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(346002)(396003)(366004)(376002)(39860400002)(230922051799003)(451199024)(1800799009)(186009)(64100799003)(66556008)(86362001)(6512007)(6506007)(66946007)(66446008)(36756003)(66476007)(8936002)(76116006)(91956017)(8676002)(71200400001)(38100700002)(4326008)(30864003)(26005)(5660300002)(6916009)(2616005)(6486002)(64756008)(316002)(478600001)(54906003)(2906002)(122000001)(41300700001)(66899024)(83380400001)(38070700009)(2004002)(579004);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?3+GSE4qJeIbMgHkYbKCL29Zb67ceo+3nwWp0oB+nfOp7I9zuCYarUHst9K?=
- =?iso-8859-1?Q?Kj/xjOZII//n/6cuXl3J4qzjnv7CUxjFHoFIC0XImDos3GkPSUm+cN2Qp1?=
- =?iso-8859-1?Q?xPL41kYkogvN4SuBekfZx7JpFghRDkHGy3ZozH00DYZLRo0SUvTc5M7bym?=
- =?iso-8859-1?Q?awIFif9S5or/KdUnaEO3a50u+qbzj+C0ejW0PEX8dispI2B7dns7DKQH+f?=
- =?iso-8859-1?Q?hy9BwQh/pl5UskQrrZdnFkCjBDwjE0SHlIuLL7KcPZpTGcyKJrMy8wiMqi?=
- =?iso-8859-1?Q?Dd+VnoYRKd7TsUubEuxNZea45FPaKjpMc86aS03gYqd8ZxjLcyei46mA4V?=
- =?iso-8859-1?Q?2L9B053R27HFaOFY2Pidp/mCnYP9flcyZhKmwcT19vs2Q1shwJeRL9Nosi?=
- =?iso-8859-1?Q?a2XJFHn0b/2SP7twxFyuk3/I9JqzZqXKYhEb85soKEGM0QnfebBRu972fi?=
- =?iso-8859-1?Q?Y0iVSvxpKCgHm4COxcdu04AOB40hjad9TrbYbimtkRexSiQ+SSskLga8n8?=
- =?iso-8859-1?Q?vXyeS2TlsG+lOMDSp0yfeYi9u1KPaHnlrSQGNGaMtRqjDzmJBjUkwftpyF?=
- =?iso-8859-1?Q?PHzsNFPl5+gZuGgPhf/bOQHwElS04Ox7ak1YZjS+vdXL7KOohfTvH7NZ0y?=
- =?iso-8859-1?Q?7vVSe2D7bn1bCoQA15tm+Nw8KqJatq9ud3tUMfdqNQSvOcDZypzori1QdP?=
- =?iso-8859-1?Q?/X7osdDZhtl/2ry6WMZqv1a9g4gNnyIXEFjtAY7Tg9qV4z4BV7j5foHxUm?=
- =?iso-8859-1?Q?pI2fLF9EgSretKJqCxYIJWhhkp1Gu5VdIeFvVQyx6AS8OtDZjFcUSivH+C?=
- =?iso-8859-1?Q?jewUcagAZPblGAa63h8Fx5kVkj5/0QSkMu85r8fwpYvk3QfpSoPhwJ4qYv?=
- =?iso-8859-1?Q?cEXIj00byGyoy6SiyK0YvYgyBH9HsEOL773clw9PrU/1ykxVQDeEdGxLBw?=
- =?iso-8859-1?Q?khBHi6r7RonD3aRxchj6+cfQa/yqnNdD/eM5u+N/0HrT3RxDI/I6TLQtKo?=
- =?iso-8859-1?Q?vHQ+HcjFiHr5lIH4npxEvkrvzxbLqrqhuLqWc77LZY09jpiYizM/D9Peep?=
- =?iso-8859-1?Q?/JWhn+dDOXmRWYrN8SQoELe4QHj/EF7UEL3kUB5MP9IZHq7f5XPDgrpI5Z?=
- =?iso-8859-1?Q?XplOnYUBVbOVI4zLYv69mEF64u7Kd1v7ZQPXW+9FivuHnyHU0mVPgAtOB4?=
- =?iso-8859-1?Q?nGo+jA/t90d7kQJRS661ku5hGFiv/VkaU9MJiqv4u5XW0B2j448DdxwMay?=
- =?iso-8859-1?Q?g9j1PtVBZBvhbD/9kldIStoM7Uiv6P60qex4DEDvYtGAS/J7xXuLel4G2y?=
- =?iso-8859-1?Q?kXObSRA+T1mB8dkQROObxqx+bDuXN5N2v6UM7dWs7i46Tv9fZN6mQrngK4?=
- =?iso-8859-1?Q?O8hjWUMgOlo+cLPEnjp+fALBrPwAF0HrTT5WpLIOrYkDD+YtF+Up8e2vPl?=
- =?iso-8859-1?Q?Kbg9c47m03gcaLDiPDnBBFbnz0TZ0A5dO1D67HKmiSV0bjvLlImY/fudmD?=
- =?iso-8859-1?Q?SpCjben6DfB6VIIZUhTAH2a2IUH9pgP1S/FY0oxZvfZIA3aRjIOASmWUy+?=
- =?iso-8859-1?Q?0wx+nsedNmI/WT6mcXl4DqVCtVUtIee59r1DYNAbcoe6QrJbfmY1fCYM+G?=
- =?iso-8859-1?Q?AWCcbWxEwvyvKBrPE9rLYsHKyr+eE9IGSeK1TuodFNHjN5LMVG3hcPvQ?=
+ =?iso-8859-1?Q?okrUPanjYNzUEkVRWRxgDLm6FPp8+bWsi0U9qpV9Ar4TCzG/GumWZCzcc+?=
+ =?iso-8859-1?Q?8xxuytIiLjydwqyl6eYIykNWFwkHsxpNuJ+vmz8eUi+iU+rrnftn5kkGfG?=
+ =?iso-8859-1?Q?0k50FetzHWbtGBvoJvLerpCLcI08YwbnITgso/abOXMLI7Df6SceJU5nSF?=
+ =?iso-8859-1?Q?o+SEvnfrOqUrbBpjJaIioa5G2o0gJnhszX4ZJPtamKxBwKKdGVG6ZBbpln?=
+ =?iso-8859-1?Q?ESN1fhL9+CG6k4eG2Fr7hUnloUUHiyKjw+1vyxAGyOLTPQzZrZf40IWPwR?=
+ =?iso-8859-1?Q?FND+27Vj1MqCkWXINdk9Banqc8w6YDqKy/35elzgZ7+vZxgGAZC2+fyC1U?=
+ =?iso-8859-1?Q?n7I1hzpPZmeO5mCG3jOIFvqwCWjo0phUtH+SJ46wTAR+vPz+uMiPKdNNEi?=
+ =?iso-8859-1?Q?xo6/GUWvazUD29keIs34jppiZiXBA4+ljktFSayGF3uqSlB5F3s7Pg2si4?=
+ =?iso-8859-1?Q?dore71Ymhnz6ZDic/sP1qKYEqOkrTvenuysCUriaUYH18l5HcZNibnkatI?=
+ =?iso-8859-1?Q?adXHYH0u/OvpoH9P6zlqydSEYzfR10X4VOJG2vAjBVjGjqLRCEYIOFiBy1?=
+ =?iso-8859-1?Q?yQ8UJ4PYrOoTvfrKFdgw6Lw8QNFJrCWJtVt+uAmLN2uFWsO27dptLXTrvL?=
+ =?iso-8859-1?Q?DZxvnRgH9IeBzW4fq/jaBzv/RkyQGKI1MQ8t5pRln55Ii760ieXT7S4ne9?=
+ =?iso-8859-1?Q?I0lmB9socQp64EvUVbVzpBqft+q6ZGBQck7CgGE6KZ0LOdBYOwEfFrZw+v?=
+ =?iso-8859-1?Q?KTD5D4zjB7qj+mVLKkXjM1dYMuAFXp5n3LUW8BEBC90DZkcYreSXw1fPmc?=
+ =?iso-8859-1?Q?tZcOjBiAMBZ+I9wh4QpBmFSx0dEehfFSr1jUp0VSOO0XR3uZEXMQ4CL6ao?=
+ =?iso-8859-1?Q?vFL2XLXw/xjRoEtj0Co7D787K/sIT6nGVV5L3yUnpEczfWVMXTB8FjLTHT?=
+ =?iso-8859-1?Q?b6I802MTo9rNXcqvMXEiJ6BjNnzsD5687zcs6yRJhYvxt3HY1FgN4efndF?=
+ =?iso-8859-1?Q?fxXSNZ+5gfFsCSJFk3bra39PbJrVMwgAxACMKXB72Pv4xx7rmSXs4RXS/M?=
+ =?iso-8859-1?Q?tZiCY6AeHh2f7H8nHKhZ5ClEjNMLv6SIf4LZwNjHqKLmUdD61gFM4tRWto?=
+ =?iso-8859-1?Q?3BDjWX9nR8Ms/5tNBIw3cpAHD1U3sQG/9wicfdyloto0DwL2qDVOD+HNso?=
+ =?iso-8859-1?Q?cswf2vlR5ICPNFHJSuol17+Jin6Y1IrCmhLo0k3MtVC55MvuyGCFtZImO+?=
+ =?iso-8859-1?Q?L7buGcSi807muAUJknlorHAehAnB+H1YfDeu3LjOY02epU27+DtfbrQxTf?=
+ =?iso-8859-1?Q?bE29ZpFDZWdGYzWsWHvWKwJc87Cb0UQnHerCE1144grDQiTrmFu9qPFGvH?=
+ =?iso-8859-1?Q?IIvLesLLGRIaPvWgAEhZnoIbvW9PMaUpnk/2T1oHGo9mcp4vc89dzaLGUA?=
+ =?iso-8859-1?Q?DenUhiI+aMECljG5PGi5iPt9XZiclFNCNyupxQXsGP3oQfikZ76NW+pN9l?=
+ =?iso-8859-1?Q?nQuriBu0FbGfJmKdSPb0/GiFIAnTp/PKo8dsdI8nE8mcmy/Nn+sDQLYCl3?=
+ =?iso-8859-1?Q?gTq4NtfsSqqw3MUR3d4HrzP0HW4gj+gYRuYR5ugFmFytQ8wDnbf3wwFTLB?=
+ =?iso-8859-1?Q?FWpjeJjkJlP+2yzOwMK1mOxxFr9ZXWfwQacl9nQjEseDTWoyB00OdUTg?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -142,268 +141,666 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b67e61ff-d329-415f-a27d-08dbe1ec6f88
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 12:56:18.7631
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4df896b0-e089-4403-186a-08dbe1ec6dba
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 12:56:16.8564
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: BKkbniO+WhjZynZ9VqKW7c/DklKNxlvUHA0vy7Qpdc3S8Sf3rsTtoZG0cyjaeW6Jy/jsANMwdYwCx9rn434Ygw==
+X-MS-Exchange-CrossTenant-userprincipalname: kyIKvqhbxIV9/E/TCJqMRl2RtJRjNECQHS/ojQHeTX2iY0eDW8y94CRzkeveSCcgCkLRBoWL6gMrs1BY7cp5yQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR0302MB9063
-X-Proofpoint-GUID: Psa6Il3WoqtBmCIJYySScdTGoJoGFJQJ
-X-Proofpoint-ORIG-GUID: Psa6Il3WoqtBmCIJYySScdTGoJoGFJQJ
+X-Proofpoint-GUID: fN-zLAFXUvUhOCFYKsTUhp7zIJpitx5j
+X-Proofpoint-ORIG-GUID: fN-zLAFXUvUhOCFYKsTUhp7zIJpitx5j
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-11-10_08,2023-11-09_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 malwarescore=0
  suspectscore=0 mlxscore=0 phishscore=0 clxscore=1015 bulkscore=0
- priorityscore=1501 mlxlogscore=999 lowpriorityscore=0 impostorscore=0
+ priorityscore=1501 mlxlogscore=962 lowpriorityscore=0 impostorscore=0
  adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2311060000 definitions=main-2311100106
 
-In contrast to GICv2 SGIs in a GICv3 implementation are not triggered
-by a MMIO write, but with a system register write. Xen knows about
-that register already, we just need to implement the handler and wire
-it up to the core Xen/ARM code.
+Create a new file called vgic-mmio-v3.c and describe the GICv3
+distributor and redistributor registers there.
+Also we provide a function to deal with the registration of the
+separate redistributor frames per VCPU and allocation of redistributor
+regions.
 
-Base on Linux commit 621ecd8d2123bc13 by Andre Przywara
+Based on Linux commits:
+ed9b8cefa91695 by Andre Przywara
+1aab6f468c10a1 by Christoffer Dall
+ccc27bf5be7b78 by Eric Auger
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
- xen/arch/arm/include/asm/gic_v3_defs.h |   2 +-
- xen/arch/arm/vgic/vgic-mmio-v3.c       | 147 +++++++++++++++++++++++++
- xen/arch/arm/vgic/vgic.c               |  10 +-
- xen/arch/arm/vgic/vgic.h               |   5 +
- 4 files changed, 160 insertions(+), 4 deletions(-)
+ xen/arch/arm/include/asm/gic_v3_defs.h |   2 +
+ xen/arch/arm/include/asm/new_vgic.h    |  18 +-
+ xen/arch/arm/vgic/vgic-init.c          |  10 +-
+ xen/arch/arm/vgic/vgic-mmio-v3.c       | 435 +++++++++++++++++++++++++
+ xen/arch/arm/vgic/vgic-mmio.c          |   3 +
+ xen/arch/arm/vgic/vgic.h               |  15 +
+ 6 files changed, 475 insertions(+), 8 deletions(-)
+ create mode 100644 xen/arch/arm/vgic/vgic-mmio-v3.c
 
 diff --git a/xen/arch/arm/include/asm/gic_v3_defs.h b/xen/arch/arm/include/=
 asm/gic_v3_defs.h
-index e0d536e887..1e81687818 100644
+index 227533868f..b7059635d7 100644
 --- a/xen/arch/arm/include/asm/gic_v3_defs.h
 +++ b/xen/arch/arm/include/asm/gic_v3_defs.h
-@@ -204,7 +204,7 @@
- #define ICH_SGI_IRQ_SHIFT            24
- #define ICH_SGI_IRQ_MASK             0xf
- #define ICH_SGI_TARGETLIST_MASK      0xffff
--#define ICH_SGI_AFFx_MASK            0xff
-+#define ICH_SGI_AFFx_MASK            0xffULL
- #define ICH_SGI_AFFINITY_LEVEL(x)    (16 * (x))
+@@ -35,6 +35,7 @@
+ #define GICD_IROUTER                 (0x6000)
+ #define GICD_IROUTER32               (0x6100)
+ #define GICD_IROUTER1019             (0x7FD8)
++#define GICD_IDREGS                  (0xFFD0)
+ #define GICD_PIDR2                   (0xFFE8)
 =20
- struct rdist_region {
+ /* Common between GICD_PIDR2 and GICR_PIDR2 */
+@@ -89,6 +90,7 @@
+ #define GICR_INVLPIR                 (0x00A0)
+ #define GICR_INVALLR                 (0x00B0)
+ #define GICR_SYNCR                   (0x00C0)
++#define GICR_IDREGS                  GICD_IDREGS
+ #define GICR_PIDR2                   GICD_PIDR2
+=20
+ /* GICR for SGI's & PPI's */
+diff --git a/xen/arch/arm/include/asm/new_vgic.h b/xen/arch/arm/include/asm=
+/new_vgic.h
+index 1e76213893..11d8f71851 100644
+--- a/xen/arch/arm/include/asm/new_vgic.h
++++ b/xen/arch/arm/include/asm/new_vgic.h
+@@ -31,6 +31,8 @@
+ #define VGIC_MAX_SPI            1019
+ #define VGIC_MAX_RESERVED       1023
+ #define VGIC_MIN_LPI            8192
++#define VGIC_V3_DIST_SIZE       SZ_64K
++#define VGIC_V3_REDIST_SIZE     (2 * SZ_64K)
+=20
+ #define irq_is_ppi(irq) ((irq) >=3D VGIC_NR_SGIS && (irq) < VGIC_NR_PRIVAT=
+E_IRQS)
+ #define irq_is_spi(irq) ((irq) >=3D VGIC_NR_PRIVATE_IRQS && \
+@@ -94,6 +96,14 @@ enum iodev_type {
+     IODEV_REDIST,
+ };
+=20
++struct vgic_redist_region {
++    uint32_t index;
++    paddr_t base;
++    uint32_t count; /* number of redistributors or 0 if single region */
++    uint32_t free_index; /* index of the next free redistributor */
++    struct list_head list;
++};
++
+ struct vgic_io_device {
+     gfn_t base_fn;
+     struct vcpu *redist_vcpu;
+@@ -121,11 +131,7 @@ struct vgic_dist {
+         /* either a GICv2 CPU interface */
+         paddr_t         cbase;
+         /* or a number of GICv3 redistributor regions */
+-        struct
+-        {
+-            paddr_t     vgic_redist_base;
+-            paddr_t     vgic_redist_free_offset;
+-        };
++        struct list_head rd_regions;
+     };
+     paddr_t             csize; /* CPU interface size */
+     paddr_t             vbase; /* virtual CPU interface base address */
+@@ -174,6 +180,8 @@ struct vgic_cpu {
+      * parts of the redistributor.
+      */
+     struct vgic_io_device   rd_iodev;
++    struct vgic_redist_region *rdreg;
++    uint32_t rdreg_index;
+     struct vgic_io_device   sgi_iodev;
+=20
+     /* Contains the attributes and gpa of the LPI pending tables. */
+diff --git a/xen/arch/arm/vgic/vgic-init.c b/xen/arch/arm/vgic/vgic-init.c
+index f8d7d3a226..c3b34be192 100644
+--- a/xen/arch/arm/vgic/vgic-init.c
++++ b/xen/arch/arm/vgic/vgic-init.c
+@@ -107,14 +107,18 @@ int domain_vgic_register(struct domain *d, unsigned i=
+nt *mmio_count)
+     {
+     case GIC_V2:
+         *mmio_count =3D 1;
++        d->arch.vgic.cbase =3D VGIC_ADDR_UNDEF;
+         break;
++    case GIC_V3:
++        *mmio_count =3D 2;
++        INIT_LIST_HEAD(&d->arch.vgic.rd_regions);
++        break;
++
+     default:
+         BUG();
+     }
+=20
+     d->arch.vgic.dbase =3D VGIC_ADDR_UNDEF;
+-    d->arch.vgic.cbase =3D VGIC_ADDR_UNDEF;
+-    d->arch.vgic.vgic_redist_base =3D VGIC_ADDR_UNDEF;
+=20
+     return 0;
+ }
+@@ -207,7 +211,7 @@ int vcpu_vgic_init(struct vcpu *v)
+     if ( gic_hw_version() =3D=3D GIC_V2 )
+         vgic_v2_enable(v);
+     else
+-        ret =3D -ENXIO;
++        vgic_register_redist_iodev(v);
+=20
+     return ret;
+ }
 diff --git a/xen/arch/arm/vgic/vgic-mmio-v3.c b/xen/arch/arm/vgic/vgic-mmio=
 -v3.c
-index 3d892a68cb..19ebf723ee 100644
---- a/xen/arch/arm/vgic/vgic-mmio-v3.c
+new file mode 100644
+index 0000000000..b79a63ce3e
+--- /dev/null
 +++ b/xen/arch/arm/vgic/vgic-mmio-v3.c
-@@ -42,6 +42,153 @@ unsigned long extract_bytes(uint64_t data, unsigned int=
- offset,
-     return (data >> (offset * 8)) & GENMASK_ULL(num * 8 - 1, 0);
- }
-=20
-+static int match_mpidr(u64 sgi_aff, u16 sgi_cpu_mask, struct vcpu *vcpu)
+@@ -0,0 +1,435 @@
++/*
++ * VGICv3 MMIO handling functions
++ * Imported from Linux ("new" KVM VGIC) and heavily adapted to Xen.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include <xen/bitops.h>
++#include <xen/sched.h>
++#include <xen/sizes.h>
++#include <asm/new_vgic.h>
++#include <asm/gic_v3_defs.h>
++#include <asm/vreg.h>
++
++#include "vgic.h"
++#include "vgic-mmio.h"
++
++static const struct vgic_register_region vgic_v3_dist_registers[] =3D {
++    REGISTER_DESC_WITH_LENGTH(GICD_CTLR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi,
++        16, VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICD_STATUSR,
++        vgic_mmio_read_rao, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_IGROUPR,
++        vgic_mmio_read_rao, vgic_mmio_write_wi, 1,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ISENABLER,
++        vgic_mmio_read_enable, vgic_mmio_write_senable, 1,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ICENABLER,
++        vgic_mmio_read_enable, vgic_mmio_write_cenable, 1,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ISPENDR,
++        vgic_mmio_read_pending, vgic_mmio_write_spending, 1,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ICPENDR,
++        vgic_mmio_read_pending, vgic_mmio_write_cpending, 1,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ISACTIVER,
++        vgic_mmio_read_active, vgic_mmio_write_sactive, 1,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ICACTIVER,
++        vgic_mmio_read_active, vgic_mmio_write_cactive,
++        1, VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_IPRIORITYR,
++        vgic_mmio_read_priority, vgic_mmio_write_priority,
++        8, VGIC_ACCESS_32bit | VGIC_ACCESS_8bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ITARGETSR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 8,
++        VGIC_ACCESS_32bit | VGIC_ACCESS_8bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_ICFGR,
++        vgic_mmio_read_config, vgic_mmio_write_config, 2,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_IGRPMODR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 1,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_IROUTER,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 64,
++        VGIC_ACCESS_64bit | VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICD_IDREGS,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 48,
++        VGIC_ACCESS_32bit),
++};
++
++static const struct vgic_register_region vgic_v3_rd_registers[] =3D {
++    /* RD_base registers */
++    REGISTER_DESC_WITH_LENGTH(GICR_CTLR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_STATUSR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_IIDR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_TYPER,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 8,
++        VGIC_ACCESS_64bit | VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_WAKER,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_PROPBASER,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 8,
++        VGIC_ACCESS_64bit | VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_PENDBASER,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 8,
++        VGIC_ACCESS_64bit | VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_INVLPIR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 8,
++        VGIC_ACCESS_64bit | VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_INVALLR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 8,
++        VGIC_ACCESS_64bit | VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_SYNCR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(GICR_IDREGS,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 48,
++        VGIC_ACCESS_32bit),
++    /* SGI_base registers */
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_IGROUPR0,
++        vgic_mmio_read_rao, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_ISENABLER0,
++        vgic_mmio_read_enable, vgic_mmio_write_senable, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_ICENABLER0,
++        vgic_mmio_read_enable, vgic_mmio_write_cenable, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_ISPENDR0,
++        vgic_mmio_read_pending, vgic_mmio_write_spending, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_ICPENDR0,
++        vgic_mmio_read_pending, vgic_mmio_write_cpending,4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_ISACTIVER0,
++        vgic_mmio_read_active, vgic_mmio_write_sactive, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_ICACTIVER0,
++        vgic_mmio_read_active, vgic_mmio_write_cactive, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_IPRIORITYR0,
++        vgic_mmio_read_priority, vgic_mmio_write_priority, 32,
++        VGIC_ACCESS_32bit | VGIC_ACCESS_8bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_ICFGR0,
++        vgic_mmio_read_config, vgic_mmio_write_config, 8,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_IGRPMODR0,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++    REGISTER_DESC_WITH_LENGTH(SZ_64K + GICR_NSACR,
++        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        VGIC_ACCESS_32bit),
++};
++
++unsigned int vgic_v3_init_dist_iodev(struct vgic_io_device *dev)
 +{
-+    unsigned long affinity;
-+    int level0;
++    dev->regions    =3D vgic_v3_dist_registers;
++    dev->nr_regions =3D ARRAY_SIZE(vgic_v3_dist_registers);
 +
-+    /*
-+     * Split the current VCPU's MPIDR into affinity level 0 and the
-+     * rest as this is what we have to compare against.
-+     */
-+    affinity =3D vcpuid_to_vaffinity(vcpu->vcpu_id);
-+    level0   =3D MPIDR_AFFINITY_LEVEL(affinity, 0);
-+    affinity &=3D ~MPIDR_LEVEL_MASK;
-+
-+    /* bail out if the upper three levels don't match */
-+    if ( sgi_aff !=3D affinity )
-+        return -1;
-+
-+    /* Is this VCPU's bit set in the mask ? */
-+    if ( !(sgi_cpu_mask & BIT(level0, ULL)) )
-+        return -1;
-+
-+    return level0;
++    return SZ_64K;
 +}
 +
-+#define SGI_AFFINITY_LEVEL(reg, level)                                    =
-     \
-+    ((((reg) & (ICH_SGI_AFFx_MASK << ICH_SGI_AFFINITY_LEVEL(level))) >>   =
-     \
-+      ICH_SGI_AFFINITY_LEVEL(level))                                      =
-     \
-+     << MPIDR_LEVEL_SHIFT(level))
-+
-+static bool vgic_v3_emulate_sgi1r(struct cpu_user_regs *regs, uint64_t *r,
-+                                  bool read)
++static bool vgic_v3_redist_region_full(struct vgic_redist_region *region)
 +{
-+    struct domain *d  =3D current->domain;
-+    struct vcpu *vcpu =3D current;
-+    struct vcpu *c_vcpu;
-+    u16 target_cpus;
-+    u64 mpidr;
-+    int sgi;
-+    int vcpu_id =3D vcpu->vcpu_id;
-+    bool broadcast;
-+    unsigned long flags;
-+
-+    if ( read )
-+    {
-+        gdprintk(XENLOG_WARNING, "Reading SGI1R_EL1 - WO register\n");
++    if ( !region->count )
 +        return false;
++
++    return (region->free_index >=3D region->count);
++}
++
++/**
++ * vgic_v3_rdist_free_slot - Look up registered rdist regions and identify=
+ one
++ * which has free space to put a new rdist region.
++ *
++ * @rd_regions: redistributor region list head
++ *
++ * A redistributor regions maps n redistributors, n =3D region size / (2 x=
+ 64kB).
++ * Stride between redistributors is 0 and regions are filled in the index =
+order.
++ *
++ * Return: the redist region handle, if any, that has space to map a new r=
+dist
++ * region.
++ */
++static struct vgic_redist_region *vgic_v3_rdist_free_slot(struct list_head=
+ *rd_regions)
++{
++    struct vgic_redist_region *rdreg;
++
++    list_for_each_entry(rdreg, rd_regions, list)
++    {
++        if ( !vgic_v3_redist_region_full(rdreg) )
++            return rdreg;
 +    }
++    return NULL;
++}
 +
-+    sgi         =3D (*r >> ICH_SGI_IRQ_SHIFT) & ICH_SGI_IRQ_MASK;
-+    broadcast   =3D *r & BIT(ICH_SGI_IRQMODE_SHIFT, ULL);
-+    target_cpus =3D (*r & ICH_SGI_TARGETLIST_MASK);
 +
-+    mpidr  =3D SGI_AFFINITY_LEVEL(*r, 3);
-+    mpidr |=3D SGI_AFFINITY_LEVEL(*r, 2);
-+    mpidr |=3D SGI_AFFINITY_LEVEL(*r, 1);
++/**
++ * vgic_register_redist_iodev - register a single redist iodev
++ * @vcpu:    The VCPU to which the redistributor belongs
++ *
++ * Register a KVM iodev for this VCPU's redistributor using the address
++ * provided.
++ *
++ * Return 0 on success, -ERRNO otherwise.
++ */
++int vgic_register_redist_iodev(struct vcpu *vcpu)
++{
++    struct domain *d              =3D vcpu->domain;
++    struct vgic_dist *vgic        =3D &d->arch.vgic;
++    struct vgic_cpu *vgic_cpu     =3D &vcpu->arch.vgic;
++    struct vgic_io_device *rd_dev =3D &vcpu->arch.vgic.rd_iodev;
++    struct vgic_redist_region *rdreg;
++    paddr_t rd_base;
 +
 +    /*
-+     * We iterate over all VCPUs to find the MPIDRs matching the request.
-+     * If we have handled one CPU, we clear its bit to detect early
-+     * if we are already finished. This avoids iterating through all
-+     * VCPUs when most of the times we just signal a single VCPU.
++     * We may be creating VCPUs before having set the base address for the
++     * redistributor region, in which case we will come back to this
++     * function for all VCPUs when the base address is set.  Just return
++     * without doing any work for now.
 +     */
-+    for_each_vcpu(d, c_vcpu)
-+    {
-+        struct vgic_irq *irq;
++    rdreg =3D vgic_v3_rdist_free_slot(&vgic->rd_regions);
++    if ( !rdreg )
++        return 0;
 +
-+        /* Exit early if we have dealt with all requested CPUs */
-+        if ( !broadcast && target_cpus =3D=3D 0 )
++    vgic_cpu->rdreg       =3D rdreg;
++    vgic_cpu->rdreg_index =3D rdreg->free_index;
++
++    rd_base             =3D rdreg->base + rdreg->free_index * VGIC_V3_REDI=
+ST_SIZE;
++
++    rd_dev->base_fn     =3D gaddr_to_gfn(rd_base);
++    rd_dev->iodev_type  =3D IODEV_REDIST;
++    rd_dev->regions     =3D vgic_v3_rd_registers;
++    rd_dev->nr_regions  =3D ARRAY_SIZE(vgic_v3_rd_registers);
++    rd_dev->redist_vcpu =3D vcpu;
++
++    register_mmio_handler(d, &vgic_io_ops, rd_base, VGIC_V3_REDIST_SIZE,
++                          rd_dev);
++
++    rdreg->free_index++;
++    return 0;
++}
++
++static int vgic_register_all_redist_iodevs(struct domain *d)
++{
++    struct vcpu *vcpu;
++    int ret =3D 0;
++
++    for_each_vcpu(d, vcpu)
++    {
++        ret =3D vgic_register_redist_iodev(vcpu);
++        if ( ret )
 +            break;
-+
-+        /* Don't signal the calling VCPU */
-+        if ( broadcast && c_vcpu->vcpu_id =3D=3D vcpu_id )
-+            continue;
-+
-+        if ( !broadcast )
-+        {
-+            int level0;
-+
-+            level0 =3D match_mpidr(mpidr, target_cpus, c_vcpu);
-+            if ( level0 =3D=3D -1 )
-+                continue;
-+
-+            /* remove this matching VCPU from the mask */
-+            target_cpus &=3D ~BIT(level0, UL);
-+        }
-+
-+        irq =3D vgic_get_irq(vcpu->domain, c_vcpu, sgi);
-+
-+        spin_lock_irqsave(&irq->irq_lock, flags);
-+
-+        if ( !irq->hw )
-+        {
-+            irq->pending_latch =3D true;
-+            vgic_queue_irq_unlock(vcpu->domain, irq, flags);
-+        }
-+        else
-+        {
-+            printk(XENLOG_ERR "HW SGIs are not implemented\n");
-+            BUG();
-+            spin_unlock_irqrestore(&irq->irq_lock, flags);
-+        }
-+
-+        vgic_put_irq(vcpu->domain, irq);
 +    }
 +
-+    return true;
++    if ( ret )
++    {
++        printk(XENLOG_ERR "Failed to register redistributor iodev\n");
++    }
++
++    return ret;
 +}
 +
-+static bool vgic_v3_emulate_sysreg(struct cpu_user_regs *regs, union hsr h=
-sr)
++static inline size_t vgic_v3_rd_region_size(struct domain *d,
++                                            struct vgic_redist_region *rdr=
+eg)
 +{
-+    struct hsr_sysreg sysreg =3D hsr.sysreg;
-+
-+    ASSERT(hsr.ec =3D=3D HSR_EC_SYSREG);
-+
-+    if ( sysreg.read )
-+        perfc_incr(vgic_sysreg_reads);
++    if ( !rdreg->count )
++        return d->max_vcpus * VGIC_V3_REDIST_SIZE;
 +    else
-+        perfc_incr(vgic_sysreg_writes);
-+
-+    switch ( hsr.bits & HSR_SYSREG_REGS_MASK )
-+    {
-+    case HSR_SYSREG_ICC_SGI1R_EL1:
-+        return vreg_emulate_sysreg(regs, hsr, vgic_v3_emulate_sgi1r);
-+
-+    default:
-+        return false;
-+    }
++        return rdreg->count * VGIC_V3_REDIST_SIZE;
 +}
 +
-+bool vgic_v3_emulate_reg(struct cpu_user_regs *regs, union hsr hsr)
++/**
++ * vgic_v3_rdist_overlap - check if a region overlaps with any
++ * existing redistributor region
++ *
++ * @kvm: kvm handle
++ * @base: base of the region
++ * @size: size of region
++ *
++ * Return: true if there is an overlap
++ */
++bool vgic_v3_rdist_overlap(struct domain *domain, paddr_t base, size_t siz=
+e)
 +{
-+    switch ( hsr.ec )
++    struct vgic_dist *d =3D &domain->arch.vgic;
++    struct vgic_redist_region *rdreg;
++
++    list_for_each_entry(rdreg, &d->rd_regions, list)
 +    {
-+#ifdef CONFIG_ARM_64
-+    case HSR_EC_SYSREG:
-+        return vgic_v3_emulate_sysreg(regs, hsr);
-+#endif
-+    case HSR_EC_CP15_64:
-+        printk(XENLOG_ERR
-+               "vgic_v3_emulate_reg: HSR_EC_CP15_64 not implemented");
-+        BUG();
-+        break;
-+    default:
-+        return false;
++        if ( (base + size > rdreg->base) &&
++             (base < rdreg->base + vgic_v3_rd_region_size(domain, rdreg)) =
+)
++            return true;
 +    }
++    return false;
 +}
 +
- /*
-  * The Revision field in the IIDR have the following meanings:
-  *
-diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
-index 97ca827fc4..946877bbac 100644
---- a/xen/arch/arm/vgic/vgic.c
-+++ b/xen/arch/arm/vgic/vgic.c
-@@ -865,9 +865,13 @@ struct irq_desc *vgic_get_hw_irq_desc(struct domain *d=
-, struct vcpu *v,
-=20
- bool vgic_emulate(struct cpu_user_regs *regs, union hsr hsr)
- {
--    ASSERT(current->domain->arch.vgic.version =3D=3D GIC_V3);
--
--    return false;
-+    switch ( current->domain->arch.vgic.version )
++static inline bool vgic_dist_overlap(struct domain *domain, paddr_t base,
++                                     size_t size)
++{
++    struct vgic_dist *d =3D &domain->arch.vgic;
++
++    return (base + size > d->dbase) && (base < d->dbase + VGIC_V3_DIST_SIZ=
+E);
++}
++
++struct vgic_redist_region *vgic_v3_rdist_region_from_index(struct domain *=
+d,
++                                                           u32 index)
++{
++    struct list_head *rd_regions =3D &d->arch.vgic.rd_regions;
++    struct vgic_redist_region *rdreg;
++
++    list_for_each_entry(rdreg, rd_regions, list)
 +    {
-+    case GIC_V3:
-+        return vgic_v3_emulate_reg(regs, hsr);
-+    default:
-+        return false;
++        if ( rdreg->index =3D=3D index )
++            return rdreg;
 +    }
- }
-=20
- /*
++    return NULL;
++}
++
++int vgic_check_iorange(paddr_t ioaddr, paddr_t addr, paddr_t alignment,
++                       paddr_t size)
++{
++    if ( !IS_VGIC_ADDR_UNDEF(ioaddr) )
++        return -EEXIST;
++
++    if ( !IS_ALIGNED(addr, alignment) || !IS_ALIGNED(size, alignment) )
++        return -EINVAL;
++
++    if ( addr + size < addr )
++        return -EINVAL;
++
++    return 0;
++}
++
++/**
++ * vgic_v3_alloc_redist_region - Allocate a new redistributor region
++ *
++ * Performs various checks before inserting the rdist region in the list.
++ * Those tests depend on whether the size of the rdist region is known
++ * (ie. count !=3D 0). The list is sorted by rdist region index.
++ *
++ * @kvm: kvm handle
++ * @index: redist region index
++ * @base: base of the new rdist region
++ * @count: number of redistributors the region is made of (0 in the old st=
+yle
++ * single region, whose size is induced from the number of vcpus)
++ *
++ * Return 0 on success, < 0 otherwise
++ */
++static int vgic_v3_alloc_redist_region(struct domain *domain, uint32_t ind=
+ex,
++                                       paddr_t base, uint32_t count)
++{
++    struct vgic_dist *d =3D &domain->arch.vgic;
++    struct vgic_redist_region *rdreg;
++    struct list_head *rd_regions =3D &d->rd_regions;
++    int nr_vcpus                 =3D domain->max_vcpus;
++    size_t size                  =3D count ? count * VGIC_V3_REDIST_SIZE
++                                         : nr_vcpus * VGIC_V3_REDIST_SIZE;
++    int ret;
++
++    /* cross the end of memory ? */
++    if ( base + size < base )
++        return -EINVAL;
++
++    if ( list_empty(rd_regions) )
++    {
++        if ( index !=3D 0 )
++            return -EINVAL;
++    }
++    else
++    {
++        rdreg =3D list_last_entry(rd_regions, struct vgic_redist_region, l=
+ist);
++
++        /* Don't mix single region and discrete redist regions */
++        if ( !count && rdreg->count )
++            return -EINVAL;
++
++        if ( !count )
++            return -EEXIST;
++
++        if ( index !=3D rdreg->index + 1 )
++            return -EINVAL;
++    }
++
++    /*
++     * For legacy single-region redistributor regions (!count),
++     * check that the redistributor region does not overlap with the
++     * distributor's address space.
++     */
++    if ( !count && !IS_VGIC_ADDR_UNDEF(d->dbase) &&
++         vgic_dist_overlap(domain, base, size) )
++        return -EINVAL;
++
++    /* collision with any other rdist region? */
++    if ( vgic_v3_rdist_overlap(domain, base, size) )
++        return -EINVAL;
++
++    rdreg =3D xzalloc(struct vgic_redist_region);
++    if ( !rdreg )
++        return -ENOMEM;
++
++    rdreg->base =3D VGIC_ADDR_UNDEF;
++
++    ret =3D vgic_check_iorange(rdreg->base, base, SZ_64K, size);
++    if ( ret )
++        goto free;
++
++    rdreg->base       =3D base;
++    rdreg->count      =3D count;
++    rdreg->free_index =3D 0;
++    rdreg->index      =3D index;
++
++    list_add_tail(&rdreg->list, rd_regions);
++    return 0;
++free:
++    xfree(rdreg);
++    return ret;
++}
++
++void vgic_v3_free_redist_region(struct vgic_redist_region *rdreg)
++{
++    list_del(&rdreg->list);
++    xfree(rdreg);
++}
++
++int vgic_v3_set_redist_base(struct domain *d, u32 index, u64 addr, u32 cou=
+nt)
++{
++    int ret;
++
++    ret =3D vgic_v3_alloc_redist_region(d, index, addr, count);
++    if ( ret )
++        return ret;
++
++    /*
++     * Register iodevs for each existing VCPU.  Adding more VCPUs
++     * afterwards will register the iodevs when needed.
++     */
++    ret =3D vgic_register_all_redist_iodevs(d);
++    if ( ret )
++    {
++        struct vgic_redist_region *rdreg;
++
++        rdreg =3D vgic_v3_rdist_region_from_index(d, index);
++        vgic_v3_free_redist_region(rdreg);
++        return ret;
++    }
++
++    return 0;
++}
+diff --git a/xen/arch/arm/vgic/vgic-mmio.c b/xen/arch/arm/vgic/vgic-mmio.c
+index 5d935a7301..1c3f861887 100644
+--- a/xen/arch/arm/vgic/vgic-mmio.c
++++ b/xen/arch/arm/vgic/vgic-mmio.c
+@@ -619,6 +619,9 @@ int vgic_register_dist_iodev(struct domain *d, gfn_t di=
+st_base_fn,
+     case VGIC_V2:
+         len =3D vgic_v2_init_dist_iodev(io_device);
+         break;
++    case VGIC_V3:
++        len =3D vgic_v3_init_dist_iodev(io_device);
++        break;
+     default:
+         BUG();
+     }
 diff --git a/xen/arch/arm/vgic/vgic.h b/xen/arch/arm/vgic/vgic.h
-index b3bba7b5f3..0e0cf7b213 100644
+index 2819569f30..a8e3ef5970 100644
 --- a/xen/arch/arm/vgic/vgic.h
 +++ b/xen/arch/arm/vgic/vgic.h
-@@ -74,6 +74,7 @@ int vgic_register_dist_iodev(struct domain *d, gfn_t dist=
+@@ -73,6 +73,9 @@ int vgic_register_dist_iodev(struct domain *d, gfn_t dist=
 _base_fn,
  #ifdef CONFIG_GICV3
  void vgic_v3_fold_lr_state(struct vcpu *vcpu);
  void vgic_v3_populate_lr(struct vcpu *vcpu, struct vgic_irq *irq, int lr);
-+bool vgic_v3_emulate_reg(struct cpu_user_regs *regs, union hsr hsr);
- unsigned int vgic_v3_init_dist_iodev(struct vgic_io_device *dev);
- int vgic_v3_set_redist_base(struct domain *d, u32 index, u64 addr, u32 cou=
++unsigned int vgic_v3_init_dist_iodev(struct vgic_io_device *dev);
++int vgic_v3_set_redist_base(struct domain *d, u32 index, u64 addr, u32 cou=
 nt);
- int vgic_register_redist_iodev(struct vcpu *vcpu);
-@@ -88,6 +89,10 @@ static inline unsigned int vgic_v3_init_dist_iodev(struc=
-t vgic_io_device *dev)
++int vgic_register_redist_iodev(struct vcpu *vcpu);
+ #else
+ static inline void vgic_v3_fold_lr_state(struct vcpu *vcpu)
  {
-     return 0;
+@@ -80,6 +83,18 @@ static inline void vgic_v3_fold_lr_state(struct vcpu *vc=
+pu)
+ static inline void vgic_v3_populate_lr(struct vcpu *vcpu, struct vgic_irq =
+*irq, int lr)
+ {
  }
-+static inline bool vgic_v3_emulate_reg(struct cpu_user_regs *regs, union h=
-sr hsr)
++static inline unsigned int vgic_v3_init_dist_iodev(struct vgic_io_device *=
+dev)
 +{
-+    return false;
++    return 0;
 +}
- static inline int vgic_v3_set_redist_base(struct domain *d, u32 index, u64=
++static inline int vgic_v3_set_redist_base(struct domain *d, u32 index, u64=
  addr, u32 count)
- {
-     return 0;
++{
++    return 0;
++}
++static inline int vgic_register_redist_iodev(struct vcpu *vcpu)
++{
++    return 0;
++}
+ #endif /* CONFIG_GICV3 */
+=20
+ #endif /* __XEN_ARM_VGIC_VGIC_H__ */
 --=20
 2.34.1
 
