@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76083C4167B
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:31:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630611.983650 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2376C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:31:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630617.983707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UPJ-00063K-BK; Fri, 10 Nov 2023 16:30:57 +0000
+	id 1r1UPQ-0007d6-7F; Fri, 10 Nov 2023 16:31:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630611.983650; Fri, 10 Nov 2023 16:30:57 +0000
+Received: by outflank-mailman (output) from mailman id 630617.983707; Fri, 10 Nov 2023 16:31:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UPJ-00063B-8S; Fri, 10 Nov 2023 16:30:57 +0000
-Received: by outflank-mailman (input) for mailman id 630611;
- Fri, 10 Nov 2023 16:30:56 +0000
+	id 1r1UPP-0007Zo-Om; Fri, 10 Nov 2023 16:31:03 +0000
+Received: by outflank-mailman (input) for mailman id 630617;
+ Fri, 10 Nov 2023 16:31:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zww5=GX=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r1UPI-0005Bj-DK
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:30:56 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
+ id 1r1UPO-0005Bj-Mk
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:31:02 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8513676c-7fe6-11ee-9b0e-b553b5be7939;
- Fri, 10 Nov 2023 17:30:54 +0100 (CET)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-9e61e969b1aso139697566b.0
- for <xen-devel@lists.xenproject.org>; Fri, 10 Nov 2023 08:30:54 -0800 (PST)
+ id 88e389cb-7fe6-11ee-9b0e-b553b5be7939;
+ Fri, 10 Nov 2023 17:31:01 +0100 (CET)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-53df747cfe5so3776182a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Nov 2023 08:31:01 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- lv19-20020a170906bc9300b009a9fbeb15f5sm4128966ejb.46.2023.11.10.08.30.52
+ lv19-20020a170906bc9300b009a9fbeb15f5sm4128966ejb.46.2023.11.10.08.30.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Nov 2023 08:30:53 -0800 (PST)
+ Fri, 10 Nov 2023 08:30:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8513676c-7fe6-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 88e389cb-7fe6-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699633854; x=1700238654; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1699633860; x=1700238660; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=H3O1Y0n3q5RJstFX0Kyg3z3bQs0fhLQ5wf5VwzlPI2E=;
-        b=FReMGtRldl4++7r5qJBcVDpR8rlfzRffTR2Qrusg31oHYt7UKZoXe+bwhkI4A15oQ4
-         d8hAuthlEBw3RZzadEYEOb1pVpSpmgcYO5FcT3QEDkLcDqMXLxoY5PudIof/j2XXd0Fp
-         RBtxUMfNotKfSPmHJvgGGudGjmaX4J+E7/5SXBGqPciy3NLFeiHvWaO0NjtL7n0lGHzm
-         Fg8aCcKa50glwZS5si+PGHIIPJeWtNToWgCgpR5FpP3v4EK1f1bahpkTaPKER0h1KtMC
-         2ZX6aTxyWCp4wDvLI5azB87PFr3UuoL72Qz/oMUlJa7ioz4tNITW4CIZFKvwJORZzT4Q
-         uEdw==
+        bh=uwoCpnzzrrgzgPgK1t3bRDD5n2e+2jmc1wxLNSR5C0E=;
+        b=X7b1Mb1EKlkYZHRwutw9EfEnCrjdDkNrLswD59HZ2DwiXBOp1cYbmG90Z6UW4abk1w
+         mQRzXOrcOuBgAydPxK9vuI9sPniOl3veLQ/WNGALXIYhmV5Tg4SEFxahl+PC0Tthurha
+         DqVVXoD+FOGlAyEwP+giq5NmfenbPRkOFPGVVFUNWB5nx42+nf4TInJq2gv+YxTZQ7W3
+         tlkoatzKfvkLF2DGdLQQlRlH6tH4bt9GBc1wOMfEF4x9Ikl2vFOBy/5RwLIOEWfLa9oI
+         mBtNb5mbP3Bk6vSA39fYEYEmmI6UiagJjrYl8Ad5ghG6ZNbI7UmzYgygjPSy+IVk+kxt
+         DIsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699633854; x=1700238654;
+        d=1e100.net; s=20230601; t=1699633860; x=1700238660;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=H3O1Y0n3q5RJstFX0Kyg3z3bQs0fhLQ5wf5VwzlPI2E=;
-        b=c6BUU4OeksaixJmuG4ee0qLG48Y7iBdmTGKf54lvyRhmu4qLGcyyKQiYNnSDEGgpvn
-         HYi9SNqTLpOhDptLu87qS9d62aU8JiFXfH02nxDX3tdiatLJDu9VY+Z3zIYzZwFt4Ys0
-         9mku0qOZXcDOqeUfGeZvH7FW8q0MCklgBSHgT6Sy3CDlMIbZG9ZN0Zo6VDy+F7DITrS6
-         BFlm8BLxE1nnXdr9+GXGFtiWaSoB7kPN29G7IsMHLQE1jX9swpxYr9iNA7fXLCBqx7pE
-         HDl9GbIEDC3QZmCZNqMKnL9khzdZq9f7ewuwn9G1WSGwE9qjIhDYAQBWZRQnhFejNnc1
-         uOyg==
-X-Gm-Message-State: AOJu0YxlDB6f0Hz5bAZz4oUpcOT6j/4ZNA0BAupnL9nFsj6fU+fYYUXR
-	kpY+ZlVsedNl6/u8SCZ6atmvt6VK/z8=
-X-Google-Smtp-Source: AGHT+IEiPYbRZhrTqpKWt7zqu4+Eg1sdWzcY9qVAqSFBpy7231QJUol8hazCDydLNbYHGIUtODK+Rg==
-X-Received: by 2002:a17:907:787:b0:9d2:20ee:b1c7 with SMTP id xd7-20020a170907078700b009d220eeb1c7mr7475614ejb.45.1699633853938;
-        Fri, 10 Nov 2023 08:30:53 -0800 (PST)
+        bh=uwoCpnzzrrgzgPgK1t3bRDD5n2e+2jmc1wxLNSR5C0E=;
+        b=sD0v8fxFQx5dEuAZc3Nln2qWCWGU7Byrt2fzjySnVePBoEwNb+EUU+WBiHBIZRUkau
+         B+odzuUTngfqafhxaBI6ANrMg42vpGxCKsMTQBxGgVNfnCxGNE/cMCtVkpCTE5ESQQJe
+         aGRI06Ic77mLjcyykY8m5pALUbiNTuakif0vukhQ7RwIeLMZ28nQ1UW/k+j1Zim7CEWP
+         fIAQuP8PHXmEPVs1dgDtc+RcsEVxB8wgVfOr+EDRoig/jQ2zm2WygCdtjDdvkHQCsJpT
+         sNEskETOEypwJw84QFCDDLz4Xlg2MGoAgfr9EEZPb12lwwQFWav+RuIiZZn1PLB4pxMt
+         k5Ew==
+X-Gm-Message-State: AOJu0YxI2P5h70ykVMiAW/z5yvgtuLJ0ZFURph7j7ryfWRVxrkSCQKj2
+	qv35N84vvJ1vF66BR2yvNg9lv73w/Mk=
+X-Google-Smtp-Source: AGHT+IFiAgypV9Aie5vuC9zDH2JDclGSJi8rbqt3C0eUenX2KnqxV1wLnxsCPNIKUBuLIju2CeueeQ==
+X-Received: by 2002:a17:907:3d91:b0:9b2:df16:851d with SMTP id he17-20020a1709073d9100b009b2df16851dmr5634285ejc.57.1699633860188;
+        Fri, 10 Nov 2023 08:31:00 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -85,47 +85,66 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 03/15] xen: ifdef inclusion of <asm/grant_table.h> in <xen/grant_table.h>
-Date: Fri, 10 Nov 2023 18:30:29 +0200
-Message-ID: <cd1341ae337fc9a1619d747b3db1a7a5cd6ad2fb.1699633310.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 09/15] xen/asm-generic: introduce generic header smp.h
+Date: Fri, 10 Nov 2023 18:30:35 +0200
+Message-ID: <bf7b027f7ae05533a6b2034e2ad4882ae27f2c67.1699633310.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1699633310.git.oleksii.kurochko@gmail.com>
 References: <cover.1699633310.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Ifdefing inclusion of <asm/grant_table.h> allows to avoid
-generation of empty <asm/grant_table.h> for cases when
-CONFIG_GRANT_TABLE is not enabled.
+<asm/smp.h> is expcted to be generic between Arm, PPC and RISC-V
+there by it is moved to asm-generic.
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
+Right now it is common only by PPC and RISC-V but during work on
+support of the mentioned arhcs <asm/smp.h> is expected to be the
+same.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
-	- ifdef inclusion of asm/grant_table.h in xen/grant_table.h to avoid
-	  generation of empty headers for PPC and RISC-V archs.
-	- update commit message
-	- add Suggested-by: Jan Beulich <jbeulich@suse.com>
-	- Remove provided before asm-generic/grant_table.h header.
+	- drop #ifded ASSEMBLY as this header isn't expected to be included in asm files.
+	- update the commit message.
 ---
- xen/include/xen/grant_table.h | 3 +++
- 1 file changed, 3 insertions(+)
+ xen/include/asm-generic/smp.h | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 xen/include/asm-generic/smp.h
 
-diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
-index 85fe6b7b5e..50edfecfb6 100644
---- a/xen/include/xen/grant_table.h
-+++ b/xen/include/xen/grant_table.h
-@@ -26,7 +26,10 @@
- #include <xen/mm-frame.h>
- #include <xen/rwlock.h>
- #include <public/grant_table.h>
+diff --git a/xen/include/asm-generic/smp.h b/xen/include/asm-generic/smp.h
+new file mode 100644
+index 0000000000..6740a2064c
+--- /dev/null
++++ b/xen/include/asm-generic/smp.h
+@@ -0,0 +1,28 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_GENERIC_SMP_H
++#define __ASM_GENERIC_SMP_H
 +
-+#ifdef CONFIG_GRANT_TABLE
- #include <asm/grant_table.h>
++#include <xen/cpumask.h>
++#include <xen/percpu.h>
++
++DECLARE_PER_CPU(cpumask_var_t, cpu_sibling_mask);
++DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
++
++#define cpu_is_offline(cpu) unlikely(!cpu_online(cpu))
++
++/*
++ * Do we, for platform reasons, need to actually keep CPUs online when we
++ * would otherwise prefer them to be off?
++ */
++#define park_offline_cpus false
++
 +#endif
- 
- struct grant_table;
- 
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: BSD
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.41.0
 
