@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDF0C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:31:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630615.983689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC78AC4167B
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:31:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630622.983745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UPN-00075U-QB; Fri, 10 Nov 2023 16:31:01 +0000
+	id 1r1UPW-0000SR-Gl; Fri, 10 Nov 2023 16:31:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630615.983689; Fri, 10 Nov 2023 16:31:01 +0000
+Received: by outflank-mailman (output) from mailman id 630622.983745; Fri, 10 Nov 2023 16:31:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UPN-00074G-GM; Fri, 10 Nov 2023 16:31:01 +0000
-Received: by outflank-mailman (input) for mailman id 630615;
- Fri, 10 Nov 2023 16:31:00 +0000
+	id 1r1UPV-0000O2-OZ; Fri, 10 Nov 2023 16:31:09 +0000
+Received: by outflank-mailman (input) for mailman id 630622;
+ Fri, 10 Nov 2023 16:31:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zww5=GX=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r1UPM-0005Bj-Gv
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:31:00 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ id 1r1UPS-0005Bj-T5
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:31:06 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 87933319-7fe6-11ee-9b0e-b553b5be7939;
- Fri, 10 Nov 2023 17:30:59 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9d2d8343dc4so376420666b.0
- for <xen-devel@lists.xenproject.org>; Fri, 10 Nov 2023 08:30:59 -0800 (PST)
+ id 8b61d7de-7fe6-11ee-9b0e-b553b5be7939;
+ Fri, 10 Nov 2023 17:31:05 +0100 (CET)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9be02fcf268so355703866b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Nov 2023 08:31:05 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- lv19-20020a170906bc9300b009a9fbeb15f5sm4128966ejb.46.2023.11.10.08.30.57
+ lv19-20020a170906bc9300b009a9fbeb15f5sm4128966ejb.46.2023.11.10.08.31.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Nov 2023 08:30:58 -0800 (PST)
+ Fri, 10 Nov 2023 08:31:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,82 +46,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 87933319-7fe6-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 8b61d7de-7fe6-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699633858; x=1700238658; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1699633864; x=1700238664; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wbj4r6F42J2p6p5PO7TAcYWIgSd4H4ZMKYzy5fPGOm8=;
-        b=aBrrTrEjqbJkH/R30lwOjUTrQf73ahtP9pxuC5taXNv76jkBbknpRK/T68q6qSGgNH
-         3N+cx1n7flfO7WfZeXkquheN/NhZeiS83tGcTo5Km/bv1y8Ew3Xp4JV/1CJvNIndhDb0
-         FKgfKafYFgRW7TuPZMZKKlXkXB0N5zHCOGITAxdwquwyVtfukZ0eg0KgRyFc7PU6C77J
-         MnQPg6cd7Du4nsbTHSlpTdZS+4jGKWFe1z9E369IfFEBQ+sgALJ1bpsBpb6KgbeAsnkO
-         PUoHzNa0yBGOPAgOWFA2f17tWV/VYq8JLUmyZTWfTWlyl5oFOimQH1j2z6UPmKl9B2xK
-         p09A==
+        bh=cMOphfLBRJJYVlhWz2+duw9NQxE7jG1sJ2FM+YdBhQQ=;
+        b=SmPwGPMtiPUnN+Jg15DyZWXXDnizsYyhP9psbpHQudhu2qQS5bRI4VctU3w30I6VuJ
+         aKj0c+pjcXOwR9LBCndDU0WD/GSLF9XGB7SYi+WUGJUf2J67bgBWOI09w67SFVTWeS4M
+         X0mXe8GlMJ2qU3CjsG414z7kQRzaI76bZTVE4bxrHEFuLbl/uFPFBTJTNAPqErOnt8Z/
+         +eR2Bvb5gwky3FLm14u1pYtz7Fqu6WKEUMGKWB/wDPQeBPcsTtCB7aWjr4bAvem2XsVm
+         e+6lVwL8y7Vbkc7nESJ5Cx6NI3vbJM+T2D8NDe2SQbnyfsj1YAcRudzfX23oXP6esKu5
+         coFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699633858; x=1700238658;
+        d=1e100.net; s=20230601; t=1699633864; x=1700238664;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wbj4r6F42J2p6p5PO7TAcYWIgSd4H4ZMKYzy5fPGOm8=;
-        b=MGAK+IbTiBQ7smioj9QWsv62uEEW3YBB5LVMC0oFxDdgR2Bop8C9Qtq6PkusCnDIqX
-         Hl46m8miNuIS5KykhpDmn9rR2C0jK0Nw7lLtGJ8Tu+uSn+MViGLhwN1ytsOirXud/oK2
-         f/rJKtHx22L40ZQz/EiNFebl08gjivtKGSIUNwFxMcSzK3A9mozSmwfRE2Hp/61PXk0x
-         75TZ0BmKY3tOo3s5pBv6ai3A7haLTY4dyaGIhSG8cQjsAVMcLZvN1fPqlUUI3imy8d75
-         +brdmZyPAHiiUmRDvxUKtGi91K2wNI4e+Z0Dq9Fd5BsdQpP5erP/Y0Bw3M/YzX6J6gfM
-         4Lvw==
-X-Gm-Message-State: AOJu0Yxc+u5tLeWYAetPVb+x+oyKAXMZvtVqBna4B0ayhRwFnIB2V6ZI
-	L3itVkQz7Q7t4L8Y19owNq9pj9EcRp4=
-X-Google-Smtp-Source: AGHT+IGsa8twXDGG2hoSMFk+2SIC+kfI+GZb2IA+wGpfAFJqj9EPCHGgl6OdoxHMLEnrPXHAOyVEFg==
-X-Received: by 2002:a17:906:4fc7:b0:9ad:8aac:362b with SMTP id i7-20020a1709064fc700b009ad8aac362bmr7968848ejw.23.1699633858309;
-        Fri, 10 Nov 2023 08:30:58 -0800 (PST)
+        bh=cMOphfLBRJJYVlhWz2+duw9NQxE7jG1sJ2FM+YdBhQQ=;
+        b=BQmlpglR1aM9K38N51sDeWx9lBNjaC7Saswu6cjZP/UhpDqWR4N38OoyS4qdhl0eky
+         1qD3qYkOX1W/Iv9wzKnOtaph2xcpHFasusfxC37LgpvFr2kd6CM5WN3YC4tet9jJID38
+         AXBnGQBG//p6fof+M3pdwLjfHid3L+UVAv3+oZla2aVyCxiKd3MGOGl3oGE1/tqoHHdS
+         V5Y30OM+xH892Ej17dxK9yunOk7QHzj3XFUGZTcn1tGbmdU2McW9RKPX5jU4PsIotZdF
+         DdFoi+1H6Xvwmngfj3CuQ4UvYIAM3Ry+fn299gEbA1mzzgYvhVpe3M7aBmRAKHG6Xg2C
+         AyNw==
+X-Gm-Message-State: AOJu0Yy5hZTgwbH7LJq0AxpQDCpCnpuBNoqaucCIW4hzXq15S/Hr50GS
+	govMoaEuRAwyVnjXqtdgDrOpVp4p5ww=
+X-Google-Smtp-Source: AGHT+IGzHIaBd8hlPXjto5H4KN2Er5FNkUP45DySj2Xrxj0AsDpkGLhsa1rt6UAfIZ9R1ih8fjuwgQ==
+X-Received: by 2002:a17:906:dc94:b0:9d3:afe1:b3e5 with SMTP id cs20-20020a170906dc9400b009d3afe1b3e5mr7594471ejc.75.1699633864192;
+        Fri, 10 Nov 2023 08:31:04 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 07/15] xen/asm-generic: introduce stub header <asm/random.h>
-Date: Fri, 10 Nov 2023 18:30:33 +0200
-Message-ID: <2464c6b984d187207fe76453bd05502d288af4f9.1699633310.git.oleksii.kurochko@gmail.com>
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>
+Subject: [PATCH v2 13/15] xen/asm-generic: introduce stub header monitor.h
+Date: Fri, 10 Nov 2023 18:30:39 +0200
+Message-ID: <9b40493df82b99904b2e4f6cf9dc8888db4a2a49.1699633310.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1699633310.git.oleksii.kurochko@gmail.com>
 References: <cover.1699633310.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-<asm/random.h> is common for Arm, PPC and RISC-V thereby it
-is moved to asm-generic.
+The header is shared between archs so it is moved to asm-generic.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
- - update the commit messages
+	- remove inclusion of "+#include <public/domctl.h>"
+	- add "struct xen_domctl_monitor_op;"
+	- remove one of SPDX tags.
 ---
- xen/include/asm-generic/random.h | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 xen/include/asm-generic/random.h
+ xen/include/asm-generic/monitor.h | 62 +++++++++++++++++++++++++++++++
+ 1 file changed, 62 insertions(+)
+ create mode 100644 xen/include/asm-generic/monitor.h
 
-diff --git a/xen/include/asm-generic/random.h b/xen/include/asm-generic/random.h
+diff --git a/xen/include/asm-generic/monitor.h b/xen/include/asm-generic/monitor.h
 new file mode 100644
-index 0000000000..cd2307e70b
+index 0000000000..4e46f2e91a
 --- /dev/null
-+++ b/xen/include/asm-generic/random.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_RANDOM_H__
-+#define __ASM_GENERIC_RANDOM_H__
++++ b/xen/include/asm-generic/monitor.h
+@@ -0,0 +1,62 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * include/asm-GENERIC/monitor.h
++ *
++ * Arch-specific monitor_op domctl handler.
++ *
++ * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
++ * Copyright (c) 2016, Bitdefender S.R.L.
++ *
++ */
 +
-+static inline unsigned int arch_get_random(void)
++#ifndef __ASM_GENERIC_MONITOR_H__
++#define __ASM_GENERIC_MONITOR_H__
++
++#include <xen/sched.h>
++
++struct xen_domctl_monitor_op;
++
++static inline
++void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
++{
++}
++
++static inline
++int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
++{
++    /* No arch-specific monitor ops on GENERIC. */
++    return -EOPNOTSUPP;
++}
++
++int arch_monitor_domctl_event(struct domain *d,
++                              struct xen_domctl_monitor_op *mop);
++
++static inline
++int arch_monitor_init_domain(struct domain *d)
++{
++    /* No arch-specific domain initialization on GENERIC. */
++    return 0;
++}
++
++static inline
++void arch_monitor_cleanup_domain(struct domain *d)
++{
++    /* No arch-specific domain cleanup on GENERIC. */
++}
++
++static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
 +{
 +    return 0;
 +}
 +
-+#endif /* __ASM_GENERIC_RANDOM_H__ */
++#endif /* __ASM_GENERIC_MONITOR_H__ */
 +
 +
 +/*
