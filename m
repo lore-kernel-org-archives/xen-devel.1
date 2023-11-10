@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2139C4167D
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 12:57:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630312.983175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE37C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 12:57:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630314.983192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1R4D-0006Qf-Ee; Fri, 10 Nov 2023 12:56:57 +0000
+	id 1r1R4I-0007H9-JD; Fri, 10 Nov 2023 12:57:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630312.983175; Fri, 10 Nov 2023 12:56:56 +0000
+Received: by outflank-mailman (output) from mailman id 630314.983192; Fri, 10 Nov 2023 12:57:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1R4B-0006Kl-Uy; Fri, 10 Nov 2023 12:56:55 +0000
-Received: by outflank-mailman (input) for mailman id 630312;
- Fri, 10 Nov 2023 12:56:45 +0000
+	id 1r1R4H-0007Am-4b; Fri, 10 Nov 2023 12:57:01 +0000
+Received: by outflank-mailman (input) for mailman id 630314;
+ Fri, 10 Nov 2023 12:56:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sssJ=GX=epam.com=prvs=567869e99b=mykyta_poturai@srs-se1.protection.inumbo.net>)
- id 1r1R41-0001y1-Ci
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 12:56:45 +0000
+ id 1r1R42-0001y1-Ck
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 12:56:46 +0000
 Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
  [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 968078c6-7fc8-11ee-98da-6d05b1d4d9a1;
+ id 96cbe06d-7fc8-11ee-98da-6d05b1d4d9a1;
  Fri, 10 Nov 2023 13:56:40 +0100 (CET)
 Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
  by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3AACIuvb025691; Fri, 10 Nov 2023 12:56:26 GMT
+ 3AACIuvZ025691; Fri, 10 Nov 2023 12:56:24 GMT
 Received: from eur04-db3-obe.outbound.protection.outlook.com
  (mail-db3eur04lp2050.outbound.protection.outlook.com [104.47.12.50])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3u9j2g0qjw-5
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3u9j2g0qjw-3
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 10 Nov 2023 12:56:26 +0000
+ Fri, 10 Nov 2023 12:56:23 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by DB3PR0302MB9063.eurprd03.prod.outlook.com
  (2603:10a6:10:43d::17) with Microsoft SMTP Server (version=TLS1_2,
@@ -55,21 +55,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 968078c6-7fc8-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 96cbe06d-7fc8-11ee-98da-6d05b1d4d9a1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hvvFHBt08JO68HN7bS3Hof2SYwY/O00FDSgU5K8GfXIaTUWOsRaGG9Ev5K7JCE1tSscWL52tsNaFS+aPlfA7VHcMv5gcaPKv5x5bW0gHg4F0sFZRubApRVQxo6AFNDswTK7movwwZ+XOLxX82rB3inUDroMUZ9Ccz04rk1Y2jZKtpcTPL1emBRvRSqSyXPpBHPRd+D1GkJKGwqmvMviVnle/2/H9nVoF4mQQ9tSvOz8VxTYwAu48PrBzYrdXs610vBG3QIfiRJBZDIBu0y6Y2+Bg+V9TEvO0wQFfqvE4GgaGxhAl3VAXKCuv7Gj7MBCZ1MDvo+NgUVMunxxQANI4jw==
+ b=KmfMeDiLhV50Jd17E0cA7jEFlvs14Z8ha/cIB3Y5MAeJ2WxdX9d4KQ847V3L/TXBEt/CK2X98ooWv3idvTOHtY/sKOOeC6rahTtBgeXZ8LD0NhGJnfvJ0ez3niG+boCI0Nfc090GYw+uOOTwwgSTyXpl+KG8262xCoHqhniQteY+TM1jrwdwx6Gm7/+SQ5ediseMWslw6STjLbvU323Nhuu9A0jf8Voo1uk9VRDcp8iMLU5R32KAZf2GzLZwQQIwUjvoLaqqz9VhzTaM6Hiv9BeFvW54hSoZWI1ssaltzaiS6Ksrp6pGkCymLCR3jUhjpZq/0tkPqwFVmQcY+xOsMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LH4NgNUrJb7AxU4A2c+rBJ2vFrRhnJveRhbmQXTv6fw=;
- b=SxazRw60CKtbVwqbewk/IkWTyBZGNghINtv3xghoJXZRbXWsziXgPATZdbNhCz3X3AVpx7VYme4BvmkTk15Zvobw1v/4PiiLgAwNW6lsFu8nxd3lBiwsetlevC8DzlYRUn6L2d3P23kLCIl2q8C0+dSYk/IxOaXYHOhKAKdRm+NmEfyRcquKexFI9P5Xap4DSETS2A2BSuTn4qU7qjis3jE9kEgzsP+rcdFAWTA9Mqa4jd7mm2Zkvo2aBDTPRyFizWc/Rkf9aMO34fTCLEA6oczEWnaTDweioMeXqflzUoJuyobi2t2VtmTWsZfRwZTF6decyG2ecxDYGlzLDxAv8A==
+ bh=O5jdN5uXcsNiZFC3fCVZlqgLJLq+GNIYO2Q9vhRpzs4=;
+ b=Lxlb/Ai+1G4CkRgeyOocmc1Kw2+mI5Pu66T/BN0hvC05zewUZygxv1b1A++RHvieiTYLOoWq02yY7+uMHhJ6o90sRaKZWLgfNVfLbci1ES+kpMVra8MDT0I7v96TYnvPumoRNNqUNBoKEeLfHa0ECfSptdxzcrP1lNp1l5u64m7XKmggty16VI0dPnJG+ZWeqCNAM3rFnTWwZhijRtuM7zu4a7nu++ERSKnN2sNNAsFVZhumAHU3oI5Iu9cVjNnJ7Dz91wr73kXdKye69yoD02Dt/1+f1yoHq65orEoif3CNPWf8lGNsV6sQmMzceb2uzT/Y1D9gIogDbR+eUc/GtQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LH4NgNUrJb7AxU4A2c+rBJ2vFrRhnJveRhbmQXTv6fw=;
- b=UutzairtowihEfQvkt8uXL404ZOdD375UtaCJr4q364m7Dl3c8s8NrQuLL2zuB7dvdugssSdpJX93CFktt7tADZR1SixAORNjfe9MaiCSS04kjqTNbnSW9p+RPuRONSH0qzuhFJx0OLQ3YV8ZH4fZCa6L2vFzzgbl3Td0oyWtOl9zvaUZTrcS3wMXz6tehUigIpDBKdTB5AblOHmw4id6uPdJUvoFf/dc5eIgw9EF2Q8rE0wwtzqrJBOL+LMLimK4/2PhfW2aaFnMgvhJflE14TQX71MCRU+9L1eajXHcnzDTi04FWKa0Rr5XcXRsbH7eI3oVWyrJXDSPTyAU5CNZw==
+ bh=O5jdN5uXcsNiZFC3fCVZlqgLJLq+GNIYO2Q9vhRpzs4=;
+ b=lu3re+7kF1jLfxjAoZeIv/sBC7OJJNv+e9gFmYaQPn/Zii0oSqXFdk13b5uxKwaV+nVe6p+7XJX7V4bD2hZhlUCZwHQyL2B+/Xnl9MiNK/amwpLq6Hvix41yNVzPK92jPYS0PoCV+usUeLOA6d+yVf73hl92SdatiXIfB8DqEmNGcLwx0lj+4CohXQjnBACJJG4F0PyXV6coUjbQwy+4gTh62BAYull27OaD3jsRTwX7rnqSpFpt0jFQmmz/bhh7mHXVjsJPSULJizMaZcodTfDpCuQn08LJXE/NDZdtLH2hADxQhWqScFFbZIdGL+xUihFgUqalGLqD3y2YCB+oog==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Mykyta Poturai <Mykyta_Poturai@epam.com>,
@@ -80,14 +80,14 @@ CC: Mykyta Poturai <Mykyta_Poturai@epam.com>,
 	<bertrand.marquis@arm.com>,
         Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
         Michal Orzel <michal.orzel@amd.com>
-Subject: [XEN PATCH v2 07/25] arm: new VGIC: Add GICv3 IROUTER register
- handlers
-Thread-Topic: [XEN PATCH v2 07/25] arm: new VGIC: Add GICv3 IROUTER register
- handlers
-Thread-Index: AQHaE9VLou6qA6symUe+SqqE2YPjzQ==
-Date: Fri, 10 Nov 2023 12:56:18 +0000
+Subject: [XEN PATCH v2 05/25] arm: new VGIC: Add GICv3 redistributor IIDR and
+ TYPER handler
+Thread-Topic: [XEN PATCH v2 05/25] arm: new VGIC: Add GICv3 redistributor IIDR
+ and TYPER handler
+Thread-Index: AQHaE9VL00f8rSPwJ0KirkGhv4uq5Q==
+Date: Fri, 10 Nov 2023 12:56:17 +0000
 Message-ID: 
- <db07985e055865947ebeee6f1392c33e48120db4.1699618395.git.mykyta_poturai@epam.com>
+ <e07041f75b4cdf6141a1a939855f9721f15d692b.1699618395.git.mykyta_poturai@epam.com>
 References: <cover.1699618395.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1699618395.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -96,45 +96,45 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DB3PR0302MB9063:EE_
-x-ms-office365-filtering-correlation-id: abf56879-3d2a-46e2-acac-08dbe1ec6e90
+x-ms-office365-filtering-correlation-id: 0f7f8033-a143-46f9-2709-08dbe1ec6e2a
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- +d9qAtnqYZ7C/VzIhfI+yfOAOHZlElwqyqTMxs7+OCoFk8j5BTx9DyCX1WzY3B5wIrms8WQq+iynL0LM7iweDfNIoEClFgvQOzu507Vr1pU0waBuqpHf55Gx/KJPynee/0WMGplG2iwGknlk0GnCg7ee3EONug36z2i3eLOWCWzYSTAmfwqss83HpEwH/+E9DU/GsFZMzrJ94qta8G/Iz9mCSaL5Am6d2mBZpm4lNl0mhdgAVKltfGgYG2Sy6GhN5sh1MBV3a9yJdAM9nbeAmFqfrVS8Dm6YA9zj0D4AAggZVfi3JgIb3+mcbj5IUg9Ohk0CuT9gnKj4364POosv6gbPILiLG/3iPIZMvu+eWSXrV4+peSYK32wxbauAJmVXbm4PnoU6BOVGlq5J44zFI32dJwXsHY9nP522nRtreYRnDEtnmhGu6U1VhLQOzeKvCYA6uspQubju4Z7K6cA4yrXe9vszGj9CMSGwn1dVQrAa+C7sHIalKA32ixLfxeXtZXzC0CpQ+qgrN1hurlgHXGNgOI6aOGqxugOQI1piWfE8VmUAbghV3d9HEoq/EE4MNq6XTWbmJ9x4Gcu5DVOmLcJfOr+BtBU1DcwqhAH76e54ozcDUCxr10dVEaUcFW4y
+ efwsLLG2yZFY6Z8jyywI3ZQPhNMVYHJKLdQeDsLVLGjwKCxy4HJ3EUh6u6rWnWEVKf8NhyvSF8kCeXv83ZiGlcPKFAH05AhYTiCMTMsJV6UphkmX71hzf+D/XRKI8c1F9uvUAHG0eGUpzmQ3dFveFPK1R/bLAw2XG5yQh/PjGKDXaKNE68DbTB9V8DjGF26109mq1BHZqyZIf0Z8Blb19k9R9Zu9tuECBM+ZB4EN7JmQwM2uq7rVNFQ6wxSfH+TIMHNW2fB77yuNnXpnf7uKrMwMQB/kIe33QQGCLRqEOyPP1o+HRG2CRxO+yPqBzxuwBpA8SNh+EJsegW93IxjFspsmT/DbdvdtIFbTtVAQfAqo//G1aeN47Hbg5yjAc6c6UFE/fn6MlZWVwDLsiS+md2cZBuzxYZTiSfvPbKJCmRvKeeuQ7ZrJMMIR6bGeqhuGKcS10p0cfxIrLDC5CsOQpmTAvV0uLGPhjVK5tqulZPo0UGDovlhyYDYbWWbkXzQC1co9ZX5PJIF8JkCHa74el3/etnmHq8us73pgNFdxhaZZfsadMwQskTqg1d2JjZWKUDE07tROfZOPJ6pkj2nEjifA/vzmzug3OC6P3o2KzhypjIFxRLdwwftvVgCmxV9+
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(346002)(396003)(366004)(376002)(39860400002)(230922051799003)(451199024)(1800799009)(186009)(64100799003)(66556008)(86362001)(6512007)(6506007)(66946007)(66446008)(36756003)(66476007)(8936002)(76116006)(91956017)(8676002)(71200400001)(38100700002)(4326008)(26005)(5660300002)(6916009)(2616005)(6486002)(64756008)(316002)(478600001)(54906003)(2906002)(122000001)(41300700001)(83380400001)(38070700009);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?YinFnRPE/5XM8TMG+RC7xubF8VmO30iOrbRWT/Xutl/O6q52oRIGUbmDAN?=
- =?iso-8859-1?Q?opwMcC/sKIfPOwTKsbywsf5ZsHhaTy3eTks3bzGpBZxDLLbCDfyZnZeHdp?=
- =?iso-8859-1?Q?L71zL5bFAC+Zw5Hr9qd+MQNR/3JsL5VaLPdZcddQisp2wuQ9rZWof3rFTI?=
- =?iso-8859-1?Q?m0DoNHonxKw+uGNqTb8rgHSyXknJB8Q2wzppbwfcQ3TMzLabLvuadXHeLt?=
- =?iso-8859-1?Q?SUvrV5oLebwBqU+Q2iLL5cy0zE3YrVqMtdOQCxXjD+09H7fPjWSx7lGS/5?=
- =?iso-8859-1?Q?KaErOZFnkKR8M+K4J2W0r+mzcx47iB3KVzBrH5O5szB34qjkXEJF0I3qxu?=
- =?iso-8859-1?Q?BkwCFSNqkApMplYWeqSrKm0NyfCP76BeS9DVfloTg8BZgfXsn0570o1F2U?=
- =?iso-8859-1?Q?3/dFxRf77NAF3Xv2pvaw+I4oj+JUOJgAPkXwt4MppE6XUVdq9TRZdGaPDB?=
- =?iso-8859-1?Q?0Li3gjkiGOwq7QSWKbi7GpH4d1pooRmTW7CYJ8V39iCGZQjDIfD9QrtXHo?=
- =?iso-8859-1?Q?1CZ8SSNW3brlM023AHOuDt3ndbpMzN5mAqOYDEvGuuWCO4TD2LFM8zs9ex?=
- =?iso-8859-1?Q?1IBmPTEYO9DRAGxrcPOLy2sk0/CG8dT+RU7IANHooPzwfNOAmm47w95dd8?=
- =?iso-8859-1?Q?f/Nr3bglI7lyL7hjCefqzHVk+SCXQdRJtT6AaD9rFat+KUL8fBvpVOyxJV?=
- =?iso-8859-1?Q?dejInEdCyBRMKzPfbMxNl1QZgFTK8+mC+RCEFtxVrMF4Qzn2ZMt0u4lSVB?=
- =?iso-8859-1?Q?M3Uo/inGZEYr8DfqqOPQNTRGse8vL0xnoxSSkNdt4wE+tQ0VvLok9Vw/Sz?=
- =?iso-8859-1?Q?gaom5kqkbTIL6411rgITdtV3e9SiMfjONDZRJZIfeygQdb0UYuuhvFkkrT?=
- =?iso-8859-1?Q?6WyWjoe/8l1b0vXN0hgi12gW4PV1uutm7VxKH8JXLaAK243/G7ifxFEr87?=
- =?iso-8859-1?Q?aq3LRgYbSzeJ09zB47Qqy8CdISJNBFYmHOwBKDJdrQY4aI3yE4XYx2RCS7?=
- =?iso-8859-1?Q?qTmH5AptjFtnlYDVIhtMr0xzkLgLxFPy/AytPtmNGiT/yPQITZkXuV2yM8?=
- =?iso-8859-1?Q?9rOE29x8zVRUjWulW7Mvfpc06bzC+LdNRS2rNmY2oROEA0C7JNR0GTFLDz?=
- =?iso-8859-1?Q?uy8xk9/rKIeEnItibuO4VowdNOmvUVxuFNUpOg5NgyKGHcXwTzg1GYMWqa?=
- =?iso-8859-1?Q?OhazMJqwimulUVzEoaAeR5S2JnVrBgjJd5sQL99hjXCopoNxnvkH5tzvG2?=
- =?iso-8859-1?Q?yN43AvSKmQil6yR79f5OCDoYunJUehY9Eym9t/7DMg3uTety1fEs5ZYBAy?=
- =?iso-8859-1?Q?mpEPMSgaKgIPhbN5sGSAZITnAQcDO7/U3HkJPZ3OaRs2IIndFY0pM5cSZI?=
- =?iso-8859-1?Q?EwsTjxrPNA2ly5U2UV8GMGwv0G9D32ixUG7HOQaUjigr0aQGZ8aDg1fImF?=
- =?iso-8859-1?Q?RdJz3Ei0ptbgiJmKAMX+p8nJMR4/dVSCPRnf0P7YJed7GXunYOX+MCZghM?=
- =?iso-8859-1?Q?LmsElnF/Ls/pvOCwXQ56FwaLX1ugr13L4UhfFI/4ZJiEGa5muda2cRkEOJ?=
- =?iso-8859-1?Q?Ps00X93KkEaXAq5EOwtyuUmhw2dUQKe9yUKX4S96SrvAkBEbhsPP91juOT?=
- =?iso-8859-1?Q?2Lrr8mX2vK/+zuBSLDDZ5PklqqbB8TWEVMeyTsPwaUyGh2gjlAdxtLTQ?=
+ =?iso-8859-1?Q?hZh1ks05FwnMIzJLppAdA70WnCx89WQTWvXJjZ9pBd4kJLCn9ca1v/tg8u?=
+ =?iso-8859-1?Q?j5uoO0uC/ys670+SCySOOS+SzPgpuYW3R3NwTa4U5Cx+Hew66JJlqumm/7?=
+ =?iso-8859-1?Q?TaaxMLDg1v9siK4OUoSG7yj5MLuCFrxrMIim2qqTVzUfV1TgUMXWHBc2Na?=
+ =?iso-8859-1?Q?xaNxH6Z/r/nBAxojo22PQK9g3/j2TsjLCvuXrq92ERJIHQWGH5ECU/ns1k?=
+ =?iso-8859-1?Q?Fizq/fbzM8ohtrLO593D4YOCbJdrQVWLNo4eNzUQKymsviWZwChMY9pPC5?=
+ =?iso-8859-1?Q?H/D+OFLevEv4+CoG09BkvgROUlOLTw3TSGT0Mr7vVY9kxAhdeNnbRcKygW?=
+ =?iso-8859-1?Q?PfkRim0HjqkaqnLzQKReDHty71Xv/8WD3bPIQptYunbnUboK+VuhZkH+2F?=
+ =?iso-8859-1?Q?nAEv6smi5M8XvRbXUVdU1jDleRhZHoAFPJonC/pBWp1WNgTsu0uTmDxmL0?=
+ =?iso-8859-1?Q?FsuMjnpEc/OOaPwWhdz3fB0I+MxvPTIPakEvzgZg8Ssuq4+uz/UTqkY7u5?=
+ =?iso-8859-1?Q?kejBVFJRFCM+aSM2MuoY8oxHN+68dC/8SV2IJanuEb4i1HPKIgWkd/SKe7?=
+ =?iso-8859-1?Q?AguBl5BlmPi9+HPm5TNCys0kBVYLuFfNsnAR5nOkKyZmi5oEcya/NS/wD5?=
+ =?iso-8859-1?Q?+ZToq8p9Q6UHFaTzQ6oJ8IGcjsZb0NNip9P0zdlu7eju5HwLOaxzyoPUS+?=
+ =?iso-8859-1?Q?UG5gUQZ5J7d4doDPPEm+I9QknMWL8SxZRGCOdlSZ0/DfvCXJjkeLC+hmXJ?=
+ =?iso-8859-1?Q?QpcIcy8bqqUsSUnlXiqQAZZQ0Oj2h470eLeaM0qFfJJYP5fGfCfIMfSTVT?=
+ =?iso-8859-1?Q?NWrROyydoCiE7piK39Xpz3qDPHxby0Z67TvrIeJYB6dmwXMQEoJNhN5Ate?=
+ =?iso-8859-1?Q?AI5XynQaZPvV+PHHDvQug00Fl2esPeObTN0bIrDt5L/GRN5eG2DnalawLL?=
+ =?iso-8859-1?Q?m1rK1AsSdyrgrwCwogyn36XNeFYIycghX3RL8w2wEYQNngdsKRoiCHDi3v?=
+ =?iso-8859-1?Q?Fwq4oJ0hKjZLQECzgLwnBf+3crdGn3bMTGygVRtaJOc2PSac3gjGPbGh8o?=
+ =?iso-8859-1?Q?Ss+Q9ACP8UQrrjo1ukH/KYmGPAed/7EY6VqU97X8eH53wLXA5ZhEjUp2cS?=
+ =?iso-8859-1?Q?OWIXcNEkVHrYotwvNhc5KVVzErpzubVSoVC5iSQIaH5c6wBCK0/aHf+ean?=
+ =?iso-8859-1?Q?QKa98jGoakJEC1Nv7p6tsbVWFvxPjr6f8lgtOHhKNEHYPDFG6LtUCbr467?=
+ =?iso-8859-1?Q?o8LQ3F8lVZt9d5DxCCIpaOD6RzXXy2V00qaiACqJRtfId36ZUPUK5lKTwc?=
+ =?iso-8859-1?Q?ymWW7HjX3alCSOXaBu2Waa4jcJAQDqIAkw1+gu3JDOKsCbg9P2+r6lDM3u?=
+ =?iso-8859-1?Q?BDZFwlXRnxGFYNeMqKAjFU86SKPKKytxx5oZHSHLfwfngIol4Zp+84f0DC?=
+ =?iso-8859-1?Q?0hoOp1yNJScj+lRleCMFbCopvg1UY32c38ltFndY54mNjOrMcXClf3iD2z?=
+ =?iso-8859-1?Q?SMzLcw5MFYUeFTfuy50NF/ZK+n2gw+5rQhe6HvmvZfaAXr2XNGtXDubcMK?=
+ =?iso-8859-1?Q?sS5bJF3bjGC6an2H6KQXAKsxGQF6qCPmqROXFVLhkvrNOQvF2UeN3N6FXs?=
+ =?iso-8859-1?Q?ZGgGSZJOJkHpomdzUWViV9jM9vcjwV8jes442SV2rRMi9andtsBVZw5A?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -142,132 +142,133 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: abf56879-3d2a-46e2-acac-08dbe1ec6e90
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 12:56:18.4267
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0f7f8033-a143-46f9-2709-08dbe1ec6e2a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 12:56:17.6259
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: TXMV9z3B58K+PF7vXxNKopjHfIrpNjs5jTuXvxcHwOqiKXNm7v8BYNEcxV02qoUoRsfVk5TLq5KuOvBfxnb5/A==
+X-MS-Exchange-CrossTenant-userprincipalname: DqkaOknF/vZrURWnSXlUj4ySUD6kW3a5aL18z9ub0S278IHmP3D2VIzh+WiFUvNhMDnVkD7XcajTFr95DGtx3A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR0302MB9063
-X-Proofpoint-ORIG-GUID: o6iGCl1vHwd9BVrGE0bIHk8fV3Vwwvtk
-X-Proofpoint-GUID: o6iGCl1vHwd9BVrGE0bIHk8fV3Vwwvtk
+X-Proofpoint-ORIG-GUID: YkRQIsWeqjlxtxDB-HdRWnhZtjNIiqKL
+X-Proofpoint-GUID: YkRQIsWeqjlxtxDB-HdRWnhZtjNIiqKL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-11-10_09,2023-11-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 mlxlogscore=999
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 mlxlogscore=994
  adultscore=0 spamscore=0 malwarescore=0 suspectscore=0 bulkscore=0
  impostorscore=0 phishscore=0 priorityscore=1501 clxscore=1015
  lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2311060000 definitions=main-2311100106
 
-Since GICv3 supports much more than the 8 CPUs the GICv2 ITARGETSR
-register can handle, the new IROUTER register covers the whole range
-of possible target (V)CPUs by using the same MPIDR that the cores
-report themselves.
-In addition to translating this MPIDR into a vcpu pointer we store
-the originally written value as well. The architecture allows to
-write any values into the register, which must be read back as written.
+The redistributor TYPER tells the OS about the associated MPIDR,
+also the LAST bit is crucial to determine the number of redistributors.
 
-Since we don't support affinity level 3, we don't need to take care
-about the upper word of this 64-bit register, which simplifies the
-handling a bit.
-
-Based on Linux commit 78a714aba03039 by Andre Przywara
+Based on Linux commit 741972d8a69ce74 by Andre Przywara
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
- xen/arch/arm/vgic/vgic-mmio-v3.c | 59 +++++++++++++++++++++++++++++++-
- 1 file changed, 58 insertions(+), 1 deletion(-)
+ xen/arch/arm/vgic/vgic-mmio-v3.c | 65 +++++++++++++++++++++++++++++++-
+ 1 file changed, 63 insertions(+), 2 deletions(-)
 
 diff --git a/xen/arch/arm/vgic/vgic-mmio-v3.c b/xen/arch/arm/vgic/vgic-mmio=
 -v3.c
-index ccdf3b9456..3d892a68cb 100644
+index beb3d6ad2a..707a38c727 100644
 --- a/xen/arch/arm/vgic/vgic-mmio-v3.c
 +++ b/xen/arch/arm/vgic/vgic-mmio-v3.c
-@@ -22,6 +22,19 @@
+@@ -22,6 +22,13 @@
  #include "vgic.h"
  #include "vgic-mmio.h"
 =20
-+static struct vcpu *mpidr_to_vcpu(struct domain *d, unsigned long mpidr)
++/* extract @num bytes at @offset bytes offset in data */
++unsigned long extract_bytes(uint64_t data, unsigned int offset,
++                            unsigned int num)
 +{
-+    struct vcpu *vcpu;
-+
-+    mpidr &=3D MPIDR_HWID_MASK;
-+    for_each_vcpu(d, vcpu)
-+    {
-+        if ( mpidr =3D=3D vcpuid_to_vaffinity(vcpu->vcpu_id) )
-+            return vcpu;
-+    }
-+    return NULL;
++    return (data >> (offset * 8)) & GENMASK_ULL(num * 8 - 1, 0);
 +}
 +
- /* extract @num bytes at @offset bytes offset in data */
- unsigned long extract_bytes(uint64_t data, unsigned int offset,
-                             unsigned int num)
-@@ -98,6 +111,50 @@ static void vgic_mmio_write_v3_misc(struct vcpu *vcpu, =
-paddr_t addr,
+ /*
+  * The Revision field in the IIDR have the following meanings:
+  *
+@@ -91,6 +98,60 @@ static void vgic_mmio_write_v3_misc(struct vcpu *vcpu, p=
+addr_t addr,
      }
  }
 =20
-+static unsigned long vgic_mmio_read_irouter(struct vcpu *vcpu, paddr_t add=
-r,
-+                                            unsigned int len)
++static bool vgic_mmio_vcpu_rdist_is_last(struct vcpu *vcpu)
 +{
-+    int intid            =3D VGIC_ADDR_TO_INTID(addr, 64);
-+    struct vgic_irq *irq =3D vgic_get_irq(vcpu->domain, NULL, intid);
-+    unsigned long ret    =3D 0;
++    struct vgic_dist *vgic    =3D &vcpu->domain->arch.vgic;
++    struct vgic_cpu *vgic_cpu =3D &vcpu->arch.vgic;
++    struct vgic_redist_region *iter, *rdreg =3D vgic_cpu->rdreg;
 +
-+    if ( !irq )
-+        return 0;
++    if ( !rdreg )
++        return false;
 +
-+    /* The upper word is RAZ for us. */
-+    if ( !(addr & 4) )
-+        ret =3D extract_bytes(irq->mpidr, addr & 7, len);
++    if ( vgic_cpu->rdreg_index < rdreg->free_index - 1 )
++    {
++        return false;
++    }
++    else if ( rdreg->count && vgic_cpu->rdreg_index =3D=3D (rdreg->count -=
+ 1) )
++    {
++        struct list_head *rd_regions =3D &vgic->rd_regions;
++        paddr_t end =3D rdreg->base + rdreg->count * VGIC_V3_REDIST_SIZE;
 +
-+    vgic_put_irq(vcpu->domain, irq);
-+    return ret;
++        /*
++         * the rdist is the last one of the redist region,
++         * check whether there is no other contiguous rdist region
++         */
++        list_for_each_entry(iter, rd_regions, list)
++        {
++            if ( iter->base =3D=3D end && iter->free_index > 0 )
++                return false;
++        }
++    }
++    return true;
 +}
 +
-+static void vgic_mmio_write_irouter(struct vcpu *vcpu, paddr_t addr,
-+                                    unsigned int len, unsigned long val)
++static unsigned long vgic_mmio_read_v3r_typer(struct vcpu *vcpu, paddr_t a=
+ddr,
++                                              unsigned int len)
 +{
-+    int intid =3D VGIC_ADDR_TO_INTID(addr, 64);
-+    struct vgic_irq *irq;
-+    unsigned long flags;
++    unsigned long mpidr =3D vcpuid_to_vaffinity(vcpu->vcpu_id);
++    int target_vcpu_id  =3D vcpu->vcpu_id;
++    u64 value;
 +
-+    /* The upper word is WI for us since we don't implement Aff3. */
-+    if ( addr & 4 )
-+        return;
++    value =3D (u64)(mpidr & GENMASK(23, 0)) << 32;
++    value |=3D ((target_vcpu_id & 0xffff) << 8);
 +
-+    irq =3D vgic_get_irq(vcpu->domain, NULL, intid);
++    if ( vgic_mmio_vcpu_rdist_is_last(vcpu) )
++        value |=3D GICR_TYPER_LAST;
 +
-+    if ( !irq )
-+        return;
-+
-+    spin_lock_irqsave(&irq->irq_lock, flags);
-+
-+    /* We only care about and preserve Aff0, Aff1 and Aff2. */
-+    irq->mpidr       =3D val & GENMASK(23, 0);
-+    irq->target_vcpu =3D mpidr_to_vcpu(vcpu->domain, irq->mpidr);
-+
-+    spin_unlock_irqrestore(&irq->irq_lock, flags);
-+    vgic_put_irq(vcpu->domain, irq);
++    return extract_bytes(value, addr & 7, len);
 +}
 +
- static bool vgic_mmio_vcpu_rdist_is_last(struct vcpu *vcpu)
- {
-     struct vgic_dist *vgic    =3D &vcpu->domain->arch.vgic;
-@@ -206,7 +263,7 @@ static const struct vgic_register_region vgic_v3_dist_r=
++static unsigned long vgic_mmio_read_v3r_iidr(struct vcpu *vcpu, paddr_t ad=
+dr,
++                                             unsigned int len)
++{
++    return (PRODUCT_ID_KVM << 24) | (VARIANT_ID_XEN << 16) |
++           (IMPLEMENTER_ARM << 0);
++}
++
+ static const struct vgic_register_region vgic_v3_dist_registers[] =3D {
+     REGISTER_DESC_WITH_LENGTH(GICD_CTLR,
+         vgic_mmio_read_v3_misc, vgic_mmio_write_v3_misc,
+@@ -148,10 +209,10 @@ static const struct vgic_register_region vgic_v3_rd_r=
 egisters[] =3D {
-         vgic_mmio_read_raz, vgic_mmio_write_wi, 1,
+         vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
          VGIC_ACCESS_32bit),
-     REGISTER_DESC_WITH_BITS_PER_IRQ(GICD_IROUTER,
--        vgic_mmio_read_raz, vgic_mmio_write_wi, 64,
-+        vgic_mmio_read_irouter, vgic_mmio_write_irouter, 64,
+     REGISTER_DESC_WITH_LENGTH(GICR_IIDR,
+-        vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
++        vgic_mmio_read_v3r_iidr, vgic_mmio_write_wi, 4,
+         VGIC_ACCESS_32bit),
+     REGISTER_DESC_WITH_LENGTH(GICR_TYPER,
+-        vgic_mmio_read_raz, vgic_mmio_write_wi, 8,
++        vgic_mmio_read_v3r_typer, vgic_mmio_write_wi, 8,
          VGIC_ACCESS_64bit | VGIC_ACCESS_32bit),
-     REGISTER_DESC_WITH_LENGTH(GICD_IDREGS,
-         vgic_mmio_read_v3_idregs, vgic_mmio_write_wi, 48,
+     REGISTER_DESC_WITH_LENGTH(GICR_WAKER,
+         vgic_mmio_read_raz, vgic_mmio_write_wi, 4,
 --=20
 2.34.1
 
