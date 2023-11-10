@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B60CC4167D
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:23:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630577.983568 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B9F1C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:23:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630580.983590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UHQ-0006rL-Qt; Fri, 10 Nov 2023 16:22:48 +0000
+	id 1r1UHg-0008Lp-27; Fri, 10 Nov 2023 16:23:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630577.983568; Fri, 10 Nov 2023 16:22:48 +0000
+Received: by outflank-mailman (output) from mailman id 630580.983590; Fri, 10 Nov 2023 16:23:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UHQ-0006py-J4; Fri, 10 Nov 2023 16:22:48 +0000
-Received: by outflank-mailman (input) for mailman id 630577;
- Fri, 10 Nov 2023 16:22:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r1UHf-0008Lg-Uw; Fri, 10 Nov 2023 16:23:03 +0000
+Received: by outflank-mailman (input) for mailman id 630580;
+ Fri, 10 Nov 2023 16:23:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ap16=GX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r1U4q-00048H-BB
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:09:48 +0000
+ id 1r1U5D-0004cS-RJ
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:10:11 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 91eb3491-7fe3-11ee-98da-6d05b1d4d9a1;
- Fri, 10 Nov 2023 17:09:47 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9f34dd96-7fe3-11ee-9b0e-b553b5be7939;
+ Fri, 10 Nov 2023 17:10:10 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A924C219B3;
- Fri, 10 Nov 2023 16:09:47 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id EC087219B4;
+ Fri, 10 Nov 2023 16:10:09 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7526D13398;
- Fri, 10 Nov 2023 16:09:47 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C169613398;
+ Fri, 10 Nov 2023 16:10:09 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id IHdAG8tVTmUqCQAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 10 Nov 2023 16:09:47 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id gH/kLeFVTmVeCQAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 10 Nov 2023 16:10:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,97 +53,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91eb3491-7fe3-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 9f34dd96-7fe3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1699632587; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1699632609; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xNe8mrte8l3zt8GAD/vWfM/ysJb8YxQM0ihzz8RCAYI=;
-	b=ucxlTLAXKFAcGDQbY9fAu0mQd7o0xCebfdSQCjL7xOhZ94FSMZpLWABLGr2nHNTUk1EKH4
-	xZug1sGyzKygMXjT0O7zLXGMmKC+oBdSAIDhyURU8FCzBkP6IobYQlrHF1bj9jf4wWZ61k
-	vj9ZZPF36c1WVYUjb10Pggdq4Mpot5g=
+	bh=oAZKhBAd6GT93Obj94j3yjFdAss/Va3cfRb6VorS53Y=;
+	b=pYmsLvxEBdeltPTcFGkEkHv24YTfJNEAC2lyvak5KOpvB+amuNQODE61RgjMGa5hJAVA74
+	J97NxeTvPXhfG4VWOqCZp+twRFdYig+Tg6zQVK824PZ0iMqke+MmeT4bxQtr55fEnJadUm
+	JwVDVfdGnY33teaiWL2DvaMT9AYyNkU=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v2 18/29] tools/xenstored: rename xenbus_evtchn()
-Date: Fri, 10 Nov 2023 17:07:53 +0100
-Message-Id: <20231110160804.29021-19-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 22/29] tools/xenstored: get own domid in stubdom case
+Date: Fri, 10 Nov 2023 17:07:57 +0100
+Message-Id: <20231110160804.29021-23-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231110160804.29021-1-jgross@suse.com>
 References: <20231110160804.29021-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Rename the xenbus_evtchn() function to get_xenbus_evtchn() in order to
-avoid two externally visible symbols with the same name when Xenstore-
-stubdom is being built with a Mini-OS with CONFIG_XENBUS set.
+Obtain the own domid from the Xenstore special grant entry when running
+as stubdom.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstored/core.h   | 2 +-
- tools/xenstored/domain.c | 2 +-
- tools/xenstored/minios.c | 2 +-
- tools/xenstored/posix.c  | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+V2:
+- replacement of V1 patch (ANdrew Cooper)
+---
+ tools/xenstored/core.c   | 1 +
+ tools/xenstored/core.h   | 1 +
+ tools/xenstored/minios.c | 5 +++++
+ 3 files changed, 7 insertions(+)
 
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 0c14823fb0..8e271e31f9 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -2738,6 +2738,7 @@ static struct option options[] = {
+ int dom0_domid = 0;
+ int dom0_event = 0;
+ int priv_domid = 0;
++int stub_domid = -1;
+ 
+ static unsigned int get_optval_uint(const char *arg)
+ {
 diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
-index ad87199042..480b0f5f7b 100644
+index d0ac587f8f..3c28007d11 100644
 --- a/tools/xenstored/core.h
 +++ b/tools/xenstored/core.h
-@@ -383,7 +383,7 @@ static inline bool domain_is_unprivileged(const struct connection *conn)
- }
+@@ -361,6 +361,7 @@ do {						\
+ extern int dom0_domid;
+ extern int dom0_event;
+ extern int priv_domid;
++extern int stub_domid;
+ extern bool keep_orphans;
  
- /* Return the event channel used by xenbus. */
--evtchn_port_t xenbus_evtchn(void);
-+evtchn_port_t get_xenbus_evtchn(void);
- 
- /* Write out the pidfile */
- void write_pidfile(const char *pidfile);
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 409b53acf9..6ef136e01f 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -1208,7 +1208,7 @@ void dom0_init(void)
- 	evtchn_port_t port;
- 	struct domain *dom0;
- 
--	port = xenbus_evtchn();
-+	port = get_xenbus_evtchn();
- 	if (port == -1)
- 		barf_perror("Failed to initialize dom0 port");
- 
+ extern unsigned int timeout_watch_event_msec;
 diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
-index b5c3a205e6..0779efbf91 100644
+index 0cdec3ae51..202d70387a 100644
 --- a/tools/xenstored/minios.c
 +++ b/tools/xenstored/minios.c
-@@ -38,7 +38,7 @@ void init_pipe(int reopen_log_pipe[2])
- 	reopen_log_pipe[1] = -1;
- }
+@@ -19,6 +19,8 @@
+ #include <sys/mman.h>
+ #include "core.h"
+ #include <xen/grant_table.h>
++#include <mini-os/events.h>
++#include <mini-os/gnttab.h>
  
--evtchn_port_t xenbus_evtchn(void)
-+evtchn_port_t get_xenbus_evtchn(void)
+ void write_pidfile(const char *pidfile)
  {
- 	return dom0_event;
- }
-diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
-index 6ac45fdb45..7e03dd982d 100644
---- a/tools/xenstored/posix.c
-+++ b/tools/xenstored/posix.c
-@@ -111,7 +111,7 @@ void unmap_xenbus(void *interface)
- 	munmap(interface, getpagesize());
- }
+@@ -56,4 +58,7 @@ void unmap_xenbus(void *interface)
  
--evtchn_port_t xenbus_evtchn(void)
-+evtchn_port_t get_xenbus_evtchn(void)
+ void early_init(void)
  {
- 	int fd;
- 	int rc;
++	stub_domid = evtchn_get_domid();
++	if (stub_domid == DOMID_INVALID)
++		barf("could not get own domid");
+ }
 -- 
 2.35.3
 
