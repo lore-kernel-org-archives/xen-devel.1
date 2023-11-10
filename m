@@ -4,46 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551CDC4167B
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 20:43:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630794.983897 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87067C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 21:57:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630815.983947 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1YKs-0005Ds-04; Fri, 10 Nov 2023 20:42:38 +0000
+	id 1r1ZVE-0007XO-Nu; Fri, 10 Nov 2023 21:57:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630794.983897; Fri, 10 Nov 2023 20:42:37 +0000
+Received: by outflank-mailman (output) from mailman id 630815.983947; Fri, 10 Nov 2023 21:57:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1YKr-0005Dl-Tm; Fri, 10 Nov 2023 20:42:37 +0000
-Received: by outflank-mailman (input) for mailman id 630794;
- Fri, 10 Nov 2023 20:42:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r1ZVE-0007XH-LP; Fri, 10 Nov 2023 21:57:24 +0000
+Received: by outflank-mailman (input) for mailman id 630815;
+ Fri, 10 Nov 2023 21:57:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vE0U=GX=epam.com=prvs=56783987ff=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1r1YKq-0004yp-H5
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 20:42:36 +0000
-Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aadc3ae5-8009-11ee-9b0e-b553b5be7939;
- Fri, 10 Nov 2023 21:42:32 +0100 (CET)
-Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3AAKIjQt010025; Fri, 10 Nov 2023 20:42:27 GMT
-Received: from eur05-am6-obe.outbound.protection.outlook.com
- (mail-am6eur05lp2104.outbound.protection.outlook.com [104.47.18.104])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3u9kkysufj-3
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 10 Nov 2023 20:42:27 +0000
-Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
- by DB3PR0302MB8991.eurprd03.prod.outlook.com (2603:10a6:10:437::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Fri, 10 Nov
- 2023 20:42:23 +0000
-Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
- ([fe80::8e03:368:1fd7:1822]) by VI1PR03MB3710.eurprd03.prod.outlook.com
- ([fe80::8e03:368:1fd7:1822%5]) with mapi id 15.20.6977.019; Fri, 10 Nov 2023
- 20:42:23 +0000
+ <SRS0=YK6u=GX=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1r1ZVD-0007XB-4p
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 21:57:23 +0000
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+ [209.85.221.53]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1f740cd3-8014-11ee-98da-6d05b1d4d9a1;
+ Fri, 10 Nov 2023 22:57:21 +0100 (CET)
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-32fe1a29010so1381020f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Nov 2023 13:57:21 -0800 (PST)
+Received: from [192.168.1.10] (host-92-26-107-252.as13285.net. [92.26.107.252])
+ by smtp.gmail.com with ESMTPSA id
+ z8-20020a5d6548000000b0032da75af3easm196746wrv.80.2023.11.10.13.57.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Nov 2023 13:57:14 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,157 +46,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aadc3ae5-8009-11ee-9b0e-b553b5be7939
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C7dj0MfiNhBcQRxOXWlLu+E8hDVjZ4M/bAd97c+F09PNhDkq6PB+58Oi811KA+U5QsX5i6jHY4e4Wt4304XprWFNR+t9Y1qankKjmD2epfw3E0+T3I03rBmXx+NetH7LdEmJiposO5pEv9bvgYxaXpcxjEeAmEcQhS0I/Hc70HsC9gyYkKKtfnbgVfAYQuBB9Ri4B/IiUmb1C6wBt99wQwM2E901Fvxbm98VwtGuGbd3bgD6on+6gRW/ooMP5fDZzdBVJOZ+4pPJ38qj4NF3b7Vi9P/jhzRNv5vANNXd3LCoV9W7jeLSBRXeCCpysC2Nvu92PqBlcLZI8M1/TK4L8w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OKWARBfkUGbfwrphZNisw+1lvrxJ4IcHq6RYQnSJRuE=;
- b=E26+7tTYs5Vb45W2X5Nga72XsY/IoP4LX8fHXDkAKXZ3PlYsLbh18raJ81iZQQZQaG/38GWH2SXgy2gBvEeLdnZqdHnuRsMrF9Syp6sUTtXkFnx6JHw56Qx26e6vqlouKJmhJrZ2oPAc7YpOr45xmPX4EJsuvW6HLTMltwc6OnCccYKWckVf/AacYqMaMEvVwCHHO6QxqH51Rz8C8qx4VZ+mB/M6aSTQIBFuOQ0SxT7uF34qklJf+YjON8lbkVjz3i2JLNmwaoJEwt5Wods5c9nn9wpyI85lO3qkXITNoBsYlsYXhlxsBvlFiyRjrJeVnRvlISWt5V1ohCRtTDQH0Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OKWARBfkUGbfwrphZNisw+1lvrxJ4IcHq6RYQnSJRuE=;
- b=BNIe2UUcVtrvYCL9/nRZ8oH+N9+9MFwo/bxvlJYU2vxi9rwIjIG4xzlfR6qCon+lH0nZukftKOSbzv9+QhFxqPaer3/YbFsVYJgh9sEvZUBTrClVJNqeCwwn15h8fE5/XYEv570YZQondgAKe/DiAY7fw5EPdwJ8Eua/iBVIYeKmheCl7ZHRJOWS39KaawYKdE+2nL1vDqojC9LSUul/lIcDMA/S9vCXqhTW26nYOaer9MtkzMifC7lAU1YiOuUq4h6pFMpUrMovytMg3IdavnLWNzZ8lQICWvk7aKYxd/x/xlYya7E1fHHRqv65rv3x4iZupqr0YTRyny0jewleqg==
-From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-CC: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
-        Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Anthony Perard <anthony.perard@citrix.com>,
-        Paul Durrant <paul@xen.org>,
-        "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
-Subject: [PATCH v1 2/7] xen-bus: Do not destroy frontend/backend directories
-Thread-Topic: [PATCH v1 2/7] xen-bus: Do not destroy frontend/backend
- directories
-Thread-Index: AQHaFBZnKqlUX8wCr0GIKTREthBW5Q==
-Date: Fri, 10 Nov 2023 20:42:22 +0000
-Message-ID: <20231110204207.2927514-3-volodymyr_babchuk@epam.com>
-References: <20231110204207.2927514-1-volodymyr_babchuk@epam.com>
-In-Reply-To: <20231110204207.2927514-1-volodymyr_babchuk@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.42.0
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|DB3PR0302MB8991:EE_
-x-ms-office365-filtering-correlation-id: 5bc8600f-bd49-4902-caac-08dbe22d8aac
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- eMdTJYD8hdUfjYRSfS49W/otw7oU2rlT7EZkqGf1DooukUiBpoK9jUnSvMo2/4ejhwEJ1TSlJM5alts0x+Q479PTwHvu/NmPcKGtNDr8igBN8spOOATeULQnekd/nSG0cBsaLpkYBK4EUYoxNCb3Q2I9ihpv16U8AJXZzJd5s6DXEJPy8FfmB89UQzL2aL8SR26X5D01s9hhOQz17EZwAez1TlmGPRyZSYhJpsQ/mSuXx6x6bWP8e357/R6lQLBEPgnSLvr9+9AtMnYpFUr1bm373HTNNxO3xRPbXCViW4PZ3zh7opC8t2DMKjryPRiGBzPoDLxkmzJnMCKRxGv8inoZmYazCg58+FR2hId6cZKyJ6IzeqQSLTK+ZSl6VFW+bchrs56QIpf9ZM+wIJyRYmA508cS/a05szLh/0bF0VxCbNuZU8vP6oJPhWF3lsNUP5Tb5RIVjYW0IFDPN2OpOFySCmtbfp1hLEbnIKyu/3R/y1MM8cfQiag8G/oRr6xxJjO3KSO7iblvseXtNjhm01fyIrSOd4Cwrb/L1i94Yel/yY9QjIGBiqLbZRRJSMFgwi1A0Bb3+7teaNnY872SsVvnq8sNd293Ya/wEOnBkRCzXXgpeaBXd10kh+VdzUfB
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(376002)(346002)(39860400002)(396003)(366004)(230922051799003)(451199024)(186009)(1800799009)(64100799003)(41300700001)(2906002)(8936002)(4326008)(86362001)(5660300002)(38070700009)(8676002)(316002)(36756003)(83380400001)(38100700002)(478600001)(2616005)(1076003)(6512007)(6486002)(71200400001)(122000001)(6506007)(55236004)(91956017)(76116006)(66556008)(66446008)(26005)(6916009)(64756008)(66476007)(66946007)(54906003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?232sTjS/Gy/kngS8P2pcprtA+UZK7UcGFy+3w4XwY9/Z2d5IMTkpNJsuPi?=
- =?iso-8859-1?Q?H549jXIFHIriUBo49FPcfrWlBcMuAJZ5+rW5QAbLuIyPsOORTiGH9uY8Fm?=
- =?iso-8859-1?Q?4wDLlVJ3ZtyN3ka2wNCBxA81WFBu7DpU3AwsW+qi2+BBxv9zkEulL54vDt?=
- =?iso-8859-1?Q?cQJaSp8tXCTRid606zo8o4BucM4j/FBjMxCM0SOREZaHg1oDirJGuJ+GHQ?=
- =?iso-8859-1?Q?JnB5HkpvkRyJxTyERs3+vUfSQHmqVx2x9CwBGptfZQoZ3+n+ey9FYgyPDF?=
- =?iso-8859-1?Q?O28t1Dk+ctp4lJsPL1fUYgJMb+xpTukdOJwYrle8YPsL6EKahj4Dg1ppSr?=
- =?iso-8859-1?Q?/qWkbS8fWu/TEYJJOYBqSdFtLG01lv7cmmlMx3d6YFE/PSgXYNhVuE9hfk?=
- =?iso-8859-1?Q?V4xetBTx4fMNtWiMYVb9EFdesbKJ3DBfB04273IneXS57if8aTVn67FoUA?=
- =?iso-8859-1?Q?bX9BRYvEzFe4AlPSBVawky4teYMX1k4cWOd3iN1Sh4foN9qbgW+LSfcpq8?=
- =?iso-8859-1?Q?yDOK6Z48YRuLJuA4y9KTPfZMB9kVfwzCElNPJMP58rpHRmy5C8uhzy/EnR?=
- =?iso-8859-1?Q?vt1PftvSGswT32dfNZz8vydAILzn7gKLzUUPrGX1ZmWN9dxJSXy036tv4+?=
- =?iso-8859-1?Q?s/YKVH0z0G4GJTcb1Qr60PrjsxFp9gZf6ouBh1LbK+QgJ5hg/Y+A2IgH/n?=
- =?iso-8859-1?Q?HrH8EQD28km+E4tIBI/H+Jizgq5sHkm43C7m2DMdhYVaj734bDr1fdNBoM?=
- =?iso-8859-1?Q?xuqtU9INEGIQntP9OYKDm5tYqIZGZBrFfP5WPwe5xRnwhLbTscYSgc77S5?=
- =?iso-8859-1?Q?lFTYiwV/Ha3u3AMLqcwR0TETi36L0JPj2qdX3iJWrinfl/xJXaqHQjBmwq?=
- =?iso-8859-1?Q?B/RjqymTub57MuhexCXMrmiVCtwGqFKmaEyL6YCzkfeAnDI6NXOiRbvN82?=
- =?iso-8859-1?Q?Asb1aK5hjXS5dn8KVDO6mlYXmRpfrwKjLwTWprZm1Jy08KCHxFV5jXW3iI?=
- =?iso-8859-1?Q?PU5iiuEYj3GPZTOzIQLnzDFkqx2I7218Qxj5YlTxfLrtssX2iHD5csMi2n?=
- =?iso-8859-1?Q?0I16UhrLwyVlhMF61RlyPU3/EF9KwTO/MoRApQVaEngj7LDR+KGG7iFIv2?=
- =?iso-8859-1?Q?y1pkn+9Q2hHyK/Zd/8qdNKDA18CINMF0p9So5kNg+IClF4b+8m4NedWGac?=
- =?iso-8859-1?Q?edpddUbJwiC/NORVfnAeQEMwF3GHQAzpCXXHdMox5VX8dLqm+0UWKyy4+Y?=
- =?iso-8859-1?Q?EsuiJaqqzkba6jBxtvz0Iifx5F25jz2lo4K9NFta5v2svK1kp5TBks4FQQ?=
- =?iso-8859-1?Q?WaUL+QiRuvX41J6Oh6dUx5O0aPMur8ALdlrHp10C5beUmEONP/RhbpNUZt?=
- =?iso-8859-1?Q?vwzWDqeGejx81dmuADqLTlqJAK9ut7mv2xDAalRLg2jCHx/qU0k7q7/BEr?=
- =?iso-8859-1?Q?OUbIkriBBTuj62DiBXncLtTJMZWPN4+8lGVuw3/m935n2WaiX45DAiVR5U?=
- =?iso-8859-1?Q?AU/J3JdqIyQJ2YPimJB3zTo2lQGOLlTxdFsK5ZQ9QXtFjFMqpdIovfSKyK?=
- =?iso-8859-1?Q?rAJIQMtX3IpVI0tmOz4AcBeeBOMXugQ90976pNXmTDEG8RjCy1czQzLSbR?=
- =?iso-8859-1?Q?NY9XSnuXXMFPW9Q5xgRR/O/j4mo9kEdBmTNiG+vEDV6d5dFu6q56qczQ?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 1f740cd3-8014-11ee-98da-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1699653434; x=1700258234; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=9tq+vVFzFQuNPFulMvijWhkTMgOJllrgAQLHZADDbn8=;
+        b=a3UglbkVwl6DuANMstGl8ngOSPnYezYL6sIS0T5OYa2LHoveTE39MaP6glblrkiAbA
+         NK3l11dp9U47QFPIhN0r+1mE871sPzCFCo51MzZWKavjkxjfb7KdWUoGHTfNjTg7SU4t
+         n96mBwsv6ciUvCSSVCzGyDHditIwWa76gU1rs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699653434; x=1700258234;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=9tq+vVFzFQuNPFulMvijWhkTMgOJllrgAQLHZADDbn8=;
+        b=s/ukw5bTXLtOuzN7CpOqAAbIQy/yNXYoweH/jHnUrfYNkXYbY0UbFjxtI7D1b7l3Ct
+         0/01Mz1M1eexvfHVUnTKw6+K9oHAfcExVqtBVR5j1rMynwqmmjHFnEzx+elKtEsuJBNd
+         kmwnqbyFlAOPkctZPagXK8DKgaVM5hfnTSW+zm0Su/Lvxuf2Wy1IgVyKPnUJuJs1aVbD
+         voZL9v5D6cbX6rDUNLKfh/grElmOn49Y2tVfyWIj6sBaVlkoQnKQDvhFbFkhgbV2QmNw
+         vuy641t07D3YM0hFUSeAOcmdTOrjumWBIQ5L3UyyhF/2SrqjKtYGEdhq2/H6LoiRj3xR
+         dfbA==
+X-Gm-Message-State: AOJu0Yw5gNfofNxoTo1XINP9FBnctCfdlcS/WTTY5kcjjxQW+pxm6Eac
+	pya9nw2L470l+4lybbIAYumGDA==
+X-Google-Smtp-Source: AGHT+IF6RgPCbKzN8I8kSLKa/jPUwsttZ5PE9pbgDJQVt6VpOvfV5RuubNVVRsDJIry7cuYVrgy90w==
+X-Received: by 2002:a5d:6d06:0:b0:32d:857c:d51c with SMTP id e6-20020a5d6d06000000b0032d857cd51cmr383345wrq.43.1699653434534;
+        Fri, 10 Nov 2023 13:57:14 -0800 (PST)
+Message-ID: <0a168232-ea32-4aa1-b270-961782fec9dc@citrix.com>
+Date: Fri, 10 Nov 2023 21:57:13 +0000
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5bc8600f-bd49-4902-caac-08dbe22d8aac
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 20:42:22.3490
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9kgIgaLSbA0ltG1jaSIk80Pe31b2A3q3L0zvgGTgvkIsDcF81mLGR1gaUpfjxsniawGKFWNA7zylwSu+UkBu6qEdmht3+/gYttvKHfuWA4s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR0302MB8991
-X-Proofpoint-GUID: kKNgRHbizpDH08hwtsCO87z5qaDmoW4x
-X-Proofpoint-ORIG-GUID: kKNgRHbizpDH08hwtsCO87z5qaDmoW4x
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-10_18,2023-11-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 malwarescore=0
- suspectscore=0 mlxscore=0 phishscore=0 clxscore=1015 bulkscore=0
- priorityscore=1501 mlxlogscore=631 lowpriorityscore=0 impostorscore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2311060000 definitions=main-2311100172
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.18 3/3] docs/sphinx: Fix indexing
+Content-Language: en-GB
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>,
+ Wei Liu <wl@xen.org>, Julien Grall <julien@xen.org>,
+ Henry Wang <Henry.Wang@arm.com>
+References: <20231108152727.58764-1-andrew.cooper3@citrix.com>
+ <20231108152727.58764-4-andrew.cooper3@citrix.com>
+ <alpine.DEB.2.22.394.2311091601420.3478774@ubuntu-linux-20-04-desktop>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <alpine.DEB.2.22.394.2311091601420.3478774@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+On 10/11/2023 12:07 am, Stefano Stabellini wrote:
+> On Wed, 8 Nov 2023, Andrew Cooper wrote:
+>> diff --git a/docs/index.rst b/docs/index.rst
+>> index f3f779f89ce5..22fdde80590c 100644
+>> --- a/docs/index.rst
+>> +++ b/docs/index.rst
+>> @@ -53,17 +53,18 @@ kind of development environment.
+>>     hypervisor-guide/index
+>>  
+>>  
+>> -MISRA C coding guidelines
+>> --------------------------
+>> +Unsorted documents
+>> +------------------
+>>  
+>> -MISRA C rules and directive to be used as coding guidelines when writing
+>> -Xen hypervisor code.
+>> +Documents in need of some rearranging.
+> I understand the need for an "Unsorted documents", but why taking away
+> "MISRA C coding guidelines" from here?
 
-The PV backend running in other than Dom0 domain (non toolstack domain)
-is not allowed to destroy frontend/backend directories. The more,
-it does not need to do that at all, this is purely toolstack/xl devd
-business.
+You can't have it both here and in index.rst without breaking the indexing.
 
-I do not know for what reason the backend does that here, this is not reall=
-y
-needed, probably it is just a leftover and all xs_node_destroy()
-instances should go away completely.
+Also because in it's current position it breaks the navbar.  MISRA is
+part of the developer guide, and what should be at the toplevel should
+be a general section on safety certification, which cross-references the
+developer guide amongst other things.  Nevertheless it will stay visible
+for now at the top level because of how the toctree.
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
----
- hw/xen/xen-bus.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+It's in unsorted because I have thrown the index together with the bare
+minimum effort in order to fix Sphinx errors in time for 4.18.
 
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index 06d5192aca..75474d4b43 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -598,8 +598,9 @@ static void xen_device_backend_destroy(XenDevice *xende=
-v)
-=20
-     g_assert(xenbus->xsh);
-=20
--    xs_node_destroy(xenbus->xsh, XBT_NULL, xendev->backend_path,
--                    &local_err);
-+    if (xenbus->backend_id =3D=3D 0)
-+        xs_node_destroy(xenbus->xsh, XBT_NULL, xendev->backend_path,
-+                        &local_err);
-     g_free(xendev->backend_path);
-     xendev->backend_path =3D NULL;
-=20
-@@ -754,8 +755,9 @@ static void xen_device_frontend_destroy(XenDevice *xend=
-ev)
-=20
-     g_assert(xenbus->xsh);
-=20
--    xs_node_destroy(xenbus->xsh, XBT_NULL, xendev->frontend_path,
--                    &local_err);
-+    if (xenbus->backend_id =3D=3D 0)
-+        xs_node_destroy(xenbus->xsh, XBT_NULL, xendev->frontend_path,
-+                        &local_err);
-     g_free(xendev->frontend_path);
-     xendev->frontend_path =3D NULL;
-=20
---=20
-2.42.0
+This is also why I'm not changing any text.  There is 0 time between now
+and this needing fixing for the release.
+
+Someone else can find some time to polish it - which is far more work
+than just in the index - and we can backport it when its done.
+
+~Andrew
 
