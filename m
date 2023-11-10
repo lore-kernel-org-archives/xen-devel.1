@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33DDDC4167B
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:22:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630576.983559 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A79ECC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 16:23:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630575.983556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UHQ-0006ha-Bt; Fri, 10 Nov 2023 16:22:48 +0000
+	id 1r1UHQ-0006c1-2o; Fri, 10 Nov 2023 16:22:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630576.983559; Fri, 10 Nov 2023 16:22:48 +0000
+Received: by outflank-mailman (output) from mailman id 630575.983556; Fri, 10 Nov 2023 16:22:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1UHQ-0006eL-6S; Fri, 10 Nov 2023 16:22:48 +0000
-Received: by outflank-mailman (input) for mailman id 630576;
+	id 1r1UHP-0006bb-Sk; Fri, 10 Nov 2023 16:22:47 +0000
+Received: by outflank-mailman (input) for mailman id 630575;
  Fri, 10 Nov 2023 16:22:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ap16=GX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r1U4V-0004cS-U3
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:09:27 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1r1U5f-0004cS-Og
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 16:10:39 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 84962116-7fe3-11ee-9b0e-b553b5be7939;
- Fri, 10 Nov 2023 17:09:25 +0100 (CET)
+ id afde8a42-7fe3-11ee-9b0e-b553b5be7939;
+ Fri, 10 Nov 2023 17:10:38 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4BC2F219B3;
- Fri, 10 Nov 2023 16:09:25 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id E007D1F8BD;
+ Fri, 10 Nov 2023 16:10:37 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1E4CA13398;
- Fri, 10 Nov 2023 16:09:25 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AF21513398;
+ Fri, 10 Nov 2023 16:10:37 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id xHsQBrVVTmUJCQAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 10 Nov 2023 16:09:25 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id e4pqKf1VTmWeCQAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 10 Nov 2023 16:10:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,133 +53,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 84962116-7fe3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: afde8a42-7fe3-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1699632565; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1699632637; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=lNELVOtIBvsXIZZicR5yL0eKM2DQUzTKU2kSsnMPGxo=;
-	b=sVcDy2eCiRDJlVk10Kk2Wm9uV0EeUF1Mfbd06tvg2Jc+tPdaEOOb7cpdgGpvn7VpZpKcOH
-	LZcZna+SV0w4v8dmxw6g9PbNi7fwy6meX+IbAnLHxhWTJsyZdy/JN0DPnZMbNMqE1Y/Zm3
-	/WlKEPtTsIP0e9kdXPILeyfMTjmbnPQ=
+	bh=EdPFyHzBpfLl8phFJP9JfSgms8FOuRsGhsZ9dt1Y3Sc=;
+	b=m0XrOh53fEJ9STIBbKVJWxUtB8+DijG8ygb8l3kfLXPp1nI7/bIGjudfFj539KZHZylQ5S
+	hLXY7mZIZ2HflDL+s7bVUCeqd396OPLRW0M0u4IlOVO1LOBT1GyyNf0zjSa2bK5SK4JHp7
+	iTUthuAWy5/5jovqiK3qhEaE8AQx2fs=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Jason Andryuk <jandryuk@gmail.com>
-Subject: [PATCH v2 14/29] tools/xenlogd: add 9pfs read request support
-Date: Fri, 10 Nov 2023 17:07:49 +0100
-Message-Id: <20231110160804.29021-15-jgross@suse.com>
+Subject: [PATCH v2 27/29] tools/xenstored: add helpers for filename handling
+Date: Fri, 10 Nov 2023 17:08:02 +0100
+Message-Id: <20231110160804.29021-28-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231110160804.29021-1-jgross@suse.com>
 References: <20231110160804.29021-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the read request of the 9pfs protocol.
+Add some helpers for handling filenames which might need different
+implementations between stubdom and daemon environments:
 
-For now support only reading plain files (no directories).
+- expansion of relative filenames (those are not really defined today,
+  just expand them to be relative to /var/lib/xen/xenstore)
+- expansion of xenstore_daemon_rundir() (used e.g. for saving the state
+  file in case of live update - needs to be unchanged in the daemon
+  case, but should result in /var/lib/xen/xenstore for stubdom)
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
 ---
-V2:
-- make error check more readable (Jason Andryuk)
----
- tools/xen-9pfsd/io.c | 64 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 64 insertions(+)
+ tools/xenstored/core.c      | 9 ++++++++-
+ tools/xenstored/core.h      | 3 +++
+ tools/xenstored/lu_daemon.c | 4 ++--
+ tools/xenstored/minios.c    | 5 +++++
+ tools/xenstored/posix.c     | 5 +++++
+ 5 files changed, 23 insertions(+), 3 deletions(-)
 
-diff --git a/tools/xen-9pfsd/io.c b/tools/xen-9pfsd/io.c
-index f8d981c2a6..1edea2e24a 100644
---- a/tools/xen-9pfsd/io.c
-+++ b/tools/xen-9pfsd/io.c
-@@ -32,6 +32,7 @@
- #define P9_CMD_WALK       110
- #define P9_CMD_OPEN       112
- #define P9_CMD_CREATE     114
-+#define P9_CMD_READ       116
- #define P9_CMD_WRITE      118
- #define P9_CMD_CLUNK      120
- #define P9_CMD_STAT       124
-@@ -1120,6 +1121,65 @@ static void p9_create(struct ring *ring, struct p9_header *hdr)
-     free_fid(device, fidp);
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 4a9d874f17..77befd24c9 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -158,6 +158,13 @@ void trace_destroy(const void *data, const char *type)
+ 		trace("obj: DESTROY %s %p\n", type, data);
  }
  
-+static void p9_read(struct ring *ring, struct p9_header *hdr)
++char *absolute_filename(const void *ctx, const char *filename)
 +{
-+    device *device = ring->device;
-+    uint32_t fid;
-+    uint64_t off;
-+    unsigned int len;
-+    uint32_t count;
-+    void *buf;
-+    struct p9_fid *fidp;
-+    int ret;
-+
-+    ret = fill_data(ring, "ULU", &fid, &off, &count);
-+    if ( ret != 3 )
-+    {
-+        p9_error(ring, hdr->tag, EINVAL);
-+        return;
-+    }
-+
-+    fidp = get_fid_ref(device, fid);
-+    if ( !fidp || !fidp->opened )
-+    {
-+        p9_error(ring, hdr->tag, EBADF);
-+        goto out;
-+    }
-+
-+    if ( fidp->isdir )
-+    {
-+        p9_error(ring, hdr->tag, EOPNOTSUPP);
-+        goto out;
-+    }
-+    else
-+    {
-+        len = count;
-+        buf = ring->buffer + sizeof(*hdr) + sizeof(uint32_t);
-+
-+        while ( len != 0 )
-+        {
-+            ret = pread(fidp->fd, buf, len, off);
-+            if ( ret <= 0 )
-+                break;
-+            len -= ret;
-+            buf += ret;
-+            off += ret;
-+        }
-+        if ( ret < 0 && len == count )
-+        {
-+            p9_error(ring, hdr->tag, errno);
-+            goto out;
-+        }
-+
-+        buf = ring->buffer + sizeof(*hdr) + sizeof(uint32_t);
-+        len = count - len;
-+        fill_buffer(ring, hdr->cmd + 1, hdr->tag, "D", &len, buf);
-+    }
-+
-+ out:
-+    free_fid(device, fidp);
++	if (filename[0] != '/')
++		return talloc_asprintf(ctx, XENSTORE_LIB_DIR "/%s", filename);
++	return talloc_strdup(ctx, filename);
 +}
 +
- static void p9_write(struct ring *ring, struct p9_header *hdr)
- {
-     device *device = ring->device;
-@@ -1349,6 +1409,10 @@ void *io_thread(void *arg)
-                 p9_create(ring, &hdr);
-                 break;
+ /**
+  * Signal handler for SIGHUP, which requests that the trace log is reopened
+  * (in the main loop).  A single byte is written to reopen_log_pipe, to awaken
+@@ -2983,7 +2990,7 @@ int main(int argc, char *argv[])
  
-+            case P9_CMD_READ:
-+                p9_read(ring, &hdr);
-+                break;
+ 	signal(SIGHUP, trigger_reopen_log);
+ 	if (tracefile)
+-		tracefile = talloc_strdup(NULL, tracefile);
++		tracefile = absolute_filename(NULL, tracefile);
+ 
+ #ifndef NO_LIVE_UPDATE
+ 	/* Read state in case of live update. */
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index a0d3592961..51e1dddb22 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -393,6 +393,9 @@ void early_init(void);
+ void mount_9pfs(void);
+ #endif
+ 
++const char *xenstore_rundir(void);
++char *absolute_filename(const void *ctx, const char *filename);
 +
-             case P9_CMD_WRITE:
-                 p9_write(ring, &hdr);
-                 break;
+ /* Write out the pidfile */
+ void write_pidfile(const char *pidfile);
+ 
+diff --git a/tools/xenstored/lu_daemon.c b/tools/xenstored/lu_daemon.c
+index 71bcabadd3..6351111ab0 100644
+--- a/tools/xenstored/lu_daemon.c
++++ b/tools/xenstored/lu_daemon.c
+@@ -24,7 +24,7 @@ void lu_get_dump_state(struct lu_dump_state *state)
+ 	state->size = 0;
+ 
+ 	state->filename = talloc_asprintf(NULL, "%s/state_dump",
+-					  xenstore_daemon_rundir());
++					  xenstore_rundir());
+ 	if (!state->filename)
+ 		barf("Allocation failure");
+ 
+@@ -65,7 +65,7 @@ FILE *lu_dump_open(const void *ctx)
+ 	int fd;
+ 
+ 	filename = talloc_asprintf(ctx, "%s/state_dump",
+-				   xenstore_daemon_rundir());
++				   xenstore_rundir());
+ 	if (!filename)
+ 		return NULL;
+ 
+diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
+index fddbede869..cfc2377857 100644
+--- a/tools/xenstored/minios.c
++++ b/tools/xenstored/minios.c
+@@ -98,3 +98,8 @@ void mount_9pfs(void)
+ {
+ 	create_thread("mount-9pfs", mount_thread, NULL);
+ }
++
++const char *xenstore_rundir(void)
++{
++	return XENSTORE_LIB_DIR;
++}
+diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
+index fcb7791bd7..76f5c9ab84 100644
+--- a/tools/xenstored/posix.c
++++ b/tools/xenstored/posix.c
+@@ -168,3 +168,8 @@ void early_init(void)
+ 	mkdir(xenstore_daemon_rundir(), 0755);
+ 	mkdir(XENSTORE_LIB_DIR, 0755);
+ }
++
++const char *xenstore_rundir(void)
++{
++	return xenstore_daemon_rundir();
++}
 -- 
 2.35.3
 
