@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486B4C41535
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41C69C05031
 	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 12:56:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630302.983080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.630304.983095 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1R3z-0003Lo-NL; Fri, 10 Nov 2023 12:56:43 +0000
+	id 1r1R41-0003nH-Nz; Fri, 10 Nov 2023 12:56:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630302.983080; Fri, 10 Nov 2023 12:56:43 +0000
+Received: by outflank-mailman (output) from mailman id 630304.983095; Fri, 10 Nov 2023 12:56:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1R3z-0003IE-8p; Fri, 10 Nov 2023 12:56:43 +0000
-Received: by outflank-mailman (input) for mailman id 630302;
- Fri, 10 Nov 2023 12:56:40 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r1R41-0003jW-0p; Fri, 10 Nov 2023 12:56:45 +0000
+Received: by outflank-mailman (input) for mailman id 630304;
+ Fri, 10 Nov 2023 12:56:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sssJ=GX=epam.com=prvs=567869e99b=mykyta_poturai@srs-se1.protection.inumbo.net>)
- id 1r1R3w-0001y1-Bj
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 12:56:40 +0000
+ id 1r1R3x-0001y0-5v
+ for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 12:56:41 +0000
 Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 94bb3bf0-7fc8-11ee-98da-6d05b1d4d9a1;
- Fri, 10 Nov 2023 13:56:37 +0100 (CET)
+ [148.163.133.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 955dff4d-7fc8-11ee-9b0e-b553b5be7939;
+ Fri, 10 Nov 2023 13:56:38 +0100 (CET)
 Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
  by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3AACIuvc025691; Fri, 10 Nov 2023 12:56:27 GMT
+ 3AACIuvh025691; Fri, 10 Nov 2023 12:56:31 GMT
 Received: from eur04-db3-obe.outbound.protection.outlook.com
  (mail-db3eur04lp2050.outbound.protection.outlook.com [104.47.12.50])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3u9j2g0qjw-6
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3u9j2g0qjw-11
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 10 Nov 2023 12:56:26 +0000
+ Fri, 10 Nov 2023 12:56:31 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by DB3PR0302MB9063.eurprd03.prod.outlook.com
  (2603:10a6:10:43d::17) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Fri, 10 Nov
- 2023 12:56:20 +0000
+ 2023 12:56:24 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::f172:7877:386b:8dc0]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::f172:7877:386b:8dc0%6]) with mapi id 15.20.6954.029; Fri, 10 Nov 2023
- 12:56:20 +0000
+ 12:56:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,21 +55,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94bb3bf0-7fc8-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 955dff4d-7fc8-11ee-9b0e-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=L5bVoaHtf9hbfKEfPq+WKJEeFvOK9PVEaZ731Bk8Q92uFWHuIezEtaPZc2JXmBaEt18pWYEkQo344KBoKRHNGDSSYklg3BOKCOe4iA3sqKLyXA5X77ycK43qFKUwkvctIoTvUbZVWF49nXpdrYvjM96xo9Rc2J+4PN3JsaTtGQi2iZINqPp1D885T/zPLdjDQU9QKC/peyQhq8cmtxX01wxbSSMmJlThXT06P4YDpU4AoKDS1vR03qnjrBdAXlXRJ/0ObMaZISjrbjaVJnp6q+R05oEDjWkNey6fveQAwGXH+DXGRRwYt7shoZTJYbE9HyGTbmMvN3Y1wXrJ7bk9hg==
+ b=JqZ15/rfG7fUg7DWQvFcGgAW4ZsygIPMMMMH2NnpQ2QbD9HTg8fSrvTTdXe7jmM+uIQrsZbhrAld4MiDbYfBOLhXKvvITC+X2Za6WHC7pny/cYdb3sh5qqqnS1rSLS0cJf4sYzIjjuVtNYPn0AwpGRE2lbdjg4HySewK7S4qRqmkfKAJ1ihVBbeZa0qx5S7A6jnO3L2F/qULaZm5Vs6gHrabRlrvJvbB4v+P7/lMKdtnF0mTvk2u9ma4M61hwpK6bjSIARan0/8d/qDVkbI/ldB+V6s9AMe6QmPxHs53m30MojvQsDb2v2rzwfPjYUPxjMUMwzECWH7mjtoTRaxOkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LBDVOyba/BI30WH6KKbB8Uk/B+zX3ZAsejH38vpaBkc=;
- b=ZoaDWZ9GamKaLk2O5bkA8irxeorDFJcIVW13Uhi9gqFd5Od7pvWSZTQqpR+JBzu+apIQmHN9nuSjtuB/lodUfb6BxVVIKbeU7JB+IqXcRL775gI48zExEmhCTPypab+y3CtnHC4DwpIHJdj7FaUuChUcIiNJj8AKrErxuK7uUMAKoxKslSAHGQm76j2GTlST/4bUTSFjED1KF8BERahDqmYbGYcFyMHJKt3vyijWLtF0gbMvTN2XSDdHnpSi5vokOaz53F4p74ErulR9tCojAnfQX9u+901E8piqBIZE/UKJdXdHYso/mHO8EBfNSYRoZwP4OfU8vVst19Me5MX3FQ==
+ bh=laODZ4Gs+y5E4svUvsfAqE5Iuee5D06nD4w3sS8JL40=;
+ b=XglTUcfubP67CF3FVgVD//4DcSaDO5sIZ2vcV89JAWCR5gV8bWX9Pr+q4LkhQMt6V2fy1CaoZ4GOtSEcVbOGzOPPDTaplVSacty3sLcboTR1ywLPfhiDs3Qm5MhHQiPLYZolhdie1EJWE+NyDYLzd9uDo8CNmnGxq2reKcBKmmD3ZD8tJR0WY/2G3XwVdyve9Y4NVzFlFwWfbeIt99W1AOoCaKZ3cDWq43Qc7oFg/RnZLtLD62p61sbKwo71W5DzJMECRK/H1h64FrBl+m4GklrrTUthItvtiS/H3HXUAwxPoYS1DzhPWxWq+GofzZJMeuGfG/LrhQ3E89bwAjPx3Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LBDVOyba/BI30WH6KKbB8Uk/B+zX3ZAsejH38vpaBkc=;
- b=qxkN6sMV1jhWw7E2lLql/Ynf8bmJ/jUjlImF/IaWOF1rNESiKqiY1G/fIPITWLm1wgwnl1G0bqdVFRRp18oLmYK73CFS4JcvklGDOISftUiZj7Y3RC3graXOg/dL9xmB5lUXmf7pMb5m0sFef1gNLRFzuGgCVHn2bLT8pkRNqb6aCyjXGWV8jJDTHavqQBIVuBnSl0pj8onVI5cR7/B5izrt+rqoGv0XOmgSTbD6bJVVqyfuZKyNmtnXZWkgGPeM3LUoijBbKxxveNYlkcrtCXbspBAgT01Q4C7g5W3FnMBLZTR1JzELfgAtOBW9EjswuIiCg5qh3c7w6yYgtBkOxA==
+ bh=laODZ4Gs+y5E4svUvsfAqE5Iuee5D06nD4w3sS8JL40=;
+ b=fmyaQZ6MGWsRQn9ye21lXhGFq7RqE8A+azUklOujl22FT0T/eD/FZ3/zJey3dT1q0j4n4o+w7DXMcEwVXv+XL53ymLz0dwDmXW2bGZ2Fp6qrAtceB78sNCr5t0ggOKuoL4/5l7jDxmN7rF7YQ/AD2MGO6VfhxiTrEfyvpfFcMouI0IduFbFX1IU3YSw75bkleei2zfNb+zUNOKRdOZX9bXIUD5bzyLfnOQvaIvg9iAP5jng6sxfjmSAkh4azV5+xWBOVZDCtNpEqMNg7IktmugVOooI+ycW+Aa5MuXvHGHHjkNET/jtnVLhLgBORHBcYkoUteyusqwZQoz4dWGsG7g==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Mykyta Poturai <Mykyta_Poturai@epam.com>,
@@ -80,14 +80,14 @@ CC: Mykyta Poturai <Mykyta_Poturai@epam.com>,
 	<bertrand.marquis@arm.com>,
         Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
         Michal Orzel <michal.orzel@amd.com>
-Subject: [XEN PATCH v2 09/25] arm: new VGIC: vgic_init: implement
- map_resources
-Thread-Topic: [XEN PATCH v2 09/25] arm: new VGIC: vgic_init: implement
- map_resources
-Thread-Index: AQHaE9VMePQXqYRQtUG5KTRNHOZuvw==
-Date: Fri, 10 Nov 2023 12:56:19 +0000
+Subject: [XEN PATCH v2 19/25] arm: new VGIC: its: Add LPI translation cache
+ definition
+Thread-Topic: [XEN PATCH v2 19/25] arm: new VGIC: its: Add LPI translation
+ cache definition
+Thread-Index: AQHaE9VOswsQu2Pw50ypJgIWmh5TYw==
+Date: Fri, 10 Nov 2023 12:56:22 +0000
 Message-ID: 
- <c89e43a412d1805dc988d1b8145695f85da3e112.1699618395.git.mykyta_poturai@epam.com>
+ <8d747db93eb3a2afd4895d8e20b163dcd707bb33.1699618395.git.mykyta_poturai@epam.com>
 References: <cover.1699618395.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1699618395.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -96,45 +96,45 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DB3PR0302MB9063:EE_
-x-ms-office365-filtering-correlation-id: 2c58c5b2-7f8c-48cc-7889-08dbe1ec6fbf
+x-ms-office365-filtering-correlation-id: 81c3897b-eec6-410e-fd19-08dbe1ec7209
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- PkzxPl5B/QmsrBEsUDDqpZkFYvOvdWfIS8Xrfo9nD/dZMUO3UjNImN5SiGZlhpUyittFr0ZlwnU/GtqqrY9bUn/ntU9Ix6/3ZwQWlhPR5p9lXpEy/yTgf6ESdjW7KrFcFWZBKiUUmPH5XsaBTausPgDyqyV1WGZkRrM9jEtEftNgZH60uUsHw8YRFV1k2J/3rDN0RGdSLQiBQdDNnAAkmjxg8v4icaS2cGmJPAyi9LA+gXMX5gwArGYto/2d81nRPHtxytq6ZAPuVdAlPSok9mCybDt6v8a183J6rJJX3snHlNoFvS7zDFmgwq7/QWLI78URg6kaZa8B/rnlr3RfNL5tbqfmcNGui/ysnG4rWFQS+6lg1ViSbdvHbItUH3Lq8k1VIYOTVQo5gWfUx9fT9+AQK8rGRSryLnLp5/GkxiLaXJk5woy9UbnlaMTnepPjNjof7tpPZu/Cxx/ha13eAbIBU2PfQ68I8WUCJgsfF50L8lD5fBbGi2WqcEkhmJ87KdS0W5ttbs3g86NEoLaGQLbOkVBVsa7pyTimztHG0GfLm/x/q0Av9JFacOZybX8pNnK+Wiok84rrQfgumSraP6yYPe/Q9ipITU/QYL5reLg=
+ 3wmlamY3LNFeJ/yJ9+OnohN32gDRJyW9df1JCS98Cb9XNjuosKkTkeGbCq88Z5h68vc1QaixcqKyWsZxEzQipSd0CgHSCR2r675Pc/3J+myzlahiuh4HgJHWvjH01lykZP5JO1OqoqJbRjOPJzBfDuCcf3MUdPpwkbmLF+78c1zB7oDQ2PdmoGQhhcPfsgpcQYjOGRuKp/C3unlp9YBdB6i+neW3Vrl5f+b+w/AZOgvcwPQCA+wLUyh5MP9HRetjy3m0P9mR4MHUh1a+vbUScGrE+R7/AlOl9VDD5J/g+1bph+gKhsND/Gyfhe3q3mtOFXSBHIsHwNo3xZCJb/G2vOBcOazv6vN0Vp3qcZgMogNpxgBV+hlOepPsdhJYdhWbaMAU9j39VGc5/LU2zquB2IQz0cMiU8xiGjo3ItRSWjEpd3CDMZ+YEObWgyIDBbUZSnVZSZoakWJbMtXLBfPs2ni8WWOmO39R1IejZ5BR7zydZqXiwWCVOFeSUXlM8PNmJ9x8LTcwf2UEYIJhqg671eA1igcR7JrWFF+1O4cRjO9H4kB14LbkZZ4OhGYof4AP2MK3wxn8gaJiuagiIeO02OkhfItFnJHp/y9zbgNMXvAj0+LQCc031ADk/gHdSgLx
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(346002)(396003)(366004)(376002)(39860400002)(230922051799003)(451199024)(1800799009)(186009)(64100799003)(66556008)(86362001)(6512007)(6506007)(66946007)(66446008)(36756003)(66476007)(8936002)(76116006)(91956017)(8676002)(71200400001)(38100700002)(4326008)(26005)(5660300002)(6916009)(2616005)(6486002)(64756008)(316002)(478600001)(54906003)(2906002)(122000001)(41300700001)(83380400001)(38070700009);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?fJyGsfRLBczsfPEqRRa01ztgP+UAGIMwOTGEQf7Pv33x6Trhfg62bMDB9t?=
- =?iso-8859-1?Q?K6a14T4ohBzRngFwqc+TFOzW1zBcPwBsQQ+dfRYM9KE/dx1v6iMz6R0WXQ?=
- =?iso-8859-1?Q?9rCzp7Fbv8Mvxl66zTVrwmturERReYr/gWNc73Xz1vJ1Z7l6rQOxnfdziE?=
- =?iso-8859-1?Q?mSie03C3Gyth78IdhVWtF+3lQq2mO96kCLtOzMA9ZQX6VMIujhPt0nfGVf?=
- =?iso-8859-1?Q?kdBPnoGB0udy80aJxQwDOsCtulYxaafAtJvbZUP0Tbp6f1m0M4wms3eYGj?=
- =?iso-8859-1?Q?WtUJv1mLfQcxazNcGg4+m6RwigG82kh58cudJBgDDJLP4vt6vhMQDDcmnO?=
- =?iso-8859-1?Q?QUMMeCGCNhQTkyZvnmnnAhl9iObXcWgdGcEudQ3mCbPAGzRIj8pwPWEAPd?=
- =?iso-8859-1?Q?VRoU9cdvFmphhRlJKl4SbKkzLycGTEknoiSfdXv8cwMAiCWqs1iOC3WqrW?=
- =?iso-8859-1?Q?m/TAXS1PW8tP8u8+QQctSbc0nvAMAN71YMCvQq3m2wM8lDwgEvmffvwgrB?=
- =?iso-8859-1?Q?ecxnpuIGOkxzYfEXORjiayrZwHXEmykiANu2PQKxPqszYKzzECESEZi6/o?=
- =?iso-8859-1?Q?YaTGTJMT3+AeNzes+ZB/Nxn49fkj3JFuJCd77PGq5Epw3jagGxWIxVHyCR?=
- =?iso-8859-1?Q?ak3ZkLNmGKwqHoEoqeurzBAlV+AdbTYP+ZVGD3QjRF8bKvr2QOPMmuqcbd?=
- =?iso-8859-1?Q?ZvuSjQO8gAjDF4fbh1aZF4Aa3sfQA7vj6qQV6mAAaXSKdfu25+mgqJ5mxA?=
- =?iso-8859-1?Q?g/DccID8MmJhdAbNJMOzNdvVLNrw6nXPf5+7ipLF4p6cF5bnJVk9uN5+rY?=
- =?iso-8859-1?Q?YTSFJpF9EDLQGGz/3XA7q969yeiJfHHOoYWW0K7V84bnnQXbvZUKRUR0Ao?=
- =?iso-8859-1?Q?fSF9xmeOPc2XsnqPC5ghPrvfhhEm6xUtDLPNtpzZ5vp7y22FY3Ra/ixni1?=
- =?iso-8859-1?Q?EgTkAnxtokrjPVoA4T2+IrQx1/opJUC4YVGWvBrIJ5nrGN8iMFpTH4ZLGO?=
- =?iso-8859-1?Q?x2Mif8ZJ5sk8WuSdcFsm8YELAqHrTTbqpfI/kMcNzZ+753rFsXKt2sGgHp?=
- =?iso-8859-1?Q?TLfnUlkjC5Bdw32F8hP4UHrqLfGlQpKi6ZLbTiGz9R6ZfRK9jx+SR78t1D?=
- =?iso-8859-1?Q?GYmxW+QAiZ1L9g9PDxGMhsMzz9cy0Tip5jYzxgIIsOAONhCOAPwc4424BQ?=
- =?iso-8859-1?Q?egvYi9ZPAcdXu9+3u4m/PqrbSmN0QnFq2Gr8BqPtbGJnFVx8JlDaJgiMLn?=
- =?iso-8859-1?Q?WPpGREuvDEEKZ8dJtDG29Er8rcBLWrdZ+rPEIkm45wBNyzYtKlZsZB9F3W?=
- =?iso-8859-1?Q?p3v4hjs2LLTuA2HrvWVH+3Z/QzIch5LJgfjOMQ1E+DptxlmUghjS688SYO?=
- =?iso-8859-1?Q?J3Eh9PLRw65bmPZbJ14RWF6S4CWB9G6NGsuNR5EW2RGHp3TjxD3QZpICsj?=
- =?iso-8859-1?Q?AHCgioaN3Z4mDCxkegLjDxKb9MSPn6OL87l7h0BMnqP+hGc/9gI2+noutE?=
- =?iso-8859-1?Q?78IwCWYrbjopCFpOKdZKJE+CV87/hrpraz+Q28fuQrSbG8sO4tDPEaMXxu?=
- =?iso-8859-1?Q?l9+kbl+t/x3wq7obLgB4NtlLSt7gsqBLWH20q+QtDSamT+tOdYSjQOQSiU?=
- =?iso-8859-1?Q?2ZbCaOizXW+NCbaZ+SzKnFeqeXrHSfq3BmorP6a/z8bkcvSQ4nd3vpWQ?=
+ =?iso-8859-1?Q?R/riGC6Flf7VgFyhYhrprFxVbRlR5DC2sEkQwjqFyz/I8xqCKMJIZMbQIU?=
+ =?iso-8859-1?Q?VBpiJJcRpHV41U5BkNMFRk1Lk97C0i8jovEn8qKXaU3oPXlBjismK7zEUo?=
+ =?iso-8859-1?Q?hW9CpgHrRaDWQrC/cwocMQArMdmtzuemnoruOWmEDNjkdTDgRRW7BE2bsZ?=
+ =?iso-8859-1?Q?EnWsA2ankLazK8L5v2/miOarBjLOeMh6gToTiIZMsCjambbQkRvVTacGbO?=
+ =?iso-8859-1?Q?HJ0a9UEcaI/xmZw6jvbaJ9GNOs4+10vzq8e6iWHctvk6LPQfgvrGmjAfcO?=
+ =?iso-8859-1?Q?dpfNwV/cBYVFS96R4opmex4rF48nB47RliktO3e7uFVnWb0HREXpmzKk73?=
+ =?iso-8859-1?Q?N308Sa2ARBg1QMVjzQe/ikljoReGFswwqcxAnvo+ASmPTd8AyuZ7ObaeNx?=
+ =?iso-8859-1?Q?TywGzolJRU00bkIZEmQllzu0sKY2guf1sXAQzvTwjDeU18Qmdp59MgZcdj?=
+ =?iso-8859-1?Q?DkvN99V3qTupL5poY9h3t6WfTC9TNr1wUD7clsLx/qJyD94OyZvm4X5rlk?=
+ =?iso-8859-1?Q?CKDV5CTGBDhs7nFY/+K3UKjGQorwTquQuhBCzyTrjJic9r/pn3+Ur9J6sZ?=
+ =?iso-8859-1?Q?Q5mVoCAqVvGfLOspxRjMpCRGsja4MmIC11NnWjKhRc4zdsbYJSuZwl6LW1?=
+ =?iso-8859-1?Q?itXb/fMMv2J/7SJkUcS/QtR5ZjKzqeXM8ELb1SQ4uxYlhM9WphUuYeqnud?=
+ =?iso-8859-1?Q?3Lp7CeCaMAw/1trNAJsy59MVIv2yORaH3JkfwaqQRSfvILJq4oZZwxYa/8?=
+ =?iso-8859-1?Q?v0ELSsHlyeFAKM8LY2KL8UVxvij0VpNgHKc6ra2hd5X9uYvVQ28h1Yvkeh?=
+ =?iso-8859-1?Q?RU3UXghzL2qkf+aaYl/5zZjM/Hfbhx6xLDZHhXICYtmfKWJgdfLG7a4wDX?=
+ =?iso-8859-1?Q?D55o4qnVq5f1GEx2N+uXKEhTQXfXfu7VkhCpchCu/wKomyxK1NGBASyXnl?=
+ =?iso-8859-1?Q?vMzC5B1TSaI0Uek8kbRImfZjQn+FuG/CpxBTwQMrlSudIub3iAyS8iM9k4?=
+ =?iso-8859-1?Q?pDKAYFGLYf02qHmwbQmER7BFUNh5milkpBDOF9t2osNm4SmnYWLj2DFLWK?=
+ =?iso-8859-1?Q?8AAUHBZLEYGfFkAN/3tk3+YbRPVEvt9g532TytIllz6AZAKTEGPfmwofXe?=
+ =?iso-8859-1?Q?1p668FDjiMcv7U3aaI2Gx3vpgSS/0BJmTAKTqINqpz5DzHdPmB1ZfA9VDs?=
+ =?iso-8859-1?Q?xJYAEGLgD3sr0UKEfgT1UBfhlXWfZvMlfTujBmdKUslh04VBJU4c5yh6Yb?=
+ =?iso-8859-1?Q?TKV/7guD0SqsvJkfNH9HC/UKzmhFIuEXBWpHNnSBPJaN2kM3lmRpXWR0hY?=
+ =?iso-8859-1?Q?AdUXtVNJrOsurtX8/8JOa73YdvXlaKLgFM+mesjMXcEjtSYoC3p9CIzqUZ?=
+ =?iso-8859-1?Q?JutJxvuEJn94rIh1GRfhhQHp+J9P5iB6fD9tiYXc4Dy/nZcc5G/crC8xLd?=
+ =?iso-8859-1?Q?bDfPLWVjQ+r/hajQMUScW10rWHhPEJ4LYrDhcWA1Xl0HJy9Y9TplFFK69+?=
+ =?iso-8859-1?Q?wAJMiWrjtu4n7eEcUcWn+kVDwBGhjw36NZlbva/aFG5RqL7Ujj9TGomuTG?=
+ =?iso-8859-1?Q?R8SDdwTNYHPWGV+8XZtAtFzvjhvafqL0mRh20hEmFqBFXGX+55FDKerrOu?=
+ =?iso-8859-1?Q?F3DZnGwju0rDBKnZAMz0McuiOM09NpeyJnlZKW/Ww80E4+osjG6Z9ubg?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -142,225 +142,315 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2c58c5b2-7f8c-48cc-7889-08dbe1ec6fbf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 12:56:19.0708
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81c3897b-eec6-410e-fd19-08dbe1ec7209
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 12:56:22.5551
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: qHB946+1kfUjcY0U/ZYmcQXwJYpYASYLrVJoA30wclSDYG5DwNY/EPpQ0zLxbgMW4rHHJSmrRKXC8A6aequnIQ==
+X-MS-Exchange-CrossTenant-userprincipalname: uNK0bznj8zP6nR6nMReRLu7c8VqlDBFpFryMu5ht1liYiBjHpBkynuHRj+hUMAGEVa0kRQY4ICVU/jOT9bJp5A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR0302MB9063
-X-Proofpoint-ORIG-GUID: GE0xtHXiOjiNtZbiYNHVHIKMpUx1L2Id
-X-Proofpoint-GUID: GE0xtHXiOjiNtZbiYNHVHIKMpUx1L2Id
+X-Proofpoint-ORIG-GUID: bVLGMpNT3R9t2aZ8pVMOFwQdxOhkIXFl
+X-Proofpoint-GUID: bVLGMpNT3R9t2aZ8pVMOFwQdxOhkIXFl
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-11-10_09,2023-11-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 mlxlogscore=714
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 mlxlogscore=835
  adultscore=0 spamscore=0 malwarescore=0 suspectscore=0 bulkscore=0
  impostorscore=0 phishscore=0 priorityscore=1501 clxscore=1015
  lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2311060000 definitions=main-2311100106
 
-map_resources is the last initialization step needed before the first
-VCPU is run. At that stage the code stores the MMIO base addresses used.
-Also it registers the respective register frames with the MMIO framework.
+Add the basic data structure that expresses an MSI to LPI
+translation as well as the allocation/release hooks.
 
-This is based on Linux commit b0442ee227e826af by Eric Auger
+Implement cache invalidation, lookup and storage.
+
+The size of the cache is arbitrarily defined as 16*nr_vcpus.
+
+This is based on Linux commits 24cab82c34aa6f, 7d825fd6eaa7467,
+89489ee9ced8 and 86a7dae884f38 by Marc Zyngier
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
- xen/arch/arm/vgic/vgic-init.c |  2 +-
- xen/arch/arm/vgic/vgic-v3.c   | 85 +++++++++++++++++++++++++++++++++++
- xen/arch/arm/vgic/vgic.c      | 13 +-----
- xen/arch/arm/vgic/vgic.h      |  5 +++
- 4 files changed, 93 insertions(+), 12 deletions(-)
+ xen/arch/arm/include/asm/new_vgic.h |   3 +
+ xen/arch/arm/vgic/vgic-its.c        | 195 ++++++++++++++++++++++++++++
+ 2 files changed, 198 insertions(+)
 
-diff --git a/xen/arch/arm/vgic/vgic-init.c b/xen/arch/arm/vgic/vgic-init.c
-index c3b34be192..ca13cf385c 100644
---- a/xen/arch/arm/vgic/vgic-init.c
-+++ b/xen/arch/arm/vgic/vgic-init.c
-@@ -178,7 +178,7 @@ int domain_vgic_init(struct domain *d, unsigned int nr_=
-spis)
-     if ( dist->version =3D=3D GIC_V2 )
-         ret =3D vgic_v2_map_resources(d);
-     else
--        ret =3D -ENXIO;
-+        ret =3D vgic_v3_map_resources(d);
-=20
-     if ( ret )
-         return ret;
-diff --git a/xen/arch/arm/vgic/vgic-v3.c b/xen/arch/arm/vgic/vgic-v3.c
-index b018ee6040..470bb63147 100644
---- a/xen/arch/arm/vgic/vgic-v3.c
-+++ b/xen/arch/arm/vgic/vgic-v3.c
-@@ -14,11 +14,33 @@
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- #include <asm/new_vgic.h>
-+#include <asm/gic_v3_defs.h>
- #include <asm/gic.h>
- #include <xen/sched.h>
-=20
- #include "vgic.h"
-=20
-+static struct {
-+    bool enabled;
-+    /* Distributor interface address */
-+    paddr_t dbase;
-+    /* Re-distributor regions */
-+    unsigned int nr_rdist_regions;
-+    const struct rdist_region *regions;
-+    unsigned int intid_bits; /* Number of interrupt ID bits */
-+} vgic_v3_hw_data;
+diff --git a/xen/arch/arm/include/asm/new_vgic.h b/xen/arch/arm/include/asm=
+/new_vgic.h
+index d0fd15e154..b038fb7861 100644
+--- a/xen/arch/arm/include/asm/new_vgic.h
++++ b/xen/arch/arm/include/asm/new_vgic.h
+@@ -212,6 +212,9 @@ struct vgic_dist {
+     spinlock_t          lpi_list_lock;
+     struct list_head    lpi_list_head;
+     unsigned int        lpi_list_count;
 +
-+void vgic_v3_setup_hw(paddr_t dbase, unsigned int nr_rdist_regions,
-+                      const struct rdist_region *regions,
-+                      unsigned int intid_bits)
-+{
-+    vgic_v3_hw_data.enabled          =3D true;
-+    vgic_v3_hw_data.dbase            =3D dbase;
-+    vgic_v3_hw_data.nr_rdist_regions =3D nr_rdist_regions;
-+    vgic_v3_hw_data.regions          =3D regions;
-+    vgic_v3_hw_data.intid_bits       =3D intid_bits;
-+}
++    /* LPI translation cache */
++    struct list_head	lpi_translation_cache;
+ };
+=20
+ struct vgic_cpu {
+diff --git a/xen/arch/arm/vgic/vgic-its.c b/xen/arch/arm/vgic/vgic-its.c
+index 6c726dde3a..48dfa09115 100644
+--- a/xen/arch/arm/vgic/vgic-its.c
++++ b/xen/arch/arm/vgic/vgic-its.c
+@@ -44,6 +44,14 @@ struct its_ite {
+     u32 event_id;
+ };
+=20
++struct vgic_translation_cache_entry {
++    struct list_head entry;
++    paddr_t db;
++    u32 devid;
++    u32 eventid;
++    struct vgic_irq *irq;
++};
 +
  /*
-  * transfer the content of the LRs back into the corresponding ap_list:
-  * - active bit is transferred as is
-@@ -204,3 +226,66 @@ void vgic_v3_populate_lr(struct vcpu *vcpu, struct vgi=
-c_irq *irq, int lr)
-=20
-     gic_hw_ops->write_lr(lr, &lr_val);
+  * Find and returns a device in the device table for an ITS.
+  * Must be called with the its_devices_lock mutex held.
+@@ -152,6 +160,144 @@ int vgic_copy_lpi_list(struct domain *d, struct vcpu =
+*vcpu, u32 **intid_ptr)
+     return i;
  }
-+
-+unsigned int vgic_v3_max_rdist_count(const struct domain *d)
+=20
++void __vgic_put_lpi_locked(struct domain *d, struct vgic_irq *irq)
 +{
-+    /*
-+     * Normally there is only one GICv3 redistributor region.
-+     * The GICv3 DT binding provisions for multiple regions, since there a=
-re
-+     * platforms out there which need those (multi-socket systems).
-+     * For domain using the host memory layout, we have to live with the M=
-MIO
-+     * layout the hardware provides, so we have to copy the multiple regio=
-ns
-+     * - as the first region may not provide enough space to hold all
-+     * redistributors we need.
-+     * All the other domains will get a constructed memory map, so we can =
-go
-+     * with the architected single redistributor region.
-+     */
-+    return domain_use_host_layout(d) ? vgic_v3_hw_data.nr_rdist_regions
-+                                     : GUEST_GICV3_RDIST_REGIONS;
++    struct vgic_dist *dist =3D &d->arch.vgic;
++
++    if ( !atomic_dec_and_test(&irq->refcount) )
++    {
++        return;
++    };
++
++    list_del(&irq->lpi_list);
++    dist->lpi_list_count--;
++
++    xfree(irq);
 +}
 +
-+int vgic_v3_map_resources(struct domain *d)
++static struct vgic_irq *__vgic_its_check_cache(struct vgic_dist *dist,
++                                               paddr_t db, u32 devid,
++                                               u32 eventid)
 +{
-+    int rdist_count, i, ret;
++    struct vgic_translation_cache_entry *cte, *fcte;
 +
-+    /* Allocate memory for Re-distributor regions */
-+    rdist_count =3D vgic_v3_max_rdist_count(d);
-+
-+    /*
-+     * For domain using the host memory layout, it gets the hardware
-+     * address.
-+     * Other domains get the virtual platform layout.
-+     */
-+    if ( domain_use_host_layout(d) )
++    list_for_each_entry(cte, &dist->lpi_translation_cache, entry)
 +    {
-+        d->arch.vgic.dbase =3D vgic_v3_hw_data.dbase;
++        /*
++         * If we hit a NULL entry, there is nothing after this
++         * point.
++         */
++        if ( !cte->irq )
++            break;
 +
-+        for ( i =3D 0; i < vgic_v3_hw_data.nr_rdist_regions; i++ )
-+        {
-+            vgic_v3_set_redist_base(d, i, vgic_v3_hw_data.regions[i].base,
-+                                    vgic_v3_hw_data.regions[i].size /
-+                                        GICV3_GICR_SIZE);
-+        }
-+    }
-+    else
-+    {
-+        d->arch.vgic.dbase =3D GUEST_GICV3_GICD_BASE;
++        if ( cte->db !=3D db || cte->devid !=3D devid || cte->eventid !=3D=
+ eventid )
++            continue;
 +
-+        /* A single Re-distributor region is mapped for the guest. */
-+        BUILD_BUG_ON(GUEST_GICV3_RDIST_REGIONS !=3D 1);
++        /*
++         * Move this entry to the head, as it is the most
++         * recently used.
++         */
++        fcte =3D list_first_entry(&dist->lpi_translation_cache,
++                                struct vgic_translation_cache_entry, entry=
+);
 +
-+        /* The first redistributor should contain enough space for all CPU=
-s */
-+        BUILD_BUG_ON((GUEST_GICV3_GICR0_SIZE / GICV3_GICR_SIZE) <
-+                     MAX_VIRT_CPUS);
-+        vgic_v3_set_redist_base(d, 0, GUEST_GICV3_GICR0_BASE,
-+                                GUEST_GICV3_GICR0_SIZE / GICV3_GICR_SIZE);
++        if ( fcte->irq !=3D cte->irq )
++            list_move(&cte->entry, &dist->lpi_translation_cache);
++
++        return cte->irq;
 +    }
 +
-+    /* Register mmio handle for the Distributor */
-+    ret =3D
-+        vgic_register_dist_iodev(d, gaddr_to_gfn(d->arch.vgic.dbase), VGIC=
-_V3);
-+
-+    d->arch.vgic.ready =3D true;
-+
-+    return 0;
++    return NULL;
 +}
-diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
-index 946877bbac..2f9644dc18 100644
---- a/xen/arch/arm/vgic/vgic.c
-+++ b/xen/arch/arm/vgic/vgic.c
-@@ -968,23 +968,14 @@ unsigned int vgic_max_vcpus(unsigned int domctl_vgic_=
-version)
-     {
-     case XEN_DOMCTL_CONFIG_GIC_V2:
-         return VGIC_V2_MAX_CPUS;
-+    case XEN_DOMCTL_CONFIG_GIC_V3:
-+        return VGIC_V3_MAX_CPUS;
-=20
-     default:
-         return 0;
-     }
- }
-=20
--#ifdef CONFIG_GICV3
--/* Dummy implementation to allow building without actual vGICv3 support. *=
-/
--void vgic_v3_setup_hw(paddr_t dbase,
--                      unsigned int nr_rdist_regions,
--                      const struct rdist_region *regions,
--                      unsigned int intid_bits)
--{
--    panic("New VGIC implementation does not yet support GICv3\n");
--}
--#endif
--
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/arm/vgic/vgic.h b/xen/arch/arm/vgic/vgic.h
-index 0e0cf7b213..7dbadf7501 100644
---- a/xen/arch/arm/vgic/vgic.h
-+++ b/xen/arch/arm/vgic/vgic.h
-@@ -74,6 +74,7 @@ int vgic_register_dist_iodev(struct domain *d, gfn_t dist=
-_base_fn,
- #ifdef CONFIG_GICV3
- void vgic_v3_fold_lr_state(struct vcpu *vcpu);
- void vgic_v3_populate_lr(struct vcpu *vcpu, struct vgic_irq *irq, int lr);
-+int vgic_v3_map_resources(struct domain *d);
- bool vgic_v3_emulate_reg(struct cpu_user_regs *regs, union hsr hsr);
- unsigned int vgic_v3_init_dist_iodev(struct vgic_io_device *dev);
- int vgic_v3_set_redist_base(struct domain *d, u32 index, u64 addr, u32 cou=
-nt);
-@@ -85,6 +86,10 @@ static inline void vgic_v3_fold_lr_state(struct vcpu *vc=
-pu)
- static inline void vgic_v3_populate_lr(struct vcpu *vcpu, struct vgic_irq =
-*irq, int lr)
- {
- }
-+static inline int vgic_v3_map_resources(struct domain *d)
++
++static struct vgic_irq *vgic_its_check_cache(struct domain *d, paddr_t db,
++					     u32 devid, u32 eventid)
 +{
-+    return 0;
++	struct vgic_dist *dist =3D &d->arch.vgic;
++	struct vgic_irq *irq;
++
++	spin_lock(&dist->lpi_list_lock);
++	irq =3D __vgic_its_check_cache(dist, db, devid, eventid);
++	spin_unlock(&dist->lpi_list_lock);
++
++	return irq;
 +}
- static inline unsigned int vgic_v3_init_dist_iodev(struct vgic_io_device *=
-dev)
++
++static void vgic_its_cache_translation(struct domain *d, struct vgic_its *=
+its,
++                                       u32 devid, u32 eventid,
++                                       struct vgic_irq *irq)
++{
++    struct vgic_dist *dist =3D &d->arch.vgic;
++    struct vgic_translation_cache_entry *cte;
++    unsigned long flags;
++    paddr_t db;
++
++    /* Do not cache a directly injected interrupt */
++    if ( irq->hw )
++        return;
++
++    spin_lock_irqsave(&dist->lpi_list_lock, flags);
++
++    if ( unlikely(list_empty(&dist->lpi_translation_cache)) )
++        goto out;
++
++    /*
++     * We could have raced with another CPU caching the same
++     * translation behind our back, so let's check it is not in
++     * already
++     */
++    db =3D its->vgic_its_base + GITS_TRANSLATER;
++    if ( __vgic_its_check_cache(dist, db, devid, eventid) )
++        goto out;
++
++    /* Always reuse the last entry (LRU policy) */
++    cte =3D list_last_entry(&dist->lpi_translation_cache, typeof(*cte), en=
+try);
++
++    /*
++     * Caching the translation implies having an extra reference
++     * to the interrupt, so drop the potential reference on what
++     * was in the cache, and increment it on the new interrupt.
++     */
++    if ( cte->irq )
++        __vgic_put_lpi_locked(d, cte->irq);
++
++    vgic_get_irq_kref(irq);
++
++    cte->db      =3D db;
++    cte->devid   =3D devid;
++    cte->eventid =3D eventid;
++    cte->irq     =3D irq;
++
++    /* Move the new translation to the head of the list */
++    list_move(&cte->entry, &dist->lpi_translation_cache);
++
++out:
++    spin_unlock_irqrestore(&dist->lpi_list_lock, flags);
++}
++
++void vgic_its_invalidate_cache(struct domain *d)
++{
++    struct vgic_dist *dist =3D &d->arch.vgic;
++    struct vgic_translation_cache_entry *cte;
++    unsigned long flags;
++
++    spin_lock_irqsave(&dist->lpi_list_lock, flags);
++
++    list_for_each_entry(cte, &dist->lpi_translation_cache, entry)
++    {
++        /*
++         * If we hit a NULL entry, there is nothing after this
++         * point.
++         */
++        if ( !cte->irq )
++            break;
++
++        __vgic_put_lpi_locked(d, cte->irq);
++        cte->irq =3D NULL;
++    }
++
++    spin_unlock_irqrestore(&dist->lpi_list_lock, flags);
++}
++
+ /* Requires the its_lock to be held. */
+ static void its_free_ite(struct domain *d, struct its_ite *ite)
  {
-     return 0;
+@@ -184,6 +330,8 @@ void vgic_its_free_device(struct vgic_its_device *devic=
+e)
+     list_for_each_entry_safe(ite, temp, &device->itt_head, ite_list)
+         its_free_ite(d, ite);
+=20
++    vgic_its_invalidate_cache(d);
++
+     list_del(&device->dev_list);
+     xfree(device);
+ }
+@@ -351,6 +499,8 @@ static void vgic_mmio_write_its_ctlr(struct domain *d, =
+struct vgic_its *its,
+         goto out;
+=20
+     its->enabled =3D !!(val & GITS_CTLR_ENABLE);
++    if ( !its->enabled )
++        vgic_its_invalidate_cache(d);
+=20
+     /*
+      * Try to process any pending commands. This function bails out early
+@@ -742,6 +892,48 @@ out:
+     return ret;
+ }
+=20
++/* Default is 16 cached LPIs per vcpu */
++#define LPI_DEFAULT_PCPU_CACHE_SIZE 16
++
++void vgic_lpi_translation_cache_init(struct domain *d)
++{
++    struct vgic_dist *dist =3D &d->arch.vgic;
++    unsigned int sz;
++    int i;
++
++    if ( !list_empty(&dist->lpi_translation_cache) )
++        return;
++
++    sz =3D d->max_vcpus * LPI_DEFAULT_PCPU_CACHE_SIZE;
++
++    for ( i =3D 0; i < sz; i++ )
++    {
++        struct vgic_translation_cache_entry *cte;
++
++        /* An allocation failure is not fatal */
++        cte =3D xzalloc(struct vgic_translation_cache_entry);
++        if ( WARN_ON(!cte) )
++            break;
++
++        INIT_LIST_HEAD(&cte->entry);
++        list_add(&cte->entry, &dist->lpi_translation_cache);
++    }
++}
++
++void vgic_lpi_translation_cache_destroy(struct domain *d)
++{
++    struct vgic_dist *dist =3D &d->arch.vgic;
++    struct vgic_translation_cache_entry *cte, *tmp;
++
++    vgic_its_invalidate_cache(d);
++
++    list_for_each_entry_safe(cte, tmp, &dist->lpi_translation_cache, entry=
+)
++    {
++        list_del(&cte->entry);
++        xfree(cte);
++    }
++}
++
+ #define INITIAL_BASER_VALUE                                               =
+     \
+     (GIC_BASER_CACHEABILITY(GITS_BASER, INNER, RaWb) |                    =
+     \
+      GIC_BASER_CACHEABILITY(GITS_BASER, OUTER, SameAsInner) |             =
+     \
+@@ -763,6 +955,8 @@ static int vgic_its_create(struct domain *d, u64 addr)
+=20
+     d->arch.vgic.its =3D its;
+=20
++    vgic_lpi_translation_cache_init(d);
++
+     spin_lock_init(&its->its_lock);
+     spin_lock_init(&its->cmd_lock);
+=20
+@@ -829,6 +1023,7 @@ void vgic_v3_its_free_domain(struct domain *d)
+=20
+     vgic_its_free_device_list(d, its);
+     vgic_its_free_collection_list(d, its);
++    vgic_lpi_translation_cache_destroy(d);
+=20
+     spin_unlock(&d->arch.vgic.its_devices_lock);
+     spin_unlock(&its->its_lock);
 --=20
 2.34.1
 
