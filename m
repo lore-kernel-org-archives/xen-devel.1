@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4054C4332F
-	for <xen-devel@archiver.kernel.org>; Sat, 11 Nov 2023 06:03:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630840.984037 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC52C4332F
+	for <xen-devel@archiver.kernel.org>; Sat, 11 Nov 2023 08:02:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630883.984048 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1h5B-0000x7-7P; Sat, 11 Nov 2023 06:03:01 +0000
+	id 1r1iwJ-0000dW-8Q; Sat, 11 Nov 2023 08:01:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630840.984037; Sat, 11 Nov 2023 06:03:01 +0000
+Received: by outflank-mailman (output) from mailman id 630883.984048; Sat, 11 Nov 2023 08:01:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1h5B-0000x0-4o; Sat, 11 Nov 2023 06:03:01 +0000
-Received: by outflank-mailman (input) for mailman id 630840;
- Sat, 11 Nov 2023 01:10:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wVGi=GY=proton.me=adresseinconnue@srs-se1.protection.inumbo.net>)
- id 1r1cW8-0005lG-3t
- for xen-devel@lists.xenproject.org; Sat, 11 Nov 2023 01:10:33 +0000
-Received: from mail-40138.protonmail.ch (mail-40138.protonmail.ch
- [185.70.40.138]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1964223a-802f-11ee-9b0e-b553b5be7939;
- Sat, 11 Nov 2023 02:10:29 +0100 (CET)
+	id 1r1iwJ-0000dP-5V; Sat, 11 Nov 2023 08:01:59 +0000
+Received: by outflank-mailman (input) for mailman id 630883;
+ Sat, 11 Nov 2023 08:01:57 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r1iwH-0000dF-Mn; Sat, 11 Nov 2023 08:01:57 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r1iwG-000109-Uq; Sat, 11 Nov 2023 08:01:56 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r1iwG-00046g-Ga; Sat, 11 Nov 2023 08:01:56 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1r1iwG-00024a-G9; Sat, 11 Nov 2023 08:01:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,55 +44,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1964223a-802f-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1699665026; x=1699924226;
-	bh=aDMexFQmGPG6u56g0VnujM80HkyA9ltlhNf9uFT+QoI=;
-	h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=NDfO1+ahS3gZZLJrsxgDr0ni0trRwwuXnzPVvtHRXpy0JwzgsrbaLaZnQ2U3jSgWt
-	 rtSrlDfWl//gaOg3dehDyxD98D1uwPZR2zoxqfWi2wRhVNI1lAo4NnmB5RjIX9Fndu
-	 an/HGzEZSlfo5oNEik0s38EZHmT6tyKkWhLK+GkSUUTlKfggq+WkjgPsK4rVjLN2If
-	 +8dvTKRQzN2Hfgj7ysVvTIr+kDflKkSq02dVPM7TdEeKtcn/HZHd1fUcv6dVlkIO8j
-	 +N+G1NI7yBdQ34VOsfnFzEUdox01F38CIrxZ9xgl6I3ZAd/L4ngGBumv1WTG5UqePD
-	 sySwU7JcvNReA==
-Date: Sat, 11 Nov 2023 01:10:13 +0000
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-From: adresseinconnue <adresseinconnue@proton.me>
-Subject: Bug report: Qubes 4.2 RC4
-Message-ID: <Sy3bgLQNkkk1ursClxwxZTiZVRZ88NIlc7gspd7nCdFlrqWKGLunFkzrETElI5XTJmq3q6akcY-oGyHcOE-oRHZYx5dTekuh1SuziXaO9zk=@proton.me>
-Feedback-ID: 49686843:user:proton
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=iOCT4dGveLVf7SxTOO0guXl3ymkUPwgySTd+wgcOFXE=; b=R80qK7/ltcgry1IUv8C3ZpUhj0
+	ePUO2jL3PAnGW8XOHnECDbSFj/fsaKgNOGnYKZK6K8BTAI/klSy/SFyBbpa6R7oEMgQ/ufxdH13os
+	YMuiWpx3wM5aYNoignjcg6KL8UypuPolUHEoQ/h16hjMr46CJfwDUG3xQX7GXuVEAnWs=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-183733-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="b1_bEnBJz2iQnlCCqk5O5CvkYXUonLRpT2CSkb6i2QI8A"
+Subject: [ovmf test] 183733: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=33deaa3b845f0d588ffd068003558be46f90aaac
+X-Osstest-Versions-That:
+    ovmf=589f2e49e5f9ff998bd4f08cbf28a1572ab7b544
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Sat, 11 Nov 2023 08:01:56 +0000
 
-This is a multi-part message in MIME format.
+flight 183733 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/183733/
 
---b1_bEnBJz2iQnlCCqk5O5CvkYXUonLRpT2CSkb6i2QI8A
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 33deaa3b845f0d588ffd068003558be46f90aaac
+baseline version:
+ ovmf                 589f2e49e5f9ff998bd4f08cbf28a1572ab7b544
 
-SGVsbG8sIEkgaGF2ZSBmaWxlZCBhIGJ1ZyByZXBvcnQgW29uIEdpdEh1Yl0oaHR0cHM6Ly94ZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcpIGFib3V0IG15IFdpRmkgY2FyZC4gVGhlIHJlcG9y
-dCByZWZlcmVuY2VzIGEgdmVyeSBkZXRhaWxlZCBpbml0aWFsIHBvc3Qgb24gdGhlIFF1YmVzIGZv
-cnVtIGFib3V0IHRoZSBzaXR1YXRpb24sIHdoaWNoIHlvdSBjYW4gW2ZpbmQgaGVyZV0oaHR0cHM6
-Ly94ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcpLiBUaGFuayB5b3UgZm9yIGxvb2tpbmcg
-aW50byB0aGlzLg==
+Last test of basis   183725  2023-11-10 01:45:00 Z    1 days
+Testing same since   183733  2023-11-11 02:41:07 Z    0 days    1 attempts
 
---b1_bEnBJz2iQnlCCqk5O5CvkYXUonLRpT2CSkb6i2QI8A
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
+------------------------------------------------------------
+People who touched revisions under test:
+  Leif Lindholm <quic_llindhol@quicinc.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Rebecca Cran <rebecca@bsdio.com>
 
-PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0
-cHg7Ij5IZWxsbywgSSBoYXZlIGZpbGVkIGEgYnVnIHJlcG9ydCA8YSBocmVmPSJodHRwczovL3hl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyIgdGl0bGU9Im9uIEdpdEh1YiI+b24gR2l0SHVi
-PC9hPiBhYm91dCBteSBXaUZpIGNhcmQuIFRoZSByZXBvcnQgcmVmZXJlbmNlcyBhIHZlcnkgZGV0
-YWlsZWQgaW5pdGlhbCBwb3N0IG9uIHRoZSBRdWJlcyBmb3J1bSBhYm91dCB0aGUgc2l0dWF0aW9u
-LCB3aGljaCB5b3UgY2FuIDxhIGhyZWY9Imh0dHBzOi8veGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnIiB0aXRsZT0iZmluZCBoZXJlIj5maW5kIGhlcmU8L2E+LiBUaGFuayB5b3UgZm9yIGxv
-b2tpbmcgaW50byB0aGlzLjxicj48L2Rpdj4NCg0K
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
 
---b1_bEnBJz2iQnlCCqk5O5CvkYXUonLRpT2CSkb6i2QI8A--
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   589f2e49e5..33deaa3b84  33deaa3b845f0d588ffd068003558be46f90aaac -> xen-tested-master
 
