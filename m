@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC1BCC4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Nov 2023 23:49:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.630835.983977 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA06EC4332F
+	for <xen-devel@archiver.kernel.org>; Sat, 11 Nov 2023 01:13:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.630842.983987 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1bFm-0002Av-8j; Fri, 10 Nov 2023 23:49:34 +0000
+	id 1r1cYt-0005rD-DT; Sat, 11 Nov 2023 01:13:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 630835.983977; Fri, 10 Nov 2023 23:49:34 +0000
+Received: by outflank-mailman (output) from mailman id 630842.983987; Sat, 11 Nov 2023 01:13:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r1bFm-0002Ao-6G; Fri, 10 Nov 2023 23:49:34 +0000
-Received: by outflank-mailman (input) for mailman id 630835;
- Fri, 10 Nov 2023 23:49:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r1cYt-0005r6-Aj; Sat, 11 Nov 2023 01:13:23 +0000
+Received: by outflank-mailman (input) for mailman id 630842;
+ Sat, 11 Nov 2023 01:13:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0VeX=GX=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1r1bFk-0002Ai-LX
- for xen-devel@lists.xenproject.org; Fri, 10 Nov 2023 23:49:32 +0000
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c9d940ea-8023-11ee-98da-6d05b1d4d9a1;
- Sat, 11 Nov 2023 00:49:31 +0100 (CET)
+ <SRS0=mrjv=GY=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1r1cYs-0005r0-36
+ for xen-devel@lists.xenproject.org; Sat, 11 Nov 2023 01:13:22 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7f701f37-802f-11ee-9b0e-b553b5be7939;
+ Sat, 11 Nov 2023 02:13:19 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id B4EF0CE16DE;
- Fri, 10 Nov 2023 23:49:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4834C433C8;
- Fri, 10 Nov 2023 23:49:26 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 240B361B50;
+ Sat, 11 Nov 2023 01:13:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36180C433C8;
+ Sat, 11 Nov 2023 01:13:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,87 +43,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c9d940ea-8023-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 7f701f37-802f-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1699660168;
-	bh=1All/a8Lap0XJa/MPRanfnfkzMC2g9BumuEPwua10yI=;
+	s=k20201202; t=1699665193;
+	bh=6Buy5WI8dHOTDajp23jaxdqYD8f2IuTxvRV6gD+xsaI=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=aqbMPzmR9+bFqR6yyuBINjDxhqRLIe1CU5w3bLZ7TCqU7E75OtOpmdG+VR5qlZhhx
-	 nD43g3hhbnwxEon0Jz2JRV/tbXRUNRgKh4fCMbQdanYAsru5WvHklUx1HyCXK/dRE6
-	 AShNanYat9h7kG6PVZ7SLiJjq1kgCB+916ZSp0T2SMkpIIyMupdaYj1NQPZjgYMfxG
-	 2At/lLppnlNJeVAmzQqQwuFha5uDZ5c4h5TH4Zm1to4nNFv8mBUPy9I9EkWvUMuUo3
-	 dnewmVdBDquZkKMNfpKTJ/sOIchMVOqKk23g9WJ1Z12dsOP+Urug4M+d1D/6p2NBJ8
-	 lWCtG5wDEtoKg==
-Date: Fri, 10 Nov 2023 15:49:25 -0800 (PST)
+	b=tBaUZmke8hcEtWHf9XYfuDO++65lnIPMhyiH9pYp0b0mvMNxkZqgbCzr+fUXb78lt
+	 O86JMohgTOZVvhUTeL17B6qK9w9R6YnXlyA11VgEYV/TaVNlIeu8S4MxU+S0mHmfYE
+	 /a1apE8I9HPeLSO42mtVSOPf7Ek0/JNGDZ01lnLSQhxemsyrp2IjGp8YjuXAILGMBA
+	 n0CW3xuf/iYUO0rnICWeVO9JXh63ZLuXMnz2FoECNeOBp3LE3TwAGhUZXM6GGdrZQN
+	 ISBmcAV4uP71NHbqtUgqAH7JyRz9S+Q6znPrz9KipJtENhEoANgH0CMLauAEC19CeT
+	 jrxaDPr2bjANw==
+Date: Fri, 10 Nov 2023 17:13:10 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    Xen-devel <xen-devel@lists.xenproject.org>, 
-    George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>, 
-    Wei Liu <wl@xen.org>, Julien Grall <julien@xen.org>, 
-    Henry Wang <Henry.Wang@arm.com>
-Subject: Re: [PATCH for-4.18 3/3] docs/sphinx: Fix indexing
-In-Reply-To: <0a168232-ea32-4aa1-b270-961782fec9dc@citrix.com>
-Message-ID: <alpine.DEB.2.22.394.2311101546100.3478774@ubuntu-linux-20-04-desktop>
-References: <20231108152727.58764-1-andrew.cooper3@citrix.com> <20231108152727.58764-4-andrew.cooper3@citrix.com> <alpine.DEB.2.22.394.2311091601420.3478774@ubuntu-linux-20-04-desktop> <0a168232-ea32-4aa1-b270-961782fec9dc@citrix.com>
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+cc: Julien Grall <julien@xen.org>, Jbeulich <jbeulich@suse.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Andrew Cooper3 <andrew.cooper3@citrix.com>, michal.orzel@amd.com, 
+    xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, 
+    consulting@bugseng.com, roger.pau@citrix.com, 
+    George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, 
+    xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH][for-4.19] domain: add ASSERT to help static analysis
+ tools
+In-Reply-To: <0ad97e9ff3d703f56b24393e327cac84@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2311101709410.3478774@ubuntu-linux-20-04-desktop>
+References: <3f163bb58993410183229e72eb1f227057f9b1c7.1699034273.git.nicola.vetrini@bugseng.com> <d67ec7e2-a606-ed62-150f-08e3c1c9aabe@suse.com> <44df74cb532bfb9642b1c8752ee8c0d6@bugseng.com> <2c8c246d-caea-5c8b-4a2a-83248422c48d@suse.com>
+ <b407f981-c58c-4272-bc7c-1470a87e2487@xen.org> <4b4583f5-4cdb-6be9-20eb-22466b6aef28@suse.com> <483f3b34-ebd4-4613-b083-596bebf5ac15@xen.org> <alpine.DEB.2.22.394.2311091614010.3478774@ubuntu-linux-20-04-desktop> <cffef994-1cba-4ce2-acb5-96e0ddd61064@xen.org>
+ <0ad97e9ff3d703f56b24393e327cac84@bugseng.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-259878124-1699660059=:3478774"
-Content-ID: <alpine.DEB.2.22.394.2311101547580.3478774@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=US-ASCII
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+On Fri, 10 Nov 2023, Nicola Vetrini wrote:
+> Hi everyone,
+> 
+> I trimmed the thread a bit, to make this more readable.
+> 
+> > > > > > IMHO, the only viable option would be to have a configuration to
+> > > > > > keep
+> > > > > > ASSERT in production build for scanning tools.
+> > > > > 
+> > > > > But wouldn't that then likely mean scanning to be done on builds not
+> > > > > also
+> > > > > used in production? Would doing so even be permitted when
+> > > > > certification
+> > > > > is a requirement? Or do you expect such production builds to be used
+> > > > > with
+> > > > > the assertions left in place (increasing the risk of a crash; recall
+> > > > > that
+> > > > > assertions themselves may also be wrong, and hence one triggering in
+> > > > > rare
+> > > > > cases may not really be a reason to bring down the system)?
+> > > > 
+> > > > I will leave Stefano/Nicola to answer from the certification
+> > > > perspective. But
+> > > > I don't really see how we could get away unless we replace most of the
+> > > > ASSERT() with proper runtime check (which may not be desirable for
+> > > > ASSERT()s
+> > > > like this one).
+> > > 
+> > > For sure we don't want to replace ASSERTs with runtime checks.
+> > > 
+> > > Nicola, do we really need the ASSERT to be implemented as a check, or
+> > > would the presence of the ASSERT alone suffice as a tag, the same way we
+> > > would be using /* SAF-xx-safe */ or asmlinkage?
+> > > 
+> > > If we only need ASSERT as a deviation tag, then production builds vs.
+> > > debug build doesn't matter.
+> > > 
+> > > If ECLAIR actually needs ASSERT to be implemented as a check, could we
+> > > have a special #define to define ASSERT in a special way for static
+> > > analysis tools in production builds? For instance:
+> > > 
+> > > #ifdef STATIC_ANALYSIS
+> > > #define ASSERT(p) \
+> > >      do { if ( unlikely(!(p)) ) printk("ASSERT triggered %s:%d",
+> > > __file__,__LINE__); } while (0)
+> > > #endif
+> > 
+> > Just to make 100% clear, you are saying that assessor will be happy if we
+> > analyze it with ASSERT enabled but in production we use it wout them
+> > enabled? The assumption here is that they should have *never* been triggered
+> > so they surely should not happen in production.
+> > 
+> > Cheers,
+> 
+> First of all, Andrew is experimenting with an alternate solution, so we should
+> wait making
+> any decision here until he can share the outcome of his findings.
+> However, from a certification perspective, the fact that the codebase is
+> tested with
+> asserts enabled is a strong enough claim for a justification to be based on an
+> assertion;
+> the code path just needs to be exercised by the tests.
+> Getting into the business of how to define asserts for static analysis is
+> likely to
+> just cause more trouble.
 
---8323329-259878124-1699660059=:3478774
-Content-Type: text/plain; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.22.394.2311101547581.3478774@ubuntu-linux-20-04-desktop>
-
-On Fri, 10 Nov 2023, Andrew Cooper wrote:
-> On 10/11/2023 12:07 am, Stefano Stabellini wrote:
-> > On Wed, 8 Nov 2023, Andrew Cooper wrote:
-> >> diff --git a/docs/index.rst b/docs/index.rst
-> >> index f3f779f89ce5..22fdde80590c 100644
-> >> --- a/docs/index.rst
-> >> +++ b/docs/index.rst
-> >> @@ -53,17 +53,18 @@ kind of development environment.
-> >>     hypervisor-guide/index
-> >>  
-> >>  
-> >> -MISRA C coding guidelines
-> >> --------------------------
-> >> +Unsorted documents
-> >> +------------------
-> >>  
-> >> -MISRA C rules and directive to be used as coding guidelines when writing
-> >> -Xen hypervisor code.
-> >> +Documents in need of some rearranging.
-> > I understand the need for an "Unsorted documents", but why taking away
-> > "MISRA C coding guidelines" from here?
-> 
-> You can't have it both here and in index.rst without breaking the indexing.
-> 
-> Also because in it's current position it breaks the navbar.  MISRA is
-> part of the developer guide, and what should be at the toplevel should
-> be a general section on safety certification, which cross-references the
-> developer guide amongst other things.  Nevertheless it will stay visible
-> for now at the top level because of how the toctree.
-> 
-> It's in unsorted because I have thrown the index together with the bare
-> minimum effort in order to fix Sphinx errors in time for 4.18.
-> 
-> This is also why I'm not changing any text.  There is 0 time between now
-> and this needing fixing for the release.
-> 
-> Someone else can find some time to polish it - which is far more work
-> than just in the index - and we can backport it when its done.
-
-OK. I don't mean to make things difficult so if you don't think it is
-easy to keep "MISRA C coding guidelines" here in docs/index.rst then so
-be it. Can you at least add "and related files" to the text in
-docs/misra/index.rst? Can be done on commit. Anyway:
-
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
---8323329-259878124-1699660059=:3478774--
+That's great. Also given Andrew's reply, then can we just go ahead with
+adding the ASSERT as done in this patch (with the added in-code comment
+as requested by Jan)?
 
