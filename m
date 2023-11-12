@@ -4,35 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35011C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:38:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631305.984513 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E3C4C4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 06:06:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631211.984523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2MqM-0005Z3-6E; Mon, 13 Nov 2023 02:38:30 +0000
+	id 1r2Q5D-00031J-IA; Mon, 13 Nov 2023 06:06:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631305.984513; Mon, 13 Nov 2023 02:38:30 +0000
+Received: by outflank-mailman (output) from mailman id 631211.984523; Mon, 13 Nov 2023 06:06:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2MqM-0005Yw-33; Mon, 13 Nov 2023 02:38:30 +0000
-Received: by outflank-mailman (input) for mailman id 631305;
- Mon, 13 Nov 2023 02:38:28 +0000
+	id 1r2Q5D-00031C-FP; Mon, 13 Nov 2023 06:06:03 +0000
+Received: by outflank-mailman (input) for mailman id 631211;
+ Sun, 12 Nov 2023 20:28:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=cCEZ=G2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1r2MdK-00011s-8c
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:25:02 +0000
-Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
- [2001:1600:3:17::bc09])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SfMF=GZ=gmail.com=jimmylee4930@srs-se1.protection.inumbo.net>)
+ id 1r2H4f-0002nE-Jz
+ for xen-devel@lists.xenproject.org; Sun, 12 Nov 2023 20:28:53 +0000
+Received: from mail-yw1-x1142.google.com (mail-yw1-x1142.google.com
+ [2607:f8b0:4864:20::1142])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d8b26ed8-81cb-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 03:25:01 +0100 (CET)
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
- by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCv05yshzMq2HC;
- Mon, 13 Nov 2023 02:25:00 +0000 (UTC)
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4STCtz4hvPz3W; Mon, 13 Nov 2023 03:24:59 +0100 (CET)
+ id 178f1d27-819a-11ee-98da-6d05b1d4d9a1;
+ Sun, 12 Nov 2023 21:28:52 +0100 (CET)
+Received: by mail-yw1-x1142.google.com with SMTP id
+ 00721157ae682-5b3b17d36d5so39621967b3.0
+ for <xen-devel@lists.xenproject.org>; Sun, 12 Nov 2023 12:28:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,567 +42,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d8b26ed8-81cb-11ee-98da-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1699842300;
-	bh=PATv6XqDzwsqZ2hzsduhnRZLYujicEUOyMqcIKoFSMY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=0mhnZA1xfB5IXGthCsMhNYtbubItWy18yziuYfeR6AWnv19fq1a5ISoUh4unXyOIh
-	 SC9+Jk+sOe/3QbX5C7M0oDyImgy94uTLkrpYq/BH7ntImAVOjNoVR0spQpk+hAJBca
-	 WdT/RtauYzVOLQlQ7Hw86Ab44ZapL/N2SdK3uwOw=
-From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-To: Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H . Peter Anvin" <hpa@zytor.com>,
-	Ingo Molnar <mingo@redhat.com>,
-	Kees Cook <keescook@chromium.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Wanpeng Li <wanpengli@tencent.com>
-Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-	Alexander Graf <graf@amazon.com>,
-	Chao Peng <chao.p.peng@linux.intel.com>,
-	"Edgecombe, Rick P" <rick.p.edgecombe@intel.com>,
-	Forrest Yuan Yu <yuanyu@google.com>,
-	James Gowans <jgowans@amazon.com>,
-	James Morris <jamorris@linux.microsoft.com>,
-	John Andersen <john.s.andersen@intel.com>,
-	"Madhavan T . Venkataraman" <madvenka@linux.microsoft.com>,
-	Marian Rotariu <marian.c.rotariu@gmail.com>,
-	=?UTF-8?q?Mihai=20Don=C8=9Bu?= <mdontu@bitdefender.com>,
-	=?UTF-8?q?Nicu=C8=99or=20C=C3=AE=C8=9Bu?= <nicu.citu@icloud.com>,
-	Thara Gopinath <tgopinath@microsoft.com>,
-	Trilok Soni <quic_tsoni@quicinc.com>,
-	Wei Liu <wei.liu@kernel.org>,
-	Will Deacon <will@kernel.org>,
-	Yu Zhang <yu.c.zhang@linux.intel.com>,
-	Zahra Tarkhani <ztarkhani@microsoft.com>,
-	=?UTF-8?q?=C8=98tefan=20=C8=98icleru?= <ssicleru@bitdefender.com>,
-	dev@lists.cloudhypervisor.org,
-	kvm@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-security-module@vger.kernel.org,
-	qemu-devel@nongnu.org,
-	virtualization@lists.linux-foundation.org,
-	x86@kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v2 18/19] heki: x86: Protect guest kernel memory using the KVM hypervisor
-Date: Sun, 12 Nov 2023 21:23:25 -0500
-Message-ID: <20231113022326.24388-19-mic@digikod.net>
-In-Reply-To: <20231113022326.24388-1-mic@digikod.net>
-References: <20231113022326.24388-1-mic@digikod.net>
+X-Inumbo-ID: 178f1d27-819a-11ee-98da-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1699820931; x=1700425731; darn=lists.xenproject.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=/bZ6JlDX2WiUn3FAhGNH+2q05nnJRn5fMsHYlnD6/As=;
+        b=YdaBlGwUUZHFuBNXo6+vED0KVJ4p8UGYjxUgHjQx2ZVXLZM5bISVYo0ylVl4CJ5D/X
+         hZkTyjj0Le/UD2dMBArFmqnfHAViRc3ABpGRfpSZZ2z9ppVU62GUlBxVflPalOvWxIl0
+         0taNX5SMd8zH4wcZP1cHnm3oI7N/QupL2hRqvILmZLK6dibUte4j1yPiYYVKTYU6mac/
+         Iokg+V4EtJ5tdcExJPNh0upBwY9S8pzXjN5HTqEDglbn5FoOEKxv1xmP+r5mXUoiqoXd
+         b1AOumK3mDb+RWNWmXiAgn9dzu8jU8+/UdBBu7PenHxHrouR3HsC1y5ChsB9ax64VOAw
+         wcAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699820931; x=1700425731;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=/bZ6JlDX2WiUn3FAhGNH+2q05nnJRn5fMsHYlnD6/As=;
+        b=rLiQHuweky8bZ+YKQY7pymyQMJ/HxUzCJ31DPbmDoUTKx/sJUyEp/QGFe2jviTwZyt
+         s2d9LskTD6yuycnFqQkqRwgtgorKbd04WsAg3EDqh0aFlT3/nX8tb9n0pE/Wi2IvhX5V
+         Ex+W1e0HUSNZL/kT7Y3D6y11I0yxPn1u0rE683wGRzGDNFHf0M3l1qBwl/Eum1gFclgJ
+         tpp3bdk+p2lCb/04xpbL8U3I0xMzz6AXCclGqtqeLTdlV1bFYO6qKRwb5iE3/9fbrwKr
+         EDHLyVEEvMAlfiR2zawLgpFA35kJsB/8j3Hwa8ci9PcDKz+xrShP1tak9cpOpT9R3O7q
+         986w==
+X-Gm-Message-State: AOJu0YwfQqgMZccb8zaiNCqqsw62vVv7nA4ncsXXZL43QAqdBHBTzFDz
+	VlvjHqrdGzjIF0iD0K6+Uui8g9+/O1Zh/IteLD3aKpFn4vMRmWmRJ1E=
+X-Google-Smtp-Source: AGHT+IEIQdeOFCqy9xfoUGcEGvUMafPwMwzop8jFaHO9Vici/0Kxj1gFYA1ldfbB/u9YKejsBefBMPHZSA0C1XxNiU8=
+X-Received: by 2002:a25:6ec1:0:b0:daf:18f9:2a3f with SMTP id
+ j184-20020a256ec1000000b00daf18f92a3fmr4882862ybc.27.1699820930776; Sun, 12
+ Nov 2023 12:28:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+From: Jimmy Lee <jimmylee4930@gmail.com>
+Date: Sun, 12 Nov 2023 12:28:40 -0800
+Message-ID: <CAFyR2DVCuDyufB-EWHTSurQ69Dc7PZ9CQZdN_T-Ym2rjVaRPNw@mail.gmail.com>
+Subject: Faking the number of CPUs for dom0 with dom0_max_vcpus
+To: xen-devel@lists.xenproject.org
+Content-Type: multipart/alternative; boundary="000000000000c2c8fc0609fa66a0"
 
-From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
+--000000000000c2c8fc0609fa66a0
+Content-Type: text/plain; charset="UTF-8"
 
-Implement a hypervisor function, kvm_protect_memory() that calls the
-KVM_HC_PROTECT_MEMORY hypercall to request the KVM hypervisor to
-set specified permissions on a list of guest pages.
+Hello Xen experts, I am trying to set dom0_max_vcpus to a number that is
+larger than the number of pcpus. For example, I have a 4-CPU machine but I
+want applications in dom0 to have an illusion that they are running on a
+64-cpu machine. However, it seems that dom0 will always recognize the
+number of pcpus. I can see the vcpus in the output of "xl vcpu-list" but
+most of them are not online. How can I achieve my goal? Thanks!
 
-Using the protect_memory() function, set proper EPT permissions for all
-guest pages.
 
-Use the MEM_ATTR_IMMUTABLE property to protect the kernel static
-sections and the boot-time read-only sections. This enables to make sure
-a compromised guest will not be able to change its main physical memory
-page permissions. However, this also disable any feature that may change
-the kernel's text section (e.g., ftrace, Kprobes), but they can still be
-used on kernel modules.
+Jimmy
 
-Module loading/unloading, and eBPF JIT is allowed without restrictions
-for now, but we'll need a way to authenticate these code changes to
-really improve the guests' security. We plan to use module signatures,
-but there is no solution yet to authenticate eBPF programs.
+[root@ip-10-0-131-61 cpu3]# xl vcpu-list
+> Name                                ID  VCPU   CPU State   Time(s)
+> Affinity (Hard / Soft)
+> Domain-0                             0     0    0   r--      15.9  all /
+> all
+> Domain-0                             0     1    3   -b-      11.9  all /
+> all
+> Domain-0                             0     2    1   -b-      11.2  all /
+> all
+> Domain-0                             0     3    2   -b-      12.4  all /
+> all
+> Domain-0                             0     4    -   --p       0.0  all /
+> all
+> Domain-0                             0     5    -   --p       0.0  all /
+> all
+> Domain-0                             0     6    -   --p       0.0  all /
+> all
+> Domain-0                             0     7    -   --p       0.0  all /
+> all
+> Domain-0                             0     8    -   --p       0.0  all /
+> all
+> ....
+>
 
-Being able to use ftrace and Kprobes in a secure way is a challenge not
-solved yet. We're looking for ideas to make this work.
+[root@ip-10-0-131-61 cpu3]# lscpu
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                4
+On-line CPU(s) list:   0-3
+Thread(s) per core:    4
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+...
 
-Likewise, the JUMP_LABEL feature cannot work because the kernel's text
-section is read-only.
+[root@ip-10-0-131-61 cpu3]# xl info
+...
+xen_commandline        : placeholder dom0_mem=3%,min:2G,max:4G
+com1=115200,8n1 console=com1,tty,vga dom0_max_vcpus=64 spec-ctrl=no
+sched=credit vcpu_migration_delay=1000 allowsuperpage ioapic_ack=new
+...
 
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: H. Peter Anvin <hpa@zytor.com>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Sean Christopherson <seanjc@google.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
-Cc: Wanpeng Li <wanpengli@tencent.com>
-Co-developed-by: Mickaël Salaün <mic@digikod.net>
-Signed-off-by: Mickaël Salaün <mic@digikod.net>
-Signed-off-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
----
+--000000000000c2c8fc0609fa66a0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-Changes since v1:
-* New patch
----
- arch/x86/kernel/kvm.c  | 11 ++++++
- arch/x86/kvm/mmu/mmu.c |  2 +-
- arch/x86/mm/heki.c     | 21 ++++++++++
- include/linux/heki.h   | 26 ++++++++++++
- virt/heki/Kconfig      |  1 +
- virt/heki/counters.c   | 90 ++++++++++++++++++++++++++++++++++++++++--
- virt/heki/main.c       | 83 +++++++++++++++++++++++++++++++++++++-
- 7 files changed, 229 insertions(+), 5 deletions(-)
-
-diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
-index 8349f4ad3bbd..343615b0e3bf 100644
---- a/arch/x86/kernel/kvm.c
-+++ b/arch/x86/kernel/kvm.c
-@@ -1021,8 +1021,19 @@ static int kvm_lock_crs(void)
- 	return err;
- }
- 
-+static int kvm_protect_memory(gpa_t pa)
-+{
-+	long err;
-+
-+	WARN_ON_ONCE(in_interrupt());
-+
-+	err = kvm_hypercall1(KVM_HC_PROTECT_MEMORY, pa);
-+	return err;
-+}
-+
- static struct heki_hypervisor kvm_heki_hypervisor = {
- 	.lock_crs = kvm_lock_crs,
-+	.protect_memory = kvm_protect_memory,
- };
- 
- static void kvm_init_heki(void)
-diff --git a/arch/x86/kvm/mmu/mmu.c b/arch/x86/kvm/mmu/mmu.c
-index 2d09bcc35462..13be05e9ccf1 100644
---- a/arch/x86/kvm/mmu/mmu.c
-+++ b/arch/x86/kvm/mmu/mmu.c
-@@ -7374,7 +7374,7 @@ bool kvm_arch_post_set_memory_attributes(struct kvm *kvm,
- 	int level;
- 
- 	lockdep_assert_held_write(&kvm->mmu_lock);
--	lockdep_assert_held(&kvm->slots_lock);
-+	lockdep_assert_held(&kvm->slots_arch_lock);
- 
- 	/*
- 	 * The sequence matters here: upper levels consume the result of lower
-diff --git a/arch/x86/mm/heki.c b/arch/x86/mm/heki.c
-index e4c60d8b4f2d..6c3fa9defada 100644
---- a/arch/x86/mm/heki.c
-+++ b/arch/x86/mm/heki.c
-@@ -45,6 +45,19 @@ __init void heki_arch_early_init(void)
- 	heki_map(direct_map_end, kernel_end);
- }
- 
-+void heki_arch_late_init(void)
-+{
-+	/*
-+	 * The permission counters for all existing kernel mappings have
-+	 * already been updated. Now, walk all the pages, compute their
-+	 * permissions from the counters and apply the permissions in the
-+	 * host page table. To accomplish this, we walk the direct map
-+	 * range.
-+	 */
-+	heki_protect(direct_map_va, direct_map_end);
-+	pr_warn("Guest memory protected\n");
-+}
-+
- unsigned long heki_flags_to_permissions(unsigned long flags)
- {
- 	unsigned long permissions;
-@@ -67,6 +80,11 @@ void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
- 		*clear |= MEM_ATTR_EXEC;
- }
- 
-+unsigned long heki_default_permissions(void)
-+{
-+	return MEM_ATTR_READ | MEM_ATTR_WRITE;
-+}
-+
- static unsigned long heki_pgprot_to_flags(pgprot_t prot)
- {
- 	unsigned long flags = 0;
-@@ -100,6 +118,9 @@ static void heki_text_poke_common(struct page **pages, int npages,
- 		heki_callback(&args);
- 	}
- 
-+	if (args.head)
-+		heki_apply_permissions(&args);
-+
- 	mutex_unlock(&heki_lock);
- }
- 
-diff --git a/include/linux/heki.h b/include/linux/heki.h
-index 6f2cfddc6dac..306bcec7ae92 100644
---- a/include/linux/heki.h
-+++ b/include/linux/heki.h
-@@ -15,6 +15,8 @@
- #include <linux/init.h>
- #include <linux/kernel.h>
- #include <linux/printk.h>
-+#include <linux/mm.h>
-+#include <linux/memblock.h>
- #include <linux/slab.h>
- 
- #ifdef CONFIG_HEKI
-@@ -61,6 +63,7 @@ struct heki_page_list {
-  */
- struct heki_hypervisor {
- 	int (*lock_crs)(void); /* Lock control registers. */
-+	int (*protect_memory)(gpa_t pa); /* Protect guest memory */
- };
- 
- /*
-@@ -74,16 +77,28 @@ struct heki_hypervisor {
-  *	- a page is mapped into the kernel address space
-  *	- a page is unmapped from the kernel address space
-  *	- permissions are changed for a mapped page
-+ *
-+ * At the end of kernel boot (before kicking off the init process), the
-+ * permissions for guest pages are applied to the host page table.
-+ *
-+ * Beyond that point, the counters and host page table permissions are updated
-+ * whenever:
-+ *
-+ *	- a guest page is mapped into the kernel address space
-+ *	- a guest page is unmapped from the kernel address space
-+ *	- permissions are changed for a mapped guest page
-  */
- struct heki {
- 	struct heki_hypervisor *hypervisor;
- 	struct mem_table *counters;
-+	bool protect_memory;
- };
- 
- enum heki_cmd {
- 	HEKI_MAP,
- 	HEKI_UPDATE,
- 	HEKI_UNMAP,
-+	HEKI_PROTECT_MEMORY,
- };
- 
- /*
-@@ -103,7 +118,12 @@ struct heki_args {
- 
- 	/* Permissions passed by heki_update(). */
- 	unsigned long set;
-+	unsigned long set_global;
- 	unsigned long clear;
-+
-+	/* Page list is built by the callback. */
-+	struct heki_page_list *head;
-+	phys_addr_t head_pa;
- };
- 
- /* Callback function called by the table walker. */
-@@ -125,14 +145,20 @@ void heki_update(unsigned long va, unsigned long end, unsigned long set,
- 		 unsigned long clear);
- void heki_unmap(unsigned long va, unsigned long end);
- void heki_callback(struct heki_args *args);
-+void heki_protect(unsigned long va, unsigned long end);
-+void heki_add_pa(struct heki_args *args, phys_addr_t pa,
-+		 unsigned long permissions);
-+void heki_apply_permissions(struct heki_args *args);
- 
- /* Arch-specific functions. */
- void heki_arch_early_init(void);
-+void heki_arch_late_init(void);
- unsigned long heki_flags_to_permissions(unsigned long flags);
- void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
- 				unsigned long *clear);
- void heki_text_poke_start(struct page **pages, int npages, pgprot_t prot);
- void heki_text_poke_end(struct page **pages, int npages, pgprot_t prot);
-+unsigned long heki_default_permissions(void);
- 
- #else /* !CONFIG_HEKI */
- 
-diff --git a/virt/heki/Kconfig b/virt/heki/Kconfig
-index 6d956eb9d04b..9bde84cd759e 100644
---- a/virt/heki/Kconfig
-+++ b/virt/heki/Kconfig
-@@ -8,6 +8,7 @@ config HEKI
- 	select KVM_GENERIC_MEMORY_ATTRIBUTES
- 	depends on !X86_16BIT
- 	select SPARSEMEM
-+	depends on !JUMP_LABEL
- 	help
- 	  This feature enhances guest virtual machine security by taking
- 	  advantage of security features provided by the hypervisor for guests.
-diff --git a/virt/heki/counters.c b/virt/heki/counters.c
-index d0f830b0775a..302113bee6ff 100644
---- a/virt/heki/counters.c
-+++ b/virt/heki/counters.c
-@@ -13,6 +13,25 @@
- 
- DEFINE_MUTEX(heki_lock);
- 
-+static inline unsigned long heki_permissions(struct heki_counters *counters)
-+{
-+	unsigned long permissions;
-+
-+	if (!counters)
-+		return heki_default_permissions();
-+
-+	permissions = 0;
-+	if (counters->read)
-+		permissions |= MEM_ATTR_READ;
-+	if (counters->write)
-+		permissions |= MEM_ATTR_WRITE;
-+	if (counters->execute)
-+		permissions |= MEM_ATTR_EXEC;
-+	if (!permissions)
-+		permissions = heki_default_permissions();
-+	return permissions;
-+}
-+
- static void heki_update_counters(struct heki_counters *counters,
- 				 unsigned long perm, unsigned long set,
- 				 unsigned long clear)
-@@ -53,20 +72,38 @@ static struct heki_counters *heki_create_counters(struct mem_table *table,
- 	return counters;
- }
- 
-+static void heki_check_counters(struct heki_counters *counters,
-+				unsigned long permissions)
-+{
-+	/*
-+	 * If a permission has been added to a PTE directly, it will not be
-+	 * reflected in the counters. Adjust for that. This is a bit of a
-+	 * hack, really.
-+	 */
-+	if ((permissions & MEM_ATTR_READ) && !counters->read)
-+		counters->read++;
-+	if ((permissions & MEM_ATTR_WRITE) && !counters->write)
-+		counters->write++;
-+	if ((permissions & MEM_ATTR_EXEC) && !counters->execute)
-+		counters->execute++;
-+}
-+
- void heki_callback(struct heki_args *args)
- {
- 	/* The VA is only for debug. It is not really used in this function. */
- 	unsigned long va;
- 	phys_addr_t pa, pa_end;
--	unsigned long permissions;
-+	unsigned long permissions, existing, new;
- 	void **entry;
- 	struct heki_counters *counters;
- 	unsigned int ignore;
-+	bool protect_memory;
- 
- 	if (!pfn_valid(args->pa >> PAGE_SHIFT))
- 		return;
- 
- 	permissions = heki_flags_to_permissions(args->flags);
-+	protect_memory = heki.protect_memory;
- 
- 	/*
- 	 * Handle counters for a leaf entry in the kernel page table.
-@@ -80,6 +117,8 @@ void heki_callback(struct heki_args *args)
- 		else
- 			counters = NULL;
- 
-+		existing = heki_permissions(counters);
-+
- 		switch (args->cmd) {
- 		case HEKI_MAP:
- 			if (!counters)
-@@ -102,10 +141,30 @@ void heki_callback(struct heki_args *args)
- 					     permissions);
- 			break;
- 
-+		case HEKI_PROTECT_MEMORY:
-+			if (counters)
-+				heki_check_counters(counters, permissions);
-+			existing = 0;
-+			break;
-+
- 		default:
- 			WARN_ON_ONCE(1);
- 			break;
- 		}
-+
-+		new = heki_permissions(counters) | args->set_global;
-+
-+		/*
-+		 * To be able to use a pool of allocated memory for new
-+		 * executable or read-only mappings (e.g., kernel module
-+		 * loading), ignores immutable attribute if memory can be
-+		 * changed.
-+		 */
-+		if (new & MEM_ATTR_WRITE)
-+			new &= ~MEM_ATTR_IMMUTABLE;
-+
-+		if (protect_memory && existing != new)
-+			heki_add_pa(args, pa, new);
- 	}
- }
- 
-@@ -120,14 +179,20 @@ static void heki_func(unsigned long va, unsigned long end,
- 
- 	mutex_lock(&heki_lock);
- 
-+	if (args->cmd == HEKI_PROTECT_MEMORY)
-+		heki.protect_memory = true;
-+
- 	heki_walk(va, end, heki_callback, args);
- 
-+	if (args->head)
-+		heki_apply_permissions(args);
-+
- 	mutex_unlock(&heki_lock);
- }
- 
- /*
-  * Find the mappings in the given range and initialize permission counters for
-- * them.
-+ * them. Apply permissions in the host page table.
-  */
- void heki_map(unsigned long va, unsigned long end)
- {
-@@ -138,6 +203,25 @@ void heki_map(unsigned long va, unsigned long end)
- 	heki_func(va, end, &args);
- }
- 
-+/*
-+ * The architecture calls this to protect all guest pages at the end of
-+ * kernel init. Up to this point, only the counters for guest pages have been
-+ * updated. No permissions have been applied on the host page table.
-+ * Now, the permissions will be applied.
-+ *
-+ * Beyond this point, the host page table permissions will always be updated
-+ * whenever the counters are updated.
-+ */
-+void heki_protect(unsigned long va, unsigned long end)
-+{
-+	struct heki_args args = {
-+		.cmd = HEKI_PROTECT_MEMORY,
-+		.set_global = MEM_ATTR_IMMUTABLE,
-+	};
-+
-+	heki_func(va, end, &args);
-+}
-+
- /*
-  * Find the mappings in the given range and update permission counters for
-  * them. Apply permissions in the host page table.
-@@ -156,7 +240,7 @@ void heki_update(unsigned long va, unsigned long end, unsigned long set,
- 
- /*
-  * Find the mappings in the given range and revert the permission counters for
-- * them.
-+ * them. Apply permissions in the host page table.
-  */
- void heki_unmap(unsigned long va, unsigned long end)
- {
-diff --git a/virt/heki/main.c b/virt/heki/main.c
-index 0ab7de659e6f..5629334112e7 100644
---- a/virt/heki/main.c
-+++ b/virt/heki/main.c
-@@ -51,7 +51,7 @@ void heki_late_init(void)
- {
- 	struct heki_hypervisor *hypervisor = heki.hypervisor;
- 
--	if (!heki_enabled || !heki.hypervisor)
-+	if (!heki.counters)
- 		return;
- 
- 	/* Locks control registers so a compromised guest cannot change them. */
-@@ -59,6 +59,87 @@ void heki_late_init(void)
- 		return;
- 
- 	pr_warn("Control registers locked\n");
-+
-+	heki_arch_late_init();
-+}
-+
-+/*
-+ * Build a list of guest pages with their permissions. This list will be
-+ * passed to the VMM/Hypervisor to set these permissions in the host page
-+ * table.
-+ */
-+void heki_add_pa(struct heki_args *args, phys_addr_t pa,
-+		 unsigned long permissions)
-+{
-+	struct heki_page_list *list = args->head;
-+	struct heki_pages *hpage;
-+	u64 max_pages;
-+	struct page *page;
-+	bool new = false;
-+
-+	max_pages = (PAGE_SIZE - sizeof(*list)) / sizeof(*hpage);
-+again:
-+	if (!list || list->npages == max_pages) {
-+		page = alloc_page(GFP_KERNEL);
-+		if (WARN_ON_ONCE(!page))
-+			return;
-+
-+		list = page_address(page);
-+		list->npages = 0;
-+		list->next_pa = args->head_pa;
-+		list->next = args->head;
-+
-+		args->head = list;
-+		args->head_pa = page_to_pfn(page) << PAGE_SHIFT;
-+		new = true;
-+	}
-+
-+	hpage = &list->pages[list->npages];
-+	if (new) {
-+		hpage->pa = pa;
-+		hpage->epa = pa + PAGE_SIZE;
-+		hpage->permissions = permissions;
-+		return;
-+	}
-+
-+	if (pa == hpage->epa && permissions == hpage->permissions) {
-+		hpage->epa += PAGE_SIZE;
-+		return;
-+	}
-+
-+	list->npages++;
-+	new = true;
-+	goto again;
-+}
-+
-+void heki_apply_permissions(struct heki_args *args)
-+{
-+	struct heki_hypervisor *hypervisor = heki.hypervisor;
-+	struct heki_page_list *list = args->head;
-+	phys_addr_t list_pa = args->head_pa;
-+	struct page *page;
-+	int ret;
-+
-+	if (!list)
-+		return;
-+
-+	/* The very last one must be included. */
-+	list->npages++;
-+
-+	/* Protect guest memory in the host page table. */
-+	ret = hypervisor->protect_memory(list_pa);
-+	if (ret) {
-+		pr_warn("Failed to set memory permission\n");
-+		return;
-+	}
-+
-+	/* Free all the pages in the page list. */
-+	while (list) {
-+		page = pfn_to_page(list_pa >> PAGE_SHIFT);
-+		list_pa = list->next_pa;
-+		list = list->next;
-+		__free_pages(page, 0);
-+	}
- }
- 
- static int __init heki_parse_config(char *str)
--- 
-2.42.1
-
+PGRpdiBkaXI9Imx0ciI+SGVsbG8gWGVuIGV4cGVydHMsIEkgYW0gdHJ5aW5nIHRvIHNldMKgZG9t
+MF9tYXhfdmNwdXMgdG8gYSBudW1iZXIgdGhhdCBpcyBsYXJnZXIgdGhhbiB0aGUgbnVtYmVyIG9m
+IHBjcHVzLiBGb3IgZXhhbXBsZSwgSSBoYXZlIGEgNC1DUFUgbWFjaGluZSBidXQgSSB3YW50IGFw
+cGxpY2F0aW9ucyBpbiBkb20wIHRvIGhhdmUgYW4gaWxsdXNpb24gdGhhdCB0aGV5IGFyZSBydW5u
+aW5nIG9uIGEgNjQtY3B1IG1hY2hpbmUuIEhvd2V2ZXIsIGl0IHNlZW1zIHRoYXQgZG9tMCB3aWxs
+IGFsd2F5cyByZWNvZ25pemUgdGhlIG51bWJlciBvZiBwY3B1cy4gSSBjYW4gc2VlIHRoZSB2Y3B1
+cyBpbiB0aGUgb3V0cHV0IG9mICZxdW90O3hsIHZjcHUtbGlzdCZxdW90OyBidXQgbW9zdCBvZiB0
+aGVtIGFyZSBub3Qgb25saW5lLiBIb3cgY2FuIEkgYWNoaWV2ZSBteSBnb2FsPyBUaGFua3MhPGRp
+dj48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5KaW1teTxicj48ZGl2Pjxicj48L2Rpdj48
+YmxvY2txdW90ZSBjbGFzcz0iZ21haWxfcXVvdGUiIHN0eWxlPSJtYXJnaW46MHB4IDBweCAwcHgg
+MC44ZXg7Ym9yZGVyLWxlZnQ6MXB4IHNvbGlkIHJnYigyMDQsMjA0LDIwNCk7cGFkZGluZy1sZWZ0
+OjFleCI+PGZvbnQgZmFjZT0ibW9ub3NwYWNlIj5bcm9vdEBpcC0xMC0wLTEzMS02MSBjcHUzXSMg
+eGwgdmNwdS1saXN0PGJyPk5hbWUgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqBJRCDCoFZDUFUgwqAgQ1BVIFN0YXRlIMKgIFRpbWUocykgQWZmaW5pdHkgKEhh
+cmQgLyBTb2Z0KTxicj5Eb21haW4tMCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCAwIMKgIMKgIDAgwqAgwqAwIMKgIHItLSDCoCDCoCDCoDE1LjkgwqBhbGwgLyBhbGw8
+YnI+RG9tYWluLTAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgMCDC
+oCDCoCAxIMKgIMKgMyDCoCAtYi0gwqAgwqAgwqAxMS45IMKgYWxsIC8gYWxsPGJyPkRvbWFpbi0w
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIDAgwqAgwqAgMiDCoCDC
+oDEgwqAgLWItIMKgIMKgIMKgMTEuMiDCoGFsbCAvIGFsbDxicj5Eb21haW4tMCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAwIMKgIMKgIDMgwqAgwqAyIMKgIC1iLSDC
+oCDCoCDCoDEyLjQgwqBhbGwgLyBhbGw8YnI+RG9tYWluLTAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgMCDCoCDCoCA0IMKgIMKgLSDCoCAtLXAgwqAgwqAgwqAgMC4w
+IMKgYWxsIC8gYWxsPGJyPkRvbWFpbi0wIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIDAgwqAgwqAgNSDCoCDCoC0gwqAgLS1wIMKgIMKgIMKgIDAuMCDCoGFsbCAvIGFs
+bDxicj5Eb21haW4tMCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAw
+IMKgIMKgIDYgwqAgwqAtIMKgIC0tcCDCoCDCoCDCoCAwLjAgwqBhbGwgLyBhbGw8YnI+RG9tYWlu
+LTAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgMCDCoCDCoCA3IMKg
+IMKgLSDCoCAtLXAgwqAgwqAgwqAgMC4wIMKgYWxsIC8gYWxsPGJyPkRvbWFpbi0wIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIDAgwqAgwqAgOCDCoCDCoC0gwqAgLS1w
+IMKgIMKgIMKgIDAuMCDCoGFsbCAvIGFsbDxicj4uLi4uPC9mb250Pjxicj48L2Jsb2NrcXVvdGU+
+PGRpdj48YnI+PC9kaXY+PGRpdj48Zm9udCBmYWNlPSJtb25vc3BhY2UiPltyb290QGlwLTEwLTAt
+MTMxLTYxIGNwdTNdIyBsc2NwdTwvZm9udD48L2Rpdj48Zm9udCBmYWNlPSJtb25vc3BhY2UiPkFy
+Y2hpdGVjdHVyZTogwqAgwqAgwqAgwqAgwqB4ODZfNjQ8YnI+Q1BVIG9wLW1vZGUocyk6IMKgIMKg
+IMKgIMKgMzItYml0LCA2NC1iaXQ8YnI+Qnl0ZSBPcmRlcjogwqAgwqAgwqAgwqAgwqAgwqBMaXR0
+bGUgRW5kaWFuPGJyPkNQVShzKTogwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqA0PGJyPk9uLWxpbmUg
+Q1BVKHMpIGxpc3Q6IMKgIDAtMzxicj5UaHJlYWQocykgcGVyIGNvcmU6IMKgIMKgNDxicj5Db3Jl
+KHMpIHBlciBzb2NrZXQ6IMKgIMKgMTxicj5Tb2NrZXQocyk6IMKgIMKgIMKgIMKgIMKgIMKgIDE8
+YnI+TlVNQSBub2RlKHMpOiDCoCDCoCDCoCDCoCDCoDE8L2ZvbnQ+PGRpdj48Zm9udCBmYWNlPSJt
+b25vc3BhY2UiPi4uLjwvZm9udD48L2Rpdj48ZGl2Pjxmb250IGZhY2U9Im1vbm9zcGFjZSI+PGJy
+PjwvZm9udD48L2Rpdj48ZGl2Pjxmb250IGZhY2U9Im1vbm9zcGFjZSI+W3Jvb3RAaXAtMTAtMC0x
+MzEtNjEgY3B1M10jIHhsIGluZm88YnI+PC9mb250PjxkaXY+PGZvbnQgZmFjZT0ibW9ub3NwYWNl
+Ij4uLi48L2ZvbnQ+PC9kaXY+PGRpdj48Zm9udCBmYWNlPSJtb25vc3BhY2UiPnhlbl9jb21tYW5k
+bGluZSDCoCDCoCDCoCDCoDogcGxhY2Vob2xkZXIgZG9tMF9tZW09MyUsbWluOjJHLG1heDo0RyBj
+b20xPTExNTIwMCw4bjEgY29uc29sZT1jb20xLHR0eSx2Z2EgZG9tMF9tYXhfdmNwdXM9NjQgc3Bl
+Yy1jdHJsPW5vIHNjaGVkPWNyZWRpdCB2Y3B1X21pZ3JhdGlvbl9kZWxheT0xMDAwIGFsbG93c3Vw
+ZXJwYWdlIGlvYXBpY19hY2s9bmV3PGJyPjwvZm9udD48L2Rpdj48ZGl2Pjxmb250IGZhY2U9Im1v
+bm9zcGFjZSI+Li4uPC9mb250PjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2Pjxk
+aXY+PGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2
+PjxkaXY+PGZvbnQgZmFjZT0ibW9ub3NwYWNlIj48YnI+PC9mb250PjwvZGl2PjxkaXY+PGZvbnQg
+ZmFjZT0ibW9ub3NwYWNlIj48YnI+PC9mb250PjwvZGl2PjwvZGl2PjwvZGl2PjwvZGl2Pg0K
+--000000000000c2c8fc0609fa66a0--
 
