@@ -4,64 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F686C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 15:29:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631724.985362 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DBE2C4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 15:30:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631729.985371 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Ys7-0006DG-WE; Mon, 13 Nov 2023 15:29:08 +0000
+	id 1r2Yti-00088L-En; Mon, 13 Nov 2023 15:30:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631724.985362; Mon, 13 Nov 2023 15:29:07 +0000
+Received: by outflank-mailman (output) from mailman id 631729.985371; Mon, 13 Nov 2023 15:30:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Ys7-0006D9-Sl; Mon, 13 Nov 2023 15:29:07 +0000
-Received: by outflank-mailman (input) for mailman id 631724;
- Mon, 13 Nov 2023 15:29:06 +0000
+	id 1r2Yti-00088E-CC; Mon, 13 Nov 2023 15:30:46 +0000
+Received: by outflank-mailman (input) for mailman id 631729;
+ Mon, 13 Nov 2023 15:30:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EUjx=G2=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
- id 1r2Ys6-0006D3-Et
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 15:29:06 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on2082.outbound.protection.outlook.com [40.107.7.82])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=DPbO=G2=linaro.org=philmd@srs-se1.protection.inumbo.net>)
+ id 1r2YlS-0005il-Oj
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 15:22:14 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6168cb87-8239-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 16:29:05 +0100 (CET)
-Received: from AS9PR06CA0244.eurprd06.prod.outlook.com (2603:10a6:20b:45f::35)
- by AS8PR08MB6199.eurprd08.prod.outlook.com (2603:10a6:20b:296::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.29; Mon, 13 Nov
- 2023 15:28:34 +0000
-Received: from AMS0EPF000001A8.eurprd05.prod.outlook.com
- (2603:10a6:20b:45f:cafe::a4) by AS9PR06CA0244.outlook.office365.com
- (2603:10a6:20b:45f::35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.29 via Frontend
- Transport; Mon, 13 Nov 2023 15:28:34 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AMS0EPF000001A8.mail.protection.outlook.com (10.167.16.148) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7002.14 via Frontend Transport; Mon, 13 Nov 2023 15:28:34 +0000
-Received: ("Tessian outbound 385ad2f98d71:v228");
- Mon, 13 Nov 2023 15:28:34 +0000
-Received: from 4e82c1590d56.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- BCB77F74-0073-468B-9CE4-D02CFF481894.1; 
- Mon, 13 Nov 2023 15:28:27 +0000
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 4e82c1590d56.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Mon, 13 Nov 2023 15:28:27 +0000
-Received: from AM0PR08MB3745.eurprd08.prod.outlook.com (2603:10a6:208:ff::27)
- by AM8PR08MB6435.eurprd08.prod.outlook.com (2603:10a6:20b:317::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.29; Mon, 13 Nov
- 2023 15:28:26 +0000
-Received: from AM0PR08MB3745.eurprd08.prod.outlook.com
- ([fe80::ab65:955d:ff82:80e]) by AM0PR08MB3745.eurprd08.prod.outlook.com
- ([fe80::ab65:955d:ff82:80e%3]) with mapi id 15.20.6977.029; Mon, 13 Nov 2023
- 15:28:26 +0000
+ id 6c2103a2-8238-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 16:22:14 +0100 (CET)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-54394328f65so7044526a12.3
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Nov 2023 07:22:14 -0800 (PST)
+Received: from m1x-phil.lan ([176.164.221.204])
+ by smtp.gmail.com with ESMTPSA id
+ lu16-20020a170906fad000b0098884f86e41sm4167855ejb.123.2023.11.13.07.22.11
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 13 Nov 2023 07:22:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,145 +47,233 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6168cb87-8239-11ee-98da-6d05b1d4d9a1
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=b+vPHVLv9DgaDIpsV4G/GvndoObaR+YaTA9XmT36br/3/x07aKBU1cb9qvcNz/XM7oB6S0+gJ0hYTMUnUbJjSM7lmyKuYE1i3D3n0NPB1n6OaXgB0dsbW0PmmAYhXxiTpzeBgm/cVLNUAGpAH0HmBa/Z8zXjf2SZa0ihZYszXWOT2oKPUtRcj9YB+9vyzXeFEXvfTVsn8RVV9wsUMyG8YaHIg10gwIpOO/VZChHsGvKy4UZIy8qhGQ7BR/KQBspPN4k+rD1J9Fv23Ykz6LOZX2oprkyFn71m43CkRsb6quqeu4ChjqUKjUtub4XSUdHnzZroEmGz0wUsDfCHdGGXtA==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yIdcjh8GTqbof6QVLq/iuNdGDsY94HJxNcCXRGGW+rI=;
- b=SRQnRsiBNPR2LLhCQv0btZGzk+ATjvAXuQvEcAYlkAO1Li/LFQz3LL47FVMrnHfEYbDw56GVSuV1lCSz3Ziqp9qkNUkvEH40Sobi8pxd1PiUZlw8k+OEa0PKQZe1fqQD/JH/9LwbSknXai54GEWJ8uOL5buh0O+HDGEnJ8mtlRTIVAjkr2903SdwHM/aGvOoX9S4SIPWv0QZeLNZk95SvwJqtnjrfJk1+Fa6mrUyeI4nAUacnkQbocmIaSiS4ojEpnuEauA5ueCCbnpQxaTWD5Z2dBEoBo4JrtSgaY1gywYUW/FOfhauz/TDJbhpdwD46wOxkWJL1D2zhoendWgvcA==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yIdcjh8GTqbof6QVLq/iuNdGDsY94HJxNcCXRGGW+rI=;
- b=EDcZC02Sk5+J+gOo8d/37kdFzjwb8WV4D2IoN4VIw99vjJacwSPhFmlKqJtC+oS4qwvqd9DLw4AbqJIVO5v52FPcetSfQmcsDbryiD8pjeRqPRTRV0mdATx7G60sn6A2Li+Tej0LpKDb/Uc/sflVOCcEWh4sRyjBrNHDMZAAchE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: c2f9a57c965a9b76
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kkzESVq4edIQDXqtAS/A8R5qK5NixCsQMi0v6MDFO0OlGlSyFw63DZH+U0q/Ml+7WGzNcOt73CB3YOAycjY2OKPa4/rv1ucO6cpmmq17nSCts3Pf0DMjawSOdrZxUVexEv8oejflP6pBwfYmQmTeBQ1ZKGPNePiDEK8hwjnr6batrC3tN+1TMEtO17WZCoAt7b6ukcVV5oae0dCYMi92jpJFqk834Vk97nECUFPA1n6DkwZIc2ecDza8Lbfh6tIslTEGQc2oJ5TSnH/bnC4fmjNhYHkKTMYzDbC3Tqo4z228YgzjPOWD2z6ND2ncP/OUjF6KvapsjbK6ITgIXju8aQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yIdcjh8GTqbof6QVLq/iuNdGDsY94HJxNcCXRGGW+rI=;
- b=AAvcMxmZI8fltbhfw5km4WHAZ7+ynhzyFzyX5In0/OJHJn7gbwhhZZU/mYUySmDnNPTIyR11CG+gFelmyWcRSzK1eFia18C81fdQu12SiYkx2+BmIOIgmzm/gDABKoaAuPY6arpPctDcybQQIyQhJ1cEhLn8TgojvLAUp1+ZuVnQhhDOLaAFojmhW5+gni7T3JQYK6nZS9W9c1RxW/NvwywFXJD1+SJnbMcfHzW0j+BBYWqXqRHncExOWE1SqRapI2KMIJ1P6PyFJa6VlFd0ZbomhBUCVddLRAgI9Bz+iu9bYnn4zMnYqHm3Wy1N+IWu28FDMVDRW6UMDds5EUe7Wg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yIdcjh8GTqbof6QVLq/iuNdGDsY94HJxNcCXRGGW+rI=;
- b=EDcZC02Sk5+J+gOo8d/37kdFzjwb8WV4D2IoN4VIw99vjJacwSPhFmlKqJtC+oS4qwvqd9DLw4AbqJIVO5v52FPcetSfQmcsDbryiD8pjeRqPRTRV0mdATx7G60sn6A2Li+Tej0LpKDb/Uc/sflVOCcEWh4sRyjBrNHDMZAAchE=
-From: Luca Fancellu <Luca.Fancellu@arm.com>
-To: George Dunlap <george.dunlap@cloud.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Jan
- Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Bertrand
- Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <Michal.Orzel@amd.com>, Wei
- Liu <wl@xen.org>
-Subject: Re: Clang-format configuration discussion - pt 1
-Thread-Topic: Clang-format configuration discussion - pt 1
-Thread-Index: AQHaEild8psuTSSrb0SmQq+9AXKRR7B4Sv6AgAAcuYA=
-Date: Mon, 13 Nov 2023 15:28:26 +0000
-Message-ID: <809BE359-C54A-450D-8F61-935E1C106981@arm.com>
-References: <174FCBBC-3C2F-47E9-936A-F1399DD9AFFB@arm.com>
- <CA+zSX=Z2O-EoP5AL-vEgeJgf11YGi4fweSy+XFWOAc5TEEJ9dA@mail.gmail.com>
-In-Reply-To:
- <CA+zSX=Z2O-EoP5AL-vEgeJgf11YGi4fweSy+XFWOAc5TEEJ9dA@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3774.200.91.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	AM0PR08MB3745:EE_|AM8PR08MB6435:EE_|AMS0EPF000001A8:EE_|AS8PR08MB6199:EE_
-X-MS-Office365-Filtering-Correlation-Id: b828910c-604e-4363-1166-08dbe45d334c
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- Tv3SSAE+Iwae+6hrc0cDVDuPf/3NbNwBru90MSM1Yx+Lkwmb7O+6leyn5trjEiJ6XJItGRrgUbvfb2Dq2YpU2vlCVGrQFsJSv17mdaTsqQyEflUutHe+krhz+zMJQo1QsOpn7JoiBdS75dFqhn+aN2iXwgJGhRh69y2T+/lnpaDScZhcuebFEzmMWV1WaEjPken4n5T1H5Rv/UsENqN0DDc3YHi/e57OYRSBmhigcCXw2fdC+hlcoza3FrBTCIteDODLNvu8ZG0dR97mWdl78DQ1NPpH8J8Gsi/YCZ40Rr72veR6XouxuDza4i/xmATqyPUPEubnfRekuUCeEOVnfosfcwnr3UE0SMz98O1VtomBYCqgKHxaMo0MKo+cCTv3/GTyuovyfG1QO9xLYeeLRxnvWsTMF2xebz0ppm3bt4qyU0pOebSg8+WlmQNOCsSINqEgsFnnBbhzHrmOTIBUEjbz6D0wI9ZfTS5xwdq3NWbGmU9AYSGNVrT77FI0Mcf7f6ZeEhX6CJVIjFgA+od9VxmhGtd095aCZoinfkt6sx04LTeOlOwjfLMbBDIAQerBGJk9Cw++HIM9MQX+gxJ1jN069ddnJRwJo+f4ylZ79BSvAL3WtWnphZFKawOo8C3+fwl5l3Lxu+IRwSS9IULLBQ==
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR08MB3745.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(39860400002)(136003)(396003)(366004)(376002)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(91956017)(316002)(76116006)(54906003)(64756008)(66446008)(66946007)(66556008)(66476007)(6916009)(478600001)(6486002)(71200400001)(86362001)(5660300002)(38070700009)(41300700001)(33656002)(36756003)(2906002)(4326008)(8676002)(8936002)(2616005)(38100700002)(122000001)(26005)(6506007)(6512007)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <EDF07A5C43007448BC5D06637F5FDCB8@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-Inumbo-ID: 6c2103a2-8238-11ee-98da-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1699888933; x=1700493733; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=M4sm9DG4Z80HufhtnK5i8zUn8uDgyk6yGboQ8Gp5Uh8=;
+        b=Hx4/J/M5boRN9Gt+jVpVZh1c+Q5YfL3KxrUENgke6Q4ER6+tRewrPNTpOHkgorHTpz
+         SBoLumDHlWMxYqN/X4QG7mvetq8HBD7qp4VsQ3axz9zMER0APrbhfjwBQ3QspuxiwZ4X
+         aSX97eIQlM6lqV4yIijLMR2hmys7hi84Cwbm5RA3ossss9SdsmawhgxUuSzbZRWz0sTW
+         LE098Bn6dV6+a0X4rEofEXb2HefWNnjQOMp1EWQB4qka+pG3bRYG/TxkatXx2ycFCYXH
+         gNJjB9fBZa7kQgQZssgipNMoMt3mcHi2Brd4ukJhwFaXtj2reFdcTn8Ez7Qt2f1Dtrju
+         MM1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699888933; x=1700493733;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=M4sm9DG4Z80HufhtnK5i8zUn8uDgyk6yGboQ8Gp5Uh8=;
+        b=rSsxXf1N3LkgAp/YTZdkUkqMrwF9QRrqqsGZYFhhCQ90x92kwLGXAhpdk3Cx9SPrjW
+         CFU2W7nvwGuEWlTbYS5kEgBPIrTFKXHarjrwdAf6+z8yT/TFdAPmFpnbKamwxN8zPFyZ
+         jkEtJmvMybV36575Czj7wXC6cSwamPWdd8DpbVrxUv5GohRBtKxnsh2ZG3syLqLE8NqU
+         L1vUO/lZqsDfeL/7u2tBkyLEqAm1DBYStEh7bkjqgY2tgLc1uN/YvUjkb9WU7Zx87hm1
+         dnjADkJHbF4+fy33yMiswzYxof1Lh96gia5knJAlvqAVoS5rO2R/BgwWfr/iry6jErM+
+         3a9g==
+X-Gm-Message-State: AOJu0YxWCW8gtzlgmmuWUWwPfk1HhSkJZd/iWRn1KaxaECZ6ewXizBX5
+	sw6/GAuz+pJ6uYZjy8AmLoP7CA==
+X-Google-Smtp-Source: AGHT+IHGfNKy17vE6nE5Sw7Yg/bCgxdoxzzgRWsVuH1JW/c7ZnqbwtyNJGeirXmng2B4mnP0CKSxhg==
+X-Received: by 2002:a17:906:b092:b0:9de:2b93:cab9 with SMTP id x18-20020a170906b09200b009de2b93cab9mr5146163ejy.8.1699888933620;
+        Mon, 13 Nov 2023 07:22:13 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: David Woodhouse <dwmw@amazon.co.uk>,
+	qemu-devel@nongnu.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	xen-devel@lists.xenproject.org,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	qemu-block@nongnu.org,
+	Thomas Huth <thuth@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	qemu-arm@nongnu.org,
+	Paul Durrant <paul@xen.org>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Subject: [PATCH-for-9.0 09/10] hw/xen: Extract 'xen_igd.h' from 'xen_pt.h'
+Date: Mon, 13 Nov 2023 16:21:12 +0100
+Message-ID: <20231113152114.47916-10-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231113152114.47916-1-philmd@linaro.org>
+References: <20231113152114.47916-1-philmd@linaro.org>
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6435
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AMS0EPF000001A8.eurprd05.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	ac70d9c6-ca1d-4f9f-7f25-08dbe45d2e3d
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	1K5fO2PA+XqwRUwu8R/T0JnHNQp+OLPHOXuQYJBuksY/RmsmXhsnDX3JEovHRtiz4/5T70Nj3z5MARdLI0MFZEAa5HJVMbL2se/YgkPkS9iCNRJBCh44+ulda289SJ9GdVouOXcAhKXmaNLsZWliM5ft8GZI6qlkfkVyDIfyKeCf9FdmFcmxb2gjtsQ2CmVQ9dpxwUVSoPY6vG5kc71jNdBrfAakXs2NBO27SYvCMAjiCR4YN8ZpTxSbyQ6BTTCYgP0Cf7kBcCBORuPcPpr0xH0jPb9ruoBzQakwFSyWRGmJpTIitgNsg+fvQ3QnvnabIKpKt4wzI3P+pt4s4vRByVKis7FbQVcBkAUdtGNA9wXUmyP5H754A18stxnNQh0pw8F839Bi5d8fdsr0j4wcOIfczEmMwyi8VUU62hSQM/wDvWRRS3lYEaVFXC3gc7abRB24Lxz5UrYeE0TiAovdAuHguigWbw3UBUgO5jv/RYx7nbgOdGPx3+YQn7TQ6RloG8I8R0g1XKPWye32bmwk5UI7tFWZ2ygqHVFsnSnXiHZbvFmyna0G/W6bnrFTZ0PPiOd9i1X5e5Xa1mqi1sB5mAfbSLCbYhfMqBJi2S5k+04tALeGU6Eo7HGMTn4XoxmQvcDp0ZtYOgv1ALbj7cUP13sY0vf6hIJBxfTrfa0sQnFUPW3V4BsYjhy2oPZYIkWjnMZJdMRWC0q11yaJMbc48grBcpZfXTLRk2QwODLb+vub3K0VsOIh4drzUuLpCQ29
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(376002)(39860400002)(346002)(396003)(136003)(230922051799003)(186009)(1800799009)(82310400011)(64100799003)(451199024)(40470700004)(36840700001)(46966006)(2906002)(5660300002)(40460700003)(41300700001)(81166007)(356005)(33656002)(36756003)(6506007)(82740400003)(86362001)(2616005)(336012)(478600001)(26005)(6512007)(47076005)(6486002)(36860700001)(6862004)(4326008)(8676002)(8936002)(54906003)(316002)(70586007)(70206006)(40480700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2023 15:28:34.6303
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b828910c-604e-4363-1166-08dbe45d334c
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AMS0EPF000001A8.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6199
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-SGkgR2VvcmdlLA0KDQpUaGFua3MgYSBsb3QgZm9yIHRha2luZyB0aGUgdGltZSB0byBoYXZlIGEg
-bG9vayBvbiB0aGF0Lg0KDQo+IA0KPiBMdWNhLA0KPiANCj4gVGhhbmsgeW91IHNvIG11Y2ggZm9y
-IHRoZSB3b3JrIHRoYXQgeW91J3ZlIGRvbmUgaGVyZS4NCj4gDQo+IFRoZSBhcHByb2FjaCBpbiB5
-b3VyIHYyIHNlcmllcyBsb29rcyBwbGF1c2libGUsIGFzIGRvZXMgYSBicmllZg0KPiBvdmVydmll
-dyBvZiB0aGUgaXRlbXMgaW4gdGhpcyBsaXN0Lg0KPiANCj4gT25lIHByb2JsZW0gSSBoYXZlIGlz
-IGhvdyB0byByZWFsbHkgZXZhbHVhdGUgdGhlIHByb3Bvc2VkIGNoYW5nZXMuICBJDQo+IHNwZW50
-IGEgZmV3IG1pbnV0ZXMgc2tpbW1pbmcgdGhyb3VnaCB0aGUgIm1lZ2FkaWZmIiBbMV0gb3V0cHV0
-IGZyb20NCj4gdGhlIHYyIHNlcmllcywgYW5kIHdoaWxlIGV2ZXJ5dGhpbmcgbG9va2VkIGZpbmUs
-IHRoYXQgaXMgYSBIVUdFIHBhdGNoDQo+IHRvIHNraW0gdGhyb3VnaC4gIEkgZG9uJ3QgcmVhbGx5
-IGhhdmUgYW55IHdheSB0byBrbm93IGlmIHRoZXJlJ3Mgc29tZQ0KPiBydWxlIGludHJvZHVjZWQg
-dGhhdCBJIGRvbid0IHJlYWxseSBhZ3JlZSB3aXRoLg0KPiANCj4gT24gdGhlIG90aGVyIGhhbmQs
-IEkgd2FudCB0byBhdm9pZCBidXN5IG1ha2Utd29yayBhbmQgdGhlIGludml0YXRpb24NCj4gdG8g
-aW50ZXJtaW5hYmxlIGJpa2Utc2hlZGRpbmcgZGlzY3Vzc2lvbnMuDQo+IA0KPiBJcyBpdCBwb3Nz
-aWJsZSwgZm9yIGluc3RhbmNlLCB0byBzdGFydCB3aXRoIGEgZGlmZiB3aGljaCB3aWxsIGVuZm9y
-Y2UNCj4gKmp1c3QgdGhlc2Ugc2V0dGluZ3MqIChjb2x1bW4gd2lkdGgsIGluZGVudGF0aW9uLCBh
-bmQgc28gb24pPyAgQW5kDQo+IHRoZW4gYWRkIG9uIG5ldyBjb2Rpbmcgc3R5bGUgY2hhbmdlcyBv
-bmUgKG9yIGEgZmV3KSBhdCBhIHRpbWUsIGluIGENCj4gd2F5IHRoYXQgd291bGQgbWFrZSBpdCBl
-YXNpZXIgdG8gdW5kZXJzdGFuZCB3aGF0IGVmZmVjdCBlYWNoIGNoYW5nZSBpcw0KPiBoYXZpbmc/
-ICBJZiBzbywgZG8geW91IHRoaW5rIHRoYXQncyBhIHJlYXNvbmFibGUgYXBwcm9hY2g/DQo+IA0K
-PiBJZiBub3QsIGhvdyBkbyB5b3UgcHJvcG9zZSB0byBwcm9jZWVkPw0KDQpZZXMgdGhleSBhcmUg
-YSBsb3Qgb2YgbW9kaWZpY2F0aW9ucywgdGhlIGlzc3VlIGlzIHRoYXQgd2hlbiB3ZSBkb27igJl0
-IHNwZWNpZnkNCmEgY29uZmlndXJhYmxlLCB0aGUgZGVmYXVsdCBvcHRpb24gd2lsbCB0YWtlIHBs
-YWNlLCBzbyBpdOKAmXMgbm90IHJlYWxseSBmZWFzaWJsZQ0KdG8gcHJvZHVjZSBhbiBvdXRwdXQg
-d2hlcmUgb25seSB0aGUgc3BlY2lmaWVkIGNvbmZpZ3VyYWJsZSB3aWxsIGFmZmVjdCB0aGUNCmZv
-cm1hdC4NCg0KVGhlIGVhc2llc3QsIGJ1dCBkaWZmaWN1bHQgYXQgdGhlIHNhbWUgdGltZSwgd2F5
-IEkgdGhvdWdodCB3ZSBjYW4gcHJvY2VlZCBpcw0KZGlzY3Vzc2luZyBhIHNldCBvZiBydWxlIGF0
-IHRoZSB0aW1lIHdoZXJlIHdlIGFsbCAod2VsbCB0aGUgbWFpbnRhaW5lcnMpIGFncmVlDQppbiBw
-cmluY2lwbGUsIHNvIHRoYXQgd2UgYXBwbHkgdGhlbSB0byB0aGUgY29kZWJhc2UgdW50aWwgdGhl
-IGxpc3QgaXMgY29tcGxldGVkDQphbmQgYWxzbyBDT0RJTkdfU1RZTEUgY2FuIHJlZmxlY3QgdGhl
-bS4NCg0KQW55d2F5IGlmIHNvbWVvbmUgY2FtZSB1cCB3aXRoIGEgYmV0dGVyIGlkZWEsIEnigJlt
-IG9wZW4gdG8gc3VnZ2VzdGlvbnMuDQoNCkNoZWVycywNCkx1Y2ENCg0KDQo=
+"hw/xen/xen_pt.h" requires "hw/xen/xen_native.h" which is target
+specific. It also declares IGD methods, which are not target
+specific.
+
+Target-agnostic code can use IGD methods. To allow that, extract
+these methos into a new "hw/xen/xen_igd.h" header.
+
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+What license for the new "hw/xen/xen_igd.h" header?
+---
+ hw/xen/xen_pt.h             | 14 --------------
+ include/hw/xen/xen_igd.h    | 23 +++++++++++++++++++++++
+ accel/xen/xen-all.c         |  1 +
+ hw/i386/pc_piix.c           |  1 +
+ hw/xen/xen_pt.c             |  3 ++-
+ hw/xen/xen_pt_config_init.c |  3 ++-
+ hw/xen/xen_pt_graphics.c    |  3 ++-
+ hw/xen/xen_pt_stub.c        |  2 +-
+ 8 files changed, 32 insertions(+), 18 deletions(-)
+ create mode 100644 include/hw/xen/xen_igd.h
+
+diff --git a/hw/xen/xen_pt.h b/hw/xen/xen_pt.h
+index 31bcfdf705..da5af67638 100644
+--- a/hw/xen/xen_pt.h
++++ b/hw/xen/xen_pt.h
+@@ -5,9 +5,6 @@
+ #include "xen-host-pci-device.h"
+ #include "qom/object.h"
+ 
+-bool xen_igd_gfx_pt_enabled(void);
+-void xen_igd_gfx_pt_set(bool value, Error **errp);
+-
+ void xen_pt_log(const PCIDevice *d, const char *f, ...) G_GNUC_PRINTF(2, 3);
+ 
+ #define XEN_PT_ERR(d, _f, _a...) xen_pt_log(d, "%s: Error: "_f, __func__, ##_a)
+@@ -52,12 +49,6 @@ typedef struct XenPTDeviceClass {
+     XenPTQdevRealize pci_qdev_realize;
+ } XenPTDeviceClass;
+ 
+-uint32_t igd_read_opregion(XenPCIPassthroughState *s);
+-void xen_igd_reserve_slot(PCIBus *pci_bus);
+-void igd_write_opregion(XenPCIPassthroughState *s, uint32_t val);
+-void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
+-                                           XenHostPCIDevice *dev);
+-
+ /* function type for config reg */
+ typedef int (*xen_pt_conf_reg_init)
+     (XenPCIPassthroughState *, XenPTRegInfo *, uint32_t real_offset,
+@@ -343,11 +334,6 @@ static inline bool xen_pt_has_msix_mapping(XenPCIPassthroughState *s, int bar)
+ void *pci_assign_dev_load_option_rom(PCIDevice *dev, int *size,
+                                      unsigned int domain, unsigned int bus,
+                                      unsigned int slot, unsigned int function);
+-static inline bool is_igd_vga_passthrough(XenHostPCIDevice *dev)
+-{
+-    return (xen_igd_gfx_pt_enabled()
+-            && ((dev->class_code >> 0x8) == PCI_CLASS_DISPLAY_VGA));
+-}
+ int xen_pt_register_vga_regions(XenHostPCIDevice *dev);
+ int xen_pt_unregister_vga_regions(XenHostPCIDevice *dev);
+ void xen_pt_setup_vga(XenPCIPassthroughState *s, XenHostPCIDevice *dev,
+diff --git a/include/hw/xen/xen_igd.h b/include/hw/xen/xen_igd.h
+new file mode 100644
+index 0000000000..52f1f8244c
+--- /dev/null
++++ b/include/hw/xen/xen_igd.h
+@@ -0,0 +1,23 @@
++#ifndef XEN_IGD_H
++#define XEN_IGD_H
++
++#include "hw/xen/xen-host-pci-device.h"
++
++typedef struct XenPCIPassthroughState XenPCIPassthroughState;
++
++bool xen_igd_gfx_pt_enabled(void);
++void xen_igd_gfx_pt_set(bool value, Error **errp);
++
++uint32_t igd_read_opregion(XenPCIPassthroughState *s);
++void xen_igd_reserve_slot(PCIBus *pci_bus);
++void igd_write_opregion(XenPCIPassthroughState *s, uint32_t val);
++void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
++                                           XenHostPCIDevice *dev);
++
++static inline bool is_igd_vga_passthrough(XenHostPCIDevice *dev)
++{
++    return (xen_igd_gfx_pt_enabled()
++            && ((dev->class_code >> 0x8) == PCI_CLASS_DISPLAY_VGA));
++}
++
++#endif
+diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
+index 5ff0cb8bd9..0bdefce537 100644
+--- a/accel/xen/xen-all.c
++++ b/accel/xen/xen-all.c
+@@ -15,6 +15,7 @@
+ #include "hw/xen/xen_native.h"
+ #include "hw/xen/xen-legacy-backend.h"
+ #include "hw/xen/xen_pt.h"
++#include "hw/xen/xen_igd.h"
+ #include "chardev/char.h"
+ #include "qemu/accel.h"
+ #include "sysemu/cpus.h"
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index eace854335..a607dcb56c 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -56,6 +56,7 @@
+ #ifdef CONFIG_XEN
+ #include <xen/hvm/hvm_info_table.h>
+ #include "hw/xen/xen_pt.h"
++#include "hw/xen/xen_igd.h"
+ #endif
+ #include "hw/xen/xen-x86.h"
+ #include "hw/xen/xen.h"
+diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
+index 36e6f93c37..a8edabdabc 100644
+--- a/hw/xen/xen_pt.c
++++ b/hw/xen/xen_pt.c
+@@ -59,7 +59,8 @@
+ #include "hw/pci/pci.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/qdev-properties-system.h"
+-#include "xen_pt.h"
++#include "hw/xen/xen_pt.h"
++#include "hw/xen/xen_igd.h"
+ #include "hw/xen/xen.h"
+ #include "hw/xen/xen-legacy-backend.h"
+ #include "qemu/range.h"
+diff --git a/hw/xen/xen_pt_config_init.c b/hw/xen/xen_pt_config_init.c
+index 2b8680b112..ba4cd78238 100644
+--- a/hw/xen/xen_pt_config_init.c
++++ b/hw/xen/xen_pt_config_init.c
+@@ -15,7 +15,8 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "qemu/timer.h"
+-#include "xen_pt.h"
++#include "hw/xen/xen_pt.h"
++#include "hw/xen/xen_igd.h"
+ #include "hw/xen/xen-legacy-backend.h"
+ 
+ #define XEN_PT_MERGE_VALUE(value, data, val_mask) \
+diff --git a/hw/xen/xen_pt_graphics.c b/hw/xen/xen_pt_graphics.c
+index 0aed3bb6fd..6c2e3f4840 100644
+--- a/hw/xen/xen_pt_graphics.c
++++ b/hw/xen/xen_pt_graphics.c
+@@ -3,7 +3,8 @@
+  */
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+-#include "xen_pt.h"
++#include "hw/xen/xen_pt.h"
++#include "hw/xen/xen_igd.h"
+ #include "xen-host-pci-device.h"
+ 
+ static unsigned long igd_guest_opregion;
+diff --git a/hw/xen/xen_pt_stub.c b/hw/xen/xen_pt_stub.c
+index 5c108446a8..72feebeb20 100644
+--- a/hw/xen/xen_pt_stub.c
++++ b/hw/xen/xen_pt_stub.c
+@@ -6,7 +6,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "hw/xen/xen_pt.h"
++#include "hw/xen/xen_igd.h"
+ #include "qapi/error.h"
+ 
+ bool xen_igd_gfx_pt_enabled(void)
+-- 
+2.41.0
+
 
