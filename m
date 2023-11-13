@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A91B4C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:24:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631256.984414 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DFADC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:34:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631276.984423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mcs-0004EK-8Z; Mon, 13 Nov 2023 02:24:34 +0000
+	id 1r2MmH-0007yX-5Y; Mon, 13 Nov 2023 02:34:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631256.984414; Mon, 13 Nov 2023 02:24:34 +0000
+Received: by outflank-mailman (output) from mailman id 631276.984423; Mon, 13 Nov 2023 02:34:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mcs-0004D6-45; Mon, 13 Nov 2023 02:24:34 +0000
-Received: by outflank-mailman (input) for mailman id 631256;
- Mon, 13 Nov 2023 02:24:33 +0000
+	id 1r2MmH-0007yQ-2y; Mon, 13 Nov 2023 02:34:17 +0000
+Received: by outflank-mailman (input) for mailman id 631276;
+ Mon, 13 Nov 2023 02:34:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=cCEZ=G2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1r2Mcr-00011s-1b
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:33 +0000
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [185.125.25.9]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c7173425-81cb-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 03:24:31 +0100 (CET)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCtR28lmzMq1pb;
- Mon, 13 Nov 2023 02:24:31 +0000 (UTC)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4STCtP6n2FzMpnPd; Mon, 13 Nov 2023 03:24:29 +0100 (CET)
+ id 1r2Mcy-00011s-Ix
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:40 +0000
+Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
+ [2001:1600:4:17::bc0c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cbafeb58-81cb-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 03:24:39 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCtb03xVzMpvcL;
+ Mon, 13 Nov 2023 02:24:39 +0000 (UTC)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4STCtY6j2Kz3W; Mon, 13 Nov 2023 03:24:37 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,14 +44,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c7173425-81cb-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: cbafeb58-81cb-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1699842271;
-	bh=HO3RcULwQ802eeIPFZkXgFQnmnXm7kA4hgpvD90H0yM=;
+	s=20191114; t=1699842278;
+	bh=udX3yMbRw+y6U4YMfanKu8XE/62XvcB7w1fSqqDyDOI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=oy65yEMwFBZXkzY8/GbCSCY015c7FsKYAOxiyiLLg876EDse7qPjjQ2TawXHbDdpo
-	 RqYXUhhMZo8wrcdUoNJcKni3rzSjF0HzYO1MLe/71b+NvJhrkaU1fgwZGfleYIbVsx
-	 7CZiYxZUd35oWxWwZ9c+J67orF3hA2vwNYlS1LAw=
+	b=JKmMqdlijgI0WHD2CFxV/y7DWfB+LUKrwQo0xOX8EfXAZsvA9YZ7OO5gDS9iDz+rl
+	 OhhkExnEBcdos98SON70W/UL9RJeu0hGR5koDZT8lkh5am5LEoQnacmgelAtWgQqxy
+	 GoKDTdCaRbpksDhhbdbuDq2zFJFNL69+pG5malPA=
 From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
 To: Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
@@ -91,9 +92,9 @@ Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
 	virtualization@lists.linux-foundation.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v2 10/19] KVM: x86: Implement per-guest-page permissions
-Date: Sun, 12 Nov 2023 21:23:17 -0500
-Message-ID: <20231113022326.24388-11-mic@digikod.net>
+Subject: [RFC PATCH v2 12/19] x86: Implement the Memory Table feature to store arbitrary per-page data
+Date: Sun, 12 Nov 2023 21:23:19 -0500
+Message-ID: <20231113022326.24388-13-mic@digikod.net>
 In-Reply-To: <20231113022326.24388-1-mic@digikod.net>
 References: <20231113022326.24388-1-mic@digikod.net>
 MIME-Version: 1.0
@@ -101,28 +102,36 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Infomaniak-Routing: alpha
 
-Define memory attributes that can be associated with guest physical
-pages in KVM. To begin with, define permissions as memory attributes
-(READ, WRITE and EXECUTE), and the IMMUTABLE property. In the future,
-other attributes could be defined.
+From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 
-Use the memory attribute feature to implement the following functions in
-KVM:
+This feature can be used by a consumer to associate any arbitrary
+pointer with a physical page. The feature implements a page table format
+that mirrors the hardware page table. A leaf entry in the table points
+to consumer data for that page.
 
-- kvm_permissions_set(): Set the permissions for a guest page in the
-  memory attribute XArray.
+The page table format has these advantages:
 
-- kvm_permissions_get(): Retrieve the permissions associated with a
-  guest page in same XArray.
+- The format allows for a sparse representation. This is useful since
+  the physical address space can be large and is typically sparsely
+  populated in a system.
 
-These functions will be called in a following commit to associate proper
-permissions with guest pages instead of RWX for all the pages.
+- A consumer of this feature can choose to populate data just for the
+  pages he is interested in.
 
-Add 4 new memory attributes, private to the KVM implementation:
-- KVM_MEMORY_ATTRIBUTE_HEKI_READ
-- KVM_MEMORY_ATTRIBUTE_HEKI_WRITE
-- KVM_MEMORY_ATTRIBUTE_HEKI_EXEC
-- KVM_MEMORY_ATTRIBUTE_HEKI_IMMUTABLE
+- Information can be stored for large pages, if a consumer wishes.
+
+For instance, for Heki, the guest kernel uses this to create permissions
+counters for each guest physical page. The permissions counters reflects
+the collective permissions for a guest physical page across all mappings
+to that page. This allows the guest to request the hypervisor to set
+only the necessary permissions for a guest physical page in the EPT
+(instead of RWX).
+
+This feature could also be used to improve the KVM's memory attribute
+and the write page tracking.
+
+We will support large page entries in mem_table in a future version
+thanks to extra mem_table_ops's merge() and split() operations.
 
 Cc: Borislav Petkov <bp@alien8.de>
 Cc: Dave Hansen <dave.hansen@linux.intel.com>
@@ -136,235 +145,352 @@ Cc: Sean Christopherson <seanjc@google.com>
 Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
 Cc: Wanpeng Li <wanpengli@tencent.com>
-Co-developed-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 Signed-off-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
-Signed-off-by: Mickaël Salaün <mic@digikod.net>
 ---
 
 Changes since v1:
-* New patch replacing the deprecated page tracking mechanism.
-* Add new files: virt/lib/kvm_permissions.c and
-  include/linux/kvm_mem_attr.h
-* Add new kvm_permissions_get() and kvm_permissions_set() leveraging
-  the to-be-upstream memory attributes for KVM.
-* Introduce the KVM_MEMORY_ATTRIBUTE_HEKI_* values.
+* New patch and new file: kernel/mem_table.c
 ---
- arch/x86/kvm/Kconfig         |   1 +
- arch/x86/kvm/Makefile        |   4 +-
- include/linux/kvm_mem_attr.h |  32 +++++++++++
- include/uapi/linux/kvm.h     |   5 ++
- virt/heki/Kconfig            |   1 +
- virt/lib/kvm_permissions.c   | 104 +++++++++++++++++++++++++++++++++++
- 6 files changed, 146 insertions(+), 1 deletion(-)
- create mode 100644 include/linux/kvm_mem_attr.h
- create mode 100644 virt/lib/kvm_permissions.c
+ arch/x86/kernel/setup.c   |   2 +
+ include/linux/heki.h      |   1 +
+ include/linux/mem_table.h |  55 ++++++++++
+ kernel/Makefile           |   2 +
+ kernel/mem_table.c        | 219 ++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 279 insertions(+)
+ create mode 100644 include/linux/mem_table.h
+ create mode 100644 kernel/mem_table.c
 
-diff --git a/arch/x86/kvm/Kconfig b/arch/x86/kvm/Kconfig
-index 7a3b52b7e456..ea6d73241632 100644
---- a/arch/x86/kvm/Kconfig
-+++ b/arch/x86/kvm/Kconfig
-@@ -50,6 +50,7 @@ config KVM
- 	select HAVE_KVM_PM_NOTIFIER if PM
- 	select KVM_GENERIC_HARDWARE_ENABLING
- 	select HYPERVISOR_SUPPORTS_HEKI
-+	select SPARSEMEM
- 	help
- 	  Support hosting fully virtualized guest machines using hardware
- 	  virtualization extensions.  You will need a fairly recent
-diff --git a/arch/x86/kvm/Makefile b/arch/x86/kvm/Makefile
-index 80e3fe184d17..aac51a5d2cae 100644
---- a/arch/x86/kvm/Makefile
-+++ b/arch/x86/kvm/Makefile
-@@ -9,10 +9,12 @@ endif
+diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+index b098b1fa2470..e7ae46953ae4 100644
+--- a/arch/x86/kernel/setup.c
++++ b/arch/x86/kernel/setup.c
+@@ -25,6 +25,7 @@
+ #include <linux/static_call.h>
+ #include <linux/swiotlb.h>
+ #include <linux/random.h>
++#include <linux/mem_table.h>
  
- include $(srctree)/virt/kvm/Makefile.kvm
+ #include <uapi/linux/mount.h>
  
-+VIRT_LIB = ../../../virt/lib
-+
- kvm-y			+= x86.o emulate.o i8259.o irq.o lapic.o \
- 			   i8254.o ioapic.o irq_comm.o cpuid.o pmu.o mtrr.o \
- 			   hyperv.o debugfs.o mmu/mmu.o mmu/page_track.o \
--			   mmu/spte.o
-+			   mmu/spte.o $(VIRT_LIB)/kvm_permissions.o
+@@ -1315,6 +1316,7 @@ void __init setup_arch(char **cmdline_p)
+ #endif
  
- ifdef CONFIG_HYPERV
- kvm-y			+= kvm_onhyperv.o
-diff --git a/include/linux/kvm_mem_attr.h b/include/linux/kvm_mem_attr.h
+ 	unwind_init();
++	mem_table_init(PG_LEVEL_4K);
+ }
+ 
+ #ifdef CONFIG_X86_32
+diff --git a/include/linux/heki.h b/include/linux/heki.h
+index 89cc9273a968..9b0c966c50d1 100644
+--- a/include/linux/heki.h
++++ b/include/linux/heki.h
+@@ -15,6 +15,7 @@
+ #include <linux/init.h>
+ #include <linux/kernel.h>
+ #include <linux/printk.h>
++#include <linux/slab.h>
+ 
+ #ifdef CONFIG_HEKI
+ 
+diff --git a/include/linux/mem_table.h b/include/linux/mem_table.h
 new file mode 100644
-index 000000000000..0a755025e553
+index 000000000000..738bf12309f3
 --- /dev/null
-+++ b/include/linux/kvm_mem_attr.h
-@@ -0,0 +1,32 @@
++++ b/include/linux/mem_table.h
+@@ -0,0 +1,55 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * KVM guest page permissions - Definitions.
++ * Memory table feature - Definitions.
 + *
 + * Copyright © 2023 Microsoft Corporation.
 + */
-+#ifndef __KVM_MEM_ATTR_H__
-+#define __KVM_MEM_ATTR_H__
 +
-+#include <linux/kvm_host.h>
-+#include <linux/kvm_types.h>
++#ifndef __MEM_TABLE_H__
++#define __MEM_TABLE_H__
 +
 +/* clang-format off */
 +
-+#define MEM_ATTR_READ			BIT(0)
-+#define MEM_ATTR_WRITE			BIT(1)
-+#define MEM_ATTR_EXEC			BIT(2)
-+#define MEM_ATTR_IMMUTABLE		BIT(3)
-+
-+#define MEM_ATTR_PROT ( \
-+	MEM_ATTR_READ | \
-+	MEM_ATTR_WRITE | \
-+	MEM_ATTR_EXEC | \
-+	MEM_ATTR_IMMUTABLE)
++/*
++ * The MEM_TABLE bit is set on entries that point to an intermediate table.
++ * So, this bit is reserved. This means that pointers to consumer data must
++ * be at least two-byte aligned (so the MEM_TABLE bit is 0).
++ */
++#define MEM_TABLE		BIT(0)
++#define IS_LEAF(entry)		!((uintptr_t)entry & MEM_TABLE)
 +
 +/* clang-format on */
 +
-+int kvm_permissions_set(struct kvm *kvm, gfn_t gfn_start, gfn_t gfn_end,
-+			unsigned long heki_attr);
-+unsigned long kvm_permissions_get(struct kvm *kvm, gfn_t gfn);
++/*
++ * A memory table is arranged exactly like a page table. The memory table
++ * configuration reflects the hardware page table configuration.
++ */
 +
-+#endif /* __KVM_MEM_ATTR_H__ */
-diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
-index 2477b4a16126..2b5b90216565 100644
---- a/include/uapi/linux/kvm.h
-+++ b/include/uapi/linux/kvm.h
-@@ -2319,6 +2319,11 @@ struct kvm_memory_attributes {
- 
- #define KVM_MEMORY_ATTRIBUTE_PRIVATE           (1ULL << 3)
- 
-+#define KVM_MEMORY_ATTRIBUTE_HEKI_READ         (1ULL << 4)
-+#define KVM_MEMORY_ATTRIBUTE_HEKI_WRITE        (1ULL << 5)
-+#define KVM_MEMORY_ATTRIBUTE_HEKI_EXEC         (1ULL << 6)
-+#define KVM_MEMORY_ATTRIBUTE_HEKI_IMMUTABLE    (1ULL << 7)
++/* Parameters at each level of the memory table hierarchy. */
++struct mem_table_level {
++	unsigned int number;
++	unsigned int nentries;
++	unsigned int shift;
++	unsigned int mask;
++};
 +
- #define KVM_CREATE_GUEST_MEMFD	_IOWR(KVMIO,  0xd4, struct kvm_create_guest_memfd)
++struct mem_table {
++	struct mem_table_level *level;
++	struct mem_table_ops *ops;
++	bool changed;
++	void *entries[];
++};
++
++/* Operations that need to be supplied by a consumer of memory tables. */
++struct mem_table_ops {
++	void (*free)(void *buf);
++};
++
++void mem_table_init(unsigned int base_level);
++struct mem_table *mem_table_alloc(struct mem_table_ops *ops);
++void mem_table_free(struct mem_table *table);
++void **mem_table_create(struct mem_table *table, phys_addr_t pa);
++void **mem_table_find(struct mem_table *table, phys_addr_t pa,
++		      unsigned int *level_num);
++
++#endif /* __MEM_TABLE_H__ */
+diff --git a/kernel/Makefile b/kernel/Makefile
+index 3947122d618b..dcef03ec5c54 100644
+--- a/kernel/Makefile
++++ b/kernel/Makefile
+@@ -131,6 +131,8 @@ obj-$(CONFIG_WATCH_QUEUE) += watch_queue.o
+ obj-$(CONFIG_RESOURCE_KUNIT_TEST) += resource_kunit.o
+ obj-$(CONFIG_SYSCTL_KUNIT_TEST) += sysctl-test.o
  
- struct kvm_create_guest_memfd {
-diff --git a/virt/heki/Kconfig b/virt/heki/Kconfig
-index 5ea75b595667..75a784653e31 100644
---- a/virt/heki/Kconfig
-+++ b/virt/heki/Kconfig
-@@ -5,6 +5,7 @@
- config HEKI
- 	bool "Hypervisor Enforced Kernel Integrity (Heki)"
- 	depends on ARCH_SUPPORTS_HEKI && HYPERVISOR_SUPPORTS_HEKI
-+	select KVM_GENERIC_MEMORY_ATTRIBUTES
- 	help
- 	  This feature enhances guest virtual machine security by taking
- 	  advantage of security features provided by the hypervisor for guests.
-diff --git a/virt/lib/kvm_permissions.c b/virt/lib/kvm_permissions.c
++obj-$(CONFIG_SPARSEMEM) += mem_table.o
++
+ CFLAGS_stackleak.o += $(DISABLE_STACKLEAK_PLUGIN)
+ obj-$(CONFIG_GCC_PLUGIN_STACKLEAK) += stackleak.o
+ KASAN_SANITIZE_stackleak.o := n
+diff --git a/kernel/mem_table.c b/kernel/mem_table.c
 new file mode 100644
-index 000000000000..9f4e8027d21c
+index 000000000000..280a1b5ddde0
 --- /dev/null
-+++ b/virt/lib/kvm_permissions.c
-@@ -0,0 +1,104 @@
++++ b/kernel/mem_table.c
+@@ -0,0 +1,219 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * KVM guest page permissions - functions.
++ * Memory table feature.
++ *
++ * This feature can be used by a consumer to associate any arbitrary pointer
++ * with a physical page. The feature implements a page table format that
++ * mirrors the hardware page table. A leaf entry in the table points to
++ * consumer data for that page.
++ *
++ * The page table format has these advantages:
++ *
++ *	- The format allows for a sparse representation. This is useful since
++ *	  the physical address space can be large and is typically sparsely
++ *	  populated in a system.
++ *
++ *	- A consumer of this feature can choose to populate data just for
++ *	  the pages he is interested in.
++ *
++ *	- Information can be stored for large pages, if a consumer wishes.
++ *
++ * For instance, for Heki, the guest kernel uses this to create permissions
++ * counters for each guest physical page. The permissions counters reflects the
++ * collective permissions for a guest physical page across all mappings to that
++ * page. This allows the guest to request the hypervisor to set only the
++ * necessary permissions for a guest physical page in the EPT (instead of RWX).
 + *
 + * Copyright © 2023 Microsoft Corporation.
 + */
-+#include <linux/kvm_host.h>
-+#include <linux/kvm_mem_attr.h>
 +
-+#ifdef pr_fmt
-+#undef pr_fmt
-+#endif
++/*
++ * Memory table functions use recursion for simplicity. The recursion is bounded
++ * by the number of hardware page table levels.
++ *
++ * Locking is left to the caller of these functions.
++ */
++#include <linux/heki.h>
++#include <linux/mem_table.h>
++#include <linux/pgtable.h>
 +
-+#define pr_fmt(fmt) "kvm: heki: " fmt
++#define TABLE(entry) ((void *)((uintptr_t)entry & ~MEM_TABLE))
++#define ENTRY(table) ((void *)((uintptr_t)table | MEM_TABLE))
 +
-+/* clang-format off */
++/*
++ * Within this feature, the table levels start from 0. On X86, the base level
++ * is not 0.
++ */
++unsigned int mem_table_base_level __ro_after_init;
++unsigned int mem_table_nlevels __ro_after_init;
++struct mem_table_level mem_table_levels[CONFIG_PGTABLE_LEVELS] __ro_after_init;
 +
-+static unsigned long kvm_default_permissions =
-+	MEM_ATTR_READ |
-+	MEM_ATTR_WRITE |
-+	MEM_ATTR_EXEC;
-+
-+static unsigned long kvm_memory_attributes_heki =
-+	KVM_MEMORY_ATTRIBUTE_HEKI_READ |
-+	KVM_MEMORY_ATTRIBUTE_HEKI_WRITE |
-+	KVM_MEMORY_ATTRIBUTE_HEKI_EXEC |
-+	KVM_MEMORY_ATTRIBUTE_HEKI_IMMUTABLE;
-+
-+/* clang-format on */
-+
-+static unsigned long heki_attr_to_kvm_attr(unsigned long heki_attr)
++void __init mem_table_init(unsigned int base_level)
 +{
-+	unsigned long kvm_attr = 0;
-+
-+	if (WARN_ON_ONCE((heki_attr | MEM_ATTR_PROT) != MEM_ATTR_PROT))
-+		return 0;
-+
-+	if (heki_attr & MEM_ATTR_READ)
-+		kvm_attr |= KVM_MEMORY_ATTRIBUTE_HEKI_READ;
-+	if (heki_attr & MEM_ATTR_WRITE)
-+		kvm_attr |= KVM_MEMORY_ATTRIBUTE_HEKI_WRITE;
-+	if (heki_attr & MEM_ATTR_EXEC)
-+		kvm_attr |= KVM_MEMORY_ATTRIBUTE_HEKI_EXEC;
-+	if (heki_attr & MEM_ATTR_IMMUTABLE)
-+		kvm_attr |= KVM_MEMORY_ATTRIBUTE_HEKI_IMMUTABLE;
-+	return kvm_attr;
-+}
-+
-+static unsigned long kvm_attr_to_heki_attr(unsigned long kvm_attr)
-+{
-+	unsigned long heki_attr = 0;
-+
-+	if (kvm_attr & KVM_MEMORY_ATTRIBUTE_HEKI_READ)
-+		heki_attr |= MEM_ATTR_READ;
-+	if (kvm_attr & KVM_MEMORY_ATTRIBUTE_HEKI_WRITE)
-+		heki_attr |= MEM_ATTR_WRITE;
-+	if (kvm_attr & KVM_MEMORY_ATTRIBUTE_HEKI_EXEC)
-+		heki_attr |= MEM_ATTR_EXEC;
-+	if (kvm_attr & KVM_MEMORY_ATTRIBUTE_HEKI_IMMUTABLE)
-+		heki_attr |= MEM_ATTR_IMMUTABLE;
-+	return heki_attr;
-+}
-+
-+unsigned long kvm_permissions_get(struct kvm *kvm, gfn_t gfn)
-+{
-+	unsigned long kvm_attr = 0;
++	struct mem_table_level *level;
++	unsigned long shift, delta_shift;
++	int physmem_bits;
++	int i, max_levels;
 +
 +	/*
-+	 * Retrieve the permissions for a guest page. If not present (i.e., no
-+	 * attribute), then return default permissions (RWX).  This means
-+	 * setting permissions to 0 resets them to RWX. We might want to
-+	 * revisit that in a future version.
++	 * Compute the actual number of levels present. Compute the parameters
++	 * for each level.
 +	 */
-+	kvm_attr = kvm_get_memory_attributes(kvm, gfn);
-+	if (kvm_attr)
-+		return kvm_attr_to_heki_attr(kvm_attr);
-+	else
-+		return kvm_default_permissions;
++	shift = ilog2(PAGE_SIZE);
++	physmem_bits = PAGE_SHIFT;
++	max_levels = CONFIG_PGTABLE_LEVELS;
++
++	for (i = 0; i < max_levels && physmem_bits < MAX_PHYSMEM_BITS; i++) {
++		level = &mem_table_levels[i];
++
++		switch (i) {
++		case 0:
++			level->nentries = PTRS_PER_PTE;
++			break;
++		case 1:
++			level->nentries = PTRS_PER_PMD;
++			break;
++		case 2:
++			level->nentries = PTRS_PER_PUD;
++			break;
++		case 3:
++			level->nentries = PTRS_PER_P4D;
++			break;
++		case 4:
++			level->nentries = PTRS_PER_PGD;
++			break;
++		}
++		level->number = i;
++		level->shift = shift;
++		level->mask = level->nentries - 1;
++
++		delta_shift = ilog2(level->nentries);
++		shift += delta_shift;
++		physmem_bits += delta_shift;
++	}
++	mem_table_nlevels = i;
++	mem_table_base_level = base_level;
 +}
-+EXPORT_SYMBOL_GPL(kvm_permissions_get);
 +
-+int kvm_permissions_set(struct kvm *kvm, gfn_t gfn_start, gfn_t gfn_end,
-+			unsigned long heki_attr)
++struct mem_table *mem_table_alloc(struct mem_table_ops *ops)
 +{
-+	if ((heki_attr | MEM_ATTR_PROT) != MEM_ATTR_PROT)
-+		return -EINVAL;
++	struct mem_table_level *level;
++	struct mem_table *table;
 +
-+	if (gfn_end <= gfn_start)
-+		return -EINVAL;
++	level = &mem_table_levels[mem_table_nlevels - 1];
 +
-+	if (kvm_range_has_memory_attributes(kvm, gfn_start, gfn_end,
-+					    KVM_MEMORY_ATTRIBUTE_HEKI_IMMUTABLE,
-+					    false)) {
-+		pr_warn_ratelimited(
-+			"Guest tried to change immutable permission for GFNs %llx-%llx\n",
-+			gfn_start, gfn_end);
-+		return -EPERM;
++	table = kzalloc(struct_size(table, entries, level->nentries),
++			GFP_KERNEL);
++	if (table) {
++		table->level = level;
++		table->ops = ops;
++		return table;
++	}
++	return NULL;
++}
++EXPORT_SYMBOL_GPL(mem_table_alloc);
++
++static void _mem_table_free(struct mem_table *table)
++{
++	struct mem_table_level *level = table->level;
++	void **entries = table->entries;
++	struct mem_table_ops *ops = table->ops;
++	int i;
++
++	for (i = 0; i < level->nentries; i++) {
++		if (!entries[i])
++			continue;
++		if (IS_LEAF(entries[i])) {
++			/* The consumer frees the pointer. */
++			ops->free(entries[i]);
++			continue;
++		}
++		_mem_table_free(TABLE(entries[i]));
++	}
++	kfree(table);
++}
++
++void mem_table_free(struct mem_table *table)
++{
++	_mem_table_free(table);
++}
++EXPORT_SYMBOL_GPL(mem_table_free);
++
++static void **_mem_table_find(struct mem_table *table, phys_addr_t pa,
++			      unsigned int *level_number)
++{
++	struct mem_table_level *level = table->level;
++	void **entries = table->entries;
++	unsigned long i;
++
++	i = (pa >> level->shift) & level->mask;
++
++	*level_number = level->number;
++	if (!entries[i])
++		return NULL;
++
++	if (IS_LEAF(entries[i]))
++		return &entries[i];
++
++	return _mem_table_find(TABLE(entries[i]), pa, level_number);
++}
++
++void **mem_table_find(struct mem_table *table, phys_addr_t pa,
++		      unsigned int *level_number)
++{
++	void **entry;
++
++	entry = _mem_table_find(table, pa, level_number);
++	level_number += mem_table_base_level;
++
++	return entry;
++}
++EXPORT_SYMBOL_GPL(mem_table_find);
++
++static void **_mem_table_create(struct mem_table *table, phys_addr_t pa)
++{
++	struct mem_table_level *level = table->level;
++	void **entries = table->entries;
++	unsigned long i;
++
++	table->changed = true;
++	i = (pa >> level->shift) & level->mask;
++
++	if (!level->number) {
++		/*
++		 * Reached the lowest level. Return a pointer to the entry
++		 * so that the consumer can populate it.
++		 */
++		return &entries[i];
 +	}
 +
-+	return kvm_vm_set_mem_attributes(kvm, gfn_start, gfn_end,
-+					 heki_attr_to_kvm_attr(heki_attr),
-+					 kvm_memory_attributes_heki);
++	/*
++	 * If the entry is NULL, then create a lower level table and make the
++	 * entry point to it. Or, if the entry is a leaf, then we need to
++	 * split the entry. In this case as well, create a lower level table
++	 * to split the entry.
++	 */
++	if (!entries[i] || IS_LEAF(entries[i])) {
++		struct mem_table *next;
++
++		/* Create next level table. */
++		level--;
++		next = kzalloc(struct_size(table, entries, level->nentries),
++			       GFP_KERNEL);
++		if (!next)
++			return NULL;
++
++		next->level = level;
++		next->ops = table->ops;
++		next->changed = true;
++		entries[i] = ENTRY(next);
++	}
++
++	return _mem_table_create(TABLE(entries[i]), pa);
 +}
-+EXPORT_SYMBOL_GPL(kvm_permissions_set);
++
++void **mem_table_create(struct mem_table *table, phys_addr_t pa)
++{
++	return _mem_table_create(table, pa);
++}
++EXPORT_SYMBOL_GPL(mem_table_create);
 -- 
 2.42.1
 
