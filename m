@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F867C4167D
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:36:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631286.984464 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57B72C4167D
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:36:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631289.984473 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mo3-0001kz-JV; Mon, 13 Nov 2023 02:36:07 +0000
+	id 1r2MoT-0002aC-T2; Mon, 13 Nov 2023 02:36:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631286.984464; Mon, 13 Nov 2023 02:36:07 +0000
+Received: by outflank-mailman (output) from mailman id 631289.984473; Mon, 13 Nov 2023 02:36:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mo3-0001kq-Gd; Mon, 13 Nov 2023 02:36:07 +0000
-Received: by outflank-mailman (input) for mailman id 631286;
- Mon, 13 Nov 2023 02:36:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r2MoT-0002a5-Q5; Mon, 13 Nov 2023 02:36:33 +0000
+Received: by outflank-mailman (input) for mailman id 631289;
+ Mon, 13 Nov 2023 02:36:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=cCEZ=G2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1r2MdO-0000Y9-R9
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:25:06 +0000
-Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
- [185.125.25.15]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id daec20f5-81cb-11ee-9b0e-b553b5be7939;
- Mon, 13 Nov 2023 03:25:04 +0100 (CET)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCv440z4zMq2H7;
- Mon, 13 Nov 2023 02:25:04 +0000 (UTC)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4STCv31cKszMppt7; Mon, 13 Nov 2023 03:25:03 +0100 (CET)
+ id 1r2Md9-00011s-36
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:51 +0000
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [84.16.66.174]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d23441fa-81cb-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 03:24:50 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCtn6lRlzMpvf0;
+ Mon, 13 Nov 2023 02:24:49 +0000 (UTC)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4STCtn0kJDz3W; Mon, 13 Nov 2023 03:24:49 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,14 +43,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: daec20f5-81cb-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: d23441fa-81cb-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1699842304;
-	bh=qU7rpwZb8Bl+xuVDwtq6MKJ75S7Uo4UAc0PUDjw5xlk=;
+	s=20191114; t=1699842289;
+	bh=oIX4MzUmE/Oa64hLfkUteDWwPQashM0GHMQHapB48so=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=HbDL//+3ATCwPmW6FeNdrIH7tZIwaMnw+QS1qdZf+B2mnT/MKQm4aP+mx66UUcjaD
-	 hsK1zTShrWzEU7FyzuuXAFeXbZ2X6WXdUpzO09fScu+mFKm7CXVRlh5HLUvFpTFOab
-	 J5+cWZjh90MaulzQheCaiQUYvIq2/sNhJR0yOd08=
+	b=K5jzM4XuFLgeXCO9+orL/1d6/57akoG8sVCXVP6DTx3kGnM8+LT8Zp4EFmKLEQVJU
+	 byp0y0LRrf6MzvP+HnMoZzEDuC6dqCMBtuBJ4XXTKeXfqgWYy3j1J1518WlBYsj24n
+	 4qx1SQ23tdaoLwB2+k7Q0uM0YzOX+D/zb42fxDvg=
 From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
 To: Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
@@ -91,9 +91,9 @@ Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
 	virtualization@lists.linux-foundation.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v2 19/19] virt: Add Heki KUnit tests
-Date: Sun, 12 Nov 2023 21:23:26 -0500
-Message-ID: <20231113022326.24388-20-mic@digikod.net>
+Subject: [RFC PATCH v2 15/19] heki: x86: Initialize permissions counters for pages in vmap()/vunmap()
+Date: Sun, 12 Nov 2023 21:23:22 -0500
+Message-ID: <20231113022326.24388-16-mic@digikod.net>
 In-Reply-To: <20231113022326.24388-1-mic@digikod.net>
 References: <20231113022326.24388-1-mic@digikod.net>
 MIME-Version: 1.0
@@ -101,329 +101,155 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Infomaniak-Routing: alpha
 
-This adds a new CONFIG_HEKI_TEST option to run tests at boot. Because we
-use some symbols not exported to modules (e.g., kernel_set_to_readonly)
-this could not work as modules.
+From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 
-To run these tests, we need to boot the kernel with the heki_test=N boot
-argument with N selecting a specific test:
-1. heki_test_cr_disable_smep: Check CR pinning and try to disable SMEP.
-2. heki_test_write_to_const: Check .rodata (const) protection.
-3. heki_test_write_to_ro_after_init: Check __ro_after_init protection.
-4. heki_test_exec: Check non-executable kernel memory.
+When a page gets mapped, create permissions counters for it and
+initialize them based on the specified permissions.
 
-This way to select tests should not be required when the kernel will
-properly handle the triggered synthetic page faults.  For now, these
-page faults make the kernel loop.
-
-All these tests temporarily disable the related kernel self-protections
-and should then failed if Heki doesn't protect the kernel.  They are
-verbose to make it easier to understand what is going on.
+When a page gets unmapped, update the counters appropriately.
 
 Cc: Borislav Petkov <bp@alien8.de>
 Cc: Dave Hansen <dave.hansen@linux.intel.com>
 Cc: H. Peter Anvin <hpa@zytor.com>
 Cc: Ingo Molnar <mingo@redhat.com>
 Cc: Kees Cook <keescook@chromium.org>
-Cc: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
+Cc: Mickaël Salaün <mic@digikod.net>
 Cc: Paolo Bonzini <pbonzini@redhat.com>
 Cc: Sean Christopherson <seanjc@google.com>
 Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
 Cc: Wanpeng Li <wanpengli@tencent.com>
-Signed-off-by: Mickaël Salaün <mic@digikod.net>
+Signed-off-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 ---
 
 Changes since v1:
-* Move all tests to virt/heki/tests.c
+* New patch
 ---
- include/linux/heki.h |   1 +
- virt/heki/Kconfig    |  12 +++
- virt/heki/Makefile   |   1 +
- virt/heki/main.c     |   6 +-
- virt/heki/tests.c    | 207 +++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 226 insertions(+), 1 deletion(-)
- create mode 100644 virt/heki/tests.c
+ include/linux/heki.h | 11 ++++++++++-
+ mm/vmalloc.c         |  7 +++++++
+ virt/heki/counters.c | 20 ++++++++++++++++++++
+ 3 files changed, 37 insertions(+), 1 deletion(-)
 
 diff --git a/include/linux/heki.h b/include/linux/heki.h
-index 306bcec7ae92..9e2cf0051ab0 100644
+index 86c787d121e0..d660994d34d0 100644
 --- a/include/linux/heki.h
 +++ b/include/linux/heki.h
-@@ -149,6 +149,7 @@ void heki_protect(unsigned long va, unsigned long end);
- void heki_add_pa(struct heki_args *args, phys_addr_t pa,
- 		 unsigned long permissions);
- void heki_apply_permissions(struct heki_args *args);
-+void heki_run_test(void);
+@@ -68,7 +68,11 @@ struct heki_hypervisor {
+  * pointer into this heki structure.
+  *
+  * During guest kernel boot, permissions counters for each guest page are
+- * initialized based on the page's current permissions.
++ * initialized based on the page's current permissions. Beyond this point,
++ * the counters are updated whenever:
++ *
++ *	- a page is mapped into the kernel address space
++ *	- a page is unmapped from the kernel address space
+  */
+ struct heki {
+ 	struct heki_hypervisor *hypervisor;
+@@ -77,6 +81,7 @@ struct heki {
+ 
+ enum heki_cmd {
+ 	HEKI_MAP,
++	HEKI_UNMAP,
+ };
+ 
+ /*
+@@ -109,6 +114,7 @@ void heki_counters_init(void);
+ void heki_walk(unsigned long va, unsigned long va_end, heki_func_t func,
+ 	       struct heki_args *args);
+ void heki_map(unsigned long va, unsigned long end);
++void heki_unmap(unsigned long va, unsigned long end);
  
  /* Arch-specific functions. */
  void heki_arch_early_init(void);
-diff --git a/virt/heki/Kconfig b/virt/heki/Kconfig
-index 9bde84cd759e..fa814a921bb0 100644
---- a/virt/heki/Kconfig
-+++ b/virt/heki/Kconfig
-@@ -28,3 +28,15 @@ config HYPERVISOR_SUPPORTS_HEKI
- 	  A hypervisor should select this when it can successfully build
- 	  and run with CONFIG_HEKI. That is, it should provide all of the
- 	  hypervisor support required for the Heki feature.
-+
-+config HEKI_TEST
-+	bool "Tests for Heki" if !KUNIT_ALL_TESTS
-+	depends on HEKI && KUNIT=y
-+	default KUNIT_ALL_TESTS
-+	help
-+	  Run Heki tests at runtime according to the heki_test=N boot
-+	  parameter, with N identifying the test to run (between 1 and 4).
-+
-+	  Before launching the init process, the system might not respond
-+	  because of unhandled kernel page fault.  This will be fixed in a
-+	  next patch series.
-diff --git a/virt/heki/Makefile b/virt/heki/Makefile
-index 564f92faa9d8..a66cd0ba140b 100644
---- a/virt/heki/Makefile
-+++ b/virt/heki/Makefile
-@@ -3,3 +3,4 @@
- obj-y += main.o
- obj-y += walk.o
- obj-y += counters.o
-+obj-y += tests.o
-diff --git a/virt/heki/main.c b/virt/heki/main.c
-index 5629334112e7..ce9984231996 100644
---- a/virt/heki/main.c
-+++ b/virt/heki/main.c
-@@ -51,8 +51,10 @@ void heki_late_init(void)
+@@ -125,6 +131,9 @@ static inline void heki_late_init(void)
+ static inline void heki_map(unsigned long va, unsigned long end)
  {
- 	struct heki_hypervisor *hypervisor = heki.hypervisor;
+ }
++static inline void heki_unmap(unsigned long va, unsigned long end)
++{
++}
  
--	if (!heki.counters)
-+	if (!heki.counters) {
-+		heki_run_test();
- 		return;
-+	}
+ #endif /* CONFIG_HEKI */
  
- 	/* Locks control registers so a compromised guest cannot change them. */
- 	if (WARN_ON(hypervisor->lock_crs()))
-@@ -61,6 +63,8 @@ void heki_late_init(void)
- 	pr_warn("Control registers locked\n");
+diff --git a/mm/vmalloc.c b/mm/vmalloc.c
+index a3fedb3ee0db..d9096502e571 100644
+--- a/mm/vmalloc.c
++++ b/mm/vmalloc.c
+@@ -40,6 +40,7 @@
+ #include <linux/pgtable.h>
+ #include <linux/hugetlb.h>
+ #include <linux/sched/mm.h>
++#include <linux/heki.h>
+ #include <asm/tlbflush.h>
+ #include <asm/shmparam.h>
  
- 	heki_arch_late_init();
+@@ -301,6 +302,8 @@ static int vmap_range_noflush(unsigned long addr, unsigned long end,
+ 	if (mask & ARCH_PAGE_TABLE_SYNC_MASK)
+ 		arch_sync_kernel_mappings(start, end);
+ 
++	heki_map(start, end);
 +
-+	heki_run_test();
+ 	return err;
  }
  
- /*
-diff --git a/virt/heki/tests.c b/virt/heki/tests.c
-new file mode 100644
-index 000000000000..6e6542b257f1
---- /dev/null
-+++ b/virt/heki/tests.c
-@@ -0,0 +1,207 @@
-+// SPDX-License-Identifier: GPL-2.0-only
+@@ -419,6 +422,8 @@ void __vunmap_range_noflush(unsigned long start, unsigned long end)
+ 	pgtbl_mod_mask mask = 0;
+ 
+ 	BUG_ON(addr >= end);
++	heki_unmap(start, end);
++
+ 	pgd = pgd_offset_k(addr);
+ 	do {
+ 		next = pgd_addr_end(addr, end);
+@@ -564,6 +569,8 @@ static int vmap_small_pages_range_noflush(unsigned long addr, unsigned long end,
+ 	if (mask & ARCH_PAGE_TABLE_SYNC_MASK)
+ 		arch_sync_kernel_mappings(start, end);
+ 
++	heki_map(start, end);
++
+ 	return 0;
+ }
+ 
+diff --git a/virt/heki/counters.c b/virt/heki/counters.c
+index 7067449cabca..adc8d566b8a9 100644
+--- a/virt/heki/counters.c
++++ b/virt/heki/counters.c
+@@ -88,6 +88,13 @@ void heki_callback(struct heki_args *args)
+ 			heki_update_counters(counters, 0, permissions, 0);
+ 			break;
+ 
++		case HEKI_UNMAP:
++			if (WARN_ON_ONCE(!counters))
++				break;
++			heki_update_counters(counters, permissions, 0,
++					     permissions);
++			break;
++
+ 		default:
+ 			WARN_ON_ONCE(1);
+ 			break;
+@@ -124,6 +131,19 @@ void heki_map(unsigned long va, unsigned long end)
+ 	heki_func(va, end, &args);
+ }
+ 
 +/*
-+ * Hypervisor Enforced Kernel Integrity (Heki) - Common code
-+ *
-+ * Copyright © 2023 Microsoft Corporation
++ * Find the mappings in the given range and revert the permission counters for
++ * them.
 + */
-+
-+#include <linux/kvm_host.h>
-+#include <kunit/test.h>
-+#include <linux/cache.h>
-+#include <linux/heki.h>
-+#include <linux/kernel.h>
-+#include <linux/mm.h>
-+#include <linux/printk.h>
-+#include <linux/set_memory.h>
-+#include <linux/types.h>
-+#include <linux/vmalloc.h>
-+
-+#include "common.h"
-+
-+#ifdef CONFIG_HEKI_TEST
-+
-+/* Heki test data */
-+
-+/* Takes two pages to not change permission of other read-only pages. */
-+const char heki_test_const_buf[PAGE_SIZE * 2] = {};
-+char heki_test_ro_after_init_buf[PAGE_SIZE * 2] __ro_after_init = {};
-+
-+long heki_test_exec_data(long);
-+void _test_exec_data_end(void);
-+
-+/* Used to test ROP execution against the .rodata section. */
-+/* clang-format off */
-+asm(
-+".pushsection .rodata;" // NOT .text section
-+".global heki_test_exec_data;"
-+".type heki_test_exec_data, @function;"
-+"heki_test_exec_data:"
-+ASM_ENDBR
-+"movq %rdi, %rax;"
-+"inc %rax;"
-+ASM_RET
-+".size heki_test_exec_data, .-heki_test_exec_data;"
-+"_test_exec_data_end:"
-+".popsection");
-+/* clang-format on */
-+
-+static void heki_test_cr_disable_smep(struct kunit *test)
++void heki_unmap(unsigned long va, unsigned long end)
 +{
-+	unsigned long cr4;
-+
-+	/* SMEP should be initially enabled. */
-+	KUNIT_ASSERT_TRUE(test, __read_cr4() & X86_CR4_SMEP);
-+
-+	kunit_warn(test,
-+		   "Starting control register pinning tests with SMEP check\n");
-+
-+	/*
-+	 * Trying to disable SMEP, bypassing kernel self-protection by not
-+	 * using cr4_clear_bits(X86_CR4_SMEP).
-+	 */
-+	cr4 = __read_cr4() & ~X86_CR4_SMEP;
-+	asm volatile("mov %0,%%cr4" : "+r"(cr4) : : "memory");
-+
-+	/* SMEP should still be enabled. */
-+	KUNIT_ASSERT_TRUE(test, __read_cr4() & X86_CR4_SMEP);
-+}
-+
-+static inline void print_addr(struct kunit *test, const char *const buf_name,
-+			      void *const buf)
-+{
-+	const pte_t pte = *virt_to_kpte((unsigned long)buf);
-+	const phys_addr_t paddr = slow_virt_to_phys(buf);
-+	bool present = pte_flags(pte) & (_PAGE_PRESENT);
-+	bool accessible = pte_accessible(&init_mm, pte);
-+
-+	kunit_warn(
-+		test,
-+		"%s vaddr:%llx paddr:%llx exec:%d write:%d present:%d accessible:%d\n",
-+		buf_name, (unsigned long long)buf, paddr, !!pte_exec(pte),
-+		!!pte_write(pte), present, accessible);
-+}
-+
-+extern int kernel_set_to_readonly;
-+
-+static void heki_test_write_to_rodata(struct kunit *test,
-+				      const char *const buf_name,
-+				      char *const ro_buf)
-+{
-+	print_addr(test, buf_name, (void *)ro_buf);
-+	KUNIT_EXPECT_EQ(test, 0, *ro_buf);
-+
-+	kunit_warn(
-+		test,
-+		"Bypassing kernel self-protection: mark memory as writable\n");
-+	kernel_set_to_readonly = 0;
-+	/*
-+	 * Removes execute permission that might be set by bugdoor-exec,
-+	 * because change_page_attr_clear() is not use by set_memory_rw().
-+	 * This is required since commit 652c5bf380ad ("x86/mm: Refuse W^X
-+	 * violations").
-+	 */
-+	KUNIT_ASSERT_FALSE(test, set_memory_nx((unsigned long)PTR_ALIGN_DOWN(
-+						       ro_buf, PAGE_SIZE),
-+					       1));
-+	KUNIT_ASSERT_FALSE(test, set_memory_rw((unsigned long)PTR_ALIGN_DOWN(
-+						       ro_buf, PAGE_SIZE),
-+					       1));
-+	kernel_set_to_readonly = 1;
-+
-+	kunit_warn(test, "Trying memory write\n");
-+	*ro_buf = 0x11;
-+	KUNIT_EXPECT_EQ(test, 0, *ro_buf);
-+	kunit_warn(test, "New content: 0x%02x\n", *ro_buf);
-+}
-+
-+static void heki_test_write_to_const(struct kunit *test)
-+{
-+	heki_test_write_to_rodata(test, "const_buf",
-+				  (void *)heki_test_const_buf);
-+}
-+
-+static void heki_test_write_to_ro_after_init(struct kunit *test)
-+{
-+	heki_test_write_to_rodata(test, "ro_after_init_buf",
-+				  (void *)heki_test_ro_after_init_buf);
-+}
-+
-+typedef long test_exec_t(long);
-+
-+static void heki_test_exec(struct kunit *test)
-+{
-+	const size_t exec_size = 7;
-+	unsigned long nx_page_start = (unsigned long)PTR_ALIGN_DOWN(
-+		(const void *const)heki_test_exec_data, PAGE_SIZE);
-+	unsigned long nx_page_end = (unsigned long)PTR_ALIGN(
-+		(const void *const)heki_test_exec_data + exec_size, PAGE_SIZE);
-+	test_exec_t *exec = (test_exec_t *)heki_test_exec_data;
-+	long ret;
-+
-+	/* Starting non-executable memory tests. */
-+	print_addr(test, "test_exec_data", heki_test_exec_data);
-+
-+	kunit_warn(
-+		test,
-+		"Bypassing kernel-self protection: mark memory as executable\n");
-+	kernel_set_to_readonly = 0;
-+	KUNIT_ASSERT_FALSE(test,
-+			   set_memory_rox(nx_page_start,
-+					  PFN_UP(nx_page_end - nx_page_start)));
-+	kernel_set_to_readonly = 1;
-+
-+	kunit_warn(
-+		test,
-+		"Trying to execute data (ROP) in (initially) non-executable memory\n");
-+	ret = exec(3);
-+
-+	/* This should not be reached because of the uncaught page fault. */
-+	KUNIT_EXPECT_EQ(test, 3, ret);
-+	kunit_warn(test, "Result of execution: 3 + 1 = %ld\n", ret);
-+}
-+
-+const struct kunit_case heki_test_cases[] = {
-+	KUNIT_CASE(heki_test_cr_disable_smep),
-+	KUNIT_CASE(heki_test_write_to_const),
-+	KUNIT_CASE(heki_test_write_to_ro_after_init),
-+	KUNIT_CASE(heki_test_exec),
-+	{}
-+};
-+
-+static unsigned long heki_test __ro_after_init;
-+
-+static int __init parse_heki_test_config(char *str)
-+{
-+	if (kstrtoul(str, 10, &heki_test) ||
-+	    heki_test > (ARRAY_SIZE(heki_test_cases) - 1))
-+		pr_warn("Invalid option string for heki_test: '%s'\n", str);
-+	return 1;
-+}
-+
-+__setup("heki_test=", parse_heki_test_config);
-+
-+void heki_run_test(void)
-+{
-+	struct kunit_case heki_test_case[2] = {};
-+	struct kunit_suite heki_test_suite = {
-+		.name = "heki",
-+		.test_cases = heki_test_case,
++	struct heki_args args = {
++		.cmd = HEKI_UNMAP,
 +	};
-+	struct kunit_suite *const test_suite = &heki_test_suite;
 +
-+	if (!kunit_enabled() || heki_test == 0 ||
-+	    heki_test >= ARRAY_SIZE(heki_test_cases))
-+		return;
-+
-+	pr_warn("Running test #%lu\n", heki_test);
-+	heki_test_case[0] = heki_test_cases[heki_test - 1];
-+	__kunit_test_suites_init(&test_suite, 1);
++	heki_func(va, end, &args);
 +}
 +
-+#else /* CONFIG_HEKI_TEST */
-+
-+void heki_run_test(void)
-+{
-+}
-+
-+#endif /* CONFIG_HEKI_TEST */
+ /*
+  * Permissions counters are associated with each guest page using the
+  * Memory Table feature. Initialize the permissions counters here.
 -- 
 2.42.1
 
