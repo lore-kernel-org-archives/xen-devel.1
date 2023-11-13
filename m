@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A631C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:36:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631291.984484 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62048C4167B
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:37:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631294.984494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2MoZ-0002vF-55; Mon, 13 Nov 2023 02:36:39 +0000
+	id 1r2Moq-0003e4-JW; Mon, 13 Nov 2023 02:36:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631291.984484; Mon, 13 Nov 2023 02:36:39 +0000
+Received: by outflank-mailman (output) from mailman id 631294.984494; Mon, 13 Nov 2023 02:36:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2MoZ-0002v8-1O; Mon, 13 Nov 2023 02:36:39 +0000
-Received: by outflank-mailman (input) for mailman id 631291;
- Mon, 13 Nov 2023 02:36:38 +0000
+	id 1r2Moq-0003dp-GD; Mon, 13 Nov 2023 02:36:56 +0000
+Received: by outflank-mailman (input) for mailman id 631294;
+ Mon, 13 Nov 2023 02:36:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=cCEZ=G2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1r2Md6-00011s-61
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:48 +0000
-Received: from smtp-8fac.mail.infomaniak.ch (smtp-8fac.mail.infomaniak.ch
- [83.166.143.172]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d05aa5f2-81cb-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 03:24:47 +0100 (CET)
+ id 1r2MdH-00011s-0f
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:59 +0000
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [2001:1600:3:17::bc09])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d6cf04db-81cb-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 03:24:58 +0100 (CET)
 Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCtk62jlzMpvbR;
- Mon, 13 Nov 2023 02:24:46 +0000 (UTC)
+ by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCtx4lfyzMq2H9;
+ Mon, 13 Nov 2023 02:24:57 +0000 (UTC)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4STCtj3BHpzMpnPj; Mon, 13 Nov 2023 03:24:45 +0100 (CET)
+ id 4STCtw1z09zMpnPr; Mon, 13 Nov 2023 03:24:56 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,14 +44,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d05aa5f2-81cb-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: d6cf04db-81cb-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1699842286;
-	bh=cKEtzyAn6nu6IgS2HwQtrr3Q0FdnoNCxsjW/LjtBy3Y=;
+	s=20191114; t=1699842297;
+	bh=x8fg6SD1g74kkGJ23TK2HH1loleby/1wIvw5whB02rE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jIruH5whNlSM69bid+qC3QXUvSlkIk75w7vIB/z+Qo7hEu+vNgXjfS7u+hLyxFvJh
-	 GvNxrzuFYdFr4xGhRvANkM2xckqutIUrO++9D0gm+yBcTUiZrahZ5H3unv9L5ngWMM
-	 D6Za9ta9LWpEPpfa0MoQWkvjZSapc+FeceMFwMpo=
+	b=dJfAiYA2HYA3jqI/ZQKjz5gzrQbNbqyogck83ckqbDcyi+QeXvv9eLzd5ebcYVOvo
+	 cLtZ+H/07iEl7T5kTrk2eFqbGuc3VumW1ct0jF8/XyG299t2fBuDo8YODWnquBbTNY
+	 ymQ6InNw/ozaj7PTIf8MX7lr4GmSX3s7IhzlnmOM=
 From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
 To: Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
@@ -91,9 +92,9 @@ Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
 	virtualization@lists.linux-foundation.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v2 14/19] heki: x86: Initialize permissions counters for pages mapped into KVA
-Date: Sun, 12 Nov 2023 21:23:21 -0500
-Message-ID: <20231113022326.24388-15-mic@digikod.net>
+Subject: [RFC PATCH v2 17/19] heki: x86: Update permissions counters during text patching
+Date: Sun, 12 Nov 2023 21:23:24 -0500
+Message-ID: <20231113022326.24388-18-mic@digikod.net>
 In-Reply-To: <20231113022326.24388-1-mic@digikod.net>
 References: <20231113022326.24388-1-mic@digikod.net>
 MIME-Version: 1.0
@@ -103,23 +104,12 @@ X-Infomaniak-Routing: alpha
 
 From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 
-Define a permissions counters structure that contains a counter for
-read, write and execute. Each mapped guest page will be allocated a
-permissions counters structure.
+X86 uses a function called __text_poke() to modify executable code. This
+patching function is used by many features such as KProbes and FTrace.
 
-During kernel boot, walk the kernel address space, locate all the
-mappings, create permissions counters for each mapped guest page and
-update the counters to reflect the collective permissions for each page
-across all of its mappings.
-
-The collective permissions will be applied in the EPT in a following
-commit.
-
-We might want to move these counters to a safer place (e.g., KVM) to
-protect it from tampering by the guest kernel itself.
-
-We should note that walking through all mappings might be slow if KASAN
-is enabled.
+Update the permissions counters for the text page so that write
+permissions can be temporarily established in the EPT to modify the
+instructions in that page.
 
 Cc: Borislav Petkov <bp@alien8.de>
 Cc: Dave Hansen <dave.hansen@linux.intel.com>
@@ -133,376 +123,159 @@ Cc: Sean Christopherson <seanjc@google.com>
 Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
 Cc: Wanpeng Li <wanpengli@tencent.com>
-Suggested-by: Mickaël Salaün <mic@digikod.net>
 Signed-off-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 ---
 
 Changes since v1:
-* New patch and new files: arch/x86/mm/heki.c and virt/heki/counters.c
+* New patch
 ---
- arch/x86/mm/Makefile |   2 +
- arch/x86/mm/heki.c   |  56 +++++++++++++++++
- include/linux/heki.h |  32 ++++++++++
- virt/heki/Kconfig    |   2 +
- virt/heki/Makefile   |   1 +
- virt/heki/counters.c | 147 +++++++++++++++++++++++++++++++++++++++++++
- virt/heki/main.c     |  13 ++++
- 7 files changed, 253 insertions(+)
- create mode 100644 arch/x86/mm/heki.c
- create mode 100644 virt/heki/counters.c
+ arch/x86/kernel/alternative.c |  5 ++++
+ arch/x86/mm/heki.c            | 49 +++++++++++++++++++++++++++++++++++
+ include/linux/heki.h          | 14 ++++++++++
+ 3 files changed, 68 insertions(+)
 
-diff --git a/arch/x86/mm/Makefile b/arch/x86/mm/Makefile
-index c80febc44cd2..2998eaac0dbb 100644
---- a/arch/x86/mm/Makefile
-+++ b/arch/x86/mm/Makefile
-@@ -67,3 +67,5 @@ obj-$(CONFIG_AMD_MEM_ENCRYPT)	+= mem_encrypt_amd.o
- 
- obj-$(CONFIG_AMD_MEM_ENCRYPT)	+= mem_encrypt_identity.o
- obj-$(CONFIG_AMD_MEM_ENCRYPT)	+= mem_encrypt_boot.o
-+
-+obj-$(CONFIG_HEKI)		+= heki.o
-diff --git a/arch/x86/mm/heki.c b/arch/x86/mm/heki.c
-new file mode 100644
-index 000000000000..c495df0d8772
---- /dev/null
-+++ b/arch/x86/mm/heki.c
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Hypervisor Enforced Kernel Integrity (Heki) - Arch specific.
-+ *
-+ * Copyright © 2023 Microsoft Corporation
-+ */
-+
+diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
+index 517ee01503be..64fd8757ba5c 100644
+--- a/arch/x86/kernel/alternative.c
++++ b/arch/x86/kernel/alternative.c
+@@ -18,6 +18,7 @@
+ #include <linux/mmu_context.h>
+ #include <linux/bsearch.h>
+ #include <linux/sync_core.h>
 +#include <linux/heki.h>
-+#include <linux/kvm_mem_attr.h>
-+
-+#ifdef pr_fmt
-+#undef pr_fmt
-+#endif
-+
-+#define pr_fmt(fmt) "heki-guest: " fmt
-+
-+static unsigned long kernel_va;
-+static unsigned long kernel_end;
-+static unsigned long direct_map_va;
-+static unsigned long direct_map_end;
-+
-+__init void heki_arch_early_init(void)
-+{
-+	/* Kernel virtual address space range, not yet compatible with KASLR. */
-+	if (pgtable_l5_enabled()) {
-+		kernel_va = 0xff00000000000000UL;
-+		kernel_end = 0xffffffffffe00000UL;
-+		direct_map_va = 0xff11000000000000UL;
-+		direct_map_end = 0xff91000000000000UL;
-+	} else {
-+		kernel_va = 0xffff800000000000UL;
-+		kernel_end = 0xffffffffffe00000UL;
-+		direct_map_va = 0xffff888000000000UL;
-+		direct_map_end = 0xffffc88000000000UL;
-+	}
-+
-+	/*
-+	 * Initialize the counters for all existing kernel mappings except
-+	 * for direct map.
-+	 */
-+	heki_map(kernel_va, direct_map_va);
-+	heki_map(direct_map_end, kernel_end);
-+}
-+
-+unsigned long heki_flags_to_permissions(unsigned long flags)
-+{
-+	unsigned long permissions;
-+
-+	permissions = MEM_ATTR_READ | MEM_ATTR_EXEC;
-+	if (flags & _PAGE_RW)
-+		permissions |= MEM_ATTR_WRITE;
-+	if (flags & _PAGE_NX)
-+		permissions &= ~MEM_ATTR_EXEC;
-+
-+	return permissions;
-+}
-diff --git a/include/linux/heki.h b/include/linux/heki.h
-index a7ae0b387dfe..86c787d121e0 100644
---- a/include/linux/heki.h
-+++ b/include/linux/heki.h
-@@ -19,6 +19,16 @@
+ #include <asm/text-patching.h>
+ #include <asm/alternative.h>
+ #include <asm/sections.h>
+@@ -1801,6 +1802,7 @@ static void *__text_poke(text_poke_f func, void *addr, const void *src, size_t l
+ 	 */
+ 	pgprot = __pgprot(pgprot_val(PAGE_KERNEL) & ~_PAGE_GLOBAL);
  
- #ifdef CONFIG_HEKI
++	heki_text_poke_start(pages, cross_page_boundary ? 2 : 1, pgprot);
+ 	/*
+ 	 * The lock is not really needed, but this allows to avoid open-coding.
+ 	 */
+@@ -1865,7 +1867,10 @@ static void *__text_poke(text_poke_f func, void *addr, const void *src, size_t l
+ 	}
  
-+/*
-+ * This structure keeps track of the collective permissions for a guest page
-+ * across all of its mappings.
-+ */
-+struct heki_counters {
-+	int read;
-+	int write;
-+	int execute;
-+};
+ 	local_irq_restore(flags);
 +
- /*
-  * This structure contains a guest physical range and its permissions (RWX).
-  */
-@@ -56,9 +66,17 @@ struct heki_hypervisor {
- /*
-  * If the active hypervisor supports Heki, it will plug its heki_hypervisor
-  * pointer into this heki structure.
-+ *
-+ * During guest kernel boot, permissions counters for each guest page are
-+ * initialized based on the page's current permissions.
-  */
- struct heki {
- 	struct heki_hypervisor *hypervisor;
-+	struct mem_table *counters;
-+};
+ 	pte_unmap_unlock(ptep, ptl);
++	heki_text_poke_end(pages, cross_page_boundary ? 2 : 1, pgprot);
 +
-+enum heki_cmd {
-+	HEKI_MAP,
- };
- 
- /*
-@@ -72,6 +90,9 @@ struct heki_args {
- 	phys_addr_t pa;
- 	size_t size;
- 	unsigned long flags;
-+
-+	/* Command passed by caller. */
-+	enum heki_cmd cmd;
- };
- 
- /* Callback function called by the table walker. */
-@@ -84,6 +105,14 @@ extern bool __read_mostly enable_mbec;
- 
- void heki_early_init(void);
- void heki_late_init(void);
-+void heki_counters_init(void);
-+void heki_walk(unsigned long va, unsigned long va_end, heki_func_t func,
-+	       struct heki_args *args);
-+void heki_map(unsigned long va, unsigned long end);
-+
-+/* Arch-specific functions. */
-+void heki_arch_early_init(void);
-+unsigned long heki_flags_to_permissions(unsigned long flags);
- 
- #else /* !CONFIG_HEKI */
- 
-@@ -93,6 +122,9 @@ static inline void heki_early_init(void)
- static inline void heki_late_init(void)
- {
+ 	return addr;
  }
-+static inline void heki_map(unsigned long va, unsigned long end)
-+{
-+}
  
- #endif /* CONFIG_HEKI */
+diff --git a/arch/x86/mm/heki.c b/arch/x86/mm/heki.c
+index c0eace9e343f..e4c60d8b4f2d 100644
+--- a/arch/x86/mm/heki.c
++++ b/arch/x86/mm/heki.c
+@@ -5,8 +5,11 @@
+  * Copyright © 2023 Microsoft Corporation
+  */
  
-diff --git a/virt/heki/Kconfig b/virt/heki/Kconfig
-index 75a784653e31..6d956eb9d04b 100644
---- a/virt/heki/Kconfig
-+++ b/virt/heki/Kconfig
-@@ -6,6 +6,8 @@ config HEKI
- 	bool "Hypervisor Enforced Kernel Integrity (Heki)"
- 	depends on ARCH_SUPPORTS_HEKI && HYPERVISOR_SUPPORTS_HEKI
- 	select KVM_GENERIC_MEMORY_ATTRIBUTES
-+	depends on !X86_16BIT
-+	select SPARSEMEM
- 	help
- 	  This feature enhances guest virtual machine security by taking
- 	  advantage of security features provided by the hypervisor for guests.
-diff --git a/virt/heki/Makefile b/virt/heki/Makefile
-index a5daa4ff7a4f..564f92faa9d8 100644
---- a/virt/heki/Makefile
-+++ b/virt/heki/Makefile
-@@ -2,3 +2,4 @@
++#include <asm/pgtable.h>
++#include <asm/text-patching.h>
+ #include <linux/heki.h>
+ #include <linux/kvm_mem_attr.h>
++#include <linux/mm.h>
  
- obj-y += main.o
- obj-y += walk.o
-+obj-y += counters.o
-diff --git a/virt/heki/counters.c b/virt/heki/counters.c
-new file mode 100644
-index 000000000000..7067449cabca
---- /dev/null
-+++ b/virt/heki/counters.c
-@@ -0,0 +1,147 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Hypervisor Enforced Kernel Integrity (Heki) - Permissions counters.
-+ *
-+ * Copyright © 2023 Microsoft Corporation
-+ */
+ #ifdef pr_fmt
+ #undef pr_fmt
+@@ -63,3 +66,49 @@ void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
+ 	if (pgprot_val(prot) & _PAGE_NX)
+ 		*clear |= MEM_ATTR_EXEC;
+ }
 +
-+#include <linux/heki.h>
-+#include <linux/kvm_mem_attr.h>
-+#include <linux/mem_table.h>
-+
-+#include "common.h"
-+
-+DEFINE_MUTEX(heki_lock);
-+
-+static void heki_update_counters(struct heki_counters *counters,
-+				 unsigned long perm, unsigned long set,
-+				 unsigned long clear)
++static unsigned long heki_pgprot_to_flags(pgprot_t prot)
 +{
-+	if (WARN_ON_ONCE(!counters))
-+		return;
++	unsigned long flags = 0;
 +
-+	if ((clear & MEM_ATTR_READ) && (perm & MEM_ATTR_READ))
-+		counters->read--;
-+	if ((clear & MEM_ATTR_WRITE) && (perm & MEM_ATTR_WRITE))
-+		counters->write--;
-+	if ((clear & MEM_ATTR_EXEC) && (perm & MEM_ATTR_EXEC))
-+		counters->execute--;
-+
-+	if ((set & MEM_ATTR_READ) && !(perm & MEM_ATTR_READ))
-+		counters->read++;
-+	if ((set & MEM_ATTR_WRITE) && !(perm & MEM_ATTR_WRITE))
-+		counters->write++;
-+	if ((set & MEM_ATTR_EXEC) && !(perm & MEM_ATTR_EXEC))
-+		counters->execute++;
++	if (pgprot_val(prot) & _PAGE_RW)
++		flags |= _PAGE_RW;
++	if (pgprot_val(prot) & _PAGE_NX)
++		flags |= _PAGE_NX;
++	return flags;
 +}
 +
-+static struct heki_counters *heki_create_counters(struct mem_table *table,
-+						  phys_addr_t pa)
++static void heki_text_poke_common(struct page **pages, int npages,
++				  pgprot_t prot, enum heki_cmd cmd)
 +{
-+	struct heki_counters *counters;
-+	void **entry;
++	struct heki_args args = {
++		.cmd = cmd,
++	};
++	unsigned long va = poking_addr;
++	int i;
 +
-+	entry = mem_table_create(table, pa);
-+	if (WARN_ON(!entry))
-+		return NULL;
-+
-+	counters = kzalloc(sizeof(*counters), GFP_KERNEL);
-+	if (WARN_ON(!counters))
-+		return NULL;
-+
-+	*entry = counters;
-+	return counters;
-+}
-+
-+void heki_callback(struct heki_args *args)
-+{
-+	/* The VA is only for debug. It is not really used in this function. */
-+	unsigned long va;
-+	phys_addr_t pa, pa_end;
-+	unsigned long permissions;
-+	void **entry;
-+	struct heki_counters *counters;
-+	unsigned int ignore;
-+
-+	if (!pfn_valid(args->pa >> PAGE_SHIFT))
++	if (!heki.counters)
 +		return;
-+
-+	permissions = heki_flags_to_permissions(args->flags);
-+
-+	/*
-+	 * Handle counters for a leaf entry in the kernel page table.
-+	 */
-+	pa_end = args->pa + args->size;
-+	for (pa = args->pa, va = args->va; pa < pa_end;
-+	     pa += PAGE_SIZE, va += PAGE_SIZE) {
-+		entry = mem_table_find(heki.counters, pa, &ignore);
-+		if (entry)
-+			counters = *entry;
-+		else
-+			counters = NULL;
-+
-+		switch (args->cmd) {
-+		case HEKI_MAP:
-+			if (!counters)
-+				counters =
-+					heki_create_counters(heki.counters, pa);
-+			heki_update_counters(counters, 0, permissions, 0);
-+			break;
-+
-+		default:
-+			WARN_ON_ONCE(1);
-+			break;
-+		}
-+	}
-+}
-+
-+static void heki_func(unsigned long va, unsigned long end,
-+		      struct heki_args *args)
-+{
-+	if (!heki.counters || va >= end)
-+		return;
-+
-+	va = ALIGN_DOWN(va, PAGE_SIZE);
-+	end = ALIGN(end, PAGE_SIZE);
 +
 +	mutex_lock(&heki_lock);
 +
-+	heki_walk(va, end, heki_callback, args);
++	for (i = 0; i < npages; i++, va += PAGE_SIZE) {
++		args.va = va;
++		args.pa = page_to_pfn(pages[i]) << PAGE_SHIFT;
++		args.size = PAGE_SIZE;
++		args.flags = heki_pgprot_to_flags(prot);
++		heki_callback(&args);
++	}
 +
 +	mutex_unlock(&heki_lock);
 +}
 +
-+/*
-+ * Find the mappings in the given range and initialize permission counters for
-+ * them.
-+ */
-+void heki_map(unsigned long va, unsigned long end)
++void heki_text_poke_start(struct page **pages, int npages, pgprot_t prot)
 +{
-+	struct heki_args args = {
-+		.cmd = HEKI_MAP,
-+	};
-+
-+	heki_func(va, end, &args);
++	heki_text_poke_common(pages, npages, prot, HEKI_MAP);
 +}
 +
-+/*
-+ * Permissions counters are associated with each guest page using the
-+ * Memory Table feature. Initialize the permissions counters here.
-+ * Note that we don't support large page entries for counters because
-+ * it is difficult to merge/split counters for large pages.
-+ */
-+
-+static void heki_counters_free(void *counters)
++void heki_text_poke_end(struct page **pages, int npages, pgprot_t prot)
 +{
-+	kfree(counters);
++	heki_text_poke_common(pages, npages, prot, HEKI_UNMAP);
 +}
-+
-+static struct mem_table_ops heki_counters_ops = {
-+	.free = heki_counters_free,
-+};
-+
-+__init void heki_counters_init(void)
-+{
-+	heki.counters = mem_table_alloc(&heki_counters_ops);
-+	WARN_ON(!heki.counters);
-+}
-diff --git a/virt/heki/main.c b/virt/heki/main.c
-index ff1937e1c946..0ab7de659e6f 100644
---- a/virt/heki/main.c
-+++ b/virt/heki/main.c
-@@ -21,6 +21,16 @@ __init void heki_early_init(void)
- 		pr_warn("Heki is not enabled\n");
- 		return;
- 	}
-+
-+	/*
-+	 * Static addresses (see heki_arch_early_init) are not compatible with
-+	 * KASLR. This will be handled in a next patch series.
-+	 */
-+	if (IS_ENABLED(CONFIG_RANDOMIZE_BASE)) {
-+		pr_warn("Heki is disabled because KASLR is not supported yet\n");
-+		return;
-+	}
-+
- 	pr_warn("Heki is enabled\n");
+diff --git a/include/linux/heki.h b/include/linux/heki.h
+index 079b34af07f0..6f2cfddc6dac 100644
+--- a/include/linux/heki.h
++++ b/include/linux/heki.h
+@@ -111,6 +111,7 @@ typedef void (*heki_func_t)(struct heki_args *args);
  
- 	if (!heki.hypervisor) {
-@@ -29,6 +39,9 @@ __init void heki_early_init(void)
- 		return;
- 	}
- 	pr_warn("Heki is supported by the active Hypervisor\n");
-+
-+	heki_counters_init();
-+	heki_arch_early_init();
+ extern struct heki heki;
+ extern bool heki_enabled;
++extern struct mutex heki_lock;
+ 
+ extern bool __read_mostly enable_mbec;
+ 
+@@ -123,12 +124,15 @@ void heki_map(unsigned long va, unsigned long end);
+ void heki_update(unsigned long va, unsigned long end, unsigned long set,
+ 		 unsigned long clear);
+ void heki_unmap(unsigned long va, unsigned long end);
++void heki_callback(struct heki_args *args);
+ 
+ /* Arch-specific functions. */
+ void heki_arch_early_init(void);
+ unsigned long heki_flags_to_permissions(unsigned long flags);
+ void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
+ 				unsigned long *clear);
++void heki_text_poke_start(struct page **pages, int npages, pgprot_t prot);
++void heki_text_poke_end(struct page **pages, int npages, pgprot_t prot);
+ 
+ #else /* !CONFIG_HEKI */
+ 
+@@ -149,6 +153,16 @@ static inline void heki_unmap(unsigned long va, unsigned long end)
+ {
  }
  
- /*
++/* Arch-specific functions. */
++static inline void heki_text_poke_start(struct page **pages, int npages,
++					pgprot_t prot)
++{
++}
++static inline void heki_text_poke_end(struct page **pages, int npages,
++				      pgprot_t prot)
++{
++}
++
+ #endif /* CONFIG_HEKI */
+ 
+ #endif /* __HEKI_H__ */
 -- 
 2.42.1
 
