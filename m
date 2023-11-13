@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D46A0C4167D
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:24:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631247.984345 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 512EAC072DD
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:24:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631252.984394 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2McS-0001JD-NQ; Mon, 13 Nov 2023 02:24:08 +0000
+	id 1r2Mck-00038N-H8; Mon, 13 Nov 2023 02:24:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631247.984345; Mon, 13 Nov 2023 02:24:08 +0000
+Received: by outflank-mailman (output) from mailman id 631252.984394; Mon, 13 Nov 2023 02:24:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2McS-0001J0-Hn; Mon, 13 Nov 2023 02:24:08 +0000
-Received: by outflank-mailman (input) for mailman id 631247;
- Mon, 13 Nov 2023 02:24:07 +0000
+	id 1r2Mck-000389-Dz; Mon, 13 Nov 2023 02:24:26 +0000
+Received: by outflank-mailman (input) for mailman id 631252;
+ Mon, 13 Nov 2023 02:24:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=cCEZ=G2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1r2McR-00011s-ML
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:07 +0000
-Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
- [185.125.25.10]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b822cef1-81cb-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 03:24:06 +0100 (CET)
+ id 1r2Mcj-00011s-5Y
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:25 +0000
+Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
+ [45.157.188.14]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c2c95f2f-81cb-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 03:24:24 +0100 (CET)
 Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCsy1PsbzMpvSP;
- Mon, 13 Nov 2023 02:24:06 +0000 (UTC)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCtJ0ZdVzMpvZk;
+ Mon, 13 Nov 2023 02:24:24 +0000 (UTC)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4STCsw4qBmzMpnPj; Mon, 13 Nov 2023 03:24:04 +0100 (CET)
+ id 4STCtG6J2GzMpnPd; Mon, 13 Nov 2023 03:24:22 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,14 +43,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b822cef1-81cb-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: c2c95f2f-81cb-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1699842246;
-	bh=14gESsZbdf4eGyL7ckyTON/9RCrFW/bTzWgKvh9Y1QM=;
+	s=20191114; t=1699842263;
+	bh=oVoPkAWjPfqZGemyyPZ53MkaSuuZZCG0BkbPtJbgAiE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=lCCpGzLomRxznCOR/eHwVydQZR5isgftfHk7I92gfDtAO6CX5RswyL7i2tobhTzAE
-	 apr2Ceo33clgylfofcyYQRC+1ikfzHy4nOQYn3bmJlbss06S6fk2V+z1J7nyoxgujZ
-	 p/uhukd50aRDJnnIXpcjdg1Yj4GNzxC2Wp5ETI6s=
+	b=vrln9/b46q/IyvbLiM7gr/pjSy6nNAlaXyCcWrkwCHL76184CKYv4PInqVYTmM3XU
+	 usQOOb2erA5xMR73/PzeYEi/AVI+wGVine2Q4AcSnr9lSM8X4meSz+MPB7uM5eZm7x
+	 SS5OjADjVFHRajKr3cVBhD/5XC7T3gtprqTK5mks=
 From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
 To: Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
@@ -91,9 +91,9 @@ Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
 	virtualization@lists.linux-foundation.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v2 03/19] KVM: x86: Add notifications for Heki policy configuration and violation
-Date: Sun, 12 Nov 2023 21:23:10 -0500
-Message-ID: <20231113022326.24388-4-mic@digikod.net>
+Subject: [RFC PATCH v2 08/19] KVM: x86: Extend kvm_vm_set_mem_attributes() with a mask
+Date: Sun, 12 Nov 2023 21:23:15 -0500
+Message-ID: <20231113022326.24388-9-mic@digikod.net>
 In-Reply-To: <20231113022326.24388-1-mic@digikod.net>
 References: <20231113022326.24388-1-mic@digikod.net>
 MIME-Version: 1.0
@@ -101,360 +101,140 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Infomaniak-Routing: alpha
 
-Add an interface for user space to be notified about guests' Heki policy
-and related violations.
+Enable to only update a subset of attributes.
 
-Extend the KVM_ENABLE_CAP IOCTL with KVM_CAP_HEKI_CONFIGURE and
-KVM_CAP_HEKI_DENIAL. Each one takes a bitmask as first argument that can
-contains KVM_HEKI_EXIT_REASON_CR0 and KVM_HEKI_EXIT_REASON_CR4. The
-returned value is the bitmask of known Heki exit reasons, for now:
-KVM_HEKI_EXIT_REASON_CR0 and KVM_HEKI_EXIT_REASON_CR4.
+This is needed to be able to use the XArray for different use cases and
+make sure they don't interfere (see a following commit).
 
-If KVM_CAP_HEKI_CONFIGURE is set, a VM exit will be triggered for each
-KVM_HC_LOCK_CR_UPDATE hypercalls according to the requested control
-register. This enables to enlighten the VMM with the guest
-auto-restrictions.
-
-If KVM_CAP_HEKI_DENIAL is set, a VM exit will be triggered for each
-pinned CR violation. This enables the VMM to react to a policy
-violation.
-
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: H. Peter Anvin <hpa@zytor.com>
-Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Chao Peng <chao.p.peng@linux.intel.com>
 Cc: Kees Cook <keescook@chromium.org>
 Cc: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
 Cc: Sean Christopherson <seanjc@google.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
-Cc: Wanpeng Li <wanpengli@tencent.com>
+Cc: Yu Zhang <yu.c.zhang@linux.intel.com>
 Signed-off-by: Mickaël Salaün <mic@digikod.net>
 ---
 
 Changes since v1:
-* New patch. Making user space aware of Heki properties was requested by
-  Sean Christopherson.
+* New patch
 ---
- arch/x86/kvm/vmx/vmx.c   |   5 +-
- arch/x86/kvm/x86.c       | 114 +++++++++++++++++++++++++++++++++++----
- arch/x86/kvm/x86.h       |   7 +--
- include/linux/kvm_host.h |   2 +
- include/uapi/linux/kvm.h |  22 ++++++++
- 5 files changed, 136 insertions(+), 14 deletions(-)
+ arch/x86/kvm/mmu/mmu.c   |  2 +-
+ include/linux/kvm_host.h |  2 +-
+ virt/kvm/kvm_main.c      | 27 +++++++++++++++++++--------
+ 3 files changed, 21 insertions(+), 10 deletions(-)
 
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index f487bf16dd96..b631b1d7ba30 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -5444,6 +5444,7 @@ static int handle_cr(struct kvm_vcpu *vcpu)
- 	int reg;
- 	int err;
- 	int ret;
-+	bool exit = false;
+diff --git a/arch/x86/kvm/mmu/mmu.c b/arch/x86/kvm/mmu/mmu.c
+index 4d378d308762..d7010e09440d 100644
+--- a/arch/x86/kvm/mmu/mmu.c
++++ b/arch/x86/kvm/mmu/mmu.c
+@@ -7283,7 +7283,7 @@ static bool hugepage_has_attrs(struct kvm *kvm, struct kvm_memory_slot *slot,
  
- 	exit_qualification = vmx_get_exit_qual(vcpu);
- 	cr = exit_qualification & 15;
-@@ -5453,8 +5454,8 @@ static int handle_cr(struct kvm_vcpu *vcpu)
- 		val = kvm_register_read(vcpu, reg);
- 		trace_kvm_cr_write(cr, val);
- 
--		ret = heki_check_cr(vcpu, cr, val);
--		if (ret)
-+		ret = heki_check_cr(vcpu, cr, val, &exit);
-+		if (exit)
- 			return ret;
- 
- 		switch (cr) {
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 4e6c4c21f12c..43c28a6953bf 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -119,6 +119,10 @@ static u64 __read_mostly cr4_reserved_bits = CR4_RESERVED_BITS;
- 
- #define KVM_CAP_PMU_VALID_MASK KVM_PMU_CAP_DISABLE
- 
-+#define KVM_HEKI_EXIT_REASON_VALID_MASK ( \
-+	KVM_HEKI_EXIT_REASON_CR0 | \
-+	KVM_HEKI_EXIT_REASON_CR4)
-+
- #define KVM_X2APIC_API_VALID_FLAGS (KVM_X2APIC_API_USE_32BIT_IDS | \
-                                     KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK)
- 
-@@ -4644,6 +4648,10 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
- 		if (kvm_is_vm_type_supported(KVM_X86_SW_PROTECTED_VM))
- 			r |= BIT(KVM_X86_SW_PROTECTED_VM);
- 		break;
-+	case KVM_CAP_HEKI_CONFIGURE:
-+	case KVM_CAP_HEKI_DENIAL:
-+		r = KVM_HEKI_EXIT_REASON_VALID_MASK;
-+		break;
- 	default:
- 		break;
+ 	for (gfn = start; gfn < end; gfn += KVM_PAGES_PER_HPAGE(level - 1)) {
+ 		if (hugepage_test_mixed(slot, gfn, level - 1) ||
+-		    attrs != kvm_get_memory_attributes(kvm, gfn))
++		    !(attrs & kvm_get_memory_attributes(kvm, gfn)))
+ 			return false;
  	}
-@@ -6518,6 +6526,22 @@ int kvm_vm_ioctl_enable_cap(struct kvm *kvm,
- 		}
- 		mutex_unlock(&kvm->lock);
- 		break;
-+#ifdef CONFIG_HEKI
-+	case KVM_CAP_HEKI_CONFIGURE:
-+		r = -EINVAL;
-+		if (cap->args[0] & ~KVM_HEKI_EXIT_REASON_VALID_MASK)
-+			break;
-+		kvm->heki_configure_exit_reason = cap->args[0];
-+		r = 0;
-+		break;
-+	case KVM_CAP_HEKI_DENIAL:
-+		r = -EINVAL;
-+		if (cap->args[0] & ~KVM_HEKI_EXIT_REASON_VALID_MASK)
-+			break;
-+		kvm->heki_denial_exit_reason = cap->args[0];
-+		r = 0;
-+		break;
-+#endif
- 	default:
- 		r = -EINVAL;
- 		break;
-@@ -8056,11 +8080,60 @@ static unsigned long emulator_get_cr(struct x86_emulate_ctxt *ctxt, int cr)
- 
- #ifdef CONFIG_HEKI
- 
-+static int complete_heki_configure_exit(struct kvm_vcpu *const vcpu)
-+{
-+	kvm_rax_write(vcpu, 0);
-+	++vcpu->stat.hypercalls;
-+	return kvm_skip_emulated_instruction(vcpu);
-+}
-+
-+static int complete_heki_denial_exit(struct kvm_vcpu *const vcpu)
-+{
-+	kvm_inject_gp(vcpu, 0);
-+	return 1;
-+}
-+
-+/* Returns true if the @exit_reason is handled by @vcpu->kvm. */
-+static bool heki_exit_cr(struct kvm_vcpu *const vcpu, const __u32 exit_reason,
-+			 const u64 heki_reason, unsigned long value)
-+{
-+	switch (exit_reason) {
-+	case KVM_EXIT_HEKI_CONFIGURE:
-+		if (!(vcpu->kvm->heki_configure_exit_reason & heki_reason))
-+			return false;
-+
-+		vcpu->run->heki_configure.reason = heki_reason;
-+		memset(vcpu->run->heki_configure.reserved, 0,
-+		       sizeof(vcpu->run->heki_configure.reserved));
-+		vcpu->run->heki_configure.cr_pinned = value;
-+		vcpu->arch.complete_userspace_io = complete_heki_configure_exit;
-+		break;
-+	case KVM_EXIT_HEKI_DENIAL:
-+		if (!(vcpu->kvm->heki_denial_exit_reason & heki_reason))
-+			return false;
-+
-+		vcpu->run->heki_denial.reason = heki_reason;
-+		memset(vcpu->run->heki_denial.reserved, 0,
-+		       sizeof(vcpu->run->heki_denial.reserved));
-+		vcpu->run->heki_denial.cr_value = value;
-+		vcpu->arch.complete_userspace_io = complete_heki_denial_exit;
-+		break;
-+	default:
-+		WARN_ON_ONCE(1);
-+		return false;
-+	}
-+
-+	vcpu->run->exit_reason = exit_reason;
-+	return true;
-+}
-+
- #define HEKI_ABI_VERSION 1
- 
- static int heki_lock_cr(struct kvm_vcpu *const vcpu, const unsigned long cr,
--			unsigned long pin, unsigned long flags)
-+			unsigned long pin, unsigned long flags, bool *exit)
- {
-+	*exit = false;
-+
- 	if (flags) {
- 		if ((flags == KVM_LOCK_CR_UPDATE_VERSION) && !cr && !pin)
- 			return HEKI_ABI_VERSION;
-@@ -8080,6 +8153,8 @@ static int heki_lock_cr(struct kvm_vcpu *const vcpu, const unsigned long cr,
- 			return -KVM_EINVAL;
- 
- 		atomic_long_or(pin, &vcpu->kvm->heki_pinned_cr0);
-+		*exit = heki_exit_cr(vcpu, KVM_EXIT_HEKI_CONFIGURE,
-+				     KVM_HEKI_EXIT_REASON_CR0, pin);
- 		return 0;
- 	case 4:
- 		/* Checks for irrelevant bits. */
-@@ -8089,24 +8164,37 @@ static int heki_lock_cr(struct kvm_vcpu *const vcpu, const unsigned long cr,
- 		/* Ignores bits not present in host. */
- 		pin &= __read_cr4();
- 		atomic_long_or(pin, &vcpu->kvm->heki_pinned_cr4);
-+		*exit = heki_exit_cr(vcpu, KVM_EXIT_HEKI_CONFIGURE,
-+				     KVM_HEKI_EXIT_REASON_CR4, pin);
- 		return 0;
- 	}
- 	return -KVM_EINVAL;
- }
- 
-+/*
-+ * Sets @exit to true if the caller must exit (i.e. denied access) with the
-+ * returned value:
-+ * - 0 when kvm_run is configured;
-+ * - 1 when there is no user space handler.
-+ */
- int heki_check_cr(struct kvm_vcpu *const vcpu, const unsigned long cr,
--		  const unsigned long val)
-+		  const unsigned long val, bool *exit)
- {
- 	unsigned long pinned;
- 
-+	*exit = false;
-+
- 	switch (cr) {
- 	case 0:
- 		pinned = atomic_long_read(&vcpu->kvm->heki_pinned_cr0);
- 		if ((val & pinned) != pinned) {
- 			pr_warn_ratelimited(
- 				"heki: Blocked CR0 update: 0x%lx\n", val);
--			kvm_inject_gp(vcpu, 0);
--			return 1;
-+			*exit = true;
-+			if (heki_exit_cr(vcpu, KVM_EXIT_HEKI_DENIAL,
-+					 KVM_HEKI_EXIT_REASON_CR0, val))
-+				return 0;
-+			return complete_heki_denial_exit(vcpu);
- 		}
- 		return 0;
- 	case 4:
-@@ -8114,8 +8202,11 @@ int heki_check_cr(struct kvm_vcpu *const vcpu, const unsigned long cr,
- 		if ((val & pinned) != pinned) {
- 			pr_warn_ratelimited(
- 				"heki: Blocked CR4 update: 0x%lx\n", val);
--			kvm_inject_gp(vcpu, 0);
--			return 1;
-+			*exit = true;
-+			if (heki_exit_cr(vcpu, KVM_EXIT_HEKI_DENIAL,
-+					 KVM_HEKI_EXIT_REASON_CR4, val))
-+				return 0;
-+			return complete_heki_denial_exit(vcpu);
- 		}
- 		return 0;
- 	}
-@@ -8129,9 +8220,10 @@ static int emulator_set_cr(struct x86_emulate_ctxt *ctxt, int cr, ulong val)
- {
- 	struct kvm_vcpu *vcpu = emul_to_vcpu(ctxt);
- 	int res = 0;
-+	bool exit = false;
- 
--	res = heki_check_cr(vcpu, cr, val);
--	if (res)
-+	res = heki_check_cr(vcpu, cr, val, &exit);
-+	if (exit)
- 		return res;
- 
- 	switch (cr) {
-@@ -9998,7 +10090,11 @@ int kvm_emulate_hypercall(struct kvm_vcpu *vcpu)
- 		if (a0 > U32_MAX) {
- 			ret = -KVM_EINVAL;
- 		} else {
--			ret = heki_lock_cr(vcpu, a0, a1, a2);
-+			bool exit = false;
-+
-+			ret = heki_lock_cr(vcpu, a0, a1, a2, &exit);
-+			if (exit)
-+				return ret;
- 		}
- 		break;
- #endif /* CONFIG_HEKI */
-diff --git a/arch/x86/kvm/x86.h b/arch/x86/kvm/x86.h
-index 193093112b55..f8f5c32bedd9 100644
---- a/arch/x86/kvm/x86.h
-+++ b/arch/x86/kvm/x86.h
-@@ -292,18 +292,19 @@ static inline bool kvm_check_has_quirk(struct kvm *kvm, u64 quirk)
- 
- #ifdef CONFIG_HEKI
- 
--int heki_check_cr(struct kvm_vcpu *vcpu, unsigned long cr, unsigned long val);
-+int heki_check_cr(struct kvm_vcpu *vcpu, unsigned long cr, unsigned long val,
-+		  bool *exit);
- 
- #else /* CONFIG_HEKI */
- 
- static inline int heki_check_cr(struct kvm_vcpu *vcpu, unsigned long cr,
--				unsigned long val)
-+				unsigned long val, bool *exit)
- {
- 	return 0;
- }
- 
- static inline int heki_lock_cr(struct kvm_vcpu *const vcpu, unsigned long cr,
--			       unsigned long pin)
-+			       unsigned long pin, bool *exit)
- {
- 	return 0;
- }
+ 	return true;
 diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
-index 6864c80ff936..ec32af17add8 100644
+index 85b8648fd892..de68390ab0f2 100644
 --- a/include/linux/kvm_host.h
 +++ b/include/linux/kvm_host.h
-@@ -838,6 +838,8 @@ struct kvm {
- #ifdef CONFIG_HEKI
- 	atomic_long_t heki_pinned_cr0;
- 	atomic_long_t heki_pinned_cr4;
-+	u64 heki_configure_exit_reason;
-+	u64 heki_denial_exit_reason;
- #endif /* CONFIG_HEKI */
+@@ -2397,7 +2397,7 @@ bool kvm_arch_pre_set_memory_attributes(struct kvm *kvm,
+ bool kvm_arch_post_set_memory_attributes(struct kvm *kvm,
+ 					 struct kvm_gfn_range *range);
+ int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+-			      unsigned long attributes);
++			      unsigned long attributes, unsigned long mask);
  
- #ifdef CONFIG_HAVE_KVM_PM_NOTIFIER
-diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
-index 5b5820d19e71..2477b4a16126 100644
---- a/include/uapi/linux/kvm.h
-+++ b/include/uapi/linux/kvm.h
-@@ -279,6 +279,8 @@ struct kvm_xen_exit {
- #define KVM_EXIT_RISCV_CSR        36
- #define KVM_EXIT_NOTIFY           37
- #define KVM_EXIT_MEMORY_FAULT     38
-+#define KVM_EXIT_HEKI_CONFIGURE   39
-+#define KVM_EXIT_HEKI_DENIAL      40
+ static inline bool kvm_mem_is_private(struct kvm *kvm, gfn_t gfn)
+ {
+diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+index 0096ccfbb609..e2c178db17d5 100644
+--- a/virt/kvm/kvm_main.c
++++ b/virt/kvm/kvm_main.c
+@@ -2436,7 +2436,7 @@ static int kvm_vm_ioctl_clear_dirty_log(struct kvm *kvm,
+ #ifdef CONFIG_KVM_GENERIC_MEMORY_ATTRIBUTES
+ /*
+  * Returns true if _all_ gfns in the range [@start, @end) have attributes
+- * matching @attrs.
++ * matching the @attrs bitmask.
+  */
+ bool kvm_range_has_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+ 				     unsigned long attrs)
+@@ -2459,7 +2459,8 @@ bool kvm_range_has_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+ 			entry = xas_next(&xas);
+ 		} while (xas_retry(&xas, entry));
  
- /* For KVM_EXIT_INTERNAL_ERROR */
- /* Emulate instruction failed. */
-@@ -532,6 +534,24 @@ struct kvm_run {
- 			__u64 gpa;
- 			__u64 size;
- 		} memory_fault;
-+		/* KVM_EXIT_HEKI_CONFIGURE */
-+		struct {
-+#define KVM_HEKI_EXIT_REASON_CR0	(1ULL << 0)
-+#define KVM_HEKI_EXIT_REASON_CR4	(1ULL << 1)
-+			__u64 reason;
-+			union {
-+				__u64 cr_pinned;
-+				__u64 reserved[7]; /* ignored */
-+			};
-+		} heki_configure;
-+		/* KVM_EXIT_HEKI_DENIAL */
-+		struct {
-+			__u64 reason;
-+			union {
-+				__u64 cr_value;
-+				__u64 reserved[7]; /* ignored */
-+			};
-+		} heki_denial;
- 		/* Fix the size of the union. */
- 		char padding[256];
+-		if (xas.xa_index != index || xa_to_value(entry) != attrs) {
++		if (xas.xa_index != index ||
++		    (xa_to_value(entry) & attrs) != attrs) {
+ 			has_attrs = false;
+ 			break;
+ 		}
+@@ -2553,7 +2554,7 @@ static bool kvm_pre_set_memory_attributes(struct kvm *kvm,
+ 
+ /* Set @attributes for the gfn range [@start, @end). */
+ int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+-				     unsigned long attributes)
++			      unsigned long attributes, unsigned long mask)
+ {
+ 	struct kvm_mmu_notifier_range pre_set_range = {
+ 		.start = start,
+@@ -2572,11 +2573,8 @@ int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+ 		.may_block = true,
  	};
-@@ -1219,6 +1239,8 @@ struct kvm_ppc_resize_hpt {
- #define KVM_CAP_MEMORY_ATTRIBUTES 232
- #define KVM_CAP_GUEST_MEMFD 233
- #define KVM_CAP_VM_TYPES 234
-+#define KVM_CAP_HEKI_CONFIGURE 235
-+#define KVM_CAP_HEKI_DENIAL 236
+ 	unsigned long i;
+-	void *entry;
+ 	int r = 0;
  
- #ifdef KVM_CAP_IRQ_ROUTING
+-	entry = attributes ? xa_mk_value(attributes) : NULL;
+-
+ 	lockdep_assert_held(&kvm->slots_arch_lock);
  
+ 	/* Nothing to do if the entire range as the desired attributes. */
+@@ -2596,6 +2594,16 @@ int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
+ 	kvm_handle_gfn_range(kvm, &pre_set_range);
+ 
+ 	for (i = start; i < end; i++) {
++		unsigned long value = 0;
++		void *entry;
++
++		entry = xa_load(&kvm->mem_attr_array, i);
++		if (xa_is_value(entry))
++			value = xa_to_value(entry) & ~mask;
++
++		value |= attributes & mask;
++		entry = value ? xa_mk_value(value) : NULL;
++
+ 		r = xa_err(xa_store(&kvm->mem_attr_array, i, entry,
+ 				    GFP_KERNEL_ACCOUNT));
+ 		KVM_BUG_ON(r, kvm);
+@@ -2609,12 +2617,14 @@ static int kvm_vm_ioctl_set_mem_attributes(struct kvm *kvm,
+ 					   struct kvm_memory_attributes *attrs)
+ {
+ 	int r;
++	unsigned long attrs_mask;
+ 	gfn_t start, end;
+ 
+ 	/* flags is currently not used. */
+ 	if (attrs->flags)
+ 		return -EINVAL;
+-	if (attrs->attributes & ~kvm_supported_mem_attributes(kvm))
++	attrs_mask = kvm_supported_mem_attributes(kvm);
++	if (attrs->attributes & ~attrs_mask)
+ 		return -EINVAL;
+ 	if (attrs->size == 0 || attrs->address + attrs->size < attrs->address)
+ 		return -EINVAL;
+@@ -2632,7 +2642,8 @@ static int kvm_vm_ioctl_set_mem_attributes(struct kvm *kvm,
+ 	BUILD_BUG_ON(sizeof(attrs->attributes) != sizeof(unsigned long));
+ 
+ 	mutex_lock(&kvm->slots_arch_lock);
+-	r = kvm_vm_set_mem_attributes(kvm, start, end, attrs->attributes);
++	r = kvm_vm_set_mem_attributes(kvm, start, end, attrs->attributes,
++				      attrs_mask);
+ 	mutex_unlock(&kvm->slots_arch_lock);
+ 	return r;
+ }
 -- 
 2.42.1
 
