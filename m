@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C9D2C4167D
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 17:37:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631879.985652 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE6FC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 17:53:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631888.985662 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2arx-0006Nj-B6; Mon, 13 Nov 2023 17:37:05 +0000
+	id 1r2b7Q-0007M7-I6; Mon, 13 Nov 2023 17:53:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631879.985652; Mon, 13 Nov 2023 17:37:05 +0000
+Received: by outflank-mailman (output) from mailman id 631888.985662; Mon, 13 Nov 2023 17:53:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2arx-0006Nc-7i; Mon, 13 Nov 2023 17:37:05 +0000
-Received: by outflank-mailman (input) for mailman id 631879;
- Mon, 13 Nov 2023 17:37:04 +0000
+	id 1r2b7Q-0007M0-FL; Mon, 13 Nov 2023 17:53:04 +0000
+Received: by outflank-mailman (input) for mailman id 631888;
+ Mon, 13 Nov 2023 17:53:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dHgb=G2=zytor.com=hpa@srs-se1.protection.inumbo.net>)
- id 1r2arw-000525-9Q
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 17:37:04 +0000
-Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=h1x5=G2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1r2b7P-0007Lu-1U
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 17:53:03 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 402dd66c-824b-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 18:37:02 +0100 (CET)
-Received: from [127.0.0.1] ([12.191.197.195]) (authenticated bits=0)
- by mail.zytor.com (8.17.1/8.17.1) with ESMTPSA id 3ADHaD5Q2879261
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Mon, 13 Nov 2023 09:36:14 -0800
+ id 7ce59900-824d-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 18:53:01 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40a48775c58so26223765e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Nov 2023 09:53:01 -0800 (PST)
+Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
+ n7-20020a7bcbc7000000b004064cd71aa8sm8697066wmi.34.2023.11.13.09.53.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Nov 2023 09:53:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,83 +46,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 402dd66c-824b-11ee-98da-6d05b1d4d9a1
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 3ADHaD5Q2879261
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2023111101; t=1699896975;
-	bh=SCbNEaKysaDENzp7ym8rKe0t6E54PmQIYjGt+gUaVHA=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-	b=yDdz7RU+C8v9nYIEBzCAWgRm3F1WpeF12wJgCrA6ccgmNshH+SnO2sPhDYH9PySHL
-	 YyqF7gWVqnOyr+dQAlGtnI9JasuK7AwYlLy1Tt2yJ1F5ZtYRCDnhW+aPvp3RGHfPVB
-	 ysKh2MIXuyuYvp9nlGkCXC0QcYduFhDiMoxcqjQi9RkcMYie4H2Kw3TzoAxlI6tvXV
-	 rrRKQ+lxLK4B2iaxhdShSn2TR4kmpimd9HhJX0jQ6J/xPqAgC0pG4q/9GwQchMAeUS
-	 VQv4HAjGvUZ+w8UYh6+zktz0G+ELn42zjvoiL9UHu2Nr46sqxDE142BCoNIRfAyLDl
-	 nQ9dbCgQdGOGA==
-Date: Mon, 13 Nov 2023 12:36:04 -0500
-From: "H. Peter Anvin" <hpa@zytor.com>
-To: Borislav Petkov <bp@alien8.de>, Xin Li <xin3.li@intel.com>
-CC: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-edac@vger.kernel.org, linux-hyperv@vger.kernel.org,
-        kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
-        tglx@linutronix.de, mingo@redhat.com, dave.hansen@linux.intel.com,
-        x86@kernel.org, luto@kernel.org, pbonzini@redhat.com,
-        seanjc@google.com, peterz@infradead.org, jgross@suse.com,
-        ravi.v.shankar@intel.com, mhiramat@kernel.org,
-        andrew.cooper3@citrix.com, jiangshanlai@gmail.com,
-        nik.borisov@suse.com
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v12_19/37=5D_x86/fred=3A_Update?= =?US-ASCII?Q?_MSR=5FIA32=5FFRED=5FRSP0_during_task_switch?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231113093742.GAZVHuZk9CGTRIfAWb@fat_crate.local>
-References: <20231003062458.23552-1-xin3.li@intel.com> <20231003062458.23552-20-xin3.li@intel.com> <20231113093742.GAZVHuZk9CGTRIfAWb@fat_crate.local>
-Message-ID: <3BFEBDE8-6F90-43A5-AE34-07B0ED0CAAAE@zytor.com>
+X-Inumbo-ID: 7ce59900-824d-11ee-98da-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1699897981; x=1700502781; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=T8/3EOPbR2ofVzNuWqkP/qMPKIkG7fBZoWGemR7UHzU=;
+        b=d6MZPpYIfQxqAoEIcIuGcJrF6y7YOTn3KgMQ0QPWlfzToeOsQsYIuZYuWRJsG3qn3c
+         HlXMjq+JY37aZFSdI2gI0qUiQQKzP9ErU9Ys5+oUKrl15emBoeDSQDId3M+F8kGVJbSz
+         o7K6xXmelOkoFgdnfLZuc9mvDeRfD7pA5tj6Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699897981; x=1700502781;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=T8/3EOPbR2ofVzNuWqkP/qMPKIkG7fBZoWGemR7UHzU=;
+        b=AROF0iOz2zHCCf95eF4lV0lEaFSHjB6aIBf5dmHiQe/qCpNrapFU06l4KKXruYLvLz
+         kLnmfly2Gu8UkyrdSxcIHMkhbk0amVf3QSlYWpyHbZJRV7r9hiMzmB82NArRiHLCVpU+
+         rxTYI7vULQQVG/A1GHCoYeuiC86rz1K/ZhI+/nl6pLBurZsBhxKVIgiOr43iQ2pLqkkw
+         5kn01s7kntim48Jp4yMJr/t+RzqZES3ZTsFdkWFjV8zAtBldjrZpAlaCnjdVnjdW3oYX
+         RV+V4aiCC91ebuo4NEmmtI5INU/WNLCGQTDt4cwrWFRxlrVMnkBgnJwa9q0Xm+zGP/jl
+         36PQ==
+X-Gm-Message-State: AOJu0YyrbXRPTEzBG1pXsyjqC/uOjxJbQjQ076T1mLwvo/+oEr0I2/XO
+	ujf49xZbjP4CGs6KQSWtRXe8bg==
+X-Google-Smtp-Source: AGHT+IGjrOzRLGIAOTmht6JuaNSBqDtY8M+pe8Qkwbo3Jiuc6tDyUK3jOHIGuyb1B9Ksb9yCjXgThA==
+X-Received: by 2002:a05:600c:4f47:b0:405:34e4:14e3 with SMTP id m7-20020a05600c4f4700b0040534e414e3mr5528420wmq.3.1699897981019;
+        Mon, 13 Nov 2023 09:53:01 -0800 (PST)
+Date: Mon, 13 Nov 2023 18:53:00 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH] xen/x86: On x2APIC mode, derive LDR from APIC_ID
+Message-ID: <ZVJifMqOR_3zINYZ@macbook.local>
+References: <20231113165023.5824-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20231113165023.5824-1-alejandro.vallejo@cloud.com>
 
-On November 13, 2023 4:37:42 AM EST, Borislav Petkov <bp@alien8=2Ede> wrote=
-:
->On Mon, Oct 02, 2023 at 11:24:40PM -0700, Xin Li wrote:
->> From: "H=2E Peter Anvin (Intel)" <hpa@zytor=2Ecom>
->>=20
->> MSR_IA32_FRED_RSP0 is used during ring 3 event delivery, and needs to
->> be updated to point to the top of next task stack during task switch=2E
->>=20
->> Signed-off-by: H=2E Peter Anvin (Intel) <hpa@zytor=2Ecom>
->> Tested-by: Shan Kang <shan=2Ekang@intel=2Ecom>
->> Signed-off-by: Xin Li <xin3=2Eli@intel=2Ecom>
->> ---
->>  arch/x86/include/asm/switch_to=2Eh | 8 ++++++--
->>  1 file changed, 6 insertions(+), 2 deletions(-)
->>=20
->> diff --git a/arch/x86/include/asm/switch_to=2Eh b/arch/x86/include/asm/=
-switch_to=2Eh
->> index f42dbf17f52b=2E=2Ec3bd0c0758c9 100644
->> --- a/arch/x86/include/asm/switch_to=2Eh
->> +++ b/arch/x86/include/asm/switch_to=2Eh
->> @@ -70,9 +70,13 @@ static inline void update_task_stack(struct task_str=
-uct *task)
->>  #ifdef CONFIG_X86_32
->>  	this_cpu_write(cpu_tss_rw=2Ex86_tss=2Esp1, task->thread=2Esp0);
->>  #else
->> -	/* Xen PV enters the kernel on the thread stack=2E */
->> -	if (cpu_feature_enabled(X86_FEATURE_XENPV))
->> +	if (cpu_feature_enabled(X86_FEATURE_FRED)) {
->> +		/* WRMSRNS is a baseline feature for FRED=2E */
->> +		wrmsrns(MSR_IA32_FRED_RSP0, (unsigned long)task_stack_page(task) + T=
-HREAD_SIZE);
->
->If this non-serializing write happens now and, AFAICT, the CR3 write
->during the task switch has already happened in switch_mm* earlier, what
->is the serialization point that's going to make sure that write is
->committed before the new task starts executing?
->
->Thx=2E
->
+On Mon, Nov 13, 2023 at 04:50:23PM +0000, Alejandro Vallejo wrote:
+> Both Intel and AMD manuals agree that on x2APIC mode, the APIC LDR and ID
+> registers are derivable from each other through a fixed formula.
+> 
+> Xen uses that formula, but applies it to vCPU IDs (which are sequential)
+> rather than x2APIC_IDs (which are not, at the moment). As I understand it,
+> this is an attempt to tightly pack vCPUs into clusters so each cluster has
+> 16 vCPUs rather than 8, but this is problematic for OSs that might read the
+> x2APIC_ID and internally derive LDR (or the other way around)
 
-A resource cannot be consumed after the value has been written; this is th=
-e only necessary level of serialization, equivalent to, say, RAX=2E
+I would replace the underscore from x2APIC ID with a space instead.
 
-A serializing instruction stops the entire pipeline until everything has r=
-etired and any stores have become globally visible=2E
+Seeing the commit that introduced the bogus LDR value, I'm not sure it
+was intentional, as previous Xen code had:
+
+u32 id = vlapic_get_reg(vlapic, APIC_ID);
+u32 ldr = ((id & ~0xf) << 16) | (1 << (id & 0xf));
+vlapic_set_reg(vlapic, APIC_LDR, ldr);
+
+Which was correct, as the LDR was derived from the APIC ID and not the
+vCPU ID.
+
+> This patch fixes the implementation so we follow the rules in the x2APIC
+> spec(s).
+> 
+> While in the neighborhood, replace the u32 type with the standard uint32_t
+
+Likely wants:
+
+Fixes: f9e0cccf7b35 ('x86/HVM: fix ID handling of x2APIC emulation')
+
+> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+
+I do wonder whether we need to take any precautions with guests being
+able to trigger an APIC reset, and thus seeing a changed LDR register
+if the guest happens to be migrated from an older hypervisor version
+that doesn't have this fix.  IOW: I wonder whether Xen should keep the
+previous bogus LDR value across APIC resets for guests that have
+already seen it.
+
+Thanks, Roger.
 
