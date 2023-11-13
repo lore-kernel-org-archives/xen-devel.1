@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9542C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:38:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631302.984503 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35011C4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:38:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631305.984513 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mpj-0004ol-U2; Mon, 13 Nov 2023 02:37:51 +0000
+	id 1r2MqM-0005Z3-6E; Mon, 13 Nov 2023 02:38:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631302.984503; Mon, 13 Nov 2023 02:37:51 +0000
+Received: by outflank-mailman (output) from mailman id 631305.984513; Mon, 13 Nov 2023 02:38:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mpj-0004oe-RW; Mon, 13 Nov 2023 02:37:51 +0000
-Received: by outflank-mailman (input) for mailman id 631302;
- Mon, 13 Nov 2023 02:37:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r2MqM-0005Yw-33; Mon, 13 Nov 2023 02:38:30 +0000
+Received: by outflank-mailman (input) for mailman id 631305;
+ Mon, 13 Nov 2023 02:38:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=cCEZ=G2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1r2MdE-0000Y9-IV
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:56 +0000
-Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
- [84.16.66.170]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d45e2065-81cb-11ee-9b0e-b553b5be7939;
- Mon, 13 Nov 2023 03:24:53 +0100 (CET)
+ id 1r2MdK-00011s-8c
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:25:02 +0000
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [2001:1600:3:17::bc09])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d8b26ed8-81cb-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 03:25:01 +0100 (CET)
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCts44SJzMpvdP;
- Mon, 13 Nov 2023 02:24:53 +0000 (UTC)
+ by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCv05yshzMq2HC;
+ Mon, 13 Nov 2023 02:25:00 +0000 (UTC)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4STCtr2nMzz3W; Mon, 13 Nov 2023 03:24:52 +0100 (CET)
+ id 4STCtz4hvPz3W; Mon, 13 Nov 2023 03:24:59 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,14 +44,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d45e2065-81cb-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: d8b26ed8-81cb-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1699842293;
-	bh=xCal4QiPzuyoIMCQ55fNeQ6igvrqyER4Ogi9VJWigXw=;
+	s=20191114; t=1699842300;
+	bh=PATv6XqDzwsqZ2hzsduhnRZLYujicEUOyMqcIKoFSMY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=tSrGiLtuSOlTibjuVDi1SgaJbkgBVfdywQJICFGMkZZbetDA86MTLx1CUJrtURSJN
-	 PCIUP107oOKIFocIkyU1oVto05PKP3vEUaLGG4TW793G5zq8LWUqWguccvZHAbm47M
-	 LggTT2pvie45aa6Z33u6iroI0xd/t/vhEQdIBxuk=
+	b=0mhnZA1xfB5IXGthCsMhNYtbubItWy18yziuYfeR6AWnv19fq1a5ISoUh4unXyOIh
+	 SC9+Jk+sOe/3QbX5C7M0oDyImgy94uTLkrpYq/BH7ntImAVOjNoVR0spQpk+hAJBca
+	 WdT/RtauYzVOLQlQ7Hw86Ab44ZapL/N2SdK3uwOw=
 From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
 To: Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
@@ -91,9 +92,9 @@ Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
 	virtualization@lists.linux-foundation.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v2 16/19] heki: x86: Update permissions counters when guest page permissions change
-Date: Sun, 12 Nov 2023 21:23:23 -0500
-Message-ID: <20231113022326.24388-17-mic@digikod.net>
+Subject: [RFC PATCH v2 18/19] heki: x86: Protect guest kernel memory using the KVM hypervisor
+Date: Sun, 12 Nov 2023 21:23:25 -0500
+Message-ID: <20231113022326.24388-19-mic@digikod.net>
 In-Reply-To: <20231113022326.24388-1-mic@digikod.net>
 References: <20231113022326.24388-1-mic@digikod.net>
 MIME-Version: 1.0
@@ -103,8 +104,30 @@ X-Infomaniak-Routing: alpha
 
 From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 
-When permissions are changed on an existing mapping, update the
-permissions counters.
+Implement a hypervisor function, kvm_protect_memory() that calls the
+KVM_HC_PROTECT_MEMORY hypercall to request the KVM hypervisor to
+set specified permissions on a list of guest pages.
+
+Using the protect_memory() function, set proper EPT permissions for all
+guest pages.
+
+Use the MEM_ATTR_IMMUTABLE property to protect the kernel static
+sections and the boot-time read-only sections. This enables to make sure
+a compromised guest will not be able to change its main physical memory
+page permissions. However, this also disable any feature that may change
+the kernel's text section (e.g., ftrace, Kprobes), but they can still be
+used on kernel modules.
+
+Module loading/unloading, and eBPF JIT is allowed without restrictions
+for now, but we'll need a way to authenticate these code changes to
+really improve the guests' security. We plan to use module signatures,
+but there is no solution yet to authenticate eBPF programs.
+
+Being able to use ftrace and Kprobes in a secure way is a challenge not
+solved yet. We're looking for ideas to make this work.
+
+Likewise, the JUMP_LABEL feature cannot work because the kernel's text
+section is read-only.
 
 Cc: Borislav Petkov <bp@alien8.de>
 Cc: Dave Hansen <dave.hansen@linux.intel.com>
@@ -112,238 +135,475 @@ Cc: H. Peter Anvin <hpa@zytor.com>
 Cc: Ingo Molnar <mingo@redhat.com>
 Cc: Kees Cook <keescook@chromium.org>
 Cc: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
-Cc: Mickaël Salaün <mic@digikod.net>
 Cc: Paolo Bonzini <pbonzini@redhat.com>
 Cc: Sean Christopherson <seanjc@google.com>
 Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
 Cc: Wanpeng Li <wanpengli@tencent.com>
+Co-developed-by: Mickaël Salaün <mic@digikod.net>
+Signed-off-by: Mickaël Salaün <mic@digikod.net>
 Signed-off-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 ---
 
 Changes since v1:
 * New patch
 ---
- arch/x86/mm/heki.c           |  9 +++++++
- arch/x86/mm/pat/set_memory.c | 51 ++++++++++++++++++++++++++++++++++++
- include/linux/heki.h         | 14 ++++++++++
- virt/heki/counters.c         | 23 ++++++++++++++++
- 4 files changed, 97 insertions(+)
+ arch/x86/kernel/kvm.c  | 11 ++++++
+ arch/x86/kvm/mmu/mmu.c |  2 +-
+ arch/x86/mm/heki.c     | 21 ++++++++++
+ include/linux/heki.h   | 26 ++++++++++++
+ virt/heki/Kconfig      |  1 +
+ virt/heki/counters.c   | 90 ++++++++++++++++++++++++++++++++++++++++--
+ virt/heki/main.c       | 83 +++++++++++++++++++++++++++++++++++++-
+ 7 files changed, 229 insertions(+), 5 deletions(-)
 
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 8349f4ad3bbd..343615b0e3bf 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -1021,8 +1021,19 @@ static int kvm_lock_crs(void)
+ 	return err;
+ }
+ 
++static int kvm_protect_memory(gpa_t pa)
++{
++	long err;
++
++	WARN_ON_ONCE(in_interrupt());
++
++	err = kvm_hypercall1(KVM_HC_PROTECT_MEMORY, pa);
++	return err;
++}
++
+ static struct heki_hypervisor kvm_heki_hypervisor = {
+ 	.lock_crs = kvm_lock_crs,
++	.protect_memory = kvm_protect_memory,
+ };
+ 
+ static void kvm_init_heki(void)
+diff --git a/arch/x86/kvm/mmu/mmu.c b/arch/x86/kvm/mmu/mmu.c
+index 2d09bcc35462..13be05e9ccf1 100644
+--- a/arch/x86/kvm/mmu/mmu.c
++++ b/arch/x86/kvm/mmu/mmu.c
+@@ -7374,7 +7374,7 @@ bool kvm_arch_post_set_memory_attributes(struct kvm *kvm,
+ 	int level;
+ 
+ 	lockdep_assert_held_write(&kvm->mmu_lock);
+-	lockdep_assert_held(&kvm->slots_lock);
++	lockdep_assert_held(&kvm->slots_arch_lock);
+ 
+ 	/*
+ 	 * The sequence matters here: upper levels consume the result of lower
 diff --git a/arch/x86/mm/heki.c b/arch/x86/mm/heki.c
-index c495df0d8772..c0eace9e343f 100644
+index e4c60d8b4f2d..6c3fa9defada 100644
 --- a/arch/x86/mm/heki.c
 +++ b/arch/x86/mm/heki.c
-@@ -54,3 +54,12 @@ unsigned long heki_flags_to_permissions(unsigned long flags)
- 
- 	return permissions;
+@@ -45,6 +45,19 @@ __init void heki_arch_early_init(void)
+ 	heki_map(direct_map_end, kernel_end);
  }
-+
-+void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
-+				unsigned long *clear)
-+{
-+	if (pgprot_val(prot) & _PAGE_RW)
-+		*set |= MEM_ATTR_WRITE;
-+	if (pgprot_val(prot) & _PAGE_NX)
-+		*clear |= MEM_ATTR_EXEC;
-+}
-diff --git a/arch/x86/mm/pat/set_memory.c b/arch/x86/mm/pat/set_memory.c
-index bda9f129835e..6aaa1ce5692c 100644
---- a/arch/x86/mm/pat/set_memory.c
-+++ b/arch/x86/mm/pat/set_memory.c
-@@ -22,6 +22,7 @@
- #include <linux/cc_platform.h>
- #include <linux/set_memory.h>
- #include <linux/memregion.h>
-+#include <linux/heki.h>
  
- #include <asm/e820/api.h>
- #include <asm/processor.h>
-@@ -2056,11 +2057,56 @@ int clear_mce_nospec(unsigned long pfn)
- EXPORT_SYMBOL_GPL(clear_mce_nospec);
- #endif /* CONFIG_X86_64 */
- 
-+#ifdef CONFIG_HEKI
-+
-+static void heki_change_page_attr_set(unsigned long va, int numpages,
-+				      pgprot_t set)
++void heki_arch_late_init(void)
 +{
-+	unsigned long va_end;
-+	unsigned long set_permissions = 0, clear_permissions = 0;
-+
-+	heki_pgprot_to_permissions(set, &set_permissions, &clear_permissions);
-+	if (!(set_permissions | clear_permissions))
-+		return;
-+
-+	va_end = va + (numpages << PAGE_SHIFT);
-+	heki_update(va, va_end, set_permissions, clear_permissions);
++	/*
++	 * The permission counters for all existing kernel mappings have
++	 * already been updated. Now, walk all the pages, compute their
++	 * permissions from the counters and apply the permissions in the
++	 * host page table. To accomplish this, we walk the direct map
++	 * range.
++	 */
++	heki_protect(direct_map_va, direct_map_end);
++	pr_warn("Guest memory protected\n");
 +}
 +
-+static void heki_change_page_attr_clear(unsigned long va, int numpages,
-+					pgprot_t clear)
-+{
-+	unsigned long va_end;
-+	unsigned long set_permissions = 0, clear_permissions = 0;
-+
-+	heki_pgprot_to_permissions(clear, &clear_permissions, &set_permissions);
-+	if (!(set_permissions | clear_permissions))
-+		return;
-+
-+	va_end = va + (numpages << PAGE_SHIFT);
-+	heki_update(va, va_end, set_permissions, clear_permissions);
-+}
-+
-+#else /* !CONFIG_HEKI */
-+
-+static void heki_change_page_attr_set(unsigned long va, int numpages,
-+				      pgprot_t set)
-+{
-+}
-+
-+static void heki_change_page_attr_clear(unsigned long va, int numpages,
-+					pgprot_t clear)
-+{
-+}
-+
-+#endif /* CONFIG_HEKI */
-+
- int set_memory_x(unsigned long addr, int numpages)
+ unsigned long heki_flags_to_permissions(unsigned long flags)
  {
- 	if (!(__supported_pte_mask & _PAGE_NX))
- 		return 0;
- 
-+	heki_change_page_attr_clear(addr, numpages, __pgprot(_PAGE_NX));
- 	return change_page_attr_clear(&addr, numpages, __pgprot(_PAGE_NX), 0);
+ 	unsigned long permissions;
+@@ -67,6 +80,11 @@ void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
+ 		*clear |= MEM_ATTR_EXEC;
  }
  
-@@ -2069,11 +2115,14 @@ int set_memory_nx(unsigned long addr, int numpages)
- 	if (!(__supported_pte_mask & _PAGE_NX))
- 		return 0;
- 
-+	heki_change_page_attr_set(addr, numpages, __pgprot(_PAGE_NX));
- 	return change_page_attr_set(&addr, numpages, __pgprot(_PAGE_NX), 0);
- }
- 
- int set_memory_ro(unsigned long addr, int numpages)
++unsigned long heki_default_permissions(void)
++{
++	return MEM_ATTR_READ | MEM_ATTR_WRITE;
++}
++
+ static unsigned long heki_pgprot_to_flags(pgprot_t prot)
  {
-+	// TODO: What about _PAGE_DIRTY?
-+	heki_change_page_attr_clear(addr, numpages, __pgprot(_PAGE_RW));
- 	return change_page_attr_clear(&addr, numpages, __pgprot(_PAGE_RW | _PAGE_DIRTY), 0);
- }
+ 	unsigned long flags = 0;
+@@ -100,6 +118,9 @@ static void heki_text_poke_common(struct page **pages, int npages,
+ 		heki_callback(&args);
+ 	}
  
-@@ -2084,11 +2133,13 @@ int set_memory_rox(unsigned long addr, int numpages)
- 	if (__supported_pte_mask & _PAGE_NX)
- 		clr.pgprot |= _PAGE_NX;
- 
-+	heki_change_page_attr_clear(addr, numpages, clr);
- 	return change_page_attr_clear(&addr, numpages, clr, 0);
- }
- 
- int set_memory_rw(unsigned long addr, int numpages)
- {
-+	heki_change_page_attr_set(addr, numpages, __pgprot(_PAGE_RW));
- 	return change_page_attr_set(&addr, numpages, __pgprot(_PAGE_RW), 0);
++	if (args.head)
++		heki_apply_permissions(&args);
++
+ 	mutex_unlock(&heki_lock);
  }
  
 diff --git a/include/linux/heki.h b/include/linux/heki.h
-index d660994d34d0..079b34af07f0 100644
+index 6f2cfddc6dac..306bcec7ae92 100644
 --- a/include/linux/heki.h
 +++ b/include/linux/heki.h
-@@ -73,6 +73,7 @@ struct heki_hypervisor {
-  *
+@@ -15,6 +15,8 @@
+ #include <linux/init.h>
+ #include <linux/kernel.h>
+ #include <linux/printk.h>
++#include <linux/mm.h>
++#include <linux/memblock.h>
+ #include <linux/slab.h>
+ 
+ #ifdef CONFIG_HEKI
+@@ -61,6 +63,7 @@ struct heki_page_list {
+  */
+ struct heki_hypervisor {
+ 	int (*lock_crs)(void); /* Lock control registers. */
++	int (*protect_memory)(gpa_t pa); /* Protect guest memory */
+ };
+ 
+ /*
+@@ -74,16 +77,28 @@ struct heki_hypervisor {
   *	- a page is mapped into the kernel address space
   *	- a page is unmapped from the kernel address space
-+ *	- permissions are changed for a mapped page
+  *	- permissions are changed for a mapped page
++ *
++ * At the end of kernel boot (before kicking off the init process), the
++ * permissions for guest pages are applied to the host page table.
++ *
++ * Beyond that point, the counters and host page table permissions are updated
++ * whenever:
++ *
++ *	- a guest page is mapped into the kernel address space
++ *	- a guest page is unmapped from the kernel address space
++ *	- permissions are changed for a mapped guest page
   */
  struct heki {
  	struct heki_hypervisor *hypervisor;
-@@ -81,6 +82,7 @@ struct heki {
+ 	struct mem_table *counters;
++	bool protect_memory;
+ };
  
  enum heki_cmd {
  	HEKI_MAP,
-+	HEKI_UPDATE,
+ 	HEKI_UPDATE,
  	HEKI_UNMAP,
++	HEKI_PROTECT_MEMORY,
  };
  
-@@ -98,6 +100,10 @@ struct heki_args {
+ /*
+@@ -103,7 +118,12 @@ struct heki_args {
  
- 	/* Command passed by caller. */
- 	enum heki_cmd cmd;
+ 	/* Permissions passed by heki_update(). */
+ 	unsigned long set;
++	unsigned long set_global;
+ 	unsigned long clear;
 +
-+	/* Permissions passed by heki_update(). */
-+	unsigned long set;
-+	unsigned long clear;
++	/* Page list is built by the callback. */
++	struct heki_page_list *head;
++	phys_addr_t head_pa;
  };
  
  /* Callback function called by the table walker. */
-@@ -114,11 +120,15 @@ void heki_counters_init(void);
- void heki_walk(unsigned long va, unsigned long va_end, heki_func_t func,
- 	       struct heki_args *args);
- void heki_map(unsigned long va, unsigned long end);
-+void heki_update(unsigned long va, unsigned long end, unsigned long set,
-+		 unsigned long clear);
+@@ -125,14 +145,20 @@ void heki_update(unsigned long va, unsigned long end, unsigned long set,
+ 		 unsigned long clear);
  void heki_unmap(unsigned long va, unsigned long end);
+ void heki_callback(struct heki_args *args);
++void heki_protect(unsigned long va, unsigned long end);
++void heki_add_pa(struct heki_args *args, phys_addr_t pa,
++		 unsigned long permissions);
++void heki_apply_permissions(struct heki_args *args);
  
  /* Arch-specific functions. */
  void heki_arch_early_init(void);
++void heki_arch_late_init(void);
  unsigned long heki_flags_to_permissions(unsigned long flags);
-+void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
-+				unsigned long *clear);
+ void heki_pgprot_to_permissions(pgprot_t prot, unsigned long *set,
+ 				unsigned long *clear);
+ void heki_text_poke_start(struct page **pages, int npages, pgprot_t prot);
+ void heki_text_poke_end(struct page **pages, int npages, pgprot_t prot);
++unsigned long heki_default_permissions(void);
  
  #else /* !CONFIG_HEKI */
  
-@@ -131,6 +141,10 @@ static inline void heki_late_init(void)
- static inline void heki_map(unsigned long va, unsigned long end)
- {
- }
-+static inline void heki_update(unsigned long va, unsigned long end,
-+			       unsigned long set, unsigned long clear)
-+{
-+}
- static inline void heki_unmap(unsigned long va, unsigned long end)
- {
- }
+diff --git a/virt/heki/Kconfig b/virt/heki/Kconfig
+index 6d956eb9d04b..9bde84cd759e 100644
+--- a/virt/heki/Kconfig
++++ b/virt/heki/Kconfig
+@@ -8,6 +8,7 @@ config HEKI
+ 	select KVM_GENERIC_MEMORY_ATTRIBUTES
+ 	depends on !X86_16BIT
+ 	select SPARSEMEM
++	depends on !JUMP_LABEL
+ 	help
+ 	  This feature enhances guest virtual machine security by taking
+ 	  advantage of security features provided by the hypervisor for guests.
 diff --git a/virt/heki/counters.c b/virt/heki/counters.c
-index adc8d566b8a9..d0f830b0775a 100644
+index d0f830b0775a..302113bee6ff 100644
 --- a/virt/heki/counters.c
 +++ b/virt/heki/counters.c
-@@ -88,6 +88,13 @@ void heki_callback(struct heki_args *args)
- 			heki_update_counters(counters, 0, permissions, 0);
+@@ -13,6 +13,25 @@
+ 
+ DEFINE_MUTEX(heki_lock);
+ 
++static inline unsigned long heki_permissions(struct heki_counters *counters)
++{
++	unsigned long permissions;
++
++	if (!counters)
++		return heki_default_permissions();
++
++	permissions = 0;
++	if (counters->read)
++		permissions |= MEM_ATTR_READ;
++	if (counters->write)
++		permissions |= MEM_ATTR_WRITE;
++	if (counters->execute)
++		permissions |= MEM_ATTR_EXEC;
++	if (!permissions)
++		permissions = heki_default_permissions();
++	return permissions;
++}
++
+ static void heki_update_counters(struct heki_counters *counters,
+ 				 unsigned long perm, unsigned long set,
+ 				 unsigned long clear)
+@@ -53,20 +72,38 @@ static struct heki_counters *heki_create_counters(struct mem_table *table,
+ 	return counters;
+ }
+ 
++static void heki_check_counters(struct heki_counters *counters,
++				unsigned long permissions)
++{
++	/*
++	 * If a permission has been added to a PTE directly, it will not be
++	 * reflected in the counters. Adjust for that. This is a bit of a
++	 * hack, really.
++	 */
++	if ((permissions & MEM_ATTR_READ) && !counters->read)
++		counters->read++;
++	if ((permissions & MEM_ATTR_WRITE) && !counters->write)
++		counters->write++;
++	if ((permissions & MEM_ATTR_EXEC) && !counters->execute)
++		counters->execute++;
++}
++
+ void heki_callback(struct heki_args *args)
+ {
+ 	/* The VA is only for debug. It is not really used in this function. */
+ 	unsigned long va;
+ 	phys_addr_t pa, pa_end;
+-	unsigned long permissions;
++	unsigned long permissions, existing, new;
+ 	void **entry;
+ 	struct heki_counters *counters;
+ 	unsigned int ignore;
++	bool protect_memory;
+ 
+ 	if (!pfn_valid(args->pa >> PAGE_SHIFT))
+ 		return;
+ 
+ 	permissions = heki_flags_to_permissions(args->flags);
++	protect_memory = heki.protect_memory;
+ 
+ 	/*
+ 	 * Handle counters for a leaf entry in the kernel page table.
+@@ -80,6 +117,8 @@ void heki_callback(struct heki_args *args)
+ 		else
+ 			counters = NULL;
+ 
++		existing = heki_permissions(counters);
++
+ 		switch (args->cmd) {
+ 		case HEKI_MAP:
+ 			if (!counters)
+@@ -102,10 +141,30 @@ void heki_callback(struct heki_args *args)
+ 					     permissions);
  			break;
  
-+		case HEKI_UPDATE:
-+			if (!counters)
-+				continue;
-+			heki_update_counters(counters, permissions, args->set,
-+					     args->clear);
++		case HEKI_PROTECT_MEMORY:
++			if (counters)
++				heki_check_counters(counters, permissions);
++			existing = 0;
 +			break;
 +
- 		case HEKI_UNMAP:
- 			if (WARN_ON_ONCE(!counters))
- 				break;
-@@ -131,6 +138,22 @@ void heki_map(unsigned long va, unsigned long end)
+ 		default:
+ 			WARN_ON_ONCE(1);
+ 			break;
+ 		}
++
++		new = heki_permissions(counters) | args->set_global;
++
++		/*
++		 * To be able to use a pool of allocated memory for new
++		 * executable or read-only mappings (e.g., kernel module
++		 * loading), ignores immutable attribute if memory can be
++		 * changed.
++		 */
++		if (new & MEM_ATTR_WRITE)
++			new &= ~MEM_ATTR_IMMUTABLE;
++
++		if (protect_memory && existing != new)
++			heki_add_pa(args, pa, new);
+ 	}
+ }
+ 
+@@ -120,14 +179,20 @@ static void heki_func(unsigned long va, unsigned long end,
+ 
+ 	mutex_lock(&heki_lock);
+ 
++	if (args->cmd == HEKI_PROTECT_MEMORY)
++		heki.protect_memory = true;
++
+ 	heki_walk(va, end, heki_callback, args);
+ 
++	if (args->head)
++		heki_apply_permissions(args);
++
+ 	mutex_unlock(&heki_lock);
+ }
+ 
+ /*
+  * Find the mappings in the given range and initialize permission counters for
+- * them.
++ * them. Apply permissions in the host page table.
+  */
+ void heki_map(unsigned long va, unsigned long end)
+ {
+@@ -138,6 +203,25 @@ void heki_map(unsigned long va, unsigned long end)
  	heki_func(va, end, &args);
  }
  
 +/*
-+ * Find the mappings in the given range and update permission counters for
-+ * them. Apply permissions in the host page table.
++ * The architecture calls this to protect all guest pages at the end of
++ * kernel init. Up to this point, only the counters for guest pages have been
++ * updated. No permissions have been applied on the host page table.
++ * Now, the permissions will be applied.
++ *
++ * Beyond this point, the host page table permissions will always be updated
++ * whenever the counters are updated.
 + */
-+void heki_update(unsigned long va, unsigned long end, unsigned long set,
-+		 unsigned long clear)
++void heki_protect(unsigned long va, unsigned long end)
 +{
 +	struct heki_args args = {
-+		.cmd = HEKI_UPDATE,
-+		.set = set,
-+		.clear = clear,
++		.cmd = HEKI_PROTECT_MEMORY,
++		.set_global = MEM_ATTR_IMMUTABLE,
 +	};
 +
 +	heki_func(va, end, &args);
 +}
 +
  /*
+  * Find the mappings in the given range and update permission counters for
+  * them. Apply permissions in the host page table.
+@@ -156,7 +240,7 @@ void heki_update(unsigned long va, unsigned long end, unsigned long set,
+ 
+ /*
   * Find the mappings in the given range and revert the permission counters for
-  * them.
+- * them.
++ * them. Apply permissions in the host page table.
+  */
+ void heki_unmap(unsigned long va, unsigned long end)
+ {
+diff --git a/virt/heki/main.c b/virt/heki/main.c
+index 0ab7de659e6f..5629334112e7 100644
+--- a/virt/heki/main.c
++++ b/virt/heki/main.c
+@@ -51,7 +51,7 @@ void heki_late_init(void)
+ {
+ 	struct heki_hypervisor *hypervisor = heki.hypervisor;
+ 
+-	if (!heki_enabled || !heki.hypervisor)
++	if (!heki.counters)
+ 		return;
+ 
+ 	/* Locks control registers so a compromised guest cannot change them. */
+@@ -59,6 +59,87 @@ void heki_late_init(void)
+ 		return;
+ 
+ 	pr_warn("Control registers locked\n");
++
++	heki_arch_late_init();
++}
++
++/*
++ * Build a list of guest pages with their permissions. This list will be
++ * passed to the VMM/Hypervisor to set these permissions in the host page
++ * table.
++ */
++void heki_add_pa(struct heki_args *args, phys_addr_t pa,
++		 unsigned long permissions)
++{
++	struct heki_page_list *list = args->head;
++	struct heki_pages *hpage;
++	u64 max_pages;
++	struct page *page;
++	bool new = false;
++
++	max_pages = (PAGE_SIZE - sizeof(*list)) / sizeof(*hpage);
++again:
++	if (!list || list->npages == max_pages) {
++		page = alloc_page(GFP_KERNEL);
++		if (WARN_ON_ONCE(!page))
++			return;
++
++		list = page_address(page);
++		list->npages = 0;
++		list->next_pa = args->head_pa;
++		list->next = args->head;
++
++		args->head = list;
++		args->head_pa = page_to_pfn(page) << PAGE_SHIFT;
++		new = true;
++	}
++
++	hpage = &list->pages[list->npages];
++	if (new) {
++		hpage->pa = pa;
++		hpage->epa = pa + PAGE_SIZE;
++		hpage->permissions = permissions;
++		return;
++	}
++
++	if (pa == hpage->epa && permissions == hpage->permissions) {
++		hpage->epa += PAGE_SIZE;
++		return;
++	}
++
++	list->npages++;
++	new = true;
++	goto again;
++}
++
++void heki_apply_permissions(struct heki_args *args)
++{
++	struct heki_hypervisor *hypervisor = heki.hypervisor;
++	struct heki_page_list *list = args->head;
++	phys_addr_t list_pa = args->head_pa;
++	struct page *page;
++	int ret;
++
++	if (!list)
++		return;
++
++	/* The very last one must be included. */
++	list->npages++;
++
++	/* Protect guest memory in the host page table. */
++	ret = hypervisor->protect_memory(list_pa);
++	if (ret) {
++		pr_warn("Failed to set memory permission\n");
++		return;
++	}
++
++	/* Free all the pages in the page list. */
++	while (list) {
++		page = pfn_to_page(list_pa >> PAGE_SHIFT);
++		list_pa = list->next_pa;
++		list = list->next;
++		__free_pages(page, 0);
++	}
+ }
+ 
+ static int __init heki_parse_config(char *str)
 -- 
 2.42.1
 
