@@ -4,46 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D2E2C4167B
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 15:54:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631747.985402 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC54CC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 15:57:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631750.985411 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2ZFr-0008Qh-KE; Mon, 13 Nov 2023 15:53:39 +0000
+	id 1r2ZJY-0001zu-9G; Mon, 13 Nov 2023 15:57:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631747.985402; Mon, 13 Nov 2023 15:53:39 +0000
+Received: by outflank-mailman (output) from mailman id 631750.985411; Mon, 13 Nov 2023 15:57:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2ZFr-0008Qa-HX; Mon, 13 Nov 2023 15:53:39 +0000
-Received: by outflank-mailman (input) for mailman id 631747;
- Mon, 13 Nov 2023 15:53:38 +0000
+	id 1r2ZJY-0001zn-6j; Mon, 13 Nov 2023 15:57:28 +0000
+Received: by outflank-mailman (input) for mailman id 631750;
+ Mon, 13 Nov 2023 15:57:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tkTp=G2=epam.com=prvs=5681af493a=oleksandr_tyshchenko@srs-se1.protection.inumbo.net>)
- id 1r2ZFq-0008QS-GC
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 15:53:38 +0000
-Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cdcffa0e-823c-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 16:53:37 +0100 (CET)
-Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3ADFUj6G028016; Mon, 13 Nov 2023 15:53:33 GMT
-Received: from eur01-he1-obe.outbound.protection.outlook.com
- (mail-he1eur01lp2050.outbound.protection.outlook.com [104.47.0.50])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3ubk0rs92v-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 13 Nov 2023 15:53:32 +0000
-Received: from DB8PR03MB6108.eurprd03.prod.outlook.com (2603:10a6:10:ed::15)
- by PA4PR03MB6893.eurprd03.prod.outlook.com (2603:10a6:102:eb::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.18; Mon, 13 Nov
- 2023 15:53:28 +0000
-Received: from DB8PR03MB6108.eurprd03.prod.outlook.com
- ([fe80::fea9:8f02:fb13:fd44]) by DB8PR03MB6108.eurprd03.prod.outlook.com
- ([fe80::fea9:8f02:fb13:fd44%6]) with mapi id 15.20.6977.029; Mon, 13 Nov 2023
- 15:53:28 +0000
+ <SRS0=h1x5=G2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1r2ZJW-0001vs-Kn
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 15:57:26 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 569a0b7e-823d-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 16:57:25 +0100 (CET)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4083f613275so38087365e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Nov 2023 07:57:25 -0800 (PST)
+Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
+ k23-20020a05600c1c9700b0040531f5c51asm8582386wms.5.2023.11.13.07.57.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Nov 2023 07:57:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,164 +46,246 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cdcffa0e-823c-11ee-98da-6d05b1d4d9a1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ufh+ui458jT/tIE1XYuSiugPrmyQfXtkoNgREXLC76ey05cKDB3+9sj/t2qsTSQfMZBnb3GGka3UMahthL2+FLlp63OnyZAz0cPJTeayluYkHCzt9UI/96UFyHs+PoCeDvGhQY2dl2btWcdw9/F5P3OflktlDj/cAaVdSJ5ort2MLSxdV06hQj8E326DfUltfIrdeV5l6Mhcl8M4szBI0Y5Xh/HQH8z0PiOEN/ZQWBaP3LtOTRVfrJIwaOu4vk6J1frfGmTRFhmOTN2TBW0mq1qBTohP5CludYlFwY/RSWyfAbwhuPEO62JnH8iHeq3PthwfADUuXOR9FitcHArKXg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ETMtRESNJmr+goj+uKvRRM2zLqwLPCkv27sDTe2V00g=;
- b=j7s834UTT5EAMsvA1ynxtIp3Ce59ryCLm6CSmQgueX7n/ETfuFtJfO116YoAkX6ZGnDR6UrL6wsnM1mD0iyg/t3yZdy+dclNpTxE2IhxD6ohzcE+XBgfW7h28du+ebmMcUWso5muX5IZJTvcVK+OEXNVlo6aG0X/zIJtH6RyB9JWsofh69kwKtezfxP+zgydAFU3UxEfYuMkJH9nrFrcYjNRkfSF7BYupMI9d6iFw0Bg2AQNkEzzAd1MsIBq1G1ZGyPkRCoTJi4uYoWf1VcC5L7FXM/T4UOfXJ2A2KcFCc2VD6pndiYDuJSZE5RxSmkQAjjDGbmpTqjdZ4mWFay/MQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ETMtRESNJmr+goj+uKvRRM2zLqwLPCkv27sDTe2V00g=;
- b=PCROIdLtaYOcJdg3D1NqNSogWfWYfs0fNcY3KEThtgSIkpc/CwqtphRiqPS6TOxDDiHSa4A47EJpJ+L01ZysPm7UDV2pHzqc+3+p72MQauOr36oY9bOr7kc6Rt0SlYe9NR19/2PwK1iEqACTGasALnfvmlNGNLKbq6Ufl7U+hpWPTsrjggF2a+JRwG6iCGVrAmfMHGIcEhrmfoZuz1thjkD3QIFFeDVQG0cJVbnykMJHqMZzJmxcMdESxiXy7RfdbBX/g1exAEb0Z+KMHHl8g/kz950nc6OeBzKV6XJ0pKTYujIZIvXEgA+mF1b1l+qyKH/QEsZLf30QeyTP4SMmfA==
-From: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
-To: Juergen Gross <jgross@suse.com>,
-        "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>,
-        "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH 3/7] xen/events: reduce externally visible helper
- functions
-Thread-Topic: [PATCH 3/7] xen/events: reduce externally visible helper
- functions
-Thread-Index: AQHZ//oKavD9kfGMLE6r3CZA/iY8BbB4kyCA
-Date: Mon, 13 Nov 2023 15:53:28 +0000
-Message-ID: <86612c88-5ea9-4730-acf3-2a7e40804c27@epam.com>
-References: <20231016062831.20630-1-jgross@suse.com>
- <20231016062831.20630-4-jgross@suse.com>
-In-Reply-To: <20231016062831.20630-4-jgross@suse.com>
-Accept-Language: en-US, ru-RU
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB8PR03MB6108:EE_|PA4PR03MB6893:EE_
-x-ms-office365-filtering-correlation-id: bb885ef5-0d95-491a-a81e-08dbe460ad7e
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- lE+WyCYjoABhSSUmGpvWhEqyxv7PzEK+HtTmSryyuuQKnbyI9ah5DfOHIjUUj5NLmU0rHMBLQwmd6UGR+DSk3gYcCgL83FvH72qCejlNKJCsXKT+q4A38As9j7vudPo8hOpgRh2UCLlT6DFHKeucfb7iD8ay+Pt8oMYMF/gE4QYFaD81JTMjv37dlQ0IEgZGEIethdKcZ4WmMsawu0N234/jTkLYpM6bBIg6O4JzC6uJJOV05bCttt/u0L/WZ9MwboQoaJITqWFZ+dqBmM4zY4TYaiV0Q2I9QfZuqVMdbfDhdgTzJ2RkDh1MxKfpK3bpSrQr05MfKrJiImwK2N6cZosrNibVFx6ZPan6XvgiuEqF4PcV8vg0x3b5AxCTK/7BA1Pf7eagDMvebl0FX3DR/5r7ACWP7NyvDkfdbJikVynNxLwwYabluEjmU4eBhBU5MtMSMq0OGKSDfpyLomyictQ1cdQLN03LOt/P2CvTIS5RqlpMbXN0jKAdmqS22CynDIjGZIq2OH3YoEtP1qJE3Pp7sSUY1JQWKLh2xNVGKymNN6J/a/wpDCjywR7upnql9tv2SiFMGIUrJ4GF05jCY77NGEXdKT7Wi6yzBNOyYqQenDmwCh+3zT8qPT+Yox8cpWpz43n8yXdi8gK6BYSmEaYZNbgWK1Szeez0/g0wpZq0eWJ0BObB3mGDo7v4jl3G
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR03MB6108.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(376002)(346002)(136003)(366004)(39860400002)(230273577357003)(230173577357003)(230922051799003)(1800799009)(64100799003)(186009)(451199024)(4326008)(8936002)(8676002)(83380400001)(86362001)(31686004)(26005)(41300700001)(53546011)(2616005)(55236004)(38100700002)(122000001)(6506007)(316002)(36756003)(31696002)(64756008)(66556008)(110136005)(54906003)(66946007)(66476007)(76116006)(66446008)(91956017)(6512007)(38070700009)(71200400001)(5660300002)(6486002)(2906002)(478600001)(45980500001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?TFJUU1UvdmpvNjNnYnZOMzdqRk1FdUJ5VzVKUzlOZ3U0NEo2MTRWakhpWjg5?=
- =?utf-8?B?RzNORTh4Nmo1MVlpSCtVbm8yeGJ4Vm5NbkgxNzloM3Y2b3ZQUHJKTjZNRFlS?=
- =?utf-8?B?K1NsRzJlRkNTY2c1T210WTB3RHFrdURXWnVlRDNrODJXOXlNUlcwc3BuSHNI?=
- =?utf-8?B?MU44THc5Unp6aTVCUDFZZUM0VUl1SXVuWEJoMmtOanBNTFdFTzVWbjZhMjkr?=
- =?utf-8?B?c0VLMDh0bm05Ry96TWhqRlA3TWxlQVhHWXp4ajhUYTlENVpTTUdKdG9GVGFk?=
- =?utf-8?B?N051MTFmK0prUmttcWtyRlBWQ09WOUZqcTdBN1lDZGdzT05NVVFENUg5dlRG?=
- =?utf-8?B?MFh3Ym9ZamZidWttUTk0dHBrTzl2NGpMdTB1UmhxZk96aVp1QTNibUVIMjFK?=
- =?utf-8?B?am0rVGNIRDgvOW94bE9DZk9kc0tLaTFwdmZGUjZzRVQ2VjBqcmtETGw0RlZV?=
- =?utf-8?B?THVLNEo2eWNnV2dxVEtZeStFN0t0ZVZIbTN1MWwyN1ExQUI3WTFRZC9HeERN?=
- =?utf-8?B?VWh1UDZDTXZ0T2lSRWl2eHFydVJOQWVEL0grSllaOUI1T1I5WFI0am1rZmF0?=
- =?utf-8?B?UEE0UVpYN25rbW91UUtreUNRdnRvVUdkWlI3VkJqa2tDTVRUZkFnZURteVdo?=
- =?utf-8?B?QXdJOGJqQnl2dGF0S1B5OGxPMkJBOU5YRUlvanRRZEhuZVBFcWx0UjN3clg5?=
- =?utf-8?B?K2lWMzJmTnJJaExxSFIyZkZ3YUJpVkpjdmtyZ3NDQVBNc0M5MzZ3dUZja085?=
- =?utf-8?B?bGVIYS9seUcwVWIzOUoreHhaUk1UV3Z0alduV1kvOE9nSXlqYkZTV2VuMGVH?=
- =?utf-8?B?YlJTUWhlMVVOVUdOY1VHeHdJSGR0K20zd3o0VDBoKzZ6b0trSmtqaVZxZlVy?=
- =?utf-8?B?VndBZHhYRHMzRlVwR2M4SHpQMDhHNDJ0SFZuVnBvTmpBL09mTEJZclRuM0hw?=
- =?utf-8?B?SDlDQ2FKWGhTZzhaOWFNRkdzUG1uTlZCNi9GTDZiMkt3amxwSHVMQkJrUHY1?=
- =?utf-8?B?WmJUZWorTmNjTnNkUlRBZGtyTUY2ZmlmdmRwa0ViNUVxQVRuYmZvRFgzeFhM?=
- =?utf-8?B?Uk9sYmxnTER3YjB3MkRQZU1vSHFvbW5RdHprZnRIMjQ5OUc3Q21KVUMvRE0w?=
- =?utf-8?B?TmlmRU1USGFMMjFtOEhwZWJhQ0daTFpkZFlSUjVBN3hDNEpibTE3VHpmeWxh?=
- =?utf-8?B?dGN4Z05Tak1wRHdiMy9ZV28zaDJqWkxtMWRFVUx3aUpzbkgwRXhGK3lNSlVS?=
- =?utf-8?B?NXdkTkZpc1FTNUpQczJSV0hWcitOMkJzTm1mQUVMUnM1QlUzbXNKekhrMW00?=
- =?utf-8?B?SVR4YkNTcjFsQUFDcmtRM1VzUnlUNW1HNmdXRXpaYjI1Vm4rdzRZZXAySkty?=
- =?utf-8?B?OXZUNGR3ZFZlclYwWDBOaWs5dE9IZ1pzaEdPdUxHNGErZ0ZDcGhSTmhBeFR3?=
- =?utf-8?B?MHdGSnZMSis3aVNrTnRZc2Y1czRPMFpRVVJFUjVpKzN3MFZ5NWhPdTZwT3dk?=
- =?utf-8?B?N1h1cmJiZWQ1YXgyN1VJZHlabndaVTQ0TEJ6Tkdzcm41cDJ1ZHVaSkpKNENB?=
- =?utf-8?B?R05zc2lrc0JMclI1UlY2RE53V1VKc0NMN0N3WGVTaitHZ2NPR3ZSSHNNSlV2?=
- =?utf-8?B?UTU1MkpUOHJ0ZXZiSGFVZEliaTUrWTZuSEhZWXoyR1UxN1M4bkE3dkZ4TGNT?=
- =?utf-8?B?RDV1MHFYZGlQcTVobVA1ZkZsUmh4V04ya2FqMU5PQ0UrcDJuZUg1WUhFVmxx?=
- =?utf-8?B?ejkvV3RKdmtzQ2Q5cnVoRjQ0ZXh4K1cwN3FSc3VHVGQ5SmdrT1pVRnZ3WUVi?=
- =?utf-8?B?anUrVzJxcmppZURXSUQ4MXZBOHE4M0toSE44ZlJwem9CckpJVjVLd0lNeHkz?=
- =?utf-8?B?Q004cG1SQzBDTk0zSElNYlN5OTNlaG94a0k5Z20wNHRNcjNNNGJrWmhWSVZW?=
- =?utf-8?B?cUZDZkJtMHdZMVdEVDZzZlFENTl6L055cTdNclpIdWY3azk1WG9mVkNoWHpS?=
- =?utf-8?B?RVhwTU9Ec2VmUzFsQ2tDaGxaVDh6Wk4vTm95Sk9KVW1pOC9qczRIZ2RjbjVS?=
- =?utf-8?B?T3djRTE0d0daZU0yMktZemVZcUhZdmYzWGJGQ0VNL3EwSmlmbWg3R0ErTFRL?=
- =?utf-8?B?TTB6ZE9yMW1pdk43NE1LSjFzQUFpSS9lV0Z4eG5icndyVDJ4R3cxRnBCNWVC?=
- =?utf-8?Q?XzyaUVmLG/XRw6iYgZIIHzc=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <D120A4ED1730A742B851EE66EA44C5E5@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-Inumbo-ID: 569a0b7e-823d-11ee-98da-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1699891044; x=1700495844; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nbcFVNx/+MBqIDasdKfMxNiPK3f0tpqXaYKaJpDUyIE=;
+        b=QfWi2rwK5yW46bFh8SE00VsnV0nSBB/3dXTfyAkqZxkBZlJM1StxCFmGrIe2x1201W
+         qm0io50R1l1n4bBLiukFwlV8rCuROYXHIMHXkeCT1S36v3nKq9mJIZlZQEhmwCiKiplU
+         5rl11gykdjx1tFOUgT+EYWoE4WC3BjOH1pP30=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699891044; x=1700495844;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nbcFVNx/+MBqIDasdKfMxNiPK3f0tpqXaYKaJpDUyIE=;
+        b=SFt4Lf4jvh2iN3kdW6WmYdjC/2KZG36cHa/Ni+3C/flPhpnOrgHt+AR4ogIhT/z6gC
+         8J18fwdjEilUJ2D0i2evhFAaK9P+5bmTWugLB5jmnjkW0iyU07wa2gTmdevU+SBLnuEa
+         dMtH5qJwWcgm9Qol2R+SUTznOCRGNXODgoI9piJK6HsxBWo/CZ7rdbUVHtdaBUWDyWKI
+         5nz/jo1vY2ZFh1/5U7Bw+vD7EpsSeQAASWYaBX/Ph8Lb+hJjUm5h8Bav4t8HHff78DQP
+         ApEnD0pGJHp1TJjBq6LfeqKqxC3rtlRQOadrsVz9/L6At9RgRSHyIVBsfR/R/rwAEGl/
+         WmSQ==
+X-Gm-Message-State: AOJu0YwKvssCFweMG6AQh4E17erCRY+G+6sFmwq/FcvYDQRHEZwGbf7z
+	1fXTKc5U6BQ0QqZGc9Fj7QeNAeWrPg7NcUuLRDw=
+X-Google-Smtp-Source: AGHT+IGB6tYCHKYjN+3JJw8WEojKyrIngSy6IQ31P48tKvta4fEr+7r16z5ofRTVYU6ojjwBmezPEw==
+X-Received: by 2002:a1c:790b:0:b0:409:7aa9:a903 with SMTP id l11-20020a1c790b000000b004097aa9a903mr5807341wme.19.1699891044006;
+        Mon, 13 Nov 2023 07:57:24 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH] automation: set architecture in docker files
+Date: Mon, 13 Nov 2023 16:57:01 +0100
+Message-ID: <20231113155701.52052-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB8PR03MB6108.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb885ef5-0d95-491a-a81e-08dbe460ad7e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Nov 2023 15:53:28.1575
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: RQ6kBYLdW9Q5jrz1bc9asN0d+NZIoYXG9vYS5mp9DiyWz4+GQyCG4owG6WZUQe5DYNj5z1qpxPfbpdhYw1EOeBQy88vnop0/bsS+2Kp0ey8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6893
-X-Proofpoint-GUID: pV8qRS2m9tEHSdArQchcymCNt80g-bAQ
-X-Proofpoint-ORIG-GUID: pV8qRS2m9tEHSdArQchcymCNt80g-bAQ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-13_05,2023-11-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- impostorscore=0 mlxlogscore=800 suspectscore=0 malwarescore=0 mlxscore=0
- bulkscore=0 phishscore=0 clxscore=1015 adultscore=0 spamscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2311060000 definitions=main-2311130129
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-DQoNCk9uIDE2LjEwLjIzIDA5OjI4LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KDQoNCkhlbGxvIEp1
-ZXJnZW4NCg0KPiBnZXRfZXZ0Y2huX3RvX2lycSgpIGhhcyBvbmx5IG9uZSBleHRlcm5hbCB1c2Vy
-IHdoaWxlIGlycV9mcm9tX2V2dGNobigpDQo+IHByb3ZpZGVzIHRoZSBzYW1lIGZ1bmN0aW9uYWxp
-dHkgYW5kIGlzIGV4cG9ydGVkIGZvciBhIHdpZGVyIHVzZXIgYmFzZS4NCj4gTW9kaWZ5IHRoZSBv
-bmx5IGV4dGVybmFsIHVzZXIgb2YgZ2V0X2V2dGNobl90b19pcnEoKSB0byB1c2UNCj4gaXJxX2Zy
-b21fZXZ0Y2huKCkgaW5zdGVhZCBhbmQgbWFrZSBnZXRfZXZ0Y2huX3RvX2lycSgpIHN0YXRpYy4N
-Cj4gDQo+IGV2dGNobl9mcm9tX2lycSgpIGFuZCBpcnFfZnJvbV92aXJxKCkgaGF2ZSBhIHNpbmds
-ZSBleHRlcm5hbCB1c2VyIGFuZA0KPiBjYW4gZWFzaWx5IGJlIGNvbWJpbmVkIHRvIGEgbmV3IGhl
-bHBlciBpcnFfZXZ0Y2huX2Zyb21fdmlycSgpIGFsbG93aW5nDQo+IHRvIGRyb3AgaXJxX2Zyb21f
-dmlycSgpIGFuZCB0byBtYWtlIGV2dGNobl9mcm9tX2lycSgpIHN0YXRpYy4NCj4gDQo+IFNpZ25l
-ZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCg0KDQpSZXZpZXdlZC1i
-eTogT2xla3NhbmRyIFR5c2hjaGVua28gPG9sZWtzYW5kcl90eXNoY2hlbmtvQGVwYW0uY29tPg0K
-DQpUd28gTklUcyAqTk9UKiBkaXJlY3RseSByZWxhdGVkIHRvIGN1cnJlbnQgcGF0Y2ggYmVsb3cu
-DQoNCg0KPiAtLS0NCj4gICBkcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRzXzJsLmMgICAgICAgfCAg
-OCArKysrLS0tLQ0KPiAgIGRyaXZlcnMveGVuL2V2ZW50cy9ldmVudHNfYmFzZS5jICAgICB8IDEz
-ICsrKysrKysrKy0tLS0NCj4gICBkcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRzX2ludGVybmFsLmgg
-fCAgMSAtDQo+ICAgaW5jbHVkZS94ZW4vZXZlbnRzLmggICAgICAgICAgICAgICAgIHwgIDQgKyst
-LQ0KPiAgIDQgZmlsZXMgY2hhbmdlZCwgMTUgaW5zZXJ0aW9ucygrKSwgMTEgZGVsZXRpb25zKC0p
-DQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy94ZW4vZXZlbnRzL2V2ZW50c18ybC5jIGIvZHJp
-dmVycy94ZW4vZXZlbnRzL2V2ZW50c18ybC5jDQo+IGluZGV4IGI4ZjJmOTcxYzJmMC4uZTM1ODUz
-MzBjZjk4IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRzXzJsLmMNCj4g
-KysrIGIvZHJpdmVycy94ZW4vZXZlbnRzL2V2ZW50c18ybC5jDQo+IEBAIC0xNzEsMTEgKzE3MSwx
-MSBAQCBzdGF0aWMgdm9pZCBldnRjaG5fMmxfaGFuZGxlX2V2ZW50cyh1bnNpZ25lZCBjcHUsIHN0
-cnVjdCBldnRjaG5fbG9vcF9jdHJsICpjdHJsKQ0KPiAgIAlpbnQgaTsNCj4gICAJc3RydWN0IHNo
-YXJlZF9pbmZvICpzID0gSFlQRVJWSVNPUl9zaGFyZWRfaW5mbzsNCj4gICAJc3RydWN0IHZjcHVf
-aW5mbyAqdmNwdV9pbmZvID0gX190aGlzX2NwdV9yZWFkKHhlbl92Y3B1KTsNCj4gKwlldnRjaG5f
-cG9ydF90IGV2dGNobjsNCj4gICANCj4gICAJLyogVGltZXIgaW50ZXJydXB0IGhhcyBoaWdoZXN0
-IHByaW9yaXR5LiAqLw0KPiAtCWlycSA9IGlycV9mcm9tX3ZpcnEoY3B1LCBWSVJRX1RJTUVSKTsN
-Cj4gKwlpcnEgPSBpcnFfZXZ0Y2huX2Zyb21fdmlycShjcHUsIFZJUlFfVElNRVIsICZldnRjaG4p
-Ow0KPiAgIAlpZiAoaXJxICE9IC0xKSB7DQo+IC0JCWV2dGNobl9wb3J0X3QgZXZ0Y2huID0gZXZ0
-Y2huX2Zyb21faXJxKGlycSk7DQoNCk1vc3QgdXNlcnMgb2YgZXZ0Y2huX2Zyb21faXJxKCkgY2hl
-Y2sgcmV0dXJuZWQgZXZ0Y2huIHZpYSBWQUxJRF9FVlRDSE4oKSANCmFzIGl0IG1pZ2h0IGJlIDAu
-IEJ1dCB0aGlzIHVzZXIgZG9lc24ndC4NCg0KDQo+ICAgCQl3b3JkX2lkeCA9IGV2dGNobiAvIEJJ
-VFNfUEVSX0xPTkc7DQo+ICAgCQliaXRfaWR4ID0gZXZ0Y2huICUgQklUU19QRVJfTE9ORzsNCj4g
-ICAJCWlmIChhY3RpdmVfZXZ0Y2hucyhjcHUsIHMsIHdvcmRfaWR4KSAmICgxVUxMIDw8IGJpdF9p
-ZHgpKQ0KPiBAQCAtMzI4LDkgKzMyOCw5IEBAIGlycXJldHVybl90IHhlbl9kZWJ1Z19pbnRlcnJ1
-cHQoaW50IGlycSwgdm9pZCAqZGV2X2lkKQ0KPiAgIAlmb3IgKGkgPSAwOyBpIDwgRVZUQ0hOXzJM
-X05SX0NIQU5ORUxTOyBpKyspIHsNCj4gICAJCWlmIChzeW5jX3Rlc3RfYml0KGksIEJNKHNoLT5l
-dnRjaG5fcGVuZGluZykpKSB7DQo+ICAgCQkJaW50IHdvcmRfaWR4ID0gaSAvIEJJVFNfUEVSX0VW
-VENITl9XT1JEOw0KPiAtCQkJcHJpbnRrKCIgICVkOiBldmVudCAlZCAtPiBpcnEgJWQlcyVzJXNc
-biIsDQo+ICsJCQlwcmludGsoIiAgJWQ6IGV2ZW50ICVkIC0+IGlycSAldSVzJXMlc1xuIiwNCg0K
-Y2hlY2twYXRjaC5wbCBzYXlzOg0KDQpXQVJOSU5HOiBwcmludGsoKSBzaG91bGQgaW5jbHVkZSBL
-RVJOXzxMRVZFTD4gZmFjaWxpdHkgbGV2ZWwNCiMzNzogRklMRTogZHJpdmVycy94ZW4vZXZlbnRz
-L2V2ZW50c18ybC5jOjMzMToNCisJCQlwcmludGsoIiAgJWQ6IGV2ZW50ICVkIC0+IGlycSAldSVz
-JXMlc1xuIiwNCg0KDQo+ICAgCQkJICAgICAgIGNwdV9mcm9tX2V2dGNobihpKSwgaSwNCj4gLQkJ
-CSAgICAgICBnZXRfZXZ0Y2huX3RvX2lycShpKSwNCj4gKwkJCSAgICAgICBpcnFfZnJvbV9ldnRj
-aG4oaSksDQo+ICAgCQkJICAgICAgIHN5bmNfdGVzdF9iaXQod29yZF9pZHgsIEJNKCZ2LT5ldnRj
-aG5fcGVuZGluZ19zZWwpKQ0KPiAgIAkJCSAgICAgICA/ICIiIDogIiBsMi1jbGVhciIsDQo+ICAg
-CQkJICAgICAgICFzeW5jX3Rlc3RfYml0KGksIEJNKHNoLT5ldnRjaG5fbWFzaykpDQo+IA0KDQpb
-c25pcF0=
+Pass the desired architecture of the image in the FROM instruction if the
+image is possibly multi-platform.
+
+This allows using the x86 Dockerfiles on OS X on arm64 hardware.
+
+No functional change intended.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+I haven't touched the Yocto dockerfile because I'm not sure how it's used.
+---
+ automation/build/alpine/3.18.dockerfile               | 2 +-
+ automation/build/archlinux/current-riscv64.dockerfile | 2 +-
+ automation/build/archlinux/current.dockerfile         | 2 +-
+ automation/build/centos/7.dockerfile                  | 2 +-
+ automation/build/debian/bookworm.dockerfile           | 2 +-
+ automation/build/debian/bullseye-ppc64le.dockerfile   | 2 +-
+ automation/build/debian/buster-gcc-ibt.dockerfile     | 2 +-
+ automation/build/debian/jessie.dockerfile             | 2 +-
+ automation/build/debian/stretch.dockerfile            | 2 +-
+ automation/build/fedora/29.dockerfile                 | 2 +-
+ automation/build/suse/opensuse-leap.dockerfile        | 2 +-
+ automation/build/suse/opensuse-tumbleweed.dockerfile  | 2 +-
+ automation/build/ubuntu/bionic.dockerfile             | 2 +-
+ automation/build/ubuntu/focal.dockerfile              | 2 +-
+ automation/build/ubuntu/trusty.dockerfile             | 2 +-
+ automation/build/ubuntu/xenial-xilinx.dockerfile      | 2 +-
+ automation/build/ubuntu/xenial.dockerfile             | 2 +-
+ 17 files changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/automation/build/alpine/3.18.dockerfile b/automation/build/alpine/3.18.dockerfile
+index 5d2a69a06010..4ae9cb5e9e30 100644
+--- a/automation/build/alpine/3.18.dockerfile
++++ b/automation/build/alpine/3.18.dockerfile
+@@ -1,4 +1,4 @@
+-FROM alpine:3.18
++FROM --platform=linux/amd64 alpine:3.18
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/archlinux/current-riscv64.dockerfile b/automation/build/archlinux/current-riscv64.dockerfile
+index abf8e7bf0b88..af75b5c720ce 100644
+--- a/automation/build/archlinux/current-riscv64.dockerfile
++++ b/automation/build/archlinux/current-riscv64.dockerfile
+@@ -1,4 +1,4 @@
+-FROM archlinux
++FROM --platform=linux/amd64 archlinux
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/archlinux/current.dockerfile b/automation/build/archlinux/current.dockerfile
+index 47e79637a4a6..d974a1434fd5 100644
+--- a/automation/build/archlinux/current.dockerfile
++++ b/automation/build/archlinux/current.dockerfile
+@@ -1,4 +1,4 @@
+-FROM archlinux:base-devel
++FROM --platform=linux/amd64 archlinux:base-devel
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/centos/7.dockerfile b/automation/build/centos/7.dockerfile
+index 69dcefb2f011..ab450f0b3a0e 100644
+--- a/automation/build/centos/7.dockerfile
++++ b/automation/build/centos/7.dockerfile
+@@ -1,4 +1,4 @@
+-FROM centos:7
++FROM --platform=linux/amd64 centos:7
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/debian/bookworm.dockerfile b/automation/build/debian/bookworm.dockerfile
+index ae008c8d46e5..ac87778b3972 100644
+--- a/automation/build/debian/bookworm.dockerfile
++++ b/automation/build/debian/bookworm.dockerfile
+@@ -1,4 +1,4 @@
+-FROM debian:bookworm
++FROM --platform=linux/amd64 debian:bookworm
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/debian/bullseye-ppc64le.dockerfile b/automation/build/debian/bullseye-ppc64le.dockerfile
+index 4de8458445ae..6fdfb6bc2b40 100644
+--- a/automation/build/debian/bullseye-ppc64le.dockerfile
++++ b/automation/build/debian/bullseye-ppc64le.dockerfile
+@@ -1,4 +1,4 @@
+-FROM debian:bullseye-slim
++FROM --platform=linux/amd64 debian:bullseye-slim
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/debian/buster-gcc-ibt.dockerfile b/automation/build/debian/buster-gcc-ibt.dockerfile
+index 96ab4fe8a2f1..4328c109b72b 100644
+--- a/automation/build/debian/buster-gcc-ibt.dockerfile
++++ b/automation/build/debian/buster-gcc-ibt.dockerfile
+@@ -1,4 +1,4 @@
+-FROM debian:buster-slim AS builder
++FROM --platform=linux/amd64 debian:buster-slim AS builder
+ 
+ ENV DEBIAN_FRONTEND=noninteractive
+ ENV USER root
+diff --git a/automation/build/debian/jessie.dockerfile b/automation/build/debian/jessie.dockerfile
+index 63b2c1e5b771..db0962953c9a 100644
+--- a/automation/build/debian/jessie.dockerfile
++++ b/automation/build/debian/jessie.dockerfile
+@@ -1,4 +1,4 @@
+-FROM debian/eol:jessie
++FROM --platform=linux/amd64 debian/eol:jessie
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/debian/stretch.dockerfile b/automation/build/debian/stretch.dockerfile
+index 1af6c691f8f4..9f6c146f032c 100644
+--- a/automation/build/debian/stretch.dockerfile
++++ b/automation/build/debian/stretch.dockerfile
+@@ -1,4 +1,4 @@
+-FROM debian:stretch
++FROM --platform=linux/amd64 debian:stretch
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/fedora/29.dockerfile b/automation/build/fedora/29.dockerfile
+index e55b06a4517e..42a87ce6c84b 100644
+--- a/automation/build/fedora/29.dockerfile
++++ b/automation/build/fedora/29.dockerfile
+@@ -1,4 +1,4 @@
+-FROM fedora:29
++FROM --platform=linux/amd64 fedora:29
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/suse/opensuse-leap.dockerfile b/automation/build/suse/opensuse-leap.dockerfile
+index 7010b71acaa0..e1ec38a41445 100644
+--- a/automation/build/suse/opensuse-leap.dockerfile
++++ b/automation/build/suse/opensuse-leap.dockerfile
+@@ -1,4 +1,4 @@
+-FROM opensuse/leap
++FROM --platform=linux/amd64 opensuse/leap
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/suse/opensuse-tumbleweed.dockerfile b/automation/build/suse/opensuse-tumbleweed.dockerfile
+index 959e1f6939f0..38f6fda2ff1b 100644
+--- a/automation/build/suse/opensuse-tumbleweed.dockerfile
++++ b/automation/build/suse/opensuse-tumbleweed.dockerfile
+@@ -1,4 +1,4 @@
+-FROM opensuse/tumbleweed
++FROM --platform=linux/amd64 opensuse/tumbleweed
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/ubuntu/bionic.dockerfile b/automation/build/ubuntu/bionic.dockerfile
+index e15f54431efb..77d7f933860c 100644
+--- a/automation/build/ubuntu/bionic.dockerfile
++++ b/automation/build/ubuntu/bionic.dockerfile
+@@ -1,4 +1,4 @@
+-FROM ubuntu:18.04
++FROM --platform=linux/amd64 ubuntu:18.04
+ LABEL maintainer.name="The Xen Project " \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/ubuntu/focal.dockerfile b/automation/build/ubuntu/focal.dockerfile
+index e3d11194ee2f..30a9b8e84ffe 100644
+--- a/automation/build/ubuntu/focal.dockerfile
++++ b/automation/build/ubuntu/focal.dockerfile
+@@ -1,4 +1,4 @@
+-FROM ubuntu:20.04
++FROM --platform=linux/amd64 ubuntu:20.04
+ LABEL maintainer.name="The Xen Project " \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/ubuntu/trusty.dockerfile b/automation/build/ubuntu/trusty.dockerfile
+index 22e294c20cac..0d33578c4e1d 100644
+--- a/automation/build/ubuntu/trusty.dockerfile
++++ b/automation/build/ubuntu/trusty.dockerfile
+@@ -1,4 +1,4 @@
+-FROM ubuntu:14.04
++FROM --platform=linux/amd64 ubuntu:14.04
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/ubuntu/xenial-xilinx.dockerfile b/automation/build/ubuntu/xenial-xilinx.dockerfile
+index 5f7087135213..49f27b322995 100644
+--- a/automation/build/ubuntu/xenial-xilinx.dockerfile
++++ b/automation/build/ubuntu/xenial-xilinx.dockerfile
+@@ -1,4 +1,4 @@
+-FROM ubuntu:16.04
++FROM --platform=linux/amd64 ubuntu:16.04
+ LABEL maintainer.name="The Xen Project " \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+diff --git a/automation/build/ubuntu/xenial.dockerfile b/automation/build/ubuntu/xenial.dockerfile
+index 2d2ba3e31f63..e8035434f804 100644
+--- a/automation/build/ubuntu/xenial.dockerfile
++++ b/automation/build/ubuntu/xenial.dockerfile
+@@ -1,4 +1,4 @@
+-FROM ubuntu:16.04
++FROM --platform=linux/amd64 ubuntu:16.04
+ LABEL maintainer.name="The Xen Project " \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+-- 
+2.42.0
+
 
