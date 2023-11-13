@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 512EAC072DD
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:24:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631252.984394 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E12A9C41535
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 02:24:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631245.984324 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mck-00038N-H8; Mon, 13 Nov 2023 02:24:26 +0000
+	id 1r2McN-0000n5-33; Mon, 13 Nov 2023 02:24:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631252.984394; Mon, 13 Nov 2023 02:24:26 +0000
+Received: by outflank-mailman (output) from mailman id 631245.984324; Mon, 13 Nov 2023 02:24:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2Mck-000389-Dz; Mon, 13 Nov 2023 02:24:26 +0000
-Received: by outflank-mailman (input) for mailman id 631252;
- Mon, 13 Nov 2023 02:24:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r2McM-0000my-Vs; Mon, 13 Nov 2023 02:24:02 +0000
+Received: by outflank-mailman (input) for mailman id 631245;
+ Mon, 13 Nov 2023 02:24:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=cCEZ=G2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1r2Mcj-00011s-5Y
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:25 +0000
-Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
- [45.157.188.14]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c2c95f2f-81cb-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 03:24:24 +0100 (CET)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCtJ0ZdVzMpvZk;
- Mon, 13 Nov 2023 02:24:24 +0000 (UTC)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4STCtG6J2GzMpnPd; Mon, 13 Nov 2023 03:24:22 +0100 (CET)
+ id 1r2McL-0000Y9-Um
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 02:24:01 +0000
+Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
+ [2001:1600:4:17::190e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b42f8047-81cb-11ee-9b0e-b553b5be7939;
+ Mon, 13 Nov 2023 03:24:00 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4STCsp5jGkzMpvS5;
+ Mon, 13 Nov 2023 02:23:58 +0000 (UTC)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4STCsn4w8yz3W; Mon, 13 Nov 2023 03:23:57 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,14 +44,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2c95f2f-81cb-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: b42f8047-81cb-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1699842263;
-	bh=oVoPkAWjPfqZGemyyPZ53MkaSuuZZCG0BkbPtJbgAiE=;
+	s=20191114; t=1699842238;
+	bh=tY8hlJfPopuy154H09Cr6nqcw/h0DUTJ1/nUw09u9eU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=vrln9/b46q/IyvbLiM7gr/pjSy6nNAlaXyCcWrkwCHL76184CKYv4PInqVYTmM3XU
-	 usQOOb2erA5xMR73/PzeYEi/AVI+wGVine2Q4AcSnr9lSM8X4meSz+MPB7uM5eZm7x
-	 SS5OjADjVFHRajKr3cVBhD/5XC7T3gtprqTK5mks=
+	b=bV4lvDvQTCac2IMzSmZNNLVBOtTqAuS2XLzxMp+OAzsv+rke/FG2TXyxhi8G9+60p
+	 uVBBHLsVIDwfgY2jYAyUCw2LIYtSt/u33MBaH9fX9Ljjyq03aPdOVNbFjYzptoLzUl
+	 mUsHCWJz6tf9YxVBhc8meVQg8fYV2sX1kdkepvvo=
 From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
 To: Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
@@ -91,9 +92,9 @@ Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
 	virtualization@lists.linux-foundation.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v2 08/19] KVM: x86: Extend kvm_vm_set_mem_attributes() with a mask
-Date: Sun, 12 Nov 2023 21:23:15 -0500
-Message-ID: <20231113022326.24388-9-mic@digikod.net>
+Subject: [RFC PATCH v2 01/19] virt: Introduce Hypervisor Enforced Kernel Integrity (Heki)
+Date: Sun, 12 Nov 2023 21:23:08 -0500
+Message-ID: <20231113022326.24388-2-mic@digikod.net>
 In-Reply-To: <20231113022326.24388-1-mic@digikod.net>
 References: <20231113022326.24388-1-mic@digikod.net>
 MIME-Version: 1.0
@@ -101,140 +102,252 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Infomaniak-Routing: alpha
 
-Enable to only update a subset of attributes.
+From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 
-This is needed to be able to use the XArray for different use cases and
-make sure they don't interfere (see a following commit).
+Hypervisor Enforced Kernel Integrity (Heki) is a feature that will use
+the hypervisor to enhance guest virtual machine security.
 
-Cc: Chao Peng <chao.p.peng@linux.intel.com>
+Implement minimal code to introduce Heki:
+
+- Define the config variables.
+
+- Define a kernel command line parameter "heki" to turn the feature
+  on or off. By default, Heki is on.
+
+- Define heki_early_init() and call it in start_kernel(). Currently,
+  this function only prints the value of the "heki" command
+  line parameter.
+
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: Dave Hansen <dave.hansen@linux.intel.com>
+Cc: H. Peter Anvin <hpa@zytor.com>
+Cc: Ingo Molnar <mingo@redhat.com>
 Cc: Kees Cook <keescook@chromium.org>
-Cc: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>
 Cc: Sean Christopherson <seanjc@google.com>
-Cc: Yu Zhang <yu.c.zhang@linux.intel.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
+Cc: Wanpeng Li <wanpengli@tencent.com>
+Co-developed-by: Mickaël Salaün <mic@digikod.net>
 Signed-off-by: Mickaël Salaün <mic@digikod.net>
+Signed-off-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
 ---
 
 Changes since v1:
-* New patch
+* Shrinked this patch to only contain the minimal common parts.
+* Moved heki_early_init() to start_kernel().
 ---
- arch/x86/kvm/mmu/mmu.c   |  2 +-
- include/linux/kvm_host.h |  2 +-
- virt/kvm/kvm_main.c      | 27 +++++++++++++++++++--------
- 3 files changed, 21 insertions(+), 10 deletions(-)
+ Kconfig              |  2 ++
+ arch/x86/Kconfig     |  1 +
+ include/linux/heki.h | 31 +++++++++++++++++++++++++++++++
+ init/main.c          |  2 ++
+ mm/mm_init.c         |  1 +
+ virt/Makefile        |  1 +
+ virt/heki/Kconfig    | 19 +++++++++++++++++++
+ virt/heki/Makefile   |  3 +++
+ virt/heki/common.h   | 16 ++++++++++++++++
+ virt/heki/main.c     | 32 ++++++++++++++++++++++++++++++++
+ 10 files changed, 108 insertions(+)
+ create mode 100644 include/linux/heki.h
+ create mode 100644 virt/heki/Kconfig
+ create mode 100644 virt/heki/Makefile
+ create mode 100644 virt/heki/common.h
+ create mode 100644 virt/heki/main.c
 
-diff --git a/arch/x86/kvm/mmu/mmu.c b/arch/x86/kvm/mmu/mmu.c
-index 4d378d308762..d7010e09440d 100644
---- a/arch/x86/kvm/mmu/mmu.c
-+++ b/arch/x86/kvm/mmu/mmu.c
-@@ -7283,7 +7283,7 @@ static bool hugepage_has_attrs(struct kvm *kvm, struct kvm_memory_slot *slot,
+diff --git a/Kconfig b/Kconfig
+index 745bc773f567..0c844d9bcb03 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -29,4 +29,6 @@ source "lib/Kconfig"
  
- 	for (gfn = start; gfn < end; gfn += KVM_PAGES_PER_HPAGE(level - 1)) {
- 		if (hugepage_test_mixed(slot, gfn, level - 1) ||
--		    attrs != kvm_get_memory_attributes(kvm, gfn))
-+		    !(attrs & kvm_get_memory_attributes(kvm, gfn)))
- 			return false;
- 	}
- 	return true;
-diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
-index 85b8648fd892..de68390ab0f2 100644
---- a/include/linux/kvm_host.h
-+++ b/include/linux/kvm_host.h
-@@ -2397,7 +2397,7 @@ bool kvm_arch_pre_set_memory_attributes(struct kvm *kvm,
- bool kvm_arch_post_set_memory_attributes(struct kvm *kvm,
- 					 struct kvm_gfn_range *range);
- int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
--			      unsigned long attributes);
-+			      unsigned long attributes, unsigned long mask);
+ source "lib/Kconfig.debug"
  
- static inline bool kvm_mem_is_private(struct kvm *kvm, gfn_t gfn)
- {
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 0096ccfbb609..e2c178db17d5 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -2436,7 +2436,7 @@ static int kvm_vm_ioctl_clear_dirty_log(struct kvm *kvm,
- #ifdef CONFIG_KVM_GENERIC_MEMORY_ATTRIBUTES
- /*
-  * Returns true if _all_ gfns in the range [@start, @end) have attributes
-- * matching @attrs.
-+ * matching the @attrs bitmask.
-  */
- bool kvm_range_has_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
- 				     unsigned long attrs)
-@@ -2459,7 +2459,8 @@ bool kvm_range_has_memory_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
- 			entry = xas_next(&xas);
- 		} while (xas_retry(&xas, entry));
- 
--		if (xas.xa_index != index || xa_to_value(entry) != attrs) {
-+		if (xas.xa_index != index ||
-+		    (xa_to_value(entry) & attrs) != attrs) {
- 			has_attrs = false;
- 			break;
- 		}
-@@ -2553,7 +2554,7 @@ static bool kvm_pre_set_memory_attributes(struct kvm *kvm,
- 
- /* Set @attributes for the gfn range [@start, @end). */
- int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
--				     unsigned long attributes)
-+			      unsigned long attributes, unsigned long mask)
- {
- 	struct kvm_mmu_notifier_range pre_set_range = {
- 		.start = start,
-@@ -2572,11 +2573,8 @@ int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
- 		.may_block = true,
- 	};
- 	unsigned long i;
--	void *entry;
- 	int r = 0;
- 
--	entry = attributes ? xa_mk_value(attributes) : NULL;
--
- 	lockdep_assert_held(&kvm->slots_arch_lock);
- 
- 	/* Nothing to do if the entire range as the desired attributes. */
-@@ -2596,6 +2594,16 @@ int kvm_vm_set_mem_attributes(struct kvm *kvm, gfn_t start, gfn_t end,
- 	kvm_handle_gfn_range(kvm, &pre_set_range);
- 
- 	for (i = start; i < end; i++) {
-+		unsigned long value = 0;
-+		void *entry;
++source "virt/heki/Kconfig"
 +
-+		entry = xa_load(&kvm->mem_attr_array, i);
-+		if (xa_is_value(entry))
-+			value = xa_to_value(entry) & ~mask;
-+
-+		value |= attributes & mask;
-+		entry = value ? xa_mk_value(value) : NULL;
-+
- 		r = xa_err(xa_store(&kvm->mem_attr_array, i, entry,
- 				    GFP_KERNEL_ACCOUNT));
- 		KVM_BUG_ON(r, kvm);
-@@ -2609,12 +2617,14 @@ static int kvm_vm_ioctl_set_mem_attributes(struct kvm *kvm,
- 					   struct kvm_memory_attributes *attrs)
- {
- 	int r;
-+	unsigned long attrs_mask;
- 	gfn_t start, end;
+ source "Documentation/Kconfig"
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 66bfabae8814..424f949442bd 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -35,6 +35,7 @@ config X86_64
+ 	select SWIOTLB
+ 	select ARCH_HAS_ELFCORE_COMPAT
+ 	select ZONE_DMA32
++	select ARCH_SUPPORTS_HEKI
  
- 	/* flags is currently not used. */
- 	if (attrs->flags)
- 		return -EINVAL;
--	if (attrs->attributes & ~kvm_supported_mem_attributes(kvm))
-+	attrs_mask = kvm_supported_mem_attributes(kvm);
-+	if (attrs->attributes & ~attrs_mask)
- 		return -EINVAL;
- 	if (attrs->size == 0 || attrs->address + attrs->size < attrs->address)
- 		return -EINVAL;
-@@ -2632,7 +2642,8 @@ static int kvm_vm_ioctl_set_mem_attributes(struct kvm *kvm,
- 	BUILD_BUG_ON(sizeof(attrs->attributes) != sizeof(unsigned long));
+ config FORCE_DYNAMIC_FTRACE
+ 	def_bool y
+diff --git a/include/linux/heki.h b/include/linux/heki.h
+new file mode 100644
+index 000000000000..4c18d2283392
+--- /dev/null
++++ b/include/linux/heki.h
+@@ -0,0 +1,31 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Hypervisor Enforced Kernel Integrity (Heki) - Definitions
++ *
++ * Copyright © 2023 Microsoft Corporation
++ */
++
++#ifndef __HEKI_H__
++#define __HEKI_H__
++
++#include <linux/types.h>
++#include <linux/cache.h>
++#include <linux/init.h>
++#include <linux/kernel.h>
++#include <linux/printk.h>
++
++#ifdef CONFIG_HEKI
++
++extern bool heki_enabled;
++
++void heki_early_init(void);
++
++#else /* !CONFIG_HEKI */
++
++static inline void heki_early_init(void)
++{
++}
++
++#endif /* CONFIG_HEKI */
++
++#endif /* __HEKI_H__ */
+diff --git a/init/main.c b/init/main.c
+index 436d73261810..0d28301c5402 100644
+--- a/init/main.c
++++ b/init/main.c
+@@ -99,6 +99,7 @@
+ #include <linux/init_syscalls.h>
+ #include <linux/stackdepot.h>
+ #include <linux/randomize_kstack.h>
++#include <linux/heki.h>
+ #include <net/net_namespace.h>
  
- 	mutex_lock(&kvm->slots_arch_lock);
--	r = kvm_vm_set_mem_attributes(kvm, start, end, attrs->attributes);
-+	r = kvm_vm_set_mem_attributes(kvm, start, end, attrs->attributes,
-+				      attrs_mask);
- 	mutex_unlock(&kvm->slots_arch_lock);
- 	return r;
- }
+ #include <asm/io.h>
+@@ -1047,6 +1048,7 @@ void start_kernel(void)
+ 	uts_ns_init();
+ 	key_init();
+ 	security_init();
++	heki_early_init();
+ 	dbg_late_init();
+ 	net_ns_init();
+ 	vfs_caches_init();
+diff --git a/mm/mm_init.c b/mm/mm_init.c
+index 50f2f34745af..896977383cc3 100644
+--- a/mm/mm_init.c
++++ b/mm/mm_init.c
+@@ -26,6 +26,7 @@
+ #include <linux/pgtable.h>
+ #include <linux/swap.h>
+ #include <linux/cma.h>
++#include <linux/heki.h>
+ #include "internal.h"
+ #include "slab.h"
+ #include "shuffle.h"
+diff --git a/virt/Makefile b/virt/Makefile
+index 1cfea9436af9..4550dc624466 100644
+--- a/virt/Makefile
++++ b/virt/Makefile
+@@ -1,2 +1,3 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ obj-y	+= lib/
++obj-$(CONFIG_HEKI) += heki/
+diff --git a/virt/heki/Kconfig b/virt/heki/Kconfig
+new file mode 100644
+index 000000000000..49695fff6d21
+--- /dev/null
++++ b/virt/heki/Kconfig
+@@ -0,0 +1,19 @@
++# SPDX-License-Identifier: GPL-2.0
++#
++# Hypervisor Enforced Kernel Integrity (Heki)
++
++config HEKI
++	bool "Hypervisor Enforced Kernel Integrity (Heki)"
++	depends on ARCH_SUPPORTS_HEKI
++	help
++	  This feature enhances guest virtual machine security by taking
++	  advantage of security features provided by the hypervisor for guests.
++	  This feature is helpful in maintaining guest virtual machine security
++	  even after the guest kernel has been compromised.
++
++config ARCH_SUPPORTS_HEKI
++	bool "Architecture support for Heki"
++	help
++	  An architecture should select this when it can successfully build
++	  and run with CONFIG_HEKI. That is, it should provide all of the
++	  architecture support required for the HEKI feature.
+diff --git a/virt/heki/Makefile b/virt/heki/Makefile
+new file mode 100644
+index 000000000000..354e567df71c
+--- /dev/null
++++ b/virt/heki/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0-only
++
++obj-y += main.o
+diff --git a/virt/heki/common.h b/virt/heki/common.h
+new file mode 100644
+index 000000000000..edd98fc650a8
+--- /dev/null
++++ b/virt/heki/common.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Hypervisor Enforced Kernel Integrity (Heki) - Common header
++ *
++ * Copyright © 2023 Microsoft Corporation
++ */
++
++#ifndef _HEKI_COMMON_H
++
++#ifdef pr_fmt
++#undef pr_fmt
++#endif
++
++#define pr_fmt(fmt) "heki-guest: " fmt
++
++#endif /* _HEKI_COMMON_H */
+diff --git a/virt/heki/main.c b/virt/heki/main.c
+new file mode 100644
+index 000000000000..f005dd74d586
+--- /dev/null
++++ b/virt/heki/main.c
+@@ -0,0 +1,32 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Hypervisor Enforced Kernel Integrity (Heki) - Common code
++ *
++ * Copyright © 2023 Microsoft Corporation
++ */
++
++#include <linux/heki.h>
++
++#include "common.h"
++
++bool heki_enabled __ro_after_init = true;
++
++/*
++ * Must be called after kmem_cache_init().
++ */
++__init void heki_early_init(void)
++{
++	if (!heki_enabled) {
++		pr_warn("Heki is not enabled\n");
++		return;
++	}
++	pr_warn("Heki is enabled\n");
++}
++
++static int __init heki_parse_config(char *str)
++{
++	if (strtobool(str, &heki_enabled))
++		pr_warn("Invalid option string for heki: '%s'\n", str);
++	return 1;
++}
++__setup("heki=", heki_parse_config);
 -- 
 2.42.1
 
