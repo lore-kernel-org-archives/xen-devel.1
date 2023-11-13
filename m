@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6ECFC4167B
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 09:09:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631422.984741 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE849C4167D
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 09:09:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631417.984696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2SwH-0008Ln-7V; Mon, 13 Nov 2023 09:09:01 +0000
+	id 1r2SwA-0007Ep-81; Mon, 13 Nov 2023 09:08:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631422.984741; Mon, 13 Nov 2023 09:09:01 +0000
+Received: by outflank-mailman (output) from mailman id 631417.984696; Mon, 13 Nov 2023 09:08:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2SwH-0008LK-2k; Mon, 13 Nov 2023 09:09:01 +0000
-Received: by outflank-mailman (input) for mailman id 631422;
- Mon, 13 Nov 2023 09:08:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r2SwA-0007Ei-3q; Mon, 13 Nov 2023 09:08:54 +0000
+Received: by outflank-mailman (input) for mailman id 631417;
+ Mon, 13 Nov 2023 09:08:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EUjx=G2=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1r2SwF-0007Gm-S8
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 09:08:59 +0000
+ id 1r2Sw8-0007Ec-U1
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 09:08:52 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 453426a3-8204-11ee-9b0e-b553b5be7939;
- Mon, 13 Nov 2023 10:08:55 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 42e5e7a4-8204-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 10:08:51 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BD3141758;
- Mon, 13 Nov 2023 01:09:42 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B5F94FEC;
+ Mon, 13 Nov 2023 01:09:35 -0800 (PST)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0AA693F6C4;
- Mon, 13 Nov 2023 01:08:55 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 015D43F6C4;
+ Mon, 13 Nov 2023 01:08:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 453426a3-8204-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 42e5e7a4-8204-11ee-98da-6d05b1d4d9a1
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: rahul.singh@arm.com,
@@ -57,185 +57,62 @@ Cc: rahul.singh@arm.com,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 5/5] arm/dom0less: introduce Kconfig for dom0less feature
-Date: Mon, 13 Nov 2023 09:08:41 +0000
-Message-Id: <20231113090841.595428-6-luca.fancellu@arm.com>
+Subject: [PATCH v4 0/5] Fine granular configuration
+Date: Mon, 13 Nov 2023 09:08:36 +0000
+Message-Id: <20231113090841.595428-1-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231113090841.595428-1-luca.fancellu@arm.com>
-References: <20231113090841.595428-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce a Kconfig for the dom0less feature, enabled by default,
-to be able to choose if the feature should be compiled or not.
+This serie aims to add more modularity to some feature that can be excluded
+without issues from the build.
 
-Provide static inline stubs when the option is disabled for the
-functions externally visible.
+The first patch is already reviewed.
 
-Use the new Kconfig to remove dom0less DT binding from the efi-boot.h
-code when the Kconfig is not enabled, do the same for
-allocate_bank_memory inside domain_build.c that currently is used
-only by dom0less-build.c module, but it's kept there provisioning
-its usage by dom0 code.
+v2 update: So I've tried to see how to put the dom0less code in the common code,
+but the amount of modifications are not trivial, even putting only the common
+part and protecting them with ARM, leaving the ARM specific stuff under arch/
+like gic etc... will leave a status that is not very nice, so I've decided for
+now to keep everything on the arm architecture so that who is going to work
+on unifying the code in common can just take from there and do the proper
+rework.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
-Changes from v3:
- - Update Kconfig (Michal)
-Changes from v2:
- - protect allocate_bank_memory with the new Kconfig
----
- xen/arch/arm/Kconfig                      |  8 ++++++++
- xen/arch/arm/Makefile                     |  2 +-
- xen/arch/arm/domain_build.c               |  2 ++
- xen/arch/arm/efi/efi-boot.h               |  4 ++++
- xen/arch/arm/include/asm/dom0less-build.h | 12 ++++++++++++
- xen/arch/arm/include/asm/domain_build.h   |  2 ++
- xen/common/Kconfig                        |  2 +-
- 7 files changed, 30 insertions(+), 2 deletions(-)
+This serie is not targeting 4.18.
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 0045a3762d86..f321381a6e87 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -88,6 +88,14 @@ config GICV2
- 	  Driver for the ARM Generic Interrupt Controller v2.
- 	  If unsure, say Y
- 
-+config DOM0LESS_BOOT
-+	bool "Dom0less boot support" if EXPERT
-+	default y
-+	help
-+	  Dom0less boot support enables Xen to create and start domU guests during
-+	  Xen boot without the need of a control domain (Dom0), which could be
-+	  present anyway.
-+
- config GICV3
- 	bool "GICv3 driver"
- 	depends on !NEW_VGIC
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 89ef0c9075b5..5daf8f10114d 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -15,7 +15,7 @@ obj-y += cpufeature.o
- obj-y += decode.o
- obj-y += device.o
- obj-$(CONFIG_IOREQ_SERVER) += dm.o
--obj-y += dom0less-build.init.o
-+obj-$(CONFIG_DOM0LESS_BOOT) += dom0less-build.init.o
- obj-y += domain.o
- obj-y += domain_build.init.o
- obj-$(CONFIG_ARCH_MAP_DOMAIN_PAGE) += domain_page.o
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 615faaffba9f..9c5e7835b544 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -415,6 +415,7 @@ static void __init allocate_memory_11(struct domain *d,
-     }
- }
- 
-+#ifdef CONFIG_DOM0LESS_BOOT
- bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
-                                  gfn_t sgfn, paddr_t tot_size)
- {
-@@ -476,6 +477,7 @@ bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
- 
-     return true;
- }
-+#endif
- 
- /*
-  * When PCI passthrough is available we want to keep the
-diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-index 1c3640bb65fd..689dc016d081 100644
---- a/xen/arch/arm/efi/efi-boot.h
-+++ b/xen/arch/arm/efi/efi-boot.h
-@@ -802,6 +802,7 @@ static int __init handle_module_node(const EFI_LOADED_IMAGE *loaded_image,
-     return 1;
- }
- 
-+#ifdef CONFIG_DOM0LESS_BOOT
- /*
-  * This function checks for boot modules under the domU guest domain node
-  * in the DT.
-@@ -849,6 +850,7 @@ static int __init handle_dom0less_domain_node(const EFI_LOADED_IMAGE *loaded_ima
- 
-     return mb_modules_found;
- }
-+#endif
- 
- /*
-  * This function checks for xen domain nodes under the /chosen node for possible
-@@ -876,6 +878,7 @@ static int __init efi_check_dt_boot(const EFI_LOADED_IMAGE *loaded_image)
-     {
-         int ret;
- 
-+#ifdef CONFIG_DOM0LESS_BOOT
-         if ( !fdt_node_check_compatible(fdt_efi, node, "xen,domain") )
-         {
-             /* Found a node with compatible xen,domain; handle this node. */
-@@ -884,6 +887,7 @@ static int __init efi_check_dt_boot(const EFI_LOADED_IMAGE *loaded_image)
-                 return ERROR_DT_MODULE_DOMU;
-         }
-         else
-+#endif
-         {
-             ret = handle_module_node(loaded_image, &dir_handle, node, addr_len,
-                                      size_len, false);
-diff --git a/xen/arch/arm/include/asm/dom0less-build.h b/xen/arch/arm/include/asm/dom0less-build.h
-index 75502b562548..1c6fc0962b07 100644
---- a/xen/arch/arm/include/asm/dom0less-build.h
-+++ b/xen/arch/arm/include/asm/dom0less-build.h
-@@ -3,9 +3,21 @@
- #ifndef __ARM_DOM0LESS_BUILD_H_
- #define __ARM_DOM0LESS_BUILD_H_
- 
-+#ifdef CONFIG_DOM0LESS_BOOT
-+
- void create_domUs(void);
- bool is_dom0less_mode(void);
- 
-+#else  /* !CONFIG_DOM0LESS_BOOT */
-+
-+static inline void create_domUs(void) {}
-+static inline bool is_dom0less_mode(void)
-+{
-+    return false;
-+}
-+
-+#endif /* CONFIG_DOM0LESS_BOOT */
-+
- #endif  /* __ARM_DOM0LESS_BUILD_H_ */
- 
- /*
-diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
-index da9e6025f37c..6df61fa1d587 100644
---- a/xen/arch/arm/include/asm/domain_build.h
-+++ b/xen/arch/arm/include/asm/domain_build.h
-@@ -6,8 +6,10 @@
- 
- typedef __be32 gic_interrupt_t[3];
- 
-+#ifdef CONFIG_DOM0LESS_BOOT
- bool allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
-                           gfn_t sgfn, paddr_t tot_size);
-+#endif
- int construct_domain(struct domain *d, struct kernel_info *kinfo);
- int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
- int make_chosen_node(const struct kernel_info *kinfo);
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 4d6fe051641d..310ad4229cdf 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -100,7 +100,7 @@ config NUMA
- 
- config STATIC_MEMORY
- 	bool "Static Allocation Support (UNSUPPORTED)" if UNSUPPORTED
--	depends on ARM
-+	depends on DOM0LESS_BOOT
- 	help
- 	  Static Allocation refers to system or sub-system(domains) for
- 	  which memory areas are pre-defined by configuration using physical
+Luca Fancellu (5):
+  arm/gicv2: make GICv2 driver and vGICv2 optional
+  xen/arm: Add asm/domain.h include to kernel.h
+  arm/dom0less: put dom0less feature code in a separate module
+  xen/arm: Move static memory build code in separate modules
+  arm/dom0less: introduce Kconfig for dom0less feature
+
+ xen/arch/arm/Kconfig                      |   27 +
+ xen/arch/arm/Makefile                     |    7 +-
+ xen/arch/arm/bootfdt.c                    |  161 +-
+ xen/arch/arm/dom0less-build.c             | 1018 ++++++
+ xen/arch/arm/domain_build.c               | 3591 ++++++---------------
+ xen/arch/arm/efi/efi-boot.h               |    4 +
+ xen/arch/arm/gic-v3.c                     |    4 +
+ xen/arch/arm/include/asm/dom0less-build.h |   30 +
+ xen/arch/arm/include/asm/domain_build.h   |   36 +
+ xen/arch/arm/include/asm/kernel.h         |    1 +
+ xen/arch/arm/include/asm/setup.h          |    1 -
+ xen/arch/arm/include/asm/static-memory.h  |   50 +
+ xen/arch/arm/include/asm/static-shmem.h   |   71 +
+ xen/arch/arm/setup.c                      |   58 +-
+ xen/arch/arm/static-memory.c              |  294 ++
+ xen/arch/arm/static-shmem.c               |  554 ++++
+ xen/arch/arm/vgic.c                       |    2 +
+ xen/arch/arm/vgic/Makefile                |    4 +-
+ xen/common/Kconfig                        |    2 +-
+ 19 files changed, 3083 insertions(+), 2832 deletions(-)
+ create mode 100644 xen/arch/arm/dom0less-build.c
+ create mode 100644 xen/arch/arm/include/asm/dom0less-build.h
+ create mode 100644 xen/arch/arm/include/asm/static-memory.h
+ create mode 100644 xen/arch/arm/include/asm/static-shmem.h
+ create mode 100644 xen/arch/arm/static-memory.c
+ create mode 100644 xen/arch/arm/static-shmem.c
+
 -- 
 2.34.1
 
