@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80328C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7CDC4332F
 	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 12:43:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631559.984988 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.631562.985019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2WHg-0008Og-S8; Mon, 13 Nov 2023 12:43:20 +0000
+	id 1r2WHw-0000vc-QN; Mon, 13 Nov 2023 12:43:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631559.984988; Mon, 13 Nov 2023 12:43:20 +0000
+Received: by outflank-mailman (output) from mailman id 631562.985019; Mon, 13 Nov 2023 12:43:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2WHg-0008OZ-Pc; Mon, 13 Nov 2023 12:43:20 +0000
-Received: by outflank-mailman (input) for mailman id 631559;
- Mon, 13 Nov 2023 12:43:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r2WHw-0000vN-MP; Mon, 13 Nov 2023 12:43:36 +0000
+Received: by outflank-mailman (input) for mailman id 631562;
+ Mon, 13 Nov 2023 12:43:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=N+lR=G2=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r2WHf-00089i-Ig
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 12:43:19 +0000
+ id 1r2WHv-0000Xf-CD
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 12:43:35 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 38436a19-8222-11ee-9b0e-b553b5be7939;
- Mon, 13 Nov 2023 13:43:18 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4235acd8-8222-11ee-98da-6d05b1d4d9a1;
+ Mon, 13 Nov 2023 13:43:34 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id C32B01F7AB;
- Mon, 13 Nov 2023 12:43:17 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id A4D061F6E6;
+ Mon, 13 Nov 2023 12:43:34 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 88CD61358C;
- Mon, 13 Nov 2023 12:43:17 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 79B9E1358C;
+ Mon, 13 Nov 2023 12:43:34 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id XFYgIOUZUmVBcQAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 13 Nov 2023 12:43:17 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 49hYHPYZUmVlcQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 13 Nov 2023 12:43:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,90 +53,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38436a19-8222-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 4235acd8-8222-11ee-98da-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1699879397; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1699879414; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=QB3Q3bk7SIJemBIbBb4h+zwgDJi8hqayh+CtPWg6tiE=;
-	b=KtcnXZVgZu36wWLzu28Mmx1APh/eqyos7/+GdRQgihEm0ADrOENBXjx7WBCOPMyT6mjJ+X
-	06x4IiD4AtS/F4tD8NiZd3rRnDU+Trnqh5n15mjJuTd/QASiD6LfTUrY9l+gyivuvXJbgc
-	vUKpfMN9qqogJVVjhzfRE0Uiy616Iwk=
+	bh=gXFEuOQILoQ662ByGndYuFK8T/I1cGHZaW2+4BFFJh0=;
+	b=dPpPJ73dgn+aVMAN0urQUULQx/TSKIU4NIB5XuDlkZa0GebmigrBe93oXM66rffQVaded0
+	gw/X9KX2p578k+3REdcOxjJtpUk8jSCj3CnrWDTdju4s7+An6/mwGkodHoKkfb29mXzhCP
+	VdT7SGyZweX0ISXzNvbRA7L3264TOyY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 1/5] tools/xenstored: remove "-D" command line parameter
-Date: Mon, 13 Nov 2023 13:43:05 +0100
-Message-Id: <20231113124309.10862-2-jgross@suse.com>
+Subject: [PATCH 4/5] tools/xenstored: remove "-N" command line option
+Date: Mon, 13 Nov 2023 13:43:08 +0100
+Message-Id: <20231113124309.10862-5-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231113124309.10862-1-jgross@suse.com>
 References: <20231113124309.10862-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove the "-D" command parameter, which is disabling initialization of
-the mandatory domain data handling.
+The "-N" (do not daemonize) command line option is of questionable use:
+its sole purpose seems to be to aid debugging of xenstored by making it
+easier to start xenstored under gdb, or to see any debug messages
+easily.
+
+Debug messages can as well be sent to syslog(), while gdb can be
+attached to the daemon easily. The only not covered case is an error
+while initializing xenstored, but this could be handled e.g. by saving
+a core dump, which can be analyzed later.
+
+The call of talloc_enable_leak_report_full() done only with "-N"
+specified is no longer needed, as the same can be achieved via
+"xenstore-control memreport".
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstored/core.c | 10 ++--------
- 1 file changed, 2 insertions(+), 8 deletions(-)
+Slightly RFC, as this is making debugging a little bit harder in
+specific cases. OTOH I didn't use this option since years, in spite of
+having done a _lot_ of xenstore hacking.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/xenstored/core.c | 26 +++++++-------------------
+ 1 file changed, 7 insertions(+), 19 deletions(-)
 
 diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index edd07711db..8bd4098cb6 100644
+index 5a6378316a..c3cfef0965 100644
 --- a/tools/xenstored/core.c
 +++ b/tools/xenstored/core.c
-@@ -2661,7 +2661,6 @@ static void usage(void)
+@@ -2652,7 +2652,6 @@ static void usage(void)
  "\n"
- "where options may include:\n"
- "\n"
--"  -D, --no-domain-init    to state that xenstored should not initialise dom0,\n"
  "  -F, --pid-file <file>   giving a file for the daemon's pid to be written,\n"
  "  -H, --help              to output this message,\n"
- "  -N, --no-fork           to request that the daemon does not fork,\n"
-@@ -2708,7 +2707,6 @@ static void usage(void)
- 
- 
- static struct option options[] = {
--	{ "no-domain-init", 0, NULL, 'D' },
- 	{ "entry-nb", 1, NULL, 'E' },
- 	{ "pid-file", 1, NULL, 'F' },
+-"  -N, --no-fork           to request that the daemon does not fork,\n"
+ "  -T, --trace-file <file> giving the file for logging, and\n"
+ "      --trace-control=+<switch> activate a specific <switch>\n"
+ "      --trace-control=-<switch> deactivate a specific <switch>\n"
+@@ -2699,7 +2698,6 @@ static struct option options[] = {
  	{ "event", 1, NULL, 'e' },
-@@ -2841,7 +2839,6 @@ int main(int argc, char *argv[])
+ 	{ "master-domid", 1, NULL, 'm' },
+ 	{ "help", 0, NULL, 'H' },
+-	{ "no-fork", 0, NULL, 'N' },
+ 	{ "priv-domid", 1, NULL, 'p' },
+ 	{ "entry-size", 1, NULL, 'S' },
+ 	{ "trace-file", 1, NULL, 'T' },
+@@ -2822,7 +2820,6 @@ int main(int argc, char *argv[])
+ {
+ 	int opt;
  	int sock_pollfd_idx = -1;
- 	bool dofork = true;
- 	bool outputpid = false;
--	bool no_domain_init = false;
+-	bool dofork = true;
  	bool live_update = false;
  	const char *pidfile = NULL;
  	int timeout;
-@@ -2850,12 +2847,9 @@ int main(int argc, char *argv[])
+@@ -2831,7 +2828,7 @@ int main(int argc, char *argv[])
  	orig_argv = argv;
  
  	while ((opt = getopt_long(argc, argv,
--				  "DE:F:H::KNPS:t:A:M:Q:q:T:RVW:w:U",
-+				  "E:F:H::KNPS:t:A:M:Q:q:T:RVW:w:U",
+-				  "E:F:H::KNS:t:A:M:Q:q:T:RW:w:U",
++				  "E:F:H::KS:t:A:M:Q:q:T:RW:w:U",
  				  options, NULL)) != -1) {
  		switch (opt) {
--		case 'D':
--			no_domain_init = true;
--			break;
  		case 'E':
- 			hard_quotas[ACC_NODES].val = get_optval_uint(optarg);
+@@ -2843,9 +2840,6 @@ int main(int argc, char *argv[])
+ 		case 'H':
+ 			usage();
+ 			return 0;
+-		case 'N':
+-			dofork = false;
+-			break;
+ 		case 'R':
+ 			recovery = false;
  			break;
-@@ -2964,7 +2958,7 @@ int main(int argc, char *argv[])
- 	init_pipe(reopen_log_pipe);
+@@ -2911,18 +2905,13 @@ int main(int argc, char *argv[])
+ 	/* Errors ignored here, will be reported when we open files */
+ 	mkdir(xenstore_daemon_rundir(), 0755);
  
- 	/* Listen to hypervisor. */
--	if (!no_domain_init && !live_update) {
-+	if (!live_update) {
- 		domain_init(-1);
- 		dom0_init();
+-	if (dofork) {
+-		openlog("xenstored", 0, LOG_DAEMON);
+-		if (!live_update)
+-			daemonize();
+-	}
++	openlog("xenstored", 0, LOG_DAEMON);
++	if (!live_update)
++		daemonize();
++
+ 	if (pidfile)
+ 		write_pidfile(pidfile);
+ 
+-	/* Talloc leak reports go to stderr, which is closed if we fork. */
+-	if (!dofork)
+-		talloc_enable_leak_report_full();
+-
+ 	/* Don't kill us with SIGPIPE. */
+ 	signal(SIGPIPE, SIG_IGN);
+ 
+@@ -2942,11 +2931,10 @@ int main(int argc, char *argv[])
  	}
+ 
+ 	/* redirect to /dev/null now we're ready to accept connections */
+-	if (dofork && !live_update)
++	if (!live_update)
+ 		finish_daemonize();
+ #ifndef __MINIOS__
+-	if (dofork)
+-		xprintf = trace;
++	xprintf = trace;
+ #endif
+ 
+ 	signal(SIGHUP, trigger_reopen_log);
 -- 
 2.35.3
 
