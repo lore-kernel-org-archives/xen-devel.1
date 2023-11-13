@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F79C4167D
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 12:43:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.631561.985008 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C0D1C4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Nov 2023 12:43:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.631563.985029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2WHr-0000Zl-Bn; Mon, 13 Nov 2023 12:43:31 +0000
+	id 1r2WI4-0001OV-2M; Mon, 13 Nov 2023 12:43:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 631561.985008; Mon, 13 Nov 2023 12:43:31 +0000
+Received: by outflank-mailman (output) from mailman id 631563.985029; Mon, 13 Nov 2023 12:43:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2WHr-0000Za-8n; Mon, 13 Nov 2023 12:43:31 +0000
-Received: by outflank-mailman (input) for mailman id 631561;
- Mon, 13 Nov 2023 12:43:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r2WI3-0001OO-VF; Mon, 13 Nov 2023 12:43:43 +0000
+Received: by outflank-mailman (input) for mailman id 631563;
+ Mon, 13 Nov 2023 12:43:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=N+lR=G2=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r2WHq-0000Xf-DH
- for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 12:43:30 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3eda6225-8222-11ee-98da-6d05b1d4d9a1;
- Mon, 13 Nov 2023 13:43:29 +0100 (CET)
+ id 1r2WI2-00089i-3f
+ for xen-devel@lists.xenproject.org; Mon, 13 Nov 2023 12:43:42 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 45b691b4-8222-11ee-9b0e-b553b5be7939;
+ Mon, 13 Nov 2023 13:43:40 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0A8C01F6E6;
- Mon, 13 Nov 2023 12:43:29 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5C1FC218F1;
+ Mon, 13 Nov 2023 12:43:40 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C7CB31358C;
- Mon, 13 Nov 2023 12:43:28 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2F4711358C;
+ Mon, 13 Nov 2023 12:43:40 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id /SveLvAZUmVecQAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 13 Nov 2023 12:43:28 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id foUqCvwZUmVzcQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 13 Nov 2023 12:43:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,101 +53,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3eda6225-8222-11ee-98da-6d05b1d4d9a1
+X-Inumbo-ID: 45b691b4-8222-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1699879409; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1699879420; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xRSn0Gy55koV3sSKwt+Dit5JVjBiMtzOaatQj6/2xAg=;
-	b=WtjyZt1bUbqDzRzKi3TNDcyZqzHxw9u3RrlgA8p60wWhpGOKSU0L0qGLWZYnQFwLPoLYQU
-	h9pVfu6r4ys9aKoOoLiW0FPZ64AQleEjI8JRBAO/+1kO2aiLxKWWYVaVLULmhO8dKkiAQ1
-	Uxx7/oChtkx6c6uAWxIQJrWmd9lc7l4=
+	bh=e446G+xhnceZo0d5puzVNgBcr2j5egvLiaV1XBFhMhk=;
+	b=KNIGDnA5bPPhkylE+AV8izI7gRoOYYwWNuwAo/JEqdt0cHSklk2yCi6qpq4/8UOS1yFFWW
+	r69ovYsJU+7UQKkMrQzg0HlVzCYIPwpOR3S6Q/mX5Ufl2o/KBbCxJ2WcGGQzkq4VJLe1rN
+	pGrpLlx+YrxIW5RzNN/+yJ4D3zc5Alg=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 3/5] tools/xenstored: remove the "-P" command line option
-Date: Mon, 13 Nov 2023 13:43:07 +0100
-Message-Id: <20231113124309.10862-4-jgross@suse.com>
+Subject: [PATCH 5/5] tools/xenstored: remove the "-R" command line option
+Date: Mon, 13 Nov 2023 13:43:09 +0100
+Message-Id: <20231113124309.10862-6-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231113124309.10862-1-jgross@suse.com>
 References: <20231113124309.10862-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The "-P" command line option just results in printing the PID of the
-xenstored daemon to stdout before stdout is being closed. The same
-information can be retrieved from the PID file via the "-F" option.
+The "-R" (no recovery) command line option enables to omit fixing the
+node store in case of detected inconsistencies.
 
-Remove the redundant "-P" option.
+This might have been of interest in the past, when the node data base
+was kept in a file, but now the usability of this option is zero.
+
+Remove the "-R" option.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstored/core.c | 13 +------------
- 1 file changed, 1 insertion(+), 12 deletions(-)
+ tools/xenstored/core.c | 20 ++++----------------
+ 1 file changed, 4 insertions(+), 16 deletions(-)
 
 diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index 3e31e74933..5a6378316a 100644
+index c3cfef0965..9d6a5684b8 100644
 --- a/tools/xenstored/core.c
 +++ b/tools/xenstored/core.c
-@@ -2653,7 +2653,6 @@ static void usage(void)
- "  -F, --pid-file <file>   giving a file for the daemon's pid to be written,\n"
- "  -H, --help              to output this message,\n"
- "  -N, --no-fork           to request that the daemon does not fork,\n"
--"  -P, --output-pid        to request that the pid of the daemon is output,\n"
- "  -T, --trace-file <file> giving the file for logging, and\n"
- "      --trace-control=+<switch> activate a specific <switch>\n"
- "      --trace-control=-<switch> deactivate a specific <switch>\n"
-@@ -2702,7 +2701,6 @@ static struct option options[] = {
- 	{ "help", 0, NULL, 'H' },
- 	{ "no-fork", 0, NULL, 'N' },
- 	{ "priv-domid", 1, NULL, 'p' },
--	{ "output-pid", 0, NULL, 'P' },
- 	{ "entry-size", 1, NULL, 'S' },
- 	{ "trace-file", 1, NULL, 'T' },
- 	{ "trace-control", 1, NULL, 1 },
-@@ -2825,7 +2823,6 @@ int main(int argc, char *argv[])
- 	int opt;
- 	int sock_pollfd_idx = -1;
- 	bool dofork = true;
--	bool outputpid = false;
- 	bool live_update = false;
- 	const char *pidfile = NULL;
- 	int timeout;
-@@ -2834,7 +2831,7 @@ int main(int argc, char *argv[])
+@@ -78,7 +78,6 @@ char **orig_argv;
+ 
+ LIST_HEAD(connections);
+ int tracefd = -1;
+-static bool recovery = true;
+ bool keep_orphans = false;
+ static int reopen_log_pipe[2];
+ static int reopen_log_pipe0_pollfd_idx = -1;
+@@ -2443,9 +2442,6 @@ int remember_string(struct hashtable *hash, const char *str)
+  * have a corresponding child node (and if so, delete them).  Each valid child
+  * is then recursively checked.
+  *
+- * No deleting is performed if the recovery flag is cleared (i.e. -R was
+- * passed on the command line).
+- *
+  * As we go, we record each node in the given reachable hashtable.  These
+  * entries will be used later in clean_store.
+  */
+@@ -2462,8 +2458,7 @@ static int check_store_step(const void *ctx, struct connection *conn,
+ 
+ 	if (hashtable_search(data->reachable, (void *)node->name)) {
+ 		log("check_store: '%s' is duplicated!", node->name);
+-		return recovery ? WALK_TREE_RM_CHILDENTRY
+-				: WALK_TREE_SKIP_CHILDREN;
++		return WALK_TREE_RM_CHILDENTRY;
+ 	}
+ 
+ 	if (remember_string(data->reachable, node->name))
+@@ -2479,7 +2474,7 @@ static int check_store_enoent(const void *ctx, struct connection *conn,
+ {
+ 	log("check_store: node '%s' not found", name);
+ 
+-	return recovery ? WALK_TREE_RM_CHILDENTRY : WALK_TREE_OK;
++	return WALK_TREE_RM_CHILDENTRY;
+ }
+ 
+ 
+@@ -2504,8 +2499,7 @@ static int clean_store_(const void *key, void *val, void *private)
+ 	}
+ 	if (!hashtable_search(reachable, name)) {
+ 		log("clean_store: '%s' is orphaned!", name);
+-		if (recovery)
+-			db_delete(NULL, name, NULL);
++		db_delete(NULL, name, NULL);
+ 	}
+ 
+ 	talloc_free(name);
+@@ -2685,8 +2679,6 @@ static void usage(void)
+ "  -w, --timeout <what>=<seconds>   set the timeout in seconds for <what>,\n"
+ "                          allowed timeout candidates are:\n"
+ "                          watch-event: time a watch-event is kept pending\n"
+-"  -R, --no-recovery       to request that no recovery should be attempted when\n"
+-"                          the store is corrupted (debug only),\n"
+ "  -K, --keep-orphans      don't delete nodes owned by a domain when the\n"
+ "                          domain is deleted (this is a security risk!)\n");
+ }
+@@ -2708,7 +2700,6 @@ static struct option options[] = {
+ 	{ "quota", 1, NULL, 'Q' },
+ 	{ "quota-soft", 1, NULL, 'q' },
+ 	{ "timeout", 1, NULL, 'w' },
+-	{ "no-recovery", 0, NULL, 'R' },
+ 	{ "keep-orphans", 0, NULL, 'K' },
+ 	{ "watch-nb", 1, NULL, 'W' },
+ #ifndef NO_LIVE_UPDATE
+@@ -2828,7 +2819,7 @@ int main(int argc, char *argv[])
  	orig_argv = argv;
  
  	while ((opt = getopt_long(argc, argv,
--				  "E:F:H::KNPS:t:A:M:Q:q:T:RW:w:U",
-+				  "E:F:H::KNS:t:A:M:Q:q:T:RW:w:U",
+-				  "E:F:H::KS:t:A:M:Q:q:T:RW:w:U",
++				  "E:F:H::KS:t:A:M:Q:q:T:W:w:U",
  				  options, NULL)) != -1) {
  		switch (opt) {
  		case 'E':
-@@ -2849,9 +2846,6 @@ int main(int argc, char *argv[])
- 		case 'N':
- 			dofork = false;
- 			break;
--		case 'P':
--			outputpid = true;
+@@ -2840,9 +2831,6 @@ int main(int argc, char *argv[])
+ 		case 'H':
+ 			usage();
+ 			return 0;
+-		case 'R':
+-			recovery = false;
 -			break;
- 		case 'R':
- 			recovery = false;
+ 		case 'S':
+ 			hard_quotas[ACC_NODESZ].val = get_optval_uint(optarg);
  			break;
-@@ -2947,11 +2941,6 @@ int main(int argc, char *argv[])
- 		dom0_init();
- 	}
- 
--	if (outputpid) {
--		printf("%ld\n", (long)getpid());
--		fflush(stdout);
--	}
--
- 	/* redirect to /dev/null now we're ready to accept connections */
- 	if (dofork && !live_update)
- 		finish_daemonize();
 -- 
 2.35.3
 
