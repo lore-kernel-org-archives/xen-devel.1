@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CD39C4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E170AC4167B
 	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 17:57:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.633102.987717 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.633097.987698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfV-0003D0-Im; Tue, 14 Nov 2023 17:57:45 +0000
+	id 1r2xfU-0002ig-0T; Tue, 14 Nov 2023 17:57:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 633102.987717; Tue, 14 Nov 2023 17:57:45 +0000
+Received: by outflank-mailman (output) from mailman id 633097.987698; Tue, 14 Nov 2023 17:57:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfU-00036u-QE; Tue, 14 Nov 2023 17:57:44 +0000
-Received: by outflank-mailman (input) for mailman id 633102;
- Tue, 14 Nov 2023 17:50:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r2xfT-0002eo-8h; Tue, 14 Nov 2023 17:57:43 +0000
+Received: by outflank-mailman (input) for mailman id 633097;
+ Tue, 14 Nov 2023 17:50:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5HBD=G3=3mdeb.com=krystian.hebel@srs-se1.protection.inumbo.net>)
- id 1r2xYk-0004wk-Me
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:46 +0000
-Received: from 5.mo583.mail-out.ovh.net (5.mo583.mail-out.ovh.net
- [87.98.173.103]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55eb02bf-8316-11ee-9b0e-b553b5be7939;
- Tue, 14 Nov 2023 18:50:45 +0100 (CET)
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.4.72])
- by mo583.mail-out.ovh.net (Postfix) with ESMTP id 831882530C
- for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:44 +0000 (UTC)
+ id 1r2xYj-0004mK-IS
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:45 +0000
+Received: from 1.mo576.mail-out.ovh.net (1.mo576.mail-out.ovh.net
+ [178.33.251.173]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 548dcfb9-8316-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 18:50:42 +0100 (CET)
+Received: from director8.ghost.mail-out.ovh.net (unknown [10.109.146.213])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 7DBC72BB9F
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:42 +0000 (UTC)
 Received: from ghost-submission-6684bf9d7b-x5j2z (unknown [10.110.115.90])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 053BA1FD62;
- Tue, 14 Nov 2023 17:50:43 +0000 (UTC)
+ by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 11F161FD62;
+ Tue, 14 Nov 2023 17:50:42 +0000 (UTC)
 Received: from 3mdeb.com ([37.59.142.103])
  by ghost-submission-6684bf9d7b-x5j2z with ESMTPSA
- id +FLBOXOzU2V/lwcATVRwWg
- (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:43 +0000
+ id KH1oAXKzU2V/lwcATVRwWg
+ (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,8 +48,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55eb02bf-8316-11ee-9b0e-b553b5be7939
-Authentication-Results:garm.ovh; auth=pass (GARM-103G0053f19ddfa-4a8e-402b-a711-632ec1da18cf,
+X-Inumbo-ID: 548dcfb9-8316-11ee-98db-6d05b1d4d9a1
+Authentication-Results:garm.ovh; auth=pass (GARM-103G005280f6773-d231-4d88-b48f-1424666bd49a,
                     1C6EC45AC3E1968723EBE40916FD99D0F8B07574) smtp.auth=krystian.hebel@3mdeb.com
 X-OVh-ClientIp:213.192.77.249
 From: Krystian Hebel <krystian.hebel@3mdeb.com>
@@ -59,18 +59,18 @@ Cc: Krystian Hebel <krystian.hebel@3mdeb.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 06/10] x86/smp: call x2apic_ap_setup() earlier
-Date: Tue, 14 Nov 2023 18:50:08 +0100
-Message-ID: <7c13554e60cc76516922992b7faf911b91f99a2a.1699981248.git.krystian.hebel@3mdeb.com>
+Subject: [XEN PATCH 5/9] x86/smp: call x2apic_ap_setup() earlier
+Date: Tue, 14 Nov 2023 18:50:05 +0100
+Message-ID: <7c13554e60cc76516922992b7faf911b91f99a2a.1699982111.git.krystian.hebel@3mdeb.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1699981248.git.krystian.hebel@3mdeb.com>
-References: <cover.1699981248.git.krystian.hebel@3mdeb.com>
+In-Reply-To: <cover.1699982111.git.krystian.hebel@3mdeb.com>
+References: <cover.1699982111.git.krystian.hebel@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12930960431237409136
+X-Ovh-Tracer-Id: 12930397484398389616
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevtdevieehieeiveekvefhlefftdfhteefueelhfdvhedtjeegkedugfefvdekffenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgepgeenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekfedpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevtdevieehieeiveekvefhlefftdfhteefueelhfdvhedtjeegkedugfefvdekffenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
 
 It used to be called from smp_callin(), however BUG_ON() was invoked on
 multiple occasions before that. It may end up calling machine_restart()
