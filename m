@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C26C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 14:44:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.632649.986979 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C634C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 14:47:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.632655.986989 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2ueE-0004TT-8J; Tue, 14 Nov 2023 14:44:14 +0000
+	id 1r2uh1-0005oB-Pm; Tue, 14 Nov 2023 14:47:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 632649.986979; Tue, 14 Nov 2023 14:44:14 +0000
+Received: by outflank-mailman (output) from mailman id 632655.986989; Tue, 14 Nov 2023 14:47:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2ueE-0004TM-5p; Tue, 14 Nov 2023 14:44:14 +0000
-Received: by outflank-mailman (input) for mailman id 632649;
- Tue, 14 Nov 2023 14:44:12 +0000
+	id 1r2uh1-0005o4-NI; Tue, 14 Nov 2023 14:47:07 +0000
+Received: by outflank-mailman (input) for mailman id 632655;
+ Tue, 14 Nov 2023 14:47:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Iys2=G3=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1r2ueC-0004TG-MV
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 14:44:12 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=6V1E=G3=linaro.org=philmd@srs-se1.protection.inumbo.net>)
+ id 1r2uZx-0003vI-FR
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 14:39:49 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 46448b60-82fc-11ee-98db-6d05b1d4d9a1;
- Tue, 14 Nov 2023 15:44:11 +0100 (CET)
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2c503da4fd6so73359991fa.1
- for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 06:44:11 -0800 (PST)
-Received: from [172.25.82.51] ([12.186.190.2])
- by smtp.gmail.com with ESMTPSA id
- d21-20020a05620a241500b0077bd79682c4sm2431108qkn.5.2023.11.14.06.44.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Nov 2023 06:44:10 -0800 (PST)
+ id a98a2ede-82fb-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 15:39:48 +0100 (CET)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-507bd19eac8so7632269e87.0
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 06:39:48 -0800 (PST)
+Received: from m1x-phil.lan (cac94-h02-176-184-25-155.dsl.sta.abo.bbox.fr.
+ [176.184.25.155]) by smtp.gmail.com with ESMTPSA id
+ l18-20020a50d6d2000000b00542db304680sm5268842edj.63.2023.11.14.06.39.46
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 14 Nov 2023 06:39:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,147 +47,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46448b60-82fc-11ee-98db-6d05b1d4d9a1
+X-Inumbo-ID: a98a2ede-82fb-11ee-98db-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1699973051; x=1700577851; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=LzMmkVdserEMmO9c1dzFsiFKocKzYApkm+sujdRvQ+k=;
-        b=eenapmTRYh609vcCSp5NB+icROB9HhuWeVLIiu7HABZGdiKTwX9rnn5TsEyKBIBQ0S
-         qJrSK3ELeAsVT4mkJBNBZkC5vNQ8k800jH5390I6KcYxTpZfYb/b6FiZOVQr14nLbsAp
-         tNvFWPM8cgADWhO3D14jZUsEOXi85ihlpdgUU=
+        d=linaro.org; s=google; t=1699972788; x=1700577588; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=x5X2FluBMHtEHwLVURbcbmArZUeMN34wqMB+9uG3SGg=;
+        b=qqIB2ixtDwnE8Ljp1CRMJKiVKwfUu7C8qkWkxML06u2pAP5DLTuNbZgtCLaPOVCJnX
+         9DxmxhykGfwE2znel8+OABw7XM+4NnvBOIZ+2GM8L4/o74RM6/y+3D2uGUAJ78MZ6YMe
+         hmbXc0dIdBG8AS2Uqktus5uIZJPTjiHxcyia0DaritmtY+nC9aWqaX282oDvX7vEX7bc
+         HHqIid1cH0P4ufCLraSVJkMPdWjOj5MeVPl0yCO+Jqq2oqv/kX5Di0UbC/pgT6Joc+T1
+         kTzpda+pWUuyhm2l8QmJFc23TKKkMiD+diXNrrqzgNqK8LdIF6dUPhiyYcStssol2IZ3
+         /Tlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699973051; x=1700577851;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=LzMmkVdserEMmO9c1dzFsiFKocKzYApkm+sujdRvQ+k=;
-        b=ZuZIHqS93Bpq4harOM4jo2QJUQf44M0AU2W76LbkB1S39xzwJKsKHgUFO+kotQH+oI
-         5bXUn1A42YqEB48DhoZ8E2gn0zYomsF2N8CbA7e0aBb8EyfECyJMF6SyEWMEmvMX7meJ
-         DXiaW6IfQyThzuZlE43oOKmfnKMwHpCq4anUs6AeENszDnm3wkaFrZKLB1Wk4JkRslcW
-         f+hUGihQ0C9zY9YUEu1XUhYa4uKhf/mDdYVM/WoSL9uq4qAbJkFegvCXB78J5LgqpU7h
-         XqE4xfjtMW/pv23/yp+3YoyNSJS6raMimvcKee4zyHL/lt6ovFKHRwg6ipb96K2bjEjT
-         T52Q==
-X-Gm-Message-State: AOJu0Yy4jDj/MlRQnayXdh2Oc8fEh70Rrb3I80JkKU/afHKAzYWxdiEV
-	RcA5YojBEYZUMkwx1GWKJjmB2A==
-X-Google-Smtp-Source: AGHT+IEdPrI7oiqeN7y3Ub11nHYXukcBqfvO3LljkArbZokQBCNroV+6ZbLC5RTeULGp6OuWX5P57A==
-X-Received: by 2002:a2e:8551:0:b0:2c5:16c0:6239 with SMTP id u17-20020a2e8551000000b002c516c06239mr1790071ljj.51.1699973051343;
-        Tue, 14 Nov 2023 06:44:11 -0800 (PST)
-Message-ID: <2a340b44-9d3e-431f-94d6-e77e6145fc6a@citrix.com>
-Date: Tue, 14 Nov 2023 14:44:09 +0000
+        d=1e100.net; s=20230601; t=1699972788; x=1700577588;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=x5X2FluBMHtEHwLVURbcbmArZUeMN34wqMB+9uG3SGg=;
+        b=Uvbb8g9LiZSi5bjI4mLa3zoHzJSmkUiMiGEbF7mzPpilo22GAf8Q9UxvvOgsDwRyqc
+         NO2EQe1oTz7vMSCdAzODUou7n5f81/MGljhdmE0r5krCwjmtZz/SWbQhNPoWri6jI72G
+         8ynbEifGH6PPdTIB11GuFb9Bs2PHDKAz+pxoXxOG6zA2CvKHyJ47by1mxNARQmiUFh/v
+         XZsO8e0vIfyZdzX0LvIBA/Vo5EHAkNiWwpl6UxxGamMx7Rt6DIfIAFFzIX0Xff1wYTzt
+         GXkoaCjcyJ9288P63Vm2iW1SVp+qfaD4s/LRvhJmV2ZBJ/1Zrt5g3KbgN/Z+L5BNJ/Mk
+         XWhw==
+X-Gm-Message-State: AOJu0YzG+VMPXM9euQjl+KDXeyn41iyRN5r01zDWM+IAoH5G+7tVaiEG
+	csQjZoBpcWQdNkMbzIg24KwV1Q==
+X-Google-Smtp-Source: AGHT+IEJ1DzMQPrVK6vmcQ1s/BHFe+ZR138ty+E3IEfmXhpEvhlt8hMy3AYRKnboRNNE1Pe2RYsE2w==
+X-Received: by 2002:a05:6512:b14:b0:509:8e3d:7cb0 with SMTP id w20-20020a0565120b1400b005098e3d7cb0mr9400030lfu.41.1699972788532;
+        Tue, 14 Nov 2023 06:39:48 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: David Woodhouse <dwmw@amazon.co.uk>,
+	qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Paul Durrant <paul@xen.org>,
+	qemu-arm@nongnu.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	xen-devel@lists.xenproject.org,
+	qemu-block@nongnu.org,
+	Anthony Perard <anthony.perard@citrix.com>,
+	kvm@vger.kernel.org,
+	Thomas Huth <thuth@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [RFC PATCH-for-9.0 v2 13/19] hw/xen: Remove use of 'target_ulong' in handle_ioreq()
+Date: Tue, 14 Nov 2023 15:38:09 +0100
+Message-ID: <20231114143816.71079-14-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231114143816.71079-1-philmd@linaro.org>
+References: <20231114143816.71079-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/x86: On x2APIC mode, derive LDR from APIC_ID
-Content-Language: en-GB
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>,
- Alejandro Vallejo <alejandro.vallejo@cloud.com>,
- Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>
-References: <20231113165023.5824-1-alejandro.vallejo@cloud.com>
- <ZVJifMqOR_3zINYZ@macbook.local>
- <5c4a237e-975d-f452-1261-f9fc10ef65c6@suse.com>
- <65536590.050a0220.eb28a.617d@mx.google.com>
- <f278f367-81cb-4a72-9303-23622dea3abd@suse.com>
- <fd99ea62-f011-4bcb-ba83-4698b5d267fd@citrix.com>
- <ZVOAEFoYFDp8lxCd@macbook.local>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <ZVOAEFoYFDp8lxCd@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 14/11/2023 2:11 pm, Roger Pau Monné wrote:
-> On Tue, Nov 14, 2023 at 12:55:46PM +0000, Andrew Cooper wrote:
->> On 14/11/2023 12:32 pm, Jan Beulich wrote:
->>> On 14.11.2023 13:18, Alejandro Vallejo wrote:
->>>> On Tue, Nov 14, 2023 at 11:14:22AM +0100, Jan Beulich wrote:
->>>>> On 13.11.2023 18:53, Roger Pau Monné wrote:
->>>> I don't think vlapic_match_logical_addr() is affected. The LDR's are still
->>>> unique in the bogus case so the matching ought to work. Problem would arise
->>>> if the guest makes assumptions about APIC_ID and LDR relationships.
->>> The LDRs still being unique (or not) isn't what I'm concerned about. It is
->>> the function's return value which would be wrong, as the incoming "mda"
->>> presumably was set in its respective field on the assumption that the LDRs
->>> are set in a spec-compliant way. There not having been problem reports
->>> makes me wonder whether any guests actually use logical delivery mode in a
->>> wider fashion.
->> They likely don't.
->>
->> Logical delivery for xAPIC only works in a tiny fraction of cases
->> (assuming correct topology information, which we don't give), and
->> persuading a VM to turn on x2APIC without a vIOMMU is not something
->> we've managed to do in Xen.
-> We do, in fact the pvshim (or nested Xen) will run in x2APIC mode if
-> available.
-> Linux >= 5.17 will also use x2APIC mode if available when running as a
-> Xen HVM guest:
->
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c8980fcb210851138cb34c9a8cb0cf0c09f07bf9
+Per commit f17068c1c7 ("xen-hvm: reorganize xen-hvm and move common
+function to xen-hvm-common"), handle_ioreq() is expected to be
+target-agnostic. However it uses 'target_ulong', which is a target
+specific definition.
 
-Yeah that's never actually been tested with 256 vCPUs.
+Per xen/include/public/hvm/ioreq.h header:
 
-A VM *must* have either a vIOMMU, or know (via whatever means) that
-there are no IO-APICs, or (via whatever means) that all IO-APICs can use
-reserved bits for 32k destination APIC ID support.
+  struct ioreq {
+    uint64_t addr;          /* physical address */
+    uint64_t data;          /* data (or paddr of data) */
+    uint32_t count;         /* for rep prefixes */
+    uint32_t size;          /* size in bytes */
+    uint32_t vp_eport;      /* evtchn for notifications to/from device model */
+    uint16_t _pad0;
+    uint8_t state:4;
+    uint8_t data_is_ptr:1;  /* if 1, data above is the guest paddr
+                             * of the real data to use. */
+    uint8_t dir:1;          /* 1=read, 0=write */
+    uint8_t df:1;
+    uint8_t _pad1:1;
+    uint8_t type;           /* I/O type */
+  };
+  typedef struct ioreq ioreq_t;
 
-As it stands, this is just something which will explode on us in the
-future.  Hopefully the worst that will happen is a panic on boot.
+If 'data' is not a pointer, it is a u64.
 
-> If a guest has been booted with the bogus LDR we need to keep it on
-> migrate, otherwise at least Xen will break (because it does read the
-> LDR from the hardware instead of building it based on the APIC ID).
+- In PIO / VMWARE_PORT modes, only 32-bit are used.
 
-Of course.  That would be data corruption otherwise.
+- In MMIO COPY mode, memory is accessed by chunks of 64-bit
 
-> Switching to the correct LDR on APIC reset can be sensible, any APIC
-> device reset should be done together with updating whatever registers
-> have been previously cached, and OSes don't do APIC resets anyway.
+- In PCI_CONFIG mode, access is u8 or u16 or u32.
 
-Yes.  We can just set it properly on reset and the problem ought to
-disappear.
+- None of TIMEOFFSET / INVALIDATE use 'req'.
 
-~Andrew
+- Fallback is only used in x86 for VMWARE_PORT.
+
+Masking the upper bits of 'data' to keep 'req->size' low bits
+is irrelevant of the target word size. Remove the word size
+check and always extract the relevant bits.
+
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/xen/xen-hvm-common.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
+index bb3cfb200c..fb81bd8fbc 100644
+--- a/hw/xen/xen-hvm-common.c
++++ b/hw/xen/xen-hvm-common.c
+@@ -1,5 +1,6 @@
+ #include "qemu/osdep.h"
+ #include "qemu/units.h"
++#include "qemu/bitops.h"
+ #include "qapi/error.h"
+ #include "trace.h"
+ 
+@@ -426,9 +427,8 @@ static void handle_ioreq(XenIOState *state, ioreq_t *req)
+     trace_handle_ioreq(req, req->type, req->dir, req->df, req->data_is_ptr,
+                        req->addr, req->data, req->count, req->size);
+ 
+-    if (!req->data_is_ptr && (req->dir == IOREQ_WRITE) &&
+-            (req->size < sizeof (target_ulong))) {
+-        req->data &= ((target_ulong) 1 << (8 * req->size)) - 1;
++    if (!req->data_is_ptr && (req->dir == IOREQ_WRITE)) {
++        req->data = extract64(req->data, 0, BITS_PER_BYTE * req->size);
+     }
+ 
+     if (req->dir == IOREQ_WRITE)
+-- 
+2.41.0
+
 
