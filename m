@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5CDAC07CA9
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 17:57:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.633078.987600 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B93C0755A
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 17:57:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.633088.987642 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfM-0000Jm-JY; Tue, 14 Nov 2023 17:57:36 +0000
+	id 1r2xfO-00018F-U0; Tue, 14 Nov 2023 17:57:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 633078.987600; Tue, 14 Nov 2023 17:57:36 +0000
+Received: by outflank-mailman (output) from mailman id 633088.987642; Tue, 14 Nov 2023 17:57:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfM-0000II-G3; Tue, 14 Nov 2023 17:57:36 +0000
-Received: by outflank-mailman (input) for mailman id 633078;
- Tue, 14 Nov 2023 17:50:30 +0000
+	id 1r2xfO-00014g-Fm; Tue, 14 Nov 2023 17:57:38 +0000
+Received: by outflank-mailman (input) for mailman id 633088;
+ Tue, 14 Nov 2023 17:50:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5HBD=G3=3mdeb.com=krystian.hebel@srs-se1.protection.inumbo.net>)
- id 1r2xYU-0004mK-BL
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:30 +0000
-Received: from 4.mo583.mail-out.ovh.net (4.mo583.mail-out.ovh.net
- [178.33.111.247]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c4a8a8f-8316-11ee-98db-6d05b1d4d9a1;
- Tue, 14 Nov 2023 18:50:29 +0100 (CET)
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.109.156.215])
- by mo583.mail-out.ovh.net (Postfix) with ESMTP id 8770029423
- for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:28 +0000 (UTC)
+ id 1r2xYf-0004mK-Hb
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:41 +0000
+Received: from 7.mo576.mail-out.ovh.net (7.mo576.mail-out.ovh.net
+ [46.105.50.32]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 52d7454f-8316-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 18:50:39 +0100 (CET)
+Received: from director8.ghost.mail-out.ovh.net (unknown [10.109.146.213])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 99E5E2BFEA
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:39 +0000 (UTC)
 Received: from ghost-submission-6684bf9d7b-x5j2z (unknown [10.110.115.90])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 8F5A81FD24;
- Tue, 14 Nov 2023 17:50:27 +0000 (UTC)
+ by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 253951FDE8;
+ Tue, 14 Nov 2023 17:50:39 +0000 (UTC)
 Received: from 3mdeb.com ([37.59.142.103])
  by ghost-submission-6684bf9d7b-x5j2z with ESMTPSA
- id rx40GWOzU2V/lwcATVRwWg
- (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:27 +0000
+ id AKMpBm+zU2V/lwcATVRwWg
+ (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,8 +48,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c4a8a8f-8316-11ee-98db-6d05b1d4d9a1
-Authentication-Results:garm.ovh; auth=pass (GARM-103G0054052121a-002a-44d4-9d02-8e709530af71,
+X-Inumbo-ID: 52d7454f-8316-11ee-98db-6d05b1d4d9a1
+Authentication-Results:garm.ovh; auth=pass (GARM-103G00562a061e7-849b-469d-8155-380106dc87b3,
                     1C6EC45AC3E1968723EBE40916FD99D0F8B07574) smtp.auth=krystian.hebel@3mdeb.com
 X-OVh-ClientIp:213.192.77.249
 From: Krystian Hebel <krystian.hebel@3mdeb.com>
@@ -58,100 +58,202 @@ Cc: Krystian Hebel <krystian.hebel@3mdeb.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH 0/9] x86: parallelize AP bring-up during boot
-Date: Tue, 14 Nov 2023 18:49:54 +0100
-Message-ID: <cover.1699982111.git.krystian.hebel@3mdeb.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 2/2] x86/smp: start APs in parallel during boot
+Date: Tue, 14 Nov 2023 18:50:00 +0100
+Message-ID: <77c9199eabf3a30ebcf89356b2dd35abd611a3a9.1699981241.git.krystian.hebel@3mdeb.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <cover.1699981241.git.krystian.hebel@3mdeb.com>
+References: <cover.1699981241.git.krystian.hebel@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12926456833206757834
+X-Ovh-Tracer-Id: 12929553056808806768
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhheeigeffkeejudegieeifeeiuedtfefffeefudefjeethfffueelieegfeegueenucffohhmrghinhepghhithhhuhgsrdgtohhmnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddruddtfeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehkrhihshhtihgrnhdrhhgvsggvlhesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehkeefpdhmohguvgepshhmthhpohhuth
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevtdevieehieeiveekvefhlefftdfhteefueelhfdvhedtjeegkedugfefvdekffenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
 
-Patch series available on this branch:
-https://github.com/TrenchBoot/xen/tree/smp_cleanup_upstreaming
+Multiple delays are required when sending IPIs and waiting for
+responses. During boot, 4 such IPIs were sent per each AP. With this
+change, only one set of broadcast IPIs is sent. This reduces boot time,
+especially for platforms with large number of cores.
 
-This series makes AP bring-up parallel on x86. This reduces number of
-IPIs (and more importantly, delays between them) required to start all
-logical processors significantly.
+Single CPU initialization is still possible, it is used for hotplug.
 
-In order to make it possible, some state variables that were global
-had to be made per-CPU. In most cases, accesses to those variables can
-be performed through helper macros, some of them existed before in a
-different form.
-
-In addition to work required for parallel initialization, I've fixed
-issues in error path around `machine_restart()` that were discovered
-during implementation and testing.
-
-CPU hotplug should not be affected, but I had no way of testing it.
 During wakeup from S3 APs are started one by one. It should be possible
 to enable parallel execution there as well, but I don't have a way of
-testing it as of now.
+properly testing it as of now.
 
-To measure the improvement, I added output lines (identical for before
-and after changes so there is no impact of printing over serial) just
-above and below `if ( !pv_shim )` block. `console_timestamps=raw` was
-used to get as accurate timestamp as possible, and average over 3 boots
-was taken into account for each measurement. The final improvement was
-calculated as (1 - after/before) * 100%, rounded to 0.01%. These are
-the results:
+Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+---
+ xen/arch/x86/include/asm/smp.h |  1 +
+ xen/arch/x86/setup.c           |  2 +
+ xen/arch/x86/smpboot.c         | 68 ++++++++++++++++++++++++----------
+ 3 files changed, 51 insertions(+), 20 deletions(-)
 
-* Dell OptiPlex 9010 with Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz
-  (4 cores, 4 threads): 48.83%
-* MSI PRO Z790-P with 13th Gen Intel(R) Core(TM) i5-13600K (14 cores,
-  20 threads, 6P+8E) `smt=on`: 36.16%
-* MSI PRO Z790-P with 13th Gen Intel(R) Core(TM) i5-13600K (14 cores,
-  20 threads, 6P+8E) `smt=off`: 0.25% (parking takes a lot of additional
-  time)
-* HP t630 Thin Client with AMD Embedded G-Series GX-420GI Radeon R7E
-  (4 cores, 4 threads): 68.00%
-
-Krystian Hebel (9):
-  x86/boot: choose AP stack based on APIC ID
-  x86: don't access x86_cpu_to_apicid[] directly, use
-    cpu_physical_id(cpu)
-  x86/smp: drop x86_cpu_to_apicid, use cpu_data[cpu].apicid instead
-  x86/smp: move stack_base to cpu_data
-  x86/smp: call x2apic_ap_setup() earlier
-  x86/shutdown: protect against recurrent machine_restart()
-  x86/smp: drop booting_cpu variable
-  x86/smp: make cpu_state per-CPU
-  x86/smp: start APs in parallel during boot
-
- xen/arch/x86/acpi/cpu_idle.c          |   4 +-
- xen/arch/x86/acpi/lib.c               |   2 +-
- xen/arch/x86/apic.c                   |   2 +-
- xen/arch/x86/boot/trampoline.S        |  20 +++
- xen/arch/x86/boot/x86_64.S            |  34 ++++-
- xen/arch/x86/cpu/mwait-idle.c         |   4 +-
- xen/arch/x86/domain.c                 |   2 +-
- xen/arch/x86/include/asm/asm_defns.h  |   2 +-
- xen/arch/x86/include/asm/cpufeature.h |   2 +
- xen/arch/x86/include/asm/processor.h  |   2 +
- xen/arch/x86/include/asm/smp.h        |   7 +-
- xen/arch/x86/mpparse.c                |   6 +-
- xen/arch/x86/numa.c                   |  17 +--
- xen/arch/x86/platform_hypercall.c     |   2 +-
- xen/arch/x86/setup.c                  |  25 +++-
- xen/arch/x86/shutdown.c               |  20 ++-
- xen/arch/x86/smpboot.c                | 207 ++++++++++++++++----------
- xen/arch/x86/spec_ctrl.c              |   2 +-
- xen/arch/x86/sysctl.c                 |   2 +-
- xen/arch/x86/traps.c                  |   4 +-
- xen/arch/x86/x86_64/asm-offsets.c     |   5 +-
- xen/include/xen/smp.h                 |   2 -
- 22 files changed, 248 insertions(+), 125 deletions(-)
-
-
-base-commit: fb41228ececea948c7953c8c16fe28fd65c6536b
-prerequisite-patch-id: 142a87c707411d49e136c3fb76f1b14963ec6dc8
-prerequisite-patch-id: f155cb7e2761deec26b76f1b8b587bc56a404c80
+diff --git a/xen/arch/x86/include/asm/smp.h b/xen/arch/x86/include/asm/smp.h
+index 98739028a6ed..6ca0158a368d 100644
+--- a/xen/arch/x86/include/asm/smp.h
++++ b/xen/arch/x86/include/asm/smp.h
+@@ -31,6 +31,7 @@ DECLARE_PER_CPU(cpumask_var_t, send_ipi_cpumask);
+ extern bool park_offline_cpus;
+ 
+ void smp_send_nmi_allbutself(void);
++void smp_send_init_sipi_sipi_allbutself(void);
+ 
+ void send_IPI_mask(const cpumask_t *, int vector);
+ void send_IPI_self(int vector);
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index b2c0679725ea..42a9067b81eb 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1963,6 +1963,8 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+                 cpu_data[i].stack_base = cpu_alloc_stack(i);
+         }
+ 
++        smp_send_init_sipi_sipi_allbutself();
++
+         for_each_present_cpu ( i )
+         {
+             if ( (park_offline_cpus || num_online_cpus() < max_cpus) &&
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index cbea2d45f70d..e9a7f78a5a6f 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -425,7 +425,7 @@ void start_secondary(unsigned int cpu)
+ 
+ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+ {
+-    unsigned long send_status = 0, accept_status = 0;
++    unsigned long send_status = 0, accept_status = 0, sh = 0;
+     int maxlvt, timeout, i;
+ 
+     /*
+@@ -445,6 +445,12 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+     if ( tboot_in_measured_env() && !tboot_wake_ap(phys_apicid, start_eip) )
+         return 0;
+ 
++    /*
++     * Use destination shorthand for broadcasting IPIs during boot.
++     */
++    if ( phys_apicid == BAD_APICID )
++        sh = APIC_DEST_ALLBUT;
++
+     /*
+      * Be paranoid about clearing APIC errors.
+      */
+@@ -458,7 +464,7 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+         /*
+          * Turn INIT on target chip via IPI
+          */
+-        apic_icr_write(APIC_INT_LEVELTRIG | APIC_INT_ASSERT | APIC_DM_INIT,
++        apic_icr_write(APIC_INT_LEVELTRIG | APIC_INT_ASSERT | APIC_DM_INIT | sh,
+                        phys_apicid);
+ 
+         if ( !x2apic_enabled )
+@@ -475,7 +481,7 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+ 
+             Dprintk("Deasserting INIT.\n");
+ 
+-            apic_icr_write(APIC_INT_LEVELTRIG | APIC_DM_INIT, phys_apicid);
++            apic_icr_write(APIC_INT_LEVELTRIG | APIC_DM_INIT | sh, phys_apicid);
+ 
+             Dprintk("Waiting for send to finish...\n");
+             timeout = 0;
+@@ -512,7 +518,7 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+          * STARTUP IPI
+          * Boot on the stack
+          */
+-        apic_icr_write(APIC_DM_STARTUP | (start_eip >> 12), phys_apicid);
++        apic_icr_write(APIC_DM_STARTUP | (start_eip >> 12) | sh, phys_apicid);
+ 
+         if ( !x2apic_enabled )
+         {
+@@ -565,7 +571,6 @@ int alloc_cpu_id(void)
+ static int do_boot_cpu(int apicid, int cpu)
+ {
+     int timeout, boot_error = 0, rc = 0;
+-    unsigned long start_eip;
+ 
+     /*
+      * Save current MTRR state in case it was changed since early boot
+@@ -573,21 +578,31 @@ static int do_boot_cpu(int apicid, int cpu)
+      */
+     mtrr_save_state();
+ 
+-    start_eip = bootsym_phys(trampoline_realmode_entry);
++    /* Check if AP is already up. */
++    if ( cpu_data[cpu].cpu_state != CPU_STATE_INIT )
++    {
++        /* This grunge runs the startup process for the targeted processor. */
++        unsigned long start_eip;
++        start_eip = bootsym_phys(trampoline_realmode_entry);
+ 
+-    /* start_eip needs be page aligned, and below the 1M boundary. */
+-    if ( start_eip & ~0xff000 )
+-        panic("AP trampoline %#lx not suitably positioned\n", start_eip);
++        /* start_eip needs be page aligned, and below the 1M boundary. */
++        if ( start_eip & ~0xff000 )
++            panic("AP trampoline %#lx not suitably positioned\n", start_eip);
+ 
+-    /* So we see what's up   */
+-    if ( opt_cpu_info )
+-        printk("Booting processor %d/%d eip %lx\n",
+-               cpu, apicid, start_eip);
++        /* So we see what's up   */
++        if ( opt_cpu_info )
++            printk("AP trampoline at %lx\n", start_eip);
+ 
+-    /* This grunge runs the startup process for the targeted processor. */
++        /* mark "stuck" area as not stuck */
++        bootsym(trampoline_cpu_started) = 0;
++        smp_mb();
+ 
+-    /* Starting actual IPI sequence... */
+-    boot_error = wakeup_secondary_cpu(apicid, start_eip);
++        /* Starting actual IPI sequence... */
++        boot_error = wakeup_secondary_cpu(apicid, start_eip);
++    }
++
++    if ( opt_cpu_info )
++        printk("Booting processor %d/%d\n", cpu, apicid);
+ 
+     if ( !boot_error )
+     {
+@@ -646,10 +661,6 @@ static int do_boot_cpu(int apicid, int cpu)
+         rc = -EIO;
+     }
+ 
+-    /* mark "stuck" area as not stuck */
+-    bootsym(trampoline_cpu_started) = 0;
+-    smp_mb();
+-
+     return rc;
+ }
+ 
+@@ -1155,6 +1166,23 @@ static struct notifier_block cpu_smpboot_nfb = {
+     .notifier_call = cpu_smpboot_callback
+ };
+ 
++void smp_send_init_sipi_sipi_allbutself(void)
++{
++    unsigned long start_eip;
++    start_eip = bootsym_phys(trampoline_realmode_entry);
++
++    /* start_eip needs be page aligned, and below the 1M boundary. */
++    if ( start_eip & ~0xff000 )
++        panic("AP trampoline %#lx not suitably positioned\n", start_eip);
++
++    /* So we see what's up   */
++    if ( opt_cpu_info )
++        printk("Booting APs in parallel, eip %lx\n", start_eip);
++
++    /* Starting actual broadcast IPI sequence... */
++    wakeup_secondary_cpu(BAD_APICID, start_eip);
++}
++
+ void __init smp_prepare_cpus(void)
+ {
+     register_cpu_notifier(&cpu_smpboot_nfb);
 -- 
 2.41.0
 
