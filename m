@@ -4,52 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C0BAC4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 15:16:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.632780.987206 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E9B6C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 15:20:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.632796.987226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2v8z-0001su-HT; Tue, 14 Nov 2023 15:16:01 +0000
+	id 1r2vCu-00052t-Av; Tue, 14 Nov 2023 15:20:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 632780.987206; Tue, 14 Nov 2023 15:16:01 +0000
+Received: by outflank-mailman (output) from mailman id 632796.987226; Tue, 14 Nov 2023 15:20:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2v8z-0001sn-Eh; Tue, 14 Nov 2023 15:16:01 +0000
-Received: by outflank-mailman (input) for mailman id 632780;
- Tue, 14 Nov 2023 15:15:59 +0000
+	id 1r2vCu-00052N-65; Tue, 14 Nov 2023 15:20:04 +0000
+Received: by outflank-mailman (input) for mailman id 632796;
+ Tue, 14 Nov 2023 15:20:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=H6sB=G3=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1r2v8x-0001sO-D2
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 15:15:59 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [2a01:111:f400:fe59::600])
+ <SRS0=eqXQ=G3=casper.srs.infradead.org=BATV+a8e905033730cff805ca+7387+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1r2vCt-0004pW-Fa
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 15:20:03 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b5e7e100-8300-11ee-98db-6d05b1d4d9a1;
- Tue, 14 Nov 2023 16:15:57 +0100 (CET)
-Received: from CH5P223CA0002.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:1f3::10)
- by DM4PR12MB5962.namprd12.prod.outlook.com (2603:10b6:8:69::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6977.29; Tue, 14 Nov 2023 15:15:50 +0000
-Received: from DS2PEPF00003443.namprd04.prod.outlook.com
- (2603:10b6:610:1f3:cafe::67) by CH5P223CA0002.outlook.office365.com
- (2603:10b6:610:1f3::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.31 via Frontend
- Transport; Tue, 14 Nov 2023 15:15:50 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS2PEPF00003443.mail.protection.outlook.com (10.167.17.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7002.14 via Frontend Transport; Tue, 14 Nov 2023 15:15:50 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Tue, 14 Nov
- 2023 09:15:48 -0600
-Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.32
- via Frontend Transport; Tue, 14 Nov 2023 09:15:47 -0600
+ id 483965f6-8301-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 16:20:02 +0100 (CET)
+Received: from [12.186.190.2] (helo=[127.0.0.1])
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1r2vCn-008fhY-Fa; Tue, 14 Nov 2023 15:19:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,103 +42,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b5e7e100-8300-11ee-98db-6d05b1d4d9a1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VoTHtH2woT/zmxOywLdCgslMKPzQ3lL2rwRj73oevyFWws+cTw+yG7TLiycZ6hf/39BDB5CCWFVs4su8q7oVuHkfv1qAPxfKvFX4CPeeYHYfva3H6ZH0qpS/cfuRNgpjkDDQD5FBKTwtmR6HA8IqL1JCXM33RhzSQywAfBiRVl2gZifoTwc6D882kGLaJnTaxiCeiiojdNephAK3LWdq8NczWrhC8+lhqbyb1yOpOvr/+YPwKdLgOGtfHodK3nM4XKmWJpeTwyEHERHWRkdYU1WwOSnDLrUw9Dv2j/GOn99Aa1zxkGpzUJwG1SUdcAj5GWqTZ9FREtlDy3Ujx7J1Eg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DasBI6LeyKgugWeCwBkYzotJQvEFYR+pBHAsv5kFKHA=;
- b=CkAXbI1VBF4IwKGuRL0mt4CKJj3Ooeboz3CrY20J5Ldre2d3HZ0zucpTeuVwfJE+oboKtiSREOjB7U7HJqxfni0xUGjWLm9u15HuA/RDu1o6Pg8+ldX5IetnmWrao1OuAyQZSDjXYcbxD5vvKnu5gyVnuMeIIuoGOuEjI9Hcu38I9Yi6vWbAdcSSW+LcVsNB/uD4IrWNLt8J1LhpafKN71msw6j03JgpMJ2pvKU8fyTwfIvFLl6Y9VfoDpzhMGEPhI/tpCVlYXQLVQg6fpKGlUhpz3SQgwbmFctRtNf9q9cdBqB6nXvXSlkhH4IUhIxerks3FGaKfjOFMDa6eR7VsQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DasBI6LeyKgugWeCwBkYzotJQvEFYR+pBHAsv5kFKHA=;
- b=qReXNCnYH2mTsRNNAMbMj2r5I4Kojbvsc3tsuiwFH/fWpBLwvmBNW8XE775eZP+BB3MB940ihLsmJe72aOQe16qxagrxE0JuplwQI0hSLTSwlKDq/YRFHXdyJ4gnxmbwQ/z3b5C5ARIbNoyrdPjsDzKCUB27etQ64DNTEIKHl9U=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <sstabellini@kernel.org>, Michal Orzel <michal.orzel@amd.com>
-Subject: [ImageBuilder] Add 'bootz' to a list of supported boot commands
-Date: Tue, 14 Nov 2023 16:15:35 +0100
-Message-ID: <20231114151535.53409-1-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 483965f6-8301-11ee-98db-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:Message-ID:References:In-Reply-To:Subject:CC:To:From:Date:Sender
+	:Reply-To:Content-ID:Content-Description;
+	bh=8oHKIB2Z25t55M8rg997hmml2qBzYjJja9p3MLoID9Q=; b=MGoU06Rd2CU4tijjS4zit7AS2o
+	EK5W2DNxSaap5vdRgr4lcPo4zGcIOq4atxzna3eoqsGisnNIWyNGw93pjsrw6oaP0WFFFgVLYBQZz
+	ClKfV7KrSJ1t1EoRo2xxMOh1jnYJshbl0jbHkjAa9cxj5rwxiL2k2+h7xbdzuUF4pLtlgUmOSkME0
+	Uq+kwwckEVCRyY9c0wqtGkbt3pl09tWIQNEMt3G1DMKTQtlMxIhdejhXq5Fe0Y7D6jA34FrWF434P
+	xU+RMJD/6Br8s11hd/K1O0XHW4bEY9r2voia+3nEj2IVrY/SvDOKzxr05FZJRtBMRX8gdRMisqfgH
+	oej8JDZQ==;
+Date: Tue, 14 Nov 2023 10:19:51 -0500
+From: David Woodhouse <dwmw2@infradead.org>
+To: =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
+ David Woodhouse <dwmw@amazon.co.uk>, qemu-devel@nongnu.org
+CC: =?ISO-8859-1?Q?Alex_Benn=E9e?= <alex.bennee@linaro.org>,
+ Paul Durrant <paul@xen.org>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ xen-devel@lists.xenproject.org, qemu-block@nongnu.org,
+ Anthony Perard <anthony.perard@citrix.com>, kvm@vger.kernel.org,
+ Thomas Huth <thuth@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Beraldo Leal <bleal@redhat.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH-for-9=2E0_v2_01/19=5D_tests/avocado=3A_A?= =?US-ASCII?Q?dd_=27guest=3Axen=27_tag_to_tests_running_Xen_guest?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <04917b57-d778-41a2-b320-c8c0afbe9ffb@linaro.org>
+References: <20231114143816.71079-1-philmd@linaro.org> <20231114143816.71079-2-philmd@linaro.org> <94D9484A-917D-4970-98DE-35B84BEDA1DC@infradead.org> <407f32ee-e489-4c05-9c3d-fa6c29bb1d99@linaro.org> <074BCACF-C8D0-440A-A805-CDB0DB21C416@infradead.org> <04917b57-d778-41a2-b320-c8c0afbe9ffb@linaro.org>
+Message-ID: <37D11113-662D-49FD-B1F1-757217EAFEEA@infradead.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003443:EE_|DM4PR12MB5962:EE_
-X-MS-Office365-Filtering-Correlation-Id: f27ed917-e233-4a89-76de-08dbe5249639
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	ULCtQ1dPAxJPgeTiL1FNAKPcT1oE2Ox4/A/firGBilW12FY075ZKjEzeDi3Be7JKv1n9jThf1TYP3QQ7rJFbRTDCKVmV9ajfDzJEOd5eMxq6lFhsvPHMwk/r3qRCvo3oftg63f9dSgHuBniz5YjqjXsKbYwHqvhR0JGbpg0rDIfy0KE0OIraxDxeJXQolH09WWJlyehNYqCnDJv8cKPaLweFfBwGr5T+/bymQCgA9lBiNacvhrbPgMu/1CJMjoJscHA63YkJ5BIAKlzg8jKP3vF3bzovIANuJqA8O3dIxRGf3wNimcHbrICVRMLxI4AD0ATptC3VRV5DR6qLav7DEs804N8jV3qC7SEFza1XoKv8Hwfai0sHQ7P/kGuxWbyvWOXNbXUP0eBtbdPpohBflTrb14lLFgt++XATPa+SDNUjxQ+2hGJnvOKbG8THbcdKdMxkzupzQ+B0lFvYOCc/ImMe2sI2rFnSxj2Y0zcD5IZixD5p1M4/VWJxhObym7f7frJrGJOBL0doTy+Bb4+RM/qJ0yY1VLQT4HG+dT4iNroepGvNJ0ZNPC9Kk0cUkKMcS/yyHukPDwSiJ4F/RdXPJGNGstzA37rIbwr7QDhcMghbhSZ4fh007pXgXCjWh4UImtJaG/d7IV/Txhhnt2VvYxw9t44qNsZmbNTdWAv/yHhaRIfXkmJAc7STri1whWKwW9Y6sFEXz9bPxqgEE40cGw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(230922051799003)(451199024)(186009)(1800799009)(82310400011)(46966006)(36840700001)(54906003)(70206006)(70586007)(6916009)(86362001)(356005)(81166007)(36756003)(83380400001)(426003)(336012)(26005)(6666004)(1076003)(2616005)(36860700001)(2906002)(508600001)(316002)(8676002)(4326008)(47076005)(8936002)(5660300002)(44832011)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2023 15:15:50.2488
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f27ed917-e233-4a89-76de-08dbe5249639
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS2PEPF00003443.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5962
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-At the moment, in order to boot 32-bit images, we need to set BOOT_CMD
-to 'bootm' which results in adding a u-boot header on top of an image.
-Add 'bootz' to a list of supported boot commands, so that we can skip
-this extra step. In most cases, specifying 'bootm' should only be needed
-for images without Linux kernel Image/zImage header. Otherwise, we can
-use 'booti'/'bootz'.
+On 14 November 2023 10:13:14 GMT-05:00, "Philippe Mathieu-Daud=C3=A9" <phil=
+md@linaro=2Eorg> wrote:
+>On 14/11/23 16:08, David Woodhouse wrote:
+>> On 14 November 2023 10:00:09 GMT-05:00, "Philippe Mathieu-Daud=C3=A9" <=
+philmd@linaro=2Eorg> wrote:
+>>> On 14/11/23 15:50, David Woodhouse wrote:
+>>>> On 14 November 2023 09:37:57 GMT-05:00, "Philippe Mathieu-Daud=C3=A9"=
+ <philmd@linaro=2Eorg> wrote:
+>>>>> Add a tag to run all Xen-specific tests using:
+>>>>>=20
+>>>>>    $ make check-avocado AVOCADO_TAGS=3D'guest:xen'
+>>>>>=20
+>>>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro=2Eorg>
+>>>>> ---
+>>>>> tests/avocado/boot_xen=2Epy      | 3 +++
+>>>>> tests/avocado/kvm_xen_guest=2Epy | 1 +
+>>>>> 2 files changed, 4 insertions(+)
+>>>>=20
+>>>> Those two are very different=2E One runs on Xen, the other on KVM=2E =
+Do we want to use the same tag for both?
+>>>=20
+>>> My understanding is,
+>>> - boot_xen=2Epy runs Xen on TCG
+>>> - kvm_xen_guest=2Epy runs Xen on KVM
+>>> so both runs Xen guests=2E
+>>=20
+>> Does boot_xen=2Epy actually boot *Xen*? And presumably at least one Xen=
+ guest *within* Xen?
+>
+>I'll let Alex confirm, but yes, I expect Xen guest within Xen guest withi=
+n TCG=2E So the tags "accel:tcg" (already present) and "guest:xen"=2E
+>
+>> kvm_xen_guest=2Epy boots a "Xen guest" under KVM directly without any r=
+eal Xen being present=2E It's *emulating* Xen=2E
+>
+>Yes, so the tag "guest:xen" is correct=2E
+>
+>> They do both run Xen guests (or at least guests which use Xen hypercall=
+s and *think* they're running under Xen)=2E But is that the important class=
+ification for lumping them together?
+>
+>The idea of AVOCADO_TAGS is to restrict testing to what you want to cover=
+=2E So here this allow running 'anything that can run Xen guest'
+>in a single command, for example it is handy on my macOS aarch64 host=2E
 
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
- README.md                | 4 ++--
- scripts/uboot-script-gen | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+Ok, that makes sense then=2E Thanks for your patience=2E
 
-diff --git a/README.md b/README.md
-index fe5d2052cc69..3b4b16f1f7e4 100644
---- a/README.md
-+++ b/README.md
-@@ -80,8 +80,8 @@ Where:
-   though.
- 
- - BOOT_CMD specifies the u-boot command used to boot the binaries.
--  By default, it is 'booti'. The acceptable values are 'booti', 'bootm'
--  and 'bootefi' and 'none'. If the value is 'none', the BOOT_CMD is not
-+  By default, it is 'booti'. The acceptable values are 'booti', 'bootm',
-+  'bootz' and 'bootefi' and 'none'. If the value is 'none', the BOOT_CMD is not
-   added to the boot script, and the addresses for the Xen binary and the
-   DTB are stored in 'host_kernel_addr' and 'host_fdt_addr' u-boot
-   env variables respectively, to be used manually when booting.
-diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
-index 6e52da5e2aca..9e3d86e4743a 100755
---- a/scripts/uboot-script-gen
-+++ b/scripts/uboot-script-gen
-@@ -1041,7 +1041,7 @@ function check_depends()
- 
- function check_boot_cmd()
- {
--    if ! [[ " bootm booti bootefi none " =~ " ${BOOT_CMD}" ]]
-+    if ! [[ " bootm booti bootz bootefi none " =~ " ${BOOT_CMD}" ]]
-     then
-         echo "\"BOOT_CMD=$BOOT_CMD\" is not valid"
-         exit 1
--- 
-2.25.1
+Reviewed-by: David Woodhouse <dwmw@amazon=2Eco=2Euk>
 
 
