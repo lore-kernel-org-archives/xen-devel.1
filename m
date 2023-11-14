@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C56C07D59
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 17:57:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.633081.987613 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A2E8C07CB1
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 17:57:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.633093.987661 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfN-0000aJ-8J; Tue, 14 Nov 2023 17:57:37 +0000
+	id 1r2xfQ-0001ZB-3B; Tue, 14 Nov 2023 17:57:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 633081.987613; Tue, 14 Nov 2023 17:57:37 +0000
+Received: by outflank-mailman (output) from mailman id 633093.987661; Tue, 14 Nov 2023 17:57:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfN-0000Yj-2i; Tue, 14 Nov 2023 17:57:37 +0000
-Received: by outflank-mailman (input) for mailman id 633081;
- Tue, 14 Nov 2023 17:50:39 +0000
+	id 1r2xfP-0001VV-Lh; Tue, 14 Nov 2023 17:57:39 +0000
+Received: by outflank-mailman (input) for mailman id 633093;
+ Tue, 14 Nov 2023 17:50:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5HBD=G3=3mdeb.com=krystian.hebel@srs-se1.protection.inumbo.net>)
- id 1r2xYd-0004mK-H8
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:39 +0000
-Received: from 8.mo550.mail-out.ovh.net (8.mo550.mail-out.ovh.net
- [178.33.110.239]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5233b874-8316-11ee-98db-6d05b1d4d9a1;
- Tue, 14 Nov 2023 18:50:38 +0100 (CET)
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.16.30])
- by mo550.mail-out.ovh.net (Postfix) with ESMTP id 83145294F8
- for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:38 +0000 (UTC)
+ id 1r2xYh-0004mK-I0
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:43 +0000
+Received: from 15.mo583.mail-out.ovh.net (15.mo583.mail-out.ovh.net
+ [178.33.107.29]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 537c944b-8316-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 18:50:41 +0100 (CET)
+Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.4.72])
+ by mo583.mail-out.ovh.net (Postfix) with ESMTP id B4C18293F1
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:40 +0000 (UTC)
 Received: from ghost-submission-6684bf9d7b-x5j2z (unknown [10.110.115.90])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id EFD131FDF1;
- Tue, 14 Nov 2023 17:50:37 +0000 (UTC)
+ by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 487A31FE62;
+ Tue, 14 Nov 2023 17:50:40 +0000 (UTC)
 Received: from 3mdeb.com ([37.59.142.103])
  by ghost-submission-6684bf9d7b-x5j2z with ESMTPSA
- id CGqmN22zU2V/lwcATVRwWg
- (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:37 +0000
+ id 4KCTDnCzU2V/lwcATVRwWg
+ (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,8 +48,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5233b874-8316-11ee-98db-6d05b1d4d9a1
-Authentication-Results:garm.ovh; auth=pass (GARM-103G00598bb5702-cfe7-4f88-8cef-640e0a4e1820,
+X-Inumbo-ID: 537c944b-8316-11ee-98db-6d05b1d4d9a1
+Authentication-Results:garm.ovh; auth=pass (GARM-103G005915ed08e-a95f-4d03-acd7-52e44f105973,
                     1C6EC45AC3E1968723EBE40916FD99D0F8B07574) smtp.auth=krystian.hebel@3mdeb.com
 X-OVh-ClientIp:213.192.77.249
 From: Krystian Hebel <krystian.hebel@3mdeb.com>
@@ -59,124 +59,166 @@ Cc: Krystian Hebel <krystian.hebel@3mdeb.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 02/10] x86/boot: choose AP stack based on APIC ID
-Date: Tue, 14 Nov 2023 18:49:58 +0100
-Message-ID: <0e7dd957b6f26fa7b752bdce1ef6ebe97c825903.1699981248.git.krystian.hebel@3mdeb.com>
+Subject: [XEN PATCH 3/9] x86/smp: drop x86_cpu_to_apicid, use cpu_data[cpu].apicid instead
+Date: Tue, 14 Nov 2023 18:50:02 +0100
+Message-ID: <8121d9b472b305be751158aa3af3fed98ff0572e.1699982111.git.krystian.hebel@3mdeb.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <cover.1699981248.git.krystian.hebel@3mdeb.com>
-References: <cover.1699981248.git.krystian.hebel@3mdeb.com>
+In-Reply-To: <cover.1699982111.git.krystian.hebel@3mdeb.com>
+References: <cover.1699982111.git.krystian.hebel@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12929271583775369584
+X-Ovh-Tracer-Id: 12929834533636450672
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhgfdtvdeigedtvedvudehgefgkeefffetfeekkedthfdvveeiteduteehtedvgfenucffohhmrghinhepthhrrghmphholhhinhgvrdhssgdpgiekiegpieegrdhssgenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheehtddpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeehleekveevvdfhgeetlefhjedtjefgjedtkeekffeitdffkeffueetkedtgfeiueenucffohhmrghinhepgiekiegpieegrdhssgenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekfedpmhhouggvpehsmhhtphhouhht
 
-This is made as first step of making parallel AP bring-up possible. It
-should be enough for pre-C code.
+Both fields held the same data.
 
 Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 ---
- xen/arch/x86/boot/trampoline.S | 20 ++++++++++++++++++++
- xen/arch/x86/boot/x86_64.S     | 28 +++++++++++++++++++++++++++-
- xen/arch/x86/setup.c           |  7 +++++++
- 3 files changed, 54 insertions(+), 1 deletion(-)
+ xen/arch/x86/boot/x86_64.S           |  8 +++++---
+ xen/arch/x86/include/asm/asm_defns.h |  2 +-
+ xen/arch/x86/include/asm/processor.h |  2 ++
+ xen/arch/x86/include/asm/smp.h       |  4 ----
+ xen/arch/x86/numa.c                  | 15 +++++++--------
+ xen/arch/x86/smpboot.c               |  8 ++++----
+ xen/arch/x86/x86_64/asm-offsets.c    |  4 +++-
+ 7 files changed, 22 insertions(+), 21 deletions(-)
 
-diff --git a/xen/arch/x86/boot/trampoline.S b/xen/arch/x86/boot/trampoline.S
-index b8ab0ffdcbb0..ec254125016d 100644
---- a/xen/arch/x86/boot/trampoline.S
-+++ b/xen/arch/x86/boot/trampoline.S
-@@ -72,6 +72,26 @@ trampoline_protmode_entry:
-         mov     $X86_CR4_PAE,%ecx
-         mov     %ecx,%cr4
- 
-+        /*
-+         * Get APIC ID while we're in non-paged mode. Start by checking if
-+         * x2APIC is enabled.
-+         */
-+        mov     $MSR_APIC_BASE, %ecx
-+        rdmsr
-+        and     $APIC_BASE_EXTD, %eax
-+        jnz     .Lx2apic
-+
-+        /* Not x2APIC, read from MMIO */
-+        mov     0xfee00020, %esp
-+        shr     $24, %esp
-+        jmp     1f
-+
-+.Lx2apic:
-+        mov     $(MSR_X2APIC_FIRST + (0x20 >> 4)), %ecx
-+        rdmsr
-+        mov     %eax, %esp
-+1:
-+
-         /* Load pagetable base register. */
-         mov     $sym_offs(idle_pg_table),%eax
-         add     bootsym_rel(trampoline_xen_phys_start,4,%eax)
 diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
-index 04bb62ae8680..b85b47b5c1a0 100644
+index b85b47b5c1a0..195550b5c0ea 100644
 --- a/xen/arch/x86/boot/x86_64.S
 +++ b/xen/arch/x86/boot/x86_64.S
-@@ -15,7 +15,33 @@ ENTRY(__high_start)
-         mov     $XEN_MINIMAL_CR4,%rcx
-         mov     %rcx,%cr4
+@@ -20,15 +20,17 @@ ENTRY(__high_start)
+         jz      .L_stack_set
  
--        mov     stack_start(%rip),%rsp
-+        test    %ebx,%ebx
-+        cmovz   stack_start(%rip), %rsp
-+        jz      .L_stack_set
-+
-+        /* APs only: get stack base from APIC ID saved in %esp. */
-+        mov     $-1, %rax
-+        lea     x86_cpu_to_apicid(%rip), %rcx
-+1:
-+        add     $1, %rax
-+        cmp     $NR_CPUS, %eax
-+        jb      2f
-+        hlt
-+2:
-+        cmp     %esp, (%rcx, %rax, 4)
-+        jne     1b
-+
-+        /* %eax is now Xen CPU index. */
-+        lea     stack_base(%rip), %rcx
-+        mov     (%rcx, %rax, 8), %rsp
-+
-+        test    %rsp,%rsp
-+        jnz     1f
-+        hlt
-+1:
-+        add     $(STACK_SIZE - CPUINFO_sizeof), %rsp
-+
-+.L_stack_set:
+         /* APs only: get stack base from APIC ID saved in %esp. */
+-        mov     $-1, %rax
+-        lea     x86_cpu_to_apicid(%rip), %rcx
++        mov     $0, %rax
++        lea     cpu_data(%rip), %rcx
++        /* cpu_data[0] is BSP, skip it. */
+ 1:
+         add     $1, %rax
++        add     $CPUINFO_X86_sizeof, %rcx
+         cmp     $NR_CPUS, %eax
+         jb      2f
+         hlt
+ 2:
+-        cmp     %esp, (%rcx, %rax, 4)
++        cmp     %esp, CPUINFO_X86_apicid(%rcx)
+         jne     1b
  
-         /* Reset EFLAGS (subsumes CLI and CLD). */
-         pushq   $0
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index a3d3f797bb1e..1285969901e0 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1951,6 +1951,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-      */
-     if ( !pv_shim )
-     {
-+        /* Separate loop to make parallel AP bringup possible. */
-         for_each_present_cpu ( i )
-         {
-             /* Set up cpu_to_node[]. */
-@@ -1958,6 +1959,12 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-             /* Set up node_to_cpumask based on cpu_to_node[]. */
-             numa_add_cpu(i);
+         /* %eax is now Xen CPU index. */
+diff --git a/xen/arch/x86/include/asm/asm_defns.h b/xen/arch/x86/include/asm/asm_defns.h
+index baaaccb26e17..6b05d9d140b8 100644
+--- a/xen/arch/x86/include/asm/asm_defns.h
++++ b/xen/arch/x86/include/asm/asm_defns.h
+@@ -158,7 +158,7 @@ register unsigned long current_stack_pointer asm("rsp");
+ #endif
  
-+            if ( stack_base[i] == NULL )
-+                stack_base[i] = cpu_alloc_stack(i);
-+        }
+ #define CPUINFO_FEATURE_OFFSET(feature)           \
+-    (CPUINFO_features + (cpufeat_word(feature) * 4))
++    (CPUINFO_X86_features + (cpufeat_word(feature) * 4))
+ 
+ #else
+ 
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index b0d2a62c075f..8345d58094da 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -92,6 +92,8 @@ struct x86_cpu_id {
+ extern struct cpuinfo_x86 cpu_data[];
+ #define current_cpu_data cpu_data[smp_processor_id()]
+ 
++#define cpu_physical_id(cpu)	cpu_data[cpu].apicid
 +
-+        for_each_present_cpu ( i )
-+        {
-             if ( (park_offline_cpus || num_online_cpus() < max_cpus) &&
-                  !cpu_online(i) )
-             {
+ extern bool probe_cpuid_faulting(void);
+ extern void ctxt_switch_levelling(const struct vcpu *next);
+ extern void (*ctxt_switch_masking)(const struct vcpu *next);
+diff --git a/xen/arch/x86/include/asm/smp.h b/xen/arch/x86/include/asm/smp.h
+index c0b5d7cdd8dd..94c557491860 100644
+--- a/xen/arch/x86/include/asm/smp.h
++++ b/xen/arch/x86/include/asm/smp.h
+@@ -39,10 +39,6 @@ extern void (*mtrr_hook) (void);
+ 
+ extern void zap_low_mappings(void);
+ 
+-extern u32 x86_cpu_to_apicid[];
+-
+-#define cpu_physical_id(cpu)	x86_cpu_to_apicid[cpu]
+-
+ #define cpu_is_offline(cpu) unlikely(!cpu_online(cpu))
+ extern void cpu_exit_clear(unsigned int cpu);
+ extern void cpu_uninit(unsigned int cpu);
+diff --git a/xen/arch/x86/numa.c b/xen/arch/x86/numa.c
+index 39e131cb4f35..91527be5b406 100644
+--- a/xen/arch/x86/numa.c
++++ b/xen/arch/x86/numa.c
+@@ -54,14 +54,13 @@ bool __init arch_numa_unavailable(void)
+ /*
+  * Setup early cpu_to_node.
+  *
+- * Populate cpu_to_node[] only if x86_cpu_to_apicid[],
+- * and apicid_to_node[] tables have valid entries for a CPU.
+- * This means we skip cpu_to_node[] initialisation for NUMA
+- * emulation and faking node case (when running a kernel compiled
+- * for NUMA on a non NUMA box), which is OK as cpu_to_node[]
+- * is already initialized in a round robin manner at numa_init_array,
+- * prior to this call, and this initialization is good enough
+- * for the fake NUMA cases.
++ * Populate cpu_to_node[] only if cpu_data[], and apicid_to_node[]
++ * tables have valid entries for a CPU. This means we skip
++ * cpu_to_node[] initialisation for NUMA emulation and faking node
++ * case (when running a kernel compiled for NUMA on a non NUMA box),
++ * which is OK as cpu_to_node[] is already initialized in a round
++ * robin manner at numa_init_array, prior to this call, and this
++ * initialization is good enough for the fake NUMA cases.
+  */
+ void __init init_cpu_to_node(void)
+ {
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index de87c5a41926..f061486e56eb 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -61,10 +61,8 @@ unsigned int __read_mostly nr_sockets;
+ cpumask_t **__read_mostly socket_cpumask;
+ static cpumask_t *secondary_socket_cpumask;
+ 
+-struct cpuinfo_x86 cpu_data[NR_CPUS];
+-
+-u32 x86_cpu_to_apicid[NR_CPUS] __read_mostly =
+-	{ [0 ... NR_CPUS-1] = BAD_APICID };
++struct cpuinfo_x86 cpu_data[NR_CPUS] =
++        { [0 ... NR_CPUS-1] .apicid = BAD_APICID };
+ 
+ static int cpu_error;
+ static enum cpu_state {
+@@ -81,7 +79,9 @@ void *stack_base[NR_CPUS];
+ 
+ void initialize_cpu_data(unsigned int cpu)
+ {
++    uint32_t apicid = cpu_physical_id(cpu);
+     cpu_data[cpu] = boot_cpu_data;
++    cpu_physical_id(cpu) = apicid;
+ }
+ 
+ static bool smp_store_cpu_info(unsigned int id)
+diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
+index 57b73a4e6214..e881cd5de0a0 100644
+--- a/xen/arch/x86/x86_64/asm-offsets.c
++++ b/xen/arch/x86/x86_64/asm-offsets.c
+@@ -159,7 +159,9 @@ void __dummy__(void)
+     OFFSET(IRQSTAT_softirq_pending, irq_cpustat_t, __softirq_pending);
+     BLANK();
+ 
+-    OFFSET(CPUINFO_features, struct cpuinfo_x86, x86_capability);
++    OFFSET(CPUINFO_X86_features, struct cpuinfo_x86, x86_capability);
++    OFFSET(CPUINFO_X86_apicid, struct cpuinfo_x86, apicid);
++    DEFINE(CPUINFO_X86_sizeof, sizeof(struct cpuinfo_x86));
+     BLANK();
+ 
+     OFFSET(MB_flags, multiboot_info_t, flags);
 -- 
 2.41.0
 
