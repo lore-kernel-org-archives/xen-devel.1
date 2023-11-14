@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E0DC4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 16:32:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.632947.987512 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74BC0C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 16:40:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.632973.987521 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2wKq-000623-VW; Tue, 14 Nov 2023 16:32:20 +0000
+	id 1r2wSe-0004OB-Ub; Tue, 14 Nov 2023 16:40:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 632947.987512; Tue, 14 Nov 2023 16:32:20 +0000
+Received: by outflank-mailman (output) from mailman id 632973.987521; Tue, 14 Nov 2023 16:40:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2wKq-00061u-RT; Tue, 14 Nov 2023 16:32:20 +0000
-Received: by outflank-mailman (input) for mailman id 632947;
- Tue, 14 Nov 2023 16:32:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=6V1E=G3=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1r2wKp-0002h9-Ly
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 16:32:19 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5fdbd3cf-830b-11ee-9b0e-b553b5be7939;
- Tue, 14 Nov 2023 17:32:17 +0100 (CET)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9d0b4dfd60dso875144566b.1
- for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 08:32:17 -0800 (PST)
-Received: from m1x-phil.lan (cac94-h02-176-184-25-155.dsl.sta.abo.bbox.fr.
- [176.184.25.155]) by smtp.gmail.com with ESMTPSA id
- s12-20020a1709066c8c00b0099cd008c1a4sm5788138ejr.136.2023.11.14.08.32.14
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 14 Nov 2023 08:32:16 -0800 (PST)
+	id 1r2wSe-0004O4-Rs; Tue, 14 Nov 2023 16:40:24 +0000
+Received: by outflank-mailman (input) for mailman id 632973;
+ Tue, 14 Nov 2023 16:40:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=krWi=G3=mg.gitlab.com=bounce+c66dc3.947b4-xen-devel=lists.xenproject.org@srs-se1.protection.inumbo.net>)
+ id 1r2wSd-0004Ms-FR
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 16:40:23 +0000
+Received: from m202-219.mailgun.net (m202-219.mailgun.net [161.38.202.219])
+ by se1-gles-sth1.inumbo.com (Halon) with UTF8SMTPS
+ id 8014940e-830c-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 17:40:22 +0100 (CET)
+Received: from mg.gitlab.com (16.226.74.34.bc.googleusercontent.com
+ [34.74.226.16]) by
+ 1e90be7af010 with SMTP id 6553a2f3fdb0b5accaf24aee (version=TLS1.3,
+ cipher=TLS_AES_128_GCM_SHA256); Tue, 14 Nov 2023 16:40:19 GMT
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,1103 +41,489 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5fdbd3cf-830b-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1699979537; x=1700584337; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fBoLjADQF92oUz8YGjrCFJ5vAIgrltjc0XkKGW8dGlc=;
-        b=YGlkzW7+UUuHZbgWRszP1Okvh2X3JotR5IEHlRam07sMXB3o9NVe/IWN4o9BwGvcso
-         9QzdCoiWw26rNv3cXt6B5bPr9jv5Sci1l2FGHl6gMq8reQWoGjNNHvFYMyCzYg5JXsfp
-         EIzRWEPZeKH7dQxzkEMZ7kUR0RWvVK9ztRAVmCG9kPmfpTY6CC4ZZwMq4vR2GFr/hshT
-         9ZUrhkDhG8u5vnLVm+LHuo/vcJLO4STYLgAO9dOM6OQmglEKLiOW8BOkJc1kpw+hJaVz
-         nLWlZIK4FZt8TEuARf7HjUwq3ln3sDdRa56mOg1JZYR61Nh8A3SgISuNxrS8QXtXdIHc
-         vYww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699979537; x=1700584337;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fBoLjADQF92oUz8YGjrCFJ5vAIgrltjc0XkKGW8dGlc=;
-        b=rjZYHQz1ZvgHLRBLFAzR49/qj8bftz9KjSy43mYutf03W8qwL4uN1kG92zoBDcxCsv
-         gVtSLJd47ha9/wFeyqwRaDBzHHxYBOHTNICUWzZUwcUBuDX3ubImVn5XE8BJXbO+uaEl
-         j3KLdkRI4unPted5D+b30ge/l+yes5Fnp+F+YEUYliOshSa/lnVZzYj1FHP0NM6/1QFc
-         ecDKhyG0j2+egxrSS7rAJv34YV4nMuPunMYGuPOMNmcavBE+IWT5mE4l1DMp2ddHnm5G
-         anqWXSQYe9ws9LkYVcyFa0XQcwdNwsZ9u5OuTNxK6zcha0AF//MIjoKY2BEBxiJty4AY
-         Bq+w==
-X-Gm-Message-State: AOJu0YxTFRE9ycyMDzNn/hHqu4spqYR6nduTbW++DPkt6k+w12r48OVP
-	HsIePbmjptca9k2S0SF6sY0W2A==
-X-Google-Smtp-Source: AGHT+IHCzaPi5Ki96YFTxblFzU9hUvvVJMXhVG8xP2TJoi7bkBVxcUKkybZuFBTY+HQf7VLJRu7P5A==
-X-Received: by 2002:a17:906:dc9:b0:9d4:84b6:8709 with SMTP id p9-20020a1709060dc900b009d484b68709mr6908245eji.58.1699979536701;
-        Tue, 14 Nov 2023 08:32:16 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	Thomas Huth <thuth@redhat.com>,
-	qemu-arm@nongnu.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	xen-devel@lists.xenproject.org,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Eduardo Habkost <eduardo@habkost.net>
-Subject: [RFC PATCH-for-9.0 8/9] hw/xen/hvm: Merge xen-hvm-common.c files
-Date: Tue, 14 Nov 2023 17:31:22 +0100
-Message-ID: <20231114163123.74888-9-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231114163123.74888-1-philmd@linaro.org>
-References: <20231114163123.74888-1-philmd@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 8014940e-830c-11ee-98db-6d05b1d4d9a1
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.gitlab.com;
+ q=dns/txt; s=mailo; t=1699980019; x=1699987219; h=List-Id:
+ Content-Transfer-Encoding: Content-Type: Mime-Version: Subject: Subject:
+ Message-ID: To: To: Reply-To: From: From: Date: Sender: Sender;
+ bh=zw4mjoYYxSd4TcKUyOOmPsZ0O3B7GIdD7J925d1NkEc=;
+ b=OInCr+dOFQKKImJ7Wid2mGaRI7Qls7QX8ufR0XWA96g6ScY+E4wwnXyKuG18VPCMnCRpKdFFIKrvtr+CHyo7ahomM3KE+USCV4QnmbT9nnFEmUZRbcyNbtYsnKhswlHU242EgtnsAjEEDzCYH3WNVOsHdEdjboDoZAT8W6pjT6k=
+X-Mailgun-Sending-Ip: 161.38.202.219
+X-Mailgun-Sid: WyI4YjA3MiIsInhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyIsIjk0N2I0Il0=
+Sender: gitlab@mg.gitlab.com
+Date: Tue, 14 Nov 2023 16:40:19 +0000
+From: GitLab <gitlab@mg.gitlab.com>
+Reply-To: GitLab <noreply@gitlab.com>
+To: xen-devel@lists.xenproject.org
+Message-ID: <6553a2f317d17_2c9ada8153767@gitlab-sidekiq-catchall-v2-69dcfbdb95-kzgzd.mail>
+Subject: xen | Failed pipeline for staging-4.17 | 0527bab0
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_6553a2f3a69f_2c9ada815364d";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-GitLab-Project: xen
+X-GitLab-Project-Id: 2336572
+X-GitLab-Project-Path: xen-project/xen
+X-GitLab-Pipeline-Id: 1071977342
+X-GitLab-Pipeline-Ref: staging-4.17
+X-GitLab-Pipeline-Status: failed
+Auto-Submitted: auto-generated
+X-Auto-Response-Suppress: All
 
-hw/i386/xen/xen-hvm-common.c content is target agnostic,
-and should be common to all targets. Merge both files.
-Remove the now unnecessary xen_register_framebuffer() stub.
+----==_mimepart_6553a2f3a69f_2c9ada815364d
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-ARM targets now inherit the common xen_memory_listener.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- hw/arm/xen_arm.c             |  24 --
- hw/i386/xen/xen-hvm-common.c | 473 -----------------------------------
- hw/xen/xen-hvm-common.c      | 458 +++++++++++++++++++++++++++++++++
- stubs/xen-hw-stub.c          |   4 -
- hw/i386/xen/meson.build      |   1 -
- 5 files changed, 458 insertions(+), 502 deletions(-)
- delete mode 100644 hw/i386/xen/xen-hvm-common.c
 
-diff --git a/hw/arm/xen_arm.c b/hw/arm/xen_arm.c
-index 39dcd74d07..0ead84c9e1 100644
---- a/hw/arm/xen_arm.c
-+++ b/hw/arm/xen_arm.c
-@@ -38,17 +38,6 @@
- #define TYPE_XEN_ARM  MACHINE_TYPE_NAME("xenpvh")
- OBJECT_DECLARE_SIMPLE_TYPE(XenArmState, XEN_ARM)
- 
--const MemoryListener xen_memory_listener = {
--    .region_add = xen_region_add,
--    .region_del = xen_region_del,
--    .log_start = NULL,
--    .log_stop = NULL,
--    .log_sync = NULL,
--    .log_global_start = NULL,
--    .log_global_stop = NULL,
--    .priority = MEMORY_LISTENER_PRIORITY_ACCEL,
--};
--
- struct XenArmState {
-     /*< private >*/
-     MachineState parent;
-@@ -136,19 +125,6 @@ void xen_arch_handle_ioreq(XenIOState *state, ioreq_t *req)
-     return;
- }
- 
--void xen_arch_set_memory(XenIOState *state, MemoryRegionSection *section,
--                         bool add)
--{
--}
--
--void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
--{
--}
--
--void qmp_xen_set_global_dirty_log(bool enable, Error **errp)
--{
--}
--
- #ifdef CONFIG_TPM
- static void xen_enable_tpm(XenArmState *xam)
- {
-diff --git a/hw/i386/xen/xen-hvm-common.c b/hw/i386/xen/xen-hvm-common.c
-deleted file mode 100644
-index e8ef0e0c94..0000000000
---- a/hw/i386/xen/xen-hvm-common.c
-+++ /dev/null
-@@ -1,473 +0,0 @@
--/*
-- * Copyright (C) 2010       Citrix Ltd.
-- *
-- * This work is licensed under the terms of the GNU GPL, version 2.  See
-- * the COPYING file in the top-level directory.
-- *
-- * Contributions after 2012-01-13 are licensed under the terms of the
-- * GNU GPL, version 2 or (at your option) any later version.
-- */
--
--#include "qemu/osdep.h"
--#include "qemu/range.h"
--#include "qapi/qapi-commands-migration.h"
--#include "exec/target_page.h"
--#include "hw/xen/xen-hvm-common.h"
--#include "trace.h"
--
--static MemoryRegion *framebuffer;
--static bool xen_in_migration;
--
--static QLIST_HEAD(, XenPhysmap) xen_physmap;
--static const XenPhysmap *log_for_dirtybit;
--/* Buffer used by xen_sync_dirty_bitmap */
--static unsigned long *dirty_bitmap;
--
--static XenPhysmap *get_physmapping(hwaddr start_addr, ram_addr_t size,
--                                   int page_mask)
--{
--    XenPhysmap *physmap = NULL;
--
--    start_addr &= -page_mask;
--
--    QLIST_FOREACH(physmap, &xen_physmap, list) {
--        if (range_covers_byte(physmap->start_addr, physmap->size, start_addr)) {
--            return physmap;
--        }
--    }
--    return NULL;
--}
--
--static hwaddr xen_phys_offset_to_gaddr(hwaddr phys_offset, ram_addr_t size,
--                                       int page_mask)
--{
--    hwaddr addr = phys_offset & -page_mask;
--    XenPhysmap *physmap = NULL;
--
--    QLIST_FOREACH(physmap, &xen_physmap, list) {
--        if (range_covers_byte(physmap->phys_offset, physmap->size, addr)) {
--            return physmap->start_addr + (phys_offset - physmap->phys_offset);
--        }
--    }
--
--    return phys_offset;
--}
--
--#ifdef XEN_COMPAT_PHYSMAP
--static int xen_save_physmap(XenIOState *state, XenPhysmap *physmap)
--{
--    char path[80], value[17];
--
--    snprintf(path, sizeof(path),
--            "/local/domain/0/device-model/%d/physmap/%"PRIx64"/start_addr",
--            xen_domid, (uint64_t)physmap->phys_offset);
--    snprintf(value, sizeof(value), "%"PRIx64, (uint64_t)physmap->start_addr);
--    if (!xs_write(state->xenstore, 0, path, value, strlen(value))) {
--        return -1;
--    }
--    snprintf(path, sizeof(path),
--            "/local/domain/0/device-model/%d/physmap/%"PRIx64"/size",
--            xen_domid, (uint64_t)physmap->phys_offset);
--    snprintf(value, sizeof(value), "%"PRIx64, (uint64_t)physmap->size);
--    if (!xs_write(state->xenstore, 0, path, value, strlen(value))) {
--        return -1;
--    }
--    if (physmap->name) {
--        snprintf(path, sizeof(path),
--                "/local/domain/0/device-model/%d/physmap/%"PRIx64"/name",
--                xen_domid, (uint64_t)physmap->phys_offset);
--        if (!xs_write(state->xenstore, 0, path,
--                      physmap->name, strlen(physmap->name))) {
--            return -1;
--        }
--    }
--    return 0;
--}
--#else
--static int xen_save_physmap(XenIOState *state, XenPhysmap *physmap)
--{
--    return 0;
--}
--#endif
--
--static int xen_add_to_physmap(XenIOState *state,
--                              hwaddr start_addr,
--                              ram_addr_t size,
--                              MemoryRegion *mr,
--                              hwaddr offset_within_region)
--{
--    unsigned target_page_bits = qemu_target_page_bits();
--    int page_size = qemu_target_page_size();
--    int page_mask = -page_size;
--    unsigned long nr_pages;
--    int rc = 0;
--    XenPhysmap *physmap = NULL;
--    hwaddr pfn, start_gpfn;
--    hwaddr phys_offset = memory_region_get_ram_addr(mr);
--    const char *mr_name;
--
--    if (get_physmapping(start_addr, size, page_mask)) {
--        return 0;
--    }
--    if (size <= 0) {
--        return -1;
--    }
--
--    /* Xen can only handle a single dirty log region for now and we want
--     * the linear framebuffer to be that region.
--     * Avoid tracking any regions that is not videoram and avoid tracking
--     * the legacy vga region. */
--    if (mr == framebuffer && start_addr > 0xbffff) {
--        goto go_physmap;
--    }
--    return -1;
--
--go_physmap:
--    DPRINTF("mapping vram to %"HWADDR_PRIx" - %"HWADDR_PRIx"\n",
--            start_addr, start_addr + size);
--
--    mr_name = memory_region_name(mr);
--
--    physmap = g_new(XenPhysmap, 1);
--
--    physmap->start_addr = start_addr;
--    physmap->size = size;
--    physmap->name = mr_name;
--    physmap->phys_offset = phys_offset;
--
--    QLIST_INSERT_HEAD(&xen_physmap, physmap, list);
--
--    if (runstate_check(RUN_STATE_INMIGRATE)) {
--        /* Now when we have a physmap entry we can replace a dummy mapping with
--         * a real one of guest foreign memory. */
--        uint8_t *p = xen_replace_cache_entry(phys_offset, start_addr, size);
--        assert(p && p == memory_region_get_ram_ptr(mr));
--
--        return 0;
--    }
--
--    pfn = phys_offset >> target_page_bits;
--    start_gpfn = start_addr >> target_page_bits;
--    nr_pages = size >> target_page_bits;
--    rc = xendevicemodel_relocate_memory(xen_dmod, xen_domid, nr_pages, pfn,
--                                        start_gpfn);
--    if (rc) {
--        int saved_errno = errno;
--
--        error_report("relocate_memory %lu pages from GFN %"HWADDR_PRIx
--                     " to GFN %"HWADDR_PRIx" failed: %s",
--                     nr_pages, pfn, start_gpfn, strerror(saved_errno));
--        errno = saved_errno;
--        return -1;
--    }
--
--    rc = xendevicemodel_pin_memory_cacheattr(xen_dmod, xen_domid,
--                                   start_addr >> target_page_bits,
--                                   (start_addr + size - 1) >> target_page_bits,
--                                   XEN_DOMCTL_MEM_CACHEATTR_WB);
--    if (rc) {
--        error_report("pin_memory_cacheattr failed: %s", strerror(errno));
--    }
--    return xen_save_physmap(state, physmap);
--}
--
--static int xen_remove_from_physmap(XenIOState *state,
--                                   hwaddr start_addr,
--                                   ram_addr_t size)
--{
--    unsigned target_page_bits = qemu_target_page_bits();
--    int page_size = qemu_target_page_size();
--    int page_mask = -page_size;
--    int rc = 0;
--    XenPhysmap *physmap = NULL;
--    hwaddr phys_offset = 0;
--
--    physmap = get_physmapping(start_addr, size, page_mask);
--    if (physmap == NULL) {
--        return -1;
--    }
--
--    phys_offset = physmap->phys_offset;
--    size = physmap->size;
--
--    DPRINTF("unmapping vram to %"HWADDR_PRIx" - %"HWADDR_PRIx", at "
--            "%"HWADDR_PRIx"\n", start_addr, start_addr + size, phys_offset);
--
--    size >>= target_page_bits;
--    start_addr >>= target_page_bits;
--    phys_offset >>= target_page_bits;
--    rc = xendevicemodel_relocate_memory(xen_dmod, xen_domid, size, start_addr,
--                                        phys_offset);
--    if (rc) {
--        int saved_errno = errno;
--
--        error_report("relocate_memory "RAM_ADDR_FMT" pages"
--                     " from GFN %"HWADDR_PRIx
--                     " to GFN %"HWADDR_PRIx" failed: %s",
--                     size, start_addr, phys_offset, strerror(saved_errno));
--        errno = saved_errno;
--        return -1;
--    }
--
--    QLIST_REMOVE(physmap, list);
--    if (log_for_dirtybit == physmap) {
--        log_for_dirtybit = NULL;
--        g_free(dirty_bitmap);
--        dirty_bitmap = NULL;
--    }
--    g_free(physmap);
--
--    return 0;
--}
--
--static void xen_sync_dirty_bitmap(XenIOState *state,
--                                  hwaddr start_addr,
--                                  ram_addr_t size)
--{
--    unsigned target_page_bits = qemu_target_page_bits();
--    int page_size = qemu_target_page_size();
--    int page_mask = -page_size;
--    hwaddr npages = size >> target_page_bits;
--    const int width = sizeof(unsigned long) * 8;
--    size_t bitmap_size = DIV_ROUND_UP(npages, width);
--    int rc, i, j;
--    const XenPhysmap *physmap = NULL;
--
--    physmap = get_physmapping(start_addr, size, page_mask);
--    if (physmap == NULL) {
--        /* not handled */
--        return;
--    }
--
--    if (log_for_dirtybit == NULL) {
--        log_for_dirtybit = physmap;
--        dirty_bitmap = g_new(unsigned long, bitmap_size);
--    } else if (log_for_dirtybit != physmap) {
--        /* Only one range for dirty bitmap can be tracked. */
--        return;
--    }
--
--    rc = xen_track_dirty_vram(xen_domid, start_addr >> target_page_bits,
--                              npages, dirty_bitmap);
--    if (rc < 0) {
--#ifndef ENODATA
--#define ENODATA  ENOENT
--#endif
--        if (errno == ENODATA) {
--            memory_region_set_dirty(framebuffer, 0, size);
--            DPRINTF("xen: track_dirty_vram failed (0x" HWADDR_FMT_plx
--                    ", 0x" HWADDR_FMT_plx "): %s\n",
--                    start_addr, start_addr + size, strerror(errno));
--        }
--        return;
--    }
--
--    for (i = 0; i < bitmap_size; i++) {
--        unsigned long map = dirty_bitmap[i];
--        while (map != 0) {
--            j = ctzl(map);
--            map &= ~(1ul << j);
--            memory_region_set_dirty(framebuffer,
--                                    (i * width + j) * page_size,
--                                    page_size);
--        };
--    }
--}
--
--static void xen_log_start(MemoryListener *listener,
--                          MemoryRegionSection *section,
--                          int old, int new)
--{
--    XenIOState *state = container_of(listener, XenIOState, memory_listener);
--
--    if (new & ~old & (1 << DIRTY_MEMORY_VGA)) {
--        xen_sync_dirty_bitmap(state, section->offset_within_address_space,
--                              int128_get64(section->size));
--    }
--}
--
--static void xen_log_stop(MemoryListener *listener, MemoryRegionSection *section,
--                         int old, int new)
--{
--    if (old & ~new & (1 << DIRTY_MEMORY_VGA)) {
--        log_for_dirtybit = NULL;
--        g_free(dirty_bitmap);
--        dirty_bitmap = NULL;
--        /* Disable dirty bit tracking */
--        xen_track_dirty_vram(xen_domid, 0, 0, NULL);
--    }
--}
--
--static void xen_log_sync(MemoryListener *listener, MemoryRegionSection *section)
--{
--    XenIOState *state = container_of(listener, XenIOState, memory_listener);
--
--    xen_sync_dirty_bitmap(state, section->offset_within_address_space,
--                          int128_get64(section->size));
--}
--
--static void xen_log_global_start(MemoryListener *listener)
--{
--    if (xen_enabled()) {
--        xen_in_migration = true;
--    }
--}
--
--static void xen_log_global_stop(MemoryListener *listener)
--{
--    xen_in_migration = false;
--}
--
--const MemoryListener xen_memory_listener = {
--    .name = "xen-memory",
--    .region_add = xen_region_add,
--    .region_del = xen_region_del,
--    .log_start = xen_log_start,
--    .log_stop = xen_log_stop,
--    .log_sync = xen_log_sync,
--    .log_global_start = xen_log_global_start,
--    .log_global_stop = xen_log_global_stop,
--    .priority = MEMORY_LISTENER_PRIORITY_ACCEL,
--};
--
--#ifdef XEN_COMPAT_PHYSMAP
--void xen_read_physmap(XenIOState *state)
--{
--    XenPhysmap *physmap = NULL;
--    unsigned int len, num, i;
--    char path[80], *value = NULL;
--    char **entries = NULL;
--
--    QLIST_INIT(&xen_physmap);
--
--    snprintf(path, sizeof(path),
--            "/local/domain/0/device-model/%d/physmap", xen_domid);
--    entries = xs_directory(state->xenstore, 0, path, &num);
--    if (entries == NULL)
--        return;
--
--    for (i = 0; i < num; i++) {
--        physmap = g_new(XenPhysmap, 1);
--        physmap->phys_offset = strtoull(entries[i], NULL, 16);
--        snprintf(path, sizeof(path),
--                "/local/domain/0/device-model/%d/physmap/%s/start_addr",
--                xen_domid, entries[i]);
--        value = xs_read(state->xenstore, 0, path, &len);
--        if (value == NULL) {
--            g_free(physmap);
--            continue;
--        }
--        physmap->start_addr = strtoull(value, NULL, 16);
--        free(value);
--
--        snprintf(path, sizeof(path),
--                "/local/domain/0/device-model/%d/physmap/%s/size",
--                xen_domid, entries[i]);
--        value = xs_read(state->xenstore, 0, path, &len);
--        if (value == NULL) {
--            g_free(physmap);
--            continue;
--        }
--        physmap->size = strtoull(value, NULL, 16);
--        free(value);
--
--        snprintf(path, sizeof(path),
--                "/local/domain/0/device-model/%d/physmap/%s/name",
--                xen_domid, entries[i]);
--        physmap->name = xs_read(state->xenstore, 0, path, &len);
--
--        QLIST_INSERT_HEAD(&xen_physmap, physmap, list);
--    }
--    free(entries);
--}
--#else
--void xen_read_physmap(XenIOState *state)
--{
--    QLIST_INIT(&xen_physmap);
--}
--#endif
--
--void xen_register_framebuffer(MemoryRegion *mr)
--{
--    framebuffer = mr;
--}
--
--void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
--{
--    unsigned target_page_bits = qemu_target_page_bits();
--    int page_size = qemu_target_page_size();
--    int page_mask = -page_size;
--
--    if (unlikely(xen_in_migration)) {
--        int rc;
--        ram_addr_t start_pfn, nb_pages;
--
--        start = xen_phys_offset_to_gaddr(start, length, page_mask);
--
--        if (length == 0) {
--            length = page_size;
--        }
--        start_pfn = start >> target_page_bits;
--        nb_pages = ((start + length + page_size - 1) >> target_page_bits)
--            - start_pfn;
--        rc = xen_modified_memory(xen_domid, start_pfn, nb_pages);
--        if (rc) {
--            fprintf(stderr,
--                    "%s failed for "RAM_ADDR_FMT" ("RAM_ADDR_FMT"): %i, %s\n",
--                    __func__, start, nb_pages, errno, strerror(errno));
--        }
--    }
--}
--
--void qmp_xen_set_global_dirty_log(bool enable, Error **errp)
--{
--    if (enable) {
--        memory_global_dirty_log_start(GLOBAL_DIRTY_MIGRATION);
--    } else {
--        memory_global_dirty_log_stop(GLOBAL_DIRTY_MIGRATION);
--    }
--}
--
--void xen_arch_set_memory(XenIOState *state, MemoryRegionSection *section,
--                         bool add)
--{
--    unsigned target_page_bits = qemu_target_page_bits();
--    int page_size = qemu_target_page_size();
--    int page_mask = -page_size;
--    hwaddr start_addr = section->offset_within_address_space;
--    ram_addr_t size = int128_get64(section->size);
--    bool log_dirty = memory_region_is_logging(section->mr, DIRTY_MEMORY_VGA);
--    hvmmem_type_t mem_type;
--
--    if (!memory_region_is_ram(section->mr)) {
--        return;
--    }
--
--    if (log_dirty != add) {
--        return;
--    }
--
--    trace_xen_client_set_memory(start_addr, size, log_dirty);
--
--    start_addr &= page_mask;
--    size = ROUND_UP(size, page_size);
--
--    if (add) {
--        if (!memory_region_is_rom(section->mr)) {
--            xen_add_to_physmap(state, start_addr, size,
--                               section->mr, section->offset_within_region);
--        } else {
--            mem_type = HVMMEM_ram_ro;
--            if (xen_set_mem_type(xen_domid, mem_type,
--                                 start_addr >> target_page_bits,
--                                 size >> target_page_bits)) {
--                DPRINTF("xen_set_mem_type error, addr: "HWADDR_FMT_plx"\n",
--                        start_addr);
--            }
--        }
--    } else {
--        if (xen_remove_from_physmap(state, start_addr, size) < 0) {
--            DPRINTF("physmapping does not exist at "HWADDR_FMT_plx"\n", start_addr);
--        }
--    }
--}
-diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
-index 73fa2c414d..50ce45effc 100644
---- a/hw/xen/xen-hvm-common.c
-+++ b/hw/xen/xen-hvm-common.c
-@@ -1,7 +1,9 @@
- #include "qemu/osdep.h"
- #include "qemu/units.h"
- #include "qemu/bitops.h"
-+#include "qemu/range.h"
- #include "qapi/error.h"
-+#include "qapi/qapi-commands-migration.h"
- #include "exec/target_page.h"
- #include "trace.h"
- 
-@@ -11,6 +13,462 @@
- #include "hw/boards.h"
- 
- MemoryRegion xen_memory;
-+static MemoryRegion *framebuffer;
-+static bool xen_in_migration;
-+
-+static QLIST_HEAD(, XenPhysmap) xen_physmap;
-+static const XenPhysmap *log_for_dirtybit;
-+/* Buffer used by xen_sync_dirty_bitmap */
-+static unsigned long *dirty_bitmap;
-+
-+static XenPhysmap *get_physmapping(hwaddr start_addr, ram_addr_t size,
-+                                   int page_mask)
-+{
-+    XenPhysmap *physmap = NULL;
-+
-+    start_addr &= -page_mask;
-+
-+    QLIST_FOREACH(physmap, &xen_physmap, list) {
-+        if (range_covers_byte(physmap->start_addr, physmap->size, start_addr)) {
-+            return physmap;
-+        }
-+    }
-+    return NULL;
-+}
-+
-+static hwaddr xen_phys_offset_to_gaddr(hwaddr phys_offset, ram_addr_t size,
-+                                       int page_mask)
-+{
-+    hwaddr addr = phys_offset & -page_mask;
-+    XenPhysmap *physmap = NULL;
-+
-+    QLIST_FOREACH(physmap, &xen_physmap, list) {
-+        if (range_covers_byte(physmap->phys_offset, physmap->size, addr)) {
-+            return physmap->start_addr + (phys_offset - physmap->phys_offset);
-+        }
-+    }
-+
-+    return phys_offset;
-+}
-+
-+#ifdef XEN_COMPAT_PHYSMAP
-+static int xen_save_physmap(XenIOState *state, XenPhysmap *physmap)
-+{
-+    char path[80], value[17];
-+
-+    snprintf(path, sizeof(path),
-+            "/local/domain/0/device-model/%d/physmap/%"PRIx64"/start_addr",
-+            xen_domid, (uint64_t)physmap->phys_offset);
-+    snprintf(value, sizeof(value), "%"PRIx64, (uint64_t)physmap->start_addr);
-+    if (!xs_write(state->xenstore, 0, path, value, strlen(value))) {
-+        return -1;
-+    }
-+    snprintf(path, sizeof(path),
-+            "/local/domain/0/device-model/%d/physmap/%"PRIx64"/size",
-+            xen_domid, (uint64_t)physmap->phys_offset);
-+    snprintf(value, sizeof(value), "%"PRIx64, (uint64_t)physmap->size);
-+    if (!xs_write(state->xenstore, 0, path, value, strlen(value))) {
-+        return -1;
-+    }
-+    if (physmap->name) {
-+        snprintf(path, sizeof(path),
-+                "/local/domain/0/device-model/%d/physmap/%"PRIx64"/name",
-+                xen_domid, (uint64_t)physmap->phys_offset);
-+        if (!xs_write(state->xenstore, 0, path,
-+                      physmap->name, strlen(physmap->name))) {
-+            return -1;
-+        }
-+    }
-+    return 0;
-+}
-+#else
-+static int xen_save_physmap(XenIOState *state, XenPhysmap *physmap)
-+{
-+    return 0;
-+}
-+#endif
-+
-+static int xen_add_to_physmap(XenIOState *state,
-+                              hwaddr start_addr,
-+                              ram_addr_t size,
-+                              MemoryRegion *mr,
-+                              hwaddr offset_within_region)
-+{
-+    unsigned target_page_bits = qemu_target_page_bits();
-+    int page_size = qemu_target_page_size();
-+    int page_mask = -page_size;
-+    unsigned long nr_pages;
-+    int rc = 0;
-+    XenPhysmap *physmap = NULL;
-+    hwaddr pfn, start_gpfn;
-+    hwaddr phys_offset = memory_region_get_ram_addr(mr);
-+    const char *mr_name;
-+
-+    if (get_physmapping(start_addr, size, page_mask)) {
-+        return 0;
-+    }
-+    if (size <= 0) {
-+        return -1;
-+    }
-+
-+    /* Xen can only handle a single dirty log region for now and we want
-+     * the linear framebuffer to be that region.
-+     * Avoid tracking any regions that is not videoram and avoid tracking
-+     * the legacy vga region. */
-+    if (mr == framebuffer && start_addr > 0xbffff) {
-+        goto go_physmap;
-+    }
-+    return -1;
-+
-+go_physmap:
-+    DPRINTF("mapping vram to %"HWADDR_PRIx" - %"HWADDR_PRIx"\n",
-+            start_addr, start_addr + size);
-+
-+    mr_name = memory_region_name(mr);
-+
-+    physmap = g_new(XenPhysmap, 1);
-+
-+    physmap->start_addr = start_addr;
-+    physmap->size = size;
-+    physmap->name = mr_name;
-+    physmap->phys_offset = phys_offset;
-+
-+    QLIST_INSERT_HEAD(&xen_physmap, physmap, list);
-+
-+    if (runstate_check(RUN_STATE_INMIGRATE)) {
-+        /* Now when we have a physmap entry we can replace a dummy mapping with
-+         * a real one of guest foreign memory. */
-+        uint8_t *p = xen_replace_cache_entry(phys_offset, start_addr, size);
-+        assert(p && p == memory_region_get_ram_ptr(mr));
-+
-+        return 0;
-+    }
-+
-+    pfn = phys_offset >> target_page_bits;
-+    start_gpfn = start_addr >> target_page_bits;
-+    nr_pages = size >> target_page_bits;
-+    rc = xendevicemodel_relocate_memory(xen_dmod, xen_domid, nr_pages, pfn,
-+                                        start_gpfn);
-+    if (rc) {
-+        int saved_errno = errno;
-+
-+        error_report("relocate_memory %lu pages from GFN %"HWADDR_PRIx
-+                     " to GFN %"HWADDR_PRIx" failed: %s",
-+                     nr_pages, pfn, start_gpfn, strerror(saved_errno));
-+        errno = saved_errno;
-+        return -1;
-+    }
-+
-+    rc = xendevicemodel_pin_memory_cacheattr(xen_dmod, xen_domid,
-+                                   start_addr >> target_page_bits,
-+                                   (start_addr + size - 1) >> target_page_bits,
-+                                   XEN_DOMCTL_MEM_CACHEATTR_WB);
-+    if (rc) {
-+        error_report("pin_memory_cacheattr failed: %s", strerror(errno));
-+    }
-+    return xen_save_physmap(state, physmap);
-+}
-+
-+static int xen_remove_from_physmap(XenIOState *state,
-+                                   hwaddr start_addr,
-+                                   ram_addr_t size)
-+{
-+    unsigned target_page_bits = qemu_target_page_bits();
-+    int page_size = qemu_target_page_size();
-+    int page_mask = -page_size;
-+    int rc = 0;
-+    XenPhysmap *physmap = NULL;
-+    hwaddr phys_offset = 0;
-+
-+    physmap = get_physmapping(start_addr, size, page_mask);
-+    if (physmap == NULL) {
-+        return -1;
-+    }
-+
-+    phys_offset = physmap->phys_offset;
-+    size = physmap->size;
-+
-+    DPRINTF("unmapping vram to %"HWADDR_PRIx" - %"HWADDR_PRIx", at "
-+            "%"HWADDR_PRIx"\n", start_addr, start_addr + size, phys_offset);
-+
-+    size >>= target_page_bits;
-+    start_addr >>= target_page_bits;
-+    phys_offset >>= target_page_bits;
-+    rc = xendevicemodel_relocate_memory(xen_dmod, xen_domid, size, start_addr,
-+                                        phys_offset);
-+    if (rc) {
-+        int saved_errno = errno;
-+
-+        error_report("relocate_memory "RAM_ADDR_FMT" pages"
-+                     " from GFN %"HWADDR_PRIx
-+                     " to GFN %"HWADDR_PRIx" failed: %s",
-+                     size, start_addr, phys_offset, strerror(saved_errno));
-+        errno = saved_errno;
-+        return -1;
-+    }
-+
-+    QLIST_REMOVE(physmap, list);
-+    if (log_for_dirtybit == physmap) {
-+        log_for_dirtybit = NULL;
-+        g_free(dirty_bitmap);
-+        dirty_bitmap = NULL;
-+    }
-+    g_free(physmap);
-+
-+    return 0;
-+}
-+
-+static void xen_sync_dirty_bitmap(XenIOState *state,
-+                                  hwaddr start_addr,
-+                                  ram_addr_t size)
-+{
-+    unsigned target_page_bits = qemu_target_page_bits();
-+    int page_size = qemu_target_page_size();
-+    int page_mask = -page_size;
-+    hwaddr npages = size >> target_page_bits;
-+    const int width = sizeof(unsigned long) * 8;
-+    size_t bitmap_size = DIV_ROUND_UP(npages, width);
-+    int rc, i, j;
-+    const XenPhysmap *physmap = NULL;
-+
-+    physmap = get_physmapping(start_addr, size, page_mask);
-+    if (physmap == NULL) {
-+        /* not handled */
-+        return;
-+    }
-+
-+    if (log_for_dirtybit == NULL) {
-+        log_for_dirtybit = physmap;
-+        dirty_bitmap = g_new(unsigned long, bitmap_size);
-+    } else if (log_for_dirtybit != physmap) {
-+        /* Only one range for dirty bitmap can be tracked. */
-+        return;
-+    }
-+
-+    rc = xen_track_dirty_vram(xen_domid, start_addr >> target_page_bits,
-+                              npages, dirty_bitmap);
-+    if (rc < 0) {
-+#ifndef ENODATA
-+#define ENODATA  ENOENT
-+#endif
-+        if (errno == ENODATA) {
-+            memory_region_set_dirty(framebuffer, 0, size);
-+            DPRINTF("xen: track_dirty_vram failed (0x" HWADDR_FMT_plx
-+                    ", 0x" HWADDR_FMT_plx "): %s\n",
-+                    start_addr, start_addr + size, strerror(errno));
-+        }
-+        return;
-+    }
-+
-+    for (i = 0; i < bitmap_size; i++) {
-+        unsigned long map = dirty_bitmap[i];
-+        while (map != 0) {
-+            j = ctzl(map);
-+            map &= ~(1ul << j);
-+            memory_region_set_dirty(framebuffer,
-+                                    (i * width + j) * page_size,
-+                                    page_size);
-+        };
-+    }
-+}
-+
-+static void xen_log_start(MemoryListener *listener,
-+                          MemoryRegionSection *section,
-+                          int old, int new)
-+{
-+    XenIOState *state = container_of(listener, XenIOState, memory_listener);
-+
-+    if (new & ~old & (1 << DIRTY_MEMORY_VGA)) {
-+        xen_sync_dirty_bitmap(state, section->offset_within_address_space,
-+                              int128_get64(section->size));
-+    }
-+}
-+
-+static void xen_log_stop(MemoryListener *listener, MemoryRegionSection *section,
-+                         int old, int new)
-+{
-+    if (old & ~new & (1 << DIRTY_MEMORY_VGA)) {
-+        log_for_dirtybit = NULL;
-+        g_free(dirty_bitmap);
-+        dirty_bitmap = NULL;
-+        /* Disable dirty bit tracking */
-+        xen_track_dirty_vram(xen_domid, 0, 0, NULL);
-+    }
-+}
-+
-+static void xen_log_sync(MemoryListener *listener, MemoryRegionSection *section)
-+{
-+    XenIOState *state = container_of(listener, XenIOState, memory_listener);
-+
-+    xen_sync_dirty_bitmap(state, section->offset_within_address_space,
-+                          int128_get64(section->size));
-+}
-+
-+static void xen_log_global_start(MemoryListener *listener)
-+{
-+    if (xen_enabled()) {
-+        xen_in_migration = true;
-+    }
-+}
-+
-+static void xen_log_global_stop(MemoryListener *listener)
-+{
-+    xen_in_migration = false;
-+}
-+
-+const MemoryListener xen_memory_listener = {
-+    .name = "xen-memory",
-+    .region_add = xen_region_add,
-+    .region_del = xen_region_del,
-+    .log_start = xen_log_start,
-+    .log_stop = xen_log_stop,
-+    .log_sync = xen_log_sync,
-+    .log_global_start = xen_log_global_start,
-+    .log_global_stop = xen_log_global_stop,
-+    .priority = MEMORY_LISTENER_PRIORITY_ACCEL,
-+};
-+
-+#ifdef XEN_COMPAT_PHYSMAP
-+void xen_read_physmap(XenIOState *state)
-+{
-+    XenPhysmap *physmap = NULL;
-+    unsigned int len, num, i;
-+    char path[80], *value = NULL;
-+    char **entries = NULL;
-+
-+    QLIST_INIT(&xen_physmap);
-+
-+    snprintf(path, sizeof(path),
-+            "/local/domain/0/device-model/%d/physmap", xen_domid);
-+    entries = xs_directory(state->xenstore, 0, path, &num);
-+    if (entries == NULL)
-+        return;
-+
-+    for (i = 0; i < num; i++) {
-+        physmap = g_new(XenPhysmap, 1);
-+        physmap->phys_offset = strtoull(entries[i], NULL, 16);
-+        snprintf(path, sizeof(path),
-+                "/local/domain/0/device-model/%d/physmap/%s/start_addr",
-+                xen_domid, entries[i]);
-+        value = xs_read(state->xenstore, 0, path, &len);
-+        if (value == NULL) {
-+            g_free(physmap);
-+            continue;
-+        }
-+        physmap->start_addr = strtoull(value, NULL, 16);
-+        free(value);
-+
-+        snprintf(path, sizeof(path),
-+                "/local/domain/0/device-model/%d/physmap/%s/size",
-+                xen_domid, entries[i]);
-+        value = xs_read(state->xenstore, 0, path, &len);
-+        if (value == NULL) {
-+            g_free(physmap);
-+            continue;
-+        }
-+        physmap->size = strtoull(value, NULL, 16);
-+        free(value);
-+
-+        snprintf(path, sizeof(path),
-+                "/local/domain/0/device-model/%d/physmap/%s/name",
-+                xen_domid, entries[i]);
-+        physmap->name = xs_read(state->xenstore, 0, path, &len);
-+
-+        QLIST_INSERT_HEAD(&xen_physmap, physmap, list);
-+    }
-+    free(entries);
-+}
-+#else
-+void xen_read_physmap(XenIOState *state)
-+{
-+    QLIST_INIT(&xen_physmap);
-+}
-+#endif
-+
-+void xen_register_framebuffer(MemoryRegion *mr)
-+{
-+    framebuffer = mr;
-+}
-+
-+void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
-+{
-+    unsigned target_page_bits = qemu_target_page_bits();
-+    int page_size = qemu_target_page_size();
-+    int page_mask = -page_size;
-+
-+    if (unlikely(xen_in_migration)) {
-+        int rc;
-+        ram_addr_t start_pfn, nb_pages;
-+
-+        start = xen_phys_offset_to_gaddr(start, length, page_mask);
-+
-+        if (length == 0) {
-+            length = page_size;
-+        }
-+        start_pfn = start >> target_page_bits;
-+        nb_pages = ((start + length + page_size - 1) >> target_page_bits)
-+            - start_pfn;
-+        rc = xen_modified_memory(xen_domid, start_pfn, nb_pages);
-+        if (rc) {
-+            fprintf(stderr,
-+                    "%s failed for "RAM_ADDR_FMT" ("RAM_ADDR_FMT"): %i, %s\n",
-+                    __func__, start, nb_pages, errno, strerror(errno));
-+        }
-+    }
-+}
-+
-+void qmp_xen_set_global_dirty_log(bool enable, Error **errp)
-+{
-+    if (enable) {
-+        memory_global_dirty_log_start(GLOBAL_DIRTY_MIGRATION);
-+    } else {
-+        memory_global_dirty_log_stop(GLOBAL_DIRTY_MIGRATION);
-+    }
-+}
-+
-+void xen_arch_set_memory(XenIOState *state, MemoryRegionSection *section,
-+                         bool add)
-+{
-+    unsigned target_page_bits = qemu_target_page_bits();
-+    int page_size = qemu_target_page_size();
-+    int page_mask = -page_size;
-+    hwaddr start_addr = section->offset_within_address_space;
-+    ram_addr_t size = int128_get64(section->size);
-+    bool log_dirty = memory_region_is_logging(section->mr, DIRTY_MEMORY_VGA);
-+    hvmmem_type_t mem_type;
-+
-+    if (!memory_region_is_ram(section->mr)) {
-+        return;
-+    }
-+
-+    if (log_dirty != add) {
-+        return;
-+    }
-+
-+    trace_xen_client_set_memory(start_addr, size, log_dirty);
-+
-+    start_addr &= page_mask;
-+    size = ROUND_UP(size, page_size);
-+
-+    if (add) {
-+        if (!memory_region_is_rom(section->mr)) {
-+            xen_add_to_physmap(state, start_addr, size,
-+                               section->mr, section->offset_within_region);
-+        } else {
-+            mem_type = HVMMEM_ram_ro;
-+            if (xen_set_mem_type(xen_domid, mem_type,
-+                                 start_addr >> target_page_bits,
-+                                 size >> target_page_bits)) {
-+                DPRINTF("xen_set_mem_type error, addr: "HWADDR_FMT_plx"\n",
-+                        start_addr);
-+            }
-+        }
-+    } else {
-+        if (xen_remove_from_physmap(state, start_addr, size) < 0) {
-+            DPRINTF("physmapping does not exist at "HWADDR_FMT_plx"\n", start_addr);
-+        }
-+    }
-+}
- 
- void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
-                    Error **errp)
-diff --git a/stubs/xen-hw-stub.c b/stubs/xen-hw-stub.c
-index 53c6a6f2a0..da8912f037 100644
---- a/stubs/xen-hw-stub.c
-+++ b/stubs/xen-hw-stub.c
-@@ -13,7 +13,3 @@ int xen_is_pirq_msi(uint32_t msi_data)
- {
-     return 0;
- }
--
--void xen_register_framebuffer(MemoryRegion *mr)
--{
--}
-diff --git a/hw/i386/xen/meson.build b/hw/i386/xen/meson.build
-index d38759cfe4..3f0df8bc07 100644
---- a/hw/i386/xen/meson.build
-+++ b/hw/i386/xen/meson.build
-@@ -1,7 +1,6 @@
- i386_ss.add(when: 'CONFIG_XEN', if_true: files(
-   'xen_apic.c',
-   'xen_pvdevice.c',
--  'xen-hvm-common.c',
- ))
- i386_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
-   'xen-hvm.c',
+Pipeline #1071977342 has failed!
+
+Project: xen ( https://gitlab.com/xen-project/xen )
+Branch: staging-4.17 ( https://gitlab.com/xen-project/xen/-/commits/staging-4.17 )
+
+Commit: 0527bab0 ( https://gitlab.com/xen-project/xen/-/commit/0527bab0901b800e3f1be2e7836c5346b6e08809 )
+Commit Message: x86/spec-ctrl: Add SRSO whitepaper URL
+
+... now...
+Commit Author: Andrew Cooper ( https://gitlab.com/andyhhp )
+Committed by: Jan Beulich ( https://gitlab.com/jbeulich )
+
+
+Pipeline #1071977342 ( https://gitlab.com/xen-project/xen/-/pipelines/1071977342 ) triggered by Ganis ( https://gitlab.com/ganis )
+had 1 failed job.
+
+Job #5532419311 ( https://gitlab.com/xen-project/xen/-/jobs/5532419311/raw )
+
+Stage: build
+Name: debian-buster-gcc-ibt
+
 -- 
-2.41.0
+You're receiving this email because of your account on gitlab.com.
 
+
+
+
+----==_mimepart_6553a2f3a69f_2c9ada815364d
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://ww=
+w.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml" lang=3D"en" xml:lang=3D"en">=
+
+<head>
+<meta content=3D"text/html; charset=3DUTF-8" http-equiv=3D"Content-Type" =
+/>
+<meta content=3D"width=3Ddevice-width, initial-scale=3D1" name=3D"viewpor=
+t" />
+<meta content=3D"IE=3Dedge" http-equiv=3D"X-UA-Compatible" />
+<title>xen | Failed pipeline for staging-4.17 | 0527bab0</title>
+<style data-premailer=3D"ignore" type=3D"text/css">
+body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}t=
+able,td{mso-table-lspace:0pt;mso-table-rspace:0pt}img{-ms-interpolation-m=
+ode:bicubic}.hidden{display:none !important;visibility:hidden !important}=
+a[x-apple-data-detectors]{color:inherit !important;text-decoration:none !=
+important;font-size:inherit !important;font-family:inherit !important;fon=
+t-weight:inherit !important;line-height:inherit !important}div[style*=3D'=
+margin: 16px 0']{margin:0 !important}@media only screen and (max-width: 6=
+39px){body,#body{min-width:320px !important}table.wrapper{width:100% !imp=
+ortant;min-width:320px !important}table.wrapper td.wrapper-cell{border-le=
+ft:0 !important;border-right:0 !important;border-radius:0 !important;padd=
+ing-left:10px !important;padding-right:10px !important}}
+
+</style>
+
+<style>body {
+margin: 0 !important; background-color: #fafafa; padding: 0; text-align: =
+center; min-width: 640px; width: 100%; height: 100%; font-family: "Helvet=
+ica Neue", Helvetica, Arial, sans-serif;
+}
+</style></head>
+<body style=3D"text-align: center; min-width: 640px; width: 100%; height:=
+ 100%; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-se=
+rif; margin: 0; padding: 0;" bgcolor=3D"#fafafa">
+
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" id=3D"body" style=
+=3D"text-align: center; min-width: 640px; width: 100%; margin: 0; padding=
+: 0;" bgcolor=3D"#fafafa">
+<tbody>
+<tr class=3D"line">
+<td style=3D"font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, s=
+ans-serif; height: 4px; font-size: 4px; line-height: 4px;" bgcolor=3D"#6b=
+4fbb"></td>
+</tr>
+<tr class=3D"header">
+<td style=3D"font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, s=
+ans-serif; font-size: 13px; line-height: 1.6; color: #5c5c5c; padding: 25=
+px 0;">
+
+<img alt=3D"GitLab" src=3D"https://gitlab.com/assets/mailers/gitlab_logo-=
+2957169c8ef64c58616a1ac3f4fc626e8a35ce4eb3ed31bb0d873712f2a041a0.png" wid=
+th=3D"55" height=3D"55" />
+</td>
+</tr>
+<tr>
+<td style=3D"font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, s=
+ans-serif;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"wrapper"=
+ style=3D"width: 640px; border-collapse: separate; border-spacing: 0; mar=
+gin: 0 auto;">
+<tbody>
+<tr>
+<td class=3D"wrapper-cell" style=3D"font-family: &quot;Helvetica Neue&quo=
+t;, Helvetica, Arial, sans-serif; border-radius: 3px; overflow: hidden; p=
+adding: 18px 25px; border: 1px solid #ededed;" align=3D"left" bgcolor=3D"=
+#fff">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"content"=
+ style=3D"width: 100%; border-collapse: separate; border-spacing: 0;">
+<tbody>
+<tr class=3D"alert">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; bo=
+rder-radius: 3px; font-size: 14px; line-height: 1.3; overflow: hidden; co=
+lor: #ffffff; padding: 10px;" align=3D"center" bgcolor=3D"#d22f57">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"img" sty=
+le=3D"border-collapse: collapse; margin: 0 auto;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; co=
+lor: #ffffff; padding-right: 5px; line-height: 1;" align=3D"center" valig=
+n=3D"middle">
+<img alt=3D"&#10006;" height=3D"13" src=3D"https://gitlab.com/assets/mail=
+ers/ci_pipeline_notif_v1/icon-x-red-inverted-06edddd39ba2a7f9a32f6201e420=
+175db85a4b6ac0348203fdc069001b440149.gif" style=3D"display: block;" width=
+=3D"13" />
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; co=
+lor: #ffffff;" align=3D"center" valign=3D"middle">
+Pipeline #1071977342 has failed!
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class=3D"spacer">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; he=
+ight: 18px; font-size: 18px; line-height: 18px;">
+&#160;
+</td>
+</tr>
+<tr class=3D"section">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; bo=
+rder-radius: 3px; overflow: hidden; padding: 0 15px; border: 1px solid #e=
+deded;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"table-in=
+fo" style=3D"width: 100%;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #8c8c8c; font-weight: 300; margin=
+: 0; padding: 14px 0;">
+Project
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #333333; font-weight: 500; width:=
+ 75%; margin: 0; padding: 14px 0 14px 5px;">
+<a class=3D"muted" href=3D"https://gitlab.com/xen-project" style=3D"color=
+: #333333; text-decoration: none;">
+xen-project
+</a>
+/
+<a class=3D"muted" href=3D"https://gitlab.com/xen-project/xen" style=3D"c=
+olor: #333333; text-decoration: none;">
+xen
+</a>
+</td>
+</tr>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #8c8c8c; font-weight: 300; border=
+-top-width: 1px; border-top-color: #ededed; border-top-style: solid; marg=
+in: 0; padding: 14px 0;">
+Branch
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #333333; font-weight: 500; width:=
+ 75%; border-top-width: 1px; border-top-color: #ededed; border-top-style:=
+ solid; margin: 0; padding: 14px 0 14px 5px;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"img" sty=
+le=3D"border-collapse: collapse;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; padding-right: 5px;" valign=3D"middle">
+<img alt=3D"" height=3D"13" src=3D"https://gitlab.com/assets/mailers/ci_p=
+ipeline_notif_v1/icon-branch-gray-53618a7fc19d4d32ccbabac2f6d59bebe67202a=
+9f2f1255e3f72c69756c0dd9c.gif" style=3D"display: block;" width=3D"13" />
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4;" valign=3D"middle">
+<a class=3D"muted" href=3D"https://gitlab.com/xen-project/xen/-/commits/s=
+taging-4.17" style=3D"color: #333333; text-decoration: none;">
+staging-4.17
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #8c8c8c; font-weight: 300; border=
+-top-width: 1px; border-top-color: #ededed; border-top-style: solid; marg=
+in: 0; padding: 14px 0;">
+Commit
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #333333; font-weight: 400; width:=
+ 75%; border-top-width: 1px; border-top-color: #ededed; border-top-style:=
+ solid; margin: 0; padding: 14px 0 14px 5px;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"img" sty=
+le=3D"border-collapse: collapse;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; padding-right: 5px;" valign=3D"middle">
+<img alt=3D"" height=3D"13" src=3D"https://gitlab.com/assets/mailers/ci_p=
+ipeline_notif_v1/icon-commit-gray-c10243ac24cde64b549aec91de35e6b49c8739b=
+506b86472b54614c10d8b4aac.gif" style=3D"display: block;" width=3D"13" />
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4;" valign=3D"middle">
+<a href=3D"https://gitlab.com/xen-project/xen/-/commit/0527bab0901b800e3f=
+1be2e7836c5346b6e08809" style=3D"color: #3777b0; text-decoration: none;">=
+
+0527bab0
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+<div class=3D"commit" style=3D"color: #5c5c5c; font-weight: 300;">
+x86/spec-ctrl: Add SRSO whitepaper URL
+
+... now...
+</div>
+</td>
+</tr>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #8c8c8c; font-weight: 300; border=
+-top-width: 1px; border-top-color: #ededed; border-top-style: solid; marg=
+in: 0; padding: 14px 0;">
+Commit Author
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #333333; font-weight: 500; width:=
+ 75%; border-top-width: 1px; border-top-color: #ededed; border-top-style:=
+ solid; margin: 0; padding: 14px 0 14px 5px;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"img" sty=
+le=3D"border-collapse: collapse;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; padding-right: 5px;" valign=3D"middle">
+<img alt=3D"" class=3D"avatar" height=3D"24" src=3D"https://secure.gravat=
+ar.com/avatar/6cb22538f3a82e4ee99e1d0419f62385?s=3D48&amp;d=3Didenticon" =
+style=3D"display: block; border-radius: 12px; margin: -2px 0;" width=3D"2=
+4" />
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4;" valign=3D"middle">
+<a class=3D"muted" href=3D"https://gitlab.com/andyhhp" style=3D"color: #3=
+33333; text-decoration: none;">
+Andrew Cooper
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #8c8c8c; font-weight: 300; border=
+-top-width: 1px; border-top-color: #ededed; border-top-style: solid; marg=
+in: 0; padding: 14px 0;">Committed by</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; color: #333333; font-weight: 500; width:=
+ 75%; border-top-width: 1px; border-top-color: #ededed; border-top-style:=
+ solid; margin: 0; padding: 14px 0 14px 5px;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"img" sty=
+le=3D"border-collapse: collapse;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; padding-right: 5px;" valign=3D"middle">
+<img alt=3D"" class=3D"avatar" height=3D"24" src=3D"https://secure.gravat=
+ar.com/avatar/d85e7926e3558bc23df7a4eb6c8a7c5e?s=3D48&amp;d=3Didenticon" =
+style=3D"display: block; border-radius: 12px; margin: -2px 0;" width=3D"2=
+4" />
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4;" valign=3D"middle">
+<a class=3D"muted" href=3D"https://gitlab.com/jbeulich" style=3D"color: #=
+333333; text-decoration: none;">
+Jan Beulich
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class=3D"spacer">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; he=
+ight: 18px; font-size: 18px; line-height: 18px;">
+&#160;
+</td>
+</tr>
+<tr class=3D"pre-section">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; co=
+lor: #333333; font-size: 15px; font-weight: 400; line-height: 1.4; paddin=
+g: 15px 5px 0;" align=3D"center">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"img" sty=
+le=3D"border-collapse: collapse; margin: 0 auto;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; font-weight: 500; line-height: 1.4;" valign=3D"baseline">
+Pipeline <a style=3D"color: #3777b0; text-decoration: none;" href=3D"http=
+s://gitlab.com/xen-project/xen/-/pipelines/1071977342">#1071977342</a> tr=
+iggered by
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; line-height: 1.4; padding-right: 5px; padding-left: 5px;" =
+width=3D"24" valign=3D"middle">
+<img alt=3D"" class=3D"avatar" height=3D"24" src=3D"https://secure.gravat=
+ar.com/avatar/568538936b4ac45a343cb3a4ab0c6cda?s=3D48&amp;d=3Didenticon" =
+style=3D"display: block; border-radius: 12px; margin: -2px 0;" width=3D"2=
+4" />
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
+nt-size: 15px; font-weight: 500; line-height: 1.4;" valign=3D"baseline">
+<a class=3D"muted" href=3D"https://gitlab.com/ganis" style=3D"color: #333=
+333; text-decoration: none;">
+Ganis
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan=3D"2" style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,=
+sans-serif; color: #333333; font-size: 14px; font-weight: 400; line-heigh=
+t: 1.4; padding: 0 8px 16px;" align=3D"center">
+had 1 failed job
+</td>
+</tr>
+<tr class=3D"table-warning">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; bo=
+rder-radius: 4px 4px 0 0; overflow: hidden; color: #d22852; font-size: 14=
+px; line-height: 1.4; padding: 8px 16px; border-color: #ededed; border-st=
+yle: solid; border-width: 1px 1px 0;" align=3D"center" bgcolor=3D"#fdf4f6=
+">
+Failed job
+</td>
+</tr>
+<tr class=3D"section">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; bo=
+rder-radius: 0 0 4px 4px; overflow: hidden; padding: 0 16px; border-color=
+: #ededed; border-style: solid; border-width: 0 1px 1px;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"builds" =
+style=3D"width: 100%; border-collapse: collapse;">
+<tbody>
+<tr class=3D"build-state">
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; co=
+lor: #8c8c8c; font-weight: 500; font-size: 14px; padding: 16px 0;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"img" sty=
+le=3D"border-collapse: collapse;">
+<tbody>
+<tr>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; co=
+lor: #d22f57; font-weight: 500; font-size: 16px; padding-right: 8px; line=
+-height: 10px;" valign=3D"middle">
+<img alt=3D"&#10006;" height=3D"10" src=3D"https://gitlab.com/assets/mail=
+ers/ci_pipeline_notif_v1/icon-x-red-67056b7b99899e30453df79abfbe16162f6a2=
+6ed789d8236f81afcaea216ffe6.gif" style=3D"display: block;" width=3D"10" /=
+>
+</td>
+<td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; co=
+lor: #8c8c8c; font-weight: 500; font-size: 14px;" valign=3D"middle">
+build
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td align=3D"right" style=3D"font-family: 'Helvetica Neue',Helvetica,Aria=
+l,sans-serif; color: #8c8c8c; font-weight: 500; font-size: 14px; padding:=
+ 16px 0;">
+<a href=3D"https://gitlab.com/xen-project/xen/-/jobs/5532419311" style=3D=
+"color: #3777b0; text-decoration: none;">
+debian-buster-gcc-ibt
+</a>
+
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr class=3D"footer">
+<td style=3D"font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, s=
+ans-serif; font-size: 13px; line-height: 1.6; color: #5c5c5c; padding: 25=
+px 0;">
+<img alt=3D"GitLab" class=3D"footer-logo" src=3D"https://gitlab.com/asset=
+s/mailers/gitlab_logo_black_text-5430ca955baf2bbce6d3aa856a025da70ac5c959=
+5597537254f665c10beab7a5.png" style=3D"display: block; width: 90px; margi=
+n: 0 auto 1em;" />
+<div>
+You're receiving this email because of your account on <a target=3D"_blan=
+k" rel=3D"noopener noreferrer" href=3D"https://gitlab.com" style=3D"color=
+: #3777b0; text-decoration: none;">gitlab.com</a>. <a href=3D"https://git=
+lab.com/-/profile/notifications" target=3D"_blank" rel=3D"noopener norefe=
+rrer" class=3D"mng-notif-link" style=3D"color: #3777b0; text-decoration: =
+none;">Manage all notifications</a> &#183; <a href=3D"https://gitlab.com/=
+help" target=3D"_blank" rel=3D"noopener noreferrer" class=3D"help-link" s=
+tyle=3D"color: #3777b0; text-decoration: none;">Help</a>
+</div>
+</td>
+</tr>
+
+
+<tr>
+<td class=3D"footer-message" style=3D"font-family: &quot;Helvetica Neue&q=
+uot;, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.6; co=
+lor: #5c5c5c; padding: 25px 0;">
+
+</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+
+----==_mimepart_6553a2f3a69f_2c9ada815364d--
 
