@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55F4FC4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 15:14:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.632774.987196 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9A3AC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 15:16:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.632781.987216 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2v7Z-0000jI-7f; Tue, 14 Nov 2023 15:14:33 +0000
+	id 1r2v94-0002Ar-PJ; Tue, 14 Nov 2023 15:16:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 632774.987196; Tue, 14 Nov 2023 15:14:33 +0000
+Received: by outflank-mailman (output) from mailman id 632781.987216; Tue, 14 Nov 2023 15:16:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2v7Z-0000j7-4k; Tue, 14 Nov 2023 15:14:33 +0000
-Received: by outflank-mailman (input) for mailman id 632774;
- Tue, 14 Nov 2023 15:14:30 +0000
+	id 1r2v94-0002Ak-MW; Tue, 14 Nov 2023 15:16:06 +0000
+Received: by outflank-mailman (input) for mailman id 632781;
+ Tue, 14 Nov 2023 15:16:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eqXQ=G3=casper.srs.infradead.org=BATV+a8e905033730cff805ca+7387+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r2v7W-0008AQ-AQ
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 15:14:30 +0000
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+ <SRS0=gJWh=G3=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1r2v93-0001sO-Q2
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 15:16:05 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 815e72df-8300-11ee-98db-6d05b1d4d9a1;
- Tue, 14 Nov 2023 16:14:29 +0100 (CET)
-Received: from [12.186.190.2] (helo=[127.0.0.1])
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r2v73-008dEf-2f; Tue, 14 Nov 2023 15:14:01 +0000
+ id bacd9d73-8300-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 16:16:05 +0100 (CET)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-507973f3b65so8162169e87.3
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 07:16:05 -0800 (PST)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ a7-20020a056512020700b005079d34f330sm1342970lfo.282.2023.11.14.07.16.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Nov 2023 07:16:04 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,59 +46,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 815e72df-8300-11ee-98db-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Message-ID:References:In-Reply-To:Subject:CC:To:From:Date:Sender
-	:Reply-To:Content-ID:Content-Description;
-	bh=zLWRl6fuh+QlAq2JcSTCgSqOD3rW63ZP4Laj6regjn0=; b=CDbCkxBOGqoE0okEs41cvDk5fY
-	avC36PbcnvrY2oGlWB+RQPF4liPIPZGR3EmI5Av83WCkoqFq/6JecFkFY7vUWsvo7/8BmYzi44D1g
-	Ws5geOrtzOEM5Q+9dgkqYhjuO8CCj0m7FwKXRyGH/otFSxezkrYf7thCJcuan3UovTroWWy1VVTp0
-	pnd+C2RYiX9iD91nqIjI4v94iVedb61DZAmiijnR8rGW40PapOik1v9uw6WmF0h27udRo7vUsUI+/
-	CdQBeD4lSkTeDsX/DqpzXtj+VzppGTN+wtPUM4BmDuIgnKf9HDMxmYUNaj5vpn46oYHJTmkvPF/K5
-	uuDkjPBA==;
-Date: Tue, 14 Nov 2023 10:13:58 -0500
-From: David Woodhouse <dwmw2@infradead.org>
-To: =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
- David Woodhouse <dwmw@amazon.co.uk>, qemu-devel@nongnu.org
-CC: =?ISO-8859-1?Q?Alex_Benn=E9e?= <alex.bennee@linaro.org>,
- Paul Durrant <paul@xen.org>, qemu-arm@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- xen-devel@lists.xenproject.org, qemu-block@nongnu.org,
- Anthony Perard <anthony.perard@citrix.com>, kvm@vger.kernel.org,
- Thomas Huth <thuth@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH-for-9=2E0_v2_06/19=5D_hw/pci/msi?= =?US-ASCII?Q?=3A_Restrict_xen=5Fis=5Fpirq=5Fmsi=28=29_call_to_Xen?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231114143816.71079-7-philmd@linaro.org>
-References: <20231114143816.71079-1-philmd@linaro.org> <20231114143816.71079-7-philmd@linaro.org>
-Message-ID: <EEC18CA6-88F2-4F18-BDE5-5E9AAE5778A7@infradead.org>
+X-Inumbo-ID: bacd9d73-8300-11ee-98db-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1699974964; x=1700579764; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ktp5yOM9PEIg+T7oEz4OKeZ/CwStGNVTT5+LiWqecM4=;
+        b=isWfa6QD6PSRcGEZqf9mQmYzSS74VbC7FaihFZVl0RPvi/CfUG+oyOjMd48cHv/1aT
+         PLTc9Rw1tCG+v6JfIzCh0Nbfc/eyLQiJwgVgCtO7nqcHAwjvo9T5LbJwXXMNg6vTEQBL
+         yQlc+37t/hnpLeqpqopMp3vIpjgoyHMjKsjRRPL9M77VAAy5skLEHLo/bCLvSqcDyk8B
+         dTF7UIyAcIzYQ3xkvoE8Y1bvWBNwDD/Fo+cICaG3JYN3EcP3wiRwtSSwFQW/vchrUBv4
+         tKXbHRgwIVNJ4TfHlDvWwwMSyUgHoX39lxETKCJQDZBWhwt9rP9HMZCKxRtOlMIvYKsl
+         5wJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699974965; x=1700579765;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Ktp5yOM9PEIg+T7oEz4OKeZ/CwStGNVTT5+LiWqecM4=;
+        b=s0GZGrALwP0cVTKQ5EhEuQF+wITsR9Z/FQTiJdkmNRJo8E+XQOHzJxDrSov39sVLLo
+         8I+UR3skJsjaQVSyjUQdIEGJOgfi5WqDKKAXOB3cu5ySZmxzxPXZelL9FWloWcgp2Mt0
+         3yxyUsqlcYyi3NNTvTLwvrOh1qRTh+r03vkE07oBDVzO8pgeczHURMJJIUJZTafHyboB
+         IBtwNJMQsc20bcOQ8Lbs4SvMpihlSGlOXqoK8P7DTx9t50xvBX9XKfMOfUGaE7srS9qG
+         3seOOPCW5SxfNFacHQ418tg9VzzkyQ5hBh1CpcwW2v9PFG98FCHdvtLEqasBGNP7PCFX
+         Dk5Q==
+X-Gm-Message-State: AOJu0YylEXSc3BRkOiEusWpD0sT0v7hCqQ6qieux53B36bA4GyJyTD6i
+	Jhnz2GC9vzZjPc2APHP2LeyH+OiAiIY=
+X-Google-Smtp-Source: AGHT+IEygYANju+gZ93rCVXrkgy30AYx2IbaCtR8hswwr4Yb+9WO4NXMlXCmd761sDkgTYBKNdp4hQ==
+X-Received: by 2002:ac2:57cf:0:b0:4fe:347d:7c4b with SMTP id k15-20020ac257cf000000b004fe347d7c4bmr6442969lfo.7.1699974964434;
+        Tue, 14 Nov 2023 07:16:04 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3] xen: ifdef inclusion of <asm/grant_table.h> in <xen/grant_table.h>
+Date: Tue, 14 Nov 2023 17:16:01 +0200
+Message-ID: <feee97db556b5b38adb11877c4a37f1d0a09fc92.1699974909.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+Content-Transfer-Encoding: 8bit
 
-On 14 November 2023 09:38:02 GMT-05:00, "Philippe Mathieu-Daud=C3=A9" <phil=
-md@linaro=2Eorg> wrote:
->Similarly to the restriction in hw/pci/msix=2Ec (see commit
->e1e4bf2252 "msix: fix msix_vector_masked"), restrict the
->xen_is_pirq_msi() call in msi_is_masked() to Xen=2E
->
->Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro=2Eorg>
+Ifdef-ing inclusion of <asm/grant_table.h> allows to avoid
+generation of empty <asm/grant_table.h> for cases when
+CONFIG_GRANT_TABLE is not enabled.
 
-Hm, we do also support the Xen abomination of snooping on MSI table writes=
- to see if they're targeted at a Xen PIRQ, then actually unmasking the MSI =
-from QEMU when the guest binds the corresponding event channel to that PIRQ=
-=2E
+The following changes were done for Arm:
+<asm/grant_table.h> should be included directly because it contains
+gnttab_dom0_frames() macros which is unique for Arm and is used in
+arch/arm/domain_build.c.
+<asm/grant_table.h> is #ifdef-ed with CONFIG_GRANT_TABLE in
+<xen/grant_table.h> so in case of !CONFIG_GRANT_TABLE gnttab_dom0_frames
+won't be available for use in arch/arm/domain_build.c.
 
-I think this is going to break in CI as kvm_xen_guest=2Epy does deliberate=
-ly exercise that use case, doesn't it?
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+This patch was part of patch series:
+https://lore.kernel.org/xen-devel/cover.1699633310.git.oleksii.kurochko@gmail.com/
 
-I deliberately *didn't* switch to testing the Xen PV net device, with a co=
-mment that testing MSI and irqchip permutations was far more entertaining=
-=2E So I hope it should catch this?
+The patch series hasn't been reviewed all yet so send this path
+separately.
+---
+ xen/arch/arm/domain_build.c   | 10 ++++++++++
+ xen/include/xen/grant_table.h |  3 +++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 49792dd590..54620199d2 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -33,6 +33,16 @@
+ 
+ #include <xen/irq.h>
+ #include <xen/grant_table.h>
++/*
++ * <asm/grant_table.h> should be included directly because it contains
++ * gnttab_dom0_frames() macros which is unique for Arm and is used in
++ * this file.
++ *
++ * <asm/grant_table.h> is #ifdef-ed with CONFIG_GRANT_TABLE in
++ * <xen/grant_table.h> so in case of !CONFIG_GRANT_TABLE gnttab_dom0_frames
++ * won't be available for use in this file.
++ */
++#include <asm/grant_table.h>
+ #include <xen/serial.h>
+ 
+ #define STATIC_EVTCHN_NODE_SIZE_CELLS 2
+diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
+index 85fe6b7b5e..50edfecfb6 100644
+--- a/xen/include/xen/grant_table.h
++++ b/xen/include/xen/grant_table.h
+@@ -26,7 +26,10 @@
+ #include <xen/mm-frame.h>
+ #include <xen/rwlock.h>
+ #include <public/grant_table.h>
++
++#ifdef CONFIG_GRANT_TABLE
+ #include <asm/grant_table.h>
++#endif
+ 
+ struct grant_table;
+ 
+-- 
+2.41.0
 
 
