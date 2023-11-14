@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D449BC07D5B
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 17:57:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.633101.987710 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2917CC072A2
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 17:58:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.633106.987726 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfU-0002vL-Tt; Tue, 14 Nov 2023 17:57:44 +0000
+	id 1r2xfX-0003bv-6d; Tue, 14 Nov 2023 17:57:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 633101.987710; Tue, 14 Nov 2023 17:57:44 +0000
+Received: by outflank-mailman (output) from mailman id 633106.987726; Tue, 14 Nov 2023 17:57:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2xfT-0002tB-VL; Tue, 14 Nov 2023 17:57:43 +0000
-Received: by outflank-mailman (input) for mailman id 633101;
- Tue, 14 Nov 2023 17:50:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r2xfW-0003VY-97; Tue, 14 Nov 2023 17:57:46 +0000
+Received: by outflank-mailman (input) for mailman id 633106;
+ Tue, 14 Nov 2023 17:50:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5HBD=G3=3mdeb.com=krystian.hebel@srs-se1.protection.inumbo.net>)
- id 1r2xYk-0004mK-Ic
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:46 +0000
-Received: from 18.mo582.mail-out.ovh.net (18.mo582.mail-out.ovh.net
- [46.105.73.110]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5569ac42-8316-11ee-98db-6d05b1d4d9a1;
- Tue, 14 Nov 2023 18:50:44 +0100 (CET)
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.4.8])
- by mo582.mail-out.ovh.net (Postfix) with ESMTP id E087B28D3B
- for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:43 +0000 (UTC)
+ id 1r2xYl-0004wk-Gi
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 17:50:47 +0000
+Received: from 19.mo582.mail-out.ovh.net (19.mo582.mail-out.ovh.net
+ [188.165.56.177]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 567bcec5-8316-11ee-9b0e-b553b5be7939;
+ Tue, 14 Nov 2023 18:50:46 +0100 (CET)
+Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.16.176])
+ by mo582.mail-out.ovh.net (Postfix) with ESMTP id BA50D28A3F
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 17:50:45 +0000 (UTC)
 Received: from ghost-submission-6684bf9d7b-x5j2z (unknown [10.110.115.90])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 66F941FD62;
- Tue, 14 Nov 2023 17:50:43 +0000 (UTC)
+ by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 4F0A71FDF1;
+ Tue, 14 Nov 2023 17:50:45 +0000 (UTC)
 Received: from 3mdeb.com ([37.59.142.103])
  by ghost-submission-6684bf9d7b-x5j2z with ESMTPSA
- id wBjGFXOzU2V/lwcATVRwWg
- (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:43 +0000
+ id qLM5EHWzU2V/lwcATVRwWg
+ (envelope-from <krystian.hebel@3mdeb.com>); Tue, 14 Nov 2023 17:50:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,8 +48,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5569ac42-8316-11ee-98db-6d05b1d4d9a1
-Authentication-Results:garm.ovh; auth=pass (GARM-103G0059f3c2416-a2f6-49ac-bfc0-4df6296c09f1,
+X-Inumbo-ID: 567bcec5-8316-11ee-9b0e-b553b5be7939
+Authentication-Results:garm.ovh; auth=pass (GARM-103G0056fce45e0-23cf-4afa-a93e-0729be2d3147,
                     1C6EC45AC3E1968723EBE40916FD99D0F8B07574) smtp.auth=krystian.hebel@3mdeb.com
 X-OVh-ClientIp:213.192.77.249
 From: Krystian Hebel <krystian.hebel@3mdeb.com>
@@ -59,64 +59,124 @@ Cc: Krystian Hebel <krystian.hebel@3mdeb.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 6/9] x86/shutdown: protect against recurrent machine_restart()
-Date: Tue, 14 Nov 2023 18:50:07 +0100
-Message-ID: <87b0e650f28038c2fb64c5eb607c8fdaa7b4db07.1699982111.git.krystian.hebel@3mdeb.com>
+Subject: [XEN PATCH 7/9] x86/smp: drop booting_cpu variable
+Date: Tue, 14 Nov 2023 18:50:10 +0100
+Message-ID: <22109ebd7edef1140cb438a6ec5fa1726cdf2c12.1699982111.git.krystian.hebel@3mdeb.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1699982111.git.krystian.hebel@3mdeb.com>
 References: <cover.1699982111.git.krystian.hebel@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12930678956841675120
+X-Ovh-Tracer-Id: 12931241905954597232
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevtdevieehieeiveekvefhlefftdfhteefueelhfdvhedtjeegkedugfefvdekffenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgepgeenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekvddpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudeffedgudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhrhihsthhirghnucfjvggsvghluceokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeehleekveevvdfhgeetlefhjedtjefgjedtkeekffeitdffkeffueetkedtgfeiueenucffohhmrghinhepgiekiegpieegrdhssgenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgepfeenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeokhhrhihsthhirghnrdhhvggsvghlseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekvddpmhhouggvpehsmhhtphhouhhtpdgukhhimhepnhhonhgv
 
-If multiple CPUs called machine_restart() before actual restart took
-place, but after boot CPU declared itself not online, ASSERT in
-on_selected_cpus() will fail. Few calls later execution would end up
-in machine_restart() again, with another frame on call stack for new
-exception.
-
-To protect against running out of stack, code checks if boot CPU is
-still online before calling on_selected_cpus().
+CPU id is obtained as a side effect of searching for appropriate
+stack for AP. It can be used as a parameter to start_secondary().
+Coincidentally this also makes further work on making AP bring-up
+code parallel easier.
 
 Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 ---
- xen/arch/x86/shutdown.c | 20 +++++++++++++++++---
- 1 file changed, 17 insertions(+), 3 deletions(-)
+ xen/arch/x86/boot/x86_64.S | 13 +++++++++----
+ xen/arch/x86/smpboot.c     | 15 +++++----------
+ 2 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/xen/arch/x86/shutdown.c b/xen/arch/x86/shutdown.c
-index 7619544d14da..32c70505ed77 100644
---- a/xen/arch/x86/shutdown.c
-+++ b/xen/arch/x86/shutdown.c
-@@ -577,9 +577,23 @@ void machine_restart(unsigned int delay_millisecs)
-         /* Ensure we are the boot CPU. */
-         if ( get_apic_id() != boot_cpu_physical_apicid )
-         {
--            /* Send IPI to the boot CPU (logical cpu 0). */
--            on_selected_cpus(cpumask_of(0), __machine_restart,
--                             &delay_millisecs, 0);
-+            /*
-+             * Send IPI to the boot CPU (logical cpu 0).
-+             *
-+             * If multiple CPUs called machine_restart() before actual restart
-+             * took place, but after boot CPU declared itself not online, ASSERT
-+             * in on_selected_cpus() will fail. Few calls later we would end up
-+             * here again, with another frame on call stack for new exception.
-+             * To protect against running out of stack, check if boot CPU is
-+             * online.
-+             *
-+             * Note this is not an atomic operation, so it is possible for
-+             * on_selected_cpus() to be called once after boot CPU is offline
-+             * before we hit halt() below.
-+             */
-+            if ( cpu_online(0) )
-+                on_selected_cpus(cpumask_of(0), __machine_restart,
-+                                 &delay_millisecs, 0);
-             for ( ; ; )
-                 halt();
-         }
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index 8d61f270761f..ad01f20d548d 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -20,20 +20,24 @@ ENTRY(__high_start)
+         jz      .L_stack_set
+ 
+         /* APs only: get stack base from APIC ID saved in %esp. */
+-        mov     $0, %rax
++        mov     $0, %rbx
+         lea     cpu_data(%rip), %rcx
+         /* cpu_data[0] is BSP, skip it. */
+ 1:
+-        add     $1, %rax
++        add     $1, %rbx
+         add     $CPUINFO_X86_sizeof, %rcx
+-        cmp     $NR_CPUS, %eax
++        cmp     $NR_CPUS, %rbx
+         jb      2f
+         hlt
+ 2:
+         cmp     %esp, CPUINFO_X86_apicid(%rcx)
+         jne     1b
+ 
+-        /* %rcx is now cpu_data[cpu], read stack base from it. */
++        /*
++         * At this point:
++         * - %rcx is cpu_data[cpu], read stack base from it,
++         * - %rbx (callee-save) is Xen cpu number, pass it to start_secondary().
++         */
+         mov     CPUINFO_X86_stack_base(%rcx), %rsp
+ 
+         test    %rsp,%rsp
+@@ -101,6 +105,7 @@ ENTRY(__high_start)
+ .L_ap_cet_done:
+ #endif /* CONFIG_XEN_SHSTK || CONFIG_XEN_IBT */
+ 
++        mov     %rbx, %rdi
+         tailcall start_secondary
+ 
+ .L_bsp:
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index a3895dafa267..39ffd356dbbc 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -222,8 +222,6 @@ static void smp_callin(void)
+         cpu_relax();
+ }
+ 
+-static int booting_cpu;
+-
+ /* CPUs for which sibling maps can be computed. */
+ static cpumask_t cpu_sibling_setup_map;
+ 
+@@ -311,15 +309,14 @@ static void set_cpu_sibling_map(unsigned int cpu)
+     }
+ }
+ 
+-void start_secondary(void *unused)
++void start_secondary(unsigned int cpu)
+ {
+     struct cpu_info *info = get_cpu_info();
+ 
+     /*
+-     * Dont put anything before smp_callin(), SMP booting is so fragile that we
++     * Don't put anything before smp_callin(), SMP booting is so fragile that we
+      * want to limit the things done here to the most necessary things.
+      */
+-    unsigned int cpu = booting_cpu;
+ 
+     /* Critical region without IDT or TSS.  Any fault is deadly! */
+ 
+@@ -346,9 +343,9 @@ void start_secondary(void *unused)
+      */
+     spin_debug_disable();
+ 
+-    get_cpu_info()->use_pv_cr3 = false;
+-    get_cpu_info()->xen_cr3 = 0;
+-    get_cpu_info()->pv_cr3 = 0;
++    info->use_pv_cr3 = false;
++    info->xen_cr3 = 0;
++    info->pv_cr3 = 0;
+ 
+     /*
+      * BUG_ON() used in load_system_tables() and later code may end up calling
+@@ -575,8 +572,6 @@ static int do_boot_cpu(int apicid, int cpu)
+      */
+     mtrr_save_state();
+ 
+-    booting_cpu = cpu;
+-
+     start_eip = bootsym_phys(trampoline_realmode_entry);
+ 
+     /* start_eip needs be page aligned, and below the 1M boundary. */
 -- 
 2.41.0
 
