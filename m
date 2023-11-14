@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCADC4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 15:14:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.632770.987176 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01DBAC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Nov 2023 15:14:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.632773.987186 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2v6y-0008By-Hv; Tue, 14 Nov 2023 15:13:56 +0000
+	id 1r2v7W-0000T0-PV; Tue, 14 Nov 2023 15:14:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 632770.987176; Tue, 14 Nov 2023 15:13:56 +0000
+Received: by outflank-mailman (output) from mailman id 632773.987186; Tue, 14 Nov 2023 15:14:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r2v6y-0008Br-EA; Tue, 14 Nov 2023 15:13:56 +0000
-Received: by outflank-mailman (input) for mailman id 632770;
- Tue, 14 Nov 2023 15:13:54 +0000
+	id 1r2v7W-0000St-Mh; Tue, 14 Nov 2023 15:14:30 +0000
+Received: by outflank-mailman (input) for mailman id 632773;
+ Tue, 14 Nov 2023 15:14:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gJWh=G3=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r2v6w-0008AQ-I7
- for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 15:13:54 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=KEZK=G3=redhat.com=david@srs-se1.protection.inumbo.net>)
+ id 1r2v7V-0008AQ-AB
+ for xen-devel@lists.xenproject.org; Tue, 14 Nov 2023 15:14:29 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6c487ea4-8300-11ee-98db-6d05b1d4d9a1;
- Tue, 14 Nov 2023 16:13:53 +0100 (CET)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-507cd62472dso7380661e87.0
- for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 07:13:53 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- f18-20020a05651232d200b00507987edd22sm1348822lfg.156.2023.11.14.07.13.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Nov 2023 07:13:51 -0800 (PST)
+ id 806bf6c7-8300-11ee-98db-6d05b1d4d9a1;
+ Tue, 14 Nov 2023 16:14:28 +0100 (CET)
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-677-1w4RiBWaObGnJbIewu3tcQ-1; Tue, 14 Nov 2023 10:14:25 -0500
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-32d9b520d15so2482429f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Nov 2023 07:14:25 -0800 (PST)
+Received: from ?IPV6:2003:cb:c73e:8900:2d8:c9f0:f3fb:d4fd?
+ (p200300cbc73e890002d8c9f0f3fbd4fd.dip0.t-ipconnect.de.
+ [2003:cb:c73e:8900:2d8:c9f0:f3fb:d4fd])
+ by smtp.gmail.com with ESMTPSA id
+ h15-20020a5d548f000000b0032fbe5b1e45sm8042334wrv.61.2023.11.14.07.14.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Nov 2023 07:14:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,126 +53,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c487ea4-8300-11ee-98db-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699974832; x=1700579632; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eni2uQcHzPa3p0BXkZBXBU2/wAC0HDdu58dG92X4l7M=;
-        b=Z+wy+1JBsk7MlZpZytGLbrHPQWSsV2MYyUW/RZ642njxYGQaliAoTTP2lsvNYAqWqt
-         MYLA6mw2ERwc1wf6Na4n8JnJTSvQB+kvM8zehF7QYr+ji7AAyDNAtAdCDxwbC8H2el/B
-         DSuP5QyfI5oY4yeyCQNZBY75O+mPgW3wMTNOd17UDG2s6TFRI9QmklBqxTwhy6EQA3JS
-         xMLCusODhqWtmEAJi8OVTLLd9OYk2OMBb2VUuZQR1nXRhRr50hA9WKgg7bvdKZrJxYIu
-         NXm8cKEjSW0eW5Kv4g1ZlVR7NOxWWfKc/6Kd5M7ESiLHFg8Ot2pMiqwJmlcd8zFuGgKO
-         lWNw==
+X-Inumbo-ID: 806bf6c7-8300-11ee-98db-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1699974867;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Zevbj+27sluhLeonkisRMHT3igYPuh7OylaeV79/St4=;
+	b=ZjYbG3Jb4RK2mz73Lrhs0R9/lJtKq0rwUiYavSYt1R7fTMHd9RHnACYsopL4Zcr5iCLTFm
+	1YxPrU1yYTArafWlrf1zH/2ptJ8xYq3uWBdh5jpYF2Uc2leEa556/Bdey36Zg32+4SK6Q9
+	7sqgu7+A0v37B9MzBS7rtgTwaAxz4I4=
+X-MC-Unique: 1w4RiBWaObGnJbIewu3tcQ-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699974832; x=1700579632;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=eni2uQcHzPa3p0BXkZBXBU2/wAC0HDdu58dG92X4l7M=;
-        b=DGKZFYGwHgV0rcpliKqTtz7xygaJrqin3jRK8B0JY4RQ9O2HMc+gsizJWrt6grIwwZ
-         iWfr0RzVGNLDSbrIbIIUMaNFewS5ihTY+SRH2321PgaceIahRnK4g7HF339cP3n0t5v8
-         P9ON+x+T1m9iaaiUjSuhpATceUsyOD/6skN/cVSijKYRdu99egTUraOCYc95mkhvKSmX
-         RnWMPCAFNYWLZR9scozNcZbK4YgYX8sM65TBfRkTnvTDVvqD3nIOXsa0XvBbOgnfhfOC
-         vJKdzok5OzmGsn/mzQ6eSFS6JPijs/HoYdYTPhaprIBJHCdDfq9yuucpH8BJ3l740IJs
-         CvLw==
-X-Gm-Message-State: AOJu0Yw00rRfwWzT1x16Ail0QTh+FaxeYrNeyT02iblnUTb49KUBkBgN
-	MHolKldhIXNKaRP88qf+YDJU92zx8+k=
-X-Google-Smtp-Source: AGHT+IEzcpy18UDDhhnN+a+RNf+F0kB/z2W2MF5MLcjpqSpUTxrMDiRTRF7evh7oap6bN8DHUtnA5g==
-X-Received: by 2002:a05:6512:3d1b:b0:500:acae:30c5 with SMTP id d27-20020a0565123d1b00b00500acae30c5mr1275757lfv.15.1699974832143;
-        Tue, 14 Nov 2023 07:13:52 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v3] xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
-Date: Tue, 14 Nov 2023 17:13:49 +0200
-Message-ID: <371c5dd29fa974ca27db1f720f17fb0ffdd667a0.1699974488.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.41.0
+        d=1e100.net; s=20230601; t=1699974864; x=1700579664;
+        h=content-transfer-encoding:in-reply-to:organization:autocrypt:from
+         :references:cc:to:content-language:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Zevbj+27sluhLeonkisRMHT3igYPuh7OylaeV79/St4=;
+        b=gRr5FMWkkrdOqgTOeXa7FokeLYmLL5CRtfMnr8wQgDL2dgu6lM13y6PmYfecOZGhXG
+         gf3Gp1B83uG/KMlCzSFFDyQOUC57jIW51Ye+fFrlrXMK1c8JAp4cyo3D6vH6Us99sEHQ
+         ua9kut6pZqSpFXEtSLK+S2nlC8C44611JoEJezRHx73hTGHAe+wklEqlm9EaLCjawI/q
+         X3ZQlcyCdKaP51zOaDJPzKNVDPC7ZsgVMnrNn0/dWCvINlKh4sr7MXTpELy+aUs4PeDZ
+         9iHUXpMcPKrHqHlRf+xiyPWRCytaGoMyigkt/B/EScrafaZLQa+fZDk1kZZ1xsltoSrS
+         D1lw==
+X-Gm-Message-State: AOJu0Yyxmb7z6jSIUimzXLgJ+IzmvMA/HFNPohxnYOjpdriDI8fC7wcW
+	8YnzlWNKGsV23PREbtHHwC33XSbWcknAbDH8C7lzbPK/h+NYTTRfh80On4KbTzwfFeDldOytZ7d
+	FxWYU2vJ9XPbATqCCe8Tx7V/va9o=
+X-Received: by 2002:a5d:598b:0:b0:32f:77a6:52ea with SMTP id n11-20020a5d598b000000b0032f77a652eamr8145360wri.61.1699974864154;
+        Tue, 14 Nov 2023 07:14:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHWvp2RmJ//8fsFBdsIYlfatPRTWrCx9ePltVcGnpvlfrdHxaQugSb5f0/fufSXb+7rD+l7ow==
+X-Received: by 2002:a5d:598b:0:b0:32f:77a6:52ea with SMTP id n11-20020a5d598b000000b0032f77a652eamr8145338wri.61.1699974863739;
+        Tue, 14 Nov 2023 07:14:23 -0800 (PST)
+Message-ID: <32e27c37-d208-4575-8807-99b6a91f7321@redhat.com>
+Date: Tue, 14 Nov 2023 16:14:22 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH-for-9.0 v2 04/19] system/physmem: Do not include
+ 'hw/xen/xen.h' but 'sysemu/xen.h'
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ David Woodhouse <dwmw@amazon.co.uk>, qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Paul Durrant <paul@xen.org>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, David Woodhouse <dwmw2@infradead.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ xen-devel@lists.xenproject.org, qemu-block@nongnu.org,
+ Anthony Perard <anthony.perard@citrix.com>, kvm@vger.kernel.org,
+ Thomas Huth <thuth@redhat.com>, Peter Xu <peterx@redhat.com>
+References: <20231114143816.71079-1-philmd@linaro.org>
+ <20231114143816.71079-5-philmd@linaro.org>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ WNyWQQ==
+Organization: Red Hat
+In-Reply-To: <20231114143816.71079-5-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-ifdefing inclusion of <asm/mem_access.h> in <xen/mem_access.h>
-allows to avoid generation of empty <asm/mem_access.h> header
-for the case when !CONFIG_MEM_ACCESS.
+On 14.11.23 15:38, Philippe Mathieu-Daudé wrote:
+> physmem.c doesn't use any declaration from "hw/xen/xen.h",
+> it only requires "sysemu/xen.h" and "system/xen-mapcache.h".
+> 
+> Suggested-by: David Woodhouse <dwmw@amazon.co.uk>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
 
-For Arm it was explicitly added inclusion of <asm/mem_access.h> for p2m.c
-and traps.c because they require some functions from <asm/mem_access.h> which
-aren't available in case of !CONFIG_MEM_ACCESS.
+Reviewed-by: David Hildenbrand <david@redhat.com>
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-
----
-This patch was part of patch series:
-https://lore.kernel.org/xen-devel/cover.1699633310.git.oleksii.kurochko@gmail.com/
-
-The patch series hasn't been reviewed all yet so send this path
-separately.
----
- xen/arch/arm/p2m.c           | 6 ++++++
- xen/arch/arm/traps.c         | 6 ++++++
- xen/include/xen/mem_access.h | 2 ++
- 3 files changed, 14 insertions(+)
-
-diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
-index de32a2d638..9050c72acf 100644
---- a/xen/arch/arm/p2m.c
-+++ b/xen/arch/arm/p2m.c
-@@ -11,6 +11,12 @@
- #include <asm/event.h>
- #include <asm/flushtlb.h>
- #include <asm/guest_walk.h>
-+/*
-+ * Inclusion of <asm/mem_acces.h> in <xen/mem_access.h> is #ifdef-ed with
-+ * CONFIG_MEM_ACCESS so in case of !CONFIG_MEM_ACCESS will cause a compilation
-+ * issue "implicit declaration of functions 'p2m_mem_access*'.
-+ */
-+#include <asm/mem_access.h>
- #include <asm/page.h>
- #include <asm/traps.h>
- 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index ce89f16404..5e39b26272 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -35,6 +35,12 @@
- #include <asm/cpufeature.h>
- #include <asm/event.h>
- #include <asm/hsr.h>
-+/*
-+ * Inclusion of <asm/mem_acces.h> in <xen/mem_access.h> is #ifdef-ed with
-+ * CONFIG_MEM_ACCESS so in case of !CONFIG_MEM_ACCESS will cause a compilation
-+ * issue "implicit declaration of functions 'p2m_mem_access*.
-+ */
-+#include <asm/mem_access.h>
- #include <asm/mmio.h>
- #include <asm/regs.h>
- #include <asm/smccc.h>
-diff --git a/xen/include/xen/mem_access.h b/xen/include/xen/mem_access.h
-index 4e4811680d..87d93b31f6 100644
---- a/xen/include/xen/mem_access.h
-+++ b/xen/include/xen/mem_access.h
-@@ -33,7 +33,9 @@
-  */
- struct vm_event_st;
- 
-+#ifdef CONFIG_MEM_ACCESS
- #include <asm/mem_access.h>
-+#endif
- 
- /*
-  * Additional access types, which are used to further restrict
 -- 
-2.41.0
+Cheers,
+
+David / dhildenb
 
 
