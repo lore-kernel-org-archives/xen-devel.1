@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B25C5AD4C
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Nov 2023 17:28:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.633810.988874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7333DC072A2
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Nov 2023 17:31:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.633823.988904 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3Jfz-0003H2-Qq; Wed, 15 Nov 2023 17:27:43 +0000
+	id 1r3JjP-00064G-S3; Wed, 15 Nov 2023 17:31:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 633810.988874; Wed, 15 Nov 2023 17:27:43 +0000
+Received: by outflank-mailman (output) from mailman id 633823.988904; Wed, 15 Nov 2023 17:31:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3Jfz-0003Gt-Nz; Wed, 15 Nov 2023 17:27:43 +0000
-Received: by outflank-mailman (input) for mailman id 633810;
- Wed, 15 Nov 2023 17:27:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ynSk=G4=desiato.srs.infradead.org=BATV+a72437c23eaab18a7e37+7388+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r3Jfx-00031s-FT
- for xen-devel@lists.xenproject.org; Wed, 15 Nov 2023 17:27:42 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 44ac0529-83dc-11ee-98db-6d05b1d4d9a1;
- Wed, 15 Nov 2023 18:27:38 +0100 (CET)
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r3Jfi-004Bc0-25; Wed, 15 Nov 2023 17:27:26 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r3Jfh-004sFA-0O; Wed, 15 Nov 2023 17:27:25 +0000
+	id 1r3JjP-000649-PH; Wed, 15 Nov 2023 17:31:15 +0000
+Received: by outflank-mailman (input) for mailman id 633823;
+ Wed, 15 Nov 2023 17:31:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1r3JjO-00063x-3d
+ for xen-devel@lists.xenproject.org; Wed, 15 Nov 2023 17:31:14 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1r3JjN-0006G3-MP; Wed, 15 Nov 2023 17:31:13 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1r3JjN-0005EP-Ga; Wed, 15 Nov 2023 17:31:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,50 +40,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 44ac0529-83dc-11ee-98db-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=xZ0wYBocgdl60a2Ke1KkDB2txC+xjHjAaO8lJ+NcfrU=; b=XVzGDFHvHAQS7pHVQQYtQa/lLp
-	2UoxL3xy8yAGaXIpD3HnYS1Nexe0T24xp6GGBlvQ7XnNUTTstfnTk6JlEbkW5tWd+k2do+YX/362E
-	DR5UB6NSCYhGk+b+vs5WIXsgrFrJDP7bLVsNGhATvHJ5BhcEdIqcKo6n8SZfmYmTNktVgO9yvE0To
-	lL4uY0PRJ2LnFAT8Taclm5kj3ZIOvAhgMiso1mBHsxWMEw3yskvBkxdFtKIfnJX9zYIOmdsjOjaet
-	wboDj3DcmL97sWedEbN1B8S2cnCwgMANT5vxhwvHjC9jx+OdXSY0/Ve02cQI9oX+Z9PYILTBqBQBr
-	baiYoa1A==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Kevin Wolf <kwolf@redhat.com>,
-	Hanna Reitz <hreitz@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	qemu-block@nongnu.org
-Subject: [PATCH 0/3] Misc fixes for 8.2
-Date: Wed, 15 Nov 2023 17:24:34 +0000
-Message-ID: <20231115172723.1161679-1-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.41.0
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=fl6xOmXJi6+18dkqwdXBTON/RwPUjxd+q6/WwEvMjig=; b=KiJNN+PUuA63sTQP9RTPk4Y5pf
+	VMqB/L7amRdn8wRZ9stZPWdfCRm1Flmw7jHwCbAeZXsOCJDYLX4zrQwyclUwdb8cuja/kJsglWW30
+	JCSO1aWEySeXc2Hx57uRBnBzXemwqlmMbFVca5Bo/74nTVr8EkQY1GUEaE+kysUHeSko=;
+Message-ID: <9e0760f2-6ffd-4010-aabf-ff4f643f288c@xen.org>
+Date: Wed, 15 Nov 2023 17:31:11 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 2/6] xen/public: arch-arm: reserve resources for
+ virtio-pci
+Content-Language: en-GB
+To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
+ Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20231115112611.3865905-1-Sergiy_Kibrik@epam.com>
+ <20231115112611.3865905-3-Sergiy_Kibrik@epam.com>
+ <f4523916-f8aa-4f3c-a148-2fc73b0c5fa4@xen.org>
+ <a5ce647b-f372-41ee-b1d2-b6ff16c3d1a0@epam.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <a5ce647b-f372-41ee-b1d2-b6ff16c3d1a0@epam.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-Fix a use-after-free (or double-free) due to net_cleanup() freeing NICs
-that don't belong to it, fix a newly-introduced launch failure with a
-documented command line, and clean up code to avoid a Coverity warning.
+Hi Oleksandr,
 
-David Woodhouse (3):
-      net: do not delete nics in net_cleanup()
-      vl: disable default serial when xen-console is enabled
-      hw/xen: clean up xen_block_find_free_vdev() to avoid Coverity false positive
+On 15/11/2023 16:51, Oleksandr Tyshchenko wrote:
+> 
+> 
+> On 15.11.23 14:33, Julien Grall wrote:
+>> Hi,
+> 
+> 
+> Hello Julien
+> 
+> Let me please try to explain some bits.
+> 
+> 
+>>
+>> Thanks for adding support for virtio-pci in Xen. I have some questions.
+>>
+>> On 15/11/2023 11:26, Sergiy Kibrik wrote:
+>>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>>
+>>> In order to enable more use-cases such as having multiple
+>>> device-models (Qemu) running in different backend domains which provide
+>>> virtio-pci devices for the same guest, we allocate and expose one
+>>> PCI host bridge for every virtio backend domain for that guest.
+>>
+>> OOI, why do you need to expose one PCI host bridge for every stubdomain?
+>>
+>> In fact looking at the next patch, it seems you are handling some of the
+>> hostbridge request in Xen. This is adds a bit more confusion.
+>>
+>> I was expecting the virtual PCI device would be in the vPCI and each
+>> Device emulator would advertise which BDF they are covering.
+> 
+> 
+> This patch series only covers use-cases where the device emulator
+> handles the *entire* PCI Host bridge and PCI (virtio-pci) devices behind
+> it (i.e. Qemu). Also this patch series doesn't touch vPCI/PCI
+> pass-through resources, handling, accounting, nothing. 
 
- hw/block/xen-block.c | 24 +++++++++++++++++++++---
- net/net.c            | 28 ++++++++++++++++++++++------
- system/vl.c          |  1 +
- 3 files changed, 44 insertions(+), 9 deletions(-)
+I understood you want to one Device Emulator to handle the entire PCI 
+host bridge. But...
 
+ From the
+> hypervisor we only need a help to intercept the config space accesses
+> happen in a range [GUEST_VIRTIO_PCI_ECAM_BASE ...
+> GUEST_VIRTIO_PCI_ECAM_BASE + GUEST_VIRTIO_PCI_TOTAL_ECAM_SIZE] and
+> forward them to the linked device emulator (if any), that's all.
 
+... I really don't see why you need to add code in Xen to trap the 
+region. If QEMU is dealing with the hostbridge, then it should be able 
+to register the MMIO region and then do the translation.
+
+> 
+> It is not possible (with current series) to run device emulators what
+> emulate only separate PCI (virtio-pci) devices. For it to be possible, I
+> think, much more changes are required than current patch series does.
+> There at least should be special PCI Host bridge emulation in Xen (or
+> reuse vPCI) for the integration. Also Xen should be in charge of forming
+> resulting PCI interrupt based on each PCI device level signaling (if we
+> use legacy interrupts), some kind of x86's XEN_DMOP_set_pci_intx_level,
+> etc. Please note, I am not saying this is not possible in general,
+> likely it is possible, but initial patch series doesn't cover these
+> use-cases)
+> 
+> We expose one PCI host bridge per virtio backend domain. This is a
+> separate PCI host bridge to combine all virtio-pci devices running in
+> the same backend domain (in the same device emulator currently).
+> The examples:
+> - if only one domain runs Qemu which servers virtio-blk, virtio-net,
+> virtio-console devices for DomU - only single PCI Host bridge will be
+> exposed for DomU
+> - if we add another domain to run Qemu to serve additionally virtio-gpu,
+> virtio-input and virtio-snd for the *same* DomU - we expose second PCI
+> Host bridge for DomU
+> 
+> I am afraid, we cannot end up exposing only single PCI Host bridge with
+> current model (if we use device emulators running in different domains
+> that handles the *entire* PCI Host bridges), this won't work.
+
+That makes sense and it is fine. But see above, I think only the #2 is 
+necessary for the hypervisor. Patch #5 should not be necessary at all.
+
+[...]
+
+>>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+>>> ---
+>>>    xen/include/public/arch-arm.h | 21 +++++++++++++++++++++
+>>>    1 file changed, 21 insertions(+)
+>>>
+>>> diff --git a/xen/include/public/arch-arm.h
+>>> b/xen/include/public/arch-arm.h
+>>> index a25e87dbda..e6c9cd5335 100644
+>>> --- a/xen/include/public/arch-arm.h
+>>> +++ b/xen/include/public/arch-arm.h
+>>> @@ -466,6 +466,19 @@ typedef uint64_t xen_callback_t;
+>>>    #define GUEST_VPCI_MEM_ADDR                 xen_mk_ullong(0x23000000)
+>>>    #define GUEST_VPCI_MEM_SIZE                 xen_mk_ullong(0x10000000)
+>>> +/*
+>>> + * 16 MB is reserved for virtio-pci configuration space based on
+>>> calculation
+>>> + * 8 bridges * 2 buses x 32 devices x 8 functions x 4 KB = 16 MB
+>>
+>> Can you explain how youd ecided the "2"?
+> 
+> good question, we have a limited free space available in memory layout
+> (we had difficulties to find a suitable holes) also we don't expect a
+> lot of virtio-pci devices, so "256" used vPCI would be too much. It was
+> decided to reduce significantly, but select maximum to fit into free
+> space, with having "2" buses we still fit into the chosen holes.
+
+If you don't expect a lot of virtio devices, then why do you need two 
+buses? Wouldn't one be sufficient?
+
+> 
+> 
+>>
+>>> + */
+>>> +#define GUEST_VIRTIO_PCI_ECAM_BASE          xen_mk_ullong(0x33000000)
+>>> +#define GUEST_VIRTIO_PCI_TOTAL_ECAM_SIZE    xen_mk_ullong(0x01000000)
+>>> +#define GUEST_VIRTIO_PCI_HOST_ECAM_SIZE     xen_mk_ullong(0x00200000)
+>>> +
+>>> +/* 64 MB is reserved for virtio-pci memory */
+>>> +#define GUEST_VIRTIO_PCI_ADDR_TYPE_MEM    xen_mk_ullong(0x02000000)
+>>> +#define GUEST_VIRTIO_PCI_MEM_ADDR         xen_mk_ullong(0x34000000)
+>>> +#define GUEST_VIRTIO_PCI_MEM_SIZE         xen_mk_ullong(0x04000000)
+>>> +
+>>>    /*
+>>>     * 16MB == 4096 pages reserved for guest to use as a region to map its
+>>>     * grant table in.
+>>> @@ -476,6 +489,11 @@ typedef uint64_t xen_callback_t;
+>>>    #define GUEST_MAGIC_BASE  xen_mk_ullong(0x39000000)
+>>>    #define GUEST_MAGIC_SIZE  xen_mk_ullong(0x01000000)
+>>> +/* 64 MB is reserved for virtio-pci Prefetch memory */
+>>
+>> This doesn't seem a lot depending on your use case. Can you details how
+>> you can up with "64 MB"?
+> 
+> the same calculation as it was done configuration space. It was observed
+> that only 16K is used per virtio-pci device (maybe it can be bigger for
+> usual PCI device, I don't know). Please look at the example of DomU log
+> below (to strings that contain "*BAR 4: assigned*"):
+
+What about virtio-gpu? I would expect a bit more memory is necessary for 
+that use case.
+
+Any case, what I am looking for is for some explanation in the commit 
+message of the limits. I don't particularly care about the exact limit 
+because this is not part of a stable ABI.
+
+Cheers,
+
+-- 
+Julien Grall
 
