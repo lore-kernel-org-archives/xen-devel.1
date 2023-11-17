@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E64C072A2
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 10:15:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635024.990715 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CD40C197A0
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 10:17:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635033.990735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3vsb-0002E0-Gh; Fri, 17 Nov 2023 10:15:17 +0000
+	id 1r3vv6-0003tf-5e; Fri, 17 Nov 2023 10:17:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635024.990715; Fri, 17 Nov 2023 10:15:17 +0000
+Received: by outflank-mailman (output) from mailman id 635033.990735; Fri, 17 Nov 2023 10:17:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3vsb-0002Dt-Ds; Fri, 17 Nov 2023 10:15:17 +0000
-Received: by outflank-mailman (input) for mailman id 635024;
- Fri, 17 Nov 2023 10:15:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r3vv6-0003tV-1v; Fri, 17 Nov 2023 10:17:52 +0000
+Received: by outflank-mailman (input) for mailman id 635033;
+ Fri, 17 Nov 2023 10:17:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1e97=G6=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r3vsa-0002Dn-BR
- for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 10:15:16 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3386e5b1-8532-11ee-98dc-6d05b1d4d9a1;
- Fri, 17 Nov 2023 11:15:15 +0100 (CET)
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2c50906f941so25137341fa.2
- for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 02:15:15 -0800 (PST)
+ id 1r3vv4-0003aG-6j
+ for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 10:17:50 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8ea24bbc-8532-11ee-9b0e-b553b5be7939;
+ Fri, 17 Nov 2023 11:17:48 +0100 (CET)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5094727fa67so2568151e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 02:17:48 -0800 (PST)
 Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- m21-20020a05600c3b1500b003fe61c33df5sm6686487wms.3.2023.11.17.02.15.14
+ m8-20020a05600c4f4800b004083bc9ac90sm2200097wmq.24.2023.11.17.02.17.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 02:15:14 -0800 (PST)
+ Fri, 17 Nov 2023 02:17:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,85 +46,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3386e5b1-8532-11ee-98dc-6d05b1d4d9a1
+X-Inumbo-ID: 8ea24bbc-8532-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1700216115; x=1700820915; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1700216268; x=1700821068; darn=lists.xenproject.org;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:message-id:subject:cc:to:from:date:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=JtN5H/wJPQwEEETu4NWtSSlUD1qXiWR4M/LuTh8uuvI=;
-        b=pVIEHFxbnrpXZfYS3ylm8WUv92Za5X9U5KtqICSytsfOwfOsA8px/BT4V0kU3c7ezI
-         w4vU1G0MOF2mkbVNq/j0ic7OH+wWHiTIvZXfsyWKmzt69VqtediA03Z2jeelUUg+aUS6
-         bPmuljtY4/+daxJzex+/ug2RQgKbg9telBq7o=
+        bh=loXZqCZDmQ7tctq/Y997gxvqbChXA3qRMNqwb52e5U8=;
+        b=Q19OA0dxsIiAiB/yq3A+ehLEZNT48nzgVHegleMhRGdn6I3AeJdcUYAuOB3sK2T7FP
+         IqbHV1dnQtB6xQ8/v8d22p2W9Wf08NimWyaBnpF+jCPPTovE+QltuCrIcXLpm8FwHn0w
+         Xl/GvqdcJjoURGvKht+6ckLwDqoDnGvGHoLHI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700216115; x=1700820915;
+        d=1e100.net; s=20230601; t=1700216268; x=1700821068;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=JtN5H/wJPQwEEETu4NWtSSlUD1qXiWR4M/LuTh8uuvI=;
-        b=cPjPu6+3e/bvJf482H17A8rLFZhXYwWEY4jGxPGBzt6dxxjBbLsI4+ubRR3RtmAZs2
-         fxOhXHATFTCL4WzkOdpBcIeFpDDdHYLP8PlyUauB6OVGb5CC0pkKkdLzP7Nph+xQ5uQJ
-         N9UquqHhRJwadby0OSMDdkGgSQMLMYDmqzEfcHQxhY2bHbTyRgAc7lEVqtjGxEWbTpbo
-         AGAifDXor+MzCTUxSZXFgcRkTTt2vKrtebd/Vj03LucsKV01rU66PjgZefoi9kpK9ULO
-         WUv0EtZ8MjSOjWEx4851i5kFPuwjFnCHEatSr2SpUWJcptBDJmKpM8P/Xums/pZ64Yrd
-         ABtA==
-X-Gm-Message-State: AOJu0YzXPKtiwNS6mh+blZEuZCGO04sKz/iPp+QeKyu58DGnWi6kodRA
-	zZhOcb8Q6X0SeVuUtWcsdV7JzK73d3FLime6x+k=
-X-Google-Smtp-Source: AGHT+IEbBGU7eT4q8z2kU3Mzq7HgjEKUHc8tnPA2LTw0jSwhyYTIYWZq1d3QGNbkJ8kfCqPFQl3ACg==
-X-Received: by 2002:a2e:bc14:0:b0:2c5:1aae:400d with SMTP id b20-20020a2ebc14000000b002c51aae400dmr9954396ljf.22.1700216115022;
-        Fri, 17 Nov 2023 02:15:15 -0800 (PST)
-Date: Fri, 17 Nov 2023 11:15:13 +0100
+        bh=loXZqCZDmQ7tctq/Y997gxvqbChXA3qRMNqwb52e5U8=;
+        b=esk1mzc4HAHZ1DKV9/KQx3bWv4yFRXzFNY+bk3UAcxWXN5zWqdCGqCdJGiXzQQk5Pu
+         7YEhlLOH4FmcEC8Hu/Mbhi2KLE8WGXoDFU46I7buFlLGZ9Pj9whKCLHNvot9MFsxqtWf
+         xTbQdZyuhU3JsqdN2z/4g8fQC1j2W9/tyEAFM+GjfKmVyhaweE3poV30wPlD63CeNseL
+         3dx7XI5pI/2hytu6l9C79K71BbD5H4KkimeEO0sImJaWcXnhmWtHH3wmAKvVCg3abo3/
+         CqofQVof8BxyZZphcSCfagKOslZ0rLRSfLDxhR6F1LBRILWsGRrSedNWHnMq56Dxu7Yr
+         oCRg==
+X-Gm-Message-State: AOJu0YyV8BxcMPXNJx8i7MKjRPgFO5IiDNHo6fsoCV/n1lAxcAyDplSe
+	t3ku8r6kGd0M4wdu3TcMRSBzmg==
+X-Google-Smtp-Source: AGHT+IEbr8434/vDbB0YPkN7kEQHhrSbvzO1Y8k461p9hfxyGi7h3f4YDNOiO/oF7N7xwgL9lft7ow==
+X-Received: by 2002:a05:6512:104c:b0:50a:756d:40fd with SMTP id c12-20020a056512104c00b0050a756d40fdmr4306611lfb.11.1700216267798;
+        Fri, 17 Nov 2023 02:17:47 -0800 (PST)
+Date: Fri, 17 Nov 2023 11:17:46 +0100
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH 6/6] automation: switch to multi-platform images when
- possible
-Message-ID: <ZVc9MZQ3lJpL2Nz1@macbook.local>
-References: <20231116121310.72210-1-roger.pau@citrix.com>
- <20231116121310.72210-7-roger.pau@citrix.com>
- <alpine.DEB.2.22.394.2311161711560.773207@ubuntu-linux-20-04-desktop>
+To: James Dingwall <james@dingwall.me.uk>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	James Dingwall <james-xen@dingwall.me.uk>,
+	xen-devel@lists.xenproject.org
+Subject: Re: xen 4.15.5: msr_relaxed required for MSR 0x1a2
+Message-ID: <ZVc9yq9b6fezMWcY@macbook.local>
+References: <ZVZAO/W0m/h+IPbi@dingwall.me.uk>
+ <aa13be5e-d90c-4074-a16c-d3b051da754d@citrix.com>
+ <ZVcv7259slJF4wBh@dingwall.me.uk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <alpine.DEB.2.22.394.2311161711560.773207@ubuntu-linux-20-04-desktop>
+In-Reply-To: <ZVcv7259slJF4wBh@dingwall.me.uk>
 
-On Thu, Nov 16, 2023 at 05:14:23PM -0800, Stefano Stabellini wrote:
-> On Thu, 16 Nov 2023, Roger Pau Monne wrote:
-> > Instead of using specific architecture image, switch to using multi-arch ones
-> > and specify the desired architecture using the --platform option.
+On Fri, Nov 17, 2023 at 09:18:39AM +0000, James Dingwall wrote:
+> On Thu, Nov 16, 2023 at 04:32:47PM +0000, Andrew Cooper wrote:
+> > On 16/11/2023 4:15 pm, James Dingwall wrote:
+> > > Hi,
+> > >
+> > > Per the msr_relaxed documentation:
+> > >
+> > >    "If using this option is necessary to fix an issue, please report a bug."
+> > >
+> > > After recently upgrading an environment from Xen 4.14.5 to Xen 4.15.5 we
+> > > started experiencing a BSOD at boot with one of our Windows guests.  We found
+> > > that enabling `msr_relaxed = 1` in the guest configuration has resolved the
+> > > problem.  With a debug build of Xen and `hvm_debug=2048` on the command line
+> > > the following messages were caught as the BSOD happened:
+> > >
+> > > (XEN) [HVM:11.0] <vmx_msr_read_intercept> ecx=0x1a2
+> > > (XEN) vmx.c:3298:d11v0 RDMSR 0x000001a2 unimplemented
+> > > (XEN) d11v0 VIRIDIAN CRASH: 1e ffffffffc0000096 fffff80b8de81eb5 0 0
+> > >
+> > > I found that MSR 0x1a2 is MSR_TEMPERATURE_TARGET and from that this patch
+> > > series from last month:
+> > >
+> > > https://patchwork.kernel.org/project/xen-devel/list/?series=796550
+> > >
+> > > Picking out just a small part of that fixes the problem for us. Although the
+> > > the patch is against 4.15.5 I think it would be relevant to more recent
+> > > releases too.
 > > 
-> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> > ---
-> > I haven't touched the Yocto dockerfile because I'm not sure how it's used.
+> > Which version of Windows, and what hardware?
+> > 
+> > The Viridian Crash isn't about the RDMSR itself - it's presumably
+> > collateral damage shortly thereafter.
+> > 
+> > Does filling in 0 for that MSR also resolve the issue?  It's model
+> > specific and we absolutely cannot pass it through from real hardware
+> > like that.
+> > 
 > 
-> We are missing:
+> Hi Andrew,
 > 
-> automation/build/debian/buster-gcc-ibt.dockerfile
+> Thanks for your response.  The guest is running Windows 10 and the crash
+> happens in a proprietary hardware driver.
 
-That file was updated in patch 5/6:
-
-https://lore.kernel.org/xen-devel/20231116121310.72210-6-roger.pau@citrix.com/
-
-> automation/build/debian/bookworm-cppcheck.dockerfile
-
-Not sure I'm following, bookworm-cppcheck.dockerfile is updated...
-
-> automation/tests-artifacts/*
-
-Oh, didn't realize about those, I will do in a separate patch.
-
-> Aside from that, it is fine.
-> 
-> How did you test the updated containers? Have you already pushed them to
-> the registry?
-
-I've pushed them to my local registry and changed the registry in one
-of my Xen branches, see:
-
-https://gitlab.com/xen-project/people/royger/xen/-/pipelines/1074512137
-
-Some jobs failed because the runners run out of space.
+When you say proprietary you mean a custom driver made for your
+use-case, or is this some vendor driver widely available?
 
 Thanks, Roger.
 
