@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 993E5C072A2
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 12:05:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635099.990844 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F3DC072A2
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 12:25:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635112.990885 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3xal-0003Xy-BA; Fri, 17 Nov 2023 12:04:59 +0000
+	id 1r3xtz-0001KH-QF; Fri, 17 Nov 2023 12:24:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635099.990844; Fri, 17 Nov 2023 12:04:59 +0000
+Received: by outflank-mailman (output) from mailman id 635112.990885; Fri, 17 Nov 2023 12:24:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3xal-0003Xr-8a; Fri, 17 Nov 2023 12:04:59 +0000
-Received: by outflank-mailman (input) for mailman id 635099;
- Fri, 17 Nov 2023 12:04:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r3xtz-0001KA-M9; Fri, 17 Nov 2023 12:24:51 +0000
+Received: by outflank-mailman (input) for mailman id 635112;
+ Fri, 17 Nov 2023 12:24:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1e97=G6=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r3xaj-0003Xj-Rk
- for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 12:04:57 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 863fb1d0-8541-11ee-98dc-6d05b1d4d9a1;
- Fri, 17 Nov 2023 13:04:56 +0100 (CET)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4079ed65471so15538015e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 04:04:56 -0800 (PST)
-Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- v21-20020a05600c429500b0040a4cc876e0sm2447375wmc.40.2023.11.17.04.04.55
+ <SRS0=c3wv=G6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1r3xtx-0000iK-V2
+ for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 12:24:49 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4c8a8535-8544-11ee-9b0e-b553b5be7939;
+ Fri, 17 Nov 2023 13:24:48 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-50aa2abfcfcso185150e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 04:24:48 -0800 (PST)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ a18-20020ac25e72000000b005094d95e8bcsm209811lfr.218.2023.11.17.04.24.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 04:04:55 -0800 (PST)
+ Fri, 17 Nov 2023 04:24:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,234 +46,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 863fb1d0-8541-11ee-98dc-6d05b1d4d9a1
+X-Inumbo-ID: 4c8a8535-8544-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1700222696; x=1700827496; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=dLFzUW6/wb0srpQqKWk54q2GmVgvGwjkRl4RtOKuHn0=;
-        b=hU7DNS+4lyDrL+78wv+6DB5uBMkQnDpegciA4cxzV9DvPMPgYpbZXqrOUY7+hUtE+M
-         oqlhX84b98inFCpw25e7ntLfHEYut3QAnICN8KxU9xqZYUMFCizkIXK+BL1xz8ajVHPU
-         9xGhi2pvPu4kpd7jXbxnjIcAerTldDfoIdPD0=
+        d=gmail.com; s=20230601; t=1700223887; x=1700828687; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Q4Bl151fhJ0xUdwwLt/MNmOxcrc+o6rAwxdJ/C4d3oY=;
+        b=lU0P3zPKzjzYN3PTklf4aqCrinnYngk2gQg86zBfGlluQsW5j4/hx3W0QIOi1Iz3Il
+         6em5nfFjeL1ZfR3OYBViwxmLZVlwpFyikOtlCb8vcPcZpevyQV/pXeWh9+7z+cq6zbud
+         2MN4224qCkGfDOd8OC61uUJUvL2dImRo6/mgM05YF/fD7GcCSsjIsvj0DAyCsH4NmDor
+         VsvELFkAQrFmLYabkMdog8uMxFOne3WC6qAwtp6mDiVkv9dL5dhMtCLUl6y+98ccCX0z
+         K0HptO1xvAj0OhWGGsoqiXOkcX6gbO6VWNouBpEuO5zSSfk7L+eoPuMUhuFnH0yMM/X5
+         u9PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700222696; x=1700827496;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=dLFzUW6/wb0srpQqKWk54q2GmVgvGwjkRl4RtOKuHn0=;
-        b=hX9+NKbV/ewbD8tpT0oqvCD0XUJA8aClPbuXVuMtv+r14nMDuIB4OQt5Z6d79zkp7b
-         cdVJh8k44TW0UiipUJpYa4IxnN68XmJTC3MH/d9SRzsdV+4obSF5+Ej8trwBtHiQF/0I
-         aOfW5uGaJVrjy/nigb/G3Rh06vGeFVE4xkIapPtQIh9CZ0dDbsfw0cUfTWFE/uroaDP7
-         eQQTyzZpjHCmEtO0L0TyagKtmAETfnFhRj4d1923M6YfthHYwp+YlcgQmwAMFB55fATS
-         UybubmrmzCggUSEt9t9RconnGUuM7qTSljMD2k/1YvV42DwsRPuz5XaqvS/MW9PvFUPo
-         JWlw==
-X-Gm-Message-State: AOJu0Yw2ICVUHd4+0wonYzKbD6U8sEzqEPm/MlZx+MlcJW3a0Ih8EBFl
-	7lh86kbH+hH3647+Km4XiCv4mZuoVBghoOEz0lA=
-X-Google-Smtp-Source: AGHT+IEKApUrJxfbalBtW+AgaBcxk6AWSfoSkFTzaZNGbKEENcCnDeuz6BH59IZrcGOeTMN/Uee1mg==
-X-Received: by 2002:a05:600c:138b:b0:408:4160:150a with SMTP id u11-20020a05600c138b00b004084160150amr4204823wmf.33.1700222695996;
-        Fri, 17 Nov 2023 04:04:55 -0800 (PST)
-Date: Fri, 17 Nov 2023 13:04:54 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1700223887; x=1700828687;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Q4Bl151fhJ0xUdwwLt/MNmOxcrc+o6rAwxdJ/C4d3oY=;
+        b=RQ0ASPgXG4j+dmmbY0LTmFVYvCwnlDPulDwvBAYmJ273mmgdW8utOjWYbKO0ZbNlo1
+         aTlarCkInJKGF1px3YazQCC2gSg9P8zeUU4oua2qAXGpNak5wW5JVNNrieEt+9vjem8k
+         2KjWa/xsw71t1R3MLE+5kalpL6e7gUPbsZP47CjWClwaUMFQeBaZagBSln+WJXTCeDG8
+         cmi1+iQX3LV4ti2+uDcry7T3xu5w6jjwDXqhQUpe10r1RsXqWvvU4GCtbHAUc90f3y9E
+         jfXmt15fMTJ1VhDOz3fVHvoA/d6OM0Jybm4fAxOrr60DeW9vR5O7r38JCW4a2GQVsfbX
+         sHSA==
+X-Gm-Message-State: AOJu0Yy6eNLA5hgbhsgOhVC4MwdRe3SQ6am8vsXrWHPNYJazy3UYwKLO
+	fwEfwiBy/+KbZnFaTckqWWGC3mqMH2Y=
+X-Google-Smtp-Source: AGHT+IEQGmAq7M3igpPBDgybVnhLTD9HucQkntc4cm/zOElOFuPdMvw5wfPD0tMgbHWZ7aCU8r1STg==
+X-Received: by 2002:a05:6512:941:b0:500:a378:db71 with SMTP id u1-20020a056512094100b00500a378db71mr12212137lft.57.1700223887288;
+        Fri, 17 Nov 2023 04:24:47 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <paul@xen.org>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH 3/3] x86/iommu: use a rangeset for hwdom setup
-Message-ID: <ZVdW5lf8VlauTDh-@macbook.local>
-References: <20231117094749.81091-1-roger.pau@citrix.com>
- <20231117094749.81091-4-roger.pau@citrix.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 03/14] xen/asm-generic: introduce generic hypercall.h
+Date: Fri, 17 Nov 2023 14:24:27 +0200
+Message-ID: <47f9117b19cbb616a36f4149a7aeaaffdbfa48a9.1700221559.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <cover.1700221559.git.oleksii.kurochko@gmail.com>
+References: <cover.1700221559.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231117094749.81091-4-roger.pau@citrix.com>
 
-On Fri, Nov 17, 2023 at 10:47:49AM +0100, Roger Pau Monne wrote:
-> The current loop that iterates from 0 to the maximum RAM address in order to
-> setup the IOMMU mappings is highly inefficient, and it will get worse as the
-> amount of RAM increases.  It's also not accounting for any reserved regions
-> past the last RAM address.
-> 
-> Instead of iterating over memory addresses, iterate over the memory map regions
-> and use a rangeset in order to keep track of which ranges need to be identity
-> mapped in the hardware domain physical address space.
-> 
-> On an AMD EPYC 7452 with 512GiB of RAM, the time to execute
-> arch_iommu_hwdom_init() in nanoseconds is:
-> 
-> x old
-> + new
->     N           Min           Max        Median           Avg        Stddev
-> x   5 2.2364154e+10  2.338244e+10 2.2474685e+10 2.2622409e+10 4.2949869e+08
-> +   5       1025012       1033036       1026188     1028276.2     3623.1194
-> Difference at 95.0% confidence
-> 	-2.26214e+10 +/- 4.42931e+08
-> 	-99.9955% +/- 9.05152e-05%
-> 	(Student's t, pooled s = 3.03701e+08)
-> 
-> Execution time of arch_iommu_hwdom_init() goes down from ~22s to ~0.001s.
-> 
-> Note there's a change for HVM domains (ie: PVH dom0) that get switched to
-> create the p2m mappings using map_mmio_regions() instead of
-> p2m_add_identity_entry(), so that ranges can be mapped with a single function
-> call if possible.  Note that the interface of map_mmio_regions() doesn't
-> allow creating read-only mappings, but so far there are no such mappings
-> created for PVH dom0 in arch_iommu_hwdom_init().
-> 
-> No change intended in the resulting mappings that a hardware domain gets.
-> 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
->  xen/arch/x86/hvm/io.c               |  15 +-
->  xen/arch/x86/include/asm/hvm/io.h   |   4 +-
->  xen/drivers/passthrough/x86/iommu.c | 355 +++++++++++++++++-----------
->  3 files changed, 231 insertions(+), 143 deletions(-)
-> 
-> diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-> index d75af83ad01f..7c4b7317b13a 100644
-> --- a/xen/arch/x86/hvm/io.c
-> +++ b/xen/arch/x86/hvm/io.c
-> @@ -364,9 +364,20 @@ static const struct hvm_mmcfg *vpci_mmcfg_find(const struct domain *d,
->      return NULL;
->  }
->  
-> -bool vpci_is_mmcfg_address(const struct domain *d, paddr_t addr)
-> +int vpci_subtract_mmcfg(const struct domain *d, struct rangeset *r)
->  {
-> -    return vpci_mmcfg_find(d, addr);
-> +    const struct hvm_mmcfg *mmcfg;
-> +
-> +    list_for_each_entry ( mmcfg, &d->arch.hvm.mmcfg_regions, next )
-> +    {
-> +        int rc = rangeset_remove_range(r, PFN_DOWN(mmcfg->addr),
-> +                                       PFN_DOWN(mmcfg->addr + mmcfg->size - 1));
-> +
-> +        if ( rc )
-> +            return rc;
-> +    }
-> +
-> +    return 0;
->  }
->  
->  static unsigned int vpci_mmcfg_decode_addr(const struct hvm_mmcfg *mmcfg,
-> diff --git a/xen/arch/x86/include/asm/hvm/io.h b/xen/arch/x86/include/asm/hvm/io.h
-> index e5225e75ef26..c9d058fd5695 100644
-> --- a/xen/arch/x86/include/asm/hvm/io.h
-> +++ b/xen/arch/x86/include/asm/hvm/io.h
-> @@ -153,8 +153,8 @@ int register_vpci_mmcfg_handler(struct domain *d, paddr_t addr,
->  /* Destroy tracked MMCFG areas. */
->  void destroy_vpci_mmcfg(struct domain *d);
->  
-> -/* Check if an address is between a MMCFG region for a domain. */
-> -bool vpci_is_mmcfg_address(const struct domain *d, paddr_t addr);
-> +/* Remove MMCFG regions from a given rangeset. */
-> +int vpci_subtract_mmcfg(const struct domain *d, struct rangeset *r);
->  
->  #endif /* __ASM_X86_HVM_IO_H__ */
->  
-> diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-> index d70cee9fea77..be2c909f61d8 100644
-> --- a/xen/drivers/passthrough/x86/iommu.c
-> +++ b/xen/drivers/passthrough/x86/iommu.c
-> @@ -301,129 +301,133 @@ void iommu_identity_map_teardown(struct domain *d)
->      }
->  }
->  
-> -static int __hwdom_init xen_in_range(unsigned long mfn)
-> +static int __hwdom_init remove_xen_ranges(struct rangeset *r)
->  {
->      paddr_t start, end;
-> -    int i;
-> -
-> -    enum { region_s3, region_ro, region_rw, region_bss, nr_regions };
-> -    static struct {
-> -        paddr_t s, e;
-> -    } xen_regions[nr_regions] __hwdom_initdata;
-> +    int rc;
->  
-> -    /* initialize first time */
-> -    if ( !xen_regions[0].s )
-> -    {
-> -        /* S3 resume code (and other real mode trampoline code) */
-> -        xen_regions[region_s3].s = bootsym_phys(trampoline_start);
-> -        xen_regions[region_s3].e = bootsym_phys(trampoline_end);
-> +    /* S3 resume code (and other real mode trampoline code) */
-> +    rc = rangeset_remove_range(r, PFN_DOWN(bootsym_phys(trampoline_start)),
-> +                               PFN_DOWN(bootsym_phys(trampoline_end)));
-> +    if ( rc )
-> +        return rc;
->  
-> -        /*
-> -         * This needs to remain in sync with the uses of the same symbols in
-> -         * - __start_xen()
-> -         * - is_xen_fixed_mfn()
-> -         * - tboot_shutdown()
-> -         */
-> +    /*
-> +     * This needs to remain in sync with the uses of the same symbols in
-> +     * - __start_xen()
-> +     * - is_xen_fixed_mfn()
-> +     * - tboot_shutdown()
-> +     */
-> +    /* hypervisor .text + .rodata */
-> +    rc = rangeset_remove_range(r, PFN_DOWN(__pa(&_stext)),
-> +                               PFN_DOWN(__pa(&__2M_rodata_end)));
-> +    if ( rc )
-> +        return rc;
->  
-> -        /* hypervisor .text + .rodata */
-> -        xen_regions[region_ro].s = __pa(&_stext);
-> -        xen_regions[region_ro].e = __pa(&__2M_rodata_end);
-> -        /* hypervisor .data + .bss */
-> -        xen_regions[region_rw].s = __pa(&__2M_rwdata_start);
-> -        xen_regions[region_rw].e = __pa(&__2M_rwdata_end);
-> -        if ( efi_boot_mem_unused(&start, &end) )
-> -        {
-> -            ASSERT(__pa(start) >= xen_regions[region_rw].s);
-> -            ASSERT(__pa(end) <= xen_regions[region_rw].e);
-> -            xen_regions[region_rw].e = __pa(start);
-> -            xen_regions[region_bss].s = __pa(end);
-> -            xen_regions[region_bss].e = __pa(&__2M_rwdata_end);
-> -        }
-> +    /* hypervisor .data + .bss */
-> +    if ( efi_boot_mem_unused(&start, &end) )
-> +    {
-> +        ASSERT(__pa(start) >= __pa(&__2M_rwdata_start));
-> +        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
-> +                                   PFN_DOWN(__pa(start)));
-> +        if ( rc )
-> +            return rc;
-> +        ASSERT(__pa(end) <= __pa(&__2M_rwdata_end));
-> +        rc = rangeset_remove_range(r, PFN_DOWN(__pa(end)),
-> +                                   PFN_DOWN(__pa(&__2M_rwdata_end)));
-> +        if ( rc )
-> +            return rc;
-> +    }
-> +    else
-> +    {
-> +        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
-> +                                   PFN_DOWN(__pa(&__2M_rwdata_end)));
-> +        if ( rc )
-> +            return rc;
->      }
-> -
-> -    start = (paddr_t)mfn << PAGE_SHIFT;
-> -    end = start + PAGE_SIZE;
-> -    for ( i = 0; i < nr_regions; i++ )
-> -        if ( (start < xen_regions[i].e) && (end > xen_regions[i].s) )
-> -            return 1;
->  
->      return 0;
->  }
->  
-> -static unsigned int __hwdom_init hwdom_iommu_map(const struct domain *d,
-> -                                                 unsigned long pfn,
-> -                                                 unsigned long max_pfn)
-> +static int __hwdom_init map_subtract(unsigned long s, unsigned long e,
+Introduce an empty generic hypercall.h for archs which don't
+implement it.
 
-Bah, this (and others below) are missing cf_check attribute.
+Drop PPC's hypercall.h and switch to generic one instead.
 
-Will fix in v2.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V3:
+ - Drop PPC's hypercall.h and switch to generic one.
+ - Update the commit message
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V2:
+ - add check that <asm/hypercall.h> isn't included directly.
+---
+ xen/arch/ppc/include/asm/Makefile    |  1 +
+ xen/arch/ppc/include/asm/hypercall.h |  5 -----
+ xen/include/asm-generic/hypercall.h  | 18 ++++++++++++++++++
+ 3 files changed, 19 insertions(+), 5 deletions(-)
+ delete mode 100644 xen/arch/ppc/include/asm/hypercall.h
+ create mode 100644 xen/include/asm-generic/hypercall.h
 
-Roger.
+diff --git a/xen/arch/ppc/include/asm/Makefile b/xen/arch/ppc/include/asm/Makefile
+index ece7fa66dd..48d587f35d 100644
+--- a/xen/arch/ppc/include/asm/Makefile
++++ b/xen/arch/ppc/include/asm/Makefile
+@@ -1,3 +1,4 @@
+ # SPDX-License-Identifier: GPL-2.0-only
++generic-y += hypercall.h
+ generic-y += paging.h
+ generic-y += vm_event.h
+diff --git a/xen/arch/ppc/include/asm/hypercall.h b/xen/arch/ppc/include/asm/hypercall.h
+deleted file mode 100644
+index 1e8ca0ce9c..0000000000
+--- a/xen/arch/ppc/include/asm/hypercall.h
++++ /dev/null
+@@ -1,5 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef __ASM_PPC_HYPERCALL_H__
+-#define __ASM_PPC_HYPERCALL_H__
+-
+-#endif /* __ASM_PPC_HYPERCALL_H__ */
+diff --git a/xen/include/asm-generic/hypercall.h b/xen/include/asm-generic/hypercall.h
+new file mode 100644
+index 0000000000..7743b35c0d
+--- /dev/null
++++ b/xen/include/asm-generic/hypercall.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __XEN_HYPERCALL_H__
++#error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
++#endif
++
++#ifndef __ASM_GENERIC_HYPERCALL_H__
++#define __ASM_GENERIC_HYPERCALL_H__
++
++#endif /* __ASM_GENERIC_HYPERCALL_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+-- 
+2.41.0
+
 
