@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6FDBC54FB9
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 10:18:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635032.990725 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E627C197A0
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 10:30:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635046.990745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3vv1-0003bo-TR; Fri, 17 Nov 2023 10:17:47 +0000
+	id 1r3w73-0000Jo-AX; Fri, 17 Nov 2023 10:30:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635032.990725; Fri, 17 Nov 2023 10:17:47 +0000
+Received: by outflank-mailman (output) from mailman id 635046.990745; Fri, 17 Nov 2023 10:30:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3vv1-0003bh-Qe; Fri, 17 Nov 2023 10:17:47 +0000
-Received: by outflank-mailman (input) for mailman id 635032;
- Fri, 17 Nov 2023 10:17:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r3w73-0000Jh-7x; Fri, 17 Nov 2023 10:30:13 +0000
+Received: by outflank-mailman (input) for mailman id 635046;
+ Fri, 17 Nov 2023 10:30:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2+Qn=G6=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1r3vv0-0003aG-6u
- for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 10:17:46 +0000
+ <SRS0=8Lb0=G6=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1r3w72-0000JZ-Ds
+ for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 10:30:12 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8bcbe792-8532-11ee-9b0e-b553b5be7939;
- Fri, 17 Nov 2023 11:17:43 +0100 (CET)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id 06A814EE0744;
- Fri, 17 Nov 2023 11:17:43 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 49302574-8534-11ee-98dc-6d05b1d4d9a1;
+ Fri, 17 Nov 2023 11:30:11 +0100 (CET)
+Received: from [172.20.10.2] (unknown [37.163.77.7])
+ by support.bugseng.com (Postfix) with ESMTPSA id 87FDB4EE0744;
+ Fri, 17 Nov 2023 11:30:09 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,74 +41,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8bcbe792-8532-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 49302574-8534-11ee-98dc-6d05b1d4d9a1
+Message-ID: <30cec2c7-5fac-458b-be90-e43a66b78058@bugseng.com>
+Date: Fri, 17 Nov 2023 11:30:08 +0100
 MIME-Version: 1.0
-Date: Fri, 17 Nov 2023 11:17:43 +0100
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Xen Devel <xen-devel@lists.xenproject.org>
-Cc: Consulting <consulting@bugseng.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Jbeulich <jbeulich@suse.com>, Andrew Cooper3
- <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>, Roger Pau
- <roger.pau@citrix.com>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal
- Orzel <michal.orzel@amd.com>
-Subject: Devise macros to encapsulate (x & -x)
-Message-ID: <08e6cb27d65250d109df0ef8a49dc80a@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH v3] xen: introduce function type bug_fn_t.
+Content-Language: en-US, it
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>
+References: <3942021ff51b117ab2b50aecd6e75353cd73ab20.1700158707.git.federico.serafini@bugseng.com>
+ <82bd029b-4c26-4eb3-9e93-1d34fab40db3@xen.org>
+From: Federico Serafini <federico.serafini@bugseng.com>
+Organization: BUGSENG srl
+In-Reply-To: <82bd029b-4c26-4eb3-9e93-1d34fab40db3@xen.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi all,
+On 17/11/23 11:12, Julien Grall wrote:
+> Hi Federico,
+> 
+> On 17/11/2023 08:28, Federico Serafini wrote:
+>> Introduce function type bug_fn_t. This improves readability and helps
+>> to validate that the function passed to run_in_exception_handle() has
+>> the expected prototype.
+> Hmmm... I read the second part as you will validate the type in 
+> run_in_exception_handle(). But I can't find such change. How about:
+> 
+> "and could be used to help validating that ..."
+> 
+> No need to send a new revision for that. I can do it on commit.
+> 
+>>
+>> Use the newly-intoduced type to address a violation of MISRA
+>> C:2012 Rule 8.2.
+>>
+>> Suggested-by: Julien Grall <julien@xen.org>
+>> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+> 
+> Acked-by: Julien Grall <jgrall@amazon.com>
+> 
+>> ---
+>>   xen/arch/arm/traps.c  | 2 +-
+>>   xen/include/xen/bug.h | 5 +++--
+>>   2 files changed, 4 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+>> index ce89f16404..8492e2b7bb 100644
+>> --- a/xen/arch/arm/traps.c
+>> +++ b/xen/arch/arm/traps.c
+>> @@ -1236,7 +1236,7 @@ int do_bug_frame(const struct cpu_user_regs 
+>> *regs, vaddr_t pc)
+>>       if ( id == BUGFRAME_run_fn )
+>>       {
+>> -        void (*fn)(const struct cpu_user_regs *) = (void 
+>> *)regs->BUG_FN_REG;
+>> +        bug_fn_t *fn = (void *)regs->BUG_FN_REG;
+>>           fn(regs);
+>>           return 0;
+>> diff --git a/xen/include/xen/bug.h b/xen/include/xen/bug.h
+>> index e8a4eea71a..cb5138410e 100644
+>> --- a/xen/include/xen/bug.h
+>> +++ b/xen/include/xen/bug.h
+>> @@ -99,6 +99,9 @@ struct bug_frame {
+>>   #endif
+>> +struct cpu_user_regs;
+>> +typedef void bug_fn_t(const struct cpu_user_regs *regs);
+>> +
+> 
+> If your aim is to validate the type in run_in_exception_handler(), then 
+> this is defined too late. You will need to define it before "asm/bug.h" 
+> is included so arch-specific implementations of run_in_exception_handler 
+> can use it.
+> 
+> Note that for Arm we are using a macro, but others may use a static inline.
 
-As discussed in this thread [1], which is about complying with MISRA C 
-Rule 10.1,
-a macro was introduced to encapsulate a well-known construct:
-
-/*
-  * Given an unsigned integer argument, expands to a mask where just the 
-least
-  * significant nonzero bit of the argument is set, or 0 if no bits are 
-set.
-  */
-#define ISOLATE_LSB(x) ((x) & -(x))
-
-This macro has a gained some calls in the subsequent patches in that 
-thread, but concerns were raised around the fact that it would be better 
-to devise a macro that evaluates its argument only once. A proposed 
-solution is this (thanks to Jan Beulich):
-
-#define ISOLATE_LSB(x) ({ \
-      typeof(x) x_ = (x); \
-      x_ & -x_; \
-})
-
-However, it can't be used in all call sites that the previous macro 
-would have once that series is committed, as can be seen in [2]. 
-Therefore, while the implementation looks ok,
-a case has been made to have separate macros, of which the latter form 
-is preferred.
-
-The following points require some thought:
-
-- where the single evaluation macro should be placed?
-   One proposed location is xen/include/xen/bitops.h
-- is the proposed form actually the best, or maybe it could be an inline 
-function?
-
-Then testing can happen and a subsequent version of those uncommitted 
-patches introducing uses of either construct will be submitted, to 
-modify all the call sites only once in the commit history.
-
-Let me know what you think of this.
-Regards,
-
-[1] 
-https://lore.kernel.org/xen-devel/8a1313b3ab5ba6dd556cf37409e3b703@bugseng.com/T/#mdeb510325e1acacb6477a88de8577e9e87351ba5
-[2] https://gitlab.com/xen-project/people/bugseng/xen/-/jobs/5423693947
+Thanks for the information!
 
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+Federico Serafini, M.Sc.
+
+Software Engineer, BUGSENG (http://bugseng.com)
 
