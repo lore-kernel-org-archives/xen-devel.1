@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F3DC072A2
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 12:25:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635112.990885 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EEB4C47071
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 12:25:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635114.990905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3xtz-0001KH-QF; Fri, 17 Nov 2023 12:24:51 +0000
+	id 1r3xu1-0001pp-Hw; Fri, 17 Nov 2023 12:24:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635112.990885; Fri, 17 Nov 2023 12:24:51 +0000
+Received: by outflank-mailman (output) from mailman id 635114.990905; Fri, 17 Nov 2023 12:24:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3xtz-0001KA-M9; Fri, 17 Nov 2023 12:24:51 +0000
-Received: by outflank-mailman (input) for mailman id 635112;
- Fri, 17 Nov 2023 12:24:50 +0000
+	id 1r3xu1-0001pa-Dq; Fri, 17 Nov 2023 12:24:53 +0000
+Received: by outflank-mailman (input) for mailman id 635114;
+ Fri, 17 Nov 2023 12:24:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c3wv=G6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r3xtx-0000iK-V2
- for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 12:24:49 +0000
+ id 1r3xu0-0000iK-Lu
+ for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 12:24:52 +0000
 Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
  [2a00:1450:4864:20::131])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4c8a8535-8544-11ee-9b0e-b553b5be7939;
- Fri, 17 Nov 2023 13:24:48 +0100 (CET)
+ id 4e2627db-8544-11ee-9b0e-b553b5be7939;
+ Fri, 17 Nov 2023 13:24:51 +0100 (CET)
 Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50aa2abfcfcso185150e87.3
- for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 04:24:48 -0800 (PST)
+ 2adb3069b0e04-5094727fa67so2727460e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 04:24:51 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a18-20020ac25e72000000b005094d95e8bcsm209811lfr.218.2023.11.17.04.24.46
+ a18-20020ac25e72000000b005094d95e8bcsm209811lfr.218.2023.11.17.04.24.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 04:24:46 -0800 (PST)
+ Fri, 17 Nov 2023 04:24:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,118 +46,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c8a8535-8544-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 4e2627db-8544-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700223887; x=1700828687; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1700223890; x=1700828690; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Q4Bl151fhJ0xUdwwLt/MNmOxcrc+o6rAwxdJ/C4d3oY=;
-        b=lU0P3zPKzjzYN3PTklf4aqCrinnYngk2gQg86zBfGlluQsW5j4/hx3W0QIOi1Iz3Il
-         6em5nfFjeL1ZfR3OYBViwxmLZVlwpFyikOtlCb8vcPcZpevyQV/pXeWh9+7z+cq6zbud
-         2MN4224qCkGfDOd8OC61uUJUvL2dImRo6/mgM05YF/fD7GcCSsjIsvj0DAyCsH4NmDor
-         VsvELFkAQrFmLYabkMdog8uMxFOne3WC6qAwtp6mDiVkv9dL5dhMtCLUl6y+98ccCX0z
-         K0HptO1xvAj0OhWGGsoqiXOkcX6gbO6VWNouBpEuO5zSSfk7L+eoPuMUhuFnH0yMM/X5
-         u9PA==
+        bh=i1dFNOxKIfpxe4fbqyq4aYiHJEk/IRyQX0YWJ3IS3kY=;
+        b=aN5tHBU8cUyOT74PB0luPsRwb0vJQIbn72IOCyH3W84NmkkmfoWgVsQ1v9DYVz3CeD
+         iraEBOy2GbPG8YD2TZDrLCk5/MZJdCs3Z8VCoN1zS/Il5b2OxTFo4yutSh/mTur+M+XT
+         u1l6kbMwKqhwgjVY81Hs+aSlVMrLddaVZyf4yr1hWxpBDzvlR6aTL1cHuOH4IVTsesOX
+         VW7kmbnoBp0hqSSyTG89ycwjWAgpmRX8ENT9X/ocoyDlgtEjlsy1MlBJatJTAzY6gBWb
+         5gQMliO+tGazNmWy+VYds9Fq0HjFlOzYh0u05CjBESZgbMLC7RoIWY/akNdre5b8OU14
+         0sxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700223887; x=1700828687;
+        d=1e100.net; s=20230601; t=1700223890; x=1700828690;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Q4Bl151fhJ0xUdwwLt/MNmOxcrc+o6rAwxdJ/C4d3oY=;
-        b=RQ0ASPgXG4j+dmmbY0LTmFVYvCwnlDPulDwvBAYmJ273mmgdW8utOjWYbKO0ZbNlo1
-         aTlarCkInJKGF1px3YazQCC2gSg9P8zeUU4oua2qAXGpNak5wW5JVNNrieEt+9vjem8k
-         2KjWa/xsw71t1R3MLE+5kalpL6e7gUPbsZP47CjWClwaUMFQeBaZagBSln+WJXTCeDG8
-         cmi1+iQX3LV4ti2+uDcry7T3xu5w6jjwDXqhQUpe10r1RsXqWvvU4GCtbHAUc90f3y9E
-         jfXmt15fMTJ1VhDOz3fVHvoA/d6OM0Jybm4fAxOrr60DeW9vR5O7r38JCW4a2GQVsfbX
-         sHSA==
-X-Gm-Message-State: AOJu0Yy6eNLA5hgbhsgOhVC4MwdRe3SQ6am8vsXrWHPNYJazy3UYwKLO
-	fwEfwiBy/+KbZnFaTckqWWGC3mqMH2Y=
-X-Google-Smtp-Source: AGHT+IEQGmAq7M3igpPBDgybVnhLTD9HucQkntc4cm/zOElOFuPdMvw5wfPD0tMgbHWZ7aCU8r1STg==
-X-Received: by 2002:a05:6512:941:b0:500:a378:db71 with SMTP id u1-20020a056512094100b00500a378db71mr12212137lft.57.1700223887288;
-        Fri, 17 Nov 2023 04:24:47 -0800 (PST)
+        bh=i1dFNOxKIfpxe4fbqyq4aYiHJEk/IRyQX0YWJ3IS3kY=;
+        b=ZHyUvv2ABvQqk//XtEvuU93YcZtOeao/bsISO/vNhiAG5031JPGlXbqoB1bbw+gdu3
+         yVAHpVgXiDAEWx+/ZVnUOrUrDnu3IHDg6o+QBDWEKZ0MSkclV0DL6d9SdP9ihzosKE4M
+         fGQ1H9uR7r7Crub7zAdYHHX8/jp4E12UuVW9pcUjyMHtqPuB8T8r8AhOSYlFs2vlsNFu
+         nNYs3vqRkQvROeMeqDm9Iq6HnlCHSL0Xhp7+22BZIINp+lEZefv3QlJiaDjYVufz7brk
+         9WqxEE7LU9hKZNqbPw+ZeP4P6sEc2iWvHZst0mpUVGSF32iBboPRlEx/Rm95dgI8yrSU
+         G6BQ==
+X-Gm-Message-State: AOJu0YwiaujMRHHQNr1GqtypWDV166tyKikC4AAPEWVQUgTvNyeXLwXs
+	hyU9ZZZZL4jCj6iQUmfpCvKLnSH1EH8=
+X-Google-Smtp-Source: AGHT+IH3+reAVmfVJJN0NjtOL7cn6V0nBW6vS3nAoCQBvotNB9uWzEmohcLUH0aW+uHS3u2OPyMS1w==
+X-Received: by 2002:a05:6512:a96:b0:509:8e7f:b46c with SMTP id m22-20020a0565120a9600b005098e7fb46cmr4729902lfu.56.1700223889890;
+        Fri, 17 Nov 2023 04:24:49 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 03/14] xen/asm-generic: introduce generic hypercall.h
-Date: Fri, 17 Nov 2023 14:24:27 +0200
-Message-ID: <47f9117b19cbb616a36f4149a7aeaaffdbfa48a9.1700221559.git.oleksii.kurochko@gmail.com>
+	Wei Liu <wl@xen.org>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v3 05/14] xen/asm-generic: introduce stub header <asm/random.h>
+Date: Fri, 17 Nov 2023 14:24:29 +0200
+Message-ID: <9a2b8920df291915ac6be0d14e6e9896e81ea9bd.1700221559.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1700221559.git.oleksii.kurochko@gmail.com>
 References: <cover.1700221559.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce an empty generic hypercall.h for archs which don't
-implement it.
-
-Drop PPC's hypercall.h and switch to generic one instead.
+<asm/random.h> is common for Arm, PPC and RISC-V thereby it
+is moved to asm-generic.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V3:
- - Drop PPC's hypercall.h and switch to generic one.
- - Update the commit message
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - Drop Arm and PPC's random.h and switch to asm-generic verison.
 ---
 Changes in V2:
- - add check that <asm/hypercall.h> isn't included directly.
+ - update the commit messages
 ---
- xen/arch/ppc/include/asm/Makefile    |  1 +
- xen/arch/ppc/include/asm/hypercall.h |  5 -----
- xen/include/asm-generic/hypercall.h  | 18 ++++++++++++++++++
- 3 files changed, 19 insertions(+), 5 deletions(-)
- delete mode 100644 xen/arch/ppc/include/asm/hypercall.h
- create mode 100644 xen/include/asm-generic/hypercall.h
+ xen/arch/arm/include/asm/Makefile |  1 +
+ xen/arch/arm/include/asm/random.h |  9 ---------
+ xen/arch/ppc/include/asm/Makefile |  1 +
+ xen/arch/ppc/include/asm/random.h |  9 ---------
+ xen/include/asm-generic/random.h  | 20 ++++++++++++++++++++
+ 5 files changed, 22 insertions(+), 18 deletions(-)
+ delete mode 100644 xen/arch/arm/include/asm/random.h
+ delete mode 100644 xen/arch/ppc/include/asm/random.h
+ create mode 100644 xen/include/asm-generic/random.h
 
+diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
+index 96e3aa6b6c..cac6d5e3df 100644
+--- a/xen/arch/arm/include/asm/Makefile
++++ b/xen/arch/arm/include/asm/Makefile
+@@ -1,4 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ generic-y += iocap.h
+ generic-y += paging.h
++generic-y += random.h
+ generic-y += vm_event.h
+diff --git a/xen/arch/arm/include/asm/random.h b/xen/arch/arm/include/asm/random.h
+deleted file mode 100644
+index b4acee276b..0000000000
+--- a/xen/arch/arm/include/asm/random.h
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#ifndef __ASM_RANDOM_H__
+-#define __ASM_RANDOM_H__
+-
+-static inline unsigned int arch_get_random(void)
+-{
+-    return 0;
+-}
+-
+-#endif /* __ASM_RANDOM_H__ */
 diff --git a/xen/arch/ppc/include/asm/Makefile b/xen/arch/ppc/include/asm/Makefile
-index ece7fa66dd..48d587f35d 100644
+index 9f5a0dfb31..d8f2a1453c 100644
 --- a/xen/arch/ppc/include/asm/Makefile
 +++ b/xen/arch/ppc/include/asm/Makefile
-@@ -1,3 +1,4 @@
- # SPDX-License-Identifier: GPL-2.0-only
-+generic-y += hypercall.h
+@@ -2,4 +2,5 @@
+ generic-y += hypercall.h
+ generic-y += iocap.h
  generic-y += paging.h
++generic-y += random.h
  generic-y += vm_event.h
-diff --git a/xen/arch/ppc/include/asm/hypercall.h b/xen/arch/ppc/include/asm/hypercall.h
+diff --git a/xen/arch/ppc/include/asm/random.h b/xen/arch/ppc/include/asm/random.h
 deleted file mode 100644
-index 1e8ca0ce9c..0000000000
---- a/xen/arch/ppc/include/asm/hypercall.h
+index 2f9e9bbae4..0000000000
+--- a/xen/arch/ppc/include/asm/random.h
 +++ /dev/null
-@@ -1,5 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--#ifndef __ASM_PPC_HYPERCALL_H__
--#define __ASM_PPC_HYPERCALL_H__
+@@ -1,9 +0,0 @@
+-#ifndef __ASM_PPC_RANDOM_H__
+-#define __ASM_PPC_RANDOM_H__
 -
--#endif /* __ASM_PPC_HYPERCALL_H__ */
-diff --git a/xen/include/asm-generic/hypercall.h b/xen/include/asm-generic/hypercall.h
+-static inline unsigned int arch_get_random(void)
+-{
+-    return 0;
+-}
+-
+-#endif /* __ASM_PPC_RANDOM_H__ */
+diff --git a/xen/include/asm-generic/random.h b/xen/include/asm-generic/random.h
 new file mode 100644
-index 0000000000..7743b35c0d
+index 0000000000..cd2307e70b
 --- /dev/null
-+++ b/xen/include/asm-generic/hypercall.h
-@@ -0,0 +1,18 @@
++++ b/xen/include/asm-generic/random.h
+@@ -0,0 +1,20 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __XEN_HYPERCALL_H__
-+#error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
-+#endif
++#ifndef __ASM_GENERIC_RANDOM_H__
++#define __ASM_GENERIC_RANDOM_H__
 +
-+#ifndef __ASM_GENERIC_HYPERCALL_H__
-+#define __ASM_GENERIC_HYPERCALL_H__
++static inline unsigned int arch_get_random(void)
++{
++    return 0;
++}
 +
-+#endif /* __ASM_GENERIC_HYPERCALL_H__ */
++#endif /* __ASM_GENERIC_RANDOM_H__ */
++
 +
 +/*
 + * Local variables:
 + * mode: C
-+ * c-file-style: "BSD"
++ * c-file-style: BSD
 + * c-basic-offset: 4
 + * indent-tabs-mode: nil
 + * End:
