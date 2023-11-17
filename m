@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25134C5AD4C
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 12:25:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635121.990960 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B538C072A2
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 12:25:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635123.990977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3xuA-0003Vd-Bt; Fri, 17 Nov 2023 12:25:02 +0000
+	id 1r3xuD-00046S-4e; Fri, 17 Nov 2023 12:25:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635121.990960; Fri, 17 Nov 2023 12:25:02 +0000
+Received: by outflank-mailman (output) from mailman id 635123.990977; Fri, 17 Nov 2023 12:25:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3xuA-0003UA-4h; Fri, 17 Nov 2023 12:25:02 +0000
-Received: by outflank-mailman (input) for mailman id 635121;
- Fri, 17 Nov 2023 12:25:00 +0000
+	id 1r3xuC-00044W-L9; Fri, 17 Nov 2023 12:25:04 +0000
+Received: by outflank-mailman (input) for mailman id 635123;
+ Fri, 17 Nov 2023 12:25:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c3wv=G6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r3xu8-0000ZQ-5o
- for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 12:25:00 +0000
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [2a00:1450:4864:20::129])
+ id 1r3xuA-0000ZQ-M4
+ for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 12:25:02 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5348235b-8544-11ee-98dc-6d05b1d4d9a1;
- Fri, 17 Nov 2023 13:24:59 +0100 (CET)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-507f1c29f25so2659776e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 04:24:59 -0800 (PST)
+ id 54bf2552-8544-11ee-98dc-6d05b1d4d9a1;
+ Fri, 17 Nov 2023 13:25:02 +0100 (CET)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-507cee17b00so2493491e87.2
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 04:25:02 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a18-20020ac25e72000000b005094d95e8bcsm209811lfr.218.2023.11.17.04.24.57
+ a18-20020ac25e72000000b005094d95e8bcsm209811lfr.218.2023.11.17.04.25.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 04:24:58 -0800 (PST)
+ Fri, 17 Nov 2023 04:25:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5348235b-8544-11ee-98dc-6d05b1d4d9a1
+X-Inumbo-ID: 54bf2552-8544-11ee-98dc-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700223898; x=1700828698; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1700223901; x=1700828701; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YsnMnx3qJnhyBXB1udD6ESspWS/fknMucSDv+GOY/fs=;
-        b=AkljVgjeVkb3b+Q3GFDXhYLRyf8R9zQic3L9DcVBhZiicJyhwtyaIb86Uf2qvAIuOi
-         4NMTgpY0ZglofOQIgsX0IhqAke7EQib+0Qubee+mvLQy/XYoOd2fkMX5tEPmuV45R8pi
-         JceBtFWGSCX2NIN7mhlCQTCc0PlsvuAhI3YtyPChgHMIKH9y8iPWhX8xfPrlmSjzB63x
-         7NXlQPnQkNTE9LlyuFcUiyfor2k5Am1KvmAVSRnxG/3UF5PBaIgwXax6SwNSUUeEZLzz
-         AhzRTHjgLO6BxI1yMhvyLkPKfV0Aj6NrM8AOPydD7+RodizA+7OWQtIrbxjCGuvftf/j
-         wd5Q==
+        bh=tJjcySsrWCUTisDHIaY5a1c2SD1fU/bpuLwPL2CuBTA=;
+        b=kVlnbOm77zfqpTI7bhsw7GfxK69nRmBl5XSxY1Zdqyw2TXg2Y9pUZ6igHxjqMYz6Ci
+         KCp00FOZHpGA14ImMDUQhz8cJ2lJG0nxee+WMhBOC6ZDjjavbi1GEz1ysRz71MjiwLHO
+         PlMETrbFuWbvX0SPh5vlTf8rVUYd6bHMXUyVWYLggmAlyUzlgTaauGCzvurmmsENmHbn
+         Bc0zS2uR7a0b+EB2DIyJJWFezBDtMn/wrrot3MBSy2BoK04zBpO9vckJbmMBqVrL1fma
+         aQnXXS9TIHgwflC3TrR3tTknuN5vSdQWr/k6MMsZsJ1F6Wybmpblc04E53f13hMQRPH4
+         a/FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700223898; x=1700828698;
+        d=1e100.net; s=20230601; t=1700223901; x=1700828701;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YsnMnx3qJnhyBXB1udD6ESspWS/fknMucSDv+GOY/fs=;
-        b=Q/eldrAhPY+7UNxlX08kv0gkEwlgmaU7i15Gd76x5JKpgdvANW7h//QJpteja75wvk
-         HCllShncAYi8EMpcPTmGni89Xl0Yyz+LduHc6n/qXTTUj9gPm8Ctp0Kx8g2PZCDiZ1Vu
-         j3hkeFIpFEiJi/EzvYZtmqMKs4DKLi9y8pCcspoyA0BwoYs++Rf9k7CJ5XnU849Lc42E
-         QJq3bDgSMdlCwnxZXTPW511Q+bruOaRkC+NqeEGi0pazULVy9ctv9CclaNgWX+gkSVHi
-         U30Q0ebslE4Oul2/MEZ52SfVy5DHodDa2cB/aQGO93Dfd2iIOsL60RRdY9tqX5On5IF6
-         Hk9Q==
-X-Gm-Message-State: AOJu0Yy6rDb2Cu1xVhOjBA3FP3LO5uEQJqJ5JVQD0FLKrJf3y5GfZZdq
-	2CAiG91OHyztUc/32pjsWz6prBz8ylI=
-X-Google-Smtp-Source: AGHT+IEwrI59ykOOh0OZRtckIxEPSenLZxQMITCBvRfEyqfF1KwNUKBBo1VkLPcpX+iCMbo0xi1mKg==
-X-Received: by 2002:a05:6512:94e:b0:509:1227:ca71 with SMTP id u14-20020a056512094e00b005091227ca71mr11881967lft.17.1700223898553;
-        Fri, 17 Nov 2023 04:24:58 -0800 (PST)
+        bh=tJjcySsrWCUTisDHIaY5a1c2SD1fU/bpuLwPL2CuBTA=;
+        b=I+b/Sn/dKBaXLVBtwWrPcE6aCg9VGSly+m4d0ASMmPvcMe1myWEJpYCHhB/lJWdMGo
+         9efFLeC2zB0t0+8y37YNDM02TBICOVtxFo3em7hZejPS84U09gtRQ/N2cICidUyk54ZM
+         42wKwsoXZgXlTsmPMjdpGtfNLXj1vHzvs1g1aNE0JT30nIUj0kWoL4jVrw6nh2hprrx/
+         KmWYP+KuqM7nD9otAOq71biXKaAYW4W3XIkeyXwjv5+CjJ2m4AxsBsR+T/GJUBSMnS6X
+         Gi6HoTOgYsYiU6FpZxI6MJ4SxjApUFZmpNAjmPyqsI8nlIsnHEA7yYvYO8wntMDhqYnc
+         rMQw==
+X-Gm-Message-State: AOJu0YwVa/H1y3OCyyKfJJRRrpXwjAUNdac2M+qDBfmn3TIZGn7a8cDN
+	9AF7F7rrANyII30NdCnwLM5+hyI6Y5s=
+X-Google-Smtp-Source: AGHT+IFYxXcNyg3SvVQe/LDOT6dpnjF82/o1CSl8OOCxiVTZeiGHE1uvF5kyLOIQ17nCI2mCCn+XvQ==
+X-Received: by 2002:a05:6512:1383:b0:50a:9652:31d2 with SMTP id fc3-20020a056512138300b0050a965231d2mr7469171lfb.15.1700223900985;
+        Fri, 17 Nov 2023 04:25:00 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -89,127 +89,77 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v3 11/14] xen/asm-generic: introduce stub header numa.h
-Date: Fri, 17 Nov 2023 14:24:35 +0200
-Message-ID: <7ae3b2dbdb8e711b2462af511e1f64c2700113d7.1700221559.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 13/14] xen: ifdef inclusion of <asm/grant_table.h> in <xen/grant_table.h>
+Date: Fri, 17 Nov 2023 14:24:37 +0200
+Message-ID: <d2ccd9d037202515a63d085c8f11654d12926a47.1700221559.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.1700221559.git.oleksii.kurochko@gmail.com>
 References: <cover.1700221559.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-<asm/numa.h> is common through some archs so it is moved
-to asm-generic.
+Ifdef-ing inclusion of <asm/grant_table.h> allows to avoid
+generation of empty <asm/grant_table.h> for cases when
+CONFIG_GRANT_TABLE is not enabled.
 
+The following changes were done for Arm:
+<asm/grant_table.h> should be included directly because it contains
+gnttab_dom0_frames() macros which is unique for Arm and is used in
+arch/arm/domain_build.c.
+<asm/grant_table.h> is #ifdef-ed with CONFIG_GRANT_TABLE in
+<xen/grant_table.h> so in case of !CONFIG_GRANT_TABLE gnttab_dom0_frames
+won't be available for use in arch/arm/domain_build.c.
+
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V3:
- - Remove old header inclusion in asm-generic numa.h and include
-   <xen/mm-frame.h> and <xen/stdint.h>
- - Drop Arm and PPC's numa.h and use asm-generic version instead.
+ - Remove unnecessary comment.
 ---
-Changes in V2:
-	- update the commit message.
-	- change u8 to uint8_t.
-	- add ifnded CONFIG_NUMA.
----
- xen/arch/arm/include/asm/Makefile             |  1 +
- xen/arch/ppc/include/asm/Makefile             |  1 +
- xen/arch/ppc/include/asm/numa.h               | 26 -------------------
- .../asm => include/asm-generic}/numa.h        | 13 ++++++----
- 4 files changed, 10 insertions(+), 31 deletions(-)
- delete mode 100644 xen/arch/ppc/include/asm/numa.h
- rename xen/{arch/arm/include/asm => include/asm-generic}/numa.h (75%)
+ xen/arch/arm/domain_build.c            | 1 +
+ xen/arch/ppc/include/asm/grant_table.h | 5 -----
+ xen/include/xen/grant_table.h          | 3 +++
+ 3 files changed, 4 insertions(+), 5 deletions(-)
+ delete mode 100644 xen/arch/ppc/include/asm/grant_table.h
 
-diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
-index 8221429c2c..0c855a798a 100644
---- a/xen/arch/arm/include/asm/Makefile
-+++ b/xen/arch/arm/include/asm/Makefile
-@@ -2,6 +2,7 @@
- generic-y += altp2m.h
- generic-y += hardirq.h
- generic-y += iocap.h
-+generic-y += numa.h
- generic-y += paging.h
- generic-y += percpu.h
- generic-y += random.h
-diff --git a/xen/arch/ppc/include/asm/Makefile b/xen/arch/ppc/include/asm/Makefile
-index 9bbae4cec8..d5a94bc718 100644
---- a/xen/arch/ppc/include/asm/Makefile
-+++ b/xen/arch/ppc/include/asm/Makefile
-@@ -5,6 +5,7 @@ generic-y += hardirq.h
- generic-y += hypercall.h
- generic-y += iocap.h
- generic-y += monitor.h
-+generic-y += numa.h
- generic-y += paging.h
- generic-y += percpu.h
- generic-y += random.h
-diff --git a/xen/arch/ppc/include/asm/numa.h b/xen/arch/ppc/include/asm/numa.h
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 2dd2926b41..6e8cc6bbb5 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -34,6 +34,7 @@
+ 
+ #include <xen/irq.h>
+ #include <xen/grant_table.h>
++#include <asm/grant_table.h>
+ #include <xen/serial.h>
+ 
+ #define STATIC_EVTCHN_NODE_SIZE_CELLS 2
+diff --git a/xen/arch/ppc/include/asm/grant_table.h b/xen/arch/ppc/include/asm/grant_table.h
 deleted file mode 100644
-index 7fdf66c3da..0000000000
---- a/xen/arch/ppc/include/asm/numa.h
+index d0ff58dd3d..0000000000
+--- a/xen/arch/ppc/include/asm/grant_table.h
 +++ /dev/null
-@@ -1,26 +0,0 @@
--#ifndef __ASM_PPC_NUMA_H__
--#define __ASM_PPC_NUMA_H__
+@@ -1,5 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef __ASM_PPC_GRANT_TABLE_H__
+-#define __ASM_PPC_GRANT_TABLE_H__
 -
--#include <xen/types.h>
--#include <xen/mm.h>
--
--typedef uint8_t nodeid_t;
--
--/* Fake one node for now. See also node_online_map. */
--#define cpu_to_node(cpu) 0
--#define node_to_cpumask(node)   (cpu_online_map)
--
--/*
-- * TODO: make first_valid_mfn static when NUMA is supported on PPC, this
-- * is required because the dummy helpers are using it.
-- */
--extern mfn_t first_valid_mfn;
--
--/* XXX: implement NUMA support */
--#define node_spanned_pages(nid) (max_page - mfn_x(first_valid_mfn))
--#define node_start_pfn(nid) (mfn_x(first_valid_mfn))
--#define __node_distance(a, b) (20)
--
--#define arch_want_default_dmazone() (false)
--
--#endif /* __ASM_PPC_NUMA_H__ */
-diff --git a/xen/arch/arm/include/asm/numa.h b/xen/include/asm-generic/numa.h
-similarity index 75%
-rename from xen/arch/arm/include/asm/numa.h
-rename to xen/include/asm-generic/numa.h
-index e2bee2bd82..c5b522dee8 100644
---- a/xen/arch/arm/include/asm/numa.h
-+++ b/xen/include/asm-generic/numa.h
-@@ -1,9 +1,11 @@
--#ifndef __ARCH_ARM_NUMA_H
--#define __ARCH_ARM_NUMA_H
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ARCH_GENERIC_NUMA_H
-+#define __ARCH_GENERIC_NUMA_H
- 
--#include <xen/mm.h>
-+#include <xen/mm-frame.h>
-+#include <xen/stdint.h>
- 
--typedef u8 nodeid_t;
-+typedef uint8_t nodeid_t;
- 
- #ifndef CONFIG_NUMA
- 
-@@ -26,7 +28,8 @@ extern mfn_t first_valid_mfn;
- 
- #define arch_want_default_dmazone() (false)
- 
--#endif /* __ARCH_ARM_NUMA_H */
-+#endif /* __ARCH_GENERIC_NUMA_H */
+-#endif /* __ASM_PPC_GRANT_TABLE_H__ */
+diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
+index 85fe6b7b5e..50edfecfb6 100644
+--- a/xen/include/xen/grant_table.h
++++ b/xen/include/xen/grant_table.h
+@@ -26,7 +26,10 @@
+ #include <xen/mm-frame.h>
+ #include <xen/rwlock.h>
+ #include <public/grant_table.h>
 +
- /*
-  * Local variables:
-  * mode: C
++#ifdef CONFIG_GRANT_TABLE
+ #include <asm/grant_table.h>
++#endif
+ 
+ struct grant_table;
+ 
 -- 
 2.41.0
 
