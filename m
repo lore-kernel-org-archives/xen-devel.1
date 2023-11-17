@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47C97C197A0
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 10:08:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635002.990684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D11FC197A0
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Nov 2023 10:13:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635010.990696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3vlQ-00070b-Bg; Fri, 17 Nov 2023 10:07:52 +0000
+	id 1r3vq4-00017A-VR; Fri, 17 Nov 2023 10:12:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635002.990684; Fri, 17 Nov 2023 10:07:52 +0000
+Received: by outflank-mailman (output) from mailman id 635010.990696; Fri, 17 Nov 2023 10:12:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r3vlQ-00070U-91; Fri, 17 Nov 2023 10:07:52 +0000
-Received: by outflank-mailman (input) for mailman id 635002;
- Fri, 17 Nov 2023 10:07:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1e97=G6=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r3vlP-00070N-1m
- for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 10:07:51 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2a05f4e1-8531-11ee-98dc-6d05b1d4d9a1;
- Fri, 17 Nov 2023 11:07:50 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4083f613275so14699355e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 17 Nov 2023 02:07:50 -0800 (PST)
-Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- r5-20020a05600c458500b003fefaf299b6sm2153194wmo.38.2023.11.17.02.07.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 02:07:41 -0800 (PST)
+	id 1r3vq4-000173-QU; Fri, 17 Nov 2023 10:12:40 +0000
+Received: by outflank-mailman (input) for mailman id 635010;
+ Fri, 17 Nov 2023 10:12:40 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1r3vq4-00016x-1b
+ for xen-devel@lists.xenproject.org; Fri, 17 Nov 2023 10:12:40 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1r3vq3-0004mw-72; Fri, 17 Nov 2023 10:12:39 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1r3vq3-0000xc-1D; Fri, 17 Nov 2023 10:12:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,97 +41,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a05f4e1-8531-11ee-98dc-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1700215661; x=1700820461; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=rXQYdP2yECEsDwWfLsrCu1ALufV0Ny4J8ENU7pc2fVs=;
-        b=tEdUS/nHzFmXugYiD4pRiFzLsVrY9zL51LbrWFvvEEoYPRIqHNv0EeGcsUjC6G2EEI
-         l4Tgc0XZo1Ho4OxAGFsS1k922rqnBzuTTmhUuUlQv7virEKd6t578maSFHTBaKbXNQma
-         J2HYB2HT2pa5QEA4TQc0eV8aHkJ1XtE9wvQzE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700215661; x=1700820461;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=rXQYdP2yECEsDwWfLsrCu1ALufV0Ny4J8ENU7pc2fVs=;
-        b=Ptn9rHlMW4OpVFSeC8pmvf0anCuy/xa9xFZkAks43MP9nLLNjLO0nsIijuy1r0OiF0
-         GahtelRccnezHWyPvThsverX2fg8vpUuI+g25NczQno/v7+INmn5xVIj85X+mM7I5y6a
-         R7rCWil9s4zc1WhiFLn89lHspz2OJd7JX02dPgrLBUGWQlC/aQNW952x8WM5YgmiTN3H
-         XbvpNDAwpGSjAc8y4M9LW5eKwHmeVZvrDi0MbSdmDYPTzfLaGKYTVXY9eswf52Rs/rml
-         ZAP1gxEWnkyCjZPisI79yjRC/yRPqGt/MxrslDflUGuS/StZFpwi26Zq52NSdIi3X3aI
-         Czjw==
-X-Gm-Message-State: AOJu0Ywa/s6oez9PSKWrbVLs5BsPYVQm1TEpfrGIgjtZpfO4a96AgVXd
-	AetH64kgEl2K8u7Ky87Mu4O+dg==
-X-Google-Smtp-Source: AGHT+IEvPyAn2pbqF6IIFTWMXaaBOyuoU1Y93SjA3tmj2MURrIcCyzDfMFhzGQhUFKOrq9XFeA9ZLg==
-X-Received: by 2002:a05:600c:524c:b0:3fd:2e89:31bd with SMTP id fc12-20020a05600c524c00b003fd2e8931bdmr4075760wmb.14.1700215661544;
-        Fri, 17 Nov 2023 02:07:41 -0800 (PST)
-Date: Fri, 17 Nov 2023 11:07:39 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH 1/6] automation: remove CR characters from QEMU serial
-Message-ID: <ZVc7a56DXOtEoS0N@macbook.local>
-References: <20231116121310.72210-1-roger.pau@citrix.com>
- <20231116121310.72210-2-roger.pau@citrix.com>
- <alpine.DEB.2.22.394.2311161701420.773207@ubuntu-linux-20-04-desktop>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=3U9bA7f2zozsIt2AyVWBwDVc3iy59lraSUXeXEYCkqQ=; b=WEMc3GG9xJdfF6By/+o1erPTAh
+	xJ0/41ENsR8GDGK0MXs2Dh7RG+O9Q2G43ib0O2wAZYg7qVNPjkbqDozwQUIxw6dg/C3ybqlWwmcv1
+	yw2Pe2DOh3oXwAl1HA2ajjshbZxgxYLM/F5EsknF10CKOfhlv1qoCubvHSkIbId1kJ3o=;
+Message-ID: <82bd029b-4c26-4eb3-9e93-1d34fab40db3@xen.org>
+Date: Fri, 17 Nov 2023 10:12:37 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <alpine.DEB.2.22.394.2311161701420.773207@ubuntu-linux-20-04-desktop>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH v3] xen: introduce function type bug_fn_t.
+Content-Language: en-GB
+To: Federico Serafini <federico.serafini@bugseng.com>,
+ xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>
+References: <3942021ff51b117ab2b50aecd6e75353cd73ab20.1700158707.git.federico.serafini@bugseng.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <3942021ff51b117ab2b50aecd6e75353cd73ab20.1700158707.git.federico.serafini@bugseng.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 16, 2023 at 05:05:28PM -0800, Stefano Stabellini wrote:
-> On Thu, 16 Nov 2023, Roger Pau Monne wrote:
-> > The gitlab CI webpage seems to have issues displaying the \CR\CR\LF "\r\r\n"
-> > sequence on the web interface used as line returns by the Linux kernel serial
-> > output.  This leads to the QEMU tests output looking like:
-> > 
-> > (XEN) Guest Loglevel: Nothing (Rate-limited: Errors and warnings)
-> > (XEN) *** Serial input to DOM0 (type 'CTRL-a' three times to switch input)
-> > (XEN) Freed 664kB init memory
-> > mapping kernel into physical memory
-> > about to get started...
-> > qemu-system-x86_64: terminating on signal 15 from pid 52 (timeout)
-> > 
-> > This not helpful, so strip the CR characters from the output that goes to
-> > stdout, leaving the output in the smoke.serial untouched.
-> > 
-> > Fixes: 3030a73bf849 ('automation: add a QEMU based x86_64 Dom0/DomU test')
-> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> 
-> Thanks for the patch. Let me see if I understood correctly.
-> 
-> In the gitlab web UI everything after the last (XEN) log line
-> disappears, for instance:
-> 
-> https://gitlab.com/xen-project/xen/-/jobs/5556551478
-> 
-> (XEN) d1v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER0
-> / # qemu-system-aarch64: terminating on signal 15 from pid 145 (timeout)
-> 
-> 
-> While if I look at the full logs there are plenty of Linux kernel logs
-> after it:
-> https://cdn.artifacts.gitlab-static.net/ec/ad/ecad5145a0ec1eb179fd47d1590d5ec43d705e8af2f9a816607ac31891cb82b9/2023_11_16/5556551478/6032156805/job.log?response-content-type=text%2Fplain%3B%20charset%3Dutf-8&response-content-disposition=inline&Expires=1700183635&KeyName=gprd-artifacts-cdn&Signature=vT8CBwI2Th23OvRvQKvNPgHiT5Y=
-> 
-> And this patch aims at fixing that, is that correct?
-> 
-> 
-> But I went to check your pipeline
-> https://gitlab.com/xen-project/people/royger/xen/-/pipelines/1074512137
-> and the corresponding job
-> https://gitlab.com/xen-project/people/royger/xen/-/jobs/5549620441 has
-> the same issue?
+Hi Federico,
 
-I made the change just for qemu-alpine-x86_64-gcc:
+On 17/11/2023 08:28, Federico Serafini wrote:
+> Introduce function type bug_fn_t. This improves readability and helps
+> to validate that the function passed to run_in_exception_handle() has
+> the expected prototype.
+Hmmm... I read the second part as you will validate the type in 
+run_in_exception_handle(). But I can't find such change. How about:
 
-https://gitlab.com/xen-project/people/royger/xen/-/jobs/5550049674
+"and could be used to help validating that ..."
 
-I didn't realize qemu-smoke-dom0-arm64-gcc was also using it.  If the
-fix is acceptable I can submit v2 adding the arm instances also.
+No need to send a new revision for that. I can do it on commit.
 
-Thanks, Roger.
+> 
+> Use the newly-intoduced type to address a violation of MISRA
+> C:2012 Rule 8.2.
+> 
+> Suggested-by: Julien Grall <julien@xen.org>
+> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+> ---
+>   xen/arch/arm/traps.c  | 2 +-
+>   xen/include/xen/bug.h | 5 +++--
+>   2 files changed, 4 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+> index ce89f16404..8492e2b7bb 100644
+> --- a/xen/arch/arm/traps.c
+> +++ b/xen/arch/arm/traps.c
+> @@ -1236,7 +1236,7 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
+>   
+>       if ( id == BUGFRAME_run_fn )
+>       {
+> -        void (*fn)(const struct cpu_user_regs *) = (void *)regs->BUG_FN_REG;
+> +        bug_fn_t *fn = (void *)regs->BUG_FN_REG;
+>   
+>           fn(regs);
+>           return 0;
+> diff --git a/xen/include/xen/bug.h b/xen/include/xen/bug.h
+> index e8a4eea71a..cb5138410e 100644
+> --- a/xen/include/xen/bug.h
+> +++ b/xen/include/xen/bug.h
+> @@ -99,6 +99,9 @@ struct bug_frame {
+>   
+>   #endif
+>   
+> +struct cpu_user_regs;
+> +typedef void bug_fn_t(const struct cpu_user_regs *regs);
+> +
+
+If your aim is to validate the type in run_in_exception_handler(), then 
+this is defined too late. You will need to define it before "asm/bug.h" 
+is included so arch-specific implementations of run_in_exception_handler 
+can use it.
+
+Note that for Arm we are using a macro, but others may use a static inline.
+
+Cheers,
+
+-- 
+Julien Grall
 
