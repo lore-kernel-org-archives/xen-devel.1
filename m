@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC40C197A0
-	for <xen-devel@archiver.kernel.org>; Sat, 18 Nov 2023 02:20:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635475.991372 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79621C197A0
+	for <xen-devel@archiver.kernel.org>; Sat, 18 Nov 2023 02:25:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635481.991393 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r4AwA-000179-Tl; Sat, 18 Nov 2023 02:19:58 +0000
+	id 1r4B1Z-00036m-QF; Sat, 18 Nov 2023 02:25:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635475.991372; Sat, 18 Nov 2023 02:19:58 +0000
+Received: by outflank-mailman (output) from mailman id 635481.991393; Sat, 18 Nov 2023 02:25:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r4AwA-000172-R0; Sat, 18 Nov 2023 02:19:58 +0000
-Received: by outflank-mailman (input) for mailman id 635475;
- Sat, 18 Nov 2023 02:19:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r4B1Z-00036f-Mz; Sat, 18 Nov 2023 02:25:33 +0000
+Received: by outflank-mailman (input) for mailman id 635481;
+ Sat, 18 Nov 2023 02:25:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=W+gg=G7=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1r4Aw9-00016w-If
- for xen-devel@lists.xenproject.org; Sat, 18 Nov 2023 02:19:57 +0000
+ id 1r4B1Y-00036Z-OX
+ for xen-devel@lists.xenproject.org; Sat, 18 Nov 2023 02:25:32 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f6016c13-85b8-11ee-98dc-6d05b1d4d9a1;
- Sat, 18 Nov 2023 03:19:55 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bdd80b3c-85b9-11ee-9b0e-b553b5be7939;
+ Sat, 18 Nov 2023 03:25:30 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A82B461DF3;
- Sat, 18 Nov 2023 02:19:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DC08C433C8;
- Sat, 18 Nov 2023 02:19:50 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6AEED61DF4;
+ Sat, 18 Nov 2023 02:25:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 037CEC433C8;
+ Sat, 18 Nov 2023 02:25:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,205 +43,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f6016c13-85b8-11ee-98dc-6d05b1d4d9a1
+X-Inumbo-ID: bdd80b3c-85b9-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1700273992;
-	bh=z6pTziN/JcjnXzjVx6Wp158hLjbEqCdHpHzaB73Dcpc=;
+	s=k20201202; t=1700274327;
+	bh=P/pAtM4BpAP0nUNJJRlbFGyazfOJtuOOvA8lKWSt1sM=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=thtrgRUbLkRciqIpqh6vKIOryif9ckBe2ePwbuW2lORhVpGjg/m+kS+krV1BruWtD
-	 W0Z6NPVTic/gc8ud8qzA37fQI9musapzyBukvTQG85exb25IMN3LKmREeCn9obb/69
-	 FYRFT9IKaRBdea3MvJ+kvwcOYDh3HzSsLpcpWFdr3BmC+78AMXc6l0qbbVqnZP2dR2
-	 hq44SUyoPF6F5qafN4kz/sLilUalhFnAz/b8oPbNN7ZslotLI+MO+YwzqrW/jBEhQL
-	 D9P2i4FaXUBOD7Wz2al7zcxiGjPMuyfRmZWngmqsWKngeKbk4MM2kTV0ATWoob1OhF
-	 piF1PMua6dLuA==
-Date: Fri, 17 Nov 2023 18:19:48 -0800 (PST)
+	b=j0nqGecqpZB4cdGO762nCT5RsT78gq/a8pZu6Br6RectegUG0uDv/xfo4cPc4kp6R
+	 73oQopYBRGbe87H8S6aRa8AWs730s8nWKAR00WVtbJ/mpbhPvYPYCsih/4qRZmubzV
+	 M57pOM7rwSf7+vjdSaK76MkxpBuGbW43EGJugNgbn5LIKBjaDGICAboRa9w0i9l9sh
+	 nG4cuE8w7e5MAiApPFKWNOMXVnTfN0lnA88MEocVVmxrxgVwnbOT2azOsryQfiZqYS
+	 j9pi6GwmzDJ7jMes7ORxC1HrUJcvB7aaVJEArIB/x+kQ2hGCGU7wNxQlkxOX8pHyM3
+	 cY2oey7Z0JzeQ==
+Date: Fri, 17 Nov 2023 18:25:25 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Julien Grall <julien@xen.org>
-cc: Nicola Vetrini <nicola.vetrini@bugseng.com>, 
-    xen-devel@lists.xenproject.org, sstabellini@kernel.org, 
-    michal.orzel@amd.com, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, 
-    consulting@bugseng.com, jbeulich@suse.com, andrew.cooper3@citrix.com, 
-    roger.pau@citrix.com, bertrand.marquis@arm.com, 
-    Simone Ballarin <simone.ballarin@bugseng.com>, 
-    Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [XEN PATCH v4 1/2] automation/eclair: make the docs for MISRA
- C:2012 Dir 4.1 visible to ECLAIR
-In-Reply-To: <90f41e53-783b-43e6-9188-abbae847e370@xen.org>
-Message-ID: <alpine.DEB.2.22.394.2311171813380.773207@ubuntu-linux-20-04-desktop>
-References: <cover.1699975581.git.nicola.vetrini@bugseng.com> <f14b266f18089f5951a3e390a5ebfe713beb8dbb.1699975581.git.nicola.vetrini@bugseng.com> <f63fa9b5-a821-49d4-88f6-7d991ab6c644@xen.org> <1689d4b47d708098c43601a58e867f1c@bugseng.com>
- <ecbfa46d-2e0a-4685-9695-f7de37e7b6ce@xen.org> <fd6f51afebb9fd90531e30289eb99d8c@bugseng.com> <90f41e53-783b-43e6-9188-abbae847e370@xen.org>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: [PATCH 1/6] automation: remove CR characters from QEMU serial
+In-Reply-To: <ZVc7a56DXOtEoS0N@macbook.local>
+Message-ID: <alpine.DEB.2.22.394.2311171823550.773207@ubuntu-linux-20-04-desktop>
+References: <20231116121310.72210-1-roger.pau@citrix.com> <20231116121310.72210-2-roger.pau@citrix.com> <alpine.DEB.2.22.394.2311161701420.773207@ubuntu-linux-20-04-desktop> <ZVc7a56DXOtEoS0N@macbook.local>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-464059291-1700273631=:773207"
-Content-ID: <alpine.DEB.2.22.394.2311171818090.773207@ubuntu-linux-20-04-desktop>
+Content-Type: multipart/mixed; boundary="8323329-309321110-1700274327=:773207"
 
   This message is in MIME format.  The first part should be readable text,
   while the remaining parts are likely unreadable without MIME-aware tools.
 
---8323329-464059291-1700273631=:773207
-Content-Type: text/plain; CHARSET=UTF-8
+--8323329-309321110-1700274327=:773207
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.22.394.2311171818091.773207@ubuntu-linux-20-04-desktop>
 
-On Fri, 17 Nov 2023, Julien Grall wrote:
-> Hi,
+On Fri, 17 Nov 2023, Roger Pau Monné wrote:
+> On Thu, Nov 16, 2023 at 05:05:28PM -0800, Stefano Stabellini wrote:
+> > On Thu, 16 Nov 2023, Roger Pau Monne wrote:
+> > > The gitlab CI webpage seems to have issues displaying the \CR\CR\LF "\r\r\n"
+> > > sequence on the web interface used as line returns by the Linux kernel serial
+> > > output.  This leads to the QEMU tests output looking like:
+> > > 
+> > > (XEN) Guest Loglevel: Nothing (Rate-limited: Errors and warnings)
+> > > (XEN) *** Serial input to DOM0 (type 'CTRL-a' three times to switch input)
+> > > (XEN) Freed 664kB init memory
+> > > mapping kernel into physical memory
+> > > about to get started...
+> > > qemu-system-x86_64: terminating on signal 15 from pid 52 (timeout)
+> > > 
+> > > This not helpful, so strip the CR characters from the output that goes to
+> > > stdout, leaving the output in the smoke.serial untouched.
+> > > 
+> > > Fixes: 3030a73bf849 ('automation: add a QEMU based x86_64 Dom0/DomU test')
+> > > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> > 
+> > Thanks for the patch. Let me see if I understood correctly.
+> > 
+> > In the gitlab web UI everything after the last (XEN) log line
+> > disappears, for instance:
+> > 
+> > https://gitlab.com/xen-project/xen/-/jobs/5556551478
+> > 
+> > (XEN) d1v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER0
+> > / # qemu-system-aarch64: terminating on signal 15 from pid 145 (timeout)
+> > 
+> > 
+> > While if I look at the full logs there are plenty of Linux kernel logs
+> > after it:
+> > https://cdn.artifacts.gitlab-static.net/ec/ad/ecad5145a0ec1eb179fd47d1590d5ec43d705e8af2f9a816607ac31891cb82b9/2023_11_16/5556551478/6032156805/job.log?response-content-type=text%2Fplain%3B%20charset%3Dutf-8&response-content-disposition=inline&Expires=1700183635&KeyName=gprd-artifacts-cdn&Signature=vT8CBwI2Th23OvRvQKvNPgHiT5Y=
+> > 
+> > And this patch aims at fixing that, is that correct?
+> > 
+> > 
+> > But I went to check your pipeline
+> > https://gitlab.com/xen-project/people/royger/xen/-/pipelines/1074512137
+> > and the corresponding job
+> > https://gitlab.com/xen-project/people/royger/xen/-/jobs/5549620441 has
+> > the same issue?
 > 
-> On 16/11/2023 08:45, Nicola Vetrini wrote:
-> > On 2023-11-15 12:22, Julien Grall wrote:
-> > > Hi,
-> > > 
-> > > On 15/11/2023 11:02, Nicola Vetrini wrote:
-> > > > On 2023-11-14 23:12, Julien Grall wrote:
-> > > > > Hi,
-> > > > > 
-> > > > > On 14/11/2023 15:36, Nicola Vetrini wrote:
-> > > > > > To be able to check for the existence of the necessary subsections
-> > > > > > in
-> > > > > > the documentation for MISRA C:2012 Dir 4.1, ECLAIR needs to have a
-> > > > > > source
-> > > > > > file that is built.
-> > > > > > 
-> > > > > > This file is generated from 'C-runtime-failures.rst' in docs/misra
-> > > > > > and the configuration is updated accordingly.
-> > > > > > 
-> > > > > > Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-> > > > > > ---
-> > > > > > Changes from RFC:
-> > > > > > - Dropped unused/useless code
-> > > > > > - Revised the sed command
-> > > > > > - Revised the clean target
-> > > > > > 
-> > > > > > Changes in v2:
-> > > > > > - Added explanative comment to the makefile
-> > > > > > - printf instead of echo
-> > > > > > 
-> > > > > > Changes in v3:
-> > > > > > - Terminate the generated file with a newline
-> > > > > > - Build it with -std=c99, so that the documentation
-> > > > > >    for D1.1 applies.
-> > > > > > Changes in v5:
-> > > > > > - Transform and build the file directly in the eclair-specific
-> > > > > > directory
-> > > > > > ---
-> > > > > >   automation/eclair_analysis/build.sh   | 21 +++++++++++++++++++--
-> > > > > >   automation/eclair_analysis/prepare.sh |  7 ++++---
-> > > > > >   2 files changed, 23 insertions(+), 5 deletions(-)
-> > > > > > 
-> > > > > > diff --git a/automation/eclair_analysis/build.sh
-> > > > > > b/automation/eclair_analysis/build.sh
-> > > > > > index ec087dd822fa..f24292ed0643 100755
-> > > > > > --- a/automation/eclair_analysis/build.sh
-> > > > > > +++ b/automation/eclair_analysis/build.sh
-> > > > > > @@ -33,12 +33,29 @@ else
-> > > > > >     PROCESSORS=6
-> > > > > >   fi
-> > > > > >   +runtime_failures_docs() {
-> > > > > > +  doc="C-runtime-failures.rst"
-> > > > > > +  builddir="automation/eclair_analysis"
-> > > > > > +
-> > > > > > +  cp "docs/misra/${doc}" "${builddir}"
-> > > > > 
-> > > > > Is it necessary to copy the .rst? IOW, would it be sufficient to
-> > > > > use...
-> > > > > 
-> > > > > > +  cd "${builddir}"
-> > > > > > +  printf "/*\n\n" >"${doc}.tmp"
-> > > > > > +  sed -e 's|\*/|*//*|g' "${doc}" >>"${doc}.tmp"
-> > > > > 
-> > > > > ... docs/misc/${doc} here?
-> > > > > 
-> > > > 
-> > > > I didn't want to leave a stray file under docs/misra, but it's not
-> > > > essential.
-> > > 
-> > > I am confused. I am suggesting to use:
-> > > 
-> > > sed -e 's|\*/|*//*|g' "../../docs/misc/${doc}" >> "${doc}.tmp"
-> > > 
-> > > So *.tmp is still created at the same place.
-> > > 
-> > 
-> > Ok, makes sense.
-> > 
-> > > > 
-> > > > > > +  printf "\n\n*/\n" >>"${doc}.tmp"
-> > > > > > +  mv "${doc}.tmp" "${doc}.c"
-> > > > > 
-> > > > > NIT: I am not sure why you need to first create .tmp and then
-> > > > > create.c.
-> > > > > 
-> > > > 
-> > > > Wasn't this a pattern to defend against interruptions of the build, just
-> > > > as I did in v3?
-> > > > 
-> > > > +$(TARGETS:.o=.c): %.c: %.rst
-> > > > +    printf "/*\n\n" > $@.tmp
-> > > > +    sed -e 's|\*/|*//*|g' $< >> $@.tmp
-> > > > +    printf "\n\n*/\n" >> $@.tmp
-> > > > +    mv $@.tmp $@
-> > > 
-> > > Yes but it makes sense for the Makefile because the target would not be
-> > > re-executed if *.c exists.
-> > > 
-> > > But I don't think this is the case for you because you are using a bash
-> > > script. So your function should always be re-executed regardless on
-> > > whether it was interrupted or not.
-> > > 
-> > 
-> > Ok.
-> > 
-> > > > 
-> > > > > > +
-> > > > > > +  # Cannot redirect to /dev/null because it would be excluded from
-> > > > > > the analysis
-> > > > > > +  "${CROSS_COMPILE}gcc-12" -std=c99 -c "${doc}.c" -o "${doc}.o"
-> > > > > 
-> > > > > NIT: It would be helpful to specify why -std=c99 is used. Above, you
-> > > > > suggest this is to enable D1.1.
-> > > > > 
-> > > > 
-> > > > Yeah, the comment in the changelog should be pasted here
-> > > > 
-> > > > > NIT: Can we define CC and use here and ...
-> > > > > 
-> > > > > > +  cd -
-> > > > > > +}
-> > > > > > +
-> > > > > >   (
-> > > > > > -  cd xen
-> > > > > > +  runtime_failures_docs
-> > > > > >       make "-j${PROCESSORS}" "-l${PROCESSORS}.0"    \
-> > > > > >          "CROSS_COMPILE=${CROSS_COMPILE}"         \
-> > > > > >          "CC=${CROSS_COMPILE}gcc-12"              \
-> > > > > 
-> > > > > ...? This would make easier to re-use the code.
-> > > > > 
-> > > > 
-> > > > I don't expect this build script to be changed much to be honest, but if
-> > > > you think
-> > > > this is beneficial then it's ok.
-> > > 
-> > > This is not only about code evolving. It makes easier to spot your are
-> > > using the same compiler. I would not have made the remark if you were
-> > > using 'gcc'.
-> > > 
-> > > But I noticed you were using gcc-12 and originally thought it was a
-> > > mistake until I saw the second use.
-> > > 
-> > > The advantage of a variable CC (and CXX) is you can add a comment on top
-> > > why you are specifically requestion gcc-12? IOW, why is gcc not fine?
-> > > 
-> > 
-> > The assumptions in C-language-toolchain.rst (which are reflected in the
-> > analysis config) are using gcc-12 explicitly; that's just easier from a
-> > certification perspective to have a fixed version.
+> I made the change just for qemu-alpine-x86_64-gcc:
 > 
-> I am not against fixed version. It just needs to be documented. At least
-> reading C-language-toolchain.rst, it is not obvious to me that this is only
-> applying to GCC-12.
+> https://gitlab.com/xen-project/people/royger/xen/-/jobs/5550049674
+> 
+> I didn't realize qemu-smoke-dom0-arm64-gcc was also using it.  If the
+> fix is acceptable I can submit v2 adding the arm instances also.
 
-I did a commit sweep for the old MISRA patches. I didn't commit this
-series as I imagine it requires a respin.
---8323329-464059291-1700273631=:773207--
+Yes the fix is fine. All the qemu scripts are copy/paste design right
+now and I am aware they need to be unified. It is not just
+qemu-smoke-dom0-arm64-gcc, also qemu-smoke-dom0less-arm64.sh and
+basically all the other scripts that start QEMU.
+--8323329-309321110-1700274327=:773207--
 
