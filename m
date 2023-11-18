@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FB39C47071
-	for <xen-devel@archiver.kernel.org>; Sat, 18 Nov 2023 03:51:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635529.991533 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA70C54E76
+	for <xen-devel@archiver.kernel.org>; Sat, 18 Nov 2023 05:21:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635570.991543 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r4CMt-0007uT-27; Sat, 18 Nov 2023 03:51:39 +0000
+	id 1r4DlC-00032Q-Av; Sat, 18 Nov 2023 05:20:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635529.991533; Sat, 18 Nov 2023 03:51:39 +0000
+Received: by outflank-mailman (output) from mailman id 635570.991543; Sat, 18 Nov 2023 05:20:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r4CMs-0007uM-Vb; Sat, 18 Nov 2023 03:51:38 +0000
-Received: by outflank-mailman (input) for mailman id 635529;
- Sat, 18 Nov 2023 03:51:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r4DlC-00032J-7y; Sat, 18 Nov 2023 05:20:50 +0000
+Received: by outflank-mailman (input) for mailman id 635570;
+ Sat, 18 Nov 2023 05:20:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mcuz=G7=mg.gitlab.com=bounce+c66dc3.947b4-xen-devel=lists.xenproject.org@srs-se1.protection.inumbo.net>)
- id 1r4CMr-0007tL-Lp
- for xen-devel@lists.xenproject.org; Sat, 18 Nov 2023 03:51:37 +0000
-Received: from so254-136.mailgun.net (so254-136.mailgun.net [198.61.254.136])
- by se1-gles-sth1.inumbo.com (Halon) with UTF8SMTPS
- id c4c5d20b-85c5-11ee-98dd-6d05b1d4d9a1;
- Sat, 18 Nov 2023 04:51:36 +0100 (CET)
-Received: from mg.gitlab.com (1.226.74.34.bc.googleusercontent.com
- [34.74.226.1]) by
- bd1dc5b56579 with SMTP id 655834c5decb5344c59ba629 (version=TLS1.3,
- cipher=TLS_AES_128_GCM_SHA256); Sat, 18 Nov 2023 03:51:33 GMT
+ id 1r4DlA-00032A-Uk
+ for xen-devel@lists.xenproject.org; Sat, 18 Nov 2023 05:20:49 +0000
+Received: from m202-219.mailgun.net (m202-219.mailgun.net [161.38.202.219])
+ by se1-gles-flk1.inumbo.com (Halon) with UTF8SMTPS
+ id 39506c4b-85d2-11ee-9b0e-b553b5be7939;
+ Sat, 18 Nov 2023 06:20:46 +0100 (CET)
+Received: from mg.gitlab.com (18.226.74.34.bc.googleusercontent.com
+ [34.74.226.18]) by
+ 83c9957548d0 with SMTP id 655849a9a4dcab75e9890732 (version=TLS1.3,
+ cipher=TLS_AES_128_GCM_SHA256); Sat, 18 Nov 2023 05:20:41 GMT
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,56 +41,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c4c5d20b-85c5-11ee-98dd-6d05b1d4d9a1
+X-Inumbo-ID: 39506c4b-85d2-11ee-9b0e-b553b5be7939
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.gitlab.com;
- q=dns/txt; s=mailo; t=1700279493; x=1700286693; h=List-Id:
+ q=dns/txt; s=mailo; t=1700284843; x=1700292043; h=List-Id:
  Content-Transfer-Encoding: Content-Type: Mime-Version: Subject: Subject:
  Message-ID: To: To: Reply-To: From: From: Date: Sender: Sender;
- bh=jQGIFib6vR4/O1i4HErhfJybPk/l3vurqhUL01EXxA8=;
- b=qblWGdkWmjMNtgseIhmlKaWKun4hC+zIa4qHmkFFgXdudsqqMidHm7/ag/9CptO9wKT7oBBqfqAwhnVNJC+OoU1yhaESQasCEii+9I7QLHjjx8VA7Fqu+GwwWunyKtpbJNxUSKxfGc4t8BLM1WcC+47NRo1Uwwr6v96DT5ABExo=
-X-Mailgun-Sending-Ip: 198.61.254.136
+ bh=b1+Js8t+E9XyTX/DmoYpm6LqBQgXXBSWzwqpdmstnSc=;
+ b=AZIOmDX29cdckcBAsvr6yz3thpg+F8rbw2p9Ym8UBuQLm4w25Gt7FlsMOGYnHtfWcDbt0+spVcpFqcXHFknEIu5B5tt0SKyNRzmq4D0xEVqsT6kKlXtn8NJtWc/JAWIdY81z6HfzL26pEKWedH0Rb8Pp4bF7GCOHZ1Ch/i+shJw=
+X-Mailgun-Sending-Ip: 161.38.202.219
 X-Mailgun-Sid: WyI4YjA3MiIsInhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyIsIjk0N2I0Il0=
 Sender: gitlab@mg.gitlab.com
-Date: Sat, 18 Nov 2023 03:51:31 +0000
+Date: Sat, 18 Nov 2023 05:20:41 +0000
 From: GitLab <gitlab@mg.gitlab.com>
 Reply-To: GitLab <noreply@gitlab.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <655834c3d7311_2c1197842075fe@gitlab-sidekiq-catchall-v2-5c44d4cdc7-wwdb4.mail>
-Subject: xen | Successful pipeline for staging | 83e9e305
+Message-ID: <655849a95ea41_2d656bf5c2080d@gitlab-sidekiq-catchall-v2-5c44d4cdc7-56l9v.mail>
+Subject: xen | Successful pipeline for staging | 98758ae4
 Mime-Version: 1.0
 Content-Type: multipart/alternative;
- boundary="--==_mimepart_655834c3cdf5b_2c1197842074b";
+ boundary="--==_mimepart_655849a955b2c_2d656bf5c20790";
  charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-GitLab-Project: xen
 X-GitLab-Project-Id: 2336572
 X-GitLab-Project-Path: xen-project/xen
-X-GitLab-Pipeline-Id: 1076983423
+X-GitLab-Pipeline-Id: 1076994458
 X-GitLab-Pipeline-Ref: staging
 X-GitLab-Pipeline-Status: success
 Auto-Submitted: auto-generated
 X-Auto-Response-Suppress: All
 
-----==_mimepart_655834c3cdf5b_2c1197842074b
+----==_mimepart_655849a955b2c_2d656bf5c20790
 Content-Type: text/plain;
  charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 
 
-Pipeline #1076983423 has passed!
+Pipeline #1076994458 has passed!
 
 Project: xen ( https://gitlab.com/xen-project/xen )
 Branch: staging ( https://gitlab.com/xen-project/xen/-/commits/staging )
 
-Commit: 83e9e305 ( https://gitlab.com/xen-project/xen/-/commit/83e9e305103ef00ba3b546657d47c4aa85899cff )
-Commit Message: automation/eclair: add a deviation for MISRA C:...
+Commit: 98758ae4 ( https://gitlab.com/xen-project/xen/-/commit/98758ae48974d6d24f999e4d9324e463d326f66f )
+Commit Message: xen: introduce function type bug_fn_t.
+
+Introdu...
 Commit Author: Federico Serafini
 Committed by: Stefano Stabellini
 
 
 
-Pipeline #1076983423 ( https://gitlab.com/xen-project/xen/-/pipelines/1076983423 ) triggered by Ganis ( https://gitlab.com/ganis )
+Pipeline #1076994458 ( https://gitlab.com/xen-project/xen/-/pipelines/1076994458 ) triggered by Ganis ( https://gitlab.com/ganis )
 successfully completed 129 jobs in 3 stages.
 
 -- 
@@ -99,7 +101,7 @@ You're receiving this email because of your account on gitlab.com.
 
 
 
-----==_mimepart_655834c3cdf5b_2c1197842074b
+----==_mimepart_655849a955b2c_2d656bf5c20790
 Content-Type: text/html;
  charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
@@ -114,7 +116,7 @@ w.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <meta content=3D"width=3Ddevice-width, initial-scale=3D1" name=3D"viewpor=
 t" />
 <meta content=3D"IE=3Dedge" http-equiv=3D"X-UA-Compatible" />
-<title>xen | Successful pipeline for staging | 83e9e305</title>
+<title>xen | Successful pipeline for staging | 98758ae4</title>
 <style data-premailer=3D"ignore" type=3D"text/css">
 body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}t=
 able,td{mso-table-lspace:0pt;mso-table-rspace:0pt}img{-ms-interpolation-m=
@@ -191,7 +193,7 @@ ers/ci_pipeline_notif_v1/icon-check-green-inverted-3fc3485096ebb83ce1d951=
 </td>
 <td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; co=
 lor: #ffffff;" align=3D"center" valign=3D"middle">
-Pipeline #1076983423 has passed!
+Pipeline #1076994458 has passed!
 </td>
 </tr>
 </tbody>
@@ -287,15 +289,17 @@ ipeline_notif_v1/icon-commit-gray-c10243ac24cde64b549aec91de35e6b49c8739b=
 </td>
 <td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
 nt-size: 15px; line-height: 1.4;" valign=3D"middle">
-<a href=3D"https://gitlab.com/xen-project/xen/-/commit/83e9e305103ef00ba3=
-b546657d47c4aa85899cff" style=3D"color: #3777b0; text-decoration: none;">=
-83e9e305</a>
+<a href=3D"https://gitlab.com/xen-project/xen/-/commit/98758ae48974d6d24f=
+999e4d9324e463d326f66f" style=3D"color: #3777b0; text-decoration: none;">=
+98758ae4</a>
 </td>
 </tr>
 </tbody>
 </table>
 <div class=3D"commit" style=3D"color: #5c5c5c; font-weight: 300;">
-automation/eclair: add a deviation for MISRA C:...
+xen: introduce function type bug_fn_t.
+
+Introdu...
 </div>
 </td>
 </tr>
@@ -385,8 +389,8 @@ le=3D"border-collapse: collapse; margin: 0 auto;">
 <tr>
 <td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
 nt-size: 15px; line-height: 1.4; font-weight: 500;" valign=3D"baseline">
-Pipeline <a href=3D"https://gitlab.com/xen-project/xen/-/pipelines/107698=
-3423" style=3D"color: #3777b0; text-decoration: none;">#1076983423</a> tr=
+Pipeline <a href=3D"https://gitlab.com/xen-project/xen/-/pipelines/107699=
+4458" style=3D"color: #3777b0; text-decoration: none;">#1076994458</a> tr=
 iggered by
 </td>
 <td style=3D"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; fo=
@@ -461,5 +465,5 @@ lor: #5c5c5c; padding: 25px 0;">
 </body>
 </html>
 
-----==_mimepart_655834c3cdf5b_2c1197842074b--
+----==_mimepart_655849a955b2c_2d656bf5c20790--
 
