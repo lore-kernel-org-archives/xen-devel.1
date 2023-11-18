@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2908C072A2
-	for <xen-devel@archiver.kernel.org>; Sat, 18 Nov 2023 00:45:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.635470.991362 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809CBC197A0
+	for <xen-devel@archiver.kernel.org>; Sat, 18 Nov 2023 02:20:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.635476.991382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r49Sq-0003bq-B7; Sat, 18 Nov 2023 00:45:36 +0000
+	id 1r4AwN-0002Dn-5H; Sat, 18 Nov 2023 02:20:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 635470.991362; Sat, 18 Nov 2023 00:45:36 +0000
+Received: by outflank-mailman (output) from mailman id 635476.991382; Sat, 18 Nov 2023 02:20:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r49Sq-0003bj-8B; Sat, 18 Nov 2023 00:45:36 +0000
-Received: by outflank-mailman (input) for mailman id 635470;
- Sat, 18 Nov 2023 00:45:34 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r4AwN-0002Dg-2R; Sat, 18 Nov 2023 02:20:11 +0000
+Received: by outflank-mailman (input) for mailman id 635476;
+ Sat, 18 Nov 2023 02:20:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=W+gg=G7=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1r49So-0003bd-Cb
- for xen-devel@lists.xenproject.org; Sat, 18 Nov 2023 00:45:34 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c631d5eb-85ab-11ee-9b0e-b553b5be7939;
- Sat, 18 Nov 2023 01:45:31 +0100 (CET)
+ id 1r4AwM-00016w-2b
+ for xen-devel@lists.xenproject.org; Sat, 18 Nov 2023 02:20:10 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fe2b36bc-85b8-11ee-98dc-6d05b1d4d9a1;
+ Sat, 18 Nov 2023 03:20:09 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8217961E34;
- Sat, 18 Nov 2023 00:45:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42B4CC433C7;
- Sat, 18 Nov 2023 00:45:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 79B3161DF4;
+ Sat, 18 Nov 2023 02:20:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9DCEC433C8;
+ Sat, 18 Nov 2023 02:20:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,175 +44,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c631d5eb-85ab-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: fe2b36bc-85b8-11ee-98dc-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1700268328;
-	bh=nNkY+fb2y3EQRcovAzUPxRitknmIYLi4FdIxCOu5eEI=;
+	s=k20201202; t=1700274006;
+	bh=j5Ws/t6Ta9eJejgOz4SewkwKk+0kbJcLvoqmWcbva18=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=dL2sL3VZUJidBrsZzoTSnPqCyQWJKIeA+Dp0gvUa6QCLcCH89HThbRazwPqQrwfFX
-	 8sEveM5pUJEc7xPToeadcycz0b7M0/u/M5q4V1N2IwNkCGpgSr0C/sP3nrTEp9lzPM
-	 NDeDnx8B7lyCKJhfuOKH3J1OaiNPjIo4VGpAUSwHX0L2poLeKQq0mmBsJAvOwOFTAS
-	 UQiKeBTNtkoI/eE5hmUWYJzcoUVaQmKxHOE5/wz0P+A+mleeqwyXHb9kLhI7dozSPU
-	 2MtMLSgb1vRVn3i/j77u2sZ4ZLrX7UQ9534KcaJ5KPMbg8C5ZjiO9QoVN+9yqhravA
-	 Sf1YBybl3HbEQ==
-Date: Fri, 17 Nov 2023 16:45:25 -0800 (PST)
+	b=Lkh50obpp0E8QA22GpImRqqcAFmM2IJxPXPa8GYpsqYfl8qmtc5ZEaYFVdZ4bI4E+
+	 Y/WtiOlaYpuRS+xifcR4EEwWF6I7wA9iJ7u0uu2jRHHo3GhXN8ZenOxV391Xf2/UGo
+	 EYiRSVH4LBFYme11VFKqsbYicZ0RAAIPknWiCgIc3+ac9voBGEPD9yW16ZPZk4HQLK
+	 FFW/bg4P6NG2yq4LEjNOVMzfGw+8eqmDLA50CUB+74mM0kO6bqTleqKTiUmnW3Vgx0
+	 m6hzhUCb2n8F2cvUU9DGB8toyy5wi0SdcqQowRbkdgE1q8nvx4bvmb2HZky1grzut4
+	 /bR+WqNkkmT1A==
+Date: Fri, 17 Nov 2023 18:20:03 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-    Stewart Hildebrand <stewart.hildebrand@amd.com>, 
-    Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
-    Wei Liu <wl@xen.org>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v10 13/17] vpci: add initial support for virtual PCI bus
- topology
-In-Reply-To: <87edgo2f6j.fsf@epam.com>
-Message-ID: <alpine.DEB.2.22.394.2311171633190.773207@ubuntu-linux-20-04-desktop>
-References: <20231012220854.2736994-1-volodymyr_babchuk@epam.com> <20231012220854.2736994-14-volodymyr_babchuk@epam.com> <d6a58e73-da51-40f1-a2f7-576274945585@xen.org> <alpine.DEB.2.22.394.2311161513210.773207@ubuntu-linux-20-04-desktop> <87o7ft44bv.fsf@epam.com>
- <alpine.DEB.2.22.394.2311161651090.773207@ubuntu-linux-20-04-desktop> <87a5rc4gk7.fsf@epam.com> <770aaef8-09f4-480a-95b8-cc0448ad07ff@xen.org> <8734x43zxi.fsf@epam.com> <alpine.DEB.2.22.394.2311171339010.773207@ubuntu-linux-20-04-desktop>
- <87edgo2f6j.fsf@epam.com>
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+cc: Jan Beulich <jbeulich@suse.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, michal.orzel@amd.com, 
+    xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, 
+    consulting@bugseng.com, andrew.cooper3@citrix.com, roger.pau@citrix.com, 
+    Simone Ballarin <simone.ballarin@bugseng.com>, 
+    Doug Goldstein <cardoe@cardoe.com>, 
+    George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, 
+    Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH][for-4.19 v4 1/8] xen/include: add macro
+ ISOLATE_LOW_BIT
+In-Reply-To: <8a1313b3ab5ba6dd556cf37409e3b703@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2311171804590.773207@ubuntu-linux-20-04-desktop>
+References: <cover.1698410970.git.nicola.vetrini@bugseng.com> <dca236bf9199f596bafb35eb48d81adc280d8cca.1698410970.git.nicola.vetrini@bugseng.com> <f88edc35-6b1b-0136-aa1f-6429652c4016@suse.com> <alpine.DEB.2.22.394.2310301536390.1625118@ubuntu-linux-20-04-desktop>
+ <7c26fb70-6a8c-58a3-6a1d-300dd57b5827@suse.com> <817fab34432c854ce585aba80db77f7c@bugseng.com> <8b4e0da82930375b2a95387a9031c73f@bugseng.com> <1178b79c-d6a3-a46c-5556-3fb5964dc051@suse.com> <392566d1-109b-413c-b904-0e4cb4007263@suse.com>
+ <6b6f051130b724ee6a813235e049354c@bugseng.com> <7cbf6f0f-d5b1-44e2-9a0e-a9d7d353eb6b@suse.com> <alpine.DEB.2.22.394.2311161635200.773207@ubuntu-linux-20-04-desktop> <b5277391-71bb-42b6-82e4-635dd1361ad3@suse.com>
+ <8a1313b3ab5ba6dd556cf37409e3b703@bugseng.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Fri, 17 Nov 2023, Volodymyr Babchuk wrote:
-> > On Fri, 17 Nov 2023, Volodymyr Babchuk wrote:
-> >> Hi Julien,
-> >> 
-> >> Julien Grall <julien@xen.org> writes:
-> >> 
-> >> > Hi Volodymyr,
-> >> >
-> >> > On 17/11/2023 14:09, Volodymyr Babchuk wrote:
-> >> >> Hi Stefano,
-> >> >> Stefano Stabellini <sstabellini@kernel.org> writes:
-> >> >> 
-> >> >>> On Fri, 17 Nov 2023, Volodymyr Babchuk wrote:
-> >> >>>>> I still think, no matter the BDF allocation scheme, that we should try
-> >> >>>>> to avoid as much as possible to have two different PCI Root Complex
-> >> >>>>> emulators. Ideally we would have only one PCI Root Complex emulated by
-> >> >>>>> Xen. Having 2 PCI Root Complexes both of them emulated by Xen would be
-> >> >>>>> tolerable but not ideal.
-> >> >>>>
-> >> >>>> But what is exactly wrong with this setup?
-> >> >>>
-> >> >>> [...]
-> >> >>>
-> >> >>>>> The worst case I would like to avoid is to have
-> >> >>>>> two PCI Root Complexes, one emulated by Xen and one emulated by QEMU.
-> >> >>>>
-> >> >>>> This is how our setup works right now.
-> >> >>>
-> >> >>> If we have:
-> >> >>> - a single PCI Root Complex emulated in Xen
-> >> >>> - Xen is safety certified
-> >> >>> - individual Virtio devices emulated by QEMU with grants for memory
-> >> >>>
-> >> >>> We can go very far in terms of being able to use Virtio in safety
-> >> >>> use-cases. We might even be able to use Virtio (frontends) in a SafeOS.
-> >> >>>
-> >> >>> On the other hand if we put an additional Root Complex in QEMU:
-> >> >>> - we pay a price in terms of complexity of the codebase
-> >> >>> - we pay a price in terms of resource utilization
-> >> >>> - we have one additional problem in terms of using this setup with a
-> >> >>>    SafeOS (one more device emulated by a non-safe component)
-> >> >>>
-> >> >>> Having 2 PCI Root Complexes both emulated in Xen is a middle ground
-> >> >>> solution because:
-> >> >>> - we still pay a price in terms of resource utilization
-> >> >>> - the code complexity goes up a bit but hopefully not by much
-> >> >>> - there is no impact on safety compared to the ideal scenario
-> >> >>>
-> >> >>> This is why I wrote that it is tolerable.
-> >> >> Ah, I see now. Yes, I am agree with this. Also I want to add some
-> >> >> more
-> >> >> points:
-> >> >> - There is ongoing work on implementing virtio backends as a
-> >> >> separate
-> >> >>    applications, written in Rust. Linaro are doing this part. Right now
-> >> >>    they are implementing only virtio-mmio, but if they want to provide
-> >> >>    virtio-pci as well, they will need a mechanism to plug only
-> >> >>    virtio-pci, without Root Complex. This is argument for using single Root
-> >> >>    Complex emulated in Xen.
-> >> >> - As far as I know (actually, Oleksandr told this to me), QEMU has
-> >> >> no
-> >> >>    mechanism for exposing virtio-pci backends without exposing PCI root
-> >> >>    complex as well. Architecturally, there should be a PCI bus to which
-> >> >>    virtio-pci devices are connected. Or we need to make some changes to
-> >> >>    QEMU internals to be able to create virtio-pci backends that are not
-> >> >>    connected to any bus. Also, added benefit that PCI Root Complex
-> >> >>    emulator in QEMU handles legacy PCI interrupts for us. This is
-> >> >>    argument for separate Root Complex for QEMU.
-> >> >> As right now we have only virtio-pci backends provided by QEMU and
-> >> >> this
-> >> >> setup is already working, I propose to stick to this
-> >> >> solution. Especially, taking into account that it does not require any
-> >> >> changes to hypervisor code.
-> >> >
-> >> > I am not against two hostbridge as a temporary solution as long as
-> >> > this is not a one way door decision. I am not concerned about the
-> >> > hypervisor itself, I am more concerned about the interface exposed by
-> >> > the toolstack and QEMU.
-> >
-> > I agree with this...
-> >
-> >
-> >> > To clarify, I don't particular want to have to maintain the two
-> >> > hostbridges solution once we can use a single hostbridge. So we need
-> >> > to be able to get rid of it without impacting the interface too much.
-> >
-> > ...and this
-> >
-> >
-> >> This depends on virtio-pci backends availability. AFAIK, now only one
-> >> option is to use QEMU and QEMU provides own host bridge. So if we want
-> >> get rid of the second host bridge we need either another virtio-pci
-> >> backend or we need to alter QEMU code so it can live without host
-> >> bridge.
-> >> 
-> >> As for interfaces, it appears that QEMU case does not require any changes
-> >> into hypervisor itself, it just boils down to writing couple of xenstore
-> >> entries and spawning QEMU with correct command line arguments.
-> >
-> > One thing that Stewart wrote in his reply that is important: it doesn't
-> > matter if QEMU thinks it is emulating a PCI Root Complex because that's
-> > required from QEMU's point of view to emulate an individual PCI device.
-> >
-> > If we can arrange it so the QEMU PCI Root Complex is not registered
-> > against Xen as part of the ioreq interface, then QEMU's emulated PCI
-> > Root Complex is going to be left unused. I think that would be great
-> > because we still have a clean QEMU-Xen-tools interface and the only
-> > downside is some extra unused emulation in QEMU. It would be a
-> > fantastic starting point.
+On Fri, 17 Nov 2023, Nicola Vetrini wrote:
+> Hi Jan,
 > 
-> I believe, that in this case we need to set manual ioreq handlers, like
-> what was done in patch "xen/arm: Intercept vPCI config accesses and
-> forward them to emulator", because we need to route ECAM accesses
-> either to a virtio-pci backend or to a real PCI device. Also we need
-> to tell QEMU to not install own ioreq handles for ECAM space.
+> > > > > > While I've committed this patch (hoping that I got the necessary
+> > > > > > context
+> > > > > > adjustment right for the
+> > > > > > automation/eclair_analysis/ECLAIR/deviations.ecl
+> > > > > > change), I'd like to come back to this before going further with
+> > > > > > users
+> > > > > > of
+> > > > > > the new macro: I still think we ought to try to get to the single
+> > > > > > evaluation wherever possible. The macro would then be used only in
+> > > > > > cases
+> > > > > > where the alternative construct (perhaps an isolate_lsb() macro,
+> > > > > > living
+> > > > > > perhaps in xen/bitops.h) cannot be used. ISOLATE_LSB() would then
+> > > > > > want
+> > > > > > to
+> > > > > > gain a comment directing people to the "better" sibling. Thoughts?
+> > > > > 
+> > > > > Having the users in place would help me estimate the remaining work
+> > > > > that
+> > > > > needs to be done on this rule and see if my local counts match up with
+> > > > > the counts in staging.
+> > > > 
+> > > > By "having the users in place", you mean you want other patches in this
+> > > > and the dependent series to be committed as-is (except for the name
+> > > > change)? That's what I'd like to avoid, as it would mean touching all
+> > > > those use sites again where the proposed isolate_lsb() could be used
+> > > > instead. I'd rather see all use sites be put into their final shape
+> > > > right away.
+> > > 
+> > > This request is coming a bit late and also after all the patches have
+> > > been reviewed already. I for one am not looking forward to review them
+> > > again.
+> > > 
+> > > That said, if you could be more specified maybe it could become
+> > > actionable:
+> > > 
+> > > - do you have a pseudo code implementation of the "better" macro you
+> > >   would like to propose?
+> > 
+> > May I remind you that I made this request (including a draft implementation)
+> > before already, and Nicola then merely found that the evaluate-once form
+> > simply cannot be used everywhere? Anybody could have thought of the option
+> > of "splitting" the macro. After all I hope that there is no disagreement on
+> > macro arguments better being evaluated just once, whenever possible.
+> > 
+> > > - do you have an list of call sites you would like to be changed to use
+> > >   the "better" macro?
+> > 
+> > No, I don't have a list. But the pattern is pretty clear: The "better" form
+> > ought to be used wherever it actually can be used.
+> > 
+> > > Also, you might remember past discussions about time spent making
+> > > changes yourself vs. others doing the same. This is one of those cases
+> > > that it would be faster for you to make the change and send a patch than
+> > > explaining someone else how to do it, then review the result (and
+> > > review it again as it probably won't be exactly as you asked the first
+> > > time.)
+> > > 
+> > > If you don't want the call sites to be changes twice, may I suggest you
+> > > provide a patch on top of Nicola's series, I review and ack your patch,
+> > > and Nicola or I rebase & resend the series so that the call sites are
+> > > only changes once as you would like? I think that's going to be way
+> > > faster.
+> > 
+> > I'll see if I can find time to do so. I don't normally work on top of
+> > other people's uncommitted patches, though ... So I may also choose to go
+> > a slightly different route. (You realize though that all still pending
+> > patches using the new macro need touching again anyway, don't you?)
+> > 
+> > Jan
+> 
+> Then perhaps it's best if I give it a try at doing the single evaluation
+> macro, so that I can make a series modifying the call sites only once on top
+> of that and send everything in one go. Before doing that, though, I'll make a
+> thread where various aspects that are not so clear yet can be discussed, so
+> that we can devise a robust solution (also to dig this out of this deep
+> thread).
 
-I was imagining that the interface would look like this: QEMU registers
-a PCI BDF and Xen automatically starts forwarding to QEMU ECAM
-reads/writes requests for the PCI config space of that BDF only. It
-would not be the entire ECAM space but only individual PCI conf
-reads/writes that the BDF only.
-
-
-> Another point is PCI legacy interrupts, which should be emulated on Xen
-> side. And unless I miss something, we will need some new mechanism to
-> signal those interrupts from QEMU/other backend. I am not sure if we can
-> use already existing IRQ signaling mechanism, because PCI interrupts are
-> ORed for all devices on a bridge and are level-sensitive.
-
-I hope we can reuse xc_hvm_set_pci_intx_level or another XEN_DMOP
-hypercall
-
-
-> Of course, we will need all of this anyways, if we want to support
-> standalone virtio-pci backends, but for me it sounds more like "finish
-> point" :)
-
+In the meantime I committed patches from #5 onward as they don't depend
+on ISOLATE_LSB
 
