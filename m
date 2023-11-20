@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A66C197A0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 11:39:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.636630.992225 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 765A9C54E76
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 11:39:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.636632.992244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r52c5-0004FL-4t; Mon, 20 Nov 2023 11:38:49 +0000
+	id 1r52cG-0004pT-Jy; Mon, 20 Nov 2023 11:39:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 636630.992225; Mon, 20 Nov 2023 11:38:49 +0000
+Received: by outflank-mailman (output) from mailman id 636632.992244; Mon, 20 Nov 2023 11:39:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r52c5-0004FE-2J; Mon, 20 Nov 2023 11:38:49 +0000
-Received: by outflank-mailman (input) for mailman id 636630;
- Mon, 20 Nov 2023 11:38:47 +0000
+	id 1r52cG-0004pI-Gx; Mon, 20 Nov 2023 11:39:00 +0000
+Received: by outflank-mailman (input) for mailman id 636632;
+ Mon, 20 Nov 2023 11:38:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WPLm=HB=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r52c3-0004F8-MR
- for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 11:38:47 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1r52cF-0004F8-MI
+ for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 11:38:59 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5da66d84-8799-11ee-98df-6d05b1d4d9a1;
- Mon, 20 Nov 2023 12:38:46 +0100 (CET)
+ id 6503ad55-8799-11ee-98df-6d05b1d4d9a1;
+ Mon, 20 Nov 2023 12:38:59 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id ED66B2190B;
- Mon, 20 Nov 2023 11:38:45 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id AA5DF1F85D;
+ Mon, 20 Nov 2023 11:38:58 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6F58413499;
- Mon, 20 Nov 2023 11:38:45 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 687CA13499;
+ Mon, 20 Nov 2023 11:38:58 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 5o/GGUVFW2WqPQAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 20 Nov 2023 11:38:45 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id VW7EF1JFW2W/PQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 20 Nov 2023 11:38:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,14 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5da66d84-8799-11ee-98df-6d05b1d4d9a1
+X-Inumbo-ID: 6503ad55-8799-11ee-98df-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1700480325; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=NLwENRVTo357k+tumrzZ4ap5+XiZP8RkIEcBvoKnH9Y=;
-	b=LejPns590LIlN0YhxaZ+zPC9xbLNuvEWDg4Iu1GJgQsVt6r3rl9oXRpEQ97pb8KiBKTMJR
-	TzOlEQ+r6YZpEtX/jQoMJxClhc56yQOO/p9x/5G4KMJQIeL9Tn3qm6Fa3m5KxWKUxvC00Z
-	E5TXq4zyJMjtu6BGls2MP0TT8+rB1ZU=
+	t=1700480338; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=P9k7ruJndhEp5UZ0bXYcY2mHarlDnu/RN2d+ITm7QSI=;
+	b=tWf/VWk+14wpXhnuWXwRBUTQVrfAgyT65WkdLygj4zZmFLiu1hG6Uq3rzqnVk6FKTfqPls
+	PkQ2D/B9EMm5IXsmRtyJmej4GogYHQJ7sap79Pyvl/zqmPDrNrOhN2Ip/aR6EWLD7/Bi4L
+	ojBDEVNznU1rOah2UTYNXd7QJBikJhE=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: javi.merino@cloud.com,
@@ -70,25 +72,18 @@ Cc: javi.merino@cloud.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Lukasz Hawrylko <lukasz@hawrylko.pl>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>
-Subject: [PATCH v3 00/13] xen/spinlock: make recursive spinlocks a dedicated type
-Date: Mon, 20 Nov 2023 12:38:29 +0100
-Message-Id: <20231120113842.5897-1-jgross@suse.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 02/13] xen/spinlock: reduce lock profile ifdefs
+Date: Mon, 20 Nov 2023 12:38:31 +0100
+Message-Id: <20231120113842.5897-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231120113842.5897-1-jgross@suse.com>
+References: <20231120113842.5897-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out1.suse.de;
+Authentication-Results: smtp-out2.suse.de;
 	none
-X-Spamd-Result: default: False [0.70 / 50.00];
+X-Spamd-Result: default: False [-0.48 / 50.00];
 	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
@@ -96,79 +91,141 @@ X-Spamd-Result: default: False [0.70 / 50.00];
 	 R_MISSING_CHARSET(2.50)[];
 	 TO_MATCH_ENVRCPT_ALL(0.00)[];
 	 MIME_GOOD(-0.10)[text/plain];
+	 REPLY(-4.00)[];
 	 BROKEN_CONTENT_TYPE(1.50)[];
 	 NEURAL_HAM_LONG(-1.00)[-1.000];
 	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 NEURAL_HAM_SHORT(-0.20)[-0.999];
-	 RCPT_COUNT_TWELVE(0.00)[18];
+	 NEURAL_HAM_SHORT(-0.20)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[9];
 	 MID_CONTAINS_FROM(1.00)[];
 	 FUZZY_BLOCKED(0.00)[rspamd.com];
 	 FROM_EQ_ENVFROM(0.00)[];
 	 MIME_TRACE(0.00)[0:+];
 	 RCVD_COUNT_TWO(0.00)[2];
 	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
+	 BAYES_HAM(-0.18)[70.40%]
 
-Instead of being able to use normal spinlocks as recursive ones, too,
-make recursive spinlocks a special lock type.
+With some small adjustments to the LOCK_PROFILE_* macros some #ifdefs
+can be dropped from spinlock.c.
 
-This will make the spinlock structure smaller in production builds and
-add type-safety.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch
+V3:
+- add variable name to macros parameter (Jan Beulich)
+---
+ xen/common/spinlock.c | 49 +++++++++++++++++++------------------------
+ 1 file changed, 21 insertions(+), 28 deletions(-)
 
-This allows to increase the maximum number of physical cpus from 8191
-to 65535 without increasing the size of the lock structure in production
-builds (the size of recursive spinlocks in debug builds will grow to
-12 bytes due to that change).
-
-Changes in V2:
-- addressed comments by Jan Beulich
-- lots of additional cleanups
-- reorganized complete series
-
-Changes in V3:
-- addressed comments by Jan Beulich
-
-Juergen Gross (13):
-  xen/spinlock: fix coding style issues
-  xen/spinlock: reduce lock profile ifdefs
-  xen/spinlock: make spinlock initializers more readable
-  xen/spinlock: introduce new type for recursive spinlocks
-  xen/spinlock: rename recursive lock functions
-  xen/spinlock: add rspin_[un]lock_irq[save|restore]()
-  xen/spinlock: make struct lock_profile rspinlock_t aware
-  xen/spinlock: add explicit non-recursive locking functions
-  xen/spinlock: add another function level
-  xen/spinlock: add missing rspin_is_locked() and rspin_barrier()
-  xen/spinlock: split recursive spinlocks from normal ones
-  xen/spinlock: remove indirection through macros for spin_*() functions
-  xen/spinlock: support higher number of cpus
-
- xen/arch/arm/domain.c         |   4 +-
- xen/arch/arm/mm.c             |   4 +-
- xen/arch/x86/domain.c         |  20 +--
- xen/arch/x86/include/asm/mm.h |   2 +-
- xen/arch/x86/mm.c             |  12 +-
- xen/arch/x86/mm/mem_sharing.c |  16 +-
- xen/arch/x86/mm/mm-locks.h    |   6 +-
- xen/arch/x86/mm/p2m-pod.c     |   6 +-
- xen/arch/x86/mm/p2m.c         |   4 +-
- xen/arch/x86/tboot.c          |   4 +-
- xen/arch/x86/traps.c          |  14 +-
- xen/common/domain.c           |   6 +-
- xen/common/domctl.c           |   4 +-
- xen/common/grant_table.c      |  10 +-
- xen/common/ioreq.c            |  54 +++----
- xen/common/memory.c           |   4 +-
- xen/common/numa.c             |   4 +-
- xen/common/page_alloc.c       |  30 ++--
- xen/common/spinlock.c         | 296 +++++++++++++++++++++++-----------
- xen/drivers/char/console.c    |  48 ++----
- xen/drivers/passthrough/pci.c |   8 +-
- xen/include/xen/console.h     |   5 +-
- xen/include/xen/sched.h       |  10 +-
- xen/include/xen/spinlock.h    | 176 ++++++++++++--------
- 24 files changed, 449 insertions(+), 298 deletions(-)
-
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index d7194e518c..ce18fbdd8a 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -267,25 +267,28 @@ void spin_debug_disable(void)
+         lock->profile->time_hold += NOW() - lock->profile->time_locked;      \
+         lock->profile->lock_cnt++;                                           \
+     }
+-#define LOCK_PROFILE_VAR    s_time_t block = 0
+-#define LOCK_PROFILE_BLOCK  block = block ? : NOW();
+-#define LOCK_PROFILE_GOT                                                     \
++#define LOCK_PROFILE_VAR(var, val)    s_time_t var = (val)
++#define LOCK_PROFILE_BLOCK(var     )  var = var ? : NOW()
++#define LOCK_PROFILE_BLKACC(tst, val)                                        \
++    if ( tst )                                                               \
++    {                                                                        \
++        lock->profile->time_block += lock->profile->time_locked - (val);     \
++        lock->profile->block_cnt++;                                          \
++    }
++#define LOCK_PROFILE_GOT(val)                                                \
+     if ( lock->profile )                                                     \
+     {                                                                        \
+         lock->profile->time_locked = NOW();                                  \
+-        if ( block )                                                         \
+-        {                                                                    \
+-            lock->profile->time_block += lock->profile->time_locked - block; \
+-            lock->profile->block_cnt++;                                      \
+-        }                                                                    \
++        LOCK_PROFILE_BLKACC(val, val);                                       \
+     }
+ 
+ #else
+ 
+ #define LOCK_PROFILE_REL
+-#define LOCK_PROFILE_VAR
+-#define LOCK_PROFILE_BLOCK
+-#define LOCK_PROFILE_GOT
++#define LOCK_PROFILE_VAR(var, val)
++#define LOCK_PROFILE_BLOCK(var)
++#define LOCK_PROFILE_BLKACC(tst, val)
++#define LOCK_PROFILE_GOT(val)
+ 
+ #endif
+ 
+@@ -308,7 +311,7 @@ static void always_inline spin_lock_common(spinlock_t *lock,
+                                            void (*cb)(void *), void *data)
+ {
+     spinlock_tickets_t tickets = SPINLOCK_TICKET_INC;
+-    LOCK_PROFILE_VAR;
++    LOCK_PROFILE_VAR(block, 0);
+ 
+     check_lock(&lock->debug, false);
+     preempt_disable();
+@@ -316,14 +319,14 @@ static void always_inline spin_lock_common(spinlock_t *lock,
+                                            tickets.head_tail);
+     while ( tickets.tail != observe_head(&lock->tickets) )
+     {
+-        LOCK_PROFILE_BLOCK;
++        LOCK_PROFILE_BLOCK(block);
+         if ( cb )
+             cb(data);
+         arch_lock_relax();
+     }
+     arch_lock_acquire_barrier();
+     got_lock(&lock->debug);
+-    LOCK_PROFILE_GOT;
++    LOCK_PROFILE_GOT(block);
+ }
+ 
+ void _spin_lock(spinlock_t *lock)
+@@ -411,19 +414,15 @@ int _spin_trylock(spinlock_t *lock)
+      * arch_lock_acquire_barrier().
+      */
+     got_lock(&lock->debug);
+-#ifdef CONFIG_DEBUG_LOCK_PROFILE
+-    if ( lock->profile )
+-        lock->profile->time_locked = NOW();
+-#endif
++    LOCK_PROFILE_GOT(0);
++
+     return 1;
+ }
+ 
+ void _spin_barrier(spinlock_t *lock)
+ {
+     spinlock_tickets_t sample;
+-#ifdef CONFIG_DEBUG_LOCK_PROFILE
+-    s_time_t block = NOW();
+-#endif
++    LOCK_PROFILE_VAR(block, NOW());
+ 
+     check_barrier(&lock->debug);
+     smp_mb();
+@@ -432,13 +431,7 @@ void _spin_barrier(spinlock_t *lock)
+     {
+         while ( observe_head(&lock->tickets) == sample.head )
+             arch_lock_relax();
+-#ifdef CONFIG_DEBUG_LOCK_PROFILE
+-        if ( lock->profile )
+-        {
+-            lock->profile->time_block += NOW() - block;
+-            lock->profile->block_cnt++;
+-        }
+-#endif
++        LOCK_PROFILE_BLKACC(lock->profile, block);
+     }
+     smp_mb();
+ }
 -- 
 2.35.3
 
