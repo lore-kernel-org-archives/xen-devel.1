@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ED65C197A0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 22:49:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.637323.993032 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75115C2BB3F
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 22:49:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.637329.993086 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5D52-0004rx-DC; Mon, 20 Nov 2023 22:49:24 +0000
+	id 1r5D5A-0006BT-Fk; Mon, 20 Nov 2023 22:49:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 637323.993032; Mon, 20 Nov 2023 22:49:24 +0000
+Received: by outflank-mailman (output) from mailman id 637329.993086; Mon, 20 Nov 2023 22:49:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5D52-0004rq-A4; Mon, 20 Nov 2023 22:49:24 +0000
-Received: by outflank-mailman (input) for mailman id 637323;
- Mon, 20 Nov 2023 22:49:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r5D5A-00069C-6x; Mon, 20 Nov 2023 22:49:32 +0000
+Received: by outflank-mailman (input) for mailman id 637329;
+ Mon, 20 Nov 2023 22:49:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Uh/B=HB=citrix.com=prvs=681f0548f=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1r5D50-0004rh-8p
- for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 22:49:22 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 09775415-87f7-11ee-98e0-6d05b1d4d9a1;
- Mon, 20 Nov 2023 23:49:20 +0100 (CET)
+ id 1r5D59-0005pp-0K
+ for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 22:49:31 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0fd74cc1-87f7-11ee-9b0e-b553b5be7939;
+ Mon, 20 Nov 2023 23:49:29 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 09775415-87f7-11ee-98e0-6d05b1d4d9a1
+X-Inumbo-ID: 0fd74cc1-87f7-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1700520560;
+  d=citrix.com; s=securemail; t=1700520568;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ypD7FL2deFYmmK/IKRzebizp0y0p5ZU6aoYIe+SpQ+E=;
-  b=Qo4aGEf59stRJPiE1CtjmLl78cWVrYo4E1H153sT2ao5C6Rb3E8X8nim
-   YqauCZfRpvZKjgEC95aWm4mjJ8HSdAri4IHEegz9Am5rWLiWke/2+2Zuq
-   guXO2DuDS+1EIpfvwIBh38LF2Fjcn2tnZooI0Uuam6qN8bflJP9eqZZ8k
-   0=;
-X-CSE-ConnectionGUID: YZEIJDDgRpirGwCdt/oM8w==
-X-CSE-MsgGUID: I70KWNrSTtCQmBILCUNMbg==
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=3sQs0NPyCIz2F9DlyYtFEywO02GaqviYPBmMjYsQYss=;
+  b=dLHAXekwU4/8cDc8QBozO3tlmyc6zRMxWzD+rhWzcaAuoi/3ZebGK2uA
+   SZUq/woY/PZBKbvfR0VDcwJzE7c6OFQvwpTh9Nj2VMOi9+r1Mj26vRoRe
+   tmMpPgrqnUOxdVKa6Wk55xkcZjnLU4/0SsExL8NmSMxFLO+ukJ0VP9oHr
+   Y=;
+X-CSE-ConnectionGUID: LtYo8xJLRvC+jqiF6E23hw==
+X-CSE-MsgGUID: MYjbWUHGQ3Of01rMr+BAKQ==
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 128218323
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 127436306
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.159.70
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:Ddb7WKvnI+hiN0IbEWF3bfPExOfnVKpeMUV32f8akzHdYApBsoF/q
- tZmKWmFOanYYDOkcth+YIm2oUMA7MXQnd41HVRvqHtkEykV+JbJXdiXEBz9bniYRiHhoOCLz
- O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVaicfHg3HFc4IMsYoUoLs/YjhYJ1isSODQqIu
- Nfjy+XSI1bg0DNvWo4uw/vrRChH4rKq5Fv0gnRkPaoQ5QaEzyFPZH4iDfrZw0XQE9E88tGSH
- 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
- Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
- fMwGQIgTzKvq+2M2LOhZfZHithkK+y7I9ZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
- 5NHM3w1Nk2GOkAefAhPYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27B/
- DKcpjSiWEpy2Nq36GXd0U2KnNTzgQjCXagzMJaF0NtgjwjGroAUIEJPDgbqyRWjsWauVtQaJ
- 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O88Q5RyJy6HUyx2EHWVCRTlEAPQ9r9M/TzEu0
- l6PnvvqCCZpvbnTTmiSnp+LqRuiNC5TKnUNDQcGUA8E7t/LsIw1yBXVQb5LLqmxidHkHCDq9
- BqDpiM+mrY7gNYC0uOw+lWvqzihvITTRwg5oADeRHu47xhRbZSgIYev7DDz6PdLLI+dCF6br
- nUAs8Gb4KYFCpTlvDaKSugXALbv7f+KNjTGiHZlApY6+jKivXWkeOh45jB1I0NgdNgJZSXoZ
- k77sx5e/5JVMz2haqofXm6qI510l+66T42jD62FKIUWCnRsSOOZ1BBcSG+y80ziqlAti44gE
- puHNsGJXWlPXMyL0wGKq/chPa4Dn39mnT+CG8qikXyaPayiiGl5oIrp0WdijchjtctoWC2Pr
- 75i2zKikn2zqtHWbCjN6pI0JlsXN3U9Dp2eg5UILrbeelc8RDh4VKG5LVYdl2pNxfw9egDgp
- CnVZ6Ol4ACn2S2vxfuiNhiPl48Drb4g9ClmbETAzH6j2mQ5YJbH0UvsX8JfQFXTz8Q6laQcZ
- 6BcK6297gFnFmyvF8I1McOs8+SPtX2D2WqzAsZSSGFuI8c9H1WRpY6Mk8mG3HBmMxdbfPAW+
- 9WIvj43i7JaL+i+JK46sM6S8m4=
-IronPort-HdrOrdr: A9a23:Qg0TUKwbsyisPe6XsK9jKrPwFL1zdoMgy1knxilNoRw8SKKlfq
- eV7Y0mPH7P+VAssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
- 4JSdkHNDSaNzlHZKjBjzVQa+xQouW6zA==
-X-Talos-CUID: 9a23:1WMCkmBmO6wAe1P6ExhV2W82NuwqSGXc1ljPCEOkTmFMGKLAHA==
-X-Talos-MUID: 9a23:xvDCJQXSh1DZ7Mrq/B6z3BJdEt1T37iFMUUnsLEthu+hPyMlbg==
+IronPort-Data: A9a23:ViszRKnytzLpQl+33q/RHQLo5gx9JkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIbW22CafaMYmD0KNElaonk9xlT6pDUxtI2SwVrqy41RSMWpZLJC+rCIxarNUt+DCFhoGFPt
+ JxCN4aafKjYaleG+39B55C49SEUOZmgH+e6UKicfHkpGWeIcQ954Tp7gek1n4V0ttawBgKJq
+ LvartbWfVSowFaYCEpNg064gE0p5KiaVA8w5ARkPqkS5geGzRH5MbpETU2PByqgKmVrNrbSq
+ 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
+ f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
+ dgEGTddfjKnvfydg7CiS8cyq554LNa+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
+ ZBfM2A2Kk2dMlsQYj/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xxzH+
+ jmYpDynav0cHPmuyzC6z1KDv7Tok3uiQqcIV5eR1cc/1TV/wURMUUZLBDNXu8KRmkO4Ht5SN
+ UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JyOeAn7ACGyoLP/h2UQGMDS1Zpc8c6vcU7QTgr0
+ F6hnN7zAzFr9rqPRhq16bO8vT60fy8PIgcqZzIATAYDy8nupsc0lB2nZuhkFKm5n9jkAwbay
+ jqBrDU9r7gLhMtN3KK+lXjNjiiwvJHPQkgw7x/OQ2O+xgpjYciuYInAwV3a5vZJKMCeVEuMu
+ FANnsTY5+cLZbmXkyaAWvkKWrug6PCMKjT0i0NgBJQn+HKm/HvLVYZR6zZ6LQF3P9oeeDnoS
+ EXOthhc4pAVN3yvBZKbeKroVZ5sl/K5U424B7aLNrKif6Sdaiej4BBpNV6y+1rzuwsuiKARZ
+ 7rBKsazWCNy5btc8NamewsM+eZ0nnhilD2JHM6T8vix7VaJiJeopVY53LimNLlRAFus+lm9z
+ jqmH5LiJ+9jeOP/eDLL1oUYMEoHK3M2bbiv9JQPK7beeFY/QT5/YxM0/V/HU9Y990iyvr2Ql
+ kxRp2cCkAav7ZE5AVniho9fhEPHAs8k8CNT0d0ENle0wXkzCbtDH49GH6bbiYIPrbQ5pdYtF
+ qltRil1KqgXItgx02hHPMaVQU0LXEjDuD9iyAL8MWRmIsY5H1OYkjImFyO2nBQz4uOMnZNWi
+ 9WdOsnzGPLvmywK4B7qVc+S
+IronPort-HdrOrdr: A9a23:HeWtGK4ZLHCFQbq/1QPXwPDXdLJyesId70hD6qhwISY6TiX+rb
+ HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
+X-Talos-CUID: =?us-ascii?q?9a23=3AXzENrGiZe9EO+Vz12OZbakUkGjJuVmHsyyfAAWu?=
+ =?us-ascii?q?CF00qSqSUZwG9ovhkjJ87?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AhQ7Htg5xisfcDZK0sJ6dIuetxoxN0qakN30tvqx?=
+ =?us-ascii?q?dnMfcbDZVIXS3pReOF9o=3D?=
 X-IronPort-AV: E=Sophos;i="6.04,214,1695700800"; 
-   d="scan'208";a="128218323"
+   d="scan'208";a="127436306"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -92,9 +94,9 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>, Roberto Bagnara
 	<roberto.bagnara@bugseng.com>, Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 3/6] xen/efi: Make efi-boot.h compile with -Wwrite-strings
-Date: Mon, 20 Nov 2023 22:49:09 +0000
-Message-ID: <20231120224912.1421916-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 6/6] xen: Enable -Wwrite-strings
+Date: Mon, 20 Nov 2023 22:49:12 +0000
+Message-ID: <20231120224912.1421916-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231120224912.1421916-1-andrew.cooper3@citrix.com>
 References: <20231120224912.1421916-1-andrew.cooper3@citrix.com>
@@ -102,18 +104,9 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-GCC complains:
-
-  In file included from arch/arm/efi/boot.c:700:
-  arch/arm/efi/efi-boot.h: In function 'efi_arch_handle_cmdline':
-  arch/arm/efi/efi-boot.h:482:16: error: assignment discards 'const' qualifier from pointer target type [-Werror=discarded-qualifiers]
-    482 |         name.s = "xen";
-        |                ^
-
-There's no easy option.  .rodata is really read-only, so the fact Xen doesn't
-crash means these strings aren't written to.
-
-Lie to the compiler using a union.
+The codebase is now -Wwrite-strings clean.  Activate the option to cause
+string literals to have a const type, and prevent any violations of MISRA Rule
+7.4 being reintroduced.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -127,40 +120,23 @@ CC: Bertrand Marquis <bertrand.marquis@arm.com>
 CC: Michal Orzel <michal.orzel@amd.com>
 CC: Roberto Bagnara <roberto.bagnara@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
-
-I *really* don't like this, but it's the only suggestion given.
 ---
- xen/arch/arm/efi/efi-boot.h | 2 +-
- xen/arch/x86/efi/efi-boot.h | 3 ++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ xen/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-index 1c3640bb65fd..c26bf18b68b9 100644
---- a/xen/arch/arm/efi/efi-boot.h
-+++ b/xen/arch/arm/efi/efi-boot.h
-@@ -479,7 +479,7 @@ static void __init efi_arch_handle_cmdline(CHAR16 *image_name,
-         w2s(&name);
-     }
-     else
--        name.s = "xen";
-+        name.cs = "xen"; /* TODO, find a better way of doing this. */
+diff --git a/xen/Makefile b/xen/Makefile
+index 7b869f4b3037..ca571103c868 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -392,7 +392,7 @@ endif
+ CFLAGS-$(CONFIG_CC_SPLIT_SECTIONS) += -ffunction-sections -fdata-sections
  
-     prop_len = 0;
-     prop_len += snprintf(buf + prop_len,
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index eebc54180bf7..e2d256e0517b 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -324,7 +324,8 @@ static void __init efi_arch_handle_cmdline(CHAR16 *image_name,
-         w2s(&name);
-     }
-     else
--        name.s = "xen";
-+        name.cs = "xen"; /* TODO, find a better way of doing this. */
-+
-     place_string(&mbi.cmdline, name.s);
- 
-     if ( mbi.cmdline )
+ CFLAGS += -nostdinc -fno-builtin -fno-common
+-CFLAGS += -Werror -Wredundant-decls -Wno-pointer-arith
++CFLAGS += -Werror -Wredundant-decls -Wwrite-strings -Wno-pointer-arith
+ $(call cc-option-add,CFLAGS,CC,-Wvla)
+ CFLAGS += -pipe -D__XEN__ -include $(srctree)/include/xen/config.h
+ CFLAGS-$(CONFIG_DEBUG_INFO) += -g
 -- 
 2.30.2
 
