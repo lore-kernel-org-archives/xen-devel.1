@@ -4,44 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42FFCC197A0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 11:52:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.636671.992365 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C669C54E76
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 12:02:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.636681.992374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r52ot-0006vk-Jr; Mon, 20 Nov 2023 11:52:03 +0000
+	id 1r52yO-0002R6-Kc; Mon, 20 Nov 2023 12:01:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 636671.992365; Mon, 20 Nov 2023 11:52:03 +0000
+Received: by outflank-mailman (output) from mailman id 636681.992374; Mon, 20 Nov 2023 12:01:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r52ot-0006vb-Gt; Mon, 20 Nov 2023 11:52:03 +0000
-Received: by outflank-mailman (input) for mailman id 636671;
- Mon, 20 Nov 2023 11:52:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=WPLm=HB=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r52d6-0005BS-Km
- for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 11:39:52 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 83da69b1-8799-11ee-9b0e-b553b5be7939;
- Mon, 20 Nov 2023 12:39:50 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 87AB22190B;
- Mon, 20 Nov 2023 11:39:50 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3A6A213499;
- Mon, 20 Nov 2023 11:39:50 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id skrLDIZFW2VQPgAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 20 Nov 2023 11:39:50 +0000
+	id 1r52yO-0002Qz-Hz; Mon, 20 Nov 2023 12:01:52 +0000
+Received: by outflank-mailman (input) for mailman id 636681;
+ Mon, 20 Nov 2023 12:01:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=GG8d=HB=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1r52yN-0002Qt-Bs
+ for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 12:01:51 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 964b1122-879c-11ee-98df-6d05b1d4d9a1;
+ Mon, 20 Nov 2023 13:01:50 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4083f61312eso17199585e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Nov 2023 04:01:50 -0800 (PST)
+Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
+ q1-20020a5d61c1000000b00332cb8fd5b7sm693352wrv.67.2023.11.20.04.01.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Nov 2023 04:01:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,284 +46,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 83da69b1-8799-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1700480390; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Q/EYfxk8Qg0QVlYL7ei3uVdlG67nL3oHtwpOh/6nVK4=;
-	b=uUUb19ylb0VAXIkKN8njGIYCENNkVJLyLwL11/88tC1y/gbcui7uRghhUmC/MRdeTiU0Ef
-	4Wid+Ph+vCMXMMYZQGFZDD9o4/tx5civOpNDOEIyiHxEtxlzGL0zEsIhprAsQX+oFELAtb
-	6rpU5IF379Ougi8nYweHuyo06bxe8Zc=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: javi.merino@cloud.com,
-	Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 11/13] xen/spinlock: split recursive spinlocks from normal ones
-Date: Mon, 20 Nov 2023 12:38:40 +0100
-Message-Id: <20231120113842.5897-12-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231120113842.5897-1-jgross@suse.com>
-References: <20231120113842.5897-1-jgross@suse.com>
+X-Inumbo-ID: 964b1122-879c-11ee-98df-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1700481709; x=1701086509; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=m8V6AfJdcPcxDFtN0eGZ2PlgKo6saqWElPxwXFF+2tQ=;
+        b=lZ78NUs5xlA344BnWb014Wd5FtyNnRqhiFHGQBXWIFvVWNqlE1uAuUCph9ct5kwOmc
+         5BbUfBqw69wG37OUYX+syDelkQ7Gi7oLHXb5yuEuU2S58ZsAm5uASs+qL03ZTwKpC4Aa
+         z/5DlM5OFxP5Cosv8H1Tm1C8U531RUrQLFVWc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1700481709; x=1701086509;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=m8V6AfJdcPcxDFtN0eGZ2PlgKo6saqWElPxwXFF+2tQ=;
+        b=nkp/ow1ieznYb+wXZWOeo2qb7cMfGy6C4I4P/5E9exttUExMhiHmb5c2cbJX+fAroR
+         yMROuuvelF6N7Kts56O6effAVXxXRY9E7gHF56+Q1RJLCxHHof39aiRX/Wfn6FXfMQOL
+         siwsRLeJvcpS3aAirGdqgY1quxbLW+4IXGHxaAL3hgQviojtqkkVATeCw0qcw/NNCAHS
+         wovnldpHDTD3i1qJbUyMilhUwVE+Y6hRlZOs9sgvbsSR9JAYpvoUCNr0rC3jq3G6+zUV
+         hEsbTuaoJBoTNuXDzx/QixhMWiQoEgBCacKb1cL7KErDGOxQQHM5CQqGz0I6sbGntut/
+         Ks/Q==
+X-Gm-Message-State: AOJu0Yw+d/6ktSbCfNTNgq41NFxd2nYzCqEvHhG9/RF1xdHkIBYcD4PX
+	5fMroj4nQCs8xKUlaHEhbNbO5g==
+X-Google-Smtp-Source: AGHT+IEk1Mu0Cm3kge8q3rp+/1FukqtmUc+/R89Y7bU4Azt2Lu8JZhyh4DCiWp3vnZyg+hHFIyOkxQ==
+X-Received: by 2002:a5d:64c6:0:b0:332:c527:66e8 with SMTP id f6-20020a5d64c6000000b00332c52766e8mr2151394wri.7.1700481709552;
+        Mon, 20 Nov 2023 04:01:49 -0800 (PST)
+Date: Mon, 20 Nov 2023 13:01:48 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 1/3] amd-vi: use the same IOMMU page table levels for PV
+ and HVM
+Message-ID: <ZVtKrKTyGli-Uj9H@macbook.local>
+References: <20231117094749.81091-1-roger.pau@citrix.com>
+ <20231117094749.81091-2-roger.pau@citrix.com>
+ <e90d416e-f4dd-4b2c-9247-0e3aa35c26d9@citrix.com>
+ <0392fe23-7589-4dc2-b664-1e7e01c3914d@suse.com>
+ <ZVs0fvUQI9C7NRc5@macbook.local>
+ <f414730f-307d-4ef6-9aaa-a861925fdab4@suse.com>
+ <ZVs52elOtWbTaD0i@macbook.local>
+ <a857c016-7cc7-48ed-968a-8a9f2748c8d3@suse.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out1.suse.de;
-	none
-X-Spamd-Result: default: False [-3.30 / 50.00];
-	 ARC_NA(0.00)[];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 FROM_HAS_DN(0.00)[];
-	 TO_DN_SOME(0.00)[];
-	 R_MISSING_CHARSET(2.50)[];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 MIME_GOOD(-0.10)[text/plain];
-	 REPLY(-4.00)[];
-	 BROKEN_CONTENT_TYPE(1.50)[];
-	 NEURAL_HAM_LONG(-1.00)[-1.000];
-	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 NEURAL_HAM_SHORT(-0.20)[-1.000];
-	 RCPT_COUNT_SEVEN(0.00)[9];
-	 MID_CONTAINS_FROM(1.00)[];
-	 FUZZY_BLOCKED(0.00)[rspamd.com];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 RCVD_COUNT_TWO(0.00)[2];
-	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
+In-Reply-To: <a857c016-7cc7-48ed-968a-8a9f2748c8d3@suse.com>
 
-Recursive and normal spinlocks are sharing the same data structure for
-representation of the lock. This has two major disadvantages:
+On Mon, Nov 20, 2023 at 12:34:45PM +0100, Jan Beulich wrote:
+> On 20.11.2023 11:50, Roger Pau Monné wrote:
+> > On Mon, Nov 20, 2023 at 11:37:43AM +0100, Jan Beulich wrote:
+> >> On 20.11.2023 11:27, Roger Pau Monné wrote:
+> >>> On Mon, Nov 20, 2023 at 10:45:29AM +0100, Jan Beulich wrote:
+> >>>> On 17.11.2023 12:55, Andrew Cooper wrote:
+> >>>>> On 17/11/2023 9:47 am, Roger Pau Monne wrote:
+> >>>>>>      /*
+> >>>>>> -     * Choose the number of levels for the IOMMU page tables.
+> >>>>>> -     * - PV needs 3 or 4, depending on whether there is RAM (including hotplug
+> >>>>>> -     *   RAM) above the 512G boundary.
+> >>>>>> -     * - HVM could in principle use 3 or 4 depending on how much guest
+> >>>>>> -     *   physical address space we give it, but this isn't known yet so use 4
+> >>>>>> -     *   unilaterally.
+> >>>>>> -     * - Unity maps may require an even higher number.
+> >>>>>> +     * Choose the number of levels for the IOMMU page tables, taking into
+> >>>>>> +     * account unity maps.
+> >>>>>>       */
+> >>>>>> -    hd->arch.amd.paging_mode = max(amd_iommu_get_paging_mode(
+> >>>>>> -            is_hvm_domain(d)
+> >>>>>> -            ? 1UL << (DEFAULT_DOMAIN_ADDRESS_WIDTH - PAGE_SHIFT)
+> >>>>>> -            : get_upper_mfn_bound() + 1),
+> >>>>>> -        amd_iommu_min_paging_mode);
+> >>>>>> +    hd->arch.amd.paging_mode = max(pgmode, amd_iommu_min_paging_mode);
+> >>>>>
+> >>>>> I think these min/max variables can be dropped now we're not doing
+> >>>>> variable height IOMMU pagetables, which further simplifies this expression.
+> >>>>
+> >>>> Did you take unity maps into account? At least $subject and comment looks
+> >>>> to not be consistent in this regard: Either unity maps need considering
+> >>>> specially (and then we don't uniformly use the same depth), or they don't
+> >>>> need mentioning in the comment (anymore).
+> >>>
+> >>> Unity maps that require an address width > DEFAULT_DOMAIN_ADDRESS_WIDTH
+> >>> will currently only work on PV at best, as HVM p2m code is limited to
+> >>> 4 level page tables, so even if the IOMMU page tables support a
+> >>> greater address width the call to map such regions will trigger an
+> >>> error in the p2m code way before attempting to create any IOMMU
+> >>> mappings.
+> >>>
+> >>> We could do:
+> >>>
+> >>> hd->arch.amd.paging_mode =
+> >>>     is_hvm_domain(d) ? pgmode : max(pgmode, amd_iommu_min_paging_mode);
+> >>>
+> >>> Putting IVMD/RMRR regions that require the usage of 5 level page
+> >>> tables would be a very short sighted move by vendors IMO.
+> >>>
+> >>> And will put us back in a situation where PV vs HVM can get different
+> >>> IOMMU page table levels, which is undesirable.  It might be better to
+> >>> just assume all domains use DEFAULT_DOMAIN_ADDRESS_WIDTH and hide
+> >>> devices that have IVMD/RMRR regions above that limit.
+> >>
+> >> That's a possible approach, yes. To be honest, I was actually hoping we'd
+> >> move in a different direction: Do away with the entirely arbitrary
+> >> DEFAULT_DOMAIN_ADDRESS_WIDTH, and use actual system properties instead.
+> > 
+> > Hm, yes, that might be a sensible approach, but right now I don't want
+> > to block this series on such (likely big) piece of work.  I think we
+> > should aim for HVM and PV to have the same IOMMU page table levels,
+> > and that's currently limited by the p2m code only supporting 4 levels.
+> 
+> No, I certainly don't mean to introduce a dependency there. Yet what
+> you do here goes actively against that possible movement in the other
+> direction: What "actual system properties" are differs between PV and
+> HVM (host properties vs guest properties), and hence there would
+> continue to be a (possible) difference in depth between the two.
 
-- it is not clear from the definition of a lock, whether it is intended
-  to be used recursive or not, while a mixture of both usage variants
-  needs to be
+Might be.  Overall seems like more complexity for a little win.
 
-- in production builds (builds without CONFIG_DEBUG_LOCKS) the needed
-  data size of an ordinary spinlock is 8 bytes instead of 4, due to the
-  additional recursion data needed (associated with that the rwlock
-  data is using 12 instead of only 8 bytes)
+The simplest option would be to unconditionally use the maximum page
+table levels supported by both the CPU and the IOMMU.
 
-Fix that by introducing a struct spinlock_recursive for recursive
-spinlocks only, and switch recursive spinlock functions to require
-pointers to this new struct.
+> >> Whether having PV and HVM have uniform depth is indeed desirable is also
+> >> not entirely obvious to me. Having looked over patch 3 now, it also
+> >> hasn't become clear to me why the change here is actually a (necessary)
+> >> prereq.
+> > 
+> > Oh, it's a prereq because I've found AMD systems that have reserved
+> > regions > 512GB, but no RAM past that region.  arch_iommu_hwdom_init()
+> > would fail on those systems when patch 3/3 was applied, as then
+> > reserved regions past the last RAM address are also mapped in
+> > arch_iommu_hwdom_init().
+> 
+> Hmm, interesting. I can't bring together "would fail" and "are also
+> mapped" though, unless the latter was meant to say "are attempted to
+> also be mapped", in which case I could at least see room for failure.
 
-This allows to check the correct usage at build time.
+Yes, "are attempted to also be mapped", and that attempt fails.  I
+would assume that "would fail" was already connected to "also mapped",
+but maybe it's not clear enough.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- use shorter names (Jan Beulich)
-- don't embed spinlock_t in rspinlock_t (Jan Beulich)
----
- xen/common/spinlock.c      | 49 ++++++++++++++++++++++++++++++++
- xen/include/xen/spinlock.h | 58 +++++++++++++++++++++++++-------------
- 2 files changed, 88 insertions(+), 19 deletions(-)
+> Yet still this would then feel like an issue with the last patch alone,
+> which the change here is merely avoiding (without this being a strict
+> prereq). Instead I'd expect us to use 4 levels whenever there are any
+> kind of regions (reserved or not) above 512G. Without disallowing use
+> of 3 levels on other (smaller) systems.
 
-diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
-index 8bb6691b14..0467541f43 100644
---- a/xen/common/spinlock.c
-+++ b/xen/common/spinlock.c
-@@ -541,6 +541,55 @@ void rspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags)
-     local_irq_restore(flags);
- }
- 
-+int nrspin_trylock(rspinlock_t *lock)
-+{
-+    check_lock(&lock->debug, true);
-+
-+    if ( unlikely(lock->recurse_cpu != SPINLOCK_NO_CPU) )
-+        return 0;
-+
-+    return spin_trylock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
-+}
-+
-+void nrspin_lock(rspinlock_t *lock)
-+{
-+    spin_lock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR, NULL,
-+                     NULL);
-+}
-+
-+void nrspin_unlock(rspinlock_t *lock)
-+{
-+    spin_unlock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
-+}
-+
-+void nrspin_lock_irq(rspinlock_t *lock)
-+{
-+    ASSERT(local_irq_is_enabled());
-+    local_irq_disable();
-+    nrspin_lock(lock);
-+}
-+
-+void nrspin_unlock_irq(rspinlock_t *lock)
-+{
-+    nrspin_unlock(lock);
-+    local_irq_enable();
-+}
-+
-+unsigned long __nrspin_lock_irqsave(rspinlock_t *lock)
-+{
-+    unsigned long flags;
-+
-+    local_irq_save(flags);
-+    nrspin_lock(lock);
-+    return flags;
-+}
-+
-+void nrspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags)
-+{
-+    nrspin_unlock(lock);
-+    local_irq_restore(flags);
-+}
-+
- #ifdef CONFIG_DEBUG_LOCK_PROFILE
- 
- struct lock_profile_anc {
-diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
-index fb6ca1949a..a2b1bb2df6 100644
---- a/xen/include/xen/spinlock.h
-+++ b/xen/include/xen/spinlock.h
-@@ -76,8 +76,6 @@ union lock_debug { };
- */
- 
- struct spinlock;
--/* Temporary hack until a dedicated struct rspinlock is existing. */
--#define rspinlock spinlock
- 
- struct lock_profile {
-     struct lock_profile *next;       /* forward link */
-@@ -108,6 +106,10 @@ struct lock_profile_qhead {
-     __used_section(".lockprofile.data") =                                     \
-     &__lock_profile_data_##name
- #define _SPIN_LOCK_UNLOCKED(x) {                                              \
-+    .debug =_LOCK_DEBUG,                                                      \
-+    .profile = x,                                                             \
-+}
-+#define _RSPIN_LOCK_UNLOCKED(x) {                                             \
-     .recurse_cpu = SPINLOCK_NO_CPU,                                           \
-     .debug =_LOCK_DEBUG,                                                      \
-     .profile = x,                                                             \
-@@ -117,8 +119,9 @@ struct lock_profile_qhead {
-     spinlock_t l = _SPIN_LOCK_UNLOCKED(NULL);                                 \
-     static struct lock_profile __lock_profile_data_##l = _LOCK_PROFILE(l);    \
-     _LOCK_PROFILE_PTR(l)
-+#define RSPIN_LOCK_UNLOCKED _RSPIN_LOCK_UNLOCKED(NULL)
- #define DEFINE_RSPINLOCK(l)                                                   \
--    rspinlock_t l = _SPIN_LOCK_UNLOCKED(NULL);                                \
-+    rspinlock_t l = _RSPIN_LOCK_UNLOCKED(NULL);                               \
-     static struct lock_profile __lock_profile_data_##l = _RLOCK_PROFILE(l);   \
-     _LOCK_PROFILE_PTR(l)
- 
-@@ -143,8 +146,11 @@ struct lock_profile_qhead {
- 
- #define spin_lock_init_prof(s, l)                                             \
-     __spin_lock_init_prof(s, l, lock, spinlock_t, 0)
--#define rspin_lock_init_prof(s, l)                                            \
--    __spin_lock_init_prof(s, l, rlock, rspinlock_t, 1)
-+#define rspin_lock_init_prof(s, l) do {                                       \
-+        __spin_lock_init_prof(s, l, rlock, rspinlock_t, 1);                   \
-+        (s)->l.recurse_cpu = SPINLOCK_NO_CPU;                                 \
-+        (s)->l.recurse_cnt = 0;                                               \
-+    } while (0)
- 
- void _lock_profile_register_struct(
-     int32_t type, struct lock_profile_qhead *qhead, int32_t idx);
-@@ -166,11 +172,15 @@ struct lock_profile_qhead { };
- struct lock_profile { };
- 
- #define SPIN_LOCK_UNLOCKED {                                                  \
-+    .debug =_LOCK_DEBUG,                                                      \
-+}
-+#define RSPIN_LOCK_UNLOCKED {                                                 \
-+    .debug =_LOCK_DEBUG,                                                      \
-     .recurse_cpu = SPINLOCK_NO_CPU,                                           \
-     .debug =_LOCK_DEBUG,                                                      \
- }
- #define DEFINE_SPINLOCK(l) spinlock_t l = SPIN_LOCK_UNLOCKED
--#define DEFINE_RSPINLOCK(l) rspinlock_t l = SPIN_LOCK_UNLOCKED
-+#define DEFINE_RSPINLOCK(l) rspinlock_t l = RSPIN_LOCK_UNLOCKED
- 
- #define spin_lock_init_prof(s, l) spin_lock_init(&((s)->l))
- #define rspin_lock_init_prof(s, l) rspin_lock_init(&((s)->l))
-@@ -180,7 +190,6 @@ struct lock_profile { };
- 
- #endif
- 
--
- typedef union {
-     uint32_t head_tail;
-     struct {
-@@ -192,6 +201,14 @@ typedef union {
- #define SPINLOCK_TICKET_INC { .head_tail = 0x10000, }
- 
- typedef struct spinlock {
-+    spinlock_tickets_t tickets;
-+    union lock_debug debug;
-+#ifdef CONFIG_DEBUG_LOCK_PROFILE
-+    struct lock_profile *profile;
-+#endif
-+} spinlock_t;
-+
-+typedef struct rspinlock {
-     spinlock_tickets_t tickets;
-     uint16_t recurse_cpu:SPINLOCK_CPU_BITS;
- #define SPINLOCK_NO_CPU        ((1u << SPINLOCK_CPU_BITS) - 1)
-@@ -202,12 +219,10 @@ typedef struct spinlock {
- #ifdef CONFIG_DEBUG_LOCK_PROFILE
-     struct lock_profile *profile;
- #endif
--} spinlock_t;
--
--typedef spinlock_t rspinlock_t;
-+} rspinlock_t;
- 
- #define spin_lock_init(l) (*(l) = (spinlock_t)SPIN_LOCK_UNLOCKED)
--#define rspin_lock_init(l) (*(l) = (rspinlock_t)SPIN_LOCK_UNLOCKED)
-+#define rspin_lock_init(l) (*(l) = (rspinlock_t)RSPIN_LOCK_UNLOCKED)
- 
- void _spin_lock(spinlock_t *lock);
- void _spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data);
-@@ -242,6 +257,19 @@ void rspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags);
- int rspin_is_locked(const rspinlock_t *lock);
- void rspin_barrier(rspinlock_t *lock);
- 
-+int nrspin_trylock(rspinlock_t *lock);
-+void nrspin_lock(rspinlock_t *lock);
-+void nrspin_unlock(rspinlock_t *lock);
-+void nrspin_lock_irq(rspinlock_t *lock);
-+void nrspin_unlock_irq(rspinlock_t *lock);
-+#define nrspin_lock_irqsave(l, f)                               \
-+    ({                                                          \
-+        BUILD_BUG_ON(sizeof(f) != sizeof(unsigned long));       \
-+        ((f) = __nrspin_lock_irqsave(l));                       \
-+    })
-+unsigned long __nrspin_lock_irqsave(rspinlock_t *lock);
-+void nrspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags);
-+
- #define spin_lock(l)                  _spin_lock(l)
- #define spin_lock_cb(l, c, d)         _spin_lock_cb(l, c, d)
- #define spin_lock_irq(l)              _spin_lock_irq(l)
-@@ -270,12 +298,4 @@ void rspin_barrier(rspinlock_t *lock);
- /* Ensure a lock is quiescent between two critical operations. */
- #define spin_barrier(l)               _spin_barrier(l)
- 
--#define nrspin_trylock(l)    spin_trylock(l)
--#define nrspin_lock(l)       spin_lock(l)
--#define nrspin_unlock(l)     spin_unlock(l)
--#define nrspin_lock_irq(l)   spin_lock_irq(l)
--#define nrspin_unlock_irq(l) spin_unlock_irq(l)
--#define nrspin_lock_irqsave(l, f)      spin_lock_irqsave(l, f)
--#define nrspin_unlock_irqrestore(l, f) spin_unlock_irqrestore(l, f)
--
- #endif /* __SPINLOCK_H__ */
--- 
-2.35.3
+While reserved regions are the ones that made me realize about this
+IOMMU page table difference, what about device MMIO regions?
 
+There's no limitation that avoids MMIO regions from living past the
+last RAM address, and possibly above the 512GB mark.
+
+If anything for PV we should limit page table levels based on the
+supported paddr bits reported by the CPU, but limiting it based on the
+memory map seems plain bogus.
+
+Thanks, Roger.
 
