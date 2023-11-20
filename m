@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB29C54E76
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 11:23:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.636620.992205 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CA6C54E76
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Nov 2023 11:35:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.636626.992215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r52MZ-0007k4-E7; Mon, 20 Nov 2023 11:22:47 +0000
+	id 1r52YD-0002EZ-IT; Mon, 20 Nov 2023 11:34:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 636620.992205; Mon, 20 Nov 2023 11:22:47 +0000
+Received: by outflank-mailman (output) from mailman id 636626.992215; Mon, 20 Nov 2023 11:34:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r52MZ-0007jx-Ag; Mon, 20 Nov 2023 11:22:47 +0000
-Received: by outflank-mailman (input) for mailman id 636620;
- Mon, 20 Nov 2023 11:22:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r52YD-0002ES-E2; Mon, 20 Nov 2023 11:34:49 +0000
+Received: by outflank-mailman (input) for mailman id 636626;
+ Mon, 20 Nov 2023 11:34:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=9+lD=HB=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1r52MY-0007jr-Gy
- for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 11:22:46 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20619.outbound.protection.outlook.com
- [2a01:111:f400:7d00::619])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1fe5deca-8797-11ee-9b0e-b553b5be7939;
- Mon, 20 Nov 2023 12:22:44 +0100 (CET)
+ id 1r52YB-0002EM-Sz
+ for xen-devel@lists.xenproject.org; Mon, 20 Nov 2023 11:34:48 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20617.outbound.protection.outlook.com
+ [2a01:111:f400:7e1a::617])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ce8875e2-8798-11ee-98df-6d05b1d4d9a1;
+ Mon, 20 Nov 2023 12:34:46 +0100 (CET)
 Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by DB9PR04MB10009.eurprd04.prod.outlook.com (2603:10a6:10:4ec::11)
+ by AS8PR04MB8103.eurprd04.prod.outlook.com (2603:10a6:20b:3b3::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.16; Mon, 20 Nov
- 2023 11:22:41 +0000
+ 2023 11:34:44 +0000
 Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
  ([fe80::eb8e:fa24:44c1:5d44]) by DU2PR04MB8790.eurprd04.prod.outlook.com
  ([fe80::eb8e:fa24:44c1:5d44%3]) with mapi id 15.20.7025.015; Mon, 20 Nov 2023
- 11:22:41 +0000
+ 11:34:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,30 +49,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1fe5deca-8797-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: ce8875e2-8798-11ee-98df-6d05b1d4d9a1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JVSreEeAxilDC67dIN0DjCvI2QDDdsHaaGq7JX6HjuX37Y0joznEAVNCEuvmEQxxX6zXbh7+fWVe7a3Iue6UmApmBWtkengdfNEakqNpwrDQdzGXjxHVISZZrGAUwLdARnrCrGESvcYTwZiwA3Gy2YHmGXXAoR4na5whjngTzmUybXxLTlGJcDCAwcSfqzULNMEZoJiEi6SdavWJF3RUtg41RyGFB1123+kCd2tq4bXc3wBsiwsvoS3eozulz+8PPvPobIuiERCcjcsFmLUSvl8H9aXE7DKVLH5L9WdvTZblL1Jp1KN4xbtZuhpFsEOLgMmnKY1lkadYf5nxCdrysw==
+ b=gUFbK6ZKX6xM73gNggmtFspC1OvpiWjCAipAzymsWmXRA6V4AZPxsJEAABxKucWqXevSWAYu9VckmsXpQKlqeC/hIoHUZaJMyboWfwIpHWm5ePOD40mi86Z0wHHRN95L/m0EMf1bAPmO51ctUm7pGKshCyM54q78E7T+GZ2kXGT6aBzPc/6/BWbZLw1k0H+2YaUfv9AOxnEoiuClv+bwrs5UFyyQMmuz8+TeJl+vc2kzSlibhFt5UIgdBHLnL6DIKS+xA27KdzClRpUvphtw2CDk9wf33fEI3X6cdNRU3HVK3XTLVukRY5k12ss6i1nCuelyfPu/ZwVVBw53SkN+Ug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=52sV2VQ79iKPM9A+JcHwbMdcMtv3fjDnzRzXAz1uo+w=;
- b=RHE/4mS0BU+6/VmIjuQBuqiMvAIBbJZlfYPfMGg3m0XZvKR23CoTUS8GP/NzzZbgpQDZpEOrpaGHsBm0CaTGzfTimIsg7/gRu+JVPOek89DqgrqEuPTx+01crrk2QW06fozV0yvCfvqT/dD7vmq5P7dxWtzyI4KRoCGYfC5eLAHOo+9Ledbw1f2XAaVrPS/kUYPo57QkZ8zjX8DZpeLUB4SYNLxjesy4a/MMSS1qPO3YNmynknsoLOrH8X40ho/yu6urWqzKxIivpV/fdKCFLts8R/m2hQF0Z3/BcJut9jc/IVZaPXZzGjBF2DylBf9ZiIRp5OCPUrgic5GVjjKixA==
+ bh=Z5kLVuIyFrgiWUcHogd2nCXxVGSKSjpcut5ZCn/5sAY=;
+ b=HcaMo3oqL0bC//NKtPyFpXG41cdXeISRRGURYgDw8fjcj21f9QAuRimc67xWayKVU5pSy3YziI0QQaDJTiBuY0X4R4qvWMXMBDg90GzWVVS26XPDkiJ531mQAJhhFTT9wIRcoA4BpTO5p6cgbwl8EYoaHBI2k8WT7UlYCG0gyshsulGEcj7+1MsUGvKrzV5KlBnBOKS5/lP07Z/lCYXatkcsxomFY+HcVBUnF3IZ18Qn0LqkOV6E3j2SYc8eBfAg3ttSN4r/UAjhfB0inzn7azT7LdcDUsl6PsED9Da43Ewq1mcEvqXPFugwdM9bclC1XnNRYkdKj2KZdc67eVzuhA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=52sV2VQ79iKPM9A+JcHwbMdcMtv3fjDnzRzXAz1uo+w=;
- b=lzvTsV6bWrEjlWxzoSAS8whrcS3s/MlC0v07/Z2K6cKoRcBY4hWOD9fXfSa2BeLssUOKqetD2Tb0AmNlSijT1Z3DiWekQDglMe4IODrEkQzSK4TH+uKaHzluglITb4T37IQ5ZznuIekJrOtmq7aea8cSqRLyIR4Km1TilR6RJe0ncdPtqSLLUYXyJjCC0GppxLlUEtU/3lVrIlYJiFifMjuwzaDGafgxSmR1Q9Z+CYh5nZbv/MjL8WEcA2b17N8h0AiPOhw68+aj/0bwnrWesfH8gviH7wMRj/sLmxvKoMcBDfjLi6XYhmlKJkY4P4sc7jMhpmoECIbY9MNf3zp6Ig==
+ bh=Z5kLVuIyFrgiWUcHogd2nCXxVGSKSjpcut5ZCn/5sAY=;
+ b=pcr8Of2topzpzqGhInHsJUz1chMrnIkO5nqRrlnlLR0ZrNlYdJ0IgW2A/6ix09z8UxPwn8S+9Ly26KM5vuTSaFJgp3ZXkaFzKZrhjvZPZbJ9zrUrn567Km9E2k6draS9IyHnzp2bsN1WEqDWdXtI3N/WNYHjAUYDUQsR1QQJj4SslhCd1GKufJ0g1/4N5eLdq2MaXmeaUhi3aR14zSsfNk7Ah17LAKEV59JEkELVv3Ek/tTPNfSmdVhpAXU2bDTLdvc3PjBzq8sWohg+6Unz4bCeq83E3lu0r8E7FgipdJ637Y3xmPHpK5liH2w819QD8PKjJbNTe+wAeZhes0lp2A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <667125f7-f62d-4ff6-be89-f117f212d261@suse.com>
-Date: Mon, 20 Nov 2023 12:22:42 +0100
+Message-ID: <a857c016-7cc7-48ed-968a-8a9f2748c8d3@suse.com>
+Date: Mon, 20 Nov 2023 12:34:45 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: xen | Failed pipeline for staging | cfb77779
+Subject: Re: [PATCH 1/3] amd-vi: use the same IOMMU page table levels for PV
+ and HVM
 Content-Language: en-US
-To: xen-devel@lists.xenproject.org
-References: <655b3e044c94f_2c9ffc41124dc@gitlab-sidekiq-catchall-v2-7d448ff795-5mlg7.mail>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <20231117094749.81091-1-roger.pau@citrix.com>
+ <20231117094749.81091-2-roger.pau@citrix.com>
+ <e90d416e-f4dd-4b2c-9247-0e3aa35c26d9@citrix.com>
+ <0392fe23-7589-4dc2-b664-1e7e01c3914d@suse.com>
+ <ZVs0fvUQI9C7NRc5@macbook.local>
+ <f414730f-307d-4ef6-9aaa-a861925fdab4@suse.com>
+ <ZVs52elOtWbTaD0i@macbook.local>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -97,165 +105,159 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <655b3e044c94f_2c9ffc41124dc@gitlab-sidekiq-catchall-v2-7d448ff795-5mlg7.mail>
+In-Reply-To: <ZVs52elOtWbTaD0i@macbook.local>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0380.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f7::8) To DU2PR04MB8790.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0283.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:e6::12) To DU2PR04MB8790.eurprd04.prod.outlook.com
  (2603:10a6:10:2e1::23)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|DB9PR04MB10009:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7c31935b-663a-440a-bcdc-08dbe9bb028a
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|AS8PR04MB8103:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9e905ea-c5f6-422d-32b4-08dbe9bcb19a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	7d5xJvXZDXYNSKwDnJ38jKbO9+825d1hOtIhUI2a24rMxXkUvzvcFaMkX4YYtyxijYOC8RAlPeNxPE7BZOpyzao+4yZH3NuxiZ7Kz3hjUQKEJ0kJpcY/Ow3VZk+edMZ5phPedJyHU+WQB2tL/3SAxywCpTgWqsuyOhAsqulIFaPaMLAg8yyvFRI2whVezjVAFMsJZeIj6dvVU3kUGGQg5WWmpsTQ7FTVn1QrzudWoqWc+5+Cu/5S4y4VFcl5103YyfwQEbu+XmIVgmYv4ZFGgY0ctg+bKSzktX/Ay5pyg+RTqJOXhUmRkXxe/cPRmdlmKrORlD5P/7wmj/AoO5bDst1ABjQfwIqnG4vDUh9R7bjhIe5eQ+Q2B2Iuqs02y9NjUL1ILVtGlJLuP0QOS+Bt2SOGeFuoabtQRr/GBo5We1LhnspCxIk3jFv1ZvXy/8niDVJb8FhnDQGkNhhN2I42mEqKmf4Ga8wYV4g7I0H8LQawed4E3TTorFsskLRWYVVpBEiPzJrRYDlpnUViB4t2mEvZJQRcGv50ydqKtxUoeNWFO/vIpbjY5QCBfcNEEe4ad7AcHRm/3OQ1ShGz35We52I75cirFaMTt/S+ZU3jup9Q7BbIYQSxh9DERUx/ms3sETcFrI0dqX97Nm0Mb5ywCMUrtLMi2RlB23DBlxi023FhhMiR8I8u7Add7xJk5i82
+	Eg2GGbQrih52bfOWKwBnqBc96leRO1iKpAOckXlOZgc8iyRMWtSoeXj1Sjv8sIEFwyuPPpEx8Nlveudkwqo6QkuqQ6M/wraL/n/F0ENEFqUiwWJVRH+cYp4B64iMcGJMC/3BVe4zxSnXoDJp/FsCdJlYs2YwjYpKK+3AKlHjKWB82hz/uoFkVtKRfXa9aAUJb8YjoHtXKVKfNFcNdaY+O+0o+jYQ8q3B4Y9ZfwsnN7pKV0O47/emD7SCOJ3Y/kZzkAWwNDBp0+W/HDNHALw1s5y2xLa8oU0T+CwYZpuvzy833pe4shLKcGb490FPVW0DVSfnci2j1049FoiKbln/2Qii2GEdeh0EWta01FX0lyYLlqGKLpboIiqz+dkCFu7tjNQI4ocoYiNf3+HOsSUimEQLb2aAunJhDBn67q4C2tQzEKcWkgGqFM0lBXH/XFxqGez9X2SHza78V4woQo1725Nw2XVm1WaHt3pFML0GnxEtvmt5Dr5bdAmrBzUXq/UHjB+tlwJ4Rl87gVet44d24gwsaqOUrbhjha2h6VwchRQGpmqtzYhoFppBEwxrdXVx/kSR5l7Sv4PaAktI2gWFKqHERmuU4EWl0txo7+cnzPBnhgBnJDIZAovGmDoE0PUCHaHbOsJOX9shHluykhn2Zg==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(366004)(376002)(346002)(136003)(39860400002)(230922051799003)(186009)(64100799003)(1800799012)(451199024)(5660300002)(66476007)(66556008)(6916009)(8936002)(66946007)(8676002)(316002)(83380400001)(26005)(53546011)(6506007)(478600001)(6486002)(2616005)(966005)(6512007)(41300700001)(2906002)(36756003)(38100700002)(86362001)(31696002)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(376002)(366004)(346002)(136003)(39860400002)(230922051799003)(451199024)(64100799003)(1800799012)(186009)(41300700001)(36756003)(5660300002)(86362001)(31696002)(2906002)(6512007)(6506007)(53546011)(2616005)(26005)(83380400001)(6486002)(478600001)(31686004)(4326008)(8676002)(8936002)(38100700002)(316002)(6916009)(66946007)(66556008)(66476007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?Z1JXUHJpK2tIMDhkZ21NUjA5ekZlOXZHRC9CVWRDbjBlOGtPYVhzL2Vsdk9C?=
- =?utf-8?B?NUVSZ2xJK25FNk0wWUdsSHloM2p0dGw3OVRveXFmQkJyNEE4bUtTdGhFazN2?=
- =?utf-8?B?OGFsN0YxMm5Leno3RmpndlhZZlBweUFxNU5IUUROVjlnUEdyN3UrZHcybXZu?=
- =?utf-8?B?NWRhSzlkZmtZdUR6QjI5VzVyRGlDZWw5VmxuKzFERHJuUFd2Z3VHUFBoOXRL?=
- =?utf-8?B?WkhaZDhGc0pjTG9iUk5NcXhvMDJvditjZUdveVVXMnhmRnNMUnkzcy9YdkpP?=
- =?utf-8?B?OVI1QzZCMHFFWXhuRXBZYWJQRzVKMW9WbHZ4aUk4VEtlR01lL2ZuQnlBQjI1?=
- =?utf-8?B?VW0xQy9IQUU3VXNidEpCNG5oSzFrY2p3cFFBcXFJakZXbnlncVV1eldGaHlR?=
- =?utf-8?B?ak5yUkkzam0xcUUvM2theVV6eTBWYlRsczNvdnRSRDhBWHRzTVdCV1E0TnV3?=
- =?utf-8?B?VTlDVVhrRkZjR09BSXVkSTlnbjMvbzc0Wk5GNEtRU2RPUHY3NnZYOW1uVDlI?=
- =?utf-8?B?ZTZWY1lrTWh2TmJqTWNlK2NHak5BVUMxN3BrdW84SkJDeXpDQWU4V2VIcVUx?=
- =?utf-8?B?QzQrNDJYL2wxRjBUbTI3YmNKWmEwRDBjZkNTVlJJVXJrUW1zMytmUVlsWk9t?=
- =?utf-8?B?WGJVcjJESDJVanJ3UGVsRnVNc3drRUNhM04rS21QRU9YOVVWS2RmZjdkZnlZ?=
- =?utf-8?B?U042REtwenY0T1ZSck5GSFM1Sm9vZzliNitKUlRReVdQdDUzSWhKY2VPcEEr?=
- =?utf-8?B?UUhRRHRUUmFsSlZpdUdEb00wYlpGSk9JWTJtMDU5Q1hlS1Y0OWxuZmhmU2Zl?=
- =?utf-8?B?K2NnYURiWWNwOFNxa09UOUJQdDhLdExza1JKa3VGVXY0dERjNFV1M2k4c1Ja?=
- =?utf-8?B?cElab2YvNEZrL2RmZldnYUtIdTI0SXMzZm1CNXFkZjNTc2ZraXczc0o4VEZs?=
- =?utf-8?B?NEdyY3NscTF6aHdQQ0taejlZODNEaXRwT0xWbGd4WGhqWUNEZTJCdmJPendw?=
- =?utf-8?B?OE9yYWxZMlRlaUdteGw5MzJ5eHhlMCs3MVkrWEV2Nk5GbGNQNjQ2aHpjZDdM?=
- =?utf-8?B?bkN0ZkVrMnl4RExTZFZrT0VVZnBDNGZxcVBLUXhDUk85eVZ5U2ZWZGM3dEJW?=
- =?utf-8?B?cnVtWlBUckJQRDR6NmFqVTl0Qm9JZ2hMbCs1SG05b3ZpSkhNZUYvRWh1QXoz?=
- =?utf-8?B?TE1Uekx2eGpvL0dTb1BpSFlFRHc5QzQ2eEpMREFqVm9wcHNRWklBYVRQTUha?=
- =?utf-8?B?dzJrYlUxS3o2NGd4OG8xOWttcFN5QmFVaHVoWk1UYzhETTcrenh3ODhuZDRE?=
- =?utf-8?B?LzFJQkVqMTVnamZtZ1d2U3c5dEpyaVFqS1lwQVR2L3BmTlV2WXVzQVFwMk1u?=
- =?utf-8?B?UEZISUI0QnFsUnRiRG5kR0oySUN5VFpnVlU1d1dIb2RkbTFxdkNULzUxNWpD?=
- =?utf-8?B?WDNTZVJiTmNSOWN6UG9IaHV1UXlqVWhsMXEyK3E5TWFPOXh3T2hCVUJvNEk3?=
- =?utf-8?B?OUE4RGdkMklzaTVvMnJ4SDkyQVlXTVEzRkdJelZLbGtFcFl4bk1maFBoenJy?=
- =?utf-8?B?dzQ4d3V1QVVWL0xCSmhqTDB6ZFYwelZLNTZBaDhtL3k2Y2JtOU04V1BHWjkw?=
- =?utf-8?B?dW85bERBeTU3eTRuYVdVei9pZ0VqMXFGL1A4d2pQOWcxeGs1ZWc2WlcrZndJ?=
- =?utf-8?B?dTc3SkJ1ZE9hMWE0T0U4T05SNHNJeko3VWJlYm5DMGJ6eEtIdlFoZEZUcU1H?=
- =?utf-8?B?ZHJoNnpUOWhJSnFOT2I2cjdhL2kvMUpoZURGU0o0cUtBRVJUNThHZ3FTYnJj?=
- =?utf-8?B?STljNC9Jb3RSbGd0eU9UWktZMWJ1NjBrZmZMbk9YbHUwWTJBMzdXVFJKcHdh?=
- =?utf-8?B?Q25KeG5PZFFlZDZZRC8zNThiNlRSK0dhM2FtYmk4a3ZWVWVRejl0dHptZXho?=
- =?utf-8?B?SXJLUjFXbWhuSDdxUWNnZkJ5TnNsdVorRlkvOU9Pem1Ub3NlNkVkQnYxRFJW?=
- =?utf-8?B?dDR3b042NnZscU1oZ0NUZ0RUSjd1dEtsNklSTXF2bzF6T2tZc1ZaRUV2Qk5S?=
- =?utf-8?B?QWNMcmxsbnBNbVJ3ZEZEK1pHRGg3NkxqaTV6NWZTMjJzVXhpWVlwSGRZaWlr?=
- =?utf-8?Q?16u6bRWAvlEuarMWjl+3jjDfq?=
+	=?utf-8?B?ZGxBRGFXWVRnZFc1M3pwWEYrcm8zVmdEaFBPYzdza0tCSjJDNjBzMWtIbi96?=
+ =?utf-8?B?N3RQelR1RlpYd0RndVE2NUVVRFE4QlR4RFRwbi80RCtPWlROVEJiU1ErU3du?=
+ =?utf-8?B?bkZjdVRPK0NpZzh5SmZZc0czWGxkcFRSd0FoTzJKM25NVStSTlg0RWxndjBv?=
+ =?utf-8?B?aXRYVHg3THBrUkREOEtZVUxyZ1orUmVQK3oxbmIwUlVmcWo3TUxkeWMyUTlL?=
+ =?utf-8?B?TiswbDNmRkp2TXJxU211R3Q5d0tWcTBvdGdxbGJyWEcxVm1US04ybE52d05h?=
+ =?utf-8?B?Sm5ETm9qTVdSVERhYmpwa29YTW1lMDRZcUlCUGhacXphaVgySis5NTZCWUJJ?=
+ =?utf-8?B?L1VBSjl3OHJrV3NjdmU4c255TWxPdHlXdC9IcTByTzlvenVIcGp3M3RaMXBw?=
+ =?utf-8?B?R3dnd253QlVwWmtFUXhRc2IzRWRtT0NBbUNVcnRtVjhaNjNhcHZOVFlBVVRO?=
+ =?utf-8?B?Qk5QOWxRdDdCZDcrNGZ4VFh5cFk1SEpEZ25ieE9hTlI4dEtBWDFnTVJ4eTM3?=
+ =?utf-8?B?RDF6MDFxeWNHR2dXalZBT002OUVBeDU5K2thY1lXK2ExODlzaEY0blg2b3Zw?=
+ =?utf-8?B?Q0I2enFWL253WktuV0V2ZUc1THFFRHRGY0hxcWFERHRxbFpIQ0xPK0Fhc1lC?=
+ =?utf-8?B?ejE0OSszZHZoSnNIOGdQQTFOVmpEZXNlajhDKzlpdTUvaUp4d2d3cDVwSUJM?=
+ =?utf-8?B?MHM5RFBJNnBMTXBmbGZqK1B4WHBIZDN0M1NvcklUbXhydE54bDdpTGdnYnhk?=
+ =?utf-8?B?ZlhsWnoyd0x0UFlmZXJVczdxNDI5WjM5d3FkRGE5QTVwV1N6cmRFeDhmTzFh?=
+ =?utf-8?B?K01jbFVZeVRHUi8xMDIvaldCZUNMZXlZRFFJY3hGN1BjOWhnM2JyRXhnRUJ4?=
+ =?utf-8?B?UGJQV2EzQWNnblYyNGgyN1F1V0ZrOCtFbDBscHYrcWNReVAxNUVSRDhadUJI?=
+ =?utf-8?B?T0R4RXJMUVFycTcxNGtSMmlkdkpsQWs2UnQ0eEhLMjNYWVNtOTE5VWpmOUpG?=
+ =?utf-8?B?RlhFb1dScnB5cXkxMkhYVnRZOWhyZDZmaklRSXBmeTAzcWNmNXU2aEE2bktN?=
+ =?utf-8?B?NmZJV0FsL0xTRmJqc1ZLSjd4RXl5czJBMy90eml3TWtieUkwejluUlh3QmZx?=
+ =?utf-8?B?ZG1QTXh2NVdSSGVSUm5SVVl1QnhtNVJxVXUzOG9uSWpNS1BjbE5UYURLNUVI?=
+ =?utf-8?B?aDFIVHV2a0s4ck5uM25BSmFEYXBSUGo1eHVjbWdHNENOdWxiNlFJWGx5OXpH?=
+ =?utf-8?B?dzJLTm54M1NjWTNLbVVvdDEvWU1ralJTVmNsNWRUKzluUEpuV0k2K3FRY1pu?=
+ =?utf-8?B?RUFoWXFrVTFJN1puQ29iTWpXVE5uRUt1bjh2d0FJWmNGVHJKOFZmaDl6bVFj?=
+ =?utf-8?B?YU9GbU1VNTFiV1hCSkZDR0ZQM21GQ2dKYjhxYkJaV1hOWEFPQml2eTg5VmNi?=
+ =?utf-8?B?amRpRGp6djJJL3VPT1RmckIvNmZPeW5iUnVGSWpMZ3JUbFhmTUw2YnVSUFRo?=
+ =?utf-8?B?dUNoczVsRHA2a3NBUlJuY3VpeGRsTXVzeHErZ2w3UDF4T3NwRy9Fa3JrNWRv?=
+ =?utf-8?B?bDB4RTNBQXRtRERvYlFEY3Y4RWZDM0krSHhSUlpBUjY3aFUrV1dmekZDQzlS?=
+ =?utf-8?B?dUs0SkVqSHRKYnRqY3B6bklZOENCWEsrRkpmeWlnYjlpdjJobkl2b1FtUzdw?=
+ =?utf-8?B?bi9KenhpYVhSeHNlV1R5S0lpSVJaby9QMWFUMmFHQ3F0YlJPd3RuM01YMTdC?=
+ =?utf-8?B?QXZhZTNIRzdHTHl0OUJWQzZpRGZlUnlveTgyUjZ2cDAzcVZRN1RRNUJ1cUJt?=
+ =?utf-8?B?MElId1NxN3pDbUFUTXpLaEJ5Y0ZaSGRHMW1jZUV6Uy9FR1JTYUlVL1l5bDBR?=
+ =?utf-8?B?QmJJeVQxMW00OUpJWjF5SDN0NmlUb2hZTDlLT28zcW9xTE1IKzZrejlrMjdC?=
+ =?utf-8?B?RXB0MkJCUmZTZStxK3orZjF5Y2ZrTjFvTGhUR0N3WWtXUHpzYXYyYlUwclZj?=
+ =?utf-8?B?aUZxajFtM0NBN3dyaFhSeTRBa0tVdVlwbkl0Z0VLbmtGM2tpSmp6eEQwcm1S?=
+ =?utf-8?B?SDVmSVZPbDE4eFIzSmNxeFhXeFlHVno2OVVMdDNsVXpicDlrbUREOFh0aGNJ?=
+ =?utf-8?Q?KMq8LovNIlGgc8v+49nt4h2In?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7c31935b-663a-440a-bcdc-08dbe9bb028a
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9e905ea-c5f6-422d-32b4-08dbe9bcb19a
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2023 11:22:41.4925
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2023 11:34:44.7385
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ka01zhClYU8ssl7vyYA3CZK6zo0A+psrxhBbK5DCDXJ8+F6gAZBoA8g2LH+BO+qyh1KCA36qIiKqWtRH/l9ZWA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB10009
+X-MS-Exchange-CrossTenant-UserPrincipalName: zpPPxMMBMw08dYKMF+IKF5NscrYIKioRq4XA9FbaAGl0vR7H9kX8Bzfq04BnbwdKKaiBO8yESl2jtJLzbv1AmA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8103
 
-On 20.11.2023 12:07, GitLab wrote:
+On 20.11.2023 11:50, Roger Pau Monné wrote:
+> On Mon, Nov 20, 2023 at 11:37:43AM +0100, Jan Beulich wrote:
+>> On 20.11.2023 11:27, Roger Pau Monné wrote:
+>>> On Mon, Nov 20, 2023 at 10:45:29AM +0100, Jan Beulich wrote:
+>>>> On 17.11.2023 12:55, Andrew Cooper wrote:
+>>>>> On 17/11/2023 9:47 am, Roger Pau Monne wrote:
+>>>>>>      /*
+>>>>>> -     * Choose the number of levels for the IOMMU page tables.
+>>>>>> -     * - PV needs 3 or 4, depending on whether there is RAM (including hotplug
+>>>>>> -     *   RAM) above the 512G boundary.
+>>>>>> -     * - HVM could in principle use 3 or 4 depending on how much guest
+>>>>>> -     *   physical address space we give it, but this isn't known yet so use 4
+>>>>>> -     *   unilaterally.
+>>>>>> -     * - Unity maps may require an even higher number.
+>>>>>> +     * Choose the number of levels for the IOMMU page tables, taking into
+>>>>>> +     * account unity maps.
+>>>>>>       */
+>>>>>> -    hd->arch.amd.paging_mode = max(amd_iommu_get_paging_mode(
+>>>>>> -            is_hvm_domain(d)
+>>>>>> -            ? 1UL << (DEFAULT_DOMAIN_ADDRESS_WIDTH - PAGE_SHIFT)
+>>>>>> -            : get_upper_mfn_bound() + 1),
+>>>>>> -        amd_iommu_min_paging_mode);
+>>>>>> +    hd->arch.amd.paging_mode = max(pgmode, amd_iommu_min_paging_mode);
+>>>>>
+>>>>> I think these min/max variables can be dropped now we're not doing
+>>>>> variable height IOMMU pagetables, which further simplifies this expression.
+>>>>
+>>>> Did you take unity maps into account? At least $subject and comment looks
+>>>> to not be consistent in this regard: Either unity maps need considering
+>>>> specially (and then we don't uniformly use the same depth), or they don't
+>>>> need mentioning in the comment (anymore).
+>>>
+>>> Unity maps that require an address width > DEFAULT_DOMAIN_ADDRESS_WIDTH
+>>> will currently only work on PV at best, as HVM p2m code is limited to
+>>> 4 level page tables, so even if the IOMMU page tables support a
+>>> greater address width the call to map such regions will trigger an
+>>> error in the p2m code way before attempting to create any IOMMU
+>>> mappings.
+>>>
+>>> We could do:
+>>>
+>>> hd->arch.amd.paging_mode =
+>>>     is_hvm_domain(d) ? pgmode : max(pgmode, amd_iommu_min_paging_mode);
+>>>
+>>> Putting IVMD/RMRR regions that require the usage of 5 level page
+>>> tables would be a very short sighted move by vendors IMO.
+>>>
+>>> And will put us back in a situation where PV vs HVM can get different
+>>> IOMMU page table levels, which is undesirable.  It might be better to
+>>> just assume all domains use DEFAULT_DOMAIN_ADDRESS_WIDTH and hide
+>>> devices that have IVMD/RMRR regions above that limit.
+>>
+>> That's a possible approach, yes. To be honest, I was actually hoping we'd
+>> move in a different direction: Do away with the entirely arbitrary
+>> DEFAULT_DOMAIN_ADDRESS_WIDTH, and use actual system properties instead.
 > 
-> 
-> Pipeline #1078515214 has failed!
-> 
-> Project: xen ( https://gitlab.com/xen-project/xen )
-> Branch: staging ( https://gitlab.com/xen-project/xen/-/commits/staging )
-> 
-> Commit: cfb77779 ( https://gitlab.com/xen-project/xen/-/commit/cfb777791d39e025cf625ba1fa080597d4defef6 )
-> Commit Message: amd/iommu: fully initialize array in 'flush_com...
-> Commit Author: Nicola Vetrini
-> Committed by: Jan Beulich ( https://gitlab.com/jbeulich )
-> 
-> 
-> Pipeline #1078515214 ( https://gitlab.com/xen-project/xen/-/pipelines/1078515214 ) triggered by Ganis ( https://gitlab.com/ganis )
-> had 17 failed jobs.
-> 
-> Job #5574364088 ( https://gitlab.com/xen-project/xen/-/jobs/5574364088/raw )
-> 
-> Stage: test
-> Name: qemu-xtf-dom0less-arm64-gcc-hyp-xen-version
-> Job #5574364058 ( https://gitlab.com/xen-project/xen/-/jobs/5574364058/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm64-gcc-staticmem
-> Job #5574364125 ( https://gitlab.com/xen-project/xen/-/jobs/5574364125/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm32-gcc-without-dom0
-> Job #5574363677 ( https://gitlab.com/xen-project/xen/-/jobs/5574363677/raw )
-> 
-> Stage: analyze
-> Name: eclair-ARM64
-> Job #5574364078 ( https://gitlab.com/xen-project/xen/-/jobs/5574364078/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm64-gcc-debug-static-shared-mem
-> Job #5574364106 ( https://gitlab.com/xen-project/xen/-/jobs/5574364106/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm32-gcc-staticmem
-> Job #5574363795 ( https://gitlab.com/xen-project/xen/-/jobs/5574363795/raw )
-> 
-> Stage: build
-> Name: debian-bookworm-gcc-arm64-randconfig
-> Job #5574363827 ( https://gitlab.com/xen-project/xen/-/jobs/5574363827/raw )
-> 
-> Stage: build
-> Name: alpine-3.18-gcc-arm64-boot-cpupools
-> Job #5574364044 ( https://gitlab.com/xen-project/xen/-/jobs/5574364044/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0-arm64-gcc-debug
-> Job #5574364073 ( https://gitlab.com/xen-project/xen/-/jobs/5574364073/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm64-gcc-debug-staticheap
-> Job #5574364075 ( https://gitlab.com/xen-project/xen/-/jobs/5574364075/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm64-gcc-static-shared-mem
-> Job #5574364054 ( https://gitlab.com/xen-project/xen/-/jobs/5574364054/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm64-gcc-debug
-> Job #5574364130 ( https://gitlab.com/xen-project/xen/-/jobs/5574364130/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm32-gcc-debug-without-dom0
-> Job #5574364120 ( https://gitlab.com/xen-project/xen/-/jobs/5574364120/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-dom0less-arm32-gcc-debug-gzip
-> Job #5574363788 ( https://gitlab.com/xen-project/xen/-/jobs/5574363788/raw )
-> 
-> Stage: build
-> Name: debian-bookworm-gcc-arm64
+> Hm, yes, that might be a sensible approach, but right now I don't want
+> to block this series on such (likely big) piece of work.  I think we
+> should aim for HVM and PV to have the same IOMMU page table levels,
+> and that's currently limited by the p2m code only supporting 4 levels.
 
-Randomly picking this one:
+No, I certainly don't mean to introduce a dependency there. Yet what
+you do here goes actively against that possible movement in the other
+direction: What "actual system properties" are differs between PV and
+HVM (host properties vs guest properties), and hence there would
+continue to be a (possible) difference in depth between the two.
 
-fatal: unable to access 'https://gitlab.com/xen-project/xen.git/': Could not resolve host: gitlab.com
+>> Whether having PV and HVM have uniform depth is indeed desirable is also
+>> not entirely obvious to me. Having looked over patch 3 now, it also
+>> hasn't become clear to me why the change here is actually a (necessary)
+>> prereq.
+> 
+> Oh, it's a prereq because I've found AMD systems that have reserved
+> regions > 512GB, but no RAM past that region.  arch_iommu_hwdom_init()
+> would fail on those systems when patch 3/3 was applied, as then
+> reserved regions past the last RAM address are also mapped in
+> arch_iommu_hwdom_init().
+
+Hmm, interesting. I can't bring together "would fail" and "are also
+mapped" though, unless the latter was meant to say "are attempted to
+also be mapped", in which case I could at least see room for failure.
+Yet still this would then feel like an issue with the last patch alone,
+which the change here is merely avoiding (without this being a strict
+prereq). Instead I'd expect us to use 4 levels whenever there are any
+kind of regions (reserved or not) above 512G. Without disallowing use
+of 3 levels on other (smaller) systems.
 
 Jan
-
-> Job #5574363779 ( https://gitlab.com/xen-project/xen/-/jobs/5574363779/raw )
-> 
-> Stage: build
-> Name: debian-bookworm-gcc-arm32-debug-staticmem
-> Job #5574363865 ( https://gitlab.com/xen-project/xen/-/jobs/5574363865/raw )
-> 
-> Stage: build
-> Name: debian-bookworm-gcc-arm64-cppcheck
-> 
-
 
