@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D5D7C54FB9
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Nov 2023 09:50:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.637625.993597 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 862D8C54FB9
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Nov 2023 09:50:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.637630.993629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5NOL-00080E-JY; Tue, 21 Nov 2023 09:50:01 +0000
+	id 1r5NOV-00017I-86; Tue, 21 Nov 2023 09:50:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 637625.993597; Tue, 21 Nov 2023 09:50:01 +0000
+Received: by outflank-mailman (output) from mailman id 637630.993629; Tue, 21 Nov 2023 09:50:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5NOL-0007zd-Fr; Tue, 21 Nov 2023 09:50:01 +0000
-Received: by outflank-mailman (input) for mailman id 637625;
- Tue, 21 Nov 2023 09:50:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r5NOV-00017B-4l; Tue, 21 Nov 2023 09:50:11 +0000
+Received: by outflank-mailman (input) for mailman id 637630;
+ Tue, 21 Nov 2023 09:50:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=AdV8=HC=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r5NOK-0007zB-UZ
- for xen-devel@lists.xenproject.org; Tue, 21 Nov 2023 09:50:00 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 54082444-8853-11ee-9b0e-b553b5be7939;
- Tue, 21 Nov 2023 10:49:57 +0100 (CET)
+ id 1r5NOT-00008u-Eb
+ for xen-devel@lists.xenproject.org; Tue, 21 Nov 2023 09:50:09 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5a711029-8853-11ee-98e1-6d05b1d4d9a1;
+ Tue, 21 Nov 2023 10:50:07 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4979E1F8A8;
- Tue, 21 Nov 2023 09:49:56 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 82EC321979;
+ Tue, 21 Nov 2023 09:50:07 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 125D8138E3;
- Tue, 21 Nov 2023 09:49:56 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4D18B138E3;
+ Tue, 21 Nov 2023 09:50:07 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id yl2SAkR9XGVANQAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 21 Nov 2023 09:49:56 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id n6yPEU99XGVxNQAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 21 Nov 2023 09:50:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,29 +53,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54082444-8853-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 5a711029-8853-11ee-98e1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1700560196; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=ylFzla17ZuFkKrStBDr86fu1z6MjOBaS8pzO54PvtZw=;
-	b=HaIPAVDr8RG17bKJyvCYWq7J3D6WgQ6SyKtbExR1DrQtsmJgXHtlunw6z3SkZD16ASaY3v
-	E+LKUolngUzh9stF/g7xOKiTxiDMqlzta+j+qzzV2aVkY7M/lzs+jJU6sS7bsDJJaTwV3E
-	6J3bMuXtMTbIS66GVqta+hGFvntBCnU=
+	t=1700560207; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=v1odbQaI2Gr+IB2DF9QOM7VdackHo1o2+QYsBMZ4bdY=;
+	b=KfLurMQ4BH9ZlhxVuC+1e+vLr0vYONRl4iXWBkaynG9Z7bfUaO4P1xNdCOD9UOacQQLsAI
+	zTpGlS3ZaK7AbJSmwdygH959eIAlFyzRk3e/NsDZmKamfMPFYoGXsA7jymLIW71o3ghiKL
+	OerhNh/G/0uOnNeB1Hkm1nVZpKMswKE=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 0/5] Mini-OS: preparations for 9pfs in xenstore-stubdom
-Date: Tue, 21 Nov 2023 10:49:48 +0100
-Message-Id: <20231121094953.22430-1-jgross@suse.com>
+Subject: [PATCH v3 2/5] Mini-OS: get own domid
+Date: Tue, 21 Nov 2023 10:49:50 +0100
+Message-Id: <20231121094953.22430-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231121094953.22430-1-jgross@suse.com>
+References: <20231121094953.22430-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out2.suse.de;
+Authentication-Results: smtp-out1.suse.de;
 	none
-X-Spamd-Result: default: False [2.51 / 50.00];
+X-Spamd-Result: default: False [-0.83 / 50.00];
 	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
@@ -83,6 +87,7 @@ X-Spamd-Result: default: False [2.51 / 50.00];
 	 R_MISSING_CHARSET(2.50)[];
 	 TO_MATCH_ENVRCPT_ALL(0.00)[];
 	 MIME_GOOD(-0.10)[text/plain];
+	 REPLY(-4.00)[];
 	 BROKEN_CONTENT_TYPE(1.50)[];
 	 RCPT_COUNT_FIVE(0.00)[5];
 	 NEURAL_HAM_LONG(-1.00)[-1.000];
@@ -94,32 +99,90 @@ X-Spamd-Result: default: False [2.51 / 50.00];
 	 MIME_TRACE(0.00)[0:+];
 	 RCVD_COUNT_TWO(0.00)[2];
 	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-1.19)[89.10%]
+	 BAYES_HAM(-0.53)[80.55%]
 
-This small patch series is doing some preparations for being able to
-use 9pfs in Xenstore-stubdom.
+Get the own domid via creation of a temporary event channel. There is
+no "official" way to read the own domid in PV guests, so use the event
+channel interface to get it:
 
-Changes in V2:
-- added patches 2 and 5
+- allocate an unbound event channel specifying DOMID_SELF for the
+  other end
 
-Changes in V3:
-- rename function to get own domid (patch 2)
+- read the event channel status which will contain the own domid in
+  unbound.dom
 
-Juergen Gross (5):
-  Mini-OS: make xenstore_buf externally visible
-  Mini-OS: get own domid
-  Mini-OS: don't crash if no shutdown node is available
-  Mini-OS: fix 9pfs stat receive format
-  Mini-OS: fix 9pfs response receiving
+- close the event channel
 
- 9pfront.c        | 13 ++++++++-----
- events.c         | 33 +++++++++++++++++++++++++++++++++
- include/lib.h    |  3 +++
- include/xenbus.h |  2 ++
- shutdown.c       | 12 ++++--------
- xenbus.c         |  2 +-
- 6 files changed, 51 insertions(+), 14 deletions(-)
+Signed-off-by: Juergen Gross <jgross@suse.com
+---
+V2:
+- new patch
+V3:
+- rename function to get_domid() (Julien Grall)
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ events.c      | 33 +++++++++++++++++++++++++++++++++
+ include/lib.h |  3 +++
+ 2 files changed, 36 insertions(+)
 
+diff --git a/events.c b/events.c
+index cdae90f4..4683e8e1 100644
+--- a/events.c
++++ b/events.c
+@@ -261,6 +261,39 @@ int evtchn_get_peercontext(evtchn_port_t local_port, char *ctx, int size)
+     return rc;
+ }
+ 
++/* Replace below when a hypercall is available to get the domid. */
++domid_t get_domid(void)
++{
++    int rc;
++    domid_t domid = DOMID_INVALID;
++    evtchn_alloc_unbound_t op;
++    struct evtchn_status status;
++    struct evtchn_close close;
++
++    op.dom = DOMID_SELF;
++    op.remote_dom = DOMID_SELF;
++    rc = HYPERVISOR_event_channel_op(EVTCHNOP_alloc_unbound, &op);
++    if ( rc )
++    {
++        printk("ERROR: alloc_unbound failed with rc=%d", rc);
++        return domid;
++    }
++
++    status.dom = DOMID_SELF;
++    status.port = op.port;
++    rc = HYPERVISOR_event_channel_op(EVTCHNOP_status, &status);
++    if ( rc )
++        printk("ERROR: EVTCHNOP_status failed with rc=%d", rc);
++    else
++        domid = status.u.unbound.dom;
++
++    close.port = op.port;
++    rc = HYPERVISOR_event_channel_op(EVTCHNOP_close, &close);
++    if ( rc )
++        printk("WARN: close_port %d failed rc=%d. ignored\n", close.port, rc);
++
++    return domid;
++}
+ 
+ /*
+  * Local variables:
+diff --git a/include/lib.h b/include/lib.h
+index fd8c36de..dd68985a 100644
+--- a/include/lib.h
++++ b/include/lib.h
+@@ -154,6 +154,9 @@ do {                                                           \
+ /* Consistency check as much as possible. */
+ void sanity_check(void);
+ 
++/* Get own domid. */
++domid_t get_domid(void);
++
+ #ifdef HAVE_LIBC
+ extern struct wait_queue_head event_queue;
+ 
 -- 
 2.35.3
 
