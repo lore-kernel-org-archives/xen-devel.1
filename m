@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F3CC61D85
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Nov 2023 20:16:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.638181.994519 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B77C61D85
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Nov 2023 20:16:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.638183.994539 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5XA7-0007Rl-Q0; Tue, 21 Nov 2023 20:15:59 +0000
+	id 1r5XAA-0007zR-8S; Tue, 21 Nov 2023 20:16:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 638181.994519; Tue, 21 Nov 2023 20:15:59 +0000
+Received: by outflank-mailman (output) from mailman id 638183.994539; Tue, 21 Nov 2023 20:16:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5XA7-0007Re-NJ; Tue, 21 Nov 2023 20:15:59 +0000
-Received: by outflank-mailman (input) for mailman id 638181;
- Tue, 21 Nov 2023 20:15:58 +0000
+	id 1r5XAA-0007zE-4h; Tue, 21 Nov 2023 20:16:02 +0000
+Received: by outflank-mailman (input) for mailman id 638183;
+ Tue, 21 Nov 2023 20:16:01 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T8a9=HC=citrix.com=prvs=682c61bdb=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1r5XA6-0007Bx-1J
- for xen-devel@lists.xenproject.org; Tue, 21 Nov 2023 20:15:58 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c5c81c9d-88aa-11ee-9b0e-b553b5be7939;
- Tue, 21 Nov 2023 21:15:55 +0100 (CET)
+ id 1r5XA9-0007Bx-0j
+ for xen-devel@lists.xenproject.org; Tue, 21 Nov 2023 20:16:01 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c8d1d8ff-88aa-11ee-9b0e-b553b5be7939;
+ Tue, 21 Nov 2023 21:15:59 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,52 +38,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5c81c9d-88aa-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: c8d1d8ff-88aa-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1700597755;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=r+o6oETfRoLUaoMxN0EAjgPAjp4KWInoqOVukWaKJ9c=;
-  b=GQ2HIE+jxtUTGmxdd/E4qr2bFPX1uSfBqNJbhxSKaTuLxYfNlAId9TDn
-   er3s5d9CQxsUvpK/FgUwAE3o0SQ+D+f1Sq6XAgs4dtryLnJnHykIhSdbi
-   GTvrLZLF5WhU7NityjCXtOyXGTZ8oYp/SOJqXYAZOBvfk8R3OcwKaybo8
+  d=citrix.com; s=securemail; t=1700597759;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=nNPFHrgxp9pbQ7IeeSDyd3YSSCnHXwpkDDz03xLZZ0Y=;
+  b=eszsf461HSGmtNP+BXu+7/JC0U6e1ftnH+KNlIYDk5NOQfcSjk70uRpf
+   lRb2/NE/OiaQmRkrXWIkYFhdJgBeCn+kbHouusn4Iqes1En2crjemE8nl
+   GF8d+2M1IKXjO6dtPnFJHsbQm9e8v/S/7F9nXSMtMOvWJzlMChgXXGQws
    4=;
-X-CSE-ConnectionGUID: Kx3BjExzTHqqzSgoe6KDkA==
-X-CSE-MsgGUID: aCRa83ClSFWBUEh0roJy8Q==
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-CSE-ConnectionGUID: BxdPn14FSKGZsTscOECGPg==
+X-CSE-MsgGUID: mpsQ+mzbStynQezYRkbRFQ==
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 128691934
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 127464603
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.159.70
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:tNO4Iq+sZamhhAIkPbh3DrUDfH6TJUtcMsCJ2f8bNWPcYEJGY0x3z
- GtOUGuGPPmMY2Wmfo1wPNvk8UkAup6Az4RmG1c/+Cs8E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
- 5hBMImowOQcFCK0SsKFa+C5xZVE/fjVAOK6UKidYnwZqTZMEE8JkQhkl/MynrlmiN24BxLlk
- d7pqojUNUTNNwRcawr40Ird7ksz1BjOkGlA5AdnPKoS5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
- 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
- 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDklt5
- acyKh0dfCyjnvuk+728R7dPqscKeZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
- ZBDMHw2MUWGPEUn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwPzhjJ/
- zOdowwVBDkTH+aWmWGu9kmCucXysCOjQoUwBe2Bo6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
- 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0efBdDuk74wGl0bfP7kCSAW1sZiVadNUsucsyRDor/
- lyEhdXkAXpoqrL9YW2Z3qeZq3W1Iyd9BW0fYS4JSyMV7t+lp5s85jrxSdJkHL+wn8fCMzj6y
- DCXrwAzn7wWy8UM0s2T913dnyiloJSPSwcv/xjWRUqs9AY/b4mgD6St6FPb5PIGK5yLQ12pt
- X0I3cOZ6YgmF5aHmTaRR6MHFb6v7uyMGDfBjkViGZZn/DOok1alfItX5Dg4Okp1KMcCeBfjf
- UDItAVeopRUOROXgbRfOtzrTZ5wlO65SIWjCai8gsdyjoZZVx/c1iNDdVys/3n0gnMjlqxhG
- ruYWJP5ZZoFMpiL3AZaVs9Ejudzm3BkmDyDLa0X2ShLxlZ3WZJ0dVvmGAHXBgzBxPnYyDg5C
- v4GXydw9z1RUfflfg7c+pMJIFYBIBATXM+u85EGL7DeclM/RAnN7sM9J5t7I+SJeIwMxo/1E
- oyVABcEmDITe1WbQel1VpyTQOy2BssuxZ7KFSctIUypyxAejXWHtc8im28MVeB/roRLlKckJ
- 8Tpju3cWpyjvByboWVCBXQ8xaQ+HCmWafWmZnP+OGFnL8c9G2QkOLbMJ2PSycXHNQLv3eNWn
- lFq/lqzrUYrL+i6MPvrVQ==
-IronPort-HdrOrdr: A9a23:oa0qdq2BCm8zoFNh/UryUgqjBL4kLtp133Aq2lEZdPRUGvb3qy
- nIpoV96faUskd0ZJhOo7C90cW7LU80lqQFhLX5X43SPzUO0VHAROoJgLcKqweQfREWndQ96U
- 4PScdD4aXLfDpHsfo=
-X-Talos-CUID: =?us-ascii?q?9a23=3AdTIu1mr1QS0FxrgpGWiagDvmUeM1KVff4WfCH2+?=
- =?us-ascii?q?hEHRSR7qYF3y8+4oxxg=3D=3D?=
-X-Talos-MUID: 9a23:hUa89Al9uMzuOIxjtqGxdnprH/1hs/+FDHsjrr87lsncLytSKmek2WE=
+IronPort-Data: A9a23:GBbuEq2dKvZbLGtYufbD5TVxkn2cJEfYwER7XKvMYLTBsI5bpzACy
+ mocD2+HP/uDamT2fdt1aozn9UMO7JXUx9RhQQc+pC1hF35El5HIVI+TRqvS04F+DeWYFR46s
+ J9OAjXkBJppJpMJjk71atANlVEliOfQAOK6UbaYUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
+ tq3qMDEULOf82cc3lk8teTb9HuDgNyo4GlD5wVkPKgR1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
+ 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
+ OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfK3FCz
+ fpBdB42TT+xnN6ty5WWYcZUiZF2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
+ ZNfMGc+KkuYC/FMEg5/5JYWteGknHTgNRZfr0qYv/Ef6GnP1g1hlrPqNbI5f/TTH5oJwBrG/
+ jmuE2LRBwkBDZ+a2zC+7mOqv+LdrBn4Urg8LejtnhJtqALKnTFCYPEMbnOrrP/8hkOgVtZ3L
+ 00P5jFovaU07FasTNT2Q1u/unHsljw2VsdUEuY6wBqQ0aeS6AGcbkAfVSJIYtEisM4wRBQp2
+ 0WPktevAiZg2JWKTVqN+7HSqim9UQAXMGsDaCksXQYDpd75r+kbsBXLSdpyFb+vuff8Ezrw3
+ jOioTA3gvMYistj/6+250zdijSg4J3AVBco5x7/V3igqAh+YeaNfYui5ELH6rBKJYmfR0OIl
+ HIZlNOT6u9IBpaI/ASLQe4KGLjv+fuZKjzagHZlApY6+jKivXWkeOhtDCpWfRkzdJxeIHmwP
+ R6V5ls5CIJv0GWCR797W4ToV+oR7ofSDuj+Xdf5RfV2bc0kHOOYxx2CdXJ8zki0zxB0zPFlZ
+ MjLGftAG0r2HkiO8dZXewv++eVyrszG7TmPLa0XNjz+uVZkWFabSK0eLHyFZf0j4aWPrW39q
+ okHb5bbkksCALSnPkE7FLL/y3hQdRDX4riv+6RqmhOreFI6SAnN9deNqV/eR2CVt/sMzbqZl
+ p1MckRZ1ED+lRX6xfaiMxhehEfUdc8n9xoTZHV8VWtELlB/Oe5DGo9DLcpoFVTmncQ/pcNJo
+ w4tIpzbWq0XGm2ap1zwr/DV9eRfSfhivirWVwLNXdT1V8cIq9DhkjM8QjbSyQ==
+IronPort-HdrOrdr: A9a23:zoRAa6kDfY3CTFmNXPHkWMirhnXpDfMbimdD5ihNYBxZY6Wkfp
+ aV7bsmPHjP+UAssRAb6Ke90cy7MAnhHPFOkPcs1ImZLXDbUQeTXfBfBaWL+UyGJ8TVzJ8+6U
+ 9YG5IObOEZ5zBB/KDHCXCDYrMdKbu8gdKVbJblvgNQpFpRGtldBm5CY27xfyEYKmgnOXNeLu
+ vt2iNpnUveRZ19VLXPOpBqZZmxmzTjruOpXfbGbyRXizWmvHeH6KPeGxPd5xcGXzZOxrtn0W
+ WtqX2y2oyT99+61zrV3Cvr741bndvnxp95CMPksLlZFhzcziipeaFoUPm6vCk4peGp5BIRjd
+ HQvw1IBbU+11rhOk+0vD7k0E3YyzAs53X+oGXoyEfLkIjWRC8eA8EEvJlecRfS9g4BsbhHoe
+ p29lPcmZpLKBvK2B3n4dvFXQwvr0KooBMZ4KUupk0acYwDbLRW6awzlXkla6vpVErBmf0a+K
+ MHNrCh2N9mNXWHcn/dtm5shPilXnE2FhDueCI/hvA=
+X-Talos-CUID: 9a23:CErM2G914nEtJqSshCSVv2QEFvgjKyHz91T/EVSEEm1OZZa6cVDFrQ==
+X-Talos-MUID: 9a23:jOKeQQuah1bq4WNNzc2ngSl5DYRt8a6VFFELqJgUivOHPxZeAmLI
 X-IronPort-AV: E=Sophos;i="6.04,216,1695700800"; 
-   d="scan'208";a="128691934"
+   d="scan'208";a="127464603"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -91,38 +94,96 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
 	<Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>, Roberto Bagnara
-	<roberto.bagnara@bugseng.com>, Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH v2 0/5] xen: Enable -Wwrite-strings
-Date: Tue, 21 Nov 2023 20:15:35 +0000
-Message-ID: <20231121201540.1528161-1-andrew.cooper3@citrix.com>
+	Roberto Bagnara <roberto.bagnara@bugseng.com>, Nicola Vetrini
+	<nicola.vetrini@bugseng.com>
+Subject: [PATCH v2 2/5] x86/setup: Rework cmdline_cook() to be compatible with -Wwrite-strings
+Date: Tue, 21 Nov 2023 20:15:37 +0000
+Message-ID: <20231121201540.1528161-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20231121201540.1528161-1-andrew.cooper3@citrix.com>
+References: <20231121201540.1528161-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Some patches from v1 committed.  This is the rest, and they're mostly
-rewritten from scratch.
+Rework the logic in __start_xen() to not potentially pass NULL into
+cmdline_cook().  This makes the logic easier to follow too, and the rest of
+__start_xen() is safe when initialising cmdline to the empty string.
 
-CI:
-  https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1080695374
-  https://cirrus-ci.com/build/5494986230202368
+Update cmdline_cook() to take and return const pointers, and write a
+description of what it does.  It now requires a non-NULL input and guarentees
+to return a pointer somewhere in the 'p' string.
 
-Andrew Cooper (5):
-  x86/setup: Clean up cmdline handling in create_dom0()
-  x86/setup: Rework cmdline_cook() to be compatible with -Wwrite-strings
-  x86/efi: Simplify efi_arch_handle_cmdline()
-  arm/efi: Simplify efi_arch_handle_cmdline()
-  xen: Enable -Wwrite-strings
+Note this only compiles because strstr() launders the const off the pointer
+when assigning to the mutable kextra, but that logic only mutates the
+mbi->cmdline buffer.
 
- xen/Makefile                |  2 +-
- xen/arch/arm/efi/efi-boot.h | 16 +----------
- xen/arch/x86/efi/efi-boot.h | 10 +------
- xen/arch/x86/setup.c        | 56 ++++++++++++++++++++-----------------
- 4 files changed, 34 insertions(+), 50 deletions(-)
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Roberto Bagnara <roberto.bagnara@bugseng.com>
+CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 
+v2:
+ * create_dom0() changes split out into a previous patch
+ * Remove the logic for a NULL input, now that all callers have been adjusted
+---
+ xen/arch/x86/setup.c | 21 +++++++++++++--------
+ 1 file changed, 13 insertions(+), 8 deletions(-)
 
-base-commit: 10081c2dc571775b538bb00982606a39832ad7e3
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index c0302c6bdd62..b171a8f4cf84 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -837,10 +837,15 @@ static bool __init loader_is_grub2(const char *loader_name)
+     return (p != NULL) && (p[5] != '0');
+ }
+ 
+-static char * __init cmdline_cook(char *p, const char *loader_name)
++/*
++ * Clean up a command line string passed to us by a bootloader.  Strip leading
++ * whitespace, and optionally strip the first parameter if our divination of
++ * the bootloader suggests that it prepended the image name.
++ *
++ * Always returns a pointer within @p.
++ */
++static const char *__init cmdline_cook(const char *p, const char *loader_name)
+ {
+-    p = p ? : "";
+-
+     /* Strip leading whitespace. */
+     while ( *p == ' ' )
+         p++;
+@@ -969,8 +974,8 @@ static struct domain *__init create_dom0(const module_t *image,
+ /* SAF-1-safe */
+ void __init noreturn __start_xen(unsigned long mbi_p)
+ {
+-    const char *memmap_type = NULL, *loader;
+-    char *cmdline, *kextra;
++    const char *memmap_type = NULL, *loader, *cmdline = "";
++    char *kextra;
+     void *bsp_stack;
+     struct cpu_info *info = get_cpu_info(), *bsp_info;
+     unsigned int initrdidx, num_parked = 0;
+@@ -1025,9 +1030,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+                                            : "unknown";
+ 
+     /* Parse the command-line options. */
+-    cmdline = cmdline_cook((mbi->flags & MBI_CMDLINE) ?
+-                           __va(mbi->cmdline) : NULL,
+-                           loader);
++    if ( mbi->flags & MBI_CMDLINE )
++        cmdline = cmdline_cook(__va(mbi->cmdline), loader);
++
+     if ( (kextra = strstr(cmdline, " -- ")) != NULL )
+     {
+         /*
 -- 
 2.30.2
 
