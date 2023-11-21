@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E44EC61D85
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Nov 2023 16:07:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.637953.994141 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4124FC61D92
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Nov 2023 16:07:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.637950.994110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5THk-0003h6-LX; Tue, 21 Nov 2023 16:07:36 +0000
+	id 1r5THf-0002ob-Pn; Tue, 21 Nov 2023 16:07:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 637953.994141; Tue, 21 Nov 2023 16:07:36 +0000
+Received: by outflank-mailman (output) from mailman id 637950.994110; Tue, 21 Nov 2023 16:07:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5THk-0003gp-HR; Tue, 21 Nov 2023 16:07:36 +0000
-Received: by outflank-mailman (input) for mailman id 637953;
- Tue, 21 Nov 2023 16:07:35 +0000
+	id 1r5THf-0002oK-Ln; Tue, 21 Nov 2023 16:07:31 +0000
+Received: by outflank-mailman (input) for mailman id 637950;
+ Tue, 21 Nov 2023 16:07:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MZRi=HC=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r5THj-0002HT-9A
- for xen-devel@lists.xenproject.org; Tue, 21 Nov 2023 16:07:35 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
+ id 1r5THe-0002HT-5q
+ for xen-devel@lists.xenproject.org; Tue, 21 Nov 2023 16:07:30 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 14a11839-8888-11ee-98e1-6d05b1d4d9a1;
- Tue, 21 Nov 2023 17:07:34 +0100 (CET)
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2c5b7764016so69543181fa.1
- for <xen-devel@lists.xenproject.org>; Tue, 21 Nov 2023 08:07:34 -0800 (PST)
+ id 11f26ba8-8888-11ee-98e1-6d05b1d4d9a1;
+ Tue, 21 Nov 2023 17:07:29 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-409299277bbso23519455e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Nov 2023 08:07:29 -0800 (PST)
 Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- e22-20020a5d5956000000b0032dbf6bf7a2sm14749789wri.97.2023.11.21.08.07.32
+ m26-20020a05600c3b1a00b0040b2b38a1fasm1950957wms.4.2023.11.21.08.07.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 08:07:32 -0800 (PST)
+ Tue, 21 Nov 2023 08:07:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,41 +46,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14a11839-8888-11ee-98e1-6d05b1d4d9a1
+X-Inumbo-ID: 11f26ba8-8888-11ee-98e1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1700582853; x=1701187653; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1700582849; x=1701187649; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8kmM/w/9TaHESzZwKotfNmIgZaxyBapwmYFaInyE/7U=;
-        b=uMcSeF/wmhtKFVH608Sq/Hv+D7By8XCNaCPHkMlFLauc9lkwkUxxWxFZwFZnety0GL
-         ftYxGNk2PDzShTA2TitKfFXlChRwYMiIgmM+XfyCu+dPlRko7Eat/v1ZYQbWagOGqdtc
-         bC0/Erp7V+1UUUxEwrXpBem0FcqEaea5dtz+Q=
+        bh=/lNDRCElyOb258n1fKG7QxMoPmJ1R7ayXwBT54m1Rig=;
+        b=FdQfT8Wu7jWhmvf3tNO4wsZ2chmhKoUmnlZGXM/d12gCF4KlYgRUuW0as6xfpgUaMR
+         LV3SzN+dDjV6CIjb/Fhy0QyaQC74Ys9X4Qbz3Nnp6DonEEaGhPabmoch4npogbNoUqvx
+         NIAySYR6uuz8M5aVFdF1gh+aVqTe0WtF84ihQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700582853; x=1701187653;
+        d=1e100.net; s=20230601; t=1700582849; x=1701187649;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8kmM/w/9TaHESzZwKotfNmIgZaxyBapwmYFaInyE/7U=;
-        b=OudTBkfBuZDKJMVtmYJEtWbL9WKmYNNLJRU12dZnb+9RhNOuxxF77qsvbekKHAZLM+
-         4wWJro5dmKgFLJGSDrg2rivzPotrSEtHVRHmIm66k/83osxrZaRfV13P1hRFrM8awr4q
-         LTuTWcM9Zoy4r2Ehk2yUhciCd0B1/hWm3YFBCLTVh5fEosHEqA78Cr+4K54EweT8FyUd
-         rn5XY16POu3k2fO5I+DXK7HPHyvw+/4pekoSjgqqS8Tz9NHN81gtJyBUB3p/uxrJcP6r
-         M4S4PY2eYBf2YWnFps7Nmd00+9+6vH59bL2yH9SoRsxapysMmowE4i+Z44RArup+8sy8
-         MDyQ==
-X-Gm-Message-State: AOJu0YzG6zcxn7OFnOrzp7herFJW+Sh9/hCNHTTyh3uZckUY/wmKKTLb
-	JW1IXrYZEj7SZAVRxbp9bBXqTfeTPjrwKkle0mU=
-X-Google-Smtp-Source: AGHT+IEti2nzUVhLiGjNIqWupHd4+A2qCCmv+0UoxlYvYGtBpB0v4kKRNlfFBufraWVlyrAflSYKWA==
-X-Received: by 2002:a2e:2e10:0:b0:2c5:12c4:5ff with SMTP id u16-20020a2e2e10000000b002c512c405ffmr6899344lju.17.1700582853198;
-        Tue, 21 Nov 2023 08:07:33 -0800 (PST)
+        bh=/lNDRCElyOb258n1fKG7QxMoPmJ1R7ayXwBT54m1Rig=;
+        b=E+2IL5kl05MWLFFfhQ2eASQHXE1jOW9onsOD8pfJlnQKMxhnzK96Nv7OeOE8/cl6zZ
+         /irbVGKKQRg2GZfq5zRaPKkpmHxCgfGucw5zOips4LJ+CcDnn00L5y0YZRujliehLobE
+         lxWV5rFCCTI38SF/dkqXg0RNGOJFpuJgYtZI9Ej/VXnRiByMUpQFJ/YyQ1Qwuo4nf5Fr
+         xAwaO4R0PjLSXQJNspVkBHCfd7UjzLP7QXdxLyVVAgegS0g1yyJtvVGdsSZ8c/bWAWem
+         k4z5dVN0kTQtMYR0YFndQY51GBnMO39lPS2nl1xeyRmaMx3qqNOMkhfj+kK4Ibtl/ChB
+         mepw==
+X-Gm-Message-State: AOJu0YyvfmOslf2d8QWe/Cv+S++gXoXo2k9l1Ht3Slrn5bFzJYsWsDEK
+	9K7pJr0Ice4tArBPSoQs3RXHWP7M+plI2X2kFLM=
+X-Google-Smtp-Source: AGHT+IG0JGH0X74kjT9rB/dTBZWAPOVFSXyvwrZVVW6hWpoBZM4xQMBtn0zfd+xCt195lg7P2JfNTQ==
+X-Received: by 2002:a05:600c:3b25:b0:407:3b6d:b561 with SMTP id m37-20020a05600c3b2500b004073b6db561mr7605929wms.9.1700582848784;
+        Tue, 21 Nov 2023 08:07:28 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 6/7] automation: set architecture in docker files
-Date: Tue, 21 Nov 2023 17:03:57 +0100
-Message-ID: <20231121160358.8080-7-roger.pau@citrix.com>
+Subject: [PATCH v2 3/7] automation: add Xen timestamps to all tests
+Date: Tue, 21 Nov 2023 17:03:54 +0100
+Message-ID: <20231121160358.8080-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231121160358.8080-1-roger.pau@citrix.com>
 References: <20231121160358.8080-1-roger.pau@citrix.com>
@@ -88,248 +88,126 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Pass the desired architecture of the image in the FROM instruction if the
-image is possibly multi-platform.
-
-This allows using the x86 Dockerfiles on OS X on arm64 hardware.
-
-No functional change intended.
-
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-I haven't touched the Yocto dockerfile because I'm not sure how it's used.
+Changes since v1:
+ - Expand to all tests.
 ---
- automation/build/alpine/3.18.dockerfile                       | 2 +-
- automation/build/archlinux/current-riscv64.dockerfile         | 2 +-
- automation/build/archlinux/current.dockerfile                 | 2 +-
- automation/build/centos/7.dockerfile                          | 2 +-
- automation/build/debian/bookworm.dockerfile                   | 2 +-
- automation/build/debian/bullseye-ppc64le.dockerfile           | 2 +-
- automation/build/debian/buster-gcc-ibt.dockerfile             | 4 ++--
- automation/build/debian/jessie.dockerfile                     | 2 +-
- automation/build/debian/stretch.dockerfile                    | 2 +-
- automation/build/fedora/29.dockerfile                         | 2 +-
- automation/build/suse/opensuse-leap.dockerfile                | 2 +-
- automation/build/suse/opensuse-tumbleweed.dockerfile          | 2 +-
- automation/build/ubuntu/bionic.dockerfile                     | 2 +-
- automation/build/ubuntu/focal.dockerfile                      | 2 +-
- automation/build/ubuntu/trusty.dockerfile                     | 2 +-
- automation/build/ubuntu/xenial-xilinx.dockerfile              | 2 +-
- automation/build/ubuntu/xenial.dockerfile                     | 2 +-
- automation/tests-artifacts/alpine/3.18.dockerfile             | 2 +-
- automation/tests-artifacts/kernel/6.1.19.dockerfile           | 2 +-
- .../tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile  | 2 +-
- 20 files changed, 21 insertions(+), 21 deletions(-)
+ automation/scripts/qemu-alpine-x86_64.sh          | 2 +-
+ automation/scripts/qemu-smoke-dom0-arm32.sh       | 2 +-
+ automation/scripts/qemu-smoke-dom0-arm64.sh       | 2 +-
+ automation/scripts/qemu-smoke-dom0less-arm32.sh   | 2 +-
+ automation/scripts/qemu-smoke-dom0less-arm64.sh   | 2 +-
+ automation/scripts/qemu-xtf-dom0less-arm64.sh     | 2 +-
+ automation/scripts/qubes-x86-64.sh                | 2 +-
+ automation/scripts/xilinx-smoke-dom0less-arm64.sh | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/automation/build/alpine/3.18.dockerfile b/automation/build/alpine/3.18.dockerfile
-index 5d2a69a06010..4ae9cb5e9e30 100644
---- a/automation/build/alpine/3.18.dockerfile
-+++ b/automation/build/alpine/3.18.dockerfile
-@@ -1,4 +1,4 @@
--FROM alpine:3.18
-+FROM --platform=linux/amd64 alpine:3.18
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
+index a1c41c030a47..8e398dcea34b 100755
+--- a/automation/scripts/qemu-alpine-x86_64.sh
++++ b/automation/scripts/qemu-alpine-x86_64.sh
+@@ -68,7 +68,7 @@ cd ../..
+ cat >> binaries/pxelinux.0 << EOF
+ #!ipxe
  
-diff --git a/automation/build/archlinux/current-riscv64.dockerfile b/automation/build/archlinux/current-riscv64.dockerfile
-index abf8e7bf0b88..af75b5c720ce 100644
---- a/automation/build/archlinux/current-riscv64.dockerfile
-+++ b/automation/build/archlinux/current-riscv64.dockerfile
-@@ -1,4 +1,4 @@
--FROM archlinux
-+FROM --platform=linux/amd64 archlinux
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+-kernel xen console=com1
++kernel xen console=com1 console_timestamps=boot
+ module bzImage console=hvc0
+ module xen-rootfs.cpio.gz
+ boot
+diff --git a/automation/scripts/qemu-smoke-dom0-arm32.sh b/automation/scripts/qemu-smoke-dom0-arm32.sh
+index 281cae38b4bd..a4b487b08055 100755
+--- a/automation/scripts/qemu-smoke-dom0-arm32.sh
++++ b/automation/scripts/qemu-smoke-dom0-arm32.sh
+@@ -63,7 +63,7 @@ XEN="xen-qemuarm"
+ DOM0_KERNEL="zImage"
+ DOM0_RAMDISK="initrd.gz"
+ DOM0_CMD="console=hvc0 earlyprintk clk_ignore_unused root=/dev/ram0 rdinit=/sbin/init"
+-XEN_CMD="console=dtuart dom0_mem=1024M bootscrub=0"
++XEN_CMD="console=dtuart dom0_mem=1024M bootscrub=0 console_timestamps=boot"
  
-diff --git a/automation/build/archlinux/current.dockerfile b/automation/build/archlinux/current.dockerfile
-index 47e79637a4a6..d974a1434fd5 100644
---- a/automation/build/archlinux/current.dockerfile
-+++ b/automation/build/archlinux/current.dockerfile
-@@ -1,4 +1,4 @@
--FROM archlinux:base-devel
-+FROM --platform=linux/amd64 archlinux:base-devel
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+ NUM_DOMUS=0
  
-diff --git a/automation/build/centos/7.dockerfile b/automation/build/centos/7.dockerfile
-index 69dcefb2f011..ab450f0b3a0e 100644
---- a/automation/build/centos/7.dockerfile
-+++ b/automation/build/centos/7.dockerfile
-@@ -1,4 +1,4 @@
--FROM centos:7
-+FROM --platform=linux/amd64 centos:7
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
+index bb3d3a6a816e..e0bb37af3610 100755
+--- a/automation/scripts/qemu-smoke-dom0-arm64.sh
++++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
+@@ -79,7 +79,7 @@ DEVICE_TREE="virt-gicv2.dtb"
+ XEN="xen"
+ DOM0_KERNEL="Image"
+ DOM0_RAMDISK="xen-rootfs.cpio.gz"
+-XEN_CMD="console=dtuart dom0_mem=1024M"
++XEN_CMD="console=dtuart dom0_mem=1024M console_timestamps=boot"
  
-diff --git a/automation/build/debian/bookworm.dockerfile b/automation/build/debian/bookworm.dockerfile
-index 7aea081c13a9..459f8e30bdc6 100644
---- a/automation/build/debian/bookworm.dockerfile
-+++ b/automation/build/debian/bookworm.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian:bookworm
-+FROM --platform=linux/amd64 debian:bookworm
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+ NUM_DOMUS=0
  
-diff --git a/automation/build/debian/bullseye-ppc64le.dockerfile b/automation/build/debian/bullseye-ppc64le.dockerfile
-index 4de8458445ae..6fdfb6bc2b40 100644
---- a/automation/build/debian/bullseye-ppc64le.dockerfile
-+++ b/automation/build/debian/bullseye-ppc64le.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian:bullseye-slim
-+FROM --platform=linux/amd64 debian:bullseye-slim
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+diff --git a/automation/scripts/qemu-smoke-dom0less-arm32.sh b/automation/scripts/qemu-smoke-dom0less-arm32.sh
+index 737adaf1a9ad..7e3cfbe9c4d0 100755
+--- a/automation/scripts/qemu-smoke-dom0less-arm32.sh
++++ b/automation/scripts/qemu-smoke-dom0less-arm32.sh
+@@ -89,7 +89,7 @@ MEMORY_END="0xC0000000"
  
-diff --git a/automation/build/debian/buster-gcc-ibt.dockerfile b/automation/build/debian/buster-gcc-ibt.dockerfile
-index 96ab4fe8a2f1..6a3e50ef6b3f 100644
---- a/automation/build/debian/buster-gcc-ibt.dockerfile
-+++ b/automation/build/debian/buster-gcc-ibt.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian:buster-slim AS builder
-+FROM --platform=linux/amd64 debian:buster-slim AS builder
+ DEVICE_TREE="virt.dtb"
+ XEN="xen"
+-XEN_CMD="console=dtuart dom0_mem=512M bootscrub=0"
++XEN_CMD="console=dtuart dom0_mem=512M bootscrub=0 console_timestamps=boot"
  
- ENV DEBIAN_FRONTEND=noninteractive
- ENV USER root
-@@ -41,7 +41,7 @@ RUN ./configure \
- RUN make -j`nproc` && make -j`nproc` install
+ DOM0_KERNEL="vmlinuz"
+ DOM0_RAMDISK="initrd.gz"
+diff --git a/automation/scripts/qemu-smoke-dom0less-arm64.sh b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+index b5ce7efdd44e..e748b8ef1699 100755
+--- a/automation/scripts/qemu-smoke-dom0less-arm64.sh
++++ b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+@@ -137,7 +137,7 @@ DEVICE_TREE="virt-gicv2.dtb"
+ XEN="xen"
+ DOM0_KERNEL="Image"
+ DOM0_RAMDISK="dom0-rootfs.cpio.gz"
+-XEN_CMD="console=dtuart dom0_mem=512M"
++XEN_CMD="console=dtuart dom0_mem=512M console_timestamps=boot"
  
+ NUM_DOMUS=1
+ DOMU_KERNEL[0]="Image"
+diff --git a/automation/scripts/qemu-xtf-dom0less-arm64.sh b/automation/scripts/qemu-xtf-dom0less-arm64.sh
+index 0c4578eda66e..a667e0412c92 100755
+--- a/automation/scripts/qemu-xtf-dom0less-arm64.sh
++++ b/automation/scripts/qemu-xtf-dom0less-arm64.sh
+@@ -33,7 +33,7 @@ MEMORY_END="0xC0000000"
+ XEN="xen"
+ DEVICE_TREE="virt-gicv2.dtb"
  
--FROM debian:buster-slim
-+FROM --platform=linux/amd64 debian:buster-slim
- COPY --from=builder /opt/gcc-11-ibt /opt/gcc-11-ibt
+-XEN_CMD="console=dtuart"
++XEN_CMD="console=dtuart console_timestamps=boot"
  
- LABEL maintainer.name="The Xen Project" \
-diff --git a/automation/build/debian/jessie.dockerfile b/automation/build/debian/jessie.dockerfile
-index 5c71c3e3ea75..32fc952fbc2d 100644
---- a/automation/build/debian/jessie.dockerfile
-+++ b/automation/build/debian/jessie.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian/eol:jessie
-+FROM --platform=linux/amd64 debian/eol:jessie
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+ DOMU_KERNEL[0]="xtf-test"
+ DOMU_MEM[0]="128"
+diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
+index adec0f1f25c7..d81ed7b931cf 100755
+--- a/automation/scripts/qubes-x86-64.sh
++++ b/automation/scripts/qubes-x86-64.sh
+@@ -185,7 +185,7 @@ TFTP=/scratch/gitlab-runner/tftp
+ CONTROLLER=control@thor.testnet
  
-diff --git a/automation/build/debian/stretch.dockerfile b/automation/build/debian/stretch.dockerfile
-index 2f1a99f45017..e2706a8f3589 100644
---- a/automation/build/debian/stretch.dockerfile
-+++ b/automation/build/debian/stretch.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian:stretch
-+FROM --platform=linux/amd64 debian:stretch
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+ echo "
+-multiboot2 (http)/gitlab-ci/xen $CONSOLE_OPTS loglvl=all guest_loglvl=all dom0_mem=4G $extra_xen_opts
++multiboot2 (http)/gitlab-ci/xen $CONSOLE_OPTS loglvl=all guest_loglvl=all dom0_mem=4G console_timestamps=boot $extra_xen_opts
+ module2 (http)/gitlab-ci/vmlinuz console=hvc0 root=/dev/ram0 earlyprintk=xen
+ module2 (http)/gitlab-ci/initrd-dom0
+ " > $TFTP/grub.cfg
+diff --git a/automation/scripts/xilinx-smoke-dom0less-arm64.sh b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
+index 2bf786f6ee86..4a071c6ef148 100755
+--- a/automation/scripts/xilinx-smoke-dom0less-arm64.sh
++++ b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
+@@ -94,7 +94,7 @@ DEVICE_TREE="mpsoc_smmu.dtb"
+ XEN="xen"
+ DOM0_KERNEL="Image"
+ DOM0_RAMDISK="dom0-rootfs.cpio.gz"
+-XEN_CMD="console=dtuart dtuart=serial0 dom0_mem=1024M"
++XEN_CMD="console=dtuart dtuart=serial0 dom0_mem=1024M console_timestamps=boot"
  
-diff --git a/automation/build/fedora/29.dockerfile b/automation/build/fedora/29.dockerfile
-index e55b06a4517e..42a87ce6c84b 100644
---- a/automation/build/fedora/29.dockerfile
-+++ b/automation/build/fedora/29.dockerfile
-@@ -1,4 +1,4 @@
--FROM fedora:29
-+FROM --platform=linux/amd64 fedora:29
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/build/suse/opensuse-leap.dockerfile b/automation/build/suse/opensuse-leap.dockerfile
-index 7010b71acaa0..e1ec38a41445 100644
---- a/automation/build/suse/opensuse-leap.dockerfile
-+++ b/automation/build/suse/opensuse-leap.dockerfile
-@@ -1,4 +1,4 @@
--FROM opensuse/leap
-+FROM --platform=linux/amd64 opensuse/leap
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/build/suse/opensuse-tumbleweed.dockerfile b/automation/build/suse/opensuse-tumbleweed.dockerfile
-index 959e1f6939f0..38f6fda2ff1b 100644
---- a/automation/build/suse/opensuse-tumbleweed.dockerfile
-+++ b/automation/build/suse/opensuse-tumbleweed.dockerfile
-@@ -1,4 +1,4 @@
--FROM opensuse/tumbleweed
-+FROM --platform=linux/amd64 opensuse/tumbleweed
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/build/ubuntu/bionic.dockerfile b/automation/build/ubuntu/bionic.dockerfile
-index e15f54431efb..77d7f933860c 100644
---- a/automation/build/ubuntu/bionic.dockerfile
-+++ b/automation/build/ubuntu/bionic.dockerfile
-@@ -1,4 +1,4 @@
--FROM ubuntu:18.04
-+FROM --platform=linux/amd64 ubuntu:18.04
- LABEL maintainer.name="The Xen Project " \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/build/ubuntu/focal.dockerfile b/automation/build/ubuntu/focal.dockerfile
-index e3d11194ee2f..30a9b8e84ffe 100644
---- a/automation/build/ubuntu/focal.dockerfile
-+++ b/automation/build/ubuntu/focal.dockerfile
-@@ -1,4 +1,4 @@
--FROM ubuntu:20.04
-+FROM --platform=linux/amd64 ubuntu:20.04
- LABEL maintainer.name="The Xen Project " \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/build/ubuntu/trusty.dockerfile b/automation/build/ubuntu/trusty.dockerfile
-index 22e294c20cac..0d33578c4e1d 100644
---- a/automation/build/ubuntu/trusty.dockerfile
-+++ b/automation/build/ubuntu/trusty.dockerfile
-@@ -1,4 +1,4 @@
--FROM ubuntu:14.04
-+FROM --platform=linux/amd64 ubuntu:14.04
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/build/ubuntu/xenial-xilinx.dockerfile b/automation/build/ubuntu/xenial-xilinx.dockerfile
-index 5f7087135213..49f27b322995 100644
---- a/automation/build/ubuntu/xenial-xilinx.dockerfile
-+++ b/automation/build/ubuntu/xenial-xilinx.dockerfile
-@@ -1,4 +1,4 @@
--FROM ubuntu:16.04
-+FROM --platform=linux/amd64 ubuntu:16.04
- LABEL maintainer.name="The Xen Project " \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/build/ubuntu/xenial.dockerfile b/automation/build/ubuntu/xenial.dockerfile
-index 2d2ba3e31f63..e8035434f804 100644
---- a/automation/build/ubuntu/xenial.dockerfile
-+++ b/automation/build/ubuntu/xenial.dockerfile
-@@ -1,4 +1,4 @@
--FROM ubuntu:16.04
-+FROM --platform=linux/amd64 ubuntu:16.04
- LABEL maintainer.name="The Xen Project " \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/tests-artifacts/alpine/3.18.dockerfile b/automation/tests-artifacts/alpine/3.18.dockerfile
-index 5f521572b8fb..f1b4a8b7a191 100644
---- a/automation/tests-artifacts/alpine/3.18.dockerfile
-+++ b/automation/tests-artifacts/alpine/3.18.dockerfile
-@@ -1,4 +1,4 @@
--FROM alpine:3.18
-+FROM --platform=linux/amd64 alpine:3.18
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/tests-artifacts/kernel/6.1.19.dockerfile b/automation/tests-artifacts/kernel/6.1.19.dockerfile
-index d5b787c1cbb5..3a4096780d20 100644
---- a/automation/tests-artifacts/kernel/6.1.19.dockerfile
-+++ b/automation/tests-artifacts/kernel/6.1.19.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian:bookworm
-+FROM --platform=linux/amd64 debian:bookworm
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
-diff --git a/automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile b/automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile
-index 7376ca46ff8e..65857147bf4f 100644
---- a/automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile
-+++ b/automation/tests-artifacts/qemu-system-ppc64/8.1.0-ppc64.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian:bullseye-slim
-+FROM --platform=linux/amd64 debian:bullseye-slim
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
- 
+ NUM_DOMUS=1
+ DOMU_KERNEL[0]="Image"
 -- 
 2.42.0
 
