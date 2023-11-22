@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29BDEC61D9B
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Nov 2023 09:54:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.638598.995345 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 601E2C61D9B
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Nov 2023 10:00:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.638610.995367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5jwK-00050h-7K; Wed, 22 Nov 2023 09:54:36 +0000
+	id 1r5k1k-0000OZ-4a; Wed, 22 Nov 2023 10:00:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 638598.995345; Wed, 22 Nov 2023 09:54:36 +0000
+Received: by outflank-mailman (output) from mailman id 638610.995367; Wed, 22 Nov 2023 10:00:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5jwK-00050a-4N; Wed, 22 Nov 2023 09:54:36 +0000
-Received: by outflank-mailman (input) for mailman id 638598;
- Wed, 22 Nov 2023 09:54:35 +0000
+	id 1r5k1j-0000OQ-Vo; Wed, 22 Nov 2023 10:00:11 +0000
+Received: by outflank-mailman (input) for mailman id 638610;
+ Wed, 22 Nov 2023 10:00:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Q+k4=HD=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1r5jwJ-0004Ow-5F
- for xen-devel@lists.xenproject.org; Wed, 22 Nov 2023 09:54:35 +0000
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [2a00:1450:4864:20::12b])
+ id 1r5k1i-0007W3-W5
+ for xen-devel@lists.xenproject.org; Wed, 22 Nov 2023 10:00:10 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 22d7f46f-891d-11ee-98e1-6d05b1d4d9a1;
- Wed, 22 Nov 2023 10:54:32 +0100 (CET)
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-50aab3bf71fso4863207e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Nov 2023 01:54:32 -0800 (PST)
+ id ec0cff92-891d-11ee-98e1-6d05b1d4d9a1;
+ Wed, 22 Nov 2023 11:00:10 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40b31232bf0so4182885e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Nov 2023 02:00:10 -0800 (PST)
 Received: from [192.168.1.10] (host-92-26-107-252.as13285.net. [92.26.107.252])
  by smtp.gmail.com with ESMTPSA id
- v18-20020a05600c471200b0040a5290dceesm1682007wmo.0.2023.11.22.01.54.31
+ v9-20020a05600c444900b0040836519dd9sm1680416wmn.25.2023.11.22.02.00.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Nov 2023 01:54:31 -0800 (PST)
+ Wed, 22 Nov 2023 02:00:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22d7f46f-891d-11ee-98e1-6d05b1d4d9a1
+X-Inumbo-ID: ec0cff92-891d-11ee-98e1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1700646872; x=1701251672; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1700647210; x=1701252010; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=YGTNPiloLMYSvwBHdC680VXhqwNJh/+/+7ciI8lxexA=;
-        b=EtB66EIG2/15k2LS3IK4cWcABKI6CqcFD7Me98Oj3HEMQjujProYzhvm4xo4J4UbNB
-         A64yPHATGVJiRTNt5n98ameCdSaHTxzcvVFscSTnHpSEs1VYit8/DzRS6rI3eva4S9vb
-         GGx3sPISnSaMD+nV1lQEWzazRE1h1ceVkSqHI=
+        bh=JwboJve+NnWYazpjvoy1l3Fmapvi/cNmoLbs/tPpc/k=;
+        b=Z9ZzotFMd85RGcPGeP95JY3lQVLriIaaAcXxSqt7N2lU1/xNAl7CZpuy55dI5gobg+
+         DU4ysyaemQlcSMOT2RBztbexSIFgV405Res34viyGYBkwOX16mY9RJE9SCCCPwDkGe6W
+         doiKe2fILEVSGqpPwhDW8Op4QRJ/39VNTvYw0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700646872; x=1701251672;
+        d=1e100.net; s=20230601; t=1700647210; x=1701252010;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YGTNPiloLMYSvwBHdC680VXhqwNJh/+/+7ciI8lxexA=;
-        b=AEue9uK/CG5eau0PWJh39K7dyn6StcmaJfmGumxmSKrrbaQOpHUDpW1eQ//hpfDTUP
-         oYme3DeyONgcr/xyR6q13rSsCoJSf6geBd2rHp7sUEvGLeS0w8huSAo/pUe6TO1Wd9ak
-         ljih5l5z60qp4rEzL3aj+j048qq6X0zUkP0idjiJdZbpTYC/rK9xT0bgxnfhkfSFsQ2l
-         tt66Xr0QGLpgDgjGa6HsJDrRuGJfZLj+bLEPqwokL+wS+31KBgTTajJjmyfaJSeSKJKI
-         oDXAIFU1N4pcSKUScaMOfwwCUvzkQ4uToEaip0VsRYEIv7WwY87wFU9GYciOW/GUhsfx
-         Oorg==
-X-Gm-Message-State: AOJu0YzLUyX+UhO/W1XAhXtRy0mRJztL77siiDi9IKUi4JrfZl3I5bJ7
-	LK2qjAM84+m2asnq8JAebvzNrg==
-X-Google-Smtp-Source: AGHT+IGSIdAS3ZnG0TxZBGADzN9wWtf9/4caVwsp0aFo940Pfi/FH8XbSHsSIBkfDTywe6GVni1Y3Q==
-X-Received: by 2002:a05:6512:2c92:b0:509:4599:f2bc with SMTP id dw18-20020a0565122c9200b005094599f2bcmr1463740lfb.14.1700646872183;
-        Wed, 22 Nov 2023 01:54:32 -0800 (PST)
-Message-ID: <8ada5516-5c1f-4c77-8f26-caa9ec314d1f@citrix.com>
-Date: Wed, 22 Nov 2023 09:54:31 +0000
+        bh=JwboJve+NnWYazpjvoy1l3Fmapvi/cNmoLbs/tPpc/k=;
+        b=AmlB5srDdbR429uWLSHZcLlc+T6JZADUVVVGTgx/uL5KNfRYyeOYNg/Kymic7s9qAf
+         2q56lrJA6uOAvmI1lLD01Phq+0zU6+MWWAUUD08PDJFuZ5ZG93aOWEmf6c7WTWJ/7xne
+         Wa75phUy4I+2TOS4bBkr8uYFKlP1Ybz8lZli1ps9CG5ebzqModn+2JMZj21fLFUYrpMI
+         u6FaUwgvoAXwOdhzY2v+Tm/PrLuRrFNmQQu8walJIrNZkS10G6tK30M3bXmu+solWtAW
+         1qlSGtv/5JlaFPl8L6W1LWVm0wVp2XtY6IiUi2bS9JlRuct4L5njKIZrjI1wtY6kDX3r
+         iWfA==
+X-Gm-Message-State: AOJu0YypLB8HvYI+lX3HBsXKElY78h51tk64GLmywKcGSlmZ5O9A/0eN
+	sc7zQRcCZvFFPmPSgJ/ffGQVCA==
+X-Google-Smtp-Source: AGHT+IGi2r/wxjkAgrOwDmC8y7eBdt+JyMNxUIeJjoIZvO8oWuRhssivOsm5N9QLla85bel8+vNkvQ==
+X-Received: by 2002:a05:600c:4295:b0:408:3a67:f6f5 with SMTP id v21-20020a05600c429500b004083a67f6f5mr1420780wmc.18.1700647209820;
+        Wed, 22 Nov 2023 02:00:09 -0800 (PST)
+Message-ID: <95872c39-a375-4c0a-b22f-a0798634e86b@citrix.com>
+Date: Wed, 22 Nov 2023 10:00:09 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/5] x86/HVM: introduce hvm_point_entry()
+Subject: Re: [PATCH] stubdom: remove caml-stubdom
 Content-Language: en-GB
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <08e0708c-17e2-4a5e-aaf7-5f60a40f76db@suse.com>
- <9810305d-4b36-4e23-b807-a7a00f0ba6b6@suse.com>
- <8573291e-9c0b-4be0-a633-05906026c7b6@citrix.com>
- <2a0f2f07-5d4c-438c-a333-336288206a61@suse.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>
+References: <20231101160837.32241-1-jgross@suse.com>
+ <7b6658b4-cd36-4d52-991b-f4b94b6fb172@suse.com>
+ <b45d743e-2ed4-49a5-92d9-1811d7be0188@citrix.com>
+ <be27f207-47d5-4795-812b-4af82f734ba8@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
@@ -132,46 +131,38 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <2a0f2f07-5d4c-438c-a333-336288206a61@suse.com>
+In-Reply-To: <be27f207-47d5-4795-812b-4af82f734ba8@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 22/11/2023 9:34 am, Jan Beulich wrote:
-> On 21.11.2023 22:30, Andrew Cooper wrote:
->> On 16/11/2023 1:46 pm, Jan Beulich wrote:
->>> ... to accompany hvm_read_entry() when actual copying isn't desirable.
->>> This allows to remove open-coded stream accesses from hpet_load(),
->>> along with using the helper in hvm_load() itself.
+On 22/11/2023 7:20 am, Juergen Gross wrote:
+> On 21.11.23 22:14, Andrew Cooper wrote:
+>> On 20/11/2023 10:36 am, Juergen Gross wrote:
+>>> On 01.11.23 17:08, Juergen Gross wrote:
+>>>> In order to build caml-stubdom, it must be explicitly enabled via
+>>>> "configure --enable-caml-stubdom". The build process is failing due to
+>>>> stubdom/ocaml.patch failing to apply. Since the patched file has been
+>>>> modified in 2014 the last time, it seems nobody cares for caml-stubdom
+>>>> since at least then.
+>>>>
+>>>> Remove caml-stubdom from the build system.
+>>>>
+>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
 >>>
->>> Since arch_hvm_load()'s declaration would need changing, and since the
->>> function is not used from elsewhere, purge the declaration. With that it
->>> makes little sense to keep arch_hvm_save()'s around; convert that
->>> function to static then at the same time.
->>>
->>> In hpet_load() simplify the specific case of error return that's in
->>> context anyway: There's no need to hold the lock when only updating a
->>> local variable.
->>>
->>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Thanks.
+>>> Any comments?
+>>
+>> I'd say the tumbleweeds from the Ocaml folks says enough.
+>>
+>> Any chance you can resend with the Changelog adjustment, and with the
+>> option stripped out of ./configure ?  Might as well clean up everything
+>> as we go.
 >
->> I really do hate all of this logic and most of it wants to live in
->> userspace, but this an improvement.
->>
->> The only thing I'm a little concerned with is the name. 
->> hvm_read_entry() clearly consumes an entry, while hvm_point_entry()
->> does, but doesn't obviously convey this at a glance.
->>
->> Ideally I'd say that hvm_{get,copy}_entry() would be better nomeclature,
->> as both have at least a vague implication of unmarshalling and one
->> clearly is making a separate copy.
-> I'm fine renaming the new one to hvm_get_entry(). For the existing one,
-> "copy" may be marginally better than "read" / "load", but then it doesn't
-> indicate direction (i.e. somewhat collides with hvm_{write,load}_entry()).
-> So I'd want to leave those as they are.
+> I can do the Changelog adjustment, but I don't see what else could be
+> removed
+> from configure. The patch already _is_ removing the --enable-caml-stubdom
+> option from stubdom/configure.
 
-Ok, get/read/write make a reasonably-ok set of names.
+Oh, so it does.  I'd assumed it would be in the root ./configure.
 
 ~Andrew
 
