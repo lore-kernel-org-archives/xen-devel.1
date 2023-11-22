@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4167C61D9B
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Nov 2023 17:12:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.638949.995960 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC2F6C61D9B
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Nov 2023 17:37:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.638958.995971 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5qlU-0005U7-Dv; Wed, 22 Nov 2023 17:11:52 +0000
+	id 1r5r9Z-0004Fh-Fa; Wed, 22 Nov 2023 17:36:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 638949.995960; Wed, 22 Nov 2023 17:11:52 +0000
+Received: by outflank-mailman (output) from mailman id 638958.995971; Wed, 22 Nov 2023 17:36:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5qlU-0005U0-BS; Wed, 22 Nov 2023 17:11:52 +0000
-Received: by outflank-mailman (input) for mailman id 638949;
- Wed, 22 Nov 2023 17:11:50 +0000
+	id 1r5r9Z-0004Fa-CL; Wed, 22 Nov 2023 17:36:45 +0000
+Received: by outflank-mailman (input) for mailman id 638958;
+ Wed, 22 Nov 2023 17:36:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aeb/=HD=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
- id 1r5qlS-0005Tu-B5
- for xen-devel@lists.xenproject.org; Wed, 22 Nov 2023 17:11:50 +0000
+ <SRS0=f1AL=HD=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1r5r9Y-0004FU-Ud
+ for xen-devel@lists.xenproject.org; Wed, 22 Nov 2023 17:36:44 +0000
 Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
  [2a00:1450:4864:20::329])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 390bee8d-895a-11ee-98e1-6d05b1d4d9a1;
- Wed, 22 Nov 2023 18:11:49 +0100 (CET)
+ id b3b118a0-895d-11ee-98e1-6d05b1d4d9a1;
+ Wed, 22 Nov 2023 18:36:43 +0100 (CET)
 Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40b2ad4953cso6541055e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 22 Nov 2023 09:11:49 -0800 (PST)
-Received: from [10.95.134.92] (54-240-197-234.amazon.com. [54.240.197.234])
- by smtp.gmail.com with ESMTPSA id
- i16-20020a05600c355000b003fc0505be19sm44748wmq.37.2023.11.22.09.11.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Nov 2023 09:11:48 -0800 (PST)
+ 5b1f17b1804b1-40b344101f2so459885e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Nov 2023 09:36:43 -0800 (PST)
+Received: from EMEAENGAAD19049. (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ fk4-20020a05600c0cc400b004068495910csm130148wmb.23.2023.11.22.09.36.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Nov 2023 09:36:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,100 +47,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 390bee8d-895a-11ee-98e1-6d05b1d4d9a1
+X-Inumbo-ID: b3b118a0-895d-11ee-98e1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700673109; x=1701277909; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wD1Osv68moY2wmNYERX6SE0aq7IXfRHUNiLz0dpPw9w=;
-        b=gVuOsBd+LA2SLqEF3HAShijqCSdvJPtwVwjvRxvYkJgyrl3XEAGw5KvJlU486+h2rG
-         8op6fMz28nUZgAAV2lORZh305Z1nMMm8wqdhP2O4KBfMGzQc4+Xwgjy9Hp9fkBPkDjSz
-         /kPVxfQr8zAIaGcCSJiJ33WBGlOhdTguw9ZOs3ltXDJgVG/TH/YNYAQ8RIF+wklZhqKo
-         k5InTmRC5FnU4kXkBAUbCxkc+O8mEqG/fT/AJnHUWsKJPsyq73hxCigPYxX12IayRs6E
-         d1Kav+YTm43AQLecJm5Cdn3Q/4lCa9WJ7v2/+ixs+hrK2Hh9GcXrsMOS1DIY4m5ATk1X
-         l2PQ==
+        d=cloud.com; s=cloud; t=1700674603; x=1701279403; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=qdaaiWiaeEeZMUMcYPxtcc3iXmAuzpoGBdoaGAL9Y6Y=;
+        b=lk+ARGzUljosHRSLQyx9A1JUmw4/1RLyK+xTerCHyQ1GuoxxDmAENpdyQwcpVDENc0
+         q/PzW+ePCUS9tcK0r4d3NF7VB4gvrmA7ZF1U1uYa7O94kD8GAqrBVxu2Wlazguzk3Nlz
+         tGYopevbY0a9KNHucVHQKEN9ZNsxy6Gqi/WL4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700673109; x=1701277909;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1700674603; x=1701279403;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wD1Osv68moY2wmNYERX6SE0aq7IXfRHUNiLz0dpPw9w=;
-        b=Lq4jf3hy5e1WW6V0qsq/OxFn6/wr+8sC2H9sn/KaLy0q20ynTJKPyQWJIMFueCJmvH
-         /BhDrgrR3FSjYZ3mwFcacrDJpUaLZzYDD9H96fMs66ZSgi9FPPM4WGhELvms1q5DQQTn
-         QxLUuPT5qhDVUdyuhU4o7KSp/IMRNrZ1gdmu+jl+T7vxiepSO6HY5MbB8QcQoBw3cT+6
-         L8gKqNY4NYTKKJ892UcJ5MQgk7tXJKpFC71PwdfhcQzIaI8Q/SprUn+8A9INgDxgprMA
-         RH21wGax1Kds5niUKb6EE5C4qsresDIyBlKb78/Az4/1hD9fPiShx2EeVmsa91r+vmDp
-         Gj7A==
-X-Gm-Message-State: AOJu0Yw2Zmh9nUc7R+Z1eEZVkccg7gzAbo7QhxAoi7qnxcLVVFeW4TTa
-	qca4teMAHOHB9+jD/MQ398M=
-X-Google-Smtp-Source: AGHT+IHlFn1oy68B82kGrutJ1vBhDlOH4mto5RqdBz1ZBta1MhC8vRAp0CKHAUcgl2mg05DpKVubbA==
-X-Received: by 2002:a05:600c:1c9f:b0:40b:2a08:c45e with SMTP id k31-20020a05600c1c9f00b0040b2a08c45emr104751wms.3.1700673108689;
-        Wed, 22 Nov 2023 09:11:48 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <b04daedc-ba6a-4109-8e23-fbcd023bcfec@xen.org>
-Date: Wed, 22 Nov 2023 17:11:47 +0000
+        bh=qdaaiWiaeEeZMUMcYPxtcc3iXmAuzpoGBdoaGAL9Y6Y=;
+        b=peD9TdO88RHe01VFsyj2A7lVbs52qrAGJqmHAP6mQa2h/+90+2MDOsIGYxR00N6ngu
+         /ZyiFwedspPtJYGVLBEiQ5u9oLT9ruysHUPcLEp14CTaIe10y+MC+NnfF//w/GB1oUeq
+         gjyMTfZwWvLdjyg96D1LbosmaHvZKDytUJvnL7M7NMbl9b+/4Hx5qtIGDmd4U8l3UcF3
+         KUPEQq95wLrZ+5gxuskV3UefzqdmNXBxM0WoX2vq5xAHKyxcKlk/kUcaN9zAdzFf3xYN
+         9I1t3b1p/jS07+vDc+zZRE1YgxD3n40hskYvTRN9/QB7MIreXjQXFbKNX1B2z7qN4jZ8
+         QmGw==
+X-Gm-Message-State: AOJu0Yz4fzaf1BBHcb3QSE8CTk6dH5SiujzILHMM+xG1w+z2FXBswv2e
+	hnzrsy6B7M4uQBDGurRpy1qoyZ633DnwezP6GUk=
+X-Google-Smtp-Source: AGHT+IGx/rLKU1wJk4wNRfuLPdtPCTgHgCYzKKnuwORqkDqH6NsXMoUTuZrpim8VN83S1iIgbJFi3A==
+X-Received: by 2002:a05:600c:45d2:b0:405:19dd:ad82 with SMTP id s18-20020a05600c45d200b0040519ddad82mr144244wmo.16.1700674602710;
+        Wed, 22 Nov 2023 09:36:42 -0800 (PST)
+Message-ID: <655e3c2a.050a0220.eedc6.0b67@mx.google.com>
+X-Google-Original-Message-ID: <ZV48JyxD06zs9CfV@EMEAENGAAD19049.>
+Date: Wed, 22 Nov 2023 17:36:39 +0000
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v3] xen/x86: On x2APIC mode, derive LDR from APIC ID
+References: <20231122160817.15266-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: paul@xen.org
-Subject: Re: [PATCH v2 4/6] xen_pvdev: Do not assume Dom0 when creating a
- directory
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: David Woodhouse <dwmw@amazon.co.uk>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
-References: <20231121221023.419901-1-volodymyr_babchuk@epam.com>
- <20231121221023.419901-5-volodymyr_babchuk@epam.com>
-Organization: Xen Project
-In-Reply-To: <20231121221023.419901-5-volodymyr_babchuk@epam.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231122160817.15266-1-alejandro.vallejo@cloud.com>
 
-On 21/11/2023 22:10, Volodymyr Babchuk wrote:
-> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+On Wed, Nov 22, 2023 at 04:08:17PM +0000, Alejandro Vallejo wrote:
+> Both Intel and AMD manuals agree that on x2APIC mode, the APIC LDR and ID
+> registers are derivable from each other through a fixed formula.
 > 
-> Instead of forcing the owner to domid 0, use XS_PRESERVE_OWNER to
-> inherit the owner of the directory.
-
-Ah... so that's why the previous patch is there.
-
-This is not the right way to fix it. The QEMU Xen support is *assuming* 
-that QEMU is either running in, or emulating, dom0. In the emulation 
-case this is probably fine, but the 'real Xen' case it should be using 
-the correct domid for node creation. I guess this could either be 
-supplied on the command line or discerned by reading the local domain 
-'domid' node.
-
+> Xen uses that formula, but applies it to vCPU IDs (which are sequential)
+> rather than x2APIC IDs (which are not, at the moment). As I understand it,
+> this is an attempt to tightly pack vCPUs into clusters so each cluster has
+> 16 vCPUs rather than 8, but this is problematic for OSs that might read the
+> x2APIC ID and internally derive LDR (or the other way around)
 > 
-> Note that for other than Dom0 domain (non toolstack domain) the
-> "driver_domain" property should be set in domain config file for the
-> toolstack to create required directories in advance.
+> This patch fixes the implementation so we follow the rules in the x2APIC
+> spec(s) and covers migrations from broken hypervisors, so LDRs are
+> preserved even for hotppluggable CPUs and across APIC resets.
 > 
-> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> While touching that area, I removed the existing printk statement in
+> vlapic_load_fixup() (as the checks it performed didn't make sense in x2APIC
+> mode and wouldn't affect the outcome) and put another printk as an else
+> branch so we get warnings trying to load nonsensical LDR values we don't
+> know about.
+> 
+> Fixes: f9e0cccf7b35 ("x86/HVM: fix ID handling of x2APIC emulation")
+> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 > ---
->   hw/xen/xen_pvdev.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
+> v3:
+>   * Removed underscores from (x2)APIC_ID in commit message
+>   * Added commit msg explaining the removal of the vlapic_load_fixup() printk
+>   * Restored lowercase to hex "F"s
+>   * Refactored a bit vlapic_load_fixup() so it has a trailing printk in
+>     case of spotting a nonsensical LDR it doesn't understand.
+>   * Moved field in domain.h with the other booleans
+>   * Trimmed down field name in domain.h
+>   * Trimmed down field comment in domain.h
 > 
-> diff --git a/hw/xen/xen_pvdev.c b/hw/xen/xen_pvdev.c
-> index c5ad71e8dc..42bdd4f6c8 100644
-> --- a/hw/xen/xen_pvdev.c
-> +++ b/hw/xen/xen_pvdev.c
-> @@ -60,7 +60,8 @@ void xen_config_cleanup(void)
->   
->   int xenstore_mkdir(char *path, int p)
->   {
-> -    if (!qemu_xen_xs_create(xenstore, 0, 0, xen_domid, p, path)) {
-> +    if (!qemu_xen_xs_create(xenstore, 0, XS_PRESERVE_OWNER,
-> +                            xen_domid, p, path)) {
->           xen_pv_printf(NULL, 0, "xs_mkdir %s: failed\n", path);
->           return -1;
->       }
+> If the field name in domain.h still seems too long I'm happy for it to be
+> trimmed further down, but I do want to preserve the "_bug_" part of it.
+I sent this one before Roger had a chance to reply to my reply on v2, which was...
 
+> 
+> OK, if you think mentioning `bug` is helpful, I think it would be best
+> placed as a prefix: bug_x2apic_ldr_vcpu_id.  Having it in the middle
+> of the field name makes it harder to spot.
+> 
+> Thanks, Roger.
+... and I'm fine with that adjustment here.
+
+Cheers,
+Alejandro
 
