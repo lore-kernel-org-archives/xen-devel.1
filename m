@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F7BEC61D97
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Nov 2023 23:03:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.639275.996413 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99281C61D97
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Nov 2023 23:04:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.639279.996422 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5wFZ-0004lk-Fl; Wed, 22 Nov 2023 23:03:17 +0000
+	id 1r5wGW-0005RY-TD; Wed, 22 Nov 2023 23:04:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 639275.996413; Wed, 22 Nov 2023 23:03:17 +0000
+Received: by outflank-mailman (output) from mailman id 639279.996422; Wed, 22 Nov 2023 23:04:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r5wFZ-0004ld-Cw; Wed, 22 Nov 2023 23:03:17 +0000
-Received: by outflank-mailman (input) for mailman id 639275;
- Wed, 22 Nov 2023 23:03:15 +0000
+	id 1r5wGW-0005RP-Qk; Wed, 22 Nov 2023 23:04:16 +0000
+Received: by outflank-mailman (input) for mailman id 639279;
+ Wed, 22 Nov 2023 23:04:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=u3EM=HD=casper.srs.infradead.org=BATV+90b6cdb086a81a73aad6+7395+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1r5wFX-0004lX-RM
- for xen-devel@lists.xenproject.org; Wed, 22 Nov 2023 23:03:15 +0000
+ id 1r5wGV-0005R8-LX
+ for xen-devel@lists.xenproject.org; Wed, 22 Nov 2023 23:04:15 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 50dc8993-898b-11ee-98e1-6d05b1d4d9a1;
- Thu, 23 Nov 2023 00:03:14 +0100 (CET)
+ id 749d76b4-898b-11ee-98e1-6d05b1d4d9a1;
+ Thu, 23 Nov 2023 00:04:14 +0100 (CET)
 Received: from [2001:8b0:10b:5:aa35:270f:6b3d:6d64]
  (helo=u3832b3a9db3152.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r5wFV-006vJM-JS; Wed, 22 Nov 2023 23:03:13 +0000
+ id 1r5wGT-006vLJ-EH; Wed, 22 Nov 2023 23:04:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,70 +43,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50dc8993-898b-11ee-98e1-6d05b1d4d9a1
+X-Inumbo-ID: 749d76b4-898b-11ee-98e1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=5WIpXF2aHggxMYj8LQLOVyFmY+jwiEqoc/pAchYsU3g=; b=qqvWhNsRJHAZTCozPXzVDH650u
-	n7KC1x5NZwThvF7fgT10DdF2Az4HM9qGzoJczXsPbKct/povlJipDoh5OXTgv3xZKFKyNoTpNXhi8
-	LpgF+fTWEf1bBU8IP6jnvzDDoqGhjyequhqp/XiJftTYkDHA0UfWe/hl37tbrNA589luPFmGoinij
-	++rU7ZAdR8RAVBGNZLdT7FYOl8zndIiEGkikRD7//k1ZNtmV2DDVEaMrRzg15BtNX882/QMnSEzAd
-	/Il8L5eOiQ2fWxAAWj5RfTOOQi5MO1O7F3/uZDVJiYwbJo0TlDmTCe+esicPTuSJWuZlqhd3IZGW4
-	sO2m33jw==;
-Message-ID: <ce719f35e72a9387fc04af098e6d688f9bbdca4e.camel@infradead.org>
-Subject: Re: [PATCH v2 4/6] xen_pvdev: Do not assume Dom0 when creating a
- directory
+	bh=cWlNBEZuUOwNyxaNA4RsifPBZBH2WUyoII676qWcvuw=; b=sAr7VxAOlc+yi6pUViPxiVfDjA
+	lwFlbC/T/320HBvZTVzCcRTXrfOYvctH23KP+B5BPrpsR9wO4/el9qn5LtzXNw3hBXoC1iIPFaIil
+	GOEaRt5kALOUawBx5Uaptw+yKxB3h4hIU/Dvn9jahWNdOxOThk13RlAvxeM6cHrtPJIOxpA6A3nfA
+	hitRkdfg4it4h+IBP+2KttEC0ZLJqBTRjB8t7YolOmAvNItk6W2o3spT2VvyC6TFyD+YRTLmBZVlP
+	KoqRTU1Cb/b2ESaiZvgESeTUOPKiVaP6BT5+LPk5yYN5PsoyFiO1E8Y2pIxKbEtv/ssEmSUY31y2Q
+	HTT8TwdA==;
+Message-ID: <67e06eae161072e05f4b0990dbde1da869241670.camel@infradead.org>
+Subject: Re: [PATCH v2 1/6] hw/xen: Set XenBackendInstance in the XenDevice
+ before realizing it
 From: David Woodhouse <dwmw2@infradead.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, paul@xen.org
-Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, Julien Grall <julien@xen.org>, Oleksandr
- Tyshchenko <Oleksandr_Tyshchenko@epam.com>, Anthony Perard
- <anthony.perard@citrix.com>,  "open list:X86 Xen CPUs"
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, "paul@xen.org"
+	 <paul@xen.org>
+Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Anthony Perard
+ <anthony.perard@citrix.com>, Kevin Wolf <kwolf@redhat.com>, Hanna Reitz
+ <hreitz@redhat.com>, =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau
+ <marcandre.lureau@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Jason
+ Wang <jasowang@redhat.com>, "open list:Block layer core"
+ <qemu-block@nongnu.org>,  "xen-devel@lists.xenproject.org"
  <xen-devel@lists.xenproject.org>
-Date: Wed, 22 Nov 2023 23:03:13 +0000
-In-Reply-To: <alpine.DEB.2.22.394.2311221428570.2053963@ubuntu-linux-20-04-desktop>
+Date: Wed, 22 Nov 2023 23:04:12 +0000
+In-Reply-To: <878r6p1jp2.fsf@epam.com>
 References: <20231121221023.419901-1-volodymyr_babchuk@epam.com>
-	 <20231121221023.419901-5-volodymyr_babchuk@epam.com>
-	 <b04daedc-ba6a-4109-8e23-fbcd023bcfec@xen.org>
-	 <alpine.DEB.2.22.394.2311221428570.2053963@ubuntu-linux-20-04-desktop>
+	 <20231121221023.419901-2-volodymyr_babchuk@epam.com>
+	 <e1663064-247d-41e3-9a36-16f81303fb94@xen.org> <878r6p1jp2.fsf@epam.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-jrDz7aFPr2R2FDdbziWA"
+	boundary="=-xoeWM6RJaxUfxqijXzdk"
 User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 
---=-jrDz7aFPr2R2FDdbziWA
+--=-xoeWM6RJaxUfxqijXzdk
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2023-11-22 at 14:29 -0800, Stefano Stabellini wrote:
-> On Wed, 22 Nov 2023, Paul Durrant wrote:
-> > On 21/11/2023 22:10, Volodymyr Babchuk wrote:
-> > > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> > >=20
-> > > Instead of forcing the owner to domid 0, use XS_PRESERVE_OWNER to
-> > > inherit the owner of the directory.
-> >=20
-> > Ah... so that's why the previous patch is there.
-> >=20
-> > This is not the right way to fix it. The QEMU Xen support is *assuming*=
- that
-> > QEMU is either running in, or emulating, dom0. In the emulation case th=
-is is
-> > probably fine, but the 'real Xen' case it should be using the correct d=
-omid
-> > for node creation. I guess this could either be supplied on the command=
- line
-> > or discerned by reading the local domain 'domid' node.
+On Wed, 2023-11-22 at 22:56 +0000, Volodymyr Babchuk wrote:
 >=20
-> yes, it should be passed as command line option to QEMU
+>=20
+> Paul Durrant <xadimgnik@gmail.com> writes:
+>=20
+> > On 21/11/2023 22:10, Volodymyr Babchuk wrote:
+> > > From: David Woodhouse <dwmw@amazon.co.uk>
+> > > This allows a XenDevice implementation to know whether it was
+> > > created
+> > > by QEMU, or merely discovered in XenStore after the toolstack created
+> > > it. This will allow us to create frontend/backend nodes only when we
+> > > should, rather than unconditionally attempting to overwrite them from
+> > > a driver domain which doesn't have privileges to do so.
+> > > As an added benefit, it also means we no longer have to call the
+> > > xen_backend_set_device() function from the device models immediately
+> > > after calling qdev_realize_and_unref(). Even though we could make
+> > > the argument that it's safe to do so, and the pointer to the unreffed
+> > > device *will* actually still be valid, it still made my skin itch to
+> > > look at it.
+> > > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+> > > ---
+> > > =C2=A0 hw/block/xen-block.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 | 3 +--
+> > > =C2=A0 hw/char/xen_console.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 | 2 +-
+> > > =C2=A0 hw/net/xen_nic.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +-
+> > > =C2=A0 hw/xen/xen-bus.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 4 ++++
+> > > =C2=A0 include/hw/xen/xen-backend.h | 2 --
+> > > =C2=A0 include/hw/xen/xen-bus.h=C2=A0=C2=A0=C2=A0=C2=A0 | 2 ++
+> > > =C2=A0 6 files changed, 9 insertions(+), 6 deletions(-)
+> > >=20
+> >=20
+> > Actually, I think you should probably update
+> > xen_backend_try_device_destroy() in this patch too. It currently uses
+> > xen_backend_list_find() to check whether the specified XenDevice has
+> > an associated XenBackendInstance.
+>=20
+> Sure. Looks like it is the only user of xen_backend_list_find(), so we
+> can get rid of it as well.
+>=20
+> I'll drop your R-b tag, because of those additional changes in the new
+> version.
 
-I'm not sure I like the idea of a command line option for something
-which QEMU could discover for itself.
+I think it's fine to keep. He told me to do it :)
 
---=-jrDz7aFPr2R2FDdbziWA
+--=-xoeWM6RJaxUfxqijXzdk
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -198,25 +223,25 @@ IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
 dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
 NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
 xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
-DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMxMTIyMjMwMzEzWjAvBgkqhkiG9w0BCQQxIgQgt/yqhZVc
-fGifBA0bmmct8wyab7gevtmf+PfOzmcf4Nswgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
+DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMxMTIyMjMwNDEyWjAvBgkqhkiG9w0BCQQxIgQglJ/aMyqB
+pIYY4moZe1gwGuUj6K3VXMO72YnsWjN9GLkwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
 BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
 A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
 dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
 DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
 MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
 Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
-lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgB2EvEsTm8Q2u8qc85TAFPWGE0mO1QKyccS
-D6iHNXqK97aEOFqryMFYtFGuAEjXJEd2uyouRnAvc+KHpjd01gKwko/EaWaAUID84kOuBBy5y1ms
-LG4BF2pvRruV+gICyG8Shu0I8UecYsDyRzxrDjVT+isWlF6ZTqj2mFVuUp0SdKHDS7mvo9qVwDB0
-KjH0MdgI35fCBU7w1G3TlopLvEACTLnqIHZi1DGn1hl+XFeDNC4B3mX3ZeBsiHoT75M2CtoW1/FS
-6OCWPqsXlNAhIamM0I4qnln/h0WD1zcwpOJOyidyLNb9Pc8RoyXcBfCtqyE3mdlrd9atnD0WNbMy
-PVakD30Ra8peRY6szywLqmLRAE1qBHW0jO2r05YrLTPMzqUhPGqTy1+HrjGPaslZyZarXb7cyc4S
-mBpImh6Z5I48iiJg5mRixros+Yy16aeHOTJ6LBrnKbgT/yA70PeFDXw7n7DH3GhH+10YZgqYC5e6
-xBlbVgQiy6tgdJF186CukeaqsHRlQOauV8MitsurDOzunoKo6CH36sunRIXT5+QvcKcl5I/Vyl6p
-2SIszwNAKiMRTfzkY4220zBSq4GcRWcUJ8dhtK9B72SIrinTZepEwpKVyFxRfJS5jgwzqp6yiJE9
-8R8DJOwRpJDl0SEhisO3LwqyOdv3GirLlg3hBcGG/QAAAAAAAA==
+lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgCfaReQKcyJssKvpxMs33WFPChnqgED2TF9
+NH/aOczm/3KWT5ZFLE0NZcAsqtBuKmIu3E+96b5YFSSY0jYEOt6zfcF+9solsjFRtOzMnFhRAL1K
+AqEWJo41Jdc2SsgX6v0d7f9vZNWbCoO49JIC8V0KtdC/mRN+1LxGstuMO7/LnkEAwFlCli5d5cww
+HZeoN/cUIp8AGly1o66htitQQ8Lg17LLZ0rnyOlgNJGzJkyRRzu24TR2i8XkDipPBg5VZ6EM/GIF
+r2ZYdNPfjr1NLVRXMwO0j6hxlbWo+/+WPK+HKgp/prHj2WZ/lGLBAhXVQ0/Jgs4/Lfqcfi3+YXvF
+rG/QVknW6izEwnFYzmgpxlzEv/UKrTOfVSUeOj+cMscozp7jP7QqIwN9nDea6l6HbAYDqCej13nA
+r7K7dTDgLWCXMq46B0cyyBRSypUAUHXtHdqtNBqOufdtp8cIIXeNzoiIsmXySbBpvd/v/uNCvWyD
+jf7wd7MSGPeJ8vbRK6enpp6TTWreaEdDqaAAa5iZQkNN1yB3vUPkuxjnKFpEZEIIqz2iL7nRTud/
+tXYIAWVDDU6wiNjFrvz5d/PSv9wmfhPVpoizkgKuYSEcX3EabsEkGvr+Gq8xVIK+DYl+x5swhzc2
+mS5SlkGoBWRuz+zojwXDRax/+HzwTfsYtiCa+tnuzwAAAAAAAA==
 
 
---=-jrDz7aFPr2R2FDdbziWA--
+--=-xoeWM6RJaxUfxqijXzdk--
 
