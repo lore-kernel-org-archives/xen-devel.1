@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C16C5AD4C
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Nov 2023 11:08:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.639612.997140 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63BFCC5AD4C
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Nov 2023 11:24:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.639618.997169 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r67ZN-0002NC-7m; Thu, 23 Nov 2023 11:08:29 +0000
+	id 1r67oH-0001TL-Uz; Thu, 23 Nov 2023 11:23:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 639612.997140; Thu, 23 Nov 2023 11:08:29 +0000
+Received: by outflank-mailman (output) from mailman id 639618.997169; Thu, 23 Nov 2023 11:23:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r67ZN-0002N5-3T; Thu, 23 Nov 2023 11:08:29 +0000
-Received: by outflank-mailman (input) for mailman id 639612;
- Thu, 23 Nov 2023 11:08:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r67oH-0001TC-SI; Thu, 23 Nov 2023 11:23:53 +0000
+Received: by outflank-mailman (input) for mailman id 639618;
+ Thu, 23 Nov 2023 11:23:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fVVO=HE=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1r67ZL-0002Mr-CN
- for xen-devel@lists.xenproject.org; Thu, 23 Nov 2023 11:08:27 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9f4a7067-89f0-11ee-9b0e-b553b5be7939;
- Thu, 23 Nov 2023 12:08:25 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4094301d505so4441275e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 23 Nov 2023 03:08:25 -0800 (PST)
-Received: from [10.80.67.30] (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- r15-20020a05600c35cf00b0040a5e69482esm2293456wmq.11.2023.11.23.03.08.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Nov 2023 03:08:24 -0800 (PST)
+ <SRS0=RRmN=HE=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1r67oG-000197-9l
+ for xen-devel@lists.xenproject.org; Thu, 23 Nov 2023 11:23:52 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c70a7c2c-89f2-11ee-98e2-6d05b1d4d9a1;
+ Thu, 23 Nov 2023 12:23:51 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40907b82ab9so10358825e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Nov 2023 03:23:51 -0800 (PST)
+Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
+ o7-20020a05600c510700b0040b36ad5413sm1517433wms.46.2023.11.23.03.23.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Nov 2023 03:23:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,131 +46,299 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9f4a7067-89f0-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: c70a7c2c-89f2-11ee-98e2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1700737705; x=1701342505; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=1DN382QkUJ69D2CQoBtu2915ppA7PpRypiKZPj/jJy8=;
-        b=m0lfvhn/joGtCf0QlE6Ws1ZT+w+vAGVs0BzPdnStCLeoOlgmG0LXP1o3KqccUYpc5g
-         alkFyxxBtHY+iFUn1G2Y99bic3n1mxvqYe4NRbh7Cd2ohJKPg4VXKFVBxYge2+y3w+m/
-         w8TWHpOfmXUvHQW9dR8/xQi1WDQUQ4pB+61u4=
+        d=citrix.com; s=google; t=1700738630; x=1701343430; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xiZONnswDwKe9ci9BXT6f1Pl5k4kKA0IcogCCNF7rGo=;
+        b=soL4yu/rlcOvZTdj0068957+rwV79PvhfYL4lje7cm6yjpq8WZmsx1M3WcRBJjO0qp
+         4vArxTkw7EIZ8d0+K+GJsi547Y7EtrumvH5zZSoVOa/oRlKaE3banPzEbnmewWkDAcGW
+         lqDWZzvtuOoeNp2saQSX0Bx57ddsNPvfrpgeo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700737705; x=1701342505;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=1DN382QkUJ69D2CQoBtu2915ppA7PpRypiKZPj/jJy8=;
-        b=m92NusJp6McTqDzlDEv/rBDv76zJQgwBgaJUS/oR74zfB1x9X293pK5nrzgUDufli9
-         134Ecmdv37qlJ5FRKuXcZWVrQVuvnjxerkTE825Whyq8qQ3wP9eKUhlfElG3cXaz5o9z
-         HHSFEPfS3q7zPcjZBHSSu63Bj9eJocGjIySvd/7enHPDy0jQlJ4MIcK0FV5TahADTt+Y
-         vYuHFN1ZCeKgtw8Z6R669eLuVEmKsQDlvEL37ZMghSOjFHCvB5rLqCwbp+9+W2ROzX3C
-         XZolkLi96W726rbITBW+F2o/jfLjM8DcK+2AfnUv30sPJK6vGrCavuDKS/Kzyi07CIL6
-         IauQ==
-X-Gm-Message-State: AOJu0Ywgbe0cZWoktxKWocWVaPPZIYyfRSpOsBMM+WhsRMOOhTIQbsSx
-	oxGxKTnklcMlPtM9AbLMoLpDgQ==
-X-Google-Smtp-Source: AGHT+IEqQv8namtQV/MQ6znq+Ief48oKRKuMymOwFN4Eo6YIoT0WF5It96xxV3Baq8oMXKLYx8BLAQ==
-X-Received: by 2002:a05:600c:3144:b0:404:72fe:ed5c with SMTP id h4-20020a05600c314400b0040472feed5cmr3971790wmo.29.1700737704826;
-        Thu, 23 Nov 2023 03:08:24 -0800 (PST)
-Message-ID: <47ee1d58-0862-4e9b-9177-a213615864d6@citrix.com>
-Date: Thu, 23 Nov 2023 11:08:24 +0000
+        d=1e100.net; s=20230601; t=1700738630; x=1701343430;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xiZONnswDwKe9ci9BXT6f1Pl5k4kKA0IcogCCNF7rGo=;
+        b=oqPbLshXr4JUWeR0Z4Y6lNmyBM8EhjDyKKhGF+nXvIP7Y/wdaQKB3tIEO+nbr+hWCE
+         1smW4lu6ZC8EtAs6VfcMGh9EitjPfFI0Q4UarRE0Hb/dV818/lgrKrJsVFGwbPJi5abg
+         0YVTSGJwLQrS65ODaQvWtJQgTkJG0jcn0qPOQIh3xy18aunmcF0aUwqU6dPeAZUb58OX
+         kQfrcfms8Ca0hUm7yRoJKBnpRxQThMd5w+yAhpTvVmOlmV/tSJrGGaCnT8Hi/3Q3orvM
+         fWy6fqS2aNnKiRvP4XoDDfD5QybmLweNI5XmEyelyvTZY8cFbxeddYUyvU10y/5Mr2gf
+         Z3+g==
+X-Gm-Message-State: AOJu0YzhljbV5QRkHUx2HVNGXSvKjfIrpwINvoGXgNuQhLUhTPHahk4H
+	HISc4H6RUfRtk6wEPNLzFrZW40JKTHvzNhSBg5c=
+X-Google-Smtp-Source: AGHT+IFg873uNCV2N+OzyDtfqrX8jTH0uhH3pweuWtn+iHtjCvPG+B22v0Vg2pBvxYLDPTBOIH4c0Q==
+X-Received: by 2002:a05:600c:5124:b0:40b:2ad8:579f with SMTP id o36-20020a05600c512400b0040b2ad8579fmr2060739wms.3.1700738629858;
+        Thu, 23 Nov 2023 03:23:49 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: [PATCH 2/3] livepatch: add a dummy hypercall for testing purposes
+Date: Thu, 23 Nov 2023 12:23:37 +0100
+Message-ID: <20231123112338.14477-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231123112338.14477-1-roger.pau@citrix.com>
+References: <20231123112338.14477-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/HVM: limit upcall vector related verbosity
-Content-Language: en-GB
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>
-References: <8efe0fed-8533-474c-9893-e6fcb38b93ca@suse.com>
- <ZV8tueH53FROk86e@macbook> <f52395ef-5995-46fa-8dc2-6b49b3d79ccc@suse.com>
- <ZV8xAJjVH5hxz9VV@macbook>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <ZV8xAJjVH5hxz9VV@macbook>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 23/11/2023 11:01 am, Roger Pau Monné wrote:
-> On Thu, Nov 23, 2023 at 11:50:41AM +0100, Jan Beulich wrote:
->> On 23.11.2023 11:47, Roger Pau Monné wrote:
->>> On Thu, Nov 23, 2023 at 11:25:34AM +0100, Jan Beulich wrote:
->>>> Avoid logging all-identical messages for every vCPU, but make sure to
->>>> log unusual events like the vector differing from vCPU 0's (note that
->>>> the respective condition also makes sure vCPU 0 itself will have the
->>>> vector setting logged), or it changing after it was once set. (Arguably
->>>> a downside is that some vCPU not having its vector set would no longer
->>>> be recognizable from the logs. But I think that's tolerable as
->>>> sufficiently unlikely outside of people actively fiddling with related
->>>> code.)
->>> Maybe we could consider printing unconditionally for debug builds?
->> Indeed I was considering that, but it's primarily debug builds where the
->> unnecessary redundancy is annoying me. (After all I work with debug builds
->> much more than with release ones.)
-> I did find the message useful when doing guest bringup in the past, in
-> order to know the guest was correctly setting up the vector callbacks.
->
-> I guess there are other ways to figure that out, or the message could
-> be added when people is doing bringup themselves.
->
-> I find the save/restore messages during domain create much more
-> unhelpful and annoying that this.
+Introduce a dummy XEN_SYSCTL_LIVEPATCH_TEST hypercall to be used in order to
+test livepatch functionality.  The hypercall fills a value in the passed
+structure, which is returned to the caller.
 
-+1  I delete them in every debugging branch...
+The xen-livepatch utility is expanded to allow calling that hypercall, and
+printing the returned value on stdout.
 
-As to this message, we ought to do something.
+Finally, add dummy patch that changes the returned value of the hypercall from
+1 to 2.  Such patch can be used with livepatch-build-tools in order to generate
+a livepatch payload, that when applied to the hypervisor change the printed
+value of `xen-livepatch test`.
 
-However, the reason it's on every vCPU is because on Windows, there's no
-ability to request the same vector on every CPU, and it often does end
-up slightly different.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+The whole logic is very simple now.  I think it's enough to have a skeleton we
+can later expand.
 
-I think the logic added is fine, although it could do with a small
-comment explaining why.  Debugging of weird bugs by dmesg isn't helpful
-anyway - things like "did it have a vector upcall" should be answered by
-tools in dom0.
+Unsure whether we should do some kind of test (with `patch -F0`) that the patch
+still applies cleanly as part of Xen build.
+---
+ tools/include/xenctrl.h                |  3 +++
+ tools/libs/ctrl/xc_misc.c              | 14 ++++++++++++++
+ tools/misc/xen-livepatch.c             | 25 +++++++++++++++++++++++++
+ xen/common/Makefile                    |  2 +-
+ xen/common/livepatch-test.c            | 20 ++++++++++++++++++++
+ xen/common/livepatch.c                 |  4 ++++
+ xen/include/public/sysctl.h            |  7 +++++++
+ xen/include/xen/livepatch.h            |  4 ++++
+ xen/test/livepatch/patches/test1.patch | 13 +++++++++++++
+ 9 files changed, 91 insertions(+), 1 deletion(-)
+ create mode 100644 xen/common/livepatch-test.c
+ create mode 100644 xen/test/livepatch/patches/test1.patch
 
-~Andrew
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 2ef8b4e05422..83a00d4974dd 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -2645,6 +2645,9 @@ int xc_livepatch_revert(xc_interface *xch, char *name, uint32_t timeout, uint32_
+ int xc_livepatch_unload(xc_interface *xch, char *name, uint32_t timeout, uint32_t flags);
+ int xc_livepatch_replace(xc_interface *xch, char *name, uint32_t timeout, uint32_t flags);
+ 
++/* Dummy hypercall to test livepatch functionality. */
++int xc_livepatch_test(xc_interface *xch, uint32_t *result);
++
+ /*
+  * Ensure cache coherency after memory modifications. A call to this function
+  * is only required on ARM as the x86 architecture provides cache coherency
+diff --git a/tools/libs/ctrl/xc_misc.c b/tools/libs/ctrl/xc_misc.c
+index 5ecdfa2c7934..0ca86a53d097 100644
+--- a/tools/libs/ctrl/xc_misc.c
++++ b/tools/libs/ctrl/xc_misc.c
+@@ -1021,6 +1021,20 @@ int xc_livepatch_replace(xc_interface *xch, char *name, uint32_t timeout, uint32
+     return _xc_livepatch_action(xch, name, LIVEPATCH_ACTION_REPLACE, timeout, flags);
+ }
+ 
++int xc_livepatch_test(xc_interface *xch, uint32_t *result)
++{
++    struct xen_sysctl sysctl = {
++        .cmd = XEN_SYSCTL_livepatch_op,
++        .u.livepatch.cmd = XEN_SYSCTL_LIVEPATCH_TEST,
++    };
++    int rc = do_sysctl(xch, &sysctl);
++
++    if ( !rc )
++        *result = sysctl.u.livepatch.u.test.result;
++
++    return rc;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/tools/misc/xen-livepatch.c b/tools/misc/xen-livepatch.c
+index 5bf9d9a32b65..5f6fd20d8814 100644
+--- a/tools/misc/xen-livepatch.c
++++ b/tools/misc/xen-livepatch.c
+@@ -37,6 +37,7 @@ void show_help(void)
+             "  replace <name>         apply <name> patch and revert all others.\n"
+             "  unload <name>          unload name <name> patch.\n"
+             "  load <file> [flags]    upload and apply <file> with name as the <file> name\n"
++            "  test                   print the result of the test hypercall (for testing purposes only)\n"
+             "    Supported flags:\n"
+             "      --nodeps           Disable inter-module buildid dependency check.\n"
+             "                         Check only against hypervisor buildid.\n",
+@@ -542,6 +543,29 @@ error:
+     return rc;
+ }
+ 
++static int test_func(int argc, char *argv[])
++{
++    int rc;
++    uint32_t result = 0;
++
++    if ( argc != 0 )
++    {
++        show_help();
++        return -1;
++    }
++
++    rc = xc_livepatch_test(xch, &result);
++    if ( rc )
++    {
++        fprintf(stderr, "test operation failed: %s\n", strerror(errno));
++        return -1;
++    }
++
++    printf("%u\n", result);
++
++    return 0;
++}
++
+ /*
+  * These are also functions in action_options that are called in case
+  * none of the ones in main_options match.
+@@ -554,6 +578,7 @@ struct {
+     { "list", list_func },
+     { "upload", upload_func },
+     { "load", load_func },
++    { "test", test_func },
+ };
+ 
+ int main(int argc, char *argv[])
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 69d6aa626c7f..ab073d41f1d2 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -23,7 +23,7 @@ obj-y += kernel.o
+ obj-y += keyhandler.o
+ obj-$(CONFIG_KEXEC) += kexec.o
+ obj-$(CONFIG_KEXEC) += kimage.o
+-obj-$(CONFIG_LIVEPATCH) += livepatch.o livepatch_elf.o
++obj-$(CONFIG_LIVEPATCH) += livepatch.o livepatch_elf.o livepatch-test.o
+ obj-$(CONFIG_MEM_ACCESS) += mem_access.o
+ obj-y += memory.o
+ obj-y += multicall.o
+diff --git a/xen/common/livepatch-test.c b/xen/common/livepatch-test.c
+new file mode 100644
+index 000000000000..05b638b2ac67
+--- /dev/null
++++ b/xen/common/livepatch-test.c
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++
++/* Dummy file for testing livepatch functionality. */
++#include <xen/livepatch.h>
++
++int livepatch_test(struct xen_sysctl_livepatch_test *test)
++{
++    test->result = 1;
++    return 0;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index 1209fea2566c..e8894db1cc93 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -2116,6 +2116,10 @@ int livepatch_op(struct xen_sysctl_livepatch_op *livepatch)
+         rc = livepatch_action(&livepatch->u.action);
+         break;
+ 
++    case XEN_SYSCTL_LIVEPATCH_TEST:
++        rc = livepatch_test(&livepatch->u.test);
++        break;
++
+     default:
+         rc = -EOPNOTSUPP;
+         break;
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 9b19679caeb1..9c13a7fdb22c 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -1137,6 +1137,12 @@ struct xen_sysctl_livepatch_action {
+     uint32_t pad;                           /* IN: Always zero. */
+ };
+ 
++/* Dummy hypercall for testing live patches. */
++#define XEN_SYSCTL_LIVEPATCH_TEST 4
++struct xen_sysctl_livepatch_test {
++    uint32_t result;                        /* OUT: dummy result for testing. */
++};
++
+ struct xen_sysctl_livepatch_op {
+     uint32_t cmd;                           /* IN: XEN_SYSCTL_LIVEPATCH_*. */
+     uint32_t pad;                           /* IN: Always zero. */
+@@ -1145,6 +1151,7 @@ struct xen_sysctl_livepatch_op {
+         struct xen_sysctl_livepatch_list list;
+         struct xen_sysctl_livepatch_get get;
+         struct xen_sysctl_livepatch_action action;
++        struct xen_sysctl_livepatch_test test;
+     } u;
+ };
+ 
+diff --git a/xen/include/xen/livepatch.h b/xen/include/xen/livepatch.h
+index df339a134e40..60d11d037dfb 100644
+--- a/xen/include/xen/livepatch.h
++++ b/xen/include/xen/livepatch.h
+@@ -11,6 +11,8 @@ struct livepatch_elf_sec;
+ struct livepatch_elf_sym;
+ struct xen_sysctl_livepatch_op;
+ 
++#include <xen/types.h> /* For elfstructs.h */
++
+ #include <xen/elfstructs.h>
+ #include <xen/errno.h> /* For -ENOSYS or -EOVERFLOW */
+ 
+@@ -165,6 +167,8 @@ static inline void common_livepatch_revert(const struct livepatch_func *func,
+     arch_livepatch_revert(func, state);
+     state->applied = LIVEPATCH_FUNC_NOT_APPLIED;
+ }
++
++int livepatch_test(struct xen_sysctl_livepatch_test *test);
+ #else
+ 
+ /*
+diff --git a/xen/test/livepatch/patches/test1.patch b/xen/test/livepatch/patches/test1.patch
+new file mode 100644
+index 000000000000..c07d697cc8de
+--- /dev/null
++++ b/xen/test/livepatch/patches/test1.patch
+@@ -0,0 +1,13 @@
++diff --git a/xen/common/livepatch-test.c b/xen/common/livepatch-test.c
++index 05b638b2ac..876173ab6f 100644
++--- a/xen/common/livepatch-test.c
+++++ b/xen/common/livepatch-test.c
++@@ -5,7 +5,7 @@
++ 
++ int livepatch_test(struct xen_sysctl_livepatch_test *test)
++ {
++-    test->result = 1;
+++    test->result = 2;
++     return 0;
++ }
++ 
+-- 
+2.43.0
+
 
