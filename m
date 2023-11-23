@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E9DC5AD4C
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Nov 2023 07:37:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.639366.996651 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC39C5AD4C
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Nov 2023 07:38:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.639378.996691 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r64HE-0004gM-Or; Thu, 23 Nov 2023 07:37:32 +0000
+	id 1r64Hq-0006gr-Va; Thu, 23 Nov 2023 07:38:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 639366.996651; Thu, 23 Nov 2023 07:37:32 +0000
+Received: by outflank-mailman (output) from mailman id 639378.996691; Thu, 23 Nov 2023 07:38:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r64HE-0004gF-MI; Thu, 23 Nov 2023 07:37:32 +0000
-Received: by outflank-mailman (input) for mailman id 639366;
- Thu, 23 Nov 2023 07:37:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r64Hq-0006gk-RO; Thu, 23 Nov 2023 07:38:10 +0000
+Received: by outflank-mailman (input) for mailman id 639378;
+ Thu, 23 Nov 2023 07:38:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FfzT=HE=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1r64HD-0004g4-0N
- for xen-devel@lists.xenproject.org; Thu, 23 Nov 2023 07:37:31 +0000
+ id 1r64Hp-0004t9-FC
+ for xen-devel@lists.xenproject.org; Thu, 23 Nov 2023 07:38:09 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 275135b7-89d3-11ee-9b0e-b553b5be7939;
- Thu, 23 Nov 2023 08:37:28 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3f0c32bb-89d3-11ee-98e2-6d05b1d4d9a1;
+ Thu, 23 Nov 2023 08:38:08 +0100 (CET)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 404964EE073C;
- Thu, 23 Nov 2023 08:37:26 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id A73B14EE0C89;
+ Thu, 23 Nov 2023 08:38:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 275135b7-89d3-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 3f0c32bb-89d3-11ee-98e2-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -53,34 +53,44 @@ Cc: sstabellini@kernel.org,
 	jbeulich@suse.com,
 	andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v5 0/3] address violations of MISRA C:2012 Rule 10.1
-Date: Thu, 23 Nov 2023 08:37:15 +0100
-Message-Id: <cover.1700724350.git.nicola.vetrini@bugseng.com>
+	Paul Durrant <paul@xen.org>
+Subject: [XEN PATCH v3 2/2] xen/iommu: use ISOLATE_LSB to wrap a violation of Rule 10.1
+Date: Thu, 23 Nov 2023 08:37:55 +0100
+Message-Id: <864df3cff95b6dde17ebd7af6d814f79a0ab2044.1700724699.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1700724699.git.nicola.vetrini@bugseng.com>
+References: <cover.1700724699.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series contains the leftover patches from [1] with the rename
-s/ISOLATE_LOW_BIT/ISOLATE_LSB/ applied. All the already committed patches from
-the aforementioned series are dropped.
+No functional change.
 
-[1] https://marc.info/?l=xen-devel&m=169841347803987
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in v2:
+- Changed macro name
+Changes in v3:
+- Changed macro name
+---
+ xen/drivers/passthrough/iommu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Nicola Vetrini (3):
-  arm/bitops: encapsulate violation of MISRA C:2012 Rule 10.1
-  xen/pdx: amend definition of PDX_GROUP_COUNT
-  x86_64/mm: express macro CNT using ISOLATE_LSB
-
- xen/arch/arm/include/asm/bitops.h |  4 ++--
- xen/arch/x86/x86_64/mm.c          | 12 ++++++------
- xen/include/xen/pdx.h             |  2 +-
- 3 files changed, 9 insertions(+), 9 deletions(-)
-
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index f9a9f53dbd44..996c31be1284 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -560,7 +560,7 @@ int __init iommu_setup(void)
+         rc = iommu_hardware_setup();
+         if ( !rc )
+             ops = iommu_get_ops();
+-        if ( ops && (ops->page_sizes & -ops->page_sizes) != PAGE_SIZE )
++        if ( ops && (ISOLATE_LSB(ops->page_sizes)) != PAGE_SIZE )
+         {
+             printk(XENLOG_ERR "IOMMU: page size mask %lx unsupported\n",
+                    ops->page_sizes);
 -- 
 2.34.1
+
 
