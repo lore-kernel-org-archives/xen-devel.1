@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1C1C5AD4C
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Nov 2023 11:44:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.639663.997250 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC3C7C5AD4C
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Nov 2023 11:51:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.639671.997270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r687j-0004sR-KD; Thu, 23 Nov 2023 11:43:59 +0000
+	id 1r68F7-00084O-MH; Thu, 23 Nov 2023 11:51:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 639663.997250; Thu, 23 Nov 2023 11:43:59 +0000
+Received: by outflank-mailman (output) from mailman id 639671.997270; Thu, 23 Nov 2023 11:51:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r687j-0004sK-GZ; Thu, 23 Nov 2023 11:43:59 +0000
-Received: by outflank-mailman (input) for mailman id 639663;
- Thu, 23 Nov 2023 11:43:58 +0000
+	id 1r68F7-00084F-IW; Thu, 23 Nov 2023 11:51:37 +0000
+Received: by outflank-mailman (input) for mailman id 639671;
+ Thu, 23 Nov 2023 11:51:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fVVO=HE=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1r687i-0004rh-2n
- for xen-devel@lists.xenproject.org; Thu, 23 Nov 2023 11:43:58 +0000
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [2a00:1450:4864:20::42e])
+ id 1r68F6-0007nV-9v
+ for xen-devel@lists.xenproject.org; Thu, 23 Nov 2023 11:51:36 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95481ae0-89f5-11ee-9b0e-b553b5be7939;
- Thu, 23 Nov 2023 12:43:56 +0100 (CET)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-32f737deedfso424941f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Nov 2023 03:43:56 -0800 (PST)
+ id a67723cf-89f6-11ee-9b0e-b553b5be7939;
+ Thu, 23 Nov 2023 12:51:34 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4083f613272so5041625e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Nov 2023 03:51:34 -0800 (PST)
 Received: from [10.80.67.30] (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- x12-20020adff64c000000b0032dcb08bf94sm1441689wrp.60.2023.11.23.03.43.55
+ z4-20020a1c4c04000000b0040b32edf626sm1722042wmf.31.2023.11.23.03.51.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Nov 2023 03:43:55 -0800 (PST)
+ Thu, 23 Nov 2023 03:51:33 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,48 +47,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95481ae0-89f5-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: a67723cf-89f6-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1700739835; x=1701344635; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1700740294; x=1701345094; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=B+G0Aym+9FxI9aw22sT/CSg2jbYeAoE2A+HQ3ceN3NQ=;
-        b=O5U7bLyVEMpfU10MnBS6bEbGnY2h1eHcAc6QY32u4HCnxzQwMheAJSCeTfCMiTz8Se
-         hb+e1qhgv6oV9C7TD8F1yp48yLnguAzY1+DEBBk0T1MsNneX1DLc5ePPEV25V91P2MlG
-         I1+m5BI3w+XQiE39Y6cs5LNS9xg5mVH4nNP4M=
+        bh=dSHaf8aoNoLk2+nXb1/jEgjxM8csooVtUAnMX07Hzbg=;
+        b=OjCURdRgi7AWdWEet00vS/BuGWKF2affN8r7Um52uEyyAIlirOi8bfTM+3rPA64WfB
+         OwR2fsuzeM6TFJkR2tCOOM/L0Bin6xTCUCRQ3aqj4J80txwkT8pMUuYbUty5O9zD7d48
+         iTzPd9STZNk4BdYQqu+s9fscuzemyA/0WSJDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700739835; x=1701344635;
+        d=1e100.net; s=20230601; t=1700740294; x=1701345094;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=B+G0Aym+9FxI9aw22sT/CSg2jbYeAoE2A+HQ3ceN3NQ=;
-        b=JAvk+NgVipZTG3OnNSiCgQrNzEKsN97zNg//6905xjqSEgGEdXYODppueuA+Fp/Sqn
-         /iL+6c/u9NLDF0fnOVL9YaV9/WJ7KtRxCdmR+4YBuTdCsXVDQYQ9jXexagPRs7AnOgM4
-         vxn6EHkzRXLJkse64cXzDmuqu07RuAs84Iv+7iZqSkrTJ9572PzmIdfPokCJ02z5DnX+
-         umuGxVkqBmz+skV5zYmCZg0EnTYyBGikcvZ5cinSDPSxiucbntFuLbDX3xxWbqkee/dJ
-         j7m/DcWTClIg15a64PFdk4reLgoItYhJ8I2yc0kPJpT4ySk9o7w4LOsLKM3iqMQB5cZy
-         t7cA==
-X-Gm-Message-State: AOJu0Yz5hntJaRsfRk+UBxWqQRCYBl8KdOwtDOr18/8BhLET8SRRL+SK
-	qNOZ4dhyIW9JtA1Sm7c/LbU8Mw==
-X-Google-Smtp-Source: AGHT+IHpfgoZ2HeiwZu6RTznwc97sfyS334OYfvwpqpFDz8XKSvSeaK5z64c76aqIw8mRvv32wfqpg==
-X-Received: by 2002:a5d:47ab:0:b0:332:d11d:5291 with SMTP id 11-20020a5d47ab000000b00332d11d5291mr2567565wrb.47.1700739835574;
-        Thu, 23 Nov 2023 03:43:55 -0800 (PST)
-Message-ID: <9e7c53bf-72bc-45d3-acaa-eed9323ab29c@citrix.com>
-Date: Thu, 23 Nov 2023 11:43:54 +0000
+        bh=dSHaf8aoNoLk2+nXb1/jEgjxM8csooVtUAnMX07Hzbg=;
+        b=Wb3APk+fjhqWl0Y/Hj/hCN2L4eiiKrtXzDDBIsLaRB47TobEqz6yCjjFEWltip9F3Y
+         m+WBZYqsC1vzXS7T9GDTieTBx4E4ESxXATfJ/h2C8jAB6rCPTFCoxmOLr8jKINXnXX3Z
+         FbNLgg/xjxPqVdQxKHpu2EIIbX8j/wEBuu5nxn+W3i+8Zd6xWun4b47HbQOT7FH5L8ul
+         m2AfCBl2D/EY25mwmNK3+V4OigiJOu8fGL33X1alY5ANK5pf+uUoByzYK1V9pMDIrj86
+         /hdBTGEigYUuehXCznHNBZ70wVxCArJLct2yLAK8stzFz6FtSWZ1pv40SuKrnvu9V1/8
+         4EhQ==
+X-Gm-Message-State: AOJu0YwMME205ZJAz0zUmFIDNPMWeRNJ/wCU4Xk/4lCMHg7VPZjOWaNd
+	EZ0mlfV1dqdMJnwykd46sdulxngEsuYPKyox+6U=
+X-Google-Smtp-Source: AGHT+IE4zZPPW4pqYlvEuZnoMN/+UrA5mKfPWy1e+kyqxENrTlAPSKMEweKw1WL0RjDnbQDrKlJhCA==
+X-Received: by 2002:a05:600c:2106:b0:409:5bd2:aa03 with SMTP id u6-20020a05600c210600b004095bd2aa03mr3916691wml.9.1700740293802;
+        Thu, 23 Nov 2023 03:51:33 -0800 (PST)
+Message-ID: <a55bd27f-a8e1-4ea8-9da7-b80bd424315d@citrix.com>
+Date: Thu, 23 Nov 2023 11:51:33 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/efi: Drop image_name from efi_arch_handle_cmdline()
+Subject: Re: [PATCH 1/3] automation/alpine: add elfutils-dev and coreutils for
+ livepatch-build-tools
 Content-Language: en-GB
-To: Jan Beulich <jbeulich@suse.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien@xen.org>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20231123113712.1933421-1-andrew.cooper3@citrix.com>
- <b3dbc02a-b7cf-444b-add2-89ed80a17bb9@suse.com>
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20231123112338.14477-1-roger.pau@citrix.com>
+ <20231123112338.14477-2-roger.pau@citrix.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
@@ -133,24 +130,29 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <b3dbc02a-b7cf-444b-add2-89ed80a17bb9@suse.com>
+In-Reply-To: <20231123112338.14477-2-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 23/11/2023 11:42 am, Jan Beulich wrote:
-> On 23.11.2023 12:37, Andrew Cooper wrote:
->> With all architectures no longer wanting an image name in the command line
->> handling, drop the parameter and forgo making one up.
->>
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+On 23/11/2023 11:23 am, Roger Pau Monne wrote:
+> In preparation for adding some livepatch-build-tools test update the Alpine
+> container to also install elfutils-dev, coreutils and GNU awk.
+>
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+> I don't very much like to add coreutils and gawk, as it's also good to test
+> that we can build Xen with Busybox, but I also got tired of adjusting
+> livepatch-build-tools.
 
-Thanks.
+Right now, the alpine environment is the main one which spots violations
+of Xen's requirement for simply a POSIX-compliant awk, which I think
+this would break?
 
-I'm quite surprised at how much cleanup this particular investigation
-has yielded.
+How much effort would it be fix livepatch-build-tools?  I think that
+would be preferable, and could be persuaded to do some simple busywork...
 
-Definitely preferable to the first plan of using the const alias.
+What about coreutils?  Presumably that's down to some differences from
+busybox ?
 
 ~Andrew
 
