@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE23C61D97
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 04:18:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640122.997955 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE95EC61DF4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 04:21:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640131.997969 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6NdR-0002Xe-25; Fri, 24 Nov 2023 04:17:45 +0000
+	id 1r6NgY-0004PO-JP; Fri, 24 Nov 2023 04:20:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640122.997955; Fri, 24 Nov 2023 04:17:45 +0000
+Received: by outflank-mailman (output) from mailman id 640131.997969; Fri, 24 Nov 2023 04:20:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6NdQ-0002XX-Vd; Fri, 24 Nov 2023 04:17:44 +0000
-Received: by outflank-mailman (input) for mailman id 640122;
- Fri, 24 Nov 2023 04:17:43 +0000
+	id 1r6NgY-0004PH-GM; Fri, 24 Nov 2023 04:20:58 +0000
+Received: by outflank-mailman (input) for mailman id 640131;
+ Fri, 24 Nov 2023 04:20:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dUjn=HF=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r6NdP-0002UR-7i
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 04:17:43 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 1r6NgW-0004N7-Cn
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 04:20:56 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 689eb9fc-8a80-11ee-98e2-6d05b1d4d9a1;
- Fri, 24 Nov 2023 05:17:41 +0100 (CET)
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:98])
+ id dbe24d1f-8a80-11ee-98e2-6d05b1d4d9a1;
+ Fri, 24 Nov 2023 05:20:54 +0100 (CET)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 292AD1FD9A;
- Thu, 23 Nov 2023 16:08:18 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 89983219C6;
+ Thu, 23 Nov 2023 15:23:12 +0000 (UTC)
 Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id E578D13A82;
- Thu, 23 Nov 2023 16:08:17 +0000 (UTC)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id A49CD13AAA;
+ Thu, 23 Nov 2023 11:45:20 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap2.dmz-prg2.suse.org with ESMTPSA id M0LINvF4X2UXFgAAn2gu4w
- (envelope-from <jgross@suse.com>); Thu, 23 Nov 2023 16:08:17 +0000
+ by imap2.dmz-prg2.suse.org with ESMTPSA id HM2sI1A7X2XjZQAAn2gu4w
+ (envelope-from <jgross@suse.com>); Thu, 23 Nov 2023 11:45:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,7 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 689eb9fc-8a80-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: dbe24d1f-8a80-11ee-98e2-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1700752992; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=v2bgQ6T5xs6Z0agxacE1YnKaxl+7FwNqtT3DbdGrpyQ=;
+	b=uskWcz0HvYeP1HogR5ZVHD71WF1fNSgA0g91Bm0DNG8zo8wDGuKGY7Hj74bByW+48d7c92
+	nfvaRuZfUViNKpA2onkJrvngLQBzqBit0rhmuvKh0HyeB8DAue5vtkOfklmjIP76AY2AUQ
+	cRMqMmksynsmdgVoJk/svU+b7nHHcxM=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
@@ -62,42 +70,35 @@ Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
 Subject: [PATCH v2 2/2] Mini-OS: keep a positive list of externally visible symbols
-Date: Thu, 23 Nov 2023 17:08:04 +0100
-Message-Id: <20231123160804.17621-3-jgross@suse.com>
+Date: Thu, 23 Nov 2023 12:45:04 +0100
+Message-Id: <20231123114504.29329-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231123160804.17621-1-jgross@suse.com>
-References: <20231123160804.17621-1-jgross@suse.com>
+In-Reply-To: <20231123114504.29329-1-jgross@suse.com>
+References: <20231123114504.29329-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: +++++++++++++++
-X-Rspamd-Server: rspamd1
-X-Rspamd-Queue-Id: 292AD1FD9A
-Authentication-Results: smtp-out2.suse.de;
-	dkim=none;
-	dmarc=fail reason="No valid SPF, No valid DKIM" header.from=suse.com (policy=quarantine);
-	spf=fail (smtp-out2.suse.de: domain of jgross@suse.com does not designate 2a07:de40:b281:104:10:150:64:98 as permitted sender) smtp.mailfrom=jgross@suse.com
-X-Spamd-Result: default: False [15.00 / 50.00];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 R_SPF_FAIL(1.00)[-all];
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spamd-Result: default: False [11.36 / 50.00];
 	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
 	 TO_DN_SOME(0.00)[];
-	 R_MISSING_CHARSET(2.50)[];
 	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
 	 MIME_GOOD(-0.10)[text/plain];
+	 NEURAL_SPAM_SHORT(2.96)[0.987];
 	 BROKEN_CONTENT_TYPE(1.50)[];
-	 DMARC_POLICY_QUARANTINE(1.50)[suse.com : No valid SPF, No valid DKIM,quarantine];
 	 RCPT_COUNT_FIVE(0.00)[5];
 	 RCVD_COUNT_THREE(0.00)[3];
-	 MX_GOOD(-0.01)[];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_SPAM_LONG(3.50)[1.000];
 	 MID_CONTAINS_FROM(1.00)[];
-	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
 	 FUZZY_BLOCKED(0.00)[rspamd.com];
 	 FROM_EQ_ENVFROM(0.00)[];
-	 R_DKIM_NA(2.20)[];
 	 MIME_TRACE(0.00)[0:+];
-	 RCVD_TLS_ALL(0.00)[]
-X-Spam: Yes
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-0.00)[33.51%]
 
 Add a mini-os.map file containing all global symbols that are allowed
 to be referenced by an application or library. Hide all other symbols
