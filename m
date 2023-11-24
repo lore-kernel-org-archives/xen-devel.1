@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C1ACC61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:46:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640496.998803 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE96C61DF4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:47:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640498.998813 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6ThI-0000yl-VE; Fri, 24 Nov 2023 10:46:08 +0000
+	id 1r6Thx-0001zS-6G; Fri, 24 Nov 2023 10:46:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640496.998803; Fri, 24 Nov 2023 10:46:08 +0000
+Received: by outflank-mailman (output) from mailman id 640498.998813; Fri, 24 Nov 2023 10:46:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6ThI-0000ye-R9; Fri, 24 Nov 2023 10:46:08 +0000
-Received: by outflank-mailman (input) for mailman id 640496;
- Fri, 24 Nov 2023 10:46:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r6Thx-0001zL-39; Fri, 24 Nov 2023 10:46:49 +0000
+Received: by outflank-mailman (input) for mailman id 640498;
+ Fri, 24 Nov 2023 10:46:47 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r6TTX-0006hx-D2
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:55 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a9e978e5-8ab4-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 11:31:44 +0100 (CET)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5431614d90eso2509960a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:44 -0800 (PST)
+ id 1r6TTJ-0006hy-Cv
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:41 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a7c33535-8ab4-11ee-98e2-6d05b1d4d9a1;
+ Fri, 24 Nov 2023 11:31:41 +0100 (CET)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a00b056ca38so243303466b.2
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:40 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.43
+ g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:31:43 -0800 (PST)
+ Fri, 24 Nov 2023 02:31:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a9e978e5-8ab4-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: a7c33535-8ab4-11ee-98e2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700821904; x=1701426704; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1700821900; x=1701426700; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=DQmzcNiiecosotaPJOdRPOzfDS9PoO7Z6SaMHAHkahM=;
-        b=QWhNT5itjIG8XYHI+ap8QQB0/dr+8UYx0d/2JCDQyfov8FkeI/fk2hC8ZJHYvBFaMH
-         XdqiDGPOqwzqNfLFCUOreomFXxuemml+BvmHc+hcWca5ncEmW/r0tcchUu1EupTiqrOY
-         3J5C1PZMk5daiRBC4k24Z4ZWsXQV+JIoxDXZQINCKJGG0XHlwZTGfqR5HThIMXu4rKeJ
-         CuCujFRK/zMnErxHcvlBJ3h9JMLvsh7ZwUTT3tSaqiN1uP/WbQaC5sB8KCO5T5KEEv/H
-         mxtEwlICrtaC/uSBYCd5w4xF5aYCIJ7LyX40c/xUAJjQb2VBp0xnN2T3x4m71M3/dZe+
-         +R3w==
+        bh=9g8XJvXceN+LKbnSsjmmA9nK3GbE+uM4xbSpxuIFeFA=;
+        b=OWKBXiScXFjkE8ARZS7zfqGjv9pPMhMOGawWNYrsNHnMCk63u5V34Q5LeaeHX884eL
+         aPNsUF98ajfwmHIiTRDxPINtIyiEVy9cm/XMGCEbAte1VewOglC1viOtIDWvuO/G5mo1
+         VV+xVCI6p4mdp7SnNbuGbP+Nzc8maSVRZ1QzqzfSI6ZkeyB5FPK9RT7KHIQCK+krk32u
+         SOGDNV/j8yvI4S+f4LoIPtbqLKnJP/lkIPCSgUHyP17O+tyXjEvlJhBqs/xS71xWkXM/
+         KzvMdEYL529EhH4vYttuUX9Le7twtCaO+DVy5Ceg7EVgNwz4bNd+9dds0jDus6bKk2i8
+         wIYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700821904; x=1701426704;
+        d=1e100.net; s=20230601; t=1700821900; x=1701426700;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=DQmzcNiiecosotaPJOdRPOzfDS9PoO7Z6SaMHAHkahM=;
-        b=I7SHFAZO8ZWONyiozQtUjvZVXiSbeLT8SB0KJsZZv5Zn61xtwUsijepKg8Hvch52Zo
-         7m4KU5yZQTfySCu5OQQjKtYeUqW2t/qx2anbzk6UCFtcn2xP39/ulUJVNjN3ukaGWj2F
-         5cVjbtkzEMzmIdbj/HVNptNYI/qthnao3BhBniTzeB1hKJU2D5vRiGszfrsW+CZOMIXr
-         F7z8YaJD+c/ZeavCSmac/PSXRNjGHQPHpQ0+HuIjg9FuH56GVnDHIHSCMbw1n2jHuY4R
-         BiRFl2dK49RFCSomOYLqWw86mKLwIxWKsUNaAUGrFIXgXG/I8NXxqxYkWNyGM5y8ze0/
-         qKQA==
-X-Gm-Message-State: AOJu0YyqRKIsHADHGRAblmHkFBfOT51AOxOhbEzyPY8cXhpd12xku16f
-	KJdloMtb5KolVUQ+CC7GQ23/3C7Wh1reXA==
-X-Google-Smtp-Source: AGHT+IEdpyOKOH8SGDaH8oOfbMTxNOrbOmYlKrSzOrQ5D2QKwj8rNSiRjo+5Uk9JZuwJomGoLlzEnw==
-X-Received: by 2002:a17:907:3a91:b0:9be:2991:81fb with SMTP id fh17-20020a1709073a9100b009be299181fbmr1396968ejc.36.1700821903737;
-        Fri, 24 Nov 2023 02:31:43 -0800 (PST)
+        bh=9g8XJvXceN+LKbnSsjmmA9nK3GbE+uM4xbSpxuIFeFA=;
+        b=nJJ9gA527tNVx/3kqKeCZGTrsA7b76W3EKrrumi/8/yXe/jr0+w/OqXvv82PPd/BuX
+         uWeXS1aujbtCVaxHP7zNP14uD1tB4bH+B3sYve6zsY3yfZddxN6eJM91nrXZSVwV7dmv
+         07+7DUl1VJMWgltQsnYVhLfZvdk7TtIiCmX9Em/fI0cPcrFhOt68U9KuD3QlrYzywO/F
+         b7tt2Mt/GD2KnO+MHrrhMNtPLNDOanIadyBktZi8lrvo6P1KCW9mchPS0rXateOawkeb
+         3frlghtRcP+GqfNCilt24MvNC3wZR/Ka8YeqLpmphIcW2pN38ZfSsEGL4kn4HokHL2j5
+         r66g==
+X-Gm-Message-State: AOJu0YzewTdy2rE2jpdivfEcHTTHYiGlRsZEbvLWr6lU87VMpQ4RiSO3
+	kkK4Jz+M0W/oYICNimz0MLM6gk7UxqWzYQ==
+X-Google-Smtp-Source: AGHT+IFkhEVq1Zkgib05dna2HJ+QkOBxYxZNOJFEkC8rVWydgHS3i40ZDia5EJjHZwgOtC4fN8rAAQ==
+X-Received: by 2002:a17:906:218:b0:9de:24d:f245 with SMTP id 24-20020a170906021800b009de024df245mr1426447ejd.12.1700821900174;
+        Fri, 24 Nov 2023 02:31:40 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,56 +88,39 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 33/39] xen/riscv: add minimal stuff to asm/processor.h to build full Xen
-Date: Fri, 24 Nov 2023 12:30:53 +0200
-Message-ID: <11f177882b74c60233626075a69bdd00d3da2311.1700761381.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 29/39] xen/riscv: add definition of __read_mostly
+Date: Fri, 24 Nov 2023 12:30:49 +0200
+Message-ID: <7fec1c9f906ee120ebae606de59f9f70efb79aff.1700761381.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+The definition of __read_mostly should be removed in:
+https://lore.kernel.org/xen-devel/f25eb5c9-7c14-6e23-8535-2c66772b333e@suse.com/
+
+The patch introduces it in arch-specific header to not
+block enabling of full Xen build for RISC-V.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V2:
- - Nothing changed. Only rebase.
+ - update the commit message
 ---
- xen/arch/riscv/include/asm/processor.h | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ xen/arch/riscv/include/asm/cache.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
-index 6db681d805..b6218a00a7 100644
---- a/xen/arch/riscv/include/asm/processor.h
-+++ b/xen/arch/riscv/include/asm/processor.h
-@@ -12,6 +12,9 @@
+diff --git a/xen/arch/riscv/include/asm/cache.h b/xen/arch/riscv/include/asm/cache.h
+index 69573eb051..94bd94db53 100644
+--- a/xen/arch/riscv/include/asm/cache.h
++++ b/xen/arch/riscv/include/asm/cache.h
+@@ -3,4 +3,6 @@
+ #ifndef _ASM_RISCV_CACHE_H
+ #define _ASM_RISCV_CACHE_H
  
- #ifndef __ASSEMBLY__
- 
-+/* TODO: need to be implemeted */
-+#define get_processor_id() 0
++#define __read_mostly __section(".data.read_mostly")
 +
- /* On stack VCPU state */
- struct cpu_user_regs
- {
-@@ -53,6 +56,18 @@ struct cpu_user_regs
-     unsigned long pregs;
- };
- 
-+/* TODO: need to implement */
-+#define cpu_to_core(_cpu)   (0)
-+#define cpu_to_socket(_cpu) (0)
-+
-+static inline void cpu_relax(void)
-+{
-+	int dummy;
-+	/* In lieu of a halt instruction, induce a long-latency stall. */
-+	__asm__ __volatile__ ("div %0, %0, zero" : "=r" (dummy));
-+	barrier();
-+}
-+
- static inline void wfi(void)
- {
-     __asm__ __volatile__ ("wfi");
+ #endif /* _ASM_RISCV_CACHE_H */
 -- 
 2.42.0
 
