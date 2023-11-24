@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3931EC61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:05:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640734.999386 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6C9CC61DF4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:05:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640732.999372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6WnV-0005kh-40; Fri, 24 Nov 2023 14:04:45 +0000
+	id 1r6WnU-0005Qq-90; Fri, 24 Nov 2023 14:04:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640734.999386; Fri, 24 Nov 2023 14:04:45 +0000
+Received: by outflank-mailman (output) from mailman id 640732.999372; Fri, 24 Nov 2023 14:04:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6WnU-0005iL-RK; Fri, 24 Nov 2023 14:04:44 +0000
-Received: by outflank-mailman (input) for mailman id 640734;
- Fri, 24 Nov 2023 14:04:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r6WnU-0005PS-2w; Fri, 24 Nov 2023 14:04:44 +0000
+Received: by outflank-mailman (input) for mailman id 640732;
+ Fri, 24 Nov 2023 14:04:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wuqv=HF=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1r6WnT-0005N1-Tz
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:04:43 +0000
+ id 1r6WnS-0005N0-Ea
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:04:42 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6a1d49dd-8ad2-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 15:04:42 +0100 (CET)
-Received: from Dell.bugseng.com (unknown [37.161.237.167])
- by support.bugseng.com (Postfix) with ESMTPSA id 85B054EE0C8F;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 693b14e9-8ad2-11ee-98e2-6d05b1d4d9a1;
  Fri, 24 Nov 2023 15:04:41 +0100 (CET)
+Received: from Dell.bugseng.com (unknown [37.161.237.167])
+ by support.bugseng.com (Postfix) with ESMTPSA id DE3034EE0C8B;
+ Fri, 24 Nov 2023 15:04:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6a1d49dd-8ad2-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 693b14e9-8ad2-11ee-98e2-6d05b1d4d9a1
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -52,9 +52,9 @@ Cc: consulting@bugseng.com,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 03/11] xen/cpumask: address violations of MISRA C:2012 Rule 8.2
-Date: Fri, 24 Nov 2023 15:03:18 +0100
-Message-Id: <0ea3c74ef2e5524d0a9726b6e0795d50dfc32eb8.1700832962.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 01/11] xen/console: address violations of MISRA C:2012 Rule 8.2
+Date: Fri, 24 Nov 2023 15:03:16 +0100
+Message-Id: <c79bcd4dd33cd448e5eba21defff1c928f064079.1700832962.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1700832962.git.federico.serafini@bugseng.com>
 References: <cover.1700832962.git.federico.serafini@bugseng.com>
@@ -65,25 +65,39 @@ Add missing parameter names. No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/include/xen/cpumask.h | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ xen/drivers/char/console.c | 4 ++--
+ xen/include/xen/console.h  | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/include/xen/cpumask.h b/xen/include/xen/cpumask.h
-index 9826707909..145e140481 100644
---- a/xen/include/xen/cpumask.h
-+++ b/xen/include/xen/cpumask.h
-@@ -460,7 +460,9 @@ extern cpumask_t cpu_present_map;
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 946af5e625..0666564ec9 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -393,9 +393,9 @@ long read_console_ring(struct xen_sysctl_readconsole *op)
+ static char serial_rx_ring[SERIAL_RX_SIZE];
+ static unsigned int serial_rx_cons, serial_rx_prod;
  
- /* Copy to/from cpumap provided by control tools. */
- struct xenctl_bitmap;
--int cpumask_to_xenctl_bitmap(struct xenctl_bitmap *, const cpumask_t *);
--int xenctl_bitmap_to_cpumask(cpumask_var_t *, const struct xenctl_bitmap *);
-+int cpumask_to_xenctl_bitmap(struct xenctl_bitmap *xenctl_cpumap,
-+                             const cpumask_t *cpumask);
-+int xenctl_bitmap_to_cpumask(cpumask_var_t *cpumask,
-+                             const struct xenctl_bitmap *xenctl_cpumap);
+-static void (*serial_steal_fn)(const char *, size_t nr) = early_puts;
++static void (*serial_steal_fn)(const char *str, size_t nr) = early_puts;
  
- #endif /* __XEN_CPUMASK_H */
+-int console_steal(int handle, void (*fn)(const char *, size_t nr))
++int console_steal(int handle, void (*fn)(const char *str, size_t nr))
+ {
+     if ( (handle == -1) || (handle != sercon_handle) )
+         return 0;
+diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
+index ab5c30c0da..68759862e8 100644
+--- a/xen/include/xen/console.h
++++ b/xen/include/xen/console.h
+@@ -36,7 +36,7 @@ struct domain *console_input_domain(void);
+  * Steal output from the console. Returns +ve identifier, else -ve error.
+  * Takes the handle of the serial line to steal, and steal callback function.
+  */
+-int console_steal(int handle, void (*fn)(const char *, size_t nr));
++int console_steal(int handle, void (*fn)(const char *str, size_t nr));
+ 
+ /* Give back stolen console. Takes the identifier returned by console_steal. */
+ void console_giveback(int id);
 -- 
 2.34.1
 
