@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E990C61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:40:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640435.998663 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F79C61DF4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:40:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640437.998678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TbD-0006F4-Uw; Fri, 24 Nov 2023 10:39:51 +0000
+	id 1r6TbF-0006dW-KJ; Fri, 24 Nov 2023 10:39:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640435.998663; Fri, 24 Nov 2023 10:39:51 +0000
+Received: by outflank-mailman (output) from mailman id 640437.998678; Fri, 24 Nov 2023 10:39:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TbD-0006Ex-Pb; Fri, 24 Nov 2023 10:39:51 +0000
-Received: by outflank-mailman (input) for mailman id 640435;
- Fri, 24 Nov 2023 10:39:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r6TbF-0006cX-D3; Fri, 24 Nov 2023 10:39:53 +0000
+Received: by outflank-mailman (input) for mailman id 640437;
+ Fri, 24 Nov 2023 10:39:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r6TTL-0006hx-BK
+ id 1r6TTL-0006hy-91
  for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:43 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a499f04d-8ab4-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 11:31:35 +0100 (CET)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a00a9c6f1e9so250594566b.3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:35 -0800 (PST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a8e02581-8ab4-11ee-98e2-6d05b1d4d9a1;
+ Fri, 24 Nov 2023 11:31:42 +0100 (CET)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-9ffb5a4f622so246791366b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:42 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.33
+ g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:31:34 -0800 (PST)
+ Fri, 24 Nov 2023 02:31:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a499f04d-8ab4-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: a8e02581-8ab4-11ee-98e2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700821895; x=1701426695; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1700821902; x=1701426702; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=e0C3Ch6z8tKuY04JIx8qm7izpoD3XbU6+MQf/w9I+Zg=;
-        b=Jz0jnAij40C/FlFCQEXeaCfWm9azMGfWycv0NiPjnSxurFRvep9p8O141HWh3ggh7l
-         3WuXpecglVSlzEHE5n1mQCGOQyBYs41sgy5LICESj65TY323eYyo65FbcVAL7rZu6/CJ
-         MWG/7yBdvWu02Y4bQV0it9GkMQekWV1/QdACbJGDtFoj7xGJYn46w/2FoaxrKxuxh2z+
-         xwZHzvXgD7vXvtEc+Pb+06ohJxOSUX8TIEGS8W7O4kFpP0WZBN8lbv3s9rK/iRrBBZWj
-         8vt5cSvhjFHs4Sm3e6mEiBD2yRXvBC8QEBPBcAsLvSnuSUGAx5mGzHXXYjmAMbecOXP7
-         F88w==
+        bh=zzc425nFXp+S3527hP5ZVJ6OTAIAaaKhm6tESKxxSc0=;
+        b=nervIoMRbEpZc5is4vmyqY3Y3oyEu9p/WKG7CmsicTcgLMbndjdycTXeTbL1T58WRT
+         Enx4P2IoIv/c+flvF+MPiHVB0u/Cv55uM6naEICMso+FEQ23Dm2kApxRHoxeGl4AOcOz
+         ips9UALqJd+efwK+qCoUczgQ5EcSkG2Pl+XWRJ8WMM5e6+Yjm1wFLNhHMygVgAQNh2M4
+         I0lJhoYkjSSbsq7RJOeC+rmwHVm5M8PzKm8d9Wglk3fXB6dyyEy3nEQZWvxKdt7JCBFx
+         AxRVhWCEMoGpkMKLukda5re3U7vRBeg5u+ov98L3P7sDBxV85Mpu9xG1h4sNanScFUmO
+         k/NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700821895; x=1701426695;
+        d=1e100.net; s=20230601; t=1700821902; x=1701426702;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=e0C3Ch6z8tKuY04JIx8qm7izpoD3XbU6+MQf/w9I+Zg=;
-        b=CCynR8pbHQZOTRdrQLrr1VeTP50IbGRUGJ093UmSYHtnNnJDvH15ZACx2qE6B/2C3R
-         sYAyABn3vgLL4EwQVe3NMniuPmmvvS1ZkS2N3Jw/V59uBNHlc8XOBOsaok/2iSxdnAhi
-         yiXiKVbenNqjMRXXC/+hJW4BOJpFr736wc3cs5sHqXU/bOzkFBjecFt9av+5VYLBvLD3
-         6uC1jg7s6Ffkp+QXo9dnKe7SGETiA6/9qWwJ/+MHNWU1uW0Tp+4JyEasyoLBtaPMLzgX
-         /zqtLItVhQjHbiY/QCr/KRFZ60Ok7qW4QT3oMCihv1NJuKWeGiEuTwVszZpivDwD2WLR
-         WKkQ==
-X-Gm-Message-State: AOJu0YzPaAEPkGvF/SouqrZqJUMtdcCQUr+D65M+1/2SPiYA60NBcEWm
-	dxqptYImWfgDgRAMx4yNVvZ5LWlzksb9gA==
-X-Google-Smtp-Source: AGHT+IFbdkFJ3SEuPodqyEBLwy6PEEz9f13WyBgHKw4XZGO8lZGGSRe/E8hTB495cXvr+mH5d0l/aQ==
-X-Received: by 2002:a17:907:c718:b0:9ff:1dea:83b5 with SMTP id ty24-20020a170907c71800b009ff1dea83b5mr2001059ejc.42.1700821894858;
-        Fri, 24 Nov 2023 02:31:34 -0800 (PST)
+        bh=zzc425nFXp+S3527hP5ZVJ6OTAIAaaKhm6tESKxxSc0=;
+        b=eR+ysLb7vSeEVPK+ksxuu5EwJdxnJEhDzT2oTKY1luzFfkghYGS2hJPZz4fxWOz289
+         P3BGaovp1NIHH3em0r+xfrYTA5JclJybPX10S2qTo7pLhkoZQhaac9gocEykt4z5zMS5
+         RMEXkDCdxHep36fNs289NmqfqI8j8rw6yowB16fv/6leT5GDFpM3ztnXIATzwfq6e1tE
+         j7mT5jMKwQfczePkqiXRVIve5yCMfo4rIQNZRyMhSJdMu9q9yp5Kc1eTW2pwYgCqXHPP
+         1j5gh8xOiQwuW/gbdi13DAtaDCT+tBn0vyGfVRSBqjZP26zwhWX0H1c64iMyUHAX9PmU
+         mvow==
+X-Gm-Message-State: AOJu0Yw1mvnnHorXSX+bmVvFBcnOGAit6jDl4hDMp/ULG0+r87lSuOeo
+	PBKJFjVR8xL13oOlarRAbDN+TblrE+Iiaw==
+X-Google-Smtp-Source: AGHT+IHFSnMZTc4mmW+Nx6XlGmcfMrgK8fu/A3K6Mw+E0AaDeHPkA/qLtMDu1Db/jW8AHe2do5uydg==
+X-Received: by 2002:a17:906:375b:b0:9c7:5667:5649 with SMTP id e27-20020a170906375b00b009c756675649mr1624362ejc.73.1700821902025;
+        Fri, 24 Nov 2023 02:31:42 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,69 +88,61 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 24/39] xen/riscv: introduce asm/irq.h
-Date: Fri, 24 Nov 2023 12:30:44 +0200
-Message-ID: <e9fc98cad562dad495ac1eb87b98be77cda72524.1700761381.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 31/39] xen/riscv: add required things to asm/current.h
+Date: Fri, 24 Nov 2023 12:30:51 +0200
+Message-ID: <b6328d9b5bbb9269066dc17d7c0fcb32fa935b2b.1700761381.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Add minimal requied things to be able to build full Xen.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
-	- add ifdef CONFIG_HAS_DEVICE_TREE for things that shouldn't be
-      in case !CONFIG_HAS_DEVICE_TREE
-	- use proper includes.
+ - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/irq.h | 37 ++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/irq.h
+ xen/arch/riscv/include/asm/current.h | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
-new file mode 100644
-index 0000000000..ca49d3f9b4
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/irq.h
-@@ -0,0 +1,37 @@
-+#ifndef __ASM_RISCV_IRQ_H__
-+#define __ASM_RISCV_IRQ_H__
+diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
+index d84f15dc50..e105329bf3 100644
+--- a/xen/arch/riscv/include/asm/current.h
++++ b/xen/arch/riscv/include/asm/current.h
+@@ -3,6 +3,22 @@
+ #ifndef __ASM_CURRENT_H
+ #define __ASM_CURRENT_H
+ 
++#include <xen/percpu.h>
++#include <asm/processor.h>
 +
-+#include <xen/bug.h>
-+#ifdef CONFIG_HAS_DEVICE_TREE
-+#include <xen/device_tree.h>
-+#endif
++#ifndef __ASSEMBLY__
 +
-+/* TODO */
-+#define nr_irqs 0U
-+#define nr_static_irqs 0
-+#define arch_hwdom_irqs(domid) 0U
++struct vcpu;
 +
-+#define domain_pirq_to_irq(d, pirq) (pirq)
++/* Which VCPU is "current" on this PCPU. */
++DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
 +
-+#define arch_evtchn_bind_pirq(d, pirq) ((void)((d) + (pirq)))
++#define current            (this_cpu(curr_vcpu))
++#define set_current(vcpu)  do { current = (vcpu); } while (0)
++#define get_cpu_current(cpu)  (per_cpu(curr_vcpu, cpu))
 +
-+struct arch_pirq {
-+};
++#define guest_cpu_user_regs() (0)
 +
-+struct arch_irq_desc {
-+    unsigned int type;
-+};
+ #define switch_stack_and_jump(stack, fn) do {               \
+     asm volatile (                                          \
+             "mv sp, %0\n"                                   \
+@@ -10,4 +26,8 @@
+     unreachable();                                          \
+ } while ( false )
+ 
++#define get_per_cpu_offset() __per_cpu_offset[get_processor_id()]
 +
-+static inline void arch_move_irqs(struct vcpu *v)
-+{
-+    BUG();
-+}
++#endif /* __ASSEMBLY__ */
 +
-+#ifdef CONFIG_HAS_DEVICE_TREE
-+static inline int platform_get_irq(const struct dt_device_node *device, int index)
-+{
-+    BUG();
-+}
-+#endif
-+
-+#endif /* __ASM_RISCV_IRQ_H__ */
+ #endif /* __ASM_CURRENT_H */
 -- 
 2.42.0
 
