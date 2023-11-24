@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6C9CC61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:05:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640732.999372 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB1FC61D97
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:23:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640773.999484 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6WnU-0005Qq-90; Fri, 24 Nov 2023 14:04:44 +0000
+	id 1r6X5K-0007W4-IN; Fri, 24 Nov 2023 14:23:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640732.999372; Fri, 24 Nov 2023 14:04:44 +0000
+Received: by outflank-mailman (output) from mailman id 640773.999484; Fri, 24 Nov 2023 14:23:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6WnU-0005PS-2w; Fri, 24 Nov 2023 14:04:44 +0000
-Received: by outflank-mailman (input) for mailman id 640732;
- Fri, 24 Nov 2023 14:04:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r6X5K-0007Vx-Fr; Fri, 24 Nov 2023 14:23:10 +0000
+Received: by outflank-mailman (input) for mailman id 640773;
+ Fri, 24 Nov 2023 14:23:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wuqv=HF=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1r6WnS-0005N0-Ea
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:04:42 +0000
+ id 1r6X5J-0007Ua-7M
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:23:09 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 693b14e9-8ad2-11ee-98e2-6d05b1d4d9a1;
- Fri, 24 Nov 2023 15:04:41 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fcaddc75-8ad4-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 15:23:07 +0100 (CET)
 Received: from Dell.bugseng.com (unknown [37.161.237.167])
- by support.bugseng.com (Postfix) with ESMTPSA id DE3034EE0C8B;
- Fri, 24 Nov 2023 15:04:39 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 3C4794EE073C;
+ Fri, 24 Nov 2023 15:23:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,63 +41,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 693b14e9-8ad2-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: fcaddc75-8ad4-11ee-9b0e-b553b5be7939
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 01/11] xen/console: address violations of MISRA C:2012 Rule 8.2
-Date: Fri, 24 Nov 2023 15:03:16 +0100
-Message-Id: <c79bcd4dd33cd448e5eba21defff1c928f064079.1700832962.git.federico.serafini@bugseng.com>
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH] automation/eclair: tag files as "adopted" and "out of scope"
+Date: Fri, 24 Nov 2023 15:22:59 +0100
+Message-Id: <548e2f7e5794ec35997d615282f0f4dc6f6250a8.1700835046.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1700832962.git.federico.serafini@bugseng.com>
-References: <cover.1700832962.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing parameter names. No functional change.
+Tag arm64/efibind.h as "adopted":
+it is used to build the efi stub, which is a separate entry point
+for Xen when booted from EFI firmware.
+
+Tag common/coverage/* as "out-of-scope":
+it is code to support gcov, hence it is part of the testing machinery.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/drivers/char/console.c | 4 ++--
- xen/include/xen/console.h  | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ automation/eclair_analysis/ECLAIR/out_of_scope.ecl | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 946af5e625..0666564ec9 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -393,9 +393,9 @@ long read_console_ring(struct xen_sysctl_readconsole *op)
- static char serial_rx_ring[SERIAL_RX_SIZE];
- static unsigned int serial_rx_cons, serial_rx_prod;
+diff --git a/automation/eclair_analysis/ECLAIR/out_of_scope.ecl b/automation/eclair_analysis/ECLAIR/out_of_scope.ecl
+index e1ec4a607c..3bd385ecf9 100644
+--- a/automation/eclair_analysis/ECLAIR/out_of_scope.ecl
++++ b/automation/eclair_analysis/ECLAIR/out_of_scope.ecl
+@@ -84,6 +84,7 @@
+ -doc_begin="Files imported from the gnu-efi package"
+ -file_tag+={adopted,"^xen/include/efi/.*$"}
+ -file_tag+={adopted,"^xen/arch/x86/include/asm/x86_64/efibind\\.h$"}
++-file_tag+={adopted,"^xen/arch/arm/include/asm/arm64/efibind\\.h$"}
+ -doc_end
  
--static void (*serial_steal_fn)(const char *, size_t nr) = early_puts;
-+static void (*serial_steal_fn)(const char *str, size_t nr) = early_puts;
+ -doc_begin="Build tools are out of scope."
+@@ -104,6 +105,10 @@
+ -file_tag+={out_of_scope,"^xen/include/xen/xxhash\\.h$"}
+ -doc_end
  
--int console_steal(int handle, void (*fn)(const char *, size_t nr))
-+int console_steal(int handle, void (*fn)(const char *str, size_t nr))
- {
-     if ( (handle == -1) || (handle != sercon_handle) )
-         return 0;
-diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
-index ab5c30c0da..68759862e8 100644
---- a/xen/include/xen/console.h
-+++ b/xen/include/xen/console.h
-@@ -36,7 +36,7 @@ struct domain *console_input_domain(void);
-  * Steal output from the console. Returns +ve identifier, else -ve error.
-  * Takes the handle of the serial line to steal, and steal callback function.
-  */
--int console_steal(int handle, void (*fn)(const char *, size_t nr));
-+int console_steal(int handle, void (*fn)(const char *str, size_t nr));
- 
- /* Give back stolen console. Takes the identifier returned by console_steal. */
- void console_giveback(int id);
++-doc_begin="Out of scope code to support gcov."
++-file_tag+={out_of_scope, "^xen/common/coverage/.*$"}
++-doc_end
++
+ -doc_begin="Headers under xen/include/public/ are the description of the public
+ hypercall ABI so the community is extremely conservative in making changes
+ there, because the interface is maintained for backward compatibility: ignore
 -- 
 2.34.1
 
