@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D0BEC61D97
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 16:30:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640824.999555 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36CF8C61D97
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 16:30:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640820.999524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Z4F-0001Yh-Me; Fri, 24 Nov 2023 16:30:11 +0000
+	id 1r6Z4B-0000pK-Ci; Fri, 24 Nov 2023 16:30:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640824.999555; Fri, 24 Nov 2023 16:30:11 +0000
+Received: by outflank-mailman (output) from mailman id 640820.999524; Fri, 24 Nov 2023 16:30:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Z4F-0001Xc-Gi; Fri, 24 Nov 2023 16:30:11 +0000
-Received: by outflank-mailman (input) for mailman id 640824;
- Fri, 24 Nov 2023 16:30:10 +0000
+	id 1r6Z4B-0000ol-A0; Fri, 24 Nov 2023 16:30:07 +0000
+Received: by outflank-mailman (input) for mailman id 640820;
+ Fri, 24 Nov 2023 16:30:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SB6C=HF=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1r6Z4E-0000du-3C
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 16:30:10 +0000
+ id 1r6Z4A-0000du-HZ
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 16:30:06 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id baffe575-8ae6-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 17:30:08 +0100 (CET)
+ id b7fca036-8ae6-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 17:30:03 +0100 (CET)
 Received: from beta.station (net-37-182-35-120.cust.vodafonedsl.it
  [37.182.35.120])
- by support.bugseng.com (Postfix) with ESMTPSA id 810044EE0747;
- Fri, 24 Nov 2023 17:30:07 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id C4A2F4EE073C;
+ Fri, 24 Nov 2023 17:30:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,48 +42,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: baffe575-8ae6-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: b7fca036-8ae6-11ee-9b0e-b553b5be7939
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	maria.celeste.cesario@bugseng.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [PATCH 3/5] AMD/IOMMU: address violations of MISRA C:2012 Rule 11.8
-Date: Fri, 24 Nov 2023 17:29:17 +0100
-Message-Id: <11fc193f35be188165294665b1e989b2db17a776.1700842832.git.maria.celeste.cesario@bugseng.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 0/5] xen: address violations of MISRA C:2012 Rule 11.8
+Date: Fri, 24 Nov 2023 17:29:14 +0100
+Message-Id: <cover.1700842832.git.maria.celeste.cesario@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1700842832.git.maria.celeste.cesario@bugseng.com>
-References: <cover.1700842832.git.maria.celeste.cesario@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
 
-Add missing const qualifier in casting to comply with Rule 11.8.
-The type of the formal parameter ivhd_block is const qualified.
-No functional change.
+The xen sources contains violations of MISRA C:2012 Rule 11.8 whose headline
+states:
+"A conversion shall not remove any const, volatile or Atomic qualification
+from the type pointed to by a pointer".
 
-Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
-Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
----
+This patch amends or removes casts that unnecessarily drop const qualifiers.
+Example:
+
+  static inline int atomic_read(const atomic_t *v)
+  {
+    return *(volatile int *)&v->counter;    /* Non-compliant */
+  }
+
+In this example, the const qualifier is unnnecessarily removed from
+the original object, therefore making it non-compliant.
+
+Maria Celeste Cesario (5):
+  x86/platform_hypercall: address violations of MISRA C:2012 Rule 11.8
+  x86/boot/reloc: address violations of MISRA C:2012 Rule 11.8
+  AMD/IOMMU: address violations of MISRA C:2012 Rule 11.8
+  x86/atomic: address violations of MISRA C:2012 Rule 11.8
+  xen/arm: address violations of MISRA C:2012 Rule 11.8
+
+ xen/arch/arm/domain_build.c              | 2 +-
+ xen/arch/arm/include/asm/atomic.h        | 2 +-
+ xen/arch/arm/include/asm/regs.h          | 2 +-
+ xen/arch/x86/boot/reloc.c                | 2 +-
+ xen/arch/x86/include/asm/atomic.h        | 8 ++++----
+ xen/arch/x86/platform_hypercall.c        | 2 +-
  xen/drivers/passthrough/amd/iommu_acpi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 7 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/xen/drivers/passthrough/amd/iommu_acpi.c b/xen/drivers/passthrough/amd/iommu_acpi.c
-index 699d33f429..00923a6bb5 100644
---- a/xen/drivers/passthrough/amd/iommu_acpi.c
-+++ b/xen/drivers/passthrough/amd/iommu_acpi.c
-@@ -1232,7 +1232,7 @@ static int __init get_last_bdf_ivhd(
-     while ( ivhd_block->header.length >=
-             (block_length + sizeof(struct acpi_ivrs_de_header)) )
-     {
--        ivhd_device = (const void *)((u8 *)ivhd_block + block_length);
-+        ivhd_device = (const void *)((const uint8_t *)ivhd_block + block_length);
- 
-         switch ( ivhd_device->header.type )
-         {
 -- 
 2.40.0
 
