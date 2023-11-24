@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BFCBC61D97
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:05:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640739.999438 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CADC636D0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:05:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640733.999375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6WnZ-00078r-RQ; Fri, 24 Nov 2023 14:04:49 +0000
+	id 1r6WnU-0005Xa-Gi; Fri, 24 Nov 2023 14:04:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640739.999438; Fri, 24 Nov 2023 14:04:49 +0000
+Received: by outflank-mailman (output) from mailman id 640733.999375; Fri, 24 Nov 2023 14:04:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6WnZ-000776-J8; Fri, 24 Nov 2023 14:04:49 +0000
-Received: by outflank-mailman (input) for mailman id 640739;
- Fri, 24 Nov 2023 14:04:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r6WnU-0005Wd-Cw; Fri, 24 Nov 2023 14:04:44 +0000
+Received: by outflank-mailman (input) for mailman id 640733;
+ Fri, 24 Nov 2023 14:04:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wuqv=HF=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1r6WnX-0005N0-TT
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:04:47 +0000
+ id 1r6WnT-0005N1-17
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:04:43 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6d14d466-8ad2-11ee-98e2-6d05b1d4d9a1;
- Fri, 24 Nov 2023 15:04:47 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 69982414-8ad2-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 15:04:41 +0100 (CET)
 Received: from Dell.bugseng.com (unknown [37.161.237.167])
- by support.bugseng.com (Postfix) with ESMTPSA id 4B65A4EE0C98;
- Fri, 24 Nov 2023 15:04:46 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id DD6024EE0C91;
+ Fri, 24 Nov 2023 15:04:40 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,46 +41,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6d14d466-8ad2-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: 69982414-8ad2-11ee-9b0e-b553b5be7939
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 08/11] xen/kernel: address a violation of MISRA C:2012 Rule 8.2
-Date: Fri, 24 Nov 2023 15:03:23 +0100
-Message-Id: <2f551139ef5a26b203c6c089947ca4bc5bd29d5a.1700832962.git.federico.serafini@bugseng.com>
+	Jan Beulich <jbeulich@suse.com>
+Subject: [XEN PATCH 02/11] xen/aclinux: address violations of MISRA C:2012 Rule 8.2
+Date: Fri, 24 Nov 2023 15:03:17 +0100
+Message-Id: <98eabdc58a458188157765fd9ca8c9d4d4f6b11c.1700832962.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1700832962.git.federico.serafini@bugseng.com>
 References: <cover.1700832962.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing parameter name. No functional change.
+Add missing parameter names. No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/include/xen/kernel.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/include/acpi/platform/aclinux.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/include/xen/kernel.h b/xen/include/xen/kernel.h
-index 560b1c2832..6bbd4a2827 100644
---- a/xen/include/xen/kernel.h
-+++ b/xen/include/xen/kernel.h
-@@ -112,7 +112,7 @@ struct vcpu;
+diff --git a/xen/include/acpi/platform/aclinux.h b/xen/include/acpi/platform/aclinux.h
+index 9e572460dc..f5e0a6108e 100644
+--- a/xen/include/acpi/platform/aclinux.h
++++ b/xen/include/acpi/platform/aclinux.h
+@@ -75,9 +75,9 @@
  
- void show_execution_state(const struct cpu_user_regs *regs);
- void cf_check show_execution_state_nonconst(struct cpu_user_regs *regs);
--void vcpu_show_execution_state(struct vcpu *);
-+void vcpu_show_execution_state(struct vcpu *v);
+ #define acpi_thread_id struct vcpu *
  
- #endif /* _LINUX_KERNEL_H */
+-void *acpi_os_alloc_memory(size_t);
+-void *acpi_os_zalloc_memory(size_t);
+-void acpi_os_free_memory(void *);
++void *acpi_os_alloc_memory(size_t sz);
++void *acpi_os_zalloc_memory(size_t sz);
++void acpi_os_free_memory(void *ptr);
  
+ #define ACPI_ALLOCATE(a)	acpi_os_alloc_memory(a)
+ #define ACPI_ALLOCATE_ZEROED(a)	acpi_os_zalloc_memory(a)
 -- 
 2.34.1
 
