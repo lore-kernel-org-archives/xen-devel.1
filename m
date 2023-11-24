@@ -4,37 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3729C61D97
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:48:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640505.998833 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95343C61D97
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:48:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640508.998843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TjT-0003ie-Qb; Fri, 24 Nov 2023 10:48:23 +0000
+	id 1r6Tjk-0004Fy-1t; Fri, 24 Nov 2023 10:48:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640505.998833; Fri, 24 Nov 2023 10:48:23 +0000
+Received: by outflank-mailman (output) from mailman id 640508.998843; Fri, 24 Nov 2023 10:48:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TjT-0003iX-M2; Fri, 24 Nov 2023 10:48:23 +0000
-Received: by outflank-mailman (input) for mailman id 640505;
- Fri, 24 Nov 2023 10:48:22 +0000
+	id 1r6Tjj-0004Fp-V6; Fri, 24 Nov 2023 10:48:39 +0000
+Received: by outflank-mailman (input) for mailman id 640508;
+ Fri, 24 Nov 2023 10:48:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r6TTN-0006hx-BU
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:45 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
+ <SRS0=u6gD=HF=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1r6Tji-0004EL-SX
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:48:38 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f400:7eae::600])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a55788b0-8ab4-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 11:31:36 +0100 (CET)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a00a9d677fcso236752066b.0
- for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:36 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:31:35 -0800 (PST)
+ id 04a9bcfd-8ab7-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 11:48:36 +0100 (CET)
+Received: from CH2PR17CA0017.namprd17.prod.outlook.com (2603:10b6:610:53::27)
+ by SJ0PR12MB7457.namprd12.prod.outlook.com (2603:10b6:a03:48d::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.21; Fri, 24 Nov
+ 2023 10:48:33 +0000
+Received: from SA2PEPF000015CC.namprd03.prod.outlook.com
+ (2603:10b6:610:53:cafe::6d) by CH2PR17CA0017.outlook.office365.com
+ (2603:10b6:610:53::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.21 via Frontend
+ Transport; Fri, 24 Nov 2023 10:48:33 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SA2PEPF000015CC.mail.protection.outlook.com (10.167.241.202) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7025.12 via Frontend Transport; Fri, 24 Nov 2023 10:48:32 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 24 Nov
+ 2023 04:48:32 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 24 Nov
+ 2023 04:48:32 -0600
+Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
+ Transport; Fri, 24 Nov 2023 04:48:29 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,179 +65,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a55788b0-8ab4-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700821896; x=1701426696; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DJRjUvdwuuad2efuExKOiQ+ed+OjR0ZfoiyU0hrJwyQ=;
-        b=BLCH2jOgcpPZz0xTBNyf6oSdRS/LJqn5Irh0ACRl0XaANNUcxPeMtwv8IUar9ygayC
-         rgMB4/XB21A2Z0dkMgbppZQ1CieVFEwEZ8crr+TPzpobdVwHIV8dyeCwDsyCIVCJ4vPP
-         daG+Xyghv4PXJT4Vni1BwD4bW7JmI0JARcvCOyu+2Adqr9G6bCvgAInCv8u070EkDukx
-         YsSjldkM8R5aSKMBz32lA4q+lg4ZFNjh7TSqqICNOaJYDQfF0YSFJAvpyR1mfNxjqb6P
-         /1rSI6XnQbpiNTgmiz9eRE/oZQOmmXxn6GXViljLvBqHA5iyhJDYQanez9EZ+/bNcM+i
-         CAfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700821896; x=1701426696;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=DJRjUvdwuuad2efuExKOiQ+ed+OjR0ZfoiyU0hrJwyQ=;
-        b=mmTxNBFfvxaqyuAKKoATd3vTNfS2zESXVQddM/ittAMG3sBSoG1BRSPj0wBfJBjOhb
-         r/n0LaQzjUwhEdjpLClFMKrsNTQ21tj4HCk0eeQ04FYKj16NriGV41n0IDQEP5Af68Ns
-         CR25bofY/xv0G1YJLqSBwc1fi+tccqINgu34woR2NFimCsBy7AACLTjGb4ZcTcnY/vIE
-         zd4opRnd27ez0eljfKkm4d0SQEvMSuXwHEGtZ7U4iAHcvONItAVwvAv5Tf0kd+iX3PZK
-         yeoempW38VMNKdILPJku7lNQWWt2QMkoh1EE6BG3qr5dpjSIl2Cq92RSLIVMSWjOyl0n
-         iztA==
-X-Gm-Message-State: AOJu0Yy7eVCu4dWdIdsUZ+6UooTKgoNHc/ePH1j0w7pdnXvsqOcUFdmp
-	pDZD0ll3WnTX933I+VAehipXX8Mj9d8B0g==
-X-Google-Smtp-Source: AGHT+IGpih3co3kvDZv/3jxn98aNZyNxgpf5T1LzAvpcmJAKB7f7T7q7e77bVQTfk3l7qT4x1EBIYg==
-X-Received: by 2002:a17:906:b6d3:b0:a03:a3c4:ed99 with SMTP id ec19-20020a170906b6d300b00a03a3c4ed99mr1807229ejb.41.1700821895729;
-        Fri, 24 Nov 2023 02:31:35 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 25/39] xen/riscv: introduce asm/p2m.h
-Date: Fri, 24 Nov 2023 12:30:45 +0200
-Message-ID: <a37e4b7115897a0265907c53667a0ede3763f0ce.1700761381.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
-References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 04a9bcfd-8ab7-11ee-9b0e-b553b5be7939
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Q2OeljKCq8p90aklX4NJgeJu0Hj0PrTYgnzzPHa7CCzk4U5fEP+4mgIkzxW6zbOmF4kHXx6cABslX7UJyp206TQPFs+FGKGouh05yTVZ+nswg7S3Pep9ru2UJiZdZdY09VaiMIKT33pwFea9u/S/EClQFicHHICTRWaf++cVynzVZC8H9V7PcnKAbZ5e80ZF2AxPYVC9V6MZ+piWLWIFBj7CJChVRN6p0if0fNCWmooiJLy5RR56r1izhJeoxvMzZ9m9F+22cjcn9LBHFqaDIz3t/A1diS+Fc8g6Z5dU4Frd265zO+1U2EbMUVwM67osdUwX+cIdBbfqNLZ+nOfYaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WtE0gSxJw4o2GFpTOi5DoZtQJ/3WJX48J0z3EA7jhKY=;
+ b=S+sKHn+geK6NE+XkoG7nB99Rjlu2Lz+ARPQH8g9+Ij6JyuLaURAKOuS8rm8PcTMyTB9Zl6ru8YAF0xUUrc4hgpV8NfuZD/yGKPhyz5v4oUFFqNSPoW73IMOji0K43DRoVm3yb+qMR9IfAkNPVjQQRZEr5BnrHgVSuWsRJMnBT+H0SE/ql2RLZXfuoauohv6MuLndispqpmZpPwf4KZXoV/W6dP3kXT2y2IsRJsGhUrxN3VxRZY5FFtbApKpiqYGdG+JLQisqOB89bLOIVYhBM4x9lJ5+Z90ZAil7YNTe8y9Lo3Wq954reQfW6BCcT32K9eUdNe2vDbVCaIGxqA/oCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WtE0gSxJw4o2GFpTOi5DoZtQJ/3WJX48J0z3EA7jhKY=;
+ b=QoydlTDe35Br3OWGCr7zJjzYs/vNjB9hdJvSsQhA3le0cuTUwK4qwF7DMCOYrTf2BvrIDD104jmkAhoAoTa5xsUl7T1UPB3NBOAlZm+ExnVyVLHG6dldP+teSwOXc7hNBgwebfRTmq/6YiiwPcZN34fMUrTzBaLj2Wz7gXmkaA8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <9f473cc8-d4d5-41de-8b87-b263759c28c5@amd.com>
+Date: Fri, 24 Nov 2023 11:48:29 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 4/5] xen/arm: Move static memory build code in separate
+ modules
+To: Luca Fancellu <luca.fancellu@arm.com>, <xen-devel@lists.xenproject.org>
+References: <20231124094841.1475381-1-luca.fancellu@arm.com>
+ <20231124094841.1475381-5-luca.fancellu@arm.com>
+Content-Language: en-US
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <20231124094841.1475381-5-luca.fancellu@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF000015CC:EE_|SJ0PR12MB7457:EE_
+X-MS-Office365-Filtering-Correlation-Id: 39b288ef-ad95-4e6d-77b9-08dbecdae718
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	MxU0DKXucTlRCU3K8n5soY/2QoEPU17ziGMh5s3gQHW9XyELxTfn2ADOM3Z2XCuErGZ+N7zR3L74DHYU30FEt8MVGdhKjLKXb7WiFexMxcJ6BQ8hHMadwpwvELqQhvaag7bzIFPV50NYGkPAqxOKXLqrmSodOSjqTan/0hrsEUlv9KIaB4VqmiAe+gWrAMDq2psRVz2zY2zvwOVlYYmBhxsveIJXpAARJhescwy6UXAao+zuuBrzDGzCrHR3WKw4cYqdtfgUG8HPFombluOH1BFa4erqcWZ2NOIV3Z5/QjPGolYGQ5vPtlWllHrW048LeMXkKchuC6m/xboVhh0+p/X6EehdseiFQalLH1RZoNxdiId3bD0uZU70TuZveEEVwQeKd47gzkdpbBG1raiVhbDo4Y8Rth7y+yTt+1q/RDMKn/P/oTjJZhmcZcW+ESpYplkL6Ojw/BdbHhNNClH43iH0DTq4GAnxn3BB7iNbq+Zl8OfgM5cDmda5F1J34xk+e9jUuNl+7EnjeGymblWfruwVfnabVN6sgEep8I907rzDXekEW3UvvNdPbacXNtzqc6CRUJN8GOVVMkPuTaKhHOZpifMqxXtmwRMi3csExIiuy+N85KvK+66tR98cEHl1YL1u5hhXqra7NkNId25j1/ca1dFkfV9i+K9T3Q7tRXrkI+twUMgWrYWhuhGgD/GJEeMTmbTKC+DJNA2puCSPMBgjxrQwbNpqrWp+cV7O3G+AWbiNn0GTpckVbk2F1ZlhH4ISo8LnQNqN3DTLnhVfwJxe0wl2TJ2ZswSEypu2qGdwyteafOw1ZqwdaRcqx8s9q1Gqo4EXrdTudM1b0qyqHYpL55LP7JOUGnzxAxfod3E=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(136003)(376002)(39860400002)(230173577357003)(230273577357003)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(82310400011)(46966006)(36840700001)(40470700004)(5660300002)(2906002)(26005)(2616005)(47076005)(4744005)(40460700003)(70206006)(70586007)(16576012)(110136005)(36756003)(54906003)(36860700001)(40480700001)(4326008)(81166007)(53546011)(316002)(8676002)(8936002)(31696002)(41300700001)(86362001)(478600001)(31686004)(336012)(356005)(44832011)(82740400003)(426003)(43740500002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2023 10:48:32.6598
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 39b288ef-ad95-4e6d-77b9-08dbecdae718
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF000015CC.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB7457
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V2:
- - Nothing changed. Only rebase.
----
- xen/arch/riscv/include/asm/p2m.h | 105 +++++++++++++++++++++++++++++++
- 1 file changed, 105 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/p2m.h
+Hi Luca,
 
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-new file mode 100644
-index 0000000000..993aec6d2c
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -0,0 +1,105 @@
-+#ifndef __ASM_RISCV_P2M_H__
-+#define __ASM_RISCV_P2M_H__
-+
-+#include <asm/page-bits.h>
-+
-+#define paddr_bits PADDR_BITS
-+
-+/*
-+ * List of possible type for each page in the p2m entry.
-+ * The number of available bit per page in the pte for this purpose is 4 bits.
-+ * So it's possible to only have 16 fields. If we run out of value in the
-+ * future, it's possible to use higher value for pseudo-type and don't store
-+ * them in the p2m entry.
-+ */
-+typedef enum {
-+    p2m_invalid = 0,    /* Nothing mapped here */
-+    p2m_ram_rw,         /* Normal read/write guest RAM */
-+    p2m_ram_ro,         /* Read-only; writes are silently dropped */
-+    p2m_mmio_direct_dev,/* Read/write mapping of genuine Device MMIO area */
-+    p2m_mmio_direct_nc, /* Read/write mapping of genuine MMIO area non-cacheable */
-+    p2m_mmio_direct_c,  /* Read/write mapping of genuine MMIO area cacheable */
-+    p2m_map_foreign_rw, /* Read/write RAM pages from foreign domain */
-+    p2m_map_foreign_ro, /* Read-only RAM pages from foreign domain */
-+    p2m_grant_map_rw,   /* Read/write grant mapping */
-+    p2m_grant_map_ro,   /* Read-only grant mapping */
-+    /* The types below are only used to decide the page attribute in the P2M */
-+    p2m_iommu_map_rw,   /* Read/write iommu mapping */
-+    p2m_iommu_map_ro,   /* Read-only iommu mapping */
-+    p2m_max_real_type,  /* Types after this won't be store in the p2m */
-+} p2m_type_t;
-+
-+#include <xen/p2m-common.h>
-+
-+static inline int get_page_and_type(struct page_info *page,
-+                                    struct domain *domain,
-+                                    unsigned long type)
-+{
-+    BUG();
-+    return 1;
-+}
-+
-+/* Look up a GFN and take a reference count on the backing page. */
-+typedef unsigned int p2m_query_t;
-+#define P2M_ALLOC    (1u<<0)   /* Populate PoD and paged-out entries */
-+#define P2M_UNSHARE  (1u<<1)   /* Break CoW sharing */
-+
-+static inline struct page_info *get_page_from_gfn(
-+    struct domain *d, unsigned long gfn, p2m_type_t *t, p2m_query_t q)
-+{
-+    BUG();
-+    return NULL;
-+}
-+
-+static inline void memory_type_changed(struct domain *d)
-+{
-+    BUG();
-+}
-+
-+
-+static inline int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
-+                                                        unsigned int order)
-+{
-+    BUG();
-+    return 1;
-+}
-+
-+static inline int guest_physmap_add_entry(struct domain *d,
-+                            gfn_t gfn,
-+                            mfn_t mfn,
-+                            unsigned long page_order,
-+                            p2m_type_t t)
-+{
-+    BUG();
-+    return 1;
-+}
-+
-+/* Untyped version for RAM only, for compatibility */
-+static inline int __must_check
-+guest_physmap_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
-+                       unsigned int page_order)
-+{
-+    return guest_physmap_add_entry(d, gfn, mfn, page_order, p2m_ram_rw);
-+}
-+
-+static inline mfn_t gfn_to_mfn(struct domain *d, gfn_t gfn)
-+{
-+    BUG();
-+    return _mfn(0);
-+}
-+
-+static inline bool arch_acquire_resource_check(struct domain *d)
-+{
-+    /*
-+     * The reference counting of foreign entries in set_foreign_p2m_entry()
-+     * is supported on RISCV.
-+     */
-+    return true;
-+}
-+
-+static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
-+{
-+    /* Not supported on RISCV. */
-+}
-+
-+#endif /* __ASM_RISCV_P2M_H__ */
-\ No newline at end of file
--- 
-2.42.0
++ CC others
 
+On 24/11/2023 10:48, Luca Fancellu wrote:
+> 
+> 
+> Move static memory and static shared memory code in separate modules
+> so that they are included only when the corresponding feature is
+> enabled, doing that we modularise the features and we remove some
+> ifdefs from the code to improve readability.
+> 
+> Move process_shm_node function from bootfdt module and make it
+> externally visible.
+> 
+> A static inline helper called process_shm_chosen is introduced, it
+> will call the process_shm function for the '/chosen' node, and will
+> be used by the function construct_dom0 instead of using directly
+> process_shm, allowing some #ifdef to be removed.
+> 
+> No functional changes are intended.
+> 
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+
+~Michal
 
