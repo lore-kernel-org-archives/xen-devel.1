@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A834C61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 17:30:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640859.999604 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7173AC61D97
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 17:30:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640861.999617 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6a0f-0002nc-Qy; Fri, 24 Nov 2023 17:30:33 +0000
+	id 1r6a0g-0002wB-FB; Fri, 24 Nov 2023 17:30:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640859.999604; Fri, 24 Nov 2023 17:30:33 +0000
+Received: by outflank-mailman (output) from mailman id 640861.999617; Fri, 24 Nov 2023 17:30:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6a0f-0002nV-OR; Fri, 24 Nov 2023 17:30:33 +0000
-Received: by outflank-mailman (input) for mailman id 640859;
- Fri, 24 Nov 2023 17:30:31 +0000
+	id 1r6a0g-0002vB-7a; Fri, 24 Nov 2023 17:30:34 +0000
+Received: by outflank-mailman (input) for mailman id 640861;
+ Fri, 24 Nov 2023 17:30:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SB6C=HF=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1r6a0d-0002YK-R9
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 17:30:31 +0000
+ id 1r6a0e-0002YK-97
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 17:30:32 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2861d191-8aef-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 18:30:27 +0100 (CET)
+ id 29794bea-8aef-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 18:30:29 +0100 (CET)
 Received: from beta.station (net-37-182-35-120.cust.vodafonedsl.it
  [37.182.35.120])
- by support.bugseng.com (Postfix) with ESMTPSA id 4D9794EE073C;
- Fri, 24 Nov 2023 18:30:26 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 9D7834EE0747;
+ Fri, 24 Nov 2023 18:30:28 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,69 +42,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2861d191-8aef-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 29794bea-8aef-11ee-9b0e-b553b5be7939
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Dario Faggioli <dfaggioli@suse.com>
-Subject: [XEN PATCH v2 0/3] xen: address violations of MISRA C:2012 Rule 13.1
-Date: Fri, 24 Nov 2023 18:29:40 +0100
-Message-Id: <cover.1700844359.git.simone.ballarin@bugseng.com>
+	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
+Subject: [XEN PATCH v2 3/3] xen: address violations of MISRA C:2012 Rule 13.1
+Date: Fri, 24 Nov 2023 18:29:43 +0100
+Message-Id: <771a6f804f4e7dda3897359b57d1d14c2878ea16.1700844359.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1700844359.git.simone.ballarin@bugseng.com>
+References: <cover.1700844359.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series contains some changes and deviation to address
-reports of MISRA C:2012 Rule 13.1:
-Initializer lists shall not contain persistent side effects
+Rule 13.1: Initializer lists shall not contain persistent side effects
 
-An assignment has been moved outside the initializer lists, other
-violations have been deviated with SAF comments.
+The assignment operation in:
 
-Function calls do not necessarily have side-effects, in these cases this
-patch proposes to add ECLAIR pure, const or noeffect attributes whenever
-possible.
+.irq = rc = uart->irq,
 
-ECLAIR pure and const attributes have the same definition of the corresponding
-GCC attributes, noeffect attribute has the following definition:
-"like pure but can also read volatile variable not triggering side effects"
+is a persistent side effect in a struct initializer list.
 
-It has been decided to avoid GCC/clang attributes to avoid potentially
-dangerous optimisations from the compiler.
+This patch avoids rc assignment and directly uses uart->irq
+in the following if statement.
 
+No functional changes.
+
+Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+
+---
 Changes in v2:
-- prefer ECLAIR attributes over GCC attributes;
-- replace ECL deviations with equivalent SAF deviations;
-- deviate violations caused by harmless volatile asm;
-- deviate violations caused by debug and logging macros/functions.
+- avoid assignment of rc;
+- drop changes in vcpu_yield(void).
+---
+ xen/drivers/char/ns16550.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Simone Ballarin (3):
-  automation/eclair: tag function calls to address violations of MISRA
-    C:2012 Rule 13.1
-  xen/arm: add SAF deviation for debugging and logging effects
-  xen: address violations of MISRA C:2012 Rule 13.1
-
- .../ECLAIR/call_properties.ecl                | 22 +++++++++++++++++++
- docs/misra/safe.json                          | 16 ++++++++++++++
- xen/arch/arm/device.c                         |  1 +
- xen/arch/arm/guestcopy.c                      |  4 ++++
- xen/arch/x86/hvm/hvm.c                        |  1 +
- xen/common/sched/core.c                       |  3 +++
- xen/drivers/char/ns16550.c                    |  6 +++--
- 7 files changed, 51 insertions(+), 2 deletions(-)
-
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index ddf2a48be6..644a3192bb 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -445,11 +445,13 @@ static void __init cf_check ns16550_init_postirq(struct serial_port *port)
+             struct msi_info msi = {
+                 .sbdf = PCI_SBDF(0, uart->ps_bdf[0], uart->ps_bdf[1],
+                                  uart->ps_bdf[2]),
+-                .irq = rc = uart->irq,
++                .irq = uart->irq,
+                 .entry_nr = 1
+             };
+ 
+-            if ( rc > 0 )
++            rc = 0;
++
++            if ( uart->irq > 0 )
+             {
+                 struct msi_desc *msi_desc = NULL;
+ 
 -- 
 2.34.1
 
