@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3862AC636D4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:31:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640370.998442 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD07C61DF4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:31:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640379.998528 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TSx-0007xi-8y; Fri, 24 Nov 2023 10:31:19 +0000
+	id 1r6TT7-0002Al-SC; Fri, 24 Nov 2023 10:31:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640370.998442; Fri, 24 Nov 2023 10:31:19 +0000
+Received: by outflank-mailman (output) from mailman id 640379.998528; Fri, 24 Nov 2023 10:31:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TSx-0007xN-5j; Fri, 24 Nov 2023 10:31:19 +0000
-Received: by outflank-mailman (input) for mailman id 640370;
- Fri, 24 Nov 2023 10:31:17 +0000
+	id 1r6TT7-00029d-Iw; Fri, 24 Nov 2023 10:31:29 +0000
+Received: by outflank-mailman (input) for mailman id 640379;
+ Fri, 24 Nov 2023 10:31:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r6TSv-0006hx-0G
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:17 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ id 1r6TT5-0006hx-Ma
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:27 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 98742273-8ab4-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 11:31:15 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a0029289b1bso245212366b.1
- for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:15 -0800 (PST)
+ id 9efe9df1-8ab4-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 11:31:26 +0100 (CET)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a002562bd8bso338517266b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:26 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.13
+ g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:31:14 -0800 (PST)
+ Fri, 24 Nov 2023 02:31:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98742273-8ab4-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 9efe9df1-8ab4-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700821874; x=1701426674; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1700821885; x=1701426685; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2Lx0hMMCNqeH/OzTGMdTqOhOkAZcvL6csJ3mh/hZCkY=;
-        b=bKoZHEwAI9ZgfuDOucs2uf2/Il4jRv16pqkp3+WEBsh6LHbit3arBetN3ZX25FFfLp
-         BV/t02jV/iyHAxrtZbJvlbCSrGdcsEPvAB2ZUq8/sbjFV4F3TOTcE+Hqd4fwqjNwsX00
-         QR5IGg+m8txSOpo63vVfWV89nOsspRgU8rnDJ1UK5AlCw+opHu98PgajKGNr3u80olkp
-         kIG8NI82hpebRlpGYFEb43/aKZ1dDd9n8jSoAQiRSVRK84tegqvLOy0Hwslvtry/scuj
-         f0cMjhO2mpBo2liu2xxP2hrvDvVqJT7I4qvD+ekkAWF9I05tPWK77MBX1UcsKhvNdxVL
-         wZnQ==
+        bh=NGHd1eioR6HPD5JPnk3lVVgnNn+PvGtKXyao91lq60c=;
+        b=S/bRg5ZbVFpD7Oiy1uCed1ltJLWbEt1Bg6qcdtsJsW0VKEghSOG0m9ded1+x8dJL2t
+         KDmM/4vpBGGWKMcs2JFh68Ro3qjtrWlZL22GpmrUK7LVKRADhmRgyOYzRjOgRm71JqUC
+         Q3aVlKjdMiVvMLxkixZfKE/YOoRXmyfEO8KyiIV7+fxSJjPKN9BfMTFBybR4b8xYcnmP
+         eW8o/Va5NUfAtepgcMtoEhlQ0zEgtyecdG/E0AAYh+rAFHnxNFWTx0231CYYrUZiv/gT
+         l+uA7tT74v3O1aC2WSBedJ+/E5S79VEa65uNljhGMHKw2mlOrhe2FiEhDrJfuWeVzCNl
+         ZBcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700821874; x=1701426674;
+        d=1e100.net; s=20230601; t=1700821885; x=1701426685;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=2Lx0hMMCNqeH/OzTGMdTqOhOkAZcvL6csJ3mh/hZCkY=;
-        b=tHkA5ltzybEbJ9ycvOwZ10f80v2cz3aDIfxj6ADs50uPfpcimKK48mUuvsH9Bpn92A
-         k/df+imGWaR2mQzwOdkQOY99V/9hS0XHmk2+IH2UzZYGsy7s1b4MXVP/jnYA4q/4dMUN
-         ABcvHftDfLon0PXXWh2vptC+ICSuoaew3bxullQ8D7UJZyRzoVX8MSAHE9dcvJI53kWc
-         /66RvV88Ty43Uml8s6Y9bi9B+BMf3JsqfFtBAhjI0oBzN/at4CQtwrzf3mu9cMhAuBqH
-         FA80c6/ErxQqQH1yHuzYTqRzpvWY9JXSvxY4OXR8Xuvdyz11IGBxSc/f5Q0iJNc6wtv5
-         PnIw==
-X-Gm-Message-State: AOJu0Yy1bwvt4yc/PEqQTSQtqxsKXZTcH5OZa9jdG4MkRa5tl4GyVcom
-	ml5DceSl/LIdBMCKojL9RGHptWmgxuounA==
-X-Google-Smtp-Source: AGHT+IGyNhQbLYbMxeMUFS3S1mxFC2Z7Epqy+ZmWtl3ykPr1DzfXKb3M/5GNJzQgNuzq2AWM2FV7Vw==
-X-Received: by 2002:a17:906:375b:b0:9c7:5667:5649 with SMTP id e27-20020a170906375b00b009c756675649mr1623343ejc.73.1700821874541;
-        Fri, 24 Nov 2023 02:31:14 -0800 (PST)
+        bh=NGHd1eioR6HPD5JPnk3lVVgnNn+PvGtKXyao91lq60c=;
+        b=nOqmTiPyw2xaRJZlk23WGyZGHMWd8tGMyB+ohpdEl9xxTUQiSpVGdyGyGMv03jPi99
+         aZ31j9NZYY/5N1EbgxMP+psUOVdz5hH0RVTnlt2IFtGyjyu9DSzrzw2mI4lj4OYE3i7N
+         JMlX1TdryM7a5Ytp2bOk+m8KGdcq9H7GhAfNmz3nW4y1TjA9XJLlXBf9RuJitE9vVC9V
+         6nzxv3EBjj79/G6TonQE2SQ1aolQY0x+0EYIbZbYlEOYqhZtj3nxZ/DVhu0uQ9i5hTll
+         g7JHqsLS5aUbBnDJ6uSyxXQkYbAPPtHNgfTxpcfz+XZ5cqTyXRci8q3JcBBlWRQ9jcVZ
+         jEEg==
+X-Gm-Message-State: AOJu0YzSbO5GSIAY3ZpS9V2fvd1pQkdirA5n6M6z7HI3ivBoA0Zrj5kH
+	EmxHU9hD9D1JeqwDE5LM4fhodTFcbvRchw==
+X-Google-Smtp-Source: AGHT+IF369ssi9i4xHOn9AHxdONjbG9obh1F0ASlfG8CJ2qND7XQtQOeZTvzeo5UxLoOqe5ik7Z9bg==
+X-Received: by 2002:a17:906:3ca:b0:9fe:ae1b:77bc with SMTP id c10-20020a17090603ca00b009feae1b77bcmr2106918eja.34.1700821885024;
+        Fri, 24 Nov 2023 02:31:25 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,9 +88,9 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 05/39] xen/riscv: introduce spinlock.h
-Date: Fri, 24 Nov 2023 12:30:25 +0200
-Message-ID: <342e330232db63454ca368aa7b5bd100c944b1e8.1700761381.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 15/39] xen/riscv: introduce flushtlb.h
+Date: Fri, 24 Nov 2023 12:30:35 +0200
+Message-ID: <12a698e62766be7dfdac23923d7cdcb3b9b2d52e.1700761381.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
@@ -100,34 +100,49 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
- - update definition of arch_lock_signal() to not violate cod style.
- - update definition of arch_lock_signal_wmb() to use WMB aspect.
+ - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/spinlock.h | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/spinlock.h
+ xen/arch/riscv/include/asm/flushtlb.h | 31 +++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/flushtlb.h
 
-diff --git a/xen/arch/riscv/include/asm/spinlock.h b/xen/arch/riscv/include/asm/spinlock.h
+diff --git a/xen/arch/riscv/include/asm/flushtlb.h b/xen/arch/riscv/include/asm/flushtlb.h
 new file mode 100644
-index 0000000000..bf45a7f005
+index 0000000000..7059a53823
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/spinlock.h
-@@ -0,0 +1,15 @@
-+#ifndef __ASM_RISCV_SPINLOCK_H
-+#define __ASM_RISCV_SPINLOCK_H
++++ b/xen/arch/riscv/include/asm/flushtlb.h
+@@ -0,0 +1,31 @@
++#ifndef __ASM_RISCV_FLUSHTLB_H__
++#define __ASM_RISCV_FLUSHTLB_H__
 +
-+#define arch_lock_acquire_barrier() smp_mb()
-+#define arch_lock_release_barrier() smp_mb()
++#include <xen/cpumask.h>
 +
-+#define arch_lock_relax() cpu_relax()
-+#define arch_lock_signal() ((void)0)
-+#define arch_lock_signal_wmb()      \
-+({                                  \
-+    smp_wmb();                      \
-+    arch_lock_signal();             \
-+})
++/*
++ * Filter the given set of CPUs, removing those that definitely flushed their
++ * TLB since @page_timestamp.
++ */
++/* XXX lazy implementation just doesn't clear anything.... */
++static inline void tlbflush_filter(cpumask_t *mask, uint32_t page_timestamp) {}
 +
-+#endif /* __ASM_RISCV_SPINLOCK_H */
++#define tlbflush_current_time() (0)
++
++static inline void page_set_tlbflush_timestamp(struct page_info *page)
++{
++    BUG();
++}
++
++/* Flush specified CPUs' TLBs */
++void arch_flush_tlb_mask(const cpumask_t *mask);
++
++#endif /* __ASM_RISCV_FLUSHTLB_H__ */
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.42.0
 
