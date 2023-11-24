@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 597ABC61D97
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:39:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640428.998653 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CCAEC61DF4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:39:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640436.998672 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Tb4-0005O3-Il; Fri, 24 Nov 2023 10:39:42 +0000
+	id 1r6TbF-0006Zw-8X; Fri, 24 Nov 2023 10:39:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640428.998653; Fri, 24 Nov 2023 10:39:42 +0000
+Received: by outflank-mailman (output) from mailman id 640436.998672; Fri, 24 Nov 2023 10:39:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Tb4-0005Np-G0; Fri, 24 Nov 2023 10:39:42 +0000
-Received: by outflank-mailman (input) for mailman id 640428;
- Fri, 24 Nov 2023 10:39:41 +0000
+	id 1r6TbF-0006Yi-5a; Fri, 24 Nov 2023 10:39:53 +0000
+Received: by outflank-mailman (input) for mailman id 640436;
+ Fri, 24 Nov 2023 10:39:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r6TTC-0006hy-6I
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:34 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
+ id 1r6TTT-0006hy-M8
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:51 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a36b0e0d-8ab4-11ee-98e2-6d05b1d4d9a1;
- Fri, 24 Nov 2023 11:31:33 +0100 (CET)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a02ba1f500fso254069466b.0
- for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:33 -0800 (PST)
+ id ac53029a-8ab4-11ee-98e2-6d05b1d4d9a1;
+ Fri, 24 Nov 2023 11:31:48 +0100 (CET)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a03a9009572so237670466b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:48 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.31
+ g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:31:32 -0800 (PST)
+ Fri, 24 Nov 2023 02:31:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a36b0e0d-8ab4-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: ac53029a-8ab4-11ee-98e2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700821892; x=1701426692; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1700821908; x=1701426708; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IYGdUaxClo88qkYZTfmXx6C4vZjKDWY65LgrL6BSEIQ=;
-        b=WZzlNpXhZhW1vyY5IQnIw6vpSW49m24E9pJ+u3K9nOwTO1Vg8CpliYnZ4gLkCteCNt
-         lzOK9owJw8B6TwkIEGuNtQKQHQU68nZ8/WHXpUlhpgDAKmt9+Q0hs37ptddQWTJ9ODgG
-         nTMkqrj0hlltKV4b5WBvXXzGEowSPh02WMBCqnVTIvIetow4JwVgTrsRFUlaE2aJZ+CG
-         2pMTYerwRtOVKrLrsYwVbdcBJB2Zn9bpLW2WuGXymDYaMCw0JgBgq609MX9/FkHn9hhj
-         bO5qrmBTI+9EiFDJsw8wnRhVtpHFeIUMZwkJ0y1EOCpyzBQmwwo7oKOxBVcLbJFKUQdh
-         5cmg==
+        bh=Z1w34BSjUAi4k8RmSoj0kwk7zKOzvOqC/Wauz6/CNUk=;
+        b=P0uy1NiUvsDK9vbmEO3yYsx/EH8fuP7NmSmM8Hnys5cgAHqQ9cZ/xJONb+D8Q3Zpy6
+         wkHSSBtEHQp3IEM8vXpC5QwYMv3AMB3KU9xzfMv82Iu/Dgg290jSEppctQguyF5KLlll
+         JCrbUIe61QA+ITrFR46z+t+S9yrXVnIBTYcayMgip4EMxnRhXTTdrWnqCUcfg3Zdzrn4
+         6yaHpI55qce7O1GeLskxO9emNqjbZimrTDhL4ZVEiqBBMgWJe0t9LJG/Rel2s3z51C+K
+         bOATyM0hqndPosPGjfsG3DI5U9Wehm4zhR9IVz5EOPMZmcrQ/pINyuqZtDqp+65vC7Kt
+         u/LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700821892; x=1701426692;
+        d=1e100.net; s=20230601; t=1700821908; x=1701426708;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IYGdUaxClo88qkYZTfmXx6C4vZjKDWY65LgrL6BSEIQ=;
-        b=Xs541Xbk+3oSC/rMPtednsDppY+p69nm4kDDcrUJD3iml74Y/rgkuT/lTm/2HhY8+y
-         0EQ9JIZD+lUfXjkIRIP8GCsror851IVQXL8bB1gYC2iNe3IKqtZacW26mPUwTasKgUEr
-         HN76Mjz6cyXUh2yKhLuuWKBaMufUFZ2G4d9rPfn5QRm5n5OYZmvTJMy5R7eT/kMZfeVx
-         r9jJEhP7Jh9NPW3VwLNo6IqakPA6CVRNyLv8Gj9FJOWYZrQtcXNCPS1e1IPjBPiNNjCc
-         CYLKcinjwyqcSMtdQ4qlUhj5YJnxadUHwA8rD7VteIs0kEYvQfwdRHcTsNpJ7u8KY+kp
-         ZnOQ==
-X-Gm-Message-State: AOJu0Yy+7NE5s/izOE+Z3YW5luBrv+zrVGT/27OGrXYlvgS7GyWgBuA6
-	1LvZ4biEIR4cXermFarY33JaW2wfoKUVcA==
-X-Google-Smtp-Source: AGHT+IGP6o+c3A/KNH1KEDT1+8QFRWy/ZU+PHOe8CjqgHxjk0FKV5rFaOf7mLnoO23Pr1C8gUjlKzw==
-X-Received: by 2002:a17:906:856:b0:a00:2de3:73cc with SMTP id f22-20020a170906085600b00a002de373ccmr1316095ejd.69.1700821892494;
-        Fri, 24 Nov 2023 02:31:32 -0800 (PST)
+        bh=Z1w34BSjUAi4k8RmSoj0kwk7zKOzvOqC/Wauz6/CNUk=;
+        b=n3Hdy/MwLv7tB+6foZ2a5LpP1AJ95wJe8LWQi6SdKbok9KDWVqT/QRUcZN4HnY5mAn
+         8ZVxXIl/eO4JkwrvjH3dVSKjG8kyQwJ8dXz+Ts1IPVWJYp7pNidmo52tkk0LWK+Zv4Gc
+         vlflTRZ7HXNdQuU2+aytW5+fon83o3tZ6N+lFn5nyb2ehVyooGPz1velK+WXSKuz3nOh
+         PHH6HBX+62k2k8euJ0Z7kpqtPeUZ69k2tG0XBq39jGQqN7cFKf5FDSUyMyyfo9erUvrf
+         RThT9y8KGo9noM/nevEKvon+HRSW2wHH5eDl57OHpy8YrH84PxRPntCmYyVdccHdUyLI
+         lNHA==
+X-Gm-Message-State: AOJu0Yxi2kRLlxMhlPSPzp+lA2EgRUjNfe6p+cdFIivVfY6iSt/afI6q
+	8sQfBRLssJEKJ6F8KvvoeszkluuZ7ZtxUQ==
+X-Google-Smtp-Source: AGHT+IHegBpC6Wr4W+8DeWaJJI/TRZ9D6YPDNiX62BYLTVqZPon3+2DL1aWyhBud5bWTm/eTPo6CBA==
+X-Received: by 2002:a17:906:c351:b0:a08:1ea3:e65a with SMTP id ci17-20020a170906c35100b00a081ea3e65amr1724981ejb.30.1700821907858;
+        Fri, 24 Nov 2023 02:31:47 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,9 +88,9 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 22/39] xen/riscv: introduce asm/domain.h
-Date: Fri, 24 Nov 2023 12:30:42 +0200
-Message-ID: <25fa93f2195ff1b87d7c7c28e6aa6eb654faca7b.1700761381.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 38/39] xen/riscv: enable full Xen build
+Date: Fri, 24 Nov 2023 12:30:58 +0200
+Message-ID: <c56be97d180b996d431eb97e7b0a23ac28798996.1700761381.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
@@ -102,59 +102,65 @@ Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Changes in V2:
  - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/domain.h | 43 +++++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/domain.h
+ xen/arch/riscv/Makefile                 | 16 +++++++++++++++-
+ xen/arch/riscv/arch.mk                  |  4 ----
+ xen/arch/riscv/configs/tiny64_defconfig |  1 -
+ 3 files changed, 15 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-new file mode 100644
-index 0000000000..f2dccf370f
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -0,0 +1,43 @@
-+#ifndef __ASM_RISCV_DOMAIN_H__
-+#define __ASM_RISCV_DOMAIN_H__
-+
-+#include <xen/xmalloc.h>
-+#include <public/hvm/params.h>
-+
-+struct hvm_domain
-+{
-+    uint64_t              params[HVM_NR_PARAMS];
-+};
-+
-+#define is_domain_direct_mapped(d) ((void)(d), 0)
-+
-+struct arch_vcpu_io {
-+};
-+
-+struct arch_vcpu {
-+};
-+
-+struct arch_domain {
-+    struct hvm_domain hvm;
-+};
-+
-+#include <xen/sched.h>
-+
-+static inline struct vcpu_guest_context *alloc_vcpu_guest_context(void)
-+{
-+    return xmalloc(struct vcpu_guest_context);
-+}
-+
-+static inline void free_vcpu_guest_context(struct vcpu_guest_context *vgc)
-+{
-+    xfree(vgc);
-+}
-+
-+struct guest_memory_policy {};
-+static inline void update_guest_memory_policy(struct vcpu *v,
-+                                              struct guest_memory_policy *gmp)
-+{}
-+
-+static inline void arch_vcpu_block(struct vcpu *v) {}
-+
-+#endif /* __ASM_RISCV_DOMAIN_H__ */
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 50c09469a0..9c02cb0ccf 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -12,10 +12,24 @@ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
+ 
+ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) -o $@
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(objtree)/common/symbols-dummy.o -o $(dot-target).0
++	$(NM) -pa --format=sysv $(dot-target).0 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).0.S
++	$(MAKE) $(build)=$(@D) $(dot-target).0.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(dot-target).0.o -o $(dot-target).1
++	$(NM) -pa --format=sysv $(dot-target).1 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).1.S
++	$(MAKE) $(build)=$(@D) $(dot-target).1.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
++	    $(dot-target).1.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
+ 		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		> $@.map
++	rm -f $(@D)/.$(@F).[0-9]*
+ 
+ $(obj)/xen.lds: $(src)/xen.lds.S FORCE
+ 	$(call if_changed_dep,cpp_lds_S)
+diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
+index 8403f96b6f..12b1673fae 100644
+--- a/xen/arch/riscv/arch.mk
++++ b/xen/arch/riscv/arch.mk
+@@ -13,7 +13,3 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
+ # -mcmodel=medlow would force Xen into the lower half.
+ 
+ CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
+-
+-# TODO: Drop override when more of the build is working
+-override ALL_OBJS-y = arch/$(SRCARCH)/built_in.o
+-override ALL_LIBS-y =
+diff --git a/xen/arch/riscv/configs/tiny64_defconfig b/xen/arch/riscv/configs/tiny64_defconfig
+index ce37c5ae00..4b488180ae 100644
+--- a/xen/arch/riscv/configs/tiny64_defconfig
++++ b/xen/arch/riscv/configs/tiny64_defconfig
+@@ -24,7 +24,6 @@
+ # CONFIG_COVERAGE is not set
+ # CONFIG_UBSAN is not set
+ # CONFIG_NEEDS_LIBELF is not set
+-
+ CONFIG_RISCV_64=y
+ CONFIG_DEBUG=y
+ CONFIG_DEBUG_INFO=y
 -- 
 2.42.0
 
