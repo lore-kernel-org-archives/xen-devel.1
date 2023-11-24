@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771B5C636D0
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 01:48:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640075.997902 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57150C61D97
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 01:48:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640077.997927 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6LJ8-0002V6-Py; Fri, 24 Nov 2023 01:48:38 +0000
+	id 1r6LJE-0003LN-FP; Fri, 24 Nov 2023 01:48:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640075.997902; Fri, 24 Nov 2023 01:48:38 +0000
+Received: by outflank-mailman (output) from mailman id 640077.997927; Fri, 24 Nov 2023 01:48:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6LJ8-0002UQ-K1; Fri, 24 Nov 2023 01:48:38 +0000
-Received: by outflank-mailman (input) for mailman id 640075;
- Fri, 24 Nov 2023 01:48:37 +0000
+	id 1r6LJE-0003LC-Al; Fri, 24 Nov 2023 01:48:44 +0000
+Received: by outflank-mailman (input) for mailman id 640077;
+ Fri, 24 Nov 2023 01:48:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uC13=HF=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1r6LJ7-0002RQ-No
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 01:48:37 +0000
+ id 1r6LJC-0002RQ-OL
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 01:48:42 +0000
 Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
  [64.147.123.19]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 92e91973-8a6b-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 02:48:34 +0100 (CET)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id C8BCC3200A49;
- Thu, 23 Nov 2023 20:48:31 -0500 (EST)
+ id 975a60df-8a6b-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 02:48:41 +0100 (CET)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailout.west.internal (Postfix) with ESMTP id 487873200A49;
+ Thu, 23 Nov 2023 20:48:39 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Thu, 23 Nov 2023 20:48:32 -0500
+ by compute6.internal (MEProxy); Thu, 23 Nov 2023 20:48:39 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 23 Nov 2023 20:48:30 -0500 (EST)
+ 23 Nov 2023 20:48:37 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,91 +45,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92e91973-8a6b-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 975a60df-8a6b-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:sender
-	:subject:subject:to:to; s=fm1; t=1700790511; x=1700876911; bh=LX
-	yAOwjjde0ByZ9X1DEhA7dY4ff5w8COeOtbRqSP8vg=; b=Pdug+HOGAg7VS85J4z
-	BNN594jq/XE/8+nYpETemTpPhbQDUo7R9Vl3D2sZh8qGPDEGE2kMRj+my8W9ZjPX
-	OiTtAaPSAdtp/8JcIwZAK7xEmT3ts0tUF5zwayUmbwuGk48/9fG2rqnpaLHCSlR4
-	I/tbZ38ooYCDO3LgmDADS/441aJYHU5mB/e+WbTNwwYyCPlDYFIJGHGxvnPzWKoT
-	oQLUa8lJs53nFwzwp1d+8mnxFO0KbDyWUry5TCq2uo92WkJOmqRnjhgXr0foEyAO
-	03JzV5fT+seBNl4wDLqo17cXrUCZuMIeY4/B+IeKsmebWo8zuAjsjMYBsV+He5as
-	iVbw==
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to; s=fm1; t=1700790518; x=1700876918; bh=YR4SrntrkR
+	9h95RVyu4/vR1Bp6CZaXa+a+sAHNBe1pw=; b=5Nuj4LMMKdO58yXKRIAtvoDnPE
+	JfHUU6qTzl/I/HUBkzeEJ2PAkVE0i7lhYatqPUbzKwEAQt8w5+ARm4I53gXnKMpB
+	fCKNVR3I4F0124bK362/WTB6DKthrf6rYsdBNO8r/zrSFOMUi2bxFmeyG38C1Jcc
+	NkID4CN3AtnF6vvIgmP0/QGjQ4wiffkRdZzF2ficl0vz8VXxrNFKr0KjEn7ssSZh
+	WwpiXkMfY4squ3HH54OtaDO162pbX7eCYby8/qvH7TH+l6bzCKdV/MLnlMkKr2eg
+	OSvstZC1syIgTYAQJ86fr3AD7Llc0Y9Qy0Y2TICOAzTp6u0gHA0zibl1b3iA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1700790511; x=1700876911; bh=LXyAOwjjde0ByZ9X1DEhA7dY4ff5w8COeOt
-	bRqSP8vg=; b=jYGZRnb3loPFsO7oIZa6c+7DpFES3Hkd7fWkz5bKhkh6p+GZBrE
-	8i/nVMl8eItIqi486wZgJxdbaJXrD7xtiptOcFjC4vW7t2PPFBNrScfD6220o01g
-	VZTPRqdmVk4Zte45ww2kVEm6SdltYt2bJSnQp5dOVJ2ulCuw/AuKHaIMLWiNIXfy
-	BVELY3H1AJoDHzM3FrfnYTToAlJzXmN2/Kjph31aZt5Dh3t+mlidMcHp0omx5aI5
-	kHF9yEkbXN7fDAxuE4y+R/voMWx1duOJAqsTqx4C9AKQ4ZUrJYQTjVTJfbexPopZ
-	bZp75RCKiygMFKrpgZGCx3mURi7CB7cT8+Q==
-X-ME-Sender: <xms:7gBgZYKnik_CEQZkxN3nKWP_otbU-0Z4hShAjNPmnaVpBdNMGhBd-Q>
-    <xme:7gBgZYI6VuA0hiNKdSiYrVBsp89wC9hxoN_M_xnQtNkjLLoFBHmr12vYYRLNNqG-g
-    BoB-lBd7aDKkw>
-X-ME-Received: <xmr:7gBgZYsNgKC7N1fMZRs3h2I8Sz92NyVz_lm7zrBaJUjJdC244D9qg1hSkawk5ZkaKMDgk8vvp8tBndWkTJ6Z_YLMvneezNn1V0lSHYHRtn4bAFULl9_9>
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1700790518; x=
+	1700876918; bh=YR4SrntrkR9h95RVyu4/vR1Bp6CZaXa+a+sAHNBe1pw=; b=u
+	ljuZ0hyCLTwE+0FV7o8cunHauFzgCqgDXtNQuIExT6p1zDOss76+iTyoIFOzU/8i
+	zKAQq/jek/4RIZVDziNzf+kwtq2GNX1apxJbxFK3/MtLxZ/gCbrAUkFCG5Mjm/by
+	o0Nn3J8aFchSicd4BUq4+/A1TNmX+KLMKUUiLrckTNft8y9khSR9Tcy9mpWGQfYa
+	xbqUkeXG0ETp3ErH1nqQy6pbLVpuwwwkbv7I6RgPKZm2AmTSTjAMQ5jlWS1xkvhw
+	bqLmp/i2eAeS6m3JtN+cKUIr22rjD3G1r7eXDDHt2oDMZEye/PwoZXsapz0r1/Nd
+	R5aPUTodtRw6FI15NaNtQ==
+X-ME-Sender: <xms:9gBgZdzsgMGs7nzg5zNxLxg4NVYb9RFAdLvKvfTCBvnLBndT2jjiWQ>
+    <xme:9gBgZdSdeKPM6kQjl8kYV86oXw6NLyx0-QGXKovBhKgpdLXiTLLIDl6dObeiR_Ej2
+    Nc1dAhUs_1LcA>
+X-ME-Received: <xmr:9gBgZXUD-EYzTcDftiNbPpwUqEhUArGWfdA1opp0pj4zL1Iy3GK12OJ0zHL-0napB-JKTPaA6b2TL9viGVwZzbLsY-7W-NiPHWaJ10ZZjOP-fBx5GFV_>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrudehgedggedtucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
-    vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
-    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
-    ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
-    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
-    khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:7wBgZVYSuK2Zi39Sh-YxS862c6su0qEQLyA2CHd-NcbTdW8dDjPWag>
-    <xmx:7wBgZfbWZA_ncTD8ZF4uUfTDlnB5J8bL4WY4_2m7l07DoH3hb7myxg>
-    <xmx:7wBgZRAnvyaPjIrSsOJvwtG4Vrl6k0mrTZ-I8EmXCmuvUjOqFEXcjA>
-    <xmx:7wBgZWzS4uOX5olN9WC-Ed7FLKYlFfy_yyWz3vhjLpWFNZ-46suYVw>
+    cujfgurhephffvvefufffkofgjfhgggfestdekredtredtjeenucfhrhhomhepofgrrhgv
+    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
+    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepueet
+    hefgieehheeftdeuleduhffgieelueejhffggfeiieevtefhfeffffeftdehnecuffhomh
+    grihhnpehgihhtlhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
+    mhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgsh
+    hlrggsrdgtohhm
+X-ME-Proxy: <xmx:9gBgZfgCdPVCXWJvuBGTNw-Nlv6-cy_fvLnFt8NRlKK1bcX8zd84cQ>
+    <xmx:9gBgZfDX88XGidbWIXW5lBZHvc-5ZqMQT1ffk0fysLhFsyc2eGc6-Q>
+    <xmx:9gBgZYIt-w5DL3RCsyjyUc6VV3QWtLULdqlxUpKuEakNRQWX4pUW0A>
+    <xmx:9gBgZU51-0IFCl8fSvzGNZ3SuMsZwgTt3GG4ilbcl7aTvaNh2Yk5zg>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 3/6] automation: prevent QEMU access to /dev/mem in PCI passthrough tests
-Date: Fri, 24 Nov 2023 02:47:07 +0100
-Message-ID: <5c7cf4c680200c37187b90eebc49f600865c65ec.1700790421.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v4 6/6] [DO NOT APPLY] switch to alternative artifact repo
+Date: Fri, 24 Nov 2023 02:47:10 +0100
+Message-ID: <7e7977bc5630a40f522b45da891689cdf11da29c.1700790421.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <cover.e8ee4f1e4458c19070007220034a9bfdc34190d5.1700790421.git-series.marmarek@invisiblethingslab.com>
 References: <cover.e8ee4f1e4458c19070007220034a9bfdc34190d5.1700790421.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-/dev/mem access doesn't work in dom0 in lockdown and in stubdomain.
-Simulate this environment with removing /dev/mem device node. Full test
-for lockdown and stubdomain will come later, when all requirements will
-be in place.
-
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+For testing, switch to my containers registry that includes containers
+rebuilt with changes in this series.
 ---
-This can be applied only after QEMU change is committed. Otherwise the
-test will fail.
----
- automation/scripts/qubes-x86-64.sh | 2 ++
- 1 file changed, 2 insertions(+)
+ automation/gitlab-ci/build.yaml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index d81ed7b931cf..7eabc1bd6ad4 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -163,6 +163,8 @@ ifconfig eth0 up
- ifconfig xenbr0 up
- ifconfig xenbr0 192.168.0.1
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 32af30ccedc9..52abb12bce48 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -324,7 +324,7 @@ qemu-system-ppc64-8.1.0-ppc64-export:
  
-+# ensure QEMU wont have access /dev/mem
-+rm -f /dev/mem
- # get domU console content into test log
- tail -F /var/log/xen/console/guest-domU.log 2>/dev/null | sed -e \"s/^/(domU) /\" &
- xl create /etc/xen/domU.cfg
+ alpine-3.18-rootfs-export:
+   extends: .test-jobs-artifact-common
+-  image: registry.gitlab.com/xen-project/xen/tests-artifacts/alpine:3.18
++  image: registry.gitlab.com/xen-project/people/marmarek/xen/tests-artifacts/alpine:3.18
+   script:
+     - mkdir binaries && cp /initrd.tar.gz binaries/initrd.tar.gz
+   artifacts:
+@@ -335,7 +335,7 @@ alpine-3.18-rootfs-export:
+ 
+ kernel-6.1.19-export:
+   extends: .test-jobs-artifact-common
+-  image: registry.gitlab.com/xen-project/xen/tests-artifacts/kernel:6.1.19
++  image: registry.gitlab.com/xen-project/people/marmarek/xen/tests-artifacts/kernel:6.1.19
+   script:
+     - mkdir binaries && cp /bzImage binaries/bzImage
+   artifacts:
 -- 
 git-series 0.9.1
 
