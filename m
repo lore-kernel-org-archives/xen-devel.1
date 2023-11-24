@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0DD2C61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:05:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640742.999474 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3931EC61DF4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 14:05:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640734.999386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Wne-0008G1-0w; Fri, 24 Nov 2023 14:04:54 +0000
+	id 1r6WnV-0005kh-40; Fri, 24 Nov 2023 14:04:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640742.999474; Fri, 24 Nov 2023 14:04:53 +0000
+Received: by outflank-mailman (output) from mailman id 640734.999386; Fri, 24 Nov 2023 14:04:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Wnd-0008FY-P9; Fri, 24 Nov 2023 14:04:53 +0000
-Received: by outflank-mailman (input) for mailman id 640742;
- Fri, 24 Nov 2023 14:04:52 +0000
+	id 1r6WnU-0005iL-RK; Fri, 24 Nov 2023 14:04:44 +0000
+Received: by outflank-mailman (input) for mailman id 640734;
+ Fri, 24 Nov 2023 14:04:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wuqv=HF=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1r6Wnb-0005N1-V1
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:04:51 +0000
+ id 1r6WnT-0005N1-Tz
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 14:04:43 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6ee7ebbb-8ad2-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 15:04:50 +0100 (CET)
+ id 6a1d49dd-8ad2-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 15:04:42 +0100 (CET)
 Received: from Dell.bugseng.com (unknown [37.161.237.167])
- by support.bugseng.com (Postfix) with ESMTPSA id 6379C4EE0C91;
- Fri, 24 Nov 2023 15:04:49 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 85B054EE0C8F;
+ Fri, 24 Nov 2023 15:04:41 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ee7ebbb-8ad2-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 6a1d49dd-8ad2-11ee-9b0e-b553b5be7939
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -52,37 +52,38 @@ Cc: consulting@bugseng.com,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 11/11] xen/serial: address a violation of MISRA C:2012 Rule 8.2
-Date: Fri, 24 Nov 2023 15:03:26 +0100
-Message-Id: <4f831a5441ac699b50783fb0559daabaa37b8e50.1700832962.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH 03/11] xen/cpumask: address violations of MISRA C:2012 Rule 8.2
+Date: Fri, 24 Nov 2023 15:03:18 +0100
+Message-Id: <0ea3c74ef2e5524d0a9726b6e0795d50dfc32eb8.1700832962.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1700832962.git.federico.serafini@bugseng.com>
 References: <cover.1700832962.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing parameter name. No functional change.
+Add missing parameter names. No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
-In my previous patch for serial.h I missed one parameter: sorry for that.
----
- xen/include/xen/serial.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/include/xen/cpumask.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/xen/include/xen/serial.h b/xen/include/xen/serial.h
-index 8d64fb5e86..870ca2f6eb 100644
---- a/xen/include/xen/serial.h
-+++ b/xen/include/xen/serial.h
-@@ -181,7 +181,7 @@ static void inline xhci_dbc_uart_init(void) {};
- void arm_uart_init(void);
+diff --git a/xen/include/xen/cpumask.h b/xen/include/xen/cpumask.h
+index 9826707909..145e140481 100644
+--- a/xen/include/xen/cpumask.h
++++ b/xen/include/xen/cpumask.h
+@@ -460,7 +460,9 @@ extern cpumask_t cpu_present_map;
  
- struct physdev_dbgp_op;
--int dbgp_op(const struct physdev_dbgp_op *);
-+int dbgp_op(const struct physdev_dbgp_op *op);
+ /* Copy to/from cpumap provided by control tools. */
+ struct xenctl_bitmap;
+-int cpumask_to_xenctl_bitmap(struct xenctl_bitmap *, const cpumask_t *);
+-int xenctl_bitmap_to_cpumask(cpumask_var_t *, const struct xenctl_bitmap *);
++int cpumask_to_xenctl_bitmap(struct xenctl_bitmap *xenctl_cpumap,
++                             const cpumask_t *cpumask);
++int xenctl_bitmap_to_cpumask(cpumask_var_t *cpumask,
++                             const struct xenctl_bitmap *xenctl_cpumap);
  
- /* Baud rate was pre-configured before invoking the UART driver. */
- #define BAUD_AUTO (-1)
+ #endif /* __XEN_CPUMASK_H */
 -- 
 2.34.1
 
