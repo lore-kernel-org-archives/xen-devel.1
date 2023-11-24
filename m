@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55BEBC636CB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A74BC61DF4
 	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 16:30:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640823.999550 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.640821.999534 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Z4F-0001Qm-CJ; Fri, 24 Nov 2023 16:30:11 +0000
+	id 1r6Z4D-00018x-NQ; Fri, 24 Nov 2023 16:30:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640823.999550; Fri, 24 Nov 2023 16:30:11 +0000
+Received: by outflank-mailman (output) from mailman id 640821.999534; Fri, 24 Nov 2023 16:30:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6Z4F-0001Q3-4P; Fri, 24 Nov 2023 16:30:11 +0000
-Received: by outflank-mailman (input) for mailman id 640823;
- Fri, 24 Nov 2023 16:30:09 +0000
+	id 1r6Z4D-00018q-Ku; Fri, 24 Nov 2023 16:30:09 +0000
+Received: by outflank-mailman (input) for mailman id 640821;
+ Fri, 24 Nov 2023 16:30:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SB6C=HF=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1r6Z4D-00015K-Px
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 16:30:09 +0000
+ id 1r6Z4C-00015K-Eg
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 16:30:08 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bbb43385-8ae6-11ee-98e2-6d05b1d4d9a1;
- Fri, 24 Nov 2023 17:30:09 +0100 (CET)
+ id ba5f5af2-8ae6-11ee-98e2-6d05b1d4d9a1;
+ Fri, 24 Nov 2023 17:30:07 +0100 (CET)
 Received: from beta.station (net-37-182-35-120.cust.vodafonedsl.it
  [37.182.35.120])
- by support.bugseng.com (Postfix) with ESMTPSA id 8B8CF4EE074E;
- Fri, 24 Nov 2023 17:30:08 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 5D1244EE0740;
+ Fri, 24 Nov 2023 17:30:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,20 +42,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bbb43385-8ae6-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: ba5f5af2-8ae6-11ee-98e2-6d05b1d4d9a1
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	maria.celeste.cesario@bugseng.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [PATCH 5/5] xen/arm: address violations of MISRA C:2012 Rule 11.8
-Date: Fri, 24 Nov 2023 17:29:19 +0100
-Message-Id: <df2af5f9a93c3cbcb61c28ff5228632c82d56f37.1700842832.git.maria.celeste.cesario@bugseng.com>
+Subject: [PATCH 1/5] x86/platform_hypercall: address violations of MISRA C:2012 Rule 11.8
+Date: Fri, 24 Nov 2023 17:29:15 +0100
+Message-Id: <a04d1dda2fd3cceaf9cfa1eb82e4964d5343ed36.1700842832.git.maria.celeste.cesario@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1700842832.git.maria.celeste.cesario@bugseng.com>
 References: <cover.1700842832.git.maria.celeste.cesario@bugseng.com>
@@ -64,61 +63,30 @@ Content-Transfer-Encoding: 8bit
 
 From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
 
-Add or amend casts to comply with Rule 11.8.
-
-The violations are resolved either:
-- by adding a missing const qualifier in the cast
-- by removing a cast to non-const on a const-qualified object
-
+Add const qualifier in cast that unnecessarily removes it
+to comply with Rule 11.8.
+The variable info is declared with a const qualified type.
 No functional change.
 
 Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
 Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
 ---
- xen/arch/arm/domain_build.c       | 2 +-
- xen/arch/arm/include/asm/atomic.h | 2 +-
- xen/arch/arm/include/asm/regs.h   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ xen/arch/x86/platform_hypercall.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 2dd2926b41..c17214f738 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -2749,7 +2749,7 @@ static int __init handle_passthrough_prop(struct kernel_info *kinfo,
-     if ( node == NULL )
-     {
-         printk(XENLOG_ERR "Couldn't find node %s in host_dt!\n",
--               (char *)xen_path->data);
-+               xen_path->data);
-         return -EINVAL;
-     }
- 
-diff --git a/xen/arch/arm/include/asm/atomic.h b/xen/arch/arm/include/asm/atomic.h
-index 64314d59b3..517216d2a8 100644
---- a/xen/arch/arm/include/asm/atomic.h
-+++ b/xen/arch/arm/include/asm/atomic.h
-@@ -154,7 +154,7 @@ static always_inline void write_atomic_size(volatile void *p,
-  */
- static inline int atomic_read(const atomic_t *v)
- {
--    return *(volatile int *)&v->counter;
-+    return *(const volatile int *)&v->counter;
- }
- 
- static inline int _atomic_read(atomic_t v)
-diff --git a/xen/arch/arm/include/asm/regs.h b/xen/arch/arm/include/asm/regs.h
-index 8a0db95415..79050937f3 100644
---- a/xen/arch/arm/include/asm/regs.h
-+++ b/xen/arch/arm/include/asm/regs.h
-@@ -48,7 +48,7 @@ static inline bool regs_mode_is_32bit(const struct cpu_user_regs *regs)
- 
- static inline bool guest_mode(const struct cpu_user_regs *r)
- {
--    unsigned long diff = (char *)guest_cpu_user_regs() - (char *)(r);
-+    unsigned long diff = (char *)guest_cpu_user_regs() - (const char *)(r);
-     /* Frame pointer must point into current CPU stack. */
-     ASSERT(diff < STACK_SIZE);
-     /* If not a guest frame, it must be a hypervisor frame. */
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index c1ab552c57..4dde71db27 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -364,7 +364,7 @@ ret_t do_platform_op(
+             if ( length > info->edd_device_params.length )
+                 length = info->edd_device_params.length;
+             if ( copy_to_compat(op->u.firmware_info.u.disk_info.edd_params,
+-                                (u8 *)&info->edd_device_params,
++                                (const uint8_t *)&info->edd_device_params,
+                                 length) )
+                 break;
+             if ( copy_to_compat(op->u.firmware_info.u.disk_info.edd_params,
 -- 
 2.40.0
 
