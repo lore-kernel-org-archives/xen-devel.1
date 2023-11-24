@@ -4,49 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A298C61D97
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:50:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640520.998873 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D099C61D97
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:51:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640527.998893 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TlR-0007jF-Vx; Fri, 24 Nov 2023 10:50:25 +0000
+	id 1r6Tlu-0000UH-G3; Fri, 24 Nov 2023 10:50:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640520.998873; Fri, 24 Nov 2023 10:50:25 +0000
+Received: by outflank-mailman (output) from mailman id 640527.998893; Fri, 24 Nov 2023 10:50:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TlR-0007j8-SV; Fri, 24 Nov 2023 10:50:25 +0000
-Received: by outflank-mailman (input) for mailman id 640520;
- Fri, 24 Nov 2023 10:50:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r6Tlu-0000TI-DA; Fri, 24 Nov 2023 10:50:54 +0000
+Received: by outflank-mailman (input) for mailman id 640527;
+ Fri, 24 Nov 2023 10:50:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ibx+=HF=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1r6TlQ-0007hc-PB
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:50:24 +0000
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20609.outbound.protection.outlook.com
- [2a01:111:f400:7eab::609])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 43f43043-8ab7-11ee-98e2-6d05b1d4d9a1;
- Fri, 24 Nov 2023 11:50:23 +0100 (CET)
-Received: from BN8PR16CA0015.namprd16.prod.outlook.com (2603:10b6:408:4c::28)
- by SN7PR12MB8772.namprd12.prod.outlook.com (2603:10b6:806:341::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.21; Fri, 24 Nov
- 2023 10:50:18 +0000
-Received: from SN1PEPF0002636C.namprd02.prod.outlook.com
- (2603:10b6:408:4c:cafe::3b) by BN8PR16CA0015.outlook.office365.com
- (2603:10b6:408:4c::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.18 via Frontend
- Transport; Fri, 24 Nov 2023 10:50:18 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002636C.mail.protection.outlook.com (10.167.241.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7025.12 via Frontend Transport; Fri, 24 Nov 2023 10:50:18 +0000
-Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 24 Nov
- 2023 04:50:11 -0600
+ <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1r6TTV-0006hx-Cz
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:53 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a857fd8c-8ab4-11ee-9b0e-b553b5be7939;
+ Fri, 24 Nov 2023 11:31:41 +0100 (CET)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-54af61f2a40so557238a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:41 -0800 (PST)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Nov 2023 02:31:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,112 +46,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43f43043-8ab7-11ee-98e2-6d05b1d4d9a1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Cpr5IbPSY2RSWUNokyAII/N2q95sxgH6scVeaERWAAAhhUqFBVwHKOBW8mh6nHI1uIoYskLIfDsRIlCvZzLnVNh1Bj5LIy9bHE7/iAaM9MXcvywiKgIHz8C1xHDGkg+sOJQndUk9VDkdGUudNljslXBpzaVJ0sTy9/JkgNx/0xFQoNY7Z8FZ93cTAXGl+E7bPoyDT0PddHzfIFFj4blwHB8aRUf1k/taUZkVndxevGMD+WjIusQmIG2MVUewx8k5OkFczkDiN5GJ3wmOcg068wcPFl/xbePzbeHDNhUnEq4CH+jVHn1l14wewT+knNXR2XYQD2YYL3r0mJvW5tNMIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wv22leIEJJc+0yjOTOAesiSy6M3ZYkPZ25c7c7AQ4Mk=;
- b=DK/iYw7Fugl4pkB9XmP9Id2/vUv9QmnaqFXYmH6InbAG44mg9URS+6RscADaPRNlAOV16e9qmrz5jkpuLIdtDb0ZPzRzHzEbpu1zyDTqDJzZsuSZOsE34cNlDE5v3WDRMxGrmtH/DsApO2/o57cciZ8+GXi+wGUvqzB16ctUOqajFYFf18fTQ57T9hom8zS5NvJo76LrlkGJVOZQkFu7V3GjIck+TEAe5W3PlPnfhwIbtcp+U2B4adQfd7YJz+SaWkg/wqMVgyM+b3Rdi/cUd8UjEj2bI2HsG+KrpnWPH5dCsFLHXojRbML1HzpPSlaX8bARa7L49waOqf70BYOeRA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wv22leIEJJc+0yjOTOAesiSy6M3ZYkPZ25c7c7AQ4Mk=;
- b=HAT3paoILeZfgHmejRC0RoNj6wtuF+ONp3CNaXL/PmndYeRY8xH/uQnBfPSh0IQNIhIft1CZenbJp5YeeQNe8NmuM7rSd08izgZ921VB9YSMivNm4NAOOBuU80CcK+0oJBQJG4UafVp0wOOqCvPO/g7+KhjFlJx2nX6ms/gGHr0=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jiqian Chen <Jiqian.Chen@amd.com>
-To: Stefano Stabellini <sstabellini@kernel.org>, Anthony Perard
-	<anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
-	<xen-devel@lists.xenproject.org>, <qemu-devel@nongnu.org>
-CC: Xenia Ragiadakou <xenia.ragiadakou@amd.com>, Stewart Hildebrand
-	<Stewart.Hildebrand@amd.com>, Alex Deucher <Alexander.Deucher@amd.com>,
-	Stefano Stabellini <stefano.stabellini@amd.com>, Huang Rui
-	<Ray.Huang@amd.com>, Honglei Huang <Honglei1.Huang@amd.com>, Julia Zhang
-	<Julia.Zhang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>
-Subject: [RFC QEMU PATCH v2 0/1] Support device passthrough when dom0 is PVH on Xen
-Date: Fri, 24 Nov 2023 18:49:50 +0800
-Message-ID: <20231124104951.3263782-1-Jiqian.Chen@amd.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: a857fd8c-8ab4-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1700821901; x=1701426701; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ewmvPOWcxXxVUGRPLKOFAXBqTtU96ll1emuQx9tNHgs=;
+        b=bfVZqK9fokeP/pPx6ZkjXIbFwxzdZFmSYAbmqS7NRy31a5UxDzEG2WcpIaM8lSiKUo
+         4lEW37+jeXgv7SrRWJp6vGk/6XzxMlMsRGIlfMusaILtnUGbKe9kijDgiQEeOjazHszR
+         aK870EAiL1PUXrhpuA149vt0X9RaAglkXtbcNysNTvMAyz6FfQfzXwdNYTfefIDSAShk
+         yKQycy6/jrtTgIboh+PuHEOvGhfh7TD3r0VLQFngNW1oVpjW5PY4UINvTF+JqdZupuGg
+         mTzMrR6cf487fTQuCzS3NmIDAR9iU977QkzaJJDFnErKqOuTDAFjbNkKiLliYuadMYFH
+         Q7Bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1700821901; x=1701426701;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ewmvPOWcxXxVUGRPLKOFAXBqTtU96ll1emuQx9tNHgs=;
+        b=a3qSTrUA2/fjMuWZqcxWkFrgWq4GiCmkAAGyaOg6fPFUFvcSDRUYrzxaGmqTCfyc8n
+         fqWFntaIO2kQUHV47bdlPl4dGRrd/qNm3nPvvVFAAT9l6M/63om0bDaf0Puue/rfs9DX
+         /NP3j4+exya01tQtOtdeh3ILVfc1p3tHZxbXZZQOC21/YJUzFLYkVj6AsgW2pBg81doe
+         oawxyPd0ocyWcBOQt6Z20EZNk+Eafd/jUaoIxZW1IVCfOEbIR9QZO6QFG5zV1i5saJ5r
+         7CyD/vtIzJls/hyMRr0u+lo4FbJCpdifaKUGGk3jVRf84iLwzzyp56UCYDyWh7w1xRRC
+         zG4Q==
+X-Gm-Message-State: AOJu0YzjVyotOPdq2TRnQO+UIB/eXA7eAPHEXPP69uNYrQ2vEXpIrIlF
+	qmmdrzDqIS8KctbJNOrafjZKOU+mvfyeQg==
+X-Google-Smtp-Source: AGHT+IEwu6D6lPHMTWs7SWKMKn6i4rjMA0EnoJMbAbbZBjIMTQE4NAUTFH75Ae7qP7ba4XEn4c63AQ==
+X-Received: by 2002:a17:906:b34f:b0:9fe:3b2c:d044 with SMTP id cd15-20020a170906b34f00b009fe3b2cd044mr1555143ejb.44.1700821901182;
+        Fri, 24 Nov 2023 02:31:41 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 30/39] xen/riscv: define an address of frame table
+Date: Fri, 24 Nov 2023 12:30:50 +0200
+Message-ID: <13ad41657814e4fc235772fa0928de1723ae7c3d.1700761381.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
+References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636C:EE_|SN7PR12MB8772:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5dd8d302-9aa3-480e-10c8-08dbecdb2609
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	sS2ORGqAhWpmlc2KsOCvNTjB6mfIfoI+8amm/MGNaAoCYUakVQ/ZQBW96b3SodJUtFjc6WEQJgd82P+Z1rK33stYN8aC8MDpOa+mt9bI3RPiksji/s3NX8iCANxROuiVnN7M71iF8wOjjg7sBR4uFLwYabw4S+VwWZ3I6rVg6d4Y+exVTREtqvfdzCd1r6P6fu0UyZSoIRROFmB4NaepeYEljKc5fZT/PB0Y6UU8OJas6isqy8QwDreqZR+8V+t2LtiWBzLdDTaR0Oyd7rv6xBQZA/t91/ZOr4pcJooCDk7jQRK7A1+uuHj0gdjom1jcPoMhVe2YAks3b4ZnvmLWmcp2hMH0WzRKT+Ir6PwWxmTIscOw/8x7apboHItuwhXhhR9oNk1SdbOjcN1RnQDK7orJ68Y0MqdS2+1syblwX19Gr7wU1p+uOI0oDWmi84TJMFSBoi4ddPBvEHwSvxfZh8ZhQl61HPeTYb4nw1geegtKK+hfFN8XptRC/fGYzBdNc7O6DkHVAFF0xsNdiJ0qYSasfGcLmGegpAAGF9MtxZG9muzCcedwZ8KILY9azGMckxGZ4c4PPGEHote5GVObtocbqSxXUZt/ne8T0VnUxXD7g+MUsTxHX1svEi0ier70yauu5vU03YvT352SPmpjifryFvmppoB6tQEinLEcdTqXvdblt7o4AXbmvFUj/69LjTuxi4d/OVNKYcboYADSicx1xfsLfctEaa9N80pn3XL1w/kJfgha80AfHaI5RihE4Ag87HiY/q2sNsaFL7xPFO4PmkPaNWIXbNj0U4rakNw=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(39860400002)(396003)(346002)(376002)(230922051799003)(64100799003)(451199024)(186009)(82310400011)(1800799012)(36840700001)(46966006)(40470700004)(40460700003)(966005)(356005)(81166007)(82740400003)(7696005)(478600001)(8936002)(8676002)(4326008)(41300700001)(86362001)(70206006)(54906003)(316002)(70586007)(110136005)(1076003)(16526019)(26005)(2616005)(426003)(336012)(83380400001)(47076005)(6666004)(36860700001)(36756003)(2906002)(5660300002)(40480700001)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2023 10:50:18.2553
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5dd8d302-9aa3-480e-10c8-08dbecdb2609
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF0002636C.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8772
 
-Hi All,
+Also the patchs adds some helpful macros.
 
-This patch is the v2 of the implementation of passthrough when dom0 is PVH on Xen.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V2:
+ - Nothing changed. Only rebase.
+---
+ xen/arch/riscv/include/asm/config.h | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-Issues we encountered:
-1. failed to map pirq for gsi
-Problem: qemu will call xc_physdev_map_pirq() to map a passthrough device’s gsi to pirq in function
-xen_pt_realize(). But failed.
-
-Reason: According to the implement of xc_physdev_map_pirq(), it needs gsi instead of irq, but qemu
-pass irq to it and treat irq as gsi, it is got from file /sys/bus/pci/devices/xxxx:xx:xx.x/irq in
-function xen_host_pci_device_get(). But actually the gsi number is not equal with irq. On PVH dom0,
-when it allocates irq for a gsi in function acpi_register_gsi_ioapic(), allocation is dynamic, and
-follow the principle of applying first, distributing first. And if you debug the kernel codes(see
-function __irq_alloc_descs), you will find the irq number is allocated from small to large by order,
-but the applying gsi number is not, gsi 38 may come before gsi 28, that causes gsi 38 get a smaller
-irq number than gsi 28, and then gsi != irq.
-
-Solution: we can record the relation between gsi and irq, then when userspace(qemu) want to use gsi,
-we can do a translation. The third patch of kernel(xen/privcmd: Add new syscall to get gsi from irq)
-records all the relations in acpi_register_gsi_xen_pvh() when dom0 initialize pci devices, and provide
-a syscall for userspace to get the gsi from irq. The third patch of xen(tools: Add new function to get
-gsi from irq) add a new function xc_physdev_gsi_from_irq() to call the new syscall added on kernel side.
-And then userspace can use that function to get gsi. Then xc_physdev_map_pirq() will success.
-
-This v2 on qemu side is the same as the v1 (
-qemu https://lore.kernel.org/xen-devel/20230312092244.451465-19-ray.huang@amd.com/), just call
-xc_physdev_gsi_from_irq() to get gsi from irq.
-
-v2 on kernel side:
-https://lore.kernel.org/lkml/20231124103123.3263471-1-Jiqian.Chen@amd.com/T/#t
-
-v2 on Xen side:
-https://lore.kernel.org/xen-devel/20231124104136.3263722-1-Jiqian.Chen@amd.com/T/#t
-
-Jiqian Chen (1):
-  xen/pci: get gsi from irq for passthrough devices
-
- hw/xen/xen-host-pci-device.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index f0544c6a20..8d2103b3ce 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -77,12 +77,31 @@
+   name:
+ #endif
+ 
++#define VPN_BITS    (9)
++#define OFFSET_BITS (12)
++
+ #ifdef CONFIG_RISCV_64
++
++#define SLOTN_ENTRY_BITS        (HYP_PT_ROOT_LEVEL * VPN_BITS + OFFSET_BITS)
++#define SLOTN(slot)             (_AT(vaddr_t,slot) << SLOTN_ENTRY_BITS)
++#define SLOTN_ENTRY_SIZE        SLOTN(1)
++
+ #define XEN_VIRT_START 0xFFFFFFFFC0000000 /* (_AC(-1, UL) + 1 - GB(1)) */
++
++#define FRAMETABLE_VIRT_START   SLOTN(196)
++#define FRAMETABLE_SIZE         GB(3)
++#define FRAMETABLE_NR           (FRAMETABLE_SIZE / sizeof(*frame_table))
++#define FRAMETABLE_VIRT_END     (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
++
++#define VMAP_VIRT_START         SLOTN(194)
++#define VMAP_VIRT_SIZE          GB(1)
++
+ #else
+ #error "RV32 isn't supported"
+ #endif
+ 
++#define HYPERVISOR_VIRT_START XEN_VIRT_START
++
+ #define SMP_CACHE_BYTES (1 << 6)
+ 
+ #define STACK_SIZE PAGE_SIZE
+@@ -95,6 +114,8 @@
+ #define RV_STAGE1_MODE SATP_MODE_SV32
+ #endif
+ 
++#define HYP_PT_ROOT_LEVEL (CONFIG_PAGING_LEVELS - 1)
++
+ #define IDENT_AREA_SIZE 64
+ 
+ #endif /* __RISCV_CONFIG_H__ */
 -- 
-2.34.1
+2.42.0
 
 
