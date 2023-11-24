@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9439C61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:31:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640365.998393 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CB9CC636CB
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:31:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640373.998461 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TSs-0006iM-LK; Fri, 24 Nov 2023 10:31:14 +0000
+	id 1r6TSy-0008IP-SL; Fri, 24 Nov 2023 10:31:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640365.998393; Fri, 24 Nov 2023 10:31:14 +0000
+Received: by outflank-mailman (output) from mailman id 640373.998461; Fri, 24 Nov 2023 10:31:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TSs-0006iF-Gp; Fri, 24 Nov 2023 10:31:14 +0000
-Received: by outflank-mailman (input) for mailman id 640365;
- Fri, 24 Nov 2023 10:31:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r6TSy-0008Fj-Ha; Fri, 24 Nov 2023 10:31:20 +0000
+Received: by outflank-mailman (input) for mailman id 640373;
+ Fri, 24 Nov 2023 10:31:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r6TSq-0006hx-VK
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:13 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95d5cadb-8ab4-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 11:31:10 +0100 (CET)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-54afe0fbde3so419400a12.3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:10 -0800 (PST)
+ id 1r6TSx-0006hy-3W
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:19 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9a7433d9-8ab4-11ee-98e2-6d05b1d4d9a1;
+ Fri, 24 Nov 2023 11:31:18 +0100 (CET)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-549070a04baso2368717a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:18 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.08
+ g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:31:09 -0800 (PST)
+ Fri, 24 Nov 2023 02:31:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,40 +46,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95d5cadb-8ab4-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 9a7433d9-8ab4-11ee-98e2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700821869; x=1701426669; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Gq30o0Xb1mNIk6XxRQvFCEj+byNN+EwOJBFvFc9B2j4=;
-        b=ljtYClu4gnqMTQ8RNrnAxZKcvLmlRO1Gfjh95BtG8kKNgBVIM2dWq94ZeJ3OUpySti
-         WeUMMKtqyOPjCzJJ824ep2gnbENnDeB3nNp6lOiyCTq6Y+IAWF5hb+N/AhwmUa19xunk
-         mrVSFWtgyI75ey91RluS/aevOxYA4UA0OME0FF28dh/iZl5FbBYpB+cvpGnhYUgDR2YH
-         RZRgjmwpRdg82Z55gwPIyB7U8wtqBJ27Z4Y0sYb6ge0GXA+AbpCTDhh7L8ZWnLQRea3M
-         2yY4DHB/svNMx3PDjMaTMq4xL8SKDwwYr0J0I7QOi1NxSGjVmdznO35t47fiYmRP65pq
-         QSLQ==
+        d=gmail.com; s=20230601; t=1700821877; x=1701426677; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IaJa/anRsPuG7MeMh544Xo5c3C5PAbaeHXhCV9tyhpk=;
+        b=c10mioMTRAWYSSGTb4rvUEO+2vJ+0vnBXIUNxfcmeofnHc09Ymq8+Nhvy+D8bcpAhl
+         uiFEFMitWkhqixwOLA3mv7yJUvgk6fxrlP+C9UIcDejJvD3dyePilDg7ZhMF33Z6vtB1
+         R3IN/DILhuWzGVfauDT+gCg4PG+sN4OGl53U2NIe7QvTTxliGKr0khuHEiEmY+0addSp
+         fG2DXQYBgiKrKYmSYqWHmFhhGXWUyYv+vE31bbtbM9woO+j8vMwQmCjeT1KJ0I5w+1Lg
+         SzXekLaERf4wDBUDrshL/dRwp1zPjPAcm95XOS9kxlc55d9W+LNDL3exScfXIZCZSSdB
+         7AFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700821869; x=1701426669;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Gq30o0Xb1mNIk6XxRQvFCEj+byNN+EwOJBFvFc9B2j4=;
-        b=cMwrvCk7iXhGWmot8Vkw3VFJjO0Xr0bv254effXIXAXAC8HBdTLnyO6YxLfS7e35Ah
-         25axDGZdmzrq62AgXpc9Kiys32YtMNw0k2nMnO68ijuEz5UiFqpXTgKb48V7J1JY5Gh9
-         Gl7aysuRtAn9KfIckyFxVEwLeajazNHfG4LL3+ODWR2qQmMaBSa1VIiA/n0Fl0ymbjxH
-         E7JfCpLlAiihElutTN2g0C3c9q75W782m6h1vGKFYtPvKY/uoHL23nK1XYkJ+ZVRxVNx
-         r+hVy0bXOf7mqkgLVtSxRRLOvHI7Kxw2fqtxrEP+WRQOS45GO+jJUxWcCNn55GuA8mRu
-         6/xw==
-X-Gm-Message-State: AOJu0Yxeu0zIeUo9TOUuBDyoQk/gfdXbWtNrDdp8CKLY7NdLzlYjzabF
-	WecaE0lVLs1YxyUgHQj0tEkTtr/GqaglWA==
-X-Google-Smtp-Source: AGHT+IHWlY4DyiLqt108rquIQtgNuwPVgqW7Ksd7mNOBIw6EvadF4yst+vYd1to6qaA/QTGZ6bthVw==
-X-Received: by 2002:a17:907:2993:b0:a00:185a:a150 with SMTP id eu19-20020a170907299300b00a00185aa150mr1141546ejc.38.1700821869356;
-        Fri, 24 Nov 2023 02:31:09 -0800 (PST)
+        d=1e100.net; s=20230601; t=1700821877; x=1701426677;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=IaJa/anRsPuG7MeMh544Xo5c3C5PAbaeHXhCV9tyhpk=;
+        b=DPUTEhKMWN4yX09I64YPCq/0e5bTmUijj+wmtM6lY4VxO7TCfT/X7nhugmXc7wzsFl
+         5xgXBhQb6YoHCey10kZjfoMErqf8HgmGoOM+Uo7/7xUp7i/9JIC9+20LEvgxr7lrGYpk
+         Vd75uXTqwBWMKDvUXTtXtUwPCqbUCA+LgPb6zsXr5QVB6tHkZlG4S1BnbKOlunYDp/re
+         aka5uJTS4A39Bmo94r+I5Y4tVU8SGmVk6Xcc2MQ38ShRe+62l4l8+WniYleNZXZivcBj
+         ItDaIAdHvFA3t87tZJs7fPFX82zzU0dlMaj6+alX8R/36AkaL2uA6hrNQl1WtYD8ilou
+         1v/A==
+X-Gm-Message-State: AOJu0YyGcnhsbCA/q67N2sEcfXq4BPOzD1nlELAhURRt/Jo165cMz7vd
+	oNnZFksAUv6QCRX+bw+bPFviH1fAMLpL/Q==
+X-Google-Smtp-Source: AGHT+IGFEiiTBiGvAR5ACWWHdqbdx+B2BrVyRLY75ufFR8vh9qZRtycnueln5Q8tQMjDSWelWaqYFw==
+X-Received: by 2002:a17:906:1ccd:b0:a00:a591:929 with SMTP id i13-20020a1709061ccd00b00a00a5910929mr1842188ejh.24.1700821877430;
+        Fri, 24 Nov 2023 02:31:17 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Connor Davis <connojdavis@gmail.com>,
@@ -87,173 +86,54 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 00/39] Enable build of full Xen for RISC-V
-Date: Fri, 24 Nov 2023 12:30:20 +0200
-Message-ID: <cover.1700761381.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 08/39] xen/riscv: introduce asm/cpufeature.h
+Date: Fri, 24 Nov 2023 12:30:28 +0200
+Message-ID: <b8fcdd22462ffa71a058e63dbf874dfc858264df.1700761381.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
+References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch series performs all of the additions necessary to drop the
-build overrides for RISCV and enable the full Xen build. Except in cases
-where compatibile implementations already exist (e.g. atomic.h and
-bitops.h), the newly added definitions are simple.
-
-The patch series is based on the following patch series:
-- [PATCH v2] xen: remove <asm/delay.h> [1]
-- [PATCH v3 00/14] Introduce generic headers [2]
-
-[1] https://lore.kernel.org/xen-devel/3d55bce44bd6ab9973cbe0ea2fc136cc44d35df2.1698759633.git.oleksii.kurochko@gmail.com/
-[2] https://lore.kernel.org/xen-devel/cover.1700221559.git.oleksii.kurochko@gmail.com/
-
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
-  - Drop the following patches as they are the part of [2]:
-      [PATCH v1 06/57] xen/riscv: introduce paging.h
-      [PATCH v1 08/57] xen/riscv: introduce asm/device.h
-      [PATCH v1 10/57] xen/riscv: introduce asm/grant_table.h
-      [PATCH v1 12/57] xen/riscv: introduce asm/hypercall.h
-      [PATCH v1 13/57] xen/riscv: introduce asm/iocap.h
-      [PATCH v1 15/57] xen/riscv: introduce asm/mem_access.h
-      [PATCH v1 18/57] xen/riscv: introduce asm/random.h
-      [PATCH v1 21/57] xen/riscv: introduce asm/xenoprof.h
-      [PATCH v1 24/57] xen/riscv: introduce asm/percpu.h
-      [PATCH v1 29/57] xen/riscv: introduce asm/hardirq.h
-      [PATCH v1 33/57] xen/riscv: introduce asm/altp2m.h
-      [PATCH v1 38/57] xen/riscv: introduce asm/monitor.h
-      [PATCH v1 39/57] xen/riscv: introduce asm/numa.h
-      [PATCH v1 42/57] xen/riscv: introduce asm/softirq.h
-  - xen/lib.h in most of the cases were changed to xen/bug.h as
-    mostly functionilty of bug.h is used.
-  - align arch-riscv.h with Arm's version of it.
-  - change the Author of commit with introduction of asm/atomic.h.
-  - update some definition from spinlock.h.
-  - code style changes.
+ - Nothing changed. Only rebase.
 ---
-
-Bobby Eshleman (1):
-  xen/riscv: introduce asm/atomic.h
-
-Oleksii Kurochko (38):
-  xen/riscv: disable unnecessary configs
-  xen/riscv: use some asm-generic headers
-  xen/riscv:introduce asm/byteorder.h
-  xen/riscv: add public arch-riscv.h
-  xen/riscv: introduce spinlock.h
-  xen/riscv: introduce fence.h
-  xen/riscv: introduce arch-riscv/hvm/save.h
-  xen/riscv: introduce asm/cpufeature.h
-  xen/riscv: introduce asm/guest_atomics.h
-  xen/riscv: introduce asm/iommu.h
-  xen/riscv: introduce asm/nospec.h
-  xen/riscv: introduce asm/setup.h
-  xen/riscv: introduce asm/system.h
-  xen/riscv: introduce bitops.h
-  xen/riscv: introduce flushtlb.h
-  xen/riscv: introduce asm/smp.h
-  xen/riscv: introduce cmpxchg.h
-  xen/riscv: introduce asm/io.h
-  xen/riscv: define bug frame tables in xen.lds.S
-  xen/riscv: introduce bit operations
-  xen/riscv: introduce asm/domain.h
-  xen/riscv: introduce asm/guest_access.h
-  xen/riscv: introduce asm/irq.h
-  xen/riscv: introduce asm/p2m.h
-  xen/riscv: introduce asm/regs.h
-  xen/riscv: introduce asm/time.h
-  xen/riscv: introduce asm/event.h
-  xen/riscv: add definition of __read_mostly
-  xen/riscv: define an address of frame table
-  xen/riscv: add required things to asm/current.h
-  xen/riscv: add minimal stuff to asm/page.h to build full Xen
-  xen/riscv: add minimal stuff to asm/processor.h to build full Xen
-  xen: add RISCV support for pmu.h
-  xen: add necessary headers to common to build full Xen for RISC-V
-  xen/riscv: add minimal stuff to asm/mm.h to build full Xen
-  xen/rirscv: add minimal amount of stubs to build full Xen
-  xen/riscv: enable full Xen build
-  xen: fix compilation issue of serial.c
-
- automation/gitlab-ci/build.yaml            | 122 ++++++
- automation/scripts/build                   |   4 +-
- xen/arch/riscv/Makefile                    |  18 +-
- xen/arch/riscv/arch.mk                     |   4 -
- xen/arch/riscv/configs/tiny64_defconfig    |  19 +-
- xen/arch/riscv/early_printk.c              | 168 --------
- xen/arch/riscv/include/asm/Makefile        |  14 +
- xen/arch/riscv/include/asm/atomic.h        | 375 ++++++++++++++++++
- xen/arch/riscv/include/asm/bitops.h        | 288 ++++++++++++++
- xen/arch/riscv/include/asm/byteorder.h     |  16 +
- xen/arch/riscv/include/asm/cache.h         |   2 +
- xen/arch/riscv/include/asm/cmpxchg.h       | 379 ++++++++++++++++++
- xen/arch/riscv/include/asm/config.h        |  21 +
- xen/arch/riscv/include/asm/cpufeature.h    |  22 ++
- xen/arch/riscv/include/asm/current.h       |  20 +
- xen/arch/riscv/include/asm/domain.h        |  43 +++
- xen/arch/riscv/include/asm/event.h         |  34 ++
- xen/arch/riscv/include/asm/fence.h         |  12 +
- xen/arch/riscv/include/asm/flushtlb.h      |  31 ++
- xen/arch/riscv/include/asm/guest_access.h  |  29 ++
- xen/arch/riscv/include/asm/guest_atomics.h |  48 +++
- xen/arch/riscv/include/asm/io.h            | 134 +++++++
- xen/arch/riscv/include/asm/iommu.h         |   7 +
- xen/arch/riscv/include/asm/irq.h           |  37 ++
- xen/arch/riscv/include/asm/mm.h            | 270 ++++++++++++-
- xen/arch/riscv/include/asm/nospec.h        |  25 ++
- xen/arch/riscv/include/asm/p2m.h           | 105 +++++
- xen/arch/riscv/include/asm/page.h          |  21 +
- xen/arch/riscv/include/asm/processor.h     |  15 +
- xen/arch/riscv/include/asm/regs.h          |  26 ++
- xen/arch/riscv/include/asm/setup.h         |   6 +
- xen/arch/riscv/include/asm/smp.h           |  23 ++
- xen/arch/riscv/include/asm/spinlock.h      |  15 +
- xen/arch/riscv/include/asm/system.h        |  79 ++++
- xen/arch/riscv/include/asm/time.h          |  19 +
- xen/arch/riscv/lib/Makefile                |   1 +
- xen/arch/riscv/lib/find_next_bit.c         | 278 ++++++++++++++
- xen/arch/riscv/mm.c                        |  52 ++-
- xen/arch/riscv/setup.c                     |   9 +-
- xen/arch/riscv/stubs.c                     | 426 +++++++++++++++++++++
- xen/arch/riscv/traps.c                     |  25 ++
- xen/arch/riscv/xen.lds.S                   |  10 +
- xen/drivers/char/serial.c                  |   2 +
- xen/include/public/arch-riscv.h            |  93 +++++
- xen/include/public/arch-riscv/hvm/save.h   |  20 +
- xen/include/public/hvm/save.h              |   2 +
- xen/include/public/pmu.h                   |   2 +
- xen/include/public/xen.h                   |   2 +
- xen/include/xen/domain.h                   |   1 +
- 49 files changed, 3194 insertions(+), 180 deletions(-)
- create mode 100644 xen/arch/riscv/include/asm/Makefile
- create mode 100644 xen/arch/riscv/include/asm/atomic.h
- create mode 100644 xen/arch/riscv/include/asm/bitops.h
- create mode 100644 xen/arch/riscv/include/asm/byteorder.h
- create mode 100644 xen/arch/riscv/include/asm/cmpxchg.h
+ xen/arch/riscv/include/asm/cpufeature.h | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
  create mode 100644 xen/arch/riscv/include/asm/cpufeature.h
- create mode 100644 xen/arch/riscv/include/asm/domain.h
- create mode 100644 xen/arch/riscv/include/asm/event.h
- create mode 100644 xen/arch/riscv/include/asm/fence.h
- create mode 100644 xen/arch/riscv/include/asm/flushtlb.h
- create mode 100644 xen/arch/riscv/include/asm/guest_access.h
- create mode 100644 xen/arch/riscv/include/asm/guest_atomics.h
- create mode 100644 xen/arch/riscv/include/asm/io.h
- create mode 100644 xen/arch/riscv/include/asm/iommu.h
- create mode 100644 xen/arch/riscv/include/asm/irq.h
- create mode 100644 xen/arch/riscv/include/asm/nospec.h
- create mode 100644 xen/arch/riscv/include/asm/p2m.h
- create mode 100644 xen/arch/riscv/include/asm/regs.h
- create mode 100644 xen/arch/riscv/include/asm/setup.h
- create mode 100644 xen/arch/riscv/include/asm/smp.h
- create mode 100644 xen/arch/riscv/include/asm/spinlock.h
- create mode 100644 xen/arch/riscv/include/asm/system.h
- create mode 100644 xen/arch/riscv/include/asm/time.h
- create mode 100644 xen/arch/riscv/lib/Makefile
- create mode 100644 xen/arch/riscv/lib/find_next_bit.c
- create mode 100644 xen/arch/riscv/stubs.c
- create mode 100644 xen/include/public/arch-riscv.h
- create mode 100644 xen/include/public/arch-riscv/hvm/save.h
 
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+new file mode 100644
+index 0000000000..211827f816
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -0,0 +1,22 @@
++#ifndef __ASM_RISCV_CPUFEATURE_H
++#define __ASM_RISCV_CPUFEATURE_H
++
++#ifndef __ASSEMBLY__
++
++static inline int cpu_nr_siblings(unsigned int cpu)
++{
++    return 1;
++}
++
++#endif /* __ASSEMBLY__ */
++
++#endif
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
++
 -- 
 2.42.0
 
