@@ -4,37 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D41C61DF4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:41:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.640455.998723 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C487C61D97
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Nov 2023 10:42:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.640459.998733 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TcB-00031r-1e; Fri, 24 Nov 2023 10:40:51 +0000
+	id 1r6TdQ-00044m-Am; Fri, 24 Nov 2023 10:42:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 640455.998723; Fri, 24 Nov 2023 10:40:51 +0000
+Received: by outflank-mailman (output) from mailman id 640459.998733; Fri, 24 Nov 2023 10:42:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r6TcA-00031k-UN; Fri, 24 Nov 2023 10:40:50 +0000
-Received: by outflank-mailman (input) for mailman id 640455;
- Fri, 24 Nov 2023 10:40:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r6TdQ-00044f-7t; Fri, 24 Nov 2023 10:42:08 +0000
+Received: by outflank-mailman (input) for mailman id 640459;
+ Fri, 24 Nov 2023 10:42:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fpHI=HF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r6TTY-0006hx-DH
- for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:31:56 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ab5bedd8-8ab4-11ee-9b0e-b553b5be7939;
- Fri, 24 Nov 2023 11:31:47 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a00b01955acso252686266b.1
- for <xen-devel@lists.xenproject.org>; Fri, 24 Nov 2023 02:31:47 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g1-20020a170906348100b009de3641d538sm1882374ejb.134.2023.11.24.02.31.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:31:45 -0800 (PST)
+ <SRS0=ibx+=HF=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
+ id 1r6TdP-00044J-7f
+ for xen-devel@lists.xenproject.org; Fri, 24 Nov 2023 10:42:07 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20616.outbound.protection.outlook.com
+ [2a01:111:f400:7e89::616])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1b6856e1-8ab6-11ee-98e2-6d05b1d4d9a1;
+ Fri, 24 Nov 2023 11:42:05 +0100 (CET)
+Received: from DM6PR07CA0052.namprd07.prod.outlook.com (2603:10b6:5:74::29) by
+ PH7PR12MB5830.namprd12.prod.outlook.com (2603:10b6:510:1d5::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.20; Fri, 24 Nov
+ 2023 10:42:01 +0000
+Received: from CY4PEPF0000EE3F.namprd03.prod.outlook.com
+ (2603:10b6:5:74:cafe::64) by DM6PR07CA0052.outlook.office365.com
+ (2603:10b6:5:74::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.20 via Frontend
+ Transport; Fri, 24 Nov 2023 10:42:01 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EE3F.mail.protection.outlook.com (10.167.242.19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7025.13 via Frontend Transport; Fri, 24 Nov 2023 10:42:00 +0000
+Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 24 Nov
+ 2023 04:41:56 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,354 +58,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab5bedd8-8ab4-11ee-9b0e-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700821906; x=1701426706; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1Kbuuii/+7rQmgonB46PIVQoLZag642OKfw6nsrfRy8=;
-        b=iRr6w3Ly3s364ncMCSjNaHERExnErwTYlahSyGgVt71wh/1Wg++l0UDNYkFsRmQQGp
-         GTx+kjWJKrQSi4ZJvSz5KuFMKFZvfkZlw8QJ1JIJKCyyjukAnH7UoMirQw0j474PQhYF
-         fC/JpM9ocErM40oVMXAL2j1umXieqPRp8/cQsQJq3xSckE0TbKoVbg1mj7/TIsP+wH2j
-         rNlwK0U/nDatGZPM6iHWGdId8PtErBMMdNLAbeAh/K0C3cbFq1nMJI0hOnmnvHRzh/6p
-         6r5BoYLzY/6p9mNAdjkDjYlqhMjmgDzpJxyrDT2L8/tQPYU+58p7UfnKFpyyROal6Ejm
-         n8Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700821906; x=1701426706;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1Kbuuii/+7rQmgonB46PIVQoLZag642OKfw6nsrfRy8=;
-        b=DsExdc22g7RxIJ0laitI6R3UkJEdWJFiJXTzYlEdTmF5+LzvbjJvFIJtL/7PhRqHvt
-         WR6Wi1l1ZbrZ7ku1Ix50Gs4ITkVkWlc46qaOvF+8TqqrQvEBrgGMJO0EI+TlpzQz+hlY
-         Fl5WHtaq2FMLmPPgl6FDjetmMZ52eC166w3Rn3lq56cGkgaWoRlNUe70dAQxkqt4QldS
-         /E+wq3Ugw70WgIHldXXvXStSXCG4oYEsA1ZTD977nRVtyomJAHavQVCUHdx0npSqYuCI
-         Pqgrr2fQS2r5Ph+TrXSsMRv5IsxSRr2KKiRrBBAJrRs5E10X4bBvDfQCiGxCF9/rUqBh
-         awhQ==
-X-Gm-Message-State: AOJu0YyhrNcWL7Xmx5VSzUW8BwcB6dCscTNwTnSNjqxHooPTsPr+qqHJ
-	OrMdwShCvkCXJVKt+S5WRZp9X0O8jRvPJQ==
-X-Google-Smtp-Source: AGHT+IFq0SCZr2yLlDzH678tDe2CxkBqcq+l+3icodbXegZpn/4jenHWQrDS1tWTXb1Al9WEgHCi8g==
-X-Received: by 2002:a17:906:7385:b0:9b6:aac1:6fa5 with SMTP id f5-20020a170906738500b009b6aac16fa5mr1507668ejl.55.1700821906201;
-        Fri, 24 Nov 2023 02:31:46 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 36/39] xen/riscv: add minimal stuff to asm/mm.h to build full Xen
-Date: Fri, 24 Nov 2023 12:30:56 +0200
-Message-ID: <ec017ed24b1e5274d64d5458e4ab4475c92dece7.1700761381.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <cover.1700761381.git.oleksii.kurochko@gmail.com>
-References: <cover.1700761381.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 1b6856e1-8ab6-11ee-98e2-6d05b1d4d9a1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZoaGuMlU/D+vp+DBP6XM6MQ1NIrx31y5zSrPf3jnN478S8xM1/Fut253hYyqr7EOeea2ZJ4MyVP4TBMiFwHpAlpUyE/yoY1/I8sXr7SuVyCEiUUVNwD8DHNq2S8W9u4Qafqpp9yL7XKrPpa2q3fv/AT054zjcSLCuDfws2pQ0VpdBMppCAz4gb3qO/q8DZGFtDfjQ2DBhfyNJK2jlKbzPlwpw2SbK3oArutSK5Zr6GsEX8mSykZ7NAgDFN1O3Gp6pS8xjTDs3EKNVIuF0lTz95r87IC8nkGqopEuI7RXwf35cA43G+rOQ2j00be7yfJwwObeAR6A23BEd6qJfz6JqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sAdLDrxElG/nCt7sYNFn/UabtUtI1BcN1/frFv9Hsk4=;
+ b=JK/401LNGihRhukidi6l5kb7X5zcOCHYg/j2bB3F/Bx+UoAtSYxvv4pfpImmeIp6BVbTLKA3gk1AOGOWCDTvomVG1isTc+wVJi4OwSXUkGAbdUeRbY03Q9dfgCw6ZCiL0eHS/1HLCDV2oEtG12f1Myyp9lV2DjSdaz+U72zn7zg/60fmHymKZai3uT0ytqcPlkesdGDVdTFgN6+yz3kjshOY7LDAOfIO/WvvX15l+/tOe8Luz5Ju7WCYXdZv6LvQ0N8HuRFcECUzQtTR943Z5G8BsdE22nOpvSE9Tw8m6Dh5qYumO6NwHifd5nJfjwlVpAtXAU+4Qh/optpd23lFUA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sAdLDrxElG/nCt7sYNFn/UabtUtI1BcN1/frFv9Hsk4=;
+ b=IMHdLCUDxI4bvGm6tugKm0r5sy5I741A+CtVzDhvAfbn9WbuwubJMqw/gmQ5L2IVEFxLwoD8CzpxruKdDtSuKkjaYvR57WjtSglv8xLvngp5tVYhcOxnkoQ6+tsbCjqpuvxFcFllBxGBLlFMbfyjQa0RgGDRlHfpAekZKkTFGhM=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Jiqian Chen <Jiqian.Chen@amd.com>
+To: Jan Beulich <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Anthony PERARD
+	<anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, <xen-devel@lists.xenproject.org>
+CC: Stewart Hildebrand <Stewart.Hildebrand@amd.com>, Alex Deucher
+	<Alexander.Deucher@amd.com>, Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+	Stefano Stabellini <stefano.stabellini@amd.com>, Huang Rui
+	<Ray.Huang@amd.com>, Honglei Huang <Honglei1.Huang@amd.com>, Julia Zhang
+	<Julia.Zhang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>
+Subject: [RFC XEN PATCH v2 0/3] Support device passthrough when dom0 is PVH on Xen
+Date: Fri, 24 Nov 2023 18:41:33 +0800
+Message-ID: <20231124104136.3263722-1-Jiqian.Chen@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3F:EE_|PH7PR12MB5830:EE_
+X-MS-Office365-Filtering-Correlation-Id: 99d4c6b5-2e5d-4036-e4ac-08dbecd9fd90
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	jnGTp0tYURfDQSwL1rHy50gRn8rGmAILUnJoMkLp2Fr5jBl9dz/mxL7EtV5J7x9zf/MsdYdVvrbHLK0Ijc2Ex49TyCgXuz+hg7Q2gUxsL3EGnpZGjsf0ejhwCb95XsdCZHaFIIikoNlmHijU+QG22k+/PpWzSP7v6ehfxAzu0lh4SSvAHngX3dUkyu3agDhz9A/nwabOCVO28/VKX43FR2X31TKRe78KA0x8PAf9zR5AEkXEoneuUGEiYgpn6bJ/6NJGwprqVPAeLR/zf3vWkRpwhUSx8A7zViGKP/3tsXHWbsq6WWy+fsF/GfsHNG/w4VErjIDL1jDHj/J91HxmEBQxQBdST3ph2w37T0O9FxbdQk2wGYofLIre59LQdxsU/l+cM3GgCnA9S/6+R8uNaCdv8KKnJccsk+XKNGDKG9kScw8ZdDNhL29ziOPpyFw8UD0zvZG+OoIbtXRjmbluYMRbzp+M099lE05vMmeQHK79Q6NIw+1cOE3RMBFebDHY01HbDdty/6jRkZlhhzId94i/pjVYfX8oGhg1cepyl1vJnGfiBqkm1ti8wBjWtu2ImYuSrrwMcgfrHp1vJ20IlcNIQ0BfXo3/erqO+spcGui+kJeqoZf6G9l2rm2OXdxC5Lf4gxIntz4QQ0xGBnRp/sW7G6er2pmYqKL488putyXweCRDInHLsRrF9OMF8t5Y7yMgSEMxkocphoBBW3Eax9nFDc+Zxa3MHmwvklWTdq0NU24rx1E34NiQlGEgodp1I9WckFQjJjlIF3HeimrW598S2PsXNxh2a5W+qHVWb/M=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(136003)(396003)(346002)(376002)(230922051799003)(82310400011)(186009)(64100799003)(451199024)(1800799012)(40470700004)(46966006)(36840700001)(40460700003)(426003)(83380400001)(82740400003)(86362001)(36756003)(356005)(81166007)(47076005)(36860700001)(336012)(70206006)(70586007)(316002)(54906003)(8936002)(4326008)(8676002)(41300700001)(110136005)(5660300002)(1076003)(2906002)(26005)(16526019)(40480700001)(2616005)(478600001)(6666004)(966005)(7696005)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2023 10:42:00.8153
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99d4c6b5-2e5d-4036-e4ac-08dbecd9fd90
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000EE3F.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5830
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V2:
- - define stub for arch_get_dma_bitsize(void)
----
- xen/arch/riscv/include/asm/mm.h | 270 +++++++++++++++++++++++++++++++-
- 1 file changed, 268 insertions(+), 2 deletions(-)
+Hi All,
 
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index 07c7a0abba..68460f6659 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -3,10 +3,271 @@
- #ifndef _ASM_RISCV_MM_H
- #define _ASM_RISCV_MM_H
- 
-+#include <public/xen.h>
-+#include <xen/pdx.h>
-+#include <xen/types.h>
-+
-+#include <asm/page.h>
- #include <asm/page-bits.h>
- 
--#define pfn_to_paddr(pfn) ((paddr_t)(pfn) << PAGE_SHIFT)
--#define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
-+#define paddr_to_pdx(pa)    mfn_to_pdx(maddr_to_mfn(pa))
-+#define gfn_to_gaddr(gfn)   pfn_to_paddr(gfn_x(gfn))
-+#define gaddr_to_gfn(ga)    _gfn(paddr_to_pfn(ga))
-+#define mfn_to_maddr(mfn)   pfn_to_paddr(mfn_x(mfn))
-+#define maddr_to_mfn(ma)    _mfn(paddr_to_pfn(ma))
-+#define vmap_to_mfn(va)     maddr_to_mfn(virt_to_maddr((vaddr_t)va))
-+#define vmap_to_page(va)    mfn_to_page(vmap_to_mfn(va))
-+#define paddr_to_pdx(pa)    mfn_to_pdx(maddr_to_mfn(pa))
-+#define gfn_to_gaddr(gfn)   pfn_to_paddr(gfn_x(gfn))
-+#define gaddr_to_gfn(ga)    _gfn(paddr_to_pfn(ga))
-+#define mfn_to_maddr(mfn)   pfn_to_paddr(mfn_x(mfn))
-+#define maddr_to_mfn(ma)    _mfn(paddr_to_pfn(ma))
-+#define vmap_to_mfn(va)     maddr_to_mfn(virt_to_maddr((vaddr_t)va))
-+#define vmap_to_page(va)    mfn_to_page(vmap_to_mfn(va))
-+
-+#define virt_to_maddr(va) ((paddr_t)((vaddr_t)(va) & PADDR_MASK))
-+#define maddr_to_virt(pa) ((void *)((paddr_t)(pa) | XEN_VIRT_START))
-+
-+/* Convert between Xen-heap virtual addresses and machine frame numbers. */
-+#define __virt_to_mfn(va) (virt_to_maddr(va) >> PAGE_SHIFT)
-+#define __mfn_to_virt(mfn) (maddr_to_virt((paddr_t)(mfn) << PAGE_SHIFT))
-+
-+/* Convert between Xen-heap virtual addresses and page-info structures. */
-+static inline struct page_info *virt_to_page(const void *v)
-+{
-+    BUG();
-+    return NULL;
-+}
-+
-+/*
-+ * We define non-underscored wrappers for above conversion functions.
-+ * These are overriden in various source files while underscored version
-+ * remain intact.
-+ */
-+#define virt_to_mfn(va)     __virt_to_mfn(va)
-+#define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
-+
-+struct page_info
-+{
-+    /* Each frame can be threaded onto a doubly-linked list. */
-+    struct page_list_entry list;
-+
-+    /* Reference count and various PGC_xxx flags and fields. */
-+    unsigned long count_info;
-+
-+    /* Context-dependent fields follow... */
-+    union {
-+        /* Page is in use: ((count_info & PGC_count_mask) != 0). */
-+        struct {
-+            /* Type reference count and various PGT_xxx flags and fields. */
-+            unsigned long type_info;
-+        } inuse;
-+        /* Page is on a free list: ((count_info & PGC_count_mask) == 0). */
-+        union {
-+            struct {
-+                /*
-+                 * Index of the first *possibly* unscrubbed page in the buddy.
-+                 * One more bit than maximum possible order to accommodate
-+                 * INVALID_DIRTY_IDX.
-+                 */
-+#define INVALID_DIRTY_IDX ((1UL << (MAX_ORDER + 1)) - 1)
-+                unsigned long first_dirty:MAX_ORDER + 1;
-+
-+                /* Do TLBs need flushing for safety before next page use? */
-+                bool need_tlbflush:1;
-+
-+#define BUDDY_NOT_SCRUBBING    0
-+#define BUDDY_SCRUBBING        1
-+#define BUDDY_SCRUB_ABORT      2
-+                unsigned long scrub_state:2;
-+            };
-+
-+            unsigned long val;
-+            } free;
-+
-+    } u;
-+
-+    union {
-+        /* Page is in use, but not as a shadow. */
-+        struct {
-+            /* Owner of this page (zero if page is anonymous). */
-+            struct domain *domain;
-+        } inuse;
-+
-+        /* Page is on a free list. */
-+        struct {
-+            /* Order-size of the free chunk this page is the head of. */
-+            unsigned int order;
-+        } free;
-+
-+    } v;
-+
-+    union {
-+        /*
-+         * Timestamp from 'TLB clock', used to avoid extra safety flushes.
-+         * Only valid for: a) free pages, and b) pages with zero type count
-+         */
-+        u32 tlbflush_timestamp;
-+    };
-+    u64 pad;
-+};
-+
-+#define frame_table ((struct page_info *)FRAMETABLE_VIRT_START)
-+
-+/* PDX of the first page in the frame table. */
-+extern unsigned long frametable_base_pdx;
-+
-+/* Convert between machine frame numbers and page-info structures. */
-+#define mfn_to_page(mfn)                                            \
-+    (frame_table + (mfn_to_pdx(mfn) - frametable_base_pdx))
-+#define page_to_mfn(pg)                                             \
-+    pdx_to_mfn((unsigned long)((pg) - frame_table) + frametable_base_pdx)
-+
-+static inline void *page_to_virt(const struct page_info *pg)
-+{
-+    return mfn_to_virt(mfn_x(page_to_mfn(pg)));
-+}
-+
-+/*
-+ * Common code requires get_page_type and put_page_type.
-+ * We don't care about typecounts so we just do the minimum to make it
-+ * happy.
-+ */
-+static inline int get_page_type(struct page_info *page, unsigned long type)
-+{
-+    return 1;
-+}
-+
-+static inline void put_page_type(struct page_info *page)
-+{
-+    return;
-+}
-+
-+/* TODO */
-+static inline bool get_page_nr(struct page_info *page, const struct domain *domain,
-+                        unsigned long nr)
-+{
-+    BUG();
-+}
-+static inline void put_page_nr(struct page_info *page, unsigned long nr)
-+{
-+    BUG();
-+}
-+
-+static inline void put_page_and_type(struct page_info *page)
-+{
-+    put_page_type(page);
-+    put_page(page);
-+}
-+
-+/*
-+ * RISCV does not have an M2P, but common code expects a handful of
-+ * M2P-related defines and functions. Provide dummy versions of these.
-+ */
-+#define INVALID_M2P_ENTRY        (~0UL)
-+#define SHARED_M2P_ENTRY         (~0UL - 1UL)
-+#define SHARED_M2P(_e)           ((_e) == SHARED_M2P_ENTRY)
-+
-+/* Xen always owns P2M on PPC */
-+#define set_gpfn_from_mfn(mfn, pfn) do { (void) (mfn), (void)(pfn); } while (0)
-+#define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
-+
-+#define PDX_GROUP_SHIFT (16 + 5)
-+
-+static inline unsigned long domain_get_maximum_gpfn(struct domain *d)
-+{
-+    BUG();
-+    return 0;
-+}
-+
-+static inline long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    BUG();
-+    return 0;
-+}
-+
-+/*
-+ * On RISCV, all the RAM is currently direct mapped in Xen.
-+ * Hence return always true.
-+ */
-+static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
-+{
-+    return true;
-+}
-+
-+#define PG_shift(idx)   (BITS_PER_LONG - (idx))
-+#define PG_mask(x, idx) (x ## UL << PG_shift(idx))
-+
-+#define PGT_none          PG_mask(0, 1)  /* no special uses of this page   */
-+#define PGT_writable_page PG_mask(1, 1)  /* has writable mappings?         */
-+#define PGT_type_mask     PG_mask(1, 1)  /* Bits 31 or 63.                 */
-+
-+ /* Count of uses of this frame as its current type. */
-+#define PGT_count_width   PG_shift(2)
-+#define PGT_count_mask    ((1UL<<PGT_count_width)-1)
-+
-+/*
-+ * Page needs to be scrubbed. Since this bit can only be set on a page that is
-+ * free (i.e. in PGC_state_free) we can reuse PGC_allocated bit.
-+ */
-+#define _PGC_need_scrub   _PGC_allocated
-+#define PGC_need_scrub    PGC_allocated
-+
-+//  /* Cleared when the owning guest 'frees' this page. */
-+#define _PGC_allocated    PG_shift(1)
-+#define PGC_allocated     PG_mask(1, 1)
-+  /* Page is Xen heap? */
-+#define _PGC_xen_heap     PG_shift(2)
-+#define PGC_xen_heap      PG_mask(1, 2)
-+#ifdef CONFIG_STATIC_MEMORY
-+/* Page is static memory */
-+#define _PGC_static    PG_shift(3)
-+#define PGC_static     PG_mask(1, 3)
-+#else
-+#define PGC_static     0
-+#endif
-+/* ... */
-+/* Page is broken? */
-+#define _PGC_broken       PG_shift(7)
-+#define PGC_broken        PG_mask(1, 7)
-+ /* Mutually-exclusive page states: { inuse, offlining, offlined, free }. */
-+#define PGC_state         PG_mask(3, 9)
-+#define PGC_state_inuse   PG_mask(0, 9)
-+#define PGC_state_offlining PG_mask(1, 9)
-+#define PGC_state_offlined PG_mask(2, 9)
-+#define PGC_state_free    PG_mask(3, 9)
-+// #define page_state_is(pg, st) (((pg)->count_info&PGC_state) == PGC_state_##st)
-+
-+/* Count of references to this frame. */
-+#define PGC_count_width   PG_shift(9)
-+#define PGC_count_mask    ((1UL<<PGC_count_width)-1)
-+
-+#define page_state_is(pg, st) (((pg)->count_info&PGC_state) == PGC_state_##st)
-+
-+#define _PGC_extra        PG_shift(10)
-+#define PGC_extra         PG_mask(1, 10)
-+
-+#define is_xen_heap_page(page) ((page)->count_info & PGC_xen_heap)
-+#define is_xen_heap_mfn(mfn) \
-+    (mfn_valid(mfn) && is_xen_heap_page(mfn_to_page(mfn)))
-+
-+#define is_xen_fixed_mfn(mfn)                                   \
-+    ((mfn_to_maddr(mfn) >= virt_to_maddr(&_start)) &&           \
-+     (mfn_to_maddr(mfn) <= virt_to_maddr((vaddr_t)_end - 1)))
-+
-+#define page_get_owner(_p)    (_p)->v.inuse.domain
-+#define page_set_owner(_p,_d) ((_p)->v.inuse.domain = (_d))
-+
-+/* TODO: implement */
-+#define mfn_valid(mfn) ({ (void) (mfn); 0; })
-+// #define max_page (0UL)
-+
-+#define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
-+
-+#define domain_set_alloc_bitsize(d) ((void)0)
-+#define domain_clamp_alloc_bitsize(d, b) (b)
-+
-+#define PFN_ORDER(_pfn) ((_pfn)->v.free.order)
- 
- extern unsigned char cpu0_boot_stack[];
- 
-@@ -20,4 +281,9 @@ unsigned long calc_phys_offset(void);
- 
- void turn_on_mmu(unsigned long ra);
- 
-+static inline unsigned int arch_get_dma_bitsize(void)
-+{
-+    return 32; /* TODO */
-+}
-+
- #endif /* _ASM_RISCV_MM_H */
+This series of patches are the v2 of the implementation of passthrough when dom0 is PVH on Xen.
+We sent the v1 to upstream before, but the v1 had so many problems and we got lots of suggestions.
+I will introduce all issues that these patches try to fix and the differences between v1 and v2.
+
+v2 on kernel side:
+https://lore.kernel.org/lkml/20231124103123.3263471-1-Jiqian.Chen@amd.com/T/#t
+
+Issues we encountered:
+1. pci_stub failed to write bar for a passthrough device.
+Problem: when we run “sudo xl pci-assignable-add <sbdf>” to assign a device, pci_stub will
+call “pcistub_init_device() -> pci_restore_state() -> pci_restore_config_space() ->
+pci_restore_config_space_range() -> pci_restore_config_dword() -> pci_write_config_dword()”,
+the pci config write will trigger an io interrupt to bar_write() in the xen, but the
+bar->enabled was set before, the write is not allowed now, and then when Qemu config the
+passthrough device in xen_pt_realize(), it gets invalid bar values.
+
+Reason: the reason is that we don't tell vPCI that the device has been reset, so the current
+cached state in pdev->vpci is all out of date and is different from the real device state.
+
+Solution: to solve this problem, the first patch of kernel(xen/pci: Add xen_reset_device_state
+function) and the fist patch of xen(xen/vpci: Clear all vpci status of device) add a new
+hypercall to reset the state stored in vPCI when the state of real device has changed.
+Thank Roger for the suggestion of this v2, and it is different from v1
+(https://lore.kernel.org/xen-devel/20230312075455.450187-3-ray.huang@amd.com/), v1 simply allow
+domU to write pci bar, it does not comply with the design principles of vPCI.
+
+2. failed to do PHYSDEVOP_map_pirq when dom0 is PVH
+Problem: HVM domU will do PHYSDEVOP_map_pirq for a passthrough device by using gsi. See
+xen_pt_realize->xc_physdev_map_pirq and pci_add_dm_done->xc_physdev_map_pirq. Then
+xc_physdev_map_pirq will call into Xen, but in hvm_physdev_op(), PHYSDEVOP_map_pirq is not allowed.
+
+Reason: In hvm_physdev_op(), the variable "currd" is PVH dom0 and PVH has no X86_EMU_USE_PIRQ flag,
+it will fail at has_pirq check.
+
+Solution: I think we may need to allow PHYSDEVOP_map_pirq when "currd" is dom0 (at present dom0 is
+PVH). The second patch of xen(x86/pvh: Open PHYSDEVOP_map_pirq for PVH dom0) allow PVH dom0 do
+PHYSDEVOP_map_pirq. This v2 patch is better than v1, v1 simply remove the has_pirq check(xen
+https://lore.kernel.org/xen-devel/20230312075455.450187-4-ray.huang@amd.com/).
+
+3. the gsi of a passthrough device doesn't be unmasked
+ 3.1 failed to check the permission of pirq
+ 3.2 the gsi of passthrough device was not registered in PVH dom0
+
+Problem:
+3.1 callback function pci_add_dm_done() will be called when qemu config a passthrough device for domU.
+This function will call xc_domain_irq_permission()-> pirq_access_permitted() to check if the gsi has
+corresponding mappings in dom0. But it didn’t, so failed. See
+XEN_DOMCTL_irq_permission->pirq_access_permitted, "current" is PVH dom0 and it return irq is 0.
+3.2 it's possible for a gsi (iow: vIO-APIC pin) to never get registered on PVH dom0, because the
+devices of PVH are using MSI(-X) interrupts. However, the IO-APIC pin must be configured for it to be
+able to be mapped into a domU.
+
+Reason: After searching codes, I find "map_pirq" and "register_gsi" will be done in function
+vioapic_write_redirent->vioapic_hwdom_map_gsi when the gsi(aka ioapic's pin) is unmasked in PVH dom0.
+So the two problems can be concluded to that the gsi of a passthrough device doesn't be unmasked.
+
+Solution: to solve these problems, the second patch of kernel(xen/pvh: Unmask irq for passthrough
+device in PVH dom0) call the unmask_irq() when we assign a device to be passthrough. So that
+passthrough devices can have the mapping of gsi on PVH dom0 and gsi can be registered. This v2 patch
+is different from the v1(
+kernel https://lore.kernel.org/xen-devel/20230312120157.452859-5-ray.huang@amd.com/,
+kernel https://lore.kernel.org/xen-devel/20230312120157.452859-5-ray.huang@amd.com/ and
+xen https://lore.kernel.org/xen-devel/20230312075455.450187-5-ray.huang@amd.com/),
+v1 performed "map_pirq" and "register_gsi" on all pci devices on PVH dom0, which is unnecessary and
+may cause multiple registration.
+
+4. failed to map pirq for gsi
+Problem: qemu will call xc_physdev_map_pirq() to map a passthrough device’s gsi to pirq in function
+xen_pt_realize(). But failed.
+
+Reason: According to the implement of xc_physdev_map_pirq(), it needs gsi instead of irq, but qemu
+pass irq to it and treat irq as gsi, it is got from file /sys/bus/pci/devices/xxxx:xx:xx.x/irq in
+function xen_host_pci_device_get(). But actually the gsi number is not equal with irq. On PVH dom0,
+when it allocates irq for a gsi in function acpi_register_gsi_ioapic(), allocation is dynamic, and
+follow the principle of applying first, distributing first. And if you debug the kernel codes(see
+function __irq_alloc_descs), you will find the irq number is allocated from small to large by order,
+but the applying gsi number is not, gsi 38 may come before gsi 28, that causes gsi 38 get a smaller
+irq number than gsi 28, and then gsi != irq.
+
+Solution: we can record the relation between gsi and irq, then when userspace(qemu) want to use gsi,
+we can do a translation. The third patch of kernel(xen/privcmd: Add new syscall to get gsi from irq)
+records all the relations in acpi_register_gsi_xen_pvh() when dom0 initialize pci devices, and provide
+a syscall for userspace to get the gsi from irq. The third patch of xen(tools: Add new function to get
+gsi from irq) add a new function xc_physdev_gsi_from_irq() to call the new syscall added on kernel side.
+And then userspace can use that function to get gsi. Then xc_physdev_map_pirq() will success. This v2
+patch is the same as v1(
+kernel https://lore.kernel.org/xen-devel/20230312120157.452859-6-ray.huang@amd.com/ and
+xen https://lore.kernel.org/xen-devel/20230312075455.450187-6-ray.huang@amd.com/)
+
+About the v2 patch of qemu, just change an included head file, other are similar to the v1 (
+qemu https://lore.kernel.org/xen-devel/20230312092244.451465-19-ray.huang@amd.com/), just call
+xc_physdev_gsi_from_irq() to get gsi from irq.
+
+
+Jiqian Chen (3):
+  xen/vpci: Clear all vpci status of device
+  x86/pvh: Open PHYSDEVOP_map_pirq for PVH dom0
+  tools: Add new function to get gsi from irq
+
+ tools/include/xen-sys/Linux/privcmd.h |  7 +++++++
+ tools/include/xencall.h               |  2 ++
+ tools/include/xenctrl.h               |  2 ++
+ tools/libs/call/core.c                |  5 +++++
+ tools/libs/call/libxencall.map        |  2 ++
+ tools/libs/call/linux.c               | 14 ++++++++++++++
+ tools/libs/call/private.h             |  9 +++++++++
+ tools/libs/ctrl/xc_physdev.c          |  4 ++++
+ tools/libs/light/libxl_pci.c          |  1 +
+ xen/arch/x86/hvm/hypercall.c          |  3 +++
+ xen/drivers/passthrough/pci.c         | 21 +++++++++++++++++++++
+ xen/drivers/pci/physdev.c             | 14 ++++++++++++++
+ xen/drivers/vpci/vpci.c               |  9 +++++++++
+ xen/include/public/physdev.h          |  2 ++
+ xen/include/xen/pci.h                 |  1 +
+ xen/include/xen/vpci.h                |  6 ++++++
+ 16 files changed, 102 insertions(+)
+
 -- 
-2.42.0
+2.34.1
 
 
