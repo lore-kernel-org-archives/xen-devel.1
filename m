@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B58A1C46CA3
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 13:46:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.642100.1001243 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92884C4167B
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 13:50:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.642105.1001263 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7bwL-0003pU-Kp; Mon, 27 Nov 2023 13:46:21 +0000
+	id 1r7bzl-00069n-Ec; Mon, 27 Nov 2023 13:49:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 642100.1001243; Mon, 27 Nov 2023 13:46:21 +0000
+Received: by outflank-mailman (output) from mailman id 642105.1001263; Mon, 27 Nov 2023 13:49:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7bwL-0003pN-II; Mon, 27 Nov 2023 13:46:21 +0000
-Received: by outflank-mailman (input) for mailman id 642100;
- Mon, 27 Nov 2023 13:46:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r7bzl-00069g-Bj; Mon, 27 Nov 2023 13:49:53 +0000
+Received: by outflank-mailman (input) for mailman id 642105;
+ Mon, 27 Nov 2023 13:49:51 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fJh/=HI=linaro.org=dan.carpenter@srs-se1.protection.inumbo.net>)
- id 1r7bwJ-0003nj-U9
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 13:46:19 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 56cf92cf-8d2b-11ee-98e2-6d05b1d4d9a1;
- Mon, 27 Nov 2023 14:46:17 +0100 (CET)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3316d3d11e1so2384584f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 05:46:17 -0800 (PST)
-Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
- v5-20020a5d6105000000b0032f7fab0712sm12018505wrt.52.2023.11.27.05.46.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:46:16 -0800 (PST)
+ <SRS0=hhMp=HI=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1r7bzj-000644-8Z
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 13:49:51 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d3f922c5-8d2b-11ee-9b0e-b553b5be7939;
+ Mon, 27 Nov 2023 14:49:47 +0100 (CET)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40b479b9c35so5060915e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 05:49:47 -0800 (PST)
+Received: from [10.80.4.253] (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ u13-20020a05600c19cd00b0040b4110f548sm7165815wmq.23.2023.11.27.05.49.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Nov 2023 05:49:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,115 +47,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 56cf92cf-8d2b-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: d3f922c5-8d2b-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1701092777; x=1701697577; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=YundCbgOqgxog8krRgkHDMLd3spWK5TLMe9KGeiCx18=;
-        b=I50vKEjuTOGuHoDB9kO2x5K+/PWjNnaN5HD6Vxm1UIsUkvycIvNjexWeTPkMGS/bHl
-         JxvJT8plOL5keMHEPiSujSwB7KADu62F6ejqcjmKcbMpv70nUCAMV8C7D6u0srHwiksZ
-         72X/sFO592FvJTBRSdvOxNEorbQFlwC3RfxNcPGfWGZ/f6BSQFlwhlhF+3FpfqMAl/Xh
-         pV4N9ZDHeaGbtfqneqLECqMErEhonBTaI0TvKlVvJW2Ol34j+sakC9goR92bOv3yv/BG
-         pfJDAEzmgUsvmWtxAw9oM/7GesufqQpU80ZmQ66RT2FR7sSONlT0SD+jOKJ5pLomhcOl
-         E1PA==
+        d=cloud.com; s=cloud; t=1701092986; x=1701697786; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=HoBvhxJ0Av+vT3EEw/lW8cjGSpIv16L+xvyD2Mzxz3I=;
+        b=ZyO9DFrsNrcIdvD2+Fc9B0PT2jqgTBoNKhTzWJrKBEsiNu4Zb9Mj4PRH4izCvHB/cB
+         Da3xlWIurZ5KKFUwnE7N8BKc3oOVP+gxD9c0KU1Ey8yjI5Yw+8xyBHZ/hT9nQPOqBZdi
+         P9pMELbsdRQdgnlVfqdWgQ8r6tI2/vUwhRoQE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701092777; x=1701697577;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YundCbgOqgxog8krRgkHDMLd3spWK5TLMe9KGeiCx18=;
-        b=Zl52ExJzlIDjA/HQzRybaMFA4mlJe441njkxczoObSKjDHo0noRIPY98Ic4CXefD9f
-         aB/x/HHW8yUEcfZLjp+ZGHgk0R9cTIG2TVjjLxHeGPA/QTeHfo76iSt19RzCqGzwaJd3
-         vw75nksz6VMi3c6MAf7IDm5KqopXPFfcJpDd/QO+C8zAnHmLTVYcbZXThJdG2rqFFqIj
-         huJU53XQyqqi9J2FdDsGFasU6LBQ1/Ufebrpi3NkLYGYU4Q4X42OYEZWTZzFWWc/8qY5
-         PU74b3hvQmkCrfkiamUHO42gyNBvdbiz4/+srRyXEyH08HQgTxkcSHgN4M4vQX0q1UhD
-         MVjg==
-X-Gm-Message-State: AOJu0Yyb2C7aIOZ1KRhbORpQMAnO580/8yhzPzRNKFNOgBuInubtWqJS
-	V9VObgAXOFLAFgu95b78ZuyEXA==
-X-Google-Smtp-Source: AGHT+IHvZXohMRpWp9ljekBnVunFfdsN+Aw6FeyybD7055qlsh79kgqr97OPSx0yef3zaO71BUfszw==
-X-Received: by 2002:a5d:64e3:0:b0:333:47e:4cf4 with SMTP id g3-20020a5d64e3000000b00333047e4cf4mr1874886wri.15.1701092776947;
-        Mon, 27 Nov 2023 05:46:16 -0800 (PST)
-Date: Mon, 27 Nov 2023 16:46:12 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Julien Grall <jgrall@amazon.com>, Rahul Singh <rahul.singh@arm.com>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	David Vrabel <david.vrabel@citrix.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	xen-devel@lists.xenproject.org, kernel-janitors@vger.kernel.org
-Subject: Re: [PATCH] xen/events: fix error codes in xen_bind_pirq_msi_to_irq()
-Message-ID: <4e85c67c-7e3a-47e1-a493-4906cd79306b@suswa.mountain>
-References: <60028de8-a137-423d-91d8-00b2942bd73d@moroto.mountain>
- <6f9c8b08-3865-479f-8f32-686f778203f6@suse.com>
+        d=1e100.net; s=20230601; t=1701092986; x=1701697786;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HoBvhxJ0Av+vT3EEw/lW8cjGSpIv16L+xvyD2Mzxz3I=;
+        b=euTTQDLWE1Vo0AQx1PabSEng2/HcEQoR93iaao4N53d/+VJRTGGYw0EcRQAjDlTTY9
+         6zm5/wFm0MgZ+P4ciPnnO6TLCMC54IJUkMpyIVjQ9SgRJzmnYglmtm5xIc1tt0szqFKG
+         TDP/oiq+zQV5BQkvtP6o37bKBgOrxVMfhkGWwc22JvPyTSVdzfMSsrFkyP8H6conbbxj
+         OqY9e3s45T6ZigmAj/dEq+pZTr9aGQHTSK4F9oK+q4SZ8w/yng+Wh7m6kkYu0zQLqztQ
+         fdVA40HWOVOQrwF+NY5IY16tzu4HUQPg+OW2FPKJnc1aTJ3JgGOw/XVMRlNkSZV8L8ij
+         h2hg==
+X-Gm-Message-State: AOJu0YxXb8o6pR56J5LBRO5qKTC0gg2qk2RbH+7mI3ako8QafDVXM7bw
+	4z2HayVmguNGCTiEuNDJ2q2Z5vIXzsH8fiVuxWo=
+X-Google-Smtp-Source: AGHT+IFuqGIwz6+wHvkfzOiKkbRFfxGApHIL9h3BY/xk1pvcBrSxZw7QdwvTBN2f+QxR3c4JisqZ8Q==
+X-Received: by 2002:a05:600c:1381:b0:405:3455:e1a3 with SMTP id u1-20020a05600c138100b004053455e1a3mr7850571wmf.17.1701092986562;
+        Mon, 27 Nov 2023 05:49:46 -0800 (PST)
+Message-ID: <287760a9-c6fd-4723-8357-f0abf9202d46@cloud.com>
+Date: Mon, 27 Nov 2023 13:49:45 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6f9c8b08-3865-479f-8f32-686f778203f6@suse.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5] xen/x86: On x2APIC mode, derive LDR from APIC ID
+Content-Language: en-US
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+References: <20231127134619.2978-1-alejandro.vallejo@cloud.com>
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+In-Reply-To: <20231127134619.2978-1-alejandro.vallejo@cloud.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 27, 2023 at 02:17:05PM +0100, Juergen Gross wrote:
-> On 27.11.23 13:57, Dan Carpenter wrote:
-> > The error code needs to be set on these error paths.
-> > 
-> > Fixes: 5dd9ad32d775 ("xen/events: drop xen_allocate_irqs_dynamic()")
-> > Fixes: d2ba3166f23b ("xen/events: move drivers/xen/events.c into drivers/xen/events/")
+On 27/11/2023 13:46, Alejandro Vallejo wrote:
+> Both Intel and AMD manuals agree that on x2APIC mode, the APIC LDR and ID
+> registers are derivable from each other through a fixed formula.
 > 
-> Please drop the last Fixes: tag. Said patch didn't introduce any new problem.
-
-Yup.
-
+> Xen uses that formula, but applies it to vCPU IDs (which are sequential)
+> rather than x2APIC IDs (which are not, at the moment). As I understand it,
+> this is an attempt to tightly pack vCPUs into clusters so each cluster has
+> 16 vCPUs rather than 8, but this is a spec violation.
 > 
-> > Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> > ---
-> > Are we going to backport these to stable?  Should I split this into two
-> > patches?
-> > 
-> >   drivers/xen/events/events_base.c | 8 ++++++--
-> >   1 file changed, 6 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-> > index f5edb9e27e3c..aae62603b461 100644
-> > --- a/drivers/xen/events/events_base.c
-> > +++ b/drivers/xen/events/events_base.c
-> > @@ -1105,13 +1105,17 @@ int xen_bind_pirq_msi_to_irq(struct pci_dev *dev, struct msi_desc *msidesc,
-> >   	mutex_lock(&irq_mapping_update_lock);
-> >   	irq = irq_alloc_descs(-1, 0, nvec, -1);
-> > -	if (irq < 0)
-> > +	if (irq < 0) {
-> > +		ret = irq;
-> >   		goto out;
-> > +	}
+> This patch fixes the implementation so we follow the x2APIC spec for new
+> VMs, while preserving the behaviour (buggy or fixed) for migrated-in VMs.
 > 
-> Why? The return value for the out: label is in irq.
+> While touching that area, remove the existing printk statement in
+> vlapic_load_fixup() (as the checks it performed didn't make sense in x2APIC
+> mode and wouldn't affect the outcome) and put another printk as an else
+> branch so we get warnings trying to load nonsensical LDR values we don't
+> know about.
 > 
+> Fixes: f9e0cccf7b35 ("x86/HVM: fix ID handling of x2APIC emulation")
+> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+> Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-This patch is full of embarrassment.  I misread this code.  I thought
-the out label was in the error handling block.
+While no R-by from Andrew was in the mailing list, it was in the xenbits
+patch, of which this is a direct copy except for minor delta suggested
+by Jan in lapic_load_fixup()
 
-> >   	for (i = 0; i < nvec; i++) {
-> >   		info = xen_irq_init(irq + i);
-> > -		if (!info)
-> > +		if (!info) {
-> > +			ret = -ENOMEM;
-> >   			goto error_irq;
-> > +		}
-> 
-> It would be easier to just preset ret with -ENOMEM when defining it.
-> 
+> https://xenbits.xen.org/gitweb/?p=people/andrewcoop/xen.git;a=commitdiff;h=953dcb0317d20959ffee14e404595cfbb66c607a#patch1
 
-That only works if it fails on the first iteration.
-
-I'll fix this up and resend.
-
-regards,
-dan carpenter
-
-
-
-
-
+Cheers,
+Alejandro
 
