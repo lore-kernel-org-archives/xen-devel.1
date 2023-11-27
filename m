@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9206C10DAA
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 06:22:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.641553.1000195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B94FC46CA0
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 06:22:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.641546.1000125 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0Y-0001uu-Gp; Mon, 27 Nov 2023 06:22:14 +0000
+	id 1r7V0Q-0008W0-Rp; Mon, 27 Nov 2023 06:22:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 641553.1000195; Mon, 27 Nov 2023 06:22:14 +0000
+Received: by outflank-mailman (output) from mailman id 641546.1000125; Mon, 27 Nov 2023 06:22:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0Y-0001uU-9i; Mon, 27 Nov 2023 06:22:14 +0000
-Received: by outflank-mailman (input) for mailman id 641553;
- Mon, 27 Nov 2023 06:22:13 +0000
+	id 1r7V0Q-0008VC-L5; Mon, 27 Nov 2023 06:22:06 +0000
+Received: by outflank-mailman (input) for mailman id 641546;
+ Mon, 27 Nov 2023 06:22:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f6Ye=HI=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
- id 1r7V0X-0008S4-BI
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:13 +0000
+ id 1r7V0P-0008S4-5v
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:05 +0000
 Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c0c522c-8ced-11ee-98e2-6d05b1d4d9a1;
- Mon, 27 Nov 2023 07:22:12 +0100 (CET)
-Received: from mail.maildlp.com (unknown [172.19.163.216])
- by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SdwV6000Dz4f3k5c
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:05 +0800 (CST)
+ id 469908ac-8ced-11ee-98e2-6d05b1d4d9a1;
+ Mon, 27 Nov 2023 07:22:03 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.163.235])
+ by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SdwTv39Rtz4f3m79
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:21:55 +0800 (CST)
 Received: from mail02.huawei.com (unknown [10.116.40.112])
- by mail.maildlp.com (Postfix) with ESMTP id CE8311A0BA5
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:08 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTP id D47481A0FEB
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:21:59 +0800 (CST)
 Received: from huaweicloud.com (unknown [10.175.104.67])
- by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S12;
- Mon, 27 Nov 2023 14:22:08 +0800 (CST)
+ by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S7;
+ Mon, 27 Nov 2023 14:21:59 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,7 +47,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c0c522c-8ced-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: 469908ac-8ced-11ee-98e2-6d05b1d4d9a1
 From: Yu Kuai <yukuai1@huaweicloud.com>
 To: hch@infradead.org,
 	ming.lei@redhat.com,
@@ -105,32 +105,32 @@ Cc: linux-block@vger.kernel.org,
 	yukuai1@huaweicloud.com,
 	yi.zhang@huawei.com,
 	yangerkun@huawei.com
-Subject: [PATCH block/for-next v2 08/16] btrfs: use new helper to get inode from block_device
-Date: Mon, 27 Nov 2023 14:21:08 +0800
-Message-Id: <20231127062116.2355129-9-yukuai1@huaweicloud.com>
+Subject: [PATCH block/for-next v2 03/16] bcache: use new helper to get inode from block_device
+Date: Mon, 27 Nov 2023 14:21:03 +0800
+Message-Id: <20231127062116.2355129-4-yukuai1@huaweicloud.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 References: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S12
-X-Coremail-Antispam: 1UD129KBjvJXoWxZr1xKFykCFWxKFyUKFy5CFg_yoW5XFWkpr
-	9xCF98tw4UXr1jga1kW3yvvr1Sqa1vkayxCr93Jw4S9rWxtryYqFyqkry8Za40yrW8JF17
-	XF4jk3yUXr10krJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUPF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-	kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-	z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr1j6r
-	xdM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
-	M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
-	v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
-	F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
-	IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
-	wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1lIx
-	kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
-	wI0_Cr1j6rxdMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
-	W8JwCI42IY6I8E87Iv6xkF7I0E14v26F4UJVW0obIYCTnIWIevJa73UjIFyTuYvjfUOBTY
-	UUUUU
+X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S7
+X-Coremail-Antispam: 1UD129KBjvdXoWrKw1xZryrZw1UJr47Kw4kJFb_yoW3uFc_uF
+	4xZFy2g3yrKrn2vr45GwsavrWjy3WkuF4IqFW7tryavFy5Jr93Wry093W3Xr43WrsIkanx
+	CFyDGr45Aw109jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbDAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUWwA2048vs2IY02
+	0Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+	wVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UM2
+	8EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
+	xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
+	vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
+	r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
+	v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
+	Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1lIxkGc2
+	Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+	Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
+	1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5U
+	UUUU=
 X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
 From: Yu Kuai <yukuai3@huawei.com>
@@ -140,70 +140,22 @@ Which is more efficiency, and also prepare to remove the field
 
 Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 ---
- fs/btrfs/disk-io.c | 6 +++---
- fs/btrfs/volumes.c | 4 ++--
- fs/btrfs/zoned.c   | 2 +-
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ drivers/md/bcache/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/btrfs/disk-io.c b/fs/btrfs/disk-io.c
-index 401ea09ae4b8..88b20cd4d046 100644
---- a/fs/btrfs/disk-io.c
-+++ b/fs/btrfs/disk-io.c
-@@ -3653,7 +3653,7 @@ struct btrfs_super_block *btrfs_read_dev_one_super(struct block_device *bdev,
- 	struct btrfs_super_block *super;
+diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
+index bfe1685dbae5..3ab8bae049ee 100644
+--- a/drivers/md/bcache/super.c
++++ b/drivers/md/bcache/super.c
+@@ -171,7 +171,7 @@ static const char *read_super(struct cache_sb *sb, struct block_device *bdev,
  	struct page *page;
- 	u64 bytenr, bytenr_orig;
--	struct address_space *mapping = bdev->bd_inode->i_mapping;
-+	struct address_space *mapping = bdev_inode(bdev)->i_mapping;
- 	int ret;
+ 	unsigned int i;
  
- 	bytenr_orig = btrfs_sb_offset(copy_num);
-@@ -3740,7 +3740,7 @@ static int write_dev_supers(struct btrfs_device *device,
- 			    struct btrfs_super_block *sb, int max_mirrors)
- {
- 	struct btrfs_fs_info *fs_info = device->fs_info;
--	struct address_space *mapping = device->bdev->bd_inode->i_mapping;
-+	struct address_space *mapping = bdev_inode(device->bdev)->i_mapping;
- 	SHASH_DESC_ON_STACK(shash, fs_info->csum_shash);
- 	int i;
- 	int errors = 0;
-@@ -3857,7 +3857,7 @@ static int wait_dev_supers(struct btrfs_device *device, int max_mirrors)
- 		    device->commit_total_bytes)
- 			break;
- 
--		page = find_get_page(device->bdev->bd_inode->i_mapping,
-+		page = find_get_page(bdev_inode(device->bdev)->i_mapping,
- 				     bytenr >> PAGE_SHIFT);
- 		if (!page) {
- 			errors++;
-diff --git a/fs/btrfs/volumes.c b/fs/btrfs/volumes.c
-index c6f16625af51..bbf157cedab7 100644
---- a/fs/btrfs/volumes.c
-+++ b/fs/btrfs/volumes.c
-@@ -1257,8 +1257,8 @@ static struct btrfs_super_block *btrfs_read_disk_super(struct block_device *bdev
- 		return ERR_PTR(-EINVAL);
- 
- 	/* pull in the page with our super */
--	page = read_cache_page_gfp(bdev->bd_inode->i_mapping, index, GFP_KERNEL);
--
-+	page = read_cache_page_gfp(bdev_inode(bdev)->i_mapping, index,
-+				   GFP_KERNEL);
+-	page = read_cache_page_gfp(bdev->bd_inode->i_mapping,
++	page = read_cache_page_gfp(bdev_inode(bdev)->i_mapping,
+ 				   SB_OFFSET >> PAGE_SHIFT, GFP_KERNEL);
  	if (IS_ERR(page))
- 		return ERR_CAST(page);
- 
-diff --git a/fs/btrfs/zoned.c b/fs/btrfs/zoned.c
-index 188378ca19c7..a5f7f1458edf 100644
---- a/fs/btrfs/zoned.c
-+++ b/fs/btrfs/zoned.c
-@@ -120,7 +120,7 @@ static int sb_write_pointer(struct block_device *bdev, struct blk_zone *zones,
- 		return -ENOENT;
- 	} else if (full[0] && full[1]) {
- 		/* Compare two super blocks */
--		struct address_space *mapping = bdev->bd_inode->i_mapping;
-+		struct address_space *mapping = bdev_inode(bdev)->i_mapping;
- 		struct page *page[BTRFS_NR_SB_LOG_ZONES];
- 		struct btrfs_super_block *super[BTRFS_NR_SB_LOG_ZONES];
- 		int i;
+ 		return "IO error";
 -- 
 2.39.2
 
