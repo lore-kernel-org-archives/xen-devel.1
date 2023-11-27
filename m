@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB2A3C07D59
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 14:13:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.642129.1001409 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0C81C07CB1
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 14:13:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.642124.1001356 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7cMw-0000H7-3B; Mon, 27 Nov 2023 14:13:50 +0000
+	id 1r7cMp-0007BJ-Ay; Mon, 27 Nov 2023 14:13:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 642129.1001409; Mon, 27 Nov 2023 14:13:49 +0000
+Received: by outflank-mailman (output) from mailman id 642124.1001356; Mon, 27 Nov 2023 14:13:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7cMv-0000GB-KM; Mon, 27 Nov 2023 14:13:49 +0000
-Received: by outflank-mailman (input) for mailman id 642129;
- Mon, 27 Nov 2023 14:13:47 +0000
+	id 1r7cMp-00077k-3d; Mon, 27 Nov 2023 14:13:43 +0000
+Received: by outflank-mailman (input) for mailman id 642124;
+ Mon, 27 Nov 2023 14:13:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5+WV=HI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r7cMt-0005XE-Q6
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 14:13:47 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
+ id 1r7cMn-0005XE-C8
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 14:13:41 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2dfd07be-8d2f-11ee-98e2-6d05b1d4d9a1;
- Mon, 27 Nov 2023 15:13:47 +0100 (CET)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50baa3e5c00so2618142e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 06:13:47 -0800 (PST)
+ id 2a57dcc0-8d2f-11ee-98e2-6d05b1d4d9a1;
+ Mon, 27 Nov 2023 15:13:40 +0100 (CET)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-50aab20e828so6079842e87.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 06:13:40 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- x29-20020ac259dd000000b00507b869b068sm1494100lfn.302.2023.11.27.06.13.45
+ x29-20020ac259dd000000b00507b869b068sm1494100lfn.302.2023.11.27.06.13.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 06:13:45 -0800 (PST)
+ Mon, 27 Nov 2023 06:13:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2dfd07be-8d2f-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: 2a57dcc0-8d2f-11ee-98e2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701094426; x=1701699226; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1701094420; x=1701699220; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9kdAs1MJcXuPPHejdAkexStxGmrKeo9/ZkYuTVmb0VU=;
-        b=gaR6X+8FRkkQpkK8YaCsEnW0h4u+XRUcTx9NSSAhe1N5/hZ6fuxHOn3b39ykRpLmrz
-         TYoYqjaqiDhP2h29lijNnFL6gPpyl8DdHO20aU4J+eSm58wTDoQ6B/6XGBKma2TqmCeS
-         6tz+Tu6Mkr+IfUXrXCa/tU7w6iOYO9iQHxdEKkME88QkxuuYaJfZV0gMATcLZSRV4AFd
-         E4Du3txlTXTuS2ANR+Difu9lwn6CFpQSkNaICvTSEVUK4QJzwINvHvNelcmml8ZPu7Nx
-         Rx6ymppq4F6a7MUnI1y/Gkyq28IYvfZYpHelHA0KoSzhBr/Vgy4dCA6mV2h+e7EPMV+3
-         I+WA==
+        bh=XCDKszFdTZd3ubNMlRIerIQDFL6fl03ubInCKVrFPUQ=;
+        b=TNMzRNwDnfKy+7xq+ZNxoEVFavEBNz6eKhw8wGt1y6okTxV9ZvSBHqVBRDsIzJQi+d
+         Ro1LlcX57rN9cnzl0kv5kWSgXWGJihrRD6QMoLym28CcwtRFMDY3WUJVFthnLD0Uvo2g
+         OlsyVLqFTBQualAAffLxvmHlV9nAv6Q4gDkmRQuTZGa8MgQiX9gFQXCo8bUM6GYabw06
+         ErpG+02APHpYMYHwGQEigiS09PtP6DCQ9TyF3u7N5K/sjTDb7ELUcnn0b4vEAkdgBQgd
+         2c++mfSlgrRDjdNDpJJjScprdAIJ0gvRC/Rji1gzinGzUOsB/zCz8BaL9eWkoeuzTwNi
+         AHvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701094426; x=1701699226;
+        d=1e100.net; s=20230601; t=1701094420; x=1701699220;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9kdAs1MJcXuPPHejdAkexStxGmrKeo9/ZkYuTVmb0VU=;
-        b=NHkO8sBWwHOibSc09KkK96Arhvy8uuKcaiIApuZ2njHgFfkNUjrLe98HPTzHGmIoS1
-         7RtJuxgZawMith58zpTK3vEOX30IwzIR1CIgGJ+A32oPQZ2EIpC4FGo1VXgaK8F46Q1G
-         gj/nYsF2eYAG4RTSNUaz0IF9/xW0RvfaQYaFxBv7VddSuGXJISo1d76yaKVy/WMr/07L
-         37oyRWn19N/AyqKI5wKTmHtciKM5YFQWyPMRGFRxjOB6vTWLSfeQ2mM0NVZsEb6WqKcW
-         tvbczZpBL8M8hmM5W7m97ujVRns7ESCdpOoCpiLJGbdeyJz/DS/MzGAGoQUYj6ZfxGJk
-         Iopw==
-X-Gm-Message-State: AOJu0Yycrc3LBYbIHWJBo+TCHGYVoWxKYGMVop2C0Qfo26O3abfxbHlQ
-	gGjcG1vb//QisjgIPMtSeZ1MN7BIOyKtxw==
-X-Google-Smtp-Source: AGHT+IF7XO+57hao/i105qRWNU98qqjNFbo7I+jgj+SEKPMIAIYlDITfNqO2ety+PmZfzc29dBzzUg==
-X-Received: by 2002:a05:6512:1588:b0:50a:af72:538 with SMTP id bp8-20020a056512158800b0050aaf720538mr5095709lfb.55.1701094426379;
-        Mon, 27 Nov 2023 06:13:46 -0800 (PST)
+        bh=XCDKszFdTZd3ubNMlRIerIQDFL6fl03ubInCKVrFPUQ=;
+        b=XnEyjjXrjjaIua1OdqA3AawxDvkPrL0j9EUsxF/gpuEQgEo3xy/ZodtDLtBoqb9gPB
+         fGnK/proM5YE1FitDsJtNvgtt1TGLdE4xrzTRphLh0LzBWQtPKl1qBq3tRKLH+M5EYKQ
+         RjPrpnuOwVwgiZlZW4MbtR+Uks9gu5kfW6IPqAQFNh6l/SRtcaTODoY8tAa18nN2Ib/G
+         R+/6DVMeOBVw9uPYd4D+5wA8eAH+ROFZkW+WVm1hwWamtqNv4gfbbW3N4dx9ORep9q7I
+         c7wrvUk3D2I7TJI226pw+G8uv/ySl/uRbWycB1Ei9PKE9w16DvpFahX8O2kmE2j8h5en
+         X9Eg==
+X-Gm-Message-State: AOJu0YwoA4vBB+q6EeQkSk4NF00jQN9nSvLTCj5P9tNGUv//XOJJLT1w
+	l2/Lmm2Yc9c0GlnBTC+DUjBEaYYVU+iKVw==
+X-Google-Smtp-Source: AGHT+IGIv7qDJm1UBS7MdqQQbNs8Vfeg3A1ypx4IfmzCjPBzEWLTSrDeeq68OF3ymgUlgnftq0yj9g==
+X-Received: by 2002:a05:6512:23a7:b0:500:a66b:b189 with SMTP id c39-20020a05651223a700b00500a66bb189mr6988673lfv.51.1701094419620;
+        Mon, 27 Nov 2023 06:13:39 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,98 +88,116 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v4 12/14] xen/asm-generic: introduce stub header softirq.h
-Date: Mon, 27 Nov 2023 16:13:25 +0200
-Message-ID: <090991be61252cabefc06da19597e3a86a4cd1da.1701093907.git.oleksii.kurochko@gmail.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v4 07/14] xen/asm-generic: introduce generalized hardirq.h
+Date: Mon, 27 Nov 2023 16:13:20 +0200
+Message-ID: <4834c3e10a0dba429edb41c340065560ccf0d942.1701093907.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1701093907.git.oleksii.kurochko@gmail.com>
 References: <cover.1701093907.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-<asm/softirq.h> is common between Arm, PPC and RISC-V so it is
-moved to asm-generic.
+<asm/hardirq.h> is common through archs thereby it is moved
+to asm-generic.
 
-Drop Arm and PPC's softirq.h and use asm-generic version instead.
+Arm and PPC were switched to asm generic verstion of hardirq.h.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-Added Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
 Changes in V4:
- - Added Reviewed-by: Michal Orzel <michal.orzel@amd.com>
- - Added Acked-by: Jan Beulich <jbeulich@suse.com>
+ - Added Reviewed-by: Jan Beulich <jbeulich@suse.com>.
+ - Added Acked-by: Julien Grall <jgrall@amazon.com>.
 ---
 Changes in V3:
- - Drop Arm and PPC's softirq.h
+ - Drop Arm and PPC's hardirq.h
  - Update the commit message.
 ---
 Changes in V2:
-    - update the commit message.
+	- add #include <xen/cache.h>.
+	- update the commit message
 ---
- xen/arch/arm/include/asm/Makefile                         | 1 +
- xen/arch/ppc/include/asm/Makefile                         | 1 +
- xen/arch/ppc/include/asm/softirq.h                        | 8 --------
- .../arm/include/asm => include/asm-generic}/softirq.h     | 7 ++++---
- 4 files changed, 6 insertions(+), 11 deletions(-)
- delete mode 100644 xen/arch/ppc/include/asm/softirq.h
- rename xen/{arch/arm/include/asm => include/asm-generic}/softirq.h (56%)
+ xen/arch/arm/include/asm/Makefile             |  1 +
+ xen/arch/ppc/include/asm/Makefile             |  1 +
+ xen/arch/ppc/include/asm/hardirq.h            | 19 -------------------
+ .../asm => include/asm-generic}/hardirq.h     |  8 +++++---
+ 4 files changed, 7 insertions(+), 22 deletions(-)
+ delete mode 100644 xen/arch/ppc/include/asm/hardirq.h
+ rename xen/{arch/arm/include/asm => include/asm-generic}/hardirq.h (79%)
 
 diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
-index b8e0763c77..c3f4291ee2 100644
+index 60bb78fc09..f6f108bbb8 100644
 --- a/xen/arch/arm/include/asm/Makefile
 +++ b/xen/arch/arm/include/asm/Makefile
-@@ -7,4 +7,5 @@ generic-y += numa.h
+@@ -1,5 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ generic-y += device.h
++generic-y += hardirq.h
+ generic-y += iocap.h
  generic-y += paging.h
  generic-y += percpu.h
- generic-y += random.h
-+generic-y += softirq.h
- generic-y += vm_event.h
 diff --git a/xen/arch/ppc/include/asm/Makefile b/xen/arch/ppc/include/asm/Makefile
-index a4188dce1d..4da0c70cc0 100644
+index edef0fab78..3241236c64 100644
 --- a/xen/arch/ppc/include/asm/Makefile
 +++ b/xen/arch/ppc/include/asm/Makefile
-@@ -10,4 +10,5 @@ generic-y += numa.h
+@@ -1,5 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ generic-y += device.h
++generic-y += hardirq.h
+ generic-y += hypercall.h
+ generic-y += iocap.h
  generic-y += paging.h
- generic-y += percpu.h
- generic-y += random.h
-+generic-y += softirq.h
- generic-y += vm_event.h
-diff --git a/xen/arch/ppc/include/asm/softirq.h b/xen/arch/ppc/include/asm/softirq.h
+diff --git a/xen/arch/ppc/include/asm/hardirq.h b/xen/arch/ppc/include/asm/hardirq.h
 deleted file mode 100644
-index a0b28a5e51..0000000000
---- a/xen/arch/ppc/include/asm/softirq.h
+index 343efc7e69..0000000000
+--- a/xen/arch/ppc/include/asm/hardirq.h
 +++ /dev/null
-@@ -1,8 +0,0 @@
--#ifndef __ASM_PPC_SOFTIRQ_H__
--#define __ASM_PPC_SOFTIRQ_H__
+@@ -1,19 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef __ASM_PPC_HARDIRQ_H__
+-#define __ASM_PPC_HARDIRQ_H__
 -
--#define NR_ARCH_SOFTIRQS 0
+-#include <xen/cache.h>
 -
--#define arch_skip_send_event_check(cpu) 0
+-typedef struct {
+-        unsigned long __softirq_pending;
+-        unsigned int __local_irq_count;
+-} __cacheline_aligned irq_cpustat_t;
 -
--#endif /* __ASM_PPC_SOFTIRQ_H__ */
-diff --git a/xen/arch/arm/include/asm/softirq.h b/xen/include/asm-generic/softirq.h
-similarity index 56%
-rename from xen/arch/arm/include/asm/softirq.h
-rename to xen/include/asm-generic/softirq.h
-index 976e0ebd70..83be855e50 100644
---- a/xen/arch/arm/include/asm/softirq.h
-+++ b/xen/include/asm-generic/softirq.h
-@@ -1,11 +1,12 @@
--#ifndef __ASM_SOFTIRQ_H__
--#define __ASM_SOFTIRQ_H__
+-#include <xen/irq_cpustat.h>    /* Standard mappings for irq_cpustat_t above */
+-
+-#define in_irq() (local_irq_count(smp_processor_id()) != 0)
+-
+-#define irq_enter()     (local_irq_count(smp_processor_id())++)
+-#define irq_exit()      (local_irq_count(smp_processor_id())--)
+-
+-#endif /* __ASM_PPC_HARDIRQ_H__ */
+diff --git a/xen/arch/arm/include/asm/hardirq.h b/xen/include/asm-generic/hardirq.h
+similarity index 79%
+rename from xen/arch/arm/include/asm/hardirq.h
+rename to xen/include/asm-generic/hardirq.h
+index 67b6a673db..ddccf460b9 100644
+--- a/xen/arch/arm/include/asm/hardirq.h
++++ b/xen/include/asm-generic/hardirq.h
+@@ -1,5 +1,6 @@
+-#ifndef __ASM_HARDIRQ_H
+-#define __ASM_HARDIRQ_H
 +/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_SOFTIRQ_H__
-+#define __ASM_GENERIC_SOFTIRQ_H__
++#ifndef __ASM_GENERIC_HARDIRQ_H
++#define __ASM_GENERIC_HARDIRQ_H
  
- #define NR_ARCH_SOFTIRQS       0
+ #include <xen/cache.h>
+ #include <xen/smp.h>
+@@ -16,7 +17,8 @@ typedef struct {
+ #define irq_enter()     (local_irq_count(smp_processor_id())++)
+ #define irq_exit()      (local_irq_count(smp_processor_id())--)
  
- #define arch_skip_send_event_check(cpu) 0
- 
--#endif /* __ASM_SOFTIRQ_H__ */
-+#endif /* __ASM_GENERIC_SOFTIRQ_H__ */
+-#endif /* __ASM_HARDIRQ_H */
++#endif /* __ASM_GENERIC_HARDIRQ_H */
++
  /*
   * Local variables:
   * mode: C
