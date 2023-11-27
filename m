@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A0B7C4167B
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 14:14:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.642128.1001404 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98862C0755A
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 14:32:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.642168.1001443 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7cMv-0000C5-EV; Mon, 27 Nov 2023 14:13:49 +0000
+	id 1r7ceM-0004mZ-Ss; Mon, 27 Nov 2023 14:31:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 642128.1001404; Mon, 27 Nov 2023 14:13:49 +0000
+Received: by outflank-mailman (output) from mailman id 642168.1001443; Mon, 27 Nov 2023 14:31:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7cMv-0000Au-4T; Mon, 27 Nov 2023 14:13:49 +0000
-Received: by outflank-mailman (input) for mailman id 642128;
- Mon, 27 Nov 2023 14:13:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5+WV=HI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r7cMs-0005XE-Q4
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 14:13:46 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2d7bb9e7-8d2f-11ee-98e2-6d05b1d4d9a1;
- Mon, 27 Nov 2023 15:13:46 +0100 (CET)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50baa1ca01cso2655965e87.2
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 06:13:46 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- x29-20020ac259dd000000b00507b869b068sm1494100lfn.302.2023.11.27.06.13.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 06:13:43 -0800 (PST)
+	id 1r7ceM-0004mS-Px; Mon, 27 Nov 2023 14:31:50 +0000
+Received: by outflank-mailman (input) for mailman id 642168;
+ Mon, 27 Nov 2023 14:31:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=nblC=HI=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1r7ceL-0004g0-G5
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 14:31:49 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on061d.outbound.protection.outlook.com
+ [2a01:111:f400:fe0e::61d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b1927b77-8d31-11ee-9b0e-b553b5be7939;
+ Mon, 27 Nov 2023 15:31:47 +0100 (CET)
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
+ by AS8PR04MB9192.eurprd04.prod.outlook.com (2603:10a6:20b:44f::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.21; Mon, 27 Nov
+ 2023 14:31:44 +0000
+Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::eb8e:fa24:44c1:5d44]) by DU2PR04MB8790.eurprd04.prod.outlook.com
+ ([fe80::eb8e:fa24:44c1:5d44%3]) with mapi id 15.20.7046.015; Mon, 27 Nov 2023
+ 14:31:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,181 +49,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d7bb9e7-8d2f-11ee-98e2-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701094425; x=1701699225; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4bUm713lDLCEJ2dvdCey6eXivZPe2wBORV5zk7ydBpk=;
-        b=JlyGcqPo+DwBzWs5Af2IgHUrjUzecFJlprbhtOxyQTsmGBsCRCYQ78VLby6L9PWX8A
-         453e3XGVvWFC9zRn2l01w/NQmrvKDiny5wHpRtKQRTsD2lcB/Lr0Ead1IKHHgN7c1vFY
-         ebIzVhQraI5ZZdw49qV838ANQeGSWwtaU6aB95DkGVk3D6yVP6Bj7tzrKLjANMhdDFI1
-         7gVG853OOGdwEO6o7nIadaWZWCuv28/ZUwrBKebJxfjZufBosS/mm7MSKhEAR3MURsDd
-         bI3yKEsZ8EGfQEog49/aBXe0M9XttH6a4VLb5IzrO4Z7EpPB6F/Owa9rscXOX65Iz+Kd
-         WPrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701094425; x=1701699225;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4bUm713lDLCEJ2dvdCey6eXivZPe2wBORV5zk7ydBpk=;
-        b=pNf/8zNDbVq0nxbN74/B3coRRUQURUYJgtYPHEx5fQNmJtrXiLHiluBu53J7QOpbXy
-         tAhvArHKNNKHqkTY6udgGdn7dKQDVnA+G8lAgJ5Wq/j+FjDCrt57U7EYGql2KrsJIrHh
-         70ww/1xzyNgweBlpxUrzsUXaVV5duPILkIqvf6snqZt30PXrohEli6RiLy1Lp6TS28NU
-         jyLoACIkr+uSZjMc3O80a7oUOEafe42If+Gqbm65ttXXkAIGl/m1IVR/HPeI/H2/u0V+
-         ZD+O24OT8wQ03xc+9sfAnuLlcPrdQzjEBRVqGX7M9q+4b6Opp3FAog+xbixHs0g7laFH
-         amCw==
-X-Gm-Message-State: AOJu0Yx9dC0zuH1dB58dcVrHB9+NG3HX31rU7c0MQB8ZNXUUJLnL7yp0
-	wW38uh8TqAi82A2TxffXO4I3CtJs3FKt/Q==
-X-Google-Smtp-Source: AGHT+IEutomLAHesztCjy6aoYueTcP3YR8O+2sj2jEHca65VzhdmRPVVuTEfc3Fu8l4ECyaqLw3AZA==
-X-Received: by 2002:ac2:44b2:0:b0:50b:aee4:ab12 with SMTP id c18-20020ac244b2000000b0050baee4ab12mr2615799lfm.53.1701094425004;
-        Mon, 27 Nov 2023 06:13:45 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v4 11/14] xen/asm-generic: introduce stub header numa.h
-Date: Mon, 27 Nov 2023 16:13:24 +0200
-Message-ID: <44bb374738ad0cae041a0164812dfd33d091d954.1701093907.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1701093907.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: b1927b77-8d31-11ee-9b0e-b553b5be7939
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Dk1V/AChgWxEMf83CoPP53IfVOUQdSg4q2WdNHEF6OjTZMDJVUXlJjegfLjAYA1d186QWydVbkpjZpmrvaj/ZBPVdFh287ooioAX++HCeCgUdc5bRB0f0YbadmbEp64WrevFvPt5lC8uvraPzYolvdMQDJm6E0RzFSvd1zOKTk3YpKAJO0PMXqn7RPrvRaHGD+hnbBwbeYnKZTKtW0Cpf38k1ripcY2HDWahkK3mSZXIUa1oRUmNeY8DuNxDgDWHrZHtb0hzNE7bGhmSs84qdiDozDaESiWlO6EEd4M2uN6pAMXEAQ9Fz5e9dPqdug3YugtH9MW7gYCaki61LrwPMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=O3o01JpG/ONgP3fXyjJdNK7Uj9Vrj5CkGgyQegYFhO0=;
+ b=dTczqZYm5vPeYW8qMzxiaHI+UU72G/rCOXD72muFNl/15k7qYuz3A8N9Ouk/gzsE55oRRoPbOHWJJKaEtJPzcw/K7g/aud86fQGxkkRw2T5TfcJIHCaGcZWewurZgI+OmcC5SFntvi/ldyyV/oeiacazU3LRfBvdUcVdYpYM3L2cxGHATuO6dfzDttCKpHOpAkcWqgAMSZg7iOzFsGbuL0wiwTFIslKy6PRQpYpFMNOMAffXyimHvOWHy3ny7aOUvX9fq/7exSGr8a/siODioJUjxJ9EMzPUuGPyiHm8rJSdD+ERKlVVfYDgKnl2MhUmFZOBRMgNpj+bmrx1eVjmQg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=O3o01JpG/ONgP3fXyjJdNK7Uj9Vrj5CkGgyQegYFhO0=;
+ b=txP6d9Tj1lCewP5rsPosYoPg2kdqhTFwzbrFQn9Z5TePwYVkAeM4WNWWyoDr/620p47beohkjk9xjq1PX+mUdVyUY7Im9F1jViaP+c2cBsiBJZd/tLV7Ccre7Prx1kC5jarnrU/PQkwSo9UnZHB2lUZ+bwH0p3E3qwGsdfkLIrWZlhFEnmWTSkFmEOkmoOiUWfX/qbOWIAq9YFjL5FSFGu5ISM8wbSo11+OiLMzslnZkLU00AZ0iVWkcsYnYrWk9Goj8jF9wCT4eEsvR/dqlSqQS7DzyqIisVPyfkj8szCuRO4ygKWlqbsnSQjuKOoHLWL/wsUG8+lJ2D4QDhN/C6w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <6aa8c7e5-c13e-43e0-bec4-74827407c985@suse.com>
+Date: Mon, 27 Nov 2023 15:31:41 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/14] xen/asm-generic: introduce generic device.h
+Content-Language: en-US
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
+ Shawn Anastasio <sanastasio@raptorengineering.com>,
+ xen-devel@lists.xenproject.org
 References: <cover.1701093907.git.oleksii.kurochko@gmail.com>
+ <67172a4fbf88833480203fcb1e2c640b6d39a556.1701093907.git.oleksii.kurochko@gmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <67172a4fbf88833480203fcb1e2c640b6d39a556.1701093907.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0057.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:4b::8) To DU2PR04MB8790.eurprd04.prod.outlook.com
+ (2603:10a6:10:2e1::23)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|AS8PR04MB9192:EE_
+X-MS-Office365-Filtering-Correlation-Id: a4ff193e-db16-4b01-2eba-08dbef5593f1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	SZi3YZungd24kzxIdurtPY0mu/6moEtyNosrK10KuxLBNSBkUz6CBFelRUDDJnkcuUmEwVb6MjwUDA9vcBKjK69usgBb7/mtS4eUje/JvA1nJI0fZDngfo+uVQkzbUOz0SLwrpmrvIb5tTMrxdh9EYOIDE8A3s/MuDXXAPzC9GYH8juES3ukj5jSeK4HnWcbdtn6Gs7ZcmBSzowTIv4oJaI/IPK3+uOG9rus7tTubHzLtQZH6bjeSdvrrsbYG4Pu4BkqnyqxltMEWqGwF+dLCT93N8jzviykEHdSagC1n3MJuUAV+D0g3jIjKzWr+/wvXYZ4ZW9kvf5jRYYZZp4YlZJEGJbzWzff6ic6TRx+NpTU9I4LqB3a0nt/qUF980163tck6CKJAHZ+xC+omn/D9Jcjx6bab5s4Yepbxqekn+kzaDp3r3tOgJOJnJuHC4qFb9hZQvw8xtDJ+BudKCzMRp/m5pGvxSJEjiH24oCQ0U9LA+9l5qKRippC+I0D/TD96bwxLSLdgbSu8C9tHSuyEoOLfarVp429p2SfezMPmP0a9cgVncI/zKcpk3rj4OoluT21ZnL1a771eacZ8YPlkjeijiNVZezr9bBVBtmMCOHWKOnj/+bAUeplt/CSbYwt8SylyizGIzsDniH3fjf38HbLGikmQ/DqTk4H729kBSs=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39860400002)(346002)(366004)(376002)(136003)(396003)(230922051799003)(451199024)(186009)(64100799003)(1800799012)(2616005)(26005)(6506007)(6512007)(53546011)(4326008)(8676002)(8936002)(5660300002)(6486002)(7416002)(31696002)(86362001)(478600001)(316002)(66946007)(66556008)(6916009)(54906003)(66476007)(38100700002)(83380400001)(31686004)(41300700001)(36756003)(2906002)(41533002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?RklxWi96VFpwVHljMW43djRDNzNXd1lNazJNam9VV3dmZ1ArNFZXUktvbnJ4?=
+ =?utf-8?B?MGZ0cGhWU3VjZUZVR3hXdUVkR0VNdkJKaE0xQVVkU2FQSXFHTmRzK3JOeHdQ?=
+ =?utf-8?B?WFpBSHVwM0p5RE1rRVRkVzV4cFNKTi8wUGM1MUdKMDZ5Y05WMHNYTVlFc0pG?=
+ =?utf-8?B?ZFgxa0VRWjZ6T1VNMkt2Z2Z4Qm9DOFNIVjc5b2JEK2xsS2xKLzBNUGgzcG5P?=
+ =?utf-8?B?QWNXa0JsczJFUHAvdStiY0dVZ25LcXlJSlUyUldWeUdWcmtHbEpiaWpvVDd4?=
+ =?utf-8?B?SWhrVlVRV2JZS1ArZGJSTWtiZEpmOUlxK1lwZVhCdGQwN29KNWdNSG1yQjQ0?=
+ =?utf-8?B?eGFhWUprRjN4WDVDWGVONk85cWN6bklsWDBLSXNTN2x4MEw3c0dGdHVXYWVk?=
+ =?utf-8?B?WXU4eDhNQi84bFpqVXllL1JNQXVjZnhieUVyaDZZVWh0S1I0QlBNOU1TUVRD?=
+ =?utf-8?B?ZmhzblU1Wm1ZZkNCdnZqTXZXUnRxM1prM1pKV1ZDc2VOZ0JGbFQ2N3huSG9o?=
+ =?utf-8?B?MldNWXBOcVVwNkQ4QThKbSt4eDlYandwNkw1QmhYMnhJYnhkK1EvSVVDUTVi?=
+ =?utf-8?B?SGoyb2NvL0grc3FSa0wwSEQyTDdxSEhGZFFSZGFpWEZRem45Q0ZDQ21hdGNy?=
+ =?utf-8?B?REFMblRnQWtOVWVxMFdBR05ybytxaEt0ZFN5UmZNdnlVRXpyYlZjdWZCWHVx?=
+ =?utf-8?B?elBzajNPejJ3OG9XYTRCY3JDRlVDQkVjQm5rSXB5M2hvNHgxRm1nbEQ2a2Zq?=
+ =?utf-8?B?M2ZiZHFqbVNNclduTEJJaFErUXhpUmYwWFZYT3NpdUVZQnhFQysyemordEFR?=
+ =?utf-8?B?ZU1KU3l2by8zaHlFdGhhcUVPWTc4KytVNm1kSFk5dU1NMkV1QW9GSGhmY3dl?=
+ =?utf-8?B?UGtJRTBSeHlkSVVFZU1vMUZSS2ZPWlNJYUJiMHdaU3V4R3lEQXBYVEhDVjFj?=
+ =?utf-8?B?Y0FoM3dSeFo2WWdkeTFGaWdDVENIWmlwK0R0ZXFESmlCZ0xMeUYzb1NoN0NE?=
+ =?utf-8?B?Z2ZaSmIwSXZVTTV2TUdSMmtYUFUzYk9pdyt5b3NZNmV0SUlJYnBGSjlIZEhD?=
+ =?utf-8?B?U3p2bXl0cDVjUVh2aTltdlZoVmpYOWlCUWpIK080ZnN2M25WSk01VlV6NEZO?=
+ =?utf-8?B?VitkNkRtZC9RYlN2dHo4d3UyV0JXQU9PQ3BONUlvZWdTUVkxRDhqbGFyNWRv?=
+ =?utf-8?B?ellkUVFFdDFhQWpWMDBqeCtOcDRWNnR1MmF0REttdUZ5T1h4ZEpXNU5xQU9V?=
+ =?utf-8?B?a0Y5dHhieWlsRVdJK1ZkczFldUQ4N1FPelJJMUJYeHpmdUE4WjIzVGVVWUdk?=
+ =?utf-8?B?dnkyUUJQbmhPM0xPMkZNSi9FbUptWFpUWU4zQlR2UEt6N0RMNTRPekhyYUxh?=
+ =?utf-8?B?UTBRSDFzK3RpZWJBblhGelNKWjZEekZuUUdDcTM5NEZhbGlnamZxZUFENHNY?=
+ =?utf-8?B?WXFNYjZ5RUZFUTVQRGY1M2p1RDg2VGpiZHIxVXFaWnBtTXZ6OHp2M3FxWFZP?=
+ =?utf-8?B?VFd2KzRwclhaS1ZZUVd2eFhERGFpYm10Zk51dzhPcXB4bUlDN0JLWk1jZGZ4?=
+ =?utf-8?B?aG9LZ28raDQyR2V4bm5sQ2c3ZjVmZ0pDQ3N0SUMvTEN0SzJDUkVoWk1tNVVM?=
+ =?utf-8?B?U01UM2ZzL2FIOHZPQXg0Zmo2eS9TWkdDcUp0dXNMSUdKU3hVNy81RnRRekR5?=
+ =?utf-8?B?VWMvMjhzSm9hTW9icll4ZURwMzBQN0pyM0VlcWxPL3ZTZ1IwSXAySG1lNjhF?=
+ =?utf-8?B?Q3ZyMXRzQUhHUWxIQkxKSnNRVXJ4Q0ladTQ5aytEbHF6ZmMxZ0w1ZHNyTk0z?=
+ =?utf-8?B?TzhTNCs4ZHJ2dy80aElwS0ZIQzRubm9IZFltSEF4ZTVJUDhkay9BVldqNEpp?=
+ =?utf-8?B?OURrV1dmRVpoamxBRG9pV29yVnNUdW1HMHpHc0JvcTFVODYyUWc4WDlaenFU?=
+ =?utf-8?B?UlRBTXJ5MmJoN1NRMnZwT0xudGdNMm5IK3hET0pBL2Rzd1Bjb0Q3UEJhNkY2?=
+ =?utf-8?B?c1BhZXlxOU1aWjl0dWFzWWxlK2ZkYWJnQ1lhL3hHY2RlVGtsVXowS1RrWVQ1?=
+ =?utf-8?B?cTY2eWxmR0VMdldXOFBtRkxtL2JtN1BCWjJFbjAvNUN5RlJUMWtsOHhxRlRF?=
+ =?utf-8?Q?NIjOincsLOe4cutNaaF/3yhSv?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a4ff193e-db16-4b01-2eba-08dbef5593f1
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2023 14:31:43.8538
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QiJFltSXWfbr3agYSnSjQyUtbBNO3jBsY00MLGrFAviiWx3s+wLFpX8itMxO2yJXU1ctHaSQGKRHLDayJx1wyA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB9192
 
-<asm/numa.h> is common through some archs so it is moved
-to asm-generic.
+On 27.11.2023 15:13, Oleksii Kurochko wrote:
+> Arm, PPC and RISC-V use the same device.h thereby device.h
+> was moved to asm-generic. Arm's device.h was taken as a base with
+> the following changes:
+>  - #ifdef PCI related things.
+>  - #ifdef ACPI related things.
+>  - Rename #ifdef guards.
+>  - Add SPDX tag.
+>  - #ifdef CONFIG_HAS_DEVICE_TREE related things.
+>  - #ifdef-ing iommu related things with CONFIG_HAS_PASSTHROUGH.
+> 
+> Also Arm and PPC are switched to asm-generic version of device.h
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> ---
+> Changes in V4:
+>  - Updated the commit message
+>  - Switched Arm and PPC to asm-generic version of device.h
+>  - Replaced HAS_PCI with CONFIG_HAS_PCI
+>  - ifdef-ing iommu filed of dev_archdata struct with CONFIG_HAS_PASSTHROUGH
+>  - ifdef-ing iommu_fwspec of device struct with CONFIG_HAS_PASSTHROUGH
+>  - ifdef-ing DT related things with CONFIG_HAS_DEVICE_TREE
+>  - Updated the commit message ( remove a note with question about
+>    if device.h should be in asm-generic or not )
+>  - Replaced DEVICE_IC with DEVICE_INTERRUPT_CONTROLLER
+>  - Rationalized usage of CONFIG_HAS_* in device.h
+>  - Fixed indents for ACPI_DEVICE_START and ACPI_DEVICE_END
+> ---
+> Changes in V3:
+>  - ifdef device tree related things.
+>  - update the commit message
+> ---
+> Changes in V2:
+> 	- take ( as common ) device.h from Arm as PPC and RISC-V use it as a base.
+> 	- #ifdef PCI related things.
+> 	- #ifdef ACPI related things.
+> 	- rename DEVICE_GIC to DEVIC_IC.
+> 	- rename #ifdef guards.
+> 	- switch Arm and PPC to generic device.h
+> 	- add SPDX tag
+> 	- update the commit message
+> 
+> ---
+>  xen/arch/arm/device.c                         |  15 ++-
+>  xen/arch/arm/domain_build.c                   |   2 +-
+>  xen/arch/arm/gic-v2.c                         |   4 +-
+>  xen/arch/arm/gic-v3.c                         |   6 +-
+>  xen/arch/arm/gic.c                            |   4 +-
+>  xen/arch/arm/include/asm/Makefile             |   1 +
+>  xen/arch/ppc/include/asm/Makefile             |   1 +
+>  xen/arch/ppc/include/asm/device.h             |  53 --------
+>  xen/arch/ppc/include/asm/irq.h                |   4 +
+>  .../asm => include/asm-generic}/device.h      | 125 +++++++++++-------
+>  xen/include/headers++.chk.new                 |   0
+>  11 files changed, 106 insertions(+), 109 deletions(-)
+>  delete mode 100644 xen/arch/ppc/include/asm/device.h
+>  rename xen/{arch/arm/include/asm => include/asm-generic}/device.h (79%)
+>  create mode 100644 xen/include/headers++.chk.new
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
----
-Changes in V4:
- - Updated guards name: *ARCH_GENERIC* -> *ASM_GENERIC*.
- - Moved inclusion of xen/mm-frame.h under "#ifndef CONFIG_NUMA".
- - Added Reviewed-by: Michal Orzel <michal.orzel@amd.com>.
----
-Changes in V3:
- - Remove old header inclusion in asm-generic numa.h and include
-   <xen/mm-frame.h> and <xen/stdint.h>
- - Drop Arm and PPC's numa.h and use asm-generic version instead.
----
-Changes in V2:
-	- update the commit message.
-	- change u8 to uint8_t.
-	- add ifnded CONFIG_NUMA.
----
- xen/arch/arm/include/asm/Makefile             |  1 +
- xen/arch/ppc/include/asm/Makefile             |  1 +
- xen/arch/ppc/include/asm/numa.h               | 26 -------------------
- .../asm => include/asm-generic}/numa.h        | 14 ++++++----
- 4 files changed, 11 insertions(+), 31 deletions(-)
- delete mode 100644 xen/arch/ppc/include/asm/numa.h
- rename xen/{arch/arm/include/asm => include/asm-generic}/numa.h (76%)
+Stray new file, presumably because of a missing entry in .gitignore?
 
-diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
-index 55d153ed82..b8e0763c77 100644
---- a/xen/arch/arm/include/asm/Makefile
-+++ b/xen/arch/arm/include/asm/Makefile
-@@ -3,6 +3,7 @@ generic-y += altp2m.h
- generic-y += device.h
- generic-y += hardirq.h
- generic-y += iocap.h
-+generic-y += numa.h
- generic-y += paging.h
- generic-y += percpu.h
- generic-y += random.h
-diff --git a/xen/arch/ppc/include/asm/Makefile b/xen/arch/ppc/include/asm/Makefile
-index bcddcc181a..a4188dce1d 100644
---- a/xen/arch/ppc/include/asm/Makefile
-+++ b/xen/arch/ppc/include/asm/Makefile
-@@ -6,6 +6,7 @@ generic-y += hardirq.h
- generic-y += hypercall.h
- generic-y += iocap.h
- generic-y += monitor.h
-+generic-y += numa.h
- generic-y += paging.h
- generic-y += percpu.h
- generic-y += random.h
-diff --git a/xen/arch/ppc/include/asm/numa.h b/xen/arch/ppc/include/asm/numa.h
-deleted file mode 100644
-index 7fdf66c3da..0000000000
---- a/xen/arch/ppc/include/asm/numa.h
-+++ /dev/null
-@@ -1,26 +0,0 @@
--#ifndef __ASM_PPC_NUMA_H__
--#define __ASM_PPC_NUMA_H__
--
--#include <xen/types.h>
--#include <xen/mm.h>
--
--typedef uint8_t nodeid_t;
--
--/* Fake one node for now. See also node_online_map. */
--#define cpu_to_node(cpu) 0
--#define node_to_cpumask(node)   (cpu_online_map)
--
--/*
-- * TODO: make first_valid_mfn static when NUMA is supported on PPC, this
-- * is required because the dummy helpers are using it.
-- */
--extern mfn_t first_valid_mfn;
--
--/* XXX: implement NUMA support */
--#define node_spanned_pages(nid) (max_page - mfn_x(first_valid_mfn))
--#define node_start_pfn(nid) (mfn_x(first_valid_mfn))
--#define __node_distance(a, b) (20)
--
--#define arch_want_default_dmazone() (false)
--
--#endif /* __ASM_PPC_NUMA_H__ */
-diff --git a/xen/arch/arm/include/asm/numa.h b/xen/include/asm-generic/numa.h
-similarity index 76%
-rename from xen/arch/arm/include/asm/numa.h
-rename to xen/include/asm-generic/numa.h
-index e2bee2bd82..b00fca4978 100644
---- a/xen/arch/arm/include/asm/numa.h
-+++ b/xen/include/asm-generic/numa.h
-@@ -1,12 +1,15 @@
--#ifndef __ARCH_ARM_NUMA_H
--#define __ARCH_ARM_NUMA_H
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_GENERIC_NUMA_H
-+#define __ASM_GENERIC_NUMA_H
- 
--#include <xen/mm.h>
-+#include <xen/stdint.h>
- 
--typedef u8 nodeid_t;
-+typedef uint8_t nodeid_t;
- 
- #ifndef CONFIG_NUMA
- 
-+#include <xen/mm-frame.h>
-+
- /* Fake one node for now. See also node_online_map. */
- #define cpu_to_node(cpu) 0
- #define node_to_cpumask(node)   (cpu_online_map)
-@@ -26,7 +29,8 @@ extern mfn_t first_valid_mfn;
- 
- #define arch_want_default_dmazone() (false)
- 
--#endif /* __ARCH_ARM_NUMA_H */
-+#endif /* __ASM_GENERIC_NUMA_H */
-+
- /*
-  * Local variables:
-  * mode: C
--- 
-2.43.0
+Overall I think there are too many changes done all in one go here.
+But it's mostly Arm which is affected, so I'll leave judging about that
+to the Arm maintainers.
 
+> --- a/xen/arch/ppc/include/asm/irq.h
+> +++ b/xen/arch/ppc/include/asm/irq.h
+> @@ -3,7 +3,9 @@
+>  #define __ASM_PPC_IRQ_H__
+>  
+>  #include <xen/lib.h>
+> +#ifdef CONFIG_HAS_DEVICE_TREE
+>  #include <xen/device_tree.h>
+> +#endif
+>  #include <public/device_tree_defs.h>
+
+Why would this #ifdef not cover the public header as well? (Otherwise I'd
+be inclined to ask that the conditional be moved inside that header.)
+
+Jan
 
