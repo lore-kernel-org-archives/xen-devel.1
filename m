@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E791C0755A
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 10:38:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.641845.1000807 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E852C07D5A
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 10:38:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.641855.1000821 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7Z0Z-0007jo-1r; Mon, 27 Nov 2023 10:38:31 +0000
+	id 1r7Z0o-0008Qe-B2; Mon, 27 Nov 2023 10:38:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 641845.1000807; Mon, 27 Nov 2023 10:38:31 +0000
+Received: by outflank-mailman (output) from mailman id 641855.1000821; Mon, 27 Nov 2023 10:38:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7Z0Y-0007je-UG; Mon, 27 Nov 2023 10:38:30 +0000
-Received: by outflank-mailman (input) for mailman id 641845;
- Mon, 27 Nov 2023 10:38:30 +0000
+	id 1r7Z0o-0008QT-7f; Mon, 27 Nov 2023 10:38:46 +0000
+Received: by outflank-mailman (input) for mailman id 641855;
+ Mon, 27 Nov 2023 10:38:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gVlU=HI=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1r7YpF-0000Co-L5
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 10:26:49 +0000
+ id 1r7Yoo-0000Co-75
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 10:26:22 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 78dd2f6e-8d0f-11ee-98e2-6d05b1d4d9a1;
- Mon, 27 Nov 2023 11:26:49 +0100 (CET)
+ id 6865c561-8d0f-11ee-98e2-6d05b1d4d9a1;
+ Mon, 27 Nov 2023 11:26:21 +0100 (CET)
 Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 75B2B21A5E;
- Mon, 27 Nov 2023 10:26:48 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id D80AA21A5E;
+ Mon, 27 Nov 2023 10:26:20 +0000 (UTC)
 Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 4CBA9132A6;
- Mon, 27 Nov 2023 10:26:48 +0000 (UTC)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id AEEAA132A6;
+ Mon, 27 Nov 2023 10:26:20 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap2.dmz-prg2.suse.org with ESMTPSA id Q69iEehuZGXdfgAAn2gu4w
- (envelope-from <jgross@suse.com>); Mon, 27 Nov 2023 10:26:48 +0000
+ by imap2.dmz-prg2.suse.org with ESMTPSA id JriAKcxuZGW3fgAAn2gu4w
+ (envelope-from <jgross@suse.com>); Mon, 27 Nov 2023 10:26:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,25 +53,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 78dd2f6e-8d0f-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: 6865c561-8d0f-11ee-98e2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1701080808; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1701080780; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6A+RhPrAAMc0jcGa19Yq756hCQ6xoflSogusd8hsADA=;
-	b=dNH1K448IJdl4+akYaWlEmCY2doQEIYjPj9X8PGJ62TFdVgPIuauGEjZCzNMf0jXp1l6iO
-	BWtBGbqsZxIeXWMlXnemN5An9Mw0NMqRa/BIDdD3c7vGVIgHh5ugXTkwTPnPyMZHXdpb53
-	1IhGwyYIXMG2hICTs8CzZR4JzON3/xA=
+	bh=ktKhOGmur4jQ1Brbb0nDkjWoCytuJc3+OYR5hECH7CE=;
+	b=IjYs3Cs2b2fDJ3zRFhwBZ2fdsjgytBwFlhVyufPK6Kks/dxRbKSpbdlKH+yCrYRmlsjoI6
+	FDaSPq0TJBmoKfP94ajBemev0J17uiv40Ca4NESo7mvgs7+88VfKCSBVo18EHNxgam5/Oe
+	fc/+FfV8ugeqZS1kaWzBBK+VAtajTCA=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 15/32] Mini-OS: add EXPORT_SYMBOL() instances to console.c
-Date: Mon, 27 Nov 2023 11:25:06 +0100
-Message-Id: <20231127102523.28003-16-jgross@suse.com>
+Subject: [PATCH v3 10/32] Mini-OS: add EXPORT_SYMBOL() instances to lib/printf.c
+Date: Mon, 27 Nov 2023 11:25:01 +0100
+Message-Id: <20231127102523.28003-11-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20231127102523.28003-1-jgross@suse.com>
 References: <20231127102523.28003-1-jgross@suse.com>
@@ -79,75 +79,113 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Authentication-Results: smtp-out1.suse.de;
 	none
-X-Spamd-Result: default: False [11.83 / 50.00];
+X-Spamd-Result: default: False [11.40 / 50.00];
+	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 BAYES_SPAM(0.43)[73.32%];
+	 FROM_HAS_DN(0.00)[];
 	 TO_DN_SOME(0.00)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
 	 R_MISSING_CHARSET(2.50)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 NEURAL_SPAM_SHORT(3.00)[1.000];
 	 BROKEN_CONTENT_TYPE(1.50)[];
 	 RCPT_COUNT_FIVE(0.00)[5];
 	 RCVD_COUNT_THREE(0.00)[3];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 ARC_NA(0.00)[];
-	 FROM_HAS_DN(0.00)[];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 NEURAL_SPAM_SHORT(3.00)[1.000];
-	 MIME_GOOD(-0.10)[text/plain];
 	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	 NEURAL_SPAM_LONG(3.50)[1.000];
 	 MID_CONTAINS_FROM(1.00)[];
 	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
 	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
 	 RCVD_TLS_ALL(0.00)[]
 
-Add the needed instances of EXPORT_SYMBOL() to console.c.
+Add the needed instances of EXPORT_SYMBOL() to lib/printf.c.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V3:
 - new patch
 ---
- console.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ lib/printf.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/console.c b/console.c
-index 5d205c7d..0107b685 100644
---- a/console.c
-+++ b/console.c
-@@ -125,6 +125,7 @@ void console_print(struct consfront_dev *dev, const char *data, int length)
- 
-     ring_send_fn(dev, copied_ptr, length);
+diff --git a/lib/printf.c b/lib/printf.c
+index f9e9d682..0e054957 100644
+--- a/lib/printf.c
++++ b/lib/printf.c
+@@ -150,6 +150,7 @@ strtoul(const char *nptr, char **endptr, int base)
+                 *endptr = __DECONST(char *, any ? s - 1 : nptr);
+         return (acc);
  }
-+EXPORT_SYMBOL(console_print);
++EXPORT_SYMBOL(strtoul);
  
- void print(int direct, const char *fmt, va_list args)
- {
-@@ -155,6 +156,7 @@ void printk(const char *fmt, ...)
-     print(0, fmt, args);
+ /*
+  * Convert a string to a quad integer.
+@@ -241,6 +242,7 @@ strtoq(const char *nptr, char **endptr, int base)
+                 *endptr = __DECONST(char *, any ? s - 1 : nptr);
+         return (acc);
+ }
++EXPORT_SYMBOL(strtoq);
+ 
+ /*
+  * Convert a string to an unsigned quad integer.
+@@ -309,6 +311,7 @@ strtouq(const char *nptr, char **endptr, int base)
+                 *endptr = __DECONST(char *, any ? s - 1 : nptr);
+         return (acc);
+ }
++EXPORT_SYMBOL(strtouq);
+ 
+ /*
+  * Scaled down version of printf(3).
+@@ -585,6 +588,7 @@ number:
+         }
+ #undef PCHAR
+ }
++EXPORT_SYMBOL(vsnprintf);
+ 
+ /**
+  * snprintf - Format a string and place it in a buffer
+@@ -603,6 +607,7 @@ int snprintf(char * buf, size_t size, const char *fmt, ...)
      va_end(args);
+     return i;
  }
-+EXPORT_SYMBOL(printk);
++EXPORT_SYMBOL(snprintf);
  
- void xprintk(const char *fmt, ...)
+ /**
+  * vsprintf - Format a string and place it in a buffer
+@@ -617,7 +622,7 @@ int vsprintf(char *buf, const char *fmt, va_list args)
  {
-@@ -164,6 +166,8 @@ void xprintk(const char *fmt, ...)
-     print(1, fmt, args);
+     return vsnprintf(buf, 0xFFFFFFFFUL, fmt, args);
+ }
+-
++EXPORT_SYMBOL(vsprintf);
+ 
+ /**
+  * sprintf - Format a string and place it in a buffer
+@@ -635,6 +640,7 @@ int sprintf(char * buf, const char *fmt, ...)
      va_end(args);
+     return i;
  }
-+EXPORT_SYMBOL(xprintk);
-+
- void init_console(void)
- {
-     printk("Initialising console ... ");
-@@ -320,6 +324,7 @@ int xencons_ring_avail(struct consfront_dev *dev)
++EXPORT_SYMBOL(sprintf);
  
-     return prod - cons;
+ /*
+  * Fill in the given table from the scanset at the given format
+@@ -1214,6 +1220,7 @@ input_failure:
+ match_failure:
+         return (nassigned);
  }
-+EXPORT_SYMBOL(xencons_ring_avail);
++EXPORT_SYMBOL(vsscanf);
  
- int xencons_ring_recv(struct consfront_dev *dev, char *data, unsigned int len)
- {
+ /**
+  * sscanf - Unformat a buffer into a list of arguments
+@@ -1231,5 +1238,6 @@ int sscanf(const char * buf, const char * fmt, ...)
+ 	va_end(args);
+ 	return i;
+ }
++EXPORT_SYMBOL(sscanf);
+ 
+ #endif
 -- 
 2.35.3
 
