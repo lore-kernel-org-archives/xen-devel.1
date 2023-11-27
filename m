@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B94FC46CA0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC6EC07D5B
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 06:22:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.641546.1000125 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.641552.1000189 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0Q-0008W0-Rp; Mon, 27 Nov 2023 06:22:06 +0000
+	id 1r7V0X-0001qb-W4; Mon, 27 Nov 2023 06:22:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 641546.1000125; Mon, 27 Nov 2023 06:22:06 +0000
+Received: by outflank-mailman (output) from mailman id 641552.1000189; Mon, 27 Nov 2023 06:22:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0Q-0008VC-L5; Mon, 27 Nov 2023 06:22:06 +0000
-Received: by outflank-mailman (input) for mailman id 641546;
- Mon, 27 Nov 2023 06:22:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r7V0X-0001qQ-Sd; Mon, 27 Nov 2023 06:22:13 +0000
+Received: by outflank-mailman (input) for mailman id 641552;
+ Mon, 27 Nov 2023 06:22:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f6Ye=HI=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
- id 1r7V0P-0008S4-5v
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:05 +0000
+ id 1r7V0W-0008S3-H5
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:12 +0000
 Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 469908ac-8ced-11ee-98e2-6d05b1d4d9a1;
- Mon, 27 Nov 2023 07:22:03 +0100 (CET)
-Received: from mail.maildlp.com (unknown [172.19.163.235])
- by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SdwTv39Rtz4f3m79
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:21:55 +0800 (CST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4ad0ae3d-8ced-11ee-9b0e-b553b5be7939;
+ Mon, 27 Nov 2023 07:22:10 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.163.216])
+ by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SdwV41Tgdz4f3jq5
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:04 +0800 (CST)
 Received: from mail02.huawei.com (unknown [10.116.40.112])
- by mail.maildlp.com (Postfix) with ESMTP id D47481A0FEB
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:21:59 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTP id 0A11D1A04A0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:07 +0800 (CST)
 Received: from huaweicloud.com (unknown [10.175.104.67])
- by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S7;
- Mon, 27 Nov 2023 14:21:59 +0800 (CST)
+ by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S11;
+ Mon, 27 Nov 2023 14:22:06 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,7 +47,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 469908ac-8ced-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: 4ad0ae3d-8ced-11ee-9b0e-b553b5be7939
 From: Yu Kuai <yukuai1@huaweicloud.com>
 To: hch@infradead.org,
 	ming.lei@redhat.com,
@@ -105,32 +105,32 @@ Cc: linux-block@vger.kernel.org,
 	yukuai1@huaweicloud.com,
 	yi.zhang@huawei.com,
 	yangerkun@huawei.com
-Subject: [PATCH block/for-next v2 03/16] bcache: use new helper to get inode from block_device
-Date: Mon, 27 Nov 2023 14:21:03 +0800
-Message-Id: <20231127062116.2355129-4-yukuai1@huaweicloud.com>
+Subject: [PATCH block/for-next v2 07/16] bcachefs: use new helper to get inode from block_device
+Date: Mon, 27 Nov 2023 14:21:07 +0800
+Message-Id: <20231127062116.2355129-8-yukuai1@huaweicloud.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 References: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S7
-X-Coremail-Antispam: 1UD129KBjvdXoWrKw1xZryrZw1UJr47Kw4kJFb_yoW3uFc_uF
-	4xZFy2g3yrKrn2vr45GwsavrWjy3WkuF4IqFW7tryavFy5Jr93Wry093W3Xr43WrsIkanx
-	CFyDGr45Aw109jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbDAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUWwA2048vs2IY02
-	0Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
-	wVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UM2
-	8EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
-	xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
-	vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
-	r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
-	v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
-	Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1lIxkGc2
-	Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
-	Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
-	1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5U
-	UUUU=
+X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S11
+X-Coremail-Antispam: 1UD129KBjvdXoWrKw1xZr17AF15GFy3Gw17KFg_yoWxtrb_XF
+	1xZF47Xw4rJFn2q3Z8JrsYvr4I9w4fWrW2vFZ8AF17G3WDGFZ5XFZ5Gr98XrsrGrs7Ga4x
+	X34fJrW7uryS9jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbq8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+	IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+	F7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJr0_Gc
+	Wl84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
+	e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+	8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+	jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
+	kIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
+	xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCIc4
+	0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AK
+	xVW8Jr0_Cr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
+	W8JwCI42IY6I8E87Iv6xkF7I0E14v26F4UJVW0obIYCTnIWIevJa73UjIFyTuYvjfUOBTY
+	UUUUU
 X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
 From: Yu Kuai <yukuai3@huawei.com>
@@ -140,22 +140,22 @@ Which is more efficiency, and also prepare to remove the field
 
 Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 ---
- drivers/md/bcache/super.c | 2 +-
+ fs/bcachefs/util.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
-index bfe1685dbae5..3ab8bae049ee 100644
---- a/drivers/md/bcache/super.c
-+++ b/drivers/md/bcache/super.c
-@@ -171,7 +171,7 @@ static const char *read_super(struct cache_sb *sb, struct block_device *bdev,
- 	struct page *page;
- 	unsigned int i;
+diff --git a/fs/bcachefs/util.h b/fs/bcachefs/util.h
+index 2984b57b2958..fe7ccb3a3517 100644
+--- a/fs/bcachefs/util.h
++++ b/fs/bcachefs/util.h
+@@ -518,7 +518,7 @@ int bch2_bio_alloc_pages(struct bio *, size_t, gfp_t);
  
--	page = read_cache_page_gfp(bdev->bd_inode->i_mapping,
-+	page = read_cache_page_gfp(bdev_inode(bdev)->i_mapping,
- 				   SB_OFFSET >> PAGE_SHIFT, GFP_KERNEL);
- 	if (IS_ERR(page))
- 		return "IO error";
+ static inline sector_t bdev_sectors(struct block_device *bdev)
+ {
+-	return bdev->bd_inode->i_size >> 9;
++	return bdev_inode(bdev)->i_size >> 9;
+ }
+ 
+ #define closure_bio_submit(bio, cl)					\
 -- 
 2.39.2
 
