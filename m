@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC58C46CA7
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 06:22:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.641550.1000169 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53903C07E97
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 06:22:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.641548.1000140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0U-0001Fn-AS; Mon, 27 Nov 2023 06:22:10 +0000
+	id 1r7V0R-0000QH-MH; Mon, 27 Nov 2023 06:22:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 641550.1000169; Mon, 27 Nov 2023 06:22:10 +0000
+Received: by outflank-mailman (output) from mailman id 641548.1000140; Mon, 27 Nov 2023 06:22:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0U-0001Fe-6H; Mon, 27 Nov 2023 06:22:10 +0000
-Received: by outflank-mailman (input) for mailman id 641550;
- Mon, 27 Nov 2023 06:22:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r7V0R-0000Oi-F8; Mon, 27 Nov 2023 06:22:07 +0000
+Received: by outflank-mailman (input) for mailman id 641548;
+ Mon, 27 Nov 2023 06:22:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f6Ye=HI=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
- id 1r7V0T-0008S4-5v
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:09 +0000
-Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 497ae6c1-8ced-11ee-98e2-6d05b1d4d9a1;
- Mon, 27 Nov 2023 07:22:08 +0100 (CET)
-Received: from mail.maildlp.com (unknown [172.19.163.235])
- by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SdwV04ttqz4f3jqW
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:00 +0800 (CST)
+ id 1r7V0Q-0008S3-1p
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:06 +0000
+Received: from dggsgout12.his.huawei.com (unknown [45.249.212.56])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 45fb875b-8ced-11ee-9b0e-b553b5be7939;
+ Mon, 27 Nov 2023 07:22:02 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.163.216])
+ by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4SdwTw1Yvgz4f3kG0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:21:56 +0800 (CST)
 Received: from mail02.huawei.com (unknown [10.116.40.112])
- by mail.maildlp.com (Postfix) with ESMTP id 7D7171A0C0B
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:03 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTP id 1214C1A0DCE
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:21:58 +0800 (CST)
 Received: from huaweicloud.com (unknown [10.175.104.67])
- by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S9;
- Mon, 27 Nov 2023 14:22:02 +0800 (CST)
+ by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S6;
+ Mon, 27 Nov 2023 14:21:57 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,7 +47,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 497ae6c1-8ced-11ee-98e2-6d05b1d4d9a1
+X-Inumbo-ID: 45fb875b-8ced-11ee-9b0e-b553b5be7939
 From: Yu Kuai <yukuai1@huaweicloud.com>
 To: hch@infradead.org,
 	ming.lei@redhat.com,
@@ -105,32 +105,32 @@ Cc: linux-block@vger.kernel.org,
 	yukuai1@huaweicloud.com,
 	yi.zhang@huawei.com,
 	yangerkun@huawei.com
-Subject: [PATCH block/for-next v2 05/16] s390/dasd: use new helper to get inode from block_device
-Date: Mon, 27 Nov 2023 14:21:05 +0800
-Message-Id: <20231127062116.2355129-6-yukuai1@huaweicloud.com>
+Subject: [PATCH block/for-next v2 02/16] xen/blkback: use new helper to get inode from block_device
+Date: Mon, 27 Nov 2023 14:21:02 +0800
+Message-Id: <20231127062116.2355129-3-yukuai1@huaweicloud.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 References: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S9
-X-Coremail-Antispam: 1UD129KBjvdXoWrKw1rWw4fAF15Kw1DXry3CFg_yoW3Cwc_CF
-	13JryIqw18Crnakw1YvF4rZr9a9F1kWr1IvFy5tr1fXF9rXF4Svw4kua13JrZ7GayUG3s8
-	JF9rXr1jvr15WjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbqkFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
-	IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
-	F7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
-	1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
-	M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
-	v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
-	F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
-	IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
-	wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1lIx
-	kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
-	wI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr
-	0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQ
-	SdkUUUUU=
+X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S6
+X-Coremail-Antispam: 1UD129KBjvdXoWrKw17KF4DGrW3uF4UJr4DCFg_yoW3KFX_XF
+	18urW7Zrn3Crsaka45uFs3Z340kw18ur4F9a1Iva4Sq34UCFW0v392vFn5Gr47XFWUG3Z0
+	y3WxXFW7tr4xJjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbDAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUXwA2048vs2IY02
+	0Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+	wVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UM2
+	8EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
+	xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
+	vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
+	r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
+	v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
+	Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1lIxkGc2
+	Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+	Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
+	1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUHbyAU
+	UUUU=
 X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
 From: Yu Kuai <yukuai3@huawei.com>
@@ -140,22 +140,22 @@ Which is more efficiency, and also prepare to remove the field
 
 Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 ---
- drivers/s390/block/dasd_ioctl.c | 2 +-
+ drivers/block/xen-blkback/xenbus.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/s390/block/dasd_ioctl.c b/drivers/s390/block/dasd_ioctl.c
-index 61b9675e2a67..a34554ace310 100644
---- a/drivers/s390/block/dasd_ioctl.c
-+++ b/drivers/s390/block/dasd_ioctl.c
-@@ -221,7 +221,7 @@ dasd_format(struct dasd_block *block, struct format_data_t *fdata)
- 	 * enabling the device later.
- 	 */
- 	if (fdata->start_unit == 0) {
--		block->gdp->part0->bd_inode->i_blkbits =
-+		bdev_inode(block->gdp->part0)->i_blkbits =
- 			blksize_bits(fdata->blksize);
+diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
+index e34219ea2b05..e11f8123d213 100644
+--- a/drivers/block/xen-blkback/xenbus.c
++++ b/drivers/block/xen-blkback/xenbus.c
+@@ -105,7 +105,7 @@ static void xen_update_blkif_status(struct xen_blkif *blkif)
+ 		return;
  	}
+ 	invalidate_inode_pages2(
+-			blkif->vbd.bdev_handle->bdev->bd_inode->i_mapping);
++			bdev_inode(blkif->vbd.bdev_handle->bdev)->i_mapping);
  
+ 	for (i = 0; i < blkif->nr_rings; i++) {
+ 		ring = &blkif->rings[i];
 -- 
 2.39.2
 
