@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC6EC07D5B
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 06:22:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.641552.1000189 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42A85C46CA9
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Nov 2023 06:22:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.641554.1000209 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0X-0001qb-W4; Mon, 27 Nov 2023 06:22:13 +0000
+	id 1r7V0b-0002Vc-OY; Mon, 27 Nov 2023 06:22:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 641552.1000189; Mon, 27 Nov 2023 06:22:13 +0000
+Received: by outflank-mailman (output) from mailman id 641554.1000209; Mon, 27 Nov 2023 06:22:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7V0X-0001qQ-Sd; Mon, 27 Nov 2023 06:22:13 +0000
-Received: by outflank-mailman (input) for mailman id 641552;
- Mon, 27 Nov 2023 06:22:12 +0000
+	id 1r7V0b-0002VQ-Ka; Mon, 27 Nov 2023 06:22:17 +0000
+Received: by outflank-mailman (input) for mailman id 641554;
+ Mon, 27 Nov 2023 06:22:16 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f6Ye=HI=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
- id 1r7V0W-0008S3-H5
- for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:12 +0000
+ id 1r7V0a-0008S3-2W
+ for xen-devel@lists.xenproject.org; Mon, 27 Nov 2023 06:22:16 +0000
 Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4ad0ae3d-8ced-11ee-9b0e-b553b5be7939;
- Mon, 27 Nov 2023 07:22:10 +0100 (CET)
+ id 4cfc2e0d-8ced-11ee-9b0e-b553b5be7939;
+ Mon, 27 Nov 2023 07:22:14 +0100 (CET)
 Received: from mail.maildlp.com (unknown [172.19.163.216])
- by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SdwV41Tgdz4f3jq5
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:04 +0800 (CST)
-Received: from mail02.huawei.com (unknown [10.116.40.112])
- by mail.maildlp.com (Postfix) with ESMTP id 0A11D1A04A0
+ by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SdwV75tdfz4f3k6D
  for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:07 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.112])
+ by mail.maildlp.com (Postfix) with ESMTP id 9FD5D1A0E06
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 14:22:10 +0800 (CST)
 Received: from huaweicloud.com (unknown [10.175.104.67])
- by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S11;
- Mon, 27 Nov 2023 14:22:06 +0800 (CST)
+ by APP1 (Coremail) with SMTP id cCh0CgDX2hB+NWRlrcU8CA--.57866S13;
+ Mon, 27 Nov 2023 14:22:10 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,7 +47,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ad0ae3d-8ced-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: 4cfc2e0d-8ced-11ee-9b0e-b553b5be7939
 From: Yu Kuai <yukuai1@huaweicloud.com>
 To: hch@infradead.org,
 	ming.lei@redhat.com,
@@ -105,19 +105,19 @@ Cc: linux-block@vger.kernel.org,
 	yukuai1@huaweicloud.com,
 	yi.zhang@huawei.com,
 	yangerkun@huawei.com
-Subject: [PATCH block/for-next v2 07/16] bcachefs: use new helper to get inode from block_device
-Date: Mon, 27 Nov 2023 14:21:07 +0800
-Message-Id: <20231127062116.2355129-8-yukuai1@huaweicloud.com>
+Subject: [PATCH block/for-next v2 09/16] cramfs: use new helper to get inode from block_device
+Date: Mon, 27 Nov 2023 14:21:09 +0800
+Message-Id: <20231127062116.2355129-10-yukuai1@huaweicloud.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 References: <20231127062116.2355129-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S11
-X-Coremail-Antispam: 1UD129KBjvdXoWrKw1xZr17AF15GFy3Gw17KFg_yoWxtrb_XF
-	1xZF47Xw4rJFn2q3Z8JrsYvr4I9w4fWrW2vFZ8AF17G3WDGFZ5XFZ5Gr98XrsrGrs7Ga4x
-	X34fJrW7uryS9jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbq8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+X-CM-TRANSID:cCh0CgDX2hB+NWRlrcU8CA--.57866S13
+X-Coremail-Antispam: 1UD129KBjvdXoWrKw17uryxXw1fuw13uFy5XFb_yoW3uFg_Aa
+	409ry8Wwn3Xrn29ws8Gws8Zr109w4rGws7uFW5Kr9rJry5JF95Crs7JF1rXr47Jr4UXa98
+	CFn7XF4xJr9F9jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbDAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
 	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
 	IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
 	F7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJr0_Gc
@@ -128,9 +128,9 @@ X-Coremail-Antispam: 1UD129KBjvdXoWrKw1xZr17AF15GFy3Gw17KFg_yoWxtrb_XF
 	kIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
 	xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCIc4
 	0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AK
-	xVW8Jr0_Cr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
-	W8JwCI42IY6I8E87Iv6xkF7I0E14v26F4UJVW0obIYCTnIWIevJa73UjIFyTuYvjfUOBTY
-	UUUUU
+	xVWxJr0_GcWlIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F
+	4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Cr1j6rxdYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkU
+	UUUU=
 X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
 From: Yu Kuai <yukuai3@huawei.com>
@@ -140,22 +140,22 @@ Which is more efficiency, and also prepare to remove the field
 
 Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 ---
- fs/bcachefs/util.h | 2 +-
+ fs/cramfs/inode.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/bcachefs/util.h b/fs/bcachefs/util.h
-index 2984b57b2958..fe7ccb3a3517 100644
---- a/fs/bcachefs/util.h
-+++ b/fs/bcachefs/util.h
-@@ -518,7 +518,7 @@ int bch2_bio_alloc_pages(struct bio *, size_t, gfp_t);
- 
- static inline sector_t bdev_sectors(struct block_device *bdev)
+diff --git a/fs/cramfs/inode.c b/fs/cramfs/inode.c
+index 60dbfa0f8805..e9ed1e24c9e4 100644
+--- a/fs/cramfs/inode.c
++++ b/fs/cramfs/inode.c
+@@ -183,7 +183,7 @@ static int next_buffer;
+ static void *cramfs_blkdev_read(struct super_block *sb, unsigned int offset,
+ 				unsigned int len)
  {
--	return bdev->bd_inode->i_size >> 9;
-+	return bdev_inode(bdev)->i_size >> 9;
- }
- 
- #define closure_bio_submit(bio, cl)					\
+-	struct address_space *mapping = sb->s_bdev->bd_inode->i_mapping;
++	struct address_space *mapping = bdev_inode(sb->s_bdev)->i_mapping;
+ 	struct file_ra_state ra = {};
+ 	struct page *pages[BLKS_PER_BUF];
+ 	unsigned i, blocknr, buffer;
 -- 
 2.39.2
 
