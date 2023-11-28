@@ -4,64 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41103C4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 10:37:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.642957.1002817 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09578C4167B
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 10:42:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.642985.1002831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7vSm-0004R2-DD; Tue, 28 Nov 2023 10:37:08 +0000
+	id 1r7vXh-0007el-4b; Tue, 28 Nov 2023 10:42:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 642957.1002817; Tue, 28 Nov 2023 10:37:08 +0000
+Received: by outflank-mailman (output) from mailman id 642985.1002831; Tue, 28 Nov 2023 10:42:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7vSm-0004Qv-AT; Tue, 28 Nov 2023 10:37:08 +0000
-Received: by outflank-mailman (input) for mailman id 642957;
- Tue, 28 Nov 2023 10:37:06 +0000
+	id 1r7vXg-0007dk-WA; Tue, 28 Nov 2023 10:42:13 +0000
+Received: by outflank-mailman (input) for mailman id 642985;
+ Tue, 28 Nov 2023 10:42:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=A0gx=HJ=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
- id 1r7vSk-0003ol-9x
- for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 10:37:06 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on2048.outbound.protection.outlook.com [40.107.7.48])
+ <SRS0=ImyS=HJ=gmail.com=marietto2008@srs-se1.protection.inumbo.net>)
+ id 1r7vXg-0007Og-8K
+ for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 10:42:12 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 123dd488-8dda-11ee-9b0e-b553b5be7939;
- Tue, 28 Nov 2023 11:37:04 +0100 (CET)
-Received: from DU2PR04CA0237.eurprd04.prod.outlook.com (2603:10a6:10:2b1::32)
- by DB9PR08MB7494.eurprd08.prod.outlook.com (2603:10a6:10:36d::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.27; Tue, 28 Nov
- 2023 10:36:35 +0000
-Received: from DB5PEPF00014B97.eurprd02.prod.outlook.com
- (2603:10a6:10:2b1:cafe::2e) by DU2PR04CA0237.outlook.office365.com
- (2603:10a6:10:2b1::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.28 via Frontend
- Transport; Tue, 28 Nov 2023 10:36:35 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5PEPF00014B97.mail.protection.outlook.com (10.167.8.235) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7046.17 via Frontend Transport; Tue, 28 Nov 2023 10:36:34 +0000
-Received: ("Tessian outbound e243565b0037:v228");
- Tue, 28 Nov 2023 10:36:34 +0000
-Received: from e5e76f2d74c1.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- F3D25E4E-2BF0-4FB5-A958-F41D23DEB3CF.1; 
- Tue, 28 Nov 2023 10:36:28 +0000
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id e5e76f2d74c1.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Tue, 28 Nov 2023 10:36:27 +0000
-Received: from AM6PR08MB3749.eurprd08.prod.outlook.com (2603:10a6:20b:8f::22)
- by DU2PR08MB7376.eurprd08.prod.outlook.com (2603:10a6:10:2f4::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.29; Tue, 28 Nov
- 2023 10:36:25 +0000
-Received: from AM6PR08MB3749.eurprd08.prod.outlook.com
- ([fe80::8da:b5c2:b334:838]) by AM6PR08MB3749.eurprd08.prod.outlook.com
- ([fe80::8da:b5c2:b334:838%7]) with mapi id 15.20.7025.022; Tue, 28 Nov 2023
- 10:36:25 +0000
+ id c87d1a86-8dda-11ee-9b0e-b553b5be7939;
+ Tue, 28 Nov 2023 11:42:10 +0100 (CET)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5488bf9e193so7222952a12.2
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Nov 2023 02:42:10 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,191 +42,453 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 123dd488-8dda-11ee-9b0e-b553b5be7939
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=B+a7RotD3y2O1lDDvCJbPfkEhpryb1ugAFxZBOHZgx3iJU2P5S6WrzVRGpeTZ++23d/MBgJG33zgY3woV5osTxpGpz5TzINg8w5s/zIJCw7pW7osi1fSl9rOjutRzpb4mtRiEioM0n3imT9hRbrtciuQjkb3yhIiVnuA6XRMv0ep+tkrjWDShhH/PuR+hYKkmgEqW2Iada0NrV8jxc2CD/Hd/iZMMBQj7v7wTxj/93rMwZb5J/9YFCWgc6sHHe5WAlWYnxOXFbEhrAzN2w1zuUvkrOroiKrOBopPA00qSxyaFi9vGTfZi7Oq+S1YmyOPjCE//QSNvsFXWqPMNxrD7A==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EmOGGQy7sOjD1W26s1AhAbwBdyMxD523+N3Efj6+HLs=;
- b=KRntGbYikqHPDJ7chRiKCtb6qs8vYoUinHtlpsPlRtonZZgaDLPe8kEV+yUw6Io1/hkEZHPzw9a7qLmiUQcRVb9SZB/23flb7l1Wnh+vlcovBINwJUX5X6hSvt4VQrUINhY5WrOExoDEa5hVA5ldAPSep6WBdttvaBH5NhntJ6oDxoMyX+bmr1KzK0rO8GOGg7i6nfaZfWvc+OpYwMTBHb24/2SNGPXQaAw8OcYn1sBGAvtOzK8P2IG59UFQrp5qYlcifzISFDIoc60L7ISfjqaRlXitOjLD7ptbk7oGD8y8mmthjt35P3lR2AHVH5jTN45QVnLDGr443aPfarXgGw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EmOGGQy7sOjD1W26s1AhAbwBdyMxD523+N3Efj6+HLs=;
- b=HsGxkglZHgrTTtQIYX4EPVEsQUwN7dOZsbLhuvf1KDJ2UfucdxCd2fEg8c5h5EynC5HyN8xaprFQADgQh4J6TeqUeEw9JXszIHeF9hKwLcmO38YVrC0g0lFJikTPidr9FCACDrGmTYYYyD7LEv0yKDl7r/PauAjAxZT1Bh6RbJo=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: ae7fa59135ee81fc
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=N8QRocfQOYKLNJXEzKkfmzyNG8nRRSLVKPmaSLbqwSO4ULiaPlUDIr/whwrXtmwYjEJWeYkNTxe6OUqFhAUwgoybx40LpzbT1VVR0vGwGbpJ08L1PMu4t6pLlr89iViGLxF5QOh3FcWaQLArBdAPIYSlNUttuov4Su/2pF8v82GxmUaIrF2hyPETVN4UEKR73W2rALC+oaJVFmJpjrktbu/3zMGAQnJo93uiNCPGhN9LDJPfpTfNr3ubl0nUDrnE0TtzAFkHGqdPzi9MRtwEjnviOdv1aRVPT2qPp1r1lnQajpPCx21UbB7/Z8siSkfQ/daCwZ3EpRDTsr3xSoStIA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EmOGGQy7sOjD1W26s1AhAbwBdyMxD523+N3Efj6+HLs=;
- b=gvOiE5DGRcCM03nDs7cgcON+Dh+KHRkqZIyxPoqSoilGzesqwKuEoHZrfceNa2HHX+I6ywH1+vTq96DgE8KHx4o3biL+J+i+MbcvcuHfWVaem5t7wTrVMNYIKxyFBf7ikj/XL/jiNimB184AWgMpO+b+UDRUuucJ7FVifSzws7qoj3R7wSnBbBdsxoiKlWTUITR9WXwBAcTNe3F9DfbByfZkpd1SXZsQjganT2RHVIgTSQwRoCNlzxFoSZHnRWVKE0QWKBBftwlA+1xQRE1QmSgbBxxcW3zQmUky4Aj4tTFauBGJK6z98tfnmpjCRq1FyEMJ6Np35POL5/e4bF1IpA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EmOGGQy7sOjD1W26s1AhAbwBdyMxD523+N3Efj6+HLs=;
- b=HsGxkglZHgrTTtQIYX4EPVEsQUwN7dOZsbLhuvf1KDJ2UfucdxCd2fEg8c5h5EynC5HyN8xaprFQADgQh4J6TeqUeEw9JXszIHeF9hKwLcmO38YVrC0g0lFJikTPidr9FCACDrGmTYYYyD7LEv0yKDl7r/PauAjAxZT1Bh6RbJo=
-From: Luca Fancellu <Luca.Fancellu@arm.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>,
-	"michal.orzel@amd.com" <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: Re: [PATCH v6 0/5] Fine granular configuration
-Thread-Topic: [PATCH v6 0/5] Fine granular configuration
-Thread-Index: AQHaHruBt1jR61BwukqrbWb7AIYNFrCJPEYAgAZTsIA=
-Date: Tue, 28 Nov 2023 10:36:25 +0000
-Message-ID: <9AFCB511-0192-4C7A-8792-51AD941D6014@arm.com>
-References: <20231124094841.1475381-1-luca.fancellu@arm.com>
- <E9D1FA66-DB03-4F52-9312-DD34FA916367@arm.com>
-In-Reply-To: <E9D1FA66-DB03-4F52-9312-DD34FA916367@arm.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3774.200.91.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	AM6PR08MB3749:EE_|DU2PR08MB7376:EE_|DB5PEPF00014B97:EE_|DB9PR08MB7494:EE_
-X-MS-Office365-Filtering-Correlation-Id: 154b0044-ccfb-45b1-e319-08dbeffde4d2
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- 5r7dNmthEWjomoKxn01me8xICdeHjIudUsIrNO+iw170QKj1h9OWspjcdqdTsUmOPVP12fmwZ6NQnIOjVhkGVIIsFSqmGqgWIUIfIELV4spgFE3UU91tLmkqKpS/EDEhigilM03i3tiYMenipOes9TnA5NXv+ZM9crSozs7lphSMKGnpsD7XYrLh+yUGYwLyrAl4gVMzn3o/+7RkK0mM4pKUgI/+Wgqh6KgdfKjdSQ5HwTDEdD0+RHAlUaLND9b0t0XrrnX1aN1XovvKqGmuZN5V+EqJIxy85jLMi/T5iINgIhgyOSxe9ut3BF7XjTaZELCFeR7mD/RxflWVOpn99IgC7wgY1P1jvmpWtjcyGddH9FfARN5hOIZn3fm6VZs7scVW5xa+rQgTRgYX4y8tJBLlwUkEBSCeNeGkqMChJ87Mw1CXdLxe4nUwBwrPmUsBxlWx8UJtBbqX0rWRfUUw5XF2LD4Xussz3zoLj7tfqEomiYo5PVu1EYQo2K6Fg3FQYPglfXxKGAtTHzjhhp3XAbYsgsfeNn0n52VqxT4DpDCYeZhes0bCe740eDQ0Zgu6G9uqxGSkWVdUcmeLMG0T/KyuZgSjD74XfCImz6P0/DvjUc3MYBsU1qhHZD+rJh29o0QQrgct9C4eSGXOxJnpMA==
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3749.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39850400004)(136003)(366004)(396003)(376002)(346002)(230922051799003)(451199024)(186009)(1800799012)(64100799003)(38100700002)(316002)(122000001)(86362001)(6486002)(4326008)(8676002)(8936002)(6916009)(36756003)(33656002)(5660300002)(83380400001)(91956017)(76116006)(6506007)(6512007)(26005)(54906003)(64756008)(66446008)(66476007)(66556008)(66946007)(2616005)(478600001)(71200400001)(53546011)(38070700009)(41300700001)(2906002)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <2AC6DE3B8DBCB44986313F878135A669@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: c87d1a86-8dda-11ee-9b0e-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701168130; x=1701772930; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=LMweMtKzlGGErdAPuMSZvkgbTLlKrcEIRSD6fpsoUS0=;
+        b=FWRaZp6ILszCBxg+DiUeIKoRjHV+b4JnxsII0+bmr2AvnBhpzeay67zXQn3tOaJK6D
+         E+mopvMBIc3f+GcIRRE4v9iQlufnOD9cxBdFcfvYYh2bKO/GU0CmckdSE5S/JzaupC9k
+         L54hHw5cG6+sXZuNqOdLhaLI8opSUEkUteT5ZckfRVaGvM7N/jIkj65lQubK41EWNswY
+         dG3sEtE6XG3PNgL2nUfsk6V/dUAcrsNv9Sxe7dAu9wLVlbFefHZepOV/4g9djum6C92Q
+         AS6KXxLUN4Qo+IjX/MV2wST70/DhEhPmbvJQB77MRQErkdCu0X+/OQXpHF1qmlneezHH
+         CDow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701168130; x=1701772930;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LMweMtKzlGGErdAPuMSZvkgbTLlKrcEIRSD6fpsoUS0=;
+        b=bTTfbpn6Gz7aY/pqm9bw4ZbhkSv4Bmfl/hqZ4BXWR9UWGvg2F+/zBy8dIlY1x6OPNx
+         0WuWk5IcQQE123KD5wFKKpu2YAY74QfDldcG9jKNMAVhzDuZZM2C4mzyiN3aBVLitCXN
+         jCp23VLf/XBaeoWrNIlr66QwqcFnpOiMuXdzLWUAuSIgKiCmURfQSG/K5vYmg5iT9Zge
+         DVdnlOhw+7yWo5pr0kzUu2tX2AZ/Q2h4402ULbomI79F4doFhRQusQ0hWn8J1ikTaS95
+         JhYE6o2sc+xHYKkcEFDvxsEPlgDdhvzvGVBJI5PL0WCncMZRkx+zQcxSAWz/BgMpNSZt
+         tejA==
+X-Gm-Message-State: AOJu0Yx8Ph21Gi6eLE6Q7otS4+0xOtwK2FfNX9NWrAjS02kyziTnkDfo
+	Z2a46ktZUhzIfgQAExH42DEyF7xVEz5zBg56eXph5Bz1r+7GxEJO
+X-Google-Smtp-Source: AGHT+IHZcUWhPB108UMRIaO5f7fhDCozfkVs9V1e8cwhD2mWotxO0DrJjV5gp3SavkH6Rqshd/4lfEwcVgEBuZObF/0=
+X-Received: by 2002:a17:906:c307:b0:9d4:2080:61dc with SMTP id
+ s7-20020a170906c30700b009d4208061dcmr11709602ejz.22.1701168129329; Tue, 28
+ Nov 2023 02:42:09 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR08MB7376
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5PEPF00014B97.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	b1302c26-6649-484b-d5b1-08dbeffddf5a
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	S5oLrR67C/T61dYIF6y2993/ezIp9bHbrFGUHAyk+R1TIvbec2VdDHB8DzoNWfOZvmgRZYjlUSA+XLYpykWHBbGMJoaDLnJGieUyxLlSB31nBzDidCcpW5FNjZxcRznQxgfNwg771OAGek+90p/WXXuF7mMECcW5JJK8O4HZduw5i6iqRVt1sLVohcfjHXrwafFaDP4Gp6yax3f19Ihm91BQBLQ6CdmTY3k6cv01wvHV1HmG+8Cjz4FfG8k20oTWPPvWZRcuA9H/BZmRZjoTILfpK8CXEfEUXKnHXFMUFFJyLUqH8edkQ7i8LBtEFP/SSLuJrTJ6GZPa5rPCP6oYjtkv8N/GwDi5dGxe0AXofZQk2vM8rVblSkAa9WeNOblcNzb9/ByZJul+XDScFGzZDdSOR71LxWVDH6N8JHr46EnSHY+Iwzpj7O6W3PoVEkY6Sgb2qG6Z8EU0mbkKybA/54vt/uGcTEmSJ0ky0FsditD5cTn79P+mNy71hpBvHy9ScwAaIJ4dtlTP27KxjlI5/9km/JtDcO48pmRa0NwQHCgNKZFGJkVmuraykEGsC9CvXPJT02YUT+WlZeVjVJkX6bOjtKII5xbZAd7639njQNqxBNYkLDxH1LYc103/7jKrPla5YnQ4K+1wsIV31DkRePsNfbNh4zw1K9ZkeXiVvVvDnYXrloXy53HyLglVDczF+X2vBoc9gdvRwY6TEsjpoFjcI586Z47McOEXMnBw66YX9VQHlSAeUlUEpgfEDE5y
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(376002)(346002)(136003)(39860400002)(396003)(230922051799003)(186009)(82310400011)(64100799003)(451199024)(1800799012)(40470700004)(36840700001)(46966006)(336012)(53546011)(2616005)(26005)(6506007)(6512007)(478600001)(47076005)(36860700001)(83380400001)(2906002)(4326008)(41300700001)(5660300002)(8936002)(54906003)(70206006)(70586007)(316002)(6486002)(6916009)(8676002)(40460700003)(356005)(81166007)(36756003)(33656002)(82740400003)(86362001)(40480700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2023 10:36:34.7534
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 154b0044-ccfb-45b1-e319-08dbeffde4d2
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB5PEPF00014B97.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB7494
+References: <CA+1FSiggg=XZmif6c3pY0+jz7i9caU-OTwFy80gwO7MVpXiwcA@mail.gmail.com>
+ <CA+1FSigM1PZc4WfZNUJSMsZbNPPTyThRJ7MMQwQ9TWn6VnSUTg@mail.gmail.com>
+ <C0A0E9FA-5AAB-4324-BBBD-D07412CD7F32@arm.com> <ZWR1v5Y3EpRK817B@macbook>
+ <CA+1FSij2Q9f9Vj0A06HUYeUxTddrEyF=Q8X5fbs96CRr83_BPg@mail.gmail.com>
+ <4fc95518-7e46-4f82-b540-afdbc941508a@netscape.net> <f606be07-c4ff-43c6-acf9-42065a84b594@netscape.net>
+ <alpine.DEB.2.22.394.2311271826370.3533093@ubuntu-linux-20-04-desktop>
+In-Reply-To: <alpine.DEB.2.22.394.2311271826370.3533093@ubuntu-linux-20-04-desktop>
+From: Mario Marietto <marietto2008@gmail.com>
+Date: Tue, 28 Nov 2023 11:41:32 +0100
+Message-ID: <CA+1FSijGq3oByrb7sDy-Zw5zqFXamyeYGrYQ9jouhN42ZDrvYA@mail.gmail.com>
+Subject: Re: We are not able to virtualize FreeBSD using xen 4.17 on Arm 32 bit
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Chuck Zmudzinski <brchuckz@netscape.net>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Demi Marie Obenour <demi@invisiblethingslab.com>, Anthony PERARD <anthony.perard@citrix.com>, 
+	Julien Grall <julien@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>, 
+	Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Elliott Mitchell <ehem+freebsd@m5p.com>
+Content-Type: multipart/alternative; boundary="0000000000000d4e84060b3412b7"
+
+--0000000000000d4e84060b3412b7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hello.
+
+to try to compile the correct freebsd kernel that's recognized by xen using
+the Elliott Michell code, are the commands below the correct ones ?
+
+$ truncate -s 100G xenvm.img
+$ mdconfig -f xenvm.img -u 0
+$ newfs /dev/md0
+$ mount /dev/md0 /mnt
+$ git clone https://gitlab.com/ehem/freebsd-src.git
+$ cd freebsd-src
+
+$ make  -DNO_MODULES   KERNCONF=3DGENERIC TARGET=3Darm TARGET_ARCH=3Darmv7 =
+buildkernel
+
+$ echo "/dev/xbd0       /       ufs     rw      1
+1" > /mnt/etc/fstab
+
+$ nano /build/etc/ttys (add the line 'xc0 "/usr/libexec/getty Pc"
+xterm on secure")
+$ umount /build
+$ mdconfig -d -u 0
+
+Do you see errors ? some missing ? very thanks.
 
 
+On Tue, Nov 28, 2023 at 3:28=E2=80=AFAM Stefano Stabellini <sstabellini@ker=
+nel.org>
+wrote:
 
-> On 24 Nov 2023, at 09:59, Luca Fancellu <Luca.Fancellu@arm.com> wrote:
->=20
-> + CC Maintainers
->=20
->> On 24 Nov 2023, at 09:48, Luca Fancellu <luca.fancellu@arm.com> wrote:
->>=20
->> This serie aims to add more modularity to some feature that can be exclu=
-ded
->> without issues from the build.
->>=20
->> The first patch is already reviewed.
->>=20
->> v2 update: So I've tried to see how to put the dom0less code in the comm=
-on code,
->> but the amount of modifications are not trivial, even putting only the c=
-ommon
->> part and protecting them with ARM, leaving the ARM specific stuff under =
-arch/
->> like gic etc... will leave a status that is not very nice, so I've decid=
-ed for
->> now to keep everything on the arm architecture so that who is going to w=
-ork
->> on unifying the code in common can just take from there and do the prope=
-r
->> rework.
->>=20
->> Luca Fancellu (5):
->> arm/gicv2: make GICv2 driver and vGICv2 optional
->> xen/arm: Add asm/domain.h include to kernel.h
->> arm/dom0less: put dom0less feature code in a separate module
->> xen/arm: Move static memory build code in separate modules
->> arm/dom0less: introduce Kconfig for dom0less feature
->>=20
->> xen/arch/arm/Kconfig                      |   27 +
->> xen/arch/arm/Makefile                     |    7 +-
->> xen/arch/arm/arm32/mmu/mm.c               |    1 +
->> xen/arch/arm/arm64/mmu/mm.c               |    1 +
->> xen/arch/arm/bootfdt.c                    |  161 +-
->> xen/arch/arm/dom0less-build.c             | 1018 ++++++
->> xen/arch/arm/domain_build.c               | 3591 ++++++---------------
->> xen/arch/arm/efi/efi-boot.h               |    4 +
->> xen/arch/arm/gic-v3.c                     |    4 +
->> xen/arch/arm/include/asm/dom0less-build.h |   30 +
->> xen/arch/arm/include/asm/domain_build.h   |   34 +
->> xen/arch/arm/include/asm/kernel.h         |    1 +
->> xen/arch/arm/include/asm/setup.h          |    2 -
->> xen/arch/arm/include/asm/static-memory.h  |   45 +
->> xen/arch/arm/include/asm/static-shmem.h   |   66 +
->> xen/arch/arm/setup.c                      |   57 +-
->> xen/arch/arm/static-memory.c              |  287 ++
->> xen/arch/arm/static-shmem.c               |  547 ++++
->> xen/arch/arm/vgic.c                       |    2 +
->> xen/arch/arm/vgic/Makefile                |    4 +-
->> xen/common/Kconfig                        |    2 +-
->> 21 files changed, 3058 insertions(+), 2833 deletions(-)
->> create mode 100644 xen/arch/arm/dom0less-build.c
->> create mode 100644 xen/arch/arm/include/asm/dom0less-build.h
->> create mode 100644 xen/arch/arm/include/asm/static-memory.h
->> create mode 100644 xen/arch/arm/include/asm/static-shmem.h
->> create mode 100644 xen/arch/arm/static-memory.c
->> create mode 100644 xen/arch/arm/static-shmem.c
->=20
-> I sent this serie forgetting about adding the maintainers, CC them
-> now.
+> On Mon, 27 Nov 2023, Chuck Zmudzinski wrote:
+> > On 11/27/2023 10:22 AM, Chuck Zmudzinski wrote:
+> > > On 11/27/2023 7:45 AM, Mario Marietto wrote:
+> > >> @Chuck Zmudzinski <mailto:brchuckz@netscape.net> : Stay tuned. They
+> want to help us. The xen developers are great. Very good support for us.
+> I'm sure that you can give a good contribution to understand what's our
+> problem and how to implement a fix with the help of all those good guys.
+> > >>
+> > >> On Mon, Nov 27, 2023 at 11:56=E2=80=AFAM Roger Pau Monn=C3=A9 <
+> roger.pau@citrix.com <mailto:roger.pau@citrix.com>> wrote:
+> > >>
+> > >>     On Mon, Nov 27, 2023 at 10:28:13AM +0000, Henry Wang wrote:
+> > >>     > +(xen-devel and Arm maintainers, including Julien)
+> > >>     >
+> > >>     > > On Nov 27, 2023, at 18:03, Mario Marietto <
+> marietto2008@gmail.com <mailto:marietto2008@gmail.com>>
+> > >>     > > wrote:
+> > >>     > >
+> > >>     > > Hello.  We have just virtualized Debian 12 on our arm (32 bi=
+t)
+> > >>     > > Chromebook model xe303c12 . As host / dom0 we have chosen
+> Devuan
+> > >>     > > 5,and for guest / domU,Debian 12. It works great. But our
+> goal is
+> > >>     > > different. We want to virtualize FreeBSD as domU. Can we hav=
+e
+> a
+> > >>     > > working Xen PV network driver for a FreeBSD arm guest ?. I
+> found
+> > >>     > > that Julien Grall has ported the Xen drivers to FreeBSD on
+> arm. I
+> > >>     > > would like to know if Julien's work was accepted upstream by
+> > >>     > > FreeBSD, in which case FreeBSD as a Xen guest on arm should
+> work
+> > >>     > > if we enable the Xen PV drivers in the FreeBSD on arm kernel=
+.
+> If
+> > >>     > > Julien's work was not accepted upstream by FreeBSD, we will
+> have
+> > >>     > > to find his patches and apply them ourselves to the FreeBSD
+> on arm
+> > >>     > > kernel.
+> > >>
+> > >>     I've added Elliot on Cc as he is working on upstreaming the
+> patches to
+> > >>     FreeBSD.  He will be able to provide a better update than myself=
+.
+> > >>
+> > >>     Regards, Roger.
+> > >
+> > > I have been collaborating with Mario, and I can explain what we have
+> done so far :
+> > >
+> > > We are using Julien's patch set against an old development version of
+> FreeBSD 11
+> > > from 2014-12-03 :
+> > >
+> > >
+> https://xenbits.xen.org/gitweb/?p=3Dpeople/julieng/freebsd.git;a=3Dshortl=
+og;h=3Drefs/heads/xen-arm-v2.2
+> > >
+> > > We successfully built the XENVIRT kernel and FreeBSD world, and
+> created the
+> > > FreeBSD rootfs according to Julien's instructions here :
+> > >
+> > >
+> https://lists.freebsd.org/pipermail/freebsd-xen/2014-November/002202.html
+> > >
+> > > There were some adjustments to the instructions :
+> > >
+> > > To build the kernel, we used :
+> > >
+> > > $ sudo make TARGET_ARCH=3Darmv6 KERNCONF=3DXENVIRT buildkernel
+> > >
+> > > instead of
+> > >
+> > > $ sudo make TARGET_ARCH=3Darmv6 KERNCONF=3DXENHVM buildkernel
+> > >
+> > > The FreeBSD 'kernel' file is in ELF format and did not work, and we
+> spent
+> > > some time trying to convert it to the zImage format without realizing
+> the
+> > > build of the FreeBSD kernel creates the 'kernel.bin' file in the
+> zImage format.
+> > > So when booting with the 'kernel.bin' file instead, it actually boots=
+ :
+> > >
+> > > user@devuan-bunsen ~ % sudo xl create freebsd.cfg
+> > > Parsing config from freebsd.cfg
+> > > user@devuan-bunsen ~ % sudo xl li
+> > > Name                                        ID   Mem VCPUs  State
+>  Time(s)
+> > > Domain-0                                     0   768     2     r-----
+>   1439.4
+> > > freebsd                                      1  1152     1     r-----
+>      3.0
+> > > user@devuan-bunsen ~ %
+> > >
+> > > However, the guest is still not working correctly :
+> > >
+> > > 1. Attaching the console with the -c option at creation or with
+> > >    'xl console freebsd' results in no output to the console.
+> > >
+> > > 2. The timestamp on the virtual disk image file shows that the
+> filesystem
+> > >    was at best mounted read-only, if it was mounted at all by the gue=
+st
+> > >    FreeBSD kernel.
+> > >
+> > > 3. The 'xl shutdown freebsd' command does not work, it just hangs. To
+> stop
+> > >    the guest, you need to do 'xl destroy freebsd'.
+> > >
+> > > However, I think we can get the console to work and the rootfs to
+> mount because I
+> > > just realized I forgot to do the steps from Julien's instructions of
+> editing the
+> > > /etc/fstab and /etc/ttys files in the FreeBSD rootfs :
+> > >
+> > > $ echo "/dev/xbd0       /       ufs     rw      1       1" >
+> /mnt/etc/fstab
+> > > $ vi /mnt/etc/ttys (add the line 'xc0 "/usr/libexec/getty Pc" xterm o=
+n
+> secure")
+> > >
+> > > I will add those and see if the console and disk are working.
+> >
+> > Unfortunately, adding xc0 to /etc/ttys and /dev/xbd0 as the root device
+> in
+> > /etc/fstab did not make the console or disk work. Still no output on th=
+e
+> > xen console from the guest kernel, and the timestamp on the rootfs imag=
+e
+> > file did not change so it did not mount read-write.
+> >
+> > We could use some advice for troubleshooting this. Now, we are blind
+> because
+> > we are not getting any xen console output But I am pleased we were able
+> to
+> > demonstrate that Julien's old patch set for FreeBSD 11 allows us to boo=
+t
+> > FreeBSD 11 on a modern version of Xen on arm - we are using the Debian
+> > stable Xen 4.17 packages.
+>
+> You can use the DEBUG hypercalls to check how far we got into the
+> booting process:
+> https://wiki.xenproject.org/wiki/Xen_ARM_DEBUG_hypercalls
+>
+> For instance add the following to FreeBSD code:
+>
+> asm volatile("hvc 0xfffd");
+>
+>
 
-Hi all,
+--=20
+Mario.
 
-I think all the patches here are Ack-ed by a maintainer, is there any issue=
- to
-merge them?
+--0000000000000d4e84060b3412b7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
->=20
-> Cheers,
-> Luca
->=20
+<div dir=3D"ltr"><div>Hello.</div><div><br></div><div>to try to compile the=
+ correct freebsd kernel that&#39;s recognized by xen using the Elliott Mich=
+ell code, are the commands below the correct ones ?</div><div><br></div><di=
+v><pre class=3D"gmail-_3GnarIQX9tD_qsgXkfSDz1"><code class=3D"gmail-_34q3Pg=
+Lsx9zIU5BiSOjFoM">$ truncate -s 100G xenvm.img<br>$ mdconfig -f xenvm.img -=
+u 0=20
+$ newfs /dev/md0=20
+$ mount /dev/md0 /mnt<br>$</code><span style=3D"font-family:monospace"><spa=
+n style=3D"color:rgb(0,0,0);background-color:rgb(255,255,255)"> git clone <=
+a href=3D"https://gitlab.com/ehem/freebsd-src.git">https://gitlab.com/ehem/=
+freebsd-src.git</a><br>$ </span></span>cd freebsd-src<br><br>$ make  -DNO_M=
+ODULES   KERNCONF=3DGENERIC TARGET=3Darm TARGET_ARCH=3Darmv7 buildkernel<co=
+de class=3D"gmail-_34q3PgLsx9zIU5BiSOjFoM"><br><br>$ echo &quot;/dev/xbd0  =
+     /       ufs     rw      1=20
+1&quot; &gt; /mnt/etc/fstab =20
 
+$ nano /build/etc/ttys (add the line &#39;xc0 &quot;/usr/libexec/getty Pc&q=
+uot; xterm on secure&quot;)
+$ umount /build<br>$ mdconfig -d -u 0<br><br></code></pre><pre class=3D"gma=
+il-_3GnarIQX9tD_qsgXkfSDz1"><code class=3D"gmail-_34q3PgLsx9zIU5BiSOjFoM">D=
+o you see errors ? some missing ? very thanks.<br></code></pre></div></div>=
+<br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue=
+, Nov 28, 2023 at 3:28=E2=80=AFAM Stefano Stabellini &lt;<a href=3D"mailto:=
+sstabellini@kernel.org">sstabellini@kernel.org</a>&gt; wrote:<br></div><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
+:1px solid rgb(204,204,204);padding-left:1ex">On Mon, 27 Nov 2023, Chuck Zm=
+udzinski wrote:<br>
+&gt; On 11/27/2023 10:22 AM, Chuck Zmudzinski wrote:<br>
+&gt; &gt; On 11/27/2023 7:45 AM, Mario Marietto wrote:<br>
+&gt; &gt;&gt; @Chuck Zmudzinski &lt;mailto:<a href=3D"mailto:brchuckz@netsc=
+ape.net" target=3D"_blank">brchuckz@netscape.net</a>&gt; : Stay tuned. They=
+ want to help us. The xen developers are great. Very good support for us. I=
+&#39;m sure that you can give a good contribution to understand what&#39;s =
+our problem and how to implement a fix with the help of all those good guys=
+.<br>
+&gt; &gt;&gt; <br>
+&gt; &gt;&gt; On Mon, Nov 27, 2023 at 11:56=E2=80=AFAM Roger Pau Monn=C3=A9=
+ &lt;<a href=3D"mailto:roger.pau@citrix.com" target=3D"_blank">roger.pau@ci=
+trix.com</a> &lt;mailto:<a href=3D"mailto:roger.pau@citrix.com" target=3D"_=
+blank">roger.pau@citrix.com</a>&gt;&gt; wrote:<br>
+&gt; &gt;&gt; <br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0On Mon, Nov 27, 2023 at 10:28:13AM +0000, =
+Henry Wang wrote:<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; +(xen-devel and Arm maintainers, incl=
+uding Julien)<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; On Nov 27, 2023, at 18:03, Mario=
+ Marietto &lt;<a href=3D"mailto:marietto2008@gmail.com" target=3D"_blank">m=
+arietto2008@gmail.com</a> &lt;mailto:<a href=3D"mailto:marietto2008@gmail.c=
+om" target=3D"_blank">marietto2008@gmail.com</a>&gt;&gt;<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; wrote:<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; Hello.=C2=A0 We have just virtua=
+lized Debian 12 on our arm (32 bit)<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; Chromebook model xe303c12 . As h=
+ost / dom0 we have chosen Devuan<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; 5,and for guest / domU,Debian 12=
+. It works great. But our goal is<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; different. We want to virtualize=
+ FreeBSD as domU. Can we have a<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; working Xen PV network driver fo=
+r a FreeBSD arm guest ?. I found<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; that Julien Grall has ported the=
+ Xen drivers to FreeBSD on arm. I<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; would like to know if Julien&#39=
+;s work was accepted upstream by<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; FreeBSD, in which case FreeBSD a=
+s a Xen guest on arm should work<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; if we enable the Xen PV drivers =
+in the FreeBSD on arm kernel. If<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; Julien&#39;s work was not accept=
+ed upstream by FreeBSD, we will have<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; to find his patches and apply th=
+em ourselves to the FreeBSD on arm<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0&gt; &gt; kernel.<br>
+&gt; &gt;&gt; <br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0I&#39;ve added Elliot on Cc as he is worki=
+ng on upstreaming the patches to<br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0FreeBSD.=C2=A0 He will be able to provide =
+a better update than myself.<br>
+&gt; &gt;&gt; <br>
+&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0Regards, Roger.<br>
+&gt; &gt; <br>
+&gt; &gt; I have been collaborating with Mario, and I can explain what we h=
+ave done so far :<br>
+&gt; &gt; <br>
+&gt; &gt; We are using Julien&#39;s patch set against an old development ve=
+rsion of FreeBSD 11<br>
+&gt; &gt; from 2014-12-03 :<br>
+&gt; &gt; <br>
+&gt; &gt; <a href=3D"https://xenbits.xen.org/gitweb/?p=3Dpeople/julieng/fre=
+ebsd.git;a=3Dshortlog;h=3Drefs/heads/xen-arm-v2.2" rel=3D"noreferrer" targe=
+t=3D"_blank">https://xenbits.xen.org/gitweb/?p=3Dpeople/julieng/freebsd.git=
+;a=3Dshortlog;h=3Drefs/heads/xen-arm-v2.2</a><br>
+&gt; &gt; <br>
+&gt; &gt; We successfully built the XENVIRT kernel and FreeBSD world, and c=
+reated the<br>
+&gt; &gt; FreeBSD rootfs according to Julien&#39;s instructions here :<br>
+&gt; &gt; <br>
+&gt; &gt; <a href=3D"https://lists.freebsd.org/pipermail/freebsd-xen/2014-N=
+ovember/002202.html" rel=3D"noreferrer" target=3D"_blank">https://lists.fre=
+ebsd.org/pipermail/freebsd-xen/2014-November/002202.html</a><br>
+&gt; &gt; <br>
+&gt; &gt; There were some adjustments to the instructions :<br>
+&gt; &gt; <br>
+&gt; &gt; To build the kernel, we used :<br>
+&gt; &gt; <br>
+&gt; &gt; $ sudo make TARGET_ARCH=3Darmv6 KERNCONF=3DXENVIRT buildkernel<br=
+>
+&gt; &gt; <br>
+&gt; &gt; instead of<br>
+&gt; &gt; <br>
+&gt; &gt; $ sudo make TARGET_ARCH=3Darmv6 KERNCONF=3DXENHVM buildkernel<br>
+&gt; &gt; <br>
+&gt; &gt; The FreeBSD &#39;kernel&#39; file is in ELF format and did not wo=
+rk, and we spent<br>
+&gt; &gt; some time trying to convert it to the zImage format without reali=
+zing the<br>
+&gt; &gt; build of the FreeBSD kernel creates the &#39;kernel.bin&#39; file=
+ in the zImage format.<br>
+&gt; &gt; So when booting with the &#39;kernel.bin&#39; file instead, it ac=
+tually boots :<br>
+&gt; &gt; <br>
+&gt; &gt; user@devuan-bunsen ~ % sudo xl create freebsd.cfg<br>
+&gt; &gt; Parsing config from freebsd.cfg<br>
+&gt; &gt; user@devuan-bunsen ~ % sudo xl li<br>
+&gt; &gt; Name=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 ID=C2=A0 =C2=A0Mem VCPUs=C2=A0 State=C2=A0 =C2=A0Time(s)<br>
+&gt; &gt; Domain-0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A00=C2=A0 =C2=A0768=C2=A0 =C2=A0 =C2=A02=C2=A0 =C2=A0 =C2=A0r-----=C2=A0 =
+=C2=A0 1439.4<br>
+&gt; &gt; freebsd=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 1=C2=A0 1152=C2=A0 =C2=A0 =C2=A01=C2=A0 =C2=A0 =C2=A0r-----=C2=A0 =C2=
+=A0 =C2=A0 =C2=A03.0<br>
+&gt; &gt; user@devuan-bunsen ~ %<br>
+&gt; &gt; <br>
+&gt; &gt; However, the guest is still not working correctly :<br>
+&gt; &gt; <br>
+&gt; &gt; 1. Attaching the console with the -c option at creation or with<b=
+r>
+&gt; &gt;=C2=A0 =C2=A0 &#39;xl console freebsd&#39; results in no output to=
+ the console.<br>
+&gt; &gt; <br>
+&gt; &gt; 2. The timestamp on the virtual disk image file shows that the fi=
+lesystem<br>
+&gt; &gt;=C2=A0 =C2=A0 was at best mounted read-only, if it was mounted at =
+all by the guest<br>
+&gt; &gt;=C2=A0 =C2=A0 FreeBSD kernel.<br>
+&gt; &gt; <br>
+&gt; &gt; 3. The &#39;xl shutdown freebsd&#39; command does not work, it ju=
+st hangs. To stop<br>
+&gt; &gt;=C2=A0 =C2=A0 the guest, you need to do &#39;xl destroy freebsd&#3=
+9;.<br>
+&gt; &gt; <br>
+&gt; &gt; However, I think we can get the console to work and the rootfs to=
+ mount because I<br>
+&gt; &gt; just realized I forgot to do the steps from Julien&#39;s instruct=
+ions of editing the<br>
+&gt; &gt; /etc/fstab and /etc/ttys files in the FreeBSD rootfs :<br>
+&gt; &gt; <br>
+&gt; &gt; $ echo &quot;/dev/xbd0=C2=A0 =C2=A0 =C2=A0 =C2=A0/=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0ufs=C2=A0 =C2=A0 =C2=A0rw=C2=A0 =C2=A0 =C2=A0 1=C2=A0 =C2=A0 =
+=C2=A0 =C2=A01&quot; &gt; /mnt/etc/fstab<br>
+&gt; &gt; $ vi /mnt/etc/ttys (add the line &#39;xc0 &quot;/usr/libexec/gett=
+y Pc&quot; xterm on secure&quot;)<br>
+&gt; &gt; <br>
+&gt; &gt; I will add those and see if the console and disk are working.<br>
+&gt; <br>
+&gt; Unfortunately, adding xc0 to /etc/ttys and /dev/xbd0 as the root devic=
+e in<br>
+&gt; /etc/fstab did not make the console or disk work. Still no output on t=
+he<br>
+&gt; xen console from the guest kernel, and the timestamp on the rootfs ima=
+ge<br>
+&gt; file did not change so it did not mount read-write.<br>
+&gt; <br>
+&gt; We could use some advice for troubleshooting this. Now, we are blind b=
+ecause<br>
+&gt; we are not getting any xen console output But I am pleased we were abl=
+e to<br>
+&gt; demonstrate that Julien&#39;s old patch set for FreeBSD 11 allows us t=
+o boot<br>
+&gt; FreeBSD 11 on a modern version of Xen on arm - we are using the Debian=
+<br>
+&gt; stable Xen 4.17 packages.<br>
+<br>
+You can use the DEBUG hypercalls to check how far we got into the<br>
+booting process:<br>
+<a href=3D"https://wiki.xenproject.org/wiki/Xen_ARM_DEBUG_hypercalls" rel=
+=3D"noreferrer" target=3D"_blank">https://wiki.xenproject.org/wiki/Xen_ARM_=
+DEBUG_hypercalls</a><br>
+<br>
+For instance add the following to FreeBSD code:<br>
+<br>
+asm volatile(&quot;hvc 0xfffd&quot;);<br>
+<br>
+</blockquote></div><br clear=3D"all"><br><span class=3D"gmail_signature_pre=
+fix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature">Mario.<br></d=
+iv>
+
+--0000000000000d4e84060b3412b7--
 
