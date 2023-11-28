@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 688FFC4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 11:07:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.643035.1002890 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D095C4167B
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 11:08:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.643041.1002900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7vvj-0000zo-IR; Tue, 28 Nov 2023 11:07:03 +0000
+	id 1r7vwW-0001tH-Sb; Tue, 28 Nov 2023 11:07:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 643035.1002890; Tue, 28 Nov 2023 11:07:03 +0000
+Received: by outflank-mailman (output) from mailman id 643041.1002900; Tue, 28 Nov 2023 11:07:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7vvj-0000zh-Fc; Tue, 28 Nov 2023 11:07:03 +0000
-Received: by outflank-mailman (input) for mailman id 643035;
- Tue, 28 Nov 2023 11:07:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r7vwW-0001tA-Pa; Tue, 28 Nov 2023 11:07:52 +0000
+Received: by outflank-mailman (input) for mailman id 643041;
+ Tue, 28 Nov 2023 11:07:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xcZ5=HJ=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1r7vvh-0000OW-Ju
- for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 11:07:01 +0000
+ id 1r7vwU-0001rU-NF
+ for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 11:07:50 +0000
 Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on2088.outbound.protection.outlook.com [40.107.7.88])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 41015128-8dde-11ee-98e3-6d05b1d4d9a1;
- Tue, 28 Nov 2023 12:07:00 +0100 (CET)
+ (mail-he1eur04on2087.outbound.protection.outlook.com [40.107.7.87])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5d55f5f4-8dde-11ee-9b0e-b553b5be7939;
+ Tue, 28 Nov 2023 12:07:48 +0100 (CET)
 Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
  by PA4PR04MB7517.eurprd04.prod.outlook.com (2603:10a6:102:e0::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.21; Tue, 28 Nov
- 2023 11:06:31 +0000
+ 2023 11:07:19 +0000
 Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
  ([fe80::eb8e:fa24:44c1:5d44]) by DU2PR04MB8790.eurprd04.prod.outlook.com
  ([fe80::eb8e:fa24:44c1:5d44%3]) with mapi id 15.20.7046.015; Tue, 28 Nov 2023
- 11:06:30 +0000
+ 11:07:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,32 +48,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41015128-8dde-11ee-98e3-6d05b1d4d9a1
+X-Inumbo-ID: 5d55f5f4-8dde-11ee-9b0e-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YEoYu6wfxPKHyjTbnN88MSxvDX33DhKyBiAMUFefgHV9yglWRiBaSwpqgShXAvUDRQkgaubdC8bwnTqQDnP8aSJy3vFfV+nRzw1v11gFaDiz9wGFWRwxrCk1c5YXhZp/hS3w0cMkoqucrZbvgxYirP0e7cXoCGOnCyDoKQJVwjJSFRMfB4QpPfEJ5ueRAQ6HTsURTJjAq2afOGCoKtSSWiHz2yWgJpHIY3A/UvXvcPevbypn+Zj+dI/fGFAI6v9o++fOHUYms30pBOVIt6yTYmklSCAWkhKKkDWVpZBxigrZudxf/WPPcm2kM9fq6u6+Yz5IjbeJBr/GOHrLKuwFeg==
+ b=b3mLbMwxAcpwIuQZHaoh6bg06Elf3ZT7a/fPHmgKIunXkCXVEeY/dKF1s6elXX4ysb5VMKJDsVAdmSn0OhVkVDCwd+IuiX51y6UoG+5KZfUnYV3WT3tjhKOKiKxOYtXQ0LGltLSiaaBm0QHmwCA/CNYCbNtJK1cwC3iIkbjs5+wcoyNr14UvJ+ffXZqZsGOsi7cVosvb/IIUARyfSbphngiNS305FrKJ+FSSnDrddkMUAa5/0oxqTq8JbfnHilb9oxpDnTF7S6U4MYeRSMJjAaTSyvNDqxkT4QihDHgwgqMSxr2e75AX82yYLHOjToYSP71tI35wvBT+tuknHpUF5A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1MUubPn8Vwssi86CUDg9oJURDLWCW1lqV2zisTjO2sI=;
- b=H0BH/evT/xWHaYFwf+GPyZcGQAkESAHGPlZbwVVsaY4ALZwVNMXEkO26TeRqNksMqtvcgr574Qu+wuuAh2urGvyeg1p6123jSOdRbkb7b+xNud1txTFgQWSiMyPtw9ZwgAG+m8Tp7vTsu7PXPor2/BUqa0y63xYBvq5f44FZqT0UfpfyBjyZsBFOehQ1+4h64iN8tV/5MDA3DJkyRiek5t6WEx8vRBxTSW0pIsBa809Ue7+HAXa+bBveVhFJ4AJCSghkGG9U9lWvhZL64UaHeKnEENS/w8WcX7Sy7pmGhbFozl3RePwk2KscPZ6N1/i3HdVlE29yDgtLwoYH9VLlcg==
+ bh=ji3OEKhwUqIsvsQcUzde40pnng7Ln2JAoUedRd8HgV0=;
+ b=K7sLxoFjcgA0gq5hmVMlDdQYNQB2eq+pDhWErjl+O28pi1zevh7iUOAEmdSAWLc/O1XSAr0GCwpstO/ueRk8vgwnMEY6v2fF7Jao+qIXaaj/ArSBd3X6l0hG5WUEKdVwJwiFnzFcNTrzjyxkKH7e7deJOY2vcXCkof2EUimMOIQEDnczX00joIC8fgYo1pig5BfQ55pmXkyVRHCHbuAaeEGhlj3+HnH4Vtzf/sQwQ23aGZ0qGxHdseLae5IIZuYBrtFCny5rngqOTK1NM16jLPahfy+6VaQkV4DLgz+VFZ6KPDNJnhq3ageHGYx6aOI4uvZpDzXTAftykLQZcy5waQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1MUubPn8Vwssi86CUDg9oJURDLWCW1lqV2zisTjO2sI=;
- b=TWXaRLyidBiggDsezc5YePJBZT8grBd/IR5vGj9FGhs08CE3CntqPlT44wHixjW8irb11xqlkug6GqjBF1lOCPgehy5TJmdPmv4fqAD5nBFI9hLoTa0jumZRR4zfCSCErzvk2PfBzKdg16QEdsxQ4wClDIRlE/J6mkyBTQtPJdsXl20Lh1eDxk3+CgGsqn5t37eXat3H8L0P6SJG8F+mEDkThW+BJ+JJyNqBZJ/0GLdqogyKuj7xHQIWk6AIypV6huzu9qSW0mvynFDmGD8toue6y1vft1Fg/+O23LfS2eIPyG61seXk9vllrAobMB/tzNaFdLUIzzmc9t5nUuCSUw==
+ bh=ji3OEKhwUqIsvsQcUzde40pnng7Ln2JAoUedRd8HgV0=;
+ b=tnhcQLYLEIZqwBSFZK4kppbLmW+jSA8PtnCAoZJqLJqQuogCzY8iMbM4ttx+gZGMm9mXnzvedAMnznkibDlIc7N0SgZt2vI9r8SVDnCybUqL8OOStdwRx1CSr7S2nQRX86c8GH30hERENekUk9H+82KAED/lg77ohDVEqcYy6dbgmo/dZ+4Y/Li3pZDwFCEy8wMG6p25XKTJuQxurP7OWhZp7TLO7Hfw5LY4rDjxcuy8O+P0jnJPTL9yXLpzRqboddd+f4DT0LStbXC28WCbjKSXNoxMwVZ3bf8Bu0EBvLiYOrpXkDB1kchLpjHZFci12TwLu7QCKqVqNmx+aNJlkg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <24060b1d-fa13-47a5-9bb5-e431b1ea7afc@suse.com>
-Date: Tue, 28 Nov 2023 12:06:30 +0100
+Message-ID: <9cad2c92-c0be-464b-b59c-7dd72d3090a6@suse.com>
+Date: Tue, 28 Nov 2023 12:07:18 +0100
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v3 2/6] x86emul: support CMPccXADD
+Subject: [PATCH v3 3/6] VMX: tertiary execution control infrastructure
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>
 References: <e13004ac-22af-411e-a5d0-907a2a0301c5@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -107,368 +108,290 @@ X-ClientProxiedBy: FR0P281CA0192.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|PA4PR04MB7517:EE_
-X-MS-Office365-Filtering-Correlation-Id: 44f5ca90-aaac-406d-adc9-08dbf002135d
+X-MS-Office365-Filtering-Correlation-Id: 160e6a0d-57f7-47d9-df93-08dbf0023022
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	NaJ1H1/2a4EjgHVMrjOl0v13g7kRuUwkyBBvjbCiKCpD+l2vJxq+Anb4Yw1JVMmzDoNpJsmSRStHKGT0YDYhxFkQIFYiRsxlpjRMvXYBZFVw938r+hGzhqjuM0LMDt9XtmihuWUkZ6PtikT1l5itNgDBULyLrH9Ogi4352k2qq7u/7ELFKMEnm8m9dcbWl4nggbm7FvOObimy8FhoviSaTwPF2O6RY49lcRbNgPWf8h1TV6nemUyysrdhnK5YDdpH4RlXLhwCVBALF2eThTPdi/X/qcbVOWredb7zSwuO1/VOQtbvHUzBgtdBlckJ3Nxqjf2CyT4kPjjtk+/Sbn9BOZQcYlfFlo5GgbPYemjbggx/g8dzQWMrVlBh48mJSf25p7utpZLuBuEh+L9uqDbrC2F7vBQC0m/OdtnTnhGKpkgaPiRozocmk/mC2qwbc2bMS4zB0MNSLrk7YFQDwVYDOY3U0rdPhJiITgpjeOm6d8F+ulb0NWa/tWSagtgmrVg1pcuOjaCouZ8A4tYUuVL/87nVznpzFyPrxk66kJZPfkJe4tBTwvxCQjbUVNygo2TYee75C22vQZ3sQ5fl/PRz7DuPQArFAbhveQwS7U/jw5p9xZn+wHeAME4k6nRotn0bQqOTwcwtI+7XspT+tUxnA==
+	nwFQEfzR/z3qPTFdApbcnHI89UsFXiamivXOTl6XAG1+2WMvL5PB0NZhjG6vII/LRzc5bc7I+7EhGRV6revMqyRHTkdhgg1mtQT7kDyk+xkcmsSgx1hPdT2ZcWXb0lnwDyPtCdym+LDzLe0rTETGtMI3wUHN5PRWxTTWr0bFOS5zqCneDeAupVO9sbqitvC0gp992TiQrF8s9BibuVgL0BpjOjWGEjOwJGPvMQqno0qBPON92QtOvssZEKEhY8aZ7eXATmgxl5lISjpIjncyj0IY2mBHRZXW7r+q1Um7dYC52dB7b/41gwZ/cixYlWK2p2eH6WVFnIC1PGJMrciy0GgsZjTvZwLG0FX3utlNE5eqL2wVstNTq8bBIJ3PAEKd//M2TWrdUxOLLdelzKBzLxYKITuacAjj3g7SFdCFzXc3yGHTKYYYs82ZHRGyMfuXsbIWUmjcYl3EYjMKUAay8yawB9djMFtS2q3iFC8k+t5J8XLo7TeWU+7oeKRPWcs57FzxFfVwkIcYk/JHgFpiHHh7CWRGjTFxmc8V3UCauBRxhmgZh0XO5qwHJcOnGes2gpvW8q5Uv6eB3J9/hPlEj/QimD39oKg6Ml2CiaXYP2f4/GrAYXvhBM6FThNjXwu0co4iliPTWnJ0lnGbZszl/w==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(136003)(366004)(396003)(39860400002)(346002)(230922051799003)(186009)(64100799003)(1800799012)(451199024)(86362001)(31696002)(83380400001)(66574015)(26005)(6506007)(6512007)(2616005)(31686004)(36756003)(38100700002)(478600001)(66556008)(66946007)(66476007)(6916009)(4326008)(6486002)(8936002)(8676002)(5660300002)(2906002)(30864003)(41300700001)(316002)(54906003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(136003)(366004)(396003)(39860400002)(346002)(230922051799003)(186009)(64100799003)(1800799012)(451199024)(86362001)(31696002)(83380400001)(26005)(6506007)(6512007)(2616005)(31686004)(36756003)(38100700002)(478600001)(66556008)(66946007)(66476007)(6916009)(4326008)(6486002)(8936002)(8676002)(5660300002)(2906002)(41300700001)(316002)(54906003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MFR3VVBxRlNCSEFZdUs4ZTJXK1BwTDZvbHZucWZtcHpLNzdNTjYyOTA0UmNw?=
- =?utf-8?B?elNyNE1iVklLdGlQeGZWcDFXU1RLaE1mUkQ5TEZVQ2htelg3TzNFdGNwcEs1?=
- =?utf-8?B?NW92eXZqbjFXdGJSSFVhc0oranlPcDdjeDdlRjRrcEJDdmJGa0JZTjAwc0pE?=
- =?utf-8?B?ZFJPTHA0VUNYQmZTNDdUTkZnTXp2L0NKTGhrbzhSUXRzY2tNSFJSY1RnWTBs?=
- =?utf-8?B?YUlkNFYzclVYNzJBckRIL2lJMGtyUGJ4MEFCSlVYODVJTnljaEJPSFFqRWtZ?=
- =?utf-8?B?a0ZnWHphdmpCd2pXSnZrOHo5RG0rMGNSRUVOZkh5bXBYRWJOK1Zab0xsV0F4?=
- =?utf-8?B?SGttQm0vSzlIUnY4QjlIKzB2UTdEWW1sRGlVZHlvdGFXT2hWYk13dlNtZnAx?=
- =?utf-8?B?RmtFTzRTbDBORWN1NHo1UEkvYVJQdHpYeU53eHdnOFFkR0ZUSExsaWlvOHlV?=
- =?utf-8?B?ZDJGYWVJZlg0NzZOL1dkaTgzR0hwT1dCZGVBK0x4WHZ5bUhKMVpQcThOVGl5?=
- =?utf-8?B?VnllaEkwRTFFMkoxM3N0TFRWZVBNVjhYWENCVnYxT3UvaUNQUWZUYUpHWE9m?=
- =?utf-8?B?ZVhCcnp1WFN3dFl4VnJCTkZGVHBlNXJ6M0NnMkhmQ1BMeXkrTUYzWDBpL1Vj?=
- =?utf-8?B?UWFlaU5VVXdrdVI2M1l3b1dHdUZqWS9XeEZ2dFh5c2hHSWNmN0tzcEd0NVNI?=
- =?utf-8?B?dWhLckZrbXRLbDhqRTFFRk9xSWFDQ00vZ3loaWF4TzQ4TzNrdkxkaWsxcTM4?=
- =?utf-8?B?VjByaU8vY0gwSnFXRmxSTnBPdVVqb0oyaDBMd0FodldQeCtTRFNUZ1YremJ6?=
- =?utf-8?B?Yy8vbmg3b0VyYUxpNGY3SzlVaVBSVUFFWHJtcXFIRUlmdnRhbC9jNGdDZlky?=
- =?utf-8?B?Wk5GTjk2Rmt0cVJyQTJhS0JJTWJrdGF3SlIwT000MExOcXJqUER4VEJyMWoy?=
- =?utf-8?B?WmdRbjVDazZTNEFCdGMzMy9EcUpVV0VFM0g2NG92MHd3RUROOTNpNldOMDFq?=
- =?utf-8?B?MWlHYWRpeTIzZU9jVlhGclRUZnloUTZkVllnWW5MN25KZVFFUTU5NlR0Y2FY?=
- =?utf-8?B?OWxlWmNLSEhNTXprVU51K011TXNjRHV3a3pqbmdRNW9MaGpJMWR3Q3NTbTVr?=
- =?utf-8?B?ZTlEWWlkWThYbTlEbmRkeFljWFczQU1FeEFzMlZ4S2NZQUdhR0VFcDFPZ015?=
- =?utf-8?B?dm5EZ2YyVHdZdWpjQnpQYzBTWnczOS81T3k3OUdiY1RycHlpZ0x1R2RXWTNH?=
- =?utf-8?B?UFVRaS9RM3VBeXpydVIvdGV1T3c0NmEwOFdvVm9laTJvYzZQazFoOGN1RlVH?=
- =?utf-8?B?YnlXVDVmeCtsbVlFNUFTZzJqOWk1ZElDV3ZnTEYrWWFWdVU2aFNaYUlLdXNt?=
- =?utf-8?B?dkZnMnFlVDdsT0M0TUJ2amdkZHhmYnROcjNVUXJraW52Mzd3Y01oK2lhOVhM?=
- =?utf-8?B?cmxGQWo5YTZUemRxb3JMWDlHWVUwUzhVa3lodmc3c1BHSWNWbWJlZExxaCt2?=
- =?utf-8?B?TTNLVzJldVEzWHZWZVZZYUhwcEduZGZMZEUwTGUrKzkrczUvMndEUUNVUGVW?=
- =?utf-8?B?MGpmQndWaHNBbDA5WktXMHQ5Mlo4d2FyWWxpbE00RkduS0tXdGcyNzZWbnFt?=
- =?utf-8?B?aE4yTE9tbk10Y2lrNTRGaWl1T0FscndVUndyU2lSeEtjQW9kbENwRUxRS09k?=
- =?utf-8?B?RVZzM2FyeUVwYTgzL2ZySDRrYmZncW83bWlSdXRja0VrWjQ0c3VVNW5ZLzFa?=
- =?utf-8?B?YTJCa3hGUXRxMVdmZ214WjRrTlhIRVprV0VBK1BPQzVZc0d0dTEwc2JhUE02?=
- =?utf-8?B?ZGRCaGdTelVKWFUwUkpZRHh3VjgrZ045RzQxL21ERGt3NE1XQlNuU3NxZk9I?=
- =?utf-8?B?S2lEd1JUdzM2M25jL0NHdTlRY0lVWUdYWkNQT09mNC91UjA4ZDNHYWFhR2Zk?=
- =?utf-8?B?Rk5xNnYycWEraEI4Y3dxY3R4TkZxOWtOaFpMT2FjTTFDNFNRNjQ5WWRBME9o?=
- =?utf-8?B?K0JkVWpwaFNBb0RTSmxHZFV0MHpmdTE4RS9oZldlVWhCRGtMNGJ2MHU4Z3Fm?=
- =?utf-8?B?cVRwOEllVWhmN2hWSGtnWEdJVWk0eGpvVkVCTEpqUm9WZE9EQ01zaXlqeGx3?=
- =?utf-8?Q?c+cD8P6OPgbFo6KVlwa2MWQ3v?=
+	=?utf-8?B?UlNpaCtDWGhuODRINEFXTktRTkh3YTB5ektXUTBpQnRkbHExazdtVHF1UW41?=
+ =?utf-8?B?OWlzNDZBWDRyQ09XUWUwbUV5TmpuYXJYaDZPc2s4VlkyRWxzZ3g5bFNwOGVt?=
+ =?utf-8?B?azJZdVlDdGU4TjBCWGZLUmJveTRIMXB1YUNSdjJvOVRQeGZPWjIyUHpNRTA0?=
+ =?utf-8?B?UEN2U000L3JpaEI3T24yU3J6a3JFRW9ZckdpK05FR09UaDdScG5iQVl5Qnpq?=
+ =?utf-8?B?b2x4cEcwRVh2Skc1R1NRNjNnVStJWndDRVBmYjYvSWdKZGo5RHlHZ3VaSDFU?=
+ =?utf-8?B?Q3RBU3ppNDB2TnBQSWlPMHJoQ05uTG5tamRjc3d4c0hHSGZBUEJ1MU1jRjFM?=
+ =?utf-8?B?eFlleWd3a3R6WjFhOFRPR3VYU3lNL3RSYWJ4YWhrNVc5NS9oR3pqY1RDTjNP?=
+ =?utf-8?B?ZjA3ZnZ6RlFRbFZhZmNpQkVuUjVXaXpWT1lIcG4rblBia2ZKZGdxM3AxZkE0?=
+ =?utf-8?B?a0srWUp3RHc5YjBWaFUvek10WUVLM2srMnBmaU5ZS2Z4QkMyeXVrd21oc2xq?=
+ =?utf-8?B?NzZBNU0zZVdJSWtMTXdOK2JaV0EvVWZoMlJaOHpDKzlucVd2NmtOeERPeERT?=
+ =?utf-8?B?Vndna1hHN25sL2FUc3F2ZFhwTiswTzQyRitBR0ZZZ1NLOUE5UFRHcFozc0NC?=
+ =?utf-8?B?Nmp0Y1E3QlJtWDJNWFFSaUEySEorWDlQUjBKWE04ZXNiRDRpV2lsTVlUTUNw?=
+ =?utf-8?B?Ujk0Smw5cVBuTmk2RHF4Vm5vSFIrLzcwRkF1NXhDT3RPWkIrR2p1NlFobWJa?=
+ =?utf-8?B?UDhxVUl1K1BDUXRmVThoZWxybFNrc2ZiRmJVdlZxMmljbTlGZEZwMG1DUWtB?=
+ =?utf-8?B?KzB6MEVrVmViODVxcGxDNDNiTlU4NmpKMTRvRVZpYlRySjBUL25yS1R3WDV5?=
+ =?utf-8?B?VjRLN3poTGVZVnFwYXEvMHJnWnVVMW5MbkRRQmdqMUlnSVhUYVc2V0FPbGh5?=
+ =?utf-8?B?K2JDRFlHelBsaktKMWlRdEZqZ0tPM1hSbVVrZEt3eTVKS0tqR1RvZDNadldQ?=
+ =?utf-8?B?UGUrNW5MYTYrbGxFYjR3SjFHWkgrRTB1Z2JJNG9TZHowZlEzRHhRbmJBeXUv?=
+ =?utf-8?B?TzlCWFVSNFhQeDhaTHZwS0xKUWR4US9mU0FjNlZ5bmlVWk9Zd1V2eHpXLy90?=
+ =?utf-8?B?c09rVVVDM2Y2UnozaUdWWjI1aloxTWtkTmR2dlhURnhSOU03bVZwaHlncnQ5?=
+ =?utf-8?B?aDFVOFFFSVdVN3lWSmN1TFFyMEpHdWFIbjlCV3JyZmNGSDVKWE95THJzR0Ji?=
+ =?utf-8?B?dFh4b1VHSHozVzJmc2dWY3IvTVhMY3NmRVBUZVZHbEZKSHk4eEE2YStxd1M2?=
+ =?utf-8?B?M0ltSlZDRUdubVNWbW9sVHlzOXRYNThDME05aU4zVFJoZ0VUMWtqSzU3Z1lJ?=
+ =?utf-8?B?d1luaUJ6d09Ibzd2Ull5amZCcjVRZjBnZVhwZ0NuaVJUb0M2VGlpOVJpZHk1?=
+ =?utf-8?B?TlV1bGxxM05ReHJRYWJhRjRRSFE5czBQSU9tbmc4VzhhSFFpUURmWWRhdkE5?=
+ =?utf-8?B?MWVybkpFdW55UXl6OFZnc1JhMXVwZHRlVjgyNUZhZnRvbzJkWUJ3MkJCejBa?=
+ =?utf-8?B?OVNwd0FhcHpQNzlHN3NQSzUzNTBwc2lzc1VibUJSTmZRcTBXMmtkU3JrS25H?=
+ =?utf-8?B?NVVxK1JtclMwdzl4QXJmYVZxU05WWWtaRjJlWnY2L1huMUZpZldCUnNwVmc0?=
+ =?utf-8?B?VjVmMzBicGNBS24rNWRidVcvMzJ1K0ZsQlRyT2Zqa2FQTHdiOVkzeGlkOW44?=
+ =?utf-8?B?UzJRUnNKdXpENzdwMXhqcFhQWDh6QlAwUjNIRHozeSt2bGx0M3h2TWJoZEU3?=
+ =?utf-8?B?alVsWGVCZkc5MDNocUxHbTdCcDJhSkV5Z1NwSzVoM3ExaEhadzZ5NFI1UDBl?=
+ =?utf-8?B?eWFuTTdHR211dG5VREpTUUZtYlIzKytlTkpCdGdTMFUxbzROcHpSRVBIODhC?=
+ =?utf-8?B?ZFFxeENjY0VrdGhpTUFVZHowVVZFdzUyRWk1T3dWOWhxcytrdXFteFBQNDZy?=
+ =?utf-8?B?UXdCcnN0aDFPNEdSc2U3UEloaUF5c1hJQ3dSWXhzZDhITUNpaDU5TzlkeUxC?=
+ =?utf-8?B?bGpGQUo3bUdWc2xnYXBCMXZLWEVjaXRDdzdDN2lWdFprVHhKempGYlBJZThq?=
+ =?utf-8?Q?kNXiCJL01pQ//fwOv20of9Sk0?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44f5ca90-aaac-406d-adc9-08dbf002135d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 160e6a0d-57f7-47d9-df93-08dbf0023022
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2023 11:06:30.9534
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2023 11:07:19.2055
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fsWsY5O3s/uanTybo9ufWPOZ6FteTrzkjacxdzpy4A48vTFdIirIIVkX+70nwtZgOb3RVc0u+DkYuCIwwHtAGw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7ixvSWC6q4U1bdy9m91Eq+KqFpIVI4CnnVxMdEe2NvycnYCePvKbUU22TaOy8WgVm5E3SzuAZDc8Xk3Ww0wKIA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7517
 
-Unconditionally wire this through the ->rmw() hook. Since x86_emul_rmw()
-now wants to construct and invoke a stub, make stub_exn available to it
-via a new field in the emulator state structure.
+This is a prereq to enabling the MSRLIST feature.
+
+Note that the PROCBASED_CTLS3 MSR is different from other VMX feature
+reporting MSRs, in that all 64 bits report allowed 1-settings.
+
+vVMX code is left alone, though, for the time being.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-v3: Add dependency on LM. Re-base.
-v2: Use X86_EXC_*. Move past introduction of stub_exn in struct
-    x86_emulate_state. Keep feature at just "a" for now.
----
-SDE: -grr or -srf
+v2: New.
 
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -186,6 +186,7 @@ static const char *const str_7d0[32] =
- static const char *const str_7a1[32] =
- {
-     [ 4] = "avx-vnni",      [ 5] = "avx512-bf16",
-+    /* 6 */                 [ 7] = "cmpccxadd",
- 
-     [10] = "fzrm",          [11] = "fsrs",
-     [12] = "fsrcs",
---- a/tools/tests/x86_emulator/predicates.c
-+++ b/tools/tests/x86_emulator/predicates.c
-@@ -1403,6 +1403,22 @@ static const struct vex {
-     { { 0xdd }, 2, T, R, pfx_66, WIG, Ln }, /* vaesenclast */
-     { { 0xde }, 2, T, R, pfx_66, WIG, Ln }, /* vaesdec */
-     { { 0xdf }, 2, T, R, pfx_66, WIG, Ln }, /* vaesdeclast */
-+    { { 0xe0 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpoxadd */
-+    { { 0xe1 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpnoxadd */
-+    { { 0xe2 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpbxadd */
-+    { { 0xe3 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpnbxadd */
-+    { { 0xe4 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpexadd */
-+    { { 0xe5 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpnexadd */
-+    { { 0xe6 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpbexadd */
-+    { { 0xe7 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpaxadd */
-+    { { 0xe8 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpsxadd */
-+    { { 0xe9 }, 2, F, W, pfx_66, Wn, L0 }, /* cmpnsxadd */
-+    { { 0xea }, 2, F, W, pfx_66, Wn, L0 }, /* cmppxadd */
-+    { { 0xeb }, 2, F, W, pfx_66, Wn, L0 }, /* cmpnpxadd */
-+    { { 0xec }, 2, F, W, pfx_66, Wn, L0 }, /* cmplxadd */
-+    { { 0xed }, 2, F, W, pfx_66, Wn, L0 }, /* cmpgexadd */
-+    { { 0xee }, 2, F, W, pfx_66, Wn, L0 }, /* cmplexadd */
-+    { { 0xef }, 2, F, W, pfx_66, Wn, L0 }, /* cmpgxadd */
-     { { 0xf2 }, 2, T, R, pfx_no, Wn, L0 }, /* andn */
-     { { 0xf3, 0x08 }, 2, T, R, pfx_no, Wn, L0 }, /* blsr */
-     { { 0xf3, 0x10 }, 2, T, R, pfx_no, Wn, L0 }, /* blsmsk */
---- a/tools/tests/x86_emulator/test_x86_emulator.c
-+++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -1412,6 +1412,78 @@ int main(int argc, char **argv)
-     }
-     printf("okay\n");
- 
-+    printf("%-40s", "Testing cmpbxadd %rbx,%r9,(%rdx)...");
-+    if ( stack_exec && cpu_has_cmpccxadd )
-+    {
-+        instr[0] = 0xc4; instr[1] = 0x62; instr[2] = 0xe1; instr[3] = 0xe2; instr[4] = 0x0a;
-+        regs.rip = (unsigned long)&instr[0];
-+        regs.eflags = EFLAGS_ALWAYS_SET;
-+        res[0] = 0x11223344;
-+        res[1] = 0x01020304;
-+        regs.rdx = (unsigned long)res;
-+        regs.r9  = 0x0001020300112233UL;
-+        regs.rbx = 0x0101010101010101UL;
-+        rc = x86_emulate(&ctxt, &emulops);
-+        if ( (rc != X86EMUL_OKAY) ||
-+             (regs.eip != (unsigned long)&instr[5]) ||
-+             (regs.r9 != 0x0102030411223344UL) ||
-+             (regs.rbx != 0x0101010101010101UL) ||
-+             ((regs.eflags & EFLAGS_MASK) !=
-+              (X86_EFLAGS_PF | EFLAGS_ALWAYS_SET)) ||
-+             (res[0] != 0x11223344) ||
-+             (res[1] != 0x01020304) )
-+            goto fail;
-+
-+        regs.rip = (unsigned long)&instr[0];
-+        regs.r9 <<= 8;
-+        rc = x86_emulate(&ctxt, &emulops);
-+        if ( (rc != X86EMUL_OKAY) ||
-+             (regs.eip != (unsigned long)&instr[5]) ||
-+             (regs.r9 != 0x0102030411223344UL) ||
-+             (regs.rbx != 0x0101010101010101UL) ||
-+             ((regs.eflags & EFLAGS_MASK) !=
-+              (X86_EFLAGS_CF | X86_EFLAGS_PF | X86_EFLAGS_SF |
-+               EFLAGS_ALWAYS_SET)) ||
-+             (res[0] != 0x12233445) ||
-+             (res[1] != 0x02030405) )
-+            goto fail;
-+        printf("okay\n");
-+
-+        printf("%-40s", "Testing cmpsxadd %r9d,%ebx,4(%r10)...");
-+        instr[1] = 0xc2; instr[2] = 0x31; instr[3] = 0xe8; instr[4] = 0x5a; instr[5] = 0x04;
-+        regs.rip = (unsigned long)&instr[0];
-+        res[2] = res[0] = ~0;
-+        regs.r10 = (unsigned long)res;
-+        rc = x86_emulate(&ctxt, &emulops);
-+        if ( (rc != X86EMUL_OKAY) ||
-+             (regs.eip != (unsigned long)&instr[6]) ||
-+             (regs.r9 != 0x0102030411223344UL) ||
-+             (regs.rbx != 0x02030405) ||
-+             ((regs.eflags & EFLAGS_MASK) != EFLAGS_ALWAYS_SET) ||
-+             (res[0] + 1) ||
-+             (res[1] != 0x02030405) ||
-+             (res[2] + 1) )
-+            goto fail;
-+
-+        regs.rip = (unsigned long)&instr[0];
-+        regs.rbx <<= 8;
-+        rc = x86_emulate(&ctxt, &emulops);
-+        if ( (rc != X86EMUL_OKAY) ||
-+             (regs.eip != (unsigned long)&instr[6]) ||
-+             (regs.r9 != 0x0102030411223344UL) ||
-+             (regs.rbx != 0x02030405) ||
-+             ((regs.eflags & EFLAGS_MASK) !=
-+              (X86_EFLAGS_CF | X86_EFLAGS_PF | X86_EFLAGS_SF |
-+               EFLAGS_ALWAYS_SET)) ||
-+             (res[0] + 1) ||
-+             (res[1] != 0x13253749) ||
-+             (res[2] + 1) )
-+            goto fail;
-+        printf("okay\n");
-+    }
-+    else
-+        printf("skipped\n");
-+
-     emulops.write_segment = write_segment;
-     emulops.write_msr     = write_msr;
- 
---- a/tools/tests/x86_emulator/x86-emulate.h
-+++ b/tools/tests/x86_emulator/x86-emulate.h
-@@ -178,6 +178,7 @@ void wrpkru(unsigned int val);
- #define cpu_has_avx512_fp16 (cp.feat.avx512_fp16 && xcr0_mask(0xe6))
- #define cpu_has_avx_vnni   (cp.feat.avx_vnni && xcr0_mask(6))
- #define cpu_has_avx512_bf16 (cp.feat.avx512_bf16 && xcr0_mask(0xe6))
-+#define cpu_has_cmpccxadd  cp.feat.cmpccxadd
- #define cpu_has_avx_ifma   (cp.feat.avx_ifma && xcr0_mask(6))
- #define cpu_has_avx_vnni_int8 (cp.feat.avx_vnni_int8 && xcr0_mask(6))
- #define cpu_has_avx_ne_convert (cp.feat.avx_ne_convert && xcr0_mask(6))
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -186,6 +186,7 @@ static inline bool boot_cpu_has(unsigned
- /* CPUID level 0x00000007:1.eax */
- #define cpu_has_avx_vnni        boot_cpu_has(X86_FEATURE_AVX_VNNI)
- #define cpu_has_avx512_bf16     boot_cpu_has(X86_FEATURE_AVX512_BF16)
-+#define cpu_has_cmpccxadd       boot_cpu_has(X86_FEATURE_CMPCCXADD)
- #define cpu_has_avx_ifma        boot_cpu_has(X86_FEATURE_AVX_IFMA)
- 
- /* CPUID level 0x00000007:1.edx */
---- a/xen/arch/x86/x86_emulate/decode.c
-+++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -439,6 +439,7 @@ static const struct ext0f38_table {
-     [0xd7] = { .simd_size = simd_scalar_vexw, .d8s = d8s_dq },
-     [0xdb] = { .simd_size = simd_packed_int, .two_op = 1 },
-     [0xdc ... 0xdf] = { .simd_size = simd_packed_int, .d8s = d8s_vl },
-+    [0xe0 ... 0xef] = { .to_mem = 1 },
-     [0xf0] = { .two_op = 1 },
-     [0xf1] = { .to_mem = 1, .two_op = 1 },
-     [0xf2 ... 0xf3] = {},
-@@ -931,6 +932,8 @@ decode_0f38(struct x86_emulate_state *s,
-             ctxt->opcode |= MASK_INSR(s->vex.pfx, X86EMUL_OPC_PFX_MASK);
-         break;
- 
-+    case X86EMUL_OPC_VEX_66(0, 0xe0) ...
-+         X86EMUL_OPC_VEX_66(0, 0xef): /* cmp<cc>xadd */
-     case X86EMUL_OPC_VEX(0, 0xf2):    /* andn */
-     case X86EMUL_OPC_VEX(0, 0xf3):    /* Grp 17 */
-     case X86EMUL_OPC_VEX(0, 0xf5):    /* bzhi */
---- a/xen/arch/x86/x86_emulate/private.h
-+++ b/xen/arch/x86/x86_emulate/private.h
-@@ -257,6 +257,7 @@ struct x86_emulate_state {
-         rmw_btc,
-         rmw_btr,
-         rmw_bts,
-+        rmw_cmpccxadd,
-         rmw_dec,
-         rmw_inc,
-         rmw_neg,
-@@ -589,6 +590,7 @@ amd_like(const struct x86_emulate_ctxt *
- #define vcpu_has_avx512_fp16() (ctxt->cpuid->feat.avx512_fp16)
- #define vcpu_has_avx_vnni()    (ctxt->cpuid->feat.avx_vnni)
- #define vcpu_has_avx512_bf16() (ctxt->cpuid->feat.avx512_bf16)
-+#define vcpu_has_cmpccxadd()   (ctxt->cpuid->feat.cmpccxadd)
- #define vcpu_has_lkgs()        (ctxt->cpuid->feat.lkgs)
- #define vcpu_has_wrmsrns()     (ctxt->cpuid->feat.wrmsrns)
- #define vcpu_has_avx_ifma()    (ctxt->cpuid->feat.avx_ifma)
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -6918,6 +6918,15 @@ x86_emulate(
- 
- #endif /* !X86EMUL_NO_SIMD */
- 
-+    case X86EMUL_OPC_VEX_66(0x0f38, 0xe0) ...
-+         X86EMUL_OPC_VEX_66(0x0f38, 0xef): /* cmp<cc>xadd r,r,m */
-+        generate_exception_if(!mode_64bit() || dst.type != OP_MEM || vex.l,
-+                              X86_EXC_UD);
-+        host_and_vcpu_must_have(cmpccxadd);
-+        fail_if(!ops->rmw);
-+        state->rmw = rmw_cmpccxadd;
-+        break;
-+
-     case X86EMUL_OPC(0x0f38, 0xf0): /* movbe m,r */
-     case X86EMUL_OPC(0x0f38, 0xf1): /* movbe r,m */
-         vcpu_must_have(movbe);
-@@ -8191,14 +8200,20 @@ x86_emulate(
-     {
-         ea.val = src.val;
-         op_bytes = dst.bytes;
-+        state->stub_exn = &stub_exn;
-         rc = ops->rmw(dst.mem.seg, dst.mem.off, dst.bytes, &_regs.eflags,
-                       state, ctxt);
-+#ifdef __XEN__
-+        if ( rc == X86EMUL_stub_failure )
-+            goto emulation_stub_failure;
-+#endif
-         if ( rc != X86EMUL_OKAY )
-             goto done;
- 
-         /* Some operations require a register to be written. */
-         switch ( state->rmw )
-         {
-+        case rmw_cmpccxadd:
-         case rmw_xchg:
-         case rmw_xadd:
-             switch ( dst.bytes )
-@@ -8473,6 +8488,7 @@ int x86_emul_rmw(
-     uint32_t *eflags,
-     struct x86_emulate_state *s,
-     struct x86_emulate_ctxt *ctxt)
-+#define stub_exn (*s->stub_exn) /* for invoke_stub() */
- {
-     unsigned long *dst = ptr;
- 
-@@ -8538,6 +8554,37 @@ int x86_emul_rmw(
- #undef BINOP
- #undef SHIFT
- 
-+#ifdef __x86_64__
-+    case rmw_cmpccxadd:
-+    {
-+        struct x86_emulate_stub stub = {};
-+        uint8_t *buf = get_stub(stub);
-+        typeof(s->vex) *pvex = container_of(buf + 1, typeof(s->vex),
-+                                            raw[0]);
-+        unsigned long dummy;
-+
-+        buf[0] = 0xc4;
-+        *pvex = s->vex;
-+        pvex->b = 1;
-+        pvex->r = 1;
-+        pvex->reg = 0xf; /* rAX */
-+        buf[3] = ctxt->opcode;
-+        buf[4] = 0x11; /* reg=rDX r/m=(%RCX) */
-+        buf[5] = 0xc3;
-+
-+        *eflags &= ~EFLAGS_MASK;
-+        invoke_stub("",
-+                    _POST_EFLAGS("[eflags]", "[mask]", "[tmp]"),
-+                    "+m" (*dst), "+d" (s->ea.val),
-+                    [tmp] "=&r" (dummy), [eflags] "+g" (*eflags)
-+                    : "a" (*decode_vex_gpr(s->vex.reg, ctxt->regs, ctxt)),
-+                      "c" (dst), [mask] "i" (EFLAGS_MASK));
-+
-+        put_stub(stub);
-+        break;
-+    }
-+#endif
-+
-     case rmw_not:
-         switch ( s->op_bytes )
-         {
-@@ -8633,7 +8680,13 @@ int x86_emul_rmw(
- #undef JCXZ
- 
-     return X86EMUL_OKAY;
-+
-+#if defined(__XEN__) && defined(__x86_64__)
-+ emulation_stub_failure:
-+    return X86EMUL_stub_failure;
-+#endif
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -164,6 +164,7 @@ static int cf_check parse_ept_param_runt
+ u32 vmx_pin_based_exec_control __read_mostly;
+ u32 vmx_cpu_based_exec_control __read_mostly;
+ u32 vmx_secondary_exec_control __read_mostly;
++uint64_t vmx_tertiary_exec_control __read_mostly;
+ u32 vmx_vmexit_control __read_mostly;
+ u32 vmx_vmentry_control __read_mostly;
+ u64 vmx_ept_vpid_cap __read_mostly;
+@@ -229,10 +230,32 @@ static u32 adjust_vmx_controls(
+     return ctl;
  }
-+#undef stub_exn
  
- static void __init __maybe_unused build_assertions(void)
+-static bool cap_check(const char *name, u32 expected, u32 saw)
++static uint64_t adjust_vmx_controls2(
++    const char *name, uint64_t ctl_min, uint64_t ctl_opt, unsigned int msr,
++    bool *mismatch)
++{
++    uint64_t vmx_msr, ctl = ctl_min | ctl_opt;
++
++    rdmsrl(msr, vmx_msr);
++
++    ctl &= vmx_msr; /* bit == 0 ==> must be zero */
++
++    /* Ensure minimum (required) set of control bits are supported. */
++    if ( ctl_min & ~ctl )
++    {
++        *mismatch = true;
++        printk("VMX: CPU%u has insufficient %s (%#lx; requires %#lx)\n",
++               smp_processor_id(), name, ctl, ctl_min);
++    }
++
++    return ctl;
++}
++
++static bool cap_check(
++    const char *name, unsigned long expected, unsigned long saw)
  {
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -279,6 +279,7 @@ XEN_CPUFEATURE(SSBD,          9*32+31) /
- /* Intel-defined CPU features, CPUID level 0x00000007:1.eax, word 10 */
- XEN_CPUFEATURE(AVX_VNNI,     10*32+ 4) /*A  AVX-VNNI Instructions */
- XEN_CPUFEATURE(AVX512_BF16,  10*32+ 5) /*A  AVX512 BFloat16 Instructions */
-+XEN_CPUFEATURE(CMPCCXADD,    10*32+ 7) /*a  CMPccXADD Instructions */
- XEN_CPUFEATURE(FZRM,         10*32+10) /*A  Fast Zero-length REP MOVSB */
- XEN_CPUFEATURE(FSRS,         10*32+11) /*A  Fast Short REP STOSB */
- XEN_CPUFEATURE(FSRCS,        10*32+12) /*A  Fast Short REP CMPSB/SCASB */
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -274,7 +274,7 @@ def crunch_numbers(state):
-         # superpages, PCID and PKU are only available in 4 level paging.
-         # NO_LMSL indicates the absense of Long Mode Segment Limits, which
-         # have been dropped in hardware.
--        LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, LKGS],
-+        LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, LKGS, CMPCCXADD],
+     if ( saw != expected )
+-        printk("VMX %s: saw %#x expected %#x\n", name, saw, expected);
++        printk("VMX %s: saw %#lx expected %#lx\n", name, saw, expected);
+     return saw != expected;
+ }
  
-         # AMD K6-2+ and K6-III processors shipped with 3DNow+, beyond the
-         # standard 3DNow in the earlier K6 processors.
+@@ -242,6 +265,7 @@ static int vmx_init_vmcs_config(bool bsp
+     u32 _vmx_pin_based_exec_control;
+     u32 _vmx_cpu_based_exec_control;
+     u32 _vmx_secondary_exec_control = 0;
++    uint64_t _vmx_tertiary_exec_control = 0;
+     u64 _vmx_ept_vpid_cap = 0;
+     u64 _vmx_misc_cap = 0;
+     u32 _vmx_vmexit_control;
+@@ -275,7 +299,8 @@ static int vmx_init_vmcs_config(bool bsp
+     opt = (CPU_BASED_ACTIVATE_MSR_BITMAP |
+            CPU_BASED_TPR_SHADOW |
+            CPU_BASED_MONITOR_TRAP_FLAG |
+-           CPU_BASED_ACTIVATE_SECONDARY_CONTROLS);
++           CPU_BASED_ACTIVATE_SECONDARY_CONTROLS |
++           CPU_BASED_ACTIVATE_TERTIARY_CONTROLS);
+     _vmx_cpu_based_exec_control = adjust_vmx_controls(
+         "CPU-Based Exec Control", min, opt,
+         MSR_IA32_VMX_PROCBASED_CTLS, &mismatch);
+@@ -339,6 +364,15 @@ static int vmx_init_vmcs_config(bool bsp
+             MSR_IA32_VMX_PROCBASED_CTLS2, &mismatch);
+     }
+ 
++    if ( _vmx_cpu_based_exec_control & CPU_BASED_ACTIVATE_TERTIARY_CONTROLS )
++    {
++        uint64_t opt = 0;
++
++        _vmx_tertiary_exec_control = adjust_vmx_controls2(
++            "Tertiary Exec Control", 0, opt,
++            MSR_IA32_VMX_PROCBASED_CTLS3, &mismatch);
++    }
++
+     /* The IA32_VMX_EPT_VPID_CAP MSR exists only when EPT or VPID available */
+     if ( _vmx_secondary_exec_control & (SECONDARY_EXEC_ENABLE_EPT |
+                                         SECONDARY_EXEC_ENABLE_VPID) )
+@@ -469,6 +503,7 @@ static int vmx_init_vmcs_config(bool bsp
+         vmx_pin_based_exec_control = _vmx_pin_based_exec_control;
+         vmx_cpu_based_exec_control = _vmx_cpu_based_exec_control;
+         vmx_secondary_exec_control = _vmx_secondary_exec_control;
++        vmx_tertiary_exec_control  = _vmx_tertiary_exec_control;
+         vmx_ept_vpid_cap           = _vmx_ept_vpid_cap;
+         vmx_vmexit_control         = _vmx_vmexit_control;
+         vmx_vmentry_control        = _vmx_vmentry_control;
+@@ -505,6 +540,9 @@ static int vmx_init_vmcs_config(bool bsp
+             "Secondary Exec Control",
+             vmx_secondary_exec_control, _vmx_secondary_exec_control);
+         mismatch |= cap_check(
++            "Tertiary Exec Control",
++            vmx_tertiary_exec_control, _vmx_tertiary_exec_control);
++        mismatch |= cap_check(
+             "VMExit Control",
+             vmx_vmexit_control, _vmx_vmexit_control);
+         mismatch |= cap_check(
+@@ -1082,6 +1120,7 @@ static int construct_vmcs(struct vcpu *v
+         v->arch.hvm.vmx.exec_control |= CPU_BASED_RDTSC_EXITING;
+ 
+     v->arch.hvm.vmx.secondary_exec_control = vmx_secondary_exec_control;
++    v->arch.hvm.vmx.tertiary_exec_control  = vmx_tertiary_exec_control;
+ 
+     /*
+      * Disable features which we don't want active by default:
+@@ -1136,6 +1175,10 @@ static int construct_vmcs(struct vcpu *v
+         __vmwrite(SECONDARY_VM_EXEC_CONTROL,
+                   v->arch.hvm.vmx.secondary_exec_control);
+ 
++    if ( cpu_has_vmx_tertiary_exec_control )
++        __vmwrite(TERTIARY_VM_EXEC_CONTROL,
++                  v->arch.hvm.vmx.tertiary_exec_control);
++
+     /* MSR access bitmap. */
+     if ( cpu_has_vmx_msr_bitmap )
+     {
+@@ -2070,10 +2113,12 @@ void vmcs_dump_vcpu(struct vcpu *v)
+                vmr(HOST_PERF_GLOBAL_CTRL));
+ 
+     printk("*** Control State ***\n");
+-    printk("PinBased=%08x CPUBased=%08x SecondaryExec=%08x\n",
++    printk("PinBased=%08x CPUBased=%08x\n",
+            vmr32(PIN_BASED_VM_EXEC_CONTROL),
+-           vmr32(CPU_BASED_VM_EXEC_CONTROL),
+-           vmr32(SECONDARY_VM_EXEC_CONTROL));
++           vmr32(CPU_BASED_VM_EXEC_CONTROL));
++    printk("SecondaryExec=%08x TertiaryExec=%08lx\n",
++           vmr32(SECONDARY_VM_EXEC_CONTROL),
++           vmr(TERTIARY_VM_EXEC_CONTROL));
+     printk("EntryControls=%08x ExitControls=%08x\n", vmentry_ctl, vmexit_ctl);
+     printk("ExceptionBitmap=%08x PFECmask=%08x PFECmatch=%08x\n",
+            vmr32(EXCEPTION_BITMAP),
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -760,6 +760,12 @@ void vmx_update_secondary_exec_control(s
+                   v->arch.hvm.vmx.secondary_exec_control);
+ }
+ 
++void vmx_update_tertiary_exec_control(struct vcpu *v)
++{
++    __vmwrite(TERTIARY_VM_EXEC_CONTROL,
++              v->arch.hvm.vmx.tertiary_exec_control);
++}
++
+ void vmx_update_exception_bitmap(struct vcpu *v)
+ {
+     u32 bitmap = unlikely(v->arch.hvm.vmx.vmx_realmode)
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+@@ -114,6 +114,7 @@ struct vmx_vcpu {
+     /* Cache of cpu execution control. */
+     u32                  exec_control;
+     u32                  secondary_exec_control;
++    uint64_t             tertiary_exec_control;
+     u32                  exception_bitmap;
+ 
+     uint64_t             shadow_gs;
+@@ -196,6 +197,7 @@ void vmx_vmcs_reload(struct vcpu *v);
+ #define CPU_BASED_RDTSC_EXITING               0x00001000U
+ #define CPU_BASED_CR3_LOAD_EXITING            0x00008000U
+ #define CPU_BASED_CR3_STORE_EXITING           0x00010000U
++#define CPU_BASED_ACTIVATE_TERTIARY_CONTROLS  0x00020000U
+ #define CPU_BASED_CR8_LOAD_EXITING            0x00080000U
+ #define CPU_BASED_CR8_STORE_EXITING           0x00100000U
+ #define CPU_BASED_TPR_SHADOW                  0x00200000U
+@@ -260,6 +262,13 @@ extern u32 vmx_vmentry_control;
+ #define SECONDARY_EXEC_NOTIFY_VM_EXITING        0x80000000U
+ extern u32 vmx_secondary_exec_control;
+ 
++#define TERTIARY_EXEC_LOADIWKEY_EXITING         BIT(0, UL)
++#define TERTIARY_EXEC_ENABLE_HLAT               BIT(1, UL)
++#define TERTIARY_EXEC_EPT_PAGING_WRITE          BIT(2, UL)
++#define TERTIARY_EXEC_GUEST_PAGING_VERIFY       BIT(3, UL)
++#define TERTIARY_EXEC_IPI_VIRT                  BIT(4, UL)
++extern uint64_t vmx_tertiary_exec_control;
++
+ #define VMX_EPT_EXEC_ONLY_SUPPORTED                         0x00000001
+ #define VMX_EPT_WALK_LENGTH_4_SUPPORTED                     0x00000040
+ #define VMX_EPT_MEMORY_TYPE_UC                              0x00000100
+@@ -295,6 +304,8 @@ extern u64 vmx_ept_vpid_cap;
+     (vmx_cpu_based_exec_control & CPU_BASED_ACTIVATE_MSR_BITMAP)
+ #define cpu_has_vmx_secondary_exec_control \
+     (vmx_cpu_based_exec_control & CPU_BASED_ACTIVATE_SECONDARY_CONTROLS)
++#define cpu_has_vmx_tertiary_exec_control \
++    (vmx_cpu_based_exec_control & CPU_BASED_ACTIVATE_TERTIARY_CONTROLS)
+ #define cpu_has_vmx_ept \
+     (vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_EPT)
+ #define cpu_has_vmx_dt_exiting \
+@@ -422,6 +433,7 @@ enum vmcs_field {
+     VIRT_EXCEPTION_INFO             = 0x0000202a,
+     XSS_EXIT_BITMAP                 = 0x0000202c,
+     TSC_MULTIPLIER                  = 0x00002032,
++    TERTIARY_VM_EXEC_CONTROL        = 0x00002034,
+     GUEST_PHYSICAL_ADDRESS          = 0x00002400,
+     VMCS_LINK_POINTER               = 0x00002800,
+     GUEST_IA32_DEBUGCTL             = 0x00002802,
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+@@ -81,6 +81,7 @@ void vmx_realmode(struct cpu_user_regs *
+ void vmx_update_exception_bitmap(struct vcpu *v);
+ void vmx_update_cpu_exec_control(struct vcpu *v);
+ void vmx_update_secondary_exec_control(struct vcpu *v);
++void vmx_update_tertiary_exec_control(struct vcpu *v);
+ 
+ #define POSTED_INTR_ON  0
+ #define POSTED_INTR_SN  1
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -347,6 +347,7 @@
+ #define MSR_IA32_VMX_TRUE_EXIT_CTLS             0x48f
+ #define MSR_IA32_VMX_TRUE_ENTRY_CTLS            0x490
+ #define MSR_IA32_VMX_VMFUNC                     0x491
++#define MSR_IA32_VMX_PROCBASED_CTLS3            0x492
+ 
+ /* K7/K8 MSRs. Not complete. See the architecture manual for a more
+    complete list. */
 
 
