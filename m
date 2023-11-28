@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A9D8C4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 09:22:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.642823.1002559 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44C2FC46CA3
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 09:22:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.642825.1002578 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7uIV-00058w-65; Tue, 28 Nov 2023 09:22:27 +0000
+	id 1r7uIW-0005cP-Kd; Tue, 28 Nov 2023 09:22:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 642823.1002559; Tue, 28 Nov 2023 09:22:27 +0000
+Received: by outflank-mailman (output) from mailman id 642825.1002578; Tue, 28 Nov 2023 09:22:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7uIV-00058p-24; Tue, 28 Nov 2023 09:22:27 +0000
-Received: by outflank-mailman (input) for mailman id 642823;
+	id 1r7uIW-0005cI-HU; Tue, 28 Nov 2023 09:22:28 +0000
+Received: by outflank-mailman (input) for mailman id 642825;
  Tue, 28 Nov 2023 09:22:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PT6c=HJ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r7uIU-0004tr-31
+ id 1r7uIU-0004tr-Kw
  for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 09:22:26 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a298e996-8dcf-11ee-9b0e-b553b5be7939;
- Tue, 28 Nov 2023 10:22:22 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-40b4e35ecf1so2105775e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Nov 2023 01:22:23 -0800 (PST)
+ id a3ccb24d-8dcf-11ee-9b0e-b553b5be7939;
+ Tue, 28 Nov 2023 10:22:24 +0100 (CET)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3316bb1303bso3233170f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Nov 2023 01:22:25 -0800 (PST)
 Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- e2-20020a5d4e82000000b0032d893d8dc8sm14402876wru.2.2023.11.28.01.22.21
+ b7-20020adfe307000000b00332fbf7ab21sm6834899wrj.60.2023.11.28.01.22.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Nov 2023 01:22:21 -0800 (PST)
+ Tue, 28 Nov 2023 01:22:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,66 +46,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a298e996-8dcf-11ee-9b0e-b553b5be7939
+X-Inumbo-ID: a3ccb24d-8dcf-11ee-9b0e-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1701163342; x=1701768142; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=OVPVkZGrv+VUn3HtwR4TYYwB/Q4YpaApBmzFLnCcK1Y=;
-        b=PUPRSiyRPatvWArvwpfsNEuU/kUWqNRet8UJs2nckGY1FEhOgOZjkhCZZp2OR93SEh
-         Xv2b3smUOsRqQ2IfrOd4EqRGCaUvv02I73dnXZAXM6qWn+fkKMloIm5mkS8aNmPBtzNF
-         7X+mGJ/7r0a9jfIYh5JXTtlTs+hCEJz9pQPcg=
+        d=citrix.com; s=google; t=1701163344; x=1701768144; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=h5HPry0cHVXYa7E65UlZUEhBkm420RlLl9/gqlG+ArQ=;
+        b=BKFwDsMvtefl2dhVlXZFUuughPuwhabDvJjl8vY5hQCWU3R+dHFu/GgCQ3iqn20iHz
+         xHYT9WQ617iOMTkRXDZp6cTauItHg7A33DRHiTnwAlF51qh+XKDYyH/4MrsK1j5pw07n
+         u2ikulgVxRh4P0D1IpNHlq0kG35r8Ht5H/dK0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701163342; x=1701768142;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=OVPVkZGrv+VUn3HtwR4TYYwB/Q4YpaApBmzFLnCcK1Y=;
-        b=Izjn5w2he/j2rs80QgMKaZrEMAbpIuLeiCF2Ec39+Pr0HNNlK8pAGmWhMfCUsW8Lw0
-         ARVlggtcOGRBfy3+AvejE3bsAcCoHYGbjBIxpgbVD1XSz2eec35PDTtr5rhN7RMyrsCN
-         ur3hpDB7/6vkkg37gLSBeGD2p7Cef6lCGyX8ztPU1vUfjV3DynZksTaigbypevur7e4O
-         FFSSmS4mYBz/c6PJ9+yJoY1+gOv9h/7Rk62/v5LtdW1608XgqJAG76pK7unyTjh/vkL5
-         QyD8RV7csAKQiWaMuth5pii2N4mF+xZ5lK/aQyW44Br7VJyDMV4pXRCKgt04ZtvkgG84
-         xwyg==
-X-Gm-Message-State: AOJu0Yys/yOqljc41VBJLqP4rq112bnWUKtxa6iNdP0FoxdKK6DwnVWH
-	Qkghtgm8lcvB6l2IT5Puz0hbYOIJAtCNfcC1e4Y=
-X-Google-Smtp-Source: AGHT+IFgqG6uz6XpkdKSy5uzjb6VIzryT1vCPg5oBEDNb9+R3vRxY4HVTvN69yuGTg7HwT39r6n61Q==
-X-Received: by 2002:a05:6000:1802:b0:332:cc15:6bae with SMTP id m2-20020a056000180200b00332cc156baemr9559311wrh.20.1701163341651;
-        Tue, 28 Nov 2023 01:22:21 -0800 (PST)
+        d=1e100.net; s=20230601; t=1701163344; x=1701768144;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=h5HPry0cHVXYa7E65UlZUEhBkm420RlLl9/gqlG+ArQ=;
+        b=gdIE698slba8G89/W7bDN1d2ykemlqLjeKlPLoz4d2NDWKpE7L8c9mGJCrohxbB6jD
+         sSvNv4qeYm4M/2RKR9DB2Hw4eZ7nc8GxlIckWeJFdLusgmJbbvNvcM+FU7oh3TYUC0XL
+         rLqc7tTqYxOEXKmEK5GAj9ImzXLIZxWSqAIq3lPtYXv4MN3Yts02FVKdwMBfiN7Pv8+H
+         UbYTDXNpUUeBVwgcX8vxKwpKyH1M0cZZnH6yl+2PYDqzrXDXzPim6J+asZMQsM8DIbJT
+         6L0PXO5xPEM5iKkZ11boC3mYqSgv8r7UlmJEbC3E5MMhrp4CWJwXzEi/WSPaKhY20ONm
+         dtiQ==
+X-Gm-Message-State: AOJu0YwEcNK+ChUOrn9wNc/40pwSTWDgZ1BUxw0HmVC9JOLc+42U7McD
+	9eFGn8DWTgtOktf+KHUJR5wIxmRzZ395XiUQXUk=
+X-Google-Smtp-Source: AGHT+IEQiMZYddsFFj7Vr/s1dpjiADp3UuvyPpdn8nKI0utkQ7+Yp9K9ye8K+CxyXt8skoTiuCjdFg==
+X-Received: by 2002:adf:f349:0:b0:333:ed:82ed with SMTP id e9-20020adff349000000b0033300ed82edmr4459304wrp.66.1701163343894;
+        Tue, 28 Nov 2023 01:22:23 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
 	Ross Lagerwall <ross.lagerwall@citrix.com>,
 	Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH v2 0/3] livepatch-build-tools: fixes for non GNU tools and alignment
-Date: Tue, 28 Nov 2023 10:21:49 +0100
-Message-ID: <20231128092152.35039-1-roger.pau@citrix.com>
+Subject: [PATCH v2 2/3] livepatch-build-tools: remove usage of gawk
+Date: Tue, 28 Nov 2023 10:21:51 +0100
+Message-ID: <20231128092152.35039-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231128092152.35039-1-roger.pau@citrix.com>
+References: <20231128092152.35039-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+And instead use plain awk.
 
-The series contains two fixes for using the tools on non GNU
-environments, plus one extra fix to account for section alignment when
-calculating old function size.
+Since plain awk cannot do the conversion from hex to decimal, use the shell
+(bash) printf to convert the (maybe) hexadecimal output of readelf.
 
-Thanks, Roger.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v1:
+ - Use shell printf to convert.
+---
+ livepatch-build | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Roger Pau Monne (3):
-  livepatch-build-tools: do not use readlink -m option
-  livepatch-build-tools: remove usage of gawk
-  livepatch-build-tools: account for section alignment when calculating
-    function size
-
- common.h             |  2 ++
- create-diff-object.c |  5 +++++
- livepatch-build      | 38 +++++++++++++++++++++-----------------
- 3 files changed, 28 insertions(+), 17 deletions(-)
-
-
-base-commit: e588b7914e7afa3abb64b15a32fc2fdb57ded341
+diff --git a/livepatch-build b/livepatch-build
+index 305644037ee7..e2ccce4f7fd7 100755
+--- a/livepatch-build
++++ b/livepatch-build
+@@ -423,14 +423,15 @@ if [ "${SKIP}" != "build" ]; then
+     echo "Reading special section data"
+     # Using xen-syms built in the previous step by build_full().
+     SPECIAL_VARS=$(readelf -wi "$OUTPUT/xen-syms" |
+-               gawk --non-decimal-data '
++               awk '
+                BEGIN { a = b = e = 0 }
+                a == 0 && /DW_AT_name.* alt_instr/ {a = 1; next}
+                b == 0 && /DW_AT_name.* bug_frame/ {b = 1; next}
+                e == 0 && /DW_AT_name.* exception_table_entry/ {e = 1; next}
+-               a == 1 {printf("export ALT_STRUCT_SIZE=%d\n", $4); a = 2}
+-               b == 1 {printf("export BUG_STRUCT_SIZE=%d\n", $4); b = 2}
+-               e == 1 {printf("export EX_STRUCT_SIZE=%d\n", $4); e = 2}
++               # Use shell printf to (possibly) convert from hex to decimal
++               a == 1 {printf("export ALT_STRUCT_SIZE=`printf \"%%d\" \"%s\"`\n", $4); a = 2}
++               b == 1 {printf("export BUG_STRUCT_SIZE=`printf \"%%d\" \"%s\"`\n", $4); b = 2}
++               e == 1 {printf("export EX_STRUCT_SIZE=`printf \"%%d\" \"%s\"`\n", $4); e = 2}
+                a == 2 && b == 2 && e == 2 {exit}')
+     [[ -n $SPECIAL_VARS ]] && eval "$SPECIAL_VARS"
+     if [[ -z $ALT_STRUCT_SIZE ]] || [[ -z $BUG_STRUCT_SIZE ]] || [[ -z $EX_STRUCT_SIZE ]]; then
 -- 
 2.43.0
 
