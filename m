@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2DBC4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 05:59:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.642695.1002398 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7468BC4167B
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 06:53:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.642742.1002408 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7r8N-0006HG-7t; Tue, 28 Nov 2023 05:59:47 +0000
+	id 1r7rxg-0006Mt-SS; Tue, 28 Nov 2023 06:52:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 642695.1002398; Tue, 28 Nov 2023 05:59:47 +0000
+Received: by outflank-mailman (output) from mailman id 642742.1002408; Tue, 28 Nov 2023 06:52:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7r8N-0006H9-3a; Tue, 28 Nov 2023 05:59:47 +0000
-Received: by outflank-mailman (input) for mailman id 642695;
- Tue, 28 Nov 2023 01:37:48 +0000
+	id 1r7rxg-0006Mm-PK; Tue, 28 Nov 2023 06:52:48 +0000
+Received: by outflank-mailman (input) for mailman id 642742;
+ Tue, 28 Nov 2023 06:52:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2PfH=HJ=gmail.com=emelyvollmer@srs-se1.protection.inumbo.net>)
- id 1r7n2q-0008Bz-Fy
- for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 01:37:48 +0000
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [2607:f8b0:4864:20::32c])
+ <SRS0=g76+=HJ=linaro.org=dan.carpenter@srs-se1.protection.inumbo.net>)
+ id 1r7rxf-0006Mg-2h
+ for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 06:52:47 +0000
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [2a00:1450:4864:20::42c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bb90b01b-8d8e-11ee-98e3-6d05b1d4d9a1;
- Tue, 28 Nov 2023 02:37:47 +0100 (CET)
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6d30d9f4549so3084567a34.0
- for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 17:37:47 -0800 (PST)
+ id bc4de7a7-8dba-11ee-98e3-6d05b1d4d9a1;
+ Tue, 28 Nov 2023 07:52:46 +0100 (CET)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3330d64958aso228519f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Nov 2023 22:52:45 -0800 (PST)
+Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
+ f8-20020adff988000000b00332e75eae4asm12065652wrr.85.2023.11.27.22.52.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Nov 2023 22:52:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,124 +46,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb90b01b-8d8e-11ee-98e3-6d05b1d4d9a1
+X-Inumbo-ID: bc4de7a7-8dba-11ee-98e3-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701135466; x=1701740266; darn=lists.xenproject.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=Jy/oTCykTaM00e347CNwkHBaLS2CcP30AyMFVm4vGQw=;
-        b=InSl1ON5f3e/8hmVKKOXx9kaJy0fgY2JlS06URJdZD2pOpamGMU6kw10/fIX0ETU6m
-         dVIDay8Q8VvsFIwZtu9o9MvS9DEvUEhyqz+RIHpbwvdf01zqeoScACbNXIrAPQPQuFHh
-         FDVakPRmYH3XFbzSbkIrcyugRgsM/fMSVDmKAKvS59Rgomrct5JYrLGq6s4NKyV72C2M
-         t7shmzMlf4BC63cQpFP9HvlDjPkU3Zl2qlmKLTj5LgjDpRhuED2J2Opg7GMURxi+41pW
-         whaTF9j94pO1v1qNUYotQDcmwilRS974MZ0YrvSoqm1QIqEv66BVAmc/fur1/Z3tKaeE
-         xPFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701135466; x=1701740266;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+        d=linaro.org; s=google; t=1701154365; x=1701759165; darn=lists.xenproject.org;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=Jy/oTCykTaM00e347CNwkHBaLS2CcP30AyMFVm4vGQw=;
-        b=ao0TYGyz14XM1kB+2cNivb5GttXWGQxl1VMveU3fSlKpKZxmgr16kg1mZKNBZ7lKDt
-         2KNCa5bS7+0vs9mXE9m4aJHNhsx99v6iLC/UH3ReQNtGQmcQR+cf1x0enICIiwjazuZ2
-         OW98Qr1xAYOlvjE8Zs522JnjooonQekN+xubpmPWKHU9hJ9QCSoeG5xt02bX57N7SGKQ
-         FC64tLm2/9fqDxceyY7AkDMjUy7bX+O/rFY/wCtAPOZV/5OZba/9yx/wNyVlCnwa5cCr
-         ILciXKDy6DMiKWvXV1iTQXPBLAtgQ2dn94ZoUt6uwZ5KRh7xy+3e6K6JZPvaFB1YswcP
-         1M9w==
-X-Gm-Message-State: AOJu0Yw2+v7sawiizXj9M+TmIaF8Wd4g372Fd345MAn77529CFhEcqkx
-	rbBccPxw+th/eyuKfyCluzPDx6upk+WiCvfj84JggHki
-X-Google-Smtp-Source: AGHT+IEdvahee5qc9B66WkqTMMcEicKk+Fr+/x+6R+emAg1zM+NNzXz9qxS8FUlODbHrfA3PGtMd2eDYoKHZvvjHKOc=
-X-Received: by 2002:a05:6870:7021:b0:1f0:811a:324d with SMTP id
- u33-20020a056870702100b001f0811a324dmr15690215oae.51.1701135465895; Mon, 27
- Nov 2023 17:37:45 -0800 (PST)
+        bh=D3sn2wORbFiaGyfRVS1oXmiOhLph+AqLJL4TzSBHvg4=;
+        b=sGOETUYq5M3MbjbtRJ1Cpxd8rQBX0XHyF7/HIYkrh8PnNyZWgNGuKBVldU8rKFfYHR
+         SpdVmqEG6kJrJ07xTK/+ADmKSl7jgtCQYek5/aj9RJdn+hskIornBMCrR67QPZpbckrI
+         9hL28alf/wqImqob/bQu22DhkEPF7Y7zok4k6d63Ko/YzzdDc2cbWfzZ6ul5+LmD3ZqN
+         1TrLhN7q4TyWuvYi4PkGaTS3PKxWr/rx2mje+yoaju66tuYp3NZ5fWyUUcgUSWWA0I3x
+         nTtQqYYMCnzLEAoWPe/FEckwvetTiDYdJSXZfhkgLDt3UBErgD/J5y5w7HTFhtl+NDBW
+         IMNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701154365; x=1701759165;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=D3sn2wORbFiaGyfRVS1oXmiOhLph+AqLJL4TzSBHvg4=;
+        b=IiZGoHGWl4blJSMtYPShdZ+kMAaahMS+/C7G0uuvqiO+yZfK2rHpf1B52HhWh0Ow/O
+         e6M+bQgeybHo9QHQnrSnSVa6kWZq78lgNnSa91pUKscgxycqrj+2Q+k3821D2petzIBd
+         dLZ5LH+z85WJwFiN8zM7O6X77axjXzGU77fqC5FW2wMYHo2ZzSbmYb+h4VZR6LxuzwgA
+         hbv6D8jQPd9h7HBIXxS5bbji78m8Yo493KYay8oLKIVOiB4IpC84WK/T3zBa8jd1EQ6l
+         zmjySTTWXdGbb6KzFJiGOg8iU3g4HTPiBgWMZ/36Mj84pNca7jOwkUs7fr8pysmEMfhF
+         3GSA==
+X-Gm-Message-State: AOJu0YzIOqJctpPp/dUsB86EtUnH0lpMIvmCti+rbn7WpWAYWfFPbcb6
+	7XMTdJKhDlAfsoFFqXH3WVhEsQ==
+X-Google-Smtp-Source: AGHT+IGEUaFU4MSfpauTFFCq+x4ajOfRtDJqm1oTNru0X5DPLaYXn9F6bGF0vfjzYdULiiFEc3puDg==
+X-Received: by 2002:adf:fd48:0:b0:332:e9f7:9a99 with SMTP id h8-20020adffd48000000b00332e9f79a99mr9121683wrs.43.1701154365307;
+        Mon, 27 Nov 2023 22:52:45 -0800 (PST)
+Date: Tue, 28 Nov 2023 09:52:41 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Rahul Singh <rahul.singh@arm.com>,
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	xen-devel@lists.xenproject.org, kernel-janitors@vger.kernel.org
+Subject: [PATCH v2] xen/events: fix error code in xen_bind_pirq_msi_to_irq()
+Message-ID: <3b9ab040-a92e-4e35-b687-3a95890a9ace@moroto.mountain>
 MIME-Version: 1.0
-From: Emely Vollmer <emelyvollmer@gmail.com>
-Date: Tue, 28 Nov 2023 02:37:34 +0100
-Message-ID: <CAEe9NNQvj=2F_=teO7UvN7doA3gJMgJU_oHct6txTyTFTTCfEg@mail.gmail.com>
-Subject: Inquiry Regarding Usage of Xen Project Images for Private T-shirt Printing
-To: xen-devel@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="00000000000028e56e060b2c7743"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailer: git-send-email haha only kidding
 
---00000000000028e56e060b2c7743
-Content-Type: text/plain; charset="UTF-8"
+Return -ENOMEM if xen_irq_init() fails.  currently the code returns an
+uninitialized variable or zero.
 
-Dear Xen Project Team,
+Fixes: 5dd9ad32d775 ("xen/events: drop xen_allocate_irqs_dynamic()")
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+---
+v2: Part of v1 was bogus.  Delete that bit.
 
-I trust this message finds you well. My name is Emely. I am an avid
-supporter and admirer of the Xen Project, and I am writing to seek your
-guidance and permission regarding the use of your images for personal,
-non-commercial purposes.
+ drivers/xen/events/events_base.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-I have recently been exploring ways to express my enthusiasm for the Xen
-Project within the confines of my private interests. To this end, I am
-interested in creating a custom t-shirt featuring the Xen Project images.
-These shirts would be exclusively for personal use and would not be
-utilized for any commercial purposes or intentions of selling.
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index f5edb9e27e3c..b8cfea7812d6 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -1110,8 +1110,10 @@ int xen_bind_pirq_msi_to_irq(struct pci_dev *dev, struct msi_desc *msidesc,
+ 
+ 	for (i = 0; i < nvec; i++) {
+ 		info = xen_irq_init(irq + i);
+-		if (!info)
++		if (!info) {
++			ret = -ENOMEM;
+ 			goto error_irq;
++		}
+ 
+ 		irq_set_chip_and_handler_name(irq + i, &xen_pirq_chip, handle_edge_irq, name);
+ 
+-- 
+2.42.0
 
-In my research, I came across your usage guidelines, which state, "You can
-use the images and material without attribution when used in a context that
-refers to the Xen Project [...] Where the context is not clear, attribution
-must be made to XenProject.org, and images used on merchandise, such as a
-sticker, must contain the Xen Project logo." I appreciate the clarity you
-provide on the acceptable use of Xen Project materials.
-
-However, I find myself in a situation where I am unsure whether the
-proposed use falls within the defined boundaries. Specifically, I would
-like to confirm whether it is permissible to print Xen Project images on
-private-use t-shirts without the intent to sell or engage in any commercial
-activities.
-
-I understand the importance of respecting intellectual property rights, and
-I want to ensure that I adhere to your guidelines and policies. If there
-are any additional conditions or steps I should follow to obtain formal
-approval for this specific use, please do let me know, and I will be more
-than happy to comply.
-
-I appreciate your time and consideration in addressing this matter. Thank
-you for your commitment to fostering a collaborative and supportive
-community around the Xen Project.
-
-Best regards,
-
-Emely V.
-
---00000000000028e56e060b2c7743
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><span style=3D"font-size:17px">Dear Xen Project Team,</sp=
-an>
-<br><br><span style=3D"font-size:17px">I trust this message finds you well.=
- My name is Emely. I am an avid supporter and admirer of the Xen Project, a=
-nd I am writing to seek your guidance and permission regarding the use of y=
-our images for personal, non-commercial purposes.</span>
-<br><br><span style=3D"font-size:17px">I have recently been exploring ways =
-to express my enthusiasm for the Xen Project within the confines of my priv=
-ate interests. To this end, I am interested in creating a custom t-shirt fe=
-aturing the Xen Project images. These shirts would be exclusively for perso=
-nal use and would not be utilized for any commercial purposes or intentions=
- of selling.</span>
-<br><br><span style=3D"font-size:17px">In my research, I came across your u=
-sage guidelines, which state, &quot;You can use the images and material wit=
-hout attribution when used in a context that refers to the Xen Project [...=
-] Where the context is not clear, attribution must be made to XenProject.or=
-g, and images used on merchandise, such as a sticker, must contain the Xen =
-Project logo.&quot; I appreciate the clarity you provide on the acceptable =
-use of Xen Project materials.</span>
-<br><br><span style=3D"font-size:17px">However, I find myself in a situatio=
-n where I am unsure whether the proposed use falls within the defined bound=
-aries. Specifically, I would like to confirm whether it is permissible to p=
-rint Xen Project images on private-use t-shirts without the intent to sell =
-or engage in any commercial activities.</span>
-<br><br><span style=3D"font-size:17px">I understand the importance of respe=
-cting intellectual property rights, and I want to ensure that I adhere to y=
-our guidelines and policies. If there are any additional conditions or step=
-s I should follow to obtain formal approval for this specific use, please d=
-o let me know, and I will be more than happy to comply.</span>
-<br><br><span style=3D"font-size:17px">I appreciate your time and considera=
-tion in addressing this matter. Thank you for your commitment to fostering =
-a collaborative and supportive community around the Xen Project.</span>
-<br><br><span style=3D"font-size:17px">Best regards,</span>
-<br><br><span style=3D"font-size:17px">Emely V.</span></div>
-
---00000000000028e56e060b2c7743--
 
