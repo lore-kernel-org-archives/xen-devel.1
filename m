@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67A95C07E98
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 550DFC4167B
 	for <xen-devel@archiver.kernel.org>; Tue, 28 Nov 2023 09:22:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.642822.1002549 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.642824.1002563 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7uIT-0004u4-UN; Tue, 28 Nov 2023 09:22:25 +0000
+	id 1r7uIV-0005C3-Dj; Tue, 28 Nov 2023 09:22:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 642822.1002549; Tue, 28 Nov 2023 09:22:25 +0000
+Received: by outflank-mailman (output) from mailman id 642824.1002563; Tue, 28 Nov 2023 09:22:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r7uIT-0004tx-Rg; Tue, 28 Nov 2023 09:22:25 +0000
-Received: by outflank-mailman (input) for mailman id 642822;
- Tue, 28 Nov 2023 09:22:24 +0000
+	id 1r7uIV-0005At-9F; Tue, 28 Nov 2023 09:22:27 +0000
+Received: by outflank-mailman (input) for mailman id 642824;
+ Tue, 28 Nov 2023 09:22:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PT6c=HJ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r7uIS-0004tq-Sj
- for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 09:22:24 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
+ id 1r7uIU-0004tq-C2
+ for xen-devel@lists.xenproject.org; Tue, 28 Nov 2023 09:22:26 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a32bb506-8dcf-11ee-98e3-6d05b1d4d9a1;
- Tue, 28 Nov 2023 10:22:23 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40b31232bf0so42186155e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Nov 2023 01:22:23 -0800 (PST)
+ id a472df4c-8dcf-11ee-98e3-6d05b1d4d9a1;
+ Tue, 28 Nov 2023 10:22:25 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40b4c2ef58aso4187555e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Nov 2023 01:22:25 -0800 (PST)
 Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- p34-20020a05600c1da200b00406408dc788sm17535442wms.44.2023.11.28.01.22.22
+ n8-20020a05600c3b8800b0040b398f0585sm14323367wms.9.2023.11.28.01.22.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Nov 2023 01:22:22 -0800 (PST)
+ Tue, 28 Nov 2023 01:22:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,41 +46,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a32bb506-8dcf-11ee-98e3-6d05b1d4d9a1
+X-Inumbo-ID: a472df4c-8dcf-11ee-98e3-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1701163343; x=1701768143; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1701163345; x=1701768145; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OgDIL9w5jx+UxCwj2sM5xrPgOrkinlsQKkLBTFvRxoc=;
-        b=Yr1o+KfN8zJHB4DoKfB2Nc7tjtBMcDQfRoT6R5TmvS+4oOSj8sAT9OJFyfpZkj5XfQ
-         Lly9EKEXkvWBriy6UyAb3EOw1uN9R3ebGwYotkG+DvUDRVNO4X0M2viV/p+uxcpoiPDH
-         fDmBqj2O/cLfDaAyjA2y9d0JKVndAFCHd/cfY=
+        bh=nloFbZsR0n5o1gFMfsRypOwTdPPhgWOtMQCBf1lcPX8=;
+        b=eX4ePTQEiWinhG61NI8NtbC0pSmWTfp4G1zG3TASMY4PNT4MQ1ybL9nLc6OHVw+NkR
+         eBhKvXVKN23VRTwND5PLx9jYXmw43eigkuSu42AvxidIoBkCJnIWP8v01msJ5biTlfaM
+         zJz4MaWKjRBSG741CWN9qSyKj3ZlCUh9MGi/U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701163343; x=1701768143;
+        d=1e100.net; s=20230601; t=1701163345; x=1701768145;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OgDIL9w5jx+UxCwj2sM5xrPgOrkinlsQKkLBTFvRxoc=;
-        b=FINwW9i5TzdJ6Qe73HB4UJ0OAyYmnG7A0hlF/bLFU8V/IpQld46IhR5d1qMG1L3ChU
-         sVH55Gqo3Oasi92gG6VwkTNbX52yLRvD6YcNhTIPl8IDfQZfyG/n6UBqZu2eWcNayiFL
-         x9QnNSRTjgflMgOQtW+bgd/RzEuJ1XfXpd5Z5A9xlRnzBq+ylPi97QwLIMsAgc4IkMI2
-         InIMq/q4uE83/MygRTid0m52BRLwB/P85Xm+HDH2uvru9D/fyPsVEn1Bl4Iy2Z/xrcta
-         QyvsXvQmeckl6TIPFvZt5eF8sLcMmP2Z2GzcM2IG8fyO7nV1Zs+CL8m12z2tLUMVE/fG
-         ByFw==
-X-Gm-Message-State: AOJu0YyD+XwaPsNslqQ5vJBCaHLG0hYU7lcK+EmdcJhWSJQtwvcU/1Sy
-	BQz2gEU8m4YZcuU7C4igJwLBOh/DapZlabi+6Qc=
-X-Google-Smtp-Source: AGHT+IERTa201gF0CHZeOAYrIVyvM0E4oJr0RIksH0nF29I7usiI6qaKzScDtaVOuV+0vNMPsuXnYg==
-X-Received: by 2002:a05:600c:4f16:b0:40b:3857:12f9 with SMTP id l22-20020a05600c4f1600b0040b385712f9mr9408150wmq.5.1701163342885;
-        Tue, 28 Nov 2023 01:22:22 -0800 (PST)
+        bh=nloFbZsR0n5o1gFMfsRypOwTdPPhgWOtMQCBf1lcPX8=;
+        b=Zu15x3k9uipQ4EdIaNoh4Is5bJnFyzq2FqMWCkPLETuuDkZO5p/yMJTo6v+P6+sqGl
+         XuqtNFfBAw3+Ej36fo3qu+SivNAH0ro/+rDNFjzBFtu6QGe3DtBBlmbWNxFFqYrY80Yh
+         6petiGvPkwC/WlXtd7RbRYyWbwlV0eglPZw2NXiD5rWvAGLP2WJVQb6DZUk5u/RuF6I+
+         x7IpXOXShfyTw01f5oFJOdga3WF5E+ct8XCQ5r+JFrf5HMviJczvNsc1BhcgFfZ1eCGW
+         D76Gxry7XxC0Ehh55reXc7PvaUU97i/uO7Kr2rJH47cuSMU12USv9UgrdE2k0ZWUeueT
+         lhiw==
+X-Gm-Message-State: AOJu0YzlHDp4qza2KReYyR7hZqtPUpZJ5VThXrdrLWz0l8WAvacaOAoG
+	sbjgPNRcYZJZNXnig+0RxGprw9pu+pc6/umuOjI=
+X-Google-Smtp-Source: AGHT+IG3Eo5ZvV3iidJ+LL4lIRYVlc0WvPm8MgpcybdntPPVgNd0KKSy77sIYN1+0k2yHT3X4/QGCA==
+X-Received: by 2002:a05:600c:198a:b0:40b:448b:f711 with SMTP id t10-20020a05600c198a00b0040b448bf711mr4835936wmq.18.1701163345041;
+        Tue, 28 Nov 2023 01:22:25 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
 	Ross Lagerwall <ross.lagerwall@citrix.com>,
 	Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH v2 1/3] livepatch-build-tools: do not use readlink -m option
-Date: Tue, 28 Nov 2023 10:21:50 +0100
-Message-ID: <20231128092152.35039-2-roger.pau@citrix.com>
+Subject: [PATCH v2 3/3] livepatch-build-tools: account for section alignment when calculating function size
+Date: Tue, 28 Nov 2023 10:21:52 +0100
+Message-ID: <20231128092152.35039-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231128092152.35039-1-roger.pau@citrix.com>
 References: <20231128092152.35039-1-roger.pau@citrix.com>
@@ -88,96 +88,59 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Busybox readlink implementation only supports the -f option to follow symlinks,
-so adjust the logic in order to keep the same behaviour without using the -m
-option.
+Forcing function section alignment at the compiler level ensures that enough
+space is present in the text section so that at least a jump can be encoded in
+the old function body to switch to the newly loaded code payload.
 
-Singed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Reviewed-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+Modify create-diff-object to account for any section alignment when calculating
+the size of the old function.
+
+When used with a suitable -falign-function compiler parameter on the Xen
+hypervisor build this ensures that all functions have enough space to
+accommodate for any control flow instructions plus a jump.
+
+Note that while the rounding could be applied to all (text) symbols, it's not
+required, as the size is only relevant for functions that are live patched, and
+hence only do the rounding when calculating the old (previous) function size.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- livepatch-build | 29 ++++++++++++++++-------------
- 1 file changed, 16 insertions(+), 13 deletions(-)
+Changes since v2:
+ - New in this version.
+---
+ common.h             | 2 ++
+ create-diff-object.c | 5 +++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/livepatch-build b/livepatch-build
-index 91d203bda0eb..305644037ee7 100755
---- a/livepatch-build
-+++ b/livepatch-build
-@@ -336,8 +336,8 @@ while [[ $# -gt 0 ]]; do
-             ;;
-         --xen-syms)
-             shift
--            XENSYMS="$(readlink -m -- "$1")"
--            [ -f "$XENSYMS" ] || die "xen-syms file does not exist"
-+            [ -f "$1" ] || die "xen-syms file does not exist"
-+            XENSYMS="$(readlink -f -- "$1")"
-             shift
-             ;;
-         --depends)
-@@ -366,22 +366,20 @@ while [[ $# -gt 0 ]]; do
- done
+diff --git a/common.h b/common.h
+index 0d3e5f1dd3b5..5ff9ef6ca8e9 100644
+--- a/common.h
++++ b/common.h
+@@ -37,6 +37,8 @@ extern char *childobj;
+ 	list_add_tail(&(_new)->list, (_list)); \
+ }
  
- [ -z "$srcarg" ] && die "Xen directory not given"
-+[ -d "$srcarg" ] || die "Xen directory does not exist"
- [ -z "$patcharg" ] && die "Patchfile not given"
-+[ -f "$patcharg" ] || die "Patchfile does not exist"
- [ -z "$configarg" ] && die ".config not given"
-+[ -f "$configarg" ] || die ".config does not exist"
- [ -z "$outputarg" ] && die "Output directory not given"
- [ -z "$DEPENDS" ] && die "Build-id dependency not given"
- [ -z "$XEN_DEPENDS" ] && die "Xen Build-id dependency not given"
- 
--SRCDIR="$(readlink -m -- "$srcarg")"
-+SRCDIR="$(readlink -f -- "$srcarg")"
- # We need an absolute path because we move around, but we need to
- # retain the name of the symlink (= realpath -s)
- PATCHFILE="$(readlink -f "$(dirname "$patcharg")")/$(basename "$patcharg")"
--CONFIGFILE="$(readlink -m -- "$configarg")"
--OUTPUT="$(readlink -m -- "$outputarg")"
--
--[ -d "${SRCDIR}" ] || die "Xen directory does not exist"
--[ -f "${PATCHFILE}" ] || die "Patchfile does not exist"
--[ -f "${CONFIGFILE}" ] || die ".config does not exist"
-+CONFIGFILE="$(readlink -f -- "$configarg")"
- 
- PATCHNAME=$(make_patch_name "${PATCHFILE}")
- 
-@@ -390,17 +388,20 @@ echo
- echo "Xen directory: ${SRCDIR}"
- echo "Patch file: ${PATCHFILE}"
- echo ".config file: ${CONFIGFILE}"
--echo "Output directory: ${OUTPUT}"
-+echo "Output directory: $outputarg"
- echo "================================================"
- echo
- 
- if [ "${SKIP}" != "build" ]; then
--    [ -e "${OUTPUT}" ] && die "Output directory exists"
-+    # Make sure output directory doesn't exist, and create it.
-+    [ -e "$outputarg" ] && die "Output directory exists"
-+    mkdir -p "$outputarg" || die
-+    OUTPUT="$(readlink -f -- "$outputarg")"
++#define ROUNDUP(x, a) (((x) + (a) - 1) & ~((a) - 1))
 +
-     grep -q 'CONFIG_LIVEPATCH=y' "${CONFIGFILE}" || die "CONFIG_LIVEPATCH must be enabled"
-     cd "$SRCDIR" || die
-     patch -s -N -p1 -f --fuzz=0 --dry-run < "$PATCHFILE" || die "Source patch file failed to apply"
+ enum loglevel {
+ 	DEBUG,
+ 	NORMAL
+diff --git a/create-diff-object.c b/create-diff-object.c
+index d0e14e3a62bb..fed360a9aa68 100644
+--- a/create-diff-object.c
++++ b/create-diff-object.c
+@@ -2015,6 +2015,11 @@ static void livepatch_create_patches_sections(struct kpatch_elf *kelf,
+ 					ERROR("lookup_global_symbol %s",
+ 					      sym->name);
+ 			}
++
++			/* Take into account section alignment for padding. */
++			result.size = ROUNDUP(result.size,
++					      sym->sec->sh.sh_addralign);
++
+ 			log_debug("lookup for %s @ 0x%016lx len %lu\n",
+ 			          sym->name, result.value, result.size);
  
--    mkdir -p "${OUTPUT}" || die
-     cp -f "${CONFIGFILE}" "${OUTPUT}/.config"
-     cp -f "${OUTPUT}/.config" "xen/.config"
- 
-@@ -453,7 +454,9 @@ if [ "${SKIP}" != "build" ]; then
- fi
- 
- if [ "${SKIP}" != "diff" ]; then
--    [ -d "${OUTPUT}" ] || die "Output directory does not exist"
-+    cd "${SCRIPTDIR}" || die
-+    [ -d "$outputarg" ] || die "Output directory does not exist"
-+    OUTPUT="$(readlink -f -- "$outputarg")"
- 
-     cd "${OUTPUT}" || die
-     create_patch
-
-base-commit: e588b7914e7afa3abb64b15a32fc2fdb57ded341
 -- 
 2.43.0
 
