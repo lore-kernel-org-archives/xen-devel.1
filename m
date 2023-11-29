@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D29D8C4167B
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 19:54:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644173.1004861 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A53C4167B
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 19:56:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644176.1004878 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8Qdr-0007w9-S8; Wed, 29 Nov 2023 19:54:39 +0000
+	id 1r8QfK-0000e0-Kh; Wed, 29 Nov 2023 19:56:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644173.1004861; Wed, 29 Nov 2023 19:54:39 +0000
+Received: by outflank-mailman (output) from mailman id 644176.1004878; Wed, 29 Nov 2023 19:56:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8Qdr-0007w2-PG; Wed, 29 Nov 2023 19:54:39 +0000
-Received: by outflank-mailman (input) for mailman id 644173;
- Wed, 29 Nov 2023 19:54:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r8QfK-0000bt-Ff; Wed, 29 Nov 2023 19:56:10 +0000
+Received: by outflank-mailman (input) for mailman id 644176;
+ Wed, 29 Nov 2023 19:56:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=s3b2=HK=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1r8Qdq-0007vw-O5
- for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 19:54:38 +0000
-Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1f881a51-8ef1-11ee-9b0f-b553b5be7939;
- Wed, 29 Nov 2023 20:54:36 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id DEEDB8285402;
- Wed, 29 Nov 2023 13:54:35 -0600 (CST)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id WyikWwCjhaI2; Wed, 29 Nov 2023 13:54:34 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 18E348285668;
- Wed, 29 Nov 2023 13:54:34 -0600 (CST)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id HEExPgEnNZO3; Wed, 29 Nov 2023 13:54:33 -0600 (CST)
-Received: from [10.11.0.3] (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 854ED8285402;
- Wed, 29 Nov 2023 13:54:33 -0600 (CST)
+ <SRS0=J7nN=HK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
+ id 1r8QfJ-0000Sw-GO
+ for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 19:56:09 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 55d330d8-8ef1-11ee-98e4-6d05b1d4d9a1;
+ Wed, 29 Nov 2023 20:56:08 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-630-7PZf8UtzMqq7ue5HK1SifQ-1; Wed,
+ 29 Nov 2023 14:56:01 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BF60E29AA2CA;
+ Wed, 29 Nov 2023 19:56:00 +0000 (UTC)
+Received: from localhost (unknown [10.39.192.91])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 22DFA1121308;
+ Wed, 29 Nov 2023 19:55:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,49 +53,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f881a51-8ef1-11ee-9b0f-b553b5be7939
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 18E348285668
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1701287674; bh=9YCpgw5K1Pm5Pd6CadDcMixEq5iCcxEGQZkZfgBK1Ew=;
-	h=Message-ID:Date:MIME-Version:To:From;
-	b=uboPYuxhXoQp118roiaFo4txe29J8f1UCneZjqk9+LnOe04NuIVA3QhRn8ibThrC0
-	 AIM0QttUlgyqcW7K1CYGanmSLrLqVoIKNdhPHVAPxD+O02N/aLrfTEn4wS7ISq6wh5
-	 X8wrXFDYaxokHBjQXq2RVlBcfkqJK5iYWR8IqwDM=
-X-Virus-Scanned: amavisd-new at rptsys.com
-Message-ID: <16dd398d-fa91-46f8-b6a2-02cd34b24aa8@raptorengineering.com>
-Date: Wed, 29 Nov 2023 13:54:33 -0600
+X-Inumbo-ID: 55d330d8-8ef1-11ee-98e4-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1701287767;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=4ocMGkaWO2UNgH6BeGysPHsaortxgu0jbKcgqrLTfAY=;
+	b=MQItrGL3QxuFlzS3M60oZzaIwfVJo+/gA308TwNwWSoZQ44Ew9+qNhidOfvOLqNGGqJOuj
+	aj+L8zlfqAuwDsZfyvbCbwmZQNTxlQOBmiRBcavbbiq5SuiAJ6D4D3VP30wZDET7X6zykh
+	+i8s4skSxdQ57HcTuVmsAJ12ZFLnxxo=
+X-MC-Unique: 7PZf8UtzMqq7ue5HK1SifQ-1
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Hanna Reitz <hreitz@redhat.com>,
+	Paul Durrant <paul@xen.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Alberto Garcia <berto@igalia.com>,
+	Emanuele Giuseppe Esposito <eesposit@redhat.com>,
+	John Snow <jsnow@redhat.com>,
+	Kevin Wolf <kwolf@redhat.com>,
+	Eric Blake <eblake@redhat.com>,
+	Wen Congyang <wencongyang2@huawei.com>,
+	<qemu-block@nongnu.org>,
+	xen-devel@lists.xenproject.org,
+	Coiby Xu <Coiby.Xu@gmail.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Xie Changlong <xiechanglong.d@gmail.com>,
+	Ari Sundholm <ari@tuxera.com>,
+	Li Zhijian <lizhijian@fujitsu.com>,
+	Cleber Rosa <crosa@redhat.com>,
+	Juan Quintela <quintela@redhat.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+	Zhang Chen <chen.zhang@intel.com>,
+	Peter Xu <peterx@redhat.com>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Leonardo Bras <leobras@redhat.com>,
+	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+	Fam Zheng <fam@euphon.net>,
+	Fabiano Rosas <farosas@suse.de>
+Subject: [PATCH 01/12] virtio-scsi: replace AioContext lock with tmf_bh_lock
+Date: Wed, 29 Nov 2023 14:55:42 -0500
+Message-ID: <20231129195553.942921-2-stefanha@redhat.com>
+In-Reply-To: <20231129195553.942921-1-stefanha@redhat.com>
+References: <20231129195553.942921-1-stefanha@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 12/14] xen/asm-generic: introduce stub header softirq.h
-Content-Language: en-US
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Wei Liu <wl@xen.org>
-References: <cover.1701093907.git.oleksii.kurochko@gmail.com>
- <090991be61252cabefc06da19597e3a86a4cd1da.1701093907.git.oleksii.kurochko@gmail.com>
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
-In-Reply-To: <090991be61252cabefc06da19597e3a86a4cd1da.1701093907.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
 
-Hi Oleksii,
+Protect the Task Management Function BH state with a lock. The TMF BH
+runs in the main loop thread. An IOThread might process a TMF at the
+same time as the TMF BH is running. Therefore tmf_bh_list and tmf_bh
+must be protected by a lock.
 
-On 11/27/23 8:13 AM, Oleksii Kurochko wrote:
-> <asm/softirq.h> is common between Arm, PPC and RISC-V so it is
-> moved to asm-generic.
-> 
-> Drop Arm and PPC's softirq.h and use asm-generic version instead.
-> 
+Run TMF request completion in the IOThread using aio_wait_bh_oneshot().
+This avoids more locking to protect the virtqueue and SCSI layer state.
 
-Acked-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+---
+ include/hw/virtio/virtio-scsi.h |  3 +-
+ hw/scsi/virtio-scsi.c           | 62 ++++++++++++++++++++++-----------
+ 2 files changed, 43 insertions(+), 22 deletions(-)
 
-Thanks,
-Shawn
+diff --git a/include/hw/virtio/virtio-scsi.h b/include/hw/virtio/virtio-scsi.h
+index 779568ab5d..da8cb928d9 100644
+--- a/include/hw/virtio/virtio-scsi.h
++++ b/include/hw/virtio/virtio-scsi.h
+@@ -85,8 +85,9 @@ struct VirtIOSCSI {
+ 
+     /*
+      * TMFs deferred to main loop BH. These fields are protected by
+-     * virtio_scsi_acquire().
++     * tmf_bh_lock.
+      */
++    QemuMutex tmf_bh_lock;
+     QEMUBH *tmf_bh;
+     QTAILQ_HEAD(, VirtIOSCSIReq) tmf_bh_list;
+ 
+diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
+index 9c751bf296..4f8d35facc 100644
+--- a/hw/scsi/virtio-scsi.c
++++ b/hw/scsi/virtio-scsi.c
+@@ -123,6 +123,30 @@ static void virtio_scsi_complete_req(VirtIOSCSIReq *req)
+     virtio_scsi_free_req(req);
+ }
+ 
++static void virtio_scsi_complete_req_bh(void *opaque)
++{
++    VirtIOSCSIReq *req = opaque;
++
++    virtio_scsi_complete_req(req);
++}
++
++/*
++ * Called from virtio_scsi_do_one_tmf_bh() in main loop thread. The main loop
++ * thread cannot touch the virtqueue since that could race with an IOThread.
++ */
++static void virtio_scsi_complete_req_from_main_loop(VirtIOSCSIReq *req)
++{
++    VirtIOSCSI *s = req->dev;
++
++    if (!s->ctx || s->ctx == qemu_get_aio_context()) {
++        /* No need to schedule a BH when there is no IOThread */
++        virtio_scsi_complete_req(req);
++    } else {
++        /* Run request completion in the IOThread */
++        aio_wait_bh_oneshot(s->ctx, virtio_scsi_complete_req_bh, req);
++    }
++}
++
+ static void virtio_scsi_bad_req(VirtIOSCSIReq *req)
+ {
+     virtio_error(VIRTIO_DEVICE(req->dev), "wrong size for virtio-scsi headers");
+@@ -338,10 +362,7 @@ static void virtio_scsi_do_one_tmf_bh(VirtIOSCSIReq *req)
+ 
+ out:
+     object_unref(OBJECT(d));
+-
+-    virtio_scsi_acquire(s);
+-    virtio_scsi_complete_req(req);
+-    virtio_scsi_release(s);
++    virtio_scsi_complete_req_from_main_loop(req);
+ }
+ 
+ /* Some TMFs must be processed from the main loop thread */
+@@ -354,18 +375,16 @@ static void virtio_scsi_do_tmf_bh(void *opaque)
+ 
+     GLOBAL_STATE_CODE();
+ 
+-    virtio_scsi_acquire(s);
++    WITH_QEMU_LOCK_GUARD(&s->tmf_bh_lock) {
++        QTAILQ_FOREACH_SAFE(req, &s->tmf_bh_list, next, tmp) {
++            QTAILQ_REMOVE(&s->tmf_bh_list, req, next);
++            QTAILQ_INSERT_TAIL(&reqs, req, next);
++        }
+ 
+-    QTAILQ_FOREACH_SAFE(req, &s->tmf_bh_list, next, tmp) {
+-        QTAILQ_REMOVE(&s->tmf_bh_list, req, next);
+-        QTAILQ_INSERT_TAIL(&reqs, req, next);
++        qemu_bh_delete(s->tmf_bh);
++        s->tmf_bh = NULL;
+     }
+ 
+-    qemu_bh_delete(s->tmf_bh);
+-    s->tmf_bh = NULL;
+-
+-    virtio_scsi_release(s);
+-
+     QTAILQ_FOREACH_SAFE(req, &reqs, next, tmp) {
+         QTAILQ_REMOVE(&reqs, req, next);
+         virtio_scsi_do_one_tmf_bh(req);
+@@ -379,8 +398,7 @@ static void virtio_scsi_reset_tmf_bh(VirtIOSCSI *s)
+ 
+     GLOBAL_STATE_CODE();
+ 
+-    virtio_scsi_acquire(s);
+-
++    /* Called after ioeventfd has been stopped, so tmf_bh_lock is not needed */
+     if (s->tmf_bh) {
+         qemu_bh_delete(s->tmf_bh);
+         s->tmf_bh = NULL;
+@@ -393,19 +411,19 @@ static void virtio_scsi_reset_tmf_bh(VirtIOSCSI *s)
+         req->resp.tmf.response = VIRTIO_SCSI_S_TARGET_FAILURE;
+         virtio_scsi_complete_req(req);
+     }
+-
+-    virtio_scsi_release(s);
+ }
+ 
+ static void virtio_scsi_defer_tmf_to_bh(VirtIOSCSIReq *req)
+ {
+     VirtIOSCSI *s = req->dev;
+ 
+-    QTAILQ_INSERT_TAIL(&s->tmf_bh_list, req, next);
++    WITH_QEMU_LOCK_GUARD(&s->tmf_bh_lock) {
++        QTAILQ_INSERT_TAIL(&s->tmf_bh_list, req, next);
+ 
+-    if (!s->tmf_bh) {
+-        s->tmf_bh = qemu_bh_new(virtio_scsi_do_tmf_bh, s);
+-        qemu_bh_schedule(s->tmf_bh);
++        if (!s->tmf_bh) {
++            s->tmf_bh = qemu_bh_new(virtio_scsi_do_tmf_bh, s);
++            qemu_bh_schedule(s->tmf_bh);
++        }
+     }
+ }
+ 
+@@ -1235,6 +1253,7 @@ static void virtio_scsi_device_realize(DeviceState *dev, Error **errp)
+     Error *err = NULL;
+ 
+     QTAILQ_INIT(&s->tmf_bh_list);
++    qemu_mutex_init(&s->tmf_bh_lock);
+ 
+     virtio_scsi_common_realize(dev,
+                                virtio_scsi_handle_ctrl,
+@@ -1277,6 +1296,7 @@ static void virtio_scsi_device_unrealize(DeviceState *dev)
+ 
+     qbus_set_hotplug_handler(BUS(&s->bus), NULL);
+     virtio_scsi_common_unrealize(dev);
++    qemu_mutex_destroy(&s->tmf_bh_lock);
+ }
+ 
+ static Property virtio_scsi_properties[] = {
+-- 
+2.42.0
+
 
