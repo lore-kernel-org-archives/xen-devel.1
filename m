@@ -4,47 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C5BFC4167B
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 20:28:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644232.1005012 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60782C4167B
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 21:01:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644236.1005021 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8RAh-0003VH-HJ; Wed, 29 Nov 2023 20:28:35 +0000
+	id 1r8Rge-0006rr-W7; Wed, 29 Nov 2023 21:01:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644232.1005012; Wed, 29 Nov 2023 20:28:35 +0000
+Received: by outflank-mailman (output) from mailman id 644236.1005021; Wed, 29 Nov 2023 21:01:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8RAh-0003VA-Cr; Wed, 29 Nov 2023 20:28:35 +0000
-Received: by outflank-mailman (input) for mailman id 644232;
- Wed, 29 Nov 2023 20:28:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SKRL=HK=dingwall.me.uk=james@srs-se1.protection.inumbo.net>)
- id 1r8RAg-0003TZ-86
- for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 20:28:34 +0000
-Received: from smarthost01c.sbp.mail.zen.net.uk
- (smarthost01c.sbp.mail.zen.net.uk [212.23.1.5])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id db6b630b-8ef5-11ee-98e4-6d05b1d4d9a1;
- Wed, 29 Nov 2023 21:28:30 +0100 (CET)
-Received: from [217.155.64.189] (helo=mail0.xen.dingwall.me.uk)
- by smarthost01c.sbp.mail.zen.net.uk with esmtpsa (TLS1.0) tls
- TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (Exim 4.95)
- (envelope-from <james@dingwall.me.uk>) id 1r8RAa-000YKh-G2;
- Wed, 29 Nov 2023 20:28:28 +0000
-Received: from localhost (localhost [IPv6:::1])
- by mail0.xen.dingwall.me.uk (Postfix) with ESMTP id 6C8D88BF82D;
- Wed, 29 Nov 2023 20:28:27 +0000 (GMT)
-Received: from mail0.xen.dingwall.me.uk ([IPv6:::1])
- by localhost (mail0.xen.dingwall.me.uk [IPv6:::1]) (amavisd-new, port 10024)
- with ESMTP id 4Cluhk5d5xI6; Wed, 29 Nov 2023 20:28:27 +0000 (GMT)
-Received: from ghoul.dingwall.me.uk (ghoul.dingwall.me.uk
- [IPv6:2a02:8010:698e:302::c0a8:1c8])
- by dingwall.me.uk (Postfix) with ESMTP id 990228BF05F;
- Wed, 29 Nov 2023 13:18:25 +0000 (GMT)
-Received: by ghoul.dingwall.me.uk (Postfix, from userid 1000)
- id 8C00913C; Wed, 29 Nov 2023 13:18:25 +0000 (GMT)
+	id 1r8Rge-0006rk-TO; Wed, 29 Nov 2023 21:01:36 +0000
+Received: by outflank-mailman (input) for mailman id 644236;
+ Wed, 29 Nov 2023 21:01:35 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8Rgd-0006ra-P9; Wed, 29 Nov 2023 21:01:35 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8Rgd-0004cZ-F7; Wed, 29 Nov 2023 21:01:35 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8Rgd-0000OT-3v; Wed, 29 Nov 2023 21:01:35 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8Rgd-0004ph-3N; Wed, 29 Nov 2023 21:01:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,129 +44,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: db6b630b-8ef5-11ee-98e4-6d05b1d4d9a1
-X-Virus-Scanned: Debian amavisd-new at dingwall.me.uk
-Date: Wed, 29 Nov 2023 13:18:25 +0000
-From: James Dingwall <james@dingwall.me.uk>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: James Dingwall <james-xen@dingwall.me.uk>,
-	Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: xen 4.15.5: msr_relaxed required for MSR 0x1a2
-Message-ID: <ZWc6IWFAjPB1tA4o@dingwall.me.uk>
-References: <ZVZAO/W0m/h+IPbi@dingwall.me.uk>
- <aa13be5e-d90c-4074-a16c-d3b051da754d@citrix.com>
- <ZVcv7259slJF4wBh@dingwall.me.uk>
- <2bd9028d-bd3d-435f-8788-38f3460ea188@suse.com>
- <ZVsYeB7DG/F2EdM7@dingwall.me.uk>
- <ZVsltWxNzrlGZNV0@macbook.local>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=5zuyPra+Ja/RHmrjBV6REyI21TR0aTHa+ANPiq6clAk=; b=HfiioFcZjxdIih27NIAUKy7Jrv
+	FcIy1IgCmMnOmcXgEfUGxogtu37dfV0qzmiJ2C2085qyaKVOxBPC/gPC+T7fRV14zygd7V3b3R//W
+	nV8Px57wCfAITGdJtkjfbXo2m2U0EDHzf5gSoLYeoXeKDbgo4qYup8sMDqmH/zDRzvHo=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-183939-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ZVsltWxNzrlGZNV0@macbook.local>
-X-Originating-smarthost01c-IP: [217.155.64.189]
-Feedback-ID: 217.155.64.189
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 183939: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=f0dd0cd9598f22ee5509bb5d1466e4821834c4ba
+X-Osstest-Versions-That:
+    xen=902377b690f42ddf44ae91c4b0751d597f1cd694
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 29 Nov 2023 21:01:35 +0000
 
-On Mon, Nov 20, 2023 at 10:24:05AM +0100, Roger Pau Monné wrote:
-> On Mon, Nov 20, 2023 at 08:27:36AM +0000, James Dingwall wrote:
-> > On Fri, Nov 17, 2023 at 10:56:30AM +0100, Jan Beulich wrote:
-> > > On 17.11.2023 10:18, James Dingwall wrote:
-> > > > On Thu, Nov 16, 2023 at 04:32:47PM +0000, Andrew Cooper wrote:
-> > > >> On 16/11/2023 4:15 pm, James Dingwall wrote:
-> > > >>> Hi,
-> > > >>>
-> > > >>> Per the msr_relaxed documentation:
-> > > >>>
-> > > >>>    "If using this option is necessary to fix an issue, please report a bug."
-> > > >>>
-> > > >>> After recently upgrading an environment from Xen 4.14.5 to Xen 4.15.5 we
-> > > >>> started experiencing a BSOD at boot with one of our Windows guests.  We found
-> > > >>> that enabling `msr_relaxed = 1` in the guest configuration has resolved the
-> > > >>> problem.  With a debug build of Xen and `hvm_debug=2048` on the command line
-> > > >>> the following messages were caught as the BSOD happened:
-> > > >>>
-> > > >>> (XEN) [HVM:11.0] <vmx_msr_read_intercept> ecx=0x1a2
-> > > >>> (XEN) vmx.c:3298:d11v0 RDMSR 0x000001a2 unimplemented
-> > > >>> (XEN) d11v0 VIRIDIAN CRASH: 1e ffffffffc0000096 fffff80b8de81eb5 0 0
-> > > >>>
-> > > >>> I found that MSR 0x1a2 is MSR_TEMPERATURE_TARGET and from that this patch
-> > > >>> series from last month:
-> > > >>>
-> > > >>> https://patchwork.kernel.org/project/xen-devel/list/?series=796550
-> > > >>>
-> > > >>> Picking out just a small part of that fixes the problem for us. Although the
-> > > >>> the patch is against 4.15.5 I think it would be relevant to more recent
-> > > >>> releases too.
-> > > >>
-> > > >> Which version of Windows, and what hardware?
-> > > >>
-> > > >> The Viridian Crash isn't about the RDMSR itself - it's presumably
-> > > >> collateral damage shortly thereafter.
-> > > >>
-> > > >> Does filling in 0 for that MSR also resolve the issue?  It's model
-> > > >> specific and we absolutely cannot pass it through from real hardware
-> > > >> like that.
-> > > >>
-> > > > 
-> > > > Hi Andrew,
-> > > > 
-> > > > Thanks for your response.  The guest is running Windows 10 and the crash
-> > > > happens in a proprietary hardware driver.  A little bit of knowledge as
-> > > > they say was enough to stop the crash but I don't understand the impact
-> > > > of what I've actually done...
-> > > > 
-> > > > To rework the patch I'd need a bit of guidance, if I understand your
-> > > > suggestion I set the MSR to 0 with this change in emul-priv-op.c:
-> > > 
-> > > For the purpose of the experiment suggested by Andrew ...
-> > > 
-> > > > diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-> > > > index ed97b1d6fcc..66f5e417df6 100644
-> > > > --- a/xen/arch/x86/pv/emul-priv-op.c
-> > > > +++ b/xen/arch/x86/pv/emul-priv-op.c
-> > > > @@ -976,6 +976,10 @@ static int read_msr(unsigned int reg, uint64_t *val,
-> > > >          *val = 0;
-> > > >          return X86EMUL_OKAY;
-> > > >  
-> > > > +    case MSR_TEMPERATURE_TARGET:
-> > > > +        *val = 0;
-> > > > +        return X86EMUL_OKAY;
-> > > > +
-> > > >      case MSR_P6_PERFCTR(0) ... MSR_P6_PERFCTR(7):
-> > > >      case MSR_P6_EVNTSEL(0) ... MSR_P6_EVNTSEL(3):
-> > > >      case MSR_CORE_PERF_FIXED_CTR0 ... MSR_CORE_PERF_FIXED_CTR2:
-> > > 
-> > > ... you wouldn't need this (affects PV domains only), and ...
-> > > 
-> > > > and this in vmx.c:
-> > > > 
-> > > > diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-> > > > index 54023a92587..bbf37b7f272 100644
-> > > > --- a/xen/arch/x86/hvm/vmx/vmx.c
-> > > > +++ b/xen/arch/x86/hvm/vmx/vmx.c
-> > > > @@ -3259,6 +3259,11 @@ static int vmx_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
-> > > >          if ( !nvmx_msr_read_intercept(msr, msr_content) )
-> > > >              goto gp_fault;
-> > > >          break;
-> > > > +
-> > > > +    case MSR_TEMPERATURE_TARGET:
-> > > > +        *msr_content = 0;
-> > > > +        break;
-> 
-> I think the preference now is to add such handling directly in
-> guest_rdmsr()?  Protected with a:
-> 
-> if ( !(cp->x86_vendor & (X86_VENDOR_INTEL)) )
->     goto gp_fault;
-> 
+flight 183939 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/183939/
 
-It is possible we can patch the the driver which is triggering the BSOD but it
-seems unlileky we'd be able to roll that out in advance of doing the Xen
-upgrade for dom0.  If the problem we are encountering is specific to our
-situation rather than a general case issue then we can easily carry a patch
-for that.
+Failures :-/ but no regressions.
 
-Thanks for the help,
-James
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  f0dd0cd9598f22ee5509bb5d1466e4821834c4ba
+baseline version:
+ xen                  902377b690f42ddf44ae91c4b0751d597f1cd694
+
+Last test of basis   183934  2023-11-29 11:04:12 Z    0 days
+Testing same since   183939  2023-11-29 18:02:12 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Julien Grall <jgrall@amazon.com>
+  Nicola Vetrini <nicola.vetrini@bugseng.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   902377b690..f0dd0cd959  f0dd0cd9598f22ee5509bb5d1466e4821834c4ba -> smoke
 
