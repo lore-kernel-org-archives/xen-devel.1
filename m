@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EE62C4167B
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 19:56:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644188.1004951 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF09C4167B
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 19:56:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644190.1004966 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8Qfg-0003Qj-9Q; Wed, 29 Nov 2023 19:56:32 +0000
+	id 1r8Qfi-0003vJ-AI; Wed, 29 Nov 2023 19:56:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644188.1004951; Wed, 29 Nov 2023 19:56:32 +0000
+Received: by outflank-mailman (output) from mailman id 644190.1004966; Wed, 29 Nov 2023 19:56:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8Qfg-0003QG-4R; Wed, 29 Nov 2023 19:56:32 +0000
-Received: by outflank-mailman (input) for mailman id 644188;
- Wed, 29 Nov 2023 19:56:30 +0000
+	id 1r8Qfi-0003u4-5h; Wed, 29 Nov 2023 19:56:34 +0000
+Received: by outflank-mailman (input) for mailman id 644190;
+ Wed, 29 Nov 2023 19:56:33 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J7nN=HK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1r8Qfe-0000tx-Pm
- for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 19:56:30 +0000
+ id 1r8Qfg-0000tx-VY
+ for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 19:56:32 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 61ca406b-8ef1-11ee-9b0f-b553b5be7939;
- Wed, 29 Nov 2023 20:56:28 +0100 (CET)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-94-kXGyFUX-NIuQCfHv6oG-HA-1; Wed, 29 Nov 2023 14:56:20 -0500
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ id 6357e65d-8ef1-11ee-9b0f-b553b5be7939;
+ Wed, 29 Nov 2023 20:56:31 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-689-YQHcEqJ8MoSrPDOZze2dXg-1; Wed,
+ 29 Nov 2023 14:56:28 -0500
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C8B9585A59D;
- Wed, 29 Nov 2023 19:56:19 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 94C14381A90E;
+ Wed, 29 Nov 2023 19:56:27 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2D6602026D66;
- Wed, 29 Nov 2023 19:56:18 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id EEF7B492BE0;
+ Wed, 29 Nov 2023 19:56:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61ca406b-8ef1-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 6357e65d-8ef1-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701287787;
+	s=mimecast20190719; t=1701287789;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=bTcDFzFaOMJ4phQ9Kw9SCD8w63fmY3HfH7RTFoWnJ+c=;
-	b=UnrAJUJxEHGyrHIGQ9OTEpvajlA8X8lae+B6Gm44ReFHpoctQD18Zfp0rFIpuiK63tHfjt
-	tQaAC1KDbMp2QKS2pQ7DGfydhhN6XbVN4vzQqI+fVR+XSU718tmxSqzBPtGhz9v4f4IXni
-	BeYsCbqNyX5TGoUDVjp9AWUgxnNMwgE=
-X-MC-Unique: kXGyFUX-NIuQCfHv6oG-HA-1
+	bh=huM4CwyuFE14O20iKZjfHtDOU9jky102zE6IbKmjBhQ=;
+	b=BCWA+zz4s288wCKPfJMCWGotA3RJ0bWR0HZ7r14gncfkyl7V5vfgCehbcD/OKIRcycmtfJ
+	2jjvY/LY0MLAuwf+2A2b8xWLxVFbUvP59OjRy2XY8FyYVbfA94o+70AG7W7K95QWu4cLNx
+	4GNFkDoBeHEzmosfqn05D/Jm7COY5TA=
+X-MC-Unique: YQHcEqJ8MoSrPDOZze2dXg-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Hanna Reitz <hreitz@redhat.com>,
@@ -98,76 +98,37 @@ Cc: Hanna Reitz <hreitz@redhat.com>,
 	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
 	Fam Zheng <fam@euphon.net>,
 	Fabiano Rosas <farosas@suse.de>
-Subject: [PATCH 07/12] aio-wait: draw equivalence between AIO_WAIT_WHILE() and AIO_WAIT_WHILE_UNLOCKED()
-Date: Wed, 29 Nov 2023 14:55:48 -0500
-Message-ID: <20231129195553.942921-8-stefanha@redhat.com>
+Subject: [PATCH 10/12] scsi: remove outdated AioContext lock comment
+Date: Wed, 29 Nov 2023 14:55:51 -0500
+Message-ID: <20231129195553.942921-11-stefanha@redhat.com>
 In-Reply-To: <20231129195553.942921-1-stefanha@redhat.com>
 References: <20231129195553.942921-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
 
-Now that the AioContext lock no longer exists, AIO_WAIT_WHILE() and
-AIO_WAIT_WHILE_UNLOCKED() are equivalent.
-
-A future patch will get rid of AIO_WAIT_WHILE_UNLOCKED().
+The SCSI subsystem no longer uses the AioContext lock. Request
+processing runs exclusively in the BlockBackend's AioContext since
+"scsi: only access SCSIDevice->requests from one thread" and hence the
+lock is unnecessary.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/block/aio-wait.h | 16 ++++------------
- 1 file changed, 4 insertions(+), 12 deletions(-)
+ hw/scsi/scsi-disk.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/include/block/aio-wait.h b/include/block/aio-wait.h
-index 5449b6d742..157f105916 100644
---- a/include/block/aio-wait.h
-+++ b/include/block/aio-wait.h
-@@ -63,9 +63,6 @@ extern AioWait global_aio_wait;
-  * @ctx: the aio context, or NULL if multiple aio contexts (for which the
-  *       caller does not hold a lock) are involved in the polling condition.
-  * @cond: wait while this conditional expression is true
-- * @unlock: whether to unlock and then lock again @ctx. This applies
-- * only when waiting for another AioContext from the main loop.
-- * Otherwise it's ignored.
-  *
-  * Wait while a condition is true.  Use this to implement synchronous
-  * operations that require event loop activity.
-@@ -78,7 +75,7 @@ extern AioWait global_aio_wait;
-  * wait on conditions between two IOThreads since that could lead to deadlock,
-  * go via the main loop instead.
-  */
--#define AIO_WAIT_WHILE_INTERNAL(ctx, cond, unlock) ({              \
-+#define AIO_WAIT_WHILE_INTERNAL(ctx, cond) ({                      \
-     bool waited_ = false;                                          \
-     AioWait *wait_ = &global_aio_wait;                             \
-     AioContext *ctx_ = (ctx);                                      \
-@@ -95,13 +92,7 @@ extern AioWait global_aio_wait;
-         assert(qemu_get_current_aio_context() ==                   \
-                qemu_get_aio_context());                            \
-         while ((cond)) {                                           \
--            if (unlock && ctx_) {                                  \
--                aio_context_release(ctx_);                         \
--            }                                                      \
-             aio_poll(qemu_get_aio_context(), true);                \
--            if (unlock && ctx_) {                                  \
--                aio_context_acquire(ctx_);                         \
--            }                                                      \
-             waited_ = true;                                        \
-         }                                                          \
-     }                                                              \
-@@ -109,10 +100,11 @@ extern AioWait global_aio_wait;
-     waited_; })
+diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
+index f1bd5f5c6e..ef0d21d737 100644
+--- a/hw/scsi/scsi-disk.c
++++ b/hw/scsi/scsi-disk.c
+@@ -351,7 +351,6 @@ done:
+     scsi_req_unref(&r->req);
+ }
  
- #define AIO_WAIT_WHILE(ctx, cond)                                  \
--    AIO_WAIT_WHILE_INTERNAL(ctx, cond, true)
-+    AIO_WAIT_WHILE_INTERNAL(ctx, cond)
- 
-+/* TODO replace this with AIO_WAIT_WHILE() in a future patch */
- #define AIO_WAIT_WHILE_UNLOCKED(ctx, cond)                         \
--    AIO_WAIT_WHILE_INTERNAL(ctx, cond, false)
-+    AIO_WAIT_WHILE_INTERNAL(ctx, cond)
- 
- /**
-  * aio_wait_kick:
+-/* Called with AioContext lock held */
+ static void scsi_dma_complete(void *opaque, int ret)
+ {
+     SCSIDiskReq *r = (SCSIDiskReq *)opaque;
 -- 
 2.42.0
 
