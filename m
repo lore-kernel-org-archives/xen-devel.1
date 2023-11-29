@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32208C4167B
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 19:56:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644177.1004891 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A52C07E98
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 19:56:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644185.1004941 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8QfM-00012Q-T7; Wed, 29 Nov 2023 19:56:12 +0000
+	id 1r8Qfd-00032I-T4; Wed, 29 Nov 2023 19:56:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644177.1004891; Wed, 29 Nov 2023 19:56:12 +0000
+Received: by outflank-mailman (output) from mailman id 644185.1004941; Wed, 29 Nov 2023 19:56:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8QfM-00012H-Oq; Wed, 29 Nov 2023 19:56:12 +0000
-Received: by outflank-mailman (input) for mailman id 644177;
- Wed, 29 Nov 2023 19:56:11 +0000
+	id 1r8Qfd-000327-O8; Wed, 29 Nov 2023 19:56:29 +0000
+Received: by outflank-mailman (input) for mailman id 644185;
+ Wed, 29 Nov 2023 19:56:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J7nN=HK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1r8QfL-0000tx-Hh
- for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 19:56:11 +0000
+ id 1r8Qfc-0000tx-PS
+ for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 19:56:28 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 56595fa9-8ef1-11ee-9b0f-b553b5be7939;
- Wed, 29 Nov 2023 20:56:09 +0100 (CET)
+ id 6119a210-8ef1-11ee-9b0f-b553b5be7939;
+ Wed, 29 Nov 2023 20:56:27 +0100 (CET)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-675-cCc6c86vMTanlI7Lk6yCzA-1; Wed, 29 Nov 2023 14:56:04 -0500
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
+ us-mta-368-V4RCa5FgOVyNOyjvlaQEWQ-1; Wed, 29 Nov 2023 14:56:22 -0500
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 54B1D85A5B5;
- Wed, 29 Nov 2023 19:56:03 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id EDC72185A781;
+ Wed, 29 Nov 2023 19:56:21 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 945FCC15881;
- Wed, 29 Nov 2023 19:56:02 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 59B8540C6EBA;
+ Wed, 29 Nov 2023 19:56:21 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 56595fa9-8ef1-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 6119a210-8ef1-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701287768;
+	s=mimecast20190719; t=1701287786;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=aS2QKCjvSUaDgBLp5BpYBu5ELqUNynQgUkZ8pGmrnOA=;
-	b=PkczHfrzBWmQuzJGedWZd53LHhHi3jf8PdjtMTrPqN/CNxgTNh7ZSXqkqEETi4WIOE0k/d
-	EPxoRgLEtGnjw22GwN0wxh68q4dpva4ypKt4rVZfrhncM9ZJRZXsjKhjIZa5oVD4WpeE+Q
-	Zui5Ty3ln5q/9hdXj06cIeFxIFzLeTY=
-X-MC-Unique: cCc6c86vMTanlI7Lk6yCzA-1
+	bh=dKDLiHF1X71kKBGZSvHJbLZCC/+L9f9ZlF5nJQ5JHss=;
+	b=X6wSY8RxPat3bgpHmYKU1oqbd3c//eONLxQ1eaNz39Wai9PtSKLF8wwc4zfknFGD/bvHqu
+	pNsRCfimNe2IglWYCueTa/Y9hnovs0h58Sq4D9MEPKrCsCBdJnXWXdV4BXfzAfVv1PerbD
+	ag9HkoGrIqvN19S4PF3ADTLkc29uQKU=
+X-MC-Unique: V4RCa5FgOVyNOyjvlaQEWQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Hanna Reitz <hreitz@redhat.com>,
@@ -98,121 +98,97 @@ Cc: Hanna Reitz <hreitz@redhat.com>,
 	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
 	Fam Zheng <fam@euphon.net>,
 	Fabiano Rosas <farosas@suse.de>
-Subject: [PATCH 02/12] tests: remove aio_context_acquire() tests
-Date: Wed, 29 Nov 2023 14:55:43 -0500
-Message-ID: <20231129195553.942921-3-stefanha@redhat.com>
+Subject: [PATCH 08/12] aio: remove aio_context_acquire()/aio_context_release() API
+Date: Wed, 29 Nov 2023 14:55:49 -0500
+Message-ID: <20231129195553.942921-9-stefanha@redhat.com>
 In-Reply-To: <20231129195553.942921-1-stefanha@redhat.com>
 References: <20231129195553.942921-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
 
-The aio_context_acquire() API is being removed. Drop the test case that
-calls the API.
+Delete these functions because nothing calls these functions anymore.
+
+I introduced these APIs in commit 98563fc3ec44 ("aio: add
+aio_context_acquire() and aio_context_release()") in 2014. It's with a
+sigh of relief that I delete these APIs almost 10 years later.
+
+Thanks to Paolo Bonzini's vision for multi-queue QEMU, we got an
+understanding of where the code needed to go in order to remove the
+limitations that the original dataplane and the IOThread/AioContext
+approach that followed it.
+
+Emanuele Giuseppe Esposito had the splendid determination to convert
+large parts of the codebase so that they no longer needed the AioContext
+lock. This was a painstaking process, both in the actual code changes
+required and the iterations of code review that Emanuele eeked out of
+Kevin and me over many months.
+
+Kevin Wolf tackled multitudes of graph locking conversions to protect
+in-flight I/O from run-time changes to the block graph as well as the
+clang Thread Safety Analysis annotations that allow the compiler to
+check whether the graph lock is being used correctly.
+
+And me, well, I'm just here to add some pizzazz to the QEMU multi-queue
+block layer :). Thank you to everyone who helped with this effort,
+including Eric Blake, code reviewer extraordinaire, and others who I've
+forgotten to mention.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- tests/unit/test-aio.c | 67 +------------------------------------------
- 1 file changed, 1 insertion(+), 66 deletions(-)
+ include/block/aio.h | 17 -----------------
+ util/async.c        | 10 ----------
+ 2 files changed, 27 deletions(-)
 
-diff --git a/tests/unit/test-aio.c b/tests/unit/test-aio.c
-index 337b6e4ea7..e77d86be87 100644
---- a/tests/unit/test-aio.c
-+++ b/tests/unit/test-aio.c
-@@ -100,76 +100,12 @@ static void event_ready_cb(EventNotifier *e)
+diff --git a/include/block/aio.h b/include/block/aio.h
+index f08b358077..af05512a7d 100644
+--- a/include/block/aio.h
++++ b/include/block/aio.h
+@@ -278,23 +278,6 @@ void aio_context_ref(AioContext *ctx);
+  */
+ void aio_context_unref(AioContext *ctx);
  
- /* Tests using aio_*.  */
- 
--typedef struct {
--    QemuMutex start_lock;
--    EventNotifier notifier;
--    bool thread_acquired;
--} AcquireTestData;
+-/* Take ownership of the AioContext.  If the AioContext will be shared between
+- * threads, and a thread does not want to be interrupted, it will have to
+- * take ownership around calls to aio_poll().  Otherwise, aio_poll()
+- * automatically takes care of calling aio_context_acquire and
+- * aio_context_release.
+- *
+- * Note that this is separate from bdrv_drained_begin/bdrv_drained_end.  A
+- * thread still has to call those to avoid being interrupted by the guest.
+- *
+- * Bottom halves, timers and callbacks can be created or removed without
+- * acquiring the AioContext.
+- */
+-void aio_context_acquire(AioContext *ctx);
 -
--static void *test_acquire_thread(void *opaque)
--{
--    AcquireTestData *data = opaque;
+-/* Relinquish ownership of the AioContext. */
+-void aio_context_release(AioContext *ctx);
 -
--    /* Wait for other thread to let us start */
--    qemu_mutex_lock(&data->start_lock);
--    qemu_mutex_unlock(&data->start_lock);
--
--    /* event_notifier_set might be called either before or after
--     * the main thread's call to poll().  The test case's outcome
--     * should be the same in either case.
--     */
--    event_notifier_set(&data->notifier);
--    aio_context_acquire(ctx);
--    aio_context_release(ctx);
--
--    data->thread_acquired = true; /* success, we got here */
--
--    return NULL;
--}
--
- static void set_event_notifier(AioContext *nctx, EventNotifier *notifier,
-                                EventNotifierHandler *handler)
- {
-     aio_set_event_notifier(nctx, notifier, handler, NULL, NULL);
+ /**
+  * aio_bh_schedule_oneshot_full: Allocate a new bottom half structure that will
+  * run only once and as soon as possible.
+diff --git a/util/async.c b/util/async.c
+index dfd44ef612..460529057c 100644
+--- a/util/async.c
++++ b/util/async.c
+@@ -719,16 +719,6 @@ void aio_context_unref(AioContext *ctx)
+     g_source_unref(&ctx->source);
  }
  
--static void dummy_notifier_read(EventNotifier *n)
+-void aio_context_acquire(AioContext *ctx)
 -{
--    event_notifier_test_and_clear(n);
+-    /* TODO remove this function */
 -}
 -
--static void test_acquire(void)
+-void aio_context_release(AioContext *ctx)
 -{
--    QemuThread thread;
--    AcquireTestData data;
--
--    /* Dummy event notifier ensures aio_poll() will block */
--    event_notifier_init(&data.notifier, false);
--    set_event_notifier(ctx, &data.notifier, dummy_notifier_read);
--    g_assert(!aio_poll(ctx, false)); /* consume aio_notify() */
--
--    qemu_mutex_init(&data.start_lock);
--    qemu_mutex_lock(&data.start_lock);
--    data.thread_acquired = false;
--
--    qemu_thread_create(&thread, "test_acquire_thread",
--                       test_acquire_thread,
--                       &data, QEMU_THREAD_JOINABLE);
--
--    /* Block in aio_poll(), let other thread kick us and acquire context */
--    aio_context_acquire(ctx);
--    qemu_mutex_unlock(&data.start_lock); /* let the thread run */
--    g_assert(aio_poll(ctx, true));
--    g_assert(!data.thread_acquired);
--    aio_context_release(ctx);
--
--    qemu_thread_join(&thread);
--    set_event_notifier(ctx, &data.notifier, NULL);
--    event_notifier_cleanup(&data.notifier);
--
--    g_assert(data.thread_acquired);
+-    /* TODO remove this function */
 -}
 -
- static void test_bh_schedule(void)
- {
-     BHTestData data = { .n = 0 };
-@@ -879,7 +815,7 @@ static void test_worker_thread_co_enter(void)
-     qemu_thread_get_self(&this_thread);
-     co = qemu_coroutine_create(co_check_current_thread, &this_thread);
+ QEMU_DEFINE_STATIC_CO_TLS(AioContext *, my_aiocontext)
  
--    qemu_thread_create(&worker_thread, "test_acquire_thread",
-+    qemu_thread_create(&worker_thread, "test_aio_co_enter",
-                        test_aio_co_enter,
-                        co, QEMU_THREAD_JOINABLE);
- 
-@@ -899,7 +835,6 @@ int main(int argc, char **argv)
-     while (g_main_context_iteration(NULL, false));
- 
-     g_test_init(&argc, &argv, NULL);
--    g_test_add_func("/aio/acquire",                 test_acquire);
-     g_test_add_func("/aio/bh/schedule",             test_bh_schedule);
-     g_test_add_func("/aio/bh/schedule10",           test_bh_schedule10);
-     g_test_add_func("/aio/bh/cancel",               test_bh_cancel);
+ AioContext *qemu_get_current_aio_context(void)
 -- 
 2.42.0
 
