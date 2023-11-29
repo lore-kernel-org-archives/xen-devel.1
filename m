@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF09C4167B
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 19:56:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644190.1004966 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6026CC4167B
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Nov 2023 20:05:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644207.1004981 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8Qfi-0003vJ-AI; Wed, 29 Nov 2023 19:56:34 +0000
+	id 1r8Qni-00007Y-4E; Wed, 29 Nov 2023 20:04:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644190.1004966; Wed, 29 Nov 2023 19:56:34 +0000
+Received: by outflank-mailman (output) from mailman id 644207.1004981; Wed, 29 Nov 2023 20:04:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8Qfi-0003u4-5h; Wed, 29 Nov 2023 19:56:34 +0000
-Received: by outflank-mailman (input) for mailman id 644190;
- Wed, 29 Nov 2023 19:56:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r8Qni-00007R-1M; Wed, 29 Nov 2023 20:04:50 +0000
+Received: by outflank-mailman (input) for mailman id 644207;
+ Wed, 29 Nov 2023 20:04:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=J7nN=HK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1r8Qfg-0000tx-VY
- for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 19:56:32 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6357e65d-8ef1-11ee-9b0f-b553b5be7939;
- Wed, 29 Nov 2023 20:56:31 +0100 (CET)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-689-YQHcEqJ8MoSrPDOZze2dXg-1; Wed,
- 29 Nov 2023 14:56:28 -0500
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 94C14381A90E;
- Wed, 29 Nov 2023 19:56:27 +0000 (UTC)
-Received: from localhost (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EEF7B492BE0;
- Wed, 29 Nov 2023 19:56:26 +0000 (UTC)
+ <SRS0=s3b2=HK=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
+ id 1r8Qng-00007L-IZ
+ for xen-devel@lists.xenproject.org; Wed, 29 Nov 2023 20:04:48 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8b6c87b8-8ef2-11ee-98e4-6d05b1d4d9a1;
+ Wed, 29 Nov 2023 21:04:47 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 3C2868285459;
+ Wed, 29 Nov 2023 14:04:46 -0600 (CST)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id rsWPAH0ZGu_4; Wed, 29 Nov 2023 14:04:45 -0600 (CST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 7DC068285494;
+ Wed, 29 Nov 2023 14:04:45 -0600 (CST)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id x9Qh34KDNANS; Wed, 29 Nov 2023 14:04:45 -0600 (CST)
+Received: from [10.11.0.3] (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id E82628285459;
+ Wed, 29 Nov 2023 14:04:44 -0600 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,83 +53,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6357e65d-8ef1-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701287789;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=huM4CwyuFE14O20iKZjfHtDOU9jky102zE6IbKmjBhQ=;
-	b=BCWA+zz4s288wCKPfJMCWGotA3RJ0bWR0HZ7r14gncfkyl7V5vfgCehbcD/OKIRcycmtfJ
-	2jjvY/LY0MLAuwf+2A2b8xWLxVFbUvP59OjRy2XY8FyYVbfA94o+70AG7W7K95QWu4cLNx
-	4GNFkDoBeHEzmosfqn05D/Jm7COY5TA=
-X-MC-Unique: YQHcEqJ8MoSrPDOZze2dXg-1
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Hanna Reitz <hreitz@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Alberto Garcia <berto@igalia.com>,
-	Emanuele Giuseppe Esposito <eesposit@redhat.com>,
-	John Snow <jsnow@redhat.com>,
-	Kevin Wolf <kwolf@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	Wen Congyang <wencongyang2@huawei.com>,
-	<qemu-block@nongnu.org>,
-	xen-devel@lists.xenproject.org,
-	Coiby Xu <Coiby.Xu@gmail.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Xie Changlong <xiechanglong.d@gmail.com>,
-	Ari Sundholm <ari@tuxera.com>,
-	Li Zhijian <lizhijian@fujitsu.com>,
-	Cleber Rosa <crosa@redhat.com>,
-	Juan Quintela <quintela@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
-	Zhang Chen <chen.zhang@intel.com>,
-	Peter Xu <peterx@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Leonardo Bras <leobras@redhat.com>,
-	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
-	Fam Zheng <fam@euphon.net>,
-	Fabiano Rosas <farosas@suse.de>
-Subject: [PATCH 10/12] scsi: remove outdated AioContext lock comment
-Date: Wed, 29 Nov 2023 14:55:51 -0500
-Message-ID: <20231129195553.942921-11-stefanha@redhat.com>
-In-Reply-To: <20231129195553.942921-1-stefanha@redhat.com>
-References: <20231129195553.942921-1-stefanha@redhat.com>
+X-Inumbo-ID: 8b6c87b8-8ef2-11ee-98e4-6d05b1d4d9a1
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 7DC068285494
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1701288285; bh=9YCpgw5K1Pm5Pd6CadDcMixEq5iCcxEGQZkZfgBK1Ew=;
+	h=Message-ID:Date:MIME-Version:To:From;
+	b=NliLccXb8suItIRTwhXh2WKcAbqBMDaHdVUTvw3qCJkCnV7bz4zk5hRTk+f8bDB0S
+	 g4kcE64RR+pblHaK0cF+bvyhEHMk/BtYe4XbFT1GhZ/0UxxrqMPOPvGdP2g0UaYOWu
+	 qWzpy5tvofYACw4vWSqxXUK1jsVgeQytf2VUiOnM=
+X-Virus-Scanned: amavisd-new at rptsys.com
+Message-ID: <042eb87d-de49-4c5f-82e0-58a184829271@raptorengineering.com>
+Date: Wed, 29 Nov 2023 14:04:44 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 12/14] xen/asm-generic: introduce stub header softirq.h
+Content-Language: en-US
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>
+References: <cover.1701093907.git.oleksii.kurochko@gmail.com>
+ <090991be61252cabefc06da19597e3a86a4cd1da.1701093907.git.oleksii.kurochko@gmail.com>
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
+In-Reply-To: <090991be61252cabefc06da19597e3a86a4cd1da.1701093907.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The SCSI subsystem no longer uses the AioContext lock. Request
-processing runs exclusively in the BlockBackend's AioContext since
-"scsi: only access SCSIDevice->requests from one thread" and hence the
-lock is unnecessary.
+Hi Oleksii,
 
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
- hw/scsi/scsi-disk.c | 1 -
- 1 file changed, 1 deletion(-)
+On 11/27/23 8:13 AM, Oleksii Kurochko wrote:
+> <asm/softirq.h> is common between Arm, PPC and RISC-V so it is
+> moved to asm-generic.
+> 
+> Drop Arm and PPC's softirq.h and use asm-generic version instead.
+> 
 
-diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
-index f1bd5f5c6e..ef0d21d737 100644
---- a/hw/scsi/scsi-disk.c
-+++ b/hw/scsi/scsi-disk.c
-@@ -351,7 +351,6 @@ done:
-     scsi_req_unref(&r->req);
- }
- 
--/* Called with AioContext lock held */
- static void scsi_dma_complete(void *opaque, int ret)
- {
-     SCSIDiskReq *r = (SCSIDiskReq *)opaque;
--- 
-2.42.0
+Acked-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 
+Thanks,
+Shawn
 
