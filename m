@@ -4,44 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A758C4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:29:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644998.1006720 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D58F6C07CA9
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:48:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.645013.1006754 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iz4-0006R2-3T; Thu, 30 Nov 2023 15:29:46 +0000
+	id 1r8jHM-000751-0q; Thu, 30 Nov 2023 15:48:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644998.1006720; Thu, 30 Nov 2023 15:29:46 +0000
+Received: by outflank-mailman (output) from mailman id 645013.1006754; Thu, 30 Nov 2023 15:48:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iz4-0006Qv-0A; Thu, 30 Nov 2023 15:29:46 +0000
-Received: by outflank-mailman (input) for mailman id 644998;
- Thu, 30 Nov 2023 15:29:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=3Itg=HL=redhat.com=eblake@srs-se1.protection.inumbo.net>)
- id 1r8iz2-0006M0-Gj
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 15:29:44 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 48ba3b98-8f95-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 16:29:43 +0100 (CET)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-605-LgiIdD8uN8mh6HEoDFNSpA-1; Thu, 30 Nov 2023 10:29:40 -0500
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AE66A101A529;
- Thu, 30 Nov 2023 15:29:39 +0000 (UTC)
-Received: from redhat.com (unknown [10.2.16.190])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 625392166B27;
- Thu, 30 Nov 2023 15:29:37 +0000 (UTC)
+	id 1r8jHL-00074u-U2; Thu, 30 Nov 2023 15:48:39 +0000
+Received: by outflank-mailman (input) for mailman id 645013;
+ Thu, 30 Nov 2023 15:48:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Hcd2=HL=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1r8jHJ-0006bT-Ry
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 15:48:37 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ebd2b1a0-8f97-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 16:48:35 +0100 (CET)
+Received: from Dell.homenet.telecomitalia.it
+ (host-82-59-158-146.retail.telecomitalia.it [82.59.158.146])
+ by support.bugseng.com (Postfix) with ESMTPSA id 3AEF04EE073E;
+ Thu, 30 Nov 2023 16:48:35 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,61 +42,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48ba3b98-8f95-11ee-98e4-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701358182;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=lRu1DpGqufpi6vJf/QtkPNmIfn7avcVJal3SJr8lFvI=;
-	b=Bc3cw61yKLvctKpdz849l7RHaq85yVW/oHAhqLhzKWBaxFTR0dTH8o31jGpmtqH04H+m+t
-	7ySKefU+a0agUXNlgrjrEAQTG0E4L3sxGPMSmSoxo/AVNZ5Ww/WRLzPbUnckrBbCUPliXk
-	qB/UABjn6ldunz1mhOxWJk1G2SurTpI=
-X-MC-Unique: LgiIdD8uN8mh6HEoDFNSpA-1
-Date: Thu, 30 Nov 2023 09:29:35 -0600
-From: Eric Blake <eblake@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: qemu-devel@nongnu.org, Hanna Reitz <hreitz@redhat.com>, 
-	Paul Durrant <paul@xen.org>, Paolo Bonzini <pbonzini@redhat.com>, 
-	Alberto Garcia <berto@igalia.com>, Emanuele Giuseppe Esposito <eesposit@redhat.com>, 
-	John Snow <jsnow@redhat.com>, Kevin Wolf <kwolf@redhat.com>, 
-	Wen Congyang <wencongyang2@huawei.com>, qemu-block@nongnu.org, xen-devel@lists.xenproject.org, 
-	Coiby Xu <Coiby.Xu@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, 
-	Xie Changlong <xiechanglong.d@gmail.com>, Ari Sundholm <ari@tuxera.com>, 
-	Li Zhijian <lizhijian@fujitsu.com>, Cleber Rosa <crosa@redhat.com>, 
-	Juan Quintela <quintela@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
-	Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>, Jason Wang <jasowang@redhat.com>, 
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>, Zhang Chen <chen.zhang@intel.com>, Peter Xu <peterx@redhat.com>, 
-	Anthony Perard <anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Leonardo Bras <leobras@redhat.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, 
-	Fam Zheng <fam@euphon.net>, Fabiano Rosas <farosas@suse.de>
-Subject: Re: [PATCH 02/12] tests: remove aio_context_acquire() tests
-Message-ID: <r6752wnsw2pf2susl5vzoszywb2etltoywuhkvhtui4h5oyslw@k4cimtclsa3g>
-References: <20231129195553.942921-1-stefanha@redhat.com>
- <20231129195553.942921-3-stefanha@redhat.com>
+X-Inumbo-ID: ebd2b1a0-8f97-11ee-9b0f-b553b5be7939
+From: Federico Serafini <federico.serafini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	Federico Serafini <federico.serafini@bugseng.com>
+Subject: [XEN PATCH 2/2] x86/p2m: address a violation of MISRA C:2012 Rule 8.3
+Date: Thu, 30 Nov 2023 16:48:22 +0100
+Message-Id: <0faaa66465367a9e4c4da5749bc123b832e02103.1701344917.git.federico.serafini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1701344917.git.federico.serafini@bugseng.com>
+References: <cover.1701344917.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231129195553.942921-3-stefanha@redhat.com>
-User-Agent: NeoMutt/20231103
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 29, 2023 at 02:55:43PM -0500, Stefan Hajnoczi wrote:
-> The aio_context_acquire() API is being removed. Drop the test case that
-> calls the API.
-> 
-> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> ---
->  tests/unit/test-aio.c | 67 +------------------------------------------
->  1 file changed, 1 insertion(+), 66 deletions(-)
+Make function declaration and definition consistent changing
+parameter name from "gpfn" to "gfn".
+For consistency, rename also "old_gpfn" to "old_gfn".
+No functional change.
 
-The rest of this series should not hold up 8.2.
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+---
+This patch depends on patch 1/2 of the same series.
+---
+ xen/arch/x86/mm/p2m.c | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-Reviewed-by: Eric Blake <eblake@redhat.com>
-
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index 42508e1e7e..6eb446e437 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -2414,10 +2414,10 @@ int xenmem_add_to_physmap_one(
+     unsigned int space,
+     union add_to_physmap_extra extra,
+     unsigned long idx,
+-    gfn_t gpfn)
++    gfn_t gfn)
+ {
+     struct page_info *page = NULL;
+-    unsigned long gmfn = 0 /* gcc ... */, old_gpfn;
++    unsigned long gmfn = 0 /* gcc ... */, old_gfn;
+     mfn_t prev_mfn;
+     int rc = 0;
+     mfn_t mfn = INVALID_MFN;
+@@ -2431,7 +2431,7 @@ int xenmem_add_to_physmap_one(
+         break;
+ 
+     case XENMAPSPACE_grant_table:
+-        rc = gnttab_map_frame(d, idx, gpfn, &mfn);
++        rc = gnttab_map_frame(d, idx, gfn, &mfn);
+         if ( rc )
+             return rc;
+         /* Need to take care of the reference obtained in gnttab_map_frame(). */
+@@ -2455,7 +2455,7 @@ int xenmem_add_to_physmap_one(
+     }
+ 
+     case XENMAPSPACE_gmfn_foreign:
+-        return p2m_add_foreign(d, idx, gfn_x(gpfn), extra.foreign_domid);
++        return p2m_add_foreign(d, idx, gfn_x(gfn), extra.foreign_domid);
+     }
+ 
+     if ( mfn_eq(mfn, INVALID_MFN) )
+@@ -2475,12 +2475,12 @@ int xenmem_add_to_physmap_one(
+      * Upon freeing we wouldn't be able to find other mappings in the P2M
+      * (unless we did a brute force search).
+      */
+-    prev_mfn = get_gfn(d, gfn_x(gpfn), &p2mt);
++    prev_mfn = get_gfn(d, gfn_x(gfn), &p2mt);
+ 
+     /* XENMAPSPACE_gmfn: Check if the MFN is associated with another GFN. */
+-    old_gpfn = get_gpfn_from_mfn(mfn_x(mfn));
+-    ASSERT(!SHARED_M2P(old_gpfn));
+-    if ( space == XENMAPSPACE_gmfn && old_gpfn != gmfn )
++    old_gfn = get_gpfn_from_mfn(mfn_x(mfn));
++    ASSERT(!SHARED_M2P(old_gfn));
++    if ( space == XENMAPSPACE_gmfn && old_gfn != gmfn )
+     {
+         rc = -EXDEV;
+         goto put_all;
+@@ -2493,22 +2493,22 @@ int xenmem_add_to_physmap_one(
+     {
+         if ( is_special_page(mfn_to_page(prev_mfn)) )
+             /* Special pages are simply unhooked from this phys slot. */
+-            rc = p2m_remove_page(d, gpfn, prev_mfn, PAGE_ORDER_4K);
++            rc = p2m_remove_page(d, gfn, prev_mfn, PAGE_ORDER_4K);
+         else if ( !mfn_eq(mfn, prev_mfn) )
+             /* Normal domain memory is freed, to avoid leaking memory. */
+-            rc = guest_remove_page(d, gfn_x(gpfn));
++            rc = guest_remove_page(d, gfn_x(gfn));
+     }
+ 
+     /* Unmap from old location, if any. */
+-    if ( !rc && old_gpfn != INVALID_M2P_ENTRY && !gfn_eq(_gfn(old_gpfn), gpfn) )
+-        rc = p2m_remove_page(d, _gfn(old_gpfn), mfn, PAGE_ORDER_4K);
++    if ( !rc && old_gfn != INVALID_M2P_ENTRY && !gfn_eq(_gfn(old_gfn), gfn) )
++        rc = p2m_remove_page(d, _gfn(old_gfn), mfn, PAGE_ORDER_4K);
+ 
+     /* Map at new location. */
+     if ( !rc )
+-        rc = p2m_add_page(d, gpfn, mfn, PAGE_ORDER_4K, p2m_ram_rw);
++        rc = p2m_add_page(d, gfn, mfn, PAGE_ORDER_4K, p2m_ram_rw);
+ 
+  put_all:
+-    put_gfn(d, gfn_x(gpfn));
++    put_gfn(d, gfn_x(gfn));
+ 
+  put_both:
+     /*
 -- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.
-Virtualization:  qemu.org | libguestfs.org
+2.34.1
 
 
