@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0EDC4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 09:12:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644488.1005553 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB916C4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 09:20:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644494.1005563 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8d64-0007yG-6z; Thu, 30 Nov 2023 09:12:36 +0000
+	id 1r8dDM-0002fT-W7; Thu, 30 Nov 2023 09:20:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644488.1005553; Thu, 30 Nov 2023 09:12:36 +0000
+Received: by outflank-mailman (output) from mailman id 644494.1005563; Thu, 30 Nov 2023 09:20:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8d64-0007y9-44; Thu, 30 Nov 2023 09:12:36 +0000
-Received: by outflank-mailman (input) for mailman id 644488;
- Thu, 30 Nov 2023 09:12:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=p39W=HL=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
- id 1r8d62-0007y3-VA
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 09:12:34 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 98e4ff40-8f60-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 10:12:34 +0100 (CET)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40859dee28cso5605285e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 30 Nov 2023 01:12:34 -0800 (PST)
-Received: from [192.168.17.21] (54-240-197-238.amazon.com. [54.240.197.238])
- by smtp.gmail.com with ESMTPSA id
- w3-20020a05600c474300b0040b36050f1bsm1227874wmo.44.2023.11.30.01.12.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Nov 2023 01:12:32 -0800 (PST)
+	id 1r8dDM-0002fA-TU; Thu, 30 Nov 2023 09:20:08 +0000
+Received: by outflank-mailman (input) for mailman id 644494;
+ Thu, 30 Nov 2023 09:20:07 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8dDL-0002a6-I2; Thu, 30 Nov 2023 09:20:07 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8dDL-0001nm-4o; Thu, 30 Nov 2023 09:20:07 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8dDK-0006Bk-Hk; Thu, 30 Nov 2023 09:20:06 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1r8dDK-0005Ok-HL; Thu, 30 Nov 2023 09:20:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,127 +44,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98e4ff40-8f60-11ee-98e4-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701335553; x=1701940353; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=siaYtfcd1nV01H+dRdqoPqqRzYarxavISfuT4qVZzyM=;
-        b=KCuQ4gL2INSaS9jGLTrUCQcuDh+hURLJe1cCHLlWN5JygxWBDmHbVqyeVHLZ3IQ7bq
-         +WixgJsBzr+dNaobJW836KU8tltX3Z4DJ+VaBZZaI5i7p50KKbZd3vhlU/ngm1rtAaEi
-         FNKWXL28bHRcMkjvFZ2Hkrysx+HLEC3M80/rGH8chwBv98ZlM6ImY8sHi+NHMjZjEaMS
-         1tnF0HqMcfI3E4ONJD4FmDW98l3HhwouWY0obc7jfKe953Sj66oS3cq33ZjpHe2mPD8S
-         TtwTGVQ3aTTSGH6iPGmc2q/Q52MJQHWPtFgzl6G156YevCMZ45poolCX/bar9bCbVeCH
-         JnXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701335553; x=1701940353;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=siaYtfcd1nV01H+dRdqoPqqRzYarxavISfuT4qVZzyM=;
-        b=sccnEaXAmQJIgneaWtLNXpUUUZG9ZdmiSW32Ll8zTFkqTFTfn/wwTofhUQPreRqTQW
-         T7kSMQ2wdSGk7dRSk6ehZZOkqm5Oa/nDbs+ZMFw85nG2RaC5uxqY3kCBSwaOp0A8bYwR
-         8cJ3x2mwtBBg6KsT2w53Vq3+x1j+sRKGFrEOem+Q+WiKaGdTCRLtHVgSnOR5TtpIRydR
-         +7p4PUxM5AKjhI3x4FKWJVrKm4o2FvbYyHH5gkbyAwScJtCbV+/RwFVP4psnQnWdJtF8
-         U/l614DuNGYnWsRnHkJhFh8cLjIGfbxlUMJnJf3JfJyNz2Ki90YhpGU06zdC9DNSUr3l
-         ci2g==
-X-Gm-Message-State: AOJu0YybXHtTjzirdP8rYL1hhD5siZI7aD0V5URrFeNVdsf175HkS4Pq
-	OZSGjnLWDvgCntMiNzPLESs=
-X-Google-Smtp-Source: AGHT+IHK+u82BOt6ta4eeN8cUN9H4SuoQH8m39Aqnj8S1aTgEt3vYUylXWxM8EvP4Mg+jRJiQRSjlA==
-X-Received: by 2002:a05:600c:3110:b0:3f5:fff8:d4f3 with SMTP id g16-20020a05600c311000b003f5fff8d4f3mr15366829wmo.7.1701335553272;
-        Thu, 30 Nov 2023 01:12:33 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <bc173dc3-1cdf-43d2-8ab5-9df4dd0a6a51@xen.org>
-Date: Thu, 30 Nov 2023 09:12:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=nglMH4OlpMnzzf5hVL6oRZ92P7UVJnJx3VyZ/7f/WPc=; b=WDvxCdrtSEiy8uBbL3KdhC9ImN
+	VCfmsGdrscpNxi2pDO9oNqPWjzsw83tnfaL9q/hdyIdiRkTpT0C1q87cnVmCKTL3Zx9y1tnKLkNWz
+	I6Ko2/k2tR/PGLFyYmWVJTWffSKpxXPTz0vbBV8hHc0bzAX6DJib34olGpU1GiV09BAg=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-183946-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: paul@xen.org
-Subject: Re: [PATCH 05/12] block: remove AioContext locking
-Content-Language: en-US
-To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
-Cc: Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Alberto Garcia <berto@igalia.com>,
- Emanuele Giuseppe Esposito <eesposit@redhat.com>,
- John Snow <jsnow@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
- Eric Blake <eblake@redhat.com>, Wen Congyang <wencongyang2@huawei.com>,
- qemu-block@nongnu.org, xen-devel@lists.xenproject.org,
- Coiby Xu <Coiby.Xu@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Xie Changlong <xiechanglong.d@gmail.com>, Ari Sundholm <ari@tuxera.com>,
- Li Zhijian <lizhijian@fujitsu.com>, Cleber Rosa <crosa@redhat.com>,
- Juan Quintela <quintela@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Jason Wang <jasowang@redhat.com>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- Zhang Chen <chen.zhang@intel.com>, Peter Xu <peterx@redhat.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Leonardo Bras <leobras@redhat.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Fam Zheng <fam@euphon.net>,
- Fabiano Rosas <farosas@suse.de>
-References: <20231129195553.942921-1-stefanha@redhat.com>
- <20231129195553.942921-6-stefanha@redhat.com>
-Organization: Xen Project
-In-Reply-To: <20231129195553.942921-6-stefanha@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [ovmf test] 183946: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=b4f8c75e316e74750d5806b8ebf2bd11a3d62626
+X-Osstest-Versions-That:
+    ovmf=59b6b5059b90883abfcbd906c411e8f59ac1aa0d
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 30 Nov 2023 09:20:06 +0000
 
-On 29/11/2023 19:55, Stefan Hajnoczi wrote:
-> This is the big patch that removes
-> aio_context_acquire()/aio_context_release() from the block layer and
-> affected block layer users.
-> 
-> There isn't a clean way to split this patch and the reviewers are likely
-> the same group of people, so I decided to do it in one patch.
-> 
-> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> ---
->   include/block/block-global-state.h |   9 +-
->   include/block/block-io.h           |   3 +-
->   include/block/snapshot.h           |   2 -
->   block.c                            | 234 +---------------------
->   block/block-backend.c              |  14 --
->   block/copy-before-write.c          |  22 +--
->   block/export/export.c              |  22 +--
->   block/io.c                         |  45 +----
->   block/mirror.c                     |  19 --
->   block/monitor/bitmap-qmp-cmds.c    |  20 +-
->   block/monitor/block-hmp-cmds.c     |  29 ---
->   block/qapi-sysemu.c                |  27 +--
->   block/qapi.c                       |  18 +-
->   block/raw-format.c                 |   5 -
->   block/replication.c                |  58 +-----
->   block/snapshot.c                   |  22 +--
->   block/write-threshold.c            |   6 -
->   blockdev.c                         | 307 +++++------------------------
->   blockjob.c                         |  18 --
->   hw/block/dataplane/virtio-blk.c    |  10 -
->   hw/block/dataplane/xen-block.c     |  17 +-
->   hw/block/virtio-blk.c              |  45 +----
->   hw/core/qdev-properties-system.c   |   9 -
->   job.c                              |  16 --
->   migration/block.c                  |  33 +---
->   migration/migration-hmp-cmds.c     |   3 -
->   migration/savevm.c                 |  22 ---
->   net/colo-compare.c                 |   2 -
->   qemu-img.c                         |   4 -
->   qemu-io.c                          |  10 +-
->   qemu-nbd.c                         |   2 -
->   replay/replay-debugging.c          |   4 -
->   tests/unit/test-bdrv-drain.c       |  51 +----
->   tests/unit/test-bdrv-graph-mod.c   |   6 -
->   tests/unit/test-block-iothread.c   |  31 ---
->   tests/unit/test-blockjob.c         | 137 -------------
->   tests/unit/test-replication.c      |  11 --
->   util/async.c                       |   4 -
->   util/vhost-user-server.c           |   3 -
->   scripts/block-coroutine-wrapper.py |   3 -
->   tests/tsan/suppressions.tsan       |   1 -
->   41 files changed, 102 insertions(+), 1202 deletions(-)
-> 
+flight 183946 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/183946/
 
-Reviewed-by: Paul Durrant <paul@xen.org>
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 b4f8c75e316e74750d5806b8ebf2bd11a3d62626
+baseline version:
+ ovmf                 59b6b5059b90883abfcbd906c411e8f59ac1aa0d
 
+Last test of basis   183945  2023-11-30 05:11:04 Z    0 days
+Testing same since   183946  2023-11-30 07:41:01 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Mike Maslenkin <mike.maslenkin@gmail.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   59b6b5059b..b4f8c75e31  b4f8c75e316e74750d5806b8ebf2bd11a3d62626 -> xen-tested-master
 
