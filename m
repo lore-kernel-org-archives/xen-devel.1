@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 630AEC10DAA
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644799.1006420 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 174C9C07CA9
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644803.1006435 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCR-000815-6a; Thu, 30 Nov 2023 14:39:31 +0000
+	id 1r8iCU-0000JU-TD; Thu, 30 Nov 2023 14:39:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644799.1006420; Thu, 30 Nov 2023 14:39:30 +0000
+Received: by outflank-mailman (output) from mailman id 644803.1006435; Thu, 30 Nov 2023 14:39:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCP-0007vo-RE; Thu, 30 Nov 2023 14:39:29 +0000
-Received: by outflank-mailman (input) for mailman id 644799;
- Thu, 30 Nov 2023 14:34:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r8iCT-0000D7-Er; Thu, 30 Nov 2023 14:39:33 +0000
+Received: by outflank-mailman (input) for mailman id 644803;
+ Thu, 30 Nov 2023 14:35:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i7v-0008Nr-07
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:34:51 +0000
+ id 1r8i8C-0008E0-Vg
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:35:08 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9cb3f37e-8f8d-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 15:34:49 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a7d88ddb-8f8d-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 15:35:08 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:34:47 -0800
+ 30 Nov 2023 06:35:05 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:37 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:56 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9cb3f37e-8f8d-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: a7d88ddb-8f8d-11ee-98e4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354889; x=1732890889;
+  t=1701354908; x=1732890908;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=dK+ilj3Q1LqgiJ2/EiJWYjQp1qXfjG6+/g3hE8BTtcM=;
-  b=S+uqvQeIY/+UlzIPEQmvk9Kko1omXkX6YAvDYBAQIsl2Z54fRu7mwDPD
-   DIXIzmYyKSW0TWZCL5MiGkIyfm9munIEfmjlMdjY/YOQ5rY/0/9XLz/C9
-   yY8ORf9uBtaGxhtE7FvxiJvru3To7eKtjZTHj7LBY+SfSjFVEI4MPYNmV
-   JLC3ejyvDepJHTfxVeNhv2rQnPXBUFo0YAp4GA5/YCmTorNSaEqCvSocJ
-   BGzYMVO2VMS09rRv257X2abEG5fLB81t7kvgmvQcVXuwY4t5Ic/t2erbn
-   HWj9LIT6kyTcZ7qc3HfjqK4TD+5IoQoILhgUR/Y/2ugXIFtp/z2kXELwY
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532281"
+  bh=3aKtyhn4HEa/g5VVCwXVJ9czPMzUH1bTJvhs1x/p4jk=;
+  b=ieFe+1UVXlIIJXNKd/9MWm4Gc6rcYToj1iYhCzXmPwn5QLhNydPUvpMh
+   j1H9ACEAhWd8dnLFZv2iYlNMbrEhesI8pEvXUaWI9YWf41U/uru7TdUaj
+   FvQesVheSpJoPElFhGSq34EjSgokWyjBOMhpUS0yxg1QYrpS+unE71YCT
+   N5I94aGRNCVRixca+6Qh8LMGXMiZRFrnHiI5llM5/hw9wxd8U0v5Cs1Ty
+   mItLO9qeNMzJ4mI0j5LXkIFpC9Wbxa/AMOebsNB9TWz7OBj7iyHtKivdd
+   7CVCI5P2nil+Wt3TkE356S/kqiybNbMoumT4CX1b0BY5DJyeXfiWUUS5n
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532332"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479532281"
+   d="scan'208";a="479532332"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730118"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730181"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942730118"
+   d="scan'208";a="942730181"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,161 +106,174 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 27/41] hw/core/slot: Introduce CPU slot as the root of CPU topology
-Date: Thu, 30 Nov 2023 22:41:49 +0800
-Message-Id: <20231130144203.2307629-28-zhao1.liu@linux.intel.com>
+Subject: [RFC 29/41] hw/core/slot: Statistics topology information in CPU slot
+Date: Thu, 30 Nov 2023 22:41:51 +0800
+Message-Id: <20231130144203.2307629-30-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Abstract the root of topology tree as a special topology device
-"cpu-slot".
+The CPU slot, as the root of the topology tree, is responsible for
+global topology information collection and updates.
+
+When a new topology device is added to/deleted from the topology tree,
+update the corresponding information in the slot.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- MAINTAINERS                |  2 ++
- hw/core/cpu-slot.c         | 48 ++++++++++++++++++++++++++++++++++++++
- hw/core/meson.build        |  1 +
- include/hw/core/cpu-slot.h | 38 ++++++++++++++++++++++++++++++
- 4 files changed, 89 insertions(+)
- create mode 100644 hw/core/cpu-slot.c
- create mode 100644 include/hw/core/cpu-slot.h
+ hw/core/cpu-slot.c         | 41 +++++++++++++++++++++++++++++++++++-
+ include/hw/core/cpu-slot.h | 43 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 83 insertions(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 4b373ff46ce3..ac08b5a8c4e0 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1856,6 +1856,7 @@ R: Philippe Mathieu-Daudé <philmd@linaro.org>
- R: Yanan Wang <wangyanan55@huawei.com>
- S: Supported
- F: hw/core/cpu.c
-+F: hw/core/cpu-slot.c
- F: hw/core/cpu-topo.c
- F: hw/core/machine-qmp-cmds.c
- F: hw/core/machine.c
-@@ -1872,6 +1873,7 @@ F: qapi/machine-common.json
- F: qapi/machine-target.json
- F: include/hw/boards.h
- F: include/hw/core/cpu.h
-+F: include/hw/core/cpu-slot.h
- F: include/hw/core/cpu-topo.h
- F: include/hw/cpu/book.h
- F: include/hw/cpu/cluster.h
 diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
-new file mode 100644
-index 000000000000..5aef5b0189c2
---- /dev/null
+index a6b7d98dea18..e8e6f4d25532 100644
+--- a/hw/core/cpu-slot.c
 +++ b/hw/core/cpu-slot.c
-@@ -0,0 +1,48 @@
-+/*
-+ * CPU slot device abstraction
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+
-+#include "hw/core/cpu-slot.h"
-+
-+static void cpu_slot_class_init(ObjectClass *oc, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
-+
-+    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
-+    dc->user_creatable = false;
-+
-+    tc->level = CPU_TOPO_ROOT;
-+}
-+
-+static const TypeInfo cpu_slot_type_info = {
-+    .name = TYPE_CPU_SLOT,
-+    .parent = TYPE_CPU_TOPO,
-+    .class_init = cpu_slot_class_init,
-+    .instance_size = sizeof(CPUSlot),
-+};
-+
-+static void cpu_slot_register_types(void)
-+{
-+    type_register_static(&cpu_slot_type_info);
-+}
-+
-+type_init(cpu_slot_register_types)
-diff --git a/hw/core/meson.build b/hw/core/meson.build
-index 501d2529697e..3347c054e162 100644
---- a/hw/core/meson.build
-+++ b/hw/core/meson.build
-@@ -23,6 +23,7 @@ else
- endif
+@@ -22,14 +22,44 @@
  
- common_ss.add(files('cpu-common.c'))
-+common_ss.add(files('cpu-slot.c'))
- common_ss.add(files('cpu-topo.c'))
- common_ss.add(files('machine-smp.c'))
- system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
+ #include "hw/core/cpu-slot.h"
+ 
++static inline
++CPUTopoStatEntry *get_topo_stat_entry(CPUTopoStat *stat,
++                                      CPUTopoLevel level)
++{
++    assert(level != CPU_TOPO_UNKNOWN);
++
++    return &stat->entries[TOPO_STAT_ENTRY_IDX(level)];
++}
++
+ static void cpu_slot_add_topo_info(CPUTopoState *root, CPUTopoState *child)
+ {
+     CPUSlot *slot = CPU_SLOT(root);
+     CPUTopoLevel level = CPU_TOPO_LEVEL(child);
++    CPUTopoStatEntry *entry;
+ 
+     if (level == CPU_TOPO_CORE) {
+-        QTAILQ_INSERT_TAIL(&slot->cores, CPU_CORE(child), node);
++        CPUCore *core = CPU_CORE(child);
++        CPUTopoStatEntry *thread_entry;
++
++        QTAILQ_INSERT_TAIL(&slot->cores, core, node);
++
++        /* Max CPUs per core is pre-configured by "nr-threads". */
++        slot->stat.max_cpus += core->nr_threads;
++        slot->stat.pre_plugged_cpus += core->plugged_threads;
++
++        thread_entry = get_topo_stat_entry(&slot->stat, CPU_TOPO_THREAD);
++        if (child->max_children > thread_entry->max_units) {
++            thread_entry->max_units = child->max_children;
++        }
+     }
++
++    entry = get_topo_stat_entry(&slot->stat, level);
++    entry->total_units++;
++    if (child->parent->num_children > entry->max_units) {
++        entry->max_units = child->parent->num_children;
++    }
++
++    set_bit(level, slot->stat.curr_levels);
+     return;
+ }
+ 
+@@ -37,10 +67,18 @@ static void cpu_slot_del_topo_info(CPUTopoState *root, CPUTopoState *child)
+ {
+     CPUSlot *slot = CPU_SLOT(root);
+     CPUTopoLevel level = CPU_TOPO_LEVEL(child);
++    CPUTopoStatEntry *entry;
++
++    assert(level != CPU_TOPO_UNKNOWN);
+ 
+     if (level == CPU_TOPO_CORE) {
+         QTAILQ_REMOVE(&slot->cores, CPU_CORE(child), node);
+     }
++
++    entry = get_topo_stat_entry(&slot->stat, level);
++    entry->total_units--;
++
++    /* No need to update entries[*].max_units and curr_levels. */
+     return;
+ }
+ 
+@@ -73,6 +111,7 @@ static void cpu_slot_instance_init(Object *obj)
+     CPUSlot *slot = CPU_SLOT(obj);
+ 
+     QTAILQ_INIT(&slot->cores);
++    set_bit(CPU_TOPO_ROOT, slot->stat.curr_levels);
+ }
+ 
+ static const TypeInfo cpu_slot_type_info = {
 diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
-new file mode 100644
-index 000000000000..718c8ecaa751
---- /dev/null
+index d2a1160562be..fa2bd4af247d 100644
+--- a/include/hw/core/cpu-slot.h
 +++ b/include/hw/core/cpu-slot.h
-@@ -0,0 +1,38 @@
-+/*
-+ * CPU slot device abstraction
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+@@ -25,6 +25,47 @@
+ #include "hw/cpu/core.h"
+ #include "hw/qdev-core.h"
+ 
++/**
++ * @USER_AVAIL_LEVEL_NUM: the number of total topology levels in topology
++ *                        bitmap, which includes CPU_TOPO_UNKNOWN.
 + */
++#define USER_AVAIL_LEVEL_NUM (CPU_TOPO_ROOT + 1)
 +
-+#ifndef CPU_SLOT_H
-+#define CPU_SLOT_H
++/**
++ * @VALID_LEVEL_NUM: the number of valid topology levels, which excludes
++ *                   CPU_TOPO_UNKNOWN and CPU_TOPO_ROOT.
++ */
++#define VALID_LEVEL_NUM (CPU_TOPO_ROOT - 1)
 +
-+#include "hw/core/cpu-topo.h"
-+#include "hw/qdev-core.h"
++#define TOPO_STAT_ENTRY_IDX(level) ((level) - 1)
 +
-+#define TYPE_CPU_SLOT "cpu-slot"
++/**
++ * CPUTopoStatEntry:
++ * @total: Total number of topological units at the same level that are
++ *         currently inserted in CPU slot
++ * @max: Maximum number of topological units at the same level under the
++ *       parent topolofical container
++ */
++typedef struct CPUTopoStatEntry {
++    unsigned int total_units;
++    unsigned int max_units;
++} CPUTopoStatEntry;
 +
-+OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
++/**
++ * CPUTopoStat:
++ * @max_cpus: Maximum number of CPUs in CPU slot.
++ * @pre_plugged_cpus: Number of pre-plugged CPUs in CPU slot.
++ * @entries: Detail count information for valid topology levels under
++ *           CPU slot
++ * @curr_levels: Current CPU topology levels inserted in CPU slot
++ */
++typedef struct CPUTopoStat {
++    unsigned int max_cpus;
++    unsigned int pre_plugged_cpus;
++    CPUTopoStatEntry entries[VALID_LEVEL_NUM];
++    DECLARE_BITMAP(curr_levels, USER_AVAIL_LEVEL_NUM);
++} CPUTopoStat;
 +
-+struct CPUSlot {
-+    /*< private >*/
-+    CPUTopoState parent_obj;
-+
-+    /*< public >*/
-+};
-+
-+#endif /* CPU_SLOT_H */
+ #define TYPE_CPU_SLOT "cpu-slot"
+ 
+ OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
+@@ -35,6 +76,7 @@ OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
+  *     where the cpu-slot is the root. cpu-slot can maintain similar
+  *     queues for other topology levels to facilitate traversal
+  *     when necessary.
++ * @stat: Statistical topology information for topology tree.
+  */
+ struct CPUSlot {
+     /*< private >*/
+@@ -42,6 +84,7 @@ struct CPUSlot {
+ 
+     /*< public >*/
+     QTAILQ_HEAD(, CPUCore) cores;
++    CPUTopoStat stat;
+ };
+ 
+ #endif /* CPU_SLOT_H */
 -- 
 2.34.1
 
