@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DBCC46CA3
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644765.1006262 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B67B6C10DAA
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644777.1006314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iC5-00030m-QM; Thu, 30 Nov 2023 14:39:09 +0000
+	id 1r8iCA-0004J1-8m; Thu, 30 Nov 2023 14:39:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644765.1006262; Thu, 30 Nov 2023 14:39:09 +0000
+Received: by outflank-mailman (output) from mailman id 644777.1006314; Thu, 30 Nov 2023 14:39:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iC5-0002zo-Hy; Thu, 30 Nov 2023 14:39:09 +0000
-Received: by outflank-mailman (input) for mailman id 644765;
- Thu, 30 Nov 2023 14:32:31 +0000
+	id 1r8iC9-0004F4-NJ; Thu, 30 Nov 2023 14:39:13 +0000
+Received: by outflank-mailman (input) for mailman id 644777;
+ Thu, 30 Nov 2023 14:33:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i5f-0007mE-6r
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:32:31 +0000
+ id 1r8i6F-0007mE-2p
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:33:07 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4a61d930-8f8d-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 15:32:30 +0100 (CET)
+ id 5f5c980a-8f8d-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 15:33:06 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:32:08 -0800
+ 30 Nov 2023 06:33:04 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:58 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:54 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a61d930-8f8d-11ee-98e4-6d05b1d4d9a1
+X-Inumbo-ID: 5f5c980a-8f8d-11ee-98e4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354750; x=1732890750;
+  t=1701354786; x=1732890786;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=rfkBnAETWygr5TaDQC+NvTNqfHDXa5mpCuKsaH8rIdY=;
-  b=aPuyWK5A854Ff9dtyoTyoKDHk4MlCWRzjVALHOdu7BJg+IhIk5PVtKX0
-   0CLnVd0I30oCisuj2FsROL5rMT2WeWP4eg4m7C1QUjkdgROMfkyS9nsaR
-   XHz43ZzcdMaAI6SB1iCnMe3tl1qTH7uA3X3eJsT+sKg4gYEj2MTszAzhN
-   IsMIMKnjz53PBpXRQVvTefPfehOIgvzacXmWNiiVveK+W08QgaFsMxzYY
-   +XrFi9ZxdczaOn3fgY6FFIHqvH6XzrXeq/+WdQdToKQm1Qn30znrOahn2
-   WyMv3It1LEOSjsKTSYZK5pU99ypVJlwamh/llyaKJiEk7G2U31upvQuif
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531552"
+  bh=/4XB1+0XSfZXJW6ggYvVG8+UQ24RT1LIudOfD5YSaJw=;
+  b=YSr/jK4XqQrYYeOvNbkGBNgSH+43/b7ldoAlj546+/mrr9L0Gp4ofx5H
+   4HsY11KahN2S5+bsxyMG3hPJcFlshVamQlCY5ldcL4I8ZLyuhDqUxCstr
+   KUmONaw8vy8PXZxgtX3R9W4G+gZW0/9DJYQKTJ3wkVtB+38WoBLHqgQvI
+   4I4qXsP4IHqfMHBItXbHiReVSVheK8JAwTeMz+cAWASmonoVOuIDqyIta
+   Kl//ijrYIiHsjfT/2KQLOVVMgkEfeaH3yhQJfTS8EPIbLtvdlIspqHU3W
+   RCfzSlqelWWt/RrLpYs1D1O5OedD4avABd44Ru0xkQPY0Vg+NmzqLGbeC
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531853"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479531552"
+   d="scan'208";a="479531853"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729798"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729971"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942729798"
+   d="scan'208";a="942729971"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,9 +106,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 10/41] hw/core/topo: Add virtual method to update topology info for parent
-Date: Thu, 30 Nov 2023 22:41:32 +0800
-Message-Id: <20231130144203.2307629-11-zhao1.liu@linux.intel.com>
+Subject: [RFC 16/41] PPC/ppc-core: Limit plugged-threads and nr-threads to be equal
+Date: Thu, 30 Nov 2023 22:41:38 +0800
+Message-Id: <20231130144203.2307629-17-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -117,86 +117,73 @@ Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-When a new topology device is inserted into the topology tree,
-its'parents (including non-direct parent) need to update topology
-information.
+PPC supports CPU hotplug at core granularity, thus ppc-core only accepts
+all CPUs in a core are plugged.
 
-Add the virtual method to help parents on topology tree update
-topology information statistics.
+Check if plugged_threads and nr_threads are equal when ppc-core
+realizes.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/core/cpu-topo.c         | 20 ++++++++++++++++++++
- include/hw/core/cpu-topo.h |  4 ++++
- 2 files changed, 24 insertions(+)
+ hw/ppc/ppc_core.c         | 18 ++++++++++++++++++
+ include/hw/ppc/ppc_core.h |  1 +
+ 2 files changed, 19 insertions(+)
 
-diff --git a/hw/core/cpu-topo.c b/hw/core/cpu-topo.c
-index 3e0c183388d8..e244f0a3564e 100644
---- a/hw/core/cpu-topo.c
-+++ b/hw/core/cpu-topo.c
-@@ -154,6 +154,20 @@ static void cpu_topo_build_hierarchy(CPUTopoState *topo, Error **errp)
-     cpu_topo_refresh_free_child_index(parent);
+diff --git a/hw/ppc/ppc_core.c b/hw/ppc/ppc_core.c
+index 4433b54af506..3857f3150052 100644
+--- a/hw/ppc/ppc_core.c
++++ b/hw/ppc/ppc_core.c
+@@ -53,20 +53,38 @@ static void powerpc_core_prop_set_core_id(Object *obj, Visitor *v,
+     core->core_id = value;
  }
  
-+static void cpu_topo_update_info(CPUTopoState *topo, bool is_realize)
++static void powerpc_core_realize(DeviceState *dev, Error **errp)
 +{
-+    CPUTopoState *parent = topo->parent;
-+    CPUTopoClass *tc;
++    CPUCore *core = CPU_CORE(dev);
++    PowerPCCoreClass *ppc_class = POWERPC_CORE_GET_CLASS(dev);
 +
-+    while (parent) {
-+        tc = CPU_TOPO_GET_CLASS(parent);
-+        if (tc->update_topo_info) {
-+            tc->update_topo_info(parent, topo, is_realize);
-+        }
-+        parent = parent->parent;
++    if (core->plugged_threads != -1 &&
++        core->nr_threads != core->plugged_threads) {
++        error_setg(errp, "nr_threads and plugged-threads must be equal");
++        return;
 +    }
++
++    ppc_class->parent_realize(dev, errp);
 +}
 +
- static void cpu_topo_set_parent(CPUTopoState *topo, Error **errp)
+ static void powerpc_core_class_init(ObjectClass *oc, void *data)
  {
-     Object *obj = OBJECT(topo);
-@@ -178,6 +192,11 @@ static void cpu_topo_set_parent(CPUTopoState *topo, Error **errp)
+     DeviceClass *dc = DEVICE_CLASS(oc);
++    PowerPCCoreClass *ppc_class = POWERPC_CORE_CLASS(oc);
  
-     if (topo->parent) {
-         cpu_topo_build_hierarchy(topo, errp);
-+        if (*errp) {
-+            return;
-+        }
-+
-+        cpu_topo_update_info(topo, true);
-     }
+     object_class_property_add(oc, "core-id", "int",
+                               powerpc_core_prop_get_core_id,
+                               powerpc_core_prop_set_core_id,
+                               NULL, NULL);
++    device_class_set_parent_realize(dc, powerpc_core_realize,
++                                    &ppc_class->parent_realize);
  }
  
-@@ -203,6 +222,7 @@ static void cpu_topo_destroy_hierarchy(CPUTopoState *topo)
-         return;
-     }
- 
-+    cpu_topo_update_info(topo, false);
-     QTAILQ_REMOVE(&parent->children, topo, sibling);
-     parent->num_children--;
- 
-diff --git a/include/hw/core/cpu-topo.h b/include/hw/core/cpu-topo.h
-index c0dfff9dc63b..79cd8606feca 100644
---- a/include/hw/core/cpu-topo.h
-+++ b/include/hw/core/cpu-topo.h
-@@ -44,6 +44,8 @@ OBJECT_DECLARE_TYPE(CPUTopoState, CPUTopoClass, CPU_TOPO)
- /**
-  * CPUTopoClass:
-  * @level: Topology level for this CPUTopoClass.
-+ * @update_topo_info: Method to update topology information statistics when
-+ *     new child (including direct child and non-direct child) is added.
-  */
- struct CPUTopoClass {
-     /*< private >*/
-@@ -51,6 +53,8 @@ struct CPUTopoClass {
+ static const TypeInfo powerpc_core_type_info = {
+     .name = TYPE_POWERPC_CORE,
+     .parent = TYPE_CPU_CORE,
+     .abstract = true,
++    .class_size = sizeof(PowerPCCoreClass),
+     .class_init = powerpc_core_class_init,
+     .instance_size = sizeof(PowerPCCore),
+ };
+diff --git a/include/hw/ppc/ppc_core.h b/include/hw/ppc/ppc_core.h
+index bcc83e426e3f..1207d220872a 100644
+--- a/include/hw/ppc/ppc_core.h
++++ b/include/hw/ppc/ppc_core.h
+@@ -34,6 +34,7 @@ struct PowerPCCoreClass {
+     CPUCoreClass parent_class;
  
      /*< public >*/
-     CPUTopoLevel level;
-+    void (*update_topo_info)(CPUTopoState *parent, CPUTopoState *child,
-+                             bool is_realize);
++    DeviceRealize parent_realize;
  };
  
- /**
+ struct PowerPCCore {
 -- 
 2.34.1
 
