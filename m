@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1533C07CA9
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644801.1006428 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66D8FC10DAA
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644791.1006383 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCS-0008MB-Sh; Thu, 30 Nov 2023 14:39:32 +0000
+	id 1r8iCJ-0006Xu-7F; Thu, 30 Nov 2023 14:39:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644801.1006428; Thu, 30 Nov 2023 14:39:32 +0000
+Received: by outflank-mailman (output) from mailman id 644791.1006383; Thu, 30 Nov 2023 14:39:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCR-0008EY-Ht; Thu, 30 Nov 2023 14:39:31 +0000
-Received: by outflank-mailman (input) for mailman id 644801;
- Thu, 30 Nov 2023 14:34:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r8iCI-0006SY-7q; Thu, 30 Nov 2023 14:39:22 +0000
+Received: by outflank-mailman (input) for mailman id 644791;
+ Thu, 30 Nov 2023 14:34:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i83-0008E0-F4
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:34:59 +0000
+ id 1r8i7K-0008Nr-1F
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:34:14 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a249a6b7-8f8d-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 15:34:58 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 866970e9-8f8d-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 15:34:11 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:34:56 -0800
+ 30 Nov 2023 06:34:09 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:47 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:00 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a249a6b7-8f8d-11ee-98e4-6d05b1d4d9a1
+X-Inumbo-ID: 866970e9-8f8d-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354898; x=1732890898;
+  t=1701354851; x=1732890851;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=FbB6vbX6bR4dqU1fCV07ghJ+c5nYYHlqh35CAqrTsmY=;
-  b=C6X5Ftzjr3qufornHD4QbhdH7yYB2zNkz92LccZnSp/zG+x5Cd5K8fcK
-   aauMozS+22014MvJT1xgtBLA6uV4OXfX3iNajd4vTsBMT0C2/I+IDRCLm
-   XHSAL13j1AU3htiWxQc57GwHbCcr2/Oa/ZFi+V5OYPW0pqMJooMN/zsaq
-   CkJb5RG0E4WMcKcH1mgFGaIAkenfMdN5jyYsghmOmtH2HNISnhveE/tPt
-   ykoBQeEwgYjXzHep2f0x0qqQ8i4YEvQJSwNUc2WDC/G7y6CBZzpyty4GP
-   mZFJwhtHyZ1m8qwSFagEDgmn97wc6vhicEPlaaa4jFyF8yUxbMLqCYFNH
+  bh=IhpodbfJau6szIdQazmb+IK5Vtn7KUNNpXNSlzloW+Q=;
+  b=b51yF4Oir5xZZusp7izSrF3IpwO5SQdCqrdJ7aQMK2t1m+RWMPOOXHLF
+   9p9DKeoOP0tDw5gZebKCHy1AP68kRpbFdxQEkL6xKrguzYooJeHe/igbk
+   uLJH4DbVs0X9pyiq4ursmpkAHtB47scRo+b42eMQqaaUZGeDRnJdcI2LO
+   YfGpnW+TFyBWco8eWRi8M2o66DScUBpflPaXeeR08CsOzsNJOfC+loEgP
+   LQq6NXm1D/OWG6MpZbu76+Ukr5kv0aCnFZzRXJbVid3Gucs3/DgEgxTdj
+   5wL1xL3l7Kq2NmiCZTA72W8Ime3NnPk/QEiS8C1eFh2prN9RCdSDZkHB8
    g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532308"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532150"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479532308"
+   d="scan'208";a="479532150"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730130"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730068"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942730130"
+   d="scan'208";a="942730068"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,9 +106,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 28/41] hw/core/slot: Maintain the core queue in CPU slot
-Date: Thu, 30 Nov 2023 22:41:50 +0800
-Message-Id: <20231130144203.2307629-29-zhao1.liu@linux.intel.com>
+Subject: [RFC 23/41] hw/cpu/die: Abstract cpu-die level as topology device
+Date: Thu, 30 Nov 2023 22:41:45 +0800
+Message-Id: <20231130144203.2307629-24-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -117,127 +117,150 @@ Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Maintain the cores queue at cpu-slot to facilitate direct traversal
-of all cores.
+Abstract die level as a topology device "cpu-die" to allow user to
+create die level topology from cli and later the cpu-dies could be added
+into topology tree.
+
+In addition, mark the cpu-die as DEVICE_CATEGORY_CPU_DEF category to
+indicate it belongs to the basic CPU definition and should be created
+from cli before board initialization.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/core/cpu-slot.c         | 43 ++++++++++++++++++++++++++++++++++++++
- include/hw/core/cpu-slot.h |  9 ++++++++
- include/hw/cpu/core.h      |  2 ++
- 3 files changed, 54 insertions(+)
+ MAINTAINERS          |  2 ++
+ hw/cpu/die.c         | 46 ++++++++++++++++++++++++++++++++++++++++++++
+ hw/cpu/meson.build   |  2 +-
+ include/hw/cpu/die.h | 38 ++++++++++++++++++++++++++++++++++++
+ 4 files changed, 87 insertions(+), 1 deletion(-)
+ create mode 100644 hw/cpu/die.c
+ create mode 100644 include/hw/cpu/die.h
 
-diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
-index 5aef5b0189c2..a6b7d98dea18 100644
---- a/hw/core/cpu-slot.c
-+++ b/hw/core/cpu-slot.c
-@@ -22,6 +22,40 @@
- 
- #include "hw/core/cpu-slot.h"
- 
-+static void cpu_slot_add_topo_info(CPUTopoState *root, CPUTopoState *child)
-+{
-+    CPUSlot *slot = CPU_SLOT(root);
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
-+
-+    if (level == CPU_TOPO_CORE) {
-+        QTAILQ_INSERT_TAIL(&slot->cores, CPU_CORE(child), node);
-+    }
-+    return;
-+}
-+
-+static void cpu_slot_del_topo_info(CPUTopoState *root, CPUTopoState *child)
-+{
-+    CPUSlot *slot = CPU_SLOT(root);
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
-+
-+    if (level == CPU_TOPO_CORE) {
-+        QTAILQ_REMOVE(&slot->cores, CPU_CORE(child), node);
-+    }
-+    return;
-+}
-+
-+static void cpu_slot_update_topo_info(CPUTopoState *root, CPUTopoState *child,
-+                                      bool is_realize)
-+{
-+    g_assert(child->parent);
-+
-+    if (is_realize) {
-+        cpu_slot_add_topo_info(root, child);
-+    } else {
-+        cpu_slot_del_topo_info(root, child);
-+    }
-+}
-+
- static void cpu_slot_class_init(ObjectClass *oc, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-@@ -31,12 +65,21 @@ static void cpu_slot_class_init(ObjectClass *oc, void *data)
-     dc->user_creatable = false;
- 
-     tc->level = CPU_TOPO_ROOT;
-+    tc->update_topo_info = cpu_slot_update_topo_info;
-+}
-+
-+static void cpu_slot_instance_init(Object *obj)
-+{
-+    CPUSlot *slot = CPU_SLOT(obj);
-+
-+    QTAILQ_INIT(&slot->cores);
- }
- 
- static const TypeInfo cpu_slot_type_info = {
-     .name = TYPE_CPU_SLOT,
-     .parent = TYPE_CPU_TOPO,
-     .class_init = cpu_slot_class_init,
-+    .instance_init = cpu_slot_instance_init,
-     .instance_size = sizeof(CPUSlot),
- };
- 
-diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
-index 718c8ecaa751..d2a1160562be 100644
---- a/include/hw/core/cpu-slot.h
-+++ b/include/hw/core/cpu-slot.h
-@@ -22,17 +22,26 @@
- #define CPU_SLOT_H
- 
- #include "hw/core/cpu-topo.h"
-+#include "hw/cpu/core.h"
- #include "hw/qdev-core.h"
- 
- #define TYPE_CPU_SLOT "cpu-slot"
- 
- OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
- 
-+/**
-+ * CPUSlot:
-+ * @cores: Queue consisting of all the cores in the topology tree
-+ *     where the cpu-slot is the root. cpu-slot can maintain similar
-+ *     queues for other topology levels to facilitate traversal
-+ *     when necessary.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 89e350866d6a..91d0936edb32 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1863,6 +1863,7 @@ F: hw/core/machine-smp.c
+ F: hw/core/null-machine.c
+ F: hw/core/numa.c
+ F: hw/cpu/cluster.c
++F: hw/cpu/die.c
+ F: qapi/machine.json
+ F: qapi/machine-common.json
+ F: qapi/machine-target.json
+@@ -1870,6 +1871,7 @@ F: include/hw/boards.h
+ F: include/hw/core/cpu.h
+ F: include/hw/core/cpu-topo.h
+ F: include/hw/cpu/cluster.h
++F: include/hw/cpu/die.h
+ F: include/sysemu/numa.h
+ F: tests/unit/test-smp-parse.c
+ T: git https://gitlab.com/ehabkost/qemu.git machine-next
+diff --git a/hw/cpu/die.c b/hw/cpu/die.c
+new file mode 100644
+index 000000000000..06c4f7cc8fa2
+--- /dev/null
++++ b/hw/cpu/die.c
+@@ -0,0 +1,46 @@
++/*
++ * CPU die abstract device
++ *
++ * Copyright (c) 2023 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
 + */
- struct CPUSlot {
-     /*< private >*/
-     CPUTopoState parent_obj;
- 
-     /*< public >*/
-+    QTAILQ_HEAD(, CPUCore) cores;
- };
- 
- #endif /* CPU_SLOT_H */
-diff --git a/include/hw/cpu/core.h b/include/hw/cpu/core.h
-index 591240861efb..65dc10931190 100644
---- a/include/hw/cpu/core.h
-+++ b/include/hw/cpu/core.h
-@@ -40,6 +40,8 @@ struct CPUCore {
-      * "-device"/"device_add"?
-      */
-     int plugged_threads;
 +
-+    QTAILQ_ENTRY(CPUCore) node;
- };
++#include "qemu/osdep.h"
++#include "hw/cpu/die.h"
++
++static void cpu_die_class_init(ObjectClass *oc, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(oc);
++    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
++
++    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
++
++    tc->level = CPU_TOPO_DIE;
++}
++
++static const TypeInfo cpu_die_type_info = {
++    .name = TYPE_CPU_DIE,
++    .parent = TYPE_CPU_TOPO,
++    .class_init = cpu_die_class_init,
++    .instance_size = sizeof(CPUDie),
++};
++
++static void cpu_die_register_types(void)
++{
++    type_register_static(&cpu_die_type_info);
++}
++
++type_init(cpu_die_register_types)
+diff --git a/hw/cpu/meson.build b/hw/cpu/meson.build
+index 6d319947ca0b..e685fe1c7d8a 100644
+--- a/hw/cpu/meson.build
++++ b/hw/cpu/meson.build
+@@ -1,4 +1,4 @@
+-system_ss.add(files('core.c', 'cluster.c'))
++system_ss.add(files('core.c', 'cluster.c', 'die.c'))
  
- #endif
+ system_ss.add(when: 'CONFIG_ARM11MPCORE', if_true: files('arm11mpcore.c'))
+ system_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview_mpcore.c'))
+diff --git a/include/hw/cpu/die.h b/include/hw/cpu/die.h
+new file mode 100644
+index 000000000000..4c68786b5f2f
+--- /dev/null
++++ b/include/hw/cpu/die.h
+@@ -0,0 +1,38 @@
++/*
++ * CPU die abstract device
++ *
++ * Copyright (c) 2023 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef HW_CPU_DIE_H
++#define HW_CPU_DIE_H
++
++#include "hw/core/cpu-topo.h"
++#include "hw/qdev-core.h"
++
++#define TYPE_CPU_DIE "cpu-die"
++
++OBJECT_DECLARE_SIMPLE_TYPE(CPUDie, CPU_DIE)
++
++struct CPUDie {
++    /*< private >*/
++    CPUTopoState obj;
++
++    /*< public >*/
++};
++
++#endif /* HW_CPU_DIE_H */
 -- 
 2.34.1
 
