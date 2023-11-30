@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B3CC07CA9
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644831.1006551 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE1CC4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644837.1006567 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCt-00065m-33; Thu, 30 Nov 2023 14:39:59 +0000
+	id 1r8iCv-0006zT-O1; Thu, 30 Nov 2023 14:40:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644831.1006551; Thu, 30 Nov 2023 14:39:58 +0000
+Received: by outflank-mailman (output) from mailman id 644837.1006567; Thu, 30 Nov 2023 14:40:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCr-00060a-1I; Thu, 30 Nov 2023 14:39:57 +0000
-Received: by outflank-mailman (input) for mailman id 644831;
- Thu, 30 Nov 2023 14:37:26 +0000
+	id 1r8iCu-0006rl-NV; Thu, 30 Nov 2023 14:40:00 +0000
+Received: by outflank-mailman (input) for mailman id 644837;
+ Thu, 30 Nov 2023 14:37:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i4k-0004Xw-Ql
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:31:34 +0000
+ id 1r8i5J-0004Xw-QY
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:32:09 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 27aa5209-8f8d-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 15:31:32 +0100 (CET)
+ id 3d088c85-8f8d-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 15:32:07 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:31:01 -0800
+ 30 Nov 2023 06:31:39 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:30:52 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:29 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27aa5209-8f8d-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 3d088c85-8f8d-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354693; x=1732890693;
+  t=1701354727; x=1732890727;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=50lNzU4oWEfgKNc9gIKf0MEOC0NyWyVi0AxeNokOwXU=;
-  b=epqoRAPAS/YlNO/PAcLcqAiqY1fh7I1c0c3+oAeflmd8i8EYeX1ALeBI
-   1TMdzOBvGKNadyzHTg/3aonx1OPYT2xWNvDsEzCzQjjdAy6GiPwH4glZ8
-   byNSkgc3emlRnSvymHo4cAjTTOWuEm7BpnNUPjxNRxv/tLasRJh7fTquD
-   8lMwnIl3KErl5v7RqhHGmLJNWy0RDQmARN6Qjo9d1ETU70gwOp//eEG89
-   4vl1PoQZjlwSdSADoqry7toWuGmOdeS7gXL/ne51+zxYiawErRbyUFuj0
-   bzxkUz3GomiL99X0IxlH7VPe6hQepu5qy6HlnjurelZ0NIy8bgqD6zBPb
+  bh=vOtFxW4vj/U4kztv92p8xu/6iieeFFSa0l7Rf+yqZFI=;
+  b=kMebdLYII7TqquSHJt71rO4bonxNpIj6X1tCzuTm+tu5KnXJV/aH7mRv
+   0oH02zKN/iDWBoAkP2wOOFAN3YsC+nZYH5PbSpdRGDER8PClmF/7TKKjp
+   MNaGFkA409nQjrN9AdKqbhvVmk7zSYBGyR85ZoRSjrlxfI+KBUoqwXyrM
+   8EM3g0eOVPnWfHJF1SO3VG+Z4JzREqolLjgjpVkuVQL1gCjQpvfaTyWo1
+   Zx+w4FG6lzordPe0HqAN2A8h6U3yp4nanj25zIyp81iw8sLToMuxNGAf1
+   6Mcf/bd3fUqACoTBR3rEoZfUYfrX60aTQan9CHyrkH4ysYa0N9is7bL/A
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479530949"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531332"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479530949"
+   d="scan'208";a="479531332"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729615"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729711"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942729615"
+   d="scan'208";a="942729711"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,9 +106,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 03/41] system: Create base category devices from cli before board initialization
-Date: Thu, 30 Nov 2023 22:41:25 +0800
-Message-Id: <20231130144203.2307629-4-zhao1.liu@linux.intel.com>
+Subject: [RFC 07/41] qdev: Introduce parent option in -device
+Date: Thu, 30 Nov 2023 22:41:29 +0800
+Message-Id: <20231130144203.2307629-8-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -117,113 +117,185 @@ Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Topology devices are required to complete CPU topology building before
-*_init_cpus() in MachineClass.init().
+Currently, the devices added by "-device" are linked via bus, and are
+set the parent as peripheral-anon or peripheral containers of the
+machine.
 
-Add a qemu_create_cli_base_devices() before board initialization to
-help create and realize topology devices from cli early.
+But this is not enough for building CPU topology hierarchies as:
+1. The relationship between different CPU hierarchies is child<>
+   property other than link<> property, and they shouldn't be linked
+   using the special bus.
+2. The canonical path of device is built from the child<> property, and
+   the well defined CPU topology hierarchies ask their canonical path to
+   reflect the correct topological relationship.
+
+With these, the child<> property support is needed for QDev interface to
+allow user to configure proper parent in "-device".
+
+Introduce the "parent" option in "-device" to create the child<>
+property. This option asks for the device id of the parent device.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- system/vl.c | 51 ++++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 34 insertions(+), 17 deletions(-)
+ hw/xen/xen-legacy-backend.c |  2 +-
+ include/monitor/qdev.h      |  3 ++-
+ system/qdev-monitor.c       | 50 ++++++++++++++++++++++++++-----------
+ 3 files changed, 38 insertions(+), 17 deletions(-)
 
-diff --git a/system/vl.c b/system/vl.c
-index 0be155b530b4..65add2fb2460 100644
---- a/system/vl.c
-+++ b/system/vl.c
-@@ -1197,8 +1197,9 @@ static int device_help_func(void *opaque, QemuOpts *opts, Error **errp)
- static int device_init_func(void *opaque, QemuOpts *opts, Error **errp)
- {
-     DeviceState *dev;
-+    long *category = opaque;
+diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
+index 124dd5f3d687..70ad11c6287e 100644
+--- a/hw/xen/xen-legacy-backend.c
++++ b/hw/xen/xen-legacy-backend.c
+@@ -184,7 +184,7 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
+     object_initialize(&xendev->qdev, ops->size, TYPE_XENBACKEND);
+     OBJECT(xendev)->free = g_free;
+     qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev),
+-                &error_fatal);
++                NULL, &error_fatal);
+     qdev_realize(DEVICE(xendev), xen_sysbus, &error_fatal);
+     object_unref(OBJECT(xendev));
  
--    dev = qdev_device_add(opts, NULL, errp);
-+    dev = qdev_device_add(opts, category, errp);
-     if (!dev && *errp) {
-         error_report_err(*errp);
-         return -1;
-@@ -2617,25 +2618,13 @@ static void qemu_init_board(void)
-     realtime_init();
+diff --git a/include/monitor/qdev.h b/include/monitor/qdev.h
+index f5fd6e6c1ffc..3d9d06158e5f 100644
+--- a/include/monitor/qdev.h
++++ b/include/monitor/qdev.h
+@@ -16,6 +16,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+  * qdev_set_id: parent the device and set its id if provided.
+  * @dev: device to handle
+  * @id: id to be given to the device, or NULL.
++ * @parent: parent to be set for the device, or NULL.
+  *
+  * Returns: the id of the device in case of success; otherwise NULL.
+  *
+@@ -34,6 +35,6 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+  * returned string is owned by the corresponding child property and must
+  * not be freed by the caller.
+  */
+-const char *qdev_set_id(DeviceState *dev, char *id, Error **errp);
++const char *qdev_set_id(DeviceState *dev, char *id, char *parent, Error **errp);
+ 
+ #endif
+diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
+index 0261937b8462..8f56113eef65 100644
+--- a/system/qdev-monitor.c
++++ b/system/qdev-monitor.c
+@@ -587,22 +587,33 @@ static BusState *qbus_find(const char *path, Error **errp)
  }
  
--static void qemu_create_cli_devices(void)
-+static void qemu_create_cli_devices(long *category)
+ static Object *qdev_find_peripheral_parent(DeviceState *dev,
++                                           char *parent_id,
+                                            Error **errp)
  {
-     DeviceOption *opt;
+     Object *parent_obj, *obj = OBJECT(dev);
  
--    soundhw_init();
--
--    qemu_opts_foreach(qemu_find_opts("fw_cfg"),
--                      parse_fw_cfg, fw_cfg_find(), &error_fatal);
--
--    /* init USB devices */
--    if (machine_usb(current_machine)) {
--        if (foreach_device_config(DEV_USB, usb_parse) < 0)
--            exit(1);
+-    parent_obj = uc_provide_default_parent(obj, errp);
+-    if (*errp) {
+-        return NULL;
 -    }
--
--    /* init generic devices */
-     rom_set_order_override(FW_CFG_ORDER_OVERRIDE_DEVICE);
-     qemu_opts_foreach(qemu_find_opts("device"),
--                      device_init_func, NULL, &error_fatal);
-+                      device_init_func, category, &error_fatal);
-     QTAILQ_FOREACH(opt, &device_opts, next) {
-         DeviceState *dev;
-         loc_push_restore(&opt->loc);
-@@ -2646,13 +2635,40 @@ static void qemu_create_cli_devices(void)
-          * from the start, so call qdev_device_add_from_qdict() directly for
-          * now.
-          */
--        dev = qdev_device_add_from_qdict(opt->opts, NULL, true, &error_fatal);
-+        dev = qdev_device_add_from_qdict(opt->opts, category,
-+                                         true, &error_fatal);
-         object_unref(OBJECT(dev));
-         loc_pop(&opt->loc);
++    if (parent_id) {
++        parent_obj = object_resolve_path_from(qdev_get_peripheral(),
++                                              parent_id, NULL);
++        if (parent_obj) {
++            if (uc_check_user_parent(obj, parent_obj)) {
++                return parent_obj;
++            }
++        }
++    } else {
++        parent_obj = uc_provide_default_parent(obj, errp);
++        if (*errp) {
++            return NULL;
++        }
+ 
+-    if (parent_obj) {
+-        /*
+-         * Non-anonymous parents (under "/peripheral") are allowed to
+-         * be accessed to create child<> properties.
+-         */
+-        if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
+-            return parent_obj;
++        if (parent_obj) {
++            /*
++             * Non-anonymous parents (under "/peripheral") are allowed to
++             * be accessed to create child<> properties.
++             */
++            if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
++                return parent_obj;
++            }
+         }
      }
-     rom_reset_order_override();
+ 
+@@ -628,7 +639,8 @@ static bool qdev_pre_check_device_id(char *id, Error **errp)
  }
  
-+static void qemu_create_cli_base_devices(void)
-+{
-+    long category = DEVICE_CATEGORY_CPU_DEF;
-+
-+    qemu_opts_foreach(qemu_find_opts("fw_cfg"),
-+                      parse_fw_cfg, fw_cfg_find(), &error_fatal);
-+
-+    /* init CPU topology devices which don't support hotplug. */
-+    qemu_create_cli_devices(&category);
-+}
-+
-+static void qemu_create_cli_periphery_devices(void)
-+{
-+    soundhw_init();
-+
-+    /* init USB devices */
-+    if (machine_usb(current_machine)) {
-+        if (foreach_device_config(DEV_USB, usb_parse) < 0) {
-+            exit(1);
-+        }
-+    }
-+
-+    /* init generic devices */
-+    qemu_create_cli_devices(NULL);
-+}
-+
- static void qemu_machine_creation_done(void)
+ /* Takes ownership of @id, will be freed when deleting the device */
+-const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
++const char *qdev_set_id(DeviceState *dev, char *id,
++                        char *parent, Error **errp)
  {
-     MachineState *machine = MACHINE(qdev_get_machine());
-@@ -2701,8 +2717,9 @@ void qmp_x_exit_preconfig(Error **errp)
-         return;
+     Object *parent_obj = NULL;
+     ObjectProperty *prop;
+@@ -639,7 +651,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
+     uc = (UserChild *)object_dynamic_cast(OBJECT(dev), TYPE_USER_CHILD);
+ 
+     if (uc) {
+-        parent_obj = qdev_find_peripheral_parent(dev, errp);
++        parent_obj = qdev_find_peripheral_parent(dev, parent, errp);
+         if (*errp) {
+             goto err;
+         }
+@@ -655,6 +667,11 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
+                 goto err;
+             }
+         }
++        g_free(parent);
++    } else if (parent) {
++        error_setg(errp, "Only the device implemented user-child "
++                   "interface supports `parent` option.");
++        goto err;
      }
  
-+    qemu_create_cli_base_devices();
-     qemu_init_board();
--    qemu_create_cli_devices();
-+    qemu_create_cli_periphery_devices();
-     qemu_machine_creation_done();
+     /*
+@@ -684,6 +701,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
  
-     if (loadvm) {
+     return prop->name;
+ err:
++    g_free(parent);
+     g_free(id);
+     return NULL;
+ }
+@@ -694,7 +712,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+     ERRP_GUARD();
+     DeviceClass *dc;
+     const char *driver, *path;
+-    char *id;
++    char *id, *parent;
+     DeviceState *dev = NULL;
+     BusState *bus = NULL;
+ 
+@@ -772,12 +790,14 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+     }
+ 
+     id = g_strdup(qdict_get_try_str(opts, "id"));
++    parent = g_strdup(qdict_get_try_str(opts, "parent"));
+ 
+     /* set properties */
+     dev->opts = qdict_clone_shallow(opts);
+     qdict_del(dev->opts, "driver");
+     qdict_del(dev->opts, "bus");
+     qdict_del(dev->opts, "id");
++    qdict_del(dev->opts, "parent");
+ 
+     object_set_properties_from_keyval(&dev->parent_obj, dev->opts, from_json,
+                                       errp);
+@@ -789,7 +809,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+      * set dev's parent and register its id.
+      * If it fails it means the id is already taken.
+      */
+-    if (!qdev_set_id(dev, id, errp)) {
++    if (!qdev_set_id(dev, id, parent, errp)) {
+         goto err_del_dev;
+     }
+ 
 -- 
 2.34.1
 
