@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E561C46CA7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A608C07CA9
 	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644771.1006289 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.644738.1006228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iC8-0003cC-30; Thu, 30 Nov 2023 14:39:12 +0000
+	id 1r8iC3-0002PR-PS; Thu, 30 Nov 2023 14:39:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644771.1006289; Thu, 30 Nov 2023 14:39:11 +0000
+Received: by outflank-mailman (output) from mailman id 644738.1006228; Thu, 30 Nov 2023 14:39:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iC7-0003Yi-B6; Thu, 30 Nov 2023 14:39:11 +0000
-Received: by outflank-mailman (input) for mailman id 644771;
- Thu, 30 Nov 2023 14:32:58 +0000
+	id 1r8iC3-0002PK-Ld; Thu, 30 Nov 2023 14:39:07 +0000
+Received: by outflank-mailman (input) for mailman id 644738;
+ Thu, 30 Nov 2023 14:30:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i66-0007xx-Td
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:32:58 +0000
+ id 1r8i3u-0004Xw-4q
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:30:42 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 599c935d-8f8d-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 15:32:56 +0100 (CET)
+ id 070bf6ef-8f8d-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 15:30:38 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:32:36 -0800
+ 30 Nov 2023 06:30:34 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:26 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:30:23 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 599c935d-8f8d-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 070bf6ef-8f8d-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354776; x=1732890776;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=rj2qhjfojWttufVsjPIiSdC7tmdmcTNlZ7nywO+2iko=;
-  b=ZrqAURBX0AU04eDmngRZe0Tm4HxrshGk39Uniu7fzVwHURWac3W7nAfC
-   Fy9DTnNdsW031zljCZm8FDq1La1xuXA9Uzuz39cJG3hei7upRCwOek11g
-   8nDfQNX5zfffOHvi4wpTe10qsKOdqlHESGsxi0s7TpWwMjZUl7t3ZIE7+
-   tWd8E9bQqEbZF0hiLOAZHJ7ljbosclMaUZpKpr3rhhgzLHd1XozpsT6jv
-   NpnRrhloxKnXBxZM9xm6pKMId5z3+5T/DLjXGhBkVkmH8rxLxet7+uafT
-   GpyYXDoV5xXQmvlMZhOa4JQAl+8IyU6/wtCLlNCiPC3CvZ7n3vHrIcIcF
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531721"
+  t=1701354638; x=1732890638;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=dbkW+mzg7wi+t2zOtELgoOvpG3MhaJxxgWBJ/5CG6Iw=;
+  b=HIgVUPC7X2tTwO4MYRuIh0dJx4o5yzs2/qqw+8wqy84vm4KSXGEGZXmD
+   EoECAXXo2y8DV8p/a/lsF0fKvnbGAw6+1tXYEtXsIjmPPq4qq+3uOQ+7H
+   Os0hlijsnRwxQcWtNrAMuGmrCi6zfsYYx0BswVOMlcOj0L57+5j5tBRJt
+   ahX7ELSO+WnBPkCVJ5pHPcjhvpG+AGTSmKiExIUT1QVzxiftge2pOSkKs
+   uWpcc54oWJuMV7yER4TeYby299EeRbf7htyQt/WLCMp2ZqXtt5hU2fG+p
+   P779PgBmqqy/RXEhn7+mecPTyPrFbMDPOAe6XN3/44ePwXYG2Zr+T9rgW
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479530824"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479531721"
+   d="scan'208";a="479530824"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729870"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729586"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942729870"
+   d="scan'208";a="942729586"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,169 +106,485 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 13/41] hw/core/cpu: Convert CPU from general device to topology device
-Date: Thu, 30 Nov 2023 22:41:35 +0800
-Message-Id: <20231130144203.2307629-14-zhao1.liu@linux.intel.com>
+Subject: [RFC 00/41] qom-topo: Abstract Everything about CPU Topology
+Date: Thu, 30 Nov 2023 22:41:22 +0800
+Message-Id: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
-References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Convert CPU to topology device then its parent topology devices could
-count the number of CPUs when new CPUs are added into topology tree.
+Hi list,
 
-Note since CPUs are created from *_init_cpus() in MachineClass.init() or
-added from hotplug way, it depends on board initialization. Thus CPU
-topology device isn't marked as DEVICE_CATEGORY_CPU_DEF and it will only
-be created after board initialization.
+This series is our latest attempt after the previous RFC [1] about
+hybrid topology support, which is based on the commit 4705fc0c8511
+("Merge tag 'pull-for-8.2-fixes-231123-1' of https://gitlab.com/
+stsquad/qemu into staging") with our previous cleanup (patches link:
+https://lore.kernel.org/all/20231127145611.925817-1-zhao1.liu@linux.intel.com/).
 
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+In the previous RFC, Daniel suggested [2] us to use the modern QOM
+approach to define CPU topology, and based on this way, defining hybrid
+topology through cli is natural. (Thanks Daniel!)
+
+About why we chose -device other than -object, please see the chapter.3
+"History of QOM Topology".
+
+In fact, S390x already implements heterogeneity at the CPU level with
+QOM CPUs, i.e., different CPUs have different entitlements [3]. However,
+for more thorough heterogeneity, i.e., heterogeneous cores, clusters,
+dies, caches and even more, we still need to go farther in the QOM
+direction.
+
+With these background, we propose this series to implement QOM "smp"
+topology in QEMU, and it's also the first step towards the heterogeneous
+topology (including CPU & cache topology) for virtualization case.
+
+The overall goal is to both use QOM "smp" topology to be compatible with
+current -smp behavior, and to take into account different architectural
+setups/requirements for CPU topology (even including different designs
+for CPU hotplug and possible_cpus[] implementation), and ultimately to
+extend QEMU's ability to define CPU topology via -device even without
+-smp.
+
+The current remining issue, mainly related to PPC, as it chose to build
+the pssible_cpus[] list at core granularity. Please see chapter.5 "Open
+Questions" for more thoughts on this issue.
+
+For other architectures that build possible_cpus[] at CPU granularity,
+the transition to QOM topology will be similar to what was done for i386
+in this patchset (please feel free to point out any issues I've missed).
+
+There's a lot of work, and the devil is in the details.
+
+
+Welcome your feedbacks!
+
+
+1. Summary about What We Did?
+=============================
+
+This series implements the basics of QOM topology and supports QOM
+topology for the i386 as the example:
+
+* Introduce the general topology device and abstract all CPU topology
+  levels to topology devices:
+
+    - including "cpu", "cpu-core", "cpu-cluster", "cpu-die",
+      "cpu-socket", "cpu-book", "cpu-drawer", and a special topology
+      root "cpu-slot" to manage topology tree.
+
+* Allow user to create "smp" CPU topology via "-device", for example:
+
+    The topology with 8 CPUs:
+
+    -accel kvm -cpu host \
+    -device cpu-socket,id=sock0 \
+    -device cpu-die,id=die0,parent=sock0 \
+    -device cpu-core,id=core0,parent=die0,nr-threads=2 \
+    -device cpu-core,id=core1,parent=die0,nr-threads=2,plugged-threads=1 \
+    -device cpu-core,id=core2,parent=die0,nr-threads=2,plugged-threads=2 \
+    -device cpu-core,id=core3,parent=die0,nr-threads=2 \
+    -device host-x86_64-cpu,socket-id=0,die-id=0,core-id=1,thread-id=1 \
+
+* Build a topology tree under machine, for example:
+
+    One of the above CPUs:
+
+    {
+        "props": {
+            "core-id": 0,
+            "socket-id": 0,
+            "thread-id": 0
+        },
+        "qom-path": "/machine/peripheral/cpu-slot/sock0/die0/core0/host-x86_64-cpu[0]",
+        "type": "host-x86_64-cpu",
+        "vcpus-count": 1
+    }
+
+* Convert topology information configured via -smp into a QOM "smp"
+  topology tree (if the arch supports QOM topology).
+
+
+2. What's the Problem?
+======================
+
+As computer architectures continue to innovate, the need for
+heterogeneous topology of virtual machine in QEMU is growing.
+
+On the one hand, there is the need for heterogeneous CPU topology
+support. Heterogeneous CPU topology refers to systems that use more than
+one kind of processor or cores [4], the typical example is intel hybrid
+architecture with 2 core types [5], which will even have heterogeneous
+die topology [6]. And we can see that not only Intel, but also ARM and
+AMD's heterogeneous platforms will have the ability to support
+virtualization.
+
+On the other hand, there is also a growing need for heterogeneous cache
+topology in QEMU. Not only will Intel's hybrid platforms introduce
+complex heterogeneous cache topology, but more platforms have aslo seen
+the strong demand for heterogeneous cache topology definition (e.g. ARM
+[7]). Although cache topology is strictly speaking a separate topology
+from CPU topology, in terms of the actual processor build process and
+the current QEMU's way to define cache topology (e.g., i386 [8] & ARM
+[9]), cache topology is and should be dependent on CPU topology to be
+defined.
+
+With this background of increasing interest in heterogeneous computing,
+we need a flexible way (for accel) to define a wide variety of CPU
+topologies in QEMU.
+
+Obviously, -smp is not enough, so here we propose a way to define CPU
+topology based on -device, in the hope that this will greatly expand the
+flexibility of QEMU's CPU topology definition.
+
+
+3. History of QOM Topology
+==========================
+
+The intent of QOM topology is not to stop at QOM CPUs, but to abstract
+more CPU topology levels.
+
+In fact, it's not a new term.
+
+Back in 2014, Fan proposed [10] a hierarchical tree based on QOM node,
+QOM sockets, QOM cores and QOM cpu. Andreas also propsed [11] socket/
+core/thread QOM model to create hierarchical topology in place. From
+the discussion at that time, the hierarchy topology tree representation
+was what people (Igor said [12]) wanted. However, this work was not
+continued.
+
+Then Bharata abstracted [13] the cpu-core to support core granularity
+hotplug in spapr. Until now, the only user of cpu-core is still spapr.
+
+Cpu-cluster was introduced by Luc [14] to organize CPUs in different
+containers to support GDB for TCG case. Though this abstraction was
+descripted as: "mainly an internal QEMU representation and does not
+necessarily match with the notion of clusters on the real hardware",
+its name and function actually make it easy to correspond to the
+physical cluster/smp cluster (the difference, of course, is that TCG
+cluster collects CPUs directly, while the cluster as a CPU topology
+level collect cores, but this difference is not the impediment gap to
+converting "TCG " cluster to "general" cluster).
+
+As CPU architectures evolve, QEMU has supported more topology levels
+(clusters, die, book and drawer) for virtualization case, while the
+existing cpu-core and cpu-cluster abstractions become fragmented.
+
+And now, the need for defining hybrid topology has prompted us to
+rethink the QOM topology.
+
+Daniel suggested [2] to use -object interfaces to define CPU topology,
+and we absorbed his design idea. But in practice we found that -device
+looked like a better approach to take advantage of the current QOM CPU
+device, cpu-core device and cpu-cluster device.
+
+
+4. Design Overview
+==================
+
+4.1. General Topology Device
+============================
+
+We introduce a new topology device as the basic abstraction, then all
+levels of the CPU topology are derived from this general topology device
+type.
+
+This topology device is the basic unit for building the topology tree.
+Children topology devices are inserted into the queue of the parent, and
+the child<> property is created between the children and their parent.
+
+As the root of the topology tree, we introduce a special topology device
+"cpu-slot". It is created by the machine at machine's initialization and
+collects the topology devices created by the user from the cli, and thus
+builds the topology tree.
+
+The cpu-slot is also responsible for statistics on global topology
+information, and whenever there is a new topology child, the cpu-slot as
+root is notified to update topology informantion. In addition, different
+architectures have different requirements for topology (e.g., support
+for different levels), and such limitations/properties are applied to
+cpu-slot, which is checked when adding the new child topology unit in
+topology tree.
+
+
+4.2. Derived QOM Topology Devices
+=================================
+
+Based on the new general topology device type, we convert CPU, cpu-core
+and cpu-cluster from general devices to topology devices.
+
+And we also abstract cpu-die, cpu-socket, cpu-book and cpu-drawer as
+topology devices.
+
+
+4.3. New Device Category "DEVICE_CATEGORY_CPU_DEF"
+==================================================
+
+The topology devices can be divided into two general categories:
+
+* One, as the basic topology components, should be created before board
+  initialization, to predefine the basic topology structure for the
+  system, and is used to initialize MachineState.possible_cpus at
+  machine's initialization. This category doesn't support hotplug, such
+  as:
+
+    cpu-core (non-PPC core), cpu-cluster, cpu-die, cpu-socket, cpu-book
+    and cpu-drawer.
+
+  Thus, we introduce the new device category "DEVICE_CATEGORY_CPU_DEF"
+  to mark these devices and create them from cli before board
+  initialization.
+
+* The other are CPU and PPC core, which are the granularity of
+  MachineState.possible_cpus.
+
+  They're created from MachineState.possible_cpus in place during
+  machine initialization or are plugged into MachineState.possible_cpus
+  through hotplug way.
+
+  For these devices, they could be created from cli only after board
+  initialization.
+
+
+4.4. User-child Interface to Build Child<> from Cli
+===================================================
+
+Topology device is bus-less device, and needs child<> to build topology
+hierarchical relationship like:
+
+/machine/peripheral/cpu-slot/sock*/die*/core*/cpu*
+
+Therefore, we introduce a new user-child interface to insert hooks into
+device_add path to get/specify object parent for topology devices.
+
+If a topology device specify "parent" option in -device, it will be add
+to the corresponding topology parent with child<> property.
+
+If no "parent" option, the topology device will have the default parent
+"cpu-slot". This ensures cpu-slot could collect all topology units to
+build complete topology tree.
+
+
+5. Open Questions
+=================
+
+There's a special case, user could define topology via -device without
+-smp (that's the future hybrid topology case!).
+
+In the design of current QOM topology, the numbers of maximum CPUs and
+pre plugged CPUs could be collected during core devices realize.
+
+For the (non-PPC) architectures which build possible_cpus[] at CPU
+granularity, the cores will be created before possible_cpus[]
+initialization and then CPU slot could know how many maximum CPUs will
+be supported to fill possible_cpus[].
+
+But for PPC, the possible_cpus[] is at core granularity and PPC core
+could only be created after possible_cpus[] initialization, so that
+CPU slot cannot know the the numbers of maximum CPUs (PPC cores) and pre
+plugged CPUs (PPC cores). So for PPC, the "-smp" is necessary and cannot
+be omitted.
+
+For PPC this potential impact, i.e., even though QOM topology is
+supported in PPC, it is not possible to omit -smp to create the topology
+only via -device as for i386, and since PPC does not currently support
+heterogeneous topology, this potential impact might be acceptable?
+
+
+6. Future TODOs
+===============
+
+The current QOM topology RFC is only the very first step to introduce
+the most basic QOM support, and it tries to be as compatible as possible
+with existing SMP facilities.
+
+The ultimate goal is to completely replace the current smp-related
+topology structures with cpu-slot.
+
+There are many TODOs:
+
+* Add unit tests.
+* Support QOM topology for all architectures.
+* Get rid of MachineState.smp and MachineClass.smp_props with cpu-slot.
+* Extend QOM topology to hybrid topology.
+* Introduce "-device-set" which is derived from Daniel's "-object-set"
+  idea [2] to create multiple duplicate devices.
+...
+
+
+7. Patch Summary
+================
+
+Patch  1- 3: Create DEVICE_CATEGORY_CPU_DEF devices before board
+             initialization.
+Patch  4- 7: Support child<> creation from cli.
+Ptach  8-12: Introduce general topology device.
+Patch 13-26: Abstract all topology levels to topology devices.
+Patch 27-34: Introduce cpu-slot to manage the CPU topology of machine.
+Patch 35-41: Convert i386's CPU creation & hotplug to be based on QOM
+             topology.
+
+
+8. Reference
+============
+
+[1]:  Hybrid topology RFC:
+      https://mail.gnu.org/archive/html/qemu-devel/2023-02/msg03205.html
+[2]:  Daniel's suggestion about QOM topology:
+      https://mail.gnu.org/archive/html/qemu-devel/2023-02/msg03320.html
+[3]:  S390x topology document (by Nina):
+      https://lists.gnu.org/archive/html/qemu-devel/2023-10/msg04842.html
+[4]:  Heterogeneous computing:
+      https://en.wikipedia.org/wiki/Heterogeneous_computing
+[5]:  12th gen’s Intel hybrid technology:
+      https://www.intel.com/content/www/us/en/support/articles/000091896/processors.html
+[6]:  Intel Meteor Lake (14th gen) architecture overview:
+      https://www.intel.com/content/www/us/en/content-details/788851/meteor-lake-architecture-overview.html
+[7]:  Need of ARM heterogeneous cache topology (by Yanan):
+      https://mail.gnu.org/archive/html/qemu-devel/2023-02/msg05139.html
+[8]:  Cache topology implementation for i386:
+      https://lists.gnu.org/archive/html/qemu-devel/2023-10/msg08251.html
+[9]:  Cluster for ARM to define shared L2 cache and L3 tag (by Yanan):
+      https://lore.kernel.org/all/20211228092221.21068-1-wangyanan55@huawei.com/
+[10]: [PATCH v1 0/4] prebuild cpu QOM tree /machine/node/socket/core
+      ->link-cpu (by Fan):
+      https://lore.kernel.org/all/cover.1395217538.git.chen.fan.fnst@cn.fujitsu.com/
+[11]: [PATCH RFC 0/4] target-i386: PC socket/core/thread modeling,
+      part 1 (by Andreas):
+      https://lore.kernel.org/all/1427131923-4670-1-git-send-email-afaerber@suse.de/
+[12]: "Now we want to have similar QOM tree for introspection which
+      helps express topology as well" (by Igor):
+      https://lore.kernel.org/all/20150407170734.51faac90@igors-macbook-pro.local/
+[13]: [for-2.7 PATCH v3 06/15] cpu: Abstract CPU core type (by Bharata)
+      https://lore.kernel.org/all/1463024905-28401-7-git-send-email-bharata@linux.vnet.ibm.com/
+[14]: [PATCH v8 01/16] hw/cpu: introduce CPU clusters (by Luc):
+      https://lore.kernel.org/all/20181207090135.7651-2-luc.michel@greensocs.com/
+
+Thanks and Best Regards,
+Zhao
+
 ---
- accel/kvm/kvm-all.c   |  4 ++--
- hw/core/cpu-common.c  | 25 +++++++++++++++++++++----
- include/hw/core/cpu.h |  8 ++++++--
- 3 files changed, 29 insertions(+), 8 deletions(-)
+Zhao Liu (41):
+  qdev: Introduce new device category to cover basic topology device
+  qdev: Allow qdev_device_add() to add specific category device
+  system: Create base category devices from cli before board
+    initialization
+  qom/object: Introduce helper to resolve path from non-direct parent
+  qdev: Set device parent and id after setting properties
+  qdev: Introduce user-child interface to collect devices from -device
+  qdev: Introduce parent option in -device
+  hw/core/topo: Introduce CPU topology device abstraction
+  hw/core/topo: Support topology index for topology device
+  hw/core/topo: Add virtual method to update topology info for parent
+  hw/core/topo: Add virtual method to check topology child
+  hw/core/topo: Add helpers to traverse the CPU topology tree
+  hw/core/cpu: Convert CPU from general device to topology device
+  PPC/ppc-core: Offload core-id to PPC specific core abstarction
+  hw/cpu/core: Allow to configure plugged threads for cpu-core
+  PPC/ppc-core: Limit plugged-threads and nr-threads to be equal
+  hw/cpu/core: Convert cpu-core from general device to topology device
+  hw/cpu/cluster: Rename CPUClusterState to CPUCluster
+  hw/cpu/cluster: Wrap TCG related ops and props into CONFIG_TCG
+  hw/cpu/cluster: Descript cluster is not only used for TCG in comment
+  hw/cpu/cluster: Allow cpu-cluster to be created by -device
+  hw/cpu/cluster: Convert cpu-cluster from general device to topology
+    device
+  hw/cpu/die: Abstract cpu-die level as topology device
+  hw/cpu/socket: Abstract cpu-socket level as topology device
+  hw/cpu/book: Abstract cpu-book level as topology device
+  hw/cpu/drawer: Abstract cpu-drawer level as topology device
+  hw/core/slot: Introduce CPU slot as the root of CPU topology
+  hw/core/slot: Maintain the core queue in CPU slot
+  hw/core/slot: Statistics topology information in CPU slot
+  hw/core/slot: Check topology child to be added under CPU slot
+  hw/machine: Plug cpu-slot into machine to maintain topology tree
+  hw/machine: Build smp topology tree from -smp
+  hw/machine: Validate smp topology tree without -smp
+  hw/core/topo: Implement user-child to collect topology device from cli
+  hw/i386: Make x86_cpu_new() private in x86.c
+  hw/i386: Allow x86_cpu_new() to specify parent for new CPU
+  hw/i386: Allow i386 to create new CPUs from QOM topology
+  hw/i386: Wrap apic id and topology sub ids assigning as helpers
+  hw/i386: Add the interface to search parent for QOM topology
+  hw/i386: Support QOM topology
+  hw/i386: Cleanup non-QOM topology support
 
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index e39a810a4e92..2eee3eb95907 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -3953,7 +3953,7 @@ static void query_stats(StatsResultList **result, StatsTarget target,
-         break;
-     case STATS_TARGET_VCPU:
-         add_stats_entry(result, STATS_PROVIDER_KVM,
--                        cpu->parent_obj.canonical_path,
-+                        DEVICE(cpu)->canonical_path,
-                         stats_list);
-         break;
-     default:
-@@ -4045,7 +4045,7 @@ static void query_stats_cb(StatsResultList **result, StatsTarget target,
-         stats_args.names = names;
-         stats_args.errp = errp;
-         CPU_FOREACH(cpu) {
--            if (!apply_str_list_filter(cpu->parent_obj.canonical_path, targets)) {
-+            if (!apply_str_list_filter(DEVICE(cpu)->canonical_path, targets)) {
-                 continue;
-             }
-             query_stats_vcpu(cpu, &stats_args);
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index 82dae51a550b..e9ed84ff5386 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -195,6 +195,16 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
- {
-     CPUState *cpu = CPU(dev);
-     Object *machine = qdev_get_machine();
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
-+
-+    /*
-+     * The parent topology realize() must be completed before cpu_resume()
-+     * where the CPU starts to run.
-+     */
-+    cc->parent_realize(dev, errp);
-+    if (*errp) {
-+        return;
-+    }
- 
-     /* qdev_get_machine() can return something that's not TYPE_MACHINE
-      * if this is one of the user-only emulators; in that case there's
-@@ -225,6 +235,7 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
- static void cpu_common_unrealizefn(DeviceState *dev)
- {
-     CPUState *cpu = CPU(dev);
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
- 
-     /* Call the plugin hook before clearing the cpu is fully unrealized */
-     if (tcg_enabled()) {
-@@ -233,6 +244,7 @@ static void cpu_common_unrealizefn(DeviceState *dev)
- 
-     /* NOTE: latest generic point before the cpu is fully unrealized */
-     cpu_exec_unrealizefn(cpu);
-+    cc->parent_unrealize(dev);
- }
- 
- static void cpu_common_initfn(Object *obj)
-@@ -275,6 +287,7 @@ static void cpu_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-     ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    CPUTopoClass *tc = CPU_TOPO_CLASS(klass);
-     CPUClass *k = CPU_CLASS(klass);
- 
-     k->parse_features = cpu_common_parse_features;
-@@ -282,9 +295,6 @@ static void cpu_class_init(ObjectClass *klass, void *data)
-     k->has_work = cpu_common_has_work;
-     k->gdb_read_register = cpu_common_gdb_read_register;
-     k->gdb_write_register = cpu_common_gdb_write_register;
--    set_bit(DEVICE_CATEGORY_CPU, dc->categories);
--    dc->realize = cpu_common_realizefn;
--    dc->unrealize = cpu_common_unrealizefn;
-     rc->phases.hold = cpu_common_reset_hold;
-     cpu_class_init_props(dc);
-     /*
-@@ -292,11 +302,18 @@ static void cpu_class_init(ObjectClass *klass, void *data)
-      * IRQs, adding reset handlers, halting non-first CPUs, ...
-      */
-     dc->user_creatable = false;
-+    /* CPU is the minimum granularity for hotplug. */
-+    dc->hotpluggable = true;
-+    device_class_set_parent_realize(dc, cpu_common_realizefn,
-+                                    &k->parent_realize);
-+    device_class_set_parent_unrealize(dc, cpu_common_unrealizefn,
-+                                      &k->parent_unrealize);
-+    tc->level = CPU_TOPO_THREAD;
- }
- 
- static const TypeInfo cpu_type_info = {
-     .name = TYPE_CPU,
--    .parent = TYPE_DEVICE,
-+    .parent = TYPE_CPU_TOPO,
-     .instance_size = sizeof(CPUState),
-     .instance_init = cpu_common_initfn,
-     .instance_finalize = cpu_common_finalize,
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index c0c8320413e5..a700f7c39140 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -20,6 +20,7 @@
- #ifndef QEMU_CPU_H
- #define QEMU_CPU_H
- 
-+#include "hw/core/cpu-topo.h"
- #include "hw/qdev-core.h"
- #include "disas/dis-asm.h"
- #include "exec/cpu-common.h"
-@@ -146,7 +147,7 @@ struct SysemuCPUOps;
-  */
- struct CPUClass {
-     /*< private >*/
--    DeviceClass parent_class;
-+    CPUTopoClass parent_class;
-     /*< public >*/
- 
-     ObjectClass *(*class_by_name)(const char *cpu_model);
-@@ -191,6 +192,9 @@ struct CPUClass {
-     int reset_dump_flags;
-     int gdb_num_core_regs;
-     bool gdb_stop_before_watchpoint;
-+
-+    DeviceRealize parent_realize;
-+    DeviceUnrealize parent_unrealize;
- };
- 
- /*
-@@ -456,7 +460,7 @@ struct qemu_work_item;
-  */
- struct CPUState {
-     /*< private >*/
--    DeviceState parent_obj;
-+    CPUTopoState parent_obj;
-     /* cache to avoid expensive CPU_GET_CLASS */
-     CPUClass *cc;
-     /*< public >*/
+ MAINTAINERS                        |  16 +
+ accel/kvm/kvm-all.c                |   4 +-
+ gdbstub/system.c                   |   2 +-
+ hw/core/cpu-common.c               |  25 +-
+ hw/core/cpu-slot.c                 | 605 +++++++++++++++++++++++++++++
+ hw/core/cpu-topo.c                 | 399 +++++++++++++++++++
+ hw/core/machine-smp.c              |   9 +
+ hw/core/machine.c                  |  10 +
+ hw/core/meson.build                |   2 +
+ hw/cpu/book.c                      |  46 +++
+ hw/cpu/cluster.c                   |  50 ++-
+ hw/cpu/core.c                      |  72 ++--
+ hw/cpu/die.c                       |  46 +++
+ hw/cpu/drawer.c                    |  46 +++
+ hw/cpu/meson.build                 |   2 +-
+ hw/cpu/socket.c                    |  46 +++
+ hw/i386/x86.c                      | 319 ++++++++++-----
+ hw/net/virtio-net.c                |   2 +-
+ hw/ppc/meson.build                 |   1 +
+ hw/ppc/pnv.c                       |   6 +-
+ hw/ppc/pnv_core.c                  |  17 +-
+ hw/ppc/ppc_core.c                  | 102 +++++
+ hw/ppc/spapr.c                     |  28 +-
+ hw/ppc/spapr_cpu_core.c            |  19 +-
+ hw/usb/xen-usb.c                   |   3 +-
+ hw/xen/xen-legacy-backend.c        |   2 +-
+ include/hw/arm/armsse.h            |   2 +-
+ include/hw/arm/xlnx-versal.h       |   4 +-
+ include/hw/arm/xlnx-zynqmp.h       |   4 +-
+ include/hw/boards.h                |  13 +
+ include/hw/core/cpu-slot.h         | 108 +++++
+ include/hw/core/cpu-topo.h         | 111 ++++++
+ include/hw/core/cpu.h              |   8 +-
+ include/hw/cpu/book.h              |  38 ++
+ include/hw/cpu/cluster.h           |  51 ++-
+ include/hw/cpu/core.h              |  26 +-
+ include/hw/cpu/die.h               |  38 ++
+ include/hw/cpu/drawer.h            |  38 ++
+ include/hw/cpu/socket.h            |  38 ++
+ include/hw/i386/x86.h              |   5 +-
+ include/hw/ppc/pnv_core.h          |  11 +-
+ include/hw/ppc/ppc_core.h          |  58 +++
+ include/hw/ppc/spapr_cpu_core.h    |  12 +-
+ include/hw/qdev-core.h             |   1 +
+ include/hw/riscv/microchip_pfsoc.h |   4 +-
+ include/hw/riscv/sifive_u.h        |   4 +-
+ include/monitor/qdev.h             |   7 +-
+ include/monitor/user-child.h       |  57 +++
+ include/qom/object.h               |  26 ++
+ qom/object.c                       |  31 ++
+ system/meson.build                 |   1 +
+ system/qdev-monitor.c              | 141 ++++++-
+ system/user-child.c                |  72 ++++
+ system/vl.c                        |  53 ++-
+ target/i386/cpu.c                  |   4 +
+ tests/unit/meson.build             |   5 +-
+ 56 files changed, 2607 insertions(+), 243 deletions(-)
+ create mode 100644 hw/core/cpu-slot.c
+ create mode 100644 hw/core/cpu-topo.c
+ create mode 100644 hw/cpu/book.c
+ create mode 100644 hw/cpu/die.c
+ create mode 100644 hw/cpu/drawer.c
+ create mode 100644 hw/cpu/socket.c
+ create mode 100644 hw/ppc/ppc_core.c
+ create mode 100644 include/hw/core/cpu-slot.h
+ create mode 100644 include/hw/core/cpu-topo.h
+ create mode 100644 include/hw/cpu/book.h
+ create mode 100644 include/hw/cpu/die.h
+ create mode 100644 include/hw/cpu/drawer.h
+ create mode 100644 include/hw/cpu/socket.h
+ create mode 100644 include/hw/ppc/ppc_core.h
+ create mode 100644 include/monitor/user-child.h
+ create mode 100644 system/user-child.c
+
 -- 
 2.34.1
 
