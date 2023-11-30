@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A995C07CA9
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 18:58:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.645112.1006974 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C584EC4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 19:34:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.645118.1006983 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8mEa-00041E-Hy; Thu, 30 Nov 2023 18:58:00 +0000
+	id 1r8mnc-0000Tk-2z; Thu, 30 Nov 2023 19:34:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 645112.1006974; Thu, 30 Nov 2023 18:58:00 +0000
+Received: by outflank-mailman (output) from mailman id 645118.1006983; Thu, 30 Nov 2023 19:34:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8mEa-000417-Du; Thu, 30 Nov 2023 18:58:00 +0000
-Received: by outflank-mailman (input) for mailman id 645112;
- Thu, 30 Nov 2023 18:57:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4Jom=HL=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r8mEZ-00040z-87
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 18:57:59 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 606d8301-8fb2-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 19:57:58 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-333229dcebdso730581f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 30 Nov 2023 10:57:58 -0800 (PST)
-Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- g18-20020a05600c311200b0040b42df75fcsm2677201wmo.39.2023.11.30.09.37.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Nov 2023 09:37:36 -0800 (PST)
+	id 1r8mnc-0000Td-0E; Thu, 30 Nov 2023 19:34:12 +0000
+Received: by outflank-mailman (input) for mailman id 645118;
+ Thu, 30 Nov 2023 19:34:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=3Itg=HL=redhat.com=eblake@srs-se1.protection.inumbo.net>)
+ id 1r8mna-0000TX-Ul
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 19:34:10 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6cef8ded-8fb7-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 20:34:07 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-686-RZUkswVuPmuQYjY25Z6cPg-1; Thu,
+ 30 Nov 2023 14:34:02 -0500
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AEBC53C000A9;
+ Thu, 30 Nov 2023 19:34:01 +0000 (UTC)
+Received: from redhat.com (unknown [10.2.16.190])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 48154C15881;
+ Thu, 30 Nov 2023 19:33:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,91 +53,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 606d8301-8fb2-11ee-98e4-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1701370677; x=1701975477; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=lcathtPMd/K6//oFMVQXSzN41+O54GUsjafhp+RF6U4=;
-        b=K33ZTseW6aWQ+GUN3GkHperKIKvcOzRthxIFSni3LUwf5goVuK3QStvLZRTV7cokpM
-         In38NS6V/A0o53WPVz1zIHEu0SWcWmADo+YXvmDrlb2DmnlV9T1AvRms7S2g2UK3CoT6
-         DSP0XljPNzo6WKu2Y9ivCL+FuzDBq+b6HfOak=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701370677; x=1701975477;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lcathtPMd/K6//oFMVQXSzN41+O54GUsjafhp+RF6U4=;
-        b=Yxd16QIXSvGxOdFJXyvPP5SmDpv8A4M5cS8t2Zx5/iAWcW+R9xPPeD6QRW6RDi1lUe
-         n81SaQvKZJgEASpl4h0qexsQpruIp8U03YemZFK9Rie5Ld6VQ0LS0EzswyEKLJzL8dhW
-         5QTI7yJ27WW2LDaW1LAKgKFlrWRiXguztZ99zL0XAA/SHBT85NoNSkw1De9GFGPlUFsX
-         j+/sIgCmlHyYB/X1WkoZQV88f2C0E+Yp4psHBbh7aLpea0zhyuXHtFyTa8XwnJUMqlS8
-         6/7NiYFpo3E3pBCfl+d5581u3xJSMGMyHVuMfWCjrbFknKn9cjqfD8kM2qvJSUpcoeYE
-         a8cQ==
-X-Gm-Message-State: AOJu0YwBl6ZiM9SqOmygriTEn+cCPm/zx/CHGHx0Y9OlZQrilTJkJg8d
-	V/+4LCtijbdjTbQ4cE2uflBTCLhfpGHEm7gRrs4=
-X-Google-Smtp-Source: AGHT+IELsgRR2XV4U7ninKGiFM/shsuXV0t1HIW1G+Wy/nQjkAepd01DVR+4GOfodS4JEoEj5vLn1Q==
-X-Received: by 2002:a05:600c:198c:b0:40b:578d:248e with SMTP id t12-20020a05600c198c00b0040b578d248emr2216wmq.27.1701365856857;
-        Thu, 30 Nov 2023 09:37:36 -0800 (PST)
-Date: Thu, 30 Nov 2023 18:37:35 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v2 1/5] x86/livepatch: set function alignment to ensure
- minimal function size
-Message-ID: <ZWjIX0Jo5gW5SEDr@macbook>
-References: <20231128100352.35430-1-roger.pau@citrix.com>
- <20231128100352.35430-2-roger.pau@citrix.com>
- <a65aafed-68c0-41dd-bf4d-3eeff87dd5d3@suse.com>
+X-Inumbo-ID: 6cef8ded-8fb7-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1701372846;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uPN8j5o+8l5w/iaYdtuGIVOqMccrauJ8Ec54nmU0VwI=;
+	b=RRNPbKazjCmWqRfwRhFA9RBPpy+2PyUJ/NCnCjz0Hz+bKEUppQH9xGnDNp0RC2vcjqoY9m
+	OlW6mPhzbJYftAUOolBeWz9L/qp0cVjrFbE0ZgVia4lx8zfQBbIMTCHr2R0L83YTDqxdLl
+	vRxM1ThjBbheJnOYFr66KB+w4GdWtFQ=
+X-MC-Unique: RZUkswVuPmuQYjY25Z6cPg-1
+Date: Thu, 30 Nov 2023 13:33:56 -0600
+From: Eric Blake <eblake@redhat.com>
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: qemu-devel@nongnu.org, Hanna Reitz <hreitz@redhat.com>, 
+	Paul Durrant <paul@xen.org>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Alberto Garcia <berto@igalia.com>, Emanuele Giuseppe Esposito <eesposit@redhat.com>, 
+	John Snow <jsnow@redhat.com>, Kevin Wolf <kwolf@redhat.com>, 
+	Wen Congyang <wencongyang2@huawei.com>, qemu-block@nongnu.org, xen-devel@lists.xenproject.org, 
+	Coiby Xu <Coiby.Xu@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, 
+	Xie Changlong <xiechanglong.d@gmail.com>, Ari Sundholm <ari@tuxera.com>, 
+	Li Zhijian <lizhijian@fujitsu.com>, Cleber Rosa <crosa@redhat.com>, 
+	Juan Quintela <quintela@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+	Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>, Zhang Chen <chen.zhang@intel.com>, Peter Xu <peterx@redhat.com>, 
+	Anthony Perard <anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Leonardo Bras <leobras@redhat.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, 
+	Fam Zheng <fam@euphon.net>, Fabiano Rosas <farosas@suse.de>
+Subject: Re: [PATCH 04/12] graph-lock: remove AioContext locking
+Message-ID: <shpuf2hftekseg2gm6ngmhtwsorc5voyr5nhq5ngz6khu3cv74@tjj5l2dg33ek>
+References: <20231129195553.942921-1-stefanha@redhat.com>
+ <20231129195553.942921-5-stefanha@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <a65aafed-68c0-41dd-bf4d-3eeff87dd5d3@suse.com>
+In-Reply-To: <20231129195553.942921-5-stefanha@redhat.com>
+User-Agent: NeoMutt/20231103
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
 
-On Thu, Nov 30, 2023 at 05:55:07PM +0100, Jan Beulich wrote:
-> On 28.11.2023 11:03, Roger Pau Monne wrote:
-> > The minimal function size requirements for livepatch are either 5 bytes (for
-> > jmp) or 9 bytes (for endbr + jmp).  Ensure that functions are always at least
-> > that size by requesting the compiled to align the functions to 8 or 16 bytes,
-> > depending on whether Xen is build with IBT support.
+On Wed, Nov 29, 2023 at 02:55:45PM -0500, Stefan Hajnoczi wrote:
+> Stop acquiring/releasing the AioContext lock in
+> bdrv_graph_wrlock()/bdrv_graph_unlock() since the lock no longer has any
+> effect.
 > 
-> How is alignment going to enforce minimum function size? If a function is
-> last in a section, there may not be any padding added (ahead of linking at
-> least). The trailing padding also isn't part of the function.
-
-If each function lives in it's own section (by using
--ffunction-sections), and each section is aligned, then I think we can
-guarantee that there will always be enough padding space?
-
-Even the last function/section on the .text block would still be
-aligned, and as long as the function alignment <= SECTION_ALIGN
-there will be enough padding left.  I should add some build time
-assert that CONFIG_CC_FUNCTION_ALIGNMENT <= SECTION_ALIGN.
-
-While the trailing padding is not part of the function itself, I don't
-see issues in overwriting it with the replacement function code.
-
-> > Note that it's possible for the compiler to end up using a higher function
-> > alignment regardless of the passed value, so this change just make sure that
-> > the minimum required for livepatch to work is present.
-> > 
-> > Since the option (-falign-functions) is supported by both minimal required
-> > compiler versions of clang and gcc there's no need to add a test to check for
-> > its presence.
-> > 
-> > The alignment is currently only implemented for livepatch on x86, I'm unsure
-> > whether ARM has a mandatory function alignment high enough to cover for the
-> > space required by the replacement instruction(s).
+> The distinction between bdrv_graph_wrunlock() and
+> bdrv_graph_wrunlock_ctx() becomes meaningless and they can be collapsed
+> into one function.
 > 
-> Indeed I was wondering whether this shouldn't be generalized, if indeed
-> required.
+> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> ---
 
-Well, more than required it's nice to have in order to avoid failures.
-The checks in the livepatch code will trigger if there's not enough
-space to apply the replacement code.
+Reviewed-by: Eric Blake <eblake@redhat.com>
 
-Thanks, Roger.
+-- 
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.
+Virtualization:  qemu.org | libguestfs.org
+
 
