@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 738CEC46CA3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C25C10DAA
 	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:31:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644744.1006168 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.644746.1006179 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8i4C-0004Zr-2X; Thu, 30 Nov 2023 14:31:00 +0000
+	id 1r8i4C-0004kC-Jc; Thu, 30 Nov 2023 14:31:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644744.1006168; Thu, 30 Nov 2023 14:31:00 +0000
+Received: by outflank-mailman (output) from mailman id 644746.1006179; Thu, 30 Nov 2023 14:31:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8i4B-0004Zk-Uw; Thu, 30 Nov 2023 14:30:59 +0000
-Received: by outflank-mailman (input) for mailman id 644744;
- Thu, 30 Nov 2023 14:30:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r8i4C-0004go-Ex; Thu, 30 Nov 2023 14:31:00 +0000
+Received: by outflank-mailman (input) for mailman id 644746;
+ Thu, 30 Nov 2023 14:30:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4Jom=HL=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1r8i4A-0004Xw-8R
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:30:58 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 12efe29f-8f8d-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 15:30:56 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40b397793aaso6086725e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 30 Nov 2023 06:30:56 -0800 (PST)
+ id 1r8i4B-0004ZQ-Kg
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:30:59 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1427b2f2-8f8d-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 15:30:58 +0100 (CET)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2c9b8aa4fc7so13200381fa.1
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Nov 2023 06:30:58 -0800 (PST)
 Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- z3-20020a05600c0a0300b0040839fcb217sm2258963wmp.8.2023.11.30.06.30.55
+ l6-20020a05600c4f0600b0040b3829eb50sm2147422wmq.20.2023.11.30.06.30.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Nov 2023 06:30:55 -0800 (PST)
+ Thu, 30 Nov 2023 06:30:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,79 +46,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12efe29f-8f8d-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 1427b2f2-8f8d-11ee-98e4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1701354656; x=1701959456; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7YB37uIZeiul8LXYiUxNbAMSZ783gJlh2AC/oVkpE9k=;
-        b=eSHayK3KiQWxyyKxv2dvOh+XutUyRSWh349zfMpFuNv/k/Us0ri8muyjdHoXi2jDIX
-         MzjfCYwR45QwX2BVc7ZT6ApS+u/oR/Mdo1I4u492kJHTLOCcJGM+RcXzFNuqsl3TJUv5
-         Oyax1CTgXcU6bfpi/eyZh4SHOMHVmEP//mqAE=
+        d=citrix.com; s=google; t=1701354658; x=1701959458; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fQRBfy8mxD2fxhjluFNHS4DopwBarTdVQ7BkPng8IXA=;
+        b=fLpvoDYL2GeqVCJfPWD6BV5HubfDTFZ/eX1e5FI51hjWxrOjcy2IQ7d4Xr7twO75uv
+         Rm69GXTpdgTT9r5WgCpDUBjGWTiva5FzhuK5+BK39kuLzpTdxb81rCq4JxKg37SsmpRp
+         eUCrJamRlYPzcMaTuwvVxq5rwGfTWQQScYmcs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701354656; x=1701959456;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7YB37uIZeiul8LXYiUxNbAMSZ783gJlh2AC/oVkpE9k=;
-        b=uaNlzkd35Q/V6wUxSjnN1Tevnfy0BOKa+1PMHRJWKCDCGRV16AAH4dX4WvoCWaiX0c
-         9ovcnpptH1CLYSDCAgOMVoaTv95SIulQrgz38dagSaVCrwFs9AH0sXhfGqUcPsNPsjxI
-         5qsICW5Ma9UAWOP5qtF/TlisOswlIAY0Rb27nfFOU/z5wlCiFQQgZJC5G3rlUWPn5SO4
-         j1xy5i8Vpr7TM53hPjl/xabJyfSnNklIFRToFR8Kf8lb9SFh8WiOojN89VPYHjTQLtta
-         jiqZAE88rgoFRI9R4HCf0Gif82z8mpd5Fj8ejv0tS7niVtiqDpYNuKhX1LlETrwZzG9D
-         GJNw==
-X-Gm-Message-State: AOJu0YzA4LzgC8EsoC7+jNS06ST/XN6ojVJvdGWf2RdiYV3oXzOLcdSq
-	XkmprEmev98/2rSn173enxX5XHstzu7CrCzCeRI=
-X-Google-Smtp-Source: AGHT+IGk5wiVX8u7sDPjUBYqsnBCp9HjIvQBHrfkrueF3ZqUybxOG4Ktv99JpeK54r4EJg3kufojFQ==
-X-Received: by 2002:a05:600c:1d08:b0:40b:2a62:a2b6 with SMTP id l8-20020a05600c1d0800b0040b2a62a2b6mr18753285wms.1.1701354655932;
-        Thu, 30 Nov 2023 06:30:55 -0800 (PST)
+        d=1e100.net; s=20230601; t=1701354658; x=1701959458;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fQRBfy8mxD2fxhjluFNHS4DopwBarTdVQ7BkPng8IXA=;
+        b=p5qHIeZZaY1zY1sS+HnF/xROFwxwMVcFQZnI8EJaheMdTYJZSDw4y2rjp6HSfmpgFh
+         hGJKcKSx4zgr6B+E327QFRwBiT4T9HQSuZDJBDNZ2wKZC+lB2+1tFtIm19t1z1OXm9tA
+         DkRvwSbZJ0d/vNVIcK3AwXwDFVAm9tvQM6XrLYzaf77pW69GvyXxKM8oZm8bqYrWIj8M
+         MU7dXutkWLMia6wBCEFStS4iENjJQBstWjp38eOhXkZegdcNJekYLzWd6TpwN9yiTL1y
+         bQ757U9PtpTF5mrnYC/f53J0RC7pk9Wn7zGBhuanFBNiWrXxwEXGa8Nw15bUjxaZp8r7
+         Hl/w==
+X-Gm-Message-State: AOJu0Yxu0D2O1qte+3d9iIuYLAsm0cC6XluhnghSOXRfTjpqh5D3tvMY
+	CQkw7mhJ9WBOsloIkBMB23m3L7reJcBmWH4pAZ8=
+X-Google-Smtp-Source: AGHT+IHE30j/1wq34RhYhglOCCZK2jwlEJyT0jRNofnQ19p5C9uTjAO/znofEM90kRWHMPbDis9o0w==
+X-Received: by 2002:a2e:7804:0:b0:2c9:af4f:4ca9 with SMTP id t4-20020a2e7804000000b002c9af4f4ca9mr6677816ljc.13.1701354657965;
+        Thu, 30 Nov 2023 06:30:57 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 0/5] xen/livepatch: fixes for the pre-apply / post-revert hooks
-Date: Thu, 30 Nov 2023 15:29:39 +0100
-Message-ID: <20231130142944.46322-1-roger.pau@citrix.com>
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: [PATCH 2/5] xen/livepatch: search for symbols in all loaded payloads
+Date: Thu, 30 Nov 2023 15:29:41 +0100
+Message-ID: <20231130142944.46322-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231130142944.46322-1-roger.pau@citrix.com>
+References: <20231130142944.46322-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+When checking if an address belongs to a patch, or when resolving a symbol,
+take into account all loaded livepatch payloads, even if not applied.
 
-The follow series contain a misc of fixes mostly related to the usage of
-the pre-apply / post-revert hooks.  The norevert test is also fixed to
-work as I think was expected.  Finally both the no{apply,revert}
-tests are fixed to build properly, as the files where previously
-unhooked from the build system completely.
+This is required in order for the pre-apply and post-revert hooks to work
+properly, or else Xen won't detect the intruction pointer belonging to those
+hooks as being part of the currently active text.
 
-I'm unsure how useful the apply and revert hooks really are, as without
-calling the internal apply/revert functions the state of the payload
-structure is quite likely inconsistent with the code expectations.
+Move the RCU handling to be used for payload_list instead of applied_list, as
+now the calls from trap code will iterate over the payload_list.
 
-Thanks, Roger.
+Fixes: 8313c864fa95 ('livepatch: Implement pre-|post- apply|revert hooks')
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/common/livepatch.c | 49 +++++++++++++++---------------------------
+ 1 file changed, 17 insertions(+), 32 deletions(-)
 
-Roger Pau Monne (5):
-  xen/livepatch: register livepatch regions when loaded
-  xen/livepatch: search for symbols in all loaded payloads
-  xen/livepatch: fix norevert test attempt to open-code revert
-  xen/livepatch: fix norevert test hook setup typo
-  xen/livepatch: properly build the noapply and norevert tests
-
- xen/common/livepatch.c                        | 95 +++++++++++--------
- xen/common/virtual_region.c                   | 40 +++-----
- xen/include/xen/livepatch.h                   | 32 +------
- xen/test/livepatch/Makefile                   |  4 +-
- .../livepatch/xen_action_hooks_norevert.c     | 24 ++---
- 5 files changed, 81 insertions(+), 114 deletions(-)
-
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index 3199432f11f5..4e775be66571 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -36,13 +36,14 @@
+  * caller in schedule_work.
+  */
+ static DEFINE_SPINLOCK(payload_lock);
+-static LIST_HEAD(payload_list);
+-
+ /*
+- * Patches which have been applied. Need RCU in case we crash (and then
+- * traps code would iterate via applied_list) when adding entries on the list.
++ * Need RCU in case we crash (and then traps code would iterate via
++ * payload_list) when adding entries on the list.
+  */
+-static DEFINE_RCU_READ_LOCK(rcu_applied_lock);
++static DEFINE_RCU_READ_LOCK(rcu_payload_lock);
++static LIST_HEAD(payload_list);
++
++/* Patches which have been applied. Only modified from stop machine context. */
+ static LIST_HEAD(applied_list);
+ 
+ static unsigned int payload_cnt;
+@@ -111,12 +112,8 @@ bool is_patch(const void *ptr)
+     const struct payload *data;
+     bool r = false;
+ 
+-    /*
+-     * Only RCU locking since this list is only ever changed during apply
+-     * or revert context. And in case it dies there we need an safe list.
+-     */
+-    rcu_read_lock(&rcu_applied_lock);
+-    list_for_each_entry_rcu ( data, &applied_list, applied_list )
++    rcu_read_lock(&rcu_payload_lock);
++    list_for_each_entry_rcu ( data, &payload_list, list )
+     {
+         if ( (ptr >= data->rw_addr &&
+               ptr < (data->rw_addr + data->rw_size)) ||
+@@ -130,7 +127,7 @@ bool is_patch(const void *ptr)
+         }
+ 
+     }
+-    rcu_read_unlock(&rcu_applied_lock);
++    rcu_read_unlock(&rcu_payload_lock);
+ 
+     return r;
+ }
+@@ -166,12 +163,8 @@ static const char *cf_check livepatch_symbols_lookup(
+     const void *va = (const void *)addr;
+     const char *n = NULL;
+ 
+-    /*
+-     * Only RCU locking since this list is only ever changed during apply
+-     * or revert context. And in case it dies there we need an safe list.
+-     */
+-    rcu_read_lock(&rcu_applied_lock);
+-    list_for_each_entry_rcu ( data, &applied_list, applied_list )
++    rcu_read_lock(&rcu_payload_lock);
++    list_for_each_entry_rcu ( data, &payload_list, list )
+     {
+         if ( va < data->text_addr ||
+              va >= (data->text_addr + data->text_size) )
+@@ -200,7 +193,7 @@ static const char *cf_check livepatch_symbols_lookup(
+         n = data->symtab[best].name;
+         break;
+     }
+-    rcu_read_unlock(&rcu_applied_lock);
++    rcu_read_unlock(&rcu_payload_lock);
+ 
+     return n;
+ }
+@@ -1074,7 +1067,8 @@ static void free_payload(struct payload *data)
+ {
+     ASSERT(spin_is_locked(&payload_lock));
+     unregister_virtual_region(&data->region);
+-    list_del(&data->list);
++    list_del_rcu(&data->list);
++    rcu_barrier();
+     payload_cnt--;
+     payload_version++;
+     free_payload_data(data);
+@@ -1173,7 +1167,7 @@ static int livepatch_upload(struct xen_sysctl_livepatch_upload *upload)
+         INIT_LIST_HEAD(&data->list);
+         INIT_LIST_HEAD(&data->applied_list);
+ 
+-        list_add_tail(&data->list, &payload_list);
++        list_add_tail_rcu(&data->list, &payload_list);
+         payload_cnt++;
+         payload_version++;
+     }
+@@ -1384,11 +1378,7 @@ static int apply_payload(struct payload *data)
+ 
+ static inline void apply_payload_tail(struct payload *data)
+ {
+-    /*
+-     * We need RCU variant (which has barriers) in case we crash here.
+-     * The applied_list is iterated by the trap code.
+-     */
+-    list_add_tail_rcu(&data->applied_list, &applied_list);
++    list_add_tail(&data->applied_list, &applied_list);
+ 
+     data->state = LIVEPATCH_STATE_APPLIED;
+ }
+@@ -1428,12 +1418,7 @@ static int revert_payload(struct payload *data)
+ 
+ static inline void revert_payload_tail(struct payload *data)
+ {
+-
+-    /*
+-     * We need RCU variant (which has barriers) in case we crash here.
+-     * The applied_list is iterated by the trap code.
+-     */
+-    list_del_rcu(&data->applied_list);
++    list_del(&data->applied_list);
+ 
+     data->reverted = true;
+     data->state = LIVEPATCH_STATE_CHECKED;
 -- 
 2.43.0
 
