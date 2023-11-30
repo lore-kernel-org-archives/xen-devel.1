@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9760AC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DBCC46CA3
 	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644740.1006233 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.644765.1006262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iC4-0002Rp-2D; Thu, 30 Nov 2023 14:39:08 +0000
+	id 1r8iC5-00030m-QM; Thu, 30 Nov 2023 14:39:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644740.1006233; Thu, 30 Nov 2023 14:39:08 +0000
+Received: by outflank-mailman (output) from mailman id 644765.1006262; Thu, 30 Nov 2023 14:39:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iC3-0002QH-SI; Thu, 30 Nov 2023 14:39:07 +0000
-Received: by outflank-mailman (input) for mailman id 644740;
- Thu, 30 Nov 2023 14:30:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r8iC5-0002zo-Hy; Thu, 30 Nov 2023 14:39:09 +0000
+Received: by outflank-mailman (input) for mailman id 644765;
+ Thu, 30 Nov 2023 14:32:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i3x-0004Xw-MR
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:30:45 +0000
+ id 1r8i5f-0007mE-6r
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:32:31 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0b0af4c0-8f8d-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 15:30:43 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4a61d930-8f8d-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 15:32:30 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:30:42 -0800
+ 30 Nov 2023 06:32:08 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:30:33 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:58 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b0af4c0-8f8d-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 4a61d930-8f8d-11ee-98e4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354643; x=1732890643;
+  t=1701354750; x=1732890750;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=GonVMos5FsS7CHBj98lIck+6Zgp9gIFuSW7kS7bFSf0=;
-  b=hqYaGFJwxeX6PWEI7zb0Gw9Y9LmbYQtgFax+DrT/rq1OYrXH2mTEVkOY
-   b9YoehCmz4hJ7Rub1Gz2cs/uurBkYVYWBgzMGGQOp28AfzFLl2TpOF8Un
-   A5Mc8XuJV9FGyu6cMqiQQG+s6GyZjGZIWKuvEwdTRArENKn3cnSYAVlYB
-   cxNQB5Gf493sx1dWPn9IYQEfjKDovHJNQdtYmKUOxliz14RuuS3QkME1s
-   oYgNVnu/7irBO9i+Qs9jP+vPUjFmCEmPxSac4fS6WLPYExnP/kno2F/S+
-   6VbXCKUyXl3RvsZ/2zLwBXdLAL55Bu5XIERoYBALerIkMX2zxmju1B77k
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479530847"
+  bh=rfkBnAETWygr5TaDQC+NvTNqfHDXa5mpCuKsaH8rIdY=;
+  b=aPuyWK5A854Ff9dtyoTyoKDHk4MlCWRzjVALHOdu7BJg+IhIk5PVtKX0
+   0CLnVd0I30oCisuj2FsROL5rMT2WeWP4eg4m7C1QUjkdgROMfkyS9nsaR
+   XHz43ZzcdMaAI6SB1iCnMe3tl1qTH7uA3X3eJsT+sKg4gYEj2MTszAzhN
+   IsMIMKnjz53PBpXRQVvTefPfehOIgvzacXmWNiiVveK+W08QgaFsMxzYY
+   +XrFi9ZxdczaOn3fgY6FFIHqvH6XzrXeq/+WdQdToKQm1Qn30znrOahn2
+   WyMv3It1LEOSjsKTSYZK5pU99ypVJlwamh/llyaKJiEk7G2U31upvQuif
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531552"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479530847"
+   d="scan'208";a="479531552"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729601"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729798"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942729601"
+   d="scan'208";a="942729798"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,9 +106,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 01/41] qdev: Introduce new device category to cover basic topology device
-Date: Thu, 30 Nov 2023 22:41:23 +0800
-Message-Id: <20231130144203.2307629-2-zhao1.liu@linux.intel.com>
+Subject: [RFC 10/41] hw/core/topo: Add virtual method to update topology info for parent
+Date: Thu, 30 Nov 2023 22:41:32 +0800
+Message-Id: <20231130144203.2307629-11-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -117,41 +117,86 @@ Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Topology devices are used to define CPUs and need to be created and
-realized before the board initialization.
+When a new topology device is inserted into the topology tree,
+its'parents (including non-direct parent) need to update topology
+information.
 
-Use this new catogory to identify such special devices.
+Add the virtual method to help parents on topology tree update
+topology information statistics.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- include/hw/qdev-core.h | 1 +
- system/qdev-monitor.c  | 1 +
- 2 files changed, 2 insertions(+)
+ hw/core/cpu-topo.c         | 20 ++++++++++++++++++++
+ include/hw/core/cpu-topo.h |  4 ++++
+ 2 files changed, 24 insertions(+)
 
-diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
-index 151d9682380d..97b7cfd04e35 100644
---- a/include/hw/qdev-core.h
-+++ b/include/hw/qdev-core.h
-@@ -86,6 +86,7 @@ typedef enum DeviceCategory {
-     DEVICE_CATEGORY_SOUND,
-     DEVICE_CATEGORY_MISC,
-     DEVICE_CATEGORY_CPU,
-+    DEVICE_CATEGORY_CPU_DEF,
-     DEVICE_CATEGORY_WATCHDOG,
-     DEVICE_CATEGORY_MAX
- } DeviceCategory;
-diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
-index a13db763e5dd..0f163b2d0310 100644
---- a/system/qdev-monitor.c
-+++ b/system/qdev-monitor.c
-@@ -173,6 +173,7 @@ static void qdev_print_devinfos(bool show_no_user)
-         [DEVICE_CATEGORY_SOUND]   = "Sound",
-         [DEVICE_CATEGORY_MISC]    = "Misc",
-         [DEVICE_CATEGORY_CPU]     = "CPU",
-+        [DEVICE_CATEGORY_CPU_DEF] = "CPU Definition",
-         [DEVICE_CATEGORY_WATCHDOG]= "Watchdog",
-         [DEVICE_CATEGORY_MAX]     = "Uncategorized",
-     };
+diff --git a/hw/core/cpu-topo.c b/hw/core/cpu-topo.c
+index 3e0c183388d8..e244f0a3564e 100644
+--- a/hw/core/cpu-topo.c
++++ b/hw/core/cpu-topo.c
+@@ -154,6 +154,20 @@ static void cpu_topo_build_hierarchy(CPUTopoState *topo, Error **errp)
+     cpu_topo_refresh_free_child_index(parent);
+ }
+ 
++static void cpu_topo_update_info(CPUTopoState *topo, bool is_realize)
++{
++    CPUTopoState *parent = topo->parent;
++    CPUTopoClass *tc;
++
++    while (parent) {
++        tc = CPU_TOPO_GET_CLASS(parent);
++        if (tc->update_topo_info) {
++            tc->update_topo_info(parent, topo, is_realize);
++        }
++        parent = parent->parent;
++    }
++}
++
+ static void cpu_topo_set_parent(CPUTopoState *topo, Error **errp)
+ {
+     Object *obj = OBJECT(topo);
+@@ -178,6 +192,11 @@ static void cpu_topo_set_parent(CPUTopoState *topo, Error **errp)
+ 
+     if (topo->parent) {
+         cpu_topo_build_hierarchy(topo, errp);
++        if (*errp) {
++            return;
++        }
++
++        cpu_topo_update_info(topo, true);
+     }
+ }
+ 
+@@ -203,6 +222,7 @@ static void cpu_topo_destroy_hierarchy(CPUTopoState *topo)
+         return;
+     }
+ 
++    cpu_topo_update_info(topo, false);
+     QTAILQ_REMOVE(&parent->children, topo, sibling);
+     parent->num_children--;
+ 
+diff --git a/include/hw/core/cpu-topo.h b/include/hw/core/cpu-topo.h
+index c0dfff9dc63b..79cd8606feca 100644
+--- a/include/hw/core/cpu-topo.h
++++ b/include/hw/core/cpu-topo.h
+@@ -44,6 +44,8 @@ OBJECT_DECLARE_TYPE(CPUTopoState, CPUTopoClass, CPU_TOPO)
+ /**
+  * CPUTopoClass:
+  * @level: Topology level for this CPUTopoClass.
++ * @update_topo_info: Method to update topology information statistics when
++ *     new child (including direct child and non-direct child) is added.
+  */
+ struct CPUTopoClass {
+     /*< private >*/
+@@ -51,6 +53,8 @@ struct CPUTopoClass {
+ 
+     /*< public >*/
+     CPUTopoLevel level;
++    void (*update_topo_info)(CPUTopoState *parent, CPUTopoState *child,
++                             bool is_realize);
+ };
+ 
+ /**
 -- 
 2.34.1
 
