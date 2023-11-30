@@ -4,33 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BCA1C07CA9
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:13:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644958.1006665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5057EC4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:19:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644972.1006686 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8ij1-0002MS-JS; Thu, 30 Nov 2023 15:13:11 +0000
+	id 1r8ioR-0004y6-EW; Thu, 30 Nov 2023 15:18:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644958.1006665; Thu, 30 Nov 2023 15:13:11 +0000
+Received: by outflank-mailman (output) from mailman id 644972.1006686; Thu, 30 Nov 2023 15:18:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8ij1-0002ML-Gu; Thu, 30 Nov 2023 15:13:11 +0000
-Received: by outflank-mailman (input) for mailman id 644958;
- Thu, 30 Nov 2023 15:13:11 +0000
+	id 1r8ioR-0004xz-Bi; Thu, 30 Nov 2023 15:18:47 +0000
+Received: by outflank-mailman (input) for mailman id 644972;
+ Thu, 30 Nov 2023 15:18:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZmE5=HL=cloud.com=kelly.choi@srs-se1.protection.inumbo.net>)
- id 1r8ij1-0002MF-4T
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 15:13:11 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
+ id 1r8i8q-0008E0-8m
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:35:48 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f8f355a8-8f92-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 16:13:10 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a187cd4eb91so117126166b.3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Nov 2023 07:13:10 -0800 (PST)
+ id bf59b2a9-8f8d-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 15:35:47 +0100 (CET)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Nov 2023 06:35:45 -0800
+Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:35:35 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,106 +43,280 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f8f355a8-8f92-11ee-98e4-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1701357189; x=1701961989; darn=lists.xenproject.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=en2qWV6gd6X60S07WN8Z5awnuTkrelPJjx0uApjIJAs=;
-        b=GkirZllYsd+/W/U3bBb2r6cnQKyE3LT9xiPtxHymt94Qw6qVJB2ttKhx6+8vCMqr5a
-         D2QVIDuRHjLNZxJFXgHZm1+niwlJmqgInEIsYTYrT5pw82NwJ7PrsTxb6NuZfrAkLIxi
-         U8pHCdi3xFWdwH1ASVdsZjB4pSVC6CsnebNrU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701357189; x=1701961989;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=en2qWV6gd6X60S07WN8Z5awnuTkrelPJjx0uApjIJAs=;
-        b=LNEfaMjUkG3kIRwAsiaAt7o3uUw5gse85ZFNdeL7qlNK+qk/gHrXWokpzNJV1epFjF
-         MRZ1ORToMkIr1qBOrlrGsmWaASzYfSj6BRb29zaKsyOAa2eM08eeAkNCc5HyLZInmBAl
-         u7NDLr+Tnooe6Rmu+V2DpZFpZj7upAjAmb+vZbmv6UCC4nxs80TV1rWEBr4e08j93s5Y
-         o8Lu4TadUeZcUp4co085np/5dm8NdPeaALexdTD8850vaprSAn9M9m8pfnKJGZZUitL7
-         eqipJS7Fc4smp9Z62karIoAK20MrYEA9RjK736fe+gYVP/eXDbMBCQVX5MIFmLmlNHoq
-         Z3uA==
-X-Gm-Message-State: AOJu0Ywjm0OHNkMWMSS5TznfN76k3SZCWQnDkr7r/xBI0ctamTPiE+Wq
-	Zw9wUqX9DuiK5Z82i4MGdZ4dHfO4gbr8u97nj1aDkFKtyJicDDhoOylczg==
-X-Google-Smtp-Source: AGHT+IG9HrOnmG3LeBZq3CrJeB1WGXpwQAKFJfUUlBsVoYPRlI3izBTje7EvnUMLF6tDWST0HMbyTMgg0r6cZb3sk1I=
-X-Received: by 2002:a17:906:c08:b0:a18:ed83:ccc0 with SMTP id
- s8-20020a1709060c0800b00a18ed83ccc0mr761354ejf.28.1701357189262; Thu, 30 Nov
- 2023 07:13:09 -0800 (PST)
+X-Inumbo-ID: bf59b2a9-8f8d-11ee-98e4-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1701354947; x=1732890947;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=zMs3wimSwFi3OS/xT8fCJCLyivsPCu0OTNgeR6TOgP0=;
+  b=Nw9Zwe69Mk+TS601A3YuuhAalgfKvFgpVCFb1nIq3+pqYPt0WlQCT0xm
+   umeFpcCRZAXdCRhocduL+Zy0/iuFg+C6Zm+ewBg9woT1xr/ra5LJwHv4X
+   KWQ0Uql02opxuXzfEyMS3mb85SwAp+mW/Ir1f83khKERRKRzjIKttS8v1
+   z3KwKEWA0gNRNSuTQQlMjJ/SRzuXFMwVzzzqn5n6QAlIQIgaMoYpPEqTq
+   ULj3wcbKW7bb/RXwTA6RRpztzAO3oewm2YCYRyU9xnk37LoP7KmCAY2Ou
+   XBMdNpi0oBQtU5BOBZU4C7JFj8p3TiXeOD9z0/dqy3Rn+O2x1YkAbpF6m
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532483"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
+   d="scan'208";a="479532483"
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730310"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
+   d="scan'208";a="942730310"
+From: Zhao Liu <zhao1.liu@linux.intel.com>
+To: Paolo Bonzini <pbonzini@redhat.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Yanan Wang <wangyanan55@huawei.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Daniel Henrique Barboza <danielhb413@gmail.com>,
+	Igor Mammedov <imammedo@redhat.com>,
+	=?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+	=?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Barrat?= <fbarrat@linux.ibm.com>,
+	David Gibson <david@gibson.dropbear.id.au>,
+	Harsh Prateek Bora <harshpb@linux.ibm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Alistair Francis <alistair@alistair23.me>,
+	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+	=?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	Bin Meng <bin.meng@windriver.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Weiwei Li <liwei1518@gmail.com>,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	qemu-devel@nongnu.org,
+	kvm@vger.kernel.org,
+	qemu-ppc@nongnu.org,
+	xen-devel@lists.xenproject.org,
+	qemu-arm@nongnu.org,
+	qemu-riscv@nongnu.org,
+	qemu-s390x@nongnu.org
+Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
+	Thomas Huth <thuth@redhat.com>,
+	Zhiyuan Lv <zhiyuan.lv@intel.com>,
+	Zhenyu Wang <zhenyu.z.wang@intel.com>,
+	Yongwei Ma <yongwei.ma@intel.com>,
+	Zhao Liu <zhao1.liu@intel.com>
+Subject: [RFC 33/41] hw/machine: Validate smp topology tree without -smp
+Date: Thu, 30 Nov 2023 22:41:55 +0800
+Message-Id: <20231130144203.2307629-34-zhao1.liu@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
+References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 MIME-Version: 1.0
-From: Kelly Choi <kelly.choi@cloud.com>
-Date: Thu, 30 Nov 2023 15:12:33 +0000
-Message-ID: <CAO-mL=x3DntLhoKuaiWYjVqkQRqj=rdyZWmuH1aDjkmUbQchyA@mail.gmail.com>
-Subject: INFORMAL VOTE REQUIRED - DOCUMENTATION WORDING
-To: xen-devel@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="000000000000e71461060b601668"
+Content-Transfer-Encoding: 8bit
 
---000000000000e71461060b601668
-Content-Type: text/plain; charset="UTF-8"
+From: Zhao Liu <zhao1.liu@intel.com>
 
-Hi all,
+QOM topology allows user to create topology tree from cli without -smp,
+in this case, validate the topology tree to meet the smp requirement.
 
-There have been a few discussions about how we use documentation wording
-within the community. Whilst there are differences in opinions and
-perceptions of the definition, it would be helpful to see a wider consensus
-of how we feel.
+Currently, for compatibility with MachineState.smp, initialize
+MachineState.smp from topology tree in this case.
 
-*Discussion: Should we use the term 'broken' in our documentation, or do
-you think an alternative wording would be better? If you agree or disagree,
-please vote as this will impact future discussions. *
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+---
+ hw/core/cpu-slot.c         | 146 +++++++++++++++++++++++++++++++++++++
+ hw/core/machine.c          |  10 +++
+ include/hw/core/cpu-slot.h |   1 +
+ 3 files changed, 157 insertions(+)
 
-I have purposely made the vote between two options to help us move in a
-forward direction.
+diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
+index ade155baf60b..45b6aef0750a 100644
+--- a/hw/core/cpu-slot.c
++++ b/hw/core/cpu-slot.c
+@@ -413,3 +413,149 @@ void machine_create_smp_topo_tree(MachineState *ms, Error **errp)
+     }
+     slot->smp_parsed = true;
+ }
++
++static void set_smp_child_topo_info(CpuTopology *smp_info,
++                                    CPUTopoStat *stat,
++                                    CPUTopoLevel child_level)
++{
++    unsigned int *smp_count;
++    CPUTopoStatEntry *entry;
++
++    smp_count = get_smp_info_by_level(smp_info, child_level);
++    entry = get_topo_stat_entry(stat, child_level);
++    *smp_count = entry->max_units ? entry->max_units : 1;
++
++    return;
++}
++
++typedef struct ValidateCbData {
++    CPUTopoStat *stat;
++    CpuTopology *smp_info;
++    Error **errp;
++} ValidateCbData;
++
++static int validate_topo_children(CPUTopoState *topo, void *opaque)
++{
++    CPUTopoLevel level = CPU_TOPO_LEVEL(topo), next_level;
++    ValidateCbData *cb = opaque;
++    unsigned int max_children;
++    CPUTopoStatEntry *entry;
++    Error **errp = cb->errp;
++
++    if (level != CPU_TOPO_THREAD && !topo->num_children &&
++        !topo->max_children) {
++        error_setg(errp, "Invalid topology: the CPU topology "
++                   "(level: %s, index: %d) isn't completed.",
++                   cpu_topo_level_to_string(level), topo->index);
++        return TOPO_FOREACH_ERR;
++    }
++
++    if (level == CPU_TOPO_UNKNOWN) {
++        error_setg(errp, "Invalid CPU topology: unknown topology level.");
++        return TOPO_FOREACH_ERR;
++    }
++
++    /*
++     * Only CPU_TOPO_THREAD level's child_level could be CPU_TOPO_UNKNOWN,
++     * but machine_validate_cpu_topology() is before CPU creation.
++     */
++    if (topo->child_level == CPU_TOPO_UNKNOWN) {
++        error_setg(errp, "Invalid CPU topology: incomplete topology "
++                   "(level: %s, index: %d), no child?.",
++                   cpu_topo_level_to_string(level), topo->index);
++        return TOPO_FOREACH_ERR;
++    }
++
++    /*
++     * Currently hybrid topology isn't supported, so only SMP topology
++     * is allowed.
++     */
++
++    entry = get_topo_stat_entry(cb->stat, topo->child_level);
++
++    /* Max threads per core is pre-configured by "nr-threads". */
++    max_children = topo->child_level != CPU_TOPO_THREAD ?
++                   topo->num_children : topo->max_children;
++
++    if (entry->max_units != max_children) {
++        error_setg(errp, "Invalid SMP topology: "
++                   "The %s topology is asymmetric.",
++                   cpu_topo_level_to_string(level));
++        return TOPO_FOREACH_ERR;
++    }
++
++    next_level = find_next_bit(cb->stat->curr_levels, USER_AVAIL_LEVEL_NUM,
++                               topo->child_level + 1);
++
++    if (next_level != level) {
++        error_setg(errp, "Invalid smp topology: "
++                   "asymmetric CPU topology depth.");
++        return TOPO_FOREACH_ERR;
++    }
++
++    set_smp_child_topo_info(cb->smp_info, cb->stat, topo->child_level);
++
++    return TOPO_FOREACH_CONTINUE;
++}
++
++/*
++ * Only check the case user configures CPU topology via -device
++ * without -smp. In this case, MachineState.smp also needs to be
++ * initialized based on topology tree.
++ */
++bool machine_validate_cpu_topology(MachineState *ms, Error **errp)
++{
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
++    CPUTopoState *slot_topo = CPU_TOPO(ms->topo);
++    CPUTopoStat *stat = &ms->topo->stat;
++    CpuTopology *smp_info = &ms->smp;
++    unsigned int total_cpus;
++    ValidateCbData cb;
++
++    if (ms->topo->smp_parsed) {
++        return true;
++    } else if (!slot_topo->num_children) {
++        /*
++         * If there's no -smp nor -device to add topology children,
++         * then create the default topology.
++         */
++        machine_create_smp_topo_tree(ms, errp);
++        if (*errp) {
++            return false;
++        }
++        return true;
++    }
++
++    if (test_bit(CPU_TOPO_CLUSTER, stat->curr_levels)) {
++        mc->smp_props.has_clusters = true;
++    }
++
++    /*
++     * The next cpu_topo_child_foreach_recursive() doesn't cover the
++     * parent topology unit. Update information for root here.
++     */
++    set_smp_child_topo_info(smp_info, stat, slot_topo->child_level);
++
++    cb.stat = stat;
++    cb.smp_info = smp_info;
++    cb.errp = errp;
++
++    cpu_topo_child_foreach_recursive(slot_topo, NULL,
++                                     validate_topo_children, &cb);
++    if (*errp) {
++        return false;
++    }
++
++    ms->smp.cpus = stat->pre_plugged_cpus ?
++                   stat->pre_plugged_cpus : 1;
++    ms->smp.max_cpus = stat->max_cpus ?
++                       stat->max_cpus : 1;
++
++    total_cpus = ms->smp.drawers * ms->smp.books *
++                 ms->smp.sockets * ms->smp.dies *
++                 ms->smp.clusters * ms->smp.cores *
++                 ms->smp.threads;
++    g_assert(total_cpus == ms->smp.max_cpus);
++
++    return true;
++}
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 0c1739814124..5fa0c826f35e 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -1505,6 +1505,16 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
+                                    "on", false);
+     }
+ 
++    /*
++     * TODO: drop this check and validate topology tree by default
++     * when all arches support QOM topology.
++     */
++    if (machine_class->smp_props.possible_cpus_qom_granu) {
++        if (!machine_validate_cpu_topology(machine, errp)) {
++            return;
++        }
++    }
++
+     accel_init_interfaces(ACCEL_GET_CLASS(machine->accelerator));
+     machine_class->init(machine);
+     phase_advance(PHASE_MACHINE_INITIALIZED);
+diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
+index de3d08fcb2ac..9e1c6d6b7ff2 100644
+--- a/include/hw/core/cpu-slot.h
++++ b/include/hw/core/cpu-slot.h
+@@ -100,5 +100,6 @@ struct CPUSlot {
+ 
+ void machine_plug_cpu_slot(MachineState *ms);
+ void machine_create_smp_topo_tree(MachineState *ms, Error **errp);
++bool machine_validate_cpu_topology(MachineState *ms, Error **errp);
+ 
+ #endif /* CPU_SLOT_H */
+-- 
+2.34.1
 
-*PLEASE VOTE HERE. Deadline 15th December 2023.
-<https://cryptpad.fr/form/#/2/form/view/7ByH95Vd7KiDOvN4wjV5iUGlMuZbkVdwk7cYpZdluWo/>*
-*Your name will be required but will be private. If you answer anonymously,
-your vote will not count. This is to ensure it is fair and each person gets
-one vote. *
-
-As an open-source project, we need to come to a common ground, which
-sometimes means we may not personally agree. To make this fair, please note
-the final results will be used to determine our future actions within the
-community.
-
-If the majority votes for/against, we will respect the majority and
-implement this accordingly.
-
-Many thanks,
-Kelly Choi
-
-Xen Project Community Manager
-XenServer, Cloud Software Group
-
---000000000000e71461060b601668
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi all,=C2=A0<div><br></div><div>There have been a few dis=
-cussions about how we use documentation wording within the community. Whils=
-t there are differences in opinions and perceptions of the definition, it w=
-ould be helpful to see a wider consensus of how we feel.=C2=A0</div><div><b=
-r></div><div><b>Discussion: Should we use the term &#39;broken&#39; in our =
-documentation, or do you think an alternative wording would be better? If y=
-ou agree or disagree, please vote as this=C2=A0will impact future=C2=A0disc=
-ussions.=C2=A0</b></div><div><b><br></b></div><div>I have purposely made th=
-e vote between two options to help us move in a forward direction.</div><di=
-v><br></div><div><b><font color=3D"#ff0000"><a href=3D"https://cryptpad.fr/=
-form/#/2/form/view/7ByH95Vd7KiDOvN4wjV5iUGlMuZbkVdwk7cYpZdluWo/">PLEASE VOT=
-E HERE. Deadline 15th December 2023.</a></font></b></div><div><i>Your name =
-will be required but will be private. If you answer anonymously, your vote =
-will not count. This is to ensure it is fair and each person gets one vote.=
-=C2=A0</i><br></div><div><br></div><div>As an open-source project, we need =
-to come to a common ground, which sometimes means we may not personally agr=
-ee. To make this fair, please note the final results will be used to determ=
-ine our future actions within the community.=C2=A0</div><div><br></div><div=
->If the majority votes for/against, we will respect the majority and implem=
-ent this accordingly.=C2=A0</div><div><br clear=3D"all"><div><div dir=3D"lt=
-r" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D=
-"ltr"><div>Many thanks,</div><div>Kelly Choi</div><div><br></div><div><div =
-style=3D"color:rgb(136,136,136)">Xen Project Community Manager</div><div st=
-yle=3D"color:rgb(136,136,136)">XenServer, Cloud Software Group</div></div><=
-/div></div></div></div></div>
-
---000000000000e71461060b601668--
 
