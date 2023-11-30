@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCAD1C4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644819.1006490 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 630AEC10DAA
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644799.1006420 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCg-0002wF-77; Thu, 30 Nov 2023 14:39:46 +0000
+	id 1r8iCR-000815-6a; Thu, 30 Nov 2023 14:39:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644819.1006490; Thu, 30 Nov 2023 14:39:45 +0000
+Received: by outflank-mailman (output) from mailman id 644799.1006420; Thu, 30 Nov 2023 14:39:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCe-0002jM-9i; Thu, 30 Nov 2023 14:39:44 +0000
-Received: by outflank-mailman (input) for mailman id 644819;
- Thu, 30 Nov 2023 14:36:43 +0000
+	id 1r8iCP-0007vo-RE; Thu, 30 Nov 2023 14:39:29 +0000
+Received: by outflank-mailman (input) for mailman id 644799;
+ Thu, 30 Nov 2023 14:34:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i9j-0000pO-Kk
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:36:43 +0000
+ id 1r8i7v-0008Nr-07
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:34:51 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id df06d535-8f8d-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 15:36:41 +0100 (CET)
+ id 9cb3f37e-8f8d-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 15:34:49 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:36:16 -0800
+ 30 Nov 2023 06:34:47 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:36:03 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:37 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: df06d535-8f8d-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 9cb3f37e-8f8d-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701355001; x=1732891001;
+  t=1701354889; x=1732890889;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=xvYlraOGB3zayUrWIK0PscKH2Ic2SrgqXJLGzTM1XXI=;
-  b=nf7zfM5ep/A9Skf6dZhIHN/1tVx6PH1M90+O18AbWo7Y3X0J6Wij6e+q
-   Y9KzqrlPCEtSTlHX4hf7hBwUZrpZghXFyZ8OuEVGGaHR6C83FTtFkd3Y8
-   jUCnv7wmEK5AvHpfjUUsyC+5sGe54ALc1V5hy+78CDaXUohnthq37HS7w
-   aMdskleeq/rrCwQZutYoh56u8uuKajlm5k4HHwKZmOoi+z6bHp103fGEq
-   lclaASyZXMLDfAhVqJAfyVrblk9GrmaSRFq/nDpJD4UYJz2yOtAGI1iPR
-   CBC1fZVBF0OrT8ogA5/KJsO0AFUm4RxJsUAkWJ+95se0LYCnwAZvBlWb2
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532657"
+  bh=dK+ilj3Q1LqgiJ2/EiJWYjQp1qXfjG6+/g3hE8BTtcM=;
+  b=S+uqvQeIY/+UlzIPEQmvk9Kko1omXkX6YAvDYBAQIsl2Z54fRu7mwDPD
+   DIXIzmYyKSW0TWZCL5MiGkIyfm9munIEfmjlMdjY/YOQ5rY/0/9XLz/C9
+   yY8ORf9uBtaGxhtE7FvxiJvru3To7eKtjZTHj7LBY+SfSjFVEI4MPYNmV
+   JLC3ejyvDepJHTfxVeNhv2rQnPXBUFo0YAp4GA5/YCmTorNSaEqCvSocJ
+   BGzYMVO2VMS09rRv257X2abEG5fLB81t7kvgmvQcVXuwY4t5Ic/t2erbn
+   HWj9LIT6kyTcZ7qc3HfjqK4TD+5IoQoILhgUR/Y/2ugXIFtp/z2kXELwY
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532281"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479532657"
+   d="scan'208";a="479532281"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730473"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730118"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942730473"
+   d="scan'208";a="942730118"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,66 +106,161 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 36/41] hw/i386: Allow x86_cpu_new() to specify parent for new CPU
-Date: Thu, 30 Nov 2023 22:41:58 +0800
-Message-Id: <20231130144203.2307629-37-zhao1.liu@linux.intel.com>
+Subject: [RFC 27/41] hw/core/slot: Introduce CPU slot as the root of CPU topology
+Date: Thu, 30 Nov 2023 22:41:49 +0800
+Message-Id: <20231130144203.2307629-28-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-For QOM topology, CPU should be inserted under its parent core.
-
-Extend x86_cpu_new() to allow caller to specify topology parent.
+Abstract the root of topology tree as a special topology device
+"cpu-slot".
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/i386/x86.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ MAINTAINERS                |  2 ++
+ hw/core/cpu-slot.c         | 48 ++++++++++++++++++++++++++++++++++++++
+ hw/core/meson.build        |  1 +
+ include/hw/core/cpu-slot.h | 38 ++++++++++++++++++++++++++++++
+ 4 files changed, 89 insertions(+)
+ create mode 100644 hw/core/cpu-slot.c
+ create mode 100644 include/hw/core/cpu-slot.h
 
-diff --git a/hw/i386/x86.c b/hw/i386/x86.c
-index d9293846db64..3c99f4c3ab51 100644
---- a/hw/i386/x86.c
-+++ b/hw/i386/x86.c
-@@ -94,15 +94,22 @@ uint32_t x86_cpu_apic_id_from_index(X86MachineState *x86ms,
-     return x86_apicid_from_cpu_idx(&topo_info, cpu_index);
- }
- 
--
- static void x86_cpu_new(X86MachineState *x86ms, int64_t apic_id,
--                        Error **errp)
-+                        Object *parent, int index, Error **errp)
- {
--    Object *cpu = object_new(MACHINE(x86ms)->cpu_type);
-+    const char *cpu_type = MACHINE(x86ms)->cpu_type;
-+    Object *cpu = object_new(cpu_type);
- 
-     if (!object_property_set_uint(cpu, "apic-id", apic_id, errp)) {
-         goto out;
-     }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 4b373ff46ce3..ac08b5a8c4e0 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1856,6 +1856,7 @@ R: Philippe Mathieu-Daudé <philmd@linaro.org>
+ R: Yanan Wang <wangyanan55@huawei.com>
+ S: Supported
+ F: hw/core/cpu.c
++F: hw/core/cpu-slot.c
+ F: hw/core/cpu-topo.c
+ F: hw/core/machine-qmp-cmds.c
+ F: hw/core/machine.c
+@@ -1872,6 +1873,7 @@ F: qapi/machine-common.json
+ F: qapi/machine-target.json
+ F: include/hw/boards.h
+ F: include/hw/core/cpu.h
++F: include/hw/core/cpu-slot.h
+ F: include/hw/core/cpu-topo.h
+ F: include/hw/cpu/book.h
+ F: include/hw/cpu/cluster.h
+diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
+new file mode 100644
+index 000000000000..5aef5b0189c2
+--- /dev/null
++++ b/hw/core/cpu-slot.c
+@@ -0,0 +1,48 @@
++/*
++ * CPU slot device abstraction
++ *
++ * Copyright (c) 2023 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+    if (parent) {
-+        char *name = g_strdup_printf("%s[%d]", cpu_type, index);
-+        object_property_add_child(parent, name, cpu);
-+        g_free(name);
-+    }
++#include "qemu/osdep.h"
 +
-     qdev_realize(DEVICE(cpu), NULL, errp);
++#include "hw/core/cpu-slot.h"
++
++static void cpu_slot_class_init(ObjectClass *oc, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(oc);
++    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
++
++    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
++    dc->user_creatable = false;
++
++    tc->level = CPU_TOPO_ROOT;
++}
++
++static const TypeInfo cpu_slot_type_info = {
++    .name = TYPE_CPU_SLOT,
++    .parent = TYPE_CPU_TOPO,
++    .class_init = cpu_slot_class_init,
++    .instance_size = sizeof(CPUSlot),
++};
++
++static void cpu_slot_register_types(void)
++{
++    type_register_static(&cpu_slot_type_info);
++}
++
++type_init(cpu_slot_register_types)
+diff --git a/hw/core/meson.build b/hw/core/meson.build
+index 501d2529697e..3347c054e162 100644
+--- a/hw/core/meson.build
++++ b/hw/core/meson.build
+@@ -23,6 +23,7 @@ else
+ endif
  
- out:
-@@ -146,7 +153,8 @@ void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
- 
-     possible_cpus = mc->possible_cpu_arch_ids(ms);
-     for (i = 0; i < ms->smp.cpus; i++) {
--        x86_cpu_new(x86ms, possible_cpus->cpus[i].arch_id, &error_fatal);
-+        x86_cpu_new(x86ms, possible_cpus->cpus[i].arch_id,
-+                    NULL, i, &error_fatal);
-     }
- }
- 
+ common_ss.add(files('cpu-common.c'))
++common_ss.add(files('cpu-slot.c'))
+ common_ss.add(files('cpu-topo.c'))
+ common_ss.add(files('machine-smp.c'))
+ system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
+diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
+new file mode 100644
+index 000000000000..718c8ecaa751
+--- /dev/null
++++ b/include/hw/core/cpu-slot.h
+@@ -0,0 +1,38 @@
++/*
++ * CPU slot device abstraction
++ *
++ * Copyright (c) 2023 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef CPU_SLOT_H
++#define CPU_SLOT_H
++
++#include "hw/core/cpu-topo.h"
++#include "hw/qdev-core.h"
++
++#define TYPE_CPU_SLOT "cpu-slot"
++
++OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
++
++struct CPUSlot {
++    /*< private >*/
++    CPUTopoState parent_obj;
++
++    /*< public >*/
++};
++
++#endif /* CPU_SLOT_H */
 -- 
 2.34.1
 
