@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F01C4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644795.1006400 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6EFBC4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644815.1006466 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCN-0007LK-4n; Thu, 30 Nov 2023 14:39:27 +0000
+	id 1r8iCb-0001mS-Ex; Thu, 30 Nov 2023 14:39:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644795.1006400; Thu, 30 Nov 2023 14:39:27 +0000
+Received: by outflank-mailman (output) from mailman id 644815.1006466; Thu, 30 Nov 2023 14:39:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCM-0007F7-9O; Thu, 30 Nov 2023 14:39:26 +0000
-Received: by outflank-mailman (input) for mailman id 644795;
- Thu, 30 Nov 2023 14:34:31 +0000
+	id 1r8iCZ-0001cB-Q3; Thu, 30 Nov 2023 14:39:39 +0000
+Received: by outflank-mailman (input) for mailman id 644815;
+ Thu, 30 Nov 2023 14:35:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i7b-0008E0-Ew
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:34:31 +0000
+ id 1r8i8h-0008E0-Ay
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:35:39 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 919ec32c-8f8d-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 15:34:30 +0100 (CET)
+ id b9e73598-8f8d-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 15:35:38 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:34:28 -0800
+ 30 Nov 2023 06:35:35 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:18 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:35:24 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 919ec32c-8f8d-11ee-98e4-6d05b1d4d9a1
+X-Inumbo-ID: b9e73598-8f8d-11ee-98e4-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354870; x=1732890870;
+  t=1701354938; x=1732890938;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=R67m9mW34W7uiETtegm4359TeHvWglaSP7oCtBRRyHM=;
-  b=A7LjNdy2Cl1idzU5WEFIh+IWk8Jzgx+oZMnkcWWtXEiBUFFkT/qfZgE5
-   hxToLcxpj6GyFJdUmYrR3xl6iTpyXjCHVXryCJivk9IVEXMynH3qD/F93
-   eZnF3oI3uoB9wTsOYbYzwVhR7rujApL7YoQncNreDK3s+PWogwgDKYscv
-   fHDjpsvLXafe7ptI6j94QyqN6O6c7lNS5pSNyI0uu2LE+70jBQgd3MemS
-   3iUMkv9SeFyfAk2dsH0xS2vL1De5JV3jYMzlr9VFS03gM1krd3pUFUXvZ
-   rlBt+VgCxFCc1s4joYsmk5zTtuxFaA0iw00Mg+BNptKoBPWRsXqqVMfY7
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532217"
+  bh=ONngA8TQ7iwdQG2PpHP3CY/JQBJI2+erv4AqH9RU4Wo=;
+  b=nqwwSCIQi8K1+kPfijeZWhrzWsilvb2fmB2dK7Mygjl0LIui/pkQW3Gz
+   ij6bbJZ73MwytHIzte0w70wLlx2wh0xSmuJCC0tCZSjmTB6gy8yGRpd6/
+   WT+UC6xN4AnOZ95iELXQq0lXdfhMKIKAeWzrQkTLBeMGk3FbnxSKjH4mG
+   zIpKns+LsXHneXZcHGvJogUJSuXXpxKYI9LIFuuNNbNI4vDzyRIIdWEva
+   2QIXRh0m5V+9HvJ91+/lZhZmPj1q5sIio6RfT+VRR9eLV3NxeS9Nv/wH2
+   3TtS2j7GqK5OeeURR2gSsQix4CO0XzafwKmu3MXqw9EqrsEsk1Pit861i
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532446"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479532217"
+   d="scan'208";a="479532446"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730090"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730298"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942730090"
+   d="scan'208";a="942730298"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,9 +106,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 25/41] hw/cpu/book: Abstract cpu-book level as topology device
-Date: Thu, 30 Nov 2023 22:41:47 +0800
-Message-Id: <20231130144203.2307629-26-zhao1.liu@linux.intel.com>
+Subject: [RFC 32/41] hw/machine: Build smp topology tree from -smp
+Date: Thu, 30 Nov 2023 22:41:54 +0800
+Message-Id: <20231130144203.2307629-33-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -117,150 +117,385 @@ Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Abstract book level as a topology device "cpu-book" to allow user to
-create book level topology from cli and later the cpu-books could be
-added into topology tree.
-
-In addition, mark the cpu-book as DEVICE_CATEGORY_CPU_DEF category to
-indicate it belongs to the basic CPU definition and should be created
-from cli before board initialization.
+For the architecture supports QOM topology (the field
+MachineClass.possible_cpus_qom_granu is set), implement smp QOM topology
+tree from MachineState.smp.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- MAINTAINERS           |  2 ++
- hw/cpu/book.c         | 46 +++++++++++++++++++++++++++++++++++++++++++
- hw/cpu/meson.build    |  2 +-
- include/hw/cpu/book.h | 38 +++++++++++++++++++++++++++++++++++
- 4 files changed, 87 insertions(+), 1 deletion(-)
- create mode 100644 hw/cpu/book.c
- create mode 100644 include/hw/cpu/book.h
+ hw/core/cpu-slot.c         | 217 +++++++++++++++++++++++++++++++++++++
+ hw/core/machine-smp.c      |   9 ++
+ hw/cpu/core.c              |   1 -
+ include/hw/boards.h        |  11 ++
+ include/hw/core/cpu-slot.h |   5 +
+ tests/unit/meson.build     |   5 +-
+ 6 files changed, 246 insertions(+), 2 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6a9fa0aeed0c..dd5adfda64cc 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1862,6 +1862,7 @@ F: hw/core/machine.c
- F: hw/core/machine-smp.c
- F: hw/core/null-machine.c
- F: hw/core/numa.c
-+F: hw/cpu/book.c
- F: hw/cpu/cluster.c
- F: hw/cpu/die.c
- F: hw/cpu/socket.c
-@@ -1871,6 +1872,7 @@ F: qapi/machine-target.json
- F: include/hw/boards.h
- F: include/hw/core/cpu.h
- F: include/hw/core/cpu-topo.h
-+F: include/hw/cpu/book.h
- F: include/hw/cpu/cluster.h
- F: include/hw/cpu/die.h
- F: include/hw/cpu/socket.h
-diff --git a/hw/cpu/book.c b/hw/cpu/book.c
-new file mode 100644
-index 000000000000..4b16267b10eb
---- /dev/null
-+++ b/hw/cpu/book.c
-@@ -0,0 +1,46 @@
-+/*
-+ * CPU book abstract device
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "hw/cpu/book.h"
-+
-+static void cpu_book_class_init(ObjectClass *oc, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
-+
-+    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
-+
-+    tc->level = CPU_TOPO_BOOK;
-+}
-+
-+static const TypeInfo cpu_book_type_info = {
-+    .name = TYPE_CPU_BOOK,
-+    .parent = TYPE_CPU_TOPO,
-+    .class_init = cpu_book_class_init,
-+    .instance_size = sizeof(CPUBook),
-+};
-+
-+static void cpu_book_register_types(void)
-+{
-+    type_register_static(&cpu_book_type_info);
-+}
-+
-+type_init(cpu_book_register_types)
-diff --git a/hw/cpu/meson.build b/hw/cpu/meson.build
-index 251724fea86c..c44b54c5abb0 100644
---- a/hw/cpu/meson.build
-+++ b/hw/cpu/meson.build
-@@ -1,4 +1,4 @@
--system_ss.add(files('core.c', 'cluster.c', 'die.c', 'socket.c'))
-+system_ss.add(files('core.c', 'cluster.c', 'die.c', 'socket.c', 'book.c'))
+diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
+index 4b148440ed3d..ade155baf60b 100644
+--- a/hw/core/cpu-slot.c
++++ b/hw/core/cpu-slot.c
+@@ -22,6 +22,11 @@
  
- system_ss.add(when: 'CONFIG_ARM11MPCORE', if_true: files('arm11mpcore.c'))
- system_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview_mpcore.c'))
-diff --git a/include/hw/cpu/book.h b/include/hw/cpu/book.h
-new file mode 100644
-index 000000000000..b91bd553bea6
---- /dev/null
-+++ b/include/hw/cpu/book.h
-@@ -0,0 +1,38 @@
-+/*
-+ * CPU book abstract device
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
+ #include "hw/boards.h"
+ #include "hw/core/cpu-slot.h"
++#include "hw/cpu/book.h"
++#include "hw/cpu/cluster.h"
++#include "hw/cpu/die.h"
++#include "hw/cpu/drawer.h"
++#include "hw/cpu/socket.h"
+ #include "qapi/error.h"
+ 
+ static inline
+@@ -196,3 +201,215 @@ void machine_plug_cpu_slot(MachineState *ms)
+         clear_bit(CPU_TOPO_DRAWER, ms->topo->supported_levels);
+     }
+ }
 +
-+#ifndef HW_CPU_BOOK_H
-+#define HW_CPU_BOOK_H
++static unsigned int *get_smp_info_by_level(CpuTopology *smp_info,
++                                           CPUTopoLevel child_level)
++{
++    switch (child_level) {
++    case CPU_TOPO_THREAD:
++        return &smp_info->threads;
++    case CPU_TOPO_CORE:
++        return &smp_info->cores;
++    case CPU_TOPO_CLUSTER:
++        return &smp_info->clusters;
++    case CPU_TOPO_DIE:
++        return &smp_info->dies;
++    case CPU_TOPO_SOCKET:
++        return &smp_info->sockets;
++    case CPU_TOPO_BOOK:
++        return &smp_info->books;
++    case CPU_TOPO_DRAWER:
++        return &smp_info->drawers;
++    default:
++        /* No need to consider CPU_TOPO_UNKNOWN, and CPU_TOPO_ROOT. */
++        g_assert_not_reached();
++    }
 +
-+#include "hw/core/cpu-topo.h"
-+#include "hw/qdev-core.h"
++    return NULL;
++}
 +
-+#define TYPE_CPU_BOOK "cpu-book"
++static const char *get_topo_typename_by_level(CPUTopoLevel level)
++{
++    switch (level) {
++    case CPU_TOPO_CORE:
++        return TYPE_CPU_CORE;
++    case CPU_TOPO_CLUSTER:
++        return TYPE_CPU_CLUSTER;
++    case CPU_TOPO_DIE:
++        return TYPE_CPU_DIE;
++    case CPU_TOPO_SOCKET:
++        return TYPE_CPU_SOCKET;
++    case CPU_TOPO_BOOK:
++        return TYPE_CPU_BOOK;
++    case CPU_TOPO_DRAWER:
++        return TYPE_CPU_DRAWER;
++    default:
++        /*
++         * No need to consider CPU_TOPO_UNKNOWN, CPU_TOPO_THREAD
++         * and CPU_TOPO_ROOT.
++         */
++        g_assert_not_reached();
++    }
 +
-+OBJECT_DECLARE_SIMPLE_TYPE(CPUBook, CPU_BOOK)
++    return NULL;
++}
 +
-+struct CPUBook {
-+    /*< private >*/
-+    CPUTopoState obj;
++static char *get_topo_global_name(CPUTopoStat *stat,
++                                  CPUTopoLevel level)
++{
++    const char *type = NULL;
++    CPUTopoStatEntry *entry;
 +
-+    /*< public >*/
-+};
++    type = cpu_topo_level_to_string(level);
++    entry = get_topo_stat_entry(stat, level);
++    return g_strdup_printf("%s[%d]", type, entry->total_units);
++}
 +
-+#endif /* HW_CPU_BOOK_H */
++typedef struct SMPBuildCbData {
++    unsigned long *supported_levels;
++    unsigned int plugged_cpus;
++    CpuTopology *smp_info;
++    CPUTopoStat *stat;
++    Error **errp;
++} SMPBuildCbData;
++
++static int smp_core_set_threads(Object *core, unsigned int max_threads,
++                                unsigned int *plugged_cpus, Error **errp)
++{
++    if (!object_property_set_int(core, "nr-threads", max_threads, errp)) {
++        object_unref(core);
++        return TOPO_FOREACH_ERR;
++    }
++
++    if (*plugged_cpus > max_threads) {
++        if (!object_property_set_int(core, "plugged-threads",
++                                     max_threads, errp)) {
++            object_unref(core);
++            return TOPO_FOREACH_ERR;
++        }
++        *plugged_cpus -= max_threads;
++    } else{
++        if (!object_property_set_int(core, "plugged-threads",
++                                     *plugged_cpus, errp)) {
++            object_unref(core);
++            return TOPO_FOREACH_ERR;
++        }
++        *plugged_cpus = 0;
++    }
++
++    return TOPO_FOREACH_CONTINUE;
++}
++
++static int add_smp_topo_child(CPUTopoState *topo, void *opaque)
++{
++    CPUTopoLevel level, child_level;
++    Object *parent = OBJECT(topo);
++    SMPBuildCbData *cb = opaque;
++    unsigned int *nr_children;
++    Error **errp = cb->errp;
++
++    level = CPU_TOPO_LEVEL(topo);
++    child_level = find_last_bit(cb->supported_levels, level);
++
++    /*
++     * child_level equals to level, that means no child needs to create.
++     * This shouldn't happen.
++     */
++    g_assert(child_level != level);
++
++    nr_children = get_smp_info_by_level(cb->smp_info, child_level);
++    topo->max_children = *nr_children;
++
++    for (int i = 0; i < topo->max_children; i++) {
++        ObjectProperty *prop;
++        Object *child;
++        gchar *name;
++
++        child = object_new(get_topo_typename_by_level(child_level));
++        name = get_topo_global_name(cb->stat, child_level);
++
++        prop = object_property_try_add_child(parent, name, child, errp);
++        g_free(name);
++        if (!prop) {
++            return TOPO_FOREACH_ERR;
++        }
++
++        if (child_level == CPU_TOPO_CORE) {
++            int ret = smp_core_set_threads(child, cb->smp_info->threads,
++                                           &cb->plugged_cpus, errp);
++
++            if (ret == TOPO_FOREACH_ERR) {
++                return ret;
++            }
++        }
++
++        qdev_realize(DEVICE(child), NULL, errp);
++        if (*errp) {
++            return TOPO_FOREACH_ERR;
++        }
++    }
++
++    return TOPO_FOREACH_CONTINUE;
++}
++
++void machine_create_smp_topo_tree(MachineState *ms, Error **errp)
++{
++    DECLARE_BITMAP(foreach_bitmap, USER_AVAIL_LEVEL_NUM);
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
++    CPUSlot *slot = ms->topo;
++    SMPBuildCbData cb;
++
++    if (!slot) {
++        error_setg(errp, "Invalid machine: "
++                   "the cpu-slot of machine is not initialized.");
++        return;
++    }
++
++    if (mc->smp_props.possible_cpus_qom_granu != CPU_TOPO_CORE &&
++        mc->smp_props.possible_cpus_qom_granu != CPU_TOPO_THREAD) {
++        error_setg(errp, "Invalid machine: Only support building "
++                   "qom smp topology with core/thread granularity. "
++                   "Not support %s granularity.",
++                   cpu_topo_level_to_string(
++                       mc->smp_props.possible_cpus_qom_granu));
++        return;
++    }
++
++    cb.supported_levels = slot->supported_levels;
++    cb.plugged_cpus = ms->smp.cpus;
++    cb.smp_info = &ms->smp;
++    cb.stat = &slot->stat;
++    cb.errp = errp;
++
++    if (add_smp_topo_child(CPU_TOPO(slot), &cb) < 0) {
++        return;
++    }
++
++    bitmap_copy(foreach_bitmap, slot->supported_levels, USER_AVAIL_LEVEL_NUM);
++
++    /*
++     * Don't create threads from -smp, and just record threads
++     * number in core.
++     */
++    clear_bit(CPU_TOPO_CORE, foreach_bitmap);
++    clear_bit(CPU_TOPO_THREAD, foreach_bitmap);
++
++    /*
++     * If the core level is inserted by hotplug way, don't create cores
++     * from -smp ethier.
++     */
++    if (mc->smp_props.possible_cpus_qom_granu == CPU_TOPO_CORE) {
++        CPUTopoLevel next_level;
++
++        next_level = find_next_bit(foreach_bitmap, USER_AVAIL_LEVEL_NUM,
++                                   CPU_TOPO_CORE + 1);
++        clear_bit(next_level, foreach_bitmap);
++    }
++
++    cpu_topo_child_foreach_recursive(CPU_TOPO(slot), foreach_bitmap,
++                                     add_smp_topo_child, &cb);
++    if (*errp) {
++        return;
++    }
++    slot->smp_parsed = true;
++}
+diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
+index 25019c91ee36..a0d091b23b97 100644
+--- a/hw/core/machine-smp.c
++++ b/hw/core/machine-smp.c
+@@ -19,6 +19,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "hw/boards.h"
++#include "hw/core/cpu-slot.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ 
+@@ -230,6 +231,14 @@ void machine_parse_smp_config(MachineState *ms,
+                    mc->name, mc->max_cpus);
+         return;
+     }
++
++    /*
++     * TODO: drop this check and convert "smp" to QOM topology tree by
++     * default when all arches support QOM topology.
++     */
++    if (mc->smp_props.possible_cpus_qom_granu) {
++        machine_create_smp_topo_tree(ms, errp);
++    }
+ }
+ 
+ unsigned int machine_topo_get_cores_per_socket(const MachineState *ms)
+diff --git a/hw/cpu/core.c b/hw/cpu/core.c
+index 261b15fa8171..07100754e9d1 100644
+--- a/hw/cpu/core.c
++++ b/hw/cpu/core.c
+@@ -107,7 +107,6 @@ static void cpu_core_class_init(ObjectClass *oc, void *data)
+ static const TypeInfo cpu_core_type_info = {
+     .name = TYPE_CPU_CORE,
+     .parent = TYPE_CPU_TOPO,
+-    .abstract = true,
+     .class_init = cpu_core_class_init,
+     .class_size = sizeof(CPUCoreClass),
+     .instance_size = sizeof(CPUCore),
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 81a7b04ece86..88de08d98f9f 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -138,6 +138,11 @@ typedef struct {
+  *                 provided SMP configuration
+  * @books_supported - whether books are supported by the machine
+  * @drawers_supported - whether drawers are supported by the machine
++ * @possible_cpus_qom_granu - the topology granularity for possible_cpus[]
++ *                            based on QOM CPU topology to plug CPUs.
++ *                            Note this flag indicates the support for QOM CPU
++ *                            topology. If QOM CPU topology is not supported,
++ *                            must set this field as CPU_TOPO_UNKNOWN.
+  */
+ typedef struct {
+     bool prefer_sockets;
+@@ -146,6 +151,7 @@ typedef struct {
+     bool has_clusters;
+     bool books_supported;
+     bool drawers_supported;
++    CPUTopoLevel possible_cpus_qom_granu;
+ } SMPCompatProps;
+ 
+ /**
+@@ -187,6 +193,9 @@ typedef struct {
+  *    specifies default CPU_TYPE, which will be used for parsing target
+  *    specific features and for creating CPUs if CPU name wasn't provided
+  *    explicitly at CLI
++ * @default_core_tyep:
++ *    specifies default CORE_TYPE, which will be used to create default core
++ *    topology device for smp topology tree from -smp
+  * @minimum_page_bits:
+  *    If non-zero, the board promises never to create a CPU with a page size
+  *    smaller than this, so QEMU can use a more efficient larger page
+@@ -267,6 +276,7 @@ struct MachineClass {
+     const char *hw_version;
+     ram_addr_t default_ram_size;
+     const char *default_cpu_type;
++    const char *default_core_type;
+     bool default_kernel_irqchip_split;
+     bool option_rom_has_mr;
+     bool rom_file_has_mr;
+@@ -398,6 +408,7 @@ struct MachineState {
+     const char *cpu_type;
+     AccelState *accelerator;
+     CPUArchIdList *possible_cpus;
++    /* TODO: get rid of "smp" when all arches support QOM topology. */
+     CpuTopology smp;
+     CPUSlot *topo;
+     struct NVDIMMState *nvdimms_state;
+diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
+index 1361af4ccfc0..de3d08fcb2ac 100644
+--- a/include/hw/core/cpu-slot.h
++++ b/include/hw/core/cpu-slot.h
+@@ -79,6 +79,9 @@ OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
+  * @stat: Statistical topology information for topology tree.
+  * @supported_levels: Supported topology levels for topology tree.
+  * @ms: Machine in which this cpu-slot is plugged.
++ * @smp_parsed: Flag indicates if topology tree is derived from "-smp".
++ *      If not, MachineState.smp needs to be initialized based on
++ *      topology tree.
+  */
+ struct CPUSlot {
+     /*< private >*/
+@@ -89,11 +92,13 @@ struct CPUSlot {
+     CPUTopoStat stat;
+     DECLARE_BITMAP(supported_levels, USER_AVAIL_LEVEL_NUM);
+     MachineState *ms;
++    bool smp_parsed;
+ };
+ 
+ #define MACHINE_CORE_FOREACH(ms, core) \
+     QTAILQ_FOREACH((core), &(ms)->topo->cores, node)
+ 
+ void machine_plug_cpu_slot(MachineState *ms);
++void machine_create_smp_topo_tree(MachineState *ms, Error **errp);
+ 
+ #endif /* CPU_SLOT_H */
+diff --git a/tests/unit/meson.build b/tests/unit/meson.build
+index a05d47109040..5806dc5d813c 100644
+--- a/tests/unit/meson.build
++++ b/tests/unit/meson.build
+@@ -138,7 +138,10 @@ if have_system
+     'test-util-sockets': ['socket-helpers.c'],
+     'test-base64': [],
+     'test-bufferiszero': [],
+-    'test-smp-parse': [qom, meson.project_source_root() / 'hw/core/machine-smp.c'],
++    'test-smp-parse': [qom, meson.project_source_root() / 'hw/core/machine-smp.c',
++                       meson.project_source_root() / 'hw/core/cpu-slot.c',
++                       meson.project_source_root() / 'hw/core/cpu-topo.c',
++                       hwcore],
+     'test-vmstate': [migration, io],
+     'test-yank': ['socket-helpers.c', qom, io, chardev]
+   }
 -- 
 2.34.1
 
