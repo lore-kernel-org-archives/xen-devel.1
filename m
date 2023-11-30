@@ -4,34 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5057EC4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:19:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644972.1006686 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A5BC10DC2
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:26:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644990.1006700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8ioR-0004y6-EW; Thu, 30 Nov 2023 15:18:47 +0000
+	id 1r8ivZ-0002Ch-7a; Thu, 30 Nov 2023 15:26:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644972.1006686; Thu, 30 Nov 2023 15:18:47 +0000
+Received: by outflank-mailman (output) from mailman id 644990.1006700; Thu, 30 Nov 2023 15:26:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8ioR-0004xz-Bi; Thu, 30 Nov 2023 15:18:47 +0000
-Received: by outflank-mailman (input) for mailman id 644972;
- Thu, 30 Nov 2023 15:18:46 +0000
+	id 1r8ivZ-0002Ca-4i; Thu, 30 Nov 2023 15:26:09 +0000
+Received: by outflank-mailman (input) for mailman id 644990;
+ Thu, 30 Nov 2023 15:26:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i8q-0008E0-8m
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:35:48 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=3Itg=HL=redhat.com=eblake@srs-se1.protection.inumbo.net>)
+ id 1r8ivX-0002CR-NE
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 15:26:07 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bf59b2a9-8f8d-11ee-98e4-6d05b1d4d9a1;
- Thu, 30 Nov 2023 15:35:47 +0100 (CET)
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:35:45 -0800
-Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:35:35 -0800
+ id c53d729c-8f94-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 16:26:03 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-631-AkwYzv4cPa23jxw8AoYvfg-1; Thu,
+ 30 Nov 2023 10:25:58 -0500
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 597981C0F479;
+ Thu, 30 Nov 2023 15:25:57 +0000 (UTC)
+Received: from redhat.com (unknown [10.2.16.190])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C7778492BE7;
+ Thu, 30 Nov 2023 15:25:53 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,280 +53,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bf59b2a9-8f8d-11ee-98e4-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354947; x=1732890947;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=zMs3wimSwFi3OS/xT8fCJCLyivsPCu0OTNgeR6TOgP0=;
-  b=Nw9Zwe69Mk+TS601A3YuuhAalgfKvFgpVCFb1nIq3+pqYPt0WlQCT0xm
-   umeFpcCRZAXdCRhocduL+Zy0/iuFg+C6Zm+ewBg9woT1xr/ra5LJwHv4X
-   KWQ0Uql02opxuXzfEyMS3mb85SwAp+mW/Ir1f83khKERRKRzjIKttS8v1
-   z3KwKEWA0gNRNSuTQQlMjJ/SRzuXFMwVzzzqn5n6QAlIQIgaMoYpPEqTq
-   ULj3wcbKW7bb/RXwTA6RRpztzAO3oewm2YCYRyU9xnk37LoP7KmCAY2Ou
-   XBMdNpi0oBQtU5BOBZU4C7JFj8p3TiXeOD9z0/dqy3Rn+O2x1YkAbpF6m
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532483"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479532483"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730310"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942730310"
-From: Zhao Liu <zhao1.liu@linux.intel.com>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Yanan Wang <wangyanan55@huawei.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	"Michael S . Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Daniel Henrique Barboza <danielhb413@gmail.com>,
-	Igor Mammedov <imammedo@redhat.com>,
-	=?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
-	=?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Barrat?= <fbarrat@linux.ibm.com>,
-	David Gibson <david@gibson.dropbear.id.au>,
-	Harsh Prateek Bora <harshpb@linux.ibm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	Alistair Francis <alistair@alistair23.me>,
-	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
-	=?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	Bin Meng <bin.meng@windriver.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Weiwei Li <liwei1518@gmail.com>,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	qemu-devel@nongnu.org,
-	kvm@vger.kernel.org,
-	qemu-ppc@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	qemu-arm@nongnu.org,
-	qemu-riscv@nongnu.org,
-	qemu-s390x@nongnu.org
-Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
-	Thomas Huth <thuth@redhat.com>,
-	Zhiyuan Lv <zhiyuan.lv@intel.com>,
-	Zhenyu Wang <zhenyu.z.wang@intel.com>,
-	Yongwei Ma <yongwei.ma@intel.com>,
-	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 33/41] hw/machine: Validate smp topology tree without -smp
-Date: Thu, 30 Nov 2023 22:41:55 +0800
-Message-Id: <20231130144203.2307629-34-zhao1.liu@linux.intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
-References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
+X-Inumbo-ID: c53d729c-8f94-11ee-98e4-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1701357962;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1E3MmvTBcjlJZU/lnnO0iHKSu14HCeHV8F5Op4ocv4k=;
+	b=V6CarrlKE0XZtZv4t4mORZoUcC2iuJHNkXQ8TB5KBgcVrXGIlMGLQ7P8pondgEvEjP3gkj
+	epwnPHUx+cwarvIxML6EzTNpolcOPqfR922JBg6oa7/Wz8c888yc1GIdepjZc/nvQ769c/
+	qOfTHVBsVerqYqj202emGzAu6MRR8ks=
+X-MC-Unique: AkwYzv4cPa23jxw8AoYvfg-1
+Date: Thu, 30 Nov 2023 09:25:52 -0600
+From: Eric Blake <eblake@redhat.com>
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: qemu-devel@nongnu.org, Hanna Reitz <hreitz@redhat.com>, 
+	Paul Durrant <paul@xen.org>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Alberto Garcia <berto@igalia.com>, Emanuele Giuseppe Esposito <eesposit@redhat.com>, 
+	John Snow <jsnow@redhat.com>, Kevin Wolf <kwolf@redhat.com>, 
+	Wen Congyang <wencongyang2@huawei.com>, qemu-block@nongnu.org, xen-devel@lists.xenproject.org, 
+	Coiby Xu <Coiby.Xu@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, 
+	Xie Changlong <xiechanglong.d@gmail.com>, Ari Sundholm <ari@tuxera.com>, 
+	Li Zhijian <lizhijian@fujitsu.com>, Cleber Rosa <crosa@redhat.com>, 
+	Juan Quintela <quintela@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+	Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>, Zhang Chen <chen.zhang@intel.com>, Peter Xu <peterx@redhat.com>, 
+	Anthony Perard <anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Leonardo Bras <leobras@redhat.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, 
+	Fam Zheng <fam@euphon.net>, Fabiano Rosas <farosas@suse.de>
+Subject: Re: [PATCH 01/12] virtio-scsi: replace AioContext lock with
+ tmf_bh_lock
+Message-ID: <tng432xox5h3zwi7vkc7nbuu2bckkackqtdifqt2dtsn7t2eti@m2jwhopket2s>
+References: <20231129195553.942921-1-stefanha@redhat.com>
+ <20231129195553.942921-2-stefanha@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231129195553.942921-2-stefanha@redhat.com>
+User-Agent: NeoMutt/20231103
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
 
-From: Zhao Liu <zhao1.liu@intel.com>
+On Wed, Nov 29, 2023 at 02:55:42PM -0500, Stefan Hajnoczi wrote:
+> Protect the Task Management Function BH state with a lock. The TMF BH
+> runs in the main loop thread. An IOThread might process a TMF at the
+> same time as the TMF BH is running. Therefore tmf_bh_list and tmf_bh
+> must be protected by a lock.
+> 
+> Run TMF request completion in the IOThread using aio_wait_bh_oneshot().
+> This avoids more locking to protect the virtqueue and SCSI layer state.
 
-QOM topology allows user to create topology tree from cli without -smp,
-in this case, validate the topology tree to meet the smp requirement.
+Are we trying to get this into 8.2?
 
-Currently, for compatibility with MachineState.smp, initialize
-MachineState.smp from topology tree in this case.
+> 
+> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> ---
+>  include/hw/virtio/virtio-scsi.h |  3 +-
+>  hw/scsi/virtio-scsi.c           | 62 ++++++++++++++++++++++-----------
+>  2 files changed, 43 insertions(+), 22 deletions(-)
+>
 
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
----
- hw/core/cpu-slot.c         | 146 +++++++++++++++++++++++++++++++++++++
- hw/core/machine.c          |  10 +++
- include/hw/core/cpu-slot.h |   1 +
- 3 files changed, 157 insertions(+)
+Reviewed-by: Eric Blake <eblake@redhat.com>
 
-diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
-index ade155baf60b..45b6aef0750a 100644
---- a/hw/core/cpu-slot.c
-+++ b/hw/core/cpu-slot.c
-@@ -413,3 +413,149 @@ void machine_create_smp_topo_tree(MachineState *ms, Error **errp)
-     }
-     slot->smp_parsed = true;
- }
-+
-+static void set_smp_child_topo_info(CpuTopology *smp_info,
-+                                    CPUTopoStat *stat,
-+                                    CPUTopoLevel child_level)
-+{
-+    unsigned int *smp_count;
-+    CPUTopoStatEntry *entry;
-+
-+    smp_count = get_smp_info_by_level(smp_info, child_level);
-+    entry = get_topo_stat_entry(stat, child_level);
-+    *smp_count = entry->max_units ? entry->max_units : 1;
-+
-+    return;
-+}
-+
-+typedef struct ValidateCbData {
-+    CPUTopoStat *stat;
-+    CpuTopology *smp_info;
-+    Error **errp;
-+} ValidateCbData;
-+
-+static int validate_topo_children(CPUTopoState *topo, void *opaque)
-+{
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(topo), next_level;
-+    ValidateCbData *cb = opaque;
-+    unsigned int max_children;
-+    CPUTopoStatEntry *entry;
-+    Error **errp = cb->errp;
-+
-+    if (level != CPU_TOPO_THREAD && !topo->num_children &&
-+        !topo->max_children) {
-+        error_setg(errp, "Invalid topology: the CPU topology "
-+                   "(level: %s, index: %d) isn't completed.",
-+                   cpu_topo_level_to_string(level), topo->index);
-+        return TOPO_FOREACH_ERR;
-+    }
-+
-+    if (level == CPU_TOPO_UNKNOWN) {
-+        error_setg(errp, "Invalid CPU topology: unknown topology level.");
-+        return TOPO_FOREACH_ERR;
-+    }
-+
-+    /*
-+     * Only CPU_TOPO_THREAD level's child_level could be CPU_TOPO_UNKNOWN,
-+     * but machine_validate_cpu_topology() is before CPU creation.
-+     */
-+    if (topo->child_level == CPU_TOPO_UNKNOWN) {
-+        error_setg(errp, "Invalid CPU topology: incomplete topology "
-+                   "(level: %s, index: %d), no child?.",
-+                   cpu_topo_level_to_string(level), topo->index);
-+        return TOPO_FOREACH_ERR;
-+    }
-+
-+    /*
-+     * Currently hybrid topology isn't supported, so only SMP topology
-+     * is allowed.
-+     */
-+
-+    entry = get_topo_stat_entry(cb->stat, topo->child_level);
-+
-+    /* Max threads per core is pre-configured by "nr-threads". */
-+    max_children = topo->child_level != CPU_TOPO_THREAD ?
-+                   topo->num_children : topo->max_children;
-+
-+    if (entry->max_units != max_children) {
-+        error_setg(errp, "Invalid SMP topology: "
-+                   "The %s topology is asymmetric.",
-+                   cpu_topo_level_to_string(level));
-+        return TOPO_FOREACH_ERR;
-+    }
-+
-+    next_level = find_next_bit(cb->stat->curr_levels, USER_AVAIL_LEVEL_NUM,
-+                               topo->child_level + 1);
-+
-+    if (next_level != level) {
-+        error_setg(errp, "Invalid smp topology: "
-+                   "asymmetric CPU topology depth.");
-+        return TOPO_FOREACH_ERR;
-+    }
-+
-+    set_smp_child_topo_info(cb->smp_info, cb->stat, topo->child_level);
-+
-+    return TOPO_FOREACH_CONTINUE;
-+}
-+
-+/*
-+ * Only check the case user configures CPU topology via -device
-+ * without -smp. In this case, MachineState.smp also needs to be
-+ * initialized based on topology tree.
-+ */
-+bool machine_validate_cpu_topology(MachineState *ms, Error **errp)
-+{
-+    MachineClass *mc = MACHINE_GET_CLASS(ms);
-+    CPUTopoState *slot_topo = CPU_TOPO(ms->topo);
-+    CPUTopoStat *stat = &ms->topo->stat;
-+    CpuTopology *smp_info = &ms->smp;
-+    unsigned int total_cpus;
-+    ValidateCbData cb;
-+
-+    if (ms->topo->smp_parsed) {
-+        return true;
-+    } else if (!slot_topo->num_children) {
-+        /*
-+         * If there's no -smp nor -device to add topology children,
-+         * then create the default topology.
-+         */
-+        machine_create_smp_topo_tree(ms, errp);
-+        if (*errp) {
-+            return false;
-+        }
-+        return true;
-+    }
-+
-+    if (test_bit(CPU_TOPO_CLUSTER, stat->curr_levels)) {
-+        mc->smp_props.has_clusters = true;
-+    }
-+
-+    /*
-+     * The next cpu_topo_child_foreach_recursive() doesn't cover the
-+     * parent topology unit. Update information for root here.
-+     */
-+    set_smp_child_topo_info(smp_info, stat, slot_topo->child_level);
-+
-+    cb.stat = stat;
-+    cb.smp_info = smp_info;
-+    cb.errp = errp;
-+
-+    cpu_topo_child_foreach_recursive(slot_topo, NULL,
-+                                     validate_topo_children, &cb);
-+    if (*errp) {
-+        return false;
-+    }
-+
-+    ms->smp.cpus = stat->pre_plugged_cpus ?
-+                   stat->pre_plugged_cpus : 1;
-+    ms->smp.max_cpus = stat->max_cpus ?
-+                       stat->max_cpus : 1;
-+
-+    total_cpus = ms->smp.drawers * ms->smp.books *
-+                 ms->smp.sockets * ms->smp.dies *
-+                 ms->smp.clusters * ms->smp.cores *
-+                 ms->smp.threads;
-+    g_assert(total_cpus == ms->smp.max_cpus);
-+
-+    return true;
-+}
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 0c1739814124..5fa0c826f35e 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1505,6 +1505,16 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
-                                    "on", false);
-     }
- 
-+    /*
-+     * TODO: drop this check and validate topology tree by default
-+     * when all arches support QOM topology.
-+     */
-+    if (machine_class->smp_props.possible_cpus_qom_granu) {
-+        if (!machine_validate_cpu_topology(machine, errp)) {
-+            return;
-+        }
-+    }
-+
-     accel_init_interfaces(ACCEL_GET_CLASS(machine->accelerator));
-     machine_class->init(machine);
-     phase_advance(PHASE_MACHINE_INITIALIZED);
-diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
-index de3d08fcb2ac..9e1c6d6b7ff2 100644
---- a/include/hw/core/cpu-slot.h
-+++ b/include/hw/core/cpu-slot.h
-@@ -100,5 +100,6 @@ struct CPUSlot {
- 
- void machine_plug_cpu_slot(MachineState *ms);
- void machine_create_smp_topo_tree(MachineState *ms, Error **errp);
-+bool machine_validate_cpu_topology(MachineState *ms, Error **errp);
- 
- #endif /* CPU_SLOT_H */
 -- 
-2.34.1
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.
+Virtualization:  qemu.org | libguestfs.org
 
 
