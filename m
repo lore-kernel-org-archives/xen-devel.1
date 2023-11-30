@@ -4,39 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC0BC4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 16:00:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.645032.1006794 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 683BAC07CA9
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 16:02:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.645040.1006814 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8jSb-0005NL-SN; Thu, 30 Nov 2023 16:00:17 +0000
+	id 1r8jUX-0006qF-JA; Thu, 30 Nov 2023 16:02:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 645032.1006794; Thu, 30 Nov 2023 16:00:17 +0000
+Received: by outflank-mailman (output) from mailman id 645040.1006814; Thu, 30 Nov 2023 16:02:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8jSb-0005NE-OG; Thu, 30 Nov 2023 16:00:17 +0000
-Received: by outflank-mailman (input) for mailman id 645032;
- Thu, 30 Nov 2023 16:00:16 +0000
+	id 1r8jUX-0006q8-G7; Thu, 30 Nov 2023 16:02:17 +0000
+Received: by outflank-mailman (input) for mailman id 645040;
+ Thu, 30 Nov 2023 16:02:16 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=BG3/=HL=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1r8jSa-0005KM-LJ
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 16:00:16 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on2057.outbound.protection.outlook.com [40.107.7.57])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=4Jom=HL=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1r8jUW-0006q2-BT
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 16:02:16 +0000
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8c96da59-8f99-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 17:00:14 +0100 (CET)
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
- by VE1PR04MB7310.eurprd04.prod.outlook.com (2603:10a6:800:1a2::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.8; Thu, 30 Nov
- 2023 15:59:45 +0000
-Received: from DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::eb8e:fa24:44c1:5d44]) by DU2PR04MB8790.eurprd04.prod.outlook.com
- ([fe80::eb8e:fa24:44c1:5d44%3]) with mapi id 15.20.7068.012; Thu, 30 Nov 2023
- 15:59:45 +0000
+ id d3ca1928-8f99-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 17:02:14 +0100 (CET)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-32f8441dfb5so773225f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Nov 2023 08:02:14 -0800 (PST)
+Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
+ f12-20020adfdb4c000000b00332d3b89561sm1873646wrj.97.2023.11.30.08.02.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Nov 2023 08:02:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,134 +46,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c96da59-8f99-11ee-9b0f-b553b5be7939
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PFqEHJq02Vwpl/xfov8jVHQIaJLU6VLnBHqQgVCoRuas8SLnMfzV2eNqHZ5Sd9kqAg5G8f6I4N9oEk9LO+b0pJJJwg78j/jBRHnZQy/ja1794o7Im/55An8OVKT6bARwz7MRZruvVprqLHKJYGZgDi72LotBT8G10BCuLP8mBDbhczOUGm/QtK4CyxUA2UlhPnI06ALdDVO4eKI0y+k0DhJ+5mWWSNshI2e1b+FqB1wWb60mEqB+V41rK/qjh4lkLalh2BNjBpznJAa/R1OA0p0i9+7NA2L/Spp6Y7e3+mkffPMa0gDj6FXhFCUNnQwLhvkitUlV9TecODpf1jFHcA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=02HKpb4GNdUC1VsGOqjmWHVYN/hnbassl75ivaLhBFs=;
- b=Nf6HL3VwnJHx20LYiS/f6gvDhptgCG4kJ2UHG+o38205y+vmSm0QAqS0o3q8eHV4PCNAiqtO04Lzp3J/HuWYdp/35GiPKNOr8EnO7nzCsVjyRFFryim/JDSj0Yhb8pGhhhezOVZGveJcNeP/mEdkS9hb85AQPGWPOP+eQZw3Wo/xwJtYODKjv/qW9IuDfz0/Uxkr2CcCjGR6BJOSC4ZJ0RCl6Ms0wf7aUlnhOE13Ai0NfUvPP7J7CI+pUBE0tkWir7aI47l8i1oJv0L5shDJ8fAh6/70OOjaKjUmgwYofXtmRTOWNW/bTMzPvYnDizUVYfRBibCVfXOPYva5KsBwfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=02HKpb4GNdUC1VsGOqjmWHVYN/hnbassl75ivaLhBFs=;
- b=PSwjHp0LztYcUVyreqL1Wtdrt2xEnFGQAUCCYYP8sYI65cDepSL1acS8ZISvgIFJkbNCwCOWsS/ACFG+1FHaI0T0GTrtSKuPVSOR6+EHo1qSFKT5mz2dKnWgv9vfigxS2l9q5yMOEKKcGJyWQqc9INNQcH15yzlKa8nEJCel0fzxS39eywOOyK8riVReWHx09Eg64FlznLd3Te0uetrpbRH9aHHX4MF4Vm/JRHn+4+mo89q0Tv2l7swubtvwU78cOU/kIZisdPvtZUe2iKfA2ynbRDTxLPbuA9tnSa0FbB8sr9wx8mf6pE3zVis324MF3uIiSN5NyyTb4nnyo8dZrA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <d70f2ae5-b4d2-4758-ac84-1e8f8c415ff7@suse.com>
-Date: Thu, 30 Nov 2023 16:59:44 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH 07/11] xen/iommu: address violations of MISRA C:2012
- Rule 8.2
-Content-Language: en-US
-To: Federico Serafini <federico.serafini@bugseng.com>
-Cc: consulting@bugseng.com, Paul Durrant <paul@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1700832962.git.federico.serafini@bugseng.com>
- <85581b19ffe10276639683aff56d04f3f74abd6f.1700832962.git.federico.serafini@bugseng.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <85581b19ffe10276639683aff56d04f3f74abd6f.1700832962.git.federico.serafini@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0437.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:c6::7) To DU2PR04MB8790.eurprd04.prod.outlook.com
- (2603:10a6:10:2e1::23)
+X-Inumbo-ID: d3ca1928-8f99-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1701360134; x=1701964934; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=J8Q31kwOWiBDXnwlbMX0bPU/+i+b5UwJll/wjEONC1U=;
+        b=PdQw6BmV4N+ZRrxZ262D/349Mad0uhcBqfqVfEImmhSNgTO8JQf4ie/iw38GpqIBaE
+         zDiHl5mTGloxIjEjPCDEd54Z/7gYMxEVQvYgUCLNg4uIqfBZAeLMSz4epywkg4XP6ouq
+         kcNC6iPUIil827QcpKgMZm9qFGAMXolt683Ig=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701360134; x=1701964934;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=J8Q31kwOWiBDXnwlbMX0bPU/+i+b5UwJll/wjEONC1U=;
+        b=BGOxgJ+T+9LW8Uw+WA8Tebzns/fcwCwlVFwQb5ZCSxfh1yqlAldJJCBjwUXwWbB6jT
+         va3BQiEAKR4JJWonwpeDVvQxc+P5ENkSBcU3JaKKGdoGtbVLfnx8oecBWZPBKC5rIKa7
+         GZ0V1Bbv3wsNKT547HbJDuiD1gELtdJ+uLse3j0cq+48loBUSfXA35swUzMuhTD41rzb
+         pKuTNmy9a9YtISPDLXth3Djmo7hkQL+01HYTIq+x8tC9KzdsoiVu6uXtjn7fUd+76k8n
+         U0rsqECp78+fFMQAzdyTnE1b6IzgYzHt0rAfiw4lpI2yJy3fJxxEoRi2bYVdv95nT8/K
+         AOSQ==
+X-Gm-Message-State: AOJu0YyH/1z5+i97cAAjhuEHEvK5wJgZTalZo/Z5driH9XHueb150yca
+	q1CMY4ZBAMoO3CH/uxgZwriQiQ==
+X-Google-Smtp-Source: AGHT+IG7CHrQYHgQi9oJz5npE820tArdqo6WytLhF5GonusjbfiVhyI2nc1i0dbHiq1MLAlBCrQniA==
+X-Received: by 2002:a5d:458b:0:b0:332:ffaf:d217 with SMTP id p11-20020a5d458b000000b00332ffafd217mr9790796wrq.27.1701360133280;
+        Thu, 30 Nov 2023 08:02:13 -0800 (PST)
+Date: Thu, 30 Nov 2023 17:02:12 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Jiqian Chen <Jiqian.Chen@amd.com>, Juergen Gross <jgross@suse.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Len Brown <lenb@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+	xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+	linux-acpi@vger.kernel.org,
+	Stefano Stabellini <stefano.stabellini@amd.com>,
+	Alex Deucher <Alexander.Deucher@amd.com>,
+	Christian Koenig <Christian.Koenig@amd.com>,
+	Stewart Hildebrand <Stewart.Hildebrand@amd.com>,
+	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+	Honglei Huang <Honglei1.Huang@amd.com>,
+	Julia Zhang <Julia.Zhang@amd.com>, Huang Rui <Ray.Huang@amd.com>
+Subject: Re: [RFC KERNEL PATCH v2 2/3] xen/pvh: Unmask irq for passthrough
+ device in PVH dom0
+Message-ID: <ZWiyBP4Lzz5lXraP@macbook>
+References: <20231124103123.3263471-1-Jiqian.Chen@amd.com>
+ <20231124103123.3263471-3-Jiqian.Chen@amd.com>
+ <alpine.DEB.2.22.394.2311291950350.3533093@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_|VE1PR04MB7310:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5ce528f6-43c3-4335-a0af-08dbf1bd5f38
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	psm77l1qgVEgGS8EhKznSzEnupXBIz8vEDy/7in6F1DEAyv2qYR+xUCLYytNut7nE3bEFPT0Kpc5Xg4nt9divcZ3MFnObqRQnnTMwl25Qxw/9vOnWTTr0RQa8PI+Oe54ybypBzhfDQaoEcNUGsnB9xx5NsNdAMAPPdncu4CMUGAmUU8xASdatFMX132dotWEzGCu8NzS23LwNy1phJAUslQF1CDRplV/PcRjwTrdA7054wcU6A2N10k6I3t/ZkYGEgVqucUxF17gUqxIiJuwOCZBbI/+SibBtaVo/+L1axPzSV3eo4BSEHuFrMxp+Us9/JBdop8cy+xvUDmiu89PNNOWRO7F8RqIYSfEk+PbcI4haeapjV48OjAZj7PgLOJQbAtBoSXOuE6Af1T8k0dTzlzabV+XfqZgCrIqBa1/HDxiJ+gR/BnD0m1T5jjDTtB5/By0+QVSGPkGvt0luCNYjGzD1cAezcfEn6R51FguKs0OBrw/VC33VD7lHOFtudF/OgatNjlnENKsfl9T1CD8lDgJbxVKYGF805TTMKIGwqQ5UXsHueSVSuTn+G8dXyk44Ujv9PxObfXolvAYPgWhd6LKMltmqo+egTRSCEWrKEp3k3WtSrWCkQamAWA1kzbnStq8BCI8tjqDSrWTMpAROA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8790.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(396003)(366004)(39860400002)(136003)(376002)(230922051799003)(64100799003)(451199024)(1800799012)(186009)(8936002)(31696002)(86362001)(316002)(4326008)(5660300002)(36756003)(66556008)(6916009)(66946007)(66476007)(54906003)(4744005)(31686004)(8676002)(6506007)(38100700002)(2906002)(478600001)(6486002)(53546011)(6512007)(2616005)(41300700001)(26005)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?KzlGVFNqS21pWGFZMnRTZGtoUGVYdFdVQ1BwQ1lNRERZSDNxSkNiOU9BWWdv?=
- =?utf-8?B?cmRZVmoraThBZjMrSnZOM01xVEV6MzRkaWJCdHlzMUYxWHpXb0dsUlNQdHZq?=
- =?utf-8?B?UGFoRVVUNzhaaXNsblJtbTZOZVRXRmFjb0s0SkdsTVNXOGVsTGdtamltdkhW?=
- =?utf-8?B?dkJlN0lvM3oyMjNlclhDYWg2SVdXZE9iMGZMZ21jNzhPZ01kUmsxM1pWN2FK?=
- =?utf-8?B?ei81WENOMkpKMkYxU2tOaTJzOFJoNmlNZzMwS0R6UTRuTkVPSWc5SDFDZStx?=
- =?utf-8?B?QjQxY0s4RWJySXJ5SGZpTktFVkVERUpRVTliL25YV0Z4MnowVlZMeURFK1Fw?=
- =?utf-8?B?aWtwZXZEcHBzV1d0TnY4cnNDQjYxT3lQNXFhbXNRTXlEMHp4RTNwNDJYTWw1?=
- =?utf-8?B?Nm1UK251bUFsdDlLWDNheG0wZGg1cWIxYk12VkZ6ZEN6SlQ4Y1hpTXlpU3lB?=
- =?utf-8?B?M2ppUHhjZnRxNm5pU3ZVdFBLbUNmZk93dHY4WmErOFRBby9mZ0dRMkJJSTI0?=
- =?utf-8?B?WHFkc0RWNmVHNXVVVldHd1J3dVRudytFWDZRMTFvdW1QUndwMHVEN2UvZllo?=
- =?utf-8?B?cUlOVldORmJueHhtOFNnd1VJQlh1ZSs3a2txb1ZZb2k0K2NOVkhDNmhwOW1i?=
- =?utf-8?B?OC8wMnR0dCs5Rzl2bHlTTitaVHI3RlgxZFVnbkk0TUZhWi9STUwxZWJlUFF6?=
- =?utf-8?B?eCsvUitKbFdBS09vTWRGLzFjdE5UbFVsanRrVDlyL0dvM0FDTWs4T3h1dFV0?=
- =?utf-8?B?MG1wWVRoaStrK0hyV1FmSVBkREd1M2ZycTNaWThOTU5uNCt1VC9yYXV0UWZq?=
- =?utf-8?B?STVJQ0VjV2JVSUovcXo0WkYrV3NMTUx5ZE4wYk1LVzJ4T2RyemZqVlVKRmlK?=
- =?utf-8?B?a0lTcUhlSk9lMjR3MDBLalRIN2xUQnptU1hnUmZLS0YwNXpTV0hGV2dCV0lj?=
- =?utf-8?B?K04vb2dQcVo1V25iR0NWTVBRQkhMQU40SG90YWZMdTQrTW9oTHVobFF6cGF2?=
- =?utf-8?B?ZjlwSlF5d04ya3ZWZWdKa1JDRGFGWFVIWlAvaGJMNzIwYnBaM3JNNFpJUTdX?=
- =?utf-8?B?TlhRazJqT3poaVRNRm1qNUpaZEdpVGFDcG5sd3l1bGl0cUoxYm1Ja2FHbGRU?=
- =?utf-8?B?UUVQNkg2OUtrRmZqY0ZuUDVObVROUG1NTC8zZUFubzgwa0FNL1dhT0hmNm1q?=
- =?utf-8?B?OU9Pb2VSVXpudXpCZTcrS1N2aDBSSWM4K3VaOEY5dWRuV3A4U2hUUlh0NHg0?=
- =?utf-8?B?TkVvMVc0VUEyMVV5V2oySnJQemFOLzJvOUJJVjhkRGxKVnlqTTJKYUYrZDdj?=
- =?utf-8?B?L3V6OWJFWGN3QTNpckh4VllQcGFqaDhRU01ja0NVbnBUN1hWYVpaQzhNTlR5?=
- =?utf-8?B?Qm4wMmxnSmh0TXR4ZjVsV2I4ZFpmUVBwOXJUOUtja0I5bXdIbFNra0NLRFcw?=
- =?utf-8?B?dFpzS3NuTVJkWERRWlIvcDliOEFXLzRBeisrVUVwenhpNUVSOUpmTytpQ3h3?=
- =?utf-8?B?dmhNSXFLNi9sVEtPOG5qNXhaNVVvelc3Tm1tTGs4ZlVNRHRxNnY2SFhGRytz?=
- =?utf-8?B?c1hVN2ZsQmlKNTZXVG1RSzlhOEs1aEtuM2piSnViREROY0t3RWdxZDhKczJz?=
- =?utf-8?B?ZkdWeUpIOGZPbkx5T0ZvL1hEVkJ0SjdJZHpEVGlOYTIyNTdMQWxaRVNUVjhn?=
- =?utf-8?B?dEN4MXhLMzdITzFuZmszZTBVZFZoUzJMWHhKNy92WG5CQXFzLzN5bWxHcXlm?=
- =?utf-8?B?UW5say9PVVY3RitrVUhDMThNNCtyam13dzBXb2RFcmxQdHRtNjNwTnZDVGJx?=
- =?utf-8?B?TFJhSndNblc4WWdHek9MNnNoK1ZRQWp3YnorUjNzWjNybGlDR0lickJuUmpw?=
- =?utf-8?B?RG9PbzJKV1VlcVBuQWxjZlQ1YWRhcUFScnZOTFoxQnBHeGZZcm9XQWc1NjM2?=
- =?utf-8?B?SUo0RWRPUUtXb0NCWjRNVXdFR0F0aFFsZXE2THg0RTBKcHlCOWt6TXBkbkwv?=
- =?utf-8?B?M2kyZ3lUN3hmNGxsRTRYN3k0T1RBejFFbVE4anNlM2hMa1IvSGt3TzcyU1VZ?=
- =?utf-8?B?WmMyTEgwSk4zRHpJS3l0QnUxTldWSWNTS3AwZGplcjRFaDV2eEJEM3BydmZQ?=
- =?utf-8?Q?6ByghMTaz2FQSaCdDL1M2oec2?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ce528f6-43c3-4335-a0af-08dbf1bd5f38
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8790.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Nov 2023 15:59:45.2873
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hGVQD1v0UyfFwy1/oNSoB3DBXI212lCDbLqHPDzxj2K7ZV8hb/AnCKHuLvE0rRugPTQ7tkLgIjVm3l8Zh3CWtA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7310
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.22.394.2311291950350.3533093@ubuntu-linux-20-04-desktop>
 
-On 24.11.2023 15:03, Federico Serafini wrote:
-> Add missing parameter names to address violations of MISRA C:2012
-> Rule 8.2 and remove uses of u{8,16,32} in favor of C standard types.
-> No functional change.
+On Wed, Nov 29, 2023 at 07:53:59PM -0800, Stefano Stabellini wrote:
+> On Fri, 24 Nov 2023, Jiqian Chen wrote:
+> > This patch is to solve two problems we encountered when we try to
+> > passthrough a device to hvm domU base on Xen PVH dom0.
+> > 
+> > First, hvm guest will alloc a pirq and irq for a passthrough device
+> > by using gsi, before that, the gsi must first has a mapping in dom0,
+> > see Xen code pci_add_dm_done->xc_domain_irq_permission, it will call
+> > into Xen and check whether dom0 has the mapping. See
+> > XEN_DOMCTL_irq_permission->pirq_access_permitted, "current" is PVH
+> > dom0 and it return irq is 0, and then return -EPERM.
+> > This is because the passthrough device doesn't do PHYSDEVOP_map_pirq
+> > when thay are enabled.
+> > 
+> > Second, in PVH dom0, the gsi of a passthrough device doesn't get
+> > registered, but gsi must be configured for it to be able to be
+> > mapped into a domU.
+> > 
+> > After searching codes, we can find map_pirq and register_gsi will be
+> > done in function vioapic_write_redirent->vioapic_hwdom_map_gsi when
+> > the gsi(aka ioapic's pin) is unmasked in PVH dom0. So the problems
+> > can be conclude to that the gsi of a passthrough device doesn't be
+> > unmasked.
+> > 
+> > To solve the unmaske problem, this patch call the unmask_irq when we
+> > assign a device to be passthrough. So that the gsi can get registered
+> > and mapped in PVH dom0.
 > 
-> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+> 
+> Roger, this seems to be more of a Xen issue than a Linux issue. Why do
+> we need the unmask check in Xen? Couldn't we just do:
+> 
+> 
+> diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
+> index 4e40d3609a..df262a4a18 100644
+> --- a/xen/arch/x86/hvm/vioapic.c
+> +++ b/xen/arch/x86/hvm/vioapic.c
+> @@ -287,7 +287,7 @@ static void vioapic_write_redirent(
+>              hvm_dpci_eoi(d, gsi);
+>      }
+>  
+> -    if ( is_hardware_domain(d) && unmasked )
+> +    if ( is_hardware_domain(d) )
+>      {
+>          /*
+>           * NB: don't call vioapic_hwdom_map_gsi while holding hvm.irq_lock
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+There are some issues with this approach.
 
+mp_register_gsi() will only setup the trigger and polarity of the
+IO-APIC pin once, so we do so once the guest unmask the pin in order
+to assert that the configuration is the intended one.  A guest is
+allowed to write all kind of nonsense stuff to the IO-APIC RTE, but
+that doesn't take effect unless the pin is unmasked.
 
+Overall the question would be whether we have any guarantees that
+the hardware domain has properly configured the pin, even if it's not
+using it itself (as it hasn't been unmasked).
+
+IIRC PCI legacy interrupts are level triggered and low polarity, so we
+could configure any pins that are not setup at bind time?
+
+Thanks, Roger.
 
