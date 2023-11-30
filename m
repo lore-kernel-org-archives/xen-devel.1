@@ -4,52 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2272C4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:03:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644934.1006647 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9CFC10DC2
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 15:13:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644959.1006676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iZT-0007ra-Dg; Thu, 30 Nov 2023 15:03:19 +0000
+	id 1r8ijB-0002gk-Sg; Thu, 30 Nov 2023 15:13:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644934.1006647; Thu, 30 Nov 2023 15:03:19 +0000
+Received: by outflank-mailman (output) from mailman id 644959.1006676; Thu, 30 Nov 2023 15:13:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iZT-0007rT-B9; Thu, 30 Nov 2023 15:03:19 +0000
-Received: by outflank-mailman (input) for mailman id 644934;
- Thu, 30 Nov 2023 15:03:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r8ijB-0002gd-PV; Thu, 30 Nov 2023 15:13:21 +0000
+Received: by outflank-mailman (input) for mailman id 644959;
+ Thu, 30 Nov 2023 15:13:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/hl0=HL=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1r8iZR-0007rN-JM
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 15:03:17 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20621.outbound.protection.outlook.com
- [2a01:111:f400:fe59::621])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 957fb148-8f91-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 16:03:14 +0100 (CET)
-Received: from CH0PR03CA0085.namprd03.prod.outlook.com (2603:10b6:610:cc::30)
- by SN7PR12MB8103.namprd12.prod.outlook.com (2603:10b6:806:355::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.23; Thu, 30 Nov
- 2023 15:03:11 +0000
-Received: from DS2PEPF00003447.namprd04.prod.outlook.com
- (2603:10b6:610:cc:cafe::a7) by CH0PR03CA0085.outlook.office365.com
- (2603:10b6:610:cc::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.24 via Frontend
- Transport; Thu, 30 Nov 2023 15:03:11 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS2PEPF00003447.mail.protection.outlook.com (10.167.17.74) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7046.17 via Frontend Transport; Thu, 30 Nov 2023 15:03:10 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Thu, 30 Nov
- 2023 09:03:07 -0600
-Received: from [172.27.137.28] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
- Transport; Thu, 30 Nov 2023 09:03:04 -0600
+ <SRS0=4Jom=HL=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1r8ijB-0002MF-1p
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 15:13:21 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ff25cda7-8f92-11ee-98e4-6d05b1d4d9a1;
+ Thu, 30 Nov 2023 16:13:20 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40b54261442so8829885e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Nov 2023 07:13:20 -0800 (PST)
+Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
+ l8-20020a5d4bc8000000b003316b3d69b3sm1760620wrt.46.2023.11.30.07.13.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Nov 2023 07:13:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,206 +46,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 957fb148-8f91-11ee-9b0f-b553b5be7939
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WuXxCCq93TEs+cYSdr60I22HQfUnnoKryJ3HAmvy+lkYS7KRa7bvT9HUaHIHk3R7LmhrFF4RIr2QpOzw9kKY06u2/88wLiYmxnyNkUv4BOCXY/DCxmZDVdTi/m42vEEeSnqcpSjL+Q3n/UzSzzUxFK03J3y/I/GE/SFbVrJNK2h3J3YyzfJuijvlz1XavrUuD2xL8TlFH/zBg51zc6Cu8seSYB4TrKreiNejvmctPqfglrQZ7K9jW93liagvMLqtWHX1r8NvVYtLH/9/xbK9h34AvtwKdtyA9uJYJCCRX/8UG2Mi1u0ZF7/emZBEpbcp+93qVcIGyID4/xwB9sxIqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eBFIVtiQXa0sNx/4VzJnx+rOix4DIGI+pZcFJLf3UZw=;
- b=ZuaUS0uxj68MnNbglX1WG9af5nVMtnfzFVYl9HGNf0LIHCDMbbR2fLgJtWSrtCGSdE+q3qYn81IAddJX7ptJad9MpYrXIbvWlrQiDYrv5f/DjYsLL0LB2n+5Ey0hIGjTqD4xDEv4T7R1m3+V3Wtzn7vEqz0mxDcMW9CjBvGW5xlCjciNGVEaNUUl711YlDM1kf4pUgwivaE8OZpZck2uQjqn1hIuMeieV1dZ+/6Dj9OS1Gl+FVBUHhKfp/qDSY4C5R/tKiY2rdXZ8voZmpAtErZR2xgW9uHW0L+BoF03OSoEgIkPehVbofQxrJk4IlcMcmlqM0bIknr5cXmRYTtZYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eBFIVtiQXa0sNx/4VzJnx+rOix4DIGI+pZcFJLf3UZw=;
- b=r0Ras1tkhSDJVNk+S8BIv8KY1eqp9ZB61akeaVyeDaQWKJYUb3wGiIU8WSWtexrhex3RKznrjJb7lCX5sbxoAiFAnPIhc3aS+aTUh8QUOPPIfcwV7Wd0SrOY5ygboUIC2cRveJ3OfYeX/HSrHR10Ug8GcqYS/URiqpG29G010s4=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <f78395f3-6588-4bc9-8612-3450a8f44be7@amd.com>
-Date: Thu, 30 Nov 2023 10:03:02 -0500
+X-Inumbo-ID: ff25cda7-8f92-11ee-98e4-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1701357200; x=1701962000; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=zHbIpqKppVrirWnuO8nHfLF6hK+LIbZb7v0QlMQXF8Q=;
+        b=ECjywN+bgv5Rl30aVSDWNtbvj3TlnB75SfHrnGU6Z+rXPwPkmePxAhoEmPI8g0wNut
+         CGuCRnRGZrTGnAPy4M3QDb9uPB1sSWoOv+GKM1QhsaS1tk+qa3Tjr2sSxYFplMxW7K8j
+         iPefBDZSs1+3c+CFnscGI23avCpm+dFE4F8uI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701357200; x=1701962000;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=zHbIpqKppVrirWnuO8nHfLF6hK+LIbZb7v0QlMQXF8Q=;
+        b=oXzAgQCcGqJlD5vcxmitFi+dRhexQsG7tU1z1jQRcg+OOec3dA5wOTffmEbTVBK1w1
+         h9hihlLZOgGypQC4Kn1sQTa0oCovpDgPuTVx/vhkR6i25EgC6xiyaHHwEsH70DWiVjAQ
+         03O5wfDLDuyW8b3JC+OKxE6MwbyCGFGUuonEftPTI2v7z67lV3Wn97v25kfPn7U5NiG/
+         N48iNK1yKzCivvniBpDNROTpA5UOKxC/IkH1aQSQzJ4iZ4HocGvEKLtsVfYJGMQDv3Yw
+         xRTjGzKjCuoPhI+QxQKoBVCEaMLvv4Ewq0YrPSxBfLfz7WdgWipIXGg4+NzgCcQpSoPB
+         XiAw==
+X-Gm-Message-State: AOJu0Yx1ar55alxxGEOkFirtW4MBm1DV2zSm0LP9C9P+fbJBF76UQX0W
+	HCKicLMYzBHoDdZ796injkAmEI00ZMJYPhSl8+w=
+X-Google-Smtp-Source: AGHT+IEvGDWaS2xSJN5CO2xPYnnHJJ+5awRVwaMq+O0xpPyRzVLJIJ7UO7pc9Meccu3QUa3cZQ9coQ==
+X-Received: by 2002:a05:600c:4b2a:b0:40b:4337:7cbf with SMTP id i42-20020a05600c4b2a00b0040b43377cbfmr10468364wmp.1.1701357200043;
+        Thu, 30 Nov 2023 07:13:20 -0800 (PST)
+Date: Thu, 30 Nov 2023 16:13:18 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: "Chen, Jiqian" <Jiqian.Chen@amd.com>
+Cc: Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"Hildebrand, Stewart" <Stewart.Hildebrand@amd.com>,
+	"Deucher, Alexander" <Alexander.Deucher@amd.com>,
+	"Ragiadakou, Xenia" <Xenia.Ragiadakou@amd.com>,
+	"Stabellini, Stefano" <stefano.stabellini@amd.com>,
+	"Huang, Ray" <Ray.Huang@amd.com>,
+	"Huang, Honglei1" <Honglei1.Huang@amd.com>,
+	"Zhang, Julia" <Julia.Zhang@amd.com>
+Subject: Re: [RFC XEN PATCH v2 2/3] x86/pvh: Open PHYSDEVOP_map_pirq for PVH
+ dom0
+Message-ID: <ZWimjreYPWvAtle5@macbook>
+References: <20231124104136.3263722-1-Jiqian.Chen@amd.com>
+ <20231124104136.3263722-3-Jiqian.Chen@amd.com>
+ <ZWX2c7oQfeZxrpEF@macbook>
+ <BL1PR12MB5849A2AB56BAC75D4558F873E782A@BL1PR12MB5849.namprd12.prod.outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC KERNEL PATCH v2 1/3] xen/pci: Add xen_reset_device_state
- function
-Content-Language: en-US
-To: "Chen, Jiqian" <Jiqian.Chen@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>
-CC: Juergen Gross <jgross@suse.com>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>, Thomas Gleixner <tglx@linutronix.de>, "Boris
- Ostrovsky" <boris.ostrovsky@oracle.com>, "Rafael J . Wysocki"
-	<rafael@kernel.org>, Len Brown <lenb@kernel.org>, Bjorn Helgaas
-	<bhelgaas@google.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger.pau@citrix.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>, "linux-acpi@vger.kernel.org"
-	<linux-acpi@vger.kernel.org>, "Stabellini, Stefano"
-	<stefano.stabellini@amd.com>, "Deucher, Alexander"
-	<Alexander.Deucher@amd.com>, "Koenig, Christian" <Christian.Koenig@amd.com>,
-	"Ragiadakou, Xenia" <Xenia.Ragiadakou@amd.com>, "Huang, Honglei1"
-	<Honglei1.Huang@amd.com>, "Zhang, Julia" <Julia.Zhang@amd.com>, "Huang, Ray"
-	<Ray.Huang@amd.com>
-References: <20231124103123.3263471-1-Jiqian.Chen@amd.com>
- <20231124103123.3263471-2-Jiqian.Chen@amd.com>
- <alpine.DEB.2.22.394.2311291943260.3533093@ubuntu-linux-20-04-desktop>
- <BL1PR12MB58490EB260D226500141557EE782A@BL1PR12MB5849.namprd12.prod.outlook.com>
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-In-Reply-To: <BL1PR12MB58490EB260D226500141557EE782A@BL1PR12MB5849.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003447:EE_|SN7PR12MB8103:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0c753df2-6631-4fdb-5150-08dbf1b57823
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	vqNgQS6+MyAmGysQyzTvULI2XB9tcAY7ALXeSWoFkM+jhBkNSccCU6PvqCnnKB51BcVkpiBqrwGwi8T0NVI51dDQHZOBHHWI8SOHMrw9ffY8AoOe6I21mvDRaovgrSnKgMRUaU4pPUulyB6Nh6cxSZ07QiJleHlMCsFr3Yj6Bv020ouNNLCIh4oLh732ZlWl2Sxx4WfF3Eb07wwwkwJC6GrIqNfyh2qQcr4wzzRZWucQK6YB0xwUYyVzcFrwxwHgIRpWRvxuKIiMR46jD+1GeHdRDJeux6U0YxlUGfQ2pjtDL+5+92Hj7VuGZISnDnyjHYb9cz9cYHA8P04yQkOnGa7NkckVGuVixHPcogly74Vp/87Pv5IuhyNC2+KyNt2vC4JY0rflMghsHLaGHGUakBXv6SLOZVub4nAFkDiPnA4+VXhalzfEkKNZdITnKVU15YeLHXRQN2fdOTZ+dcD+Lb5PB2zeRkJEKom+k/vXX3gWghwCY9IDmD4BJZB71oLuy8xvTCpHreJNxNXamY5YX1OT8+HYbwDe6sOfgQUa9pACrhgDd2ZkC/ffoO06EE8jHu1XIImIxNfaD1lQ9XMGl8Nl030V/wANPLojhqOoGoW6iDqwt0PoncQZRbJrMy/6/pCajd2dVVL+jEO1Xof9/iK6ikkZR6NwZ920lPi/YgPxIwyY+Jx/YDHuZH/PyaQlhM7boQzbR/QSRIyiNmpKJis8EXzGuhHLh0KF3KaSC6eXRQE7EVChoE0GbjmP3Xu5w7UcIqtYap0iSbC/wKFPeirW+1b2GDxS5YQUQ/deHDiUieAFrNgR8faYvwQRyA+lHhmfkpxBYCCD+dnyi+Bx17Slu8o4NZkSkGprRZqJz50=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(376002)(396003)(39860400002)(136003)(230922051799003)(186009)(451199024)(64100799003)(82310400011)(1800799012)(46966006)(36840700001)(40470700004)(31686004)(40460700003)(40480700001)(2616005)(478600001)(53546011)(336012)(47076005)(26005)(36860700001)(356005)(81166007)(86362001)(36756003)(82740400003)(31696002)(70586007)(5660300002)(70206006)(44832011)(54906003)(41300700001)(426003)(7416002)(2906002)(83380400001)(4326008)(8676002)(316002)(8936002)(110136005)(16576012)(43740500002)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Nov 2023 15:03:10.9230
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c753df2-6631-4fdb-5150-08dbf1b57823
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS2PEPF00003447.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8103
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <BL1PR12MB5849A2AB56BAC75D4558F873E782A@BL1PR12MB5849.namprd12.prod.outlook.com>
 
-On 11/30/23 02:03, Chen, Jiqian wrote:
+On Thu, Nov 30, 2023 at 06:32:00AM +0000, Chen, Jiqian wrote:
 > 
-> On 2023/11/30 11:46, Stefano Stabellini wrote:
->> On Fri, 24 Nov 2023, Jiqian Chen wrote:
->>> When device on dom0 side has been reset, the vpci on Xen side
->>> won't get notification, so that the cached state in vpci is
->>> all out of date with the real device state.
->>> To solve that problem, this patch add a function to clear all
->>> vpci device state when device is reset on dom0 side.
->>>
->>> And call that function in pcistub_init_device. Because when
->>> we use "pci-assignable-add" to assign a passthrough device in
->>> Xen, it will reset passthrough device and the vpci state will
->>> out of date, and then device will fail to restore bar state.
->>>
->>> Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
->>> Signed-off-by: Huang Rui <ray.huang@amd.com>
->>> ---
->>>  drivers/xen/pci.c                  | 12 ++++++++++++
->>>  drivers/xen/xen-pciback/pci_stub.c |  3 +++
->>>  include/xen/interface/physdev.h    |  2 ++
->>>  include/xen/pci.h                  |  6 ++++++
->>>  4 files changed, 23 insertions(+)
->>>
->>> diff --git a/drivers/xen/pci.c b/drivers/xen/pci.c
->>> index 72d4e3f193af..e9b30bc09139 100644
->>> --- a/drivers/xen/pci.c
->>> +++ b/drivers/xen/pci.c
->>> @@ -177,6 +177,18 @@ static int xen_remove_device(struct device *dev)
->>>  	return r;
->>>  }
->>>  
->>> +int xen_reset_device_state(const struct pci_dev *dev)
->>> +{
->>> +	struct physdev_pci_device device = {
->>> +		.seg = pci_domain_nr(dev->bus),
->>> +		.bus = dev->bus->number,
->>> +		.devfn = dev->devfn
->>> +	};
->>> +
->>> +	return HYPERVISOR_physdev_op(PHYSDEVOP_pci_device_state_reset, &device);
->>> +}
->>> +EXPORT_SYMBOL_GPL(xen_reset_device_state);
->>> +
->>>  static int xen_pci_notifier(struct notifier_block *nb,
->>>  			    unsigned long action, void *data)
->>>  {
->>> diff --git a/drivers/xen/xen-pciback/pci_stub.c b/drivers/xen/xen-pciback/pci_stub.c
->>> index e34b623e4b41..5a96b6c66c07 100644
->>> --- a/drivers/xen/xen-pciback/pci_stub.c
->>> +++ b/drivers/xen/xen-pciback/pci_stub.c
->>> @@ -421,6 +421,9 @@ static int pcistub_init_device(struct pci_dev *dev)
->>>  	else {
->>>  		dev_dbg(&dev->dev, "resetting (FLR, D3, etc) the device\n");
->>>  		__pci_reset_function_locked(dev);
->>> +		err = xen_reset_device_state(dev);
->>> +		if (err)
->>> +			goto config_release;
->>
->> Older versions of Xen won't have the hypercall
->> PHYSDEVOP_pci_device_state_reset implemented. I think we should do
->> something like:
->>
->> if (err && xen_pvh_domain())
->>     goto config_release;
->>
->>
->> Or even:
->>
->> if (xen_pvh_domain()) {
->>     err = xen_reset_device_state(dev);
->>     if (err)
->>         goto config_release;
->> }
->>
->> depending on whether we want to call xen_reset_device_state also for PV
->> guests or not. I am assuming we don't want to error out on failure such
->> as -ENOENT for PV guests.
-> Yes, only for PVH dom0, I will add the condition in next version. Thank you!
+> On 2023/11/28 22:17, Roger Pau Monné wrote:
+> > On Fri, Nov 24, 2023 at 06:41:35PM +0800, Jiqian Chen wrote:
+> >> If we run Xen with PVH dom0 and hvm domU, hvm will map a pirq for
+> >> a passthrough device by using gsi, see xen_pt_realize->xc_physdev_map_pirq
+> >> and pci_add_dm_done->xc_physdev_map_pirq. Then xc_physdev_map_pirq will
+> >> call into Xen, but in hvm_physdev_op, PHYSDEVOP_map_pirq is not allowed
+> >> because currd is PVH dom0 and PVH has no X86_EMU_USE_PIRQ flag, it will
+> >> fail at has_pirq check.
+> >>
+> >> So, I think we may need to allow PHYSDEVOP_map_pirq when currd is dom0 (at
+> > 
+> > And PHYSDEVOP_unmap_pirq also?
+> Yes, in the failed path, PHYSDEVOP_unmap_pirq will be called. I will add some descriptions about it into the commit message.
+> 
+> > 
+> >> present dom0 is PVH).
+> > 
+> > IMO it would be better to implement a new set of DMOP hypercalls that
+> > handle the setup of interrupts from physical devices that are assigned
+> > to a guest.  That should allow us to get rid of the awkward PHYSDEVOP
+> > + XEN_DOMCTL_{,un}bind_pt_irq hypercall interface, which currently
+> > prevents QEMU from being hypervisor version agnostic (since the domctl
+> > interface is not stable).
+> > 
+> > I understand this might be too much to ask for, but something to take
+> > into account.
+> Yes, that will be a complex project. I think current change can meet the needs. We can take DMOP into account in the future. Thank you.
 
-We will want to call xen_reset_device_state() for Arm dom0, too, so checking xen_pvh_domain() alone is not sufficient. I suggest instead to check !xen_pv_domain().
+The issue with this approach is that we always do things in a rush and
+cut corners, and then never pay back the debt.  Anyway, I'm not going
+to block this, and I'm not blaming you.
 
-> 
->>
->>
->>>  		pci_restore_state(dev);
->>>  	}
->>>  	/* Now disable the device (this also ensures some private device
->>> diff --git a/include/xen/interface/physdev.h b/include/xen/interface/physdev.h
->>> index a237af867873..231526f80f6c 100644
->>> --- a/include/xen/interface/physdev.h
->>> +++ b/include/xen/interface/physdev.h
->>> @@ -263,6 +263,8 @@ struct physdev_pci_device {
->>>      uint8_t devfn;
->>>  };
->>>  
->>> +#define PHYSDEVOP_pci_device_state_reset     32
->>> +
->>>  #define PHYSDEVOP_DBGP_RESET_PREPARE    1
->>>  #define PHYSDEVOP_DBGP_RESET_DONE       2
->>>  
->>> diff --git a/include/xen/pci.h b/include/xen/pci.h
->>> index b8337cf85fd1..b2e2e856efd6 100644
->>> --- a/include/xen/pci.h
->>> +++ b/include/xen/pci.h
->>> @@ -4,10 +4,16 @@
->>>  #define __XEN_PCI_H__
->>>  
->>>  #if defined(CONFIG_XEN_DOM0)
->>> +int xen_reset_device_state(const struct pci_dev *dev);
->>>  int xen_find_device_domain_owner(struct pci_dev *dev);
->>>  int xen_register_device_domain_owner(struct pci_dev *dev, uint16_t domain);
->>>  int xen_unregister_device_domain_owner(struct pci_dev *dev);
->>>  #else
->>> +static inline int xen_reset_device_state(const struct pci_dev *dev)
->>> +{
->>> +	return -1;
->>> +}
->>> +
->>>  static inline int xen_find_device_domain_owner(struct pci_dev *dev)
->>>  {
->>>  	return -1;
->>> -- 
->>> 2.34.1
->>>
-> 
+Sadly this is just focused on getting something working in the short
+term rather than thinking long term in a maintainable interface.
+
+Regards, Roger.
 
