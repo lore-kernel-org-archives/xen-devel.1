@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE1CC4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.644837.1006567 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06AF6C07CA9
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.644824.1006518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCv-0006zT-O1; Thu, 30 Nov 2023 14:40:01 +0000
+	id 1r8iCm-0004lm-LY; Thu, 30 Nov 2023 14:39:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 644837.1006567; Thu, 30 Nov 2023 14:40:01 +0000
+Received: by outflank-mailman (output) from mailman id 644824.1006518; Thu, 30 Nov 2023 14:39:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r8iCu-0006rl-NV; Thu, 30 Nov 2023 14:40:00 +0000
-Received: by outflank-mailman (input) for mailman id 644837;
- Thu, 30 Nov 2023 14:37:53 +0000
+	id 1r8iCl-0004Wc-Ek; Thu, 30 Nov 2023 14:39:51 +0000
+Received: by outflank-mailman (input) for mailman id 644824;
+ Thu, 30 Nov 2023 14:36:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jjew=HL=linux.intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
- id 1r8i5J-0004Xw-QY
- for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:32:09 +0000
+ id 1r8i9n-0000pO-Uk
+ for xen-devel@lists.xenproject.org; Thu, 30 Nov 2023 14:36:47 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3d088c85-8f8d-11ee-9b0f-b553b5be7939;
- Thu, 30 Nov 2023 15:32:07 +0100 (CET)
+ id e3151d4e-8f8d-11ee-9b0f-b553b5be7939;
+ Thu, 30 Nov 2023 15:36:46 +0100 (CET)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:31:39 -0800
+ 30 Nov 2023 06:36:42 -0800
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:29 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:36:33 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d088c85-8f8d-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: e3151d4e-8f8d-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701354727; x=1732890727;
+  t=1701355006; x=1732891006;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=vOtFxW4vj/U4kztv92p8xu/6iieeFFSa0l7Rf+yqZFI=;
-  b=kMebdLYII7TqquSHJt71rO4bonxNpIj6X1tCzuTm+tu5KnXJV/aH7mRv
-   0oH02zKN/iDWBoAkP2wOOFAN3YsC+nZYH5PbSpdRGDER8PClmF/7TKKjp
-   MNaGFkA409nQjrN9AdKqbhvVmk7zSYBGyR85ZoRSjrlxfI+KBUoqwXyrM
-   8EM3g0eOVPnWfHJF1SO3VG+Z4JzREqolLjgjpVkuVQL1gCjQpvfaTyWo1
-   Zx+w4FG6lzordPe0HqAN2A8h6U3yp4nanj25zIyp81iw8sLToMuxNGAf1
-   6Mcf/bd3fUqACoTBR3rEoZfUYfrX60aTQan9CHyrkH4ysYa0N9is7bL/A
+  bh=q0lEBoFOr9b0x5amAD6sBLj9mxt45Se06XmWgm72SHY=;
+  b=aCv8TiwjThHi9DnlHxz3vJ6b31n05Kofu3wuWgXE+6wb9hgy0Ph2xAPj
+   u/w/zHbvjh5AAhDM3ImFz7XunalIXo/RoUc9F6tfGPSNV/+Eb3o/jLzU+
+   CjwlRnyPQoKXa1Fs1cZ6QVzhDPEI4ZQsANedF0CpRnMDqYNXjlRTVnJ2Y
+   f7cmY4UtQlSBzNJBq/qN7C4Offqwpi24SZxaWOxP0Yhu4SErFyva6ODlH
+   /DKXRQzAqALUzB2co7zqh/SpYuk0QY74Tt41+hwgpKHMdM1U1Yb0o+hxC
+   zZgNIcn1pJkTQwO2s+6Ngdj9hlYeuUHKOp5EMFQcmxogs/EvWDQleartj
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531332"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532773"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="479531332"
+   d="scan'208";a="479532773"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729711"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730530"
 X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; 
-   d="scan'208";a="942729711"
+   d="scan'208";a="942730530"
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -106,9 +106,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
 	Zhenyu Wang <zhenyu.z.wang@intel.com>,
 	Yongwei Ma <yongwei.ma@intel.com>,
 	Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 07/41] qdev: Introduce parent option in -device
-Date: Thu, 30 Nov 2023 22:41:29 +0800
-Message-Id: <20231130144203.2307629-8-zhao1.liu@linux.intel.com>
+Subject: [RFC 39/41] hw/i386: Add the interface to search parent for QOM topology
+Date: Thu, 30 Nov 2023 22:42:01 +0800
+Message-Id: <20231130144203.2307629-40-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -117,185 +117,182 @@ Content-Transfer-Encoding: 8bit
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Currently, the devices added by "-device" are linked via bus, and are
-set the parent as peripheral-anon or peripheral containers of the
-machine.
+QOM topology needs to search parent cpu-core for hotplugged CPU to
+create topology child<> property in qdev_set_id().
 
-But this is not enough for building CPU topology hierarchies as:
-1. The relationship between different CPU hierarchies is child<>
-   property other than link<> property, and they shouldn't be linked
-   using the special bus.
-2. The canonical path of device is built from the child<> property, and
-   the well defined CPU topology hierarchies ask their canonical path to
-   reflect the correct topological relationship.
-
-With these, the child<> property support is needed for QDev interface to
-allow user to configure proper parent in "-device".
-
-Introduce the "parent" option in "-device" to create the child<>
-property. This option asks for the device id of the parent device.
+This process is before x86_cpu_pre_plug(), thus place 2 helpers
+x86_cpu_assign_apic_id() and x86_cpu_assign_topo_id() in
+x86_cpu_search_parent_pre_plug() to help get the correct topology sub
+indexes. Then x86_cpu_search_parent_pre_plug() searches the parent
+cpu-core with these sub indexes.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/xen/xen-legacy-backend.c |  2 +-
- include/monitor/qdev.h      |  3 ++-
- system/qdev-monitor.c       | 50 ++++++++++++++++++++++++++-----------
- 3 files changed, 38 insertions(+), 17 deletions(-)
+ hw/i386/x86.c         | 128 +++++++++++++++++++++++++++++++++++++++---
+ include/hw/i386/x86.h |   3 +
+ 2 files changed, 122 insertions(+), 9 deletions(-)
 
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index 124dd5f3d687..70ad11c6287e 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -184,7 +184,7 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
-     object_initialize(&xendev->qdev, ops->size, TYPE_XENBACKEND);
-     OBJECT(xendev)->free = g_free;
-     qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev),
--                &error_fatal);
-+                NULL, &error_fatal);
-     qdev_realize(DEVICE(xendev), xen_sysbus, &error_fatal);
-     object_unref(OBJECT(xendev));
+diff --git a/hw/i386/x86.c b/hw/i386/x86.c
+index 04edd6de6aeb..595d4365fdd1 100644
+--- a/hw/i386/x86.c
++++ b/hw/i386/x86.c
+@@ -460,16 +460,18 @@ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
+         return;
+     }
  
-diff --git a/include/monitor/qdev.h b/include/monitor/qdev.h
-index f5fd6e6c1ffc..3d9d06158e5f 100644
---- a/include/monitor/qdev.h
-+++ b/include/monitor/qdev.h
-@@ -16,6 +16,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-  * qdev_set_id: parent the device and set its id if provided.
-  * @dev: device to handle
-  * @id: id to be given to the device, or NULL.
-+ * @parent: parent to be set for the device, or NULL.
-  *
-  * Returns: the id of the device in case of success; otherwise NULL.
-  *
-@@ -34,6 +35,6 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-  * returned string is owned by the corresponding child property and must
-  * not be freed by the caller.
-  */
--const char *qdev_set_id(DeviceState *dev, char *id, Error **errp);
-+const char *qdev_set_id(DeviceState *dev, char *id, char *parent, Error **errp);
+-    /* if 'address' properties socket-id/core-id/thread-id are not set, set them
+-     * so that machine_query_hotpluggable_cpus would show correct values
++    /*
++     * possible_cpus_qom_granu means the QOM topology support.
++     *
++     * TODO: Drop the "!mc->smp_props.possible_cpus_qom_granu" case when
++     * i386 completes QOM topology support.
+      */
+-    /* TODO: move socket_id/core_id/thread_id checks into x86_cpu_realizefn()
+-     * once -smp refactoring is complete and there will be CPU private
+-     * CPUState::nr_cores and CPUState::nr_threads fields instead of globals */
+-    x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
+-    x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
+-    if (*errp) {
+-        return;
++    if (!mc->smp_props.possible_cpus_qom_granu) {
++        x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
++        x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
++        if (*errp) {
++            return;
++        }
+     }
  
- #endif
-diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
-index 0261937b8462..8f56113eef65 100644
---- a/system/qdev-monitor.c
-+++ b/system/qdev-monitor.c
-@@ -587,22 +587,33 @@ static BusState *qbus_find(const char *path, Error **errp)
+     if (hyperv_feat_enabled(cpu, HYPERV_FEAT_VPINDEX) &&
+@@ -484,6 +486,114 @@ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
+     numa_cpu_pre_plug(cpu_slot, dev, errp);
  }
  
- static Object *qdev_find_peripheral_parent(DeviceState *dev,
-+                                           char *parent_id,
-                                            Error **errp)
- {
-     Object *parent_obj, *obj = OBJECT(dev);
- 
--    parent_obj = uc_provide_default_parent(obj, errp);
--    if (*errp) {
--        return NULL;
--    }
-+    if (parent_id) {
-+        parent_obj = object_resolve_path_from(qdev_get_peripheral(),
-+                                              parent_id, NULL);
-+        if (parent_obj) {
-+            if (uc_check_user_parent(obj, parent_obj)) {
-+                return parent_obj;
-+            }
++static int x86_cpu_get_topo_id_by_level(X86CPU *cpu,
++                                        CPUTopoLevel level)
++{
++    switch (level) {
++    case CPU_TOPO_THREAD:
++        return cpu->thread_id;
++    case CPU_TOPO_CORE:
++        return cpu->core_id;
++    case CPU_TOPO_DIE:
++        return cpu->die_id;
++    case CPU_TOPO_SOCKET:
++        return cpu->socket_id;
++    default:
++        g_assert_not_reached();
++    }
++
++    return -1;
++}
++
++typedef struct SearchCoreCb {
++    X86CPU *cpu;
++    CPUTopoState *parent;
++    int id;
++} SearchCoreCb;
++
++static int x86_cpu_search_parent_core(CPUTopoState *topo,
++                                      void *opaque)
++{
++    SearchCoreCb *cb = opaque;
++    CPUTopoLevel level = CPU_TOPO_LEVEL(topo);
++
++    cb->parent = topo;
++    cb->id = x86_cpu_get_topo_id_by_level(cb->cpu, level);
++
++    if (cb->id == topo->index) {
++        if (level == CPU_TOPO_CORE) {
++            return TOPO_FOREACH_END;
 +        }
-+    } else {
-+        parent_obj = uc_provide_default_parent(obj, errp);
++        return TOPO_FOREACH_CONTINUE;
++    }
++    return TOPO_FOREACH_SIBLING;
++}
++
++Object *x86_cpu_search_parent_pre_plug(CPUTopoState *topo,
++                                       CPUTopoState *root,
++                                       Error **errp)
++{
++    int ret;
++    SearchCoreCb cb;
++    X86CPUTopoIDs topo_ids;
++    X86CPUTopoInfo topo_info;
++    X86CPU *cpu = X86_CPU(topo);
++    CPUSlot *slot = CPU_SLOT(root);
++    MachineState *ms = slot->ms;
++    DECLARE_BITMAP(foreach_bitmap, USER_AVAIL_LEVEL_NUM);
++
++    topo_info.dies_per_pkg = ms->smp.dies;
++    topo_info.cores_per_die = ms->smp.cores;
++    topo_info.threads_per_core = ms->smp.threads;
++
++    if (cpu->apic_id == UNASSIGNED_APIC_ID) {
++        x86_cpu_assign_apic_id(ms, cpu, &topo_ids, &topo_info, errp);
 +        if (*errp) {
 +            return NULL;
 +        }
- 
--    if (parent_obj) {
--        /*
--         * Non-anonymous parents (under "/peripheral") are allowed to
--         * be accessed to create child<> properties.
--         */
--        if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
--            return parent_obj;
-+        if (parent_obj) {
-+            /*
-+             * Non-anonymous parents (under "/peripheral") are allowed to
-+             * be accessed to create child<> properties.
-+             */
-+            if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
-+                return parent_obj;
-+            }
-         }
-     }
- 
-@@ -628,7 +639,8 @@ static bool qdev_pre_check_device_id(char *id, Error **errp)
- }
- 
- /* Takes ownership of @id, will be freed when deleting the device */
--const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
-+const char *qdev_set_id(DeviceState *dev, char *id,
-+                        char *parent, Error **errp)
++    } else {
++        /*
++         * if 'address' properties socket-id/core-id/thread-id are not set,
++         * set them so that machine_query_hotpluggable_cpus would show
++         * correct values.
++         *
++         * TODO: move socket_id/core_id/thread_id checks into
++         * x86_cpu_realizefn() once -smp refactoring is complete and there
++         * will be CPU private CPUState::nr_cores and CPUState::nr_threads
++         * fields instead of globals.
++         */
++        x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
++    }
++
++    x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
++    if (*errp) {
++        return NULL;
++    }
++
++    cb.cpu = cpu;
++    cb.parent = NULL;
++    cb.id = -1;
++    bitmap_fill(foreach_bitmap, USER_AVAIL_LEVEL_NUM);
++    clear_bit(CPU_TOPO_UNKNOWN, foreach_bitmap);
++    clear_bit(CPU_TOPO_THREAD, foreach_bitmap);
++
++    ret = cpu_topo_child_foreach_recursive(root, foreach_bitmap,
++                                           x86_cpu_search_parent_core, &cb);
++    if (ret != TOPO_FOREACH_END) {
++        g_autofree char *search_info = NULL;
++
++        search_info = !cb.parent ? g_strdup("") :
++            g_strdup_printf(" for %s level with id: %d",
++            cpu_topo_level_to_string(CPU_TOPO_LEVEL(cb.parent)), cb.id);
++        error_setg(errp, "Can't find parent%s", search_info);
++        return NULL;
++    }
++
++    /* Keep the index of CPU topology device the same as the thread_id. */
++    topo->index = cpu->thread_id;
++    return OBJECT(cb.parent);
++}
++
+ CpuInstanceProperties
+ x86_cpu_index_to_props(MachineState *ms, unsigned cpu_index)
  {
-     Object *parent_obj = NULL;
-     ObjectProperty *prop;
-@@ -639,7 +651,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
-     uc = (UserChild *)object_dynamic_cast(OBJECT(dev), TYPE_USER_CHILD);
- 
-     if (uc) {
--        parent_obj = qdev_find_peripheral_parent(dev, errp);
-+        parent_obj = qdev_find_peripheral_parent(dev, parent, errp);
-         if (*errp) {
-             goto err;
-         }
-@@ -655,6 +667,11 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
-                 goto err;
-             }
-         }
-+        g_free(parent);
-+    } else if (parent) {
-+        error_setg(errp, "Only the device implemented user-child "
-+                   "interface supports `parent` option.");
-+        goto err;
-     }
- 
-     /*
-@@ -684,6 +701,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
- 
-     return prop->name;
- err:
-+    g_free(parent);
-     g_free(id);
-     return NULL;
- }
-@@ -694,7 +712,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-     ERRP_GUARD();
-     DeviceClass *dc;
-     const char *driver, *path;
--    char *id;
-+    char *id, *parent;
-     DeviceState *dev = NULL;
-     BusState *bus = NULL;
- 
-@@ -772,12 +790,14 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-     }
- 
-     id = g_strdup(qdict_get_try_str(opts, "id"));
-+    parent = g_strdup(qdict_get_try_str(opts, "parent"));
- 
-     /* set properties */
-     dev->opts = qdict_clone_shallow(opts);
-     qdict_del(dev->opts, "driver");
-     qdict_del(dev->opts, "bus");
-     qdict_del(dev->opts, "id");
-+    qdict_del(dev->opts, "parent");
- 
-     object_set_properties_from_keyval(&dev->parent_obj, dev->opts, from_json,
-                                       errp);
-@@ -789,7 +809,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-      * set dev's parent and register its id.
-      * If it fails it means the id is already taken.
-      */
--    if (!qdev_set_id(dev, id, errp)) {
-+    if (!qdev_set_id(dev, id, parent, errp)) {
-         goto err_del_dev;
-     }
- 
+diff --git a/include/hw/i386/x86.h b/include/hw/i386/x86.h
+index 19e9f93fe286..e8c9ddc36359 100644
+--- a/include/hw/i386/x86.h
++++ b/include/hw/i386/x86.h
+@@ -104,6 +104,9 @@ int64_t x86_get_default_cpu_node_id(const MachineState *ms, int idx);
+ const CPUArchIdList *x86_possible_cpu_arch_ids(MachineState *ms);
+ CPUArchId *x86_find_cpu_slot(MachineState *ms, uint32_t id, int *idx);
+ void x86_rtc_set_cpus_count(ISADevice *rtc, uint16_t cpus_count);
++Object *x86_cpu_search_parent_pre_plug(CPUTopoState *topo,
++                                       CPUTopoState *root,
++                                       Error **errp);
+ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
+                       DeviceState *dev, Error **errp);
+ void x86_cpu_plug(HotplugHandler *hotplug_dev,
 -- 
 2.34.1
 
