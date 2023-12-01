@@ -4,44 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C1CBC4167B
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Dec 2023 20:01:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.645683.1007936 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB9B2C10F04
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Dec 2023 20:04:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.645680.1007965 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r99gf-00018j-Is; Fri, 01 Dec 2023 20:00:33 +0000
+	id 1r99kE-0003BQ-OQ; Fri, 01 Dec 2023 20:04:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 645683.1007936; Fri, 01 Dec 2023 20:00:33 +0000
+Received: by outflank-mailman (output) from mailman id 645680.1007965; Fri, 01 Dec 2023 20:04:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r99gf-00018c-Ft; Fri, 01 Dec 2023 20:00:33 +0000
-Received: by outflank-mailman (input) for mailman id 645683;
- Fri, 01 Dec 2023 20:00:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dz9Y=HM=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1r99gd-0000tE-Lk
- for xen-devel@lists.xenproject.org; Fri, 01 Dec 2023 20:00:31 +0000
-Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 45c4292a-9084-11ee-98e5-6d05b1d4d9a1;
- Fri, 01 Dec 2023 21:00:28 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 51AB982855D4;
- Fri,  1 Dec 2023 14:00:27 -0600 (CST)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id i9hgK0MiGiwf; Fri,  1 Dec 2023 14:00:25 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 021E982853A9;
- Fri,  1 Dec 2023 14:00:25 -0600 (CST)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id QnmuEvKhB_0U; Fri,  1 Dec 2023 14:00:24 -0600 (CST)
-Received: from raptor-ewks-026.2lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 481C28285518;
- Fri,  1 Dec 2023 14:00:24 -0600 (CST)
+	id 1r99kE-0003BJ-Lv; Fri, 01 Dec 2023 20:04:14 +0000
+Received: by outflank-mailman (input) for mailman id 645680;
+ Fri, 01 Dec 2023 19:59:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=cfBb=HM=proton.me=renewin@srs-se1.protection.inumbo.net>)
+ id 1r99fe-0008Ng-Ai
+ for xen-devel@lists.xenproject.org; Fri, 01 Dec 2023 19:59:31 +0000
+Received: from mail-40134.protonmail.ch (mail-40134.protonmail.ch
+ [185.70.40.134]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 210cc5d4-9084-11ee-9b0f-b553b5be7939;
+ Fri, 01 Dec 2023 20:59:26 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,840 +38,402 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 45c4292a-9084-11ee-98e5-6d05b1d4d9a1
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 021E982853A9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1701460825; bh=rrS98yFoCir+fVp7z2VJPB9bRNWgZ1ymV3ZhVtsKbi8=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=ZzTyiQNZY3UFihuh5Jxyk+elo/hdIyHYOrwBbcA1YgSCtJpOlld9jeR/HfuHzz79E
-	 y6s4E4SFIBbIusgJeLUhofUgUL0ofyGXdArEbpnDVx23nXvTRJrljtaRg4WClYPWNV
-	 QDxKf/jfVy0iQ0Ic3cac7x/4NdBzhJfbuLEK3cas=
-X-Virus-Scanned: amavisd-new at rptsys.com
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
-To: xen-devel@lists.xenproject.org
-Cc: Timothy Pearson <tpearson@raptorengineering.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH 1/3] xen/ppc: Enable Boot Allocator
-Date: Fri,  1 Dec 2023 13:59:54 -0600
-Message-Id: <5ed3351f7824a5d0a1ff29c17cb55b2608f28109.1701384928.git.sanastasio@raptorengineering.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <cover.1701384928.git.sanastasio@raptorengineering.com>
-References: <cover.1701384928.git.sanastasio@raptorengineering.com>
+X-Inumbo-ID: 210cc5d4-9084-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1701460765; x=1701719965;
+	bh=2AmH3Hb8FqeisSu7ScxFGSik/ltWjd5VwAxGhyGAlQw=;
+	h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=cNWhzsb1TpgRIjmyP45p1e/bjaoAsndFixH3K1WDqgH0TBXu6/dVyPxkn8N1DXN7k
+	 25vEzzhv5bz3nmPaLgdivjKrELN6/x30EJvSORQ8liWFCc0BMiYyg1XD5GVJnYv2qn
+	 tvNXU0Sn5wx1eS8uPFk3KmNxbtaI8L6IM2y/AWhazT/lhzH6f5I48dlofiXjEPQcyo
+	 iTgjGUM3K1u72PKb8L2NLyDmjw91hwuBBwJmIRlAiFk4woQLOBidfCzqaX/RgOWz66
+	 q/6Utk8fiL38ZqD3kIOc9gvMt4TCuv7pq6gyPBrA0OHokW7aXv/fjs+1Kc32jzTi0b
+	 wIRA6LFknAl+g==
+Date: Fri, 01 Dec 2023 19:59:12 +0000
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+From: =?utf-8?Q?Ren=C3=A9_Winther_H=C3=B8jgaard?= <renewin@proton.me>
+Subject: Trying add smt=off disabled cores to cpupool crash xen
+Message-ID: <ImC5JB7OjNgCNtCixZSzBIyXAyR0qI-DKWcm-w5YtHP_5aH71GA_zJK2C4AmA4_GtaYAKK6wGEM8YZ2THj2qLe9kFhjO5bEl8qoqRY8o9p4=@proton.me>
+Feedback-ID: 45853758:user:proton
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha512; boundary="------08aeeaf5fdfa0d2107f357d7ac96c3f8203141a9a0d317189db93fb70591b31d"; charset=utf-8
 
-Adapt arm's earlyfdt parsing code to ppc64 and enable Xen's early boot
-allocator. Routines for parsing arm-specific devicetree nodes (e.g.
-multiboot) were excluded, reducing the overall footprint of code that
-was copied.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------08aeeaf5fdfa0d2107f357d7ac96c3f8203141a9a0d317189db93fb70591b31d
+Content-Type: multipart/mixed;boundary=---------------------f94de33a37ba315914385a1efdebb5da
 
-Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
----
- xen/arch/ppc/Makefile            |   1 +
- xen/arch/ppc/bootfdt.c           | 507 +++++++++++++++++++++++++++++++
- xen/arch/ppc/include/asm/setup.h | 113 +++++++
- xen/arch/ppc/setup.c             | 109 ++++++-
- 4 files changed, 729 insertions(+), 1 deletion(-)
- create mode 100644 xen/arch/ppc/bootfdt.c
+-----------------------f94de33a37ba315914385a1efdebb5da
+Content-Type: multipart/alternative;boundary=---------------------6df91a8ddd19c3542ed41ea32b0a3a21
 
-diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
-index 71feb5e2c4..8a2a809c70 100644
---- a/xen/arch/ppc/Makefile
-+++ b/xen/arch/ppc/Makefile
-@@ -1,5 +1,6 @@
- obj-$(CONFIG_PPC64) += ppc64/
- 
-+obj-y += bootfdt.o
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.init.o
- obj-y += mm-radix.o
- obj-y += opal.o
-diff --git a/xen/arch/ppc/bootfdt.c b/xen/arch/ppc/bootfdt.c
-new file mode 100644
-index 0000000000..791e1ca61f
---- /dev/null
-+++ b/xen/arch/ppc/bootfdt.c
-@@ -0,0 +1,507 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Early Device Tree and boot info bookkeeping.
-+ * Derived from arch/arm/bootfdt.c and setup.c.
-+ *
-+ * Copyright (C) 2012-2014 Citrix Systems, Inc.
-+ * Copyright (C) Raptor Engineering LLC
-+ */
-+
-+#include <xen/types.h>
-+#include <xen/lib.h>
-+#include <xen/kernel.h>
-+#include <xen/init.h>
-+#include <xen/efi.h>
-+#include <xen/device_tree.h>
-+#include <xen/lib.h>
-+#include <xen/libfdt/libfdt-xen.h>
-+#include <xen/sort.h>
-+#include <xsm/xsm.h>
-+#include <asm/setup.h>
-+
-+struct bootinfo __initdata bootinfo;
-+
-+struct bootmodule __init *add_boot_module(bootmodule_kind kind,
-+                                          paddr_t start, paddr_t size,
-+                                          bool domU)
-+{
-+    struct bootmodules *mods = &bootinfo.modules;
-+    struct bootmodule *mod;
-+    unsigned int i;
-+
-+    if ( mods->nr_mods == MAX_MODULES )
-+    {
-+        printk("Ignoring %s boot module at %"PRIpaddr"-%"PRIpaddr" (too many)\n",
-+               boot_module_kind_as_string(kind), start, start + size);
-+        return NULL;
-+    }
-+
-+    if ( check_reserved_regions_overlap(start, size) )
-+        return NULL;
-+
-+    for ( i = 0 ; i < mods->nr_mods ; i++ )
-+    {
-+        mod = &mods->module[i];
-+        if ( mod->kind == kind && mod->start == start )
-+        {
-+            if ( !domU )
-+                mod->domU = false;
-+            return mod;
-+        }
-+    }
-+
-+    mod = &mods->module[mods->nr_mods++];
-+    mod->kind = kind;
-+    mod->start = start;
-+    mod->size = size;
-+    mod->domU = domU;
-+
-+    return mod;
-+}
-+
-+const char * __init boot_module_kind_as_string(bootmodule_kind kind)
-+{
-+    switch ( kind )
-+    {
-+    case BOOTMOD_XEN:     return "Xen";
-+    case BOOTMOD_FDT:     return "Device Tree";
-+    case BOOTMOD_KERNEL:  return "Kernel";
-+    default: BUG();
-+    }
-+}
-+
-+/*
-+ * TODO: '*_end' could be 0 if the module/region is at the end of the physical
-+ * address space. This is for now not handled as it requires more rework.
-+ */
-+static bool __init bootmodules_overlap_check(struct bootmodules *bootmodules,
-+                                             paddr_t region_start,
-+                                             paddr_t region_size)
-+{
-+    paddr_t mod_start = INVALID_PADDR, mod_end = 0;
-+    paddr_t region_end = region_start + region_size;
-+    unsigned int i, mod_num = bootmodules->nr_mods;
-+
-+    for ( i = 0; i < mod_num; i++ )
-+    {
-+        mod_start = bootmodules->module[i].start;
-+        mod_end = mod_start + bootmodules->module[i].size;
-+
-+        if ( region_end <= mod_start || region_start >= mod_end )
-+            continue;
-+        else
-+        {
-+            printk("Region: [%#"PRIpaddr", %#"PRIpaddr") overlapping with"
-+                   " mod[%u]: [%#"PRIpaddr", %#"PRIpaddr")\n", region_start,
-+                   region_end, i, mod_start, mod_end);
-+            return true;
-+        }
-+    }
-+
-+    return false;
-+}
-+
-+/*
-+ * TODO: '*_end' could be 0 if the bank/region is at the end of the physical
-+ * address space. This is for now not handled as it requires more rework.
-+ */
-+static bool __init meminfo_overlap_check(struct meminfo *meminfo,
-+                                         paddr_t region_start,
-+                                         paddr_t region_size)
-+{
-+    paddr_t bank_start = INVALID_PADDR, bank_end = 0;
-+    paddr_t region_end = region_start + region_size;
-+    unsigned int i, bank_num = meminfo->nr_banks;
-+
-+    for ( i = 0; i < bank_num; i++ )
-+    {
-+        bank_start = meminfo->bank[i].start;
-+        bank_end = bank_start + meminfo->bank[i].size;
-+
-+        if ( region_end <= bank_start || region_start >= bank_end )
-+            continue;
-+        else
-+        {
-+            printk("Region: [%#"PRIpaddr", %#"PRIpaddr") overlapping with"
-+                   " bank[%u]: [%#"PRIpaddr", %#"PRIpaddr")\n", region_start,
-+                   region_end, i, bank_start, bank_end);
-+            return true;
-+        }
-+    }
-+
-+    return false;
-+}
-+
-+/*
-+ * Given an input physical address range, check if this range is overlapping
-+ * with the existing reserved memory regions defined in bootinfo.
-+ * Return true if the input physical address range is overlapping with any
-+ * existing reserved memory regions, otherwise false.
-+ */
-+bool __init check_reserved_regions_overlap(paddr_t region_start,
-+                                           paddr_t region_size)
-+{
-+    /* Check if input region is overlapping with bootinfo.reserved_mem banks */
-+    if ( meminfo_overlap_check(&bootinfo.reserved_mem,
-+                               region_start, region_size) )
-+        return true;
-+
-+    /* Check if input region is overlapping with bootmodules */
-+    if ( bootmodules_overlap_check(&bootinfo.modules,
-+                                   region_start, region_size) )
-+        return true;
-+
-+    return false;
-+}
-+
-+static bool __init device_tree_node_matches(const void *fdt, int node,
-+                                            const char *match)
-+{
-+    const char *name;
-+    size_t match_len;
-+
-+    name = fdt_get_name(fdt, node, NULL);
-+    match_len = strlen(match);
-+
-+    /*
-+     * Match both "match" and "match@..." patterns but not
-+     * "match-foo".
-+     */
-+    return strncmp(name, match, match_len) == 0
-+        && (name[match_len] == '@' || name[match_len] == '\0');
-+}
-+
-+void __init device_tree_get_reg(const __be32 **cell, uint32_t address_cells,
-+                                uint32_t size_cells, paddr_t *start,
-+                                paddr_t *size)
-+{
-+    uint64_t dt_start, dt_size;
-+
-+    /*
-+     * dt_next_cell will return uint64_t whereas paddr_t may not be 64-bit.
-+     * Thus, there is an implicit cast from uint64_t to paddr_t.
-+     */
-+    dt_start = dt_next_cell(address_cells, cell);
-+    dt_size = dt_next_cell(size_cells, cell);
-+
-+    if ( dt_start != (paddr_t)dt_start )
-+    {
-+        printk("Physical address greater than max width supported\n");
-+        WARN();
-+    }
-+
-+    if ( dt_size != (paddr_t)dt_size )
-+    {
-+        printk("Physical size greater than max width supported\n");
-+        WARN();
-+    }
-+
-+    /*
-+     * Xen will truncate the address/size if it is greater than the maximum
-+     * supported width and it will give an appropriate warning.
-+     */
-+    *start = dt_start;
-+    *size = dt_size;
-+}
-+
-+static int __init device_tree_get_meminfo(const void *fdt, int node,
-+                                          const char *prop_name,
-+                                          uint32_t address_cells, uint32_t size_cells,
-+                                          void *data, enum membank_type type)
-+{
-+    const struct fdt_property *prop;
-+    unsigned int i, banks;
-+    const __be32 *cell;
-+    uint32_t reg_cells = address_cells + size_cells;
-+    paddr_t start, size;
-+    struct meminfo *mem = data;
-+
-+    if ( address_cells < 1 || size_cells < 1 )
-+    {
-+        printk("fdt: property `%s': invalid #address-cells or #size-cells",
-+               prop_name);
-+        return -EINVAL;
-+    }
-+
-+    prop = fdt_get_property(fdt, node, prop_name, NULL);
-+    if ( !prop )
-+        return -ENOENT;
-+
-+    cell = (const __be32 *)prop->data;
-+    banks = fdt32_to_cpu(prop->len) / (reg_cells * sizeof(uint32_t));
-+
-+    for ( i = 0; i < banks && mem->nr_banks < NR_MEM_BANKS; i++ )
-+    {
-+        device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
-+        if ( mem == &bootinfo.reserved_mem &&
-+             check_reserved_regions_overlap(start, size) )
-+            return -EINVAL;
-+        /* Some DT may describe empty bank, ignore them */
-+        if ( !size )
-+            continue;
-+        mem->bank[mem->nr_banks].start = start;
-+        mem->bank[mem->nr_banks].size = size;
-+        mem->bank[mem->nr_banks].type = type;
-+        mem->nr_banks++;
-+    }
-+
-+    if ( i < banks )
-+    {
-+        printk("Warning: Max number of supported memory regions reached.\n");
-+        return -ENOSPC;
-+    }
-+
-+    return 0;
-+}
-+
-+uint32_t __init device_tree_get_uint32_t(const void *fdt, int node,
-+                               const char *prop_name, uint32_t dflt)
-+{
-+    const struct fdt_property *prop;
-+
-+    prop = fdt_get_property(fdt, node, prop_name, NULL);
-+    if ( !prop || prop->len < sizeof(uint32_t) )
-+        return dflt;
-+
-+    return fdt32_to_cpu(*(uint32_t*)prop->data);
-+}
-+
-+/**
-+ * device_tree_for_each_node - iterate over all device tree sub-nodes
-+ * @fdt: flat device tree.
-+ * @node: parent node to start the search from
-+ * @func: function to call for each sub-node.
-+ * @data: data to pass to @func.
-+ *
-+ * Any nodes nested at DEVICE_TREE_MAX_DEPTH or deeper are ignored.
-+ *
-+ * Returns 0 if all nodes were iterated over successfully.  If @func
-+ * returns a value different from 0, that value is returned immediately.
-+ */
-+int __init device_tree_for_each_node(const void *fdt, int node,
-+                                     device_tree_node_func func,
-+                                     void *data)
-+{
-+    /*
-+     * We only care about relative depth increments, assume depth of
-+     * node is 0 for simplicity.
-+     */
-+    int depth = 0;
-+    const int first_node = node;
-+    uint32_t address_cells[DEVICE_TREE_MAX_DEPTH];
-+    uint32_t size_cells[DEVICE_TREE_MAX_DEPTH];
-+    int ret;
-+
-+    do {
-+        const char *name = fdt_get_name(fdt, node, NULL);
-+        uint32_t as, ss;
-+
-+        if ( depth >= DEVICE_TREE_MAX_DEPTH )
-+        {
-+            printk("Warning: device tree node `%s' is nested too deep\n",
-+                   name);
-+            continue;
-+        }
-+
-+        as = depth > 0 ? address_cells[depth-1] : DT_ROOT_NODE_ADDR_CELLS_DEFAULT;
-+        ss = depth > 0 ? size_cells[depth-1] : DT_ROOT_NODE_SIZE_CELLS_DEFAULT;
-+
-+        address_cells[depth] = device_tree_get_uint32_t(fdt, node,
-+                                                   "#address-cells", as);
-+        size_cells[depth] = device_tree_get_uint32_t(fdt, node,
-+                                                "#size-cells", ss);
-+
-+        /* skip the first node */
-+        if ( node != first_node )
-+        {
-+            ret = func(fdt, node, name, depth, as, ss, data);
-+            if ( ret != 0 )
-+                return ret;
-+        }
-+
-+        node = fdt_next_node(fdt, node, &depth);
-+    } while ( node >= 0 && depth > 0 );
-+
-+    return 0;
-+}
-+
-+static int __init process_memory_node(const void *fdt, int node,
-+                                      const char *name, int depth,
-+                                      uint32_t address_cells, uint32_t size_cells,
-+                                      void *data)
-+{
-+    return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells,
-+                                   data, MEMBANK_DEFAULT);
-+}
-+
-+static int __init process_reserved_memory_node(const void *fdt, int node,
-+                                               const char *name, int depth,
-+                                               uint32_t address_cells,
-+                                               uint32_t size_cells,
-+                                               void *data)
-+{
-+    int rc;
-+
-+    rc = process_memory_node(fdt, node, name, depth, address_cells,
-+                                 size_cells, data);
-+
-+
-+    if ( rc == -ENOSPC )
-+        panic("Max number of supported reserved-memory regions reached.\n");
-+    else if ( rc != -ENOENT )
-+        return rc;
-+    return 0;
-+}
-+
-+static int __init process_reserved_memory(const void *fdt, int node,
-+                                          const char *name, int depth,
-+                                          uint32_t address_cells, uint32_t size_cells)
-+{
-+    return device_tree_for_each_node(fdt, node,
-+                                     process_reserved_memory_node,
-+                                     &bootinfo.reserved_mem);
-+}
-+
-+static int __init process_chosen_node(const void *fdt, int node,
-+                                      const char *name,
-+                                      uint32_t address_cells, uint32_t size_cells)
-+{
-+    const struct fdt_property *prop;
-+    paddr_t start, end;
-+    int len;
-+
-+    printk("Checking for initrd in /chosen\n");
-+
-+    prop = fdt_get_property(fdt, node, "linux,initrd-start", &len);
-+    if ( !prop )
-+        /* No initrd present. */
-+        return 0;
-+    if ( len != sizeof(uint32_t) && len != sizeof(uint64_t) )
-+    {
-+        printk("linux,initrd-start property has invalid length %d\n", len);
-+        return -EINVAL;
-+    }
-+    start = dt_read_paddr((void *)&prop->data, dt_size_to_cells(len));
-+
-+    prop = fdt_get_property(fdt, node, "linux,initrd-end", &len);
-+    if ( !prop )
-+    {
-+        printk("linux,initrd-end not present but -start was\n");
-+        return -EINVAL;
-+    }
-+    if ( len != sizeof(uint32_t) && len != sizeof(uint64_t) )
-+    {
-+        printk("linux,initrd-end property has invalid length %d\n", len);
-+        return -EINVAL;
-+    }
-+    end = dt_read_paddr((void *)&prop->data, dt_size_to_cells(len));
-+
-+    if ( start >= end )
-+    {
-+        printk("linux,initrd limits invalid: %"PRIpaddr" >= %"PRIpaddr"\n",
-+                  start, end);
-+        return -EINVAL;
-+    }
-+
-+    printk("Initrd %"PRIpaddr"-%"PRIpaddr"\n", start, end);
-+
-+    add_boot_module(BOOTMOD_RAMDISK, start, end-start, false);
-+
-+    return 0;
-+}
-+
-+static int __init early_scan_node(const void *fdt,
-+                                  int node, const char *name, int depth,
-+                                  uint32_t address_cells, uint32_t size_cells,
-+                                  void *data)
-+{
-+    int rc = 0;
-+
-+    if( device_tree_node_matches(fdt, node, "memory") )
-+        rc = process_memory_node(fdt, node, name, depth,
-+                                 address_cells, size_cells, &bootinfo.mem);
-+    else if ( depth == 1 && !dt_node_cmp(name, "reserved-memory") )
-+        rc = process_reserved_memory(fdt, node, name, depth,
-+                                     address_cells, size_cells);
-+    else if ( depth == 1 && device_tree_node_matches(fdt, node, "chosen") )
-+        rc = process_chosen_node(fdt, node, name, address_cells, size_cells);
-+
-+    if ( rc < 0 )
-+        printk("fdt: node `%s': parsing failed\n", name);
-+    return rc;
-+}
-+
-+static void __init early_print_info(void)
-+{
-+    struct meminfo *mi = &bootinfo.mem;
-+    struct meminfo *mem_resv = &bootinfo.reserved_mem;
-+    struct bootmodules *mods = &bootinfo.modules;
-+    struct bootcmdlines *cmds = &bootinfo.cmdlines;
-+    unsigned int i, j;
-+
-+    for ( i = 0; i < mi->nr_banks; i++ )
-+        printk("RAM: %"PRIpaddr" - %"PRIpaddr"\n",
-+                mi->bank[i].start,
-+                mi->bank[i].start + mi->bank[i].size - 1);
-+    printk("\n");
-+    for ( i = 0 ; i < mods->nr_mods; i++ )
-+        printk("MODULE[%d]: %"PRIpaddr" - %"PRIpaddr" %-12s\n",
-+                i,
-+                mods->module[i].start,
-+                mods->module[i].start + mods->module[i].size,
-+                boot_module_kind_as_string(mods->module[i].kind));
-+
-+    for ( j = 0; j < mem_resv->nr_banks; j++, i++ )
-+    {
-+        printk(" RESVD_[%u]: %"PRIpaddr" - %"PRIpaddr"\n", i,
-+               mem_resv->bank[j].start,
-+               mem_resv->bank[j].start + mem_resv->bank[j].size - 1);
-+    }
-+    printk("\n");
-+    for ( i = 0 ; i < cmds->nr_mods; i++ )
-+        printk("CMDLINE[%"PRIpaddr"]:%s %s\n", cmds->cmdline[i].start,
-+               cmds->cmdline[i].dt_name,
-+               &cmds->cmdline[i].cmdline[0]);
-+    printk("\n");
-+}
-+
-+/**
-+ * boot_fdt_init - initialize bootinfo from a DTB
-+ * @fdt: flattened device tree binary
-+ * @paddr: physical address of device tree binary
-+ *
-+ * Returns the size of the DTB.
-+ */
-+size_t __init boot_fdt_init(const void *fdt, paddr_t paddr)
-+{
-+    int ret;
-+    paddr_t xen_start, xen_end;
-+
-+    ret = fdt_check_header(fdt);
-+    if ( ret < 0 )
-+        panic("No valid device tree\n");
-+
-+    device_tree_for_each_node((void *)fdt, 0, early_scan_node, NULL);
-+
-+    /*
-+     * The device tree passed to us may have been allocated by skiboot, in which
-+     * case it will exist within a reserved region and this call will fail. This
-+     * is fine, however, since either way the allocator will know not to step on
-+     * the device tree.
-+     */
-+    add_boot_module(BOOTMOD_FDT, paddr, fdt_totalsize(fdt), false);
-+
-+    /*
-+     * Xen relocates itself at the ppc64 entrypoint, so we need to manually mark
-+     * the kernel module.
-+     */
-+    xen_start = __pa(_start);
-+    xen_end = PAGE_ALIGN(__pa(_end));
-+    if ( !add_boot_module(BOOTMOD_KERNEL, xen_start, xen_end, false) )
-+        panic("Xen overlaps reserved memory! %016lx - %016lx\n", xen_start,
-+              xen_end);
-+
-+    early_print_info();
-+
-+    return fdt_totalsize(fdt);
-+}
-diff --git a/xen/arch/ppc/include/asm/setup.h b/xen/arch/ppc/include/asm/setup.h
-index e4f64879b6..f6e1940fa9 100644
---- a/xen/arch/ppc/include/asm/setup.h
-+++ b/xen/arch/ppc/include/asm/setup.h
-@@ -3,4 +3,117 @@
- 
- #define max_init_domid (0)
- 
-+#include <public/version.h>
-+#include <asm/p2m.h>
-+#include <xen/device_tree.h>
-+
-+#define MIN_FDT_ALIGN 8
-+#define MAX_FDT_SIZE SZ_2M
-+
-+#define NR_MEM_BANKS 256
-+
-+#define MAX_MODULES 32 /* Current maximum useful modules */
-+
-+typedef enum {
-+    BOOTMOD_XEN,
-+    BOOTMOD_FDT,
-+    BOOTMOD_KERNEL,
-+    BOOTMOD_RAMDISK,
-+}  bootmodule_kind;
-+
-+enum membank_type {
-+    /*
-+     * The MEMBANK_DEFAULT type refers to either reserved memory for the
-+     * device/firmware (when the bank is in 'reserved_mem') or any RAM (when
-+     * the bank is in 'mem').
-+     */
-+    MEMBANK_DEFAULT,
-+    /*
-+     * The MEMBANK_STATIC_DOMAIN type is used to indicate whether the memory
-+     * bank is bound to a static Xen domain. It is only valid when the bank
-+     * is in reserved_mem.
-+     */
-+    MEMBANK_STATIC_DOMAIN,
-+    /*
-+     * The MEMBANK_STATIC_HEAP type is used to indicate whether the memory
-+     * bank is reserved as static heap. It is only valid when the bank is
-+     * in reserved_mem.
-+     */
-+    MEMBANK_STATIC_HEAP,
-+};
-+
-+/* Indicates the maximum number of characters(\0 included) for shm_id */
-+#define MAX_SHM_ID_LENGTH 16
-+
-+struct membank {
-+    paddr_t start;
-+    paddr_t size;
-+    enum membank_type type;
-+};
-+
-+struct meminfo {
-+    unsigned int nr_banks;
-+    struct membank bank[NR_MEM_BANKS];
-+};
-+
-+/*
-+ * The domU flag is set for kernels and ramdisks of "xen,domain" nodes.
-+ * The purpose of the domU flag is to avoid getting confused in
-+ * kernel_probe, where we try to guess which is the dom0 kernel and
-+ * initrd to be compatible with all versions of the multiboot spec.
-+ */
-+#define BOOTMOD_MAX_CMDLINE 1024
-+struct bootmodule {
-+    bootmodule_kind kind;
-+    bool domU;
-+    paddr_t start;
-+    paddr_t size;
-+};
-+
-+/* DT_MAX_NAME is the node name max length according the DT spec */
-+#define DT_MAX_NAME 41
-+struct bootcmdline {
-+    bootmodule_kind kind;
-+    bool domU;
-+    paddr_t start;
-+    char dt_name[DT_MAX_NAME];
-+    char cmdline[BOOTMOD_MAX_CMDLINE];
-+};
-+
-+struct bootmodules {
-+    int nr_mods;
-+    struct bootmodule module[MAX_MODULES];
-+};
-+
-+struct bootcmdlines {
-+    unsigned int nr_mods;
-+    struct bootcmdline cmdline[MAX_MODULES];
-+};
-+
-+struct bootinfo {
-+    struct meminfo mem;
-+    struct meminfo reserved_mem;
-+    struct bootmodules modules;
-+    struct bootcmdlines cmdlines;
-+    bool static_heap;
-+};
-+
-+extern struct bootinfo bootinfo;
-+
-+/*
-+ * setup.c
-+ */
-+
-+bool check_reserved_regions_overlap(paddr_t region_start, paddr_t region_size);
-+struct bootmodule *add_boot_module(bootmodule_kind kind,
-+                                   paddr_t start, paddr_t size, bool domU);
-+void add_boot_cmdline(const char *name, const char *cmdline,
-+                      bootmodule_kind kind, paddr_t start, bool domU);
-+const char *boot_module_kind_as_string(bootmodule_kind kind);
-+
-+/*
-+ * bootfdt.c
-+ */
-+size_t boot_fdt_init(const void *fdt, paddr_t paddr);
-+
- #endif /* __ASM_PPC_SETUP_H__ */
-diff --git a/xen/arch/ppc/setup.c b/xen/arch/ppc/setup.c
-index 101bdd8bb6..90de99051e 100644
---- a/xen/arch/ppc/setup.c
-+++ b/xen/arch/ppc/setup.c
-@@ -1,16 +1,116 @@
- /* SPDX-License-Identifier: GPL-2.0-or-later */
- #include <xen/init.h>
- #include <xen/lib.h>
-+#include <xen/libfdt/libfdt.h>
- #include <xen/mm.h>
- #include <public/version.h>
- #include <asm/boot.h>
- #include <asm/early_printk.h>
- #include <asm/mm.h>
- #include <asm/processor.h>
-+#include <asm/setup.h>
- 
- /* Xen stack for bringing up the first CPU. */
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE] __aligned(STACK_SIZE);
- 
-+/*
-+ * Return the end of the non-module region starting at s. In other
-+ * words return s the start of the next modules after s.
-+ *
-+ * On input *end is the end of the region which should be considered
-+ * and it is updated to reflect the end of the module, clipped to the
-+ * end of the region if it would run over.
-+ */
-+static paddr_t __init next_module(paddr_t s, paddr_t *end)
-+{
-+    struct bootmodules *mi = &bootinfo.modules;
-+    paddr_t lowest = ~(paddr_t)0;
-+    int i;
-+
-+    for ( i = 0; i < mi->nr_mods; i++ )
-+    {
-+        paddr_t mod_s = mi->module[i].start;
-+        paddr_t mod_e = mod_s + mi->module[i].size;
-+
-+        if ( !mi->module[i].size )
-+            continue;
-+
-+        if ( mod_s < s )
-+            continue;
-+        if ( mod_s > lowest )
-+            continue;
-+        if ( mod_s > *end )
-+            continue;
-+        lowest = mod_s;
-+        *end = min(*end, mod_e);
-+    }
-+    return lowest;
-+}
-+
-+static void __init dt_unreserved_regions(paddr_t s, paddr_t e,
-+                                         void (*cb)(paddr_t ps, paddr_t pe),
-+                                         unsigned int first)
-+{
-+    unsigned int i;
-+
-+    for ( i = 0 ; i < bootinfo.reserved_mem.nr_banks; i++ )
-+    {
-+        paddr_t r_s = bootinfo.reserved_mem.bank[i].start;
-+        paddr_t r_e = r_s + bootinfo.reserved_mem.bank[i].size;
-+
-+        if ( s < r_e && r_s < e )
-+        {
-+            dt_unreserved_regions(r_e, e, cb, i + 1);
-+            dt_unreserved_regions(s, r_s, cb, i + 1);
-+            return;
-+        }
-+    }
-+
-+    cb(s, e);
-+}
-+
-+/*
-+ * Populate the boot allocator. Based on arch/arm/setup.c's
-+ * populate_boot_allocator.
-+ * All RAM but the following regions will be added to the boot allocator:
-+ *  - Modules (e.g., Xen, Kernel)
-+ *  - Reserved regions
-+ */
-+static void __init populate_boot_allocator(void)
-+{
-+    unsigned int i;
-+    const struct meminfo *banks = &bootinfo.mem;
-+    paddr_t s, e;
-+
-+    for ( i = 0; i < banks->nr_banks; i++ )
-+    {
-+        const struct membank *bank = &banks->bank[i];
-+        paddr_t bank_end = bank->start + bank->size;
-+
-+        s = bank->start;
-+        while ( s < bank_end )
-+        {
-+            paddr_t n = bank_end;
-+
-+            e = next_module(s, &n);
-+
-+            if ( e == ~(paddr_t)0 )
-+                e = n = bank_end;
-+
-+            /*
-+             * Module in a RAM bank other than the one which we are
-+             * not dealing with here.
-+             */
-+            if ( e > bank_end )
-+                e = bank_end;
-+
-+            dt_unreserved_regions(s, e, init_boot_pages, 0);
-+
-+            s = n;
-+        }
-+    }
-+}
-+
- void setup_exceptions(void)
- {
-     unsigned long lpcr;
-@@ -24,6 +124,8 @@ void __init noreturn start_xen(unsigned long r3, unsigned long r4,
-                                unsigned long r5, unsigned long r6,
-                                unsigned long r7)
- {
-+    void *boot_fdt;
-+
-     if ( r5 )
-     {
-         /* Unsupported OpenFirmware boot protocol */
-@@ -32,11 +134,16 @@ void __init noreturn start_xen(unsigned long r3, unsigned long r4,
-     else
-     {
-         /* kexec boot protocol */
--        boot_opal_init((void *)r3);
-+        boot_fdt = (void *)r3;
-+        boot_opal_init(boot_fdt);
-     }
- 
-     setup_exceptions();
- 
-+    boot_fdt_init(boot_fdt, r3);
-+
-+    populate_boot_allocator();
-+
-     setup_initial_pagetables();
- 
-     early_printk("Hello, ppc64le!\n");
--- 
-2.30.2
+-----------------------6df91a8ddd19c3542ed41ea32b0a3a21
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;charset=utf-8
+
+If I set smt=3Doff and try to configure cpupools with credit(1) as if all =
+cores are available, I get the following crash. =C2=A0
+
+
+The crash happens when I try to use xl cpupool-add-cpu on the disabled HT =
+sibling cores.
+
+
+
+Hyper-threading is enabled in the firmware, and only disabled with smt=3Do=
+ff.
+
+
+
+Software: Xen-4.17.3 / Qubes OS 4.2.0-RC5
+Firmware: Dasharo 0.9.0 - Z790P
+Hardware: 13900K
+
+
+
+(XEN) ----[ Xen-4.17.3-pre =C2=A0x86_64 =C2=A0debug=3Dy =C2=A0Not tainted =
+]----(XEN) CPU: =C2=A0 =C2=A06
+(XEN) RIP: =C2=A0 =C2=A0e008:[<ffff82d040248f89>] schedule_cpu_add+0x50/0x=
+456
+(XEN) RFLAGS: 0000000000010202 =C2=A0 CONTEXT: hypervisor (d0v3)
+(XEN) rax: ffff82d0405a9288 =C2=A0 rbx: ffff83107f5a1980 =C2=A0 rcx: 00000=
+00000000020
+(XEN) rdx: 80007d2fbfa59000 =C2=A0 rsi: ffff83107f5a1980 =C2=A0 rdi: 00000=
+00000000020
+(XEN) rbp: 0000000000000009 =C2=A0 rsp: ffff831087d3fc68 =C2=A0 r8: =C2=A0=
+0000000000000000
+(XEN) r9: =C2=A0ffff82d0405b6b60 =C2=A0 r10: ffff831087d22ab0 =C2=A0 r11: =
+0000000000000003
+(XEN) r12: ffff831087d22ab0 =C2=A0 r13: 0000000000000020 =C2=A0 r14: ffff8=
+31087d22ab0
+(XEN) r15: ffff82d0405ae680 =C2=A0 cr0: 0000000080050033 =C2=A0 cr4: 00000=
+00000b526e0
+(XEN) cr3: 0000000912e30000 =C2=A0 cr2: 000072e5cb008375
+(XEN) fsb: 000072e5caac7380 =C2=A0 gsb: ffff8881b9d80000 =C2=A0 gss: 00000=
+00000000000
+(XEN) ds: 0000 =C2=A0 es: 0000 =C2=A0 fs: 0000 =C2=A0 gs: 0000 =C2=A0 ss: =
+e010 =C2=A0 cs: e008
+(XEN) Xen code around <ffff82d040248f89> (schedule_cpu_add+0x50/0x456):
+(XEN) =C2=A0db 8e 37 00 48 8b 14 ca <4c> 8b 2c 02 3b 3d 75 f0 1f 00 0f 83 =
+c9 01 00 00
+(XEN) Xen stack trace from rsp=3Dffff831087d3fc68:
+(XEN) =C2=A0 =C2=A0ffff83107f5a16e0 ffff82d040204c3b ffff831000000018 ffff=
+831087d3fd28
+(XEN) =C2=A0 =C2=A0ffff831087d3fcc8 3431831087d3fcd0 ffff83107f002033 ffff=
+831087d3fcd0
+(XEN) =C2=A0 =C2=A00000000000000000 ffff831087d40d70 ffff82d040246d48 0000=
+000000000000
+(XEN) =C2=A0 =C2=A0ffff83107f5a1980 0000000000000009 ffff831087d22ab0 0000=
+000000000020
+(XEN) =C2=A0 =C2=A0ffff831087d22ab0 ffff82d0405ae680 ffff82d040235dec ffff=
+831087d3fe20
+(XEN) =C2=A0 =C2=A000000000ffffffed 0000000000000009 ffff83107f5a1980 ffff=
+82d040236b05
+(XEN) =C2=A0 =C2=A00000000000000000 0000000000000000 000072e5cb098010 ffff=
+831087d3ffff
+(XEN) =C2=A0 =C2=A00000000000000000 ffff82d04045d5d8 ffff82d040234763 0000=
+0000c0000102
+(XEN) =C2=A0 =C2=A00000000000000000 0000000000000000 00000000c0000102 0000=
+000d00000000
+(XEN) =C2=A0 =C2=A0ffffffff8101ede6 000000000000e033 0000000000011082 ffff=
+c90043c1fb00
+(XEN) =C2=A0 =C2=A0000000000000e02b 11e6f31d9b4cbeef 96994088d9fcbeef 7d89=
+7394f3ecbeef
+(XEN) =C2=A0 =C2=A0c501dd1632b4beef ffff82d040227cc6 ffff831087d3fe48 0000=
+000000000000
+(XEN) =C2=A0 =C2=A00000000000011082 0000000000000000 ffff831087d3ffff 0000=
+000000000000
+(XEN) =C2=A0 =C2=A0ffffffff8101ede4 ffff82d0403495d0 0000001500000012 0000=
+000200000004
+(XEN) =C2=A0 =C2=A00000000000000000 0000000000000009 000072e5cad9cb60 7be3=
+82ddb0c16b00
+(XEN) =C2=A0 =C2=A00000000000a97768 0000000000a97150 0000000000000000 0000=
+7ffe90589abc
+(XEN) =C2=A0 =C2=A000007ffe9058a780 000000000043d990 000000000043d9b0 0000=
+72e5cad20434
+(XEN) =C2=A0 =C2=A000007ffe90589ac0 000072e5cafa3f79 0000000000000008 ffff=
+831087d3fef8
+(XEN) =C2=A0 =C2=A00000000000000023 ffff83107f52b000 0000000000000000 0000=
+000000000000
+(XEN) =C2=A0 =C2=A00000000000000000 ffff82d0402dd07f ffff83107f52b000 0000=
+000000000000
+(XEN) Xen call trace:
+(XEN) =C2=A0 =C2=A0[<ffff82d040248f89>] R schedule_cpu_add+0x50/0x456
+(XEN) =C2=A0 =C2=A0[<ffff82d040204c3b>] S debugtrace_printk+0x119/0x2cc
+(XEN) =C2=A0 =C2=A0[<ffff82d040246d48>] S free_affinity_masks+0x15/0x17
+(XEN) =C2=A0 =C2=A0[<ffff82d040235dec>] S cpupool.c#cpupool_assign_cpu_loc=
+ked+0x53/0x160
+(XEN) =C2=A0 =C2=A0[<ffff82d040236b05>] S cpupool_do_sysctl+0x367/0x760
+(XEN) =C2=A0 =C2=A0[<ffff82d040234763>] S do_sysctl+0x827/0x1269
+(XEN) =C2=A0 =C2=A0[<ffff82d040227cc6>] S timer.c#timer_lock+0x69/0x143
+(XEN) =C2=A0 =C2=A0[<ffff82d0403495d0>] S x86_emulate_wrapper+0x24/0x56
+(XEN) =C2=A0 =C2=A0[<ffff82d0402dd07f>] S pv_hypercall+0x3a2/0x4a9
+(XEN) =C2=A0 =C2=A0[<ffff82d0402012b7>] S lstar_enter+0x137/0x140
+(XEN)
+(XEN) debugtrace_dump() global buffer starting
+(XEN) wrap: 0
+(XEN) debugtrace_dump() global buffer finished
+(XEN)
+(XEN) ****************************************
+(XEN) Panic on CPU 6:
+(XEN) GENERAL PROTECTION FAULT
+(XEN) [error_code=3D0000]
+(XEN) ****************************************
+(XEN)
+(XEN) Reboot in five seconds...
+
+/rene
+-----------------------6df91a8ddd19c3542ed41ea32b0a3a21
+Content-Type: multipart/related;boundary=---------------------9343bbedf538043a542760126bd77762
+
+-----------------------9343bbedf538043a542760126bd77762
+Content-Type: text/html;charset=utf-8
+Content-Transfer-Encoding: base64
+
+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0
+cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6IHJnYigyNTUsIDI1NSwg
+MjU1KTsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVy
+IE5ldywgbW9ub3NwYWNlOyI+SWYgSSBzZXQgc210PW9mZiBhbmQgdHJ5IHRvIGNvbmZpZ3VyZSBj
+cHVwb29scyB3aXRoIGNyZWRpdCgxKSBhcyBpZiBhbGwgY29yZXMgYXJlIGF2YWlsYWJsZSwgSSBn
+ZXQgdGhlIGZvbGxvd2luZyBjcmFzaC4gJm5ic3A7IDxicj48L3NwYW4+PC9kaXY+PGRpdiBzdHls
+ZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0cHg7IGNvbG9y
+OiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6IHJnYigyNTUsIDI1NSwgMjU1KTsiPjxz
+cGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9u
+b3NwYWNlOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXJpYWws
+IHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsgYmFja2dy
+b3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5
+OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij5UaGUgY3Jhc2ggaGFw
+cGVucyB3aGVuIEkgdHJ5IHRvIHVzZSB4bCBjcHVwb29sLWFkZC1jcHUgb24gdGhlIGRpc2FibGVk
+IEhUIHNpYmxpbmcgY29yZXMuPGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWls
+eTogQXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAw
+KTsgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyI+PHNwYW4gc3R5bGU9ImZv
+bnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij48YnI+
+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsg
+Zm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiBy
+Z2IoMjU1LCAyNTUsIDI1NSk7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25z
+b2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPkh5cGVyLXRocmVhZGluZyBpcyBlbmFibGVk
+IGluIHRoZSBmaXJtd2FyZSwgYW5kIG9ubHkgZGlzYWJsZWQgd2l0aCBzbXQ9b2ZmLjxicj48L3Nw
+YW4+PC9kaXY+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250
+LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6IHJnYigy
+NTUsIDI1NSwgMjU1KTsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFz
+LCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJm
+b250LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJn
+YigwLCAwLCAwKTsgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyI+PHNwYW4g
+c3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3Bh
+Y2U7Ij5Tb2Z0d2FyZTogWGVuLTQuMTcuMyAvIFF1YmVzIE9TIDQuMi4wLVJDNTwvc3Bhbj48L2Rp
+dj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTog
+MTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1
+LCAyNTUpOyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJp
+ZXIgTmV3LCBtb25vc3BhY2U7Ij5GaXJtd2FyZTogRGFzaGFybyAwLjkuMCAtIFo3OTBQPC9zcGFu
+PjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1z
+aXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1
+LCAyNTUsIDI1NSk7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywg
+Q291cmllciBOZXcsIG1vbm9zcGFjZTsiPkhhcmR3YXJlOiAxMzkwMEs8YnI+PC9zcGFuPjwvZGl2
+PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAx
+NHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUs
+IDI1NSk7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmll
+ciBOZXcsIG1vbm9zcGFjZTsiPjxicj48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0iZm9udC1mYW1p
+bHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0cHg7Ij48c3BhbiBzdHlsZT0iZm9u
+dC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4p
+IC0tLS1bIFhlbi00LjE3LjMtcHJlICZuYnNwO3g4Nl82NCAmbmJzcDtkZWJ1Zz15ICZuYnNwO05v
+dCB0YWludGVkIF0tLS0tPC9zcGFuPjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5s
+bywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSBDUFU6ICZuYnNwOyAm
+bmJzcDs2PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywg
+Q29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSBSSVA6ICZuYnNwOyAmbmJz
+cDtlMDA4OlsmbHQ7ZmZmZjgyZDA0MDI0OGY4OSZndDtdIHNjaGVkdWxlX2NwdV9hZGQrMHg1MC8w
+eDQ1Njwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENv
+bnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgUkZMQUdTOiAwMDAwMDAwMDAw
+MDEwMjAyICZuYnNwOyBDT05URVhUOiBoeXBlcnZpc29yIChkMHYzKTwvc3Bhbj48L2Rpdj48ZGl2
+PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywg
+bW9ub3NwYWNlOyI+KFhFTikgcmF4OiBmZmZmODJkMDQwNWE5Mjg4ICZuYnNwOyByYng6IGZmZmY4
+MzEwN2Y1YTE5ODAgJm5ic3A7IHJjeDogMDAwMDAwMDAwMDAwMDAyMDwvc3Bhbj48L2Rpdj48ZGl2
+PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywg
+bW9ub3NwYWNlOyI+KFhFTikgcmR4OiA4MDAwN2QyZmJmYTU5MDAwICZuYnNwOyByc2k6IGZmZmY4
+MzEwN2Y1YTE5ODAgJm5ic3A7IHJkaTogMDAwMDAwMDAwMDAwMDAyMDwvc3Bhbj48L2Rpdj48ZGl2
+PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywg
+bW9ub3NwYWNlOyI+KFhFTikgcmJwOiAwMDAwMDAwMDAwMDAwMDA5ICZuYnNwOyByc3A6IGZmZmY4
+MzEwODdkM2ZjNjggJm5ic3A7IHI4OiAmbmJzcDswMDAwMDAwMDAwMDAwMDAwPC9zcGFuPjwvZGl2
+PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIg
+TmV3LCBtb25vc3BhY2U7Ij4oWEVOKSByOTogJm5ic3A7ZmZmZjgyZDA0MDViNmI2MCAmbmJzcDsg
+cjEwOiBmZmZmODMxMDg3ZDIyYWIwICZuYnNwOyByMTE6IDAwMDAwMDAwMDAwMDAwMDM8L3NwYW4+
+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291
+cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pIHIxMjogZmZmZjgzMTA4N2QyMmFiMCAmbmJzcDsg
+cjEzOiAwMDAwMDAwMDAwMDAwMDIwICZuYnNwOyByMTQ6IGZmZmY4MzEwODdkMjJhYjA8L3NwYW4+
+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291
+cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pIHIxNTogZmZmZjgyZDA0MDVhZTY4MCAmbmJzcDsg
+Y3IwOiAwMDAwMDAwMDgwMDUwMDMzICZuYnNwOyBjcjQ6IDAwMDAwMDAwMDBiNTI2ZTA8L3NwYW4+
+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291
+cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pIGNyMzogMDAwMDAwMDkxMmUzMDAwMCAmbmJzcDsg
+Y3IyOiAwMDAwNzJlNWNiMDA4Mzc1PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQt
+ZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSBm
+c2I6IDAwMDA3MmU1Y2FhYzczODAgJm5ic3A7IGdzYjogZmZmZjg4ODFiOWQ4MDAwMCAmbmJzcDsg
+Z3NzOiAwMDAwMDAwMDAwMDAwMDAwPC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQt
+ZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSBk
+czogMDAwMCAmbmJzcDsgZXM6IDAwMDAgJm5ic3A7IGZzOiAwMDAwICZuYnNwOyBnczogMDAwMCAm
+bmJzcDsgc3M6IGUwMTAgJm5ic3A7IGNzOiBlMDA4PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5
+bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7
+Ij4oWEVOKSBYZW4gY29kZSBhcm91bmQgJmx0O2ZmZmY4MmQwNDAyNDhmODkmZ3Q7IChzY2hlZHVs
+ZV9jcHVfYWRkKzB4NTAvMHg0NTYpOjwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250
+LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikg
+Jm5ic3A7ZGIgOGUgMzcgMDAgNDggOGIgMTQgY2EgJmx0OzRjJmd0OyA4YiAyYyAwMiAzYiAzZCA3
+NSBmMCAxZiAwMCAwZiA4MyBjOSAwMSAwMCAwMDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxl
+PSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+
+KFhFTikgWGVuIHN0YWNrIHRyYWNlIGZyb20gcnNwPWZmZmY4MzEwODdkM2ZjNjg6PC9zcGFuPjwv
+ZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJp
+ZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7ZmZmZjgzMTA3ZjVhMTZlMCBm
+ZmZmODJkMDQwMjA0YzNiIGZmZmY4MzEwMDAwMDAwMTggZmZmZjgzMTA4N2QzZmQyODwvc3Bhbj48
+L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3Vy
+aWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwO2ZmZmY4MzEwODdkM2ZjYzgg
+MzQzMTgzMTA4N2QzZmNkMCBmZmZmODMxMDdmMDAyMDMzIGZmZmY4MzEwODdkM2ZjZDA8L3NwYW4+
+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291
+cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDswMDAwMDAwMDAwMDAwMDAw
+IGZmZmY4MzEwODdkNDBkNzAgZmZmZjgyZDA0MDI0NmQ0OCAwMDAwMDAwMDAwMDAwMDAwPC9zcGFu
+PjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENv
+dXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7ZmZmZjgzMTA3ZjVhMTk4
+MCAwMDAwMDAwMDAwMDAwMDA5IGZmZmY4MzEwODdkMjJhYjAgMDAwMDAwMDAwMDAwMDAyMDwvc3Bh
+bj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBD
+b3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwO2ZmZmY4MzEwODdkMjJh
+YjAgZmZmZjgyZDA0MDVhZTY4MCBmZmZmODJkMDQwMjM1ZGVjIGZmZmY4MzEwODdkM2ZlMjA8L3Nw
+YW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywg
+Q291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDswMDAwMDAwMGZmZmZm
+ZmVkIDAwMDAwMDAwMDAwMDAwMDkgZmZmZjgzMTA3ZjVhMTk4MCBmZmZmODJkMDQwMjM2YjA1PC9z
+cGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMs
+IENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7MDAwMDAwMDAwMDAw
+MDAwMCAwMDAwMDAwMDAwMDAwMDAwIDAwMDA3MmU1Y2IwOTgwMTAgZmZmZjgzMTA4N2QzZmZmZjwv
+c3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFz
+LCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwOzAwMDAwMDAwMDAw
+MDAwMDAgZmZmZjgyZDA0MDQ1ZDVkOCBmZmZmODJkMDQwMjM0NzYzIDAwMDAwMDAwYzAwMDAxMDI8
+L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xh
+cywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDswMDAwMDAwMDAw
+MDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDBjMDAwMDEwMiAwMDAwMDAwZDAwMDAwMDAw
+PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29s
+YXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7ZmZmZmZmZmY4
+MTAxZWRlNiAwMDAwMDAwMDAwMDBlMDMzIDAwMDAwMDAwMDAwMTEwODIgZmZmZmM5MDA0M2MxZmIw
+MDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNv
+bGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwOzAwMDAwMDAw
+MDAwMGUwMmIgMTFlNmYzMWQ5YjRjYmVlZiA5Njk5NDA4OGQ5ZmNiZWVmIDdkODk3Mzk0ZjNlY2Jl
+ZWY8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25z
+b2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDtjNTAxZGQx
+NjMyYjRiZWVmIGZmZmY4MmQwNDAyMjdjYzYgZmZmZjgzMTA4N2QzZmU0OCAwMDAwMDAwMDAwMDAw
+MDAwPC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29u
+c29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7MDAwMDAw
+MDAwMDAxMTA4MiAwMDAwMDAwMDAwMDAwMDAwIGZmZmY4MzEwODdkM2ZmZmYgMDAwMDAwMDAwMDAw
+MDAwMDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENv
+bnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwO2ZmZmZm
+ZmZmODEwMWVkZTQgZmZmZjgyZDA0MDM0OTVkMCAwMDAwMDAxNTAwMDAwMDEyIDAwMDAwMDAyMDAw
+MDAwMDQ8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBD
+b25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDswMDAw
+MDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDkgMDAwMDcyZTVjYWQ5Y2I2MCA3YmUzODJkZGIw
+YzE2YjAwPC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywg
+Q29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7MDAw
+MDAwMDAwMGE5Nzc2OCAwMDAwMDAwMDAwYTk3MTUwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDdmZmU5
+MDU4OWFiYzwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8s
+IENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwOzAw
+MDA3ZmZlOTA1OGE3ODAgMDAwMDAwMDAwMDQzZDk5MCAwMDAwMDAwMDAwNDNkOWIwIDAwMDA3MmU1
+Y2FkMjA0MzQ8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxv
+LCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDsw
+MDAwN2ZmZTkwNTg5YWMwIDAwMDA3MmU1Y2FmYTNmNzkgMDAwMDAwMDAwMDAwMDAwOCBmZmZmODMx
+MDg3ZDNmZWY4PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5s
+bywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7
+MDAwMDAwMDAwMDAwMDAyMyBmZmZmODMxMDdmNTJiMDAwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAw
+MDAwMDAwMDAwMDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVu
+bG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNw
+OzAwMDAwMDAwMDAwMDAwMDAgZmZmZjgyZDA0MDJkZDA3ZiBmZmZmODMxMDdmNTJiMDAwIDAwMDAw
+MDAwMDAwMDAwMDA8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1l
+bmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pIFhlbiBjYWxsIHRy
+YWNlOjwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENv
+bnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwO1smbHQ7
+ZmZmZjgyZDA0MDI0OGY4OSZndDtdIFIgc2NoZWR1bGVfY3B1X2FkZCsweDUwLzB4NDU2PC9zcGFu
+PjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENv
+dXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7WyZsdDtmZmZmODJkMDQw
+MjA0YzNiJmd0O10gUyBkZWJ1Z3RyYWNlX3ByaW50aysweDExOS8weDJjYzwvc3Bhbj48L2Rpdj48
+ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5l
+dywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwO1smbHQ7ZmZmZjgyZDA0MDI0NmQ0OCZn
+dDtdIFMgZnJlZV9hZmZpbml0eV9tYXNrcysweDE1LzB4MTc8L3NwYW4+PC9kaXY+PGRpdj48c3Bh
+biBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9z
+cGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDtbJmx0O2ZmZmY4MmQwNDAyMzVkZWMmZ3Q7XSBTIGNw
+dXBvb2wuYyNjcHVwb29sX2Fzc2lnbl9jcHVfbG9ja2VkKzB4NTMvMHgxNjA8L3NwYW4+PC9kaXY+
+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmllciBO
+ZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDtbJmx0O2ZmZmY4MmQwNDAyMzZiMDUm
+Z3Q7XSBTIGNwdXBvb2xfZG9fc3lzY3RsKzB4MzY3LzB4NzYwPC9zcGFuPjwvZGl2PjxkaXY+PHNw
+YW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25v
+c3BhY2U7Ij4oWEVOKSAmbmJzcDsgJm5ic3A7WyZsdDtmZmZmODJkMDQwMjM0NzYzJmd0O10gUyBk
+b19zeXNjdGwrMHg4MjcvMHgxMjY5PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQt
+ZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAm
+bmJzcDsgJm5ic3A7WyZsdDtmZmZmODJkMDQwMjI3Y2M2Jmd0O10gUyB0aW1lci5jI3RpbWVyX2xv
+Y2srMHg2OS8weDE0Mzwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTog
+TWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZu
+YnNwO1smbHQ7ZmZmZjgyZDA0MDM0OTVkMCZndDtdIFMgeDg2X2VtdWxhdGVfd3JhcHBlcisweDI0
+LzB4NTY8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBD
+b25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICZuYnNwOyAmbmJzcDtbJmx0
+O2ZmZmY4MmQwNDAyZGQwN2YmZ3Q7XSBTIHB2X2h5cGVyY2FsbCsweDNhMi8weDRhOTwvc3Bhbj48
+L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3Vy
+aWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgJm5ic3A7ICZuYnNwO1smbHQ7ZmZmZjgyZDA0MDIw
+MTJiNyZndDtdIFMgbHN0YXJfZW50ZXIrMHgxMzcvMHgxNDA8L3NwYW4+PC9kaXY+PGRpdj48c3Bh
+biBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9z
+cGFjZTsiPihYRU4pIDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTog
+TWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgZGVidWd0cmFj
+ZV9kdW1wKCkgZ2xvYmFsIGJ1ZmZlciBzdGFydGluZzwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0
+eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNl
+OyI+KFhFTikgd3JhcDogMDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWls
+eTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhFTikgZGVidWd0
+cmFjZV9kdW1wKCkgZ2xvYmFsIGJ1ZmZlciBmaW5pc2hlZDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFu
+IHN0eWxlPSJmb250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3Nw
+YWNlOyI+KFhFTikgPC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBN
+ZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7Ij4oWEVOKSAqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqPC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5
+bGU9ImZvbnQtZmFtaWx5OiBNZW5sbywgQ29uc29sYXMsIENvdXJpZXIgTmV3LCBtb25vc3BhY2U7
+Ij4oWEVOKSBQYW5pYyBvbiBDUFUgNjo8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9u
+dC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4p
+IEdFTkVSQUwgUFJPVEVDVElPTiBGQVVMVDwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJm
+b250LWZhbWlseTogTWVubG8sIENvbnNvbGFzLCBDb3VyaWVyIE5ldywgbW9ub3NwYWNlOyI+KFhF
+TikgW2Vycm9yX2NvZGU9MDAwMF08L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iZm9udC1m
+YW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pICoq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKio8L3NwYW4+PC9kaXY+PGRpdj48
+c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1v
+bm9zcGFjZTsiPihYRU4pIDwvc3Bhbj48L2Rpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1l
+bmxvLCBDb25zb2xhcywgQ291cmllciBOZXcsIG1vbm9zcGFjZTsiPihYRU4pIFJlYm9vdCBpbiBm
+aXZlIHNlY29uZHMuLi48L3NwYW4+PGJyPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBB
+cmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyI+PGJyPjwvZGl2PjxkaXYgc3R5bGU9
+ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjog
+cmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSk7Ij4vcmVu
+ZTxicj48L2Rpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IE1lbmxvLCBDb25zb2xhcywgQ291
+cmllciBOZXcsIG1vbm9zcGFjZTsiPgo8L3NwYW4+
+-----------------------9343bbedf538043a542760126bd77762--
+-----------------------6df91a8ddd19c3542ed41ea32b0a3a21--
+-----------------------f94de33a37ba315914385a1efdebb5da
+Content-Type: application/pgp-keys; filename="publickey - renewin@proton.me - 0x43C32E54.asc"; name="publickey - renewin@proton.me - 0x43C32E54.asc"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="publickey - renewin@proton.me - 0x43C32E54.asc"; name="publickey - renewin@proton.me - 0x43C32E54.asc"
+
+LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tCgp4ak1FWWxmZy9oWUpLd1lCQkFI
+YVJ3OEJBUWRBOWhrZnlRblEzVlVETWZsT3FPZU1sc1o0N252eml1cmoKbXJnZTFCd040d3pOSlhK
+bGJtVjNhVzVBY0hKdmRHOXVMbTFsSUR4eVpXNWxkMmx1UUhCeWIzUnZiaTV0ClpUN0Nqd1FRRmdv
+QUlBVUNZbGZnL2dZTENRY0lBd0lFRlFnS0FnUVdBZ0VBQWhrQkFoc0RBaDRCQUNFSgpFQXRxSisz
+WXh1S1hGaUVFUThNdVZIeDNmREZGcnZqSEMyb243ZGpHNHBkYUtBRC9WMnNlNk5lTGJ0VkkKVzVB
+ck1XRHdJN21xZ0dNSDgrQ3ZCelh1RUE5Y2xrOEEvUkNLbjdzRE1HZVJzWVNENWNFRXdidVRLK01B
+CkZ4T2owaEZGOS9PNHRxQUd6amdFWWxmZy9oSUtLd1lCQkFHWFZRRUZBUUVIUUlmc3ozdGNhVElk
+MWp2YQpZVG12NURmdUVRVGY4V2s3RmtGVG5LNHltMjRJQXdFSUI4SjRCQmdXQ0FBSkJRSmlWK0Qr
+QWhzTUFDRUoKRUF0cUorM1l4dUtYRmlFRVE4TXVWSHgzZkRGRnJ2akhDMm9uN2RqRzRwZDZpUUQr
+TzVrR0w2ZjhndktJCmlpSStidS94NkFacytvNGZERmVlc052bS9TWkFRZUVBLzBxbEw1RHR2ckJD
+TjY5b2xZMERlRjQ1d0R0bQpEbDlIZ2dtc09sdXRTYzRCCj1xUFNVCi0tLS0tRU5EIFBHUCBQVUJM
+SUMgS0VZIEJMT0NLLS0tLS0K
+-----------------------f94de33a37ba315914385a1efdebb5da--
+
+--------08aeeaf5fdfa0d2107f357d7ac96c3f8203141a9a0d317189db93fb70591b31d
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: ProtonMail
+
+wnUEARYKACcFgmVqOv8JkAtqJ+3YxuKXFiEEQ8MuVHx3fDFFrvjHC2on7djG
+4pcAACmeAQCJSZey9dMiYP3QgGgnUFqfdS+gRA28e5uYKzlK4F+xZAD+JZ2S
+ipzvWEdaexU6RsDzx/3pZy7fY8kRftz9pbbg+Qc=
+=fX2S
+-----END PGP SIGNATURE-----
+
+
+--------08aeeaf5fdfa0d2107f357d7ac96c3f8203141a9a0d317189db93fb70591b31d--
 
 
