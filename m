@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E739C10F05
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Dec 2023 20:48:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.645739.1008016 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 717F8C07E97
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Dec 2023 20:48:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.645742.1008046 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r9AQv-0007jz-4M; Fri, 01 Dec 2023 20:48:21 +0000
+	id 1r9AR0-00009X-3u; Fri, 01 Dec 2023 20:48:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 645739.1008016; Fri, 01 Dec 2023 20:48:21 +0000
+Received: by outflank-mailman (output) from mailman id 645742.1008046; Fri, 01 Dec 2023 20:48:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r9AQv-0007jr-1B; Fri, 01 Dec 2023 20:48:21 +0000
-Received: by outflank-mailman (input) for mailman id 645739;
- Fri, 01 Dec 2023 20:48:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r9AR0-00009K-0G; Fri, 01 Dec 2023 20:48:26 +0000
+Received: by outflank-mailman (input) for mailman id 645742;
+ Fri, 01 Dec 2023 20:48:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yVFl=HM=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1r9AQt-0007Cg-95
- for xen-devel@lists.xenproject.org; Fri, 01 Dec 2023 20:48:19 +0000
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [2a00:1450:4864:20::129])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f4fa5bb2-908a-11ee-98e5-6d05b1d4d9a1;
- Fri, 01 Dec 2023 21:48:18 +0100 (CET)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-50bc811d12fso3606748e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 01 Dec 2023 12:48:18 -0800 (PST)
+ id 1r9AQy-0008SX-MU
+ for xen-devel@lists.xenproject.org; Fri, 01 Dec 2023 20:48:24 +0000
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [2a00:1450:4864:20::22d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f6dc7b51-908a-11ee-9b0f-b553b5be7939;
+ Fri, 01 Dec 2023 21:48:22 +0100 (CET)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2c9c149848fso33125571fa.2
+ for <xen-devel@lists.xenproject.org>; Fri, 01 Dec 2023 12:48:21 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- i18-20020a2ea372000000b002c6ed7e546esm511142ljn.124.2023.12.01.12.48.15
+ i18-20020a2ea372000000b002c6ed7e546esm511142ljn.124.2023.12.01.12.48.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Dec 2023 12:48:16 -0800 (PST)
+ Fri, 01 Dec 2023 12:48:20 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,234 +46,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f4fa5bb2-908a-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: f6dc7b51-908a-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701463698; x=1702068498; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1701463700; x=1702068500; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=U/Fa3V+suVuY5Wl4cnMTSRfOG8VUNxvSJcflHXogt7E=;
-        b=WPcrJlWDVWLfTosghFwDp3uH2wzUSNYO2ieyUJus8OX8vYMPvJPDOJVoZOfWUk4sMB
-         Ou6Dc7Znj0tdHKIks8J9HdC8sQTrqNOxbF7mE/ZcR9puwqnOY77RkypcoE3RLLSJm+9o
-         XpJpUehMH9rV5pHxC+zyeEcRJWk/PfELOXy2LKMgRYl78FRqf+s6vnYuao5wCMy+Sw/K
-         7NN6eK5IdEzNslDaJL+nVJbFzMQRtTBTLhuNh+7n2xZ6F4dlFCtmS11oz9nNpv/NQZyW
-         q+RYwfB6KSdibz0qNZKmkNV/J7l2Goty9Fj4v+LEYp5hVQtlLhpKv6B1yn+lqRJPG62m
-         RPZw==
+        bh=8K0BYHGWC+ogJ6gBKSwmGTMdkzCbZuHLzNWf4Sj6tTQ=;
+        b=Fp9CMOCPpf5JGCK4HACnzwkanlzaWMhDJiNi+mGQzTt/UGqRU9Q2VjI+yHfaH5vU6N
+         39M4W1q63uyZ6qxI8tfV7crhn2Y9Z+Qmea3qFEbKbSn5fX20ZU4iW/l4Lvobz4mkBCcc
+         WxU8J1ZXmn/xBT1i6EDo/o1BebstyICubvql6YU5YSyGmR56q1psmrotfSjgNv7rnVO8
+         3oMFm0L35leNXilWOeAYHdYkraf8MbdMMZKOT2O5Nf+uvloynU/s59KpPvgEJPoP8DKp
+         zhDZxKUF4hk1wzx3UtcFjfCnjxNO+CyDPdD+mSI5s5Tfd/8iT9TjdeelQxBXi3HP6XCG
+         LN/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701463698; x=1702068498;
+        d=1e100.net; s=20230601; t=1701463700; x=1702068500;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=U/Fa3V+suVuY5Wl4cnMTSRfOG8VUNxvSJcflHXogt7E=;
-        b=gbwkXHBmBEFeePo98uBr/Dt1EBaZMbVcuts8Bac6wOiCAq2epveCyM/kBl6BjwJsU6
-         fg0LYMR+GxMrN4Ac01BJs24nx3hNDCguc6fByCLiG8o9bbljNiAEnJxsCvqzMCwmvWIc
-         skXkfrJdzX8Jmrozucg825FDFo0sGBzkYdueaAQ15iHU6Yss7TQ5dwe37ERk1V1yGJRo
-         IAphYxWPuWmyVhPnog3IV9O4sBXelW08dt4/fXs/L+ozkPoyobCHamturHXrLg2z1D43
-         67TKUDJmhPvWFX2dRxQEOI64K6/4JjWpJdCrrl9OnTJiSDPpcNbVhOsdXZzsQww6e/Dn
-         9KdA==
-X-Gm-Message-State: AOJu0Yy+t5g6HEMEDm5KE4fqLNvud13pt4Htg14sRoYvdqakl8/bqU1H
-	FB8hYDR7bwY9V2cKajOMugxCMFfc5keOcw==
-X-Google-Smtp-Source: AGHT+IFWs2H8CtxOHc9wOx2zpzoQ08DIixhbTwRslXs2DSEgkFsBo4hLz8/rpY8QZwzf66GVzWMLww==
-X-Received: by 2002:a2e:8017:0:b0:2c9:dae6:43f4 with SMTP id j23-20020a2e8017000000b002c9dae643f4mr633507ljg.118.1701463697700;
-        Fri, 01 Dec 2023 12:48:17 -0800 (PST)
+        bh=8K0BYHGWC+ogJ6gBKSwmGTMdkzCbZuHLzNWf4Sj6tTQ=;
+        b=kLqPu8grBR4BoYpD5KH8qZlxN2VfxwNpxJCUH1MzCN9ZguKFu71l1ok52IlydCEgM3
+         1xvqlFuquh4YWu2PlTNYAOpNRgmQ8A8PRQocRDTr0UO/5T7ZwELgxSWoZ5gUaJTlT34R
+         WTroNkmht3vH5GXoa4pCTylmotSLDkerLr2JiJ8qheYjLrLA60PCPJNrea924k05bRK1
+         8sZwbx0Uv1esm2wB7Iw+MGpBWzOAkOTVznebK5fQ8aRPW3nq4xs/9tz1TmgkCDRFuyS9
+         s67DyjqElqmmH3m6dQJH03/YopuUSJ8D7cuPOeYnS/peuarzwInUQls0CrzUtED48Riq
+         6NwA==
+X-Gm-Message-State: AOJu0YxQleqQh+6DXqT/Aqy3D4c/6BrvCbSqF7WuJzM8gkYz0C78+GrW
+	Mue2aSruukIKRPpV9ljq1EF+ojzHGInRoA==
+X-Google-Smtp-Source: AGHT+IHwoqKK/fylcEtCmUl06UVfE5szR9Dr+PSwdTucXZKF9B4qEHFRgrM3cdOmVKbTGjFnDwKmzg==
+X-Received: by 2002:a2e:9286:0:b0:2c9:c43e:8ac2 with SMTP id d6-20020a2e9286000000b002c9c43e8ac2mr1054667ljh.12.1701463700396;
+        Fri, 01 Dec 2023 12:48:20 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v5 2/7] xen/asm-generic: introduce stub header monitor.h
-Date: Fri,  1 Dec 2023 22:48:05 +0200
-Message-ID: <e968b9763890ca784b8da0a83f65c43470748e9b.1701453087.git.oleksii.kurochko@gmail.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v5 4/7] xen/asm-generic: introduce stub header softirq.h
+Date: Fri,  1 Dec 2023 22:48:07 +0200
+Message-ID: <56ce43435f5f9be025d74503f173ef04176f4882.1701453087.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1701453087.git.oleksii.kurochko@gmail.com>
 References: <cover.1701453087.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The header is shared between several archs so it is
+<asm/softirq.h> is common between Arm, PPC and RISC-V so it is
 moved to asm-generic.
 
-Switch partly Arm and PPC to asm-generic/monitor.h and only
-arch_monitor_get_capabilities() left in arch-specific/monitor.h.
+Drop Arm and PPC's softirq.h and use asm-generic version instead.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
 Changes in V5:
-  - Switched partly Arm and PPC to asm-generic monitor.h only
-    arch_monitor_get_capabilities() left in arch-specific/monitor.h.
-  - Updated the commit message.
+ - Strayed "Added" in commit message
+ - Added Acked-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
 Changes in V4:
- - Removed the double blank line.
- - Added Acked-by: Jan Beulich <jbeulich@suse.com>.
- - Update the commit message
+ - Added Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+ - Added Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V3:
- - Use forward-declaration of struct domain instead of " #include <xen/sched.h> ".
- - Add ' include <xen/errno.h> '
- - Drop PPC's monitor.h.
+ - Drop Arm and PPC's softirq.h
+ - Update the commit message.
 ---
 Changes in V2:
-	- remove inclusion of "+#include <public/domctl.h>"
-	- add "struct xen_domctl_monitor_op;"
-	- remove one of SPDX tags.
+    - update the commit message.
 ---
- xen/arch/arm/include/asm/monitor.h | 28 +--------------
- xen/arch/ppc/include/asm/monitor.h | 28 +--------------
- xen/include/asm-generic/monitor.h  | 57 ++++++++++++++++++++++++++++++
- 3 files changed, 59 insertions(+), 54 deletions(-)
- create mode 100644 xen/include/asm-generic/monitor.h
+ xen/arch/arm/include/asm/Makefile                         | 1 +
+ xen/arch/ppc/include/asm/Makefile                         | 1 +
+ xen/arch/ppc/include/asm/softirq.h                        | 8 --------
+ .../arm/include/asm => include/asm-generic}/softirq.h     | 7 ++++---
+ 4 files changed, 6 insertions(+), 11 deletions(-)
+ delete mode 100644 xen/arch/ppc/include/asm/softirq.h
+ rename xen/{arch/arm/include/asm => include/asm-generic}/softirq.h (56%)
 
-diff --git a/xen/arch/arm/include/asm/monitor.h b/xen/arch/arm/include/asm/monitor.h
-index 7567be66bd..045217c310 100644
---- a/xen/arch/arm/include/asm/monitor.h
-+++ b/xen/arch/arm/include/asm/monitor.h
-@@ -25,33 +25,7 @@
- #include <xen/sched.h>
- #include <public/domctl.h>
+diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
+index 0c855a798a..a28cc5d1b1 100644
+--- a/xen/arch/arm/include/asm/Makefile
++++ b/xen/arch/arm/include/asm/Makefile
+@@ -6,4 +6,5 @@ generic-y += numa.h
+ generic-y += paging.h
+ generic-y += percpu.h
+ generic-y += random.h
++generic-y += softirq.h
+ generic-y += vm_event.h
+diff --git a/xen/arch/ppc/include/asm/Makefile b/xen/arch/ppc/include/asm/Makefile
+index f09c5ea8a1..efd72862c8 100644
+--- a/xen/arch/ppc/include/asm/Makefile
++++ b/xen/arch/ppc/include/asm/Makefile
+@@ -8,4 +8,5 @@ generic-y += numa.h
+ generic-y += paging.h
+ generic-y += percpu.h
+ generic-y += random.h
++generic-y += softirq.h
+ generic-y += vm_event.h
+diff --git a/xen/arch/ppc/include/asm/softirq.h b/xen/arch/ppc/include/asm/softirq.h
+deleted file mode 100644
+index a0b28a5e51..0000000000
+--- a/xen/arch/ppc/include/asm/softirq.h
++++ /dev/null
+@@ -1,8 +0,0 @@
+-#ifndef __ASM_PPC_SOFTIRQ_H__
+-#define __ASM_PPC_SOFTIRQ_H__
+-
+-#define NR_ARCH_SOFTIRQS 0
+-
+-#define arch_skip_send_event_check(cpu) 0
+-
+-#endif /* __ASM_PPC_SOFTIRQ_H__ */
+diff --git a/xen/arch/arm/include/asm/softirq.h b/xen/include/asm-generic/softirq.h
+similarity index 56%
+rename from xen/arch/arm/include/asm/softirq.h
+rename to xen/include/asm-generic/softirq.h
+index 976e0ebd70..83be855e50 100644
+--- a/xen/arch/arm/include/asm/softirq.h
++++ b/xen/include/asm-generic/softirq.h
+@@ -1,11 +1,12 @@
+-#ifndef __ASM_SOFTIRQ_H__
+-#define __ASM_SOFTIRQ_H__
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_GENERIC_SOFTIRQ_H__
++#define __ASM_GENERIC_SOFTIRQ_H__
  
--static inline
--void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
--{
--}
--
--static inline
--int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
--{
--    /* No arch-specific monitor ops on ARM. */
--    return -EOPNOTSUPP;
--}
--
--int arch_monitor_domctl_event(struct domain *d,
--                              struct xen_domctl_monitor_op *mop);
--
--static inline
--int arch_monitor_init_domain(struct domain *d)
--{
--    /* No arch-specific domain initialization on ARM. */
--    return 0;
--}
--
--static inline
--void arch_monitor_cleanup_domain(struct domain *d)
--{
--    /* No arch-specific domain cleanup on ARM. */
--}
-+#include <asm-generic/monitor.h>
+ #define NR_ARCH_SOFTIRQS       0
  
- static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
- {
-diff --git a/xen/arch/ppc/include/asm/monitor.h b/xen/arch/ppc/include/asm/monitor.h
-index e5b0282bf1..89000dacc6 100644
---- a/xen/arch/ppc/include/asm/monitor.h
-+++ b/xen/arch/ppc/include/asm/monitor.h
-@@ -6,33 +6,7 @@
- #include <public/domctl.h>
- #include <xen/errno.h>
+ #define arch_skip_send_event_check(cpu) 0
  
--static inline
--void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
--{
--}
--
--static inline
--int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
--{
--    /* No arch-specific monitor ops on PPC. */
--    return -EOPNOTSUPP;
--}
--
--int arch_monitor_domctl_event(struct domain *d,
--                              struct xen_domctl_monitor_op *mop);
--
--static inline
--int arch_monitor_init_domain(struct domain *d)
--{
--    /* No arch-specific domain initialization on PPC. */
--    return 0;
--}
--
--static inline
--void arch_monitor_cleanup_domain(struct domain *d)
--{
--    /* No arch-specific domain cleanup on PPC. */
--}
-+#include <asm-generic/monitor.h>
- 
- static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
- {
-diff --git a/xen/include/asm-generic/monitor.h b/xen/include/asm-generic/monitor.h
-new file mode 100644
-index 0000000000..74e4870cd7
---- /dev/null
-+++ b/xen/include/asm-generic/monitor.h
-@@ -0,0 +1,57 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * include/asm-generic/monitor.h
-+ *
-+ * Arch-specific monitor_op domctl handler.
-+ *
-+ * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-+ * Copyright (c) 2016, Bitdefender S.R.L.
-+ *
-+ */
-+
-+#ifndef __ASM_GENERIC_MONITOR_H__
-+#define __ASM_GENERIC_MONITOR_H__
-+
-+#include <xen/errno.h>
-+
-+struct domain;
-+struct xen_domctl_monitor_op;
-+
-+static inline
-+void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
-+{
-+}
-+
-+static inline
-+int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
-+{
-+    /* No arch-specific monitor ops on GENERIC. */
-+    return -EOPNOTSUPP;
-+}
-+
-+int arch_monitor_domctl_event(struct domain *d,
-+                              struct xen_domctl_monitor_op *mop);
-+
-+static inline
-+int arch_monitor_init_domain(struct domain *d)
-+{
-+    /* No arch-specific domain initialization on GENERIC. */
-+    return 0;
-+}
-+
-+static inline
-+void arch_monitor_cleanup_domain(struct domain *d)
-+{
-+    /* No arch-specific domain cleanup on GENERIC. */
-+}
-+
-+#endif /* __ASM_GENERIC_MONITOR_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: BSD
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+-#endif /* __ASM_SOFTIRQ_H__ */
++#endif /* __ASM_GENERIC_SOFTIRQ_H__ */
+ /*
+  * Local variables:
+  * mode: C
 -- 
 2.43.0
 
