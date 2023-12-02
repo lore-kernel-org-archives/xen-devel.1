@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C4CDC10F05
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F04C10F07
 	for <xen-devel@archiver.kernel.org>; Sat,  2 Dec 2023 01:27:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.645835.1008291 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.645828.1008232 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r9Emx-0003LF-Gh; Sat, 02 Dec 2023 01:27:23 +0000
+	id 1r9Emt-00027Z-LP; Sat, 02 Dec 2023 01:27:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 645835.1008291; Sat, 02 Dec 2023 01:27:23 +0000
+Received: by outflank-mailman (output) from mailman id 645828.1008232; Sat, 02 Dec 2023 01:27:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r9Emx-0003K7-46; Sat, 02 Dec 2023 01:27:23 +0000
-Received: by outflank-mailman (input) for mailman id 645835;
- Sat, 02 Dec 2023 01:27:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1r9Emt-00027S-IS; Sat, 02 Dec 2023 01:27:19 +0000
+Received: by outflank-mailman (input) for mailman id 645828;
+ Sat, 02 Dec 2023 01:27:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jVJG=HN=epam.com=prvs=6700ee1bd8=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1r9Emu-000271-OH
- for xen-devel@lists.xenproject.org; Sat, 02 Dec 2023 01:27:20 +0000
-Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
- [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ed77f349-90b1-11ee-9b0f-b553b5be7939;
- Sat, 02 Dec 2023 02:27:17 +0100 (CET)
-Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
- by mx0b-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3B20exWc004068; Sat, 2 Dec 2023 01:27:15 GMT
-Received: from eur02-vi1-obe.outbound.protection.outlook.com
- (mail-vi1eur02lp2040.outbound.protection.outlook.com [104.47.11.40])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3uqt8mg1hm-5
+ id 1r9Ems-000272-8U
+ for xen-devel@lists.xenproject.org; Sat, 02 Dec 2023 01:27:18 +0000
+Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
+ [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ec92fc62-90b1-11ee-98e5-6d05b1d4d9a1;
+ Sat, 02 Dec 2023 02:27:16 +0100 (CET)
+Received: from pps.filterd (m0174678.ppops.net [127.0.0.1])
+ by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3B1NLGv0008549; Sat, 2 Dec 2023 01:27:12 GMT
+Received: from eur03-dba-obe.outbound.protection.outlook.com
+ (mail-dbaeur03lp2169.outbound.protection.outlook.com [104.47.51.169])
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3uqfjgj05q-6
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Sat, 02 Dec 2023 01:27:14 +0000
+ Sat, 02 Dec 2023 01:27:12 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
  by DU0PR03MB8599.eurprd03.prod.outlook.com (2603:10a6:10:3e6::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.27; Sat, 2 Dec
- 2023 01:27:09 +0000
+ 2023 01:27:07 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::8e03:368:1fd7:1822]) by VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::8e03:368:1fd7:1822%6]) with mapi id 15.20.7046.027; Sat, 2 Dec 2023
- 01:27:09 +0000
+ 01:27:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,21 +55,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ed77f349-90b1-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: ec92fc62-90b1-11ee-98e5-6d05b1d4d9a1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bCQtJj4C3OyLvyP07sjtYz/XMAIavCGvgfPgqI078Uw4ifiMe2Ks+WDclK3kAA8fmW54UUckTOzQdf0l8lzcfjY89SmN8z6sl+pgCd9HRA/6UDrpwsC6tUwgaeyXOXq8mVWtMuvkL7wIsnh8I1GablCWsxfDc1+CRUlGOyKWhag6t9QVi5zmFPjPMpoQ2c2Qp77v1sIPhGeRsXH2+z7M2r67U04qM/VseKQl2gZt2Tsch5pSlVioaFbWMbeaT7cMixrDxe/wZ4QipHV9V6NN4Jwd4/FymYiEn/EXyKu5OO+QhgJDvhrwBefjXbi9ElqsulJMsSjakmS9pW/GiVj2gA==
+ b=fNOrBjonGpoY9DN1gCwVwR2d6NwrLJyAara6IXSLX1N5WHxSxrCfy7ZuXI25PS5qO30S8xvMYOEc6g9hc3O41mg91O047itZA8NFTLdxay0HpFAlX8mH2azn7fGnI2DE9biI9Rniu8SyVTo3Cqbu1SSZCtsPY9N2JecLL400Pqk42hK4p/GtB8WTM7cp3insIxEd2tIdx6+I4PGRyXpR8qBJkIlu5lA8d2u1yKR22jnQIAJvbObSaKq+RGUOUpHxLtesg59Dv5DdejCz4EU7RPAgmt9m6QmLxv+SPGXChkkcwMapMTMs3c+gUokWDKAjVDzUA48k8aw5V75KnV0H0A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q3pAsw+LQMW37ya9xY/fsEtMgle4eyEFHTErMj7PTwA=;
- b=UjyMO+dt5QnyuFZ1My3/vv+m+fj4UzGRzGlkr1lOiaKOPtJguC9oKSMvVZBJhMCG8yL6GSyFq81QgJKMdsFpcesFeSQNkmB74gqsjmchQyl0C3eDpcOfm6RHWhm95JDUfB53y1Ogr30MWRncLI0EFchySU3O9nl7xUNUD98ZU6l35O1WwoGiHC8GTOiFnzdwYAuUeFKNuiwFERL6imOm7J94CxNYtuyQRrF6QdL/J9Kh+AJDthNcoa+cs7xKWvkWV7+jRk9kW9kVsFtqO8B6uk4J4tqZYNvdjyppEpptPm7bBpvsLW/p4duIdx9iWGJnSme1jQeoRAzTWruFEbih0A==
+ bh=fCAtQkOh1LlRj3VEXjXrBI42f2r4sRFKlSbnUPHqVJA=;
+ b=BH+U/AlC8xu908Yx+05uXx85l7StqHYXsUWum4OGSKeYcPTF0qQzAs1TbbZACbZQHTOgQZ3z1EJBnBlpVw38cGuDMvI000QHsLorwp55sdHq4NF21OExLgssXuBsF8Zc32oDVAjZE1FktPBzIWNApfjRrXP0Agoles9EJulBBs4vUPI6Fq88PzJfOw1WrTB6NSaplEvMbZaQwWBYsOfRRqVreUBGD+b5LFdalNWM1LVbKldJRJM4kvcURtLFOLtSxfWQ7UoMATBZLMhGqEL8cdNbjOxiswLd826oZyHLqLzgsDLLA4+2OoTl+fvyeSkbyb22D4R83pMdR6b/BgdEcg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q3pAsw+LQMW37ya9xY/fsEtMgle4eyEFHTErMj7PTwA=;
- b=lNrTyzTZs3cOeRQ8SMNKIowGFqODO2etAm86cg3flk9Tz/BppgSo271B3C5/42D3YCCD5JG5edmBFfrkeIlh6eHZlh1NrENsCj2Na8tbYZE+9lPuMXKrMicF8/tjx5zb/Tpo1xiL0m1yQDKHiVjh5ewP6ssyBZ8mRAXQajGjiJaiTxn0XhkiNm8Pi90FGwpo3d2tqOEpfQi/5mw7GseIHs2Lp2BAmmIEhXHwTe2rlOxvujPMEs5g78+PcT8U5X3xUK0Pmwyj6ecXCTvu+3KkCntcTpzTNwzaN65HGDMdp5PT9FjIV1jehRdoqlb/dvbeVhpekjWHBRsk7ntJ8kmLHQ==
+ bh=fCAtQkOh1LlRj3VEXjXrBI42f2r4sRFKlSbnUPHqVJA=;
+ b=J/LuqckK9XcohCSzJGtJvEEQFCu3cPWCBA9fg6MreZWdkXJh71qKm2u1sNXZg0IpCUV9c8HCd5nlrjbzgXSIqKAPZF9LX9Kg+FjfBjWqRmLR4uAyU++adIOrdrbftMhkG8m6Fi/v2Gz0U00SjbdP4X4dZwY+aAxsBbYDJicu1ZLNrNRSAMeeE2+zftUWLdhKMdaHlxWyPV7Ex6kNOTwl07Eqerq31dfWADXJkrCUuX5JDgolcSOwUYBYMzqRAAczqck0AvOgIeGrTjs19WqS3ekXuWpwLj0tiw7XWjcbGt0I8yUPk82u3d7cXZEiPx3po4jj27FLDrubQrXqmO6e4w==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
@@ -78,13 +78,12 @@ CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
         =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
 	<roger.pau@citrix.com>,
         Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v11 12/17] vpci/header: emulate PCI_COMMAND register for
- guests
-Thread-Topic: [PATCH v11 12/17] vpci/header: emulate PCI_COMMAND register for
- guests
-Thread-Index: AQHaJL6pbF2piO+GXk2gsbpguvwtEw==
-Date: Sat, 2 Dec 2023 01:27:05 +0000
-Message-ID: <20231202012556.2012281-13-volodymyr_babchuk@epam.com>
+Subject: [PATCH v11 07/17] vpci/header: implement guest BAR register handlers
+Thread-Topic: [PATCH v11 07/17] vpci/header: implement guest BAR register
+ handlers
+Thread-Index: AQHaJL6oqjV1cLv4e0GmK4Y233LkQA==
+Date: Sat, 2 Dec 2023 01:27:04 +0000
+Message-ID: <20231202012556.2012281-8-volodymyr_babchuk@epam.com>
 References: <20231202012556.2012281-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20231202012556.2012281-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -94,45 +93,45 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.42.0
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|DU0PR03MB8599:EE_
-x-ms-office365-filtering-correlation-id: 7eeb0784-d548-49f3-edaa-08dbf2d5cdcd
+x-ms-office365-filtering-correlation-id: 4096a790-67a7-4017-985c-08dbf2d5cc65
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- 3E8QrFBpn4d2JTFqbXNlmc+7Y5PmnvBKTQWcUZG/y7btkyH54A+cFcPtVBXSJR6yOImji76Nn/miJN2JMoeMWOfT1T3ZWXdUEjai/hbFhT9hbKKaYrDneFHtgVP16JQxTqU2SMKPpmrFV5plS1z8y1YgYR1F6zS2PR3SV8Xe8dsA/LXULHA+fNgkYlXiokvxA0pA+00Z68xsmGdhg1p9F7rcpo6jvjaWMOsUHK3+z3mOd0Lh3PcjC24fjLq9p9bhoRGZTvuPIbn/V9JsSyOGvUbzHZem+zYAZae0kf9/0gObSWNq+fnEqYwzdL5E/tI11NBmHHOrL+q487cTTbKycNilwRjj4QI3HENyCOMYz8CCBfUU18R/yzFyShNG/jQH+S+JAda8Zc+IjnrGtGh+U7UWMFJftFYcuJqhiBs92JniKzWS0uZln0D6WM90aCexM0KIX0tQhdkbObct4GOd/dmZAvrGx6mrWHRwJ2tL5uuf9Ca2VSNwuWL2v8lq5ZmLK9GVrSbksb/KjEyPJf/rr+U9hYOVt2bjX2HqTG3QbAijr1Sm8WykrHTWtcx4k1SHg9GE6WArNIZhyEeZWurih54D1QJKM4HogbfI8b8SH9DrwSl8jSB0LS5cdv0gykde+O62AQAN8+RELsZacs4DGWrsGn9DOdcp1VcejnkGOpo=
+ bZ/mq0D5DD02n0TzDj21sjIrPTrc5BYS8fSHsWsO/PBomx1RvJstm182hO1w/+JDII4pXOJlM2XINppKZQxEezv+wbTSDKhxqx1vvpPEq7t4QaeghGUylzetrILD9eKf07x9nNMF2WO15UP87MOTwMYEdElLCtQw9iAhxlvsxt4n3OeVT3j7krqTSS3MM6sUUz2Vn34FU4npSCMCXAf8Lz7AGehQeg/cC47evwLyOIjlpiU736OyTmCqBGe3R6xnMJhO2sg9nfU4a2MbVUlGXTXU8PJ87+XeMi3zVZV3scfJ6dENAFYriwj8kSPeNC2Mev+vWqgSulBCcFyJgHcMmsOxW6l7L8mimQFVL+LScUQNHvEIxF3vKa3nHcIgQjySSdjrrMQ+mmcrmt2yH7IhymE1c3nOmz9c2Dga5IGqjV+8TXRC9jfIRmrIj+Wzd6WT2FLwcohrEbe9mBqGyxcOd8H1HLZMFX//QLot34Z5oJr7Ke/2yJUJ7Of1Tmrv5Me6BpogTYkmflKpQxnH6L+uqxlX3SN8994d+03jikhgLsVzthNONokwJ+K+EVn1tM+0AHrtdtQYWdtt49WRlag/NKK8aTs7hmvnnEEooHmMu6eKgHObeIYlmRPfipQ17a7u9CIO4YI7DDobKeFYCuxFxwBxFOS1SVCdXPW83JEQsrQ=
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(396003)(39860400002)(346002)(376002)(366004)(230922051799003)(230273577357003)(230173577357003)(186009)(64100799003)(451199024)(1800799012)(5660300002)(86362001)(4326008)(8676002)(8936002)(2906002)(38070700009)(41300700001)(36756003)(2616005)(107886003)(1076003)(6512007)(6506007)(55236004)(83380400001)(6486002)(478600001)(26005)(71200400001)(6666004)(38100700002)(122000001)(316002)(91956017)(54906003)(64756008)(66446008)(6916009)(66476007)(66556008)(76116006)(66946007);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?LFbhjfAeQtPViVq9hvudyKubyzH56K+b0vUaMLbp6E/HmsGzeOFPs8MMj7?=
- =?iso-8859-1?Q?IIJ2F225wxlWQCe5O7XCyXMTJGsU9POIElFhT77Y52xE40AenBP0ViYLws?=
- =?iso-8859-1?Q?ssAjFEQvn7cM1xO2W7xzrE19UN+HwoS32fx+czCcRQjH4CpowhTb71wcOW?=
- =?iso-8859-1?Q?E6+HdvXb2YLN+kLkZv1GqsXcKshEOKgveQkuCRtAQsyRXDRXDkdTcVEpuc?=
- =?iso-8859-1?Q?2Qdg0pRE0YK9cie5kkTttseYAQUhjjwLPSnKrXqqRdUEa/b/YXBsQzNKmk?=
- =?iso-8859-1?Q?nbZmPjXsx94Vla62IlXjQGcDXDvf7kCKm2e6Oe21POX0GepJ5LP4Zr9BQ7?=
- =?iso-8859-1?Q?G5u6760ZfdKk2I1pHicGcw6wUl5s3rc2/oeukRbzXKZdSB7JwbgG/LwVNz?=
- =?iso-8859-1?Q?JAf4t4e/ZjEWZ7ZaABCq4e1ZpJAgdsqKuCiuZmzKjFOnyo7Mmf1fHTTTQ8?=
- =?iso-8859-1?Q?u4kn/LJ7qoN5AIT3heXE2z1SFnfRapTKqCm0yYPc2cTNMwqFbJUEG1xxIc?=
- =?iso-8859-1?Q?kFN00OM1vF3/cEMaxpxDBoKXsLtxjAKR7ZrWi8EcLxyLHbAYkTio5moNEr?=
- =?iso-8859-1?Q?wL5QmADXX9CKVdP18zibJWpKDRk1KkLBD/vbsn1u0v8HIvq7+jyP9xOsHW?=
- =?iso-8859-1?Q?PubVNABm0Han+JeLJPUBl+1HJLYZIDvohnv0xg0gT/PBNLqD/f/nW6QA3z?=
- =?iso-8859-1?Q?OvteMKUGwMuYhFPDVeViFPm0ZpRRp/WjYmMrFvR6+6jZSMkbseVlKjpABB?=
- =?iso-8859-1?Q?490ZX5ueTcxGCqfeAyzmYVSgg/PGMrigtecbMGJ6MNoOmK75YA5FOBk1iW?=
- =?iso-8859-1?Q?EpL5IeYNbD0X2hL8yniQ1lpxBARF96mKjgGRPNCD66toh/iVe5T7l/iWQz?=
- =?iso-8859-1?Q?Z41+h46nksvMdSAkIP7OHzQLAMFLJ4VLwz8abQ1AYr1cX6h14olU1B2IGL?=
- =?iso-8859-1?Q?fXvbnCR8pE2w4HEowo4RdXIfg1XQIQDzKXF9jFYt+RjppvbWPkg+1lz05f?=
- =?iso-8859-1?Q?niA5KVF51CV+tu/olh6pE44AazDozPxz5130LqmbbMBwNV/qGhsEBGZ9Up?=
- =?iso-8859-1?Q?aafHypnhUW68yycvlIl3hrcmVdPUiOtchv4rhDdxrPQEefZFzO/ac1s2Mh?=
- =?iso-8859-1?Q?tjrs8hj6lA9B+baeBRATDXLjB09XZcGj8dF2GXqIb7jSI90/iUTVxVdER7?=
- =?iso-8859-1?Q?MGdll/ttJqss7tvNME8G6rigZDiKNaK6lJXMpvQc9d10UYdEb225asbwyL?=
- =?iso-8859-1?Q?A8dRTmSIeyvg4aNdyvXyGFWbx7dZE60dsa07CKfOQegAsVr41pYk1bWZb0?=
- =?iso-8859-1?Q?/CzI84qFBvQonnDnv2AdxMfw7t19U95kx/wbNBWYzxRqs5VGS6u2WrT6xD?=
- =?iso-8859-1?Q?UT6bgFGr5Fp7U4xp2WUPfUyseMnHIdB/1EhlBag5HrpIuhpHTs3/aq9UcZ?=
- =?iso-8859-1?Q?QakadqKipHVpnP5NNcyUFGz+fDTetW8i48UeZiJlNy7E7HhqUeEBRQ/tf2?=
- =?iso-8859-1?Q?0DocKDi8AkiYrN6ruqmz0L9OSl3rF36ubpGf15ufZBtoU69XrRSfc/n85A?=
- =?iso-8859-1?Q?eV/KIivTMh3XwLc5JHZmH1ijGc7z7cQOuURJGCTikkiYle1cCp0hGH56L0?=
- =?iso-8859-1?Q?gTYPrTCgQszvDhNv1rUtL8FmfXMe2IRKJUx5Ml+8NRK0nL7GfTrWUDUA?=
+ =?iso-8859-1?Q?Htiq+dBpyQVuNr6YzmL/BOobwv5XoY6X8QAQQm3GTyYklzxwMl4QitTh8g?=
+ =?iso-8859-1?Q?pnQzFVCXOOmjf7jxAUASsQaqWSbPMM63nvufSu/OJmsQo8XXP/kCuL796W?=
+ =?iso-8859-1?Q?ymhrskc38JiUMfeGtnV5kBy4hRm1cVOW37iyCiwNWytLx2zBbbyM88IOgL?=
+ =?iso-8859-1?Q?jT7NWN+6s4gf6+VEbvX++4atJbcdNQh+zucmmPcSX1+P9J2AtuH4APFhMf?=
+ =?iso-8859-1?Q?edIUBfpQuUyNHiqNbsTf8Rg5dfkWfBaBAlTyamkEB1Oa1QRh/CeqriMcvg?=
+ =?iso-8859-1?Q?d5fJIkgZeJufkUsgr8sDplces7RZdqJ1Z7HTXhJUOHrvhsbTy5tMvDawXy?=
+ =?iso-8859-1?Q?XAmilu+xhbwtxDRb75VlyIUVxblSx4JgrG7hqOwQAfqtbINRATlxqj+coI?=
+ =?iso-8859-1?Q?CijCAYqWadwzfTaKbzakCH4HfHu5+BGIWlw5Pg2qljB+JS01fHzL4Wtvup?=
+ =?iso-8859-1?Q?Lv965uIvMEyW4R0ewRalGVTvsLq9PLycww5apkQzId76DKo6kk8hMUJY8D?=
+ =?iso-8859-1?Q?0B4qOGIWuIXAcFctuw1TqDTU7AUO08/D28bJNHiqF+72PXK9fbW9S1NfHD?=
+ =?iso-8859-1?Q?ePLUHlIlyk3kgZhFtqoo230pn4jHMRme4RUncQu3/OufS/CKrqAtIqygUM?=
+ =?iso-8859-1?Q?WssLtGCcJXzFiabygOK6YuXX79g2H6AngZO7UuZfsbwq2zGdM+IU4h73NY?=
+ =?iso-8859-1?Q?8uS7bBteH7zdHq3OOEe79k16bwKn5pNxsmR3637rHeJKGFPrD0qJYMdHg0?=
+ =?iso-8859-1?Q?Tq1Khx85TGNyxRS6LnZ0T4R5IiwtQkirbhms0BhzVUu8TC0ajqlBPfu03f?=
+ =?iso-8859-1?Q?uJJp/Tg9qekbN36YQSgzddvFzkZuMv79DKqsQShhj7OB3Pv4SfU1zagho+?=
+ =?iso-8859-1?Q?tJ7kTirJCWeJZ0fdrfEG45BLCRfFq2a125GfHCtKbs0e1tJKei1fTHh6iV?=
+ =?iso-8859-1?Q?9IhmmSVD66+UDGzqBRypy1n/AEfxycJagudOS/OuThSOYwX1XxmwJFdoaT?=
+ =?iso-8859-1?Q?Snzee0pLZdEo/AQYuefvFkv+tEQ/dJQy1HOU6zllCwmPZubEpXBJf/rhAC?=
+ =?iso-8859-1?Q?YgtrAF6WkG5E33+yVc4njFzwhvK21+VvoEGSdZO7oUvA+boAV/fT9Azunj?=
+ =?iso-8859-1?Q?rIDkXnhhSfsRt21kR/v6VE5O181o5k3lD1KbTBoH+q6S6LVABfxLN2tKDb?=
+ =?iso-8859-1?Q?0NEyD4vSu4LkTtWC9YrPEFQy29c6MtMJ5yvbMtg9qRgWXi0FFdTk0W4amJ?=
+ =?iso-8859-1?Q?Y9m+1y93OyQ7WcxLrmplnvwRa+Wm39OQX1P4wmKI/bBlwJfquT/olAPhtG?=
+ =?iso-8859-1?Q?EoNRKr8TwKlTnL1QvoYhhPZyE72N4OnOQnMk9tiip+cjn6koZGZBEOGSm6?=
+ =?iso-8859-1?Q?A0K3+WX5m10dfa8hSdubMZVNpwfQWlwGzWbM0eC0f6PJdKXeRXgBqyvBx3?=
+ =?iso-8859-1?Q?m5bLPxfrjbWPG4IlnaQkO9Xnej3xQXOQ/LRj1GWIWiU1ZSc7tJvOUOxJ2H?=
+ =?iso-8859-1?Q?WQyyAkZ5KQrjdBdXYHkvyAs1daYv9oV0ECh3eExMwdeuU3aJUqKC4O9GxE?=
+ =?iso-8859-1?Q?qd885aMBE5OV0Ol+5Sun3IQx4jFY1BOiLLjWggcdM/7Vgd1YGZlUH4HA/h?=
+ =?iso-8859-1?Q?+GdbKdJno9uPzb2LWpakutau0INxEd6OlckkSvTGLOelA/mHDWpHLJqQ?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -140,293 +139,322 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7eeb0784-d548-49f3-edaa-08dbf2d5cdcd
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Dec 2023 01:27:05.9424
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4096a790-67a7-4017-985c-08dbf2d5cc65
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Dec 2023 01:27:04.5039
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: scQYzCULk6geVBzzqAFkPuaJciwpisnhaDop1ed+LL5jDiOFuXHcwMu4DtPJHVmPju1nOD9Jo9WIp2VexLbdZ64bsV/hhZutt5FQMJV4v3g=
+X-MS-Exchange-CrossTenant-userprincipalname: zdp+vZbn8xdrJiaDy1p0te9QVmS4piHM514fR+wL1/RJpEnFhuhSkt4mE1xrzFSNmVYp6/HDd1ao7krFSNOrr7iZaGYN8FSLMiSbweM/c9g=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB8599
-X-Proofpoint-ORIG-GUID: w3MQhgRcfDnR5a8Ep2nAdKiHh-HfIuWo
-X-Proofpoint-GUID: w3MQhgRcfDnR5a8Ep2nAdKiHh-HfIuWo
+X-Proofpoint-GUID: sCeXfsJgOFqBdcKh-tnc0IaIldpWNxpk
+X-Proofpoint-ORIG-GUID: sCeXfsJgOFqBdcKh-tnc0IaIldpWNxpk
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-12-01_24,2023-11-30_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 bulkscore=0
- phishscore=0 suspectscore=0 impostorscore=0 mlxscore=0 adultscore=0
- malwarescore=0 lowpriorityscore=0 mlxlogscore=999 clxscore=1015
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 phishscore=0
+ lowpriorityscore=0 spamscore=0 clxscore=1015 suspectscore=0
+ impostorscore=0 adultscore=0 bulkscore=0 priorityscore=1501 mlxscore=0
+ mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2311060000 definitions=main-2312020008
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Xen and/or Dom0 may have put values in PCI_COMMAND which they expect
-to remain unaltered. PCI_COMMAND_SERR bit is a good example: while the
-guest's view of this will want to be zero initially, the host having set
-it to 1 may not easily be overwritten with 0, or else we'd effectively
-imply giving the guest control of the bit. Thus, PCI_COMMAND register needs
-proper emulation in order to honor host's settings.
+Add relevant vpci register handlers when assigning PCI device to a domain
+and remove those when de-assigning. This allows having different
+handlers for different domains, e.g. hwdom and other guests.
 
-According to "PCI LOCAL BUS SPECIFICATION, REV. 3.0", section "6.2.2
-Device Control" the reset state of the command register is typically 0,
-so when assigning a PCI device use 0 as the initial state for the guest's v=
-iew
-of the command register.
+Emulate guest BAR register values: this allows creating a guest view
+of the registers and emulates size and properties probe as it is done
+during PCI device enumeration by the guest.
 
-Here is the full list of command register bits with notes about
-emulation, along with QEMU behavior in the same situation:
-
-PCI_COMMAND_IO - QEMU does not allow a guest to change value of this bit
-in real device. Instead it is always set to 1. A guest can write to this
-register, but writes are ignored.
-
-PCI_COMMAND_MEMORY - QEMU behaves exactly as with PCI_COMMAND_IO. In
-Xen case, we handle writes to this bit by mapping/unmapping BAR
-regions. For devices assigned to DomUs, memory decoding will be
-disabled at the initialization.
-
-PCI_COMMAND_MASTER - Allow guest to control it. QEMU passes through
-writes to this bit.
-
-PCI_COMMAND_SPECIAL - Guest can generate special cycles only if it has
-access to host bridge that supports software generation of special
-cycles. In our case guest has no access to host bridges at all. Value
-after reset is 0. QEMU passes through writes of this bit, we will do
-the same.
-
-PCI_COMMAND_INVALIDATE - Allows "Memory Write and Invalidate" commands
-to be generated. It requires additional configuration via Cacheline
-Size register. We are not emulating this register right now and we
-can't expect guest to properly configure it. QEMU "emulates" access to
-Cachline Size register by ignoring all writes to it. QEMU passes through
-writes of PCI_COMMAND_INVALIDATE bit, we will do the same.
-
-PCI_COMMAND_VGA_PALETTE - Enable VGA palette snooping. QEMU passes
-through writes of this bit, we will do the same.
-
-PCI_COMMAND_PARITY - Controls how device response to parity
-errors. QEMU ignores writes to this bit, we will do the same.
-
-PCI_COMMAND_WAIT - Reserved. Should be 0, but QEMU passes
-through writes of this bit, so we will do the same.
-
-PCI_COMMAND_SERR - Controls if device can assert SERR. QEMU ignores
-writes to this bit, we will do the same.
-
-PCI_COMMAND_FAST_BACK - Optional bit that allows fast back-to-back
-transactions. It is configured by firmware, so we don't want guest to
-control it. QEMU ignores writes to this bit, we will do the same.
-
-PCI_COMMAND_INTX_DISABLE - Disables INTx signals. If MSI(X) is
-enabled, device is prohibited from asserting INTx as per
-specification. Value after reset is 0. In QEMU case, it checks of INTx
-was mapped for a device. If it is not, then guest can't control
-PCI_COMMAND_INTX_DISABLE bit. In our case, we prohibit a guest to
-change value of this bit if MSI(X) is enabled.
+All empty, IO and ROM BARs for guests are emulated by returning 0 on
+reads and ignoring writes: this BARs are special with this respect as
+their lower bits have special meaning, so returning default ~0 on read
+may confuse guest OS.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
-
-It is better to rework this patch using new register handling tools
-that Stewart Hildenbrand upstreaming right now.
-
 In v11:
-- Fix copy-paste mistake: vpci->msi should be vpci->msix
-- Handle PCI_COMMAND_IO
-- Fix condition for disabling INTx in the MSI-X code
-- Show domU changes to only allowed bits
-- Show PCI_COMMAND_MEMORY write only after P2M was altered
-- Update comments in the code
+- Access guest_addr after adjusting for MEM64_HI bar in
+guest_bar_write()
+- guest bar handlers renamed and now  _mem_ part to denote
+that they are handling only memory BARs
+- refuse to update guest BAR address if BAR is enabled
 In v10:
-- Added cf_check attribute to guest_cmd_read
-- Removed warning about non-zero cmd
-- Updated comment MSI code regarding disabling INTX
-- Used ternary operator in vpci_add_register() call
-- Disable memory decoding for DomUs in init_bars()
+- ull -> ULL to be MISRA-compatbile
+- Use PAGE_OFFSET() instead of combining with ~PAGE_MASK
+- Set type of empty bars to VPCI_BAR_EMPTY
 In v9:
-- Reworked guest_cmd_read
-- Added handling for more bits
+- factored-out "fail" label introduction in init_bars()
+- replaced #ifdef CONFIG_X86 with IS_ENABLED()
+- do not pass bars[i] to empty_bar_read() handler
+- store guest's BAR address instead of guests BAR register view
 Since v6:
-- fold guest's logic into cmd_write
-- implement cmd_read, so we can report emulated INTx state to guests
-- introduce header->guest_cmd to hold the emulated state of the
-  PCI_COMMAND register for guests
+- unify the writing of the PCI_COMMAND register on the
+  error path into a label
+- do not introduce bar_ignore_access helper and open code
+- s/guest_bar_ignore_read/empty_bar_read
+- update error message in guest_bar_write
+- only setup empty_bar_read for IO if !x86
 Since v5:
-- add additional check for MSI-X enabled while altering INTX bit
-- make sure INTx disabled while guests enable MSI/MSI-X
+- make sure that the guest set address has the same page offset
+  as the physical address on the host
+- remove guest_rom_{read|write} as those just implement the default
+  behaviour of the registers not being handled
+- adjusted comment for struct vpci.addr field
+- add guest handlers for BARs which are not handled and will otherwise
+  return ~0 on read and ignore writes. The BARs are special with this
+  respect as their lower bits have special meaning, so returning ~0
+  doesn't seem to be right
+Since v4:
+- updated commit message
+- s/guest_addr/guest_reg
 Since v3:
-- gate more code on CONFIG_HAS_MSI
-- removed logic for the case when MSI/MSI-X not enabled
+- squashed two patches: dynamic add/remove handlers and guest BAR
+  handler implementation
+- fix guest BAR read of the high part of a 64bit BAR (Roger)
+- add error handling to vpci_assign_device
+- s/dom%pd/%pd
+- blank line before return
+Since v2:
+- remove unneeded ifdefs for CONFIG_HAS_VPCI_GUEST_SUPPORT as more code
+  has been eliminated from being built on x86
+Since v1:
+ - constify struct pci_dev where possible
+ - do not open code is_system_domain()
+ - simplify some code3. simplify
+ - use gdprintk + error code instead of gprintk
+ - gate vpci_bar_{add|remove}_handlers with CONFIG_HAS_VPCI_GUEST_SUPPORT,
+   so these do not get compiled for x86
+ - removed unneeded is_system_domain check
+ - re-work guest read/write to be much simpler and do more work on write
+   than read which is expected to be called more frequently
+ - removed one too obvious comment
 ---
- xen/drivers/vpci/header.c | 53 ++++++++++++++++++++++++++++++++++++---
- xen/drivers/vpci/msi.c    |  6 +++++
- xen/drivers/vpci/msix.c   |  5 ++++
- xen/include/xen/vpci.h    |  3 +++
- 4 files changed, 64 insertions(+), 3 deletions(-)
+ xen/drivers/vpci/header.c | 135 +++++++++++++++++++++++++++++++++-----
+ xen/include/xen/vpci.h    |   3 +
+ 2 files changed, 122 insertions(+), 16 deletions(-)
 
 diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 21b3fb5579..bc2ebe125b 100644
+index e6a1d58c42..43216429d9 100644
 --- a/xen/drivers/vpci/header.c
 +++ b/xen/drivers/vpci/header.c
-@@ -167,6 +167,9 @@ static void modify_decoding(const struct pci_dev *pdev,=
- uint16_t cmd,
-     if ( !rom_only )
-     {
-         pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
-+        /* Show DomU that we updated P2M */
-+        header->guest_cmd &=3D ~PCI_COMMAND_MEMORY;
-+        header->guest_cmd =3D (val & PCI_COMMAND_MEMORY);
-         header->bars_mapped =3D map;
-     }
-     else
-@@ -518,14 +521,40 @@ static int modify_bars(const struct pci_dev *pdev, ui=
-nt16_t cmd, bool rom_only)
-     return 0;
+@@ -477,6 +477,75 @@ static void cf_check bar_write(
+     pci_conf_write32(pdev->sbdf, reg, val);
  }
 =20
-+/* TODO: Add proper emulation for all bits of the command register. */
- static void cf_check cmd_write(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t cmd, void *data=
-)
- {
-     struct vpci_header *header =3D data;
-=20
-+    if ( !is_hardware_domain(pdev->domain) )
++static void cf_check guest_mem_bar_write(const struct pci_dev *pdev,
++                                         unsigned int reg, uint32_t val,
++                                         void *data)
++{
++    struct vpci_bar *bar =3D data;
++    bool hi =3D false;
++    uint64_t guest_addr;
++
++    if ( bar->type =3D=3D VPCI_BAR_MEM64_HI )
 +    {
-+        const struct vpci *vpci =3D pdev->vpci;
-+        uint16_t excluded =3D PCI_COMMAND_PARITY | PCI_COMMAND_SERR |
-+            PCI_COMMAND_FAST_BACK | PCI_COMMAND_IO;
-+
-+        if ( (vpci->msi && vpci->msi->enabled) ||
-+             (vpci->msix && vpci->msix->enabled) )
-+            excluded |=3D PCI_COMMAND_INTX_DISABLE;
-+
-+        cmd &=3D ~excluded;
-+
-+        /*
-+         * Show guest that we allowed it to change bits that are not
-+         * immediately excluded. Do not show change to
-+         * PCI_COMMAND_MEMORY bit till we finish with P2M
-+         */
-+        header->guest_cmd =3D (header->guest_cmd &
-+                             (excluded | PCI_COMMAND_MEMORY)) |
-+            (cmd & ~PCI_COMMAND_MEMORY);
-+
-+        cmd |=3D pci_conf_read16(pdev->sbdf, reg) & excluded;
++        ASSERT(reg > PCI_BASE_ADDRESS_0);
++        bar--;
++        hi =3D true;
++    }
++    else
++    {
++        val &=3D PCI_BASE_ADDRESS_MEM_MASK;
 +    }
 +
-     /*
-      * Let Dom0 play with all the bits directly except for the memory
--     * decoding one.
-+     * decoding one. Bits that are not allowed for DomU are already
-+     * handled above.
-      */
-     if ( header->bars_mapped !=3D !!(cmd & PCI_COMMAND_MEMORY) )
-         /*
-@@ -539,6 +568,14 @@ static void cf_check cmd_write(
-         pci_conf_write16(pdev->sbdf, reg, cmd);
- }
-=20
-+static uint32_t cf_check guest_cmd_read(
-+    const struct pci_dev *pdev, unsigned int reg, void *data)
-+{
-+    const struct vpci_header *header =3D data;
++    guest_addr =3D bar->guest_addr;
++    guest_addr &=3D ~(0xffffffffULL << (hi ? 32 : 0));
++    guest_addr |=3D (uint64_t)val << (hi ? 32 : 0);
 +
-+    return header->guest_cmd;
++    /* Allow guest to size BAR correctly */
++    guest_addr &=3D ~(bar->size - 1);
++
++    /*
++     * Xen only cares whether the BAR is mapped into the p2m, so allow BAR
++     * writes as long as the BAR is not mapped into the p2m.
++     */
++    if ( bar->enabled )
++    {
++        /* If the value written is the current one avoid printing a warnin=
+g. */
++        if ( guest_addr !=3D bar->guest_addr )
++            gprintk(XENLOG_WARNING,
++                    "%pp: ignored guest BAR %zu write while mapped\n",
++                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
++        return;
++    }
++    bar->guest_addr =3D guest_addr;
 +}
 +
- static void cf_check bar_write(
++static uint32_t cf_check guest_mem_bar_read(const struct pci_dev *pdev,
++                                            unsigned int reg, void *data)
++{
++    const struct vpci_bar *bar =3D data;
++    uint32_t reg_val;
++
++    if ( bar->type =3D=3D VPCI_BAR_MEM64_HI )
++    {
++        ASSERT(reg > PCI_BASE_ADDRESS_0);
++        bar--;
++        return bar->guest_addr >> 32;
++    }
++
++    reg_val =3D bar->guest_addr;
++    reg_val |=3D bar->type =3D=3D VPCI_BAR_MEM32 ? PCI_BASE_ADDRESS_MEM_TY=
+PE_32 :
++                                             PCI_BASE_ADDRESS_MEM_TYPE_64;
++    reg_val |=3D bar->prefetchable ? PCI_BASE_ADDRESS_MEM_PREFETCH : 0;
++
++    return reg_val;
++}
++
++static uint32_t cf_check empty_bar_read(const struct pci_dev *pdev,
++                                        unsigned int reg, void *data)
++{
++    return 0;
++}
++
+ static void cf_check rom_write(
      const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data=
 )
  {
-@@ -755,8 +792,9 @@ static int cf_check init_bars(struct pci_dev *pdev)
-     }
+@@ -537,6 +606,7 @@ static int cf_check init_bars(struct pci_dev *pdev)
+     struct vpci_header *header =3D &pdev->vpci->header;
+     struct vpci_bar *bars =3D header->bars;
+     int rc;
++    bool is_hwdom =3D is_hardware_domain(pdev->domain);
 =20
-     /* Setup a handler for the command register. */
--    rc =3D vpci_add_register(pdev->vpci, vpci_hw_read16, cmd_write, PCI_CO=
-MMAND,
--                           2, header);
-+    rc =3D vpci_add_register(pdev->vpci,
-+                           is_hwdom ? vpci_hw_read16 : guest_cmd_read,
-+                           cmd_write, PCI_COMMAND, 2, header);
-     if ( rc )
-         return rc;
+     ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
 =20
-@@ -768,6 +806,15 @@ static int cf_check init_bars(struct pci_dev *pdev)
-     if ( cmd & PCI_COMMAND_MEMORY )
-         pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd & ~PCI_COMMAND_MEMOR=
-Y);
+@@ -578,8 +648,11 @@ static int cf_check init_bars(struct pci_dev *pdev)
+         if ( i && bars[i - 1].type =3D=3D VPCI_BAR_MEM64_LO )
+         {
+             bars[i].type =3D VPCI_BAR_MEM64_HI;
+-            rc =3D vpci_add_register(pdev->vpci, vpci_hw_read32, bar_write=
+, reg,
+-                                   4, &bars[i]);
++            rc =3D vpci_add_register(pdev->vpci,
++                                   is_hwdom ? vpci_hw_read32 :
++                                                        guest_mem_bar_read=
+,
++                                   is_hwdom ? bar_write : guest_mem_bar_wr=
+ite,
++                                   reg, 4, &bars[i]);
+             if ( rc )
+                 goto fail;
 =20
-+    /*
-+     * Clear PCI_COMMAND_MEMORY for DomUs, so they will always start with
-+     * memory decoding disabled and to ensure that we will not call modify=
-_bars()
-+     * at the end of this function.
-+     */
-+    if ( !is_hwdom )
-+        cmd &=3D ~ (PCI_COMMAND_MEMORY | PCI_COMMAND_IO);
-+    header->guest_cmd =3D cmd;
+@@ -590,6 +663,14 @@ static int cf_check init_bars(struct pci_dev *pdev)
+         if ( (val & PCI_BASE_ADDRESS_SPACE) =3D=3D PCI_BASE_ADDRESS_SPACE_=
+IO )
+         {
+             bars[i].type =3D VPCI_BAR_IO;
++            if ( !IS_ENABLED(CONFIG_X86) && !is_hwdom )
++            {
++                rc =3D vpci_add_register(pdev->vpci, empty_bar_read, NULL,
++                                       reg, 4, NULL);
++                if ( rc )
++                    goto fail;
++            }
 +
-     for ( i =3D 0; i < num_bars; i++ )
-     {
-         uint8_t reg =3D PCI_BASE_ADDRESS_0 + i * 4;
-diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
-index 6ff71e5f9a..6cfa9aea00 100644
---- a/xen/drivers/vpci/msi.c
-+++ b/xen/drivers/vpci/msi.c
-@@ -70,6 +70,12 @@ static void cf_check control_write(
-=20
-         if ( vpci_msi_arch_enable(msi, pdev, vectors) )
-             return;
-+
-+        /*
-+         * Make sure domU doesn't enable INTx while enabling MSI.
-+         */
-+        if ( !is_hardware_domain(pdev->domain) )
-+            pci_intx(pdev, false);
-     }
-     else
-         vpci_msi_arch_disable(msi, pdev);
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index b6abab47ef..2aa2833160 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -97,6 +97,7 @@ static void cf_check control_write(
-         for ( i =3D 0; i < msix->max_entries; i++ )
-             if ( !msix->entries[i].masked && msix->entries[i].updated )
-                 update_entry(&msix->entries[i], pdev, i);
-+
-     }
-     else if ( !new_enabled && msix->enabled )
-     {
-@@ -135,6 +136,10 @@ static void cf_check control_write(
+             continue;
          }
+         if ( (val & PCI_BASE_ADDRESS_MEM_TYPE_MASK) =3D=3D
+@@ -606,6 +687,15 @@ static int cf_check init_bars(struct pci_dev *pdev)
+         if ( size =3D=3D 0 )
+         {
+             bars[i].type =3D VPCI_BAR_EMPTY;
++
++            if ( !is_hwdom )
++            {
++                rc =3D vpci_add_register(pdev->vpci, empty_bar_read, NULL,
++                                       reg, 4, NULL);
++                if ( rc )
++                    goto fail;
++            }
++
+             continue;
+         }
+=20
+@@ -613,28 +703,41 @@ static int cf_check init_bars(struct pci_dev *pdev)
+         bars[i].size =3D size;
+         bars[i].prefetchable =3D val & PCI_BASE_ADDRESS_MEM_PREFETCH;
+=20
+-        rc =3D vpci_add_register(pdev->vpci, vpci_hw_read32, bar_write, re=
+g, 4,
+-                               &bars[i]);
++        rc =3D vpci_add_register(pdev->vpci,
++                               is_hwdom ? vpci_hw_read32 : guest_mem_bar_r=
+ead,
++                               is_hwdom ? bar_write : guest_mem_bar_write,
++                               reg, 4, &bars[i]);
+         if ( rc )
+             goto fail;
      }
 =20
-+    /* Make sure domU doesn't enable INTx while enabling MSI-X. */
-+    if ( new_enabled && !msix->enabled && !is_hardware_domain(pdev->domain=
-) )
-+        pci_intx(pdev, false);
-+
-     msix->masked =3D new_masked;
-     msix->enabled =3D new_enabled;
+-    /* Check expansion ROM. */
+-    rc =3D pci_size_mem_bar(pdev->sbdf, rom_reg, &addr, &size, PCI_BAR_ROM=
+);
+-    if ( rc > 0 && size )
++    if ( is_hwdom )
+     {
+-        struct vpci_bar *rom =3D &header->bars[num_bars];
++        rc =3D pci_size_mem_bar(pdev->sbdf, rom_reg, &addr, &size, PCI_BAR=
+_ROM);
++        if ( rc > 0 && size )
++        {
++            struct vpci_bar *rom =3D &header->bars[num_bars];
 =20
+-        rom->type =3D VPCI_BAR_ROM;
+-        rom->size =3D size;
+-        rom->addr =3D addr;
+-        header->rom_enabled =3D pci_conf_read32(pdev->sbdf, rom_reg) &
+-                              PCI_ROM_ADDRESS_ENABLE;
++            rom->type =3D VPCI_BAR_ROM;
++            rom->size =3D size;
++            rom->addr =3D addr;
++            header->rom_enabled =3D pci_conf_read32(pdev->sbdf, rom_reg) &
++                                  PCI_ROM_ADDRESS_ENABLE;
+=20
+-        rc =3D vpci_add_register(pdev->vpci, vpci_hw_read32, rom_write, ro=
+m_reg,
+-                               4, rom);
++            rc =3D vpci_add_register(pdev->vpci, vpci_hw_read32, rom_write=
+,
++                                   rom_reg, 4, rom);
++            if ( rc )
++                rom->type =3D VPCI_BAR_EMPTY;
++        }
++    }
++    else
++    {
++        /* TODO: Check expansion ROM, we do not handle ROM for guests for =
+now */
++        header->bars[num_bars].type =3D VPCI_BAR_EMPTY;
++        rc =3D vpci_add_register(pdev->vpci, empty_bar_read, NULL,
++                               rom_reg, 4, NULL);
+         if ( rc )
+-            rom->type =3D VPCI_BAR_EMPTY;
++            goto fail;
+     }
+=20
+     return (cmd & PCI_COMMAND_MEMORY) ? modify_bars(pdev, cmd, false) : 0;
 diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index c39fab4832..a50dad6968 100644
+index 75cfb532ee..2028f2151f 100644
 --- a/xen/include/xen/vpci.h
 +++ b/xen/include/xen/vpci.h
-@@ -87,6 +87,9 @@ struct vpci {
-         } bars[PCI_HEADER_NORMAL_NR_BARS + 1];
-         /* At most 6 BARS + 1 expansion ROM BAR. */
-=20
-+        /* Guest (domU only) view of the PCI_COMMAND register. */
-+        uint16_t guest_cmd;
-+
-         /*
-          * Store whether the ROM enable bit is set (doesn't imply ROM BAR
-          * is mapped into guest p2m) if there's a ROM BAR on the device.
+@@ -67,7 +67,10 @@ struct vpci {
+     struct vpci_header {
+         /* Information about the PCI BARs of this device. */
+         struct vpci_bar {
++            /* Physical (host) address. */
+             uint64_t addr;
++            /* Guest address. */
++            uint64_t guest_addr;
+             uint64_t size;
+             enum {
+                 VPCI_BAR_EMPTY,
 --=20
 2.42.0
 
