@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF423C10DC1
-	for <xen-devel@archiver.kernel.org>; Sat,  2 Dec 2023 01:27:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.645841.1008350 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8FA4C07E97
+	for <xen-devel@archiver.kernel.org>; Sat,  2 Dec 2023 01:27:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.645843.1008370 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r9En4-0005Am-GZ; Sat, 02 Dec 2023 01:27:30 +0000
+	id 1r9En7-0005up-Nq; Sat, 02 Dec 2023 01:27:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 645841.1008350; Sat, 02 Dec 2023 01:27:30 +0000
+Received: by outflank-mailman (output) from mailman id 645843.1008370; Sat, 02 Dec 2023 01:27:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1r9En3-00058M-Sz; Sat, 02 Dec 2023 01:27:29 +0000
-Received: by outflank-mailman (input) for mailman id 645841;
- Sat, 02 Dec 2023 01:27:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1r9En7-0005t8-Ef; Sat, 02 Dec 2023 01:27:33 +0000
+Received: by outflank-mailman (input) for mailman id 645843;
+ Sat, 02 Dec 2023 01:27:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jVJG=HN=epam.com=prvs=6700ee1bd8=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1r9En1-000272-K5
- for xen-devel@lists.xenproject.org; Sat, 02 Dec 2023 01:27:27 +0000
-Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f243ff3b-90b1-11ee-98e5-6d05b1d4d9a1;
- Sat, 02 Dec 2023 02:27:25 +0100 (CET)
-Received: from pps.filterd (m0174678.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3B1NLGv4008549; Sat, 2 Dec 2023 01:27:16 GMT
-Received: from eur03-dba-obe.outbound.protection.outlook.com
- (mail-dbaeur03lp2169.outbound.protection.outlook.com [104.47.51.169])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3uqfjgj05q-10
+ id 1r9En3-000271-C4
+ for xen-devel@lists.xenproject.org; Sat, 02 Dec 2023 01:27:29 +0000
+Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
+ [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f3c1fae9-90b1-11ee-9b0f-b553b5be7939;
+ Sat, 02 Dec 2023 02:27:27 +0100 (CET)
+Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
+ by mx0b-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3B20exWd004068; Sat, 2 Dec 2023 01:27:16 GMT
+Received: from eur02-vi1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02lp2040.outbound.protection.outlook.com [104.47.11.40])
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3uqt8mg1hm-6
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Sat, 02 Dec 2023 01:27:15 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
  by DU0PR03MB8599.eurprd03.prod.outlook.com (2603:10a6:10:3e6::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.27; Sat, 2 Dec
- 2023 01:27:11 +0000
+ 2023 01:27:10 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::8e03:368:1fd7:1822]) by VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::8e03:368:1fd7:1822%6]) with mapi id 15.20.7046.027; Sat, 2 Dec 2023
- 01:27:11 +0000
+ 01:27:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,21 +55,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f243ff3b-90b1-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: f3c1fae9-90b1-11ee-9b0f-b553b5be7939
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eB4bd+G5qUD75eQXMR/lOkFVQEOzoQ5eKGuoPzBsWir2qx7GHtukzxUwADNZtGDG+UmF+FWK3daHfJCuXfn+HiseQ3n/0EU4P3dIyeL95VoL+gGwgmhpyjEvW8k2W6hUdcK5O12/hjqewdi3m/tnn4Lix+WLlNF5wG3o35s4QZ3p93TKqBzhqjsCo7tIvw0aZLKlXoEzanULa5wXnvkJ8hWGwtCrbjDdzjXo/zRrYHk4jC7KsYK1NByJ9vKnmgFzh/no3/yg23U97acQWh92pYwihksmVWeQ94zBo3oqxVB34Df5MQKvohw7lUuEf6PDWuNkIkN2q5MFYdMkVWXAEQ==
+ b=Gcz2fapa26LFQAmG1I8hVtDYK9jALeWrZB4DOZdt0BzwvqgvCrF8Olrnm/zYHQJYdQavkfEKsjUl8nD69BlsGUmoRpz6fPaU8zJbI4LENuIxaQw2Y5FauB4qrDIN6+YAIK2rC3K255dwKplyuwO7DADfST4HjfrlOAsiAHKIWPIx3UW/y+SpkEJRajVshOAclC3uqNZ9XMhbZXaHdy7srIisr4EsTSpOsi1mYT7uBpvJMr4cluX8/3SZHfuUZTYuJeRUKXEleUs5uOwZGvCQEFTT2R52Vo4cL3RB40Bdi+mCmah3sz6iJEZniLfRVczHIx+I5L46JL8b21KObiLcQQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=22ltegJ1p7Qot1PJ9ShhvDH8ZaJL6Qo1XKi3VZAv5vo=;
- b=a00GlAtIWWE1HPHzPyWKQHaqSTEc+DeDbtSdWUpYNPgofTixJMAKF8n+qYpoEU2keqQRPcJDjzxMjMwTvWM5xt6n3CREwQ6VwP4u6bxdo7aovD9XL+3WvVxYQXueLR7Yxx3fSbsqSkQ3VrJ5PdAM8c0sEUHoFLK0GDixgnAVjmY7fLwCx3YArYMW7wqFZeQcBYIKD19/txSUFb2zndPb2yHXLyBwpmM/+yETGH0T0ijpH4OKAOr0VknWytxGMBUqVr/uZAnipjm+7dEkjU9FGs5bOWoWdq8An6OqAqDvSDP4jg+biCWZeOHkDorGMirvBDUPX/cPELv2wRMJ1RJIRg==
+ bh=PbQ7MUIQ2IkedJNUm+tfwIF8ti84wzB5RJbUQkThnyY=;
+ b=ZOaHy6KqIy72HdGYkLM32Ielp1BvC4Tsm75c6fEywoLdFK+NRPTQUORF80D9Fo8aQoaNQvnOneKI7+Fa/wJnvST/UwY9T3CXObSI9qkPfMnklyCAd2Fk7INwYRCUVmTvr9n9/KNfI8VBCcfPB8gDk0S5QaJ+o71aBUbowbovUdLBz8V6w8hP+lm8OIXysqzfbPwO2FgqiEeXdiyHokoN5MfyIC4gB9hP3uqbcMCf0OZpP/muKaftGESsPFupathe3EMFOXvg7bJxCvrtQoH8dmrtaFQxqPBkLkp8McXFV7sOmdrx6TfrEQJ1dDrSjfO83xvsvGWBoIjH6ai/MBPg+A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=22ltegJ1p7Qot1PJ9ShhvDH8ZaJL6Qo1XKi3VZAv5vo=;
- b=K/a4cXricBvqbwuH5aFCGNR/d5bLAS5NHDy/mULx7lwCWK3aluRhm9ZlQFRcceEWBKrfjz5VTbx4bbDAc9xYhLEsADL8HnLJDUiMWTuAkgY9YkSP1sceVTAVdkiiNlh97ma1RWvEmU7txdVVcou9/XCgG0GjTyjBGCBaUPQpszD0XspmI+ifgRUaLWoYcYYQ35Hn6oTidY20DAW0fYfJf8fQMln2G9TZF+lyD2GjptWDUTyJLubJCiIrhcqYZg5xsMgxkdl1jrCdHX8XgG/4JDoI2NlJWHQoRaEc9xZXtQdBQaH7+YDgGTvU0Lf0wOMX1mxyq/UHMNi4KSKJgq/5bA==
+ bh=PbQ7MUIQ2IkedJNUm+tfwIF8ti84wzB5RJbUQkThnyY=;
+ b=dVVclVNkDLNX0e+t0qzaDqyjPucNs51ccJWSxjvYg9EQDB+XZMTNc+GfPiKNyD9hzzZc14CReKXHxXFQ86vYj+j4wWWWviV3tfTUdG/7Soif2aDp99wFtPTWAVIT0o7IjNjbeRpt19v30Kqukz0HpQ1BQuxSlaj3na47W3sKi3jZjY+Iowl969AZQT9zccpd9v6dDww2Jkl37DR8P19/Zb/p2uDF2IsBDe2dQkfo0kVHCUFqaCKZzo/It4ZAfY8uApjgcIYfV92o23CR0mA3mfZ/8rrUbDa+9gRui71EaibxzV5XZkVgyvz5fHIeb2YewOoMPwFeRG84Z+opv657uw==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
@@ -83,14 +83,16 @@ CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
         Michal Orzel <michal.orzel@amd.com>,
         Volodymyr
  Babchuk <Volodymyr_Babchuk@epam.com>,
-        Julien Grall <jgrall@amazon.com>,
+        =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>,
         Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v11 15/17] xen/arm: account IO handlers for emulated PCI MSI-X
-Thread-Topic: [PATCH v11 15/17] xen/arm: account IO handlers for emulated PCI
- MSI-X
-Thread-Index: AQHaJL6p9eGZ4W17RUGnV1K8Sgg+4w==
-Date: Sat, 2 Dec 2023 01:27:07 +0000
-Message-ID: <20231202012556.2012281-16-volodymyr_babchuk@epam.com>
+Subject: [PATCH v11 14/17] xen/arm: translate virtual PCI bus topology for
+ guests
+Thread-Topic: [PATCH v11 14/17] xen/arm: translate virtual PCI bus topology
+ for guests
+Thread-Index: AQHaJL6pGDTUzUqjcE21xonM3gZpjA==
+Date: Sat, 2 Dec 2023 01:27:06 +0000
+Message-ID: <20231202012556.2012281-15-volodymyr_babchuk@epam.com>
 References: <20231202012556.2012281-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20231202012556.2012281-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -100,45 +102,45 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.42.0
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|DU0PR03MB8599:EE_
-x-ms-office365-filtering-correlation-id: 28609c78-400e-4876-6c4d-08dbf2d5ce9b
+x-ms-office365-filtering-correlation-id: 1b72d35d-ceaf-452c-688b-08dbf2d5ce5b
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- BLmX9YE5PDVxL2tS9RtMDUPBEInubQi8eTN8Rlw2p83ZtYKxLnh2rtpIteDIG+Y+ACXeBs7Bg3pFI1Tq19P43g4TIiBHzCBxixmo5cCOcB8Zi83N0FL+jzsNRJQ7sVvrXKsbgItdmx+/L/L6620yU9l2SqJVTckbvut+QVKfU2+b7rJoUdMVkilszsfwXiOcP2F4yXkcHcVYGOQQwAMBOW9wrlFj0Eqt//CCorAvSMe/tk8MFZ9D6jOEvWaHWYEaEvW46zt68yVIIgj9L7C7Vv36Oy4d7eKlVfwqFoVseE2SfFUzdQ/bBXS0vupi6B2wrjiRKTpzYaACYiHczuvWYrcDLULZHBNzetQMQE+rLFSKRzuuq7xzvJqdJKcRittxxeP8gMBfktbEp4DldqYA7ebsxxS9m4ayVAjWZHsuEFNsDQGJM0ZM/D5nMprjMi9ld3vN1uSSI+3pDvjTt8HMZbLTj5v9qU9Wsm9Ef/84XNkyddLFI677Q7RXt5fwxOXQ4N/KA0QDDooU1qKUoHzmMh1BrEAdvipEeLLeD5BAybRJUOkbrR/nvK+OJAxydqiM2/ASMl6ejoUuhic6LOqdCZ05H/937BGV68knZij64BCvkDOsIKCJToRfBirJlR8T
+ BhuAiKPS14c6DzpW49cSHpSn4xRJopWjveOMY2wYYQpBy/o+AL/sVgoiE/5U2Ii90JDQyG7KyBfOcAZrMSkU2IIRPOm8yFalVv1JXU421cBpoi7OAPIaCgPiLDutPbQDo4Dmot7UT0EBEYTP0MEfdMT+0tvkrbrrM1OZ36zPsBSSshvEpkVHPNk19aYjg3zaAGxGBSwiDAYZNAedf3SA8m9CsU3PCY1QAI7e6knB6A+LFLMLUvoNkyiisZKoUC4TmX0zyrabVUqDnT3ZX1PKUZa4qNecPMoJVyLN/XJJU2tXuEmt9JijJq8u5EpoOGQwJdiLaYOqgHdgkmOlFtlFB3W43fw1bQFHTWCjP/dnOlDK2iDVkAEOQtcJ7GZAJBHC3siwr/Da43Cx0EUg4t+bkr7ZrHg+VhsHOqayryidOrBOjlQrpxM46ptM36p3o/0tAD1+CfIU8+E/iCL/Lm1BKyhbHfAMRumhJSe6K89ob/3QmsQS4pOpCYgY8Bf9wH8uMn+uhO64shFUTcQtLfkqg7ceSSzROjQ2gdD5U8DFxS6A7zw5Wh9x92DSfbs2hCCG+M3GGj4V12dL/OASQ2xyaV9ZdD6XG5P+uvOXTJJ2Se28L3Dij11DzfOlqtWZOGHg
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(396003)(39860400002)(346002)(376002)(366004)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(5660300002)(86362001)(66899024)(4326008)(8676002)(8936002)(2906002)(15650500001)(38070700009)(41300700001)(36756003)(2616005)(107886003)(1076003)(6512007)(6506007)(55236004)(83380400001)(6486002)(478600001)(26005)(71200400001)(6666004)(38100700002)(122000001)(316002)(91956017)(54906003)(64756008)(66446008)(6916009)(66476007)(66556008)(76116006)(66946007);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(396003)(39860400002)(346002)(376002)(366004)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(5660300002)(86362001)(4326008)(8676002)(8936002)(2906002)(38070700009)(41300700001)(36756003)(2616005)(107886003)(1076003)(6512007)(6506007)(55236004)(83380400001)(6486002)(478600001)(26005)(71200400001)(6666004)(38100700002)(122000001)(316002)(91956017)(54906003)(64756008)(66446008)(6916009)(66476007)(66556008)(76116006)(66946007);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?WcsZYxn3QwWqbDQbQvvMMAJ1lCmdikKYzToszdgjOzmLZjUnckXb6iLpUJ?=
- =?iso-8859-1?Q?oXiYOChFeQDTELUO0CpM6Khe1wflXa4MnQP+KsM0/f5T/FM/1GUtsR4Ohr?=
- =?iso-8859-1?Q?y9DciP7fahj0jTk/ufRG6vyldkUe/DcBJaI5PG1vVrz0ESoXGS0V/wQKE+?=
- =?iso-8859-1?Q?emF1NuKORw+c29GGMPTJ7+zcoXt1Gimp7Eku4Kel8JukEs3aiJoAP0Gt3k?=
- =?iso-8859-1?Q?Xw5zjgyVnoWgca689XjdiRh3lUjovBzeZsThtDLAhi3OXyO+Apl8veoa6/?=
- =?iso-8859-1?Q?LV6l0r/h4PzJ/NOwwPNdYDMz4/izur1ygXFbNs0nAeZ2xOL6LhK8rYA00e?=
- =?iso-8859-1?Q?oUVxZZxjeL7UdZXxUS897vFM80w5jmZ9FQFuNSz33yTpfIe3X/3C5VYq95?=
- =?iso-8859-1?Q?UCXwgw0eAyawGkdqVAX601ahSjUCb54+hpmZdFQhBvLRi38a/G3CKDeTMA?=
- =?iso-8859-1?Q?/vH9AG/ND0x3+WYFMZUf+m59zO1+fZZvsk/LrUaMK/+YgghuE4/LE8qPdD?=
- =?iso-8859-1?Q?RDeEZkXlvYHCy/DNuxDx4JUFEekfYX2QesTHNbuqQiTlYPGWTfMgXt558V?=
- =?iso-8859-1?Q?faEnFz118vAeUJrvGwParkv57f8QeSieGnd/u8XqLSiWsfHx6NtgnL4NbS?=
- =?iso-8859-1?Q?jTXijVv1MIfGo0yBeVlTQgowInLW0i1o9kLm+YGchogxFa8WZc5xpvI0yF?=
- =?iso-8859-1?Q?uTRviuh9MtXTt+YEL3WlenVkoFkVeg5kK+oRk0rS+kv/NWJOb+mL9EEKEM?=
- =?iso-8859-1?Q?bqdACHPaDYrUbTaTqXJkv38O4te7MpQEREvkqsmzmM1Ud5hyc4bm8Q+s4J?=
- =?iso-8859-1?Q?kzevR4hzlOI7v3CExz1+9xFVCdwkWYk10NOb8oFikg/NRAmMs4oSItszcL?=
- =?iso-8859-1?Q?biUaKFh5EmFP3Rys57+FfLyJDPRiJG1I8hprfLTysReN+sjiQZunv82wH9?=
- =?iso-8859-1?Q?QfsPORBEoz7DgAFuVRbdeDoaNXgiU3zh7r6X+q1q0VY8N8I3Aa/7fWQMr3?=
- =?iso-8859-1?Q?VJA6eOJEzCFijUrmQmHpdUY0nqkhtctSbXt8Po1XikR/MWhCoZGv9rihPu?=
- =?iso-8859-1?Q?Z5Rn9AB7b+Z9CjeDl+X8Y1d2DwgZhBR2DfFZCSd752vj3khwbLHxPiP+PL?=
- =?iso-8859-1?Q?R0+DtWKBkIe1JgLlNGHVYebwbRtlvHLBGGbWtOes6xbAlaWNWIXkz+lh83?=
- =?iso-8859-1?Q?EbB896mPwPgguej4yv1da2MqA1DG/wI/X3JAXFpTzkT+nXsvu1teyN97Vm?=
- =?iso-8859-1?Q?SotWkvAJgEuiXZ5E55DHvULJ06mgs6L9dTIFcw/UjAKBNGF8VkRwEGCE9z?=
- =?iso-8859-1?Q?haje3O+//cGXimtGJRRLW1AMxJdTrWhGZnWDWwMSAGnQvyA/Hndiuf6M3A?=
- =?iso-8859-1?Q?KCYX4wj1EpXBkQ+Sb/CFKp4Wq9d6oJ4NKDTrOzJgKHy57iI9GPJDbwdLCx?=
- =?iso-8859-1?Q?jzrBGPJqOgWdzr4PcMXeQ3cYJBRPKn0P8C49FS3PgnsIYsQxUTPeHWv57F?=
- =?iso-8859-1?Q?w/Ml9yiqZlknUXIzRvRkkZ2iv3gxacwcRBNDScRy+5gjSJp1YGZp5p2c1+?=
- =?iso-8859-1?Q?+ouDNyZqLIOdDqa3F/sxhWkGGMLqHZ7oLKFZp/I2V9z3F2kkBHkfCar2fK?=
- =?iso-8859-1?Q?XCeDVHoSrD5LRyV89be/nSPgAPQlP5AgzqlDP/G2pN+ens9B2vv53Pyw?=
+ =?iso-8859-1?Q?it+ETn2n+fRtJW4vDkVaBTAvTPCMdx8wT7Im1tREvpvA+6LEeo3rDWyhvL?=
+ =?iso-8859-1?Q?qFh4FhFrotTRr5bIZrsKThjttwpYKiXCrUzZr/aJxDZmi3QMW0+UuN4c1n?=
+ =?iso-8859-1?Q?p3DDmxO09TEuiHR6MwM8f9UqRhKNYJgH1r78+OXfklKSBsYP+0z597I+Tk?=
+ =?iso-8859-1?Q?UfNM6r0CFlSjF6Y6t3kIdR3Sw4PF5MnSrpa2sUoWMOzWYY+eCm4Fraacxc?=
+ =?iso-8859-1?Q?oMRW38Wxo+KxIizRyrnQtmrfGTd50v64pdPrF8oj9tjGQ/8hU5N8m6rD7u?=
+ =?iso-8859-1?Q?SI1PoBa9YpfLyaVFJshfcnlQD9cI7w2Qq6lwsqfodtme6UaZ1j4ZDdKLfa?=
+ =?iso-8859-1?Q?HKd+tDxyXq6DtU/ed20Fijv0nwyVG2GUNfbjS4WRdz4KctUW2cpOKQ99hc?=
+ =?iso-8859-1?Q?K5eBKTLJLciahnBPHlW6SvtBKPo/QpCp0grEPBThOr50dbYqavtUTxU6Ty?=
+ =?iso-8859-1?Q?ElT/ABzb1fRP7S/AwJZTHu5bXH5D+BRsTiJnxzfQus3cUJckkE/pAhchi/?=
+ =?iso-8859-1?Q?VQa4XwpJmK+qagYXFZjU7pJGwr0+qrWJug7Ok/iNh1AzjrI/iZueUWoZxo?=
+ =?iso-8859-1?Q?LjFKgh5lFVaelyKAa8vl8ThUOHjyio4E132SWCgtzfh+YeIKuBa5dWd/qI?=
+ =?iso-8859-1?Q?Aah1fVtcy5jEcMHma1K6tG6ZayJQiKA0iD0vKDjJxqNVhO9ZWZbjlLBRrl?=
+ =?iso-8859-1?Q?N1qWJPFP4OVXJgjqUO0fOgbqnOIvFAsX0wA6sXBm5PFzbMCezZ9GW/kUbs?=
+ =?iso-8859-1?Q?9GsgSx/XB8P8U5HRLufPdxbxkBZGhxIQSsWinSuAKS9bgzMgOvcYU2Qu4v?=
+ =?iso-8859-1?Q?u5ofBi0olre+fcSos+fkR0hYtmNLJu18XDZwruv4l4Rwj2d/eW1pemhi3O?=
+ =?iso-8859-1?Q?LO0QyItrcKYdDGRybJ91zM9jD/b3TMn/gtcmIpFuuYnZZKp7DjuwZCXmSU?=
+ =?iso-8859-1?Q?ETs1zW7W2OD4FWzTgsV1h4f1Zvnwntayl2HbKde54eC6uY7Fy9yOjLx2Cw?=
+ =?iso-8859-1?Q?B80M/2JaX/F1faZacsNs4EcvZsjxEGmlRX7QSy2IQOUi22RXw9bjotFxFL?=
+ =?iso-8859-1?Q?6UQmMMgaAMgqF5L7QqRHGQKzXPodyrZEgIAdGiCUrrtL65Dfxh1jh01qMx?=
+ =?iso-8859-1?Q?TUu3IzqyG/hVrxE0KOHPQC/5cf3srHX09O7G0Pd07nZBnw943KPOVQuTMb?=
+ =?iso-8859-1?Q?YY6HbVFtFHPWjjArLtR4sISfakAoBC7EAMGCRsHCtWvkhZpaXn6sTNDxUz?=
+ =?iso-8859-1?Q?uucUX0e/qAQxtz1aiJRgrD4Bl+KX65/Iq8zItNyLp3OWOHxIEWsFp0wPGE?=
+ =?iso-8859-1?Q?FuA716ARwBUfAIz5uxUDYciNPvBHehkuDvCzQfwCbzmpCC+gOdR6+0IUsN?=
+ =?iso-8859-1?Q?G87ce8ZFHIeh8r7CeM0FkjMRWc0tXO2FVRtMhBP7lk5On6U/kMLL28Mh9N?=
+ =?iso-8859-1?Q?IpWP9whH+5I2/QU+ge99gxSfHKwz44lNCqngsvi5eHUhxdcX517gwm3cub?=
+ =?iso-8859-1?Q?0vVZ1sMq9ZFRdfbztoJBJEUjn0Hc3LySJRI6uZDatSpbwMRDwM1r8+xtBg?=
+ =?iso-8859-1?Q?OmSDP8mhFYEa0nWeJdvXlt82kss3PI8jBvPgYLaMUJ7x1EtUt4VCGd+JCF?=
+ =?iso-8859-1?Q?tEG6amar+ZTTg+mq7RmQnAG6GIBqp+P/kUk3zr7aKsyte+XYE7F3tNwA?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -146,80 +148,234 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 28609c78-400e-4876-6c4d-08dbf2d5ce9b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Dec 2023 01:27:07.1866
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b72d35d-ceaf-452c-688b-08dbf2d5ce5b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Dec 2023 01:27:06.4593
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 8HnUlaeCbebl0Qk5tIhOKyMGqB2hKDCA1eLKpRlYNDuftGtfHM3s6XMSTXqQ/DBw1OOzmaJtvTyCqwk63/wz8UsLYpwto+Ac2y+VjuqoHus=
+X-MS-Exchange-CrossTenant-userprincipalname: sfLpyYgFxmli5SNiqjaGvaNs4tATJklytmbXrCI3WYMkzJHot/fv8gf8IOpIbBOnuA8lWAGCafTQmNIcLvjAW3tMQIujyGTIFt30dcphYjQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB8599
-X-Proofpoint-GUID: _pKyBxUJvXrRlOj-gNFJXZ5EHgRpb6yz
-X-Proofpoint-ORIG-GUID: _pKyBxUJvXrRlOj-gNFJXZ5EHgRpb6yz
+X-Proofpoint-ORIG-GUID: HMiYs3pK8hazm7EO0Zwij9s3iT339YZz
+X-Proofpoint-GUID: HMiYs3pK8hazm7EO0Zwij9s3iT339YZz
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-12-01_24,2023-11-30_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 phishscore=0
- lowpriorityscore=0 spamscore=0 clxscore=1011 suspectscore=0
- impostorscore=0 adultscore=0 bulkscore=0 priorityscore=1501 mlxscore=0
- mlxlogscore=404 classifier=spam adjust=0 reason=mlx scancount=1
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 bulkscore=0
+ phishscore=0 suspectscore=0 impostorscore=0 mlxscore=0 adultscore=0
+ malwarescore=0 lowpriorityscore=0 mlxlogscore=999 clxscore=1015
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2311060000 definitions=main-2312020008
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-At the moment, we always allocate an extra 16 slots for IO handlers
-(see MAX_IO_HANDLER). So while adding IO trap handlers for the emulated
-MSI-X registers we need to explicitly tell that we have additional IO
-handlers, so those are accounted.
+There are three  originators for the PCI configuration space access:
+1. The domain that owns physical host bridge: MMIO handlers are
+there so we can update vPCI register handlers with the values
+written by the hardware domain, e.g. physical view of the registers
+vs guest's view on the configuration space.
+2. Guest access to the passed through PCI devices: we need to properly
+map virtual bus topology to the physical one, e.g. pass the configuration
+space access to the corresponding physical devices.
+3. Emulated host PCI bridge access. It doesn't exist in the physical
+topology, e.g. it can't be mapped to some physical host bridge.
+So, all access to the host bridge itself needs to be trapped and
+emulated.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-
 ---
-This actually moved here from the part 2 of the prep work for PCI
-passthrough on Arm as it seems to be the proper place for it.
-
+In v11:
+- Fixed format issues
+- Added ASSERT_UNREACHABLE() to the dummy implementation of
+vpci_translate_virtual_device()
+- Moved variable in vpci_sbdf_from_gpa(), now it is easier to follow
+the logic in the function
+Since v9:
+- Commend about required lock replaced with ASSERT()
+- Style fixes
+- call to vpci_translate_virtual_device folded into vpci_sbdf_from_gpa
+Since v8:
+- locks moved out of vpci_translate_virtual_device()
+Since v6:
+- add pcidevs locking to vpci_translate_virtual_device
+- update wrt to the new locking scheme
 Since v5:
-- optimize with IS_ENABLED(CONFIG_HAS_PCI_MSI) since VPCI_MAX_VIRT_DEV is
-  defined unconditionally
-New in v5
+- add vpci_translate_virtual_device for #ifndef CONFIG_HAS_VPCI_GUEST_SUPPO=
+RT
+  case to simplify ifdefery
+- add ASSERT(!is_hardware_domain(d)); to vpci_translate_virtual_device
+- reset output register on failed virtual SBDF translation
+Since v4:
+- indentation fixes
+- constify struct domain
+- updated commit message
+- updates to the new locking scheme (pdev->vpci_lock)
+Since v3:
+- revisit locking
+- move code to vpci.c
+Since v2:
+ - pass struct domain instead of struct vcpu
+ - constify arguments where possible
+ - gate relevant code with CONFIG_HAS_VPCI_GUEST_SUPPORT
+New in v2
 ---
- xen/arch/arm/vpci.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ xen/arch/arm/vpci.c     | 47 +++++++++++++++++++++++++++++++----------
+ xen/drivers/vpci/vpci.c | 24 +++++++++++++++++++++
+ xen/include/xen/vpci.h  | 12 +++++++++++
+ 3 files changed, 72 insertions(+), 11 deletions(-)
 
 diff --git a/xen/arch/arm/vpci.c b/xen/arch/arm/vpci.c
-index 7a6a0017d1..348ba0fbc8 100644
+index 3bc4bb5508..7a6a0017d1 100644
 --- a/xen/arch/arm/vpci.c
 +++ b/xen/arch/arm/vpci.c
-@@ -130,6 +130,8 @@ static int vpci_get_num_handlers_cb(struct domain *d,
+@@ -7,31 +7,51 @@
 =20
- unsigned int domain_vpci_get_num_mmio_handlers(struct domain *d)
+ #include <asm/mmio.h>
+=20
+-static pci_sbdf_t vpci_sbdf_from_gpa(const struct pci_host_bridge *bridge,
+-                                     paddr_t gpa)
++static bool vpci_sbdf_from_gpa(struct domain *d,
++                               const struct pci_host_bridge *bridge,
++                               paddr_t gpa, pci_sbdf_t *sbdf)
  {
-+    unsigned int count;
+-    pci_sbdf_t sbdf;
++    bool translated =3D true;
 +
-     if ( !has_vpci(d) )
-         return 0;
++    ASSERT(sbdf);
 =20
-@@ -150,7 +152,17 @@ unsigned int domain_vpci_get_num_mmio_handlers(struct =
-domain *d)
-      * For guests each host bridge requires one region to cover the
-      * configuration space. At the moment, we only expose a single host br=
-idge.
-      */
--    return 1;
-+    count =3D 1;
-+
-+    /*
-+     * There's a single MSI-X MMIO handler that deals with both PBA
-+     * and MSI-X tables per each PCI device being passed through.
-+     * Maximum number of emulated virtual devices is VPCI_MAX_VIRT_DEV.
-+     */
-+    if ( IS_ENABLED(CONFIG_HAS_PCI_MSI) )
-+        count +=3D VPCI_MAX_VIRT_DEV;
-+
-+    return count;
+     if ( bridge )
+     {
+-        sbdf.sbdf =3D VPCI_ECAM_BDF(gpa - bridge->cfg->phys_addr);
+-        sbdf.seg =3D bridge->segment;
+-        sbdf.bus +=3D bridge->cfg->busn_start;
++        sbdf->sbdf =3D VPCI_ECAM_BDF(gpa - bridge->cfg->phys_addr);
++        sbdf->seg =3D bridge->segment;
++        sbdf->bus +=3D bridge->cfg->busn_start;
+     }
+     else
+-        sbdf.sbdf =3D VPCI_ECAM_BDF(gpa - GUEST_VPCI_ECAM_BASE);
++    {
++        /*
++         * For the passed through devices we need to map their virtual SBD=
+F
++         * to the physical PCI device being passed through.
++         */
++        sbdf->sbdf =3D VPCI_ECAM_BDF(gpa - GUEST_VPCI_ECAM_BASE);
++        read_lock(&d->pci_lock);
++        translated =3D vpci_translate_virtual_device(d, sbdf);
++        read_unlock(&d->pci_lock);
++    }
+=20
+-    return sbdf;
++    return translated;
  }
+=20
+ static int vpci_mmio_read(struct vcpu *v, mmio_info_t *info,
+                           register_t *r, void *p)
+ {
+     struct pci_host_bridge *bridge =3D p;
+-    pci_sbdf_t sbdf =3D vpci_sbdf_from_gpa(bridge, info->gpa);
++    pci_sbdf_t sbdf;
+     /* data is needed to prevent a pointer cast on 32bit */
+     unsigned long data;
+=20
++    ASSERT(!bridge =3D=3D !is_hardware_domain(v->domain));
++
++    if ( !vpci_sbdf_from_gpa(v->domain, bridge, info->gpa, &sbdf) )
++    {
++        *r =3D ~0UL;
++        return 1;
++    }
++
+     if ( vpci_ecam_read(sbdf, ECAM_REG_OFFSET(info->gpa),
+                         1U << info->dabt.size, &data) )
+     {
+@@ -39,7 +59,7 @@ static int vpci_mmio_read(struct vcpu *v, mmio_info_t *in=
+fo,
+         return 1;
+     }
+=20
+-    *r =3D ~0ul;
++    *r =3D ~0UL;
+=20
+     return 0;
+ }
+@@ -48,7 +68,12 @@ static int vpci_mmio_write(struct vcpu *v, mmio_info_t *=
+info,
+                            register_t r, void *p)
+ {
+     struct pci_host_bridge *bridge =3D p;
+-    pci_sbdf_t sbdf =3D vpci_sbdf_from_gpa(bridge, info->gpa);
++    pci_sbdf_t sbdf;
++
++    ASSERT(!bridge =3D=3D !is_hardware_domain(v->domain));
++
++    if ( !vpci_sbdf_from_gpa(v->domain, bridge, info->gpa, &sbdf) )
++        return 1;
+=20
+     return vpci_ecam_write(sbdf, ECAM_REG_OFFSET(info->gpa),
+                            1U << info->dabt.size, r);
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index c92f2d7bc3..7c0b610ccc 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -77,6 +77,30 @@ static int add_virtual_device(struct pci_dev *pdev)
+     return 0;
+ }
+=20
++/*
++ * Find the physical device which is mapped to the virtual device
++ * and translate virtual SBDF to the physical one.
++ */
++bool vpci_translate_virtual_device(const struct domain *d, pci_sbdf_t *sbd=
+f)
++{
++    const struct pci_dev *pdev;
++
++    ASSERT(!is_hardware_domain(d));
++    ASSERT(rw_is_locked(&d->pci_lock));
++
++    for_each_pdev ( d, pdev )
++    {
++        if ( pdev->vpci && (pdev->vpci->guest_sbdf.sbdf =3D=3D sbdf->sbdf)=
+ )
++        {
++            /* Replace guest SBDF with the physical one. */
++            *sbdf =3D pdev->sbdf;
++            return true;
++        }
++    }
++
++    return false;
++}
++
+ #endif /* CONFIG_HAS_VPCI_GUEST_SUPPORT */
+=20
+ void vpci_deassign_device(struct pci_dev *pdev)
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 6a06267ef2..ec6598237b 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -294,6 +294,18 @@ static inline bool __must_check vpci_process_pending(s=
+truct vcpu *v)
+ }
+ #endif
+=20
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++bool vpci_translate_virtual_device(const struct domain *d, pci_sbdf_t *sbd=
+f);
++#else
++static inline bool vpci_translate_virtual_device(const struct domain *d,
++                                                 pci_sbdf_t *sbdf)
++{
++    ASSERT_UNREACHABLE();
++
++    return false;
++}
++#endif
++
+ #endif
 =20
  /*
 --=20
