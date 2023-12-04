@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16054C4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Dec 2023 09:36:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.646665.1009151 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7188C4167B
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Dec 2023 09:39:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.646668.1009161 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rA5NK-0007FP-Kn; Mon, 04 Dec 2023 09:36:26 +0000
+	id 1rA5QR-0000EY-2Q; Mon, 04 Dec 2023 09:39:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 646665.1009151; Mon, 04 Dec 2023 09:36:26 +0000
+Received: by outflank-mailman (output) from mailman id 646668.1009161; Mon, 04 Dec 2023 09:39:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rA5NK-0007FI-IB; Mon, 04 Dec 2023 09:36:26 +0000
-Received: by outflank-mailman (input) for mailman id 646665;
- Mon, 04 Dec 2023 09:36:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rA5QQ-0000ER-W7; Mon, 04 Dec 2023 09:39:38 +0000
+Received: by outflank-mailman (input) for mailman id 646668;
+ Mon, 04 Dec 2023 09:39:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZlsO=HP=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rA5NJ-0007E0-Fj
- for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 09:36:25 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 973438b6-9288-11ee-98e5-6d05b1d4d9a1;
- Mon, 04 Dec 2023 10:36:24 +0100 (CET)
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2c9ef682264so21311751fa.3
- for <xen-devel@lists.xenproject.org>; Mon, 04 Dec 2023 01:36:24 -0800 (PST)
+ id 1rA5QP-0000EL-Al
+ for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 09:39:37 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 08c6a262-9289-11ee-9b0f-b553b5be7939;
+ Mon, 04 Dec 2023 10:39:35 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-50be8ced3ddso1799900e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Dec 2023 01:39:35 -0800 (PST)
 Received: from [192.168.220.211] ([94.75.70.14])
  by smtp.gmail.com with ESMTPSA id
- r8-20020a2eb888000000b002ca0a5dc73csm126553ljp.9.2023.12.04.01.36.23
+ b13-20020a0565120b8d00b0050aa4c50590sm1209224lfv.128.2023.12.04.01.39.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Dec 2023 01:36:23 -0800 (PST)
+ Mon, 04 Dec 2023 01:39:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,85 +47,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 973438b6-9288-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: 08c6a262-9289-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701682584; x=1702287384; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1701682774; x=1702287574; darn=lists.xenproject.org;
         h=mime-version:user-agent:content-transfer-encoding:references
          :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=ad7pck1T9sE2nfwaXcbJmSqne45ZquNKOpGjXndxcOQ=;
-        b=ZIscmDR6mjKjzkhGcVFGkl3frJmEA2tAToKtFSbquDrIbIu2wFeG2BSSaq7W/SiFcb
-         t8KZWDrO/FGpRFcV0NleL2gyNao0HW/q+jo42Vf3ryN47lj1ZqNZNCSLusVFEeJZU9Ew
-         PAawVRG/ShEp4rtveOVR8tmzuXaGmHQ7Oae/PdnH3PsFCybgqpVu4oYlshQuzNFMvHNe
-         YHeLdt4V5UMdVtLyL2HToRBOA7x8OmL7z4U9ILkuBq0G0BequAfh2VMJ9tSnjczPEAa+
-         2ly6YN0lIvkDh0h5c21YhC4gb1dYv5mE4sNacllVx6SHSPgrUL5URpBM0rYUhmW6ioyQ
-         kbOQ==
+        bh=aBMA8H0kuDQmGVp/jDoERKw0CVGK2B210u9LQOw/Yg8=;
+        b=LvNryooIoSY3WTsUgjavEzrvNL77LUa4SHe0eJO48R41UG/Bd77kygbF5GwAIDPved
+         ShMicv/KNcsrY30uIKgl+kkF0QXCfIC5rSZjd344VPqvcFvqBo/f9cOVidfHak4x1bVT
+         AQC2CKGoew39zgT4Nb3dRYi35KAo5llhIk1TANxOyAobWfqgkYNBZLG0O5s1OTxY3nFO
+         gpE8B5QsaV3h72V7s/JBwelJFCxHrr/qxBh3dfPMMB1z0p6o/byf6zQw/vIYq+pCv7VU
+         7q7X2xZAu/yikW6Exz/b5UnCwIpgRaAK2eNREsPqLWccXGvW1JZIJ7vyccvjHi6jbAbG
+         60Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701682584; x=1702287384;
+        d=1e100.net; s=20230601; t=1701682774; x=1702287574;
         h=mime-version:user-agent:content-transfer-encoding:references
          :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=ad7pck1T9sE2nfwaXcbJmSqne45ZquNKOpGjXndxcOQ=;
-        b=w/xJahqnkvXsH+DD79ITqYZMm76vvdjJDBLgA7/SQOZyOvGkxf1eqmT1UQrrAej4Wr
-         cqk8vvcM28kBcDcDKnsWpzCl7o9c1P/lml4NAcsTSAYqzQodFwYCopZWsbrGDKj5c/SG
-         5snucY10+ez4EuJ0ccZQquk6GVtQIwm9PEn35T8WmMK0qGeW9H8ZMwr4o/KEQAtYBMzZ
-         lhMftfIaVRQZUsP04gWd0lD05lKKf5G2TOTAxhs/Zsx1vf1PKXMjT3IClMCdeIMWAY4G
-         eOFbBUeM/MIxW/YAl71bBXAqTCKWGEgPVlO3lE52Mq6QXdMAyCbOXC4e3Y+SDxPloVuL
-         lN2A==
-X-Gm-Message-State: AOJu0YxGFhDtsuHnDwiBVFiHs9KwQdif0wbYm1VZzYKU6O8dtJJsWIxc
-	Dm+1pVU8lVdIkNdbH/It0Z0=
-X-Google-Smtp-Source: AGHT+IHcb0H7xWlkiggJCqwhGlxgcfpERsmILcoEjbPpsv2ns23RpgB3XeG5lS4AjpGHDn/dr5jXcw==
-X-Received: by 2002:a2e:9803:0:b0:2ca:c96:f4b with SMTP id a3-20020a2e9803000000b002ca0c960f4bmr179851ljj.51.1701682583828;
-        Mon, 04 Dec 2023 01:36:23 -0800 (PST)
-Message-ID: <e995e0394b4f638c421603ae01590543316f8456.camel@gmail.com>
-Subject: Re: [PATCH v5 6/7] xen/asm-generic: ifdef inclusion of
- <asm/mem_access.h>
+        bh=aBMA8H0kuDQmGVp/jDoERKw0CVGK2B210u9LQOw/Yg8=;
+        b=jY1pWiE5PIxLp6SAXf+FlaBFYpN/mYopTWTxZREWDpf3BUbZcBPYyTgTTLgulT6FF+
+         Als4MaiW1JPiGLlOp6yo/yYtwGuX4aDvbgBcRvE6GHGfrr2MaWZGuBKm92G9gueDj5jZ
+         KWClTE/LjGUTazCHc2kg1ETt8LZbXNn47XO0IGNrfRjFeva0RAy/PHVtEITYES4O3d01
+         XrA43vYJk0ixr2lm/h7hJ077w6PNCZ7/cjrm7Jp4Dxys0IuFlzbzso/SRJSqtEG1+kiO
+         tcPIvMrzgeivY7BvNyDLqgWfWZuNfxee7KvIrPh//k58Cg76dVtPbFMDCOjTT4t5pjVk
+         bfBQ==
+X-Gm-Message-State: AOJu0YxTPesXfMBcsI5vgcDMzt0sytyzeD+Dwm0rmOR/iqlut3We1une
+	q9CFwhBi4YRliHD7saARQoQ=
+X-Google-Smtp-Source: AGHT+IHl0Q8Q9weOYwAFkJXH/Q82Rd404rlmLhOXzFYFz8RGHjg5R0fDhg1VVnt0MP/FHYTqnC9mLQ==
+X-Received: by 2002:ac2:5382:0:b0:50b:e693:ee20 with SMTP id g2-20020ac25382000000b0050be693ee20mr1197894lfh.31.1701682774418;
+        Mon, 04 Dec 2023 01:39:34 -0800 (PST)
+Message-ID: <74222b30ec0ab589b18f97032bc8074023c89e2b.camel@gmail.com>
+Subject: Re: [PATCH v5 5/7] xen: ifdef inclusion of <asm/grant_table.h> in
+ <xen/grant_table.h>
 From: Oleksii <oleksii.kurochko@gmail.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
  <julien@xen.org>,  Bertrand Marquis <bertrand.marquis@arm.com>, Michal
  Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
  <Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, Tamas K
- Lengyel <tamas@tklengyel.com>,  Alexandru Isaila <aisaila@bitdefender.com>,
- Petre Pircalabu <ppircalabu@bitdefender.com>, Shawn Anastasio
- <sanastasio@raptorengineering.com>, xen-devel@lists.xenproject.org
-Date: Mon, 04 Dec 2023 11:36:22 +0200
-In-Reply-To: <14d0c19e-2a40-4669-aaf5-ad1bfc8b77fc@suse.com>
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, Shawn
+ Anastasio <sanastasio@raptorengineering.com>, xen-devel@lists.xenproject.org
+Date: Mon, 04 Dec 2023 11:39:33 +0200
+In-Reply-To: <050a57f5-7c04-4b4a-848d-fd2f0993a9a7@suse.com>
 References: <cover.1701453087.git.oleksii.kurochko@gmail.com>
-	 <d42a34866edc70a12736b5c6976aa1b44b4ebd8a.1701453087.git.oleksii.kurochko@gmail.com>
-	 <14d0c19e-2a40-4669-aaf5-ad1bfc8b77fc@suse.com>
+	 <cdc20255540a66ba0b6946ac6d48c11029cd3385.1701453087.git.oleksii.kurochko@gmail.com>
+	 <050a57f5-7c04-4b4a-848d-fd2f0993a9a7@suse.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.50.1 (3.50.1-1.fc39) 
 MIME-Version: 1.0
 
-On Mon, 2023-12-04 at 09:46 +0100, Jan Beulich wrote:
+On Mon, 2023-12-04 at 09:41 +0100, Jan Beulich wrote:
 > On 01.12.2023 21:48, Oleksii Kurochko wrote:
+> > Ifdef-ing inclusion of <asm/grant_table.h> allows to avoid
+> > generation of empty <asm/grant_table.h> for cases when
+> > CONFIG_GRANT_TABLE is not enabled.
+> >=20
+> > The following changes were done for Arm:
+> > <asm/grant_table.h> should be included directly because it contains
+> > gnttab_dom0_frames() macros which is unique for Arm and is used in
+> > arch/arm/domain_build.c.
+> > <asm/grant_table.h> is #ifdef-ed with CONFIG_GRANT_TABLE in
+> > <xen/grant_table.h> so in case of !CONFIG_GRANT_TABLE
+> > gnttab_dom0_frames
+> > won't be available for use in arch/arm/domain_build.c.
+> >=20
+> > Suggested-by: Jan Beulich <jbeulich@suse.com>
+>=20
+> Not really, no: In particular ...
+>=20
 > > --- a/xen/common/Kconfig
 > > +++ b/xen/common/Kconfig
-> > @@ -87,7 +87,7 @@ config MEM_ACCESS_ALWAYS_ON
-> > =C2=A0config MEM_ACCESS
-> > =C2=A0	def_bool MEM_ACCESS_ALWAYS_ON
-> > =C2=A0	prompt "Memory Access and VM events" if
-> > !MEM_ACCESS_ALWAYS_ON
-> > -	depends on HVM
-> > +	depends on HVM && (ARM || X86)
+> > @@ -15,6 +15,7 @@ config CORE_PARKING
+> > =C2=A0config GRANT_TABLE
+> > =C2=A0	bool "Grant table support" if EXPERT
+> > =C2=A0	default y
+> > +	depends on ARM || X86
 >=20
-> While - unlike for GRANT_TABLE - I view going this route as an
-> option, I
-> still think it wants doing without explicitly naming architectures
-> here.
-> There wants to be a HAS_MEM_ACCESS, selected by Arm's Kconfig and by
-> MEM_ACCESS_ALWAYS_ON (which in turn x86 selects). This could then
-> also
-> replace the HVM dependency here - x86 ought to select
-> MEM_ACCESS_ALWAYS_ON
-> only when HVM is enabled.
-Thanks.
+> ... this I explicitly said I consider wrong to add.
+Then I misunderstood you.
 
-It will be definetely better to introduce HAS_MEM_ACCESS.
+What about to do the same as with MEM_ACCESS config and introduce
+HAS_GRANT_TABLE?
 
+Or would it be better just update "depends on" to !RISCV && !PPC?
 
 ~ Oleksii
 
