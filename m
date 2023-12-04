@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1543CC10F05
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D81C4167B
 	for <xen-devel@archiver.kernel.org>; Mon,  4 Dec 2023 09:43:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.646679.1009218 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.646681.1009242 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rA5Tx-00042f-2e; Mon, 04 Dec 2023 09:43:17 +0000
+	id 1rA5Tz-0004jo-20; Mon, 04 Dec 2023 09:43:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 646679.1009218; Mon, 04 Dec 2023 09:43:17 +0000
+Received: by outflank-mailman (output) from mailman id 646681.1009242; Mon, 04 Dec 2023 09:43:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rA5Tw-00042C-Sm; Mon, 04 Dec 2023 09:43:16 +0000
-Received: by outflank-mailman (input) for mailman id 646679;
- Mon, 04 Dec 2023 09:43:15 +0000
+	id 1rA5Ty-0004ih-T0; Mon, 04 Dec 2023 09:43:18 +0000
+Received: by outflank-mailman (input) for mailman id 646681;
+ Mon, 04 Dec 2023 09:43:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uft2=HP=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rA5Tu-0003MS-VC
- for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 09:43:14 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
+ id 1rA5Tx-0003MS-VT
+ for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 09:43:17 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8abe08a9-9289-11ee-9b0f-b553b5be7939;
- Mon, 04 Dec 2023 10:43:13 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40c0e37cfafso1939595e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 04 Dec 2023 01:43:13 -0800 (PST)
+ id 8c9171d0-9289-11ee-9b0f-b553b5be7939;
+ Mon, 04 Dec 2023 10:43:16 +0100 (CET)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3333b46f26aso1602431f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Dec 2023 01:43:16 -0800 (PST)
 Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- jg23-20020a05600ca01700b0040b30be6244sm14376982wmb.24.2023.12.04.01.43.11
+ d7-20020a05600c3ac700b0040b632f31d2sm9370573wms.5.2023.12.04.01.43.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Dec 2023 01:43:11 -0800 (PST)
+ Mon, 04 Dec 2023 01:43:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,41 +46,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8abe08a9-9289-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 8c9171d0-9289-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1701682992; x=1702287792; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1701682995; x=1702287795; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uhvbsGVggmpzL6VhFDTXJNRWZSL+PUA9PR1Ri8iXGLA=;
-        b=CliS9MysGcFD0fTcqL/ZY5smT34J9ksrIrzqr5q94/gJXy2oU8Mzq7lVp0EogdMQGC
-         eyIOI8NoY37snuQAYv/E/77IzGHiDKnsHkAfCnRhTA2oeqVB7C63OMyWwuFqcuB4Xumr
-         BmrF1k9nUIx0Ixz8OztsnuBgIbHtb5Wpd8HjA=
+        bh=dxD/xIKIZNY1Gd+udPylENsx3szHutH/fapKCoFaITg=;
+        b=c2MH7ZNoZwZP90Z0dFD7stBvxBoFVPXHD6/Og9rfg9Liw/LCOcK/sCf9/fElYytCJM
+         /j+1NcTZWl1LpFCGtEJZiWEeudoVF/Bt04vaCzwGvj+n2b3zAw44qncXT4JS/dcmjJ1K
+         MdabpxhRJOzxQim1NImjhz4W0XcdS8VGvlW6A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701682992; x=1702287792;
+        d=1e100.net; s=20230601; t=1701682995; x=1702287795;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uhvbsGVggmpzL6VhFDTXJNRWZSL+PUA9PR1Ri8iXGLA=;
-        b=arxf30jkxw+06ZkiByNjxbhcsp9658smc2WK2yV/1aQdB/Qr3S9GO4e10qR+x+Xfgt
-         VYZwjer4FyVFGVMy72RDOxqg2Mm99VUL67TNcMb6EJoBnhj1FqdUTcmAl3VAIT2pZTBX
-         OpwMX1wwqibEFX4jXfxx6RUwfcUUikpUyfi00CN/KuEgGqdrXObo0Sdkb7RTUOOiNf6B
-         KnusvQWsnc+JMwG8YpliSQH6jkOGYOIRbVraf+XAWlveFH91sGRu6pJRQhJdg6/h+BfB
-         Mm2WF1b1YzDOWugi4hkhQhK+Yr4GjXUKCuYlvtO9PV3qXzpGp/z48yLatrUud8HVgBD6
-         Mktg==
-X-Gm-Message-State: AOJu0YyEjpAW29EOB6nmRpcQPIPNV3/s/zbuWMSqv542wTk4Qm5YK30L
-	YGajOpg9iDnXtzSVzXQStcd4582/loFrujFgDZE=
-X-Google-Smtp-Source: AGHT+IHGbm6svOID28oBbJ+PecxwhKiaRzO5RQK1pDm0gQJ0G0iWUsdq17d4C0+yP1bsmBSFLCBdoA==
-X-Received: by 2002:a05:600c:601a:b0:40b:5e59:c557 with SMTP id az26-20020a05600c601a00b0040b5e59c557mr2262756wmb.129.1701682991843;
-        Mon, 04 Dec 2023 01:43:11 -0800 (PST)
+        bh=dxD/xIKIZNY1Gd+udPylENsx3szHutH/fapKCoFaITg=;
+        b=uuLidUkhjCofsJ0olzK9orfEDV63CKBETbo9ByRkV4CpagEldXJEO3jukHP10nVI4q
+         TK9tdKmlTX/Tc+r7xJSMu8IazHr0RabdR7MZ/y+vKZIv9ZzD/JjzY/j38f3SjNQpn+gY
+         i3tLbvw5Ph9HuLMvtWcVn5LQqpiYo0Wnv+xMr6Z4h1zKBV+KjzDuogJuv9U5pJSOe99g
+         fc/HmquB/zs7OOHId3QNcuvpRHRHuGZEtD21PrZZ4KEzocdN6NGiKDrrYh7S+VUqFYW3
+         fQbNU44OaRwEyPo3IqkJ/14Oz+6U/6ypEQy84rS17Ye7kg+ZzAWPSWR9PdqloCKDsMvE
+         hKbA==
+X-Gm-Message-State: AOJu0YwwwmDt9Maeir1irNkq8xVT1S1DDEhK1s6r79ut1KdhFUX9tBs+
+	x5okhmBbx5s2wLJ8UuDsyDoxwAhiVJrvU1BpPgo=
+X-Google-Smtp-Source: AGHT+IHC4vfktUCR6jsvd+9qQfs94hYFg8QP5pZ0Uo7toZQiieUuEjnP32WLZ2tIqVAz6IBf96RBXQ==
+X-Received: by 2002:a05:600c:181c:b0:40b:5e59:b7af with SMTP id n28-20020a05600c181c00b0040b5e59b7afmr2209866wmp.140.1701682995478;
+        Mon, 04 Dec 2023 01:43:15 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Paul Durrant <paul@xen.org>,
 	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v2 3/6] x86/iommu: introduce a rangeset to perform hwdom IOMMU setup
-Date: Mon,  4 Dec 2023 10:43:02 +0100
-Message-ID: <20231204094305.59267-4-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Lukasz Hawrylko <lukasz@hawrylko.pl>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	=?UTF-8?q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>
+Subject: [PATCH v2 6/6] x86/iommu: cleanup unused functions
+Date: Mon,  4 Dec 2023 10:43:05 +0100
+Message-ID: <20231204094305.59267-7-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231204094305.59267-1-roger.pau@citrix.com>
 References: <20231204094305.59267-1-roger.pau@citrix.com>
@@ -88,144 +93,140 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This change just introduces the boilerplate code in order to use a rangeset
-when setting up the hardware domain IOMMU mappings.  The rangeset is never
-populated in this patch, so it's a non-functional change as far as the mappings
-the domain gets established.
+Remove xen_in_range() and vpci_is_mmcfg_address() now that hey are unused.
 
-Note there's a change for HVM domains (ie: PVH dom0) that will get switched to
-create the p2m mappings using map_mmio_regions() instead of
-p2m_add_identity_entry(), so that ranges can be mapped with a single function
-call if possible.  Note that the interface of map_mmio_regions() doesn't allow
-creating read-only mappings, but so far there are no such mappings created for
-PVH dom0 in arch_iommu_hwdom_init().
+Adjust comments to point to the new functions that replace the existing ones.
+
+No functional change.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-Changes since v1:
- - Split from bigger patch.
+Can be squashed with the previous patch if desired, split as a separate patch
+for clarity.
 ---
- xen/drivers/passthrough/x86/iommu.c | 89 +++++++++++++++++++++++++++++
- 1 file changed, 89 insertions(+)
+ xen/arch/x86/include/asm/hvm/io.h |  3 --
+ xen/arch/x86/include/asm/setup.h  |  1 -
+ xen/arch/x86/setup.c              | 53 ++-----------------------------
+ xen/arch/x86/tboot.c              |  2 +-
+ 4 files changed, 3 insertions(+), 56 deletions(-)
 
-diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index 857dccb6a465..531a428f6496 100644
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -370,10 +370,77 @@ static unsigned int __hwdom_init hwdom_iommu_map(const struct domain *d,
-     return perms;
+diff --git a/xen/arch/x86/include/asm/hvm/io.h b/xen/arch/x86/include/asm/hvm/io.h
+index e1e5e6fe7491..24d1b6134f02 100644
+--- a/xen/arch/x86/include/asm/hvm/io.h
++++ b/xen/arch/x86/include/asm/hvm/io.h
+@@ -153,9 +153,6 @@ int register_vpci_mmcfg_handler(struct domain *d, paddr_t addr,
+ /* Destroy tracked MMCFG areas. */
+ void destroy_vpci_mmcfg(struct domain *d);
+ 
+-/* Check if an address is between a MMCFG region for a domain. */
+-bool vpci_is_mmcfg_address(const struct domain *d, paddr_t addr);
+-
+ /* Remove MMCFG regions from a given rangeset. */
+ int vpci_subtract_mmcfg(const struct domain *d, struct rangeset *r);
+ 
+diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+index cd07d98101d8..1ced1299c77b 100644
+--- a/xen/arch/x86/include/asm/setup.h
++++ b/xen/arch/x86/include/asm/setup.h
+@@ -36,7 +36,6 @@ unsigned long initial_images_nrpages(nodeid_t node);
+ void discard_initial_images(void);
+ void *bootstrap_map(const module_t *mod);
+ 
+-int xen_in_range(unsigned long mfn);
+ int remove_xen_ranges(struct rangeset *r);
+ 
+ extern uint8_t kbd_shift_flags;
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 71fa0b46f181..7d2cb61a2a4a 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1343,7 +1343,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         relocated = true;
+ 
+         /*
+-         * This needs to remain in sync with xen_in_range() and the
++         * This needs to remain in sync with remove_xen_ranges() and the
+          * respective reserve_e820_ram() invocation below. No need to
+          * query efi_boot_mem_unused() here, though.
+          */
+@@ -1495,7 +1495,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+     if ( using_2M_mapping() )
+         efi_boot_mem_unused(NULL, NULL);
+ 
+-    /* This needs to remain in sync with xen_in_range(). */
++    /* This needs to remain in sync with remove_xen_ranges(). */
+     if ( efi_boot_mem_unused(&eb_start, &eb_end) )
+     {
+         reserve_e820_ram(&boot_e820, __pa(_stext), __pa(eb_start));
+@@ -2087,55 +2087,6 @@ void arch_get_xen_caps(xen_capabilities_info_t *info)
+     }
  }
  
-+struct map_data {
-+    struct domain *d;
-+    unsigned int flush_flags;
-+    bool ro;
-+};
-+
-+static int __hwdom_init cf_check identity_map(unsigned long s, unsigned long e,
-+                                              void *data)
-+{
-+    struct map_data *info = data;
-+    struct domain *d = info->d;
-+    long rc;
-+
-+    if ( iommu_verbose )
-+        printk(XENLOG_INFO " [%010lx, %010lx] R%c\n",
-+               s, e, info->ro ? 'O' : 'W');
-+
-+    if ( paging_mode_translate(d) )
-+    {
-+        if ( info->ro )
-+        {
-+            ASSERT_UNREACHABLE();
-+            return 0;
-+        }
-+        while ( (rc = map_mmio_regions(d, _gfn(s), e - s + 1, _mfn(s))) > 0 )
-+        {
-+            s += rc;
-+            process_pending_softirqs();
-+        }
-+    }
-+    else
-+    {
-+        const unsigned int perms = IOMMUF_readable | IOMMUF_preempt |
-+                                   (info->ro ? 0 : IOMMUF_writable);
-+
-+        if ( info->ro && !iomem_access_permitted(d, s, e) )
-+        {
-+            /*
-+             * Should be more fine grained in order to not map the forbidden
-+             * frame instead of rejecting the region as a whole, but it's only
-+             * for read-only MMIO regions, which are very limited.
-+             */
-+            printk(XENLOG_DEBUG
-+                   "IOMMU read-only mapping of region [%lx, %lx] forbidden\n",
-+                   s, e);
-+            return 0;
-+        }
-+        while ( (rc = iommu_map(d, _dfn(s), _mfn(s), e - s + 1,
-+                                perms, &info->flush_flags)) > 0 )
-+        {
-+            s += rc;
-+            process_pending_softirqs();
-+        }
-+    }
-+    ASSERT(rc <= 0);
-+    if ( rc )
-+        printk(XENLOG_WARNING
-+               "IOMMU identity mapping of [%lx, %lx] failed: %ld\n",
-+               s, e, rc);
-+
-+    /* Ignore errors and attempt to map the remaining regions. */
-+    return 0;
-+}
-+
- void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+-int __hwdom_init xen_in_range(unsigned long mfn)
+-{
+-    paddr_t start, end;
+-    int i;
+-
+-    enum { region_s3, region_ro, region_rw, region_bss, nr_regions };
+-    static struct {
+-        paddr_t s, e;
+-    } xen_regions[nr_regions] __hwdom_initdata;
+-
+-    /* initialize first time */
+-    if ( !xen_regions[0].s )
+-    {
+-        /* S3 resume code (and other real mode trampoline code) */
+-        xen_regions[region_s3].s = bootsym_phys(trampoline_start);
+-        xen_regions[region_s3].e = bootsym_phys(trampoline_end);
+-
+-        /*
+-         * This needs to remain in sync with the uses of the same symbols in
+-         * - __start_xen() (above)
+-         * - is_xen_fixed_mfn()
+-         * - tboot_shutdown()
+-         */
+-
+-        /* hypervisor .text + .rodata */
+-        xen_regions[region_ro].s = __pa(&_stext);
+-        xen_regions[region_ro].e = __pa(&__2M_rodata_end);
+-        /* hypervisor .data + .bss */
+-        xen_regions[region_rw].s = __pa(&__2M_rwdata_start);
+-        xen_regions[region_rw].e = __pa(&__2M_rwdata_end);
+-        if ( efi_boot_mem_unused(&start, &end) )
+-        {
+-            ASSERT(__pa(start) >= xen_regions[region_rw].s);
+-            ASSERT(__pa(end) <= xen_regions[region_rw].e);
+-            xen_regions[region_rw].e = __pa(start);
+-            xen_regions[region_bss].s = __pa(end);
+-            xen_regions[region_bss].e = __pa(&__2M_rwdata_end);
+-        }
+-    }
+-
+-    start = (paddr_t)mfn << PAGE_SHIFT;
+-    end = start + PAGE_SIZE;
+-    for ( i = 0; i < nr_regions; i++ )
+-        if ( (start < xen_regions[i].e) && (end > xen_regions[i].s) )
+-            return 1;
+-
+-    return 0;
+-}
+-
+ int __hwdom_init remove_xen_ranges(struct rangeset *r)
  {
-     unsigned long i, top, max_pfn, start, count;
-     unsigned int flush_flags = 0, start_perms = 0;
-+    struct rangeset *map;
-+    struct map_data map_data = { .d = d };
-+    int rc;
+     paddr_t start, end;
+diff --git a/xen/arch/x86/tboot.c b/xen/arch/x86/tboot.c
+index 86c4c22cacb8..4c254b4e34b4 100644
+--- a/xen/arch/x86/tboot.c
++++ b/xen/arch/x86/tboot.c
+@@ -321,7 +321,7 @@ void tboot_shutdown(uint32_t shutdown_type)
  
-     BUG_ON(!is_hardware_domain(d));
- 
-@@ -397,6 +464,10 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
-     if ( iommu_hwdom_passthrough )
-         return;
- 
-+    map = rangeset_new(NULL, NULL, 0);
-+    if ( !map )
-+        panic("IOMMU init: unable to allocate rangeset\n");
-+
-     max_pfn = (GB(4) >> PAGE_SHIFT) - 1;
-     top = max(max_pdx, pfn_to_pdx(max_pfn) + 1);
- 
-@@ -451,6 +522,24 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
-             goto commit;
-     }
- 
-+    if ( iommu_verbose )
-+        printk(XENLOG_INFO "d%u: identity mappings for IOMMU:\n",
-+               d->domain_id);
-+
-+    rc = rangeset_report_ranges(map, 0, ~0UL, identity_map, &map_data);
-+    if ( rc )
-+        panic("IOMMU unable to create mappings: %d\n", rc);
-+    if ( is_pv_domain(d) )
-+    {
-+        map_data.ro = true;
-+        rc = rangeset_report_ranges(mmio_ro_ranges, 0, ~0UL, identity_map,
-+                                    &map_data);
-+        if ( rc )
-+            panic("IOMMU unable to create read-only mappings: %d\n", rc);
-+    }
-+
-+    rangeset_destroy(map);
-+
-     /* Use if to avoid compiler warning */
-     if ( iommu_iotlb_flush_all(d, flush_flags) )
-         return;
+         /*
+          * Xen regions for tboot to MAC. This needs to remain in sync with
+-         * xen_in_range().
++         * remove_xen_ranges().
+          */
+         g_tboot_shared->num_mac_regions = 3;
+         /* S3 resume code (and other real mode trampoline code) */
 -- 
 2.43.0
 
