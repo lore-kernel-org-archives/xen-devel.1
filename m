@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 603B9C4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Dec 2023 12:36:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.646893.1009532 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E62EEC4167B
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Dec 2023 12:46:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.646898.1009542 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rA8Aq-0002lg-Kz; Mon, 04 Dec 2023 12:35:44 +0000
+	id 1rA8LF-00065p-J1; Mon, 04 Dec 2023 12:46:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 646893.1009532; Mon, 04 Dec 2023 12:35:44 +0000
+Received: by outflank-mailman (output) from mailman id 646898.1009542; Mon, 04 Dec 2023 12:46:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rA8Aq-0002lZ-HL; Mon, 04 Dec 2023 12:35:44 +0000
-Received: by outflank-mailman (input) for mailman id 646893;
- Mon, 04 Dec 2023 12:35:43 +0000
+	id 1rA8LF-00065i-GL; Mon, 04 Dec 2023 12:46:29 +0000
+Received: by outflank-mailman (input) for mailman id 646898;
+ Mon, 04 Dec 2023 12:46:28 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/x5/=HP=redhat.com=kwolf@srs-se1.protection.inumbo.net>)
- id 1rA8Ap-0002lT-NW
- for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 12:35:43 +0000
+ id 1rA8LE-00065c-6X
+ for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 12:46:28 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a2836a81-92a1-11ee-98e5-6d05b1d4d9a1;
- Mon, 04 Dec 2023 13:35:42 +0100 (CET)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-561-Oj5F8mbkOzyGzz28vE5gHQ-1; Mon,
- 04 Dec 2023 07:35:35 -0500
+ id 23068d18-92a3-11ee-98e5-6d05b1d4d9a1;
+ Mon, 04 Dec 2023 13:46:26 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-587-WlsnWTGLP9CgoOClcumpYA-1; Mon, 04 Dec 2023 07:46:19 -0500
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D365129AA3AC;
- Mon,  4 Dec 2023 12:35:34 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CF54285A58B;
+ Mon,  4 Dec 2023 12:46:18 +0000 (UTC)
 Received: from redhat.com (unknown [10.39.194.237])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 7F823C1596F;
- Mon,  4 Dec 2023 12:35:28 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B032BC15983;
+ Mon,  4 Dec 2023 12:46:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a2836a81-92a1-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: 23068d18-92a3-11ee-98e5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701693341;
+	s=mimecast20190719; t=1701693985;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=qx2GfDHf3/ajVNCVouqYYAoLzEYyS3eVAO/xtWLuxKw=;
-	b=CQ5KjotOJMXGQrNQr29HAbASMsfySbOoKfz6kndE5aoiW7t1/VJCkGDxHQSew1HmF6SFru
-	5QVFwJEiPSQisooGnaWB4gq8ZEPjMHs5Uq0N1IWmjNRH6f5QmhcOEH3L5ixAox2ltWlOD0
-	3d0bRJ6v3fgSxrcbhrL4y+q1GDzQ1/c=
-X-MC-Unique: Oj5F8mbkOzyGzz28vE5gHQ-1
-Date: Mon, 4 Dec 2023 13:35:27 +0100
+	bh=OdqJcUWrpkerK9dE7JvdF+gkdvliUlUpsIv/joFLTrU=;
+	b=US/ZXufMixJF3shG3LE1TzC5TGQK8Uph39bM4XZ3DDtG4lCUjDkE1ymJwP+UmmNp3QKi6j
+	wvSgX8MJNFgiY4TPXMBpcjxkxSVKlfxDHRoahAMw7Mxe+YPkqoAt/IpYpNcgatzJvu3JTA
+	w7/jQkhN6KQckDVvjMdOgYODiZXsgkc=
+X-MC-Unique: WlsnWTGLP9CgoOClcumpYA-1
+Date: Mon, 4 Dec 2023 13:46:13 +0100
 From: Kevin Wolf <kwolf@redhat.com>
 To: Stefan Hajnoczi <stefanha@redhat.com>
 Cc: qemu-devel@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
@@ -90,7 +90,7 @@ Cc: qemu-devel@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
 	Fam Zheng <fam@euphon.net>, Fabiano Rosas <farosas@suse.de>
 Subject: Re: [PATCH 01/12] virtio-scsi: replace AioContext lock with
  tmf_bh_lock
-Message-ID: <ZW3Hj_hXJr5auhm7@redhat.com>
+Message-ID: <ZW3KFQ3PsdbVFymi@redhat.com>
 References: <20231129195553.942921-1-stefanha@redhat.com>
  <20231129195553.942921-2-stefanha@redhat.com>
 MIME-Version: 1.0
@@ -110,6 +110,14 @@ Am 29.11.2023 um 20:55 hat Stefan Hajnoczi geschrieben:
 > 
 > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 
-Reviewed-by: Kevin Wolf <kwolf@redhat.com>
+The second part reminds me that the implicit protection of the virtqueue
+and SCSI data structures by having all accesses in a single thread is
+hard to review and I think we wanted to put some assertions there to
+check that we're really running in the right thread. I don't think we
+have done that so far, so I suppose after this patch would be the place
+in the series to add them, before we remove the protection by the
+AioContext lock?
+
+Kevin
 
 
