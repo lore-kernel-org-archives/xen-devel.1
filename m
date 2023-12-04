@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D25C4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Dec 2023 15:18:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647110.1009831 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B81C4167B
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Dec 2023 15:23:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647119.1009852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAAi6-0001n2-B9; Mon, 04 Dec 2023 15:18:14 +0000
+	id 1rAAnE-0005nY-4a; Mon, 04 Dec 2023 15:23:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647110.1009831; Mon, 04 Dec 2023 15:18:14 +0000
+Received: by outflank-mailman (output) from mailman id 647119.1009852; Mon, 04 Dec 2023 15:23:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAAi6-0001mv-8F; Mon, 04 Dec 2023 15:18:14 +0000
-Received: by outflank-mailman (input) for mailman id 647110;
- Mon, 04 Dec 2023 15:18:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PgPa=HP=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1rAAi5-0001jk-1p
- for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 15:18:13 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 552210c3-92b8-11ee-98e5-6d05b1d4d9a1;
- Mon, 04 Dec 2023 16:18:10 +0100 (CET)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-373-Q7vPoqGuPbqZZ9WrmOSLTg-1; Mon, 04 Dec 2023 10:18:04 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
+	id 1rAAnE-0005nP-1z; Mon, 04 Dec 2023 15:23:32 +0000
+Received: by outflank-mailman (input) for mailman id 647119;
+ Mon, 04 Dec 2023 15:23:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=THDE=HP=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1rAAnD-0005Xf-6L
+ for xen-devel@lists.xenproject.org; Mon, 04 Dec 2023 15:23:31 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 13bc8396-92b9-11ee-9b0f-b553b5be7939;
+ Mon, 04 Dec 2023 16:23:29 +0100 (CET)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:98])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AD91B81B56A;
- Mon,  4 Dec 2023 15:18:03 +0000 (UTC)
-Received: from localhost (unknown [10.39.192.49])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 89EDE40C6EBB;
- Mon,  4 Dec 2023 15:18:02 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2CA21220CE;
+ Mon,  4 Dec 2023 15:23:29 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 03EEE13588;
+ Mon,  4 Dec 2023 15:23:28 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id 0LZJO/DubWUqJgAAn2gu4w
+ (envelope-from <jgross@suse.com>); Mon, 04 Dec 2023 15:23:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,112 +54,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 552210c3-92b8-11ee-98e5-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701703089;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kBZ1SZVWRnkDiTr92kHl7AK+tPgCY2ZrLpcj1yanM/w=;
-	b=bsl+/Horf9FBZiWUIjzZptUawgJe9roBE6cA99oL9d7md34MVkcIZmSa8Tk7z8hEThgi84
-	aGi2+gEQC8GK2gFEjFavZrMtNqhuKt/q34I2euLNVg/Xp4UvS4qg1UvYL6MfaM/1FKAIvk
-	tEVIC9d+Qisv6dsaPS6dIYWZh6Ssr7M=
-X-MC-Unique: Q7vPoqGuPbqZZ9WrmOSLTg-1
-Date: Mon, 4 Dec 2023 10:17:55 -0500
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Kevin Wolf <kwolf@redhat.com>
-Cc: qemu-devel@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
-	Paul Durrant <paul@xen.org>, Paolo Bonzini <pbonzini@redhat.com>,
-	Alberto Garcia <berto@igalia.com>,
-	Emanuele Giuseppe Esposito <eesposit@redhat.com>,
-	John Snow <jsnow@redhat.com>, Eric Blake <eblake@redhat.com>,
-	Wen Congyang <wencongyang2@huawei.com>, qemu-block@nongnu.org,
-	xen-devel@lists.xenproject.org, Coiby Xu <Coiby.Xu@gmail.com>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Xie Changlong <xiechanglong.d@gmail.com>,
-	Ari Sundholm <ari@tuxera.com>, Li Zhijian <lizhijian@fujitsu.com>,
-	Cleber Rosa <crosa@redhat.com>, Juan Quintela <quintela@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
-	Zhang Chen <chen.zhang@intel.com>, Peter Xu <peterx@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Leonardo Bras <leobras@redhat.com>,
-	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
-	Fam Zheng <fam@euphon.net>, Fabiano Rosas <farosas@suse.de>
-Subject: Re: [PATCH 05/12] block: remove AioContext locking
-Message-ID: <20231204151755.GC1492005@fedora>
-References: <20231129195553.942921-1-stefanha@redhat.com>
- <20231129195553.942921-6-stefanha@redhat.com>
- <ZW3jVZZ_Kuf99g8O@redhat.com>
+X-Inumbo-ID: 13bc8396-92b9-11ee-9b0f-b553b5be7939
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	=?UTF-8?q?Ren=C3=A9=20Winther=20H=C3=B8jgaard?= <renewin@proton.me>
+Subject: [PATCH v2 1/3] xen/sched: fix adding offline cpu to cpupool
+Date: Mon,  4 Dec 2023 16:23:19 +0100
+Message-Id: <20231204152321.16520-2-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231204152321.16520-1-jgross@suse.com>
+References: <20231204152321.16520-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="+4Jsw1CxaxIgWzJ/"
-Content-Disposition: inline
-In-Reply-To: <ZW3jVZZ_Kuf99g8O@redhat.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Server: rspamd1
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Rspamd-Queue-Id: 2CA21220CE
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	 REPLY(-4.00)[]
 
+Trying to add an offline cpu to a cpupool can crash the hypervisor,
+as the probably non-existing percpu area of the cpu is accessed before
+the availability of the cpu is being tested. This can happen in case
+the cpupool's granularity is "core" or "socket".
 
---+4Jsw1CxaxIgWzJ/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fix that by testing the cpu to be online.
 
-On Mon, Dec 04, 2023 at 03:33:57PM +0100, Kevin Wolf wrote:
-> Am 29.11.2023 um 20:55 hat Stefan Hajnoczi geschrieben:
-> > This is the big patch that removes
-> > aio_context_acquire()/aio_context_release() from the block layer and
-> > affected block layer users.
-> >=20
-> > There isn't a clean way to split this patch and the reviewers are likely
-> > the same group of people, so I decided to do it in one patch.
-> >=20
-> > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
->=20
-> > @@ -7585,29 +7433,12 @@ void coroutine_fn bdrv_co_leave(BlockDriverStat=
-e *bs, AioContext *old_ctx)
-> > =20
-> >  void coroutine_fn bdrv_co_lock(BlockDriverState *bs)
-> >  {
-> > -    AioContext *ctx =3D bdrv_get_aio_context(bs);
-> > -
-> > -    /* In the main thread, bs->aio_context won't change concurrently */
-> > -    assert(qemu_get_current_aio_context() =3D=3D qemu_get_aio_context(=
-));
-> > -
-> > -    /*
-> > -     * We're in coroutine context, so we already hold the lock of the =
-main
-> > -     * loop AioContext. Don't lock it twice to avoid deadlocks.
-> > -     */
-> > -    assert(qemu_in_coroutine());
-> > -    if (ctx !=3D qemu_get_aio_context()) {
-> > -        aio_context_acquire(ctx);
-> > -    }
-> > +    /* TODO removed in next patch */
-> >  }
->=20
-> It's still there at the end of the series.
+Fixes: cb563d7665f2 ("xen/sched: support core scheduling for moving cpus to/from cpupools")
+Reported-by: René Winther Højgaard <renewin@proton.me>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- enhance commit message
+---
+ xen/common/sched/cpupool.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Will fix in v2. Thanks!
-
---+4Jsw1CxaxIgWzJ/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmVt7aMACgkQnKSrs4Gr
-c8jOnAgAroCsRM62VuXidh1DiXsdM/0hkCfNnvZSyW8BYwcZlOo16u9i6w1n4+fW
-HrkQPylQsCI5gHfj72kqrfphVoxWDdjCeaTN+ILBnSbbvKzvym2bNtsYfuuZpMGO
-v9wItcMUPP0UkEwiPgSTj28FlfAj9SqzjDEiaIqgJjzL6jVEqQ/xuI9tvESarulP
-SKVf02Lwrz2y4dH25crdvwyP1w2x0ZK9TtaE59g5hElfOC/bhBiFiPtVEeAFOwDw
-5HXPwJA9U0NOzjVxvYg1Bg2rxhlTxRu3A22b7T+zYwKHIG+FYan3ejiDvOz1YwF3
-baMaVDb0ovZiApd+ipPwctALD+HI9g==
-=TuU3
------END PGP SIGNATURE-----
-
---+4Jsw1CxaxIgWzJ/--
+diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
+index 2e094b0cfa..ad8f608462 100644
+--- a/xen/common/sched/cpupool.c
++++ b/xen/common/sched/cpupool.c
+@@ -892,6 +892,8 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
+         if ( cpu >= nr_cpu_ids )
+             goto addcpu_out;
+         ret = -ENODEV;
++        if ( !cpu_online(cpu) )
++            goto addcpu_out;
+         cpus = sched_get_opt_cpumask(c->gran, cpu);
+         if ( !cpumask_subset(cpus, &cpupool_free_cpus) ||
+              cpumask_intersects(cpus, &cpupool_locked_cpus) )
+-- 
+2.35.3
 
 
