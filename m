@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D728C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:21:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647559.1010840 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D709C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:22:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647561.1010860 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUW-0004P5-V2; Tue, 05 Dec 2023 11:21:28 +0000
+	id 1rATUY-0004uP-IU; Tue, 05 Dec 2023 11:21:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647559.1010840; Tue, 05 Dec 2023 11:21:28 +0000
+Received: by outflank-mailman (output) from mailman id 647561.1010860; Tue, 05 Dec 2023 11:21:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUW-0004Ow-Q9; Tue, 05 Dec 2023 11:21:28 +0000
-Received: by outflank-mailman (input) for mailman id 647559;
- Tue, 05 Dec 2023 11:21:26 +0000
+	id 1rATUY-0004tv-F5; Tue, 05 Dec 2023 11:21:30 +0000
+Received: by outflank-mailman (input) for mailman id 647561;
+ Tue, 05 Dec 2023 11:21:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUU-0003dP-ST
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:26 +0000
+ id 1rATUW-0003dP-SX
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:28 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6c311f48-9360-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 12:21:24 +0100 (CET)
+ id 6ca7069c-9360-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 12:21:26 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:18 -0800
+ 05 Dec 2023 03:21:19 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:16 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:17 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c311f48-9360-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 6ca7069c-9360-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775285; x=1733311285;
+  t=1701775287; x=1733311287;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=jUmKwc/SMnY0ZGiDGUCu3QSu4hVAIRhy7FwTA3XKz/Q=;
-  b=YFVQajwickw0ewsmdV5m2snAmElv+XHdW6nXr2U8UgGZdTyRb/aRXSln
-   3Puf7ouF8AfXiTw5Roo0zaHpr0CpRmhXq+M7bKU8XPACBpHESSWjQn5Ow
-   sGtT7o6PNaSJXE6Pu0fLtIA1Sjtm+O4OGY6v8qwGJpffmPRxrjBe/l7L8
-   Lra1+a2RlkZA+/xXq+Rjia0ALBEKX97Ez8r2GVhH6Lewg0qQAKz6uaRZL
-   qclSQ+lI/BmN2xkXdZxlJSKqii7Biywic7OLs75xZnqhuQIldh85U2xHJ
-   b5typ95TP1+2d+S3I7B805HqrOUUtmCyl/nzgVm/DyVYzglXGNEfR1GJ6
+  bh=XAJxKoMf+2QJIK9eDHNvPpRiHTb0PPLqXWearFjnRKA=;
+  b=ZwJr9giykQwTkJo7bybLidF14PQQuL/pxMcqjLjC9BGsZOhLvWNccMn7
+   7Md222P09CL1ggbjZTQQQ0fmmxUafzcFoBmMNFLvpGlOOmtYpp7a/iGQG
+   gei02IfNmjhXJxFVbohRhDCNw0+wr2xJ7YXtO9X5AgHZJCgYo81tDnCd5
+   V2E3NlGH0koCHbRR6Xha6qenUSbn4Ww+eT3BoIPdMCamytSioUTFY93Ex
+   3GufM1IaKZBqgvCVTXfon3PfT4jdSGAQHsPHbxRW2TZUOz359cbWyrgBW
+   cPMj/myhTrx4J1obil9dC5Mt/KwhYpFUJngYWwr3kau0ccJUIG2w+S5AG
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942329"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942384"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942329"
+   d="scan'208";a="942384"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192905"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192916"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018192905"
+   d="scan'208";a="1018192916"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,92 +88,74 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 03/35] x86/trapnr: Add event type macros to <asm/trapnr.h>
-Date: Tue,  5 Dec 2023 02:49:52 -0800
-Message-ID: <20231205105030.8698-4-xin3.li@intel.com>
+Subject: [PATCH v13 06/35] x86/cpufeatures: Add the CPU feature bit for FRED
+Date: Tue,  5 Dec 2023 02:49:55 -0800
+Message-ID: <20231205105030.8698-7-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Intel VT-x classifies events into eight different types, which is
-inherited by FRED for event identification. As such, event type
-becomes a common x86 concept, and should be defined in a common x86
-header.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add event type macros to <asm/trapnr.h>, and use it in <asm/vmx.h>.
+Any FRED CPU will always have the following features as its baseline:
+  1) LKGS, load attributes of the GS segment but the base address into
+     the IA32_KERNEL_GS_BASE MSR instead of the GS segment’s descriptor
+     cache.
+  2) WRMSRNS, non-serializing WRMSR for faster MSR writes.
 
-Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Changes since v10:
-* A few comment fixes and improvements (Andrew Cooper).
+Change since v12:
+* s/cpu/CPU/g (Borislav Petkov).
 ---
- arch/x86/include/asm/trapnr.h | 12 ++++++++++++
- arch/x86/include/asm/vmx.h    | 17 +++++++++--------
- 2 files changed, 21 insertions(+), 8 deletions(-)
+ arch/x86/include/asm/cpufeatures.h       | 1 +
+ arch/x86/kernel/cpu/cpuid-deps.c         | 2 ++
+ tools/arch/x86/include/asm/cpufeatures.h | 1 +
+ 3 files changed, 4 insertions(+)
 
-diff --git a/arch/x86/include/asm/trapnr.h b/arch/x86/include/asm/trapnr.h
-index f5d2325aa0b7..8d1154cdf787 100644
---- a/arch/x86/include/asm/trapnr.h
-+++ b/arch/x86/include/asm/trapnr.h
-@@ -2,6 +2,18 @@
- #ifndef _ASM_X86_TRAPNR_H
- #define _ASM_X86_TRAPNR_H
+diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
+index a903fc130e49..fef95d190054 100644
+--- a/arch/x86/include/asm/cpufeatures.h
++++ b/arch/x86/include/asm/cpufeatures.h
+@@ -324,6 +324,7 @@
+ #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
+ #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
+ #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
++#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
+ #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
+ #define X86_FEATURE_WRMSRNS		(12*32+19) /* "" Non-serializing WRMSR */
+ #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
+diff --git a/arch/x86/kernel/cpu/cpuid-deps.c b/arch/x86/kernel/cpu/cpuid-deps.c
+index e462c1d3800a..b7174209d855 100644
+--- a/arch/x86/kernel/cpu/cpuid-deps.c
++++ b/arch/x86/kernel/cpu/cpuid-deps.c
+@@ -82,6 +82,8 @@ static const struct cpuid_dep cpuid_deps[] = {
+ 	{ X86_FEATURE_XFD,			X86_FEATURE_XGETBV1   },
+ 	{ X86_FEATURE_AMX_TILE,			X86_FEATURE_XFD       },
+ 	{ X86_FEATURE_SHSTK,			X86_FEATURE_XSAVES    },
++	{ X86_FEATURE_FRED,			X86_FEATURE_LKGS      },
++	{ X86_FEATURE_FRED,			X86_FEATURE_WRMSRNS   },
+ 	{}
+ };
  
-+/*
-+ * Event type codes used by FRED, Intel VT-x and AMD SVM
-+ */
-+#define EVENT_TYPE_EXTINT	0	// External interrupt
-+#define EVENT_TYPE_RESERVED	1
-+#define EVENT_TYPE_NMI		2	// NMI
-+#define EVENT_TYPE_HWEXC	3	// Hardware originated traps, exceptions
-+#define EVENT_TYPE_SWINT	4	// INT n
-+#define EVENT_TYPE_PRIV_SWEXC	5	// INT1
-+#define EVENT_TYPE_SWEXC	6	// INTO, INT3
-+#define EVENT_TYPE_OTHER	7	// FRED SYSCALL/SYSENTER, VT-x MTF
-+
- /* Interrupts/Exceptions */
- 
- #define X86_TRAP_DE		 0	/* Divide-by-zero */
-diff --git a/arch/x86/include/asm/vmx.h b/arch/x86/include/asm/vmx.h
-index 0e73616b82f3..4dba17363008 100644
---- a/arch/x86/include/asm/vmx.h
-+++ b/arch/x86/include/asm/vmx.h
-@@ -17,6 +17,7 @@
- #include <linux/types.h>
- 
- #include <uapi/asm/vmx.h>
-+#include <asm/trapnr.h>
- #include <asm/vmxfeatures.h>
- 
- #define VMCS_CONTROL_BIT(x)	BIT(VMX_FEATURE_##x & 0x1f)
-@@ -374,14 +375,14 @@ enum vmcs_field {
- #define VECTORING_INFO_DELIVER_CODE_MASK    	INTR_INFO_DELIVER_CODE_MASK
- #define VECTORING_INFO_VALID_MASK       	INTR_INFO_VALID_MASK
- 
--#define INTR_TYPE_EXT_INTR              (0 << 8) /* external interrupt */
--#define INTR_TYPE_RESERVED              (1 << 8) /* reserved */
--#define INTR_TYPE_NMI_INTR		(2 << 8) /* NMI */
--#define INTR_TYPE_HARD_EXCEPTION	(3 << 8) /* processor exception */
--#define INTR_TYPE_SOFT_INTR             (4 << 8) /* software interrupt */
--#define INTR_TYPE_PRIV_SW_EXCEPTION	(5 << 8) /* ICE breakpoint - undocumented */
--#define INTR_TYPE_SOFT_EXCEPTION	(6 << 8) /* software exception */
--#define INTR_TYPE_OTHER_EVENT           (7 << 8) /* other event */
-+#define INTR_TYPE_EXT_INTR		(EVENT_TYPE_EXTINT << 8)	/* external interrupt */
-+#define INTR_TYPE_RESERVED		(EVENT_TYPE_RESERVED << 8)	/* reserved */
-+#define INTR_TYPE_NMI_INTR		(EVENT_TYPE_NMI << 8)		/* NMI */
-+#define INTR_TYPE_HARD_EXCEPTION	(EVENT_TYPE_HWEXC << 8)		/* processor exception */
-+#define INTR_TYPE_SOFT_INTR		(EVENT_TYPE_SWINT << 8)		/* software interrupt */
-+#define INTR_TYPE_PRIV_SW_EXCEPTION	(EVENT_TYPE_PRIV_SWEXC << 8)	/* ICE breakpoint */
-+#define INTR_TYPE_SOFT_EXCEPTION	(EVENT_TYPE_SWEXC << 8)		/* software exception */
-+#define INTR_TYPE_OTHER_EVENT		(EVENT_TYPE_OTHER << 8)		/* other event */
- 
- /* GUEST_INTERRUPTIBILITY_INFO flags. */
- #define GUEST_INTR_STATE_STI		0x00000001
+diff --git a/tools/arch/x86/include/asm/cpufeatures.h b/tools/arch/x86/include/asm/cpufeatures.h
+index 26a73ae18a86..f433e9f61354 100644
+--- a/tools/arch/x86/include/asm/cpufeatures.h
++++ b/tools/arch/x86/include/asm/cpufeatures.h
+@@ -321,6 +321,7 @@
+ #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
+ #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
+ #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
++#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
+ #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
+ #define X86_FEATURE_WRMSRNS		(12*32+19) /* "" Non-serializing WRMSR */
+ #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
 -- 
 2.43.0
 
