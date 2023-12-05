@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F423C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 10:53:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647539.1010770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 590A2C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:04:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647543.1010780 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAT31-0002hL-SE; Tue, 05 Dec 2023 10:53:03 +0000
+	id 1rATD6-0005hU-VV; Tue, 05 Dec 2023 11:03:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647539.1010770; Tue, 05 Dec 2023 10:53:03 +0000
+Received: by outflank-mailman (output) from mailman id 647543.1010780; Tue, 05 Dec 2023 11:03:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAT31-0002hE-P7; Tue, 05 Dec 2023 10:53:03 +0000
-Received: by outflank-mailman (input) for mailman id 647539;
- Tue, 05 Dec 2023 10:53:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rATD6-0005hN-S5; Tue, 05 Dec 2023 11:03:28 +0000
+Received: by outflank-mailman (input) for mailman id 647543;
+ Tue, 05 Dec 2023 11:03:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cmhw=HQ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rAT31-0002h8-Bi
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 10:53:03 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 75005890-935c-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 11:53:00 +0100 (CET)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3333fbbeab9so2389472f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 05 Dec 2023 02:53:00 -0800 (PST)
-Received: from [10.80.67.30] (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- b14-20020adff90e000000b0033346fe9b9bsm6019558wrr.83.2023.12.05.02.52.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Dec 2023 02:52:59 -0800 (PST)
+ <SRS0=ibAO=HQ=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1rATD5-0005hH-Fx
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:03:27 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2060c.outbound.protection.outlook.com
+ [2a01:111:f400:fe59::60c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ccacb159-935d-11ee-98e5-6d05b1d4d9a1;
+ Tue, 05 Dec 2023 12:02:38 +0100 (CET)
+Received: from MW4PR02CA0007.namprd02.prod.outlook.com (2603:10b6:303:16d::33)
+ by BL0PR12MB4899.namprd12.prod.outlook.com (2603:10b6:208:1cf::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.34; Tue, 5 Dec
+ 2023 11:02:32 +0000
+Received: from CO1PEPF000042A7.namprd03.prod.outlook.com
+ (2603:10b6:303:16d:cafe::17) by MW4PR02CA0007.outlook.office365.com
+ (2603:10b6:303:16d::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.34 via Frontend
+ Transport; Tue, 5 Dec 2023 11:02:31 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042A7.mail.protection.outlook.com (10.167.243.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7068.20 via Frontend Transport; Tue, 5 Dec 2023 11:02:31 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 5 Dec
+ 2023 05:02:30 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 5 Dec
+ 2023 05:02:30 -0600
+Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
+ Transport; Tue, 5 Dec 2023 05:02:28 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,167 +65,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 75005890-935c-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1701773580; x=1702378380; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=gBfyyYHdoaZo+tMVL/3oFuk2m5NmkJejWqjBwhqVL8o=;
-        b=MQzsrhF45Ur/8dHUvX9YwU9gTWpmS/D2i7TBcDYABoHXXitDhjYhbGPT3XozCnQD56
-         7NkegKvKrwao0zXqQq/Uk0r3AUwoG5UEQM6HMDyg21S0mHOZKouU78Kke0CtqwCEXyd7
-         6HBbRFnWSFhsxP1CTnyafu0v0ISYodCgtTyFw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701773580; x=1702378380;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=gBfyyYHdoaZo+tMVL/3oFuk2m5NmkJejWqjBwhqVL8o=;
-        b=I+J7f6Vr7vhIiKl01e0OF2S+vgKAhSly1SuNqzCKR2AhleGSaHWhV3a0Lf+iyk2ROv
-         QCnKGowNiRyxlGvCJNOYGgK1CCWWxB+HqM/SocbkfAx+Nyh6F/aS8og7MewOqvvV4Rhr
-         kIk/+yT9jbljKsGZDM++al+N2DpTG95Hy7Yb4KXvXel1mmXUrlG0ut6W7OAVibEw/BZH
-         gZo61E5o6QFDaLtC3yDq3/ozm99P76qVoRuKL5FhkUx6A6xpdgrLAHYF7+nxJxs49Y9B
-         XYM1aPz2FEr1+T+5GbH7o+htjSr5hLr7Cnbj9J04bB9FCOhyy1+jEz347O0E8bEgh85R
-         UQPQ==
-X-Gm-Message-State: AOJu0YwDhBDcL7HOkQig7IWUPUvqW6LIec/erN4Q4oUFlituKBI7zNYn
-	QKQ2KMARTFR9gq16Flo0pnFhmg==
-X-Google-Smtp-Source: AGHT+IH0Qeat3251pfRpxMH9Y9xkUL03RLdSnQyUmCH/p10SOMcP92ihW25/W+qiVc2mrCQ8MD+ekw==
-X-Received: by 2002:adf:f9d0:0:b0:333:533d:9cf1 with SMTP id w16-20020adff9d0000000b00333533d9cf1mr1061160wrr.103.1701773580005;
-        Tue, 05 Dec 2023 02:53:00 -0800 (PST)
-Message-ID: <6aaeea8c-cba9-4d3b-85a8-905dfee69e6f@citrix.com>
-Date: Tue, 5 Dec 2023 10:52:59 +0000
+X-Inumbo-ID: ccacb159-935d-11ee-98e5-6d05b1d4d9a1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AKEeslhqk9ff3fOo8O+C02ZzBeAAuiT0nOOaiTxKO/gaY2k+uM+ekFQ+aVN3+R3E7kLTEcEQpNqtP6yqaw8IwdZftKIs3IvKjSVqRdbId5EWHhecsV9T6RlxiUeaL2QSiczUVUD5oCRUY4JBHeGFjwzBM5pnTO731/YLU0QosLwlACGICJgk20/luVIrkwmRktDSDj/TiHiiqz4rNySM70Q4jIyHqedfdagu0bpA4MjRz0X90mPqF2WPkVqLgeHsSH+OL4lCSPIGQ1LHHGaD6wXKCTquz2NOAqrOWn/LPxckJLY0TRJz3Rerdyx6lH5sBSNUgvdH3NlURzkbrZE7DQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ytuLXMV96imYv8nU18kaIKWbU83DwGoQIx/XQ4xNORQ=;
+ b=Wm7xLdmkbctBNYvt7kIrklIqH89VTaILdpi1/PpANmdxZwtyzVYoexlpNozEJ7wzT1tkPQwLS4U3//aIC5wLnUMXtIRRs3yhmQaj2skoAh3fZTjRy25TDz7fU2WDYOglFwa8qO+7nK5UwuIM0fNONGFOvo57n00mPdcaK4fYOjRnGFY1EI3VHNImeqfy8kXN0zI62mU8cT4aDdGJSC8+mN77JHcePWx2iOl/ayGpKqQE0VbR2x4zjdAKkSG/+JobECm5Hy/K6LiaLrI76/zuNOIJp6Hu8aR8ZMSYlkMBshiFvQYW60+2eWETuKMc7rXNnlQa3mF0oKrxJTywT8Vl6g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=xen.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ytuLXMV96imYv8nU18kaIKWbU83DwGoQIx/XQ4xNORQ=;
+ b=nVRCJRjlGcjEKNPwrLj567MMSNGEe2PGCLxEmv1ce7MzwtUCu/7pamg45M3tasEgySFFsu6lrspodIaSzwRp8jUetDI/tl/W5jydccewS3Js4Hku6bIjHzB3CdDYQEMvhc1fe8pwpRm0kGIgrvYTZbM8iUKYaxMpi28E5pznPYI=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <03a91b0f-eabe-47bd-b9fb-a9e15bdd121f@amd.com>
+Date: Tue, 5 Dec 2023 12:02:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC XEN PATCH] xen/arm: ffa: reclaim shared memory on guest
- destroy
-Content-Language: en-GB
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>, Julien Grall <julien@xen.org>
-Cc: Jens Wiklander <jens.wiklander@linaro.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "patches@linaro.org" <patches@linaro.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <20231204075552.3585875-1-jens.wiklander@linaro.org>
- <232c2496-77d6-4e37-a400-dbefd135ef3c@xen.org>
- <0B35D609-5378-4180-B79E-0CAE69D42165@arm.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <0B35D609-5378-4180-B79E-0CAE69D42165@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: Re: [RFC PATCH] xen/arm: Add emulation of Debug Data Transfer
+ Registers
+Content-Language: en-US
+To: Julien Grall <julien@xen.org>, Ayan Kumar Halder <ayankuma@amd.com>, "Ayan
+ Kumar Halder" <ayan.kumar.halder@amd.com>, <sstabellini@kernel.org>,
+	<stefano.stabellini@amd.com>, <bertrand.marquis@arm.com>,
+	<Volodymyr_Babchuk@epam.com>
+CC: <xen-devel@lists.xenproject.org>
+References: <20231201185009.1719183-1-ayan.kumar.halder@amd.com>
+ <0bd65e25-aec2-4294-9a73-1cdaece52242@xen.org>
+ <9ffe5a34-d1f4-4f4a-82eb-77c92f71040c@amd.com>
+ <ca91f71b-9633-495f-9fb2-731bd250a561@xen.org>
+ <8547fc3b-4e77-45d7-8063-1bee869d07db@amd.com>
+ <3a9efd72-07cc-4b1d-8814-d4f6df4e6230@xen.org>
+ <73554150-9880-447c-ac2b-e4f3ef0f76be@amd.com>
+ <0d232ffe-1eb1-420b-af2c-70e16088a9b6@xen.org>
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <0d232ffe-1eb1-420b-af2c-70e16088a9b6@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042A7:EE_|BL0PR12MB4899:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1caace06-1c8d-4aee-259c-08dbf581ad85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	/rE2gZE0f+yeAjVpvT5fKhMsGVDJ6xNCTOa283y6FBtYfstLE+VP+NwqB/NGI5ESxcQAszu3jm4m7K8mI1UIhpNzZPINrG1JmjP4VVW1S5YKWBbZqcQMnxFNTnbSkKhSX51u2qxCW5dOhZVuMSiLtsXcVwvsSSE5pzHYNFkVNEK99nuFjhjRt7uQH4LpZBTr56o7HvxRvQ3iYR6Pi7g7HGDCyMMvencGznC7tGrzwPjUPDNCScdwNB+FQTBigVya6AjLXoZr9asLi6QWCHlySmLOslgcHFX55HfKOZSp7E0OZJTdfVwaNyX0BK7owVsEdNupVLk/6KBvkJZ3z5ZV0iTMiD81T2lKj4+C1ebbRMD8A9oJmtG5QYrHL96BKz96mcALZx8cxgQzCSsx6SkorLAZWNA16XxKf6IvmmBLTNJ4YL0Ib/N4d2hNMjnQRALejNAsxmaWIN9yv6maxE8FMuDei7hdCcRAmUMLq2vClQaP9t1tc6Oe4le9dUuyyIvQXg1QCG+uNTOPtm+gqGsEmVfySCZ32sN4yO3QncWksxlZ5Lcb0Vf8QqrCNDad6w3HAVC5xht3FDEfmEQtKsWpEXYX7uDNQpPjhWoZmDra/hFolz5IIh7RKHC9RQ+yZLCbO/cfbN7DVue1jSHgVobYSo021NBf5mRzSl9fMNjZ8TCE/9RrAryh4T7x7aRHFZofvkBcvShRey8IGm/D01FY9xZuAp6YAlKDpoXPFudr84hxIUMfY9HTQuHyELzXWM+s4H+Xh2ju3CGcuKkFhjk0ndVrOn4fJPUhj4LI0Csrb55IMlmz/QYc1mWZZ43Yyb/YYqtDEJxVJPEbuEN1YNVtKPzPz8PWVg3+6KRnI8N0vFUMzvfrmlTiTMJM++3veem4
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(396003)(376002)(346002)(39860400002)(230173577357003)(230273577357003)(230922051799003)(186009)(82310400011)(1800799012)(451199024)(64100799003)(46966006)(40470700004)(36840700001)(110136005)(70586007)(70206006)(316002)(16576012)(478600001)(40460700003)(5660300002)(36756003)(41300700001)(2906002)(31696002)(44832011)(86362001)(4326008)(8936002)(8676002)(31686004)(2616005)(36860700001)(83380400001)(81166007)(40480700001)(356005)(47076005)(26005)(426003)(336012)(82740400003)(53546011)(43740500002)(36900700001)(2101003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2023 11:02:31.1640
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1caace06-1c8d-4aee-259c-08dbf581ad85
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000042A7.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4899
 
-On 05/12/2023 8:14 am, Bertrand Marquis wrote:
-> Hi Julien,
->
-> Thanks a lot for your review and comment, this is very helpful.
->
->> On 4 Dec 2023, at 20:24, Julien Grall <julien@xen.org> wrote:
+
+
+On 05/12/2023 11:42, Julien Grall wrote:
+> 
+> 
+> On 05/12/2023 10:30, Michal Orzel wrote:
 >>
->> Hi Jens,
 >>
->> On 04/12/2023 07:55, Jens Wiklander wrote:
->>>        if ( ctx->rx )
->>>          rxtx_unmap(ctx);
->>>  +
->>> +    list_for_each_entry_safe(shm, tmp, &ctx->shm_list, list)
->>> +    {
->>> +        register_t handle_hi;
->>> +        register_t handle_lo;
->>> +
->>> +        uint64_to_regpair(&handle_hi, &handle_lo, shm->handle);
->>> +        res = ffa_mem_reclaim(handle_lo, handle_hi, 0);
->> Is this call expensive? If so, we may need to handle continuation here.
-> This call should not be expensive in the normal case as memory is reclaimable
-> so there is no processing required in the SP and all is done in the SPMC which
-> should basically just return a yes or no depending on a state for the handle.
->
-> So I think this is the best trade.
->
-> @Jens: One thing to consider is that a Destroy might get a retry or busy answer and we
-> will have to issue it again and this is not considered in the current implementation.
->
-> After discussing the subject internally we could in fact consider that if an SP cannot release
-> some memory shared with the VM destroyed, it should tell it by returning "retry" to the message.
-> Here that could simplify things by doing a strategy where:
-> - we retry on the VM_DESTROY message if required
-> - if some memory is not reclaimable we check if we could park it and make the VM a zombie.
-> What do you think ?
+>> On 05/12/2023 11:01, Julien Grall wrote:
+>>>
+>>>
+>>> On 05/12/2023 09:28, Michal Orzel wrote:
+>>>> Hi Julien,
+>>>>
+>>>> On 04/12/2023 20:55, Julien Grall wrote:
+>>>>>
+>>>>>
+>>>>> On 04/12/2023 13:02, Ayan Kumar Halder wrote:
+>>>>>>
+>>>>>> On 04/12/2023 10:31, Julien Grall wrote:
+>>>>>>> Hi Ayan,
+>>>>>> Hi Julien,
+>>>>>>>
+>>>>>>> On 01/12/2023 18:50, Ayan Kumar Halder wrote:
+>>>>>>>> Currently if user enables HVC_DCC config option in Linux, it invokes
+>>>>>>>> access to debug data transfer registers (ie DBGDTRTX_EL0 on arm64,
+>>>>>>>> DBGDTRTXINT on arm32). As these registers are not emulated, Xen injects
+>>>>>>>> an undefined exception to the guest. And Linux crashes.
+>>>>>>>
+>>>>>>> I am missing some data points here to be able to say whether I would
+>>>>>>> be ok with emulating the registers. So some questions:
+>>>>>>>     * As you wrote below, HVC_DCC will return -ENODEV after this
+>>>>>>> emulation. So may I ask what's the use case to enable it? (e.g. is
+>>>>>>> there a distro turning this on?)
+>>>>>>
+>>>>>> I am not aware of any distro using (or not using) this feature. This
+>>>>>> issue came to light during our internal testing, when HVC_DCC was
+>>>>>> enabled to use the debug console. When Linux runs without Xen, then we
+>>>>>> could observe the logs on the debug console. When Linux was running as a
+>>>>>> VM, it crashed.
+>>>>>>
+>>>>>> My intention here was to do the bare minimum emulation so that the crash
+>>>>>> could be avoided.
+>>>>> This reminds me a bit the discussion around "xen/arm64: Decode ldr/str
+>>>>> post increment operations". I don't want Xen to contain half-backed
+>>>>> emulation just to please an OS in certain configuration that doesn't
+>>>>> seem to be often used.
+>>>>>
+>>>>> Also, AFAICT, KVM is in the same situation...
+>>>> Well, KVM is not in the same situation. It emulates all DCC regs as RAZ/WI, so there
+>>>> will be no fault on an attempt to access the DCC.
+>>>
+>>> Does this mean a guest will think the JTAG is availabe?
+>> Yes, it will believe the DCC is available which is not a totally bad idea. Yes, it will not have
+>> any effect but at least covers the polling loop. The solution proposed here sounds better but does not take
+>> into account the busy while loop when sending the char. Linux DCC earlycon does not make an initial check that runtime
+>> driver does and will keep waiting in the loop if TXfull is set. Emulating everything as RAZ/WI solves that.
+>> As you can see, each solution has its flaws and depends on the OS implementation.
+> 
+> Right, which prove my earlier point. You are providing an emulation just
+> to please a specific driver in Linux (not even the whole Linux). This is
+> what I was the most concern of.
+> 
+> So ...
+> 
+>>>> In general, I think that if a register is not optional and does not depend on other register
+>>>> to be checked first (e.g. a feature/control register we emulate), which implies that it is fully ok for a guest to
+>>>> access it directly - we should at least try to do something not to crash a guest.
+>>>
+>>> This is where we have opposing opinion. I view crashing a guest better
+>>> than providing a wrong emulation because it gives a clear signal that
+>>> the register they are trying to access will not function properly.
+>>>
+>>> We had this exact same discussion a few years ago when Linux started to
+>>> access GIC*_ACTIVER registers. I know that Stefano was for emulating
+>>> them as RAZ but this had consequences on the domain side (Linux
+>>> sometimes need to read them). We settled on printing a warning which is
+>>> not great but better than claiming we properly emulate the register.
+>>>
+>>>>
+>>>> I agree that this feature is not widely used. In fact I can only find it implemented in Linux and U-BOOT
+>>>> and the issue I found in DBGDSCRINT (no access from EL0, even though we emulate REXT.UDCCdis as 0) only
+>>>> proves that. At the same time, it does not cost us much to add this trivial support.
+>>>
+>>> See above. If we provide an (even basic) emulation, we need to make sure
+>>> it is correct and doesn't have a side effect on the guest. If we can't
+>>> guarantee that (e.g. like for set/way when a device is assigned), then
+>>> the best course of action is to crash the domain.
+>>>
+>>> AFAICT, the proposed emulation would be ok.
+> 
+> ... I will need to revise this statement. I am now against this patch.
+Yes, the problem was tricky from the very beginning and I somewhat agree. I prepared a POC with one solution
+that Ayan extended and sent to gather feedback (hence RFC). I think we should still wait for others
+opinion (@Stefano, @Bertrand). I think the thread contains all the necessary information
+to decide what to do:
+- do nothing* (guest crashes)
+- emulate DCC the same way as KVM i.e. RAZ/WI (no crash, no busy loop, guest keeps using DCC with no effect)
+- emulate DCC with TXfull set to 1 (no crash, runtime DCC in Linux returns -ENODEV, earlycon busy loop issue)
 
-This is the cleanup issue discussed at XenSummit, isn't it?
+* I still think we should fix DBGDSCRINT but I can send a separate patch (not really related to the DCC problem)
 
-You cannot feasibly implement this cleanup by having
-ffa_domain_teardown() return -ERESTART.
+~Michal
 
-Yes, it will probably function - but now you're now bouncing in/out of
-Xen as fast as the CPU will allow, rechecking a condition which will
-take an unbounded quantity of time.  Meanwhile, you've tied up a
-userspace thread (the invocation of `xl destroy`) to do so, and one of
-dom0's vCPU for however long the scheduler is willing to schedule the
-destroy invocation, which will be 100% of the time as it's always busy
-in the hypervisor.
-
-The teardown/kill infrastructure is intended and expected to always make
-forward progress.
-
-
-The closest thing to this patch which will work sanely is this:
-
-Hold a single domain reference for any non-zero amount of magic memory
-held.  See domain_adjust_tot_pages() and how it interacts with
-{get,put}_domain(), and copy it.  Importantly, this prevents the domain
-being freed until the final piece of magic memory has been released.
-
-Have some way (can be early on the teardown/kill path, or a separate
-hypercall - assuming the VM can't ever be scheduled again) to kick Xen
-into being responsible for trying to reclaim the memory.  (Start a
-timer, or reclaim in the idle loop, whatever.)
-
-This way, you can `xl destroy` a VM in an arbitrary state, *and* the
-invocation will terminate when Xen has nothing deterministic left to do,
-*and* in the case that the secure world or Xen has an issue, the VM will
-stay around as a zombie holding minimal resources.
-
-~Andrew
 
