@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4383C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 10:02:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647509.1010689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7175C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 10:08:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647513.1010710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rASFM-00047T-Hp; Tue, 05 Dec 2023 10:01:44 +0000
+	id 1rASLY-00060p-BX; Tue, 05 Dec 2023 10:08:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647509.1010689; Tue, 05 Dec 2023 10:01:44 +0000
+Received: by outflank-mailman (output) from mailman id 647513.1010710; Tue, 05 Dec 2023 10:08:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rASFM-00047M-Ec; Tue, 05 Dec 2023 10:01:44 +0000
-Received: by outflank-mailman (input) for mailman id 647509;
- Tue, 05 Dec 2023 10:01:43 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1rASLY-00060i-8q; Tue, 05 Dec 2023 10:08:08 +0000
+Received: by outflank-mailman (input) for mailman id 647513;
+ Tue, 05 Dec 2023 10:08:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rASFL-00047G-Fy
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 10:01:43 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rASFG-0001hY-MZ; Tue, 05 Dec 2023 10:01:38 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rASFG-0003Dv-GB; Tue, 05 Dec 2023 10:01:38 +0000
+ (envelope-from <SRS0=Mnjk=HQ=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1rASLW-0005zz-Le
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 10:08:06 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2e91f1bd-9356-11ee-98e5-6d05b1d4d9a1;
+ Tue, 05 Dec 2023 11:08:05 +0100 (CET)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0121122060;
+ Tue,  5 Dec 2023 10:08:04 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id B7DD3138FF;
+ Tue,  5 Dec 2023 10:08:03 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id ArWzK4P2bmX6MAAAn2gu4w
+ (envelope-from <jgross@suse.com>); Tue, 05 Dec 2023 10:08:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,110 +53,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=emITBoV3TzCZp2reSjmHhDi/1Y0czcMhxi2xOmBM4c8=; b=z88XR1jh1LiWWJtNcw1ZuDc5Om
-	xphf3ylRNxyFmCjTGX5gjSz4vJ8DIFPfi4ypcF0+J6jCjlgBJNkU3qPjm7ije+26+eGk7wIhTu1D3
-	VqubnMulAl8/nfb9szV+H8C/Cu55cjjJ4IWSwVI9gkHBrZgyNxMsEAl3ijzjfYDHJYW4=;
-Message-ID: <3a9efd72-07cc-4b1d-8814-d4f6df4e6230@xen.org>
-Date: Tue, 5 Dec 2023 10:01:36 +0000
+X-Inumbo-ID: 2e91f1bd-9356-11ee-98e5-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1701770884; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2fYQv/39LJ/pI8k7gLnqlsK8l/cey3HS0JyD9skuDbw=;
+	b=px9YmtebgyHlc7a5wrtMn8qltRRRoBjVOspgyMydzA1AQvl3txfWWUPkmgs7arLdbA5l3P
+	zGPza2ljlKaI2LIoPT3HjEP+7Y1Q2h5YS7mkn+9rtHjO+2/D8HdtBlbo2f3RFO3ZfWlCmn
+	pj7BictQ/LKTnzHgMMjdupkqtG4Fx3A=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Arnd Bergmann <arnd@arndb.de>
+Subject: [PATCH 1/2] xen: make include/xen/unaligned.h usable on all architectures
+Date: Tue,  5 Dec 2023 11:07:55 +0100
+Message-Id: <20231205100756.18920-2-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231205100756.18920-1-jgross@suse.com>
+References: <20231205100756.18920-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] xen/arm: Add emulation of Debug Data Transfer
- Registers
-Content-Language: en-GB
-To: Michal Orzel <michal.orzel@amd.com>, Ayan Kumar Halder
- <ayankuma@amd.com>, Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
- sstabellini@kernel.org, stefano.stabellini@amd.com,
- bertrand.marquis@arm.com, Volodymyr_Babchuk@epam.com
-Cc: xen-devel@lists.xenproject.org
-References: <20231201185009.1719183-1-ayan.kumar.halder@amd.com>
- <0bd65e25-aec2-4294-9a73-1cdaece52242@xen.org>
- <9ffe5a34-d1f4-4f4a-82eb-77c92f71040c@amd.com>
- <ca91f71b-9633-495f-9fb2-731bd250a561@xen.org>
- <8547fc3b-4e77-45d7-8063-1bee869d07db@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <8547fc3b-4e77-45d7-8063-1bee869d07db@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spamd-Result: default: False [-3.30 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 REPLY(-4.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 NEURAL_HAM_LONG(-1.00)[-1.000];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-0.20)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[9];
+	 MID_CONTAINS_FROM(1.00)[];
+	 DBL_BLOCKED_OPENRESOLVER(0.00)[arndb.de:email,suse.com:email];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-3.00)[99.99%]
 
+Instead of defining get_unaligned() and put_unaligned() in a way that
+is only supporting architectures allowing unaligned accesses, use the
+same approach as the Linux kernel and let the compiler do the
+decision how to generate the code for probably unaligned data accesses.
 
+Update include/xen/unaligned.h from include/asm-generic/unaligned.h of
+the Linux kernel.
 
-On 05/12/2023 09:28, Michal Orzel wrote:
-> Hi Julien,
-> 
-> On 04/12/2023 20:55, Julien Grall wrote:
->>
->>
->> On 04/12/2023 13:02, Ayan Kumar Halder wrote:
->>>
->>> On 04/12/2023 10:31, Julien Grall wrote:
->>>> Hi Ayan,
->>> Hi Julien,
->>>>
->>>> On 01/12/2023 18:50, Ayan Kumar Halder wrote:
->>>>> Currently if user enables HVC_DCC config option in Linux, it invokes
->>>>> access to debug data transfer registers (ie DBGDTRTX_EL0 on arm64,
->>>>> DBGDTRTXINT on arm32). As these registers are not emulated, Xen injects
->>>>> an undefined exception to the guest. And Linux crashes.
->>>>
->>>> I am missing some data points here to be able to say whether I would
->>>> be ok with emulating the registers. So some questions:
->>>>    * As you wrote below, HVC_DCC will return -ENODEV after this
->>>> emulation. So may I ask what's the use case to enable it? (e.g. is
->>>> there a distro turning this on?)
->>>
->>> I am not aware of any distro using (or not using) this feature. This
->>> issue came to light during our internal testing, when HVC_DCC was
->>> enabled to use the debug console. When Linux runs without Xen, then we
->>> could observe the logs on the debug console. When Linux was running as a
->>> VM, it crashed.
->>>
->>> My intention here was to do the bare minimum emulation so that the crash
->>> could be avoided.
->> This reminds me a bit the discussion around "xen/arm64: Decode ldr/str
->> post increment operations". I don't want Xen to contain half-backed
->> emulation just to please an OS in certain configuration that doesn't
->> seem to be often used.
->>
->> Also, AFAICT, KVM is in the same situation...
-> Well, KVM is not in the same situation. It emulates all DCC regs as RAZ/WI, so there
-> will be no fault on an attempt to access the DCC.
+The generated code has been checked to be the same on x86.
 
-Does this mean a guest will think the JTAG is availabe?
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 803f4e1eab7a
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xen/include/xen/unaligned.h | 121 +++++++++++++++++++++++++-----------
+ 1 file changed, 86 insertions(+), 35 deletions(-)
 
-> 
-> In general, I think that if a register is not optional and does not depend on other register
-> to be checked first (e.g. a feature/control register we emulate), which implies that it is fully ok for a guest to
-> access it directly - we should at least try to do something not to crash a guest.
-
-This is where we have opposing opinion. I view crashing a guest better 
-than providing a wrong emulation because it gives a clear signal that 
-the register they are trying to access will not function properly.
-
-We had this exact same discussion a few years ago when Linux started to 
-access GIC*_ACTIVER registers. I know that Stefano was for emulating 
-them as RAZ but this had consequences on the domain side (Linux 
-sometimes need to read them). We settled on printing a warning which is 
-not great but better than claiming we properly emulate the register.
-
-> 
-> I agree that this feature is not widely used. In fact I can only find it implemented in Linux and U-BOOT
-> and the issue I found in DBGDSCRINT (no access from EL0, even though we emulate REXT.UDCCdis as 0) only
-> proves that. At the same time, it does not cost us much to add this trivial support.
-
-See above. If we provide an (even basic) emulation, we need to make sure 
-it is correct and doesn't have a side effect on the guest. If we can't 
-guarantee that (e.g. like for set/way when a device is assigned), then 
-the best course of action is to crash the domain.
-
-AFAICT, the proposed emulation would be ok. But I want to make clear 
-that I would not generally be ok with this approach and the decision 
-would need to be on the case by case basis.
-
-Cheers,
-
+diff --git a/xen/include/xen/unaligned.h b/xen/include/xen/unaligned.h
+index 0a2b16d05d..325d9f875f 100644
+--- a/xen/include/xen/unaligned.h
++++ b/xen/include/xen/unaligned.h
+@@ -1,12 +1,4 @@
+-/*
+- * This header can be used by architectures where unaligned accesses work
+- * without faulting, and at least reasonably efficiently.  Other architectures
+- * will need to have a custom asm/unaligned.h.
+- */
+-#ifndef __ASM_UNALIGNED_H__
+-#error "xen/unaligned.h should not be included directly - include asm/unaligned.h instead"
+-#endif
+-
++/* SPDX-License-Identifier: GPL-2.0 */
+ #ifndef __XEN_UNALIGNED_H__
+ #define __XEN_UNALIGNED_H__
+ 
+@@ -15,67 +7,126 @@
+ #include <asm/byteorder.h>
+ #endif
+ 
+-#define get_unaligned(p) (*(p))
+-#define put_unaligned(val, p) (*(p) = (val))
++/*
++ * This is the most generic implementation of unaligned accesses
++ * and should work almost anywhere.
++ */
++
++#define __get_unaligned_t(type, ptr) ({						\
++	const struct { type x; } __packed *__pptr = (typeof(__pptr))(ptr);	\
++	__pptr->x;								\
++})
++
++#define __put_unaligned_t(type, val, ptr) do {					\
++	struct { type x; } __packed *__pptr = (typeof(__pptr))(ptr);		\
++	__pptr->x = (val);							\
++} while (0)
++
++#define get_unaligned(ptr)	__get_unaligned_t(typeof(*(ptr)), (ptr))
++#define put_unaligned(val, ptr) __put_unaligned_t(typeof(*(ptr)), (val), (ptr))
++
++static inline u16 get_unaligned_le16(const void *p)
++{
++	return le16_to_cpu(__get_unaligned_t(__le16, p));
++}
++
++static inline u32 get_unaligned_le32(const void *p)
++{
++	return le32_to_cpu(__get_unaligned_t(__le32, p));
++}
++
++static inline u64 get_unaligned_le64(const void *p)
++{
++	return le64_to_cpu(__get_unaligned_t(__le64, p));
++}
++
++static inline void put_unaligned_le16(u16 val, void *p)
++{
++	__put_unaligned_t(__le16, cpu_to_le16(val), p);
++}
++
++static inline void put_unaligned_le32(u32 val, void *p)
++{
++	__put_unaligned_t(__le32, cpu_to_le32(val), p);
++}
++
++static inline void put_unaligned_le64(u64 val, void *p)
++{
++	__put_unaligned_t(__le64, cpu_to_le64(val), p);
++}
++
++static inline u16 get_unaligned_be16(const void *p)
++{
++	return be16_to_cpu(__get_unaligned_t(__be16, p));
++}
++
++static inline u32 get_unaligned_be32(const void *p)
++{
++	return be32_to_cpu(__get_unaligned_t(__be32, p));
++}
+ 
+-static inline uint16_t get_unaligned_be16(const void *p)
++static inline u64 get_unaligned_be64(const void *p)
+ {
+-	return be16_to_cpup(p);
++	return be64_to_cpu(__get_unaligned_t(__be64, p));
+ }
+ 
+-static inline void put_unaligned_be16(uint16_t val, void *p)
++static inline void put_unaligned_be16(u16 val, void *p)
+ {
+-	*(__force __be16*)p = cpu_to_be16(val);
++	__put_unaligned_t(__be16, cpu_to_be16(val), p);
+ }
+ 
+-static inline uint32_t get_unaligned_be32(const void *p)
++static inline void put_unaligned_be32(u32 val, void *p)
+ {
+-	return be32_to_cpup(p);
++	__put_unaligned_t(__be32, cpu_to_be32(val), p);
+ }
+ 
+-static inline void put_unaligned_be32(uint32_t val, void *p)
++static inline void put_unaligned_be64(u64 val, void *p)
+ {
+-	*(__force __be32*)p = cpu_to_be32(val);
++	__put_unaligned_t(__be64, cpu_to_be64(val), p);
+ }
+ 
+-static inline uint64_t get_unaligned_be64(const void *p)
++static inline u32 __get_unaligned_be24(const u8 *p)
+ {
+-	return be64_to_cpup(p);
++	return p[0] << 16 | p[1] << 8 | p[2];
+ }
+ 
+-static inline void put_unaligned_be64(uint64_t val, void *p)
++static inline u32 get_unaligned_be24(const void *p)
+ {
+-	*(__force __be64*)p = cpu_to_be64(val);
++	return __get_unaligned_be24(p);
+ }
+ 
+-static inline uint16_t get_unaligned_le16(const void *p)
++static inline u32 __get_unaligned_le24(const u8 *p)
+ {
+-	return le16_to_cpup(p);
++	return p[0] | p[1] << 8 | p[2] << 16;
+ }
+ 
+-static inline void put_unaligned_le16(uint16_t val, void *p)
++static inline u32 get_unaligned_le24(const void *p)
+ {
+-	*(__force __le16*)p = cpu_to_le16(val);
++	return __get_unaligned_le24(p);
+ }
+ 
+-static inline uint32_t get_unaligned_le32(const void *p)
++static inline void __put_unaligned_be24(const u32 val, u8 *p)
+ {
+-	return le32_to_cpup(p);
++	*p++ = val >> 16;
++	*p++ = val >> 8;
++	*p++ = val;
+ }
+ 
+-static inline void put_unaligned_le32(uint32_t val, void *p)
++static inline void put_unaligned_be24(const u32 val, void *p)
+ {
+-	*(__force __le32*)p = cpu_to_le32(val);
++	__put_unaligned_be24(val, p);
+ }
+ 
+-static inline uint64_t get_unaligned_le64(const void *p)
++static inline void __put_unaligned_le24(const u32 val, u8 *p)
+ {
+-	return le64_to_cpup(p);
++	*p++ = val;
++	*p++ = val >> 8;
++	*p++ = val >> 16;
+ }
+ 
+-static inline void put_unaligned_le64(uint64_t val, void *p)
++static inline void put_unaligned_le24(const u32 val, void *p)
+ {
+-	*(__force __le64*)p = cpu_to_le64(val);
++	__put_unaligned_le24(val, p);
+ }
+ 
+ #endif /* __XEN_UNALIGNED_H__ */
 -- 
-Julien Grall
+2.35.3
+
 
