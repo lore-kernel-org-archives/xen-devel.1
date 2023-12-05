@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C3DC4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:34:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647657.1011149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAE4C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:36:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647668.1011159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATh6-0000Z7-BZ; Tue, 05 Dec 2023 11:34:28 +0000
+	id 1rATid-0002P7-M0; Tue, 05 Dec 2023 11:36:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647657.1011149; Tue, 05 Dec 2023 11:34:28 +0000
+Received: by outflank-mailman (output) from mailman id 647668.1011159; Tue, 05 Dec 2023 11:36:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATh6-0000Yz-8p; Tue, 05 Dec 2023 11:34:28 +0000
-Received: by outflank-mailman (input) for mailman id 647657;
- Tue, 05 Dec 2023 11:34:27 +0000
+	id 1rATid-0002P0-JP; Tue, 05 Dec 2023 11:36:03 +0000
+Received: by outflank-mailman (input) for mailman id 647668;
+ Tue, 05 Dec 2023 11:36:01 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUk-0003dP-Ul
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:42 +0000
+ id 1rATUu-0003dP-VZ
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:52 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 71f72086-9360-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 12:21:33 +0100 (CET)
+ id 75364c9f-9360-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 12:21:39 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:24 -0800
+ 05 Dec 2023 03:21:28 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:22 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:26 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71f72086-9360-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 75364c9f-9360-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775294; x=1733311294;
+  t=1701775300; x=1733311300;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=0d3DQGm/I5ml9Pn9RDXaRIVibuYwsK2Hzyh1Rbxiqo8=;
-  b=f4ZcupoRpybK9ORpKfHT4iN/IRTwpbYpWh5zmmvRJsPENQlKK6Eo3d14
-   tylWxPJxN6zqTkCTFuR9LuJdVyemMK1xe7U78bNomNzcLm0Np/egwLdCL
-   ad+qJW8MLPZ9uynrCC7LaQS1LVhkv033cc9JJHOAYJXAUQmyq7ZLVh836
-   VtqB7q851Wr2+tEZGsR4LT+wBKg9uVuteDE9b64a059aCkCD7xP2Vcfvd
-   zLLxBrGuZaMZV+9yydiwbLfK4d4omntuUEQwMIHUwfVEHCPFuhX2VKGuI
-   GFNkgRL2K/fj+Sg0Sr8xGeABqPB1p8AZpRjjlUjHNnCoEruazKlWpDyGB
+  bh=hUnJXd4Og3bi9hMQPhy7/57sMPohL9ggwF5nLer6ATE=;
+  b=OHpBGf8SFQ+WAx0+UAC+kewWsQ7RDH/DV+V04Ys8LZyoyYKE6NaFSVPc
+   1BTC+7u8B9zUrLutGnrESGCK8fNEOHdHiCiyzvFHgCEAhMI6+yEJ6CsMH
+   YWPWRsPFK9EBRnWgh/ql9K8cTu8n/nMXYFBF1UVyZNdYLTahMmJytFdZA
+   JaA/ASUgbpZDAcwYLUGihn40MtGzN1hBZoJgg/4UAYZw7E1fYaahbFT3g
+   v1ESQpdIQAosxBygmOcR/USaZefmmEXqXmSoLwqoBxGBtomq9nEr4GI0d
+   l+97fBPr35DjQAb0/3ZONmGdAMR+LnAbMd0gGB4Id/taasCJlotR0AA+k
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942571"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942719"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942571"
+   d="scan'208";a="942719"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192976"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018193019"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018192976"
+   d="scan'208";a="1018193019"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,230 +88,176 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 22/35] x86/idtentry: Incorporate definitions/declarations of the FRED entries
-Date: Tue,  5 Dec 2023 02:50:11 -0800
-Message-ID: <20231205105030.8698-23-xin3.li@intel.com>
+Subject: [PATCH v13 34/35] x86/fred: Add FRED initialization functions
+Date: Tue,  5 Dec 2023 02:50:23 -0800
+Message-ID: <20231205105030.8698-35-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-FRED and IDT can share most of the definitions and declarations so
-that in the majority of cases the actual handler implementation is the
-same.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-The differences are the exceptions where FRED stores exception related
-information on the stack and the sysvec implementations as FRED can
-handle irqentry/exit() in the dispatcher instead of having it in each
-handler.
+Add cpu_init_fred_exceptions() to:
+  - Set FRED entrypoints for events happening in ring 0 and 3.
+  - Specify the stack level for IRQs occurred ring 0.
+  - Specify dedicated event stacks for #DB/NMI/#MCE/#DF.
+  - Enable FRED and invalidtes IDT.
+  - Force 32-bit system calls to use "int $0x80" only.
 
-Also add stub defines for vectors which are not used due to Kconfig
-decisions to spare the ifdeffery in the actual FRED dispatch code.
+Add fred_complete_exception_setup() to:
+  - Initialize system_vectors as done for IDT systems.
+  - Set unused sysvec_table entries to fred_handle_spurious_interrupt().
 
-Suggested-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
+Co-developed-by: Xin Li <xin3.li@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Change since v9:
-* Except NMI/#DB/#MCE, FRED really should share the exception handlers
-  with IDT (Thomas Gleixner).
+Changes since v9:
+* Set unused sysvec table entries to fred_handle_spurious_interrupt()
+  in fred_complete_exception_setup() (Thomas Gleixner).
 
-Change since v8:
-* Put IDTENTRY changes in a separate patch (Thomas Gleixner).
+Changes since v5:
+* Add a comment for FRED stack level settings (Lai Jiangshan).
+* Define NMI/#DB/#MCE/#DF stack levels using macros.
 ---
- arch/x86/include/asm/idtentry.h | 71 +++++++++++++++++++++++++++++----
- 1 file changed, 63 insertions(+), 8 deletions(-)
+ arch/x86/entry/entry_fred.c | 21 +++++++++++++
+ arch/x86/include/asm/fred.h |  5 ++++
+ arch/x86/kernel/Makefile    |  1 +
+ arch/x86/kernel/fred.c      | 59 +++++++++++++++++++++++++++++++++++++
+ 4 files changed, 86 insertions(+)
+ create mode 100644 arch/x86/kernel/fred.c
 
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index cfca68f6cb84..4f26ee9b8b74 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -13,15 +13,18 @@
+diff --git a/arch/x86/entry/entry_fred.c b/arch/x86/entry/entry_fred.c
+index 3e33a4ab4624..abe66d65fa2d 100644
+--- a/arch/x86/entry/entry_fred.c
++++ b/arch/x86/entry/entry_fred.c
+@@ -140,6 +140,27 @@ void __init fred_install_sysvec(unsigned int sysvec, idtentry_t handler)
+ 		 sysvec_table[sysvec - FIRST_SYSTEM_VECTOR] = handler;
+ }
  
- #include <asm/irq_stack.h>
- 
-+typedef void (*idtentry_t)(struct pt_regs *regs);
++static noinstr void fred_handle_spurious_interrupt(struct pt_regs *regs)
++{
++	spurious_interrupt(regs, regs->fred_ss.vector);
++}
 +
- /**
-  * DECLARE_IDTENTRY - Declare functions for simple IDT entry points
-  *		      No error code pushed by hardware
-  * @vector:	Vector number (ignored for C)
-  * @func:	Function name of the entry point
-  *
-- * Declares three functions:
-+ * Declares four functions:
-  * - The ASM entry point: asm_##func
-  * - The XEN PV trap entry point: xen_##func (maybe unused)
-+ * - The C handler called from the FRED event dispatcher (maybe unused)
-  * - The C handler called from the ASM entry point
-  *
-  * Note: This is the C variant of DECLARE_IDTENTRY(). As the name says it
-@@ -31,6 +34,7 @@
- #define DECLARE_IDTENTRY(vector, func)					\
- 	asmlinkage void asm_##func(void);				\
- 	asmlinkage void xen_asm_##func(void);				\
-+	void fred_##func(struct pt_regs *regs);				\
- 	__visible void func(struct pt_regs *regs)
++void __init fred_complete_exception_setup(void)
++{
++	unsigned int vector;
++
++	for (vector = 0; vector < FIRST_EXTERNAL_VECTOR; vector++)
++		set_bit(vector, system_vectors);
++
++	for (vector = 0; vector < NR_SYSTEM_VECTORS; vector++) {
++		if (sysvec_table[vector])
++			set_bit(vector + FIRST_SYSTEM_VECTOR, system_vectors);
++		else
++			sysvec_table[vector] = fred_handle_spurious_interrupt;
++	}
++	fred_setup_done = true;
++}
++
+ static noinstr void fred_extint(struct pt_regs *regs)
+ {
+ 	unsigned int vector = regs->fred_ss.vector;
+diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
+index 2fa9f34e5c95..e86c7ba32435 100644
+--- a/arch/x86/include/asm/fred.h
++++ b/arch/x86/include/asm/fred.h
+@@ -83,8 +83,13 @@ static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int
+ 	asm_fred_entry_from_kvm(ss);
+ }
  
- /**
-@@ -137,6 +141,17 @@ static __always_inline void __##func(struct pt_regs *regs,		\
- #define DEFINE_IDTENTRY_RAW(func)					\
- __visible noinstr void func(struct pt_regs *regs)
- 
-+/**
-+ * DEFINE_FREDENTRY_RAW - Emit code for raw FRED entry points
-+ * @func:	Function name of the entry point
-+ *
-+ * @func is called from the FRED event dispatcher with interrupts disabled.
-+ *
-+ * See @DEFINE_IDTENTRY_RAW for further details.
++void cpu_init_fred_exceptions(void);
++void fred_complete_exception_setup(void);
++
+ #else /* CONFIG_X86_FRED */
+ static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
++static inline void cpu_init_fred_exceptions(void) { }
++static inline void fred_complete_exception_setup(void) { }
+ static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int vector) { }
+ #endif /* CONFIG_X86_FRED */
+ #endif /* !__ASSEMBLY__ */
+diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
+index 0000325ab98f..0dcbfc1a4c41 100644
+--- a/arch/x86/kernel/Makefile
++++ b/arch/x86/kernel/Makefile
+@@ -48,6 +48,7 @@ obj-y			+= platform-quirks.o
+ obj-y			+= process_$(BITS).o signal.o signal_$(BITS).o
+ obj-y			+= traps.o idt.o irq.o irq_$(BITS).o dumpstack_$(BITS).o
+ obj-y			+= time.o ioport.o dumpstack.o nmi.o
++obj-$(CONFIG_X86_FRED)	+= fred.o
+ obj-$(CONFIG_MODIFY_LDT_SYSCALL)	+= ldt.o
+ obj-$(CONFIG_X86_KERNEL_IBT)		+= ibt_selftest.o
+ obj-y			+= setup.o x86_init.o i8259.o irqinit.o
+diff --git a/arch/x86/kernel/fred.c b/arch/x86/kernel/fred.c
+new file mode 100644
+index 000000000000..4bcd8791ad96
+--- /dev/null
++++ b/arch/x86/kernel/fred.c
+@@ -0,0 +1,59 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#include <linux/kernel.h>
++
++#include <asm/desc.h>
++#include <asm/fred.h>
++#include <asm/tlbflush.h>
++#include <asm/traps.h>
++
++/* #DB in the kernel would imply the use of a kernel debugger. */
++#define FRED_DB_STACK_LEVEL		1UL
++#define FRED_NMI_STACK_LEVEL		2UL
++#define FRED_MC_STACK_LEVEL		2UL
++/*
++ * #DF is the highest level because a #DF means "something went wrong
++ * *while delivering an exception*." The number of cases for which that
++ * can happen with FRED is drastically reduced and basically amounts to
++ * "the stack you pointed me to is broken." Thus, always change stacks
++ * on #DF, which means it should be at the highest level.
 + */
-+#define DEFINE_FREDENTRY_RAW(func)					\
-+noinstr void fred_##func(struct pt_regs *regs)
++#define FRED_DF_STACK_LEVEL		3UL
 +
- /**
-  * DECLARE_IDTENTRY_RAW_ERRORCODE - Declare functions for raw IDT entry points
-  *				    Error code pushed by hardware
-@@ -233,17 +248,27 @@ static noinline void __##func(struct pt_regs *regs, u32 vector)
- #define DEFINE_IDTENTRY_SYSVEC(func)					\
- static void __##func(struct pt_regs *regs);				\
- 									\
-+static __always_inline void instr_##func(struct pt_regs *regs)		\
-+{									\
-+	kvm_set_cpu_l1tf_flush_l1d();					\
-+	run_sysvec_on_irqstack_cond(__##func, regs);			\
-+}									\
-+									\
- __visible noinstr void func(struct pt_regs *regs)			\
- {									\
- 	irqentry_state_t state = irqentry_enter(regs);			\
- 									\
- 	instrumentation_begin();					\
--	kvm_set_cpu_l1tf_flush_l1d();					\
--	run_sysvec_on_irqstack_cond(__##func, regs);			\
-+	instr_##func (regs);						\
- 	instrumentation_end();						\
- 	irqentry_exit(regs, state);					\
- }									\
- 									\
-+void fred_##func(struct pt_regs *regs)					\
-+{									\
-+	instr_##func (regs);						\
-+}									\
-+									\
- static noinline void __##func(struct pt_regs *regs)
- 
- /**
-@@ -260,19 +285,29 @@ static noinline void __##func(struct pt_regs *regs)
- #define DEFINE_IDTENTRY_SYSVEC_SIMPLE(func)				\
- static __always_inline void __##func(struct pt_regs *regs);		\
- 									\
--__visible noinstr void func(struct pt_regs *regs)			\
-+static __always_inline void instr_##func(struct pt_regs *regs)		\
- {									\
--	irqentry_state_t state = irqentry_enter(regs);			\
--									\
--	instrumentation_begin();					\
- 	__irq_enter_raw();						\
- 	kvm_set_cpu_l1tf_flush_l1d();					\
- 	__##func (regs);						\
- 	__irq_exit_raw();						\
-+}									\
-+									\
-+__visible noinstr void func(struct pt_regs *regs)			\
-+{									\
-+	irqentry_state_t state = irqentry_enter(regs);			\
-+									\
-+	instrumentation_begin();					\
-+	instr_##func (regs);						\
- 	instrumentation_end();						\
- 	irqentry_exit(regs, state);					\
- }									\
- 									\
-+void fred_##func(struct pt_regs *regs)					\
-+{									\
-+	instr_##func (regs);						\
-+}									\
-+									\
- static __always_inline void __##func(struct pt_regs *regs)
- 
- /**
-@@ -410,15 +445,18 @@ __visible noinstr void func(struct pt_regs *regs,			\
- /* C-Code mapping */
- #define DECLARE_IDTENTRY_NMI		DECLARE_IDTENTRY_RAW
- #define DEFINE_IDTENTRY_NMI		DEFINE_IDTENTRY_RAW
-+#define DEFINE_FREDENTRY_NMI		DEFINE_FREDENTRY_RAW
- 
- #ifdef CONFIG_X86_64
- #define DECLARE_IDTENTRY_MCE		DECLARE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_MCE		DEFINE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_MCE_USER	DEFINE_IDTENTRY_NOIST
-+#define DEFINE_FREDENTRY_MCE		DEFINE_FREDENTRY_RAW
- 
- #define DECLARE_IDTENTRY_DEBUG		DECLARE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_DEBUG		DEFINE_IDTENTRY_IST
- #define DEFINE_IDTENTRY_DEBUG_USER	DEFINE_IDTENTRY_NOIST
-+#define DEFINE_FREDENTRY_DEBUG		DEFINE_FREDENTRY_RAW
- #endif
- 
- #else /* !__ASSEMBLY__ */
-@@ -651,23 +689,36 @@ DECLARE_IDTENTRY(RESCHEDULE_VECTOR,			sysvec_reschedule_ipi);
- DECLARE_IDTENTRY_SYSVEC(REBOOT_VECTOR,			sysvec_reboot);
- DECLARE_IDTENTRY_SYSVEC(CALL_FUNCTION_SINGLE_VECTOR,	sysvec_call_function_single);
- DECLARE_IDTENTRY_SYSVEC(CALL_FUNCTION_VECTOR,		sysvec_call_function);
-+#else
-+# define fred_sysvec_reschedule_ipi			NULL
-+# define fred_sysvec_reboot				NULL
-+# define fred_sysvec_call_function_single		NULL
-+# define fred_sysvec_call_function			NULL
- #endif
- 
- #ifdef CONFIG_X86_LOCAL_APIC
- # ifdef CONFIG_X86_MCE_THRESHOLD
- DECLARE_IDTENTRY_SYSVEC(THRESHOLD_APIC_VECTOR,		sysvec_threshold);
-+# else
-+# define fred_sysvec_threshold				NULL
- # endif
- 
- # ifdef CONFIG_X86_MCE_AMD
- DECLARE_IDTENTRY_SYSVEC(DEFERRED_ERROR_VECTOR,		sysvec_deferred_error);
-+# else
-+# define fred_sysvec_deferred_error			NULL
- # endif
- 
- # ifdef CONFIG_X86_THERMAL_VECTOR
- DECLARE_IDTENTRY_SYSVEC(THERMAL_APIC_VECTOR,		sysvec_thermal);
-+# else
-+# define fred_sysvec_thermal				NULL
- # endif
- 
- # ifdef CONFIG_IRQ_WORK
- DECLARE_IDTENTRY_SYSVEC(IRQ_WORK_VECTOR,		sysvec_irq_work);
-+# else
-+# define fred_sysvec_irq_work				NULL
- # endif
- #endif
- 
-@@ -675,12 +726,16 @@ DECLARE_IDTENTRY_SYSVEC(IRQ_WORK_VECTOR,		sysvec_irq_work);
- DECLARE_IDTENTRY_SYSVEC(POSTED_INTR_VECTOR,		sysvec_kvm_posted_intr_ipi);
- DECLARE_IDTENTRY_SYSVEC(POSTED_INTR_WAKEUP_VECTOR,	sysvec_kvm_posted_intr_wakeup_ipi);
- DECLARE_IDTENTRY_SYSVEC(POSTED_INTR_NESTED_VECTOR,	sysvec_kvm_posted_intr_nested_ipi);
-+#else
-+# define fred_sysvec_kvm_posted_intr_ipi		NULL
-+# define fred_sysvec_kvm_posted_intr_wakeup_ipi		NULL
-+# define fred_sysvec_kvm_posted_intr_nested_ipi		NULL
- #endif
- 
- #if IS_ENABLED(CONFIG_HYPERV)
- DECLARE_IDTENTRY_SYSVEC(HYPERVISOR_CALLBACK_VECTOR,	sysvec_hyperv_callback);
- DECLARE_IDTENTRY_SYSVEC(HYPERV_REENLIGHTENMENT_VECTOR,	sysvec_hyperv_reenlightenment);
--DECLARE_IDTENTRY_SYSVEC(HYPERV_STIMER0_VECTOR,	sysvec_hyperv_stimer0);
-+DECLARE_IDTENTRY_SYSVEC(HYPERV_STIMER0_VECTOR,		sysvec_hyperv_stimer0);
- #endif
- 
- #if IS_ENABLED(CONFIG_ACRN_GUEST)
++#define FRED_STKLVL(vector, lvl)	((lvl) << (2 * (vector)))
++
++void cpu_init_fred_exceptions(void)
++{
++	/* When FRED is enabled by default, remove this log message */
++	pr_info("Initialize FRED on CPU%d\n", smp_processor_id());
++
++	wrmsrl(MSR_IA32_FRED_CONFIG,
++	       /* Reserve for CALL emulation */
++	       FRED_CONFIG_REDZONE |
++	       FRED_CONFIG_INT_STKLVL(0) |
++	       FRED_CONFIG_ENTRYPOINT(asm_fred_entrypoint_user));
++
++	/*
++	 * The purpose of separate stacks for NMI, #DB and #MC *in the kernel*
++	 * (remember that user space faults are always taken on stack level 0)
++	 * is to avoid overflowing the kernel stack.
++	 */
++	wrmsrl(MSR_IA32_FRED_STKLVLS,
++	       FRED_STKLVL(X86_TRAP_DB,  FRED_DB_STACK_LEVEL) |
++	       FRED_STKLVL(X86_TRAP_NMI, FRED_NMI_STACK_LEVEL) |
++	       FRED_STKLVL(X86_TRAP_MC,  FRED_MC_STACK_LEVEL) |
++	       FRED_STKLVL(X86_TRAP_DF,  FRED_DF_STACK_LEVEL));
++
++	/* The FRED equivalents to IST stacks... */
++	wrmsrl(MSR_IA32_FRED_RSP1, __this_cpu_ist_top_va(DB));
++	wrmsrl(MSR_IA32_FRED_RSP2, __this_cpu_ist_top_va(NMI));
++	wrmsrl(MSR_IA32_FRED_RSP3, __this_cpu_ist_top_va(DF));
++
++	/* Enable FRED */
++	cr4_set_bits(X86_CR4_FRED);
++	/* Any further IDT use is a bug */
++	idt_invalidate();
++
++	/* Use int $0x80 for 32-bit system calls in FRED mode */
++	setup_clear_cpu_cap(X86_FEATURE_SYSENTER32);
++	setup_clear_cpu_cap(X86_FEATURE_SYSCALL32);
++}
 -- 
 2.43.0
 
