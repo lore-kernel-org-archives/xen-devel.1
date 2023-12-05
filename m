@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65B0DC10DCE
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 18:21:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.648189.1012340 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63264C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 18:21:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.648195.1012360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAa2I-0004vt-CY; Tue, 05 Dec 2023 18:20:46 +0000
+	id 1rAa2P-0005oJ-4U; Tue, 05 Dec 2023 18:20:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 648189.1012340; Tue, 05 Dec 2023 18:20:46 +0000
+Received: by outflank-mailman (output) from mailman id 648195.1012360; Tue, 05 Dec 2023 18:20:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAa2I-0004vh-8m; Tue, 05 Dec 2023 18:20:46 +0000
-Received: by outflank-mailman (input) for mailman id 648189;
- Tue, 05 Dec 2023 18:20:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rAa2O-0005nc-Vd; Tue, 05 Dec 2023 18:20:52 +0000
+Received: by outflank-mailman (input) for mailman id 648195;
+ Tue, 05 Dec 2023 18:20:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=I6T2=HQ=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1rAa2G-0002fT-Pz
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 18:20:44 +0000
+ id 1rAa2O-0002wG-0I
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 18:20:52 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0076e629-939b-11ee-98e5-6d05b1d4d9a1;
- Tue, 05 Dec 2023 19:20:44 +0100 (CET)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 03b80a54-939b-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 19:20:49 +0100 (CET)
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-689-aLTBzfH7NZ6pFUQL-ZClUQ-1; Tue,
- 05 Dec 2023 13:20:37 -0500
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
- [10.11.54.1])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-696-FJu31-KlP_-4-uDfX0zTIw-1; Tue,
+ 05 Dec 2023 13:20:44 -0500
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 91D0029ABA04;
- Tue,  5 Dec 2023 18:20:36 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 52F743C2A1CB;
+ Tue,  5 Dec 2023 18:20:43 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.111])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D27EE3C25;
- Tue,  5 Dec 2023 18:20:35 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AF518492BE6;
+ Tue,  5 Dec 2023 18:20:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0076e629-939b-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: 03b80a54-939b-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701800443;
+	s=mimecast20190719; t=1701800448;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=eTK1D/m0rA2DrSG0310cQh9Ae3M4PF5cLiXTsHSalhM=;
-	b=CqFKd2elAa5X3eJu7+hCP5rmtkCEBMWlGP84WpDOw6sLupBFEpIYWts9p3tw8F0VrAstGk
-	/v7tLUpPhnJ69lmj4gqauHXfFYe3RaN2MMcE/mRAsttXwZSwQHOShcC0TPALUhO1zJ/cEC
-	Sqd1BURKoB6wK0AHFl10TI9O//xqHLY=
-X-MC-Unique: aLTBzfH7NZ6pFUQL-ZClUQ-1
+	bh=CXVutLONoGnwNzaaLHCyq57V4khRfPmIjmlvVDaOzsM=;
+	b=Q6LP+B8SIvX1gS/60KXvRyKZKkKJaOhR3gvE9nI3lNHWsAtFvj3u0pta24hDl9dD7gwwNb
+	4pDwavhPpdw4ZGEB+GbRx6iZapvjlCHRA82MRPrHDpIYDnsTZSdXhI9LnXA1uwMANDDwpW
+	n+2m1gpfAtEIdHZTZz8fKnqfmYnH+30=
+X-MC-Unique: FJu31-KlP_-4-uDfX0zTIw-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
@@ -100,94 +100,98 @@ Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
 	David Hildenbrand <david@redhat.com>,
 	Li Zhijian <lizhijian@fujitsu.com>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 07/14] block: remove bdrv_co_lock()
-Date: Tue,  5 Dec 2023 13:20:04 -0500
-Message-ID: <20231205182011.1976568-8-stefanha@redhat.com>
+Subject: [PATCH v2 10/14] aio: remove aio_context_acquire()/aio_context_release() API
+Date: Tue,  5 Dec 2023 13:20:07 -0500
+Message-ID: <20231205182011.1976568-11-stefanha@redhat.com>
 In-Reply-To: <20231205182011.1976568-1-stefanha@redhat.com>
 References: <20231205182011.1976568-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.1
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.10
 
-The bdrv_co_lock() and bdrv_co_unlock() functions are already no-ops.
-Remove them.
+Delete these functions because nothing calls these functions anymore.
+
+I introduced these APIs in commit 98563fc3ec44 ("aio: add
+aio_context_acquire() and aio_context_release()") in 2014. It's with a
+sigh of relief that I delete these APIs almost 10 years later.
+
+Thanks to Paolo Bonzini's vision for multi-queue QEMU, we got an
+understanding of where the code needed to go in order to remove the
+limitations that the original dataplane and the IOThread/AioContext
+approach that followed it.
+
+Emanuele Giuseppe Esposito had the splendid determination to convert
+large parts of the codebase so that they no longer needed the AioContext
+lock. This was a painstaking process, both in the actual code changes
+required and the iterations of code review that Emanuele eked out of
+Kevin and me over many months.
+
+Kevin Wolf tackled multitudes of graph locking conversions to protect
+in-flight I/O from run-time changes to the block graph as well as the
+clang Thread Safety Analysis annotations that allow the compiler to
+check whether the graph lock is being used correctly.
+
+And me, well, I'm just here to add some pizzazz to the QEMU multi-queue
+block layer :). Thank you to everyone who helped with this effort,
+including Eric Blake, code reviewer extraordinaire, and others who I've
+forgotten to mention.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+Reviewed-by: Eric Blake <eblake@redhat.com>
 ---
- include/block/block-global-state.h | 14 --------------
- block.c                            | 10 ----------
- blockdev.c                         |  4 ----
- 3 files changed, 28 deletions(-)
+ include/block/aio.h | 17 -----------------
+ util/async.c        | 10 ----------
+ 2 files changed, 27 deletions(-)
 
-diff --git a/include/block/block-global-state.h b/include/block/block-global-state.h
-index 0327f1c605..4ec0b217f0 100644
---- a/include/block/block-global-state.h
-+++ b/include/block/block-global-state.h
-@@ -267,20 +267,6 @@ int bdrv_debug_remove_breakpoint(BlockDriverState *bs, const char *tag);
- int bdrv_debug_resume(BlockDriverState *bs, const char *tag);
- bool bdrv_debug_is_suspended(BlockDriverState *bs, const char *tag);
+diff --git a/include/block/aio.h b/include/block/aio.h
+index f08b358077..af05512a7d 100644
+--- a/include/block/aio.h
++++ b/include/block/aio.h
+@@ -278,23 +278,6 @@ void aio_context_ref(AioContext *ctx);
+  */
+ void aio_context_unref(AioContext *ctx);
  
--/**
-- * Locks the AioContext of @bs if it's not the current AioContext. This avoids
-- * double locking which could lead to deadlocks: This is a coroutine_fn, so we
-- * know we already own the lock of the current AioContext.
+-/* Take ownership of the AioContext.  If the AioContext will be shared between
+- * threads, and a thread does not want to be interrupted, it will have to
+- * take ownership around calls to aio_poll().  Otherwise, aio_poll()
+- * automatically takes care of calling aio_context_acquire and
+- * aio_context_release.
 - *
-- * May only be called in the main thread.
+- * Note that this is separate from bdrv_drained_begin/bdrv_drained_end.  A
+- * thread still has to call those to avoid being interrupted by the guest.
+- *
+- * Bottom halves, timers and callbacks can be created or removed without
+- * acquiring the AioContext.
 - */
--void coroutine_fn bdrv_co_lock(BlockDriverState *bs);
+-void aio_context_acquire(AioContext *ctx);
 -
--/**
-- * Unlocks the AioContext of @bs if it's not the current AioContext.
-- */
--void coroutine_fn bdrv_co_unlock(BlockDriverState *bs);
+-/* Relinquish ownership of the AioContext. */
+-void aio_context_release(AioContext *ctx);
 -
- bool bdrv_child_change_aio_context(BdrvChild *c, AioContext *ctx,
-                                    GHashTable *visited, Transaction *tran,
-                                    Error **errp);
-diff --git a/block.c b/block.c
-index 91ace5d2d5..434b7f4d72 100644
---- a/block.c
-+++ b/block.c
-@@ -7431,16 +7431,6 @@ void coroutine_fn bdrv_co_leave(BlockDriverState *bs, AioContext *old_ctx)
-     bdrv_dec_in_flight(bs);
+ /**
+  * aio_bh_schedule_oneshot_full: Allocate a new bottom half structure that will
+  * run only once and as soon as possible.
+diff --git a/util/async.c b/util/async.c
+index dfd44ef612..460529057c 100644
+--- a/util/async.c
++++ b/util/async.c
+@@ -719,16 +719,6 @@ void aio_context_unref(AioContext *ctx)
+     g_source_unref(&ctx->source);
  }
  
--void coroutine_fn bdrv_co_lock(BlockDriverState *bs)
+-void aio_context_acquire(AioContext *ctx)
 -{
--    /* TODO removed in next patch */
+-    /* TODO remove this function */
 -}
 -
--void coroutine_fn bdrv_co_unlock(BlockDriverState *bs)
+-void aio_context_release(AioContext *ctx)
 -{
--    /* TODO removed in next patch */
+-    /* TODO remove this function */
 -}
 -
- static void bdrv_do_remove_aio_context_notifier(BdrvAioNotifier *ban)
- {
-     GLOBAL_STATE_CODE();
-diff --git a/blockdev.c b/blockdev.c
-index 8a1b28f830..3a5e7222ec 100644
---- a/blockdev.c
-+++ b/blockdev.c
-@@ -2264,18 +2264,14 @@ void coroutine_fn qmp_block_resize(const char *device, const char *node_name,
-         return;
-     }
+ QEMU_DEFINE_STATIC_CO_TLS(AioContext *, my_aiocontext)
  
--    bdrv_co_lock(bs);
-     bdrv_drained_begin(bs);
--    bdrv_co_unlock(bs);
- 
-     old_ctx = bdrv_co_enter(bs);
-     blk_co_truncate(blk, size, false, PREALLOC_MODE_OFF, 0, errp);
-     bdrv_co_leave(bs, old_ctx);
- 
--    bdrv_co_lock(bs);
-     bdrv_drained_end(bs);
-     blk_co_unref(blk);
--    bdrv_co_unlock(bs);
- }
- 
- void qmp_block_stream(const char *job_id, const char *device,
+ AioContext *qemu_get_current_aio_context(void)
 -- 
 2.43.0
 
