@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F325C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:30:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647626.1011070 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9C2BC4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:32:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647642.1011100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATck-0002ob-WB; Tue, 05 Dec 2023 11:29:58 +0000
+	id 1rATfL-0005xy-0B; Tue, 05 Dec 2023 11:32:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647626.1011070; Tue, 05 Dec 2023 11:29:58 +0000
+Received: by outflank-mailman (output) from mailman id 647642.1011100; Tue, 05 Dec 2023 11:32:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATck-0002oQ-Ta; Tue, 05 Dec 2023 11:29:58 +0000
-Received: by outflank-mailman (input) for mailman id 647626;
- Tue, 05 Dec 2023 11:29:57 +0000
+	id 1rATfK-0005xr-Tj; Tue, 05 Dec 2023 11:32:38 +0000
+Received: by outflank-mailman (input) for mailman id 647642;
+ Tue, 05 Dec 2023 11:32:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUf-0003dP-UB
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:37 +0000
+ id 1rATUo-0003dP-V4
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:46 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7049dbef-9360-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 12:21:30 +0100 (CET)
+ id 73bfcde9-9360-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 12:21:36 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:21 -0800
+ 05 Dec 2023 03:21:26 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:20 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:24 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7049dbef-9360-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 73bfcde9-9360-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775292; x=1733311292;
+  t=1701775297; x=1733311297;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=1ausx4Z+ZyraUX+YcuvtrDimsqYt0aM/gmBdfI6uiWo=;
-  b=MwjJWuhSj0q+AcEqPm8Xn8+7dUDlbN4+PM8/mxPevlmmr8UeskRhXx6F
-   AQfomNO3Jx5S2zR5u9VAMEGgTBbMtfjiOEeJLr3TdgWYGRuXvulVc/olD
-   jsRQqNBN6PHYqBzQEruSnEER9IhnzxATp7NpZ2YAraG3cZtb6dCOl95/h
-   n1sTtzxsGzOpWZIJ4qVZDEkPJNeLvc+zWOPXPXdNxhslELYFdvJssUV7B
-   HdYVhhsRRftZY3ze3IJlCuU2JbtdhpvcLwOBTws4sSmoaUkJyUcA6uOxE
-   NGhbB+osQfFUtyuDjNlhkMYyN4R6ZgoelOHAFQXPCiqm9rqXnXdXLiIFA
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942488"
+  bh=WNry4Fzy15Ftidcudz/wq0ei+oIMjP7Ry/4o5mJqLAU=;
+  b=jlqDFujMN9L0jJmBdfd6DccH5f6z5n5kIBh+TUJcZUiXB2UdN9UVlX+J
+   8KmczzdBv1mO17opiTUfvn6EGzDKx4TFuVhhg4e3T6nqVIwfZ7O9YCqnQ
+   bH8TFOqb2phyRDTAPQ0vVRSF73x3IdLqi98eBywpClKcPffym2TYWjjJJ
+   ItzZhi5CZm0ohVjAfSo+nRc66LEp/d9kr3BszfK8gZvP9TKgU6tr+4lJc
+   uxcEbWH02Z15sd8KMO3ojWtbj0tCFWMgy1LvbIl/UuU1gipdJQjTBdyAW
+   ayDQ9pvSA7Zn3Bt3xYMKarB1EFTMCf3iCx+qUU9+a6LUVqR4IXgIsf9VW
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942646"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942488"
+   d="scan'208";a="942646"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192949"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192998"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018192949"
+   d="scan'208";a="1018192998"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,9 +88,9 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 15/35] x86/fred: Add a new header file for FRED definitions
-Date: Tue,  5 Dec 2023 02:50:04 -0800
-Message-ID: <20231205105030.8698-16-xin3.li@intel.com>
+Subject: [PATCH v13 28/35] x86/fred: Let ret_from_fork_asm() jmp to asm_fred_exit_user when FRED is enabled
+Date: Tue,  5 Dec 2023 02:50:17 -0800
+Message-ID: <20231205105030.8698-29-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
@@ -99,94 +99,47 @@ Content-Transfer-Encoding: 8bit
 
 From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
-Add a header file for FRED prototypes and definitions.
+Let ret_from_fork_asm() jmp to asm_fred_exit_user when FRED is enabled,
+otherwise the existing IDT code is chosen.
 
 Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/entry/entry_64.S      | 6 ++++++
+ arch/x86/entry/entry_64_fred.S | 1 +
+ 2 files changed, 7 insertions(+)
 
-Changes since v6:
-* Replace pt_regs csx flags prefix FRED_CSL_ with FRED_CSX_.
----
- arch/x86/include/asm/fred.h | 68 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 68 insertions(+)
- create mode 100644 arch/x86/include/asm/fred.h
-
-diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-new file mode 100644
-index 000000000000..f514fdb5a39f
---- /dev/null
-+++ b/arch/x86/include/asm/fred.h
-@@ -0,0 +1,68 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Macros for Flexible Return and Event Delivery (FRED)
-+ */
-+
-+#ifndef ASM_X86_FRED_H
-+#define ASM_X86_FRED_H
-+
-+#include <linux/const.h>
-+
-+#include <asm/asm.h>
-+
-+/*
-+ * FRED event return instruction opcodes for ERET{S,U}; supported in
-+ * binutils >= 2.41.
-+ */
-+#define ERETS			_ASM_BYTES(0xf2,0x0f,0x01,0xca)
-+#define ERETU			_ASM_BYTES(0xf3,0x0f,0x01,0xca)
-+
-+/*
-+ * RSP is aligned to a 64-byte boundary before used to push a new stack frame
-+ */
-+#define FRED_STACK_FRAME_RSP_MASK	_AT(unsigned long, (~0x3f))
-+
-+/*
-+ * Used for the return address for call emulation during code patching,
-+ * and measured in 64-byte cache lines.
-+ */
-+#define FRED_CONFIG_REDZONE_AMOUNT	1
-+#define FRED_CONFIG_REDZONE		(_AT(unsigned long, FRED_CONFIG_REDZONE_AMOUNT) << 6)
-+#define FRED_CONFIG_INT_STKLVL(l)	(_AT(unsigned long, l) << 9)
-+#define FRED_CONFIG_ENTRYPOINT(p)	_AT(unsigned long, (p))
-+
-+#ifndef __ASSEMBLY__
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index 5a1660701623..87d817296dcb 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -247,7 +247,13 @@ SYM_CODE_START(ret_from_fork_asm)
+ 	 * and unwind should work normally.
+ 	 */
+ 	UNWIND_HINT_REGS
 +
 +#ifdef CONFIG_X86_FRED
-+#include <linux/kernel.h>
-+
-+#include <asm/ptrace.h>
-+
-+struct fred_info {
-+	/* Event data: CR2, DR6, ... */
-+	unsigned long edata;
-+	unsigned long resv;
-+};
-+
-+/* Full format of the FRED stack frame */
-+struct fred_frame {
-+	struct pt_regs   regs;
-+	struct fred_info info;
-+};
-+
-+static __always_inline struct fred_info *fred_info(struct pt_regs *regs)
-+{
-+	return &container_of(regs, struct fred_frame, regs)->info;
-+}
-+
-+static __always_inline unsigned long fred_event_data(struct pt_regs *regs)
-+{
-+	return fred_info(regs)->edata;
-+}
-+
-+#else /* CONFIG_X86_FRED */
-+static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
-+#endif /* CONFIG_X86_FRED */
-+#endif /* !__ASSEMBLY__ */
-+
-+#endif /* ASM_X86_FRED_H */
++	ALTERNATIVE "jmp swapgs_restore_regs_and_return_to_usermode", \
++		    "jmp asm_fred_exit_user", X86_FEATURE_FRED
++#else
+ 	jmp	swapgs_restore_regs_and_return_to_usermode
++#endif
+ SYM_CODE_END(ret_from_fork_asm)
+ .popsection
+ 
+diff --git a/arch/x86/entry/entry_64_fred.S b/arch/x86/entry/entry_64_fred.S
+index 37a1dd5e8ace..5781c3411b44 100644
+--- a/arch/x86/entry/entry_64_fred.S
++++ b/arch/x86/entry/entry_64_fred.S
+@@ -32,6 +32,7 @@
+ SYM_CODE_START_NOALIGN(asm_fred_entrypoint_user)
+ 	FRED_ENTER
+ 	call	fred_entry_from_user
++SYM_INNER_LABEL(asm_fred_exit_user, SYM_L_GLOBAL)
+ 	FRED_EXIT
+ 	ERETU
+ SYM_CODE_END(asm_fred_entrypoint_user)
 -- 
 2.43.0
 
