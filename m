@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D31F7C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:22:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647571.1010948 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8698C07E97
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:25:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647594.1010980 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUk-0007ZN-9f; Tue, 05 Dec 2023 11:21:42 +0000
+	id 1rATYh-0004iY-Cr; Tue, 05 Dec 2023 11:25:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647571.1010948; Tue, 05 Dec 2023 11:21:42 +0000
+Received: by outflank-mailman (output) from mailman id 647594.1010980; Tue, 05 Dec 2023 11:25:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUj-0007Wk-ME; Tue, 05 Dec 2023 11:21:41 +0000
-Received: by outflank-mailman (input) for mailman id 647571;
- Tue, 05 Dec 2023 11:21:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rATYh-0004iR-9O; Tue, 05 Dec 2023 11:25:47 +0000
+Received: by outflank-mailman (input) for mailman id 647594;
+ Tue, 05 Dec 2023 11:25:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUg-0005GD-SD
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:38 +0000
+ id 1rATUp-0003dP-V6
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:47 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7492f17a-9360-11ee-98e5-6d05b1d4d9a1;
- Tue, 05 Dec 2023 12:21:38 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7383e649-9360-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 12:21:36 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:26 -0800
+ 05 Dec 2023 03:21:25 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:25 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:24 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7492f17a-9360-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: 7383e649-9360-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775299; x=1733311299;
+  t=1701775297; x=1733311297;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=uIZltVBi8wI2fdlt/Uk1Bni3bjv6/HHLxi0uq5CIvWc=;
-  b=EeipshQKdwjmkmHjh3C2V0+5DRsy4dHyNDiEidGjgG1rCK6I99LNKDZN
-   jxep4y3vibgN+y/QDHG2s3l6S6qf4hCNQzm2JLcJJz8Q3E244wq9K+A1k
-   n8zokUfVI2tkkr1+nJQ49o7cU/xf26UL9au4KO2OFA9Lf8G3U4gZumwow
-   Vcnp5/jmjpDBgMUaAZ+IMcWgFe7PMhQ4MbdDGxc5VItYMyqS5GqFSnE8T
-   7roX1Vv7HczlIcZKMZoL9MWCTTSyo0DqbinT8Yzwaws89i1jJSAq0OIlV
-   QjC6E2/6w12hdTRz78o+9k3b2A4N7jsjLh9XmEcv2Qj9r2AP4CuhjU9xX
+  bh=P4BKwwxZjNA35zXhN23eflIGEejxxbnos06jsBzXQIU=;
+  b=JBvzSrtfdcf7kbEjL6E5eq2ValttEHj4RuRfX6q7NYVqx06YibzOUoX8
+   z3naSDu+3v9K6dmXiwqbRp+CCzHt7EuqBt8okUwH3c5GxaiHuA9t9IFi8
+   hhm8HrZZd68Z4q+drqWhh3+rX461i0Ri2UQXF10b3YASw16wu4IfeGAR0
+   zXvhlZMMh7DDgOf7vaz9ZnLQQ4BIA3z3yJmpEJtU0X/IMM6NPd/JQaCtb
+   bH31XrNsmGjL1XrhdkH/oDCR8AgZVnPUzb/NXqcFdrs3gK0rDsu7fXzwJ
+   5PVXg9VnD45uytzPtBgah1+VP/QGtiEhuzJ0XFAobF9UB+Fgmy+1rR3ik
    g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942668"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942632"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942668"
+   d="scan'208";a="942632"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018193005"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192995"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018193005"
+   d="scan'208";a="1018192995"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,83 +88,193 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 30/35] x86/entry/calling: Allow PUSH_AND_CLEAR_REGS being used beyond actual entry code
-Date: Tue,  5 Dec 2023 02:50:19 -0800
-Message-ID: <20231205105030.8698-31-xin3.li@intel.com>
+Subject: [PATCH v13 27/35] x86/traps: Add sysvec_install() to install a system interrupt handler
+Date: Tue,  5 Dec 2023 02:50:16 -0800
+Message-ID: <20231205105030.8698-28-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "Peter Zijlstra (Intel)" <peterz@infradead.org>
+Add sysvec_install() to install a system interrupt handler into the IDT
+or the FRED system interrupt handler table.
 
-PUSH_AND_CLEAR_REGS could be used besides actual entry code; in that case
-%rbp shouldn't be cleared (otherwise the frame pointer is destroyed) and
-UNWIND_HINT shouldn't be added.
-
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/entry/calling.h | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/entry/calling.h b/arch/x86/entry/calling.h
-index e59d3073e7cf..a023d9a97cd2 100644
---- a/arch/x86/entry/calling.h
-+++ b/arch/x86/entry/calling.h
-@@ -65,7 +65,7 @@ For 32-bit we have the following conventions - kernel is built with
-  * for assembly code:
-  */
+Changes since v8:
+* Introduce a macro sysvec_install() to derive the asm handler name from
+  a C handler, which simplifies the code and avoids an ugly typecast
+  (Thomas Gleixner).
+---
+ arch/x86/entry/entry_fred.c      | 14 ++++++++++++++
+ arch/x86/include/asm/desc.h      |  2 --
+ arch/x86/include/asm/idtentry.h  | 15 +++++++++++++++
+ arch/x86/kernel/cpu/acrn.c       |  4 ++--
+ arch/x86/kernel/cpu/mshyperv.c   | 15 +++++++--------
+ arch/x86/kernel/idt.c            |  4 ++--
+ arch/x86/kernel/kvm.c            |  2 +-
+ drivers/xen/events/events_base.c |  2 +-
+ 8 files changed, 42 insertions(+), 16 deletions(-)
+
+diff --git a/arch/x86/entry/entry_fred.c b/arch/x86/entry/entry_fred.c
+index 215883e90f94..e80e3efbc057 100644
+--- a/arch/x86/entry/entry_fred.c
++++ b/arch/x86/entry/entry_fred.c
+@@ -126,6 +126,20 @@ static idtentry_t sysvec_table[NR_SYSTEM_VECTORS] __ro_after_init = {
+ 	SYSVEC(POSTED_INTR_NESTED_VECTOR,	kvm_posted_intr_nested_ipi),
+ };
  
--.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
-+.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 unwind_hint=1
- 	.if \save_ret
- 	pushq	%rsi		/* pt_regs->si */
- 	movq	8(%rsp), %rsi	/* temporarily store the return address in %rsi */
-@@ -87,14 +87,17 @@ For 32-bit we have the following conventions - kernel is built with
- 	pushq	%r13		/* pt_regs->r13 */
- 	pushq	%r14		/* pt_regs->r14 */
- 	pushq	%r15		/* pt_regs->r15 */
++static bool fred_setup_done __initdata;
 +
-+	.if \unwind_hint
- 	UNWIND_HINT_REGS
-+	.endif
++void __init fred_install_sysvec(unsigned int sysvec, idtentry_t handler)
++{
++	if (WARN_ON_ONCE(sysvec < FIRST_SYSTEM_VECTOR))
++		return;
++
++	if (WARN_ON_ONCE(fred_setup_done))
++		return;
++
++	if (!WARN_ON_ONCE(sysvec_table[sysvec - FIRST_SYSTEM_VECTOR]))
++		 sysvec_table[sysvec - FIRST_SYSTEM_VECTOR] = handler;
++}
++
+ static noinstr void fred_extint(struct pt_regs *regs)
+ {
+ 	unsigned int vector = regs->fred_ss.vector;
+diff --git a/arch/x86/include/asm/desc.h b/arch/x86/include/asm/desc.h
+index ab97b22ac04a..ec95fe44fa3a 100644
+--- a/arch/x86/include/asm/desc.h
++++ b/arch/x86/include/asm/desc.h
+@@ -402,8 +402,6 @@ static inline void set_desc_limit(struct desc_struct *desc, unsigned long limit)
+ 	desc->limit1 = (limit >> 16) & 0xf;
+ }
  
- 	.if \save_ret
- 	pushq	%rsi		/* return address on top of stack */
- 	.endif
- .endm
+-void alloc_intr_gate(unsigned int n, const void *addr);
+-
+ static inline void init_idt_data(struct idt_data *data, unsigned int n,
+ 				 const void *addr)
+ {
+diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
+index 4f26ee9b8b74..650c98160152 100644
+--- a/arch/x86/include/asm/idtentry.h
++++ b/arch/x86/include/asm/idtentry.h
+@@ -459,6 +459,21 @@ __visible noinstr void func(struct pt_regs *regs,			\
+ #define DEFINE_FREDENTRY_DEBUG		DEFINE_FREDENTRY_RAW
+ #endif
  
--.macro CLEAR_REGS
-+.macro CLEAR_REGS clear_bp=1
- 	/*
- 	 * Sanitize registers of values that a speculation attack might
- 	 * otherwise want to exploit. The lower registers are likely clobbered
-@@ -109,7 +112,9 @@ For 32-bit we have the following conventions - kernel is built with
- 	xorl	%r10d, %r10d	/* nospec r10 */
- 	xorl	%r11d, %r11d	/* nospec r11 */
- 	xorl	%ebx,  %ebx	/* nospec rbx */
-+	.if \clear_bp
- 	xorl	%ebp,  %ebp	/* nospec rbp */
-+	.endif
- 	xorl	%r12d, %r12d	/* nospec r12 */
- 	xorl	%r13d, %r13d	/* nospec r13 */
- 	xorl	%r14d, %r14d	/* nospec r14 */
-@@ -117,9 +122,9 @@ For 32-bit we have the following conventions - kernel is built with
++void idt_install_sysvec(unsigned int n, const void *function);
++
++#ifdef CONFIG_X86_FRED
++void fred_install_sysvec(unsigned int vector, const idtentry_t function);
++#else
++static inline void fred_install_sysvec(unsigned int vector, const idtentry_t function) { }
++#endif
++
++#define sysvec_install(vector, function) {				\
++	if (cpu_feature_enabled(X86_FEATURE_FRED))			\
++		fred_install_sysvec(vector, function);			\
++	else								\
++		idt_install_sysvec(vector, asm_##function);		\
++}
++
+ #else /* !__ASSEMBLY__ */
  
- .endm
+ /*
+diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
+index bfeb18fad63f..2c5b51aad91a 100644
+--- a/arch/x86/kernel/cpu/acrn.c
++++ b/arch/x86/kernel/cpu/acrn.c
+@@ -26,8 +26,8 @@ static u32 __init acrn_detect(void)
  
--.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
--	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret
--	CLEAR_REGS
-+.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 clear_bp=1 unwind_hint=1
-+	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret unwind_hint=\unwind_hint
-+	CLEAR_REGS clear_bp=\clear_bp
- .endm
+ static void __init acrn_init_platform(void)
+ {
+-	/* Setup the IDT for ACRN hypervisor callback */
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_acrn_hv_callback);
++	/* Install system interrupt handler for ACRN hypervisor callback */
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
  
- .macro POP_REGS pop_rdi=1
+ 	x86_platform.calibrate_tsc = acrn_get_tsc_khz;
+ 	x86_platform.calibrate_cpu = acrn_get_tsc_khz;
+diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
+index 01fa06dd06b6..45e0e70e238c 100644
+--- a/arch/x86/kernel/cpu/mshyperv.c
++++ b/arch/x86/kernel/cpu/mshyperv.c
+@@ -539,19 +539,18 @@ static void __init ms_hyperv_init_platform(void)
+ 	 */
+ 	x86_platform.apic_post_init = hyperv_init;
+ 	hyperv_setup_mmu_ops();
+-	/* Setup the IDT for hypervisor callback */
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_hyperv_callback);
+ 
+-	/* Setup the IDT for reenlightenment notifications */
++	/* Install system interrupt handler for hypervisor callback */
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_hyperv_callback);
++
++	/* Install system interrupt handler for reenlightenment notifications */
+ 	if (ms_hyperv.features & HV_ACCESS_REENLIGHTENMENT) {
+-		alloc_intr_gate(HYPERV_REENLIGHTENMENT_VECTOR,
+-				asm_sysvec_hyperv_reenlightenment);
++		sysvec_install(HYPERV_REENLIGHTENMENT_VECTOR, sysvec_hyperv_reenlightenment);
+ 	}
+ 
+-	/* Setup the IDT for stimer0 */
++	/* Install system interrupt handler for stimer0 */
+ 	if (ms_hyperv.misc_features & HV_STIMER_DIRECT_MODE_AVAILABLE) {
+-		alloc_intr_gate(HYPERV_STIMER0_VECTOR,
+-				asm_sysvec_hyperv_stimer0);
++		sysvec_install(HYPERV_STIMER0_VECTOR, sysvec_hyperv_stimer0);
+ 	}
+ 
+ # ifdef CONFIG_SMP
+diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
+index 8857abc706e4..2b734927eec1 100644
+--- a/arch/x86/kernel/idt.c
++++ b/arch/x86/kernel/idt.c
+@@ -337,7 +337,7 @@ void idt_invalidate(void)
+ 	load_idt(&idt);
+ }
+ 
+-void __init alloc_intr_gate(unsigned int n, const void *addr)
++void __init idt_install_sysvec(unsigned int n, const void *function)
+ {
+ 	if (WARN_ON(n < FIRST_SYSTEM_VECTOR))
+ 		return;
+@@ -346,5 +346,5 @@ void __init alloc_intr_gate(unsigned int n, const void *addr)
+ 		return;
+ 
+ 	if (!WARN_ON(test_and_set_bit(n, system_vectors)))
+-		set_intr_gate(n, addr);
++		set_intr_gate(n, function);
+ }
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 0ddb3bd0f1aa..70d3aa717a29 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -829,7 +829,7 @@ static void __init kvm_guest_init(void)
+ 
+ 	if (kvm_para_has_feature(KVM_FEATURE_ASYNC_PF_INT) && kvmapf) {
+ 		static_branch_enable(&kvm_async_pf_enabled);
+-		alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_kvm_asyncpf_interrupt);
++		sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_kvm_asyncpf_interrupt);
+ 	}
+ 
+ #ifdef CONFIG_SMP
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index b8cfea7812d6..e2813bac92d4 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -2216,7 +2216,7 @@ static __init void xen_alloc_callback_vector(void)
+ 		return;
+ 
+ 	pr_info("Xen HVM callback vector for event delivery is enabled\n");
+-	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_xen_hvm_callback);
++	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_xen_hvm_callback);
+ }
+ #else
+ void xen_setup_callback_vector(void) {}
 -- 
 2.43.0
 
