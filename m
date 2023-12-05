@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D709C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:22:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647561.1010860 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B61C07E97
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:22:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647563.1010875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUY-0004uP-IU; Tue, 05 Dec 2023 11:21:30 +0000
+	id 1rATUa-0005K8-HW; Tue, 05 Dec 2023 11:21:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647561.1010860; Tue, 05 Dec 2023 11:21:30 +0000
+Received: by outflank-mailman (output) from mailman id 647563.1010875; Tue, 05 Dec 2023 11:21:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUY-0004tv-F5; Tue, 05 Dec 2023 11:21:30 +0000
-Received: by outflank-mailman (input) for mailman id 647561;
- Tue, 05 Dec 2023 11:21:28 +0000
+	id 1rATUa-0005II-BS; Tue, 05 Dec 2023 11:21:32 +0000
+Received: by outflank-mailman (input) for mailman id 647563;
+ Tue, 05 Dec 2023 11:21:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUW-0003dP-SX
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:28 +0000
+ id 1rATUY-0003dP-TA
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:30 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6ca7069c-9360-11ee-9b0f-b553b5be7939;
+ id 6d9637ad-9360-11ee-9b0f-b553b5be7939;
  Tue, 05 Dec 2023 12:21:26 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  05 Dec 2023 03:21:19 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:17 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:18 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ca7069c-9360-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 6d9637ad-9360-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
   t=1701775287; x=1733311287;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=XAJxKoMf+2QJIK9eDHNvPpRiHTb0PPLqXWearFjnRKA=;
-  b=ZwJr9giykQwTkJo7bybLidF14PQQuL/pxMcqjLjC9BGsZOhLvWNccMn7
-   7Md222P09CL1ggbjZTQQQ0fmmxUafzcFoBmMNFLvpGlOOmtYpp7a/iGQG
-   gei02IfNmjhXJxFVbohRhDCNw0+wr2xJ7YXtO9X5AgHZJCgYo81tDnCd5
-   V2E3NlGH0koCHbRR6Xha6qenUSbn4Ww+eT3BoIPdMCamytSioUTFY93Ex
-   3GufM1IaKZBqgvCVTXfon3PfT4jdSGAQHsPHbxRW2TZUOz359cbWyrgBW
-   cPMj/myhTrx4J1obil9dC5Mt/KwhYpFUJngYWwr3kau0ccJUIG2w+S5AG
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942384"
+  bh=at3P90/0BHfZm4A3RDkp4mmTPKN/FQQ6JC7gRORtMwU=;
+  b=Hi9+qqrSRYSHE/bzr39tBZYAb7pb7u5HtKapuGTBoHQ2eQB03Nqb5Rcb
+   WmVB16Zdd3UnYH0myD/ofUhh46kNNIlFlCtCI7fUh2hBGX5qMjIJHfllD
+   2kNmZh8VTRZtlINDOjUX1mPsEhq9wru1h87egoPoex4LtBylCn7ARRJMj
+   rVQnfqH5IcFwDjwndokZOEBw1LtkMcUDkIt33qu7EDikg8dUYT9rQhlym
+   NG4H9ROyKMYovwEHlc2hwxPP9ASzhAGXMv6MVdOXBgjcS86yatZyE2Svl
+   BvQv05wAzzwUUH771WwfDwAr6efYOaY9QWkIXzcABzunm+9Utc3bYEX4c
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942402"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942384"
+   d="scan'208";a="942402"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192916"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192924"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018192916"
+   d="scan'208";a="1018192924"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,74 +88,52 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 06/35] x86/cpufeatures: Add the CPU feature bit for FRED
-Date: Tue,  5 Dec 2023 02:49:55 -0800
-Message-ID: <20231205105030.8698-7-xin3.li@intel.com>
+Subject: [PATCH v13 08/35] x86/fred: Disable FRED by default in its early stage
+Date: Tue,  5 Dec 2023 02:49:57 -0800
+Message-ID: <20231205105030.8698-9-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+To enable FRED, a new kernel command line option "fred" needs to be added.
 
-Any FRED CPU will always have the following features as its baseline:
-  1) LKGS, load attributes of the GS segment but the base address into
-     the IA32_KERNEL_GS_BASE MSR instead of the GS segment’s descriptor
-     cache.
-  2) WRMSRNS, non-serializing WRMSR for faster MSR writes.
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ Documentation/admin-guide/kernel-parameters.txt | 3 +++
+ arch/x86/kernel/cpu/common.c                    | 3 +++
+ 2 files changed, 6 insertions(+)
 
-Change since v12:
-* s/cpu/CPU/g (Borislav Petkov).
----
- arch/x86/include/asm/cpufeatures.h       | 1 +
- arch/x86/kernel/cpu/cpuid-deps.c         | 2 ++
- tools/arch/x86/include/asm/cpufeatures.h | 1 +
- 3 files changed, 4 insertions(+)
-
-diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
-index a903fc130e49..fef95d190054 100644
---- a/arch/x86/include/asm/cpufeatures.h
-+++ b/arch/x86/include/asm/cpufeatures.h
-@@ -324,6 +324,7 @@
- #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
- #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
- #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
-+#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
- #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
- #define X86_FEATURE_WRMSRNS		(12*32+19) /* "" Non-serializing WRMSR */
- #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
-diff --git a/arch/x86/kernel/cpu/cpuid-deps.c b/arch/x86/kernel/cpu/cpuid-deps.c
-index e462c1d3800a..b7174209d855 100644
---- a/arch/x86/kernel/cpu/cpuid-deps.c
-+++ b/arch/x86/kernel/cpu/cpuid-deps.c
-@@ -82,6 +82,8 @@ static const struct cpuid_dep cpuid_deps[] = {
- 	{ X86_FEATURE_XFD,			X86_FEATURE_XGETBV1   },
- 	{ X86_FEATURE_AMX_TILE,			X86_FEATURE_XFD       },
- 	{ X86_FEATURE_SHSTK,			X86_FEATURE_XSAVES    },
-+	{ X86_FEATURE_FRED,			X86_FEATURE_LKGS      },
-+	{ X86_FEATURE_FRED,			X86_FEATURE_WRMSRNS   },
- 	{}
- };
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 65731b060e3f..6992b392e8d3 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -1526,6 +1526,9 @@
+ 			Warning: use of this parameter will taint the kernel
+ 			and may cause unknown problems.
  
-diff --git a/tools/arch/x86/include/asm/cpufeatures.h b/tools/arch/x86/include/asm/cpufeatures.h
-index 26a73ae18a86..f433e9f61354 100644
---- a/tools/arch/x86/include/asm/cpufeatures.h
-+++ b/tools/arch/x86/include/asm/cpufeatures.h
-@@ -321,6 +321,7 @@
- #define X86_FEATURE_FZRM		(12*32+10) /* "" Fast zero-length REP MOVSB */
- #define X86_FEATURE_FSRS		(12*32+11) /* "" Fast short REP STOSB */
- #define X86_FEATURE_FSRC		(12*32+12) /* "" Fast short REP {CMPSB,SCASB} */
-+#define X86_FEATURE_FRED		(12*32+17) /* Flexible Return and Event Delivery */
- #define X86_FEATURE_LKGS		(12*32+18) /* "" Load "kernel" (userspace) GS */
- #define X86_FEATURE_WRMSRNS		(12*32+19) /* "" Non-serializing WRMSR */
- #define X86_FEATURE_AMX_FP16		(12*32+21) /* "" AMX fp16 Support */
++	fred		[X86-64]
++			Enable flexible return and event delivery
++
+ 	ftrace=[tracer]
+ 			[FTRACE] will set and start the specified tracer
+ 			as early as possible in order to facilitate early
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index 4d4b87c6885d..68102acd63b0 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -1491,6 +1491,9 @@ static void __init cpu_parse_early_param(void)
+ 	char *argptr = arg, *opt;
+ 	int arglen, taint = 0;
+ 
++	if (!cmdline_find_option_bool(boot_command_line, "fred"))
++		setup_clear_cpu_cap(X86_FEATURE_FRED);
++
+ #ifdef CONFIG_X86_32
+ 	if (cmdline_find_option_bool(boot_command_line, "no387"))
+ #ifdef CONFIG_MATH_EMULATION
 -- 
 2.43.0
 
