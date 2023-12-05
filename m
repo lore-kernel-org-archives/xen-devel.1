@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAE4C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:36:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647668.1011159 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F6C6C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:38:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647675.1011170 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATid-0002P7-M0; Tue, 05 Dec 2023 11:36:03 +0000
+	id 1rATkf-0004GL-2h; Tue, 05 Dec 2023 11:38:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647668.1011159; Tue, 05 Dec 2023 11:36:03 +0000
+Received: by outflank-mailman (output) from mailman id 647675.1011170; Tue, 05 Dec 2023 11:38:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATid-0002P0-JP; Tue, 05 Dec 2023 11:36:03 +0000
-Received: by outflank-mailman (input) for mailman id 647668;
- Tue, 05 Dec 2023 11:36:01 +0000
+	id 1rATke-0004GE-V3; Tue, 05 Dec 2023 11:38:08 +0000
+Received: by outflank-mailman (input) for mailman id 647675;
+ Tue, 05 Dec 2023 11:38:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUu-0003dP-VZ
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:52 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+ (envelope-from <SRS0=kfJ1=HQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rATkc-0004Er-VU
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:38:06 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 75364c9f-9360-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 12:21:39 +0100 (CET)
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:28 -0800
-Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:26 -0800
+ id c0e06ecb-9362-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 12:38:04 +0100 (CET)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40b2ad4953cso41095885e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Dec 2023 03:38:04 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ bg24-20020a05600c3c9800b0040b3d33ab55sm22284633wmb.47.2023.12.05.03.38.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Dec 2023 03:38:04 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,222 +47,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 75364c9f-9360-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775300; x=1733311300;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=hUnJXd4Og3bi9hMQPhy7/57sMPohL9ggwF5nLer6ATE=;
-  b=OHpBGf8SFQ+WAx0+UAC+kewWsQ7RDH/DV+V04Ys8LZyoyYKE6NaFSVPc
-   1BTC+7u8B9zUrLutGnrESGCK8fNEOHdHiCiyzvFHgCEAhMI6+yEJ6CsMH
-   YWPWRsPFK9EBRnWgh/ql9K8cTu8n/nMXYFBF1UVyZNdYLTahMmJytFdZA
-   JaA/ASUgbpZDAcwYLUGihn40MtGzN1hBZoJgg/4UAYZw7E1fYaahbFT3g
-   v1ESQpdIQAosxBygmOcR/USaZefmmEXqXmSoLwqoBxGBtomq9nEr4GI0d
-   l+97fBPr35DjQAb0/3ZONmGdAMR+LnAbMd0gGB4Id/taasCJlotR0AA+k
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942719"
-X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942719"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018193019"
-X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018193019"
-From: Xin Li <xin3.li@intel.com>
-To: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-edac@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Cc: tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	x86@kernel.org,
-	hpa@zytor.com,
-	luto@kernel.org,
-	pbonzini@redhat.com,
-	seanjc@google.com,
-	peterz@infradead.org,
-	jgross@suse.com,
-	ravi.v.shankar@intel.com,
-	mhiramat@kernel.org,
-	andrew.cooper3@citrix.com,
-	jiangshanlai@gmail.com,
-	nik.borisov@suse.com,
-	shan.kang@intel.com
-Subject: [PATCH v13 34/35] x86/fred: Add FRED initialization functions
-Date: Tue,  5 Dec 2023 02:50:23 -0800
-Message-ID: <20231205105030.8698-35-xin3.li@intel.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
-References: <20231205105030.8698-1-xin3.li@intel.com>
+X-Inumbo-ID: c0e06ecb-9362-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1701776284; x=1702381084; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=hzKa1Dx2dZg8S7YoZWzImzxxkEiCHh71hCRgk8iUnCM=;
+        b=Vw5vT90I1zD+bb2heoQhjm1F1ywJigVLyJb16UHNl76BeVrxemqZ8gnhnsucMH440F
+         rTC+T/1fol4djdPFLVWv2xPB9462vWvxQni8ZiJCFR7mH3ReuRDbT5VO2MS6ra4RAsI1
+         E64zPqW11vjNHm0AzBVxzbdbpsLo7MoIpeGzzAfIKjkumnzBI9HUrWvRfoqeWLrUKXLF
+         ECBHLnned8Q0oRfSBVQAo4gLm7YelmqX6bzDEayjqbmFPnAKJbk5hEPpsM5ZDG81Y6LU
+         oZM2GUnTU/3Nheg+JXD6HENiB2i5jN+Xp6WyUSo6pnqy+K7ba0xiuK2Yh72l3w8RqrjB
+         euaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701776284; x=1702381084;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=hzKa1Dx2dZg8S7YoZWzImzxxkEiCHh71hCRgk8iUnCM=;
+        b=rAXWTpnR0cKWZbdlEihbQOWzw9glwg84PchHq0nE7MJ9xzgfl7lsi8YcvNeXlutCUr
+         21237rw9YelDIDkCbks3gL0FRPeoNfqgoe+oRkA8x6hgOa+sXBszdzNTdWu5vmTr3c98
+         FmgCafDiEE0NSdt0hZZ58Ac1cMl0jxzmifqDKLsYAiC0m6JSCwo0Jy1oIjYBMgrZZpKr
+         8lC2krWzohYi/FpxBVCsPpf223L4yF0g9qVlwIby5qXCwPM5skpjdaYFsSr6gCFddsxf
+         dp17t1PmYAJZY3CzjdyetbgMnx4MWofVxkhV2AiTYjLNfuUjq62WSZh/wMJCh9saj6lh
+         UBjQ==
+X-Gm-Message-State: AOJu0YzRkUC4+7ehmhns6rek6pYjJMCRyQdGuceTnf5gjY4H9kElCn/U
+	UugP1Uy1EtLCIAWiBnpM0TqF
+X-Google-Smtp-Source: AGHT+IE+0UfSMY5RmZdIWdGIoDJePrEVu/5oBUk9g1tCz0qZstyFZFK9gDngh9FLJ/F6eNrP3lbr0Q==
+X-Received: by 2002:a05:600c:4c08:b0:40b:5e4a:2368 with SMTP id d8-20020a05600c4c0800b0040b5e4a2368mr413527wmp.106.1701776284412;
+        Tue, 05 Dec 2023 03:38:04 -0800 (PST)
+Message-ID: <4797d75b-5ad9-445d-bbd7-6e90cd80f5a3@suse.com>
+Date: Tue, 5 Dec 2023 12:38:03 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] config: update Mini-OS commit
+Content-Language: en-US
+To: Juergen Gross <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20231205103508.5811-1-jgross@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20231205103508.5811-1-jgross@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+On 05.12.2023 11:35, Juergen Gross wrote:
+> Update the Mini-OS upstream revision.
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
 
-Add cpu_init_fred_exceptions() to:
-  - Set FRED entrypoints for events happening in ring 0 and 3.
-  - Specify the stack level for IRQs occurred ring 0.
-  - Specify dedicated event stacks for #DB/NMI/#MCE/#DF.
-  - Enable FRED and invalidtes IDT.
-  - Force 32-bit system calls to use "int $0x80" only.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Add fred_complete_exception_setup() to:
-  - Initialize system_vectors as done for IDT systems.
-  - Set unused sysvec_table entries to fred_handle_spurious_interrupt().
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
-Co-developed-by: Xin Li <xin3.li@intel.com>
-Signed-off-by: Xin Li <xin3.li@intel.com>
----
-
-Changes since v9:
-* Set unused sysvec table entries to fred_handle_spurious_interrupt()
-  in fred_complete_exception_setup() (Thomas Gleixner).
-
-Changes since v5:
-* Add a comment for FRED stack level settings (Lai Jiangshan).
-* Define NMI/#DB/#MCE/#DF stack levels using macros.
----
- arch/x86/entry/entry_fred.c | 21 +++++++++++++
- arch/x86/include/asm/fred.h |  5 ++++
- arch/x86/kernel/Makefile    |  1 +
- arch/x86/kernel/fred.c      | 59 +++++++++++++++++++++++++++++++++++++
- 4 files changed, 86 insertions(+)
- create mode 100644 arch/x86/kernel/fred.c
-
-diff --git a/arch/x86/entry/entry_fred.c b/arch/x86/entry/entry_fred.c
-index 3e33a4ab4624..abe66d65fa2d 100644
---- a/arch/x86/entry/entry_fred.c
-+++ b/arch/x86/entry/entry_fred.c
-@@ -140,6 +140,27 @@ void __init fred_install_sysvec(unsigned int sysvec, idtentry_t handler)
- 		 sysvec_table[sysvec - FIRST_SYSTEM_VECTOR] = handler;
- }
- 
-+static noinstr void fred_handle_spurious_interrupt(struct pt_regs *regs)
-+{
-+	spurious_interrupt(regs, regs->fred_ss.vector);
-+}
-+
-+void __init fred_complete_exception_setup(void)
-+{
-+	unsigned int vector;
-+
-+	for (vector = 0; vector < FIRST_EXTERNAL_VECTOR; vector++)
-+		set_bit(vector, system_vectors);
-+
-+	for (vector = 0; vector < NR_SYSTEM_VECTORS; vector++) {
-+		if (sysvec_table[vector])
-+			set_bit(vector + FIRST_SYSTEM_VECTOR, system_vectors);
-+		else
-+			sysvec_table[vector] = fred_handle_spurious_interrupt;
-+	}
-+	fred_setup_done = true;
-+}
-+
- static noinstr void fred_extint(struct pt_regs *regs)
- {
- 	unsigned int vector = regs->fred_ss.vector;
-diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
-index 2fa9f34e5c95..e86c7ba32435 100644
---- a/arch/x86/include/asm/fred.h
-+++ b/arch/x86/include/asm/fred.h
-@@ -83,8 +83,13 @@ static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int
- 	asm_fred_entry_from_kvm(ss);
- }
- 
-+void cpu_init_fred_exceptions(void);
-+void fred_complete_exception_setup(void);
-+
- #else /* CONFIG_X86_FRED */
- static __always_inline unsigned long fred_event_data(struct pt_regs *regs) { return 0; }
-+static inline void cpu_init_fred_exceptions(void) { }
-+static inline void fred_complete_exception_setup(void) { }
- static __always_inline void fred_entry_from_kvm(unsigned int type, unsigned int vector) { }
- #endif /* CONFIG_X86_FRED */
- #endif /* !__ASSEMBLY__ */
-diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
-index 0000325ab98f..0dcbfc1a4c41 100644
---- a/arch/x86/kernel/Makefile
-+++ b/arch/x86/kernel/Makefile
-@@ -48,6 +48,7 @@ obj-y			+= platform-quirks.o
- obj-y			+= process_$(BITS).o signal.o signal_$(BITS).o
- obj-y			+= traps.o idt.o irq.o irq_$(BITS).o dumpstack_$(BITS).o
- obj-y			+= time.o ioport.o dumpstack.o nmi.o
-+obj-$(CONFIG_X86_FRED)	+= fred.o
- obj-$(CONFIG_MODIFY_LDT_SYSCALL)	+= ldt.o
- obj-$(CONFIG_X86_KERNEL_IBT)		+= ibt_selftest.o
- obj-y			+= setup.o x86_init.o i8259.o irqinit.o
-diff --git a/arch/x86/kernel/fred.c b/arch/x86/kernel/fred.c
-new file mode 100644
-index 000000000000..4bcd8791ad96
---- /dev/null
-+++ b/arch/x86/kernel/fred.c
-@@ -0,0 +1,59 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#include <linux/kernel.h>
-+
-+#include <asm/desc.h>
-+#include <asm/fred.h>
-+#include <asm/tlbflush.h>
-+#include <asm/traps.h>
-+
-+/* #DB in the kernel would imply the use of a kernel debugger. */
-+#define FRED_DB_STACK_LEVEL		1UL
-+#define FRED_NMI_STACK_LEVEL		2UL
-+#define FRED_MC_STACK_LEVEL		2UL
-+/*
-+ * #DF is the highest level because a #DF means "something went wrong
-+ * *while delivering an exception*." The number of cases for which that
-+ * can happen with FRED is drastically reduced and basically amounts to
-+ * "the stack you pointed me to is broken." Thus, always change stacks
-+ * on #DF, which means it should be at the highest level.
-+ */
-+#define FRED_DF_STACK_LEVEL		3UL
-+
-+#define FRED_STKLVL(vector, lvl)	((lvl) << (2 * (vector)))
-+
-+void cpu_init_fred_exceptions(void)
-+{
-+	/* When FRED is enabled by default, remove this log message */
-+	pr_info("Initialize FRED on CPU%d\n", smp_processor_id());
-+
-+	wrmsrl(MSR_IA32_FRED_CONFIG,
-+	       /* Reserve for CALL emulation */
-+	       FRED_CONFIG_REDZONE |
-+	       FRED_CONFIG_INT_STKLVL(0) |
-+	       FRED_CONFIG_ENTRYPOINT(asm_fred_entrypoint_user));
-+
-+	/*
-+	 * The purpose of separate stacks for NMI, #DB and #MC *in the kernel*
-+	 * (remember that user space faults are always taken on stack level 0)
-+	 * is to avoid overflowing the kernel stack.
-+	 */
-+	wrmsrl(MSR_IA32_FRED_STKLVLS,
-+	       FRED_STKLVL(X86_TRAP_DB,  FRED_DB_STACK_LEVEL) |
-+	       FRED_STKLVL(X86_TRAP_NMI, FRED_NMI_STACK_LEVEL) |
-+	       FRED_STKLVL(X86_TRAP_MC,  FRED_MC_STACK_LEVEL) |
-+	       FRED_STKLVL(X86_TRAP_DF,  FRED_DF_STACK_LEVEL));
-+
-+	/* The FRED equivalents to IST stacks... */
-+	wrmsrl(MSR_IA32_FRED_RSP1, __this_cpu_ist_top_va(DB));
-+	wrmsrl(MSR_IA32_FRED_RSP2, __this_cpu_ist_top_va(NMI));
-+	wrmsrl(MSR_IA32_FRED_RSP3, __this_cpu_ist_top_va(DF));
-+
-+	/* Enable FRED */
-+	cr4_set_bits(X86_CR4_FRED);
-+	/* Any further IDT use is a bug */
-+	idt_invalidate();
-+
-+	/* Use int $0x80 for 32-bit system calls in FRED mode */
-+	setup_clear_cpu_cap(X86_FEATURE_SYSENTER32);
-+	setup_clear_cpu_cap(X86_FEATURE_SYSCALL32);
-+}
--- 
-2.43.0
 
 
