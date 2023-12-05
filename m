@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8698C07E97
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:25:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647594.1010980 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3DC6C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:26:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647595.1010985 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATYh-0004iY-Cr; Tue, 05 Dec 2023 11:25:47 +0000
+	id 1rATYh-0004lr-K6; Tue, 05 Dec 2023 11:25:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647594.1010980; Tue, 05 Dec 2023 11:25:47 +0000
+Received: by outflank-mailman (output) from mailman id 647595.1010985; Tue, 05 Dec 2023 11:25:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATYh-0004iR-9O; Tue, 05 Dec 2023 11:25:47 +0000
-Received: by outflank-mailman (input) for mailman id 647594;
+	id 1rATYh-0004kx-Gj; Tue, 05 Dec 2023 11:25:47 +0000
+Received: by outflank-mailman (input) for mailman id 647595;
  Tue, 05 Dec 2023 11:25:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUp-0003dP-V6
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:47 +0000
+ id 1rATUj-0003dP-Ud
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:41 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7383e649-9360-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 12:21:36 +0100 (CET)
+ id 71f1981c-9360-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 12:21:33 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:25 -0800
+ 05 Dec 2023 03:21:23 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:24 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:21 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7383e649-9360-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 71f1981c-9360-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775297; x=1733311297;
+  t=1701775294; x=1733311294;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=P4BKwwxZjNA35zXhN23eflIGEejxxbnos06jsBzXQIU=;
-  b=JBvzSrtfdcf7kbEjL6E5eq2ValttEHj4RuRfX6q7NYVqx06YibzOUoX8
-   z3naSDu+3v9K6dmXiwqbRp+CCzHt7EuqBt8okUwH3c5GxaiHuA9t9IFi8
-   hhm8HrZZd68Z4q+drqWhh3+rX461i0Ri2UQXF10b3YASw16wu4IfeGAR0
-   zXvhlZMMh7DDgOf7vaz9ZnLQQ4BIA3z3yJmpEJtU0X/IMM6NPd/JQaCtb
-   bH31XrNsmGjL1XrhdkH/oDCR8AgZVnPUzb/NXqcFdrs3gK0rDsu7fXzwJ
-   5PVXg9VnD45uytzPtBgah1+VP/QGtiEhuzJ0XFAobF9UB+Fgmy+1rR3ik
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942632"
+  bh=hPsnAnmRCEio5pl6T3lxKlJogXHr45sRU/QYYYLaUzw=;
+  b=LpQLmyXaI9qKZgZCwahESvpBGqmTx8iCH9ISzWRfLQe7U5dIrWVwtBZR
+   UDrFSxhpL27uTdadYLlbB631iU79tsTKTN3XHnhxKUOHjvx58nSKJZu5P
+   BJ6pXqkefkMD1VderwYsNm8xiGoBhiwqbR/4Yc9A2QJjolLD3XMKWFtYd
+   uV2jjMQLWqWycEzA1Brw9i/fjufZtIrbKbz8YU875Irh1LzJstdkNWQIj
+   vbTa0NNXyCp4bJGLJfhcOCxgLhTMfQvsxQaacbhATT9RUFmRL84SXRp5F
+   y4u0dPigozoLtZtSACzhmh7lorOXVaFhJitgfi2Mm47teyZDd1ac45OJy
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942537"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942632"
+   d="scan'208";a="942537"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192995"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192965"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018192995"
+   d="scan'208";a="1018192965"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,193 +88,53 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 27/35] x86/traps: Add sysvec_install() to install a system interrupt handler
-Date: Tue,  5 Dec 2023 02:50:16 -0800
-Message-ID: <20231205105030.8698-28-xin3.li@intel.com>
+Subject: [PATCH v13 19/35] x86/fred: No ESPFIX needed when FRED is enabled
+Date: Tue,  5 Dec 2023 02:50:08 -0800
+Message-ID: <20231205105030.8698-20-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add sysvec_install() to install a system interrupt handler into the IDT
-or the FRED system interrupt handler table.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
+Because FRED always restores the full value of %rsp, ESPFIX is
+no longer needed when it's enabled.
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
+ arch/x86/kernel/espfix_64.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Changes since v8:
-* Introduce a macro sysvec_install() to derive the asm handler name from
-  a C handler, which simplifies the code and avoids an ugly typecast
-  (Thomas Gleixner).
----
- arch/x86/entry/entry_fred.c      | 14 ++++++++++++++
- arch/x86/include/asm/desc.h      |  2 --
- arch/x86/include/asm/idtentry.h  | 15 +++++++++++++++
- arch/x86/kernel/cpu/acrn.c       |  4 ++--
- arch/x86/kernel/cpu/mshyperv.c   | 15 +++++++--------
- arch/x86/kernel/idt.c            |  4 ++--
- arch/x86/kernel/kvm.c            |  2 +-
- drivers/xen/events/events_base.c |  2 +-
- 8 files changed, 42 insertions(+), 16 deletions(-)
-
-diff --git a/arch/x86/entry/entry_fred.c b/arch/x86/entry/entry_fred.c
-index 215883e90f94..e80e3efbc057 100644
---- a/arch/x86/entry/entry_fred.c
-+++ b/arch/x86/entry/entry_fred.c
-@@ -126,6 +126,20 @@ static idtentry_t sysvec_table[NR_SYSTEM_VECTORS] __ro_after_init = {
- 	SYSVEC(POSTED_INTR_NESTED_VECTOR,	kvm_posted_intr_nested_ipi),
- };
+diff --git a/arch/x86/kernel/espfix_64.c b/arch/x86/kernel/espfix_64.c
+index 16f9814c9be0..6726e0473d0b 100644
+--- a/arch/x86/kernel/espfix_64.c
++++ b/arch/x86/kernel/espfix_64.c
+@@ -106,6 +106,10 @@ void __init init_espfix_bsp(void)
+ 	pgd_t *pgd;
+ 	p4d_t *p4d;
  
-+static bool fred_setup_done __initdata;
-+
-+void __init fred_install_sysvec(unsigned int sysvec, idtentry_t handler)
-+{
-+	if (WARN_ON_ONCE(sysvec < FIRST_SYSTEM_VECTOR))
++	/* FRED systems always restore the full value of %rsp */
++	if (cpu_feature_enabled(X86_FEATURE_FRED))
 +		return;
 +
-+	if (WARN_ON_ONCE(fred_setup_done))
+ 	/* Install the espfix pud into the kernel page directory */
+ 	pgd = &init_top_pgt[pgd_index(ESPFIX_BASE_ADDR)];
+ 	p4d = p4d_alloc(&init_mm, pgd, ESPFIX_BASE_ADDR);
+@@ -129,6 +133,10 @@ void init_espfix_ap(int cpu)
+ 	void *stack_page;
+ 	pteval_t ptemask;
+ 
++	/* FRED systems always restore the full value of %rsp */
++	if (cpu_feature_enabled(X86_FEATURE_FRED))
 +		return;
 +
-+	if (!WARN_ON_ONCE(sysvec_table[sysvec - FIRST_SYSTEM_VECTOR]))
-+		 sysvec_table[sysvec - FIRST_SYSTEM_VECTOR] = handler;
-+}
-+
- static noinstr void fred_extint(struct pt_regs *regs)
- {
- 	unsigned int vector = regs->fred_ss.vector;
-diff --git a/arch/x86/include/asm/desc.h b/arch/x86/include/asm/desc.h
-index ab97b22ac04a..ec95fe44fa3a 100644
---- a/arch/x86/include/asm/desc.h
-+++ b/arch/x86/include/asm/desc.h
-@@ -402,8 +402,6 @@ static inline void set_desc_limit(struct desc_struct *desc, unsigned long limit)
- 	desc->limit1 = (limit >> 16) & 0xf;
- }
- 
--void alloc_intr_gate(unsigned int n, const void *addr);
--
- static inline void init_idt_data(struct idt_data *data, unsigned int n,
- 				 const void *addr)
- {
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index 4f26ee9b8b74..650c98160152 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -459,6 +459,21 @@ __visible noinstr void func(struct pt_regs *regs,			\
- #define DEFINE_FREDENTRY_DEBUG		DEFINE_FREDENTRY_RAW
- #endif
- 
-+void idt_install_sysvec(unsigned int n, const void *function);
-+
-+#ifdef CONFIG_X86_FRED
-+void fred_install_sysvec(unsigned int vector, const idtentry_t function);
-+#else
-+static inline void fred_install_sysvec(unsigned int vector, const idtentry_t function) { }
-+#endif
-+
-+#define sysvec_install(vector, function) {				\
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))			\
-+		fred_install_sysvec(vector, function);			\
-+	else								\
-+		idt_install_sysvec(vector, asm_##function);		\
-+}
-+
- #else /* !__ASSEMBLY__ */
- 
- /*
-diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
-index bfeb18fad63f..2c5b51aad91a 100644
---- a/arch/x86/kernel/cpu/acrn.c
-+++ b/arch/x86/kernel/cpu/acrn.c
-@@ -26,8 +26,8 @@ static u32 __init acrn_detect(void)
- 
- static void __init acrn_init_platform(void)
- {
--	/* Setup the IDT for ACRN hypervisor callback */
--	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_acrn_hv_callback);
-+	/* Install system interrupt handler for ACRN hypervisor callback */
-+	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
- 
- 	x86_platform.calibrate_tsc = acrn_get_tsc_khz;
- 	x86_platform.calibrate_cpu = acrn_get_tsc_khz;
-diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
-index 01fa06dd06b6..45e0e70e238c 100644
---- a/arch/x86/kernel/cpu/mshyperv.c
-+++ b/arch/x86/kernel/cpu/mshyperv.c
-@@ -539,19 +539,18 @@ static void __init ms_hyperv_init_platform(void)
- 	 */
- 	x86_platform.apic_post_init = hyperv_init;
- 	hyperv_setup_mmu_ops();
--	/* Setup the IDT for hypervisor callback */
--	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_hyperv_callback);
- 
--	/* Setup the IDT for reenlightenment notifications */
-+	/* Install system interrupt handler for hypervisor callback */
-+	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_hyperv_callback);
-+
-+	/* Install system interrupt handler for reenlightenment notifications */
- 	if (ms_hyperv.features & HV_ACCESS_REENLIGHTENMENT) {
--		alloc_intr_gate(HYPERV_REENLIGHTENMENT_VECTOR,
--				asm_sysvec_hyperv_reenlightenment);
-+		sysvec_install(HYPERV_REENLIGHTENMENT_VECTOR, sysvec_hyperv_reenlightenment);
- 	}
- 
--	/* Setup the IDT for stimer0 */
-+	/* Install system interrupt handler for stimer0 */
- 	if (ms_hyperv.misc_features & HV_STIMER_DIRECT_MODE_AVAILABLE) {
--		alloc_intr_gate(HYPERV_STIMER0_VECTOR,
--				asm_sysvec_hyperv_stimer0);
-+		sysvec_install(HYPERV_STIMER0_VECTOR, sysvec_hyperv_stimer0);
- 	}
- 
- # ifdef CONFIG_SMP
-diff --git a/arch/x86/kernel/idt.c b/arch/x86/kernel/idt.c
-index 8857abc706e4..2b734927eec1 100644
---- a/arch/x86/kernel/idt.c
-+++ b/arch/x86/kernel/idt.c
-@@ -337,7 +337,7 @@ void idt_invalidate(void)
- 	load_idt(&idt);
- }
- 
--void __init alloc_intr_gate(unsigned int n, const void *addr)
-+void __init idt_install_sysvec(unsigned int n, const void *function)
- {
- 	if (WARN_ON(n < FIRST_SYSTEM_VECTOR))
- 		return;
-@@ -346,5 +346,5 @@ void __init alloc_intr_gate(unsigned int n, const void *addr)
- 		return;
- 
- 	if (!WARN_ON(test_and_set_bit(n, system_vectors)))
--		set_intr_gate(n, addr);
-+		set_intr_gate(n, function);
- }
-diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
-index 0ddb3bd0f1aa..70d3aa717a29 100644
---- a/arch/x86/kernel/kvm.c
-+++ b/arch/x86/kernel/kvm.c
-@@ -829,7 +829,7 @@ static void __init kvm_guest_init(void)
- 
- 	if (kvm_para_has_feature(KVM_FEATURE_ASYNC_PF_INT) && kvmapf) {
- 		static_branch_enable(&kvm_async_pf_enabled);
--		alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_kvm_asyncpf_interrupt);
-+		sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_kvm_asyncpf_interrupt);
- 	}
- 
- #ifdef CONFIG_SMP
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index b8cfea7812d6..e2813bac92d4 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -2216,7 +2216,7 @@ static __init void xen_alloc_callback_vector(void)
- 		return;
- 
- 	pr_info("Xen HVM callback vector for event delivery is enabled\n");
--	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, asm_sysvec_xen_hvm_callback);
-+	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_xen_hvm_callback);
- }
- #else
- void xen_setup_callback_vector(void) {}
+ 	/* We only have to do this once... */
+ 	if (likely(per_cpu(espfix_stack, cpu)))
+ 		return;		/* Already initialized */
 -- 
 2.43.0
 
