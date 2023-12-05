@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81021C07E97
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:21:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647572.1010955 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 178BBC07E97
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:21:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647570.1010940 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUl-0007l6-6S; Tue, 05 Dec 2023 11:21:43 +0000
+	id 1rATUj-0007Oi-5B; Tue, 05 Dec 2023 11:21:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647572.1010955; Tue, 05 Dec 2023 11:21:43 +0000
+Received: by outflank-mailman (output) from mailman id 647570.1010940; Tue, 05 Dec 2023 11:21:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUk-0007gc-FN; Tue, 05 Dec 2023 11:21:42 +0000
-Received: by outflank-mailman (input) for mailman id 647572;
- Tue, 05 Dec 2023 11:21:40 +0000
+	id 1rATUi-0007ME-Ns; Tue, 05 Dec 2023 11:21:40 +0000
+Received: by outflank-mailman (input) for mailman id 647570;
+ Tue, 05 Dec 2023 11:21:37 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUi-0005GD-4l
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:40 +0000
+ id 1rATUf-0005GD-MY
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:37 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 754a6a2c-9360-11ee-98e5-6d05b1d4d9a1;
- Tue, 05 Dec 2023 12:21:39 +0100 (CET)
+ id 73c888cc-9360-11ee-98e5-6d05b1d4d9a1;
+ Tue, 05 Dec 2023 12:21:36 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:28 -0800
+ 05 Dec 2023 03:21:26 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:26 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:25 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 754a6a2c-9360-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: 73c888cc-9360-11ee-98e5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775300; x=1733311300;
+  t=1701775297; x=1733311297;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=GKdJrpjNAAfGimUxYAq3wTN/xrTwaQ33LU4i4+qObUE=;
-  b=gdDgwlDBCU8LJ6neaiShDVSKjoFhzx+s8aTe18lgt9BllNVZg9/w+z78
-   SUZ4k9j4f4StSnPpKdamcMNHyTnvMo7L3jK+wgJ9ypMy3Bdt1iCwINj4o
-   Yvf03eOQTUnrjwyhGvTcJX5GB7QFN6k9uy8P539P6u2Vm5ge32mKvChOT
-   sZdM9mAc/MeoOmBLHWjYnqSbPTtENs7i4Y3bYK98Mb4pp0Ocp9/FOxO+L
-   Gn/2Gdxm8PnWsg17P40I67brwtqtHbOFFBkukxh/YSTDv4NYme8Xm+B9s
-   2TqN3RchjYdg4CvpOF8y2WP27CvaImmDhacoRsj5bQSMEZMGWsYVVQDk1
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942730"
+  bh=c4v54mG+yNciVv+S7CXnyMniWVPMoCmWvn//znfwVvI=;
+  b=Z84pk1Fc9psctUckgygqQYKX7gQ5/TAG+UwODCUcJGQRKJw+AngR8amL
+   qDJ6xKzDI4WyRd392+VyMrwgKILGhLtn7QwD1HG4gs6ID9D9ZXJObYw5o
+   9CX/FZEKGyodIZguu/0jDsxk3Imy95B2VFRb3hIj2nLGBy3gT9fLybd3H
+   lGoQuHKKYk7LCKH4HwOeMJyiEEHxL2ocIkX4XGUUrkuOxQpB5iL46JepN
+   qsK0rAcMcV54alUrVisM6s6nWcmCIINECvRolAHBx+EY6WHFmzVtCChJG
+   YYdW+h2wqT8GJ/Rk+y5Ljxy7jxRuMWUFmKa3cxpaZwIJBiv3NPhobYZPN
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942658"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942730"
+   d="scan'208";a="942658"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018193022"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018193002"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018193022"
+   d="scan'208";a="1018193002"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,133 +88,187 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 35/35] x86/fred: Invoke FRED initialization code to enable FRED
-Date: Tue,  5 Dec 2023 02:50:24 -0800
-Message-ID: <20231205105030.8698-36-xin3.li@intel.com>
+Subject: [PATCH v13 29/35] x86/fred: Fixup fault on ERETU by jumping to fred_entrypoint_user
+Date: Tue,  5 Dec 2023 02:50:18 -0800
+Message-ID: <20231205105030.8698-30-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+If the stack frame contains an invalid user context (e.g. due to invalid SS,
+a non-canonical RIP, etc.) the ERETU instruction will trap (#SS or #GP).
 
-Let cpu_init_exception_handling() call cpu_init_fred_exceptions() to
-initialize FRED. However if FRED is unavailable or disabled, it falls
-back to set up TSS IST and initialize IDT.
+From a Linux point of view, this really should be considered a user space
+failure, so use the standard fault fixup mechanism to intercept the fault,
+fix up the exception frame, and redirect execution to fred_entrypoint_user.
+The end result is that it appears just as if the hardware had taken the
+exception immediately after completing the transition to user space.
 
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
-Co-developed-by: Xin Li <xin3.li@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
 
-Changes since v10:
-* No need to invalidate SYSCALL and SYSENTER MSRs (Thomas Gleixner).
-
 Changes since v8:
-* Move this patch after all required changes are in place (Thomas
-  Gleixner).
----
- arch/x86/kernel/cpu/common.c | 22 +++++++++++++++++-----
- arch/x86/kernel/irqinit.c    |  7 ++++++-
- arch/x86/kernel/traps.c      |  5 ++++-
- 3 files changed, 27 insertions(+), 7 deletions(-)
+* Reflect the FRED spec 5.0 change that ERETS and ERETU add 8 to %rsp
+  before popping the return context from the stack.
 
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 9a075792e275..91d2f6018c48 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -61,6 +61,7 @@
- #include <asm/microcode.h>
- #include <asm/intel-family.h>
- #include <asm/cpu_device_id.h>
+Changes since v6:
+* Add a comment to explain why it is safe to write to the previous FRED stack
+  frame. (Lai Jiangshan).
+
+Changes since v5:
+* Move the NMI bit from an invalid stack frame, which caused ERETU to fault,
+  to the fault handler's stack frame, thus to unblock NMI ASAP if NMI is blocked
+  (Lai Jiangshan).
+---
+ arch/x86/entry/entry_64_fred.S             |  5 +-
+ arch/x86/include/asm/extable_fixup_types.h |  4 +-
+ arch/x86/mm/extable.c                      | 79 ++++++++++++++++++++++
+ 3 files changed, 86 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/entry/entry_64_fred.S b/arch/x86/entry/entry_64_fred.S
+index 5781c3411b44..d1c2fc4af8ae 100644
+--- a/arch/x86/entry/entry_64_fred.S
++++ b/arch/x86/entry/entry_64_fred.S
+@@ -3,6 +3,7 @@
+  * The actual FRED entry points.
+  */
+ 
++#include <asm/asm.h>
+ #include <asm/fred.h>
+ 
+ #include "calling.h"
+@@ -34,7 +35,9 @@ SYM_CODE_START_NOALIGN(asm_fred_entrypoint_user)
+ 	call	fred_entry_from_user
+ SYM_INNER_LABEL(asm_fred_exit_user, SYM_L_GLOBAL)
+ 	FRED_EXIT
+-	ERETU
++1:	ERETU
++
++	_ASM_EXTABLE_TYPE(1b, asm_fred_entrypoint_user, EX_TYPE_ERETU)
+ SYM_CODE_END(asm_fred_entrypoint_user)
+ 
+ .fill asm_fred_entrypoint_kernel - ., 1, 0xcc
+diff --git a/arch/x86/include/asm/extable_fixup_types.h b/arch/x86/include/asm/extable_fixup_types.h
+index 991e31cfde94..1585c798a02f 100644
+--- a/arch/x86/include/asm/extable_fixup_types.h
++++ b/arch/x86/include/asm/extable_fixup_types.h
+@@ -64,6 +64,8 @@
+ #define	EX_TYPE_UCOPY_LEN4		(EX_TYPE_UCOPY_LEN | EX_DATA_IMM(4))
+ #define	EX_TYPE_UCOPY_LEN8		(EX_TYPE_UCOPY_LEN | EX_DATA_IMM(8))
+ 
+-#define EX_TYPE_ZEROPAD			20 /* longword load with zeropad on fault */
++#define	EX_TYPE_ZEROPAD			20 /* longword load with zeropad on fault */
++
++#define	EX_TYPE_ERETU			21
+ 
+ #endif
+diff --git a/arch/x86/mm/extable.c b/arch/x86/mm/extable.c
+index 271dcb2deabc..fc40a4e12f3a 100644
+--- a/arch/x86/mm/extable.c
++++ b/arch/x86/mm/extable.c
+@@ -6,6 +6,7 @@
+ #include <xen/xen.h>
+ 
+ #include <asm/fpu/api.h>
 +#include <asm/fred.h>
- #include <asm/uv/uv.h>
- #include <asm/ia32.h>
- #include <asm/set_memory.h>
-@@ -2117,7 +2118,15 @@ void syscall_init(void)
- 	/* The default user and kernel segments */
- 	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
- 
--	idt_syscall_init();
-+	/*
-+	 * Except the IA32_STAR MSR, there is NO need to setup SYSCALL and
-+	 * SYSENTER MSRs for FRED, because FRED uses the ring 3 FRED
-+	 * entrypoint for SYSCALL and SYSENTER, and ERETU is the only legit
-+	 * instruction to return to ring 3 (both sysexit and sysret cause
-+	 * #UD when FRED is enabled).
-+	 */
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		idt_syscall_init();
- }
- 
- #else	/* CONFIG_X86_64 */
-@@ -2223,8 +2232,9 @@ void cpu_init_exception_handling(void)
- 	/* paranoid_entry() gets the CPU number from the GDT */
- 	setup_getcpu(cpu);
- 
--	/* IST vectors need TSS to be set up. */
--	tss_setup_ist(tss);
-+	/* For IDT mode, IST vectors need to be set in TSS. */
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		tss_setup_ist(tss);
- 	tss_setup_io_bitmap(tss);
- 	set_tss_desc(cpu, &get_cpu_entry_area(cpu)->tss.x86_tss);
- 
-@@ -2233,8 +2243,10 @@ void cpu_init_exception_handling(void)
- 	/* GHCB needs to be setup to handle #VC. */
- 	setup_ghcb();
- 
--	/* Finally load the IDT */
--	load_current_idt();
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		cpu_init_fred_exceptions();
-+	else
-+		load_current_idt();
- }
- 
- /*
-diff --git a/arch/x86/kernel/irqinit.c b/arch/x86/kernel/irqinit.c
-index c683666876f1..f79c5edc0b89 100644
---- a/arch/x86/kernel/irqinit.c
-+++ b/arch/x86/kernel/irqinit.c
-@@ -28,6 +28,7 @@
- #include <asm/setup.h>
- #include <asm/i8259.h>
+ #include <asm/sev.h>
  #include <asm/traps.h>
-+#include <asm/fred.h>
- #include <asm/prom.h>
+ #include <asm/kdebug.h>
+@@ -223,6 +224,80 @@ static bool ex_handler_ucopy_len(const struct exception_table_entry *fixup,
+ 	return ex_handler_uaccess(fixup, regs, trapnr, fault_address);
+ }
  
- /*
-@@ -96,7 +97,11 @@ void __init native_init_IRQ(void)
- 	/* Execute any quirks before the call gates are initialised: */
- 	x86_init.irqs.pre_vector_init();
- 
--	idt_setup_apic_and_irq_gates();
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		fred_complete_exception_setup();
-+	else
-+		idt_setup_apic_and_irq_gates();
++#ifdef CONFIG_X86_FRED
++static bool ex_handler_eretu(const struct exception_table_entry *fixup,
++			     struct pt_regs *regs, unsigned long error_code)
++{
++	struct pt_regs *uregs = (struct pt_regs *)
++		(regs->sp - offsetof(struct pt_regs, orig_ax));
++	unsigned short ss = uregs->ss;
++	unsigned short cs = uregs->cs;
 +
- 	lapic_assign_system_vectors();
- 
- 	if (!acpi_ioapic && !of_ioapic && nr_legacy_irqs()) {
-diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
-index 848c85208a57..0ee78a30e14a 100644
---- a/arch/x86/kernel/traps.c
-+++ b/arch/x86/kernel/traps.c
-@@ -1411,7 +1411,10 @@ void __init trap_init(void)
- 
- 	/* Initialize TSS before setting up traps so ISTs work */
- 	cpu_init_exception_handling();
++	/*
++	 * Move the NMI bit from the invalid stack frame, which caused ERETU
++	 * to fault, to the fault handler's stack frame, thus to unblock NMI
++	 * with the fault handler's ERETS instruction ASAP if NMI is blocked.
++	 */
++	regs->fred_ss.nmi = uregs->fred_ss.nmi;
 +
- 	/* Setup traps as cpu_init() might #GP */
--	idt_setup_traps();
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		idt_setup_traps();
++	/*
++	 * Sync event information to uregs, i.e., the ERETU return frame, but
++	 * is it safe to write to the ERETU return frame which is just above
++	 * current event stack frame?
++	 *
++	 * The RSP used by FRED to push a stack frame is not the value in %rsp,
++	 * it is calculated from %rsp with the following 2 steps:
++	 * 1) RSP = %rsp - (IA32_FRED_CONFIG & 0x1c0)	// Reserve N*64 bytes
++	 * 2) RSP = RSP & ~0x3f		// Align to a 64-byte cache line
++	 * when an event delivery doesn't trigger a stack level change.
++	 *
++	 * Here is an example with N*64 (N=1) bytes reserved:
++	 *
++	 *  64-byte cache line ==>  ______________
++	 *                         |___Reserved___|
++	 *                         |__Event_data__|
++	 *                         |_____SS_______|
++	 *                         |_____RSP______|
++	 *                         |_____FLAGS____|
++	 *                         |_____CS_______|
++	 *                         |_____IP_______|
++	 *  64-byte cache line ==> |__Error_code__| <== ERETU return frame
++	 *                         |______________|
++	 *                         |______________|
++	 *                         |______________|
++	 *                         |______________|
++	 *                         |______________|
++	 *                         |______________|
++	 *                         |______________|
++	 *  64-byte cache line ==> |______________| <== RSP after step 1) and 2)
++	 *                         |___Reserved___|
++	 *                         |__Event_data__|
++	 *                         |_____SS_______|
++	 *                         |_____RSP______|
++	 *                         |_____FLAGS____|
++	 *                         |_____CS_______|
++	 *                         |_____IP_______|
++	 *  64-byte cache line ==> |__Error_code__| <== ERETS return frame
++	 *
++	 * Thus a new FRED stack frame will always be pushed below a previous
++	 * FRED stack frame ((N*64) bytes may be reserved between), and it is
++	 * safe to write to a previous FRED stack frame as they never overlap.
++	 */
++	fred_info(uregs)->edata = fred_event_data(regs);
++	uregs->ssx = regs->ssx;
++	uregs->fred_ss.ss = ss;
++	/* The NMI bit was moved away above */
++	uregs->fred_ss.nmi = 0;
++	uregs->csx = regs->csx;
++	uregs->fred_cs.sl = 0;
++	uregs->fred_cs.wfe = 0;
++	uregs->cs = cs;
++	uregs->orig_ax = error_code;
 +
- 	cpu_init();
++	return ex_handler_default(fixup, regs);
++}
++#endif
++
+ int ex_get_fixup_type(unsigned long ip)
+ {
+ 	const struct exception_table_entry *e = search_exception_tables(ip);
+@@ -300,6 +375,10 @@ int fixup_exception(struct pt_regs *regs, int trapnr, unsigned long error_code,
+ 		return ex_handler_ucopy_len(e, regs, trapnr, fault_addr, reg, imm);
+ 	case EX_TYPE_ZEROPAD:
+ 		return ex_handler_zeropad(e, regs, fault_addr);
++#ifdef CONFIG_X86_FRED
++	case EX_TYPE_ERETU:
++		return ex_handler_eretu(e, regs, error_code);
++#endif
+ 	}
+ 	BUG();
  }
 -- 
 2.43.0
