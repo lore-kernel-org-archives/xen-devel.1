@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE29C10F09
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 18:21:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.648185.1012297 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1008C10DCE
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 18:20:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.648192.1012350 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAa26-0003Na-IG; Tue, 05 Dec 2023 18:20:34 +0000
+	id 1rAa2K-0005GW-P3; Tue, 05 Dec 2023 18:20:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 648185.1012297; Tue, 05 Dec 2023 18:20:34 +0000
+Received: by outflank-mailman (output) from mailman id 648192.1012350; Tue, 05 Dec 2023 18:20:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAa26-0003MG-DB; Tue, 05 Dec 2023 18:20:34 +0000
-Received: by outflank-mailman (input) for mailman id 648185;
- Tue, 05 Dec 2023 18:20:33 +0000
+	id 1rAa2K-0005GH-KW; Tue, 05 Dec 2023 18:20:48 +0000
+Received: by outflank-mailman (input) for mailman id 648192;
+ Tue, 05 Dec 2023 18:20:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=I6T2=HQ=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1rAa25-0002wG-FD
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 18:20:33 +0000
+ id 1rAa2J-0002wG-Om
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 18:20:47 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f8cd0d77-939a-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 19:20:31 +0100 (CET)
+ id 015b3741-939b-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 19:20:45 +0100 (CET)
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-624-nxpk8rGSNfC8bigtBsmm5g-1; Tue,
- 05 Dec 2023 13:20:25 -0500
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-587-ksoH-B_qNCu3IHo5ypFuDQ-1; Tue,
+ 05 Dec 2023 13:20:40 -0500
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id EFE3529ABA09;
- Tue,  5 Dec 2023 18:20:22 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D0ACB386A0AC;
+ Tue,  5 Dec 2023 18:20:38 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.111])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3AB3CC15968;
- Tue,  5 Dec 2023 18:20:22 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 329D9492BC6;
+ Tue,  5 Dec 2023 18:20:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f8cd0d77-939a-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 015b3741-939b-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701800430;
+	s=mimecast20190719; t=1701800444;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8L/sqNOye5u7RuNbcak0BJzo7ABJgGjW0OxZLTOj6y8=;
-	b=bC9o89MvyIQXd7luX1WPop4JIAjQwlCK5qbuihP6ckdrjAyW5QBj1rrlZux4B6vOuAwaZw
-	S9SF4dLEP/uYjiGIEYlV7EpFbP/QpyLbXSnJK1BevzjIBoEUpTGEmEIfSNwRc8pVbOKOj4
-	CBM+KzVca8Sw9TEHEMHVou8lkfNm2/0=
-X-MC-Unique: nxpk8rGSNfC8bigtBsmm5g-1
+	bh=QKQzQ3fye1WySx6n8C4OipFXirz9rwxVm6vz00LMeKs=;
+	b=PCXoewqez83iclCPZ5RqkjrtMG4/MWwVviMVfoT/DFNUQArvaxTn419iEwwm0r0xsxJzTT
+	DyUBjEuJhtIunFVurqUbxUMpbjnyQ/5QtLH7K1frbZobIFUUTj/LelrYCOwObBcBYscVqG
+	smev1PigzZYwj8I0E2l2INBeYDJ4ttw=
+X-MC-Unique: ksoH-B_qNCu3IHo5ypFuDQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
@@ -100,123 +100,277 @@ Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
 	David Hildenbrand <david@redhat.com>,
 	Li Zhijian <lizhijian@fujitsu.com>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 03/14] tests: remove aio_context_acquire() tests
-Date: Tue,  5 Dec 2023 13:20:00 -0500
-Message-ID: <20231205182011.1976568-4-stefanha@redhat.com>
+Subject: [PATCH v2 08/14] scsi: remove AioContext locking
+Date: Tue,  5 Dec 2023 13:20:05 -0500
+Message-ID: <20231205182011.1976568-9-stefanha@redhat.com>
 In-Reply-To: <20231205182011.1976568-1-stefanha@redhat.com>
 References: <20231205182011.1976568-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
 
-The aio_context_acquire() API is being removed. Drop the test case that
-calls the API.
+The AioContext lock no longer has any effect. Remove it.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 Reviewed-by: Eric Blake <eblake@redhat.com>
-Reviewed-by: Kevin Wolf <kwolf@redhat.com>
 ---
- tests/unit/test-aio.c | 67 +------------------------------------------
- 1 file changed, 1 insertion(+), 66 deletions(-)
+ include/hw/virtio/virtio-scsi.h | 14 --------------
+ hw/scsi/scsi-bus.c              |  2 --
+ hw/scsi/scsi-disk.c             | 31 +++++--------------------------
+ hw/scsi/virtio-scsi.c           | 18 ------------------
+ 4 files changed, 5 insertions(+), 60 deletions(-)
 
-diff --git a/tests/unit/test-aio.c b/tests/unit/test-aio.c
-index 337b6e4ea7..e77d86be87 100644
---- a/tests/unit/test-aio.c
-+++ b/tests/unit/test-aio.c
-@@ -100,76 +100,12 @@ static void event_ready_cb(EventNotifier *e)
+diff --git a/include/hw/virtio/virtio-scsi.h b/include/hw/virtio/virtio-scsi.h
+index da8cb928d9..7f0573b1bf 100644
+--- a/include/hw/virtio/virtio-scsi.h
++++ b/include/hw/virtio/virtio-scsi.h
+@@ -101,20 +101,6 @@ struct VirtIOSCSI {
+     uint32_t host_features;
+ };
  
- /* Tests using aio_*.  */
- 
--typedef struct {
--    QemuMutex start_lock;
--    EventNotifier notifier;
--    bool thread_acquired;
--} AcquireTestData;
--
--static void *test_acquire_thread(void *opaque)
+-static inline void virtio_scsi_acquire(VirtIOSCSI *s)
 -{
--    AcquireTestData *data = opaque;
--
--    /* Wait for other thread to let us start */
--    qemu_mutex_lock(&data->start_lock);
--    qemu_mutex_unlock(&data->start_lock);
--
--    /* event_notifier_set might be called either before or after
--     * the main thread's call to poll().  The test case's outcome
--     * should be the same in either case.
--     */
--    event_notifier_set(&data->notifier);
--    aio_context_acquire(ctx);
--    aio_context_release(ctx);
--
--    data->thread_acquired = true; /* success, we got here */
--
--    return NULL;
+-    if (s->ctx) {
+-        aio_context_acquire(s->ctx);
+-    }
 -}
 -
- static void set_event_notifier(AioContext *nctx, EventNotifier *notifier,
-                                EventNotifierHandler *handler)
+-static inline void virtio_scsi_release(VirtIOSCSI *s)
+-{
+-    if (s->ctx) {
+-        aio_context_release(s->ctx);
+-    }
+-}
+-
+ void virtio_scsi_common_realize(DeviceState *dev,
+                                 VirtIOHandleOutput ctrl,
+                                 VirtIOHandleOutput evt,
+diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
+index f3ec11f892..df68a44b6a 100644
+--- a/hw/scsi/scsi-bus.c
++++ b/hw/scsi/scsi-bus.c
+@@ -1731,9 +1731,7 @@ void scsi_device_purge_requests(SCSIDevice *sdev, SCSISense sense)
  {
-     aio_set_event_notifier(nctx, notifier, handler, NULL, NULL);
+     scsi_device_for_each_req_async(sdev, scsi_device_purge_one_req, NULL);
+ 
+-    aio_context_acquire(blk_get_aio_context(sdev->conf.blk));
+     blk_drain(sdev->conf.blk);
+-    aio_context_release(blk_get_aio_context(sdev->conf.blk));
+     scsi_device_set_ua(sdev, sense);
  }
  
--static void dummy_notifier_read(EventNotifier *n)
--{
--    event_notifier_test_and_clear(n);
--}
--
--static void test_acquire(void)
--{
--    QemuThread thread;
--    AcquireTestData data;
--
--    /* Dummy event notifier ensures aio_poll() will block */
--    event_notifier_init(&data.notifier, false);
--    set_event_notifier(ctx, &data.notifier, dummy_notifier_read);
--    g_assert(!aio_poll(ctx, false)); /* consume aio_notify() */
--
--    qemu_mutex_init(&data.start_lock);
--    qemu_mutex_lock(&data.start_lock);
--    data.thread_acquired = false;
--
--    qemu_thread_create(&thread, "test_acquire_thread",
--                       test_acquire_thread,
--                       &data, QEMU_THREAD_JOINABLE);
--
--    /* Block in aio_poll(), let other thread kick us and acquire context */
--    aio_context_acquire(ctx);
--    qemu_mutex_unlock(&data.start_lock); /* let the thread run */
--    g_assert(aio_poll(ctx, true));
--    g_assert(!data.thread_acquired);
--    aio_context_release(ctx);
--
--    qemu_thread_join(&thread);
--    set_event_notifier(ctx, &data.notifier, NULL);
--    event_notifier_cleanup(&data.notifier);
--
--    g_assert(data.thread_acquired);
--}
--
- static void test_bh_schedule(void)
+diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
+index a5048e0aaf..61be3d395a 100644
+--- a/hw/scsi/scsi-disk.c
++++ b/hw/scsi/scsi-disk.c
+@@ -2339,14 +2339,10 @@ static void scsi_disk_reset(DeviceState *dev)
  {
-     BHTestData data = { .n = 0 };
-@@ -879,7 +815,7 @@ static void test_worker_thread_co_enter(void)
-     qemu_thread_get_self(&this_thread);
-     co = qemu_coroutine_create(co_check_current_thread, &this_thread);
+     SCSIDiskState *s = DO_UPCAST(SCSIDiskState, qdev.qdev, dev);
+     uint64_t nb_sectors;
+-    AioContext *ctx;
  
--    qemu_thread_create(&worker_thread, "test_acquire_thread",
-+    qemu_thread_create(&worker_thread, "test_aio_co_enter",
-                        test_aio_co_enter,
-                        co, QEMU_THREAD_JOINABLE);
+     scsi_device_purge_requests(&s->qdev, SENSE_CODE(RESET));
  
-@@ -899,7 +835,6 @@ int main(int argc, char **argv)
-     while (g_main_context_iteration(NULL, false));
+-    ctx = blk_get_aio_context(s->qdev.conf.blk);
+-    aio_context_acquire(ctx);
+     blk_get_geometry(s->qdev.conf.blk, &nb_sectors);
+-    aio_context_release(ctx);
  
-     g_test_init(&argc, &argv, NULL);
--    g_test_add_func("/aio/acquire",                 test_acquire);
-     g_test_add_func("/aio/bh/schedule",             test_bh_schedule);
-     g_test_add_func("/aio/bh/schedule10",           test_bh_schedule10);
-     g_test_add_func("/aio/bh/cancel",               test_bh_cancel);
+     nb_sectors /= s->qdev.blocksize / BDRV_SECTOR_SIZE;
+     if (nb_sectors) {
+@@ -2545,15 +2541,13 @@ static void scsi_unrealize(SCSIDevice *dev)
+ static void scsi_hd_realize(SCSIDevice *dev, Error **errp)
+ {
+     SCSIDiskState *s = DO_UPCAST(SCSIDiskState, qdev, dev);
+-    AioContext *ctx = NULL;
++
+     /* can happen for devices without drive. The error message for missing
+      * backend will be issued in scsi_realize
+      */
+     if (s->qdev.conf.blk) {
+-        ctx = blk_get_aio_context(s->qdev.conf.blk);
+-        aio_context_acquire(ctx);
+         if (!blkconf_blocksizes(&s->qdev.conf, errp)) {
+-            goto out;
++            return;
+         }
+     }
+     s->qdev.blocksize = s->qdev.conf.logical_block_size;
+@@ -2562,16 +2556,11 @@ static void scsi_hd_realize(SCSIDevice *dev, Error **errp)
+         s->product = g_strdup("QEMU HARDDISK");
+     }
+     scsi_realize(&s->qdev, errp);
+-out:
+-    if (ctx) {
+-        aio_context_release(ctx);
+-    }
+ }
+ 
+ static void scsi_cd_realize(SCSIDevice *dev, Error **errp)
+ {
+     SCSIDiskState *s = DO_UPCAST(SCSIDiskState, qdev, dev);
+-    AioContext *ctx;
+     int ret;
+     uint32_t blocksize = 2048;
+ 
+@@ -2587,8 +2576,6 @@ static void scsi_cd_realize(SCSIDevice *dev, Error **errp)
+         blocksize = dev->conf.physical_block_size;
+     }
+ 
+-    ctx = blk_get_aio_context(dev->conf.blk);
+-    aio_context_acquire(ctx);
+     s->qdev.blocksize = blocksize;
+     s->qdev.type = TYPE_ROM;
+     s->features |= 1 << SCSI_DISK_F_REMOVABLE;
+@@ -2596,7 +2583,6 @@ static void scsi_cd_realize(SCSIDevice *dev, Error **errp)
+         s->product = g_strdup("QEMU CD-ROM");
+     }
+     scsi_realize(&s->qdev, errp);
+-    aio_context_release(ctx);
+ }
+ 
+ 
+@@ -2727,7 +2713,6 @@ static int get_device_type(SCSIDiskState *s)
+ static void scsi_block_realize(SCSIDevice *dev, Error **errp)
+ {
+     SCSIDiskState *s = DO_UPCAST(SCSIDiskState, qdev, dev);
+-    AioContext *ctx;
+     int sg_version;
+     int rc;
+ 
+@@ -2742,9 +2727,6 @@ static void scsi_block_realize(SCSIDevice *dev, Error **errp)
+                           "be removed in a future version");
+     }
+ 
+-    ctx = blk_get_aio_context(s->qdev.conf.blk);
+-    aio_context_acquire(ctx);
+-
+     /* check we are using a driver managing SG_IO (version 3 and after) */
+     rc = blk_ioctl(s->qdev.conf.blk, SG_GET_VERSION_NUM, &sg_version);
+     if (rc < 0) {
+@@ -2752,18 +2734,18 @@ static void scsi_block_realize(SCSIDevice *dev, Error **errp)
+         if (rc != -EPERM) {
+             error_append_hint(errp, "Is this a SCSI device?\n");
+         }
+-        goto out;
++        return;
+     }
+     if (sg_version < 30000) {
+         error_setg(errp, "scsi generic interface too old");
+-        goto out;
++        return;
+     }
+ 
+     /* get device type from INQUIRY data */
+     rc = get_device_type(s);
+     if (rc < 0) {
+         error_setg(errp, "INQUIRY failed");
+-        goto out;
++        return;
+     }
+ 
+     /* Make a guess for the block size, we'll fix it when the guest sends.
+@@ -2783,9 +2765,6 @@ static void scsi_block_realize(SCSIDevice *dev, Error **errp)
+ 
+     scsi_realize(&s->qdev, errp);
+     scsi_generic_read_device_inquiry(&s->qdev);
+-
+-out:
+-    aio_context_release(ctx);
+ }
+ 
+ typedef struct SCSIBlockReq {
+diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
+index 4f8d35facc..ca365a70e9 100644
+--- a/hw/scsi/virtio-scsi.c
++++ b/hw/scsi/virtio-scsi.c
+@@ -642,9 +642,7 @@ static void virtio_scsi_handle_ctrl(VirtIODevice *vdev, VirtQueue *vq)
+         return;
+     }
+ 
+-    virtio_scsi_acquire(s);
+     virtio_scsi_handle_ctrl_vq(s, vq);
+-    virtio_scsi_release(s);
+ }
+ 
+ static void virtio_scsi_complete_cmd_req(VirtIOSCSIReq *req)
+@@ -882,9 +880,7 @@ static void virtio_scsi_handle_cmd(VirtIODevice *vdev, VirtQueue *vq)
+         return;
+     }
+ 
+-    virtio_scsi_acquire(s);
+     virtio_scsi_handle_cmd_vq(s, vq);
+-    virtio_scsi_release(s);
+ }
+ 
+ static void virtio_scsi_get_config(VirtIODevice *vdev,
+@@ -1031,9 +1027,7 @@ static void virtio_scsi_handle_event(VirtIODevice *vdev, VirtQueue *vq)
+         return;
+     }
+ 
+-    virtio_scsi_acquire(s);
+     virtio_scsi_handle_event_vq(s, vq);
+-    virtio_scsi_release(s);
+ }
+ 
+ static void virtio_scsi_change(SCSIBus *bus, SCSIDevice *dev, SCSISense sense)
+@@ -1052,9 +1046,7 @@ static void virtio_scsi_change(SCSIBus *bus, SCSIDevice *dev, SCSISense sense)
+             },
+         };
+ 
+-        virtio_scsi_acquire(s);
+         virtio_scsi_push_event(s, &info);
+-        virtio_scsi_release(s);
+     }
+ }
+ 
+@@ -1071,17 +1063,13 @@ static void virtio_scsi_hotplug(HotplugHandler *hotplug_dev, DeviceState *dev,
+     VirtIODevice *vdev = VIRTIO_DEVICE(hotplug_dev);
+     VirtIOSCSI *s = VIRTIO_SCSI(vdev);
+     SCSIDevice *sd = SCSI_DEVICE(dev);
+-    AioContext *old_context;
+     int ret;
+ 
+     if (s->ctx && !s->dataplane_fenced) {
+         if (blk_op_is_blocked(sd->conf.blk, BLOCK_OP_TYPE_DATAPLANE, errp)) {
+             return;
+         }
+-        old_context = blk_get_aio_context(sd->conf.blk);
+-        aio_context_acquire(old_context);
+         ret = blk_set_aio_context(sd->conf.blk, s->ctx, errp);
+-        aio_context_release(old_context);
+         if (ret < 0) {
+             return;
+         }
+@@ -1097,10 +1085,8 @@ static void virtio_scsi_hotplug(HotplugHandler *hotplug_dev, DeviceState *dev,
+             },
+         };
+ 
+-        virtio_scsi_acquire(s);
+         virtio_scsi_push_event(s, &info);
+         scsi_bus_set_ua(&s->bus, SENSE_CODE(REPORTED_LUNS_CHANGED));
+-        virtio_scsi_release(s);
+     }
+ }
+ 
+@@ -1122,17 +1108,13 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
+     qdev_simple_device_unplug_cb(hotplug_dev, dev, errp);
+ 
+     if (s->ctx) {
+-        virtio_scsi_acquire(s);
+         /* If other users keep the BlockBackend in the iothread, that's ok */
+         blk_set_aio_context(sd->conf.blk, qemu_get_aio_context(), NULL);
+-        virtio_scsi_release(s);
+     }
+ 
+     if (virtio_vdev_has_feature(vdev, VIRTIO_SCSI_F_HOTPLUG)) {
+-        virtio_scsi_acquire(s);
+         virtio_scsi_push_event(s, &info);
+         scsi_bus_set_ua(&s->bus, SENSE_CODE(REPORTED_LUNS_CHANGED));
+-        virtio_scsi_release(s);
+     }
+ }
+ 
 -- 
 2.43.0
 
