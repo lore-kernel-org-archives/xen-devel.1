@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D86C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:22:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647569.1010930 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D31F7C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:22:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647571.1010948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUh-0006wz-5x; Tue, 05 Dec 2023 11:21:39 +0000
+	id 1rATUk-0007ZN-9f; Tue, 05 Dec 2023 11:21:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647569.1010930; Tue, 05 Dec 2023 11:21:39 +0000
+Received: by outflank-mailman (output) from mailman id 647571.1010948; Tue, 05 Dec 2023 11:21:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUg-0006tf-II; Tue, 05 Dec 2023 11:21:38 +0000
-Received: by outflank-mailman (input) for mailman id 647569;
- Tue, 05 Dec 2023 11:21:36 +0000
+	id 1rATUj-0007Wk-ME; Tue, 05 Dec 2023 11:21:41 +0000
+Received: by outflank-mailman (input) for mailman id 647571;
+ Tue, 05 Dec 2023 11:21:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUe-0005GD-Bx
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:36 +0000
+ id 1rATUg-0005GD-SD
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:38 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 730f3b57-9360-11ee-98e5-6d05b1d4d9a1;
- Tue, 05 Dec 2023 12:21:35 +0100 (CET)
+ id 7492f17a-9360-11ee-98e5-6d05b1d4d9a1;
+ Tue, 05 Dec 2023 12:21:38 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:25 -0800
+ 05 Dec 2023 03:21:26 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:23 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:25 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 730f3b57-9360-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: 7492f17a-9360-11ee-98e5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775296; x=1733311296;
+  t=1701775299; x=1733311299;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=vHkfUOkHLHmL9MW/AMzgDgLZBnOiSQn6Z3TVJI+bGO8=;
-  b=DOMTJ95gOqfihqEw1RceMgpGlsX/PENWbRZvu/KRrmGTWUZJZpM7g9nG
-   6xbKsZzSx2azj2oHrclAuZkA5GWR0U9cS8TdHOAGDKArhHX6SsmppxAnl
-   J4kO1qZBud54rmPMJOqJR0Sl7ebTnGinuNgGKMD6J6sOBzgYTK/E6++By
-   ikqgQLNlv8MmgERLjTO2arLKenRBxNOJ2JsYFHb5wZ/40TSAfC9kxKtYV
-   wsJItG+w0nrPPipQUAx0OZ/4DbZxl2IsRGYOhObXQn8x+DdpXWQjtG4FX
-   hjo+BGI/xERlnVcmzquxU0r6a2lZ1nMy0+1WZvBWpIOlyobcwznETxWhZ
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942595"
+  bh=uIZltVBi8wI2fdlt/Uk1Bni3bjv6/HHLxi0uq5CIvWc=;
+  b=EeipshQKdwjmkmHjh3C2V0+5DRsy4dHyNDiEidGjgG1rCK6I99LNKDZN
+   jxep4y3vibgN+y/QDHG2s3l6S6qf4hCNQzm2JLcJJz8Q3E244wq9K+A1k
+   n8zokUfVI2tkkr1+nJQ49o7cU/xf26UL9au4KO2OFA9Lf8G3U4gZumwow
+   Vcnp5/jmjpDBgMUaAZ+IMcWgFe7PMhQ4MbdDGxc5VItYMyqS5GqFSnE8T
+   7roX1Vv7HczlIcZKMZoL9MWCTTSyo0DqbinT8Yzwaws89i1jJSAq0OIlV
+   QjC6E2/6w12hdTRz78o+9k3b2A4N7jsjLh9XmEcv2Qj9r2AP4CuhjU9xX
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942668"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942595"
+   d="scan'208";a="942668"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192984"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018193005"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018192984"
+   d="scan'208";a="1018193005"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,76 +88,83 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 24/35] x86/fred: Add a NMI entry stub for FRED
-Date: Tue,  5 Dec 2023 02:50:13 -0800
-Message-ID: <20231205105030.8698-25-xin3.li@intel.com>
+Subject: [PATCH v13 30/35] x86/entry/calling: Allow PUSH_AND_CLEAR_REGS being used beyond actual entry code
+Date: Tue,  5 Dec 2023 02:50:19 -0800
+Message-ID: <20231205105030.8698-31-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+From: "Peter Zijlstra (Intel)" <peterz@infradead.org>
 
-On a FRED system, NMIs nest both with themselves and faults, transient
-information is saved into the stack frame, and NMI unblocking only
-happens when the stack frame indicates that so should happen.
+PUSH_AND_CLEAR_REGS could be used besides actual entry code; in that case
+%rbp shouldn't be cleared (otherwise the frame pointer is destroyed) and
+UNWIND_HINT shouldn't be added.
 
-Thus, the NMI entry stub for FRED is really quite small...
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/kernel/nmi.c | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ arch/x86/entry/calling.h | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/kernel/nmi.c b/arch/x86/kernel/nmi.c
-index 17e955ab69fe..56350d839e44 100644
---- a/arch/x86/kernel/nmi.c
-+++ b/arch/x86/kernel/nmi.c
-@@ -35,6 +35,7 @@
- #include <asm/nospec-branch.h>
- #include <asm/microcode.h>
- #include <asm/sev.h>
-+#include <asm/fred.h>
+diff --git a/arch/x86/entry/calling.h b/arch/x86/entry/calling.h
+index e59d3073e7cf..a023d9a97cd2 100644
+--- a/arch/x86/entry/calling.h
++++ b/arch/x86/entry/calling.h
+@@ -65,7 +65,7 @@ For 32-bit we have the following conventions - kernel is built with
+  * for assembly code:
+  */
  
- #define CREATE_TRACE_POINTS
- #include <trace/events/nmi.h>
-@@ -651,6 +652,33 @@ void nmi_backtrace_stall_check(const struct cpumask *btp)
+-.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
++.macro PUSH_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 unwind_hint=1
+ 	.if \save_ret
+ 	pushq	%rsi		/* pt_regs->si */
+ 	movq	8(%rsp), %rsi	/* temporarily store the return address in %rsi */
+@@ -87,14 +87,17 @@ For 32-bit we have the following conventions - kernel is built with
+ 	pushq	%r13		/* pt_regs->r13 */
+ 	pushq	%r14		/* pt_regs->r14 */
+ 	pushq	%r15		/* pt_regs->r15 */
++
++	.if \unwind_hint
+ 	UNWIND_HINT_REGS
++	.endif
  
- #endif
+ 	.if \save_ret
+ 	pushq	%rsi		/* return address on top of stack */
+ 	.endif
+ .endm
  
-+#ifdef CONFIG_X86_FRED
-+/*
-+ * With FRED, CR2/DR6 is pushed to #PF/#DB stack frame during FRED
-+ * event delivery, i.e., there is no problem of transient states.
-+ * And NMI unblocking only happens when the stack frame indicates
-+ * that so should happen.
-+ *
-+ * Thus, the NMI entry stub for FRED is really straightforward and
-+ * as simple as most exception handlers. As such, #DB is allowed
-+ * during NMI handling.
-+ */
-+DEFINE_FREDENTRY_NMI(exc_nmi)
-+{
-+	irqentry_state_t irq_state;
-+
-+	if (IS_ENABLED(CONFIG_SMP) && arch_cpu_is_offline(smp_processor_id()))
-+		return;
-+
-+	irq_state = irqentry_nmi_enter(regs);
-+
-+	inc_irq_stat(__nmi_count);
-+	default_do_nmi(regs);
-+
-+	irqentry_nmi_exit(regs, irq_state);
-+}
-+#endif
-+
- void stop_nmi(void)
- {
- 	ignore_nmis++;
+-.macro CLEAR_REGS
++.macro CLEAR_REGS clear_bp=1
+ 	/*
+ 	 * Sanitize registers of values that a speculation attack might
+ 	 * otherwise want to exploit. The lower registers are likely clobbered
+@@ -109,7 +112,9 @@ For 32-bit we have the following conventions - kernel is built with
+ 	xorl	%r10d, %r10d	/* nospec r10 */
+ 	xorl	%r11d, %r11d	/* nospec r11 */
+ 	xorl	%ebx,  %ebx	/* nospec rbx */
++	.if \clear_bp
+ 	xorl	%ebp,  %ebp	/* nospec rbp */
++	.endif
+ 	xorl	%r12d, %r12d	/* nospec r12 */
+ 	xorl	%r13d, %r13d	/* nospec r13 */
+ 	xorl	%r14d, %r14d	/* nospec r14 */
+@@ -117,9 +122,9 @@ For 32-bit we have the following conventions - kernel is built with
+ 
+ .endm
+ 
+-.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0
+-	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret
+-	CLEAR_REGS
++.macro PUSH_AND_CLEAR_REGS rdx=%rdx rcx=%rcx rax=%rax save_ret=0 clear_bp=1 unwind_hint=1
++	PUSH_REGS rdx=\rdx, rcx=\rcx, rax=\rax, save_ret=\save_ret unwind_hint=\unwind_hint
++	CLEAR_REGS clear_bp=\clear_bp
+ .endm
+ 
+ .macro POP_REGS pop_rdi=1
 -- 
 2.43.0
 
