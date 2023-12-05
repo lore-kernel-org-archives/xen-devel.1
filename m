@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AA12C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 12:39:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647751.1011409 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ADB3C07E97
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 12:39:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647742.1011321 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAUhS-0005Yg-9V; Tue, 05 Dec 2023 12:38:54 +0000
+	id 1rAUhI-00035e-Px; Tue, 05 Dec 2023 12:38:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647751.1011409; Tue, 05 Dec 2023 12:38:54 +0000
+Received: by outflank-mailman (output) from mailman id 647742.1011321; Tue, 05 Dec 2023 12:38:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAUhS-0005XS-4T; Tue, 05 Dec 2023 12:38:54 +0000
-Received: by outflank-mailman (input) for mailman id 647751;
- Tue, 05 Dec 2023 12:38:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rAUhI-00035W-LE; Tue, 05 Dec 2023 12:38:44 +0000
+Received: by outflank-mailman (input) for mailman id 647742;
+ Tue, 05 Dec 2023 12:38:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JQhx=HQ=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
- id 1rAUhQ-00035R-9K
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 12:38:52 +0000
+ id 1rAUhH-00035L-6Y
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 12:38:43 +0000
 Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3c5c2c12-936b-11ee-98e5-6d05b1d4d9a1;
- Tue, 05 Dec 2023 13:38:51 +0100 (CET)
-Received: from mail.maildlp.com (unknown [172.19.163.235])
- by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4Sl0Sx4Cydz4f3lDS
- for <xen-devel@lists.xenproject.org>; Tue,  5 Dec 2023 20:38:41 +0800 (CST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3520b307-936b-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 13:38:39 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.93.142])
+ by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4Sl0Sl5mkSz4f3jYk
+ for <xen-devel@lists.xenproject.org>; Tue,  5 Dec 2023 20:38:31 +0800 (CST)
 Received: from mail02.huawei.com (unknown [10.116.40.112])
- by mail.maildlp.com (Postfix) with ESMTP id 4871A1A0C92
- for <xen-devel@lists.xenproject.org>; Tue,  5 Dec 2023 20:38:46 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTP id D2FD81A0808
+ for <xen-devel@lists.xenproject.org>; Tue,  5 Dec 2023 20:38:32 +0800 (CST)
 Received: from huaweicloud.com (unknown [10.175.104.67])
- by APP1 (Coremail) with SMTP id cCh0CgDnNw7GGW9lr8E8Cw--.35507S13;
- Tue, 05 Dec 2023 20:38:45 +0800 (CST)
+ by APP1 (Coremail) with SMTP id cCh0CgDnNw7GGW9lr8E8Cw--.35507S4;
+ Tue, 05 Dec 2023 20:38:32 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,7 +47,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c5c2c12-936b-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: 3520b307-936b-11ee-9b0f-b553b5be7939
 From: Yu Kuai <yukuai1@huaweicloud.com>
 To: axboe@kernel.dk,
 	roger.pau@citrix.com,
@@ -96,111 +96,80 @@ Cc: linux-block@vger.kernel.org,
 	yukuai1@huaweicloud.com,
 	yi.zhang@huawei.com,
 	yangerkun@huawei.com
-Subject: [PATCH -next RFC 09/14] cramfs: use bdev apis in cramfs_blkdev_read()
-Date: Tue,  5 Dec 2023 20:37:23 +0800
-Message-Id: <20231205123728.1866699-10-yukuai1@huaweicloud.com>
+Subject: [PATCH -next RFC 00/14] block: don't access bd_inode directly from other modules
+Date: Tue,  5 Dec 2023 20:37:14 +0800
+Message-Id: <20231205123728.1866699-1-yukuai1@huaweicloud.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231205123728.1866699-1-yukuai1@huaweicloud.com>
-References: <20231205123728.1866699-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:cCh0CgDnNw7GGW9lr8E8Cw--.35507S13
-X-Coremail-Antispam: 1UD129KBjvJXoW7Ww17ur1fXryfAF1rJr4UCFg_yoW8trW7pF
-	1akanIkr4q9ry29ay3Xr1DZF15Ga4kXF4kCFWxuw43Z3W5trna9r10kry0qFW8GrZFqryv
-	9r4jkryfur15Ka7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUP214x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-	kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-	z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr1j6r
-	xdM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
-	M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
-	v20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
-	F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
-	IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
-	wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1lIx
-	kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
-	wI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr
-	0_Cr1lIxAIcVC2z280aVCY1x0267AKxVWxJr0_GcJvcSsGvfC2KfnxnUUI43ZEXa7VUbCe
-	HDUUUUU==
+X-CM-TRANSID:cCh0CgDnNw7GGW9lr8E8Cw--.35507S4
+X-Coremail-Antispam: 1UD129KBjvJXoW7Kw4Utry8XFW7Zr18Jr43Wrg_yoW8WF1kpr
+	y3KF1fGr1Uu347Zaya9an7tryrJw4kGay7GF17t34rZr13JryfAr4ktrW8Ja48Jr9rXr4k
+	Xw1DtryFgr10gaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
+	JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+	CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+	2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+	W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+	Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
+	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4U
+	JwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
+	0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AK
+	xVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvj
+	fUoL0eDUUUU
 X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
 From: Yu Kuai <yukuai3@huawei.com>
 
-On the one hand covert to use folio while reading bdev inode, on the
-other hand prevent to access bd_inode directly.
+Patch 1 add some bdev apis, then follow up patches will use these apis
+to avoid access bd_inode directly, and hopefully the field bd_inode can
+be removed eventually(after figure out a way for fs/buffer.c).
 
-Also do some cleanup that there is no need for two for loop, and remove
-local array pages.
+Yu Kuai (14):
+  block: add some bdev apis
+  xen/blkback: use bdev api in xen_update_blkif_status()
+  bcache: use bdev api in read_super()
+  mtd: block2mtd: use bdev apis
+  s390/dasd: use bdev api in dasd_format()
+  scsicam: use bdev api in scsi_bios_ptable()
+  bcachefs: remove dead function bdev_sectors()
+  btrfs: use bdev apis
+  cramfs: use bdev apis in cramfs_blkdev_read()
+  erofs: use bdev api
+  ext4: use bdev apis
+  jbd2: use bdev apis
+  gfs2: use bdev api
+  nilfs2: use bdev api in nilfs_attach_log_writer()
 
-Signed-off-by: Yu Kuai <yukuai3@huawei.com>
----
- fs/cramfs/inode.c | 35 ++++++++++++-----------------------
- 1 file changed, 12 insertions(+), 23 deletions(-)
+ block/bdev.c                       | 116 +++++++++++++++++++++++++++++
+ block/bio.c                        |   1 +
+ block/blk.h                        |   2 -
+ drivers/block/xen-blkback/xenbus.c |   3 +-
+ drivers/md/bcache/super.c          |  11 ++-
+ drivers/mtd/devices/block2mtd.c    |  80 +++++++++-----------
+ drivers/s390/block/dasd_ioctl.c    |   5 +-
+ drivers/scsi/scsicam.c             |   3 +-
+ fs/bcachefs/util.h                 |   5 --
+ fs/btrfs/disk-io.c                 |  68 ++++++++---------
+ fs/btrfs/volumes.c                 |  17 ++---
+ fs/btrfs/zoned.c                   |  12 ++-
+ fs/cramfs/inode.c                  |  35 +++------
+ fs/erofs/data.c                    |  17 +++--
+ fs/erofs/internal.h                |   1 +
+ fs/ext4/dir.c                      |   6 +-
+ fs/ext4/ext4_jbd2.c                |   6 +-
+ fs/ext4/super.c                    |  27 +------
+ fs/gfs2/glock.c                    |   2 +-
+ fs/gfs2/ops_fstype.c               |   2 +-
+ fs/jbd2/journal.c                  |   3 +-
+ fs/jbd2/recovery.c                 |   6 +-
+ fs/nilfs2/segment.c                |   2 +-
+ include/linux/blkdev.h             |  27 +++++++
+ include/linux/buffer_head.h        |   5 +-
+ 25 files changed, 273 insertions(+), 189 deletions(-)
 
-diff --git a/fs/cramfs/inode.c b/fs/cramfs/inode.c
-index 60dbfa0f8805..46ff4e5506fd 100644
---- a/fs/cramfs/inode.c
-+++ b/fs/cramfs/inode.c
-@@ -183,9 +183,6 @@ static int next_buffer;
- static void *cramfs_blkdev_read(struct super_block *sb, unsigned int offset,
- 				unsigned int len)
- {
--	struct address_space *mapping = sb->s_bdev->bd_inode->i_mapping;
--	struct file_ra_state ra = {};
--	struct page *pages[BLKS_PER_BUF];
- 	unsigned i, blocknr, buffer;
- 	unsigned long devsize;
- 	char *data;
-@@ -214,37 +211,29 @@ static void *cramfs_blkdev_read(struct super_block *sb, unsigned int offset,
- 	devsize = bdev_nr_bytes(sb->s_bdev) >> PAGE_SHIFT;
- 
- 	/* Ok, read in BLKS_PER_BUF pages completely first. */
--	file_ra_state_init(&ra, mapping);
--	page_cache_sync_readahead(mapping, &ra, NULL, blocknr, BLKS_PER_BUF);
--
--	for (i = 0; i < BLKS_PER_BUF; i++) {
--		struct page *page = NULL;
--
--		if (blocknr + i < devsize) {
--			page = read_mapping_page(mapping, blocknr + i, NULL);
--			/* synchronous error? */
--			if (IS_ERR(page))
--				page = NULL;
--		}
--		pages[i] = page;
--	}
-+	bdev_sync_readahead(sb->s_bdev, NULL, NULL, blocknr, BLKS_PER_BUF);
- 
- 	buffer = next_buffer;
- 	next_buffer = NEXT_BUFFER(buffer);
- 	buffer_blocknr[buffer] = blocknr;
- 	buffer_dev[buffer] = sb;
--
- 	data = read_buffers[buffer];
-+
- 	for (i = 0; i < BLKS_PER_BUF; i++) {
--		struct page *page = pages[i];
-+		struct folio *folio = NULL;
-+
-+		if (blocknr + i < devsize)
-+			folio = bdev_read_folio(sb->s_bdev, blocknr + i);
- 
--		if (page) {
--			memcpy_from_page(data, page, 0, PAGE_SIZE);
--			put_page(page);
--		} else
-+		if (IS_ERR_OR_NULL(folio)) {
- 			memset(data, 0, PAGE_SIZE);
-+		} else {
-+			memcpy_from_folio(data, folio, 0, PAGE_SIZE);
-+			folio_put(folio);
-+		}
- 		data += PAGE_SIZE;
- 	}
-+
- 	return read_buffers[buffer] + offset;
- }
- 
 -- 
 2.39.2
 
