@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A996AC10F04
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:21:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647558.1010830 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9AEBC4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 11:21:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647562.1010870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUV-00048V-Ji; Tue, 05 Dec 2023 11:21:27 +0000
+	id 1rATUZ-0005EU-VC; Tue, 05 Dec 2023 11:21:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647558.1010830; Tue, 05 Dec 2023 11:21:27 +0000
+Received: by outflank-mailman (output) from mailman id 647562.1010870; Tue, 05 Dec 2023 11:21:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rATUV-00048O-Gx; Tue, 05 Dec 2023 11:21:27 +0000
-Received: by outflank-mailman (input) for mailman id 647558;
- Tue, 05 Dec 2023 11:21:25 +0000
+	id 1rATUZ-0005DR-RC; Tue, 05 Dec 2023 11:21:31 +0000
+Received: by outflank-mailman (input) for mailman id 647562;
+ Tue, 05 Dec 2023 11:21:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QGQ0=HQ=intel.com=xin3.li@srs-se1.protection.inumbo.net>)
- id 1rATUT-0003dP-TU
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:25 +0000
+ id 1rATUX-0003dP-Sp
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 11:21:29 +0000
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6ad2501a-9360-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 12:21:23 +0100 (CET)
+ id 6d95f8ea-9360-11ee-9b0f-b553b5be7939;
+ Tue, 05 Dec 2023 12:21:26 +0100 (CET)
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 03:21:18 -0800
+ 05 Dec 2023 03:21:19 -0800
 Received: from unknown (HELO fred..) ([172.25.112.68])
- by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:16 -0800
+ by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:17 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,27 +43,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ad2501a-9360-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 6d95f8ea-9360-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775285; x=1733311285;
+  t=1701775287; x=1733311287;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=4HjA/ehjhpPNNDfV0w3r41UQQGamUWV+NqHjpKdn1bk=;
-  b=NdHApvaQJQvfQVBebrbZVDl9Kpxe0+TGRfJMQ2OzEZo87IRw8/8Iu2kR
-   B9Axf41QNaM80nMWr6tx8QnsXKf41ssPIUGRXCMV4UW9v1ilXuEl40ztp
-   WV5mBcJQoDOCr4312+1nOT+K0om0r/wkIXtrK2TQKCOWgDLiL7OPQxBDq
-   gRa6n6XWb8rKieOdoV8ncW8MI8UihQe7jq3mLimBwhPs5McvqGS129DHB
-   /prbIwO+fgx8ZWlrLY5ymnKzvL2d/nfK9tSQkDzJz1JkIey3j1alaL8qd
-   mtDNtfB6iYMHV6UjcSW7KsQz2ey9lb6miQkYJuw1SxuEf2rJADaYNaREW
+  bh=yH4lF8AAQOSRX1ndoBAeOBidmlKnduYQQwpRB60hdFM=;
+  b=CLRHJH0LYX4q60ydssLLcA3e/OM2BQ3AzASnM92e2MUlWqlLH7y2WPs7
+   aO/j4MOtszdvOHP5rEXGVFS/I93CdyCZh6zHyELHZyem5YngymeJZz8bw
+   QGQFxNl0k4DcSzZ8emPCSkVcw//o1IFSKzhlwAeMaiPHtLK302ELIr9nW
+   NwAIzCIwRh+BbbQjIZ0sZPzSyWfZfq/7tZZNBNKs4yUguFVrshvdIIGj/
+   RYgxjYJxdzUYuzGcEA9v0PLQRvOOjTWiSwLkXxcGQ6xuQX3AD4+DSKPhE
+   l03EOZG0A4p808MZKREUmCV9GOz4jQ/J0DlEMtQTxhEjYAiPRAZXr1b2V
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942322"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942375"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942322"
+   d="scan'208";a="942375"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192900"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018192911"
 X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018192900"
+   d="scan'208";a="1018192911"
 From: Xin Li <xin3.li@intel.com>
 To: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -88,73 +88,46 @@ Cc: tglx@linutronix.de,
 	jiangshanlai@gmail.com,
 	nik.borisov@suse.com,
 	shan.kang@intel.com
-Subject: [PATCH v13 02/35] x86/entry: Remove idtentry_sysvec from entry_{32,64}.S
-Date: Tue,  5 Dec 2023 02:49:51 -0800
-Message-ID: <20231205105030.8698-3-xin3.li@intel.com>
+Subject: [PATCH v13 05/35] x86/fred: Add Kconfig option for FRED (CONFIG_X86_FRED)
+Date: Tue,  5 Dec 2023 02:49:54 -0800
+Message-ID: <20231205105030.8698-6-xin3.li@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
 References: <20231205105030.8698-1-xin3.li@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-idtentry_sysvec is really just DECLARE_IDTENTRY defined in
-<asm/idtentry.h>, no need to define it separately.
+From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
 
+Add the configuration option CONFIG_X86_FRED to enable FRED.
+
+Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 Tested-by: Shan Kang <shan.kang@intel.com>
 Signed-off-by: Xin Li <xin3.li@intel.com>
 ---
- arch/x86/entry/entry_32.S       | 4 ----
- arch/x86/entry/entry_64.S       | 8 --------
- arch/x86/include/asm/idtentry.h | 2 +-
- 3 files changed, 1 insertion(+), 13 deletions(-)
+ arch/x86/Kconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index 4e295798638b..1b0fe4b49ea0 100644
---- a/arch/x86/entry/entry_32.S
-+++ b/arch/x86/entry/entry_32.S
-@@ -649,10 +649,6 @@ SYM_CODE_START_LOCAL(asm_\cfunc)
- SYM_CODE_END(asm_\cfunc)
- .endm
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index c456c9b1fc7c..ec923d4055c5 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -492,6 +492,15 @@ config X86_CPU_RESCTRL
  
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /*
-  * Include the defines which emit the idt entries which are shared
-  * shared between 32 and 64 bit and emit the __irqentry_text_* markers
-diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-index 567d973eed03..5a1660701623 100644
---- a/arch/x86/entry/entry_64.S
-+++ b/arch/x86/entry/entry_64.S
-@@ -370,14 +370,6 @@ SYM_CODE_END(\asmsym)
- 	idtentry \vector asm_\cfunc \cfunc has_error_code=1
- .endm
+ 	  Say N if unsure.
  
--/*
-- * System vectors which invoke their handlers directly and are not
-- * going through the regular common device interrupt handling code.
-- */
--.macro idtentry_sysvec vector cfunc
--	idtentry \vector asm_\cfunc \cfunc has_error_code=0
--.endm
--
- /**
-  * idtentry_mce_db - Macro to generate entry stubs for #MC and #DB
-  * @vector:		Vector number
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index 05fd175cec7d..cfca68f6cb84 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -447,7 +447,7 @@ __visible noinstr void func(struct pt_regs *regs,			\
- 
- /* System vector entries */
- #define DECLARE_IDTENTRY_SYSVEC(vector, func)				\
--	idtentry_sysvec vector func
-+	DECLARE_IDTENTRY(vector, func)
- 
- #ifdef CONFIG_X86_64
- # define DECLARE_IDTENTRY_MCE(vector, func)				\
++config X86_FRED
++	bool "Flexible Return and Event Delivery"
++	depends on X86_64
++	help
++	  When enabled, try to use Flexible Return and Event Delivery
++	  instead of the legacy SYSCALL/SYSENTER/IDT architecture for
++	  ring transitions and exception/interrupt handling if the
++	  system supports.
++
+ if X86_32
+ config X86_BIGSMP
+ 	bool "Support for big SMP systems with more than 8 CPUs"
 -- 
 2.43.0
 
