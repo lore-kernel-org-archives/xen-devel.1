@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DEC9C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 18:20:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.648184.1012290 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10B16C10F05
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 18:20:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.648186.1012304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAa26-0003FW-08; Tue, 05 Dec 2023 18:20:34 +0000
+	id 1rAa26-0003Ts-W2; Tue, 05 Dec 2023 18:20:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 648184.1012290; Tue, 05 Dec 2023 18:20:33 +0000
+Received: by outflank-mailman (output) from mailman id 648186.1012304; Tue, 05 Dec 2023 18:20:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAa25-0003FP-Sz; Tue, 05 Dec 2023 18:20:33 +0000
-Received: by outflank-mailman (input) for mailman id 648184;
- Tue, 05 Dec 2023 18:20:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rAa26-0003SQ-O4; Tue, 05 Dec 2023 18:20:34 +0000
+Received: by outflank-mailman (input) for mailman id 648186;
+ Tue, 05 Dec 2023 18:20:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=I6T2=HQ=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1rAa24-0002wG-F9
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 18:20:32 +0000
+ id 1rAa25-0002fT-Ls
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 18:20:33 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f86807a6-939a-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 19:20:30 +0100 (CET)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-365-GF-QWva-Oni-7XU0aB-D9w-1; Tue, 05 Dec 2023 13:20:20 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f9c4140d-939a-11ee-98e5-6d05b1d4d9a1;
+ Tue, 05 Dec 2023 19:20:33 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-551--Te_eBzINpij5dm8ZX6ilA-1; Tue,
+ 05 Dec 2023 13:20:28 -0500
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4226585A597;
- Tue,  5 Dec 2023 18:20:18 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CCAF2386A0AF;
+ Tue,  5 Dec 2023 18:20:26 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.111])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 99C5B51E3;
- Tue,  5 Dec 2023 18:20:17 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AFE9A3C25;
+ Tue,  5 Dec 2023 18:20:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f86807a6-939a-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: f9c4140d-939a-11ee-98e5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1701800429;
+	s=mimecast20190719; t=1701800431;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PYzMzXb1PdcjP3A1qwHad/XAhWJKM4hT2cxMg6piGu4=;
-	b=WCB28mTctlm3HwtP/GGotoNmvKb3jY7S4dCnfTsaXoi2R9QnZCGAeOSqUWsC5z1ZCuUGNb
-	Mh7yJw/f52Pr13MI1Q4ZS5dcXKhCOZ0ShmJyr4cEJYbRjlcBqjNSM7xyTvVkpegipigXlt
-	P4HrDlGa4qL4FJGZR3nnd9W5rFZAMtY=
-X-MC-Unique: GF-QWva-Oni-7XU0aB-D9w-1
+	bh=2xkZi3XPrXCgy6FPT4RsS2T7UTaP09qNkYfhhg0EmAc=;
+	b=Ku+Yxukh1G++AZSyP02JQQxBVn8GBn/4scck2VsAmUe2U9uSZqmeY6obnyyaOXYYfVRsKk
+	du6+uuBJxnixlsSOeB1Wp+jjwrlIi9xJesxliFZg/gA+FqLHLwObG01yZ9ZPnMECcX87Fm
+	KZbM2fbp0pBqIngxPPj2GFEYuWlCA08=
+X-MC-Unique: -Te_eBzINpij5dm8ZX6ilA-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
@@ -100,171 +100,57 @@ Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
 	David Hildenbrand <david@redhat.com>,
 	Li Zhijian <lizhijian@fujitsu.com>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 01/14] virtio-scsi: replace AioContext lock with tmf_bh_lock
-Date: Tue,  5 Dec 2023 13:19:58 -0500
-Message-ID: <20231205182011.1976568-2-stefanha@redhat.com>
+Subject: [PATCH v2 04/14] aio: make aio_context_acquire()/aio_context_release() a no-op
+Date: Tue,  5 Dec 2023 13:20:01 -0500
+Message-ID: <20231205182011.1976568-5-stefanha@redhat.com>
 In-Reply-To: <20231205182011.1976568-1-stefanha@redhat.com>
 References: <20231205182011.1976568-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.1
 
-Protect the Task Management Function BH state with a lock. The TMF BH
-runs in the main loop thread. An IOThread might process a TMF at the
-same time as the TMF BH is running. Therefore tmf_bh_list and tmf_bh
-must be protected by a lock.
+aio_context_acquire()/aio_context_release() has been replaced by
+fine-grained locking to protect state shared by multiple threads. The
+AioContext lock still plays the role of balancing locking in
+AIO_WAIT_WHILE() and many functions in QEMU either require that the
+AioContext lock is held or not held for this reason. In other words, the
+AioContext lock is purely there for consistency with itself and serves
+no real purpose anymore.
 
-Run TMF request completion in the IOThread using aio_wait_bh_oneshot().
-This avoids more locking to protect the virtqueue and SCSI layer state.
+Stop actually acquiring/releasing the lock in
+aio_context_acquire()/aio_context_release() so that subsequent patches
+can remove callers across the codebase incrementally.
+
+I have performed "make check" and qemu-iotests stress tests across
+x86-64, ppc64le, and aarch64 to confirm that there are no failures as a
+result of eliminating the lock.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 Reviewed-by: Eric Blake <eblake@redhat.com>
-Reviewed-by: Kevin Wolf <kwolf@redhat.com>
+Acked-by: Kevin Wolf <kwolf@redhat.com>
 ---
- include/hw/virtio/virtio-scsi.h |  3 +-
- hw/scsi/virtio-scsi.c           | 62 ++++++++++++++++++++++-----------
- 2 files changed, 43 insertions(+), 22 deletions(-)
+ util/async.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/hw/virtio/virtio-scsi.h b/include/hw/virtio/virtio-scsi.h
-index 779568ab5d..da8cb928d9 100644
---- a/include/hw/virtio/virtio-scsi.h
-+++ b/include/hw/virtio/virtio-scsi.h
-@@ -85,8 +85,9 @@ struct VirtIOSCSI {
+diff --git a/util/async.c b/util/async.c
+index 8f90ddc304..04ee83d220 100644
+--- a/util/async.c
++++ b/util/async.c
+@@ -725,12 +725,12 @@ void aio_context_unref(AioContext *ctx)
  
-     /*
-      * TMFs deferred to main loop BH. These fields are protected by
--     * virtio_scsi_acquire().
-+     * tmf_bh_lock.
-      */
-+    QemuMutex tmf_bh_lock;
-     QEMUBH *tmf_bh;
-     QTAILQ_HEAD(, VirtIOSCSIReq) tmf_bh_list;
- 
-diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
-index 9c751bf296..4f8d35facc 100644
---- a/hw/scsi/virtio-scsi.c
-+++ b/hw/scsi/virtio-scsi.c
-@@ -123,6 +123,30 @@ static void virtio_scsi_complete_req(VirtIOSCSIReq *req)
-     virtio_scsi_free_req(req);
- }
- 
-+static void virtio_scsi_complete_req_bh(void *opaque)
-+{
-+    VirtIOSCSIReq *req = opaque;
-+
-+    virtio_scsi_complete_req(req);
-+}
-+
-+/*
-+ * Called from virtio_scsi_do_one_tmf_bh() in main loop thread. The main loop
-+ * thread cannot touch the virtqueue since that could race with an IOThread.
-+ */
-+static void virtio_scsi_complete_req_from_main_loop(VirtIOSCSIReq *req)
-+{
-+    VirtIOSCSI *s = req->dev;
-+
-+    if (!s->ctx || s->ctx == qemu_get_aio_context()) {
-+        /* No need to schedule a BH when there is no IOThread */
-+        virtio_scsi_complete_req(req);
-+    } else {
-+        /* Run request completion in the IOThread */
-+        aio_wait_bh_oneshot(s->ctx, virtio_scsi_complete_req_bh, req);
-+    }
-+}
-+
- static void virtio_scsi_bad_req(VirtIOSCSIReq *req)
+ void aio_context_acquire(AioContext *ctx)
  {
-     virtio_error(VIRTIO_DEVICE(req->dev), "wrong size for virtio-scsi headers");
-@@ -338,10 +362,7 @@ static void virtio_scsi_do_one_tmf_bh(VirtIOSCSIReq *req)
- 
- out:
-     object_unref(OBJECT(d));
--
--    virtio_scsi_acquire(s);
--    virtio_scsi_complete_req(req);
--    virtio_scsi_release(s);
-+    virtio_scsi_complete_req_from_main_loop(req);
+-    qemu_rec_mutex_lock(&ctx->lock);
++    /* TODO remove this function */
  }
  
- /* Some TMFs must be processed from the main loop thread */
-@@ -354,18 +375,16 @@ static void virtio_scsi_do_tmf_bh(void *opaque)
- 
-     GLOBAL_STATE_CODE();
- 
--    virtio_scsi_acquire(s);
-+    WITH_QEMU_LOCK_GUARD(&s->tmf_bh_lock) {
-+        QTAILQ_FOREACH_SAFE(req, &s->tmf_bh_list, next, tmp) {
-+            QTAILQ_REMOVE(&s->tmf_bh_list, req, next);
-+            QTAILQ_INSERT_TAIL(&reqs, req, next);
-+        }
- 
--    QTAILQ_FOREACH_SAFE(req, &s->tmf_bh_list, next, tmp) {
--        QTAILQ_REMOVE(&s->tmf_bh_list, req, next);
--        QTAILQ_INSERT_TAIL(&reqs, req, next);
-+        qemu_bh_delete(s->tmf_bh);
-+        s->tmf_bh = NULL;
-     }
- 
--    qemu_bh_delete(s->tmf_bh);
--    s->tmf_bh = NULL;
--
--    virtio_scsi_release(s);
--
-     QTAILQ_FOREACH_SAFE(req, &reqs, next, tmp) {
-         QTAILQ_REMOVE(&reqs, req, next);
-         virtio_scsi_do_one_tmf_bh(req);
-@@ -379,8 +398,7 @@ static void virtio_scsi_reset_tmf_bh(VirtIOSCSI *s)
- 
-     GLOBAL_STATE_CODE();
- 
--    virtio_scsi_acquire(s);
--
-+    /* Called after ioeventfd has been stopped, so tmf_bh_lock is not needed */
-     if (s->tmf_bh) {
-         qemu_bh_delete(s->tmf_bh);
-         s->tmf_bh = NULL;
-@@ -393,19 +411,19 @@ static void virtio_scsi_reset_tmf_bh(VirtIOSCSI *s)
-         req->resp.tmf.response = VIRTIO_SCSI_S_TARGET_FAILURE;
-         virtio_scsi_complete_req(req);
-     }
--
--    virtio_scsi_release(s);
- }
- 
- static void virtio_scsi_defer_tmf_to_bh(VirtIOSCSIReq *req)
+ void aio_context_release(AioContext *ctx)
  {
-     VirtIOSCSI *s = req->dev;
- 
--    QTAILQ_INSERT_TAIL(&s->tmf_bh_list, req, next);
-+    WITH_QEMU_LOCK_GUARD(&s->tmf_bh_lock) {
-+        QTAILQ_INSERT_TAIL(&s->tmf_bh_list, req, next);
- 
--    if (!s->tmf_bh) {
--        s->tmf_bh = qemu_bh_new(virtio_scsi_do_tmf_bh, s);
--        qemu_bh_schedule(s->tmf_bh);
-+        if (!s->tmf_bh) {
-+            s->tmf_bh = qemu_bh_new(virtio_scsi_do_tmf_bh, s);
-+            qemu_bh_schedule(s->tmf_bh);
-+        }
-     }
+-    qemu_rec_mutex_unlock(&ctx->lock);
++    /* TODO remove this function */
  }
  
-@@ -1235,6 +1253,7 @@ static void virtio_scsi_device_realize(DeviceState *dev, Error **errp)
-     Error *err = NULL;
- 
-     QTAILQ_INIT(&s->tmf_bh_list);
-+    qemu_mutex_init(&s->tmf_bh_lock);
- 
-     virtio_scsi_common_realize(dev,
-                                virtio_scsi_handle_ctrl,
-@@ -1277,6 +1296,7 @@ static void virtio_scsi_device_unrealize(DeviceState *dev)
- 
-     qbus_set_hotplug_handler(BUS(&s->bus), NULL);
-     virtio_scsi_common_unrealize(dev);
-+    qemu_mutex_destroy(&s->tmf_bh_lock);
- }
- 
- static Property virtio_scsi_properties[] = {
+ QEMU_DEFINE_STATIC_CO_TLS(AioContext *, my_aiocontext)
 -- 
 2.43.0
 
