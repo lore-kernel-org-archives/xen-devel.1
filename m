@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89503C4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 12:34:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.647736.1011310 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A864C4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Dec 2023 12:38:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.647745.1011345 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAUcy-0007H8-8U; Tue, 05 Dec 2023 12:34:16 +0000
+	id 1rAUhK-0003cv-Hf; Tue, 05 Dec 2023 12:38:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 647736.1011310; Tue, 05 Dec 2023 12:34:16 +0000
+Received: by outflank-mailman (output) from mailman id 647745.1011345; Tue, 05 Dec 2023 12:38:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAUcy-0007H1-4k; Tue, 05 Dec 2023 12:34:16 +0000
-Received: by outflank-mailman (input) for mailman id 647736;
- Tue, 05 Dec 2023 12:34:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rAUhK-0003bS-CU; Tue, 05 Dec 2023 12:38:46 +0000
+Received: by outflank-mailman (input) for mailman id 647745;
+ Tue, 05 Dec 2023 12:38:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jRF5=HQ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rAUcw-0007Ff-OY
- for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 12:34:14 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 98551dbd-936a-11ee-9b0f-b553b5be7939;
- Tue, 05 Dec 2023 13:34:12 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40c0a074e71so22245895e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 05 Dec 2023 04:34:12 -0800 (PST)
-Received: from localhost ([213.195.113.99]) by smtp.gmail.com with ESMTPSA id
- g14-20020a05600c310e00b0040b481222e3sm22391417wmo.41.2023.12.05.04.34.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Dec 2023 04:34:11 -0800 (PST)
+ <SRS0=JQhx=HQ=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
+ id 1rAUhJ-00035R-Iu
+ for xen-devel@lists.xenproject.org; Tue, 05 Dec 2023 12:38:45 +0000
+Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 35d688c0-936b-11ee-98e5-6d05b1d4d9a1;
+ Tue, 05 Dec 2023 13:38:41 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.163.216])
+ by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4Sl0Sj4lhDz4f3lDT
+ for <xen-devel@lists.xenproject.org>; Tue,  5 Dec 2023 20:38:29 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.112])
+ by mail.maildlp.com (Postfix) with ESMTP id 5C53D1A0A42
+ for <xen-devel@lists.xenproject.org>; Tue,  5 Dec 2023 20:38:34 +0800 (CST)
+Received: from huaweicloud.com (unknown [10.175.104.67])
+ by APP1 (Coremail) with SMTP id cCh0CgDnNw7GGW9lr8E8Cw--.35507S5;
+ Tue, 05 Dec 2023 20:38:33 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,107 +47,312 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98551dbd-936a-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1701779651; x=1702384451; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4Fqyc6JPbEffc12vul4iA7D2vP1qKTReNpKbh0bHSQk=;
-        b=ek+HHtanF1HVj8WaY2h3Jm0YJY2F8Uo/DVkKrAXx3BH+COWQAZ6Y3fOG0Mys/1CgaF
-         Cr09ldLlAE55calNBnKjQjPO9gRazXiTsiZhdA6XORE8es2jKdOcvqy2+co/dQk6lLDz
-         nbyLSbrAGuwqXre/qwoRxKgz8EOTNeGYrMeVE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701779651; x=1702384451;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4Fqyc6JPbEffc12vul4iA7D2vP1qKTReNpKbh0bHSQk=;
-        b=G8DCK3l9H71VpsndV0T4xlZPEfhTMB7EFmz7JaaIe0V8a98du5I7FaCnckau3Uez/T
-         BhG3L5TrsPF7jjnAoqE+vTqy9t2Bg/eraH91RV6aw+rLbS9Qllf/rzZBJmy4vpsgwO6C
-         D8+tmRu+NQyESFAOFG58uckdN0UD+VoGq2xhn7hAVjualp4iWGU/kQGxdVN0Xu3Je17f
-         Y0wP6RImPpeIZKM0PcrBvCsp5/JVBhx25l3cL4ahAGNJ/JQGvuN2zybWqDgCACR7coTH
-         GLGan4G3ru1Zs+ihaMQ+1pTx9C0ezGG8oXraaf47tMuU7+NRHSHnIa7ll3Mq1qJ2tk42
-         Fg+w==
-X-Gm-Message-State: AOJu0YxXIeTpjR5q9X+BN3YBElKOWdr5kTWn/kayTtJzlWeHVmB12jw0
-	tFpdbfZ7DtMJcmmAQzGNXN8FD9KUQ9MGmfpnJhg=
-X-Google-Smtp-Source: AGHT+IGwhpyT+obAY0DLw8knajDvfpkmX2em2qFn945caqLNO7JwwU99i8l9Y8hoecsCb95BAcQP1A==
-X-Received: by 2002:a05:600c:35c4:b0:40b:5e22:96f with SMTP id r4-20020a05600c35c400b0040b5e22096fmr4098727wmq.94.1701779651627;
-        Tue, 05 Dec 2023 04:34:11 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] livepatch-build-tools: allow livepatching version.c
-Date: Tue,  5 Dec 2023 13:34:03 +0100
-Message-ID: <20231205123403.63813-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: 35d688c0-936b-11ee-98e5-6d05b1d4d9a1
+From: Yu Kuai <yukuai1@huaweicloud.com>
+To: axboe@kernel.dk,
+	roger.pau@citrix.com,
+	colyli@suse.de,
+	kent.overstreet@gmail.com,
+	joern@lazybastard.org,
+	miquel.raynal@bootlin.com,
+	richard@nod.at,
+	vigneshr@ti.com,
+	sth@linux.ibm.com,
+	hoeppner@linux.ibm.com,
+	hca@linux.ibm.com,
+	gor@linux.ibm.com,
+	agordeev@linux.ibm.com,
+	jejb@linux.ibm.com,
+	martin.petersen@oracle.com,
+	clm@fb.com,
+	josef@toxicpanda.com,
+	dsterba@suse.com,
+	nico@fluxnic.net,
+	xiang@kernel.org,
+	chao@kernel.org,
+	tytso@mit.edu,
+	adilger.kernel@dilger.ca,
+	agruenba@redhat.com,
+	jack@suse.com,
+	konishi.ryusuke@gmail.com,
+	willy@infradead.org,
+	akpm@linux-foundation.org,
+	hare@suse.de,
+	p.raghav@samsung.com
+Cc: linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	linux-bcachefs@vger.kernel.org,
+	linux-btrfs@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org,
+	linux-ext4@vger.kernel.org,
+	gfs2@lists.linux.dev,
+	linux-nilfs@vger.kernel.org,
+	yukuai3@huawei.com,
+	yukuai1@huaweicloud.com,
+	yi.zhang@huawei.com,
+	yangerkun@huawei.com
+Subject: [PATCH -next RFC 01/14] block: add some bdev apis
+Date: Tue,  5 Dec 2023 20:37:15 +0800
+Message-Id: <20231205123728.1866699-2-yukuai1@huaweicloud.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231205123728.1866699-1-yukuai1@huaweicloud.com>
+References: <20231205123728.1866699-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:cCh0CgDnNw7GGW9lr8E8Cw--.35507S5
+X-Coremail-Antispam: 1UD129KBjvJXoW3GrykCryfur18GF48Cw1xXwb_yoW3tF48pF
+	yUKa45JrWUGr1Igrs2yw43Zr1agw10k3WxZa4xA34Yk3yktrn2gF95Kw1UArWSqrWkAFZr
+	XFW3ZrWxur1jkFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUPY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+	x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+	Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+	A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+	0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+	IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+	Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+	xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+	6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Wrv_Gr1UMIIYrx
+	kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
+	6F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
+	1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JULXo7U
+	UUUU=
+X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
-Currently version.o is explicitly ignored as the file would change as a result
-of the orignal and the patched build having possibly different dates and
-times.
+From: Yu Kuai <yukuai3@huawei.com>
 
-Fix such difference by exporting the date and time from the build script, so
-that both builds share the same build time.  This allows checking for changes
-in version.c, since the rest of fields need to be manually changed in order to
-produce different output.
+Those apis will be used for other modules, so that bd_inode won't be
+accessed directly from other modules.
 
-Setting XEN_BUILD_{DATE,TIME} as an environment variable has been supported
-since before livepatch support was added to Xen, so it's safe to export those
-variables unconditionally.
-
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 ---
- livepatch-build | 4 ++++
- livepatch-gcc   | 2 --
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ block/bdev.c           | 116 +++++++++++++++++++++++++++++++++++++++++
+ block/bio.c            |   1 +
+ block/blk.h            |   2 -
+ include/linux/blkdev.h |  27 ++++++++++
+ 4 files changed, 144 insertions(+), 2 deletions(-)
 
-diff --git a/livepatch-build b/livepatch-build
-index e2ccce4f7fd7..f622683fc56c 100755
---- a/livepatch-build
-+++ b/livepatch-build
-@@ -417,6 +417,10 @@ if [ "${SKIP}" != "build" ]; then
+diff --git a/block/bdev.c b/block/bdev.c
+index 6f73b02d549c..fcba5c1bd113 100644
+--- a/block/bdev.c
++++ b/block/bdev.c
+@@ -92,6 +92,13 @@ void invalidate_bdev(struct block_device *bdev)
+ }
+ EXPORT_SYMBOL(invalidate_bdev);
  
-     export CROSS_COMPILE="${TOOLSDIR}/livepatch-gcc "
- 
-+    # Force same date and time to prevent unwanted changes in version.c
-+    export XEN_BUILD_DATE=`LC_ALL=C date`
-+    export XEN_BUILD_TIME=`LC_ALL=C date +%T`
++void invalidate_bdev_range(struct block_device *bdev, pgoff_t start,
++			   pgoff_t end)
++{
++	invalidate_mapping_pages(bdev->bd_inode->i_mapping, start, end);
++}
++EXPORT_SYMBOL_GPL(invalidate_bdev_range);
 +
-     echo "Perform full initial build with ${CPUS} CPU(s)..."
-     build_full
+ /*
+  * Drop all buffers & page cache for given bdev range. This function bails
+  * with error if bdev has other exclusive owner (such as filesystem).
+@@ -124,6 +131,7 @@ int truncate_bdev_range(struct block_device *bdev, blk_mode_t mode,
+ 					     lstart >> PAGE_SHIFT,
+ 					     lend >> PAGE_SHIFT);
+ }
++EXPORT_SYMBOL_GPL(truncate_bdev_range);
  
-diff --git a/livepatch-gcc b/livepatch-gcc
-index fcad80551aa0..e4cb6fb59029 100755
---- a/livepatch-gcc
-+++ b/livepatch-gcc
-@@ -33,7 +33,6 @@ if [[ "$TOOLCHAINCMD" =~ $GCC_RE ]] ; then
-             obj=$2
-             [[ $2 = */.tmp_*.o ]] && obj=${2/.tmp_/}
-             case "$(basename $obj)" in
--            version.o|\
-             debug.o|\
-             check.o|\
-             *.xen-syms.*.o|\
-@@ -63,7 +62,6 @@ done
- elif [[ "$TOOLCHAINCMD" =~ $OBJCOPY_RE ]] ; then
-     obj="${!#}"
-     case "$(basename $obj)" in
--        version.o|\
-         debug.o|\
-         check.o|\
-         boot.o|\
-
-base-commit: e588b7914e7afa3abb64b15a32fc2fdb57ded341
-prerequisite-patch-id: 3419543c1c7c96b551db398518dbb10d81b3d5d9
-prerequisite-patch-id: 640658ca7a1a21a540bfd6a862ff83669f70a065
-prerequisite-patch-id: 650cd4210c2e73e9d2588b048be2c8278ae96acd
+ static void set_init_blocksize(struct block_device *bdev)
+ {
+@@ -138,6 +146,18 @@ static void set_init_blocksize(struct block_device *bdev)
+ 	bdev->bd_inode->i_blkbits = blksize_bits(bsize);
+ }
+ 
++loff_t bdev_size(struct block_device *bdev)
++{
++	loff_t size;
++
++	spin_lock(&bdev->bd_size_lock);
++	size = i_size_read(bdev->bd_inode);
++	spin_unlock(&bdev->bd_size_lock);
++
++	return size;
++}
++EXPORT_SYMBOL_GPL(bdev_size);
++
+ int set_blocksize(struct block_device *bdev, int size)
+ {
+ 	/* Size must be a power of two, and between 512 and PAGE_SIZE */
+@@ -1144,3 +1164,99 @@ static int __init setup_bdev_allow_write_mounted(char *str)
+ 	return 1;
+ }
+ __setup("bdev_allow_write_mounted=", setup_bdev_allow_write_mounted);
++
++struct folio *bdev_read_folio(struct block_device *bdev, pgoff_t index)
++{
++	return read_mapping_folio(bdev->bd_inode->i_mapping, index, NULL);
++}
++EXPORT_SYMBOL_GPL(bdev_read_folio);
++
++struct folio *bdev_read_folio_gfp(struct block_device *bdev, pgoff_t index,
++				  gfp_t gfp)
++{
++	return mapping_read_folio_gfp(bdev->bd_inode->i_mapping, index, gfp);
++}
++EXPORT_SYMBOL_GPL(bdev_read_folio_gfp);
++
++struct folio *bdev_get_folio(struct block_device *bdev, pgoff_t index)
++{
++	return filemap_get_folio(bdev->bd_inode->i_mapping, index);
++}
++EXPORT_SYMBOL_GPL(bdev_get_folio);
++
++struct folio *bdev_find_or_create_folio(struct block_device *bdev,
++					pgoff_t index, gfp_t gfp)
++{
++	return __filemap_get_folio(bdev->bd_inode->i_mapping, index,
++				   FGP_LOCK | FGP_ACCESSED | FGP_CREAT, gfp);
++}
++EXPORT_SYMBOL_GPL(bdev_find_or_create_folio);
++
++int bdev_wb_err_check(struct block_device *bdev, errseq_t since)
++{
++	return errseq_check(&bdev->bd_inode->i_mapping->wb_err, since);
++}
++EXPORT_SYMBOL_GPL(bdev_wb_err_check);
++
++int bdev_wb_err_check_and_advance(struct block_device *bdev, errseq_t *since)
++{
++	return errseq_check_and_advance(&bdev->bd_inode->i_mapping->wb_err,
++					since);
++}
++EXPORT_SYMBOL_GPL(bdev_wb_err_check_and_advance);
++
++void bdev_balance_dirty_pages_ratelimited(struct block_device *bdev)
++{
++	return balance_dirty_pages_ratelimited(bdev->bd_inode->i_mapping);
++}
++EXPORT_SYMBOL_GPL(bdev_balance_dirty_pages_ratelimited);
++
++void bdev_sync_readahead(struct block_device *bdev, struct file_ra_state *ra,
++			 struct file *file, pgoff_t index,
++			 unsigned long req_count)
++{
++	struct file_ra_state tmp_ra = {};
++
++	if (!ra) {
++		ra = &tmp_ra;
++		file_ra_state_init(ra, bdev->bd_inode->i_mapping);
++	}
++	page_cache_sync_readahead(bdev->bd_inode->i_mapping, ra, file, index,
++				  req_count);
++}
++EXPORT_SYMBOL_GPL(bdev_sync_readahead);
++
++void bdev_attach_wb(struct block_device *bdev)
++{
++	inode_attach_wb(bdev->bd_inode, NULL);
++}
++EXPORT_SYMBOL_GPL(bdev_attach_wb);
++
++void bdev_correlate_mapping(struct block_device *bdev,
++			    struct address_space *mapping)
++{
++	mapping->host = bdev->bd_inode;
++}
++EXPORT_SYMBOL_GPL(bdev_correlate_mapping);
++
++gfp_t bdev_gfp_constraint(struct block_device *bdev, gfp_t gfp)
++{
++	return mapping_gfp_constraint(bdev->bd_inode->i_mapping, gfp);
++}
++EXPORT_SYMBOL_GPL(bdev_gfp_constraint);
++
++/*
++ * The del_gendisk() function uninitializes the disk-specific data
++ * structures, including the bdi structure, without telling anyone
++ * else.  Once this happens, any attempt to call mark_buffer_dirty()
++ * (for example, by ext4_commit_super), will cause a kernel OOPS.
++ * This is a kludge to prevent these oops until we can put in a proper
++ * hook in del_gendisk() to inform the VFS and file system layers.
++ */
++int bdev_ejected(struct block_device *bdev)
++{
++	struct backing_dev_info *bdi = inode_to_bdi(bdev->bd_inode);
++
++	return bdi->dev == NULL;
++}
++EXPORT_SYMBOL_GPL(bdev_ejected);
+diff --git a/block/bio.c b/block/bio.c
+index 816d412c06e9..f7123ad9b4ee 100644
+--- a/block/bio.c
++++ b/block/bio.c
+@@ -1119,6 +1119,7 @@ void bio_add_folio_nofail(struct bio *bio, struct folio *folio, size_t len,
+ 	WARN_ON_ONCE(off > UINT_MAX);
+ 	__bio_add_page(bio, &folio->page, len, off);
+ }
++EXPORT_SYMBOL_GPL(bio_add_folio_nofail);
+ 
+ /**
+  * bio_add_folio - Attempt to add part of a folio to a bio.
+diff --git a/block/blk.h b/block/blk.h
+index 08a358bc0919..da4becd4f7e9 100644
+--- a/block/blk.h
++++ b/block/blk.h
+@@ -467,8 +467,6 @@ extern struct device_attribute dev_attr_events_poll_msecs;
+ extern struct attribute_group blk_trace_attr_group;
+ 
+ blk_mode_t file_to_blk_mode(struct file *file);
+-int truncate_bdev_range(struct block_device *bdev, blk_mode_t mode,
+-		loff_t lstart, loff_t lend);
+ long blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg);
+ long compat_blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg);
+ 
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 3f8a21cd9233..a55db77274a4 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1342,6 +1342,11 @@ static inline unsigned int block_size(struct block_device *bdev)
+ 	return 1 << bdev->bd_inode->i_blkbits;
+ }
+ 
++static inline u8 block_bits(struct block_device *bdev)
++{
++	return bdev->bd_inode->i_blkbits;
++}
++
+ int kblockd_schedule_work(struct work_struct *work);
+ int kblockd_mod_delayed_work_on(int cpu, struct delayed_work *dwork, unsigned long delay);
+ 
+@@ -1515,6 +1520,28 @@ struct block_device *blkdev_get_no_open(dev_t dev);
+ void blkdev_put_no_open(struct block_device *bdev);
+ 
+ struct block_device *I_BDEV(struct inode *inode);
++loff_t bdev_size(struct block_device *bdev);
++void invalidate_bdev_range(struct block_device *bdev, pgoff_t start,
++			   pgoff_t end);
++int truncate_bdev_range(struct block_device *bdev, blk_mode_t mode,
++		loff_t lstart, loff_t lend);
++struct folio *bdev_get_folio(struct block_device *bdev, pgoff_t index);
++struct folio *bdev_find_or_create_folio(struct block_device *bdev,
++					pgoff_t index, gfp_t gfp);
++struct folio *bdev_read_folio(struct block_device *bdev, pgoff_t index);
++struct folio *bdev_read_folio_gfp(struct block_device *bdev, pgoff_t index,
++				  gfp_t gfp);
++int bdev_wb_err_check(struct block_device *bdev, errseq_t since);
++int bdev_wb_err_check_and_advance(struct block_device *bdev, errseq_t *since);
++void bdev_balance_dirty_pages_ratelimited(struct block_device *bdev);
++void bdev_sync_readahead(struct block_device *bdev, struct file_ra_state *ra,
++			 struct file *file, pgoff_t index,
++			 unsigned long req_count);
++void bdev_attach_wb(struct block_device *bdev);
++void bdev_correlate_mapping(struct block_device *bdev,
++			    struct address_space *mapping);
++gfp_t bdev_gfp_constraint(struct block_device *bdev, gfp_t gfp);
++int bdev_ejected(struct block_device *bdev);
+ 
+ #ifdef CONFIG_BLOCK
+ void invalidate_bdev(struct block_device *bdev);
 -- 
-2.43.0
+2.39.2
 
 
