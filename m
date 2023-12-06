@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA72C4167B
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 09:01:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.649001.1013202 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE6CFC4167B
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 09:06:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.649004.1013213 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAnmD-00016d-9M; Wed, 06 Dec 2023 09:01:05 +0000
+	id 1rAnrJ-000243-RO; Wed, 06 Dec 2023 09:06:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 649001.1013202; Wed, 06 Dec 2023 09:01:05 +0000
+Received: by outflank-mailman (output) from mailman id 649004.1013213; Wed, 06 Dec 2023 09:06:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAnmD-00016W-6g; Wed, 06 Dec 2023 09:01:05 +0000
-Received: by outflank-mailman (input) for mailman id 649001;
- Wed, 06 Dec 2023 09:01:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rAnrJ-00023w-Oj; Wed, 06 Dec 2023 09:06:21 +0000
+Received: by outflank-mailman (input) for mailman id 649004;
+ Wed, 06 Dec 2023 09:06:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=X1yw=HR=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rAnmB-00014k-TF
- for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 09:01:03 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fb76d7d8-9415-11ee-98e5-6d05b1d4d9a1;
- Wed, 06 Dec 2023 10:01:03 +0100 (CET)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33348e711e0so482255f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 06 Dec 2023 01:01:03 -0800 (PST)
+ id 1rAnrI-00022d-Ls
+ for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 09:06:20 +0000
+Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com
+ [2a00:1450:4864:20::343])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b756aea7-9416-11ee-9b0f-b553b5be7939;
+ Wed, 06 Dec 2023 10:06:18 +0100 (CET)
+Received: by mail-wm1-x343.google.com with SMTP id
+ 5b1f17b1804b1-40859dee28cso65271705e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 06 Dec 2023 01:06:18 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- j9-20020adfea49000000b0033331beb85asm13580883wrn.69.2023.12.06.01.01.01
+ g16-20020a05600c4ed000b0040b47c53610sm21255737wmq.14.2023.12.06.01.06.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Dec 2023 01:01:01 -0800 (PST)
+ Wed, 06 Dec 2023 01:06:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,48 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fb76d7d8-9415-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: b756aea7-9416-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1701853262; x=1702458062; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1701853578; x=1702458378; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=ul/+2J/Q9UnLYNeMt387FM5aK0kgEyIrv9wS6MqhWlg=;
-        b=ZBHdaKeRuurIUKxYySDURIb9sZm1ST1Ph6oFe7sJUjtSGomst7vJv5JTBTJxEpgWEY
-         /J5txmTWmPqY93T80TssqXLLQkH/dz65Id2Epq75Po4wWu/jgm3m3exCphG2jLojRro5
-         z1ucw0AC7bWxtOMCbkXwmT2bcWNL385ECgW3Kt+BqqRRDWBQvQ/PITXtm7/iyLqFK8PH
-         rsVGJ/qTLMMRv1UMGRE8+FQtEO+KhGfYwTsB+B2fhXrGAnXLVI7AfVcuGjkK9L/8uBaN
-         u2dufjc1AqYD1Z8YVEDbWfeK2IaAJ7wpNdhHi2aMU4pxavG1ht75QoHVV2DcMqp1QpgB
-         XYFg==
+        bh=wvwtw6phcPiVErnUuHnmMujra8D4GYFtZrxNc53AQhg=;
+        b=UmEQdP5JQ58MOp2pcnykGYRLHJKGe67SSCeVAykSY8gvF9mtynJcN/UxO/VTrgC9OY
+         uT5thYVoN+/JzlGQL38LrN/cQLV7D3W4UgzSxh2+2eVH9mk0MYEz3fN5i/5mB8NcLDTq
+         B2fxn5L2ijCoSvDrav8LiH0gJaEU9jUS+poOLCQvt73xX9z7si8Cxvp/mNeg254HdoWM
+         qsZ/y+CrCW3yppM/SOQXI6QfKOhGTJfHvtq3MaX7x5pn6xBn6HTO8m/w8edijzzFFllv
+         v1Vt+A/h67qsXN2mFXqggzLV2We2aIP+7A64GkWZytdHI++givtidux6cIk/LKzsC0j9
+         oiGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701853262; x=1702458062;
+        d=1e100.net; s=20230601; t=1701853578; x=1702458378;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ul/+2J/Q9UnLYNeMt387FM5aK0kgEyIrv9wS6MqhWlg=;
-        b=JjLfVL+dtetRdIRBxuYMGFg+7usw3FJlGAtGGD2KxS8p3Q/wMAFr1/zTKJw6xSgp2m
-         SVr0x2KZ7EUPKrjPM2jyVxsCP8nQIURUrxmuFhx/PRk9jwJWS1SoSex92Vtf7mCtTc0S
-         MxkFJXotNQFBZWZ86qO/3Wk4eykn2XOhBjPK8J/k70LmM7U5dy9ZkJRs6tvJPwwF5+iI
-         LUQh02YOlZhMUdXQw3LIIG2jvYMTNwFmNyz4Z9fVOjfbVu4Wgafr/DMbG5qeedd4s/gS
-         iX+imQcL/GhaNf/VdCVwcYVQSwR6uM2kKx75wY5+IzGH2L3TQuhd07totm8Ru2XbbN9z
-         +M6Q==
-X-Gm-Message-State: AOJu0YwQnQ1P6pczQkDauTqDR5hQId8RWcwaaPGwkDmQ6+x2N8QwtQTD
-	md5HivU+5zHJUxUhfCeQHBE4
-X-Google-Smtp-Source: AGHT+IFPNn4gB1hBVFNQNywtPvrXF6btbJ+oaiCbOQlG6emDHncB0WpObvKj9r+p/8qjTt/tnKmb9A==
-X-Received: by 2002:a5d:4d81:0:b0:333:3bc1:1f95 with SMTP id b1-20020a5d4d81000000b003333bc11f95mr301938wru.106.1701853261790;
-        Wed, 06 Dec 2023 01:01:01 -0800 (PST)
-Message-ID: <21691a25-1630-4f56-bd3f-60e2a71107ef@suse.com>
-Date: Wed, 6 Dec 2023 10:01:00 +0100
+        bh=wvwtw6phcPiVErnUuHnmMujra8D4GYFtZrxNc53AQhg=;
+        b=IPDdmmR8YLKCmn9qQSBnRSUnnUC7jJAk+MEz38nF5sVoHXs1VorZ4BXkxB36GhgHBq
+         NmBg1qX4AGp6076M5EzX0/4mAAOyCjvF3/iQIS+mtdQJE/NUsSSVTlw5ldCXRAGmnyvU
+         9N2iZpS3fiVn/pQJQArDPnPkRYR6Zao12eIupuszoYT5jKb5/9IbnMQj1wvN6C/3WNeB
+         fsnKS001rgJYNwkUo67oUnSoH6BONn+k1FVDUcirX9VJjpA6m8A9JiDqOvRMORdaJzmH
+         vqsORxg6dT+SU7Rr44pXpGCPZxVgPSfrCPCQjNwwfRmni02YqmEdDyTP8bh101MI4BHe
+         yX9A==
+X-Gm-Message-State: AOJu0YxUnnIgOeX/cfkDDurmIjwmfa7xUsf3EyvQaWLGa9wb30FeIslz
+	zYztdlDhUaTjQ8WD8PLQHgpt
+X-Google-Smtp-Source: AGHT+IHwKxYfJ5tcxmug+SYUNqgTCaLloMURciQh6gSc0v+KZNAtCUiuoBWkYHiW0fMa5kMOWSLnrg==
+X-Received: by 2002:a05:600c:b97:b0:40b:5e1b:54ae with SMTP id fl23-20020a05600c0b9700b0040b5e1b54aemr335441wmb.58.1701853577693;
+        Wed, 06 Dec 2023 01:06:17 -0800 (PST)
+Message-ID: <ccdbe84d-24ca-41f0-bc1f-fb9499c73880@suse.com>
+Date: Wed, 6 Dec 2023 10:06:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH] ns16550: remove partial explicit initializer
+Subject: Re: [PATCH] docs/misra/rules.rst: add more rules
 Content-Language: en-US
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: andrew.cooper3@citrix.com, george.dunlap@citrix.com, julien@xen.org,
+ bertrannd.marquis@arm.com, roger.pau@citrix.com,
+ roberto.bagnara@bugseng.com, federico.serafini@bugseng.com,
  xen-devel@lists.xenproject.org
-References: <89f9aebddac56c034aace59c5b910ad4bef701c5.1701793717.git.nicola.vetrini@bugseng.com>
+References: <alpine.DEB.2.22.394.2312051859440.110490@ubuntu-linux-20-04-desktop>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -113,24 +113,63 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <89f9aebddac56c034aace59c5b910ad4bef701c5.1701793717.git.nicola.vetrini@bugseng.com>
+In-Reply-To: <alpine.DEB.2.22.394.2312051859440.110490@ubuntu-linux-20-04-desktop>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 05.12.2023 17:31, Nicola Vetrini wrote:
-> --- a/xen/drivers/char/ns16550.c
-> +++ b/xen/drivers/char/ns16550.c
-> @@ -73,7 +73,7 @@ static struct ns16550 {
+On 06.12.2023 04:02, Stefano Stabellini wrote:
+> --- a/docs/misra/rules.rst
+> +++ b/docs/misra/rules.rst
+> @@ -462,11 +462,23 @@ maintainers if you want to suggest a change.
+>  
+>         while(0) and while(1) and alike are allowed.
+>  
+> +   * - `Rule 16.3 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_16_03.c>`_
+> +     - Required
+> +     - An unconditional break statement shall terminate every
+> +       switch-clause
+> +     - In addition to break, also other flow control statements such as
+> +       continue, return, goto are allowed.
+> +
+>     * - `Rule 16.7 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_16_07.c>`_
+>       - Required
+>       - A switch-expression shall not have essentially Boolean type
+>       -
+>  
+> +   * - `Rule 17.1 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_01.c>`_
+> +     - Required
+> +     - The features of <stdarg.h> shall not be used
+> +     -
 
-With the variable even being static, ...
+Did we really accept this without any constraint (warranting mentioning
+here)?
 
->      bool msi;
->      const struct ns16550_config_param *param; /* Points into .init.*! */
->  #endif
-> -} ns16550_com[2] = { { 0 } };
-> +} ns16550_com[2] = { };
+> @@ -478,12 +490,24 @@ maintainers if you want to suggest a change.
+>         have an explicit return statement with an expression
+>       -
+>  
+> +   * - `Rule 17.5 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_05.c>`_
+> +     - Advisory
+> +     - The function argument corresponding to a parameter declared to
+> +       have an array type shall have an appropriate number of elements
+> +     -
+> +
+>     * - `Rule 17.6 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_06.c>`_
+>       - Mandatory
+>       - The declaration of an array parameter shall not contain the
+>         static keyword between the [ ]
+>       -
+>  
+> +   * - `Rule 17.7 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_07.c>`_
+> +     - Required
+> +     - The value returned by a function having non-void return type
+> +       shall be used
+> +     -
 
-... what use is the initializer in the first place?
+Same question here.
+
+If the other additions were separate, I probably would have ack-ed them
+right away.
 
 Jan
 
