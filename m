@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411C0C4167B
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 09:07:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.649013.1013273 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02170C4167B
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 09:07:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.649010.1013263 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAnrt-0004bc-MI; Wed, 06 Dec 2023 09:06:57 +0000
+	id 1rAnro-00040b-E7; Wed, 06 Dec 2023 09:06:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 649013.1013273; Wed, 06 Dec 2023 09:06:57 +0000
+Received: by outflank-mailman (output) from mailman id 649010.1013263; Wed, 06 Dec 2023 09:06:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAnrt-0004bN-Iu; Wed, 06 Dec 2023 09:06:57 +0000
-Received: by outflank-mailman (input) for mailman id 649013;
- Wed, 06 Dec 2023 09:06:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rAnro-00040G-9F; Wed, 06 Dec 2023 09:06:52 +0000
+Received: by outflank-mailman (input) for mailman id 649010;
+ Wed, 06 Dec 2023 09:06:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=B4rn=HR=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1rAnrs-00022d-3b
- for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 09:06:56 +0000
+ id 1rAnrm-0002Yw-VM
+ for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 09:06:50 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id cc690495-9416-11ee-9b0f-b553b5be7939;
- Wed, 06 Dec 2023 10:06:53 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id ca2f57a6-9416-11ee-98e5-6d05b1d4d9a1;
+ Wed, 06 Dec 2023 10:06:50 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2B7081474;
- Wed,  6 Dec 2023 01:07:39 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 834FD139F;
+ Wed,  6 Dec 2023 01:07:35 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E69A53F762;
- Wed,  6 Dec 2023 01:06:49 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 8B32A3F762;
+ Wed,  6 Dec 2023 01:06:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc690495-9416-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: ca2f57a6-9416-11ee-98e5-6d05b1d4d9a1
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org,
 	michal.orzel@amd.com
@@ -56,167 +56,72 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v5 05/11] xen/arm: use paddr_assigned to indicate whether host address is provided
-Date: Wed,  6 Dec 2023 17:06:17 +0800
-Message-Id: <20231206090623.1932275-6-Penny.Zheng@arm.com>
+Subject: [PATCH v5 04/11] xen/arm: introduce allocate_domheap_memory and guest_physmap_memory
+Date: Wed,  6 Dec 2023 17:06:16 +0800
+Message-Id: <20231206090623.1932275-5-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231206090623.1932275-1-Penny.Zheng@arm.com>
 References: <20231206090623.1932275-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We use paddr_assigned to indicate whether host address is provided, by
-checking the length of "xen,shared-mem" property.
+We split the code of allocate_bank_memory into two parts,
+allocate_domheap_memory and guest_physmap_memory.
 
-The shm matching criteria shall also be adapt to cover the new scenario, by
-adding when host address is not provided, if SHMID matches, the region size
-must exactly match too.
+One is about allocating guest RAM from heap, which could be re-used later for
+allocating static shared memory from heap when host address is not provided.
+The other is building up guest P2M mapping.
 
-During domain creation, right now, a static shared memory node could be
-banked with a statically configured host memory bank, or arbitrary
-host memory of dedicated size, which will later be allocated from heap by Xen.
-To cover both scenarios, we create a new structure shm_meminfo. It is very
-alike meminfo, but with the maximum array size being a smaller number
-NR_SHM_BANKS(16).
-As "shm_meminfo" is also a new member of "enum meminfo_type", we shall implement
-its own callback "retrieve_shm_meminfo" to have access to all MACRO
-helpers, e.g. GET_MEMBANK(...).
-
-Also, to make codes tidy and clear, we extract codes about parsing
-"xen,shared-mem" property from function "process_shm" and move them into
-a new helper "parse_shm_property".
+We also define a set of MACRO helpers to access common fields in data
+structure of "meminfo" type, e.g. "struct meminfo" is one of them, and
+later new "struct shm_meminfo" is also one of them.
+This kind of structures must have the following characteristics:
+- an array of "struct membank"
+- a member called "nr_banks" indicating current array size
+- a field indicating the maximum array size
+When introducing a new data structure, according callbacks with function type
+"retrieve_fn" shall be defined for using MACRO helpers.
+This commit defines callback "retrieve_meminfo" for data structure
+"struct meminfo".
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 ---
-v1 -> v2
-- In order to get allocated banked host memory info during domain creat    ion,
-we create a new structure shm_meminfo. It is very alike meminfo, with
-the maximum array size being NR_SHM_BANKS. As shm_meminfo is a new
-member of type meminfo_type, we shall implement its own callback
-retrieve_shm_meminfo to have access to all MACRO helpers, e.g.
-GET_MEMBANK(...)
-- rename "acquire_shm_memnode" to "find_shm_memnode"
+v1 -> v2:
+-  define a set of MACRO helpers to access common fields in data structure of
+"meminfo" type. "struct meminfo" is one of them, and according callback
+"retrieve_meminfo" is also introduced here.
+- typo of changing 1ULL to 1UL
 ---
 v2 -> v3
 - rebase and no changes
 ---
 v3 -> v4:
-- rebase and no change
+rebase and no change
 ---
 v4 -> v5:
-- fix bugs of that tot_size and membank shall not be member of union,
-but struct, to differentiate two types of static shared memory node.
+rebase and no change
 ---
- xen/arch/arm/domain_build.c             |   3 +
- xen/arch/arm/include/asm/setup.h        |  14 +-
- xen/arch/arm/include/asm/static-shmem.h |   3 +
- xen/arch/arm/static-shmem.c             | 360 ++++++++++++++++++------
- 4 files changed, 293 insertions(+), 87 deletions(-)
+ xen/arch/arm/domain_build.c      | 119 +++++++++++++++++++++++++------
+ xen/arch/arm/include/asm/setup.h |  33 +++++++++
+ 2 files changed, 129 insertions(+), 23 deletions(-)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index a8bc78baa5..c69d481d34 100644
+index 64ae944431..a8bc78baa5 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -70,6 +70,9 @@ static void __init retrieve_meminfo(void *mem, unsigned int *max_mem_banks,
+@@ -51,6 +51,28 @@ boolean_param("ext_regions", opt_ext_regions);
+ static u64 __initdata dom0_mem;
+ static bool __initdata dom0_mem_set;
  
- retrieve_fn __initdata retrievers[MAX_MEMINFO_TYPE] = {
-     [NORMAL_MEMINFO] = retrieve_meminfo,
-+#ifdef CONFIG_STATIC_SHM
-+    [SHM_MEMINFO] = retrieve_shm_meminfo,
-+#endif
- };
- #endif
- 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index bc5f08be97..043588cd2d 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -59,6 +59,9 @@ struct meminfo {
- 
- enum meminfo_type {
-     NORMAL_MEMINFO,
-+#ifdef CONFIG_STATIC_SHM
-+    SHM_MEMINFO,
-+#endif
-     MAX_MEMINFO_TYPE,
- };
- 
-@@ -150,7 +153,16 @@ struct bootinfo {
-         unsigned int nr_nodes;
-         struct {
-             struct shm_node node;
--            const struct membank *membank;
-+            /*
-+             * For a static shared memory node, it is either banked with
-+             * a statically configured host memory bank, or arbitrary host
-+             * memory which will be allocated by Xen with a specified total
-+             * size(tot_size).
-+             */
-+            struct {
-+                const struct membank *membank;
-+                paddr_t tot_size;
-+            };
-         } shm_nodes[NR_MEM_BANKS];
-     } shminfo;
- #endif
-diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
-index 66a3f4c146..a67445cec8 100644
---- a/xen/arch/arm/include/asm/static-shmem.h
-+++ b/xen/arch/arm/include/asm/static-shmem.h
-@@ -24,6 +24,9 @@ static inline int process_shm_chosen(struct domain *d,
- int process_shm_node(const void *fdt, int node, uint32_t address_cells,
-                      uint32_t size_cells);
- 
-+void retrieve_shm_meminfo(void *mem, unsigned int *max_mem_banks,
-+                          struct membank **bank,
-+                          unsigned int **nr_banks);
- #else /* !CONFIG_STATIC_SHM */
- 
- static inline int make_resv_memory_node(const struct domain *d, void *fdt,
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-index 6a3d8a54bd..a9eb26d543 100644
---- a/xen/arch/arm/static-shmem.c
-+++ b/xen/arch/arm/static-shmem.c
-@@ -6,6 +6,50 @@
- #include <asm/domain_build.h>
- #include <asm/static-shmem.h>
- 
-+#define NR_SHM_BANKS 16
-+
-+/*
-+ * There are two types of static shared memory node:
-+ * A static shared memory node could be banked with a statically
-+ * configured host memory bank, or a set of arbitrary host memory
-+ * banks allocated from heap by Xen on runtime.
-+ */
-+struct shm_meminfo {
-+    unsigned int nr_banks;
-+    struct membank bank[NR_SHM_BANKS];
-+    paddr_t tot_size;
-+};
-+
-+/*
-+ * struct shm_memnode holds banked host memory info for a static
-+ * shared memory node
-+ */
-+struct shm_memnode {
-+    char shm_id[MAX_SHM_ID_LENGTH];
-+    struct shm_meminfo meminfo;
-+};
-+
-+static __initdata struct {
-+    unsigned int nr_nodes;
-+    struct shm_memnode node[NR_MEM_BANKS];
-+} shm_memdata;
-+
-+void __init retrieve_shm_meminfo(void *mem, unsigned int *max_mem_banks,
-+                                 struct membank **bank,
-+                                 unsigned int **nr_banks)
++#ifdef CONFIG_DOM0LESS_BOOT
++static void __init retrieve_meminfo(void *mem, unsigned int *max_mem_banks,
++                                    struct membank **bank,
++                                    unsigned int **nr_banks)
 +{
-+    struct shm_meminfo *meminfo = (struct shm_meminfo *)mem;
++    struct meminfo *meminfo = (struct meminfo *)mem;
 +
 +    if ( max_mem_banks )
-+        *max_mem_banks = NR_SHM_BANKS;
++        *max_mem_banks = NR_MEM_BANKS;
 +
 +    if ( nr_banks )
 +        *nr_banks = &(meminfo->nr_banks);
@@ -225,420 +130,181 @@ index 6a3d8a54bd..a9eb26d543 100644
 +        *bank = meminfo->bank;
 +}
 +
- static int __init acquire_nr_borrower_domain(const char *shm_id,
-                                              unsigned long *nr_borrowers)
++retrieve_fn __initdata retrievers[MAX_MEMINFO_TYPE] = {
++    [NORMAL_MEMINFO] = retrieve_meminfo,
++};
++#endif
++
+ static int __init parse_dom0_mem(const char *s)
  {
-@@ -172,6 +216,129 @@ static int __init append_shm_bank_to_domain(struct kernel_info *kinfo,
-     return 0;
+     dom0_mem_set = true;
+@@ -415,32 +437,20 @@ static void __init allocate_memory_11(struct domain *d,
  }
  
-+static struct shm_memnode * __init find_shm_memnode(const char *shm_id)
-+{
-+    unsigned int i;
-+    struct shm_memnode *shm_memnode;
-+
-+    for ( i = 0 ; i < shm_memdata.nr_nodes; i++ )
-+    {
-+        shm_memnode = &shm_memdata.node[i];
-+
-+        if ( strcmp(shm_id, shm_memnode->shm_id) == 0 )
-+            return shm_memnode;
-+    }
-+
-+    if ( i == NR_MEM_BANKS )
-+        return NULL;
-+
-+    shm_memnode = &shm_memdata.node[i];
-+    safe_strcpy(shm_memnode->shm_id, shm_id);
-+    shm_memdata.nr_nodes++;
-+    return shm_memnode;
-+}
-+
-+/* Parse "xen,shared-mem" property in static shared memory node */
-+static struct shm_memnode * __init parse_shm_property(struct domain *d,
-+                                    const struct dt_device_node *dt_node,
-+                                    bool *paddr_assigned, paddr_t *gbase,
-+                                    const char *shm_id)
-+{
-+    uint32_t addr_cells, size_cells;
-+    const struct dt_property *prop;
-+    const __be32 *cells;
-+    uint32_t len;
-+    unsigned int i;
-+    paddr_t pbase, psize;
-+    struct shm_memnode *shm_memnode;
-+
-+    /* xen,shared-mem = <pbase, gbase, size>; And pbase could be optional. */
-+    prop = dt_find_property(dt_node, "xen,shared-mem", &len);
-+    BUG_ON(!prop);
-+    cells = (const __be32 *)prop->value;
-+
-+    addr_cells = dt_n_addr_cells(dt_node);
-+    size_cells = dt_n_size_cells(dt_node);
-+    if ( len != dt_cells_to_size(addr_cells + size_cells + addr_cells) )
-+    {
-+        /* pbase is not provided in "xen,shared-mem" */
-+        if ( len == dt_cells_to_size(size_cells + addr_cells) )
-+            *paddr_assigned = false;
-+        else
-+        {
-+            printk("fdt: invalid `xen,shared-mem` property.\n");
-+            return NULL;
-+        }
-+    }
-+
-+    /*
-+     * If we firstly process the shared memory node with unique "xen,shm-id",
-+     * we allocate a new member "shm_memnode" for it in shm_memdata.
-+     */
-+    shm_memnode = find_shm_memnode(shm_id);
-+    BUG_ON(!shm_memnode);
-+    if ( !(*paddr_assigned) )
-+    {
-+        device_tree_get_reg(&cells, addr_cells, size_cells, gbase, &psize);
-+        /* Whether it is a new shm node? */
-+        if ( shm_memnode->meminfo.tot_size == 0 )
-+            goto out_early1;
-+        else
-+            goto out_early2;
-+    }
-+    else
-+    {
-+        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, gbase);
-+        psize = dt_read_number(cells, size_cells);
-+
-+        /* Whether it is a new shm node? */
-+        if ( shm_memnode->meminfo.nr_banks != 0 )
-+            goto out_early2;
-+    }
-+
-+    /*
-+     * The static shared memory node #dt_node is banked with a
-+     * statically configured host memory bank.
-+     */
-+    shm_memnode->meminfo.bank[0].start = pbase;
-+    shm_memnode->meminfo.bank[0].size = psize;
-+    shm_memnode->meminfo.nr_banks = 1;
-+
-+    if ( !IS_ALIGNED(pbase, PAGE_SIZE) )
-+    {
-+        printk("%pd: physical address 0x%"PRIpaddr" is not suitably aligned.\n",
-+               d, pbase);
-+        return NULL;
-+    }
-+
-+    for ( i = 0; i < PFN_DOWN(psize); i++ )
-+        if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
-+        {
-+            printk("%pd: invalid physical MFN 0x%"PRI_mfn"\n for static shared memory node\n",
-+                   d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
-+            return NULL;
-+        }
-+
-+ out_early1:
-+    if ( !IS_ALIGNED(psize, PAGE_SIZE) )
-+    {
-+        printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
-+               d, psize);
-+        return NULL;
-+    }
-+    shm_memnode->meminfo.tot_size = psize;
-+
-+ out_early2:
-+    if ( !IS_ALIGNED(*gbase, PAGE_SIZE) )
-+    {
-+        printk("%pd: guest address 0x%"PRIpaddr" is not suitably aligned.\n",
-+               d, *gbase);
-+        return NULL;
-+    }
-+
-+    return shm_memnode;
-+}
-+
- int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-                        const struct dt_device_node *node)
+ #ifdef CONFIG_DOM0LESS_BOOT
+-bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
+-                                 gfn_t sgfn, paddr_t tot_size)
++static bool __init allocate_domheap_memory(struct domain *d,
++                                           paddr_t tot_size,
++                                           void *mem, enum meminfo_type type)
  {
-@@ -179,51 +346,17 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+-    int res;
+     struct page_info *pg;
+-    struct membank *bank;
+     unsigned int max_order = ~0;
+-
+-    /*
+-     * allocate_bank_memory can be called with a tot_size of zero for
+-     * the second memory bank. It is not an error and we can safely
+-     * avoid creating a zero-size memory bank.
+-     */
+-    if ( tot_size == 0 )
+-        return true;
+-
+-    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
+-    bank->start = gfn_to_gaddr(sgfn);
+-    bank->size = tot_size;
++    unsigned int *nr_banks = GET_NR_BANKS(mem, type);
  
-     dt_for_each_child_node(node, shm_node)
+     while ( tot_size > 0 )
      {
--        const struct dt_property *prop;
--        const __be32 *cells;
--        uint32_t addr_cells, size_cells;
-         paddr_t gbase, pbase, psize;
-         int ret = 0;
--        unsigned int i;
-         const char *role_str;
-         const char *shm_id;
-         bool owner_dom_io = true;
-+        bool paddr_assigned = true;
-+        struct shm_memnode *shm_memnode;
+         unsigned int order = get_allocation_size(tot_size);
++        struct membank *membank;
  
-         if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
+         order = min(max_order, order);
+-
+         pg = alloc_domheap_pages(d, order, 0);
+         if ( !pg )
+         {
+@@ -460,15 +470,78 @@ bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
              continue;
+         }
  
--        /*
--         * xen,shared-mem = <pbase, gbase, size>;
--         * TODO: pbase is optional.
--         */
--        addr_cells = dt_n_addr_cells(shm_node);
--        size_cells = dt_n_size_cells(shm_node);
--        prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
--        BUG_ON(!prop);
--        cells = (const __be32 *)prop->value;
--        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, &gbase);
--        psize = dt_read_paddr(cells, size_cells);
--        if ( !IS_ALIGNED(pbase, PAGE_SIZE) || !IS_ALIGNED(gbase, PAGE_SIZE) )
+-        res = guest_physmap_add_page(d, sgfn, page_to_mfn(pg), order);
+-        if ( res )
 -        {
--            printk("%pd: physical address 0x%"PRIpaddr", or guest address 0x%"PRIpaddr" is not suitably aligned.\n",
--                   d, pbase, gbase);
--            return -EINVAL;
+-            dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
++        if ( *nr_banks == MAX_MEM_BANKS(type) )
+             return false;
 -        }
--        if ( !IS_ALIGNED(psize, PAGE_SIZE) )
--        {
--            printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
--                   d, psize);
--            return -EINVAL;
--        }
--
--        for ( i = 0; i < PFN_DOWN(psize); i++ )
--            if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
--            {
--                printk("%pd: invalid physical address 0x%"PRI_mfn"\n",
--                       d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
--                return -EINVAL;
--            }
--
-         /*
-          * "role" property is optional and if it is defined explicitly,
-          * then the owner domain is not the default "dom_io" domain.
-@@ -238,6 +371,13 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-         }
-         BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
- 
-+        shm_memnode = parse_shm_property(d, shm_node, &paddr_assigned, &gbase,
-+                                         shm_id);
-+        if ( !shm_memnode )
-+            return -EINVAL;
-+        pbase = shm_memnode->meminfo.bank[0].start;
-+        psize = shm_memnode->meminfo.bank[0].size;
 +
-         /*
-          * DOMID_IO is a fake domain and is not described in the Device-Tree.
-          * Therefore when the owner of the shared region is DOMID_IO, we will
-@@ -349,10 +489,10 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
- {
-     const struct fdt_property *prop, *prop_id, *prop_role;
-     const __be32 *cell;
--    paddr_t paddr, gaddr, size, end;
-+    paddr_t paddr, gaddr, size;
-     unsigned int i;
-     int len;
--    bool owner = false;
-+    bool owner = false, paddr_assigned = true;
-     const char *shm_id;
++        membank = GET_MEMBANK(mem, type, *nr_banks);
++        membank->start = mfn_to_maddr(page_to_mfn(pg));
++        membank->size = 1ULL << (PAGE_SHIFT + order);
++        (*nr_banks)++;
++        tot_size -= membank->size;
++    }
++
++    return true;
++}
++
++static int __init guest_physmap_memory(struct domain *d,
++                                       void *mem, enum meminfo_type type,
++                                       gfn_t sgfn)
++{
++    unsigned int i;
++    int res;
++    unsigned int *nr_banks = GET_NR_BANKS(mem, type);
++
++    for ( i = 0; i < *nr_banks; i++ )
++    {
++        struct membank *membank = GET_MEMBANK(mem, type, i);
++        paddr_t start = membank->start;
++        paddr_t size = membank->size;
++        unsigned int order = get_order_from_bytes(size);
++
++        /* Size must be power of two */
++        BUG_ON(!size || (size & (size - 1)));
++        res = guest_physmap_add_page(d, sgfn, maddr_to_mfn(start), order);
++        if ( res )
++            return res;
  
-     if ( address_cells < 1 || size_cells < 1 )
-@@ -404,96 +544,140 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
- 
-     if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
-     {
-+        /* paddr is not provided in "xen,shared-mem" */
-         if ( len == dt_cells_to_size(size_cells + address_cells) )
--            printk("fdt: host physical address must be chosen by users at the moment.\n");
--
--        printk("fdt: invalid `xen,shared-mem` property.\n");
--        return -EINVAL;
-+            paddr_assigned = false;
-+        else
-+        {
-+            printk("fdt: invalid `xen,shared-mem` property.\n");
-+            return -EINVAL;
-+        }
+         sgfn = gfn_add(sgfn, 1UL << order);
+-        tot_size -= (1ULL << (PAGE_SHIFT + order));
++    }
++
++    return 0;
++}
++
++bool __init allocate_bank_memory(struct domain *d,
++                                 struct kernel_info *kinfo,
++                                 gfn_t sgfn,
++                                 paddr_t total_size)
++{
++    struct membank *bank;
++    struct meminfo host = { 0 };
++
++    /*
++     * allocate_bank_memory can be called with a total_size of zero for
++     * the second memory bank. It is not an error and we can safely
++     * avoid creating a zero-size memory bank.
++     */
++    if ( total_size == 0 )
++        return true;
++
++    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
++    bank->start = gfn_to_gaddr(sgfn);
++    bank->size = total_size;
++
++    if ( !allocate_domheap_memory(d, total_size, (void *)&host, NORMAL_MEMINFO) )
++    {
++        printk(XENLOG_ERR "Failed to allocate (%"PRIpaddr"MB) pages to %pd\n",
++               total_size >> 20, d);
++        return false;
++    }
++
++    if ( guest_physmap_memory(d, (void *)&host, NORMAL_MEMINFO, sgfn) )
++    {
++        printk(XENLOG_ERR "Failed to map (%"PRIpaddr"MB) pages to %pd\n",
++               total_size >> 20, d);
++        return false;
      }
  
-     cell = (const __be32 *)prop->data;
--    device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
--    size = dt_next_cell(size_cells, &cell);
--
--    if ( !size )
-+    if ( !paddr_assigned )
-+        device_tree_get_reg(&cell, address_cells, size_cells, &gaddr, &size);
-+    else
-     {
--        printk("fdt: the size for static shared memory region can not be zero\n");
--        return -EINVAL;
--    }
-+        paddr_t end;
-+
-+        device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
-+        size = dt_next_cell(size_cells, &cell);
-+
-+        if ( !size )
-+        {
-+            printk("fdt: the size for static shared memory region can not be zero\n");
-+            return -EINVAL;
-+        }
-+
-+        end = paddr + size;
-+        if ( end <= paddr )
-+        {
-+            printk("fdt: static shared memory region %s overflow\n", shm_id);
-+            return -EINVAL;
-+        }
+     kinfo->mem.nr_banks++;
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 3a2b35ea46..bc5f08be97 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -57,6 +57,39 @@ struct meminfo {
+     struct membank bank[NR_MEM_BANKS];
+ };
  
--    end = paddr + size;
--    if ( end <= paddr )
--    {
--        printk("fdt: static shared memory region %s overflow\n", shm_id);
--        return -EINVAL;
-     }
- 
-     for ( i = 0; i < bootinfo.shminfo.nr_nodes; i++ )
-     {
--        paddr_t bank_start = bootinfo.shminfo.shm_nodes[i].membank->start;
--        paddr_t bank_size = bootinfo.shminfo.shm_nodes[i].membank->size;
-         const char *bank_id = bootinfo.shminfo.shm_nodes[i].node.shm_id;
-+        bool is_shmid_equal = strncmp(shm_id, bank_id, MAX_SHM_ID_LENGTH) == 0 ?
-+                              true : false;
- 
-         /*
-          * Meet the following check:
-+         * when host address is provided:
-          * 1) The shm ID matches and the region exactly match
-          * 2) The shm ID doesn't match and the region doesn't overlap
-          * with an existing one
-+         * when host address is not provided:
-+         * 1) The shm ID matches and the region size exactly match
-+         */
-+        /*
-+         * For a static shared memory node, it is either banked with
-+         * a statically configured host memory bank(membank != NULL), or
-+         * arbitrary host memory which will later be allocated by Xen(
-+         * tot_size != 0).
-          */
--        if ( paddr == bank_start && size == bank_size )
-+        if ( bootinfo.shminfo.shm_nodes[i].membank != NULL )
-         {
--            if ( strncmp(shm_id, bank_id, MAX_SHM_ID_LENGTH) == 0 )
-+            paddr_t bank_start = bootinfo.shminfo.shm_nodes[i].membank->start;
-+            paddr_t bank_size = bootinfo.shminfo.shm_nodes[i].membank->size;
-+            bool is_same_region = (paddr == bank_start) && (size == bank_size) ?
-+                                  true : false;
++enum meminfo_type {
++    NORMAL_MEMINFO,
++    MAX_MEMINFO_TYPE,
++};
 +
-+            if ( is_same_region && is_shmid_equal )
-                 break;
--            else
-+            else if ( is_same_region || is_shmid_equal )
-             {
-                 printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
-                        shm_id);
-                 return -EINVAL;
-             }
-         }
--        else if ( strcmp(shm_id, mem->bank[i].shm_id) != 0 )
--            continue;
-         else
-         {
--            printk("fdt: different shared memory region could not share the same shm ID %s\n",
--                   shm_id);
--            return -EINVAL;
-+            paddr_t tot_size = bootinfo.shminfo.shm_nodes[i].tot_size;
-+            bool is_same_region = tot_size == size ? true : false;
++/*
++ * Define a set of MACRO helpers to access meminfo_type, like "struct meminfo"
++ * as type of NORMAL_MEMINFO, etc.
++ * This kind of structure must have a array of "struct membank",
++ * a member called nr_banks indicating the current array size, and also a field
++ * indicating the maximum array size.
++ */
++typedef void (*retrieve_fn)(void *, unsigned int *, struct membank **,
++                            unsigned int **);
 +
-+            if ( !paddr_assigned && is_same_region && is_shmid_equal )
-+                break;
-+            else if ( is_shmid_equal )
-+            {
-+                if ( paddr_assigned )
-+                {
-+                    printk("fdt: two different types of static shared memory region could not share the same shm-id %s\n",
-+                           shm_id);
-+                    return -EINVAL;
-+                }
++#define MAX_MEM_BANKS(type) ({                              \
++    unsigned int _max_mem_banks;                            \
++    retrievers[type](NULL, &_max_mem_banks, NULL, NULL);    \
++    _max_mem_banks;                                         \
++})
 +
-+                printk("fdt: when host address is not provided, if xen,shm-id matches, size must stay the same too(%"PRIpaddr" -> %"PRIpaddr")\n",
-+                       size, tot_size);
-+                return -EINVAL;
-+            }
-         }
-     }
- 
-     if ( i == bootinfo.shminfo.nr_nodes )
-     {
--        struct meminfo *mem = &bootinfo.reserved_mem;
--
--        if ( (i < NR_MEM_BANKS) && (mem->nr_banks < NR_MEM_BANKS) )
-+        if ( i < NR_MEM_BANKS )
-         {
--            struct membank *membank = &mem->bank[mem->nr_banks];
-             struct shm_node *shm_node = &bootinfo.shminfo.shm_nodes[i].node;
--
--            if ( check_reserved_regions_overlap(paddr, size) )
--                return -EINVAL;
--
--            /* Static shared memory shall be reserved from any other use. */
--            membank->start = paddr;
--            membank->size = size;
--            membank->type = MEMBANK_STATIC_DOMAIN;
--            mem->nr_banks++;
-+            struct meminfo *mem = &bootinfo.reserved_mem;
- 
-             /* Record static shared memory node info in bootinfo.shminfo */
-             safe_strcpy(shm_node->shm_id, shm_id);
--            /*
--             * Reserved memory bank is recorded together to assist
--             * doing shm node verification.
--             */
--            bootinfo.shminfo.shm_nodes[i].membank = membank;
-             bootinfo.shminfo.nr_nodes++;
++#define GET_MEMBANK(mem, type, index) ({                    \
++    struct membank *_bank;                                  \
++    retrievers[type]((void *)(mem), NULL, &_bank, NULL);    \
++    &(_bank[index]);                                        \
++})
 +
-+            if ( !paddr_assigned )
-+                bootinfo.shminfo.shm_nodes[i].tot_size = size;
-+            else if ( mem->nr_banks < NR_MEM_BANKS )
-+            {
-+                struct membank *membank = &mem->bank[mem->nr_banks];
++#define GET_NR_BANKS(mem, type) ({                          \
++    unsigned int *_nr_banks;                                \
++    retrievers[type]((void *)mem, NULL, NULL, &_nr_banks);  \
++    _nr_banks;                                              \
++})
 +
-+                if ( check_reserved_regions_overlap(paddr, size) )
-+                    return -EINVAL;
-+
-+                /* Static shared memory shall be reserved from any other use. */
-+                membank->start = paddr;
-+                membank->size = size;
-+                membank->type = MEMBANK_STATIC_DOMAIN;
-+                mem->nr_banks++;
-+
-+                /*
-+                 * Reserved memory bank is recorded together to assist
-+                 * doing shm node verification.
-+                 */
-+                bootinfo.shminfo.shm_nodes[i].membank = membank;
-+            }
-+            else
-+                goto fail;
-         }
-         else
--        {
--            printk("Warning: Max number of supported memory regions reached.\n");
--            return -ENOSPC;
--        }
-+            goto fail;
-     }
-+
-     /*
-      * keep a count of the number of borrowers, which later may be used
-      * to calculate the reference count.
-@@ -502,6 +686,10 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-         bootinfo.shminfo.shm_nodes[i].node.nr_shm_borrowers++;
- 
-     return 0;
-+
-+ fail:
-+    printk("Warning: Max number of supported memory regions reached.\n");
-+    return -ENOSPC;
- }
- 
- int __init make_resv_memory_node(const struct domain *d, void *fdt,
+ /*
+  * The domU flag is set for kernels and ramdisks of "xen,domain" nodes.
+  * The purpose of the domU flag is to avoid getting confused in
 -- 
 2.25.1
 
