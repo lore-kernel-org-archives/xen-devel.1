@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02170C4167B
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 09:07:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.649010.1013263 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE0FC10F04
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 09:07:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.649019.1013293 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAnro-00040b-E7; Wed, 06 Dec 2023 09:06:52 +0000
+	id 1rAns0-0005cv-Ju; Wed, 06 Dec 2023 09:07:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 649010.1013263; Wed, 06 Dec 2023 09:06:52 +0000
+Received: by outflank-mailman (output) from mailman id 649019.1013293; Wed, 06 Dec 2023 09:07:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAnro-00040G-9F; Wed, 06 Dec 2023 09:06:52 +0000
-Received: by outflank-mailman (input) for mailman id 649010;
- Wed, 06 Dec 2023 09:06:51 +0000
+	id 1rAns0-0005ck-FY; Wed, 06 Dec 2023 09:07:04 +0000
+Received: by outflank-mailman (input) for mailman id 649019;
+ Wed, 06 Dec 2023 09:07:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=B4rn=HR=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1rAnrm-0002Yw-VM
- for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 09:06:50 +0000
+ id 1rAnry-0002Yw-Cj
+ for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 09:07:02 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id ca2f57a6-9416-11ee-98e5-6d05b1d4d9a1;
- Wed, 06 Dec 2023 10:06:50 +0100 (CET)
+ id d061339e-9416-11ee-98e5-6d05b1d4d9a1;
+ Wed, 06 Dec 2023 10:07:00 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 834FD139F;
- Wed,  6 Dec 2023 01:07:35 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E139D139F;
+ Wed,  6 Dec 2023 01:07:45 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 8B32A3F762;
- Wed,  6 Dec 2023 01:06:46 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E8F2C3F762;
+ Wed,  6 Dec 2023 01:06:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca2f57a6-9416-11ee-98e5-6d05b1d4d9a1
+X-Inumbo-ID: d061339e-9416-11ee-98e5-6d05b1d4d9a1
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org,
 	michal.orzel@amd.com
@@ -56,44 +56,41 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v5 04/11] xen/arm: introduce allocate_domheap_memory and guest_physmap_memory
-Date: Wed,  6 Dec 2023 17:06:16 +0800
-Message-Id: <20231206090623.1932275-5-Penny.Zheng@arm.com>
+Subject: [PATCH v5 07/11] xen/arm: remove shm holes for extended regions
+Date: Wed,  6 Dec 2023 17:06:19 +0800
+Message-Id: <20231206090623.1932275-8-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231206090623.1932275-1-Penny.Zheng@arm.com>
 References: <20231206090623.1932275-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We split the code of allocate_bank_memory into two parts,
-allocate_domheap_memory and guest_physmap_memory.
+Static shared memory acts as reserved memory in guest, so it shall be
+excluded from extended regions.
 
-One is about allocating guest RAM from heap, which could be re-used later for
-allocating static shared memory from heap when host address is not provided.
-The other is building up guest P2M mapping.
+Extended regions are taken care of under three different scenarios:
+normal DomU, direct-map domain with iommu on, and direct-map domain
+with iommu off.
 
-We also define a set of MACRO helpers to access common fields in data
-structure of "meminfo" type, e.g. "struct meminfo" is one of them, and
-later new "struct shm_meminfo" is also one of them.
-This kind of structures must have the following characteristics:
-- an array of "struct membank"
-- a member called "nr_banks" indicating current array size
-- a field indicating the maximum array size
-When introducing a new data structure, according callbacks with function type
-"retrieve_fn" shall be defined for using MACRO helpers.
-This commit defines callback "retrieve_meminfo" for data structure
-"struct meminfo".
+For normal DomU, we create a new function "remove_shm_holes_for_domU", to
+firstly transfer original outputs into the format of "struct rangeset",
+then use "remove_shm_from_rangeset" to remove static shm from them.
+
+For direct-map domain with iommu on, after we get guest shm info from "kinfo",
+we use "remove_shm_from_rangeset" to remove static shm.
+
+For direct-map domain with iommu off, as static shm has already been taken
+care of through reserved memory banks, we do nothing.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+
 ---
 v1 -> v2:
--  define a set of MACRO helpers to access common fields in data structure of
-"meminfo" type. "struct meminfo" is one of them, and according callback
-"retrieve_meminfo" is also introduced here.
-- typo of changing 1ULL to 1UL
+- new commit
 ---
-v2 -> v3
-- rebase and no changes
+v2 -> v3:
+- error out non-zero res before remove_shm_holes_for_domU
+- rebase
 ---
 v3 -> v4:
 rebase and no change
@@ -101,210 +98,212 @@ rebase and no change
 v4 -> v5:
 rebase and no change
 ---
- xen/arch/arm/domain_build.c      | 119 +++++++++++++++++++++++++------
- xen/arch/arm/include/asm/setup.h |  33 +++++++++
- 2 files changed, 129 insertions(+), 23 deletions(-)
+ xen/arch/arm/domain_build.c             | 19 +++++-
+ xen/arch/arm/include/asm/domain_build.h |  2 +
+ xen/arch/arm/include/asm/static-shmem.h | 17 +++++
+ xen/arch/arm/static-shmem.c             | 83 +++++++++++++++++++++++++
+ 4 files changed, 118 insertions(+), 3 deletions(-)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 64ae944431..a8bc78baa5 100644
+index c58996e3e9..e040f8a6d9 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -51,6 +51,28 @@ boolean_param("ext_regions", opt_ext_regions);
- static u64 __initdata dom0_mem;
- static bool __initdata dom0_mem_set;
- 
-+#ifdef CONFIG_DOM0LESS_BOOT
-+static void __init retrieve_meminfo(void *mem, unsigned int *max_mem_banks,
-+                                    struct membank **bank,
-+                                    unsigned int **nr_banks)
-+{
-+    struct meminfo *meminfo = (struct meminfo *)mem;
-+
-+    if ( max_mem_banks )
-+        *max_mem_banks = NR_MEM_BANKS;
-+
-+    if ( nr_banks )
-+        *nr_banks = &(meminfo->nr_banks);
-+
-+    if ( bank )
-+        *bank = meminfo->bank;
-+}
-+
-+retrieve_fn __initdata retrievers[MAX_MEMINFO_TYPE] = {
-+    [NORMAL_MEMINFO] = retrieve_meminfo,
-+};
-+#endif
-+
- static int __init parse_dom0_mem(const char *s)
- {
-     dom0_mem_set = true;
-@@ -415,32 +437,20 @@ static void __init allocate_memory_11(struct domain *d,
+@@ -887,8 +887,8 @@ int __init make_memory_node(const struct domain *d,
+     return res;
  }
  
- #ifdef CONFIG_DOM0LESS_BOOT
--bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
--                                 gfn_t sgfn, paddr_t tot_size)
-+static bool __init allocate_domheap_memory(struct domain *d,
-+                                           paddr_t tot_size,
-+                                           void *mem, enum meminfo_type type)
+-static int __init add_ext_regions(unsigned long s_gfn, unsigned long e_gfn,
+-                                  void *data)
++int __init add_ext_regions(unsigned long s_gfn, unsigned long e_gfn,
++                           void *data)
  {
--    int res;
-     struct page_info *pg;
--    struct membank *bank;
-     unsigned int max_order = ~0;
--
--    /*
--     * allocate_bank_memory can be called with a tot_size of zero for
--     * the second memory bank. It is not an error and we can safely
--     * avoid creating a zero-size memory bank.
--     */
--    if ( tot_size == 0 )
--        return true;
--
--    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
--    bank->start = gfn_to_gaddr(sgfn);
--    bank->size = tot_size;
-+    unsigned int *nr_banks = GET_NR_BANKS(mem, type);
+     struct meminfo *ext_regions = data;
+     paddr_t start, size;
+@@ -1062,6 +1062,8 @@ static int __init handle_pci_range(const struct dt_device_node *dev,
+  * - MMIO
+  * - Host RAM
+  * - PCI aperture
++ * - Static shared memory regions, which are described by special property
++ *   "xen,static-shm"
+  */
+ static int __init find_memory_holes(const struct kernel_info *kinfo,
+                                     struct meminfo *ext_regions)
+@@ -1078,6 +1080,14 @@ static int __init find_memory_holes(const struct kernel_info *kinfo,
+     if ( !mem_holes )
+         return -ENOMEM;
  
-     while ( tot_size > 0 )
-     {
-         unsigned int order = get_allocation_size(tot_size);
-+        struct membank *membank;
- 
-         order = min(max_order, order);
--
-         pg = alloc_domheap_pages(d, order, 0);
-         if ( !pg )
-         {
-@@ -460,15 +470,78 @@ bool __init allocate_bank_memory(struct domain *d, struct kernel_info *kinfo,
-             continue;
-         }
- 
--        res = guest_physmap_add_page(d, sgfn, page_to_mfn(pg), order);
--        if ( res )
--        {
--            dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
-+        if ( *nr_banks == MAX_MEM_BANKS(type) )
-             return false;
--        }
-+
-+        membank = GET_MEMBANK(mem, type, *nr_banks);
-+        membank->start = mfn_to_maddr(page_to_mfn(pg));
-+        membank->size = 1ULL << (PAGE_SHIFT + order);
-+        (*nr_banks)++;
-+        tot_size -= membank->size;
++    /* Remove static shared memory regions */
++    if ( kinfo->shminfo.nr_banks != 0 )
++    {
++        res = remove_shm_from_rangeset(kinfo, mem_holes);
++        if ( res )
++            goto out;
 +    }
 +
-+    return true;
+     /* Start with maximum possible addressable physical memory range */
+     start = 0;
+     end = (1ULL << p2m_ipa_bits) - 1;
+@@ -1180,7 +1190,10 @@ static int __init find_domU_holes(const struct kernel_info *kinfo,
+         res = 0;
+     }
+ 
+-    return res;
++    if ( res )
++        return res;
++
++    return remove_shm_holes_for_domU(kinfo, ext_regions);
+ }
+ 
+ int __init make_hypervisor_node(struct domain *d,
+diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
+index 1b75a4c6a8..0433e76e68 100644
+--- a/xen/arch/arm/include/asm/domain_build.h
++++ b/xen/arch/arm/include/asm/domain_build.h
+@@ -56,6 +56,8 @@ bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
+                              void *mem, enum meminfo_type type);
+ #endif
+ 
++int add_ext_regions(unsigned long s_gfn, unsigned long e_gfn, void *data);
++
+ #endif
+ 
+ /*
+diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
+index a67445cec8..d149985291 100644
+--- a/xen/arch/arm/include/asm/static-shmem.h
++++ b/xen/arch/arm/include/asm/static-shmem.h
+@@ -27,6 +27,12 @@ int process_shm_node(const void *fdt, int node, uint32_t address_cells,
+ void retrieve_shm_meminfo(void *mem, unsigned int *max_mem_banks,
+                           struct membank **bank,
+                           unsigned int **nr_banks);
++
++int remove_shm_from_rangeset(const struct kernel_info *kinfo,
++                             struct rangeset *rangeset);
++
++int remove_shm_holes_for_domU(const struct kernel_info *kinfo,
++                              struct meminfo *orig_ext);
+ #else /* !CONFIG_STATIC_SHM */
+ 
+ static inline int make_resv_memory_node(const struct domain *d, void *fdt,
+@@ -55,6 +61,17 @@ static inline int process_shm_node(const void *fdt, int node,
+     return -EINVAL;
+ }
+ 
++static inline int remove_shm_from_rangeset(const struct kernel_info *kinfo,
++                                           struct rangeset *rangeset)
++{
++    return 0;
 +}
 +
-+static int __init guest_physmap_memory(struct domain *d,
-+                                       void *mem, enum meminfo_type type,
-+                                       gfn_t sgfn)
++static inline int remove_shm_holes_for_domU(const struct kernel_info *kinfo,
++                                            struct meminfo *orig_ext)
++{
++    return 0;
++}
+ #endif /* CONFIG_STATIC_SHM */
+ 
+ #endif /* __ASM_STATIC_SHMEM_H_ */
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index b04e58172b..a06949abaf 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+ #include <xen/libfdt/libfdt.h>
++#include <xen/rangeset.h>
+ #include <xen/sched.h>
+ 
+ #include <asm/domain_build.h>
+@@ -818,6 +819,88 @@ int __init make_resv_memory_node(const struct domain *d, void *fdt,
+     return res;
+ }
+ 
++int __init remove_shm_from_rangeset(const struct kernel_info *kinfo,
++                                    struct rangeset *rangeset)
 +{
 +    unsigned int i;
-+    int res;
-+    unsigned int *nr_banks = GET_NR_BANKS(mem, type);
 +
-+    for ( i = 0; i < *nr_banks; i++ )
++    /* Remove static shared memory regions */
++    for ( i = 0; i < kinfo->shminfo.nr_banks; i++ )
 +    {
-+        struct membank *membank = GET_MEMBANK(mem, type, i);
-+        paddr_t start = membank->start;
-+        paddr_t size = membank->size;
-+        unsigned int order = get_order_from_bytes(size);
++        struct membank membank = kinfo->shminfo.bank[i].membank;
++        paddr_t start, end;
++        int res;
 +
-+        /* Size must be power of two */
-+        BUG_ON(!size || (size & (size - 1)));
-+        res = guest_physmap_add_page(d, sgfn, maddr_to_mfn(start), order);
++        start = membank.start;
++        end = membank.start + membank.size - 1;
++        res = rangeset_remove_range(rangeset, start, end);
 +        if ( res )
-+            return res;
- 
-         sgfn = gfn_add(sgfn, 1UL << order);
--        tot_size -= (1ULL << (PAGE_SHIFT + order));
++        {
++            printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
++                   start, end);
++            return -EINVAL;
++        }
 +    }
 +
 +    return 0;
 +}
 +
-+bool __init allocate_bank_memory(struct domain *d,
-+                                 struct kernel_info *kinfo,
-+                                 gfn_t sgfn,
-+                                 paddr_t total_size)
++int __init remove_shm_holes_for_domU(const struct kernel_info *kinfo,
++                                     struct meminfo *orig_ext)
 +{
-+    struct membank *bank;
-+    struct meminfo host = { 0 };
++    struct rangeset *guest_holes;
++    unsigned int i = 0, tail;
++    int res;
++    paddr_t start, end;
 +
-+    /*
-+     * allocate_bank_memory can be called with a total_size of zero for
-+     * the second memory bank. It is not an error and we can safely
-+     * avoid creating a zero-size memory bank.
-+     */
-+    if ( total_size == 0 )
-+        return true;
++    /* No static shared memory region. */
++    if ( kinfo->shminfo.nr_banks == 0 )
++        return 0;
 +
-+    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
-+    bank->start = gfn_to_gaddr(sgfn);
-+    bank->size = total_size;
++    dt_dprintk("Remove static shared memory holes for extended regions of DomU\n");
 +
-+    if ( !allocate_domheap_memory(d, total_size, (void *)&host, NORMAL_MEMINFO) )
++    guest_holes = rangeset_new(NULL, NULL, 0);
++    if ( !guest_holes )
++        return -ENOMEM;
++
++    for ( ; i < orig_ext->nr_banks; i++ )
 +    {
-+        printk(XENLOG_ERR "Failed to allocate (%"PRIpaddr"MB) pages to %pd\n",
-+               total_size >> 20, d);
-+        return false;
++        start = orig_ext->bank[i].start;
++        end = start + orig_ext->bank[i].size - 1;
++
++        res = rangeset_add_range(guest_holes, start, end);
++        if ( res )
++        {
++            printk(XENLOG_ERR "Failed to add: %#"PRIpaddr"->%#"PRIpaddr"\n",
++                   start, end);
++            goto out;
++        }
 +    }
 +
-+    if ( guest_physmap_memory(d, (void *)&host, NORMAL_MEMINFO, sgfn) )
-+    {
-+        printk(XENLOG_ERR "Failed to map (%"PRIpaddr"MB) pages to %pd\n",
-+               total_size >> 20, d);
-+        return false;
-     }
- 
-     kinfo->mem.nr_banks++;
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 3a2b35ea46..bc5f08be97 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -57,6 +57,39 @@ struct meminfo {
-     struct membank bank[NR_MEM_BANKS];
- };
- 
-+enum meminfo_type {
-+    NORMAL_MEMINFO,
-+    MAX_MEMINFO_TYPE,
-+};
++    /* Remove static shared memory regions */
++    res = remove_shm_from_rangeset(kinfo, guest_holes);
++    if ( res )
++        goto out;
 +
-+/*
-+ * Define a set of MACRO helpers to access meminfo_type, like "struct meminfo"
-+ * as type of NORMAL_MEMINFO, etc.
-+ * This kind of structure must have a array of "struct membank",
-+ * a member called nr_banks indicating the current array size, and also a field
-+ * indicating the maximum array size.
-+ */
-+typedef void (*retrieve_fn)(void *, unsigned int *, struct membank **,
-+                            unsigned int **);
++    tail = orig_ext->nr_banks - 1;
++    start = orig_ext->bank[0].start;
++    end = orig_ext->bank[tail].start + orig_ext->bank[tail].size - 1;
 +
-+#define MAX_MEM_BANKS(type) ({                              \
-+    unsigned int _max_mem_banks;                            \
-+    retrievers[type](NULL, &_max_mem_banks, NULL, NULL);    \
-+    _max_mem_banks;                                         \
-+})
++    /* Reset original extended regions to hold new value */
++    orig_ext->nr_banks = 0;
++    res = rangeset_report_ranges(guest_holes, start, end,
++                                 add_ext_regions, orig_ext);
++    if ( res )
++        orig_ext->nr_banks = 0;
++    else if ( !orig_ext->nr_banks )
++        res = -ENOENT;
 +
-+#define GET_MEMBANK(mem, type, index) ({                    \
-+    struct membank *_bank;                                  \
-+    retrievers[type]((void *)(mem), NULL, &_bank, NULL);    \
-+    &(_bank[index]);                                        \
-+})
++out:
++    rangeset_destroy(guest_holes);
 +
-+#define GET_NR_BANKS(mem, type) ({                          \
-+    unsigned int *_nr_banks;                                \
-+    retrievers[type]((void *)mem, NULL, NULL, &_nr_banks);  \
-+    _nr_banks;                                              \
-+})
++    return res;
++}
 +
  /*
-  * The domU flag is set for kernels and ramdisks of "xen,domain" nodes.
-  * The purpose of the domU flag is to avoid getting confused in
+  * Local variables:
+  * mode: C
 -- 
 2.25.1
 
