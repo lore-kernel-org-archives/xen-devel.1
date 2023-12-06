@@ -4,44 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52546C4167B
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 07:11:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.648918.1013003 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43DF4C4167B
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Dec 2023 07:15:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.648930.1013023 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAm3d-0006cj-Kj; Wed, 06 Dec 2023 07:10:57 +0000
+	id 1rAm7p-0008Ii-DP; Wed, 06 Dec 2023 07:15:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 648918.1013003; Wed, 06 Dec 2023 07:10:57 +0000
+Received: by outflank-mailman (output) from mailman id 648930.1013023; Wed, 06 Dec 2023 07:15:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rAm3d-0006bh-HE; Wed, 06 Dec 2023 07:10:57 +0000
-Received: by outflank-mailman (input) for mailman id 648918;
- Wed, 06 Dec 2023 07:10:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rAm7p-0008Ib-AB; Wed, 06 Dec 2023 07:15:17 +0000
+Received: by outflank-mailman (input) for mailman id 648930;
+ Wed, 06 Dec 2023 07:15:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lx6I=HR=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rAm3b-00060n-R6
- for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 07:10:55 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 97e5022c-9406-11ee-9b0f-b553b5be7939;
- Wed, 06 Dec 2023 08:10:53 +0100 (CET)
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 2A3BE21F77;
- Wed,  6 Dec 2023 07:10:53 +0000 (UTC)
-Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id E09BC13403;
- Wed,  6 Dec 2023 07:10:52 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap2.dmz-prg2.suse.org with ESMTPSA id InuNNXwecGW8DQAAn2gu4w
- (envelope-from <jgross@suse.com>); Wed, 06 Dec 2023 07:10:52 +0000
+ (envelope-from <SRS0=X1yw=HR=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rAm7n-0008IV-PV
+ for xen-devel@lists.xenproject.org; Wed, 06 Dec 2023 07:15:15 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3364bc6d-9407-11ee-98e5-6d05b1d4d9a1;
+ Wed, 06 Dec 2023 08:15:14 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40c032962c5so49577735e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Dec 2023 23:15:14 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ fk14-20020a05600c0cce00b0040b2a52ecaasm24961745wmb.2.2023.12.05.23.15.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Dec 2023 23:15:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,210 +47,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 97e5022c-9406-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1701846653; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=01yXAXnopllhAibwtpJp62r2FPmbb38ceKEA8gzDvaI=;
-	b=vNpsbNvUbt8YY4Pr4TPNJ/2yIlflCNjgdkAMtbF67MfQ3TvPMF+bS0K8sNdb+SCxryoBc3
-	SM5hur8pgBJmymheTmLYRM6GVMpDCGdCsRDVp6mY6sel5WGlH77yeze89eSjAnLBvOp5A+
-	NWQJ0Ahn6Wbq+pmRNOXCkv8rTZ5zbw0=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Arnd Bergmann <arnd@arndb.de>
-Subject: [PATCH v2 2/3] xen: make include/xen/unaligned.h usable on all architectures
-Date: Wed,  6 Dec 2023 08:10:38 +0100
-Message-Id: <20231206071039.24435-3-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231206071039.24435-1-jgross@suse.com>
-References: <20231206071039.24435-1-jgross@suse.com>
+X-Inumbo-ID: 3364bc6d-9407-11ee-98e5-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1701846914; x=1702451714; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=tsUrV2TsEnAnqqlFfFUF9DdBZ35EFK56xyRvjdTs+QI=;
+        b=PtJ1FT+SOPtdKAGV0g//fVdfvxyX7/2jkFtaclaSV0bFk5JftzIGCWcOxl8BcjWv3a
+         /md8fVOnp5fl/B7bIL4AicPQBNeBl+2IRR3CZ2Cv5oSU/SOEstAwiaqnzwJMoveDLfAj
+         oTRoesBHYLQQWgj5OjTXxGKFuzL10ovZ+I7CR87TL2SG6TTWbu04ZS7p1h0fcrUVyXJP
+         9bP9Mc9kwKyLHtjWgkVYvZCGfU0cacd1loNsXk8jwKA8O0c5kbzk9LFrQS+0kgnmpmbL
+         24kNo4pSYfxbBLzS8IX1qQcwGND+XopebNfksuutD1WBE3kQx0B+B9at4r2qDNp+vQ1+
+         RX5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701846914; x=1702451714;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=tsUrV2TsEnAnqqlFfFUF9DdBZ35EFK56xyRvjdTs+QI=;
+        b=SegW6I5Elt3s00Wf4g2d15G6fmTXn3BwKtO7nswBHKw+WPsirjeZBh+4P1bAnpkX8P
+         7C7SVBIzFqmfVn2m6ViqfUmnyMDh+LdZZSRmwDI1klRfx15fDy2Tazbg7s9J/fikmv0b
+         ZtyMR8pPBb8fhEgQFSysfgQmPHDojbiPOsL++cZwp2e/ilVJNBWK0rGVNp6RPCLdE85G
+         wuGxKNz1ZSo/gki4Hfivc8sk34tTeBpGGdj16J+qmEAopV22v0Dfscoct2zRQ930+Q0j
+         cKIEo4UcBzQoz2KfSf9sat7rU5Fw9cW7UJt00MEuw3Xui+AUxXuMQi6z8TjVSwCrq5O/
+         mW2Q==
+X-Gm-Message-State: AOJu0YzFjWGq5Z2Hh1Vodv5ZSHEYr2HFY36U0+dTDhxCkm+R41tiVX85
+	2nwf3DJSSSP9eEhC0mvvi4QQ
+X-Google-Smtp-Source: AGHT+IHb+qIvx/+xyz5tsnH86VbLDff88N0kU1Yqz8cU99a+xZAn+Gp3aM+Vy7NfmhwadlwmdutlvQ==
+X-Received: by 2002:a05:600c:46cb:b0:40c:83f:b6ce with SMTP id q11-20020a05600c46cb00b0040c083fb6cemr218178wmo.56.1701846913939;
+        Tue, 05 Dec 2023 23:15:13 -0800 (PST)
+Message-ID: <e83e7254-0c90-4912-ae63-ea7221a10071@suse.com>
+Date: Wed, 6 Dec 2023 08:15:13 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [BUG]i2c_hid_acpi broken with 4.17.2 on Framework Laptop 13 AMD
+Content-Language: en-US
+To: =?UTF-8?Q?S=C3=A9bastien_Chaumat?= <euidzero@gmail.com>
+Cc: xen-devel@lists.xenproject.org
+References: <CAKm-Umas=5=JzooRzPHxUDigKpFK3Ze7cQcG8eR5kWgn-d_7fQ@mail.gmail.com>
+ <7f34d258-97fa-43e8-8d67-ac9dc93213af@suse.com>
+ <CAKm-UmYGTLY0fTh4zvj-xrA3Tp+Oj+ES61pncG7ze0QnP4o=FQ@mail.gmail.com>
+ <52bd8702-cf7d-4f5b-883d-be6214ba31c0@suse.com>
+ <CAKm-UmadRsc7GEYDqMDTBaoozT5Bj3nwK+=uDs1LkTZVG8tgdQ@mail.gmail.com>
+ <CAKm-UmZnPtH_Fxou3OV0BbpP+tBpSe1z8Qet4Q5=zDD7UGZy6Q@mail.gmail.com>
+ <CAKm-UmbaHoXymP8CcBVBLSVG7T9zCE2fbFQB33SMnY8pwXOU1Q@mail.gmail.com>
+ <435d159f-96d5-49af-82ec-bce6961e3391@suse.com>
+ <CAKm-UmbEBOm525=f+OOL0P05tQVVQz9wegh7F8yhgV_=Z7rWug@mail.gmail.com>
+ <CAKm-UmYejm8CW-Enc_Y-aefcLPsRhQO8w2P-fNdu1zXMMjUAoA@mail.gmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <CAKm-UmYejm8CW-Enc_Y-aefcLPsRhQO8w2P-fNdu1zXMMjUAoA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [1.70 / 50.00];
-	 ARC_NA(0.00)[];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 FROM_HAS_DN(0.00)[];
-	 TO_DN_SOME(0.00)[];
-	 R_MISSING_CHARSET(2.50)[];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 MIME_GOOD(-0.10)[text/plain];
-	 BROKEN_CONTENT_TYPE(1.50)[];
-	 RCVD_COUNT_THREE(0.00)[3];
-	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 NEURAL_HAM_SHORT(-0.20)[-1.000];
-	 RCPT_COUNT_SEVEN(0.00)[9];
-	 MID_CONTAINS_FROM(1.00)[];
-	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
-	 FUZZY_BLOCKED(0.00)[rspamd.com];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
-Authentication-Results: smtp-out1.suse.de;
-	none
 
-Instead of defining get_unaligned() and put_unaligned() in a way that
-is only supporting architectures allowing unaligned accesses, use the
-same approach as the Linux kernel and let the compiler do the
-decision how to generate the code for probably unaligned data accesses.
+On 05.12.2023 21:31, Sébastien Chaumat wrote:
+>> [    2.464598] amd_gpio AMDI0030:00: failed to enable wake-up interrupt
+> 
+> Is it expected that IRQ7 goes from fasteoi (kernel 6.6.4 ) to
+> ioapic-edge and IRQ9 to ioapic-level ?
+> 
+> IR-IO-APIC    7-fasteoi   pinctrl_amd
+> IR-IO-APIC    9-fasteoi   acpi
+> 
+> to (xen 4.18.0)
+> 
+> xen-pirq     -ioapic-edge  pinctrl_amd
+> xen-pirq     -ioapic-level  acpi
+> 
+> ?
 
-Update include/xen/unaligned.h from include/asm-generic/unaligned.h of
-the Linux kernel.
+Aren't you comparing different things here? IR-* pretty clearly is on a
+native kernel (no Xen). It being "edge" looks suspicious, though.
 
-The generated code has been checked to be the same on x86.
+But again - I'm not primarily a kernel person, and hence you continuing
+to send replies To: me feels at least odd.
 
-Modify the Linux variant to not use underscore prefixed identifiers,
-avoid unneeded parentheses and drop the 24-bit accessors.
-
-Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 803f4e1eab7a
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- drop 24-bit accessors (Jan Beulich)
-- avoid underscore prefixed identifiers (Jan Beulich)
-- drop unneeded parentheses (Jan Beulich)
----
- xen/include/xen/unaligned.h | 77 ++++++++++++++++++++-----------------
- 1 file changed, 42 insertions(+), 35 deletions(-)
-
-diff --git a/xen/include/xen/unaligned.h b/xen/include/xen/unaligned.h
-index 0a2b16d05d..0ceb06a2bb 100644
---- a/xen/include/xen/unaligned.h
-+++ b/xen/include/xen/unaligned.h
-@@ -1,12 +1,4 @@
--/*
-- * This header can be used by architectures where unaligned accesses work
-- * without faulting, and at least reasonably efficiently.  Other architectures
-- * will need to have a custom asm/unaligned.h.
-- */
--#ifndef __ASM_UNALIGNED_H__
--#error "xen/unaligned.h should not be included directly - include asm/unaligned.h instead"
--#endif
--
-+/* SPDX-License-Identifier: GPL-2.0 */
- #ifndef __XEN_UNALIGNED_H__
- #define __XEN_UNALIGNED_H__
- 
-@@ -15,67 +7,82 @@
- #include <asm/byteorder.h>
- #endif
- 
--#define get_unaligned(p) (*(p))
--#define put_unaligned(val, p) (*(p) = (val))
-+/*
-+ * This is the most generic implementation of unaligned accesses
-+ * and should work almost anywhere.
-+ */
-+
-+#define get_unaligned_t_(type, ptr) ({					\
-+	const struct { type x; } __packed *ptr_ = (typeof(ptr_))(ptr);	\
-+	ptr_->x;							\
-+})
-+
-+#define put_unaligned_t_(type, val, ptr) do {				\
-+	struct { type x; } __packed *ptr_ = (typeof(ptr_))(ptr);	\
-+	ptr_->x = val;							\
-+} while (0)
-+
-+#define get_unaligned(ptr)	get_unaligned_t_(typeof(*(ptr)), ptr)
-+#define put_unaligned(val, ptr) put_unaligned_t_(typeof(*(ptr)), val, ptr)
- 
--static inline uint16_t get_unaligned_be16(const void *p)
-+static inline u16 get_unaligned_le16(const void *p)
- {
--	return be16_to_cpup(p);
-+	return le16_to_cpu(get_unaligned_t_(__le16, p));
- }
- 
--static inline void put_unaligned_be16(uint16_t val, void *p)
-+static inline u32 get_unaligned_le32(const void *p)
- {
--	*(__force __be16*)p = cpu_to_be16(val);
-+	return le32_to_cpu(get_unaligned_t_(__le32, p));
- }
- 
--static inline uint32_t get_unaligned_be32(const void *p)
-+static inline u64 get_unaligned_le64(const void *p)
- {
--	return be32_to_cpup(p);
-+	return le64_to_cpu(get_unaligned_t_(__le64, p));
- }
- 
--static inline void put_unaligned_be32(uint32_t val, void *p)
-+static inline void put_unaligned_le16(u16 val, void *p)
- {
--	*(__force __be32*)p = cpu_to_be32(val);
-+	put_unaligned_t_(__le16, cpu_to_le16(val), p);
- }
- 
--static inline uint64_t get_unaligned_be64(const void *p)
-+static inline void put_unaligned_le32(u32 val, void *p)
- {
--	return be64_to_cpup(p);
-+	put_unaligned_t_(__le32, cpu_to_le32(val), p);
- }
- 
--static inline void put_unaligned_be64(uint64_t val, void *p)
-+static inline void put_unaligned_le64(u64 val, void *p)
- {
--	*(__force __be64*)p = cpu_to_be64(val);
-+	put_unaligned_t_(__le64, cpu_to_le64(val), p);
- }
- 
--static inline uint16_t get_unaligned_le16(const void *p)
-+static inline u16 get_unaligned_be16(const void *p)
- {
--	return le16_to_cpup(p);
-+	return be16_to_cpu(get_unaligned_t_(__be16, p));
- }
- 
--static inline void put_unaligned_le16(uint16_t val, void *p)
-+static inline u32 get_unaligned_be32(const void *p)
- {
--	*(__force __le16*)p = cpu_to_le16(val);
-+	return be32_to_cpu(get_unaligned_t_(__be32, p));
- }
- 
--static inline uint32_t get_unaligned_le32(const void *p)
-+static inline u64 get_unaligned_be64(const void *p)
- {
--	return le32_to_cpup(p);
-+	return be64_to_cpu(get_unaligned_t_(__be64, p));
- }
- 
--static inline void put_unaligned_le32(uint32_t val, void *p)
-+static inline void put_unaligned_be16(u16 val, void *p)
- {
--	*(__force __le32*)p = cpu_to_le32(val);
-+	put_unaligned_t_(__be16, cpu_to_be16(val), p);
- }
- 
--static inline uint64_t get_unaligned_le64(const void *p)
-+static inline void put_unaligned_be32(u32 val, void *p)
- {
--	return le64_to_cpup(p);
-+	put_unaligned_t_(__be32, cpu_to_be32(val), p);
- }
- 
--static inline void put_unaligned_le64(uint64_t val, void *p)
-+static inline void put_unaligned_be64(u64 val, void *p)
- {
--	*(__force __le64*)p = cpu_to_le64(val);
-+	put_unaligned_t_(__be64, cpu_to_be64(val), p);
- }
- 
- #endif /* __XEN_UNALIGNED_H__ */
--- 
-2.35.3
-
+Jan
 
