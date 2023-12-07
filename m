@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11303C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A3C6C46CA3
 	for <xen-devel@archiver.kernel.org>; Thu,  7 Dec 2023 11:11:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.649779.1014685 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.649777.1014664 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rBCHu-0005mo-BB; Thu, 07 Dec 2023 11:11:26 +0000
+	id 1rBCHs-0005J3-NQ; Thu, 07 Dec 2023 11:11:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 649779.1014685; Thu, 07 Dec 2023 11:11:26 +0000
+Received: by outflank-mailman (output) from mailman id 649777.1014664; Thu, 07 Dec 2023 11:11:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rBCHu-0005mh-7x; Thu, 07 Dec 2023 11:11:26 +0000
-Received: by outflank-mailman (input) for mailman id 649779;
- Thu, 07 Dec 2023 11:11:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rBCHs-0005Iw-KX; Thu, 07 Dec 2023 11:11:24 +0000
+Received: by outflank-mailman (input) for mailman id 649777;
+ Thu, 07 Dec 2023 11:11:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fZpn=HS=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rBCHs-0005Iv-Ly
- for xen-devel@lists.xenproject.org; Thu, 07 Dec 2023 11:11:24 +0000
+ id 1rBCHr-0005Ik-6p
+ for xen-devel@lists.xenproject.org; Thu, 07 Dec 2023 11:11:23 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5a91a0ce-94f1-11ee-9b0f-b553b5be7939;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5a5609df-94f1-11ee-98e7-6d05b1d4d9a1;
  Thu, 07 Dec 2023 12:11:22 +0100 (CET)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id C54024EE073E;
+ by support.bugseng.com (Postfix) with ESMTPSA id 17E9F4EE073A;
  Thu,  7 Dec 2023 12:11:21 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a91a0ce-94f1-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 5a5609df-94f1-11ee-98e7-6d05b1d4d9a1
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -49,57 +49,46 @@ Cc: consulting@bugseng.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 1/3] xen/x86: add missing instances of asmlinkage attributes
-Date: Thu,  7 Dec 2023 12:11:16 +0100
-Message-Id: <34a6fbfadd5a3029552cd25933de5cd0e80984e2.1701947290.git.nicola.vetrini@bugseng.com>
+	Wei Liu <wl@xen.org>,
+	Paul Durrant <paul@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [XEN PATCH v2 0/3] address some violations of MISRA C Rule 8.4
+Date: Thu,  7 Dec 2023 12:11:15 +0100
+Message-Id: <cover.1701947290.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1701947290.git.nicola.vetrini@bugseng.com>
-References: <cover.1701947290.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-No functional change.
+MISRA C:2012 Rule 8.4 states:
+"A compatible declaration shall be visible when an object or function with
+external linkage is defined".
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-Changes in v2:
-- The attribute on boot_gdtr and l1_fixmap_x has been dropped, as detailed in
-  the cover letter.
----
- xen/arch/x86/efi/efi-boot.h | 5 +++--
- xen/arch/x86/smpboot.c      | 2 +-
- 2 files changed, 4 insertions(+), 3 deletions(-)
+Changes from v1:
+- Patch 1/7 has been committed;
+- Patch 2/7 has been dropped, as the fix is already part of [1];
+- Patch 3/7 drops the addition of asmlinkage on variables. Discussion on how to
+  handle the existing uses can be part of a separate patch;
+- Patch 4/7 is unchanged;
+- Patch 5/7 has been committed;
+- Patch 6/7 has been dropped
+- Patch 7/7 has been revised to have a declaration for first_valid_mfn, rather
+  than a deviation for the absence of a declaration
 
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index 86467da301e5..8ea64e31cdc2 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -808,8 +808,9 @@ static const char *__init get_option(const char *cmd, const char *opt)
-     return o;
- }
- 
--void __init efi_multiboot2(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable,
--                           const char *cmdline)
-+void asmlinkage __init efi_multiboot2(EFI_HANDLE ImageHandle,
-+                                      EFI_SYSTEM_TABLE *SystemTable,
-+                                      const char *cmdline)
- {
-     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop;
-     EFI_HANDLE gop_handle;
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 4c54ecbc91d7..8aa621533f3d 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -310,7 +310,7 @@ static void set_cpu_sibling_map(unsigned int cpu)
-     }
- }
- 
--void start_secondary(void *unused)
-+void asmlinkage start_secondary(void *unused)
- {
-     struct cpu_info *info = get_cpu_info();
- 
+[1] https://lore.kernel.org/xen-devel/27dd8f40-1ea6-1e7e-49c2-31936a17e9d7@suse.com/
+
+Nicola Vetrini (3):
+  xen/x86: add missing instances of asmlinkage attributes
+  x86/viridian: make build_assertions static
+  xen/mm: add declaration for first_valid_mfn
+
+ xen/arch/x86/efi/efi-boot.h       | 5 +++--
+ xen/arch/x86/hvm/viridian/synic.c | 2 +-
+ xen/arch/x86/smpboot.c            | 2 +-
+ xen/include/xen/mm.h              | 2 ++
+ 4 files changed, 7 insertions(+), 4 deletions(-)
+
 -- 
 2.34.1
 
