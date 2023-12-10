@@ -4,35 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87848C4167B
-	for <xen-devel@archiver.kernel.org>; Sun, 10 Dec 2023 14:58:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.651359.1016978 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C4FC4167B
+	for <xen-devel@archiver.kernel.org>; Sun, 10 Dec 2023 16:16:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.651371.1017004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCLG5-0003Fa-Ul; Sun, 10 Dec 2023 14:58:17 +0000
+	id 1rCMTE-0006P6-Rj; Sun, 10 Dec 2023 16:15:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 651359.1016978; Sun, 10 Dec 2023 14:58:17 +0000
+Received: by outflank-mailman (output) from mailman id 651371.1017004; Sun, 10 Dec 2023 16:15:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCLG5-0003FT-Re; Sun, 10 Dec 2023 14:58:17 +0000
-Received: by outflank-mailman (input) for mailman id 651359;
- Sun, 10 Dec 2023 14:58:16 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rCLG4-0003FJ-Kv; Sun, 10 Dec 2023 14:58:16 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rCLG4-0005MX-D0; Sun, 10 Dec 2023 14:58:16 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rCLG4-0002BG-1R; Sun, 10 Dec 2023 14:58:16 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1rCLG4-0007Ih-0r; Sun, 10 Dec 2023 14:58:16 +0000
+	id 1rCMTE-0006Oz-Nm; Sun, 10 Dec 2023 16:15:56 +0000
+Received: by outflank-mailman (input) for mailman id 651371;
+ Sun, 10 Dec 2023 16:15:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=lAJh=HV=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
+ id 1rCMTD-0005py-Mf
+ for xen-devel@lists.xenproject.org; Sun, 10 Dec 2023 16:15:55 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20603.outbound.protection.outlook.com
+ [2a01:111:f400:fe5b::603])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 64157715-9777-11ee-98e8-6d05b1d4d9a1;
+ Sun, 10 Dec 2023 17:15:55 +0100 (CET)
+Received: from CY5PR17CA0058.namprd17.prod.outlook.com (2603:10b6:930:12::20)
+ by CH2PR12MB4216.namprd12.prod.outlook.com (2603:10b6:610:a8::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32; Sun, 10 Dec
+ 2023 16:15:45 +0000
+Received: from CY4PEPF0000E9D3.namprd03.prod.outlook.com
+ (2603:10b6:930:12:cafe::55) by CY5PR17CA0058.outlook.office365.com
+ (2603:10b6:930:12::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32 via Frontend
+ Transport; Sun, 10 Dec 2023 16:15:44 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D3.mail.protection.outlook.com (10.167.241.146) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7091.18 via Frontend Transport; Sun, 10 Dec 2023 16:15:44 +0000
+Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Sun, 10 Dec
+ 2023 10:15:38 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,143 +58,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=c8SX8OluQ2UavL+tvTWX4/5Uxs0AotqI6KFyIyHvGVM=; b=gPia+uRGMyO1eh+NrndpuFlpcR
-	CrDqJKzPcSMsvCPCj8kxgWdSt+lxfH/5RBnZOvhHFS51Zqqh6huyg54hH/cYN+JSmWOFEhHFGX6u6
-	eOr4bw/32aXKBUNaqmqZr7kWi3BqzMKNAVe5ZiFKNAa+IhfNUhPdEyLdFb2Lls/nxe6U=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-184069-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 64157715-9777-11ee-98e8-6d05b1d4d9a1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MUWM0qutTMMeenq1MAyWuVl2Ac5ZfWwhPASMMvE2GSw+WDK+mVtuvTmI1FqK9Tv844TlloXulWGi0GM+Wbozm227Icaa8EarXa7EymGB59jS2uQRkhFMlYEYy2EznTURuH5mhoPv4KHuQay8Sz74nQrDaXltiUlUSsEkPfF4I0cywXVw8L8idCCnwVyKbua+Z7amVSSU2n4nmdcivo31jSW+r/VETyi8lv9aY0EfrS4IWK49UBv6gEdEtbM9myavz7Zgp4tDnWpWUHdC1ZMZBlvOmryqyvdTsCRIbip37uqBEBaGlgljPgJ17eMvRGwj4EVBWxhIf62gr8XUjx91pg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=e0cVJClnKI0t+S5tf/NWGenaSQY7dTKBr3BxoBA+0yg=;
+ b=UGztRtYOB+Q+UbXi1c1mBnPetxV6zNQBSEpx14ozt2mYiVEcHsNm6kXEgpYnoHP1ir1uB5FzMd6/H0ZdmhvPxt+3qPfPv2/8FdkMz+ihTc3E52daGSxTF2SePhEO+64i0Of0/QNKwNpBq3tKrf/UwDOFjfXA7yLg/zFcxiQ2VpKNvxKgK2QtXLLEqMhCSTEQ5syHHAvrEFSiY2S/C2LOeaQYIUd9iFmoFSZUzC5Dva1Q6hr/lTTr+4OC3jD5pRz/K78VhZknx2FYp72nKXpoPBvaiAt97UkMBNPQQoeBaJUPNsz7tQyVqo3toqmy4hv2EKHOkLdhdVQejx9ek9AxuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=e0cVJClnKI0t+S5tf/NWGenaSQY7dTKBr3BxoBA+0yg=;
+ b=WugWokQlCzKNdd4LZfCYgc+CgdEVr30USTES9WYlFrNv0avtgUNI3BLKYEstMgOs8j3ZJi8rZetjo4RCoYmNy6/stV0D3ymRkhGwI93bHS84nrvy2Y9O6df739q6UtYQT82XKys/IfhlBDvPwcLMSqji9theFdFLwSeYF3IIIe4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Jiqian Chen <Jiqian.Chen@amd.com>
+To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Oleksandr Tyshchenko
+	<oleksandr_tyshchenko@epam.com>, "Rafael J . Wysocki" <rafael@kernel.org>,
+	Len Brown <lenb@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, "Thomas
+ Gleixner" <tglx@linutronix.de>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+CC: <linux-kernel@vger.kernel.org>, <linux-pci@vger.kernel.org>,
+	<linux-acpi@vger.kernel.org>, <xen-devel@lists.xenproject.org>, Alex Deucher
+	<Alexander.Deucher@amd.com>, Christian Koenig <Christian.Koenig@amd.com>,
+	Stewart Hildebrand <Stewart.Hildebrand@amd.com>, Xenia Ragiadakou
+	<xenia.ragiadakou@amd.com>, Honglei Huang <Honglei1.Huang@amd.com>, "Julia
+ Zhang" <Julia.Zhang@amd.com>, Huang Rui <Ray.Huang@amd.com>, Jiqian Chen
+	<Jiqian.Chen@amd.com>, Huang Rui <ray.huang@amd.com>
+Subject: [RFC KERNEL PATCH v3 1/3] xen/pci: Add xen_reset_device_state function
+Date: Mon, 11 Dec 2023 00:15:17 +0800
+Message-ID: <20231210161519.1550860-2-Jiqian.Chen@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231210161519.1550860-1-Jiqian.Chen@amd.com>
+References: <20231210161519.1550860-1-Jiqian.Chen@amd.com>
 MIME-Version: 1.0
-Subject: [libvirt test] 184069: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    libvirt=1a2f33cb593e6bf4913d97143bf76d5e7f866912
-X-Osstest-Versions-That:
-    libvirt=06e344f762bb2a31bfbdecbf0da9736373c19cce
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 10 Dec 2023 14:58:16 +0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D3:EE_|CH2PR12MB4216:EE_
+X-MS-Office365-Filtering-Correlation-Id: c1ff42dc-c1c3-4b41-b08a-08dbf99b42f3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	sjxsHOhfjm4BdqjLcc6/A0HrcK0KDCJsgTUEjobA6Pvj1fuXPvL4dSftfmoeOMf2UhVA6hfZyw9uVwKZj4Vw2uOm0oaA5K+HCXjGTXIu4M2kX/mcvCF7Aq4B64EVGrGo3jcuEAAL8l2rbWzms14he+qH1D8ORQ0ZwCE+WpCEUxUxuMeMmn8iMd67jyx3k58xXMe7PDrm4rtnhfeRh+CmY7A2crE03Z8EsjCmmWqouYzyO8VxsJnR9RtQg6Ht2RKyOrU9pwyhGvkTKLy4X77UV6U4XGSk56m+ueiIl2kgtAscsusRP3O4emgXv9jsPmNuXNRnQR0Yr1Lg5pAdx/rmGy/sXFN8NAISB4d4fbReLDTLgXTo9R1tBTfz8EhcYdbegFcDV+7b8gAJ0wTZq9ENjRsWtllmkvMBl2QT0bgD0o9dmvjNT6B5SBMw85ldmFL4BNNQ8nNdCjswyvzo25JHaT19C4Z3xZOF8WAedafYzqZ7kiTPY296Gw6d56jpepby+mjgyas/uRvFE0kxLQ+d25jMxJ39zjkf6T/ezvjE0ksXT70NrcYSC2x637hrYThr7db489RheqQ9U2W8ckGKJSOYvKD6nSl8+vVZ9ZZ6lOqkKT0wGU8HMxAjC0beus8YD9Bj/kY8NaDokaXSK+hQG3bPmnkkysOMc59R6woEcbrM7VCxCPAmo1nSBlq+ZpAGNAotujG/dujiql/ieHqAGEXiFEMT2cRKo35gcuC58EykX7QHDXV1XPSUIsprn5KkyerRYfNecvW6Vc0Bhw4YNg==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(39860400002)(376002)(396003)(346002)(230922051799003)(451199024)(1800799012)(186009)(82310400011)(64100799003)(46966006)(36840700001)(40470700004)(41300700001)(5660300002)(7416002)(2906002)(2616005)(1076003)(6666004)(7696005)(36756003)(478600001)(36860700001)(47076005)(81166007)(82740400003)(356005)(426003)(83380400001)(336012)(40480700001)(26005)(16526019)(8936002)(40460700003)(8676002)(4326008)(86362001)(54906003)(110136005)(316002)(70206006)(70586007)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2023 16:15:44.0477
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c1ff42dc-c1c3-4b41-b08a-08dbf99b42f3
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000E9D3.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4216
 
-flight 184069 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/184069/
+When device on dom0 side has been reset, the vpci on Xen side
+won't get notification, so that the cached state in vpci is
+all out of date with the real device state.
+To solve that problem, add a new function to clear all vpci
+device state when device is reset on dom0 side.
 
-Failures :-/ but no regressions.
+And call that function in pcistub_init_device. Because when
+using "pci-assignable-add" to assign a passthrough device in
+Xen, it will reset passthrough device and the vpci state will
+out of date, and then device will fail to restore bar state.
 
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 184033
- test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 184033
- test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 184033
- test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+Co-developed-by: Huang Rui <ray.huang@amd.com>
+Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+---
+ drivers/xen/pci.c                  | 12 ++++++++++++
+ drivers/xen/xen-pciback/pci_stub.c |  4 ++++
+ include/xen/interface/physdev.h    |  8 ++++++++
+ include/xen/pci.h                  |  6 ++++++
+ 4 files changed, 30 insertions(+)
 
-version targeted for testing:
- libvirt              1a2f33cb593e6bf4913d97143bf76d5e7f866912
-baseline version:
- libvirt              06e344f762bb2a31bfbdecbf0da9736373c19cce
+diff --git a/drivers/xen/pci.c b/drivers/xen/pci.c
+index 72d4e3f193af..e9b30bc09139 100644
+--- a/drivers/xen/pci.c
++++ b/drivers/xen/pci.c
+@@ -177,6 +177,18 @@ static int xen_remove_device(struct device *dev)
+ 	return r;
+ }
+ 
++int xen_reset_device_state(const struct pci_dev *dev)
++{
++	struct physdev_pci_device device = {
++		.seg = pci_domain_nr(dev->bus),
++		.bus = dev->bus->number,
++		.devfn = dev->devfn
++	};
++
++	return HYPERVISOR_physdev_op(PHYSDEVOP_pci_device_state_reset, &device);
++}
++EXPORT_SYMBOL_GPL(xen_reset_device_state);
++
+ static int xen_pci_notifier(struct notifier_block *nb,
+ 			    unsigned long action, void *data)
+ {
+diff --git a/drivers/xen/xen-pciback/pci_stub.c b/drivers/xen/xen-pciback/pci_stub.c
+index e34b623e4b41..24f599eaec14 100644
+--- a/drivers/xen/xen-pciback/pci_stub.c
++++ b/drivers/xen/xen-pciback/pci_stub.c
+@@ -421,6 +421,10 @@ static int pcistub_init_device(struct pci_dev *dev)
+ 	else {
+ 		dev_dbg(&dev->dev, "resetting (FLR, D3, etc) the device\n");
+ 		__pci_reset_function_locked(dev);
++		if (!xen_pv_domain())
++			err = xen_reset_device_state(dev);
++		if (err)
++			goto config_release;
+ 		pci_restore_state(dev);
+ 	}
+ 	/* Now disable the device (this also ensures some private device
+diff --git a/include/xen/interface/physdev.h b/include/xen/interface/physdev.h
+index a237af867873..bed53afc4c52 100644
+--- a/include/xen/interface/physdev.h
++++ b/include/xen/interface/physdev.h
+@@ -256,6 +256,14 @@ struct physdev_pci_device_add {
+  */
+ #define PHYSDEVOP_prepare_msix          30
+ #define PHYSDEVOP_release_msix          31
++/*
++ * On PVH dom0, when device is reset, the vpci on Xen side
++ * won't get notification, so that the cached state in vpci is
++ * all out of date with the real device state. Use this to reset
++ * the vpci state of device.
++ */
++#define PHYSDEVOP_pci_device_state_reset     32
++
+ struct physdev_pci_device {
+     /* IN */
+     uint16_t seg;
+diff --git a/include/xen/pci.h b/include/xen/pci.h
+index b8337cf85fd1..b2e2e856efd6 100644
+--- a/include/xen/pci.h
++++ b/include/xen/pci.h
+@@ -4,10 +4,16 @@
+ #define __XEN_PCI_H__
+ 
+ #if defined(CONFIG_XEN_DOM0)
++int xen_reset_device_state(const struct pci_dev *dev);
+ int xen_find_device_domain_owner(struct pci_dev *dev);
+ int xen_register_device_domain_owner(struct pci_dev *dev, uint16_t domain);
+ int xen_unregister_device_domain_owner(struct pci_dev *dev);
+ #else
++static inline int xen_reset_device_state(const struct pci_dev *dev)
++{
++	return -1;
++}
++
+ static inline int xen_find_device_domain_owner(struct pci_dev *dev)
+ {
+ 	return -1;
+-- 
+2.34.1
 
-Last test of basis   184033  2023-12-08 04:20:31 Z    2 days
-Testing same since   184045  2023-12-09 04:25:29 Z    1 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Göran Uddeborg <goeran@uddeborg.se>
-  Jim Fehlig <jfehlig@suse.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-qcow2                               pass    
- test-arm64-arm64-libvirt-raw                                 pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-i386-libvirt-raw                                  pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/libvirt.git
-   06e344f762..1a2f33cb59  1a2f33cb593e6bf4913d97143bf76d5e7f866912 -> xen-tested-master
 
