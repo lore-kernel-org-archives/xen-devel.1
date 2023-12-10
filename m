@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB89C10F07
-	for <xen-devel@archiver.kernel.org>; Sun, 10 Dec 2023 16:16:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.651370.1016993 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BF5C4167B
+	for <xen-devel@archiver.kernel.org>; Sun, 10 Dec 2023 16:16:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.651378.1017023 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCMT6-00068x-Il; Sun, 10 Dec 2023 16:15:48 +0000
+	id 1rCMTj-0007PZ-G6; Sun, 10 Dec 2023 16:16:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 651370.1016993; Sun, 10 Dec 2023 16:15:48 +0000
+Received: by outflank-mailman (output) from mailman id 651378.1017023; Sun, 10 Dec 2023 16:16:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCMT6-00068q-GA; Sun, 10 Dec 2023 16:15:48 +0000
-Received: by outflank-mailman (input) for mailman id 651370;
- Sun, 10 Dec 2023 16:15:47 +0000
+	id 1rCMTj-0007PS-DY; Sun, 10 Dec 2023 16:16:27 +0000
+Received: by outflank-mailman (input) for mailman id 651378;
+ Sun, 10 Dec 2023 16:16:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lAJh=HV=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1rCMT4-0005py-Lt
- for xen-devel@lists.xenproject.org; Sun, 10 Dec 2023 16:15:47 +0000
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20601.outbound.protection.outlook.com
- [2a01:111:f403:2409::601])
+ id 1rCMTi-0005py-Uv
+ for xen-devel@lists.xenproject.org; Sun, 10 Dec 2023 16:16:26 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f400:7eae::600])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5dc5e79f-9777-11ee-98e8-6d05b1d4d9a1;
- Sun, 10 Dec 2023 17:15:43 +0100 (CET)
-Received: from CYZPR05CA0044.namprd05.prod.outlook.com (2603:10b6:930:a3::23)
- by BY5PR12MB4194.namprd12.prod.outlook.com (2603:10b6:a03:210::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32; Sun, 10 Dec
- 2023 16:15:39 +0000
-Received: from CY4PEPF0000E9D1.namprd03.prod.outlook.com
- (2603:10b6:930:a3:cafe::89) by CYZPR05CA0044.outlook.office365.com
- (2603:10b6:930:a3::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.21 via Frontend
- Transport; Sun, 10 Dec 2023 16:15:38 +0000
+ id 7766439d-9777-11ee-98e8-6d05b1d4d9a1;
+ Sun, 10 Dec 2023 17:16:26 +0100 (CET)
+Received: from CY5PR14CA0030.namprd14.prod.outlook.com (2603:10b6:930:2::24)
+ by LV8PR12MB9418.namprd12.prod.outlook.com (2603:10b6:408:202::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.31; Sun, 10 Dec
+ 2023 16:16:21 +0000
+Received: from CY4PEPF0000E9D3.namprd03.prod.outlook.com
+ (2603:10b6:930:2:cafe::a2) by CY5PR14CA0030.outlook.office365.com
+ (2603:10b6:930:2::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32 via Frontend
+ Transport; Sun, 10 Dec 2023 16:16:20 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000E9D1.mail.protection.outlook.com (10.167.241.144) with Microsoft
+ CY4PEPF0000E9D3.mail.protection.outlook.com (10.167.241.146) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7091.18 via Frontend Transport; Sun, 10 Dec 2023 16:15:38 +0000
+ 15.20.7091.18 via Frontend Transport; Sun, 10 Dec 2023 16:16:20 +0000
 Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Sun, 10 Dec
- 2023 10:15:32 -0600
+ 2023 10:15:49 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5dc5e79f-9777-11ee-98e8-6d05b1d4d9a1
+X-Inumbo-ID: 7766439d-9777-11ee-98e8-6d05b1d4d9a1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=m9jcXsMOJcheojG0j33JvAFnX7EPx9B7V+jF0QHUE/8QkYQhsna+sHd2EGwJ4Eb102vOI3ytz+1mjmaFQhs3MqLfRCM1b6kSJwoIJpmjscVw3slWRfG7THcTBP9gRGX6XkU/coC7kpjKOIeILu4WPi5RTJ7A1ovZwBJj/vgp4LQo/3AFYFSFtegLoo/DReTuJl6XXk8geacZcPnNJtEf+IN909RZSamjcJkN5Q3qThggdt305XLmGK6xoo4yQnirbCA4CqMvhS/E3uBuluNqkiIs0cQQpkOJSkmo2FqdOMSh3BsUwxZ0K96BhxOTFFmqln4nLep2AgO8UdCz6EKeQA==
+ b=QWsm5GfVnWDAEXOev3qPy+9Oo9vEhjgojvAJvK4SYd3C8XZeE5kkk5t/e8sLO/y9nv6rFRXEnGMbM8d86r0PsLX6PXK0En3bY7BKmaBr5hlqW68hZEWDUcLzE3ryONMMkK2jxYfUotH5wmzxIXtB1Bt4ViOyX3vAgGuzyK5jrewKQ+Mrhd5f2UMPwsq34R+vQp1Rl+6cJTpR1QCX3Dn3rqRrCH+0OQomnRcPyz+7EyjxELwadxIHV5vXn8teFvD8HDseLhqRp0O52UxtBkKPLkCThUlGx6fOEowBFxbr3oehXSfgy/7xmNQiyQ5o/V+Lkor7AFtf11aXdyONNX5FtA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jTOwWH8hZtBfEwSEXMP8D8XX9nppVNLQOx6Jg7+Cj6g=;
- b=MWCZywXwNZkafUgZHrLUTnNDwCyeektgyyckoS4zqz8tNzJ9xdhL08iCvOdph4GIy+9Jqh+ZJHgzh8vnEizdA5fl5Wi1areVrU6xB8F63zyDro97+PXajEb0GmqEfBMjn0ifl8F2s0JU+jyLg6MomDB/uSzDA76ju+REBFwBYwZWduy1Zv1Vgji4iqU4+9DdloYj+9dd7M4X7pRoLLviYfJavlcZRzVnw36EQM7waiiTggePeqTNRiWw0IV6orWZg/rje8WuOU9C7k/q7c9X4CKiunnGLa12reEtoIm7xrCYfu3kHp/tK9r568dmYIeYzBtv1CsUS6U1rBGmC7eULg==
+ bh=T1QqKGxeBunvmatxkoJCYLpxpTTAmq3J1BXHqGyX7K8=;
+ b=NaXUasULf+3697EMIzz8bb3avdG6J6+LdQheCObV0SzYj9e7F6umiXKM75067Qi5uM6gckQYhRlf2gd5dFef7pI3OHh3i5/Pt/i+oKLoO6JxnY/rS6CdD9jTE4V+ymyqg1IsW9xfLAeIEpw4I54p9c/6QyjKyZJko2H4ADmwjoHcsvY11RnknJxqTEAO/zQ0lCxCbnzmy+ju7p4XFrJlgpuEntv5x3w7ACm7D48nutFVx1oLcqHLFNClL8FwVFcazYUeEajBvFYjvQYaxagbD2wqK0mjbgrHXCfKls7IO2bO2HHlYGYoNSy2pnwjQAfelJ5RpV1fCBFO3Ck+Qr3V1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jTOwWH8hZtBfEwSEXMP8D8XX9nppVNLQOx6Jg7+Cj6g=;
- b=RRolg0YH/99AEkuOqWd8zhSXwRb0njLvSBx0dej8V8FvZvndKLVpqoda9YlV6ef9Jc/D2xkHjcJrzM+edl3Leu/UntJJN2jiaRWd4TgOJoVrgE/ZuxgooNuR3I/5AU85CkZLPGArYrsKIDOuN8aFzGX2eGEyWJ3k8/OmLlw9L8I=
+ bh=T1QqKGxeBunvmatxkoJCYLpxpTTAmq3J1BXHqGyX7K8=;
+ b=z/WxThTiyvBGs/YY350WLQvRTM/LIqdbOSDOZTItL6Md9SPEeRdNzoCcYxg8DEOQ2gJAxTEYWzSdz2bDtrTZa/Bf+RzvQiIVcutqYa7l/xvdd/d8UngQBMqKcs7gpUAKKuAGSvujvnZS1bzxr1NTH9h8UA920ycc9u+6KBMXqmI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -93,159 +93,110 @@ CC: <linux-kernel@vger.kernel.org>, <linux-pci@vger.kernel.org>,
 	Stewart Hildebrand <Stewart.Hildebrand@amd.com>, Xenia Ragiadakou
 	<xenia.ragiadakou@amd.com>, Honglei Huang <Honglei1.Huang@amd.com>, "Julia
  Zhang" <Julia.Zhang@amd.com>, Huang Rui <Ray.Huang@amd.com>, Jiqian Chen
-	<Jiqian.Chen@amd.com>
-Subject: [RFC KERNEL PATCH v3 0/3] Support device passthrough when dom0 is PVH on Xen
-Date: Mon, 11 Dec 2023 00:15:16 +0800
-Message-ID: <20231210161519.1550860-1-Jiqian.Chen@amd.com>
+	<Jiqian.Chen@amd.com>, Huang Rui <ray.huang@amd.com>
+Subject: [RFC KERNEL PATCH v3 3/3] PCI/sysfs: Add gsi sysfs for pci_dev
+Date: Mon, 11 Dec 2023 00:15:19 +0800
+Message-ID: <20231210161519.1550860-4-Jiqian.Chen@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231210161519.1550860-1-Jiqian.Chen@amd.com>
+References: <20231210161519.1550860-1-Jiqian.Chen@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [10.180.168.240]
 X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D1:EE_|BY5PR12MB4194:EE_
-X-MS-Office365-Filtering-Correlation-Id: 54fc3b0f-085f-4440-ea61-08dbf99b3fbf
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D3:EE_|LV8PR12MB9418:EE_
+X-MS-Office365-Filtering-Correlation-Id: cf2f23ec-1ba0-46b2-0375-08dbf99b58cd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	OnKY+i+xrHNIxEqLrC8OE39aFpZ4DACvtP7roWk6CNTUV3A0Y67EE3WnLXlDaTo0HOFx2r4legQA+8dc8MO8fVL+MdvDLKVPhmd/YsPeLKBuI0t2xid9/vQLI/NK7bUbjHkqLxXF/NzIwlrYaykpD/petx9hVn/uv+Cxad+GV2OsHzJgSKdjVyWfLFeBtnnKT1NYFatcNtTdCsjyVzWLPxta24mI81VkAf6jBC40H79rhcYELZy/WUd9ChaqvBmxIJv5su1gHpmLyhWzcF8KxKC5KUs0YtHQK0e4WFOxt1gwiZmqND8lp1pXN+5/4rRx7a5O6r5zsP0lZmQY+bsgzFvXGvEqtUnqzytzMgncToHhtdfXmIpVTJcrci/cADtYB5/avL5z846azjLnDiGl6khUIXs4GwBjYgLd8zDYdR6z+Lx/U1mlQDyRe12QrDLYZUKWIr90HF2tpAfe6CNP9/EZD8pZOhNxBnRPPlch9zn5ECpnSwbw1B944vP0oJE4T/mmTrZiRtyC46pUukHSg3gXUtigROEfUHq+7AoKSkqGnsDeubCzYzMxaZnpKN2g2HhipSDZm/oar2VP1JU8Ot5bUNHQc3tNSTf08rF0/q84dWN/f9QmNZDqidz1kC1e+zbZMeTNOtuiWDEeOscpJ2Up1zRR0fIwxCxVhSK8UucFtwbiEG+I0ueK5i+X1mMks/HJIOxlTuyeyoOko78zaveRFi1U7S8hNTnrW2Vk3DOa2/2+ITrKvki1Gk0Unlr7Wazh5rFaJP7nw6DZ9k5sHw==
+	7cfoB48RFii35Dpa6TXwr7UxlCzYNwfbaERgbGp/VozX/bPoP+7GQKkXxKnbh7P9c4S1i/ANYjSywduz00puSxzU78+U7XlSAKk5dTeMTgG6vGBlrZyMY8Zhz5AScY0Tn8eGITwcP9NUGEKY0dpoGCUhhQKc7oNWLYIxRHRRHOfh0eBJPe+Mr3jHEBhlH2BV9CQT7xlwgE2uKwv1DrHy12MjwsrGW3qvxpfnsZPlzvVJWMJF+I/tyoj5AO3kjb1QpO/8fJahQBfoRGED+kCF4IAQDdbao/hXKt5kX6DghX4l75ZISl0ev8OfnWE3b5mF6oRbd6O7qJZV8kx9FrsiQFK2Jyt1Kr3VlOH4CUBQimAHcDJOB/WHZ56GfF3fdNknTAxdQryfH1dTx9a/UF6VVps96GdlMl0tKIPT/1SPdWImr04VRcoS/5cmkg8nRAIm0M/glfUUIIoluQLd+u1niu4TO94nDm1GwU72vr3DbV2jd1m4zOV7qijvq3FJwN9U9EfL5CAd5XkvAQ4EB1S9aCNn+Y1ZqLmHKjFM7MBAyk2pJxkMmuZyx0XPWWQE4clL5ROBI4HDG8u9sey//vLNJfMglx0RdiSEDVWSMtZxQsr/gnkldZ6wEnHbDszaNz0gUsaWLH1VUu6DdOZp7u5j586pAZQbyUBpIFzo0Rs/zErO47zc/3NtUu3tLFhNtQ22mZ7yfRPuksJOpdU2C3mdiGuUCk1FQWqrA4Qq4CKnk+xfklxcmldrIiUQCEMbdekINtRHBLsjPXosJjj1c7GuHA==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(136003)(376002)(39850400004)(346002)(230922051799003)(451199024)(64100799003)(82310400011)(1800799012)(186009)(46966006)(36840700001)(36860700001)(5660300002)(1076003)(47076005)(336012)(26005)(2616005)(16526019)(36756003)(426003)(7416002)(70586007)(70206006)(54906003)(966005)(40480700001)(2906002)(83380400001)(82740400003)(81166007)(41300700001)(356005)(478600001)(7696005)(86362001)(8676002)(8936002)(4326008)(110136005)(316002)(6666004)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(39860400002)(136003)(376002)(230922051799003)(64100799003)(82310400011)(1800799012)(451199024)(186009)(40470700004)(46966006)(36840700001)(7416002)(6666004)(7696005)(2906002)(54906003)(70206006)(356005)(81166007)(86362001)(36756003)(316002)(8936002)(4326008)(8676002)(5660300002)(40480700001)(70586007)(110136005)(478600001)(40460700003)(41300700001)(36860700001)(82740400003)(47076005)(26005)(336012)(426003)(1076003)(2616005)(83380400001)(16526019)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2023 16:15:38.6752
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2023 16:16:20.7041
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 54fc3b0f-085f-4440-ea61-08dbf99b3fbf
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf2f23ec-1ba0-46b2-0375-08dbf99b58cd
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000E9D1.namprd03.prod.outlook.com
+	CY4PEPF0000E9D3.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4194
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9418
 
-Hi All,
+There is a need for some scenarios to use gsi sysfs.
+For example, when xen passthrough a device to dumU, it will
+use gsi to map pirq, but currently userspace can't get gsi
+number.
+So, add gsi sysfs for that and for other potential scenarios.
 
-This is v3 series to support passthrough on Xen when dom0 is PVH.
-v2->v3 changes:
-* patch#1: add condition to limit do xen_reset_device_state for no-pv domain in pcistub_init_device.
-* patch#2: Abandoning previous implementations that call unmask_irq. To setup gsi and map pirq for passthrough device in pcistub_init_device.
-* patch#3: Abandoning previous implementations that adds new syscall to get gsi from irq. To add a new sysfs for gsi, then userspace can get gsi number from sysfs.
+Co-developed-by: Huang Rui <ray.huang@amd.com>
+Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+---
+ drivers/acpi/pci_irq.c  |  1 +
+ drivers/pci/pci-sysfs.c | 11 +++++++++++
+ include/linux/pci.h     |  2 ++
+ 3 files changed, 14 insertions(+)
 
-
-v2 link:
-https://lore.kernel.org/lkml/20231124103123.3263471-1-Jiqian.Chen@amd.com/T/#t
-Below is the description of v2 cover letter:
-This series of patches are the v2 of the implementation of passthrough when dom0 is PVH on Xen.
-We sent the v1 to upstream before, but the v1 had so many problems and we got lots of suggestions.
-I will introduce all issues that these patches try to fix and the differences between v1 and v2.
-
-Issues we encountered:
-1. pci_stub failed to write bar for a passthrough device.
-Problem: when we run “sudo xl pci-assignable-add <sbdf>” to assign a device, pci_stub will
-call “pcistub_init_device() -> pci_restore_state() -> pci_restore_config_space() ->
-pci_restore_config_space_range() -> pci_restore_config_dword() -> pci_write_config_dword()”,
-the pci config write will trigger an io interrupt to bar_write() in the xen, but the
-bar->enabled was set before, the write is not allowed now, and then when Qemu config the
-passthrough device in xen_pt_realize(), it gets invalid bar values.
-
-Reason: the reason is that we don't tell vPCI that the device has been reset, so the current
-cached state in pdev->vpci is all out of date and is different from the real device state.
-
-Solution: to solve this problem, the first patch of kernel(xen/pci: Add xen_reset_device_state
-function) and the fist patch of xen(xen/vpci: Clear all vpci status of device) add a new
-hypercall to reset the state stored in vPCI when the state of real device has changed.
-Thank Roger for the suggestion of this v2, and it is different from v1
-(https://lore.kernel.org/xen-devel/20230312075455.450187-3-ray.huang@amd.com/), v1 simply allow
-domU to write pci bar, it does not comply with the design principles of vPCI.
-
-2. failed to do PHYSDEVOP_map_pirq when dom0 is PVH
-Problem: HVM domU will do PHYSDEVOP_map_pirq for a passthrough device by using gsi. See
-xen_pt_realize->xc_physdev_map_pirq and pci_add_dm_done->xc_physdev_map_pirq. Then
-xc_physdev_map_pirq will call into Xen, but in hvm_physdev_op(), PHYSDEVOP_map_pirq is not allowed.
-
-Reason: In hvm_physdev_op(), the variable "currd" is PVH dom0 and PVH has no X86_EMU_USE_PIRQ flag,
-it will fail at has_pirq check.
-
-Solution: I think we may need to allow PHYSDEVOP_map_pirq when "currd" is dom0 (at present dom0 is
-PVH). The second patch of xen(x86/pvh: Open PHYSDEVOP_map_pirq for PVH dom0) allow PVH dom0 do
-PHYSDEVOP_map_pirq. This v2 patch is better than v1, v1 simply remove the has_pirq check(xen
-https://lore.kernel.org/xen-devel/20230312075455.450187-4-ray.huang@amd.com/).
-
-3. the gsi of a passthrough device doesn't be unmasked
- 3.1 failed to check the permission of pirq
- 3.2 the gsi of passthrough device was not registered in PVH dom0
-
-Problem:
-3.1 callback function pci_add_dm_done() will be called when qemu config a passthrough device for domU.
-This function will call xc_domain_irq_permission()-> pirq_access_permitted() to check if the gsi has
-corresponding mappings in dom0. But it didn’t, so failed. See
-XEN_DOMCTL_irq_permission->pirq_access_permitted, "current" is PVH dom0 and it return irq is 0.
-3.2 it's possible for a gsi (iow: vIO-APIC pin) to never get registered on PVH dom0, because the
-devices of PVH are using MSI(-X) interrupts. However, the IO-APIC pin must be configured for it to be
-able to be mapped into a domU.
-
-Reason: After searching codes, I find "map_pirq" and "register_gsi" will be done in function
-vioapic_write_redirent->vioapic_hwdom_map_gsi when the gsi(aka ioapic's pin) is unmasked in PVH dom0.
-So the two problems can be concluded to that the gsi of a passthrough device doesn't be unmasked.
-
-Solution: to solve these problems, the second patch of kernel(xen/pvh: Unmask irq for passthrough
-device in PVH dom0) call the unmask_irq() when we assign a device to be passthrough. So that
-passthrough devices can have the mapping of gsi on PVH dom0 and gsi can be registered. This v2 patch
-is different from the v1(
-kernel https://lore.kernel.org/xen-devel/20230312120157.452859-5-ray.huang@amd.com/,
-kernel https://lore.kernel.org/xen-devel/20230312120157.452859-5-ray.huang@amd.com/ and
-xen https://lore.kernel.org/xen-devel/20230312075455.450187-5-ray.huang@amd.com/),
-v1 performed "map_pirq" and "register_gsi" on all pci devices on PVH dom0, which is unnecessary and
-may cause multiple registration.
-
-4. failed to map pirq for gsi
-Problem: qemu will call xc_physdev_map_pirq() to map a passthrough device’s gsi to pirq in function
-xen_pt_realize(). But failed.
-
-Reason: According to the implement of xc_physdev_map_pirq(), it needs gsi instead of irq, but qemu
-pass irq to it and treat irq as gsi, it is got from file /sys/bus/pci/devices/xxxx:xx:xx.x/irq in
-function xen_host_pci_device_get(). But actually the gsi number is not equal with irq. On PVH dom0,
-when it allocates irq for a gsi in function acpi_register_gsi_ioapic(), allocation is dynamic, and
-follow the principle of applying first, distributing first. And if you debug the kernel codes(see
-function __irq_alloc_descs), you will find the irq number is allocated from small to large by order,
-but the applying gsi number is not, gsi 38 may come before gsi 28, that causes gsi 38 get a smaller
-irq number than gsi 28, and then gsi != irq.
-
-Solution: we can record the relation between gsi and irq, then when userspace(qemu) want to use gsi,
-we can do a translation. The third patch of kernel(xen/privcmd: Add new syscall to get gsi from irq)
-records all the relations in acpi_register_gsi_xen_pvh() when dom0 initialize pci devices, and provide
-a syscall for userspace to get the gsi from irq. The third patch of xen(tools: Add new function to get
-gsi from irq) add a new function xc_physdev_gsi_from_irq() to call the new syscall added on kernel side.
-And then userspace can use that function to get gsi. Then xc_physdev_map_pirq() will success. This v2
-patch is the same as v1(
-kernel https://lore.kernel.org/xen-devel/20230312120157.452859-6-ray.huang@amd.com/ and
-xen https://lore.kernel.org/xen-devel/20230312075455.450187-6-ray.huang@amd.com/)
-
-About the v2 patch of qemu, just change an included head file, other are similar to the v1 (
-qemu https://lore.kernel.org/xen-devel/20230312092244.451465-19-ray.huang@amd.com/), just call
-xc_physdev_gsi_from_irq() to get gsi from irq.
-
-Jiqian Chen (3):
-  xen/pci: Add xen_reset_device_state function
-  xen/pvh: Setup gsi and map pirq for passthrough device
-  PCI/sysfs: Add gsi sysfs for pci_dev
-
- arch/x86/xen/enlighten_pvh.c       | 116 +++++++++++++++++++++++++++++
- drivers/acpi/pci_irq.c             |   3 +-
- drivers/pci/pci-sysfs.c            |  11 +++
- drivers/xen/pci.c                  |  12 +++
- drivers/xen/xen-pciback/pci_stub.c |  12 +++
- include/linux/acpi.h               |   1 +
- include/linux/pci.h                |   2 +
- include/xen/acpi.h                 |   1 +
- include/xen/interface/physdev.h    |   8 ++
- include/xen/pci.h                  |   6 ++
- 10 files changed, 171 insertions(+), 1 deletion(-)
-
+diff --git a/drivers/acpi/pci_irq.c b/drivers/acpi/pci_irq.c
+index 630fe0a34bc6..739a58755df2 100644
+--- a/drivers/acpi/pci_irq.c
++++ b/drivers/acpi/pci_irq.c
+@@ -449,6 +449,7 @@ int acpi_pci_irq_enable(struct pci_dev *dev)
+ 		kfree(entry);
+ 		return 0;
+ 	}
++	dev->gsi = gsi;
+ 
+ 	rc = acpi_register_gsi(&dev->dev, gsi, triggering, polarity);
+ 	if (rc < 0) {
+diff --git a/drivers/pci/pci-sysfs.c b/drivers/pci/pci-sysfs.c
+index 2321fdfefd7d..c51df88d079e 100644
+--- a/drivers/pci/pci-sysfs.c
++++ b/drivers/pci/pci-sysfs.c
+@@ -71,6 +71,16 @@ static ssize_t irq_show(struct device *dev,
+ }
+ static DEVICE_ATTR_RO(irq);
+ 
++static ssize_t gsi_show(struct device *dev,
++			struct device_attribute *attr,
++			char *buf)
++{
++	struct pci_dev *pdev = to_pci_dev(dev);
++
++	return sysfs_emit(buf, "%u\n", pdev->gsi);
++}
++static DEVICE_ATTR_RO(gsi);
++
+ static ssize_t broken_parity_status_show(struct device *dev,
+ 					 struct device_attribute *attr,
+ 					 char *buf)
+@@ -596,6 +606,7 @@ static struct attribute *pci_dev_attrs[] = {
+ 	&dev_attr_revision.attr,
+ 	&dev_attr_class.attr,
+ 	&dev_attr_irq.attr,
++	&dev_attr_gsi.attr,
+ 	&dev_attr_local_cpus.attr,
+ 	&dev_attr_local_cpulist.attr,
+ 	&dev_attr_modalias.attr,
+diff --git a/include/linux/pci.h b/include/linux/pci.h
+index 60ca768bc867..7ef9060b239c 100644
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -529,6 +529,8 @@ struct pci_dev {
+ 
+ 	/* These methods index pci_reset_fn_methods[] */
+ 	u8 reset_methods[PCI_NUM_RESET_METHODS]; /* In priority order */
++
++	unsigned int	gsi;
+ };
+ 
+ static inline struct pci_dev *pci_physfn(struct pci_dev *dev)
 -- 
 2.34.1
 
