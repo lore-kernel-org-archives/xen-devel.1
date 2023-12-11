@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7460C10F05
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 14:08:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.652157.1017891 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34008C46CA3
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 14:09:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.652158.1017901 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCgxe-0001WW-Uu; Mon, 11 Dec 2023 14:08:42 +0000
+	id 1rCgxr-0001qv-66; Mon, 11 Dec 2023 14:08:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 652157.1017891; Mon, 11 Dec 2023 14:08:42 +0000
+Received: by outflank-mailman (output) from mailman id 652158.1017901; Mon, 11 Dec 2023 14:08:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCgxe-0001WN-Re; Mon, 11 Dec 2023 14:08:42 +0000
-Received: by outflank-mailman (input) for mailman id 652157;
- Mon, 11 Dec 2023 14:08:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rCgxr-0001qo-33; Mon, 11 Dec 2023 14:08:55 +0000
+Received: by outflank-mailman (input) for mailman id 652158;
+ Mon, 11 Dec 2023 14:08:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ydLR=HW=cloud.com=kelly.choi@srs-se1.protection.inumbo.net>)
- id 1rCgxd-0001Vs-O0
- for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 14:08:41 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c895b81d-982e-11ee-9b0f-b553b5be7939;
- Mon, 11 Dec 2023 15:08:39 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a1e2f34467aso428035266b.2
- for <xen-devel@lists.xenproject.org>; Mon, 11 Dec 2023 06:08:39 -0800 (PST)
+ <SRS0=vrFX=HW=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
+ id 1rCgxp-0001ph-Oh
+ for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 14:08:53 +0000
+Received: from dggsgout11.his.huawei.com (unknown [45.249.212.51])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cea90782-982e-11ee-98e8-6d05b1d4d9a1;
+ Mon, 11 Dec 2023 15:08:52 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.93.142])
+ by dggsgout11.his.huawei.com (SkyGuard) with ESMTP id 4SpkB26fRZz4f3lDn
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Dec 2023 22:08:42 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.112])
+ by mail.maildlp.com (Postfix) with ESMTP id CE1A21A083F
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Dec 2023 22:08:47 +0800 (CST)
+Received: from huaweicloud.com (unknown [10.175.104.67])
+ by APP1 (Coremail) with SMTP id cCh0CgDX2xHtF3dlUJpxDQ--.35009S4;
+ Mon, 11 Dec 2023 22:08:47 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,177 +47,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c895b81d-982e-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1702303719; x=1702908519; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=SIagXiUr9qcUjx+qV4QcL8eRgfLx3JAhDGQhMUNweiA=;
-        b=LzQgd0H2+aksBspXF3BBQKEwxM5Z6qAQXa7C4VQccwpKlXliOdI1dyqMy8+n/NfoEl
-         1G9Gprd0rkbk3eiz/LaR+WVP1TZxcCR/BixpzZn4/p/GONpRGnxBV/Y9EQZDleqBkeoI
-         BATGurCr8MtGFxXpdAhsDXeF+J8vLBHpNTeuU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702303719; x=1702908519;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SIagXiUr9qcUjx+qV4QcL8eRgfLx3JAhDGQhMUNweiA=;
-        b=U2CtCIdCt5g2UWJMQLbsr36Rz4ZIiy0LB5kR6RlcJ2vjh54V+j0E5KNfFNLTkAW7i4
-         7bi4WZacurfGHiFLoQ04xWFDnU4Srxi4ydQGZbjqzqkIPO7rpcPHkKfoi5noZNPN/ofe
-         LAxmstyR3RGt23Q81ocquESJ8/XIDoNuA6jZp7iYbHvUjLV7hcH0nIcmBCF6SN5U0nFR
-         JmdBP4D3LBnd9oJhejXpJ2QifbYNekthhgmWfTk7dNlzUWxquVf1y0ICyVhvrxt2pXh6
-         032fQEbD5nWdJFhvMKQtzq1pODSv+IYuLS4qFjxZEwG1yFg24HFsANYk7+c+M1cIWhNX
-         FJdA==
-X-Gm-Message-State: AOJu0YwLIgAauWc5RjnLxgK1Qn1qwaflh+2UOVFe13be5qSqgsekS1xm
-	7Ul6b9aiYvC63hPqUoWLr18KY51LbAkj8F841jxULw==
-X-Google-Smtp-Source: AGHT+IGvVp1tdD936dtZA20B+fFOf1XZbgRhIxoIziRmRVvdVVmIdj41zHcNsfTVRZJKElBaQhGl4VNYqffMv3MqPCM=
-X-Received: by 2002:a17:906:1010:b0:a19:4f2b:f76d with SMTP id
- 16-20020a170906101000b00a194f2bf76dmr2204858ejm.13.1702303718951; Mon, 11 Dec
- 2023 06:08:38 -0800 (PST)
+X-Inumbo-ID: cea90782-982e-11ee-98e8-6d05b1d4d9a1
+From: Yu Kuai <yukuai1@huaweicloud.com>
+To: axboe@kernel.dk,
+	roger.pau@citrix.com,
+	colyli@suse.de,
+	kent.overstreet@gmail.com,
+	joern@lazybastard.org,
+	miquel.raynal@bootlin.com,
+	richard@nod.at,
+	vigneshr@ti.com,
+	sth@linux.ibm.com,
+	hoeppner@linux.ibm.com,
+	hca@linux.ibm.com,
+	gor@linux.ibm.com,
+	agordeev@linux.ibm.com,
+	jejb@linux.ibm.com,
+	martin.petersen@oracle.com,
+	clm@fb.com,
+	josef@toxicpanda.com,
+	dsterba@suse.com,
+	viro@zeniv.linux.org.uk,
+	brauner@kernel.org,
+	nico@fluxnic.net,
+	xiang@kernel.org,
+	chao@kernel.org,
+	tytso@mit.edu,
+	adilger.kernel@dilger.ca,
+	agruenba@redhat.com,
+	jack@suse.com,
+	konishi.ryusuke@gmail.com,
+	willy@infradead.org,
+	akpm@linux-foundation.org,
+	p.raghav@samsung.com,
+	hare@suse.de
+Cc: linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	linux-bcachefs@vger.kernel.org,
+	linux-btrfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org,
+	linux-ext4@vger.kernel.org,
+	gfs2@lists.linux.dev,
+	linux-nilfs@vger.kernel.org,
+	yukuai3@huawei.com,
+	yukuai1@huaweicloud.com,
+	yi.zhang@huawei.com,
+	yangerkun@huawei.com
+Subject: [PATCH RFC v2 for-6.8/block 11/18] erofs: use bdev api
+Date: Mon, 11 Dec 2023 22:07:22 +0800
+Message-Id: <20231211140722.974745-1-yukuai1@huaweicloud.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231211140552.973290-1-yukuai1@huaweicloud.com>
+References: <20231211140552.973290-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
-References: <CAO-mL=x3DntLhoKuaiWYjVqkQRqj=rdyZWmuH1aDjkmUbQchyA@mail.gmail.com>
- <alpine.DEB.2.22.394.2311301426210.110490@ubuntu-linux-20-04-desktop>
- <CA+zSX=ZJETPgXut62Y5RQyB8Q6Ruwqd656+iW+ark6WOXYEf+w@mail.gmail.com>
- <alpine.DEB.2.22.394.2312011253390.110490@ubuntu-linux-20-04-desktop>
- <1978d259-1531-4dcc-a106-d87f6f26885d@suse.com> <CA+zSX=YNcjDZHF-gx8C8owEpyyjSEtj-MKDAqRwp9woHzEFtUg@mail.gmail.com>
- <alpine.DEB.2.22.394.2312041524180.110490@ubuntu-linux-20-04-desktop>
-In-Reply-To: <alpine.DEB.2.22.394.2312041524180.110490@ubuntu-linux-20-04-desktop>
-From: Kelly Choi <kelly.choi@cloud.com>
-Date: Mon, 11 Dec 2023 14:08:02 +0000
-Message-ID: <CAO-mL=ypSOeMPnXEeQJTAhZ2o3j5MPGCfXv0vM7Kje_syLmr8g@mail.gmail.com>
-Subject: Re: INFORMAL VOTE REQUIRED - DOCUMENTATION WORDING
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: George Dunlap <george.dunlap@cloud.com>, Jan Beulich <jbeulich@suse.com>, 
-	xen-devel@lists.xenproject.org, committers@xenproject.org
-Content-Type: multipart/alternative; boundary="00000000000077fabe060c3c78ef"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:cCh0CgDX2xHtF3dlUJpxDQ--.35009S4
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZF4kuFy3Wr1DurykKryxGrg_yoW8KrW8pF
+	W7Cr1rGrWrXrs09wn2gr1UZF43ta97Jw48CayxJw1Fv3yUtryagFy0ywnrGr48Kr4kKrs2
+	qF1Ivryxuw1UGrUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4U
+	JVW0owA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+	Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+	I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+	4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+	n2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
+	0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Wrv_Gr1U
+	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF7I
+	0E14v26F4UJVW0owCI42IY6xAIw20EY4v20xvaj40_Zr0_Wr1UMIIF0xvEx4A2jsIE14v2
+	6r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Cr1j6rxdYxBIdaVFxhVjvjDU0xZFpf9x0J
+	UCXdbUUUUU=
+X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
---00000000000077fabe060c3c78ef
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Yu Kuai <yukuai3@huawei.com>
 
-Hi all,
+Avoid to access bd_inode directly, prepare to remove bd_inode from
+block_devcie.
 
-As we haven't yet reached a consensus, let's see what the informal vote
-looks like in the community by the end of the week.
-Since the scope and context have changed slightly, anonymous voting is
-permitted and I will be counting all votes made after Dec 4th. Please only
-vote once.
+Signed-off-by: Yu Kuai <yukuai3@huawei.com>
+---
+ fs/erofs/data.c     | 18 ++++++++++++------
+ fs/erofs/internal.h |  2 ++
+ 2 files changed, 14 insertions(+), 6 deletions(-)
 
-Should you wish to change your answer you can do so using this link:
-https://cryptpad.fr/form/#/2/form/view/7ByH95Vd7KiDOvN4wjV5iUGlMuZbkVdwk7cY=
-pZdluWo/
+diff --git a/fs/erofs/data.c b/fs/erofs/data.c
+index c98aeda8abb2..8cf3618190ab 100644
+--- a/fs/erofs/data.c
++++ b/fs/erofs/data.c
+@@ -32,8 +32,7 @@ void erofs_put_metabuf(struct erofs_buf *buf)
+ void *erofs_bread(struct erofs_buf *buf, erofs_blk_t blkaddr,
+ 		  enum erofs_kmap_type type)
+ {
+-	struct inode *inode = buf->inode;
+-	erofs_off_t offset = (erofs_off_t)blkaddr << inode->i_blkbits;
++	erofs_off_t offset = (erofs_off_t)blkaddr << buf->blkszbits;
+ 	pgoff_t index = offset >> PAGE_SHIFT;
+ 	struct page *page = buf->page;
+ 	struct folio *folio;
+@@ -43,7 +42,9 @@ void *erofs_bread(struct erofs_buf *buf, erofs_blk_t blkaddr,
+ 		erofs_put_metabuf(buf);
+ 
+ 		nofs_flag = memalloc_nofs_save();
+-		folio = read_cache_folio(inode->i_mapping, index, NULL, NULL);
++		folio = buf->inode ?
++			read_mapping_folio(buf->inode->i_mapping, index, NULL) :
++			bdev_read_folio(buf->bdev, offset);
+ 		memalloc_nofs_restore(nofs_flag);
+ 		if (IS_ERR(folio))
+ 			return folio;
+@@ -67,10 +68,15 @@ void *erofs_bread(struct erofs_buf *buf, erofs_blk_t blkaddr,
+ 
+ void erofs_init_metabuf(struct erofs_buf *buf, struct super_block *sb)
+ {
+-	if (erofs_is_fscache_mode(sb))
++	if (erofs_is_fscache_mode(sb)) {
+ 		buf->inode = EROFS_SB(sb)->s_fscache->inode;
+-	else
+-		buf->inode = sb->s_bdev->bd_inode;
++		buf->bdev = NULL;
++		buf->blkszbits = buf->inode->i_blkbits;
++	} else {
++		buf->inode = NULL;
++		buf->bdev = sb->s_bdev;
++		buf->blkszbits = EROFS_SB(sb)->blkszbits;
++	}
+ }
+ 
+ void *erofs_read_metabuf(struct erofs_buf *buf, struct super_block *sb,
+diff --git a/fs/erofs/internal.h b/fs/erofs/internal.h
+index b0409badb017..c9206351b485 100644
+--- a/fs/erofs/internal.h
++++ b/fs/erofs/internal.h
+@@ -224,8 +224,10 @@ enum erofs_kmap_type {
+ 
+ struct erofs_buf {
+ 	struct inode *inode;
++	struct block_device *bdev;
+ 	struct page *page;
+ 	void *base;
++	u8 blkszbits;
+ 	enum erofs_kmap_type kmap_type;
+ };
+ #define __EROFS_BUF_INITIALIZER	((struct erofs_buf){ .page = NULL })
+-- 
+2.39.2
 
-Many thanks,
-Kelly Choi
-
-Community Manager
-Xen Project
-
-
-On Mon, Dec 4, 2023 at 11:51=E2=80=AFPM Stefano Stabellini <sstabellini@ker=
-nel.org>
-wrote:
-
-> On Mon, 4 Dec 2023, George Dunlap wrote:
-> > And how do we give people practical options to respond to a maintainer
-> > who they think is being "picky"
->
-> If a maintainer is too picky the contributor and the other maintainers
-> should say that the patch is good enough in their view. If the
-> maintainers disagree (on that topic or another) the new informal voting
-> rule should help us move forward faster.
->
-> The informal voting would have helped us move forward faster in the
-> original thread.
->
->
-> On Mon, 4 Dec 2023, George Dunlap wrote:
-> > the chance of a vote of the committers being out of sync with the
-> > community is fairly small. But of course, small is not impossible.
-> > [...] Hence the community-wide survey.
->
-> Yes. If someone cares about the outcome, and they are not happy with the
-> informal vote, then they need to call for a formal vote.
->
-> But maintainers/committers might not always be the right people to
-> escalate the voting to.
->
-> Yes committers' opinions should count, but certain things have more to
-> do with our users and the way they understand our documentation than
-> implementation correctness. For these things, our users' opinions should
-> count as much as ours.
->
-> So I can see that in those cases, if someone is not happy with the
-> informal vote, the best next step would be a community-wide survey like
-> Kelly did here. That's a good idea.
->
-> I don't think that's written anywhere in our governance specifically,
-> but I think it would be a good addition.
->
-
---00000000000077fabe060c3c78ef
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi all,=C2=A0<div><br></div><div>As we haven&#39;t yet rea=
-ched a consensus, let&#39;s see what the informal vote looks like in the co=
-mmunity by the end of the week.=C2=A0</div><div>Since the scope and context=
- have changed slightly, anonymous voting is permitted and I will be countin=
-g all votes made after Dec 4th. Please only vote once.=C2=A0</div><div><br>=
-</div><div>Should you wish to change your answer you can do so using this l=
-ink:=C2=A0<a href=3D"https://cryptpad.fr/form/#/2/form/view/7ByH95Vd7KiDOvN=
-4wjV5iUGlMuZbkVdwk7cYpZdluWo/">https://cryptpad.fr/form/#/2/form/view/7ByH9=
-5Vd7KiDOvN4wjV5iUGlMuZbkVdwk7cYpZdluWo/</a></div><div><br clear=3D"all"><di=
-v><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signat=
-ure"><div dir=3D"ltr"><div>Many thanks,</div><div>Kelly Choi</div><div><br>=
-</div><div><div style=3D"color:rgb(136,136,136)">Community Manager</div><di=
-v style=3D"color:rgb(136,136,136)">Xen Project=C2=A0<br></div></div></div><=
-/div></div><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Mon, Dec 4, 2023 at 11:51=E2=80=AFPM Stefano Stabel=
-lini &lt;<a href=3D"mailto:sstabellini@kernel.org">sstabellini@kernel.org</=
-a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On=
- Mon, 4 Dec 2023, George Dunlap wrote:<br>
-&gt; And how do we give people practical options to respond to a maintainer=
-<br>
-&gt; who they think is being &quot;picky&quot;<br>
-<br>
-If a maintainer is too picky the contributor and the other maintainers<br>
-should say that the patch is good enough in their view. If the<br>
-maintainers disagree (on that topic or another) the new informal voting<br>
-rule should help us move forward faster.<br>
-<br>
-The informal voting would have helped us move forward faster in the<br>
-original thread.<br>
-<br>
-<br>
-On Mon, 4 Dec 2023, George Dunlap wrote:<br>
-&gt; the chance of a vote of the committers being out of sync with the<br>
-&gt; community is fairly small. But of course, small is not impossible.<br>
-&gt; [...] Hence the community-wide survey.<br>
-<br>
-Yes. If someone cares about the outcome, and they are not happy with the<br=
->
-informal vote, then they need to call for a formal vote.<br>
-<br>
-But maintainers/committers might not always be the right people to<br>
-escalate the voting to.<br>
-<br>
-Yes committers&#39; opinions should count, but certain things have more to<=
-br>
-do with our users and the way they understand our documentation than<br>
-implementation correctness. For these things, our users&#39; opinions shoul=
-d<br>
-count as much as ours.<br>
-<br>
-So I can see that in those cases, if someone is not happy with the<br>
-informal vote, the best next step would be a community-wide survey like<br>
-Kelly did here. That&#39;s a good idea. <br>
-<br>
-I don&#39;t think that&#39;s written anywhere in our governance specificall=
-y,<br>
-but I think it would be a good addition.<br>
-</blockquote></div>
-
---00000000000077fabe060c3c78ef--
 
