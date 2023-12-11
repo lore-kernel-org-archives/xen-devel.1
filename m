@@ -4,32 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D86F3C169C2
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 09:15:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.651525.1017192 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC93C4167B
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 09:16:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.651537.1017232 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCcN3-0001cy-Qs; Mon, 11 Dec 2023 09:14:37 +0000
+	id 1rCcOO-0003hL-TX; Mon, 11 Dec 2023 09:16:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 651525.1017192; Mon, 11 Dec 2023 09:14:37 +0000
+Received: by outflank-mailman (output) from mailman id 651537.1017232; Mon, 11 Dec 2023 09:16:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCcN3-0001cp-LT; Mon, 11 Dec 2023 09:14:37 +0000
-Received: by outflank-mailman (input) for mailman id 651525;
- Mon, 11 Dec 2023 09:14:36 +0000
+	id 1rCcOO-0003hE-Q6; Mon, 11 Dec 2023 09:16:00 +0000
+Received: by outflank-mailman (input) for mailman id 651537;
+ Mon, 11 Dec 2023 09:15:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BtsV=HW=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rCcN2-0001ce-Bm
- for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 09:14:36 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=DOfJ=HW=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
+ id 1rCcOM-0003gv-Q0
+ for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 09:15:58 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b321d339-9805-11ee-98e8-6d05b1d4d9a1;
- Mon, 11 Dec 2023 10:14:34 +0100 (CET)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 2A01C4EE073E;
- Mon, 11 Dec 2023 10:14:32 +0100 (CET)
+ id e50663a5-9805-11ee-98e8-6d05b1d4d9a1;
+ Mon, 11 Dec 2023 10:15:58 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-50bfd7be487so4720468e87.0
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Dec 2023 01:15:58 -0800 (PST)
+Received: from [192.168.15.251] (54-240-197-236.amazon.com. [54.240.197.236])
+ by smtp.gmail.com with ESMTPSA id
+ k3-20020adfe8c3000000b003334460e256sm8066228wrn.92.2023.12.11.01.15.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Dec 2023 01:15:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,63 +47,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b321d339-9805-11ee-98e8-6d05b1d4d9a1
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [XEN PATCH v3 0/3] address some violations of MISRA C Rule 8.4
-Date: Mon, 11 Dec 2023 10:14:26 +0100
-Message-Id: <cover.1702285639.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: e50663a5-9805-11ee-98e8-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1702286157; x=1702890957; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:reply-to:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=ucSgeYlaSTptwTOrfqO4eZBdPvsqYJnEMgFfVhJwg+0=;
+        b=kEbIsESom9uq9uaCbMfw+tmgsM8CArDAvmeUgdjeKtwGi/IpZF2sw1FptKecipI2bC
+         dKt/zQa127Snl4S8GHDTbJoyeSxSeUBjySa7zXSs0WRfsR5zMyK2tDP/KF5w6V4Ldx6X
+         zkVRhOdYUeXOaOck0IEZsw72eVMW+OhGj61c+L2CK92VzUNzSWD1Ecs05s4mo+EWd1eb
+         G+3Lp7/aSa1/jdwm0IL82GUXhwaSi9Z2xE0+NH3hX9VcWnVmvw7KKUcH4jSq2pUHmAB+
+         0Sx+lPooaJDTMnxZSrRpmzIolH4i90W2+s1Dz03Jbn5z+zGJzIsUfqJFLGB3j36STEEf
+         rGeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1702286157; x=1702890957;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:reply-to:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ucSgeYlaSTptwTOrfqO4eZBdPvsqYJnEMgFfVhJwg+0=;
+        b=L2JKV0udex5nklhKgLtt+29r/dehOoSaT+9iMrlbFJNZfBEfKH78P/hXxfaPbSbkbz
+         a9lli6/wkSn9ow5UoUBvxGJeWxUe3rc80V8f5FTlTwRZpHtATtQaN8NxhDpTxqa4cnws
+         TXQMGEYRioWKLL0txmjBWL32faufKzS/OApTZkws6KF7Wstg3Sk1Gp6NM7Ns33hn4BhH
+         LTkQcvw10pXHfn06dXIP0BMn2pmP2Csx4jXYTQI+K9pPRFjzCO0/oNhNZJ093BedLOm7
+         3HgEUgh9V9S8/9EMVOv4DrJ6M1eHRi5Z81ckyApzPjroM39MOSKediNNRTYfe6NWDCJh
+         Yufg==
+X-Gm-Message-State: AOJu0YyL40fwiJ2dx+IGdO8D1KwjUxzkNzgXxkWRbaNJEklYMLVGE3v8
+	NW6SXxGatJCkbLqkbOfbmco=
+X-Google-Smtp-Source: AGHT+IEVw3YNQrNEvYjlg8HXVQyO0FShPYGmP5m+MjLX8fscBtoeOEqFwREP/JNm/An0kjhECAcGuQ==
+X-Received: by 2002:ac2:48b9:0:b0:50b:e40b:f8b2 with SMTP id u25-20020ac248b9000000b0050be40bf8b2mr1690917lfg.42.1702286157213;
+        Mon, 11 Dec 2023 01:15:57 -0800 (PST)
+Message-ID: <c981de39-1105-423a-8782-e17bd35cc2ab@gmail.com>
+Date: Mon, 11 Dec 2023 09:15:54 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Reply-To: paul@xen.org
+Subject: Re: [XEN PATCH v3 2/3] x86/viridian: make build_assertions static
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com, Paul Durrant <paul@xen.org>, Wei Liu
+ <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1702285639.git.nicola.vetrini@bugseng.com>
+ <2bc69a77a0fae290902019822230dd863b1041b5.1702285639.git.nicola.vetrini@bugseng.com>
+Content-Language: en-US
+From: "Durrant, Paul" <xadimgnik@gmail.com>
+In-Reply-To: <2bc69a77a0fae290902019822230dd863b1041b5.1702285639.git.nicola.vetrini@bugseng.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-MISRA C:2012 Rule 8.4 states:
-"A compatible declaration shall be visible when an object or function with
-external linkage is defined".
+On 11/12/2023 09:14, Nicola Vetrini wrote:
+> This is consistent with other instances of the same function
+> and also resolves a violation of MISRA C:2012 Rule 8.4.
+> 
+> No functional change.
+> 
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+> ---
+>   xen/arch/x86/hvm/viridian/synic.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
 
-Changes from v1:
-- Patch 1/7 has been committed;
-- Patch 2/7 has been dropped, as the fix is already part of [1];
-- Patch 3/7 drops the addition of asmlinkage on variables. Discussion on how to
-  handle the existing uses can be part of a separate patch;
-- Patch 4/7 is unchanged;
-- Patch 5/7 has been committed;
-- Patch 6/7 has been dropped
-- Patch 7/7 has been revised to have a declaration for first_valid_mfn, rather
-  than a deviation for the absence of a declaration
-Changes from v2:
-- Patch 3/3: remove redundant declarations
+Acked-by: Paul Durrant <paul@xen.org>
 
-[1] https://lore.kernel.org/xen-devel/27dd8f40-1ea6-1e7e-49c2-31936a17e9d7@suse.com/
-
-
-Nicola Vetrini (3):
-  xen/x86: add missing instances of asmlinkage attributes
-  x86/viridian: make build_assertions static
-  xen/mm: add declaration for first_valid_mfn
-
- xen/arch/arm/include/asm/numa.h   | 8 ++++----
- xen/arch/ppc/include/asm/numa.h   | 7 +++----
- xen/arch/x86/efi/efi-boot.h       | 5 +++--
- xen/arch/x86/hvm/viridian/synic.c | 2 +-
- xen/arch/x86/smpboot.c            | 2 +-
- xen/include/xen/mm.h              | 2 ++
- 6 files changed, 14 insertions(+), 12 deletions(-)
-
--- 
-2.34.1
 
