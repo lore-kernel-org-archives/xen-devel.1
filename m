@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE20C4167B
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 10:30:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.651597.1017342 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14300C46CC6
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 10:30:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.651600.1017363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCdYe-0005vB-V1; Mon, 11 Dec 2023 10:30:40 +0000
+	id 1rCdYg-0006Et-Fq; Mon, 11 Dec 2023 10:30:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 651597.1017342; Mon, 11 Dec 2023 10:30:40 +0000
+Received: by outflank-mailman (output) from mailman id 651600.1017363; Mon, 11 Dec 2023 10:30:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCdYe-0005v4-Rr; Mon, 11 Dec 2023 10:30:40 +0000
-Received: by outflank-mailman (input) for mailman id 651597;
- Mon, 11 Dec 2023 10:30:39 +0000
+	id 1rCdYg-0006Ci-0K; Mon, 11 Dec 2023 10:30:42 +0000
+Received: by outflank-mailman (input) for mailman id 651600;
+ Mon, 11 Dec 2023 10:30:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BtsV=HW=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rCdYd-0005Em-M6
- for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 10:30:39 +0000
+ id 1rCdYe-0005Em-TA
+ for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 10:30:40 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 51d2ff79-9810-11ee-9b0f-b553b5be7939;
- Mon, 11 Dec 2023 11:30:35 +0100 (CET)
+ id 533cb554-9810-11ee-9b0f-b553b5be7939;
+ Mon, 11 Dec 2023 11:30:38 +0100 (CET)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id AD6D34EE0742;
- Mon, 11 Dec 2023 11:30:34 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 46FDA4EE0742;
+ Mon, 11 Dec 2023 11:30:37 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 51d2ff79-9810-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 533cb554-9810-11ee-9b0f-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -50,58 +50,34 @@ Cc: consulting@bugseng.com,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 2/7] x86/mm: address MISRA C:2012 Rule 2.1
-Date: Mon, 11 Dec 2023 11:30:23 +0100
-Message-Id: <5913d8871ff6c4f320c521e50e550a64e58d4351.1702283415.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 6/7] x86/platform: removed break to address MISRA C:2012 Rule 2.1
+Date: Mon, 11 Dec 2023 11:30:27 +0100
+Message-Id: <b1103bc13d5ce04159417592705b4fe6a6db748b.1702283415.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1702283415.git.nicola.vetrini@bugseng.com>
 References: <cover.1702283415.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The "return 0" after the swich statement in 'xen/arch/x86/mm.c'
-is unreachable because all switch clauses end with returns.
-However, some of them can be substituted with "break"s to allow
-the "return 0" outside the switch to be reachable.
-
-No functional changes.
+The break statement is redundant, hence it can be removed.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/mm.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/arch/x86/platform_hypercall.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 0a66db10b959..8b31426a5348 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -4753,7 +4753,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         }
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index 4dde71db275c..7556c6e6cd0c 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -723,7 +723,6 @@ ret_t do_platform_op(
  
-         spin_unlock(&d->arch.e820_lock);
--        return 0;
-+        break;
+         ret = continue_hypercall_on_cpu(
+             0, cpu_down_helper, (void *)(unsigned long)cpu);
+-        break;
      }
+     break;
  
-     case XENMEM_machine_memory_map:
-@@ -4818,7 +4818,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         if ( __copy_to_guest(arg, &ctxt.map, 1) )
-             return -EFAULT;
- 
--        return 0;
-+        break;
-     }
- 
-     case XENMEM_machphys_mapping:
-@@ -4834,7 +4834,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         if ( copy_to_guest(arg, &mapping, 1) )
-             return -EFAULT;
- 
--        return 0;
-+        break;
-     }
- 
- #ifdef CONFIG_HVM
 -- 
 2.34.1
 
