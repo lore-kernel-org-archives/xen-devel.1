@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E327DC4167B
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 14:18:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.652227.1017980 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE41C4167B
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Dec 2023 14:21:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.652242.1017990 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCh6j-0000yo-2x; Mon, 11 Dec 2023 14:18:05 +0000
+	id 1rCh9e-0004gX-Gx; Mon, 11 Dec 2023 14:21:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 652227.1017980; Mon, 11 Dec 2023 14:18:05 +0000
+Received: by outflank-mailman (output) from mailman id 652242.1017990; Mon, 11 Dec 2023 14:21:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCh6j-0000yh-0P; Mon, 11 Dec 2023 14:18:05 +0000
-Received: by outflank-mailman (input) for mailman id 652227;
- Mon, 11 Dec 2023 14:18:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rCh9e-0004gQ-EJ; Mon, 11 Dec 2023 14:21:06 +0000
+Received: by outflank-mailman (input) for mailman id 652242;
+ Mon, 11 Dec 2023 14:21:05 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+mB3=HW=gmail.com=euidzero@srs-se1.protection.inumbo.net>)
- id 1rCh6h-0000yb-Sg
- for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 14:18:03 +0000
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [2607:f8b0:4864:20::102a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 17d0c797-9830-11ee-98e8-6d05b1d4d9a1;
- Mon, 11 Dec 2023 15:18:02 +0100 (CET)
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-286867cac72so2744132a91.2
- for <xen-devel@lists.xenproject.org>; Mon, 11 Dec 2023 06:18:02 -0800 (PST)
+ <SRS0=vrFX=HW=huaweicloud.com=yukuai1@srs-se1.protection.inumbo.net>)
+ id 1rCgz7-0001Vs-4c
+ for xen-devel@lists.xenproject.org; Mon, 11 Dec 2023 14:10:13 +0000
+Received: from dggsgout12.his.huawei.com (unknown [45.249.212.56])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fca07605-982e-11ee-9b0f-b553b5be7939;
+ Mon, 11 Dec 2023 15:10:10 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.163.216])
+ by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4SpkCZ3rlTz4f3kG2
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Dec 2023 22:10:02 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.112])
+ by mail.maildlp.com (Postfix) with ESMTP id F0B8C1A0AB9
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Dec 2023 22:10:04 +0800 (CST)
+Received: from huaweicloud.com (unknown [10.175.104.67])
+ by APP1 (Coremail) with SMTP id cCh0CgDnNw46GHdlJ7BxDQ--.34937S4;
+ Mon, 11 Dec 2023 22:10:04 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,121 +47,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 17d0c797-9830-11ee-98e8-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702304281; x=1702909081; darn=lists.xenproject.org;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rDC1EKuqWIHaXEp62zYsedlm2GsxzaijNEZ9jSbvxNM=;
-        b=WFGIft+DBTdlE9WksKbVe7fBLvBNm2oFQxOK0ikZTuq5iqLMxvD5AxkGZe7afzKtM/
-         FBLOIeV2gKMsMW0eZnNLNH9avWJCT23y/qkrmXAsYt0EFuhq2zOSYwZIRe1ASH5Mu2To
-         c/KxObpyFnZy+F6+Mhne6auHRYL11GkMMuAn39QUKMoVHOLMW+FPxztPAXmyA1etHJvD
-         ySSoWuEKoMpVxiEF9e79pPK8FelPmLDCT1riAoDPD9pzuqneB1zIvwVpKJ4x03x4J8tO
-         sz9S9edNfiVpq3q1Asp9wnzRJrmNkiz/LCYgs971DAZGvfulYP9pRl5+AeiYJwSE9pff
-         wYXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702304281; x=1702909081;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rDC1EKuqWIHaXEp62zYsedlm2GsxzaijNEZ9jSbvxNM=;
-        b=lExDpbIgC9T+qno3vuwqlCFTmgMPLeF+kLA1DsEeBfHFbjlCcw7fc0H9gEOWaFf04N
-         bZ7Wle9iQo9IQAVCD6LjEJTdSegF0W4LrdqmUwj3gCkrDPVgVCvKWvXymPePVWdQeLBS
-         DMwxlrn9+lA39UK3bS6DLbUO/LHRqi/Ds/l9Lx5KnkyqnVhuekhdAHENTDOu6iQErNc3
-         y2w1/uEAMJpG8iYosl3kVa8RmWoMrTxHOG95sZqVs8KiyubNblAWqinri5cS2Q0e6s95
-         OtwItfaiHWkhwQeio+6gGTjPRBPjHsT1A1HrmHx4D8+Xx+nkJx6tq5NGQlMwGNNOsRCo
-         wIKA==
-X-Gm-Message-State: AOJu0Yyspu5RQTSnCjIKJaTHB1K5vD6gqIwBY08Ga/q7WNkNkDDXWn1g
-	6RQf9q99wMmpwIGKviFx64vtYa3U2bMoNpDOYCzFXcUuOiE=
-X-Google-Smtp-Source: AGHT+IF+MzBDhxWy+6HJuoblyLIDdDzQtBrMvEuwI7GVBsmoPyeKRfBb29rETEy7zoLrOXCliQbjEYC0lEPF/UCy57I=
-X-Received: by 2002:a17:90a:d3d0:b0:28a:3526:a3ff with SMTP id
- d16-20020a17090ad3d000b0028a3526a3ffmr1623313pjw.53.1702304281060; Mon, 11
- Dec 2023 06:18:01 -0800 (PST)
+X-Inumbo-ID: fca07605-982e-11ee-9b0f-b553b5be7939
+From: Yu Kuai <yukuai1@huaweicloud.com>
+To: axboe@kernel.dk,
+	roger.pau@citrix.com,
+	colyli@suse.de,
+	kent.overstreet@gmail.com,
+	joern@lazybastard.org,
+	miquel.raynal@bootlin.com,
+	richard@nod.at,
+	vigneshr@ti.com,
+	sth@linux.ibm.com,
+	hoeppner@linux.ibm.com,
+	hca@linux.ibm.com,
+	gor@linux.ibm.com,
+	agordeev@linux.ibm.com,
+	jejb@linux.ibm.com,
+	martin.petersen@oracle.com,
+	clm@fb.com,
+	josef@toxicpanda.com,
+	dsterba@suse.com,
+	viro@zeniv.linux.org.uk,
+	brauner@kernel.org,
+	nico@fluxnic.net,
+	xiang@kernel.org,
+	chao@kernel.org,
+	tytso@mit.edu,
+	adilger.kernel@dilger.ca,
+	agruenba@redhat.com,
+	jack@suse.com,
+	konishi.ryusuke@gmail.com,
+	willy@infradead.org,
+	akpm@linux-foundation.org,
+	p.raghav@samsung.com,
+	hare@suse.de
+Cc: linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	linux-bcachefs@vger.kernel.org,
+	linux-btrfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org,
+	linux-ext4@vger.kernel.org,
+	gfs2@lists.linux.dev,
+	linux-nilfs@vger.kernel.org,
+	yukuai3@huawei.com,
+	yukuai1@huaweicloud.com,
+	yi.zhang@huawei.com,
+	yangerkun@huawei.com
+Subject: [PATCH RFC v2 for-6.8/block 18/18] ext4: use bdev apis
+Date: Mon, 11 Dec 2023 22:08:39 +0800
+Message-Id: <20231211140839.976021-1-yukuai1@huaweicloud.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231211140552.973290-1-yukuai1@huaweicloud.com>
+References: <20231211140552.973290-1-yukuai1@huaweicloud.com>
 MIME-Version: 1.0
-References: <CAKm-Umas=5=JzooRzPHxUDigKpFK3Ze7cQcG8eR5kWgn-d_7fQ@mail.gmail.com>
- <7f34d258-97fa-43e8-8d67-ac9dc93213af@suse.com> <CAKm-UmYGTLY0fTh4zvj-xrA3Tp+Oj+ES61pncG7ze0QnP4o=FQ@mail.gmail.com>
- <52bd8702-cf7d-4f5b-883d-be6214ba31c0@suse.com> <CAKm-UmadRsc7GEYDqMDTBaoozT5Bj3nwK+=uDs1LkTZVG8tgdQ@mail.gmail.com>
- <CAKm-UmZnPtH_Fxou3OV0BbpP+tBpSe1z8Qet4Q5=zDD7UGZy6Q@mail.gmail.com>
- <CAKm-UmbaHoXymP8CcBVBLSVG7T9zCE2fbFQB33SMnY8pwXOU1Q@mail.gmail.com>
- <435d159f-96d5-49af-82ec-bce6961e3391@suse.com> <CAKm-UmbEBOm525=f+OOL0P05tQVVQz9wegh7F8yhgV_=Z7rWug@mail.gmail.com>
- <CAKm-UmYejm8CW-Enc_Y-aefcLPsRhQO8w2P-fNdu1zXMMjUAoA@mail.gmail.com>
- <e83e7254-0c90-4912-ae63-ea7221a10071@suse.com> <CAKm-UmbDNbeakVQtDT47o4Qc4oQvi0dqmBDb5Q=pRqTHFY0C5w@mail.gmail.com>
- <CAKm-UmZtN2o3d13cE9GyyLKfMmZ855MfrAAw9O6zE-5ob0-iYg@mail.gmail.com> <64d738b7-08c1-4b2c-a828-a137c870408e@suse.com>
-In-Reply-To: <64d738b7-08c1-4b2c-a828-a137c870408e@suse.com>
-From: =?UTF-8?Q?S=C3=A9bastien_Chaumat?= <euidzero@gmail.com>
-Date: Mon, 11 Dec 2023 15:17:50 +0100
-Message-ID: <CAKm-UmaNnFFrdDp+dknjnxsFSgPdn+BhmkZ-S3bZAEE8-FccLQ@mail.gmail.com>
-Subject: Re: [BUG]i2c_hid_acpi broken with 4.17.2 on Framework Laptop 13 AMD
-To: xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:cCh0CgDnNw46GHdlJ7BxDQ--.34937S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxAF47JryfCw48Xw1Duw48JFb_yoW5XF4fpa
+	43GFyDGr4Dury09wsrGFsrZa40kw18GFy3GryfZa42qrWaqrySkFykKF1xZF1UX3y8X348
+	XFyjkryxAr45CrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26rxl
+	6s0DM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+	0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+	jxv20xvE14v26r1q6rW5McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr
+	1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
+	n2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
+	AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWrXVW8Jr1l
+	IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7CjxV
+	AFwI0_Cr1j6rxdMIIF0xvE42xK8VAvwI8IcIk0rVWUCVW8JwCI42IY6I8E87Iv67AKxVW8
+	JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26F4UJVW0obIYCTnIWIevJa73UjIFyTuYvjfUe_
+	MaUUUUU
+X-CM-SenderInfo: 51xn3trlr6x35dzhxuhorxvhhfrp/
 
-Le lun. 11 d=C3=A9c. 2023 =C3=A0 12:27, Jan Beulich <jbeulich@suse.com> a =
-=C3=A9crit :
->
-> On 11.12.2023 12:09, S=C3=A9bastien Chaumat wrote:
-> > Le lun. 11 d=C3=A9c. 2023 =C3=A0 10:18, S=C3=A9bastien Chaumat <euidzer=
-o@gmail.com> a =C3=A9crit :
-> >>
-> >>> On 05.12.2023 21:31, S=C3=A9bastien Chaumat wrote:
-> >>>>> [    2.464598] amd_gpio AMDI0030:00: failed to enable wake-up inter=
-rupt
-> >>>>
-> >>>> Is it expected that IRQ7 goes from fasteoi (kernel 6.6.4 ) to
-> >>>> ioapic-edge and IRQ9 to ioapic-level ?
-> >>>>
-> >>>> IR-IO-APIC    7-fasteoi   pinctrl_amd
-> >>>> IR-IO-APIC    9-fasteoi   acpi
-> >>>>
-> >>>> to (xen 4.18.0)
-> >>>>
-> >>>> xen-pirq     -ioapic-edge  pinctrl_amd
-> >>>> xen-pirq     -ioapic-level  acpi
-> >>>>
-> >>>> ?
-> >
-> > This look similar to
-> > https://yhbt.net/lore/all/20201006044941.fdjsp346kc5thyzy@Rk/t/
-> >
-> > This issue seems that IRQ 7 (the GPIO controller) is natively fasteoi
-> > (so level type) while in xen it  is mapped to oapic-edge  instead of
-> > oapic-level
-> > as the SSDT indicates :
-> >
-> >  Device (GPIO)
-> >
-> >      {
-> >          Name (_HID, "AMDI0030")  // _HID: Hardware ID
-> >          Name (_CID, "AMDI0030")  // _CID: Compatible ID
-> >          Name (_UID, Zero)  // _UID: Unique ID
-> >          Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Set=
-tings
-> >          {
-> >              Name (RBUF, ResourceTemplate ()
-> >              {
-> >                  Interrupt (ResourceConsumer, Level, ActiveLow, Shared,=
- ,, )
-> >                  {
-> >                      0x00000007,
-> >            }
-> > Any idea why ?
->
-> Information coming from AML is required to be handed down by Dom0 to Xen.
-> May want checking that (a) Dom0 properly does so and (b) Xen doesn't scre=
-w
-> up in consuming that data. See PHYSDEVOP_setup_gsi. I wonder if this is
-> specific to it being IRQ7 which GPIO uses, as at the (master) PIC IRQ7 is
-> also the spurious vector. You may want to retry with the tip of the 4.17
-> branch (soon to become 4.17.3) - while it doesn't look very likely to me
-> that recent backports there were related, it may still be that they make
-> a difference.
+From: Yu Kuai <yukuai3@huawei.com>
 
-Tried 4.17.3-pre : no change
-How would you check (a) and (b) exactly (I need technical directions here)?
+Avoid to access bd_inode directly, prepare to remove bd_inode from
+block_devcie.
 
-Any way to force IRQ7 to ioapic-level to test the hypothesis ?
+Signed-off-by: Yu Kuai <yukuai3@huawei.com>
+---
+ fs/ext4/dir.c       | 6 ++----
+ fs/ext4/ext4_jbd2.c | 6 +++---
+ fs/ext4/super.c     | 3 +--
+ 3 files changed, 6 insertions(+), 9 deletions(-)
 
-Thanks
-S=C3=A9bastien
+diff --git a/fs/ext4/dir.c b/fs/ext4/dir.c
+index 3985f8c33f95..64e35eb6a324 100644
+--- a/fs/ext4/dir.c
++++ b/fs/ext4/dir.c
+@@ -191,10 +191,8 @@ static int ext4_readdir(struct file *file, struct dir_context *ctx)
+ 			pgoff_t index = map.m_pblk >>
+ 					(PAGE_SHIFT - inode->i_blkbits);
+ 			if (!ra_has_index(&file->f_ra, index))
+-				page_cache_sync_readahead(
+-					sb->s_bdev->bd_inode->i_mapping,
+-					&file->f_ra, file,
+-					index, 1);
++				bdev_sync_readahead(sb->s_bdev, &file->f_ra,
++						    file, index, 1);
+ 			file->f_ra.prev_pos = (loff_t)index << PAGE_SHIFT;
+ 			bh = ext4_bread(NULL, inode, map.m_lblk, 0);
+ 			if (IS_ERR(bh)) {
+diff --git a/fs/ext4/ext4_jbd2.c b/fs/ext4/ext4_jbd2.c
+index d1a2e6624401..c1bf3a00fad9 100644
+--- a/fs/ext4/ext4_jbd2.c
++++ b/fs/ext4/ext4_jbd2.c
+@@ -206,7 +206,6 @@ static void ext4_journal_abort_handle(const char *caller, unsigned int line,
+ 
+ static void ext4_check_bdev_write_error(struct super_block *sb)
+ {
+-	struct address_space *mapping = sb->s_bdev->bd_inode->i_mapping;
+ 	struct ext4_sb_info *sbi = EXT4_SB(sb);
+ 	int err;
+ 
+@@ -216,9 +215,10 @@ static void ext4_check_bdev_write_error(struct super_block *sb)
+ 	 * we could read old data from disk and write it out again, which
+ 	 * may lead to on-disk filesystem inconsistency.
+ 	 */
+-	if (errseq_check(&mapping->wb_err, READ_ONCE(sbi->s_bdev_wb_err))) {
++	if (bdev_wb_err_check(sb->s_bdev, READ_ONCE(sbi->s_bdev_wb_err))) {
+ 		spin_lock(&sbi->s_bdev_wb_lock);
+-		err = errseq_check_and_advance(&mapping->wb_err, &sbi->s_bdev_wb_err);
++		err = bdev_wb_err_check_and_advance(sb->s_bdev,
++						    &sbi->s_bdev_wb_err);
+ 		spin_unlock(&sbi->s_bdev_wb_lock);
+ 		if (err)
+ 			ext4_error_err(sb, -err,
+diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+index 3b5e2b557488..96724cae622a 100644
+--- a/fs/ext4/super.c
++++ b/fs/ext4/super.c
+@@ -5544,8 +5544,7 @@ static int __ext4_fill_super(struct fs_context *fc, struct super_block *sb)
+ 	 * used to detect the metadata async write error.
+ 	 */
+ 	spin_lock_init(&sbi->s_bdev_wb_lock);
+-	errseq_check_and_advance(&sb->s_bdev->bd_inode->i_mapping->wb_err,
+-				 &sbi->s_bdev_wb_err);
++	bdev_wb_err_check_and_advance(sb->s_bdev, &sbi->s_bdev_wb_err);
+ 	EXT4_SB(sb)->s_mount_state |= EXT4_ORPHAN_FS;
+ 	ext4_orphan_cleanup(sb, es);
+ 	EXT4_SB(sb)->s_mount_state &= ~EXT4_ORPHAN_FS;
+-- 
+2.39.2
+
 
