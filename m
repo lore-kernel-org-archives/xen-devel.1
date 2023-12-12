@@ -4,33 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFCE9C4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Dec 2023 15:38:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.653191.1019545 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24A9DC46CA2
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Dec 2023 15:39:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.653207.1019595 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rD4pf-0000Zp-B0; Tue, 12 Dec 2023 15:38:03 +0000
+	id 1rD4qy-0003Hl-R9; Tue, 12 Dec 2023 15:39:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 653191.1019545; Tue, 12 Dec 2023 15:38:03 +0000
+Received: by outflank-mailman (output) from mailman id 653207.1019595; Tue, 12 Dec 2023 15:39:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rD4pf-0000Zi-87; Tue, 12 Dec 2023 15:38:03 +0000
-Received: by outflank-mailman (input) for mailman id 653191;
- Tue, 12 Dec 2023 15:38:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rD4qy-0003He-OS; Tue, 12 Dec 2023 15:39:24 +0000
+Received: by outflank-mailman (input) for mailman id 653207;
+ Tue, 12 Dec 2023 15:39:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0UEi=HX=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1rD4pd-0000ZM-FF
- for xen-devel@lists.xenproject.org; Tue, 12 Dec 2023 15:38:01 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6e47a0f6-9904-11ee-98e8-6d05b1d4d9a1;
- Tue, 12 Dec 2023 16:38:00 +0100 (CET)
-Received: from Dell.homenet.telecomitalia.it
- (host-82-60-45-193.retail.telecomitalia.it [82.60.45.193])
- by support.bugseng.com (Postfix) with ESMTPSA id 0662B4EE0C91;
- Tue, 12 Dec 2023 16:37:59 +0100 (CET)
+ <SRS0=Ckot=HX=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
+ id 1rD4qw-0003HJ-NT
+ for xen-devel@lists.xenproject.org; Tue, 12 Dec 2023 15:39:22 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9d60d559-9904-11ee-9b0f-b553b5be7939;
+ Tue, 12 Dec 2023 16:39:20 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-588-oXKjbKZqPLi5HX1YCXpYaQ-1; Tue,
+ 12 Dec 2023 10:39:14 -0500
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B28B42806403;
+ Tue, 12 Dec 2023 15:39:11 +0000 (UTC)
+Received: from localhost (unknown [10.39.193.220])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 922F32026D66;
+ Tue, 12 Dec 2023 15:39:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,119 +53,251 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e47a0f6-9904-11ee-98e8-6d05b1d4d9a1
-From: Federico Serafini <federico.serafini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH 2/4] x86/asm: address violations of MISRA C:2012 Rule 8.2
-Date: Tue, 12 Dec 2023 16:37:40 +0100
-Message-Id: <0db906df2d3649fc8652be6b80e14870b78b0f56.1702394721.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1702394721.git.federico.serafini@bugseng.com>
-References: <cover.1702394721.git.federico.serafini@bugseng.com>
+X-Inumbo-ID: 9d60d559-9904-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1702395559;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=mhd5PyZ3DXbsV3qmdtVMB6yuzeux7oigKl5JGcj9MXo=;
+	b=EsjQKdeD1G2/IqDJtT6IsqND4u9xIXHy2ejqVwvl1gFrFWeGWLiiHuNLtagBpWs2ldr4QP
+	gH3JfYwU1nWNvaA7cvzMGDo3K1kH5lOpad70CAQRroLt6ghvPNudpoMnUXKbsQRwh/53H6
+	MMoN3DG3VCAGTlEh/RVFCHFB0hPdrWA=
+X-MC-Unique: oXKjbKZqPLi5HX1YCXpYaQ-1
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Akihiko Odaki <akihiko.odaki@daynix.com>,
+	Artyom Tarasenko <atar4qemu@gmail.com>,
+	Paul Durrant <paul@xen.org>,
+	Daniel Henrique Barboza <danielhb413@gmail.com>,
+	=?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	BALATON Zoltan <balaton@eik.bme.hu>,
+	Jagannathan Raman <jag.raman@oracle.com>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	David Gibson <david@gibson.dropbear.id.au>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+	Alexander Graf <agraf@csgraf.de>,
+	Hailiang Zhang <zhanghailiang@xfusion.com>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	Harsh Prateek Bora <harshpb@linux.ibm.com>,
+	Ilya Leoshkevich <iii@linux.ibm.com>,
+	Peter Xu <peterx@redhat.com>,
+	Hyman Huang <yong.huang@smartx.com>,
+	Fam Zheng <fam@euphon.net>,
+	Song Gao <gaosong@loongson.cn>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Aurelien Jarno <aurelien@aurel32.net>,
+	Leonardo Bras <leobras@redhat.com>,
+	Jiri Slaby <jslaby@suse.cz>,
+	Eric Farman <farman@linux.ibm.com>,
+	Thomas Huth <thuth@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	David Hildenbrand <david@redhat.com>,
+	Michael Roth <michael.roth@amd.com>,
+	Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Cameron Esfahani <dirty@apple.com>,
+	qemu-ppc@nongnu.org,
+	John Snow <jsnow@redhat.com>,
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+	Weiwei Li <liwei1518@gmail.com>,
+	Hanna Reitz <hreitz@redhat.com>,
+	qemu-s390x@nongnu.org,
+	qemu-block@nongnu.org,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	kvm@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+	Andrey Smirnov <andrew.smirnov@gmail.com>,
+	Reinoud Zandijk <reinoud@netbsd.org>,
+	Kevin Wolf <kwolf@redhat.com>,
+	Bin Meng <bin.meng@windriver.com>,
+	Sunil Muthuswamy <sunilmut@microsoft.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	qemu-riscv@nongnu.org,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	Stafford Horne <shorne@gmail.com>,
+	Fabiano Rosas <farosas@suse.de>,
+	Juan Quintela <quintela@redhat.com>,
+	Markus Armbruster <armbru@redhat.com>,
+	qemu-arm@nongnu.org,
+	Jason Wang <jasowang@redhat.com>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Max Filippov <jcmvbkbc@gmail.com>,
+	Jean-Christophe Dubois <jcd@tribudubois.net>,
+	Eric Blake <eblake@redhat.com>,
+	Roman Bolshakov <rbolshakov@ddn.com>,
+	Halil Pasic <pasic@linux.ibm.com>,
+	xen-devel@lists.xenproject.org,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2 0/5] Make Big QEMU Lock naming consistent
+Date: Tue, 12 Dec 2023 10:38:59 -0500
+Message-ID: <20231212153905.631119-1-stefanha@redhat.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
 
-Add missing parameter names. No functional change.
+v2:
+- Rename APIs bql_*() [PeterX]
+- Spell out "Big QEMU Lock (BQL)" in doc comments [PeterX]
+- Rename "iolock" variables in hw/remote/mpqemu-link.c [Harsh]
+- Fix bql_auto_lock() indentation in Patch 2 [Ilya]
+- "with BQL taken" -> "with the BQL taken" [Philippe]
+- "under BQL" -> "under the BQL" [Philippe]
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
- xen/arch/x86/include/asm/amd.h       | 2 +-
- xen/arch/x86/include/asm/debugreg.h  | 4 ++--
- xen/arch/x86/include/asm/flushtlb.h  | 3 ++-
- xen/arch/x86/include/asm/hap.h       | 2 +-
- xen/arch/x86/include/asm/iommu.h     | 2 +-
- xen/arch/x86/include/asm/microcode.h | 2 +-
- 6 files changed, 8 insertions(+), 7 deletions(-)
+The Big QEMU Lock ("BQL") has two other names: "iothread lock" and "QEMU global
+mutex". The term "iothread lock" is easily confused with the unrelated --object
+iothread (iothread.c).
 
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index 0700827561..2cc0ce2e9f 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -157,7 +157,7 @@
- #define is_zen4_uarch()   boot_cpu_has(X86_FEATURE_AUTO_IBRS)
- 
- struct cpuinfo_x86;
--int cpu_has_amd_erratum(const struct cpuinfo_x86 *, int, ...);
-+int cpu_has_amd_erratum(const struct cpuinfo_x86 *cpu, int osvw_id, ...);
- 
- extern s8 opt_allow_unsafe;
- 
-diff --git a/xen/arch/x86/include/asm/debugreg.h b/xen/arch/x86/include/asm/debugreg.h
-index b6454cc04e..2bdaf5d9aa 100644
---- a/xen/arch/x86/include/asm/debugreg.h
-+++ b/xen/arch/x86/include/asm/debugreg.h
-@@ -96,8 +96,8 @@
- #define breakpoint_addr_ok(a) __addr_ok(a)
- 
- struct vcpu;
--long set_debugreg(struct vcpu *, unsigned int reg, unsigned long value);
--void activate_debugregs(const struct vcpu *);
-+long set_debugreg(struct vcpu *v, unsigned int reg, unsigned long value);
-+void activate_debugregs(const struct vcpu *curr);
- 
- struct cpu_policy;
- 
-diff --git a/xen/arch/x86/include/asm/flushtlb.h b/xen/arch/x86/include/asm/flushtlb.h
-index a461ee36ff..bb0ad58db4 100644
---- a/xen/arch/x86/include/asm/flushtlb.h
-+++ b/xen/arch/x86/include/asm/flushtlb.h
-@@ -141,7 +141,8 @@ unsigned int flush_area_local(const void *va, unsigned int flags);
- #define flush_local(flags) flush_area_local(NULL, flags)
- 
- /* Flush specified CPUs' TLBs/caches */
--void flush_area_mask(const cpumask_t *, const void *va, unsigned int flags);
-+void flush_area_mask(const cpumask_t *mask, const void *va,
-+                     unsigned int flags);
- #define flush_mask(mask, flags) flush_area_mask(mask, NULL, flags)
- 
- /* Flush all CPUs' TLBs/caches */
-diff --git a/xen/arch/x86/include/asm/hap.h b/xen/arch/x86/include/asm/hap.h
-index 05e124ad57..f01ce73fb4 100644
---- a/xen/arch/x86/include/asm/hap.h
-+++ b/xen/arch/x86/include/asm/hap.h
-@@ -32,7 +32,7 @@ int   hap_track_dirty_vram(struct domain *d,
-                            unsigned int nr_frames,
-                            XEN_GUEST_HANDLE(void) guest_dirty_bitmap);
- 
--extern const struct paging_mode *hap_paging_get_mode(struct vcpu *);
-+extern const struct paging_mode *hap_paging_get_mode(struct vcpu *v);
- int hap_set_allocation(struct domain *d, unsigned int pages, bool *preempted);
- unsigned int hap_get_allocation(struct domain *d);
- 
-diff --git a/xen/arch/x86/include/asm/iommu.h b/xen/arch/x86/include/asm/iommu.h
-index eb720205e2..15a848ddc3 100644
---- a/xen/arch/x86/include/asm/iommu.h
-+++ b/xen/arch/x86/include/asm/iommu.h
-@@ -87,7 +87,7 @@ extern const struct iommu_init_ops *iommu_init_ops;
- void iommu_update_ire_from_apic(unsigned int apic, unsigned int pin,
-                                 uint64_t rte);
- unsigned int iommu_read_apic_from_ire(unsigned int apic, unsigned int reg);
--int iommu_setup_hpet_msi(struct msi_desc *);
-+int iommu_setup_hpet_msi(struct msi_desc *msi);
- 
- static inline void iommu_adjust_irq_affinities(void)
- {
-diff --git a/xen/arch/x86/include/asm/microcode.h b/xen/arch/x86/include/asm/microcode.h
-index 62ce3418f7..8f59b20b02 100644
---- a/xen/arch/x86/include/asm/microcode.h
-+++ b/xen/arch/x86/include/asm/microcode.h
-@@ -22,7 +22,7 @@ struct cpu_signature {
- DECLARE_PER_CPU(struct cpu_signature, cpu_sig);
- 
- void microcode_set_module(unsigned int idx);
--int microcode_update(XEN_GUEST_HANDLE(const_void), unsigned long len);
-+int microcode_update(XEN_GUEST_HANDLE(const_void) buf, unsigned long len);
- int early_microcode_init(unsigned long *module_map,
-                          const struct multiboot_info *mbi);
- int microcode_init_cache(unsigned long *module_map,
+This series updates the code and documentation to consistently use "BQL". This
+makes the code easier to understand.
+
+Stefan Hajnoczi (5):
+  system/cpus: rename qemu_mutex_lock_iothread() to bql_lock()
+  qemu/main-loop: rename QEMU_IOTHREAD_LOCK_GUARD to BQL_LOCK_GUARD
+  qemu/main-loop: rename qemu_cond_wait_iothread() to
+    qemu_cond_wait_bql()
+  Replace "iothread lock" with "BQL" in comments
+  Rename "QEMU global mutex" to "BQL" in comments and docs
+
+ docs/devel/multi-thread-tcg.rst      |   7 +-
+ docs/devel/qapi-code-gen.rst         |   2 +-
+ docs/devel/replay.rst                |   2 +-
+ docs/devel/reset.rst                 |   2 +-
+ docs/devel/multiple-iothreads.txt    |  16 ++--
+ hw/display/qxl.h                     |   2 +-
+ include/block/aio-wait.h             |   2 +-
+ include/block/blockjob.h             |   6 +-
+ include/exec/cpu-common.h            |   2 +-
+ include/exec/memory.h                |   4 +-
+ include/exec/ramblock.h              |   2 +-
+ include/io/task.h                    |   2 +-
+ include/migration/register.h         |   8 +-
+ include/qemu/coroutine-core.h        |   2 +-
+ include/qemu/coroutine.h             |   2 +-
+ include/qemu/main-loop.h             |  69 ++++++++--------
+ include/qemu/thread.h                |   2 +-
+ target/arm/internals.h               |   4 +-
+ accel/accel-blocker.c                |  10 +--
+ accel/dummy-cpus.c                   |   8 +-
+ accel/hvf/hvf-accel-ops.c            |   4 +-
+ accel/kvm/kvm-accel-ops.c            |   4 +-
+ accel/kvm/kvm-all.c                  |  22 ++---
+ accel/tcg/cpu-exec.c                 |  26 +++---
+ accel/tcg/cputlb.c                   |  20 ++---
+ accel/tcg/tcg-accel-ops-icount.c     |   6 +-
+ accel/tcg/tcg-accel-ops-mttcg.c      |  12 +--
+ accel/tcg/tcg-accel-ops-rr.c         |  18 ++--
+ accel/tcg/tcg-accel-ops.c            |   2 +-
+ accel/tcg/translate-all.c            |   2 +-
+ cpu-common.c                         |   4 +-
+ dump/dump.c                          |   4 +-
+ hw/block/dataplane/virtio-blk.c      |   8 +-
+ hw/block/virtio-blk.c                |   2 +-
+ hw/core/cpu-common.c                 |   6 +-
+ hw/display/virtio-gpu.c              |   2 +-
+ hw/i386/intel_iommu.c                |   6 +-
+ hw/i386/kvm/xen_evtchn.c             |  30 +++----
+ hw/i386/kvm/xen_gnttab.c             |   2 +-
+ hw/i386/kvm/xen_overlay.c            |   2 +-
+ hw/i386/kvm/xen_xenstore.c           |   2 +-
+ hw/intc/arm_gicv3_cpuif.c            |   2 +-
+ hw/intc/s390_flic.c                  |  18 ++--
+ hw/mips/mips_int.c                   |   2 +-
+ hw/misc/edu.c                        |   4 +-
+ hw/misc/imx6_src.c                   |   2 +-
+ hw/misc/imx7_src.c                   |   2 +-
+ hw/net/xen_nic.c                     |   8 +-
+ hw/ppc/pegasos2.c                    |   2 +-
+ hw/ppc/ppc.c                         |   6 +-
+ hw/ppc/spapr.c                       |   2 +-
+ hw/ppc/spapr_events.c                |   2 +-
+ hw/ppc/spapr_rng.c                   |   4 +-
+ hw/ppc/spapr_softmmu.c               |   4 +-
+ hw/remote/mpqemu-link.c              |  22 ++---
+ hw/remote/vfio-user-obj.c            |   2 +-
+ hw/s390x/s390-skeys.c                |   2 +-
+ hw/scsi/virtio-scsi-dataplane.c      |   6 +-
+ migration/block-dirty-bitmap.c       |  14 ++--
+ migration/block.c                    |  40 ++++-----
+ migration/colo.c                     |  62 +++++++-------
+ migration/dirtyrate.c                |  12 +--
+ migration/migration.c                |  54 ++++++------
+ migration/ram.c                      |  16 ++--
+ net/tap.c                            |   2 +-
+ replay/replay-internal.c             |   2 +-
+ semihosting/console.c                |   8 +-
+ stubs/iothread-lock.c                |   6 +-
+ system/cpu-throttle.c                |   6 +-
+ system/cpus.c                        |  55 +++++++------
+ system/dirtylimit.c                  |   4 +-
+ system/memory.c                      |   2 +-
+ system/physmem.c                     |  14 ++--
+ system/runstate.c                    |   2 +-
+ system/watchpoint.c                  |   4 +-
+ target/arm/arm-powerctl.c            |  14 ++--
+ target/arm/helper.c                  |   6 +-
+ target/arm/hvf/hvf.c                 |   8 +-
+ target/arm/kvm.c                     |   4 +-
+ target/arm/kvm64.c                   |   4 +-
+ target/arm/ptw.c                     |   6 +-
+ target/arm/tcg/helper-a64.c          |   8 +-
+ target/arm/tcg/m_helper.c            |   6 +-
+ target/arm/tcg/op_helper.c           |  24 +++---
+ target/arm/tcg/psci.c                |   2 +-
+ target/hppa/int_helper.c             |   8 +-
+ target/i386/hvf/hvf.c                |   6 +-
+ target/i386/kvm/hyperv.c             |   4 +-
+ target/i386/kvm/kvm.c                |  28 +++----
+ target/i386/kvm/xen-emu.c            |  16 ++--
+ target/i386/nvmm/nvmm-accel-ops.c    |   6 +-
+ target/i386/nvmm/nvmm-all.c          |  20 ++---
+ target/i386/tcg/sysemu/fpu_helper.c  |   6 +-
+ target/i386/tcg/sysemu/misc_helper.c |   4 +-
+ target/i386/whpx/whpx-accel-ops.c    |   6 +-
+ target/i386/whpx/whpx-all.c          |  24 +++---
+ target/loongarch/csr_helper.c        |   4 +-
+ target/mips/kvm.c                    |   4 +-
+ target/mips/tcg/sysemu/cp0_helper.c  |   4 +-
+ target/openrisc/sys_helper.c         |  16 ++--
+ target/ppc/excp_helper.c             |  14 ++--
+ target/ppc/helper_regs.c             |   2 +-
+ target/ppc/kvm.c                     |   4 +-
+ target/ppc/misc_helper.c             |   8 +-
+ target/ppc/timebase_helper.c         |   8 +-
+ target/riscv/cpu_helper.c            |   4 +-
+ target/s390x/kvm/kvm.c               |   4 +-
+ target/s390x/tcg/misc_helper.c       | 118 +++++++++++++--------------
+ target/sparc/int32_helper.c          |   2 +-
+ target/sparc/int64_helper.c          |   6 +-
+ target/sparc/win_helper.c            |  20 ++---
+ target/xtensa/exc_helper.c           |   8 +-
+ ui/spice-core.c                      |   6 +-
+ util/async.c                         |   2 +-
+ util/main-loop.c                     |   8 +-
+ util/qsp.c                           |   6 +-
+ util/rcu.c                           |  16 ++--
+ audio/coreaudio.m                    |   8 +-
+ memory_ldst.c.inc                    |  18 ++--
+ target/i386/hvf/README.md            |   2 +-
+ ui/cocoa.m                           |  56 ++++++-------
+ 121 files changed, 644 insertions(+), 645 deletions(-)
+
 -- 
-2.34.1
+2.43.0
 
 
