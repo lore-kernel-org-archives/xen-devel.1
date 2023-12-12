@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9CF8C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Dec 2023 22:39:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.653616.1020025 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D40FEC4167B
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Dec 2023 22:48:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.653621.1020035 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rDBOj-0004ip-6P; Tue, 12 Dec 2023 22:38:41 +0000
+	id 1rDBXt-0006mY-1Y; Tue, 12 Dec 2023 22:48:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 653616.1020025; Tue, 12 Dec 2023 22:38:41 +0000
+Received: by outflank-mailman (output) from mailman id 653621.1020035; Tue, 12 Dec 2023 22:48:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rDBOj-0004ii-36; Tue, 12 Dec 2023 22:38:41 +0000
-Received: by outflank-mailman (input) for mailman id 653616;
- Tue, 12 Dec 2023 22:38:39 +0000
+	id 1rDBXs-0006mR-VD; Tue, 12 Dec 2023 22:48:08 +0000
+Received: by outflank-mailman (input) for mailman id 653621;
+ Tue, 12 Dec 2023 22:48:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=A1Zv=HX=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1rDBOh-0004iY-Af
- for xen-devel@lists.xenproject.org; Tue, 12 Dec 2023 22:38:39 +0000
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ id 1rDBXr-0006mJ-BT
+ for xen-devel@lists.xenproject.org; Tue, 12 Dec 2023 22:48:07 +0000
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 30c4cb89-993f-11ee-98e8-6d05b1d4d9a1;
- Tue, 12 Dec 2023 23:38:37 +0100 (CET)
+ id 829a6b3d-9940-11ee-98e8-6d05b1d4d9a1;
+ Tue, 12 Dec 2023 23:48:06 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 267B8B817CA;
- Tue, 12 Dec 2023 22:38:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CFE8C433C7;
- Tue, 12 Dec 2023 22:38:35 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id B0B8DCE1C61;
+ Tue, 12 Dec 2023 22:48:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D70FEC433C7;
+ Tue, 12 Dec 2023 22:47:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,55 +43,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 30c4cb89-993f-11ee-98e8-6d05b1d4d9a1
+X-Inumbo-ID: 829a6b3d-9940-11ee-98e8-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1702420716;
-	bh=CtG2DfxlAksLVIdyYgnqD1BqwaGgnM13hz70YTyLgok=;
+	s=k20201202; t=1702421280;
+	bh=FWunfJukoEf8uv3S6Blf40SDiYHQAMZe9Gql3B5kJ9g=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=OqbcEOGrXIDx/4Qec4va0UclQAsLOl20ESvfQNFbqmHCegaJV7Qb9TUorVj5WmcVY
-	 E7B+Dp760r3sgpUME7jUTDjoiEYDRJAeyaz6ec2isvbKc7XOzdGcPLTpht+GLC1EYl
-	 PSQBFRFSK8looUFGm5I8S+kui9Gfm5TfKRm2Zo9DitB7FrUvjpVbII4ibto8s+Scyu
-	 Bb3GFhAFStNvoE4D5iqht/TRJuId2b/3BknA3ycUEr/RdO2XRwgz4ry2fRuXopRHjx
-	 n2LGA0b0GJGVTfsXvThRqvhfys/Gia259QKc1+nQuI2u2sn2/cblyCDjE8tiV5QRFh
-	 YHpxCZJ/glVZg==
-Date: Tue, 12 Dec 2023 14:38:34 -0800 (PST)
+	b=ShLSWiLIvT4eSfzvXltGMrcDw6iA3r6SP1QZQHKz4G3spFFMImdNYxzZcuVS44t7k
+	 GQK4U9mTwxlbaDpIClg5/ZzonLKEEPBlt0FjusyHsmrghVF5DUC01KPHXgn/IiS+2j
+	 1+GtD1+Q9xjJBDA761aF8+h7C3ZbRjOEtCTLImKfIqNay7mmSCEleGmn9wBEChVG/9
+	 RnYn5SFD5/OLpXqTTiGtHJeNIv+81F3VfTiRGungJJ+RhqfqnCoaZkN4WSUINmnQrO
+	 9w4GzwM3HDNeGhUk0n2EbYlt68b0cQu6rUpdPR8T04uwiigMkmSEAq2oLgs4hRNbi5
+	 aufUofpKCtmgw==
+Date: Tue, 12 Dec 2023 14:47:58 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Jan Beulich <jbeulich@suse.com>
-cc: Nicola Vetrini <nicola.vetrini@bugseng.com>, 
+To: Federico Serafini <federico.serafini@bugseng.com>
+cc: xen-devel@lists.xenproject.org, consulting@bugseng.com, 
     Andrew Cooper <andrew.cooper3@citrix.com>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    consulting@bugseng.com, Wei Liu <wl@xen.org>, 
-    xen-devel@lists.xenproject.org
-Subject: Re: [XEN PATCH 6/7] x86/platform: removed break to address MISRA
- C:2012 Rule 2.1
-In-Reply-To: <a8c42909-6316-448b-8d21-628d055abfbc@suse.com>
-Message-ID: <alpine.DEB.2.22.394.2312121437280.1703076@ubuntu-linux-20-04-desktop>
-References: <cover.1702283415.git.nicola.vetrini@bugseng.com> <b1103bc13d5ce04159417592705b4fe6a6db748b.1702283415.git.nicola.vetrini@bugseng.com> <a8c42909-6316-448b-8d21-628d055abfbc@suse.com>
+    George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
+    Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+    Wei Liu <wl@xen.org>
+Subject: Re: [XEN PATCH 1/4] xen/compat: address violations of MISRA C:2012
+ Rule 8.2
+In-Reply-To: <6a3bd7a3e4fa83c2c176894f756bd2e24c0f3ee0.1702394721.git.federico.serafini@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2312121447520.1703076@ubuntu-linux-20-04-desktop>
+References: <cover.1702394721.git.federico.serafini@bugseng.com> <6a3bd7a3e4fa83c2c176894f756bd2e24c0f3ee0.1702394721.git.federico.serafini@bugseng.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Tue, 12 Dec 2023, Jan Beulich wrote:
-> On 11.12.2023 11:30, Nicola Vetrini wrote:
-> > The break statement is redundant, hence it can be removed.
+On Tue, 12 Dec 2023, Federico Serafini wrote:
+> Add missing parameter names. No functional change.
 > 
-> Except ...
-> 
-> > --- a/xen/arch/x86/platform_hypercall.c
-> > +++ b/xen/arch/x86/platform_hypercall.c
-> > @@ -723,7 +723,6 @@ ret_t do_platform_op(
-> >  
-> >          ret = continue_hypercall_on_cpu(
-> >              0, cpu_down_helper, (void *)(unsigned long)cpu);
-> > -        break;
-> >      }
-> >      break;
-> 
-> ... it wants to be the other break that is removed, imo.
+> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 
-I was also about to comment about which of the two breaks to remove... I
-didn't know if there are x86 specific conventions so I didn't say
-anything about it. But I also think it is more natural to keep the other
-break.
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+
 
