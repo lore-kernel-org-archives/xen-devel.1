@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38BD5C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Dec 2023 09:53:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.652888.1019017 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B22C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Dec 2023 09:54:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.652891.1019027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCzSS-0007XD-09; Tue, 12 Dec 2023 09:53:44 +0000
+	id 1rCzSu-0008CI-9f; Tue, 12 Dec 2023 09:54:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 652888.1019017; Tue, 12 Dec 2023 09:53:43 +0000
+Received: by outflank-mailman (output) from mailman id 652891.1019027; Tue, 12 Dec 2023 09:54:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rCzSR-0007X5-Tt; Tue, 12 Dec 2023 09:53:43 +0000
-Received: by outflank-mailman (input) for mailman id 652888;
- Tue, 12 Dec 2023 09:53:42 +0000
+	id 1rCzSu-0008CB-5e; Tue, 12 Dec 2023 09:54:12 +0000
+Received: by outflank-mailman (input) for mailman id 652891;
+ Tue, 12 Dec 2023 09:54:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=A/PU=HX=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rCzSQ-000715-2v
- for xen-devel@lists.xenproject.org; Tue, 12 Dec 2023 09:53:42 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
+ (envelope-from <SRS0=/k62=HX=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1rCzNQ-0006i7-9p
+ for xen-devel@lists.xenproject.org; Tue, 12 Dec 2023 09:48:32 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 53e2d840-98d4-11ee-9b0f-b553b5be7939;
- Tue, 12 Dec 2023 10:53:40 +0100 (CET)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3332e351670so4926243f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 12 Dec 2023 01:53:40 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- g20-20020a05600c4ed400b0040c31bb66dcsm15672783wmq.20.2023.12.12.01.53.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Dec 2023 01:53:39 -0800 (PST)
+ id 9b26cd42-98d3-11ee-9b0f-b553b5be7939;
+ Tue, 12 Dec 2023 10:48:30 +0100 (CET)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 2B6511F74C;
+ Tue, 12 Dec 2023 09:48:30 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id E5F36139E9;
+ Tue, 12 Dec 2023 09:48:29 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id GlrjNm0seGX+fgAAn2gu4w
+ (envelope-from <jgross@suse.com>); Tue, 12 Dec 2023 09:48:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,105 +53,253 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 53e2d840-98d4-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1702374820; x=1702979620; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=F1SydZvsbopBu/icAPKPoVlc7p/qggaakBqwEkAJFIE=;
-        b=GQ8Quv6NUrePjNe2fsGDWj1crjZBG7RyTCoXWp7DHCdiQIQ9Ykbu+SM+jUuHe+96hk
-         gmN10J6MxyUgC1TtBHhll1musFRHvwZD6zQFcYoOSR6MLNBthZtJM/7HyFl5oOuyYjoR
-         9jGt/Dt7Fm3r/5T/WuQrjwuLHMLWKYOO7S2Gc6H8qG3MGVaJ68Sn0YXBx8p+IayBDZ6J
-         SHdNAlY3XyHzFQiaieUvZfWORisLYBzg6cxf9iomQnkgW9+gVbmn7RKVVe9pICZqG/iM
-         csD+mYTKUOkkUOpSw1CYypVafgc1rzYVKYjRoBQzAzLRTar3k/mx82idMTn2OTdBeNlc
-         XyPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702374820; x=1702979620;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=F1SydZvsbopBu/icAPKPoVlc7p/qggaakBqwEkAJFIE=;
-        b=lwA8FYxXocMQU1pNVvYhVIcLOKLp66Ou9+anLHG5BKOc8hvTydxlx82KVr3VC/2njV
-         eJmJfpMQ5YNjW3wCjorjExRd1a9ZBb3Quqe9Bfhc/YY67o/cCQ9UHOb1GJi1KZeyTOGA
-         RKT7uzuAvrWj/6LUNl0Hhf1M1o1UON9gXve0GNr3FeX75o+8eOm+YnA56fD8YI3bnO0E
-         7nUS+1t6e4eJJ9f9lHlRhEEmBqfYB/si9NH6bsaRunLf+aOkpJc/HyZzH7rIIuoRIHM9
-         Jm9mR+2T+dEG8w89YlvXqQ3vAhpb7DaAXTyc+VFsBGZni5x/7Y6JCSwuBmhMZIQA0ytH
-         rRYg==
-X-Gm-Message-State: AOJu0Yx/fdc6o4l45ja67NwYs/BS4Lzsska6LHfxuKkfCcj3xprzTTbT
-	butT4Zr8TDnH2gYcoRttbjun
-X-Google-Smtp-Source: AGHT+IEmIo8c17Nv0bbU7s5adbxEAJhFfxsp6msh+pdzQ1DeUcasDrgNlT6NfMJD5y26KNoqCYt1mQ==
-X-Received: by 2002:a05:600c:44e:b0:40b:5e22:2e0 with SMTP id s14-20020a05600c044e00b0040b5e2202e0mr1532334wmb.76.1702374819894;
-        Tue, 12 Dec 2023 01:53:39 -0800 (PST)
-Message-ID: <0ad1d3f5-2a23-4ee9-a6e7-ebb824d2b7d7@suse.com>
-Date: Tue, 12 Dec 2023 10:53:20 +0100
+X-Inumbo-ID: 9b26cd42-98d3-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1702374510; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=X9mtlOEEzRw0edEwEif+vRv2D1U88AlwXf4iThb3cgE=;
+	b=j16YnGSd8HmcxmMNaY9AbaLdu2gwwGtPOeiAo3vlqhr2TN6EJVeWVMfG6CfxOooQ47VS1a
+	1/37ZRLk5Hi/YZxZO2ykAAE9sOTX8JXldRsMBiaqeMXpGO4ldLURJQTqXkpFGtoPFIHa5n
+	5g5tfAHahqu+Ig6LjgfAQ2Ukb+uyVoQ=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1702374510; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=X9mtlOEEzRw0edEwEif+vRv2D1U88AlwXf4iThb3cgE=;
+	b=j16YnGSd8HmcxmMNaY9AbaLdu2gwwGtPOeiAo3vlqhr2TN6EJVeWVMfG6CfxOooQ47VS1a
+	1/37ZRLk5Hi/YZxZO2ykAAE9sOTX8JXldRsMBiaqeMXpGO4ldLURJQTqXkpFGtoPFIHa5n
+	5g5tfAHahqu+Ig6LjgfAQ2Ukb+uyVoQ=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 11/12] xen/spinlock: remove indirection through macros for spin_*() functions
+Date: Tue, 12 Dec 2023 10:47:24 +0100
+Message-Id: <20231212094725.22184-12-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20231212094725.22184-1-jgross@suse.com>
+References: <20231212094725.22184-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH 2/7] x86/mm: address MISRA C:2012 Rule 2.1
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, consulting@bugseng.com,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-References: <cover.1702283415.git.nicola.vetrini@bugseng.com>
- <5913d8871ff6c4f320c521e50e550a64e58d4351.1702283415.git.nicola.vetrini@bugseng.com>
- <alpine.DEB.2.22.394.2312111741390.1703076@ubuntu-linux-20-04-desktop>
- <ff95c65f53ab8acfd577ec132009cd7b@bugseng.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ff95c65f53ab8acfd577ec132009cd7b@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [8.80 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 BAYES_SPAM(5.10)[100.00%];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 NEURAL_HAM_LONG(-1.00)[-1.000];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-0.20)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[8];
+	 MID_CONTAINS_FROM(1.00)[];
+	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_TLS_ALL(0.00)[]
 
-On 12.12.2023 10:12, Nicola Vetrini wrote:
-> On 2023-12-12 02:42, Stefano Stabellini wrote:
->> On Mon, 11 Dec 2023, Nicola Vetrini wrote:
->>> The "return 0" after the swich statement in 'xen/arch/x86/mm.c'
->>> is unreachable because all switch clauses end with returns.
->>> However, some of them can be substituted with "break"s to allow
->>> the "return 0" outside the switch to be reachable.
->>>
->>> No functional changes.
->>
->> This is correct but makes the code inconsistent. I would either remove
->> the return 0; at the end of arch_memory_op, or do the following:
->>
->> - initialize rc to 0 at the beginning: int rc = 0;
->> - all switch clauses break instead of return;
->> - at the end: return rc;
-> 
-> Given the feedback on the Arm side, the first solution is likely to be 
-> preferred.
+In reality all spin_*() functions are macros which are defined to just
+call a related real function.
 
-I wouldn't mind either option, with
-- the former ensured to be okay with all compiler versions we (still)
-  support,
-- the latter having the initialize rc to 0 part dropped; imo it's better
-  if every case block makes sure to set the intended value explicitly.
+Remove this macro layer, as it is adding complexity without any gain.
 
-Jan
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch
+---
+ xen/common/spinlock.c      | 28 +++++++++---------
+ xen/include/xen/spinlock.h | 58 +++++++++++++++-----------------------
+ 2 files changed, 36 insertions(+), 50 deletions(-)
+
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index d0f8393504..296bcf33e6 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -332,30 +332,30 @@ static void always_inline spin_lock_common(spinlock_tickets_t *t,
+     LOCK_PROFILE_GOT(block);
+ }
+ 
+-void _spin_lock(spinlock_t *lock)
++void spin_lock(spinlock_t *lock)
+ {
+     spin_lock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR, NULL,
+                      NULL);
+ }
+ 
+-void _spin_lock_cb(spinlock_t *lock, void (*cb)(void *data), void *data)
++void spin_lock_cb(spinlock_t *lock, void (*cb)(void *data), void *data)
+ {
+     spin_lock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR, cb, data);
+ }
+ 
+-void _spin_lock_irq(spinlock_t *lock)
++void spin_lock_irq(spinlock_t *lock)
+ {
+     ASSERT(local_irq_is_enabled());
+     local_irq_disable();
+-    _spin_lock(lock);
++    spin_lock(lock);
+ }
+ 
+-unsigned long _spin_lock_irqsave(spinlock_t *lock)
++unsigned long __spin_lock_irqsave(spinlock_t *lock)
+ {
+     unsigned long flags;
+ 
+     local_irq_save(flags);
+-    _spin_lock(lock);
++    spin_lock(lock);
+     return flags;
+ }
+ 
+@@ -371,20 +371,20 @@ static void always_inline spin_unlock_common(spinlock_tickets_t *t,
+     preempt_enable();
+ }
+ 
+-void _spin_unlock(spinlock_t *lock)
++void spin_unlock(spinlock_t *lock)
+ {
+     spin_unlock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
+ }
+ 
+-void _spin_unlock_irq(spinlock_t *lock)
++void spin_unlock_irq(spinlock_t *lock)
+ {
+-    _spin_unlock(lock);
++    spin_unlock(lock);
+     local_irq_enable();
+ }
+ 
+-void _spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
++void spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
+ {
+-    _spin_unlock(lock);
++    spin_unlock(lock);
+     local_irq_restore(flags);
+ }
+ 
+@@ -393,7 +393,7 @@ static int always_inline spin_is_locked_common(const spinlock_tickets_t *t)
+     return t->head != t->tail;
+ }
+ 
+-int _spin_is_locked(const spinlock_t *lock)
++int spin_is_locked(const spinlock_t *lock)
+ {
+     return spin_is_locked_common(&lock->tickets);
+ }
+@@ -429,7 +429,7 @@ static int always_inline spin_trylock_common(spinlock_tickets_t *t,
+     return 1;
+ }
+ 
+-int _spin_trylock(spinlock_t *lock)
++int spin_trylock(spinlock_t *lock)
+ {
+     return spin_trylock_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
+ }
+@@ -453,7 +453,7 @@ static void always_inline spin_barrier_common(spinlock_tickets_t *t,
+     smp_mb();
+ }
+ 
+-void _spin_barrier(spinlock_t *lock)
++void spin_barrier(spinlock_t *lock)
+ {
+     spin_barrier_common(&lock->tickets, &lock->debug, LOCK_PROFILE_PAR);
+ }
+diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
+index ca18b9250a..87946965b2 100644
+--- a/xen/include/xen/spinlock.h
++++ b/xen/include/xen/spinlock.h
+@@ -224,18 +224,30 @@ typedef struct rspinlock {
+ #define spin_lock_init(l) (*(l) = (spinlock_t)SPIN_LOCK_UNLOCKED)
+ #define rspin_lock_init(l) (*(l) = (rspinlock_t)RSPIN_LOCK_UNLOCKED)
+ 
+-void _spin_lock(spinlock_t *lock);
+-void _spin_lock_cb(spinlock_t *lock, void (*cb)(void *data), void *data);
+-void _spin_lock_irq(spinlock_t *lock);
+-unsigned long _spin_lock_irqsave(spinlock_t *lock);
++void spin_lock(spinlock_t *lock);
++void spin_lock_cb(spinlock_t *lock, void (*cb)(void *data), void *data);
++void spin_lock_irq(spinlock_t *lock);
++#define spin_lock_irqsave(l, f)                                 \
++    ({                                                          \
++        BUILD_BUG_ON(sizeof(f) != sizeof(unsigned long));       \
++        ((f) = __spin_lock_irqsave(l));                         \
++    })
++unsigned long __spin_lock_irqsave(spinlock_t *lock);
+ 
+-void _spin_unlock(spinlock_t *lock);
+-void _spin_unlock_irq(spinlock_t *lock);
+-void _spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags);
++void spin_unlock(spinlock_t *lock);
++void spin_unlock_irq(spinlock_t *lock);
++void spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags);
+ 
+-int _spin_is_locked(const spinlock_t *lock);
+-int _spin_trylock(spinlock_t *lock);
+-void _spin_barrier(spinlock_t *lock);
++int spin_is_locked(const spinlock_t *lock);
++int spin_trylock(spinlock_t *lock);
++#define spin_trylock_irqsave(lock, flags)       \
++({                                              \
++    local_irq_save(flags);                      \
++    spin_trylock(lock) ?                        \
++    1 : ({ local_irq_restore(flags); 0; });     \
++})
++/* Ensure a lock is quiescent between two critical operations. */
++void spin_barrier(spinlock_t *lock);
+ 
+ /*
+  * rspin_[un]lock(): Use these forms when the lock can (safely!) be
+@@ -270,32 +282,6 @@ void nrspin_unlock_irq(rspinlock_t *lock);
+ unsigned long __nrspin_lock_irqsave(rspinlock_t *lock);
+ void nrspin_unlock_irqrestore(rspinlock_t *lock, unsigned long flags);
+ 
+-#define spin_lock(l)                  _spin_lock(l)
+-#define spin_lock_cb(l, c, d)         _spin_lock_cb(l, c, d)
+-#define spin_lock_irq(l)              _spin_lock_irq(l)
+-#define spin_lock_irqsave(l, f)                                 \
+-    ({                                                          \
+-        BUILD_BUG_ON(sizeof(f) != sizeof(unsigned long));       \
+-        ((f) = _spin_lock_irqsave(l));                          \
+-    })
+-
+-#define spin_unlock(l)                _spin_unlock(l)
+-#define spin_unlock_irq(l)            _spin_unlock_irq(l)
+-#define spin_unlock_irqrestore(l, f)  _spin_unlock_irqrestore(l, f)
+-
+-#define spin_is_locked(l)             _spin_is_locked(l)
+-#define spin_trylock(l)               _spin_trylock(l)
+-
+-#define spin_trylock_irqsave(lock, flags)       \
+-({                                              \
+-    local_irq_save(flags);                      \
+-    spin_trylock(lock) ?                        \
+-    1 : ({ local_irq_restore(flags); 0; });     \
+-})
+-
+ #define spin_lock_kick(l)             arch_lock_signal_wmb()
+ 
+-/* Ensure a lock is quiescent between two critical operations. */
+-#define spin_barrier(l)               _spin_barrier(l)
+-
+ #endif /* __SPINLOCK_H__ */
+-- 
+2.35.3
+
 
