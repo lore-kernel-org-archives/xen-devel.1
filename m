@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5368C4167D
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Dec 2023 11:44:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.654487.1021401 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81CC9C4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Dec 2023 11:44:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.654491.1021429 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rDk8W-00019Z-Sx; Thu, 14 Dec 2023 11:44:16 +0000
+	id 1rDk8Z-0001iq-DU; Thu, 14 Dec 2023 11:44:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 654487.1021401; Thu, 14 Dec 2023 11:44:16 +0000
+Received: by outflank-mailman (output) from mailman id 654491.1021429; Thu, 14 Dec 2023 11:44:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rDk8W-00019O-Or; Thu, 14 Dec 2023 11:44:16 +0000
-Received: by outflank-mailman (input) for mailman id 654487;
- Thu, 14 Dec 2023 11:44:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rDk8Z-0001gZ-6p; Thu, 14 Dec 2023 11:44:19 +0000
+Received: by outflank-mailman (input) for mailman id 654491;
+ Thu, 14 Dec 2023 11:44:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=57RS=HZ=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rDk8V-0000uU-Oq
- for xen-devel@lists.xenproject.org; Thu, 14 Dec 2023 11:44:15 +0000
+ id 1rDk8X-00016v-Tc
+ for xen-devel@lists.xenproject.org; Thu, 14 Dec 2023 11:44:17 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1b22bd8e-9a76-11ee-98e9-6d05b1d4d9a1;
- Thu, 14 Dec 2023 12:44:14 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1c0e4ffd-9a76-11ee-9b0f-b553b5be7939;
+ Thu, 14 Dec 2023 12:44:16 +0100 (CET)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id 3BE0F4EE0744;
- Thu, 14 Dec 2023 12:44:14 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id A1EF04EE0746;
+ Thu, 14 Dec 2023 12:44:15 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,54 +41,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1b22bd8e-9a76-11ee-98e9-6d05b1d4d9a1
+X-Inumbo-ID: 1c0e4ffd-9a76-11ee-9b0f-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 2/5] x86/ioapic: use NULL as a null pointer constant
-Date: Thu, 14 Dec 2023 12:44:07 +0100
-Message-Id: <01968117d9fc3eee6d6eca0d340d9d2edd4d6dd4.1702553835.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 5/5] xen/wait: address violations of MISRA C Rule 11.9
+Date: Thu, 14 Dec 2023 12:44:10 +0100
+Message-Id: <a4e13ba24ab54895454d8df1c956865f7cf7f0b5.1702553835.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1702553835.git.nicola.vetrini@bugseng.com>
 References: <cover.1702553835.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Resolves violations of MISRA C Rule 11.9.
 No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/io_apic.c | 4 ++--
+ xen/common/wait.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index d11c880544e6..dd25ba394301 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -207,7 +207,7 @@ struct IO_APIC_route_entry **alloc_ioapic_entries(void)
+diff --git a/xen/common/wait.c b/xen/common/wait.c
+index 86d3b15419db..cb6f5ff3c20a 100644
+--- a/xen/common/wait.c
++++ b/xen/common/wait.c
+@@ -125,7 +125,7 @@ static void __prepare_to_wait(struct waitqueue_vcpu *wqv)
+     struct vcpu *curr = current;
+     unsigned long dummy;
  
-     ioapic_entries = xmalloc_array(struct IO_APIC_route_entry *, nr_ioapics);
-     if (!ioapic_entries)
--        return 0;
-+        return NULL;
+-    ASSERT(wqv->esp == 0);
++    ASSERT(wqv->esp == NULL);
  
-     for (apic = 0; apic < nr_ioapics; apic++) {
-         ioapic_entries[apic] =
-@@ -224,7 +224,7 @@ nomem:
-         xfree(ioapic_entries[apic]);
-     xfree(ioapic_entries);
+     /* Save current VCPU affinity; force wakeup on *this* CPU only. */
+     if ( vcpu_temporary_affinity(curr, smp_processor_id(), VCPU_AFFINITY_WAIT) )
+@@ -171,7 +171,7 @@ static void __prepare_to_wait(struct waitqueue_vcpu *wqv)
+           [sz] "i" (PAGE_SIZE)
+         : "memory", "rax", "rdx", "r8", "r9", "r10", "r11" );
  
--    return 0;
-+    return NULL;
- }
- 
- union entry_union {
+-    if ( unlikely(wqv->esp == 0) )
++    if ( unlikely(wqv->esp == NULL) )
+     {
+         gdprintk(XENLOG_ERR, "Stack too large in %s\n", __func__);
+         domain_crash(curr->domain);
 -- 
 2.34.1
 
