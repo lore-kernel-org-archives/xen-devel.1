@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 593F0C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 01:53:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.654825.1022227 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4BF2C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 02:50:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.654832.1022238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rDxNq-0002Yh-CA; Fri, 15 Dec 2023 01:52:58 +0000
+	id 1rDyHP-0002QA-8Q; Fri, 15 Dec 2023 02:50:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 654825.1022227; Fri, 15 Dec 2023 01:52:58 +0000
+Received: by outflank-mailman (output) from mailman id 654832.1022238; Fri, 15 Dec 2023 02:50:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rDxNq-0002Ya-9U; Fri, 15 Dec 2023 01:52:58 +0000
-Received: by outflank-mailman (input) for mailman id 654825;
- Fri, 15 Dec 2023 01:52:56 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rDxNo-0002YO-Sx; Fri, 15 Dec 2023 01:52:56 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rDxNo-0000Je-Nl; Fri, 15 Dec 2023 01:52:56 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rDxNo-0001OW-8z; Fri, 15 Dec 2023 01:52:56 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1rDxNo-0005EO-7Y; Fri, 15 Dec 2023 01:52:56 +0000
+	id 1rDyHP-0002Q3-5l; Fri, 15 Dec 2023 02:50:23 +0000
+Received: by outflank-mailman (input) for mailman id 654832;
+ Fri, 15 Dec 2023 02:50:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=onWf=H2=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
+ id 1rDyHN-0002Pv-2n
+ for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 02:50:21 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id abf60fd7-9af4-11ee-9b0f-b553b5be7939;
+ Fri, 15 Dec 2023 03:50:15 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 8A1F38285463;
+ Thu, 14 Dec 2023 20:50:13 -0600 (CST)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id bmues2ljoQog; Thu, 14 Dec 2023 20:50:13 -0600 (CST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id EDE098285558;
+ Thu, 14 Dec 2023 20:50:12 -0600 (CST)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 3W1wJtzMBbe9; Thu, 14 Dec 2023 20:50:12 -0600 (CST)
+Received: from [10.11.0.2] (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id 36E3B8285463;
+ Thu, 14 Dec 2023 20:50:12 -0600 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +53,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=OH1TZrrHV0yaKLFxqbRlPpLK06QMCY/asXnvQyy2e0k=; b=suY4w56efCNHeTIfSzrh3PfSV9
-	C+u0l2zGi0uV+WUcWzvWTTQwUflizZPz/IC8YHdnTSGOe4dVEmJhcGyVLp9LCZkTFhP0BO7OsbCkZ
-	3HcS3VakskmgX+WCnzvxRxTbkJU6+N1SBBukaNnwIB6RXtWdXP+N80U67BewRoIlvpBg=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-184142-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: abf60fd7-9af4-11ee-9b0f-b553b5be7939
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com EDE098285558
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1702608613; bh=M2dCAVskJ5Bbdcz6mR8vjfRrGA1mVbY8VyComlFME8I=;
+	h=Message-ID:Date:MIME-Version:To:From;
+	b=EgAD4Hql2I95us9FrFWuNXq5lcZByCv/TPakGVVHFHZh6jArDSgBj4XtIhAlE31Cs
+	 vk+80EZNxhygmGa/RAeWSBPyjbuqx0Tfkhh25nuLuH45U8M0b+56wNP/2p7frJcSkM
+	 rzTngJLqKlkq0DG5N4RiZMhtk6U/1McSDMQoGZI8=
+X-Virus-Scanned: amavisd-new at rptsys.com
+Message-ID: <bd465581-601e-4d7d-a345-6d88740c9e64@raptorengineering.com>
+Date: Thu, 14 Dec 2023 20:50:11 -0600
 MIME-Version: 1.0
-Subject: [ovmf test] 184142: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=3ce5f2d445e51efe2aebaa227a055e5c8522d00b
-X-Osstest-Versions-That:
-    ovmf=7f5e75895bd6bbfbde191fb8458d324033f76c57
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 15 Dec 2023 01:52:56 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] xen/ppc: Enable Boot Allocator
+Content-Language: en-US
+To: Julien Grall <julien@xen.org>,
+ Timothy Pearson <tpearson@raptorengineering.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>, Oleksii <oleksii.kurochko@gmail.com>
+References: <cover.1701384928.git.sanastasio@raptorengineering.com>
+ <5ed3351f7824a5d0a1ff29c17cb55b2608f28109.1701384928.git.sanastasio@raptorengineering.com>
+ <938b9bfe-fba0-4c77-b2e5-fb79fb316ab4@xen.org>
+ <7e0ea8d9ca0a3a90550eb7b9e65fe86c.squirrel@vali.starlink.edu>
+ <1981531f-a919-4569-9b6b-8f962f9d7cfb@xen.org>
+ <536439989.51518893.1701471704571.JavaMail.zimbra@raptorengineeringinc.com>
+ <4ce0f52f-8a63-4d10-8cea-5c3b905477ec@xen.org>
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
+In-Reply-To: <4ce0f52f-8a63-4d10-8cea-5c3b905477ec@xen.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-flight 184142 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/184142/
+Hi Julien,
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 3ce5f2d445e51efe2aebaa227a055e5c8522d00b
-baseline version:
- ovmf                 7f5e75895bd6bbfbde191fb8458d324033f76c57
+Thank you for the feedback. Most of your points will be addressed by
+following your suggestion of moving ARM's bootfdt.c to common, but I
+wanted to respond with a few points of clarification.
 
-Last test of basis   184138  2023-12-14 16:44:15 Z    0 days
-Testing same since   184142  2023-12-14 22:12:46 Z    0 days    1 attempts
+On 12/1/23 5:23 PM, Julien Grall wrote:
+> * fdt_get_mem_rsv_paddr(), this is part of the DT is used to reserve
+> memory. This was superseed to /reserved-memory, but I wonder how
+> widespread this is on PPC?
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Michael Kubacki <michael.kubacki@microsoft.com>
+As far as I can tell, the DT reserve memory map is not used on
+PPC/PowerNV. This information is instead communicated through
+`reserved-memory` nodes in the DT itself, which the existing code
+handles.
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+> * If am not mistaken you are adding the Xen module as BOOTMOD_KERNEL,
+> however this is meant to be used for the domain kernel. Xen should be
+> BOOTMOD_XEN.
 
+Thank you for pointing this out -- BOOTMOD_XEN is indeed the correct
+choice here.
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+> I hope that helps.
+> 
+> Cheers,
+>
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+Thanks,
+Shawn
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   7f5e75895b..3ce5f2d445  3ce5f2d445e51efe2aebaa227a055e5c8522d00b -> xen-tested-master
 
