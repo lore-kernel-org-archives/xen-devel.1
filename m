@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD35C46CD7
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 14:20:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655137.1022890 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB394C35274
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 14:55:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.655188.1022900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE92d-0000WR-9v; Fri, 15 Dec 2023 14:19:51 +0000
+	id 1rE9ab-0001L5-Os; Fri, 15 Dec 2023 14:54:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655137.1022890; Fri, 15 Dec 2023 14:19:51 +0000
+Received: by outflank-mailman (output) from mailman id 655188.1022900; Fri, 15 Dec 2023 14:54:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE92d-0000VQ-5m; Fri, 15 Dec 2023 14:19:51 +0000
-Received: by outflank-mailman (input) for mailman id 655137;
- Fri, 15 Dec 2023 14:19:49 +0000
+	id 1rE9ab-0001Ky-MC; Fri, 15 Dec 2023 14:54:57 +0000
+Received: by outflank-mailman (input) for mailman id 655188;
+ Fri, 15 Dec 2023 14:54:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=a4Sn=H2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rE92b-0007Jp-7c
- for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 14:19:49 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
+ id 1rE9aa-0001Ks-4r
+ for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 14:54:56 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e0166d80-9b54-11ee-9b0f-b553b5be7939;
- Fri, 15 Dec 2023 15:18:53 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40c2c5a8150so6716615e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 15 Dec 2023 06:18:53 -0800 (PST)
+ id e794a2e6-9b59-11ee-9b0f-b553b5be7939;
+ Fri, 15 Dec 2023 15:54:53 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40c256ffdbcso8674695e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Dec 2023 06:54:53 -0800 (PST)
 Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
- jb4-20020a05600c54e400b0040c5cf930e6sm10304639wmb.19.2023.12.15.06.18.52
+ fa5-20020a05600c518500b0040c6d559490sm1720837wmb.3.2023.12.15.06.54.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 06:18:52 -0800 (PST)
+ Fri, 15 Dec 2023 06:54:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,107 +46,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0166d80-9b54-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: e794a2e6-9b59-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1702649933; x=1703254733; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FDw1hBjsMh2mJKl/ow003iacu/0pNjCq+t0PtXkwl9g=;
-        b=MA9kWeo8D7n3EFjRQHy72QWjaVBKDBDkyJ8xGyQ02Y/M3Dq5E64UoPpFroWejcvD98
-         qMFgJ1G8lG9jdN5RS9xnwL9A7XwjbRHbc+hbfWEQWYdcvYwGQTbtktEefHajCejCZuxv
-         YmL+lmOZRo49+Tsoyytqzvopnsdv32S8YPO8Q=
+        d=citrix.com; s=google; t=1702652093; x=1703256893; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Pb+esVZ95ff8GURkfDxZ5O1g1nKPENVklToWc7Xd3cA=;
+        b=B1PyVCV+/ygrH+9Bn2FXzpJ8CUH0cPQlCNoiMPZF6V/u53IjuvXW6EuYxZVQL+igcJ
+         azuUqf6HJLwr8AMD+pswT8/dflcoMBTAEx4BQce+bHkDAiSnxBRTq6xyJ0OLzlo/QkNc
+         iVt229Folw7CHbtYDyZyCS7LoL0J+AJXGqvJ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702649933; x=1703254733;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FDw1hBjsMh2mJKl/ow003iacu/0pNjCq+t0PtXkwl9g=;
-        b=pEXLA/ORfObDc+ZVoAPpXnJ2WLLCom72LjAGqfbHB626XuRbL8x8xvcorbrHzFAL6A
-         Y/QmdsHkRuQv0Z8byHOrFQcodUiU536JPkvqYbCmPHXL+yxazVI4V6F5dofuQ6nI7/9f
-         jtCVah7nY7BsuOk/kjahYIlLv6po60dRuPgvE3Xp1Uhwvwz2TTLgUVUfzkCw5p3weIu0
-         tkyRG78T9SIEZDdpDDuW4RD0mC6K63e9BnfSBhmzKh48dxAhGf61G/neq9eoO7c4aYUL
-         dfpTfobxzEXDtvqmX/BY6OfIVnTAwbcFruRD/7r2Dbv2Jchej0cbxq1WWeYv5QgaVhMc
-         dIIA==
-X-Gm-Message-State: AOJu0YxYqty5jJTvK89u1QxROx2/ZJ7N2eNiIK1l5ITxUwf77UYwASKO
-	uI3jBtcAefAZsuI6kWiDPshDql+LLYDx+X6Socw=
-X-Google-Smtp-Source: AGHT+IEKFd55/ZjZslr+01W7mD8pITw5hJ9VLgKPE1npdtdCJtacXmzMitWqw+BqgZzK1lArug7B/w==
-X-Received: by 2002:a05:600c:1705:b0:40b:3fc7:c887 with SMTP id c5-20020a05600c170500b0040b3fc7c887mr6586131wmn.20.1702649932808;
-        Fri, 15 Dec 2023 06:18:52 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v3 3/7] amd-vi: set IOMMU page table levels based on guest reported paddr width
-Date: Fri, 15 Dec 2023 15:18:28 +0100
-Message-ID: <20231215141832.9492-4-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231215141832.9492-1-roger.pau@citrix.com>
-References: <20231215141832.9492-1-roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1702652093; x=1703256893;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Pb+esVZ95ff8GURkfDxZ5O1g1nKPENVklToWc7Xd3cA=;
+        b=f+BxSO8idLEkAtpwuqqCbjCR3K2XsvvIwjceyc2JSDBn3vtEZ1tRnkIDixlVHl0zUB
+         nntLP7Y5oPjV8ddSCIHZHLVp2qPED6LSjDChWTkCZvO5CRNvxaBs9htawjxznCoKjcCL
+         z/dAJ07jlLnwktJ62VTtowcR3KAoOdSvUS9VUGnL9gAw0K3x6JNMAW0RJi0PEUz7saG0
+         8NzsG86Bf6a/gjLqffgeSIWqMaK+IOcwu9dkkcfh1n8ziO/+27KBjqNmC1GSzsS+vS++
+         BkM5DR3UZXyNq0iN+2irIVI2km+8bmCYdXY5nKYZU9dmeS16g8RvWciqM3VxzEi6Tjdu
+         k55g==
+X-Gm-Message-State: AOJu0Yxe7vlb7uyVX3dSeFsvVqKCokwh2PR0fNcswPRbi/LjK8wqxlsU
+	P+STakvhnQDbCo30NyhMdpD4bw==
+X-Google-Smtp-Source: AGHT+IHHXZAtub6WmdhpsanpDsB4lEKRPMS5lET1dND/fbmyV17vruz6MYh1jSFpU8bINPUUM3If8w==
+X-Received: by 2002:a05:600c:16c4:b0:40c:69dc:18c7 with SMTP id l4-20020a05600c16c400b0040c69dc18c7mr785377wmn.170.1702652093242;
+        Fri, 15 Dec 2023 06:54:53 -0800 (PST)
+Date: Fri, 15 Dec 2023 15:54:52 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH] x86: allow non-BIGMEM configs to boot on >= 16Tb systems
+Message-ID: <ZXxovHNdNK_OfHUs@macbook>
+References: <4b282f2f-bce8-4c98-897c-2866ec1b6dd0@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <4b282f2f-bce8-4c98-897c-2866ec1b6dd0@suse.com>
 
-However take into account the minimum number of levels required by unity maps
-when setting the page table levels.
+On Wed, Jun 07, 2023 at 08:17:30AM +0200, Jan Beulich wrote:
+> While frame table setup, directmap init, and boot allocator population
+> respect all intended bounds, the logic passing memory to the heap
+> allocator which wasn't passed to the boot allocator fails to respect
+> max_{pdx,pfn}. This then typically triggers the BUG() in
+> free_heap_pages() after checking page state, because of hitting a struct
+> page_info instance which was set to all ~0.
+> 
+> Of course all the memory above the 16Tb boundary is still going to
+> remain unused; using it requires BIGMEM=y. And of course this fix
+> similarly ought to help BIGMEM=y configurations on >= 123Tb systems
+> (where all the memory beyond that boundary continues to be unused).
+> 
+> Fixes: bac2000063ba ("x86-64: reduce range spanned by 1:1 mapping and frame table indexes")
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-The previous setting of the page table levels for PV guests based on the
-highest RAM address was bogus, as there can be other non-RAM regions past the
-highest RAM address that need to be mapped, for example device MMIO.
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 
-For HVM we also take amd_iommu_min_paging_mode into account, however if unity
-maps require more than 4 levels attempting to add those will currently fail at
-the p2m level, as 4 levels is the maximum supported.
+> ---
+> Sadly the people reporting the issue have decided to go with the 16Tb
+> limit, and hence the patch wasn't tested by them. I thought that I'd
+> still post it, though.
 
-Fixes: 0700c962ac2d ('Add AMD IOMMU support into hypervisor')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - Use the renamed domain_max_paddr_bits().
+We should see about finding a way to test BIGMEM, maybe with PoD.
 
-Changes since v1:
- - Use paging_max_paddr_bits() instead of hardcoding
-   DEFAULT_DOMAIN_ADDRESS_WIDTH.
----
- xen/drivers/passthrough/amd/pci_amd_iommu.c | 20 ++++++++------------
- 1 file changed, 8 insertions(+), 12 deletions(-)
+> The "must not be passed to the boot allocator" for the range in question
+> may already not be applicable anymore, with all page tables now being
+> mapped via map_domain_page() (iirc this work has been completed). But of
+> course there would be a risk that something else is/was overlooked, and
+> hence the offending code is being fixed rather than purged (and the
+> purging should occur once the directmap is properly gone). (This also
+> seems preferable for potential backports of this change.)
+> 
+> --- a/xen/arch/x86/setup.c
+> +++ b/xen/arch/x86/setup.c
+> @@ -1722,15 +1722,16 @@ void __init noreturn __start_xen(unsigne
+>  
+>      if ( max_page - 1 > virt_to_mfn(HYPERVISOR_VIRT_END - 1) )
+>      {
+> -        unsigned long limit = virt_to_mfn(HYPERVISOR_VIRT_END - 1);
+> +        unsigned long lo = virt_to_mfn(HYPERVISOR_VIRT_END - 1);
+> +        unsigned long hi = pdx_to_pfn(max_pdx - 1) + 1;
 
-diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-index 6bc73dc21052..cc3e2ccd5ed7 100644
---- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-+++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-@@ -359,21 +359,17 @@ int __read_mostly amd_iommu_min_paging_mode = 1;
- static int cf_check amd_iommu_domain_init(struct domain *d)
- {
-     struct domain_iommu *hd = dom_iommu(d);
-+    int pglvl = amd_iommu_get_paging_mode(
-+                PFN_DOWN(1UL << domain_max_paddr_bits(d)));
-+
-+    if ( pglvl < 0 )
-+        return pglvl;
- 
-     /*
--     * Choose the number of levels for the IOMMU page tables.
--     * - PV needs 3 or 4, depending on whether there is RAM (including hotplug
--     *   RAM) above the 512G boundary.
--     * - HVM could in principle use 3 or 4 depending on how much guest
--     *   physical address space we give it, but this isn't known yet so use 4
--     *   unilaterally.
--     * - Unity maps may require an even higher number.
-+     * Choose the number of levels for the IOMMU page tables, taking into
-+     * account unity maps.
-      */
--    hd->arch.amd.paging_mode = max(amd_iommu_get_paging_mode(
--            is_hvm_domain(d)
--            ? 1UL << (DEFAULT_DOMAIN_ADDRESS_WIDTH - PAGE_SHIFT)
--            : get_upper_mfn_bound() + 1),
--        amd_iommu_min_paging_mode);
-+    hd->arch.amd.paging_mode = max(pglvl, amd_iommu_min_paging_mode);
- 
-     return 0;
- }
--- 
-2.43.0
+Maybe use max_page to avoid the pdx_to_pfn() call?  (And is also more
+in context with the condition on the outside if).
 
+Thanks, Roger.
 
