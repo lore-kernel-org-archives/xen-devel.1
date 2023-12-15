@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C5EDC46CD3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0716C46CD4
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 14:19:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655133.1022841 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.655136.1022880 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE92Y-0007UV-N4; Fri, 15 Dec 2023 14:19:46 +0000
+	id 1rE92b-000092-Sm; Fri, 15 Dec 2023 14:19:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655133.1022841; Fri, 15 Dec 2023 14:19:46 +0000
+Received: by outflank-mailman (output) from mailman id 655136.1022880; Fri, 15 Dec 2023 14:19:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE92Y-0007Sz-Ga; Fri, 15 Dec 2023 14:19:46 +0000
-Received: by outflank-mailman (input) for mailman id 655133;
- Fri, 15 Dec 2023 14:19:45 +0000
+	id 1rE92b-00006o-Mo; Fri, 15 Dec 2023 14:19:49 +0000
+Received: by outflank-mailman (input) for mailman id 655136;
+ Fri, 15 Dec 2023 14:19:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=a4Sn=H2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rE92X-0007Jp-7E
- for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 14:19:45 +0000
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [2a00:1450:4864:20::432])
+ id 1rE92a-0007Jp-7Z
+ for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 14:19:48 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e0f36918-9b54-11ee-9b0f-b553b5be7939;
- Fri, 15 Dec 2023 15:18:55 +0100 (CET)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-336447100e9so660666f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 15 Dec 2023 06:18:55 -0800 (PST)
+ id df8f4edd-9b54-11ee-9b0f-b553b5be7939;
+ Fri, 15 Dec 2023 15:18:52 +0100 (CET)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40c236624edso7547545e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Dec 2023 06:18:52 -0800 (PST)
 Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
- m11-20020a056000008b00b0033332524235sm18838237wrx.82.2023.12.15.06.18.53
+ k20-20020a5d5254000000b003365b5df349sm190650wrc.93.2023.12.15.06.18.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 06:18:53 -0800 (PST)
+ Fri, 15 Dec 2023 06:18:51 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,41 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0f36918-9b54-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: df8f4edd-9b54-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1702649934; x=1703254734; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1702649931; x=1703254731; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Oi/OU1B+BD1EA3x0F7BUpdNkno4zp2sbqcsBzG1DxYU=;
-        b=nFDC5G/l+7sldOARFp40VwKOHEcm0cFiA8bzoJMJzjEc6+OKCr2eVtuV9PwX1aN6rk
-         v8gH8FpR4QzpchbWj1/5dtZQqGawAbGFLStCZdZyV9uxijH3WDtZVxLtrcHGGO2I57tP
-         09rDhNeut/SPPXNtKR1lBdw9sEikmozXgUVnU=
+        bh=i40rODJO/X0LXQNlEUFaGjc3uP8fUKGEa0LahLnFqZ4=;
+        b=OwkYD66IIPftCSkkiC1fwKj9Pgye/tPEMWK4sQx6dsS6e6DR00aNHXEanAIiOh+J+y
+         piI5fQ3icHQREdTygqb/LQKQ7LQW8bcuzIHnPyAyK1Me1WjBh8ws1uuwNc4uY4w1yiRN
+         MCLO460EiIwYS67XG6kl8Qmzr5FkJ3ohQ5I4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702649934; x=1703254734;
+        d=1e100.net; s=20230601; t=1702649931; x=1703254731;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Oi/OU1B+BD1EA3x0F7BUpdNkno4zp2sbqcsBzG1DxYU=;
-        b=Qi0RjgvS2HwwS9bZJCjSaIOR4fgXU5ZVHrS2Q3FbmoQIR3X0ZPabZjaaxIpvKVxePu
-         l1VPDEJNlhjEIA8oUTl5yUMO4O9F2AgVBD/LarT42qG4OLUGDJkKG+R3guO3OwQFnxNk
-         deyhgcu4rUpZyF9+EmW+C4bDya/Z/SDkRqBkTCwPysyfFe8jhNjRH4HRbzAGsUnxtXmV
-         jXHIzDNRAmbzspuBKe7yv2PGwrXSGm0bXNxVCKsmheZuqiLuc11L2bvN+vNlgx9Zmem6
-         8rs0FEbKrZcgFaEo6KLL7DU5EYDghGkh9L1t9fH0o8r7tCQmdfjoYa4xiuq2PqMKY4l+
-         ig9A==
-X-Gm-Message-State: AOJu0Yz8OB22eR5zUXfYazHoyLxoQzBpWLNWmexxQRgoe7jNSYa7bP0n
-	+S6PUi0fwRi6P/5+BePx9x2Bbv+3IYEs22ySZOc=
-X-Google-Smtp-Source: AGHT+IGNAKxLrG4i+x0ulksZxzM5IxMcvmrPVWewI4viXKQy/+N3xsRzrOj4Cn+xThFRixmYztTIsA==
-X-Received: by 2002:adf:f94a:0:b0:336:2548:2e21 with SMTP id q10-20020adff94a000000b0033625482e21mr3922947wrr.38.1702649934301;
-        Fri, 15 Dec 2023 06:18:54 -0800 (PST)
+        bh=i40rODJO/X0LXQNlEUFaGjc3uP8fUKGEa0LahLnFqZ4=;
+        b=hr+nvWUMZM6Pn1a6xEQIvssbyasAgj/qHNnl5GcLtX+pd8WCftF4imDeWlr+u5FRnm
+         j/F9U5cI/RRIRtCanAP7r9CGlTRkBMi7v2Ry//jLaDTXcHa93lkT0IWuqreGE3NHzuCx
+         X0MZrl1kAU1aWdiKSDod3l9jdm/xwNoixpIYYdKx1/yJibSmizgO7d7k1YMvQe5HJd6w
+         8cvhiBqu07lIVLLT2/gJlyiiDDrE4uI/pZO/nxCsZyez7gVOn3XJnKBvN9aiLox6DTJ1
+         tuzHUsRV5tFi1M36AAeCOk/gx+/JvAQWvXREiXAMCQrkAa0LGH/koK2RUpM9w1e8kejp
+         xidw==
+X-Gm-Message-State: AOJu0Yz0ixUG1Rx26OwG4rB0YTTwwSLzEwP057qRp4GUvEvjGjE0wcsW
+	JY/fUsSBevrGAJx8IJwB61kO+qafPn4SskPmWlU=
+X-Google-Smtp-Source: AGHT+IHolaIVqpjYAMNLgKYfrrXCOS+fc4hUrxfSN2XF9Ny4iN8pmO3vuABTOUeCM7ux/KAzFMr1uw==
+X-Received: by 2002:a05:600c:6cf:b0:40c:5777:da1a with SMTP id b15-20020a05600c06cf00b0040c5777da1amr2998869wmn.113.1702649931612;
+        Fri, 15 Dec 2023 06:18:51 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v3 4/7] x86/iommu: introduce a rangeset to perform hwdom IOMMU setup
-Date: Fri, 15 Dec 2023 15:18:29 +0100
-Message-ID: <20231215141832.9492-5-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 2/7] x86/p2m: move and rename paging_max_paddr_bits()
+Date: Fri, 15 Dec 2023 15:18:27 +0100
+Message-ID: <20231215141832.9492-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231215141832.9492-1-roger.pau@citrix.com>
 References: <20231215141832.9492-1-roger.pau@citrix.com>
@@ -88,165 +89,118 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This change just introduces the boilerplate code in order to use a rangeset
-when setting up the hardware domain IOMMU mappings.  The rangeset is never
-populated in this patch, so it's a non-functional change as far as the mappings
-the domain gets established.
+The function also supports non-paging domains, and hence it being placed in
+p2m.h and named with the paging_ prefix is misleading.
 
-Note there will be a change for HVM domains (ie: PVH dom0) when the code
-introduced here gets used: the p2m mappings will be established using
-map_mmio_regions() instead of p2m_add_identity_entry(), so that ranges can be
-mapped with a single function call if possible.  Note that the interface of
-map_mmio_regions() doesn't allow creating read-only mappings, but so far there
-are no such mappings created for PVH dom0 in arch_iommu_hwdom_init().
+Move to x86 domain.c and rename to domain_max_paddr_bits().  Moving to a
+different header is non trivial, as the function depends on helpers declared in
+p2m.h.  There's no performance reason for the function being inline.
+
+No functional change intended.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
 Changes since v2:
- - Better deal with read-only regions.
- - Destroy rangeset earlier.
- - Switch to using map_data.flush_flags.
- - Reword commit message to clarify the change in behaviour for HVM will only
-   take effect after later changes.
-
-Changes since v1:
- - Split from bigger patch.
+ - New in this version.
 ---
- xen/drivers/passthrough/x86/iommu.c | 102 +++++++++++++++++++++++++++-
- 1 file changed, 101 insertions(+), 1 deletion(-)
+ xen/arch/x86/cpu-policy.c         |  2 +-
+ xen/arch/x86/domain.c             | 21 +++++++++++++++++++++
+ xen/arch/x86/include/asm/domain.h |  3 +++
+ xen/arch/x86/include/asm/paging.h | 22 ----------------------
+ 4 files changed, 25 insertions(+), 23 deletions(-)
 
-diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index 857dccb6a465..ca5e0bca810f 100644
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -370,10 +370,88 @@ static unsigned int __hwdom_init hwdom_iommu_map(const struct domain *d,
-     return perms;
- }
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index 423932bc13d6..76efb050edf7 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -864,7 +864,7 @@ void recalculate_cpuid_policy(struct domain *d)
  
-+struct map_data {
-+    struct domain *d;
-+    unsigned int flush_flags;
-+    bool mmio_ro;
-+};
-+
-+static int __hwdom_init cf_check identity_map(unsigned long s, unsigned long e,
-+                                              void *data)
+     p->extd.maxphysaddr = min(p->extd.maxphysaddr, max->extd.maxphysaddr);
+     p->extd.maxphysaddr = min_t(uint8_t, p->extd.maxphysaddr,
+-                                paging_max_paddr_bits(d));
++                                domain_max_paddr_bits(d));
+     p->extd.maxphysaddr = max_t(uint8_t, p->extd.maxphysaddr,
+                                 (p->basic.pae || p->basic.pse36) ? 36 : 32);
+ 
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 3712e36df930..8a31d18f6967 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2552,6 +2552,27 @@ static int __init cf_check init_vcpu_kick_softirq(void)
+ }
+ __initcall(init_vcpu_kick_softirq);
+ 
++unsigned int domain_max_paddr_bits(const struct domain *d)
 +{
-+    struct map_data *info = data;
-+    struct domain *d = info->d;
-+    long rc;
++    unsigned int bits = paging_mode_hap(d) ? hap_paddr_bits : paddr_bits;
 +
-+    if ( iommu_verbose )
-+        printk(XENLOG_INFO " [%010lx, %010lx] R%c\n",
-+               s, e, info->mmio_ro ? 'O' : 'W');
-+
-+    if ( paging_mode_translate(d) )
++    if ( paging_mode_external(d) )
 +    {
-+        if ( info->mmio_ro )
++        if ( !IS_ENABLED(CONFIG_BIGMEM) && paging_mode_shadow(d) )
 +        {
-+            ASSERT_UNREACHABLE();
-+            return 0;
++            /* Shadowed superpages store GFNs in 32-bit page_info fields. */
++            bits = min(bits, 32U + PAGE_SHIFT);
 +        }
-+        while ( (rc = map_mmio_regions(d, _gfn(s), e - s + 1, _mfn(s))) > 0 )
++        else
 +        {
-+            s += rc;
-+            process_pending_softirqs();
++            /* Both p2m-ept and p2m-pt only support 4-level page tables. */
++            bits = min(bits, 48U);
 +        }
 +    }
-+    else
-+    {
-+        const unsigned int perms = IOMMUF_readable | IOMMUF_preempt |
-+                                   (info->mmio_ro ? 0 : IOMMUF_writable);
 +
-+        /*
-+         * Read-only ranges are only created based on the contents of mmio
-+         * read-only rangeset, and hence need the additional iomem permissions
-+         * check.
-+         */
-+        while( info->mmio_ro && s <= e && !iomem_access_permitted(d, s, e) )
-+        {
-+            /*
-+             * Consume a frame per iteration until the reminder is accessible
-+             * or there's nothing left to map.
-+             */
-+            if ( iomem_access_permitted(d, s, s) )
-+            {
-+                rc = iommu_map(d, _dfn(s), _mfn(s), 1, perms,
-+                               &info->flush_flags);
-+                if ( rc < 0 )
-+                    break;
-+                /* Must map a frame at least, which is what we request for. */
-+                ASSERT(rc == 1);
-+                process_pending_softirqs();
-+            }
-+            s++;
-+        }
-+        while ( (rc = iommu_map(d, _dfn(s), _mfn(s), e - s + 1,
-+                                perms, &info->flush_flags)) > 0 )
-+        {
-+            s += rc;
-+            process_pending_softirqs();
-+        }
-+    }
-+    ASSERT(rc <= 0);
-+    if ( rc )
-+        printk(XENLOG_WARNING
-+               "IOMMU identity mapping of [%lx, %lx] failed: %ld\n",
-+               s, e, rc);
-+
-+    /* Ignore errors and attempt to map the remaining regions. */
-+    return 0;
++    return bits;
 +}
 +
- void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
- {
-     unsigned long i, top, max_pfn, start, count;
-     unsigned int flush_flags = 0, start_perms = 0;
-+    struct rangeset *map;
-+    struct map_data map_data = { .d = d };
-+    int rc;
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 4b6b7ceab1ed..622d22bef255 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -777,6 +777,9 @@ static inline void pv_inject_sw_interrupt(unsigned int vector)
+ struct arch_vcpu_io {
+ };
  
-     BUG_ON(!is_hardware_domain(d));
- 
-@@ -397,6 +475,10 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
-     if ( iommu_hwdom_passthrough )
-         return;
- 
-+    map = rangeset_new(NULL, NULL, 0);
-+    if ( !map )
-+        panic("IOMMU init: unable to allocate rangeset\n");
++/* Maxphysaddr supportable by the paging infrastructure. */
++unsigned int domain_max_paddr_bits(const struct domain *d);
 +
-     max_pfn = (GB(4) >> PAGE_SHIFT) - 1;
-     top = max(max_pdx, pfn_to_pdx(max_pfn) + 1);
+ #endif /* __ASM_DOMAIN_H__ */
  
-@@ -451,8 +533,26 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
-             goto commit;
-     }
- 
-+    if ( iommu_verbose )
-+        printk(XENLOG_INFO "%pd: identity mappings for IOMMU:\n", d);
-+
-+    rc = rangeset_report_ranges(map, 0, ~0UL, identity_map, &map_data);
-+    if ( rc )
-+        panic("IOMMU unable to create mappings: %d\n", rc);
-+    rangeset_destroy(map);
-+
-+    if ( is_pv_domain(d) )
-+    {
-+        map_data.mmio_ro = true;
-+        rc = rangeset_report_ranges(mmio_ro_ranges, 0, ~0UL, identity_map,
-+                                    &map_data);
-+        if ( rc )
-+            panic("IOMMU unable to create read-only mappings: %d\n", rc);
-+    }
-+
-+    map_data.flush_flags |= flush_flags;
-     /* Use if to avoid compiler warning */
--    if ( iommu_iotlb_flush_all(d, flush_flags) )
-+    if ( iommu_iotlb_flush_all(d, map_data.flush_flags) )
-         return;
+ /*
+diff --git a/xen/arch/x86/include/asm/paging.h b/xen/arch/x86/include/asm/paging.h
+index 76162a9429ce..8a2a0af40874 100644
+--- a/xen/arch/x86/include/asm/paging.h
++++ b/xen/arch/x86/include/asm/paging.h
+@@ -336,28 +336,6 @@ static inline bool gfn_valid(const struct domain *d, gfn_t gfn)
+     return !(gfn_x(gfn) >> (d->arch.cpuid->extd.maxphysaddr - PAGE_SHIFT));
  }
  
+-/* Maxphysaddr supportable by the paging infrastructure. */
+-static always_inline unsigned int paging_max_paddr_bits(const struct domain *d)
+-{
+-    unsigned int bits = paging_mode_hap(d) ? hap_paddr_bits : paddr_bits;
+-
+-    if ( paging_mode_external(d) )
+-    {
+-        if ( !IS_ENABLED(CONFIG_BIGMEM) && paging_mode_shadow(d) )
+-        {
+-            /* Shadowed superpages store GFNs in 32-bit page_info fields. */
+-            bits = min(bits, 32U + PAGE_SHIFT);
+-        }
+-        else
+-        {
+-            /* Both p2m-ept and p2m-pt only support 4-level page tables. */
+-            bits = min(bits, 48U);
+-        }
+-    }
+-
+-    return bits;
+-}
+-
+ #endif /* XEN_PAGING_H */
+ 
+ /*
 -- 
 2.43.0
 
