@@ -4,37 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB394C35274
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 14:55:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655188.1022900 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C839AC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 16:12:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.655205.1022918 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE9ab-0001L5-Os; Fri, 15 Dec 2023 14:54:57 +0000
+	id 1rEAnA-0007XA-FC; Fri, 15 Dec 2023 16:12:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655188.1022900; Fri, 15 Dec 2023 14:54:57 +0000
+Received: by outflank-mailman (output) from mailman id 655205.1022918; Fri, 15 Dec 2023 16:12:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE9ab-0001Ky-MC; Fri, 15 Dec 2023 14:54:57 +0000
-Received: by outflank-mailman (input) for mailman id 655188;
- Fri, 15 Dec 2023 14:54:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=a4Sn=H2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rE9aa-0001Ks-4r
- for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 14:54:56 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e794a2e6-9b59-11ee-9b0f-b553b5be7939;
- Fri, 15 Dec 2023 15:54:53 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-40c256ffdbcso8674695e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 15 Dec 2023 06:54:53 -0800 (PST)
-Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
- fa5-20020a05600c518500b0040c6d559490sm1720837wmb.3.2023.12.15.06.54.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 06:54:52 -0800 (PST)
+	id 1rEAnA-0007X3-Bn; Fri, 15 Dec 2023 16:12:00 +0000
+Received: by outflank-mailman (input) for mailman id 655205;
+ Fri, 15 Dec 2023 16:11:58 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rEAn8-0007Wh-En; Fri, 15 Dec 2023 16:11:58 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rEAn8-0001jV-5r; Fri, 15 Dec 2023 16:11:58 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rEAn7-0002q0-MV; Fri, 15 Dec 2023 16:11:57 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1rEAn7-0003mN-M1; Fri, 15 Dec 2023 16:11:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,92 +44,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e794a2e6-9b59-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1702652093; x=1703256893; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Pb+esVZ95ff8GURkfDxZ5O1g1nKPENVklToWc7Xd3cA=;
-        b=B1PyVCV+/ygrH+9Bn2FXzpJ8CUH0cPQlCNoiMPZF6V/u53IjuvXW6EuYxZVQL+igcJ
-         azuUqf6HJLwr8AMD+pswT8/dflcoMBTAEx4BQce+bHkDAiSnxBRTq6xyJ0OLzlo/QkNc
-         iVt229Folw7CHbtYDyZyCS7LoL0J+AJXGqvJ0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702652093; x=1703256893;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Pb+esVZ95ff8GURkfDxZ5O1g1nKPENVklToWc7Xd3cA=;
-        b=f+BxSO8idLEkAtpwuqqCbjCR3K2XsvvIwjceyc2JSDBn3vtEZ1tRnkIDixlVHl0zUB
-         nntLP7Y5oPjV8ddSCIHZHLVp2qPED6LSjDChWTkCZvO5CRNvxaBs9htawjxznCoKjcCL
-         z/dAJ07jlLnwktJ62VTtowcR3KAoOdSvUS9VUGnL9gAw0K3x6JNMAW0RJi0PEUz7saG0
-         8NzsG86Bf6a/gjLqffgeSIWqMaK+IOcwu9dkkcfh1n8ziO/+27KBjqNmC1GSzsS+vS++
-         BkM5DR3UZXyNq0iN+2irIVI2km+8bmCYdXY5nKYZU9dmeS16g8RvWciqM3VxzEi6Tjdu
-         k55g==
-X-Gm-Message-State: AOJu0Yxe7vlb7uyVX3dSeFsvVqKCokwh2PR0fNcswPRbi/LjK8wqxlsU
-	P+STakvhnQDbCo30NyhMdpD4bw==
-X-Google-Smtp-Source: AGHT+IHHXZAtub6WmdhpsanpDsB4lEKRPMS5lET1dND/fbmyV17vruz6MYh1jSFpU8bINPUUM3If8w==
-X-Received: by 2002:a05:600c:16c4:b0:40c:69dc:18c7 with SMTP id l4-20020a05600c16c400b0040c69dc18c7mr785377wmn.170.1702652093242;
-        Fri, 15 Dec 2023 06:54:53 -0800 (PST)
-Date: Fri, 15 Dec 2023 15:54:52 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] x86: allow non-BIGMEM configs to boot on >= 16Tb systems
-Message-ID: <ZXxovHNdNK_OfHUs@macbook>
-References: <4b282f2f-bce8-4c98-897c-2866ec1b6dd0@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=wlf49ex4GpR+nGBBl4fk+KsOtmd0bXkS/ys0PvvkPUM=; b=bcGC2pwZ6PdvJ9woyUDd+S8vB7
+	qPrxnYVheDULhuub+69zuzkNCKuI8xAe0E9oOcS5YKohpULyuyfzV6n9xjJ6GTRjUmoJyjMnoWdIq
+	UOob7jyUIW7PVJFFR5ZdndY9trzFvT0iBkkf57Gzrq+qF4K3oYfHnCa1cszt/Cl/Ntf8=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-184144-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <4b282f2f-bce8-4c98-897c-2866ec1b6dd0@suse.com>
+MIME-Version: 1.0
+Subject: [libvirt test] 184144: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    libvirt=641ed83e3d635648d94234fa94a6d47e912144f7
+X-Osstest-Versions-That:
+    libvirt=cecbaa87d53392a79098c66503af35b99e7b7029
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 15 Dec 2023 16:11:57 +0000
 
-On Wed, Jun 07, 2023 at 08:17:30AM +0200, Jan Beulich wrote:
-> While frame table setup, directmap init, and boot allocator population
-> respect all intended bounds, the logic passing memory to the heap
-> allocator which wasn't passed to the boot allocator fails to respect
-> max_{pdx,pfn}. This then typically triggers the BUG() in
-> free_heap_pages() after checking page state, because of hitting a struct
-> page_info instance which was set to all ~0.
-> 
-> Of course all the memory above the 16Tb boundary is still going to
-> remain unused; using it requires BIGMEM=y. And of course this fix
-> similarly ought to help BIGMEM=y configurations on >= 123Tb systems
-> (where all the memory beyond that boundary continues to be unused).
-> 
-> Fixes: bac2000063ba ("x86-64: reduce range spanned by 1:1 mapping and frame table indexes")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+flight 184144 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/184144/
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Failures :-/ but no regressions.
 
-> ---
-> Sadly the people reporting the issue have decided to go with the 16Tb
-> limit, and hence the patch wasn't tested by them. I thought that I'd
-> still post it, though.
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 184119
+ test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 184119
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 184119
+ test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
 
-We should see about finding a way to test BIGMEM, maybe with PoD.
+version targeted for testing:
+ libvirt              641ed83e3d635648d94234fa94a6d47e912144f7
+baseline version:
+ libvirt              cecbaa87d53392a79098c66503af35b99e7b7029
 
-> The "must not be passed to the boot allocator" for the range in question
-> may already not be applicable anymore, with all page tables now being
-> mapped via map_domain_page() (iirc this work has been completed). But of
-> course there would be a risk that something else is/was overlooked, and
-> hence the offending code is being fixed rather than purged (and the
-> purging should occur once the directmap is properly gone). (This also
-> seems preferable for potential backports of this change.)
-> 
-> --- a/xen/arch/x86/setup.c
-> +++ b/xen/arch/x86/setup.c
-> @@ -1722,15 +1722,16 @@ void __init noreturn __start_xen(unsigne
->  
->      if ( max_page - 1 > virt_to_mfn(HYPERVISOR_VIRT_END - 1) )
->      {
-> -        unsigned long limit = virt_to_mfn(HYPERVISOR_VIRT_END - 1);
-> +        unsigned long lo = virt_to_mfn(HYPERVISOR_VIRT_END - 1);
-> +        unsigned long hi = pdx_to_pfn(max_pdx - 1) + 1;
+Last test of basis   184119  2023-12-13 04:20:39 Z    2 days
+Testing same since   184144  2023-12-15 04:22:03 Z    0 days    1 attempts
 
-Maybe use max_page to avoid the pdx_to_pfn() call?  (And is also more
-in context with the condition on the outside if).
+------------------------------------------------------------
+People who touched revisions under test:
+  Peter Krempa <pkrempa@redhat.com>
 
-Thanks, Roger.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-libvirt-raw                                  pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/libvirt.git
+   cecbaa87d5..641ed83e3d  641ed83e3d635648d94234fa94a6d47e912144f7 -> xen-tested-master
 
