@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7C62C4167B
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 11:19:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655029.1022669 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A89EC4167B
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 11:47:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.655070.1022719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE6DU-00024W-Qs; Fri, 15 Dec 2023 11:18:52 +0000
+	id 1rE6fF-0001eK-BE; Fri, 15 Dec 2023 11:47:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655029.1022669; Fri, 15 Dec 2023 11:18:52 +0000
+Received: by outflank-mailman (output) from mailman id 655070.1022719; Fri, 15 Dec 2023 11:47:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rE6DU-00024P-ON; Fri, 15 Dec 2023 11:18:52 +0000
-Received: by outflank-mailman (input) for mailman id 655029;
- Fri, 15 Dec 2023 11:18:51 +0000
+	id 1rE6fF-0001eD-8f; Fri, 15 Dec 2023 11:47:33 +0000
+Received: by outflank-mailman (input) for mailman id 655070;
+ Fri, 15 Dec 2023 11:47:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=a4Sn=H2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rE6DT-00024C-OQ
- for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 11:18:51 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ <SRS0=qUFd=H2=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
+ id 1rE6fD-0001e7-F5
+ for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 11:47:31 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b8bad3d4-9b3b-11ee-98ea-6d05b1d4d9a1;
- Fri, 15 Dec 2023 12:18:50 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40c48d7a7a7so5131405e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 Dec 2023 03:18:50 -0800 (PST)
-Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
- q14-20020a05600c46ce00b0040c4c9c52a3sm16968713wmo.12.2023.12.15.03.18.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 03:18:48 -0800 (PST)
+ id ba1cedf1-9b3f-11ee-98ea-6d05b1d4d9a1;
+ Fri, 15 Dec 2023 12:47:30 +0100 (CET)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40c39e936b4so5961645e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Dec 2023 03:47:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,117 +42,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8bad3d4-9b3b-11ee-98ea-6d05b1d4d9a1
+X-Inumbo-ID: ba1cedf1-9b3f-11ee-98ea-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1702639129; x=1703243929; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QQSfgCUH/gyqfKahydnZfRc1+dZ9TnmnpZoNnoVbHCA=;
-        b=tAZyuB+L/axBWDP5SxLPpMoNdbQ7QdcZow+tl53MBRbyxu8JQPKneocVtvOrjVoM5g
-         X/ZcEsVwBP0GdfBEWv14Ez7RfLuhgKt8Od/vYhWcGyxwscRJ8Jt2ZBY3VfQp+17niR42
-         RpCwGgFCaaPnQv3jGvaR8/AkZvt4i7XHvG3Eg=
+        d=cloud.com; s=cloud; t=1702640850; x=1703245650; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TenIao7bMiUVyvEGfhfEceUI6WytzaJa5c4gA8UOiHc=;
+        b=U9v6HafNTPexqAr1Nq6GcEfKdx/jceve8FvRyg2ecdbx0HvMZNiYcWusyc66Cc0k1D
+         OscGZsSgTuUdPxoLCRCATOdCCkEJi+DSs0BA1OpogNFg3bPy8YkbSahaSagHz/wKuTV3
+         nRxbP+ffXPN96O1nhnjBkkjWeU29OyyI/J1bE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702639129; x=1703243929;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QQSfgCUH/gyqfKahydnZfRc1+dZ9TnmnpZoNnoVbHCA=;
-        b=wELR+IgOeNNjyYQknoDfjPuKgEfpIzTCHRO16kSfHPZl55EJwa+FNVSWWqcdOBc9ap
-         zzA+ZJ7dFcqcLHuf+ANylo90EIXZ93s1yHVFM+le1rP/kA+fS+y8DEV5FfNczQjtt43Y
-         5tAfQYlfUVjazY+1q2kudlENp1WxtXRsN0oxlhnnI/1Ak1lRZurU8aMoIMaYkOrBRcF7
-         LEqg8bZHlIIxofNj//2Ky42XBD64xQAc25kInQvJRu1P+U/+fTFM8MJUfj4YXHaoLdJN
-         5TddPvR5hQFoA6kNPdEH/7VclClPvuJtyypthdZJFR77f0ufhkTNMHfP/pkoA+qfkeUQ
-         RnGg==
-X-Gm-Message-State: AOJu0YxM+GQgISHPrr8dTZSlWxxBErXk9IfW9xDejZV6S86mFVVdyJwY
-	tj15Hjl/WI6ueaKLd6hXouK5c/qPdD/tfxz9kS4=
-X-Google-Smtp-Source: AGHT+IFwESF7Ewp9G+VWRj6rmJQWPYVvDfKnaUTthxyii3n7Ut2mEE7WCszR1WVBmtYa1xVTNilVCA==
-X-Received: by 2002:a05:600c:3411:b0:404:4b6f:d70d with SMTP id y17-20020a05600c341100b004044b6fd70dmr6839489wmp.17.1702639128764;
-        Fri, 15 Dec 2023 03:18:48 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v4 0/4] xen/x86: add testing for self modifying code and livepatch
-Date: Fri, 15 Dec 2023 12:18:38 +0100
-Message-ID: <20231215111842.8009-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1702640850; x=1703245650;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=TenIao7bMiUVyvEGfhfEceUI6WytzaJa5c4gA8UOiHc=;
+        b=aRJJrJIyoBEURuDhBhJNNkt6Nycfh+n6tKJ6iKtSmKCSM2TAKr3F3BcUrK27MByrad
+         S4azqZwsDEYMl+qFgO4+qzrRG4yDSCzE7GMzCkZs6luK60HBjzcXpOHLlV5exrCLHBU8
+         BzuxfbyVq7ibHE+RKqsHXLhnbUawRjMZAq83bNfj/B0gmM/EyGDE11o1de1Id0jl8Je+
+         tznshNiGvMQ+ixx16bh7UCiB0gEyaCfU3RXa+6S7ooONv03gyoDbT0NrB5wLRn7eh8Oc
+         iF6eNzvnpv05g+olr6WU//+E68oisFii9QD8Rts7eqQXMwRvUO5ZnSIW1yFhb7hNPQ+z
+         BBEg==
+X-Gm-Message-State: AOJu0Yz+UVjIFbvSPMEyhHJCAH4zZc0FWlHtnsoF1Ji5P1gBu9XBIh93
+	/iG58k8tdMUEnGOkVm3yY7lLJm5dej68CE/R/5AF
+X-Google-Smtp-Source: AGHT+IEAM9d/uNJA8u1Vg5tTYO+RBd4K1EX5rSNkRyigqjkaPrD4fX7j0CFMYTRTQWoP7AJbxafzWyJ1vJUx37s8P7g=
+X-Received: by 2002:a05:600c:2814:b0:40b:5f03:b43f with SMTP id
+ m20-20020a05600c281400b0040b5f03b43fmr3058809wmb.353.1702640849828; Fri, 15
+ Dec 2023 03:47:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20231214085424.16890-1-roger.pau@citrix.com>
+In-Reply-To: <20231214085424.16890-1-roger.pau@citrix.com>
+From: Ross Lagerwall <ross.lagerwall@cloud.com>
+Date: Fri, 15 Dec 2023 11:47:18 +0000
+Message-ID: <CAG7k0EqHi2gTFY8rhuceVURTWv1TvHLuQgkvjtjoz=A7GWdiAQ@mail.gmail.com>
+Subject: Re: [PATCH v2] livepatch-build-tools: allow livepatching version.c
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On Thu, Dec 14, 2023 at 8:54=E2=80=AFAM Roger Pau Monne <roger.pau@citrix.c=
+om> wrote:
+>
+> Currently version.o is explicitly ignored as the file would change as a r=
+esult
+> of the orignal and the patched build having possibly different dates, tim=
+es or
+> changeset strings (by the patched build appending -dirty).
+>
+> Fix such difference by exporting the date and time from the build script,=
+ so
+> that both builds share the same build time.  The changeset string gets se=
+t in
+> .scmversion, and is cleaned on script exit if it wasn't present initially=
+. This
+> allows checking for changes in version.c, since the rest of fields need t=
+o be
+> manually changed in order to produce different output.
+>
+> Setting XEN_BUILD_{DATE,TIME} as an environment variable and .scmversion =
+has
+> been supported since before livepatch support was added to Xen, so it's s=
+afe to
+> export those variables unconditionally.
+>
+> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> ---
+> Changes since v1:
+>  - Also ensure consistent changeset version.
+> ---
+>  livepatch-build | 14 ++++++++++++++
+>  livepatch-gcc   |  2 --
+>  2 files changed, 14 insertions(+), 2 deletions(-)
+>
+> diff --git a/livepatch-build b/livepatch-build
+> index e2ccce4f7fd7..332d26f5c6b6 100755
+> --- a/livepatch-build
+> +++ b/livepatch-build
+> @@ -392,6 +392,10 @@ echo "Output directory: $outputarg"
+>  echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D"
+>  echo
+>
+> +cleanup_version() {
+> +    rm -rf "${SRCDIR}/xen/.scmversion"
+> +}
+> +
+>  if [ "${SKIP}" !=3D "build" ]; then
+>      # Make sure output directory doesn't exist, and create it.
+>      [ -e "$outputarg" ] && die "Output directory exists"
+> @@ -417,6 +421,16 @@ if [ "${SKIP}" !=3D "build" ]; then
+>
+>      export CROSS_COMPILE=3D"${TOOLSDIR}/livepatch-gcc "
+>
+> +    # Force same date and time to prevent unwanted changes in version.c
+> +    export XEN_BUILD_DATE=3D`LC_ALL=3DC date`
+> +    export XEN_BUILD_TIME=3D`LC_ALL=3DC date +%T`
+> +
+> +    # Ensure uniform changeset between builds
+> +    if [ ! -e "${SRCDIR}/xen/.scmversion" ]; then
+> +        trap cleanup_version EXIT
+> +        echo "unavailable" > "${SRCDIR}/xen/.scmversion"
 
-The following series contains a misc set of fixes and improvements.
+Shouldn't this be "${SRCDIR}/.scmversion" since Xen runs
+"$(srctree)/tools/scmversion $(XEN_ROOT)"?
 
-There's one improvement for the hypervisor to set function alignment for
-livepatch builds in order to make sure there's always enough space in a
-function to be live-patched.
+Otherwise I still get spurious version.o changes...
 
-Following patches attempt to introduce a set of tests for self modifying
-code, currently one test using the alternatives framework, and one test
-for livepatch.
+With the 3 uses of that changed (can change during commit),
 
-Last patch hooks the newly introduced livepatch test into the gitlab CI
-using QEMU and an Alpine Linux dom0:
-
-https://gitlab.com/xen-project/people/royger/xen/-/pipelines/1108069448
-
-Roger Pau Monne (4):
-  x86/livepatch: align functions to ensure minimal distance between
-    entry points
-  xen/x86: introduce self modifying code test
-  x86/livepatch: introduce a basic live patch test to gitlab CI
-  automation: add x86-64 livepatching test
-
- automation/gitlab-ci/build.yaml               |  9 +++
- automation/gitlab-ci/test.yaml                |  8 +++
- automation/scripts/build-livepatch            | 27 +++++++
- .../scripts/qemu-alpine-x86_64-livepatch.sh   | 68 ++++++++++++++++++
- tools/include/xenctrl.h                       |  2 +
- tools/libs/ctrl/xc_misc.c                     | 14 ++++
- tools/misc/xen-livepatch.c                    | 29 ++++++++
- xen/Kconfig                                   | 19 +++++
- xen/Makefile                                  |  3 +
- xen/arch/arm/livepatch.c                      |  2 +
- xen/arch/arm/xen.lds.S                        |  4 ++
- xen/arch/x86/Kconfig                          |  1 +
- xen/arch/x86/Makefile                         |  1 +
- xen/arch/x86/include/asm/test.h               | 37 ++++++++++
- xen/arch/x86/livepatch.c                      |  4 ++
- xen/arch/x86/setup.c                          |  3 +
- xen/arch/x86/sysctl.c                         |  9 +++
- xen/arch/x86/test/Makefile                    |  3 +
- xen/arch/x86/test/smoc-lp-alt.c               | 24 +++++++
- xen/arch/x86/test/smoc-lp.c                   | 24 +++++++
- xen/arch/x86/test/smoc.c                      | 70 +++++++++++++++++++
- xen/arch/x86/xen.lds.S                        |  4 ++
- xen/common/Kconfig                            |  5 +-
- xen/common/kernel.c                           |  5 +-
- xen/include/public/sysctl.h                   | 13 ++++
- xen/include/xen/lib.h                         |  1 +
- 26 files changed, 386 insertions(+), 3 deletions(-)
- create mode 100755 automation/scripts/build-livepatch
- create mode 100755 automation/scripts/qemu-alpine-x86_64-livepatch.sh
- create mode 100644 xen/arch/x86/include/asm/test.h
- create mode 100644 xen/arch/x86/test/Makefile
- create mode 100644 xen/arch/x86/test/smoc-lp-alt.c
- create mode 100644 xen/arch/x86/test/smoc-lp.c
- create mode 100644 xen/arch/x86/test/smoc.c
-
--- 
-2.43.0
-
+Reviewed-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
