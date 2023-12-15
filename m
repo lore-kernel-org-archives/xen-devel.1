@@ -4,29 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA5AC46CA2
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 18:15:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655293.1023004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59546C35274
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Dec 2023 18:18:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.655312.1023023 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rECi6-00040C-Vl; Fri, 15 Dec 2023 18:14:54 +0000
+	id 1rEClX-0005QH-M9; Fri, 15 Dec 2023 18:18:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655293.1023004; Fri, 15 Dec 2023 18:14:54 +0000
+Received: by outflank-mailman (output) from mailman id 655312.1023023; Fri, 15 Dec 2023 18:18:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rECi6-000405-SN; Fri, 15 Dec 2023 18:14:54 +0000
-Received: by outflank-mailman (input) for mailman id 655293;
- Fri, 15 Dec 2023 18:14:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Xt8Y=H2=citrix.com=prvs=706e6129d=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1rECi5-0003yp-Fg
- for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 18:14:53 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d3f73a49-9b75-11ee-9b0f-b553b5be7939;
- Fri, 15 Dec 2023 19:14:48 +0100 (CET)
+	id 1rEClX-0005QA-Jb; Fri, 15 Dec 2023 18:18:27 +0000
+Received: by outflank-mailman (input) for mailman id 655312;
+ Fri, 15 Dec 2023 18:18:26 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1rEClW-0005Q4-Nu
+ for xen-devel@lists.xenproject.org; Fri, 15 Dec 2023 18:18:26 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rEClV-00042p-K1; Fri, 15 Dec 2023 18:18:25 +0000
+Received: from 54-240-197-227.amazon.com ([54.240.197.227]
+ helo=[192.168.3.206]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rEClV-0000yV-Dq; Fri, 15 Dec 2023 18:18:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,78 +41,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3f73a49-9b75-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1702664088;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=yYLE3EW3IzlmeMXoR9i6wCusETN7guTz9g5beECTFME=;
-  b=gexQ9JkAnBh345LFIekjHLjOnfpqo/pM1oRNrlTxCSRkcgKeYiLMTyKQ
-   sqJlqVO7MAkvkqt9eQ6AIUTLvqRoHDvYDCSvhJbS1ZMef7fNbgNodcSMa
-   hdMgLTYcpXPfPF1ySg7PVBnykDqQP8GBQslHxUSlUNqfdtPD5s1BYu6vg
-   Q=;
-X-CSE-ConnectionGUID: 7ftEl9BGRgycC6H1/bDEmw==
-X-CSE-MsgGUID: vpzgdHhQRHCjbkiwCy9h9A==
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 131604185
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.159.70
-X-Policy: $RELAYED
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:izRIpKBTVvP9IxVW/4viw5YqxClBgxIJ4kV8jS/XYbTApG8rgWQGx
- 2sfXW/XaKncZGKjLtpxb9nio0hT7ZDcz9RiQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
- yk6QoOdRCzhZiaE/n9BCpC48D8kk/nOH+KgYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
- t7pyyHlEAbNNwVcbCRMt8pvlDs15K6p4WlB4wRkDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
- uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
- jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIwpehrLGUf3
- 9MiJyEGRU6j3qW87J++Vbw57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
- pdIL2U3BPjDS0Qn1lM/IZQyhuq3wFL4dCVVsgm9rqsr+WnDigd21dABNfKMIYXUHZkMzhvwS
- mTu4XzrDR06NOWl6RGH+HGtmcTezCOqcddHfFG/3qEz2wDCroAJMzUGWF3+rfSnh0qWX9NEN
- 1dS6icotbI19kGgUp/6RRLQnZKflkdCAZwKSbR8sVzcjPWMi+qEOoQaZmFPdPEi5eUZfzM73
- XTXv4quDxBCtaLAHBpx6YyoQSOO1Tk9dDBaP3JVF1BZs7HeTJcPYgUjp+uP8ZJZbfWvQFkcO
- xjQ8EADa0w71KbnLZmT81HdmC6LrZPUVAMz7Qi/djv6tlkkO9/9Od31uQezARN8wGGxFwjpg
- ZT5s5LGsLBm4W+lzXTlrBox8EGBuK/ebWy0ba9HFJg97TW9k0NPjqgJiAyS0HxBa55eERewO
- R+7hO+kzMMLVJdcRfMtMt3Z5gVD5fSIKOkJodiJPoMVOsYuK1/vEeMHTRf44l0BWXMEyckXU
- ap3u+71ZZrGIcyLFAaLeto=
-IronPort-HdrOrdr: A9a23:HRAy8aCYY+lvRHXlHemg55DYdb4zR+YMi2TC1yhKJyC9Ffbo8/
- xG/c5rsyMc5wxwZJhNo7y90cq7MBbhHPxOkOos1N6ZNWGM0gaVxelZnOzfKlbbehEWmNQz6U
- 4ZSdkdNOHN
-X-Talos-CUID: =?us-ascii?q?9a23=3A/zbQImmo1crkb1sXcaj4e9cvVGjXOSLT0FrUcmW?=
- =?us-ascii?q?XM2l4Q5bLaQbX8o9JltU7zg=3D=3D?=
-X-Talos-MUID: 9a23:pkKozgVP4JBWjFDq/CH0lj5uFMdR2YSFCkoOkIotqpiEZAUlbg==
-X-IronPort-AV: E=Sophos;i="6.04,279,1695700800"; 
-   d="scan'208";a="131604185"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 0/2] xen: run_in_exception_handler() cleanup
-Date: Fri, 15 Dec 2023 18:14:31 +0000
-Message-ID: <20231215181433.1588532-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=26x2uNLuz37IfKdR7s5+/RWOsOtwTlwVQz6SGBOEY5U=; b=5XOJe7aSlpeNika1Szi6zXvc8f
+	gZQrmGmMslxwDLSRj/ZsiECM8rqXAB75kvnvJHYKzY6gJu7DWpfvJa1GqqeBWILUmWjFTU9e0tD4l
+	8BAf3oCn3FbwYQc5Qv63LDOESh34/MIMFT+t3BihMcVBcev9aFEJxphwn0clskZaMyIM=;
+Message-ID: <724bf769-709b-4489-aab3-85d5abe2abbf@xen.org>
+Date: Fri, 15 Dec 2023 18:18:23 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH 5/7] xen/arm: traps: add ASSERT_UNREACHABLE() where
+ needed
+Content-Language: en-GB
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: xen-devel@lists.xenproject.org, consulting@bugseng.com,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1702283415.git.nicola.vetrini@bugseng.com>
+ <394b69b769f2dc2461d2ddb0c7e037f4794eb244.1702283415.git.nicola.vetrini@bugseng.com>
+ <08e3c8f0-772e-4c08-9afc-c623f19c85e3@xen.org>
+ <240c97ed-ce27-406d-84ad-68b72e999294@xen.org>
+ <5ad1c008182bc9f23e1b37b0d6e35e4c@bugseng.com>
+ <2b4eec7c-3657-4542-96b9-56b272e8723b@xen.org>
+ <alpine.DEB.2.22.394.2312141418160.3175268@ubuntu-linux-20-04-desktop>
+ <add58ef45d9cb970c2447f22443f50c8@bugseng.com>
+ <c70f5399c36e364f06c525eed3058789@bugseng.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <c70f5399c36e364f06c525eed3058789@bugseng.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Cleanup from looking at "[XEN RFC] xen/bug: introduce bug_fn_nonconst_t to
-validate run_in_exception_handle()".  Not really relevant to the MISRA side of
-things.
+Hi,
 
-Gitlab run:
-  https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1108032069
+On 15/12/2023 14:08, Nicola Vetrini wrote:
+>>> Yes, I would go with 3., replace advance_pc with domain_crash. Assuming
+>>> that it would also solve the violation in ECLAIR.
+>>
+>> It needs to be prefixed with an ASSERT_UNREACHABLE(), though, because 
+>> it's still a violation if there is no execution path leading to 
+>> domain_crash(), but other than that it seems the safest choice.
+> 
+> Assuming there are no objections to going forward with this proposal, 
+> would you mind telling me how can I do the proper domain_crash call. 
+> Most of the examples get a "struct domain *" from a parameter or from 
+> the macro "current", so I was thinking of
+> 
+> domain_crash(current->domain);
+> 
+> but I'm not so sure about this, as there are no other uses in vcpreg.c. 
 
-Andrew Cooper (2):
-  driver/char: Drop run_in_exception_handler() ifdefary
-  xen/bug: Complete outstanding TODO
+That would be correct. All the helpers in vcpreg.c are meant to work on 
+the current vCPU.
 
- xen/drivers/char/ehci-dbgp.c |  4 ----
- xen/drivers/char/ns16550.c   |  4 ----
- xen/include/xen/bug.h        | 16 +++++++---------
- 3 files changed, 7 insertions(+), 17 deletions(-)
+> You can also submit the patch yourself, if you prefer.
 
+I am not entirely sure about which justification you want to use for 
+MISRA. So here the diff:
 
-base-commit: cad6f9a4c12dd4d5cdb2620e3fe24727ee81c7ce
+diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
+index 39aeda9dab62..485b3cb63c86 100644
+--- a/xen/arch/arm/vcpreg.c
++++ b/xen/arch/arm/vcpreg.c
+@@ -708,7 +708,13 @@ void do_cp10(struct cpu_user_regs *regs, const 
+union hsr hsr)
+          return;
+      }
+
+-    advance_pc(regs, hsr);
++    /*
++     * All the cases in the switch should return. If this is not the
++     * case, then something went wrong and it is best to crash the
++     * domain.
++     */
++    ASSERT_UNREACHABLE();
++    domain_crash(current->domain);
+  }
+
+  void do_cp(struct cpu_user_regs *regs, const union hsr hsr)
+
+Cheers,
+
 -- 
-2.30.2
-
+Julien Grall
 
