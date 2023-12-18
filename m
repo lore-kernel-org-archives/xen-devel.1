@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A6F1C35274
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Dec 2023 14:00:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655989.1023913 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70725C46CCD
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Dec 2023 14:03:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.655996.1023923 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFE9z-0006Uf-0G; Mon, 18 Dec 2023 13:59:55 +0000
+	id 1rFED7-00008F-I3; Mon, 18 Dec 2023 14:03:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655989.1023913; Mon, 18 Dec 2023 13:59:54 +0000
+Received: by outflank-mailman (output) from mailman id 655996.1023923; Mon, 18 Dec 2023 14:03:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFE9y-0006UY-Tx; Mon, 18 Dec 2023 13:59:54 +0000
-Received: by outflank-mailman (input) for mailman id 655989;
- Mon, 18 Dec 2023 13:59:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rFED7-000083-FX; Mon, 18 Dec 2023 14:03:09 +0000
+Received: by outflank-mailman (input) for mailman id 655996;
+ Mon, 18 Dec 2023 14:03:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=h3b+=H5=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rFE9w-0006TG-W0
- for xen-devel@lists.xenproject.org; Mon, 18 Dec 2023 13:59:52 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b6b7ccf5-9dad-11ee-98eb-6d05b1d4d9a1;
- Mon, 18 Dec 2023 14:59:51 +0100 (CET)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3363aa1b7d2so2873729f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 18 Dec 2023 05:59:52 -0800 (PST)
+ id 1rFED6-00007x-OH
+ for xen-devel@lists.xenproject.org; Mon, 18 Dec 2023 14:03:08 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2af72cdc-9dae-11ee-9b0f-b553b5be7939;
+ Mon, 18 Dec 2023 15:03:06 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40d05ebe642so8754075e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Dec 2023 06:03:06 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- p16-20020a5d48d0000000b0033616ea5a0fsm23744085wrs.45.2023.12.18.05.54.13
+ bg22-20020a05600c3c9600b0040c6ab53cd2sm15492943wmb.10.2023.12.18.06.03.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Dec 2023 05:54:13 -0800 (PST)
+ Mon, 18 Dec 2023 06:03:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b6b7ccf5-9dad-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: 2af72cdc-9dae-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1702907991; x=1703512791; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
-         :from:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=kSJ+2g/yNCJ4GnMeWu8vmqbqESy46ofPlCqnat6qEq8=;
-        b=DV/ZjTJqpCnUV8rJqxXrzuaAOXq4aNVEiuHgfU5YNFAcfiRICOJkgZX2ZaUjdr4UQe
-         055Eo5sa/NbBz1I7pR8RkjWgwaIoZv5sYhCZ7mJnSZxEwNHiKX1eunHwcieAYzmtJT/D
-         Huz1QhPh70aayYAhl4xYoQ9bZ5Ekm6HUkoRJzImBU65SRfsEUAQqbAbwDVP/2Ilb1NZ3
-         LC9+0JfudkmvBw6JgTGj+GMwA1Nc2iOOTcQl7utjmrmXjIcTrZVCxvSTwzWJGxQyCu3+
-         oFv+PaqdxCmHHcWeBdoBxbYEJ0fvBpeDfA2Hq8ey4teL3jF4xSUUrXbpnDvuPALNVGdN
-         lGnA==
+        d=suse.com; s=google; t=1702908186; x=1703512986; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ntiCil28lyRVJPkdss5XJyeHJxz3eEVttwAY37JVNGY=;
+        b=SwNaiK0am1KqURVTLPgzsGS5Lo0eH2/ZLdH0mMFO5lVsa2lk4QhAVLPmg67XU/ty1J
+         aKHzxePV0NgFPBgUw2eBs5ciFeje+wM7QGcIGA3yrlyAmSqJOJKquOypUV/5si6EmKWG
+         ZevzsZR2pKX+il88H8/toTWhRL2cBaBckb3MAOW23x4XtPqbOPzv5NPy0gV33GEhkp8J
+         4X97AXmhf3/+zHEcMK8ig6RMACSnK0TWsoOob2brOUoQo6UuVvUaUVM1WBab9xwo1tx3
+         1HIGrO9oTK0UfRNr2b4VoIrUJlVC4lcWihnapDKlhd/WC6/jdZCw78m3xba4wS2ms5Mq
+         MdIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702907991; x=1703512791;
-        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
-         :from:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kSJ+2g/yNCJ4GnMeWu8vmqbqESy46ofPlCqnat6qEq8=;
-        b=M+akaYOtMFdUDJ83IdnkuYT0aH1lbd4M/qPYc6dEKzZJ4LYQXRmBhdWsCrsI0raoxF
-         5BpsNDbigfc3yt/gzUU6ldhrCARpYz6dcCQaH5Wqao/jdr8uxtY8APPEK4SIF6Brnb3w
-         ro1XI3+CC6252OTvWiJTRY830/buKk33QTuzfyrX61NT9hsAFSwm2qpRKdjtcJeCwV6a
-         jNW6MrspkSc1IzUmEWU3+iQuy0AGpA2qeFjoVHE9jIrJSm3Xhikx/rjKw3HiCPe7tU9v
-         nHAM5wpnaGUtRg93fvY4byh5cr0m0Fu3oIPwvd9dNDLHJO9gvtqGmvrgQRJmuE776RVI
-         DXNA==
-X-Gm-Message-State: AOJu0YwaXqMb9ht0Xqtsn2TyYSTuyp1jcVJWYWcbFjGmb8q5ByCbdqom
-	WX31lrybjBkU4bftQV7V3/cYranyiXwF/+JsImS2
-X-Google-Smtp-Source: AGHT+IEVvuPrFF6mW+vXa3B+FfNNW12GiFEKN3Id0l0oEpmd5gD+pW3fci0zfDE6aTeccVoZC56N1g==
-X-Received: by 2002:adf:f383:0:b0:336:5d19:e73c with SMTP id m3-20020adff383000000b003365d19e73cmr1598390wro.200.1702907653748;
-        Mon, 18 Dec 2023 05:54:13 -0800 (PST)
-Message-ID: <f7cbd6a1-3367-41a0-b5df-7013dcfffc83@suse.com>
-Date: Mon, 18 Dec 2023 14:54:12 +0100
+        d=1e100.net; s=20230601; t=1702908186; x=1703512986;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ntiCil28lyRVJPkdss5XJyeHJxz3eEVttwAY37JVNGY=;
+        b=fwq8kZoOk5PhE9RpH8SbQzsD7BzM6/hNg2TPKLcW78bSqg4K0eYOCDkZ+E3hua/zO1
+         d2++lHprHchEi8ioG3mml43IUJvgHQwxgnrgdnRGzCoW6n9xinC9Wo3PgPfhUXU6tCfY
+         PyG28FpDcMi8g6U8D4MpEKKr3GmDrWqM+TmbyqI0dF5YFDHVNVNCPa6Va1E4Xb46QOGW
+         GrEQBE2vnivMMYyGlY3p3fm1S8v81kPuf7RUBRqMjm5AlKQ+WniLlGJpVbsVRNv9jtB1
+         ligZU3pX401j0Mx0hCtBda326kpwYHZTppiVsI+fgOaBCaqdm4FC58YOsqIzvTKcTb0C
+         X7Ow==
+X-Gm-Message-State: AOJu0Yz2WnAFHLWkSb3PEepi/qm+rXbr+zQXPJ8zH7vatKFeqEV66SIp
+	f92xNpUkgcIw08SYkYTSqOfq
+X-Google-Smtp-Source: AGHT+IGTna0BCzeSRqTqSDXdZjpJqWI9i62p+/FBdAtztuUKchlgkRWaV57vqp/AZhmucQuu/fC+vw==
+X-Received: by 2002:a05:600c:1c01:b0:40c:2ba2:8add with SMTP id j1-20020a05600c1c0100b0040c2ba28addmr7925084wms.117.1702908186182;
+        Mon, 18 Dec 2023 06:03:06 -0800 (PST)
+Message-ID: <ffa5a22a-36cf-4817-aae3-668d6ff181bf@suse.com>
+Date: Mon, 18 Dec 2023 15:03:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] x86/spec-ctrl: add logic to issue IBPB on exit to
- guest
+Subject: Re: [XEN PATCH v3 1/3] xen/x86: add missing instances of asmlinkage
+ attributes
 Content-Language: en-US
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: xen-devel@lists.xenproject.org, consulting@bugseng.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1702285639.git.nicola.vetrini@bugseng.com>
+ <2282f4b7ff0143f513f9677e0cca2d68c0f2a08c.1702285639.git.nicola.vetrini@bugseng.com>
+ <alpine.DEB.2.22.394.2312111748300.1703076@ubuntu-linux-20-04-desktop>
 From: Jan Beulich <jbeulich@suse.com>
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-References: <06591b64-2f05-a4cc-a2f3-a74c3c4a76d6@suse.com>
- <31da79de-bd6b-af95-793a-c16516992bc7@suse.com> <ZYA3Db53Z3fvBlwn@macbook>
- <1c00c3ba-4d10-4cdc-ae2e-ca2fb2157be6@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -115,31 +116,18 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1c00c3ba-4d10-4cdc-ae2e-ca2fb2157be6@suse.com>
+In-Reply-To: <alpine.DEB.2.22.394.2312111748300.1703076@ubuntu-linux-20-04-desktop>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 18.12.2023 14:46, Jan Beulich wrote:
-> On 18.12.2023 13:11, Roger Pau Monné wrote:
->> On Tue, Feb 14, 2023 at 05:10:42PM +0100, Jan Beulich wrote:
->>> ---
->>> I have to admit that I'm not really certain about the placement of the
->>> IBPB wrt the MSR_SPEC_CTRL writes. For now I've simply used "opposite of
->>> entry".
+On 12.12.2023 02:48, Stefano Stabellini wrote:
+> On Mon, 11 Dec 2023, Nicola Vetrini wrote:
+>> No functional change.
 >>
->> Maybe it would easier to just add the MSR_PRED_CMD PRED_CMD_IBPB write
->> to the vmcs MSR load list?
->>
->> It's a one-time only AFAICT, as you would only want to do this for
->> context-switch AFAICT.
+>> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 > 
-> That would be a back and forth of adding and removing the MSR to/from
-> that list then, which I'm not convinced is helpful. With these special
-> MSRs I would further be uncertain as to their effect when used via one
-> of these lists.
+> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-Plus (as only a secondary argument, but still) it would make PV and HVM
-mechanisms entirely different.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
