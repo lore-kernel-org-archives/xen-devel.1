@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66054C46CA2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A984DC46CD4
 	for <xen-devel@archiver.kernel.org>; Mon, 18 Dec 2023 10:17:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655807.1023639 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.655801.1023588 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFAh1-0006Ha-J2; Mon, 18 Dec 2023 10:17:47 +0000
+	id 1rFAgv-00055h-Pa; Mon, 18 Dec 2023 10:17:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655807.1023639; Mon, 18 Dec 2023 10:17:47 +0000
+Received: by outflank-mailman (output) from mailman id 655801.1023588; Mon, 18 Dec 2023 10:17:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFAh1-0006GI-BI; Mon, 18 Dec 2023 10:17:47 +0000
-Received: by outflank-mailman (input) for mailman id 655807;
- Mon, 18 Dec 2023 10:17:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rFAgv-00055W-LW; Mon, 18 Dec 2023 10:17:41 +0000
+Received: by outflank-mailman (input) for mailman id 655801;
+ Mon, 18 Dec 2023 10:17:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mejk=H5=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rFAh0-00055V-Fw
- for xen-devel@lists.xenproject.org; Mon, 18 Dec 2023 10:17:46 +0000
+ id 1rFAgu-00055P-ON
+ for xen-devel@lists.xenproject.org; Mon, 18 Dec 2023 10:17:40 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id affa4c52-9d8e-11ee-98eb-6d05b1d4d9a1;
- Mon, 18 Dec 2023 11:17:46 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ab9dfe7b-9d8e-11ee-9b0f-b553b5be7939;
+ Mon, 18 Dec 2023 11:17:38 +0100 (CET)
 Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id A4D0C4EE0747;
- Mon, 18 Dec 2023 11:17:44 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 7C6EB4EE0742;
+ Mon, 18 Dec 2023 11:17:36 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,72 +41,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: affa4c52-9d8e-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: ab9dfe7b-9d8e-11ee-9b0f-b553b5be7939
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [XEN PATCH v2 6/7] xen/arm: vcpreg: address violation of MISRA C Rule 2.1
-Date: Mon, 18 Dec 2023 11:17:32 +0100
-Message-Id: <9816362a11aeb7b9618500dea9bbf32e4b5483a9.1702891792.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v2 0/7] address violations of MISRA C:2012 Rule 2.1
+Date: Mon, 18 Dec 2023 11:17:26 +0100
+Message-Id: <cover.1702891792.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1702891792.git.nicola.vetrini@bugseng.com>
-References: <cover.1702891792.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There is no path that reaches the call to 'advance_pc', thus violating MISRA C
-Rule 2.1.
-A call to ASSERT_UNREACHABLE() is added after the switch, despite this being
-useful to detect errors only in debug builds; if that marker is ever reached,
-a domain crash is triggered, as a defensive coding measure.
+MISRA C:2012 Rule 2.1 states: "A project shall not contain unreachable code".
+As such, this series eliminates various instances of unreachable code found in
+Xen, by providing equivalent compliant constructs.
 
-No functional change.
+This series is loosely based on my earlier series [1], but the overall approach
+has changed since; for instance, declarations without initialization are now
+ignored, as detailed in docs/misra/deviations.rst.
 
-Signed-off-by: Julien Grall <julien@xen.org>
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-The code changes (including the comment) were made by Julien in [1]; I added the
-commit text and all other informations.
+[1] https://lore.kernel.org/xen-devel/cover.1690985045.git.nicola.vetrini@bugseng.com/
 
-All the switch clauses, when expanded, end with a return statement
-and the default clause has an unconditional return, therefore
-advance_pc() is never reached.
+Changes in v2:
+- Patch 4 has been committed;
+- Drop Patch 7/7;
+- Add two new patches:
+  - "xen/arm: vcpreg: address violation of MISRA C Rule 2.1"
+  - "automation/eclair_analysis: avoid violation of MISRA Rule 2.1"
+- Reworked all other patches.
 
-However, it has been deemed safer to crash the domain if the switch is ever
-exited.
+Nicola Vetrini (7):
+  xen/shutdown: address MISRA C:2012 Rule 2.1
+  x86/mm: address MISRA C:2012 Rule 2.1
+  xen/arm: address MISRA C:2012 Rule 2.1
+  xen/arm: traps: add ASSERT_UNREACHABLE() where needed
+  x86/platform: removed break to address MISRA C:2012 Rule 2.1
+  xen/arm: vcpreg: address violation of MISRA C Rule 2.1
+  automation/eclair_analysis: avoid violation of MISRA Rule 2.1
 
-[1] https://lore.kernel.org/xen-devel/alpine.DEB.2.22.394.2312151232580.3175268@ubuntu-linux-20-04-desktop/T/#maa91d8025532455a6317119a1e4affa00a99e1ce
----
- xen/arch/arm/vcpreg.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ automation/eclair_analysis/ECLAIR/deviations.ecl |  7 ++++++-
+ xen/arch/arm/mm.c                                |  1 +
+ xen/arch/arm/traps.c                             |  3 ++-
+ xen/arch/arm/vcpreg.c                            | 10 ++++++++--
+ xen/arch/arm/vgic-v3-its.c                       |  1 +
+ xen/arch/x86/mm.c                                |  2 --
+ xen/arch/x86/platform_hypercall.c                |  1 -
+ xen/common/shutdown.c                            | 15 ++++-----------
+ 8 files changed, 22 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
-index 39aeda9dab62..a2d050070473 100644
---- a/xen/arch/arm/vcpreg.c
-+++ b/xen/arch/arm/vcpreg.c
-@@ -707,8 +707,14 @@ void do_cp10(struct cpu_user_regs *regs, const union hsr hsr)
-         inject_undef_exception(regs, hsr);
-         return;
-     }
--
--    advance_pc(regs, hsr);
-+    
-+    /*
-+     * All the cases in the switch should return. If this is not the
-+     * case, then something went wrong and it is best to crash the
-+     * domain.
-+     */
-+    ASSERT_UNREACHABLE();
-+    domain_crash(current->domain);
- }
- 
- void do_cp(struct cpu_user_regs *regs, const union hsr hsr)
 -- 
 2.34.1
 
