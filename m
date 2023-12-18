@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0679EC46CD2
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Dec 2023 09:00:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.655711.1023438 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37D89C35274
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Dec 2023 09:04:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.655714.1023448 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rF9UL-0003Tr-LO; Mon, 18 Dec 2023 09:00:37 +0000
+	id 1rF9Y7-0004OQ-55; Mon, 18 Dec 2023 09:04:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 655711.1023438; Mon, 18 Dec 2023 09:00:37 +0000
+Received: by outflank-mailman (output) from mailman id 655714.1023448; Mon, 18 Dec 2023 09:04:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rF9UL-0003Tk-HY; Mon, 18 Dec 2023 09:00:37 +0000
-Received: by outflank-mailman (input) for mailman id 655711;
- Mon, 18 Dec 2023 09:00:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MePR=H5=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1rF9UK-0003Te-M5
- for xen-devel@lists.xenproject.org; Mon, 18 Dec 2023 09:00:36 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e763abf3-9d83-11ee-9b0f-b553b5be7939;
- Mon, 18 Dec 2023 10:00:34 +0100 (CET)
-Received: from Dell.bugseng.com (unknown [78.210.165.135])
- by support.bugseng.com (Postfix) with ESMTPSA id 803954EE0742;
- Mon, 18 Dec 2023 10:00:31 +0100 (CET)
+	id 1rF9Y7-0004OJ-2K; Mon, 18 Dec 2023 09:04:31 +0000
+Received: by outflank-mailman (input) for mailman id 655714;
+ Mon, 18 Dec 2023 09:04:29 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rF9Y5-0004O9-91; Mon, 18 Dec 2023 09:04:29 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rF9Y4-0001Eb-SQ; Mon, 18 Dec 2023 09:04:28 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rF9Y4-0001GG-IT; Mon, 18 Dec 2023 09:04:28 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1rF9Y4-0001tV-I5; Mon, 18 Dec 2023 09:04:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,136 +44,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e763abf3-9d83-11ee-9b0f-b553b5be7939
-From: Federico Serafini <federico.serafini@bugseng.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=PLA1lCyabivRuz9Z6ASlfFpnObM0ox6xATOYkkPcueM=; b=jKv7lKfGOfB/TNHE82mXdHT18U
+	cu9T00jlq7bdJfPeaQA7ywNcYhz6S0hFWTl0NIWDsiw/Io8J5RZTgjRiHoS3VlosndXQbxq1CbWsV
+	uMeQYyCfCYBsANTuod2y+w988PGNGWQJukuNH04yk1eWXEJH78V/cH2rtqhD9AFWKwkg=;
 To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v3] automation/eclair: add deviations for MISRA C:2012 Rule 16.3
-Date: Mon, 18 Dec 2023 10:00:18 +0100
-Message-Id: <23f4bf337883f1d6b67f7bd8466a9c299713e9d4.1702889534.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+Message-ID: <osstest-184163-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 184163: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=74daeded0cabe87d26546f07f9a3911cb60ec0e1
+X-Osstest-Versions-That:
+    ovmf=3ce5f2d445e51efe2aebaa227a055e5c8522d00b
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 18 Dec 2023 09:04:28 +0000
 
-MISRA C:2012 Rule 16.3 states that an unconditional break statement
-shall terminate every switch-clause.
+flight 184163 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/184163/
 
-Update ECLAIR configuration to take into account:
-  - continue, goto, return statements;
-  - functions with attribute noreturn;
-  - pseudo-keyword fallthrough;
-  - macro BUG();
-  - comments.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 74daeded0cabe87d26546f07f9a3911cb60ec0e1
+baseline version:
+ ovmf                 3ce5f2d445e51efe2aebaa227a055e5c8522d00b
 
-Update docs/misra/deviations.rst accordingly.
+Last test of basis   184142  2023-12-14 22:12:46 Z    3 days
+Testing same since   184163  2023-12-18 06:42:51 Z    0 days    1 attempts
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
-Changes in v3:
-  - added bullet point for pseudo-keyword fallthrough;
-  - mentioned noreturn attribute;
-  - fixed typo.
----
-Changes in v2:
-  - applied suggestions coming from
-    https://lists.xenproject.org/archives/html/xen-devel/2023-12/msg00957.html
----
- .../eclair_analysis/ECLAIR/deviations.ecl     | 28 ++++++++++++++++
- docs/misra/deviations.rst                     | 32 +++++++++++++++++++
- 2 files changed, 60 insertions(+)
+------------------------------------------------------------
+People who touched revisions under test:
+  Daniel Nguyen <daniel.nguyen@arm.com>
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index 683f2bbfe8..0e8152f9c3 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -327,6 +327,34 @@ therefore have the same behavior of a boolean"
- -config=MC3R1.R14.4,etypes+={deliberate, "stmt(child(cond,child(expr,ref(^<?domain>?::is_dying$))))","src_type(enum)"}
- -doc_end
- 
-+#
-+# Series 16.
-+#
-+
-+-doc_begin="Switch clauses ending with continue, goto, return statements are
-+safe."
-+-config=MC3R1.R16.3,terminals+={safe, "node(continue_stmt||goto_stmt||return_stmt)"}
-+-doc_end
-+
-+-doc_begin="Switch clauses ending with a call to a function that does not give
-+the control back (i.e., a function with attribute noreturn) are safe."
-+-config=MC3R1.R16.3,terminals+={safe, "call(property(noreturn))"}
-+-doc_end
-+
-+-doc_begin="Switch clauses ending with pseudo-keyword \"fallthrough\" are
-+safe."
-+-config=MC3R1.R16.3,reports+={safe, "any_area(end_loc(any_exp(text(/fallthrough;/))))"}
-+-doc_end
-+
-+-doc_begin="Switch clauses ending with failure method \"BUG()\" are safe."
-+-config=MC3R1.R16.3,reports+={safe, "any_area(end_loc(any_exp(text(/BUG\\(\\);/))))"}
-+-doc_end
-+
-+-doc_begin="Switch clauses not ending with the break statement are safe if an
-+explicit comment indicating the fallthrough intention is present."
-+-config=MC3R1.R16.3,reports+={safe, "any_area(end_loc(any_exp(text(^(?s).*/\\* [fF]all ?through.? \\*/.*$,0..1))))"}
-+-doc_end
-+
- #
- # Series 20.
- #
-diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-index eda3c8100c..0131d72959 100644
---- a/docs/misra/deviations.rst
-+++ b/docs/misra/deviations.rst
-@@ -276,6 +276,38 @@ Deviations related to MISRA C:2012 Rules:
-        therefore have the same behavior of a boolean.
-      - Project-wide deviation; tagged as `deliberate` for ECLAIR.
- 
-+   * - R16.3
-+     - Switch clauses ending with continue, goto, return statements are safe.
-+     - Tagged as `safe` for ECLAIR.
-+
-+   * - R16.3
-+     - Switch clauses ending with a call to a function that does not give
-+       the control back (i.e., a function with attribute noreturn) are safe.
-+     - Tagged as `safe` for ECLAIR.
-+
-+   * - R16.3
-+     - Switch clauses ending with pseudo-keyword \"fallthrough\" are safe.
-+     - Tagged as `safe` for ECLAIR.
-+
-+   * - R16.3
-+     - Switch clauses ending with failure method \"BUG()\" are safe.
-+     - Tagged as `safe` for ECLAIR.
-+
-+   * - R16.3
-+     - Existing switch clauses not ending with the break statement are safe if
-+       an explicit comment indicating the fallthrough intention is present.
-+       However, the use of such comments in new code is deprecated:
-+       the pseudo-keyword "fallthrough" shall be used.
-+     - Tagged as `safe` for ECLAIR. The accepted comments are:
-+         - /\* fall through \*/
-+         - /\* fall through. \*/
-+         - /\* fallthrough \*/
-+         - /\* fallthrough. \*/
-+         - /\* Fall through \*/
-+         - /\* Fall through. \*/
-+         - /\* Fallthrough \*/
-+         - /\* Fallthrough. \*/
-+
-    * - R20.7
-      - Code violating Rule 20.7 is safe when macro parameters are used:
-        (1) as function arguments;
--- 
-2.34.1
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   3ce5f2d445..74daeded0c  74daeded0cabe87d26546f07f9a3911cb60ec0e1 -> xen-tested-master
 
