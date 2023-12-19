@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B09CC46CD2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90F9EC46CD8
 	for <xen-devel@archiver.kernel.org>; Tue, 19 Dec 2023 11:06:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.656671.1025053 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.656670.1025044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFXvS-0004bW-4m; Tue, 19 Dec 2023 11:06:14 +0000
+	id 1rFXvR-0004RP-Cy; Tue, 19 Dec 2023 11:06:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 656671.1025053; Tue, 19 Dec 2023 11:06:14 +0000
+Received: by outflank-mailman (output) from mailman id 656670.1025044; Tue, 19 Dec 2023 11:06:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFXvR-0004a0-RM; Tue, 19 Dec 2023 11:06:13 +0000
-Received: by outflank-mailman (input) for mailman id 656671;
- Tue, 19 Dec 2023 11:06:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rFXvR-0004OG-7T; Tue, 19 Dec 2023 11:06:13 +0000
+Received: by outflank-mailman (input) for mailman id 656670;
+ Tue, 19 Dec 2023 11:06:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Div9=H6=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rFXvQ-0003cc-2G
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 11:06:12 +0000
+ id 1rFXvP-0003Hq-Lb
+ for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 11:06:11 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9d6cbe10-9e5e-11ee-9b0f-b553b5be7939;
- Tue, 19 Dec 2023 12:06:10 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9bb7bc45-9e5e-11ee-98eb-6d05b1d4d9a1;
+ Tue, 19 Dec 2023 12:06:07 +0100 (CET)
 Received: from beta.station (net-37-182-35-120.cust.vodafonedsl.it
  [37.182.35.120])
- by support.bugseng.com (Postfix) with ESMTPSA id 7A4024EE0C9B;
- Tue, 19 Dec 2023 12:06:09 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 1B7B04EE0C92;
+ Tue, 19 Dec 2023 12:06:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,21 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d6cbe10-9e5e-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 9bb7bc45-9e5e-11ee-98eb-6d05b1d4d9a1
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [PATCH v2 6/6] xen/common: address violations of MISRA C:2012 Rule 11.8
-Date: Tue, 19 Dec 2023 12:05:14 +0100
-Message-Id: <df682e995b726b5f7ba8af0f69bb888c398eac96.1702982442.git.maria.celeste.cesario@bugseng.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 2/6] xen/ppc: address violations of MISRA C:2012 Rule 11.8.
+Date: Tue, 19 Dec 2023 12:05:10 +0100
+Message-Id: <9270a4fe1712cff6a99e60c7862de1c1b2dde3d6.1702982442.git.maria.celeste.cesario@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1702982442.git.maria.celeste.cesario@bugseng.com>
 References: <cover.1702982442.git.maria.celeste.cesario@bugseng.com>
@@ -70,31 +66,30 @@ headline states:
 "A conversion shall not remove any const, volatile or _Atomic qualification
 from the type pointed to by a pointer".
 
-Change cast type from void* to uintptr_t.
-void* type cast resulted in violation of the Rule, a cast to type uintptr_t
-is more appropriate type-wise.
+Fix violation by adding missing const qualifier in cast.
 
 Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
 Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-Commit introduced in v2
+Adaptation requested by the community to make the code more consistent.
 ---
- xen/common/version.c | 2 +-
+ xen/arch/ppc/include/asm/atomic.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/common/version.c b/xen/common/version.c
-index d320135208..e807ef4de0 100644
---- a/xen/common/version.c
-+++ b/xen/common/version.c
-@@ -178,7 +178,7 @@ void __init xen_build_init(void)
-     if ( &n[1] >= __note_gnu_build_id_end )
-         return;
+diff --git a/xen/arch/ppc/include/asm/atomic.h b/xen/arch/ppc/include/asm/atomic.h
+index 64168aa3f1..fe778579fb 100644
+--- a/xen/arch/ppc/include/asm/atomic.h
++++ b/xen/arch/ppc/include/asm/atomic.h
+@@ -16,7 +16,7 @@
  
--    sz = (void *)__note_gnu_build_id_end - (void *)n;
-+    sz = (uintptr_t)__note_gnu_build_id_end - (uintptr_t)n;
+ static inline int atomic_read(const atomic_t *v)
+ {
+-    return *(volatile int *)&v->counter;
++    return *(const volatile int *)&v->counter;
+ }
  
-     rc = xen_build_id_check(n, sz, &build_id_p, &build_id_len);
- 
+ static inline int _atomic_read(atomic_t v)
 -- 
 2.40.0
 
