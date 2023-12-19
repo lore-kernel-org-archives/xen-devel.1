@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C627FC41535
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Dec 2023 17:07:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.657062.1025711 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695C7C41535
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Dec 2023 18:20:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.657071.1025731 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFdZ6-0002L5-BU; Tue, 19 Dec 2023 17:07:32 +0000
+	id 1rFehM-0006ln-U4; Tue, 19 Dec 2023 18:20:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 657062.1025711; Tue, 19 Dec 2023 17:07:32 +0000
+Received: by outflank-mailman (output) from mailman id 657071.1025731; Tue, 19 Dec 2023 18:20:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFdZ6-0002Ky-8h; Tue, 19 Dec 2023 17:07:32 +0000
-Received: by outflank-mailman (input) for mailman id 657062;
- Tue, 19 Dec 2023 17:07:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rom3=H6=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rFdZ4-0002Kn-CR
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 17:07:30 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 173a285c-9e91-11ee-98eb-6d05b1d4d9a1;
- Tue, 19 Dec 2023 18:07:29 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-336755f1688so619648f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 19 Dec 2023 09:07:29 -0800 (PST)
-Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
- u9-20020a05600c19c900b0040d18fdfe96sm3708741wmq.44.2023.12.19.09.07.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 09:07:27 -0800 (PST)
+	id 1rFehM-0006lg-RI; Tue, 19 Dec 2023 18:20:08 +0000
+Received: by outflank-mailman (input) for mailman id 657071;
+ Tue, 19 Dec 2023 18:20:07 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Dspo=H6=redhat.com=kwolf@srs-se1.protection.inumbo.net>)
+ id 1rFehL-0006cR-CJ
+ for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 18:20:07 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 39f8db44-9e9b-11ee-9b0f-b553b5be7939;
+ Tue, 19 Dec 2023 19:20:03 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-557-ng6tSX5TO9q6N0AkdP052Q-1; Tue, 19 Dec 2023 13:19:54 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9391184B04B;
+ Tue, 19 Dec 2023 18:19:53 +0000 (UTC)
+Received: from redhat.com (unknown [10.39.194.175])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 81F601121306;
+ Tue, 19 Dec 2023 18:19:48 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,161 +53,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 173a285c-9e91-11ee-98eb-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1703005649; x=1703610449; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=GBQ8AHEZ1nE0Ff/rqbZrhyTISpcUQQu3s0Kbjtwe8Qw=;
-        b=jNXnkjr3dDA/QeSrY5KNaTO1UBvUwjgLx/J22hDn5aHM0+sc4ERnbcoHq5V29kke8W
-         WC+DC5YMZGRJUwMhPMDTQYhyw4Hat4Kgh17F4TzIZXNi4BBHrxi0Aq4pkXzXwH869qbK
-         dSzfvm7vyhpsluh3Bj61wmTT5PKJSj0zkdQLI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703005649; x=1703610449;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=GBQ8AHEZ1nE0Ff/rqbZrhyTISpcUQQu3s0Kbjtwe8Qw=;
-        b=AkjT0Oiiqt/iwX8SF9B1HSM5NvtNcLSdFTrsLDMJns4Oso7fY31ZCIdZ74EI4JAJlA
-         6Vid4MEd3W1b4RJCLy9kLuc5Uhh4vzcwriSoTsHxMw2JtJ6mBlwXgCZnJiO0zbwtyqTJ
-         F9ku9jViaU9K65MgTeatEYnTNkzcBquv2YZ2KWWb7kyAMZJz2YTo10Qosl6Mr/YNunXL
-         iQYHWByDBJQa/ziYb0r0berUP28LmVmTDgjS9Yv6dkEs0HkvU3ZqyBRw5Xh50ynqKYxE
-         FVKlsD8ReVuGfhT3WXIN3XX28LVw6hlImiyzYCq7MvhB+h3eNyLoLcKk0TMHmwnNRKb7
-         1pnQ==
-X-Gm-Message-State: AOJu0Yw+2qhDo3Nz8jpf2PopqQusV0+C6G9nQYIhwd7ov26NbpP9hv0z
-	GKnzRzLF5hZW2pbHz/KgSqHbFW6cKQZjAJj754k=
-X-Google-Smtp-Source: AGHT+IEDCK+PdKJmnKBWE4qhZG1HusO8eyM02PvVD99cCLAezPeLNhJR+SNEONI7Hj0ujw+bj9/TrA==
-X-Received: by 2002:a05:600c:2048:b0:40c:692f:3413 with SMTP id p8-20020a05600c204800b0040c692f3413mr4315829wmg.77.1703005648740;
-        Tue, 19 Dec 2023 09:07:28 -0800 (PST)
-Date: Tue, 19 Dec 2023 18:07:26 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH v4 4/4] x86/PV: issue branch prediction barrier when
- switching 64-bit guest to kernel mode
-Message-ID: <ZYHNzo8UFzOkt0pv@macbook>
-References: <06591b64-2f05-a4cc-a2f3-a74c3c4a76d6@suse.com>
- <2863b0a9-ca7c-3cce-104d-0b6685b0b383@suse.com>
- <ZYCARJAxH9hBD0YQ@macbook>
- <6e022af1-d383-48be-ab54-6ec254aa1502@suse.com>
- <ZYGC8JaJ45tkbqQC@macbook>
- <aacaa220-3e95-4dff-9572-79f9e79faeae@suse.com>
- <ZYGyjQiAomxh0QnI@macbook>
+X-Inumbo-ID: 39f8db44-9e9b-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1703010002;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=kdHrCBh+aFwerdanskMZMdWR+mM1k+MIbCkQXlcqavA=;
+	b=YUzEEySBxcELbNg2caIEBGbXo1YJnCd4+VMKq/hxIgtYu/AO5v1qTcQUzzyeo6WM89UuYQ
+	68rHFSIGHAtjX7SF3uC/yzLJArla9GFtWnpPYx2KMP6QWHadUmWQKN3qxWWLd6DY2fbtEb
+	f3DNBL9RSzQtmLo9s8iuPGAWf7/deyw=
+X-MC-Unique: ng6tSX5TO9q6N0AkdP052Q-1
+Date: Tue, 19 Dec 2023 19:19:47 +0100
+From: Kevin Wolf <kwolf@redhat.com>
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: qemu-devel@nongnu.org,
+	Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+	Cleber Rosa <crosa@redhat.com>,
+	Xie Changlong <xiechanglong.d@gmail.com>,
+	Paul Durrant <paul@xen.org>, Ari Sundholm <ari@tuxera.com>,
+	Jason Wang <jasowang@redhat.com>, Eric Blake <eblake@redhat.com>,
+	John Snow <jsnow@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+	Wen Congyang <wencongyang2@huawei.com>,
+	Alberto Garcia <berto@igalia.com>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org,
+	Juan Quintela <quintela@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>, Coiby Xu <Coiby.Xu@gmail.com>,
+	Fabiano Rosas <farosas@suse.de>, Hanna Reitz <hreitz@redhat.com>,
+	Zhang Chen <chen.zhang@intel.com>,
+	Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
+	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+	Peter Xu <peterx@redhat.com>,
+	Emanuele Giuseppe Esposito <eesposit@redhat.com>,
+	Fam Zheng <fam@euphon.net>, Leonardo Bras <leobras@redhat.com>,
+	David Hildenbrand <david@redhat.com>,
+	Li Zhijian <lizhijian@fujitsu.com>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v2 04/14] aio: make
+ aio_context_acquire()/aio_context_release() a no-op
+Message-ID: <ZYHew2poxuJJRyhC@redhat.com>
+References: <20231205182011.1976568-1-stefanha@redhat.com>
+ <20231205182011.1976568-5-stefanha@redhat.com>
+ <ZYG2mSe1JWnC0tq_@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <ZYGyjQiAomxh0QnI@macbook>
+In-Reply-To: <ZYG2mSe1JWnC0tq_@redhat.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
 
-On Tue, Dec 19, 2023 at 04:11:09PM +0100, Roger Pau Monné wrote:
-> On Tue, Dec 19, 2023 at 03:06:50PM +0100, Jan Beulich wrote:
-> > On 19.12.2023 12:48, Roger Pau Monné wrote:
-> > > On Tue, Dec 19, 2023 at 10:56:16AM +0100, Jan Beulich wrote:
-> > >> On 18.12.2023 18:24, Roger Pau Monné wrote:
-> > >>> On Tue, Feb 14, 2023 at 05:12:08PM +0100, Jan Beulich wrote:
-> > >>>> --- a/xen/arch/x86/pv/domain.c
-> > >>>> +++ b/xen/arch/x86/pv/domain.c
-> > >>>> @@ -455,6 +455,7 @@ static void _toggle_guest_pt(struct vcpu
-> > >>>>  void toggle_guest_mode(struct vcpu *v)
-> > >>>>  {
-> > >>>>      const struct domain *d = v->domain;
-> > >>>> +    struct cpu_info *cpu_info = get_cpu_info();
-> > >>>>      unsigned long gs_base;
-> > >>>>  
-> > >>>>      ASSERT(!is_pv_32bit_vcpu(v));
-> > >>>> @@ -467,15 +468,21 @@ void toggle_guest_mode(struct vcpu *v)
-> > >>>>      if ( v->arch.flags & TF_kernel_mode )
-> > >>>>          v->arch.pv.gs_base_kernel = gs_base;
-> > >>>>      else
-> > >>>> +    {
-> > >>>>          v->arch.pv.gs_base_user = gs_base;
-> > >>>> +
-> > >>>> +        if ( opt_ibpb_mode_switch &&
-> > >>>> +             !(d->arch.spec_ctrl_flags & SCF_entry_ibpb) &&
-> > >>>> +             !VM_ASSIST(d, mode_switch_no_ibpb) )
-> > >>>> +            cpu_info->spec_ctrl_flags |= SCF_new_pred_ctxt;
-> > >>>
-> > >>> Likewise similar to the remarks I've made before, if doing an IBPB on
-> > >>> entry is enough to cover for the case here, it must also be fine to
-> > >>> issue the IBPB right here, instead of deferring to return to guest
-> > >>> context?
-> > >>>
-> > >>> The only concern would be (as you mentioned before) to avoid clearing
-> > >>> valid Xen predictions, but I would rather see some figures about what
-> > >>> effect the delaying to return to guest has vs issuing it right here.
-> > >>
-> > >> Part of the reason (aiui) to do things on the exit path was to
-> > >> consolidate the context switch induced one and the user->kernel switch
-> > >> one into the same place and mechanism.
-> > > 
-> > > Isn't it kind of a very specific case that we end up doing a
-> > > user->kernel switch as part of a context switch?  IOW: would require
-> > > the vCPU to be scheduled out at that very specific point.
+Am 19.12.2023 um 16:28 hat Kevin Wolf geschrieben:
+> Am 05.12.2023 um 19:20 hat Stefan Hajnoczi geschrieben:
+> > aio_context_acquire()/aio_context_release() has been replaced by
+> > fine-grained locking to protect state shared by multiple threads. The
+> > AioContext lock still plays the role of balancing locking in
+> > AIO_WAIT_WHILE() and many functions in QEMU either require that the
+> > AioContext lock is held or not held for this reason. In other words, the
+> > AioContext lock is purely there for consistency with itself and serves
+> > no real purpose anymore.
 > > 
-> > No, there's no user->kernel switch at the same time as context switch.
-> > What I was trying to explain is that with the actual IBPB being issued
-> > on exit to guest, both the context switch path and the user->kernel
-> > mode switch path set the same indicator, for the exit path to consume.
-> 
-> Deferring to exit to guest path could be OK, but unless strictly
-> needed, which I don't think it's the case, I would request for IBPB to
-> be executed in C context rather than assembly one.
-> 
-> > >>>> + *
-> > >>>> + * By default (on affected and capable hardware) as a safety measure Xen,
-> > >>>> + * to cover for the fact that guest-kernel and guest-user modes are both
-> > >>>> + * running in ring 3 (and hence share prediction context), would issue a
-> > >>>> + * barrier for user->kernel mode switches of PV guests.
-> > >>>> + */
-> > >>>> +#define VMASST_TYPE_mode_switch_no_ibpb  33
-> > >>>
-> > >>> Would it be possible to define the assist as
-> > >>> VMASST_TYPE_mode_switch_ibpb and have it on when enabled?  So that the
-> > >>> guest would disable it if unneeded?  IMO negated options are in
-> > >>> general harder to understand.
-> > >>
-> > >> Negative options aren't nice, yes, but VM assists start out as all
-> > >> clear.
-> > > 
-> > > Are you sure?  I see VMASST_TYPE_pae_extended_cr3 getting set in
-> > > dom0_construct_pv() and that makes me wonder whether other bits
-> > > couldn't start set also.
-> > > 
-> > > Maybe there's some restriction I'm missing, but I don't see any
-> > > wording in the description of the interface that states that all
-> > > assists are supposed to start disabled.
+> > Stop actually acquiring/releasing the lock in
+> > aio_context_acquire()/aio_context_release() so that subsequent patches
+> > can remove callers across the codebase incrementally.
 > > 
-> > Well, that setting of pae_extended_cr3 is in response to the kernel's
-> > notes section having a respective indicator. So we still only set the
-> > bit in response to what the kernel's asking us to do, just that here
-> > we carry out the request ahead of launching the kernel.
+> > I have performed "make check" and qemu-iotests stress tests across
+> > x86-64, ppc64le, and aarch64 to confirm that there are no failures as a
+> > result of eliminating the lock.
 > > 
-> > Also consider what would happen during migration if there was a
-> > default-on assist: At the destination we can't know whether the
-> > source simply didn't know of the bit, or whether the guest elected to
-> > clear it.
+> > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> > Reviewed-by: Eric Blake <eblake@redhat.com>
+> > Acked-by: Kevin Wolf <kwolf@redhat.com>
 > 
-> Hm, I see, so I was indeed missing that aspect.  VM assist is passed
-> as a plain bitmap, and there's no signal on which assists the VM had
-> available on the source side if not enabled.
+> I knew why I wasn't confident enough to give a R-b... This crashes
+> qemu-storage-daemon in the qemu-iotests case graph-changes-while-io.
+> 
+> qemu-storage-daemon: ../nbd/server.c:2542: nbd_co_receive_request: Assertion `client->recv_coroutine == qemu_coroutine_self()' failed.
+> 
+> (gdb) bt
+> #0  0x00007fdb00529884 in __pthread_kill_implementation () from /lib64/libc.so.6
+> #1  0x00007fdb004d8afe in raise () from /lib64/libc.so.6
+> #2  0x00007fdb004c187f in abort () from /lib64/libc.so.6
+> #3  0x00007fdb004c179b in __assert_fail_base.cold () from /lib64/libc.so.6
+> #4  0x00007fdb004d1187 in __assert_fail () from /lib64/libc.so.6
+> #5  0x0000557f9f9534eb in nbd_co_receive_request (errp=0x7fdafc25eec0, request=0x7fdafc25ef10, req=0x7fdaf00159c0) at ../nbd/server.c:2542
+> #6  nbd_trip (opaque=0x557fa0b33fa0) at ../nbd/server.c:2962
+> #7  0x0000557f9faa416b in coroutine_trampoline (i0=<optimized out>, i1=<optimized out>) at ../util/coroutine-ucontext.c:177
+> #8  0x00007fdb004efe90 in ?? () from /lib64/libc.so.6
+> #9  0x00007fdafc35f680 in ?? ()
+> #10 0x0000000000000000 in ?? ()
+> (gdb) p *client
+> $2 = {refcount = 4, close_fn = 0x557f9f95dc40 <nbd_blockdev_client_closed>, exp = 0x557fa0b30590, tlscreds = 0x0, tlsauthz = 0x0, sioc = 0x557fa0b33d90, ioc = 0x557fa0b33d90,
+>   recv_coroutine = 0x7fdaf0015eb0, send_lock = {locked = 0, ctx = 0x0, from_push = {slh_first = 0x0}, to_pop = {slh_first = 0x0}, handoff = 0, sequence = 0, holder = 0x0},
+>   send_coroutine = 0x0, read_yielding = false, quiescing = false, next = {tqe_next = 0x0, tqe_circ = {tql_next = 0x0, tql_prev = 0x557fa0b305e8}}, nb_requests = 1, closing = false,
+>   check_align = 1, mode = NBD_MODE_EXTENDED, contexts = {exp = 0x557fa0b30590, count = 1, base_allocation = true, allocation_depth = false, bitmaps = 0x0}, opt = 7, optlen = 0}
+> (gdb) p co_tls_current
+> $3 = (Coroutine *) 0x7fdaf00061d0
 
-Sorry, please bear with me, as I've been further thinking about this.
+This one isn't easy to debug...
 
-Why does the assist needs to be default-on?  It's my understanding
-that the guest can execute the IBPB itself by writing to the MSR, but
-that's suboptimal in the user -> kernel context switch as it then
-involves two traps into Xen, but the guest is not left insecure, it
-just needs to write the MSR itself like on native.
+The first problem here is that two nbd_trip() coroutines are scheduled
+in the same iothread, and creating the second one overwrites
+client->recv_coroutine, which triggers the assertion in the first one.
 
-In fact, if we add an IBPB by default as part of amd64 PV user ->
-kernel guest context switch, we are likely doing a double IBPB on
-guests not aware of the assist.
+This can be fixed by introducing a new mutex in NBDClient and taking it
+in nbd_client_receive_next_request() so that there is no race between
+checking client->recv_coroutine != NULL and setting it to a new
+coroutine. (Not entirely sure why two different threads are doing this,
+maybe the main thread reentering in drained_end and the iothread waiting
+for the next request?)
 
-IOW: I don't know why doing the assist as guest opt-in would be
-insecure, in fact I think it's the best approach (again I might be
-missing something).
+However, I'm seeing new assertion failures when I do that:
+client->quiescing isn't set in the -EAGAIN case in nbd_trip(). I haven't
+really figured out yet where this comes from. Taking the new NBDClient
+lock in the drain functions and in nbd_trip() doesn't seem to be enough
+to fix it anyway. Or maybe I didn't quite find the right places to take
+it.
 
-Thanks, Roger.
+I'm not sure if the list of NBD clients needs a lock, too, or if it is
+only ever accessed in the main thread, but that should be unrelated to
+the assertion failures I'm seeing.
+
+Kevin
+
 
