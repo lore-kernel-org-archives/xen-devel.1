@@ -4,38 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B67C41535
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Dec 2023 11:22:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.656713.1025100 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F2EC41535
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Dec 2023 11:22:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.656643.1025111 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFYAe-0003kW-LZ; Tue, 19 Dec 2023 11:21:56 +0000
+	id 1rFYBI-0004Jy-29; Tue, 19 Dec 2023 11:22:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 656713.1025100; Tue, 19 Dec 2023 11:21:56 +0000
+Received: by outflank-mailman (output) from mailman id 656643.1025111; Tue, 19 Dec 2023 11:22:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFYAe-0003kP-It; Tue, 19 Dec 2023 11:21:56 +0000
-Received: by outflank-mailman (input) for mailman id 656713;
- Tue, 19 Dec 2023 11:21:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=z0wA=H6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rFYAd-0003kI-K8
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 11:21:55 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d069affd-9e60-11ee-98eb-6d05b1d4d9a1;
- Tue, 19 Dec 2023 12:21:54 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40c580ba223so55517305e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 19 Dec 2023 03:21:55 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- v4-20020a05600c470400b0040b37f107c4sm2379432wmo.16.2023.12.19.03.21.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Dec 2023 03:21:54 -0800 (PST)
+	id 1rFYBH-0004Jr-Vs; Tue, 19 Dec 2023 11:22:35 +0000
+Received: by outflank-mailman (input) for mailman id 656643;
+ Tue, 19 Dec 2023 10:42:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=pd1e=H6=damsy.net=pierre-eric@srs-se1.protection.inumbo.net>)
+ id 1rFXY8-0005Cg-I9
+ for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 10:42:09 +0000
+Received: from mail.damsy.net (mail.damsy.net [85.90.245.9])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 40a0d39b-9e5b-11ee-9b0f-b553b5be7939;
+ Tue, 19 Dec 2023 11:42:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,237 +38,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d069affd-9e60-11ee-98eb-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1702984914; x=1703589714; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=8iDeP7+nBkAeHmXEmwC1SKL4tNpSnffZ5LhiRrqQEUo=;
-        b=dEhlPcGVMTr3wjWBtGiP47lWY6hGvJ/l4cpzmWOae+yguOzXZ3gikjryH3skw67lHu
-         tepRAXmMtPbA6FbPjVXfcHlDM/xuHCF/77et9+G43Jb76bUypKO8wWEMRe1IbRBhipsZ
-         hPYB6mYWMeEoSagx/c8AeM+RjflRSTUkMcIHAs55DHKF8HU1C7vA0OnsC+L0FdWvo6c/
-         hdLQAZ++071d1PCtGN8/xmuvE01FBAwCopaPdWe5CiMgSuiuQr/WYpOEYSicV04r7EL8
-         N/Taw/paBBlh9r+mO4Jn0bCKFh3IFbLD7ymmxnzCzg/eW/NEf7IAOlzq6FrK6mSIC8nR
-         /ccw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702984914; x=1703589714;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=8iDeP7+nBkAeHmXEmwC1SKL4tNpSnffZ5LhiRrqQEUo=;
-        b=FxKRHTviUO9llp1MDX7jNuhZZjCZxCXZrzSHQzvIUpNrQcRbACYAjdW+D3hQlif/T/
-         rHw+waFtkaW6YaHfXRYfNGKugYquuhgPTZoA6pEFxotQNEstNP2EpOHokHkYHq6HeTCe
-         h+mOp7fqBKFiBbTjvXEc0BfCtBdRqRCPv6ZWOmYeGGasw6RoSzfOz2J6Kk3xxJNyKncJ
-         SjHa7PrIUUgBVX/N/OiDfB2q0hkLEY/l5xWyuIt0U9Kv6hCuqaoCs1TPvLuCgtM/tTcR
-         dN/FB9WavKE7ZCmzfgpEd7sTHSTj7K8bt3QuAOiI7RyAkUfN9Ie3gLjhAsoKPVxcTmgE
-         Uplw==
-X-Gm-Message-State: AOJu0YxiKNDxd4J7afk+eBbTsW1nov0FgXn7CxWFmxlFZUlz37b0Adh/
-	+idCzECKqj1/v/ctzwKJ9A/3EoL8YMZthyGnvP5+
-X-Google-Smtp-Source: AGHT+IGTEkYe16KgOiOHm7twoKF1IJYOJ7yup+LsqoJmx4kv02ujMM6b3otNlkkHYcXQ5HIXr1DkcQ==
-X-Received: by 2002:a05:600c:470e:b0:40c:5f0b:d638 with SMTP id v14-20020a05600c470e00b0040c5f0bd638mr5793047wmo.182.1702984914484;
-        Tue, 19 Dec 2023 03:21:54 -0800 (PST)
-Message-ID: <c12f20a3-407c-4914-b6a0-1690962fd72c@suse.com>
-Date: Tue, 19 Dec 2023 12:21:53 +0100
+X-Inumbo-ID: 40a0d39b-9e5b-11ee-9b0f-b553b5be7939
+Message-ID: <31891dcd-d72a-4d81-8bb1-579c6a8e6365@damsy.net>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=damsy.net; s=201803;
+	t=1702982523;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=3575rjkDpAj2qDIT9c9EXnf7PqaPnB51hWsSon8Voos=;
+	b=bJd2yQAW9oaHXk5iTSIzLjsmuhJZxrxpEUIMh345UF3XZS3+xAsl1GPXy8Y6NAfwp1Pm7i
+	YD4yTTxMEaDPJwhl4b5oSt7E6MR9zQUqhBaAaAWGLv8D6v65dtEdOMVt+LT9z0ER164xMq
+	Pl5gqgbDRJxvJkBYmBNkbjZ3ZpvIKYJJAa6kZYU87GWTaUuYumbX/no+X5NWmd08+T1z07
+	SLrCdWIBMP6sJRPVRt4CXgTsyN1lDL0Dz1jzkjcSt0Jae8eYQRB1zIeRkH7ORn7DrgQ9r4
+	HdZq8cHOIX+y60mDkvkNCzmnzRGIl/800IOb1seWgdhqpeod75eXqE0jykUwiA==
+Date: Tue, 19 Dec 2023 11:42:02 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/platform: tidy do_platform_op() a little
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v6 09/11] virtio-gpu: Support Venus capset
+To: Huang Rui <ray.huang@amd.com>, Akihiko Odaki <akihiko.odaki@daynix.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Antonio Caggiano <quic_acaggian@quicinc.com>,
+ "Dr . David Alan Gilbert" <dgilbert@redhat.com>,
+ Robert Beckett <bob.beckett@collabora.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, qemu-devel@nongnu.org
+Cc: xen-devel@lists.xenproject.org,
+ Gurchetan Singh <gurchetansingh@chromium.org>, ernunes@redhat.com,
+ Alyssa Ross <hi@alyssa.is>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Alex Deucher <alexander.deucher@amd.com>,
+ Stefano Stabellini <stefano.stabellini@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+ Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
+ Honglei Huang <honglei1.huang@amd.com>, Julia Zhang <julia.zhang@amd.com>,
+ Chen Jiqian <Jiqian.Chen@amd.com>,
+ Antonio Caggiano <antonio.caggiano@collabora.com>
+References: <20231219075320.165227-1-ray.huang@amd.com>
+ <20231219075320.165227-10-ray.huang@amd.com>
+Content-Language: fr
+From: Pierre-Eric Pelloux-Prayer <pierre-eric@damsy.net>
+In-Reply-To: <20231219075320.165227-10-ray.huang@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-The function has a few stray scopes and inconsistent use (indentation)
-of break statements. Drop the stray braces and bring all the break-s in
-line with one another. This in particular means dropping a redundant
-break from XENPF_cpu_offline handling, pleasing Misra C:2012 rule 2.1.
+Hi Ray, Antonio,
 
-No functional change intended.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-This is an alternative proposal to
-https://lists.xen.org/archives/html/xen-devel/2023-12/msg01540.html.
+Le 19/12/2023 à 08:53, Huang Rui a écrit :
+> From: Antonio Caggiano <antonio.caggiano@collabora.com>
+> 
+> Add support for the Venus capset, which enables Vulkan support through
+> the Venus Vulkan driver for virtio-gpu.
+> 
+> Signed-off-by: Antonio Caggiano <antonio.caggiano@collabora.com>
+> Signed-off-by: Huang Rui <ray.huang@amd.com>
+> ---
+> 
+> No change in v6.
+> 
+>   hw/display/virtio-gpu-virgl.c | 21 +++++++++++++++++----
+>   1 file changed, 17 insertions(+), 4 deletions(-)
+> 
+> diff --git a/hw/display/virtio-gpu-virgl.c b/hw/display/virtio-gpu-virgl.c
+> index be9da6e780..f35a751824 100644
+> --- a/hw/display/virtio-gpu-virgl.c
+> +++ b/hw/display/virtio-gpu-virgl.c
+> @@ -506,6 +506,11 @@ static void virgl_cmd_get_capset_info(VirtIOGPU *g,
+>           virgl_renderer_get_cap_set(resp.capset_id,
+>                                      &resp.capset_max_version,
+>                                      &resp.capset_max_size);
+> +    } else if (info.capset_index == 2) {
+> +        resp.capset_id = VIRTIO_GPU_CAPSET_VENUS;
+> +        virgl_renderer_get_cap_set(resp.capset_id,
+> +                                   &resp.capset_max_version,
+> +                                   &resp.capset_max_size);
+>       } else {
+>           resp.capset_max_version = 0;
+>           resp.capset_max_size = 0;
+> @@ -978,10 +983,18 @@ int virtio_gpu_virgl_init(VirtIOGPU *g)
+>   
+>   int virtio_gpu_virgl_get_num_capsets(VirtIOGPU *g)
+>   {
+> -    uint32_t capset2_max_ver, capset2_max_size;
+> +    uint32_t capset2_max_ver, capset2_max_size, num_capsets;
+> +    num_capsets = 1;
+> +
+>       virgl_renderer_get_cap_set(VIRTIO_GPU_CAPSET_VIRGL2,
+> -                              &capset2_max_ver,
+> -                              &capset2_max_size);
+> +                               &capset2_max_ver,
+> +                               &capset2_max_size);
+> +    num_capsets += capset2_max_ver ? 1 : 0;
+> +
+> +    virgl_renderer_get_cap_set(VIRTIO_GPU_CAPSET_VENUS,
+> +                               &capset2_max_ver,
+> +                               &capset2_max_size);
+> +    num_capsets += capset2_max_size ? 1 : 0;
 
-A few more scopes could be eliminated if the various "cpu" variables
-were consolidated to switch() of function scope.
+IMHO the logic here doesn't work.
 
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -258,7 +258,6 @@ ret_t do_platform_op(
-         break;
- 
-     case XENPF_add_memtype:
--    {
-         ret = mtrr_add_page(
-             op->u.add_memtype.mfn,
-             op->u.add_memtype.nr_mfns,
-@@ -273,11 +272,9 @@ ret_t do_platform_op(
-             if ( ret != 0 )
-                 mtrr_del_page(ret, 0, 0);
-         }
--    }
--    break;
-+        break;
- 
-     case XENPF_del_memtype:
--    {
-         if (op->u.del_memtype.handle == 0
-             /* mtrr/main.c otherwise does a lookup */
-             && (int)op->u.del_memtype.reg >= 0)
-@@ -288,8 +285,7 @@ ret_t do_platform_op(
-         }
-         else
-             ret = -EINVAL;
--    }
--    break;
-+        break;
- 
-     case XENPF_read_memtype:
-     {
-@@ -306,8 +302,8 @@ ret_t do_platform_op(
-             ret = __copy_field_to_guest(u_xenpf_op, op, u.read_memtype)
-                   ? -EFAULT : 0;
-         }
-+        break;
-     }
--    break;
- 
-     case XENPF_microcode_update:
-     {
-@@ -316,8 +312,8 @@ ret_t do_platform_op(
-         guest_from_compat_handle(data, op->u.microcode.data);
- 
-         ret = microcode_update(data, op->u.microcode.length);
-+        break;
-     }
--    break;
- 
-     case XENPF_platform_quirk:
-     {
-@@ -340,8 +336,8 @@ ret_t do_platform_op(
-             ret = -EINVAL;
-             break;
-         }
-+        break;
-     }
--    break;
- 
-     case XENPF_firmware_info:
-         switch ( op->u.firmware_info.type )
-@@ -521,8 +517,8 @@ ret_t do_platform_op(
- 
-         if ( ret == 0 && __copy_field_to_guest(u_xenpf_op, op, u.getidletime) )
-             ret = -EFAULT;
-+        break;
-     }
--    break;
- 
-     case XENPF_set_processor_pminfo:
-         switch ( op->u.set_pminfo.type )
-@@ -601,8 +597,8 @@ ret_t do_platform_op(
-         put_cpu_maps();
- 
-         ret = __copy_field_to_guest(u_xenpf_op, op, u.pcpu_info) ? -EFAULT : 0;
-+        break;
-     }
--    break;
- 
-     case XENPF_get_cpu_version:
-     {
-@@ -637,8 +633,8 @@ ret_t do_platform_op(
- 
-         if ( __copy_field_to_guest(u_xenpf_op, op, u.pcpu_version) )
-             ret = -EFAULT;
-+        break;
-     }
--    break;
- 
-     case XENPF_get_ucode_revision:
-     {
-@@ -666,8 +662,8 @@ ret_t do_platform_op(
- 
-         if ( __copy_field_to_guest(u_xenpf_op, op, u.ucode_revision) )
-             ret = -EFAULT;
-+        break;
-     }
--    break;
- 
-     case XENPF_cpu_online:
-     {
-@@ -725,7 +721,6 @@ ret_t do_platform_op(
-             0, cpu_down_helper, (void *)(unsigned long)cpu);
-         break;
-     }
--    break;
- 
-     case XENPF_cpu_hotadd:
-         ret = xsm_resource_plug_core(XSM_HOOK);
-@@ -735,7 +730,7 @@ ret_t do_platform_op(
-         ret = cpu_add(op->u.cpu_add.apic_id,
-                       op->u.cpu_add.acpi_id,
-                       op->u.cpu_add.pxm);
--    break;
-+        break;
- 
-     case XENPF_mem_hotadd:
-         ret = xsm_resource_plug_core(XSM_HOOK);
-@@ -775,8 +770,8 @@ ret_t do_platform_op(
-             ret = -EINVAL;
-             break;
-         }
-+        break;
-     }
--    break;
- 
-     case XENPF_resource_op:
-     {
-@@ -842,8 +837,8 @@ ret_t do_platform_op(
-             ret = ra.nr_done;
- 
-         xfree(ra.entries);
-+        break;
-     }
--    break;
- 
-     case XENPF_get_symbol:
-     {
-@@ -870,8 +865,8 @@ ret_t do_platform_op(
-             ret = -EFAULT;
-         if ( !ret && __copy_field_to_guest(u_xenpf_op, op, u.symdata) )
-             ret = -EFAULT;
-+        break;
-     }
--    break;
- 
- #ifdef CONFIG_VIDEO
-     case XENPF_get_dom0_console:
+The kernel will use num_capset like this:
+
+	for (i = 0; i < num_capsets; i++) {
+		virtio_gpu_cmd_get_capset_info(vgdev, i);
+
+So if num_capset = 2, it will query the capset info of index 0 and 1.
+Capset 0 is alway VIRGL so it's fine. But since VIRL2 support is optional,
+QEMU has no way to know if index 1 is VIRGL2 (if it's supported)
+or VENUS (if VIRGL2 support is missing).
+And it'll get worse when we will want to support CAPSET_DRM.
+
+Ray: we have a patch internally for this (virtio-gpu: fix capset query), you
+may want to add it to this series, before this patch.
+
+Regards,
+Pierre-Eric
+
+
+
+>   
+> -    return capset2_max_ver ? 2 : 1;
+> +    return num_capsets;
+>   }
 
