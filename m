@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C87BEC41535
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Dec 2023 11:06:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.656665.1025001 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C203C41535
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Dec 2023 11:06:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.656667.1025016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFXv6-0003I3-TM; Tue, 19 Dec 2023 11:05:52 +0000
+	id 1rFXvP-0003in-Er; Tue, 19 Dec 2023 11:06:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 656665.1025001; Tue, 19 Dec 2023 11:05:52 +0000
+Received: by outflank-mailman (output) from mailman id 656667.1025016; Tue, 19 Dec 2023 11:06:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFXv6-0003Hw-Q5; Tue, 19 Dec 2023 11:05:52 +0000
-Received: by outflank-mailman (input) for mailman id 656665;
- Tue, 19 Dec 2023 11:05:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rFXvP-0003hs-A9; Tue, 19 Dec 2023 11:06:11 +0000
+Received: by outflank-mailman (input) for mailman id 656667;
+ Tue, 19 Dec 2023 11:06:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aNFb=H6=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rFXv5-0003Hq-95
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 11:05:51 +0000
+ <SRS0=Div9=H6=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
+ id 1rFXvO-0003cc-CD
+ for xen-devel@lists.xenproject.org; Tue, 19 Dec 2023 11:06:10 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 911ef441-9e5e-11ee-98eb-6d05b1d4d9a1;
- Tue, 19 Dec 2023 12:05:49 +0100 (CET)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- by support.bugseng.com (Postfix) with ESMTPA id 524684EE0738;
- Tue, 19 Dec 2023 12:05:49 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9c46a156-9e5e-11ee-9b0f-b553b5be7939;
+ Tue, 19 Dec 2023 12:06:08 +0100 (CET)
+Received: from beta.station (net-37-182-35-120.cust.vodafonedsl.it
+ [37.182.35.120])
+ by support.bugseng.com (Postfix) with ESMTPSA id 806C34EE0C98;
+ Tue, 19 Dec 2023 12:06:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,60 +42,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 911ef441-9e5e-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: 9c46a156-9e5e-11ee-9b0f-b553b5be7939
+From: Simone Ballarin <simone.ballarin@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 3/6] xen: add deviations for Rule 11.8
+Date: Tue, 19 Dec 2023 12:05:11 +0100
+Message-Id: <04cdbf21db915634acd49108edab7d6331df35eb.1702982442.git.maria.celeste.cesario@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1702982442.git.maria.celeste.cesario@bugseng.com>
+References: <cover.1702982442.git.maria.celeste.cesario@bugseng.com>
 MIME-Version: 1.0
-Date: Tue, 19 Dec 2023 12:05:49 +0100
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org, Luca Fancellu <Luca.Fancellu@arm.com>
-Subject: Re: [XEN PATCH] xen: add acmacros.h to exclude-list.json
-In-Reply-To: <2fd03776043811a8ceae9ae41de5f0fa@bugseng.com>
-References: <664ddc412905546d44d3e311a743ba5217a6243b.1702976486.git.nicola.vetrini@bugseng.com>
- <055b6cf3-4f29-4f1d-b650-26c6d9be8832@suse.com>
- <2fd03776043811a8ceae9ae41de5f0fa@bugseng.com>
-Message-ID: <2c64af71dcb3984f1753ef115868cb7b@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 2023-12-19 11:51, Nicola Vetrini wrote:
-> On 2023-12-19 11:37, Jan Beulich wrote:
->> On 19.12.2023 10:02, Nicola Vetrini wrote:
->>> --- a/docs/misra/exclude-list.json
->>> +++ b/docs/misra/exclude-list.json
->>> @@ -209,6 +209,10 @@
->>>            "rel_path": "include/acpi/acglobal.h",
->>>            "comment": "Imported from Linux, ignore for now"
->>>          },
->>> +        {
->>> +          "rel_path": "include/acpi/acmacros.h",
->>> +          "comment": "Imported from Linux, ignore for now"
->>> +        },
->> 
->> Together with what's already there (in context), wouldn't it better be
->> the entire directory then which is excluded, or at least all
->> include/acpi/ac*.h collectively (and perhaps also
->> include/acpi/platform/ac*.h)?
->> 
->> Jan
-> 
-> +Cc Luca Fancellu
-> 
-> Sure. I wasn't certain which files are imported from ACPI CA and which 
-> aren't.
-> I'm also not sure whether "include/acpi/ac*.h" would be properly 
-> recognized by other tooling that uses exclude-list.json (only cppcheck 
-> I think). I Cc-ed Luca Fancellu on this.
+From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
 
-It occurred to me that it's surely ok to use "include/acpi/ac*" and 
-"include/acpi/platform/ac*".
+The xen sources contain violations of MISRA C:2012 Rule 11.8 whose
+headline states:
+"A conversion shall not remove any const, volatile or _Atomic qualification
+from the type pointed to by a pointer".
 
+The macro 'container_of' violates the Rule because it casts away any
+qualifier to do pointer arithmetic, but making the macro definition compliant
+would add additional complexity, therefore a deviation is introduced.
+
+Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
+Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
+---
+Changes in v2:
+- remove deviation for function ERR_CAST;
+
+container_of: Fixing this violation would require the declaration of a new
+ macro taking advantage of the return value of the ternary operator ?: :
+ its return value preserves qualifiers present on both expression, hence
+ returning void* or qualified void* depending on pointer type, like in this macro:
+ '#define same_constness_void_ptr(ptr) ((typeof((false ? (void*) 1 : (ptr)))) (ptr))'
+ The result could then be used with a Generic to avoid the cast.
+---
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 7 +++++++
+ docs/misra/deviations.rst                        | 7 +++++++
+ 2 files changed, 14 insertions(+)
+
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index 683f2bbfe8..1515378ff1 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -292,6 +292,13 @@ constant expressions are required.\""
+ # Series 11
+ #
+ 
++-doc_begin="Violations caused by container_of are due to pointer arithmetic operations
++with the provided offset. The resulting pointer is then immediately cast back to its
++original type, which preserves the qualifier. This use is deemed safe.
++Fixing this violation would require to increase code complexity and lower readability."
++-config=MC3R1.R11.8,reports+={safe,"any_area(any_loc(any_exp(macro(^container_of$))))"}
++-doc_end
++
+ -doc_begin="This construct is used to check if the type is scalar, and for this purpose the use of 0 as a null pointer constant is deliberate."
+ -config=MC3R1.R11.9,reports+={deliberate, "any_area(any_loc(any_exp(macro(^__ACCESS_ONCE$))))"
+ }
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+index eda3c8100c..ccf6e90e87 100644
+--- a/docs/misra/deviations.rst
++++ b/docs/misra/deviations.rst
+@@ -248,6 +248,13 @@ Deviations related to MISRA C:2012 Rules:
+        If no bits are set, 0 is returned.
+      - Tagged as `safe` for ECLAIR.
+ 
++   * - R11.8
++     - Violations caused by container_of are due to pointer arithmetic operations
++       with the provided offset. The resulting pointer is then immediately cast back to its
++       original type, which preserves the qualifier. This use is deemed safe.
++       Fixing this violation would require to increase code complexity and lower readability.
++     - Tagged as `safe` for ECLAIR.
++    
+    * - R11.9
+      - __ACCESS_ONCE uses an integer, which happens to be zero, as a
+        compile time check. The typecheck uses a cast. The usage of zero or other
 -- 
-Nicola Vetrini, BSc
-Software Engineer, BUGSENG srl (https://bugseng.com)
+2.40.0
+
 
