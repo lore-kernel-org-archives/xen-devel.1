@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D059C3DA6E
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 09:19:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.657499.1026372 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D678C3DA6E
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 09:26:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.657509.1026392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFsjo-000458-RN; Wed, 20 Dec 2023 09:19:36 +0000
+	id 1rFsq3-0006yn-O4; Wed, 20 Dec 2023 09:26:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 657499.1026372; Wed, 20 Dec 2023 09:19:36 +0000
+Received: by outflank-mailman (output) from mailman id 657509.1026392; Wed, 20 Dec 2023 09:26:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFsjo-00044y-Op; Wed, 20 Dec 2023 09:19:36 +0000
-Received: by outflank-mailman (input) for mailman id 657499;
- Wed, 20 Dec 2023 09:19:35 +0000
+	id 1rFsq3-0006yg-L4; Wed, 20 Dec 2023 09:26:03 +0000
+Received: by outflank-mailman (input) for mailman id 657509;
+ Wed, 20 Dec 2023 09:26:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vWXp=H7=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rFsjn-0003PP-GI
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 09:19:35 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1rFsq2-0006k1-B6
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 09:26:02 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e3343231-9f18-11ee-9b0f-b553b5be7939;
- Wed, 20 Dec 2023 10:19:33 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40c39ef63d9so59296915e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2023 01:19:33 -0800 (PST)
+ id c8e7aaab-9f19-11ee-9b0f-b553b5be7939;
+ Wed, 20 Dec 2023 10:25:59 +0100 (CET)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3366827ca79so2905359f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2023 01:25:59 -0800 (PST)
 Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
- bd8-20020a05600c1f0800b0040c44b4a282sm6601137wmb.43.2023.12.20.01.19.32
+ w1-20020adfcd01000000b0033651e6a74dsm962178wrm.27.2023.12.20.01.25.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 01:19:32 -0800 (PST)
+ Wed, 20 Dec 2023 01:25:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,124 +46,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3343231-9f18-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: c8e7aaab-9f19-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1703063973; x=1703668773; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1703064358; x=1703669158; darn=lists.xenproject.org;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:message-id:subject:cc:to:from:date:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=c/Laim6OxH3l6g9LnE7PaxHVhjpomMuhc0L9ZfiA7Q4=;
-        b=ZaX1C+OPMTLzviHB6wgLaZmKocfIahA2SSqGfCbIR4mhRh3kPXXmFQwcfqmdHruCJ5
-         ubphsNyGLWtOZUb57jVcbVBbe6nWUARQZtKFDd4q7nugT/gyf8ktl7vo3H8ZW0J3qQjC
-         fW5F4VxQT3iOJ0u9Snx2l3ht5DBdodWHpUJec=
+        bh=/n9fVzun9HV4qvz9ociuNgnncThnUDGYOkmdgR5Mi9A=;
+        b=KX8VIIhI5So8HVrZwDCHstmLRh9+OEsN1nj09FQv8IfCQvh9Htd+/yk8fHf1IdPGm+
+         yykTwJdMXnnrS5up21GnatVzJtq8GsW5FodkH4ffnsU6vuglGwOFsQkCmQrrj/DnY18U
+         onMIvfvTYvy2UG1SGhmhK5Ne1ase4GD4BbkfI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703063973; x=1703668773;
+        d=1e100.net; s=20230601; t=1703064358; x=1703669158;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=c/Laim6OxH3l6g9LnE7PaxHVhjpomMuhc0L9ZfiA7Q4=;
-        b=AFcCJEX6VN5+GZ9VrcMVCERt/DqoG48mQ3c7o7c0RZCZoYMusmmtlYAS9FAxGr+RHV
-         mwb3DC3ufZoNOJPgrdbGf8flxEFle6pFPPnBpKcCb+KGqo4qmiP38GxQIxj09YprBrTM
-         EydTwPFT7V8CJPLJ3bThJO/vUOFdM96ys5qH92HihHGqMJRioKDqrE7Ocu6TgZA+tU46
-         myAnZgTWk+OGddGJKnzRRq+N8Ejc3Dru2rUn4RGyZMCGxKm2FXlohi24UWtgVYpJ1YIv
-         F7zj8R+5B6JddPrPxosQ2z/vjuZ5TBb5hJSbOlBoPgivvd0lNAMTB2FuAAZaOJdgATPf
-         gDLQ==
-X-Gm-Message-State: AOJu0YzN0GeRDnVrXtXoNWAqRkr1MdFd/QVbmKLoHuEMGly9tqjIvgyd
-	N1xSn/oDDQVyKxj/HRxXiBr2mQ==
-X-Google-Smtp-Source: AGHT+IGk3+M85VTK2ERaNenJ8Q64Jyve113QG/m7lMtzWkcVtJakwbhUlAZZe4wPMM6ENkQFi+SmfA==
-X-Received: by 2002:a7b:cb92:0:b0:40c:3308:3b02 with SMTP id m18-20020a7bcb92000000b0040c33083b02mr10649170wmi.99.1703063973107;
-        Wed, 20 Dec 2023 01:19:33 -0800 (PST)
-Date: Wed, 20 Dec 2023 10:19:32 +0100
+        bh=/n9fVzun9HV4qvz9ociuNgnncThnUDGYOkmdgR5Mi9A=;
+        b=gilYXFFOuQtJmrkRrCPhH1I0svTYr8yRFCMZd4lJYsttP323sGUosxq1gp9StIzN4b
+         D/E5aD8N31pgbLLnCv8QCXbGBRgYGVHdfm8lf6u898LzOTcWiTR7Tc75uQ80yF2aisqX
+         BgDOEMK8l1eYw+0q1Lihz7QmZp04DadGI4f0FNF6kgmUPyO+21XxxGOD1aDRJlbsXu5Y
+         D/Zo6I+oIp1xatGeq/0Xx4tqiMcVguRM5/WoBvh99uCw9XYG68xmvC/q7tczGfx4+fiF
+         8IbWyieKPU+TrfbZfa8BKfsqjbrhVJ1RVdaouev5omuFxYAsQbmRn1cjsBj+Hl854923
+         S3vw==
+X-Gm-Message-State: AOJu0YxaJRsZD983NHGEnnisU4gbQvQ9kcwVQMGra1bNgu6M//aMl6yU
+	VgYNfoHKXUM148KQfOyDpm/x4g==
+X-Google-Smtp-Source: AGHT+IE+v2Cr3irVtSnRxZdkNy09PArWCn+qlzKXIA95UN/PSowkdNe09nT/FvJ1F9Lx2//QsOFptQ==
+X-Received: by 2002:adf:f00a:0:b0:336:4216:d998 with SMTP id j10-20020adff00a000000b003364216d998mr5887010wro.23.1703064358451;
+        Wed, 20 Dec 2023 01:25:58 -0800 (PST)
+Date: Wed, 20 Dec 2023 10:25:57 +0100
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	xen-devel@lists.xenproject.org,
+	xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v4 1/4] x86/livepatch: align functions to ensure minimal
- distance between entry points
-Message-ID: <ZYKxpFugdO-CUZam@macbook>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v4 2/4] xen/x86: introduce self modifying code test
+Message-ID: <ZYKzJeiOLOW5mcF_@macbook>
 References: <20231215111842.8009-1-roger.pau@citrix.com>
- <20231215111842.8009-2-roger.pau@citrix.com>
- <bc08ed7e-766d-4f0e-a7ef-994d09d1dbe2@citrix.com>
- <ZYKmn-lvKQpauL6Z@macbook>
- <87e185ab-6129-41ea-8424-9484659840d1@suse.com>
+ <20231215111842.8009-3-roger.pau@citrix.com>
+ <32d6d42f-2736-42ed-bad3-a6bdaedf588c@citrix.com>
+ <ZYKvFUICQ4pKwH0S@macbook>
+ <91390df2-57f7-41b7-a1cc-a050d89e5219@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <87e185ab-6129-41ea-8424-9484659840d1@suse.com>
+In-Reply-To: <91390df2-57f7-41b7-a1cc-a050d89e5219@suse.com>
 
-On Wed, Dec 20, 2023 at 10:03:51AM +0100, Jan Beulich wrote:
-> On 20.12.2023 09:32, Roger Pau Monné wrote:
-> > On Tue, Dec 19, 2023 at 07:46:11PM +0000, Andrew Cooper wrote:
+On Wed, Dec 20, 2023 at 10:12:15AM +0100, Jan Beulich wrote:
+> On 20.12.2023 10:08, Roger Pau Monné wrote:
+> > On Tue, Dec 19, 2023 at 08:31:29PM +0000, Andrew Cooper wrote:
 > >> On 15/12/2023 11:18 am, Roger Pau Monne wrote:
-> >>> The minimal function size requirements for livepatch are either 5 bytes (for
+> >>> --- /dev/null
+> >>> +++ b/xen/arch/x86/include/asm/test.h
+> >>> @@ -0,0 +1,30 @@
+> >>> +#ifndef _ASM_X86_TEST_H_
+> >>> +#define _ASM_X86_TEST_H_
+> >>> +
+> >>> +#include <xen/types.h>
+> >>> +
+> >>> +int test_smoc(uint32_t selection, uint32_t *results);
+> >>> +
+> >>> +static inline void execute_selftests(void)
 > >>
-> >> "for an x86 livepatch", seeing as we're touching multiple architectures
-> >> worth of files.
+> >> IMO run_selftests() would be better, but this is already not all of our
+> >> selftests, and this particular function really doesn't warrant being
+> >> static inline.
 > >>
-> >> I know it's at the end of the sentence, but it wants to be earlier to be
-> >> clearer.
-> >>
-> >>> jmp) or 9 bytes (for endbr + jmp) on x86, and always 4 bytes on Arm.  Ensure
-> >>> that distance between functions entry points is always at least of the minimal
-> >>> required size for livepatch instruction replacement to be successful.
-> >>>
-> >>> Add an additional align directive to the linker script, in order to ensure that
-> >>> the next section placed after the .text.* (per-function sections) is also
-> >>> aligned to the required boundary, so that the distance of the last function
-> >>> entry point with the next symbol is also of minimal size.
-> >>>
-> >>> Note that it's possible for the compiler to end up using a higher function
-> >>> alignment regardless of the passed value, so this change just make sure that
-> >>> the minimum required for livepatch to work is present.  Different compilers
-> >>> handle the option differently, as clang will ignore -falign-functions value
-> >>> if it's smaller than the one that would be set by the optimization level, while
-> >>> gcc seems to always honor the function alignment passed in -falign-functions.
-> >>> In order to cope with this behavior and avoid that setting -falign-functions
-> >>> results in an alignment inferior to what the optimization level would have
-> >>> selected force x86 release builds to use a function alignment of 16 bytes.
-> >>
-> >> Yuck :(
-> >>
-> >> The same will be true for all other architectures too?
+> >> But I'm also not sure what this is liable to contain other than
+> >> test_smoc() so I'm not sure why we want it.
 > > 
-> > I would expect that for gcc I guess.
-> > 
-> >> What happens on ARM, which also picks up an explicit choice in livepatch
-> >> builds?
-> > 
-> > Arm AFAICT seems to use a 4 byte function alignment with -O2 (both gcc
-> > and clang), so that matches what we need to enforce for livepatch.  If
-> > we ever need a higher alignment for livepatch reasons it would be a
-> > multiple of the minimum one set by the compiler, so that should be
-> > fine.
+> > This was requested by Jan, he was concerned that more of such tests
+> > would appear.  It's new in v4 IIRC.
 > 
-> Thinking of it: The forcing of 16-byte alignment in release builds of x86
-> is based on observations with certain compiler versions, iirc. What if
-> future versions decide to go lower/higher for, perhaps, very good reasons?
-> We don't really mean to override the compiler's choice, so maybe further
-> probing is actually necessary?
+> If the two of you want it without such a wrapper, so be it. I will admit
+> I was a little puzzled to find it implemented as inline function, but I
+> didn't see a strong need to comment on that.
 
-We do override the default (on gcc) when using livepatch anyway, so we
-might as well be consistent and attempt to provide a value that's
-reasonable?
-
-Linux currently uses 16-byte also on x86 and set in Kconfig, and all
-compiler versions I've tested use 16-bytes with -O2, so I think it's
-unlikely to change overnight (and a lot of software will still use 16
-anyway).
-
-If a more suitable value is needed in the future we can always adjust,
-that's the whole point of having it in Kconfig.  We can also select a
-better value even in compilers that might not know about it.
+It felt a bit misplaced to put such generic selftest function in a
+smoc.c file, and I didn't feel like introducing a new test.c file just
+for that.  I don't have a strong opinion however, if you think it's
+better to go in smoc.c I'm happy with that.
 
 Thanks, Roger.
 
