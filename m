@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC86C3DA6E
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 10:56:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.657626.1026603 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50ADC46CD3
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 11:03:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.657632.1026621 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFuFF-0002Zd-PS; Wed, 20 Dec 2023 10:56:09 +0000
+	id 1rFuMD-00058e-MF; Wed, 20 Dec 2023 11:03:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 657626.1026603; Wed, 20 Dec 2023 10:56:09 +0000
+Received: by outflank-mailman (output) from mailman id 657632.1026621; Wed, 20 Dec 2023 11:03:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFuFF-0002ZW-L0; Wed, 20 Dec 2023 10:56:09 +0000
-Received: by outflank-mailman (input) for mailman id 657626;
- Wed, 20 Dec 2023 10:56:08 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rFuFE-0002ZQ-7T
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 10:56:08 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rFuFD-0002KQ-69; Wed, 20 Dec 2023 10:56:07 +0000
-Received: from [15.248.2.232] (helo=[10.24.67.20])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rFuFC-0007kx-VR; Wed, 20 Dec 2023 10:56:07 +0000
+	id 1rFuMD-00057L-J2; Wed, 20 Dec 2023 11:03:21 +0000
+Received: by outflank-mailman (input) for mailman id 657632;
+ Wed, 20 Dec 2023 11:03:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=xS+a=H7=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1rFuMC-0004rG-59
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 11:03:20 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6227cee9-9f27-11ee-98eb-6d05b1d4d9a1;
+ Wed, 20 Dec 2023 12:03:19 +0100 (CET)
+Received: from Dell.bugseng.com (unknown [37.161.218.228])
+ by support.bugseng.com (Postfix) with ESMTPSA id 8BE794EE0C9A;
+ Wed, 20 Dec 2023 12:03:18 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,71 +41,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=R1Td4gWLf0+H+wX7JRjsHV9k/DYi2k+ZphId3/XqEo8=; b=T8Vf/wDJjP2VFp3ZY+XbwXuJgW
-	tncpqDjQEbXcM5o/YltAeorVbtJahQ5Te5FROdgmE9SK5mGhJXLdSN2O8a5MwcJrADwa1rUxi1LNg
-	VECBkNqMXuBi0LLsQCtvqmE7EInDVAjHLLfES3/bFgjuDTLA1aKwMxY9okZhVOkaqRGU=;
-Message-ID: <82d3c6d1-62a4-45c1-8f57-ecec6bb97e90@xen.org>
-Date: Wed, 20 Dec 2023 10:56:04 +0000
+X-Inumbo-ID: 6227cee9-9f27-11ee-98eb-6d05b1d4d9a1
+From: Federico Serafini <federico.serafini@bugseng.com>
+To: xen-devel@lists.xenproject.org
+Cc: consulting@bugseng.com,
+	Federico Serafini <federico.serafini@bugseng.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH 2/7] xen/arm: traps: address violations of MISRA C:2012 Rule 16.3
+Date: Wed, 20 Dec 2023 12:03:02 +0100
+Message-Id: <90c6cdb780ff7b75aada2a8a8a2df5d9e8b94b78.1703066935.git.federico.serafini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1703066935.git.federico.serafini@bugseng.com>
+References: <cover.1703066935.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] xen/dm: arm: Introudce arm_inject_msi DM op
-Content-Language: en-GB
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
- Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <6a631756a126e73390f95b9e86c69e3286c92f59.1702991909.git.mykyta_poturai@epam.com>
- <cacbff18-f37d-42dc-ab8c-79409aa1d237@epam.com>
- <13b218b5-2d37-48de-9baa-cf2b99211bde@xen.org>
- <alpine.DEB.2.22.394.2312191641140.3175268@ubuntu-linux-20-04-desktop>
- <3a5df135-1bcf-41d7-b489-c5fd938b10d6@epam.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <3a5df135-1bcf-41d7-b489-c5fd938b10d6@epam.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi,
+MISRA C:2012 Rule 16.3 states: "An unconditional `break' statement
+shall terminate every switch-clause".
 
-On 20/12/2023 09:13, Mykyta Poturai wrote:
-> 
-> Hi,
-> 
-> On 20.12.23 02:42, Stefano Stabellini wrote:
->> On Tue, 19 Dec 2023, Julien Grall wrote:
->>>
->>> But QEMU should really not need to implement a full ITS. What it needs is a
->>> way to forward the MSI to Xen. That's it.
->>
->> I fully agree with Julien
->>
->>
->>> Stefano, do you have any suggestion how to do this in QEMU?
->>
->> Yes, we just need something like hw/i386/xen/xen_apic.c but for ARM
-> 
-> It is exactly like xen_apic.c. All this implementation does is getting
-> the MSI messages and forwarding them to Xen using the DM op from this patch.
+Add missing break statements to address violations of Rule 16.3.
+Add pseudo-keyword "fallthrough" to make explicit the intended
+behavior and satisfy the requirements to deviate Rule 16.3.
+No functional change.
 
-If this implementation is only getting the MSI messages and forwarding 
-them, then why is it built on top of the vGICv3 ITS structure?
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+---
+ xen/arch/arm/traps.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-Shouldn't instead be something that is agnostic to the interrupt 
-controller (and even possibly arch agnostic)?
-
-The point here is in Xen context, QEMU doesn't know which interrupt 
-controller will be exposed to the guest. QEMU is just used for emulating 
-devices and none of this should really be architecture specific. 
-Instead, it should be a Xen specific way to inject MSI/IRQ.
-
-Cheers,
-
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 77220ba092..9c10e8f78c 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -1414,10 +1414,18 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
+     {
+         /* Deliberately corrupt parameter regs used by this hypercall. */
+         switch ( hypercall_args[*nr] ) {
+-        case 5: HYPERCALL_ARG5(regs) = 0xDEADBEEFU;
+-        case 4: HYPERCALL_ARG4(regs) = 0xDEADBEEFU;
+-        case 3: HYPERCALL_ARG3(regs) = 0xDEADBEEFU;
+-        case 2: HYPERCALL_ARG2(regs) = 0xDEADBEEFU;
++        case 5:
++            HYPERCALL_ARG5(regs) = 0xDEADBEEFU;
++            fallthrough;
++        case 4:
++            HYPERCALL_ARG4(regs) = 0xDEADBEEFU;
++            fallthrough;
++        case 3:
++            HYPERCALL_ARG3(regs) = 0xDEADBEEFU;
++            fallthrough;
++        case 2:
++            HYPERCALL_ARG2(regs) = 0xDEADBEEFU;
++            fallthrough;
+         case 1: /* Don't clobber x0/r0 -- it's the return value */
+         case 0: /* -ENOSYS case */
+             break;
+@@ -1929,6 +1937,7 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
+         gprintk(XENLOG_WARNING,
+                 "Unsupported FSC: HSR=%#"PRIregister" DFSC=%#x\n",
+                 hsr.bits, xabt.fsc);
++        break;
+     }
+ 
+ inject_abt:
+@@ -2136,6 +2145,7 @@ void asmlinkage do_trap_guest_sync(struct cpu_user_regs *regs)
+                 "Unknown Guest Trap. HSR=%#"PRIregister" EC=0x%x IL=%x Syndrome=0x%"PRIx32"\n",
+                 hsr.bits, hsr.ec, hsr.len, hsr.iss);
+         inject_undef_exception(regs, hsr);
++        break;
+     }
+ }
+ 
 -- 
-Julien Grall
+2.34.1
+
 
