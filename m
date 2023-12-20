@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21427C3DA6E
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 13:40:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.657798.1026891 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4822C3DA6E
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 13:44:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.657803.1026911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFwo7-0002As-Uf; Wed, 20 Dec 2023 13:40:19 +0000
+	id 1rFws1-0003WF-QT; Wed, 20 Dec 2023 13:44:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 657798.1026891; Wed, 20 Dec 2023 13:40:19 +0000
+Received: by outflank-mailman (output) from mailman id 657803.1026911; Wed, 20 Dec 2023 13:44:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rFwo7-0002Al-S5; Wed, 20 Dec 2023 13:40:19 +0000
-Received: by outflank-mailman (input) for mailman id 657798;
- Wed, 20 Dec 2023 13:40:19 +0000
+	id 1rFws1-0003W8-Ng; Wed, 20 Dec 2023 13:44:21 +0000
+Received: by outflank-mailman (input) for mailman id 657803;
+ Wed, 20 Dec 2023 13:44:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=265R=H7=gmail.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1rFwo7-0002Af-AW
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 13:40:19 +0000
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [2607:f8b0:4864:20::c2f])
+ <SRS0=vWXp=H7=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1rFws0-0003Gg-41
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 13:44:20 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4fbb9966-9f3d-11ee-98eb-6d05b1d4d9a1;
- Wed, 20 Dec 2023 14:40:18 +0100 (CET)
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-58d06bfadf8so3997980eaf.1
- for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2023 05:40:18 -0800 (PST)
+ id dff00579-9f3d-11ee-98eb-6d05b1d4d9a1;
+ Wed, 20 Dec 2023 14:44:19 +0100 (CET)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40c3f68b69aso52860885e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2023 05:44:19 -0800 (PST)
+Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
+ j7-20020a05600c190700b0040c31bb66dcsm7358017wmq.20.2023.12.20.05.44.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Dec 2023 05:44:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,76 +46,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4fbb9966-9f3d-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: dff00579-9f3d-11ee-98eb-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703079617; x=1703684417; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=uMd4ADOFvkzah5me9T/+HHhJ6VCiXe+Wthd/vIvVj/o=;
-        b=jJ6kALfM59GKxftGllmAALOADIkc3z0jXHySHOy3S9A108YwKO3kV8xVjxiC8B3anO
-         +Ccj7wVhkvjgzO6uTa/Dy6zcABXoC9fi6YPMR1FKhzGQikePJV1Fxjvr5q39gB4tfVuY
-         uO28a1tQBYYEEr6jnKvRBcVki4+NKE+hX4XNYNWUbLLQsV5tQgVvWBADBPEjtiCBU8Pb
-         xAJ0nmehFaObZVl6caXiD1EtQIvO/dN/KlDoj53E1MoKEiIZW6Kldhd/L2zGiB11Vi8+
-         VYReJTH41I96mlVcbQ1s3PNPMxBYd5xeAhvmBPFdiH8wfYqTZ56IwCTE+t1YkCDeW1O1
-         jvKQ==
+        d=citrix.com; s=google; t=1703079859; x=1703684659; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Zpl/pvdAy8I8bWYC4wJLs2ijp/eL3QlGcKk+qyRQerA=;
+        b=kDQlau0wZiiBYgVozWyESQ92D6TBhtDU8WSUeJI0QMfPNJEb7IMSN3HUmdwkBwIU+U
+         SkeyR1Jermk4WppxRFWJDESdXbUFUs1jr1qLRaV+xcJ/OKf9c/p4zNGe5gkccZ5nB/Nw
+         hd8JaSnPDtRbnidsPOVAtesmKze87YrXkqeJY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703079617; x=1703684417;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uMd4ADOFvkzah5me9T/+HHhJ6VCiXe+Wthd/vIvVj/o=;
-        b=ibF880IloGRxdxK9u/PITZ+a38ns3mgj2IiHx6RHq3em1ebqs0c37K4hKqCk7G16ep
-         6a7j7xf57K4Bk67CJBcPe176abnTpWFicwLRgPy95IEKdcGbXs7xwqiUy1wELGwVbK7A
-         37Iv/gHRSaOrCYjBY6v/ZleqKBvaag0wUxJfV02x6TWk9pLRd42EMC7dG/ZDqQmmPsIa
-         blzMfy1zbxIe7xkz0u49hBQcvjcqbUfrHrQ6NaVO24+pCgvYTp9mglEfesWVo644HHkS
-         Y0xiJ7NpcOT/ckI5jOOLe4XBpa65cTOV3E0HVRwIAzzax0xHgA5A6E7ooBtEc5l1zmNN
-         nhdQ==
-X-Gm-Message-State: AOJu0YxtF3ldihPRZzWdghJHrhb/FEQITUJOpVSVuZE8aDX7aZwwAWnt
-	irRN8VxmvKx+aLihTf8heDEgLe70LIJc2H3sbwg=
-X-Google-Smtp-Source: AGHT+IG4wiFT4rUzLfQAVpvMwGvhbloaVAniWXFbzQNYl02YYRfoCtVhV2QvGtYv0LsqGi1jEHbDB4q4s7vK0gg2PG4=
-X-Received: by 2002:a4a:8c26:0:b0:593:e06a:5ade with SMTP id
- u35-20020a4a8c26000000b00593e06a5ademr2000642ooj.14.1703079616936; Wed, 20
- Dec 2023 05:40:16 -0800 (PST)
+        d=1e100.net; s=20230601; t=1703079859; x=1703684659;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Zpl/pvdAy8I8bWYC4wJLs2ijp/eL3QlGcKk+qyRQerA=;
+        b=n2Ax0z5gvdwBlTjUR8TSu8JIRcwAgnRpkjpy6ywLM8iXZFATOYzmPKuC8kMwi0818w
+         47PTkVaTd3u18wMvWaZ05T3RUIB4p/i67o1ID4a9xGN59fQtXTYIUlfIv5DlUl147T1u
+         +J1rm3U2M1TLC+1PC0C3/cS0quJLOTvDs9E8o3fzd1dqcHawbRnnUNbrKEdMm09kZ2pG
+         jyD/aSX+n9OWh6pm6bwRVFVAS8avv8CrV3D+XHoz4EnG+3aXb9bKUnBCOYhjxaypbZLH
+         47KRjlmxkQxhY7vD3e6k+CTOouaPAskXvuZC3DQLqDUwpnrqjmJ7taxC32qbzDOShdpq
+         SfbQ==
+X-Gm-Message-State: AOJu0YznZtIDAveDsfyzbNCxkpIddksl1bv3UZaOoTPzHVg1Frj06IB9
+	P9+dAmMTFMR68uPw8N/JFvj2daf8czZGEwVXmno=
+X-Google-Smtp-Source: AGHT+IGaL4PDOlk862SoqaXg6gAIMGnT4q/dB5L8eKzSmHI0ZJOyu/L0M49PPpwy3+Z2dV1dCBMSHw==
+X-Received: by 2002:a05:600c:3411:b0:409:79df:7f9c with SMTP id y17-20020a05600c341100b0040979df7f9cmr13537926wmp.36.1703079858702;
+        Wed, 20 Dec 2023 05:44:18 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 1/6] x86/p2m: move and rename paging_max_paddr_bits()
+Date: Wed, 20 Dec 2023 14:43:41 +0100
+Message-ID: <20231220134346.22430-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231220134346.22430-1-roger.pau@citrix.com>
+References: <20231220134346.22430-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-References: <20231205182011.1976568-1-stefanha@redhat.com> <20231205182011.1976568-5-stefanha@redhat.com>
- <ZYG2mSe1JWnC0tq_@redhat.com> <ZYHew2poxuJJRyhC@redhat.com>
- <CAJSP0QX0fg0TGWuveJz6+QbF9EmY=vPiU-c99fHZMN=1jAnXkw@mail.gmail.com> <ZYK0pUSPFQiU4Qs_@redhat.com>
-In-Reply-To: <ZYK0pUSPFQiU4Qs_@redhat.com>
-From: Stefan Hajnoczi <stefanha@gmail.com>
-Date: Wed, 20 Dec 2023 08:40:04 -0500
-Message-ID: <CAJSP0QXc2RVDHC_-CxbB_rvKOR36Q_wz5wWgCgaFtYt37oE6XA@mail.gmail.com>
-Subject: Re: [PATCH v2 04/14] aio: make aio_context_acquire()/aio_context_release()
- a no-op
-To: Kevin Wolf <kwolf@redhat.com>
-Cc: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org, 
-	=?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>, Cleber Rosa <crosa@redhat.com>, 
-	Xie Changlong <xiechanglong.d@gmail.com>, Paul Durrant <paul@xen.org>, Ari Sundholm <ari@tuxera.com>, 
-	Jason Wang <jasowang@redhat.com>, Eric Blake <eblake@redhat.com>, John Snow <jsnow@redhat.com>, 
-	Eduardo Habkost <eduardo@habkost.net>, Wen Congyang <wencongyang2@huawei.com>, 
-	Alberto Garcia <berto@igalia.com>, Anthony Perard <anthony.perard@citrix.com>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, 
-	Juan Quintela <quintela@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Coiby Xu <Coiby.Xu@gmail.com>, 
-	Fabiano Rosas <farosas@suse.de>, Hanna Reitz <hreitz@redhat.com>, Zhang Chen <chen.zhang@intel.com>, 
-	=?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
-	Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Peter Xu <peterx@redhat.com>, 
-	Emanuele Giuseppe Esposito <eesposit@redhat.com>, Fam Zheng <fam@euphon.net>, Leonardo Bras <leobras@redhat.com>, 
-	David Hildenbrand <david@redhat.com>, Li Zhijian <lizhijian@fujitsu.com>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, 20 Dec 2023 at 04:32, Kevin Wolf <kwolf@redhat.com> wrote:
->
-> Am 19.12.2023 um 22:23 hat Stefan Hajnoczi geschrieben:
-> > The following hack makes the test pass but there are larger safety
-> > issues that I'll need to look at on Wednesday:
->
-> I see, you're taking the same approach as in the SCSI layer: Don't make
-> things thread-safe, but just always access them from the same thread.
+The function also supports non-paging domains, and hence it being placed in
+p2m.h and named with the paging_ prefix is misleading.
 
-Yes, but it feels like a hack to me. You pointed out that other parts
-also don't look thread-safe (e.g. the clients list) and I agree. I've
-started annotating the code and will try to come up with a full fix
-today.
+Move to x86 domain.c and rename to domain_max_paddr_bits().  Moving to a
+different header is non trivial, as the function depends on helpers declared in
+p2m.h.  There's no performance reason for the function being inline.
 
-Stefan
+Note the function is safe to use against PV or system domains, as it does check
+whether the domain is using external paging, and if not the returned physical
+address width is the host (native) value.
+
+No functional change intended.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes since v3:
+ - Expand changelog.
+
+Changes since v2:
+ - New in this version.
+---
+ xen/arch/x86/cpu-policy.c         |  2 +-
+ xen/arch/x86/domain.c             | 21 +++++++++++++++++++++
+ xen/arch/x86/include/asm/domain.h |  3 +++
+ xen/arch/x86/include/asm/paging.h | 22 ----------------------
+ 4 files changed, 25 insertions(+), 23 deletions(-)
+
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index 423932bc13d6..76efb050edf7 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -864,7 +864,7 @@ void recalculate_cpuid_policy(struct domain *d)
+ 
+     p->extd.maxphysaddr = min(p->extd.maxphysaddr, max->extd.maxphysaddr);
+     p->extd.maxphysaddr = min_t(uint8_t, p->extd.maxphysaddr,
+-                                paging_max_paddr_bits(d));
++                                domain_max_paddr_bits(d));
+     p->extd.maxphysaddr = max_t(uint8_t, p->extd.maxphysaddr,
+                                 (p->basic.pae || p->basic.pse36) ? 36 : 32);
+ 
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 3712e36df930..8a31d18f6967 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2552,6 +2552,27 @@ static int __init cf_check init_vcpu_kick_softirq(void)
+ }
+ __initcall(init_vcpu_kick_softirq);
+ 
++unsigned int domain_max_paddr_bits(const struct domain *d)
++{
++    unsigned int bits = paging_mode_hap(d) ? hap_paddr_bits : paddr_bits;
++
++    if ( paging_mode_external(d) )
++    {
++        if ( !IS_ENABLED(CONFIG_BIGMEM) && paging_mode_shadow(d) )
++        {
++            /* Shadowed superpages store GFNs in 32-bit page_info fields. */
++            bits = min(bits, 32U + PAGE_SHIFT);
++        }
++        else
++        {
++            /* Both p2m-ept and p2m-pt only support 4-level page tables. */
++            bits = min(bits, 48U);
++        }
++    }
++
++    return bits;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 4b6b7ceab1ed..622d22bef255 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -777,6 +777,9 @@ static inline void pv_inject_sw_interrupt(unsigned int vector)
+ struct arch_vcpu_io {
+ };
+ 
++/* Maxphysaddr supportable by the paging infrastructure. */
++unsigned int domain_max_paddr_bits(const struct domain *d);
++
+ #endif /* __ASM_DOMAIN_H__ */
+ 
+ /*
+diff --git a/xen/arch/x86/include/asm/paging.h b/xen/arch/x86/include/asm/paging.h
+index 76162a9429ce..8a2a0af40874 100644
+--- a/xen/arch/x86/include/asm/paging.h
++++ b/xen/arch/x86/include/asm/paging.h
+@@ -336,28 +336,6 @@ static inline bool gfn_valid(const struct domain *d, gfn_t gfn)
+     return !(gfn_x(gfn) >> (d->arch.cpuid->extd.maxphysaddr - PAGE_SHIFT));
+ }
+ 
+-/* Maxphysaddr supportable by the paging infrastructure. */
+-static always_inline unsigned int paging_max_paddr_bits(const struct domain *d)
+-{
+-    unsigned int bits = paging_mode_hap(d) ? hap_paddr_bits : paddr_bits;
+-
+-    if ( paging_mode_external(d) )
+-    {
+-        if ( !IS_ENABLED(CONFIG_BIGMEM) && paging_mode_shadow(d) )
+-        {
+-            /* Shadowed superpages store GFNs in 32-bit page_info fields. */
+-            bits = min(bits, 32U + PAGE_SHIFT);
+-        }
+-        else
+-        {
+-            /* Both p2m-ept and p2m-pt only support 4-level page tables. */
+-            bits = min(bits, 48U);
+-        }
+-    }
+-
+-    return bits;
+-}
+-
+ #endif /* XEN_PAGING_H */
+ 
+ /*
+-- 
+2.43.0
+
 
