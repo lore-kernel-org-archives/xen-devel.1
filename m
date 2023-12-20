@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA15C3DA6E
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 17:15:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.658212.1027288 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CCEC3DA6E
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Dec 2023 18:24:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.658219.1027308 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rG09l-0006z9-3Q; Wed, 20 Dec 2023 17:14:53 +0000
+	id 1rG1Ev-0002xV-9E; Wed, 20 Dec 2023 18:24:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 658212.1027288; Wed, 20 Dec 2023 17:14:53 +0000
+Received: by outflank-mailman (output) from mailman id 658219.1027308; Wed, 20 Dec 2023 18:24:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rG09k-0006z2-WD; Wed, 20 Dec 2023 17:14:53 +0000
-Received: by outflank-mailman (input) for mailman id 658212;
- Wed, 20 Dec 2023 17:14:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rG1Ev-0002xO-63; Wed, 20 Dec 2023 18:24:17 +0000
+Received: by outflank-mailman (input) for mailman id 658219;
+ Wed, 20 Dec 2023 18:24:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cHJo=H7=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1rG09k-0006yw-IZ
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 17:14:52 +0000
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [2a00:1450:4864:20::432])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 49242367-9f5b-11ee-98eb-6d05b1d4d9a1;
- Wed, 20 Dec 2023 18:14:51 +0100 (CET)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3367903b4dcso1139988f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2023 09:14:51 -0800 (PST)
-Received: from perard.uk.xensource.com (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- v11-20020a05600c470b00b0040c5cf930e6sm277654wmo.19.2023.12.20.09.14.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 09:14:50 -0800 (PST)
+ <SRS0=wrkk=H7=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1rG1Et-0002hx-GT
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2023 18:24:15 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f9b29432-9f64-11ee-9b0f-b553b5be7939;
+ Wed, 20 Dec 2023 19:24:13 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 92170616E1;
+ Wed, 20 Dec 2023 18:24:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5321C433C7;
+ Wed, 20 Dec 2023 18:24:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,77 +43,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 49242367-9f5b-11ee-98eb-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1703092491; x=1703697291; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=IHoyBRXbxJl/Fk8Fe3c346+q8RDAepu8NiFo0x6fhJ0=;
-        b=NzjabceynYTpScdtdJztAD0D59j5iysW+5AaMWzWuZh6yzWJAyp+rONi7dlIAXPq7h
-         GxZ7vRzaxwlUHZtSWnrgQ373V6gApJSjlxP89X1PeOR0vRCmcoBleJszrDm1+gi+O/9y
-         rgiABGmyZ57Z7XBOoylsd+2VveP1A3YLzn7AQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703092491; x=1703697291;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IHoyBRXbxJl/Fk8Fe3c346+q8RDAepu8NiFo0x6fhJ0=;
-        b=W3uUpJH3FaNLRWXPRZhrGI5kruRy9EIqtDzEg7/TBo9abydWzOuk/ms3HA5ZE4rgTb
-         QFv+UfWwX1zfx/HxP3B/d06JFuM0s75mTHRPGNpoN4DYaVfbVJ0ffiQ5AEy3ppX2ficE
-         ABWLNNK690pGymnLjXpAmd+lVrIDAKNTm2zNvHrpEkmV9D3vhx3dLO++/PLytUzIBC9j
-         CYZm10GCZqWBws1Rx4bPC8Yc1p7R3LlN5FC/0qXp092F74X1aSbcxCGdUORa+j+jwFIx
-         AXTfzUPHYA/xbpjGiFp1/KlKf3TbK8qn8jAoO2K/YcVQDoTkbuv27Exe1Q3EYC1d47zG
-         20ug==
-X-Gm-Message-State: AOJu0Yxf/cGY9kPnRkgPvdiamPU7U4/Qp+ex8SXfYLhPrWSNxVS58fxW
-	+cyoCQRhYkqyO0+Nlj1FECXoKmqeREDdosFLTM0=
-X-Google-Smtp-Source: AGHT+IGRAMgCdG4L0aP219RsTczPXkgRF+jQWtr4HVkeakP8eTPoYJTansv0A2cLJ4AfITMamFMxwQ==
-X-Received: by 2002:a05:600c:1e05:b0:40b:5e59:ccc8 with SMTP id ay5-20020a05600c1e0500b0040b5e59ccc8mr8386wmb.169.1703092490889;
-        Wed, 20 Dec 2023 09:14:50 -0800 (PST)
-Date: Wed, 20 Dec 2023 17:14:50 +0000
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] tools/xg: Reserialise CPU policies with the allocated
- number of leaves.
-Message-ID: <8dc3efe1-9419-4fc6-8801-e56625cd0693@perard>
-References: <20231212105717.6031-1-alejandro.vallejo@cloud.com>
+X-Inumbo-ID: f9b29432-9f64-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1703096652;
+	bh=jvMqksva70Wn2M8Xu3PBi1hCXSjBSwlNNO6oe/XHZoI=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=lUKu6Ciz3AHJhweR2YVWA/MUAxauanjnI2GNh1oSvAMVTJWYw4Dxa3LXJtrT6YIs+
+	 7mtcBP5+CTwgwwQeOCIFsK8rNIu9dIVDjl8+Kkf2ihqZj/tAn0I7Gu0agwBnfGimwL
+	 uMNRj0y4JU0RzNPYsvwTFedZmLMToO9kM74WZV+psd0V9fOdP76VRAOvoMKt9nBQNU
+	 zMwYJbrwvPVegwVXxlB3jYZ8w/uX/OopZPqIBFdKG+KUGk0H/KE/BRej5cih9Up0aj
+	 h4I0N9g8T2irFPwNHyv+n8pYmZPx+p7yh2VGJeXIKU0DGG5V16wfkZhpIG3CWhB6jL
+	 LQgSVh2ioC1pA==
+Date: Wed, 20 Dec 2023 10:24:09 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, 
+    michal.orzel@amd.com, xenia.ragiadakou@amd.com, ayan.kumar.halder@amd.com, 
+    consulting@bugseng.com, jbeulich@suse.com, andrew.cooper3@citrix.com, 
+    roger.pau@citrix.com, Simone Ballarin <simone.ballarin@bugseng.com>, 
+    Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: [XEN PATCH] automation/eclair_analysis: fix typo in deviation.
+In-Reply-To: <d9ec973290747665905176939aef7749d5550734.1703068956.git.nicola.vetrini@bugseng.com>
+Message-ID: <alpine.DEB.2.22.394.2312201005130.685950@ubuntu-linux-20-04-desktop>
+References: <d9ec973290747665905176939aef7749d5550734.1703068956.git.nicola.vetrini@bugseng.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231212105717.6031-1-alejandro.vallejo@cloud.com>
+Content-Type: text/plain; charset=US-ASCII
 
-On Tue, Dec 12, 2023 at 10:57:17AM +0000, Alejandro Vallejo wrote:
-> The procedure used to customize the domain CPU policy is broken when
-> toolstack tries to set leaves (with subleaves) that the hypervisor didn't
-> need to serialise (i.e: because they where empty subleaves).
+On Wed, 20 Dec 2023, Nicola Vetrini wrote:
+> Unwanted leading '+'-s cause the deviation not to work as expected,
+> leading to wrong analysis counts.
 > 
-> During typical domain creation xg does the following:
-> 
->   1. Probe Xen for max #leaves that a policy may have
->   2. Allocate memory for that many leaves
->   3. Tell the hypervisor to dump the policy in the allocated buffer
->   4. Deserialise it
->   5. Modify it
->   6. Reserialise it
->   7. Send it back to Xen
-> 
-> The problem is that (3) overrides nr_leaves, which then makes (6) fail in
-> the case where (5) has added subleaves that Xen understands but didn't need
-> to serialize on (3).
-> 
-> The fix uses an opaque CPU policy object so we can (a) avoid probing Xen
-> for sizes, and (b) trivially have knowledge of the actual size of the
-> buffer.
-> 
-> While at it, fix xc_cpu_policy_destroy() to preserve errno accross free()
-> 
-> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+> Fixes: 11126964d82f ("automation/eclair_analysis: avoid violation of MISRA Rule 2.1")
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-Thanks,
-
--- 
-Anthony PERARD
 
