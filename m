@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D222CC35274
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Dec 2023 10:24:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.658759.1028099 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC89DC35274
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Dec 2023 10:24:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.658764.1028109 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGGDY-0003yO-I4; Thu, 21 Dec 2023 10:23:52 +0000
+	id 1rGGEL-0004dF-UM; Thu, 21 Dec 2023 10:24:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 658759.1028099; Thu, 21 Dec 2023 10:23:52 +0000
+Received: by outflank-mailman (output) from mailman id 658764.1028109; Thu, 21 Dec 2023 10:24:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGGDY-0003yH-Dk; Thu, 21 Dec 2023 10:23:52 +0000
-Received: by outflank-mailman (input) for mailman id 658759;
- Thu, 21 Dec 2023 10:23:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vttA=IA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rGGDX-0003x3-LW
- for xen-devel@lists.xenproject.org; Thu, 21 Dec 2023 10:23:51 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0891f3b5-9feb-11ee-98eb-6d05b1d4d9a1;
- Thu, 21 Dec 2023 11:23:50 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3367a304091so544142f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 21 Dec 2023 02:23:50 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- b2-20020a5d4d82000000b003366224319csm1695716wru.53.2023.12.21.02.23.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 02:23:49 -0800 (PST)
+	id 1rGGEL-0004d8-RI; Thu, 21 Dec 2023 10:24:41 +0000
+Received: by outflank-mailman (input) for mailman id 658764;
+ Thu, 21 Dec 2023 10:24:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=HEgZ=IA=amd.com=Julia.Zhang@srs-se1.protection.inumbo.net>)
+ id 1rGGEJ-0004Xj-Rj
+ for xen-devel@lists.xenproject.org; Thu, 21 Dec 2023 10:24:39 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2412::600])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 23bf439d-9feb-11ee-9b0f-b553b5be7939;
+ Thu, 21 Dec 2023 11:24:37 +0100 (CET)
+Received: from DM6PR07CA0113.namprd07.prod.outlook.com (2603:10b6:5:330::16)
+ by SJ0PR12MB8140.namprd12.prod.outlook.com (2603:10b6:a03:4e3::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.18; Thu, 21 Dec
+ 2023 10:24:30 +0000
+Received: from DS2PEPF00003446.namprd04.prod.outlook.com
+ (2603:10b6:5:330:cafe::a3) by DM6PR07CA0113.outlook.office365.com
+ (2603:10b6:5:330::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.20 via Frontend
+ Transport; Thu, 21 Dec 2023 10:24:30 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS2PEPF00003446.mail.protection.outlook.com (10.167.17.73) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7113.14 via Frontend Transport; Thu, 21 Dec 2023 10:24:30 +0000
+Received: from jenkins-julia.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Thu, 21 Dec
+ 2023 04:24:16 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,99 +58,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0891f3b5-9feb-11ee-98eb-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1703154230; x=1703759030; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=rll7w/ylB4mbAaGMLCIq8LJO2ulEQT9zrPbAbxvdH1U=;
-        b=bcPxgdIIQMXKzKii6R9wYC3y56HUSpKk8jgftlRbW+9sHTGBK26KCNTcNjxvm5F2y9
-         FfjMbgrZI+wpQEAET7p5+6n/bOaaLs9/i78i7CNVIHFOfdK4NqxQ4ZgRhFA2jwiT9EY4
-         BM7C5jAu9HoDDns9AuhCE4uKhp/OGzCkEfy04pAAEVsBqzEscP7O2VnBTi2aPv+lOt/2
-         t0w8D3LlpMmGKXarKoAqQ7k4qPZPQkgLNkxOfj6/UJEN6mUyAW4CHz2SC3Pare6+gxjn
-         vo+khB7POeF1iRnbWNALxVkHWf23rcavwKteFMM/cTzLTW06ct8K0JJS3Nm5R4q3xAUE
-         ISBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703154230; x=1703759030;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=rll7w/ylB4mbAaGMLCIq8LJO2ulEQT9zrPbAbxvdH1U=;
-        b=t966D9vZT9XINSDcPrtn6dmvtq+zgHWVcIVWnoaOQ5hZ8oGB/23tjTKKN3l8qW5Pgn
-         AN+YiBXTJMBq0e1+sTwiQJQjTZLnxt66jRZDoKc8MGWJtuRbv7cchpkN00yQUXfMVuNi
-         uLBknZAXfcvZDzjFCA9IUm80U+2JugrUtc+CMM/+B8oiRJucWBeoMm9ZDt+4yIZPW4E0
-         pGYfjwYvseUEQZ/3dPeLy0m0Z1o7ttlIaLvV6yA8k37WdR2yZU/QgZ+bNHkcofuuhNyn
-         OXL3AZh5EQOGza1OQ95tFGLhOBLd6MkrQrt4V8wMtTJSH3mmZEZpfEtsRGjpK8M6tApI
-         SEvQ==
-X-Gm-Message-State: AOJu0Yw9/+jjgOj3WZIFb9A5/IMHNT+hSlMw1HKluEenOYlkRQFTgd0+
-	CKTu/UzJatjhpN6WKAOe57xb
-X-Google-Smtp-Source: AGHT+IH5JnK1c0pnKaywxvQsSFdWNoCh0tDDllemFK2B8Z4xRo0G8/4l3DOYM55esruvF6dNWoXP1A==
-X-Received: by 2002:a05:6000:18cd:b0:336:841c:c358 with SMTP id w13-20020a05600018cd00b00336841cc358mr368017wrq.155.1703154230089;
-        Thu, 21 Dec 2023 02:23:50 -0800 (PST)
-Message-ID: <c4c1d007-1c38-495d-9f1c-ee7e679f57ce@suse.com>
-Date: Thu, 21 Dec 2023 11:23:49 +0100
+X-Inumbo-ID: 23bf439d-9feb-11ee-9b0f-b553b5be7939
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jERasMzmjbTxZkoz6s9aPLI+TfSRoLMtG9Pqh69YkzRr3Dq06Z/AVT+GwGbBEeFTo3Dl+NdLpgTsAypocqnvLBB76eg8rcMeqzrB6+uKUIXpLn/HNCW08wb4auI0QoPfVs/2sJCr6u4xnHTvqYUcls5Ct2HQjHYHFgSUJe+ZE3XOGMfIWRMTSj/bNu3yDuOL6sam7WZSyQvSKVKue+VW0dsgOg94d3AxGj7W8ia8ycTjNBgYZFH0G+iDbmFCNp4SJPS2mD05txFwWqhBD+R7ol3LZRKpqvizfRsPZTyDMSjR49/KwpXCDyBoxgclT7JlE1z6KZFN4zAaPhXtWNIRdA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=E5nowDQx2hz6h1Oq56yTcaTPYgCFQhF1Wp6/Ebw4Ly0=;
+ b=LndurRNOoEGK+wAewXU5WJMU7co1cKThtACOmmVN4glLJHbDdm/Nc7oykqqfFgK/W1neEeFQ6J1wh6KLSgSRR6Bv38/ZQxlPtoQncXJTvEl90LXGmL7wRC2DZd+5sXNiRxVBoFUpwsHKp8Z9g7VKcbXQ596zHMUWBKEyRZeL+MWKm2CJ9jGF9YN8Q7aIoQlfryurFDEoSIkv4dVCugDNVgOi2qaVOSUyJlqmELUHtvl883jWgMGjqN97hyD2Xy34ANmDb0zaZiowhNUEcHJTbfclHaKFYHuaeOfiQJue4GGvIoaDIT937kKTgEaCkh2onfLLkdwdeMDc2SVJXUKn2g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=E5nowDQx2hz6h1Oq56yTcaTPYgCFQhF1Wp6/Ebw4Ly0=;
+ b=VkkzPF0wjwmVtQ6swvGhvZW+UnWnaEdVzLHwEs9l2YVrB3oEfBCoG5HHNMUXLYS2zvRsCudRaxSOiFEp0DYCSoPZWvhDnLK3GLNd8Kobs5+aG4nsJ1KO6J7TyrC5dwvqmu0cNCMdx4Lwz1onxn06XVEaiN1EOuR+/rZ3Wc9776w=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Julia Zhang <julia.zhang@amd.com>
+To: Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD
+	<anthony.perard@citrix.com>, Antonio Caggiano
+	<antonio.caggiano@collabora.com>, "Dr . David Alan Gilbert"
+	<dgilbert@redhat.com>, Robert Beckett <bob.beckett@collabora.com>,
+	<qemu-devel@nongnu.org>
+CC: <xen-devel@lists.xenproject.org>, Alex Deucher
+	<alexander.deucher@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?=
+	<christian.koenig@amd.com>, Xenia Ragiadakou <burzalodowa@gmail.com>,
+	"Honglei Huang" <honglei1.huang@amd.com>, Julia Zhang <julia.zhang@amd.com>,
+	"Chen Jiqian" <Jiqian.Chen@amd.com>
+Subject: [PATCH v2 0/1]  Implementation of resource_query_layout
+Date: Thu, 21 Dec 2023 18:23:41 +0800
+Message-ID: <20231221102342.4022630-1-julia.zhang@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/iommu: add CHANGELOG entry for hwdom setup time
- improvements
-Content-Language: en-US
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Community Manager <community.manager@xenproject.org>,
- xen-devel@lists.xenproject.org
-References: <20231220134346.22430-1-roger.pau@citrix.com>
- <20231221101244.25650-1-roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20231221101244.25650-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003446:EE_|SJ0PR12MB8140:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9a8e435-a527-4d31-1a09-08dc020f04ad
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	5OdeR9R7YbD9DepVSYRhxFcvqDa1W2Nrru5F7yKMgZs/Ob3g0EcSjfl2QqsW331rhVCuMZR91O+7ShyeXABE5wD3NL9T9tPo89qTkKc9j1PtW4kDXznqbqLzOvLYG5oWBww05C5+IdW8kvmI4D9/oCXvBWyoIRTa+49IxbV1O5GZMuLr5TjnnRk2YfyEwbpFtYJS8Y+0k23Ie0d10IxlbI/ZUvG0wIyM4fe3KwgUchj/jcy0IqjXPi0ZgWHRcP9ZMNSpxLzwbeCP/W5hd6D8Fx8NPTUh61W51NzYeEOx98KQ7CvMoMJ5jHv5dfZOep608MVIDnjar9qAf2tLfrmWuujyL4zSpq86QNwxferFYRvVCsvnp4gJ4PXjHaojfUwjzWKF7NMLq8B2WYTBIRBWiDYWmb7HOEU7stege1ZU4Ngoae4EA2iQmsfFG2Ifkc3Kd6iRKS2M03HlvgYHthhBTcmymK5qknGoih84pACEvhPP9OKkGgnX9yJctIO8ye3ZEKUeICs1vat5pxpNr7jqhZ/cXEYGgpiWYsGJsDBnv+q5zIbnd46izhBcf8XFn0iyoR6aUvADXtP7xWvoOplEiH3zL4OSX2Xz7iiL52Bj2f0sW1mrvR2tioqNN/qDwb+H9u4A4+hV4+j2/hwzg5YCjY2PZ+SsVdUFoKsBD7XmEq5tliqw/j1Rl+je7ztOkVqaWBbD802Gor6b9QKeewxU/Pvarz+meXfnPubMZfsJhEMlU0p4vkmuBLJgfspn3Smu0cjXzCSvO0HLvJsaj8uiNg==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(136003)(39860400002)(376002)(230922051799003)(186009)(64100799003)(82310400011)(1800799012)(451199024)(36840700001)(40470700004)(46966006)(8676002)(4326008)(8936002)(26005)(2906002)(40480700001)(478600001)(316002)(40460700003)(44832011)(6666004)(70586007)(54906003)(110136005)(70206006)(7696005)(5660300002)(86362001)(36860700001)(47076005)(1076003)(81166007)(82740400003)(2616005)(7416002)(36756003)(336012)(356005)(426003)(41300700001)(16526019)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Dec 2023 10:24:30.5204
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9a8e435-a527-4d31-1a09-08dc020f04ad
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS2PEPF00003446.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8140
 
-On 21.12.2023 11:12, Roger Pau Monne wrote:
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
->  CHANGELOG.md | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/CHANGELOG.md b/CHANGELOG.md
-> index 5ee5d41fc933..52484c047bd1 100644
-> --- a/CHANGELOG.md
-> +++ b/CHANGELOG.md
-> @@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
->  ### Changed
->   - Changed flexible array definitions in public I/O interface headers to not
->     use "1" as the number of array elements.
-> + - On x86:
-> +   - Reduce IOMMU setup time for hardware domain.
->  
->  ### Added
->   - On x86:
+Hi all,
 
-I'm a little puzzled: Isn't this more like patch 7/6 of the v4 series
-(or possibly patch 5.5/6), which hasn't gone in yet?
+Sorry to late reply. This is v2 of the implementation of
+resource_query_layout. This adds a new ioctl to let guest query information
+of host resource, which is originally from Daniel Stone. We add some
+changes to support query the correct stride of host resource before it's
+created, which is to support dGPU prime feature. Without correct stride,
+dGPU can not blit data to virtio iGPU correctly. 
 
-Jan
+Changes from v1 to v2:
+-Squash two patches to a single patch. 
+-A small modification of VIRTIO_GPU_F_RESOURCE_QUERY_LAYOUT
+
+
+Below is description of v1:
+This add implementation of resource_query_layout to get the information of
+how the host has actually allocated the buffer. This function is now used
+to query the stride for guest linear resource for dGPU prime on guest VMs.
+
+v1 of qemu side:
+https:
+//lore.kernel.org/qemu-devel/20231110074027.24862-1-julia.zhang@amd.com/T/#t
+
+v1 of kernel side:
+ https:
+//lore.kernel.org/xen-devel/20231110074027.24862-1-julia.zhang@amd.com/T/#t
+
+Daniel Stone (1):
+  virgl: Implement resource_query_layout
+
+ hw/display/virtio-gpu-base.c                |  4 +++
+ hw/display/virtio-gpu-virgl.c               | 40 +++++++++++++++++++++
+ include/hw/virtio/virtio-gpu-bswap.h        |  7 ++++
+ include/standard-headers/linux/virtio_gpu.h | 30 ++++++++++++++++
+ meson.build                                 |  4 +++
+ 5 files changed, 85 insertions(+)
+
+-- 
+2.34.1
+
 
