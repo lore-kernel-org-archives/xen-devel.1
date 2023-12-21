@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C831CC35274
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Dec 2023 10:20:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.658751.1028089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D222CC35274
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Dec 2023 10:24:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.658759.1028099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGGAU-0002MF-25; Thu, 21 Dec 2023 10:20:42 +0000
+	id 1rGGDY-0003yO-I4; Thu, 21 Dec 2023 10:23:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 658751.1028089; Thu, 21 Dec 2023 10:20:42 +0000
+Received: by outflank-mailman (output) from mailman id 658759.1028099; Thu, 21 Dec 2023 10:23:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGGAT-0002M8-Ve; Thu, 21 Dec 2023 10:20:41 +0000
-Received: by outflank-mailman (input) for mailman id 658751;
- Thu, 21 Dec 2023 10:20:41 +0000
+	id 1rGGDY-0003yH-Dk; Thu, 21 Dec 2023 10:23:52 +0000
+Received: by outflank-mailman (input) for mailman id 658759;
+ Thu, 21 Dec 2023 10:23:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=vttA=IA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rGGAT-0002La-9t
- for xen-devel@lists.xenproject.org; Thu, 21 Dec 2023 10:20:41 +0000
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [2a00:1450:4864:20::430])
+ id 1rGGDX-0003x3-LW
+ for xen-devel@lists.xenproject.org; Thu, 21 Dec 2023 10:23:51 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 96cb9be8-9fea-11ee-98eb-6d05b1d4d9a1;
- Thu, 21 Dec 2023 11:20:39 +0100 (CET)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-32f8441dfb5so521068f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 21 Dec 2023 02:20:39 -0800 (PST)
+ id 0891f3b5-9feb-11ee-98eb-6d05b1d4d9a1;
+ Thu, 21 Dec 2023 11:23:50 +0100 (CET)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3367a304091so544142f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Dec 2023 02:23:50 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- e25-20020adfa459000000b003365951cef9sm1697716wra.55.2023.12.21.02.20.38
+ b2-20020a5d4d82000000b003366224319csm1695716wru.53.2023.12.21.02.23.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 02:20:39 -0800 (PST)
+ Thu, 21 Dec 2023 02:23:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96cb9be8-9fea-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: 0891f3b5-9feb-11ee-98eb-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1703154039; x=1703758839; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1703154230; x=1703759030; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=QkbK7rAhf24elMfHugp+uKo0w5y4uT5ZqG/DklLZh0E=;
-        b=a7MLjDHH+GzpCTlT1n5wp/dSmBOhVXDiNPOuth9WFNasJJq7c+/qFLdcIYTY6MwuoP
-         nZETKHZinch0AEWxGgS83emG9zH0fOeb5DNu2y6Mv+Kl8qcttP5vlu+ek5lxYtsqlIKw
-         0iq7qRI7GggMqQRU8wS2oFPhyHgd+zuuujw0kFGn2fWzuJn1Q5yR/MulBarqUf7F7v+7
-         UR0LorKjywApBbLVbE57vbl0I039p8aVvQjN/w0HwsZcoXZXJPSb2x2FmLgTfP07HEYe
-         /5hSeZ6dfb/HmzC+xRawhyadMr7B6v0/1xT8JEgMm6mLX0JdZFkkts7HNLQ6q9PizTUi
-         b1aw==
+        bh=rll7w/ylB4mbAaGMLCIq8LJO2ulEQT9zrPbAbxvdH1U=;
+        b=bcPxgdIIQMXKzKii6R9wYC3y56HUSpKk8jgftlRbW+9sHTGBK26KCNTcNjxvm5F2y9
+         FfjMbgrZI+wpQEAET7p5+6n/bOaaLs9/i78i7CNVIHFOfdK4NqxQ4ZgRhFA2jwiT9EY4
+         BM7C5jAu9HoDDns9AuhCE4uKhp/OGzCkEfy04pAAEVsBqzEscP7O2VnBTi2aPv+lOt/2
+         t0w8D3LlpMmGKXarKoAqQ7k4qPZPQkgLNkxOfj6/UJEN6mUyAW4CHz2SC3Pare6+gxjn
+         vo+khB7POeF1iRnbWNALxVkHWf23rcavwKteFMM/cTzLTW06ct8K0JJS3Nm5R4q3xAUE
+         ISBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703154039; x=1703758839;
+        d=1e100.net; s=20230601; t=1703154230; x=1703759030;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QkbK7rAhf24elMfHugp+uKo0w5y4uT5ZqG/DklLZh0E=;
-        b=ABIXqaoaUkIddgc4kPZGyQqUpMxHTq6YUsNx43OEOlyAi24ltE6Sy5g/9DnZjUz/8F
-         wdFluEXmwdGqmXry0wi+JAKRRr9CeWKN0Tlk9pMsI4rSRabi4/m0DMVsxB34xkUorXlK
-         b7zm0XTtB9QVKMqP1vprOvmIsms2DYoxKaN4kSSKjknK6ocT5WssDhymfHIJl03ayO0f
-         rd0ZIDzenhQJwFf+d+EdRavevaPLylfHC+NjpQpCkeq1CtvfqcMs3A2eX7QJlFttE8lx
-         cmwCwfJSISrvo7SvF5RlKvDxrTlhL3W2uPOvrZDVENoRxtvKFAnsWzFJDn6D9lvxgkSn
-         XrDw==
-X-Gm-Message-State: AOJu0Yy3Afq3PdvyxWRbuNPAYEetKnCSz5DYZz6ijNJdiBDfAqMzggnl
-	TbqJ3B9JXttA2WnDot/jjamH
-X-Google-Smtp-Source: AGHT+IEJ5HEs4ginJBrVKvWDTzWKjAVjE7azVL3J4x/4n1Ob+sU04qhDU04ibRTG5CQAXqmk7vgQEw==
-X-Received: by 2002:adf:fc07:0:b0:336:5d1c:a9c8 with SMTP id i7-20020adffc07000000b003365d1ca9c8mr574190wrr.59.1703154039285;
-        Thu, 21 Dec 2023 02:20:39 -0800 (PST)
-Message-ID: <978e4603-f20b-481f-97bd-2a84de0800c8@suse.com>
-Date: Thu, 21 Dec 2023 11:20:38 +0100
+        bh=rll7w/ylB4mbAaGMLCIq8LJO2ulEQT9zrPbAbxvdH1U=;
+        b=t966D9vZT9XINSDcPrtn6dmvtq+zgHWVcIVWnoaOQ5hZ8oGB/23tjTKKN3l8qW5Pgn
+         AN+YiBXTJMBq0e1+sTwiQJQjTZLnxt66jRZDoKc8MGWJtuRbv7cchpkN00yQUXfMVuNi
+         uLBknZAXfcvZDzjFCA9IUm80U+2JugrUtc+CMM/+B8oiRJucWBeoMm9ZDt+4yIZPW4E0
+         pGYfjwYvseUEQZ/3dPeLy0m0Z1o7ttlIaLvV6yA8k37WdR2yZU/QgZ+bNHkcofuuhNyn
+         OXL3AZh5EQOGza1OQ95tFGLhOBLd6MkrQrt4V8wMtTJSH3mmZEZpfEtsRGjpK8M6tApI
+         SEvQ==
+X-Gm-Message-State: AOJu0Yw9/+jjgOj3WZIFb9A5/IMHNT+hSlMw1HKluEenOYlkRQFTgd0+
+	CKTu/UzJatjhpN6WKAOe57xb
+X-Google-Smtp-Source: AGHT+IH5JnK1c0pnKaywxvQsSFdWNoCh0tDDllemFK2B8Z4xRo0G8/4l3DOYM55esruvF6dNWoXP1A==
+X-Received: by 2002:a05:6000:18cd:b0:336:841c:c358 with SMTP id w13-20020a05600018cd00b00336841cc358mr368017wrq.155.1703154230089;
+        Thu, 21 Dec 2023 02:23:50 -0800 (PST)
+Message-ID: <c4c1d007-1c38-495d-9f1c-ee7e679f57ce@suse.com>
+Date: Thu, 21 Dec 2023 11:23:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86/amd: extend CPU errata #1474 affected models
+Subject: Re: [PATCH] x86/iommu: add CHANGELOG entry for hwdom setup time
+ improvements
 Content-Language: en-US
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Roger Pau Monne <roger.pau@citrix.com>
-Cc: Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
-References: <20231221100831.25570-1-roger.pau@citrix.com>
- <213dc008-f8eb-4313-8b3e-17fc435416e1@citrix.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Community Manager <community.manager@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <20231220134346.22430-1-roger.pau@citrix.com>
+ <20231221101244.25650-1-roger.pau@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -112,33 +114,32 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <213dc008-f8eb-4313-8b3e-17fc435416e1@citrix.com>
+In-Reply-To: <20231221101244.25650-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 21.12.2023 11:17, Andrew Cooper wrote:
-> On 21/12/2023 10:08 am, Roger Pau Monne wrote:
->> Errata #1474has now been extended to cover models from family 17h ranges
+On 21.12.2023 11:12, Roger Pau Monne wrote:
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+>  CHANGELOG.md | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> Extra space needed.  Can be fixed on commit.
+> diff --git a/CHANGELOG.md b/CHANGELOG.md
+> index 5ee5d41fc933..52484c047bd1 100644
+> --- a/CHANGELOG.md
+> +++ b/CHANGELOG.md
+> @@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+>  ### Changed
+>   - Changed flexible array definitions in public I/O interface headers to not
+>     use "1" as the number of array elements.
+> + - On x86:
+> +   - Reduce IOMMU setup time for hardware domain.
+>  
+>  ### Added
+>   - On x86:
 
-Also (not just here) - isn't it "erratum" when we talk of just one?
+I'm a little puzzled: Isn't this more like patch 7/6 of the v4 series
+(or possibly patch 5.5/6), which hasn't gone in yet?
 
 Jan
-
->> 00-2Fh, so the errata now covers all the models released under Family 17h (Zen,
->> Zen+ and Zen2).
->>
->> Additionally extend the workaround to Family 18h (Hygon), since it's based on
->> the Zen architecture and very likely affected.
->>
->> Rename all the zen2 related symbols to fam17, since the errata doesn't
->> exclusively affect Zen2 anymore.
->>
->> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
->> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
->> Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> 
-> ~Andrew
-
 
