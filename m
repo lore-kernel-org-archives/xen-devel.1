@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC89DC35274
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Dec 2023 10:24:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.658764.1028109 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEFADC35274
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Dec 2023 10:25:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.658765.1028118 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGGEL-0004dF-UM; Thu, 21 Dec 2023 10:24:41 +0000
+	id 1rGGEd-00052p-4M; Thu, 21 Dec 2023 10:24:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 658764.1028109; Thu, 21 Dec 2023 10:24:41 +0000
+Received: by outflank-mailman (output) from mailman id 658765.1028118; Thu, 21 Dec 2023 10:24:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGGEL-0004d8-RI; Thu, 21 Dec 2023 10:24:41 +0000
-Received: by outflank-mailman (input) for mailman id 658764;
- Thu, 21 Dec 2023 10:24:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rGGEd-00052i-1o; Thu, 21 Dec 2023 10:24:59 +0000
+Received: by outflank-mailman (input) for mailman id 658765;
+ Thu, 21 Dec 2023 10:24:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HEgZ=IA=amd.com=Julia.Zhang@srs-se1.protection.inumbo.net>)
- id 1rGGEJ-0004Xj-Rj
- for xen-devel@lists.xenproject.org; Thu, 21 Dec 2023 10:24:39 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [2a01:111:f403:2412::600])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 23bf439d-9feb-11ee-9b0f-b553b5be7939;
- Thu, 21 Dec 2023 11:24:37 +0100 (CET)
-Received: from DM6PR07CA0113.namprd07.prod.outlook.com (2603:10b6:5:330::16)
- by SJ0PR12MB8140.namprd12.prod.outlook.com (2603:10b6:a03:4e3::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.18; Thu, 21 Dec
- 2023 10:24:30 +0000
-Received: from DS2PEPF00003446.namprd04.prod.outlook.com
- (2603:10b6:5:330:cafe::a3) by DM6PR07CA0113.outlook.office365.com
- (2603:10b6:5:330::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.20 via Frontend
- Transport; Thu, 21 Dec 2023 10:24:30 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF00003446.mail.protection.outlook.com (10.167.17.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7113.14 via Frontend Transport; Thu, 21 Dec 2023 10:24:30 +0000
-Received: from jenkins-julia.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Thu, 21 Dec
- 2023 04:24:16 -0600
+ <SRS0=yxSo=IA=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1rGGEb-00051I-Qd
+ for xen-devel@lists.xenproject.org; Thu, 21 Dec 2023 10:24:57 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3021660c-9feb-11ee-98eb-6d05b1d4d9a1;
+ Thu, 21 Dec 2023 11:24:57 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40d2376db79so4740425e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Dec 2023 02:24:57 -0800 (PST)
+Received: from [10.80.67.30] (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ l2-20020a05600c4f0200b003feae747ff2sm10663775wmq.35.2023.12.21.02.24.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 Dec 2023 02:24:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,111 +47,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23bf439d-9feb-11ee-9b0f-b553b5be7939
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jERasMzmjbTxZkoz6s9aPLI+TfSRoLMtG9Pqh69YkzRr3Dq06Z/AVT+GwGbBEeFTo3Dl+NdLpgTsAypocqnvLBB76eg8rcMeqzrB6+uKUIXpLn/HNCW08wb4auI0QoPfVs/2sJCr6u4xnHTvqYUcls5Ct2HQjHYHFgSUJe+ZE3XOGMfIWRMTSj/bNu3yDuOL6sam7WZSyQvSKVKue+VW0dsgOg94d3AxGj7W8ia8ycTjNBgYZFH0G+iDbmFCNp4SJPS2mD05txFwWqhBD+R7ol3LZRKpqvizfRsPZTyDMSjR49/KwpXCDyBoxgclT7JlE1z6KZFN4zAaPhXtWNIRdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E5nowDQx2hz6h1Oq56yTcaTPYgCFQhF1Wp6/Ebw4Ly0=;
- b=LndurRNOoEGK+wAewXU5WJMU7co1cKThtACOmmVN4glLJHbDdm/Nc7oykqqfFgK/W1neEeFQ6J1wh6KLSgSRR6Bv38/ZQxlPtoQncXJTvEl90LXGmL7wRC2DZd+5sXNiRxVBoFUpwsHKp8Z9g7VKcbXQ596zHMUWBKEyRZeL+MWKm2CJ9jGF9YN8Q7aIoQlfryurFDEoSIkv4dVCugDNVgOi2qaVOSUyJlqmELUHtvl883jWgMGjqN97hyD2Xy34ANmDb0zaZiowhNUEcHJTbfclHaKFYHuaeOfiQJue4GGvIoaDIT937kKTgEaCkh2onfLLkdwdeMDc2SVJXUKn2g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E5nowDQx2hz6h1Oq56yTcaTPYgCFQhF1Wp6/Ebw4Ly0=;
- b=VkkzPF0wjwmVtQ6swvGhvZW+UnWnaEdVzLHwEs9l2YVrB3oEfBCoG5HHNMUXLYS2zvRsCudRaxSOiFEp0DYCSoPZWvhDnLK3GLNd8Kobs5+aG4nsJ1KO6J7TyrC5dwvqmu0cNCMdx4Lwz1onxn06XVEaiN1EOuR+/rZ3Wc9776w=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Julia Zhang <julia.zhang@amd.com>
-To: Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, Antonio Caggiano
-	<antonio.caggiano@collabora.com>, "Dr . David Alan Gilbert"
-	<dgilbert@redhat.com>, Robert Beckett <bob.beckett@collabora.com>,
-	<qemu-devel@nongnu.org>
-CC: <xen-devel@lists.xenproject.org>, Alex Deucher
-	<alexander.deucher@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?=
-	<christian.koenig@amd.com>, Xenia Ragiadakou <burzalodowa@gmail.com>,
-	"Honglei Huang" <honglei1.huang@amd.com>, Julia Zhang <julia.zhang@amd.com>,
-	"Chen Jiqian" <Jiqian.Chen@amd.com>
-Subject: [PATCH v2 0/1]  Implementation of resource_query_layout
-Date: Thu, 21 Dec 2023 18:23:41 +0800
-Message-ID: <20231221102342.4022630-1-julia.zhang@amd.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 3021660c-9feb-11ee-98eb-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1703154296; x=1703759096; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=jQooth6BrfgYO72SFJtU9T6nvZk+lUA6jnXDfawcbPI=;
+        b=oSZIC28yXG5H+qKFVpumLGnsMa/sRhdWtLKLLFzV2ra+JO2V3fYvfusMHIcEhnEyh9
+         MtubaDiEemf0X1QKCejcH+1EG0S3rfb2vlXR3Ljqq9qkHjkrSwxZKvyuk8VCVTxfksXp
+         iuVQeb1fmwD871Ykde1IcQsUjdZ7aiZ7I7VRc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1703154296; x=1703759096;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=jQooth6BrfgYO72SFJtU9T6nvZk+lUA6jnXDfawcbPI=;
+        b=YpBPEDFuYYT8T4k8gnOHLd9VPL8e5uBvlxbJXmSNNqrZaj6meP1gRf5CI5kke8Ank5
+         BiqgyWGRMYV1wknYKxvYpal/kqUX0YqysZQhFX6gQ9wlhDHQXHxpJX7rNINUZPhssija
+         WV5RQdr0saZcvUfkkhNktHQTGA6dV2DaQ8m6rAehyzEId9Tx5gsP6BHi2ORNgUSCB9Y4
+         A4K71ec9xh5r4stTj1AxEF/0QgH9qGWvgsgBqIiZxneV5KzDyc7kg8M03wP0kDi1NBiQ
+         meGBD05Mrx/0BqCt+Sq6nracZdiDvY3Bod8FdXhguFyvz2xuB3yiNqGjcOaUweWs5Cdi
+         OnPQ==
+X-Gm-Message-State: AOJu0YyuF5jNx1LTYb+WC+cF32T8nUdioVBM3qOvhu5N1zP5BMRuIZf0
+	aq1wc2sdtbVp7lEI3jLTKxNqyg==
+X-Google-Smtp-Source: AGHT+IGZmz1t+LeFSd9kTYvn55s96oYtCrDK9indXCVqEi1/CD/H0/Y0J5xfYYeqVs2jdLtoP90ymg==
+X-Received: by 2002:a05:600c:3592:b0:40c:4ca8:6aca with SMTP id p18-20020a05600c359200b0040c4ca86acamr674966wmq.109.1703154296538;
+        Thu, 21 Dec 2023 02:24:56 -0800 (PST)
+Message-ID: <6d8eb59c-5824-47b3-b2d0-24f1db96b367@citrix.com>
+Date: Thu, 21 Dec 2023 10:24:55 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] x86/amd: extend CPU errata #1474 affected models
+Content-Language: en-GB
+To: Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
+References: <20231221100831.25570-1-roger.pau@citrix.com>
+ <213dc008-f8eb-4313-8b3e-17fc435416e1@citrix.com>
+ <978e4603-f20b-481f-97bd-2a84de0800c8@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <978e4603-f20b-481f-97bd-2a84de0800c8@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003446:EE_|SJ0PR12MB8140:EE_
-X-MS-Office365-Filtering-Correlation-Id: d9a8e435-a527-4d31-1a09-08dc020f04ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	5OdeR9R7YbD9DepVSYRhxFcvqDa1W2Nrru5F7yKMgZs/Ob3g0EcSjfl2QqsW331rhVCuMZR91O+7ShyeXABE5wD3NL9T9tPo89qTkKc9j1PtW4kDXznqbqLzOvLYG5oWBww05C5+IdW8kvmI4D9/oCXvBWyoIRTa+49IxbV1O5GZMuLr5TjnnRk2YfyEwbpFtYJS8Y+0k23Ie0d10IxlbI/ZUvG0wIyM4fe3KwgUchj/jcy0IqjXPi0ZgWHRcP9ZMNSpxLzwbeCP/W5hd6D8Fx8NPTUh61W51NzYeEOx98KQ7CvMoMJ5jHv5dfZOep608MVIDnjar9qAf2tLfrmWuujyL4zSpq86QNwxferFYRvVCsvnp4gJ4PXjHaojfUwjzWKF7NMLq8B2WYTBIRBWiDYWmb7HOEU7stege1ZU4Ngoae4EA2iQmsfFG2Ifkc3Kd6iRKS2M03HlvgYHthhBTcmymK5qknGoih84pACEvhPP9OKkGgnX9yJctIO8ye3ZEKUeICs1vat5pxpNr7jqhZ/cXEYGgpiWYsGJsDBnv+q5zIbnd46izhBcf8XFn0iyoR6aUvADXtP7xWvoOplEiH3zL4OSX2Xz7iiL52Bj2f0sW1mrvR2tioqNN/qDwb+H9u4A4+hV4+j2/hwzg5YCjY2PZ+SsVdUFoKsBD7XmEq5tliqw/j1Rl+je7ztOkVqaWBbD802Gor6b9QKeewxU/Pvarz+meXfnPubMZfsJhEMlU0p4vkmuBLJgfspn3Smu0cjXzCSvO0HLvJsaj8uiNg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(136003)(39860400002)(376002)(230922051799003)(186009)(64100799003)(82310400011)(1800799012)(451199024)(36840700001)(40470700004)(46966006)(8676002)(4326008)(8936002)(26005)(2906002)(40480700001)(478600001)(316002)(40460700003)(44832011)(6666004)(70586007)(54906003)(110136005)(70206006)(7696005)(5660300002)(86362001)(36860700001)(47076005)(1076003)(81166007)(82740400003)(2616005)(7416002)(36756003)(336012)(356005)(426003)(41300700001)(16526019)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Dec 2023 10:24:30.5204
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d9a8e435-a527-4d31-1a09-08dc020f04ad
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS2PEPF00003446.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8140
 
-Hi all,
+On 21/12/2023 10:20 am, Jan Beulich wrote:
+> On 21.12.2023 11:17, Andrew Cooper wrote:
+>> On 21/12/2023 10:08 am, Roger Pau Monne wrote:
+>>> Errata #1474has now been extended to cover models from family 17h ranges
+>> Extra space needed.  Can be fixed on commit.
+> Also (not just here) - isn't it "erratum" when we talk of just one?
 
-Sorry to late reply. This is v2 of the implementation of
-resource_query_layout. This adds a new ioctl to let guest query information
-of host resource, which is originally from Daniel Stone. We add some
-changes to support query the correct stride of host resource before it's
-created, which is to support dGPU prime feature. Without correct stride,
-dGPU can not blit data to virtio iGPU correctly. 
+Good point, yes.
 
-Changes from v1 to v2:
--Squash two patches to a single patch. 
--A small modification of VIRTIO_GPU_F_RESOURCE_QUERY_LAYOUT
+I'll fix both.  (I'm just collecting some patches for a Gitlab CI run on
+Juergen's patches, and I'll include this one.)
 
-
-Below is description of v1:
-This add implementation of resource_query_layout to get the information of
-how the host has actually allocated the buffer. This function is now used
-to query the stride for guest linear resource for dGPU prime on guest VMs.
-
-v1 of qemu side:
-https:
-//lore.kernel.org/qemu-devel/20231110074027.24862-1-julia.zhang@amd.com/T/#t
-
-v1 of kernel side:
- https:
-//lore.kernel.org/xen-devel/20231110074027.24862-1-julia.zhang@amd.com/T/#t
-
-Daniel Stone (1):
-  virgl: Implement resource_query_layout
-
- hw/display/virtio-gpu-base.c                |  4 +++
- hw/display/virtio-gpu-virgl.c               | 40 +++++++++++++++++++++
- include/hw/virtio/virtio-gpu-bswap.h        |  7 ++++
- include/standard-headers/linux/virtio_gpu.h | 30 ++++++++++++++++
- meson.build                                 |  4 +++
- 5 files changed, 85 insertions(+)
-
--- 
-2.34.1
-
+~Andrew
 
