@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6861AC46CD2
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:19:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.659495.1029180 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D8CC41535
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:19:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.659496.1029190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhJ8-0001Kp-Ei; Fri, 22 Dec 2023 15:19:26 +0000
+	id 1rGhJD-0001cM-Mp; Fri, 22 Dec 2023 15:19:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 659495.1029180; Fri, 22 Dec 2023 15:19:26 +0000
+Received: by outflank-mailman (output) from mailman id 659496.1029190; Fri, 22 Dec 2023 15:19:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhJ8-0001Ki-Bk; Fri, 22 Dec 2023 15:19:26 +0000
-Received: by outflank-mailman (input) for mailman id 659495;
- Fri, 22 Dec 2023 15:19:25 +0000
+	id 1rGhJD-0001cF-JQ; Fri, 22 Dec 2023 15:19:31 +0000
+Received: by outflank-mailman (input) for mailman id 659496;
+ Fri, 22 Dec 2023 15:19:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=buqB=IB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rGhDl-0007Ie-I9
- for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:53 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
+ id 1rGhDr-0007Ie-JZ
+ for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:59 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b73781d9-a0dc-11ee-98eb-6d05b1d4d9a1;
- Fri, 22 Dec 2023 16:13:52 +0100 (CET)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50e23a4df33so2371709e87.2
- for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:52 -0800 (PST)
+ id ba924920-a0dc-11ee-98eb-6d05b1d4d9a1;
+ Fri, 22 Dec 2023 16:13:57 +0100 (CET)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-50e62c1245eso1805049e87.1
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:57 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.50
+ j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 07:13:51 -0800 (PST)
+ Fri, 22 Dec 2023 07:13:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b73781d9-a0dc-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: ba924920-a0dc-11ee-98eb-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703258031; x=1703862831; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1703258037; x=1703862837; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=n4dajvonh7p2dNVDQKVaYgfkmYnC6XrrNf5FliBDwEk=;
-        b=ODjufzVW60is2uDmnbGJIqgytnGqAyaTeA2MHPATqdVd9R3MSDSX8jW3zCJWIDpR6b
-         ug9gMs/ClY5ZxmyKq8hOzpZ3nbVa7paU0W8keKXD9JpfiUkJpfGgUbeTb12SpJzEANMS
-         cxUKzTxPVu3X+lkAbNuTXxR3918iFRhNRXyCAgwRw5G53hJUO5sGBz8/O63qybI7Hz1u
-         08gr/Zv5ST716X4OVGE+9dZPPLt8XbmBYRA9AWrIiyReQUSLx27N2Frk6Se+ld7cCQ+U
-         ujLQHc432mUUEi35cNv7FOFFKSgHtorAEszcStBWJUTuL54QzBqeP0GFkLSN6/kAL2HV
-         qEBA==
+        bh=3NW4PP+xPCMRJ4FuaFoJrjezV0TKnIJLshslvX7panQ=;
+        b=m2zyDF7WCk/RR1P1nHCOsqWyPd/3v27oJ0hCZfyTMiowCcGAFhagPSykvxbJS8Q9Za
+         8yTeS90AMI2z09lDXQOuzBcXvSQxPxH/lthmrc2Vfn0rVRAL2s+ZpvMQBQPJ+8ksfPTl
+         Ij/Nuop/bjOtovER9ILAoDVzzkaTe3ZK9KvLxi470Ebl0t0ksn1AFyG2sQKgMjsWduMi
+         6ZW4v9VZDTqYHcEk1aIdS4IfRZNzuanrJO4Xl1ZMK2lFUSEhUvxCh8+39IJzshqj/BTY
+         k4PiFNxT/LUp1ZB2FkPSAU4eCvwPLFdt2iOMgQYv4lvyblmh75wfPHAYQvXywmB77QY4
+         9QYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703258031; x=1703862831;
+        d=1e100.net; s=20230601; t=1703258037; x=1703862837;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=n4dajvonh7p2dNVDQKVaYgfkmYnC6XrrNf5FliBDwEk=;
-        b=ll1edS6cy/N17TI3CCag+JoP22wTXRbQ9FdskwE63xX5CvnH/xhIoSsmm7JzpTBuwX
-         7cF49cMHDO41mQZ44WXNC9A+Xb0RuM0/ubvPzVLjLYFnwgdtfNUppo/4nu3Jcv05Yu/W
-         Ckm38z8p/Nr7ocFoGaqrI31lxRL34eqorCfTOkuTskVrMovmEqGTdFGD+se0tp7FTtoQ
-         1NU1ZR2yPQea3f3GPMkxug/GuJKZ+b18WZOjmo6fh+24scSW/WNLh3ko48igc18f0/XM
-         8OBSiVCMCVSy98303SssAIkHDIUUw2IoR9pkX+K9jlg7eVha2V9ONvpBES1ntm+/Bj/K
-         atFA==
-X-Gm-Message-State: AOJu0YxkWpwMklX8HWueSx2DXX936r5rlZjRIWaFe7FwMm30tAqYQVj9
-	7xH40wvIjccGL5PjvnI3DWueq8jh1vs=
-X-Google-Smtp-Source: AGHT+IFep3VFmnA/8jd+wAqjCvmLQK9PUeHJroMGSpFKvtKvD1wPEOIRkMbFa3HiLiY5Jdz1I7H3Aw==
-X-Received: by 2002:a05:6512:144:b0:50e:3e3d:217c with SMTP id m4-20020a056512014400b0050e3e3d217cmr735545lfo.84.1703258031537;
-        Fri, 22 Dec 2023 07:13:51 -0800 (PST)
+        bh=3NW4PP+xPCMRJ4FuaFoJrjezV0TKnIJLshslvX7panQ=;
+        b=OnzptD7bwdNOPmarbUkgF8BRGGhZTeBH4oHATDEiUfzw7e9YKNoAl59R2Fr6nGYr/y
+         jfEXxDg/UVXrKf3lI5ZZfTphO9HdyNNKxFzeUGXT+mTwd4bnjLMDyps7oQK/KJ+/e0l8
+         juCVOdHfaaGyXQnvoilz1dvi4bMFwWPi6mWFWqX/5cgoq/rHcoY1xj9utqhYx/esV3/y
+         B3H1moDl1QtsxUR0oHwfX9X4hI6N1gjtAeB4n6aZ+baQsuAciX9IP7I0aPehZX6i5+af
+         m6yemzsfM7AxomEMruIykd+mxJqBgiSaIb7dYjaq+DCqqSJG84wIwQ4eO8JJljoDrnUu
+         rs7w==
+X-Gm-Message-State: AOJu0Yxg4cY399fo31Sk31FqW7lK3IotiJJ5Jsitkk3rK02mCarqS92P
+	kxKGMgDcuKA8guESd9CkkWwgRuCTsno=
+X-Google-Smtp-Source: AGHT+IGfSQcAwFKGAgxwIoRm6aEPBfs2H1i+KvqqdiT1wZX7GIlLMfsZcM7TsXl/53HMrWbNoNBvdw==
+X-Received: by 2002:a05:6512:36d0:b0:50e:6d47:11dc with SMTP id e16-20020a05651236d000b0050e6d4711dcmr244252lfs.4.1703258037196;
+        Fri, 22 Dec 2023 07:13:57 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,150 +88,71 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 27/34] xen/riscv: define an address of frame table
-Date: Fri, 22 Dec 2023 17:13:11 +0200
-Message-ID: <d0a357e3b9597479b539e88915731b3f15489c04.1703255175.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 33/34] xen/riscv: enable full Xen build
+Date: Fri, 22 Dec 2023 17:13:17 +0200
+Message-ID: <160c29e5733ac52965b29f52bc21774710a69816.1703255175.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1703255175.git.oleksii.kurochko@gmail.com>
 References: <cover.1703255175.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Also, the patch adds some helpful macros that assist in avoiding
-the redefinition of memory layout for each MMU mode.
-
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V3:
- - drop OFFSET_BITS, and use PAGE_SHIFT instead.
- - code style fixes.
- - add comment how macros are useful.
- - move all memory related layout definitions close to comment with memory layout description.
- - make memory layout description generic for any MMU mode.
+ - Reviewed-by: Jan Beulich <jbeulich@suse.com>
+ - unrealted change dropped in tiny64_defconfig
 ---
 Changes in V2:
  - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/config.h | 85 +++++++++++++++++++----------
- 1 file changed, 55 insertions(+), 30 deletions(-)
+ xen/arch/riscv/Makefile | 16 +++++++++++++++-
+ xen/arch/riscv/arch.mk  |  4 ----
+ 2 files changed, 15 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index f0544c6a20..fb9fc9daaa 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -6,6 +6,14 @@
- #include <xen/const.h>
- #include <xen/page-size.h>
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 5523191bb7..c10d43c7e5 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -11,10 +11,24 @@ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
  
-+#ifdef CONFIG_RISCV_64
-+#define CONFIG_PAGING_LEVELS 3
-+#define RV_STAGE1_MODE SATP_MODE_SV39
-+#else
-+#define CONFIG_PAGING_LEVELS 2
-+#define RV_STAGE1_MODE SATP_MODE_SV32
-+#endif
-+
- /*
-  * RISC-V64 Layout:
-  *
-@@ -22,25 +30,56 @@
-  *
-  * It means that:
-  *   top VA bits are simply ignored for the purpose of translating to PA.
-+#endif
-  *
-- * ============================================================================
-- *    Start addr    |   End addr        |  Size  | Slot       |area description
-- * ============================================================================
-- * FFFFFFFFC0800000 |  FFFFFFFFFFFFFFFF |1016 MB | L2 511     | Unused
-- * FFFFFFFFC0600000 |  FFFFFFFFC0800000 |  2 MB  | L2 511     | Fixmap
-- * FFFFFFFFC0200000 |  FFFFFFFFC0600000 |  4 MB  | L2 511     | FDT
-- * FFFFFFFFC0000000 |  FFFFFFFFC0200000 |  2 MB  | L2 511     | Xen
-- *                 ...                  |  1 GB  | L2 510     | Unused
-- * 0000003200000000 |  0000007F80000000 | 309 GB | L2 200-509 | Direct map
-- *                 ...                  |  1 GB  | L2 199     | Unused
-- * 0000003100000000 |  00000031C0000000 |  3 GB  | L2 196-198 | Frametable
-- *                 ...                  |  1 GB  | L2 195     | Unused
-- * 0000003080000000 |  00000030C0000000 |  1 GB  | L2 194     | VMAP
-- *                 ...                  | 194 GB | L2 0 - 193 | Unused
-- * ============================================================================
-+ *       SATP_MODE_SV32   | SATP_MODE_SV39   | SATP_MODE_SV48   | SATP_MODE_SV57
-+ *      ==================|==================|==================|=================
-+ * BA0 | FFFFFFFFFFE00000 | FFFFFFFFC0000000 | FFFFFF8000000000 | FFFF000000000000
-+ * BA1 | 0000000019000000 | 0000003200000000 | 0000640000000000 | 00C8000000000000
-+ * BA2 | 0000000018800000 | 0000003100000000 | 0000620000000000 | 00C4000000000000
-+ * BA3 | 0000000018400000 | 0000003080000000 | 0000610000000000 | 00C2000000000000
-  *
--#endif
-+ * ===============================================================================
-+ * Start addr     |   End addr          |  Size  | Root PT slot | Area description
-+ * ===============================================================================
-+ * BA0 + 0x800000 |  FFFFFFFFFFFFFFFF   |1016 MB |     511      | Unused
-+ * BA0 + 0x400000 |  BA0 + 0x800000     |  2 MB  |     511      | Fixmap
-+ * BA0 + 0x200000 |  BA0 + 0x400000     |  4 MB  |     511      | FDT
-+ * BA0            |  BA0 + 0x200000     |  2 MB  |     511      | Xen
-+ *                 ...                  |  1 GB  |     510      | Unused
-+ * BA1 + 0x000000 |  BA1 + 0x4D80000000 | 309 GB |   200-509    | Direct map
-+ *                 ...                  |  1 GB  |     199      | Unused
-+ * BA2 + 0x000000 |  BA2 + 0xC0000000   |  3 GB  |   196-198    | Frametable
-+ *                 ...                  |  1 GB  |     195      | Unused
-+ * BA3 + 0x000000 |  BA3 + 0x40000000   |  1 GB  |     194      | VMAP
-+ *                 ...                  | 194 GB |   0 - 193    | Unused
-+ * ===============================================================================
-  */
-+#define VPN_BITS    (9)
-+
-+#define HYP_PT_ROOT_LEVEL (CONFIG_PAGING_LEVELS - 1)
-+
-+#ifdef CONFIG_RISCV_64
-+
-+#define SLOTN_ENTRY_BITS        (HYP_PT_ROOT_LEVEL * VPN_BITS + PAGE_SHIFT)
-+#define SLOTN(slot)             (_AT(vaddr_t, slot) << SLOTN_ENTRY_BITS)
-+#define SLOTN_ENTRY_SIZE        SLOTN(1)
-+
-+#define XEN_VIRT_START 0xFFFFFFFFC0000000 /* (_AC(-1, UL) + 1 - GB(1)) */
-+
-+#define FRAMETABLE_VIRT_START   SLOTN(196)
-+#define FRAMETABLE_SIZE         GB(3)
-+#define FRAMETABLE_NR           (FRAMETABLE_SIZE / sizeof(*frame_table))
-+#define FRAMETABLE_VIRT_END     (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
-+
-+#define VMAP_VIRT_START         SLOTN(194)
-+#define VMAP_VIRT_SIZE          GB(1)
-+
-+#else
-+#error "RV32 isn't supported"
-+#endif
-+
-+#define HYPERVISOR_VIRT_START XEN_VIRT_START
+ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+-	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) -o $@
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(objtree)/common/symbols-dummy.o -o $(dot-target).0
++	$(NM) -pa --format=sysv $(dot-target).0 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).0.S
++	$(MAKE) $(build)=$(@D) $(dot-target).0.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
++	    $(dot-target).0.o -o $(dot-target).1
++	$(NM) -pa --format=sysv $(dot-target).1 \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
++		> $(dot-target).1.S
++	$(MAKE) $(build)=$(@D) $(dot-target).1.o
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
++	    $(dot-target).1.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
+ 		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		> $@.map
++	rm -f $(@D)/.$(@F).[0-9]*
  
- #if defined(CONFIG_RISCV_64)
- # define LONG_BYTEORDER 3
-@@ -77,24 +116,10 @@
-   name:
- #endif
+ $(obj)/xen.lds: $(src)/xen.lds.S FORCE
+ 	$(call if_changed_dep,cpp_lds_S)
+diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
+index 8403f96b6f..12b1673fae 100644
+--- a/xen/arch/riscv/arch.mk
++++ b/xen/arch/riscv/arch.mk
+@@ -13,7 +13,3 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
+ # -mcmodel=medlow would force Xen into the lower half.
  
--#ifdef CONFIG_RISCV_64
--#define XEN_VIRT_START 0xFFFFFFFFC0000000 /* (_AC(-1, UL) + 1 - GB(1)) */
--#else
--#error "RV32 isn't supported"
--#endif
+ CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
 -
- #define SMP_CACHE_BYTES (1 << 6)
- 
- #define STACK_SIZE PAGE_SIZE
- 
--#ifdef CONFIG_RISCV_64
--#define CONFIG_PAGING_LEVELS 3
--#define RV_STAGE1_MODE SATP_MODE_SV39
--#else
--#define CONFIG_PAGING_LEVELS 2
--#define RV_STAGE1_MODE SATP_MODE_SV32
--#endif
--
- #define IDENT_AREA_SIZE 64
- 
- #endif /* __RISCV_CONFIG_H__ */
+-# TODO: Drop override when more of the build is working
+-override ALL_OBJS-y = arch/$(SRCARCH)/built_in.o
+-override ALL_LIBS-y =
 -- 
 2.43.0
 
