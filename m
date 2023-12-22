@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5481C46CD2
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:24:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.659535.1029230 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05FF3C41535
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:24:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.659539.1029240 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhNb-0005aP-0M; Fri, 22 Dec 2023 15:24:03 +0000
+	id 1rGhO8-0006Ap-90; Fri, 22 Dec 2023 15:24:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 659535.1029230; Fri, 22 Dec 2023 15:24:02 +0000
+Received: by outflank-mailman (output) from mailman id 659539.1029240; Fri, 22 Dec 2023 15:24:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhNa-0005aI-Ta; Fri, 22 Dec 2023 15:24:02 +0000
-Received: by outflank-mailman (input) for mailman id 659535;
- Fri, 22 Dec 2023 15:24:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rGhO8-0006Ah-6P; Fri, 22 Dec 2023 15:24:36 +0000
+Received: by outflank-mailman (input) for mailman id 659539;
+ Fri, 22 Dec 2023 15:24:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=buqB=IB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rGhDs-0000EM-1v
- for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:14:00 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b97f9e37-a0dc-11ee-9b0f-b553b5be7939;
- Fri, 22 Dec 2023 16:13:56 +0100 (CET)
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50e6ee5b7ffso192009e87.3
- for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:56 -0800 (PST)
+ id 1rGhDh-0007Ie-HZ
+ for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:49 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b477d9f3-a0dc-11ee-98eb-6d05b1d4d9a1;
+ Fri, 22 Dec 2023 16:13:47 +0100 (CET)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50e4a637958so2426131e87.2
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:47 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.54
+ j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 07:13:54 -0800 (PST)
+ Fri, 22 Dec 2023 07:13:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,51 +46,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b97f9e37-a0dc-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: b477d9f3-a0dc-11ee-98eb-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703258035; x=1703862835; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1703258026; x=1703862826; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=frli1aD+HGGze4OEMxoJ745JDQDclWlmSm+0uAYhNCA=;
-        b=fr6dBkE1qS/XjHXGqx5HpFRMFuEohCBx4XiQkmmwBdhAQkQCvz740fIe50uRAudmJe
-         33/HgSJo8zJWqth9IzsXM57R4icHdgtRtKqWLjiZha7VoIgorahawtrWrdpkRVplNt+q
-         +lyuobcZAQmJp/+xZHRfoo7QKuGNXkyG9DPSPPYfdvrz52Ykz6LoBJUk835vW2R6rlTT
-         OL/QFCVHbrMZXiLaqQmOGtlVRGsEWHEmHsYcuEnecs4bw6v4y2/o3P/ZEFUyN5OT4qNY
-         KYb520uG8FfP+6TEenvTzBLNpHxQQ+nbWyVSoq7W1Z9dlPRFLPug0z4OnLL8Sur73JzI
-         nDYw==
+        bh=X2XgyDBcB0wcGp/eGfwcZrl9kaDJvnjyiwZy9l3W62o=;
+        b=Fg1lQOU9rBjX8r+NJIeKiH7DSkZrrf8YZJshrxyjoRGXkqZ05HblmECNlCCUm5+1Zs
+         oPJMT+dHfwtpZd7xlGFrcvVTYJ9BxXtCKsz7/u6485MQOstOS5V7bVk0DVj0yRflioDU
+         FxrElPfGN4KOsUiCt5KLJ0L2G/O5r5UbAmnQgnoBtZHtuFS20WiKUGvypQbaVtxT3/iL
+         4HyQLiulEjQ9SvYWwHUfmRUwxa0HzkSH3JpAgTI+rbVH++4F3v2IytA9rk49Eeu9wZfP
+         nSR+tP+5yiM/52Q5zDgM/DOEm7/Wl974JvyU2ABv9s9z8A3RwhyC0z6Un8qz3m7yqeGg
+         /HDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703258035; x=1703862835;
+        d=1e100.net; s=20230601; t=1703258026; x=1703862826;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=frli1aD+HGGze4OEMxoJ745JDQDclWlmSm+0uAYhNCA=;
-        b=duhpVUAAx7XF9pvk7Rgh1y29RBuLeAW6hzfXl0E4OJvst4CXrkcLnfPH2vgz0KbVUm
-         wLQ2wt/xe2CJm0wlXTrQ+wGYx5BqEVBVwsG8Yq8xo9+1cUjxJRxt9YkYLlNxZeoC3Lo2
-         u7pug+49kawTpJe16FME/P2xQAo9x27RYRHSiaPyKWymywiyuwo+l40hj3MXHR1I3oXT
-         dtFo5e9deR+fNW+GEYb1UX0gQxRsG2h/v6oPvTZ9qiC6mn84dF1WL/1hOT1AZ9jDFrVF
-         uoiu4qfoodYx/InoJxN/WT9i+58lHfWYtTLX5Tgf8VDzvPXh9/8VCsSqkAdpkpeILgUB
-         OEKA==
-X-Gm-Message-State: AOJu0YxzGsM6xMkJa4d/YIqDZFuc1PYODRjDF9zG+5LOPwi2CEt+rnXn
-	I2dsdS5+cv6B99UoyMFuqsZoZNLDba0=
-X-Google-Smtp-Source: AGHT+IFZCNPquwefqv8QO+Do6E1jJO4MSuvYOlKcjviH7UvUQx1NL8Z7lBrk6DEahlfXPm4tCrV9AA==
-X-Received: by 2002:a05:6512:ea8:b0:50e:34df:7530 with SMTP id bi40-20020a0565120ea800b0050e34df7530mr1256572lfb.32.1703258035353;
-        Fri, 22 Dec 2023 07:13:55 -0800 (PST)
+        bh=X2XgyDBcB0wcGp/eGfwcZrl9kaDJvnjyiwZy9l3W62o=;
+        b=Y/+U26X/1s0MRdsNDerK3KvaVEY5eI7Fbc2RUg2ytkW1KC9N/ALhoOZ2+6NQEvAtI2
+         /ad/R14Ct7MGNIZ6+dYr4MT2L+Ru3krecvsfLCOX2fuldmeMTZaelXEX2D3H+lJnZ1gL
+         L1hud6EvDwYziBugDUd3Ko4yQfjiqOR52db+b01B5z0VNWCOCBwevzlY3236NcywI+rh
+         mc313LUyEkVZKZgiVEw7sZnYTak1XdGd7QiEpbezMDQIKU8JU2ICg7Y/VM8BRYb87I4V
+         c3cVjWcCFFVNAE5v4j9p1e1sN/ta3gt9wdBQCeJJ0sieFOhTby42VhY3L6FKFOWPtLaX
+         Nz+A==
+X-Gm-Message-State: AOJu0Yy9yer93aI3C4qbXvpcePh7Qz/CApG7jFtSZmn/pLor6H+ywcST
+	bYxz8aylVdBLvFMvQXpZbroQo7WY3K4=
+X-Google-Smtp-Source: AGHT+IFXlcx/J+Wls40o8XEL6UZ9HqMfyy2MVVMj21ySD20VMnVDQq8+43xyNlSyIR/iyL3GdDY2FQ==
+X-Received: by 2002:a05:6512:2185:b0:50e:3082:1afe with SMTP id b5-20020a056512218500b0050e30821afemr340432lft.22.1703258026484;
+        Fri, 22 Dec 2023 07:13:46 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 31/34] xen/riscv: add minimal stuff to mm.h to build full Xen
-Date: Fri, 22 Dec 2023 17:13:15 +0200
-Message-ID: <4411f6af38586074b347cd6005f19f9c670faa74.1703255175.git.oleksii.kurochko@gmail.com>
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v3 21/34] xen/riscv: introduce p2m.h
+Date: Fri, 22 Dec 2023 17:13:05 +0200
+Message-ID: <c3b1f24aea1ba01505697717b240c8d036abfee1.1703255175.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1703255175.git.oleksii.kurochko@gmail.com>
 References: <cover.1703255175.git.oleksii.kurochko@gmail.com>
@@ -100,301 +95,141 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V3:
+ - add SPDX
+ - drop unneeded for now p2m types.
+ - return false in all functions implemented with BUG() inside.
  - update the commit message
- - introduce DIRECTMAP_VIRT_START.
- - drop changes related pfn_to_paddr() and paddr_to_pfn as they were remvoe in
-   [PATCH v2 32/39] xen/riscv: add minimal stuff to asm/page.h to build full Xen
- - code style fixes.
- - drop get_page_nr  and put_page_nr as they don't need for time being
- - drop CONFIG_STATIC_MEMORY related things
- - code style fixes
 ---
 Changes in V2:
- - define stub for arch_get_dma_bitsize(void)
+ - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/config.h |   2 +
- xen/arch/riscv/include/asm/mm.h     | 248 ++++++++++++++++++++++++++++
- 2 files changed, 250 insertions(+)
+ xen/arch/ppc/include/asm/p2m.h   |   3 +-
+ xen/arch/riscv/include/asm/p2m.h | 102 +++++++++++++++++++++++++++++++
+ 2 files changed, 103 insertions(+), 2 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/p2m.h
 
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index fb9fc9daaa..400309f4ef 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -67,6 +67,8 @@
+diff --git a/xen/arch/ppc/include/asm/p2m.h b/xen/arch/ppc/include/asm/p2m.h
+index 25ba054668..3bc05b7c05 100644
+--- a/xen/arch/ppc/include/asm/p2m.h
++++ b/xen/arch/ppc/include/asm/p2m.h
+@@ -50,8 +50,7 @@ static inline void memory_type_changed(struct domain *d)
+ static inline int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
+                                                         unsigned int order)
+ {
+-    BUG_ON("unimplemented");
+-    return 1;
++    return -EOPNOTSUPP;
+ }
  
- #define XEN_VIRT_START 0xFFFFFFFFC0000000 /* (_AC(-1, UL) + 1 - GB(1)) */
- 
-+#define DIRECTMAP_VIRT_START    SLOTN(200)
+ static inline int guest_physmap_add_entry(struct domain *d,
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+new file mode 100644
+index 0000000000..d270ef6635
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -0,0 +1,102 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_RISCV_P2M_H__
++#define __ASM_RISCV_P2M_H__
 +
- #define FRAMETABLE_VIRT_START   SLOTN(196)
- #define FRAMETABLE_SIZE         GB(3)
- #define FRAMETABLE_NR           (FRAMETABLE_SIZE / sizeof(*frame_table))
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index 57026e134d..14fce72fde 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -3,8 +3,251 @@
- #ifndef _ASM_RISCV_MM_H
- #define _ASM_RISCV_MM_H
- 
-+#include <public/xen.h>
-+#include <xen/pdx.h>
-+#include <xen/types.h>
++#include <asm/page-bits.h>
 +
-+#include <asm/page.h>
- #include <asm/page-bits.h>
- 
-+#define paddr_to_pdx(pa)    mfn_to_pdx(maddr_to_mfn(pa))
-+#define gfn_to_gaddr(gfn)   pfn_to_paddr(gfn_x(gfn))
-+#define gaddr_to_gfn(ga)    _gfn(paddr_to_pfn(ga))
-+#define mfn_to_maddr(mfn)   pfn_to_paddr(mfn_x(mfn))
-+#define maddr_to_mfn(ma)    _mfn(paddr_to_pfn(ma))
-+#define vmap_to_mfn(va)     maddr_to_mfn(virt_to_maddr((vaddr_t)va))
-+#define vmap_to_page(va)    mfn_to_page(vmap_to_mfn(va))
-+#define paddr_to_pdx(pa)    mfn_to_pdx(maddr_to_mfn(pa))
-+#define gfn_to_gaddr(gfn)   pfn_to_paddr(gfn_x(gfn))
-+#define gaddr_to_gfn(ga)    _gfn(paddr_to_pfn(ga))
-+#define mfn_to_maddr(mfn)   pfn_to_paddr(mfn_x(mfn))
-+#define maddr_to_mfn(ma)    _mfn(paddr_to_pfn(ma))
-+#define vmap_to_mfn(va)     maddr_to_mfn(virt_to_maddr((vaddr_t)va))
-+#define vmap_to_page(va)    mfn_to_page(vmap_to_mfn(va))
++#define paddr_bits PADDR_BITS
 +
-+#define virt_to_maddr(va) ((paddr_t)((vaddr_t)(va) & PADDR_MASK))
-+#define maddr_to_virt(pa) ((void *)((paddr_t)(pa) | DIRECTMAP_VIRT_START))
++/*
++ * List of possible type for each page in the p2m entry.
++ * The number of available bit per page in the pte for this purpose is 4 bits.
++ * So it's possible to only have 16 fields. If we run out of value in the
++ * future, it's possible to use higher value for pseudo-type and don't store
++ * them in the p2m entry.
++ */
++typedef enum {
++    p2m_invalid = 0,    /* Nothing mapped here */
++    p2m_ram_rw,         /* Normal read/write guest RAM */
++} p2m_type_t;
 +
-+/* Convert between Xen-heap virtual addresses and machine frame numbers. */
-+#define __virt_to_mfn(va) (virt_to_maddr(va) >> PAGE_SHIFT)
-+#define __mfn_to_virt(mfn) maddr_to_virt((paddr_t)(mfn) << PAGE_SHIFT)
++#include <xen/p2m-common.h>
 +
-+/* Convert between Xen-heap virtual addresses and page-info structures. */
-+static inline struct page_info *virt_to_page(const void *v)
++static inline int get_page_and_type(struct page_info *page,
++                                    struct domain *domain,
++                                    unsigned long type)
++{
++    BUG();
++    return -EINVAL;
++}
++
++/* Look up a GFN and take a reference count on the backing page. */
++typedef unsigned int p2m_query_t;
++#define P2M_ALLOC    (1u<<0)   /* Populate PoD and paged-out entries */
++#define P2M_UNSHARE  (1u<<1)   /* Break CoW sharing */
++
++static inline struct page_info *get_page_from_gfn(
++    struct domain *d, unsigned long gfn, p2m_type_t *t, p2m_query_t q)
 +{
 +    BUG();
 +    return NULL;
 +}
 +
-+/*
-+ * We define non-underscored wrappers for above conversion functions.
-+ * These are overriden in various source files while underscored version
-+ * remain intact.
-+ */
-+#define virt_to_mfn(va)     __virt_to_mfn(va)
-+#define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
-+
-+struct page_info
-+{
-+    /* Each frame can be threaded onto a doubly-linked list. */
-+    struct page_list_entry list;
-+
-+    /* Reference count and various PGC_xxx flags and fields. */
-+    unsigned long count_info;
-+
-+    /* Context-dependent fields follow... */
-+    union {
-+        /* Page is in use: ((count_info & PGC_count_mask) != 0). */
-+        struct {
-+            /* Type reference count and various PGT_xxx flags and fields. */
-+            unsigned long type_info;
-+        } inuse;
-+        /* Page is on a free list: ((count_info & PGC_count_mask) == 0). */
-+        union {
-+            struct {
-+                /*
-+                 * Index of the first *possibly* unscrubbed page in the buddy.
-+                 * One more bit than maximum possible order to accommodate
-+                 * INVALID_DIRTY_IDX.
-+                 */
-+#define INVALID_DIRTY_IDX ((1UL << (MAX_ORDER + 1)) - 1)
-+                unsigned long first_dirty:MAX_ORDER + 1;
-+
-+                /* Do TLBs need flushing for safety before next page use? */
-+                bool need_tlbflush:1;
-+
-+#define BUDDY_NOT_SCRUBBING    0
-+#define BUDDY_SCRUBBING        1
-+#define BUDDY_SCRUB_ABORT      2
-+                unsigned long scrub_state:2;
-+            };
-+
-+                unsigned long val;
-+            } free;
-+
-+    } u;
-+
-+    union {
-+        /* Page is in use, but not as a shadow. */
-+        struct {
-+            /* Owner of this page (zero if page is anonymous). */
-+            struct domain *domain;
-+        } inuse;
-+
-+        /* Page is on a free list. */
-+        struct {
-+            /* Order-size of the free chunk this page is the head of. */
-+            unsigned int order;
-+        } free;
-+
-+    } v;
-+
-+    union {
-+        /*
-+         * Timestamp from 'TLB clock', used to avoid extra safety flushes.
-+         * Only valid for: a) free pages, and b) pages with zero type count
-+         */
-+        uint32_t tlbflush_timestamp;
-+    };
-+    uint64_t pad;
-+};
-+
-+#define frame_table ((struct page_info *)FRAMETABLE_VIRT_START)
-+
-+/* PDX of the first page in the frame table. */
-+extern unsigned long frametable_base_pdx;
-+
-+/* Convert between machine frame numbers and page-info structures. */
-+#define mfn_to_page(mfn)                                            \
-+    (frame_table + (mfn_to_pdx(mfn) - frametable_base_pdx))
-+#define page_to_mfn(pg)                                             \
-+    pdx_to_mfn((unsigned long)((pg) - frame_table) + frametable_base_pdx)
-+
-+static inline void *page_to_virt(const struct page_info *pg)
-+{
-+    return mfn_to_virt(mfn_x(page_to_mfn(pg)));
-+}
-+
-+/*
-+ * Common code requires get_page_type and put_page_type.
-+ * We don't care about typecounts so we just do the minimum to make it
-+ * happy.
-+ */
-+static inline int get_page_type(struct page_info *page, unsigned long type)
-+{
-+    return 1;
-+}
-+
-+static inline void put_page_type(struct page_info *page)
-+{
-+}
-+
-+static inline void put_page_and_type(struct page_info *page)
-+{
-+    put_page_type(page);
-+    put_page(page);
-+}
-+
-+/*
-+ * RISC-V does not have an M2P, but common code expects a handful of
-+ * M2P-related defines and functions. Provide dummy versions of these.
-+ */
-+#define INVALID_M2P_ENTRY        (~0UL)
-+#define SHARED_M2P_ENTRY         (~0UL - 1UL)
-+#define SHARED_M2P(_e)           ((_e) == SHARED_M2P_ENTRY)
-+
-+/* Xen always owns P2M on RISC-V */
-+#define set_gpfn_from_mfn(mfn, pfn) do { (void) (mfn), (void)(pfn); } while (0)
-+#define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
-+
-+#define PDX_GROUP_SHIFT (16 + 5)
-+
-+static inline unsigned long domain_get_maximum_gpfn(struct domain *d)
++static inline void memory_type_changed(struct domain *d)
 +{
 +    BUG();
-+    return 0;
 +}
 +
-+static inline long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg)
++
++static inline int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
++                                                        unsigned int order)
++{
++    return -EOPNOTSUPP;
++}
++
++static inline int guest_physmap_add_entry(struct domain *d,
++                            gfn_t gfn,
++                            mfn_t mfn,
++                            unsigned long page_order,
++                            p2m_type_t t)
 +{
 +    BUG();
-+    return 0;
++    return -EINVAL;
 +}
 +
-+/*
-+ * On RISCV, all the RAM is currently direct mapped in Xen.
-+ * Hence return always true.
-+ */
-+static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
++/* Untyped version for RAM only, for compatibility */
++static inline int __must_check
++guest_physmap_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
++                       unsigned int page_order)
 +{
++    return guest_physmap_add_entry(d, gfn, mfn, page_order, p2m_ram_rw);
++}
++
++static inline mfn_t gfn_to_mfn(struct domain *d, gfn_t gfn)
++{
++    BUG();
++    return _mfn(0);
++}
++
++static inline bool arch_acquire_resource_check(struct domain *d)
++{
++    /*
++     * The reference counting of foreign entries in set_foreign_p2m_entry()
++     * is supported on RISCV.
++     */
 +    return true;
 +}
 +
-+#define PG_shift(idx)   (BITS_PER_LONG - (idx))
-+#define PG_mask(x, idx) (x ## UL << PG_shift(idx))
-+
-+#define PGT_none          PG_mask(0, 1)  /* no special uses of this page   */
-+#define PGT_writable_page PG_mask(1, 1)  /* has writable mappings?         */
-+#define PGT_type_mask     PG_mask(1, 1)  /* Bits 31 or 63.                 */
-+
-+ /* Count of uses of this frame as its current type. */
-+#define PGT_count_width   PG_shift(2)
-+#define PGT_count_mask    ((1UL<<PGT_count_width)-1)
-+
-+/*
-+ * Page needs to be scrubbed. Since this bit can only be set on a page that is
-+ * free (i.e. in PGC_state_free) we can reuse PGC_allocated bit.
-+ */
-+#define _PGC_need_scrub   _PGC_allocated
-+#define PGC_need_scrub    PGC_allocated
-+
-+//  /* Cleared when the owning guest 'frees' this page. */
-+#define _PGC_allocated    PG_shift(1)
-+#define PGC_allocated     PG_mask(1, 1)
-+  /* Page is Xen heap? */
-+#define _PGC_xen_heap     PG_shift(2)
-+#define PGC_xen_heap      PG_mask(1, 2)
-+/* Page is broken? */
-+#define _PGC_broken       PG_shift(7)
-+#define PGC_broken        PG_mask(1, 7)
-+ /* Mutually-exclusive page states: { inuse, offlining, offlined, free }. */
-+#define PGC_state         PG_mask(3, 9)
-+#define PGC_state_inuse   PG_mask(0, 9)
-+#define PGC_state_offlining PG_mask(1, 9)
-+#define PGC_state_offlined PG_mask(2, 9)
-+#define PGC_state_free    PG_mask(3, 9)
-+// #define page_state_is(pg, st) (((pg)->count_info&PGC_state) == PGC_state_##st)
-+
-+/* Count of references to this frame. */
-+#define PGC_count_width   PG_shift(9)
-+#define PGC_count_mask    ((1UL<<PGC_count_width)-1)
-+
-+#define page_state_is(pg, st) (((pg)->count_info&PGC_state) == PGC_state_##st)
-+
-+#define _PGC_extra        PG_shift(10)
-+#define PGC_extra         PG_mask(1, 10)
-+
-+#define is_xen_heap_page(page) ((page)->count_info & PGC_xen_heap)
-+#define is_xen_heap_mfn(mfn) \
-+    (mfn_valid(mfn) && is_xen_heap_page(mfn_to_page(mfn)))
-+
-+#define is_xen_fixed_mfn(mfn)                                   \
-+    ((mfn_to_maddr(mfn) >= virt_to_maddr(&_start)) &&           \
-+     (mfn_to_maddr(mfn) <= virt_to_maddr((vaddr_t)_end - 1)))
-+
-+#define page_get_owner(_p)    (_p)->v.inuse.domain
-+#define page_set_owner(_p,_d) ((_p)->v.inuse.domain = (_d))
-+
-+/* TODO: implement */
-+#define mfn_valid(mfn) ({ (void) (mfn); 0; })
-+
-+#define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
-+
-+#define domain_set_alloc_bitsize(d) ((void)0)
-+#define domain_clamp_alloc_bitsize(d, b) (b)
-+
-+#define PFN_ORDER(_pfn) ((_pfn)->v.free.order)
-+
- extern unsigned char cpu0_boot_stack[];
- 
- void setup_initial_pagetables(void);
-@@ -17,4 +260,9 @@ unsigned long calc_phys_offset(void);
- 
- void turn_on_mmu(unsigned long ra);
- 
-+static inline unsigned int arch_get_dma_bitsize(void)
++static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
 +{
-+    return 32; /* TODO */
++    /* Not supported on RISCV. */
 +}
 +
- #endif /* _ASM_RISCV_MM_H */
++#endif /* __ASM_RISCV_P2M_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.43.0
 
