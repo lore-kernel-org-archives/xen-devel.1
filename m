@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F89BC41535
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 14:22:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.659385.1028959 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60DE5C41535
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 14:38:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.659397.1028980 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGgPl-0005z1-S5; Fri, 22 Dec 2023 14:22:13 +0000
+	id 1rGgfJ-0000IE-G0; Fri, 22 Dec 2023 14:38:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 659385.1028959; Fri, 22 Dec 2023 14:22:13 +0000
+Received: by outflank-mailman (output) from mailman id 659397.1028980; Fri, 22 Dec 2023 14:38:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGgPl-0005yu-PG; Fri, 22 Dec 2023 14:22:13 +0000
-Received: by outflank-mailman (input) for mailman id 659385;
- Fri, 22 Dec 2023 14:22:12 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rGgPk-0005yo-9Z
- for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 14:22:12 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rGgPe-0004SA-EB; Fri, 22 Dec 2023 14:22:06 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rGgPe-0008SH-5V; Fri, 22 Dec 2023 14:22:06 +0000
+	id 1rGgfJ-0000I4-D6; Fri, 22 Dec 2023 14:38:17 +0000
+Received: by outflank-mailman (input) for mailman id 659397;
+ Fri, 22 Dec 2023 14:38:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EuIk=IB=gmail.com=euidzero@srs-se1.protection.inumbo.net>)
+ id 1rGgfH-0000Hq-LY
+ for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 14:38:15 +0000
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [2607:f8b0:4864:20::42c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bca54a3c-a0d7-11ee-98eb-6d05b1d4d9a1;
+ Fri, 22 Dec 2023 15:38:14 +0100 (CET)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-6d87eadc43fso945959b3a.1
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 06:38:14 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,136 +42,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	References:Cc:To:From:Subject:MIME-Version:Date:Message-ID;
-	bh=EoNyJO5vv2JraW6JPDVb1MQdUbdODi3+bIU/00VGu74=; b=GaPvPKqP9rip8T5bRzp/RAn8U0
-	879Zp6jX4nASua9V7m8pvosBAvdMTeehuhaqN56r46GlGamx5x1yH+DJ9tSlqMDFpbXU6+5ZZ6ka8
-	OP5b2ZsR6HHs1mANe1b0S1D5fy8Pziia+Zh4oJjtvEvmHSU7kdUMWBCM9pH1tWPlgO7c=;
-Message-ID: <0f729b61-b839-48f6-89ae-b5570b1eae0b@xen.org>
-Date: Fri, 22 Dec 2023 14:22:04 +0000
+X-Inumbo-ID: bca54a3c-a0d7-11ee-98eb-6d05b1d4d9a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1703255893; x=1703860693; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=74w1MpVPP2Pqrdjl8VcbipnfkmbPb7rCjVJczW69rpE=;
+        b=N+ofPuPz0zgQKd1OR6eGqX6A4CQTtineWqcjtfTJl91LFtbfvlkWXlsz4FceDK3FDT
+         GfDJCmN3Z4V576soQ3Z2NVm+nwcNg+IG6GUHkj3oh/7Zs6KJEUVNFAJvx6ubqoLGqkcx
+         ug6pZT3jaVCVYW4sZkehKFDJpBa1Voa8M26SAMqVA0fFtuSk4gdMpW+J2cKV7nOOPDG4
+         pREElT/TNiwNQQWQjTsTZDS7r3nNMrJWv2HgdRItxQ5yB9v3gb9WYcrIL0PeTv6W92YQ
+         EMLEZPqA7XEYNGlvR6/a31JECdPjXNED3Q6mOFSAN7e+kOGnHgxT4eNdb3DSigQ1iw/N
+         iAKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1703255893; x=1703860693;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=74w1MpVPP2Pqrdjl8VcbipnfkmbPb7rCjVJczW69rpE=;
+        b=ZwueQ78JTrXtKIcSdsoFLnU0G2hZt7T53w8zG2BKkOcx2lnQ7WUOOaiGJzoMb/cih7
+         yZSJnQtgAQeEUyjAtiJ+/QHlmlzGxfAhvvIRkcQw5Y67MgvAZjGO9Gqfdmnege5S7bIS
+         q/uZMMYa78AUQGoFrKYfgXM8cuK6BMcnIOkbj+A5/ZEYPmo9pCGeeDt7WMpOhuorJWB+
+         vqzwNQlTT869abiWUOdy6yJJUw0rRGUcaETQLMA03jH09n+VJuOPydS6n8qo31BDLasc
+         2rEwHDujyNlr1ES1Rub7kMsD26PIZqkBJW8Htl9+t40v2eHrpQWsMFH45jY0pqTIihdo
+         HcCQ==
+X-Gm-Message-State: AOJu0YzoppaUWqkUuIJti49Jw/9Bvkt+iZt0N+lo2YQzDoDw6jIzCL50
+	X/qkZ0WqcvukVmmg5Gxfp+6Yu7scLPwWQn31ON/wKAw7auEpbw==
+X-Google-Smtp-Source: AGHT+IE7s79rjeiQnw31V61qhQi4jojZ7oMaR083/7wO/EM0SdD4xUqJnpQNUpPAIrryqkYXWg0kja+d5pSecnEhwlI=
+X-Received: by 2002:a05:6a00:4b51:b0:6d9:35c3:e7b2 with SMTP id
+ kr17-20020a056a004b5100b006d935c3e7b2mr1078644pfb.11.1703255892937; Fri, 22
+ Dec 2023 06:38:12 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 5/9] xen/asm-generic: introduce stub header numa.h
-Content-Language: en-GB
-From: Julien Grall <julien@xen.org>
-To: Jan Beulich <jbeulich@suse.com>, Oleksii <oleksii.kurochko@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
- Shawn Anastasio <sanastasio@raptorengineering.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1703072575.git.oleksii.kurochko@gmail.com>
- <08bca9a4158a190a0a953e5bc071a512cfe5f0f8.1703072575.git.oleksii.kurochko@gmail.com>
- <341249d1-217f-4ad2-9455-b1aded4b9b56@xen.org>
- <03cf5145-2124-4150-9f20-904f08bcabda@suse.com>
- <9f8c4fe0a87742444b52a42aa5924cf046ee18b0.camel@gmail.com>
- <67bf2be7-53f4-40d0-a856-8ae631a054b0@suse.com>
- <955e9b02-20bd-4279-9f60-bb757cdf1a03@xen.org>
-In-Reply-To: <955e9b02-20bd-4279-9f60-bb757cdf1a03@xen.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <CAKm-Umas=5=JzooRzPHxUDigKpFK3Ze7cQcG8eR5kWgn-d_7fQ@mail.gmail.com>
+ <64d738b7-08c1-4b2c-a828-a137c870408e@suse.com> <CAKm-UmayUxd8F337g+BnR=_50_o__oV_PeUv9Z+9gNZ5MXYmrA@mail.gmail.com>
+ <b4f46a91-b3b9-49b9-9a26-e2f962dee54c@suse.com> <CAKm-UmY9yYv2gOwm-O3DF7dBBNeNjs+3pDGuU+sYgJ+OHwcLNw@mail.gmail.com>
+ <CAKm-UmZ1Q77EqUit9J6RX0-MCALdu4gjaU2zrX6oneW+45a+Kw@mail.gmail.com>
+ <CAKm-UmYZcsY=C2Yhmy_EeZi0iAguVH0Eqy83upBLa_ikQtPwnw@mail.gmail.com>
+ <CAKm-Umapq5LW9yhSOGk8TOg1iuvUogUDKbEXbUcE5T5-vVzW3w@mail.gmail.com>
+ <CAKm-UmaUZ=rj-F3RvMoR7H3OvBHm1iy4PTRZAjyi=MQUVTuYVg@mail.gmail.com>
+ <CAKm-Umat77MTh6=GEuH+bf1WRX+_B4-N5hY4xwADALfhj4QCPA@mail.gmail.com>
+ <6ba9568a-ff8e-48ad-907f-74303e04d3a2@suse.com> <CAKm-UmZVoUhidEV15Xk+J_XN5a2GsBqMbXL9wqdFdoAFf_u5AA@mail.gmail.com>
+ <bcbceba7-42ac-45be-80ab-e3dfe7741ec6@suse.com> <2eafe45b-fd97-472c-a173-459d6ff0b957@suse.com>
+ <CAKm-Umbs2D7NHFE+NW2xKOu7-AZhFpH4uzE5QTuQusnGA_eNWA@mail.gmail.com>
+ <f539144c-885a-461c-a506-bdb73e626a65@suse.com> <CAKm-UmY126AfdGhWcZ3s9vwN9+ksVRRFEhOu0ZFMoDvxrqOibw@mail.gmail.com>
+In-Reply-To: <CAKm-UmY126AfdGhWcZ3s9vwN9+ksVRRFEhOu0ZFMoDvxrqOibw@mail.gmail.com>
+From: =?UTF-8?Q?S=C3=A9bastien_Chaumat?= <euidzero@gmail.com>
+Date: Fri, 22 Dec 2023 15:38:01 +0100
+Message-ID: <CAKm-UmZ-td2Ow+Gg=dC+ksLvOtTFjEoKo+_9ueozELuoK5zXrg@mail.gmail.com>
+Subject: Re: [BUG]i2c_hid_acpi broken with 4.17.2 on Framework Laptop 13 AMD
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>
+Content-Type: multipart/alternative; boundary="00000000000075cfa7060d1a2a3c"
 
+--00000000000075cfa7060d1a2a3c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Le ven. 22 d=C3=A9c. 2023 =C3=A0 15:37, S=C3=A9bastien Chaumat <euidzero@gm=
+ail.com> a
+=C3=A9crit :
 
-On 22/12/2023 13:58, Julien Grall wrote:
-> Hi Jan,
-> 
-> On 22/12/2023 13:20, Jan Beulich wrote:
->> On 22.12.2023 14:07, Oleksii wrote:
->>> On Fri, 2023-12-22 at 09:22 +0100, Jan Beulich wrote:
->>>> On 21.12.2023 20:09, Julien Grall wrote:
->>>>> On 20/12/2023 14:08, Oleksii Kurochko wrote:
->>>>>> <asm/numa.h> is common through some archs so it is moved
->>>>>> to asm-generic.
->>>>>>
->>>>>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->>>>>> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
->>>>>> Acked-by: Jan Beulich <jbeulich@suse.com>
->>>>>> Acked-by: Shawn Anastasio <sanastasio@raptorengineering.com>
->>>>>
->>>>> I think this patch will need to be rebased on top of the lastest
->>>>> staging
->>>>> as this should clash with 51ffb3311895.
->>>>
->>>> No, and I'd like to withdraw my ack here. In this case a stub header
->>>> isn't
->>>> the right choice imo - the !NUMA case should be handled in common
->>>> code. I
->>>> would have submitted the patch I have, if only the first_valid_mfn
->>>> patch
->>>> hadn't been committed already (which I now need to re-base over).
->>> I haven't seen your patch yet (waiting for it), but I assume that
->>> <asm/numa.h> will still be necessary and remain the same across Arm,
->>> PPC, and RISC-V.
->>>
->>> What am I missing?
->>
->> asm/numa.h will be necessary for an arch only if it actually has a way
->> to have CONFIG_NUMA enabled. Below, for your reference, the patch in
->> the not-yet-rebased form. As you can see, Arm's (and PPC's) header goes
->> away. If and when they choose to support NUMA, they may need to regain
->> one; whether at that point we can sort how an asm-generic/ form of the
->> header might sensibly look like remains to be seen.
->>
->> Jan
->>
->> NUMA: no need for asm/numa.h when !NUMA
->>
->> There's no point in every architecture carrying the same stubs for the
->> case when NUMA isn't enabled (or even supported). Move all of that to
->> xen/numa.h; replace explicit uses of asm/numa.h in common code. Make
->> inclusion of asm/numa.h dependent upon NUMA=y.
->>
->> Address the TODO regarding first_valid_mfn by making the variable static
->> when NUMA=y, thus also addressing a Misrs C:2012 rule 8.4 concern. Drop
->> the not really applicable "implement NUMA support" comment - in a !NUMA
->> section this simply makes no sense.
-> 
-> I have to admit, I am not really thrill with the approach you have 
-> taken. As I said before, I don't quite understand the problem of having 
-> first_valid_mfn exposed in all the circumstances.
-> 
-> This is better than trying to do...
-> 
->> --- unstable.orig/xen/common/page_alloc.c
->> +++ unstable/xen/common/page_alloc.c
->> @@ -140,7 +140,6 @@
->>   #include <xen/vm_event.h>
->>   #include <asm/flushtlb.h>
->> -#include <asm/numa.h>
->>   #include <asm/page.h>
->>   #include <public/sysctl.h>
->> @@ -256,10 +255,14 @@ static PAGE_LIST_HEAD(page_broken_list);
->>    * BOOT-TIME ALLOCATOR
->>    */
->> +#ifndef CONFIG_NUMA
->>   /*
->>    * first_valid_mfn is exported because it is use in ARM specific NUMA
->>    * helpers. See comment in arch/arm/include/asm/numa.h.
->>    */
->> +#else
->> +static
->> +#endif
-> 
-> ... this sort ugliness.
+> By request of the laptop vendor (Framework) I'm going to open the bug
+> @fedora for them to jump in.
+>
+>
 
-Just to add more thoughts. My main concern here is that we likely have 
-other variables that may only be exposed for a given arch. I would 
-rather not like if we start sprinkling the code with #ifdef CONFIG_XXX 
-static #else.
+ https://bugzilla.redhat.com/show_bug.cgi?id=3D2255625
 
-If there is a desire for everyone to start reducing the scope of the 
-variable. Then we should come up with a way to do what you did above on 
-the same line rather than multiple one. Maybe:
+S=C3=A9bastien
 
-STATIC_IF(CONFIG_NUMA) unsigned long first_valid_mfn.
+--00000000000075cfa7060d1a2a3c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Cheers,
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0ven. 22 d=C3=A9c. 2023 =C3=A0=
+=C2=A015:37, S=C3=A9bastien Chaumat &lt;<a href=3D"mailto:euidzero@gmail.co=
+m">euidzero@gmail.com</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>By request of the l=
+aptop vendor (Framework) I&#39;m going to open the bug @fedora for them to =
+jump in.</div><span><div>=C2=A0</div></span></div></blockquote><div><br></d=
+iv><div>=C2=A0<a href=3D"https://bugzilla.redhat.com/show_bug.cgi?id=3D2255=
+625">https://bugzilla.redhat.com/show_bug.cgi?id=3D2255625</a></div><div><b=
+r></div><div>S=C3=A9bastien<br></div></div></div>
 
--- 
-Julien Grall
+--00000000000075cfa7060d1a2a3c--
 
