@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF9CAC4706C
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:13:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.659425.1029130 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADF2C41535
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:14:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.659429.1029140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhDh-0003U0-5N; Fri, 22 Dec 2023 15:13:49 +0000
+	id 1rGhDj-00043w-LL; Fri, 22 Dec 2023 15:13:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 659425.1029130; Fri, 22 Dec 2023 15:13:49 +0000
+Received: by outflank-mailman (output) from mailman id 659429.1029140; Fri, 22 Dec 2023 15:13:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhDg-0003TJ-Vm; Fri, 22 Dec 2023 15:13:48 +0000
-Received: by outflank-mailman (input) for mailman id 659425;
- Fri, 22 Dec 2023 15:13:47 +0000
+	id 1rGhDj-00043a-GI; Fri, 22 Dec 2023 15:13:51 +0000
+Received: by outflank-mailman (input) for mailman id 659429;
+ Fri, 22 Dec 2023 15:13:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=buqB=IB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rGhDf-0000EM-RY
- for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:47 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
+ id 1rGhDj-0000EM-02
+ for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:51 +0000
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [2a00:1450:4864:20::132])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b3ae300e-a0dc-11ee-9b0f-b553b5be7939;
- Fri, 22 Dec 2023 16:13:46 +0100 (CET)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-50e384cd6ebso2165744e87.3
- for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:46 -0800 (PST)
+ id b58da1a9-a0dc-11ee-9b0f-b553b5be7939;
+ Fri, 22 Dec 2023 16:13:49 +0100 (CET)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-50e67e37661so1184941e87.0
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:49 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.44
+ j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 07:13:44 -0800 (PST)
+ Fri, 22 Dec 2023 07:13:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b3ae300e-a0dc-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: b58da1a9-a0dc-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703258025; x=1703862825; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1703258029; x=1703862829; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lZzYufQNZjpcCeO79bMfJlqcSeS2q9i+NJUjGOoMktg=;
-        b=GqxNI7l3IvQUrCjA2pmqzELRVAwM/eZ5jxbw9RplT9zwxcdvUeWvbTjvgudodxZSHC
-         oHqED1qlg1DPygfnab4v9QPuDxpLBGo9Mj9bgseJZzMoVskCJdyTgrXdFJA33urCVtrf
-         ObJZyGSk3v4E3z0grZlS+t5dL8c2mzQp3C39ituL7230ls4G2twFkBoCX4zvLrExwDuT
-         eumIpHU6sfGgFPuS2jXp4AI3cHKfEUwWdfwRWxyRf8sR6rF69shz8MUzpgUrdTeKESqd
-         1AmAzROAW3Ds9qZ01wXeDmjO5Dj2Tsi016Ewx4DJfcWJK/hduFSziqKifTfxlUvgHb54
-         8eHw==
+        bh=kWwkk+l5mzS2Ajj9aN3c5hR5kvo5QNNQX7kNmAH9sI4=;
+        b=IwpcrHrO4MbvNr7H4xhkkzT3JwI09ySeyI5JB0eck1+Fs9QFfoiy7TnJBzBmnzaVtr
+         f259wIVgvbYEk5XBwqNsoqExXe1HQdzleJ3Z6Z9SW9JnLzDBTNI7YoV3/epNMFt7IBFB
+         FTi4OXiFGiu1+03khqOjR0eTryd73kYOB2ow97OPWqvClfGGq7aNGzdhBtpzze+QL1rd
+         Oy2PzEeohwZstGEj4vSIlzy9RLLnfEJeP2s6CtBI2QFS4mlukZ4dtU0MF+46wL9jGjO6
+         hwP/amQdiOoxcLDvJaBtqnKQTOzFJP2l0sc+pN3E6XF1WV2PU/025IaCAMr9UNuJUkv+
+         IHww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703258025; x=1703862825;
+        d=1e100.net; s=20230601; t=1703258029; x=1703862829;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lZzYufQNZjpcCeO79bMfJlqcSeS2q9i+NJUjGOoMktg=;
-        b=eizwG3w5X3n9zzhCWs8DSqRVKKlx2rRiAvIxVQA5OMvg9nR/QQgmLIz/JAFyE1O0bR
-         FYrWJUP9UKtv9Ml0+3/UDAytSXcvOUY9Jt/vZvdCR8hxw/6QtTVMmwToQluFBVLnT/rb
-         BkYaAaMJM5HW2rJeNUv+z0bsGUloEI5z8DUJ38YEt1DOGqkuifiD2Fceck39Y1sWCj5j
-         NH+i9xxVrmD2UvaMBqyXUwgCM2+bFiQEwAZXHciKtBHU2DAN8H99z8d+lhHYiBOq+AJL
-         FLn6+Rc3P1YyWw7tXDKy0ZJnvZI+N5K6NQVGbYjS3WdoSZCuze0t7b1W91DG/6T5YkO1
-         leqA==
-X-Gm-Message-State: AOJu0Yy/un40VaH1ZbgZQTdvb/vCaG3AhL65IwzBvNFriFH9Ar1AINgx
-	KZtG9JfMFEu94r4oG6jW2TJlSC9E7Fs=
-X-Google-Smtp-Source: AGHT+IEa3Lci85EhlI7EpPIDFh0+qGFFKZULIcciEknrUzZzxtIMyZ6rBYeGHZ5G1fa/JP5TfkTZ3A==
-X-Received: by 2002:ac2:51a7:0:b0:50d:1c5e:7982 with SMTP id f7-20020ac251a7000000b0050d1c5e7982mr492145lfk.182.1703258025192;
-        Fri, 22 Dec 2023 07:13:45 -0800 (PST)
+        bh=kWwkk+l5mzS2Ajj9aN3c5hR5kvo5QNNQX7kNmAH9sI4=;
+        b=fsRSLDnwAc5Q4Fz9V2teGJfTnZ5zPBoOJJuYDCrgDbQ17UtyS/ZX3fbR1zKj4QiFBC
+         oKFLYuWLaalULEPuZ8cAAJbXmbtgMwz0mRnpSpY7kt1T2giuwrZ02sABP7lJbNHTQmxc
+         Aua6k0umqxXjXr4TVkJvP3V5Dqk/Kx+1/VXizJAOAItXvKTygCjUMKyBZaSv3d+SQhtN
+         Bh371l1Sqxxj7SN56PIuu39PcKrV5192XuNHGiKD5Yzx3/nnROewh5kVnSsTMaO5Szlv
+         ZY4wB3DgrwWvzsaeh7lcy/knUcY027HxrMp+QxZ05S7meG3j3QveH/YP5o7K8FbBJv1S
+         TM0g==
+X-Gm-Message-State: AOJu0Yy8FFttjG7Xriq/y7Ywq23vAQVpltbx6pQ7QjzGx3+sWxDC+7Yu
+	Q6cUUYQ10CWMj3q6boC5qnwazKlTQ+0=
+X-Google-Smtp-Source: AGHT+IFdcyll+q9mn67kayTVvaW/q+8atY73YlGwgPnjqTrlpeG5g0NRR5j4/49y198Tu75srv+yUg==
+X-Received: by 2002:ac2:5e33:0:b0:50e:6b48:5407 with SMTP id o19-20020ac25e33000000b0050e6b485407mr500089lfg.82.1703258028542;
+        Fri, 22 Dec 2023 07:13:48 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,9 +88,9 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 20/34] xen/riscv: introduce irq.h
-Date: Fri, 22 Dec 2023 17:13:04 +0200
-Message-ID: <11613eb5a0378315d70fc2f4d4f744ede579cca3.1703255175.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 23/34] xen/riscv: introduce time.h
+Date: Fri, 22 Dec 2023 17:13:07 +0200
+Message-ID: <999bc036ac92124e51b42896647c4d249cd7b8b7.1703255175.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1703255175.git.oleksii.kurochko@gmail.com>
 References: <cover.1703255175.git.oleksii.kurochko@gmail.com>
@@ -98,56 +98,47 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V3:
+ - Acked-by: Jan Beulich <jbeulich@suse.com>
  - add SPDX
- - remove all that was wraped to HAS_DEVICETREE_... as for RISC-V it is going to be
-   always selected.
- - update the commit message
+ - Add new line
 ---
 Changes in V2:
-	- add ifdef CONFIG_HAS_DEVICE_TREE for things that shouldn't be
-      in case !CONFIG_HAS_DEVICE_TREE
-	- use proper includes.
+ -  change xen/lib.h to xen/bug.h
+ - remove inclusion of <asm/processor.h> as it's not needed.
 ---
- xen/arch/riscv/include/asm/irq.h | 37 ++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/irq.h
+ xen/arch/riscv/include/asm/time.h | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/time.h
 
-diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
+diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
 new file mode 100644
-index 0000000000..a4434fb8ae
+index 0000000000..1f22af3bce
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/irq.h
-@@ -0,0 +1,37 @@
++++ b/xen/arch/riscv/include/asm/time.h
+@@ -0,0 +1,29 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_RISCV_IRQ_H__
-+#define __ASM_RISCV_IRQ_H__
++#ifndef __ASM_RISCV_TIME_H__
++#define __ASM_RISCV_TIME_H__
 +
 +#include <xen/bug.h>
++#include <asm/csr.h>
 +
-+/* TODO */
-+#define nr_irqs 0U
-+#define nr_static_irqs 0
-+#define arch_hwdom_irqs(domid) 0U
++struct vcpu;
 +
-+#define domain_pirq_to_irq(d, pirq) (pirq)
++/* TODO: implement */
++static inline void force_update_vcpu_system_time(struct vcpu *v) { BUG(); }
 +
-+#define arch_evtchn_bind_pirq(d, pirq) ((void)((d) + (pirq)))
++typedef unsigned long cycles_t;
 +
-+struct arch_pirq {
-+};
-+
-+struct arch_irq_desc {
-+    unsigned int type;
-+};
-+
-+static inline void arch_move_irqs(struct vcpu *v)
++static inline cycles_t get_cycles(void)
 +{
-+    BUG();
++	return csr_read(CSR_TIME);
 +}
 +
-+#endif /* __ASM_RISCV_IRQ_H__ */
++#endif /* __ASM_RISCV_TIME_H__ */
 +
 +/*
 + * Local variables:
