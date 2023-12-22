@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60DE5C41535
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 14:38:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.659397.1028980 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D48C46CD2
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:13:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.659406.1028990 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGgfJ-0000IE-G0; Fri, 22 Dec 2023 14:38:17 +0000
+	id 1rGhDL-0007J2-1D; Fri, 22 Dec 2023 15:13:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 659397.1028980; Fri, 22 Dec 2023 14:38:17 +0000
+Received: by outflank-mailman (output) from mailman id 659406.1028990; Fri, 22 Dec 2023 15:13:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGgfJ-0000I4-D6; Fri, 22 Dec 2023 14:38:17 +0000
-Received: by outflank-mailman (input) for mailman id 659397;
- Fri, 22 Dec 2023 14:38:15 +0000
+	id 1rGhDK-0007Iv-UG; Fri, 22 Dec 2023 15:13:26 +0000
+Received: by outflank-mailman (input) for mailman id 659406;
+ Fri, 22 Dec 2023 15:13:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EuIk=IB=gmail.com=euidzero@srs-se1.protection.inumbo.net>)
- id 1rGgfH-0000Hq-LY
- for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 14:38:15 +0000
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [2607:f8b0:4864:20::42c])
+ <SRS0=buqB=IB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rGhDJ-0007Ie-HM
+ for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:25 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bca54a3c-a0d7-11ee-98eb-6d05b1d4d9a1;
- Fri, 22 Dec 2023 15:38:14 +0100 (CET)
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6d87eadc43fso945959b3a.1
- for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 06:38:14 -0800 (PST)
+ id a6475537-a0dc-11ee-98eb-6d05b1d4d9a1;
+ Fri, 22 Dec 2023 16:13:23 +0100 (CET)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50e6d802507so274045e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:23 -0800 (PST)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Dec 2023 07:13:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,90 +46,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bca54a3c-a0d7-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: a6475537-a0dc-11ee-98eb-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703255893; x=1703860693; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=74w1MpVPP2Pqrdjl8VcbipnfkmbPb7rCjVJczW69rpE=;
-        b=N+ofPuPz0zgQKd1OR6eGqX6A4CQTtineWqcjtfTJl91LFtbfvlkWXlsz4FceDK3FDT
-         GfDJCmN3Z4V576soQ3Z2NVm+nwcNg+IG6GUHkj3oh/7Zs6KJEUVNFAJvx6ubqoLGqkcx
-         ug6pZT3jaVCVYW4sZkehKFDJpBa1Voa8M26SAMqVA0fFtuSk4gdMpW+J2cKV7nOOPDG4
-         pREElT/TNiwNQQWQjTsTZDS7r3nNMrJWv2HgdRItxQ5yB9v3gb9WYcrIL0PeTv6W92YQ
-         EMLEZPqA7XEYNGlvR6/a31JECdPjXNED3Q6mOFSAN7e+kOGnHgxT4eNdb3DSigQ1iw/N
-         iAKw==
+        d=gmail.com; s=20230601; t=1703258003; x=1703862803; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=aUowHZBO2nKGCuJs3sPxh/R77AFxLnhXhueIKgvrApM=;
+        b=Gjc2YyuFkoMVS0OBAeNIKBL0uiGHUVamJGP68ZxS9q0niCSrFrWJP+6Nwg8htS4lZI
+         DkaPW9n4WV81RW5+DZSBpvrk311er3IcY5/ms79HzY+y8KluyRfxoe4w1yzdEbJhMnI7
+         0o8w7JoRGOkpRzUWfcG4C+w2gfRJrSrCd81JScLvIKbc73uXNRezl8mLKFwBHKImj4lv
+         ewF9NFsDp1+dlL2BAt+1rNCIt8TdfUEVTOvaayZcJWeihSGHBvuhJpg4+oqAM3kfY5Kz
+         IcSAR/yoVqcJl/hz/mTgJNngCJEpu1ud7Vrh5RRXED9FhYd06C+KNI2pslyexonOhQng
+         UM4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703255893; x=1703860693;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=74w1MpVPP2Pqrdjl8VcbipnfkmbPb7rCjVJczW69rpE=;
-        b=ZwueQ78JTrXtKIcSdsoFLnU0G2hZt7T53w8zG2BKkOcx2lnQ7WUOOaiGJzoMb/cih7
-         yZSJnQtgAQeEUyjAtiJ+/QHlmlzGxfAhvvIRkcQw5Y67MgvAZjGO9Gqfdmnege5S7bIS
-         q/uZMMYa78AUQGoFrKYfgXM8cuK6BMcnIOkbj+A5/ZEYPmo9pCGeeDt7WMpOhuorJWB+
-         vqzwNQlTT869abiWUOdy6yJJUw0rRGUcaETQLMA03jH09n+VJuOPydS6n8qo31BDLasc
-         2rEwHDujyNlr1ES1Rub7kMsD26PIZqkBJW8Htl9+t40v2eHrpQWsMFH45jY0pqTIihdo
-         HcCQ==
-X-Gm-Message-State: AOJu0YzoppaUWqkUuIJti49Jw/9Bvkt+iZt0N+lo2YQzDoDw6jIzCL50
-	X/qkZ0WqcvukVmmg5Gxfp+6Yu7scLPwWQn31ON/wKAw7auEpbw==
-X-Google-Smtp-Source: AGHT+IE7s79rjeiQnw31V61qhQi4jojZ7oMaR083/7wO/EM0SdD4xUqJnpQNUpPAIrryqkYXWg0kja+d5pSecnEhwlI=
-X-Received: by 2002:a05:6a00:4b51:b0:6d9:35c3:e7b2 with SMTP id
- kr17-20020a056a004b5100b006d935c3e7b2mr1078644pfb.11.1703255892937; Fri, 22
- Dec 2023 06:38:12 -0800 (PST)
-MIME-Version: 1.0
-References: <CAKm-Umas=5=JzooRzPHxUDigKpFK3Ze7cQcG8eR5kWgn-d_7fQ@mail.gmail.com>
- <64d738b7-08c1-4b2c-a828-a137c870408e@suse.com> <CAKm-UmayUxd8F337g+BnR=_50_o__oV_PeUv9Z+9gNZ5MXYmrA@mail.gmail.com>
- <b4f46a91-b3b9-49b9-9a26-e2f962dee54c@suse.com> <CAKm-UmY9yYv2gOwm-O3DF7dBBNeNjs+3pDGuU+sYgJ+OHwcLNw@mail.gmail.com>
- <CAKm-UmZ1Q77EqUit9J6RX0-MCALdu4gjaU2zrX6oneW+45a+Kw@mail.gmail.com>
- <CAKm-UmYZcsY=C2Yhmy_EeZi0iAguVH0Eqy83upBLa_ikQtPwnw@mail.gmail.com>
- <CAKm-Umapq5LW9yhSOGk8TOg1iuvUogUDKbEXbUcE5T5-vVzW3w@mail.gmail.com>
- <CAKm-UmaUZ=rj-F3RvMoR7H3OvBHm1iy4PTRZAjyi=MQUVTuYVg@mail.gmail.com>
- <CAKm-Umat77MTh6=GEuH+bf1WRX+_B4-N5hY4xwADALfhj4QCPA@mail.gmail.com>
- <6ba9568a-ff8e-48ad-907f-74303e04d3a2@suse.com> <CAKm-UmZVoUhidEV15Xk+J_XN5a2GsBqMbXL9wqdFdoAFf_u5AA@mail.gmail.com>
- <bcbceba7-42ac-45be-80ab-e3dfe7741ec6@suse.com> <2eafe45b-fd97-472c-a173-459d6ff0b957@suse.com>
- <CAKm-Umbs2D7NHFE+NW2xKOu7-AZhFpH4uzE5QTuQusnGA_eNWA@mail.gmail.com>
- <f539144c-885a-461c-a506-bdb73e626a65@suse.com> <CAKm-UmY126AfdGhWcZ3s9vwN9+ksVRRFEhOu0ZFMoDvxrqOibw@mail.gmail.com>
-In-Reply-To: <CAKm-UmY126AfdGhWcZ3s9vwN9+ksVRRFEhOu0ZFMoDvxrqOibw@mail.gmail.com>
-From: =?UTF-8?Q?S=C3=A9bastien_Chaumat?= <euidzero@gmail.com>
-Date: Fri, 22 Dec 2023 15:38:01 +0100
-Message-ID: <CAKm-UmZ-td2Ow+Gg=dC+ksLvOtTFjEoKo+_9ueozELuoK5zXrg@mail.gmail.com>
-Subject: Re: [BUG]i2c_hid_acpi broken with 4.17.2 on Framework Laptop 13 AMD
+        d=1e100.net; s=20230601; t=1703258003; x=1703862803;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=aUowHZBO2nKGCuJs3sPxh/R77AFxLnhXhueIKgvrApM=;
+        b=qAZjEkTyVuiF/uT+2RQwCOVvJQGqA2r2upJg6sISBrjZqnSjupb1H+B7kUeY3uBbF7
+         fRb6j4gDTnpiuzhpiRwpq59xrnjlNnOz6Nm3dJPoWyGasCfaqj2BUf+TMcORaENYqnnt
+         sC8nq8jBy86egXY1ArJGkMLtxQvj7UVa71CMuYtEpx7bJjinnNXS6f2VbenFRoL1Bsj/
+         +Ntpio4SmCqLcbJAN70/MvJkuI9AMU2TvdizJMNr1GqbtODhFPc2EcoORzEdym5FN5Qr
+         DlPPRdDXN1zsFL4Sj2DXcWacGfUar8ZRkLSZZzictA06AIRRp9AV1+F2FGbLHqi7brQV
+         n+gg==
+X-Gm-Message-State: AOJu0Yzes1O9R6/nexyewqZ74bHS1CqeaCQFopcylmtkyXZhvdvJbxhu
+	48yyH9/Qo3PbLYyLumpL4hKdiqTof1U=
+X-Google-Smtp-Source: AGHT+IFozsh/kiyobZ4kDQYj+0L75QU4g1ERaPe2rKw2zh5mHWUkxXda334d+R1Yp45yknRXl8H6+w==
+X-Received: by 2002:a05:6512:2fc:b0:50e:242a:775e with SMTP id m28-20020a05651202fc00b0050e242a775emr796416lfq.106.1703258002781;
+        Fri, 22 Dec 2023 07:13:22 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>
-Content-Type: multipart/alternative; boundary="00000000000075cfa7060d1a2a3c"
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v3 01/34] xen/riscv: disable unnecessary configs
+Date: Fri, 22 Dec 2023 17:12:45 +0200
+Message-ID: <76eeb5b411ccab16ba9696132d6962c169cbf131.1703255175.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1703255175.git.oleksii.kurochko@gmail.com>
+References: <cover.1703255175.git.oleksii.kurochko@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
---00000000000075cfa7060d1a2a3c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This patch disables unnecessary configs for two cases:
+1. By utilizing EXTRA_FIXED_RANDCONFIG and risc-fixed-randconfig.yaml
+   file for randconfig builds (GitLab CI jobs).
+2. By using tiny64_defconfig for non-randconfig builds.
 
-Le ven. 22 d=C3=A9c. 2023 =C3=A0 15:37, S=C3=A9bastien Chaumat <euidzero@gm=
-ail.com> a
-=C3=A9crit :
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V3:
+ - Remove EXTRA_FIXED_RANDCONFIG for non-randconfig jobs.
+   For non-randconfig jobs, it is sufficient to disable configs by using the defconfig.
+ - Remove double blank lines in build.yaml file before archlinux-current-gcc-riscv64-debug
+---
+Changes in V2:
+ - update the commit message.
+ - remove xen/arch/riscv/Kconfig changes.
+---
+ .../gitlab-ci/riscv-fixed-randconfig.yaml     | 27 +++++++++++++++++++
+ xen/arch/riscv/configs/tiny64_defconfig       | 17 ++++++++++++
+ 2 files changed, 44 insertions(+)
 
-> By request of the laptop vendor (Framework) I'm going to open the bug
-> @fedora for them to jump in.
->
->
+diff --git a/automation/gitlab-ci/riscv-fixed-randconfig.yaml b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
+index f1282b40c9..344f39c2d8 100644
+--- a/automation/gitlab-ci/riscv-fixed-randconfig.yaml
++++ b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
+@@ -5,3 +5,30 @@
+       CONFIG_EXPERT=y
+       CONFIG_GRANT_TABLE=n
+       CONFIG_MEM_ACCESS=n
++      CONFIG_COVERAGE=n
++      CONFIG_SCHED_CREDIT=n
++      CONFIG_SCHED_CREDIT2=n
++      CONFIG_SCHED_RTDS=n
++      CONFIG_SCHED_NULL=n
++      CONFIG_SCHED_ARINC653=n
++      CONFIG_TRACEBUFFER=n
++      CONFIG_HYPFS=n
++      CONFIG_SPECULATIVE_HARDEN_ARRAY=n
++      CONFIG_ARGO=n
++      CONFIG_HYPFS_CONFIG=n
++      CONFIG_CORE_PARKING=n
++      CONFIG_DEBUG_TRACE=n
++      CONFIG_IOREQ_SERVER=n
++      CONFIG_CRASH_DEBUG=n
++      CONFIG_KEXEC=n
++      CONFIG_LIVEPATCH=n
++      CONFIG_NUMA=n
++      CONFIG_PERF_COUNTERS=n
++      CONFIG_HAS_PMAP=n
++      CONFIG_TRACEBUFFER=n
++      CONFIG_XENOPROF=n
++      CONFIG_COMPAT=n
++      CONFIG_COVERAGE=n
++      CONFIG_UBSAN=n
++      CONFIG_NEEDS_LIBELF=n
++      CONFIG_XSM=n
+diff --git a/xen/arch/riscv/configs/tiny64_defconfig b/xen/arch/riscv/configs/tiny64_defconfig
+index 09defe236b..35915255e6 100644
+--- a/xen/arch/riscv/configs/tiny64_defconfig
++++ b/xen/arch/riscv/configs/tiny64_defconfig
+@@ -7,6 +7,23 @@
+ # CONFIG_GRANT_TABLE is not set
+ # CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
+ # CONFIG_MEM_ACCESS is not set
++# CONFIG_ARGO is not set
++# CONFIG_HYPFS_CONFIG is not set
++# CONFIG_CORE_PARKING is not set
++# CONFIG_DEBUG_TRACE is not set
++# CONFIG_IOREQ_SERVER is not set
++# CONFIG_CRASH_DEBUG is not setz
++# CONFIG_KEXEC is not set
++# CONFIG_LIVEPATCH is not set
++# CONFIG_NUMA is not set
++# CONFIG_PERF_COUNTERS is not set
++# CONFIG_HAS_PMAP is not set
++# CONFIG_TRACEBUFFER is not set
++# CONFIG_XENOPROF is not set
++# CONFIG_COMPAT is not set
++# CONFIG_COVERAGE is not set
++# CONFIG_UBSAN is not set
++# CONFIG_NEEDS_LIBELF is not set
+ 
+ CONFIG_RISCV_64=y
+ CONFIG_DEBUG=y
+-- 
+2.43.0
 
- https://bugzilla.redhat.com/show_bug.cgi?id=3D2255625
-
-S=C3=A9bastien
-
---00000000000075cfa7060d1a2a3c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0ven. 22 d=C3=A9c. 2023 =C3=A0=
-=C2=A015:37, S=C3=A9bastien Chaumat &lt;<a href=3D"mailto:euidzero@gmail.co=
-m">euidzero@gmail.com</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
-gb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>By request of the l=
-aptop vendor (Framework) I&#39;m going to open the bug @fedora for them to =
-jump in.</div><span><div>=C2=A0</div></span></div></blockquote><div><br></d=
-iv><div>=C2=A0<a href=3D"https://bugzilla.redhat.com/show_bug.cgi?id=3D2255=
-625">https://bugzilla.redhat.com/show_bug.cgi?id=3D2255625</a></div><div><b=
-r></div><div>S=C3=A9bastien<br></div></div></div>
-
---00000000000075cfa7060d1a2a3c--
 
