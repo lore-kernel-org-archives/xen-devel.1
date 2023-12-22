@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C1FEC46CD2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D87EC47073
 	for <xen-devel@archiver.kernel.org>; Fri, 22 Dec 2023 15:13:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.659408.1028998 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.659411.1029040 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhDL-0007QL-G3; Fri, 22 Dec 2023 15:13:27 +0000
+	id 1rGhDP-00005Q-E9; Fri, 22 Dec 2023 15:13:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 659408.1028998; Fri, 22 Dec 2023 15:13:27 +0000
+Received: by outflank-mailman (output) from mailman id 659411.1029040; Fri, 22 Dec 2023 15:13:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rGhDL-0007OL-CD; Fri, 22 Dec 2023 15:13:27 +0000
-Received: by outflank-mailman (input) for mailman id 659408;
- Fri, 22 Dec 2023 15:13:26 +0000
+	id 1rGhDP-00005G-AL; Fri, 22 Dec 2023 15:13:31 +0000
+Received: by outflank-mailman (input) for mailman id 659411;
+ Fri, 22 Dec 2023 15:13:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=buqB=IB=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rGhDK-0007Ie-IC
- for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:26 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
+ id 1rGhDN-0007Ie-Sv
+ for xen-devel@lists.xenproject.org; Fri, 22 Dec 2023 15:13:29 +0000
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [2a00:1450:4864:20::232])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a7206e26-a0dc-11ee-98eb-6d05b1d4d9a1;
- Fri, 22 Dec 2023 16:13:25 +0100 (CET)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-50e70583191so93566e87.3
- for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:25 -0800 (PST)
+ id a995ebae-a0dc-11ee-98eb-6d05b1d4d9a1;
+ Fri, 22 Dec 2023 16:13:29 +0100 (CET)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ccae380df2so5219351fa.1
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2023 07:13:29 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.22
+ j7-20020a056512108700b0050e6df07728sm45983lfg.180.2023.12.22.07.13.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 07:13:23 -0800 (PST)
+ Fri, 22 Dec 2023 07:13:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7206e26-a0dc-11ee-98eb-6d05b1d4d9a1
+X-Inumbo-ID: a995ebae-a0dc-11ee-98eb-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703258004; x=1703862804; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1703258008; x=1703862808; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SyAi66B5lJY94tJWtmKWdmtOpI6CB1uTFL6t5fi0m/g=;
-        b=Rons/20rjHGfl/fPOMzvE0aHDMwx2GxooaFf18i49f/3t3n7RHJ+c41NAWa/QMmJds
-         itHEYXYzSilRuXGZDM8ZI4azLWsi300MCdINmtlgWCNJ06qHe6m6MHeJA1Him/kqK5zW
-         Y3NeZIe85yIahpigB30uNlFpMv2SjO0UObjdT1mmXv9Bzrgi287SxI8nYJAhV7uc+qkI
-         JdAjqwkuGHC7fHHmVynvwrjLDGPQIPoW6PqNcP0nY6Tmg2VIlx8nAMdmDKeWmdYTQlOZ
-         FPvtYsywu8XvehBJWoZidpRSANdFrcnRscglzDqTLmY+FkOIu+vfju8K38vw+VWzO7pV
-         6pBA==
+        bh=XxfRR5iTWHPrG0r8RfFYv+6SXwdr18UERnM1vGt8RNc=;
+        b=i/bckzCGI6P2VP/0O5yMdrsw5jIxbWBOX3lDoqebFZYewWcDOjNemoCZxCIbEzvndl
+         hMgxdXxNByoBcyBKmHiMcrn/dpOWckQexYq789DvJpG+FuRT0wFviL1bZkYSA6DoDw23
+         7YnagR0jYNt+CQwEilQ3+8e5JZrL7fZi9DfdUcFfp7eeSMPUfskJ1sH5+2cuz84JDV3i
+         GUwfJDx9ZbpKUOeeXyzRhcixHy3Wxjx+6xPAsS8bQTmbDILLF0wAudB0sxtnz0g/sb3n
+         tBlwluLRfMzyhdVcuFhRj71XyZldH9baNS1wlHdicrf3vsqIJ1YR6CcBrG4sGeELbNvR
+         52vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703258004; x=1703862804;
+        d=1e100.net; s=20230601; t=1703258008; x=1703862808;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SyAi66B5lJY94tJWtmKWdmtOpI6CB1uTFL6t5fi0m/g=;
-        b=W2YVLsflFnC/AI5hizB34o99Qf9dwSvzi5FyMXxlX8iYQcAl0Ks0VJmhkIJZiVZdNZ
-         KUFWNmQJPblbT9uB/Ev2BIpgP8aKeUyOQBzrIC8cPIq5kH1cZPTn9PFYL7uH86SHhLdD
-         tDa2lC9olJTBXyiefy1rpixNTsx01WBAlG8PCMoJNU2U5s+8NbFSi1T6fQw13UDvjGkI
-         DVE8lkKNFU1pn0juKbPPNMbpmeuwTz5+lke+UXNR35i7AH+7gNU9Mn+Y02Y+1qeg0x+g
-         25rJWKP4ocNXISEXKwDtaAH1azLEn4Y4SCzYKK9jsj8ZHAhm+z8i04vNLEimpJPWu1Lq
-         bxUA==
-X-Gm-Message-State: AOJu0YxfdLwlTlrERDrSVsgZUhx99etqKz56lKei9NFoidIgr4lb56Bj
-	KXUi7YJoFuWG9iLDb/y5cip3Jt45Txg=
-X-Google-Smtp-Source: AGHT+IEs+7oMk9zQ5GgSxjUfE24HdOn2Y1G6Urt5uFHmiLl/OsPtyoUC9y51SQjsL9FLWz+ePFoRPw==
-X-Received: by 2002:ac2:4d12:0:b0:50e:3b1:bf45 with SMTP id r18-20020ac24d12000000b0050e03b1bf45mr705673lfi.18.1703258004475;
-        Fri, 22 Dec 2023 07:13:24 -0800 (PST)
+        bh=XxfRR5iTWHPrG0r8RfFYv+6SXwdr18UERnM1vGt8RNc=;
+        b=Lqz2on1Z7mLHxQn9CK+nRez3Uyf5/67oX5d9163zRnseAQWIYBadFCJYcPtBYchbfL
+         0mpco40OpEFcXhrXOLZBTiTRiARVYF+UeWlfq86kFqzNn/lEKa0LB98CfOyIIESOJ0dD
+         TEAxev745zWkIH5fcBa+IvhCVm39g6kydtmH3OnLwv7z/zXVEJwWT/6oSxm3y80+fzwB
+         F2DXduwAjLBbqGA9iiScUApXKu3qfMdf9P9cJ1A6Nqk6tSsLUoPF/bt4Xds8mU4sr3nI
+         mjfO4e3b6Lo/ResS1G9tm2Iawa1xMuSSJZbrkfJwbCdPvDzXryr7PxjhYAmshhp1yVRZ
+         lLjQ==
+X-Gm-Message-State: AOJu0YwmuGkZcl1PH/cpEQJ5PJKmNLcqLKFj+6Z0pW8WWAY+kTWN5yUU
+	yZxLG/bDVHuzw9cwCtoB1Kq0RIJ2AA0=
+X-Google-Smtp-Source: AGHT+IEamhQQvmt0GN7tdFSr//TSSoXplDpq1N+R36tHrVkxKS4q38AjTIfliCZaHsIKus1ue0i05A==
+X-Received: by 2002:a19:7408:0:b0:50e:6bf0:49c9 with SMTP id v8-20020a197408000000b0050e6bf049c9mr378948lfe.53.1703258008130;
+        Fri, 22 Dec 2023 07:13:28 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -88,56 +88,85 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 02/34] xen/riscv: use some asm-generic headers
-Date: Fri, 22 Dec 2023 17:12:46 +0200
-Message-ID: <78a86aa86645c4c23a6294900385264c17a48864.1703255175.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 05/34] xen/riscv: introduce guest_atomics.h
+Date: Fri, 22 Dec 2023 17:12:49 +0200
+Message-ID: <fdbe7261178d057d9868aacea19c1c2b82d2da16.1703255175.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1703255175.git.oleksii.kurochko@gmail.com>
 References: <cover.1703255175.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some headers are the same as asm-generic verions of them
-so use them instead of arch-specific headers.
-
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
- As [PATCH v6 0/9] Introduce generic headers
- (https://lore.kernel.org/xen-devel/cover.1703072575.git.oleksii.kurochko@gmail.com/)
- is not stable, the list in asm/Makefile can be changed, but the changes will
- be easy.
 ---
 Changes in V3:
- - remove monitor.h from the RISC-V asm/Makefile list.
- - add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - update the commit message
+ - drop TODO commit.
+ - add ASSERT_UNREACHABLE for stubs guest functions.
+ - Add SPDX & footer
 ---
 Changes in V2:
- - New commit introduced in V2.
+ - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/Makefile | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/Makefile
+ xen/arch/riscv/include/asm/guest_atomics.h | 49 ++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/guest_atomics.h
 
-diff --git a/xen/arch/riscv/include/asm/Makefile b/xen/arch/riscv/include/asm/Makefile
+diff --git a/xen/arch/riscv/include/asm/guest_atomics.h b/xen/arch/riscv/include/asm/guest_atomics.h
 new file mode 100644
-index 0000000000..adb752b804
+index 0000000000..98f7df7b6a
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/Makefile
-@@ -0,0 +1,13 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+generic-y += altp2m.h
-+generic-y += device.h
-+generic-y += div64.h
-+generic-y += hardirq.h
-+generic-y += hypercall.h
-+generic-y += iocap.h
-+generic-y += numa.h
-+generic-y += paging.h
-+generic-y += percpu.h
-+generic-y += random.h
-+generic-y += softirq.h
-+generic-y += vm_event.h
++++ b/xen/arch/riscv/include/asm/guest_atomics.h
+@@ -0,0 +1,49 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_RISCV_GUEST_ATOMICS_H
++#define __ASM_RISCV_GUEST_ATOMICS_H
++
++#define guest_testop(name)                                                  \
++static inline int guest_##name(struct domain *d, int nr, volatile void *p)  \
++{                                                                           \
++    (void) d;                                                               \
++    (void) nr;                                                              \
++    (void) p;                                                               \
++                                                                            \
++    ASSERT_UNREACHABLE();                                                   \
++                                                                            \
++    return 0;                                                               \
++}
++
++#define guest_bitop(name)                                                   \
++static inline void guest_##name(struct domain *d, int nr, volatile void *p) \
++{                                                                           \
++    (void) d;                                                               \
++    (void) nr;                                                              \
++    (void) p;                                                               \
++    ASSERT_UNREACHABLE();                                                   \
++}
++
++guest_bitop(set_bit)
++guest_bitop(clear_bit)
++guest_bitop(change_bit)
++
++#undef guest_bitop
++
++guest_testop(test_and_set_bit)
++guest_testop(test_and_clear_bit)
++guest_testop(test_and_change_bit)
++
++#undef guest_testop
++
++#define guest_test_bit(d, nr, p) ((void)(d), test_bit(nr, p))
++
++#endif /* __ASM_RISCV_GUEST_ATOMICS_H */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.43.0
 
