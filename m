@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C924FC4725D
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jan 2024 09:52:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.660570.1030138 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B350C47DA7
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jan 2024 09:52:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.660566.1030100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rKbRH-00006y-Aa; Tue, 02 Jan 2024 09:51:59 +0000
+	id 1rKbRD-0007XW-9t; Tue, 02 Jan 2024 09:51:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 660570.1030138; Tue, 02 Jan 2024 09:51:59 +0000
+Received: by outflank-mailman (output) from mailman id 660566.1030100; Tue, 02 Jan 2024 09:51:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rKbRG-00004y-Pa; Tue, 02 Jan 2024 09:51:58 +0000
-Received: by outflank-mailman (input) for mailman id 660570;
- Tue, 02 Jan 2024 09:51:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rKbRD-0007Uu-3T; Tue, 02 Jan 2024 09:51:55 +0000
+Received: by outflank-mailman (input) for mailman id 660566;
+ Tue, 02 Jan 2024 09:51:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mpFB=IM=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1rKbRF-0006VR-Dt
- for xen-devel@lists.xenproject.org; Tue, 02 Jan 2024 09:51:57 +0000
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [2a00:1450:4864:20::536])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90d9161f-a954-11ee-98ef-6d05b1d4d9a1;
- Tue, 02 Jan 2024 10:51:56 +0100 (CET)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-556431c7d51so1221806a12.2
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jan 2024 01:51:56 -0800 (PST)
+ id 1rKbRC-00060C-4f
+ for xen-devel@lists.xenproject.org; Tue, 02 Jan 2024 09:51:54 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8e26080d-a954-11ee-9b0f-b553b5be7939;
+ Tue, 02 Jan 2024 10:51:52 +0100 (CET)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5534dcfdd61so15741353a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jan 2024 01:51:52 -0800 (PST)
 Received: from carlo-ubuntu.minervasys.tech (nonato.mo54.unimo.it.
  [155.185.85.8]) by smtp.gmail.com with ESMTPSA id
- s4-20020a1709066c8400b00a1f7ab65d3fsm11541845ejr.131.2024.01.02.01.51.55
+ s4-20020a1709066c8400b00a1f7ab65d3fsm11541845ejr.131.2024.01.02.01.51.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jan 2024 01:51:55 -0800 (PST)
+ Tue, 02 Jan 2024 01:51:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,174 +47,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90d9161f-a954-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: 8e26080d-a954-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1704189116; x=1704793916; darn=lists.xenproject.org;
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1704189111; x=1704793911; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=O+nY1AcQoCECW9cvYTyCa0KuWYpxftrNLY7zKkG+lX0=;
-        b=p6VmLlhs+6VMCbJpQVSixQtlUe1Oi/JKJPsU1NYopCtF2sJotzmkVfKuzWkl671LCv
-         po14ttvQCW15jRP72qS6GhyEhjB6wefiN91JpzK58NGqRL8CXwzFfAms2J8HDWt36HiA
-         VHd3luFdG7a2nHwSUThJJ4+A019YAtZYoPxG9XU7tBu7Cp4v4qACUe3DaZdO04MDiPVg
-         p4r9cFtRWJ2DYa9Wto4kXzLXYQJTfGPOTGSwY3XeKywR836k5FQpNNQUhqg8/YV9bMOb
-         Gw7g6i7SU38fjcqx43vL6mfQLyIDThvUJQ9tbbG5Wj2R3E4jq61bWE7UyCfyLn9b5/mq
-         3HLA==
+        bh=sP9qQ4nWMhVEqh2w5k34a2KqREJgBIKIufbFzw/gkj0=;
+        b=ecE6WAHRUfIqOWJvNjMbA71GLSIneRm3nz3q4CLSXM7OWfi/YYs6VGQiDVhI7iYZ80
+         tBJSV0DKdGIZ2+OU3aOlkACU6XnQd6gPMK/ZeZXgc+as6kMJ+cHyGdJLEHcCo93eKDck
+         /bQ5RsoXbLfPvv+jhOIs9rdaUg+cGpzhle45+9xkyBYCLEQZUD/4U3XJBLInIr26laGO
+         DMMeEelxTzTOnTSCFwu5qIilzroOjh0jpHpaZ0c+wH/FNKzjwl9F5nwe1AO5/jlXFDH7
+         9laCZbWKEqXlTVgdfPOJWPmg+dGSmxQ1gPZiPgi5pWtGXY8LtEewisLy2LzJxY0gHwAr
+         XjJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704189116; x=1704793916;
+        d=1e100.net; s=20230601; t=1704189111; x=1704793911;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=O+nY1AcQoCECW9cvYTyCa0KuWYpxftrNLY7zKkG+lX0=;
-        b=HDLId8AAinwNaupFWMNuP7SjyupgmRp5Pf5JMRQfNRJwGqptuNkeV9pQkQ0pF2TWcI
-         N191fTFnK4d8nfAXmElqFQgA89FJihy+/1PI4kyAHiRWVZkR0T6wW6LhVJ5ajR0QlBBY
-         zD5iRcGV4M5zPsiQylBCJUNNKmpiUWigtuDbgFL9jN5LxmnvGQAPOrKJTqmFc6o6uFNg
-         sY2Or7dm439u3Qh39D+aiP8X9AFwFdN4h7UeY2nNlBB3/zJxeUZ23Iz6ky331r36V+ss
-         Ft4ggehmuLBQaDZrlxTvLBU0TsEuhUky4gwfHP646Kgkgtr73d5NjD4jlHtItJAWXDTw
-         vtGQ==
-X-Gm-Message-State: AOJu0YynuSRSJv46kxTnyp/7BlNugnQE+pgZmE/Dzui+k5xN0ALgIRus
-	PDXGc5hZPkVA7rCbNI02/SSORD0ve/82z8uxAB1/QCpEtO0=
-X-Google-Smtp-Source: AGHT+IH4y/zq1O7BDpjHBHIcYJ/XVuHSLzMuDKRzUA0tlTTyF5q1wpx+WPkHpbSnn0Tf82YWSlUSVg==
-X-Received: by 2002:a17:906:1d6:b0:a26:8dee:a601 with SMTP id 22-20020a17090601d600b00a268deea601mr4140269ejj.247.1704189116239;
-        Tue, 02 Jan 2024 01:51:56 -0800 (PST)
+        bh=sP9qQ4nWMhVEqh2w5k34a2KqREJgBIKIufbFzw/gkj0=;
+        b=cpWUm+Mrd8GW7FY2FZg33GuT1St6KZsGrnYTFJhAY2V54HecHAfJFeqwq8b2rIwkqD
+         tZJrEb9S2PfB72UQBUbO5UlfA1MgkJoPwk5EOL/ZS04rPZ9IwmMbtO1vyUp/2TNJEfUw
+         RVHF7CPoOILA7aFxhA5O3pNDAeMVMji9ddxWl6hMw4AKmltJXdRnwjrRoFKlAJbJSjgb
+         F4R75nEOVKDemQK/p02kQ2e08/SICXr0I63t7awvH/IoxyzzZJPg1S+QKaR/gBJce7nx
+         jWIR1PUV4K2cHXtcGiCB5ud6Oz7WyqAZkz/kmK7mVug6jdrDLkq/PCHaB/E/gOVY7rjq
+         kjmA==
+X-Gm-Message-State: AOJu0YyGErk2wYI6i8s8SSh39iXyY5aikUDnORP9rFXtJnMokbeGm6+6
+	dCHvsKDnHGhQkkRyyICP9NzloeN/CUVLxzG95V0xB1Lkfl0=
+X-Google-Smtp-Source: AGHT+IEiZwHgqGDzuq+CofvQaRdVDEsDJPXCGOUEkAORhykUWO5dX2Iao98Y4vvHu0kxk7Vf/wPajw==
+X-Received: by 2002:a17:907:318c:b0:a27:a80a:917c with SMTP id xe12-20020a170907318c00b00a27a80a917cmr6506165ejb.2.1704189111430;
+        Tue, 02 Jan 2024 01:51:51 -0800 (PST)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
-Cc: Luca Miccio <lucmiccio@gmail.com>,
+Cc: Carlo Nonato <carlo.nonato@minervasys.tech>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Marco Solieri <marco.solieri@minervasys.tech>,
-	Carlo Nonato <carlo.nonato@minervasys.tech>
-Subject: [PATCH v5 12/13] xen/arm: add Xen cache colors command line parameter
-Date: Tue,  2 Jan 2024 10:51:37 +0100
-Message-Id: <20240102095138.17933-13-carlo.nonato@minervasys.tech>
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH v5 07/13] xen/page_alloc: introduce init_free_page_fields() helper
+Date: Tue,  2 Jan 2024 10:51:32 +0100
+Message-Id: <20240102095138.17933-8-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240102095138.17933-1-carlo.nonato@minervasys.tech>
 References: <20240102095138.17933-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Luca Miccio <lucmiccio@gmail.com>
+Introduce a new helper to initialize fields that have different uses for
+free pages.
 
-This commit adds a new command line parameter to configure Xen cache colors.
-These colors can be dumped with the cache coloring info debug-key.
-
-By default, Xen uses the first color.
-Benchmarking the VM interrupt response time provides an estimation of
-LLC usage by Xen's most latency-critical runtime task. Results on Arm
-Cortex-A53 on Xilinx Zynq UltraScale+ XCZU9EG show that one color, which
-reserves 64 KiB of L2, is enough to attain best responsiveness.
-
-More colors are instead very likely to be needed on processors whose L1
-cache is physically-indexed and physically-tagged, such as Cortex-A57.
-In such cases, coloring applies to L1 also, and there typically are two
-distinct L1-colors. Therefore, reserving only one color for Xen would
-senselessly partitions a cache memory that is already private, i.e.
-underutilize it. The default amount of Xen colors is thus set to one.
-
-Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 ---
- docs/misc/xen-command-line.pandoc | 10 ++++++++++
- xen/arch/arm/llc-coloring.c       | 29 +++++++++++++++++++++++++++++
- 2 files changed, 39 insertions(+)
+v5:
+- new patch
+---
+ xen/common/page_alloc.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 163fe7bcb1..f983f22796 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2877,6 +2877,16 @@ mode.
- **WARNING: `x2apic_phys` is deprecated and superseded by `x2apic-mode`.
- The latter takes precedence if both are set.**
- 
-+### xen-llc-colors (arm64)
-+> `= List of [ <integer> | <integer>-<integer> ]`
-+
-+> Default: `0: the lowermost color`
-+
-+Specify Xen LLC color configuration. This options is available only when
-+`CONFIG_LLC_COLORING` is enabled.
-+Two colors are most likely needed on platforms where private caches are
-+physically indexed, e.g. the L1 instruction cache of the Arm Cortex-A57.
-+
- ### xenheap_megabytes (arm32)
- > `= <size>`
- 
-diff --git a/xen/arch/arm/llc-coloring.c b/xen/arch/arm/llc-coloring.c
-index 526129cc43..99ea69ad39 100644
---- a/xen/arch/arm/llc-coloring.c
-+++ b/xen/arch/arm/llc-coloring.c
-@@ -18,6 +18,9 @@
- #include <asm/processor.h>
- #include <asm/sysregs.h>
- 
-+#define XEN_DEFAULT_COLOR       0
-+#define XEN_DEFAULT_NUM_COLORS  1
-+
- bool __ro_after_init llc_coloring_enabled;
- boolean_param("llc-coloring", llc_coloring_enabled);
- 
-@@ -30,6 +33,9 @@ static unsigned int __ro_after_init nr_colors = CONFIG_NR_LLC_COLORS;
- static unsigned int __ro_after_init dom0_colors[CONFIG_NR_LLC_COLORS];
- static unsigned int __ro_after_init dom0_num_colors;
- 
-+static unsigned int __ro_after_init xen_colors[CONFIG_NR_LLC_COLORS];
-+static unsigned int __ro_after_init xen_num_colors;
-+
- #define mfn_color_mask              (nr_colors - 1)
- #define mfn_to_color(mfn)           (mfn_x(mfn) & mfn_color_mask)
- 
-@@ -87,6 +93,12 @@ static int __init parse_dom0_colors(const char *s)
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index d874525916..9ee3981bb5 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -928,6 +928,13 @@ static struct page_info *get_free_buddy(unsigned int zone_lo,
+     }
  }
- custom_param("dom0-llc-colors", parse_dom0_colors);
  
-+static int __init parse_xen_colors(const char *s)
++/* Initialise fields which have other uses for free pages. */
++static void init_free_page_fields(struct page_info *pg)
 +{
-+    return parse_color_config(s, xen_colors, &xen_num_colors);
++    pg->u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
++    page_set_owner(pg, NULL);
 +}
-+custom_param("xen-llc-colors", parse_xen_colors);
 +
- /* Return the LLC way size by probing the hardware */
- static unsigned int __init get_llc_way_size(void)
- {
-@@ -161,6 +173,8 @@ static void dump_coloring_info(unsigned char key)
-     printk("'%c' pressed -> dumping LLC coloring general info\n", key);
-     printk("LLC way size: %u KiB\n", llc_way_size >> 10);
-     printk("Number of LLC colors supported: %u\n", nr_colors);
-+    printk("Xen has %u LLC colors: ", xen_num_colors);
-+    print_colors(xen_colors, xen_num_colors);
- }
+ /* Allocate 2^@order contiguous pages. */
+ static struct page_info *alloc_heap_pages(
+     unsigned int zone_lo, unsigned int zone_hi,
+@@ -1036,10 +1043,7 @@ static struct page_info *alloc_heap_pages(
+             accumulate_tlbflush(&need_tlbflush, &pg[i],
+                                 &tlbflush_timestamp);
  
- static bool check_colors(unsigned int *colors, unsigned int num_colors)
-@@ -217,6 +231,21 @@ bool __init llc_coloring_init(void)
-         return false;
+-        /* Initialise fields which have other uses for free pages. */
+-        pg[i].u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
+-        page_set_owner(&pg[i], NULL);
+-
++        init_free_page_fields(&pg[i]);
      }
  
-+    if ( !xen_num_colors )
-+    {
-+        printk(XENLOG_WARNING
-+               "Xen LLC color config not found. Using default color: %u\n",
-+               XEN_DEFAULT_COLOR);
-+        xen_colors[0] = XEN_DEFAULT_COLOR;
-+        xen_num_colors = XEN_DEFAULT_NUM_COLORS;
-+    }
-+
-+    if ( !check_colors(xen_colors, xen_num_colors) )
-+    {
-+        printk(XENLOG_ERR "Bad LLC color config for Xen\n");
-+        return false;
-+    }
-+
-     register_keyhandler('K', dump_coloring_info, "dump LLC coloring info", 1);
+     spin_unlock(&heap_lock);
+@@ -2802,9 +2806,7 @@ static bool prepare_staticmem_pages(struct page_info *pg, unsigned long nr_mfns,
+          * to PGC_state_inuse.
+          */
+         pg[i].count_info = PGC_static | PGC_state_inuse;
+-        /* Initialise fields which have other uses for free pages. */
+-        pg[i].u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
+-        page_set_owner(&pg[i], NULL);
++        init_free_page_fields(&pg[i]);
+     }
  
-     return true;
+     spin_unlock(&heap_lock);
 -- 
 2.34.1
 
