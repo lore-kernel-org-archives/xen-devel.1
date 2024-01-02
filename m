@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A628C47079
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1038CC4707B
 	for <xen-devel@archiver.kernel.org>; Tue,  2 Jan 2024 09:52:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.660559.1030035 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.660568.1030121 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rKbR7-00060a-OB; Tue, 02 Jan 2024 09:51:49 +0000
+	id 1rKbRF-00084o-7o; Tue, 02 Jan 2024 09:51:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 660559.1030035; Tue, 02 Jan 2024 09:51:49 +0000
+Received: by outflank-mailman (output) from mailman id 660568.1030121; Tue, 02 Jan 2024 09:51:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rKbR7-00060T-LA; Tue, 02 Jan 2024 09:51:49 +0000
-Received: by outflank-mailman (input) for mailman id 660559;
- Tue, 02 Jan 2024 09:51:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rKbRE-00083l-Vu; Tue, 02 Jan 2024 09:51:56 +0000
+Received: by outflank-mailman (input) for mailman id 660568;
+ Tue, 02 Jan 2024 09:51:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mpFB=IM=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1rKbR6-00060C-Cd
- for xen-devel@lists.xenproject.org; Tue, 02 Jan 2024 09:51:48 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 898aadf1-a954-11ee-9b0f-b553b5be7939;
- Tue, 02 Jan 2024 10:51:44 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a2343c31c4bso1029653166b.1
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jan 2024 01:51:44 -0800 (PST)
+ id 1rKbRD-0006VR-Ig
+ for xen-devel@lists.xenproject.org; Tue, 02 Jan 2024 09:51:55 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8fd18725-a954-11ee-98ef-6d05b1d4d9a1;
+ Tue, 02 Jan 2024 10:51:55 +0100 (CET)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-55539cac143so5756691a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jan 2024 01:51:55 -0800 (PST)
 Received: from carlo-ubuntu.minervasys.tech (nonato.mo54.unimo.it.
  [155.185.85.8]) by smtp.gmail.com with ESMTPSA id
- s4-20020a1709066c8400b00a1f7ab65d3fsm11541845ejr.131.2024.01.02.01.51.42
+ s4-20020a1709066c8400b00a1f7ab65d3fsm11541845ejr.131.2024.01.02.01.51.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jan 2024 01:51:43 -0800 (PST)
+ Tue, 02 Jan 2024 01:51:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,141 +47,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 898aadf1-a954-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 8fd18725-a954-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1704189103; x=1704793903; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=beeGC4zsHWhix8z9+UTegvQD7zyehBOaMLb6lMZd4h0=;
-        b=ScFGNVRFD+QEHsy+3uBdFkoarlQxzfjEjHWNKd509cKufCuDx8vDjb5QecpAlh7fCZ
-         gIrp825vFtFtpV9bp3nAr84rFa3+8m3bgg+nv1OiD2M1/vi4Kx3c2dPTBB+CzSQJwX5f
-         g9PaFprpEwF4NPUU/sVAdaP8vRS+J4Ri9pM/OG7sE+ZJDQd+Z6Q1YdF9WAQaCFQgBHTd
-         EcIZrskphQo8xF4FQtc5PRIvkjFsFa3CYkJ8udaqYc25nKvVTbijWgtSc2tKmNnRm6ao
-         lUpw7AulTfYq9cse/x4nLX+Z8OUYb4Zs8jgMCajKeQ4ytTtSlkRNXtLqnwKaieepJ3qG
-         Yyyw==
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1704189114; x=1704793914; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Yh1Spa5a2++HjujwNRVja92wtQd0bdVMGwtSuj79fk4=;
+        b=g+jiiIOdGr+aw4rEtsXCTNGhkH1+y4XmhYTbaf9NuR+rqLrf2e9JLyaRhiuZeNjpiz
+         mLMpY+Ah6b5j/xwsuJ/qn0Jv/Gm2o+gv8e91/KQ3MaL1uGn7j34XZ4zAtZMrY1l2NMdT
+         4XAFd63sbaUFU4vQSFdduvqXfb2TwK7EPsyEQ9I3f4REdJtH3L4o05SPlRId+oKY50DX
+         FwcNkOCFV4yXkX/D2rfcULdudGDGmSUf2gc624yVHa/aA4ouLRkimuymJ4Gscz30y5XT
+         8uNw1L4dd3fnuXRi2x01zR0q7L2uQYNv1QJ0O7HJuQpBssPjR2bH9L+ayuR7nRO/BDPX
+         sj9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704189103; x=1704793903;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=beeGC4zsHWhix8z9+UTegvQD7zyehBOaMLb6lMZd4h0=;
-        b=oOS9VxmOfOraS55t+DIJ5YVRPttQ5oAUhHLF/Fho08soKA0LIucnQyUp3NbHJ1NlzG
-         pPwQpDAByRZDImW6SEretziujduEhAOgcFwmvzbdY33rUK1o/lZ6aGTzm9hu83AeVwr5
-         M00CLIcYB0bCvMPFNSw+nERH3KtcaiD20AcewcruuSy1OMzic2sNkT/5KyMXalnd4Sw2
-         oa+wQ1+3MSG+/N4waAWtuCA1R6e4LrYJbO30WOEPfJxISPJpXavm0jGjsEQuSidruxhV
-         4ThL4iGx0EZl0vBhWmUUkBPUVk5S5FUDtupgzstdfAf/+R/P798v6dt1SAEIhG7IIM39
-         bFRg==
-X-Gm-Message-State: AOJu0YzUsqX6J2WokpL4AmiQZ+vXoDFl2zw9QzEsFxbjpZA8HozGCU3o
-	ym7CfYC40xedUYR1FFvCAQax9TLuJB3PcCdS06gV0KgZTOw=
-X-Google-Smtp-Source: AGHT+IFBeOlKj/wqrRUDDlGS4B5/Oh/4prEYxZjEKVhij9gmAKGfR7wZKQFvlI3x0eq+AD9Ow2FleA==
-X-Received: by 2002:a17:907:12d5:b0:a27:c65b:67ed with SMTP id vp21-20020a17090712d500b00a27c65b67edmr883137ejb.26.1704189103396;
-        Tue, 02 Jan 2024 01:51:43 -0800 (PST)
+        d=1e100.net; s=20230601; t=1704189114; x=1704793914;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Yh1Spa5a2++HjujwNRVja92wtQd0bdVMGwtSuj79fk4=;
+        b=dt7T2Zw6ZJYbH0NuB4R1rMbKGEK4ZPn3LcHx2redNNXpBQY3ofxGmi8eOoUVJD86/v
+         5k1JKemWUdcR3HOFc2ZLBTsJtz8DCUPIoRExiLlI/kCDWp8S1sI3FPSTg5tn02FnR4Uv
+         8JAQvoO6ch7Wx9x64hgyw0Pb3RK9Dj1ZVlFJ3yUep8dN6lCv0C93LYPpjtSovzWgBsNV
+         SaRk8pc2INkXMAzObbtj8CPZiZbvoqVE/IU1vnyJTfrewLj/aLxEf5x+0ldj2hpKxiUS
+         izQ67T1mxN/qv9EB7lPndl+7lD1uiYZXLTUdq++yHpP3fGg91QV+29A2uFZHfpSU9eor
+         wkvA==
+X-Gm-Message-State: AOJu0YxmA0dm/9K0LNZ8y2RdPauk6zmZEDMNRr8oGTK7/eH7aCU45KQ5
+	acozzFr3FoSzhN6U52buRYl5pX3dON06aZqZnPYYgiecqOc=
+X-Google-Smtp-Source: AGHT+IGsDNMl5Y9JClEF0mL/6gxoCKBwi9CxutTOJTPmX7FLmvMDFBlSRc7c6XX9heUNA5DON57FyQ==
+X-Received: by 2002:a17:907:928b:b0:a27:6648:cc3e with SMTP id bw11-20020a170907928b00b00a276648cc3emr5019435ejc.74.1704189114633;
+        Tue, 02 Jan 2024 01:51:54 -0800 (PST)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v5 00/13] Arm cache coloring
-Date: Tue,  2 Jan 2024 10:51:25 +0100
-Message-Id: <20240102095138.17933-1-carlo.nonato@minervasys.tech>
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH v5 10/13] xen/arm: use domain memory to allocate p2m page tables
+Date: Tue,  2 Jan 2024 10:51:35 +0100
+Message-Id: <20240102095138.17933-11-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240102095138.17933-1-carlo.nonato@minervasys.tech>
+References: <20240102095138.17933-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Shared caches in multi-core CPU architectures represent a problem for
-predictability of memory access latency. This jeopardizes applicability
-of many Arm platform in real-time critical and mixed-criticality
-scenarios. We introduce support for cache partitioning with page
-coloring, a transparent software technique that enables isolation
-between domains and Xen, and thus avoids cache interference.
+Cache colored domains can benefit from having p2m page tables allocated
+with the same coloring schema so that isolation can be achieved also for
+those kind of memory accesses.
+In order to do that, the domain struct is passed to the allocator and the
+MEMF_no_owner flag is used.
 
-When creating a domain, a simple syntax (e.g. `0-3` or `4-11`) allows
-the user to define assignments of cache partitions ids, called colors,
-where assigning different colors guarantees no mutual eviction on cache
-will ever happen. This instructs the Xen memory allocator to provide
-the i-th color assignee only with pages that maps to color i, i.e. that
-are indexed in the i-th cache partition.
+This will be useful also when NUMA will be supported on Arm.
 
-The proposed implementation supports the dom0less feature.
-The proposed implementation doesn't support the static-mem feature.
-The solution has been tested in several scenarios, including Xilinx Zynq
-MPSoCs.
+Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+---
+v5:
+- new patch
+---
+ xen/arch/arm/mmu/p2m.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-In this patch series there are two major unacceptable workarounds for which
-I want to ask you for comments:
- - #3: allocate_memory() has been moved in dom0less_build.c, so I just copied
- it back to make it compile.
- - #13: consider_modules() has been moved to arm32 only. Again I just copied it.
-
-Carlo Nonato (12):
-  xen/common: add cache coloring common code
-  xen/arm: add cache coloring initialization
-  xen/arm: add Dom0 cache coloring support
-  xen: extend domctl interface for cache coloring
-  tools: add support for cache coloring configuration
-  xen/arm: add support for cache coloring configuration via device-tree
-  xen/page_alloc: introduce init_free_page_fields() helper
-  xen/page_alloc: introduce preserved page flags macro
-  xen: add cache coloring allocator for domains
-  xen/arm: use domain memory to allocate p2m page tables
-  Revert "xen/arm: Remove unused BOOT_RELOC_VIRT_START"
-  xen/arm: add cache coloring support for Xen
-
-Luca Miccio (1):
-  xen/arm: add Xen cache colors command line parameter
-
- docs/man/xl.cfg.5.pod.in                |  10 +
- docs/misc/arm/cache-coloring.rst        | 209 ++++++++++++
- docs/misc/arm/device-tree/booting.txt   |   4 +
- docs/misc/xen-command-line.pandoc       |  61 ++++
- tools/include/libxl.h                   |   5 +
- tools/include/xenctrl.h                 |   9 +
- tools/libs/ctrl/xc_domain.c             |  34 ++
- tools/libs/light/libxl_create.c         |   9 +
- tools/libs/light/libxl_types.idl        |   1 +
- tools/xl/xl_parse.c                     |  38 ++-
- xen/arch/Kconfig                        |  28 ++
- xen/arch/arm/Kconfig                    |   1 +
- xen/arch/arm/Makefile                   |   1 +
- xen/arch/arm/alternative.c              |   9 +-
- xen/arch/arm/arm64/mmu/head.S           |  48 +++
- xen/arch/arm/arm64/mmu/mm.c             |  26 +-
- xen/arch/arm/dom0less-build.c           |  19 ++
- xen/arch/arm/domain_build.c             |  60 +++-
- xen/arch/arm/include/asm/llc-coloring.h |  46 +++
- xen/arch/arm/include/asm/mm.h           |  12 +-
- xen/arch/arm/include/asm/mmu/layout.h   |   2 +
- xen/arch/arm/include/asm/processor.h    |  16 +
- xen/arch/arm/llc-coloring.c             | 409 ++++++++++++++++++++++++
- xen/arch/arm/mmu/p2m.c                  |   4 +-
- xen/arch/arm/mmu/setup.c                |  83 ++++-
- xen/arch/arm/mmu/smpboot.c              |  11 +-
- xen/arch/arm/psci.c                     |   9 +-
- xen/arch/arm/setup.c                    | 172 +++++++++-
- xen/arch/arm/smpboot.c                  |   9 +-
- xen/common/Kconfig                      |   3 +
- xen/common/domain.c                     |   4 +
- xen/common/domctl.c                     |  11 +
- xen/common/keyhandler.c                 |   4 +
- xen/common/page_alloc.c                 | 217 ++++++++++++-
- xen/include/public/domctl.h             |  10 +-
- xen/include/xen/llc-coloring.h          |  53 +++
- xen/include/xen/sched.h                 |   5 +
- 37 files changed, 1610 insertions(+), 42 deletions(-)
- create mode 100644 docs/misc/arm/cache-coloring.rst
- create mode 100644 xen/arch/arm/include/asm/llc-coloring.h
- create mode 100644 xen/arch/arm/llc-coloring.c
- create mode 100644 xen/include/xen/llc-coloring.h
-
+diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+index 41fcca011c..d02a478cb8 100644
+--- a/xen/arch/arm/mmu/p2m.c
++++ b/xen/arch/arm/mmu/p2m.c
+@@ -32,7 +32,7 @@ static struct page_info *p2m_alloc_page(struct domain *d)
+      */
+     if ( is_hardware_domain(d) )
+     {
+-        pg = alloc_domheap_page(NULL, 0);
++        pg = alloc_domheap_page(d, MEMF_no_owner);
+         if ( pg == NULL )
+             printk(XENLOG_G_ERR "Failed to allocate P2M pages for hwdom.\n");
+     }
+@@ -81,7 +81,7 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+         if ( d->arch.paging.p2m_total_pages < pages )
+         {
+             /* Need to allocate more memory from domheap */
+-            pg = alloc_domheap_page(NULL, 0);
++            pg = alloc_domheap_page(d, MEMF_no_owner);
+             if ( pg == NULL )
+             {
+                 printk(XENLOG_ERR "Failed to allocate P2M pages.\n");
 -- 
 2.34.1
 
