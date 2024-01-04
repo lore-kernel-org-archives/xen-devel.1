@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2347C47073
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jan 2024 09:12:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.661297.1031067 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A60B7C4707B
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jan 2024 09:12:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.661296.1031061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLJmV-0006DC-1E; Thu, 04 Jan 2024 09:12:51 +0000
+	id 1rLJmU-00067O-L6; Thu, 04 Jan 2024 09:12:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 661297.1031067; Thu, 04 Jan 2024 09:12:50 +0000
+Received: by outflank-mailman (output) from mailman id 661296.1031061; Thu, 04 Jan 2024 09:12:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLJmU-0006CW-RZ; Thu, 04 Jan 2024 09:12:50 +0000
-Received: by outflank-mailman (input) for mailman id 661297;
- Thu, 04 Jan 2024 09:12:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rLJmU-00066x-Hj; Thu, 04 Jan 2024 09:12:50 +0000
+Received: by outflank-mailman (input) for mailman id 661296;
+ Thu, 04 Jan 2024 09:12:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4u2H=IO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rLJd5-00085z-Jz
- for xen-devel@lists.xenproject.org; Thu, 04 Jan 2024 09:03:07 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [2a07:de40:b251:101:10:150:64:2])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1352774b-aae0-11ee-98ef-6d05b1d4d9a1;
- Thu, 04 Jan 2024 10:03:07 +0100 (CET)
+ id 1rLJc8-0007Zm-7Y
+ for xen-devel@lists.xenproject.org; Thu, 04 Jan 2024 09:02:08 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ef0dd399-aadf-11ee-9b0f-b553b5be7939;
+ Thu, 04 Jan 2024 10:02:06 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id AA03D1F7F8;
- Thu,  4 Jan 2024 09:03:06 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C75D921F8C;
+ Thu,  4 Jan 2024 09:02:05 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8011813722;
- Thu,  4 Jan 2024 09:03:06 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A1CE513722;
+ Thu,  4 Jan 2024 09:02:05 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id +FH+HUp0lmU0WQAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 04 Jan 2024 09:03:06 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id Q5AiJg10lmXYWAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 04 Jan 2024 09:02:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,163 +53,261 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1352774b-aae0-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: ef0dd399-aadf-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1704358986; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1704358925; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Ssx28FcEWEf2WDI9VVHEBGrcITBSOtj2P4cTrF0KhcY=;
-	b=mg93sztlJ1BGH9KTiHaoUtYeL3OkskcbD0YDM0CwRBw0bFUNtu0hN/Ze9elQfPDslAEZmJ
-	TD98sq+9mo1YwK9My4O1xmS0E9t5r1aPbIvwatkaJMGD1zY/ScYrRLGbZnxDGV3wQDVSus
-	QkzoOGkonSXVYL+eJxKm8Bil5zOofGk=
+	bh=u9IiqoAT56C+h23tOpIynn8xmHY6LcxxwPGqEgbggL8=;
+	b=NIhr69+OtpqXstkMNcDOKP0hbE+nWmJOYDF4ITusVK6zKDXPfIdNKXx7hYm3pnjL8y+Kdd
+	9btmPoyXHbrF5GRjVMwY+DG3emoadrQ0q2nhzKKbnYJipTQCLJssGnyUeLDdY/6K75w2sK
+	2ENuFPrvJz5KUHd8OTMuPrAGGmp0gl4=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1704358986; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1704358925; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Ssx28FcEWEf2WDI9VVHEBGrcITBSOtj2P4cTrF0KhcY=;
-	b=mg93sztlJ1BGH9KTiHaoUtYeL3OkskcbD0YDM0CwRBw0bFUNtu0hN/Ze9elQfPDslAEZmJ
-	TD98sq+9mo1YwK9My4O1xmS0E9t5r1aPbIvwatkaJMGD1zY/ScYrRLGbZnxDGV3wQDVSus
-	QkzoOGkonSXVYL+eJxKm8Bil5zOofGk=
+	bh=u9IiqoAT56C+h23tOpIynn8xmHY6LcxxwPGqEgbggL8=;
+	b=NIhr69+OtpqXstkMNcDOKP0hbE+nWmJOYDF4ITusVK6zKDXPfIdNKXx7hYm3pnjL8y+Kdd
+	9btmPoyXHbrF5GRjVMwY+DG3emoadrQ0q2nhzKKbnYJipTQCLJssGnyUeLDdY/6K75w2sK
+	2ENuFPrvJz5KUHd8OTMuPrAGGmp0gl4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v3 23/33] tools/xenstored: move systemd handling to posix.c
-Date: Thu,  4 Jan 2024 10:00:45 +0100
-Message-Id: <20240104090055.27323-24-jgross@suse.com>
+Subject: [PATCH v3 12/33] tools/xenlogd: add 9pfs create request support
+Date: Thu,  4 Jan 2024 10:00:34 +0100
+Message-Id: <20240104090055.27323-13-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240104090055.27323-1-jgross@suse.com>
 References: <20240104090055.27323-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [0.90 / 50.00];
+X-Spamd-Result: default: False [-2.10 / 50.00];
 	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
-	 TO_DN_SOME(0.00)[];
+	 RCPT_COUNT_THREE(0.00)[4];
 	 R_MISSING_CHARSET(2.50)[];
 	 TO_MATCH_ENVRCPT_ALL(0.00)[];
 	 MIME_GOOD(-0.10)[text/plain];
 	 REPLY(-4.00)[];
 	 BROKEN_CONTENT_TYPE(1.50)[];
-	 RCPT_COUNT_FIVE(0.00)[5];
 	 RCVD_COUNT_THREE(0.00)[3];
+	 TO_DN_SOME(0.00)[];
 	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	 MID_CONTAINS_FROM(1.00)[];
 	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
 	 FUZZY_BLOCKED(0.00)[rspamd.com];
 	 FROM_EQ_ENVFROM(0.00)[];
 	 MIME_TRACE(0.00)[0:+];
-	 RCVD_TLS_ALL(0.00)[]
-Authentication-Results: smtp-out2.suse.de;
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-3.00)[100.00%]
+Authentication-Results: smtp-out1.suse.de;
 	none
 
-Move systemd handling to a new late_init() function in posix.c.
-
-This prepares a future removal of the NO_SOCKETS macro.
+Add the create request of the 9pfs protocol.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
+V2:
+- set permissions correctly (Jason Andryuk)
 V3:
-- new patch
+- use opendirat() etc. (Jason Andryuk)
+- rework error handling a little bit
 ---
- tools/xenstored/core.c   | 17 +----------------
- tools/xenstored/core.h   |  1 +
- tools/xenstored/minios.c |  4 ++++
- tools/xenstored/posix.c  | 13 +++++++++++++
- 4 files changed, 19 insertions(+), 16 deletions(-)
+ tools/xen-9pfsd/io.c | 155 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 155 insertions(+)
 
-diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index eba7744fde..7b5e1d0c0f 100644
---- a/tools/xenstored/core.c
-+++ b/tools/xenstored/core.c
-@@ -54,16 +54,6 @@
- #include "control.h"
- #include "lu.h"
+diff --git a/tools/xen-9pfsd/io.c b/tools/xen-9pfsd/io.c
+index 4adef6715f..9d816dc97e 100644
+--- a/tools/xen-9pfsd/io.c
++++ b/tools/xen-9pfsd/io.c
+@@ -32,6 +32,7 @@
+ #define P9_CMD_ERROR      107
+ #define P9_CMD_WALK       110
+ #define P9_CMD_OPEN       112
++#define P9_CMD_CREATE     114
+ #define P9_CMD_CLUNK      120
  
--#ifndef NO_SOCKETS
--#if defined(HAVE_SYSTEMD)
--#define XEN_SYSTEMD_ENABLED 1
--#endif
--#endif
--
--#if defined(XEN_SYSTEMD_ENABLED)
--#include <systemd/sd-daemon.h>
--#endif
--
- extern xenevtchn_handle *xce_handle; /* in domain.c */
- static int xce_pollfd_idx = -1;
- static struct pollfd *fds;
-@@ -2938,12 +2928,7 @@ int main(int argc, char *argv[])
- 	/* Get ready to listen to the tools. */
- 	initialize_fds(&sock_pollfd_idx, &timeout);
+ /* P9 protocol open flags. */
+@@ -42,6 +43,12 @@
+ #define P9_OTRUNC        0x10   /* or'ed in, truncate file first */
+ #define P9_OREMOVE       0x40   /* or'ed in, remove file after clunk */
  
--#if defined(XEN_SYSTEMD_ENABLED)
--	if (!live_update) {
--		sd_notify(1, "READY=1");
--		fprintf(stderr, SD_NOTICE "xenstored is ready\n");
--	}
--#endif
-+	late_init(live_update);
++/* P9 protocol create permission masks. */
++#define P9_CREATE_PERM_DIR        0x80000000
++#define P9_CREATE_PERM_NOTSUPP    0x03b00000   /* link, symlink, ... */
++#define P9_CREATE_PERM_DIR_MASK   0777
++#define P9_CREATE_PERM_FILE_MASK  0666
++
+ #define P9_MIN_MSIZE      2048
+ #define P9_VERSION        "9P2000.u"
+ #define P9_WALK_MAXELEM   16
+@@ -951,6 +958,150 @@ static void p9_open(struct ring *ring, struct p9_header *hdr)
+     p9_error(ring, hdr->tag, errno);
+ }
  
- 	/* Main loop. */
- 	for (;;) {
-diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
-index 72173f1684..0de2d8a26e 100644
---- a/tools/xenstored/core.h
-+++ b/tools/xenstored/core.h
-@@ -385,6 +385,7 @@ static inline bool domain_is_unprivileged(const struct connection *conn)
- /* Return the event channel used by xenbus. */
- evtchn_port_t get_xenbus_evtchn(void);
- void early_init(bool live_update, bool dofork, const char *pidfile);
-+void late_init(bool live_update);
- 
- void init_sockets(void);
- extern int reopen_log_pipe[2];
-diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
-index 4f48f63083..45bb0440be 100644
---- a/tools/xenstored/minios.c
-+++ b/tools/xenstored/minios.c
-@@ -49,3 +49,7 @@ void unmap_xenbus(void *interface)
- void early_init(bool live_update, bool dofork, const char *pidfile)
++static void p9_create(struct ring *ring, struct p9_header *hdr)
++{
++    device *device = ring->device;
++    uint32_t fid;
++    unsigned int name_off;
++    uint32_t perm;
++    uint8_t mode;
++    unsigned int ext_off;
++    struct p9_fid *fidp;
++    struct p9_fid *new_fidp;
++    char *path;
++    const char *relpath;
++    struct stat st;
++    struct p9_qid qid;
++    uint32_t iounit;
++    int flags;
++    int ret;
++
++    ret = fill_data(ring, "USUbS", &fid, &name_off, &perm, &mode, &ext_off);
++    if ( ret != 5 )
++    {
++        p9_error(ring, hdr->tag, EINVAL);
++        return;
++    }
++
++    if ( !name_ok(ring->str + name_off) )
++    {
++        p9_error(ring, hdr->tag, ENOENT);
++        return;
++    }
++
++    if ( perm & P9_CREATE_PERM_NOTSUPP )
++    {
++        p9_error(ring, hdr->tag, EINVAL);
++        return;
++    }
++
++    fidp = get_fid_ref(device, fid);
++    if ( !fidp || fidp->opened )
++    {
++        free_fid(device, fidp);
++        p9_error(ring, hdr->tag, EINVAL);
++        return;
++    }
++    if ( fstatat(device->root_fd, relpath_from_path(fidp->path), &st, 0) < 0 )
++    {
++        free_fid(device, fidp);
++        p9_error(ring, hdr->tag, errno);
++        return;
++    }
++
++    path = malloc(strlen(fidp->path) + strlen(ring->str + name_off) + 2);
++    if ( !path )
++    {
++        free_fid(device, fidp);
++        p9_error(ring, hdr->tag, ENOMEM);
++        return;
++    }
++    sprintf(path, "%s/%s", strcmp(fidp->path, "/") ? fidp->path : "",
++            ring->str + name_off);
++    new_fidp = alloc_fid_mem(device, fid, path);
++    free(path);
++    if ( !new_fidp )
++    {
++        free_fid(device, fidp);
++        p9_error(ring, hdr->tag, ENOMEM);
++        return;
++    }
++
++    relpath = relpath_from_path(new_fidp->path);
++
++    pthread_mutex_lock(&device->fid_mutex);
++
++    new_fidp->ref = fidp->ref;
++
++    if ( perm & P9_CREATE_PERM_DIR )
++    {
++        perm &= P9_CREATE_PERM_DIR_MASK & st.st_mode;
++        if ( mode != P9_OREAD )
++        {
++            errno = EINVAL;
++            goto err;
++        }
++        if ( mkdirat(device->root_fd, relpath, perm) < 0 )
++            goto err;
++
++        XEN_TAILQ_REMOVE(&device->fids, fidp, list);
++        XEN_TAILQ_INSERT_HEAD(&device->fids, new_fidp, list);
++        free(fidp);
++        fidp = new_fidp;
++        new_fidp = NULL;
++
++        fidp->fd = openat(device->root_fd, relpath, O_RDONLY);
++        if ( fidp->fd < 0 )
++            goto err;
++        fidp->data = fdopendir(fidp->fd);
++        if ( !fidp->data )
++            goto err;
++    }
++    else
++    {
++        flags = open_flags_from_mode(mode);
++        if ( flags < 0 )
++        {
++            errno = EINVAL;
++            goto err;
++        }
++        perm &= P9_CREATE_PERM_FILE_MASK & st.st_mode;
++
++        XEN_TAILQ_REMOVE(&device->fids, fidp, list);
++        XEN_TAILQ_INSERT_HEAD(&device->fids, new_fidp, list);
++        free(fidp);
++        fidp = new_fidp;
++        new_fidp = NULL;
++
++        fidp->fd = openat(device->root_fd, relpath, flags | O_CREAT | O_EXCL,
++                          perm);
++        if ( fidp->fd < 0 )
++            goto err;
++    }
++
++    if ( fstatat(device->root_fd, relpath, &st, 0) < 0 )
++        goto err;
++
++    fill_qid(device, fidp->path, &qid, &st);
++    iounit = get_iounit(ring, &st);
++    fidp->opened = true;
++    fidp->mode = mode;
++
++    pthread_mutex_unlock(&device->fid_mutex);
++
++    fill_buffer(ring, hdr->cmd + 1, hdr->tag, "QU", &qid, &iounit);
++
++    return;
++
++ err:
++    p9_error(ring, hdr->tag, errno);
++
++    pthread_mutex_unlock(&device->fid_mutex);
++
++    free(new_fidp);
++    free_fid(device, fidp);
++}
++
+ static void p9_clunk(struct ring *ring, struct p9_header *hdr)
  {
- }
-+
-+void late_init(bool live_update)
-+{
-+}
-diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
-index 9463ef5c8d..97c8dcaba3 100644
---- a/tools/xenstored/posix.c
-+++ b/tools/xenstored/posix.c
-@@ -24,6 +24,9 @@
- #include <stdlib.h>
- #include <syslog.h>
- #include <sys/mman.h>
-+#if defined(HAVE_SYSTEMD)
-+#include <systemd/sd-daemon.h>
-+#endif
- #include <xen-tools/xenstore-common.h>
+     device *device = ring->device;
+@@ -1060,6 +1211,10 @@ void *io_thread(void *arg)
+                 p9_open(ring, &hdr);
+                 break;
  
- #include "utils.h"
-@@ -184,3 +187,13 @@ void early_init(bool live_update, bool dofork, const char *pidfile)
- 	if (!live_update)
- 		init_sockets();
- }
++            case P9_CMD_CREATE:
++                p9_create(ring, &hdr);
++                break;
 +
-+void late_init(bool live_update)
-+{
-+#if defined(HAVE_SYSTEMD)
-+	if (!live_update) {
-+		sd_notify(1, "READY=1");
-+		fprintf(stderr, SD_NOTICE "xenstored is ready\n");
-+	}
-+#endif
-+}
+             case P9_CMD_CLUNK:
+                 p9_clunk(ring, &hdr);
+                 break;
 -- 
 2.35.3
 
