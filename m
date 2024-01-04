@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B271C47074
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jan 2024 09:10:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.661231.1030961 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC4AC47073
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jan 2024 09:10:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.661237.1030981 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLJkJ-0000RU-50; Thu, 04 Jan 2024 09:10:35 +0000
+	id 1rLJkT-0001Gm-Ue; Thu, 04 Jan 2024 09:10:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 661231.1030961; Thu, 04 Jan 2024 09:10:35 +0000
+Received: by outflank-mailman (output) from mailman id 661237.1030981; Thu, 04 Jan 2024 09:10:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLJkJ-0000RL-1Q; Thu, 04 Jan 2024 09:10:35 +0000
-Received: by outflank-mailman (input) for mailman id 661231;
- Thu, 04 Jan 2024 09:10:33 +0000
+	id 1rLJkT-0001Gb-Pc; Thu, 04 Jan 2024 09:10:45 +0000
+Received: by outflank-mailman (input) for mailman id 661237;
+ Thu, 04 Jan 2024 09:10:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4u2H=IO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rLJdt-00085z-OW
- for xen-devel@lists.xenproject.org; Thu, 04 Jan 2024 09:03:57 +0000
+ id 1rLJdM-00085z-DL
+ for xen-devel@lists.xenproject.org; Thu, 04 Jan 2024 09:03:24 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 312a8c3b-aae0-11ee-98ef-6d05b1d4d9a1;
- Thu, 04 Jan 2024 10:03:57 +0100 (CET)
+ id 1d428195-aae0-11ee-98ef-6d05b1d4d9a1;
+ Thu, 04 Jan 2024 10:03:23 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9F63321EE1;
- Thu,  4 Jan 2024 09:03:56 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 46D4F21EE1;
+ Thu,  4 Jan 2024 09:03:23 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7099813722;
- Thu,  4 Jan 2024 09:03:56 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1D5F213722;
+ Thu,  4 Jan 2024 09:03:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id BBBBGnx0lmV7WQAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 04 Jan 2024 09:03:56 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id UID0BVt0lmVOWQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 04 Jan 2024 09:03:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,35 +53,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 312a8c3b-aae0-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: 1d428195-aae0-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1704359036; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1704359003; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=e42eKBZw7TAPTT4+EA67aOP59NBUobdQXn2DchzlAu4=;
-	b=PHmDFHRLAvyx6DSPcrHLKIRnd/XR7onewPSypyD6VA0sxd11fpqBGDjlaNIvBEaSpALOLe
-	Y98ZmUcPv1Mr6K7gLT76HRyrA4f/iENOQvJG5mMV1GiO36oI8bLeYTlsMHvIrxQO5MuNhy
-	gY7tsHYPgWLUkuW9OvKrnCpYBiQ/F0I=
+	bh=PRwkEgUlvhygA2ICPfUBXzv+stFJ1TKHPnwBlk1TeGM=;
+	b=QVOpiHqAsreGoPLztZ/HrswmhEh1C1Zswv9NFUuJkfyIfyX6LSJvfuQ2yrKNknn7wa7MN9
+	cAaqTt42rwbzJkhGyqvVNyfwef/+HNfPxOQ1grfNR61UBZKeewnAXOjymmLsc9BQRiBuF9
+	QQU8K26TLOUwpcYJoRMbWUueXGz5ABE=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1704359036; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1704359003; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=e42eKBZw7TAPTT4+EA67aOP59NBUobdQXn2DchzlAu4=;
-	b=PHmDFHRLAvyx6DSPcrHLKIRnd/XR7onewPSypyD6VA0sxd11fpqBGDjlaNIvBEaSpALOLe
-	Y98ZmUcPv1Mr6K7gLT76HRyrA4f/iENOQvJG5mMV1GiO36oI8bLeYTlsMHvIrxQO5MuNhy
-	gY7tsHYPgWLUkuW9OvKrnCpYBiQ/F0I=
+	bh=PRwkEgUlvhygA2ICPfUBXzv+stFJ1TKHPnwBlk1TeGM=;
+	b=QVOpiHqAsreGoPLztZ/HrswmhEh1C1Zswv9NFUuJkfyIfyX6LSJvfuQ2yrKNknn7wa7MN9
+	cAaqTt42rwbzJkhGyqvVNyfwef/+HNfPxOQ1grfNR61UBZKeewnAXOjymmLsc9BQRiBuF9
+	QQU8K26TLOUwpcYJoRMbWUueXGz5ABE=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Jason Andryuk <jandryuk@gmail.com>
-Subject: [PATCH v3 32/33] tools/xenstored: support complete log capabilities in stubdom
-Date: Thu,  4 Jan 2024 10:00:54 +0100
-Message-Id: <20240104090055.27323-33-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3 26/33] tools/xenstored: get own domid in stubdom case
+Date: Thu,  4 Jan 2024 10:00:48 +0100
+Message-Id: <20240104090055.27323-27-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240104090055.27323-1-jgross@suse.com>
 References: <20240104090055.27323-1-jgross@suse.com>
@@ -89,18 +88,17 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Authentication-Results: smtp-out1.suse.de;
 	none
-X-Spamd-Result: default: False [1.20 / 50.00];
+X-Spamd-Result: default: False [4.20 / 50.00];
 	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
 	 TO_DN_SOME(0.00)[];
-	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
 	 R_MISSING_CHARSET(2.50)[];
-	 MIME_GOOD(-0.10)[text/plain];
 	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
 	 REPLY(-4.00)[];
 	 BROKEN_CONTENT_TYPE(1.50)[];
-	 RCPT_COUNT_FIVE(0.00)[6];
+	 RCPT_COUNT_FIVE(0.00)[5];
 	 RCVD_COUNT_THREE(0.00)[3];
 	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	 NEURAL_HAM_SHORT(-0.20)[-1.000];
@@ -110,130 +108,69 @@ X-Spamd-Result: default: False [1.20 / 50.00];
 	 FUZZY_BLOCKED(0.00)[rspamd.com];
 	 FROM_EQ_ENVFROM(0.00)[];
 	 MIME_TRACE(0.00)[0:+];
-	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com];
-	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
+	 RCVD_TLS_ALL(0.00)[]
 
-With 9pfs being fully available in Xenstore-stubdom now, there is no
-reason to not fully support all logging capabilities in stubdom.
-
-Open the logfile on stubdom only after the 9pfs file system has been
-mounted.
+Obtain the own domid when running as stubdom.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
 ---
+V2:
+- replacement of V1 patch (Andrew Cooper)
 V3:
-- remove now stale comment in sysconfig.xencommons.in (Julien Grall)
+- rename called function to get_domid() (Julien Grall)
+- change stub_domid type to domid_t (Julien Grall)
 ---
- .../Linux/init.d/sysconfig.xencommons.in      |  1 -
- tools/hotplug/Linux/launch-xenstore.in        |  1 +
- tools/xenstored/control.c                     | 30 +++++++++----------
- tools/xenstored/minios.c                      |  3 ++
- 4 files changed, 19 insertions(+), 16 deletions(-)
+ tools/xenstored/core.c   | 1 +
+ tools/xenstored/core.h   | 1 +
+ tools/xenstored/minios.c | 4 ++++
+ 3 files changed, 6 insertions(+)
 
-diff --git a/tools/hotplug/Linux/init.d/sysconfig.xencommons.in b/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
-index 433e4849af..1bdd830d8a 100644
---- a/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
-+++ b/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
-@@ -58,7 +58,6 @@ XENSTORED_ARGS=
- ## Default: Not defined, tracing off
- #
- # Log xenstored messages
--# Only evaluated if XENSTORETYPE is "daemon".
- #XENSTORED_TRACE=[yes|on|1]
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 8ff1faccef..edb2ab97b8 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -2559,6 +2559,7 @@ static struct option options[] = {
+ int dom0_domid = 0;
+ int dom0_event = 0;
+ int priv_domid = 0;
++domid_t stub_domid = DOMID_INVALID;
  
- ## Type: integer
-diff --git a/tools/hotplug/Linux/launch-xenstore.in b/tools/hotplug/Linux/launch-xenstore.in
-index e854ca1eb8..da4eeca7c5 100644
---- a/tools/hotplug/Linux/launch-xenstore.in
-+++ b/tools/hotplug/Linux/launch-xenstore.in
-@@ -98,6 +98,7 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
- 	[ -z "$XENSTORE_DOMAIN_SIZE" ] && XENSTORE_DOMAIN_SIZE=8
- 	XENSTORE_DOMAIN_ARGS="$XENSTORE_DOMAIN_ARGS --memory $XENSTORE_DOMAIN_SIZE"
- 	[ -z "$XENSTORE_MAX_DOMAIN_SIZE" ] || XENSTORE_DOMAIN_ARGS="$XENSTORE_DOMAIN_ARGS --maxmem $XENSTORE_MAX_DOMAIN_SIZE"
-+	[ -z "$XENSTORED_TRACE" ] || XENSTORE_DOMAIN_ARGS="$XENSTORE_DOMAIN_ARGS -T xenstored-trace.log"
- 
- 	echo -n Starting $XENSTORE_DOMAIN_KERNEL...
- 	${LIBEXEC_BIN}/init-xenstore-domain $XENSTORE_DOMAIN_ARGS || exit 1
-diff --git a/tools/xenstored/control.c b/tools/xenstored/control.c
-index b2f64d674f..dae23a5ac0 100644
---- a/tools/xenstored/control.c
-+++ b/tools/xenstored/control.c
-@@ -201,19 +201,6 @@ static int do_control_quota_s(const void *ctx, struct connection *conn,
- 	return EINVAL;
- }
- 
--#ifdef __MINIOS__
--static int do_control_memreport(const void *ctx, struct connection *conn,
--				const char **vec, int num)
--{
--	if (num)
--		return EINVAL;
--
--	talloc_report_full(NULL, stdout);
--
--	send_ack(conn, XS_CONTROL);
--	return 0;
--}
--#else
- static int do_control_logfile(const void *ctx, struct connection *conn,
- 			      const char **vec, int num)
+ static unsigned int get_optval_uint(const char *arg)
  {
-@@ -222,13 +209,26 @@ static int do_control_logfile(const void *ctx, struct connection *conn,
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index ddc345050c..a20c7ee3a0 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -363,6 +363,7 @@ do {						\
+ extern int dom0_domid;
+ extern int dom0_event;
+ extern int priv_domid;
++extern domid_t stub_domid;
+ extern bool keep_orphans;
  
- 	close_log();
- 	talloc_free(tracefile);
--	tracefile = talloc_strdup(NULL, vec[0]);
-+	tracefile = absolute_filename(NULL, vec[0]);
- 	reopen_log();
- 
- 	send_ack(conn, XS_CONTROL);
- 	return 0;
- }
- 
-+#ifdef __MINIOS__
-+static int do_control_memreport(const void *ctx, struct connection *conn,
-+				const char **vec, int num)
-+{
-+	if (num)
-+		return EINVAL;
-+
-+	talloc_report_full(NULL, stdout);
-+
-+	send_ack(conn, XS_CONTROL);
-+	return 0;
-+}
-+#else
- static int do_control_memreport(const void *ctx, struct connection *conn,
- 				const char **vec, int num)
- {
-@@ -309,10 +309,10 @@ static struct cmd_s cmds[] = {
- 		"[-c <cmdline>] [-F] [-t <timeout>] <file>\n"
- 		"    Default timeout is 60 seconds.", 5 },
- #endif
-+	{ "logfile", do_control_logfile, "<file>" },
- #ifdef __MINIOS__
- 	{ "memreport", do_control_memreport, "" },
- #else
--	{ "logfile", do_control_logfile, "<file>" },
- 	{ "memreport", do_control_memreport, "[<file>]" },
- #endif
- 	{ "print", do_control_print, "<string>" },
+ extern struct pollfd *fds;
 diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
-index 24fc3150b7..3f3c4b5bc0 100644
+index 5d59cc90cc..38a51e671a 100644
 --- a/tools/xenstored/minios.c
 +++ b/tools/xenstored/minios.c
-@@ -113,6 +113,9 @@ static void mount_thread(void *p)
- 	}
+@@ -20,6 +20,7 @@
+ #include "core.h"
+ #include "utils.h"
+ #include <xen/grant_table.h>
++#include <mini-os/lib.h>
  
- 	p9_device = init_9pfront(0, XENSTORE_LIB_DIR);
-+
-+	/* Start logging if selected. */
-+	reopen_log();
+ void finish_daemonize(void)
+ {
+@@ -48,6 +49,9 @@ void unmap_xenbus(void *interface)
+ 
+ void early_init(bool live_update, bool dofork, const char *pidfile)
+ {
++	stub_domid = get_domid();
++	if (stub_domid == DOMID_INVALID)
++		barf("could not get own domid");
  }
  
- void mount_9pfs(void)
+ void late_init(bool live_update)
 -- 
 2.35.3
 
