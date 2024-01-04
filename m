@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D4AC47074
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jan 2024 09:14:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.661336.1031131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F6EFC47074
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jan 2024 09:14:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.661343.1031141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLJnX-0001qz-6N; Thu, 04 Jan 2024 09:13:55 +0000
+	id 1rLJo6-0002jv-Ee; Thu, 04 Jan 2024 09:14:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 661336.1031131; Thu, 04 Jan 2024 09:13:55 +0000
+Received: by outflank-mailman (output) from mailman id 661343.1031141; Thu, 04 Jan 2024 09:14:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLJnX-0001qm-3b; Thu, 04 Jan 2024 09:13:55 +0000
-Received: by outflank-mailman (input) for mailman id 661336;
- Thu, 04 Jan 2024 09:13:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rLJo6-0002jo-C2; Thu, 04 Jan 2024 09:14:30 +0000
+Received: by outflank-mailman (input) for mailman id 661343;
+ Thu, 04 Jan 2024 09:14:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4u2H=IO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rLJdR-00085z-NY
- for xen-devel@lists.xenproject.org; Thu, 04 Jan 2024 09:03:29 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2081e669-aae0-11ee-98ef-6d05b1d4d9a1;
- Thu, 04 Jan 2024 10:03:29 +0100 (CET)
+ id 1rLJcO-0007Zm-6w
+ for xen-devel@lists.xenproject.org; Thu, 04 Jan 2024 09:02:24 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f8df8a52-aadf-11ee-9b0f-b553b5be7939;
+ Thu, 04 Jan 2024 10:02:22 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id DA59A21EE1;
- Thu,  4 Jan 2024 09:03:28 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5C55B1F7F8;
+ Thu,  4 Jan 2024 09:02:22 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A1BA913722;
- Thu,  4 Jan 2024 09:03:28 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3247513722;
+ Thu,  4 Jan 2024 09:02:22 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id wAo8JmB0lmVSWQAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 04 Jan 2024 09:03:28 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id qDXrCh50lmXtWAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 04 Jan 2024 09:02:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,111 +54,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2081e669-aae0-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: f8df8a52-aadf-11ee-9b0f-b553b5be7939
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Jason Andryuk <jandryuk@gmail.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 27/33] tools/xenstored: rework ring page (un)map functions
-Date: Thu,  4 Jan 2024 10:00:49 +0100
-Message-Id: <20240104090055.27323-28-jgross@suse.com>
+	Jason Andryuk <jandryuk@gmail.com>
+Subject: [PATCH v3 15/33] tools/xenlogd: add 9pfs read request support
+Date: Thu,  4 Jan 2024 10:00:37 +0100
+Message-Id: <20240104090055.27323-16-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240104090055.27323-1-jgross@suse.com>
 References: <20240104090055.27323-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Spamd-Result: default: False [-4.00 / 50.00];
 	 REPLY(-4.00)[]
-Authentication-Results: smtp-out1.suse.de;
-	none
-X-Rspamd-Queue-Id: DA59A21EE1
+X-Rspamd-Queue-Id: 5C55B1F7F8
 
-When [un]mapping the ring page of a Xenstore client, different actions
-are required for "normal" guests and dom0. Today this distinction is
-made at call site.
+Add the read request of the 9pfs protocol.
 
-Move this distinction into [un]map_interface() instead, avoiding code
-duplication and preparing special handling for [un]mapping the stub
-domain's ring page.
+For now support only reading plain files (no directories).
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstored/domain.c | 31 +++++++++++++------------------
- 1 file changed, 13 insertions(+), 18 deletions(-)
+V2:
+- make error check more readable (Jason Andryuk)
+---
+ tools/xen-9pfsd/io.c | 64 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
 
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 040df98b8c..af80a8221d 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -497,14 +497,20 @@ static const struct interface_funcs domain_funcs = {
+diff --git a/tools/xen-9pfsd/io.c b/tools/xen-9pfsd/io.c
+index c357342a91..651c5cbb2b 100644
+--- a/tools/xen-9pfsd/io.c
++++ b/tools/xen-9pfsd/io.c
+@@ -33,6 +33,7 @@
+ #define P9_CMD_WALK       110
+ #define P9_CMD_OPEN       112
+ #define P9_CMD_CREATE     114
++#define P9_CMD_READ       116
+ #define P9_CMD_WRITE      118
+ #define P9_CMD_CLUNK      120
+ #define P9_CMD_STAT       124
+@@ -1123,6 +1124,65 @@ static void p9_create(struct ring *ring, struct p9_header *hdr)
+     free_fid(device, fidp);
+ }
  
- static void *map_interface(domid_t domid)
- {
-+	if (domid == xenbus_master_domid())
-+		return xenbus_map();
++static void p9_read(struct ring *ring, struct p9_header *hdr)
++{
++    device *device = ring->device;
++    uint32_t fid;
++    uint64_t off;
++    unsigned int len;
++    uint32_t count;
++    void *buf;
++    struct p9_fid *fidp;
++    int ret;
 +
- 	return xengnttab_map_grant_ref(*xgt_handle, domid,
- 				       GNTTAB_RESERVED_XENSTORE,
- 				       PROT_READ|PROT_WRITE);
- }
- 
--static void unmap_interface(void *interface)
-+static void unmap_interface(domid_t domid, void *interface)
++    ret = fill_data(ring, "ULU", &fid, &off, &count);
++    if ( ret != 3 )
++    {
++        p9_error(ring, hdr->tag, EINVAL);
++        return;
++    }
++
++    fidp = get_fid_ref(device, fid);
++    if ( !fidp || !fidp->opened )
++    {
++        p9_error(ring, hdr->tag, EBADF);
++        goto out;
++    }
++
++    if ( fidp->isdir )
++    {
++        p9_error(ring, hdr->tag, EOPNOTSUPP);
++        goto out;
++    }
++    else
++    {
++        len = count;
++        buf = ring->buffer + sizeof(*hdr) + sizeof(uint32_t);
++
++        while ( len != 0 )
++        {
++            ret = pread(fidp->fd, buf, len, off);
++            if ( ret <= 0 )
++                break;
++            len -= ret;
++            buf += ret;
++            off += ret;
++        }
++        if ( ret < 0 && len == count )
++        {
++            p9_error(ring, hdr->tag, errno);
++            goto out;
++        }
++
++        buf = ring->buffer + sizeof(*hdr) + sizeof(uint32_t);
++        len = count - len;
++        fill_buffer(ring, hdr->cmd + 1, hdr->tag, "D", &len, buf);
++    }
++
++ out:
++    free_fid(device, fidp);
++}
++
+ static void p9_write(struct ring *ring, struct p9_header *hdr)
  {
--	xengnttab_unmap(*xgt_handle, interface, 1);
-+	if (domid == xenbus_master_domid())
-+		unmap_xenbus(interface);
-+	else
-+		xengnttab_unmap(*xgt_handle, interface, 1);
- }
+     device *device = ring->device;
+@@ -1354,6 +1414,10 @@ void *io_thread(void *arg)
+                 p9_create(ring, &hdr);
+                 break;
  
- static int domain_tree_remove_sub(const void *ctx, struct connection *conn,
-@@ -594,14 +600,8 @@ static int destroy_domain(void *_domain)
- 			eprintf("> Unbinding port %i failed!\n", domain->port);
- 	}
- 
--	if (domain->interface) {
--		/* Domain 0 was mapped by dom0_init, so it must be unmapped
--		   using munmap() and not the grant unmap call. */
--		if (domain->domid == dom0_domid)
--			unmap_xenbus(domain->interface);
--		else
--			unmap_interface(domain->interface);
--	}
-+	if (domain->interface)
-+		unmap_interface(domain->domid, domain->interface);
- 
- 	fire_special_watches("@releaseDomain");
- 
-@@ -966,18 +966,13 @@ static struct domain *introduce_domain(const void *ctx,
- 		return NULL;
- 
- 	if (!domain->introduced) {
--		interface = is_master_domain ? xenbus_map()
--					     : map_interface(domid);
-+		interface = map_interface(domid);
- 		if (!interface && !restore)
- 			return NULL;
- 		if (new_domain(domain, port, restore)) {
- 			rc = errno;
--			if (interface) {
--				if (is_master_domain)
--					unmap_xenbus(interface);
--				else
--					unmap_interface(interface);
--			}
-+			if (interface)
-+				unmap_interface(domid, interface);
- 			errno = rc;
- 			return NULL;
- 		}
++            case P9_CMD_READ:
++                p9_read(ring, &hdr);
++                break;
++
+             case P9_CMD_WRITE:
+                 p9_write(ring, &hdr);
+                 break;
 -- 
 2.35.3
 
