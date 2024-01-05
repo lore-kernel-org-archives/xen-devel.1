@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45BA4C4707C
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jan 2024 06:23:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.661956.1031798 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1FA0C3DA6E
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jan 2024 06:56:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.661972.1031822 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLdbg-00005a-Bz; Fri, 05 Jan 2024 06:23:00 +0000
+	id 1rLe87-0006Xm-B0; Fri, 05 Jan 2024 06:56:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 661956.1031798; Fri, 05 Jan 2024 06:23:00 +0000
+Received: by outflank-mailman (output) from mailman id 661972.1031822; Fri, 05 Jan 2024 06:56:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rLdbg-00005J-5C; Fri, 05 Jan 2024 06:23:00 +0000
-Received: by outflank-mailman (input) for mailman id 661956;
- Fri, 05 Jan 2024 06:22:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=YI+5=IP=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1rLdbe-0008Eh-FV
- for xen-devel@lists.xenproject.org; Fri, 05 Jan 2024 06:22:58 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [2a01:111:f403:2412::600])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dd6d7cb2-ab92-11ee-98ef-6d05b1d4d9a1;
- Fri, 05 Jan 2024 07:22:57 +0100 (CET)
-Received: from SJ0PR03CA0067.namprd03.prod.outlook.com (2603:10b6:a03:331::12)
- by DM8PR12MB5430.namprd12.prod.outlook.com (2603:10b6:8:28::6) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7159.17; Fri, 5 Jan 2024 06:22:51 +0000
-Received: from DS2PEPF0000343B.namprd02.prod.outlook.com
- (2603:10b6:a03:331:cafe::a7) by SJ0PR03CA0067.outlook.office365.com
- (2603:10b6:a03:331::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.14 via Frontend
- Transport; Fri, 5 Jan 2024 06:22:51 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF0000343B.mail.protection.outlook.com (10.167.18.38) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7159.9 via Frontend Transport; Fri, 5 Jan 2024 06:22:51 +0000
-Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 5 Jan
- 2024 00:22:40 -0600
+	id 1rLe87-0006Xf-8J; Fri, 05 Jan 2024 06:56:31 +0000
+Received: by outflank-mailman (input) for mailman id 661972;
+ Fri, 05 Jan 2024 06:56:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=nS5B=IP=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rLe85-0006XZ-Lt
+ for xen-devel@lists.xenproject.org; Fri, 05 Jan 2024 06:56:29 +0000
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [2a00:1450:4864:20::231])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8b72ba18-ab97-11ee-9b0f-b553b5be7939;
+ Fri, 05 Jan 2024 07:56:27 +0100 (CET)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2cd1232a2c7so16091261fa.0
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Jan 2024 22:56:26 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ dn14-20020a056638090e00b0046d17aff31bsm268399jab.157.2024.01.04.22.56.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 04 Jan 2024 22:56:25 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,272 +47,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd6d7cb2-ab92-11ee-98ef-6d05b1d4d9a1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=N4m0EWegQmhRTrEJKBoaIufqDKD6u6YBNKO6kKi8bfKIDKM8bdB4zEBxtNMCResQEFt1yeDxiMWuSSIUxxDokrmZeNBvhuucH4XYn7BbXXS9mTDfUx9sHCkMka2grRiNBLKFJ38dkoEp8XciHPC7kjJMO4dzza8u9bkhKHJebh63VAiyiKXKC/a3rOQeTstXjnPx8ti8KBvSI8WIwjv2jLGVENgmTdkwT4+ZHnuO5Xg+nHbh2YuhLU+23wRkApesI8i2Aa+rdOQmwNIWiL61FX3J6e9MBlHNXlM0EG4AaiQjGeaR6t4ArytNtGQV4Jm9ZTrVwpAQKlPR65VpjAyLZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RXqnYEfJ7mLljaqmJdZX4G1SrM2H3l3MYlqNsjGgGEw=;
- b=Se7TC4lHN9t4D6zDAODmzGBShbg3TAcbH1WG9QSPsZyKUi21xuCGtqiz1YG+STkh5EaXy0KEQ1IJbEheohcsTf72DVdoc5MtePMWleRz5/0WFaWz53svl8j4zPDtqGgaqHA3ESHMu5ItSEAXMrR/uQQkJoGCavNsVRW7BdWR10QnEpzyrIHY5ovrwudVNqy1d3d4pIG3VqFzaFgEAO2t4xFH/KJTokiclo8/sQe6mH95AflXejpG5CoiS5+oxK7Ns074p1N5FHbMaeru6+f2t+u3LujxewQP5iAppJ4tIb0xzEHNc4YGBsQL2WPcI9KnluE8pWv3WlU7zur2hF2i8w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RXqnYEfJ7mLljaqmJdZX4G1SrM2H3l3MYlqNsjGgGEw=;
- b=CyPIM26Q7Z6BHCq606/iJsRpGGDJyraG64OZZ+stjK7foZj+KBy6nRGSOvvUUF62W2/eT7JzCyFExp93tCPNFXkI6l8ktGYlOSIHTQUVUK0TE6EOq4uRecfkSyQ99NbkYAdEhzhOk+Y3n/3Ia/oj7O3pD6/MvoD7Xx9X06GucWE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jiqian Chen <Jiqian.Chen@amd.com>
-To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>, Boris Ostrovsky
-	<boris.ostrovsky@oracle.com>, Bjorn Helgaas <bhelgaas@google.com>, "Rafael J
- . Wysocki" <rafael@kernel.org>, Len Brown <lenb@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-CC: <xen-devel@lists.xenproject.org>, <linux-pci@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-acpi@vger.kernel.org>, "Stewart
- Hildebrand" <Stewart.Hildebrand@amd.com>, Huang Rui <Ray.Huang@amd.com>,
-	Jiqian Chen <Jiqian.Chen@amd.com>, Huang Rui <ray.huang@amd.com>
-Subject: [RFC KERNEL PATCH v4 2/3] xen/pvh: Setup gsi for passthrough device
-Date: Fri, 5 Jan 2024 14:22:16 +0800
-Message-ID: <20240105062217.349645-3-Jiqian.Chen@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240105062217.349645-1-Jiqian.Chen@amd.com>
-References: <20240105062217.349645-1-Jiqian.Chen@amd.com>
+X-Inumbo-ID: 8b72ba18-ab97-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1704437786; x=1705042586; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=MoYyhbl17X5DmfZhtUwBK45nI8GPL7Lj1OThPNob6Qc=;
+        b=NiX9JFTKKjJjGQ1cN6+AiETyrUJclMkBfaOZQ6AHSDZa8mTp7y0SYfwb7qvuvj65ZM
+         j8DHEnBhoF2lRF2p5lJDp/SBTao9JzejZuwNJNfg3+xZU2Hqvyyp1jDTPmx+tYc6UIN6
+         TU0/tJKmYs9OudoSNRPfXLS0RLm7RzzsAUsfXHBu8DO7CXxAojfZMPDEMSXGrT6oW+Zk
+         8uFCa45z7iXg+tDKRehOSejNXbiFFy3IVmdddnCRehqycy9YDBAPpgcc2WYJGv6EiaAc
+         W/Hw+nrvPwLD6V34qjtlPXNcGxpzruBpgd24QJmkK6BHft0Dy52Ec66Q3dZkhOlwFthI
+         /stw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704437786; x=1705042586;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=MoYyhbl17X5DmfZhtUwBK45nI8GPL7Lj1OThPNob6Qc=;
+        b=wghOz0t4S10qAQa6DMhL6pHXasVa5pjSC2/wBFNGi3/EYwDGlCurOcfz+NSc/5o1B+
+         Z+1iEiJQBK60Cke8/imILmr2Eypc4GLcJ3JJpNYVxdvGT4frh9KHDPSGxX85YvJ04bjG
+         obaBr29c4M/Rdqn4yh+gUgDJIOLjOe0YaEQYKmf0AlV63Ficy9N5VlhG3KfqVeLz/SZp
+         YtFJfcz8SECIl4wh4q0hqb6KsXIm67vpVTJB1YHl0ARHkpe1RC2dMjj+VC+JuK+Pk8s9
+         j77YPAmPiObZAHCEHRI5DBUGLBgd0MfYS+8Sltf8yOrtslE6nYweSMIfLQrrPshFoBhd
+         SPqA==
+X-Gm-Message-State: AOJu0YwkyJSUZHVIfxh4vsdM+Y/x2hiMOs3vxVjJR/AU+Y6Z+hTdJsKh
+	qPOvqa80uqlgxG1WdtYyq19pqjzHyqdo
+X-Google-Smtp-Source: AGHT+IHtwM4QvlqPq3n973MigLexWEmYlnPqD2Q6asl36qjLd6vePFmDu5S4ksb+N8OTRB6SFRdM4Q==
+X-Received: by 2002:a2e:a583:0:b0:2cd:16fe:da17 with SMTP id m3-20020a2ea583000000b002cd16feda17mr1082702ljp.71.1704437785869;
+        Thu, 04 Jan 2024 22:56:25 -0800 (PST)
+Message-ID: <6406b9d4-b5e2-41eb-9cce-93a27086fb8a@suse.com>
+Date: Fri, 5 Jan 2024 07:56:22 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen: Use -Wuninitialized and -Winit-self
+Content-Language: en-US
+To: Roberto Bagnara <roberto.bagnara@bugseng.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Wei Liu <wl@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>,
+ "consulting@bugseng.com" <consulting@bugseng.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20231228193907.3052681-1-andrew.cooper3@citrix.com>
+ <1248487f-4852-41f5-9ffd-d4d12897a622@suse.com>
+ <7d35a648-a69b-4dfb-bf4f-d30272df5e9b@citrix.com>
+ <d1d43877-912c-4f83-aa9b-bc28be418a0c@bugseng.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <d1d43877-912c-4f83-aa9b-bc28be418a0c@bugseng.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343B:EE_|DM8PR12MB5430:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2c29200f-2865-448f-2d8b-08dc0db6be87
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	m7GCGwSKSpzWwXgiJPdhPrAVEEa/9pNiNOx2iHiZIiDPMfHVME0r/ACL9FPoy5bJAaQgUa3TjyucPiKWBznOSqoI67ZBeET90EeDc24T5noqjoMn+2xqZkih5n+2ojTW0FchkXN/eS3HqII54YYXMIdpOYV0b0Wft+Yna34gmeLcrYiGHw0CHzdIejn6wOalepBJPsESoXwWB49p1sQgfyQsslcDeklaWWzatqmTme2ch6oNl4cEAlEg6BZjhlB/EAb8krkNiYnXEgLMa2fcU4PLfoYH45PZ0OnmYawNdtw07tovQkAc3WSKOOhbY4MzA7zMI4F4mHAa9YACMwPCZZikip1u72SFy6p8oOC3QoLRNvCX4kLze77Jc6Zo47bG0AgCSpofLWMeJwrgSbtnmowAljdbcBy/9RyMRt8Zx/GcFIRAq0kpCEblMEKb3GvcLZuvf5/wN2YfHIrhRfRxXtCpY9kGwTnkshPd0kvxYnkFNkpYCUtGBV+XtMqTILZiEZzQovDHlucKpqJlp1a/LG1iwdFE93xtf2+mjDFYFkkHH8sJxP9s97dkvlAlaxX8jgxp1rVpqG8v9VcAS4VH6M78qshsc9IUfzxPcqskVF6UFhwE0J6gdd8EsuOJfjCs05dJgREYL1OKamL2yce+1TaFWfxkD1UyB4idhm/YK6s4JAQsbvxWphrvJ5Qlfxr+YH9ZsyROO31JLrTIDAls6p0gZJRmBeSJlndIn4EbKRJ96f1Jiz6Ui7DdehEc4C8SSKTmhATqWVii7b1pTz7prQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(376002)(346002)(396003)(136003)(230922051799003)(451199024)(186009)(82310400011)(1800799012)(64100799003)(40470700004)(46966006)(36840700001)(2616005)(336012)(26005)(1076003)(426003)(7696005)(6666004)(16526019)(86362001)(83380400001)(4326008)(8676002)(8936002)(316002)(54906003)(7416002)(36756003)(2906002)(5660300002)(110136005)(478600001)(70206006)(70586007)(82740400003)(356005)(81166007)(47076005)(36860700001)(41300700001)(40460700003)(40480700001)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2024 06:22:51.0725
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2c29200f-2865-448f-2d8b-08dc0db6be87
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS2PEPF0000343B.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM8PR12MB5430
 
-In PVH dom0, the gsis don't get registered, but the gsi of
-a passthrough device must be configured for it to be able to be
-mapped into a domU.
+On 04.01.2024 21:43, Roberto Bagnara wrote:
+> On 2024-01-04 15:33, Andrew Cooper wrote:
+>> On 04/01/2024 1:41 pm, Jan Beulich wrote:
+>>> On 28.12.2023 20:39, Andrew Cooper wrote:
+>>>> The use of uninitialised data is undefined behaviour.  At -O2 with trivial
+>>>> examples, both Clang and GCC delete the variable, and in the case of a
+>>>> function return, the caller gets whatever was stale in %rax prior to the call.
+>>>>
+>>>> Clang includes -Wuninitialized within -Wall, but GCC only includes it in
+>>>> -Wextra, which is not used by Xen at this time.
+>>>>
+>>>> Furthermore, the specific pattern of assigning a variable to itself in its
+>>>> declaration is only diagnosed by GCC with -Winit-self.  Clang does diagnoise
+>>>> simple forms of this pattern with a plain -Wuninitialized, but it fails to
+>>>> diagnose the instances in Xen that GCC manages to find.
+>>>>
+>>>> GCC, with -Wuninitialized and -Winit-self notices:
+>>>>
+>>>>    arch/x86/time.c: In function ‘read_pt_and_tsc’:
+>>>>    arch/x86/time.c:297:14: error: ‘best’ is used uninitialized in this function [-Werror=uninitialized]
+>>>>      297 |     uint32_t best = best;
+>>>>          |              ^~~~
+>>>>    arch/x86/time.c: In function ‘read_pt_and_tmcct’:
+>>>>    arch/x86/time.c:1022:14: error: ‘best’ is used uninitialized in this function [-Werror=uninitialized]
+>>>>     1022 |     uint64_t best = best;
+>>>>          |              ^~~~
+>>>>
+>>>> and both have logic paths where best can be returned while uninitalised.
+>>> I disagree. In both cases the variables are reliably set during the first
+>>> loop iteration.
+>>
+>> I suggest you pay attention to the precision of the integers.
+>>
+>> It is hard (likely prohibitively hard) to avoid entering the if(), but
+>> it is not impossible.
+>>
+>> The compiler really has emitted logic paths where stack rubble is returned.
+>>
+>>> Furthermore this initialize-to-self is a well known pattern to suppress the
+>>> -Wuninitialized induced warnings, originally used by Linux'es
+>>> uninitialized_var().
+>>
+>> I'm glad you cited this, because it proves my point.
+>>
+>> Notice how it was purged from Linux slowly over the course of 8 years
+>> because it had been shown to create real bugs, by hiding real uses of
+>> uninitialised variables.
+> 
+> There is a worse problem for initialize-to-self: it is undefined behavior
+> per se.  If this is done to suppress a warning, then what happens is
+> paradoxical: in order to suppress a warning about a potential undefined
+> behavior (the variable might indeed be always written before being read)
+> one introduces a definite undefined behavior.
 
-When assign a device to passthrough, proactively setup the gsi
-of the device during that process.
+I don't think so - aiui this is another of the many gcc extensions to the
+language (no code is generated for this type of initialization, iirc).
 
-Co-developed-by: Huang Rui <ray.huang@amd.com>
-Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
----
- arch/x86/xen/enlighten_pvh.c       | 90 ++++++++++++++++++++++++++++++
- drivers/acpi/pci_irq.c             |  2 +-
- drivers/xen/xen-pciback/pci_stub.c |  8 +++
- include/linux/acpi.h               |  1 +
- include/xen/acpi.h                 |  6 ++
- 5 files changed, 106 insertions(+), 1 deletion(-)
-
-diff --git a/arch/x86/xen/enlighten_pvh.c b/arch/x86/xen/enlighten_pvh.c
-index ada3868c02c2..ecadd966c684 100644
---- a/arch/x86/xen/enlighten_pvh.c
-+++ b/arch/x86/xen/enlighten_pvh.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0
- #include <linux/acpi.h>
- #include <linux/export.h>
-+#include <linux/pci.h>
- 
- #include <xen/hvc-console.h>
- 
-@@ -25,6 +26,95 @@
- bool __ro_after_init xen_pvh;
- EXPORT_SYMBOL_GPL(xen_pvh);
- 
-+typedef struct gsi_info {
-+	int gsi;
-+	int trigger;
-+	int polarity;
-+} gsi_info_t;
-+
-+struct acpi_prt_entry {
-+	struct acpi_pci_id	id;
-+	u8			pin;
-+	acpi_handle		link;
-+	u32			index;		/* GSI, or link _CRS index */
-+};
-+
-+static int xen_pvh_get_gsi_info(struct pci_dev *dev,
-+								gsi_info_t *gsi_info)
-+{
-+	int gsi;
-+	u8 pin = 0;
-+	struct acpi_prt_entry *entry;
-+	int trigger = ACPI_LEVEL_SENSITIVE;
-+	int polarity = acpi_irq_model == ACPI_IRQ_MODEL_GIC ?
-+				      ACPI_ACTIVE_HIGH : ACPI_ACTIVE_LOW;
-+
-+	if (dev)
-+		pin = dev->pin;
-+	if (!dev || !pin || !gsi_info)
-+		return -EINVAL;
-+
-+	entry = acpi_pci_irq_lookup(dev, pin);
-+	if (entry) {
-+		if (entry->link)
-+			gsi = acpi_pci_link_allocate_irq(entry->link,
-+							 entry->index,
-+							 &trigger, &polarity,
-+							 NULL);
-+		else
-+			gsi = entry->index;
-+	} else
-+		gsi = -1;
-+
-+	if (gsi < 0)
-+		return -EINVAL;
-+
-+	gsi_info->gsi = gsi;
-+	gsi_info->trigger = trigger;
-+	gsi_info->polarity = polarity;
-+
-+	return 0;
-+}
-+
-+static int xen_pvh_setup_gsi(gsi_info_t *gsi_info)
-+{
-+	struct physdev_setup_gsi setup_gsi;
-+
-+	if (!gsi_info)
-+		return -EINVAL;
-+
-+	setup_gsi.gsi = gsi_info->gsi;
-+	setup_gsi.triggering = (gsi_info->trigger == ACPI_EDGE_SENSITIVE ? 0 : 1);
-+	setup_gsi.polarity = (gsi_info->polarity == ACPI_ACTIVE_HIGH ? 0 : 1);
-+
-+	return HYPERVISOR_physdev_op(PHYSDEVOP_setup_gsi, &setup_gsi);
-+}
-+
-+int xen_pvh_passthrough_gsi(struct pci_dev *dev)
-+{
-+	int ret;
-+	gsi_info_t gsi_info;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	ret = xen_pvh_get_gsi_info(dev, &gsi_info);
-+	if (ret) {
-+		xen_raw_printk("Fail to get gsi info!\n");
-+		return ret;
-+	}
-+
-+	ret = xen_pvh_setup_gsi(&gsi_info);
-+	if (ret == -EEXIST) {
-+		xen_raw_printk("Already setup the GSI :%d\n", gsi_info.gsi);
-+		ret = 0;
-+	} else if (ret)
-+		xen_raw_printk("Fail to setup GSI (%d)!\n", gsi_info.gsi);
-+
-+	return ret;
-+}
-+EXPORT_SYMBOL_GPL(xen_pvh_passthrough_gsi);
-+
- void __init xen_pvh_init(struct boot_params *boot_params)
- {
- 	u32 msr;
-diff --git a/drivers/acpi/pci_irq.c b/drivers/acpi/pci_irq.c
-index ff30ceca2203..630fe0a34bc6 100644
---- a/drivers/acpi/pci_irq.c
-+++ b/drivers/acpi/pci_irq.c
-@@ -288,7 +288,7 @@ static int acpi_reroute_boot_interrupt(struct pci_dev *dev,
- }
- #endif /* CONFIG_X86_IO_APIC */
- 
--static struct acpi_prt_entry *acpi_pci_irq_lookup(struct pci_dev *dev, int pin)
-+struct acpi_prt_entry *acpi_pci_irq_lookup(struct pci_dev *dev, int pin)
- {
- 	struct acpi_prt_entry *entry = NULL;
- 	struct pci_dev *bridge;
-diff --git a/drivers/xen/xen-pciback/pci_stub.c b/drivers/xen/xen-pciback/pci_stub.c
-index 46c40ec8a18e..22d4380d2b04 100644
---- a/drivers/xen/xen-pciback/pci_stub.c
-+++ b/drivers/xen/xen-pciback/pci_stub.c
-@@ -20,6 +20,7 @@
- #include <linux/atomic.h>
- #include <xen/events.h>
- #include <xen/pci.h>
-+#include <xen/acpi.h>
- #include <xen/xen.h>
- #include <asm/xen/hypervisor.h>
- #include <xen/interface/physdev.h>
-@@ -435,6 +436,13 @@ static int pcistub_init_device(struct pci_dev *dev)
- 			goto config_release;
- 		pci_restore_state(dev);
- 	}
-+
-+	if (xen_initial_domain() && xen_pvh_domain()) {
-+		err = xen_pvh_passthrough_gsi(dev);
-+		if (err)
-+			goto config_release;
-+	}
-+
- 	/* Now disable the device (this also ensures some private device
- 	 * data is setup before we export)
- 	 */
-diff --git a/include/linux/acpi.h b/include/linux/acpi.h
-index 4db54e928b36..7ea3be981cc3 100644
---- a/include/linux/acpi.h
-+++ b/include/linux/acpi.h
-@@ -360,6 +360,7 @@ void acpi_unregister_gsi (u32 gsi);
- 
- struct pci_dev;
- 
-+struct acpi_prt_entry *acpi_pci_irq_lookup(struct pci_dev *dev, int pin);
- int acpi_pci_irq_enable (struct pci_dev *dev);
- void acpi_penalize_isa_irq(int irq, int active);
- bool acpi_isa_irq_available(int irq);
-diff --git a/include/xen/acpi.h b/include/xen/acpi.h
-index b1e11863144d..17c4d37f1e60 100644
---- a/include/xen/acpi.h
-+++ b/include/xen/acpi.h
-@@ -67,10 +67,16 @@ static inline void xen_acpi_sleep_register(void)
- 		acpi_suspend_lowlevel = xen_acpi_suspend_lowlevel;
- 	}
- }
-+int xen_pvh_passthrough_gsi(struct pci_dev *dev);
- #else
- static inline void xen_acpi_sleep_register(void)
- {
- }
-+
-+static inline int xen_pvh_passthrough_gsi(struct pci_dev *dev)
-+{
-+	return -1;
-+}
- #endif
- 
- #endif	/* _XEN_ACPI_H */
--- 
-2.34.1
-
+Jan
 
