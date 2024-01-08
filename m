@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5CBBC47079
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663913.1033961 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7EA4C47DB0
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.663904.1033887 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaZ-0004O2-Ui; Mon, 08 Jan 2024 20:51:15 +0000
+	id 1rMwaR-0002GS-9L; Mon, 08 Jan 2024 20:51:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663913.1033961; Mon, 08 Jan 2024 20:51:15 +0000
+Received: by outflank-mailman (output) from mailman id 663904.1033887; Mon, 08 Jan 2024 20:51:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaZ-0004I5-5y; Mon, 08 Jan 2024 20:51:15 +0000
-Received: by outflank-mailman (input) for mailman id 663913;
- Mon, 08 Jan 2024 20:51:10 +0000
+	id 1rMwaQ-0002Ei-SG; Mon, 08 Jan 2024 20:51:06 +0000
+Received: by outflank-mailman (input) for mailman id 663904;
+ Mon, 08 Jan 2024 20:51:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NrlO=IS=casper.srs.infradead.org=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaU-0000R6-9t
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:10 +0000
+ id 1rMwaO-0000R6-8c
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:04 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a4d55755-ae67-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 21:51:06 +0100 (CET)
+ id a1629df7-ae67-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 21:51:01 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYk-008RPx-4k; Mon, 08 Jan 2024 20:49:23 +0000
+ id 1rMwYk-008RQ3-KA; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYk-002NFp-28; Mon, 08 Jan 2024 20:49:22 +0000
+ Hat Linux)) id 1rMwYl-002NGS-0Y; Mon, 08 Jan 2024 20:49:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a4d55755-ae67-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: a1629df7-ae67-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=gAKwLxJ9GrgFAgVd8NfOlltKClYjwdlcDlfOHDbpTRo=; b=m9RL72hoic6j71eYQXCMpigCQe
-	kc7kcinrlRJQT0Dra5IIza7HBIzUpfvP5+FJXezICTEkDc6nRNpoxfqjpKKsZVnzqw1cURpeRGXx+
-	V6y/uGAb1uqTlEvsdxiw913WMZpVWKi1lJF/d98AFA9UytmAYsZSF71U5gtWVtT0BdwqCH8eM2ocW
-	Pqh3uqD98gkzuDPYFCSM2yaVbwuk+7KGIn0tWWOErXzbgRblNoO2egcYiWSXe5JWB9k7sSjPHzsk9
-	TBJVdEVZ5St8UB4risV+pAvMeTKX4hufCKmrZBrjH8zqus4Fwf68EclEkgpVrxIJHhDSQ9MO7C5ob
-	5Ffqt/iA==;
+	bh=wozYunS9mL+E+NW7be8DLpB1Vtj79zSyr6dMjYfNaXI=; b=jcI3zWKyisQTWt932lF8taMSuX
+	Fh58CKyE7nQO1wPJEhwKWAyAOihnTcN3D88J/0ElKQ04mAla5ZQvWXnaJKqK6nCkcTf4tPvJle/p/
+	9CpBVgea3QhoLhn7gcat3RbTtqNqgSnxqw6uKNtJNt/tDXW5lCvqchHSrcRdot0vV4S2/SUWSCqCp
+	+phQiHWjzINAILVomuhlMZGxsE2OAX1d3CBs8+xqtzNgA4sVpyrezcQeflHUo/inybz+jxsDChiqB
+	Wg6i/u5ga2dtNc0038HhRYZdL7UsrzOb2pzE6aFKKrZWfn9LDsYF/a0C7xBenPqv32d2nHKcvUVR+
+	a8xUQsFQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 27/46] hw/arm/highbank: use qemu_create_nic_device()
-Date: Mon,  8 Jan 2024 20:26:56 +0000
-Message-ID: <20240108204909.564514-28-dwmw2@infradead.org>
+Subject: [PATCH v3 34/46] hw/microblaze: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:27:03 +0000
+Message-ID: <20240108204909.564514-35-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -136,38 +136,46 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/highbank.c | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ hw/microblaze/petalogix_ml605_mmu.c      | 3 +--
+ hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 +--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
-index c21e18d08f..6a0e20e58d 100644
---- a/hw/arm/highbank.c
-+++ b/hw/arm/highbank.c
-@@ -296,19 +296,17 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
+diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
+index fb7889cf67..0f5fabc32e 100644
+--- a/hw/microblaze/petalogix_ml605_mmu.c
++++ b/hw/microblaze/petalogix_ml605_mmu.c
+@@ -133,7 +133,6 @@ petalogix_ml605_init(MachineState *machine)
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
  
-     sysbus_create_simple(TYPE_SYSBUS_AHCI, 0xffe08000, pic[83]);
+     /* axi ethernet and dma initialization. */
+-    qemu_check_nic_model(&nd_table[0], "xlnx.axi-ethernet");
+     eth0 = qdev_new("xlnx.axi-ethernet");
+     dma = qdev_new("xlnx.axi-dma");
  
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[0]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff50000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[77]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 1, pic[78]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 2, pic[79]);
-+    }
+@@ -145,7 +144,7 @@ petalogix_ml605_init(MachineState *machine)
+                                   "axistream-connected-target", NULL);
+     cs = object_property_get_link(OBJECT(dma),
+                                   "axistream-control-connected-target", NULL);
+-    qdev_set_nic_properties(eth0, &nd_table[0]);
++    qemu_configure_nic_device(eth0, true, NULL);
+     qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
+     qdev_prop_set_uint32(eth0, "txmem", 0x1000);
+     object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
+diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+index 505639c298..dad46bd7f9 100644
+--- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
++++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+@@ -114,9 +114,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
  
--        qemu_check_nic_model(&nd_table[1], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[1]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff51000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[80]);
+-    qemu_check_nic_model(&nd_table[0], "xlnx.xps-ethernetlite");
+     dev = qdev_new("xlnx.xps-ethernetlite");
+-    qdev_set_nic_properties(dev, &nd_table[0]);
++    qemu_configure_nic_device(dev, true, NULL);
+     qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
+     qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 -- 
 2.41.0
 
