@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC55C3DA6E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:59:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663982.1034056 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50B1C3DA6E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:59:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.663991.1034070 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwiF-0005si-NK; Mon, 08 Jan 2024 20:59:11 +0000
+	id 1rMwim-0006nt-8h; Mon, 08 Jan 2024 20:59:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663982.1034056; Mon, 08 Jan 2024 20:59:11 +0000
+Received: by outflank-mailman (output) from mailman id 663991.1034070; Mon, 08 Jan 2024 20:59:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwiF-0005sZ-Ki; Mon, 08 Jan 2024 20:59:11 +0000
-Received: by outflank-mailman (input) for mailman id 663982;
- Mon, 08 Jan 2024 20:59:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rMwim-0006my-4j; Mon, 08 Jan 2024 20:59:44 +0000
+Received: by outflank-mailman (input) for mailman id 663991;
+ Mon, 08 Jan 2024 20:59:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwab-0000R5-9K
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:17 +0000
+ id 1rMwae-0000R6-Hh
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:20 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a99f5eb5-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:51:14 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ab0ad459-ae67-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 21:51:17 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYj-007wXN-2o; Mon, 08 Jan 2024 20:49:22 +0000
+ id 1rMwYm-007wXu-0F; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEV-0d; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYl-002NGi-1C; Mon, 08 Jan 2024 20:49:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a99f5eb5-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: ab0ad459-ae67-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=BtvYxQZMYQ5MtHfC35lrWkDioorml/mWOUj6/4zttrw=; b=KzthCYmv36IOd+nEGzae8t//5x
-	aZNckAiZq8hq4xQ4zUDuO4RpNZugkCDA0mN/hLSXw4jkkqU5sqOYKqVYoxoF6B9xG8lJAZfsLzRiX
-	ZNtW/GOZwEjZpvpU+NUCVGhZ0X4nqoTP7YNiqbMToJi6+oFkPcZMzHBFymAyrpafD1bvdXDu5m5+V
-	jH0T9mXe6bVEX9a7iPPQj3ng2bU3thCGWZBwlu6+w2IFo0kO5vPmjymu8qT+Uhi3rtVmuTZ9kc/Mv
-	Smvgse0U7ri8rkrUae4HJCP80WS2hX0+Pew5M791YwiVkxozSzgWu8VPZ4uWJaWNZvteiogHXLn4D
-	OdwV4dyA==;
+	bh=1WN6S7P9khjjRDptuhw9wfAzdg/uT5NK3rR3MKpFEIQ=; b=PPEeq4uX8x6/nqsUejt6pI1XaC
+	ehm7vGRO+AeDJTn95tLLNTK6MCaBnw3TGnVndxXMuigBOvc0bp2fxfK+TJitEh886faEWTINhRz/Z
+	dRaiGbhvcYjxVSDG1cogfRLbVb9/ZSxdWZveefhh6Sm/Yk7oNQFjx7BDj5VQzgJbPOQJLzyE10nop
+	aVlZ5rmjSlPSKJ+zmpjuCM1yqlikPj3dCmhEJofR53U3jV9LUCUzJey80tr7JrolAVt4/CuMVI/sC
+	kwbXGKVFCAtoQ33Duv8DOIeSkjf49ZVomUSkU/LVmI4JAtdJUR53zRhRHSYcq+WKfNWqgG4mD5hhj
+	170FqWXA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 09/46] hw/arm/virt: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:38 +0000
-Message-ID: <20240108204909.564514-10-dwmw2@infradead.org>
+Subject: [PATCH v3 37/46] hw/net/lasi_i82596: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:27:06 +0000
+Message-ID: <20240108204909.564514-38-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -136,24 +136,26 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/net/lasi_i82596.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 2793121cb4..8cf9237001 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1454,9 +1454,7 @@ static void create_pcie(VirtMachineState *vms)
-     pci->bypass_iommu = vms->default_bus_bypass_iommu;
-     vms->bus = pci->bus;
-     if (vms->bus) {
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci->bus, mc->default_nic);
-     }
+diff --git a/hw/net/lasi_i82596.c b/hw/net/lasi_i82596.c
+index 6a3147fe2d..2bb4f2c4ca 100644
+--- a/hw/net/lasi_i82596.c
++++ b/hw/net/lasi_i82596.c
+@@ -125,11 +125,10 @@ SysBusI82596State *lasi_82596_init(MemoryRegion *addr_space,
+     static const MACAddr HP_MAC = {
+         .a = { 0x08, 0x00, 0x09, 0xef, 0x34, 0xf6 } };
  
-     nodename = vms->pciehb_nodename = g_strdup_printf("/pcie@%" PRIx64, base);
+-    qemu_check_nic_model(&nd_table[0], TYPE_LASI_82596);
+     dev = qdev_new(TYPE_LASI_82596);
+     s = SYSBUS_I82596(dev);
+     s->state.irq = lan_irq;
+-    qdev_set_nic_properties(dev, &nd_table[0]);
++    qemu_configure_nic_device(dev, true, NULL);
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+     s->state.conf.macaddr = HP_MAC; /* set HP MAC prefix */
+ 
 -- 
 2.41.0
 
