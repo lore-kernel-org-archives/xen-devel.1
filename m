@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 857C3C3DA6E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:15:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664099.1034271 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DADDC3DA6E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:21:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664118.1034285 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwxr-00068s-T7; Mon, 08 Jan 2024 21:15:19 +0000
+	id 1rMx3X-0001vg-Kn; Mon, 08 Jan 2024 21:21:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664099.1034271; Mon, 08 Jan 2024 21:15:19 +0000
+Received: by outflank-mailman (output) from mailman id 664118.1034285; Mon, 08 Jan 2024 21:21:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwxr-00067z-Mm; Mon, 08 Jan 2024 21:15:19 +0000
-Received: by outflank-mailman (input) for mailman id 664099;
- Mon, 08 Jan 2024 21:15:18 +0000
+	id 1rMx3X-0001vZ-I8; Mon, 08 Jan 2024 21:21:11 +0000
+Received: by outflank-mailman (input) for mailman id 664118;
+ Mon, 08 Jan 2024 21:21:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwac-0000R6-Hh
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:18 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <SRS0=hFOe=IS=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1rMx3W-0001vQ-3l
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 21:21:10 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aa43dc11-ae67-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 21:51:15 +0100 (CET)
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYm-007wXp-0H; Mon, 08 Jan 2024 20:49:24 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NGM-0I; Mon, 08 Jan 2024 20:49:23 +0000
+ id d4c745ec-ae6b-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 22:21:05 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 56A8C610A1;
+ Mon,  8 Jan 2024 21:21:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86911C433C7;
+ Mon,  8 Jan 2024 21:21:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,181 +42,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: aa43dc11-ae67-11ee-9b0f-b553b5be7939
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=sIvM8Te/mI7VlQ7unlUHnFMmc5eyEzom2MnrpIIKUis=; b=XAg8ZGiC5eVOJhZhVLlJ9KN+Yt
-	KmAvPkKhALeLAXFtfQdfWZ6PGOGnj3lRB6+kFR9o9bPjIWRmMPT6BB9IhjN+AHUtNznPPIkTHPXn4
-	ieEhrCtyy3bTXBhQOO/ES2YPWZNG8J4dFM028KHdT1RWl5f5yHcjVW2PNS5eJ+HtAPrnU92aA6ciz
-	pgYIj8sFGhP+aXbpFiPDqCiMTctz5AQNEYikXpiATMk5u4rnNfCcNBtBjK22L//4NaBVeKGSrTvvW
-	woUpO3SAQJ+Xa8YaMFp/MUAigik72SrxYrWYjKUq+mTko6W8wQUK0HDaAaah8SHK6YuexEHPd5Bhc
-	z2ewDTjA==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
-	Beniamino Galvani <b.galvani@gmail.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
-	Niek Linnenbank <nieklinnenbank@gmail.com>,
-	=?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
-	Andrew Jeffery <andrew@codeconstruct.com.au>,
-	Joel Stanley <joel@jms.id.au>,
-	Igor Mitsyanko <i.mitsyanko@gmail.com>,
-	Jean-Christophe Dubois <jcd@tribudubois.net>,
-	Andrey Smirnov <andrew.smirnov@gmail.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Subbaraya Sundeep <sundeep.lkml@gmail.com>,
-	Jan Kiszka <jan.kiszka@web.de>,
-	Tyrone Ting <kfting@nuvoton.com>,
-	Hao Wu <wuhaotsh@google.com>,
-	Radoslaw Biernacki <rad@semihalf.com>,
-	Leif Lindholm <quic_llindhol@quicinc.com>,
-	Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Alistair Francis <alistair@alistair23.me>,
-	Helge Deller <deller@gmx.de>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Song Gao <gaosong@loongson.cn>,
-	Thomas Huth <huth@tuxfamily.org>,
-	Laurent Vivier <laurent@vivier.eu>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	Jiaxun Yang <jiaxun.yang@flygoat.com>,
-	=?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
-	Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
-	Aurelien Jarno <aurelien@aurel32.net>,
-	Jason Wang <jasowang@redhat.com>,
-	Jia Liu <proljc@gmail.com>,
-	Stafford Horne <shorne@gmail.com>,
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Daniel Henrique Barboza <danielhb413@gmail.com>,
-	David Gibson <david@gibson.dropbear.id.au>,
-	Harsh Prateek Bora <harshpb@linux.ibm.com>,
-	Bin Meng <bin.meng@windriver.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Weiwei Li <liwei1518@gmail.com>,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	Eric Farman <farman@linux.ibm.com>,
-	David Hildenbrand <david@redhat.com>,
-	Ilya Leoshkevich <iii@linux.ibm.com>,
-	Yoshinori Sato <ysato@users.sourceforge.jp>,
-	Magnus Damm <magnus.damm@gmail.com>,
-	Artyom Tarasenko <atar4qemu@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Max Filippov <jcmvbkbc@gmail.com>,
-	qemu-arm@nongnu.org,
-	qemu-ppc@nongnu.org,
-	qemu-riscv@nongnu.org,
-	qemu-s390x@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 33/46] hw/m68k/q800: use qemu_find_nic_info()
-Date: Mon,  8 Jan 2024 20:27:02 +0000
-Message-ID: <20240108204909.564514-34-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
-References: <20240108204909.564514-1-dwmw2@infradead.org>
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: d4c745ec-ae6b-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1704748864;
+	bh=J8muup0wlglgrTz8MoYwTawipVGTqClNwBde2ultwdc=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=R0Vol6hL+Bc7XxvXvg5uBSD+GHRAHH6/TqgapYIdRiG7ie7R/Hdt5Rv9DXbT6oC5V
+	 okG5FTPJkKaehT+Qw9SCZYvBLTu0IO8xvgo3buIrNA3ynL5VDy1G+JoEyyoupjzUA7
+	 vUvn7AKzNjISmo6mlD72ac+tsdzI1S2EIFpn+/WgWveeX5NnGjIj8d6U8/mJ6qB0AH
+	 zw/BmUzPDkwkTdUY2L5Pdbqkb4e8sjHr70UFSRsmRbWvx5/iB4cWWRYvnK4kZ86TB7
+	 6/ng7B1TxZT7DANjJb24r7oJAZ+DGdNhmowVfza7CsUmmuOrFvXD2qbPC1JT9xYt6S
+	 j1pkicvA/XKNQ==
+Date: Mon, 8 Jan 2024 13:21:00 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Carlo Nonato <carlo.nonato@minervasys.tech>
+cc: Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, 
+    Marco Solieri <marco.solieri@minervasys.tech>, 
+    Julien Grall <julien@xen.org>
+Subject: Re: [PATCH v5 04/13] xen: extend domctl interface for cache
+ coloring
+In-Reply-To: <CAG+AhRXAY1TX-z2Aw0F1oEOKY=pjU9dV+C+hu4aPjF8H2Uj=Ng@mail.gmail.com>
+Message-ID: <alpine.DEB.2.22.394.2401081319130.3675@ubuntu-linux-20-04-desktop>
+References: <20240102095138.17933-1-carlo.nonato@minervasys.tech> <20240102095138.17933-5-carlo.nonato@minervasys.tech> <99295edf-6c9c-4d06-ba20-86db67100561@xen.org> <CAG+AhRWd9E5sQPY-sxN+WGTSWtvRXGN2FnZC2Vy6LPyynKGLcQ@mail.gmail.com>
+ <4675a541-b9dc-476a-a6ff-0247a4403292@xen.org> <CAG+AhRX6Y2U6A1v=27KgUeWip115R1o+csEWcyCCooxE2Tac6w@mail.gmail.com> <33061994-0b49-4e4e-8698-d6901b9130dc@xen.org> <CAG+AhRXPt_e4+OUxbRLhf6W0reH1nmO7cC9-XoFKe_G8BVxt7w@mail.gmail.com> <e7029592-57e6-4c2a-ab11-f843047ce7f2@xen.org>
+ <CAG+AhRV8B4dcoVHXbP2KW5xsB8BQRt4NpPuXsmjc1X149GZRRw@mail.gmail.com> <08b7535e-da40-4578-b865-9b350ace379c@suse.com> <CAG+AhRXAY1TX-z2Aw0F1oEOKY=pjU9dV+C+hu4aPjF8H2Uj=Ng@mail.gmail.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+Content-Type: multipart/mixed; boundary="8323329-545452899-1704748863=:3675"
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-If a corresponding NIC configuration was found, it will have a MAC address
-already assigned, so use that. Else, generate and assign a default one.
+--8323329-545452899-1704748863=:3675
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-Using qemu_find_nic_info() is simpler than the alternative of using
-qemu_configure_nic_device() and then having to fetch the "mac" property
-as a string and convert it.
+On Mon, 8 Jan 2024, Carlo Nonato wrote:
+> Hi Jan,
+> 
+> On Mon, Jan 8, 2024 at 5:40 PM Jan Beulich <jbeulich@suse.com> wrote:
+> >
+> > On 08.01.2024 17:31, Carlo Nonato wrote:
+> > > On Mon, Jan 8, 2024 at 4:32 PM Julien Grall <julien@xen.org> wrote:
+> > >> On 08/01/2024 15:18, Carlo Nonato wrote:
+> > >>>> No. I am saying that that we should not be able to allow changing the
+> > >>>> colors after the memory has been allocated. To give an example, your
+> > >>>> current code would allow:
+> > >>>>
+> > >>>>     1) Setup the P2M pools or allocate RAM
+> > >>>>     2) Set the color
+> > >>>>
+> > >>>> This would render the coloring configuration moot.
+> > >>>>
+> > >>>> Whether we want to allow changing the coloring before hand is a
+> > >>>> different question and as I wrote earlier on, I don't mind if you want
+> > >>>> to forbid that.
+> > >>>
+> > >>> At the moment I'm relying on the toolstack in the sense that I know that it
+> > >>> will set colors right after domain creation and before memory allocation.
+> > >>> Calling alloc_domheap_pages() without a coloring configuration makes Xen
+> > >>> crash, so it's mandatory to have the configuration done before any allocation.
+> > >>> I know that we shouldn't rely on the toolstack this much, but I didn't
+> > >>> find a better way. Given this assumption, looking for an already existing
+> > >>> color configuration of a domain is sufficient to avoid what you are saying.
+> > >>>
+> > >>> Is it possible to enforce such a constraint with domctl? > I mean to be sure that this domctl will be called at a precise time.
+> > >>
+> > >> Yes. You can...
+> > >>
+> > >>>
+> > >>> Thanks.
+> > >>>
+> > >>>>> I don't know what to check that.
+> > >>>>
+> > >>>> You can check the size of the P2M pool (d->arch.paging.p2m_total_pages)
+> > >>>> is still 0. I think for RAM, you can check d->tot_pages == 0.
+> > >>
+> > >> ... reject the call if either of the two fields are not zero.
+> > >
+> > > What I'm saying is that Xen would crash before even reaching this point if no
+> > > colors were provided. Let's say that the toolstack or whatever hypercall user
+> > > isn't calling this domctl at all (or not at the right time), then the domain
+> > > colored allocator would always return null pages since there are no colors.
+> > > We would have a crash and your if (or mine) would be useless.
+> >
+> > Why is it that you can't simply allocated arbitrary memory if coloring
+> > information wasn't set up front? Aiui that'll be required anyway, as
+> > there shouldn't be a restriction that all domains have to use coloring.
+> 
+> If coloring is enabled all domains are colored. It's one of our first
+> assumptions. We haven't developed something that works hybridly and supporting
+> that would require some rework.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- hw/m68k/q800.c | 29 ++++++++++++++++-------------
- 1 file changed, 16 insertions(+), 13 deletions(-)
-
-diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
-index 83d1571d02..c9e7bdf197 100644
---- a/hw/m68k/q800.c
-+++ b/hw/m68k/q800.c
-@@ -48,6 +48,7 @@
- #include "hw/display/macfb.h"
- #include "hw/block/swim.h"
- #include "net/net.h"
-+#include "net/util.h"
- #include "qapi/error.h"
- #include "qemu/error-report.h"
- #include "sysemu/qtest.h"
-@@ -271,6 +272,8 @@ static void q800_machine_init(MachineState *machine)
-     BusState *adb_bus;
-     NubusBus *nubus;
-     DriveInfo *dinfo;
-+    NICInfo *nd;
-+    MACAddr mac;
-     uint8_t rng_seed[32];
- 
-     linux_boot = (kernel_filename != NULL);
-@@ -371,13 +374,6 @@ static void q800_machine_init(MachineState *machine)
- 
-     /* MACSONIC */
- 
--    if (nb_nics > 1) {
--        error_report("q800 can only have one ethernet interface");
--        exit(1);
--    }
--
--    qemu_check_nic_model(&nd_table[0], "dp83932");
--
-     /*
-      * MacSonic driver needs an Apple MAC address
-      * Valid prefix are:
-@@ -387,14 +383,21 @@ static void q800_machine_init(MachineState *machine)
-      * 08:00:07 Apple
-      * (Q800 use the last one)
-      */
--    nd_table[0].macaddr.a[0] = 0x08;
--    nd_table[0].macaddr.a[1] = 0x00;
--    nd_table[0].macaddr.a[2] = 0x07;
--
-     object_initialize_child(OBJECT(machine), "dp8393x", &m->dp8393x,
-                             TYPE_DP8393X);
-     dev = DEVICE(&m->dp8393x);
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    nd = qemu_find_nic_info(TYPE_DP8393X, true, "dp83932");
-+    if (nd) {
-+        qdev_set_nic_properties(dev, nd);
-+        memcpy(mac.a, nd->macaddr.a, sizeof(mac.a));
-+    } else {
-+        qemu_macaddr_default_if_unset(&mac);
-+    }
-+    mac.a[0] = 0x08;
-+    mac.a[1] = 0x00;
-+    mac.a[2] = 0x07;
-+    qdev_prop_set_macaddr(dev, "mac", mac.a);
-+
-     qdev_prop_set_uint8(dev, "it_shift", 2);
-     qdev_prop_set_bit(dev, "big_endian", true);
-     object_property_set_link(OBJECT(dev), "dma_mr",
-@@ -415,7 +418,7 @@ static void q800_machine_init(MachineState *machine)
-     prom = memory_region_get_ram_ptr(dp8393x_prom);
-     checksum = 0;
-     for (i = 0; i < 6; i++) {
--        prom[i] = revbit8(nd_table[0].macaddr.a[i]);
-+        prom[i] = revbit8(mac.a[i]);
-         checksum ^= prom[i];
-     }
-     prom[7] = 0xff - checksum;
--- 
-2.41.0
-
+I think that's a good assumption and I wouldn't go in the direction of
+supporting a mix of colored and non-colored. To benefit from cache
+coloring, all domains need to be colored, otherwise a single non-colored
+domain could thrash the cache of everyone else.
+--8323329-545452899-1704748863=:3675--
 
