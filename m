@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7474C3DA6E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:14:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664078.1034216 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D8BC47073
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:14:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664082.1034226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwwp-00036F-7T; Mon, 08 Jan 2024 21:14:15 +0000
+	id 1rMwwz-0003Rr-Dx; Mon, 08 Jan 2024 21:14:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664078.1034216; Mon, 08 Jan 2024 21:14:15 +0000
+Received: by outflank-mailman (output) from mailman id 664082.1034226; Mon, 08 Jan 2024 21:14:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwwp-000368-4V; Mon, 08 Jan 2024 21:14:15 +0000
-Received: by outflank-mailman (input) for mailman id 664078;
- Mon, 08 Jan 2024 21:14:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rMwwz-0003Ri-BE; Mon, 08 Jan 2024 21:14:25 +0000
+Received: by outflank-mailman (input) for mailman id 664082;
+ Mon, 08 Jan 2024 21:14:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaj-0000R5-AD
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:25 +0000
+ id 1rMwaZ-0000R6-HH
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:15 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ac861e9a-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:51:19 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a7eac81c-ae67-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 21:51:11 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYm-007wY2-0K; Mon, 08 Jan 2024 20:49:24 +0000
+ id 1rMwYm-007wXt-0F; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NH0-23; Mon, 08 Jan 2024 20:49:23 +0000
+ Hat Linux)) id 1rMwYl-002NGd-0y; Mon, 08 Jan 2024 20:49:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: ac861e9a-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: a7eac81c-ae67-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=apktM3rQhqJT/gPdzzrEkhVTg4OW0ilv1ws3zHsGmXQ=; b=f5E8BtrWl0Oi9+DI39I39oIRpP
-	rRDUHBUwPpvktpzzw9rTpGQNHL9MgQykQr5OwSCDg+RnjTMxky3qb/VBl2Few1nWUrwYqpreNWf8h
-	BUPA/iYnHBul1TWdzNxl00o3hkG7FewYMX4O4NOJJVb0cECNwBfnrtZMr0SUBQNzQLg6jDhhcCKJ+
-	UzMGARSFcO311sRBWcSYexrdPs6sr1ek4+TRJr5MYHmyGh6axYw++gap3DTQkmud5eVMqRaA9Jo/3
-	AJOsNX0pT3DXRw1t3TIHE5QR+MCf20OVWT/3euGBbUPwEqChZ6IYdT+4EhO4QJqK9NYMWkMbozWCb
-	usoYhQ1A==;
+	bh=fKzSEAzycsDrEiPWFhQoNqX9JuE8mZwP1mZzqxeZRVI=; b=heBk2HKstNixMCfGHrZOPLntIm
+	3ER50x76sGFR2x/zM4Mdza3n/WZnJmR281mpL1waE6lKWCg4EGMPULgiMZDSOgSE5jEjG7O5BYpL5
+	HPZF+v/DR9iBzkk7Rvd8f6AFxXoCJqlQSj5nfYekAsuL6wKs8mcZo/HvpRqcpeLT3Sg8wKV0euy8D
+	MCyQ8ppYR8RIsBhycfsDqXle4/codF94H9ZCTKDfsqVlzP3RYLTfLPgJv4acCK5aORbytCwpsTAFq
+	WF9F9NnrT/Iq0HqCfj/UIEYOXmtnOwbO7RzGBrfHRrGm5VL95TMhN64sMRjIsBT+OWZM4QMdqcIl9
+	jV/d1MGA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 41/46] hw/sparc/sun4m: use qemu_find_nic_info()
-Date: Mon,  8 Jan 2024 20:27:10 +0000
-Message-ID: <20240108204909.564514-42-dwmw2@infradead.org>
+Subject: [PATCH v3 36/46] hw/mips/jazz: use qemu_find_nic_info()
+Date: Mon,  8 Jan 2024 20:27:05 +0000
+Message-ID: <20240108204909.564514-37-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -134,81 +134,54 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Obtain the MAC address from the NIC configuration if there is one, or
-generate one explicitly so that it can be placed in the PROM.
+Extract the MAC address from the NICInfo, or generate one explicitly if
+there was no corresponding NIC configuration, to put it in the PROM.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/sparc/sun4m.c | 20 ++++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
+ hw/mips/jazz.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
-index 550af01690..e782c8ec7a 100644
---- a/hw/sparc/sun4m.c
-+++ b/hw/sparc/sun4m.c
-@@ -299,13 +299,15 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
+diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
+index 0d2348aa5a..5bf3e328db 100644
+--- a/hw/mips/jazz.c
++++ b/hw/mips/jazz.c
+@@ -119,15 +119,19 @@ static const MemoryRegionOps dma_dummy_ops = {
+     .endianness = DEVICE_NATIVE_ENDIAN,
+ };
  
- static void *sparc32_dma_init(hwaddr dma_base,
-                               hwaddr esp_base, qemu_irq espdma_irq,
--                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
-+                              hwaddr le_base, qemu_irq ledma_irq,
-+                              MACAddr *mac)
+-static void mips_jazz_init_net(NICInfo *nd, IOMMUMemoryRegion *rc4030_dma_mr,
++static void mips_jazz_init_net(IOMMUMemoryRegion *rc4030_dma_mr,
+                                DeviceState *rc4030, MemoryRegion *dp8393x_prom)
  {
-     DeviceState *dma;
-     ESPDMADeviceState *espdma;
-     LEDMADeviceState *ledma;
-     SysBusESPState *esp;
-     SysBusPCNetState *lance;
-+    NICInfo *nd = qemu_find_nic_info("lance", true, NULL);
+     DeviceState *dev;
+     SysBusDevice *sysbus;
+     int checksum, i;
+     uint8_t *prom;
++    NICInfo *nd;
  
-     dma = qdev_new(TYPE_SPARC32_DMA);
-     espdma = SPARC32_ESPDMA_DEVICE(object_resolve_path_component(
-@@ -320,7 +322,14 @@ static void *sparc32_dma_init(hwaddr dma_base,
- 
-     lance = SYSBUS_PCNET(object_resolve_path_component(
-                          OBJECT(ledma), "lance"));
--    qdev_set_nic_properties(DEVICE(lance), nd);
-+
-+    if (nd) {
-+        qdev_set_nic_properties(DEVICE(lance), nd);
-+        memcpy(mac->a, nd->macaddr.a, sizeof(mac->a));
-+    } else {
-+        qemu_macaddr_default_if_unset(mac);
-+        qdev_prop_set_macaddr(DEVICE(lance), "mac", mac->a);
+-    qemu_check_nic_model(nd, "dp83932");
++    nd = qemu_find_nic_info("dp8393x", true, "dp82932");
++    if (!nd) {
++        return;
 +    }
  
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
-@@ -823,7 +832,7 @@ static void sun4m_hw_init(MachineState *machine)
-     unsigned int smp_cpus = machine->smp.cpus;
-     unsigned int max_cpus = machine->smp.max_cpus;
-     HostMemoryBackend *ram_memdev = machine->memdev;
--    NICInfo *nd = &nd_table[0];
-+    MACAddr hostid;
- 
-     if (machine->ram_size > hwdef->max_mem) {
-         error_report("Too much memory for this machine: %" PRId64 ","
-@@ -884,10 +893,9 @@ static void sun4m_hw_init(MachineState *machine)
-                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
+     dev = qdev_new("dp8393x");
+     qdev_set_nic_properties(dev, nd);
+@@ -324,12 +328,7 @@ static void mips_jazz_init(MachineState *machine,
      }
  
--    qemu_check_nic_model(nd, TYPE_LANCE);
-     sparc32_dma_init(hwdef->dma_base,
-                      hwdef->esp_base, slavio_irq[18],
--                     hwdef->le_base, slavio_irq[16], nd);
-+                     hwdef->le_base, slavio_irq[16], &hostid);
+     /* Network controller */
+-    if (nb_nics == 1) {
+-        mips_jazz_init_net(&nd_table[0], rc4030_dma_mr, rc4030, dp8393x_prom);
+-    } else if (nb_nics > 1) {
+-        error_report("This machine only supports one NIC");
+-        exit(1);
+-    }
++    mips_jazz_init_net(rc4030_dma_mr, rc4030, dp8393x_prom);
  
-     if (graphic_depth != 8 && graphic_depth != 24) {
-         error_report("Unsupported depth: %d", graphic_depth);
-@@ -1039,7 +1047,7 @@ static void sun4m_hw_init(MachineState *machine)
-                                     machine->initrd_filename,
-                                     machine->ram_size, &initrd_size);
- 
--    nvram_init(nvram, (uint8_t *)&nd->macaddr, machine->kernel_cmdline,
-+    nvram_init(nvram, hostid.a, machine->kernel_cmdline,
-                machine->boot_config.order, machine->ram_size, kernel_size,
-                graphic_width, graphic_height, graphic_depth,
-                hwdef->nvram_machine_id, "Sun4m");
+     /* SCSI adapter */
+     dev = qdev_new(TYPE_SYSBUS_ESP);
 -- 
 2.41.0
 
