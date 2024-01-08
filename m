@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 417B2C3DA6E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:13:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664067.1034195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A70C3DA6E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:13:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664071.1034206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwvu-0001dB-OP; Mon, 08 Jan 2024 21:13:18 +0000
+	id 1rMwwB-00027f-Vh; Mon, 08 Jan 2024 21:13:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664067.1034195; Mon, 08 Jan 2024 21:13:18 +0000
+Received: by outflank-mailman (output) from mailman id 664071.1034206; Mon, 08 Jan 2024 21:13:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwvu-0001d4-LX; Mon, 08 Jan 2024 21:13:18 +0000
-Received: by outflank-mailman (input) for mailman id 664067;
- Mon, 08 Jan 2024 21:13:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rMwwB-00027Y-Sv; Mon, 08 Jan 2024 21:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 664071;
+ Mon, 08 Jan 2024 21:13:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaf-0000R6-U4
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:21 +0000
+ id 1rMwac-0000R5-9W
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:18 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ac59657f-ae67-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 21:51:19 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a7ebb5d8-ae67-11ee-98ef-6d05b1d4d9a1;
+ Mon, 08 Jan 2024 21:51:14 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYk-007wXU-32; Mon, 08 Jan 2024 20:49:49 +0000
+ id 1rMwYk-007wXT-2t; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYk-002NFF-05; Mon, 08 Jan 2024 20:49:22 +0000
+ Hat Linux)) id 1rMwYj-002NF7-2j; Mon, 08 Jan 2024 20:49:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: ac59657f-ae67-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: a7ebb5d8-ae67-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=vZMRhiZQ+Jif2GpzJ088JqGdsj64x2dfhRLBSU8SpKk=; b=gySY+Chu+vZJ5+6WwtPjM9E41R
-	jKNxbCJ+rtAWQeXdrM3MAuC28dtzfNxAYvcNCYHDML/tATRk0WgcaqinYfyT15inZuXzuzR1QcSui
-	rSfCpkB1ZVAc2sLnQd8Q8Z53vSlyLbhZt6LlcsaH521sF+qV4fQohUEK9Ig9EZYak2Hkw0R1xJdVz
-	IGHOPpKmizuS5BU5+vsFYB/7Acm69ktMUxzCJJTwJDYBWFQU80TzLDmHrbvCndfqdFzwflLwtRJ5E
-	T2ele1s6Ya9ydB6nGoFNoEqKrdA1eIjV78jw2wYqKrHOeznrc3gIWrMxROgxb5lV6wpgmr3UHKvWB
-	EFAzJkgg==;
+	bh=vOPLDRs2pS03aFI3QKRuxfVdnOLMGUdP65R8Ofm4Hp4=; b=fryOhSDr3Sqtj/iGNQmSgoZC81
+	0bGoir4uvuNgVOwYFL1sDLG0qL07aRdFpM5bAJLXRJnRMx9U3c4QlhYrfGIR0ZD8rzIod70oaH03m
+	32JHaV5EZnpDyaapgbucMOXP0B4SNSnpc4ECIHxaJ403KFlc8VSyGhgbl9Ov+D8HDtwELOrzGF4H/
+	ItyyGOTXfBcAilSezrmYxbybrVpmkvoj+/cBATGduER26ylWNBqZXNBMljk3KwcpPcFIx/nScB0CD
+	6caPIW50TvBL5hpX6f7H+gU3MUsh5192cNfpYuPDZO/kTfzzbn8mkGjq6+Oq5MRyuGx/CIfzH0w3a
+	9/f6TL/g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 19/46] hw/sparc64/sun4u: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:48 +0000
-Message-ID: <20240108204909.564514-20-dwmw2@infradead.org>
+Subject: [PATCH v3 17/46] hw/ppc: use pci_init_nic_devices()
+Date: Mon,  8 Jan 2024 20:26:46 +0000
+Message-ID: <20240108204909.564514-18-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -134,59 +134,91 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The first sunhme NIC gets placed a function 1 on slot 1 of PCI bus A,
-and the rest are dynamically assigned on PCI bus B.
-
-Previously, any PCI NIC would get the special treatment purely by
-virtue of being first in the list.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/sparc64/sun4u.c | 27 ++++++++-------------------
- 1 file changed, 8 insertions(+), 19 deletions(-)
+ hw/ppc/e500.c          |  4 +---
+ hw/ppc/mac_newworld.c  |  4 +---
+ hw/ppc/mac_oldworld.c  |  4 +---
+ hw/ppc/ppc440_bamboo.c | 14 +++++---------
+ 4 files changed, 8 insertions(+), 18 deletions(-)
 
-diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
-index 24d53bf5fd..eda9b58a21 100644
---- a/hw/sparc64/sun4u.c
-+++ b/hw/sparc64/sun4u.c
-@@ -639,29 +639,18 @@ static void sun4uv_init(MemoryRegion *address_space_mem,
+diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
+index 566f1200dd..3bd12b54ab 100644
+--- a/hw/ppc/e500.c
++++ b/hw/ppc/e500.c
+@@ -1079,9 +1079,7 @@ void ppce500_init(MachineState *machine)
  
-     memset(&macaddr, 0, sizeof(MACAddr));
-     onboard_nic = false;
--    for (i = 0; i < nb_nics; i++) {
--        PCIBus *bus;
--        nd = &nd_table[i];
--
--        if (!nd->model || strcmp(nd->model, mc->default_nic) == 0) {
--            if (!onboard_nic) {
--                pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
--                bus = pci_busA;
--                memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
--                onboard_nic = true;
--            } else {
--                pci_dev = pci_new(-1, mc->default_nic);
--                bus = pci_busB;
--            }
--        } else {
--            pci_dev = pci_new(-1, nd->model);
--            bus = pci_busB;
+     if (pci_bus) {
+         /* Register network interfaces. */
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
 -        }
- 
-+    nd = qemu_find_nic_info(mc->default_nic, true, NULL);
-+    if (nd) {
-+        pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
-         dev = &pci_dev->qdev;
-         qdev_set_nic_properties(dev, nd);
--        pci_realize_and_unref(pci_dev, bus, &error_fatal);
-+        pci_realize_and_unref(pci_dev, pci_busA, &error_fatal);
-+
-+        memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
-+        onboard_nic = true;
++        pci_init_nic_devices(pci_bus, mc->default_nic);
      }
-+    pci_init_nic_devices(pci_busB, mc->default_nic);
  
-     /* If we don't have an onboard NIC, grab a default MAC address so that
-      * we have a valid machine id */
+     /* Register spinning region */
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index 535710314a..b36dbaf2b6 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
+         graphic_depth = 15;
+     }
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* The NewWorld NVRAM is not located in the MacIO device */
+     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index 9acc7adfc9..1981d3d8f6 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
+ 
+     pci_vga_init(pci_bus);
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* MacIO IDE */
+     ide_drive_get(hd, ARRAY_SIZE(hd));
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index a189942de4..c75c3083e6 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
+     DeviceState *uicdev;
+     SysBusDevice *uicsbd;
+     int success;
+-    int i;
+ 
+     if (kvm_enabled()) {
+         error_report("machine %s does not support the KVM accelerator",
+@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
+     }
+ 
+     if (pcibus) {
+-        /* Register network interfaces. */
+-        for (i = 0; i < nb_nics; i++) {
+-            /*
+-             * There are no PCI NICs on the Bamboo board, but there are
+-             * PCI slots, so we can pick whatever default model we want.
+-             */
+-            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
+-        }
++        /*
++         * There are no PCI NICs on the Bamboo board, but there are
++         * PCI slots, so we can pick whatever default model we want.
++         */
++        pci_init_nic_devices(pcibus, mc->default_nic);
+     }
+ 
+     /* Load kernel. */
 -- 
 2.41.0
 
