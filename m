@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A70C47422
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 359C0C4725D
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663894.1033799 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.663905.1033897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaK-0000RS-V2; Mon, 08 Jan 2024 20:51:00 +0000
+	id 1rMwaS-0002Wt-5H; Mon, 08 Jan 2024 20:51:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663894.1033799; Mon, 08 Jan 2024 20:51:00 +0000
+Received: by outflank-mailman (output) from mailman id 663905.1033897; Mon, 08 Jan 2024 20:51:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaK-0000RH-Qq; Mon, 08 Jan 2024 20:51:00 +0000
-Received: by outflank-mailman (input) for mailman id 663894;
- Mon, 08 Jan 2024 20:50:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rMwaR-0002VB-Li; Mon, 08 Jan 2024 20:51:07 +0000
+Received: by outflank-mailman (input) for mailman id 663905;
+ Mon, 08 Jan 2024 20:51:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NrlO=IS=casper.srs.infradead.org=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaJ-0000R6-46
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:50:59 +0000
+ id 1rMwaO-0000R5-Rb
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:04 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9c940bd3-ae67-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 21:50:55 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a0ff359b-ae67-11ee-98ef-6d05b1d4d9a1;
+ Mon, 08 Jan 2024 21:51:00 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYi-008RPe-Ri; Mon, 08 Jan 2024 20:49:22 +0000
+ id 1rMwYj-008RPz-VV; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEu-1z; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYk-002NG1-2d; Mon, 08 Jan 2024 20:49:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 9c940bd3-ae67-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: a0ff359b-ae67-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=GlXzCO3XdZ21RHsZxfP3RgbC823eeizUvksRPyKhf1o=; b=F2PLLrhA1JCW2ZC6Gag0CAqTku
-	yoaan0Fj4kmMVNXtnb8mwsbdx3hzKzm/2rPfryD/967lRW8bxpKpoRAIiZ6hJojMGfdOiNNAqiSF7
-	TrdjxJw/78RYS0xwuNkvNVSJeuSdJOO6+v17RiFKR8zia+6NWU9Ldz7hDoi7vakXoa32RqX+TSPii
-	exGfEZHdsrKgfj2fB1e4C3ijCX3WnNHb7dlV8cHz8Z7YZQhOSufyMjqlDpFWSAoO/sFQZc0wgLO6G
-	NCMH2nANgaHhp/DlIlQbxOWgFbJea+QyzDq2hyfzHwM9pNnzQP/EIH02681vCOWfeDhOxxUrSidgH
-	YJ4me+yg==;
+	bh=5H4+RlrFBb1kzBe4t2y8/9sK3+GNicJATXfDxB43fyo=; b=sOqQRiIJwqesJ1F0GQ8sGgjgn8
+	14drnnNOVXK2BORNkgmyRJ3x5Mq5CcZFlOyG7ME7Ze3xzZwUSiYlHcoeKh0SIxQj9Vep8K3Aiyr7T
+	TUu0l4sr07meaF+29YflIoNnjqtSzGGDslj15cNGYh/TAQPGVQgP3hkcsWJ0kB2IrEW0Mf9Tv+TTO
+	bjYFGWQzr4BWwc/NfRxfdF9TxLv6x3VM1XftggObBDViAWOCgFZUSwscrjBqUzv6p8G0XzrqRfD0V
+	UFmy4QN6XCuimCND6bM24kDM5DEYzSkxpoJroDRYSU4Io9GY6YqqlSctE4keDdGEcIC7YtVZrziSq
+	Z074P6aA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 14/46] hw/mips/loongson3_virt: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:43 +0000
-Message-ID: <20240108204909.564514-15-dwmw2@infradead.org>
+Subject: [PATCH v3 29/46] hw/arm/stellaris: use qemu_find_nic_info()
+Date: Mon,  8 Jan 2024 20:26:58 +0000
+Message-ID: <20240108204909.564514-30-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -134,26 +134,77 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Rather than just using qemu_configure_nic_device(), populate the MAC
+address in the system-registers device by peeking at the NICInfo before
+it's assigned to the device.
+
+Generate the MAC address early, if there is no matching -nic option.
+Otherwise the MAC address wouldn't be generated until net_client_init1()
+runs.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/mips/loongson3_virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/arm/stellaris.c | 30 ++++++++++++++++++++++--------
+ 1 file changed, 22 insertions(+), 8 deletions(-)
 
-diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
-index 33eae01eca..caedde2df0 100644
---- a/hw/mips/loongson3_virt.c
-+++ b/hw/mips/loongson3_virt.c
-@@ -451,9 +451,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
-         usb_create_simple(usb_bus_find(-1), "usb-tablet");
-     }
+diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
+index 729a8bf569..e8e1c83413 100644
+--- a/hw/arm/stellaris.c
++++ b/hw/arm/stellaris.c
+@@ -1027,7 +1027,8 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+     DeviceState *ssys_dev;
+     int i;
+     int j;
+-    const uint8_t *macaddr;
++    NICInfo *nd;
++    MACAddr mac;
  
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- }
+     MemoryRegion *sram = g_new(MemoryRegion, 1);
+     MemoryRegion *flash = g_new(MemoryRegion, 1);
+@@ -1050,12 +1051,22 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+      * need its sysclk output.
+      */
+     ssys_dev = qdev_new(TYPE_STELLARIS_SYS);
+-    /* Most devices come preprogrammed with a MAC address in the user data. */
+-    macaddr = nd_table[0].macaddr.a;
++
++    /*
++     * Most devices come preprogrammed with a MAC address in the user data.
++     * Generate a MAC address now, if there isn't a matching -nic for it.
++     */
++    nd = qemu_find_nic_info("stellaris_enet", true, "stellaris");
++    if (nd) {
++        memcpy(mac.a, nd->macaddr.a, sizeof(mac.a));
++    } else {
++        qemu_macaddr_default_if_unset(&mac);
++    }
++
+     qdev_prop_set_uint32(ssys_dev, "user0",
+-                         macaddr[0] | (macaddr[1] << 8) | (macaddr[2] << 16));
++                         mac.a[0] | (mac.a[1] << 8) | (mac.a[2] << 16));
+     qdev_prop_set_uint32(ssys_dev, "user1",
+-                         macaddr[3] | (macaddr[4] << 8) | (macaddr[5] << 16));
++                         mac.a[3] | (mac.a[4] << 8) | (mac.a[5] << 16));
+     qdev_prop_set_uint32(ssys_dev, "did0", board->did0);
+     qdev_prop_set_uint32(ssys_dev, "did1", board->did1);
+     qdev_prop_set_uint32(ssys_dev, "dc0", board->dc0);
+@@ -1267,10 +1278,13 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+     if (board->dc4 & (1 << 28)) {
+         DeviceState *enet;
  
- static void mips_loongson3_virt_init(MachineState *machine)
+-        qemu_check_nic_model(&nd_table[0], "stellaris");
+-
+         enet = qdev_new("stellaris_enet");
+-        qdev_set_nic_properties(enet, &nd_table[0]);
++        if (nd) {
++            qdev_set_nic_properties(enet, nd);
++        } else {
++            qdev_prop_set_macaddr(enet, "mac", mac.a);
++        }
++
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(enet), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(enet), 0, 0x40048000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(enet), 0, qdev_get_gpio_in(nvic, 42));
 -- 
 2.41.0
 
