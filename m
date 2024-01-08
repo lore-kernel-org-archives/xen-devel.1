@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C73BCC47073
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 16:38:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663613.1033646 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 657D6C47079
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 16:38:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.663616.1033671 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMsdK-0003u0-0M; Mon, 08 Jan 2024 16:37:50 +0000
+	id 1rMsdY-0004iq-Ak; Mon, 08 Jan 2024 16:38:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663613.1033646; Mon, 08 Jan 2024 16:37:49 +0000
+Received: by outflank-mailman (output) from mailman id 663616.1033671; Mon, 08 Jan 2024 16:38:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMsdJ-0003tt-T4; Mon, 08 Jan 2024 16:37:49 +0000
-Received: by outflank-mailman (input) for mailman id 663613;
- Mon, 08 Jan 2024 16:37:49 +0000
+	id 1rMsdY-0004gn-2f; Mon, 08 Jan 2024 16:38:04 +0000
+Received: by outflank-mailman (input) for mailman id 663616;
+ Mon, 08 Jan 2024 16:38:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EZ8K=IS=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1rMsdJ-0003cg-Bw
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 16:37:49 +0000
+ id 1rMsdW-0003cg-A3
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 16:38:02 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4119f31c-ae44-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 17:37:47 +0100 (CET)
+ id 48b72a14-ae44-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 17:38:00 +0100 (CET)
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-668-xwrQBWUfPzqlTw3k0NIoCA-1; Mon,
- 08 Jan 2024 11:37:43 -0500
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-452-Z5Yk12GVOpSLz6gobTghhg-1; Mon,
+ 08 Jan 2024 11:37:54 -0500
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 514A83C025AC;
- Mon,  8 Jan 2024 16:37:41 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 207E43813BC5;
+ Mon,  8 Jan 2024 16:37:51 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.85])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 14E8B2026F95;
- Mon,  8 Jan 2024 16:37:40 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DEE9540C6EB9;
+ Mon,  8 Jan 2024 16:37:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4119f31c-ae44-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 48b72a14-ae44-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1704731866;
+	s=mimecast20190719; t=1704731879;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8JyAVituzHKzz/zXpAv4OyXDfgV7BDAfn1K6NqR7fpw=;
-	b=gR0J0DJ3wPfFEWY18k72JlBsyAW9W0Sn6sjEIU2DeT69HKIPSPHvWhuR6y3kyVmYgelE4c
-	FE7v79Wg/mcHqRKhqOa6H2+tZQ0zBg3bQ7+K7gIfywxulLTEE1caVjB3Qdm2OORBjmPzmg
-	HS3y8rS1fs4BvYW1WwhObKD8/ynLK8M=
-X-MC-Unique: xwrQBWUfPzqlTw3k0NIoCA-1
+	bh=g+ze6ScecUWqpBL1ym3zeCBrNvLJSj4Of46u1qqP/x4=;
+	b=T8qAz35+zfJSbkaJ7GfmpEvhefFJGuAtrDBQgjpiMyypjAWEv8m+p0dpF19DSm9KTDa2xl
+	s39IaZQNceZAFMWpLJSAEiulsjC9A/685q7jgzn5UkHvTdY66TZ4Xxf6Dg0koJJ3PsZ+0/
+	G/m8PsFz0nLZjD592miwCw1hNph24Ls=
+X-MC-Unique: Z5Yk12GVOpSLz6gobTghhg-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org,
@@ -143,107 +143,171 @@ Cc: qemu-s390x@nongnu.org,
 	Fabiano Rosas <farosas@suse.de>,
 	Akihiko Odaki <akihiko.odaki@daynix.com>,
 	David Hildenbrand <david@redhat.com>
-Subject: [PULL 1/6] iothread: Remove unused Error** argument in aio_context_set_aio_params
-Date: Mon,  8 Jan 2024 11:37:30 -0500
-Message-ID: <20240108163735.254732-2-stefanha@redhat.com>
+Subject: [PULL 4/6] qemu/main-loop: rename qemu_cond_wait_iothread() to qemu_cond_wait_bql()
+Date: Mon,  8 Jan 2024 11:37:33 -0500
+Message-ID: <20240108163735.254732-5-stefanha@redhat.com>
 In-Reply-To: <20240108163735.254732-1-stefanha@redhat.com>
 References: <20240108163735.254732-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
 
-From: Philippe Mathieu-Daudé <philmd@linaro.org>
+The name "iothread" is overloaded. Use the term Big QEMU Lock (BQL)
+instead, it is already widely used and unambiguous.
 
-aio_context_set_aio_params() doesn't use its undocumented
-Error** argument. Remove it to simplify.
-
-Note this removes a use of "unchecked Error**" in
-iothread_set_aio_context_params().
-
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-Message-ID: <20231120171806.19361-1-philmd@linaro.org>
+Reviewed-by: Cédric Le Goater <clg@kaod.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Reviewed-by: Harsh Prateek Bora <harshpb@linux.ibm.com>
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-id: 20240102153529.486531-4-stefanha@redhat.com
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/block/aio.h | 3 +--
- iothread.c          | 3 +--
- util/aio-posix.c    | 3 +--
- util/aio-win32.c    | 3 +--
- util/main-loop.c    | 5 +----
- 5 files changed, 5 insertions(+), 12 deletions(-)
+ include/qemu/main-loop.h          | 10 +++++-----
+ accel/tcg/tcg-accel-ops-rr.c      |  4 ++--
+ hw/display/virtio-gpu.c           |  2 +-
+ hw/ppc/spapr_events.c             |  2 +-
+ system/cpu-throttle.c             |  2 +-
+ system/cpus.c                     |  4 ++--
+ target/i386/nvmm/nvmm-accel-ops.c |  2 +-
+ target/i386/whpx/whpx-accel-ops.c |  2 +-
+ 8 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/include/block/aio.h b/include/block/aio.h
-index af05512a7d..c802a392e5 100644
---- a/include/block/aio.h
-+++ b/include/block/aio.h
-@@ -699,8 +699,7 @@ void aio_context_set_poll_params(AioContext *ctx, int64_t max_ns,
-  * @max_batch: maximum number of requests in a batch, 0 means that the
-  *             engine will use its default
+diff --git a/include/qemu/main-loop.h b/include/qemu/main-loop.h
+index c26ad2a029..5764db157c 100644
+--- a/include/qemu/main-loop.h
++++ b/include/qemu/main-loop.h
+@@ -371,17 +371,17 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC(BQLLockAuto, bql_auto_unlock)
+         = bql_auto_lock(__FILE__, __LINE__)
+ 
+ /*
+- * qemu_cond_wait_iothread: Wait on condition for the main loop mutex
++ * qemu_cond_wait_bql: Wait on condition for the Big QEMU Lock (BQL)
+  *
+- * This function atomically releases the main loop mutex and causes
++ * This function atomically releases the Big QEMU Lock (BQL) and causes
+  * the calling thread to block on the condition.
   */
--void aio_context_set_aio_params(AioContext *ctx, int64_t max_batch,
--                                Error **errp);
-+void aio_context_set_aio_params(AioContext *ctx, int64_t max_batch);
+-void qemu_cond_wait_iothread(QemuCond *cond);
++void qemu_cond_wait_bql(QemuCond *cond);
  
- /**
-  * aio_context_set_thread_pool_params:
-diff --git a/iothread.c b/iothread.c
-index b753286414..6c1fc8c856 100644
---- a/iothread.c
-+++ b/iothread.c
-@@ -170,8 +170,7 @@ static void iothread_set_aio_context_params(EventLoopBase *base, Error **errp)
+ /*
+- * qemu_cond_timedwait_iothread: like the previous, but with timeout
++ * qemu_cond_timedwait_bql: like the previous, but with timeout
+  */
+-void qemu_cond_timedwait_iothread(QemuCond *cond, int ms);
++void qemu_cond_timedwait_bql(QemuCond *cond, int ms);
+ 
+ /* internal interfaces */
+ 
+diff --git a/accel/tcg/tcg-accel-ops-rr.c b/accel/tcg/tcg-accel-ops-rr.c
+index c4ea372a3f..5794e5a9ce 100644
+--- a/accel/tcg/tcg-accel-ops-rr.c
++++ b/accel/tcg/tcg-accel-ops-rr.c
+@@ -111,7 +111,7 @@ static void rr_wait_io_event(void)
+ 
+     while (all_cpu_threads_idle()) {
+         rr_stop_kick_timer();
+-        qemu_cond_wait_iothread(first_cpu->halt_cond);
++        qemu_cond_wait_bql(first_cpu->halt_cond);
      }
  
-     aio_context_set_aio_params(iothread->ctx,
--                               iothread->parent_obj.aio_max_batch,
--                               errp);
-+                               iothread->parent_obj.aio_max_batch);
+     rr_start_kick_timer();
+@@ -198,7 +198,7 @@ static void *rr_cpu_thread_fn(void *arg)
  
-     aio_context_set_thread_pool_params(iothread->ctx, base->thread_pool_min,
-                                        base->thread_pool_max, errp);
-diff --git a/util/aio-posix.c b/util/aio-posix.c
-index 7f2c99729d..266c9dd35f 100644
---- a/util/aio-posix.c
-+++ b/util/aio-posix.c
-@@ -777,8 +777,7 @@ void aio_context_set_poll_params(AioContext *ctx, int64_t max_ns,
-     aio_notify(ctx);
+     /* wait for initial kick-off after machine start */
+     while (first_cpu->stopped) {
+-        qemu_cond_wait_iothread(first_cpu->halt_cond);
++        qemu_cond_wait_bql(first_cpu->halt_cond);
+ 
+         /* process any pending work */
+         CPU_FOREACH(cpu) {
+diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
+index bae1c2a803..f8a675eb30 100644
+--- a/hw/display/virtio-gpu.c
++++ b/hw/display/virtio-gpu.c
+@@ -1512,7 +1512,7 @@ void virtio_gpu_reset(VirtIODevice *vdev)
+         g->reset_finished = false;
+         qemu_bh_schedule(g->reset_bh);
+         while (!g->reset_finished) {
+-            qemu_cond_wait_iothread(&g->reset_cond);
++            qemu_cond_wait_bql(&g->reset_cond);
+         }
+     } else {
+         virtio_gpu_reset_bh(g);
+diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
+index deb4641505..cb0eeee587 100644
+--- a/hw/ppc/spapr_events.c
++++ b/hw/ppc/spapr_events.c
+@@ -899,7 +899,7 @@ void spapr_mce_req_event(PowerPCCPU *cpu, bool recovered)
+             }
+             return;
+         }
+-        qemu_cond_wait_iothread(&spapr->fwnmi_machine_check_interlock_cond);
++        qemu_cond_wait_bql(&spapr->fwnmi_machine_check_interlock_cond);
+         if (spapr->fwnmi_machine_check_addr == -1) {
+             /*
+              * If the machine was reset while waiting for the interlock,
+diff --git a/system/cpu-throttle.c b/system/cpu-throttle.c
+index 786a9a5639..c951a6c65e 100644
+--- a/system/cpu-throttle.c
++++ b/system/cpu-throttle.c
+@@ -54,7 +54,7 @@ static void cpu_throttle_thread(CPUState *cpu, run_on_cpu_data opaque)
+     endtime_ns = qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + sleeptime_ns;
+     while (sleeptime_ns > 0 && !cpu->stop) {
+         if (sleeptime_ns > SCALE_MS) {
+-            qemu_cond_timedwait_iothread(cpu->halt_cond,
++            qemu_cond_timedwait_bql(cpu->halt_cond,
+                                          sleeptime_ns / SCALE_MS);
+         } else {
+             bql_unlock();
+diff --git a/system/cpus.c b/system/cpus.c
+index 1ede629f1f..68d161d96b 100644
+--- a/system/cpus.c
++++ b/system/cpus.c
+@@ -533,12 +533,12 @@ void bql_unlock(void)
+     qemu_mutex_unlock(&bql);
  }
  
--void aio_context_set_aio_params(AioContext *ctx, int64_t max_batch,
--                                Error **errp)
-+void aio_context_set_aio_params(AioContext *ctx, int64_t max_batch)
+-void qemu_cond_wait_iothread(QemuCond *cond)
++void qemu_cond_wait_bql(QemuCond *cond)
  {
-     /*
-      * No thread synchronization here, it doesn't matter if an incorrect value
-diff --git a/util/aio-win32.c b/util/aio-win32.c
-index 948ef47a4d..d144f9391f 100644
---- a/util/aio-win32.c
-+++ b/util/aio-win32.c
-@@ -438,7 +438,6 @@ void aio_context_set_poll_params(AioContext *ctx, int64_t max_ns,
-     }
+     qemu_cond_wait(cond, &bql);
  }
  
--void aio_context_set_aio_params(AioContext *ctx, int64_t max_batch,
--                                Error **errp)
-+void aio_context_set_aio_params(AioContext *ctx, int64_t max_batch)
+-void qemu_cond_timedwait_iothread(QemuCond *cond, int ms)
++void qemu_cond_timedwait_bql(QemuCond *cond, int ms)
  {
+     qemu_cond_timedwait(cond, &bql, ms);
  }
-diff --git a/util/main-loop.c b/util/main-loop.c
-index 797b640c41..63b4cda84a 100644
---- a/util/main-loop.c
-+++ b/util/main-loop.c
-@@ -192,10 +192,7 @@ static void main_loop_update_params(EventLoopBase *base, Error **errp)
-         return;
-     }
- 
--    aio_context_set_aio_params(qemu_aio_context, base->aio_max_batch, errp);
--    if (*errp) {
--        return;
--    }
-+    aio_context_set_aio_params(qemu_aio_context, base->aio_max_batch);
- 
-     aio_context_set_thread_pool_params(qemu_aio_context, base->thread_pool_min,
-                                        base->thread_pool_max, errp);
+diff --git a/target/i386/nvmm/nvmm-accel-ops.c b/target/i386/nvmm/nvmm-accel-ops.c
+index f9d5e9a37a..6b2bfd9b9c 100644
+--- a/target/i386/nvmm/nvmm-accel-ops.c
++++ b/target/i386/nvmm/nvmm-accel-ops.c
+@@ -48,7 +48,7 @@ static void *qemu_nvmm_cpu_thread_fn(void *arg)
+             }
+         }
+         while (cpu_thread_is_idle(cpu)) {
+-            qemu_cond_wait_iothread(cpu->halt_cond);
++            qemu_cond_wait_bql(cpu->halt_cond);
+         }
+         qemu_wait_io_event_common(cpu);
+     } while (!cpu->unplug || cpu_can_run(cpu));
+diff --git a/target/i386/whpx/whpx-accel-ops.c b/target/i386/whpx/whpx-accel-ops.c
+index e783a760a7..189ae0f140 100644
+--- a/target/i386/whpx/whpx-accel-ops.c
++++ b/target/i386/whpx/whpx-accel-ops.c
+@@ -48,7 +48,7 @@ static void *whpx_cpu_thread_fn(void *arg)
+             }
+         }
+         while (cpu_thread_is_idle(cpu)) {
+-            qemu_cond_wait_iothread(cpu->halt_cond);
++            qemu_cond_wait_bql(cpu->halt_cond);
+         }
+         qemu_wait_io_event_common(cpu);
+     } while (!cpu->unplug || cpu_can_run(cpu));
 -- 
 2.43.0
 
