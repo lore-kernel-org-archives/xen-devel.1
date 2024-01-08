@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A70C3DA6E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:13:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664071.1034206 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7474C3DA6E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:14:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664078.1034216 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwwB-00027f-Vh; Mon, 08 Jan 2024 21:13:35 +0000
+	id 1rMwwp-00036F-7T; Mon, 08 Jan 2024 21:14:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664071.1034206; Mon, 08 Jan 2024 21:13:35 +0000
+Received: by outflank-mailman (output) from mailman id 664078.1034216; Mon, 08 Jan 2024 21:14:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwwB-00027Y-Sv; Mon, 08 Jan 2024 21:13:35 +0000
-Received: by outflank-mailman (input) for mailman id 664071;
- Mon, 08 Jan 2024 21:13:34 +0000
+	id 1rMwwp-000368-4V; Mon, 08 Jan 2024 21:14:15 +0000
+Received: by outflank-mailman (input) for mailman id 664078;
+ Mon, 08 Jan 2024 21:14:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwac-0000R5-9W
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:18 +0000
+ id 1rMwaj-0000R5-AD
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:25 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a7ebb5d8-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:51:14 +0100 (CET)
+ id ac861e9a-ae67-11ee-98ef-6d05b1d4d9a1;
+ Mon, 08 Jan 2024 21:51:19 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYk-007wXT-2t; Mon, 08 Jan 2024 20:49:23 +0000
+ id 1rMwYm-007wY2-0K; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NF7-2j; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYl-002NH0-23; Mon, 08 Jan 2024 20:49:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a7ebb5d8-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: ac861e9a-ae67-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=vOPLDRs2pS03aFI3QKRuxfVdnOLMGUdP65R8Ofm4Hp4=; b=fryOhSDr3Sqtj/iGNQmSgoZC81
-	0bGoir4uvuNgVOwYFL1sDLG0qL07aRdFpM5bAJLXRJnRMx9U3c4QlhYrfGIR0ZD8rzIod70oaH03m
-	32JHaV5EZnpDyaapgbucMOXP0B4SNSnpc4ECIHxaJ403KFlc8VSyGhgbl9Ov+D8HDtwELOrzGF4H/
-	ItyyGOTXfBcAilSezrmYxbybrVpmkvoj+/cBATGduER26ylWNBqZXNBMljk3KwcpPcFIx/nScB0CD
-	6caPIW50TvBL5hpX6f7H+gU3MUsh5192cNfpYuPDZO/kTfzzbn8mkGjq6+Oq5MRyuGx/CIfzH0w3a
-	9/f6TL/g==;
+	bh=apktM3rQhqJT/gPdzzrEkhVTg4OW0ilv1ws3zHsGmXQ=; b=f5E8BtrWl0Oi9+DI39I39oIRpP
+	rRDUHBUwPpvktpzzw9rTpGQNHL9MgQykQr5OwSCDg+RnjTMxky3qb/VBl2Few1nWUrwYqpreNWf8h
+	BUPA/iYnHBul1TWdzNxl00o3hkG7FewYMX4O4NOJJVb0cECNwBfnrtZMr0SUBQNzQLg6jDhhcCKJ+
+	UzMGARSFcO311sRBWcSYexrdPs6sr1ek4+TRJr5MYHmyGh6axYw++gap3DTQkmud5eVMqRaA9Jo/3
+	AJOsNX0pT3DXRw1t3TIHE5QR+MCf20OVWT/3euGBbUPwEqChZ6IYdT+4EhO4QJqK9NYMWkMbozWCb
+	usoYhQ1A==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 17/46] hw/ppc: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:46 +0000
-Message-ID: <20240108204909.564514-18-dwmw2@infradead.org>
+Subject: [PATCH v3 41/46] hw/sparc/sun4m: use qemu_find_nic_info()
+Date: Mon,  8 Jan 2024 20:27:10 +0000
+Message-ID: <20240108204909.564514-42-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -134,91 +134,81 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Obtain the MAC address from the NIC configuration if there is one, or
+generate one explicitly so that it can be placed in the PROM.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/ppc/e500.c          |  4 +---
- hw/ppc/mac_newworld.c  |  4 +---
- hw/ppc/mac_oldworld.c  |  4 +---
- hw/ppc/ppc440_bamboo.c | 14 +++++---------
- 4 files changed, 8 insertions(+), 18 deletions(-)
+ hw/sparc/sun4m.c | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
-index 566f1200dd..3bd12b54ab 100644
---- a/hw/ppc/e500.c
-+++ b/hw/ppc/e500.c
-@@ -1079,9 +1079,7 @@ void ppce500_init(MachineState *machine)
+diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+index 550af01690..e782c8ec7a 100644
+--- a/hw/sparc/sun4m.c
++++ b/hw/sparc/sun4m.c
+@@ -299,13 +299,15 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
  
-     if (pci_bus) {
-         /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
+ static void *sparc32_dma_init(hwaddr dma_base,
+                               hwaddr esp_base, qemu_irq espdma_irq,
+-                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
++                              hwaddr le_base, qemu_irq ledma_irq,
++                              MACAddr *mac)
+ {
+     DeviceState *dma;
+     ESPDMADeviceState *espdma;
+     LEDMADeviceState *ledma;
+     SysBusESPState *esp;
+     SysBusPCNetState *lance;
++    NICInfo *nd = qemu_find_nic_info("lance", true, NULL);
+ 
+     dma = qdev_new(TYPE_SPARC32_DMA);
+     espdma = SPARC32_ESPDMA_DEVICE(object_resolve_path_component(
+@@ -320,7 +322,14 @@ static void *sparc32_dma_init(hwaddr dma_base,
+ 
+     lance = SYSBUS_PCNET(object_resolve_path_component(
+                          OBJECT(ledma), "lance"));
+-    qdev_set_nic_properties(DEVICE(lance), nd);
++
++    if (nd) {
++        qdev_set_nic_properties(DEVICE(lance), nd);
++        memcpy(mac->a, nd->macaddr.a, sizeof(mac->a));
++    } else {
++        qemu_macaddr_default_if_unset(mac);
++        qdev_prop_set_macaddr(DEVICE(lance), "mac", mac->a);
++    }
+ 
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
+@@ -823,7 +832,7 @@ static void sun4m_hw_init(MachineState *machine)
+     unsigned int smp_cpus = machine->smp.cpus;
+     unsigned int max_cpus = machine->smp.max_cpus;
+     HostMemoryBackend *ram_memdev = machine->memdev;
+-    NICInfo *nd = &nd_table[0];
++    MACAddr hostid;
+ 
+     if (machine->ram_size > hwdef->max_mem) {
+         error_report("Too much memory for this machine: %" PRId64 ","
+@@ -884,10 +893,9 @@ static void sun4m_hw_init(MachineState *machine)
+                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
      }
  
-     /* Register spinning region */
-diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
-index 535710314a..b36dbaf2b6 100644
---- a/hw/ppc/mac_newworld.c
-+++ b/hw/ppc/mac_newworld.c
-@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
-         graphic_depth = 15;
-     }
+-    qemu_check_nic_model(nd, TYPE_LANCE);
+     sparc32_dma_init(hwdef->dma_base,
+                      hwdef->esp_base, slavio_irq[18],
+-                     hwdef->le_base, slavio_irq[16], nd);
++                     hwdef->le_base, slavio_irq[16], &hostid);
  
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
+     if (graphic_depth != 8 && graphic_depth != 24) {
+         error_report("Unsupported depth: %d", graphic_depth);
+@@ -1039,7 +1047,7 @@ static void sun4m_hw_init(MachineState *machine)
+                                     machine->initrd_filename,
+                                     machine->ram_size, &initrd_size);
  
-     /* The NewWorld NVRAM is not located in the MacIO device */
-     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
-diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
-index 9acc7adfc9..1981d3d8f6 100644
---- a/hw/ppc/mac_oldworld.c
-+++ b/hw/ppc/mac_oldworld.c
-@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
- 
-     pci_vga_init(pci_bus);
- 
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* MacIO IDE */
-     ide_drive_get(hd, ARRAY_SIZE(hd));
-diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
-index a189942de4..c75c3083e6 100644
---- a/hw/ppc/ppc440_bamboo.c
-+++ b/hw/ppc/ppc440_bamboo.c
-@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
-     DeviceState *uicdev;
-     SysBusDevice *uicsbd;
-     int success;
--    int i;
- 
-     if (kvm_enabled()) {
-         error_report("machine %s does not support the KVM accelerator",
-@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
-     }
- 
-     if (pcibus) {
--        /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            /*
--             * There are no PCI NICs on the Bamboo board, but there are
--             * PCI slots, so we can pick whatever default model we want.
--             */
--            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
--        }
-+        /*
-+         * There are no PCI NICs on the Bamboo board, but there are
-+         * PCI slots, so we can pick whatever default model we want.
-+         */
-+        pci_init_nic_devices(pcibus, mc->default_nic);
-     }
- 
-     /* Load kernel. */
+-    nvram_init(nvram, (uint8_t *)&nd->macaddr, machine->kernel_cmdline,
++    nvram_init(nvram, hostid.a, machine->kernel_cmdline,
+                machine->boot_config.order, machine->ram_size, kernel_size,
+                graphic_width, graphic_height, graphic_depth,
+                hwdef->nvram_machine_id, "Sun4m");
 -- 
 2.41.0
 
