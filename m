@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757A1C47073
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663896.1033817 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5CBBC47079
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.663913.1033961 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaM-0000j8-IF; Mon, 08 Jan 2024 20:51:02 +0000
+	id 1rMwaZ-0004O2-Ui; Mon, 08 Jan 2024 20:51:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663896.1033817; Mon, 08 Jan 2024 20:51:02 +0000
+Received: by outflank-mailman (output) from mailman id 663913.1033961; Mon, 08 Jan 2024 20:51:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaM-0000j0-AA; Mon, 08 Jan 2024 20:51:02 +0000
-Received: by outflank-mailman (input) for mailman id 663896;
- Mon, 08 Jan 2024 20:51:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rMwaZ-0004I5-5y; Mon, 08 Jan 2024 20:51:15 +0000
+Received: by outflank-mailman (input) for mailman id 663913;
+ Mon, 08 Jan 2024 20:51:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NrlO=IS=casper.srs.infradead.org=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaK-0000R5-Qn
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:00 +0000
+ id 1rMwaU-0000R6-9t
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:10 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9dc8b3e6-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:50:55 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a4d55755-ae67-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 21:51:06 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYj-008RPt-Rr; Mon, 08 Jan 2024 20:49:23 +0000
+ id 1rMwYk-008RPx-4k; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYk-002NFc-1T; Mon, 08 Jan 2024 20:49:22 +0000
+ Hat Linux)) id 1rMwYk-002NFp-28; Mon, 08 Jan 2024 20:49:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 9dc8b3e6-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: a4d55755-ae67-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=8zuRre35272BYJVRGd9RIb87z+uvpwtc4RlOpE6V4GU=; b=b+e5pHRNHzAKqZDt2JN3LRQAy/
-	bLs2U1SXGlCjRJKJipRex6dDaZp+CkBO/dgYwcdJfyt6yseiya5dFWEK5KYJUcFEkskgKtwgAouUh
-	yd2pjryXltEkLU0KbkXN0wJpTw7lcyuNtVo4HMqEG2UE3q6djj3wI7+Tz2u4QfUuprPPrdD0YAIRG
-	d2gRpO6/uOZYE5d0xc9sBHYVyLKWMooQA+EkAdTUpzPJDMyVPWKHHkKmLPNSAXfaDEehr/q3qZ68K
-	fh7wmhbbIFQRCKfRzskDaIgPNxMlGxMYiQNkkOPzdVoLTSj8ogm6JAkqmlhTcLiE9WXS0hyv2qQ/D
-	2c35O4/Q==;
+	bh=gAKwLxJ9GrgFAgVd8NfOlltKClYjwdlcDlfOHDbpTRo=; b=m9RL72hoic6j71eYQXCMpigCQe
+	kc7kcinrlRJQT0Dra5IIza7HBIzUpfvP5+FJXezICTEkDc6nRNpoxfqjpKKsZVnzqw1cURpeRGXx+
+	V6y/uGAb1uqTlEvsdxiw913WMZpVWKi1lJF/d98AFA9UytmAYsZSF71U5gtWVtT0BdwqCH8eM2ocW
+	Pqh3uqD98gkzuDPYFCSM2yaVbwuk+7KGIn0tWWOErXzbgRblNoO2egcYiWSXe5JWB9k7sSjPHzsk9
+	TBJVdEVZ5St8UB4risV+pAvMeTKX4hufCKmrZBrjH8zqus4Fwf68EclEkgpVrxIJHhDSQ9MO7C5ob
+	5Ffqt/iA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 24/46] hw/arm/fsl: use qemu_configure_nic_device()
-Date: Mon,  8 Jan 2024 20:26:53 +0000
-Message-ID: <20240108204909.564514-25-dwmw2@infradead.org>
+Subject: [PATCH v3 27/46] hw/arm/highbank: use qemu_create_nic_device()
+Date: Mon,  8 Jan 2024 20:26:56 +0000
+Message-ID: <20240108204909.564514-28-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -136,64 +136,38 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/fsl-imx25.c  | 2 +-
- hw/arm/fsl-imx6.c   | 2 +-
- hw/arm/fsl-imx6ul.c | 2 +-
- hw/arm/fsl-imx7.c   | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ hw/arm/highbank.c | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/hw/arm/fsl-imx25.c b/hw/arm/fsl-imx25.c
-index 9d2fb75a68..a24fa7b443 100644
---- a/hw/arm/fsl-imx25.c
-+++ b/hw/arm/fsl-imx25.c
-@@ -170,7 +170,7 @@ static void fsl_imx25_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
+index c21e18d08f..6a0e20e58d 100644
+--- a/hw/arm/highbank.c
++++ b/hw/arm/highbank.c
+@@ -296,19 +296,17 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
  
-     object_property_set_uint(OBJECT(&s->fec), "phy-num", s->phy_num,
-                              &error_abort);
--    qdev_set_nic_properties(DEVICE(&s->fec), &nd_table[0]);
-+    qemu_configure_nic_device(DEVICE(&s->fec), true, NULL);
+     sysbus_create_simple(TYPE_SYSBUS_AHCI, 0xffe08000, pic[83]);
  
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->fec), errp)) {
-         return;
-diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
-index b2153022c0..02f3024090 100644
---- a/hw/arm/fsl-imx6.c
-+++ b/hw/arm/fsl-imx6.c
-@@ -380,7 +380,7 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
+-    if (nd_table[0].used) {
+-        qemu_check_nic_model(&nd_table[0], "xgmac");
+-        dev = qdev_new("xgmac");
+-        qdev_set_nic_properties(dev, &nd_table[0]);
++    dev = qemu_create_nic_device("xgmac", true, NULL);
++    if (dev) {
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff50000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[77]);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 1, pic[78]);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 2, pic[79]);
++    }
  
-     object_property_set_uint(OBJECT(&s->eth), "phy-num", s->phy_num,
-                              &error_abort);
--    qdev_set_nic_properties(DEVICE(&s->eth), &nd_table[0]);
-+    qemu_configure_nic_device(DEVICE(&s->eth), true, NULL);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->eth), errp)) {
-         return;
-     }
-diff --git a/hw/arm/fsl-imx6ul.c b/hw/arm/fsl-imx6ul.c
-index e37b69a5e1..ca3dd439ec 100644
---- a/hw/arm/fsl-imx6ul.c
-+++ b/hw/arm/fsl-imx6ul.c
-@@ -442,7 +442,7 @@ static void fsl_imx6ul_realize(DeviceState *dev, Error **errp)
-                                  s->phy_num[i], &error_abort);
-         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
-                                  FSL_IMX6UL_ETH_NUM_TX_RINGS, &error_abort);
--        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
-+        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
-         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
- 
-         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0,
-diff --git a/hw/arm/fsl-imx7.c b/hw/arm/fsl-imx7.c
-index 474cfdc87c..1acbe065db 100644
---- a/hw/arm/fsl-imx7.c
-+++ b/hw/arm/fsl-imx7.c
-@@ -446,7 +446,7 @@ static void fsl_imx7_realize(DeviceState *dev, Error **errp)
-                                  s->phy_num[i], &error_abort);
-         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
-                                  FSL_IMX7_ETH_NUM_TX_RINGS, &error_abort);
--        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
-+        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
-         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
- 
-         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0, FSL_IMX7_ENETn_ADDR[i]);
+-        qemu_check_nic_model(&nd_table[1], "xgmac");
+-        dev = qdev_new("xgmac");
+-        qdev_set_nic_properties(dev, &nd_table[1]);
++    dev = qemu_create_nic_device("xgmac", true, NULL);
++    if (dev) {
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff51000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[80]);
 -- 
 2.41.0
 
