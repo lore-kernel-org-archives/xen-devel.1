@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6462C3DA6E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:10:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664044.1034146 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08988C3DA6E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:10:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664050.1034156 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwsX-0005eT-3C; Mon, 08 Jan 2024 21:09:49 +0000
+	id 1rMwtM-0007LX-GR; Mon, 08 Jan 2024 21:10:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664044.1034146; Mon, 08 Jan 2024 21:09:49 +0000
+Received: by outflank-mailman (output) from mailman id 664050.1034156; Mon, 08 Jan 2024 21:10:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwsX-0005eM-08; Mon, 08 Jan 2024 21:09:49 +0000
-Received: by outflank-mailman (input) for mailman id 664044;
- Mon, 08 Jan 2024 21:09:48 +0000
+	id 1rMwtM-0007LQ-Dm; Mon, 08 Jan 2024 21:10:40 +0000
+Received: by outflank-mailman (input) for mailman id 664050;
+ Mon, 08 Jan 2024 21:10:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NrlO=IS=casper.srs.infradead.org=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwag-0000R5-9y
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:22 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1rMwap-0000R5-Am
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:31 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id aba4e5f0-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:51:18 +0100 (CET)
+ id afbb034b-ae67-11ee-98ef-6d05b1d4d9a1;
+ Mon, 08 Jan 2024 21:51:25 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYh-008RPP-WE; Mon, 08 Jan 2024 20:49:21 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1rMwYm-007wXg-0G; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYi-002NEF-2O; Mon, 08 Jan 2024 20:49:20 +0000
+ Hat Linux)) id 1rMwYk-002NFv-2P; Mon, 08 Jan 2024 20:49:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: aba4e5f0-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: afbb034b-ae67-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=uc7qG2cne/6E8+t91EtiLDMAE+B8LUD5xbmCp8tTbzY=; b=W51OsUX6uNMef+WOdKoBKEPVPC
-	l0ml+H8yYOCuYD7wGi99UEZz8kAiuHDfQMnIowBKwdmBZgV/FseLB9wsfW9NBF/9hTlPSgKb8sPbT
-	Rz/dYde3PWiVF1nj1oHbdRjdIJWaFu4zzaTQjsQ2wZ6fsux/b1qrQucpKv5XdU09eB2CeQtn085kL
-	fPtGEs9Lyi+1jaCl3c8zXbiOKhWcdUaGNdQ/dL6CSW0S4V5PGqwF0YPEUjhr1MvpAur/nK6MRrk4S
-	knwoPsI53hHdtH+Pv7fm2VJ2RJuqW/JfFDzL+n2PAaKMLsC12mbjmRy67qQO0maB4G7TPJIPjgHmC
-	OoLgn7hw==;
+	bh=5FFKf2juZuA0ARVGIdD/KabCPqMDr3tXXa+7Wjm6OEc=; b=PAdt6YdVW3snue3qkAzK6dyP1c
+	FES1B1zDiKaNuaPqAoStvMFO1366b0Rk1IGPgX05qzRAjcBnKdo+B4KV/14qC8j1JEupFMb8xsYmd
+	6Kdx7GxCrLmP1pJsiI5Lu8Y13wRHSRg5bmnMsTMCscS0WODgCskYUGMTLUrAdkk2e4Y9VcUnbCzrr
+	ccW436LsI9gFz7OYQwyYUuCPRPKSK6YeOAjyzCqbeOCEtHQDZB7oPYtRUB6U9d8MXhZQvNAbD83p6
+	37MTB9n+XCnzURdsZjMZPO6kyin9WTMxqOddche5AVm+jccH1RqRDwOifFfehpaOK07R+aoBkPEyT
+	H1oQbYYA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,96 +121,93 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 05/46] hw/i386/pc: use qemu_get_nic_info() and pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:34 +0000
-Message-ID: <20240108204909.564514-6-dwmw2@infradead.org>
+Subject: [PATCH v3 28/46] hw/arm/npcm7xx: use qemu_configure_nic_device, allow emc0/emc1 as aliases
+Date: Mon,  8 Jan 2024 20:26:57 +0000
+Message-ID: <20240108204909.564514-29-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Eliminate direct access to nd_table[] and nb_nics by processing the the
-Xen and ISA NICs first and then calling pci_init_nic_devices() for the
-rest.
+Also update the test to specify which device to attach the test socket
+to, and remove the comment lamenting the fact that we can't do so.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/pc.c                | 26 ++++++++++++++++----------
- include/hw/net/ne2000-isa.h |  2 --
- 2 files changed, 16 insertions(+), 12 deletions(-)
+ hw/arm/npcm7xx.c               | 16 +++++++++-------
+ tests/qtest/npcm7xx_emc-test.c | 18 ++++--------------
+ 2 files changed, 13 insertions(+), 21 deletions(-)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 496498df3a..d80c536d88 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -658,8 +658,11 @@ static void pc_init_ne2k_isa(ISABus *bus, NICInfo *nd)
- {
-     static int nb_ne2k = 0;
+diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c
+index 15ff21d047..ee395864e4 100644
+--- a/hw/arm/npcm7xx.c
++++ b/hw/arm/npcm7xx.c
+@@ -655,8 +655,9 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
  
--    if (nb_ne2k == NE2000_NB_MAX)
-+    if (nb_ne2k == NE2000_NB_MAX) {
-+        error_setg(&error_fatal,
-+                   "maximum number of ISA NE2000 devices exceeded");
-         return;
-+    }
-     isa_ne2000_init(bus, ne2000_io[nb_ne2k],
-                     ne2000_irq[nb_ne2k], nd);
-     nb_ne2k++;
-@@ -1297,23 +1300,26 @@ void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
-                  BusState *xen_bus)
- {
-     MachineClass *mc = MACHINE_CLASS(pcmc);
--    int i;
-+    bool default_is_ne2k = g_str_equal(mc->default_nic, TYPE_ISA_NE2000);
-+    NICInfo *nd;
- 
-     rom_set_order_override(FW_CFG_ORDER_OVERRIDE_NIC);
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--        const char *model = nd->model ? nd->model : mc->default_nic;
- 
--        if (xen_bus && (!nd->model || g_str_equal(model, "xen-net-device"))) {
-+    if (xen_bus) {
-+        while (nc = qemu_find_nic_info("xen-net-device", true, NULL)) {
-             DeviceState *dev = qdev_new("xen-net-device");
-             qdev_set_nic_properties(dev, nd);
-             qdev_realize_and_unref(dev, xen_bus, &error_fatal);
--        } else if (g_str_equal(model, "ne2k_isa")) {
--            pc_init_ne2k_isa(isa_bus, nd);
--        } else {
--            pci_nic_init_nofail(nd, pci_bus, model, NULL);
-         }
-     }
+     /*
+      * EMC Modules. Cannot fail.
+-     * The mapping of the device to its netdev backend works as follows:
+-     * emc[i] = nd_table[i]
++     * Use the available NIC configurations in order, allowing 'emc0' and
++     * 'emc1' to by used as aliases for the model= parameter to override.
++     *
+      * This works around the inability to specify the netdev property for the
+      * emc device: it's not pluggable and thus the -device option can't be
+      * used.
+@@ -664,12 +665,13 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(npcm7xx_emc_addr) != ARRAY_SIZE(s->emc));
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(s->emc) != 2);
+     for (i = 0; i < ARRAY_SIZE(s->emc); i++) {
+-        s->emc[i].emc_num = i;
+         SysBusDevice *sbd = SYS_BUS_DEVICE(&s->emc[i]);
+-        if (nd_table[i].used) {
+-            qemu_check_nic_model(&nd_table[i], TYPE_NPCM7XX_EMC);
+-            qdev_set_nic_properties(DEVICE(sbd), &nd_table[i]);
+-        }
++        char alias[6];
 +
-+    while ((nd = qemu_find_nic_info(TYPE_ISA_NE2000, default_is_ne2k, NULL))) {
-+        pc_init_ne2k_isa(isa_bus, nd);
-+    }
++        s->emc[i].emc_num = i;
++        snprintf(alias, sizeof(alias), "emc%u", i);
++        qemu_configure_nic_device(DEVICE(sbd), true, alias);
 +
-+    /* Anything remaining should be a PCI NIC */
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
-+
-     rom_reset_order_override();
- }
+         /*
+          * The device exists regardless of whether it's connected to a QEMU
+          * netdev backend. So always instantiate it even if there is no
+diff --git a/tests/qtest/npcm7xx_emc-test.c b/tests/qtest/npcm7xx_emc-test.c
+index b046f1d76a..f7646fae2c 100644
+--- a/tests/qtest/npcm7xx_emc-test.c
++++ b/tests/qtest/npcm7xx_emc-test.c
+@@ -225,21 +225,11 @@ static int *packet_test_init(int module_num, GString *cmd_line)
+     g_assert_cmpint(ret, != , -1);
  
-diff --git a/include/hw/net/ne2000-isa.h b/include/hw/net/ne2000-isa.h
-index af59ee0b02..73bae10ad1 100644
---- a/include/hw/net/ne2000-isa.h
-+++ b/include/hw/net/ne2000-isa.h
-@@ -22,8 +22,6 @@ static inline ISADevice *isa_ne2000_init(ISABus *bus, int base, int irq,
- {
-     ISADevice *d;
+     /*
+-     * KISS and use -nic. We specify two nics (both emc{0,1}) because there's
+-     * currently no way to specify only emc1: The driver implicitly relies on
+-     * emc[i] == nd_table[i].
++     * KISS and use -nic. The driver accepts 'emc0' and 'emc1' as aliases
++     * in the 'model' field to specify the device to match.
+      */
+-    if (module_num == 0) {
+-        g_string_append_printf(cmd_line,
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
+-    } else {
+-        g_string_append_printf(cmd_line,
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
+-    }
++    g_string_append_printf(cmd_line, " -nic socket,fd=%d,model=emc%d ",
++                           test_sockets[1], module_num);
  
--    qemu_check_nic_model(nd, "ne2k_isa");
--
-     d = isa_try_new(TYPE_ISA_NE2000);
-     if (d) {
-         DeviceState *dev = DEVICE(d);
+     g_test_queue_destroy(packet_test_clear, test_sockets);
+     return test_sockets;
 -- 
 2.41.0
 
