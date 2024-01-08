@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FF7C3DA6E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:14:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664087.1034246 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9DF1C3DA6E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:15:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664093.1034255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwxJ-0004Ub-3l; Mon, 08 Jan 2024 21:14:45 +0000
+	id 1rMwxZ-0005D6-Aq; Mon, 08 Jan 2024 21:15:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664087.1034246; Mon, 08 Jan 2024 21:14:45 +0000
+Received: by outflank-mailman (output) from mailman id 664093.1034255; Mon, 08 Jan 2024 21:15:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwxJ-0004UQ-0T; Mon, 08 Jan 2024 21:14:45 +0000
-Received: by outflank-mailman (input) for mailman id 664087;
- Mon, 08 Jan 2024 21:14:43 +0000
+	id 1rMwxZ-0005Cn-7Q; Mon, 08 Jan 2024 21:15:01 +0000
+Received: by outflank-mailman (input) for mailman id 664093;
+ Mon, 08 Jan 2024 21:14:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwap-0000R6-Fp
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:31 +0000
+ id 1rMwan-0000R6-DE
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:29 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b20ccb88-ae67-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 21:51:28 +0100 (CET)
+ id b0ce5c26-ae67-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 21:51:26 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYi-007wXH-2u; Mon, 08 Jan 2024 20:49:21 +0000
+ id 1rMwYm-007wXk-0J; Mon, 08 Jan 2024 20:49:53 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYi-002NDx-1F; Mon, 08 Jan 2024 20:49:20 +0000
+ Hat Linux)) id 1rMwYk-002NGB-36; Mon, 08 Jan 2024 20:49:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: b20ccb88-ae67-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: b0ce5c26-ae67-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=mtEQ8glNGSSFRzQhjtP//D2DZrP1dRqKKnCW34ZZatU=; b=iwPMC3kkBzvkOv0oX7txfpHzxj
-	Sd/Kwpy6LHNzbQF3U73tK9x6IqOIVXoxSpVC41lmoGleN7vzHitOUVXyuKD3Kym8xZAfMk5h5yMax
-	/47F2INodkK8AZaWUD8oRUvHz7GwGnKBbZ+prHuzJGhyfqT8TS26tCCLYZj38z0JymIu7s7TXpCfS
-	d0I5UL4dXBue3LvnuPFyH38JkWDjYeV7WIAXbDRHGNt2mbzdAgE0fTWfXlKLBu3pRRvZpZag7wPU+
-	ALteFXAYMiXzOXAuoOnbqhaSYwTK4OtiztO+wfQaYLUORHoOqRQn0vvgAeTBD4JSCtzzMa/o1Wc5b
-	cQPmhInQ==;
+	bh=oLriCfKbYL3o15M6kYDB7N5HJ+JVsRg5ZZIf/+DvLkY=; b=E9vGlnFdFf3HV6UJCMFj6OIPyv
+	rvc5QUWb96PKjF6mE2I11Rl8ZWztiHGTr4ZIo7q12V0DCVEmsB60Ufi/rY1P+ELqqdgw3ToQmvV0X
+	cYttlyf1jmO2+WsWSZdZ7OMTG4bD+BSU8Qf4eQRS4DJo5cC40Xy8tqBwTCmaDN4xvZFyFKaHyyj8/
+	pqA/OmtEMtGz+uKiP4c8FlJKQlj8Ecj+bxfaDB9iLh1I5ekySmusMa5lce2qxre3ohO4Dcezwy1Jb
+	vMi8U49juUa0PUhxK/s7aT/B+0nveV59uDjFWnSair7sFYf0YKlXdlkmfvfK5/M0k14WMZ/VUlvYI
+	cFAbgGaQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 01/46] net: add qemu_{configure,create}_nic_device(), qemu_find_nic_info()
-Date: Mon,  8 Jan 2024 20:26:30 +0000
-Message-ID: <20240108204909.564514-2-dwmw2@infradead.org>
+Subject: [PATCH v3 31/46] hw/net/etraxfs-eth: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:27:00 +0000
+Message-ID: <20240108204909.564514-32-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -134,107 +134,72 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Most code which directly accesses nd_table[] and nb_nics uses them for
-one of two things. Either "I have created a NIC device and I'd like a
-configuration for it", or "I will create a NIC device *if* there is a
-configuration for it".  With some variants on the theme around whether
-they actually *check* if the model specified in the configuration is
-the right one.
-
-Provide functions which perform both of those, allowing platforms to
-be a little more consistent and as a step towards making nd_table[]
-and nb_nics private to the net code.
-
-Also export the qemu_find_nic_info() helper, as some platforms have
-special cases they need to handle.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- include/net/net.h |  7 ++++++-
- net/net.c         | 51 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 57 insertions(+), 1 deletion(-)
+ hw/cris/axis_dev88.c      | 9 ++++-----
+ hw/net/etraxfs_eth.c      | 5 ++---
+ include/hw/cris/etraxfs.h | 2 +-
+ 3 files changed, 7 insertions(+), 9 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index ffbd2c8d56..25ea83fd12 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -207,7 +207,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
- void qemu_check_nic_model(NICInfo *nd, const char *model);
- int qemu_find_nic_model(NICInfo *nd, const char * const *models,
-                         const char *default_model);
--
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias);
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias);
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias);
- void print_net_client(Monitor *mon, NetClientState *nc);
- void net_socket_rs_init(SocketReadState *rs,
-                         SocketReadStateFinalize *finalize,
-diff --git a/net/net.c b/net/net.c
-index 0520bc1681..aeb7f573fc 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1087,6 +1087,57 @@ static int net_init_nic(const Netdev *netdev, const char *name,
-     return idx;
- }
+diff --git a/hw/cris/axis_dev88.c b/hw/cris/axis_dev88.c
+index d82050d927..5556634921 100644
+--- a/hw/cris/axis_dev88.c
++++ b/hw/cris/axis_dev88.c
+@@ -308,15 +308,14 @@ void axisdev88_init(MachineState *machine)
  
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias)
-+{
-+    NICInfo *nd;
-+    int i;
-+
-+    for (i = 0; i < nb_nics; i++) {
-+        nd = &nd_table[i];
-+
-+        if (!nd->used || nd->instantiated) {
-+            continue;
-+        }
-+
-+        if ((match_default && !nd->model) || !g_strcmp0(nd->model, typename)
-+            || (alias && !g_strcmp0(nd->model, alias))) {
-+            return nd;
-+        }
-+    }
-+    return NULL;
-+}
-+
-+
-+/* "I have created a device. Please configure it if you can" */
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(object_get_typename(OBJECT(dev)),
-+                                     match_default, alias);
-+
-+    if (nd) {
-+        qdev_set_nic_properties(dev, nd);
-+        return true;
-+    }
-+    return false;
-+}
-+
-+/* "Please create a device, if you have a configuration for it" */
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
-+    DeviceState *dev;
-+
-+    if (!nd) {
-+        return NULL;
-+    }
-+
-+    dev = qdev_new(typename);
-+    qdev_set_nic_properties(dev, nd);
-+    return dev;
-+}
+     /* Add the two ethernet blocks.  */
+     dma_eth = g_malloc0(sizeof dma_eth[0] * 4); /* Allocate 4 channels.  */
+-    etraxfs_eth_init(&nd_table[0], 0x30034000, 1, &dma_eth[0], &dma_eth[1]);
+-    if (nb_nics > 1) {
+-        etraxfs_eth_init(&nd_table[1], 0x30036000, 2, &dma_eth[2], &dma_eth[3]);
+-    }
  
- static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
-     const Netdev *netdev,
++    etraxfs_eth_init(0x30034000, 1, &dma_eth[0], &dma_eth[1]);
+     /* The DMA Connector block is missing, hardwire things for now.  */
+     etraxfs_dmac_connect_client(etraxfs_dmac, 0, &dma_eth[0]);
+     etraxfs_dmac_connect_client(etraxfs_dmac, 1, &dma_eth[1]);
+-    if (nb_nics > 1) {
++
++    if (qemu_find_nic_info("etraxfs-eth", true, "fseth")) {
++        etraxfs_eth_init(0x30036000, 2, &dma_eth[2], &dma_eth[3]);
+         etraxfs_dmac_connect_client(etraxfs_dmac, 6, &dma_eth[2]);
+         etraxfs_dmac_connect_client(etraxfs_dmac, 7, &dma_eth[3]);
+     }
+diff --git a/hw/net/etraxfs_eth.c b/hw/net/etraxfs_eth.c
+index ba57a978d1..5faf20c782 100644
+--- a/hw/net/etraxfs_eth.c
++++ b/hw/net/etraxfs_eth.c
+@@ -647,15 +647,14 @@ static void etraxfs_eth_class_init(ObjectClass *klass, void *data)
+ 
+ /* Instantiate an ETRAXFS Ethernet MAC.  */
+ DeviceState *
+-etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
++etraxfs_eth_init(hwaddr base, int phyaddr,
+                  struct etraxfs_dma_client *dma_out,
+                  struct etraxfs_dma_client *dma_in)
+ {
+     DeviceState *dev;
+-    qemu_check_nic_model(nd, "fseth");
+ 
+     dev = qdev_new("etraxfs-eth");
+-    qdev_set_nic_properties(dev, nd);
++    qemu_configure_nic_device(dev, true, "fseth");
+     qdev_prop_set_uint32(dev, "phyaddr", phyaddr);
+ 
+     /*
+diff --git a/include/hw/cris/etraxfs.h b/include/hw/cris/etraxfs.h
+index 467b529dc0..012c4e9974 100644
+--- a/include/hw/cris/etraxfs.h
++++ b/include/hw/cris/etraxfs.h
+@@ -31,7 +31,7 @@
+ #include "hw/sysbus.h"
+ #include "qapi/error.h"
+ 
+-DeviceState *etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
++DeviceState *etraxfs_eth_init(hwaddr base, int phyaddr,
+                               struct etraxfs_dma_client *dma_out,
+                               struct etraxfs_dma_client *dma_in);
+ 
 -- 
 2.41.0
 
