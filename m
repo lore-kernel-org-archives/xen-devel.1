@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD84DC3DA6E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757A1C47073
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663912.1033954 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.663896.1033817 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaY-000467-SC; Mon, 08 Jan 2024 20:51:14 +0000
+	id 1rMwaM-0000j8-IF; Mon, 08 Jan 2024 20:51:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663912.1033954; Mon, 08 Jan 2024 20:51:14 +0000
+Received: by outflank-mailman (output) from mailman id 663896.1033817; Mon, 08 Jan 2024 20:51:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaX-00041U-W5; Mon, 08 Jan 2024 20:51:14 +0000
-Received: by outflank-mailman (input) for mailman id 663912;
- Mon, 08 Jan 2024 20:51:09 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rMwaM-0000j0-AA; Mon, 08 Jan 2024 20:51:02 +0000
+Received: by outflank-mailman (input) for mailman id 663896;
+ Mon, 08 Jan 2024 20:51:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaT-0000R6-9h
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:09 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a4ddf61a-ae67-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 21:51:06 +0100 (CET)
+ <SRS0=NrlO=IS=casper.srs.infradead.org=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1rMwaK-0000R5-Qn
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:00 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9dc8b3e6-ae67-11ee-98ef-6d05b1d4d9a1;
+ Mon, 08 Jan 2024 21:50:55 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYm-007wXw-0J; Mon, 08 Jan 2024 20:49:24 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1rMwYj-008RPt-Rr; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NGm-1P; Mon, 08 Jan 2024 20:49:23 +0000
+ Hat Linux)) id 1rMwYk-002NFc-1T; Mon, 08 Jan 2024 20:49:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a4ddf61a-ae67-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 9dc8b3e6-ae67-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=AhJIqQ4JvGd0KYjdhY7u9mp0ZZRVDk/M4nuhh3LTnPc=; b=QCk8aYCkC346WPe06AhMAiDeaM
-	wfg8iT+0fMlHnulAR9D/433Cl2gjJ8UP2O8m1cxUBdlVPBPbzyz1foyPaCRcP34NQUMYxzCTl4+db
-	o50Ep9pyalIkHCiIKdizJVrKhaaZP1CYNfqOKeQroBk2uPkSpgtE6swFA9CkQpRDxOSjnbA5gNaGH
-	HICKCAy8u3JV4UY7XqHoWa9Dlr/x+Dos61Oxq3k4Zktd/cY+aPkHq0KWFuVwklG/mApd9HPXC7XTu
-	VCEr3nG/8ImCZTzQugIZlf+94FLPbHxRIO/1oNg4wVGc2+nsdlCBYFwrgprv1PsC1RujeJHMrHIN3
-	l8QYFd/A==;
+	bh=8zuRre35272BYJVRGd9RIb87z+uvpwtc4RlOpE6V4GU=; b=b+e5pHRNHzAKqZDt2JN3LRQAy/
+	bLs2U1SXGlCjRJKJipRex6dDaZp+CkBO/dgYwcdJfyt6yseiya5dFWEK5KYJUcFEkskgKtwgAouUh
+	yd2pjryXltEkLU0KbkXN0wJpTw7lcyuNtVo4HMqEG2UE3q6djj3wI7+Tz2u4QfUuprPPrdD0YAIRG
+	d2gRpO6/uOZYE5d0xc9sBHYVyLKWMooQA+EkAdTUpzPJDMyVPWKHHkKmLPNSAXfaDEehr/q3qZ68K
+	fh7wmhbbIFQRCKfRzskDaIgPNxMlGxMYiQNkkOPzdVoLTSj8ogm6JAkqmlhTcLiE9WXS0hyv2qQ/D
+	2c35O4/Q==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,67 +121,79 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 38/46] hw/openrisc/openrisc_sim: use qemu_create_nic_device()
-Date: Mon,  8 Jan 2024 20:27:07 +0000
-Message-ID: <20240108204909.564514-39-dwmw2@infradead.org>
+Subject: [PATCH v3 24/46] hw/arm/fsl: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:26:53 +0000
+Message-ID: <20240108204909.564514-25-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/openrisc/openrisc_sim.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ hw/arm/fsl-imx25.c  | 2 +-
+ hw/arm/fsl-imx6.c   | 2 +-
+ hw/arm/fsl-imx6ul.c | 2 +-
+ hw/arm/fsl-imx7.c   | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
-index 35da123aef..bffd6f721f 100644
---- a/hw/openrisc/openrisc_sim.c
-+++ b/hw/openrisc/openrisc_sim.c
-@@ -170,7 +170,7 @@ static void openrisc_create_fdt(Or1ksimState *state,
+diff --git a/hw/arm/fsl-imx25.c b/hw/arm/fsl-imx25.c
+index 9d2fb75a68..a24fa7b443 100644
+--- a/hw/arm/fsl-imx25.c
++++ b/hw/arm/fsl-imx25.c
+@@ -170,7 +170,7 @@ static void fsl_imx25_realize(DeviceState *dev, Error **errp)
  
- static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-                                   int num_cpus, OpenRISCCPU *cpus[],
--                                  int irq_pin, NICInfo *nd)
-+                                  int irq_pin)
- {
-     void *fdt = state->fdt;
-     DeviceState *dev;
-@@ -178,8 +178,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-     char *nodename;
-     int i;
+     object_property_set_uint(OBJECT(&s->fec), "phy-num", s->phy_num,
+                              &error_abort);
+-    qdev_set_nic_properties(DEVICE(&s->fec), &nd_table[0]);
++    qemu_configure_nic_device(DEVICE(&s->fec), true, NULL);
  
--    dev = qdev_new("open_eth");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("open_eth", true, NULL);
-+    if (!dev) {
-+        return;
-+    }
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->fec), errp)) {
+         return;
+diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
+index b2153022c0..02f3024090 100644
+--- a/hw/arm/fsl-imx6.c
++++ b/hw/arm/fsl-imx6.c
+@@ -380,7 +380,7 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
  
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -313,12 +315,10 @@ static void openrisc_sim_init(MachineState *machine)
-     openrisc_create_fdt(state, or1ksim_memmap, smp_cpus, machine->ram_size,
-                         machine->kernel_cmdline);
+     object_property_set_uint(OBJECT(&s->eth), "phy-num", s->phy_num,
+                              &error_abort);
+-    qdev_set_nic_properties(DEVICE(&s->eth), &nd_table[0]);
++    qemu_configure_nic_device(DEVICE(&s->eth), true, NULL);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->eth), errp)) {
+         return;
+     }
+diff --git a/hw/arm/fsl-imx6ul.c b/hw/arm/fsl-imx6ul.c
+index e37b69a5e1..ca3dd439ec 100644
+--- a/hw/arm/fsl-imx6ul.c
++++ b/hw/arm/fsl-imx6ul.c
+@@ -442,7 +442,7 @@ static void fsl_imx6ul_realize(DeviceState *dev, Error **errp)
+                                  s->phy_num[i], &error_abort);
+         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
+                                  FSL_IMX6UL_ETH_NUM_TX_RINGS, &error_abort);
+-        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
++        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
+         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
  
--    if (nd_table[0].used) {
--        openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
--                              or1ksim_memmap[OR1KSIM_ETHOC].size,
--                              smp_cpus, cpus,
--                              OR1KSIM_ETHOC_IRQ, nd_table);
--    }
-+    openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
-+                          or1ksim_memmap[OR1KSIM_ETHOC].size,
-+                          smp_cpus, cpus,
-+                          OR1KSIM_ETHOC_IRQ);
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0,
+diff --git a/hw/arm/fsl-imx7.c b/hw/arm/fsl-imx7.c
+index 474cfdc87c..1acbe065db 100644
+--- a/hw/arm/fsl-imx7.c
++++ b/hw/arm/fsl-imx7.c
+@@ -446,7 +446,7 @@ static void fsl_imx7_realize(DeviceState *dev, Error **errp)
+                                  s->phy_num[i], &error_abort);
+         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
+                                  FSL_IMX7_ETH_NUM_TX_RINGS, &error_abort);
+-        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
++        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
+         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
  
-     if (smp_cpus > 1) {
-         openrisc_sim_ompic_init(state, or1ksim_memmap[OR1KSIM_OMPIC].base,
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0, FSL_IMX7_ENETn_ADDR[i]);
 -- 
 2.41.0
 
