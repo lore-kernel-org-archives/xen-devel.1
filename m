@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BBDC47073
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD95EC3DA6E
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663907.1033911 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.663900.1033844 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaT-0002tL-L8; Mon, 08 Jan 2024 20:51:09 +0000
+	id 1rMwaO-0001Du-6u; Mon, 08 Jan 2024 20:51:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663907.1033911; Mon, 08 Jan 2024 20:51:09 +0000
+Received: by outflank-mailman (output) from mailman id 663900.1033844; Mon, 08 Jan 2024 20:51:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaS-0002qh-U1; Mon, 08 Jan 2024 20:51:08 +0000
-Received: by outflank-mailman (input) for mailman id 663907;
- Mon, 08 Jan 2024 20:51:06 +0000
+	id 1rMwaN-0001BR-Qg; Mon, 08 Jan 2024 20:51:03 +0000
+Received: by outflank-mailman (input) for mailman id 663900;
+ Mon, 08 Jan 2024 20:51:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NrlO=IS=casper.srs.infradead.org=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaP-0000R5-Ru
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:05 +0000
+ id 1rMwaM-0000R5-RH
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:02 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a1caf14c-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:51:01 +0100 (CET)
+ id 9e92fb3c-ae67-11ee-98ef-6d05b1d4d9a1;
+ Mon, 08 Jan 2024 21:50:56 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYi-008RPd-OK; Mon, 08 Jan 2024 20:49:21 +0000
+ id 1rMwYi-008RPS-8o; Mon, 08 Jan 2024 20:49:21 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEo-1l; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYi-002NEN-37; Mon, 08 Jan 2024 20:49:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a1caf14c-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: 9e92fb3c-ae67-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=hMp2SquIWfdr4+9lBCEHUnVE2meQLGugha34lW7/ti0=; b=nDpW6G9dsy794OXiWzzXQ91GO+
-	T9HGvq07RlFgWMMFSFpZ7npfL8tb+WTug4S7gF6/baNqNfbVZdyqmyFVGHZrXiE8TEbMQcOLiHLav
-	67shYynZomLeR1hApByC3eUqRyCeW+m3fFIzpIKfkPXKmHWOzsyYlDKHXNJQKxYCgLNgK4y4cyaPd
-	W1rHCB6Of9X4o5iU//G8gPwg3guwgmkd1wvBelIMhblidAdUYeoyHkjvgRiUWQ4s0HmOVG8hxOpYO
-	gO3BKhQAxnbBd2ZCIJGIwPW8OTMjN0bo6JuIDUyP5H00LmXdCyOqMgjY7zw5DISLf9iBPOmJ0a0VD
-	TdL5bPDg==;
+	bh=bVGb2+EtT3pxaWvqPLp7baiGIuRpc42koRGOsdWnaUk=; b=X43RH9AbD3fJNnSNp6zj09ltf+
+	fnPjYoNKw/LCY4sLAJ0XSEgh2X0VrFVEH2/Vut01+TVDf27LqToIk4nMKZKNqcKYg2oSynHVvXXd3
+	wmrcu6hDmlyRPIBBAhnwoSo8bNOJnWilocaH9Nm2K412zDTBq7bBxjJNgwltO0TK0jSQIuEkSb7aL
+	Se/tAWZ770hs5e0RuJ33snAwDjPCpEgSuAWLwbQ5i6aeZt/wzTtrrt7by0kkrFLSSHIJsEcXIrnDR
+	cmTyzT+yDJWk2Zpn1SCxFDMawd09aFiLD+4f2rSXJou7fbzNwluCxx0N+7DjZKEkPZkMnpmt+Tj1W
+	cOTGJ6pg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 13/46] hw/mips/malta: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:42 +0000
-Message-ID: <20240108204909.564514-14-dwmw2@infradead.org>
+Subject: [PATCH v3 07/46] hw/alpha/dp264: use pci_init_nic_devices()
+Date: Mon,  8 Jan 2024 20:26:36 +0000
+Message-ID: <20240108204909.564514-8-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -134,44 +134,26 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The Malta board setup code would previously place the first NIC into PCI
-slot 11 if was a PCNet card, and the rest (including the first if it was
-anything other than a PCNet card) would be dynamically assigned.
-
-Now it will place any PCNet NIC into slot 11, and then anything else will
-be dynamically assigned.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/mips/malta.c | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+ hw/alpha/dp264.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index d22bb1edef..af74008c82 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -612,18 +612,9 @@ static MaltaFPGAState *malta_fpga_init(MemoryRegion *address_space,
- /* Network support */
- static void network_init(PCIBus *pci_bus)
- {
--    int i;
--
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--        const char *default_devaddr = NULL;
--
--        if (i == 0 && (!nd->model || strcmp(nd->model, "pcnet") == 0))
--            /* The malta board has a PCNet card using PCI SLOT 11 */
--            default_devaddr = "0b";
--
--        pci_nic_init_nofail(nd, pci_bus, "pcnet", default_devaddr);
--    }
-+    /* The malta board has a PCNet card using PCI SLOT 11 */
-+    pci_init_nic_in_slot(pci_bus, "pcnet", NULL, "0b");
-+    pci_init_nic_devices(pci_bus, "pcnet");
- }
+diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+index 03495e1e60..52a1fa310b 100644
+--- a/hw/alpha/dp264.c
++++ b/hw/alpha/dp264.c
+@@ -124,9 +124,7 @@ static void clipper_init(MachineState *machine)
+     pci_vga_init(pci_bus);
  
- static void bl_setup_gt64120_jump_kernel(void **p, uint64_t run_addr,
+     /* Network setup.  e1000 is good enough, failing Tulip support.  */
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* Super I/O */
+     isa_create_simple(isa_bus, TYPE_SMC37C669_SUPERIO);
 -- 
 2.41.0
 
