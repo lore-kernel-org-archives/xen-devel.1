@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A419C47DB1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD84DC3DA6E
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663898.1033829 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.663912.1033954 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaN-0000yU-6l; Mon, 08 Jan 2024 20:51:03 +0000
+	id 1rMwaY-000467-SC; Mon, 08 Jan 2024 20:51:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663898.1033829; Mon, 08 Jan 2024 20:51:03 +0000
+Received: by outflank-mailman (output) from mailman id 663912.1033954; Mon, 08 Jan 2024 20:51:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaM-0000wA-TU; Mon, 08 Jan 2024 20:51:02 +0000
-Received: by outflank-mailman (input) for mailman id 663898;
- Mon, 08 Jan 2024 20:51:01 +0000
+	id 1rMwaX-00041U-W5; Mon, 08 Jan 2024 20:51:14 +0000
+Received: by outflank-mailman (input) for mailman id 663912;
+ Mon, 08 Jan 2024 20:51:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaL-0000R6-Kr
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:01 +0000
+ id 1rMwaT-0000R6-9h
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:09 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9fc9b7e1-ae67-11ee-9b0f-b553b5be7939;
- Mon, 08 Jan 2024 21:50:58 +0100 (CET)
+ id a4ddf61a-ae67-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 21:51:06 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYj-007wXO-2l; Mon, 08 Jan 2024 20:49:22 +0000
+ id 1rMwYm-007wXw-0J; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEa-0w; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYl-002NGm-1P; Mon, 08 Jan 2024 20:49:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 9fc9b7e1-ae67-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: a4ddf61a-ae67-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=OnWPh5hbzzJOk4js2nxRTuG9hB5F2v55vySQRb6M4tk=; b=eM4ZffAn4bADdkBWEqoCKrgnIf
-	zU48GV4UpKFWM8AZjnxqAsNDiDBB40Ne9EVPaZMtoZW3+PQbyU1RJQBwqrdBybANNmBYcnUANdvi6
-	3jQwb23XEJbXAdB8z2wKtWej+vmfHbf3vSn+ZxIEFUbx+y5K5A9QzBWx4TC3PPhlXRzYcY30AtfaH
-	j6ZB5C74ZawnoR9pbtMFkFqDbDyTMuwxT7v9W45Qi0rs+jHA1fBUjUB/VNLvF3cXnktKP6l8AZAKD
-	e6XnCxIBYP21Ps9UYsQeSm9Whiu+stofElHMXnGyXFGQsxMKRqo1x/rCYc1S89DacBc8KVdsQ51kM
-	kbc0tmgA==;
+	bh=AhJIqQ4JvGd0KYjdhY7u9mp0ZZRVDk/M4nuhh3LTnPc=; b=QCk8aYCkC346WPe06AhMAiDeaM
+	wfg8iT+0fMlHnulAR9D/433Cl2gjJ8UP2O8m1cxUBdlVPBPbzyz1foyPaCRcP34NQUMYxzCTl4+db
+	o50Ep9pyalIkHCiIKdizJVrKhaaZP1CYNfqOKeQroBk2uPkSpgtE6swFA9CkQpRDxOSjnbA5gNaGH
+	HICKCAy8u3JV4UY7XqHoWa9Dlr/x+Dos61Oxq3k4Zktd/cY+aPkHq0KWFuVwklG/mApd9HPXC7XTu
+	VCEr3nG/8ImCZTzQugIZlf+94FLPbHxRIO/1oNg4wVGc2+nsdlCBYFwrgprv1PsC1RujeJHMrHIN3
+	l8QYFd/A==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 10/46] hw/hppa: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:39 +0000
-Message-ID: <20240108204909.564514-11-dwmw2@infradead.org>
+Subject: [PATCH v3 38/46] hw/openrisc/openrisc_sim: use qemu_create_nic_device()
+Date: Mon,  8 Jan 2024 20:27:07 +0000
+Message-ID: <20240108204909.564514-39-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -136,34 +136,52 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/hppa/machine.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ hw/openrisc/openrisc_sim.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index c8da7c18d5..19d477105e 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -338,7 +338,6 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
-     uint64_t kernel_entry = 0, kernel_low, kernel_high;
-     MemoryRegion *addr_space = get_system_memory();
-     MemoryRegion *rom_region;
--    long i;
-     unsigned int smp_cpus = machine->smp.cpus;
-     SysBusDevice *s;
+diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
+index 35da123aef..bffd6f721f 100644
+--- a/hw/openrisc/openrisc_sim.c
++++ b/hw/openrisc/openrisc_sim.c
+@@ -170,7 +170,7 @@ static void openrisc_create_fdt(Or1ksimState *state,
  
-@@ -362,10 +361,8 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
-                         qdev_get_gpio_in(lasi_dev, LASI_IRQ_LAN_HPA));
-     }
+ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
+                                   int num_cpus, OpenRISCCPU *cpus[],
+-                                  int irq_pin, NICInfo *nd)
++                                  int irq_pin)
+ {
+     void *fdt = state->fdt;
+     DeviceState *dev;
+@@ -178,8 +178,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
+     char *nodename;
+     int i;
  
--    for (i = 0; i < nb_nics; i++) {
--        if (!enable_lasi_lan()) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+    if (!enable_lasi_lan()) {
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
-     }
+-    dev = qdev_new("open_eth");
+-    qdev_set_nic_properties(dev, nd);
++    dev = qemu_create_nic_device("open_eth", true, NULL);
++    if (!dev) {
++        return;
++    }
  
-     /* BMC board: HP Powerbar SP2 Diva (with console only) */
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+@@ -313,12 +315,10 @@ static void openrisc_sim_init(MachineState *machine)
+     openrisc_create_fdt(state, or1ksim_memmap, smp_cpus, machine->ram_size,
+                         machine->kernel_cmdline);
+ 
+-    if (nd_table[0].used) {
+-        openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
+-                              or1ksim_memmap[OR1KSIM_ETHOC].size,
+-                              smp_cpus, cpus,
+-                              OR1KSIM_ETHOC_IRQ, nd_table);
+-    }
++    openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
++                          or1ksim_memmap[OR1KSIM_ETHOC].size,
++                          smp_cpus, cpus,
++                          OR1KSIM_ETHOC_IRQ);
+ 
+     if (smp_cpus > 1) {
+         openrisc_sim_ompic_init(state, or1ksim_memmap[OR1KSIM_OMPIC].base,
 -- 
 2.41.0
 
