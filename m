@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6FC3C47079
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.663903.1033875 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9EAC4707C
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.663899.1033836 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaQ-00022g-F5; Mon, 08 Jan 2024 20:51:06 +0000
+	id 1rMwaN-00012h-FW; Mon, 08 Jan 2024 20:51:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 663903.1033875; Mon, 08 Jan 2024 20:51:06 +0000
+Received: by outflank-mailman (output) from mailman id 663899.1033836; Mon, 08 Jan 2024 20:51:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwaQ-000205-6O; Mon, 08 Jan 2024 20:51:06 +0000
-Received: by outflank-mailman (input) for mailman id 663903;
- Mon, 08 Jan 2024 20:51:04 +0000
+	id 1rMwaN-00011p-6y; Mon, 08 Jan 2024 20:51:03 +0000
+Received: by outflank-mailman (input) for mailman id 663899;
+ Mon, 08 Jan 2024 20:51:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NrlO=IS=casper.srs.infradead.org=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaN-0000R5-RO
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:03 +0000
+ id 1rMwaL-0000R5-Qx
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:01 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a078b9f7-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:50:59 +0100 (CET)
+ id 9cb0f570-ae67-11ee-98ef-6d05b1d4d9a1;
+ Mon, 08 Jan 2024 21:50:55 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYk-008RQ4-FK; Mon, 08 Jan 2024 20:49:23 +0000
+ id 1rMwYj-008RPh-C4; Mon, 08 Jan 2024 20:49:22 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NGX-0l; Mon, 08 Jan 2024 20:49:23 +0000
+ Hat Linux)) id 1rMwYj-002NFB-2x; Mon, 08 Jan 2024 20:49:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a078b9f7-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: 9cb0f570-ae67-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=YuV1U9QqJn6O+NsoibaCqXzAKb9rkiw1btsa5muc1z8=; b=B1IyKteHJ3fp/36vduyMRbP8IR
-	YKhL/Ygp6B7X6j63nRXIEjJ6tIJHQA5p+dXkv7+JXZNQmVaO3X/IAgKGMEgnD23LYEsbJeaKC16jZ
-	Sl5cz7vnr9fQdbkcUJZkaxn8QxS/d/zNxaV8m19sOmSeAyNtjTSNpCbLr1XhhqKz3QhyBBf2No9SG
-	/nIG3Y8ztAUMxRyDYrW8IJch2VWe4JBGppyBgsK1OM12GEn2DnGek6Zhp5etAmc2iFdQrxGX3cOsJ
-	nn0cLBfc+ylsXBS7dNLnm+04s9niNuYlOWoTYdm8mLMr3Bu92phgV7xeMzesTW8Wibj4eN284q6Wo
-	mYrnMPfw==;
+	bh=mKejtkSe+nFfQ0aoeWucod44zhEmF2o9bYQegdFzkdU=; b=ZhUUZhVnEtNk66WpkrjhP43mCV
+	H3uiW5TCXECVTszSMNTlGImLRnCJ7mRVxLbSXF38/zp3zDh02oGGm5xm1I++bqiszLsiMgpKlsBbn
+	TJQE40SEXrpdX5zDOCgvIUvf9p8gxJfkb+6CquiaHmvhy7TAgDi56pnWpJpl40xFp1hW+Xx6NKe3k
+	vCmsdXhQ0Q6xN/66xcfxEuTCsskLeP5QiaL+89ed4mPu9Kg9GS2bh5ElDodmdAGOkP/R3hIqKRb+l
+	MgVuvJNBtE+tYSeTpi/2OPg3fM5ZN3Lu/S6/PYMJcGzRRk680SD/KQX/roookyqQ58M4LHbFjVmKM
+	Otesh1vA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 35/46] hw/mips/mipssim: use qemu_create_nic_device()
-Date: Mon,  8 Jan 2024 20:27:04 +0000
-Message-ID: <20240108204909.564514-36-dwmw2@infradead.org>
+Subject: [PATCH v3 18/46] hw/sh4/r2d: use pci_init_nic_devices()
+Date: Mon,  8 Jan 2024 20:26:47 +0000
+Message-ID: <20240108204909.564514-19-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -134,50 +134,42 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The MIPS SIM platform instantiates its NIC only if a corresponding
-configuration exists for it. Use qemu_create_nic_device() function for
-that.
+Previously, the first PCI NIC would be assigned to slot 2 even if the
+user override the model and made it something other than an rtl8139
+which is the default. Everything else would be dynamically assigned.
+
+Now, the first rtl8139 gets slot 2 and everything else is dynamic.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Yoshinori Sato <ysato@users.sourceforge.jp>
 ---
- hw/mips/mipssim.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ hw/sh4/r2d.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/hw/mips/mipssim.c b/hw/mips/mipssim.c
-index 01e323904d..16af31648e 100644
---- a/hw/mips/mipssim.c
-+++ b/hw/mips/mipssim.c
-@@ -118,13 +118,15 @@ static void main_cpu_reset(void *opaque)
-     }
- }
- 
--static void mipsnet_init(int base, qemu_irq irq, NICInfo *nd)
-+static void mipsnet_init(int base, qemu_irq irq)
- {
+diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
+index 4944994e9c..e9f316a6ce 100644
+--- a/hw/sh4/r2d.c
++++ b/hw/sh4/r2d.c
+@@ -240,7 +240,6 @@ static void r2d_init(MachineState *machine)
+     MemoryRegion *sdram = g_new(MemoryRegion, 1);
+     qemu_irq *irq;
+     DriveInfo *dinfo;
+-    int i;
      DeviceState *dev;
-     SysBusDevice *s;
+     SysBusDevice *busdev;
+     MemoryRegion *address_space_mem = get_system_memory();
+@@ -309,9 +308,8 @@ static void r2d_init(MachineState *machine)
+                           0x555, 0x2aa, 0);
  
--    dev = qdev_new("mipsnet");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("mipsnet", true, NULL);
-+    if (!dev) {
-+        return;
-+    }
+     /* NIC: rtl8139 on-board, and 2 slots. */
+-    for (i = 0; i < nb_nics; i++)
+-        pci_nic_init_nofail(&nd_table[i], pci_bus,
+-                            mc->default_nic, i == 0 ? "2" : NULL);
++    pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "2");
++    pci_init_nic_devices(pci_bus, mc->default_nic);
  
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -225,9 +227,8 @@ mips_mipssim_init(MachineState *machine)
-                       sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
-     }
- 
--    if (nd_table[0].used)
--        /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
--        mipsnet_init(0x4200, env->irq[2], &nd_table[0]);
-+    /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
-+    mipsnet_init(0x4200, env->irq[2]);
- }
- 
- static void mips_mipssim_machine_init(MachineClass *mc)
+     /* USB keyboard */
+     usb_create_simple(usb_bus_find(-1), "usb-kbd");
 -- 
 2.41.0
 
