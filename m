@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65ECDC47073
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:02:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664009.1034106 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93823C3DA6E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jan 2024 21:04:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664034.1034126 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwlX-00022G-At; Mon, 08 Jan 2024 21:02:35 +0000
+	id 1rMwnC-0003TQ-8D; Mon, 08 Jan 2024 21:04:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664009.1034106; Mon, 08 Jan 2024 21:02:35 +0000
+Received: by outflank-mailman (output) from mailman id 664034.1034126; Mon, 08 Jan 2024 21:04:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rMwlX-000229-7W; Mon, 08 Jan 2024 21:02:35 +0000
-Received: by outflank-mailman (input) for mailman id 664009;
- Mon, 08 Jan 2024 21:02:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rMwnC-0003TJ-5Y; Mon, 08 Jan 2024 21:04:18 +0000
+Received: by outflank-mailman (input) for mailman id 664034;
+ Mon, 08 Jan 2024 21:04:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CNLN=IS=desiato.srs.infradead.org=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rMwaZ-0000R5-9H
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:15 +0000
+ id 1rMwaY-0000R6-H2
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2024 20:51:14 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a9661ddb-ae67-11ee-98ef-6d05b1d4d9a1;
- Mon, 08 Jan 2024 21:51:14 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a7ea7fb1-ae67-11ee-9b0f-b553b5be7939;
+ Mon, 08 Jan 2024 21:51:11 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYm-007wXn-0I; Mon, 08 Jan 2024 20:49:24 +0000
+ id 1rMwYk-007wXW-33; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NGG-05; Mon, 08 Jan 2024 20:49:23 +0000
+ Hat Linux)) id 1rMwYk-002NFY-1E; Mon, 08 Jan 2024 20:49:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a9661ddb-ae67-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: a7ea7fb1-ae67-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=jjA+mKm/KR8ygCw36R3MvCf4i1b5Zw/aOnxUi6/7roc=; b=ayaN3phb+ckS8ROU9AY1SGuUTM
-	ooSaOlRggGQVW9JWqJ+ibLgkjfCrdQKFACmIKNhsgzsvpneprXtirDm+QCqwpT1xljM/hGtQpHtWo
-	nlIdMQueQhwP72M1QvdFWZShiYMP4hg2hlJQaaQ9uRW12q0D8ri/WO71OtJa/or3G4h9k5QShJSCj
-	SI9lhYJ0PjPLqufG6HVzDbjbpT1yYv9p6pszsLVo9X4MdIkUslz8q+Ts+LVakHg/4zPYHCFhIhuh6
-	miSZ4JJxO5mXWNpXPRBGPoRhCPXENfBznpyBU2IipG9GD85xVTsAmNeud8DZPp+pFdt4lcbjPtLmy
-	nIFMhOHg==;
+	bh=b/4LHUVwE3s/LELrt+0ER1ploJUp0OvQT5xXzN2r1Zo=; b=R+9UIqnOpvziyuI2TUeYql4ANg
+	NMsdk2/5xD7D9MlhuZHmIJshIziQqnGJtDHoW4juLDKVPAZkt6w3zK9xTk6L6jFAOzTTVcUuJEzbQ
+	vVIoJKEujwUoDk+eRueZjnMO/yg1smyRp20TqQaT2SOON5sjvgNVD78pTYk6hzXjh9UXi705rgHZO
+	cRP9+ZpBnCLmZBLdC1SOZJugbwehOlmlLqd6eRUBtQWfqP/9rNCd7Q9MPhrQcqTgiRqZgAdV7eX5h
+	GHjiFsyayTuk2CwPmAB5b0G+B3QxnPunBG+WrdLoYj494gfueuQxkVScypeDuhGbyxIWbNdpVNgrf
+	0vzFTh4g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,9 +121,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 32/46] hw/m68k/mcf5208: use qemu_create_nic_device()
-Date: Mon,  8 Jan 2024 20:27:01 +0000
-Message-ID: <20240108204909.564514-33-dwmw2@infradead.org>
+Subject: [PATCH v3 23/46] hw/arm/exynos4: use qemu_create_nic_device()
+Date: Mon,  8 Jan 2024 20:26:52 +0000
+Message-ID: <20240108204909.564514-24-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -136,51 +136,26 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/m68k/mcf5208.c | 19 ++++++-------------
- 1 file changed, 6 insertions(+), 13 deletions(-)
+ hw/arm/exynos4_boards.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
-index d22d8536db..0cfb806c20 100644
---- a/hw/m68k/mcf5208.c
-+++ b/hw/m68k/mcf5208.c
-@@ -206,16 +206,16 @@ static void mcf5208_sys_init(MemoryRegion *address_space, qemu_irq *pic)
-     }
- }
- 
--static void mcf_fec_init(MemoryRegion *sysmem, NICInfo *nd, hwaddr base,
--                         qemu_irq *irqs)
-+static void mcf_fec_init(MemoryRegion *sysmem, hwaddr base, qemu_irq *irqs)
- {
-     DeviceState *dev;
+diff --git a/hw/arm/exynos4_boards.c b/hw/arm/exynos4_boards.c
+index b0e13eb4f0..003992189b 100644
+--- a/hw/arm/exynos4_boards.c
++++ b/hw/arm/exynos4_boards.c
+@@ -76,10 +76,8 @@ static void lan9215_init(uint32_t base, qemu_irq irq)
      SysBusDevice *s;
-     int i;
  
--    qemu_check_nic_model(nd, TYPE_MCF_FEC_NET);
--    dev = qdev_new(TYPE_MCF_FEC_NET);
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device(TYPE_MCF_FEC_NET, true, NULL);
-+    if (!dev) {
-+        return;
-+    }
- 
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -267,14 +267,7 @@ static void mcf5208evb_init(MachineState *machine)
- 
-     mcf5208_sys_init(address_space_mem, pic);
- 
--    if (nb_nics > 1) {
--        error_report("Too many NICs");
--        exit(1);
--    }
+     /* This should be a 9215 but the 9118 is close enough */
 -    if (nd_table[0].used) {
--        mcf_fec_init(address_space_mem, &nd_table[0],
--                     0xfc030000, pic + 36);
--    }
-+    mcf_fec_init(address_space_mem, 0xfc030000, pic + 36);
- 
-     g_free(pic);
- 
+-        qemu_check_nic_model(&nd_table[0], "lan9118");
+-        dev = qdev_new(TYPE_LAN9118);
+-        qdev_set_nic_properties(dev, &nd_table[0]);
++    dev = qemu_create_nic_device(TYPE_LAN9118, true, NULL);
++    if (dev) {
+         qdev_prop_set_uint32(dev, "mode_16bit", 1);
+         s = SYS_BUS_DEVICE(dev);
+         sysbus_realize_and_unref(s, &error_fatal);
 -- 
 2.41.0
 
