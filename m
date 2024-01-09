@@ -4,33 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E49C4706C
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jan 2024 20:01:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.664950.1035105 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A409C4707B
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jan 2024 20:47:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.664986.1035141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rNIIA-0002Yr-Cm; Tue, 09 Jan 2024 20:01:42 +0000
+	id 1rNJ0O-0006E8-9n; Tue, 09 Jan 2024 20:47:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 664950.1035105; Tue, 09 Jan 2024 20:01:42 +0000
+Received: by outflank-mailman (output) from mailman id 664986.1035141; Tue, 09 Jan 2024 20:47:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rNIIA-0002Yk-90; Tue, 09 Jan 2024 20:01:42 +0000
-Received: by outflank-mailman (input) for mailman id 664950;
- Tue, 09 Jan 2024 20:01:41 +0000
+	id 1rNJ0O-0006E1-6w; Tue, 09 Jan 2024 20:47:24 +0000
+Received: by outflank-mailman (input) for mailman id 664986;
+ Tue, 09 Jan 2024 20:47:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qgrd=IT=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1rNII9-0002Yc-Af
- for xen-devel@lists.xenproject.org; Tue, 09 Jan 2024 20:01:41 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
+ id 1rNJ0N-00065f-Lx
+ for xen-devel@lists.xenproject.org; Tue, 09 Jan 2024 20:47:23 +0000
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [2607:f8b0:4864:20::832])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e73c169b-af29-11ee-98ef-6d05b1d4d9a1;
- Tue, 09 Jan 2024 21:01:40 +0100 (CET)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50e7c6f0487so3303842e87.3
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2024 12:01:40 -0800 (PST)
+ id 49773ba1-af30-11ee-98ef-6d05b1d4d9a1;
+ Tue, 09 Jan 2024 21:47:22 +0100 (CET)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-4299400fd94so14397291cf.2
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2024 12:47:22 -0800 (PST)
+Received: from pm2-ws13.praxislan02.com
+ (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
+ [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
+ fh7-20020a05622a588700b00425442a2f32sm1181628qtb.16.2024.01.09.12.47.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jan 2024 12:47:20 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,97 +48,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e73c169b-af29-11ee-98ef-6d05b1d4d9a1
+X-Inumbo-ID: 49773ba1-af30-11ee-98ef-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704830500; x=1705435300; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1704833241; x=1705438041; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bOO4ayKK2UoK28WAEDe31K//qfuYSZXi6pXJh+a7zjI=;
-        b=T/KXLiSJQyGbE3Y6C9jupHYXQFgZwxq5MGR6TRH0Ee0+kkrgLm4RUC+wqgl405s+Mv
-         AC5FJU2brxXAKMLLQuqdbIuHGAfF6nvSGbLL6jvYSaAhGGP5Z1jhPpIHxLUGOem1ZDLz
-         rgpr52G8AqP5IEwQIIhH7hROR5HSaB4HD7Vsss15Ng7KCcHbkbIYB+1FfhYPypsstBSc
-         q8UsppJSJ1yCnLloc5Ko+SjWgNR/fBR4Q735XZUz/KmZDQX+4DzQH+WF0sZt0k+qWi4J
-         p/rABEZUYJ1tREAdil6P0qT5z28gidABlhxAiBPFpY7xuacm//1XME1LrG2cnxeQKNOQ
-         5Lyw==
+        bh=LmDIAatmxct3SyiOSDfQ1Zlj25zPKv9fsM2oRUEHdKU=;
+        b=CDCY1hh8Rz7d1hb31I9gqvyt3Sabb9MglsumerW1PF8wrHQOOJLf6u4zHbwkUBry7f
+         4fvmHXQrLJBGDgqSYvsddXw829B6N+xKP3arwG66Lidh4/H5JvaNvAMsbTJm5hHzNXu1
+         DWq4piaE8u6pwvz4dQrM62yFk6EIOFtd2X6+Y4Vw/vW0E71muXexMLhntL5zZPLp3VJN
+         miFN7NetiHpZZqtaRhnGQ7uvxpUmAd/kzM9+vLaRykug+i9LSRR0FcdJLq5OdhTbDxXe
+         uuDqxSGdRwYcFz9jSQhMmF6RsKToak9dbXqDCWYaiHJaPfBL64ZGACHxmPJaWWjk4YlX
+         efIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704830500; x=1705435300;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1704833241; x=1705438041;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bOO4ayKK2UoK28WAEDe31K//qfuYSZXi6pXJh+a7zjI=;
-        b=ZgOzGiHdVx9D5H2RzRRrhSnDXKao+Ewz1u6ngtKfMFyVTHOP3MPYCXLm1KkbikZGvu
-         lcJF0ITCwtGcE388V+b/UVuVbKDDEEI5RRujTZGIJs0umXCJAgQaFnPJExzhyJazpNLZ
-         lyPe12p2FTz4ZuHWl4LuW/GcDdgtrgC8q9SyQg2I/aYlH2hXidm/2AYHSJ4ZBmXj9/EZ
-         yg04L5tTEQLN54WdgcBjMUadzkSPAwQWiVM3klQZ9CS2QghU7wHA43vW63PEvlLw7ksK
-         LWzgaP5l9RZBL0jtKpPHUvZS5uITH08eVkvRjn3jrRtsxboHkLenzFhmZRdZ1tJ4FZVD
-         ID0w==
-X-Gm-Message-State: AOJu0Yx+HZ0SoIVzxu7kRc8ZcoIbKqPdEa+yYjt+8Vl8eCe//5XPI6AK
-	xvgpUg/kNfUbqHlHuNjWl4irVwRs+MGZjwlOjbo=
-X-Google-Smtp-Source: AGHT+IHR4vNJxHw5RAm73g4WkkHX8vdiEczvgO0a2ey+LGawUvLtYqJbYwnQRRFw0YgpFy9VdlbW8snQ3iNxXeFkMQo=
-X-Received: by 2002:ac2:59d9:0:b0:50e:8e94:bcfe with SMTP id
- x25-20020ac259d9000000b0050e8e94bcfemr1634466lfn.64.1704830499831; Tue, 09
- Jan 2024 12:01:39 -0800 (PST)
-MIME-Version: 1.0
-References: <20240104090055.27323-1-jgross@suse.com> <20240104090055.27323-18-jgross@suse.com>
-In-Reply-To: <20240104090055.27323-18-jgross@suse.com>
+        bh=LmDIAatmxct3SyiOSDfQ1Zlj25zPKv9fsM2oRUEHdKU=;
+        b=d37F+hAJjFeP+7ZJv1bbY79Ap5yzL5zQsxqJN+afF5/VeXSmnXLhRm+5XU2vb12p6z
+         3Ma7tVF5NpB8g24w5g4qIMwLDwiuYYYnDQZaz3KYb4W//eKSvtHkcrrgceU1033EVjax
+         oYmwluDVAHSy8k2Mb9DMUot+lElxU/gH7DFtDsJSBr4ECdnzX4G9siML8I6Y0NVOo/Yl
+         3mv7uYag9ZUjmsjGir9yWoQtYemN/hMP/pEqcLcqlycQlEEc1akAJ+MFXfuXyZTGd7V4
+         4H7IFrsjykJlVVbcHaJ0Ch5QJD7+Ew4Bm84LVBOtY4fsPUe+/NOEJQkVpII4pvBZYYdx
+         WaDQ==
+X-Gm-Message-State: AOJu0YzF2yntWqpi1vs3jbHhaOPrr2tfUA9wFe+Sfsm8npW1SXdAsHEE
+	4CKqhA75fHy5RnCrd9QE7KxXrCBBrjM=
+X-Google-Smtp-Source: AGHT+IG0IOClNAHazYB/C5f+kT4FJpwVJFR67PGWdq0fBU8Keue7kuvgqUmwtb/0T76zcvdaYRG73g==
+X-Received: by 2002:ac8:5c0e:0:b0:428:34c5:491e with SMTP id i14-20020ac85c0e000000b0042834c5491emr31195qti.23.1704833241054;
+        Tue, 09 Jan 2024 12:47:21 -0800 (PST)
 From: Jason Andryuk <jandryuk@gmail.com>
-Date: Tue, 9 Jan 2024 15:01:28 -0500
-Message-ID: <CAKf6xptpjVyQ3Jhg1rCa6AJXrv9DEUZVS+jYZPMwN69CXP=ZdQ@mail.gmail.com>
-Subject: Re: [PATCH v3 17/33] tools/xl: support new 9pfs backend xen-9pfsd
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>, 
-	Anthony PERARD <anthony.perard@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jason Andryuk <jandryuk@gmail.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH 1/2] libxl: Remove cdrom forced QDISK w/ stubdom
+Date: Tue,  9 Jan 2024 15:46:54 -0500
+Message-ID: <20240109204655.72063-2-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240109204655.72063-1-jandryuk@gmail.com>
+References: <20240109204655.72063-1-jandryuk@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 4, 2024 at 4:02=E2=80=AFAM Juergen Gross <jgross@suse.com> wrot=
-e:
->
-> Add support for the new 9pfs backend "xen-9pfsd". For this backend type
-> the tag defaults to "Xen" and the host side path to
-> "/var/log/xen/guests/<dom-name>".
->
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-> ---
-> V2:
-> - test max_files and max_open_files, too (Jason Andryuk)
-> ---
->  docs/man/xl.cfg.5.pod.in | 36 ++++++++++++++++++++++++++++++++++--
->  tools/xl/xl_parse.c      | 36 ++++++++++++++++++++++++++++++++++++
->  2 files changed, 70 insertions(+), 2 deletions(-)
->
-> diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-> index 2e234b450e..80011adbf3 100644
-> --- a/docs/man/xl.cfg.5.pod.in
-> +++ b/docs/man/xl.cfg.5.pod.in
-> @@ -772,10 +772,16 @@ settings, from the following list:
->
->  =3Dover 4
->
-> +=3Ditem B<type=3DTYPE>
-> +
-> +The backendtype for the PV device. Supported values are B<qemu> and
-> +B<xen-9pfsd>.  The default is B<qemu>.
-> +
->  =3Ditem B<tag=3DSTRING>
->
->  9pfs tag to identify the filesystem share. The tag is needed on the
-> -guest side to mount it.
-> +guest side to mount it. For the backendtype of B<xen-9pfsd> the tag defa=
-ults to
-> +"Xen".
+A Linux HVM domain ignores PV block devices with type cdrom.  The
+Windows PV drivers also ignore device-type != "disk".  Therefore QEMU's
+emulated CD-ROM support is used.  This allows ejection and other CD-ROM
+features to work.
 
-Here and below it's "xen_9pfsd" as the type.
+With a stubdom, QEMU is running in the stubdom.  A PV disk is still
+connected into the stubdom, and then QEMU can emulate the CD-ROM into
+the guest.  This removes the need for forcing to a QDISK.  Relax the
+checks to support this.
 
-I tried mounting a xen-9pfsd export in Linux, but mount failed:
-mount: /mnt/9p-b: mount(2) system call failed: Remove I/O error.
-dmesg(1) may have more information after failed mount system call.
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+ tools/libs/light/libxl_disk.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-dmesg doesn't have any other details.
-/sys/bus/xen/devices/9pfs-2/state shows Connected.
+diff --git a/tools/libs/light/libxl_disk.c b/tools/libs/light/libxl_disk.c
+index b65cad33cc..d1f84ef404 100644
+--- a/tools/libs/light/libxl_disk.c
++++ b/tools/libs/light/libxl_disk.c
+@@ -192,7 +192,8 @@ static int libxl__device_disk_setdefault(libxl__gc *gc, uint32_t domid,
+ 
+     /* Force Qdisk backend for CDROM devices of guests with a device model. */
+     if (disk->is_cdrom != 0 &&
+-        libxl__domain_type(gc, domid) == LIBXL_DOMAIN_TYPE_HVM) {
++        libxl__domain_type(gc, domid) == LIBXL_DOMAIN_TYPE_HVM &&
++        !libxl_get_stubdom_id(CTX, domid)) {
+         if (!(disk->backend == LIBXL_DISK_BACKEND_QDISK ||
+               disk->backend == LIBXL_DISK_BACKEND_UNKNOWN)) {
+             LOGD(ERROR, domid, "Backend for CD devices on HVM guests must be Qdisk");
+-- 
+2.43.0
 
-Regards,
-Jason
 
