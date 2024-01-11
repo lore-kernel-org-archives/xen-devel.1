@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB88C47258
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jan 2024 18:34:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.666497.1037177 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B86CC47077
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jan 2024 19:47:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.666513.1037203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rNzsj-0002mp-E7; Thu, 11 Jan 2024 18:34:21 +0000
+	id 1rO118-0001Qu-7q; Thu, 11 Jan 2024 19:47:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 666497.1037177; Thu, 11 Jan 2024 18:34:21 +0000
+Received: by outflank-mailman (output) from mailman id 666513.1037203; Thu, 11 Jan 2024 19:47:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rNzsj-0002me-9v; Thu, 11 Jan 2024 18:34:21 +0000
-Received: by outflank-mailman (input) for mailman id 666497;
- Thu, 11 Jan 2024 18:34:20 +0000
+	id 1rO118-0001Qn-4h; Thu, 11 Jan 2024 19:47:06 +0000
+Received: by outflank-mailman (input) for mailman id 666513;
+ Thu, 11 Jan 2024 19:47:05 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rNzsh-0002jy-W4
- for xen-devel@lists.xenproject.org; Thu, 11 Jan 2024 18:34:19 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rO117-0001Qd-0R; Thu, 11 Jan 2024 19:47:05 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rNzsh-00047r-MH; Thu, 11 Jan 2024 18:34:19 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rNzsh-0000gW-EV; Thu, 11 Jan 2024 18:34:19 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rO116-0005XV-NE; Thu, 11 Jan 2024 19:47:04 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rO116-0008QO-5e; Thu, 11 Jan 2024 19:47:04 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1rO116-0000PS-58; Thu, 11 Jan 2024 19:47:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,154 +44,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=wAXytEso6pk4MBo3awrqwDdyXbJvCt8docbSHZABqHw=; b=Rrd687XydKoaX3Greii8U0AVFa
-	F7efTkKnbhtt4P3ZvsgB+G1fwdS9hY2I0Ed/vuwerGGekbVgdloiz4tQNnQeC9Ti/wOSMLhcWboWU
-	4pMCxiz/EYmUvsi1mJ+aSG8+a/7kcV60S1LRmiqB+DsyhX1mP4H+VVwyOBx5BCzLIg88=;
-From: Julien Grall <julien@xen.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=UFMzj0vG0amwqELjvkFIK3Mk+srU5mWG9+6OhY8YvrM=; b=BN1pDnFbCgUOnO8zJPBLcynw3l
+	jtD3Uof7Yq+ZHUHmUku3fPyiVAtHFTBCDpNT2h+rVSa4wn2+qzMSsCroxs6bjYU7w5t1P2S+7a7xF
+	vPgMrRDOPXoDlOZ9hgX+Wq6rvdPgzRtFpC4oPW4T0IzpPF2yMEIQZ/OG5fQ8v8BfmBKY=;
 To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org,
-	Julien Grall <jgrall@amazon.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 1/2] xen/arm32: head: Rework how the fixmap and early UART mapping are prepared
-Date: Thu, 11 Jan 2024 18:34:09 +0000
-Message-Id: <20240111183410.45566-2-julien@xen.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240111183410.45566-1-julien@xen.org>
-References: <20240111183410.45566-1-julien@xen.org>
-MIME-Version: 1.0
+Message-ID: <osstest-184314-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [linux-linus test] 184314: regressions - FAIL
+X-Osstest-Failures:
+    linux-linus:test-arm64-arm64-xl-credit1:debian-install:fail:regression
+    linux-linus:test-arm64-arm64-xl:debian-install:fail:regression
+    linux-linus:test-arm64-arm64-xl-thunderx:debian-install:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit2:debian-install:fail:regression
+    linux-linus:test-arm64-arm64-xl-xsm:debian-install:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-xsm:debian-install:fail:regression
+    linux-linus:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=de927f6c0b07d9e698416c5b287c521b07694cac
+X-Osstest-Versions-That:
+    linux=0dd3ee31125508cd67f7e7172247f05b7fd1753a
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 11 Jan 2024 19:47:04 +0000
 
-From: Julien Grall <jgrall@amazon.com>
+flight 184314 linux-linus real [real]
+flight 184321 linux-linus real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/184314/
+http://logs.test-lab.xenproject.org/osstest/logs/184321/
 
-Since commit 5e213f0f4d2c ("xen/arm32: head: Widen the use of the
-temporary mapping"), boot_second (used to cover regions like Xen and
-the fixmap) will not be mapped if the identity mapping overlap.
+Regressions :-(
 
-So it is ok to prepare the fixmap table and link it in boot_second
-earlier. With that, the fixmap can also be used earlier via the
-temporary mapping.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-arm64-arm64-xl-credit1  12 debian-install           fail REGR. vs. 184270
+ test-arm64-arm64-xl          12 debian-install           fail REGR. vs. 184270
+ test-arm64-arm64-xl-thunderx 12 debian-install           fail REGR. vs. 184270
+ test-arm64-arm64-xl-credit2  12 debian-install           fail REGR. vs. 184270
+ test-arm64-arm64-xl-xsm      12 debian-install           fail REGR. vs. 184270
+ test-arm64-arm64-libvirt-xsm 12 debian-install           fail REGR. vs. 184270
 
-Therefore split setup_fixmap() in two:
-    * The table is now linked in create_page_tables() because
-      the boot page tables needs to be recreated for every CPU.
-    * The early UART mapping is only added for the boot CPU0 as the
-      fixmap table is not cleared when secondary CPUs boot.
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 184270
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 184270
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 184270
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 184270
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 184270
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 184270
+ test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 184270
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 184270
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
+version targeted for testing:
+ linux                de927f6c0b07d9e698416c5b287c521b07694cac
+baseline version:
+ linux                0dd3ee31125508cd67f7e7172247f05b7fd1753a
 
-----
+Last test of basis   184270  2024-01-07 20:42:19 Z    3 days
+Failing since        184283  2024-01-08 20:10:43 Z    2 days    5 attempts
+Testing same since   184314  2024-01-11 02:43:05 Z    0 days    1 attempts
 
-    Changelog since v1:
-        * Rebase
-        * Move the UART mapping enable_mm_boot_cpu()
----
- xen/arch/arm/arm32/mmu/head.S | 61 ++++++++---------------------------
- 1 file changed, 14 insertions(+), 47 deletions(-)
+------------------------------------------------------------
+550 people touched revisions under test,
+not listing them all
 
-diff --git a/xen/arch/arm/arm32/mmu/head.S b/xen/arch/arm/arm32/mmu/head.S
-index 4e6395e7876d..a90799ad5451 100644
---- a/xen/arch/arm/arm32/mmu/head.S
-+++ b/xen/arch/arm/arm32/mmu/head.S
-@@ -165,11 +165,6 @@
-  * Rebuild the boot pagetable's first-level entries. The structure
-  * is described in mm.c.
-  *
-- * After the CPU enables paging it will add the fixmap mapping
-- * to these page tables, however this may clash with the 1:1
-- * mapping. So each CPU must rebuild the page tables here with
-- * the 1:1 in place.
-- *
-  * Inputs:
-  *   r9 : paddr(start)
-  *   r10: phys offset
-@@ -197,6 +192,10 @@ create_page_tables:
-         add   r5, r5, #PAGE_SIZE            /* r5 := Next table */
- .endr
- 
-+        /* Map the fixmap into boot_second */
-+        mov_w r0, FIXMAP_ADDR(0)
-+        create_table_entry boot_second, xen_fixmap, r0, 2
-+
-         /*
-          * Find the size of Xen in pages and multiply by the size of a
-          * PTE. This will then be compared in the mapping loop below.
-@@ -442,19 +441,20 @@ ENDPROC(enable_secondary_cpu_mm)
- ENTRY(enable_boot_cpu_mm)
-         mov   r6, lr
- 
-+#ifdef CONFIG_EARLY_PRINTK
-+        /*
-+         * Add the UART mapping to the fixmap so the UART can be used
-+         * as the MMU is on. This only need to do done on the boot CPU.
-+         */
-+        mov_w r0, EARLY_UART_VIRTUAL_ADDRESS
-+        create_mapping_entry xen_fixmap, r0, r11, type=PT_DEV_L3
-+#endif
-+
-         bl    create_page_tables
- 
-         /* Address in the runtime mapping to jump to after the MMU is enabled */
--        mov_w lr, 1f
--        b     enable_mmu
--1:
-         mov   lr, r6
--
--        /*
--         * Prepare the fixmap. The function will return to the virtual address
--         * requested by the caller.
--         */
--        b     setup_fixmap
-+        b     enable_mmu
- ENDPROC(enable_boot_cpu_mm)
- 
- /*
-@@ -503,39 +503,6 @@ remove_temporary_mapping:
-         mov  pc, lr
- ENDPROC(remove_temporary_mapping)
- 
--/*
-- * Map the UART in the fixmap (when earlyprintk is used) and hook the
-- * fixmap table in the page tables.
-- *
-- * The fixmap cannot be mapped in create_page_tables because it may
-- * clash with the 1:1 mapping.
-- *
-- * Inputs:
-- *   r10: Physical offset
-- *   r11: Early UART base physical address
-- *
-- * Clobbers r0 - r4
-- */
--setup_fixmap:
--#if defined(CONFIG_EARLY_PRINTK)
--        /* Add UART to the fixmap table */
--        mov_w r0, EARLY_UART_VIRTUAL_ADDRESS
--        create_mapping_entry xen_fixmap, r0, r11, type=PT_DEV_L3
--#endif
--        /* Map fixmap into boot_second */
--        mov_w r0, FIXMAP_ADDR(0)
--        create_table_entry boot_second, xen_fixmap, r0, 2
--        /* Ensure any page table updates made above have occurred. */
--        dsb   nshst
--        /*
--         * The fixmap area will be used soon after. So ensure no hardware
--         * translation happens before the dsb completes.
--         */
--        isb
--
--        mov   pc, lr
--ENDPROC(setup_fixmap)
--
- /* Fail-stop */
- fail:   PRINT("- Boot failed -\r\n")
- 1:      wfe
--- 
-2.40.1
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          fail    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 fail    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-freebsd11-amd64                             pass    
+ test-amd64-amd64-freebsd12-amd64                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-examine-bios                                pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  fail    
+ test-armhf-armhf-xl-credit1                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  fail    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               pass    
+ test-amd64-amd64-libvirt-raw                                 pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-arm64-arm64-xl-thunderx                                 fail    
+ test-amd64-amd64-examine-uefi                                pass    
+ test-amd64-amd64-xl-vhd                                      pass    
+ test-arm64-arm64-xl-vhd                                      pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 58694 lines long.)
 
