@@ -4,49 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77ADEC47077
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jan 2024 18:26:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.666490.1037163 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DAC3C47077
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jan 2024 18:34:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.666498.1037186 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rNzkX-0000Ef-DZ; Thu, 11 Jan 2024 18:25:53 +0000
+	id 1rNzsj-0002zv-T4; Thu, 11 Jan 2024 18:34:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 666490.1037163; Thu, 11 Jan 2024 18:25:53 +0000
+Received: by outflank-mailman (output) from mailman id 666498.1037186; Thu, 11 Jan 2024 18:34:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rNzkX-0000EY-Ai; Thu, 11 Jan 2024 18:25:53 +0000
-Received: by outflank-mailman (input) for mailman id 666490;
- Thu, 11 Jan 2024 18:25:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=c5Cn=IV=amazon.co.uk=prvs=73372ff43=eliasely@srs-se1.protection.inumbo.net>)
- id 1rNzkW-0000ES-5a
- for xen-devel@lists.xenproject.org; Thu, 11 Jan 2024 18:25:52 +0000
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com
- [99.78.197.220]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d7e3ea18-b0ae-11ee-98f0-6d05b1d4d9a1;
- Thu, 11 Jan 2024 19:25:50 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-pdx-2a-m6i4x-af372327.us-west-2.amazon.com)
- ([10.25.36.210]) by smtp-border-fw-80009.pdx80.corp.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jan 2024 18:25:46 +0000
-Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
- (pdx2-ws-svc-p26-lb5-vlan2.pdx.amazon.com [10.39.38.66])
- by email-inbound-relay-pdx-2a-m6i4x-af372327.us-west-2.amazon.com (Postfix)
- with ESMTPS id AA94060BC8; Thu, 11 Jan 2024 18:25:45 +0000 (UTC)
-Received: from EX19MTAEUA001.ant.amazon.com [10.0.43.254:36151]
- by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.1.249:2525]
- with esmtp (Farcaster)
- id 6c268b41-c38a-4f00-846a-4f2358d60a99; Thu, 11 Jan 2024 18:25:44 +0000 (UTC)
-Received: from EX19D018EUA002.ant.amazon.com (10.252.50.146) by
- EX19MTAEUA001.ant.amazon.com (10.252.50.50) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 11 Jan 2024 18:25:40 +0000
-Received: from [10.95.99.82] (10.95.99.82) by EX19D018EUA002.ant.amazon.com
- (10.252.50.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Thu, 11 Jan
- 2024 18:25:36 +0000
+	id 1rNzsj-0002xk-PT; Thu, 11 Jan 2024 18:34:21 +0000
+Received: by outflank-mailman (input) for mailman id 666498;
+ Thu, 11 Jan 2024 18:34:21 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1rNzsj-0002kT-5y
+ for xen-devel@lists.xenproject.org; Thu, 11 Jan 2024 18:34:21 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rNzsi-000483-RD; Thu, 11 Jan 2024 18:34:20 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rNzsi-0000gW-GO; Thu, 11 Jan 2024 18:34:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,126 +40,348 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d7e3ea18-b0ae-11ee-98f0-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1704997550; x=1736533550;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=vQmltPkN+rNAF/jizHqb0pq7BqTmbgPAPV2pSO6QOJ4=;
-  b=a09USRODQ6PrdPinjEM9GlCxOP+XRdEitBwziB1Ht4SicKhZWuOwQ4g/
-   tpuKbxKv1zxaRGS9XJ9Q0ePWoauyTs7zwfiqZ6egB1w5rD6/bHWLnOs1d
-   Sd2+YMsiR8jvoVlXF+ixmzEszaLO13pK23TJ8PxwGa2jXHKrOH498BNzZ
-   k=;
-X-IronPort-AV: E=Sophos;i="6.04,187,1695686400"; 
-   d="scan'208";a="57621535"
-X-Farcaster-Flow-ID: 6c268b41-c38a-4f00-846a-4f2358d60a99
-Message-ID: <0dcc54dd-b729-4e20-95af-fa4907a550c6@amazon.com>
-Date: Thu, 11 Jan 2024 18:25:31 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=qJJI5QEt+6FADEEnoFWOXuZuH35ZFWnjWnhkkG3wgoM=; b=J7WdqMUO2b954/IcmcRKZ5CtdS
+	+494fEPMyjbv+hqOQyA9lU8mcaPC2Wi6KkcgyaPpbSnw2m31SweWjyXA3qqTUpHqMeSfAN47TmwLi
+	wbubPtr3ZWSQQ04qR8hCN/04P7+Bqw+vMGkOZQXtmipWQQYAPP7kQdjt4LIOlir4dTWg=;
+From: Julien Grall <julien@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: julien@xen.org,
+	Julien Grall <jgrall@amazon.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 2/2] xen/arm32: head: Improve logging in head.S
+Date: Thu, 11 Jan 2024 18:34:10 +0000
+Message-Id: <20240111183410.45566-3-julien@xen.org>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240111183410.45566-1-julien@xen.org>
+References: <20240111183410.45566-1-julien@xen.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/22] x86: add a boot option to enable and disable the
- direct map
-Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>
-CC: Hongyan Xia <hongyxia@amazon.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, "Bertrand
- Marquis" <bertrand.marquis@arm.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger.pau@citrix.com>, Julien Grall <jgrall@amazon.com>,
-	<xen-devel@lists.xenproject.org>
-References: <20221216114853.8227-1-julien@xen.org>
- <20221216114853.8227-12-julien@xen.org>
- <fc70f967-34bb-9569-f514-7a3208e746c6@suse.com>
- <bc989828-69b9-4919-9ff3-fdd53fb2def1@amazon.com>
- <c736e4d9-5262-4adf-9e74-9b1be5ab13db@suse.com>
- <4ab710c3-c628-4bbe-9533-88af75a9b9ec@xen.org>
- <ba63d435-e26f-4c76-aedc-c027e8b03a6d@suse.com>
-From: Elias El Yandouzi <eliasely@amazon.com>
-In-Reply-To: <ba63d435-e26f-4c76-aedc-c027e8b03a6d@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.95.99.82]
-X-ClientProxiedBy: EX19D035UWB002.ant.amazon.com (10.13.138.97) To
- EX19D018EUA002.ant.amazon.com (10.252.50.146)
-Precedence: Bulk
+Content-Transfer-Encoding: 8bit
 
+From: Julien Grall <jgrall@amazon.com>
 
+The sequence to enable the MMU on arm32 is quite complex as we may need
+to jump to a temporary mapping to map Xen.
 
-On 11/01/2024 14:09, Jan Beulich wrote:
-> On 11.01.2024 13:25, Julien Grall wrote:
->> Hi Jan,
->>
->> On 11/01/2024 11:53, Jan Beulich wrote:
->>> On 11.01.2024 11:47, Elias El Yandouzi wrote:
->>>> On 22/12/2022 13:24, Jan Beulich wrote:
->>>>> That said, I think this change comes too early in the series, or there is
->>>>> something missing.
->>>>
->>>> At first, I had the same feeling but looking at the rest of the series,
->>>> I can see that the option is needed in follow-up patches.
->>>>
->>>>> As said in reply to patch 10, while there the mapcache
->>>>> is being initialized for the idle domain, I don't think it can be used
->>>>> just yet. Read through mapcache_current_vcpu() to understand why I think
->>>>> that way, paying particular attention to the ASSERT() near the end.
->>>>
->>>> Would be able to elaborate a bit more why you think that? I haven't been
->>>> able to get your point.
->>>
->>> Why exactly I referred to the ASSERT() there I can't reconstruct. The
->>> function as a whole looks problematic though when suddenly the idle
->>> domain also gains a mapcache. I'm sorry, too much context was lost
->>> from over a year ago; all of this will need looking at from scratch
->>> again whenever a new version was posted.
->>>
->>>>> In preparation of this patch here I think the mfn_to_virt() uses have to all
->>>>> disappear from map_domain_page(). Perhaps yet more strongly all
->>>>> ..._to_virt() (except fix_to_virt() and friends) and __va() have to
->>>>> disappear up front from x86 and any code path which can be taken on x86
->>>>> (which may simply mean purging all respective x86 #define-s, without
->>>>> breaking the build in any way).
->>>>
->>>> I agree with you on that one. I think it is what we're aiming for in the
->>>> long term. However, as mentioned by Julien in the cover letter, the
->>>> series's name is a misnomer and I am afraid we won't be able to remove
->>>> all of them with this series. These helpers would still be used for
->>>> xenheap pages or when the direct map is enabled.
->>>
->>> Leaving a hazard of certain uses not having been converted, or even
->>> overlooked in patches going in at around the same time as this series?
->>> I view this as pretty "adventurous".
->>
->> Until we get rid of the directmap completely (which is not the goal of
->> this series), we will need to keep mfn_to_virt().
->>
->> In fact the one you ask to remove in map_domain_page() will need to be
->> replaced with function doing the same thing. The same for the code that
->> will initially prepare the directmap. This to avoid impacting
->> performance when the user still wants to use the directmap.
->>
->> So are you just asking to remove most of the use and rename *_to_virt()
->> to something that is more directmap specific (e.g. mfn_to_directmap_virt())?
-> 
-> Well, in a way. If done this way, mfn_to_virt() (and __va()) should have no
-> users by the end of the series, and it would be obvious that nothing was
-> missed (and by then purging the old ones we could also ensure no new uses
-> would appear).
+Recently, we had one bug in the logic (see f5a49eb7f8b3 ("xen/arm32:
+head: Add mising isb in switch_to_runtime_mapping()") and it was
+a pain to debug because there are no logging.
 
-What about maddr_to_virt()? For instance, in the function 
-xen/arch/x86/dmi_scan.c:dmi_iterate(), we need to access a very low 
-machine address which isn't in the directmap range.
+In order to improve the logging in the MMU switch we need to add
+support for early printk while running on the identity mapping
+and also on the temporary mapping.
 
-How would you proceed? Calling vmap() seems to be a bit overkill for 
-just a temporary mapping and I don't really want to rework this function 
-to use map_domain_page().
+For the identity mapping, we have only the first page of Xen mapped.
+So all the strings should reside in the first page. For that purpose
+a new macro PRINT_ID is introduced.
 
-In such case, how would you proceed? What do you suggest?
+For the temporary mapping, the fixmap is already linked in the temporary
+area (and so does the UART). So we just need to update the register
+storing the UART address (i.e. r11) to point to the UART temporary
+mapping.
 
-Cheers,
+Take the opportunity to introduce mov_w_on_cond in order to
+conditionally execute mov_w and avoid branches.
 
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+
+----
+    Changelog since v1:
+        - Rebase
+        - Move one hunk to the first patch to unbreak compilation
+        - Add more logging
+        - Remove duplicated entry
+---
+ xen/arch/arm/arm32/head.S               |  9 ------
+ xen/arch/arm/arm32/mmu/head.S           | 39 +++++++++++++++++++++++++
+ xen/arch/arm/include/asm/arm32/macros.h | 33 +++++++++++++++------
+ xen/arch/arm/include/asm/asm_defns.h    |  6 ++--
+ xen/arch/arm/include/asm/early_printk.h |  3 ++
+ xen/arch/arm/include/asm/mmu/layout.h   |  4 +++
+ xen/arch/arm/mmu/setup.c                |  3 ++
+ xen/arch/arm/xen.lds.S                  |  1 +
+ 8 files changed, 78 insertions(+), 20 deletions(-)
+
+diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
+index 34ab14a9e228..99d7d4aa63d1 100644
+--- a/xen/arch/arm/arm32/head.S
++++ b/xen/arch/arm/arm32/head.S
+@@ -98,10 +98,6 @@ past_zImage:
+         b     enable_boot_cpu_mm
+ 
+ primary_switched:
+-#ifdef CONFIG_EARLY_PRINTK
+-        /* Use a virtual address to access the UART. */
+-        mov_w r11, EARLY_UART_VIRTUAL_ADDRESS
+-#endif
+         bl    zero_bss
+         PRINT("- Ready -\r\n")
+         /* Setup the arguments for start_xen and jump to C world */
+@@ -142,12 +138,7 @@ GLOBAL(init_secondary)
+ 
+         mov_w lr, secondary_switched
+         b     enable_secondary_cpu_mm
+-
+ secondary_switched:
+-#ifdef CONFIG_EARLY_PRINTK
+-        /* Use a virtual address to access the UART. */
+-        mov_w r11, EARLY_UART_VIRTUAL_ADDRESS
+-#endif
+         PRINT("- Ready -\r\n")
+         /* Jump to C world */
+         mov_w r2, start_secondary
+diff --git a/xen/arch/arm/arm32/mmu/head.S b/xen/arch/arm/arm32/mmu/head.S
+index a90799ad5451..f4abd690b612 100644
+--- a/xen/arch/arm/arm32/mmu/head.S
++++ b/xen/arch/arm/arm32/mmu/head.S
+@@ -298,6 +298,21 @@ enable_mmu:
+         mcr   CP32(r0, HSCTLR)       /* now paging is enabled */
+         isb                          /* Now, flush the icache */
+ 
++        /*
++         * At this stage, the UART address will depend on whether the
++         * temporary mapping was created or not.
++         *
++         * If it was, then the UART will be mapped in the temporary
++         * area. Otherwise, it will be mapped at runtime virtual
++         * mapping.
++         */
++#ifdef CONFIG_EARLY_PRINTK
++        teq   r12, #1               /* Was the temporary mapping created? */
++        mov_w_on_cond eq, r11, TEMPORARY_EARLY_UART_VIRTUAL_ADDRESS
++        mov_w_on_cond ne, r11, EARLY_UART_VIRTUAL_ADDRESS
++#endif
++        PRINT_ID("- Paging turned on -\r\n")
++
+         /*
+          * The MMU is turned on and we are in the 1:1 mapping. Switch
+          * to the runtime mapping.
+@@ -307,6 +322,17 @@ enable_mmu:
+         b     switch_to_runtime_mapping
+ 1:
+         mov   lr, r5                /* Restore LR */
++
++        /*
++         * Now we are running at the runtime address. The UART can
++         * be accessed using its runtime virtual address.
++         */
++#ifdef CONFIG_EARLY_PRINTK
++        mov_w r11, EARLY_UART_VIRTUAL_ADDRESS
++#endif
++
++        PRINT("- Switched to the runtime mapping -\r\n")
++
+         /*
+          * At this point, either the 1:1 map or the temporary mapping
+          * will be present. The former may clash with other parts of the
+@@ -348,12 +374,14 @@ switch_to_runtime_mapping:
+         teq   r12, #0
+         beq   ready_to_switch
+ 
++        PRINT_ID("- Switching to the temporary mapping -\r\n")
+         /* We are still in the 1:1 mapping. Jump to the temporary Virtual address. */
+         mov_w r0, 1f
+         add   r0, r0, #XEN_TEMPORARY_OFFSET /* r0 := address in temporary mapping */
+         mov   pc, r0
+ 
+ 1:
++        PRINT("- Running on the temporary mapping  -\r\n")
+         /* Remove boot_second_id */
+         mov   r2, #0
+         mov   r3, #0
+@@ -364,6 +392,8 @@ switch_to_runtime_mapping:
+ 
+         flush_xen_tlb_local r0
+ 
++        PRINT("- 1:1 mapping removed -\r\n")
++
+         /* Map boot_second into boot_pgtable */
+         mov_w r0, XEN_VIRT_START
+         create_table_entry boot_pgtable, boot_second, r0, 1
+@@ -376,7 +406,10 @@ switch_to_runtime_mapping:
+          */
+         isb
+ 
++        PRINT("- Runtime mapping mapped -\r\n")
+ ready_to_switch:
++        PRINT_ID("- Jumping to runtime address -\r\n")
++
+         mov   pc, lr
+ ENDPROC(switch_to_runtime_mapping)
+ 
+@@ -404,6 +437,8 @@ ENTRY(enable_secondary_cpu_mm)
+         mov_w lr, 1f
+         b     enable_mmu
+ 1:
++        PRINT("- Switching to the runtime page-tables -\r\n")
++
+         /*
+          * Non-boot CPUs need to move on to the proper pagetables, which were
+          * setup in prepare_secondary_mm.
+@@ -468,6 +503,8 @@ ENDPROC(enable_boot_cpu_mm)
+  * Clobbers r0 - r3
+  */
+ remove_identity_mapping:
++        PRINT("- Removing the identity mapping -\r\n")
++
+         /* r2:r3 := invalid page-table entry */
+         mov   r2, #0x0
+         mov   r3, #0x0
+@@ -488,6 +525,8 @@ ENDPROC(remove_identity_mapping)
+  * Clobbers r0 - r3
+  */
+ remove_temporary_mapping:
++        PRINT("- Removing the temporary mapping -\r\n")
++
+         /* r2:r3 := invalid page-table entry */
+         mov   r2, #0
+         mov   r3, #0
+diff --git a/xen/arch/arm/include/asm/arm32/macros.h b/xen/arch/arm/include/asm/arm32/macros.h
+index b84666c764d4..db681a7c7eaa 100644
+--- a/xen/arch/arm/include/asm/arm32/macros.h
++++ b/xen/arch/arm/include/asm/arm32/macros.h
+@@ -9,9 +9,13 @@
+  * Move an immediate constant into a 32-bit register using movw/movt
+  * instructions.
+  */
++.macro mov_w_on_cond cond, reg, word
++        movw\cond  \reg, #:lower16:\word
++        movt\cond  \reg, #:upper16:\word
++.endm
++
+ .macro mov_w reg, word
+-        movw  \reg, #:lower16:\word
+-        movt  \reg, #:upper16:\word
++        mov_w_on_cond al, \reg, \word
+ .endm
+ 
+ /*
+@@ -29,16 +33,26 @@
+ 
+ #ifdef CONFIG_EARLY_PRINTK
+ /*
+- * Macro to print a string to the UART, if there is one.
++ * Macros to print a string to the UART, if there is one.
++ *
++ * There are multiple flavors:
++ *  - PRINT_SECT(section, string): The @string will be located in @section
++ *  - PRINT(): The string will be located in .rodata.str.
++ *  - PRINT_ID(): When Xen is running on the Identity Mapping, it is
++ *    only possible to have a limited amount of Xen. This will create
++ *    the string in .rodata.idmap which will always be mapped.
+  *
+  * Clobbers r0 - r3
+  */
+-#define PRINT(_s)           \
+-        mov   r3, lr       ;\
+-        adr_l r0, 98f      ;\
+-        bl    asm_puts     ;\
+-        mov   lr, r3       ;\
+-        RODATA_STR(98, _s)
++#define PRINT_SECT(section, string)         \
++        mov   r3, lr                       ;\
++        adr_l r0, 98f                      ;\
++        bl    asm_puts                     ;\
++        mov   lr, r3                       ;\
++        RODATA_SECT(section, 98, string)
++
++#define PRINT(string) PRINT_SECT(.rodata.str, string)
++#define PRINT_ID(string) PRINT_SECT(.rodata.idmap, string)
+ 
+ /*
+  * Macro to print the value of register \rb
+@@ -54,6 +68,7 @@
+ 
+ #else /* CONFIG_EARLY_PRINTK */
+ #define PRINT(s)
++#define PRINT_ID(s)
+ 
+ .macro print_reg rb
+ .endm
+diff --git a/xen/arch/arm/include/asm/asm_defns.h b/xen/arch/arm/include/asm/asm_defns.h
+index 29a9dbb002fa..ec803c0a370c 100644
+--- a/xen/arch/arm/include/asm/asm_defns.h
++++ b/xen/arch/arm/include/asm/asm_defns.h
+@@ -22,11 +22,13 @@
+ # error "unknown ARM variant"
+ #endif
+ 
+-#define RODATA_STR(label, msg)                  \
+-.pushsection .rodata.str, "aMS", %progbits, 1 ; \
++#define RODATA_SECT(section, label, msg)         \
++.pushsection section, "aMS", %progbits, 1 ;     \
+ label:  .asciz msg;                             \
+ .popsection
+ 
++#define RODATA_STR(label, msg) RODATA_SECT(.rodata.str, label, msg)
++
+ #define ASM_INT(label, val)                 \
+     .p2align 2;                             \
+ label: .long (val);                         \
+diff --git a/xen/arch/arm/include/asm/early_printk.h b/xen/arch/arm/include/asm/early_printk.h
+index c5149b2976da..c1e84f8b0009 100644
+--- a/xen/arch/arm/include/asm/early_printk.h
++++ b/xen/arch/arm/include/asm/early_printk.h
+@@ -19,6 +19,9 @@
+ #define EARLY_UART_VIRTUAL_ADDRESS \
+     (FIXMAP_ADDR(FIXMAP_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
+ 
++#define TEMPORARY_EARLY_UART_VIRTUAL_ADDRESS \
++    (TEMPORARY_FIXMAP_ADDR(FIXMAP_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
++
+ #endif /* !CONFIG_EARLY_PRINTK */
+ 
+ #endif
+diff --git a/xen/arch/arm/include/asm/mmu/layout.h b/xen/arch/arm/include/asm/mmu/layout.h
+index eac7eef885d6..a3b546465b5a 100644
+--- a/xen/arch/arm/include/asm/mmu/layout.h
++++ b/xen/arch/arm/include/asm/mmu/layout.h
+@@ -116,6 +116,10 @@
+       (TEMPORARY_AREA_FIRST_SLOT << XEN_PT_LEVEL_SHIFT(1)))
+ 
+ #define TEMPORARY_XEN_VIRT_START    TEMPORARY_AREA_ADDR(XEN_VIRT_START)
++#define TEMPORARY_FIXMAP_VIRT_START TEMPORARY_AREA_ADDR(FIXMAP_VIRT_START)
++
++#define TEMPORARY_FIXMAP_ADDR(n)                    \
++     (TEMPORARY_FIXMAP_VIRT_START + (n) * PAGE_SIZE)
+ 
+ #else /* ARM_64 */
+ 
+diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
+index d5264e51bc44..72725840b6b7 100644
+--- a/xen/arch/arm/mmu/setup.c
++++ b/xen/arch/arm/mmu/setup.c
+@@ -120,7 +120,10 @@ static void __init __maybe_unused build_assertions(void)
+ #ifdef CONFIG_ARM_32
+     CHECK_SAME_SLOT(first, TEMPORARY_XEN_VIRT_START, DOMHEAP_VIRT_START);
+     CHECK_DIFFERENT_SLOT(first, XEN_VIRT_START, TEMPORARY_XEN_VIRT_START);
++    CHECK_SAME_SLOT(first, TEMPORARY_XEN_VIRT_START,
++                    TEMPORARY_FIXMAP_VIRT_START);
+     CHECK_SAME_SLOT(second, XEN_VIRT_START, TEMPORARY_XEN_VIRT_START);
++    CHECK_SAME_SLOT(second, FIXMAP_VIRT_START, TEMPORARY_FIXMAP_VIRT_START);
+ #endif
+ 
+ #undef CHECK_SAME_SLOT
+diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+index 59b80d122fd0..20598c6963ce 100644
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -35,6 +35,7 @@ SECTIONS
+        _idmap_start = .;
+        *(.text.header)
+        *(.text.idmap)
++       *(.rodata.idmap)
+        _idmap_end = .;
+ 
+        *(.text.cold)
 -- 
-Elias
+2.40.1
+
 
