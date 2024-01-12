@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA470C4707C
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jan 2024 11:04:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.666809.1037691 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F2AC4706C
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jan 2024 11:05:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.666812.1037702 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rOFL3-0004ie-Hw; Fri, 12 Jan 2024 11:04:37 +0000
+	id 1rOFLz-0005Qt-RL; Fri, 12 Jan 2024 11:05:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 666809.1037691; Fri, 12 Jan 2024 11:04:37 +0000
+Received: by outflank-mailman (output) from mailman id 666812.1037702; Fri, 12 Jan 2024 11:05:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rOFL3-0004iX-FK; Fri, 12 Jan 2024 11:04:37 +0000
-Received: by outflank-mailman (input) for mailman id 666809;
- Fri, 12 Jan 2024 11:04:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rOFLz-0005Qm-OT; Fri, 12 Jan 2024 11:05:35 +0000
+Received: by outflank-mailman (input) for mailman id 666812;
+ Fri, 12 Jan 2024 11:05:34 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=nnUc=IW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rOFL2-0004i3-DZ
- for xen-devel@lists.xenproject.org; Fri, 12 Jan 2024 11:04:36 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5e6d384f-b13a-11ee-98f0-6d05b1d4d9a1;
- Fri, 12 Jan 2024 12:04:34 +0100 (CET)
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2cd0f4797aaso69402131fa.0
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jan 2024 03:04:34 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- m6-20020a0566380ac600b0046993034c91sm830667jab.77.2024.01.12.03.04.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Jan 2024 03:04:33 -0800 (PST)
+ (envelope-from <julien@xen.org>) id 1rOFLy-0005QL-I5
+ for xen-devel@lists.xenproject.org; Fri, 12 Jan 2024 11:05:34 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rOFLy-0007Ga-17; Fri, 12 Jan 2024 11:05:34 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rOFLx-0007OC-SO; Fri, 12 Jan 2024 11:05:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,106 +41,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e6d384f-b13a-11ee-98f0-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1705057474; x=1705662274; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=X/lKaL3NoHZ96NAbSyFV4LhVOU5rBsgz5d+bVpr/DHs=;
-        b=LOAu9p1KtDMTxFcVr5x7RzqnBrQytF8bMF1vKGuUTF0xlA1DwgE0bdoF4DXhs2w3i7
-         8PdYoBfq/vk+nR0A2rsrP5jTUEfaEEH66TtBu0Gbip38xCzbzu7fwStjgGRfxz5sfsrW
-         TlFC93+8wbh7s7QjmbGZ80AJp4CPTvZThOAkIWK90HMpiNwu6MFnodyfC9qg2cEicwjJ
-         mMrIgA/dDg9B5pKMZ0eSZbyv/3oZG3uyOzh9mzCkS+iptVB+FK58ThqGhZOmWfxs9SEs
-         CnqfmwEILk3XHKMrZ3RlCLYunDpfeYhvai6ZxiMSqDQDArE0nIyjCw9ltOY98TUCrJEF
-         YHBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705057474; x=1705662274;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=X/lKaL3NoHZ96NAbSyFV4LhVOU5rBsgz5d+bVpr/DHs=;
-        b=K0xmHeUnBDVkxdpRG9wwRvQlM/7qWhSwRlXP4B5QImIt+oENon6SVnta2waybTTSTE
-         +WbJMN9dh2MKpAqN6sG3CcNX2ddBPtLmxyNPr6zfWO6Igzoeuz9OpE0lSH+b4vRIZ35P
-         z3Vue6O9Xfe2dlzlsVSPatWRNl5kQ2S9R40FceuN46XbJKgEaneE/DMarLRmuf3I6TVh
-         WXBJotveYBLcqR8l4aZ0w5K5c3XpFyKk5tzD/18xhnkzEKZ6NwIky9hEh3A/jKp0TXpi
-         TShPj4UIq2cmSeFB7xSv1B8PO4iCbyPziLA4eUV3cetBklwMDWboMLKsK3Dxz21dPViO
-         8CLQ==
-X-Gm-Message-State: AOJu0YzyHtJat+M3kjl74DccmBy/e8+sKkO70sian1yorzSTqsbmtVUu
-	CRTjbdB//OJlf/sGLcKm7hxIDa8PPWFV
-X-Google-Smtp-Source: AGHT+IH+l4fHfaC0FgxryHhOY46cy4PiwudoxB+no+NdzEr5gGMTHvpsqw6zUwdUaYBil0GGh5j7cA==
-X-Received: by 2002:a2e:80cc:0:b0:2cd:122a:7ee1 with SMTP id r12-20020a2e80cc000000b002cd122a7ee1mr591336ljg.36.1705057474127;
-        Fri, 12 Jan 2024 03:04:34 -0800 (PST)
-Message-ID: <b25c0ff6-b2da-4e5b-b6b9-dca7843816d2@suse.com>
-Date: Fri, 12 Jan 2024 12:04:30 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=LdRAXqyKlIxX6ztq316dIx8ul6QQBxSvOYeooF+/5PY=; b=iXmpdCa4cNk9cHgnsApbbwyUT+
+	Nh8xQcxVC94vapUCWn9HhebJlIUDktWSW/G9sdGFUqSEtQ938ink5ys206nhKRXRkWpt6SBZhIARF
+	LQ20b8KZGEZBxNQHklIufLbuLt3lZx79lgbWhK7q7sUK6mzUrWSRv/JlDcbbYuCHEKeo=;
+Message-ID: <31997e9d-35f7-4916-b6d7-de38b2697ef7@xen.org>
+Date: Fri, 12 Jan 2024 11:05:32 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] x86/vmx: Disallow the use of inactivity states
-Content-Language: en-US
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Reima Ishii <ishiir@g.ecc.u-tokyo.ac.jp>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>,
- Kevin Tian <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>,
- Takahiro Shinagawa <shina@ecc.u-tokyo.ac.jp>,
- George Dunlap <george.dunlap@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20240111231323.4043461-1-andrew.cooper3@citrix.com>
- <20240111231323.4043461-4-andrew.cooper3@citrix.com>
- <d9d9ee2b-ff95-4d5e-bb81-b1722681a4a5@suse.com>
- <8225cfd3-73d6-4a93-92b4-185399ab0ad3@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <8225cfd3-73d6-4a93-92b4-185399ab0ad3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2] xen/arm: bootfdt: Harden handling of malformed mem
+ reserve map
+Content-Language: en-GB
+To: Michal Orzel <michal.orzel@amd.com>,
+ Shawn Anastasio <sanastasio@raptorengineering.com>,
+ xen-devel@lists.xenproject.org
+Cc: Timothy Pearson <tpearson@raptorengineering.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20240111232422.2610495-1-sanastasio@raptorengineering.com>
+ <62bb1962-6668-4243-b41d-5aca5d3b7ecd@amd.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <62bb1962-6668-4243-b41d-5aca5d3b7ecd@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 12.01.2024 11:43, Andrew Cooper wrote:
-> On 12/01/2024 10:37 am, Jan Beulich wrote:
->> On 12.01.2024 00:13, Andrew Cooper wrote:
->>> --- a/xen/arch/x86/hvm/vmx/vmx.c
->>> +++ b/xen/arch/x86/hvm/vmx/vmx.c
->>> @@ -1551,7 +1551,10 @@ static void cf_check vmx_set_nonreg_state(struct vcpu *v,
->>>  {
->>>      vmx_vmcs_enter(v);
->>>  
->>> -    __vmwrite(GUEST_ACTIVITY_STATE, nrs->vmx.activity_state);
->>> +    if ( nrs->vmx.activity_state )
->>> +        domain_crash(v->domain, "Attempt to set activity_state %#lx\n",
->>> +                     nrs->vmx.activity_state);
->> Might be useful to log the offending vCPU here?
+Hi,
+
+On 12/01/2024 08:56, Michal Orzel wrote:
 > 
-> Already covered.  the innards of __domain_crash() does:
 > 
->     else if ( d == current->domain )
->     {
->         printk("Domain %d (vcpu#%d) crashed on cpu#%d:\n",
->         ...
+> On 12/01/2024 00:24, Shawn Anastasio wrote:
+>>
+>>
+>> The early_print_info routine in bootfdt.c incorrectly stores the result
+>> of a call to fdt_num_mem_rsv() in an unsigned int, which results in the
+>> negative error code being interpreted incorrectly in a subsequent loop
+>> in the case where the device tree is malformed. Fix this by properly
+>> checking the return code for an error and calling panic().
+>>
+>> Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-Except that afaict v != current here at all times (at least as far as
-current use of the function goes).
+Committed.
 
-Jan
+Cheers,
+
+-- 
+Julien Grall
 
