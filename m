@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 269CCC4707C
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jan 2024 11:05:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.666814.1037709 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1382AC4706C
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jan 2024 11:07:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.666827.1037723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rOFM0-0005UD-7l; Fri, 12 Jan 2024 11:05:36 +0000
+	id 1rOFNI-0006aF-Jm; Fri, 12 Jan 2024 11:06:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 666814.1037709; Fri, 12 Jan 2024 11:05:36 +0000
+Received: by outflank-mailman (output) from mailman id 666827.1037723; Fri, 12 Jan 2024 11:06:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rOFM0-0005U1-0X; Fri, 12 Jan 2024 11:05:36 +0000
-Received: by outflank-mailman (input) for mailman id 666814;
- Fri, 12 Jan 2024 11:05:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=flvc=IW=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rOFLz-0005QQ-0D
- for xen-devel@lists.xenproject.org; Fri, 12 Jan 2024 11:05:35 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 812dec73-b13a-11ee-9b0f-b553b5be7939;
- Fri, 12 Jan 2024 12:05:33 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-40e68d0dc2aso847055e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jan 2024 03:05:33 -0800 (PST)
-Received: from localhost ([213.195.127.70]) by smtp.gmail.com with ESMTPSA id
- m22-20020a05600c4f5600b0040d5b849f38sm9376455wmq.0.2024.01.12.03.05.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 03:05:32 -0800 (PST)
+	id 1rOFNI-0006a8-Ex; Fri, 12 Jan 2024 11:06:56 +0000
+Received: by outflank-mailman (input) for mailman id 666827;
+ Fri, 12 Jan 2024 11:06:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=nnUc=IW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rOFNH-0006WZ-OW
+ for xen-devel@lists.xenproject.org; Fri, 12 Jan 2024 11:06:55 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b23a1bdb-b13a-11ee-98f0-6d05b1d4d9a1;
+ Fri, 12 Jan 2024 12:06:55 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-50eabd1c701so7724963e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Jan 2024 03:06:55 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ f12-20020a02cacc000000b0046e61d0c894sm251302jap.161.2024.01.12.03.06.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 12 Jan 2024 03:06:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,144 +47,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 812dec73-b13a-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: b23a1bdb-b13a-11ee-98f0-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1705057532; x=1705662332; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=0fKtKx8f4NRRmDQBJOBk21ATr4s902HPCm3N4KyZPKA=;
-        b=PvCSms6J5C0my5XlnLbsDvhJein3WfBTcFDq+iy1tXcj6XZu9xF8zkhsfwXiz4HZQE
-         W8i9iec8Yh0cMz8GBOY8eeWO1C38I37FoDgi6Gk8HlDUp0yCrFTSsudlgZQ/io0UTb/E
-         nAG6qmzZM2VdsgWWnXVjUZmyel5Wmtnol/bZA=
+        d=suse.com; s=google; t=1705057615; x=1705662415; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=2OjQ+fqyf18UHDjgD2Tw6o+ti9mI3oLbjkww6S/7H7Q=;
+        b=eC+1btOfNTAYSC0hH0YQknhWV2YbU6+gdrkAfUP/Ksj7/n5WCBXZnpNz6dwr381NLg
+         5/pHfKQrCR2f2IAOGSAa0dpkv3v0qhwbJjTaU1qED4aIpsYK0h7I3gEcPSo7YjTL8uNa
+         218L2R/H11Hytk117exqvZLc/6PLOVVB/sdl6ezAepB3KKUsf8TRopGgjOjXsqahRZFw
+         zQgu9ylWhyHnGJSdPxfqlE/ZMBRqQr5hU+V3z36R4AgCZq/9/NLyGhiYevdatDL+bOdZ
+         aoKzCt44qL+qiQ6q6RY7eosZp2kkGacDfFYFGneX2ZbTCYgPjbsZoumHSjPBFvAPEIeu
+         ie1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705057532; x=1705662332;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
+        d=1e100.net; s=20230601; t=1705057615; x=1705662415;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=0fKtKx8f4NRRmDQBJOBk21ATr4s902HPCm3N4KyZPKA=;
-        b=wN0+XgBHKxqHexfxcoxlS22m7O8u/xLM6ZS/HVmEjVlsPI+AyrMRSk1vHvYoDKY3Xx
-         6pkJ02NNmspnFesmza9+JNp33NlO7ypGJxOB7P/7z/hbGyV7kMjWy10VAgqtRV8zwLIY
-         0FlyVR50ixegs7Lo7zTkCMjJ7pCIiL3romY1LT/iWq4l6y34tndqxh/b10W9its4q155
-         VhLXWzYbgGvYkMGvMJgpQvmZVAwDUw6vLsbmWnWKIR6BBDu8TNQBKucN7S3r0kQZ9RAt
-         FY5xBwKgs19lmEMBsulMfno66ocVP3mLk6gpph1MXXmM9EgBAPWnoob4bCC/2WOAP8u5
-         fxVg==
-X-Gm-Message-State: AOJu0Yz3xnqZM/sP1HgNgG2HdjzlCMhDdJph84MXa2/mwO0PZFvuqtOa
-	73KLlH7ybCt/+qfIyieWlu1SboA2DZ9X/g==
-X-Google-Smtp-Source: AGHT+IE6YA4uifsZlbkks0kaKplgSxGM6yO0CKaqEnDQnMCdUVKCG3iSvWealcHIfJtFApfrljSptw==
-X-Received: by 2002:a05:600c:1885:b0:40e:50d7:6902 with SMTP id x5-20020a05600c188500b0040e50d76902mr414056wmp.64.1705057532462;
-        Fri, 12 Jan 2024 03:05:32 -0800 (PST)
-Date: Fri, 12 Jan 2024 12:05:31 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: David Woodhouse <dwmw2@infradead.org>
-Cc: Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] x86/hvm: don't expose XENFEAT_hvm_pirqs by default
-Message-ID: <ZaEc-3tVnpFWVxLr@macbook>
-References: <20240110095311.61809-1-roger.pau@citrix.com>
- <238b79f5-0510-4306-9c32-19dade08e819@suse.com>
- <96182bf50bd52cc16b8378ff571b6954144b0723.camel@infradead.org>
+        bh=2OjQ+fqyf18UHDjgD2Tw6o+ti9mI3oLbjkww6S/7H7Q=;
+        b=t/38Q3WFlneh+b7JY619iVIFe50j3xYf6mouYkx4z648X60hT0cyAPOs4pNKo64GRr
+         ufgYxnLXn15qPD39VvuC/Tptq5vh5KvJU4InYu/ruKMtBDr4SxScr6He0uriVLA0NGrW
+         M/7egGMhbKbwWrSiqQYvOvc9jSNwU8Djcv6vqzqzBZbuPajitX86sH3sfhbRaMllAUrs
+         ZdZ+YiDCEIU3jJ7ZQI+v9rdKsfajh6Ta3l/g65KvhkYSS7UlZcTDoIshwZJ/ftqmB/1c
+         GZlIigFoT962VdvyJpghsYY9adlNzypQ+DFxaD0vULPu/sk6dyNYrZu5dk5E/BVca+rV
+         efsg==
+X-Gm-Message-State: AOJu0YwfP8BWMLGq/9hkdjyrMgs0bhrD9wrG3Z6elm4UG9ft+m2Oi2sc
+	viDvNkf8cNHXOPYRDcvZMyEwr0SZuWfc
+X-Google-Smtp-Source: AGHT+IFOH0hNpGp9R5af2ewsCa3thZ5k3KRU83thmDsLWbyjdMa2xHn9gvuPnlbm9hXgoYIC4+6hoA==
+X-Received: by 2002:a19:ca16:0:b0:50e:769b:7163 with SMTP id a22-20020a19ca16000000b0050e769b7163mr454744lfg.138.1705057614815;
+        Fri, 12 Jan 2024 03:06:54 -0800 (PST)
+Message-ID: <05589cba-6779-4794-9684-470589fe2383@suse.com>
+Date: Fri, 12 Jan 2024 12:06:51 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <96182bf50bd52cc16b8378ff571b6954144b0723.camel@infradead.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 21/34] xen/riscv: introduce p2m.h
+Content-Language: en-US
+To: Julien Grall <julien@xen.org>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Shawn Anastasio <sanastasio@raptorengineering.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, xen-devel@lists.xenproject.org
+References: <cover.1703255175.git.oleksii.kurochko@gmail.com>
+ <c3b1f24aea1ba01505697717b240c8d036abfee1.1703255175.git.oleksii.kurochko@gmail.com>
+ <abeafa19-7867-46b2-bc0e-b39eaa0f5036@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <abeafa19-7867-46b2-bc0e-b39eaa0f5036@xen.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 11, 2024 at 05:47:30PM +0000, David Woodhouse wrote:
-> On Wed, 2024-01-10 at 11:26 +0100, Jan Beulich wrote:
-> > On 10.01.2024 10:53, Roger Pau Monne wrote:
-> > > The HVM pirq feature allows routing interrupts from both physical and emulated
-> > > devices over event channels, this was done a performance improvement.  However
-> > > its usage is fully undocumented, and the only reference implementation is in
-> > > Linux.  It defeats the purpose of local APIC hardware virtualization, because
-> > > when using it interrupts avoid the usage of the local APIC altogether.
-> > 
-> > So without sufficient APIC acceleration, isn't this arranging for degraded
-> > performance then? IOW should the new default perhaps be dependent on the
-> > degree of APIC acceleration?
+On 12.01.2024 11:39, Julien Grall wrote:
+> On 22/12/2023 15:13, Oleksii Kurochko wrote:
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> Changes in V3:
+>>   - add SPDX
+>>   - drop unneeded for now p2m types.
+>>   - return false in all functions implemented with BUG() inside.
+>>   - update the commit message
+>> ---
+>> Changes in V2:
+>>   - Nothing changed. Only rebase.
+>> ---
+>>   xen/arch/ppc/include/asm/p2m.h   |   3 +-
+>>   xen/arch/riscv/include/asm/p2m.h | 102 +++++++++++++++++++++++++++++++
+>>   2 files changed, 103 insertions(+), 2 deletions(-)
+>>   create mode 100644 xen/arch/riscv/include/asm/p2m.h
+>>
+>> diff --git a/xen/arch/ppc/include/asm/p2m.h b/xen/arch/ppc/include/asm/p2m.h
+>> index 25ba054668..3bc05b7c05 100644
+>> --- a/xen/arch/ppc/include/asm/p2m.h
+>> +++ b/xen/arch/ppc/include/asm/p2m.h
+>> @@ -50,8 +50,7 @@ static inline void memory_type_changed(struct domain *d)
+>>   static inline int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
+>>                                                           unsigned int order)
+>>   {
+>> -    BUG_ON("unimplemented");
+>> -    return 1;
+>> +    return -EOPNOTSUPP;
+>>   }
+>>   
+>>   static inline int guest_physmap_add_entry(struct domain *d,
+>> diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+>> new file mode 100644
+>> index 0000000000..d270ef6635
+>> --- /dev/null
+>> +++ b/xen/arch/riscv/include/asm/p2m.h
+>> @@ -0,0 +1,102 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>> +#ifndef __ASM_RISCV_P2M_H__
+>> +#define __ASM_RISCV_P2M_H__
+>> +
+>> +#include <asm/page-bits.h>
+>> +
+>> +#define paddr_bits PADDR_BITS
+>> +
+>> +/*
+>> + * List of possible type for each page in the p2m entry.
+>> + * The number of available bit per page in the pte for this purpose is 4 bits.
+>> + * So it's possible to only have 16 fields. If we run out of value in the
+>> + * future, it's possible to use higher value for pseudo-type and don't store
+>> + * them in the p2m entry.
+>> + */
 > 
-> In fact Linux already declines to use MSI → PIRQ routing if APIC
-> acceleration is enabled.
+> This looks like a verbatim copy from Arm. Did you actually check RISC-V 
+> has 4 bits available in the PTE to store this value?
 > 
-> static void __init xen_hvm_msi_init(void)
-> {
->         if (!apic_is_disabled) {
->                 /*
->                  * If hardware supports (x2)APIC virtualization (as indicated
->                  * by hypervisor's leaf 4) then we don't need to use pirqs/
->                  * event channels for MSI handling and instead use regular
->                  * APIC processing
->                  */
->                 uint32_t eax = cpuid_eax(xen_cpuid_base() + 4);
+>> +typedef enum {
+>> +    p2m_invalid = 0,    /* Nothing mapped here */
+>> +    p2m_ram_rw,         /* Normal read/write guest RAM */
 > 
->                 if (((eax & XEN_HVM_CPUID_X2APIC_VIRT) && x2apic_mode) ||
->                     ((eax & XEN_HVM_CPUID_APIC_ACCESS_VIRT) && boot_cpu_has(X86_FEATURE_APIC)))
->                         return;
->         }
->         xen_setup_pci_msi();
-> }
+> s/guest/domain/ as this also applies for dom0.
 > 
-> > > It has also been reported to not work properly with certain devices, at least
-> > > when using some AMD GPUs Linux attempts to route interrupts over event
-> > > channels, but Xen doesn't correctly detect such routing, which leads to the
-> > > hypervisor complaining with:
-> > > 
-> > > (XEN) d15v0: Unsupported MSI delivery mode 7 for Dom15
-> > > 
-> > > When MSIs are attempted to be routed over event channels the entry delivery
-> > > mode is set to ExtINT, but Xen doesn't detect such routing and attempts to
-> > > inject the interrupt following the native MSI path, and the ExtINT delivery
-> > > mode is not supported.
-> > 
-> > Shouldn't this be properly addressed nevertheless? The way it's described
-> > it sounds as if MSI wouldn't work at all this way; I can't spot why the
-> > issue would only be "with certain devices". Yet that in turn doesn't look
-> > to be very likely - pass-through use cases, in particular SR-IOV ones,
-> > would certainly have noticed.
+>> +} p2m_type_t;
+>> +
+>> +#include <xen/p2m-common.h>
+>> +
+>> +static inline int get_page_and_type(struct page_info *page,
+>> +                                    struct domain *domain,
+>> +                                    unsigned long type)
+>> +{
+>> +    BUG();
 > 
-> I agree. The MSI to PIRQ routing thing is *awful*, especially the way
-> that Xen/QEMU snoops on writes to the MSI table while the target is
-> *masked*, and then Xen unmasks the MSI instead of the guest doing so.
+> I understand your goal with the BUG() but I find it risky. This is not a 
+> problem right now, it is more when we will decide to have RISC-V 
+> supported. You will have to go through all the BUG() to figure out which 
+> one are warrant or not.
 > 
-> But it does work, and there are three implementations of it on the
-> hypervisor side now (Xen itself, QEMU and the Nitro hypervisor).
+> To reduce the load, I would recommend to switch to ASSERT_UNREACHABLE() 
+> (or maybe introduced a different macro) that would lead to a crash on 
+> debug build but propagate the error normally on production build.
 
-There's only one implementation in Xen, that's split between the
-hypervisor and QEMU.  IOW: it's not like the QEMU and the hypervisor
-sides are independent.
+Elsewhere BUG_ON("unimplemented") is used to indicate such cases.
+Can't this be used here (and then uniformly elsewhere) as well?
 
-It's also only used by Linux, I don't know of any other guest having
-implemented support for them (thankfully I should say).
-
-> We
-> should fix the bug which is being reported, but I don't see why it's
-> necessary to completely disable the feature.
-
-It's not just this bug, the feature is fully undocumented, and every
-time there's an issue reported against interrupt delivery on HVM Linux
-we need to reverse engineer how this is supposed to work.
-
-Not to mention the MSI breakage it introduces by re-using the MSI
-data and address fields for Xen specific purposes.
-
-Note that this commit is not removing the code, just disabling it by
-default.  Users can still enable it using hvm_pirq option on xl.cfg
-(and toolstacks can use the domctl create flag to enable it).
-
-IMO if someone whats to make a case for having HVM PIRQs enabled by
-default, we first need documentation about how it's supposed to work,
-plus all the reported bugs fixed.  I have to admit I would probably be
-reluctant to enable it by default even then.
-
-Apart from the original issue, Xenia has also reported that when
-having the option enabled they see some unexpected scheduling
-imbalance, that's gone when the option is disabled:
-
-https://lore.kernel.org/xen-devel/6fe776cd-3fa6-421f-9d02-9350e85d5612@amd.com/
-
-Regards, Roger.
+Jan
 
