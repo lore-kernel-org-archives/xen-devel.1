@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0791CC47077
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 14:37:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.667804.1039429 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 812FDC47DA9
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 14:37:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.667806.1039448 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPkZ1-00077X-8f; Tue, 16 Jan 2024 14:37:15 +0000
+	id 1rPkZ2-0007ar-Nr; Tue, 16 Jan 2024 14:37:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 667804.1039429; Tue, 16 Jan 2024 14:37:15 +0000
+Received: by outflank-mailman (output) from mailman id 667806.1039448; Tue, 16 Jan 2024 14:37:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPkZ1-00077Q-4D; Tue, 16 Jan 2024 14:37:15 +0000
-Received: by outflank-mailman (input) for mailman id 667804;
- Tue, 16 Jan 2024 14:37:14 +0000
+	id 1rPkZ2-0007ak-Jv; Tue, 16 Jan 2024 14:37:16 +0000
+Received: by outflank-mailman (input) for mailman id 667806;
+ Tue, 16 Jan 2024 14:37:15 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rPkZ0-00077E-4T
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 14:37:14 +0000
+ (envelope-from <julien@xen.org>) id 1rPkZ1-0007Cm-FO
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 14:37:15 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1rPkYy-0002vs-R3; Tue, 16 Jan 2024 14:37:12 +0000
+ id 1rPkZ1-0002wE-6Q; Tue, 16 Jan 2024 14:37:15 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1rPkYy-0000Te-IK; Tue, 16 Jan 2024 14:37:12 +0000
+ id 1rPkZ0-0000Te-V0; Tue, 16 Jan 2024 14:37:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,11 +43,11 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
-	Subject:Cc:To:From; bh=XM9AeyIf1pR3Rc7j3BlY7vAmJKOyCMAvHz2S7LRU98E=; b=jTx5MT
-	hVtIfH1ZJy5cQazBWW8tIsRJQg7CTTgH/zBr7CBZjrCDM3xGVu6a9QF5lDcoqYbY23J28wm4Nkuh8
-	fuT0oFeHudRBNIFhqT4mkRj/Yp8HVtL72R3YyYSS1SOCLth38o5OqFuuPB802+aDJnfh5lBRDelfQ
-	mNzOYqiN+sI=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=Vg9wt2C8p9IZLdVpC0c8HQykip9na6+1kKIeLfSU34o=; b=C7ixQ6ITvzTEhmC5fzz/v8yROa
+	9W2V8HrFpkFQww9LlI0Jt8fsTgRlKMNhN9GpZzd+o8noZ0eGSNcbYav/Z7MGEix7MTDXWnwLh21JO
+	PtJuNBLxOv+W9XWbLq/laLuo23mATbhDKnkC6cVmxnF15MSn/wpAkWLmFco9EtRAQXH0=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: carlo.nonato@minervasys.tech,
@@ -57,50 +57,116 @@ Cc: carlo.nonato@minervasys.tech,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v1 repost 0/4] xen/arm64: Rework the MMU-off code (idmap) so it is self-contained
-Date: Tue, 16 Jan 2024 14:37:05 +0000
-Message-Id: <20240116143709.86584-1-julien@xen.org>
+Subject: [PATCH v1 repost 2/4] arm/smpboot: Move smp_up_cpu to a new section .data.idmap
+Date: Tue, 16 Jan 2024 14:37:07 +0000
+Message-Id: <20240116143709.86584-3-julien@xen.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240116143709.86584-1-julien@xen.org>
+References: <20240116143709.86584-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+With the upcoming work to color Xen, the binary will not be anymore
+physically contiguous. This will be a problem during boot as the
+assembly code will need to work out where each piece of Xen reside.
 
-Right now, the MMU-off code will access may access data that are either
-in .rodata or .data. With the enablement of cache coloring, Xen may
-not be physcally contiguous anymore when secondary CPUs are brought up.
+An easy way to solve the issue is to have all code/data accessed
+by the secondary CPUs while the MMU is off within a single page.
 
-There are multiple way to solve this problem. The first is to keep
-a copy of Xen physically contiguous in memory. The downside is this
-means we are using up to 8MB (maximum size of Xen) when only a few
-KBs is necessary.
+Right now, smp_up_cpu is used by secondary CPUs to wait there turn for
+booting before the MMU is on. Yet it is currently in .data which is
+unlikely to be within the same page as the rest of the idmap.
 
-This series is reworking the logic so all the MMU-off code is now
-self-contained for secondary boot CPUs on arm64.
+Move smp_up_cpu to the recently create section .data.idmap. The idmap is
+currently part of the text section and therefore will be mapped read-onl
+executable. This means that we need to temporarily remap
+smp_up_cpu in order to update it.
 
-On arm32, this is not yet possible because secondary CPUs needs to
-rebuild boot page-tables.
+Introduce a new function set_smp_up_cpu() for this purpose so the code
+is not duplicated between when opening and closing the gate.
 
-Cheers,
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+---
+ xen/arch/arm/smpboot.c | 36 +++++++++++++++++++++++++++++++-----
+ 1 file changed, 31 insertions(+), 5 deletions(-)
 
-Julien Grall (4):
-  arm/mmu: Move init_ttbr to a new section .data.idmap
-  arm/smpboot: Move smp_up_cpu to a new section .data.idmap
-  xen/arm64: head: Use PRINT_ID() for secondary CPU MMU-off boot code
-  [DO NOT COMMIT] xen/arm: Create a trampoline for secondary boot CPUs
-
- xen/arch/arm/arm64/head.S               | 14 +++----
- xen/arch/arm/arm64/mmu/head.S           |  2 +-
- xen/arch/arm/arm64/mmu/mm.c             |  7 ++++
- xen/arch/arm/include/asm/arm64/macros.h |  9 +++--
- xen/arch/arm/mmu/smpboot.c              | 36 +++++++++++++++---
- xen/arch/arm/psci.c                     |  5 ++-
- xen/arch/arm/smpboot.c                  | 49 ++++++++++++++++++++++---
- xen/arch/arm/xen.lds.S                  |  1 +
- 8 files changed, 101 insertions(+), 22 deletions(-)
-
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index 7110bc11fc05..8d508a1bb258 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -29,6 +29,10 @@
+ #include <asm/psci.h>
+ #include <asm/acpi.h>
+ 
++/* Override macros from asm/page.h to make them work with mfn_t */
++#undef virt_to_mfn
++#define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
++
+ cpumask_t cpu_online_map;
+ cpumask_t cpu_present_map;
+ cpumask_t cpu_possible_map;
+@@ -56,7 +60,7 @@ struct init_info init_data =
+ };
+ 
+ /* Shared state for coordinating CPU bringup */
+-unsigned long smp_up_cpu = MPIDR_INVALID;
++unsigned long __section(".data.idmap") smp_up_cpu = MPIDR_INVALID;
+ /* Shared state for coordinating CPU teardown */
+ static bool cpu_is_dead;
+ 
+@@ -429,6 +433,28 @@ void stop_cpu(void)
+         wfi();
+ }
+ 
++static void set_smp_up_cpu(unsigned long mpidr)
++{
++    /*
++     * smp_up_cpu is part of the identity mapping which is read-only. So
++     * We need to re-map the region so it can be updated.
++     */
++    void *ptr = map_domain_page(virt_to_mfn(&smp_up_cpu));
++
++    ptr += PAGE_OFFSET(&smp_up_cpu);
++
++    *(unsigned long *)ptr = mpidr;
++
++    /*
++     * init_ttbr will be accessed with the MMU off, so ensure the update
++     * is visible by cleaning the cache.
++     */
++    clean_dcache(ptr);
++
++    unmap_domain_page(ptr);
++
++}
++
+ int __init cpu_up_send_sgi(int cpu)
+ {
+     /* We don't know the GIC ID of the CPU until it has woken up, so just
+@@ -460,8 +486,7 @@ int __cpu_up(unsigned int cpu)
+     init_data.cpuid = cpu;
+ 
+     /* Open the gate for this CPU */
+-    smp_up_cpu = cpu_logical_map(cpu);
+-    clean_dcache(smp_up_cpu);
++    set_smp_up_cpu(cpu_logical_map(cpu));
+ 
+     rc = arch_cpu_up(cpu);
+ 
+@@ -497,8 +522,9 @@ int __cpu_up(unsigned int cpu)
+      */
+     init_data.stack = NULL;
+     init_data.cpuid = ~0;
+-    smp_up_cpu = MPIDR_INVALID;
+-    clean_dcache(smp_up_cpu);
++
++    set_smp_up_cpu(MPIDR_INVALID);
++
+     arch_cpu_up_finish();
+ 
+     if ( !cpu_online(cpu) )
 -- 
 2.40.1
 
