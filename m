@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 291C7C47DA7
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:03:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.668012.1039832 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7F2C47077
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:05:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.668016.1039841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPoio-0004qa-4q; Tue, 16 Jan 2024 19:03:38 +0000
+	id 1rPokV-0005pv-Ei; Tue, 16 Jan 2024 19:05:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 668012.1039832; Tue, 16 Jan 2024 19:03:38 +0000
+Received: by outflank-mailman (output) from mailman id 668016.1039841; Tue, 16 Jan 2024 19:05:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPoio-0004qT-1B; Tue, 16 Jan 2024 19:03:38 +0000
-Received: by outflank-mailman (input) for mailman id 668012;
- Tue, 16 Jan 2024 19:03:36 +0000
+	id 1rPokV-0005po-C4; Tue, 16 Jan 2024 19:05:23 +0000
+Received: by outflank-mailman (input) for mailman id 668016;
+ Tue, 16 Jan 2024 19:05:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wmx9=I2=amazon.co.uk=prvs=738631f0b=eliasely@srs-se1.protection.inumbo.net>)
- id 1rPoXn-0002UD-6h
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:15 +0000
-Received: from smtp-fw-9106.amazon.com (smtp-fw-9106.amazon.com
- [207.171.188.206]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5c1c6e28-b4a0-11ee-98f1-6d05b1d4d9a1;
- Tue, 16 Jan 2024 19:52:14 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-iad-1e-m6i4x-6e7a78d7.us-east-1.amazon.com)
- ([10.25.36.210]) by smtp-border-fw-9106.sea19.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:07 +0000
+ id 1rPoXz-0002UD-NT
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:27 +0000
+Received: from smtp-fw-80008.amazon.com (smtp-fw-80008.amazon.com
+ [99.78.197.219]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 63f1f21c-b4a0-11ee-98f1-6d05b1d4d9a1;
+ Tue, 16 Jan 2024 19:52:26 +0100 (CET)
+Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO
+ email-inbound-relay-iad-1a-m6i4x-edda28d4.us-east-1.amazon.com)
+ ([10.25.36.214]) by smtp-border-fw-80008.pdx80.corp.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:23 +0000
 Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
- (iad7-ws-svc-p70-lb3-vlan2.iad.amazon.com [10.32.235.34])
- by email-inbound-relay-iad-1e-m6i4x-6e7a78d7.us-east-1.amazon.com (Postfix)
- with ESMTPS id B87308032A; Tue, 16 Jan 2024 18:52:05 +0000 (UTC)
-Received: from EX19MTAUEB001.ant.amazon.com [10.0.44.209:15676]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.15.248:2525]
+ (iad7-ws-svc-p70-lb3-vlan3.iad.amazon.com [10.32.235.38])
+ by email-inbound-relay-iad-1a-m6i4x-edda28d4.us-east-1.amazon.com (Postfix)
+ with ESMTPS id AEAD680457; Tue, 16 Jan 2024 18:52:21 +0000 (UTC)
+Received: from EX19MTAUEB001.ant.amazon.com [10.0.44.209:52410]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.53.69:2525]
  with esmtp (Farcaster)
- id 004d37e9-5f05-4ed2-ae37-06ecad8d809b; Tue, 16 Jan 2024 18:52:05 +0000 (UTC)
+ id cabcd5e2-9941-496c-9a9e-f1315eb8d9b1; Tue, 16 Jan 2024 18:52:21 +0000 (UTC)
 Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
  EX19MTAUEB001.ant.amazon.com (10.252.135.108) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:51:54 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:21 +0000
 Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
  EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:51:54 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:20 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:51:52 +0000
+ 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:52:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,192 +60,148 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
-Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c1c6e28-b4a0-11ee-98f1-6d05b1d4d9a1
+X-Inumbo-ID: 63f1f21c-b4a0-11ee-98f1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1705431135; x=1736967135;
+  t=1705431146; x=1736967146;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Dpcwsrxvbe9T9hoTCd3fMKYWwbTAEp7kfzrhfuwZSAw=;
-  b=jtdTepk8Iwb8C2RRPTwANR7MFUKUf0Et/OwVFaZYs0jVKeoQaiSaqRNu
-   JRJ77NzZukBKrEf7qRn3ywp4i1s8tbK1+uAxjfM39x5TIEcHyo5JJfzjl
-   ZqW70wrwGYMsa2wO/8kdjMbgWj5Fps/UKXU71rF+tCtEANLQa9GUHSV2z
-   4=;
+  bh=+rU3KYKkwvDL5SMUdui7+O6LLhWUw4C+QdJzoyKqE18=;
+  b=WKwY3cC7UX248mfjBHzxVF9NgPl/pTVuEwX4Vmb/x+cqZo19RRG0QE0c
+   JKNlAT+mGRM614X8/+KRSBHsnepAorBzuJkp3mMA3pd2n5s07dM3lcIQg
+   mJN5nLZbLaC7R6XIX1++oTd8HIyVYAo0hkjlzw3s4sU9w9sHpayHrLjWE
+   o=;
 X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="697573972"
-X-Farcaster-Flow-ID: 004d37e9-5f05-4ed2-ae37-06ecad8d809b
+   d="scan'208";a="58742938"
+X-Farcaster-Flow-ID: cabcd5e2-9941-496c-9a9e-f1315eb8d9b1
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Wei Liu
-	<wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Wei Wang <wawei@amazon.de>,
-	Hongyan Xia <hongyxia@amazon.com>, Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v2] x86: Lift mapcache variable to the arch level
-Date: Tue, 16 Jan 2024 18:50:40 +0000
-Message-ID: <20240116185056.15000-12-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Elias El
+ Yandouzi" <eliasely@amazon.com>, Jan Beulich <jbeulich@suse.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2] Rename maddr_to_virt() calls
+Date: Tue, 16 Jan 2024 18:50:52 +0000
+Message-ID: <20240116185056.15000-24-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240116185056.15000-1-eliasely@amazon.com>
 References: <20240116185056.15000-1-eliasely@amazon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Precedence: Bulk
 
-From: Wei Liu <wei.liu2@citrix.com>
+Until directmap gets completely removed, we'd still need to
+keep some calls to mmaddr_to_virt() for xenheap pages or when the
+directmap is enabled.
 
-It is going to be needed by HVM and idle domain as well, because without
-the direct map, both need a mapcache to map pages.
+Rename the macro to maddr_to_directmap_virt() to flag them and
+prevent further use of maddr_to_virt().
 
-This only lifts the mapcache variable up. Whether we populate the
-mapcache for a domain is unchanged in this patch.
+Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
-Signed-off-by: Wei Liu <wei.liu2@citrix.com>
-Signed-off-by: Wei Wang <wawei@amazon.de>
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 8a31d18f69..8ef3f7746f 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -843,6 +843,8 @@ int arch_domain_create(struct domain *d,
+diff --git a/xen/arch/x86/dmi_scan.c b/xen/arch/x86/dmi_scan.c
+index 81f80c053a..ac016f3a04 100644
+--- a/xen/arch/x86/dmi_scan.c
++++ b/xen/arch/x86/dmi_scan.c
+@@ -277,7 +277,7 @@ const char *__init dmi_get_table(paddr_t *base, u32 *len)
+ 			return "SMBIOS";
+ 		}
+ 	} else {
+-		char __iomem *p = maddr_to_virt(0xF0000), *q;
++		char __iomem *p = maddr_to_directmap_virt(0xF0000), *q;
+ 		union {
+ 			struct dmi_eps dmi;
+ 			struct smbios3_eps smbios3;
+@@ -364,7 +364,7 @@ static int __init dmi_iterate(void (*decode)(const struct dmi_header *))
+ 	dmi.size = 0;
+ 	smbios3.length = 0;
  
-     psr_domain_init(d);
- 
-+    mapcache_domain_init(d);
-+
-     if ( is_hvm_domain(d) )
-     {
-         if ( (rc = hvm_domain_initialise(d, config)) != 0 )
-@@ -850,8 +852,6 @@ int arch_domain_create(struct domain *d,
-     }
-     else if ( is_pv_domain(d) )
-     {
--        mapcache_domain_init(d);
--
-         if ( (rc = pv_domain_initialise(d)) != 0 )
-             goto fail;
-     }
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index eac5e3304f..55e337aaf7 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -82,11 +82,11 @@ void *map_domain_page(mfn_t mfn)
- #endif
- 
-     v = mapcache_current_vcpu();
--    if ( !v || !is_pv_vcpu(v) )
-+    if ( !v )
-         return mfn_to_virt(mfn_x(mfn));
- 
--    dcache = &v->domain->arch.pv.mapcache;
--    vcache = &v->arch.pv.mapcache;
-+    dcache = &v->domain->arch.mapcache;
-+    vcache = &v->arch.mapcache;
-     if ( !dcache->inuse )
-         return mfn_to_virt(mfn_x(mfn));
- 
-@@ -187,14 +187,14 @@ void unmap_domain_page(const void *ptr)
-     ASSERT(va >= MAPCACHE_VIRT_START && va < MAPCACHE_VIRT_END);
- 
-     v = mapcache_current_vcpu();
--    ASSERT(v && is_pv_vcpu(v));
-+    ASSERT(v);
- 
--    dcache = &v->domain->arch.pv.mapcache;
-+    dcache = &v->domain->arch.mapcache;
-     ASSERT(dcache->inuse);
- 
-     idx = PFN_DOWN(va - MAPCACHE_VIRT_START);
-     mfn = l1e_get_pfn(MAPCACHE_L1ENT(idx));
--    hashent = &v->arch.pv.mapcache.hash[MAPHASH_HASHFN(mfn)];
-+    hashent = &v->arch.mapcache.hash[MAPHASH_HASHFN(mfn)];
- 
-     local_irq_save(flags);
- 
-@@ -233,11 +233,9 @@ void unmap_domain_page(const void *ptr)
- 
- int mapcache_domain_init(struct domain *d)
+-	p = maddr_to_virt(0xF0000);
++	p = maddr_to_directmap_virt(0xF0000);
+ 	for (q = p; q < p + 0x10000; q += 16) {
+ 		if (!dmi.size) {
+ 			memcpy_fromio(&dmi, q, sizeof(dmi));
+diff --git a/xen/arch/x86/include/asm/mach-default/bios_ebda.h b/xen/arch/x86/include/asm/mach-default/bios_ebda.h
+index 42de6b2a5b..8cfe53d1f2 100644
+--- a/xen/arch/x86/include/asm/mach-default/bios_ebda.h
++++ b/xen/arch/x86/include/asm/mach-default/bios_ebda.h
+@@ -7,7 +7,7 @@
+  */
+ static inline unsigned int get_bios_ebda(void)
  {
--    struct mapcache_domain *dcache = &d->arch.pv.mapcache;
-+    struct mapcache_domain *dcache = &d->arch.mapcache;
-     unsigned int bitmap_pages;
+-	unsigned int address = *(unsigned short *)maddr_to_virt(0x40E);
++	unsigned int address = *(unsigned short *)maddr_to_directmap_virt(0x40E);
+ 	address <<= 4;
+ 	return address;	/* 0 means none */
+ }
+diff --git a/xen/arch/x86/include/asm/page.h b/xen/arch/x86/include/asm/page.h
+index c6891b52d4..bf7bf08ba4 100644
+--- a/xen/arch/x86/include/asm/page.h
++++ b/xen/arch/x86/include/asm/page.h
+@@ -240,11 +240,11 @@ void copy_page_sse2(void *to, const void *from);
  
--    ASSERT(is_pv_domain(d));
--
- #ifdef NDEBUG
-     if ( !mem_hotplug && max_page <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-         return 0;
-@@ -261,12 +259,12 @@ int mapcache_domain_init(struct domain *d)
- int mapcache_vcpu_init(struct vcpu *v)
+ /* Convert between Xen-heap virtual addresses and machine addresses. */
+ #define __pa(x)             (virt_to_maddr(x))
+-#define __va(x)             (maddr_to_virt(x))
++#define __va(x)             (maddr_to_directmap_virt(x))
+ 
+ /* Convert between Xen-heap virtual addresses and machine frame numbers. */
+ #define __virt_to_mfn(va)   (virt_to_maddr(va) >> PAGE_SHIFT)
+-#define __mfn_to_virt(mfn)  (maddr_to_virt((paddr_t)(mfn) << PAGE_SHIFT))
++#define __mfn_to_virt(mfn)  (maddr_to_directmap_virt((paddr_t)(mfn) << PAGE_SHIFT))
+ 
+ /* Convert between machine frame numbers and page-info structures. */
+ #define mfn_to_page(mfn)    (frame_table + mfn_to_pdx(mfn))
+@@ -270,7 +270,7 @@ void copy_page_sse2(void *to, const void *from);
+ #define virt_to_mfn(va)     __virt_to_mfn(va)
+ #define mfn_to_directmap_virt(mfn)    __mfn_to_virt(mfn)
+ #define virt_to_maddr(va)   __virt_to_maddr((unsigned long)(va))
+-#define maddr_to_virt(ma)   __maddr_to_virt((unsigned long)(ma))
++#define maddr_to_directmap_virt(ma)   __maddr_to_directmap_virt((unsigned long)(ma))
+ #define maddr_to_page(ma)   __maddr_to_page(ma)
+ #define page_to_maddr(pg)   __page_to_maddr(pg)
+ #define virt_to_page(va)    __virt_to_page(va)
+diff --git a/xen/arch/x86/include/asm/x86_64/page.h b/xen/arch/x86/include/asm/x86_64/page.h
+index f49e10475f..b9e47da46e 100644
+--- a/xen/arch/x86/include/asm/x86_64/page.h
++++ b/xen/arch/x86/include/asm/x86_64/page.h
+@@ -46,7 +46,7 @@ static inline unsigned long __virt_to_maddr(unsigned long va)
+     return xen_phys_start + va - XEN_VIRT_START;
+ }
+ 
+-static inline void *__maddr_to_virt(unsigned long ma)
++static inline void *__maddr_to_directmap_virt(unsigned long ma)
  {
-     struct domain *d = v->domain;
--    struct mapcache_domain *dcache = &d->arch.pv.mapcache;
-+    struct mapcache_domain *dcache = &d->arch.mapcache;
-     unsigned long i;
-     unsigned int ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
-     unsigned int nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
+     /* Offset in the direct map, accounting for pdx compression */
+     unsigned long va_offset = maddr_to_directmapoff(ma);
+diff --git a/xen/arch/x86/mpparse.c b/xen/arch/x86/mpparse.c
+index d8ccab2449..69181b0abe 100644
+--- a/xen/arch/x86/mpparse.c
++++ b/xen/arch/x86/mpparse.c
+@@ -664,7 +664,7 @@ void __init get_smp_config (void)
  
--    if ( !is_pv_vcpu(v) || !dcache->inuse )
-+    if ( !dcache->inuse )
-         return 0;
- 
-     if ( ents > dcache->entries )
-@@ -293,7 +291,7 @@ int mapcache_vcpu_init(struct vcpu *v)
-     BUILD_BUG_ON(MAPHASHENT_NOTINUSE < MAPCACHE_ENTRIES);
-     for ( i = 0; i < MAPHASH_ENTRIES; i++ )
-     {
--        struct vcpu_maphash_entry *hashent = &v->arch.pv.mapcache.hash[i];
-+        struct vcpu_maphash_entry *hashent = &v->arch.mapcache.hash[i];
- 
-         hashent->mfn = ~0UL; /* never valid to map */
-         hashent->idx = MAPHASHENT_NOTINUSE;
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 4d97c68028..85b890b2cb 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -286,9 +286,6 @@ struct pv_domain
-     /* Mitigate L1TF with shadow/crashing? */
-     bool check_l1tf;
- 
--    /* map_domain_page() mapping cache. */
--    struct mapcache_domain mapcache;
--
-     struct cpuidmasks *cpuidmasks;
- };
- 
-@@ -327,6 +324,9 @@ struct arch_domain
- 
-     uint8_t spec_ctrl_flags; /* See SCF_DOM_MASK */
- 
-+    /* map_domain_page() mapping cache. */
-+    struct mapcache_domain mapcache;
-+
-     union {
-         struct pv_domain pv;
-         struct hvm_domain hvm;
-@@ -517,9 +517,6 @@ struct arch_domain
- 
- struct pv_vcpu
+ static int __init smp_scan_config (unsigned long base, unsigned long length)
  {
--    /* map_domain_page() mapping cache. */
--    struct mapcache_vcpu mapcache;
--
-     unsigned int vgc_flags;
+-	unsigned int *bp = maddr_to_virt(base);
++	unsigned int *bp = maddr_to_directmap_virt(base);
+ 	struct intel_mp_floating *mpf;
  
-     struct trap_info *trap_ctxt;
-@@ -619,6 +616,9 @@ struct arch_vcpu
- #define async_exception_state(t) async_exception_state[(t)-1]
-     uint8_t async_exception_mask;
- 
-+    /* map_domain_page() mapping cache. */
-+    struct mapcache_vcpu mapcache;
-+
-     /* Virtual Machine Extensions */
-     union {
-         struct pv_vcpu pv;
+ 	Dprintk("Scan SMP from %p for %ld bytes.\n", bp,length);
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 39aed5845d..1b02e2b6d5 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -1764,7 +1764,7 @@ void __init efi_init_memory(void)
+                 if ( map_pages_to_xen((unsigned long)mfn_to_directmap_virt(smfn),
+                                     _mfn(smfn), emfn - smfn, prot) == 0 )
+                     desc->VirtualStart =
+-                        (unsigned long)maddr_to_virt(desc->PhysicalStart);
++                        (unsigned long)maddr_to_directmap_virt(desc->PhysicalStart);
+                 else
+                     printk(XENLOG_ERR "Could not map MFNs %#lx-%#lx\n",
+                         smfn, emfn - 1);
 -- 
 2.40.1
 
