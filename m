@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC22C47077
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:26:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.668077.1039952 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0009C47DA7
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:26:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.668079.1039972 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPp4q-0002iZ-Qn; Tue, 16 Jan 2024 19:26:24 +0000
+	id 1rPp4u-0003Fa-8f; Tue, 16 Jan 2024 19:26:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 668077.1039952; Tue, 16 Jan 2024 19:26:24 +0000
+Received: by outflank-mailman (output) from mailman id 668079.1039972; Tue, 16 Jan 2024 19:26:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPp4q-0002iS-MW; Tue, 16 Jan 2024 19:26:24 +0000
-Received: by outflank-mailman (input) for mailman id 668077;
- Tue, 16 Jan 2024 19:26:23 +0000
+	id 1rPp4u-0003F8-4m; Tue, 16 Jan 2024 19:26:28 +0000
+Received: by outflank-mailman (input) for mailman id 668079;
+ Tue, 16 Jan 2024 19:26:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wmx9=I2=amazon.co.uk=prvs=738631f0b=eliasely@srs-se1.protection.inumbo.net>)
- id 1rPp4p-0002iI-Ry
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 19:26:23 +0000
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com
- [99.78.197.220]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1ff0e01a-b4a5-11ee-9b0f-b553b5be7939;
- Tue, 16 Jan 2024 20:26:21 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-pdx-2c-m6i4x-b1c0e1d0.us-west-2.amazon.com)
- ([10.25.36.210]) by smtp-border-fw-80009.pdx80.corp.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 19:26:17 +0000
+ id 1rPp4s-0002iI-Kv
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 19:26:26 +0000
+Received: from smtp-fw-52005.amazon.com (smtp-fw-52005.amazon.com
+ [52.119.213.156]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2306d3fa-b4a5-11ee-9b0f-b553b5be7939;
+ Tue, 16 Jan 2024 20:26:24 +0100 (CET)
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-iad-1e-m6i4x-6e7a78d7.us-east-1.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-52005.iad7.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 19:26:23 +0000
 Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
- (pdx2-ws-svc-p26-lb5-vlan3.pdx.amazon.com [10.39.38.70])
- by email-inbound-relay-pdx-2c-m6i4x-b1c0e1d0.us-west-2.amazon.com (Postfix)
- with ESMTPS id B2565800AA; Tue, 16 Jan 2024 19:26:16 +0000 (UTC)
-Received: from EX19MTAUEB001.ant.amazon.com [10.0.44.209:62203]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.28.244:2525]
+ (iad7-ws-svc-p70-lb3-vlan2.iad.amazon.com [10.32.235.34])
+ by email-inbound-relay-iad-1e-m6i4x-6e7a78d7.us-east-1.amazon.com (Postfix)
+ with ESMTPS id DA21380750; Tue, 16 Jan 2024 19:26:19 +0000 (UTC)
+Received: from EX19MTAUEB001.ant.amazon.com [10.0.44.209:34232]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.41.129:2525]
  with esmtp (Farcaster)
- id 8c1457d3-2081-4124-9d27-5ac477025126; Tue, 16 Jan 2024 19:26:16 +0000 (UTC)
-Received: from EX19D008UEC004.ant.amazon.com (10.252.135.170) by
+ id e3eca962-163c-4e87-9189-8e1da0e3c898; Tue, 16 Jan 2024 19:26:19 +0000 (UTC)
+Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
  EX19MTAUEB001.ant.amazon.com (10.252.135.108) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 19:26:16 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 19:26:18 +0000
 Received: from EX19MTAUEB001.ant.amazon.com (10.252.135.35) by
- EX19D008UEC004.ant.amazon.com (10.252.135.170) with Microsoft SMTP Server
+ EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 19:26:15 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 19:26:18 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.252.135.35) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 19:26:14 +0000
+ 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 19:26:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,225 +61,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ff0e01a-b4a5-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 2306d3fa-b4a5-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1705433181; x=1736969181;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=xKWNH6kJRXsg48ZEc5dzphr9is8CTmsp5C95JI51wQI=;
-  b=PZqe3dSlUhDvvROxMfvRlgqGrBTyOfKdgydtFeaTsXW2IB2/mkxrhL24
-   daL5q5FQqm+RxaTEcUJhIoC6oPEk7Q0RknPDagnY61vQwFd3u6krS6GLs
-   JF9tsnYGwvYzqgmVWJMFsjA5UgTDVhgy8nHTWIDEEK5QJl44qpIDCstWc
-   0=;
+  t=1705433184; x=1736969184;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=3bfMq1Uef4k7zIlKxhavHHhyVuwSclhXcQaPCDrDa7g=;
+  b=U2mekgigfQlp97fKeRfKjC/qPWGbEmz4IGoFfdKDtubzcHxaSflsjfG6
+   5K9mtCaBhSLR2/z2mDnHYJviq35/vO6zXD/dG+xk5D1gVQ541cin8ZtXq
+   C7JPbYCs2Goos6ShROhNsfC3ru6OGglQ9UGhV25OUGAySGg5sPfE/BDZU
+   Q=;
 X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="58701446"
-X-Farcaster-Flow-ID: 8c1457d3-2081-4124-9d27-5ac477025126
+   d="scan'208";a="627983547"
+X-Farcaster-Flow-ID: e3eca962-163c-4e87-9189-8e1da0e3c898
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Elias El
- Yandouzi" <eliasely@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, "Bertrand
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Wei Liu
+	<wei.liu2@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "Bertrand
  Marquis" <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Lukasz Hawrylko
-	<lukasz@hawrylko.pl>, "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>
-Subject: [PATCH v2 (resend) 00/27] Remove the directmap
-Date: Tue, 16 Jan 2024 19:25:44 +0000
-Message-ID: <20240116192611.41112-1-eliasely@amazon.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, David Woodhouse
+	<dwmw2@amazon.com>, Hongyan Xia <hongyxia@amazon.com>, Julien Grall
+	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
+Subject: [PATCH v2 (resend) 02/27] x86/setup: Move vm_init() before acpi calls
+Date: Tue, 16 Jan 2024 19:25:46 +0000
+Message-ID: <20240116192611.41112-3-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240116192611.41112-1-eliasely@amazon.com>
+References: <20240116192611.41112-1-eliasely@amazon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 Precedence: Bulk
 
-Hi all,
+From: Wei Liu <wei.liu2@citrix.com>
 
-A few years ago, Wei Liu implemented a PoC to remove the directmap
-from Xen. The last version was sent by Hongyan Xia [1].
+After the direct map removal, pages from the boot allocator are not
+going to be mapped in the direct map. Although we have map_domain_page,
+they are ephemeral and are less helpful for mappings that are more than a
+page, so we want a mechanism to globally map a range of pages, which is
+what vmap is for. Therefore, we bring vm_init into early boot stage.
 
-I will start with thanking both Wei and Hongyan for the initial work
-to upstream the feature. A lot of patches already went in and this is
-the last few patches missing to effectively enable the feature.
+To allow vmap to be initialised and used in early boot, we need to
+modify vmap to receive pages from the boot allocator during early boot
+stage.
 
-=== What is the directmap? ===
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: David Woodhouse <dwmw2@amazon.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
-At the moment, on both arm64 and x86, most of the RAM is mapped
-in Xen address space. This means that domain memory is easily
-accessible in Xen.
+----
 
-=== Why do we want to remove the directmap? ===
+    Changes in v2:
+        - The return of map_pages_to_xen() is now checked in a separate
+          patch
+        - Clarify the commit message
+        - Group the new boolean with the others
 
-(Summarizing my understanding of the previous discussion)
-
-Speculation attacks (like Spectre SP1) rely on loading piece of memory
-in the cache. If the region is not mapped then it can't be loaded.
-
-So removing reducing the amount of memory mapped in Xen will also
-reduce the surface attack.
-
-=== What's the performance impact? ===
-
-As the guest memory is not always mapped, then the cost of mapping
-will increase. I haven't done the numbers with this new version, but
-some measurement were provided in the previous version for x86.
-
-=== Improvement possible ===
-
-The known area to improve on x86 are:
-   * Mapcache: There was a patch sent by Hongyan:
-     https://lore.kernel.org/xen-devel/4058e92ce21627731c49b588a95809dc0affd83a.1581015491.git.hongyxia@amazon.com/
-   * EPT: At the moment an guest page-tabel walk requires about 20 map/unmap.
-     This will have an very high impact on the performance. We need to decide
-     whether keep the EPT always mapped is a problem
-
-The original series didn't have support for Arm64. But as there were
-some interest, I have provided a PoC.
-
-There are more extra work for Arm64:
-   * The mapcache is quite simple. We would investigate the performance
-   * The mapcache should be made compliant to the Arm Arm (this is now
-     more critical).
-   * We will likely have the same problem as for the EPT.
-   * We have no support for merging table to a superpage, neither
-     free empty page-tables. (See more below)
-
-=== Implementation ===
-
-The subject is probably a misnomer. The directmap is still present but
-the RAM is not mapped by default. Instead, the region will still be used
-to map pages allocate via alloc_xenheap_pages().
-
-The advantage is the solution is simple (so IHMO good enough for been
-merged as a tech preview). The disadvantage is the page allocator is not
-trying to keep all the xenheap pages together. So we may end up to have
-an increase of page table usage.
-
-In the longer term, we should consider to remove the direct map
-completely and switch to vmap(). The main problem with this approach
-is it is frequent to use mfn_to_virt() in the code. So we would need
-to cache the mapping (maybe in the struct page_info).
-
-=== Why arm32 is not covered? ===
-
-On Arm32, the domheap and xenheap is always separated. So by design
-the guest memory is not mapped by default.
-
-At this stage, it seems unnecessary to have to map/unmap xenheap pages
-every time they are allocated.
-
-=== Why not using a separate domheap and xenheap? ===
-
-While a separate xenheap/domheap reduce the page-table usage (all
-xenheap pages are contiguous and could be always mapped), it is also
-currently less scalable because the split is fixed at boot time (XXX:
-Can this be dynamic?).
-
-=== Future of secret-free hypervisor ===
-
-There are some information in an e-mail from Andrew a few years ago:
-
-https://lore.kernel.org/xen-devel/e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com/
-
-Cheers,
-
-[1] https://lore.kernel.org/xen-devel/cover.1588278317.git.hongyxia@amazon.com/
-
-*** BLURB HERE ***
-
-Elias El Yandouzi (3):
-  xen/x86: Add build assertion for fixmap entries
-  Rename mfn_to_virt() calls
-  Rename maddr_to_virt() calls
-
-Hongyan Xia (13):
-  acpi: vmap pages in acpi_os_alloc_memory
-  xen/numa: vmap the pages for memnodemap
-  x86/srat: vmap the pages for acpi_slit
-  x86: Map/unmap pages in restore_all_guests
-  x86/pv: Rewrite how building PV dom0 handles domheap mappings
-  x86/pv: Map L4 page table for shim domain
-  x86/mapcache: Initialise the mapcache for the idle domain
-  x86: Add a boot option to enable and disable the direct map
-  x86/domain_page: Remove the fast paths when mfn is not in the
-    directmap
-  xen/page_alloc: Add a path for xenheap when there is no direct map
-  x86/setup: Leave early boot slightly earlier
-  x86/setup: vmap heap nodes when they are outside the direct map
-  x86/setup: Do not create valid mappings when directmap=no
-
-Julien Grall (8):
-  xen/vmap: Check the page has been mapped in vm_init_type()
-  xen/vmap: Introduce vmap_size() and use it
-  xen/arm: fixmap: Rename the fixmap slots to follow the x86 convention
-  xen/x86: Add support for the PMAP
-  xen/arm32: mm: Rename 'first' to 'root' in init_secondary_pagetables()
-  xen/arm64: mm: Use per-pCPU page-tables
-  xen/arm64: Implement a mapcache for arm64
-  xen/arm64: Allow the admin to enable/disable the directmap
-
-Wei Liu (3):
-  x86/setup: Move vm_init() before acpi calls
-  x86/pv: Domheap pages should be mapped while relocating initrd
-  x86: Lift mapcache variable to the arch level
-
- docs/misc/xen-command-line.pandoc             |  12 ++
- xen/arch/arm/Kconfig                          |   3 +-
- xen/arch/arm/acpi/lib.c                       |  18 +--
- xen/arch/arm/arm64/mmu/mm.c                   |  45 +++++-
- xen/arch/arm/domain_page.c                    |  50 ++++++-
- xen/arch/arm/include/asm/arm32/mm.h           |   8 --
- xen/arch/arm/include/asm/arm64/mm.h           |   7 +-
- xen/arch/arm/include/asm/domain_page.h        |  13 ++
- xen/arch/arm/include/asm/early_printk.h       |   2 +-
- xen/arch/arm/include/asm/fixmap.h             |  16 +--
- xen/arch/arm/include/asm/mm.h                 |   9 ++
- xen/arch/arm/include/asm/mmu/layout.h         |  13 +-
- xen/arch/arm/include/asm/mmu/mm.h             |   2 +
- xen/arch/arm/mm.c                             |   1 +
- xen/arch/arm/mmu/pt.c                         |  12 +-
- xen/arch/arm/mmu/setup.c                      |  33 ++---
- xen/arch/arm/mmu/smpboot.c                    |  32 ++---
- xen/arch/arm/setup.c                          |   6 +-
- xen/arch/x86/Kconfig                          |   2 +
- xen/arch/x86/dmi_scan.c                       |   4 +-
- xen/arch/x86/domain.c                         |  12 +-
- xen/arch/x86/domain_page.c                    |  74 +++++++---
- xen/arch/x86/hvm/dom0_build.c                 |   4 +-
- xen/arch/x86/include/asm/config.h             |  12 +-
- xen/arch/x86/include/asm/domain.h             |  13 +-
- xen/arch/x86/include/asm/fixmap.h             |   9 ++
- .../x86/include/asm/mach-default/bios_ebda.h  |   2 +-
- xen/arch/x86/include/asm/mm.h                 |  10 +-
- xen/arch/x86/include/asm/page.h               |   8 +-
- xen/arch/x86/include/asm/pmap.h               |  25 ++++
- xen/arch/x86/include/asm/x86_64/page.h        |   2 +-
- xen/arch/x86/mm.c                             |  18 ++-
- xen/arch/x86/mpparse.c                        |   2 +-
- xen/arch/x86/pv/dom0_build.c                  |  73 +++++++---
- xen/arch/x86/pv/domain.c                      |  34 +++++
- xen/arch/x86/setup.c                          | 129 +++++++++++++++---
- xen/arch/x86/srat.c                           |   4 +-
- xen/arch/x86/tboot.c                          |   2 +-
- xen/arch/x86/x86_64/asm-offsets.c             |   1 +
- xen/arch/x86/x86_64/entry.S                   |   8 ++
- xen/arch/x86/x86_64/mm.c                      |  26 ++--
- xen/common/Kconfig                            |  17 +++
- xen/common/efi/boot.c                         |  23 ++--
- xen/common/numa.c                             |   9 +-
- xen/common/page_alloc.c                       |  89 ++++++++++--
- xen/common/pmap.c                             |   8 +-
- xen/common/trace.c                            |   8 +-
- xen/common/vmap.c                             |  62 ++++++---
- xen/drivers/acpi/osl.c                        |  14 +-
- xen/include/xen/mm.h                          |   7 +
- xen/include/xen/vmap.h                        |   4 +
- 51 files changed, 753 insertions(+), 244 deletions(-)
- create mode 100644 xen/arch/arm/include/asm/domain_page.h
- create mode 100644 xen/arch/x86/include/asm/pmap.h
-
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 59dd9bb25a..7e28f62d09 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -748,6 +748,8 @@ void asmlinkage __init start_xen(unsigned long boot_phys_offset,
+ 
+     setup_mm();
+ 
++    vm_init();
++
+     /* Parse the ACPI tables for possible boot-time configuration */
+     acpi_boot_table_init();
+ 
+@@ -759,8 +761,6 @@ void asmlinkage __init start_xen(unsigned long boot_phys_offset,
+      */
+     system_state = SYS_STATE_boot;
+ 
+-    vm_init();
+-
+     if ( acpi_disabled )
+     {
+         printk("Booting using Device Tree\n");
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 897b7e9208..4d0c90b7a0 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -989,6 +989,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+     int i, j, e820_warn = 0, bytes = 0;
+     unsigned long eb_start, eb_end;
+     bool acpi_boot_table_init_done = false, relocated = false;
++    bool vm_init_done = false;
+     int ret;
+     struct ns16550_defaults ns16550 = {
+         .data_bits = 8,
+@@ -1531,12 +1532,23 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+             continue;
+ 
+         if ( !acpi_boot_table_init_done &&
+-             s >= (1ULL << 32) &&
+-             !acpi_boot_table_init() )
++             s >= (1ULL << 32) )
+         {
+-            acpi_boot_table_init_done = true;
+-            srat_parse_regions(s);
+-            setup_max_pdx(raw_max_page);
++            /*
++             * We only initialise vmap and acpi after going through the bottom
++             * 4GiB, so that we have enough pages in the boot allocator.
++             */
++            if ( !vm_init_done )
++            {
++                vm_init();
++                vm_init_done = true;
++            }
++            if ( !acpi_boot_table_init() )
++            {
++                acpi_boot_table_init_done = true;
++                srat_parse_regions(s);
++                setup_max_pdx(raw_max_page);
++            }
+         }
+ 
+         if ( pfn_to_pdx((e - 1) >> PAGE_SHIFT) >= max_pdx )
+@@ -1722,6 +1734,9 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+ 
+     init_frametable();
+ 
++    if ( !vm_init_done )
++        vm_init();
++
+     if ( !acpi_boot_table_init_done )
+         acpi_boot_table_init();
+ 
+@@ -1761,12 +1776,6 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         end_boot_allocator();
+ 
+     system_state = SYS_STATE_boot;
+-    /*
+-     * No calls involving ACPI code should go between the setting of
+-     * SYS_STATE_boot and vm_init() (or else acpi_os_{,un}map_memory()
+-     * will break).
+-     */
+-    vm_init();
+ 
+     bsp_stack = cpu_alloc_stack(0);
+     if ( !bsp_stack )
+diff --git a/xen/common/vmap.c b/xen/common/vmap.c
+index 830f64c5ef..fc5c70da4d 100644
+--- a/xen/common/vmap.c
++++ b/xen/common/vmap.c
+@@ -34,10 +34,19 @@ void __init vm_init_type(enum vmap_region type, void *start, void *end)
+ 
+     for ( i = 0, va = (unsigned long)vm_bitmap(type); i < nr; ++i, va += PAGE_SIZE )
+     {
+-        struct page_info *pg = alloc_domheap_page(NULL, 0);
++        mfn_t mfn;
+         int rc;
+ 
+-        rc = map_pages_to_xen(va, page_to_mfn(pg), 1, PAGE_HYPERVISOR);
++        if ( system_state == SYS_STATE_early_boot )
++            mfn = alloc_boot_pages(1, 1);
++        else
++        {
++            struct page_info *pg = alloc_domheap_page(NULL, 0);
++
++            BUG_ON(!pg);
++            mfn = page_to_mfn(pg);
++        }
++        rc = map_pages_to_xen(va, mfn, 1, PAGE_HYPERVISOR);
+         BUG_ON(rc);
+ 
+         clear_page((void *)va);
+@@ -65,7 +74,7 @@ static void *vm_alloc(unsigned int nr, unsigned int align,
+     spin_lock(&vm_lock);
+     for ( ; ; )
+     {
+-        struct page_info *pg;
++        mfn_t mfn;
+ 
+         ASSERT(vm_low[t] == vm_top[t] || !test_bit(vm_low[t], vm_bitmap(t)));
+         for ( start = vm_low[t]; start < vm_top[t]; )
+@@ -100,9 +109,16 @@ static void *vm_alloc(unsigned int nr, unsigned int align,
+         if ( vm_top[t] >= vm_end[t] )
+             return NULL;
+ 
+-        pg = alloc_domheap_page(NULL, 0);
+-        if ( !pg )
+-            return NULL;
++        if ( system_state == SYS_STATE_early_boot )
++            mfn = alloc_boot_pages(1, 1);
++        else
++        {
++            struct page_info *pg = alloc_domheap_page(NULL, 0);
++
++            if ( !pg )
++                return NULL;
++            mfn = page_to_mfn(pg);
++        }
+ 
+         spin_lock(&vm_lock);
+ 
+@@ -110,7 +126,7 @@ static void *vm_alloc(unsigned int nr, unsigned int align,
+         {
+             unsigned long va = (unsigned long)vm_bitmap(t) + vm_top[t] / 8;
+ 
+-            if ( !map_pages_to_xen(va, page_to_mfn(pg), 1, PAGE_HYPERVISOR) )
++            if ( !map_pages_to_xen(va, mfn, 1, PAGE_HYPERVISOR) )
+             {
+                 clear_page((void *)va);
+                 vm_top[t] += PAGE_SIZE * 8;
+@@ -120,7 +136,10 @@ static void *vm_alloc(unsigned int nr, unsigned int align,
+             }
+         }
+ 
+-        free_domheap_page(pg);
++        if ( system_state == SYS_STATE_early_boot )
++            init_boot_pages(mfn_to_maddr(mfn), mfn_to_maddr(mfn) + PAGE_SIZE);
++        else
++            free_domheap_page(mfn_to_page(mfn));
+ 
+         if ( start >= vm_top[t] )
+         {
 -- 
 2.40.1
 
