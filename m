@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6BB4C47077
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:26:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.668081.1039992 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FE5C47DA7
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:26:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.668082.1039997 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPp50-0003sY-Um; Tue, 16 Jan 2024 19:26:34 +0000
+	id 1rPp51-0003w6-9E; Tue, 16 Jan 2024 19:26:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 668081.1039992; Tue, 16 Jan 2024 19:26:34 +0000
+Received: by outflank-mailman (output) from mailman id 668082.1039997; Tue, 16 Jan 2024 19:26:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPp50-0003sR-Ql; Tue, 16 Jan 2024 19:26:34 +0000
-Received: by outflank-mailman (input) for mailman id 668081;
- Tue, 16 Jan 2024 19:26:33 +0000
+	id 1rPp51-0003vB-3K; Tue, 16 Jan 2024 19:26:35 +0000
+Received: by outflank-mailman (input) for mailman id 668082;
+ Tue, 16 Jan 2024 19:26:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wmx9=I2=amazon.co.uk=prvs=738631f0b=eliasely@srs-se1.protection.inumbo.net>)
- id 1rPp4z-0003Xv-LJ
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 19:26:33 +0000
-Received: from smtp-fw-80006.amazon.com (smtp-fw-80006.amazon.com
- [99.78.197.217]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 26e12f07-b4a5-11ee-98f1-6d05b1d4d9a1;
- Tue, 16 Jan 2024 20:26:32 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO
- email-inbound-relay-pdx-2a-m6i4x-3ef535ca.us-west-2.amazon.com)
- ([10.25.36.214]) by smtp-border-fw-80006.pdx80.corp.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 19:26:29 +0000
+ id 1rPp50-0003Xv-B2
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 19:26:34 +0000
+Received: from smtp-fw-52005.amazon.com (smtp-fw-52005.amazon.com
+ [52.119.213.156]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 27f17ebe-b4a5-11ee-98f1-6d05b1d4d9a1;
+ Tue, 16 Jan 2024 20:26:33 +0100 (CET)
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-iad-1a-m6i4x-edda28d4.us-east-1.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-52005.iad7.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 19:26:32 +0000
 Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
- (pdx2-ws-svc-p26-lb5-vlan2.pdx.amazon.com [10.39.38.66])
- by email-inbound-relay-pdx-2a-m6i4x-3ef535ca.us-west-2.amazon.com (Postfix)
- with ESMTPS id 624BD609EA; Tue, 16 Jan 2024 19:26:26 +0000 (UTC)
-Received: from EX19MTAUEB001.ant.amazon.com [10.0.44.209:34536]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.3.20:2525] with
- esmtp (Farcaster)
- id 5204e9b5-4ffe-4f9b-a668-3a37bda75b90; Tue, 16 Jan 2024 19:26:25 +0000 (UTC)
-Received: from EX19D008UEA003.ant.amazon.com (10.252.134.116) by
- EX19MTAUEB001.ant.amazon.com (10.252.135.108) with Microsoft SMTP Server
+ (iad7-ws-svc-p70-lb3-vlan3.iad.amazon.com [10.32.235.38])
+ by email-inbound-relay-iad-1a-m6i4x-edda28d4.us-east-1.amazon.com (Postfix)
+ with ESMTPS id E945E8054B; Tue, 16 Jan 2024 19:26:30 +0000 (UTC)
+Received: from EX19MTAUEC002.ant.amazon.com [10.0.0.204:41793]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.95.118:2525]
+ with esmtp (Farcaster)
+ id 0048df5a-a8a5-4bf0-b47e-14349dd2b900; Tue, 16 Jan 2024 19:26:30 +0000 (UTC)
+Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
+ EX19MTAUEC002.ant.amazon.com (10.252.135.253) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 19:26:22 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 19:26:28 +0000
 Received: from EX19MTAUEB001.ant.amazon.com (10.252.135.35) by
- EX19D008UEA003.ant.amazon.com (10.252.134.116) with Microsoft SMTP Server
+ EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 19:26:22 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 19:26:28 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.252.135.35) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 19:26:21 +0000
+ 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 19:26:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,30 +61,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 26e12f07-b4a5-11ee-98f1-6d05b1d4d9a1
+X-Inumbo-ID: 27f17ebe-b4a5-11ee-98f1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
   t=1705433193; x=1736969193;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=FgFciMpLuDVe/Ws8Mo0D+wl9Af+6on00mUDD4ztD+mE=;
-  b=a0gy08PIcgQAWR60qQaCwATt2HxbGCqrIxwZOio+y+p9WUUoo1K398Pq
-   TB8nsB2y+Fju4iUQNXj9/Nz3cEJtxXSIvYZn8CinyHguiN33sFletCKFB
-   MGWUAaq2cYUXtPjnG+UprRSepf0g/GLoWS8V7uTDnFaHekPL5572KWhup
-   4=;
+  bh=fLyAFvpkS62mZ58f/yx9ju+/jVeXxTTvsO8RqlfEYZw=;
+  b=O3Ir0SQYYqAaDqPjAZqr0BkVPlOZ7kl8wt79mIBfXuxBwmnYALJO7DFt
+   JUz4AkNkoCpYcnDNDXPxh0FtSPIkVn9B2gc3LzfjLYo5Y6Haj1fxQhph6
+   xadChpELoWUpo1JVJFwGZHmpzu+6hwdv0BOJCGAASWdGhI7dUrKRuY850
+   E=;
 X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="266414239"
-X-Farcaster-Flow-ID: 5204e9b5-4ffe-4f9b-a668-3a37bda75b90
+   d="scan'208";a="627983561"
+X-Farcaster-Flow-ID: 0048df5a-a8a5-4bf0-b47e-14349dd2b900
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
-	<hongyxia@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "George
- Dunlap" <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Julien Grall
-	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
-Subject: [PATCH v2 (resend) 05/27] xen/numa: vmap the pages for memnodemap
-Date: Tue, 16 Jan 2024 19:25:49 +0000
-Message-ID: <20240116192611.41112-6-eliasely@amazon.com>
+	<hongyxia@amazon.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Elias El Yandouzi
+	<eliasely@amazon.com>
+Subject: [PATCH v2 (resend) 10/27] x86/pv: Map L4 page table for shim domain
+Date: Tue, 16 Jan 2024 19:25:54 +0000
+Message-ID: <20240116192611.41112-11-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240116192611.41112-1-eliasely@amazon.com>
 References: <20240116192611.41112-1-eliasely@amazon.com>
@@ -95,50 +95,34 @@ Precedence: Bulk
 
 From: Hongyan Xia <hongyxia@amazon.com>
 
-This avoids the assumption that there is a direct map and boot pages
-fall inside the direct map.
-
-Clean up the variables so that mfn actually stores a type-safe mfn.
+The root page table is allocated from the domheap and isn't
+mapped by default. Map it on demand to build pv shim domain.
 
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
 ----
 
-    See the discussion in the next patch about using panic().
-
     Changes in v2:
-        * vmap_contig_pages() was renamed to vmap_contig()
-        * Replace the BUG_ON() with a panic()
+        * New patch
 
-    Changes compare to Hongyan's version:
-        * The function modified was moved to common code. So rebase it
-        * vmap_boot_pages() was renamed to vmap_contig_pages()
-
-diff --git a/xen/common/numa.c b/xen/common/numa.c
-index f454c4d894..ef13ec2255 100644
---- a/xen/common/numa.c
-+++ b/xen/common/numa.c
-@@ -424,13 +424,14 @@ static int __init populate_memnodemap(const struct node *nodes,
- static int __init allocate_cachealigned_memnodemap(void)
- {
-     unsigned long size = PFN_UP(memnodemapsize * sizeof(*memnodemap));
--    unsigned long mfn = mfn_x(alloc_boot_pages(size, 1));
-+    mfn_t mfn = alloc_boot_pages(size, 1);
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index dc5e9fe117..fc51c7d362 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -991,8 +991,12 @@ do {                                                    \
+      * !CONFIG_VIDEO case so the logic here can be simplified.
+      */
+     if ( pv_shim )
++    {
++        l4start = map_domain_page(l4start_mfn);
+         pv_shim_setup_dom(d, l4start, v_start, vxenstore_start, vconsole_start,
+                           vphysmap_start, si);
++        UNMAP_DOMAIN_PAGE(l4start);
++    }
  
--    memnodemap = mfn_to_virt(mfn);
--    mfn <<= PAGE_SHIFT;
-+    memnodemap = vmap_contig(mfn, size);
-+    if ( !memnodemap )
-+        panic("Unable to map the ACPI SLIT. Retry with numa=off");
-     size <<= PAGE_SHIFT;
-     printk(KERN_DEBUG "NUMA: Allocated memnodemap from %lx - %lx\n",
--           mfn, mfn + size);
-+           mfn_to_maddr(mfn), mfn_to_maddr(mfn) + size);
-     memnodemapsize = size / sizeof(*memnodemap);
- 
-     return 0;
+ #ifdef CONFIG_COMPAT
+     if ( compat )
 -- 
 2.40.1
 
