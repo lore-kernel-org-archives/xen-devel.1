@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C92C47DA2
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:01:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.667996.1039801 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F54C47077
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:02:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.668002.1039818 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPogz-00031i-4I; Tue, 16 Jan 2024 19:01:45 +0000
+	id 1rPohU-0003WV-Me; Tue, 16 Jan 2024 19:02:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 667996.1039801; Tue, 16 Jan 2024 19:01:45 +0000
+Received: by outflank-mailman (output) from mailman id 668002.1039818; Tue, 16 Jan 2024 19:02:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPogz-00031b-1g; Tue, 16 Jan 2024 19:01:45 +0000
-Received: by outflank-mailman (input) for mailman id 667996;
- Tue, 16 Jan 2024 19:01:43 +0000
+	id 1rPohU-0003VA-Fb; Tue, 16 Jan 2024 19:02:16 +0000
+Received: by outflank-mailman (input) for mailman id 668002;
+ Tue, 16 Jan 2024 19:02:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wmx9=I2=amazon.co.uk=prvs=738631f0b=eliasely@srs-se1.protection.inumbo.net>)
- id 1rPoXm-0002UD-4f
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:14 +0000
-Received: from smtp-fw-9102.amazon.com (smtp-fw-9102.amazon.com
- [207.171.184.29]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5b316841-b4a0-11ee-98f1-6d05b1d4d9a1;
- Tue, 16 Jan 2024 19:52:12 +0100 (CET)
+ id 1rPoY0-0002UD-Nm
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:28 +0000
+Received: from smtp-fw-80008.amazon.com (smtp-fw-80008.amazon.com
+ [99.78.197.219]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 633efaf8-b4a0-11ee-98f1-6d05b1d4d9a1;
+ Tue, 16 Jan 2024 19:52:26 +0100 (CET)
 Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO
- email-inbound-relay-iad-1box-1dm6-7f722725.us-east-1.amazon.com)
- ([10.25.36.214]) by smtp-border-fw-9102.sea19.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:10 +0000
+ email-inbound-relay-iad-1a-m6i4x-617e30c2.us-east-1.amazon.com)
+ ([10.25.36.214]) by smtp-border-fw-80008.pdx80.corp.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:24 +0000
 Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
  (iad7-ws-svc-p70-lb3-vlan2.iad.amazon.com [10.32.235.34])
- by email-inbound-relay-iad-1box-1dm6-7f722725.us-east-1.amazon.com (Postfix)
- with ESMTPS id 4C12986ECA; Tue, 16 Jan 2024 18:52:07 +0000 (UTC)
-Received: from EX19MTAUEA001.ant.amazon.com [10.0.44.209:54377]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.95.118:2525]
+ by email-inbound-relay-iad-1a-m6i4x-617e30c2.us-east-1.amazon.com (Postfix)
+ with ESMTPS id 13E55690D4; Tue, 16 Jan 2024 18:52:20 +0000 (UTC)
+Received: from EX19MTAUEA002.ant.amazon.com [10.0.29.78:6774]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.41.129:2525]
  with esmtp (Farcaster)
- id 9e06fc42-65ec-4c14-b51d-213d16eee67d; Tue, 16 Jan 2024 18:52:06 +0000 (UTC)
-Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
- EX19MTAUEA001.ant.amazon.com (10.252.134.203) with Microsoft SMTP Server
+ id 6f076021-faef-46aa-80d9-ddb13dc2592e; Tue, 16 Jan 2024 18:52:19 +0000 (UTC)
+Received: from EX19D008UEC004.ant.amazon.com (10.252.135.170) by
+ EX19MTAUEA002.ant.amazon.com (10.252.134.9) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:51:59 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:19 +0000
 Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
- EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
+ EX19D008UEC004.ant.amazon.com (10.252.135.170) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:51:58 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:19 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:51:56 +0000
+ 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:52:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,31 +61,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5b316841-b4a0-11ee-98f1-6d05b1d4d9a1
+X-Inumbo-ID: 633efaf8-b4a0-11ee-98f1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1705431133; x=1736967133;
+  t=1705431146; x=1736967146;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=OwpyHZJCgfsvXgrpfF3qQCU4NbQDoI500a3pBhrqpBY=;
-  b=lTC2y5xp1rEfaDu/+8cUL02edy9LtvvvaSXhzlVtiNPglFYrn4zCeYU1
-   m0tfQrJRqTBWYng0IwbggLWtqlq6zPf19PoV/qrsqd0FKTVTMDokNLL0X
-   8yPcFIveCbTihCzWrAmy7I9SqmMwdwdIrWmsS1ODwyIzZKNuEEeNYLyAL
-   A=;
+  bh=A4skyGZm0AGMkXurcV6O3b2jzlTiRDRc3CtNyj3qfuY=;
+  b=oUmIRK8cEveQYTFTI7DWoTuelwF5PYQs8cr8tLbNtiCqr+JLjuuZ8eFM
+   ZXh2j9ZK2uMQFIqxMhiHbN2LQeSeDDlxMZ3oAsF7EvUDfv+4oJYyFB8CI
+   1eybD7Y9OD0amdW29mTzH0uDDCLBxw4e3p6hkUJzq+wns/ZP8owdqyCJ2
+   g=;
 X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="390202576"
-X-Farcaster-Flow-ID: 9e06fc42-65ec-4c14-b51d-213d16eee67d
+   d="scan'208";a="58742941"
+X-Farcaster-Flow-ID: 6f076021-faef-46aa-80d9-ddb13dc2592e
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
-	<hongyxia@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "George
- Dunlap" <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Julien Grall
-	<jgrall@amazon.com>
-Subject: [PATCH v2] x86: Add a boot option to enable and disable the direct map
-Date: Tue, 16 Jan 2024 18:50:42 +0000
-Message-ID: <20240116185056.15000-14-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, "Elias El
+ Yandouzi" <eliasely@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
+	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu
+	<wl@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Lukasz Hawrylko <lukasz@hawrylko.pl>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, =?UTF-8?q?Mateusz=20M=C3=B3wka?=
+	<mateusz.mowka@intel.com>
+Subject: [PATCH v2] Rename mfn_to_virt() calls
+Date: Tue, 16 Jan 2024 18:50:51 +0000
+Message-ID: <20240116185056.15000-23-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240116185056.15000-1-eliasely@amazon.com>
 References: <20240116185056.15000-1-eliasely@amazon.com>
@@ -94,163 +98,298 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 Precedence: Bulk
 
-From: Hongyan Xia <hongyxia@amazon.com>
+Until directmap gets completely removed, we'd still need to
+keep some calls to mfn_to_virt() for xenheap pages or when the
+directmap is enabled.
 
-Also add a helper function to retrieve it. Change arch_mfns_in_direct_map
-to check this option before returning.
+Rename the macro to mfn_to_directmap_virt() to flag them and
+prevent further use of mfn_to_virt().
 
-This is added as a Kconfig option as well as a boot command line option.
-While being generic, the Kconfig option is only usable for x86 at the moment.
+Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-
-----
-
-    Changes in V2:
-        * Introduce a Kconfig option
-        * Reword the commit message
-        * Make opt_directmap and helper generic
-
-    Changes since Hongyan's version:
-        * Reword the commit message
-        * opt_directmap is only modified during boot so mark it as
-          __ro_after_init
-
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 8e65f8bd18..63c946f482 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -799,6 +799,18 @@ that enabling this option cannot guarantee anything beyond what underlying
- hardware guarantees (with, where available and known to Xen, respective
- tweaks applied).
- 
-+### directmap (x86)
-+> `= <boolean>`
-+
-+> Default: `true`
-+
-+Enable or disable the direct map region in Xen.
-+
-+By default, Xen creates the direct map region which maps physical memory
-+in that region. Setting this to no will remove the direct map, blocking
-+exploits that leak secrets via speculative memory access in the direct
-+map.
-+
- ### dma_bits
- > `= <integer>`
- 
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index 1acdffc51c..350f41b832 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -29,6 +29,7 @@ config X86
- 	select HAS_UBSAN
- 	select HAS_VPCI if HVM
- 	select NEEDS_LIBELF
-+	select HAS_SECRET_HIDING
- 
- config ARCH_DEFCONFIG
- 	string
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 7d26d9cd2f..4aae270a78 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -620,10 +620,18 @@ void write_32bit_pse_identmap(uint32_t *l2);
- /*
-  * x86 maps part of physical memory via the directmap region.
-  * Return whether the range of MFN falls in the directmap region.
-+ *
-+ * When boot command line sets directmap=no, we will not have a direct map at
-+ * all so this will always return false.
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index cbcf3bf147..9a94d7eaf7 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -336,6 +336,7 @@ static inline uint64_t gvirt_to_maddr(vaddr_t va, paddr_t *pa,
   */
- static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
- {
--    unsigned long eva = min(DIRECTMAP_VIRT_END, HYPERVISOR_VIRT_END);
-+    unsigned long eva;
-+
-+    if ( !has_directmap() )
-+        return false;
-+
-+    eva = min(DIRECTMAP_VIRT_END, HYPERVISOR_VIRT_END);
+ #define virt_to_mfn(va)     __virt_to_mfn(va)
+ #define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
++#define mfn_to_directmap_virt(mfn) mfn_to_virt(mfn)
  
-     return (mfn + nr) <= (virt_to_mfn(eva - 1) + 1);
- }
+ /* Convert between Xen-heap virtual addresses and page-info structures. */
+ static inline struct page_info *virt_to_page(const void *v)
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index 89caefc8a2..62d6fee0f4 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -81,14 +81,14 @@ void *map_domain_page(mfn_t mfn)
+ 
+ #ifdef NDEBUG
+     if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
+-        return mfn_to_virt(mfn_x(mfn));
++        return mfn_to_directmap_virt(mfn_x(mfn));
+ #endif
+ 
+     v = mapcache_current_vcpu();
+     if ( !v || !v->domain->arch.mapcache.inuse )
+     {
+         if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
+-            return mfn_to_virt(mfn_x(mfn));
++            return mfn_to_directmap_virt(mfn_x(mfn));
+         else
+         {
+             BUG_ON(system_state >= SYS_STATE_smp_boot);
+@@ -324,7 +324,7 @@ void *map_domain_page_global(mfn_t mfn)
+ 
+ #ifdef NDEBUG
+     if ( arch_mfn_in_directmap(mfn_x(mfn, 1)) )
+-        return mfn_to_virt(mfn_x(mfn));
++        return mfn_to_directmap_virt(mfn_x(mfn));
+ #endif
+ 
+     return vmap(&mfn, 1);
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index e59f6657d9..1b3ebae16f 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -439,7 +439,7 @@ static int __init pvh_populate_p2m(struct domain *d)
+                                  d->arch.e820[i].addr + d->arch.e820[i].size);
+             enum hvm_translation_result res =
+                  hvm_copy_to_guest_phys(mfn_to_maddr(_mfn(addr)),
+-                                        mfn_to_virt(addr),
++                                        mfn_to_directmap_virt(addr),
+                                         end - d->arch.e820[i].addr,
+                                         v);
+ 
+@@ -613,7 +613,7 @@ static int __init pvh_load_kernel(struct domain *d, const module_t *image,
+ 
+     if ( initrd != NULL )
+     {
+-        rc = hvm_copy_to_guest_phys(last_addr, mfn_to_virt(initrd->mod_start),
++        rc = hvm_copy_to_guest_phys(last_addr, mfn_to_directmap_virt(initrd->mod_start),
+                                     initrd->mod_end, v);
+         if ( rc )
+         {
+diff --git a/xen/arch/x86/include/asm/page.h b/xen/arch/x86/include/asm/page.h
+index 350d1fb110..c6891b52d4 100644
+--- a/xen/arch/x86/include/asm/page.h
++++ b/xen/arch/x86/include/asm/page.h
+@@ -268,7 +268,7 @@ void copy_page_sse2(void *to, const void *from);
+  */
+ #define mfn_valid(mfn)      __mfn_valid(mfn_x(mfn))
+ #define virt_to_mfn(va)     __virt_to_mfn(va)
+-#define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
++#define mfn_to_directmap_virt(mfn)    __mfn_to_virt(mfn)
+ #define virt_to_maddr(va)   __virt_to_maddr((unsigned long)(va))
+ #define maddr_to_virt(ma)   __maddr_to_virt((unsigned long)(ma))
+ #define maddr_to_page(ma)   __maddr_to_page(ma)
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index a72c32d87c..9530c93b68 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -318,8 +318,8 @@ void __init arch_init_memory(void)
+         iostart_pfn = max_t(unsigned long, pfn, 1UL << (20 - PAGE_SHIFT));
+         ioend_pfn = min(rstart_pfn, 16UL << (20 - PAGE_SHIFT));
+         if ( iostart_pfn < ioend_pfn )
+-            destroy_xen_mappings((unsigned long)mfn_to_virt(iostart_pfn),
+-                                 (unsigned long)mfn_to_virt(ioend_pfn));
++            destroy_xen_mappings((unsigned long)mfn_to_directmap_virt(iostart_pfn),
++                                 (unsigned long)mfn_to_directmap_virt(ioend_pfn));
+ 
+         /* Mark as I/O up to next RAM region. */
+         for ( ; pfn < rstart_pfn; pfn++ )
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 4d0c90b7a0..b813ea75b5 100644
+index 84c496ac4a..de69b7935c 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -1512,6 +1512,8 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     if ( highmem_start )
-         xenheap_max_mfn(PFN_DOWN(highmem_start - 1));
+@@ -400,7 +400,7 @@ void *__init bootstrap_map(const module_t *mod)
+     void *ret;
  
-+    printk("Booting with directmap %s\n", has_directmap() ? "on" : "off");
-+
-     /*
-      * Walk every RAM region and map it in its entirety (on x86/64, at least)
-      * and notify it to the boot allocator.
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 310ad4229c..9a24c89ac5 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -83,6 +83,23 @@ config HAS_UBSAN
- config MEM_ACCESS_ALWAYS_ON
- 	bool
+     if ( system_state != SYS_STATE_early_boot )
+-        return mod ? mfn_to_virt(mod->mod_start) : NULL;
++        return mod ? mfn_to_directmap_virt(mod->mod_start) : NULL;
  
-+config HAS_SECRET_HIDING
-+	bool
-+
-+config SECRET_HIDING
-+    bool "Secret hiding"
-+    depends on HAS_SECRET_HIDING
-+    ---help---
-+    The directmap contains mapping for most of the RAM which makes domain
-+    memory easily accessible. While making the performance better, it also makes
-+    the hypervisor more vulnerable to speculation attacks.
-+
-+    Enabling this feature will allow the user to decide whether the memory
-+    is always mapped at boot or mapped only on demand (see the command line
-+    option "directmap").
-+
-+    If unsure, say N.
-+
- config MEM_ACCESS
- 	def_bool MEM_ACCESS_ALWAYS_ON
- 	prompt "Memory Access and VM events" if !MEM_ACCESS_ALWAYS_ON
+     if ( !mod )
+     {
+@@ -1703,7 +1703,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+     {
+         set_pdx_range(mod[i].mod_start,
+                       mod[i].mod_start + PFN_UP(mod[i].mod_end));
+-        map_pages_to_xen((unsigned long)mfn_to_virt(mod[i].mod_start),
++        map_pages_to_xen((unsigned long)mfn_to_directmap_virt(mod[i].mod_start),
+                          _mfn(mod[i].mod_start),
+                          PFN_UP(mod[i].mod_end), PAGE_HYPERVISOR);
+     }
+diff --git a/xen/arch/x86/tboot.c b/xen/arch/x86/tboot.c
+index 86c4c22cac..4368a64009 100644
+--- a/xen/arch/x86/tboot.c
++++ b/xen/arch/x86/tboot.c
+@@ -253,7 +253,7 @@ static void tboot_gen_xenheap_integrity(const uint8_t key[TB_KEY_SIZE],
+             continue; /* skip tboot and its page tables */
+ 
+         if ( is_page_in_use(page) && is_special_page(page) )
+-            vmac_update(mfn_to_virt(mfn), PAGE_SIZE, &ctx);
++            vmac_update(mfn_to_directmap_virt(mfn), PAGE_SIZE, &ctx);
+     }
+     *mac = vmac(NULL, 0, nonce, NULL, &ctx);
+ 
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index b2a280fba3..1697760d82 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -1247,19 +1247,25 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
+     i = virt_to_mfn(HYPERVISOR_VIRT_END - 1) + 1;
+     if ( spfn < i )
+     {
+-        ret = map_pages_to_xen((unsigned long)mfn_to_virt(spfn), _mfn(spfn),
+-                               min(epfn, i) - spfn, PAGE_HYPERVISOR);
+-        if ( ret )
+-            goto destroy_directmap;
++        if ( arch_mfns_in_directmap(spfn, min(epfn, i) - spfn ) )
++        {
++            ret = map_pages_to_xen((unsigned long)mfn_to_directmap_virt(spfn), _mfn(spfn),
++                                min(epfn, i) - spfn, PAGE_HYPERVISOR);
++            if ( ret )
++                goto destroy_directmap;
++        }
+     }
+     if ( i < epfn )
+     {
+         if ( i < spfn )
+             i = spfn;
+-        ret = map_pages_to_xen((unsigned long)mfn_to_virt(i), _mfn(i),
+-                               epfn - i, __PAGE_HYPERVISOR_RW);
+-        if ( ret )
+-            goto destroy_directmap;
++        if ( arch_mfns_in_directmap(spfn, epfn - i) )
++        {
++            ret = map_pages_to_xen((unsigned long)mfn_to_directmap_virt(i), _mfn(i),
++                                epfn - i, __PAGE_HYPERVISOR_RW);
++            if ( ret )
++                goto destroy_directmap;
++        }
+     }
+ 
+     old_node_start = node_start_pfn(node);
+@@ -1348,8 +1354,8 @@ destroy_frametable:
+     NODE_DATA(node)->node_start_pfn = old_node_start;
+     NODE_DATA(node)->node_spanned_pages = old_node_span;
+  destroy_directmap:
+-    destroy_xen_mappings((unsigned long)mfn_to_virt(spfn),
+-                         (unsigned long)mfn_to_virt(epfn));
++    destroy_xen_mappings((unsigned long)mfn_to_directmap_virt(spfn),
++                         (unsigned long)mfn_to_directmap_virt(epfn));
+ 
+     return ret;
+ }
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index efbec00af9..39aed5845d 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -1599,7 +1599,7 @@ static __init void copy_mapping(unsigned long mfn, unsigned long end,
+     for ( ; mfn < end; mfn = next )
+     {
+         l4_pgentry_t l4e = efi_l4t[l4_table_offset(mfn << PAGE_SHIFT)];
+-        unsigned long va = (unsigned long)mfn_to_virt(mfn);
++        unsigned long va = (unsigned long)mfn_to_directmap_virt(mfn);
+ 
+         if ( !(mfn & ((1UL << (L4_PAGETABLE_SHIFT - PAGE_SHIFT)) - 1)) )
+             UNMAP_DOMAIN_PAGE(l3dst);
+@@ -1757,15 +1757,18 @@ void __init efi_init_memory(void)
+         if ( pfn_to_pdx(emfn - 1) < (DIRECTMAP_SIZE >> PAGE_SHIFT) &&
+              pdx_is_region_compressible(mem_base, mem_npages) )
+         {
+-            if ( (unsigned long)mfn_to_virt(emfn - 1) >= HYPERVISOR_VIRT_END )
+-                prot &= ~_PAGE_GLOBAL;
+-            if ( map_pages_to_xen((unsigned long)mfn_to_virt(smfn),
+-                                  _mfn(smfn), emfn - smfn, prot) == 0 )
+-                desc->VirtualStart =
+-                    (unsigned long)maddr_to_virt(desc->PhysicalStart);
+-            else
+-                printk(XENLOG_ERR "Could not map MFNs %#lx-%#lx\n",
+-                       smfn, emfn - 1);
++            if ( arch_mfns_in_directmap(smfn, emfn - smfn) )
++            {
++                if ( (unsigned long)mfn_to_directmap_virt(emfn - 1) >= HYPERVISOR_VIRT_END )
++                    prot &= ~_PAGE_GLOBAL;
++                if ( map_pages_to_xen((unsigned long)mfn_to_directmap_virt(smfn),
++                                    _mfn(smfn), emfn - smfn, prot) == 0 )
++                    desc->VirtualStart =
++                        (unsigned long)maddr_to_virt(desc->PhysicalStart);
++                else
++                    printk(XENLOG_ERR "Could not map MFNs %#lx-%#lx\n",
++                        smfn, emfn - 1);
++            }
+         }
+         else if ( !((desc->PhysicalStart + len - 1) >> (VADDR_BITS - 1)) &&
+                   (extra = xmalloc(struct rt_extra)) != NULL )
 diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 740b6f0ff7..a3746cfbcf 100644
+index 42b9aaae1c..0877e275e5 100644
 --- a/xen/common/page_alloc.c
 +++ b/xen/common/page_alloc.c
-@@ -173,6 +173,11 @@ paddr_t __ro_after_init mem_hotplug;
- static char __initdata opt_badpage[100] = "";
- string_param("badpage", opt_badpage);
+@@ -610,8 +610,8 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
+     {
+         if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
+         {
+-            _heap[node] = mfn_to_virt(mfn + nr - needed);
+-            avail[node] = mfn_to_virt(mfn + nr - 1) +
++            _heap[node] = mfn_to_directmap_virt(mfn + nr - needed);
++            avail[node] = mfn_to_directmap_virt(mfn + nr - 1) +
+                           PAGE_SIZE - sizeof(**avail) * NR_ZONES;
+         }
+         else
+@@ -630,8 +630,8 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
+     {
+         if ( arch_mfns_in_directmap(mfn, needed) )
+         {
+-            _heap[node] = mfn_to_virt(mfn);
+-            avail[node] = mfn_to_virt(mfn + needed - 1) +
++            _heap[node] = mfn_to_directmap_virt(mfn);
++            avail[node] = mfn_to_directmap_virt(mfn + needed - 1) +
+                           PAGE_SIZE - sizeof(**avail) * NR_ZONES;
+         }
+         else
+diff --git a/xen/common/trace.c b/xen/common/trace.c
+index 4e7b080e61..955509a0d8 100644
+--- a/xen/common/trace.c
++++ b/xen/common/trace.c
+@@ -229,7 +229,7 @@ static int alloc_trace_bufs(unsigned int pages)
+         offset = t_info->mfn_offset[cpu];
  
-+bool __ro_after_init opt_directmap = true;
-+#ifdef CONFIG_HAS_SECRET_HIDING
-+boolean_param("directmap", opt_directmap);
-+#endif
-+
- /*
-  * no-bootscrub -> Free pages are not zeroed during boot.
-  */
-diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
-index 3d9b2d05a5..f860e98ee4 100644
---- a/xen/include/xen/mm.h
-+++ b/xen/include/xen/mm.h
-@@ -165,6 +165,13 @@ extern unsigned long max_page;
- extern unsigned long total_pages;
- extern paddr_t mem_hotplug;
+         /* Initialize the buffer metadata */
+-        per_cpu(t_bufs, cpu) = buf = mfn_to_virt(t_info_mfn_list[offset]);
++        per_cpu(t_bufs, cpu) = buf = mfn_to_directmap_virt(t_info_mfn_list[offset]);
+         buf->cons = buf->prod = 0;
  
-+extern bool opt_directmap;
-+
-+static inline bool has_directmap(void)
-+{
-+    return opt_directmap;
-+}
-+
- /*
-  * Extra fault info types which are used to further describe
-  * the source of an access violation.
+         printk(XENLOG_INFO "xentrace: p%d mfn %x offset %u\n",
+@@ -268,7 +268,7 @@ out_dealloc:
+             if ( !mfn )
+                 break;
+             ASSERT(!(mfn_to_page(_mfn(mfn))->count_info & PGC_allocated));
+-            free_xenheap_pages(mfn_to_virt(mfn), 0);
++            free_xenheap_pages(mfn_to_directmap_virt(mfn), 0);
+         }
+     }
+     free_xenheap_pages(t_info, get_order_from_pages(t_info_pages));
+@@ -529,7 +529,7 @@ static unsigned char *next_record(const struct t_buf *buf, uint32_t *next,
+     per_cpu_mfn_offset = t_info->mfn_offset[smp_processor_id()];
+     mfn_list = (uint32_t *)t_info;
+     mfn = mfn_list[per_cpu_mfn_offset + per_cpu_mfn_nr];
+-    this_page = mfn_to_virt(mfn);
++    this_page = (unsigned char *)mfn_to_directmap_virt(mfn);
+     if (per_cpu_mfn_nr + 1 >= opt_tbuf_size)
+     {
+         /* reached end of buffer? */
+@@ -538,7 +538,7 @@ static unsigned char *next_record(const struct t_buf *buf, uint32_t *next,
+     else
+     {
+         mfn = mfn_list[per_cpu_mfn_offset + per_cpu_mfn_nr + 1];
+-        *next_page = mfn_to_virt(mfn);
++        *next_page = mfn_to_directmap_virt(mfn);
+     }
+     return this_page;
+ }
 -- 
 2.40.1
 
