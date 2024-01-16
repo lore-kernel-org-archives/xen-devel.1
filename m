@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACFFC47DA2
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:08:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.668035.1039898 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 490BEC47077
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:08:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.668036.1039912 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPonf-0000xj-9E; Tue, 16 Jan 2024 19:08:39 +0000
+	id 1rPonl-0001Xw-KA; Tue, 16 Jan 2024 19:08:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 668035.1039898; Tue, 16 Jan 2024 19:08:39 +0000
+Received: by outflank-mailman (output) from mailman id 668036.1039912; Tue, 16 Jan 2024 19:08:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPonf-0000wr-2L; Tue, 16 Jan 2024 19:08:39 +0000
-Received: by outflank-mailman (input) for mailman id 668035;
- Tue, 16 Jan 2024 19:08:37 +0000
+	id 1rPonl-0001Xp-Gp; Tue, 16 Jan 2024 19:08:45 +0000
+Received: by outflank-mailman (input) for mailman id 668036;
+ Tue, 16 Jan 2024 19:08:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wmx9=I2=amazon.co.uk=prvs=738631f0b=eliasely@srs-se1.protection.inumbo.net>)
- id 1rPoY1-0002UD-Ou
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:29 +0000
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com
- [99.78.197.220]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6486fdbc-b4a0-11ee-98f1-6d05b1d4d9a1;
- Tue, 16 Jan 2024 19:52:28 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-pdx-2a-m6i4x-1197e3af.us-west-2.amazon.com)
- ([10.25.36.210]) by smtp-border-fw-80009.pdx80.corp.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:26 +0000
+ id 1rPoXv-0002UD-Mb
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:23 +0000
+Received: from smtp-fw-52004.amazon.com (smtp-fw-52004.amazon.com
+ [52.119.213.154]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6127d838-b4a0-11ee-98f1-6d05b1d4d9a1;
+ Tue, 16 Jan 2024 19:52:22 +0100 (CET)
+Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO
+ email-inbound-relay-pdx-2a-m6i4x-d47337e0.us-west-2.amazon.com) ([10.43.8.2])
+ by smtp-border-fw-52004.iad7.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:20 +0000
 Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
- (pdx2-ws-svc-p26-lb5-vlan2.pdx.amazon.com [10.39.38.66])
- by email-inbound-relay-pdx-2a-m6i4x-1197e3af.us-west-2.amazon.com (Postfix)
- with ESMTPS id 117E51000D8; Tue, 16 Jan 2024 18:52:26 +0000 (UTC)
-Received: from EX19MTAUEB002.ant.amazon.com [10.0.44.209:63933]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.3.20:2525] with
- esmtp (Farcaster)
- id cfe1bab4-7948-4ffa-8d0e-cec429382164; Tue, 16 Jan 2024 18:52:25 +0000 (UTC)
-Received: from EX19D008UEA001.ant.amazon.com (10.252.134.62) by
+ (pdx2-ws-svc-p26-lb5-vlan3.pdx.amazon.com [10.39.38.70])
+ by email-inbound-relay-pdx-2a-m6i4x-d47337e0.us-west-2.amazon.com (Postfix)
+ with ESMTPS id BEA5160B82; Tue, 16 Jan 2024 18:52:18 +0000 (UTC)
+Received: from EX19MTAUEB002.ant.amazon.com [10.0.44.209:11277]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.41.129:2525]
+ with esmtp (Farcaster)
+ id 0f1eb0ec-6a7f-4103-a81e-21febc958291; Tue, 16 Jan 2024 18:52:17 +0000 (UTC)
+Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
  EX19MTAUEB002.ant.amazon.com (10.252.135.47) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:52:25 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:16 +0000
 Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
- EX19D008UEA001.ant.amazon.com (10.252.134.62) with Microsoft SMTP Server
+ EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:52:24 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:16 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:52:23 +0000
+ 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:52:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,30 +61,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6486fdbc-b4a0-11ee-98f1-6d05b1d4d9a1
+X-Inumbo-ID: 6127d838-b4a0-11ee-98f1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1705431148; x=1736967148;
+  t=1705431142; x=1736967142;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=HBVAS715RpCNC8CvMLRfobjdzDnsKgjKWFL+xKdoEXs=;
-  b=IMiLBBO2HxsR0jYQ3ORzskVquLf1vNOKUDXIsS4WtpGiZODZnR57FJlp
-   YV8Bphh/Z7GWXE8yc589qn9CGZTY+t7WADok1hjrXWTDKyEOs6jjtkNJq
-   0l6HJikl/sMK1Wz1i7KQOMv/64+78rHJJxilJUf+tKVZno2oNABVvrtsC
-   Q=;
+  bh=RNtWDehKcdKd51zP4omQpNRTUkQx1O6KgQ+LUko8Hd0=;
+  b=ZMNcmy6vt4QoLkqwWiUmDifSacuqbQlnspkwVzGFNrBF/mLt8kM9ilvc
+   KG33e24yQpYK/yGaXEo+tou7m6w4V2VlTrW/dnn4qja8JQs7eiQWUqZSL
+   SFOvyJiNqMleHHBGpP6pRqeVrCSS+t6PNdiuQmJ/H4dy2s9Z3OdbMEiCK
+   4=;
 X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="58692070"
-X-Farcaster-Flow-ID: cfe1bab4-7948-4ffa-8d0e-cec429382164
+   d="scan'208";a="178391989"
+X-Farcaster-Flow-ID: 0f1eb0ec-6a7f-4103-a81e-21febc958291
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Julien Grall
-	<jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>, "Bertrand
- Marquis" <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Elias El Yandouzi
-	<eliasely@amazon.com>
-Subject: [PATCH v2] xen/arm64: mm: Use per-pCPU page-tables
-Date: Tue, 16 Jan 2024 18:50:54 +0000
-Message-ID: <20240116185056.15000-26-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
+	<hongyxia@amazon.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Julien Grall
+	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
+Subject: [PATCH v2] x86/setup: Do not create valid mappings when directmap=no
+Date: Tue, 16 Jan 2024 18:50:50 +0000
+Message-ID: <20240116185056.15000-22-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240116185056.15000-1-eliasely@amazon.com>
 References: <20240116185056.15000-1-eliasely@amazon.com>
@@ -93,287 +93,141 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 Precedence: Bulk
 
-From: Julien Grall <jgrall@amazon.com>
+From: Hongyan Xia <hongyxia@amazon.com>
 
-At the moment, on Arm64, every pCPU is sharing the same page-tables.
+Create empty mappings in the second e820 pass. Also, destroy existing
+direct map mappings created in the first pass.
 
-In a follow-up patch, we will allow the possibility to remove the
-direct map and therefore it will be necessary to have a mapcache.
+To make xenheap pages visible in guests, it is necessary to create empty
+L3 tables in the direct map even when directmap=no, since guest cr3s
+copy idle domain's L4 entries, which means they will share mappings in
+the direct map if we pre-populate idle domain's L4 entries and L3
+tables. A helper is introduced for this.
 
-While we have plenty of spare virtual address space to reserve part
-for each pCPU, it means that temporary mappings (e.g. guest memory)
-could be accessible by every pCPU.
+Also, after the direct map is actually gone, we need to stop updating
+the direct map in update_xen_mappings().
 
-In order to increase our security posture, it would be better if
-those mappings are only accessible by the pCPU doing the temporary
-mapping.
-
-In addition to that, a per-pCPU page-tables opens the way to have
-per-domain mapping area.
-
-Arm32 is already using per-pCPU page-tables so most of the code
-can be re-used. Arm64 doesn't yet have support for the mapcache,
-so a stub is provided (moved to its own header asm/domain_page.h).
-
-Take the opportunity to fix a typo in a comment that is modified.
-
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
-----
-
-    Changelog since v1:
-        * Rebase
-        * Fix typoes
-
-diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
-index d2651c9486..4f339efb7b 100644
---- a/xen/arch/arm/arm64/mmu/mm.c
-+++ b/xen/arch/arm/arm64/mmu/mm.c
-@@ -75,6 +75,7 @@ static void __init prepare_runtime_identity_mapping(void)
-     paddr_t id_addr = virt_to_maddr(_start);
-     lpae_t pte;
-     DECLARE_OFFSETS(id_offsets, id_addr);
-+    lpae_t *root = this_cpu(xen_pgtable);
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 3b698c8c41..84c496ac4a 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -976,6 +976,57 @@ static struct domain *__init create_dom0(const module_t *image,
+ /* How much of the directmap is prebuilt at compile time. */
+ #define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
  
-     if ( id_offsets[0] >= IDENTITY_MAPPING_AREA_NR_L0 )
-         panic("Cannot handle ID mapping above %uTB\n",
-@@ -85,7 +86,7 @@ static void __init prepare_runtime_identity_mapping(void)
-     pte.pt.table = 1;
-     pte.pt.xn = 0;
- 
--    write_pte(&xen_pgtable[id_offsets[0]], pte);
-+    write_pte(&root[id_offsets[0]], pte);
- 
-     /* Link second ID table */
-     pte = pte_of_xenaddr((vaddr_t)xen_second_id);
-diff --git a/xen/arch/arm/domain_page.c b/xen/arch/arm/domain_page.c
-index 3a43601623..ac2a6d0332 100644
---- a/xen/arch/arm/domain_page.c
-+++ b/xen/arch/arm/domain_page.c
-@@ -3,6 +3,8 @@
- #include <xen/pmap.h>
- #include <xen/vmap.h>
- 
-+#include <asm/domain_page.h>
-+
- /* Override macros from asm/page.h to make them work with mfn_t */
- #undef virt_to_mfn
- #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
-diff --git a/xen/arch/arm/include/asm/arm32/mm.h b/xen/arch/arm/include/asm/arm32/mm.h
-index 856f2dbec4..87a315db01 100644
---- a/xen/arch/arm/include/asm/arm32/mm.h
-+++ b/xen/arch/arm/include/asm/arm32/mm.h
-@@ -1,12 +1,6 @@
- #ifndef __ARM_ARM32_MM_H__
- #define __ARM_ARM32_MM_H__
- 
--#include <xen/percpu.h>
--
--#include <asm/lpae.h>
--
--DECLARE_PER_CPU(lpae_t *, xen_pgtable);
--
- /*
-  * Only a limited amount of RAM, called xenheap, is always mapped on ARM32.
-  * For convenience always return false.
-@@ -16,8 +10,6 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
-     return false;
- }
- 
--bool init_domheap_mappings(unsigned int cpu);
--
- static inline void arch_setup_page_tables(void)
- {
- }
-diff --git a/xen/arch/arm/include/asm/domain_page.h b/xen/arch/arm/include/asm/domain_page.h
-new file mode 100644
-index 0000000000..e9f52685e2
---- /dev/null
-+++ b/xen/arch/arm/include/asm/domain_page.h
-@@ -0,0 +1,13 @@
-+#ifndef __ASM_ARM_DOMAIN_PAGE_H__
-+#define __ASM_ARM_DOMAIN_PAGE_H__
-+
-+#ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
-+bool init_domheap_mappings(unsigned int cpu);
-+#else
-+static inline bool init_domheap_mappings(unsigned int cpu)
++/*
++ * This either populates a valid direct map, or allocates empty L3 tables and
++ * creates the L4 entries for virtual address between [start, end) in the
++ * direct map depending on has_directmap();
++ *
++ * When directmap=no, we still need to populate empty L3 tables in the
++ * direct map region. The reason is that on-demand xenheap mappings are
++ * created in the idle domain's page table but must be seen by
++ * everyone. Since all domains share the direct map L4 entries, they
++ * will share xenheap mappings if we pre-populate the L4 entries and L3
++ * tables in the direct map region for all RAM. We also rely on the fact
++ * that L3 tables are never freed.
++ */
++static void __init populate_directmap(uint64_t pstart, uint64_t pend,
++                                      unsigned int flags)
 +{
-+    return true;
++    unsigned long vstart = (unsigned long)__va(pstart);
++    unsigned long vend = (unsigned long)__va(pend);
++
++    if ( pstart >= pend )
++        return;
++
++    BUG_ON(vstart < DIRECTMAP_VIRT_START);
++    BUG_ON(vend > DIRECTMAP_VIRT_END);
++
++    if ( has_directmap() )
++        /* Populate valid direct map. */
++        BUG_ON(map_pages_to_xen(vstart, maddr_to_mfn(pstart),
++                                PFN_DOWN(pend - pstart), flags));
++    else
++    {
++        /* Create empty L3 tables. */
++        unsigned long vaddr = vstart & ~((1UL << L4_PAGETABLE_SHIFT) - 1);
++
++        for ( ; vaddr < vend; vaddr += (1UL << L4_PAGETABLE_SHIFT) )
++        {
++            l4_pgentry_t *pl4e = &idle_pg_table[l4_table_offset(vaddr)];
++
++            if ( !(l4e_get_flags(*pl4e) & _PAGE_PRESENT) )
++            {
++                mfn_t mfn = alloc_boot_pages(1, 1);
++                void *v = map_domain_page(mfn);
++
++                clear_page(v);
++                UNMAP_DOMAIN_PAGE(v);
++                l4e_write(pl4e, l4e_from_mfn(mfn, __PAGE_HYPERVISOR));
++            }
++        }
++    }
 +}
-+#endif
 +
-+#endif /* __ASM_ARM_DOMAIN_PAGE_H__ */
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 9a94d7eaf7..a76578a16f 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -2,6 +2,9 @@
- #define __ARCH_ARM_MM__
- 
- #include <xen/kernel.h>
-+#include <xen/percpu.h>
-+
-+#include <asm/lpae.h>
- #include <asm/page.h>
- #include <public/xen.h>
- #include <xen/pdx.h>
-diff --git a/xen/arch/arm/include/asm/mmu/mm.h b/xen/arch/arm/include/asm/mmu/mm.h
-index c5e03a66bf..c03c3a51e4 100644
---- a/xen/arch/arm/include/asm/mmu/mm.h
-+++ b/xen/arch/arm/include/asm/mmu/mm.h
-@@ -2,6 +2,8 @@
- #ifndef __ARM_MMU_MM_H__
- #define __ARM_MMU_MM_H__
- 
-+DECLARE_PER_CPU(lpae_t *, xen_pgtable);
-+
- /* Non-boot CPUs use this to find the correct pagetables. */
- extern uint64_t init_ttbr;
- 
-diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
-index a7755728ae..e772ab4e66 100644
---- a/xen/arch/arm/mmu/pt.c
-+++ b/xen/arch/arm/mmu/pt.c
-@@ -606,9 +606,9 @@ static int xen_pt_update(unsigned long virt,
-     unsigned long left = nr_mfns;
- 
-     /*
--     * For arm32, page-tables are different on each CPUs. Yet, they share
--     * some common mappings. It is assumed that only common mappings
--     * will be modified with this function.
-+     * Page-tables are different on each CPU. Yet, they share some common
-+     * mappings. It is assumed that only common mappings will be modified
-+     * with this function.
-      *
-      * XXX: Add a check.
-      */
-diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
-index 57f1b46499..8c81e26da3 100644
---- a/xen/arch/arm/mmu/setup.c
-+++ b/xen/arch/arm/mmu/setup.c
-@@ -26,17 +26,15 @@
-  * PCPUs.
-  */
- 
--#ifdef CONFIG_ARM_64
--DEFINE_PAGE_TABLE(xen_pgtable);
--static DEFINE_PAGE_TABLE(xen_first);
--#define THIS_CPU_PGTABLE xen_pgtable
--#else
- /* Per-CPU pagetable pages */
- /* xen_pgtable == root of the trie (zeroeth level on 64-bit, first on 32-bit) */
- DEFINE_PER_CPU(lpae_t *, xen_pgtable);
- #define THIS_CPU_PGTABLE this_cpu(xen_pgtable)
- /* Root of the trie for cpu0, other CPU's PTs are dynamically allocated */
- static DEFINE_PAGE_TABLE(cpu0_pgtable);
-+
-+#ifdef CONFIG_ARM_64
-+static DEFINE_PAGE_TABLE(xen_first);
- #endif
- 
- /* Common pagetable leaves */
-@@ -228,19 +226,22 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
-     lpae_t pte, *p;
-     int i;
- 
-+    p = cpu0_pgtable;
-+
-     phys_offset = boot_phys_offset;
- 
-+    /* arch_setup_page_tables() may need to access the root page-tables. */
-+    per_cpu(xen_pgtable, 0) = cpu0_pgtable;
-+
-     arch_setup_page_tables();
- 
- #ifdef CONFIG_ARM_64
-     pte = pte_of_xenaddr((uintptr_t)xen_first);
-     pte.pt.table = 1;
-     pte.pt.xn = 0;
--    xen_pgtable[zeroeth_table_offset(XEN_VIRT_START)] = pte;
-+    p[zeroeth_table_offset(XEN_VIRT_START)] = pte;
- 
--    p = (void *) xen_first;
--#else
--    p = (void *) cpu0_pgtable;
-+    p = xen_first;
- #endif
- 
-     /* Map xen second level page-table */
-@@ -283,19 +284,11 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
-     pte.pt.table = 1;
-     xen_second[second_table_offset(FIXMAP_ADDR(0))] = pte;
- 
--#ifdef CONFIG_ARM_64
--    ttbr = (uintptr_t) xen_pgtable + phys_offset;
--#else
-     ttbr = (uintptr_t) cpu0_pgtable + phys_offset;
--#endif
- 
-     switch_ttbr(ttbr);
- 
-     xen_pt_enforce_wnx();
--
--#ifdef CONFIG_ARM_32
--    per_cpu(xen_pgtable, 0) = cpu0_pgtable;
--#endif
- }
- 
- void *__init arch_vmap_virt_end(void)
-diff --git a/xen/arch/arm/mmu/smpboot.c b/xen/arch/arm/mmu/smpboot.c
-index fb5df667ba..fdd9b9c580 100644
---- a/xen/arch/arm/mmu/smpboot.c
-+++ b/xen/arch/arm/mmu/smpboot.c
-@@ -7,6 +7,7 @@
- 
- #include <xen/domain_page.h>
- 
-+#include <asm/domain_page.h>
- #include <asm/setup.h>
- 
- /*
-@@ -68,20 +69,6 @@ static void clear_boot_pagetables(void)
-     clear_table(boot_third);
- }
- 
--#ifdef CONFIG_ARM_64
--int prepare_secondary_mm(int cpu)
--{
--    clear_boot_pagetables();
--
--    /*
--     * Set init_ttbr for this CPU coming up. All CPUs share a single setof
--     * pagetables, but rewrite it each time for consistency with 32 bit.
--     */
--    init_ttbr = virt_to_maddr(xen_pgtable);
--    clean_dcache(init_ttbr);
--    return 0;
--}
--#else
- int prepare_secondary_mm(int cpu)
+ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
  {
-     lpae_t *root = alloc_xenheap_page();
-@@ -112,7 +99,6 @@ int prepare_secondary_mm(int cpu)
+     const char *memmap_type = NULL, *loader, *cmdline = "";
+@@ -1596,8 +1647,17 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         map_e = min_t(uint64_t, e,
+                       ARRAY_SIZE(l2_directmap) << L2_PAGETABLE_SHIFT);
  
-     return 0;
- }
--#endif
+-        /* Pass mapped memory to allocator /before/ creating new mappings. */
++        /*
++         * Pass mapped memory to allocator /before/ creating new mappings.
++         * The direct map for the bottom 4GiB has been populated in the first
++         * e820 pass. In the second pass, we make sure those existing mappings
++         * are destroyed when directmap=no.
++         */
+         init_boot_pages(s, min(map_s, e));
++        if ( !has_directmap() )
++            destroy_xen_mappings((unsigned long)__va(s),
++                                 (unsigned long)__va(min(map_s, e)));
++
+         s = map_s;
+         if ( s < map_e )
+         {
+@@ -1605,6 +1665,9 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+             map_s = (s + mask) & ~mask;
+             map_e &= ~mask;
+             init_boot_pages(map_s, map_e);
++            if ( !has_directmap() )
++                destroy_xen_mappings((unsigned long)__va(map_s),
++                                     (unsigned long)__va(map_e));
+         }
  
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 7e28f62d09..3dec365c57 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -42,6 +42,7 @@
- #include <asm/gic.h>
- #include <asm/cpuerrata.h>
- #include <asm/cpufeature.h>
-+#include <asm/domain_page.h>
- #include <asm/platform.h>
- #include <asm/procinfo.h>
- #include <asm/setup.h>
+         if ( map_s > map_e )
+@@ -1618,8 +1681,7 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+ 
+             if ( map_e < end )
+             {
+-                map_pages_to_xen((unsigned long)__va(map_e), maddr_to_mfn(map_e),
+-                                 PFN_DOWN(end - map_e), PAGE_HYPERVISOR);
++                populate_directmap(map_e, end, PAGE_HYPERVISOR);
+                 init_boot_pages(map_e, end);
+                 map_e = end;
+             }
+@@ -1628,13 +1690,11 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
+         {
+             /* This range must not be passed to the boot allocator and
+              * must also not be mapped with _PAGE_GLOBAL. */
+-            map_pages_to_xen((unsigned long)__va(map_e), maddr_to_mfn(map_e),
+-                             PFN_DOWN(e - map_e), __PAGE_HYPERVISOR_RW);
++            populate_directmap(map_e, e, __PAGE_HYPERVISOR_RW);
+         }
+         if ( s < map_s )
+         {
+-            map_pages_to_xen((unsigned long)__va(s), maddr_to_mfn(s),
+-                             PFN_DOWN(map_s - s), PAGE_HYPERVISOR);
++            populate_directmap(s, map_s, PAGE_HYPERVISOR);
+             init_boot_pages(s, map_s);
+         }
+     }
 -- 
 2.40.1
 
