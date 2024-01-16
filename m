@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C405C47DA2
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:06:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.668018.1039852 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A108FC47077
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:07:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.668027.1039872 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPol6-0006bf-N6; Tue, 16 Jan 2024 19:06:00 +0000
+	id 1rPomB-0007xt-DX; Tue, 16 Jan 2024 19:07:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 668018.1039852; Tue, 16 Jan 2024 19:06:00 +0000
+Received: by outflank-mailman (output) from mailman id 668027.1039872; Tue, 16 Jan 2024 19:07:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPol6-0006bY-K2; Tue, 16 Jan 2024 19:06:00 +0000
-Received: by outflank-mailman (input) for mailman id 668018;
- Tue, 16 Jan 2024 19:05:59 +0000
+	id 1rPomB-0007xk-AG; Tue, 16 Jan 2024 19:07:07 +0000
+Received: by outflank-mailman (input) for mailman id 668027;
+ Tue, 16 Jan 2024 19:07:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wmx9=I2=amazon.co.uk=prvs=738631f0b=eliasely@srs-se1.protection.inumbo.net>)
- id 1rPoXy-0002UD-NF
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:26 +0000
-Received: from smtp-fw-80007.amazon.com (smtp-fw-80007.amazon.com
- [99.78.197.218]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6294a509-b4a0-11ee-98f1-6d05b1d4d9a1;
- Tue, 16 Jan 2024 19:52:25 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-iad-1a-m6i4x-9fe6ad2f.us-east-1.amazon.com)
- ([10.25.36.210]) by smtp-border-fw-80007.pdx80.corp.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:23 +0000
+ id 1rPoY9-0002UD-93
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 18:52:37 +0000
+Received: from smtp-fw-80008.amazon.com (smtp-fw-80008.amazon.com
+ [99.78.197.219]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 69ce5dde-b4a0-11ee-98f1-6d05b1d4d9a1;
+ Tue, 16 Jan 2024 19:52:36 +0100 (CET)
+Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO
+ email-inbound-relay-iad-1a-m6i4x-47cc8a4c.us-east-1.amazon.com)
+ ([10.25.36.214]) by smtp-border-fw-80008.pdx80.corp.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 18:52:33 +0000
 Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
- (iad7-ws-svc-p70-lb3-vlan3.iad.amazon.com [10.32.235.38])
- by email-inbound-relay-iad-1a-m6i4x-9fe6ad2f.us-east-1.amazon.com (Postfix)
- with ESMTPS id 63A89899F5; Tue, 16 Jan 2024 18:52:20 +0000 (UTC)
-Received: from EX19MTAUEA001.ant.amazon.com [10.0.44.209:26324]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.41.129:2525]
+ (iad7-ws-svc-p70-lb3-vlan2.iad.amazon.com [10.32.235.34])
+ by email-inbound-relay-iad-1a-m6i4x-47cc8a4c.us-east-1.amazon.com (Postfix)
+ with ESMTPS id 6F4AB1617D2; Tue, 16 Jan 2024 18:52:30 +0000 (UTC)
+Received: from EX19MTAUEA002.ant.amazon.com [10.0.29.78:60545]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.19.196:2525]
  with esmtp (Farcaster)
- id 017ffc13-78d7-4ea7-a4ca-46863278c9c5; Tue, 16 Jan 2024 18:52:20 +0000 (UTC)
+ id 22f39cde-31e3-4ae5-85d7-d6aeaa59c7ad; Tue, 16 Jan 2024 18:52:30 +0000 (UTC)
 Received: from EX19D008UEA001.ant.amazon.com (10.252.134.62) by
- EX19MTAUEA001.ant.amazon.com (10.252.134.203) with Microsoft SMTP Server
+ EX19MTAUEA002.ant.amazon.com (10.252.134.9) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:52:10 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:29 +0000
 Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
  EX19D008UEA001.ant.amazon.com (10.252.134.62) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 18:52:09 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 18:52:29 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:52:07 +0000
+ 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 18:52:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,163 +60,185 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
-Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6294a509-b4a0-11ee-98f1-6d05b1d4d9a1
+X-Inumbo-ID: 69ce5dde-b4a0-11ee-98f1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1705431145; x=1736967145;
+  t=1705431156; x=1736967156;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=SgoUYRGfBhQWiY7NendWHvruacHBLERYGlNvfzPucEo=;
-  b=XmVXyfFFxVS+opJwfrERXHHZmpWpI4Hr6aHiC8U6OhHdBKZVfgI8YZVE
-   GC1qPCHNdWBPLjFTUmZ8tudg1/7rkvewV4gaLp52t9rcn9KWl67appRNV
-   Eh4LQM+G6LXQ3643ntf6M/JC34dYddr74Z1BUXkwepqkfuQMTgnZGt/A5
-   k=;
+  bh=bXzdRNb+zZSWrMCWDYUPYL1ZiOjiL92dtef2XmbIpMo=;
+  b=EzgS0wEKHM7aaCfLocmT8zbvEAm7v1cEkkGMPQcknqpr5PBfOKGcqaXE
+   XQdCTWfcgjkDVtC8xAkr3AjZ0FAeW7k2CVHkGhI1VqnfsNFJrGnzownqu
+   Z3RGe9hk6l+l0FnoGGH3SKGXvZNjqaWHTQJgUsk+fewaOsLYzn/BYz0iK
+   M=;
 X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="267182286"
-X-Farcaster-Flow-ID: 017ffc13-78d7-4ea7-a4ca-46863278c9c5
+   d="scan'208";a="58742966"
+X-Farcaster-Flow-ID: 22f39cde-31e3-4ae5-85d7-d6aeaa59c7ad
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Hongyan Xia
-	<hongyxia@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "George
- Dunlap" <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Julien Grall
-	<jgrall@amazon.com>, Elias El Yandouzi <eliasely@amazon.com>
-Subject: [PATCH v2] xen/page_alloc: Add a path for xenheap when there is no direct map
-Date: Tue, 16 Jan 2024 18:50:47 +0000
-Message-ID: <20240116185056.15000-19-eliasely@amazon.com>
+CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Julien Grall
+	<jgrall@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Elias El Yandouzi
+	<eliasely@amazon.com>
+Subject: [PATCH v2] xen/arm64: Allow the admin to enable/disable the directmap
+Date: Tue, 16 Jan 2024 18:50:56 +0000
+Message-ID: <20240116185056.15000-28-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240116185056.15000-1-eliasely@amazon.com>
 References: <20240116185056.15000-1-eliasely@amazon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Precedence: Bulk
 
-From: Hongyan Xia <hongyxia@amazon.com>
+From: Julien Grall <jgrall@amazon.com>
 
-When there is not an always-mapped direct map, xenheap allocations need
-to be mapped and unmapped on-demand.
+Implement the same command line option as x86 to enable/disable the
+directmap. By default this is kept enabled.
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Also modify setup_directmap_mappings() to populate the L0 entries
+related to the directmap area.
+
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
 ----
 
-    I have left the call to map_pages_to_xen() and destroy_xen_mappings()
-    in the split heap for now. I am not entirely convinced this is necessary
-    because in that setup only the xenheap would be always mapped and
-    this doesn't contain any guest memory (aside the grant-table).
-    So map/unmapping for every allocation seems unnecessary.
-
     Changes in v2:
-        * Fix remaining wrong indentation in alloc_xenheap_pages()
+        * Rely on the Kconfig option to enable Secret Hiding on Arm64
+        * Use generic helper instead of arch_has_directmap()
 
-    Changes since Hongyan's version:
-        * Rebase
-        * Fix indentation in alloc_xenheap_pages()
-        * Fix build for arm32
-
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index a3746cfbcf..52934ec5c1 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -2237,6 +2237,7 @@ void init_xenheap_pages(paddr_t ps, paddr_t pe)
- void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 63c946f482..df90b1c4c9 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -799,7 +799,7 @@ that enabling this option cannot guarantee anything beyond what underlying
+ hardware guarantees (with, where available and known to Xen, respective
+ tweaks applied).
+ 
+-### directmap (x86)
++### directmap (arm64, x86)
+ > `= <boolean>`
+ 
+ > Default: `true`
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 278243f0d6..7a19826233 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -7,6 +7,7 @@ config ARM_64
+ 	depends on !ARM_32
+ 	select 64BIT
+ 	select HAS_FAST_MULTIPLY
++	select HAS_SECRET_HIDING
+ 
+ config ARM
+ 	def_bool y
+diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
+index f4a81aa705..22e1e5b9f4 100644
+--- a/xen/arch/arm/arm64/mmu/mm.c
++++ b/xen/arch/arm/arm64/mmu/mm.c
+@@ -157,16 +157,27 @@ void __init switch_ttbr(uint64_t ttbr)
+     update_identity_mapping(false);
+ }
+ 
+-/* Map the region in the directmap area. */
++/*
++ * This either populate a valid fdirect map, or allocates empty L1 tables
++ * and creates the L0 entries for the given region in the direct map
++ * depending on has_directmap().
++ *
++ * When directmap=no, we still need to populate empty L1 tables in the
++ * directmap region. The reason is that the root page-table (i.e. L0)
++ * is per-CPU and secondary CPUs will initialize their root page-table
++ * based on the pCPU0 one. So L0 entries will be shared if they are
++ * pre-populated. We also rely on the fact that L1 tables are never
++ * freed.
++ */
+ static void __init setup_directmap_mappings(unsigned long base_mfn,
+                                             unsigned long nr_mfns)
  {
-     struct page_info *pg;
-+    void *ret;
++    unsigned long mfn_gb = base_mfn & ~((FIRST_SIZE >> PAGE_SHIFT) - 1);
+     int rc;
  
-     ASSERT_ALLOC_CONTEXT();
+     /* First call sets the directmap physical and virtual offset. */
+     if ( mfn_eq(directmap_mfn_start, INVALID_MFN) )
+     {
+-        unsigned long mfn_gb = base_mfn & ~((FIRST_SIZE >> PAGE_SHIFT) - 1);
  
-@@ -2245,17 +2246,36 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
-     if ( unlikely(pg == NULL) )
-         return NULL;
+         directmap_mfn_start = _mfn(base_mfn);
+         directmap_base_pdx = mfn_to_pdx(_mfn(base_mfn));
+@@ -187,6 +198,24 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
+         panic("cannot add directmap mapping at %lx below heap start %lx\n",
+               base_mfn, mfn_x(directmap_mfn_start));
  
-+    ret = page_to_virt(pg);
-+
-+    if ( !has_directmap() &&
-+         map_pages_to_xen((unsigned long)ret, page_to_mfn(pg), 1UL << order,
-+                          PAGE_HYPERVISOR) )
++    if ( !has_directmap() )
 +    {
-+        /* Failed to map xenheap pages. */
-+        free_heap_pages(pg, order, false);
-+        return NULL;
++        vaddr_t vaddr = (vaddr_t)__mfn_to_virt(base_mfn);
++        lpae_t *root = this_cpu(xen_pgtable);
++        unsigned int i, slot;
++
++        slot = first_table_offset(vaddr);
++        nr_mfns += base_mfn - mfn_gb;
++        for ( i = 0; i < nr_mfns; i += BIT(XEN_PT_LEVEL_ORDER(0), UL), slot++ )
++        {
++            lpae_t *entry = &root[slot];
++
++            if ( !lpae_is_valid(*entry) && !create_xen_table(entry) )
++                panic("Unable to populate zeroeth slot %u\n", slot);
++        }
++        return;
 +    }
 +
-     return page_to_virt(pg);
- }
+     rc = map_pages_to_xen((vaddr_t)__mfn_to_virt(base_mfn),
+                           _mfn(base_mfn), nr_mfns,
+                           PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
+diff --git a/xen/arch/arm/include/asm/arm64/mm.h b/xen/arch/arm/include/asm/arm64/mm.h
+index e0bd23a6ed..5888f29159 100644
+--- a/xen/arch/arm/include/asm/arm64/mm.h
++++ b/xen/arch/arm/include/asm/arm64/mm.h
+@@ -3,13 +3,10 @@
  
+ extern DEFINE_PAGE_TABLE(xen_pgtable);
  
- void free_xenheap_pages(void *v, unsigned int order)
+-/*
+- * On ARM64, all the RAM is currently direct mapped in Xen.
+- * Hence return always true.
+- */
++/* On Arm64, the user can chose whether all the RAM is directmap. */
+ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
  {
-+    unsigned long va = (unsigned long)v & PAGE_MASK;
-+
-     ASSERT_ALLOC_CONTEXT();
- 
-     if ( v == NULL )
-         return;
- 
-+    if ( !has_directmap() &&
-+         destroy_xen_mappings(va, va + (1UL << (order + PAGE_SHIFT))) )
-+        dprintk(XENLOG_WARNING,
-+                "Error while destroying xenheap mappings at %p, order %u\n",
-+                v, order);
-+
-     free_heap_pages(virt_to_page(v), order, false);
+-    return true;
++    return has_directmap();
  }
  
-@@ -2279,6 +2299,7 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
- {
-     struct page_info *pg;
-     unsigned int i;
-+    void *ret;
+ void arch_setup_page_tables(void);
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index b15a18a494..7fb75c5c3e 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -12,6 +12,7 @@
+ #include <xen/grant_table.h>
+ #include <xen/guest_access.h>
+ #include <xen/mm.h>
++#include <xen/param.h>
  
-     ASSERT_ALLOC_CONTEXT();
+ #include <xsm/xsm.h>
  
-@@ -2291,16 +2312,28 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
-     if ( unlikely(pg == NULL) )
-         return NULL;
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 3dec365c57..2bd060d321 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -748,6 +748,7 @@ void asmlinkage __init start_xen(unsigned long boot_phys_offset,
+     cmdline_parse(cmdline);
  
-+    ret = page_to_virt(pg);
-+
-+    if ( !has_directmap() &&
-+         map_pages_to_xen((unsigned long)ret, page_to_mfn(pg), 1UL << order,
-+                          PAGE_HYPERVISOR) )
-+    {
-+        /* Failed to map xenheap pages. */
-+        free_domheap_pages(pg, order);
-+        return NULL;
-+    }
-+
-     for ( i = 0; i < (1u << order); i++ )
-         pg[i].count_info |= PGC_xen_heap;
+     setup_mm();
++    printk("Booting with directmap %s\n", has_directmap() ? "on" : "off");
  
--    return page_to_virt(pg);
-+    return ret;
- }
- 
- void free_xenheap_pages(void *v, unsigned int order)
- {
-     struct page_info *pg;
-     unsigned int i;
-+    unsigned long va = (unsigned long)v & PAGE_MASK;
- 
-     ASSERT_ALLOC_CONTEXT();
- 
-@@ -2312,6 +2345,12 @@ void free_xenheap_pages(void *v, unsigned int order)
-     for ( i = 0; i < (1u << order); i++ )
-         pg[i].count_info &= ~PGC_xen_heap;
- 
-+    if ( !has_directmap() &&
-+         destroy_xen_mappings(va, va + (1UL << (order + PAGE_SHIFT))) )
-+        dprintk(XENLOG_WARNING,
-+                "Error while destroying xenheap mappings at %p, order %u\n",
-+                v, order);
-+
-     free_heap_pages(pg, order, true);
- }
+     vm_init();
  
 -- 
 2.40.1
