@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A0CC47258
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:26:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.668094.1040095 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 614FAC47258
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jan 2024 19:28:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.668118.1040122 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPp5F-0007FI-4b; Tue, 16 Jan 2024 19:26:49 +0000
+	id 1rPp72-0004bV-C9; Tue, 16 Jan 2024 19:28:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 668094.1040095; Tue, 16 Jan 2024 19:26:48 +0000
+Received: by outflank-mailman (output) from mailman id 668118.1040122; Tue, 16 Jan 2024 19:28:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rPp5E-0007CZ-I3; Tue, 16 Jan 2024 19:26:48 +0000
-Received: by outflank-mailman (input) for mailman id 668094;
- Tue, 16 Jan 2024 19:26:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rPp72-0004bM-8i; Tue, 16 Jan 2024 19:28:40 +0000
+Received: by outflank-mailman (input) for mailman id 668118;
+ Tue, 16 Jan 2024 19:28:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wmx9=I2=amazon.co.uk=prvs=738631f0b=eliasely@srs-se1.protection.inumbo.net>)
- id 1rPp5C-0002iI-6d
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 19:26:46 +0000
-Received: from smtp-fw-9102.amazon.com (smtp-fw-9102.amazon.com
- [207.171.184.29]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2d8e4dfc-b4a5-11ee-9b0f-b553b5be7939;
- Tue, 16 Jan 2024 20:26:44 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO
- email-inbound-relay-pdx-2b-m6i4x-f253a3a3.us-west-2.amazon.com)
- ([10.25.36.214]) by smtp-border-fw-9102.sea19.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 19:26:35 +0000
+ id 1rPp5U-0003Xv-35
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2024 19:27:04 +0000
+Received: from smtp-fw-52002.amazon.com (smtp-fw-52002.amazon.com
+ [52.119.213.150]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 395d8250-b4a5-11ee-98f1-6d05b1d4d9a1;
+ Tue, 16 Jan 2024 20:27:02 +0100 (CET)
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-pdx-2c-m6i4x-d2040ec1.us-west-2.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-52002.iad7.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 19:27:01 +0000
 Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev
  (pdx2-ws-svc-p26-lb5-vlan2.pdx.amazon.com [10.39.38.66])
- by email-inbound-relay-pdx-2b-m6i4x-f253a3a3.us-west-2.amazon.com (Postfix)
- with ESMTPS id B30BC8A2C3; Tue, 16 Jan 2024 19:26:34 +0000 (UTC)
-Received: from EX19MTAUEB001.ant.amazon.com [10.0.44.209:55964]
- by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.15.248:2525]
+ by email-inbound-relay-pdx-2c-m6i4x-d2040ec1.us-west-2.amazon.com (Postfix)
+ with ESMTPS id 90AE540D7F; Tue, 16 Jan 2024 19:26:59 +0000 (UTC)
+Received: from EX19MTAUEB002.ant.amazon.com [10.0.29.78:14119]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.57.22:2525]
  with esmtp (Farcaster)
- id f65ba36b-25b8-4d05-94e6-4f35e33c5e6c; Tue, 16 Jan 2024 19:26:34 +0000 (UTC)
+ id 193c356f-d5a1-4ec0-b9d7-e823c4fd556c; Tue, 16 Jan 2024 19:26:58 +0000 (UTC)
 Received: from EX19D008UEA004.ant.amazon.com (10.252.134.191) by
- EX19MTAUEB001.ant.amazon.com (10.252.135.108) with Microsoft SMTP Server
+ EX19MTAUEB002.ant.amazon.com (10.252.135.47) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 19:26:33 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 19:26:46 +0000
 Received: from EX19MTAUEB001.ant.amazon.com (10.252.135.35) by
  EX19D008UEA004.ant.amazon.com (10.252.134.191) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 16 Jan 2024 19:26:33 +0000
+ 15.2.1118.40; Tue, 16 Jan 2024 19:26:46 +0000
 Received: from dev-dsk-eliasely-1a-fd74790f.eu-west-1.amazon.com
  (10.253.91.118) by mail-relay.amazon.com (10.252.135.35) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 19:26:32 +0000
+ 15.2.1118.40 via Frontend Transport; Tue, 16 Jan 2024 19:26:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,32 +61,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d8e4dfc-b4a5-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 395d8250-b4a5-11ee-98f1-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1705433204; x=1736969204;
+  t=1705433223; x=1736969223;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=wuXlYkg7+aoOLvwI5g/1GuKiK7EGIYHkmtLupKWUrjI=;
-  b=b2J504VdoICtkKKbRBdd/H22G7IwiUjt37SvIJBC/W1XQa0c2k8l++zp
-   fiLEWcsDWqFtLxB8JNzN6qKgey+qMtxcvrUI1mOQqjud8WYdfcuXc/Foc
-   44HcKRaQIXLTu4fEwK4G6Ne6dGodrXlfMR1N2K6z5xhyEcqTDCQr1vC+Q
-   o=;
+  bh=HBVAS715RpCNC8CvMLRfobjdzDnsKgjKWFL+xKdoEXs=;
+  b=i4udLAip7iPs8rJsBIgH6ZhDtid5EH+Du6YLwpmLgFbxxE2o99m3zaVJ
+   tyOl4eewHaTALD5eTHySaeGJhSluultpsqmZ9WqKXwUfjhGQ3TRnktEOr
+   GLdsZHiN0WIE6NU7U+eJE1c8h5T4eMQ+PfTKBXywe3jZx7N6c1Cf6B9pv
+   k=;
 X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="390211249"
-X-Farcaster-Flow-ID: f65ba36b-25b8-4d05-94e6-4f35e33c5e6c
+   d="scan'208";a="606818936"
+X-Farcaster-Flow-ID: 193c356f-d5a1-4ec0-b9d7-e823c4fd556c
 From: Elias El Yandouzi <eliasely@amazon.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <julien@xen.org>, <pdurrant@amazon.com>, <dwmw@amazon.com>, Julien Grall
 	<jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>, "Bertrand
  Marquis" <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>, Wei Liu <wl@xen.org>, Elias El Yandouzi
-	<eliasely@amazon.com>, Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH v2 (resend) 14/27] xen/arm: fixmap: Rename the fixmap slots to follow the x86 convention
-Date: Tue, 16 Jan 2024 19:25:58 +0000
-Message-ID: <20240116192611.41112-15-eliasely@amazon.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Elias El Yandouzi
+	<eliasely@amazon.com>
+Subject: [PATCH v2 (resend) 25/27] xen/arm64: mm: Use per-pCPU page-tables
+Date: Tue, 16 Jan 2024 19:26:09 +0000
+Message-ID: <20240116192611.41112-26-eliasely@amazon.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240116192611.41112-1-eliasely@amazon.com>
 References: <20240116192611.41112-1-eliasely@amazon.com>
@@ -97,185 +95,285 @@ Precedence: Bulk
 
 From: Julien Grall <jgrall@amazon.com>
 
-At the moment the fixmap slots are prefixed differently between arm and
-x86.
+At the moment, on Arm64, every pCPU is sharing the same page-tables.
 
-Some of them (e.g. the PMAP slots) are used in common code. So it would
-be better if they are named the same way to avoid having to create
-aliases.
+In a follow-up patch, we will allow the possibility to remove the
+direct map and therefore it will be necessary to have a mapcache.
 
-I have decided to use the x86 naming because they are less change. So
-all the Arm fixmap slots will now be prefixed with FIX rather than
-FIXMAP.
+While we have plenty of spare virtual address space to reserve part
+for each pCPU, it means that temporary mappings (e.g. guest memory)
+could be accessible by every pCPU.
+
+In order to increase our security posture, it would be better if
+those mappings are only accessible by the pCPU doing the temporary
+mapping.
+
+In addition to that, a per-pCPU page-tables opens the way to have
+per-domain mapping area.
+
+Arm32 is already using per-pCPU page-tables so most of the code
+can be re-used. Arm64 doesn't yet have support for the mapcache,
+so a stub is provided (moved to its own header asm/domain_page.h).
+
+Take the opportunity to fix a typo in a comment that is modified.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Elias El Yandouzi <eliasely@amazon.com>
 
-Reviewed-by: Henry Wang <Henry.Wang@arm.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-
 ----
 
-    Note that potentially more renaming that could be done to share
-    more code in future. I have decided to not do that to avoid going
-    down a rabbit hole.
+    Changelog since v1:
+        * Rebase
+        * Fix typoes
 
-diff --git a/xen/arch/arm/acpi/lib.c b/xen/arch/arm/acpi/lib.c
-index 41d521f720..736cf09eca 100644
---- a/xen/arch/arm/acpi/lib.c
-+++ b/xen/arch/arm/acpi/lib.c
-@@ -40,10 +40,10 @@ char *__acpi_map_table(paddr_t phys, unsigned long size)
-         return NULL;
+diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
+index d2651c9486..4f339efb7b 100644
+--- a/xen/arch/arm/arm64/mmu/mm.c
++++ b/xen/arch/arm/arm64/mmu/mm.c
+@@ -75,6 +75,7 @@ static void __init prepare_runtime_identity_mapping(void)
+     paddr_t id_addr = virt_to_maddr(_start);
+     lpae_t pte;
+     DECLARE_OFFSETS(id_offsets, id_addr);
++    lpae_t *root = this_cpu(xen_pgtable);
  
-     offset = phys & (PAGE_SIZE - 1);
--    base = FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) + offset;
-+    base = FIXMAP_ADDR(FIX_ACPI_BEGIN) + offset;
+     if ( id_offsets[0] >= IDENTITY_MAPPING_AREA_NR_L0 )
+         panic("Cannot handle ID mapping above %uTB\n",
+@@ -85,7 +86,7 @@ static void __init prepare_runtime_identity_mapping(void)
+     pte.pt.table = 1;
+     pte.pt.xn = 0;
  
-     /* Check the fixmap is big enough to map the region */
--    if ( (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE - base) < size )
-+    if ( (FIXMAP_ADDR(FIX_ACPI_END) + PAGE_SIZE - base) < size )
-         return NULL;
+-    write_pte(&xen_pgtable[id_offsets[0]], pte);
++    write_pte(&root[id_offsets[0]], pte);
  
-     /* With the fixmap, we can only map one region at the time */
-@@ -54,7 +54,7 @@ char *__acpi_map_table(paddr_t phys, unsigned long size)
+     /* Link second ID table */
+     pte = pte_of_xenaddr((vaddr_t)xen_second_id);
+diff --git a/xen/arch/arm/domain_page.c b/xen/arch/arm/domain_page.c
+index 3a43601623..ac2a6d0332 100644
+--- a/xen/arch/arm/domain_page.c
++++ b/xen/arch/arm/domain_page.c
+@@ -3,6 +3,8 @@
+ #include <xen/pmap.h>
+ #include <xen/vmap.h>
  
-     size += offset;
-     mfn = maddr_to_mfn(phys);
--    idx = FIXMAP_ACPI_BEGIN;
-+    idx = FIX_ACPI_BEGIN;
++#include <asm/domain_page.h>
++
+ /* Override macros from asm/page.h to make them work with mfn_t */
+ #undef virt_to_mfn
+ #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
+diff --git a/xen/arch/arm/include/asm/arm32/mm.h b/xen/arch/arm/include/asm/arm32/mm.h
+index 856f2dbec4..87a315db01 100644
+--- a/xen/arch/arm/include/asm/arm32/mm.h
++++ b/xen/arch/arm/include/asm/arm32/mm.h
+@@ -1,12 +1,6 @@
+ #ifndef __ARM_ARM32_MM_H__
+ #define __ARM_ARM32_MM_H__
  
-     do {
-         set_fixmap(idx, mfn, PAGE_HYPERVISOR);
-@@ -72,8 +72,8 @@ bool __acpi_unmap_table(const void *ptr, unsigned long size)
-     unsigned int idx;
+-#include <xen/percpu.h>
+-
+-#include <asm/lpae.h>
+-
+-DECLARE_PER_CPU(lpae_t *, xen_pgtable);
+-
+ /*
+  * Only a limited amount of RAM, called xenheap, is always mapped on ARM32.
+  * For convenience always return false.
+@@ -16,8 +10,6 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+     return false;
+ }
  
-     /* We are only handling fixmap address in the arch code */
--    if ( (vaddr < FIXMAP_ADDR(FIXMAP_ACPI_BEGIN)) ||
--         (vaddr >= (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE)) )
-+    if ( (vaddr < FIXMAP_ADDR(FIX_ACPI_BEGIN)) ||
-+         (vaddr >= (FIXMAP_ADDR(FIX_ACPI_END) + PAGE_SIZE)) )
-         return false;
+-bool init_domheap_mappings(unsigned int cpu);
+-
+ static inline void arch_setup_page_tables(void)
+ {
+ }
+diff --git a/xen/arch/arm/include/asm/domain_page.h b/xen/arch/arm/include/asm/domain_page.h
+new file mode 100644
+index 0000000000..e9f52685e2
+--- /dev/null
++++ b/xen/arch/arm/include/asm/domain_page.h
+@@ -0,0 +1,13 @@
++#ifndef __ASM_ARM_DOMAIN_PAGE_H__
++#define __ASM_ARM_DOMAIN_PAGE_H__
++
++#ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
++bool init_domheap_mappings(unsigned int cpu);
++#else
++static inline bool init_domheap_mappings(unsigned int cpu)
++{
++    return true;
++}
++#endif
++
++#endif /* __ASM_ARM_DOMAIN_PAGE_H__ */
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 9a94d7eaf7..a76578a16f 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -2,6 +2,9 @@
+ #define __ARCH_ARM_MM__
+ 
+ #include <xen/kernel.h>
++#include <xen/percpu.h>
++
++#include <asm/lpae.h>
+ #include <asm/page.h>
+ #include <public/xen.h>
+ #include <xen/pdx.h>
+diff --git a/xen/arch/arm/include/asm/mmu/mm.h b/xen/arch/arm/include/asm/mmu/mm.h
+index c5e03a66bf..c03c3a51e4 100644
+--- a/xen/arch/arm/include/asm/mmu/mm.h
++++ b/xen/arch/arm/include/asm/mmu/mm.h
+@@ -2,6 +2,8 @@
+ #ifndef __ARM_MMU_MM_H__
+ #define __ARM_MMU_MM_H__
+ 
++DECLARE_PER_CPU(lpae_t *, xen_pgtable);
++
+ /* Non-boot CPUs use this to find the correct pagetables. */
+ extern uint64_t init_ttbr;
+ 
+diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
+index a7755728ae..e772ab4e66 100644
+--- a/xen/arch/arm/mmu/pt.c
++++ b/xen/arch/arm/mmu/pt.c
+@@ -606,9 +606,9 @@ static int xen_pt_update(unsigned long virt,
+     unsigned long left = nr_mfns;
  
      /*
-@@ -81,16 +81,16 @@ bool __acpi_unmap_table(const void *ptr, unsigned long size)
-      * for the ACPI fixmap region. The caller is expected to free with
-      * the same address.
+-     * For arm32, page-tables are different on each CPUs. Yet, they share
+-     * some common mappings. It is assumed that only common mappings
+-     * will be modified with this function.
++     * Page-tables are different on each CPU. Yet, they share some common
++     * mappings. It is assumed that only common mappings will be modified
++     * with this function.
+      *
+      * XXX: Add a check.
       */
--    ASSERT((vaddr & PAGE_MASK) == FIXMAP_ADDR(FIXMAP_ACPI_BEGIN));
-+    ASSERT((vaddr & PAGE_MASK) == FIXMAP_ADDR(FIX_ACPI_BEGIN));
- 
-     /* The region allocated fit in the ACPI fixmap region. */
--    ASSERT(size < (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE - vaddr));
-+    ASSERT(size < (FIXMAP_ADDR(FIX_ACPI_END) + PAGE_SIZE - vaddr));
-     ASSERT(fixmap_inuse);
- 
-     fixmap_inuse = false;
- 
--    size += vaddr - FIXMAP_ADDR(FIXMAP_ACPI_BEGIN);
--    idx = FIXMAP_ACPI_BEGIN;
-+    size += vaddr - FIXMAP_ADDR(FIX_ACPI_BEGIN);
-+    idx = FIX_ACPI_BEGIN;
- 
-     do
-     {
-diff --git a/xen/arch/arm/include/asm/early_printk.h b/xen/arch/arm/include/asm/early_printk.h
-index c1e84f8b00..f444e89a86 100644
---- a/xen/arch/arm/include/asm/early_printk.h
-+++ b/xen/arch/arm/include/asm/early_printk.h
-@@ -17,7 +17,7 @@
- 
- /* need to add the uart address offset in page to the fixmap address */
- #define EARLY_UART_VIRTUAL_ADDRESS \
--    (FIXMAP_ADDR(FIXMAP_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
-+    (FIXMAP_ADDR(FIX_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
- 
- #define TEMPORARY_EARLY_UART_VIRTUAL_ADDRESS \
-     (TEMPORARY_FIXMAP_ADDR(FIXMAP_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
-diff --git a/xen/arch/arm/include/asm/fixmap.h b/xen/arch/arm/include/asm/fixmap.h
-index 734eb9b1d4..a823456ecb 100644
---- a/xen/arch/arm/include/asm/fixmap.h
-+++ b/xen/arch/arm/include/asm/fixmap.h
-@@ -8,17 +8,17 @@
- #include <xen/pmap.h>
- 
- /* Fixmap slots */
--#define FIXMAP_CONSOLE  0  /* The primary UART */
--#define FIXMAP_MISC     1  /* Ephemeral mappings of hardware */
--#define FIXMAP_ACPI_BEGIN  2  /* Start mappings of ACPI tables */
--#define FIXMAP_ACPI_END    (FIXMAP_ACPI_BEGIN + NUM_FIXMAP_ACPI_PAGES - 1)  /* End mappings of ACPI tables */
--#define FIXMAP_PMAP_BEGIN (FIXMAP_ACPI_END + 1) /* Start of PMAP */
--#define FIXMAP_PMAP_END (FIXMAP_PMAP_BEGIN + NUM_FIX_PMAP - 1) /* End of PMAP */
-+#define FIX_CONSOLE  0  /* The primary UART */
-+#define FIX_MISC     1  /* Ephemeral mappings of hardware */
-+#define FIX_ACPI_BEGIN  2  /* Start mappings of ACPI tables */
-+#define FIX_ACPI_END    (FIX_ACPI_BEGIN + NUM_FIXMAP_ACPI_PAGES - 1)  /* End mappings of ACPI tables */
-+#define FIX_PMAP_BEGIN (FIX_ACPI_END + 1) /* Start of PMAP */
-+#define FIX_PMAP_END (FIX_PMAP_BEGIN + NUM_FIX_PMAP - 1) /* End of PMAP */
- 
--#define FIXMAP_LAST FIXMAP_PMAP_END
-+#define FIX_LAST FIX_PMAP_END
- 
- #define FIXADDR_START FIXMAP_ADDR(0)
--#define FIXADDR_TOP FIXMAP_ADDR(FIXMAP_LAST)
-+#define FIXADDR_TOP FIXMAP_ADDR(FIX_LAST)
- 
- #ifndef __ASSEMBLY__
- 
 diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
-index 72725840b6..57f1b46499 100644
+index 57f1b46499..8c81e26da3 100644
 --- a/xen/arch/arm/mmu/setup.c
 +++ b/xen/arch/arm/mmu/setup.c
-@@ -351,7 +351,7 @@ void free_init_memory(void)
+@@ -26,17 +26,15 @@
+  * PCPUs.
   */
- void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
+ 
+-#ifdef CONFIG_ARM_64
+-DEFINE_PAGE_TABLE(xen_pgtable);
+-static DEFINE_PAGE_TABLE(xen_first);
+-#define THIS_CPU_PGTABLE xen_pgtable
+-#else
+ /* Per-CPU pagetable pages */
+ /* xen_pgtable == root of the trie (zeroeth level on 64-bit, first on 32-bit) */
+ DEFINE_PER_CPU(lpae_t *, xen_pgtable);
+ #define THIS_CPU_PGTABLE this_cpu(xen_pgtable)
+ /* Root of the trie for cpu0, other CPU's PTs are dynamically allocated */
+ static DEFINE_PAGE_TABLE(cpu0_pgtable);
++
++#ifdef CONFIG_ARM_64
++static DEFINE_PAGE_TABLE(xen_first);
+ #endif
+ 
+ /* Common pagetable leaves */
+@@ -228,19 +226,22 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
+     lpae_t pte, *p;
+     int i;
+ 
++    p = cpu0_pgtable;
++
+     phys_offset = boot_phys_offset;
+ 
++    /* arch_setup_page_tables() may need to access the root page-tables. */
++    per_cpu(xen_pgtable, 0) = cpu0_pgtable;
++
+     arch_setup_page_tables();
+ 
+ #ifdef CONFIG_ARM_64
+     pte = pte_of_xenaddr((uintptr_t)xen_first);
+     pte.pt.table = 1;
+     pte.pt.xn = 0;
+-    xen_pgtable[zeroeth_table_offset(XEN_VIRT_START)] = pte;
++    p[zeroeth_table_offset(XEN_VIRT_START)] = pte;
+ 
+-    p = (void *) xen_first;
+-#else
+-    p = (void *) cpu0_pgtable;
++    p = xen_first;
+ #endif
+ 
+     /* Map xen second level page-table */
+@@ -283,19 +284,11 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
+     pte.pt.table = 1;
+     xen_second[second_table_offset(FIXMAP_ADDR(0))] = pte;
+ 
+-#ifdef CONFIG_ARM_64
+-    ttbr = (uintptr_t) xen_pgtable + phys_offset;
+-#else
+     ttbr = (uintptr_t) cpu0_pgtable + phys_offset;
+-#endif
+ 
+     switch_ttbr(ttbr);
+ 
+     xen_pt_enforce_wnx();
+-
+-#ifdef CONFIG_ARM_32
+-    per_cpu(xen_pgtable, 0) = cpu0_pgtable;
+-#endif
+ }
+ 
+ void *__init arch_vmap_virt_end(void)
+diff --git a/xen/arch/arm/mmu/smpboot.c b/xen/arch/arm/mmu/smpboot.c
+index fb5df667ba..fdd9b9c580 100644
+--- a/xen/arch/arm/mmu/smpboot.c
++++ b/xen/arch/arm/mmu/smpboot.c
+@@ -7,6 +7,7 @@
+ 
+ #include <xen/domain_page.h>
+ 
++#include <asm/domain_page.h>
+ #include <asm/setup.h>
+ 
+ /*
+@@ -68,20 +69,6 @@ static void clear_boot_pagetables(void)
+     clear_table(boot_third);
+ }
+ 
+-#ifdef CONFIG_ARM_64
+-int prepare_secondary_mm(int cpu)
+-{
+-    clear_boot_pagetables();
+-
+-    /*
+-     * Set init_ttbr for this CPU coming up. All CPUs share a single setof
+-     * pagetables, but rewrite it each time for consistency with 32 bit.
+-     */
+-    init_ttbr = virt_to_maddr(xen_pgtable);
+-    clean_dcache(init_ttbr);
+-    return 0;
+-}
+-#else
+ int prepare_secondary_mm(int cpu)
  {
--    void *src = (void *)FIXMAP_ADDR(FIXMAP_MISC);
-+    void *src = (void *)FIXMAP_ADDR(FIX_MISC);
+     lpae_t *root = alloc_xenheap_page();
+@@ -112,7 +99,6 @@ int prepare_secondary_mm(int cpu)
  
-     while (len) {
-         unsigned long l, s;
-@@ -359,10 +359,10 @@ void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
-         s = paddr & (PAGE_SIZE - 1);
-         l = min(PAGE_SIZE - s, len);
+     return 0;
+ }
+-#endif
  
--        set_fixmap(FIXMAP_MISC, maddr_to_mfn(paddr), PAGE_HYPERVISOR_WC);
-+        set_fixmap(FIX_MISC, maddr_to_mfn(paddr), PAGE_HYPERVISOR_WC);
-         memcpy(dst, src + s, l);
-         clean_dcache_va_range(dst, l);
--        clear_fixmap(FIXMAP_MISC);
-+        clear_fixmap(FIX_MISC);
- 
-         paddr += l;
-         dst += l;
-diff --git a/xen/common/pmap.c b/xen/common/pmap.c
-index 14517198aa..6e3ba9298d 100644
---- a/xen/common/pmap.c
-+++ b/xen/common/pmap.c
-@@ -32,8 +32,8 @@ void *__init pmap_map(mfn_t mfn)
- 
-     __set_bit(idx, inuse);
- 
--    slot = idx + FIXMAP_PMAP_BEGIN;
--    ASSERT(slot >= FIXMAP_PMAP_BEGIN && slot <= FIXMAP_PMAP_END);
-+    slot = idx + FIX_PMAP_BEGIN;
-+    ASSERT(slot >= FIX_PMAP_BEGIN && slot <= FIX_PMAP_END);
- 
-     /*
-      * We cannot use set_fixmap() here. We use PMAP when the domain map
-@@ -53,10 +53,10 @@ void __init pmap_unmap(const void *p)
-     unsigned int slot = virt_to_fix((unsigned long)p);
- 
-     ASSERT(system_state < SYS_STATE_smp_boot);
--    ASSERT(slot >= FIXMAP_PMAP_BEGIN && slot <= FIXMAP_PMAP_END);
-+    ASSERT(slot >= FIX_PMAP_BEGIN && slot <= FIX_PMAP_END);
-     ASSERT(!in_irq());
- 
--    idx = slot - FIXMAP_PMAP_BEGIN;
-+    idx = slot - FIX_PMAP_BEGIN;
- 
-     __clear_bit(idx, inuse);
-     arch_pmap_unmap(slot);
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 7e28f62d09..3dec365c57 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -42,6 +42,7 @@
+ #include <asm/gic.h>
+ #include <asm/cpuerrata.h>
+ #include <asm/cpufeature.h>
++#include <asm/domain_page.h>
+ #include <asm/platform.h>
+ #include <asm/procinfo.h>
+ #include <asm/setup.h>
 -- 
 2.40.1
 
