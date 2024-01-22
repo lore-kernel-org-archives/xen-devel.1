@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D62C4725D
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Jan 2024 14:02:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.669954.1042514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F72C47DAF
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Jan 2024 14:08:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.669958.1042523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rRusn-0000Qy-Er; Mon, 22 Jan 2024 14:02:37 +0000
+	id 1rRuyQ-0001Ns-0q; Mon, 22 Jan 2024 14:08:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 669954.1042514; Mon, 22 Jan 2024 14:02:37 +0000
+Received: by outflank-mailman (output) from mailman id 669958.1042523; Mon, 22 Jan 2024 14:08:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rRusn-0000Qr-AF; Mon, 22 Jan 2024 14:02:37 +0000
-Received: by outflank-mailman (input) for mailman id 669954;
- Mon, 22 Jan 2024 14:02:35 +0000
+	id 1rRuyP-0001Nl-Tl; Mon, 22 Jan 2024 14:08:25 +0000
+Received: by outflank-mailman (input) for mailman id 669958;
+ Mon, 22 Jan 2024 14:08:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=VPlZ=JA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rRusl-0000Qj-FW
- for xen-devel@lists.xenproject.org; Mon, 22 Jan 2024 14:02:35 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
+ id 1rRuh6-0007Lx-R9
+ for xen-devel@lists.xenproject.org; Mon, 22 Jan 2024 13:50:32 +0000
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [2a00:1450:4864:20::236])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e38875f9-b92e-11ee-9b0f-b553b5be7939;
- Mon, 22 Jan 2024 15:02:33 +0100 (CET)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-50e6ee8e911so4166041e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 22 Jan 2024 06:02:33 -0800 (PST)
+ id 352ead07-b92d-11ee-9b0f-b553b5be7939;
+ Mon, 22 Jan 2024 14:50:31 +0100 (CET)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2cdeb80fdfdso34057841fa.2
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Jan 2024 05:50:31 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- v8-20020a056638250800b0046ec687b028sm1786179jat.0.2024.01.22.06.02.30
+ cw13-20020a05663849cd00b0046e627dbc4csm3035114jab.121.2024.01.22.05.50.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jan 2024 06:02:32 -0800 (PST)
+ Mon, 22 Jan 2024 05:50:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,50 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e38875f9-b92e-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 352ead07-b92d-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1705932153; x=1706536953; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=PQTxoVeYOUeGdoKPF5RL1ljbfwZL7WC5tU/+ttHKeHc=;
-        b=OLmarbUuO68QstyBG1EVw5xKmHHFzsKPEcmYxGZGJx+UOdFezYpziUM3cwdH3Q8tnH
-         iP/9SXosCQ61u5IJuXSwUm6HLKCC4xZDjQMMiRnQ28pjY5fSEdTAyUfCk9im1Y8GmFWs
-         GKXHGRLhktMzK3ZMRWdBwm2Rft5Cjevbc5Bm2qYAafWm/J9rvjC9hz98w8taOW2IpxSp
-         4nOOXdqjh/KJgrA6jMraO4C7N1EwfGM9DeNRV3d/6+05UQSPtIZVnwcC/eYak9vrImD0
-         +4GG7eM0hKqPhaapJhX84bGVThEBKgfKsU3NoXuocTwhlkdIGtYl1byKK4Yr27Xu6Ani
-         ZlWA==
+        d=suse.com; s=google; t=1705931431; x=1706536231; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
+         :from:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=YO3g36PvHebDUpK9/W9a6xU16xqzRXgrwigdPTnIuIA=;
+        b=HOMvVrCr86rjfwSJ9F53Aa4gr7n7Q3jgMH7hioghRIWohIc++9d7k02CXAVptry/n1
+         bDmsBfl/LF8aww6gbyKBnDM6is9sRspcm+7xNd4IfZ3ovkdrtLw1ZBMDwdSDI12codRO
+         Y0xyZOiadsPuM50bkAnyBbzbOBKDi8RMIxQmUZt4Y8pw/Lcv0489S2AwvxMnQIc5vLIA
+         e8DVPm5RT65AFa7ncjRuS/U9mK6TfAVSsy5iMjWFHLin44QCPLu1yK1WoDPV+s+VTleQ
+         czZtIr55fcBZYSYOOxz6zUihpZX4AKDs1Q8r8WUKgYcF/kU/R57h/jt0PlJH2fwz2iHG
+         T4WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705932153; x=1706536953;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PQTxoVeYOUeGdoKPF5RL1ljbfwZL7WC5tU/+ttHKeHc=;
-        b=niEePro3y+yN+ujgBgNmC/ts6kqo/fTx8MLz3Z7sSu1VPMDMXzlfD6/S6+0fNOpa3L
-         gnJSan1JOUzdOpFKkb/FRwWyzTfL+sDK8CNUtLfAHHMrus0pGxfFrTx6NwpCgO7asfFG
-         bpth6q8XBUb2BPbT5/Ums9cTg1xqeiaDpAtKwY+nnuY/Qc55mV2NZVvbhoVJu0hyjfUw
-         dvqGGCjTFhUqkOlYK/EMlNUjgXKsemlt042wtsNrOg7kAPI4Z57xv1T1TB77BIVlvpt1
-         jJjsHRe2gt6Ekvi1Rfx/t77hraoQZ6z36OXn9oiDEFn22Ko5TNzLDgxsF2H91ug+FkLJ
-         tI1A==
-X-Gm-Message-State: AOJu0Yx7L6DjNDSZS+K9h/jokonZST+EAMgDrEGNud/7tdeIop3QRvrE
-	CeGNLQ/OqzJZZf7Of/nzbq79XUasyPWlnskK1XmT0dmDnfPRdQH74XqVzrOlPA==
-X-Google-Smtp-Source: AGHT+IG50Vv0nwZJkR1Pg5GkMBMTGNwSg1FIAZdlR3b1g1ptvhgann7asvEyJ+SyRLImJI+QuMWrBg==
-X-Received: by 2002:ac2:4101:0:b0:50f:1a9b:ef48 with SMTP id b1-20020ac24101000000b0050f1a9bef48mr1560724lfi.69.1705932152697;
-        Mon, 22 Jan 2024 06:02:32 -0800 (PST)
-Message-ID: <d4e5b1c0-bb44-4482-b86f-ff9f0947f338@suse.com>
-Date: Mon, 22 Jan 2024 15:02:29 +0100
+        d=1e100.net; s=20230601; t=1705931431; x=1706536231;
+        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
+         :from:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YO3g36PvHebDUpK9/W9a6xU16xqzRXgrwigdPTnIuIA=;
+        b=v6+J7b4uO/usdmMSElFXDu1FovvPOFybarEsWhlwPT0qyG9Nh7UbCBQUBE6akFUaHQ
+         krIq6+mrnn+IWEHjB102VoJst7DLChB5W2oOtRAjE+t2Ob1rF2GQ8FDN2cuOkykyvkCq
+         1HyE70cl0SP3kCnFtFx9+GH7YwS2wzh9NBLt2u2SlGS4mW6cLceAqlMXCPBXLGTyevX7
+         x7TiiFiFpdvfESrXbKao/he+KQRL7K2OEBRYWBs/KAfJ5SJh6NX3YnszmKSJ9IxMZCSA
+         1oogwwLaplzAwB3svyKxw9gbcKyHQ1qTLBHX41voYck4gJxQFV/bl4rEIE940LXn+8Tp
+         fFTQ==
+X-Gm-Message-State: AOJu0Ywgh9H+xJSEx51WzBPzUr/vl++cC+/MjeynAtZZCagdt5D25uCn
+	zJhzsRVgwm+/uS8xforqryWgZx0TlICG22Od5TCQV3bRFOkoVkRiYlR+t5A0hdOsHpXb4mNJMyc
+	=
+X-Google-Smtp-Source: AGHT+IEkacxUKb+IkyqWLFq78R4UAKR5nr2WMQlZsMaoUnVrnsDn4Vy1CTXya62jS+ergCB6GpyiRA==
+X-Received: by 2002:a2e:a485:0:b0:2cc:dda6:44fa with SMTP id h5-20020a2ea485000000b002ccdda644famr588581lji.92.1705931430843;
+        Mon, 22 Jan 2024 05:50:30 -0800 (PST)
+Message-ID: <befdfad9-d807-4d6e-960f-54b7a4c2799a@suse.com>
+Date: Mon, 22 Jan 2024 14:50:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH 1/3] xen: introduce static_assert_unreachable()
+Subject: [PATCH v2 5/8] PV-shim: drop pv_console_rx()'s regs parameter
 Content-Language: en-US
-To: Federico Serafini <federico.serafini@bugseng.com>
-Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <cover.1705930767.git.federico.serafini@bugseng.com>
- <01c57c7e5131d699cf622be96fea7cd8e03c23f9.1705930767.git.federico.serafini@bugseng.com>
-From: Jan Beulich <jbeulich@suse.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <33db57a2-b569-4fa8-b0b0-36ea92528d7b@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -114,44 +115,57 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <01c57c7e5131d699cf622be96fea7cd8e03c23f9.1705930767.git.federico.serafini@bugseng.com>
+In-Reply-To: <33db57a2-b569-4fa8-b0b0-36ea92528d7b@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 22.01.2024 14:48, Federico Serafini wrote:
-> Introduce macro static_asser_unreachable() to check that a program
-> point is considered unreachable by the static analysis performed by the
-> compiler, even at optimization level -O0.
+It's not needed anymore. This is in preparation of dropping the register
+parameters from IRQ handler functions.
 
-Is it really intended to limit use of this macro to cases where even
-at -O0 the compiler would eliminate respective code? Note that right
-now even debug builds are done with some optimization, and some of
-the DCE we're relying depends on that (iirc).
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-> --- a/xen/include/xen/compiler.h
-> +++ b/xen/include/xen/compiler.h
-> @@ -64,6 +64,14 @@
->  # define fallthrough        do {} while (0)  /* fallthrough */
->  #endif
->  
-> +/*
-> + * Add the following macro to check that a program point is considered
-> + * unreachable by the static analysis performed by the compiler,
-> + * even at optimization level -O0.
-> + */
-> +#define static_assert_unreachable() \
-> +    asm(".error \"unreachable program point reached\"");
+--- a/xen/arch/x86/guest/xen/xen.c
++++ b/xen/arch/x86/guest/xen/xen.c
+@@ -181,7 +181,7 @@ static void cf_check xen_evtchn_upcall(s
+             port += l1 * BITS_PER_LONG;
+ 
+             if ( pv_console && port == pv_console_evtchn() )
+-                pv_console_rx(regs);
++                pv_console_rx();
+             else if ( pv_shim )
+                 pv_shim_inject_evtchn(port);
+         }
+--- a/xen/drivers/char/xen_pv_console.c
++++ b/xen/drivers/char/xen_pv_console.c
+@@ -94,7 +94,7 @@ evtchn_port_t pv_console_evtchn(void)
+     return cons_evtchn;
+ }
+ 
+-size_t pv_console_rx(struct cpu_user_regs *regs)
++size_t pv_console_rx(void)
+ {
+     char c;
+     XENCONS_RING_IDX cons, prod;
+--- a/xen/include/xen/pv_console.h
++++ b/xen/include/xen/pv_console.h
+@@ -9,7 +9,7 @@ void pv_console_init(void);
+ void pv_console_set_rx_handler(serial_rx_fn fn);
+ void pv_console_init_postirq(void);
+ void pv_console_puts(const char *buf, size_t nr);
+-size_t pv_console_rx(struct cpu_user_regs *regs);
++size_t pv_console_rx(void);
+ evtchn_port_t pv_console_evtchn(void);
+ 
+ #else
+@@ -18,7 +18,7 @@ static inline void pv_console_init(void)
+ static inline void pv_console_set_rx_handler(serial_rx_fn fn) { }
+ static inline void pv_console_init_postirq(void) { }
+ static inline void pv_console_puts(const char *buf, size_t nr) { }
+-static inline size_t pv_console_rx(struct cpu_user_regs *regs) { return 0; }
++static inline size_t pv_console_rx(void) { return 0; }
+ 
+ #endif /* !CONFIG_XEN_GUEST */
+ #endif /* __XEN_PV_CONSOLE_H__ */
 
-Did you check the diagnostic that results when this check actually
-triggers? I expect it will be not really obvious from the message
-you introduce where the issue actually is. I expect we will want
-to use some of __FILE__ / __LINE__ / __FUNCTION__ to actually
-supply such context.
-
-Also: Stray semicolon and (nit) missing blanks.
-
-Finally I wonder about case: We have ASSERT_UNREACHABLE() and it
-may be indicated to use all uppercase her as well.
-
-Jan
 
