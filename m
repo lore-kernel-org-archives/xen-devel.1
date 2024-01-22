@@ -4,29 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB176C48277
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Jan 2024 18:17:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.670053.1042642 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79C91C47DAF
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Jan 2024 18:32:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.670077.1042707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rRyrS-0002gL-QQ; Mon, 22 Jan 2024 18:17:30 +0000
+	id 1rRz68-00010G-CT; Mon, 22 Jan 2024 18:32:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 670053.1042642; Mon, 22 Jan 2024 18:17:30 +0000
+Received: by outflank-mailman (output) from mailman id 670077.1042707; Mon, 22 Jan 2024 18:32:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rRyrS-0002gE-MY; Mon, 22 Jan 2024 18:17:30 +0000
-Received: by outflank-mailman (input) for mailman id 670053;
- Mon, 22 Jan 2024 18:17:29 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rRz68-000109-8z; Mon, 22 Jan 2024 18:32:40 +0000
+Received: by outflank-mailman (input) for mailman id 670077;
+ Mon, 22 Jan 2024 18:32:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EdLN=JA=citrix.com=prvs=74474809d=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1rRyrR-0002ee-IW
- for xen-devel@lists.xenproject.org; Mon, 22 Jan 2024 18:17:29 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7f6d6917-b952-11ee-98f2-6d05b1d4d9a1;
- Mon, 22 Jan 2024 19:17:28 +0100 (CET)
+ <SRS0=IdsA=JA=xenbits.xen.org=andrewcoop@srs-se1.protection.inumbo.net>)
+ id 1rRz67-0000hw-2x
+ for xen-devel@lists.xen.org; Mon, 22 Jan 2024 18:32:39 +0000
+Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9a3e484c-b954-11ee-9b0f-b553b5be7939;
+ Mon, 22 Jan 2024 19:32:33 +0100 (CET)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1rRz5s-0006An-5b; Mon, 22 Jan 2024 18:32:24 +0000
+Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.92)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1rRz5s-0003tE-3o; Mon, 22 Jan 2024 18:32:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,77 +45,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f6d6917-b952-11ee-98f2-6d05b1d4d9a1
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1705947448;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=UOoglNsFMfZVcHPwpDLLBcSo2RQx5ClWaZKuA5F9ss8=;
-  b=S4UQWbos//390ObDMIBlrX5rMP2WhEp8W90O8swoU1ogx4qPdKq6UnPw
-   DtJOsyyBfyHzeyg2wqGa7HVGjRCjMxlErIU+ZlUKG9k5f+lbUaG1HrlHh
-   GxXoB8YmIZ0Ttih8kG3Uu0b0x/sIwUUYhQxIXn2IIYivpBvr6Q49lgMna
-   Q=;
-X-CSE-ConnectionGUID: FCbAE902SjqaC0PT4u4YkQ==
-X-CSE-MsgGUID: 5wRHdVzFSXuDO5oZp51RKg==
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 132366779
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.159.70
-X-Policy: $RELAYED
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:POnXvqtb9QdNhken1SwIdkxotufnVAteMUV32f8akzHdYApBsoF/q
- tZmKWqBOP6PZGvyeNlwbY+19x4EupGAmoAyHAA+qigwQSoS+JbJXdiXEBz9bniYRiHhoOCLz
- O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVaicfHg3HFc4IMsYoUoLs/YjhYJ1isSODQqIu
- Nfjy+XSI1bg0DNvWo4uw/vrRChH4rKq5Vv0gnRkPaoX5AaEziFOZH4iDfrZw0XQE9E88tGSH
- 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
- Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
- fMwBhsHRz3S37iNwquyYbFUupg+cPjoBdZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
- 5NHM3w1Nk2GOkAefAhPYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27B/
- TidoTqmXUBy2Nq3lCW/0n6SlMH0rT7Xf98VJqXlr8RJjwjGroAUIEJPDgbqyRWjsWauVtQaJ
- 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O88Q5RyJy6HUyx2EHWVCRTlEAPQ5sOcmSDps0
- UWG9/vqAjp1ubHTVnOZ9Z+Ttzq5PSVTJmgHDRLoViNcvYOl+ttqyEuSH5A8SMZZk+EZBxne6
- DqjgXlm3Y4RlMcgj52HoU2bsjGV882hohEO2unHYo60xlomPNP0Pdz2sQWz0BpWEGqOorC8U
- Jk4dyu2trlm4WmlznDlfQn0NOjBCwy5GDPdm0VzOJIq6i6g/XWuFagJv2kjdBkzaJZaIWO5C
- KM2he+2zMYNVEZGkIctO97hYyjU5faI+SvZugD8MYMVP8kZmP6v9yByf0+At13QfLwXufhnY
- /+zKJ/8ZUv2/Iw7lFJasc9Bi+50rs3/rEuPLa3GI+OPjeLDOSPPGOZbWLZMB8hghJ65TMzu2
- 443H6O3J993CYUSvgG/HVYvEG03
-IronPort-HdrOrdr: A9a23:hCmENaA7gOuK5PnlHemg55DYdb4zR+YMi2TC1yhKJyC9Ffbo8P
- xG/c5rsSMc5wxwZJhNo7y90cq7MBbhHPxOkOos1N6ZNWGM0gaVxelZnO3fKlbbehEWmNQz6U
- 4ZSdkdNOHN
-X-Talos-CUID: =?us-ascii?q?9a23=3A40l/OWslj6GeWXlJoJBB2G1J6IsLWXf04SaIeXS?=
- =?us-ascii?q?6EG9CEIWpFULMyaBdxp8=3D?=
-X-Talos-MUID: 9a23:TIh+OAZ//GW3ZeBT6iDWpD1cJulT07mCLx0Ko41b4vOnOnkl
-X-IronPort-AV: E=Sophos;i="6.05,211,1701147600"; 
-   d="scan'208";a="132366779"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk
-	<konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH 0/3] x86/entry: ELF fixes and improvments
-Date: Mon, 22 Jan 2024 18:17:10 +0000
-Message-ID: <20240122181714.1543738-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: 9a3e484c-b954-11ee-9b0f-b553b5be7939
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Date:Message-Id:Subject:CC:From:To:MIME-Version:
+	Content-Transfer-Encoding:Content-Type;
+	bh=jQ2S1lvmSX4xfvrw+eMwl1VWUBAWJ50rqkkdceJepl8=; b=EBi2YM2eakxsvTwT0CXLPe3TCG
+	XRdj7cMvAbNk3IrXMywjZtW9HVaXMMeVzKhxaiQCj440jOpyyKI5MdT4rGXrCpeZXY/i8oSQR4FLe
+	qOCSD9pPGbf+Uti4LOFkz2lu1vRHXJzPotWXbb9RGJklHQcR+6dbKCySbR2bzETdMXao=;
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Mailer: MIME-tools 5.509 (Entity 5.509)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 448 v2 (CVE-2023-46838) - Linux: netback
+ processing of zero-length transmit fragment
+Message-Id: <E1rRz5s-0003tE-3o@xenbits.xenproject.org>
+Date: Mon, 22 Jan 2024 18:32:24 +0000
 
-Patch 1 is a bugfix.  Patches 2 and 3 are to improve livepatchability.
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Andrew Cooper (3):
-  x86/entry: Fix ELF metadata for NMI and handle_ist_exception
-  x86/entry: Make #PF/NMI/INT0x82 more amenable to livepatching
-  x86/entry: Make intra-funciton symbols properly local
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
- xen/arch/x86/x86_64/compat/entry.S | 21 ++++++++++----------
- xen/arch/x86/x86_64/entry.S        | 31 +++++++++++++++++-------------
- 2 files changed, 29 insertions(+), 23 deletions(-)
+            Xen Security Advisory CVE-2023-46838 / XSA-448
+                               version 2
 
+      Linux: netback processing of zero-length transmit fragment
 
-base-commit: 4900c939cb9b876c51cfc7a4c854f54c722a30b5
--- 
-2.30.2
+UPDATES IN VERSION 2
+====================
 
+Public release.
+
+ISSUE DESCRIPTION
+=================
+
+Transmit requests in Xen's virtual network protocol can consist of
+multiple parts.  While not really useful, except for the initial part
+any of them may be of zero length, i.e. carry no data at all.  Besides a
+certain initial portion of the to be transferred data, these parts are
+directly translated into what Linux calls SKB fragments.  Such converted
+request parts can, when for a particular SKB they are all of length
+zero, lead to a de-reference of NULL in core networking code.
+
+IMPACT
+======
+
+An unprivileged guest can cause Denial of Service (DoS) of the host by
+sending network packets to the backend, causing the backend to crash.
+
+Data corruption or privilege escalation have not been ruled out.
+
+VULNERABLE SYSTEMS
+==================
+
+All systems using a Linux based network backend with kernel 4.14 and
+newer are vulnerable.  Earlier versions may also be vulnerable.  Systems
+using other network backends are not known to be vulnerable.
+
+MITIGATION
+==========
+
+Using a userspace PV network backend (e.g. the qemu based "qnic" backend)
+will mitigate the problem.
+
+Using a dedicated network driver domain per guest will mitigate the
+problem.
+
+CREDITS
+=======
+
+This issue was discovered by Pratyush Yadav of Amazon.
+
+RESOLUTION
+==========
+
+Applying the attached patch resolves this issue.
+
+xsa448-linux.patch           Linux 6.7-rc - 6.5
+
+$ sha256sum xsa448*
+f8c87cf546c2bc70970ca151c0ec8c1940f969e29c4cb3d2ec37ff9e43ddfc36  xsa448-linux.patch
+$
+
+NOTE CONCERNING EARLY DISCLOSURE
+================================
+
+The embargo was intended to be 2024-01-23 12:00 UTC, but a downstream
+had a mixup of days and published early.
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patches and/or mitigations described above (or
+others which are substantially similar) is permitted during the
+embargo, even on public-facing systems with untrusted guest users and
+administrators.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmWutGMMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZ9h0H/26sgfTHO0vnTZ8cnisn3aC5VTvrx9nY5fcCe2cJ
+/KgN3q3mtb3w41/2LD/rR0Zpw4SkeTaFp69Mz2hQa37gLVDSK5lDJDR61lwhiwrQ
+MSsdPHs91EDJhF6aX/S7wsQkBZYPq1S9aOuIxJbDYN3D9WsTUWvuocXNxeqTx5q9
+iWVSJTH5NkRSAaIVldyNVkQ7pWaSrwqmBzolnrZIsDUjYU1Lk/j0u6GFbkOF9SIg
+onFiFbJhCOaIZOIP2Tfz7nHGBnxucI4cjjwy4BWM+Va35Pg4mbHaBuVGnQsaBtVF
+UdY6/jw6Qk4ktV34il3+jlgGfAFC6GILJoraASjaFCEQ7jM=
+=IPLz
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa448-linux.patch"
+Content-Disposition: attachment; filename="xsa448-linux.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
+OiB4ZW4tbmV0YmFjazogZG9uJ3QgcHJvZHVjZSB6ZXJvLXNpemUgU0tCIGZy
+YWdzCgpXaGlsZSBmcm9udGVuZHMgbWF5IHN1Ym1pdCB6ZXJvLXNpemUgcmVx
+dWVzdHMgKHdhc3RpbmcgYSBwcmVjaW91cyBzbG90KSwKY29yZSBuZXR3b3Jr
+aW5nIGNvZGUgYXMgb2YgYXQgbGVhc3QgM2VjZTc4MjY5M2M0YiAoInNvY2s6
+IHNrYl9jb3B5X3VidWZzCnN1cHBvcnQgZm9yIGNvbXBvdW5kIHBhZ2VzIikg
+Y2FuJ3QgZGVhbCB3aXRoIFNLQnMgd2hlbiB0aGV5IGhhdmUgYWxsCnplcm8t
+c2l6ZSBmcmFnbWVudHMuIFJlc3BvbmQgdG8gZW1wdHkgcmVxdWVzdHMgcmln
+aHQgd2hlbiBwb3B1bGF0aW5nCmZyYWdtZW50czsgYWxsIGZ1cnRoZXIgcHJv
+Y2Vzc2luZyBpcyBmcmFnbWVudCBiYXNlZCBhbmQgaGVuY2Ugd29uJ3QKZW5j
+b3VudGVyIHRoZXNlIGVtcHR5IHJlcXVlc3RzIGFueW1vcmUuCgpJbiBhIHdh
+eSB0aGlzIHNob3VsZCBoYXZlIGJlZW4gdGhhdCB3YXkgZnJvbSB0aGUgYmVn
+aW5uaW5nOiBXaGVuIG5vIGRhdGEKaXMgdG8gYmUgdHJhbnNmZXJyZWQgZm9y
+IGEgcGFydGljdWxhciByZXF1ZXN0LCB0aGVyZSdzIG5vdCBldmVuIGEgcG9p
+bnQKaW4gdmFsaWRhdGluZyB0aGUgcmVzcGVjdGl2ZSBncmFudCByZWYuIFRo
+YXQncyBubyBkaWZmZXJlbnQgZnJvbSBlLmcuCnBhc3NpbmcgTlVMTCBpbnRv
+IG1lbWNweSgpIHdoZW4gYXQgdGhlIHNhbWUgdGltZSB0aGUgc2l6ZSBpcyAw
+LgoKVGhpcyBpcyBYU0EtNDQ4IC8gQ1ZFLTIwMjMtNDY4MzguCgpSZXBvcnRl
+ZC1ieTogUHJhdHl1c2ggWWFkYXYgPHB0eWFkYXZAYW1hem9uLmRlPgpDYzog
+c3RhYmxlQHZnZXIua2VybmVsLm9yZwpTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1
+bGljaCA8amJldWxpY2hAc3VzZS5jb20+ClJldmlld2VkLWJ5OiBKdWVyZ2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+ClJldmlld2VkLWJ5OiBQYXVsIER1
+cnJhbnQgPHBhdWxAeGVuLm9yZz4KQWNrZWQtYnk6IFByYXR5dXNoIFlhZGF2
+IDxwdHlhZGF2QGFtYXpvbi5kZT4KCi0tLSBhL2RyaXZlcnMvbmV0L3hlbi1u
+ZXRiYWNrL25ldGJhY2suYworKysgYi9kcml2ZXJzL25ldC94ZW4tbmV0YmFj
+ay9uZXRiYWNrLmMKQEAgLTQ2MywxMiArNDYzLDI1IEBAIHN0YXRpYyB2b2lk
+IHhlbnZpZl9nZXRfcmVxdWVzdHMoc3RydWN0IHgKIAl9CiAKIAlmb3IgKHNo
+aW5mby0+bnJfZnJhZ3MgPSAwOyBucl9zbG90cyA+IDAgJiYgc2hpbmZvLT5u
+cl9mcmFncyA8IE1BWF9TS0JfRlJBR1M7Ci0JICAgICBzaGluZm8tPm5yX2Zy
+YWdzKyssIGdvcCsrLCBucl9zbG90cy0tKSB7CisJICAgICBucl9zbG90cy0t
+KSB7CisJCWlmICh1bmxpa2VseSghdHhwLT5zaXplKSkgeworCQkJdW5zaWdu
+ZWQgbG9uZyBmbGFnczsKKworCQkJc3Bpbl9sb2NrX2lycXNhdmUoJnF1ZXVl
+LT5yZXNwb25zZV9sb2NrLCBmbGFncyk7CisJCQltYWtlX3R4X3Jlc3BvbnNl
+KHF1ZXVlLCB0eHAsIDAsIFhFTl9ORVRJRl9SU1BfT0tBWSk7CisJCQlwdXNo
+X3R4X3Jlc3BvbnNlcyhxdWV1ZSk7CisJCQlzcGluX3VubG9ja19pcnFyZXN0
+b3JlKCZxdWV1ZS0+cmVzcG9uc2VfbG9jaywgZmxhZ3MpOworCQkJKyt0eHA7
+CisJCQljb250aW51ZTsKKwkJfQorCiAJCWluZGV4ID0gcGVuZGluZ19pbmRl
+eChxdWV1ZS0+cGVuZGluZ19jb25zKyspOwogCQlwZW5kaW5nX2lkeCA9IHF1
+ZXVlLT5wZW5kaW5nX3JpbmdbaW5kZXhdOwogCQl4ZW52aWZfdHhfY3JlYXRl
+X21hcF9vcChxdWV1ZSwgcGVuZGluZ19pZHgsIHR4cCwKIAkJCQkgICAgICAg
+IHR4cCA9PSBmaXJzdCA/IGV4dHJhX2NvdW50IDogMCwgZ29wKTsKIAkJZnJh
+Z19zZXRfcGVuZGluZ19pZHgoJmZyYWdzW3NoaW5mby0+bnJfZnJhZ3NdLCBw
+ZW5kaW5nX2lkeCk7CisJCSsrc2hpbmZvLT5ucl9mcmFnczsKKwkJKytnb3A7
+CiAKIAkJaWYgKHR4cCA9PSBmaXJzdCkKIAkJCXR4cCA9IHR4ZnJhZ3M7CkBA
+IC00ODEsMjAgKzQ5NCwzOSBAQCBzdGF0aWMgdm9pZCB4ZW52aWZfZ2V0X3Jl
+cXVlc3RzKHN0cnVjdCB4CiAJCXNoaW5mbyA9IHNrYl9zaGluZm8obnNrYik7
+CiAJCWZyYWdzID0gc2hpbmZvLT5mcmFnczsKIAotCQlmb3IgKHNoaW5mby0+
+bnJfZnJhZ3MgPSAwOyBzaGluZm8tPm5yX2ZyYWdzIDwgbnJfc2xvdHM7Ci0J
+CSAgICAgc2hpbmZvLT5ucl9mcmFncysrLCB0eHArKywgZ29wKyspIHsKKwkJ
+Zm9yIChzaGluZm8tPm5yX2ZyYWdzID0gMDsgc2hpbmZvLT5ucl9mcmFncyA8
+IG5yX3Nsb3RzOyArK3R4cCkgeworCQkJaWYgKHVubGlrZWx5KCF0eHAtPnNp
+emUpKSB7CisJCQkJdW5zaWduZWQgbG9uZyBmbGFnczsKKworCQkJCXNwaW5f
+bG9ja19pcnFzYXZlKCZxdWV1ZS0+cmVzcG9uc2VfbG9jaywgZmxhZ3MpOwor
+CQkJCW1ha2VfdHhfcmVzcG9uc2UocXVldWUsIHR4cCwgMCwKKwkJCQkJCSBY
+RU5fTkVUSUZfUlNQX09LQVkpOworCQkJCXB1c2hfdHhfcmVzcG9uc2VzKHF1
+ZXVlKTsKKwkJCQlzcGluX3VubG9ja19pcnFyZXN0b3JlKCZxdWV1ZS0+cmVz
+cG9uc2VfbG9jaywKKwkJCQkJCSAgICAgICBmbGFncyk7CisJCQkJY29udGlu
+dWU7CisJCQl9CisKIAkJCWluZGV4ID0gcGVuZGluZ19pbmRleChxdWV1ZS0+
+cGVuZGluZ19jb25zKyspOwogCQkJcGVuZGluZ19pZHggPSBxdWV1ZS0+cGVu
+ZGluZ19yaW5nW2luZGV4XTsKIAkJCXhlbnZpZl90eF9jcmVhdGVfbWFwX29w
+KHF1ZXVlLCBwZW5kaW5nX2lkeCwgdHhwLCAwLAogCQkJCQkJZ29wKTsKIAkJ
+CWZyYWdfc2V0X3BlbmRpbmdfaWR4KCZmcmFnc1tzaGluZm8tPm5yX2ZyYWdz
+XSwKIAkJCQkJICAgICBwZW5kaW5nX2lkeCk7CisJCQkrK3NoaW5mby0+bnJf
+ZnJhZ3M7CisJCQkrK2dvcDsKIAkJfQogCi0JCXNrYl9zaGluZm8oc2tiKS0+
+ZnJhZ19saXN0ID0gbnNrYjsKLQl9IGVsc2UgaWYgKG5za2IpIHsKKwkJaWYg
+KHNoaW5mby0+bnJfZnJhZ3MpIHsKKwkJCXNrYl9zaGluZm8oc2tiKS0+ZnJh
+Z19saXN0ID0gbnNrYjsKKwkJCW5za2IgPSBOVUxMOworCQl9CisJfQorCisJ
+aWYgKG5za2IpIHsKIAkJLyogQSBmcmFnX2xpc3Qgc2tiIHdhcyBhbGxvY2F0
+ZWQgYnV0IGl0IGlzIG5vIGxvbmdlciBuZWVkZWQKLQkJICogYmVjYXVzZSBl
+bm91Z2ggc2xvdHMgd2VyZSBjb252ZXJ0ZWQgdG8gY29weSBvcHMgYWJvdmUu
+CisJCSAqIGJlY2F1c2UgZW5vdWdoIHNsb3RzIHdlcmUgY29udmVydGVkIHRv
+IGNvcHkgb3BzIGFib3ZlIG9yIHNvbWUKKwkJICogd2VyZSBlbXB0eS4KIAkJ
+ICovCiAJCWtmcmVlX3NrYihuc2tiKTsKIAl9Cg==
+
+--=separator--
 
