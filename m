@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF829C47DDC
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Jan 2024 18:17:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.670057.1042682 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB176C48277
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Jan 2024 18:17:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.670053.1042642 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rRyrY-0003kf-Rj; Mon, 22 Jan 2024 18:17:36 +0000
+	id 1rRyrS-0002gL-QQ; Mon, 22 Jan 2024 18:17:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 670057.1042682; Mon, 22 Jan 2024 18:17:36 +0000
+Received: by outflank-mailman (output) from mailman id 670053.1042642; Mon, 22 Jan 2024 18:17:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rRyrY-0003kQ-Nr; Mon, 22 Jan 2024 18:17:36 +0000
-Received: by outflank-mailman (input) for mailman id 670057;
- Mon, 22 Jan 2024 18:17:34 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rRyrS-0002gE-MY; Mon, 22 Jan 2024 18:17:30 +0000
+Received: by outflank-mailman (input) for mailman id 670053;
+ Mon, 22 Jan 2024 18:17:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EdLN=JA=citrix.com=prvs=74474809d=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1rRyrW-0003Bi-Rj
- for xen-devel@lists.xenproject.org; Mon, 22 Jan 2024 18:17:34 +0000
+ id 1rRyrR-0002ee-IW
+ for xen-devel@lists.xenproject.org; Mon, 22 Jan 2024 18:17:29 +0000
 Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 80b7c7d1-b952-11ee-9b0f-b553b5be7939;
- Mon, 22 Jan 2024 19:17:30 +0100 (CET)
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7f6d6917-b952-11ee-98f2-6d05b1d4d9a1;
+ Mon, 22 Jan 2024 19:17:28 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,242 +38,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 80b7c7d1-b952-11ee-9b0f-b553b5be7939
+X-Inumbo-ID: 7f6d6917-b952-11ee-98f2-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1705947450;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=PoQrTCXbOLESqrnXnnL2uPe7qZz7/Q2HWhe4ECuWOno=;
-  b=QeIdA7wgpzUxQTTBPOvQYdMPnskButplDIWg8Q2WOQT/cr8PSl5yjWqZ
-   6IRwQ21/JfrjpepLTrw47XPZItGuN1U5sVDAD4Xgn5sgTfZgZLYd8RAGh
-   lL5l76HoUF0tC95PMMXk0dxvku7K+pdSON1a9PEtB3AhgnBTrl9RS5/T1
+  d=citrix.com; s=securemail; t=1705947448;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=UOoglNsFMfZVcHPwpDLLBcSo2RQx5ClWaZKuA5F9ss8=;
+  b=S4UQWbos//390ObDMIBlrX5rMP2WhEp8W90O8swoU1ogx4qPdKq6UnPw
+   DtJOsyyBfyHzeyg2wqGa7HVGjRCjMxlErIU+ZlUKG9k5f+lbUaG1HrlHh
+   GxXoB8YmIZ0Ttih8kG3Uu0b0x/sIwUUYhQxIXn2IIYivpBvr6Q49lgMna
    Q=;
 X-CSE-ConnectionGUID: FCbAE902SjqaC0PT4u4YkQ==
-X-CSE-MsgGUID: 0jxmyDTtRTqlzcsjeZYdkw==
+X-CSE-MsgGUID: 5wRHdVzFSXuDO5oZp51RKg==
 Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 132366783
+X-MesageID: 132366779
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.159.70
 X-Policy: $RELAYED
 X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:a45696nEah+gXt7H5Ld8+KDo5gzcJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xJNXWjQaarbMWrzKdAjOY2xp0wCsZPTmIBhTgdu/yE9FyMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+e6UKicfHkpGWeIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE0p5KmaVA8w5ARkOagS5gaGzBH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- dIzIhkgP0jZvOCvyZnjctUwm5gSL/C+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dMlsQYj/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xx3C/
- TyYoDSiav0cHISd2T+U3k6wvNPWmTHwQ4AfJoy09eE/1TV/wURMUUZLBDNXu8KRmkO4Ht5SN
- UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JyOeAn7ACGyoLP/h2UQGMDS1Zpd9gOpMIwAzsw2
- TehnNTvHzVj9qKUTXG18a2dpje/fyMSKAc/iTQsFFVfpYO5+cdq00OJEY4L/LOJYsPdNxr66
- h3b9HIFhawappYz6/mmoWHEumf5znTWdTLZ9jk7T0r8sVskNdT1OdT1gWU3+8qsO2pwc7Vgg
- JTns5LHhAz2JcvR/BFhuc1UdF1T296LMSfHnXlkFIQ7+jKm9haLJN8IvWEgfh05bJ5YKVcFh
- XM/XisIuvdu0IaCN/crM+pd9ex0pUQfKTgVfq+NNYcfCnSAXASG4DtvdSat4owZq2B1yftXE
- c7CIa6R4YMyVfwPIMyeG71MjtfGB0kWmQvueHwM50j/jOfDPi/EF9/o8jKmN4gE0U9Nmy2Nm
- /43CidA40w3vDHWCsUPzbMuEA==
-IronPort-HdrOrdr: A9a23:6GCv0ahsAl2TqCEToexWZ5ZtyXBQXuIji2hC6mlwRA09TySZ//
- rBoB19726MtN9xYgBHpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
- 0QF5SWYOeAdWSS5vya3ODXKbkdKaG8gcKVuds=
-X-Talos-CUID: 9a23:ycT7bm8dkfWH7lol9hKVv2A/EOkIIyWH93XJKmTgMVo1VeGkSmbFrQ==
-X-Talos-MUID: 9a23:2NxdFgk/P7LI6LDiIXu/dno6Ntdt8oiSFHoxiJEUsNKGOB5BNzSC2WE=
+IronPort-Data: A9a23:POnXvqtb9QdNhken1SwIdkxotufnVAteMUV32f8akzHdYApBsoF/q
+ tZmKWqBOP6PZGvyeNlwbY+19x4EupGAmoAyHAA+qigwQSoS+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVaicfHg3HFc4IMsYoUoLs/YjhYJ1isSODQqIu
+ Nfjy+XSI1bg0DNvWo4uw/vrRChH4rKq5Vv0gnRkPaoX5AaEziFOZH4iDfrZw0XQE9E88tGSH
+ 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
+ Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
+ fMwBhsHRz3S37iNwquyYbFUupg+cPjoBdZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
+ 5NHM3w1Nk2GOkAefAhPYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27B/
+ TidoTqmXUBy2Nq3lCW/0n6SlMH0rT7Xf98VJqXlr8RJjwjGroAUIEJPDgbqyRWjsWauVtQaJ
+ 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O88Q5RyJy6HUyx2EHWVCRTlEAPQ5sOcmSDps0
+ UWG9/vqAjp1ubHTVnOZ9Z+Ttzq5PSVTJmgHDRLoViNcvYOl+ttqyEuSH5A8SMZZk+EZBxne6
+ DqjgXlm3Y4RlMcgj52HoU2bsjGV882hohEO2unHYo60xlomPNP0Pdz2sQWz0BpWEGqOorC8U
+ Jk4dyu2trlm4WmlznDlfQn0NOjBCwy5GDPdm0VzOJIq6i6g/XWuFagJv2kjdBkzaJZaIWO5C
+ KM2he+2zMYNVEZGkIctO97hYyjU5faI+SvZugD8MYMVP8kZmP6v9yByf0+At13QfLwXufhnY
+ /+zKJ/8ZUv2/Iw7lFJasc9Bi+50rs3/rEuPLa3GI+OPjeLDOSPPGOZbWLZMB8hghJ65TMzu2
+ 443H6O3J993CYUSvgG/HVYvEG03
+IronPort-HdrOrdr: A9a23:hCmENaA7gOuK5PnlHemg55DYdb4zR+YMi2TC1yhKJyC9Ffbo8P
+ xG/c5rsSMc5wxwZJhNo7y90cq7MBbhHPxOkOos1N6ZNWGM0gaVxelZnO3fKlbbehEWmNQz6U
+ 4ZSdkdNOHN
+X-Talos-CUID: =?us-ascii?q?9a23=3A40l/OWslj6GeWXlJoJBB2G1J6IsLWXf04SaIeXS?=
+ =?us-ascii?q?6EG9CEIWpFULMyaBdxp8=3D?=
+X-Talos-MUID: 9a23:TIh+OAZ//GW3ZeBT6iDWpD1cJulT07mCLx0Ko41b4vOnOnkl
 X-IronPort-AV: E=Sophos;i="6.05,211,1701147600"; 
-   d="scan'208";a="132366783"
+   d="scan'208";a="132366779"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk
 	<konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH 3/3] x86/entry: Make intra-funciton symbols properly local
-Date: Mon, 22 Jan 2024 18:17:14 +0000
-Message-ID: <20240122181714.1543738-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/3] x86/entry: ELF fixes and improvments
+Date: Mon, 22 Jan 2024 18:17:10 +0000
+Message-ID: <20240122181714.1543738-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240122181714.1543738-1-andrew.cooper3@citrix.com>
-References: <20240122181714.1543738-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Each of these symbols are local to their main function.  By not having them
-globally visible, livepatch's binary diffing logic can reason about the
-functions properly.
+Patch 1 is a bugfix.  Patches 2 and 3 are to improve livepatchability.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-CC: Ross Lagerwall <ross.lagerwall@citrix.com>
+Andrew Cooper (3):
+  x86/entry: Fix ELF metadata for NMI and handle_ist_exception
+  x86/entry: Make #PF/NMI/INT0x82 more amenable to livepatching
+  x86/entry: Make intra-funciton symbols properly local
 
-sysenter_eflags_saved() is an open question.  This does need to be globally
-visible, and I think any livepatch modifying sysenter_entry() will need a
-manual adjustment to do_debug() to update the reference there.
----
- xen/arch/x86/x86_64/compat/entry.S | 20 ++++++++++----------
- xen/arch/x86/x86_64/entry.S        | 22 +++++++++++-----------
- 2 files changed, 21 insertions(+), 21 deletions(-)
+ xen/arch/x86/x86_64/compat/entry.S | 21 ++++++++++----------
+ xen/arch/x86/x86_64/entry.S        | 31 +++++++++++++++++-------------
+ 2 files changed, 29 insertions(+), 23 deletions(-)
 
-diff --git a/xen/arch/x86/x86_64/compat/entry.S b/xen/arch/x86/x86_64/compat/entry.S
-index 4fbd89cea1a9..1e9e0455eaf3 100644
---- a/xen/arch/x86/x86_64/compat/entry.S
-+++ b/xen/arch/x86/x86_64/compat/entry.S
-@@ -41,7 +41,7 @@ FUNC(compat_test_all_events)
-         shll  $IRQSTAT_shift,%eax
-         leaq  irq_stat+IRQSTAT_softirq_pending(%rip),%rcx
-         cmpl  $0,(%rcx,%rax,1)
--        jne   compat_process_softirqs
-+        jne   .L_compat_process_softirqs
- 
-         /* Inject exception if pending. */
-         lea   VCPU_trap_bounce(%rbx), %rdx
-@@ -49,11 +49,11 @@ FUNC(compat_test_all_events)
-         jnz   .Lcompat_process_trapbounce
- 
-         cmpb  $0, VCPU_mce_pending(%rbx)
--        jne   compat_process_mce
-+        jne   .L_compat_process_mce
- .Lcompat_test_guest_nmi:
-         cmpb  $0, VCPU_nmi_pending(%rbx)
--        jne   compat_process_nmi
--compat_test_guest_events:
-+        jne   .L_compat_process_nmi
-+.L_compat_test_guest_events:
-         movq  VCPU_vcpu_info(%rbx),%rax
-         movzwl COMPAT_VCPUINFO_upcall_pending(%rax),%eax
-         decl  %eax
-@@ -71,7 +71,7 @@ compat_test_guest_events:
-         jmp   compat_test_all_events
- 
- /* %rbx: struct vcpu */
--LABEL_LOCAL(compat_process_softirqs)
-+LABEL_LOCAL(.L_compat_process_softirqs)
-         sti
-         call  do_softirq
-         jmp   compat_test_all_events
-@@ -84,7 +84,7 @@ LABEL_LOCAL(.Lcompat_process_trapbounce)
-         jmp   compat_test_all_events
- 
- /* %rbx: struct vcpu */
--LABEL_LOCAL(compat_process_mce)
-+LABEL_LOCAL(.L_compat_process_mce)
-         testb $1 << VCPU_TRAP_MCE,VCPU_async_exception_mask(%rbx)
-         jnz   .Lcompat_test_guest_nmi
-         sti
-@@ -96,12 +96,12 @@ LABEL_LOCAL(compat_process_mce)
-         movb %dl,VCPU_mce_old_mask(%rbx)            # iret hypercall
-         orl  $1 << VCPU_TRAP_MCE,%edx
-         movb %dl,VCPU_async_exception_mask(%rbx)
--        jmp   compat_process_trap
-+        jmp   .L_compat_process_trap
- 
- /* %rbx: struct vcpu */
--LABEL_LOCAL(compat_process_nmi)
-+LABEL_LOCAL(.L_compat_process_nmi)
-         testb $1 << VCPU_TRAP_NMI,VCPU_async_exception_mask(%rbx)
--        jnz   compat_test_guest_events
-+        jnz   .L_compat_test_guest_events
-         sti
-         movb  $0, VCPU_nmi_pending(%rbx)
-         call  set_guest_nmi_trapbounce
-@@ -112,7 +112,7 @@ LABEL_LOCAL(compat_process_nmi)
-         orl  $1 << VCPU_TRAP_NMI,%edx
-         movb %dl,VCPU_async_exception_mask(%rbx)
-         /* FALLTHROUGH */
--compat_process_trap:
-+.L_compat_process_trap:
-         leaq  VCPU_trap_bounce(%rbx),%rdx
-         call  compat_create_bounce_frame
-         jmp   compat_test_all_events
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index fc64ef1fd460..130462ba0e1a 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -188,7 +188,7 @@ FUNC_LOCAL(restore_all_guest)
- 
-         RESTORE_ALL
-         testw $TRAP_syscall,4(%rsp)
--        jz    iret_exit_to_guest
-+        jz    .L_iret_exit_to_guest
- 
-         movq  24(%rsp),%r11           # RFLAGS
-         andq  $~(X86_EFLAGS_IOPL | X86_EFLAGS_VM), %r11
-@@ -220,7 +220,7 @@ FUNC_LOCAL(restore_all_guest)
- LABEL_LOCAL(.Lrestore_rcx_iret_exit_to_guest)
-         movq  8(%rsp), %rcx           # RIP
- /* No special register assumptions. */
--iret_exit_to_guest:
-+.L_iret_exit_to_guest:
-         andl  $~(X86_EFLAGS_IOPL | X86_EFLAGS_VM), 24(%rsp)
-         orl   $X86_EFLAGS_IF,24(%rsp)
-         addq  $8,%rsp
-@@ -432,10 +432,10 @@ UNLIKELY_END(msi_check)
-         cmove %rdi, %rdx
- 
-         test  %rdx, %rdx
--        jz    int80_slow_path
-+        jz    .L_int80_slow_path
- #else
-         test  %rdi, %rdi
--        jz    int80_slow_path
-+        jz    .L_int80_slow_path
- #endif
- 
-         /* Construct trap_bounce from trap_ctxt[0x80]. */
-@@ -457,7 +457,7 @@ UNLIKELY_END(msi_check)
-         call  create_bounce_frame
-         jmp   test_all_events
- 
--int80_slow_path:
-+.L_int80_slow_path:
-         /* 
-          * Setup entry vector and error code as if this was a GPF caused by an
-          * IDT entry with DPL==0.
-@@ -472,7 +472,7 @@ int80_slow_path:
-          * need to set up %r14 here, while %r15 is required to still be zero.
-          */
-         GET_STACK_END(14)
--        jmp   handle_exception_saved
-+        jmp   .L_handle_exception_saved
- END(entry_int80)
- 
-         /* create_bounce_frame & helpers don't need to be in .text.entry */
-@@ -750,10 +750,10 @@ FUNC(handle_exception, 0)
-         cmovnz %r12d, %r13d
- .Lxcpt_cr3_okay:
- 
--handle_exception_saved:
-+.L_handle_exception_saved:
-         GET_CURRENT(bx)
-         testb $X86_EFLAGS_IF>>8,UREGS_eflags+1(%rsp)
--        jz    exception_with_ints_disabled
-+        jz    .L_exception_with_ints_disabled
- 
- #if defined(CONFIG_PV32)
-         ALTERNATIVE_2 "jmp .Lcr4_pv32_done", \
-@@ -859,9 +859,9 @@ handle_exception_saved:
- #endif
- 
- /* No special register assumptions. */
--exception_with_ints_disabled:
-+.L_exception_with_ints_disabled:
-         testb $3,UREGS_cs(%rsp)         # interrupts disabled outside Xen?
--        jnz   FATAL_exception_with_ints_disabled
-+        jnz   .L_FATAL_exception_with_ints_disabled
-         movq  %rsp,%rdi
-         call  search_pre_exception_table
-         testq %rax,%rax                 # no fixup code for faulting EIP?
-@@ -891,7 +891,7 @@ exception_with_ints_disabled:
-         jmp   restore_all_xen           # return to fixup code
- 
- /* No special register assumptions. */
--FATAL_exception_with_ints_disabled:
-+.L_FATAL_exception_with_ints_disabled:
-         xorl  %esi,%esi
-         movq  %rsp,%rdi
-         tailcall fatal_trap
+
+base-commit: 4900c939cb9b876c51cfc7a4c854f54c722a30b5
 -- 
 2.30.2
 
