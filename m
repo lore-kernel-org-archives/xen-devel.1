@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695A8C46CD2
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Jan 2024 14:30:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.671018.1044153 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0078CC46CD2
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Jan 2024 14:31:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.671024.1044163 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rSeGc-0001HS-7r; Wed, 24 Jan 2024 14:30:14 +0000
+	id 1rSeHR-0001zl-Js; Wed, 24 Jan 2024 14:31:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 671018.1044153; Wed, 24 Jan 2024 14:30:14 +0000
+Received: by outflank-mailman (output) from mailman id 671024.1044163; Wed, 24 Jan 2024 14:31:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rSeGc-0001HL-4p; Wed, 24 Jan 2024 14:30:14 +0000
-Received: by outflank-mailman (input) for mailman id 671018;
- Wed, 24 Jan 2024 14:30:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rSeHR-0001ze-Gm; Wed, 24 Jan 2024 14:31:05 +0000
+Received: by outflank-mailman (input) for mailman id 671024;
+ Wed, 24 Jan 2024 14:31:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=RVUo=JC=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1rSeGa-0001Be-N3
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2024 14:30:12 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 13e2fe7b-bac5-11ee-98f5-6d05b1d4d9a1;
- Wed, 24 Jan 2024 15:30:10 +0100 (CET)
+ id 1rSeHQ-0001tR-EO
+ for xen-devel@lists.xenproject.org; Wed, 24 Jan 2024 14:31:04 +0000
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [2604:1380:40e1:4800::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 30e4ae16-bac5-11ee-9b0f-b553b5be7939;
+ Wed, 24 Jan 2024 15:31:00 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E080F61D73;
- Wed, 24 Jan 2024 14:30:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62A10C433C7;
- Wed, 24 Jan 2024 14:30:08 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 2C78ECE302B;
+ Wed, 24 Jan 2024 14:30:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9296C433B2;
+ Wed, 24 Jan 2024 14:30:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13e2fe7b-bac5-11ee-98f5-6d05b1d4d9a1
+X-Inumbo-ID: 30e4ae16-bac5-11ee-9b0f-b553b5be7939
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1706106609;
-	bh=4NLraLO7/AX0zW13dim0c0URPDyyqwoeRLWjqOfYK/Q=;
+	s=k20201202; t=1706106644;
+	bh=j7KBrdgzwN0IO1FenNnoGKVgyjjhdMdG0YY85G4rJpc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=YJPsUMX5h1m6G96o2TTL7e71ZTMMD+H+JmiJREZ2o8lm2/bPHjfPmLqlkgQlDQctw
-	 QTksrPqfygUFzwcM+8oTZEbX5CmPwQF/WBIv9TZqz9+O/4871LJb++ancfOCnZg3yq
-	 Ac61VnAuNkw01DnxLdpaTM0pZaN6gN/sc8jpnPvkRTGKVca8ubp61aROpp/wJWmxgq
-	 Eta/SJuOTJYNs2w1oucumqJJvteN6yPZ9kGteoZxPiuYICDk5FH7ujLMK+EZhs7oCO
-	 cqJiwoQdO6ziBDse74fS3iUWnekvjH+kjFJV05hEQuELU8TXQehKApNz9gL0EUCG4H
-	 0c4wtQ8N3K0Mg==
+	b=uNYDjUn70A8TsRp1zL/fz4PWjsceNKciszon5hhml/Zk/Mu2UoKuzhlhBj/y/sh/x
+	 6YlEqvNCFfzWu5M4AKCiWYLBxTWwB9fC1/GSh0OfdiS2YPWAxD19gAAO1hVjCj+gBk
+	 tn/emwieOIVTKsBstcrtSRW07+1YzxGILRvEwgHtLVOzT9JXZ3e2OflQXBTxUC0a2l
+	 uNUE7LH+68tJhQaufAnHoBHyV2UVieIcZZA97LH8cM2ckmEby8YOrUZdr87nSXcI5T
+	 tsZNkjItRzhh3BxBt7huVjGD0ToHMXufY/j+0fVz9nrvgwbCMlWKM9FpeTlrHWat+e
+	 qs7EMyUTExcWA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -64,17 +65,17 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Juergen Gross <jgross@suse.com>,
 	Sasha Levin <sashal@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 6.1 7/9] xen/gntdev: Fix the abuse of underlying struct page in DMA-buf import
-Date: Wed, 24 Jan 2024 09:29:37 -0500
-Message-ID: <20240124142949.1283818-7-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.15 7/9] xen/gntdev: Fix the abuse of underlying struct page in DMA-buf import
+Date: Wed, 24 Jan 2024 09:30:10 -0500
+Message-ID: <20240124143024.1284046-7-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240124142949.1283818-1-sashal@kernel.org>
-References: <20240124142949.1283818-1-sashal@kernel.org>
+In-Reply-To: <20240124143024.1284046-1-sashal@kernel.org>
+References: <20240124143024.1284046-1-sashal@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.1.74
+X-stable-base: Linux 5.15.147
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
@@ -102,7 +103,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 25 insertions(+), 25 deletions(-)
 
 diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
-index 940e5e9e8a54..335451309566 100644
+index 4c13cbc99896..398ea69c176c 100644
 --- a/drivers/xen/gntdev-dmabuf.c
 +++ b/drivers/xen/gntdev-dmabuf.c
 @@ -11,6 +11,7 @@
@@ -113,7 +114,7 @@ index 940e5e9e8a54..335451309566 100644
  #include <linux/slab.h>
  #include <linux/types.h>
  #include <linux/uaccess.h>
-@@ -50,7 +51,7 @@ struct gntdev_dmabuf {
+@@ -56,7 +57,7 @@ struct gntdev_dmabuf {
  
  	/* Number of pages this buffer has. */
  	int nr_pages;
@@ -122,7 +123,7 @@ index 940e5e9e8a54..335451309566 100644
  	struct page **pages;
  };
  
-@@ -484,7 +485,7 @@ static int dmabuf_exp_from_refs(struct gntdev_priv *priv, int flags,
+@@ -490,7 +491,7 @@ static int dmabuf_exp_from_refs(struct gntdev_priv *priv, int flags,
  /* DMA buffer import support. */
  
  static int
@@ -131,7 +132,7 @@ index 940e5e9e8a54..335451309566 100644
  				int count, int domid)
  {
  	grant_ref_t priv_gref_head;
-@@ -507,7 +508,7 @@ dmabuf_imp_grant_foreign_access(struct page **pages, u32 *refs,
+@@ -513,7 +514,7 @@ dmabuf_imp_grant_foreign_access(struct page **pages, u32 *refs,
  		}
  
  		gnttab_grant_foreign_access_ref(cur_ref, domid,
@@ -140,7 +141,7 @@ index 940e5e9e8a54..335451309566 100644
  		refs[i] = cur_ref;
  	}
  
-@@ -529,7 +530,6 @@ static void dmabuf_imp_end_foreign_access(u32 *refs, int count)
+@@ -535,7 +536,6 @@ static void dmabuf_imp_end_foreign_access(u32 *refs, int count)
  
  static void dmabuf_imp_free_storage(struct gntdev_dmabuf *gntdev_dmabuf)
  {
@@ -148,7 +149,7 @@ index 940e5e9e8a54..335451309566 100644
  	kfree(gntdev_dmabuf->u.imp.refs);
  	kfree(gntdev_dmabuf);
  }
-@@ -549,12 +549,6 @@ static struct gntdev_dmabuf *dmabuf_imp_alloc_storage(int count)
+@@ -555,12 +555,6 @@ static struct gntdev_dmabuf *dmabuf_imp_alloc_storage(int count)
  	if (!gntdev_dmabuf->u.imp.refs)
  		goto fail;
  
@@ -161,7 +162,7 @@ index 940e5e9e8a54..335451309566 100644
  	gntdev_dmabuf->nr_pages = count;
  
  	for (i = 0; i < count; i++)
-@@ -576,7 +570,8 @@ dmabuf_imp_to_refs(struct gntdev_dmabuf_priv *priv, struct device *dev,
+@@ -582,7 +576,8 @@ dmabuf_imp_to_refs(struct gntdev_dmabuf_priv *priv, struct device *dev,
  	struct dma_buf *dma_buf;
  	struct dma_buf_attachment *attach;
  	struct sg_table *sgt;
@@ -171,7 +172,7 @@ index 940e5e9e8a54..335451309566 100644
  	int i;
  
  	dma_buf = dma_buf_get(fd);
-@@ -624,26 +619,31 @@ dmabuf_imp_to_refs(struct gntdev_dmabuf_priv *priv, struct device *dev,
+@@ -630,26 +625,31 @@ dmabuf_imp_to_refs(struct gntdev_dmabuf_priv *priv, struct device *dev,
  
  	gntdev_dmabuf->u.imp.sgt = sgt;
  
