@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79288C46CD2
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Jan 2024 08:57:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.670818.1043844 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43961C46CD2
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Jan 2024 09:15:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.670824.1043857 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rSZ3x-0006ji-Ub; Wed, 24 Jan 2024 08:56:49 +0000
+	id 1rSZM0-0003JX-CZ; Wed, 24 Jan 2024 09:15:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 670818.1043844; Wed, 24 Jan 2024 08:56:49 +0000
+Received: by outflank-mailman (output) from mailman id 670824.1043857; Wed, 24 Jan 2024 09:15:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rSZ3x-0006jb-Qd; Wed, 24 Jan 2024 08:56:49 +0000
-Received: by outflank-mailman (input) for mailman id 670818;
- Wed, 24 Jan 2024 08:56:48 +0000
+	id 1rSZM0-0003JQ-8m; Wed, 24 Jan 2024 09:15:28 +0000
+Received: by outflank-mailman (input) for mailman id 670824;
+ Wed, 24 Jan 2024 09:15:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=bgOV=JC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rSZ3w-0006jF-TU
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2024 08:56:48 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=k9jB=JC=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rSZLy-0003Iy-IW
+ for xen-devel@lists.xenproject.org; Wed, 24 Jan 2024 09:15:26 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 817f5d03-ba96-11ee-98f5-6d05b1d4d9a1;
- Wed, 24 Jan 2024 09:56:47 +0100 (CET)
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2cddb0ee311so56379441fa.0
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jan 2024 00:56:48 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- x4-20020a056e020f0400b00361b6a1e6aasm2960866ilj.87.2024.01.24.00.56.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jan 2024 00:56:47 -0800 (PST)
+ id 1bbfbc24-ba99-11ee-98f5-6d05b1d4d9a1;
+ Wed, 24 Jan 2024 10:15:25 +0100 (CET)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-55cca88b6a5so210831a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jan 2024 01:15:25 -0800 (PST)
+Received: from [192.168.206.239] ([94.75.70.14])
+ by smtp.gmail.com with ESMTPSA id
+ h9-20020a0564020e0900b00559736b84ffsm11044750edh.89.2024.01.24.01.15.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jan 2024 01:15:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,151 +47,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 817f5d03-ba96-11ee-98f5-6d05b1d4d9a1
+X-Inumbo-ID: 1bbfbc24-ba99-11ee-98f5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1706086608; x=1706691408; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Ts+uFTaRePmueIU5jH7HQYe7b0R4U5xP6OKpShqXZGM=;
-        b=VXSHbqz+zHmIVyPxpWIUOl2QmXrDWt4/Fv4EYXlCzBlhZth70W0WNUNCae8rWCdKZU
-         GGRAQnZMhxqCHgeAl8jFIPrOz/jqoH9NfPaKyFpPVUlYrUyCftsUqDZYcl8a5H2ZE8OH
-         XZaJewA77+77+lHkez5nsg4xo0mL0g+heGRFMY/teNkZr0UvO/y0VAK3YTKbmqAE4Ygq
-         4F5t1Z74UhbD7YN3udrcjGtcYyXj1Q0LHWijbwfP7AaJJXm2+76pUjiD/LzQuJLTsXoc
-         l4Z72amPiyRgat4LrSbmgp0WtxTMUnQuDLQ0C3qbCQpXospzzCzyPEtP+LfGKkyrAffB
-         VMbQ==
+        d=gmail.com; s=20230601; t=1706087725; x=1706692525; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=9BEar1HU8T7eftDSQ6Z4GKnAGz6bSQ3j5Ys1+r4Vbgg=;
+        b=UCtHggJDPwimFiDBntRtJO4IXXx5jPKjjWT0r3g586+nDcbhBFl3rdrPdX/sWPDyvz
+         b6N9vkdodUkQdcHn11myLl9KPDRXG91xRwLEbBw2b4gdrmDEW/4Sgr7jHWcoIVJHuVv2
+         61es+xCLUDEH0pkEM3N7iI5PvUcha2eLIvuaRxkKakbhbGXjFFu5Ol79NiAKegsN5Y4B
+         Q9CK/lGVLrzVxqkueFk2r6W1f3EFvr0/S0fz3F+4HxpK2K7gb0/iJjxozgmAb8594N+g
+         UTC8eA4x9MUh4FPOjWLnAkerC/k8qn27HgQDgvovkJc75T+HWLG2j3xQWH2n5gUyzmeD
+         tsmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706086608; x=1706691408;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ts+uFTaRePmueIU5jH7HQYe7b0R4U5xP6OKpShqXZGM=;
-        b=G7QyeFbmunAZTXsYUi2jVLlP0mmkxYIQCf9rZzETX4mm+eLux1LiIbw+8thAUtJ+CP
-         jiGyfyfYx9wwX5EHfwJVtKkGaHCpcU/IXIefWoreF62zTo/1zfFnLqgTGHXmdTC+C+li
-         3wDfwpOOPUA3WH0lW8JC6sqmDboZUYP2cf1wh60o7cLEgaLH29XAquEThqt35r6UOlFO
-         +cdHgiOzdOP+g1et+hA7Yxp171CIs8VzmIrjZ+e33PoPPIU9l/+pVvT24s/WlEbKzq7F
-         OdxZNxy7cG8UYzX1+HDXoej4iYFGIB8+i51JUAkybYjyx4IG4ikut5Ojfyb/0fkSuvZt
-         Tmjw==
-X-Gm-Message-State: AOJu0YwIyW40MSjny/nEXuJ1inYCor3/H3TgRH+hA3HiAaAZILSytObH
-	Ll87L1lC5XOR22i+uLUa6Yx8U7D7wguEjJgMuqDi1qlSUM368N1Avyk8DItEDw==
-X-Google-Smtp-Source: AGHT+IEktw8YQL1QsTGtPHYfVIvIAqHfFfuMJhmykcW5kDjvFdOojsSt3azW5f3I3hSZyqnacnto3g==
-X-Received: by 2002:a2e:9e46:0:b0:2cc:c895:7140 with SMTP id g6-20020a2e9e46000000b002ccc8957140mr251279ljk.73.1706086607717;
-        Wed, 24 Jan 2024 00:56:47 -0800 (PST)
-Message-ID: <c8792489-3e61-4c2e-af80-97832a3622b7@suse.com>
-Date: Wed, 24 Jan 2024 09:56:42 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12.2 01/15] vpci: use per-domain PCI lock to protect vpci
- structure
-Content-Language: en-US
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Stewart Hildebrand <stewart.hildebrand@amd.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
- Paul Durrant <paul@xen.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+        d=1e100.net; s=20230601; t=1706087725; x=1706692525;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=9BEar1HU8T7eftDSQ6Z4GKnAGz6bSQ3j5Ys1+r4Vbgg=;
+        b=BfjKT89BIlkP2ArY5XbywBCn2SZUZlGMf8+QIKvkczAHmO2TIqItnSGYYuRXkMJwaY
+         drKzkNv2lnX0N+M2lm7o3JFkLgbeCncPOGht2tO+QzIhAZfq6AQynjUypx8lUEPVEYXc
+         AIyuoqXNsxjf6w1/kQAco69kRWtQ+MxwsA78xtQv7OWDTC0q24qxdQtZHmuCNfSz0Awx
+         D3oIXzOa9ream1spjeBF2MYb5i7qVFOOgBCuMXR2Kv4drDU8qyBlMzRj+WJEC8ClaI1q
+         X2TvkkSLEDJz715C2kje0iJL/U+nDv64je+mp++l2j284qvJdLO1NJrH3Lh/8H7G+2dW
+         h0ZQ==
+X-Gm-Message-State: AOJu0YzjjazK+obelSp7nbQYpazbm+WBgLfVQTkkPUnMP3D7G6YTSgXs
+	uV49YhwGNgTOSJwBsXRp7ZnffvH3RNdOoLtXcWakvTzwe5H5IBk4
+X-Google-Smtp-Source: AGHT+IEBM+V/cjbnzJ2r80lvSZKH9FPCZ7UZoWjBENcm6ZiwxHzb1I+sF8CBsvr8ESwl4jhJVRwczg==
+X-Received: by 2002:aa7:d399:0:b0:559:f4b4:3077 with SMTP id x25-20020aa7d399000000b00559f4b43077mr1996589edq.45.1706087724677;
+        Wed, 24 Jan 2024 01:15:24 -0800 (PST)
+Message-ID: <3c6aead1a067c6202474e9752b343d268c335b8c.camel@gmail.com>
+Subject: Re: [PATCH v3 13/34] xen/riscv: introduce cmpxchg.h
+From: Oleksii <oleksii.kurochko@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, Bob Eshleman
+ <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, George Dunlap
+ <george.dunlap@citrix.com>,  Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, 
  xen-devel@lists.xenproject.org
-References: <20240109215145.430207-1-stewart.hildebrand@amd.com>
- <20240109215145.430207-2-stewart.hildebrand@amd.com>
- <20240115194309.45683-1-stewart.hildebrand@amd.com>
- <18ec3401-4334-40c0-82a0-31abfd9797d0@suse.com> <Za_Z_WlLbBgb0EzF@macbook>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <Za_Z_WlLbBgb0EzF@macbook>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Wed, 24 Jan 2024 11:15:23 +0200
+In-Reply-To: <c57e17ed-61db-4da2-975b-083bfabcbe47@suse.com>
+References: <cover.1703255175.git.oleksii.kurochko@gmail.com>
+	 <214bfd61c8ccf2a5b2c640b815ebfa6a705f6234.1703255175.git.oleksii.kurochko@gmail.com>
+	 <8ee35a76-f3ef-4143-93ef-8e6089f82a80@suse.com>
+	 <56c23efdd79c0b1393ceef1adfcb45f66d4d1cf6.camel@gmail.com>
+	 <c5872ae0-a26a-4f51-bad6-08fd0c37d488@suse.com>
+	 <835c58c1deb89db2fa500bd7cd767facd5b5fb78.camel@gmail.com>
+	 <c57e17ed-61db-4da2-975b-083bfabcbe47@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
+MIME-Version: 1.0
 
-On 23.01.2024 16:23, Roger Pau Monné wrote:
-> On Tue, Jan 23, 2024 at 03:26:26PM +0100, Jan Beulich wrote:
->> On 15.01.2024 20:43, Stewart Hildebrand wrote:
->>> --- a/xen/arch/x86/hvm/vmsi.c
->>> +++ b/xen/arch/x86/hvm/vmsi.c
->>> @@ -468,7 +468,7 @@ int msixtbl_pt_register(struct domain *d, struct pirq *pirq, uint64_t gtable)
->>>      struct msixtbl_entry *entry, *new_entry;
->>>      int r = -EINVAL;
->>>  
->>> -    ASSERT(pcidevs_locked());
->>> +    ASSERT(pcidevs_locked() || rw_is_locked(&d->pci_lock));
->>>      ASSERT(rw_is_write_locked(&d->event_lock));
->>>  
->>>      if ( !msixtbl_initialised(d) )
->>> @@ -538,7 +538,7 @@ void msixtbl_pt_unregister(struct domain *d, struct pirq *pirq)
->>>      struct pci_dev *pdev;
->>>      struct msixtbl_entry *entry;
->>>  
->>> -    ASSERT(pcidevs_locked());
->>> +    ASSERT(pcidevs_locked() || rw_is_locked(&d->pci_lock));
->>>      ASSERT(rw_is_write_locked(&d->event_lock));
->>
->> I was hoping to just ack this patch, but the two changes above look
->> questionable to me: How can it be that holding _either_ lock is okay?
->> It's not obvious in this context that consumers have to hold both
->> locks now. In fact consumers looks to be the callers of
->> msixtbl_find_entry(), yet the list is RCU-protected. Whereas races
->> against themselves or against one another are avoided by holding
->> d->event_lock.
-> 
-> The reason for the change here is that msixtbl_pt_{un,}register() gets
-> called by pt_irq_{create,destroy}_bind(), which is in turn called by
-> vPCI code (pcidevs_locked()) that has been switched to not take the
-> pcidevs lock anymore, and hence the ASSERT would trigger.
+T24gVHVlLCAyMDI0LTAxLTIzIGF0IDE0OjI3ICswMTAwLCBKYW4gQmV1bGljaCB3cm90ZToKPiBP
+biAyMy4wMS4yMDI0IDEzOjE4LCBPbGVrc2lpIHdyb3RlOgo+ID4gT24gVHVlLCAyMDI0LTAxLTIz
+IGF0IDExOjI4ICswMTAwLCBKYW4gQmV1bGljaCB3cm90ZToKPiA+ID4gT24gMjMuMDEuMjAyNCAx
+MToxNSwgT2xla3NpaSB3cm90ZToKPiA+ID4gPiBPbiBNb24sIDIwMjQtMDEtMjIgYXQgMTc6Mjcg
+KzAxMDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+ID4gPiA+ID4gT24gMjIuMTIuMjAyMyAxNjoxMiwg
+T2xla3NpaSBLdXJvY2hrbyB3cm90ZToKPiA+ID4gPiA+ID4gK3N0YXRpYyBpbmxpbmUgdW5zaWdu
+ZWQgbG9uZyBfX3hjaGcodm9sYXRpbGUgdm9pZCAqcHRyLAo+ID4gPiA+ID4gPiB1bnNpZ25lZAo+
+ID4gPiA+ID4gPiBsb25nIHgsIGludCBzaXplKQo+ID4gPiA+ID4gPiArewo+ID4gPiA+ID4gPiAr
+wqDCoMKgIHN3aXRjaCAoc2l6ZSkgewo+ID4gPiA+ID4gPiArwqDCoMKgIGNhc2UgMToKPiA+ID4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiBfX2NtcHhjaGdfY2FzZV8xKHB0ciwgKHVpbnQz
+Ml90KS0xLCB4KTsKPiA+ID4gPiA+ID4gK8KgwqDCoCBjYXNlIDI6Cj4gPiA+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoCByZXR1cm4gX19jbXB4Y2hnX2Nhc2VfMihwdHIsICh1aW50MzJfdCktMSwgeCk7
+Cj4gPiA+ID4gPiAKPiA+ID4gPiA+IEhvdyBhcmUgdGhlc2UgZ29pbmcgdG8gd29yaz8gWW91J2xs
+IGNvbXBhcmUgYWdhaW5zdCB+MCwgYW5kCj4gPiA+ID4gPiBpZgo+ID4gPiA+ID4gdGhlCj4gPiA+
+ID4gPiB2YWx1ZQo+ID4gPiA+ID4gaW4gbWVtb3J5IGlzbid0IH4wLCBtZW1vcnkgd29uJ3QgYmUg
+dXBkYXRlZDsgeW91IHdpbGwgb25seQo+ID4gPiA+ID4gKGNvcnJlY3RseSkKPiA+ID4gPiA+IHJl
+dHVybiB0aGUgdmFsdWUgZm91bmQgaW4gbWVtb3J5Lgo+ID4gPiA+ID4gCj4gPiA+ID4gPiBPciB3
+YWl0IC0gbG9va2luZyBhdCBfX2NtcHhjaGdfY2FzZV97MSwyfSgpIGZhciBmdXJ0aGVyIGRvd24s
+Cj4gPiA+ID4gPiB5b3UKPiA+ID4gPiA+IGlnbm9yZQo+ID4gPiA+ID4gIm9sZCIgdGhlcmUuIFdo
+aWNoIGFwcGFyZW50bHkgbWVhbnMgdGhleSdsbCB3b3JrIGZvciB0aGUgdXNlCj4gPiA+ID4gPiBo
+ZXJlLAo+ID4gPiA+ID4gYnV0Cj4gPiA+ID4gPiBub3QgZm9yIHRoZSB1c2UgaW4gX19jbXB4Y2hn
+KCkuCj4gPiA+ID4gWWVzLCB0aGUgdHJpY2sgaXMgdGhhdCBvbGQgaXMgaWdub3JlZCBhbmQgaXMg
+cmVhZCBpbgo+ID4gPiA+IF9fZW11bGF0ZV9jbXB4Y2hnX2Nhc2UxXzIoKSBiZWZvcmUgX19jbXB4
+Y2hnX2Nhc2VfNCBpcyBjYWxsZWQ6Cj4gPiA+ID4gwqDCoMKgIGRvCj4gPiA+ID4ge8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IAo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgIHJlYWRfdmFsID0KPiA+ID4gPiByZWFkX2Z1bmMoYWxp
+Z25lZF9wdHIpO8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCAKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoCBzd2FwcGVkX25ldyA9IHJlYWRfdmFsICYK
+PiA+ID4gPiB+bWFzazvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqAgc3dhcHBlZF9uZXcgfD0K
+PiA+ID4gPiBtYXNrZWRfbmV3O8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqAg
+cmV0ID0gY21weGNoZ19mdW5jKGFsaWduZWRfcHRyLCByZWFkX3ZhbCwKPiA+ID4gPiBzd2FwcGVk
+X25ldyk7wqDCoMKgwqDCoMKgIAo+ID4gPiA+IMKgwqDCoCB9IHdoaWxlICggcmV0ICE9IHJlYWRf
+dmFsCj4gPiA+ID4gKTvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAKPiA+ID4gPiByZWFkX3ZhbCBpdCBpcyAn
+b2xkJy4KPiA+ID4gPiAKPiA+ID4gPiBCdXQgbm93IEkgYW0gbm90IDEwMCUgc3VyZSB0aGF0IGl0
+IGlzIGNvcnJlY3QgZm9yIF9fY21weGNoZy4uLgo+ID4gPiAKPiA+ID4gSXQganVzdCBjYW4ndCBi
+ZSBjb3JyZWN0IC0geW91IGNhbid0IGlnbm9yZSAib2xkIiB0aGVyZS4gSSB0aGluawo+ID4gPiB5
+b3UKPiA+ID4gd2FudCBzaW1wbGUgY21weGNoZyBwcmltaXRpdmVzLCB3aGljaCB4Y2hnIHRoZW4g
+dXNlcyBpbiBhIGxvb3AKPiA+ID4gKHdoaWxlCj4gPiA+IGNtcHhjaGcgdXNlcyB0aGVtIHBsYWlu
+bHkpLgo+ID4gQnV0IHhjaGcgZG9lc24ndCByZXF1aXJlICdvbGQnIHZhbHVlLCBzbyBpdCBzaG91
+bGQgYmUgaWdub3JlZCBpbgo+ID4gc29tZQo+ID4gd2F5IGJ5IGNtcHhjaGcuCj4gCj4gV2VsbCwg
+bm8uIElmIHlvdSBoYXZlIG9ubHkgY21weGNoZywgSSB0aGluayB5b3VyIG9ubHkgY2hvaWNlIGlz
+IC0gYXMKPiBzYWlkIC0gdG8gcmVhZCB0aGUgb2xkIHZhbHVlIGFuZCB0aGVuIGxvb3Agb3ZlciBj
+bXB4Y2hnIHVudGlsIHRoYXQKPiBzdWNjZWVkcy4gTm90IHJlYWxseSBkaWZmZXJlbnQgZnJvbSBv
+dGhlciBvcGVyYXRpb25zIHdoaWNoIG5lZWQKPiBlbXVsYXRpbmcgdXNpbmcgY21weGNoZy4KVGhl
+biBpdCBsb29rcyBsaWtlIHRoZSBtYWluIGVycm9yIGluIF9fZW11bGF0ZV9jbXB4Y2hnX2Nhc2Ux
+XzIgaXMgdGhhdApJIHJlYWQgdGhlIHZhbHVlIGVhY2ggdGltZSwgc28gcmVhZF92YWwgPSByZWFk
+X2Z1bmMoYWxpZ25lZF9wdHIpOyAKc2hvdWxkIGJlIGJlZm9yZSB0aGUgZG8gey4uLn0gd2hpbGUo
+KS4gQWxzbywgaXQgd291bGQgYmUgYmV0dGVyIHRvCnJlbmFtZSBpdCB0byBvbGRfdmFsIG9yIGp1
+c3Qgb2xkLgoKPiAKPiA+ID4gPiA+ID4gK3N0YXRpYyBhbHdheXNfaW5saW5lIHVuc2lnbmVkIHNo
+b3J0Cj4gPiA+ID4gPiA+IF9fY21weGNoZ19jYXNlXzIodm9sYXRpbGUKPiA+ID4gPiA+ID4gdWlu
+dDMyX3QgKnB0ciwKPiA+ID4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgCj4gPiA+ID4gPiA+IHVpbnQzMl90Cj4gPiA+ID4gPiA+IG9sZCwKPiA+
+ID4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+Cj4gPiA+ID4gPiA+IHVpbnQzMl90Cj4gPiA+ID4gPiA+IG5ldykKPiA+ID4gPiA+ID4gK3sKPiA+
+ID4gPiA+ID4gK8KgwqDCoCAodm9pZCkgb2xkOwo+ID4gPiA+ID4gPiArCj4gPiA+ID4gPiA+ICvC
+oMKgwqAgaWYgKCgodW5zaWduZWQgbG9uZylwdHIgJiAzKSA9PSAzKQo+ID4gPiA+ID4gPiArwqDC
+oMKgIHsKPiA+ID4gPiA+ID4gKyNpZmRlZiBDT05GSUdfNjRCSVQKPiA+ID4gPiA+ID4gK8KgwqDC
+oMKgwqDCoMKgIHJldHVybiBfX2VtdWxhdGVfY21weGNoZ19jYXNlMV8yKCh1aW50NjRfdCAqKXB0
+ciwKPiA+ID4gPiA+ID4gbmV3LAo+ID4gPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+cmVhZHEsCj4gPiA+ID4gPiA+IF9fY21weGNoZ19jYXNlXzgsCj4gPiA+ID4gPiA+IDB4ZmZmZlUp
+Owo+ID4gPiA+ID4gCj4gPiA+ID4gPiBXaGF0IGlmICgodW5zaWduZWQgbG9uZylwdHIgJiA3KSA9
+PSA3ICh3aGljaCBpcyBhIHN1Yi1jYXNlIG9mCj4gPiA+ID4gPiB3aGF0Cj4gPiA+ID4gPiB0aGUK
+PiA+ID4gPiA+IGlmKCkgYWJvdmUgY2hlY2tzIGZvcj8gSXNuJ3QgaXQgbW9yZSByZWFzb25hYmxl
+IHRvIHJlcXVpcmUKPiA+ID4gPiA+IGFsaWduZWQKPiA+ID4gPiA+IDE2LWJpdCBxdWFudGl0aWVz
+IGhlcmU/IE9yIGlmIG1pcy1hbGlnbmVkIGFkZHJlc3NlcyBhcmUgb2theSwKPiA+ID4gPiA+IHlv
+dQo+ID4gPiA+ID4gY291bGQKPiA+ID4gPiA+IGFzIHdlbGwgZW11bGF0ZSB1c2luZyBfX2NtcHhj
+aGdfY2FzZV80KCkuCj4gPiA+ID4gWWVzLCBpdCB3aWxsIGJlIG1vcmUgcmVhc29uYWJsZS4gSSds
+bCB1c2UgSVNfQUxJR05FRCBpbnN0ZWFkLgo+ID4gPiAKPiA+ID4gTm90IHN1cmUgSSBnZXQgeW91
+ciB1c2Ugb2YgImluc3RlYWQiIGhlcmUgY29ycmVjdGx5LiBUaGVyZSdzIG1vcmUKPiA+ID4gdG8g
+Y2hhbmdlIGhlcmUgdGhhbiBqdXN0IHRoZSBpZigpIGNvbmRpdGlvbi4KPiA+IEkgbWVhbnQgc29t
+ZXRoaW5nIGxpa2U6Cj4gPiAKPiA+IGlmICggSVNfQUxJR05FRChwdHIsIDE2KSApCj4gPiDCoMKg
+wqAgX19lbXVsYXRlX2NtcHhjaGdfY2FzZTFfMiguLi4pOwo+ID4gZWxzZQo+ID4gwqDCoMKgIGFz
+c2VydF9mYWlsZWQoInB0ciBpc24ndCBhbGlnbmVkXG4iKTsKPiAKPiBFeGNlcHQgdGhhdCB5b3Un
+ZCBiZXR0ZXIgbm90IHVzZSBhc3NlcnRfZmFpbGVkKCkgZGlyZWN0bHkgYW55d2hlcmUsCj4gYW5k
+IHRoZSBhYm92ZSBpcyBlYXNpZXIgYXMKPiAKPiDCoMKgwqAgQVNTRVJUKElTX0FMSUdORUQocHRy
+LCAxNikpOwo+IMKgwqDCoCBfX2VtdWxhdGVfY21weGNoZ19jYXNlMV8yKC4uLik7Cj4gCj4gYW55
+d2F5IChsZWF2aW5nIGFzaWRlIHRoYXQgSSBndWVzcyB5b3UgbWVhbiAyLCBub3QgMTYpLgpZZWFo
+LCBpdCBzaG91bGQgYmUgMi4gVGhhbmtzLgoKfiBPbGVrc2lpCg==
 
-I understand this is the motivation for the change, but that doesn't
-(alone) render the construct above sensible / correct.
-
->> My only guess then for the original need of holding pcidevs_lock is
->> the use of msi_desc->dev, with the desire for the device to not go
->> away. Yet the description doesn't talk about interactions of the per-
->> domain PCI lock with that one at all; it all circles around the
->> domain'd vPCI lock.
-> 
-> I do agree that it looks like the original intention of holding
-> pcidevs_lock is to prevent msi_desc->dev from being removed - yet I'm
-> not sure it's possible for the device to go away while the domain
-> event_lock is hold, as device removal would need to take that same
-> lock in order to destroy the irq_desc.
-
-Yes, that matches an observation of mine as well. If we can simplify
-(rather then complicate) locking, I'd prefer if we did. May need to
-be a separate (prereq) patch, though.
-
->> Feels like I'm missing something that's obvious to everyone else.
->> Or maybe this part of the patch is actually unrelated, and should be
->> split off (with its own [proper] justification)? Or wouldn't it then
->> be better to also change the other paths leading here to acquire the
->> per-domain PCI lock?
-> 
-> Other paths in vPCI vpci_msi_update(), vpci_msi_arch_update(),
-> vpci_msi_arch_enable()... are switched in this patch to use the
-> per-domain pci_lock instead of pcidevs lock.
-
-Hence my question: Can't we consolidate to all paths only using the
-per-domain lock? That would make these odd-looking assertions become
-normal-looking again.
-
-Jan
 
