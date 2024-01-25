@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25988C47258
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Jan 2024 09:10:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.671408.1044731 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 474EFC47258
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Jan 2024 09:32:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.671417.1044751 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rSvkb-0003Te-GU; Thu, 25 Jan 2024 09:10:21 +0000
+	id 1rSw5Z-0008AB-KL; Thu, 25 Jan 2024 09:32:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 671408.1044731; Thu, 25 Jan 2024 09:10:21 +0000
+Received: by outflank-mailman (output) from mailman id 671417.1044751; Thu, 25 Jan 2024 09:32:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rSvkb-0003TX-Dr; Thu, 25 Jan 2024 09:10:21 +0000
-Received: by outflank-mailman (input) for mailman id 671408;
- Thu, 25 Jan 2024 09:10:20 +0000
+	id 1rSw5Z-0008A4-GQ; Thu, 25 Jan 2024 09:32:01 +0000
+Received: by outflank-mailman (input) for mailman id 671417;
+ Thu, 25 Jan 2024 09:31:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=etx6=JD=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rSvka-0003TR-U5
- for xen-devel@lists.xenproject.org; Thu, 25 Jan 2024 09:10:20 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
+ id 1rSw5X-0007vY-Jk
+ for xen-devel@lists.xenproject.org; Thu, 25 Jan 2024 09:31:59 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8ff4d52c-bb61-11ee-98f5-6d05b1d4d9a1;
- Thu, 25 Jan 2024 10:10:19 +0100 (CET)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40e72a567eeso77051995e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 25 Jan 2024 01:10:20 -0800 (PST)
+ id 9526b459-bb64-11ee-98f5-6d05b1d4d9a1;
+ Thu, 25 Jan 2024 10:31:58 +0100 (CET)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-55a8fd60af0so5938968a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 25 Jan 2024 01:31:56 -0800 (PST)
 Received: from localhost ([213.195.118.74]) by smtp.gmail.com with ESMTPSA id
- t18-20020a05600c199200b0040ecea22794sm1708714wmq.45.2024.01.25.01.10.19
+ wh22-20020a170906fd1600b00a30fc529f25sm821405ejb.199.2024.01.25.01.31.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 01:10:19 -0800 (PST)
+ Thu, 25 Jan 2024 01:31:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,64 +46,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ff4d52c-bb61-11ee-98f5-6d05b1d4d9a1
+X-Inumbo-ID: 9526b459-bb64-11ee-98f5-6d05b1d4d9a1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1706173819; x=1706778619; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=13hw+jSl0gF3eZ6rlPYeh061glQKyoDVGbDjjwDq6vY=;
-        b=bZIl0DKjVkdJ2V4CwZgb30krPBbJvFICRfd3Ahpd42qYHHf1T2Wmi7QTVafbsAgRI5
-         0XtzHYQ/sWlcfi4xfqTefW+/B2l9ujxDQ2lywPfPzJ7xKhdgOBx8na9/mQeq29KTBOe5
-         hud/z3sZBtsWPfC5E9o0p4TjRYOUoJ5wp1gTU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706173819; x=1706778619;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1706175116; x=1706779916; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=13hw+jSl0gF3eZ6rlPYeh061glQKyoDVGbDjjwDq6vY=;
-        b=Eqq5tY6v4CqsYpS9Y0PRYJ6WQUjdCuB9k5SEPobHB+hE70Qv21mCJWkI6Yzo8vhD43
-         eif5apNU0rx2z4+GhyXZe5TL3p9MfJUf9xzmagNUrbDZCoc/yS/nS9MPEhQv4STt0fqR
-         agujtoqkRfsWjrQDupgpZXkwXo7CDXzimGc0EITko/WzzDj6SNG1HWh344WvOaD5r4o+
-         eMuCqrm6otVzEFXUJZW1GUZbUuTj6x567xsqhzwE9kMqU0v4LTzpUDpgCxX940nSh7o2
-         /yYn3yxUK2Rvwa4smipoZ9l5LcSgehPKW8YHGlMvXukQd8v40alkeN7RmRZfi8cg61Y0
-         zyXA==
-X-Gm-Message-State: AOJu0YxMkMzNeb8aOGP6wpkiBBDAqUwzXx7OoQG7Kk+uRx58em4lTvp2
-	pZ2oQyYIo6w/8RsrKCxLeqyoDP/Yo1jP+uodbGFsQx4Y/Jf/C5c7PT+Pkf0No/I=
-X-Google-Smtp-Source: AGHT+IHK8IV1xz+aLtEH/Ews7qXoRV7VAnsVSxr00M4NCEMFDAim6Ov5lUXhB2r0C8rIi1GNTtErkg==
-X-Received: by 2002:a7b:cb16:0:b0:40e:54f1:5d3e with SMTP id u22-20020a7bcb16000000b0040e54f15d3emr173043wmj.199.1706173819612;
-        Thu, 25 Jan 2024 01:10:19 -0800 (PST)
-Date: Thu, 25 Jan 2024 10:10:18 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH] x86/NMI: refine "watchdog stuck" log message
-Message-ID: <ZbIleqqWHTY4vhqp@macbook>
-References: <87108f1d-4b13-4c1e-9432-4f14d4f5c12d@suse.com>
- <add9b6b3-cc50-4165-8f63-cd4541a3ba23@citrix.com>
- <c8f3e7d4-8b7c-4835-b63b-dc784f27a936@suse.com>
+        bh=7vP6sfxLmfNUVHHugUyr46Hq2QM66JBX8dinWtvdjh4=;
+        b=ZMAIwqKeIyW9Nj5Sdj9lnpf5mtz2x9YgxecdmziGc1NYmp1y50LwN/rRn0HcNiKMWy
+         OlevOx9KrO65cU1wU5TQHEpDrrVGEP7p4/aRGJ4bc6MSDsUhLnTaYEuinYSpBunzYnWo
+         NPRNIj6YQ7f7mLSYWT/VkNH4cM/VyLfpSUAn8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1706175116; x=1706779916;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=7vP6sfxLmfNUVHHugUyr46Hq2QM66JBX8dinWtvdjh4=;
+        b=rFFfaJ8EB23TTimwBv7NkA8p/P5FzJBmCTlkYs+WMartDC9QMu3NtG5yQjOM2YbaFK
+         H6quHuLwd0EqHx80r30c0+HJbpPdECYdS6UP+P4/4/nxww76sQWbHJQs+X+S+EnRmuDu
+         uTjWMne6xJS2QT35363acq1c0n0LXnryEO/izmjE1d9LSJorBrMUiV8al+7jQwr2QXwM
+         I8cNlUM853Mux4SXFMj9culVs2Lcvn87yqY3yRXMdiSm8giKGVVAFYADd67IoXz2GsRM
+         Ofbv8AVBR6lcSNsrbtbdejSTzWzQbqp5eUbpaJZOIlPNfEJqGE7YxcjoQGtWnI+dqkYI
+         t0GQ==
+X-Gm-Message-State: AOJu0YzBWL4SA8CcNANYgacb8hoGO0PSqTLWa2O44Zk6w4EhP+Et3t5i
+	to/NyoPLA9Jky4NdGMY0XQCIn1R4EGmSWZSPH2P1RBtvc5pj8K/ik04pS+TbIcs684FF28f3frO
+	M
+X-Google-Smtp-Source: AGHT+IFkcCmiMKZzVykMGtuqpJz06SojcWRYZe1/Dui3aHOSq/Z+oZXED+GXSKOdmrQNcyHlHV0oKg==
+X-Received: by 2002:a17:907:a708:b0:a31:8c1e:5ced with SMTP id vw8-20020a170907a70800b00a318c1e5cedmr121647ejc.76.1706175115746;
+        Thu, 25 Jan 2024 01:31:55 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 1/2] x86/hvm: make X86_EMU_USE_PIRQ optional
+Date: Thu, 25 Jan 2024 10:30:40 +0100
+Message-ID: <20240125093041.33087-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240125093041.33087-1-roger.pau@citrix.com>
+References: <20240125093041.33087-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <c8f3e7d4-8b7c-4835-b63b-dc784f27a936@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 25, 2024 at 09:05:13AM +0100, Jan Beulich wrote:
-> On 24.01.2024 16:55, Andrew Cooper wrote:
-> > On 24/01/2024 3:21 pm, Jan Beulich wrote:
-> > but if you felt
-> > turning this into using a scratch cpumask and %*pb then I think that
-> > would be nicer still.
-> 
-> I expected you might say that, and indeed I considered it. But then
-> I wanted to keep code churn limited. The way it's done it's imo an
-> almost purely mechanical change. Much like with Roger's consideration
-> of further refining the message text in the error case.
+Allow selecting X86_EMU_USE_PIRQ for HVM guests, so it's no longer mandated to
+be always on.
 
-One suggestion I had in mind (which is not explicitly related to the
-fix here) would be to taint the hypervisor when we hit such selftests
-errors, as that would make it more obvious to go search the dmesg for
-reported failures. I think it's still fairly easy to miss noticing the
-watchdog selftest failed on some CPUs.
+There's no restriction in Xen that forces such feature to be always on for HVM
+guests, as for example PVH guests don't support it, as such allow toolstack to
+select whether to enabled it on a per-domain basis.
 
-Regards, Roger.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v3:
+ - Split hypervisor side from previous patch.
+---
+ xen/arch/x86/domain.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 8a31d18f6967..bda853e3c92b 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -725,7 +725,9 @@ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
+              emflags != (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) )
+             return false;
+         if ( !is_hardware_domain(d) &&
+-             emflags != (X86_EMU_ALL & ~X86_EMU_VPCI) &&
++             /* HVM PIRQ feature is user-selectable. */
++             (emflags & ~X86_EMU_USE_PIRQ) !=
++             (X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ)) &&
+              emflags != X86_EMU_LAPIC )
+             return false;
+     }
+-- 
+2.43.0
+
 
