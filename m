@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09758C47DDB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:40:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672322.1046299 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2A45C47422
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:41:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672341.1046312 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQBh-00041F-74; Fri, 26 Jan 2024 17:40:21 +0000
+	id 1rTQD1-0005EC-Hs; Fri, 26 Jan 2024 17:41:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672322.1046299; Fri, 26 Jan 2024 17:40:21 +0000
+Received: by outflank-mailman (output) from mailman id 672341.1046312; Fri, 26 Jan 2024 17:41:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQBh-000414-44; Fri, 26 Jan 2024 17:40:21 +0000
-Received: by outflank-mailman (input) for mailman id 672322;
- Fri, 26 Jan 2024 17:40:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rTQD1-0005E5-E4; Fri, 26 Jan 2024 17:41:43 +0000
+Received: by outflank-mailman (input) for mailman id 672341;
+ Fri, 26 Jan 2024 17:41:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bPDA=JE=casper.srs.infradead.org=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ4t-0004Zo-Pq
+ id 1rTQ4t-0004m7-Oj
  for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:19 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fe4e181a-bc70-11ee-8a43-1f161083a0e0;
- Fri, 26 Jan 2024 18:33:18 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fc5e8e90-bc70-11ee-98f5-efadbce2ee36;
+ Fri, 26 Jan 2024 18:33:15 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUL-0gC3; Fri, 26 Jan 2024 17:32:33 +0000
+ id 1rTQ49-0000000EKUx-1uSO; Fri, 26 Jan 2024 17:32:35 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ48-00000001em5-2PYf;
- Fri, 26 Jan 2024 17:32:32 +0000
+ Hat Linux)) id 1rTQ4A-00000001eng-14GT;
+ Fri, 26 Jan 2024 17:32:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: fe4e181a-bc70-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: fc5e8e90-bc70-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=XNIjAmOhj+SZtS07BQBFCx/gbJe5yDDVggy1z+Bpirk=; b=qRXBwy8wUZBA7uZmqg9qysYyBX
-	Y6Ht7Uox+6oAhC7gW4UQMkRldIgtf5lI/GgLn4EtGwZu0/+8aZ3UQ/6sw5Nm3YMXsI9ZplbcbqVRU
-	GiScBh5rU2/rvAZI+rbdLSXVYqwSpx2Xj+MikdK1RdUBZva0Xcpdckrj/KRFo1FxaE10njMG3SWRb
-	LkADFbDwwlhMqaRJtmytj91Ya617+xnZWYXRs2Ed1Z3ursa9//nPX6CeTgziudkhqDHG/KmFDVYxw
-	09AEiwPniBXkf+XV7YRKFK7GNdiekuVJFoJ6xULYvfLkXQR20xacHe13v/fDVjSrdNymWeMDedHXz
-	Oo1BD/eA==;
+	bh=DVny/j77ulUUleAP4xxt8G+Z0haYgB9hlZ/h/9Yyrxg=; b=DlRBjExjlAWl+S+PBC+lla3Kef
+	FuduYJJNw+3RIesEwWQ06DsltvkZ60y4rdBDynv1/T8B8x6xYBKa7PlEA43FRHSnvrqK/kcNkt6f4
+	AKgmjbjlKqGsJ84ajqCs6o7Jt1R1IOYfpeRTOLvC0msw3643izcxMzr+Odu1lE9tB9En31J5J+Ypk
+	d0u8RGMG34ZZ8sOqjEKpjBpG7mOPpvBL29eQY1NJhRu6nd9spHxshDeDiPi+PK0c6r0n7KVyMUZnL
+	LLM1YbMTN37dL7+Qf2lYlh93U3q+exZBv4S3jTbCbNeVVNWqcCGAsr5gT2azI7+Gwixra42hQAhbq
+	dj4A4AkQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -122,9 +122,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 18/47] hw/sh4/r2d: use pci_init_nic_devices()
-Date: Fri, 26 Jan 2024 17:24:55 +0000
-Message-ID: <20240126173228.394202-19-dwmw2@infradead.org>
+Subject: [PATCH v4 37/47] hw/net/lasi_i82596: Re-enable build
+Date: Fri, 26 Jan 2024 17:25:14 +0000
+Message-ID: <20240126173228.394202-38-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
@@ -135,42 +135,42 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Previously, the first PCI NIC would be assigned to slot 2 even if the
-user override the model and made it something other than an rtl8139
-which is the default. Everything else would be dynamically assigned.
+When converting to the shiny build-system-du-jour, a typo prevented the
+last_i82596 driver from being built. Correct the config option name to
+re-enable the build. And include "sysemu/sysemu.h" so it actually builds.
 
-Now, the first rtl8139 gets slot 2 and everything else is dynamic.
-
+Fixes: b1419fa66558 ("meson: convert hw/net")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Yoshinori Sato <ysato@users.sourceforge.jp>
 ---
- hw/sh4/r2d.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/net/lasi_i82596.c | 1 +
+ hw/net/meson.build   | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
-index 4944994e9c..e9f316a6ce 100644
---- a/hw/sh4/r2d.c
-+++ b/hw/sh4/r2d.c
-@@ -240,7 +240,6 @@ static void r2d_init(MachineState *machine)
-     MemoryRegion *sdram = g_new(MemoryRegion, 1);
-     qemu_irq *irq;
-     DriveInfo *dinfo;
--    int i;
-     DeviceState *dev;
-     SysBusDevice *busdev;
-     MemoryRegion *address_space_mem = get_system_memory();
-@@ -309,9 +308,8 @@ static void r2d_init(MachineState *machine)
-                           0x555, 0x2aa, 0);
- 
-     /* NIC: rtl8139 on-board, and 2 slots. */
--    for (i = 0; i < nb_nics; i++)
--        pci_nic_init_nofail(&nd_table[i], pci_bus,
--                            mc->default_nic, i == 0 ? "2" : NULL);
-+    pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "2");
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* USB keyboard */
-     usb_create_simple(usb_bus_find(-1), "usb-kbd");
+diff --git a/hw/net/lasi_i82596.c b/hw/net/lasi_i82596.c
+index 6a3147fe2d..09e830ba5f 100644
+--- a/hw/net/lasi_i82596.c
++++ b/hw/net/lasi_i82596.c
+@@ -14,6 +14,7 @@
+ #include "qapi/error.h"
+ #include "qemu/timer.h"
+ #include "hw/sysbus.h"
++#include "sysemu/sysemu.h"
+ #include "net/eth.h"
+ #include "hw/net/lasi_82596.h"
+ #include "hw/net/i82596.h"
+diff --git a/hw/net/meson.build b/hw/net/meson.build
+index 9afceb0619..2b426d3d5a 100644
+--- a/hw/net/meson.build
++++ b/hw/net/meson.build
+@@ -33,7 +33,7 @@ system_ss.add(when: 'CONFIG_MARVELL_88W8618', if_true: files('mv88w8618_eth.c'))
+ system_ss.add(when: 'CONFIG_CADENCE', if_true: files('cadence_gem.c'))
+ system_ss.add(when: 'CONFIG_STELLARIS_ENET', if_true: files('stellaris_enet.c'))
+ system_ss.add(when: 'CONFIG_LANCE', if_true: files('lance.c'))
+-system_ss.add(when: 'CONFIG_LASI_I82596', if_true: files('lasi_i82596.c'))
++system_ss.add(when: 'CONFIG_LASI_82596', if_true: files('lasi_i82596.c'))
+ system_ss.add(when: 'CONFIG_I82596_COMMON', if_true: files('i82596.c'))
+ system_ss.add(when: 'CONFIG_SUNHME', if_true: files('sunhme.c'))
+ system_ss.add(when: 'CONFIG_FTGMAC100', if_true: files('ftgmac100.c'))
 -- 
 2.43.0
 
