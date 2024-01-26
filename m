@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BD2AC47DDF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:33:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672257.1046075 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D478C4828D
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:33:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672258.1046099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ4j-0005Eg-1Z; Fri, 26 Jan 2024 17:33:09 +0000
+	id 1rTQ4l-00065w-C5; Fri, 26 Jan 2024 17:33:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672257.1046075; Fri, 26 Jan 2024 17:33:08 +0000
+Received: by outflank-mailman (output) from mailman id 672258.1046099; Fri, 26 Jan 2024 17:33:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ4i-0005CN-OI; Fri, 26 Jan 2024 17:33:08 +0000
-Received: by outflank-mailman (input) for mailman id 672257;
- Fri, 26 Jan 2024 17:33:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rTQ4l-00065I-70; Fri, 26 Jan 2024 17:33:11 +0000
+Received: by outflank-mailman (input) for mailman id 672258;
+ Fri, 26 Jan 2024 17:33:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bPDA=JE=casper.srs.infradead.org=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ4h-0004Zo-6K
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:07 +0000
+ id 1rTQ4i-0004m7-5z
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:08 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f6d80c20-bc70-11ee-8a43-1f161083a0e0;
- Fri, 26 Jan 2024 18:33:06 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f6909de3-bc70-11ee-98f5-efadbce2ee36;
+ Fri, 26 Jan 2024 18:33:05 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUI-0c8R; Fri, 26 Jan 2024 17:32:33 +0000
+ id 1rTQ4A-0000000EKVE-1KWX; Fri, 26 Jan 2024 17:32:35 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ47-00000001elY-26Lp;
- Fri, 26 Jan 2024 17:32:31 +0000
+ Hat Linux)) id 1rTQ4B-00000001eoc-0Zcj;
+ Fri, 26 Jan 2024 17:32:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f6d80c20-bc70-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: f6909de3-bc70-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=C7nZq/xI+tHeWx5EE1R48ZvurCMfWCSLsOC+/dyJjdk=; b=Rv2CQRFKPPyrLZD67SGNqYuyb4
-	GvyhT2YW0gHDow6GwIwtyMr2T8XDpGhiLDkpIl+LXPq+vSjs0xaTXC+C74GqqFjOdKKzCFWOAiahT
-	sB76ExMjIfNhDo8gW1z6wgV68rgmcMG4plTG+aLERSxf4tHclfLIDHVltLbw+RQlVWpSbibrqC2GF
-	3uQFm4GMwabqQE8hart4kFuZ7fOEhqfwFwZSBirP2coHxK0N9D+He1wdqV4EOu/exOaJ0CeuSiv8d
-	0QWonbluFTzgv8d7fMKsnELacrNO1B0NTYqWGfdq2WJbIyHawk7Lua4tuq9/zG54YfsC3sHvnIYsa
-	u3kXcdGQ==;
+	bh=mMqmzYHdP9y/z29knSdyyl/j1smIAiKPsHboaiDoM8A=; b=IVHbkUTVu9QS37/ZYsTzfIizrG
+	LPu/yqj/9DjNLjK5MqQJcDbaTTqxAzfRFUEkMm4afH9tPBzreb9YiJxUjaXrKpupvuupxwI0lVPkN
+	au0VGXkd5EMo6iuMUoLPFu4ZysSeYj85Cv6MjA8l3VInOlHCJOupJpehhmxdcdzfR7Qu12dwsiaDB
+	SwG+ZiJW3i5w1rLjjO/Er74woIQaiBQeJEMYx2XB+9mBVzYV+Q3RAnbYGraFAVlmSnA+NPgXLWxER
+	0D1IBqmMMJjRwNalpz7QFwfhmoe/1hcEubjkQv2F5IzQDKtcYcoD3dgGB4HWxfKj248xTcE7A0nu5
+	HRskgV4g==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -123,9 +123,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>,
 	Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 07/47] hw/alpha/dp264: use pci_init_nic_devices()
-Date: Fri, 26 Jan 2024 17:24:44 +0000
-Message-ID: <20240126173228.394202-8-dwmw2@infradead.org>
+Subject: [PATCH v4 47/47] net: make nb_nics and nd_table[] static in net/net.c
+Date: Fri, 26 Jan 2024 17:25:24 +0000
+Message-ID: <20240126173228.394202-48-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
@@ -136,27 +136,60 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Also remove the stale declaration of host_net_devices; the actual
+definition was removed long ago in commit 7cc28cb06104 ("net: Remove
+the deprecated 'host_net_add' and 'host_net_remove' HMP commands")
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/alpha/dp264.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ include/net/net.h | 4 ----
+ net/net.c         | 3 +++
+ system/globals.c  | 2 --
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
-index 03495e1e60..52a1fa310b 100644
---- a/hw/alpha/dp264.c
-+++ b/hw/alpha/dp264.c
-@@ -124,9 +124,7 @@ static void clipper_init(MachineState *machine)
-     pci_vga_init(pci_bus);
+diff --git a/include/net/net.h b/include/net/net.h
+index 588ee55f28..b1f9b35fcc 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -301,10 +301,6 @@ struct NICInfo {
+     int nvectors;
+ };
  
-     /* Network setup.  e1000 is good enough, failing Tulip support.  */
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
+-extern int nb_nics;
+-extern NICInfo nd_table[MAX_NICS];
+-extern const char *host_net_devices[];
+-
+ /* from net.c */
+ extern NetClientStateList net_clients;
+ bool netdev_is_modern(const char *optstr);
+diff --git a/net/net.c b/net/net.c
+index d705e9b0fd..a2f0c828bb 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -77,6 +77,9 @@ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
  
-     /* Super I/O */
-     isa_create_simple(isa_bus, TYPE_SMC37C669_SUPERIO);
+ static GHashTable *nic_model_help;
+ 
++static int nb_nics;
++static NICInfo nd_table[MAX_NICS];
++
+ /***********************************************************/
+ /* network device redirectors */
+ 
+diff --git a/system/globals.c b/system/globals.c
+index e83b5428d1..b6d4e72530 100644
+--- a/system/globals.c
++++ b/system/globals.c
+@@ -36,8 +36,6 @@ int display_opengl;
+ const char* keyboard_layout;
+ bool enable_mlock;
+ bool enable_cpu_pm;
+-int nb_nics;
+-NICInfo nd_table[MAX_NICS];
+ int autostart = 1;
+ int vga_interface_type = VGA_NONE;
+ bool vga_interface_created;
 -- 
 2.43.0
 
