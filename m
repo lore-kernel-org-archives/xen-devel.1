@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F83C48286
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97A3C4828C
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 15:42:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672095.1045812 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.672091.1045773 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTOLT-0004Bq-Gu; Fri, 26 Jan 2024 15:42:19 +0000
+	id 1rTOLP-0003GE-V4; Fri, 26 Jan 2024 15:42:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672095.1045812; Fri, 26 Jan 2024 15:42:19 +0000
+Received: by outflank-mailman (output) from mailman id 672091.1045773; Fri, 26 Jan 2024 15:42:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTOLT-0004Al-96; Fri, 26 Jan 2024 15:42:19 +0000
-Received: by outflank-mailman (input) for mailman id 672095;
- Fri, 26 Jan 2024 15:42:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rTOLP-0003G7-RK; Fri, 26 Jan 2024 15:42:15 +0000
+Received: by outflank-mailman (input) for mailman id 672091;
+ Fri, 26 Jan 2024 15:42:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DqdW=JE=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rTOLS-00039n-2f
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 15:42:18 +0000
+ id 1rTOLO-0002k9-Ip
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 15:42:14 +0000
 Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
  [2a00:1450:4864:20::12f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7b6c9df7-bc61-11ee-98f5-efadbce2ee36;
- Fri, 26 Jan 2024 16:42:16 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 79405bba-bc61-11ee-8a43-1f161083a0e0;
+ Fri, 26 Jan 2024 16:42:12 +0100 (CET)
 Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5100ed2b33dso1253461e87.0
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jan 2024 07:42:16 -0800 (PST)
+ 2adb3069b0e04-5100c2f7a16so458704e87.1
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jan 2024 07:42:12 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- q5-20020ac25105000000b0050e7ec49881sm208351lfb.21.2024.01.26.07.42.14
+ q5-20020ac25105000000b0050e7ec49881sm208351lfb.21.2024.01.26.07.42.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jan 2024 07:42:15 -0800 (PST)
+ Fri, 26 Jan 2024 07:42:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,322 +46,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b6c9df7-bc61-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 79405bba-bc61-11ee-8a43-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706283736; x=1706888536; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1706283732; x=1706888532; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9CoC0jYDEb7IzuBO+LTtL41X0IwHwYGfKM4uqjQc6J8=;
-        b=ANe1mH2TQ7652+hfoPSK64RggTlI00leWyujtAMlVk7aGlENV2y4iNCJIuepjjdVeU
-         c7t/uz6OGyUACRY28HDvrc9l8HzkfOIbNKW89fcb0y2rjQw1VUH6Ry/aa2ZHu+KFsTjl
-         XaufhD74BZVGaev/r42K985UDCNiQhEkNs+KeabLXm2GCjj74PUqT+ph5PftGE85ZoWm
-         uYr+qvM1uGt9i56UPuSR+d3NgpBBJduKv9H6I83ButZmofeg8ePkz5cyvVEN7AUzpMaL
-         Wdc+o4E98FCoNb3pPiLVWEtkbBfPaIaywAEtJhNLrwCwYruFuZpibGMnw2sHdNPkJT5V
-         N4Bw==
+        bh=VEZW9bC9IZuUyn5hU4hwwOb0kPnkeC45L5CWqPFzyWM=;
+        b=GcZ1e2aRoSGSa2QrUHmXldkfXO2UASRFV74EBCMwoeG/uqiiYCmx8RL5txQ6nLmgnl
+         xd/L+nGjCD1euVFH4WDT9QrpEBbkj0kjkavAh0sYSrEaLf6zBIrao1b/c86SbjXcM7AV
+         9MENnfMrpRx8vfBZkEYWyNQpUhxrUpFIHIjNtYr+Nx/86YvYdHZhP2Y90/21j+B2029W
+         6piJcsDXAmACpUxjvfkjovpjiZmjafTEnb/MksLp88nPFVZJp44yLYU3fgk/FNmID7Hi
+         iH4bAQN04DsQ9l1tVMdqxKKUPV/mFhj9N9siPLKrarluSADG/xJzVsDsRwfL4p83SQMK
+         h85g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706283736; x=1706888536;
+        d=1e100.net; s=20230601; t=1706283732; x=1706888532;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9CoC0jYDEb7IzuBO+LTtL41X0IwHwYGfKM4uqjQc6J8=;
-        b=JFDdA33AJgnI9ffPDSXRpXRTTcQerxUPUtW0A+C2R4HJqgM26z3HVatsqmYWBDQcHE
-         VJy0KoGrGuMqOsv091hKwuqBGhXbQI4UGb1y45qvYta/o6kZlYJwBkr/dbZN2t9Jb5MZ
-         Nj2y//2BehQ96uMsUVfklnghm05y1KrEiBg5vx+Dk1eOuAincj/74wyRv03bnD3+/Ena
-         /S5eIRlSKWbQdHN7nU1ww1IjvM728AKxkRPEal3nQ5iVkJGvXBDuaGjYEZaWfZeMESjz
-         I2OQ5o0BywT7jQcOAnSP6elAr56S9wbWnK6lb6u1NEE5TNHw4bOxU1BZ5eRLKBprIDKb
-         u65g==
-X-Gm-Message-State: AOJu0Yxzs6JjwwImffUKP+AObwvX8V5Rm9DM2WJ70rLdhXesRDjX4YwG
-	6hhBz3baCbt/mbCk8w5OBTofLaEi5xyH0yT8ds+NlwP1Dn8tGrpL53WeKivs
-X-Google-Smtp-Source: AGHT+IHjD4GEuhO7ompOdwR9Fd6BoQjwV+WsrEoI/sNz6GEohRlCZPloaxtjJeShIRWVokLGuvgn/g==
-X-Received: by 2002:a19:f816:0:b0:510:c4a:a02d with SMTP id a22-20020a19f816000000b005100c4aa02dmr810864lff.122.1706283735722;
-        Fri, 26 Jan 2024 07:42:15 -0800 (PST)
+        bh=VEZW9bC9IZuUyn5hU4hwwOb0kPnkeC45L5CWqPFzyWM=;
+        b=sG5wG89aPyKbGwt6zRlpDPynEPCjFKWSrz2ThG7/1KWSESwyxCFHYWq2XqyY7xiIeM
+         b4AxM5jaldzE6JwZbUwypMKlR0Z09KCchaoNE6mMmmJdt7a0NeWSX5qkDlVgYIaV9YoP
+         0aqoGGeMTvn4RJDntk+PdNjWFSqPpTbICSgWhRavWbww3oFCdZWGQLfixDOw4GpHeX04
+         FfGgLxRFK3wHLmCwVAm4IqTyYuy5xdNIwntbxEKgjqMx2/UufZkBBI+PQuS5xWVETucE
+         dYxucs5dC+fvr6g1ffn/gEujnfDp/LaDCpnl0FMYm4Q4mlD3Q6cEIhU2KXgY/9nZ1ma/
+         0+Fg==
+X-Gm-Message-State: AOJu0Yyq02gc7DmFdnn/y2oYpukKxhQRtiI4aDX//xmtZOF0BqW6pX+O
+	XiQCQB81C/TuAItpgQ5w2dhij/JwwFcI/Qg4NB6mrRb6lPt3iqcEIaguQJMo
+X-Google-Smtp-Source: AGHT+IEe9j/Pjph1NsnFlw2LwlbWbgpilGjH7F9SOqvpbcVHNAN5EN/XiY1sJWitLcqPCemnE/5y+g==
+X-Received: by 2002:ac2:4985:0:b0:510:194e:4e07 with SMTP id f5-20020ac24985000000b00510194e4e07mr13193lfl.26.1706283732052;
+        Fri, 26 Jan 2024 07:42:12 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v7 6/7] xen/arm: switch Arm to use asm-generic/device.h
-Date: Fri, 26 Jan 2024 17:42:06 +0200
-Message-ID: <d5d2b0515516f0554a0532ff4d4fbd9c704e0a1b.1706281994.git.oleksii.kurochko@gmail.com>
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v7 2/7] automation: introduce fixed randconfig for RISC-V
+Date: Fri, 26 Jan 2024 17:42:02 +0200
+Message-ID: <6641e6fdd36c4128c6c76badfb778dc195f1e419.1706281994.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1706281994.git.oleksii.kurochko@gmail.com>
 References: <cover.1706281994.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+This patch introduces the file riscv-fixed-randconfig.yaml,
+which includes all configurations that should be disabled for
+randconfig builds.
+
+Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/arm/device.c             |   5 ++
- xen/arch/arm/domain_build.c       |   2 +-
- xen/arch/arm/gic-v2.c             |   4 +-
- xen/arch/arm/gic-v3.c             |   6 +-
- xen/arch/arm/gic.c                |   4 +-
- xen/arch/arm/include/asm/Makefile |   1 +
- xen/arch/arm/include/asm/device.h | 124 ------------------------------
- 7 files changed, 14 insertions(+), 132 deletions(-)
- delete mode 100644 xen/arch/arm/include/asm/device.h
+The patch were introduced after discussion in a topic:
+ https://lore.kernel.org/xen-devel/cover.1701966261.git.oleksii.kurochko@gmail.com/
+---
+Changes in V7:
+ - Nothing changed. Only rebase
+---
+Changes in V6:
+ - The patch was introduced in this version of patch series.
+---
+ automation/gitlab-ci/build.yaml                  | 8 ++++----
+ automation/gitlab-ci/riscv-fixed-randconfig.yaml | 7 +++++++
+ 2 files changed, 11 insertions(+), 4 deletions(-)
+ create mode 100644 automation/gitlab-ci/riscv-fixed-randconfig.yaml
 
-diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
-index 1f631d3274..3e02cff008 100644
---- a/xen/arch/arm/device.c
-+++ b/xen/arch/arm/device.c
-@@ -16,7 +16,10 @@
- #include <xen/lib.h>
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 32af30cced..38cd93c306 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -516,6 +516,8 @@ alpine-3.18-gcc-debug-arm64-boot-cpupools:
+       CONFIG_BOOT_TIME_CPUPOOLS=y
  
- extern const struct device_desc _sdevice[], _edevice[];
+ # RISC-V 64 cross-build
++include: 'automation/gitlab-ci/riscv-fixed-randconfig.yaml'
 +
-+#ifdef CONFIG_ACPI
- extern const struct acpi_device_desc _asdevice[], _aedevice[];
-+#endif
+ archlinux-current-gcc-riscv64:
+   extends: .gcc-riscv64-cross-build
+   variables:
+@@ -536,8 +538,7 @@ archlinux-current-gcc-riscv64-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    EXTRA_FIXED_RANDCONFIG: !reference [.riscv-fixed-randconfig, variables, EXTRA_FIXED_RANDCONFIG]
  
- int __init device_init(struct dt_device_node *dev, enum device_class class,
-                        const void *data)
-@@ -45,6 +48,7 @@ int __init device_init(struct dt_device_node *dev, enum device_class class,
-     return -EBADF;
- }
+ archlinux-current-gcc-riscv64-debug-randconfig:
+   extends: .gcc-riscv64-cross-build-debug
+@@ -545,8 +546,7 @@ archlinux-current-gcc-riscv64-debug-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    EXTRA_FIXED_RANDCONFIG: !reference [.riscv-fixed-randconfig, variables, EXTRA_FIXED_RANDCONFIG]
  
-+#ifdef CONFIG_ACPI
- int __init acpi_device_init(enum device_class class, const void *data, int class_type)
- {
-     const struct acpi_device_desc *desc;
-@@ -61,6 +65,7 @@ int __init acpi_device_init(enum device_class class, const void *data, int class
- 
-     return -EBADF;
- }
-+#endif
- 
- enum device_class device_get_class(const struct dt_device_node *dev)
- {
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 46161848dc..085d88671e 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -1651,7 +1651,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
-      * Replace these nodes with our own. Note that the original may be
-      * used_by DOMID_XEN so this check comes first.
-      */
--    if ( device_get_class(node) == DEVICE_GIC )
-+    if ( device_get_class(node) == DEVICE_INTERRUPT_CONTROLLER )
-         return make_gic_node(d, kinfo->fdt, node);
-     if ( dt_match_node(timer_matches, node) )
-         return make_timer_node(kinfo);
-diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-index cf392bfd1c..5d6885e389 100644
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -1366,7 +1366,7 @@ static const struct dt_device_match gicv2_dt_match[] __initconst =
-     { /* sentinel */ },
- };
- 
--DT_DEVICE_START(gicv2, "GICv2", DEVICE_GIC)
-+DT_DEVICE_START(gicv2, "GICv2", DEVICE_INTERRUPT_CONTROLLER)
-         .dt_match = gicv2_dt_match,
-         .init = gicv2_dt_preinit,
- DT_DEVICE_END
-@@ -1381,7 +1381,7 @@ static int __init gicv2_acpi_preinit(const void *data)
-     return 0;
- }
- 
--ACPI_DEVICE_START(agicv2, "GICv2", DEVICE_GIC)
-+ACPI_DEVICE_START(agicv2, "GICv2", DEVICE_INTERRUPT_CONTROLLER)
-         .class_type = ACPI_MADT_GIC_VERSION_V2,
-         .init = gicv2_acpi_preinit,
- ACPI_DEVICE_END
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index bf0e5c1b75..1cb1360606 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -1909,7 +1909,7 @@ static const struct dt_device_match gicv3_dt_match[] __initconst =
-     { /* sentinel */ },
- };
- 
--DT_DEVICE_START(gicv3, "GICv3", DEVICE_GIC)
-+DT_DEVICE_START(gicv3, "GICv3", DEVICE_INTERRUPT_CONTROLLER)
-         .dt_match = gicv3_dt_match,
-         .init = gicv3_dt_preinit,
- DT_DEVICE_END
-@@ -1924,12 +1924,12 @@ static int __init gicv3_acpi_preinit(const void *data)
-     return 0;
- }
- 
--ACPI_DEVICE_START(agicv3, "GICv3", DEVICE_GIC)
-+ACPI_DEVICE_START(agicv3, "GICv3", DEVICE_INTERRUPT_CONTROLLER)
-         .class_type = ACPI_MADT_GIC_VERSION_V3,
-         .init = gicv3_acpi_preinit,
- ACPI_DEVICE_END
- 
--ACPI_DEVICE_START(agicv4, "GICv4", DEVICE_GIC)
-+ACPI_DEVICE_START(agicv4, "GICv4", DEVICE_INTERRUPT_CONTROLLER)
-         .class_type = ACPI_MADT_GIC_VERSION_V4,
-         .init = gicv3_acpi_preinit,
- ACPI_DEVICE_END
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index d922ea67aa..b5a9c8266c 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -234,7 +234,7 @@ static void __init gic_dt_preinit(void)
-         if ( !dt_get_parent(node) )
-             continue;
- 
--        rc = device_init(node, DEVICE_GIC, NULL);
-+        rc = device_init(node, DEVICE_INTERRUPT_CONTROLLER, NULL);
-         if ( !rc )
-         {
-             /* NOTE: Only one GIC is supported */
-@@ -262,7 +262,7 @@ static void __init gic_acpi_preinit(void)
- 
-     dist = container_of(header, struct acpi_madt_generic_distributor, header);
- 
--    if ( acpi_device_init(DEVICE_GIC, NULL, dist->version) )
-+    if ( acpi_device_init(DEVICE_INTERRUPT_CONTROLLER, NULL, dist->version) )
-         panic("Unable to find compatible GIC in the ACPI table\n");
- }
- #else
-diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
-index 505cb49090..4a4036c951 100644
---- a/xen/arch/arm/include/asm/Makefile
-+++ b/xen/arch/arm/include/asm/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0-only
- generic-y += altp2m.h
-+generic-y += device.h
- generic-y += hardirq.h
- generic-y += iocap.h
- generic-y += paging.h
-diff --git a/xen/arch/arm/include/asm/device.h b/xen/arch/arm/include/asm/device.h
-deleted file mode 100644
-index b5d451e087..0000000000
---- a/xen/arch/arm/include/asm/device.h
-+++ /dev/null
-@@ -1,124 +0,0 @@
--#ifndef __ASM_ARM_DEVICE_H
--#define __ASM_ARM_DEVICE_H
--
--enum device_type
--{
--    DEV_DT,
--    DEV_PCI,
--};
--
--struct dev_archdata {
--    void *iommu;    /* IOMMU private data */
--};
--
--/* struct device - The basic device structure */
--struct device
--{
--    enum device_type type;
--#ifdef CONFIG_HAS_DEVICE_TREE
--    struct dt_device_node *of_node; /* Used by drivers imported from Linux */
--#endif
--    struct dev_archdata archdata;
--    struct iommu_fwspec *iommu_fwspec; /* per-device IOMMU instance data */
--};
--
--typedef struct device device_t;
--
--#include <xen/device_tree.h>
--
--#define dev_is_pci(dev) ((dev)->type == DEV_PCI)
--#define dev_is_dt(dev)  ((dev)->type == DEV_DT)
--
--enum device_class
--{
--    DEVICE_SERIAL,
--    DEVICE_IOMMU,
--    DEVICE_GIC,
--    DEVICE_PCI_HOSTBRIDGE,
--    /* Use for error */
--    DEVICE_UNKNOWN,
--};
--
--struct device_desc {
--    /* Device name */
--    const char *name;
--    /* Device class */
--    enum device_class class;
--    /* List of devices supported by this driver */
--    const struct dt_device_match *dt_match;
--    /*
--     * Device initialization.
--     *
--     * -EAGAIN is used to indicate that device probing is deferred.
--     */
--    int (*init)(struct dt_device_node *dev, const void *data);
--};
--
--struct acpi_device_desc {
--    /* Device name */
--    const char *name;
--    /* Device class */
--    enum device_class class;
--    /* type of device supported by the driver */
--    const int class_type;
--    /* Device initialization */
--    int (*init)(const void *data);
--};
--
--/**
-- *  acpi_device_init - Initialize a device
-- *  @class: class of the device (serial, network...)
-- *  @data: specific data for initializing the device
-- *
-- *  Return 0 on success.
-- */
--int acpi_device_init(enum device_class class,
--                     const void *data, int class_type);
--
--/**
-- *  device_init - Initialize a device
-- *  @dev: device to initialize
-- *  @class: class of the device (serial, network...)
-- *  @data: specific data for initializing the device
-- *
-- *  Return 0 on success.
-- */
--int device_init(struct dt_device_node *dev, enum device_class class,
--                const void *data);
--
--/**
-- * device_get_type - Get the type of the device
-- * @dev: device to match
-- *
-- * Return the device type on success or DEVICE_ANY on failure
-- */
--enum device_class device_get_class(const struct dt_device_node *dev);
--
--#define DT_DEVICE_START(_name, _namestr, _class)                    \
--static const struct device_desc __dev_desc_##_name __used           \
--__section(".dev.info") = {                                          \
--    .name = _namestr,                                               \
--    .class = _class,                                                \
--
--#define DT_DEVICE_END                                               \
--};
--
--#define ACPI_DEVICE_START(_name, _namestr, _class)                    \
--static const struct acpi_device_desc __dev_desc_##_name __used           \
--__section(".adev.info") = {                       \
--    .name = _namestr,                                               \
--    .class = _class,                                                \
--
--#define ACPI_DEVICE_END                                               \
--};
--
--#endif /* __ASM_ARM_DEVICE_H */
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
+ # Power cross-build
+ debian-bullseye-gcc-ppc64le:
+diff --git a/automation/gitlab-ci/riscv-fixed-randconfig.yaml b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
+new file mode 100644
+index 0000000000..f1282b40c9
+--- /dev/null
++++ b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
+@@ -0,0 +1,7 @@
++.riscv-fixed-randconfig:
++  variables:
++    EXTRA_FIXED_RANDCONFIG:
++      CONFIG_COVERAGE=n
++      CONFIG_EXPERT=y
++      CONFIG_GRANT_TABLE=n
++      CONFIG_MEM_ACCESS=n
 -- 
 2.43.0
 
