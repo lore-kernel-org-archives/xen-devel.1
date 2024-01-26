@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF392C47DDB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:38:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672305.1046279 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0532AC47DDB
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:40:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672321.1046288 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ9l-00013q-Gw; Fri, 26 Jan 2024 17:38:21 +0000
+	id 1rTQBT-0003cr-Rt; Fri, 26 Jan 2024 17:40:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672305.1046279; Fri, 26 Jan 2024 17:38:21 +0000
+Received: by outflank-mailman (output) from mailman id 672321.1046288; Fri, 26 Jan 2024 17:40:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ9l-00013h-De; Fri, 26 Jan 2024 17:38:21 +0000
-Received: by outflank-mailman (input) for mailman id 672305;
- Fri, 26 Jan 2024 17:38:19 +0000
+	id 1rTQBT-0003ck-Om; Fri, 26 Jan 2024 17:40:07 +0000
+Received: by outflank-mailman (input) for mailman id 672321;
+ Fri, 26 Jan 2024 17:40:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=46+y=JE=desiato.srs.infradead.org=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ55-0004m7-RD
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:31 +0000
+ id 1rTQ5D-0004m7-Sw
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:39 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 01e77551-bc71-11ee-98f5-efadbce2ee36;
- Fri, 26 Jan 2024 18:33:24 +0100 (CET)
+ id 04945a1a-bc71-11ee-98f5-efadbce2ee36;
+ Fri, 26 Jan 2024 18:33:29 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4A-000000069Up-1vM6; Fri, 26 Jan 2024 17:32:35 +0000
+ id 1rTQ4A-000000069Ue-1wwP; Fri, 26 Jan 2024 17:32:35 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ49-00000001en3-1zqq;
- Fri, 26 Jan 2024 17:32:33 +0000
+ Hat Linux)) id 1rTQ47-00000001elJ-0BRo;
+ Fri, 26 Jan 2024 17:32:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 01e77551-bc71-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 04945a1a-bc71-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=X6ke30CwveEkz5smymx38sGBgkKUHVYamBl46p3i/0I=; b=G494fFd2mP0Dj7LuDOipJm7Owz
-	lg4FxCPBqEekH32mKUFiRpjvM4gbvJl8IyqV24tQnkqtoD3kIoU0//E55ptwp/KNLJLObDFWl84xA
-	LyyEbvysIGcuVn6jGjouhI95tXxUJ5Wd2Y1sxDNUbYJzAg1ojC1/ejwquyKqaxjA5h1ljcaxMG72Y
-	kKR324Lr/AGkF8i4Pg3J0gV8ytJQjyDewTTJR3xZfCcDxwRcsAqAf2QEZIPUmTm49PSKqH9r6ZzZo
-	qoBceM7r7v7IC4Pnmllgo8gsJCI7tdgMmdddhMb++f9cefXfZaemmAftT3NzjS7qS0dXTKscg1YGC
-	Zf2G4uPw==;
+	bh=XmoH6A+nBWef4HqrfR783ZSUxaA8W49f9I7azkQqtOs=; b=FuCrBmZY5nYwKyYrErP59AA1dZ
+	SWxwci4hTyJC9UXZZOp+usyr/gAyVYXGz3L7EOj4aNSPOwRWapSpc6hm68VAQYPzat9DngTZUbHja
+	Mlfdfsdy3v4OkHDI5iF62kvEKkcuYBi6FgB2BGtFH/H0TeceQq6XCcMdDCY5u5oaqAZCcb/6whd47
+	oJqFbYi8pQw34UzYm1n8cviAzuWn2HqbHfrAZxOD5dU13hEBwcw7cEkuyK55M1YGiMQFVTlHEBe4W
+	F2JcfiF9+y/mPN/BMca2IiouKaopiqwSC4tirvd6UqGXo+J+oKwdLuAqU+v/shwadwUZg9lwKiqzP
+	ulDsuIdQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -122,9 +122,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 28/47] hw/arm/npcm7xx: use qemu_configure_nic_device, allow emc0/emc1 as aliases
-Date: Fri, 26 Jan 2024 17:25:05 +0000
-Message-ID: <20240126173228.394202-29-dwmw2@infradead.org>
+Subject: [PATCH v4 02/47] net: report list of available models according to platform
+Date: Fri, 26 Jan 2024 17:24:39 +0000
+Message-ID: <20240126173228.394202-3-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
@@ -135,80 +135,148 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Also update the test to specify which device to attach the test socket
-to, and remove the comment lamenting the fact that we can't do so.
+By noting the models for which a configuration was requested, we can give
+the user an accurate list of which NIC models were actually available on
+the platform/configuration that was otherwise chosen.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/arm/npcm7xx.c               | 16 +++++++++-------
- tests/qtest/npcm7xx_emc-test.c | 18 ++++--------------
- 2 files changed, 13 insertions(+), 21 deletions(-)
+ net/net.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 94 insertions(+)
 
-diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c
-index 15ff21d047..ee395864e4 100644
---- a/hw/arm/npcm7xx.c
-+++ b/hw/arm/npcm7xx.c
-@@ -655,8 +655,9 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
+diff --git a/net/net.c b/net/net.c
+index aeb7f573fc..962904eaef 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -75,6 +75,8 @@ typedef QSIMPLEQ_HEAD(, NetdevQueueEntry) NetdevQueue;
  
-     /*
-      * EMC Modules. Cannot fail.
--     * The mapping of the device to its netdev backend works as follows:
--     * emc[i] = nd_table[i]
-+     * Use the available NIC configurations in order, allowing 'emc0' and
-+     * 'emc1' to by used as aliases for the model= parameter to override.
-+     *
-      * This works around the inability to specify the netdev property for the
-      * emc device: it's not pluggable and thus the -device option can't be
-      * used.
-@@ -664,12 +665,13 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
-     QEMU_BUILD_BUG_ON(ARRAY_SIZE(npcm7xx_emc_addr) != ARRAY_SIZE(s->emc));
-     QEMU_BUILD_BUG_ON(ARRAY_SIZE(s->emc) != 2);
-     for (i = 0; i < ARRAY_SIZE(s->emc); i++) {
--        s->emc[i].emc_num = i;
-         SysBusDevice *sbd = SYS_BUS_DEVICE(&s->emc[i]);
--        if (nd_table[i].used) {
--            qemu_check_nic_model(&nd_table[i], TYPE_NPCM7XX_EMC);
--            qdev_set_nic_properties(DEVICE(sbd), &nd_table[i]);
--        }
-+        char alias[6];
+ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
+ 
++static GHashTable *nic_model_help;
 +
-+        s->emc[i].emc_num = i;
-+        snprintf(alias, sizeof(alias), "emc%u", i);
-+        qemu_configure_nic_device(DEVICE(sbd), true, alias);
+ /***********************************************************/
+ /* network device redirectors */
+ 
+@@ -1087,12 +1089,94 @@ static int net_init_nic(const Netdev *netdev, const char *name,
+     return idx;
+ }
+ 
++static gboolean add_nic_result(gpointer key, gpointer value, gpointer user_data)
++{
++    GPtrArray *results = user_data;
++    GPtrArray *alias_list = value;
++    const char *model = key;
++    char *result;
 +
-         /*
-          * The device exists regardless of whether it's connected to a QEMU
-          * netdev backend. So always instantiate it even if there is no
-diff --git a/tests/qtest/npcm7xx_emc-test.c b/tests/qtest/npcm7xx_emc-test.c
-index b046f1d76a..f7646fae2c 100644
---- a/tests/qtest/npcm7xx_emc-test.c
-+++ b/tests/qtest/npcm7xx_emc-test.c
-@@ -225,21 +225,11 @@ static int *packet_test_init(int module_num, GString *cmd_line)
-     g_assert_cmpint(ret, != , -1);
++    if (!alias_list) {
++        result = g_strdup(model);
++    } else {
++        GString *result_str = g_string_new(model);
++        int i;
++
++        g_string_append(result_str, " (aka ");
++        for (i = 0; i < alias_list->len; i++) {
++            if (i) {
++                g_string_append(result_str, ", ");
++            }
++            g_string_append(result_str, alias_list->pdata[i]);
++        }
++        g_string_append(result_str, ")");
++        result = result_str->str;
++        g_string_free(result_str, false);
++        g_ptr_array_unref(alias_list);
++    }
++    g_ptr_array_add(results, result);
++    return true;
++}
++
++static int model_cmp(char **a, char **b)
++{
++    return strcmp(*a, *b);
++}
++
++static void show_nic_models(void)
++{
++    GPtrArray *results = g_ptr_array_new();
++    int i;
++
++    g_hash_table_foreach_remove(nic_model_help, add_nic_result, results);
++    g_ptr_array_sort(results, (GCompareFunc)model_cmp);
++
++    printf("Available NIC models for this configuration:\n");
++    for (i = 0 ; i < results->len; i++) {
++        printf("%s\n", (char *)results->pdata[i]);
++    }
++    g_hash_table_unref(nic_model_help);
++    nic_model_help = NULL;
++}
++
++static void add_nic_model_help(const char *model, const char *alias)
++{
++    GPtrArray *alias_list = NULL;
++
++    if (g_hash_table_lookup_extended(nic_model_help, model, NULL,
++                                     (gpointer *)&alias_list)) {
++        /* Already exists, no alias to add: return */
++        if (!alias) {
++            return;
++        }
++        if (alias_list) {
++            /* Check if this alias is already in the list. Add if not. */
++            if (!g_ptr_array_find_with_equal_func(alias_list, alias,
++                                                  g_str_equal, NULL)) {
++                g_ptr_array_add(alias_list, g_strdup(alias));
++            }
++            return;
++        }
++    }
++    /* Either this model wasn't in the list already, or a first alias added */
++    if (alias) {
++        alias_list = g_ptr_array_new();
++        g_ptr_array_set_free_func(alias_list, g_free);
++        g_ptr_array_add(alias_list, g_strdup(alias));
++    }
++    g_hash_table_replace(nic_model_help, g_strdup(model), alias_list);
++}
++
+ NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+                             const char *alias)
+ {
+     NICInfo *nd;
+     int i;
  
-     /*
--     * KISS and use -nic. We specify two nics (both emc{0,1}) because there's
--     * currently no way to specify only emc1: The driver implicitly relies on
--     * emc[i] == nd_table[i].
-+     * KISS and use -nic. The driver accepts 'emc0' and 'emc1' as aliases
-+     * in the 'model' field to specify the device to match.
-      */
--    if (module_num == 0) {
--        g_string_append_printf(cmd_line,
--                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " "
--                               " -nic user,model=" TYPE_NPCM7XX_EMC " ",
--                               test_sockets[1]);
--    } else {
--        g_string_append_printf(cmd_line,
--                               " -nic user,model=" TYPE_NPCM7XX_EMC " "
--                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " ",
--                               test_sockets[1]);
--    }
-+    g_string_append_printf(cmd_line, " -nic socket,fd=%d,model=emc%d ",
-+                           test_sockets[1], module_num);
++    if (nic_model_help) {
++        add_nic_model_help(typename, alias);
++    }
++
+     for (i = 0; i < nb_nics; i++) {
+         nd = &nd_table[i];
  
-     g_test_queue_destroy(packet_test_clear, test_sockets);
-     return test_sockets;
+@@ -1606,6 +1690,10 @@ void net_check_clients(void)
+     NetClientState *nc;
+     int i;
+ 
++    if (nic_model_help) {
++        show_nic_models();
++        exit(0);
++    }
+     net_hub_check_clients();
+ 
+     QTAILQ_FOREACH(nc, &net_clients, next) {
+@@ -1685,6 +1773,12 @@ static int net_param_nic(void *dummy, QemuOpts *opts, Error **errp)
+     memset(ni, 0, sizeof(*ni));
+     ni->model = qemu_opt_get_del(opts, "model");
+ 
++    if (!nic_model_help && !g_strcmp0(ni->model, "help")) {
++        nic_model_help = g_hash_table_new_full(g_str_hash, g_str_equal,
++                                               g_free, NULL);
++        return 0;
++    }
++
+     /* Create an ID if the user did not specify one */
+     nd_id = g_strdup(qemu_opts_id(opts));
+     if (!nd_id) {
 -- 
 2.43.0
 
