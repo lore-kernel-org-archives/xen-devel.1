@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 874B1C47DDB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:37:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672291.1046218 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E49AC47DDB
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:38:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672292.1046223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ9I-0006jL-M3; Fri, 26 Jan 2024 17:37:52 +0000
+	id 1rTQ9I-0006mX-VU; Fri, 26 Jan 2024 17:37:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672291.1046218; Fri, 26 Jan 2024 17:37:52 +0000
+Received: by outflank-mailman (output) from mailman id 672292.1046223; Fri, 26 Jan 2024 17:37:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ9I-0006jE-JM; Fri, 26 Jan 2024 17:37:52 +0000
-Received: by outflank-mailman (input) for mailman id 672291;
+	id 1rTQ9I-0006lL-QQ; Fri, 26 Jan 2024 17:37:52 +0000
+Received: by outflank-mailman (input) for mailman id 672292;
  Fri, 26 Jan 2024 17:37:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=46+y=JE=desiato.srs.infradead.org=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ57-0004Zo-FP
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:33 +0000
+ id 1rTQ5E-0004m7-Sv
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:40 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0545496b-bc71-11ee-8a43-1f161083a0e0;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 05876c47-bc71-11ee-98f5-efadbce2ee36;
  Fri, 26 Jan 2024 18:33:30 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4A-000000069Uk-1tKu; Fri, 26 Jan 2024 17:32:34 +0000
+ id 1rTQ4A-000000069Uf-1sy3; Fri, 26 Jan 2024 17:32:35 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ47-00000001ele-2qm0;
- Fri, 26 Jan 2024 17:32:31 +0000
+ Hat Linux)) id 1rTQ48-00000001em2-21yn;
+ Fri, 26 Jan 2024 17:32:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 0545496b-bc71-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: 05876c47-bc71-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=f4zhtWJwTDv/GTqQefyNMB0pZHdx/v1BNCZKPZQKYkE=; b=nSwxOvPfmxriQ/utFCd6E5uTgk
-	zLRl3W9ZzxOKqxVeKHfIePMrsRsDgzhQob0ieitsWWAtWHoxaW/ddWelyJgrB6j43fCgZx4CfWKWo
-	Jtz18hNYhD1A3V7taJd3cmQeJpm+sgEx4s7SJ+A7w3RGfK1faQT8DK58V5Zl3rCgJsNTSup6ChZRl
-	5zbnuTqtlRDWshBloZzpeVj6jD4ScFBWVJ6Q8sJX08c7z2Es93nvEn+66ltrPI8hM8b5C/++EVrqU
-	9XwrgCAONDTRJDXixzJBtRo6ZCM49mnTc0R0ZIYs2m6pjhjVoj7eKiK+d6DVc0muGuqz6H90aRRuc
-	Z9ZupxNA==;
+	bh=11Xexm/zfEQsP0C5lVH66y3jNuSB03J3oevWpWV4QDE=; b=J5wO8JEkkhyeDWgg6bi+L0kaFG
+	z8WmsTAHijYoKW/KHa0AJ/dFQToJ5llh906NAjxJNlaQVVgtZ1AK+w9xp88vwX0PxRMrMjrILPzw9
+	9qwrRq5v290fYBfp4WN/7Q/QNb3QaUIUPjrllJMAOTKqZ8nUoutZY9sy8af8wFqQLksb2ItJVeukD
+	CmORWp0+U239cZgQ/WmA/Xc9qFByy+rMUjh7Pqbm5ECAnoId3nu6h2gW9Cbjx4Q3ZrATtmzlEd6F8
+	tQzKRGeo+AeN++aiiuZfA8GNazNFeAwNU4W7CGU+m4asCHHYTdtNYcYPSt/iV31elDlWT+BQ9KJJc
+	Jyb0FrFg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -123,9 +123,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>,
 	Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 09/47] hw/arm/virt: use pci_init_nic_devices()
-Date: Fri, 26 Jan 2024 17:24:46 +0000
-Message-ID: <20240126173228.394202-10-dwmw2@infradead.org>
+Subject: [PATCH v4 17/47] hw/ppc: use pci_init_nic_devices()
+Date: Fri, 26 Jan 2024 17:24:54 +0000
+Message-ID: <20240126173228.394202-18-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
@@ -139,24 +139,89 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/arm/virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/ppc/e500.c          |  4 +---
+ hw/ppc/mac_newworld.c  |  4 +---
+ hw/ppc/mac_oldworld.c  |  4 +---
+ hw/ppc/ppc440_bamboo.c | 14 +++++---------
+ 4 files changed, 8 insertions(+), 18 deletions(-)
 
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 5cbc69dff8..ad8e7edb8c 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1454,9 +1454,7 @@ static void create_pcie(VirtMachineState *vms)
-     pci->bypass_iommu = vms->default_bus_bypass_iommu;
-     vms->bus = pci->bus;
-     if (vms->bus) {
+diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
+index 566f1200dd..3bd12b54ab 100644
+--- a/hw/ppc/e500.c
++++ b/hw/ppc/e500.c
+@@ -1079,9 +1079,7 @@ void ppce500_init(MachineState *machine)
+ 
+     if (pci_bus) {
+         /* Register network interfaces. */
 -        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
 -        }
-+        pci_init_nic_devices(pci->bus, mc->default_nic);
++        pci_init_nic_devices(pci_bus, mc->default_nic);
      }
  
-     nodename = vms->pciehb_nodename = g_strdup_printf("/pcie@%" PRIx64, base);
+     /* Register spinning region */
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index 535710314a..b36dbaf2b6 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
+         graphic_depth = 15;
+     }
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* The NewWorld NVRAM is not located in the MacIO device */
+     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index 9acc7adfc9..1981d3d8f6 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
+ 
+     pci_vga_init(pci_bus);
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* MacIO IDE */
+     ide_drive_get(hd, ARRAY_SIZE(hd));
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index a189942de4..c75c3083e6 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
+     DeviceState *uicdev;
+     SysBusDevice *uicsbd;
+     int success;
+-    int i;
+ 
+     if (kvm_enabled()) {
+         error_report("machine %s does not support the KVM accelerator",
+@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
+     }
+ 
+     if (pcibus) {
+-        /* Register network interfaces. */
+-        for (i = 0; i < nb_nics; i++) {
+-            /*
+-             * There are no PCI NICs on the Bamboo board, but there are
+-             * PCI slots, so we can pick whatever default model we want.
+-             */
+-            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
+-        }
++        /*
++         * There are no PCI NICs on the Bamboo board, but there are
++         * PCI slots, so we can pick whatever default model we want.
++         */
++        pci_init_nic_devices(pcibus, mc->default_nic);
+     }
+ 
+     /* Load kernel. */
 -- 
 2.43.0
 
