@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E414DC4828A
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:33:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672264.1046141 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D866C47DDB
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:33:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672266.1046152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ4r-0007EJ-DL; Fri, 26 Jan 2024 17:33:17 +0000
+	id 1rTQ4t-0007Xd-Cb; Fri, 26 Jan 2024 17:33:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672264.1046141; Fri, 26 Jan 2024 17:33:17 +0000
+Received: by outflank-mailman (output) from mailman id 672266.1046152; Fri, 26 Jan 2024 17:33:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ4q-0007Af-Tz; Fri, 26 Jan 2024 17:33:16 +0000
-Received: by outflank-mailman (input) for mailman id 672264;
- Fri, 26 Jan 2024 17:33:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rTQ4s-0007VB-De; Fri, 26 Jan 2024 17:33:18 +0000
+Received: by outflank-mailman (input) for mailman id 672266;
+ Fri, 26 Jan 2024 17:33:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bPDA=JE=casper.srs.infradead.org=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ4o-0004m7-OA
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:14 +0000
+ id 1rTQ4p-0004Zo-Og
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:15 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f9d107ad-bc70-11ee-98f5-efadbce2ee36;
- Fri, 26 Jan 2024 18:33:11 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fbd50071-bc70-11ee-8a43-1f161083a0e0;
+ Fri, 26 Jan 2024 18:33:14 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUJ-0gas; Fri, 26 Jan 2024 17:32:33 +0000
+ id 1rTQ48-0000000EKUM-0cz8; Fri, 26 Jan 2024 17:32:33 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ47-00000001elM-0UcP;
- Fri, 26 Jan 2024 17:32:31 +0000
+ Hat Linux)) id 1rTQ48-00000001em8-2k7B;
+ Fri, 26 Jan 2024 17:32:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f9d107ad-bc70-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: fbd50071-bc70-11ee-8a43-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=OdxzKrubfC0ZaYycLGHWamGW/MHu3AZpCkbdAJlgMyI=; b=oLyNvxBjpIrjGRRU3R48knb+RJ
-	HGX4tMfXsp1iRB4pIZ7NBDTIhTAKm3Wo8Qzxg8b3FXNy6G7bp4/3Q1XhZA1UniQnrDX5a+wRDU7oO
-	i2hMEaCbTfbVfs5a2hotsQ/cQ3lhYHtDc8VutRmH0woi0XpvA5OZXZcwfAOsQZS36JeB/nPaSRk8R
-	p/dMQqB8K5HxG0sI12RIlxWxy7Dvn6HPOeeAFRlVTUSbyMlAYrtkETpxYLgzemRWOvBEah7v4QXLu
-	6tvEyocuOhm7RAexy7qTfKmD0eZBrGjSXZI1q9ZWcVufyRe+Fx7dTOpo5V87/ZEgk/ajitS8bQXGL
-	mh3Xldiw==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=OKm118/V6gxksMAtfnJ8Ufap3iGAGMSmq6JcPfpdm/s=; b=KmE2/C36b2yD/mi6cnVRZu3qWq
+	Z9xfuHuEdCxG75ekpPyLnVv/AlHYqa969PePpng1ceqCLcMC8mgXmzOrtlrKXJm1KswPmlJI5eifu
+	oipdb0z1La5GuH8+oHn9mjdomJ5IUBu60G8KM01RZt/B0sIfTloIyYVpC3tjXgTCIAoX1Pchpmxka
+	rOLsWIqM9B/ix0CPnKtCsTUV7Z0EK+MUFpl1jLMkD3kvc8VlpDOLWGaB6cHmhzCDOJuxHrO1khvR2
+	SLamE78r6mAXsis1twc0Wv36LXwO15tXzS4FXPZJRsnPiSf97GDvzE+N6gNLcHFJkw3VhzKt6Px3/
+	Rt5/rmYQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -123,130 +123,73 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>,
 	Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 03/47] net: add qemu_create_nic_bus_devices()
-Date: Fri, 26 Jan 2024 17:24:40 +0000
-Message-ID: <20240126173228.394202-4-dwmw2@infradead.org>
+Subject: [PATCH v4 19/47] hw/sparc64/sun4u: use pci_init_nic_devices()
+Date: Fri, 26 Jan 2024 17:24:56 +0000
+Message-ID: <20240126173228.394202-20-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This will instantiate any NICs which live on a given bus type. Each bus
-is allowed *one* substitution (for PCI it's virtio → virtio-net-pci, for
-Xen it's xen → xen-net-device; no point in overengineering it unless we
-actually want more).
+The first sunhme NIC gets placed a function 1 on slot 1 of PCI bus A,
+and the rest are dynamically assigned on PCI bus B.
+
+Previously, any PCI NIC would get the special treatment purely by
+virtue of being first in the list.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- include/net/net.h | 22 ++++++++++++++++++++
- net/net.c         | 53 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 75 insertions(+)
+ hw/sparc64/sun4u.c | 27 ++++++++-------------------
+ 1 file changed, 8 insertions(+), 19 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index dff1872b4d..728ca965af 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -248,6 +248,28 @@ bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-  */
- DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-                                     const char *alias);
-+
-+/*
-+ * qemu_create_nic_bus_devices: Create configured NIC devices for a given bus
-+ * @bus: Bus on which to create devices
-+ * @parent_type: Object type for devices to be created (e.g. TYPE_PCI_DEVICE)
-+ * @default_model: Object type name for default NIC model (or %NULL)
-+ * @alias: Additional model string to replace, for user convenience
-+ * @alias_target: Actual object type name to be used in place of @alias
-+ *
-+ * Instantiate dynamic NICs on a given bus, typically a PCI bus. This scans
-+ * for available NIC configurations which either specify a model which is
-+ * a child type of @parent_type, or which do not specify a model when
-+ * @default_model is non-NULL. Each device is instantiated on the given @bus.
-+ *
-+ * A single substitution is supported, e.g. "xen" → "xen-net-device" for the
-+ * Xen bus, or "virtio" → "virtio-net-pci" for PCI. This allows the user to
-+ * specify a more understandable "model=" parameter on the command line, not
-+ * only the real object typename.
-+ */
-+void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
-+                                 const char *default_model,
-+                                 const char *alias, const char *alias_target);
- void print_net_client(Monitor *mon, NetClientState *nc);
- void net_socket_rs_init(SocketReadState *rs,
-                         SocketReadStateFinalize *finalize,
-diff --git a/net/net.c b/net/net.c
-index 962904eaef..4651b3f443 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1223,6 +1223,59 @@ DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-     return dev;
- }
+diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
+index 24d53bf5fd..eda9b58a21 100644
+--- a/hw/sparc64/sun4u.c
++++ b/hw/sparc64/sun4u.c
+@@ -639,29 +639,18 @@ static void sun4uv_init(MemoryRegion *address_space_mem,
  
-+void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
-+                                 const char *default_model,
-+                                 const char *alias, const char *alias_target)
-+{
-+    GPtrArray *nic_models = qemu_get_nic_models(parent_type);
-+    const char *model;
-+    DeviceState *dev;
-+    NICInfo *nd;
-+    int i;
+     memset(&macaddr, 0, sizeof(MACAddr));
+     onboard_nic = false;
+-    for (i = 0; i < nb_nics; i++) {
+-        PCIBus *bus;
+-        nd = &nd_table[i];
+-
+-        if (!nd->model || strcmp(nd->model, mc->default_nic) == 0) {
+-            if (!onboard_nic) {
+-                pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
+-                bus = pci_busA;
+-                memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
+-                onboard_nic = true;
+-            } else {
+-                pci_dev = pci_new(-1, mc->default_nic);
+-                bus = pci_busB;
+-            }
+-        } else {
+-            pci_dev = pci_new(-1, nd->model);
+-            bus = pci_busB;
+-        }
+ 
++    nd = qemu_find_nic_info(mc->default_nic, true, NULL);
++    if (nd) {
++        pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
+         dev = &pci_dev->qdev;
+         qdev_set_nic_properties(dev, nd);
+-        pci_realize_and_unref(pci_dev, bus, &error_fatal);
++        pci_realize_and_unref(pci_dev, pci_busA, &error_fatal);
 +
-+    if (nic_model_help) {
-+        if (alias_target) {
-+            add_nic_model_help(alias_target, alias);
-+        }
-+        for (i = 0; i < nic_models->len - 1; i++) {
-+            add_nic_model_help(nic_models->pdata[i], NULL);
-+        }
-+    }
-+
-+    /* Drop the NULL terminator which would make g_str_equal() unhappy */
-+    nic_models->len--;
-+
-+    for (i = 0; i < nb_nics; i++) {
-+        nd = &nd_table[i];
-+
-+        if (!nd->used || nd->instantiated) {
-+            continue;
-+        }
-+
-+        model = nd->model ? nd->model : default_model;
-+        if (!model) {
-+            continue;
-+        }
-+
-+        /* Each bus type is allowed *one* substitution */
-+        if (g_str_equal(model, alias)) {
-+            model = alias_target;
-+        }
-+
-+        if (!g_ptr_array_find_with_equal_func(nic_models, model,
-+                                              g_str_equal, NULL)) {
-+            /* This NIC does not live on this bus. */
-+            continue;
-+        }
-+
-+        dev = qdev_new(model);
-+        qdev_set_nic_properties(dev, nd);
-+        qdev_realize_and_unref(dev, bus, &error_fatal);
-+    }
-+
-+    g_ptr_array_free(nic_models, true);
-+}
-+
- static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
-     const Netdev *netdev,
-     const char *name,
++        memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
++        onboard_nic = true;
+     }
++    pci_init_nic_devices(pci_busB, mc->default_nic);
+ 
+     /* If we don't have an onboard NIC, grab a default MAC address so that
+      * we have a valid machine id */
 -- 
 2.43.0
 
