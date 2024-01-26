@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CB2C47422
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C93C48260
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 10:08:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.671912.1045440 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.671914.1045454 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTJ8g-0007sA-N0; Fri, 26 Jan 2024 10:08:46 +0000
+	id 1rTJ8i-00089l-5o; Fri, 26 Jan 2024 10:08:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 671912.1045440; Fri, 26 Jan 2024 10:08:46 +0000
+Received: by outflank-mailman (output) from mailman id 671914.1045454; Fri, 26 Jan 2024 10:08:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTJ8g-0007s3-K5; Fri, 26 Jan 2024 10:08:46 +0000
-Received: by outflank-mailman (input) for mailman id 671912;
- Fri, 26 Jan 2024 10:08:45 +0000
+	id 1rTJ8i-00088b-1G; Fri, 26 Jan 2024 10:08:48 +0000
+Received: by outflank-mailman (input) for mailman id 671914;
+ Fri, 26 Jan 2024 10:08:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rljN=JE=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1rTJ8f-0007rm-Pi
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 10:08:45 +0000
+ id 1rTJ8g-0007rm-EO
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 10:08:46 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e2eab20f-bc32-11ee-8a43-1f161083a0e0;
+ id e359c6eb-bc32-11ee-8a43-1f161083a0e0;
  Fri, 26 Jan 2024 11:08:44 +0100 (CET)
 Received: from Dell.homenet.telecomitalia.it
  (host-87-16-84-78.retail.telecomitalia.it [87.16.84.78])
- by support.bugseng.com (Postfix) with ESMTPSA id D90774EE073E;
- Fri, 26 Jan 2024 11:08:42 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 030DB4EE074B;
+ Fri, 26 Jan 2024 11:08:43 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,44 +42,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e2eab20f-bc32-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: e359c6eb-bc32-11ee-8a43-1f161083a0e0
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Federico Serafini <federico.serafini@bugseng.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [XEN PATCH v2 0/3] Introduce and use STATIC_ASSERT_UNREACHABLE()
-Date: Fri, 26 Jan 2024 11:05:40 +0100
-Message-Id: <cover.1706259490.git.federico.serafini@bugseng.com>
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 2/3] x86/uaccess: replace __{get,put}_user_bad() with STATIC_ASSERT_UNREACHABLE()
+Date: Fri, 26 Jan 2024 11:05:42 +0100
+Message-Id: <e28bb23a12fae3c8630f943b469137d367f20022.1706259490.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1706259490.git.federico.serafini@bugseng.com>
+References: <cover.1706259490.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce macro STATIC_ASSERT_UNREACHABLE(),
-use it to replace __{get,put}_user_bad(),
-update ECLAIR configuration to allow the use of such macro at the end of
-switch-caluses.
+Use STATIC_ASSERT_UNREACHABLE() to improve readability and anticipate
+the build failure (from a linker error to an assembler error) in case
+of wrong size.
 
-Federico Serafini (3):
-  xen: introduce STATIC_ASSERT_UNREACHABLE()
-  x86/uaccess: replace __{get,put}_user_bad() with
-    STATIC_ASSERT_UNREACHABLE()
-  automation/eclair: add deviation for MISRA C:2012 Rule 16.3
+Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+---
+ xen/arch/x86/include/asm/uaccess.h | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
- automation/eclair_analysis/ECLAIR/deviations.ecl | 4 ++++
- docs/misra/deviations.rst                        | 5 +++++
- xen/arch/x86/include/asm/uaccess.h               | 7 ++-----
- xen/include/xen/compiler.h                       | 7 +++++++
- 4 files changed, 18 insertions(+), 5 deletions(-)
-
+diff --git a/xen/arch/x86/include/asm/uaccess.h b/xen/arch/x86/include/asm/uaccess.h
+index 7443519d5b..52faf1d919 100644
+--- a/xen/arch/x86/include/asm/uaccess.h
++++ b/xen/arch/x86/include/asm/uaccess.h
+@@ -21,9 +21,6 @@ unsigned int copy_from_guest_ll(void *to, const void __user *from, unsigned int
+ unsigned int copy_to_unsafe_ll(void *to, const void *from, unsigned int n);
+ unsigned int copy_from_unsafe_ll(void *to, const void *from, unsigned int n);
+ 
+-extern long __get_user_bad(void);
+-extern void __put_user_bad(void);
+-
+ #define UA_KEEP(args...) args
+ #define UA_DROP(args...)
+ 
+@@ -208,7 +205,7 @@ do {                                                                       \
+     case 8:                                                                \
+         put_unsafe_asm(x, ptr, grd, retval, "q",  "", "ir", errret);       \
+         break;                                                             \
+-    default: __put_user_bad();                                             \
++    default: STATIC_ASSERT_UNREACHABLE();                                  \
+     }                                                                      \
+     clac();                                                                \
+ } while ( false )
+@@ -227,7 +224,7 @@ do {                                                                       \
+     case 2: get_unsafe_asm(x, ptr, grd, retval, "w", "=r", errret); break; \
+     case 4: get_unsafe_asm(x, ptr, grd, retval, "k", "=r", errret); break; \
+     case 8: get_unsafe_asm(x, ptr, grd, retval,  "", "=r", errret); break; \
+-    default: __get_user_bad();                                             \
++    default: STATIC_ASSERT_UNREACHABLE();                                  \
+     }                                                                      \
+     clac();                                                                \
+ } while ( false )
 -- 
 2.34.1
 
