@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE7CC47422
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:43:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672370.1046392 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBF3C47422
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:44:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672374.1046401 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQEw-0000lP-Qh; Fri, 26 Jan 2024 17:43:42 +0000
+	id 1rTQF9-0001j8-2T; Fri, 26 Jan 2024 17:43:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672370.1046392; Fri, 26 Jan 2024 17:43:42 +0000
+Received: by outflank-mailman (output) from mailman id 672374.1046401; Fri, 26 Jan 2024 17:43:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQEw-0000lE-MP; Fri, 26 Jan 2024 17:43:42 +0000
-Received: by outflank-mailman (input) for mailman id 672370;
- Fri, 26 Jan 2024 17:43:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rTQF8-0001is-Vv; Fri, 26 Jan 2024 17:43:54 +0000
+Received: by outflank-mailman (input) for mailman id 672374;
+ Fri, 26 Jan 2024 17:43:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=46+y=JE=desiato.srs.infradead.org=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ56-0004m7-RE
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:32 +0000
+ id 1rTQ5A-0004Zo-GI
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:36 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0261d062-bc71-11ee-98f5-efadbce2ee36;
- Fri, 26 Jan 2024 18:33:25 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 081a8a72-bc71-11ee-8a43-1f161083a0e0;
+ Fri, 26 Jan 2024 18:33:35 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4B-000000069V7-2w5m; Fri, 26 Jan 2024 17:32:36 +0000
+ id 1rTQ4B-000000069Uu-2vfo; Fri, 26 Jan 2024 17:32:36 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ4A-00000001eoK-38TD;
+ Hat Linux)) id 1rTQ4A-00000001eo6-21Fg;
  Fri, 26 Jan 2024 17:32:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 0261d062-bc71-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 081a8a72-bc71-11ee-8a43-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=mX/hl3L+uzP16qDkLnKIjlw9AZT6Th7nY6ik791ai64=; b=FEyZ2pdM526tfsTPguJ6nEMtvW
-	HI13ThH4aGimnLaYdXWR6rBmwT7yOvUeWUsDqp3/RxjGthObBG+wR589pvEUzemdixC/bMU5Mps6Q
-	GZLdNd4A1WuN6jfAJYdVVLx+zy2Ml0Ze7DAOdwAqJ5nLHoP2Bs2Sbzt3l/TgAi4oGa9stRTBVFars
-	yi0kyONAoU/zrWfE2ZIGQxr7frBsw8wisVh/52fZ/UB5N02IFNCAuA7amOO/tPAVNricYVxymrzLH
-	jlhrncipjhaI27Tw0EnVvqCioV/tFZBrjwYrghPt9PJLAFi1ybpFOoL4q36iR7L/gm+12+BCgRnKM
-	+RY5auxQ==;
+	bh=IXEZX2HEBbMBwUhayue76+vBPs8XLNbiy1LneqBnSSQ=; b=L1IC8mi7FZhd2xkOxGFrYFeg8p
+	WcUxvd8Yz3sWSBxucd5MC2EQ3FIO6fL8OU/9NSnVMEybFgTeaMFjqd8sqZoiZEGmoPjSZLOMfQu0V
+	SHcceRwOGTSZ7pUIcP2LQjJjMWiO6ToDAIvqKQEOJRDXQJc8tZq9+uPDOElIVaxqs06OmiCZGdtHW
+	q6co0x6x6QDAE8FZea34ld2K+eJZgcBAjVzZeBbPtdbecn01YrcGpX9/0TlQs5n5PPEBTd4BMc6MZ
+	TFmR2CVGn1qarOl/+7+Az7QSTEFPqkBjq+Z0UZh35NzvyMyiToZBvfTyPreHo1CkH0CSQjWybDBmq
+	48mFntgQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -123,9 +123,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	David Woodhouse <dwmw@amazon.co.uk>,
 	Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 43/47] hw/xtensa/xtfpga: use qemu_create_nic_device()
-Date: Fri, 26 Jan 2024 17:25:20 +0000
-Message-ID: <20240126173228.394202-44-dwmw2@infradead.org>
+Subject: [PATCH v4 40/47] hw/riscv: use qemu_configure_nic_device()
+Date: Fri, 26 Jan 2024 17:25:17 +0000
+Message-ID: <20240126173228.394202-41-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
@@ -139,45 +139,67 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/xtensa/xtfpga.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ hw/riscv/microchip_pfsoc.c | 14 ++------------
+ hw/riscv/sifive_u.c        |  7 +------
+ 2 files changed, 3 insertions(+), 18 deletions(-)
 
-diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
-index fbad1c83a3..f49e6591dc 100644
---- a/hw/xtensa/xtfpga.c
-+++ b/hw/xtensa/xtfpga.c
-@@ -141,14 +141,16 @@ static void xtfpga_net_init(MemoryRegion *address_space,
-         hwaddr base,
-         hwaddr descriptors,
-         hwaddr buffers,
--        qemu_irq irq, NICInfo *nd)
-+        qemu_irq irq)
- {
-     DeviceState *dev;
-     SysBusDevice *s;
-     MemoryRegion *ram;
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index b775aa8946..7725dfbde5 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -202,7 +202,6 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+     MemoryRegion *qspi_xip_mem = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
+-    NICInfo *nd;
+     int i;
  
--    dev = qdev_new("open_eth");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("open_eth", true, NULL);
-+    if (!dev) {
-+        return;
-+    }
+     sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
+@@ -411,17 +410,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+         memmap[MICROCHIP_PFSOC_USB].size);
  
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -301,10 +303,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-         memory_region_add_subregion(system_memory, board->io[1], io);
-     }
-     xtfpga_fpga_init(system_io, 0x0d020000, freq);
--    if (nd_table[0].used) {
--        xtfpga_net_init(system_io, 0x0d030000, 0x0d030400, 0x0d800000,
--                        extints[1], nd_table);
+     /* GEMs */
+-
+-    nd = &nd_table[0];
+-    if (nd->used) {
+-        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+-        qdev_set_nic_properties(DEVICE(&s->gem0), nd);
 -    }
-+    xtfpga_net_init(system_io, 0x0d030000, 0x0d030400, 0x0d800000, extints[1]);
+-    nd = &nd_table[1];
+-    if (nd->used) {
+-        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+-        qdev_set_nic_properties(DEVICE(&s->gem1), nd);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->gem0), true, NULL);
++    qemu_configure_nic_device(DEVICE(&s->gem1), true, NULL);
  
-     serial_mm_init(system_io, 0x0d050020, 2, extints[0],
-                    115200, serial_hd(0), DEVICE_NATIVE_ENDIAN);
+     object_property_set_int(OBJECT(&s->gem0), "revision", GEM_REVISION, errp);
+     object_property_set_int(OBJECT(&s->gem0), "phy-addr", 8, errp);
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ec76dce6c9..5207ec1fa5 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -789,7 +789,6 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
+     int i, j;
+-    NICInfo *nd = &nd_table[0];
+ 
+     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
+     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
+@@ -893,11 +892,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     }
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_DEV_OTP].base);
+ 
+-    /* FIXME use qdev NIC properties instead of nd_table[] */
+-    if (nd->used) {
+-        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+-        qdev_set_nic_properties(DEVICE(&s->gem), nd);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->gem), true, NULL);
+     object_property_set_int(OBJECT(&s->gem), "revision", GEM_REVISION,
+                             &error_abort);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->gem), errp)) {
 -- 
 2.43.0
 
