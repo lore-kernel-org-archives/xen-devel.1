@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE84AC47DDB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:52:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672431.1046500 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF4A1C47422
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:54:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672440.1046515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQND-00023P-DU; Fri, 26 Jan 2024 17:52:15 +0000
+	id 1rTQPG-000449-Uh; Fri, 26 Jan 2024 17:54:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672431.1046500; Fri, 26 Jan 2024 17:52:15 +0000
+Received: by outflank-mailman (output) from mailman id 672440.1046515; Fri, 26 Jan 2024 17:54:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQND-00022u-8l; Fri, 26 Jan 2024 17:52:15 +0000
-Received: by outflank-mailman (input) for mailman id 672431;
- Fri, 26 Jan 2024 17:52:13 +0000
+	id 1rTQPG-000442-Rl; Fri, 26 Jan 2024 17:54:22 +0000
+Received: by outflank-mailman (input) for mailman id 672440;
+ Fri, 26 Jan 2024 17:54:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bPDA=JE=casper.srs.infradead.org=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ4v-0004m7-P2
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:21 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=46+y=JE=desiato.srs.infradead.org=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1rTQ5B-0004m7-SG
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:37 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fe38b1fb-bc70-11ee-98f5-efadbce2ee36;
- Fri, 26 Jan 2024 18:33:18 +0100 (CET)
+ id 03a5be44-bc71-11ee-98f5-efadbce2ee36;
+ Fri, 26 Jan 2024 18:33:27 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ49-0000000EKUu-0WUm; Fri, 26 Jan 2024 17:32:34 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ4A-000000069Us-1wZd; Fri, 26 Jan 2024 17:32:47 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ4A-00000001enY-0TPb;
- Fri, 26 Jan 2024 17:32:34 +0000
+ Hat Linux)) id 1rTQ49-00000001enM-3JsS;
+ Fri, 26 Jan 2024 17:32:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: fe38b1fb-bc70-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 03a5be44-bc71-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=ZK2tD63GvqUrApaaWgfzsdauGq2sH6JIvuMsNwpoITs=; b=qkfPZXh49dYOhIJMauMCMT4Wur
-	huWzyz4Rsevt17NsZbNL4jjADOXXnZLkQ7VnzTp0d2odG3zXYBgdF4F1KtXW4/2kUjeD7HZfRyy3Z
-	w48gBqearXCoIdsu0/Qr+d0rq6lwQF2LGSJN7r1ay+GTYZP0X03kpilU9pq5H6Zb9OdzC5afjHwTq
-	SurL2JzCakVBVU5hx59YXCkgokAJr4Vf2SHPkccuA4H2S6gBVyMu7ddzFL3hH62/rkheekIN7jfU4
-	mopxJLybNEjfV2HZyF3T5/z+qI1fciXVXGmT6EVxKFXmD+LXEEajOO/8eYmnZ5/hHmxCzMYm7PcmU
-	iFeYg3aQ==;
+	bh=GkywRXV+y0p7Nt5wgFGuell3roGE2NQ8qPpvNbU7STs=; b=V4bapDZigG0KqzrpWHLQWnoMdI
+	cCsUhnQ2jJfRVYxm5QPNAx9aG3sYfWfCXybauSoZQ/SxssH+cElsrF0p4HVv4Ue3bzhEPIXPXj+LT
+	htNZt681XmQRX7j36VsmHoNxcTw2TkxrDHu0PGz2CPOboVyIiLeEKvnm3Z1F+VQnC+8GMNUQmuxxM
+	+2J/GblKKNXD4shz499zroeB9kWSx1H7G952MNGnFYL1Vg63gJXtukuip89zNkKRpTqfWlgwgBxUO
+	ER7hClAADuP/6NX4cZiaSNs9/dBeSbU2NeqAF1s/sLQdKRkQIYCWVU7TNNo7A8QWIkXDIJGf8sHEP
+	pYxaDeow==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,64 +121,69 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
-	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 35/47] hw/mips/mipssim: use qemu_create_nic_device()
-Date: Fri, 26 Jan 2024 17:25:12 +0000
-Message-ID: <20240126173228.394202-36-dwmw2@infradead.org>
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Thomas Huth <thuth@redhat.com>
+Subject: [PATCH v4 32/47] hw/m68k/mcf5208: use qemu_create_nic_device()
+Date: Fri, 26 Jan 2024 17:25:09 +0000
+Message-ID: <20240126173228.394202-33-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The MIPS SIM platform instantiates its NIC only if a corresponding
-configuration exists for it. Use qemu_create_nic_device() function for
-that.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/mips/mipssim.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ hw/m68k/mcf5208.c | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/hw/mips/mipssim.c b/hw/mips/mipssim.c
-index 01e323904d..16af31648e 100644
---- a/hw/mips/mipssim.c
-+++ b/hw/mips/mipssim.c
-@@ -118,13 +118,15 @@ static void main_cpu_reset(void *opaque)
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index d22d8536db..0cfb806c20 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -206,16 +206,16 @@ static void mcf5208_sys_init(MemoryRegion *address_space, qemu_irq *pic)
      }
  }
  
--static void mipsnet_init(int base, qemu_irq irq, NICInfo *nd)
-+static void mipsnet_init(int base, qemu_irq irq)
+-static void mcf_fec_init(MemoryRegion *sysmem, NICInfo *nd, hwaddr base,
+-                         qemu_irq *irqs)
++static void mcf_fec_init(MemoryRegion *sysmem, hwaddr base, qemu_irq *irqs)
  {
      DeviceState *dev;
      SysBusDevice *s;
+     int i;
  
--    dev = qdev_new("mipsnet");
+-    qemu_check_nic_model(nd, TYPE_MCF_FEC_NET);
+-    dev = qdev_new(TYPE_MCF_FEC_NET);
 -    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("mipsnet", true, NULL);
++    dev = qemu_create_nic_device(TYPE_MCF_FEC_NET, true, NULL);
 +    if (!dev) {
 +        return;
 +    }
  
      s = SYS_BUS_DEVICE(dev);
      sysbus_realize_and_unref(s, &error_fatal);
-@@ -225,9 +227,8 @@ mips_mipssim_init(MachineState *machine)
-                       sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
-     }
+@@ -267,14 +267,7 @@ static void mcf5208evb_init(MachineState *machine)
  
--    if (nd_table[0].used)
--        /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
--        mipsnet_init(0x4200, env->irq[2], &nd_table[0]);
-+    /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
-+    mipsnet_init(0x4200, env->irq[2]);
- }
+     mcf5208_sys_init(address_space_mem, pic);
  
- static void mips_mipssim_machine_init(MachineClass *mc)
+-    if (nb_nics > 1) {
+-        error_report("Too many NICs");
+-        exit(1);
+-    }
+-    if (nd_table[0].used) {
+-        mcf_fec_init(address_space_mem, &nd_table[0],
+-                     0xfc030000, pic + 36);
+-    }
++    mcf_fec_init(address_space_mem, 0xfc030000, pic + 36);
+ 
+     g_free(pic);
+ 
 -- 
 2.43.0
 
