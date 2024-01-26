@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE42C48260
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 15:42:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672089.1045753 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82729C47422
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 15:42:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672094.1045796 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTOLO-0002lj-CE; Fri, 26 Jan 2024 15:42:14 +0000
+	id 1rTOLS-0003jw-6e; Fri, 26 Jan 2024 15:42:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672089.1045753; Fri, 26 Jan 2024 15:42:14 +0000
+Received: by outflank-mailman (output) from mailman id 672094.1045796; Fri, 26 Jan 2024 15:42:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTOLO-0002lc-8s; Fri, 26 Jan 2024 15:42:14 +0000
-Received: by outflank-mailman (input) for mailman id 672089;
- Fri, 26 Jan 2024 15:42:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rTOLR-0003hn-Vy; Fri, 26 Jan 2024 15:42:17 +0000
+Received: by outflank-mailman (input) for mailman id 672094;
+ Fri, 26 Jan 2024 15:42:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DqdW=JE=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rTOLM-0002k9-Tj
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 15:42:12 +0000
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [2a00:1450:4864:20::12f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 78b3e608-bc61-11ee-8a43-1f161083a0e0;
- Fri, 26 Jan 2024 16:42:11 +0100 (CET)
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-51025cafb51so798371e87.2
- for <xen-devel@lists.xenproject.org>; Fri, 26 Jan 2024 07:42:11 -0800 (PST)
+ id 1rTOLR-00039n-3B
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 15:42:17 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7ae2e924-bc61-11ee-98f5-efadbce2ee36;
+ Fri, 26 Jan 2024 16:42:15 +0100 (CET)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-51022133a84so642725e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Jan 2024 07:42:15 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- q5-20020ac25105000000b0050e7ec49881sm208351lfb.21.2024.01.26.07.42.10
+ q5-20020ac25105000000b0050e7ec49881sm208351lfb.21.2024.01.26.07.42.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jan 2024 07:42:10 -0800 (PST)
+ Fri, 26 Jan 2024 07:42:14 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,199 +46,279 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 78b3e608-bc61-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: 7ae2e924-bc61-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706283731; x=1706888531; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NVBkI04VCHtY+BjWYOuLlcsihydzSeVqGac1GglpNUk=;
-        b=HSpOc6ffqh0GL+CgEcqfQF9YhLAdrUhUhnWmFrjdBQEoQjuStJYaro1TISd7vyVw54
-         dmCWbT26oDiyxhOYfi1XAhNNzeAQ+y8VadYcwlpcNWNCVPsnCWqBll014IS9pvam4Aq2
-         FHAYfAXx7g9DpjQCA4kZmq1nkhZX9PZU45iGdd4e4ReOAantPg6twKnTLVup1B+n5pKO
-         FlnT3QxCpw733nVXmUsj4D4qmIdueS1nFlw/S00+CpVAzTkIoWKv05meX2yt/quXzpjr
-         HF77NCN+82IwqaBe0ChckmgBq0NclkLnfCTytm8LNr2FFh18KddonLtGfwLwdmTnDbs3
-         YXig==
+        d=gmail.com; s=20230601; t=1706283735; x=1706888535; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FLBEcEhjguKvXHdTuEC4hoUJhlDOkKsN5bndKqUwPUQ=;
+        b=bsaA9S/JUS1UyIS+31G5cqoW3XJXQGbFetJ5f/JQl4ztwutXVuL0mmBb56FWoqQ4Rt
+         0Js0PAmPMqiLJSYlxkypEVUJH3Stwambj16KCZBS/AjRcAZS4+pdM5ZHxEeq1oFhMPfC
+         wSmkootA+0W6SU6S3nZ5cmvVF1l4YMo+MhXb659EpbnrkjV8Kn9MuRvJqGQTBNgMIIDC
+         WETffYKszlBS22oV8IaLrY0/t/7/a320fSupKModrGsIaniATBR3pR23/ZZ1+I1PHb4S
+         HUU5kR0CBJCO/ou1cE5jPoprJPrM+iLLoilW9KE/5sFZbc8/spKjgZRtDF8g1ZtTAV+y
+         7GAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706283731; x=1706888531;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NVBkI04VCHtY+BjWYOuLlcsihydzSeVqGac1GglpNUk=;
-        b=uCl+dOsTwEi5pxbX0N7La1jMYeSr8T2/cby25JEhX/6PQ7ETehlnBfNEaM2B7wlxm2
-         ExMfAXoJ170B4EIJUie+MIHMOsAbFlhW9yniKtShxi+Wm3aZw5X1D5X0GzzUhCMCpBOF
-         E3fv/A/uZ7d0s4E8DJGuVBSL/arLCPBDQKaJwcje9vh5iKLCigbxKeEewwze4ZxWceeA
-         TtxwYS19SNVDq0To71XMOfo4fPJns4T4hzONV0xwpYHHVN8BLVyw2bn1Kg2n/DpNeGKK
-         5o62uQeyAVRIxhdg2AR/70RHmMptgpy7XT4s2D7sx5xlcPyzWlIsAgMPej6nG3cMjd+6
-         BD4g==
-X-Gm-Message-State: AOJu0YxkVIFLbGCw/CPqiSDmovPST//wJeK2UDpylG8G8JC/XRgv08RV
-	K7hPXW2vy0x7IoMObhOFoU/3ZNrBpm/vUM+E13pqdc19RcLJFGPzQO24VlAS
-X-Google-Smtp-Source: AGHT+IH6B7uxFwctX6Ms1Hjoj3ZpOH+Arws05ZOYwWPBS1Cf4jUxNqO1vxEZM29T7iz1HGGGGoDkvA==
-X-Received: by 2002:a05:6512:e99:b0:50e:6032:984b with SMTP id bi25-20020a0565120e9900b0050e6032984bmr1096838lfb.110.1706283730958;
-        Fri, 26 Jan 2024 07:42:10 -0800 (PST)
+        d=1e100.net; s=20230601; t=1706283735; x=1706888535;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FLBEcEhjguKvXHdTuEC4hoUJhlDOkKsN5bndKqUwPUQ=;
+        b=gvecNdiOsvuZ0FXn8w25bK21+SySM9YWovNKIRxXYbUWPvMRqbOlxcaGyCn7sXLBj9
+         LDJQ32c7cz9k9Q52jRUFkIf/gwgx6mrWKvacmsi6r7NPhhB4A7dMAyly8jgO++aLQeEs
+         FidAjhX0Tptc3grUGHNiM9IqqJNmqwQWjA2IQaizPrCDXet/Lhmtjvfh3dRK5270SoZA
+         IfkZh8CHiH+F8og2ex2ceF+HmRJM6VKkZAKxFMVyukHAfp6fcP4Iigr1C6/1NkxvEgwD
+         IuN2/wwgO5Vxw5q9M7KuDabDFqxFcv3FDqtP+6JuQ459nS5pAZxTO1CM1tR2eDPchJzF
+         TM4Q==
+X-Gm-Message-State: AOJu0YypZCD62pIx5i8g069zF27HgfbrOq2rfGcEVyKLvqHynJ+RFHZv
+	vp8EV6MQog0/EfRhUOURKscFfSVT4amQTDD+02s2qvgcdjH1aBe07ScjM3Tf
+X-Google-Smtp-Source: AGHT+IFpaeOqR1Lx9X/+OfhLDLRNmlovnlRSZA2BL1j7RuqIt8Q1MlPu+uZ7fMMcS7Tds8AECo3DnQ==
+X-Received: by 2002:a19:e05a:0:b0:50e:7c08:1a55 with SMTP id g26-20020a19e05a000000b0050e7c081a55mr43653lfj.18.1706283734802;
+        Fri, 26 Jan 2024 07:42:14 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 0/7] Introduce generic headers
-Date: Fri, 26 Jan 2024 17:42:00 +0200
-Message-ID: <cover.1706281994.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v7 5/7] xen/asm-generic: introduce generic device.h
+Date: Fri, 26 Jan 2024 17:42:05 +0200
+Message-ID: <621ff5bd992ea8e6202ec03fa52c0e09aacd8f83.1706281994.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1706281994.git.oleksii.kurochko@gmail.com>
+References: <cover.1706281994.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some headers are common between several architectures, so the current patch series
-provide them.
+Arm, PPC and RISC-V use the same device.h thereby device.h
+was moved to asm-generic. Arm's device.h was taken as a base with
+the following changes:
+ - #ifdef PCI related things.
+ - #ifdef ACPI related things.
+ - Rename #ifdef guards.
+ - Add SPDX tag.
+ - #ifdef CONFIG_HAS_DEVICE_TREE related things.
+ - #ifdef-ing iommu related things with CONFIG_HAS_PASSTHROUGH.
 
-Another one reason to have them as generic is a simplification of adding support
-necessary to make a complete Xen build as it was/is being done in the patch series [1]
-and [2].
-
-Also, instead of providing generic/stub headers, it was used
-"#ifdef CONFIG_* #include <asm/*.h> #endif" instead of providing empty headers.
-
-This patch series is a pre-requisite for "Enable build of full Xen for RISC-V" [3].
-
-[1] https://lore.kernel.org/xen-devel/cover.1694543103.git.sanastasio@raptorengineering.com/
-[2] https://lore.kernel.org/xen-devel/cover.1692181079.git.oleksii.kurochko@gmail.com/
-[3] https://lore.kernel.org/xen-devel/cover.1700761381.git.oleksii.kurochko@gmail.com/
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V7:
- - The following patches were dropped because of rebasing as they were merged
-   to staging:
-   - [PATCH v6 3/9] xen/asm-generic: introduce generic div64.h header
-   - [PATCH v6 6/9] xen/asm-generic: introduce stub header softirq.h
-   - [PATCH v6 7/9] xen: ifdef inclusion of <asm/grant_table.h> in <xen/grant_table.h>
-   - [PATCH v6 8/9] xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
-- [PATCH v6 5/9] xen/asm-generic: introduce stub header numa.h was dropped becaus of
-  the patch: "[PATCH v2] NUMA: no need for asm/numa.h when !NUMA"
-- Drop definition of arch_monitor_domctl_event for PPC.
-- define arch_monitor_domctl_event in asm-generic/monitor.h.
-- Add "define HAS_ARCH_MONITOR_DOMCTL_EVENT" in arm/.../monitor.h as it has arch
-  specific implementation.
-- keeping DEVICE_PCI_HOSTBRIDGE available for every build based on the reply:
+ - keeping DEVICE_PCI_HOSTBRIDGE available for every build based on the reply:
     https://lore.kernel.org/xen-devel/926a5c12-7f02-42ec-92a8-1c82d060c710@xen.org/
-- add comment above enum device_type.h with explanation about DEV_TYPE_MAX.        
-- drop #ifdef HAS_PCI around "(device_get_class(dev) == DEVICE_PCI_HOSTBRIDGE))" in ARM code.
-- separate patch  "[PATCH v6 9/9] xen/asm-generic: introduce generic device.h" into 3 patches.
+ - add comment above enum device_type.h with explanation about DEV_TYPE_MAX.        
+ - separate patch  "[PATCH v6 9/9] xen/asm-generic: introduce generic device.h" into 3 patches.
 ---
 Changes in V6:
- - Fix the build script to work properly with EXTRA_FIXED_RANDCONFIG.
- - Introduce separate randconfig yaml with fixed configs for RISC-V.
- - Disable CONFIG_GRANT_TABLE and CONFIG_MEM_ACCESS for PPC and RISC-V.
- - Remove change in Kconfig/common for CONFIG_GRANT_TABLE and CONFIG_MEM_ACCESS.
- - Rebase on top of the latest staging. 
+ - Rebase only.
 ---
 Changes in V5:
- - Update the patch series message as patch related to delay.h was merged.
- - Rebase on top of staging because half of the patches of the patch series were
-   merged to staging branch.
- - Add A-by for some of the patches.
- - Add "depends on X86 || Arm" for CONFIG_GRANT_TABLE and CONFIG_MEM_ACCESS to be
-   sure it won't be turned on by randconfig in CI.
- - Partly switch Arm and PPC to asm-generic/monitor.h.
- - Some other minor changes
+  - Removed generated file: xen/include/headers++.chk.new
+  - Removed pointless #ifdef CONFIG_HAS_DEVICE_TREE ... #endif for PPC as
+    CONFIG_HAS_DEVICE_TREE will be always used for PPC.
 ---
 Changes in V4:
- - Update the cover letter message
- - Add Reviewed-by/Acked-by for patches:
-    [PATCH v3 01/14] xen/asm-generic: introduce stub header paging.h
-    [PATCH v3 03/14] xen/asm-generic: introduce generic hypercall.h
-    [PATCH v3 04/14] xen/asm-generic: introduce generic header iocap.h
-    [PATCH v3 05/14] xen/asm-generic: introduce stub header <asm/random.h>
-    [PATCH v3 06/14] xen/asm-generic: introduce generic header percpu.h
-    [PATCH v3 07/14] xen/asm-generic: introduce generalized hardirq.h
-    [PATCH v3 08/14] xen/asm-generic: introduce generic div64.h header
-    [PATCH v3 09/14] xen/asm-generic: introduce generic header altp2m.h
-    [PATCH v3 10/14] xen/asm-generic: introduce stub header monitor.h
-    [PATCH v3 11/14] xen/asm-generic: introduce stub header numa.h
-    [PATCH v3 12/14] xen/asm-generic: introduce stub header softirq.h
- - Fix some code style and minor issues.
- - Use asm-generic version of device.h for Arm and PPC.
+ - Updated the commit message
+ - Switched Arm and PPC to asm-generic version of device.h
+ - Replaced HAS_PCI with CONFIG_HAS_PCI
+ - ifdef-ing iommu filed of dev_archdata struct with CONFIG_HAS_PASSTHROUGH
+ - ifdef-ing iommu_fwspec of device struct with CONFIG_HAS_PASSTHROUGH
+ - ifdef-ing DT related things with CONFIG_HAS_DEVICE_TREE
+ - Updated the commit message ( remove a note with question about
+   if device.h should be in asm-generic or not )
+ - Replaced DEVICE_IC with DEVICE_INTERRUPT_CONTROLLER
+ - Rationalized usage of CONFIG_HAS_* in device.h
+ - Fixed indents for ACPI_DEVICE_START and ACPI_DEVICE_END
 ---
 Changes in V3:
- - Update the commit message of the cover letter.
- - Drop the following patch as it can be arch-specific enough:
-   * [PATCH v2 09/15] xen/asm-generic: introduce generic header smp.h
- - Drop correspondent arch specific headers and use asm-generic version of
-   a header.
- - Back to the patch series patches:
-   * xen: ifdef inclusion of <asm/grant_table.h> in <xen/grant_table.h>
-   * xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
+ - ifdef device tree related things.
+ - update the commit message
 ---
 Changes in V2:
- - Update the commit message of the cover letter.
- - Drop the following patches because they are arch-specific or was sent as a separate patch:
-   - xen/asm-generic: introduce stub header event.h
-	 - xen/asm-generic: introduce stub header spinlock.h
-	 - [PATCH v1 03/29] xen/asm-generic: introduce stub header cpufeature.h
-	 - [PATCH v1 07/29] xen/asm-generic: introduce stub header guest_atomics.h
-	 - [PATCH v1 10/29] xen/asm-generic: introduce stub header iommu.h
-	 - [PATCH v1 12/29] xen/asm-generic: introduce stub header pci.h because separate patch was sent [5]
-	 - [PATCH v1 14/29] xen/asm-generic: introduce stub header setup.h
-	 - [PATCH v1 15/29] xen/asm-generic: introduce stub header xenoprof.h because of [3].
-	 - [PATCH v1 16/29] xen/asm-generic: introduce stub header flushtlb.h
-	 - [PATCH v1 22/29] xen/asm-generic: introduce stub header delay.h because of [3]
-	 - [PATCH v1 23/29] xen/asm-generic: introduce stub header domain.h
-	 - [PATCH v1 24/29] xen/asm-generic: introduce stub header guest_access.h
-	 - [PATCH v1 25/29] xen/asm-generic: introduce stub header irq.h ( probably not so generic as I expected, I'll back to it if it will be necessary in the future )
-	 - [PATCH v1 28/29] xen/asm-generic: introduce stub header p2m.h ( probably not so generic as I expected, I'll back to it if it will be necessary in the future )
- - For the rest of the patches please look at changes for each patch separately.
+	- take ( as common ) device.h from Arm as PPC and RISC-V use it as a base.
+	- #ifdef PCI related things.
+	- #ifdef ACPI related things.
+	- rename DEVICE_GIC to DEVIC_IC.
+	- rename #ifdef guards.
+	- switch Arm and PPC to generic device.h
+	- add SPDX tag
+	- update the commit message
 ---
-Oleksii Kurochko (7):
-  automation: ensure values in EXTRA_FIXED_RANDCONFIG are separated by
-    new line
-  automation: introduce fixed randconfig for RISC-V
-  xen/asm-generic: introduce stub header monitor.h
-  xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
-  xen/asm-generic: introduce generic device.h
-  xen/arm: switch Arm to use asm-generic/device.h
-  xen/ppc: switch PPC to use asm-generic/device.h
+ xen/include/asm-generic/device.h | 162 +++++++++++++++++++++++++++++++
+ 1 file changed, 162 insertions(+)
+ create mode 100644 xen/include/asm-generic/device.h
 
- automation/gitlab-ci/build.yaml               |   8 +-
- .../gitlab-ci/riscv-fixed-randconfig.yaml     |   7 +
- automation/scripts/build                      |   6 +-
- xen/arch/arm/device.c                         |   5 +
- xen/arch/arm/domain_build.c                   |   2 +-
- xen/arch/arm/gic-v2.c                         |   4 +-
- xen/arch/arm/gic-v3.c                         |   6 +-
- xen/arch/arm/gic.c                            |   4 +-
- xen/arch/arm/include/asm/Makefile             |   1 +
- xen/arch/arm/include/asm/monitor.h            |  25 +---
- xen/arch/arm/p2m.c                            |   1 +
- xen/arch/arm/traps.c                          |   1 +
- xen/arch/ppc/configs/ppc64_defconfig          |   1 +
- xen/arch/ppc/include/asm/Makefile             |   1 +
- xen/arch/ppc/include/asm/device.h             |  53 --------
- xen/arch/ppc/include/asm/mem_access.h         |   5 -
- xen/arch/ppc/include/asm/monitor.h            |  28 +---
- xen/arch/ppc/stubs.c                          |   8 --
- xen/arch/riscv/configs/tiny64_defconfig       |   1 +
- .../asm => include/asm-generic}/device.h      | 128 ++++++++++++------
- xen/include/asm-generic/monitor.h             |  64 +++++++++
- xen/include/xen/mem_access.h                  |   2 +
- 22 files changed, 186 insertions(+), 175 deletions(-)
- create mode 100644 automation/gitlab-ci/riscv-fixed-randconfig.yaml
- delete mode 100644 xen/arch/ppc/include/asm/device.h
- delete mode 100644 xen/arch/ppc/include/asm/mem_access.h
- rename xen/{arch/arm/include/asm => include/asm-generic}/device.h (76%)
- create mode 100644 xen/include/asm-generic/monitor.h
-
+diff --git a/xen/include/asm-generic/device.h b/xen/include/asm-generic/device.h
+new file mode 100644
+index 0000000000..f12b30dc43
+--- /dev/null
++++ b/xen/include/asm-generic/device.h
+@@ -0,0 +1,162 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_GENERIC_DEVICE_H__
++#define __ASM_GENERIC_DEVICE_H__
++
++#include <xen/stdbool.h>
++
++/*
++ * DEV_TYPE_MAX is currently not in use, but it was added because the enum may
++ * be empty when !HAS_DEVICE_TREE and !HAS_PCI, which could lead to
++ * a compilation error.
++ */
++enum device_type
++{
++#ifdef CONFIG_HAS_DEVICE_TREE
++    DEV_DT,
++#endif
++
++#ifdef CONFIG_HAS_PCI
++    DEV_PCI,
++#endif
++    DEV_TYPE_MAX,
++};
++
++enum device_class
++{
++    DEVICE_SERIAL,
++    DEVICE_IOMMU,
++    DEVICE_INTERRUPT_CONTROLLER,
++    DEVICE_PCI_HOSTBRIDGE,
++    /* Use for error */
++    DEVICE_UNKNOWN,
++};
++
++struct dev_archdata {
++#ifdef CONFIG_HAS_PASSTHROUGH
++    void *iommu;    /* IOMMU private data */
++#endif
++};
++
++/* struct device - The basic device structure */
++struct device
++{
++    enum device_type type;
++#ifdef CONFIG_HAS_DEVICE_TREE
++    struct dt_device_node *of_node; /* Used by drivers imported from Linux */
++#endif
++    struct dev_archdata archdata;
++#ifdef CONFIG_HAS_PASSTHROUGH
++    struct iommu_fwspec *iommu_fwspec; /* per-device IOMMU instance data */
++#endif
++};
++
++typedef struct device device_t;
++
++#ifdef CONFIG_HAS_DEVICE_TREE
++
++#include <xen/device_tree.h>
++
++#define dev_is_dt(dev)  ((dev)->type == DEV_DT)
++
++/**
++ *  device_init - Initialize a device
++ *  @dev: device to initialize
++ *  @class: class of the device (serial, network...)
++ *  @data: specific data for initializing the device
++ *
++ *  Return 0 on success.
++ */
++int device_init(struct dt_device_node *dev, enum device_class class,
++                const void *data);
++
++/**
++ * device_get_type - Get the type of the device
++ * @dev: device to match
++ *
++ * Return the device type on success or DEVICE_ANY on failure
++ */
++enum device_class device_get_class(const struct dt_device_node *dev);
++
++#define DT_DEVICE_START(_name, _namestr, _class)                    \
++static const struct device_desc __dev_desc_##_name __used           \
++__section(".dev.info") = {                                          \
++    .name = _namestr,                                               \
++    .class = _class,                                                \
++
++#define DT_DEVICE_END                                               \
++};
++
++#else /* !CONFIG_HAS_DEVICE_TREE */
++#define dev_is_dt(dev) ((void)(dev), false)
++#endif /* CONFIG_HAS_DEVICE_TREE */
++
++#ifdef CONFIG_HAS_PCI
++#define dev_is_pci(dev) ((dev)->type == DEV_PCI)
++#else
++#define dev_is_pci(dev) ((void)(dev), false)
++#endif
++
++struct device_desc {
++    /* Device name */
++    const char *name;
++    /* Device class */
++    enum device_class class;
++
++#ifdef CONFIG_HAS_DEVICE_TREE
++
++    /* List of devices supported by this driver */
++    const struct dt_device_match *dt_match;
++    /*
++     * Device initialization.
++     *
++     * -EAGAIN is used to indicate that device probing is deferred.
++     */
++    int (*init)(struct dt_device_node *dev, const void *data);
++
++#endif
++};
++
++#ifdef CONFIG_ACPI
++
++struct acpi_device_desc {
++    /* Device name */
++    const char *name;
++    /* Device class */
++    enum device_class class;
++    /* type of device supported by the driver */
++    const int class_type;
++    /* Device initialization */
++    int (*init)(const void *data);
++};
++
++/**
++ *  acpi_device_init - Initialize a device
++ *  @class: class of the device (serial, network...)
++ *  @data: specific data for initializing the device
++ *
++ *  Return 0 on success.
++ */
++int acpi_device_init(enum device_class class,
++                     const void *data, int class_type);
++
++#define ACPI_DEVICE_START(_name, _namestr, _class)              \
++static const struct acpi_device_desc __dev_desc_##_name __used  \
++__section(".adev.info") = {                                     \
++    .name = _namestr,                                           \
++    .class = _class,                                            \
++
++#define ACPI_DEVICE_END                                         \
++};
++
++#endif /* CONFIG_ACPI */
++
++#endif /* __ASM_GENERIC_DEVICE_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.43.0
 
