@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 623CCC4828A
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:33:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.672253.1046049 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E88C6C47DDB
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jan 2024 17:33:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.672256.1046069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ4g-0004ot-Pn; Fri, 26 Jan 2024 17:33:06 +0000
+	id 1rTQ4i-0005AM-MI; Fri, 26 Jan 2024 17:33:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 672253.1046049; Fri, 26 Jan 2024 17:33:06 +0000
+Received: by outflank-mailman (output) from mailman id 672256.1046069; Fri, 26 Jan 2024 17:33:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rTQ4g-0004om-Mk; Fri, 26 Jan 2024 17:33:06 +0000
-Received: by outflank-mailman (input) for mailman id 672253;
- Fri, 26 Jan 2024 17:33:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rTQ4i-00058K-Dy; Fri, 26 Jan 2024 17:33:08 +0000
+Received: by outflank-mailman (input) for mailman id 672256;
+ Fri, 26 Jan 2024 17:33:07 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bPDA=JE=casper.srs.infradead.org=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1rTQ4f-0004Zo-DP
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:05 +0000
+ id 1rTQ4h-0004m7-5w
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2024 17:33:07 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f62c9830-bc70-11ee-8a43-1f161083a0e0;
- Fri, 26 Jan 2024 18:33:05 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f588b39c-bc70-11ee-98f5-efadbce2ee36;
+ Fri, 26 Jan 2024 18:33:03 +0100 (CET)
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUO-1Dvu; Fri, 26 Jan 2024 17:32:33 +0000
+ id 1rTQ48-0000000EKUH-0gwd; Fri, 26 Jan 2024 17:32:33 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ48-00000001emH-43JH;
- Fri, 26 Jan 2024 17:32:32 +0000
+ Hat Linux)) id 1rTQ47-00000001elh-3JDA;
+ Fri, 26 Jan 2024 17:32:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f62c9830-bc70-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: f588b39c-bc70-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=pMTNl31Z4wpC7RcyuXgVYoTxdcUq3RoTFZ8/v9Gj+ug=; b=ODknmQx9pYHZ2OKzuPTEoZWS1B
-	QfPM2lEpj+28gcu3a/nGfEJDtNOhbYE5phTZvy+Q95iPyF7opdo6PhO4rKABtsv1fVlLZ8/pUr+Ps
-	snEPHO+f2tc4eKwrTOt4PRfShqjQC8kKFEpjsViqXHkLjp+mcTXkA0bqpHVgIykBy/YyJb5emsmXy
-	PAqprcm+ymy0h/xEza6ae9QafFApdKKvSK+Gfgyvnp7DFT99VAYGuoBSMPd5FWS2dUQmSWMyHM9mt
-	8RukyYs2i5ya21RAr7O3+4ZQ1nhuYilKDm9rnb2d1dJmC3axTOwTubfqZrvhFzMpUh0qimjhcAqMC
-	lUUf6c0A==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=mlzjYpSZjZYD2hYts+UpgvgXir7egBvmFzjPnPYKEbw=; b=qlhRo9i8k117Zm8HSNvaw8uaTn
+	njG4DzpUgoeqvAPkmQsWrCknlgqB0K0WLuGwpGTb5DCch+LgSX6v3EAcD0XQrb0ZFEJ5O64RqPuUP
+	6Bfvec+jIbg6FRkcQuxva8bWqFUF7mww9Dusx8/GItRfSPekwDpuvguN2DoAToQqtF5qMsb87IOyK
+	QJhDHMeIVGdDlZIVY9Zc7MPN7kEQiZGSbX2Aqs53XK/HIqzhkx3hkNgBe01lrKiIguTJ2c6XoQuif
+	XQ4e4jmdF1/lrt4jB1YhMGLVEDKcdwMEK13TxAC1R9GDHcaek9yYobNbxtBK0vdSZxV8/3enPv1JC
+	MP5+wlIg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -121,15 +121,15 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	qemu-riscv@nongnu.org,
 	qemu-s390x@nongnu.org,
 	xen-devel@lists.xenproject.org,
-	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 22/47] hw/arm/aspeed: use qemu_configure_nic_device()
-Date: Fri, 26 Jan 2024 17:24:59 +0000
-Message-ID: <20240126173228.394202-23-dwmw2@infradead.org>
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Thomas Huth <thuth@redhat.com>
+Subject: [PATCH v4 10/47] hw/hppa: use pci_init_nic_devices()
+Date: Fri, 26 Jan 2024 17:24:47 +0000
+Message-ID: <20240126173228.394202-11-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
@@ -137,38 +137,36 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Acked-by: Cédric Le Goater <clg@kaod.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/arm/aspeed.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ hw/hppa/machine.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
-index cc59176563..bed5e4f40b 100644
---- a/hw/arm/aspeed.c
-+++ b/hw/arm/aspeed.c
-@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
-     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
-     AspeedSoCClass *sc;
-     int i;
--    NICInfo *nd = &nd_table[0];
+diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
+index 9e611620cc..a1045b48cc 100644
+--- a/hw/hppa/machine.c
++++ b/hw/hppa/machine.c
+@@ -342,7 +342,6 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
+     uint64_t kernel_entry = 0, kernel_low, kernel_high;
+     MemoryRegion *addr_space = get_system_memory();
+     MemoryRegion *rom_region;
+-    long i;
+     unsigned int smp_cpus = machine->smp.cpus;
+     SysBusDevice *s;
  
-     bmc->soc = ASPEED_SOC(object_new(amc->soc_name));
-     object_property_add_child(OBJECT(machine), "soc", OBJECT(bmc->soc));
-@@ -371,10 +370,10 @@ static void aspeed_machine_init(MachineState *machine)
-                              &error_fatal);
- 
-     for (i = 0; i < sc->macs_num; i++) {
--        if ((amc->macs_mask & (1 << i)) && nd->used) {
--            qemu_check_nic_model(nd, TYPE_FTGMAC100);
--            qdev_set_nic_properties(DEVICE(&bmc->soc->ftgmac100[i]), nd);
--            nd++;
-+        if ((amc->macs_mask & (1 << i)) &&
-+            !qemu_configure_nic_device(DEVICE(&bmc->soc->ftgmac100[i]),
-+                                       true, NULL)) {
-+            break; /* No configs left; stop asking */
-         }
+@@ -368,10 +367,8 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
+                         qdev_get_gpio_in(lasi_dev, LASI_IRQ_LAN_HPA));
      }
  
+-    for (i = 0; i < nb_nics; i++) {
+-        if (!enable_lasi_lan()) {
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-        }
++    if (!enable_lasi_lan()) {
++        pci_init_nic_devices(pci_bus, mc->default_nic);
+     }
+ 
+     /* BMC board: HP Powerbar SP2 Diva (with console only) */
 -- 
 2.43.0
 
