@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA7FC47DB3
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jan 2024 17:19:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.673074.1047333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD6C7C48292
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jan 2024 17:19:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.673065.1047256 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rUVID-0000Oi-TN; Mon, 29 Jan 2024 17:19:33 +0000
+	id 1rUVI5-0006sQ-2X; Mon, 29 Jan 2024 17:19:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 673074.1047333; Mon, 29 Jan 2024 17:19:33 +0000
+Received: by outflank-mailman (output) from mailman id 673065.1047256; Mon, 29 Jan 2024 17:19:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rUVID-0000Lh-6s; Mon, 29 Jan 2024 17:19:33 +0000
-Received: by outflank-mailman (input) for mailman id 673074;
- Mon, 29 Jan 2024 17:19:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rUVI4-0006sI-Tx; Mon, 29 Jan 2024 17:19:24 +0000
+Received: by outflank-mailman (input) for mailman id 673065;
+ Mon, 29 Jan 2024 17:19:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vh+I=JH=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1rUVIB-0005vb-Bh
- for xen-devel@lists.xenproject.org; Mon, 29 Jan 2024 17:19:31 +0000
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [2a00:1450:4864:20::22a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8f8c7d97-beca-11ee-98f5-efadbce2ee36;
- Mon, 29 Jan 2024 18:19:29 +0100 (CET)
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2cc9fa5e8e1so32885801fa.3
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jan 2024 09:19:29 -0800 (PST)
+ id 1rUVI3-0005vY-2s
+ for xen-devel@lists.xenproject.org; Mon, 29 Jan 2024 17:19:23 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8a7c0322-beca-11ee-8a43-1f161083a0e0;
+ Mon, 29 Jan 2024 18:19:21 +0100 (CET)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-55ad2a47b7aso2867033a12.3
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jan 2024 09:19:21 -0800 (PST)
 Received: from carlo-ubuntu.mo54.unimo.it (nonato.mo54.unimo.it.
  [155.185.85.8]) by smtp.gmail.com with ESMTPSA id
- eo15-20020a056402530f00b005598ec568dbsm3970494edb.59.2024.01.29.09.19.27
+ eo15-20020a056402530f00b005598ec568dbsm3970494edb.59.2024.01.29.09.19.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 09:19:28 -0800 (PST)
+ Mon, 29 Jan 2024 09:19:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,301 +47,428 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f8c7d97-beca-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 8a7c0322-beca-11ee-8a43-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1706548769; x=1707153569; darn=lists.xenproject.org;
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1706548760; x=1707153560; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bOEDeXZz+KvpHcMcDfWEFx1e9GAnCTEDaLyDCycF2TQ=;
-        b=QNfB12m7vO4Nj6rT1oA8yx7qRTiEua4Mnk8pc1zyRObZFRpUj0MS7XZmuOmM5eIcEc
-         Rstvt63cyP8I/yHiKIxLd/SP2ZFU5pRGN9y7bIxd9GKxL+zjZI7M3k6ZoA/eXC4PBtOM
-         wNl04us+Ipm4p1tZyMaB6cRyb9eIcp9JbOaLAnsFYNHz7I0Oq9VvjOmJbcjMnRg6anRx
-         hyccWtDUhvEbmJB/0mQgfQVR07xYGeHO+Ua56CbrB7Ddu4Sgnljw8bGAbsdk3tJc+36Z
-         cN9RucFEQ9ZyQmDeN3dGzEjCmJ/HS+kK1Y9W2e9nSYqg06plnum3uZvJiQI0FBghXkdL
-         kCgw==
+        bh=iIa5rMBLPGQ7jfnyxO46jyMXIeNANfVTdO7DqWxwb4c=;
+        b=0bBIkWqyMluE7NrkadFknPdyeo/VGnswpdj9g9pUTVsz4CNCqpK3zDsdYzY1sQd7Zu
+         6tRXuIfl2p/P49daegDEtiRvgQ5OrIIucLxSbd3pqOXJu7hcYMd5KVAhM9tA6i5foJih
+         tNWYSbkfRHyxpSF7k4Xaon9UlhRrUr1Hm9PoIju7HaD5EUgWpasrfAZaaBpw17w4kWVe
+         T8yDhn8WR0z/xCI7IZbpnyaoqFBOVnF8lV3mQy4XlLRr0aPig3wJF3aqJCf2VD153UoZ
+         v6sMknWjaM9w/7rMPFraAw7sNO7wDT7ZHObPjhgMa7Bl1W3wjLg3jJvs4gmako/SlJfk
+         fxLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706548769; x=1707153569;
+        d=1e100.net; s=20230601; t=1706548760; x=1707153560;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bOEDeXZz+KvpHcMcDfWEFx1e9GAnCTEDaLyDCycF2TQ=;
-        b=aW4AJXEgSsM+XvVPNWvkrv5ZMUi5sxdESNUxviLFUU1P5aEWmGZcATPJxzhfmoPUpx
-         ioTiDuCD6dyBk39wrFOfFYEEDHRsYFFQwmzBnGn1P3Hwoj5aWFAnqeNLIPJ91z6qF9X4
-         +cpL3cHszhaRsKEH1dsSRt8+Cf94SCCrElrKeUikf82MipJ9bRhNvyxSt58bYsoB8CnT
-         rMeaqC62hjtBV+sDhHxDg+MGGNYMfYkILnOx/Wi5L0op7SDl9bGarav2Dfv10+CvFkAN
-         96nRt6dLdIevvLPdaekbIcUgoHR5Hf2Ks3B93sWHIHiOkbjI6zVyK87WYLmP9X8r4/dk
-         qc/A==
-X-Gm-Message-State: AOJu0YxZ53/FCNDAPDBD+bumUiW6HaSzZzeENpA4GM2a9wgqb8wBWt67
-	5KZyQjL78efwKnSoHO7hPETRa0vlNicQA/djXA1cwzATdIhthSw3ppoVr0FzOk5zhbfX8DinXV8
-	QjD0=
-X-Google-Smtp-Source: AGHT+IEHbmtrPBuSoOGAvYNewKRuZ2nMFc2QPdwPS0snVlLI1HqtmRWiBozo33nTOPw6ibBWT4OnRw==
-X-Received: by 2002:a2e:bc86:0:b0:2cf:f748:1aba with SMTP id h6-20020a2ebc86000000b002cff7481abamr5146953ljf.20.1706548769042;
-        Mon, 29 Jan 2024 09:19:29 -0800 (PST)
+        bh=iIa5rMBLPGQ7jfnyxO46jyMXIeNANfVTdO7DqWxwb4c=;
+        b=McVZpwsA/ECJJkbpKeQKPAK9qNNxC0X9Y8nKum8K4sea2gl4wr7thgHIC2G9t4xXRb
+         3uJP+cyD2syNENnTxo1rLQ2RL5FZIzW7AvxVOnqhAHEBygwsHDV5YHbsx6CXg5Beiv3O
+         dszMv0M8ZbcELe/5G3s8DYKw8va5kuUnvhaaL58tvlsx+OY9psMefcxvAUuj7phhGSQ1
+         Hj4DqRm9hYX2R/bFqnjkGQQv1U2ZnnIVHq6Yp5l/OsWmL20T2FXwLXmaExOg5u17ae5R
+         sgmCx/0Az42UcaTr3B1nmmySbOL+ns9UnkBr4/ESbFejrEafsmlmDihqriA9NOShFWCj
+         v0rQ==
+X-Gm-Message-State: AOJu0YwNDVJpxVmSBoOuBESCa2pFd6bYOdRadjJ9xPe3/bltCYOhfowz
+	LOaqVsFLj7t5C8b0UjbpJRjiUp0mDFuP9ozQBghe3wX2DVRjiI8IMLOC/fu4MOeNAQWCbIeweDC
+	PXf4=
+X-Google-Smtp-Source: AGHT+IHLLjWbB9yMguzQrhksnw/TcTzEZ1IjvtsAG0LjISoDSw4ezhsFSU0FMy/J2KXuxCp8BBSGiQ==
+X-Received: by 2002:aa7:cb53:0:b0:55f:19c4:600c with SMTP id w19-20020aa7cb53000000b0055f19c4600cmr1301080edt.37.1706548760210;
+        Mon, 29 Jan 2024 09:19:20 -0800 (PST)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
 	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v6 13/15] xen/arm: make consider_modules() available for xen relocation
-Date: Mon, 29 Jan 2024 18:18:09 +0100
-Message-Id: <20240129171811.21382-14-carlo.nonato@minervasys.tech>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH v6 04/15] xen/arm: add Dom0 cache coloring support
+Date: Mon, 29 Jan 2024 18:18:00 +0100
+Message-Id: <20240129171811.21382-5-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240129171811.21382-1-carlo.nonato@minervasys.tech>
 References: <20240129171811.21382-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Cache coloring must physically relocate Xen in order to color the hypervisor
-and consider_modules() is a key function that is needed to find a new
-available physical address.
+Add a command line parameter to allow the user to set the coloring
+configuration for Dom0.
+A common configuration syntax for cache colors is introduced and
+documented.
+Take the opportunity to also add:
+ - default configuration notion.
+ - function to check well-formed configurations.
 
-672d67f339c0 ("xen/arm: Split MMU-specific setup_mm() and related code out")
-moved consider_modules() under arm32. Move it back to setup.c and make it
-non-static so that it can be used outside.
+Direct mapping Dom0 isn't possible when coloring is enabled, so
+CDF_directmap flag is removed when creating it.
+
+Based on original work from: Luca Miccio <lucmiccio@gmail.com>
 
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 ---
 v6:
-- new patch
+- moved domain_llc_coloring_free() in this patch
+- removed domain_alloc_colors() in favor of a more explicit allocation
+- parse_color_config() now accepts the size of the array to be filled
+- allocate_memory() moved in another patch
+v5:
+- Carlo Nonato as the new author
+- moved dom0 colors parsing (parse_colors()) in this patch
+- added dom0_set_llc_colors() to set dom0 colors after creation
+- moved color allocation and checking in this patch
+- error handling when allocating color arrays
+- FIXME: copy pasted allocate_memory() cause it got moved
+v4:
+- dom0 colors are dynamically allocated as for any other domain
+  (colors are duplicated in dom0_colors and in the new array, but logic
+  is simpler)
 ---
- xen/arch/arm/arm32/mmu/mm.c      | 93 +-------------------------------
- xen/arch/arm/include/asm/setup.h |  3 ++
- xen/arch/arm/setup.c             | 92 +++++++++++++++++++++++++++++++
- 3 files changed, 96 insertions(+), 92 deletions(-)
+ docs/misc/cache-coloring.rst      |  29 ++++++
+ docs/misc/xen-command-line.pandoc |   9 ++
+ xen/arch/arm/domain_build.c       |  10 +-
+ xen/common/domain.c               |   3 +
+ xen/common/llc-coloring.c         | 153 ++++++++++++++++++++++++++++++
+ xen/include/xen/llc-coloring.h    |   3 +
+ 6 files changed, 206 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
-index cb441ca87c..e9e1e48f9f 100644
---- a/xen/arch/arm/arm32/mmu/mm.c
-+++ b/xen/arch/arm/arm32/mmu/mm.c
-@@ -7,6 +7,7 @@
- #include <xen/pfn.h>
- #include <asm/fixmap.h>
- #include <asm/static-memory.h>
-+#include <asm/setup.h>
- 
- static unsigned long opt_xenheap_megabytes __initdata;
- integer_param("xenheap_megabytes", opt_xenheap_megabytes);
-@@ -29,98 +30,6 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
-     directmap_virt_end = XENHEAP_VIRT_START + nr_mfns * PAGE_SIZE;
- }
- 
--/*
-- * Returns the end address of the highest region in the range s..e
-- * with required size and alignment that does not conflict with the
-- * modules from first_mod to nr_modules.
-- *
-- * For non-recursive callers first_mod should normally be 0 (all
-- * modules and Xen itself) or 1 (all modules but not Xen).
-- */
--static paddr_t __init consider_modules(paddr_t s, paddr_t e,
--                                       uint32_t size, paddr_t align,
--                                       int first_mod)
--{
--    const struct bootmodules *mi = &bootinfo.modules;
--    int i;
--    int nr;
--
--    s = (s+align-1) & ~(align-1);
--    e = e & ~(align-1);
--
--    if ( s > e ||  e - s < size )
--        return 0;
--
--    /* First check the boot modules */
--    for ( i = first_mod; i < mi->nr_mods; i++ )
--    {
--        paddr_t mod_s = mi->module[i].start;
--        paddr_t mod_e = mod_s + mi->module[i].size;
--
--        if ( s < mod_e && mod_s < e )
--        {
--            mod_e = consider_modules(mod_e, e, size, align, i+1);
--            if ( mod_e )
--                return mod_e;
--
--            return consider_modules(s, mod_s, size, align, i+1);
--        }
--    }
--
--    /* Now check any fdt reserved areas. */
--
--    nr = fdt_num_mem_rsv(device_tree_flattened);
--
--    for ( ; i < mi->nr_mods + nr; i++ )
--    {
--        paddr_t mod_s, mod_e;
--
--        if ( fdt_get_mem_rsv_paddr(device_tree_flattened,
--                                   i - mi->nr_mods,
--                                   &mod_s, &mod_e ) < 0 )
--            /* If we can't read it, pretend it doesn't exist... */
--            continue;
--
--        /* fdt_get_mem_rsv_paddr returns length */
--        mod_e += mod_s;
--
--        if ( s < mod_e && mod_s < e )
--        {
--            mod_e = consider_modules(mod_e, e, size, align, i+1);
--            if ( mod_e )
--                return mod_e;
--
--            return consider_modules(s, mod_s, size, align, i+1);
--        }
--    }
--
--    /*
--     * i is the current bootmodule we are evaluating, across all
--     * possible kinds of bootmodules.
--     *
--     * When retrieving the corresponding reserved-memory addresses, we
--     * need to index the bootinfo.reserved_mem bank starting from 0, and
--     * only counting the reserved-memory modules. Hence, we need to use
--     * i - nr.
--     */
--    nr += mi->nr_mods;
--    for ( ; i - nr < bootinfo.reserved_mem.nr_banks; i++ )
--    {
--        paddr_t r_s = bootinfo.reserved_mem.bank[i - nr].start;
--        paddr_t r_e = r_s + bootinfo.reserved_mem.bank[i - nr].size;
--
--        if ( s < r_e && r_s < e )
--        {
--            r_e = consider_modules(r_e, e, size, align, i + 1);
--            if ( r_e )
--                return r_e;
--
--            return consider_modules(s, r_s, size, align, i + 1);
--        }
--    }
--    return e;
--}
--
- /*
-  * Find a contiguous region that fits in the static heap region with
-  * required size and alignment, and return the end address of the region
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index d15a88d2e0..37c0e345f0 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -207,6 +207,9 @@ struct init_info
-     unsigned int cpuid;
- };
- 
-+paddr_t consider_modules(paddr_t s, paddr_t e, uint32_t size, paddr_t align,
-+                         int first_mod);
+diff --git a/docs/misc/cache-coloring.rst b/docs/misc/cache-coloring.rst
+index 0535b5c656..c347725525 100644
+--- a/docs/misc/cache-coloring.rst
++++ b/docs/misc/cache-coloring.rst
+@@ -85,6 +85,35 @@ More specific documentation is available at `docs/misc/xen-command-line.pandoc`.
+ +----------------------+-------------------------------+
+ | ``llc-way-size``     | set the LLC way size          |
+ +----------------------+-------------------------------+
++| ``dom0-llc-colors``  | Dom0 color configuration      |
+++----------------------+-------------------------------+
 +
- #endif
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 14cb023783..28f4761705 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -545,6 +545,98 @@ static void * __init relocate_fdt(paddr_t dtb_paddr, size_t dtb_size)
-     return fdt;
- }
++Colors selection format
++***********************
++
++Regardless of the memory pool that has to be colored (Xen, Dom0/DomUs),
++the color selection can be expressed using the same syntax. In particular a
++comma-separated list of colors or ranges of colors is used.
++Ranges are hyphen-separated intervals (such as `0-4`) and are inclusive on both
++sides.
++
++Note that:
++
++- no spaces are allowed between values.
++- no overlapping ranges or duplicated colors are allowed.
++- values must be written in ascending order.
++
++Examples:
++
+++-------------------+-----------------------------+
++| **Configuration** | **Actual selection**        |
+++-------------------+-----------------------------+
++| 1-2,5-8           | [1, 2, 5, 6, 7, 8]          |
+++-------------------+-----------------------------+
++| 4-8,10,11,12      | [4, 5, 6, 7, 8, 10, 11, 12] |
+++-------------------+-----------------------------+
++| 0                 | [0]                         |
+++-------------------+-----------------------------+
  
+ Known issues and limitations
+ ****************************
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 11f9f209d1..25da997b5b 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -963,6 +963,15 @@ Controls for the dom0 IOMMU setup.
+ 
+ Specify a list of IO ports to be excluded from dom0 access.
+ 
++### dom0-llc-colors
++> `= List of [ <integer> | <integer>-<integer> ]`
++
++> Default: `All available LLC colors`
++
++Specify dom0 LLC color configuration. This options is available only when
++`CONFIG_LLC_COLORING` is enabled. If the parameter is not set, all available
++colors are used.
++
+ ### dom0_max_vcpus
+ 
+ Either:
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index a9e5310aff..e380d25dca 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2,6 +2,7 @@
+ #include <xen/init.h>
+ #include <xen/compile.h>
+ #include <xen/lib.h>
++#include <xen/llc-coloring.h>
+ #include <xen/mm.h>
+ #include <xen/param.h>
+ #include <xen/domain_page.h>
+@@ -2161,6 +2162,7 @@ void __init create_dom0(void)
+         .max_maptrack_frames = -1,
+         .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
+     };
++    unsigned int flags = CDF_privileged;
+     int rc;
+ 
+     /* The vGIC for DOM0 is exactly emulating the hardware GIC */
+@@ -2188,10 +2190,16 @@ void __init create_dom0(void)
+             panic("SVE vector length error\n");
+     }
+ 
+-    dom0 = domain_create(0, &dom0_cfg, CDF_privileged | CDF_directmap);
++    if ( !llc_coloring_enabled )
++        flags |= CDF_directmap;
++
++    dom0 = domain_create(0, &dom0_cfg, flags);
+     if ( IS_ERR(dom0) )
+         panic("Error creating domain 0 (rc = %ld)\n", PTR_ERR(dom0));
+ 
++    if ( llc_coloring_enabled && (rc = dom0_set_llc_colors(dom0)) )
++        panic("Error initializing LLC coloring for domain 0 (rc = %d)", rc);
++
+     if ( alloc_dom0_vcpu0(dom0) == NULL )
+         panic("Error creating domain 0 vcpu0\n");
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index f6f5574996..f144b54f4f 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -33,6 +33,7 @@
+ #include <xen/xenoprof.h>
+ #include <xen/irq.h>
+ #include <xen/argo.h>
++#include <xen/llc-coloring.h>
+ #include <asm/p2m.h>
+ #include <asm/processor.h>
+ #include <public/sched.h>
+@@ -1208,6 +1209,8 @@ void domain_destroy(struct domain *d)
+ 
+     BUG_ON(!d->is_dying);
+ 
++    domain_llc_coloring_free(d);
++
+     /* May be already destroyed, or get_domain() can race us. */
+     if ( atomic_cmpxchg(&d->refcnt, 0, DOMAIN_DESTROYED) != 0 )
+         return;
+diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
+index 10729e70c1..983de44a47 100644
+--- a/xen/common/llc-coloring.c
++++ b/xen/common/llc-coloring.c
+@@ -17,6 +17,63 @@ size_param("llc-way-size", llc_way_size);
+ /* Number of colors available in the LLC */
+ static unsigned int __ro_after_init max_nr_colors = CONFIG_NR_LLC_COLORS;
+ 
++static unsigned int __initdata dom0_colors[CONFIG_NR_LLC_COLORS];
++static unsigned int __initdata dom0_num_colors;
++
 +/*
-+ * Returns the end address of the highest region in the range s..e
-+ * with required size and alignment that does not conflict with the
-+ * modules from first_mod to nr_modules.
++ * Parse the coloring configuration given in the buf string, following the
++ * syntax below.
 + *
-+ * For non-recursive callers first_mod should normally be 0 (all
-+ * modules and Xen itself) or 1 (all modules but not Xen).
++ * COLOR_CONFIGURATION ::= COLOR | RANGE,...,COLOR | RANGE
++ * RANGE               ::= COLOR-COLOR
++ *
++ * Example: "0,2-6,15-16" represents the set of colors: 0,2,3,4,5,6,15,16.
 + */
-+paddr_t __init consider_modules(paddr_t s, paddr_t e,
-+                                uint32_t size, paddr_t align,
-+                                int first_mod)
++static int parse_color_config(const char *buf, unsigned int *colors,
++                              unsigned int num_colors, unsigned int *num_parsed)
 +{
-+    const struct bootmodules *mi = &bootinfo.modules;
-+    int i;
-+    int nr;
++    const char *s = buf;
 +
-+    s = (s+align-1) & ~(align-1);
-+    e = e & ~(align-1);
++    if ( !colors || !num_colors )
++        return -EINVAL;
 +
-+    if ( s > e ||  e - s < size )
-+        return 0;
++    *num_parsed = 0;
 +
-+    /* First check the boot modules */
-+    for ( i = first_mod; i < mi->nr_mods; i++ )
++    while ( *s != '\0' )
 +    {
-+        paddr_t mod_s = mi->module[i].start;
-+        paddr_t mod_e = mod_s + mi->module[i].size;
-+
-+        if ( s < mod_e && mod_s < e )
++        if ( *s != ',' )
 +        {
-+            mod_e = consider_modules(mod_e, e, size, align, i+1);
-+            if ( mod_e )
-+                return mod_e;
++            unsigned int color, start, end;
 +
-+            return consider_modules(s, mod_s, size, align, i+1);
++            start = simple_strtoul(s, &s, 0);
++
++            if ( *s == '-' )    /* Range */
++            {
++                s++;
++                end = simple_strtoul(s, &s, 0);
++            }
++            else                /* Single value */
++                end = start;
++
++            if ( start > end || (end - start) > (UINT_MAX - *num_parsed) ||
++                 (*num_parsed + (end - start)) >= num_colors )
++                return -EINVAL;
++            for ( color = start; color <= end; color++ )
++                colors[(*num_parsed)++] = color;
++        }
++        else
++            s++;
++    }
++
++    return *s ? -EINVAL : 0;
++}
++
++static int __init parse_dom0_colors(const char *s)
++{
++    return parse_color_config(s, dom0_colors, max_nr_colors, &dom0_num_colors);
++}
++custom_param("dom0-llc-colors", parse_dom0_colors);
++
+ static void print_colors(const unsigned int *colors, unsigned int num_colors)
+ {
+     unsigned int i;
+@@ -47,6 +104,29 @@ static void dump_coloring_info(unsigned char key)
+     printk("Number of LLC colors supported: %u\n", max_nr_colors);
+ }
+ 
++static bool check_colors(const unsigned int *colors, unsigned int num_colors)
++{
++    unsigned int i;
++
++    if ( num_colors > max_nr_colors )
++    {
++        printk(XENLOG_ERR "Number of LLC colors requested > %u\n",
++               max_nr_colors);
++        return false;
++    }
++
++    for ( i = 0; i < num_colors; i++ )
++    {
++        if ( colors[i] >= max_nr_colors )
++        {
++            printk(XENLOG_ERR "LLC color %u >= %u\n", colors[i], max_nr_colors);
++            return false;
 +        }
 +    }
 +
-+    /* Now check any fdt reserved areas. */
++    return true;
++}
 +
-+    nr = fdt_num_mem_rsv(device_tree_flattened);
+ void __init llc_coloring_init(void)
+ {
+     if ( !llc_way_size && !(llc_way_size = get_llc_way_size()) )
+@@ -70,12 +150,85 @@ void __init llc_coloring_init(void)
+     arch_llc_coloring_init();
+ }
+ 
++void domain_llc_coloring_free(struct domain *d)
++{
++    xfree(__va(__pa(d->llc_colors)));
++}
 +
-+    for ( ; i < mi->nr_mods + nr; i++ )
+ void domain_dump_llc_colors(const struct domain *d)
+ {
+     printk("Domain %pd has %u LLC colors: ", d, d->num_llc_colors);
+     print_colors(d->llc_colors, d->num_llc_colors);
+ }
+ 
++static unsigned int *alloc_colors(unsigned int num_colors)
++{
++    unsigned int *colors;
++
++    if ( num_colors > max_nr_colors )
++        return NULL;
++
++    colors = xmalloc_array(unsigned int, num_colors);
++    if ( !colors )
++        return NULL;
++
++    return colors;
++}
++
++static int domain_check_colors(const struct domain *d)
++{
++    if ( !d->num_llc_colors )
 +    {
-+        paddr_t mod_s, mod_e;
-+
-+        if ( fdt_get_mem_rsv_paddr(device_tree_flattened,
-+                                   i - mi->nr_mods,
-+                                   &mod_s, &mod_e ) < 0 )
-+            /* If we can't read it, pretend it doesn't exist... */
-+            continue;
-+
-+        /* fdt_get_mem_rsv_paddr returns length */
-+        mod_e += mod_s;
-+
-+        if ( s < mod_e && mod_s < e )
-+        {
-+            mod_e = consider_modules(mod_e, e, size, align, i+1);
-+            if ( mod_e )
-+                return mod_e;
-+
-+            return consider_modules(s, mod_s, size, align, i+1);
-+        }
++        printk(XENLOG_ERR "No LLC color config found for %pd\n", d);
++        return -ENODATA;
++    }
++    else if ( !check_colors(d->llc_colors, d->num_llc_colors) )
++    {
++        printk(XENLOG_ERR "Bad LLC color config for %pd\n", d);
++        return -EINVAL;
 +    }
 +
-+    /*
-+     * i is the current bootmodule we are evaluating, across all
-+     * possible kinds of bootmodules.
-+     *
-+     * When retrieving the corresponding reserved-memory addresses, we
-+     * need to index the bootinfo.reserved_mem bank starting from 0, and
-+     * only counting the reserved-memory modules. Hence, we need to use
-+     * i - nr.
-+     */
-+    nr += mi->nr_mods;
-+    for ( ; i - nr < bootinfo.reserved_mem.nr_banks; i++ )
-+    {
-+        paddr_t r_s = bootinfo.reserved_mem.bank[i - nr].start;
-+        paddr_t r_e = r_s + bootinfo.reserved_mem.bank[i - nr].size;
++    return 0;
++}
 +
-+        if ( s < r_e && r_s < e )
-+        {
-+            r_e = consider_modules(r_e, e, size, align, i + 1);
-+            if ( r_e )
-+                return r_e;
++static int domain_set_default_colors(struct domain *d)
++{
++    unsigned int *colors = alloc_colors(max_nr_colors);
++    unsigned int i;
 +
-+            return consider_modules(s, r_s, size, align, i + 1);
-+        }
-+    }
-+    return e;
++    if ( !colors )
++        return -ENOMEM;
++
++    printk(XENLOG_WARNING
++           "LLC color config not found for %pd, using default\n", d);
++
++    for ( i = 0; i < max_nr_colors; i++ )
++        colors[i] = i;
++
++    d->llc_colors = colors;
++    d->num_llc_colors = max_nr_colors;
++
++    return 0;
++}
++
++int __init dom0_set_llc_colors(struct domain *d)
++{
++    unsigned int *colors;
++
++    if ( !dom0_num_colors )
++        return domain_set_default_colors(d);
++
++    colors = alloc_colors(dom0_num_colors);
++    if ( !colors )
++        return -ENOMEM;
++
++    memcpy(colors, dom0_colors, sizeof(unsigned int) * dom0_num_colors);
++    d->llc_colors = colors;
++    d->num_llc_colors = dom0_num_colors;
++
++    return domain_check_colors(d);
 +}
 +
  /*
-  * Return the end of the non-module region starting at s. In other
-  * words return s the start of the next modules after s.
+  * Local variables:
+  * mode: C
+diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
+index 5e12eb426f..1a73080c98 100644
+--- a/xen/include/xen/llc-coloring.h
++++ b/xen/include/xen/llc-coloring.h
+@@ -14,16 +14,19 @@
+ extern bool llc_coloring_enabled;
+ 
+ void llc_coloring_init(void);
++void domain_llc_coloring_free(struct domain *d);
+ void domain_dump_llc_colors(const struct domain *d);
+ #else
+ #define llc_coloring_enabled false
+ 
+ static inline void llc_coloring_init(void) {}
++static inline void domain_llc_coloring_free(struct domain *d) {}
+ static inline void domain_dump_llc_colors(const struct domain *d) {}
+ #endif
+ 
+ unsigned int get_llc_way_size(void);
+ void arch_llc_coloring_init(void);
++int dom0_set_llc_colors(struct domain *d);
+ 
+ #endif /* __COLORING_H__ */
+ 
 -- 
 2.34.1
 
