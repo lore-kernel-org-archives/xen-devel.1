@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B300C4828C
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jan 2024 17:19:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.673069.1047292 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD718C48294
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jan 2024 17:19:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.673076.1047350 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rUVI8-0007i9-U2; Mon, 29 Jan 2024 17:19:28 +0000
+	id 1rUVIF-0000qU-LB; Mon, 29 Jan 2024 17:19:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 673069.1047292; Mon, 29 Jan 2024 17:19:28 +0000
+Received: by outflank-mailman (output) from mailman id 673076.1047350; Mon, 29 Jan 2024 17:19:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rUVI8-0007gN-FU; Mon, 29 Jan 2024 17:19:28 +0000
-Received: by outflank-mailman (input) for mailman id 673069;
- Mon, 29 Jan 2024 17:19:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rUVIF-0000ni-1t; Mon, 29 Jan 2024 17:19:35 +0000
+Received: by outflank-mailman (input) for mailman id 673076;
+ Mon, 29 Jan 2024 17:19:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vh+I=JH=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1rUVI7-0005vb-6Y
- for xen-devel@lists.xenproject.org; Mon, 29 Jan 2024 17:19:27 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8cb469f9-beca-11ee-98f5-efadbce2ee36;
- Mon, 29 Jan 2024 18:19:25 +0100 (CET)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-55a90a0a1a1so2547905a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jan 2024 09:19:24 -0800 (PST)
+ id 1rUVIC-0005vY-2e
+ for xen-devel@lists.xenproject.org; Mon, 29 Jan 2024 17:19:32 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9072ee54-beca-11ee-8a43-1f161083a0e0;
+ Mon, 29 Jan 2024 18:19:31 +0100 (CET)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-55eed368b0bso2594684a12.0
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Jan 2024 09:19:31 -0800 (PST)
 Received: from carlo-ubuntu.mo54.unimo.it (nonato.mo54.unimo.it.
  [155.185.85.8]) by smtp.gmail.com with ESMTPSA id
- eo15-20020a056402530f00b005598ec568dbsm3970494edb.59.2024.01.29.09.19.23
+ eo15-20020a056402530f00b005598ec568dbsm3970494edb.59.2024.01.29.09.19.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 09:19:23 -0800 (PST)
+ Mon, 29 Jan 2024 09:19:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,37 +47,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8cb469f9-beca-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 9072ee54-beca-11ee-8a43-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1706548764; x=1707153564; darn=lists.xenproject.org;
+        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1706548770; x=1707153570; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=J9RFmP+aBqqH4SIR3Jn1WqEGTeAcNYfa+alt6ENH+Bw=;
-        b=p0CPUrxvQY5EiTPuTGURNV/dgMauzAM/e1OJKWjfBlKcDHI5bkn2b2QNus8BVPIc2m
-         so0rtl8QgwDRMAda8Jm2hnx8GZXlpzXbg2U48OR40mlrEX1kFTIQH2HaE9ZHGkNcFMBh
-         rQOG4X4SlXImG0g7DpN+OWyfhNxxqy5YDsRz/otA3vXD7wZ8P48+ElOOJfcTgXm8WxTw
-         Cu/kmXUSg6F2jKOwPNFCJ2d3l5TDGYZfsBJNc9ilD1YUc81AxDexa7oUNrXg3N2XfcDc
-         jIeprkldfJogYG4tKYcHBmjCGP/hZvHtS5D3ljzgVTtx/kJstFdDDfhfRD0uEltEa8BF
-         MZww==
+        bh=U/xUYJDHb6Zn3w9TBBig7WhAk/AOSiMp9RlKr6dgP2E=;
+        b=WBY8nigApNSmOxzD+7scbd3868YkFxnn8b7pwhrODPFiLU07cxK5R0mkNXXZfMURlM
+         ZD4IJ6yTlCx3yBf2gjCDq9oGUfbUVkSAni1hka/qVnz9kIGHGgOtkOixeolk5TvTwBHY
+         h7raKAAVDR2rjvDrXxKndL5y32pZWd97YirxKo+V2r9dMdT2519P6BL6jyjIcmRZLDSb
+         CGyXv80wZfSUBvw920ZGYDLkSDu/woAUvJKxywCkQ5fwB5BnFgsg/fseS8MIU7wwmog4
+         qbix9sCs4VjwTkBrl3jkg6jvPJV7j9hNtUuRSDPrlCa1Jdk+8+2eZHChnw3a3wA9epIS
+         lpQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706548764; x=1707153564;
+        d=1e100.net; s=20230601; t=1706548770; x=1707153570;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=J9RFmP+aBqqH4SIR3Jn1WqEGTeAcNYfa+alt6ENH+Bw=;
-        b=V3YmO++8wF8RfeYX0N2R1xDNyinCFTGqf23A3CFSY3vw3DTfPA+DD6CCILqb/fx9R/
-         RE8WadWQlzTg7L8WzEriTRxPXX9uYsJ9GD7DXls1SKZrzYeaiSFz3eJj+yHIm/WPCrD/
-         ZE8+qU0hVzLHztffDHMPF9JquTkuE5zEU7PrO5BBUD8m8hBvI228YkZDUiCBzNesPAW2
-         f2Cbn9We8kGeK+OiXOC+10HNMCEpj/V6dxTgihB6u1maAeB/COGPOfove+yrAIctbb9s
-         fW3pFzy4s70mGuhWCIi0a9ui2eTneCz5TmLujPas1YF1Rj9RN+xPvOKq8fbqIq8V64Ts
-         Yn0Q==
-X-Gm-Message-State: AOJu0YzSBdELRzDBFzULawDhgMSR4swDtixoVs9u339OzWiCuD2S5NJ0
-	ogH7tAQiSbK46I9X4n/gjvo+Epy0gCbD1x+hpEXF1GkCQ+1XIAz4TGrwCP+LVi9dIx8NE5ZMQNd
-	QY1o=
-X-Google-Smtp-Source: AGHT+IHKjEqoRTvmqUd5xzklE7o7VNS35XUcP7U5jcbyKHDOgRixQG2hSX8IN+N4vxxGKn3ZYTeWUQ==
-X-Received: by 2002:a05:6402:1b10:b0:55d:1eae:1e9f with SMTP id by16-20020a0564021b1000b0055d1eae1e9fmr4327297edb.15.1706548763994;
-        Mon, 29 Jan 2024 09:19:23 -0800 (PST)
+        bh=U/xUYJDHb6Zn3w9TBBig7WhAk/AOSiMp9RlKr6dgP2E=;
+        b=bOIs7Jz2UfenoToX3HFYiTacoeegj/05+eksfmChY6KKcaQ9xBzIwf2KLFAxREH23Z
+         GVrdVHx06M/3uC/I1vvOoQO6LU5Yf+PsdGtepvmFU6L5NqB1WGrFUHGC9+7OGqpb668F
+         TYXtg8e5eHTnM9ePCNRPI/Pp4b6dcjo6wJYgOEaXQB+VIob7QBlOJyV+A9JQCtReoB6N
+         P9efU2LGhObA/KDG5jKsxNBCWFdnmwE1AqLEHkujXcgWdf6rj67pBExVqsaM/N3OqIAS
+         TfnFnLCfWtqsxZlyqT851dNDby+zerEu68na53R9eJiW0osgNi0nqcTrJoMRsAIgQoHj
+         qLjQ==
+X-Gm-Message-State: AOJu0YzhtG3xDpP3w8P14eZOts26G7Gpr3h9SjvIXH0hYbKuHdO+doMT
+	s0B8yCuKwEBRUMUQdqs0rma64EPnkilY7Kezn1AviV8yE6vUGHLdRKFHFRNdttc21G3XWgI6Oqp
+	Cp6Y=
+X-Google-Smtp-Source: AGHT+IFfyqAJQ8sAINSHdQQK6qqpoH3R0bcyfxPSeaYcI3S/L5NM69tIPus/nQPn5TvAizkT+NKrlg==
+X-Received: by 2002:a50:ec8d:0:b0:55f:1da7:62f6 with SMTP id e13-20020a50ec8d000000b0055f1da762f6mr1602730edr.13.1706548770565;
+        Mon, 29 Jan 2024 09:19:30 -0800 (PST)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrea.bastoni@minervasys.tech,
@@ -88,69 +88,41 @@ Cc: andrea.bastoni@minervasys.tech,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v6 08/15] xen/page_alloc: introduce init_free_page_fields() helper
-Date: Mon, 29 Jan 2024 18:18:04 +0100
-Message-Id: <20240129171811.21382-9-carlo.nonato@minervasys.tech>
+Subject: [PATCH v6 15/15] support: add cache coloring arm64 experimental feature
+Date: Mon, 29 Jan 2024 18:18:11 +0100
+Message-Id: <20240129171811.21382-16-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240129171811.21382-1-carlo.nonato@minervasys.tech>
 References: <20240129171811.21382-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce a new helper to initialize fields that have different uses for
-free pages.
-
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
 ---
 v6:
-- Carlo Nonato as the only signed-off-by
-v5:
 - new patch
 ---
- xen/common/page_alloc.c | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ SUPPORT.md | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 2f4f2859c4..2ec17df9b4 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -925,6 +925,13 @@ static struct page_info *get_free_buddy(unsigned int zone_lo,
-     }
- }
+diff --git a/SUPPORT.md b/SUPPORT.md
+index a90d1108c9..f94569c862 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -363,6 +363,13 @@ by maintaining multiple physical to machine (p2m) memory mappings.
+     Status, x86 HVM: Tech Preview
+     Status, ARM: Tech Preview
  
-+/* Initialise fields which have other uses for free pages. */
-+static void init_free_page_fields(struct page_info *pg)
-+{
-+    pg->u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
-+    page_set_owner(pg, NULL);
-+}
++### Cache coloring
 +
- /* Allocate 2^@order contiguous pages. */
- static struct page_info *alloc_heap_pages(
-     unsigned int zone_lo, unsigned int zone_hi,
-@@ -1033,10 +1040,7 @@ static struct page_info *alloc_heap_pages(
-             accumulate_tlbflush(&need_tlbflush, &pg[i],
-                                 &tlbflush_timestamp);
++Allows to reserve Last Level Cache (LLC) partitions for Dom0, DomUs and Xen
++itself.
++
++    Status, Arm64: Experimental
++
+ ## Resource Management
  
--        /* Initialise fields which have other uses for free pages. */
--        pg[i].u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
--        page_set_owner(&pg[i], NULL);
--
-+        init_free_page_fields(&pg[i]);
-     }
- 
-     spin_unlock(&heap_lock);
-@@ -2799,9 +2803,7 @@ static bool prepare_staticmem_pages(struct page_info *pg, unsigned long nr_mfns,
-          * to PGC_state_inuse.
-          */
-         pg[i].count_info = PGC_static | PGC_state_inuse;
--        /* Initialise fields which have other uses for free pages. */
--        pg[i].u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
--        page_set_owner(&pg[i], NULL);
-+        init_free_page_fields(&pg[i]);
-     }
- 
-     spin_unlock(&heap_lock);
+ ### CPU Pools
 -- 
 2.34.1
 
