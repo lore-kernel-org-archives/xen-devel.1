@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34204C47DDB
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jan 2024 17:19:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.673075.1047342 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C21C47DB3
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jan 2024 17:20:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.673077.1047376 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rUVIE-0000aY-Oz; Mon, 29 Jan 2024 17:19:34 +0000
+	id 1rUVIv-000667-A9; Mon, 29 Jan 2024 17:20:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 673075.1047342; Mon, 29 Jan 2024 17:19:34 +0000
+Received: by outflank-mailman (output) from mailman id 673077.1047376; Mon, 29 Jan 2024 17:20:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rUVIE-0000WX-41; Mon, 29 Jan 2024 17:19:34 +0000
-Received: by outflank-mailman (input) for mailman id 673075;
- Mon, 29 Jan 2024 17:19:32 +0000
+	id 1rUVIv-00065x-7R; Mon, 29 Jan 2024 17:20:17 +0000
+Received: by outflank-mailman (input) for mailman id 673077;
+ Mon, 29 Jan 2024 17:20:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Vh+I=JH=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1rUVIB-0005vY-O9
- for xen-devel@lists.xenproject.org; Mon, 29 Jan 2024 17:19:31 +0000
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [2a00:1450:4864:20::52f])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=rx5v=JH=suse.de=farosas@srs-se1.protection.inumbo.net>)
+ id 1rUVIt-00060i-H6
+ for xen-devel@lists.xenproject.org; Mon, 29 Jan 2024 17:20:15 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 900c0e81-beca-11ee-8a43-1f161083a0e0;
- Mon, 29 Jan 2024 18:19:30 +0100 (CET)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-55a5e7fa471so2925527a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jan 2024 09:19:30 -0800 (PST)
-Received: from carlo-ubuntu.mo54.unimo.it (nonato.mo54.unimo.it.
- [155.185.85.8]) by smtp.gmail.com with ESMTPSA id
- eo15-20020a056402530f00b005598ec568dbsm3970494edb.59.2024.01.29.09.19.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 09:19:29 -0800 (PST)
+ id a9ae3570-beca-11ee-8a43-1f161083a0e0;
+ Mon, 29 Jan 2024 18:20:13 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 806A721F92;
+ Mon, 29 Jan 2024 17:20:12 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id BDA5313647;
+ Mon, 29 Jan 2024 17:20:11 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id hRlBLkvet2VxYAAAD6G6ig
+ (envelope-from <farosas@suse.de>); Mon, 29 Jan 2024 17:20:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,658 +54,542 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 900c0e81-beca-11ee-8a43-1f161083a0e0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minervasys-tech.20230601.gappssmtp.com; s=20230601; t=1706548770; x=1707153570; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0I5n9NCJphRrFbEL84vyCPUVcS0YQhAxUDqpEr89QQ8=;
-        b=v51o/lv52+2ctSV5+aCTYifHDAsB7S/QxwUfHkH6EVZfAG+oTNAhKB4xPX0pwJHxJB
-         wqaywQk8Nosb1xBG8M76CcErI0LQV0qzKRYUAYGsd3q2TtZxGC+mMal29rb9pF+jQIAG
-         I6Hkin7pk2XF0sV0DOnZWGRGXtULv1Z9uYd9C/z1DI2MJAlr6aqiYc77Abpm+hRYdaV6
-         GZVglGgEEepz37Z7kVpeogs42eerai9X7XEynPpz5Fw9if82oC5JtsGyilLmwWCJ0yuP
-         KgrDrF+0SCtnPjzAdGy745bIkRDCzIWDZXr6Y1/ngV2aQMZ/AOyxv/T3ppwy7OXKw4+j
-         RlpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706548770; x=1707153570;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0I5n9NCJphRrFbEL84vyCPUVcS0YQhAxUDqpEr89QQ8=;
-        b=u63owWfXTh14Yk9j36OAjdAqKnVds1TGUgX/9lGpJC+IBiu0VWZRyYd/6mp8KEF0ZU
-         QI5yY/kvZGOUJLvfibir8VJrSDRiNwJVhdsQzku8EGeG5q7wjzgEueHAvOmZheQt9DmM
-         w9Kh0XaT7IC/dDsJ6DrunmbHfkg/ic7Q00yan4rc8QS5IoTRoLYV0vgiAZZn559Lgmex
-         LqAvHNO0pG710/Y24HMeIfpUKjjnfHcUHgsxUHFv9vZzS9GXSRZuE25dX9j50E4fEpRi
-         NvNXgK/+uIB21jIebMJYvvvJif3UG9FItPe1CHgZymoEzH8ZEQeXMi1P9Dua2iKO9n7V
-         /pHw==
-X-Gm-Message-State: AOJu0YxylS5PbW2DI/27KgHouduSqMs9O7Ms+32vBj936hVUacfnGHcs
-	ZlNpG68jqWqSqJXahgbFbxHJrrYuBGp1snJJuxeRGqIeVg4Zqn7++MeJVuRcQNhuuRHe5roKWI5
-	SFyU=
-X-Google-Smtp-Source: AGHT+IHlr451d+Zr7M9dKVnd80bpeZnjzImUXU9tmZOircuhovcZ785ez6CzE5coA4U5vM07nTHhmA==
-X-Received: by 2002:a05:6402:2692:b0:55c:7aa7:53a9 with SMTP id w18-20020a056402269200b0055c7aa753a9mr5133927edd.5.1706548769838;
-        Mon, 29 Jan 2024 09:19:29 -0800 (PST)
-From: Carlo Nonato <carlo.nonato@minervasys.tech>
-To: xen-devel@lists.xenproject.org
-Cc: andrea.bastoni@minervasys.tech,
-	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Marco Solieri <marco.solieri@minervasys.tech>
-Subject: [PATCH v6 14/15] xen/arm: add cache coloring support for Xen
-Date: Mon, 29 Jan 2024 18:18:10 +0100
-Message-Id: <20240129171811.21382-15-carlo.nonato@minervasys.tech>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240129171811.21382-1-carlo.nonato@minervasys.tech>
-References: <20240129171811.21382-1-carlo.nonato@minervasys.tech>
+X-Inumbo-ID: a9ae3570-beca-11ee-8a43-1f161083a0e0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1706548812; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6hJMzhBEMCKpgRG4wxS8YBfobz37mSA/+BPbvKdU2Cs=;
+	b=EzeWOlq9VkVrwwH9GXp4K8ejxz2nkDG+xFDKopp/2Z/HdEXm+JF+FMOFCZpltwlG2DPrK6
+	QjSeMqdDJtqdRJfEWeR0YC2iVb8dP6eSHjrYiYg31MnxcnjV3j58FuQvKWDdWGLDiGx0w5
+	NPrE7dM9E4wqNPscMMJdgkg5CtHYsFQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1706548812;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6hJMzhBEMCKpgRG4wxS8YBfobz37mSA/+BPbvKdU2Cs=;
+	b=HxUJGU4k19XN2tMk8ujL7WdjtgWi0jOESt8JFbQVTXJivzIUv7TyGvRNR6rG4/848s44FS
+	HA/zBFkYs069aYBw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1706548812; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6hJMzhBEMCKpgRG4wxS8YBfobz37mSA/+BPbvKdU2Cs=;
+	b=EzeWOlq9VkVrwwH9GXp4K8ejxz2nkDG+xFDKopp/2Z/HdEXm+JF+FMOFCZpltwlG2DPrK6
+	QjSeMqdDJtqdRJfEWeR0YC2iVb8dP6eSHjrYiYg31MnxcnjV3j58FuQvKWDdWGLDiGx0w5
+	NPrE7dM9E4wqNPscMMJdgkg5CtHYsFQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1706548812;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6hJMzhBEMCKpgRG4wxS8YBfobz37mSA/+BPbvKdU2Cs=;
+	b=HxUJGU4k19XN2tMk8ujL7WdjtgWi0jOESt8JFbQVTXJivzIUv7TyGvRNR6rG4/848s44FS
+	HA/zBFkYs069aYBw==
+From: Fabiano Rosas <farosas@suse.de>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, Paolo Bonzini
+ <pbonzini@redhat.com>, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
+ qemu-arm@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>, Zhao Liu
+ <zhao1.liu@intel.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@kaod.org>, Nicholas
+ Piggin <npiggin@gmail.com>, =?utf-8?B?RnLDqWTDqXJpYw==?= Barrat
+ <fbarrat@linux.ibm.com>, Alex
+ =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>, Viresh Kumar
+ <viresh.kumar@linaro.org>,
+ mzamazal@redhat.com, Stefano Stabellini <sstabellini@kernel.org>, Anthony
+ Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>, Peter Xu
+ <peterx@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Cameron
+ Esfahani <dirty@apple.com>, Roman Bolshakov <rbolshakov@ddn.com>, Laurent
+ Vivier <laurent@vivier.eu>, Daniel Henrique Barboza
+ <danielhb413@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair
+ Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v3 01/29] bulk: Access existing variables initialized to
+ &S->F when available
+In-Reply-To: <20240129164514.73104-2-philmd@linaro.org>
+References: <20240129164514.73104-1-philmd@linaro.org>
+ <20240129164514.73104-2-philmd@linaro.org>
+Date: Mon, 29 Jan 2024 14:20:09 -0300
+Message-ID: <875xzcoy46.fsf@suse.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=EzeWOlq9;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=HxUJGU4k
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	 TO_DN_SOME(0.00)[];
+	 R_RATELIMIT(0.00)[to_ip_from(RLur6zqgge5zak3uenq87ipfaa)];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 DKIM_TRACE(0.00)[suse.de:+];
+	 MX_GOOD(-0.01)[];
+	 NEURAL_HAM_SHORT(-0.20)[-1.000];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 MID_RHS_MATCH_FROM(0.00)[];
+	 BAYES_HAM(-3.00)[100.00%];
+	 ARC_NA(0.00)[];
+	 R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	 FROM_HAS_DN(0.00)[];
+	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 TAGGED_RCPT(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 NEURAL_HAM_LONG(-1.00)[-1.000];
+	 DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	 RCPT_COUNT_TWELVE(0.00)[35];
+	 DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,linaro.org:email,suse.de:dkim,suse.de:email];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FREEMAIL_CC(0.00)[nongnu.org,redhat.com,vger.kernel.org,linaro.org,intel.com,ilande.co.uk,gmail.com,kaod.org,linux.ibm.com,kernel.org,citrix.com,xen.org,apple.com,ddn.com,vivier.eu,dabbelt.com,wdc.com,windriver.com,linux.alibaba.com,lists.xenproject.org];
+	 RCVD_TLS_ALL(0.00)[];
+	 SUSPICIOUS_RECIPS(1.50)[]
+X-Rspamd-Queue-Id: 806A721F92
 
-Add the cache coloring support for Xen physical space.
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
 
-Since Xen must be relocated to a new physical space, some relocation
-functionalities must be brought back:
-- the virtual address of the new space is taken from 0c18fb76323b
-  ("xen/arm: Remove unused BOOT_RELOC_VIRT_START").
-- relocate_xen() and get_xen_paddr() are taken from f60658c6ae47
-  ("xen/arm: Stop relocating Xen").
+> When a variable is initialized to &struct->field, use it
+> in place. Rationale: while this makes the code more concise,
+> this also helps static analyzers.
+>
+> Mechanical change using the following Coccinelle spatch script:
+>
+>  @@
+>  type S, F;
+>  identifier s, m, v;
+>  @@
+>       S *s;
+>       ...
+>       F *v =3D &s->m;
+>       <+...
+>  -    &s->m
+>  +    v
+>       ...+>
+>
+> Inspired-by: Zhao Liu <zhao1.liu@intel.com>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-setup_pagetables() must be adapted for coloring and for relocation. Runtime
-page tables are used to map the colored space, but they are also linked in
-boot tables so that the new space is temporarily available for relocation.
-This implies that Xen protection must happen after the copy.
+Acked-by: Fabiano Rosas <farosas@suse.de>
 
-Finally, since the alternative framework needs to remap the Xen text and
-inittext sections, this operation must be done in a coloring-aware way.
-The function xen_remap_colored() is introduced for that.
-
-Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
----
-v6:
-- squashed with BOOT_RELOC_VIRT_START patch
-- consider_modules() moved in another patch
-- removed psci and smpboot code because of new idmap work already handles that
-- moved xen_remap_colored() in alternative.c since it's only used there
-- removed xen_colored_temp[] in favor of xen_xenmap[] usage for mapping
-- use of boot_module_find_by_kind() to remove the need of extra parameter in
-  setup_pagetables()
-- moved get_xen_paddr() in arm/llc-coloring.c since it's only used there
-v5:
-- FIXME: consider_modules copy pasted since it got moved
-v4:
-- removed set_value_for_secondary() because it was wrongly cleaning cache
-- relocate_xen() now calls switch_ttbr_id()
----
- xen/arch/arm/alternative.c            | 30 ++++++++-
- xen/arch/arm/arm64/mmu/head.S         | 57 +++++++++++++++-
- xen/arch/arm/arm64/mmu/mm.c           | 28 ++++++--
- xen/arch/arm/include/asm/mmu/layout.h |  3 +
- xen/arch/arm/llc-coloring.c           | 61 ++++++++++++++++-
- xen/arch/arm/mmu/setup.c              | 97 ++++++++++++++++++++++++---
- xen/arch/arm/setup.c                  |  5 +-
- xen/common/llc-coloring.c             | 23 +++++++
- xen/include/xen/llc-coloring.h        | 14 ++++
- 9 files changed, 299 insertions(+), 19 deletions(-)
-
-diff --git a/xen/arch/arm/alternative.c b/xen/arch/arm/alternative.c
-index 016e66978b..a6b0794d80 100644
---- a/xen/arch/arm/alternative.c
-+++ b/xen/arch/arm/alternative.c
-@@ -9,6 +9,7 @@
- #include <xen/init.h>
- #include <xen/types.h>
- #include <xen/kernel.h>
-+#include <xen/llc-coloring.h>
- #include <xen/mm.h>
- #include <xen/vmap.h>
- #include <xen/smp.h>
-@@ -191,6 +192,27 @@ static int __apply_alternatives_multi_stop(void *xenmap)
-     return 0;
- }
- 
-+static void __init *xen_remap_colored(mfn_t xen_mfn, paddr_t xen_size)
-+{
-+    unsigned int i;
-+    void *xenmap;
-+    mfn_t *xen_colored_mfns;
-+
-+    xen_colored_mfns = xmalloc_array(mfn_t, xen_size >> PAGE_SHIFT);
-+    if ( !xen_colored_mfns )
-+        panic("Can't allocate LLC colored MFNs\n");
-+
-+    for_each_xen_colored_mfn( xen_mfn, i )
-+    {
-+        xen_colored_mfns[i] = xen_mfn;
-+    }
-+
-+    xenmap = vmap(xen_colored_mfns, xen_size >> PAGE_SHIFT);
-+    xfree(xen_colored_mfns);
-+
-+    return xenmap;
-+}
-+
- /*
-  * This function should only be called during boot and before CPU0 jump
-  * into the idle_loop.
-@@ -209,8 +231,12 @@ void __init apply_alternatives_all(void)
-      * The text and inittext section are read-only. So re-map Xen to
-      * be able to patch the code.
-      */
--    xenmap = __vmap(&xen_mfn, 1U << xen_order, 1, 1, PAGE_HYPERVISOR,
--                    VMAP_DEFAULT);
-+    if ( llc_coloring_enabled )
-+        xenmap = xen_remap_colored(xen_mfn, xen_size);
-+    else
-+        xenmap = __vmap(&xen_mfn, 1U << xen_order, 1, 1, PAGE_HYPERVISOR,
-+                        VMAP_DEFAULT);
-+
-     /* Re-mapping Xen is not expected to fail during boot. */
-     BUG_ON(!xenmap);
- 
-diff --git a/xen/arch/arm/arm64/mmu/head.S b/xen/arch/arm/arm64/mmu/head.S
-index fa40b696dd..7926849ab1 100644
---- a/xen/arch/arm/arm64/mmu/head.S
-+++ b/xen/arch/arm/arm64/mmu/head.S
-@@ -427,6 +427,60 @@ fail:   PRINT("- Boot failed -\r\n")
-         b     1b
- ENDPROC(fail)
- 
-+/*
-+ * Copy Xen to new location and switch TTBR
-+ * x0    ttbr
-+ * x1    source address
-+ * x2    destination address
-+ * x3    length
-+ *
-+ * Source and destination must be word aligned, length is rounded up
-+ * to a 16 byte boundary.
-+ *
-+ * MUST BE VERY CAREFUL when saving things to RAM over the copy
-+ */
-+ENTRY(relocate_xen)
-+        /*
-+         * Copy 16 bytes at a time using:
-+         *   x9: counter
-+         *   x10: data
-+         *   x11: data
-+         *   x12: source
-+         *   x13: destination
-+         */
-+        mov     x9, x3
-+        mov     x12, x1
-+        mov     x13, x2
-+
-+1:      ldp     x10, x11, [x12], #16
-+        stp     x10, x11, [x13], #16
-+
-+        subs    x9, x9, #16
-+        bgt     1b
-+
-+        /*
-+         * Flush destination from dcache using:
-+         *   x9: counter
-+         *   x10: step
-+         *   x11: vaddr
-+         *
-+         * This is to ensure data is visible to the instruction cache
-+         */
-+        dsb   sy
-+
-+        mov   x9, x3
-+        ldr   x10, =dcache_line_bytes /* x10 := step */
-+        ldr   x10, [x10]
-+        mov   x11, x2
-+
-+1:      dc    cvac, x11
-+
-+        add   x11, x11, x10
-+        subs  x9, x9, x10
-+        bgt   1b
-+
-+        b switch_ttbr_id
-+
- /*
-  * Switch TTBR
-  *
-@@ -452,7 +506,8 @@ ENTRY(switch_ttbr_id)
- 
-         /*
-          * 5) Flush I-cache
--         * This should not be necessary but it is kept for safety.
-+         * This should not be necessary in the general case, but it's needed
-+         * for cache coloring because in that case code is relocated.
-          */
-         ic     iallu
-         isb
-diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
-index d2651c9486..07cf8040a2 100644
---- a/xen/arch/arm/arm64/mmu/mm.c
-+++ b/xen/arch/arm/arm64/mmu/mm.c
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0 */
- 
- #include <xen/init.h>
-+#include <xen/llc-coloring.h>
- #include <xen/mm.h>
- #include <xen/pfn.h>
- 
-@@ -125,27 +126,46 @@ void update_identity_mapping(bool enable)
- }
- 
- extern void switch_ttbr_id(uint64_t ttbr);
-+extern void relocate_xen(uint64_t ttbr, void *src, void *dst, size_t len);
- 
- typedef void (switch_ttbr_fn)(uint64_t ttbr);
-+typedef void (relocate_xen_fn)(uint64_t ttbr, void *src, void *dst, size_t len);
- 
- void __init switch_ttbr(uint64_t ttbr)
- {
--    vaddr_t id_addr = virt_to_maddr(switch_ttbr_id);
--    switch_ttbr_fn *fn = (switch_ttbr_fn *)id_addr;
-+    vaddr_t vaddr, id_addr;
-     lpae_t pte;
- 
-+    if ( llc_coloring_enabled )
-+        vaddr = (vaddr_t)relocate_xen;
-+    else
-+        vaddr = (vaddr_t)switch_ttbr_id;
-+
-+    id_addr = virt_to_maddr(vaddr);
-+
-     /* Enable the identity mapping in the boot page tables */
-     update_identity_mapping(true);
- 
-     /* Enable the identity mapping in the runtime page tables */
--    pte = pte_of_xenaddr((vaddr_t)switch_ttbr_id);
-+    pte = pte_of_xenaddr(vaddr);
-     pte.pt.table = 1;
-     pte.pt.xn = 0;
-     pte.pt.ro = 1;
-     write_pte(&xen_third_id[third_table_offset(id_addr)], pte);
- 
-     /* Switch TTBR */
--    fn(ttbr);
-+    if ( llc_coloring_enabled )
-+    {
-+        relocate_xen_fn *fn = (relocate_xen_fn *)id_addr;
-+
-+        fn(ttbr, _start, (void *)BOOT_RELOC_VIRT_START, _end - _start);
-+    }
-+    else
-+    {
-+        switch_ttbr_fn *fn = (switch_ttbr_fn *)id_addr;
-+
-+        fn(ttbr);
-+    }
- 
-     /*
-      * Disable the identity mapping in the runtime page tables.
-diff --git a/xen/arch/arm/include/asm/mmu/layout.h b/xen/arch/arm/include/asm/mmu/layout.h
-index a3b546465b..7228c9fb82 100644
---- a/xen/arch/arm/include/asm/mmu/layout.h
-+++ b/xen/arch/arm/include/asm/mmu/layout.h
-@@ -30,6 +30,7 @@
-  *  10M -  12M   Fixmap: special-purpose 4K mapping slots
-  *  12M -  16M   Early boot mapping of FDT
-  *  16M -  18M   Livepatch vmap (if compiled in)
-+ *  16M -  22M   Cache-colored Xen text, data, bss (temporary, if compiled in)
-  *
-  *   1G -   2G   VMAP: ioremap and early_ioremap
-  *
-@@ -74,6 +75,8 @@
- #define BOOT_FDT_VIRT_START     (FIXMAP_VIRT_START + FIXMAP_VIRT_SIZE)
- #define BOOT_FDT_VIRT_SIZE      _AT(vaddr_t, MB(4))
- 
-+#define BOOT_RELOC_VIRT_START   (BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE)
-+
- #ifdef CONFIG_LIVEPATCH
- #define LIVEPATCH_VMAP_START    (BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE)
- #define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
-diff --git a/xen/arch/arm/llc-coloring.c b/xen/arch/arm/llc-coloring.c
-index eee1e80e2d..bbb39214a8 100644
---- a/xen/arch/arm/llc-coloring.c
-+++ b/xen/arch/arm/llc-coloring.c
-@@ -9,6 +9,7 @@
- 
- #include <asm/processor.h>
- #include <asm/sysregs.h>
-+#include <asm/setup.h>
- 
- /* Return the LLC way size by probing the hardware */
- unsigned int __init get_llc_way_size(void)
-@@ -62,7 +63,65 @@ unsigned int __init get_llc_way_size(void)
-     return line_size * num_sets;
- }
- 
--void __init arch_llc_coloring_init(void) {}
-+/**
-+ * get_xen_paddr - get physical address to relocate Xen to
-+ *
-+ * Xen is relocated to as near to the top of RAM as possible and
-+ * aligned to a XEN_PADDR_ALIGN boundary.
-+ */
-+static paddr_t __init get_xen_paddr(uint32_t xen_size)
-+{
-+    struct meminfo *mi = &bootinfo.mem;
-+    paddr_t min_size;
-+    paddr_t paddr = 0;
-+    int i;
-+
-+    min_size = (xen_size + (XEN_PADDR_ALIGN-1)) & ~(XEN_PADDR_ALIGN-1);
-+
-+    /* Find the highest bank with enough space. */
-+    for ( i = 0; i < mi->nr_banks; i++ )
-+    {
-+        const struct membank *bank = &mi->bank[i];
-+        paddr_t s, e;
-+
-+        if ( bank->size >= min_size )
-+        {
-+            e = consider_modules(bank->start, bank->start + bank->size,
-+                                 min_size, XEN_PADDR_ALIGN, 0);
-+            if ( !e )
-+                continue;
-+
-+#ifdef CONFIG_ARM_32
-+            /* Xen must be under 4GB */
-+            if ( e > 0x100000000ULL )
-+                e = 0x100000000ULL;
-+            if ( e < bank->start )
-+                continue;
-+#endif
-+
-+            s = e - min_size;
-+
-+            if ( s > paddr )
-+                paddr = s;
-+        }
-+    }
-+
-+    if ( !paddr )
-+        panic("Not enough memory to relocate Xen\n");
-+
-+    printk("Placing Xen at 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
-+           paddr, paddr + min_size);
-+
-+    return paddr;
-+}
-+
-+void __init arch_llc_coloring_init(void)
-+{
-+    struct bootmodule *xen_bootmodule = boot_module_find_by_kind(BOOTMOD_XEN);
-+
-+    xen_bootmodule->size = xen_colored_map_size();
-+    xen_bootmodule->start = get_xen_paddr(xen_bootmodule->size);
-+}
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
-index 72725840b6..f3e4f6c304 100644
---- a/xen/arch/arm/mmu/setup.c
-+++ b/xen/arch/arm/mmu/setup.c
-@@ -7,6 +7,7 @@
- 
- #include <xen/init.h>
- #include <xen/libfdt/libfdt.h>
-+#include <xen/llc-coloring.h>
- #include <xen/sizes.h>
- #include <xen/vmap.h>
- 
-@@ -15,6 +16,11 @@
- /* Override macros from asm/page.h to make them work with mfn_t */
- #undef mfn_to_virt
- #define mfn_to_virt(mfn) __mfn_to_virt(mfn_x(mfn))
-+#undef virt_to_mfn
-+#define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
-+
-+#define virt_to_reloc_virt(virt) \
-+    (((vaddr_t)virt) - XEN_VIRT_START + BOOT_RELOC_VIRT_START)
- 
- /* Main runtime page tables */
- 
-@@ -69,6 +75,7 @@ static void __init __maybe_unused build_assertions(void)
-     /* 2MB aligned regions */
-     BUILD_BUG_ON(XEN_VIRT_START & ~SECOND_MASK);
-     BUILD_BUG_ON(FIXMAP_ADDR(0) & ~SECOND_MASK);
-+    BUILD_BUG_ON(BOOT_RELOC_VIRT_START & ~SECOND_MASK);
-     /* 1GB aligned regions */
- #ifdef CONFIG_ARM_32
-     BUILD_BUG_ON(XENHEAP_VIRT_START & ~FIRST_MASK);
-@@ -132,7 +139,12 @@ static void __init __maybe_unused build_assertions(void)
- 
- lpae_t __init pte_of_xenaddr(vaddr_t va)
- {
--    paddr_t ma = va + phys_offset;
-+    paddr_t ma;
-+
-+    if ( llc_coloring_enabled )
-+        ma = virt_to_maddr(virt_to_reloc_virt(va));
-+    else
-+        ma = va + phys_offset;
- 
-     return mfn_to_xen_entry(maddr_to_mfn(ma), MT_NORMAL);
- }
-@@ -218,9 +230,44 @@ static void xen_pt_enforce_wnx(void)
-     flush_xen_tlb_local();
- }
- 
-+static void __init create_llc_coloring_mappings(void)
-+{
-+    lpae_t pte;
-+    unsigned int i;
-+    struct bootmodule *xen_bootmodule = boot_module_find_by_kind(BOOTMOD_XEN);
-+    mfn_t mfn = maddr_to_mfn(xen_bootmodule->start);
-+
-+    for_each_xen_colored_mfn( mfn, i )
-+    {
-+        pte = mfn_to_xen_entry(mfn, MT_NORMAL);
-+        pte.pt.table = 1; /* level 3 mappings always have this bit set */
-+        xen_xenmap[i] = pte;
-+    }
-+
-+    for ( i = 0; i < XEN_NR_ENTRIES(2); i++ )
-+    {
-+        vaddr_t va = BOOT_RELOC_VIRT_START + (i << XEN_PT_LEVEL_SHIFT(2));
-+
-+        pte = mfn_to_xen_entry(virt_to_mfn(xen_xenmap +
-+                                           i * XEN_PT_LPAE_ENTRIES),
-+                               MT_NORMAL);
-+        pte.pt.table = 1;
-+        write_pte(&boot_second[second_table_offset(va)], pte);
-+    }
-+}
-+
- /*
-- * Boot-time pagetable setup.
-+ * Boot-time pagetable setup with coloring support
-  * Changes here may need matching changes in head.S
-+ *
-+ * The cache coloring support consists of:
-+ * - Create colored mapping that conforms to Xen color selection in xen_xenmap[]
-+ * - Link the mapping in boot page tables using BOOT_RELOC_VIRT_START as vaddr
-+ * - pte_of_xenaddr() takes care of translating addresses to the new space
-+ *   during runtime page tables creation
-+ * - Relocate xen and update TTBR with the new address in the colored space
-+ *   (see switch_ttbr())
-+ * - Protect the new space
-  */
- void __init setup_pagetables(unsigned long boot_phys_offset)
- {
-@@ -230,6 +277,9 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
- 
-     phys_offset = boot_phys_offset;
- 
-+    if ( llc_coloring_enabled )
-+        create_llc_coloring_mappings();
-+
-     arch_setup_page_tables();
- 
- #ifdef CONFIG_ARM_64
-@@ -257,13 +307,7 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
-             break;
-         pte = pte_of_xenaddr(va);
-         pte.pt.table = 1; /* third level mappings always have this bit set */
--        if ( is_kernel_text(va) || is_kernel_inittext(va) )
--        {
--            pte.pt.xn = 0;
--            pte.pt.ro = 1;
--        }
--        if ( is_kernel_rodata(va) )
--            pte.pt.ro = 1;
-+        pte.pt.xn = 0; /* Permissions will be enforced later. Allow execution */
-         xen_xenmap[i] = pte;
-     }
- 
-@@ -289,8 +333,43 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
-     ttbr = (uintptr_t) cpu0_pgtable + phys_offset;
- #endif
- 
-+    if ( llc_coloring_enabled )
-+        ttbr = virt_to_maddr(virt_to_reloc_virt(THIS_CPU_PGTABLE));
-+
-     switch_ttbr(ttbr);
- 
-+    /* Protect Xen */
-+    for ( i = 0; i < XEN_NR_ENTRIES(3); i++ )
-+    {
-+        vaddr_t va = XEN_VIRT_START + (i << PAGE_SHIFT);
-+        lpae_t *entry = xen_xenmap + i;
-+
-+        if ( !is_kernel(va) )
-+            break;
-+
-+        pte = read_atomic(entry);
-+
-+        if ( is_kernel_text(va) || is_kernel_inittext(va) )
-+        {
-+            pte.pt.xn = 0;
-+            pte.pt.ro = 1;
-+        } else if ( is_kernel_rodata(va) ) {
-+            pte.pt.ro = 1;
-+            pte.pt.xn = 1;
-+        } else {
-+            pte.pt.xn = 1;
-+            pte.pt.ro = 0;
-+        }
-+
-+        write_pte(entry, pte);
-+    }
-+
-+    /*
-+     * We modified live page-tables. Ensure the TBLs are invalidated
-+     * before setting enforcing the WnX permissions.
-+     */
-+    flush_xen_tlb_local();
-+
-     xen_pt_enforce_wnx();
- 
- #ifdef CONFIG_ARM_32
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 28f4761705..64a449f78d 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -816,8 +816,6 @@ void asmlinkage __init start_xen(unsigned long boot_phys_offset,
-     /* Initialize traps early allow us to get backtrace when an error occurred */
-     init_traps();
- 
--    setup_pagetables(boot_phys_offset);
--
-     smp_clear_cpu_maps();
- 
-     device_tree_flattened = early_fdt_map(fdt_paddr);
-@@ -841,6 +839,9 @@ void asmlinkage __init start_xen(unsigned long boot_phys_offset,
- 
-     llc_coloring_init();
- 
-+    setup_pagetables(boot_phys_offset);
-+    device_tree_flattened = early_fdt_map(fdt_paddr);
-+
-     setup_mm();
- 
-     /* Parse the ACPI tables for possible boot-time configuration */
-diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-index dace881b55..c0c4ce47bf 100644
---- a/xen/common/llc-coloring.c
-+++ b/xen/common/llc-coloring.c
-@@ -29,6 +29,8 @@ static unsigned int __ro_after_init xen_num_colors;
- 
- #define mfn_color_mask              (max_nr_colors - 1)
- #define mfn_to_color(mfn)           (mfn_x(mfn) & mfn_color_mask)
-+#define mfn_set_color(mfn, color)   (_mfn((mfn_x(mfn) & ~mfn_color_mask) | \
-+                                     (color)))
- 
- /*
-  * Parse the coloring configuration given in the buf string, following the
-@@ -316,6 +318,27 @@ unsigned int get_max_nr_llc_colors(void)
-     return max_nr_colors;
- }
- 
-+paddr_t __init xen_colored_map_size(void)
-+{
-+    return ROUNDUP((_end - _start) * max_nr_colors, XEN_PADDR_ALIGN);
-+}
-+
-+mfn_t __init xen_colored_mfn(mfn_t mfn)
-+{
-+    unsigned int i, color = mfn_to_color(mfn);
-+
-+    for( i = 0; i < xen_num_colors; i++ )
-+    {
-+        if ( color == xen_colors[i] )
-+            return mfn;
-+        else if ( color < xen_colors[i] )
-+            return mfn_set_color(mfn, xen_colors[i]);
-+    }
-+
-+    /* Jump to next color space (max_nr_colors mfns) and use the first color */
-+    return mfn_set_color(mfn_add(mfn, max_nr_colors), xen_colors[0]);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
-index b96a7134ed..5cb560d75d 100644
---- a/xen/include/xen/llc-coloring.h
-+++ b/xen/include/xen/llc-coloring.h
-@@ -24,6 +24,17 @@ static inline void domain_llc_coloring_free(struct domain *d) {}
- static inline void domain_dump_llc_colors(const struct domain *d) {}
- #endif
- 
-+/**
-+ * Iterate over each Xen mfn in the colored space.
-+ * @mfn:    the current mfn. The first non colored mfn must be provided as the
-+ *          starting point.
-+ * @i:      loop index.
-+ */
-+#define for_each_xen_colored_mfn(mfn, i)        \
-+    for ( i = 0, mfn = xen_colored_mfn(mfn);    \
-+          i < (_end - _start) >> PAGE_SHIFT;    \
-+          i++, mfn = xen_colored_mfn(mfn_add(mfn, 1)) )
-+
- unsigned int get_llc_way_size(void);
- void arch_llc_coloring_init(void);
- int dom0_set_llc_colors(struct domain *d);
-@@ -35,6 +46,9 @@ struct page_info;
- unsigned int page_to_llc_color(const struct page_info *pg);
- unsigned int get_max_nr_llc_colors(void);
- 
-+paddr_t xen_colored_map_size(void);
-+mfn_t xen_colored_mfn(mfn_t mfn);
-+
- #endif /* __COLORING_H__ */
- 
- /*
--- 
-2.34.1
-
+> ---
+>  hw/display/ati.c              |  2 +-
+>  hw/misc/macio/pmu.c           |  2 +-
+>  hw/misc/pvpanic-pci.c         |  2 +-
+>  hw/pci-bridge/cxl_root_port.c |  2 +-
+>  hw/ppc/pnv.c                  | 20 ++++++++++----------
+>  hw/virtio/vhost-user-gpio.c   |  8 ++++----
+>  hw/virtio/vhost-user-scmi.c   |  6 +++---
+>  hw/virtio/virtio-pci.c        |  2 +-
+>  hw/xen/xen_pt.c               |  6 +++---
+>  migration/multifd-zlib.c      |  2 +-
+>  target/arm/cpu.c              |  4 ++--
+>  target/arm/kvm.c              |  2 +-
+>  target/arm/machine.c          |  6 +++---
+>  target/i386/hvf/x86hvf.c      |  2 +-
+>  target/m68k/helper.c          |  2 +-
+>  target/ppc/kvm.c              |  8 ++++----
+>  target/riscv/cpu_helper.c     |  2 +-
+>  17 files changed, 39 insertions(+), 39 deletions(-)
+>
+> diff --git a/hw/display/ati.c b/hw/display/ati.c
+> index 569b8f6165..8d2501bd82 100644
+> --- a/hw/display/ati.c
+> +++ b/hw/display/ati.c
+> @@ -991,7 +991,7 @@ static void ati_vga_realize(PCIDevice *dev, Error **e=
+rrp)
+>      }
+>      vga_init(vga, OBJECT(s), pci_address_space(dev),
+>               pci_address_space_io(dev), true);
+> -    vga->con =3D graphic_console_init(DEVICE(s), 0, s->vga.hw_ops, &s->v=
+ga);
+> +    vga->con =3D graphic_console_init(DEVICE(s), 0, s->vga.hw_ops, vga);
+>      if (s->cursor_guest_mode) {
+>          vga->cursor_invalidate =3D ati_cursor_invalidate;
+>          vga->cursor_draw_line =3D ati_cursor_draw_line;
+> diff --git a/hw/misc/macio/pmu.c b/hw/misc/macio/pmu.c
+> index e9a90da88f..7fe1c4e517 100644
+> --- a/hw/misc/macio/pmu.c
+> +++ b/hw/misc/macio/pmu.c
+> @@ -737,7 +737,7 @@ static void pmu_realize(DeviceState *dev, Error **err=
+p)
+>      timer_mod(s->one_sec_timer, s->one_sec_target);
+>=20=20
+>      if (s->has_adb) {
+> -        qbus_init(&s->adb_bus, sizeof(s->adb_bus), TYPE_ADB_BUS,
+> +        qbus_init(adb_bus, sizeof(s->adb_bus), TYPE_ADB_BUS,
+>                    dev, "adb.0");
+>          adb_register_autopoll_callback(adb_bus, pmu_adb_poll, s);
+>      }
+> diff --git a/hw/misc/pvpanic-pci.c b/hw/misc/pvpanic-pci.c
+> index c01e4ce864..83be95d0d2 100644
+> --- a/hw/misc/pvpanic-pci.c
+> +++ b/hw/misc/pvpanic-pci.c
+> @@ -48,7 +48,7 @@ static void pvpanic_pci_realizefn(PCIDevice *dev, Error=
+ **errp)
+>      PVPanicPCIState *s =3D PVPANIC_PCI_DEVICE(dev);
+>      PVPanicState *ps =3D &s->pvpanic;
+>=20=20
+> -    pvpanic_setup_io(&s->pvpanic, DEVICE(s), 2);
+> +    pvpanic_setup_io(ps, DEVICE(s), 2);
+>=20=20
+>      pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY, &ps->mr);
+>  }
+> diff --git a/hw/pci-bridge/cxl_root_port.c b/hw/pci-bridge/cxl_root_port.c
+> index 8f97697631..2cf2f7bf5f 100644
+> --- a/hw/pci-bridge/cxl_root_port.c
+> +++ b/hw/pci-bridge/cxl_root_port.c
+> @@ -175,7 +175,7 @@ static void cxl_rp_realize(DeviceState *dev, Error **=
+errp)
+>=20=20
+>      cxl_cstate->dvsec_offset =3D CXL_ROOT_PORT_DVSEC_OFFSET;
+>      cxl_cstate->pdev =3D pci_dev;
+> -    build_dvsecs(&crp->cxl_cstate);
+> +    build_dvsecs(cxl_cstate);
+>=20=20
+>      cxl_component_register_block_init(OBJECT(pci_dev), cxl_cstate,
+>                                        TYPE_CXL_ROOT_PORT);
+> diff --git a/hw/ppc/pnv.c b/hw/ppc/pnv.c
+> index 0297871bdd..202a569e27 100644
+> --- a/hw/ppc/pnv.c
+> +++ b/hw/ppc/pnv.c
+> @@ -1257,11 +1257,11 @@ static void pnv_chip_power8_realize(DeviceState *=
+dev, Error **errp)
+>      }
+>=20=20
+>      /* Processor Service Interface (PSI) Host Bridge */
+> -    object_property_set_int(OBJECT(&chip8->psi), "bar", PNV_PSIHB_BASE(c=
+hip),
+> +    object_property_set_int(OBJECT(psi8), "bar", PNV_PSIHB_BASE(chip),
+>                              &error_fatal);
+> -    object_property_set_link(OBJECT(&chip8->psi), ICS_PROP_XICS,
+> +    object_property_set_link(OBJECT(psi8), ICS_PROP_XICS,
+>                               OBJECT(chip8->xics), &error_abort);
+> -    if (!qdev_realize(DEVICE(&chip8->psi), NULL, errp)) {
+> +    if (!qdev_realize(DEVICE(psi8), NULL, errp)) {
+>          return;
+>      }
+>      pnv_xscom_add_subregion(chip, PNV_XSCOM_PSIHB_BASE,
+> @@ -1292,7 +1292,7 @@ static void pnv_chip_power8_realize(DeviceState *de=
+v, Error **errp)
+>      }
+>      pnv_xscom_add_subregion(chip, PNV_XSCOM_OCC_BASE, &chip8->occ.xscom_=
+regs);
+>      qdev_connect_gpio_out(DEVICE(&chip8->occ), 0,
+> -                          qdev_get_gpio_in(DEVICE(&chip8->psi), PSIHB_IR=
+Q_OCC));
+> +                          qdev_get_gpio_in(DEVICE(psi8), PSIHB_IRQ_OCC));
+>=20=20
+>      /* OCC SRAM model */
+>      memory_region_add_subregion(get_system_memory(), PNV_OCC_SENSOR_BASE=
+(chip),
+> @@ -1543,12 +1543,12 @@ static void pnv_chip_power9_realize(DeviceState *=
+dev, Error **errp)
+>                              &chip9->xive.xscom_regs);
+>=20=20
+>      /* Processor Service Interface (PSI) Host Bridge */
+> -    object_property_set_int(OBJECT(&chip9->psi), "bar", PNV9_PSIHB_BASE(=
+chip),
+> +    object_property_set_int(OBJECT(psi9), "bar", PNV9_PSIHB_BASE(chip),
+>                              &error_fatal);
+>      /* This is the only device with 4k ESB pages */
+> -    object_property_set_int(OBJECT(&chip9->psi), "shift", XIVE_ESB_4K,
+> +    object_property_set_int(OBJECT(psi9), "shift", XIVE_ESB_4K,
+>                              &error_fatal);
+> -    if (!qdev_realize(DEVICE(&chip9->psi), NULL, errp)) {
+> +    if (!qdev_realize(DEVICE(psi9), NULL, errp)) {
+>          return;
+>      }
+>      pnv_xscom_add_subregion(chip, PNV9_XSCOM_PSIHB_BASE,
+> @@ -1571,7 +1571,7 @@ static void pnv_chip_power9_realize(DeviceState *de=
+v, Error **errp)
+>      }
+>      pnv_xscom_add_subregion(chip, PNV9_XSCOM_OCC_BASE, &chip9->occ.xscom=
+_regs);
+>      qdev_connect_gpio_out(DEVICE(&chip9->occ), 0, qdev_get_gpio_in(
+> -                              DEVICE(&chip9->psi), PSIHB9_IRQ_OCC));
+> +                              DEVICE(psi9), PSIHB9_IRQ_OCC));
+>=20=20
+>      /* OCC SRAM model */
+>      memory_region_add_subregion(get_system_memory(), PNV9_OCC_SENSOR_BAS=
+E(chip),
+> @@ -1586,7 +1586,7 @@ static void pnv_chip_power9_realize(DeviceState *de=
+v, Error **errp)
+>      pnv_xscom_add_subregion(chip, PNV9_XSCOM_SBE_MBOX_BASE,
+>                              &chip9->sbe.xscom_mbox_regs);
+>      qdev_connect_gpio_out(DEVICE(&chip9->sbe), 0, qdev_get_gpio_in(
+> -                              DEVICE(&chip9->psi), PSIHB9_IRQ_PSU));
+> +                              DEVICE(psi9), PSIHB9_IRQ_PSU));
+>=20=20
+>      /* HOMER */
+>      object_property_set_link(OBJECT(&chip9->homer), "chip", OBJECT(chip),
+> @@ -1627,7 +1627,7 @@ static void pnv_chip_power9_realize(DeviceState *de=
+v, Error **errp)
+>                                          PNV9_XSCOM_I2CM_SIZE,
+>                                  &chip9->i2c[i].xscom_regs);
+>          qdev_connect_gpio_out(DEVICE(&chip9->i2c[i]), 0,
+> -                              qdev_get_gpio_in(DEVICE(&chip9->psi),
+> +                              qdev_get_gpio_in(DEVICE(psi9),
+>                                                 PSIHB9_IRQ_SBE_I2C));
+>      }
+>  }
+> diff --git a/hw/virtio/vhost-user-gpio.c b/hw/virtio/vhost-user-gpio.c
+> index a83437a5da..6d4e9200ff 100644
+> --- a/hw/virtio/vhost-user-gpio.c
+> +++ b/hw/virtio/vhost-user-gpio.c
+> @@ -79,9 +79,9 @@ static int vu_gpio_start(VirtIODevice *vdev)
+>       * set needed for the vhost configuration. The backend may also
+>       * apply backend_features when the feature set is sent.
+>       */
+> -    vhost_ack_features(&gpio->vhost_dev, feature_bits, vdev->guest_featu=
+res);
+> +    vhost_ack_features(vhost_dev, feature_bits, vdev->guest_features);
+>=20=20
+> -    ret =3D vhost_dev_start(&gpio->vhost_dev, vdev, false);
+> +    ret =3D vhost_dev_start(vhost_dev, vdev, false);
+>      if (ret < 0) {
+>          error_report("Error starting vhost-user-gpio: %d", ret);
+>          goto err_guest_notifiers;
+> @@ -94,7 +94,7 @@ static int vu_gpio_start(VirtIODevice *vdev)
+>       * enabling/disabling irqfd.
+>       */
+>      for (i =3D 0; i < gpio->vhost_dev.nvqs; i++) {
+> -        vhost_virtqueue_mask(&gpio->vhost_dev, vdev, i, false);
+> +        vhost_virtqueue_mask(vhost_dev, vdev, i, false);
+>      }
+>=20=20
+>      /*
+> @@ -114,7 +114,7 @@ static int vu_gpio_start(VirtIODevice *vdev)
+>  err_guest_notifiers:
+>      k->set_guest_notifiers(qbus->parent, gpio->vhost_dev.nvqs, false);
+>  err_host_notifiers:
+> -    vhost_dev_disable_notifiers(&gpio->vhost_dev, vdev);
+> +    vhost_dev_disable_notifiers(vhost_dev, vdev);
+>=20=20
+>      return ret;
+>  }
+> diff --git a/hw/virtio/vhost-user-scmi.c b/hw/virtio/vhost-user-scmi.c
+> index 918bb7dcf7..300847e672 100644
+> --- a/hw/virtio/vhost-user-scmi.c
+> +++ b/hw/virtio/vhost-user-scmi.c
+> @@ -56,9 +56,9 @@ static int vu_scmi_start(VirtIODevice *vdev)
+>          goto err_host_notifiers;
+>      }
+>=20=20
+> -    vhost_ack_features(&scmi->vhost_dev, feature_bits, vdev->guest_featu=
+res);
+> +    vhost_ack_features(vhost_dev, feature_bits, vdev->guest_features);
+>=20=20
+> -    ret =3D vhost_dev_start(&scmi->vhost_dev, vdev, true);
+> +    ret =3D vhost_dev_start(vhost_dev, vdev, true);
+>      if (ret < 0) {
+>          error_report("Error starting vhost-user-scmi: %d", ret);
+>          goto err_guest_notifiers;
+> @@ -71,7 +71,7 @@ static int vu_scmi_start(VirtIODevice *vdev)
+>       * enabling/disabling irqfd.
+>       */
+>      for (i =3D 0; i < scmi->vhost_dev.nvqs; i++) {
+> -        vhost_virtqueue_mask(&scmi->vhost_dev, vdev, i, false);
+> +        vhost_virtqueue_mask(vhost_dev, vdev, i, false);
+>      }
+>      return 0;
+>=20=20
+> diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c
+> index 1a7039fb0c..cb6940fc0e 100644
+> --- a/hw/virtio/virtio-pci.c
+> +++ b/hw/virtio/virtio-pci.c
+> @@ -1929,7 +1929,7 @@ static void virtio_pci_device_plugged(DeviceState *=
+d, Error **errp)
+>      bool modern_pio =3D proxy->flags & VIRTIO_PCI_FLAG_MODERN_PIO_NOTIFY;
+>      uint8_t *config;
+>      uint32_t size;
+> -    VirtIODevice *vdev =3D virtio_bus_get_device(&proxy->bus);
+> +    VirtIODevice *vdev =3D virtio_bus_get_device(bus);
+>=20=20
+>      /*
+>       * Virtio capabilities present without
+> diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
+> index 36e6f93c37..10ddf6bc91 100644
+> --- a/hw/xen/xen_pt.c
+> +++ b/hw/xen/xen_pt.c
+> @@ -710,7 +710,7 @@ static void xen_pt_destroy(PCIDevice *d) {
+>      uint8_t intx;
+>      int rc;
+>=20=20
+> -    if (machine_irq && !xen_host_pci_device_closed(&s->real_device)) {
+> +    if (machine_irq && !xen_host_pci_device_closed(host_dev)) {
+>          intx =3D xen_pt_pci_intx(s);
+>          rc =3D xc_domain_unbind_pt_irq(xen_xc, xen_domid, machine_irq,
+>                                       PT_IRQ_TYPE_PCI,
+> @@ -759,8 +759,8 @@ static void xen_pt_destroy(PCIDevice *d) {
+>          memory_listener_unregister(&s->io_listener);
+>          s->listener_set =3D false;
+>      }
+> -    if (!xen_host_pci_device_closed(&s->real_device)) {
+> -        xen_host_pci_device_put(&s->real_device);
+> +    if (!xen_host_pci_device_closed(host_dev)) {
+> +        xen_host_pci_device_put(host_dev);
+>      }
+>  }
+>  /* init */
+> diff --git a/migration/multifd-zlib.c b/migration/multifd-zlib.c
+> index 37ce48621e..237ee49928 100644
+> --- a/migration/multifd-zlib.c
+> +++ b/migration/multifd-zlib.c
+> @@ -75,7 +75,7 @@ static int zlib_send_setup(MultiFDSendParams *p, Error =
+**errp)
+>  err_free_zbuff:
+>      g_free(z->zbuff);
+>  err_deflate_end:
+> -    deflateEnd(&z->zs);
+> +    deflateEnd(zs);
+>  err_free_z:
+>      g_free(z);
+>      error_setg(errp, "multifd %u: %s", p->id, err_msg);
+> diff --git a/target/arm/cpu.c b/target/arm/cpu.c
+> index b60e103046..60ab8f3242 100644
+> --- a/target/arm/cpu.c
+> +++ b/target/arm/cpu.c
+> @@ -2087,7 +2087,7 @@ static void arm_cpu_realizefn(DeviceState *dev, Err=
+or **errp)
+>       * We rely on no XScale CPU having VFP so we can use the same bits i=
+n the
+>       * TB flags field for VECSTRIDE and XSCALE_CPAR.
+>       */
+> -    assert(arm_feature(&cpu->env, ARM_FEATURE_AARCH64) ||
+> +    assert(arm_feature(env, ARM_FEATURE_AARCH64) ||
+>             !cpu_isar_feature(aa32_vfp_simd, cpu) ||
+>             !arm_feature(env, ARM_FEATURE_XSCALE));
+>=20=20
+> @@ -2129,7 +2129,7 @@ static void arm_cpu_realizefn(DeviceState *dev, Err=
+or **errp)
+>      }
+>=20=20
+>      if (cpu->cfgend) {
+> -        if (arm_feature(&cpu->env, ARM_FEATURE_V7)) {
+> +        if (arm_feature(env, ARM_FEATURE_V7)) {
+>              cpu->reset_sctlr |=3D SCTLR_EE;
+>          } else {
+>              cpu->reset_sctlr |=3D SCTLR_B;
+> diff --git a/target/arm/kvm.c b/target/arm/kvm.c
+> index 81813030a5..ab85d628a8 100644
+> --- a/target/arm/kvm.c
+> +++ b/target/arm/kvm.c
+> @@ -1888,7 +1888,7 @@ int kvm_arch_init_vcpu(CPUState *cs)
+>          cpu->psci_version =3D QEMU_PSCI_VERSION_0_2;
+>          cpu->kvm_init_features[0] |=3D 1 << KVM_ARM_VCPU_PSCI_0_2;
+>      }
+> -    if (!arm_feature(&cpu->env, ARM_FEATURE_AARCH64)) {
+> +    if (!arm_feature(env, ARM_FEATURE_AARCH64)) {
+>          cpu->kvm_init_features[0] |=3D 1 << KVM_ARM_VCPU_EL1_32BIT;
+>      }
+>      if (!kvm_check_extension(cs->kvm_state, KVM_CAP_ARM_PMU_V3)) {
+> diff --git a/target/arm/machine.c b/target/arm/machine.c
+> index 9d7dbaea54..b2b39b2475 100644
+> --- a/target/arm/machine.c
+> +++ b/target/arm/machine.c
+> @@ -773,7 +773,7 @@ static int cpu_pre_load(void *opaque)
+>      env->irq_line_state =3D UINT32_MAX;
+>=20=20
+>      if (!kvm_enabled()) {
+> -        pmu_op_start(&cpu->env);
+> +        pmu_op_start(env);
+>      }
+>=20=20
+>      return 0;
+> @@ -871,11 +871,11 @@ static int cpu_post_load(void *opaque, int version_=
+id)
+>      }
+>=20=20
+>      if (!kvm_enabled()) {
+> -        pmu_op_finish(&cpu->env);
+> +        pmu_op_finish(env);
+>      }
+>=20=20
+>      if (tcg_enabled()) {
+> -        arm_rebuild_hflags(&cpu->env);
+> +        arm_rebuild_hflags(env);
+>      }
+>=20=20
+>      return 0;
+> diff --git a/target/i386/hvf/x86hvf.c b/target/i386/hvf/x86hvf.c
+> index 3b1ef5f49a..be2c46246e 100644
+> --- a/target/i386/hvf/x86hvf.c
+> +++ b/target/i386/hvf/x86hvf.c
+> @@ -408,7 +408,7 @@ bool hvf_inject_interrupts(CPUState *cs)
+>      if (!(env->hflags & HF_INHIBIT_IRQ_MASK) &&
+>          (cs->interrupt_request & CPU_INTERRUPT_HARD) &&
+>          (env->eflags & IF_MASK) && !(info & VMCS_INTR_VALID)) {
+> -        int line =3D cpu_get_pic_interrupt(&x86cpu->env);
+> +        int line =3D cpu_get_pic_interrupt(env);
+>          cs->interrupt_request &=3D ~CPU_INTERRUPT_HARD;
+>          if (line >=3D 0) {
+>              wvmcs(cs->accel->fd, VMCS_ENTRY_INTR_INFO, line |
+> diff --git a/target/m68k/helper.c b/target/m68k/helper.c
+> index 14508dfa11..a812f328a1 100644
+> --- a/target/m68k/helper.c
+> +++ b/target/m68k/helper.c
+> @@ -972,7 +972,7 @@ bool m68k_cpu_tlb_fill(CPUState *cs, vaddr address, i=
+nt size,
+>          access_type |=3D ACCESS_SUPER;
+>      }
+>=20=20
+> -    ret =3D get_physical_address(&cpu->env, &physical, &prot,
+> +    ret =3D get_physical_address(env, &physical, &prot,
+>                                 address, access_type, &page_size);
+>      if (likely(ret =3D=3D 0)) {
+>          tlb_set_page(cs, address & TARGET_PAGE_MASK,
+> diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+> index 26fa9d0575..b95a0b4928 100644
+> --- a/target/ppc/kvm.c
+> +++ b/target/ppc/kvm.c
+> @@ -635,8 +635,8 @@ static int kvm_put_fp(CPUState *cs)
+>=20=20
+>          for (i =3D 0; i < 32; i++) {
+>              uint64_t vsr[2];
+> -            uint64_t *fpr =3D cpu_fpr_ptr(&cpu->env, i);
+> -            uint64_t *vsrl =3D cpu_vsrl_ptr(&cpu->env, i);
+> +            uint64_t *fpr =3D cpu_fpr_ptr(env, i);
+> +            uint64_t *vsrl =3D cpu_vsrl_ptr(env, i);
+>=20=20
+>  #if HOST_BIG_ENDIAN
+>              vsr[0] =3D float64_val(*fpr);
+> @@ -704,8 +704,8 @@ static int kvm_get_fp(CPUState *cs)
+>=20=20
+>          for (i =3D 0; i < 32; i++) {
+>              uint64_t vsr[2];
+> -            uint64_t *fpr =3D cpu_fpr_ptr(&cpu->env, i);
+> -            uint64_t *vsrl =3D cpu_vsrl_ptr(&cpu->env, i);
+> +            uint64_t *fpr =3D cpu_fpr_ptr(env, i);
+> +            uint64_t *vsrl =3D cpu_vsrl_ptr(env, i);
+>=20=20
+>              reg.addr =3D (uintptr_t) &vsr;
+>              reg.id =3D vsx ? KVM_REG_PPC_VSR(i) : KVM_REG_PPC_FPR(i);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index c7cc7eb423..791435d628 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1200,7 +1200,7 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, =
+vaddr addr)
+>      CPURISCVState *env =3D &cpu->env;
+>      hwaddr phys_addr;
+>      int prot;
+> -    int mmu_idx =3D cpu_mmu_index(&cpu->env, false);
+> +    int mmu_idx =3D cpu_mmu_index(env, false);
+>=20=20
+>      if (get_physical_address(env, &phys_addr, &prot, addr, NULL, 0, mmu_=
+idx,
+>                               true, env->virt_enabled, true)) {
 
