@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96495C47258
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Jan 2024 10:43:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.673884.1048415 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B084C47258
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Jan 2024 10:44:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.673892.1048439 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rV83U-0001MO-8m; Wed, 31 Jan 2024 10:42:56 +0000
+	id 1rV84z-0002tj-Nf; Wed, 31 Jan 2024 10:44:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 673884.1048415; Wed, 31 Jan 2024 10:42:56 +0000
+Received: by outflank-mailman (output) from mailman id 673892.1048439; Wed, 31 Jan 2024 10:44:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rV83U-0001M4-3G; Wed, 31 Jan 2024 10:42:56 +0000
-Received: by outflank-mailman (input) for mailman id 673884;
- Wed, 31 Jan 2024 10:42:54 +0000
+	id 1rV84z-0002tc-K6; Wed, 31 Jan 2024 10:44:29 +0000
+Received: by outflank-mailman (input) for mailman id 673892;
+ Wed, 31 Jan 2024 10:44:28 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/tZP=JJ=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1rV83S-0001KI-KH
- for xen-devel@lists.xenproject.org; Wed, 31 Jan 2024 10:42:54 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
+ <SRS0=UyAi=JJ=cloud.com=christian.lindig@srs-se1.protection.inumbo.net>)
+ id 1rV84y-0002tS-JS
+ for xen-devel@lists.xenproject.org; Wed, 31 Jan 2024 10:44:28 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7d08452e-c025-11ee-8a43-1f161083a0e0;
- Wed, 31 Jan 2024 11:42:54 +0100 (CET)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-33ae3be1c37so435100f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 31 Jan 2024 02:42:54 -0800 (PST)
-Received: from fedora39.edvint-x-u ([185.25.67.249])
+ id b4ec2b61-c025-11ee-8a43-1f161083a0e0;
+ Wed, 31 Jan 2024 11:44:27 +0100 (CET)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a26ed1e05c7so628240266b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 31 Jan 2024 02:44:27 -0800 (PST)
+Received: from smtpclient.apple ([160.101.139.1])
  by smtp.gmail.com with ESMTPSA id
- bk24-20020a0560001d9800b0033add8aa1d2sm12678460wrb.44.2024.01.31.02.42.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 02:42:53 -0800 (PST)
+ hw20-20020a170907a0d400b00a2b1a20e662sm6051072ejc.34.2024.01.31.02.44.26
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 31 Jan 2024 02:44:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,106 +47,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7d08452e-c025-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: b4ec2b61-c025-11ee-8a43-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1706697773; x=1707302573; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=cloud.com; s=cloud; t=1706697867; x=1707302667; darn=lists.xenproject.org;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MlDvwn/xwDXSCmMe/kTB137wQ3seg5CSZJxIiCw9FZo=;
-        b=j1sd6Mzi5UQALwEyeHj+zbX+aRiZE35shJBgvILgYF0Wkyqp6txXJvCxpS3M3ThgoG
-         nuuHAdsr9UHpQ5ZfhV9LvVYmOxCKpOIcoKghy5wIylGy+yHr3RnMgbl2SfxURzax5tWO
-         Nby4/25tzLwuOOjo2JkDyw3bCP/GAcmOTHEhY=
+        bh=L9xYwjpFTBl2Zy2qetzGXiASmifk2rE7lsmZclrwvaA=;
+        b=AnqmVZX83iYDmcBmnXC/g7IC1bdG3AUpGg/VCw0tqfqxH84mvOx2+JiRfGMgeyFK9v
+         Yncre/SNk16YZ6UNY1kIImI8SkXykUitAQcDXJXHLgGeYOVWlfctzKUCA4jzUAx8/9J2
+         i+vfFSIlg63Q6eO6JslyBmyI1I34Kz21aUIGI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706697773; x=1707302573;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1706697867; x=1707302667;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MlDvwn/xwDXSCmMe/kTB137wQ3seg5CSZJxIiCw9FZo=;
-        b=q9gx4wHO83XB8GX+hlMHyyU9xMlXQMi7UghmfCppWQ8tu//+pL85KV+N2sh3iNeXjC
-         e/6AN4yFel3NeLmj25kf87xiSMrpLJ6rawpUXREBpKhLZYlJgX+A4cAcNBcSDzKdsWjx
-         fGtZzvsFDVOvn3cOD99imzZk6sO+XDgXArgWYETGrRxcFhXZt6PjWbezyk1xgpCAEu27
-         VCLEnXMzACtVul5z7Azu1cnuEp1SFD4//ZJWzdiqdPVaAs6R+cKfC46Ks3zpB+5tFivR
-         G9ct1mlFbqdIIgqxwFdMopMVrPl7s4pQFC4uKuPIvyxqPYquIu59N2+1/Uf7KbJ0S3eW
-         pCuQ==
-X-Gm-Message-State: AOJu0YxIyHD1QHOg1ga1ux9XMtV4o4ViIESh7w0pCoZE0mgzf9jYdbPg
-	bCS+jXE9DVhdLoi40TNeBUj5OUtoyZn8DqlpVdjL0LoKdlEhXE0zHdbXCzhFLCadxcoH/bYi7ds
-	W910Ulw==
-X-Google-Smtp-Source: AGHT+IHPOLG0f2wML2y1vEWWVQlreaVZFlkpTOFcDLELLu7QDtb5Y/usbHBFd0fIOHfswto+nNh0Wg==
-X-Received: by 2002:a5d:664d:0:b0:33b:147:7c61 with SMTP id f13-20020a5d664d000000b0033b01477c61mr1301751wrw.5.1706697773360;
-        Wed, 31 Jan 2024 02:42:53 -0800 (PST)
-From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>
-Subject: [PATCH v1 1/2] oxenstored: fix build on OCaml 5.x
-Date: Wed, 31 Jan 2024 10:42:48 +0000
-Message-ID: <e3a8e4361f7e06b61660a4eeeb17f16555a07c6e.1706697216.git.edwin.torok@cloud.com>
-X-Mailer: git-send-email 2.43.0
+        bh=L9xYwjpFTBl2Zy2qetzGXiASmifk2rE7lsmZclrwvaA=;
+        b=Vj0+BnunJwjrgQLFA0ai43HKIgG66NLZvuREaKWlH+mRVyeJ9VuKgoZ9RtDjpzZrfb
+         cBXWjeeVItPi3qBPtGefTuaCqquoyuamGXt1069P8JbdGl11BXNy204UxRbr5ZV2BUBi
+         03AarfftG+flaSV7EmFauB3z2hGmW1/wXNn/YdNv2hW6aLuTSCEvh4U25ELpIR3poYUz
+         vowHJuQBJ7a/+4LnguJIBKBGADAaY4+Wn0p8ZZqWllt6ngUxVizqJZv8Y6/7AXBmk3E8
+         MR1miB2ZuhITaoZrNQXaYTvFm4HuOEZEwydCDMQgCyCSTxRxaZ0Iag+2I8yQm/nIGFTM
+         oehw==
+X-Gm-Message-State: AOJu0YwI7rOV66ZsQLgcT7OvdmC0GIxR3u0Sh8k58mJlH/MqxspAoNxA
+	XkSpR/KWtQWI+T/2Jmi6xdR/UZJwc4SXa17tBp1+Y86Nh1e8FTt4r9PyUgs0mLI=
+X-Google-Smtp-Source: AGHT+IF8JUacnjeqbcVtvg6IBhr3Kn9OLU2/DFgoAcwslBGGjnduPvvAwdsnzD/Iow7nTFyzj9J37Q==
+X-Received: by 2002:a17:906:7fc2:b0:a35:6601:e401 with SMTP id r2-20020a1709067fc200b00a356601e401mr864196ejs.5.1706697867257;
+        Wed, 31 Jan 2024 02:44:27 -0800 (PST)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.200.91.1.1\))
+Subject: Re: [PATCH v1 0/2] tools/ocaml: support OCaml 5.x, drop support for
+ <=4.05
+From: Christian Lindig <christian.lindig@cloud.com>
 In-Reply-To: <cover.1706697216.git.edwin.torok@cloud.com>
+Date: Wed, 31 Jan 2024 10:44:16 +0000
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Wei Liu <wl@xen.org>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Christian Lindig <christian.lindig@citrix.com>,
+ David Scott <dave@recoil.org>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <4E9A23AB-5745-4A71-9013-156B6648025A@cloud.com>
 References: <cover.1706697216.git.edwin.torok@cloud.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+To: =?utf-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@cloud.com>
+X-Mailer: Apple Mail (2.3774.200.91.1.1)
 
-Char.lowercase got removed in OCaml 5.0 (it has been deprecated since 2014).
 
-Char.lowercase_ascii has existed since OCaml 4.03, so that is the new
-minimum version for oxenstored.
 
-(Given the choice between supporting a new release and dropping support
-for an 8y+ old release, we drop support for OCaml <4.03)
+> On 31 Jan 2024, at 10:42, Edwin T=C3=B6r=C3=B6k =
+<edwin.torok@cloud.com> wrote:
+>=20
+> Fix building oxenstored with OCaml 5.x.
+> OCaml 5.x has removed some functions that have been deprecated for =
+many years,
+> in order to support OCaml 5.x we need to drop support for OCaml 4.02.
+>=20
+> Tested in gitlab CI (together with my other series):
+> =
+https://gitlab.com/xen-project/people/edwintorok/xen/-/pipelines/115830282=
+7
+>=20
+> Edwin T=C3=B6r=C3=B6k (2):
+>  oxenstored: fix build on OCaml 5.x
+>  tools/ocaml: bump minimum version to OCaml 4.05
+>=20
+> tools/configure               | 2 +-
+> tools/configure.ac            | 2 +-
+> tools/ocaml/xenstored/disk.ml | 2 +-
+> 3 files changed, 3 insertions(+), 3 deletions(-)
+>=20
+> --=20
+> 2.43.0
+>=20
 
-Signed-off-by: Edwin Török <edwin.torok@cloud.com>
----
- tools/configure               | 2 +-
- tools/configure.ac            | 2 +-
- tools/ocaml/xenstored/disk.ml | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/tools/configure b/tools/configure
-index 0135a0059a..5723efaa56 100755
---- a/tools/configure
-+++ b/tools/configure
-@@ -6836,7 +6836,7 @@ else
-                      -e 's/[^0-9]//g'`
- 
- 
--  ax_compare_version_B=`echo "4.02.0" | sed -e 's/\([0-9]*\)/Z\1Z/g' \
-+  ax_compare_version_B=`echo "4.03.0" | sed -e 's/\([0-9]*\)/Z\1Z/g' \
-                      -e 's/Z\([0-9]\)Z/Z0\1Z/g' \
-                      -e 's/Z\([0-9][0-9]\)Z/Z0\1Z/g' \
-                      -e 's/Z\([0-9][0-9][0-9]\)Z/Z0\1Z/g' \
-diff --git a/tools/configure.ac b/tools/configure.ac
-index 618ef8c63f..c979c3de7c 100644
---- a/tools/configure.ac
-+++ b/tools/configure.ac
-@@ -336,7 +336,7 @@ AS_IF([test "x$ocamltools" = "xy"], [
-             AC_MSG_ERROR([Ocaml tools enabled, but missing ocamlopt or ocamlfind])])
-         ocamltools="n"
-     ], [
--        AX_COMPARE_VERSION([$OCAMLVERSION], [lt], [4.02.0], [
-+        AX_COMPARE_VERSION([$OCAMLVERSION], [lt], [4.03.0], [
-             AS_IF([test "x$enable_ocamltools" = "xyes"], [
-                 AC_MSG_ERROR([Your version of OCaml: $OCAMLVERSION is not supported])])
-             ocamltools="n"
-diff --git a/tools/ocaml/xenstored/disk.ml b/tools/ocaml/xenstored/disk.ml
-index 91f945f2bd..ccaa048faf 100644
---- a/tools/ocaml/xenstored/disk.ml
-+++ b/tools/ocaml/xenstored/disk.ml
-@@ -30,7 +30,7 @@ let undec c =
-   | _          -> raise (Failure "undecify")
- 
- let unhex c =
--  let c = Char.lowercase c in
-+  let c = Char.lowercase_ascii c in
-   match c with
-   | '0' .. '9' -> (Char.code c) - (Char.code '0')
-   | 'a' .. 'f' -> (Char.code c) - (Char.code 'a') + 10
--- 
-2.43.0
+Acked-by: Christian Lindig <christian.lindig@cloud.com>
 
 
