@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22010C48286
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Feb 2024 21:40:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.674715.1049830 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69028C48292
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Feb 2024 21:40:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.674717.1049851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rVenL-0005Jq-Dr; Thu, 01 Feb 2024 21:40:27 +0000
+	id 1rVenT-0005ps-36; Thu, 01 Feb 2024 21:40:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 674715.1049830; Thu, 01 Feb 2024 21:40:27 +0000
+Received: by outflank-mailman (output) from mailman id 674717.1049851; Thu, 01 Feb 2024 21:40:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rVenL-0005Jj-BA; Thu, 01 Feb 2024 21:40:27 +0000
-Received: by outflank-mailman (input) for mailman id 674715;
- Thu, 01 Feb 2024 21:40:26 +0000
+	id 1rVenS-0005ph-UT; Thu, 01 Feb 2024 21:40:34 +0000
+Received: by outflank-mailman (input) for mailman id 674717;
+ Thu, 01 Feb 2024 21:40:33 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MzG+=JK=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1rVenK-0005Jd-Aj
- for xen-devel@lists.xenproject.org; Thu, 01 Feb 2024 21:40:26 +0000
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [2607:f8b0:4864:20::1136])
+ id 1rVenR-0005Jd-Qq
+ for xen-devel@lists.xenproject.org; Thu, 01 Feb 2024 21:40:33 +0000
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [2607:f8b0:4864:20::1130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 812dd29a-c14a-11ee-98f5-efadbce2ee36;
- Thu, 01 Feb 2024 22:40:24 +0100 (CET)
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6040d9e52b9so14765167b3.0
- for <xen-devel@lists.xenproject.org>; Thu, 01 Feb 2024 13:40:24 -0800 (PST)
+ id 85fb3eb9-c14a-11ee-98f5-efadbce2ee36;
+ Thu, 01 Feb 2024 22:40:32 +0100 (CET)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-6040d9e52b9so14766197b3.0
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Feb 2024 13:40:32 -0800 (PST)
 Received: from pm2-ws13.praxislan02.com
  (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
  [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
- h7-20020a05620a21c700b007853eb72c49sm154978qka.46.2024.02.01.13.40.20
+ h7-20020a05620a21c700b007853eb72c49sm154978qka.46.2024.02.01.13.40.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Feb 2024 13:40:21 -0800 (PST)
+ Thu, 01 Feb 2024 13:40:29 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,128 +48,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 812dd29a-c14a-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 85fb3eb9-c14a-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706823622; x=1707428422; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sOBkl/FI31A16UeVSXNN4wI40FVp19VWKB4FKGEq7Co=;
-        b=k1JoC9othNW5gzz/XkYnAXF4rEl5+NZBYdNwP4Uu/BRRbIbF0AIkc6HusIr+Gn57i7
-         pJ8I6op4aMUk0iEmDrpqtcKJ4STYJWudp9XKKzaMagUxZ6l/Y+bh6608idQzXk49Q63G
-         ZPgE5G1wL3D15V9/BK4YLZbHUy8obMXVILRX8CfpSrTw7NRYb49XLtZMKKzefiDkUT81
-         J4PnI6XBzSEJ3BjGB7h6Iy6mMu+E2bLAvqKf+y1ZW7Y+nJEfpw4JMqtRHHk6YsUtXLKt
-         mmUWF9UYhHT8B3gkD1dhJzLOJ5QHafewFbyATyVionLtRD1SP5/2UL+8WHAmM4O8W8DB
-         z/QQ==
+        d=gmail.com; s=20230601; t=1706823630; x=1707428430; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ucbmMMAbbZ+Pz4AdE+09SKz62vvqmDMnyT9AshCA9EQ=;
+        b=Qsibb857iTEPS1EEvQDMv1Wz+TmQkg/EwlPqWKozxR3UH1IYEDkQvSAIaJKCyMrJQc
+         R8ZNpsoTXmjJ/zwkGZJBApYJRhgqAJEiHA6+u2s9EafRGxZQ2BwesEGeTe4FovUnbqkc
+         2awQVWK59lBmHQbDj7g+TBHgc1yGOW1sbkkltym96DOqMpg25cbjevZjSu9lancgoChk
+         7y4e6fkwhDt4NSm9uXFLxOMrkXD2l+Z5rVuMc0YqpDLbnKoAmpR4v8yNFhA8W87pyk08
+         Pxv3kTKcSnAFd61f5C7payadPlUYWeIDrgss3DUhKY0M8CwQCajdd9z+woCsXnrPXqXa
+         d5Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706823622; x=1707428422;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=sOBkl/FI31A16UeVSXNN4wI40FVp19VWKB4FKGEq7Co=;
-        b=ZYHiD9CDzqK72BMFiKMWV1msX+SnPUJdkr+yGUvKBwslkHSO4S3VrhHQfvR47GHiWM
-         bTiLzBldw9Mad3yV3F8mLisMBFqpxeHY6jHpcAE4aby43kgXwLlH35nQIIn5w/qH+8O+
-         UHJZXksNVzrOhmAY1N4GQANf6Mj21CrCYcoz1uXkwyVJHzKGjPxdyOovWILrqNrhR7rW
-         8QDCUNsr4KKvGmPQ5t/zItae/kQhsmwn/rnE1QVsqjTUNimqFcGTJPDMnNoiD2e5QfJP
-         yRLgaNF/Q0bx5IsUCAdoinQNLPwS5duBUBVzH+H+AdiLF8VnnqwyWgc04hXgQ1RQogO1
-         1u2Q==
-X-Gm-Message-State: AOJu0YwTIleOlfVpLTOy+t8o0o7cGSTrqPDS3KKwLOxbGcZqx/0T3oT0
-	k2uLOqfq0o85HKbiUiJXuONILw+lQG4WdtwWgpN5nUzTJPlD6eDP5eRix1LR
-X-Google-Smtp-Source: AGHT+IHXu0MiyHUQqw/Xz8M9a/POsPkTtJhpLdNaLRvqNDZa39Uf6TbkyqqY5jMPckdRNIhOxZyyvg==
-X-Received: by 2002:a81:ad08:0:b0:602:9161:2e73 with SMTP id l8-20020a81ad08000000b0060291612e73mr419591ywh.29.1706823621845;
-        Thu, 01 Feb 2024 13:40:21 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCW9l/sZeUwluN+qLJsGDA8KBjAkKBO/JxjefS6jLoalY8FJCijPf3GVLkhcwPr0IY0aHOHSfjxNfvAMrRgsjFRLs7k2lkOMyBNh+5etLeAF4ViLtqqlbBNsM5+y7O++8sGlKBFsl9T6LWgF82dxnFZpcbPKNr+vQtqoqGwUY53VVIe+BKq10oXqWYKJTFMYOnu4VC+FmbX6f0BkpAxRFnJrWJ51te4Z0NfI7xaSwZ8hCJ8hpxZ3HPIyR9pTdbgQUkqCOqNnJn5yvRrU6NTJfjepZh1tmTuANatUvTEG5uAGNAbneF1XlErOYzo=
+        d=1e100.net; s=20230601; t=1706823630; x=1707428430;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ucbmMMAbbZ+Pz4AdE+09SKz62vvqmDMnyT9AshCA9EQ=;
+        b=VIpoGrOzpy7g5nNLGCaMOiBrW52SYDp6wKKB2TPHkmtHTMzdiLOeDO5oNbN6NfpJJs
+         aZMDiiTH3ylYltn7WOWka6SHgiRiV45fkPWE1KqNe/doLKRDObSWDlPyITgjeKHSOuBB
+         FCHrvgAG7FT61GNNJi5vMA0ORLU3ET8v2W/M04//DdG1ON6ZOItGiAzuYKEox2N9Evw2
+         Xb/CVflISCg1inRMGOyLAi9LwAWJbNlxQ0I3yxMCzkr6T7kUsnF850/hsQ88PUivtt2Z
+         91mX44L3nR9GDuk8z/PqcS3E0RAIDbO+hPhPwfdpNrc2hji4sDFZURWODamSfrqMxCnN
+         I5iw==
+X-Gm-Message-State: AOJu0YxBNaTiG1IM5z8MAjpiO/9Vr1vcHkLIHFL/s9L0jKFKErgQcJGd
+	Njs9Vbovx1FQGs6Tm5lCHoOc1N0yugTdK4Whm+tSU10FukK8J3AnFhjBrPit
+X-Google-Smtp-Source: AGHT+IGyZ3ROrgxWgwd9VmfOUiLAllEP63hV3T4NdJde0vqe3kbDuDiHRW5UFWDUI28W5/SabNCBWw==
+X-Received: by 2002:a0d:cc53:0:b0:5ff:6b9e:cdd9 with SMTP id o80-20020a0dcc53000000b005ff6b9ecdd9mr463708ywd.46.1706823630026;
+        Thu, 01 Feb 2024 13:40:30 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCWt/eemjeAB0YsJRR+bss0JwPO4dcbAfWs7OXwO60kt3BD3y1I2eGHOBZL3aMxPpKLx8YYVZeNUEUmAMMNLGe99eaiJiz5jrUGQwORoA/L3/EG66/nsdnT8Yd4yV+zKju6qm0LYgtGFDem4UWXV9C1+PwFIa2cW4mOc4w==
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: marmarek@invisiblethingslab.com,
 	Jason Andryuk <jandryuk@gmail.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 0/3] libxl: Stubdom cd-rom changing support
-Date: Thu,  1 Feb 2024 16:40:01 -0500
-Message-ID: <20240201214004.238858-1-jandryuk@gmail.com>
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 2/3] libxl: Allow Phy backend for CDROM devices
+Date: Thu,  1 Feb 2024 16:40:03 -0500
+Message-ID: <20240201214004.238858-3-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240201214004.238858-1-jandryuk@gmail.com>
+References: <20240201214004.238858-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These patches enable cd-rom media changing for an HVM with a linux
-stubdom.
+A Linux HVM domain ignores PV block devices with type cdrom.  The
+Windows PV drivers also ignore device-type != "disk".  Therefore QEMU's
+emulated CD-ROM support is used.  This allows ejection and other CD-ROM
+features to work.
 
-v1 didn't support these empty drives.  The code came out of OpenXT which
-has a hack - null.iso.  null.iso is an ISO with no contents.  OpenXT
-doesn't actually eject the cd-rom, it just inserts null.iso.  This patch
-set has QEMU present empty media.
+With a stubdom, QEMU is running in the stubdom.  A PV disk is still
+connected into the stubdom, and then QEMU can emulate the CD-ROM into
+the guest.  Phy support has been enhanced to provide a placeholder file
+forempty disks, so it is usable as a CDROM backend as well.  Allow Phy
+to pass the check as well.
 
-The first patch creates an empty file, /run/xen/empty-cdrom.%u, for Phy
-drives that are "empty".  The place holder simplifies things because the
-block scripts don't work for an empty params.  Even if the scripts were
-modified for that, a stubdom will timeout on startup when the empty
-disk/blkback never connects.  The empty file works around these issues.
+(Bypassing just for a linux-based stubdom doesn't work because
+libxl__device_disk_setdefault() gets called early in domain creation
+before xenstore is populated with relevant information for the stubdom
+type.  The build information isn't readily available and won't exist in
+some call trees, so it isn't usable either.)
 
-The second patch allows use of Phy backend drives for a cd-rom.  This
-works for non-stubdom HVMs.  Actually special casing stubdoms didn't
-work.
+Let disk_try_backend() allow format empty for Phy cdrom drives.
 
-The third patch expands the cd-rom changing code to support the stubdom
-case.
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+v2:
+Different approach to pass QDISK requirement check.
+---
+ tools/libs/light/libxl_device.c | 12 ++++++++----
+ tools/libs/light/libxl_disk.c   | 11 +++++++----
+ 2 files changed, 15 insertions(+), 8 deletions(-)
 
-To change the cd-rom medium, libxl will:
- - QMP eject the medium from QEMU
- - block-detach the old PV disk
- - block-attach the new PV disk
- - QMP change the medium to the new PV disk by fdset-id
-
-xl cd-eject follows the above through connecting the new PV disk,
-empty-cdrom.%u.  It skips the QMP media change.  This keeps the xenstore
-entries which are needed to identify that a cd-rom drive is present.  If
-the xenstore entries were removed on eject, libxl wouldn't find the
-device (hdc) for a subsequent cd-insert.
-
-The QMP change insert uses fdset-id STUBDOM_FDSET_CD + $disk - 'a'.
-That is, hda -> 'a', so
-STUBDOM_FDSET_CD + 'a' - 'a' = STUBDOM_FDSET_CD.
-For hdc:
-STUBDOM_FDSET_CD + 'c' - 'a' = STUBDOM_FDSET_CD + 2.
-
-The stubdom must internally handle adding /dev/xvdc to the appropriate
-fdset inside QEMU.
-
-A script like this:
-https://github.com/OpenXT/xenclient-oe/blob/master/recipes-core/initrdscripts/initramfs-stubdomain/qemu-xvdc-add-fd.sh
-
-Can be called by busybox mdev configured like this:
-https://github.com/OpenXT/xenclient-oe/blob/master/recipes-core/busybox/files/mdev.conf
-
-(OpenXT mdev as the hotplug helper works, but with a ~Qubes stubdom, I
-had to run mdev as a daemon, mdev -d.)
-
-Linux locks the cd-rom by default?  That means the QMP eject commands
-fail, but then Linux unlocks.  Re-running a second time works.  Windows
-doesn't do that.
-
-There are spurious messages sometimes like:
-libxl: error: libxl_qmp.c:1837:qmp_ev_parse_error_messages: Domain 5:Could not dup FD for /dev/fdset/8002 flags 0: No such file or directory
-
-libxl doesn't know when the stubdom has setup the fdset.  Since it gets
-those errors, it'll retry adding to the fdset.
-
-Jason Andryuk (3):
-  libxl: Create empty cdrom file for stubdom
-  libxl: Allow Phy backend for CDROM devices
-  libxl: Enable stubdom cdrom changing
-
- docs/misc/stubdom.txt             |  16 ++
- tools/libs/light/libxl_device.c   |  17 +-
- tools/libs/light/libxl_disk.c     | 345 +++++++++++++++++++++++++++---
- tools/libs/light/libxl_domain.c   |   4 +
- tools/libs/light/libxl_internal.h |   1 +
- 5 files changed, 344 insertions(+), 39 deletions(-)
-
+diff --git a/tools/libs/light/libxl_device.c b/tools/libs/light/libxl_device.c
+index 09d85928d7..f73c6705d4 100644
+--- a/tools/libs/light/libxl_device.c
++++ b/tools/libs/light/libxl_device.c
+@@ -301,13 +301,17 @@ static int disk_try_backend(disk_try_backend_args *a,
+ 
+     switch (backend) {
+     case LIBXL_DISK_BACKEND_PHY:
+-        if (a->disk->format != LIBXL_DISK_FORMAT_RAW) {
+-            goto bad_format;
+-        }
+-
+         if (libxl_defbool_val(a->disk->colo_enable))
+             goto bad_colo;
+ 
++        if (a->disk->is_cdrom && a->disk->format == LIBXL_DISK_FORMAT_EMPTY) {
++            LOG(DEBUG, "Disk vdev=%s is an empty cdrom", a->disk->vdev);
++            return backend;
++        }
++
++        if (a->disk->format != LIBXL_DISK_FORMAT_RAW)
++            goto bad_format;
++
+         if (a->disk->backend_domid != LIBXL_TOOLSTACK_DOMID) {
+             LOG(DEBUG, "Disk vdev=%s, is using a storage driver domain, "
+                        "skipping physical device check", a->disk->vdev);
+diff --git a/tools/libs/light/libxl_disk.c b/tools/libs/light/libxl_disk.c
+index c48e1de659..09082ffb58 100644
+--- a/tools/libs/light/libxl_disk.c
++++ b/tools/libs/light/libxl_disk.c
+@@ -188,15 +188,18 @@ static int libxl__device_disk_setdefault(libxl__gc *gc, uint32_t domid,
+         return ERROR_FAIL;
+     }
+ 
+-    /* Force Qdisk backend for CDROM devices of guests with a device model. */
++    /* Only allow Qdisk or Phy for CDROM devices. */
+     if (disk->is_cdrom != 0 &&
+         libxl__domain_type(gc, domid) == LIBXL_DOMAIN_TYPE_HVM) {
++        if (disk->backend == LIBXL_DISK_BACKEND_UNKNOWN)
++            disk->backend = LIBXL_DISK_BACKEND_QDISK;
++
+         if (!(disk->backend == LIBXL_DISK_BACKEND_QDISK ||
+-              disk->backend == LIBXL_DISK_BACKEND_UNKNOWN)) {
+-            LOGD(ERROR, domid, "Backend for CD devices on HVM guests must be Qdisk");
++              disk->backend == LIBXL_DISK_BACKEND_PHY)) {
++            LOGD(ERROR, domid,
++                 "Backend for CD devices on HVM guests must be Qdisk or Phy");
+             return ERROR_FAIL;
+         }
+-        disk->backend = LIBXL_DISK_BACKEND_QDISK;
+     }
+ 
+     if (disk->is_cdrom &&
 -- 
 2.43.0
 
