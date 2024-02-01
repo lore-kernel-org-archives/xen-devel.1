@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4289DC48286
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Feb 2024 21:12:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.674710.1049821 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA975C4828D
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Feb 2024 21:40:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.674716.1049841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rVeLu-0008NT-8r; Thu, 01 Feb 2024 21:12:06 +0000
+	id 1rVenP-0005Z8-Nk; Thu, 01 Feb 2024 21:40:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 674710.1049821; Thu, 01 Feb 2024 21:12:06 +0000
+Received: by outflank-mailman (output) from mailman id 674716.1049841; Thu, 01 Feb 2024 21:40:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rVeLu-0008NM-4s; Thu, 01 Feb 2024 21:12:06 +0000
-Received: by outflank-mailman (input) for mailman id 674710;
- Thu, 01 Feb 2024 21:12:05 +0000
+	id 1rVenP-0005Yx-L1; Thu, 01 Feb 2024 21:40:31 +0000
+Received: by outflank-mailman (input) for mailman id 674716;
+ Thu, 01 Feb 2024 21:40:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=i6jM=JK=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rVeLt-0008NG-HG
- for xen-devel@lists.xenproject.org; Thu, 01 Feb 2024 21:12:05 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
+ <SRS0=MzG+=JK=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
+ id 1rVenN-0005YC-PJ
+ for xen-devel@lists.xenproject.org; Thu, 01 Feb 2024 21:40:29 +0000
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [2607:f8b0:4864:20::731])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8b9aad2c-c146-11ee-8a43-1f161083a0e0;
- Thu, 01 Feb 2024 22:12:03 +0100 (CET)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5101cd91017so1703613e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 01 Feb 2024 13:12:03 -0800 (PST)
-Received: from [192.168.1.10] (host-92-3-248-192.as13285.net. [92.3.248.192])
- by smtp.gmail.com with ESMTPSA id
- v7-20020a05600c444700b0040e541ddcb1sm612832wmn.33.2024.02.01.13.12.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Feb 2024 13:12:02 -0800 (PST)
+ id 83c67fe8-c14a-11ee-8a43-1f161083a0e0;
+ Thu, 01 Feb 2024 22:40:28 +0100 (CET)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-783d4b3a00bso100070885a.3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Feb 2024 13:40:28 -0800 (PST)
+Received: from pm2-ws13.praxislan02.com
+ (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
+ [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
+ h7-20020a05620a21c700b007853eb72c49sm154978qka.46.2024.02.01.13.40.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Feb 2024 13:40:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,121 +48,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b9aad2c-c146-11ee-8a43-1f161083a0e0
+X-Inumbo-ID: 83c67fe8-c14a-11ee-8a43-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1706821923; x=1707426723; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=nSJ2hZZ2VYITCzpQNgQpqsT/bQ+Ovwqx8owNpGRLy7I=;
-        b=vVRGOxYrPd+/P57aZn6eefbcQ9dUCBKJG+236rChXEkwzL7EjuhpZpOhO7+voDF3Mm
-         IMu1lzrBQPv/oYY7Tj2W5cQQmdO64RhF8QxvX4gRJ9bMLwoCbh93/Oht17dfQXm2KR/n
-         /lvzmllFLu4VgvDziE4sv8wJuAL/YPp+QOlEw=
+        d=gmail.com; s=20230601; t=1706823627; x=1707428427; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vkexTyneUo8yDBZMkq46yZq63xLJ/JfR3uJQ589GQF4=;
+        b=aMbHaPRdMZxgH0MmI0cZagUUrvBf+uCDs2Li3M/7v/JjuaHESdDmjwNSkHTCyS0vu9
+         U46JZzZTN8Ka0BfP0AcGJata3CNGz/UXm9OBTtNKOXj3VuRh22DYCAeA/Sch57mV2lyZ
+         pvlz6vjBn/2UlmP32a8QedqyP8+i+9upuz1g6IXfTjstnmtnm9CE8ki7tm6KbNvmEw6a
+         6R5oEgwnOeJlPQvZA0HFJPOsEIAnVPc0fkyZaApjR1cu2i9FiGUBWKO/IhZUgPDJw8Br
+         /esNCGEtVJT+IFQHiMuAdl7WQE0gmc3H5D+m5k5LmsBNZXi6JnvlrJXHNOVntrh8qSV1
+         pR3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706821923; x=1707426723;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nSJ2hZZ2VYITCzpQNgQpqsT/bQ+Ovwqx8owNpGRLy7I=;
-        b=QDJzsCz8wAWysnQZgEzuAJbBWIBnUgtYv1x/NV15NNsk3QFMyvMc7+xAPawCZ1/srG
-         aPDz1zEoa02xF+bq0Qfb0iW2Jh1EFfOKSy9rM1yHSRZ+huLT994ChXBkieFJFcqID72l
-         jS6/O9HOMg0Wp5WxaWcHrDWMQ866iWaebhZEdCQFV7jRRJ4pnIWMk2Qe5j5F6kiohZTG
-         KnbGywbQZmaHZD6W/DFzJXVXQbN//G06dvADAa6jF4q2x41Dvu16fzhi+n4AjvVhO3Ij
-         nVoJSa4hWUE/8hs9L9Lw8E9RkWFpAl+g22Xmi2GvBYmti26fWnoseUhJ6tANv4b7UhMy
-         ch5A==
-X-Gm-Message-State: AOJu0YyTh7U1/yIC0PE3tWUvcwGfPH5tnY4x20myKUWRhx02BDkL48EV
-	6Kk61nkiGpM710xP2JojOXVxKrDIh98JH1C0eogNL2c602SiLmeKqvhxUEPizsQ=
-X-Google-Smtp-Source: AGHT+IF1qYQV3WYRGe2k4kQs/eIQkj1dW54V5m//TWFyxZZPuqL1Q5/RdiTXGTpJLG7kMyTD1xs3WA==
-X-Received: by 2002:a05:6512:1103:b0:511:1796:aad6 with SMTP id l3-20020a056512110300b005111796aad6mr2983367lfg.35.1706821922811;
-        Thu, 01 Feb 2024 13:12:02 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCXJaWVxA3z8SUIiotiHS+oUN5oWQIZU7R+UHnTuUULPQ3waCjMrvQuICCMI6vqFg+C2Ir4B/vQtMAFp/OUk9YSJFKsLlJhxeo5RuIryYA+Fb2iNDHHOA+x94/F4uHEQoIh24qGt
-Message-ID: <e42ee8c5-10b0-4369-8cc9-7b298fa68ef7@citrix.com>
-Date: Thu, 1 Feb 2024 21:12:02 +0000
+        d=1e100.net; s=20230601; t=1706823627; x=1707428427;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vkexTyneUo8yDBZMkq46yZq63xLJ/JfR3uJQ589GQF4=;
+        b=qfM7BGu1yZWOloU9QFdHtCU3pktqt/la2gJPztA1AKCZGJHgQq0ez4yxYiQrIKQSZW
+         H0Eku/Nd8jUackv8sNvRafuAxq2jpIslv4p61o290nQfwGvACe/bIisjXzsuU6UFfuoi
+         aHzx/f6ukh8v+9Z5EzLADOnLJN8DlWG06bxDIn5gZsreup6K5ln2vKIoPViDK8XT09N3
+         6kNg6mzU9wF1Fg5uLiGTtoybVhe9kK2F8KJj4GEq8+GyIbMz2vN+TFxWKid3mnc0KNR4
+         1f3i+l9+97oYVYyCbsCIOVKddZ6gHuIA3t2c75nIaIqC6Yw1LcUt+GIspQsyg5qXqC/2
+         LJnw==
+X-Gm-Message-State: AOJu0YzueLxubb2/RA9J1UQ+6MczHB+NMSnAMa+CNPNRjINqmhylaf9g
+	ho4lX/r7vrqdSjmvdRqloLw4lhMG9mXzuNbqqAi3LJ5wKgar/vLVSOVXKkBT
+X-Google-Smtp-Source: AGHT+IGLBrIpsduzyOBzC7LSkPVe7PuJfrOhZUbgPczkeBMlBbhnOdd0NAToewP/ECbnKyOeZmEAYw==
+X-Received: by 2002:a05:6214:dcc:b0:685:c584:6e8b with SMTP id 12-20020a0562140dcc00b00685c5846e8bmr7595618qvt.0.1706823626707;
+        Thu, 01 Feb 2024 13:40:26 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCX34J5GhBe54FX3RBJqs7ZIWuDZVmL3wYyHWNMhm4yVwBjP4NDDQcS4ST2AaUoq/EH7He+c6OGqS3wkKJlg5Rhh3uN4e+jlCVP/jJCzcXOuBXqDeRJMNoCkC4IN3lwXH6Vjdym+ADGppGppFifok3YOG4DAbHttMLfKsw==
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: marmarek@invisiblethingslab.com,
+	Jason Andryuk <jandryuk@gmail.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 1/3] libxl: Create empty file for Phy cdrom
+Date: Thu,  1 Feb 2024 16:40:02 -0500
+Message-ID: <20240201214004.238858-2-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240201214004.238858-1-jandryuk@gmail.com>
+References: <20240201214004.238858-1-jandryuk@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86: arrange for ENDBR zapping from
- <vendor>_ctxt_switch_masking()
-Content-Language: en-GB
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <c19cf600-5971-457b-936d-77a035ab6913@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <c19cf600-5971-457b-936d-77a035ab6913@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 16/01/2024 4:53 pm, Jan Beulich wrote:
-> While altcall is already used for them, the functions want announcing in
-> .init.rodata.cf_clobber, even if the resulting static variables aren't
-> otherwise used.
->
-> While doing this also move ctxt_switch_masking to .data.ro_after_init.
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+With a device model stubdom, dom0 exports a PV disk to the stubdom.
+Inside the stubdom, QEMU emulates a cdrom to the guest with a
+host_device pointing at the PV frontend (/dev/xvdc)
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+An empty cdrom drive causes problems booting the stubdom.  The PV disk
+protocol isn't designed to support no media.  That can be partially
+hacked around, but the stubdom kernel waits for all block devices to
+transition to Connected.  Since the backend never connects empty media,
+stubdom launch times out and it is destroyed.
 
->
-> --- a/xen/arch/x86/cpu/amd.c
-> +++ b/xen/arch/x86/cpu/amd.c
-> @@ -258,6 +258,11 @@ static void cf_check amd_ctxt_switch_mas
->  #undef LAZY
->  }
->  
-> +#ifdef CONFIG_XEN_IBT /* Announce the function to ENDBR clobbering logic. */
-> +static const typeof(ctxt_switch_masking) __initconst_cf_clobber __used csm =
-> +    amd_ctxt_switch_masking;
-> +#endif
+Empty media and the PV disks not connecting is fine at runtime since the
+stubdom keeps running irrespective of the disk state.
 
-If we gain more of these, I suspect we'll want a wrapper for it.
+Empty media can be worked around my providing an empty file to the
+stubdom for the PV disk source.  This works as the disk is exposed as a
+zero-size disk.  Dynamically create the empty file as needed and remove
+in the stubdom cleanup.
 
-Irritatingly you can't pass parameters into global asm, because the nice
-way to do this would be an _ASM_PTR in a pushsection.
+libxl__device_disk_set_backend() needs to allow through these "empty"
+disks with a pdev_path.
 
-~Andrew
+Fixup the params writing since scripts have trouble with an empty params
+field.
+
+This works for non-stubdom HVMs as well.
+
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+v2:
+New to support "empty" cdroms
+---
+ tools/libs/light/libxl_device.c   |  5 ++++-
+ tools/libs/light/libxl_disk.c     | 36 +++++++++++++++++++++++++++----
+ tools/libs/light/libxl_domain.c   |  4 ++++
+ tools/libs/light/libxl_internal.h |  1 +
+ 4 files changed, 41 insertions(+), 5 deletions(-)
+
+diff --git a/tools/libs/light/libxl_device.c b/tools/libs/light/libxl_device.c
+index 13da6e0573..09d85928d7 100644
+--- a/tools/libs/light/libxl_device.c
++++ b/tools/libs/light/libxl_device.c
+@@ -421,7 +421,10 @@ int libxl__device_disk_set_backend(libxl__gc *gc, libxl_device_disk *disk) {
+             LOG(ERROR, "Disk vdev=%s is empty but not cdrom", disk->vdev);
+             return ERROR_INVAL;
+         }
+-        if (disk->pdev_path != NULL && strcmp(disk->pdev_path, "")) {
++        if (disk->pdev_path != NULL &&
++            (strcmp(disk->pdev_path, "") &&
++             strncmp(disk->pdev_path, LIBXL_STUBDOM_EMPTY_CDROM,
++                     strlen(LIBXL_STUBDOM_EMPTY_CDROM)))) {
+             LOG(ERROR,
+                 "Disk vdev=%s is empty but an image has been provided: %s",
+                 disk->vdev, disk->pdev_path);
+diff --git a/tools/libs/light/libxl_disk.c b/tools/libs/light/libxl_disk.c
+index ea3623dd6f..c48e1de659 100644
+--- a/tools/libs/light/libxl_disk.c
++++ b/tools/libs/light/libxl_disk.c
+@@ -199,6 +199,32 @@ static int libxl__device_disk_setdefault(libxl__gc *gc, uint32_t domid,
+         disk->backend = LIBXL_DISK_BACKEND_QDISK;
+     }
+ 
++    if (disk->is_cdrom &&
++        disk->format == LIBXL_DISK_FORMAT_EMPTY &&
++        disk->backend == LIBXL_DISK_BACKEND_PHY &&
++        disk->backend_domid == LIBXL_TOOLSTACK_DOMID) {
++        uint32_t target_domid;
++        int fd;
++
++        if (libxl_is_stubdom(CTX, domid, &target_domid)) {
++            LOGED(DEBUG, domid, "Using target_domid %u", target_domid);
++        } else {
++            target_domid = domid;
++        }
++        free(disk->pdev_path);
++        disk->pdev_path =
++            libxl__sprintf(NOGC, LIBXL_STUBDOM_EMPTY_CDROM ".%u",
++                           target_domid);
++        fd = creat(disk->pdev_path, 0400);
++        if (fd < 0) {
++            LOGED(ERROR, domid, "Failed to create empty cdrom \"%s\"",
++                  disk->pdev_path);
++            return ERROR_FAIL;
++        }
++
++        close(fd);
++    }
++
+     rc = libxl__device_disk_set_backend(gc, disk);
+     return rc;
+ }
+@@ -988,7 +1014,7 @@ static void cdrom_insert_ejected(libxl__egc *egc,
+     empty = flexarray_make(gc, 4, 1);
+     flexarray_append_pair(empty, "type",
+                           libxl__device_disk_string_of_backend(disk->backend));
+-    flexarray_append_pair(empty, "params", "");
++    flexarray_append_pair(empty, "params", disk->pdev_path ?: "");
+ 
+     for (;;) {
+         rc = libxl__xs_transaction_start(gc, &t);
+@@ -1164,13 +1190,15 @@ static void cdrom_insert_inserted(libxl__egc *egc,
+     insert = flexarray_make(gc, 4, 1);
+     flexarray_append_pair(insert, "type",
+                       libxl__device_disk_string_of_backend(disk->backend));
+-    if (disk->format != LIBXL_DISK_FORMAT_EMPTY)
++    if (disk->backend == LIBXL_DISK_BACKEND_QDISK &&
++        disk->format != LIBXL_DISK_FORMAT_EMPTY) {
+         flexarray_append_pair(insert, "params",
+                     GCSPRINTF("%s:%s",
+                         libxl__device_disk_string_of_format(disk->format),
+                         disk->pdev_path));
+-    else
+-        flexarray_append_pair(insert, "params", "");
++    } else {
++        flexarray_append_pair(insert, "params", disk->pdev_path ?: "");
++    }
+ 
+     for (;;) {
+         rc = libxl__xs_transaction_start(gc, &t);
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 5ee1544d9c..6751fc785f 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -1525,6 +1525,10 @@ static void devices_destroy_cb(libxl__egc *egc,
+     if (rc < 0)
+         LOGD(ERROR, domid, "libxl__devices_destroy failed");
+ 
++    /* Remove the file after the hotplug scripts have run.  The scripts won't
++     * run if the file doesn't exist when they are run.  */
++    libxl__remove_file(gc, GCSPRINTF(LIBXL_STUBDOM_EMPTY_CDROM ".%u", domid));
++
+     vm_path = libxl__xs_read(gc, XBT_NULL, GCSPRINTF("%s/vm", dom_path));
+     if (vm_path)
+         if (!xs_rm(ctx->xsh, XBT_NULL, vm_path))
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index d5732d1c37..094d0df9b1 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -120,6 +120,7 @@
+ #define STUBDOM_CONSOLE_SERIAL 3
+ #define STUBDOM_SPECIAL_CONSOLES 3
+ #define LIBXL_LINUX_STUBDOM_MEM 128
++#define LIBXL_STUBDOM_EMPTY_CDROM XEN_RUN_DIR "/empty-cdrom" /* .$domid */
+ #define TAP_DEVICE_SUFFIX "-emu"
+ #define DOMID_XS_PATH "domid"
+ #define PVSHIM_BASENAME "xen-shim"
+-- 
+2.43.0
+
 
