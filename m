@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C11A1C48291
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Feb 2024 09:38:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.674919.1050089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F8C4C48292
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Feb 2024 09:38:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.674921.1050104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rVq0P-0005sc-J8; Fri, 02 Feb 2024 09:38:41 +0000
+	id 1rVq0Q-00063N-9W; Fri, 02 Feb 2024 09:38:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 674919.1050089; Fri, 02 Feb 2024 09:38:41 +0000
+Received: by outflank-mailman (output) from mailman id 674921.1050104; Fri, 02 Feb 2024 09:38:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rVq0P-0005sV-FR; Fri, 02 Feb 2024 09:38:41 +0000
-Received: by outflank-mailman (input) for mailman id 674919;
- Fri, 02 Feb 2024 09:38:40 +0000
+	id 1rVq0Q-000631-0Z; Fri, 02 Feb 2024 09:38:42 +0000
+Received: by outflank-mailman (input) for mailman id 674921;
+ Fri, 02 Feb 2024 09:38:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lYVL=JL=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rVq0O-0005sE-3i
- for xen-devel@lists.xenproject.org; Fri, 02 Feb 2024 09:38:40 +0000
+ id 1rVq0P-0005sE-4a
+ for xen-devel@lists.xenproject.org; Fri, 02 Feb 2024 09:38:41 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d6d50c72-c1ae-11ee-98f5-efadbce2ee36;
- Fri, 02 Feb 2024 10:38:37 +0100 (CET)
+ id d86c3a85-c1ae-11ee-98f5-efadbce2ee36;
+ Fri, 02 Feb 2024 10:38:39 +0100 (CET)
 Received: from beta.station (net-188-218-67-100.cust.vodafonedsl.it
  [188.218.67.100])
- by support.bugseng.com (Postfix) with ESMTPSA id 8C67D4EE0737;
- Fri,  2 Feb 2024 10:38:35 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 2BA274EE073C;
+ Fri,  2 Feb 2024 10:38:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,81 +42,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6d50c72-c1ae-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: d86c3a85-c1ae-11ee-98f5-efadbce2ee36
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
-	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v3 0/4] address violation of MISRA C:2012 Rule 13.1
-Date: Fri,  2 Feb 2024 10:37:43 +0100
-Message-Id: <cover.1706700228.git.maria.celeste.cesario@bugseng.com>
+	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
+Subject: [PATCH v3 2/4] xen/ns16550: address violations of MISRA C:2012 Rule 13.1
+Date: Fri,  2 Feb 2024 10:37:45 +0100
+Message-Id: <d1fb1baae24cf0b0b2826ed531abab12950f93cd.1706700228.git.maria.celeste.cesario@bugseng.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1706700228.git.maria.celeste.cesario@bugseng.com>
+References: <cover.1706700228.git.maria.celeste.cesario@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
+Rule 13.1: Initializer lists shall not contain persistent side effects
 
-The Xen sources contain violations of MISRA C:2012 Rule 13.1 whose headline states:
-"Initializer lists shall not contain persistent side effects".
+The assignment operation in:
 
-The file properties.json containing function and macro properties is introduced, as
-stated in v2 discussion. Some functions and macros are found to have properties that
-can be exploited by static analyzers. For this reason, the file docs/properties.json
-contains all the needed properties. A description of the json file is documented in
-docs/properties.rst.
+.irq = rc = uart->irq,
 
-Some persistent effects have been moved outside initializer lists to address violations
-of Rule 13.1.
+is a persistent side effect in a struct initializer list.
 
-Link to the discussion: https://lore.kernel.org/all/cover.1700844359.git.simone.ballarin@bugseng.com/T/#u
+This patch assigns rc separately outside the structure.
 
+No functional change.
 
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
+Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
+
+---
 Changes in v3:
-- change prefix from xen to xen/ns16550
-- add assignment of rc in xen/ns16550
-- use rc as controlling expression in the following if-statement
-- change commit prefix from xen/arm to xen
-- specify where saf-3-safe comments are applied in guestcopy.c
-- reword saf comments text
+- add assignment of rc;
+- use rc as controlling expression in the following if-statement;
+- change prefix from xen to xen/ns16550.
+Changes in v2:
+- avoid assignment of rc;
+- drop changes in vcpu_yield(void).
+---
+ xen/drivers/char/ns16550.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Maria Celeste Cesario (1):
-  eclair: add and manage properties
-
-Simone Ballarin (3):
-  xen: add SAF deviation for debugging and logging effects
-  xen/ns16550: address violations of MISRA C:2012 Rule 13.1
-  xen/x86: address violations of MISRA C:2012 Rule 13.1
-
- .../eclair_analysis/ECLAIR/analysis.ecl       |   1 +
- automation/eclair_analysis/prepare.sh         |   2 +
- docs/misra/safe.json                          |  16 +
- docs/properties.json                          | 841 ++++++++++++++++++
- docs/properties.rst                           |  58 ++
- xen/arch/arm/device.c                         |   1 +
- xen/arch/arm/guestcopy.c                      |  16 +-
- xen/arch/x86/hvm/hvm.c                        |   1 +
- xen/arch/x86/io_apic.c                        |   9 +-
- xen/arch/x86/mpparse.c                        |   3 +-
- xen/arch/x86/setup.c                          |   3 +-
- xen/common/sched/core.c                       |   3 +
- xen/drivers/char/ns16550.c                    |   4 +-
- 13 files changed, 948 insertions(+), 10 deletions(-)
- create mode 100644 docs/properties.json
- create mode 100644 docs/properties.rst
-
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index afe3d514b9..97bf098534 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -441,10 +441,12 @@ static void __init cf_check ns16550_init_postirq(struct serial_port *port)
+             struct msi_info msi = {
+                 .sbdf = PCI_SBDF(0, uart->ps_bdf[0], uart->ps_bdf[1],
+                                  uart->ps_bdf[2]),
+-                .irq = rc = uart->irq,
++                .irq = uart->irq,
+                 .entry_nr = 1
+             };
+ 
++            rc = uart->irq;
++
+             if ( rc > 0 )
+             {
+                 struct msi_desc *msi_desc = NULL;
 -- 
 2.40.0
 
