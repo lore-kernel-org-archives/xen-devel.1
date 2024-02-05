@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A6CC48291
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:58:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.675883.1051563 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1636FC4828D
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:59:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.675893.1051573 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwgY-0001K4-33; Mon, 05 Feb 2024 10:58:46 +0000
+	id 1rWwgt-0002Ju-Aa; Mon, 05 Feb 2024 10:59:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 675883.1051563; Mon, 05 Feb 2024 10:58:46 +0000
+Received: by outflank-mailman (output) from mailman id 675893.1051573; Mon, 05 Feb 2024 10:59:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwgX-0001Jx-WA; Mon, 05 Feb 2024 10:58:45 +0000
-Received: by outflank-mailman (input) for mailman id 675883;
- Mon, 05 Feb 2024 10:58:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rWwgt-0002Jl-7u; Mon, 05 Feb 2024 10:59:07 +0000
+Received: by outflank-mailman (input) for mailman id 675893;
+ Mon, 05 Feb 2024 10:59:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=b4fC=JO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rWwZy-0000qL-Ft
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:51:58 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 94923e2f-c414-11ee-98f5-efadbce2ee36;
- Mon, 05 Feb 2024 11:51:56 +0100 (CET)
+ id 1rWwar-0002wU-Sm
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:52:53 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b6364be0-c414-11ee-8a45-1f161083a0e0;
+ Mon, 05 Feb 2024 11:52:53 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 801021F8BA;
- Mon,  5 Feb 2024 10:51:56 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0023422100;
+ Mon,  5 Feb 2024 10:52:52 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4E3C9132DD;
- Mon,  5 Feb 2024 10:51:56 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B63F1132DD;
+ Mon,  5 Feb 2024 10:52:52 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id +NmVEcy9wGW4NgAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:51:56 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 9ar+KgS+wGUGNwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:52:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,141 +54,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94923e2f-c414-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: b6364be0-c414-11ee-8a45-1f161083a0e0
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v4 20/32] tools: add 9pfs device to xenstore-stubdom
-Date: Mon,  5 Feb 2024 11:49:49 +0100
-Message-Id: <20240205105001.24171-21-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Jason Andryuk <jandryuk@gmail.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v4 30/32] tools/xenstored: add helpers for filename handling
+Date: Mon,  5 Feb 2024 11:49:59 +0100
+Message-Id: <20240205105001.24171-31-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240205105001.24171-1-jgross@suse.com>
 References: <20240205105001.24171-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out2.suse.de;
+Authentication-Results: smtp-out1.suse.de;
 	none
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Spamd-Result: default: False [-4.00 / 50.00];
 	 REPLY(-4.00)[]
-X-Rspamd-Queue-Id: 801021F8BA
+X-Rspamd-Queue-Id: 0023422100
 
-Add a 9pfs device to Xenstore stubdom in order to allow it to do e.g.
-logging into a dom0 file.
+Add some helpers for handling filenames which might need different
+implementations between stubdom and daemon environments:
 
-Use the following parameters for the new device:
-
-- tag = "Xen"
-- type = "xen_9pfsd"
-- path = "/var/lib/xen/xenstore"
-- security-model = "none"
-
-For now don't limit allowed file space or number of files.
-
-Add a new libxl function for adding it similar to the function for
-adding the console device.
+- expansion of relative filenames (those are not really defined today,
+  just expand them to be relative to /var/lib/xen/xenstore)
+- expansion of xenstore_daemon_rundir() (used e.g. for saving the state
+  file in case of live update - needs to be unchanged in the daemon
+  case, but should result in /var/lib/xen/xenstore for stubdom)
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V2:
-- add security_model parameter to new libxl function (Jason Andryuk)
-V4:
-- rename function to libxl_device_9pfs_add() (Anthony Perard)
-- use a libxl_device_p9 pointer as parameter (Anthony Perard)
+V3:
+- make absolute_filename() return a pointer to const (Julien Grall)
 ---
- tools/helpers/init-xenstore-domain.c |  7 +++++++
- tools/include/libxl.h                | 15 +++++++++++++++
- tools/libs/light/libxl_9pfs.c        | 16 ++++++++++++++++
- 3 files changed, 38 insertions(+)
+ tools/xenstored/core.c      | 15 +++++++++++++--
+ tools/xenstored/core.h      |  5 ++++-
+ tools/xenstored/lu_daemon.c |  4 ++--
+ tools/xenstored/minios.c    |  5 +++++
+ tools/xenstored/posix.c     |  8 +++++++-
+ 5 files changed, 31 insertions(+), 6 deletions(-)
 
-diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
-index 140ed610ae..1683438c5c 100644
---- a/tools/helpers/init-xenstore-domain.c
-+++ b/tools/helpers/init-xenstore-domain.c
-@@ -433,6 +433,12 @@ int main(int argc, char** argv)
-     int rv, fd;
-     char *maxmem_str = NULL;
-     libxl_ctx *ctx;
-+    libxl_device_p9 p9 = { .backend_domid = 0,
-+                           .tag = "Xen",
-+                           .path = XEN_LIB_DIR"/xenstore",
-+                           .security_model = "none",
-+                           .type = LIBXL_P9_TYPE_XEN_9PFSD,
-+    };
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 48fc787ac1..bada1ad9a2 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -63,7 +63,7 @@ char **orig_argv;
+ LIST_HEAD(connections);
+ int tracefd = -1;
+ bool keep_orphans = false;
+-char *tracefile = NULL;
++const char *tracefile = NULL;
+ static struct hashtable *nodes;
+ unsigned int trace_flags = TRACE_OBJ | TRACE_IO;
  
-     while ( (opt = getopt_long(argc, argv, "v", options, NULL)) != -1 )
-     {
-@@ -543,6 +549,7 @@ int main(int argc, char** argv)
-     }
-     libxl_console_add_xenstore(ctx, domid, 0, console_evtchn, console_gfn,
-                                NULL);
-+    libxl_device_9pfs_add(ctx, domid, &p9, NULL);
-     libxl_ctx_free(ctx);
- 
-     fd = creat(XEN_RUN_DIR "/xenstored.pid", 0666);
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index a554f2ccd6..e6ab5ddb94 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -583,6 +583,13 @@
-  * libxl_console_add_xenstore() in libxl.
-  */
- #define LIBXL_HAVE_CONSOLE_ADD_XENSTORE 1
-+
-+/*
-+ * LIBXL_HAVE_P9_ADD_XENSTORE indicates presence of the function
-+ * libxl_device_9pfs_add() in libxl.
-+ */
-+#define LIBXL_HAVE_P9_ADD_XENSTORE 1
-+
- /*
-  * libxl ABI compatibility
-  *
-@@ -2074,6 +2081,14 @@ int libxl_console_add_xenstore(libxl_ctx *ctx, uint32_t domid, uint32_t backend,
-                                const libxl_asyncop_how *ao_how)
-                                LIBXL_EXTERNAL_CALLERS_ONLY;
- 
-+/* libxl_device_9pfs_add writes the Xenstore entries for a domain's
-+ * primary 9pfs device based on domid, and device parameters.
-+ * If needed it will start the backend daemon.
-+ */
-+int libxl_device_9pfs_add(libxl_ctx *ctx, uint32_t domid, libxl_device_p9 *p9,
-+                          const libxl_asyncop_how *ao_how)
-+                          LIBXL_EXTERNAL_CALLERS_ONLY;
-+
- /* May be called with info_r == NULL to check for domain's existence.
-  * Returns ERROR_DOMAIN_NOTFOUND if domain does not exist (used to return
-  * ERROR_INVAL for this scenario). */
-diff --git a/tools/libs/light/libxl_9pfs.c b/tools/libs/light/libxl_9pfs.c
-index 7593686a90..8f5d475322 100644
---- a/tools/libs/light/libxl_9pfs.c
-+++ b/tools/libs/light/libxl_9pfs.c
-@@ -208,6 +208,22 @@ static void libxl__device_p9_add(libxl__egc *egc, uint32_t domid,
-         aodev->callback(egc, aodev);
+@@ -137,6 +137,17 @@ void trace_destroy(const void *data, const char *type)
+ 		trace("obj: DESTROY %s %p\n", type, data);
  }
  
-+int libxl_device_9pfs_add(libxl_ctx *ctx, uint32_t domid, libxl_device_p9 *p9,
-+                          const libxl_asyncop_how *ao_how)
++/*
++ * Return an absolute filename.
++ * In case of a relative filename given as input, prepend XENSTORE_LIB_DIR.
++ */
++const char *absolute_filename(const void *ctx, const char *filename)
 +{
-+    AO_CREATE(ctx, domid, ao_how);
-+    libxl__ao_device *aodev;
-+
-+    GCNEW(aodev);
-+    libxl__prepare_ao_device(ao, aodev);
-+    aodev->action = LIBXL__DEVICE_ACTION_ADD;
-+    aodev->callback = device_addrm_aocomplete;
-+
-+    libxl__device_p9_add(egc, domid, p9, aodev);
-+
-+    return AO_INPROGRESS;
++	if (filename[0] != '/')
++		return talloc_asprintf(ctx, XENSTORE_LIB_DIR "/%s", filename);
++	return talloc_strdup(ctx, filename);
 +}
 +
- #define libxl_device_p9_list NULL
- #define libxl_device_p9_compare NULL
+ void close_log(void)
+ {
+ 	if (tracefd >= 0)
+@@ -2759,7 +2770,7 @@ int main(int argc, char *argv[])
+ #endif
  
+ 	if (tracefile)
+-		tracefile = talloc_strdup(NULL, tracefile);
++		tracefile = absolute_filename(NULL, tracefile);
+ 
+ #ifndef NO_LIVE_UPDATE
+ 	/* Read state in case of live update. */
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index fe0ee90581..e58779e88c 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -341,7 +341,7 @@ void close_log(void);
+ extern int orig_argc;
+ extern char **orig_argv;
+ 
+-extern char *tracefile;
++extern const char *tracefile;
+ extern int tracefd;
+ 
+ /* Trace flag values must be kept in sync with trace_switches[] contents. */
+@@ -405,6 +405,9 @@ void set_socket_fd(int fd);
+ void mount_9pfs(void);
+ #endif
+ 
++const char *xenstore_rundir(void);
++const char *absolute_filename(const void *ctx, const char *filename);
++
+ /* Close stdin/stdout/stderr to complete daemonize */
+ void finish_daemonize(void);
+ 
+diff --git a/tools/xenstored/lu_daemon.c b/tools/xenstored/lu_daemon.c
+index 71bcabadd3..6351111ab0 100644
+--- a/tools/xenstored/lu_daemon.c
++++ b/tools/xenstored/lu_daemon.c
+@@ -24,7 +24,7 @@ void lu_get_dump_state(struct lu_dump_state *state)
+ 	state->size = 0;
+ 
+ 	state->filename = talloc_asprintf(NULL, "%s/state_dump",
+-					  xenstore_daemon_rundir());
++					  xenstore_rundir());
+ 	if (!state->filename)
+ 		barf("Allocation failure");
+ 
+@@ -65,7 +65,7 @@ FILE *lu_dump_open(const void *ctx)
+ 	int fd;
+ 
+ 	filename = talloc_asprintf(ctx, "%s/state_dump",
+-				   xenstore_daemon_rundir());
++				   xenstore_rundir());
+ 	if (!filename)
+ 		return NULL;
+ 
+diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
+index 562a9b4972..e70386f8c7 100644
+--- a/tools/xenstored/minios.c
++++ b/tools/xenstored/minios.c
+@@ -128,3 +128,8 @@ void mount_9pfs(void)
+ {
+ 	create_thread("mount-9pfs", mount_thread, NULL);
+ }
++
++const char *xenstore_rundir(void)
++{
++	return XENSTORE_LIB_DIR;
++}
+diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
+index 496329dfd1..d88c82d972 100644
+--- a/tools/xenstored/posix.c
++++ b/tools/xenstored/posix.c
+@@ -326,9 +326,10 @@ void early_init(bool live_update, bool dofork, const char *pidfile)
+ {
+ 	reopen_log();
+ 
+-	/* Make sure xenstored directory exists. */
++	/* Make sure xenstored directories exist. */
+ 	/* Errors ignored here, will be reported when we open files */
+ 	mkdir(xenstore_daemon_rundir(), 0755);
++	mkdir(XENSTORE_LIB_DIR, 0755);
+ 
+ 	if (dofork) {
+ 		openlog("xenstored", 0, LOG_DAEMON);
+@@ -406,3 +407,8 @@ void set_socket_fd(int fd)
+ {
+ 	sock = fd;
+ }
++
++const char *xenstore_rundir(void)
++{
++	return xenstore_daemon_rundir();
++}
 -- 
 2.35.3
 
