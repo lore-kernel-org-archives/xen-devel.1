@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 599DEC48298
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 15:33:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.676195.1052153 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27FC4C4829D
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 15:33:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.676202.1052223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX0xh-0007IJ-23; Mon, 05 Feb 2024 15:32:45 +0000
+	id 1rX0xo-0000a4-BP; Mon, 05 Feb 2024 15:32:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 676195.1052153; Mon, 05 Feb 2024 15:32:45 +0000
+Received: by outflank-mailman (output) from mailman id 676202.1052223; Mon, 05 Feb 2024 15:32:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX0xg-0007IB-VQ; Mon, 05 Feb 2024 15:32:44 +0000
-Received: by outflank-mailman (input) for mailman id 676195;
- Mon, 05 Feb 2024 15:32:43 +0000
+	id 1rX0xo-0000ZX-6s; Mon, 05 Feb 2024 15:32:52 +0000
+Received: by outflank-mailman (input) for mailman id 676202;
+ Mon, 05 Feb 2024 15:32:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TPgQ=JO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rX0xf-0007Hv-Cn
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:32:43 +0000
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [2a00:1450:4864:20::12f])
+ id 1rX0xm-0007Hv-Uc
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:32:50 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cd757792-c43b-11ee-8a46-1f161083a0e0;
- Mon, 05 Feb 2024 16:32:42 +0100 (CET)
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5115744dfe5so5542e87.2
- for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:32:42 -0800 (PST)
+ id d21fed8e-c43b-11ee-8a46-1f161083a0e0;
+ Mon, 05 Feb 2024 16:32:50 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-510faac8c57so2310580e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:32:50 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- s1-20020a056512314100b005114d401157sm474445lfi.2.2024.02.05.07.32.40
+ s1-20020a056512314100b005114d401157sm474445lfi.2.2024.02.05.07.32.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Feb 2024 07:32:41 -0800 (PST)
+ Mon, 05 Feb 2024 07:32:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,140 +46,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd757792-c43b-11ee-8a46-1f161083a0e0
+X-Inumbo-ID: d21fed8e-c43b-11ee-8a46-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707147161; x=1707751961; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1707147169; x=1707751969; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=QPaE7lsiNetODMb4yDxZSXp3uI/1BFAvrBNl/vZuK+E=;
-        b=bKqRZn5jdJN6+wt/o+/lL9ABu/9YZy27WMS/LlSgHnuGLpYtAb+4LXisR1YH8HCqFm
-         3iHEKjEhk3L922sC8EXf0UcHwFHf6y07i4KMxUSz3ge7BOvv7GmLbWpvWCBwZOAA9DgW
-         8BTic73wpqNu2w+Tyfd6J/Mi4Wk6F4B904d7pEPP1GidqzXyv3bZGe/JCd/jVO9jvuTP
-         9PSy3jMfMgB+FGhFIn+rCrkUIPsxzy6npB2iFjleBFfncHv2xSUid1VqGCMMLeVzBJXe
-         xugkHkJgeC6jezInvU0lgQ1JPOh/ExoVBgYV1S6RyN2px/YXnzc92jwkb9nlxxMyQDz9
-         d29g==
+        bh=jujKuKcHk/bGVpGrSTxRhAACNFbzeped1VAo2Fwe7V4=;
+        b=JTTcyGWrG/Sm/ASFdQvhndLrJIeda4VYzRZAUjwVo5RbMQHtqSyugPG1rw0kVwb7HM
+         6r+PwUshbF/HldBKkGMYQB5dA7fsIfo+5yXhCqQu4Pbt7OiU0J7RkhJyZ8VwOLVUFIee
+         XAA47g1Jq3niyjjJAUE+ep5rFHN7DtRSNWZNxeqiVaXNa+q5K7xJYdPImFCEHxjb7TlV
+         Lla+2WxMJzBl2vC5R1zxbrEcfLczTzR/jghRUMLJejq8+U6kmXejnlOBETH2BCg98koP
+         evel2hWIWZ/EkVF5kOqoSkBmptfhSuYmpmJZ4HTVDqHEY4Ha6rPfh1G5bauCDSgYElWF
+         RjKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707147161; x=1707751961;
+        d=1e100.net; s=20230601; t=1707147169; x=1707751969;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=QPaE7lsiNetODMb4yDxZSXp3uI/1BFAvrBNl/vZuK+E=;
-        b=N7TQRdE4KK4TUzKGbp13ZB18D4U/mwFYW0Cuz3hU8vaKdAq0J1uZNeGAFfikY9FGiP
-         w+vROJLeC99X5AFmCe/94Kn1kigl6bn5shYAXg04+oGV00sGZroysV9e2qo/1uWWliJh
-         YnLBUv5B4NDX6g+FfCHMsAQTIuRY89zSNvFqnWf2EoWS9Jk8bkkYOtkEMn1sCgMqY2si
-         rUgoH7cpSW/rLG0mg6WPtGI2AlM+Mm5n0Ie69DbscHhJI4zPipxx13x+VTmV2nE+nL8P
-         5l0i27PQRb1t5/y5nIKJw7sqxOEMenumtHCr8U4N0kd2adkqOKW4J781UOH2+iTlea8t
-         WT1w==
-X-Gm-Message-State: AOJu0YweoOJUqjm3oG4HijURvzUtehpchwicuaXMPsxQ4gh7F//WUf4J
-	zk8WJj3+4Z5kTs1kvGF2j/RrPvRP8iErSlFN52n8LphSh09HKbfw8d93pTh6
-X-Google-Smtp-Source: AGHT+IHj7ev+GqSUfsoELsOVw/8nhp+7AMv61Oet/v+xMIOQqrZa4qZ6u5PeQKgFzTMP5CzOqPrZJg==
-X-Received: by 2002:a05:6512:31ca:b0:50e:a789:dd3b with SMTP id j10-20020a05651231ca00b0050ea789dd3bmr7231537lfe.1.1707147161488;
-        Mon, 05 Feb 2024 07:32:41 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCVFa5DpX6sTlNLEgC5k0Lz+lvWZArIUVNAnFr7qgtcW4FKjWwsmyqFiHuoWMgkZQKQ9J3KupSVv0hL+HxfDn3obLPaUicS1IvBaiTsUf+Z/Gaz5dsL9rbP6HxAtvRUcLtlOn7Tka/BJpOXnFMmzS7S6snhK++tJVvjM482qCQO4LattImaKbC0nxKKMQkD2m/lNa4jaFhoI1CgijKO88ksdYEL1
+        bh=jujKuKcHk/bGVpGrSTxRhAACNFbzeped1VAo2Fwe7V4=;
+        b=sJsFq9foavMfgjx37jd8souItCRpzxi4HxTuoQn9ruQyEXK61Q1uUW8Trj3TsEKYLZ
+         DmPKwcQ4iu9bImadfyZi4AMYminhSf4/4z1oIIVnU3Dhhgj+t+XxSHSQaLmSh96xxLO0
+         N7QL0ODvDeSrfhbmNAcnMeQ1CX+hkQK4TMDcK+Z2OfdYU/rKv/v9fuG3zkuxi/p8HAHr
+         wjF/Ifs6YiP+CieshxkPP6iBVPMRyQGNl1bOlBU8cESBJFfeQR17C/PQ524DUbD3uU8B
+         dJXkVOqgwwj5mLiAkJVU8/Zva8VNtaxOcRSgHlA+KHAfXj4ETkHFKP1WBF1aZdEqFU7x
+         m5Vg==
+X-Gm-Message-State: AOJu0YyDWG6PgeMXyecBjIW5Q589NlY78EMU2xPLAFCNWBA93C3nKoY1
+	pQPTicnnKvu4xVIVP6FFSh5Y6VKRZ4BxphzbbgA+W5lOYKs48K5VflDBS9/P
+X-Google-Smtp-Source: AGHT+IF5joLMpboqZ7YvXzw1AujwcY43pMBJ4ztKpRXJKsjYJR7EOe8dGcLYV3ZESg0gbGKowODmvQ==
+X-Received: by 2002:ac2:5b06:0:b0:511:49e5:f36a with SMTP id v6-20020ac25b06000000b0051149e5f36amr1500843lfn.10.1707147168866;
+        Mon, 05 Feb 2024 07:32:48 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCXXzy8tRKrdIG0OTSJdxQf+eTm1rFKunQ+zIHvY16CdSqXwClYmzS/0rh8e6Y6f8QaBBmLLiptZb5m9cr5Y7czaEmFFcRYtS/mLSsOspwvli8Nc7aLQg/YfOVEt71HKBQKuKblX9k8oecsHHRY649cdO/NWaoFWDN1kto7N0zUBlfEKcTf3HkAn98hp6URmwdjlsAolTg5sCs2Il9ot55wK+4RhWGl9jgBIvD38qKL0hU4mxXKUFKsh28WFdVKWMGiSRn3C3hfGxZ2+nEpY4fWQe+Q+bUCdfUrXBucLxvQ/b9nQyK5a2wq3jzVYZkZOqvWmuAP/
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v4 01/30] xen/riscv: disable unnecessary configs
-Date: Mon,  5 Feb 2024 16:32:08 +0100
-Message-ID: <3a6ac88525e645e57c0dd44324fadc7ce499369e.1707146506.git.oleksii.kurochko@gmail.com>
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 08/30] xen/riscv: introduce setup.h
+Date: Mon,  5 Feb 2024 16:32:15 +0100
+Message-ID: <9556f01b1c95c8b22dae4cfec7cca9a1040e5395.1707146506.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1707146506.git.oleksii.kurochko@gmail.com>
 References: <cover.1707146506.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch disables unnecessary configs for two cases:
-1. By utilizing EXTRA_FIXED_RANDCONFIG and risc-fixed-randconfig.yaml
-   file for randconfig builds (GitLab CI jobs).
-2. By using tiny64_defconfig for non-randconfig builds.
-
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V4:
- - Nothing changed. Only rebase
+  - Nothing changed. Only rebase
 ---
 Changes in V3:
- - Remove EXTRA_FIXED_RANDCONFIG for non-randconfig jobs.
-   For non-randconfig jobs, it is sufficient to disable configs by using the defconfig.
- - Remove double blank lines in build.yaml file before archlinux-current-gcc-riscv64-debug
+ - add SPDX
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V2:
- - update the commit message.
- - remove xen/arch/riscv/Kconfig changes.
+ - Nothing changed. Only rebase.
 ---
- .../gitlab-ci/riscv-fixed-randconfig.yaml     | 27 +++++++++++++++++++
- xen/arch/riscv/configs/tiny64_defconfig       | 17 ++++++++++++
- 2 files changed, 44 insertions(+)
+ xen/arch/riscv/include/asm/setup.h | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/setup.h
 
-diff --git a/automation/gitlab-ci/riscv-fixed-randconfig.yaml b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
-index f1282b40c9..344f39c2d8 100644
---- a/automation/gitlab-ci/riscv-fixed-randconfig.yaml
-+++ b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
-@@ -5,3 +5,30 @@
-       CONFIG_EXPERT=y
-       CONFIG_GRANT_TABLE=n
-       CONFIG_MEM_ACCESS=n
-+      CONFIG_COVERAGE=n
-+      CONFIG_SCHED_CREDIT=n
-+      CONFIG_SCHED_CREDIT2=n
-+      CONFIG_SCHED_RTDS=n
-+      CONFIG_SCHED_NULL=n
-+      CONFIG_SCHED_ARINC653=n
-+      CONFIG_TRACEBUFFER=n
-+      CONFIG_HYPFS=n
-+      CONFIG_SPECULATIVE_HARDEN_ARRAY=n
-+      CONFIG_ARGO=n
-+      CONFIG_HYPFS_CONFIG=n
-+      CONFIG_CORE_PARKING=n
-+      CONFIG_DEBUG_TRACE=n
-+      CONFIG_IOREQ_SERVER=n
-+      CONFIG_CRASH_DEBUG=n
-+      CONFIG_KEXEC=n
-+      CONFIG_LIVEPATCH=n
-+      CONFIG_NUMA=n
-+      CONFIG_PERF_COUNTERS=n
-+      CONFIG_HAS_PMAP=n
-+      CONFIG_TRACEBUFFER=n
-+      CONFIG_XENOPROF=n
-+      CONFIG_COMPAT=n
-+      CONFIG_COVERAGE=n
-+      CONFIG_UBSAN=n
-+      CONFIG_NEEDS_LIBELF=n
-+      CONFIG_XSM=n
-diff --git a/xen/arch/riscv/configs/tiny64_defconfig b/xen/arch/riscv/configs/tiny64_defconfig
-index 09defe236b..35915255e6 100644
---- a/xen/arch/riscv/configs/tiny64_defconfig
-+++ b/xen/arch/riscv/configs/tiny64_defconfig
-@@ -7,6 +7,23 @@
- # CONFIG_GRANT_TABLE is not set
- # CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
- # CONFIG_MEM_ACCESS is not set
-+# CONFIG_ARGO is not set
-+# CONFIG_HYPFS_CONFIG is not set
-+# CONFIG_CORE_PARKING is not set
-+# CONFIG_DEBUG_TRACE is not set
-+# CONFIG_IOREQ_SERVER is not set
-+# CONFIG_CRASH_DEBUG is not setz
-+# CONFIG_KEXEC is not set
-+# CONFIG_LIVEPATCH is not set
-+# CONFIG_NUMA is not set
-+# CONFIG_PERF_COUNTERS is not set
-+# CONFIG_HAS_PMAP is not set
-+# CONFIG_TRACEBUFFER is not set
-+# CONFIG_XENOPROF is not set
-+# CONFIG_COMPAT is not set
-+# CONFIG_COVERAGE is not set
-+# CONFIG_UBSAN is not set
-+# CONFIG_NEEDS_LIBELF is not set
- 
- CONFIG_RISCV_64=y
- CONFIG_DEBUG=y
+diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
+new file mode 100644
+index 0000000000..7613a5dbd0
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/setup.h
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#ifndef __ASM_RISCV_SETUP_H__
++#define __ASM_RISCV_SETUP_H__
++
++#define max_init_domid (0)
++
++#endif /* __ASM_RISCV_SETUP_H__ */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.43.0
 
