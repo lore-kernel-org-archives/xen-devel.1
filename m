@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A71C1C48295
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0726C4828D
 	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 15:39:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.676273.1052400 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.676274.1052409 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX13q-00047N-AU; Mon, 05 Feb 2024 15:39:06 +0000
+	id 1rX13r-0004Ll-GO; Mon, 05 Feb 2024 15:39:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 676273.1052400; Mon, 05 Feb 2024 15:39:06 +0000
+Received: by outflank-mailman (output) from mailman id 676274.1052409; Mon, 05 Feb 2024 15:39:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX13q-00047G-5v; Mon, 05 Feb 2024 15:39:06 +0000
-Received: by outflank-mailman (input) for mailman id 676273;
+	id 1rX13r-0004LY-Dj; Mon, 05 Feb 2024 15:39:07 +0000
+Received: by outflank-mailman (input) for mailman id 676274;
  Mon, 05 Feb 2024 15:39:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TPgQ=JO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rX0xy-0007I6-Gk
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:33:02 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d8531ee9-c43b-11ee-98f5-efadbce2ee36;
- Mon, 05 Feb 2024 16:33:00 +0100 (CET)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-511531f03f6so810453e87.0
- for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:33:00 -0800 (PST)
+ id 1rX0y5-0007Hv-D1
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:33:09 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dcf60bb0-c43b-11ee-8a46-1f161083a0e0;
+ Mon, 05 Feb 2024 16:33:08 +0100 (CET)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-511570b2f49so136041e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:33:08 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- s1-20020a056512314100b005114d401157sm474445lfi.2.2024.02.05.07.32.59
+ s1-20020a056512314100b005114d401157sm474445lfi.2.2024.02.05.07.33.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Feb 2024 07:32:59 -0800 (PST)
+ Mon, 05 Feb 2024 07:33:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,37 +46,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d8531ee9-c43b-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: dcf60bb0-c43b-11ee-8a46-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707147180; x=1707751980; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1707147188; x=1707751988; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Fh1fXKNPLCGaG/VnLCvzTyh2EW511i6o4O6lrTHgeBw=;
-        b=UpuoIWF6MvaSPzfv6soZwe0sbtgkS9Yip/6za+EPpxY88tZSbeutaM1tOOPtXMjo98
-         lay7woK7VDAApoAxqlQRLbPhuxlOKZUYbIQmNDiJ5bW6ZbUQJsbkuMv5nUdiFT+NNLbP
-         gBU6xqQdIrog9AxJXDiPg0R5s+5bKXuXCDpLqaNuXuEsuuvpC2E8knGfZL/Sio7TzK2J
-         Z1l3HccB7SpwDutagRoKVTPiOMSmUOM3eYFJgYwZ/fa7nM9bkErXQ5bTM0dbpYHg6emK
-         mi0YTrwp+rqO8LHnxc1mR1w4YamccPHB7xfektTywCzzxn+3lq0+z7t7t4Cbb+qOe1Zx
-         +lQw==
+        bh=9TiqYRhQ4dcRbS7+3AgrdpkDQ6DcscMTVBQpmiSzNsk=;
+        b=llAvG+9wbsdpolhktv/1m8aP0/DJcT2g62HV1P31daQbTsvNQrdJ4gRsOADnw0XDe6
+         S3KWibAsW9lneDvsg0My4RUTv12148THgMlBHrjSGpSoKx/kjp8JM1tF5IZLOJuzPGy6
+         67BMAhjlF2JHxCsV13a3UyQQ7yp0FZAAz1J1w82Gpgfqg5eQeujQq1ZSTKaOGYbxSgCf
+         ZZ2pV0YDiuN+tQjxq8TResuOqTRSCoGQWrNlUmAqDM/LHTuouUPnoPr3KWnpFW4LvWA2
+         KDAn2EX5YTQmSu05LgtO7Y9oeXntmarTfyDVjprboMR8JEM75Y9zfFZWWdYm73G6Q1YF
+         9j5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707147180; x=1707751980;
+        d=1e100.net; s=20230601; t=1707147188; x=1707751988;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Fh1fXKNPLCGaG/VnLCvzTyh2EW511i6o4O6lrTHgeBw=;
-        b=N2sBglsHC71O8wKAiP3C7xcd8ruKpH5ThLz5zolJ69Y1nxGannhdVtAUUBM2s5VEJV
-         YQNRryrcDdvDXUBLyL/KwxdBZKF7dSTOxb3Acoh/yXabXpX6TRy1DP1l39krYAzImEST
-         0JTbAiRni9/20sdQ3yaPHPVZ8oh2ZvmtKMnyMYClnEb0XOPjbKic53VTf1ixuyvok/oS
-         RQoq3LpqdgUJmdiJdNXp99ENzEY4ffFO7k1eHlFOfzu8ItdZmESC467HVQlU8q6S7IE3
-         44vSJ8p9iHejd7xeZf6DBZ557txgzUeey8NHf9PTlrwGv1z+cbhBUp6Q6BHWWt6RiQSc
-         vVGg==
-X-Gm-Message-State: AOJu0YxLQZ5cY5V+MvVAvWmA6Ejd463vmbeWWcoH6fVVzgFb9zfLIjCa
-	GBLvH5/gyipUOEwEdYjEkbqvFSo07BKkCR6Nd4M+Y+wACBH2mU/tmjU/YGY5
-X-Google-Smtp-Source: AGHT+IHUe+H4IHHtzSGa/KZg/3OWOYeEcxwYLKDEgMAfnmSQCcWtVTsDgjs4MKtetv1K08sdHB0AcA==
-X-Received: by 2002:a05:6512:3151:b0:511:4ee4:48d1 with SMTP id s17-20020a056512315100b005114ee448d1mr2311431lfi.32.1707147180083;
-        Mon, 05 Feb 2024 07:33:00 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCVv0V2Sn1riFTcccMtaw4DrDISuAWzeSjJbFZLS60Bt1zzm5rHHNZZ5719o0GuJ3Zloh8JRFR0HWBsQljxCnJIG4dy4pcTfVNMkTQlozDoJRy+gAQtiuH0Yyu7MVjp1B+qAAk609pFnX4azd5lmdlumMjsLfqM3KFxVu41h95BXd3MpBtNtCWdCiL1Bpv2LylLvLH2rcDmnBclr9a0YkFLuukm6VwYXwke3MkV+2VMm2Q/gTtx+6goiKCCWRmdVMWQ2dnUbDxYKNzFloaLeXv8/PM+fSDzFGJ3wqHLedvq9nwNTljLZyK+OXWtWIvV/2JWgbGzr
+        bh=9TiqYRhQ4dcRbS7+3AgrdpkDQ6DcscMTVBQpmiSzNsk=;
+        b=nMBxpY5ISnUZ219iiijlhefmtsY/84Vm6hIz4TGj6NWzMAlzViNe9gfKmqkeGQZ20m
+         IeHSnRC1ZKqMertcLSaQOtIFoidmlZDCBRB0ELJ6sbMuykvWBVgfZI1iO9/tI6g5CI3S
+         AfC8sbRKDVqiF5vErEIHh6U/eG3ghbx+1siT1BjmD5NZ0Zf4YwZVDzmBOEVfNXT+5CAp
+         xAWq4r89X4nkej91/68an8GlSX15Um4PzIp5Z/dtBJAXx2foahKUeNKJAUY5V0Acuud3
+         gFms2sLAaXx0/c8tnSNLsUsnulln2gItmykqdcndp8unbFWJPqW27JeB3NQGJc0iACM6
+         9lXQ==
+X-Gm-Message-State: AOJu0YxTgYwhuiY5xqg5xW8T4DAiknmMHRiYN1bSAxvNpy/Zu2z9d5tp
+	m2Ru4CqmEZ8DsxKV1It+HYATXcHcEf71EYRU3BR0LuQWEW5lKcytiJO76rZe
+X-Google-Smtp-Source: AGHT+IGIC9dZAHKKEFYYA2ddyPhitcB+XaJ84TU2oHRdoylepvqUSn6XWSwKYnSEo/3aCiVUx3xiyg==
+X-Received: by 2002:ac2:4c07:0:b0:511:48fe:1b07 with SMTP id t7-20020ac24c07000000b0051148fe1b07mr12441lfq.5.1707147187749;
+        Mon, 05 Feb 2024 07:33:07 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCXqqlMbaSt5dGe6wWB/Mq9M7T+par/wtcW9fLFZQD0jxwZqidUCJuT7gLsc0f9m5J5Z0qt6rISb/JSAYl79PL/E4plmr7tdNgMVghLgHOXCYjfvDZ0bdqIx95KTjKCM+RAwLlhFo6A+wMdgkkOr9903rCCkn+jtVV1XbIjhy7f1WnAvKXn7+YJ5KXvJlyzFWETuCl8er+K94UNkv7F/SimG+ceohExy49hPvZqnjGBC16yPsKA0c/AtgMp81TG2Bm/0KBZwr2OlfR49KakGMAxSkT+e9iG5N2xCvKREBtmkgIHjxHUyt9KPsUnmAtF+3YfvHxxO
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -89,9 +89,9 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 18/30] xen/riscv: introduce time.h
-Date: Mon,  5 Feb 2024 16:32:25 +0100
-Message-ID: <f0a4566c185469fa9f5de41b5bbbc7234cfa9912.1707146506.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 26/30] xen/riscv: add minimal stuff to mm.h to build full Xen
+Date: Mon,  5 Feb 2024 16:32:33 +0100
+Message-ID: <369fe9e80d11c5e499810a6819fc1c282ce60628.1707146506.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1707146506.git.oleksii.kurochko@gmail.com>
 References: <cover.1707146506.git.oleksii.kurochko@gmail.com>
@@ -99,59 +99,349 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V4:
- - s/BUG()/BUG_ON("unimplemented")
+ - update an argument name of PFN_ORDERN macros.
+ - drop pad at the end of 'struct page_info'.
+ - Change message -> subject in "Changes in V3"
+ - delete duplicated macros from riscv/mm.h
+ - fix identation in struct page_info
+ - align comment for PGC_ macros
+ - update definitions of domain_set_alloc_bitsize() and domain_clamp_alloc_bitsize()
+ - drop unnessary comments.
+ - s/BUG/BUG_ON("...")
+ - define __virt_to_maddr, __maddr_to_virt as stubs
+ - add inclusion of xen/mm-frame.h for mfn_x and others
+ - include "xen/mm.h" instead of "asm/mm.h" to fix compilation issues:
+	 In file included from arch/riscv/setup.c:7:
+	./arch/riscv/include/asm/mm.h:60:28: error: field 'list' has incomplete type
+	   60 |     struct page_list_entry list;
+	      |                            ^~~~
+	./arch/riscv/include/asm/mm.h:81:43: error: 'MAX_ORDER' undeclared here (not in a function)
+	   81 |                 unsigned long first_dirty:MAX_ORDER + 1;
+	      |                                           ^~~~~~~~~
+	./arch/riscv/include/asm/mm.h:81:31: error: bit-field 'first_dirty' width not an integer constant
+	   81 |                 unsigned long first_dirty:MAX_ORDER + 1;
+ - Define __virt_to_mfn() and __mfn_to_virt() using maddr_to_mfn() and mfn_to_maddr().
 ---
 Changes in V3:
- - Acked-by: Jan Beulich <jbeulich@suse.com>
- - add SPDX
- - Add new line
+ - update the commit title
+ - introduce DIRECTMAP_VIRT_START.
+ - drop changes related pfn_to_paddr() and paddr_to_pfn as they were remvoe in
+   [PATCH v2 32/39] xen/riscv: add minimal stuff to asm/page.h to build full Xen
+ - code style fixes.
+ - drop get_page_nr  and put_page_nr as they don't need for time being
+ - drop CONFIG_STATIC_MEMORY related things
+ - code style fixes
 ---
 Changes in V2:
- - change xen/lib.h to xen/bug.h
- - remove inclusion of <asm/processor.h> as it's not needed.
+ - define stub for arch_get_dma_bitsize(void)
 ---
- xen/arch/riscv/include/asm/time.h | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/time.h
+ xen/arch/riscv/include/asm/mm.h | 246 ++++++++++++++++++++++++++++++++
+ xen/arch/riscv/mm.c             |   2 +-
+ xen/arch/riscv/setup.c          |   2 +-
+ 3 files changed, 248 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
-new file mode 100644
-index 0000000000..2e359fa046
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/time.h
-@@ -0,0 +1,29 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __ASM_RISCV_TIME_H__
-+#define __ASM_RISCV_TIME_H__
-+
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 07c7a0abba..0254babcc1 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -3,11 +3,252 @@
+ #ifndef _ASM_RISCV_MM_H
+ #define _ASM_RISCV_MM_H
+ 
++#include <public/xen.h>
 +#include <xen/bug.h>
-+#include <asm/csr.h>
++#include <xen/mm-frame.h>
++#include <xen/pdx.h>
++#include <xen/types.h>
 +
-+struct vcpu;
+ #include <asm/page-bits.h>
+ 
+ #define pfn_to_paddr(pfn) ((paddr_t)(pfn) << PAGE_SHIFT)
+ #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
+ 
++#define paddr_to_pdx(pa)    mfn_to_pdx(maddr_to_mfn(pa))
++#define gfn_to_gaddr(gfn)   pfn_to_paddr(gfn_x(gfn))
++#define gaddr_to_gfn(ga)    _gfn(paddr_to_pfn(ga))
++#define mfn_to_maddr(mfn)   pfn_to_paddr(mfn_x(mfn))
++#define maddr_to_mfn(ma)    _mfn(paddr_to_pfn(ma))
++#define vmap_to_mfn(va)     maddr_to_mfn(virt_to_maddr((vaddr_t)va))
++#define vmap_to_page(va)    mfn_to_page(vmap_to_mfn(va))
 +
-+/* TODO: implement */
-+static inline void force_update_vcpu_system_time(struct vcpu *v) { BUG_ON("unimplemented"); }
-+
-+typedef unsigned long cycles_t;
-+
-+static inline cycles_t get_cycles(void)
++static inline unsigned long __virt_to_maddr(unsigned long va)
 +{
-+	return csr_read(CSR_TIME);
++    BUG_ON("unimplemented");
++    return 0;
 +}
 +
-+#endif /* __ASM_RISCV_TIME_H__ */
++static inline void *__maddr_to_virt(unsigned long ma)
++{
++    BUG_ON("unimplemented");
++    return NULL;
++}
++
++#define virt_to_maddr(va) __virt_to_maddr((unsigned long)(va))
++#define maddr_to_virt(pa) __maddr_to_virt((unsigned long)(pa))
++
++/* Convert between Xen-heap virtual addresses and machine frame numbers. */
++#define __virt_to_mfn(va)  mfn_x(maddr_to_mfn(virt_to_maddr(va)))
++#define __mfn_to_virt(mfn) maddr_to_virt(mfn_to_maddr(_mfn(mfn)))
++
++/* Convert between Xen-heap virtual addresses and page-info structures. */
++static inline struct page_info *virt_to_page(const void *v)
++{
++    BUG_ON("unimplemented");
++    return NULL;
++}
 +
 +/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
++ * We define non-underscored wrappers for above conversion functions.
++ * These are overriden in various source files while underscored version
++ * remain intact.
 + */
++#define virt_to_mfn(va)     __virt_to_mfn(va)
++#define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
++
++struct page_info
++{
++    /* Each frame can be threaded onto a doubly-linked list. */
++    struct page_list_entry list;
++
++    /* Reference count and various PGC_xxx flags and fields. */
++    unsigned long count_info;
++
++    /* Context-dependent fields follow... */
++    union {
++        /* Page is in use: ((count_info & PGC_count_mask) != 0). */
++        struct {
++            /* Type reference count and various PGT_xxx flags and fields. */
++            unsigned long type_info;
++        } inuse;
++        /* Page is on a free list: ((count_info & PGC_count_mask) == 0). */
++        union {
++            struct {
++                /*
++                 * Index of the first *possibly* unscrubbed page in the buddy.
++                 * One more bit than maximum possible order to accommodate
++                 * INVALID_DIRTY_IDX.
++                 */
++#define INVALID_DIRTY_IDX ((1UL << (MAX_ORDER + 1)) - 1)
++                unsigned long first_dirty:MAX_ORDER + 1;
++
++                /* Do TLBs need flushing for safety before next page use? */
++                bool need_tlbflush:1;
++
++#define BUDDY_NOT_SCRUBBING    0
++#define BUDDY_SCRUBBING        1
++#define BUDDY_SCRUB_ABORT      2
++                unsigned long scrub_state:2;
++            };
++
++                unsigned long val;
++        } free;
++    } u;
++
++    union {
++        /* Page is in use, but not as a shadow. */
++        struct {
++            /* Owner of this page (zero if page is anonymous). */
++            struct domain *domain;
++        } inuse;
++
++        /* Page is on a free list. */
++        struct {
++            /* Order-size of the free chunk this page is the head of. */
++            unsigned int order;
++        } free;
++    } v;
++
++    union {
++        /*
++         * Timestamp from 'TLB clock', used to avoid extra safety flushes.
++         * Only valid for: a) free pages, and b) pages with zero type count
++         */
++        uint32_t tlbflush_timestamp;
++    };
++};
++
++#define frame_table ((struct page_info *)FRAMETABLE_VIRT_START)
++
++/* PDX of the first page in the frame table. */
++extern unsigned long frametable_base_pdx;
++
++/* Convert between machine frame numbers and page-info structures. */
++#define mfn_to_page(mfn)                                            \
++    (frame_table + (mfn_to_pdx(mfn) - frametable_base_pdx))
++#define page_to_mfn(pg)                                             \
++    pdx_to_mfn((unsigned long)((pg) - frame_table) + frametable_base_pdx)
++
++static inline void *page_to_virt(const struct page_info *pg)
++{
++    return mfn_to_virt(mfn_x(page_to_mfn(pg)));
++}
++
++/*
++ * Common code requires get_page_type and put_page_type.
++ * We don't care about typecounts so we just do the minimum to make it
++ * happy.
++ */
++static inline int get_page_type(struct page_info *page, unsigned long type)
++{
++    return 1;
++}
++
++static inline void put_page_type(struct page_info *page)
++{
++}
++
++static inline void put_page_and_type(struct page_info *page)
++{
++    put_page_type(page);
++    put_page(page);
++}
++
++/*
++ * RISC-V does not have an M2P, but common code expects a handful of
++ * M2P-related defines and functions. Provide dummy versions of these.
++ */
++#define INVALID_M2P_ENTRY        (~0UL)
++#define SHARED_M2P_ENTRY         (~0UL - 1UL)
++#define SHARED_M2P(_e)           ((_e) == SHARED_M2P_ENTRY)
++
++#define set_gpfn_from_mfn(mfn, pfn) do { (void)(mfn), (void)(pfn); } while (0)
++#define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
++
++#define PDX_GROUP_SHIFT (16 + 5)
++
++static inline unsigned long domain_get_maximum_gpfn(struct domain *d)
++{
++    BUG_ON("unimplemented");
++    return 0;
++}
++
++static inline long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg)
++{
++    BUG_ON("unimplemented");
++    return 0;
++}
++
++/*
++ * On RISCV, all the RAM is currently direct mapped in Xen.
++ * Hence return always true.
++ */
++static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
++{
++    return true;
++}
++
++#define PG_shift(idx)   (BITS_PER_LONG - (idx))
++#define PG_mask(x, idx) (x ## UL << PG_shift(idx))
++
++#define PGT_none          PG_mask(0, 1)  /* no special uses of this page   */
++#define PGT_writable_page PG_mask(1, 1)  /* has writable mappings?         */
++#define PGT_type_mask     PG_mask(1, 1)  /* Bits 31 or 63.                 */
++
++ /* Count of uses of this frame as its current type. */
++#define PGT_count_width   PG_shift(2)
++#define PGT_count_mask    ((1UL << PGT_count_width) - 1)
++
++/*
++ * Page needs to be scrubbed. Since this bit can only be set on a page that is
++ * free (i.e. in PGC_state_free) we can reuse PGC_allocated bit.
++ */
++#define _PGC_need_scrub   _PGC_allocated
++#define PGC_need_scrub    PGC_allocated
++
++/* Cleared when the owning guest 'frees' this page. */
++#define _PGC_allocated    PG_shift(1)
++#define PGC_allocated     PG_mask(1, 1)
++/* Page is Xen heap? */
++#define _PGC_xen_heap     PG_shift(2)
++#define PGC_xen_heap      PG_mask(1, 2)
++/* Page is broken? */
++#define _PGC_broken       PG_shift(7)
++#define PGC_broken        PG_mask(1, 7)
++/* Mutually-exclusive page states: { inuse, offlining, offlined, free }. */
++#define PGC_state         PG_mask(3, 9)
++#define PGC_state_inuse   PG_mask(0, 9)
++#define PGC_state_offlining PG_mask(1, 9)
++#define PGC_state_offlined PG_mask(2, 9)
++#define PGC_state_free    PG_mask(3, 9)
++#define page_state_is(pg, st) (((pg)->count_info&PGC_state) == PGC_state_##st)
++
++/* Count of references to this frame. */
++#define PGC_count_width   PG_shift(9)
++#define PGC_count_mask    ((1UL << PGC_count_width) - 1)
++
++#define _PGC_extra        PG_shift(10)
++#define PGC_extra         PG_mask(1, 10)
++
++#define is_xen_heap_page(page) ((page)->count_info & PGC_xen_heap)
++#define is_xen_heap_mfn(mfn) \
++    (mfn_valid(mfn) && is_xen_heap_page(mfn_to_page(mfn)))
++
++#define is_xen_fixed_mfn(mfn)                                   \
++    ((mfn_to_maddr(mfn) >= virt_to_maddr((vaddr_t)_start)) &&   \
++     (mfn_to_maddr(mfn) <= virt_to_maddr((vaddr_t)_end - 1)))
++
++#define page_get_owner(_p)    (_p)->v.inuse.domain
++#define page_set_owner(_p,_d) ((_p)->v.inuse.domain = (_d))
++
++/* TODO: implement */
++#define mfn_valid(mfn) ({ (void)(mfn); 0; })
++
++#define domain_set_alloc_bitsize(d) ((void)(d))
++#define domain_clamp_alloc_bitsize(d, b) ((void)(d), (b))
++
++#define PFN_ORDER(pfn) ((pfn)->v.free.order)
++
+ extern unsigned char cpu0_boot_stack[];
+ 
+ void setup_initial_pagetables(void);
+@@ -20,4 +261,9 @@ unsigned long calc_phys_offset(void);
+ 
+ void turn_on_mmu(unsigned long ra);
+ 
++static inline unsigned int arch_get_dma_bitsize(void)
++{
++    return 32; /* TODO */
++}
++
+ #endif /* _ASM_RISCV_MM_H */
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 053f043a3d..fe3a43be20 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -5,12 +5,12 @@
+ #include <xen/init.h>
+ #include <xen/kernel.h>
+ #include <xen/macros.h>
++#include <xen/mm.h>
+ #include <xen/pfn.h>
+ 
+ #include <asm/early_printk.h>
+ #include <asm/csr.h>
+ #include <asm/current.h>
+-#include <asm/mm.h>
+ #include <asm/page.h>
+ #include <asm/processor.h>
+ 
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 6593f601c1..98a94c4c48 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -2,9 +2,9 @@
+ 
+ #include <xen/compile.h>
+ #include <xen/init.h>
++#include <xen/mm.h>
+ 
+ #include <asm/early_printk.h>
+-#include <asm/mm.h>
+ 
+ /* Xen stack for bringing up the first CPU. */
+ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
 -- 
 2.43.0
 
