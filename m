@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C10C4828D
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:50:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.675799.1051333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F95C4828D
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:52:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.675812.1051343 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwYj-0004nO-Ss; Mon, 05 Feb 2024 10:50:41 +0000
+	id 1rWwaX-00064m-CR; Mon, 05 Feb 2024 10:52:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 675799.1051333; Mon, 05 Feb 2024 10:50:41 +0000
+Received: by outflank-mailman (output) from mailman id 675812.1051343; Mon, 05 Feb 2024 10:52:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwYj-0004nC-Px; Mon, 05 Feb 2024 10:50:41 +0000
-Received: by outflank-mailman (input) for mailman id 675799;
- Mon, 05 Feb 2024 10:50:40 +0000
+	id 1rWwaX-00064d-95; Mon, 05 Feb 2024 10:52:33 +0000
+Received: by outflank-mailman (input) for mailman id 675812;
+ Mon, 05 Feb 2024 10:52:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=b4fC=JO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rWwYi-0000qL-Eb
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:50:40 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 1rWwaW-00064Q-Le
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:52:32 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 65f51b28-c414-11ee-98f5-efadbce2ee36;
- Mon, 05 Feb 2024 11:50:38 +0100 (CET)
+ id a8c4cb0b-c414-11ee-98f5-efadbce2ee36;
+ Mon, 05 Feb 2024 11:52:30 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 1ED821F8BA;
- Mon,  5 Feb 2024 10:50:38 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5255922285;
+ Mon,  5 Feb 2024 10:52:30 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DAF68132DD;
- Mon,  5 Feb 2024 10:50:37 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 14A4A132DD;
+ Mon,  5 Feb 2024 10:52:30 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id Oq28M329wGUjNgAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:50:37 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id QOmNA+69wGXmNgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:52:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,42 +53,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65f51b28-c414-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: a8c4cb0b-c414-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707130238; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1707130350; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=hRIG3K7WCdgf9Z1PIv4Opjhz+muswiZWfpgWnc+2iLg=;
-	b=UDpSx3gHoJ28Rag8I1uLRwN5+my/9UWih3NG0D+C1ZzTJqCX4GQi3cJV2bVhZeBjIEsT2b
-	CNc10NjvPJsnu1H0WoxazDOxkhE1gx3lua7Jv2qEGFGJvV/r593B89mvEJmnvHr/Vn6dRA
-	8O1bWK34oq0hTxdUd9IECxd3VF39RNE=
+	bh=sBN45VY796bPT208E7z1cKUSQ/jSCHWuzgN6GPy8ckw=;
+	b=XPLQmfsImAnW4qPMeUaZMNYUKSCWkTag5wGDPSYySdjzxWw0LTfK7czpaKIGUbR2VOgO/U
+	w/sayaMlagAz0M9Fclx3CRPeO7wYiBdhqS4ushlEwZ2F8eoSOVBWGaxr7mgKgLiW+ZIqQ4
+	BWDxSi9ki62/PDIMB4SWLuhbqmMLaTY=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707130238; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1707130350; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=hRIG3K7WCdgf9Z1PIv4Opjhz+muswiZWfpgWnc+2iLg=;
-	b=UDpSx3gHoJ28Rag8I1uLRwN5+my/9UWih3NG0D+C1ZzTJqCX4GQi3cJV2bVhZeBjIEsT2b
-	CNc10NjvPJsnu1H0WoxazDOxkhE1gx3lua7Jv2qEGFGJvV/r593B89mvEJmnvHr/Vn6dRA
-	8O1bWK34oq0hTxdUd9IECxd3VF39RNE=
+	bh=sBN45VY796bPT208E7z1cKUSQ/jSCHWuzgN6GPy8ckw=;
+	b=XPLQmfsImAnW4qPMeUaZMNYUKSCWkTag5wGDPSYySdjzxWw0LTfK7czpaKIGUbR2VOgO/U
+	w/sayaMlagAz0M9Fclx3CRPeO7wYiBdhqS4ushlEwZ2F8eoSOVBWGaxr7mgKgLiW+ZIqQ4
+	BWDxSi9ki62/PDIMB4SWLuhbqmMLaTY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Jason Andryuk <jandryuk@gmail.com>
-Subject: [PATCH v4 06/32] tools/xen-9pfsd: add 9pfs version request support
-Date: Mon,  5 Feb 2024 11:49:35 +0100
-Message-Id: <20240205105001.24171-7-jgross@suse.com>
+	Jason Andryuk <jandryuk@gmail.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v4 26/32] tools/xenstored: rework ring page (un)map functions
+Date: Mon,  5 Feb 2024 11:49:55 +0100
+Message-Id: <20240205105001.24171-27-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240205105001.24171-1-jgross@suse.com>
 References: <20240205105001.24171-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out2.suse.de;
+Authentication-Results: smtp-out1.suse.de;
 	none
-X-Spamd-Result: default: False [-2.10 / 50.00];
+X-Spamd-Result: default: False [0.89 / 50.00];
 	 ARC_NA(0.00)[];
 	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
@@ -99,269 +101,99 @@ X-Spamd-Result: default: False [-2.10 / 50.00];
 	 TO_MATCH_ENVRCPT_ALL(0.00)[];
 	 REPLY(-4.00)[];
 	 BROKEN_CONTENT_TYPE(1.50)[];
-	 RCPT_COUNT_FIVE(0.00)[5];
 	 RCVD_COUNT_THREE(0.00)[3];
 	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 RCPT_COUNT_SEVEN(0.00)[7];
 	 MID_CONTAINS_FROM(1.00)[];
 	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
 	 FUZZY_BLOCKED(0.00)[rspamd.com];
 	 FROM_EQ_ENVFROM(0.00)[];
 	 MIME_TRACE(0.00)[0:+];
-	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com];
+	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com,amazon.com];
 	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
+	 BAYES_HAM(-0.01)[50.16%]
 
-Add the version request of the 9pfs protocol. For the version use the
-"9P2000.u" variant, as it is supported by Mini-OS and Linux.
+When [un]mapping the ring page of a Xenstore client, different actions
+are required for "normal" guests and dom0. Today this distinction is
+made at call site.
 
-For the request parsing add all format items needed even in future in
-order to avoid code churn for those additions later.
+Move this distinction into [un]map_interface() instead, avoiding code
+duplication and preparing special handling for [un]mapping the stub
+domain's ring page.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V3:
-- use unaligned helper macros (Jason Andryuk)
----
- tools/xen-9pfsd/io.c | 201 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 201 insertions(+)
+ tools/xenstored/domain.c | 31 +++++++++++++------------------
+ 1 file changed, 13 insertions(+), 18 deletions(-)
 
-diff --git a/tools/xen-9pfsd/io.c b/tools/xen-9pfsd/io.c
-index 4a44c70c4d..839dd1112c 100644
---- a/tools/xen-9pfsd/io.c
-+++ b/tools/xen-9pfsd/io.c
-@@ -22,8 +22,12 @@
- #include "xen-9pfsd.h"
+diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
+index 040df98b8c..af80a8221d 100644
+--- a/tools/xenstored/domain.c
++++ b/tools/xenstored/domain.c
+@@ -497,14 +497,20 @@ static const struct interface_funcs domain_funcs = {
  
- /* P9 protocol commands (response is either cmd+1 or P9_CMD_ERROR). */
-+#define P9_CMD_VERSION    100
- #define P9_CMD_ERROR      107
- 
-+#define P9_MIN_MSIZE      2048
-+#define P9_VERSION        "9P2000.u"
+ static void *map_interface(domid_t domid)
+ {
++	if (domid == xenbus_master_domid())
++		return xenbus_map();
 +
- struct p9_qid {
-     uint8_t type;
- #define QID_TYPE_DIR      0x80
-@@ -294,6 +298,169 @@ static unsigned int add_string(struct ring *ring, const char *str,
-     return ret;
+ 	return xengnttab_map_grant_ref(*xgt_handle, domid,
+ 				       GNTTAB_RESERVED_XENSTORE,
+ 				       PROT_READ|PROT_WRITE);
  }
  
-+static bool chk_data(struct ring *ring, void *data, unsigned int len)
-+{
-+    struct p9_header *hdr = ring->buffer;
-+
-+    if ( data + len <= ring->buffer + hdr->size )
-+        return true;
-+
-+    errno = E2BIG;
-+
-+    return false;
-+}
-+
-+static bool fill_data_elem(void **par, void **array, unsigned int *array_sz,
-+                           unsigned int elem_sz, void *data)
-+{
-+    if ( *array_sz && !*array )
-+    {
-+        *array = calloc(*array_sz, elem_sz);
-+        if ( !*array )
-+            return false;
-+        *par = *array;
-+    }
-+
-+    memcpy(*par, data, elem_sz);
-+
-+    if ( *array_sz )
-+    {
-+        *par += elem_sz;
-+        *array_sz -= 1;
-+    }
-+
-+    return true;
-+}
-+
-+/*
-+ * Fill variables with request data.
-+ * fmt is a sequence of format characters. Supported characters are:
-+ * a: an array (2 bytes number of elements + the following format as elements)
-+ *    The number of elements is stored in the first unsigned int parameter, the
-+ *    next parameter is a pointer to an array of elements as denoted by the next
-+ *    format character. The array is allocated dynamically.
-+ * b: 1 byte unsigned integer
-+ *    The value is stored in the next parameter with type uint8_t.
-+ * D: Data blob (4 byte length + <length> bytes)
-+ *    2 parameters are consumed, first an unsigned int for the length, then a
-+ *    pointer to the first uint8_t value.
-+ *    No array support.
-+ * L: 8 byte unsigned integer
-+ *    The value is stored in the next parameter with type uint64_t.
-+ * S: String (2 byte length + <length> characters)
-+ *    The 0-terminated string is stored in device->str + off, off is stored in
-+ *    the next parameter with type unsigned int.
-+ * U: 4 byte unsigned integer
-+ *    The value is stored in the next parameter with type uint32_t.
-+ *
-+ * Return value: number of filled variables, errno will be set in case of
-+ *   error.
-+ */
-+static int fill_data(struct ring *ring, const char *fmt, ...)
-+{
-+    struct p9_header *hdr = ring->buffer;
-+    void *data = hdr + 1;
-+    void *par;
-+    unsigned int pars = 0;
-+    const char *f;
-+    va_list ap;
-+    unsigned int len;
-+    unsigned int str_off;
-+    unsigned int array_sz = 0;
-+    void **array = NULL;
-+
-+    va_start(ap, fmt);
-+
-+    for ( f = fmt; *f; f++ )
-+    {
-+        if ( !array_sz )
-+            par = va_arg(ap, void *);
-+
-+        switch ( *f )
-+        {
-+        case 'a':
-+            f++;
-+            if ( !*f || array_sz )
-+                fmt_err(fmt);
-+            if ( !chk_data(ring, data, sizeof(uint16_t)) )
-+                return pars;
-+            array_sz = get_unaligned((uint16_t *)data);
-+            data += sizeof(uint16_t);
-+            *(unsigned int *)par = array_sz;
-+            array = va_arg(ap, void **);
-+            *array = NULL;
-+            break;
-+
-+        case 'b':
-+            if ( !chk_data(ring, data, sizeof(uint8_t)) )
-+                return pars;
-+            if ( !fill_data_elem(&par, array, &array_sz, sizeof(uint8_t),
-+                                 data) )
-+                return pars;
-+            data += sizeof(uint8_t);
-+            break;
-+
-+        case 'D':
-+            if ( array_sz )
-+                fmt_err(fmt);
-+            if ( !chk_data(ring, data, sizeof(uint32_t)) )
-+                return pars;
-+            len = get_unaligned((uint32_t *)data);
-+            data += sizeof(uint32_t);
-+            *(unsigned int *)par = len;
-+            par = va_arg(ap, void *);
-+            if ( !chk_data(ring, data, len) )
-+                return pars;
-+            memcpy(par, data, len);
-+            data += len;
-+            break;
-+
-+        case 'L':
-+            if ( !chk_data(ring, data, sizeof(uint64_t)) )
-+                return pars;
-+            if ( !fill_data_elem(&par, array, &array_sz, sizeof(uint64_t),
-+                                 data) )
-+                return pars;
-+            data += sizeof(uint64_t);
-+            break;
-+
-+        case 'S':
-+            if ( !chk_data(ring, data, sizeof(uint16_t)) )
-+                return pars;
-+            len = get_unaligned((uint16_t *)data);
-+            data += sizeof(uint16_t);
-+            if ( !chk_data(ring, data, len) )
-+                return pars;
-+            str_off = add_string(ring, data, len);
-+            if ( str_off == ~0 )
-+                return pars;
-+            if ( !fill_data_elem(&par, array, &array_sz, sizeof(unsigned int),
-+                                 &str_off) )
-+                return pars;
-+            data += len;
-+            break;
-+
-+        case 'U':
-+            if ( !chk_data(ring, data, sizeof(uint32_t)) )
-+                return pars;
-+            if ( !fill_data_elem(&par, array, &array_sz, sizeof(uint32_t),
-+                                 data) )
-+                return pars;
-+            data += sizeof(uint32_t);
-+            break;
-+
-+        default:
-+            fmt_err(fmt);
-+        }
-+
-+        if ( array_sz )
-+            f--;
-+        pars++;
-+    }
-+
-+    return pars;
-+}
-+
- static void p9_error(struct ring *ring, uint16_t tag, uint32_t err)
+-static void unmap_interface(void *interface)
++static void unmap_interface(domid_t domid, void *interface)
  {
-     unsigned int erroff;
-@@ -305,6 +472,36 @@ static void p9_error(struct ring *ring, uint16_t tag, uint32_t err)
-                 &err);
+-	xengnttab_unmap(*xgt_handle, interface, 1);
++	if (domid == xenbus_master_domid())
++		unmap_xenbus(interface);
++	else
++		xengnttab_unmap(*xgt_handle, interface, 1);
  }
  
-+static void p9_version(struct ring *ring, struct p9_header *hdr)
-+{
-+    uint32_t max_size;
-+    unsigned int off;
-+    char *version;
-+    int ret;
-+
-+    ret = fill_data(ring, "US", &max_size, &off);
-+    if ( ret != 2 )
-+    {
-+        p9_error(ring, hdr->tag, errno);
-+        return;
-+    }
-+
-+    if ( max_size < P9_MIN_MSIZE )
-+    {
-+        p9_error(ring, hdr->tag, EMSGSIZE);
-+        return;
-+    }
-+
-+    if ( max_size < ring->max_size )
-+        ring->max_size = max_size;
-+
-+    version = ring->str + off;
-+    if ( strcmp(version, P9_VERSION) )
-+        version = "unknown";
-+
-+    fill_buffer(ring, hdr->cmd + 1, hdr->tag, "US", &ring->max_size, version);
-+}
-+
- void *io_thread(void *arg)
- {
-     struct ring *ring = arg;
-@@ -360,6 +557,10 @@ void *io_thread(void *arg)
+ static int domain_tree_remove_sub(const void *ctx, struct connection *conn,
+@@ -594,14 +600,8 @@ static int destroy_domain(void *_domain)
+ 			eprintf("> Unbinding port %i failed!\n", domain->port);
+ 	}
  
-             switch ( hdr.cmd )
-             {
-+            case P9_CMD_VERSION:
-+                p9_version(ring, &hdr);
-+                break;
-+
-             default:
-                 syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
-                        ring->device->domid, ring->device->devid, hdr.cmd);
+-	if (domain->interface) {
+-		/* Domain 0 was mapped by dom0_init, so it must be unmapped
+-		   using munmap() and not the grant unmap call. */
+-		if (domain->domid == dom0_domid)
+-			unmap_xenbus(domain->interface);
+-		else
+-			unmap_interface(domain->interface);
+-	}
++	if (domain->interface)
++		unmap_interface(domain->domid, domain->interface);
+ 
+ 	fire_special_watches("@releaseDomain");
+ 
+@@ -966,18 +966,13 @@ static struct domain *introduce_domain(const void *ctx,
+ 		return NULL;
+ 
+ 	if (!domain->introduced) {
+-		interface = is_master_domain ? xenbus_map()
+-					     : map_interface(domid);
++		interface = map_interface(domid);
+ 		if (!interface && !restore)
+ 			return NULL;
+ 		if (new_domain(domain, port, restore)) {
+ 			rc = errno;
+-			if (interface) {
+-				if (is_master_domain)
+-					unmap_xenbus(interface);
+-				else
+-					unmap_interface(interface);
+-			}
++			if (interface)
++				unmap_interface(domid, interface);
+ 			errno = rc;
+ 			return NULL;
+ 		}
 -- 
 2.35.3
 
