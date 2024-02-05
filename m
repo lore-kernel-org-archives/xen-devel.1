@@ -4,44 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F36C48291
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:59:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.675902.1051598 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56348C4828D
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 11:02:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.675930.1051613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwhQ-0003ca-AF; Mon, 05 Feb 2024 10:59:40 +0000
+	id 1rWwk4-00061e-Mt; Mon, 05 Feb 2024 11:02:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 675902.1051598; Mon, 05 Feb 2024 10:59:40 +0000
+Received: by outflank-mailman (output) from mailman id 675930.1051613; Mon, 05 Feb 2024 11:02:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwhQ-0003bx-4L; Mon, 05 Feb 2024 10:59:40 +0000
-Received: by outflank-mailman (input) for mailman id 675902;
- Mon, 05 Feb 2024 10:59:39 +0000
+	id 1rWwk4-00061V-JI; Mon, 05 Feb 2024 11:02:24 +0000
+Received: by outflank-mailman (input) for mailman id 675930;
+ Mon, 05 Feb 2024 11:02:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=b4fC=JO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rWwZb-0002wU-3o
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:51:35 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ (envelope-from <SRS0=8/S5=JO=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rWwk3-00061F-0Z
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 11:02:23 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 87365d1d-c414-11ee-8a45-1f161083a0e0;
- Mon, 05 Feb 2024 11:51:34 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0C76E1F8BA;
- Mon,  5 Feb 2024 10:51:34 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D28CE132DD;
- Mon,  5 Feb 2024 10:51:33 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id qvb3MbW9wGWVNgAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:51:33 +0000
+ id 0930ec22-c416-11ee-8a45-1f161083a0e0;
+ Mon, 05 Feb 2024 12:02:21 +0100 (CET)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40fd280421aso14375455e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 03:02:21 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ n8-20020a05600c500800b0040fd162944fsm6859582wmr.35.2024.02.05.03.02.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Feb 2024 03:02:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,225 +47,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 87365d1d-c414-11ee-8a45-1f161083a0e0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707130294; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=h0jxnSPLZTXt0UgW8EvhU376ps4C4d/D3zwFe+T6tRE=;
-	b=EnUOwUQ/3F5sKaosP/ma2J4roQfFx+oWZZzhZeBFhGT6sKJXu3PO70y2VtPVMHZEfasPrK
-	xrBOXPAvMS5UNMIh+sVxO16ohUDPO+OQM3nWqKAbW8vre94mjojrgyiWk/LSFq6/mi+xkD
-	+PFHUU162jed1J0ctHrvSoNASg0VKPc=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707130294; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=h0jxnSPLZTXt0UgW8EvhU376ps4C4d/D3zwFe+T6tRE=;
-	b=EnUOwUQ/3F5sKaosP/ma2J4roQfFx+oWZZzhZeBFhGT6sKJXu3PO70y2VtPVMHZEfasPrK
-	xrBOXPAvMS5UNMIh+sVxO16ohUDPO+OQM3nWqKAbW8vre94mjojrgyiWk/LSFq6/mi+xkD
-	+PFHUU162jed1J0ctHrvSoNASg0VKPc=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Jason Andryuk <jandryuk@gmail.com>
-Subject: [PATCH v4 16/32] tools/xl: support new 9pfs backend xen_9pfsd
-Date: Mon,  5 Feb 2024 11:49:45 +0100
-Message-Id: <20240205105001.24171-17-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240205105001.24171-1-jgross@suse.com>
-References: <20240205105001.24171-1-jgross@suse.com>
+X-Inumbo-ID: 0930ec22-c416-11ee-8a45-1f161083a0e0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1707130941; x=1707735741; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JMhBhF+jLHqSxlmz3PoFc0DY3oDXSGsNldebH1x70jc=;
+        b=ei0mN1u2KtEkwRRtxOLTKB6Ds3wJE0AFcMoyj6hIHUCevHQL4xDVsYQSoZw51zLCkP
+         WLE4gt5zmFYviAJUu2Zid6VoIHK/8I4O03xgw1c04lc+tut61MMxThVom84PnSlVkf76
+         6M/MMcZ46ttXC0NVH96Z2npbeF1b7M9iuIjBxdoX7YgDu+8oIv8RDjRD7merDoNrYwNj
+         G9wkxhMX2xYc0NxSilDlJ1k20IH/3KEbNvtAj6YZ/ccMLcCgbKoPtqPK+9pgTVPv1U30
+         XwGy4Yk4s68EZVC7Yx6M+eYeslgvIG4z8ppVmeXAh4BcIEPOGOfFwtiy37bedKIbWI5T
+         UZIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1707130941; x=1707735741;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=JMhBhF+jLHqSxlmz3PoFc0DY3oDXSGsNldebH1x70jc=;
+        b=cLFRgxCTVm0vuVw1PlgBS1mRdtOca1TcQLKI7z6BnOBM7Jwbuvqyv/QlxfMicwBLs1
+         l7G49dQqUAk3PMgxXh1LBE68l1YSmMYWYbl/k2VNQBILwnzTtxSXWja9laWcJ9V9SiiQ
+         fCiu9rzn0GWRjwW/NRa5tkBsqt86L97J/AqKJqmYacCsfTrmQz4Tn4gU8dY7UsGr4Jhk
+         z/iGTPG2IkGDC+8w3ygII98L8wRmGbQBVsdIewkQgz1hJS6S/I6Bizrg3gSJdnwKkuMH
+         XxHkjMbWH9QBH2kFs+00IO/GZhXQz+j2pPrLsE+nX3MlmwHb/ShiZ1MO4TTruIUFZ3Q+
+         paBw==
+X-Gm-Message-State: AOJu0YxR5udJqNU7z8P7Bfe6ir1580tS6L69MVaVU9h26SuBiSAWr+me
+	4m/RCYXpewBL9g1e3Glml5eU5IZ7JER6dqpHN3PsOnK3wh+PXsjVTqC6ksh4Cskq8GHxe9YM/Nc
+	=
+X-Google-Smtp-Source: AGHT+IHoZ2j2fykQIUqgEUwSeqD2KadUvquUBLsnbiO59SBJLvMWkN6sm6rrXOn0LXcqOeZLcS/9eQ==
+X-Received: by 2002:a05:600c:4f44:b0:40e:d30d:3fe2 with SMTP id m4-20020a05600c4f4400b0040ed30d3fe2mr4784821wmq.5.1707130933375;
+        Mon, 05 Feb 2024 03:02:13 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCUCwKy49F54VvtTcCjc4HlA6iTbflap4YpOlO614g9fbYRLWvDndOS1UOUGQqmyWMB/JH2TZjRf50/6r7ncU/iK5U4HWrjvZbZlFwTSo+X6h9Eu9df9wPP7YlE0jqLSYurjemKjG5S60anv7/eKlHG/v0tN6mCV5Rd2114F
+Message-ID: <a0a7fa35-4615-4a9b-9887-569353f05e33@suse.com>
+Date: Mon, 5 Feb 2024 12:02:15 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out2.suse.de;
-	none
-X-Spamd-Result: default: False [-3.30 / 50.00];
-	 ARC_NA(0.00)[];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 FROM_HAS_DN(0.00)[];
-	 TO_DN_SOME(0.00)[];
-	 R_MISSING_CHARSET(2.50)[];
-	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	 MIME_GOOD(-0.10)[text/plain];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 REPLY(-4.00)[];
-	 BROKEN_CONTENT_TYPE(1.50)[];
-	 RCPT_COUNT_FIVE(0.00)[5];
-	 NEURAL_HAM_LONG(-1.00)[-1.000];
-	 RCVD_COUNT_THREE(0.00)[3];
-	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 NEURAL_HAM_SHORT(-0.20)[-1.000];
-	 MID_CONTAINS_FROM(1.00)[];
-	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
-	 FUZZY_BLOCKED(0.00)[rspamd.com];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com];
-	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 0/2] gnttab: hypervisor side XSA-448 follow-up
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add support for the new 9pfs backend "xen_9pfsd". For this backend type
-the tag defaults to "Xen" and the host side path to
-"/var/log/xen/guests/<dom-name>".
+Let's try to better deal with effectively no-op requests.
 
-Do most of the default settings in libxl. Unfortunately the default
-path can't easily be set in libxl, as the domain name isn't available
-in the related 9pfs specific function.
+1: fully ignore zero-size copy requests
+2: almost fully ignore zero-size flush requests
 
-Settings the defaults in libxl requires to move the sanity checking
-of 9pfs parameters from xl to libxl, too.
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
----
-V2:
-- test max_files and max_open_files, too (Jason Andryuk)
-V4:
-- fix man page to use the "xen_9pfsd" type due to idl limitation
-  (Jason Andryuk)
-- set (most of) the defaults in libxl (Anthony Perard)
----
- docs/man/xl.cfg.5.pod.in      | 36 +++++++++++++++++++++++++++++++++--
- tools/libs/light/libxl_9pfs.c | 18 ++++++++++++++++++
- tools/xl/xl_parse.c           | 23 +++++++++++++++++++---
- 3 files changed, 72 insertions(+), 5 deletions(-)
-
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index ea8d41727d..039e057318 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -772,10 +772,16 @@ settings, from the following list:
- 
- =over 4
- 
-+=item B<type=TYPE>
-+
-+The backendtype for the PV device. Supported values are B<qemu> and
-+B<xen_9pfsd>.  The default is B<qemu>.
-+
- =item B<tag=STRING>
- 
- 9pfs tag to identify the filesystem share. The tag is needed on the
--guest side to mount it.
-+guest side to mount it. For the backendtype of B<xen_9pfsd> the tag defaults to
-+"Xen".
- 
- =item B<security_model="none">
- 
-@@ -785,12 +791,38 @@ squash or remap).
- 
- =item B<path=STRING>
- 
--Filesystem path on the backend to export.
-+Filesystem path on the backend to export. For the backendtype of B<xen_9pfsd>
-+the path defaults to "@XEN_LOG_DIR@/guests/<guest-name>".
- 
- =item B<backend=domain-id>
- 
- Specify the backend domain name or id, defaults to dom0.
- 
-+=item B<max-files=NUMBER>
-+
-+Specify the maximum number of files below B<path>. A value of 0 (which
-+is the default) doesn't limit the number of files. Only valid for
-+B<type=xen_9pfsd>.
-+
-+=item B<max-open-files=NUMBER>
-+
-+Specify the maximum number of concurrently opened files below B<path>.
-+Multiple opens of the same file are counted individually. Only valid for
-+B<type=xen_9pfsd>, which has a default of B<max-open-files=5>.
-+
-+=item B<max-space=NUMBER>
-+
-+Specify the maximum used disk space in MiB below B<path>. A value of 0 (which
-+is the default) doesn't limit the usable disk space. Only valid for
-+B<type=xen_9pfsd>.
-+
-+=item B<auto-delete=BOOLEAN>
-+
-+When set the backend will delete the oldest file which is currently not
-+opened by the guest in case the disk space limit set via B<max-space> or the
-+file limit set via B<max-files> is being reached. Only valid for
-+B<type=xen_9pfsd>.
-+
- =back
- 
- =item B<pvcalls=[ "backend=domain-id", ... ]>
-diff --git a/tools/libs/light/libxl_9pfs.c b/tools/libs/light/libxl_9pfs.c
-index 68fa9947ad..7593686a90 100644
---- a/tools/libs/light/libxl_9pfs.c
-+++ b/tools/libs/light/libxl_9pfs.c
-@@ -20,6 +20,24 @@
- static int libxl__device_p9_setdefault(libxl__gc *gc, uint32_t domid,
-                                        libxl_device_p9 *p9, bool hotplug)
- {
-+    if (p9->type == LIBXL_P9_TYPE_UNKNOWN) {
-+        p9->type = LIBXL_P9_TYPE_QEMU;
-+    }
-+    if (p9->type == LIBXL_P9_TYPE_QEMU &&
-+        (p9->max_files || p9->max_open_files || p9->max_space ||
-+         p9->auto_delete)) {
-+        LOGD(ERROR, domid, "Illegal 9pfs parameter combination");
-+        return ERROR_INVAL;
-+    }
-+    if (p9->type == LIBXL_P9_TYPE_XEN_9PFSD && !p9->tag) {
-+        p9->tag = libxl__strdup(NOGC, "Xen");
-+    }
-+
-+    if (!p9->path || !p9->security_model || !p9->tag) {
-+        LOGD(ERROR, domid, "9pfs spec missing required field!");
-+        return ERROR_INVAL;
-+    }
-+
-     return libxl__resolve_domid(gc, p9->backend_domname, &p9->backend_domid);
- }
- 
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 9b358f11b8..80ffe85f5e 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2233,6 +2233,20 @@ void parse_config_data(const char *config_source,
-                     replace_string(&p9->tag, value);
-                 } else if (!strcmp(key, "backend")) {
-                     replace_string(&p9->backend_domname, value);
-+                } else if (!strcmp(key, "type")) {
-+                    if (libxl_p9_type_from_string(value, &p9->type)) {
-+                        fprintf(stderr, "failed to parse 9pfs type: %s\n",
-+                                value);
-+                        exit(1);
-+                    }
-+                } else if (!strcmp(key, "max-files")) {
-+                    p9->max_files = parse_ulong(value);
-+                } else if (!strcmp(key, "max-open-files")) {
-+                    p9->max_open_files = parse_ulong(value);
-+                } else if (!strcmp(key, "max-space")) {
-+                    p9->max_space = parse_ulong(value);
-+                } else if (!strcmp(key, "auto-delete")) {
-+                    p9->auto_delete = strtoul(value, NULL, 0);
-                 } else {
-                     fprintf(stderr, "Unknown 9pfs parameter '%s'\n", key);
-                     exit(1);
-@@ -2243,9 +2257,12 @@ void parse_config_data(const char *config_source,
- 
-             libxl_string_list_dispose(&pairs);
- 
--            if (!p9->path || !p9->security_model || !p9->tag) {
--                fprintf(stderr, "9pfs spec missing required field!\n");
--                exit(1);
-+            if (p9->type == LIBXL_P9_TYPE_XEN_9PFSD && !p9->path) {
-+                char *path;
-+
-+                xasprintf(&path, XEN_LOG_DIR "/guests/%s", c_info->name);
-+                replace_string(&p9->path, path);
-+                free(path);
-             }
-         }
-     }
--- 
-2.35.3
-
+Jan
 
