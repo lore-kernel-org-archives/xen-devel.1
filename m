@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27FC4C4829D
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 15:33:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.676202.1052223 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75C75C4829A
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 15:33:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.676200.1052199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX0xo-0000a4-BP; Mon, 05 Feb 2024 15:32:52 +0000
+	id 1rX0xl-0008Jd-Ms; Mon, 05 Feb 2024 15:32:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 676202.1052223; Mon, 05 Feb 2024 15:32:52 +0000
+Received: by outflank-mailman (output) from mailman id 676200.1052199; Mon, 05 Feb 2024 15:32:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX0xo-0000ZX-6s; Mon, 05 Feb 2024 15:32:52 +0000
-Received: by outflank-mailman (input) for mailman id 676202;
- Mon, 05 Feb 2024 15:32:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rX0xl-0008Il-Gm; Mon, 05 Feb 2024 15:32:49 +0000
+Received: by outflank-mailman (input) for mailman id 676200;
+ Mon, 05 Feb 2024 15:32:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TPgQ=JO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rX0xm-0007Hv-Uc
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:32:50 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d21fed8e-c43b-11ee-8a46-1f161083a0e0;
- Mon, 05 Feb 2024 16:32:50 +0100 (CET)
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-510faac8c57so2310580e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:32:50 -0800 (PST)
+ id 1rX0xk-0007I6-OC
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:32:48 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d028054a-c43b-11ee-98f5-efadbce2ee36;
+ Mon, 05 Feb 2024 16:32:47 +0100 (CET)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-51121637524so6822970e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:32:47 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- s1-20020a056512314100b005114d401157sm474445lfi.2.2024.02.05.07.32.48
+ s1-20020a056512314100b005114d401157sm474445lfi.2.2024.02.05.07.32.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Feb 2024 07:32:48 -0800 (PST)
+ Mon, 05 Feb 2024 07:32:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,37 +46,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d21fed8e-c43b-11ee-8a46-1f161083a0e0
+X-Inumbo-ID: d028054a-c43b-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707147169; x=1707751969; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1707147166; x=1707751966; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jujKuKcHk/bGVpGrSTxRhAACNFbzeped1VAo2Fwe7V4=;
-        b=JTTcyGWrG/Sm/ASFdQvhndLrJIeda4VYzRZAUjwVo5RbMQHtqSyugPG1rw0kVwb7HM
-         6r+PwUshbF/HldBKkGMYQB5dA7fsIfo+5yXhCqQu4Pbt7OiU0J7RkhJyZ8VwOLVUFIee
-         XAA47g1Jq3niyjjJAUE+ep5rFHN7DtRSNWZNxeqiVaXNa+q5K7xJYdPImFCEHxjb7TlV
-         Lla+2WxMJzBl2vC5R1zxbrEcfLczTzR/jghRUMLJejq8+U6kmXejnlOBETH2BCg98koP
-         evel2hWIWZ/EkVF5kOqoSkBmptfhSuYmpmJZ4HTVDqHEY4Ha6rPfh1G5bauCDSgYElWF
-         RjKg==
+        bh=r6k+h8FV3d3vqiaEMlAmNrvziqvskuI2jnLZD/dQBlM=;
+        b=BgVd3K+6wg0nuW7AQWKED/JY0hLQaTZzM4vXEdBNcyhSKrrMGj5hE+7FcO7sZV8eh8
+         HHM0dLIx8DXOpAYL8LIybxN5VDhGh52B1NpCguA5ZngX4STh3n7zq7dS2e4wELc07Wva
+         QvTBT9LFdsK/CAI+DnXilpu9bh8kUSeJrTx4epcVwTf+sfPmwItegTHJ+wCLxq2Ep3v1
+         cTSfdvZ7i1GYcvYnNFxeE2NYMGb/6HGA2AFGUgf9zP4O1rcUIkpxpXfC8ttmcyIAw6nY
+         2gO4DLBoWYG9ar/O4XOOw+dztC/aTIn93rSlTAu3c9aaFnTX3/ANCXF9lhIeztkbEXub
+         77Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707147169; x=1707751969;
+        d=1e100.net; s=20230601; t=1707147166; x=1707751966;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jujKuKcHk/bGVpGrSTxRhAACNFbzeped1VAo2Fwe7V4=;
-        b=sJsFq9foavMfgjx37jd8souItCRpzxi4HxTuoQn9ruQyEXK61Q1uUW8Trj3TsEKYLZ
-         DmPKwcQ4iu9bImadfyZi4AMYminhSf4/4z1oIIVnU3Dhhgj+t+XxSHSQaLmSh96xxLO0
-         N7QL0ODvDeSrfhbmNAcnMeQ1CX+hkQK4TMDcK+Z2OfdYU/rKv/v9fuG3zkuxi/p8HAHr
-         wjF/Ifs6YiP+CieshxkPP6iBVPMRyQGNl1bOlBU8cESBJFfeQR17C/PQ524DUbD3uU8B
-         dJXkVOqgwwj5mLiAkJVU8/Zva8VNtaxOcRSgHlA+KHAfXj4ETkHFKP1WBF1aZdEqFU7x
-         m5Vg==
-X-Gm-Message-State: AOJu0YyDWG6PgeMXyecBjIW5Q589NlY78EMU2xPLAFCNWBA93C3nKoY1
-	pQPTicnnKvu4xVIVP6FFSh5Y6VKRZ4BxphzbbgA+W5lOYKs48K5VflDBS9/P
-X-Google-Smtp-Source: AGHT+IF5joLMpboqZ7YvXzw1AujwcY43pMBJ4ztKpRXJKsjYJR7EOe8dGcLYV3ZESg0gbGKowODmvQ==
-X-Received: by 2002:ac2:5b06:0:b0:511:49e5:f36a with SMTP id v6-20020ac25b06000000b0051149e5f36amr1500843lfn.10.1707147168866;
-        Mon, 05 Feb 2024 07:32:48 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCXXzy8tRKrdIG0OTSJdxQf+eTm1rFKunQ+zIHvY16CdSqXwClYmzS/0rh8e6Y6f8QaBBmLLiptZb5m9cr5Y7czaEmFFcRYtS/mLSsOspwvli8Nc7aLQg/YfOVEt71HKBQKuKblX9k8oecsHHRY649cdO/NWaoFWDN1kto7N0zUBlfEKcTf3HkAn98hp6URmwdjlsAolTg5sCs2Il9ot55wK+4RhWGl9jgBIvD38qKL0hU4mxXKUFKsh28WFdVKWMGiSRn3C3hfGxZ2+nEpY4fWQe+Q+bUCdfUrXBucLxvQ/b9nQyK5a2wq3jzVYZkZOqvWmuAP/
+        bh=r6k+h8FV3d3vqiaEMlAmNrvziqvskuI2jnLZD/dQBlM=;
+        b=NONUKb2QKp5v0bht11wHzRBX+8CjKY82uD0hhhl12pc+mj7iumUEWLyu24b1vXc93C
+         kcgcBwqmxgSYg0LREdjU8pK7OJhwLAAtw1S4aj5A4AkciMP+tJB8h9eIvgY0UmIUvylX
+         rf6ys/pT2xSFvN/MVrvydNIXkAXNp4vMiRY7EGwNhFV8/WzI44bLqwVqktxkwuSHoPzR
+         0+gxcOkLDm3FsRElyh0/FtoZhzxck4aSxQQ0I2jXuX38DSRh/hTXw9dm7GPizBBX+ycw
+         cjsrTG7dlHTGE8/94Koeh6VR6KTmzVRVHCsIkGcJtOPEaOndhQ1JSw0k6FmUCsP4ciLC
+         kJNA==
+X-Gm-Message-State: AOJu0Yxu0AbUQvZ+cPuQt5gj+n7fnaHXsQgNR89O9uhiRE+VtTpQjJ7r
+	MVQ61mIDKPIm+Xuq4yPbHN0WhzdZiZUNWIvwJTBbOJ0FQNf/NN7PnOCrZAFE
+X-Google-Smtp-Source: AGHT+IH2pEQL4vZHR4MIEJz68fgv+P3tICF/uAeNOq4jVyksCsAdQPpNvtJllexRR5adepWtKjsiXg==
+X-Received: by 2002:ac2:4141:0:b0:511:56cf:5547 with SMTP id c1-20020ac24141000000b0051156cf5547mr341802lfi.1.1707147166303;
+        Mon, 05 Feb 2024 07:32:46 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCUDAoZxLjfy7HkxTNBi3WUn1ERJyszXw4tprspv4xeX6CniIEbx62uxIUGO2bOy3eu8pVs9iyJ86O+M5hmcFSa3Dk1vJLbHMRtg/aAHExQOCR1vm999z27iGd104XrjDG/+76NqhFh11WTetvT877pp3trNF5xmkeINlC1wqnyELm4+QQdizAZiBzPsg5jMbevc53ljIAKeJ7Q3BpN0CPX8kbcRJnnB5FjZvzpz0R1NP1UalY5MgCy5ykM+Oin/gHEE+67qFCo8cj40bVDh2W39CisiC/WiYg0MoWY+OWJaLhxd0LkYTa/6KZzbWHy4DROOxq1w
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -89,9 +89,9 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 08/30] xen/riscv: introduce setup.h
-Date: Mon,  5 Feb 2024 16:32:15 +0100
-Message-ID: <9556f01b1c95c8b22dae4cfec7cca9a1040e5395.1707146506.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 05/30] xen/riscv: introduce guest_atomics.h
+Date: Mon,  5 Feb 2024 16:32:12 +0100
+Message-ID: <542c61229e1056c3fdec3a5c086136e3b5909b07.1707146506.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1707146506.git.oleksii.kurochko@gmail.com>
 References: <cover.1707146506.git.oleksii.kurochko@gmail.com>
@@ -99,36 +99,67 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V4:
-  - Nothing changed. Only rebase
+ - Drop in guest_testop() and guest_bitop() casts of function arguments.
+ - Change "commit message" to "commit title" in "Changes in V3" to be more precise about
+   what was changed.
+ - use BUG_ON("unimplemented") instead of ASSERT_UNREACHABLE
 ---
 Changes in V3:
- - add SPDX
- - add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - update the commit title
+ - drop TODO commit.
+ - add ASSERT_UNREACHABLE for stubs guest functions.
+ - Add SPDX & footer
 ---
 Changes in V2:
  - Nothing changed. Only rebase.
 ---
- xen/arch/riscv/include/asm/setup.h | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/setup.h
+ xen/arch/riscv/include/asm/guest_atomics.h | 44 ++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/guest_atomics.h
 
-diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
+diff --git a/xen/arch/riscv/include/asm/guest_atomics.h b/xen/arch/riscv/include/asm/guest_atomics.h
 new file mode 100644
-index 0000000000..7613a5dbd0
+index 0000000000..de54914454
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/setup.h
-@@ -0,0 +1,17 @@
++++ b/xen/arch/riscv/include/asm/guest_atomics.h
+@@ -0,0 +1,44 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __ASM_RISCV_GUEST_ATOMICS_H
++#define __ASM_RISCV_GUEST_ATOMICS_H
 +
-+#ifndef __ASM_RISCV_SETUP_H__
-+#define __ASM_RISCV_SETUP_H__
++#include <xen/bug.h>
 +
-+#define max_init_domid (0)
++#define guest_testop(name)                                                  \
++static inline int guest_##name(struct domain *d, int nr, volatile void *p)  \
++{                                                                           \
++    BUG_ON("unimplemented");                                                \
++                                                                            \
++    return 0;                                                               \
++}
 +
-+#endif /* __ASM_RISCV_SETUP_H__ */
++#define guest_bitop(name)                                                   \
++static inline void guest_##name(struct domain *d, int nr, volatile void *p) \
++{                                                                           \
++    BUG_ON("unimplemented");                                                \
++}
++
++guest_bitop(set_bit)
++guest_bitop(clear_bit)
++guest_bitop(change_bit)
++
++#undef guest_bitop
++
++guest_testop(test_and_set_bit)
++guest_testop(test_and_clear_bit)
++guest_testop(test_and_change_bit)
++
++#undef guest_testop
++
++#define guest_test_bit(d, nr, p) ((void)(d), test_bit(nr, p))
++
++#endif /* __ASM_RISCV_GUEST_ATOMICS_H */
 +
 +/*
 + * Local variables:
