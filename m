@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F2CC4828D
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:58:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.675882.1051553 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A6CC48291
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:58:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.675883.1051563 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwgW-00013O-RJ; Mon, 05 Feb 2024 10:58:44 +0000
+	id 1rWwgY-0001K4-33; Mon, 05 Feb 2024 10:58:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 675882.1051553; Mon, 05 Feb 2024 10:58:44 +0000
+Received: by outflank-mailman (output) from mailman id 675883.1051563; Mon, 05 Feb 2024 10:58:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwgW-00013H-Nz; Mon, 05 Feb 2024 10:58:44 +0000
-Received: by outflank-mailman (input) for mailman id 675882;
- Mon, 05 Feb 2024 10:58:43 +0000
+	id 1rWwgX-0001Jx-WA; Mon, 05 Feb 2024 10:58:45 +0000
+Received: by outflank-mailman (input) for mailman id 675883;
+ Mon, 05 Feb 2024 10:58:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=b4fC=JO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rWwYz-0000qL-8U
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:50:57 +0000
+ id 1rWwZy-0000qL-Ft
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:51:58 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6fdc9fc0-c414-11ee-98f5-efadbce2ee36;
- Mon, 05 Feb 2024 11:50:55 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ id 94923e2f-c414-11ee-98f5-efadbce2ee36;
+ Mon, 05 Feb 2024 11:51:56 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CE8E01F8BA;
- Mon,  5 Feb 2024 10:50:54 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 801021F8BA;
+ Mon,  5 Feb 2024 10:51:56 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A4FAC132DD;
- Mon,  5 Feb 2024 10:50:54 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4E3C9132DD;
+ Mon,  5 Feb 2024 10:51:56 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id y93GJo69wGVANgAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:50:54 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id +NmVEcy9wGW4NgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:51:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,33 +54,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6fdc9fc0-c414-11ee-98f5-efadbce2ee36
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707130254; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FTPfVWkUlQhndtMJjvkYVvwFLg3Kri0CAO7AyEi1mRk=;
-	b=nA93Rx9YrZr+hop2VC7Ain11fxephLZyrBCuGFLkClL6chC4gvPYH6mTMK1PmSUHfrSRi9
-	sbz39q7p1lPl91m3o5YHxBxMrUxL7UUx1++H45cSjvKNndTg22FMEHnMfDCvc74uhqD6ma
-	TYYXWXKjt8cFw4AHI4qYp555QtfjJhg=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707130254; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FTPfVWkUlQhndtMJjvkYVvwFLg3Kri0CAO7AyEi1mRk=;
-	b=nA93Rx9YrZr+hop2VC7Ain11fxephLZyrBCuGFLkClL6chC4gvPYH6mTMK1PmSUHfrSRi9
-	sbz39q7p1lPl91m3o5YHxBxMrUxL7UUx1++H45cSjvKNndTg22FMEHnMfDCvc74uhqD6ma
-	TYYXWXKjt8cFw4AHI4qYp555QtfjJhg=
+X-Inumbo-ID: 94923e2f-c414-11ee-98f5-efadbce2ee36
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v4 09/32] tools/xen-9pfsd: add 9pfs open request support
-Date: Mon,  5 Feb 2024 11:49:38 +0100
-Message-Id: <20240205105001.24171-10-jgross@suse.com>
+Subject: [PATCH v4 20/32] tools: add 9pfs device to xenstore-stubdom
+Date: Mon,  5 Feb 2024 11:49:49 +0100
+Message-Id: <20240205105001.24171-21-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240205105001.24171-1-jgross@suse.com>
 References: <20240205105001.24171-1-jgross@suse.com>
@@ -87,228 +71,123 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Authentication-Results: smtp-out2.suse.de;
 	none
-X-Spamd-Result: default: False [-3.30 / 50.00];
-	 ARC_NA(0.00)[];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 FROM_HAS_DN(0.00)[];
-	 RCPT_COUNT_THREE(0.00)[4];
-	 R_MISSING_CHARSET(2.50)[];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 MIME_GOOD(-0.10)[text/plain];
-	 REPLY(-4.00)[];
-	 BROKEN_CONTENT_TYPE(1.50)[];
-	 NEURAL_HAM_LONG(-1.00)[-1.000];
-	 RCVD_COUNT_THREE(0.00)[3];
-	 TO_DN_SOME(0.00)[];
-	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 NEURAL_HAM_SHORT(-0.20)[-1.000];
-	 MID_CONTAINS_FROM(1.00)[];
-	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
-	 FUZZY_BLOCKED(0.00)[rspamd.com];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	 REPLY(-4.00)[]
+X-Rspamd-Queue-Id: 801021F8BA
 
-Add the open request of the 9pfs protocol.
+Add a 9pfs device to Xenstore stubdom in order to allow it to do e.g.
+logging into a dom0 file.
+
+Use the following parameters for the new device:
+
+- tag = "Xen"
+- type = "xen_9pfsd"
+- path = "/var/lib/xen/xenstore"
+- security-model = "none"
+
+For now don't limit allowed file space or number of files.
+
+Add a new libxl function for adding it similar to the function for
+adding the console device.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
 V2:
-- don't allow to open symbolic link
-V3:
-- use openat() (Jason Andryuk)
-- use common error handling in p9_open()
+- add security_model parameter to new libxl function (Jason Andryuk)
+V4:
+- rename function to libxl_device_9pfs_add() (Anthony Perard)
+- use a libxl_device_p9 pointer as parameter (Anthony Perard)
 ---
- tools/xen-9pfsd/io.c        | 137 ++++++++++++++++++++++++++++++++++++
- tools/xen-9pfsd/xen-9pfsd.h |   4 ++
- 2 files changed, 141 insertions(+)
+ tools/helpers/init-xenstore-domain.c |  7 +++++++
+ tools/include/libxl.h                | 15 +++++++++++++++
+ tools/libs/light/libxl_9pfs.c        | 16 ++++++++++++++++
+ 3 files changed, 38 insertions(+)
 
-diff --git a/tools/xen-9pfsd/io.c b/tools/xen-9pfsd/io.c
-index 5b827706b7..2e2275e8ab 100644
---- a/tools/xen-9pfsd/io.c
-+++ b/tools/xen-9pfsd/io.c
-@@ -19,6 +19,8 @@
- #include <syslog.h>
- #include <sys/types.h>
- #include <sys/stat.h>
-+#include <dirent.h>
-+#include <fcntl.h>
- #include <xenctrl.h>           /* For cpu barriers. */
- #include <xen-tools/common-macros.h>
+diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
+index 140ed610ae..1683438c5c 100644
+--- a/tools/helpers/init-xenstore-domain.c
++++ b/tools/helpers/init-xenstore-domain.c
+@@ -433,6 +433,12 @@ int main(int argc, char** argv)
+     int rv, fd;
+     char *maxmem_str = NULL;
+     libxl_ctx *ctx;
++    libxl_device_p9 p9 = { .backend_domid = 0,
++                           .tag = "Xen",
++                           .path = XEN_LIB_DIR"/xenstore",
++                           .security_model = "none",
++                           .type = LIBXL_P9_TYPE_XEN_9PFSD,
++    };
  
-@@ -29,6 +31,15 @@
- #define P9_CMD_ATTACH     104
- #define P9_CMD_ERROR      107
- #define P9_CMD_WALK       110
-+#define P9_CMD_OPEN       112
+     while ( (opt = getopt_long(argc, argv, "v", options, NULL)) != -1 )
+     {
+@@ -543,6 +549,7 @@ int main(int argc, char** argv)
+     }
+     libxl_console_add_xenstore(ctx, domid, 0, console_evtchn, console_gfn,
+                                NULL);
++    libxl_device_9pfs_add(ctx, domid, &p9, NULL);
+     libxl_ctx_free(ctx);
+ 
+     fd = creat(XEN_RUN_DIR "/xenstored.pid", 0666);
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index a554f2ccd6..e6ab5ddb94 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -583,6 +583,13 @@
+  * libxl_console_add_xenstore() in libxl.
+  */
+ #define LIBXL_HAVE_CONSOLE_ADD_XENSTORE 1
 +
-+/* P9 protocol open flags. */
-+#define P9_OREAD            0   /* read */
-+#define P9_OWRITE           1   /* write */
-+#define P9_ORDWR            2   /* read and write */
-+#define P9_OMODEMASK     0x03
-+#define P9_OTRUNC        0x10   /* or'ed in, truncate file first */
-+#define P9_OREMOVE       0x40   /* or'ed in, remove file after clunk */
++/*
++ * LIBXL_HAVE_P9_ADD_XENSTORE indicates presence of the function
++ * libxl_device_9pfs_add() in libxl.
++ */
++#define LIBXL_HAVE_P9_ADD_XENSTORE 1
++
+ /*
+  * libxl ABI compatibility
+  *
+@@ -2074,6 +2081,14 @@ int libxl_console_add_xenstore(libxl_ctx *ctx, uint32_t domid, uint32_t backend,
+                                const libxl_asyncop_how *ao_how)
+                                LIBXL_EXTERNAL_CALLERS_ONLY;
  
- #define P9_MIN_MSIZE      2048
- #define P9_VERSION        "9P2000.u"
-@@ -829,6 +840,128 @@ static void p9_walk(struct ring *ring, struct p9_header *hdr)
-     free(names);
++/* libxl_device_9pfs_add writes the Xenstore entries for a domain's
++ * primary 9pfs device based on domid, and device parameters.
++ * If needed it will start the backend daemon.
++ */
++int libxl_device_9pfs_add(libxl_ctx *ctx, uint32_t domid, libxl_device_p9 *p9,
++                          const libxl_asyncop_how *ao_how)
++                          LIBXL_EXTERNAL_CALLERS_ONLY;
++
+ /* May be called with info_r == NULL to check for domain's existence.
+  * Returns ERROR_DOMAIN_NOTFOUND if domain does not exist (used to return
+  * ERROR_INVAL for this scenario). */
+diff --git a/tools/libs/light/libxl_9pfs.c b/tools/libs/light/libxl_9pfs.c
+index 7593686a90..8f5d475322 100644
+--- a/tools/libs/light/libxl_9pfs.c
++++ b/tools/libs/light/libxl_9pfs.c
+@@ -208,6 +208,22 @@ static void libxl__device_p9_add(libxl__egc *egc, uint32_t domid,
+         aodev->callback(egc, aodev);
  }
  
-+static int open_flags_from_mode(uint8_t mode)
++int libxl_device_9pfs_add(libxl_ctx *ctx, uint32_t domid, libxl_device_p9 *p9,
++                          const libxl_asyncop_how *ao_how)
 +{
-+    int flags;
++    AO_CREATE(ctx, domid, ao_how);
++    libxl__ao_device *aodev;
 +
-+    switch ( mode & P9_OMODEMASK )
-+    {
-+    case P9_OREAD:
-+        flags = O_RDONLY;
-+        break;
++    GCNEW(aodev);
++    libxl__prepare_ao_device(ao, aodev);
++    aodev->action = LIBXL__DEVICE_ACTION_ADD;
++    aodev->callback = device_addrm_aocomplete;
 +
-+    case P9_OWRITE:
-+        flags = O_WRONLY;
-+        break;
++    libxl__device_p9_add(egc, domid, p9, aodev);
 +
-+    case P9_ORDWR:
-+        flags = O_RDWR;
-+        break;
-+
-+    default:
-+        errno = EINVAL;
-+        return -1;
-+    }
-+
-+    if ( mode & P9_OTRUNC )
-+        flags |= O_TRUNC;
-+
-+    return flags;
++    return AO_INPROGRESS;
 +}
 +
-+static unsigned int get_iounit(struct ring *ring, struct stat *st)
-+{
-+    return (ring->max_size - st->st_blksize) & ~(st->st_blksize - 1);
-+}
-+
-+static void p9_open(struct ring *ring, struct p9_header *hdr)
-+{
-+    device *device = ring->device;
-+    uint32_t fid;
-+    uint8_t mode;
-+    struct p9_fid *fidp;
-+    struct stat st;
-+    struct p9_qid qid;
-+    uint32_t iounit;
-+    int flags;
-+    int ret;
-+
-+    ret = fill_data(ring, "Ub", &fid, &mode);
-+    if ( ret != 2 )
-+    {
-+        p9_error(ring, hdr->tag, EINVAL);
-+        return;
-+    }
-+    if ( mode & ~(P9_OMODEMASK | P9_OTRUNC | P9_OREMOVE) )
-+    {
-+        p9_error(ring, hdr->tag, EINVAL);
-+        return;
-+    }
-+
-+    fidp = get_fid_ref(device, fid);
-+    if ( !fidp )
-+    {
-+        p9_error(ring, hdr->tag, ENOENT);
-+        return;
-+    }
-+    if ( fidp->opened )
-+    {
-+        errno = EINVAL;
-+        goto err;
-+    }
-+
-+    if ( fstatat(device->root_fd, fidp->path, &st, 0) < 0 )
-+    {
-+        errno = ENOENT;
-+        goto err;
-+    }
-+
-+    if ( S_ISLNK(st.st_mode) )
-+    {
-+        errno = EMLINK;
-+        goto err;
-+    }
-+
-+    fidp->isdir = S_ISDIR(st.st_mode);
-+    fidp->mode = mode;
-+    if ( fidp->isdir )
-+    {
-+        if ( mode != P9_OREAD )
-+        {
-+            errno = EINVAL;
-+            goto err;
-+        }
-+        fidp->fd = openat(device->root_fd, fidp->path, O_RDONLY);
-+        if ( fidp->fd < 0 )
-+            goto err;
-+        fidp->data = fdopendir(fidp->fd);
-+        if ( !fidp->data )
-+            goto err;
-+    }
-+    else
-+    {
-+        flags = open_flags_from_mode(mode);
-+        if ( flags < 0 )
-+            goto err;
-+
-+        fidp->fd = openat(device->root_fd, fidp->path, flags);
-+        if ( fidp->fd < 0 )
-+            goto err;
-+    }
-+
-+    fill_qid(device, fidp->path, &qid, &st);
-+    iounit = get_iounit(ring, &st);
-+    fidp->opened = true;
-+
-+    fill_buffer(ring, hdr->cmd + 1, hdr->tag, "QU", &qid, &iounit);
-+
-+    return;
-+
-+ err:
-+    free_fid(device, fidp);
-+    p9_error(ring, hdr->tag, errno);
-+}
-+
- void *io_thread(void *arg)
- {
-     struct ring *ring = arg;
-@@ -896,6 +1029,10 @@ void *io_thread(void *arg)
-                 p9_walk(ring, &hdr);
-                 break;
- 
-+            case P9_CMD_OPEN:
-+                p9_open(ring, &hdr);
-+                break;
-+
-             default:
-                 syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
-                        ring->device->domid, ring->device->devid, hdr.cmd);
-diff --git a/tools/xen-9pfsd/xen-9pfsd.h b/tools/xen-9pfsd/xen-9pfsd.h
-index f01fffb0bb..757be2da4b 100644
---- a/tools/xen-9pfsd/xen-9pfsd.h
-+++ b/tools/xen-9pfsd/xen-9pfsd.h
-@@ -25,7 +25,11 @@ struct p9_fid {
-     XEN_TAILQ_ENTRY(struct p9_fid) list;
-     unsigned int fid;
-     unsigned int ref;
-+    int fd;
-+    uint8_t mode;
-     bool opened;
-+    bool isdir;
-+    void *data;    /* File type specific. */
-     char path[];
- };
+ #define libxl_device_p9_list NULL
+ #define libxl_device_p9_compare NULL
  
 -- 
 2.35.3
