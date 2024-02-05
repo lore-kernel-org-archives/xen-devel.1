@@ -4,45 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C632CC48295
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:57:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.675837.1051453 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B0EC48291
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 10:57:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.675838.1051463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwfT-00034x-H5; Mon, 05 Feb 2024 10:57:39 +0000
+	id 1rWwfU-0003Nz-QF; Mon, 05 Feb 2024 10:57:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 675837.1051453; Mon, 05 Feb 2024 10:57:39 +0000
+Received: by outflank-mailman (output) from mailman id 675838.1051463; Mon, 05 Feb 2024 10:57:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rWwfT-00034m-DV; Mon, 05 Feb 2024 10:57:39 +0000
-Received: by outflank-mailman (input) for mailman id 675837;
- Mon, 05 Feb 2024 10:57:38 +0000
+	id 1rWwfU-0003N5-Mg; Mon, 05 Feb 2024 10:57:40 +0000
+Received: by outflank-mailman (input) for mailman id 675838;
+ Mon, 05 Feb 2024 10:57:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=b4fC=JO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rWwYn-0000qL-Pc
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:50:45 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ id 1rWwZF-0000qL-LD
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 10:51:13 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [2a07:de40:b251:101:10:150:64:2])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 692a4a00-c414-11ee-98f5-efadbce2ee36;
- Mon, 05 Feb 2024 11:50:44 +0100 (CET)
+ id 79ce377d-c414-11ee-98f5-efadbce2ee36;
+ Mon, 05 Feb 2024 11:51:11 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id AC6BA22100;
- Mon,  5 Feb 2024 10:50:43 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 9CE161F8C5;
+ Mon,  5 Feb 2024 10:51:11 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8224E132DD;
- Mon,  5 Feb 2024 10:50:43 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 71686132DD;
+ Mon,  5 Feb 2024 10:51:11 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id IPddHoO9wGUqNgAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:50:43 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id Jy0lGp+9wGVXNgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 05 Feb 2024 10:51:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,327 +55,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 692a4a00-c414-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 79ce377d-c414-11ee-98f5-efadbce2ee36
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v4 07/32] tools/xen-9pfsd: add 9pfs attach request support
-Date: Mon,  5 Feb 2024 11:49:36 +0100
-Message-Id: <20240205105001.24171-8-jgross@suse.com>
+Subject: [PATCH v4 12/32] tools/xen-9pfsd: add 9pfs stat request support
+Date: Mon,  5 Feb 2024 11:49:41 +0100
+Message-Id: <20240205105001.24171-13-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240205105001.24171-1-jgross@suse.com>
 References: <20240205105001.24171-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out1.suse.de;
+Authentication-Results: smtp-out2.suse.de;
 	none
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Spamd-Result: default: False [-4.00 / 50.00];
 	 REPLY(-4.00)[]
-X-Rspamd-Queue-Id: AC6BA22100
+X-Rspamd-Queue-Id: 9CE161F8C5
 
-Add the attach request of the 9pfs protocol. This introduces the "fid"
-scheme of the 9pfs protocol.
-
-As this will be needed later, use a dedicated memory allocation
-function in alloc_fid() and prepare a fid reference count.
-
-For filling the qid data take the approach from the qemu 9pfs backend
-implementation.
+Add the stat request of the 9pfs protocol.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
-V2:
-- make fill_qid() parameter stbuf const (Jason Andryuk)
-- free fids after disconnecting guest (Jason Andryuk)
 V3:
-- only store relative path in fid (Jason Andryuk)
+- use fstatat() (Jason Andryuk)
 V4:
-- store a path directly usable by *at() functions in fid (Jason Andryuk)
+- add "s" format to fill_buffer() as a preparation for reading dirs
 ---
- tools/xen-9pfsd/io.c        | 164 ++++++++++++++++++++++++++++++++++++
- tools/xen-9pfsd/xen-9pfsd.c |   6 ++
- tools/xen-9pfsd/xen-9pfsd.h |  14 +++
- 3 files changed, 184 insertions(+)
+ tools/xen-9pfsd/io.c | 102 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 102 insertions(+)
 
 diff --git a/tools/xen-9pfsd/io.c b/tools/xen-9pfsd/io.c
-index 839dd1112c..4f6acefc87 100644
+index 583eea6059..031cff9f0e 100644
 --- a/tools/xen-9pfsd/io.c
 +++ b/tools/xen-9pfsd/io.c
-@@ -11,11 +11,14 @@
-  * before looking for the next request.
+@@ -34,6 +34,7 @@
+ #define P9_CMD_OPEN       112
+ #define P9_CMD_CREATE     114
+ #define P9_CMD_CLUNK      120
++#define P9_CMD_STAT       124
+ 
+ /* P9 protocol open flags. */
+ #define P9_OREAD            0   /* read */
+@@ -60,6 +61,25 @@ struct p9_qid {
+     uint64_t path;
+ };
+ 
++struct p9_stat {
++    uint16_t size;
++    uint16_t type;
++    uint32_t dev;
++    struct p9_qid qid;
++    uint32_t mode;
++    uint32_t atime;
++    uint32_t mtime;
++    uint64_t length;
++    const char *name;
++    const char *uid;
++    const char *gid;
++    const char *muid;
++    const char *extension;
++    uint32_t n_uid;
++    uint32_t n_gid;
++    uint32_t n_muid;
++};
++
+ /*
+  * Note that the ring names "in" and "out" are from the frontend's
+  * perspective, so the "in" ring will be used for responses to the frontend,
+@@ -166,6 +186,7 @@ static void fmt_err(const char *fmt)
+  * S: String (2 byte length + <length> characters)
+  *    The length is obtained via strlen() of the parameter, being a pointer
+  *    to the first character of the string
++ * s: stat (struct p9_stat)
+  * U: 4 byte unsigned integer
+  *    The parameter is a pointer to a uint32_t value
   */
+@@ -176,6 +197,8 @@ static void vfill_buffer_at(void **data, const char *fmt, va_list ap)
+     const void *par;
+     const char *str_val;
+     const struct p9_qid *qid;
++    const struct p9_stat *stat;
++    uint16_t tlen;
+     unsigned int len;
+     unsigned int array_sz = 0;
+     unsigned int elem_sz = 0;
+@@ -259,6 +282,18 @@ static void vfill_buffer_at(void **data, const char *fmt, va_list ap)
+             *data += len;
+             break;
  
-+#include <assert.h>
- #include <errno.h>
- #include <stdbool.h>
- #include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
-+#include <sys/types.h>
-+#include <sys/stat.h>
- #include <xenctrl.h>           /* For cpu barriers. */
- #include <xen-tools/common-macros.h>
- 
-@@ -23,6 +26,7 @@
- 
- /* P9 protocol commands (response is either cmd+1 or P9_CMD_ERROR). */
- #define P9_CMD_VERSION    100
-+#define P9_CMD_ATTACH     104
- #define P9_CMD_ERROR      107
- 
- #define P9_MIN_MSIZE      2048
-@@ -461,6 +465,126 @@ static int fill_data(struct ring *ring, const char *fmt, ...)
-     return pars;
++        case 's':
++            stat = par;
++            elem_sz = sizeof(*stat);
++            tlen = stat->size + sizeof(stat->size);
++            fill_buffer_at(data, "uuuUQUUULSSSSSUUU", &tlen, &stat->size,
++                           &stat->type, &stat->dev, &stat->qid, &stat->mode,
++                           &stat->atime, &stat->mtime, &stat->length,
++                           stat->name, stat->uid, stat->gid, stat->muid,
++                           stat->extension, &stat->n_uid, &stat->n_gid,
++                           &stat->n_muid);
++            break;
++
+         case 'U':
+             put_unaligned(*(const uint32_t *)par, (uint32_t *)*data);
+             elem_sz = sizeof(uint32_t);
+@@ -1148,6 +1183,69 @@ static void p9_clunk(struct ring *ring, struct p9_header *hdr)
+     fill_buffer(ring, hdr->cmd + 1, hdr->tag, "");
  }
  
-+static struct p9_fid *find_fid(device *device, unsigned int fid)
++static void fill_p9_stat(device *device, struct p9_stat *p9s, struct stat *st,
++                         const char *name)
 +{
-+    struct p9_fid *fidp;
++    memset(p9s, 0, sizeof(*p9s));
++    fill_qid(device, NULL, &p9s->qid, st);
++    p9s->mode = st->st_mode & 0777;
++    if ( S_ISDIR(st->st_mode) )
++        p9s->mode |= P9_CREATE_PERM_DIR;
++    p9s->atime = st->st_atime;
++    p9s->mtime = st->st_mtime;
++    p9s->length = st->st_size;
++    p9s->name = name;
++    p9s->uid = "";
++    p9s->gid = "";
++    p9s->muid = "";
++    p9s->extension = "";
++    p9s->n_uid = 0;
++    p9s->n_gid = 0;
++    p9s->n_muid = 0;
 +
-+    XEN_TAILQ_FOREACH(fidp, &device->fids, list)
-+    {
-+        if ( fidp->fid == fid )
-+            return fidp;
-+    }
-+
-+    return NULL;
++    /*
++     * Size of individual fields without the size field, including 5 2-byte
++     * string length fields.
++     */
++    p9s->size = 71 + strlen(p9s->name);
 +}
 +
-+static struct p9_fid *alloc_fid_mem(device *device, unsigned int fid,
-+                                    const char *path)
-+{
-+    struct p9_fid *fidp;
-+    size_t pathlen;
-+
-+    pathlen = strlen(path);
-+    fidp = calloc(sizeof(*fidp) + pathlen + 1, 1);
-+    if ( !fidp )
-+        return NULL;
-+
-+    fidp->fid = fid;
-+    strncpy(fidp->path, path, pathlen);
-+
-+    return fidp;
-+}
-+
-+static struct p9_fid *alloc_fid(device *device, unsigned int fid,
-+                                const char *path)
-+{
-+    struct p9_fid *fidp = NULL;
-+
-+    pthread_mutex_lock(&device->fid_mutex);
-+
-+    if ( find_fid(device, fid) )
-+    {
-+        errno = EBADFD;
-+        goto out;
-+    }
-+
-+    if ( device->n_fids >= device->max_open_files )
-+    {
-+        errno = EMFILE;
-+        goto out;
-+    }
-+
-+    fidp = alloc_fid_mem(device, fid, path);
-+    if ( !fidp )
-+        goto out;
-+
-+    fidp->ref = 1;
-+    XEN_TAILQ_INSERT_HEAD(&device->fids, fidp, list);
-+    device->n_fids++;
-+
-+ out:
-+    pthread_mutex_unlock(&device->fid_mutex);
-+
-+    return fidp;
-+}
-+
-+static void free_fid(device *device, struct p9_fid *fidp)
-+{
-+    if ( !fidp )
-+        return;
-+
-+    pthread_mutex_lock(&device->fid_mutex);
-+
-+    fidp->ref--;
-+    if ( !fidp->ref )
-+    {
-+        device->n_fids--;
-+        XEN_TAILQ_REMOVE(&device->fids, fidp, list);
-+        free(fidp);
-+    }
-+
-+    pthread_mutex_unlock(&device->fid_mutex);
-+}
-+
-+void free_fids(device *device)
-+{
-+    struct p9_fid *fidp;
-+
-+    while ( (fidp = XEN_TAILQ_FIRST(&device->fids)) != NULL )
-+    {
-+        XEN_TAILQ_REMOVE(&device->fids, fidp, list);
-+        free(fidp);
-+    }
-+}
-+
-+static const char *relpath_from_path(const char *path)
-+{
-+    if (!strcmp(path, "/"))
-+        return ".";
-+
-+    return (path[0] == '/') ? path + 1 : path;
-+}
-+
-+static int fill_qid(device *device, const char *path, struct p9_qid *qid,
-+                    const struct stat *stbuf)
-+{
-+    struct stat st;
-+
-+    if ( !stbuf )
-+    {
-+        if ( fstatat(device->root_fd, path, &st, 0) )
-+            return errno;
-+
-+        stbuf = &st;
-+    }
-+
-+    qid->type = S_ISDIR(stbuf->st_mode) ? QID_TYPE_DIR : 0;
-+    qid->version = stbuf->st_mtime ^ (stbuf->st_size << 8);
-+    qid->path = stbuf->st_ino;
-+
-+    return 0;
-+}
-+
- static void p9_error(struct ring *ring, uint16_t tag, uint32_t err)
- {
-     unsigned int erroff;
-@@ -502,6 +626,42 @@ static void p9_version(struct ring *ring, struct p9_header *hdr)
-     fill_buffer(ring, hdr->cmd + 1, hdr->tag, "US", &ring->max_size, version);
- }
- 
-+static void p9_attach(struct ring *ring, struct p9_header *hdr)
++static void p9_stat(struct ring *ring, struct p9_header *hdr)
 +{
 +    device *device = ring->device;
 +    uint32_t fid;
-+    uint32_t dummy_u32;
-+    unsigned int dummy_uint;
-+    struct p9_qid qid;
++    struct p9_fid *fidp;
++    struct p9_stat p9s;
++    struct stat st;
 +    int ret;
 +
-+    ret = fill_data(ring, "UUSSU", &fid, &dummy_u32, &dummy_uint, &dummy_uint,
-+                    &dummy_u32);
-+    if ( ret != 5 )
++    ret = fill_data(ring, "U", &fid);
++    if ( ret != 1 )
++    {
++        p9_error(ring, hdr->tag, EINVAL);
++        return;
++    }
++
++    fidp = get_fid_ref(device, fid);
++    if ( !fidp )
++    {
++        p9_error(ring, hdr->tag, ENOENT);
++        return;
++    }
++
++    if ( fstatat(device->root_fd, fidp->path, &st, 0) < 0 )
 +    {
 +        p9_error(ring, hdr->tag, errno);
-+        return;
++        goto out;
 +    }
++    fill_p9_stat(device, &p9s, &st, strrchr(fidp->path, '/') + 1);
 +
-+    device->root_fid = alloc_fid(device, fid, relpath_from_path("/"));
-+    if ( !device->root_fid )
-+    {
-+        p9_error(ring, hdr->tag, errno);
-+        return;
-+    }
++    fill_buffer(ring, hdr->cmd + 1, hdr->tag, "s", &p9s);
 +
-+    ret = fill_qid(device, device->root_fid->path, &qid, NULL);
-+    if ( ret )
-+    {
-+        free_fid(device, device->root_fid);
-+        device->root_fid = NULL;
-+        p9_error(ring, hdr->tag, ret);
-+        return;
-+    }
-+
-+    fill_buffer(ring, hdr->cmd + 1, hdr->tag, "Q", &qid);
++ out:
++    free_fid(device, fidp);
 +}
 +
  void *io_thread(void *arg)
  {
      struct ring *ring = arg;
-@@ -561,6 +721,10 @@ void *io_thread(void *arg)
-                 p9_version(ring, &hdr);
+@@ -1227,6 +1325,10 @@ void *io_thread(void *arg)
+                 p9_clunk(ring, &hdr);
                  break;
  
-+            case P9_CMD_ATTACH:
-+                p9_attach(ring, &hdr);
++            case P9_CMD_STAT:
++                p9_stat(ring, &hdr);
 +                break;
 +
              default:
                  syslog(LOG_DEBUG, "%u.%u sent unhandled command %u\n",
                         ring->device->domid, ring->device->devid, hdr.cmd);
-diff --git a/tools/xen-9pfsd/xen-9pfsd.c b/tools/xen-9pfsd/xen-9pfsd.c
-index 73b6c3a30e..b83b896bcc 100644
---- a/tools/xen-9pfsd/xen-9pfsd.c
-+++ b/tools/xen-9pfsd/xen-9pfsd.c
-@@ -304,6 +304,9 @@ static device *new_device(unsigned int domid, unsigned int devid)
-         return NULL;
-     }
- 
-+    pthread_mutex_init(&device->fid_mutex, NULL);
-+    XEN_TAILQ_INIT(&device->fids);
-+
-     val = read_backend_node(device, "security_model");
-     if ( !val || strcmp(val, "none") )
-     {
-@@ -399,6 +402,8 @@ static void disconnect_guest(device *device)
-     }
- 
-     device->num_rings = 0;
-+
-+    free_fids(device);
- }
- 
- static void close_device(device *device, enum xenbus_state state)
-@@ -482,6 +487,7 @@ static void remove_device(device *device)
-     XEN_TAILQ_REMOVE(&devs, device, list);
- 
-     disconnect_guest(device);
-+    pthread_mutex_destroy(&device->fid_mutex);
-     free_device(device);
- }
- 
-diff --git a/tools/xen-9pfsd/xen-9pfsd.h b/tools/xen-9pfsd/xen-9pfsd.h
-index 0cde0d2bb8..6c755411a7 100644
---- a/tools/xen-9pfsd/xen-9pfsd.h
-+++ b/tools/xen-9pfsd/xen-9pfsd.h
-@@ -21,6 +21,13 @@ struct p9_header {
-     uint16_t tag;
- } __attribute__((packed));
- 
-+struct p9_fid {
-+    XEN_TAILQ_ENTRY(struct p9_fid) list;
-+    unsigned int fid;
-+    unsigned int ref;
-+    char path[];
-+};
-+
- typedef struct device device;
- 
- struct ring {
-@@ -71,10 +78,17 @@ struct device {
-     unsigned int num_rings;
-     struct ring *ring[MAX_RINGS];
-     int root_fd;
-+
-+    /* File system handling. */
-+    pthread_mutex_t fid_mutex;
-+    XEN_TAILQ_HEAD(fidhead, struct p9_fid) fids;
-+    struct p9_fid *root_fid;
-+    unsigned int n_fids;
- };
- 
- extern xenevtchn_handle *xe;
- 
- void *io_thread(void *arg);
-+void free_fids(device *device);
- 
- #endif /* XEN_9PFSD_H */
 -- 
 2.35.3
 
