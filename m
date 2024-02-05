@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38BCEC4828D
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 15:49:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.676342.1052489 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31FF5C48295
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Feb 2024 15:49:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.676344.1052499 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX1Dr-00043K-8I; Mon, 05 Feb 2024 15:49:27 +0000
+	id 1rX1E0-0004Zg-KD; Mon, 05 Feb 2024 15:49:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 676342.1052489; Mon, 05 Feb 2024 15:49:27 +0000
+Received: by outflank-mailman (output) from mailman id 676344.1052499; Mon, 05 Feb 2024 15:49:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX1Dr-00043D-5E; Mon, 05 Feb 2024 15:49:27 +0000
-Received: by outflank-mailman (input) for mailman id 676342;
- Mon, 05 Feb 2024 15:49:26 +0000
+	id 1rX1E0-0004ZZ-GJ; Mon, 05 Feb 2024 15:49:36 +0000
+Received: by outflank-mailman (input) for mailman id 676344;
+ Mon, 05 Feb 2024 15:49:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jdDv=JO=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1rX1Dq-0003z0-GY
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:49:26 +0000
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [2607:f8b0:4864:20::52c])
+ <SRS0=TPgQ=JO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rX0y8-0007Hv-5g
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2024 15:33:12 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 22b2eb8d-c43e-11ee-8a46-1f161083a0e0;
- Mon, 05 Feb 2024 16:49:25 +0100 (CET)
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-5cdf76cde78so4083109a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:49:25 -0800 (PST)
-Received: from localhost.localdomain (h-217-31-164-171.A175.priv.bahnhof.se.
- [217.31.164.171]) by smtp.gmail.com with ESMTPSA id
- h35-20020a635763000000b005d651d4236dsm69184pgm.86.2024.02.05.07.49.18
+ id dea7b323-c43b-11ee-8a46-1f161083a0e0;
+ Mon, 05 Feb 2024 16:33:11 +0100 (CET)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-51124d43943so7189082e87.2
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 07:33:11 -0800 (PST)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ s1-20020a056512314100b005114d401157sm474445lfi.2.2024.02.05.07.33.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Feb 2024 07:49:22 -0800 (PST)
+ Mon, 05 Feb 2024 07:33:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,562 +46,697 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22b2eb8d-c43e-11ee-8a46-1f161083a0e0
+X-Inumbo-ID: dea7b323-c43b-11ee-8a46-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1707148163; x=1707752963; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=x0jQSs+xMp/AYCnSyfvm8mzv7aEdRMeM6lVxU/SiBzI=;
-        b=IahC1+KwCBk/mFo4se9lDvIgPpLceWsderCRcZ/D1YlOJLtgV2oqvSzYeQvtfccYpv
-         cZUGr+wiLQ59bI0xYQH4A/19Q+hEHrHXsIKQ7bDk1svao9nt3GGqCbTw/5RocIChuVTz
-         +VE66xp0ZzMHK1fr9bfSqXHBIIJWQS5GWEZfIZKdY0r3YSWoO9YkzPhfth8gGLn+t7of
-         JL67rXSyVVvp/eQLGsYPn/wTmnChq39ZHfi00mVvsiQ3MqMRwCdff1iaakMS20IDEcvO
-         sKGEajVIm2AcoY35Yyzidc9Iz+D5ToHkrjFZRYyN/rSxhJeJXPIgSCIKO9+gLwjhfZoo
-         0raQ==
+        d=gmail.com; s=20230601; t=1707147190; x=1707751990; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QjJUMRgdV4G9iSHV/64jl4oYvH1idC9s9JFsJgFEqL0=;
+        b=JxIjw7e8lPM5xi4QASfbjaV1m4FqDrCb7lcgcb/ffyzek10Ex1qdqJSCm0nVVb78e0
+         Qv50ATAmWSEKHSL5L963zPe+COSNjZHBbKuiZ0UcUk/O+/SW46c7WJ3TMTMp6lgZ4l6N
+         54C800q6ct1+SU14+iCo1OM93RBA7LxPiwy3DAu1yIM4HM3oW0w3Ruu/qURKnW2SCX9c
+         DgfEnEcCyzXaENqj6Ba+AvJMpQMH8F9o9wQ6BStyvvKZwsq3GwVAylwOQE/Y+/+LGj8j
+         tNtxFdyoGMMQ6yDNXvNcAoU2dADi9RDkEG4+GfV0cdDGLVOpV5cON9uhnKcPpYkisGG2
+         NZRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707148163; x=1707752963;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=x0jQSs+xMp/AYCnSyfvm8mzv7aEdRMeM6lVxU/SiBzI=;
-        b=kMKHjv+Zspou+qcNR9nNIaCccjGZ3xqXL7dMoF9C93QZKEcEiRUgvq7yBkJRV+tC9Q
-         2rDT9rmjUUJRGHpSkSSMuqBk5xn9AKRaoGg119NckLioTxwXzWfCxO1fc9s1xXzDi61A
-         nVUvfGltaCW5ddnTLbJd97sjK0IRAdnaKps+NHyv7i3K+WmSWQXYg6LobJZ5bXY8tMcR
-         Lcq9nDk8jAptObBSjL+SosOSUySCBKJH0iRg9m8p1l5rCzKfD4LSxA//MLrdgQakf6A9
-         5b41PI3KlbHHfUeJAy/yV514TbbDtzxgX4HCqGz8z75F+tjW5MHf0x10V4toQJOycpzx
-         XQng==
-X-Gm-Message-State: AOJu0YzgB8OKXle0UZ73CZ9i2K+jZ4ksq0xOAkFFl5emkO+AXJKfO5Xb
-	9rmtyyvVBrVliLGa7+ho1B4b5EronFjVJh9M4YuO+0AmWb32NTZaIX1AO+fCPT35vJwnesgdFre
-	0
-X-Google-Smtp-Source: AGHT+IFfabSLrxkpkxLEuQudPIXI8NorlRh9x2u1XpsVWHNL2uys0t746eB8FRDVgN/awy2Okclwhw==
-X-Received: by 2002:a05:6a20:9c97:b0:19c:9c9a:1b09 with SMTP id mj23-20020a056a209c9700b0019c9c9a1b09mr9678959pzb.10.1707148163378;
-        Mon, 05 Feb 2024 07:49:23 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCUesF0V/mXcz0KWIfH7HXtsKW+/Ha9lyYjSGxdk5SrsxFRpurqYhs/fldEk19gyiIJdu3+DzXK2lfIYK02C3T/uqaDsKxG2ZGhIsjD9AiAwd2qFLSsZNOpbtjT10o0dxv9hfKV2pPyoswIDP7y9dEexhxcgQFBOb3vN06cVc8hzBXGyIN6R81yEEXrBdfft9k9pde+neEIBYB0eKJFu5+wrtAmX0d1CbvBuIrX4nLYmyWjRViWrqyGpD1LAMhwReIi5HIPHfGUumeB2TUHTmi2TwI0/GqLC6gE=
-From: Jens Wiklander <jens.wiklander@linaro.org>
+        d=1e100.net; s=20230601; t=1707147190; x=1707751990;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QjJUMRgdV4G9iSHV/64jl4oYvH1idC9s9JFsJgFEqL0=;
+        b=xQ98++RQUeYJPBd5uPj/y3XRqmq0IqD46tUXiYjTF1FyT6++P4aFgcvw3T1gTzFDNh
+         qvPxBIUd+RrQISY4z+9pEZ9N+bzatX1XXM9JdeUbO7Yql6JDHpeQNjX7jEtxnEFUPmxw
+         L98YmyPTfat8/yOBh1sjvIGzJkDjHq6MOXnBpx2BOAYWcQ3OTk5on1m6YII58LQeHOwI
+         YImnieP3cSZFqagPjwESSfJ7Ngi89Ea0L1nAKEmhTZZCvKXrmk8EstHPTWwklQqI+85v
+         KkGImdHqSFHXW6lGwp+OLT6TKFA2vo7WFZrR5DD0N4vtgWOdIdAHHjg1w9DU6smBVKuW
+         54mA==
+X-Gm-Message-State: AOJu0YxibeHjkEdzGRHuIGd8qT37c5lr2tLfr4YwEoLhQEItzUrDiy9Y
+	aTCOKwVGFthKjV3t8HNgtL4PvztE+pUqWPJ+ITzJBtUuL+oRrmm+hNZue4hG
+X-Google-Smtp-Source: AGHT+IFevWNlgkqOrGWxG9VGuyiieMGXHUouY/Wd94hUuX5G4mAyz47JB3L3hubnQp0m9HK2lyuoTA==
+X-Received: by 2002:a05:6512:3b08:b0:510:293e:83b with SMTP id f8-20020a0565123b0800b00510293e083bmr7694847lfv.18.1707147190146;
+        Mon, 05 Feb 2024 07:33:10 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCUAcQagK9RBOsqVV/TIf9F+rGkw6KO6C24HfrTDOxG7Jheo7AdEIbupCYkgG5sBKPMCgDgnwB0LVxgXIFm3/1P76wiJRtN7ZYG9YDM12beV3+2BqDDurY8/NehRNW+55aK8MBnc1SOxOUMO4nyW/JefDekncGZvte06G5uz0tjiH3YipEOWa+EE7V3OS3k5tXHQViwqt7VHHKmYNCHkA02n4vMnbDT+BIjpDzsA3WOMYmX1oKksURM1uaPez5owCHqmX8hGcCrgK2v19d08kGU/TGTI4AW2mUX7GY6Loc/FNmXowNRU+6sQy8EE+IgmOfit2ga5
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: patches@linaro.org,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [XEN PATCH v4] xen/arm: ffa: reclaim shared memory on guest destroy
-Date: Mon,  5 Feb 2024 16:49:09 +0100
-Message-Id: <20240205154909.2392231-1-jens.wiklander@linaro.org>
-X-Mailer: git-send-email 2.34.1
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 28/30] xen/rirscv: add minimal amount of stubs to build full Xen
+Date: Mon,  5 Feb 2024 16:32:35 +0100
+Message-ID: <e25d55d1cb95c1b2b8ad0b4eae9794b5b6f84075.1707146506.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1707146506.git.oleksii.kurochko@gmail.com>
+References: <cover.1707146506.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When an FF-A enabled guest is destroyed it may leave behind memory
-shared with SPs. This memory must be reclaimed before it's reused or an
-SP may make changes to memory used by a new unrelated guest. So when the
-domain is teared down add FF-A requests to reclaim all remaining shared
-memory.
-
-SPs in the secure world are notified using VM_DESTROYED that a guest has
-been destroyed. An SP is supposed to relinquish all shared memory to allow
-reclaiming the memory. The relinquish operation may need to be delayed if
-the shared memory is for instance part of a DMA operation.
-
-The domain reference counter is increased when the first FF-A shared
-memory is registered and the counter is decreased again when the last
-shared memory is reclaimed. If FF-A shared memory registrations remain
-at the end of of ffa_domain_teardown() a timer is set to try to reclaim
-the shared memory every second until the memory is reclaimed.
-
-A few minor style fixes with a removed empty line here and an added new
-line there.
-
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-
-v4:
-- Retry FFA_MSG_SEND_VM_DESTROYED on the returned errors
-  FFA_RET_INTERRUPTED and FFA_RET_RETRY even after all shared memory
-  handles has been reclaimed.
-- Retry ffa_mem_reclaim() only on temporary returned errors, permanent
-  errors like FFA_RET_INVALID_PARAMETERS is dealt with in recovery mode
-  instead since the SPMC isn't expected to use that error under normal
-  circumstances.
-
-v3:
-- Mentioning in the commit message that there are some style fixes
-- Addressing review comments
-- Refactor the ffa_domain_teardown() path to let
-  ffa_domain_teardown_continue() do most of the work.
-
-v2:
-- Update commit message to match the new implementation
-- Using a per domain bitfield to keep track of which SPs has been notified
-  with VM_DESTROYED
-- Holding a domain reference counter to keep the domain as a zombie domain
-  while there still is shared memory registrations remaining to be reclaimed
-- Using a timer to retry reclaiming remaining shared memory registrations
+Changes in V4:
+  - added new stubs which are necessary for compilation after rebase: __cpu_up(), __cpu_disable(), __cpu_die()
+    from smpboot.c
+  - back changes related to printk() in early_printk() as they should be removed in the next patch to avoid
+    compilation error.
+  - update definition of cpu_khz: __read_mostly -> __ro_after_init.
+  - drop vm_event_reset_vmtrace(). It is defibed in asm-generic/vm_event.h.
+  - move vm_event_*() functions from stubs.c to riscv/vm_event.c.
+  - s/BUG/BUG_ON("unimplemented") in stubs.c
+  - back irq_actor_none() and irq_actor_none() as common/irq.c isn't compiled at this moment,
+    so this function are needed to avoid compilation error.
+  - defined max_page to avoid compilation error, it will be removed as soon as common/page_alloc.c will
+    be compiled.
 ---
- xen/arch/arm/tee/ffa.c | 285 ++++++++++++++++++++++++++++++++++-------
- 1 file changed, 236 insertions(+), 49 deletions(-)
+Changes in V3:
+ - code style fixes.
+ - update attribute for frametable_base_pdx  and frametable_virt_end to __ro_after_init.
+   insteaf of read_mostly.
+ - use BUG() instead of assert_failed/WARN for newly introduced stubs.
+ - drop "#include <public/vm_event.h>" in stubs.c and use forward declaration instead.
+ - drop ack_node() and end_node() as they aren't used now.
+---
+Changes in V2:
+ - define udelay stub
+ - remove 'select HAS_PDX' from RISC-V Kconfig because of
+   https://lore.kernel.org/xen-devel/20231006144405.1078260-1-andrew.cooper3@citrix.com/
+---
+ xen/arch/riscv/Makefile       |   1 +
+ xen/arch/riscv/early_printk.c |   1 -
+ xen/arch/riscv/mm.c           |  50 ++++
+ xen/arch/riscv/setup.c        |   8 +
+ xen/arch/riscv/stubs.c        | 438 ++++++++++++++++++++++++++++++++++
+ xen/arch/riscv/traps.c        |  25 ++
+ 6 files changed, 522 insertions(+), 1 deletion(-)
+ create mode 100644 xen/arch/riscv/stubs.c
 
-diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 0793c1c7585d..bbb6b819ee2b 100644
---- a/xen/arch/arm/tee/ffa.c
-+++ b/xen/arch/arm/tee/ffa.c
-@@ -54,6 +54,7 @@
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 1ed1a8369b..60afbc0ad9 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -4,6 +4,7 @@ obj-y += mm.o
+ obj-$(CONFIG_RISCV_64) += riscv64/
+ obj-y += sbi.o
+ obj-y += setup.o
++obj-y += stubs.o
+ obj-y += traps.o
+ obj-y += vm_event.o
+ 
+diff --git a/xen/arch/riscv/early_printk.c b/xen/arch/riscv/early_printk.c
+index 60742a042d..6d0911659d 100644
+--- a/xen/arch/riscv/early_printk.c
++++ b/xen/arch/riscv/early_printk.c
+@@ -207,4 +207,3 @@ void printk(const char *format, ...)
+ }
+ 
+ #endif
+-
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index fe3a43be20..2c3fb7d72e 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -1,5 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <xen/bug.h>
+ #include <xen/cache.h>
+ #include <xen/compiler.h>
+ #include <xen/init.h>
+@@ -14,6 +15,9 @@
+ #include <asm/page.h>
+ #include <asm/processor.h>
+ 
++unsigned long __ro_after_init frametable_base_pdx;
++unsigned long __ro_after_init frametable_virt_end;
++
+ struct mmu_desc {
+     unsigned int num_levels;
+     unsigned int pgtbl_count;
+@@ -294,3 +298,49 @@ unsigned long __init calc_phys_offset(void)
+     phys_offset = load_start - XEN_VIRT_START;
+     return phys_offset;
+ }
++
++void put_page(struct page_info *page)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned long get_upper_mfn_bound(void)
++{
++    /* No memory hotplug yet, so current memory limit is the final one. */
++    return max_page - 1;
++}
++
++void arch_dump_shared_mem_info(void)
++{
++    BUG_ON("unimplemented");
++}
++
++int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
++{
++    BUG_ON("unimplemented");
++    return -1;
++}
++
++int xenmem_add_to_physmap_one(struct domain *d, unsigned int space,
++                              union add_to_physmap_extra extra,
++                              unsigned long idx, gfn_t gfn)
++{
++    BUG_ON("unimplemented");
++
++    return 0;
++}
++
++int destroy_xen_mappings(unsigned long s, unsigned long e)
++{
++    BUG_ON("unimplemented");
++    return -1;
++}
++
++int map_pages_to_xen(unsigned long virt,
++                     mfn_t mfn,
++                     unsigned long nr_mfns,
++                     unsigned int flags)
++{
++    BUG_ON("unimplemented");
++    return -1;
++}
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 98a94c4c48..8bb5bdb2ae 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -1,11 +1,19 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <xen/bug.h>
+ #include <xen/compile.h>
+ #include <xen/init.h>
  #include <xen/mm.h>
- #include <xen/sched.h>
- #include <xen/sizes.h>
-+#include <xen/timer.h>
- #include <xen/types.h>
  
- #include <asm/event.h>
-@@ -144,6 +145,12 @@
-  */
- #define FFA_MAX_SHM_COUNT               32
++#include <public/version.h>
++
+ #include <asm/early_printk.h>
  
++void arch_get_xen_caps(xen_capabilities_info_t *info)
++{
++    BUG_ON("unimplemented");
++}
++
+ /* Xen stack for bringing up the first CPU. */
+ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
+     __aligned(STACK_SIZE);
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+new file mode 100644
+index 0000000000..529f1dbe52
+--- /dev/null
++++ b/xen/arch/riscv/stubs.c
+@@ -0,0 +1,438 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#include <xen/cpumask.h>
++#include <xen/domain.h>
++#include <xen/irq.h>
++#include <xen/nodemask.h>
++#include <xen/time.h>
++#include <public/domctl.h>
++
++#include <asm/current.h>
++
++/* smpboot.c */
++
++cpumask_t cpu_online_map;
++cpumask_t cpu_present_map;
++cpumask_t cpu_possible_map;
++
++/* ID of the PCPU we're running on */
++DEFINE_PER_CPU(unsigned int, cpu_id);
++/* XXX these seem awfully x86ish... */
++/* representing HT siblings of each logical CPU */
++DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_sibling_mask);
++/* representing HT and core siblings of each logical CPU */
++DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_core_mask);
++
++nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
++
 +/*
-+ * The time we wait until trying to tear down a domain again if it was
-+ * blocked initially.
++ * max_page is defined in page_alloc.c which isn't complied for now.
++ * definition of max_page will be remove as soon as page_alloc is built.
 + */
-+#define FFA_CTX_TEARDOWN_DELAY          SECONDS(1)
++unsigned long __read_mostly max_page;
 +
- /* FF-A-1.1-REL0 section 10.9.2 Memory region handle, page 167 */
- #define FFA_HANDLE_HYP_FLAG             BIT(63, ULL)
- #define FFA_HANDLE_INVALID              0xffffffffffffffffULL
-@@ -384,11 +391,6 @@ struct ffa_ctx {
-     unsigned int page_count;
-     /* FF-A version used by the guest */
-     uint32_t guest_vers;
--    /*
--     * Number of SPs that we have sent a VM created signal to, used in
--     * ffa_domain_teardown() to know which SPs need to be signalled.
--     */
--    uint16_t create_signal_count;
-     bool rx_is_free;
-     /* Used shared memory objects, struct ffa_shm_mem */
-     struct list_head shm_list;
-@@ -402,6 +404,15 @@ struct ffa_ctx {
-     spinlock_t tx_lock;
-     spinlock_t rx_lock;
-     spinlock_t lock;
-+    /* Used if domain can't be torn down immediately */
-+    struct domain *teardown_d;
-+    struct list_head teardown_list;
-+    s_time_t teardown_expire;
-+    /*
-+     * Used for ffa_domain_teardown() to keep track of which SPs should be
-+     * notified that this guest is being destroyed.
-+     */
-+    unsigned long vm_destroy_bitmap[];
- };
- 
- struct ffa_shm_mem {
-@@ -436,6 +447,12 @@ static void *ffa_tx __read_mostly;
- static DEFINE_SPINLOCK(ffa_rx_buffer_lock);
- static DEFINE_SPINLOCK(ffa_tx_buffer_lock);
- 
++/* time.c */
 +
-+/* Used to track domains that could not be torn down immediately. */
-+static struct timer ffa_teardown_timer;
-+static struct list_head ffa_teardown_head;
-+static DEFINE_SPINLOCK(ffa_teardown_lock);
++unsigned long __ro_after_init cpu_khz;  /* CPU clock frequency in kHz. */
 +
- static bool ffa_get_version(uint32_t *vers)
- {
-     const struct arm_smccc_1_2_regs arg = {
-@@ -853,7 +870,6 @@ static int32_t handle_partition_info_get(uint32_t w1, uint32_t w2, uint32_t w3,
-             goto out_rx_release;
-         }
- 
--
-         memcpy(ctx->rx, ffa_rx, sz);
-     }
-     ctx->rx_is_free = false;
-@@ -992,53 +1008,75 @@ static void put_shm_pages(struct ffa_shm_mem *shm)
-     }
- }
- 
--static bool inc_ctx_shm_count(struct ffa_ctx *ctx)
-+static bool inc_ctx_shm_count(struct domain *d, struct ffa_ctx *ctx)
- {
-     bool ret = true;
- 
-     spin_lock(&ctx->lock);
-+
-+    /*
-+     * If this is the first shm added, increase the domain reference
-+     * counter as we need to keep domain around a bit longer to reclaim the
-+     * shared memory in the teardown path.
-+     */
-+    if ( !ctx->shm_count )
-+        get_knownalive_domain(d);
-+
-     if (ctx->shm_count >= FFA_MAX_SHM_COUNT)
-         ret = false;
-     else
-         ctx->shm_count++;
-+
-     spin_unlock(&ctx->lock);
- 
-     return ret;
- }
- 
--static void dec_ctx_shm_count(struct ffa_ctx *ctx)
-+static void dec_ctx_shm_count(struct domain *d, struct ffa_ctx *ctx)
- {
-     spin_lock(&ctx->lock);
-+
-     ASSERT(ctx->shm_count > 0);
-     ctx->shm_count--;
-+
-+    /*
-+     * If this was the last shm removed, let go of the domain reference we
-+     * took in inc_ctx_shm_count() above.
-+     */
-+    if ( !ctx->shm_count )
-+        put_domain(d);
-+
-     spin_unlock(&ctx->lock);
- }
- 
--static struct ffa_shm_mem *alloc_ffa_shm_mem(struct ffa_ctx *ctx,
-+static struct ffa_shm_mem *alloc_ffa_shm_mem(struct domain *d,
-                                              unsigned int page_count)
- {
-+    struct ffa_ctx *ctx = d->arch.tee;
-     struct ffa_shm_mem *shm;
- 
-     if ( page_count >= FFA_MAX_SHM_PAGE_COUNT )
-         return NULL;
--    if ( !inc_ctx_shm_count(ctx) )
-+    if ( !inc_ctx_shm_count(d, ctx) )
-         return NULL;
- 
-     shm = xzalloc_flex_struct(struct ffa_shm_mem, pages, page_count);
-     if ( shm )
-         shm->page_count = page_count;
-     else
--        dec_ctx_shm_count(ctx);
-+        dec_ctx_shm_count(d, ctx);
- 
-     return shm;
- }
- 
--static void free_ffa_shm_mem(struct ffa_ctx *ctx, struct ffa_shm_mem *shm)
-+static void free_ffa_shm_mem(struct domain *d, struct ffa_shm_mem *shm)
- {
-+    struct ffa_ctx *ctx = d->arch.tee;
-+
-     if ( !shm )
-         return;
- 
--    dec_ctx_shm_count(ctx);
-+    dec_ctx_shm_count(d, ctx);
-     put_shm_pages(shm);
-     xfree(shm);
- }
-@@ -1306,7 +1344,7 @@ static void handle_mem_share(struct cpu_user_regs *regs)
-         goto out_unlock;
-     }
- 
--    shm = alloc_ffa_shm_mem(ctx, page_count);
-+    shm = alloc_ffa_shm_mem(d, page_count);
-     if ( !shm )
-     {
-         ret = FFA_RET_NO_MEMORY;
-@@ -1350,7 +1388,7 @@ static void handle_mem_share(struct cpu_user_regs *regs)
- 
- out:
-     if ( ret )
--        free_ffa_shm_mem(ctx, shm);
-+        free_ffa_shm_mem(d, shm);
- out_unlock:
-     spin_unlock(&ctx->tx_lock);
- 
-@@ -1401,7 +1439,7 @@ static int handle_mem_reclaim(uint64_t handle, uint32_t flags)
-     }
-     else
-     {
--        free_ffa_shm_mem(ctx, shm);
-+        free_ffa_shm_mem(d, shm);
-     }
- 
-     return ret;
-@@ -1486,6 +1524,41 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
-     }
- }
- 
-+static bool is_in_subscr_list(const uint16_t *subscr, uint16_t start,
-+                              uint16_t end, uint16_t sp_id)
++s_time_t get_s_time(void)
 +{
-+    unsigned int n;
-+
-+    for ( n = start; n < end; n++ )
-+    {
-+        if ( subscr[n] == sp_id )
-+            return true;
-+    }
-+
-+    return false;
++    BUG_ON("unimplemented");
 +}
 +
-+static void vm_destroy_bitmap_init(struct ffa_ctx *ctx,
-+                                   unsigned int create_signal_count)
++int reprogram_timer(s_time_t timeout)
 +{
-+    unsigned int n;
-+
-+    for ( n = 0; n < subscr_vm_destroyed_count; n++ )
-+    {
-+        /*
-+         * Skip SPs subscribed to the VM created event that never was
-+         * notified of the VM creation due to an error during
-+         * ffa_domain_init().
-+         */
-+        if ( is_in_subscr_list(subscr_vm_created, create_signal_count,
-+                               subscr_vm_created_count,
-+                               subscr_vm_destroyed[n]) )
-+            continue;
-+
-+        set_bit(n, ctx->vm_destroy_bitmap);
-+    }
++    BUG_ON("unimplemented");
 +}
 +
- static int ffa_domain_init(struct domain *d)
++void send_timer_event(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
++{
++    BUG_ON("unimplemented");
++}
++
++/* shutdown.c */
++
++void machine_restart(unsigned int delay_millisecs)
++{
++    BUG_ON("unimplemented");
++}
++
++void machine_halt(void)
++{
++    BUG_ON("unimplemented");
++}
++
++/* domctl.c */
++
++long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
++                    XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_get_domain_info(const struct domain *d,
++                          struct xen_domctl_getdomaininfo *info)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
++{
++    BUG_ON("unimplemented");
++}
++
++/* monitor.c */
++
++int arch_monitor_domctl_event(struct domain *d,
++                              struct xen_domctl_monitor_op *mop)
++{
++    BUG_ON("unimplemented");
++}
++
++/* smp.c */
++
++void arch_flush_tlb_mask(const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++void smp_send_event_check_mask(const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++void smp_send_call_function_mask(const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++/* irq.c */
++
++struct pirq *alloc_pirq_struct(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
++{
++    BUG_ON("unimplemented");
++}
++
++void pirq_guest_unbind(struct domain *d, struct pirq *pirq)
++{
++    BUG_ON("unimplemented");
++}
++
++void pirq_set_affinity(struct domain *d, int pirq, const cpumask_t *mask)
++{
++    BUG_ON("unimplemented");
++}
++
++hw_irq_controller no_irq_type = {
++    .typename = "none",
++    .startup = irq_startup_none,
++    .shutdown = irq_shutdown_none,
++    .enable = irq_enable_none,
++    .disable = irq_disable_none,
++};
++
++int arch_init_one_irq_desc(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++}
++
++void smp_send_state_dump(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
++
++/* domain.c */
++
++DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
++unsigned long __per_cpu_offset[NR_CPUS];
++
++void context_switch(struct vcpu *prev, struct vcpu *next)
++{
++    BUG_ON("unimplemented");
++}
++
++void continue_running(struct vcpu *same)
++{
++    BUG_ON("unimplemented");
++}
++
++void sync_local_execstate(void)
++{
++    BUG_ON("unimplemented");
++}
++
++void sync_vcpu_execstate(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void startup_cpu_idle_loop(void)
++{
++    BUG_ON("unimplemented");
++}
++
++void free_domain_struct(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void dump_pageframe_info(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void free_vcpu_struct(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_vcpu_create(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_vcpu_destroy(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_switch_to_aarch64_mode(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_domain_create(struct domain *d,
++                       struct xen_domctl_createdomain *config,
++                       unsigned int flags)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_domain_teardown(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_destroy(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_shutdown(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_pause(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_unpause(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_domain_soft_reset(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_domain_creation_finished(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_initialise_vcpu(struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
++{
++    BUG_ON("unimplemented");
++}
++
++int arch_vcpu_reset(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++int domain_relinquish_resources(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_dump_domain_info(struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_dump_vcpu_info(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_mark_events_pending(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_update_evtchn_irq(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_block_unless_event_pending(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++void vcpu_kick(struct vcpu *v)
++{
++    BUG_ON("unimplemented");
++}
++
++struct domain *alloc_domain_struct(void)
++{
++    BUG_ON("unimplemented");
++}
++
++struct vcpu *alloc_vcpu_struct(const struct domain *d)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned long
++hypercall_create_continuation(unsigned int op, const char *format, ...)
++{
++    BUG_ON("unimplemented");
++}
++
++int __init parse_arch_dom0_param(const char *s, const char *e)
++{
++    BUG_ON("unimplemented");
++}
++
++/* guestcopy.c */
++
++unsigned long raw_copy_to_guest(void *to, const void *from, unsigned int len)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned long raw_copy_from_guest(void *to, const void __user *from,
++                                  unsigned int len)
++{
++    BUG_ON("unimplemented");
++}
++
++/* sysctl.c */
++
++long arch_do_sysctl(struct xen_sysctl *sysctl,
++                    XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
++{
++    BUG_ON("unimplemented");
++}
++
++void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
++{
++    BUG_ON("unimplemented");
++}
++
++/* p2m.c */
++
++int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
++{
++    BUG_ON("unimplemented");
++}
++
++int unmap_mmio_regions(struct domain *d,
++                       gfn_t start_gfn,
++                       unsigned long nr,
++                       mfn_t mfn)
++{
++    BUG_ON("unimplemented");
++}
++
++int map_mmio_regions(struct domain *d,
++                     gfn_t start_gfn,
++                     unsigned long nr,
++                     mfn_t mfn)
++{
++    BUG_ON("unimplemented");
++}
++
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn)
++{
++    BUG_ON("unimplemented");
++}
++
++/* Return the size of the pool, in bytes. */
++int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
++{
++    BUG_ON("unimplemented");
++}
++
++/* delay.c */
++
++void udelay(unsigned long usecs)
++{
++    BUG_ON("unimplemented");
++}
++
++/* guest_access.h */ 
++
++static inline unsigned long raw_clear_guest(void *to, unsigned int len)
++{
++    BUG_ON("unimplemented");
++}
++
++/* smpboot.c */
++
++int __cpu_up(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
++
++void __cpu_disable(void)
++{
++    BUG_ON("unimplemented");
++}
++
++void __cpu_die(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
++
++/*
++ * The following functions are defined in common/irq.c, which will be built in
++ * the next commit, so these changes will be removed there.
++ */
++
++void cf_check irq_actor_none(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++}
++
++unsigned int cf_check irq_startup_none(struct irq_desc *desc)
++{
++    BUG_ON("unimplemented");
++
++    return 0;
++}
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index ccd3593f5a..ca56df75d8 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -4,6 +4,10 @@
+  *
+  * RISC-V Trap handlers
+  */
++
++#include <xen/lib.h>
++#include <xen/sched.h>
++
+ #include <asm/processor.h>
+ #include <asm/traps.h>
+ 
+@@ -11,3 +15,24 @@ void do_trap(struct cpu_user_regs *cpu_regs)
  {
-     struct ffa_ctx *ctx;
-@@ -1501,11 +1574,14 @@ static int ffa_domain_init(struct domain *d)
-     if ( d->domain_id >= UINT16_MAX)
-         return -ERANGE;
- 
--    ctx = xzalloc(struct ffa_ctx);
-+    ctx = xzalloc_flex_struct(struct ffa_ctx, vm_destroy_bitmap,
-+                              BITS_TO_LONGS(subscr_vm_destroyed_count));
-     if ( !ctx )
-         return -ENOMEM;
- 
-     d->arch.tee = ctx;
-+    ctx->teardown_d = d;
-+    INIT_LIST_HEAD(&ctx->shm_list);
- 
-     for ( n = 0; n < subscr_vm_created_count; n++ )
-     {
-@@ -1515,65 +1591,173 @@ static int ffa_domain_init(struct domain *d)
-         {
-             printk(XENLOG_ERR "ffa: Failed to report creation of vm_id %u to  %u: res %d\n",
-                    get_vm_id(d), subscr_vm_created[n], res);
--            ctx->create_signal_count = n;
--            return -EIO;
-+            break;
-         }
-     }
--    ctx->create_signal_count = subscr_vm_created_count;
--
--    INIT_LIST_HEAD(&ctx->shm_list);
-+    vm_destroy_bitmap_init(ctx, n);
-+    if ( n != subscr_vm_created_count )
-+        return -EIO;
- 
-     return 0;
+     die();
  }
- 
--static bool is_in_subscr_list(const uint16_t *subscr, uint16_t start,
--                              uint16_t end, uint16_t sp_id)
-+static void send_vm_destroyed(struct domain *d)
- {
-+    struct ffa_ctx *ctx = d->arch.tee;
-     unsigned int n;
-+    int32_t res;
- 
--    for ( n = start; n < end; n++ )
-+    for ( n = 0; n < subscr_vm_destroyed_count; n++ )
-     {
--        if ( subscr[n] == sp_id )
--            return true;
--    }
-+        if ( !test_bit(n, ctx->vm_destroy_bitmap) )
-+            continue;
- 
--    return false;
-+        res = ffa_direct_req_send_vm(subscr_vm_destroyed[n], get_vm_id(d),
-+                                     FFA_MSG_SEND_VM_DESTROYED);
 +
-+        if ( res )
-+        {
-+            printk(XENLOG_ERR "%pd: ffa: Failed to report destruction of vm_id %u to %u: res %d\n",
-+                   d, get_vm_id(d), subscr_vm_destroyed[n], res);
-+        }
-+
-+        /*
-+         * For these two error codes the hypervisor is expected to resend
-+         * the destruction message. For the rest it is expected that the
-+         * error is permanent and that is doesn't help to resend the
-+         * destruction message.
-+         */
-+        if ( res != FFA_RET_INTERRUPTED && res != FFA_RET_RETRY )
-+            clear_bit(n, ctx->vm_destroy_bitmap);
-+    }
- }
- 
--/* This function is supposed to undo what ffa_domain_init() has done */
--static int ffa_domain_teardown(struct domain *d)
-+static void reclaim_shms(struct domain *d)
- {
-     struct ffa_ctx *ctx = d->arch.tee;
--    unsigned int n;
-+    struct ffa_shm_mem *shm, *tmp;
-     int32_t res;
- 
--    if ( !ctx )
--        return 0;
-+    list_for_each_entry_safe(shm, tmp, &ctx->shm_list, list)
-+    {
-+        register_t handle_hi;
-+        register_t handle_lo;
-+
-+        uint64_to_regpair(&handle_hi, &handle_lo, shm->handle);
-+        res = ffa_mem_reclaim(handle_lo, handle_hi, 0);
-+        switch ( res ) {
-+        case FFA_RET_OK:
-+            printk(XENLOG_G_DEBUG "%pd: ffa: Reclaimed handle %#lx\n",
-+                   d, shm->handle);
-+            list_del(&shm->list);
-+            free_ffa_shm_mem(d, shm);
-+            break;
-+        case FFA_RET_DENIED:
-+            /*
-+             * A temporary error that may get resolved a bit later, it's
-+             * worth retrying.
-+             */
-+            printk(XENLOG_G_INFO "%pd: ffa: Failed to reclaim handle %#lx : %d\n",
-+                   d, shm->handle, res);
-+            break; /* We will retry later */
-+        default:
-+            /*
-+             * The rest of the error codes are not expected and are assumed
-+             * to be of a permanent nature. It not in our control to handle
-+             * the error properly so the object in this case is to try to
-+             * minimize the damage.
-+             *
-+             * FFA_RET_NO_MEMORY might be a temporary error as it it could
-+             * succeed if retried later, but treat it as permanent for now.
-+             */
-+            printk(XENLOG_G_INFO "%pd: ffa: Permanent failure to reclaim handle %#lx : %d\n",
-+                   d, shm->handle, res);
- 
--    for ( n = 0; n < subscr_vm_destroyed_count; n++ )
-+            /*
-+             * Remove the shm from the list and free it, but don't drop
-+             * references. This results in having the shared physical pages
-+             * permanently allocate and also keeps the domain as a zombie
-+             * domain.
-+             */
-+            list_del(&shm->list);
-+            xfree(shm);
-+            break;
-+        }
-+    }
++void vcpu_show_execution_state(struct vcpu *v)
++{
++    assert_failed("need to be implented");
 +}
 +
-+static void ffa_domain_teardown_continue(struct ffa_ctx *ctx, bool first_time)
++void show_execution_state(const struct cpu_user_regs *regs)
 +{
-+    struct ffa_ctx *next_ctx = NULL;
-+
-+    send_vm_destroyed(ctx->teardown_d);
-+    reclaim_shms(ctx->teardown_d);
-+
-+    if ( ctx->shm_count ||
-+         !bitmap_empty(ctx->vm_destroy_bitmap, subscr_vm_destroyed_count) )
-+    {
-+        printk(XENLOG_G_INFO "%pd: ffa: Remaining cleanup, retrying\n", ctx->teardown_d);
-+
-+        ctx->teardown_expire = NOW() + FFA_CTX_TEARDOWN_DELAY;
-+
-+        spin_lock(&ffa_teardown_lock);
-+        list_add_tail(&ctx->teardown_list, &ffa_teardown_head);
-+        /* Need to set a new timer for the next ctx in line */
-+        next_ctx = list_first_entry(&ffa_teardown_head, struct ffa_ctx,
-+                                    teardown_list);
-+        spin_unlock(&ffa_teardown_lock);
-+    }
-+    else
-     {
-         /*
--         * Skip SPs subscribed to the VM created event that never was
--         * notified of the VM creation due to an error during
--         * ffa_domain_init().
-+         * domain_destroy() might have been called (via put_domain() in
-+         * reclaim_shms()), so we can't touch the domain structure anymore.
-          */
--        if ( is_in_subscr_list(subscr_vm_created, ctx->create_signal_count,
--                               subscr_vm_created_count,
--                               subscr_vm_destroyed[n]) )
--            continue;
-+        xfree(ctx);
- 
--        res = ffa_direct_req_send_vm(subscr_vm_destroyed[n], get_vm_id(d),
--                                     FFA_MSG_SEND_VM_DESTROYED);
--
--        if ( res )
--            printk(XENLOG_ERR "ffa: Failed to report destruction of vm_id %u to  %u: res %d\n",
--                   get_vm_id(d), subscr_vm_destroyed[n], res);
-+        /* Only check if there has been a change to the teardown queue */
-+        if ( !first_time )
-+        {
-+            spin_lock(&ffa_teardown_lock);
-+            next_ctx = list_first_entry_or_null(&ffa_teardown_head,
-+                                                struct ffa_ctx, teardown_list);
-+            spin_unlock(&ffa_teardown_lock);
-+        }
-     }
- 
-+    if ( next_ctx )
-+        set_timer(&ffa_teardown_timer, next_ctx->teardown_expire);
++    printk("implement show_execution_state(regs)\n");
 +}
 +
-+static void ffa_teardown_timer_callback(void *arg)
++void arch_hypercall_tasklet_result(struct vcpu *v, long res)
 +{
-+    struct ffa_ctx *ctx;
-+
-+    spin_lock(&ffa_teardown_lock);
-+    ctx = list_first_entry_or_null(&ffa_teardown_head, struct ffa_ctx,
-+                                   teardown_list);
-+    if ( ctx )
-+        list_del(&ctx->teardown_list);
-+    spin_unlock(&ffa_teardown_lock);
-+
-+    if ( ctx )
-+        ffa_domain_teardown_continue(ctx, false /* !first_time */);
-+    else
-+        printk(XENLOG_G_ERR "%s: teardown list is empty\n", __func__);
++    assert_failed("need to be implented");
 +}
 +
-+/* This function is supposed to undo what ffa_domain_init() has done */
-+static int ffa_domain_teardown(struct domain *d)
++enum mc_disposition arch_do_multicall_call(struct mc_state *state)
 +{
-+    struct ffa_ctx *ctx = d->arch.tee;
-+
-+    if ( !ctx )
-+        return 0;
-+
-     if ( ctx->rx )
-         rxtx_unmap(ctx);
- 
--    XFREE(d->arch.tee);
-+    ffa_domain_teardown_continue(ctx, true /* first_time */);
- 
-     return 0;
- }
-@@ -1739,6 +1923,9 @@ static bool ffa_probe(void)
-     if ( !init_sps() )
-         goto err_free_ffa_tx;
- 
-+    INIT_LIST_HEAD(&ffa_teardown_head);
-+    init_timer(&ffa_teardown_timer, ffa_teardown_timer_callback, NULL, 0);
-+
-     return true;
- 
- err_free_ffa_tx:
++    assert_failed("need to be implented");
++    return mc_continue;
++}
 -- 
-2.34.1
+2.43.0
 
 
