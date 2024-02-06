@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 983ACC48260
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Feb 2024 01:21:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.676582.1052790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF2FDC4829E
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Feb 2024 01:21:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.676583.1052799 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXA8z-00006V-4G; Tue, 06 Feb 2024 01:21:01 +0000
+	id 1rXA90-0000PO-Bd; Tue, 06 Feb 2024 01:21:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 676582.1052790; Tue, 06 Feb 2024 01:21:01 +0000
+Received: by outflank-mailman (output) from mailman id 676583.1052799; Tue, 06 Feb 2024 01:21:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXA8y-00006L-UF; Tue, 06 Feb 2024 01:21:00 +0000
-Received: by outflank-mailman (input) for mailman id 676582;
- Tue, 06 Feb 2024 01:20:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rXA90-0000OY-7j; Tue, 06 Feb 2024 01:21:02 +0000
+Received: by outflank-mailman (input) for mailman id 676583;
+ Tue, 06 Feb 2024 01:21:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+4KK=JP=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1rXA8x-0007Zy-PD
- for xen-devel@lists.xenproject.org; Tue, 06 Feb 2024 01:20:59 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fb2ca541-c48d-11ee-98f5-efadbce2ee36;
- Tue, 06 Feb 2024 02:20:58 +0100 (CET)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a36126ee41eso631826366b.2
- for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 17:20:58 -0800 (PST)
+ id 1rXA8y-0007Lc-Ka
+ for xen-devel@lists.xenproject.org; Tue, 06 Feb 2024 01:21:00 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fc567744-c48d-11ee-8a47-1f161083a0e0;
+ Tue, 06 Feb 2024 02:20:59 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a2f22bfb4e6so673260466b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 17:20:59 -0800 (PST)
 Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- cu9-20020a170906ba8900b00a3726a5e5fdsm486803ejd.95.2024.02.05.17.20.55
+ cu9-20020a170906ba8900b00a3726a5e5fdsm486803ejd.95.2024.02.05.17.20.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Feb 2024 17:20:55 -0800 (PST)
+ Mon, 05 Feb 2024 17:20:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,45 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fb2ca541-c48d-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: fc567744-c48d-11ee-8a47-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1707182456; x=1707787256; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1707182459; x=1707787259; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=L70F5M+Yt0degs+BEb21BR1J/47RzHBiPjSDLgFIrFk=;
-        b=j1EYUQ+fHKnTmqxI0VGdNQ9+dFBX/mF06iiq9gWHcVDBC5n+b5QaeSk8SmHxFSrqFE
-         kBd+ISy/Kafa9rP272XnDVTSsQ4/FJZeCK1PFkqgL/feoFT6sA1djl+SK/c9bYvc6SIN
-         89Vao6Z+tTAR+CGjNPmtOEwtFRY6oeFc05lUU=
+        bh=+pM0fbVdhQKXAGnV8MgqEAxKe6Vv2X0dLKmpVPSvjpw=;
+        b=LwaqsOU10jyaNlqLRkN4Hli1zqcwp68kwJSYHNhDLxak210u9Bhw8t62tghU6kABmj
+         PvtzeKSBZ26zkuAJHDknjoINcjXTz97Jy9EQkeZZGPT984afg+gEVoMgaJTqoboDBUrn
+         HzODJJEPPY01vBeR+7ik6FWJWkDDKegi8Fvx8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707182456; x=1707787256;
+        d=1e100.net; s=20230601; t=1707182459; x=1707787259;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=L70F5M+Yt0degs+BEb21BR1J/47RzHBiPjSDLgFIrFk=;
-        b=h37pmgz5+BpVPJQ2u17vd2A6jMT4VAQMw7wcefuN1LgbF5rG4s8YuJ19yWkxETy/DZ
-         mgK+gxkzYKVCCEI6/ia30MkQU0JdH7kFBCfvST4E+Gyaf6QA16WaoRPJKp7rvNQGS1Um
-         sxWFLdyTZF0C1xvajiD3835OFVHiZt+uYtgZfFuV49A41TJH06rx7uU18NKGit5XoO+M
-         hfKaLqP1ednf+9FuAHeLSlBf6hI84n7Akb1kB5JyUVdbKq2NqKNreyUG0U9FMQUyXF99
-         jdwbHO46bE0RBY+ADMkCtCxM11EfTzjPKDA61wNrITDOPDHGOALYB0Fr6j9XWXh7S16G
-         ooiw==
-X-Gm-Message-State: AOJu0YwEh+WfO5aO8EyW7YilnjAzX6WMZLziO9yZUExwfLksvrvl/46S
-	mD0lx7ZeUWTjpp3po++a83v+vfpVEIQioCi96z+A3cgpsUVMKnJQvxIReEHNlzT91sIYH36qY1s
-	Z2dE=
-X-Google-Smtp-Source: AGHT+IEXW5qmvPYuFsiInq8Uq3VpZtdGvVqLvFwDeeB+2lRmMIo5xrqr5HiC4wRrxRfOjM99F7cohw==
-X-Received: by 2002:a17:906:2898:b0:a35:fdf9:e7e4 with SMTP id o24-20020a170906289800b00a35fdf9e7e4mr383456ejd.20.1707182456690;
-        Mon, 05 Feb 2024 17:20:56 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCUdFVxDXqUTy+KWuGDk9yEfcrUsYbrUs0c2vEvbCgp4OIQ4VwxWTe0XpXtjdTOM7vPlMl4shxt7HWuNdwmidnyMU7/6r2m9xA7zHup0o0TUvBeGNE0RNNNS+6A18/SRccuDndw6os5gq7hMMgpaLvPcTCJs7wREdDrF1KmzBaY=
+        bh=+pM0fbVdhQKXAGnV8MgqEAxKe6Vv2X0dLKmpVPSvjpw=;
+        b=cmICTA/tLXP2Gu2Kww0lEkyxucncIt9IE0DMbHzvhXZDEJj6yyzlifYpQ1ugMzLqnk
+         ej8ezi9T7BF/tr8XB6dzplLkO+YC+pcsBRHz2pjBjBedwxg9zoG3OM5CKAnsrqapywC9
+         25mNMqwRJ3pcgMTr9Jq2IY6Tg+ueDpPGoDqKsLJUciqYL2KjesAyytbVnlF4my1A84i/
+         26P/AnMOFUYxrvzWzo8D1LkwMfNG+MiYOZy1ZATLiWisr10veJpcSTmeR7j9rn4jjwTm
+         ifbYJD6zevI9nUO6xM3g3XHgAFghRpwZLpQXajpPDid4CY+x9QenvKrQItqLKT3py58x
+         hyXw==
+X-Gm-Message-State: AOJu0YxxzallZ5vn6wSBLCG12R9hl2Iu8cfsrlg/6qcgv+Yb31bzadGK
+	6I6kVpWFz7SsMRgYre/nh0nKWrPpYeekqQJtzmPFuLr8fFaPuTVvmpxoWcmvM+vD70KBTnOJEhe
+	Er+E=
+X-Google-Smtp-Source: AGHT+IH2cOu+Wp9hhWPN0ENYOLxHKZWM4fH3SAD3uRu30XVaQsueubP9ferpWl940F1nAwW/E2ZzYA==
+X-Received: by 2002:a17:906:6711:b0:a35:d634:ed71 with SMTP id a17-20020a170906671100b00a35d634ed71mr408368ejp.23.1707182458745;
+        Mon, 05 Feb 2024 17:20:58 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCX9XwTTAZaIAdCAi/HjSjsAx57kB++2feCoFTQuGBsw2R4RJY5t9gw2L1ZdwW2gEP4miMASqd6CRLVRSFKsOoGP6085iRQ3LHhEur5aFe4DcuS+ax9cw7Y+46MokRR+cLLdJ4y6VV7ZcgwUvqrJD5dyQQ9mj9wBM0ya/ANHYm4654S5qlBP/tstx65hgovQsLmeSgcqE7m64iTtmi93XejmBETN0HFbbzRGjb+4KeEPdMAME+HR4Y9ymg0lZbI+KapGR/EnW34R/YJlTwgHGn7E3M5de/j6N/aCmbK1CNIF8Ct3tOYjk0EoMETHXy4H
 From: George Dunlap <george.dunlap@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: George Dunlap <george.dunlap@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 4/6] nestedsvm: Disable TscRateMSR
-Date: Tue,  6 Feb 2024 01:20:49 +0000
-Message-Id: <20240206012051.3564035-5-george.dunlap@cloud.com>
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>
+Subject: [PATCH 6/6] svm/nestedvm: Introduce nested capabilities bit
+Date: Tue,  6 Feb 2024 01:20:51 +0000
+Message-Id: <20240206012051.3564035-7-george.dunlap@cloud.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240206012051.3564035-1-george.dunlap@cloud.com>
 References: <20240206012051.3564035-1-george.dunlap@cloud.com>
@@ -93,194 +98,264 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The primary purpose of TSC scaling, from our perspective, is to
-maintain the fiction of an "invariant TSC" across migrates between
-platforms with different clock speeds.
+In order to make implementation and testing tractable, we will require
+specific host functionality.  Add a nested_virt bit to hvm_funcs.caps,
+and return an error if a domain is created with nested virt and this
+bit isn't set.
 
-On AMD, the TscRateMSR CPUID bit is unconditionally enabled in the
-"host cpuid", even if the hardware doesn't actually support it.
-According to c/s fd14a1943c4 ("nestedsvm: Support TSC Rate MSR"),
-testing showed that emulating TSC scaling in an L1 was more expensive
-than emulating TSC scaling on an L0 (due to extra sets of vmexit /
-vmenter).
+For VMX, start with always enabling it if HAP is present; this
+shouldn't change current behvior.
 
-However, the current implementation seems to be broken.
+For SVM, require some basic functionality, adding a document
+explaining the rationale.
 
-First of all, the final L2 scaling ratio should be a composition of
-the L0 scaling ratio and the L1 scaling ratio; there's no indication
-this is being done anywhere.
-
-Secondly, it's not clear that the L1 tsc scaling ratio actually
-affects the L0 tsc scaling ratio.  The stored value (ns_tscratio) is
-used to affect the tsc *offset*, but doesn't seem to actually be
-factored into d->hvm.tsc_scaling_ratio.  (Which shouldn't be
-per-domain anyway, but per-vcpu.)  Having the *offset* scaled
-according to the nested scaling without the actual RDTSC itself also
-being scaled has got to produce inconsistent results.
-
-For now, just disable the functionality entirely until we can
-implement it properly:
-
-- Don't set TSCRATEMSR in the host CPUID policy
-
-- Remove MSR_AMD64_TSC_RATIO emulation handling, so that the guest
-  guests a #GP if it tries to access them (as it should when
-  TSCRATEMSR is clear)
-
-- Remove ns_tscratio from struct nestedhvm, and all code that touches
-  it
-
-Unfortunately this means ripping out the scaling calculation stuff as
-well, since it's only used in the nested case; it's there in the git
-tree if we need it for reference when we re-introduce it.
+NB that only SVM CPUID bits 0-7 have been considered.  Bits 10-16 may
+be considered in a follow-up patch.
 
 Signed-off-by: George Dunlap <george.dunlap@cloud.com>
 ---
-CC: Jan Beulich <jbeulich@suse.com>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: "Roger Pau Monné" <roger.pau@citrix.com>
+CC: George Dunlap <george.dunlap@citrix.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
+CC: "Roger Pau Monné" <roger.pau@citrix.com>
+CC: Jun Nakajima <jun.nakajima@intel.com>
+CC: Kevin Tian <kevin.tian@intel.com>
 ---
- xen/arch/x86/cpu-policy.c                    |  3 +-
- xen/arch/x86/hvm/svm/nestedsvm.c             |  2 -
- xen/arch/x86/hvm/svm/svm.c                   | 57 --------------------
- xen/arch/x86/include/asm/hvm/svm/nestedsvm.h |  5 --
- 4 files changed, 1 insertion(+), 66 deletions(-)
+ docs/designs/nested-svm-cpu-features.md | 110 ++++++++++++++++++++++++
+ xen/arch/x86/domain.c                   |   6 ++
+ xen/arch/x86/hvm/svm/nestedhvm.h        |   1 +
+ xen/arch/x86/hvm/svm/nestedsvm.c        |  14 +++
+ xen/arch/x86/hvm/svm/svm.c              |   2 +
+ xen/arch/x86/hvm/vmx/vmx.c              |   3 +
+ xen/arch/x86/include/asm/hvm/hvm.h      |  11 ++-
+ 7 files changed, 146 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
-index 10079c26ae..d71abbc44a 100644
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -407,8 +407,7 @@ static void __init calculate_host_policy(void)
-                                (1u << SVM_FEATURE_PAUSEFILTER) |
-                                (1u << SVM_FEATURE_DECODEASSISTS));
-         /* Enable features which are always emulated. */
--        p->extd.raw[0xa].d |= ((1u << SVM_FEATURE_VMCBCLEAN) |
--                               (1u << SVM_FEATURE_TSCRATEMSR));
-+        p->extd.raw[0xa].d |= (1u << SVM_FEATURE_VMCBCLEAN);
-     }
+diff --git a/docs/designs/nested-svm-cpu-features.md b/docs/designs/nested-svm-cpu-features.md
+new file mode 100644
+index 0000000000..7ffb8daefd
+--- /dev/null
++++ b/docs/designs/nested-svm-cpu-features.md
+@@ -0,0 +1,110 @@
++# Nested SVM (AMD) CPUID requirements
++
++The first step in making nested SVM production-ready is to make sure
++that all features are implemented and well-tested.  To make this
++tractable, we will initially be limiting the "supported" range of
++nested virt to a specific subset of host and guest features.  This
++document describes the criteria for deciding on features, and the
++rationale behind each feature.
++
++For AMD, all virtualization-related features can be found in CPUID
++leaf 8000000A:edx
++
++# Criteria
++
++- Processor support: At a minimum we want to support processors from
++  the last 5 years.  All things being equal, older processors are
++  better.  Bits 0:7 were available in the very earliest processors;
++  and even through bit 15 we should be pretty good support-wise.
++
++- Faithfulness to hardware: We need the behavior of the "virtual cpu"
++  from the L1 hypervisor's perspective to be as close as possible to
++  the original hardware.  In particular, the behavior of the hardware
++  on error paths 1) is not easy to understand or test, 2) can be the
++  source of surprising vulnerabiliies.  (See XSA-7 for an example of a
++  case where subtle error-handling differences can open up a privilege
++  escalation.)  We should avoid emulating any bit of the hardware with
++  complex error paths if we can at all help it.
++
++- Cost of implementation: We want to minimize the cost of
++  implementation (where this includes bringing an existing sub-par
++  implementation up to speed).  All things being equal, we'll favor a
++  configuration which does not require any new implementation.
++
++- Performance: All things being equal, we'd prefer to choose a set of
++  L0 / L1 CPUID bits that are faster than slower.
++
++
++# Bits
++
++- 0 `NP` *Nested Paging*: Required both for L0 and L1.
++
++  Based primarily on faithfulness and performance, as well as
++  potential cost of implementation.  Available on earliest hardware,
++  so no compatibility issues.
++
++- 1 `LbrVirt` *LBR / debugging virtualization*: Require for L0 and L1.
++
++  For L0 this is required for performance: There's no way to tell the
++  guests not to use the LBR-related registers; and if the guest does,
++  then you have to save and restore all LBR-related registers on
++  context switch, which is prohibitive.  Furthermore, the additional
++  emulation risks a security-relevant difference to come up.
++
++  Providing it to L1 when we have it in L0 is basically free, and
++  already implemented.
++
++  Just require it and provide it.
++
++- 2 `SVML` *SVM Lock*: Not required for L0, not provided to L1
++
++  Seems to be aboult enabling an operating system to prevent "blue
++  pill" attacks against itself.
++
++  Xen doesn't use it, nor provide it; so it would need to be
++  implementend.  The best way to protect a guest OS is to leave nested
++  virt disabled in the tools.
++
++- 3 `NRIPS` NRIP Save: Require for both L0 and L1
++
++  If NRIPS is not present, the software interrupt injection
++  functionality can't be used; and Xen has to emulate it.  That's
++  another source of potential security issues.  If hardware supports
++  it, then providing it to guest is basically free.
++
++- 4 `TscRateMsr`: Not required by L0, not provided to L1
++
++  The main putative use for this would be trying to maintain an
++  invariant TSC across cores with different clock speeds, or after a
++  migrate.  Unlike others, this doesn't have an error path to worry
++  about compatibility-wise; and according to tests done when nestedSVM
++  was first implemented, it's actually faster to emliate TscRateMSR in
++  the L0 hypervisor than for L1 to attempt to emulate it itself.
++
++  However, using this properly in L0 will take some implementation
++  effort; and composing it properly with L1 will take even more
++  effort.  Just leave it off for now.
++
++ - 5 `VmcbClean`: VMCB Clean Bits: Not required by L0, provide to L1
++
++  This is a pure optimization, both on the side of the L0 and L1.  The
++  implementaiton for L1 is entirely Xen-side, so can be provided even
++  on hardware that doesn't provide it.  And it's purely an
++  optimization, so could be "implemented" by ignoring the bits
++  entirely.
++
++  As such, we don't need to require it for L0; and as it's already
++  implemented, no reason not to provide it to L1.  Before this feature
++  was available those bits were marked SBZ ("should be zero"); setting
++  them was already advertised to cause unpredictable behavior.
++
++- 6 `FlushByAsid`: Require for L0, provide to L1
++
++  This is cheap and easy to use for L0 and to provide to the L1;
++  there's no reson not to just pass it through.
++
++- 7 `DecodeAssists`: Require for L0, provide to L1
++
++  Using it in L0 reduces the chance that we'll make some sort of error
++  in the decode path.  And if hardware supports it, it's easy enough
++  to provide to the L1.
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index bda853e3c9..a25f498265 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -673,6 +673,12 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+          */
+         config->flags |= XEN_DOMCTL_CDF_oos_off;
  
-     /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
++    if ( nested_virt && !hvm_nested_virt_supported() )
++    {
++        dprintk(XENLOG_INFO, "Nested virt requested but not available\n");
++        return -EINVAL;        
++    }
++
+     if ( nested_virt && !hap )
+     {
+         dprintk(XENLOG_INFO, "Nested virt not supported without HAP\n");
+diff --git a/xen/arch/x86/hvm/svm/nestedhvm.h b/xen/arch/x86/hvm/svm/nestedhvm.h
+index 43245e13de..31cf2af8e4 100644
+--- a/xen/arch/x86/hvm/svm/nestedhvm.h
++++ b/xen/arch/x86/hvm/svm/nestedhvm.h
+@@ -35,6 +35,7 @@ enum nestedhvm_vmexits
+ nestedsvm_check_intercepts(struct vcpu *v, struct cpu_user_regs *regs,
+     uint64_t exitcode);
+ void svm_nested_features_on_efer_update(struct vcpu *v);
++void __init start_nested_svm(struct hvm_function_table *svm_function_table);
+ 
+ /* Interface methods */
+ void cf_check nsvm_vcpu_destroy(struct vcpu *v);
 diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index ee9602f5c8..d02a59f184 100644
+index a5319ab729..92b063daa5 100644
 --- a/xen/arch/x86/hvm/svm/nestedsvm.c
 +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -146,8 +146,6 @@ int cf_check nsvm_vcpu_reset(struct vcpu *v)
-     svm->ns_msr_hsavepa = INVALID_PADDR;
-     svm->ns_ovvmcb_pa = INVALID_PADDR;
- 
--    svm->ns_tscratio = DEFAULT_TSC_RATIO;
--
-     svm->ns_cr_intercepts = 0;
-     svm->ns_dr_intercepts = 0;
-     svm->ns_exception_intercepts = 0;
+@@ -1666,3 +1666,17 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
+         }
+     }
+ }
++
++void __init start_nested_svm(struct hvm_function_table *svm_function_table)
++{
++    /* 
++     * Required host functionality to support nested virt.  See
++     * docs/designs/nested-svm-cpu-features.md for rationale.
++     */
++    svm_function_table->caps.nested_virt =
++        cpu_has_svm_nrips &&
++        cpu_has_svm_lbrv &&
++        cpu_has_svm_nrips &&
++        cpu_has_svm_flushbyasid &&
++        cpu_has_svm_decode;
++}
 diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index b551eac807..34b9f603bc 100644
+index 34b9f603bc..5c2e171777 100644
 --- a/xen/arch/x86/hvm/svm/svm.c
 +++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -777,43 +777,6 @@ static int cf_check svm_get_guest_pat(struct vcpu *v, u64 *gpat)
-     return 1;
+@@ -2527,6 +2527,8 @@ const struct hvm_function_table * __init start_svm(void)
+     svm_function_table.caps.hap_superpage_2mb = true;
+     svm_function_table.caps.hap_superpage_1gb = cpu_has_page1gb;
+ 
++    start_nested_svm(&svm_function_table);
++
+     return &svm_function_table;
  }
  
--static uint64_t scale_tsc(uint64_t host_tsc, uint64_t ratio)
--{
--    uint64_t mult, frac, scaled_host_tsc;
--
--    if ( ratio == DEFAULT_TSC_RATIO )
--        return host_tsc;
--
--    /*
--     * Suppose the most significant 32 bits of host_tsc and ratio are
--     * tsc_h and mult, and the least 32 bits of them are tsc_l and frac,
--     * then
--     *     host_tsc * ratio * 2^-32
--     *     = host_tsc * (mult * 2^32 + frac) * 2^-32
--     *     = host_tsc * mult + (tsc_h * 2^32 + tsc_l) * frac * 2^-32
--     *     = host_tsc * mult + tsc_h * frac + ((tsc_l * frac) >> 32)
--     *
--     * Multiplications in the last two terms are between 32-bit integers,
--     * so both of them can fit in 64-bit integers.
--     *
--     * Because mult is usually less than 10 in practice, it's very rare
--     * that host_tsc * mult can overflow a 64-bit integer.
--     */
--    mult = ratio >> 32;
--    frac = ratio & ((1ULL << 32) - 1);
--    scaled_host_tsc  = host_tsc * mult;
--    scaled_host_tsc += (host_tsc >> 32) * frac;
--    scaled_host_tsc += ((host_tsc & ((1ULL << 32) - 1)) * frac) >> 32;
--
--    return scaled_host_tsc;
--}
--
--static uint64_t svm_get_tsc_offset(uint64_t host_tsc, uint64_t guest_tsc,
--    uint64_t ratio)
--{
--    return guest_tsc - scale_tsc(host_tsc, ratio);
--}
--
- static void cf_check svm_set_tsc_offset(struct vcpu *v, u64 offset, u64 at_tsc)
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 4bcf436d2c..6b5ad4a509 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -3021,6 +3021,9 @@ const struct hvm_function_table * __init start_vmx(void)
+     if ( cpu_has_vmx_tsc_scaling )
+         vmx_function_table.tsc_scaling.ratio_frac_bits = 48;
+ 
++    /* TODO: Require hardware support before enabling nested virt */
++    vmx_function_table.caps.nested_virt = vmx_function_table.caps.hap;
++
+     model_specific_lbr = get_model_specific_lbr();
+     lbr_tsx_fixup_check();
+     ler_to_fixup_check();
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index bbd83a8275..8a3df0eca7 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -97,7 +97,10 @@ struct hvm_function_table {
+             singlestep:1,
+             
+             /* Hardware virtual interrupt delivery enable? */
+-            virtual_intr_delivery;
++            virtual_intr_delivery,
++
++            /* Nested virt capabilities */
++            nested_virt:1;
+ 
+     } caps;
+ 
+@@ -655,6 +658,12 @@ static inline bool hvm_altp2m_supported(void)
+     return hvm_funcs.caps.altp2m;
+ }
+ 
++/* Returns true if we have the minimum hardware requirements for nested virt */
++static inline bool hvm_nested_virt_supported(void)
++{
++    return hvm_funcs.caps.nested_virt;
++}
++
+ /* updates the current hardware p2m */
+ static inline void altp2m_vcpu_update_p2m(struct vcpu *v)
  {
-     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-@@ -832,18 +795,8 @@ static void cf_check svm_set_tsc_offset(struct vcpu *v, u64 offset, u64 at_tsc)
- 
-     if ( nestedhvm_vcpu_in_guestmode(v) )
-     {
--        struct nestedsvm *svm = &vcpu_nestedsvm(v);
--
-         n2_tsc_offset = vmcb_get_tsc_offset(n2vmcb) -
-                         vmcb_get_tsc_offset(n1vmcb);
--        if ( svm->ns_tscratio != DEFAULT_TSC_RATIO )
--        {
--            uint64_t guest_tsc = hvm_get_guest_tsc_fixed(v, at_tsc);
--
--            n2_tsc_offset = svm_get_tsc_offset(guest_tsc,
--                                               guest_tsc + n2_tsc_offset,
--                                               svm->ns_tscratio);
--        }
-         vmcb_set_tsc_offset(n1vmcb, offset);
-     }
- 
-@@ -1921,10 +1874,6 @@ static int cf_check svm_msr_read_intercept(
-         *msr_content = nsvm->ns_msr_hsavepa;
-         break;
- 
--    case MSR_AMD64_TSC_RATIO:
--        *msr_content = nsvm->ns_tscratio;
--        break;
--
-     case MSR_AMD_OSVW_ID_LENGTH:
-     case MSR_AMD_OSVW_STATUS:
-         if ( !d->arch.cpuid->extd.osvw )
-@@ -2103,12 +2052,6 @@ static int cf_check svm_msr_write_intercept(
-             goto gpf;
-         break;
- 
--    case MSR_AMD64_TSC_RATIO:
--        if ( msr_content & TSC_RATIO_RSVD_BITS )
--            goto gpf;
--        nsvm->ns_tscratio = msr_content;
--        break;
--
-     case MSR_IA32_MCx_MISC(4): /* Threshold register */
-     case MSR_F10_MC4_MISC1 ... MSR_F10_MC4_MISC3:
-         /*
-diff --git a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
-index 406fc082b1..45d658ad01 100644
---- a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
-@@ -18,11 +18,6 @@ struct nestedsvm {
-      */
-     uint64_t ns_ovvmcb_pa;
- 
--    /* virtual tscratio holding the value l1 guest writes to the
--     * MSR_AMD64_TSC_RATIO MSR.
--     */
--    uint64_t ns_tscratio;
--
-     /* Cached real intercepts of the l2 guest */
-     uint32_t ns_cr_intercepts;
-     uint32_t ns_dr_intercepts;
 -- 
 2.25.1
 
