@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB50C4828D
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Feb 2024 00:38:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.676568.1052726 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3F8C48260
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Feb 2024 01:21:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.676578.1052750 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX9TS-0008JX-58; Tue, 06 Feb 2024 00:38:06 +0000
+	id 1rXA8v-0007aF-MK; Tue, 06 Feb 2024 01:20:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 676568.1052726; Tue, 06 Feb 2024 00:38:06 +0000
+Received: by outflank-mailman (output) from mailman id 676578.1052750; Tue, 06 Feb 2024 01:20:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rX9TS-0008JQ-2Z; Tue, 06 Feb 2024 00:38:06 +0000
-Received: by outflank-mailman (input) for mailman id 676568;
- Tue, 06 Feb 2024 00:38:04 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rX9TQ-0008JG-5T; Tue, 06 Feb 2024 00:38:04 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rX9TQ-0002xE-30; Tue, 06 Feb 2024 00:38:04 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rX9TP-0002H2-HX; Tue, 06 Feb 2024 00:38:03 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1rX9TP-00007p-Gz; Tue, 06 Feb 2024 00:38:03 +0000
+	id 1rXA8v-0007a8-JS; Tue, 06 Feb 2024 01:20:57 +0000
+Received: by outflank-mailman (input) for mailman id 676578;
+ Tue, 06 Feb 2024 01:20:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=+4KK=JP=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
+ id 1rXA8u-0007Lc-E7
+ for xen-devel@lists.xenproject.org; Tue, 06 Feb 2024 01:20:56 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f9f6cc8f-c48d-11ee-8a47-1f161083a0e0;
+ Tue, 06 Feb 2024 02:20:55 +0100 (CET)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-51109060d6aso7221716e87.2
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 17:20:55 -0800 (PST)
+Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ cu9-20020a170906ba8900b00a3726a5e5fdsm486803ejd.95.2024.02.05.17.20.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Feb 2024 17:20:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,243 +47,247 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=7SCX7wgYi4dDbBHxY9LNou0Ixn2SQcvgwydMzwFpFng=; b=T7U6lKNusuX+Z+gIUXARl7V50U
-	P5x0VxwF2Vo7jK5B3FRNncc/5OL8JY6gsZV2gG1DwjKUs+n6ShuQ5KtxkYSaCBOmZ40aaDwURkonr
-	BODllq69/A38cFH4dwYnWuuNOTNME4WpT5+IwhQnpZtFgQvUOoDf5oTvN3AQAEUgRU7Y=;
+X-Inumbo-ID: f9f6cc8f-c48d-11ee-8a47-1f161083a0e0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1707182455; x=1707787255; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UyL8iRnNOrzO0tXt0n8exVji9pmykaMWjAoTvDaMaqU=;
+        b=OWHkK360S0r4Ul1/tP7Q4uxYpaaG9VAlVUaP7/TbyXbh786wlEY2kaTyTRq4BsPlVU
+         QmuJPmEcLKgmJVXq1hOTeN2s/sxU/Wk1F96HWzhXJZrIjm448KnLnPhRJgb9zho1d1GX
+         N0u4XkO5N8l6QkysRwRaA2cXU/dXrfZAdnXAk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1707182455; x=1707787255;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=UyL8iRnNOrzO0tXt0n8exVji9pmykaMWjAoTvDaMaqU=;
+        b=Xaxyo93gf30AOsLQf9jh2woG/VDoH5BSkNm01b+omIk5ng8JQdljjs544KWzTmSpgo
+         71YyNEMQKQE8A2QMp53F2AQur1RvTg8RUIsQI1URDevmNrlb0lBp6Ff2TL14fpesRjVk
+         tpGLKvsv8Aj3Cmdo4EmMZagjVKaQgg+wTRkI0yHBoalFpyIjuKm8qNdUOtwsG9NuIDIz
+         xLsKSRLF6nO76qA75w2FY7SnBOCg8UX23HoB6aJDbqp7W0EmTpZqzoKCQgcpwIdvpPDi
+         3iujbUwccQJeeaZBol1arpx1kDJDkj1lAqS41O38BpRYfNJ2QtgtFcA+7+yHRL1/bMR2
+         fMyA==
+X-Gm-Message-State: AOJu0YxLJIIThWEEQsw+mUDHOIrPkANdC1nBU10+v/vHd+yqmoL8x5Vi
+	UXYU9IyZjNA/rZvcU62iy0D71XApR6e0BAEBGX4KUEk2Gkfmi962OOtxXdmdT4l29/3vWdsX0J+
+	NS00=
+X-Google-Smtp-Source: AGHT+IFXWt1zdRs1Qg+qzCQpO7rNI1yCQJ/5UArCsgophMlXMPxm+ZJT0/q9e/bXuOnjUq/kUe4MRw==
+X-Received: by 2002:ac2:533c:0:b0:511:525a:a527 with SMTP id f28-20020ac2533c000000b00511525aa527mr491189lfh.49.1707182455217;
+        Mon, 05 Feb 2024 17:20:55 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCXjUY728lp6AlPZ93eaAYRGO8gG2OWdp8QzNUYPwV1CfEh1Q0r0oPr6krNNWob5guieNOn3eVe3Gu+9KBHYlER6WPdwbRZqLCz7rCHjkEzZgfoCBomlAuH92z+4Ie1ROU1ie4HOtf/2mMMwopr+C9/ZXX5N0Frs0hDw8/lTyYlrrTLMQJO3HDR4N9Djn7JyScRfDWPxQqgMjrjKaakGd8+fDpW6sg4yRFnj321K
+From: George Dunlap <george.dunlap@cloud.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-184596-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: George Dunlap <george.dunlap@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>
+Subject: [PATCH 3/6] xen/hvm: Move other hvm_function_table booleans into the caps bitfield
+Date: Tue,  6 Feb 2024 01:20:48 +0000
+Message-Id: <20240206012051.3564035-4-george.dunlap@cloud.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240206012051.3564035-1-george.dunlap@cloud.com>
+References: <20240206012051.3564035-1-george.dunlap@cloud.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 184596: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=3ce2e1f606cef3aa16b856396b31068c447b1262
-X-Osstest-Versions-That:
-    xen=29f17d837421f13c0e0010802de1b2d51d2ded4a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 06 Feb 2024 00:38:03 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-flight 184596 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/184596/
+Moving them all together has several advantages:
+ * Collects them all in one part of the struct
+ * The `caps` field means that we can drop the "_supported" suffix, as it's
+   clear what is meant.
 
-Regressions :-(
+Signed-off-by: George Dunlap <george.dunlap@cloud.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: "Roger Pau Monné" <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Jun Nakajima <jun.nakajima@intel.com>
+CC: Kevin Tian <kevin.tian@intel.com>
+---
+ xen/arch/x86/hvm/hvm.c             |  6 +++---
+ xen/arch/x86/hvm/svm/svm.c         |  2 +-
+ xen/arch/x86/hvm/vlapic.c          |  4 ++--
+ xen/arch/x86/hvm/vmx/vmcs.c        |  2 +-
+ xen/arch/x86/hvm/vmx/vmx.c         |  8 ++++----
+ xen/arch/x86/include/asm/hvm/hvm.h | 29 ++++++++++++++---------------
+ 6 files changed, 25 insertions(+), 26 deletions(-)
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64-xsm               6 xen-build                fail REGR. vs. 184593
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index ae9d4c4756..aa2f2d054a 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -136,7 +136,7 @@ static struct notifier_block cpu_nfb = {
+ 
+ static bool __init hap_supported(struct hvm_function_table *fns)
+ {
+-    if ( !fns->hap_supported )
++    if ( !fns->caps.hap )
+     {
+         printk("HVM: Hardware Assisted Paging (HAP) not detected\n");
+         return false;
+@@ -144,7 +144,7 @@ static bool __init hap_supported(struct hvm_function_table *fns)
+ 
+     if ( !opt_hap_enabled )
+     {
+-        fns->hap_supported = 0;
++        fns->caps.hap = 0;
+         printk("HVM: Hardware Assisted Paging (HAP) detected but disabled\n");
+         return false;
+     }
+@@ -190,7 +190,7 @@ static int __init cf_check hvm_enable(void)
+     }
+ 
+     if ( !opt_altp2m_enabled )
+-        hvm_funcs.altp2m_supported = 0;
++        hvm_funcs.caps.altp2m = 0;
+ 
+     if ( opt_hvm_fep )
+         warning_add(warning_hvm_fep);
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 40bc1ffbc6..b551eac807 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -2580,7 +2580,7 @@ const struct hvm_function_table * __init start_svm(void)
+     if ( !printed )
+         printk(" - none\n");
+ 
+-    svm_function_table.hap_supported = cpu_has_svm_npt;
++    svm_function_table.caps.hap = cpu_has_svm_npt;
+     svm_function_table.caps.hap_superpage_2mb = true;
+     svm_function_table.caps.hap_superpage_1gb = cpu_has_page1gb;
+ 
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index 71a4b954b0..dcbcf4a1fe 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -1326,7 +1326,7 @@ int vlapic_has_pending_irq(struct vcpu *v)
+     if ( irr == -1 )
+         return -1;
+ 
+-    if ( hvm_funcs.virtual_intr_delivery_enabled &&
++    if ( hvm_funcs.caps.virtual_intr_delivery &&
+          !nestedhvm_vcpu_in_guestmode(v) )
+         return irr;
+ 
+@@ -1361,7 +1361,7 @@ int vlapic_ack_pending_irq(struct vcpu *v, int vector, bool force_ack)
+     int isr;
+ 
+     if ( !force_ack &&
+-         hvm_funcs.virtual_intr_delivery_enabled )
++         hvm_funcs.caps.virtual_intr_delivery )
+         return 1;
+ 
+     /* If there's no chance of using APIC assist then bail now. */
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 53f9d81aa9..aff69d5320 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -112,7 +112,7 @@ static int cf_check parse_ept_param_runtime(const char *s)
+     struct domain *d;
+     int val;
+ 
+-    if ( !cpu_has_vmx_ept || !hvm_funcs.hap_supported ||
++    if ( !cpu_has_vmx_ept || !hvm_funcs.caps.hap ||
+          !(hvm_funcs.caps.hap_superpage_2mb ||
+            hvm_funcs.caps.hap_superpage_1gb) )
+     {
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 9cfc0140b4..4bcf436d2c 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2963,7 +2963,7 @@ const struct hvm_function_table * __init start_vmx(void)
+         return NULL;
+     }
+ 
+-    vmx_function_table.singlestep_supported = cpu_has_monitor_trap_flag;
++    vmx_function_table.caps.singlestep = cpu_has_monitor_trap_flag;
+ 
+     if ( cpu_has_vmx_dt_exiting )
+         vmx_function_table.set_descriptor_access_exiting =
+@@ -2986,8 +2986,8 @@ const struct hvm_function_table * __init start_vmx(void)
+                 printk("VMX: Disabling executable EPT superpages due to CVE-2018-12207\n");
+         }
+ 
+-        vmx_function_table.hap_supported = 1;
+-        vmx_function_table.altp2m_supported = 1;
++        vmx_function_table.caps.hap = 1;
++        vmx_function_table.caps.altp2m = 1;
+ 
+         vmx_function_table.caps.hap_superpage_2mb = cpu_has_vmx_ept_2mb;
+         vmx_function_table.caps.hap_superpage_1gb = cpu_has_vmx_ept_1gb;
+@@ -3000,7 +3000,7 @@ const struct hvm_function_table * __init start_vmx(void)
+         vmx_function_table.update_eoi_exit_bitmap = vmx_update_eoi_exit_bitmap;
+         vmx_function_table.process_isr = vmx_process_isr;
+         vmx_function_table.handle_eoi = vmx_handle_eoi;
+-        vmx_function_table.virtual_intr_delivery_enabled = true;
++        vmx_function_table.caps.virtual_intr_delivery = true;
+     }
+ 
+     if ( cpu_has_vmx_posted_intr_processing )
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index f50476f50f..bbd83a8275 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -86,20 +86,19 @@ struct hvm_vcpu_nonreg_state {
+ struct hvm_function_table {
+     const char *name;
+ 
+-    /* Support Hardware-Assisted Paging? */
+-    bool hap_supported;
+-
+-    /* Necessary hardware support for alternate p2m's? */
+-    bool altp2m_supported;
+-    bool singlestep_supported;
+-
+-    /* Hardware virtual interrupt delivery enable? */
+-    bool virtual_intr_delivery_enabled;
+-
+     struct {
+         /* Indicate HAP capabilities. */
+-        bool hap_superpage_1gb:1,
+-            hap_superpage_2mb:1;
++        bool hap:1,
++             hap_superpage_1gb:1,
++             hap_superpage_2mb:1,
++
++            /* Altp2m capabilities */
++            altp2m:1,
++            singlestep:1,
++            
++            /* Hardware virtual interrupt delivery enable? */
++            virtual_intr_delivery;
++
+     } caps;
+ 
+     /*
+@@ -642,18 +641,18 @@ static inline void hvm_enable_msr_interception(struct domain *d, uint32_t msr)
+ 
+ static inline bool hvm_is_singlestep_supported(void)
+ {
+-    return hvm_funcs.singlestep_supported;
++    return hvm_funcs.caps.singlestep;
+ }
+ 
+ static inline bool hvm_hap_supported(void)
+ {
+-    return hvm_funcs.hap_supported;
++    return hvm_funcs.caps.hap;
+ }
+ 
+ /* returns true if hardware supports alternate p2m's */
+ static inline bool hvm_altp2m_supported(void)
+ {
+-    return hvm_funcs.altp2m_supported;
++    return hvm_funcs.caps.altp2m;
+ }
+ 
+ /* updates the current hardware p2m */
+-- 
+2.25.1
 
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  3ce2e1f606cef3aa16b856396b31068c447b1262
-baseline version:
- xen                  29f17d837421f13c0e0010802de1b2d51d2ded4a
-
-Last test of basis   184593  2024-02-05 18:00:25 Z    0 days
-Testing same since   184596  2024-02-05 21:00:25 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Juergen Gross <jgross@suse.com>
-
-jobs:
- build-arm64-xsm                                              fail    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit 3ce2e1f606cef3aa16b856396b31068c447b1262
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:57 2024 +0100
-
-    tools/xenstored: map stubdom interface
-    
-    When running as stubdom, map the stubdom's Xenstore ring page in order
-    to support using the 9pfs frontend.
-    
-    Use the same pattern as in dom0_init() when running as daemon in dom0
-    (introduce the own domain, then send an event to the client side to
-    signal Xenstore is ready to communicate).
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit 097388d520eb104ebd93b486d126f319536a54e4
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:56 2024 +0100
-
-    tools/xenstored: split domain_init()
-    
-    Today domain_init() is called either just before calling dom0_init()
-    in case no live update is being performed, or it is called after
-    reading the global state from read_state_global(), as the event
-    channel fd is needed.
-    
-    Split up domain_init() into a preparation part which can be called
-    unconditionally, and in a part setting up the event channel handle.
-    
-    Note that there is no chance that chk_domain_generation() can be
-    called now before xc_handle has been setup, so there is no need for
-    the related special case anymore.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit 5edc819ed50d4d0bc0de422eed72301b69309862
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:55 2024 +0100
-
-    tools/xenstored: rework ring page (un)map functions
-    
-    When [un]mapping the ring page of a Xenstore client, different actions
-    are required for "normal" guests and dom0. Today this distinction is
-    made at call site.
-    
-    Move this distinction into [un]map_interface() instead, avoiding code
-    duplication and preparing special handling for [un]mapping the stub
-    domain's ring page.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit a3e37f7024b0fb25c648315b2edf3583aa140b32
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:54 2024 +0100
-
-    tools/xenstored: get own domid in stubdom case
-    
-    Obtain own domid when running as stubdom.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit e199a3068097708a9e712bf5d86f9fb51e6615e8
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:53 2024 +0100
-
-    tools/xenstored: move all socket handling into posix.c
-    
-    All of the socket handling is needed only when running as daemon.
-    
-    Move it into posix.c, allowing to remove the NO_SOCKETS macro.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit aae54458a1b5e947dbc4fb44beca7ec94fe80001
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:52 2024 +0100
-
-    tools/xenstored: move all log-pipe handling into posix.c
-    
-    All of the log-pipe handling is needed only when running as daemon.
-    
-    Move it into posix.c. This requires to have a service function in the
-    main event loop for handling the related requests and one for setting
-    the fds[] array, which is renamed to poll_fds to have a more specific
-    name. Use a generic name for those functions, as socket handling can
-    be added to them later, too.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit 511cc30cf8bbf083f2788cf4eee91edec0b85ac0
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:51 2024 +0100
-
-    tools/xenstored: move systemd handling to posix.c
-    
-    Move systemd handling to a new late_init() function in posix.c.
-    
-    This prepares a future removal of the NO_SOCKETS macro.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit e767a98f040d8274b0f1dc991b9eefbc13b39e2d
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:50 2024 +0100
-
-    tools/xenstored: add early_init() function
-    
-    Some xenstored initialization needs to be done in the daemon case only,
-    so split it out into a new early_init() function being a stub in the
-    stubdom case.
-    
-    Remove the call of talloc_enable_leak_report_full(), as it serves no
-    real purpose: the daemon only ever exits due to a crash, in which case
-    a log of talloc()ed memory hardly has any value.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-
-commit 1c2c7f790147ca003270b32da41550c04c7d15d2
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:47 2024 +0100
-
-    tools/xenstored: rename xenbus_evtchn()
-    
-    Rename the xenbus_evtchn() function to get_xenbus_evtchn() in order to
-    avoid two externally visible symbols with the same name when Xenstore-
-    stubdom is being built with a Mini-OS with CONFIG_XENBUS set.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-
-commit 9c076988fe5f9d55a0ecb846549bdbdfddcf3841
-Author: Juergen Gross <jgross@suse.com>
-Date:   Mon Feb 5 11:49:46 2024 +0100
-
-    tools/helpers: allocate xenstore event channel for xenstore stubdom
-    
-    In order to prepare support of PV frontends in xenstore-stubdom, add
-    allocation of a Xenstore event channel to init-xenstore-domain.c.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-(qemu changes not included)
 
