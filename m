@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1751EC4829C
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Feb 2024 01:21:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.676580.1052771 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 983ACC48260
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Feb 2024 01:21:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.676582.1052790 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXA8x-00083h-Af; Tue, 06 Feb 2024 01:20:59 +0000
+	id 1rXA8z-00006V-4G; Tue, 06 Feb 2024 01:21:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 676580.1052771; Tue, 06 Feb 2024 01:20:59 +0000
+Received: by outflank-mailman (output) from mailman id 676582.1052790; Tue, 06 Feb 2024 01:21:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXA8x-00083U-5H; Tue, 06 Feb 2024 01:20:59 +0000
-Received: by outflank-mailman (input) for mailman id 676580;
- Tue, 06 Feb 2024 01:20:57 +0000
+	id 1rXA8y-00006L-UF; Tue, 06 Feb 2024 01:21:00 +0000
+Received: by outflank-mailman (input) for mailman id 676582;
+ Tue, 06 Feb 2024 01:20:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+4KK=JP=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1rXA8v-0007Zy-R6
- for xen-devel@lists.xenproject.org; Tue, 06 Feb 2024 01:20:57 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ id 1rXA8x-0007Zy-PD
+ for xen-devel@lists.xenproject.org; Tue, 06 Feb 2024 01:20:59 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f9161d00-c48d-11ee-98f5-efadbce2ee36;
- Tue, 06 Feb 2024 02:20:55 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a364b5c5c19so45634966b.1
- for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 17:20:54 -0800 (PST)
+ id fb2ca541-c48d-11ee-98f5-efadbce2ee36;
+ Tue, 06 Feb 2024 02:20:58 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a36126ee41eso631826366b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2024 17:20:58 -0800 (PST)
 Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- cu9-20020a170906ba8900b00a3726a5e5fdsm486803ejd.95.2024.02.05.17.20.51
+ cu9-20020a170906ba8900b00a3726a5e5fdsm486803ejd.95.2024.02.05.17.20.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Feb 2024 17:20:52 -0800 (PST)
+ Mon, 05 Feb 2024 17:20:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9161d00-c48d-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: fb2ca541-c48d-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1707182453; x=1707787253; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1707182456; x=1707787256; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Amao/RbYbGVlKRe+4sVFHaBWBTnz/mv5zt9jnAf2gO8=;
-        b=LKNiowik0XnHDD0CqYaXV0eLUrXBTSvg1XkU7YuEpWLAXFJ80hcDktP0gShj+pV3AT
-         WtG38gll1uEeNGdM1K9IrwQSK+5o5lsVueOpRKIgnujkfJ2hI8SRqLgjDKvPwo6sxclk
-         Rm8eANHeT3XU82laFliNWDepOKq4A+A7PFoxM=
+        bh=L70F5M+Yt0degs+BEb21BR1J/47RzHBiPjSDLgFIrFk=;
+        b=j1EYUQ+fHKnTmqxI0VGdNQ9+dFBX/mF06iiq9gWHcVDBC5n+b5QaeSk8SmHxFSrqFE
+         kBd+ISy/Kafa9rP272XnDVTSsQ4/FJZeCK1PFkqgL/feoFT6sA1djl+SK/c9bYvc6SIN
+         89Vao6Z+tTAR+CGjNPmtOEwtFRY6oeFc05lUU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707182453; x=1707787253;
+        d=1e100.net; s=20230601; t=1707182456; x=1707787256;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Amao/RbYbGVlKRe+4sVFHaBWBTnz/mv5zt9jnAf2gO8=;
-        b=D/G1T5MTKT6Qlfs/kirS2onFYTvY/z2fnYKItZSUL8ABOrRpFj6icsXc2NA+xN3Jwh
-         Qr3c4VUnjpEeNTWuQ7wB4Jm6k9SKUQ9Hv2sb3R50rHFil1XmkzR5SG7UZZV8S4YoYSfA
-         LJrdrr6yfHwQ6+A8xevivITZvVL9saDInx9sS7R1hF5SKbRFCfAEnPTUW4KfysKksO4Z
-         OInKfIzWpqIwsa+E3qn/XSbPTXPqg66UeCmKIEn5DpBgqHPwLb7PBhLjatOfJDVxZUdT
-         TbG7kAKV3/d9rsgbeok2B3tSRwN75ExTZ1ie3nmzthAzFc0tTUqqAP7XIh1o1zPVzJpm
-         CvSg==
-X-Gm-Message-State: AOJu0YztnstcGKhQtCmXakjc4lJyiT7kqMsLD+zSeRiLZk2MvAmePNDk
-	yY2CzY1RkdviUcoX+YXImYPvW6yJnpW7Lj+Af1gCXT7Vd1A/F+a1iAiZ8r4WJ5Dh1x3Bwckvhx3
-	x8mA=
-X-Google-Smtp-Source: AGHT+IHafK91jBtYVmLvGZnuwJyOkbsecn2SYHRWDD7tDRE43HnCVB/X8GZ1kkmM7X/wQATl2fHBYA==
-X-Received: by 2002:a17:906:4095:b0:a37:2696:b3e with SMTP id u21-20020a170906409500b00a3726960b3emr862442ejj.59.1707182453136;
-        Mon, 05 Feb 2024 17:20:53 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCUgi6wyoYuGerkTH4fh6jBCjoCFbYJKmhCh45bbre+82qjLmXHDSP4F7NpPugLeTkxNPBKzt8DFEM0/JzDXgKYdYw4Ln4X0kDpJr7xaCv1MEf82JS4Y+Sv1h9R3+GcXonCWSGgasb8BlSk+LBzaNMumFX5tq/AtmA7c0yvwg4YXKBmsEzpHXs9MSC9VSYcWxBvKjT1vfOnDmPw06ItZTcoZuti96CDA7bzu+Brv
+        bh=L70F5M+Yt0degs+BEb21BR1J/47RzHBiPjSDLgFIrFk=;
+        b=h37pmgz5+BpVPJQ2u17vd2A6jMT4VAQMw7wcefuN1LgbF5rG4s8YuJ19yWkxETy/DZ
+         mgK+gxkzYKVCCEI6/ia30MkQU0JdH7kFBCfvST4E+Gyaf6QA16WaoRPJKp7rvNQGS1Um
+         sxWFLdyTZF0C1xvajiD3835OFVHiZt+uYtgZfFuV49A41TJH06rx7uU18NKGit5XoO+M
+         hfKaLqP1ednf+9FuAHeLSlBf6hI84n7Akb1kB5JyUVdbKq2NqKNreyUG0U9FMQUyXF99
+         jdwbHO46bE0RBY+ADMkCtCxM11EfTzjPKDA61wNrITDOPDHGOALYB0Fr6j9XWXh7S16G
+         ooiw==
+X-Gm-Message-State: AOJu0YwEh+WfO5aO8EyW7YilnjAzX6WMZLziO9yZUExwfLksvrvl/46S
+	mD0lx7ZeUWTjpp3po++a83v+vfpVEIQioCi96z+A3cgpsUVMKnJQvxIReEHNlzT91sIYH36qY1s
+	Z2dE=
+X-Google-Smtp-Source: AGHT+IEXW5qmvPYuFsiInq8Uq3VpZtdGvVqLvFwDeeB+2lRmMIo5xrqr5HiC4wRrxRfOjM99F7cohw==
+X-Received: by 2002:a17:906:2898:b0:a35:fdf9:e7e4 with SMTP id o24-20020a170906289800b00a35fdf9e7e4mr383456ejd.20.1707182456690;
+        Mon, 05 Feb 2024 17:20:56 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCUdFVxDXqUTy+KWuGDk9yEfcrUsYbrUs0c2vEvbCgp4OIQ4VwxWTe0XpXtjdTOM7vPlMl4shxt7HWuNdwmidnyMU7/6r2m9xA7zHup0o0TUvBeGNE0RNNNS+6A18/SRccuDndw6os5gq7hMMgpaLvPcTCJs7wREdDrF1KmzBaY=
 From: George Dunlap <george.dunlap@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: George Dunlap <george.dunlap@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>
-Subject: [PATCH 1/6] xen/hvm: Convert hap_capabilities into a bitfield
-Date: Tue,  6 Feb 2024 01:20:46 +0000
-Message-Id: <20240206012051.3564035-2-george.dunlap@cloud.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 4/6] nestedsvm: Disable TscRateMSR
+Date: Tue,  6 Feb 2024 01:20:49 +0000
+Message-Id: <20240206012051.3564035-5-george.dunlap@cloud.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240206012051.3564035-1-george.dunlap@cloud.com>
 References: <20240206012051.3564035-1-george.dunlap@cloud.com>
@@ -95,158 +93,194 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-hvm_function_table is an internal structure; rather than manually
-|-ing and &-ing bits, just make it a boolean bitfield and let the
-compiler do all the work.  This makes everything easier to read, and
-presumably allows the compiler more flexibility in producing efficient
-code.
+The primary purpose of TSC scaling, from our perspective, is to
+maintain the fiction of an "invariant TSC" across migrates between
+platforms with different clock speeds.
 
-No functional change intended.
+On AMD, the TscRateMSR CPUID bit is unconditionally enabled in the
+"host cpuid", even if the hardware doesn't actually support it.
+According to c/s fd14a1943c4 ("nestedsvm: Support TSC Rate MSR"),
+testing showed that emulating TSC scaling in an L1 was more expensive
+than emulating TSC scaling on an L0 (due to extra sets of vmexit /
+vmenter).
+
+However, the current implementation seems to be broken.
+
+First of all, the final L2 scaling ratio should be a composition of
+the L0 scaling ratio and the L1 scaling ratio; there's no indication
+this is being done anywhere.
+
+Secondly, it's not clear that the L1 tsc scaling ratio actually
+affects the L0 tsc scaling ratio.  The stored value (ns_tscratio) is
+used to affect the tsc *offset*, but doesn't seem to actually be
+factored into d->hvm.tsc_scaling_ratio.  (Which shouldn't be
+per-domain anyway, but per-vcpu.)  Having the *offset* scaled
+according to the nested scaling without the actual RDTSC itself also
+being scaled has got to produce inconsistent results.
+
+For now, just disable the functionality entirely until we can
+implement it properly:
+
+- Don't set TSCRATEMSR in the host CPUID policy
+
+- Remove MSR_AMD64_TSC_RATIO emulation handling, so that the guest
+  guests a #GP if it tries to access them (as it should when
+  TSCRATEMSR is clear)
+
+- Remove ns_tscratio from struct nestedhvm, and all code that touches
+  it
+
+Unfortunately this means ripping out the scaling calculation stuff as
+well, since it's only used in the nested case; it's there in the git
+tree if we need it for reference when we re-introduce it.
 
 Signed-off-by: George Dunlap <george.dunlap@cloud.com>
 ---
-Questions:
-
-* Should hap_superpage_2m really be set unconditionally, or should we
-  condition it on cpu_has_svm_npt?
-
-* Do we really need to "!!cpu_has_svm_npt"?  If so, wouldn't it be
-  better to put the "!!"  in the #define, rather than requiring the
-  user to know that it's needed?
-
 CC: Jan Beulich <jbeulich@suse.com>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
 CC: "Roger Pau Monné" <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
 ---
- xen/arch/x86/hvm/hvm.c             |  8 ++++----
- xen/arch/x86/hvm/svm/svm.c         |  4 ++--
- xen/arch/x86/hvm/vmx/vmcs.c        |  4 ++--
- xen/arch/x86/hvm/vmx/vmx.c         |  8 ++------
- xen/arch/x86/include/asm/hvm/hvm.h | 19 +++++++------------
- 5 files changed, 17 insertions(+), 26 deletions(-)
+ xen/arch/x86/cpu-policy.c                    |  3 +-
+ xen/arch/x86/hvm/svm/nestedsvm.c             |  2 -
+ xen/arch/x86/hvm/svm/svm.c                   | 57 --------------------
+ xen/arch/x86/include/asm/hvm/svm/nestedsvm.h |  5 --
+ 4 files changed, 1 insertion(+), 66 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index e8deeb0222..ae9d4c4756 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -174,17 +174,17 @@ static int __init cf_check hvm_enable(void)
-     {
-         printk("HVM: Hardware Assisted Paging (HAP) detected\n");
-         printk("HVM: HAP page sizes: 4kB");
--        if ( fns->hap_capabilities & HVM_HAP_SUPERPAGE_2MB )
-+        if ( fns->caps.hap_superpage_2mb )
-         {
-             printk(", 2MB%s", opt_hap_2mb ? "" : " [disabled]");
-             if ( !opt_hap_2mb )
--                hvm_funcs.hap_capabilities &= ~HVM_HAP_SUPERPAGE_2MB;
-+                hvm_funcs.caps.hap_superpage_2mb = false;
-         }
--        if ( fns->hap_capabilities & HVM_HAP_SUPERPAGE_1GB )
-+        if ( fns->caps.hap_superpage_1gb )
-         {
-             printk(", 1GB%s", opt_hap_1gb ? "" : " [disabled]");
-             if ( !opt_hap_1gb )
--                hvm_funcs.hap_capabilities &= ~HVM_HAP_SUPERPAGE_1GB;
-+                hvm_funcs.caps.hap_superpage_1gb = false;
-         }
-         printk("\n");
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index 10079c26ae..d71abbc44a 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -407,8 +407,7 @@ static void __init calculate_host_policy(void)
+                                (1u << SVM_FEATURE_PAUSEFILTER) |
+                                (1u << SVM_FEATURE_DECODEASSISTS));
+         /* Enable features which are always emulated. */
+-        p->extd.raw[0xa].d |= ((1u << SVM_FEATURE_VMCBCLEAN) |
+-                               (1u << SVM_FEATURE_TSCRATEMSR));
++        p->extd.raw[0xa].d |= (1u << SVM_FEATURE_VMCBCLEAN);
      }
+ 
+     /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index ee9602f5c8..d02a59f184 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -146,8 +146,6 @@ int cf_check nsvm_vcpu_reset(struct vcpu *v)
+     svm->ns_msr_hsavepa = INVALID_PADDR;
+     svm->ns_ovvmcb_pa = INVALID_PADDR;
+ 
+-    svm->ns_tscratio = DEFAULT_TSC_RATIO;
+-
+     svm->ns_cr_intercepts = 0;
+     svm->ns_dr_intercepts = 0;
+     svm->ns_exception_intercepts = 0;
 diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 65f437e958..5741287355 100644
+index b551eac807..34b9f603bc 100644
 --- a/xen/arch/x86/hvm/svm/svm.c
 +++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -2581,8 +2581,8 @@ const struct hvm_function_table * __init start_svm(void)
-         printk(" - none\n");
- 
-     svm_function_table.hap_supported = !!cpu_has_svm_npt;
--    svm_function_table.hap_capabilities = HVM_HAP_SUPERPAGE_2MB |
--        (cpu_has_page1gb ? HVM_HAP_SUPERPAGE_1GB : 0);
-+    svm_function_table.caps.hap_superpage_2mb = true;
-+    svm_function_table.caps.hap_superpage_1gb = cpu_has_page1gb;
- 
-     return &svm_function_table;
+@@ -777,43 +777,6 @@ static int cf_check svm_get_guest_pat(struct vcpu *v, u64 *gpat)
+     return 1;
  }
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 4fe1213855..53f9d81aa9 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -113,8 +113,8 @@ static int cf_check parse_ept_param_runtime(const char *s)
-     int val;
  
-     if ( !cpu_has_vmx_ept || !hvm_funcs.hap_supported ||
--         !(hvm_funcs.hap_capabilities &
--           (HVM_HAP_SUPERPAGE_2MB | HVM_HAP_SUPERPAGE_1GB)) )
-+         !(hvm_funcs.caps.hap_superpage_2mb ||
-+           hvm_funcs.caps.hap_superpage_1gb) )
+-static uint64_t scale_tsc(uint64_t host_tsc, uint64_t ratio)
+-{
+-    uint64_t mult, frac, scaled_host_tsc;
+-
+-    if ( ratio == DEFAULT_TSC_RATIO )
+-        return host_tsc;
+-
+-    /*
+-     * Suppose the most significant 32 bits of host_tsc and ratio are
+-     * tsc_h and mult, and the least 32 bits of them are tsc_l and frac,
+-     * then
+-     *     host_tsc * ratio * 2^-32
+-     *     = host_tsc * (mult * 2^32 + frac) * 2^-32
+-     *     = host_tsc * mult + (tsc_h * 2^32 + tsc_l) * frac * 2^-32
+-     *     = host_tsc * mult + tsc_h * frac + ((tsc_l * frac) >> 32)
+-     *
+-     * Multiplications in the last two terms are between 32-bit integers,
+-     * so both of them can fit in 64-bit integers.
+-     *
+-     * Because mult is usually less than 10 in practice, it's very rare
+-     * that host_tsc * mult can overflow a 64-bit integer.
+-     */
+-    mult = ratio >> 32;
+-    frac = ratio & ((1ULL << 32) - 1);
+-    scaled_host_tsc  = host_tsc * mult;
+-    scaled_host_tsc += (host_tsc >> 32) * frac;
+-    scaled_host_tsc += ((host_tsc & ((1ULL << 32) - 1)) * frac) >> 32;
+-
+-    return scaled_host_tsc;
+-}
+-
+-static uint64_t svm_get_tsc_offset(uint64_t host_tsc, uint64_t guest_tsc,
+-    uint64_t ratio)
+-{
+-    return guest_tsc - scale_tsc(host_tsc, ratio);
+-}
+-
+ static void cf_check svm_set_tsc_offset(struct vcpu *v, u64 offset, u64 at_tsc)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+@@ -832,18 +795,8 @@ static void cf_check svm_set_tsc_offset(struct vcpu *v, u64 offset, u64 at_tsc)
+ 
+     if ( nestedhvm_vcpu_in_guestmode(v) )
      {
-         printk("VMX: EPT not available, or not in use - ignoring\n");
-         return 0;
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 1500dca603..9cfc0140b4 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2989,12 +2989,8 @@ const struct hvm_function_table * __init start_vmx(void)
-         vmx_function_table.hap_supported = 1;
-         vmx_function_table.altp2m_supported = 1;
- 
--        vmx_function_table.hap_capabilities = 0;
+-        struct nestedsvm *svm = &vcpu_nestedsvm(v);
 -
--        if ( cpu_has_vmx_ept_2mb )
--            vmx_function_table.hap_capabilities |= HVM_HAP_SUPERPAGE_2MB;
--        if ( cpu_has_vmx_ept_1gb )
--            vmx_function_table.hap_capabilities |= HVM_HAP_SUPERPAGE_1GB;
-+        vmx_function_table.caps.hap_superpage_2mb = cpu_has_vmx_ept_2mb;
-+        vmx_function_table.caps.hap_superpage_1gb = cpu_has_vmx_ept_1gb;
- 
-         setup_ept_dump();
+         n2_tsc_offset = vmcb_get_tsc_offset(n2vmcb) -
+                         vmcb_get_tsc_offset(n1vmcb);
+-        if ( svm->ns_tscratio != DEFAULT_TSC_RATIO )
+-        {
+-            uint64_t guest_tsc = hvm_get_guest_tsc_fixed(v, at_tsc);
+-
+-            n2_tsc_offset = svm_get_tsc_offset(guest_tsc,
+-                                               guest_tsc + n2_tsc_offset,
+-                                               svm->ns_tscratio);
+-        }
+         vmcb_set_tsc_offset(n1vmcb, offset);
      }
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 985c1c14c6..f50476f50f 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -61,14 +61,6 @@ enum hvm_intblk {
- #define HVM_INTR_SHADOW_SMI    0x00000004
- #define HVM_INTR_SHADOW_NMI    0x00000008
  
--/*
-- * HAP super page capabilities:
-- * bit0: if 2MB super page is allowed?
-- * bit1: if 1GB super page is allowed?
-- */
--#define HVM_HAP_SUPERPAGE_2MB   0x00000001
--#define HVM_HAP_SUPERPAGE_1GB   0x00000002
+@@ -1921,10 +1874,6 @@ static int cf_check svm_msr_read_intercept(
+         *msr_content = nsvm->ns_msr_hsavepa;
+         break;
+ 
+-    case MSR_AMD64_TSC_RATIO:
+-        *msr_content = nsvm->ns_tscratio;
+-        break;
 -
- #define HVM_EVENT_VECTOR_UNSET    (-1)
- #define HVM_EVENT_VECTOR_UPDATING (-2)
+     case MSR_AMD_OSVW_ID_LENGTH:
+     case MSR_AMD_OSVW_STATUS:
+         if ( !d->arch.cpuid->extd.osvw )
+@@ -2103,12 +2052,6 @@ static int cf_check svm_msr_write_intercept(
+             goto gpf;
+         break;
  
-@@ -104,8 +96,11 @@ struct hvm_function_table {
-     /* Hardware virtual interrupt delivery enable? */
-     bool virtual_intr_delivery_enabled;
+-    case MSR_AMD64_TSC_RATIO:
+-        if ( msr_content & TSC_RATIO_RSVD_BITS )
+-            goto gpf;
+-        nsvm->ns_tscratio = msr_content;
+-        break;
+-
+     case MSR_IA32_MCx_MISC(4): /* Threshold register */
+     case MSR_F10_MC4_MISC1 ... MSR_F10_MC4_MISC3:
+         /*
+diff --git a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+index 406fc082b1..45d658ad01 100644
+--- a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
++++ b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+@@ -18,11 +18,6 @@ struct nestedsvm {
+      */
+     uint64_t ns_ovvmcb_pa;
  
--    /* Indicate HAP capabilities. */
--    unsigned int hap_capabilities;
-+    struct {
-+        /* Indicate HAP capabilities. */
-+        bool hap_superpage_1gb:1,
-+            hap_superpage_2mb:1;
-+    } caps;
- 
-     /*
-      * Initialise/destroy HVM domain/vcpu resources
-@@ -402,8 +397,8 @@ int hvm_get_param(struct domain *d, uint32_t index, uint64_t *value);
-     (hvm_paging_enabled(v) && ((v)->arch.hvm.guest_cr[4] & X86_CR4_PKS))
- 
- /* Can we use superpages in the HAP p2m table? */
--#define hap_has_1gb (!!(hvm_funcs.hap_capabilities & HVM_HAP_SUPERPAGE_1GB))
--#define hap_has_2mb (!!(hvm_funcs.hap_capabilities & HVM_HAP_SUPERPAGE_2MB))
-+#define hap_has_1gb hvm_funcs.caps.hap_superpage_1gb
-+#define hap_has_2mb hvm_funcs.caps.hap_superpage_2mb
- 
- #define hvm_long_mode_active(v) (!!((v)->arch.hvm.guest_efer & EFER_LMA))
- 
+-    /* virtual tscratio holding the value l1 guest writes to the
+-     * MSR_AMD64_TSC_RATIO MSR.
+-     */
+-    uint64_t ns_tscratio;
+-
+     /* Cached real intercepts of the l2 guest */
+     uint32_t ns_cr_intercepts;
+     uint32_t ns_dr_intercepts;
 -- 
 2.25.1
 
