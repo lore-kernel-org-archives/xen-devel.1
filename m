@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F622C4828F
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Feb 2024 17:40:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.677847.1054742 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4095DC4828D
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Feb 2024 19:03:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.677878.1054776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXluL-0005iE-FU; Wed, 07 Feb 2024 17:40:25 +0000
+	id 1rXnBu-0000te-2n; Wed, 07 Feb 2024 19:02:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 677847.1054742; Wed, 07 Feb 2024 17:40:25 +0000
+Received: by outflank-mailman (output) from mailman id 677878.1054776; Wed, 07 Feb 2024 19:02:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXluL-0005i7-CT; Wed, 07 Feb 2024 17:40:25 +0000
-Received: by outflank-mailman (input) for mailman id 677847;
- Wed, 07 Feb 2024 17:40:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0q5t=JQ=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1rXluJ-0005Tj-IS
- for xen-devel@lists.xenproject.org; Wed, 07 Feb 2024 17:40:23 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f762fe44-c5df-11ee-98f5-efadbce2ee36;
- Wed, 07 Feb 2024 18:40:21 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a2a17f3217aso110280766b.2
- for <xen-devel@lists.xenproject.org>; Wed, 07 Feb 2024 09:40:21 -0800 (PST)
-Received: from EMEAENGAAD19049.citrite.net
- (default-46-102-197-194.interdsl.co.uk. [46.102.197.194])
- by smtp.gmail.com with ESMTPSA id
- op3-20020a170906bce300b00a37669280d1sm976355ejb.141.2024.02.07.09.40.19
+	id 1rXnBu-0000tX-0H; Wed, 07 Feb 2024 19:02:38 +0000
+Received: by outflank-mailman (input) for mailman id 677878;
+ Wed, 07 Feb 2024 19:02:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=oL7s=JQ=rabbit.lu=slack@srs-se1.protection.inumbo.net>)
+ id 1rXnBs-0000tR-Tg
+ for xen-devel@lists.xenproject.org; Wed, 07 Feb 2024 19:02:37 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 743332e9-c5eb-11ee-8a4a-1f161083a0e0;
+ Wed, 07 Feb 2024 20:02:35 +0100 (CET)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4101565d20bso7849855e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Feb 2024 11:02:35 -0800 (PST)
+Received: from localhost.localdomain (82-64-138-184.subs.proxad.net.
+ [82.64.138.184]) by smtp.googlemail.com with ESMTPSA id
+ h13-20020a05600c314d00b0040fdc7f4fcdsm6226198wmo.4.2024.02.07.11.02.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 09:40:19 -0800 (PST)
+ Wed, 07 Feb 2024 11:02:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,127 +47,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f762fe44-c5df-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 743332e9-c5eb-11ee-8a4a-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1707327621; x=1707932421; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+hjQ03fb4gTy1nB5aYDQXgvwccHLoP4GL/zVeSr+oE4=;
-        b=FWuphzI+t9EusMvTOLYSbPCBE0rojA0TSYYslW1S2FTkw7z459xTXBW0zQDljPPZuL
-         N6PsmJ5N8V0L//WGixo1Vrr9DD7j6gNs/kIuPAuVVcivS3pJfxdMn6/xgC8KltshQMdE
-         pNrwN5Y5j2QoPzDE+T/D+BcWjX/AaL+voI1KM=
+        d=rabbit-lu.20230601.gappssmtp.com; s=20230601; t=1707332555; x=1707937355; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mdaTCdI8ySFmu0E5W0G1WTxxRBPa6Pci0/ksty6Vs5I=;
+        b=kgZaPz0LHeePYMcHpUHMZtV83hlGrWjIhf797dI/kS1knPZzBWehfCoeXkRDNQFGnc
+         Ae8r7BgGyDlJ7RgDWtkJdWktd1zzRaOhFjFtK67Z8OpnIC4BW/ZaK0hJQVcWl8lioq2o
+         pzTj4IhTH8jAjkELsUIDgivZYwxkRLhVQxJbnS5EazQ2op9Of+S/5mlYp7WrpQMmvOOA
+         jA8ywzWEal11Qk47vqS4R5zw2Q3GxQvTFPR4eAjFUn6g0pAj7YiZTjHzj+/bGxUscAno
+         sihy/P2pN6NGPaHm2XQa1JVMLFrD7LducrAUeHcEynu/oqxeWx397zHzqICoRM4wK5Sv
+         KlLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707327621; x=1707932421;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+hjQ03fb4gTy1nB5aYDQXgvwccHLoP4GL/zVeSr+oE4=;
-        b=MtcEy8iE0XuU8rZWhTC6SyWIwPmHa+bxwX3KT85cNca65hxtIBu/3KD4K1jB/H0LH7
-         kiqnjuMzK5ZI3GuW42P1B9/S0GgZsi8cxkHacTfdrwEFsaFI2kwm6oMGmvEWDKSe7sh2
-         m6ZOSPsjFP/6t+IrVl0VrA5TqNaTjNK1ArFRJ1uln0bhDDaKg+mFitDaVB+axDXxOU1y
-         6G9WKZGbklHAMH7mANnTfXt3xrHr8C3fyUh+zJJxekRJNyLqXi87+tCXj8khAEgQszDm
-         ZDgXAZGMJ8+ZEbZ5OSt3IDjZixSIGGWs5gA801tfDSpmdG9ekOn6v3Ywf8JYr78sFled
-         ef5w==
-X-Gm-Message-State: AOJu0Yweqssvhyy7pr0nN7bG/h5YTqTMV7Q5NGokLcInZ1ynpw/0X34l
-	r+XOZXIFRpoqJrlmHz7+W7qXCNxCPyfedAazTVx53EbywyCUKF/dRiRrx0+xFSsKj2x+4au6/ao
-	s
-X-Google-Smtp-Source: AGHT+IHXF4iCI5cUyuRNUfpzz5Nygg8GIH0vsQ0EZmE3VpuusshmPnBXuPJdBt5m9k7Mcz+oFVS0XQ==
-X-Received: by 2002:a17:906:1c5:b0:a35:103e:3614 with SMTP id 5-20020a17090601c500b00a35103e3614mr4214546ejj.52.1707327620723;
-        Wed, 07 Feb 2024 09:40:20 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCXAS9JeEvannetqUxhv+QgmoRsEdjhaEIVOAi6+SmbdeoIyM4R9mh2xgAQBkALvkDnr2n63Q83ejxNypl8yn5tIL0/CsOQh5VtR9zVzpmyTTtTWsxO+C5/DMwMb2J4TO3qp1DJaIKW/bTAqi90aHYgiJh1nZvqxa1CjWcr4Ca8brIS+dYe6vENEMMGfizXYa91EmZrSDslDEfu/BexVP3EWe6yNwrxIxz1yoA==
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+        d=1e100.net; s=20230601; t=1707332555; x=1707937355;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mdaTCdI8ySFmu0E5W0G1WTxxRBPa6Pci0/ksty6Vs5I=;
+        b=YD1NIO0ha9PXvLjWTIZTedLGNSuru8bIb/Nmg5LpdJ3eOIOH5PzeL72XafTlMRrksp
+         t6esxSUKHX1HtzLX5Lnr8ddxYnWvHklxgWX3W6lCjs3RBSw+xOhpLLAqGTA4XmzQ6++9
+         OCZAJ2UP8GJvQuxN+9lcBXcy4OItF50WNk7EKjDczcbGbWZHLSzExb/2O2xi41SY7NGR
+         FGryN0KmwHDHol2H3mgMwZLgHRfUTatnZ7/LbmqqD4clZtATpIwQH6TLbRS9BIKbhBJV
+         hcz71t4ASQ9vETTrePSHyJnu2C03w5YCf0++wZY02Go4jC/u63MiM6ahnXa3F3oyTl2+
+         CrPw==
+X-Gm-Message-State: AOJu0YwlZuxFR/d6sTnwf2E2YMGOm2XVXg372fijweCLACXp+2XhZ/Tr
+	7OaqLTNLus/o6w1rQUrNa8ppYtetpD0hfSlT4dCUaZWgzihCaDQSBlAehf/vTdZUMegxElLahlz
+	rvWI=
+X-Google-Smtp-Source: AGHT+IF7eD5p5sY0u42jubYJxmZ6uK7J9JFWJ+gQzZsPSpO0aJ8KqByWvwfkeqnif513snA43+OGzg==
+X-Received: by 2002:a05:600c:310d:b0:40f:d162:944c with SMTP id g13-20020a05600c310d00b0040fd162944cmr5581668wmo.31.1707332554662;
+        Wed, 07 Feb 2024 11:02:34 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCX6E0vfHCynkqxv+VCQGiERZIf7DKowp3PzAkd48ZDkn2wJvD8KNrswi5/SQL8DP3zScyGd80phSmCCjA+4f1EzbQbSC7MfTeF7OZAcObGPsDi87udr
+From: =?UTF-8?q?zithro=20/=20Cyril=20R=C3=A9bert?= <slack@rabbit.lu>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Cyril=20R=C3=A9bert?= <slack@rabbit.lu>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 1/3] tools/xg: Move xc_cpu_policy_t to xenguest.h
-Date: Wed,  7 Feb 2024 17:39:55 +0000
-Message-Id: <20240207173957.19811-2-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240207173957.19811-1-alejandro.vallejo@cloud.com>
-References: <20240207173957.19811-1-alejandro.vallejo@cloud.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3] tools/xentop: add option to display dom0 first
+Date: Wed,  7 Feb 2024 20:02:00 +0100
+Message-Id: <92ef4d230e05970e1d685b03125fce44adc55010.1707331801.git.slack@rabbit.lu>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This enables a set of follow-up simplifications in the toolstack.
+From: Cyril Rébert <slack@rabbit.lu>
 
-No functional change.
+Add a command line option to xentop to be able to display dom0 first, on top of the list.
+This is unconditional, so sorting domains with the S option will also ignore dom0.
 
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Signed-off-by: Cyril Rébert (zithro) <slack@rabbit.lu>
 ---
- tools/include/xenguest.h             |  8 +++++++-
- tools/libs/guest/xg_private.h        | 10 ----------
- xen/include/xen/lib/x86/cpu-policy.h |  6 ++++--
- 3 files changed, 11 insertions(+), 13 deletions(-)
+Changes in v3:
+(none, just reformatting patch correctly ... hopefully ?!)
+---
+Changes in v2:
+- bug fix
+- add documentation
+---
+ docs/man/xentop.1.pod |  6 +++++-
+ tools/xentop/xentop.c | 30 +++++++++++++++++++++++++++---
+ 2 files changed, 32 insertions(+), 4 deletions(-)
 
-diff --git a/tools/include/xenguest.h b/tools/include/xenguest.h
-index e01f494b772a..4e9078fdee4d 100644
---- a/tools/include/xenguest.h
-+++ b/tools/include/xenguest.h
-@@ -784,7 +784,13 @@ xen_pfn_t *xc_map_m2p(xc_interface *xch,
-                       unsigned long *mfn0);
+diff --git a/docs/man/xentop.1.pod b/docs/man/xentop.1.pod
+index 126f43d2f3..593a484ce7 100644
+--- a/docs/man/xentop.1.pod
++++ b/docs/man/xentop.1.pod
+@@ -5,7 +5,7 @@ xentop - displays real-time information about a Xen system and domains
+ =head1 SYNOPSIS
  
- #if defined(__i386__) || defined(__x86_64__)
--typedef struct xc_cpu_policy xc_cpu_policy_t;
-+#include <xen/lib/x86/cpu-policy.h>
+ B<xentop> [B<-h>] [B<-V>] [B<-d>SECONDS] [B<-n>] [B<-r>] [B<-v>] [B<-f>]
+-[B<-b>] [B<-i>ITERATIONS]
++[B<-b>] [B<-i>ITERATIONS] [B<-z>]
+ 
+ =head1 DESCRIPTION
+ 
+@@ -57,6 +57,10 @@ output data in batch mode (to stdout)
+ 
+ maximum number of iterations xentop should produce before ending
+ 
++=item B<-z>, B<--dom0-first>
 +
-+typedef struct xc_cpu_policy {
-+    struct cpu_policy policy;
-+    xen_cpuid_leaf_t leaves[CPUID_MAX_SERIALISED_LEAVES];
-+    xen_msr_entry_t msrs[MSR_MAX_SERIALISED_ENTRIES];
-+} xc_cpu_policy_t;
- 
- /* Create and free a xc_cpu_policy object. */
- xc_cpu_policy_t *xc_cpu_policy_init(void);
-diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
-index d73947094f2e..d1940f1ea482 100644
---- a/tools/libs/guest/xg_private.h
-+++ b/tools/libs/guest/xg_private.h
-@@ -170,14 +170,4 @@ int pin_table(xc_interface *xch, unsigned int type, unsigned long mfn,
- #define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), M2P_SHIFT)
- #define M2P_CHUNKS(_m)  (M2P_SIZE((_m)) >> M2P_SHIFT)
- 
--#if defined(__x86_64__) || defined(__i386__)
--#include <xen/lib/x86/cpu-policy.h>
--
--struct xc_cpu_policy {
--    struct cpu_policy policy;
--    xen_cpuid_leaf_t leaves[CPUID_MAX_SERIALISED_LEAVES];
--    xen_msr_entry_t msrs[MSR_MAX_SERIALISED_ENTRIES];
--};
--#endif /* x86 */
--
- #endif /* XG_PRIVATE_H */
-diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
-index d5e447e9dc06..0cd454dfc0b6 100644
---- a/xen/include/xen/lib/x86/cpu-policy.h
-+++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -85,6 +85,8 @@ unsigned int x86_cpuid_lookup_vendor(uint32_t ebx, uint32_t ecx, uint32_t edx);
-  */
- const char *x86_cpuid_vendor_to_str(unsigned int vendor);
- 
-+#define XENLIB_MAX(x, y) ((x) < (y) ? (y) : (x))
++display dom0 first, ignoring interactive sorting
 +
- #define CPUID_GUEST_NR_BASIC      (0xdu + 1)
- #define CPUID_GUEST_NR_CACHE      (5u + 1)
- #define CPUID_GUEST_NR_FEAT       (2u + 1)
-@@ -92,8 +94,8 @@ const char *x86_cpuid_vendor_to_str(unsigned int vendor);
- #define CPUID_GUEST_NR_XSTATE     (62u + 1)
- #define CPUID_GUEST_NR_EXTD_INTEL (0x8u + 1)
- #define CPUID_GUEST_NR_EXTD_AMD   (0x21u + 1)
--#define CPUID_GUEST_NR_EXTD       MAX(CPUID_GUEST_NR_EXTD_INTEL, \
--                                      CPUID_GUEST_NR_EXTD_AMD)
-+#define CPUID_GUEST_NR_EXTD       XENLIB_MAX(CPUID_GUEST_NR_EXTD_INTEL, \
-+                                             CPUID_GUEST_NR_EXTD_AMD)
+ =back
  
- /*
-  * Maximum number of leaves a struct cpu_policy turns into when serialised for
+ =head1 INTERACTIVE COMMANDS
+diff --git a/tools/xentop/xentop.c b/tools/xentop/xentop.c
+index 545bd5e96d..0a2fab7f15 100644
+--- a/tools/xentop/xentop.c
++++ b/tools/xentop/xentop.c
+@@ -211,6 +211,7 @@ int show_networks = 0;
+ int show_vbds = 0;
+ int repeat_header = 0;
+ int show_full_name = 0;
++int dom0_first = 0;
+ #define PROMPT_VAL_LEN 80
+ const char *prompt = NULL;
+ char prompt_val[PROMPT_VAL_LEN];
+@@ -240,6 +241,7 @@ static void usage(const char *program)
+ 	       "-b, --batch	     output in batch mode, no user input accepted\n"
+ 	       "-i, --iterations     number of iterations before exiting\n"
+ 	       "-f, --full-name      output the full domain name (not truncated)\n"
++	       "-z, --dom0-first     display dom0 first (ignore sorting)\n"
+ 	       "\n" XENTOP_BUGSTO,
+ 	       program);
+ 	return;
+@@ -1163,6 +1165,8 @@ static void top(void)
+ {
+ 	xenstat_domain **domains;
+ 	unsigned int i, num_domains = 0;
++	int dom0_index = -1;
++	int sort_start = 0, sort_count = 0;
+ 
+ 	/* Now get the node information */
+ 	if (prev_node != NULL)
+@@ -1183,11 +1187,27 @@ static void top(void)
+ 	if(domains == NULL)
+ 		fail("Failed to allocate memory\n");
+ 
+-	for (i=0; i < num_domains; i++)
++	for (i=0; i < num_domains; i++) {
+ 		domains[i] = xenstat_node_domain_by_index(cur_node, i);
++		if ( strcmp(xenstat_domain_name(domains[i]), "Domain-0") == 0 )
++			dom0_index = i;
++	}
++
++	/* Handle dom0 position, not for dom0-less */
++	if ( dom0_first == 1 && dom0_index != -1 ){
++		/* if dom0 is not first in domains, swap it there */
++		if ( dom0_index != 0 ){
++			xenstat_domain *tmp;
++			tmp = domains[0];
++			domains[0] = domains[dom0_index];
++			domains[dom0_index] = tmp;
++		}
++		sort_start = 1;
++		sort_count = 1;
++	}
+ 
+ 	/* Sort */
+-	qsort(domains, num_domains, sizeof(xenstat_domain *),
++	qsort((domains+sort_start), (num_domains-sort_count), sizeof(xenstat_domain *),
+ 	      (int(*)(const void *, const void *))compare_domains);
+ 
+ 	if(first_domain_index >= num_domains)
+@@ -1242,9 +1262,10 @@ int main(int argc, char **argv)
+ 		{ "batch",	   no_argument,	      NULL, 'b' },
+ 		{ "iterations",	   required_argument, NULL, 'i' },
+ 		{ "full-name",     no_argument,       NULL, 'f' },
++		{ "dom0-first",    no_argument,       NULL, 'z' },
+ 		{ 0, 0, 0, 0 },
+ 	};
+-	const char *sopts = "hVnxrvd:bi:f";
++	const char *sopts = "hVnxrvd:bi:fz";
+ 
+ 	if (atexit(cleanup) != 0)
+ 		fail("Failed to install cleanup handler.\n");
+@@ -1286,6 +1307,9 @@ int main(int argc, char **argv)
+ 		case 'f':
+ 			show_full_name = 1;
+ 			break;
++		case 'z':
++			dom0_first = 1;
++			break;
+ 		}
+ 	}
+ 
 -- 
-2.34.1
+2.39.2
 
 
