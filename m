@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F01EC4828F
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Feb 2024 14:25:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.677687.1054442 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5CD3C4828F
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Feb 2024 14:27:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.677695.1054463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXirE-0004fB-Fx; Wed, 07 Feb 2024 14:25:00 +0000
+	id 1rXitO-0005lm-6F; Wed, 07 Feb 2024 14:27:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 677687.1054442; Wed, 07 Feb 2024 14:25:00 +0000
+Received: by outflank-mailman (output) from mailman id 677695.1054463; Wed, 07 Feb 2024 14:27:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXirE-0004f4-D2; Wed, 07 Feb 2024 14:25:00 +0000
-Received: by outflank-mailman (input) for mailman id 677687;
- Wed, 07 Feb 2024 14:24:58 +0000
+	id 1rXitO-0005lf-3Z; Wed, 07 Feb 2024 14:27:14 +0000
+Received: by outflank-mailman (input) for mailman id 677695;
+ Wed, 07 Feb 2024 14:27:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=t7Cu=JQ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rXirC-0004ey-Rs
- for xen-devel@lists.xenproject.org; Wed, 07 Feb 2024 14:24:58 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
+ id 1rXitN-0005l0-Nl
+ for xen-devel@lists.xenproject.org; Wed, 07 Feb 2024 14:27:13 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ab8ddbe0-c5c4-11ee-8a49-1f161083a0e0;
- Wed, 07 Feb 2024 15:24:57 +0100 (CET)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-56001b47285so828124a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 07 Feb 2024 06:24:57 -0800 (PST)
+ id fc41b4c2-c5c4-11ee-8a49-1f161083a0e0;
+ Wed, 07 Feb 2024 15:27:13 +0100 (CET)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a28a6cef709so100989466b.1
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Feb 2024 06:27:13 -0800 (PST)
 Received: from [10.80.67.149] (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- v30-20020a50a45e000000b0056023efc5besm756492edb.53.2024.02.07.06.24.56
+ bi10-20020a170906a24a00b00a371a1b40c1sm822187ejb.23.2024.02.07.06.27.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Feb 2024 06:24:57 -0800 (PST)
+ Wed, 07 Feb 2024 06:27:12 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,45 +47,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab8ddbe0-c5c4-11ee-8a49-1f161083a0e0
+X-Inumbo-ID: fc41b4c2-c5c4-11ee-8a49-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1707315897; x=1707920697; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
+        d=citrix.com; s=google; t=1707316033; x=1707920833; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=YXilhrGUfIHrLwjt0i+K1G2q3zjUJ7iYeyluDTomkHQ=;
-        b=tcXCCoTcyxlgmP9tfnApZ5fES3CJiMTbw0b5GLO2VbzhW6Hw0y8IfsjSEcCpsQI0Jr
-         y2gMaraJKWsKnmBI1FRc3e+dkQfks6Rv1rpwQu3FJKeOEM1xROD/93OHoetw7wao7Fmi
-         156Q2QXz5yqwXRcuYNoYxExQBhx+oIRNGEXmc=
+        bh=xSTRBj9hIamysI41oHj8qdndP0w+mL+CHkqpJbH/j00=;
+        b=sjXQNFtkry+lHuCvqzUEYFeUfuWIn7LHgtkyPGkLxdwHbbfN19EZ9Jz0x8Q+71mdkA
+         cMORlRjyX8lXhLOC+C9FIxGSvYk77FpYSx8p9ytw4a7ppKcvAsxxXUc4Tvlmoc0X32ie
+         gtXwgm0h396HX/vw8n7N4K99Q7VR6A95F+ra4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707315897; x=1707920697;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20230601; t=1707316033; x=1707920833;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YXilhrGUfIHrLwjt0i+K1G2q3zjUJ7iYeyluDTomkHQ=;
-        b=Bsz/kvfEVQ/vXhkRzPLG8E3CiqHGKpkim2njvQLoHtjluZmaiHMubFJnbZz/Wuqa0e
-         Jqj9GpQ+d6icM52zGOA5pqpEH+PUz36D4Kf5WKHGHK4+WNdCyOMeH/la0Jerca7YNWYt
-         01EAJCqo9gqO2QqfYBRQlWQWNB6iDLd7ozAsxNgPQMh+Vrf2VwjulDXxbjUr0f0NVImS
-         a8cQSRzuhCo6HDGlRlWjps5HSMCT6AZtpU6UoISV6qAKRD1vF5IscWo920cbUX/iGWsP
-         gt96QAOVnZ68ibaFqICRZ91zIJc62REjD/ct8d41Pp/s9OEZwoColzFD+M8BWb1CxrtV
-         QWFQ==
-X-Gm-Message-State: AOJu0Yxpv2uM7BhezFvB2Kp4l4J5bdjbcP1I5eV1prI7CaRH0KH/KCQS
-	tGYf6EjghhwosLXsgKXg0ezmmyxgLaTFRfECSLriEF+oZzUNVDlW2BviY7ac5GU=
-X-Google-Smtp-Source: AGHT+IHOSn0TVoob/vj6+vgW8+pgnuW54al1/4+1LQar4mwK9hG5hs+HolndV8AG8Omz4htzmryvgQ==
-X-Received: by 2002:a05:6402:31f3:b0:55f:f2ae:20ed with SMTP id dy19-20020a05640231f300b0055ff2ae20edmr4150228edb.16.1707315897417;
-        Wed, 07 Feb 2024 06:24:57 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCWPudKpEgYVB1GH3Oa+Qf4lNCV0U0Z3h/Yp8hJ0kr4wS62UOm6Jt1v9LW8OdmeR3xSNxu0ebHxToC1ElSRIN+bWAzyXYfJL1p3l1L2HrEFnEObFjmCVs0FlPoVakgjt889/xeDw2X3NNP0=
-Message-ID: <65665f86-cbfc-4352-9d81-67ac0b21b161@citrix.com>
-Date: Wed, 7 Feb 2024 14:24:56 +0000
+        bh=xSTRBj9hIamysI41oHj8qdndP0w+mL+CHkqpJbH/j00=;
+        b=LyK+C+9lhWsu0W1Hq8eEUPvNJr1hyK+QF+TkFm1bpvR8g/OSU8Eh+3tpYLdRG72qtL
+         NcoDBnwHmJV4TDVfoIO8+6Wkng69ROlgX+xqRxPJJfe87PDpZU1UR84k7MfbFJs2aupw
+         Ybw3tAe7rHpewb/pl6qAw/xsUToPTcKtViU09mKj/JYotfvgS/vUzS3jz1WXFeMBUXe/
+         B6H0eByHFXXbbcyGxLtzGbCau51eSfr9oFLMh0BtxE1gJcojWdgDnIqKbPn370Yf2vYV
+         uXSfP9CiBKlVjg7MNkHdafDjAmFP949v72hruO9XLGNS2MlHY5BDObSpLmZ+eLQIoCWv
+         WycQ==
+X-Gm-Message-State: AOJu0YycwsrsF/sxX9gOh7yGJ3FYBsDkiKURMf7fC8m/hyWa4QDtMXwR
+	bzyiYwMR+TLRiPutMRYMgg2HzlzloQJvcDr30HPDwg+J5crAo10LuF+OnDCPx6Q=
+X-Google-Smtp-Source: AGHT+IGasbD83RRA3rAALKf36ep1GL+otVwZwTaOb2zLonyTBsAAci5d80bMs0RN0am33yXnCwdgJQ==
+X-Received: by 2002:a17:906:300b:b0:a38:19d1:cddf with SMTP id 11-20020a170906300b00b00a3819d1cddfmr3170842ejz.0.1707316032828;
+        Wed, 07 Feb 2024 06:27:12 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCU93tv2A/QiD9sekiWd/3EgPezt704DEJLqKqV1L7oD3ultMBIpTHRvf9Raamx9Qh0VGnPaY91IWstoyFdKljQPZLlYIGYO9cnVA4CLqGg26DAjN7cOeNRi6EQuMKo9ixntQF6P5VRitCdeM6f+n1HyYZv8I7TY2Z4BK+ipDYo=
+Message-ID: <c0d19a2a-3599-4f9c-ab34-c090e29760a4@citrix.com>
+Date: Wed, 7 Feb 2024 14:27:12 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: xen | Failed pipeline for staging | f4519ee8
+Subject: Re: [PATCH v6 7/7] x86: move ENTRY(), GLOBAL(), and ALIGN
 Content-Language: en-GB
 To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Anthony PERARD <anthony.perard@citrix.com>
-References: <65c38d7a7ea07_2d1b5321c96792@gitlab-sidekiq-catchall-v2-779bdffdc8-kp98w.mail>
- <115f10ac-a115-40d1-a444-50e960320557@suse.com>
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, George Dunlap <george.dunlap@citrix.com>
+References: <e4bf47ca-2ae6-1fd4-56a6-e4e777150b64@suse.com>
+ <3ba82c3a-ff95-43d0-8672-a63b23bc2cdc@suse.com>
+ <64785449-1ca6-41f7-9012-2f432c171e3a@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
@@ -130,38 +132,23 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <115f10ac-a115-40d1-a444-50e960320557@suse.com>
+In-Reply-To: <64785449-1ca6-41f7-9012-2f432c171e3a@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 07/02/2024 2:20 pm, Jan Beulich wrote:
-> On 07.02.2024 15:02, GitLab wrote:
->>
->> Pipeline #1167820960 has failed!
->>
->> Project: xen ( https://gitlab.com/xen-project/hardware/xen )
->> Branch: staging ( https://gitlab.com/xen-project/hardware/xen/-/commits/staging )
->>
->> Commit: f4519ee8 ( https://gitlab.com/xen-project/hardware/xen/-/commit/f4519ee87ebfb74fe0451130d82c99453b75e2e1 )
->> Commit Message: eclair: move function and macro properties outs...
->> Commit Author: Maria Celeste Cesario
->> Committed by: Jan Beulich ( https://gitlab.com/jbeulich )
->>
->>
->> Pipeline #1167820960 ( https://gitlab.com/xen-project/hardware/xen/-/pipelines/1167820960 ) triggered by Jan Beulich ( https://gitlab.com/jbeulich )
->> had 1 failed job.
->>
->> Job #6116519549 ( https://gitlab.com/xen-project/hardware/xen/-/jobs/6116519549/raw )
->>
->> Stage: test
->> Name: qemu-smoke-riscv64-gcc
-> I have to admit that I can't connect what was pushed recently to this job
-> failing.
+On 07/02/2024 1:39 pm, Jan Beulich wrote:
+> ... to boot code, limiting their scope and thus allowing to drop
+> respective #undef-s from the linker script.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> An obvious alternative would be to convert boot code right away too, but
+> I think this has lower priority for now.
 
-The qemu smoke tests for riscv and ppc intermittently fail on the
-OSSTest-lab infrastructure in Gitlab.
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-We've never got to the bottom of it.
+It would be nice to take these out, and it doesn't look as if it's too
+much work to do, but I guess we can settle for getting them out of config.h
 
 ~Andrew
 
