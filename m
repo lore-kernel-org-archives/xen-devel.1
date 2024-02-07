@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 945F8C4828F
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Feb 2024 14:21:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.677683.1054432 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A18BC4828D
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Feb 2024 14:25:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.677688.1054453 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXinJ-00045X-02; Wed, 07 Feb 2024 14:20:57 +0000
+	id 1rXirH-0004u0-OK; Wed, 07 Feb 2024 14:25:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 677683.1054432; Wed, 07 Feb 2024 14:20:56 +0000
+Received: by outflank-mailman (output) from mailman id 677688.1054453; Wed, 07 Feb 2024 14:25:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rXinI-00045Q-Tl; Wed, 07 Feb 2024 14:20:56 +0000
-Received: by outflank-mailman (input) for mailman id 677683;
- Wed, 07 Feb 2024 14:20:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rXirH-0004tt-LI; Wed, 07 Feb 2024 14:25:03 +0000
+Received: by outflank-mailman (input) for mailman id 677688;
+ Wed, 07 Feb 2024 14:25:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=EHwQ=JQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rXinI-00045K-22
- for xen-devel@lists.xenproject.org; Wed, 07 Feb 2024 14:20:56 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1a344395-c5c4-11ee-98f5-efadbce2ee36;
- Wed, 07 Feb 2024 15:20:54 +0100 (CET)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40fe2ed8746so5759395e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Feb 2024 06:20:54 -0800 (PST)
+ id 1rXirG-0004ey-Ct
+ for xen-devel@lists.xenproject.org; Wed, 07 Feb 2024 14:25:02 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id add73098-c5c4-11ee-8a49-1f161083a0e0;
+ Wed, 07 Feb 2024 15:25:01 +0100 (CET)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3394b892691so401529f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Feb 2024 06:25:01 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- s5-20020a05600c384500b0040ff7e31749sm3510665wmr.22.2024.02.07.06.20.53
- for <xen-devel@lists.xenproject.org>
+ w14-20020a05600c474e00b00410232ffb2csm307940wmo.25.2024.02.07.06.25.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Feb 2024 06:20:53 -0800 (PST)
+ Wed, 07 Feb 2024 06:25:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,45 +47,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a344395-c5c4-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: add73098-c5c4-11ee-8a49-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1707315653; x=1707920453; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
+        d=suse.com; s=google; t=1707315901; x=1707920701; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=0engdDqSwk41ztqZ8R3j4EjvMcOaAEJGYhy9mKr3sFg=;
-        b=QV2Ye6vpmfTNgpbiW8LvKNfufGnVOmoafJ8qvidhEcYKkxQvwF4IWYkJvFjnuocgMO
-         8M+G8rhXgIBDYHlEIuILmi7Q8ARS1/02qv1VcegeUIIV2UHkB7Ii1UoV+ZmZjIEWqof4
-         EIkJa0R7fv00Vi8R7dPK3GcD9m1qOgprFdMaarsHMV9Q1Zdzc6w5kMooMILMsFt9yvWY
-         ikYRmePdyqSVWfiLOsKlQcFjjWCm4QNBpTakI81cbuDp1HvW8PEOO8S7obttF5q5r8gq
-         AgeLPjKX0RpYoUeBERvX6gvkm4Qi+BnxYObf8IyVGobbeFLuDrX21dsILDNc3XDPwrcM
-         DyJA==
+        bh=m5ICgbt0/W6ckB4/A7YpRur4Ixkx6v4ImUf/u2oPtk0=;
+        b=d+AbupH0Zjagyp82KchuJVrVlGTq30Toef9fjDvEEyHTaXdBZepCCl5EXncuEr2p4D
+         v9w53ccgkx4Eq+V+ZutM5+pvNi92utH4SRJAd22AYc3VLm+2TKyRhtVmFUqBAZ57cXuM
+         8hephYDBD4WlsJztnoLLMTwcTbL25AldHxYgivyRObZ/ss3t6q93Q7dG6bM1+qObqryO
+         vYuydBFCNAliGg1N9M4f1l8iiSWBZimwyoIVOn+8Hlr+GkZhu95gpZh1ipLesWtOBBIz
+         EYqOu5EpsMbbuaJrbFI9IWIJKuIuV22G221xJe4M82yWKyi3S0Vk57Q3XySIW+3iqsy6
+         QVYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707315653; x=1707920453;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20230601; t=1707315901; x=1707920701;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=0engdDqSwk41ztqZ8R3j4EjvMcOaAEJGYhy9mKr3sFg=;
-        b=UADq6bf4YkMCZMFNl+4d84QlnGcpfWkPZKWAtoZwCrqcZZKcklyAB7JaDAdrPjcNhh
-         5WxbTn79P+VjjU0cg9uDkTTvPcJcDAQORhMkKETOQfEweXlqOccw4g7TMFIchkECepSF
-         LQeM/MysF6EvahhTdeKGJvfOmyye66wDLOCx6f8zMrTAfGU7+Kg2N0k6yFTP25hIGXdi
-         sFMOsjDNjCcmMrRDTTd56h0zduyUKg343UaPme58SN/W0h7OlaVAcwIdSC/EWS6ERVh2
-         b3/Q0wMEjMofD/wqxiK0bahseIfaJcIhdmHtSo05f5y9DB4BD2bvfAkz23IMI+bW81uM
-         Zfaw==
-X-Gm-Message-State: AOJu0YwnS2+VRL6Cnawg1lYwSFUzvUV1RUT0VOKzuvENFiPO0cSiO1yC
-	pVKKPG8fikyHWKCwua5nuaeoe0VLca+G982oQY3USs7LL9wmc1PS6u1uVxz1PFxs9xWuKq7/vfg
-	=
-X-Google-Smtp-Source: AGHT+IE9hiifi5FmaXPGOj4tZ1ru/1c55KZHiTFedqbJ3j2bqfrscms9CjRMVEm8zDqedlQV6ueteg==
-X-Received: by 2002:a05:600c:3d8d:b0:410:1e83:bb5b with SMTP id bi13-20020a05600c3d8d00b004101e83bb5bmr580146wmb.14.1707315653491;
-        Wed, 07 Feb 2024 06:20:53 -0800 (PST)
-Message-ID: <115f10ac-a115-40d1-a444-50e960320557@suse.com>
-Date: Wed, 7 Feb 2024 15:20:52 +0100
+        bh=m5ICgbt0/W6ckB4/A7YpRur4Ixkx6v4ImUf/u2oPtk0=;
+        b=h5uOGv1Qtu/wGS2vc1/XamUsPLHXFaAgtD1UEIcm4E1q/9A4JXGqtB7KaMlWdv5Icm
+         q84tHq6doUqWzQDByV0b8Q5oeg2D+WAF4RDwzQ2YC1R9R5JDwofEpEjxqEO/1L7g+4S/
+         vIFxPV3mMeLSQQzozsaemViPLgzz0Z4jlQz0QV9nor16KPYcyXkotc/y6tpOE167YN56
+         nUC+wooYcXd0Ru/SLhiblHaBHyIyrUbQdpaj0J5xaQ9Y3MRtznIl1/bymJCi10vKMP8Q
+         1riIY/21RvDE+ZykfVhsA2Fy8aukuXUdXFWjjWB9h0tpgVU0uREf99+mOAiBvy5EvSVF
+         8GoQ==
+X-Gm-Message-State: AOJu0Yy2Pvs53V4J4spBr8jxku8NAWCFaFcWtzH6xesLePBQQo3yfyYT
+	4XPXcCiaifiqpm2OxkvM5fBppazTLXS/HV7Yh89LhBim8cQZidnnRc2jjFOMkw==
+X-Google-Smtp-Source: AGHT+IHFfYQma5nIGhVhm7U+qLj0KtfWMYEcHNVW1FkFkMLeY+PEC/w3nQTrm/dm/gS2yyCoXIZUfg==
+X-Received: by 2002:adf:ea01:0:b0:33b:26c3:4fe0 with SMTP id q1-20020adfea01000000b0033b26c34fe0mr3914606wrm.6.1707315901213;
+        Wed, 07 Feb 2024 06:25:01 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCX2BDCNa3cAHpOW4ksLdgggKkvmRP+f1u8BJ2O5Vur0F41syCvmTmTVGZBCAM6uJAewbGJ82dsF53uF51t5iUqMAIrVKkJRhN8/L5/JC92FsN6PTNS+HcPwovO6h0yxOFAm2Ns5PMyESqqo3k8U+O6BAw1ODkis/SP0vnMJpwXVndz0h9HUHzNGRB6wrmmRqxCaCJDf0M7APkTDNLnAVozGWDU5sngnM7CqiQHY
+Message-ID: <a6bf6d72-5796-4ccc-aa3e-38438f986b32@suse.com>
+Date: Wed, 7 Feb 2024 15:25:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: xen | Failed pipeline for staging | f4519ee8
+Subject: Re: [PATCH v6 3/7] VMX: convert entry point annotations
 Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <65c38d7a7ea07_2d1b5321c96792@gitlab-sidekiq-catchall-v2-779bdffdc8-kp98w.mail>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <e4bf47ca-2ae6-1fd4-56a6-e4e777150b64@suse.com>
+ <3ba82c3a-ff95-43d0-8672-a63b23bc2cdc@suse.com>
+ <5fc304c0-be1f-46dd-a783-4030ec76a2f8@suse.com>
+ <c11bd472-fc43-49c5-8482-4fc7ed836269@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -111,34 +117,53 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <65c38d7a7ea07_2d1b5321c96792@gitlab-sidekiq-catchall-v2-779bdffdc8-kp98w.mail>
+In-Reply-To: <c11bd472-fc43-49c5-8482-4fc7ed836269@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 07.02.2024 15:02, GitLab wrote:
+On 07.02.2024 14:55, Andrew Cooper wrote:
+> On 07/02/2024 1:37 pm, Jan Beulich wrote:
+>> Use the generic framework from xen/linkage.h.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> v6: New.
+>>
+>> --- a/xen/arch/x86/hvm/vmx/entry.S
+>> +++ b/xen/arch/x86/hvm/vmx/entry.S
+>> @@ -24,7 +24,7 @@
+>>  #define VMRESUME     .byte 0x0f,0x01,0xc3
+>>  #define VMLAUNCH     .byte 0x0f,0x01,0xc2
+>>  
+>> -ENTRY(vmx_asm_vmexit_handler)
+>> +FUNC(vmx_asm_vmexit_handler)
+>>          SAVE_ALL
+>>  
+>>          mov  %cr2,%rax
+>> @@ -132,7 +132,7 @@ UNLIKELY_END(realmode)
+>>          call vmx_vmentry_failure
+>>          jmp  .Lvmx_process_softirqs
+>>  
+>> -ENTRY(vmx_asm_do_vmentry)
+>> +LABEL(vmx_asm_do_vmentry)
 > 
+> This really is a function, not a label.
 > 
-> Pipeline #1167820960 has failed!
+> xen.git/xen$ git grep vmx_asm_do_vmentry
+> arch/x86/hvm/vmx/entry.S:135:ENTRY(vmx_asm_do_vmentry)
+> arch/x86/hvm/vmx/vmcs.c:1855:void noreturn vmx_asm_do_vmentry(void);
+> arch/x86/hvm/vmx/vmcs.c:1929:    reset_stack_and_jump(vmx_asm_do_vmentry);
 > 
-> Project: xen ( https://gitlab.com/xen-project/hardware/xen )
-> Branch: staging ( https://gitlab.com/xen-project/hardware/xen/-/commits/staging )
+> It is giant mess, of two functions forming part of the same loop.
 > 
-> Commit: f4519ee8 ( https://gitlab.com/xen-project/hardware/xen/-/commit/f4519ee87ebfb74fe0451130d82c99453b75e2e1 )
-> Commit Message: eclair: move function and macro properties outs...
-> Commit Author: Maria Celeste Cesario
-> Committed by: Jan Beulich ( https://gitlab.com/jbeulich )
-> 
-> 
-> Pipeline #1167820960 ( https://gitlab.com/xen-project/hardware/xen/-/pipelines/1167820960 ) triggered by Jan Beulich ( https://gitlab.com/jbeulich )
-> had 1 failed job.
-> 
-> Job #6116519549 ( https://gitlab.com/xen-project/hardware/xen/-/jobs/6116519549/raw )
-> 
-> Stage: test
-> Name: qemu-smoke-riscv64-gcc
+> Considering that you declines to take CODE, I don't know what to
+> suggest.  The point of CODE, distinct to FUNC, was to identify the
+> places where weird things were going on, and this absolutely counts.
 
-I have to admit that I can't connect what was pushed recently to this job
-failing.
+What's not clear to me: How would CODE() differ from both FUNC() and
+LABEL()? And if the symbol is to be a function, what's wrong with
+using FUNC() here as is? There's in particular no real need to have
+all FUNC()s paired with END()s, afaict.
 
 Jan
 
