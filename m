@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12730C4828F
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Feb 2024 16:58:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.678372.1055650 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD695C4828F
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Feb 2024 16:58:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.678373.1055660 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rY7j0-0003tP-29; Thu, 08 Feb 2024 16:58:10 +0000
+	id 1rY7jR-0004eL-A0; Thu, 08 Feb 2024 16:58:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 678372.1055650; Thu, 08 Feb 2024 16:58:10 +0000
+Received: by outflank-mailman (output) from mailman id 678373.1055660; Thu, 08 Feb 2024 16:58:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rY7iz-0003tI-Uq; Thu, 08 Feb 2024 16:58:09 +0000
-Received: by outflank-mailman (input) for mailman id 678372;
- Thu, 08 Feb 2024 16:58:08 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1rY7jR-0004eE-6o; Thu, 08 Feb 2024 16:58:37 +0000
+Received: by outflank-mailman (input) for mailman id 678373;
+ Thu, 08 Feb 2024 16:58:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rY7iy-0003so-Mp
- for xen-devel@lists.xenproject.org; Thu, 08 Feb 2024 16:58:08 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rY7is-0002rV-7l; Thu, 08 Feb 2024 16:58:02 +0000
-Received: from [15.248.3.89] (helo=[10.24.67.25])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rY7is-0007xl-2K; Thu, 08 Feb 2024 16:58:02 +0000
+ (envelope-from <SRS0=m/2e=JR=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1rY7hu-0005bD-V7
+ for xen-devel@lists.xenproject.org; Thu, 08 Feb 2024 16:57:02 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 149118b1-c6a3-11ee-8a4a-1f161083a0e0;
+ Thu, 08 Feb 2024 17:57:02 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 0E4841FCFC;
+ Thu,  8 Feb 2024 16:57:02 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D2C561326D;
+ Thu,  8 Feb 2024 16:57:01 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id hjMEMt0HxWUnFAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 08 Feb 2024 16:57:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,48 +53,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=RENPLmjSW3ld/feJjMbCFg7nhfYb8CIKzF6PBoHCtBg=; b=3OJAITkVafby8TiHw9Dk77/yOy
-	henoFtHGg+khlhHpRTrfsaTXTskkdb44TOR+PpYi3fmNHQW7jj/glgQXeJtavAqXD4/l8CAZR3bvQ
-	5+qSHoj5j93WWXf4X0Bi9AU96DyML1Li95psdPtgGxkjmEKRwu86AslbdU5ljQd42pxw=;
-Message-ID: <e18cf10d-0531-4b11-8ead-a65c853a7a90@xen.org>
-Date: Thu, 8 Feb 2024 16:58:00 +0000
+X-Inumbo-ID: 149118b1-c6a3-11ee-8a4a-1f161083a0e0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1707411422; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6jOy4CDaubUih8kxJ4zaPc/m/f/u39ZSxwFGdu6w5z0=;
+	b=rKhMrlHaQrA+P8LTKcB5TETHd3n5cwUe7Q+Ej601xC3azrCz70X34wIFbdE4NUYBgOdU9e
+	kbCqi/hKMsdTKSFxUrJn3TGy0+0Lk6eaXQSrm7sP9Fl+ZcmiZNmTuxsbFJAXTQzW2zMt8U
+	QFaWQObKpXTICwTm6txQclmvmnCaXmI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1707411422; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6jOy4CDaubUih8kxJ4zaPc/m/f/u39ZSxwFGdu6w5z0=;
+	b=rKhMrlHaQrA+P8LTKcB5TETHd3n5cwUe7Q+Ej601xC3azrCz70X34wIFbdE4NUYBgOdU9e
+	kbCqi/hKMsdTKSFxUrJn3TGy0+0Lk6eaXQSrm7sP9Fl+ZcmiZNmTuxsbFJAXTQzW2zMt8U
+	QFaWQObKpXTICwTm6txQclmvmnCaXmI=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Jason Andryuk <jandryuk@gmail.com>
+Subject: [PATCH v5 13/22] tools/9pfsd: add 9pfs write request support
+Date: Thu,  8 Feb 2024 17:55:37 +0100
+Message-Id: <20240208165546.5715-14-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20240208165546.5715-1-jgross@suse.com>
+References: <20240208165546.5715-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Xen 4.19 release status tracking list
-Content-Language: en-GB
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Cc: committers@xenproject.org, community.manager@xenproject.org,
- Kelly Choi <kelly.choi@cloud.com>
-References: <CAMacjJzio2EDwudCUHoL6psKYztkHZOWwLNDknATvpN6Y0im=Q@mail.gmail.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <CAMacjJzio2EDwudCUHoL6psKYztkHZOWwLNDknATvpN6Y0im=Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [0.90 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	 R_MISSING_CHARSET(2.50)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 REPLY(-4.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 RCPT_COUNT_FIVE(0.00)[5];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 MID_CONTAINS_FROM(1.00)[];
+	 DBL_BLOCKED_OPENRESOLVER(0.00)[citrix.com:email,suse.com:email];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com];
+	 RCVD_TLS_ALL(0.00)[]
 
-Hi Oleksii,
+Add the write request of the 9pfs protocol.
 
-On 05/02/2024 19:23, Oleksii Kurochko wrote:
-> Hello everyone,
-> 
-> I would like to share with you a list for status tracking based on Xen ML:
-> 
-> Arm:
->    * [PATCH v5 00/13] Arm cache coloring [
-> https://lore.kernel.org/xen-devel/20240102095138.17933-1-carlo.nonato@minervasys.tech/
-> ]
->    * [PATCH v1 repost 0/4] xen/arm64: Rework the MMU-off code (idmap)
-> so it is self-contained [
-> https://lore.kernel.org/xen-devel/20240116143709.86584-1-julien@xen.org/
-> ]
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
+Acked-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/9pfsd/io.c | 54 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
 
-This has been committed. You can mark it as resolved.
-
-Cheers,
-
+diff --git a/tools/9pfsd/io.c b/tools/9pfsd/io.c
+index 031cff9f0e..b763e3d8d9 100644
+--- a/tools/9pfsd/io.c
++++ b/tools/9pfsd/io.c
+@@ -33,6 +33,7 @@
+ #define P9_CMD_WALK       110
+ #define P9_CMD_OPEN       112
+ #define P9_CMD_CREATE     114
++#define P9_CMD_WRITE      118
+ #define P9_CMD_CLUNK      120
+ #define P9_CMD_STAT       124
+ 
+@@ -1246,6 +1247,55 @@ static void p9_stat(struct ring *ring, struct p9_header *hdr)
+     free_fid(device, fidp);
+ }
+ 
++static void p9_write(struct ring *ring, struct p9_header *hdr)
++{
++    device *device = ring->device;
++    uint32_t fid;
++    uint64_t off;
++    unsigned int len;
++    uint32_t written;
++    void *buf;
++    struct p9_fid *fidp;
++    int ret;
++
++    ret = fill_data(ring, "ULD", &fid, &off, &len, ring->buffer);
++    if ( ret != 3 )
++    {
++        p9_error(ring, hdr->tag, EINVAL);
++        return;
++    }
++
++    fidp = get_fid_ref(device, fid);
++    if ( !fidp || !fidp->opened || fidp->isdir )
++    {
++        p9_error(ring, hdr->tag, EBADF);
++        goto out;
++    }
++
++    buf = ring->buffer;
++
++    while ( len != 0 )
++    {
++        ret = pwrite(fidp->fd, buf, len, off);
++        if ( ret < 0 )
++            break;
++        len -= ret;
++        buf += ret;
++        off += ret;
++    }
++
++    written = buf - ring->buffer;
++    if ( written == 0 )
++    {
++        p9_error(ring, hdr->tag, errno);
++        goto out;
++    }
++    fill_buffer(ring, hdr->cmd + 1, hdr->tag, "U", &written);
++
++ out:
++    free_fid(device, fidp);
++}
++
+ void *io_thread(void *arg)
+ {
+     struct ring *ring = arg;
+@@ -1321,6 +1371,10 @@ void *io_thread(void *arg)
+                 p9_create(ring, &hdr);
+                 break;
+ 
++            case P9_CMD_WRITE:
++                p9_write(ring, &hdr);
++                break;
++
+             case P9_CMD_CLUNK:
+                 p9_clunk(ring, &hdr);
+                 break;
 -- 
-Julien Grall
+2.35.3
+
 
