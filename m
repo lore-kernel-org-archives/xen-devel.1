@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7645FC4829C
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 09:40:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.678610.1056060 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3E2C48297
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 09:50:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.678620.1056069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYNNK-0007Ri-60; Fri, 09 Feb 2024 09:40:50 +0000
+	id 1rYNWX-0001fY-25; Fri, 09 Feb 2024 09:50:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 678610.1056060; Fri, 09 Feb 2024 09:40:50 +0000
+Received: by outflank-mailman (output) from mailman id 678620.1056069; Fri, 09 Feb 2024 09:50:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYNNK-0007RZ-2o; Fri, 09 Feb 2024 09:40:50 +0000
-Received: by outflank-mailman (input) for mailman id 678610;
- Fri, 09 Feb 2024 09:40:48 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rYNNI-0007OP-K8
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 09:40:48 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rYNNE-0007s9-Hc; Fri, 09 Feb 2024 09:40:44 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rYNNE-0004vM-CT; Fri, 09 Feb 2024 09:40:44 +0000
+	id 1rYNWW-0001fR-Vc; Fri, 09 Feb 2024 09:50:20 +0000
+Received: by outflank-mailman (input) for mailman id 678620;
+ Fri, 09 Feb 2024 09:50:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=KbLn=JS=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
+ id 1rYNWW-0001fG-2n
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 09:50:20 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a219e824-c730-11ee-8a4b-1f161083a0e0;
+ Fri, 09 Feb 2024 10:50:18 +0100 (CET)
+Received: from [192.168.1.15] (host-87-16-84-78.retail.telecomitalia.it
+ [87.16.84.78])
+ by support.bugseng.com (Postfix) with ESMTPSA id 84B3A4EE0739;
+ Fri,  9 Feb 2024 10:50:18 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,88 +42,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=WcBzPkO8rEnA0O+IN3gB0CE7cR4nQt10Lo5BDEzZa8o=; b=raVHHxnqiN5B8TmXzxyAhz2yzQ
-	wILWAEIALVdaqCbt5Fz310pW1DjIoSkHN4hAS0hmPX2a+ZkU/CDpkPdMnoGyQuMQQr4VD3c7iJIQ1
-	FcyxCZ64kwm7qHhxOFjef7NgqNjEdrw4OEUdFXrwGxUT8VXij7chZOWdaESk7ayv+HFE=;
-Message-ID: <8977390f-9549-40d5-bfdc-5c3da81521fc@xen.org>
-Date: Fri, 9 Feb 2024 09:40:42 +0000
+X-Inumbo-ID: a219e824-c730-11ee-8a4b-1f161083a0e0
+Message-ID: <3ed651c3-4ed3-4237-bf57-3a99a790df1a@bugseng.com>
+Date: Fri, 9 Feb 2024 10:50:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v2] docs/misra: add asm-offset.c to exclude-list
-Content-Language: en-GB
-To: Jan Beulich <jbeulich@suse.com>,
- Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
- ayan.kumar.halder@amd.com, consulting@bugseng.com,
- andrew.cooper3@citrix.com, roger.pau@citrix.com, bertrand.marquis@arm.com,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <09b659e19bf2cc6b3ee4320e019bdfa7def5f3b8.1707406598.git.nicola.vetrini@bugseng.com>
- <891e8cc2-e073-4cd3-9998-4c01ae775a3b@suse.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <891e8cc2-e073-4cd3-9998-4c01ae775a3b@suse.com>
+Subject: Re: [XEN PATCH v2 2/3] x86/uaccess: replace __{get,put}_user_bad()
+ with STATIC_ASSERT_UNREACHABLE()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: consulting@bugseng.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, xen-devel@lists.xenproject.org,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1706259490.git.federico.serafini@bugseng.com>
+ <e28bb23a12fae3c8630f943b469137d367f20022.1706259490.git.federico.serafini@bugseng.com>
+ <ec849d3a-4f6a-4afd-a7c4-418906eb909a@suse.com>
+ <alpine.DEB.2.22.394.2402061707520.1925432@ubuntu-linux-20-04-desktop>
+ <22ee2311-1e6b-4f2e-86e4-12d20b5ba4a2@suse.com>
+ <6451696b-0366-4069-b82b-094e63eced8d@bugseng.com>
+ <0b0b5a50-7692-4500-baa4-68df8f1c5d7a@suse.com>
+ <d7812cd9-7d06-493b-b8a8-d2353f148e8b@bugseng.com>
+ <a5d9b91d-4e56-4512-9b15-d6868a383923@suse.com>
+ <04a2c7b2-07e5-46fd-835e-42b3c6307547@bugseng.com>
+ <a4c2f7c0-66bc-436f-bc99-8f8ba4ec822e@suse.com>
+ <fffaa145-16ff-4969-bf4c-cfe0be98b66a@bugseng.com>
+ <2117bb4e-94a3-4990-945b-6fb141ae1e63@suse.com>
+Content-Language: en-US, it
+From: Federico Serafini <federico.serafini@bugseng.com>
+Organization: BUGSENG srl
+In-Reply-To: <2117bb4e-94a3-4990-945b-6fb141ae1e63@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
-
-Replying on the v2 as well.
-
-On 08/02/2024 15:56, Jan Beulich wrote:
-> On 08.02.2024 16:50, Nicola Vetrini wrote:
->> These files contain several deliberate violations of MISRA C rules and
->> they are not linked in the final Xen binary, therefore they can be exempted
->> from MISRA compliance.
-
-I'd like the commit message to be expanded a little bit to explain which 
-MISRA rules are a problem. This helped me to understand why we excluded 
-rather than fixed.
-
-Base on the previous discussion, I would suggest:
-
-These files contain several deliberate violation of MISRA C rules such as:
-   * R20.12 on Arm for macros DEFINE and OFFSET, where the second 
-argument of OFFSET is a macro and is used as a normal parameter and a 
-stringification operand.
-   * R2.1 because the file is not linked That said it was decided to 
-deviate the rule itselfed to deviate that aspect).
-
-The files are also not linked in the final Xen binary, therefore they 
-can be expempted from MISRA compliance.
-
+On 08/02/24 12:14, Jan Beulich wrote:
+> On 08.02.2024 11:45, Federico Serafini wrote:
+>> On 07/02/24 17:19, Jan Beulich wrote:
+>>> On 07.02.2024 16:58, Federico Serafini wrote:
+>>>> On 07/02/24 16:24, Jan Beulich wrote:
+>>>>> On 07.02.2024 16:08, Federico Serafini wrote:
+>>>>>> On 07/02/24 15:16, Jan Beulich wrote:
+>>>>>>> On 07.02.2024 14:51, Federico Serafini wrote:
+>>>>>>>> On 07/02/24 08:38, Jan Beulich wrote:
+>>>>>>>>> On 07.02.2024 02:08, Stefano Stabellini wrote:
+>>>>>>>>>> On Tue, 6 Feb 2024, Jan Beulich wrote:
+>>>>>>>>>>> On 26.01.2024 11:05, Federico Serafini wrote:
+>>>>>>>>>>>> @@ -208,7 +205,7 @@ do {                                                                       \
+>>>>>>>>>>>>           case 8:                                                                \
+>>>>>>>>>>>>               put_unsafe_asm(x, ptr, grd, retval, "q",  "", "ir", errret);       \
+>>>>>>>>>>>>               break;                                                             \
+>>>>>>>>>>>> -    default: __put_user_bad();                                             \
+>>>>>>>>>>>> +    default: STATIC_ASSERT_UNREACHABLE();                                  \
+>>>>>>>>>>>>           }                                                                      \
+>>>>>>>>>>>>           clac();                                                                \
+>>>>>>>>>>>>       } while ( false )
+>>>>>>>>>>>> @@ -227,7 +224,7 @@ do {                                                                       \
+>>>>>>>>>>>>           case 2: get_unsafe_asm(x, ptr, grd, retval, "w", "=r", errret); break; \
+>>>>>>>>>>>>           case 4: get_unsafe_asm(x, ptr, grd, retval, "k", "=r", errret); break; \
+>>>>>>>>>>>>           case 8: get_unsafe_asm(x, ptr, grd, retval,  "", "=r", errret); break; \
+>>>>>>>>>>>> -    default: __get_user_bad();                                             \
+>>>>>>>>>>>> +    default: STATIC_ASSERT_UNREACHABLE();                                  \
+>>>>>>>>>>>>           }                                                                      \
+>>>>>>>>>>>>           clac();                                                                \
+>>>>>>>>>>>>       } while ( false )
+>>>>>>>>>>>
+>>>>>>>>>>> Related to my remark on patch 1 - how is one to know the macro this was
+>>>>>>>>>>> invoked from, when seeing the resulting diagnostic?
+>>>>>>>>>>
+>>>>>>>>>> I am not sure what do you mean here... we do get an error like the
+>>>>>>>>>> following (I added a STATIC_ASSERT_UNREACHABLE for case 4):
+>>>>>>>>>>
+>>>>>>>>>> ./arch/x86/include/asm/uaccess.h:262: Error: static assertion failed: unreachable
+>>>>>>>>>
+>>>>>>>>> Right - and how do I know what _user_ of the macro actually triggered
+>>>>>>>>> it? ISTR suggesting to use one or more of __FILE__ / __LINE__ /
+>>>>>>>>> __FUNCTION__ here, for that specific purpose ...
+>>>>>>>>
+>>>>>>>> To test the macro and its diagnostics,
+>>>>>>>> I modified the first "git grep" occurrence of ASSERT_UNREACHABLE()
+>>>>>>>> on the x86 code with STATIC_ASSERT_UNREACHABLE(),
+>>>>>>>> that is in file arch/x86/alternative.c, line 312,
+>>>>>>>> function _apply_alternatives().
+>>>>>>>>
+>>>>>>>> What I got is the following build error:
+>>>>>>>>
+>>>>>>>> ...
+>>>>>>>> arch/x86/alternative.c: Assembler messages:
+>>>>>>>> arch/x86/alternative.c:312: Error: static assertion failed: unreachable
+>>>>>>>>        CC      arch/x86/copy_page.o
+>>>>>>>> make[2]: *** [Rules.mk:247: arch/x86/alternative.o] Error 1
+>>>>>>>
+>>>>>>> But that's not what my request was about. Here sufficient context is
+>>>>>>> given, even if it would be nice if the function was also visible right
+>>>>>>> away. But that's not the same as the case above, where the new macro
+>>>>>>> is used inside another macro.
+>>>>>>
+>>>>>> An example of that is the get_unsafe_size() macro,
+>>>>>> whose body uses STATIC_ASSERT_UNREACHABLE().
+>>>>>> A wrong use of get_unsafe_size() at line n
+>>>>>> leads to a build error pointing to the line n,
+>>>>>> isn't this the desired behavior?
+>>>>>
+>>>>> Aiui this would point to the line in the header file, when what you need
+>>>>> to spot the bad use of the macro is the line in the source file actually
+>>>>> using the macro. Quoting from an earlier mail of yours:
+>>>>>
+>>>>> ./arch/x86/include/asm/uaccess.h:262: Error: static assertion failed: unreachable
+>>>>
+>>>> It points to the header file uaccess.h because at line 262 there is
+>>>> an intentional wrong use of put_guest_size(), within the body of
+>>>> __copy_to_guest_pv() function.
+>>>
+>>> Yet that's again only a helper function being inlined into the ultimate
+>>> caller. That ultimate caller is what wants identifying in the diag. Not
+>>> the least because of ...
+>>>
+>>>> This example can be misleading because {get,put}_unsafe_size() are
+>>>> defined in the same file but the diagnostics is doing the
+>>>> right thing.
+>>>
+>>> ... this. And really __copy_to_guest_pv() is the wrong place to put a
+>>> wrong put_guest_size() in, to try out how diagnostics would look like
+>>> in reality: That function falls back to copy_to_guest_ll() for all
+>>> cases it can't handle directly. You want to place a bogus put_guest()
+>>> somewhere in a .c file to see what results.
 >>
->> No functional change.
+>> I added a bogus call to put_guest() at line 387 of
+>> file xen/arch/x86/mm.c, inside function page_is_ram_type().
+>> Assuming I did not choose another wrong place,
+>> the diagnostic seems appropriate:
 >>
->> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+>> arch/x86/mm.c: Assembler messages:
+>> arch/x86/mm.c:387: Error: static assertion failed: unreachable
 > 
-> Acked-by: Jan Beulich <jbeulich@suse.com>
-> albeit ...
-> 
->> --- a/docs/misra/exclude-list.json
->> +++ b/docs/misra/exclude-list.json
->> @@ -101,6 +101,10 @@
->>               "rel_path": "arch/x86/efi/check.c",
->>               "comment": "The resulting code is not included in the final Xen binary, ignore for now"
->>           },
->> +        {
->> +          "rel_path": "arch/*/*/asm-offsets.c",
->> +          "comment": "The resulting code is not included in the final Xen binary, ignore for now"
->> +        },
->>           {
->>               "rel_path": "common/coverage/*",
->>               "comment": "Files to support gcov, ignore for now"
-> 
-> ... something looks odd with indentation; can probably be adjusted
-> while committing.
+> Oh, okay, this looks appropriate then as to identifying where the
+> source construct is. However, we then still don't know where the
+> assertion in question is (there could be multiple in what the
+> original construct expands to). So I'm still inclined to ask that
+> __FILE__ / __LINE__ and/or the name of the invoking construct
+> (macro or function) be made visible in the diagnostic.
 
-I am happy to take care of both the commit message and the indentation 
-on commit.
+Any use of __FILE__ and __LINE__ results in obtaining
+the same information already reported by the assembler error message.
 
-Cheers,
+We could add an argument to the new macro to manually add some context
+at every use of the macro, but I think this would be annoying.
 
 -- 
-Julien Grall
+Federico Serafini, M.Sc.
+
+Software Engineer, BUGSENG (http://bugseng.com)
 
