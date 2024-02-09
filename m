@@ -4,37 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 145FAC4829C
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 18:01:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.678786.1056350 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFCD4C48297
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 18:02:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.678798.1056373 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYVBO-0008UO-Fa; Fri, 09 Feb 2024 18:01:02 +0000
+	id 1rYVD2-0002rS-GK; Fri, 09 Feb 2024 18:02:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 678786.1056350; Fri, 09 Feb 2024 18:01:02 +0000
+Received: by outflank-mailman (output) from mailman id 678798.1056373; Fri, 09 Feb 2024 18:02:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYVBO-0008Sa-7q; Fri, 09 Feb 2024 18:01:02 +0000
-Received: by outflank-mailman (input) for mailman id 678786;
- Fri, 09 Feb 2024 18:01:01 +0000
+	id 1rYVD2-0002rL-D3; Fri, 09 Feb 2024 18:02:44 +0000
+Received: by outflank-mailman (input) for mailman id 678798;
+ Fri, 09 Feb 2024 18:02:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Qnec=JS=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rYVBN-0007U9-6o
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 18:01:01 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
+ <SRS0=H7xO=JS=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1rYVD1-0002r1-4N
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 18:02:43 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2060e.outbound.protection.outlook.com
+ [2a01:111:f400:7e88::60e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2eb5f52c-c775-11ee-8a4b-1f161083a0e0;
- Fri, 09 Feb 2024 19:01:00 +0100 (CET)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-560c696ccffso4008420a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2024 10:01:00 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- fd1-20020a056402388100b00561103f29fbsm984503edb.75.2024.02.09.10.00.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Feb 2024 10:00:58 -0800 (PST)
+ id 6a3399a9-c775-11ee-8a4b-1f161083a0e0;
+ Fri, 09 Feb 2024 19:02:41 +0100 (CET)
+Received: from BYAPR11CA0056.namprd11.prod.outlook.com (2603:10b6:a03:80::33)
+ by IA0PR12MB8713.namprd12.prod.outlook.com (2603:10b6:208:48e::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.14; Fri, 9 Feb
+ 2024 18:02:36 +0000
+Received: from MWH0EPF000989EB.namprd02.prod.outlook.com
+ (2603:10b6:a03:80:cafe::c8) by BYAPR11CA0056.outlook.office365.com
+ (2603:10b6:a03:80::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.24 via Frontend
+ Transport; Fri, 9 Feb 2024 18:02:35 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ MWH0EPF000989EB.mail.protection.outlook.com (10.167.241.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7249.19 via Frontend Transport; Fri, 9 Feb 2024 18:02:34 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 9 Feb
+ 2024 12:02:33 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Fri, 9 Feb
+ 2024 10:02:33 -0800
+Received: from [172.23.114.18] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
+ Transport; Fri, 9 Feb 2024 12:02:31 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,342 +65,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2eb5f52c-c775-11ee-8a4b-1f161083a0e0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707501659; x=1708106459; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JZxnCL12H+ZDFR5vLYR2Fa8H1VelnALrYXWhEz3aNg4=;
-        b=N6FuLSU318UjDePVp4JLJu6GT/2hhh2apCe9NgTUVd0UjSSudeJCfua2CmdNr6i1ch
-         KbXvwj1AQgetQUCZkDAG0klJPSLbe8VMkQ6PyRSLsOKXaETFsSWwyqWud3cfWwlyLZuA
-         yZRlpScPN+VG7oFyycYizcKA91Tu3Jk5BJPMt2vgbitE7DStTNOMYDcvHUZgUjh26z18
-         GwNoPG7f+G3oswwoDeCv82z2/3ldrNLRN1XddFc3BjYMQ8BcfcuQnt4DJO9MWVTN7CFk
-         yNf5C+jlXAoxu5BWvTiCDpM9hJvv3ltpUPhwrdmd4xEvWfGtGxg1AKCjTYymAxX5miX9
-         DKVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707501659; x=1708106459;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JZxnCL12H+ZDFR5vLYR2Fa8H1VelnALrYXWhEz3aNg4=;
-        b=qr09f4NVEjrYHmIqZvZ2iN+1MVhK4Lo5avln1cMJHYEWxJjcSWLBWQ+pQnEdAaB0bm
-         zYZGEAF4Ac8EBP9T2P28Gr6v1ZBnnqNDGkxDWoFGCRAxLCTYVbVGvc5ZvU2c1hmAcddp
-         JeI9IoSx663gtNV4qZx1zHUopGR+7ipq2CD/8NsVNzkpinkd+mkWYfiy6hU6M/k1TwxE
-         x4UtznmAYZexqxLIsVwVDCifc+6MWgzWTYWKITjmltsh36KqVdXE7M/DwdqKnKUuiE4u
-         FMWYlP64UmUUexR/kwohMvHRwf4RiJEY/51ZNjH2y9V//jFtSZyy76Ug6e8tcKpaH5Dx
-         V5CQ==
-X-Gm-Message-State: AOJu0YzZ7dMbn/YW4bSZY2D6NBTvFSvNKJvnAwaBZCM2frRLB+wG9L0J
-	Aq95o79W/fuqcz/LGXD/mnyznr9GYBsUoohg4+3EJ3BR9UKUK+1HMwLJyRQS
-X-Google-Smtp-Source: AGHT+IGW1gnVN8wsBtZuIzYKExcTmqqfEH1F9xffamnzp5f18zkBRyLMCfeGTgTtHd+FxfHWMDTdSg==
-X-Received: by 2002:a05:6402:3410:b0:55f:5197:6314 with SMTP id k16-20020a056402341000b0055f51976314mr1764168edc.18.1707501659252;
-        Fri, 09 Feb 2024 10:00:59 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCVfF3SdaH0Hp4Jo9YeYcEvD7pVnwVeVJuG1jZmmx8lgUsmz+i3i1ZTu0HGjlH/cg2uiXiCeCn5o8z6wNqAIlnnvoIdXt0nyvj7wESsm3GQClePV3re9qKFxWtHwZuMhpSFtFSf2ebV1F13JWfqHQA/qVS0hjVqCIwG2F5fGkqp4G82gzINpKtK1CK38FVsHl7cC5JyO6TtvUrnqgD1xj4wfiiE=
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v8 6/7] xen/arm: switch Arm to use asm-generic/device.h
-Date: Fri,  9 Feb 2024 19:00:48 +0100
-Message-ID: <ae256e804cbfd3c5d17ef9d17f100ebbf17c48fc.1707499278.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1707499278.git.oleksii.kurochko@gmail.com>
-References: <cover.1707499278.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 6a3399a9-c775-11ee-8a4b-1f161083a0e0
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IzMZ1Ca2IYHlvrWIujB0hs9yCQj67lf3gOjhj6Fv7BaLnA0vQ7DNP/pNjk9IsfqpzlF8qFxKAeEkqA0Lt96kOr5auQaT91x2+6E0R2SOxCPk0NumWIAVmjNOlLmjhc8UjdEaNNXvU5D77zG0SLBTj6Tr3dleoreRy7eMRiqqwZUS1xYYhdJo83qm34nHiGil6YrsX6M8wxWrL1YqoggiXFVlkh8eUGdq32MX0Val0N8qy6PUTv3xGZMcGsGLu6ucEc4G/KJnWVKCYzSJv0qWv0EkpXNiTRJlLzs7iXHC1twDBG66v1lCQu7ItMzabXUM/dEs0+mdDB0x2ykFQhUM2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kEBTveNL/p7e41ml1pnFpKoFY8Pak/QF4WgXpYUVY7k=;
+ b=eleNqGrAGim1zv+bxHNA7Zv1XQ5WtktW8AmBlT2wzNowt0v1f5rxw9j5ZilqOTVHHQVgUFg9RgIzInWFevcSnQj8wC1UMDFLOvDKyX+EIesVRsAHTcYzmD9544Lj7IxRZrzzJ1cENGqZkBQ8a7LuaQuiXdyQMiRkms1VDqJAkIV090+U6MA5rLBhlX17oY7GOdGjvmM+E9VkmqAyjjOZEXOhhlIJM1KlbAdsjYzykIJ2tKxSKQ1/D2KWZck2W0ypC5NdDIBYUFf91KSvUIY4w44BH3L4hQNKBGTiVLjMYxV0kPOwbftkXnlI2AmV5qxxIco9UR1EPZWYcnMG5lb+QQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kEBTveNL/p7e41ml1pnFpKoFY8Pak/QF4WgXpYUVY7k=;
+ b=bx0f06QzMAziKc14xcQbeAWhVJ+97KYNQVFPomMLrqXzArxZVlhhT5iXzsxNX8bWKdCYWmRvhmOXn40Fn4zFL68w/EdQZPGXfaQakTk8aNx/hUF6Vs3swjyjBDto+HPTpNnnESWv8uSO/PpXxBess7RtEeWhDVidYgaOwu3D6sE=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <9b4ce4c7-6f4e-47ec-b3a4-0b417cd2660c@amd.com>
+Date: Fri, 9 Feb 2024 13:02:31 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC XEN PATCH v5 1/5] xen/vpci: Clear all vpci status of device
+To: Jiqian Chen <Jiqian.Chen@amd.com>, <xen-devel@lists.xenproject.org>
+CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, George Dunlap
+	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Anthony PERARD <anthony.perard@citrix.com>, Juergen
+ Gross <jgross@suse.com>, "Daniel P . Smith" <dpsmith@apertussolutions.com>,
+	Huang Rui <Ray.Huang@amd.com>
+References: <20240112061317.418658-1-Jiqian.Chen@amd.com>
+ <20240112061317.418658-2-Jiqian.Chen@amd.com>
+Content-Language: en-US
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <20240112061317.418658-2-Jiqian.Chen@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989EB:EE_|IA0PR12MB8713:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3062045a-09ac-4e2d-ffcc-08dc29994afa
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	pNfbM3qkI3JWWAFuJWPt00zmQYV3JHci1VH/0Ad67oEAPivQfw91RLA+Pkrxjemvu3GC/Pcl38I0EKneaGfWYePSTLmHq6Es0gzfxcNdODpF63Ah3butC1i+nMa6BdeqmxagNxnaeHDGRM+8E28lO6/1EY35JAwsIWHpe7K4O8wvTgDwePPG/nBy6gkggGVPsp6gTiAZujx+PVViSRdQAHWmseQFT0vn/6RG95z68aVLXcEdS/RxCY559lNYdYDC1ds8qI8wc9Pbve9G9s9C2gSgtf37LHkoUxrHU1NVWWzdP7lhygA6F64jbV1LRthjyemVad9/VQJQ7K4+pxgPQ0srT7S7uHzSiKQJLYISWi2NkiyKep45hOo2Mn+limfKVikRERrc5VLYLWg7++IYxEWnoumGZsj5aQUUm2UzM8IS3kUfVtusNLDJIi9mGzDn7FItOaOV6O94nGXC+vrj5QrylxhBFFivAADGbeN9yJcZ8znECHMUGcIbGnTX1T2xqsnh2OeBOQKVk7VAbc3neqcXOyQPdzYYqotuf0nQUflKxGLzSo1DFOoBAZuXjXupMOj5T+TnaLbudUTp6ewrdw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(376002)(396003)(346002)(39860400002)(136003)(230922051799003)(64100799003)(186009)(82310400011)(451199024)(1800799012)(36840700001)(40470700004)(46966006)(4326008)(478600001)(53546011)(966005)(31686004)(41300700001)(5660300002)(7416002)(44832011)(2906002)(54906003)(110136005)(70586007)(70206006)(16576012)(316002)(8936002)(8676002)(336012)(426003)(83380400001)(26005)(31696002)(81166007)(82740400003)(356005)(86362001)(2616005)(36756003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2024 18:02:34.2747
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3062045a-09ac-4e2d-ffcc-08dc29994afa
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000989EB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8713
 
-The following changes were done as a result of switching to
-asm-generic/device.h:
- * DEVICE_GIC was renamed to DEVICE_INTERRUPT_CONTROLLER according
-   to definition of enum device_class in asm-generic/device.h.
- * acpi-related things in Arm code were guarded by #ifdef CONFIG_ACPI
-   as struct acpi_device_desc was guarded in asm-generic, also functions
-   acpi_device_init() was guarded too as they are using structure
-   acpi_device_desc inside.
- * drop arm/include/asm/device.h and update arm/include/asm/Makefile
-   to use asm-generic/device.h instead.
+On 1/12/24 01:13, Jiqian Chen wrote:
+> When a device has been reset on dom0 side, the vpci on Xen
+> side won't get notification, so the cached state in vpci is
+> all out of date compare with the real device state.
+> To solve that problem, add a new hypercall to clear all vpci
+> device state. When the state of device is reset on dom0 side,
+> dom0 can call this hypercall to notify vpci.
+> 
+> Co-developed-by: Huang Rui <ray.huang@amd.com>
+> Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V8:
- - update the commit message
----
-Changes in V7:
- - newly introduced patch which is based on the previous version of the patch:
-     [PATCH v6 9/9] xen/asm-generic: introduce generic device.h
----
- xen/arch/arm/device.c             |   5 ++
- xen/arch/arm/domain_build.c       |   2 +-
- xen/arch/arm/gic-v2.c             |   4 +-
- xen/arch/arm/gic-v3.c             |   6 +-
- xen/arch/arm/gic.c                |   4 +-
- xen/arch/arm/include/asm/Makefile |   1 +
- xen/arch/arm/include/asm/device.h | 124 ------------------------------
- 7 files changed, 14 insertions(+), 132 deletions(-)
- delete mode 100644 xen/arch/arm/include/asm/device.h
+Reviewed-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 
-diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
-index 1f631d3274..3e02cff008 100644
---- a/xen/arch/arm/device.c
-+++ b/xen/arch/arm/device.c
-@@ -16,7 +16,10 @@
- #include <xen/lib.h>
- 
- extern const struct device_desc _sdevice[], _edevice[];
-+
-+#ifdef CONFIG_ACPI
- extern const struct acpi_device_desc _asdevice[], _aedevice[];
-+#endif
- 
- int __init device_init(struct dt_device_node *dev, enum device_class class,
-                        const void *data)
-@@ -45,6 +48,7 @@ int __init device_init(struct dt_device_node *dev, enum device_class class,
-     return -EBADF;
- }
- 
-+#ifdef CONFIG_ACPI
- int __init acpi_device_init(enum device_class class, const void *data, int class_type)
- {
-     const struct acpi_device_desc *desc;
-@@ -61,6 +65,7 @@ int __init acpi_device_init(enum device_class class, const void *data, int class
- 
-     return -EBADF;
- }
-+#endif
- 
- enum device_class device_get_class(const struct dt_device_node *dev)
- {
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 46161848dc..085d88671e 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -1651,7 +1651,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
-      * Replace these nodes with our own. Note that the original may be
-      * used_by DOMID_XEN so this check comes first.
-      */
--    if ( device_get_class(node) == DEVICE_GIC )
-+    if ( device_get_class(node) == DEVICE_INTERRUPT_CONTROLLER )
-         return make_gic_node(d, kinfo->fdt, node);
-     if ( dt_match_node(timer_matches, node) )
-         return make_timer_node(kinfo);
-diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-index cf392bfd1c..5d6885e389 100644
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -1366,7 +1366,7 @@ static const struct dt_device_match gicv2_dt_match[] __initconst =
-     { /* sentinel */ },
- };
- 
--DT_DEVICE_START(gicv2, "GICv2", DEVICE_GIC)
-+DT_DEVICE_START(gicv2, "GICv2", DEVICE_INTERRUPT_CONTROLLER)
-         .dt_match = gicv2_dt_match,
-         .init = gicv2_dt_preinit,
- DT_DEVICE_END
-@@ -1381,7 +1381,7 @@ static int __init gicv2_acpi_preinit(const void *data)
-     return 0;
- }
- 
--ACPI_DEVICE_START(agicv2, "GICv2", DEVICE_GIC)
-+ACPI_DEVICE_START(agicv2, "GICv2", DEVICE_INTERRUPT_CONTROLLER)
-         .class_type = ACPI_MADT_GIC_VERSION_V2,
-         .init = gicv2_acpi_preinit,
- ACPI_DEVICE_END
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index bf0e5c1b75..1cb1360606 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -1909,7 +1909,7 @@ static const struct dt_device_match gicv3_dt_match[] __initconst =
-     { /* sentinel */ },
- };
- 
--DT_DEVICE_START(gicv3, "GICv3", DEVICE_GIC)
-+DT_DEVICE_START(gicv3, "GICv3", DEVICE_INTERRUPT_CONTROLLER)
-         .dt_match = gicv3_dt_match,
-         .init = gicv3_dt_preinit,
- DT_DEVICE_END
-@@ -1924,12 +1924,12 @@ static int __init gicv3_acpi_preinit(const void *data)
-     return 0;
- }
- 
--ACPI_DEVICE_START(agicv3, "GICv3", DEVICE_GIC)
-+ACPI_DEVICE_START(agicv3, "GICv3", DEVICE_INTERRUPT_CONTROLLER)
-         .class_type = ACPI_MADT_GIC_VERSION_V3,
-         .init = gicv3_acpi_preinit,
- ACPI_DEVICE_END
- 
--ACPI_DEVICE_START(agicv4, "GICv4", DEVICE_GIC)
-+ACPI_DEVICE_START(agicv4, "GICv4", DEVICE_INTERRUPT_CONTROLLER)
-         .class_type = ACPI_MADT_GIC_VERSION_V4,
-         .init = gicv3_acpi_preinit,
- ACPI_DEVICE_END
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index d922ea67aa..b5a9c8266c 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -234,7 +234,7 @@ static void __init gic_dt_preinit(void)
-         if ( !dt_get_parent(node) )
-             continue;
- 
--        rc = device_init(node, DEVICE_GIC, NULL);
-+        rc = device_init(node, DEVICE_INTERRUPT_CONTROLLER, NULL);
-         if ( !rc )
-         {
-             /* NOTE: Only one GIC is supported */
-@@ -262,7 +262,7 @@ static void __init gic_acpi_preinit(void)
- 
-     dist = container_of(header, struct acpi_madt_generic_distributor, header);
- 
--    if ( acpi_device_init(DEVICE_GIC, NULL, dist->version) )
-+    if ( acpi_device_init(DEVICE_INTERRUPT_CONTROLLER, NULL, dist->version) )
-         panic("Unable to find compatible GIC in the ACPI table\n");
- }
- #else
-diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
-index 505cb49090..4a4036c951 100644
---- a/xen/arch/arm/include/asm/Makefile
-+++ b/xen/arch/arm/include/asm/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0-only
- generic-y += altp2m.h
-+generic-y += device.h
- generic-y += hardirq.h
- generic-y += iocap.h
- generic-y += paging.h
-diff --git a/xen/arch/arm/include/asm/device.h b/xen/arch/arm/include/asm/device.h
-deleted file mode 100644
-index b5d451e087..0000000000
---- a/xen/arch/arm/include/asm/device.h
-+++ /dev/null
-@@ -1,124 +0,0 @@
--#ifndef __ASM_ARM_DEVICE_H
--#define __ASM_ARM_DEVICE_H
--
--enum device_type
--{
--    DEV_DT,
--    DEV_PCI,
--};
--
--struct dev_archdata {
--    void *iommu;    /* IOMMU private data */
--};
--
--/* struct device - The basic device structure */
--struct device
--{
--    enum device_type type;
--#ifdef CONFIG_HAS_DEVICE_TREE
--    struct dt_device_node *of_node; /* Used by drivers imported from Linux */
--#endif
--    struct dev_archdata archdata;
--    struct iommu_fwspec *iommu_fwspec; /* per-device IOMMU instance data */
--};
--
--typedef struct device device_t;
--
--#include <xen/device_tree.h>
--
--#define dev_is_pci(dev) ((dev)->type == DEV_PCI)
--#define dev_is_dt(dev)  ((dev)->type == DEV_DT)
--
--enum device_class
--{
--    DEVICE_SERIAL,
--    DEVICE_IOMMU,
--    DEVICE_GIC,
--    DEVICE_PCI_HOSTBRIDGE,
--    /* Use for error */
--    DEVICE_UNKNOWN,
--};
--
--struct device_desc {
--    /* Device name */
--    const char *name;
--    /* Device class */
--    enum device_class class;
--    /* List of devices supported by this driver */
--    const struct dt_device_match *dt_match;
--    /*
--     * Device initialization.
--     *
--     * -EAGAIN is used to indicate that device probing is deferred.
--     */
--    int (*init)(struct dt_device_node *dev, const void *data);
--};
--
--struct acpi_device_desc {
--    /* Device name */
--    const char *name;
--    /* Device class */
--    enum device_class class;
--    /* type of device supported by the driver */
--    const int class_type;
--    /* Device initialization */
--    int (*init)(const void *data);
--};
--
--/**
-- *  acpi_device_init - Initialize a device
-- *  @class: class of the device (serial, network...)
-- *  @data: specific data for initializing the device
-- *
-- *  Return 0 on success.
-- */
--int acpi_device_init(enum device_class class,
--                     const void *data, int class_type);
--
--/**
-- *  device_init - Initialize a device
-- *  @dev: device to initialize
-- *  @class: class of the device (serial, network...)
-- *  @data: specific data for initializing the device
-- *
-- *  Return 0 on success.
-- */
--int device_init(struct dt_device_node *dev, enum device_class class,
--                const void *data);
--
--/**
-- * device_get_type - Get the type of the device
-- * @dev: device to match
-- *
-- * Return the device type on success or DEVICE_ANY on failure
-- */
--enum device_class device_get_class(const struct dt_device_node *dev);
--
--#define DT_DEVICE_START(_name, _namestr, _class)                    \
--static const struct device_desc __dev_desc_##_name __used           \
--__section(".dev.info") = {                                          \
--    .name = _namestr,                                               \
--    .class = _class,                                                \
--
--#define DT_DEVICE_END                                               \
--};
--
--#define ACPI_DEVICE_START(_name, _namestr, _class)                    \
--static const struct acpi_device_desc __dev_desc_##_name __used           \
--__section(".adev.info") = {                       \
--    .name = _namestr,                                               \
--    .class = _class,                                                \
--
--#define ACPI_DEVICE_END                                               \
--};
--
--#endif /* __ASM_ARM_DEVICE_H */
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
--- 
-2.43.0
+If you send another version, the RFC tag may be dropped.
+
+One thing to keep an eye out for below (not requesting any changes).
+
+> ---
+> diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+> index 72ef277c4f8e..c6df2c6a9561 100644
+> --- a/xen/drivers/vpci/vpci.c
+> +++ b/xen/drivers/vpci/vpci.c
+> @@ -107,6 +107,16 @@ int vpci_add_handlers(struct pci_dev *pdev)
+>  
+>      return rc;
+>  }
+> +
+> +int vpci_reset_device_state(struct pci_dev *pdev)
+> +{
+> +    ASSERT(pcidevs_locked());
+> +    ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
+> +
+> +    vpci_remove_device(pdev);
+> +    return vpci_add_handlers(pdev);
+
+Note that these two functions may be renamed soon by the patch at [1].
+Whichever patch goes in later will need to be rebased to account for the
+rename.
+
+[1] https://lists.xenproject.org/archives/html/xen-devel/2024-02/msg00134.html
+
+> +}
+> +
+>  #endif /* __XEN__ */
+>  
+>  static int vpci_register_cmp(const struct vpci_register *r1,
 
 
