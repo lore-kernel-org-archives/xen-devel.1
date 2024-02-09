@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBAC3C4828F
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 18:01:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.678780.1056293 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD03C48297
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 18:01:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.678782.1056314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYVBK-0007B7-1i; Fri, 09 Feb 2024 18:00:58 +0000
+	id 1rYVBL-0007eL-Hp; Fri, 09 Feb 2024 18:00:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 678780.1056293; Fri, 09 Feb 2024 18:00:58 +0000
+Received: by outflank-mailman (output) from mailman id 678782.1056314; Fri, 09 Feb 2024 18:00:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYVBJ-0007B0-VO; Fri, 09 Feb 2024 18:00:57 +0000
-Received: by outflank-mailman (input) for mailman id 678780;
- Fri, 09 Feb 2024 18:00:56 +0000
+	id 1rYVBL-0007eE-DJ; Fri, 09 Feb 2024 18:00:59 +0000
+Received: by outflank-mailman (input) for mailman id 678782;
+ Fri, 09 Feb 2024 18:00:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qnec=JS=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rYVBI-0007AX-P7
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 18:00:56 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
+ id 1rYVBJ-0007AX-Nd
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 18:00:57 +0000
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [2a00:1450:4864:20::233])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2ada27f8-c775-11ee-98f5-efadbce2ee36;
- Fri, 09 Feb 2024 19:00:54 +0100 (CET)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5600c43caddso1548855a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2024 10:00:54 -0800 (PST)
+ id 2c0f6149-c775-11ee-98f5-efadbce2ee36;
+ Fri, 09 Feb 2024 19:00:56 +0100 (CET)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2d066b82658so17478961fa.3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2024 10:00:56 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- fd1-20020a056402388100b00561103f29fbsm984503edb.75.2024.02.09.10.00.51
+ fd1-20020a056402388100b00561103f29fbsm984503edb.75.2024.02.09.10.00.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Feb 2024 10:00:52 -0800 (PST)
+ Fri, 09 Feb 2024 10:00:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,212 +46,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ada27f8-c775-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 2c0f6149-c775-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707501653; x=1708106453; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Bs9ogOGLG/U26z7bEm15alnNocp6JCN0/JehCJi+Wgw=;
-        b=gBBZPeAiP+kiEh30FVBtaKdDAuoDW/wb5u/Yl3zccLWPBTcyFuvcIzn1kPShYQcV5L
-         QXvR5jTH0R40Yw2YHzz9kQbhQlP1vxThf+7+dpsA0HmU78jwnUcivAEtHLRzGS63DkPx
-         88jDeGCWCHW7vSZh/sHWjurSH2DrLmhAnyJha0xZ6bBpqh24HgyIZicKLace36Fuwpmm
-         +MSUJqVbQd83Rnf77yljBGTfPu/EWBfcO1+yBUVJW6VAdX5Z4bGWDXdV1Q+AxJbaFw2/
-         UYosfHCGfWW6M6dt8xVsuFNqGbUa1BZq7iwkc4wuKB8s1YF9AnAbE5wmAtKxYDFodhYc
-         I9Cg==
+        d=gmail.com; s=20230601; t=1707501655; x=1708106455; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2FAxJg0gmB5DWDjQyTT6C98jISHS9vZdHw6mxETNKmo=;
+        b=E27mnS4bZ1BDoOq5d3Dg2Dc+ocZRlrmtvuoMKCToE/lbvm9r8W6BOGfH0UfZ49kbP5
+         sl1/h+hGtvdc6CDaDKaqDbaZ7NdPS3eb2w/LAZLERLgS8QSHceUV7XEAno39EbwWAz/Y
+         oI4R9NWNQ28FsDVZpOP/8mda5dUzM3DY+IZ+8g3RyYQHOWSncXAJSWIQoF4C8XgShI1h
+         sQNrf+QP83I7Od+xiwsJtBkQg1TCTX1Hxm/29Ut7C+kOCf7BRh4ea7EOUDwhtin9UW+N
+         yjcMwvkD5R5VIj7ukMlA5fMQqzBGvQZw4ua5tq7jQdqAL3AYwUKNIBeWVykP9K87IYTd
+         kaRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707501653; x=1708106453;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Bs9ogOGLG/U26z7bEm15alnNocp6JCN0/JehCJi+Wgw=;
-        b=qL+BvMw5QN0Q43NwIZF60GS+JBDpGPxvjrpWqVuEEN2q9RVI4PhL3c/YPrqiGJp5Fh
-         oMMzWp8mAiQFbBbAR4otaPVrZjm/kx0ZUGdipVCkpyixFnEAsJis7OroyPcEK79O6xNp
-         bj21mhWqzC+zxOHoULFV5tdXCvAPvw/+psI/a0l55wZdK3lNj73+t6z6OEtmBrJlqIG+
-         rPbZC0H+5ZFIgZltkrBd9ychPfN7CSShILtY71d+cClonPPNOY9Q/nLygGhV83UFdlRb
-         kQHuGB1IVQHq8e46an6AbVp4ghrmdwXtsolJHmcLt69h2k/pifPCH6gN35Aa5DpTr/XW
-         8tWw==
-X-Gm-Message-State: AOJu0Ywp+tdBgCKuSrpz1hrLDlHOOfy5PTnrrQLNw1exccA3F1gT6CSj
-	tVVaS4r09VmyXxT7UOnrlakUN0A1+aGLMlXXpbscGcuyv9DN4RoXSEulDug8
-X-Google-Smtp-Source: AGHT+IF/prAYCCgRd01hVTel3l+zsf3uytU0uSrtVjBhByLiQLPt5hGw3OqXEjpzyK9BHHubiAm5JA==
-X-Received: by 2002:a05:6402:5172:b0:55f:e2be:ec0e with SMTP id d18-20020a056402517200b0055fe2beec0emr1915143ede.1.1707501652539;
-        Fri, 09 Feb 2024 10:00:52 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCVvZgV6duVjqfdo8lft4AMLopEZ2qr4Yma8GPzb13TkJdRfdQvsUhogHBzMFLpZgw9KPvUbbgSTqZbb7zKp5Z0PTpN3v6yJPkVlDNSQi3Ozo4mRW5qJG3FBBhN0ZQ1mMqLPXavX3bVimPVw/NVBQHbqJl+3yAPuIX8w10JwVhu051BbhkwdWAmA7uohdieve/47Sr0OfjNZ8bhukCpHxw/aNZpGtM2n5L6YOWHNNLcX+k+WeyUBABLbCZ/gzBAzpiJWriSLBVHz1lhR7QkCu6EkL2ZT70rVyb75xeQiw3A1DAAnJXd9aRXuVsQTY1Jj0g9721J2cbSWu+fJ2ZvvL6dNQCNAjelhmV9Hpc+WwCw0LTAfb2aJOL2KGeiaSwrS+uMtyjNyFhWzGbAW/lQXwYiLUNumuKYS8ejFyRm/sJDzTUSURp0b7DcNlFQXrK+E5hcan8dUkJpGsa9NSo80SXUzwcV8M9m6loyFyt0+PrcRH84LrKB4lQ3mQa3AsPbKA/l4huy2dVvhoIQ5zPbIFnKZdzAShEao+Omyyq7M8f5bv3h1wRTrzpZG7JYcAzuovd5ITRgGY9O7uxvLIoR/sQc=
+        d=1e100.net; s=20230601; t=1707501655; x=1708106455;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2FAxJg0gmB5DWDjQyTT6C98jISHS9vZdHw6mxETNKmo=;
+        b=lZyKt/p0BxpuEU5RbmGQiFunTFlbUqlmOcm5xTxRbh9MTqAiWv0DS+luj4XzZC2tf3
+         EdgI3PZkG41olls/66mR5RAsCEZkvWKB3qhRFesogHRulX9pbM/uD3EqR+nFVXD6ak7C
+         azJTTZUD8BsVNBeFLntZ/gOCphlpaIGecY0vpN4Uico9skKnaw3gw5mSZGJkOwkOQLk/
+         nZ+vHVKGQcKGViFiixWHtS3aokY7eaEMgyjHHlmxKBgDolNe4ccTyvt77UlKvGHfIhIy
+         JAYzzU6IIZPoSBU+7E7V2ZyTWowFITkAKtIXGQvW9HpM5rXSGQH1/mxDVoHLpfrwhNqw
+         z3LQ==
+X-Gm-Message-State: AOJu0Yxs9r2AlDunwz+Qoejf2pYADzzyc8+5DctKUFdoM7ibYzc2xJU/
+	5Oc2UKfJQg38hLLQHF6E2A2pagT9oFeyuc6/RzCkMBZeiBmuzUsQzmLYObX5
+X-Google-Smtp-Source: AGHT+IFbSuQHrFD+pCaWosSAT51WKM2wswg64lILWQSiNhb+QTAe+Zz7P5j3ad0mIicMH3BJdo6Qeg==
+X-Received: by 2002:a2e:9888:0:b0:2d0:a2ad:bb5 with SMTP id b8-20020a2e9888000000b002d0a2ad0bb5mr1691612ljj.44.1707501654857;
+        Fri, 09 Feb 2024 10:00:54 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCU2UNPXe/bQPGqfYVR+SWxZqR7Zi8dQvlVA1YR82f6V8MlZ84d6/8d410wm+zJH0xq9zzODG8LCTm+bzx6fbU7UQQRCXjVZ0tDE/77AZUqwDTDa5nH/MhdxWA==
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v8 0/7]  Introduce generic headers
-Date: Fri,  9 Feb 2024 19:00:42 +0100
-Message-ID: <cover.1707499278.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v8 2/7] automation: introduce fixed randconfig for RISC-V
+Date: Fri,  9 Feb 2024 19:00:44 +0100
+Message-ID: <3f662e3b4ded36d982ff04ed5cdfdd8e36f83594.1707499278.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1707499278.git.oleksii.kurochko@gmail.com>
+References: <cover.1707499278.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some headers are common between several architectures, so the current patch series
-provide them.
+This patch introduces the file riscv-fixed-randconfig.yaml,
+which includes all configurations that should be disabled for
+randconfig builds.
 
-Another one reason to have them as generic is a simplification of adding support
-necessary to make a complete Xen build as it was/is being done in the patch series [1]
-and [2].
-
-Also, instead of providing generic/stub headers, it was used
-"#ifdef CONFIG_* #include <asm/*.h> #endif" instead of providing empty headers.
-
-This patch series is a pre-requisite for "Enable build of full Xen for RISC-V" [3].
-
-[1] https://lore.kernel.org/xen-devel/cover.1694543103.git.sanastasio@raptorengineering.com/
-[2] https://lore.kernel.org/xen-devel/cover.1692181079.git.oleksii.kurochko@gmail.com/
-[3] https://lore.kernel.org/xen-devel/cover.1700761381.git.oleksii.kurochko@gmail.com/
+Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
+The patch were introduced after discussion in a topic:
+ https://lore.kernel.org/xen-devel/cover.1701966261.git.oleksii.kurochko@gmail.com/
+ ---
 Changes in V8:
- - Add Acked-by Acked-by: Tamas K Lengyel <tamas@tklengyel.com> for patches:
-    [PATCH v7 4/7] xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
-    [PATCH v7 3/7] xen/asm-generic: introduce stub header monitor.h
- - Update the commit messages for patches:
-    [PATCH v7 5/7] xen/asm-generic: introduce generic device.h
-    [PATCH v7 6/7] xen/arm: switch Arm to use asm-generic/device.h
- - Drop #ifdef HAS_PCI in asm-generic/device.h to be consistent with other pci-related
-   things in the header.
- - Code styles fixes.    
+ - Nothing changed. Only rebase
 ---
 Changes in V7:
- - The following patches were dropped because of rebasing as they were merged
-   to staging:
-   - [PATCH v6 3/9] xen/asm-generic: introduce generic div64.h header
-   - [PATCH v6 6/9] xen/asm-generic: introduce stub header softirq.h
-   - [PATCH v6 7/9] xen: ifdef inclusion of <asm/grant_table.h> in <xen/grant_table.h>
-   - [PATCH v6 8/9] xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
-- [PATCH v6 5/9] xen/asm-generic: introduce stub header numa.h was dropped becaus of
-  the patch: "[PATCH v2] NUMA: no need for asm/numa.h when !NUMA"
-- Drop definition of arch_monitor_domctl_event for PPC.
-- define arch_monitor_domctl_event in asm-generic/monitor.h.
-- Add "define HAS_ARCH_MONITOR_DOMCTL_EVENT" in arm/.../monitor.h as it has arch
-  specific implementation.
-- keeping DEVICE_PCI_HOSTBRIDGE available for every build based on the reply:
-    https://lore.kernel.org/xen-devel/926a5c12-7f02-42ec-92a8-1c82d060c710@xen.org/
-- add comment above enum device_type.h with explanation about DEV_TYPE_MAX.        
-- drop #ifdef HAS_PCI around "(device_get_class(dev) == DEVICE_PCI_HOSTBRIDGE))" in ARM code.
-- separate patch  "[PATCH v6 9/9] xen/asm-generic: introduce generic device.h" into 3 patches.
+ - Nothing changed. Only rebase
 ---
 Changes in V6:
- - Fix the build script to work properly with EXTRA_FIXED_RANDCONFIG.
- - Introduce separate randconfig yaml with fixed configs for RISC-V.
- - Disable CONFIG_GRANT_TABLE and CONFIG_MEM_ACCESS for PPC and RISC-V.
- - Remove change in Kconfig/common for CONFIG_GRANT_TABLE and CONFIG_MEM_ACCESS.
- - Rebase on top of the latest staging. 
+ - The patch was introduced in this version of patch series.
 ---
-Changes in V5:
- - Update the patch series message as patch related to delay.h was merged.
- - Rebase on top of staging because half of the patches of the patch series were
-   merged to staging branch.
- - Add A-by for some of the patches.
- - Add "depends on X86 || Arm" for CONFIG_GRANT_TABLE and CONFIG_MEM_ACCESS to be
-   sure it won't be turned on by randconfig in CI.
- - Partly switch Arm and PPC to asm-generic/monitor.h.
- - Some other minor changes
----
-Changes in V4:
- - Update the cover letter message
- - Add Reviewed-by/Acked-by for patches:
-    [PATCH v3 01/14] xen/asm-generic: introduce stub header paging.h
-    [PATCH v3 03/14] xen/asm-generic: introduce generic hypercall.h
-    [PATCH v3 04/14] xen/asm-generic: introduce generic header iocap.h
-    [PATCH v3 05/14] xen/asm-generic: introduce stub header <asm/random.h>
-    [PATCH v3 06/14] xen/asm-generic: introduce generic header percpu.h
-    [PATCH v3 07/14] xen/asm-generic: introduce generalized hardirq.h
-    [PATCH v3 08/14] xen/asm-generic: introduce generic div64.h header
-    [PATCH v3 09/14] xen/asm-generic: introduce generic header altp2m.h
-    [PATCH v3 10/14] xen/asm-generic: introduce stub header monitor.h
-    [PATCH v3 11/14] xen/asm-generic: introduce stub header numa.h
-    [PATCH v3 12/14] xen/asm-generic: introduce stub header softirq.h
- - Fix some code style and minor issues.
- - Use asm-generic version of device.h for Arm and PPC.
----
-Changes in V3:
- - Update the commit message of the cover letter.
- - Drop the following patch as it can be arch-specific enough:
-   * [PATCH v2 09/15] xen/asm-generic: introduce generic header smp.h
- - Drop correspondent arch specific headers and use asm-generic version of
-   a header.
- - Back to the patch series patches:
-   * xen: ifdef inclusion of <asm/grant_table.h> in <xen/grant_table.h>
-   * xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
----
-Changes in V2:
- - Update the commit message of the cover letter.
- - Drop the following patches because they are arch-specific or was sent as a separate patch:
-   - xen/asm-generic: introduce stub header event.h
-	 - xen/asm-generic: introduce stub header spinlock.h
-	 - [PATCH v1 03/29] xen/asm-generic: introduce stub header cpufeature.h
-	 - [PATCH v1 07/29] xen/asm-generic: introduce stub header guest_atomics.h
-	 - [PATCH v1 10/29] xen/asm-generic: introduce stub header iommu.h
-	 - [PATCH v1 12/29] xen/asm-generic: introduce stub header pci.h because separate patch was sent [5]
-	 - [PATCH v1 14/29] xen/asm-generic: introduce stub header setup.h
-	 - [PATCH v1 15/29] xen/asm-generic: introduce stub header xenoprof.h because of [3].
-	 - [PATCH v1 16/29] xen/asm-generic: introduce stub header flushtlb.h
-	 - [PATCH v1 22/29] xen/asm-generic: introduce stub header delay.h because of [3]
-	 - [PATCH v1 23/29] xen/asm-generic: introduce stub header domain.h
-	 - [PATCH v1 24/29] xen/asm-generic: introduce stub header guest_access.h
-	 - [PATCH v1 25/29] xen/asm-generic: introduce stub header irq.h ( probably not so generic as I expected, I'll back to it if it will be necessary in the future )
-	 - [PATCH v1 28/29] xen/asm-generic: introduce stub header p2m.h ( probably not so generic as I expected, I'll back to it if it will be necessary in the future )
- - For the rest of the patches please look at changes for each patch separately.
----
-
-Oleksii Kurochko (7):
-  automation: ensure values in EXTRA_FIXED_RANDCONFIG are separated by
-    new line
-  automation: introduce fixed randconfig for RISC-V
-  xen/asm-generic: introduce stub header monitor.h
-  xen/asm-generic: ifdef inclusion of <asm/mem_access.h>
-  xen/asm-generic: introduce generic device.h
-  xen/arm: switch Arm to use asm-generic/device.h
-  xen/ppc: switch PPC to use asm-generic/device.h
-
- automation/gitlab-ci/build.yaml               |   8 +-
- .../gitlab-ci/riscv-fixed-randconfig.yaml     |   7 ++
- automation/scripts/build                      |   6 +-
- xen/arch/arm/device.c                         |   5 +
- xen/arch/arm/domain_build.c                   |   2 +-
- xen/arch/arm/gic-v2.c                         |   4 +-
- xen/arch/arm/gic-v3.c                         |   6 +-
- xen/arch/arm/gic.c                            |   4 +-
- xen/arch/arm/include/asm/Makefile             |   1 +
- xen/arch/arm/include/asm/monitor.h            |  25 +---
- xen/arch/arm/p2m.c                            |   1 +
- xen/arch/arm/traps.c                          |   1 +
- xen/arch/ppc/configs/ppc64_defconfig          |   1 +
- xen/arch/ppc/include/asm/Makefile             |   1 +
- xen/arch/ppc/include/asm/device.h             |  53 --------
- xen/arch/ppc/include/asm/mem_access.h         |   5 -
- xen/arch/ppc/include/asm/monitor.h            |  28 +----
- xen/arch/ppc/stubs.c                          |   8 --
- xen/arch/riscv/configs/tiny64_defconfig       |   1 +
- .../asm => include/asm-generic}/device.h      | 117 +++++++++++-------
- xen/include/asm-generic/monitor.h             |  64 ++++++++++
- xen/include/xen/mem_access.h                  |   2 +
- 22 files changed, 174 insertions(+), 176 deletions(-)
+ automation/gitlab-ci/build.yaml                  | 8 ++++----
+ automation/gitlab-ci/riscv-fixed-randconfig.yaml | 7 +++++++
+ 2 files changed, 11 insertions(+), 4 deletions(-)
  create mode 100644 automation/gitlab-ci/riscv-fixed-randconfig.yaml
- delete mode 100644 xen/arch/ppc/include/asm/device.h
- delete mode 100644 xen/arch/ppc/include/asm/mem_access.h
- rename xen/{arch/arm/include/asm => include/asm-generic}/device.h (66%)
- create mode 100644 xen/include/asm-generic/monitor.h
 
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 6d2cb18b88..376eb17f9c 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -512,6 +512,8 @@ alpine-3.18-gcc-debug-arm64-boot-cpupools:
+       CONFIG_BOOT_TIME_CPUPOOLS=y
+ 
+ # RISC-V 64 cross-build
++include: 'automation/gitlab-ci/riscv-fixed-randconfig.yaml'
++
+ archlinux-current-gcc-riscv64:
+   extends: .gcc-riscv64-cross-build
+   variables:
+@@ -532,8 +534,7 @@ archlinux-current-gcc-riscv64-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    EXTRA_FIXED_RANDCONFIG: !reference [.riscv-fixed-randconfig, variables, EXTRA_FIXED_RANDCONFIG]
+ 
+ archlinux-current-gcc-riscv64-debug-randconfig:
+   extends: .gcc-riscv64-cross-build-debug
+@@ -541,8 +542,7 @@ archlinux-current-gcc-riscv64-debug-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    EXTRA_FIXED_RANDCONFIG: !reference [.riscv-fixed-randconfig, variables, EXTRA_FIXED_RANDCONFIG]
+ 
+ # Power cross-build
+ debian-bullseye-gcc-ppc64le:
+diff --git a/automation/gitlab-ci/riscv-fixed-randconfig.yaml b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
+new file mode 100644
+index 0000000000..f1282b40c9
+--- /dev/null
++++ b/automation/gitlab-ci/riscv-fixed-randconfig.yaml
+@@ -0,0 +1,7 @@
++.riscv-fixed-randconfig:
++  variables:
++    EXTRA_FIXED_RANDCONFIG:
++      CONFIG_COVERAGE=n
++      CONFIG_EXPERT=y
++      CONFIG_GRANT_TABLE=n
++      CONFIG_MEM_ACCESS=n
 -- 
 2.43.0
 
