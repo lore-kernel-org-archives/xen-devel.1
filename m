@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE12C4828F
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 09:39:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.678605.1056039 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E42FC4828F
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Feb 2024 09:40:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.678609.1056050 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYNMF-0005pz-Iz; Fri, 09 Feb 2024 09:39:43 +0000
+	id 1rYNNH-0007CR-Sj; Fri, 09 Feb 2024 09:40:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 678605.1056039; Fri, 09 Feb 2024 09:39:43 +0000
+Received: by outflank-mailman (output) from mailman id 678609.1056050; Fri, 09 Feb 2024 09:40:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rYNMF-0005ps-G1; Fri, 09 Feb 2024 09:39:43 +0000
-Received: by outflank-mailman (input) for mailman id 678605;
- Fri, 09 Feb 2024 09:39:41 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rYNNH-0007CK-Ol; Fri, 09 Feb 2024 09:40:47 +0000
+Received: by outflank-mailman (input) for mailman id 678609;
+ Fri, 09 Feb 2024 09:40:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qnec=JS=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rYNMD-0005pm-DW
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 09:39:41 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2575982f-c72f-11ee-8a4b-1f161083a0e0;
- Fri, 09 Feb 2024 10:39:40 +0100 (CET)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-511616b73ddso1198497e87.0
- for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2024 01:39:40 -0800 (PST)
+ id 1rYNNH-0007Bz-Am
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2024 09:40:47 +0000
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [2a00:1450:4864:20::236])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4c5f0482-c72f-11ee-98f5-efadbce2ee36;
+ Fri, 09 Feb 2024 10:40:45 +0100 (CET)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2cf3ed3b917so7266291fa.1
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2024 01:40:45 -0800 (PST)
 Received: from [192.168.206.239] ([94.75.70.14])
  by smtp.gmail.com with ESMTPSA id
- 8-20020ac24828000000b005117ac9cd1asm50230lft.88.2024.02.09.01.39.38
+ a6-20020a2e88c6000000b002d0c34de739sm177438ljk.105.2024.02.09.01.40.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Feb 2024 01:39:39 -0800 (PST)
+ Fri, 09 Feb 2024 01:40:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,64 +47,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2575982f-c72f-11ee-8a4b-1f161083a0e0
+X-Inumbo-ID: 4c5f0482-c72f-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707471580; x=1708076380; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1707471645; x=1708076445; darn=lists.xenproject.org;
         h=mime-version:user-agent:content-transfer-encoding:references
          :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=s/Dyv6JD++6g81K++/rhaIf7qr4pDURdgPVxoli3z+Q=;
-        b=f+ZzhumdxUhCs7z8vuJcBa7ps6nOoppJmqLpBVwPuMRkPlIriC6MTXbBERIw67Kl+E
-         q1bfpY7uxHPmtna/piH5Oaqg1VaVdlah7dqxBb0AmLa5eQq2q6Gx7hdPf4d4Oso2OUQP
-         KSw6NSi2h4DLjA3q3lF4OLdCUIjQwykHqv7TW12tabJArkyOhO/QLpUv8ekTKRtTzzDZ
-         O1pQ2DOoRWJWhR3RrathipzzqTzis3355OvLmr8ggk7uabjQN+O8ZRnY5M5AHjm7lx19
-         TaOIzQfajs8M0bJNzj1ikYiuHXHyq2cV/ynZg/nU5PxdGUSxzxayh5tBySueubSPJCEz
-         tVsw==
+        bh=nMIWIk8UrRRacEEuL0vZEYRkZB38ASc7SyjxbcTn3AU=;
+        b=Jy0veO4dlENiRNAlyGC7Y2irXiK+jsKkccfl2eydz1zEiBGg/a9unYk+THrWQg/haJ
+         i0vinAiO/NXFHZjasK9Peq0YujwbpSjJTkcyZCasjcjkwiM5R3ADfkr0LIcAhwjtzhIT
+         MmaPE4+0j4+ja8wo2dcyWPbBCphFsUrQzTx0Dm4XbOIsCU1ir6fadrez/wkDAKGml+wF
+         DJAe1zk2wHey3lWfkg4B9+hTLyDlY3gkKceWEkYJHh5d3qUEco7RIDSh+xazM3WqWpCC
+         1F/YDPLXNZEA/RQtM4MBNRNLRxJnl3/R5ySjHrwO2zXzOqTdqSzluglDM7yhXLXDdhb2
+         H4gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707471580; x=1708076380;
+        d=1e100.net; s=20230601; t=1707471645; x=1708076445;
         h=mime-version:user-agent:content-transfer-encoding:references
          :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=s/Dyv6JD++6g81K++/rhaIf7qr4pDURdgPVxoli3z+Q=;
-        b=JbD3QlAA9ounIX7RgPXecGDuGMlV2acSi3uLYhh3/dY4EH9cZogawCBXu6B+F1jiry
-         WOOHeMDFpZQ3V8gEPgFXCuREHLGn35hUfXMZWAj00kFyz+wdRKZLr0zz5pgJtV0VrmBv
-         qsv83DROoFRJopuwquqvVKzd0z/MV0VobWztf97EY+aCxEY9WHBMxM6RqmZ+UpELuxsy
-         lreJY2S/Nxca61dD//jmYhKwmOf/JmOIxFw6m9kg8IPIxtfr4oLSOFqjP5hSijDgRawH
-         WJEHcLG4EQOS/jgaKbofz0oXeEv4lGptC3YRlgmv3JKHAwutiZ2kgf+3fOQMTZUMAc3n
-         a/2g==
-X-Gm-Message-State: AOJu0YwRZxfY9fc6R4HVcrYjUGbsA3Vmt9Oe2udOZGXLAT+Mw4sXk2Yn
-	I5Y8hAAur8fV6Kl6XBlwde/GySPUccFRoXZc62l/gwrGKaDUNH3B
-X-Google-Smtp-Source: AGHT+IGPGglg+V/00Jrg55McyLpL1F2ELorstlFLspgxxLXJnTblCWSYFl9w/vecAD44DNktsRIpzg==
-X-Received: by 2002:a19:644a:0:b0:511:4eb4:c4ed with SMTP id b10-20020a19644a000000b005114eb4c4edmr750652lfj.45.1707471579745;
-        Fri, 09 Feb 2024 01:39:39 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCUEvC+GK8BdtojWPmhTZpydXwX0wQPxVQaiIZbKsLQMl5FlkeVpxc4TINBKICwZVBzjekdbN+WxRBwgob9afVbADDzJ1RQUXID4/Jhl8CbnyosNTbA/0+eaF03Pa2AnfNjTz3i3TUFMPuDS6xDf39V0+Fk4s8WEeqvfsVms5HjSyLF+vxryUxqa5OfPFuR2G2hPhbu6xEEShII/uWuAulzQHRaCTsWATxxWCwdzcg1D61OEpQljG3/Ovjryqrh6NstCgDYSSDpsJ+CQq0nxxi7w9TW/lg9kKj8PsZYOZDftg6Zet6RNR+ONShiIyAXAuKaG4E713nnVkbIYKRKjyQxjnTlNu6f3tlyqcrhtW0I2Y529Lhx5tDhXh3Pn5cx/eTN1UB5Is9SDelikGRHtgcX44KnRuNOHT0Q+YSmPLojpFJ/sttVCnd1Rn3jC9kKVb6dW5LoeApAcYdDbiL1gz6eQ/Ry1cvM3ZrtowNtiwMLf4R8Myzc=
-Message-ID: <4670386b86a396de7706b3d77dede92992296a92.camel@gmail.com>
+        bh=nMIWIk8UrRRacEEuL0vZEYRkZB38ASc7SyjxbcTn3AU=;
+        b=vgqxrRQbh6GAjgqUAWd+RWQBasVq5R/XZ2hZmOHz027v7Xfp49pJ1pc54AEWJShs9r
+         6B99nSX+tvVoyi++yYOxyGyqFUC1Z2jY3dfSBXV1W1AHBs65O/rU6/iHY9FinVKDdNEX
+         Udwpct6Qi/U0uNoms7Wgzdx4DV8UNh2/77HP8RZtIQV4NVqI3ETitBKcJ44sWLToXeEI
+         BRGVU3AHePCku547qTGR+vVq7vA4LufWLqlwVJb2jECIbWkAVy1SWuA0H9Q5V3X1XmbP
+         URyeWVKdIGzuDmi3FZNa8mF+GC8G254D9CjkTwM5NdMoGEPAPZ4tDJVtjV6pvRMka0Sk
+         Zl5Q==
+X-Gm-Message-State: AOJu0YyNRJnY6Pot7QuASG/6xLM9AoC6CXSdnC4P04hXp/Z364qoC2A2
+	juKyxMg8Ib6dUc5xIs7Pwe9I+lEd321RyyMoBfUlyaYICeCqUPgo
+X-Google-Smtp-Source: AGHT+IH4mqRFBjZxoDil7XDFslrGlZtiEmW3p5aKqaA72XsAf0//uQdPo1b8TgPlszCI5pJeJswWXw==
+X-Received: by 2002:a2e:b616:0:b0:2d0:b3c4:5113 with SMTP id r22-20020a2eb616000000b002d0b3c45113mr1027651ljn.11.1707471644980;
+        Fri, 09 Feb 2024 01:40:44 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCUbpAX5B/Q4W5sTtQATc+u0xmXMqrVC9Xc20JpKktz5DkvnijQzfc5XHKySVgT4qN8Y+6fHQHwz1yvboKpiV3h57JLc844kJoBdVpBVX+aZyYZBzT+Y9+YXK8jx014Ut47fhKCuakjJ2AEIKzlIhTMzNdqdUUOOedyRYjRGmh3YxRLJBg7uUYBmSSykalZQfUoPqhEOnK0htVTrvHApbD0SDsUDO3XajCUSpEojgv1k21ct7F5W+bmYsVN7RRJR6qt+CSVdfVRoRrTqE6f5C8GAjRjerTo3fqGdxET03FjfdU1yhuPU0UbIyNK+AujZoekb3TxN1Lih1SiHqPrKwzvRGferXBc2+aOoXuEk5OMHQNeV/MRb4Yi43U5VTHLG2kY/Ye9B4/iiTIkUuSrsScmVmvQD9z0J4xXqiQlobjiHbQ0Ho9aVRO2LMRnpsLMwPO/wbqnIP9CR9p0TQ9lQGPwkUJgwO7fTpNBw9rkz3VfvhqRX38cXgbs=
+Message-ID: <9d1cadd4e918960d38426a8a4d83d18dbd4aa07e.camel@gmail.com>
 Subject: Re: [PATCH] xen: move BUG_ON(), WARN_ON(), ASSERT(),
  ASSERT_UNREACHABLE() to xen/bug.h
 From: Oleksii <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>,  Bertrand Marquis <bertrand.marquis@arm.com>, Michal
- Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, Shawn
- Anastasio <sanastasio@raptorengineering.com>, Roger Pau
- =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Konrad Rzeszutek Wilk
- <konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>, 
- xen-devel@lists.xenproject.org
-Date: Fri, 09 Feb 2024 10:39:38 +0100
-In-Reply-To: <91e58646-5420-4e1c-a8c5-b6ff7a417d13@suse.com>
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
+ <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan
+ Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>,  Shawn Anastasio
+ <sanastasio@raptorengineering.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?=
+ <roger.pau@citrix.com>,  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>,  "Daniel P. Smith"
+ <dpsmith@apertussolutions.com>
+Date: Fri, 09 Feb 2024 10:40:43 +0100
+In-Reply-To: <07e4b9b0-5ddd-4499-b280-bd5d583b8b8c@xen.org>
 References: 
 	<4887b2d91a4bf2e8b4b66f03964259651981403b.1706897023.git.oleksii.kurochko@gmail.com>
-	 <91e58646-5420-4e1c-a8c5-b6ff7a417d13@suse.com>
+	 <07e4b9b0-5ddd-4499-b280-bd5d583b8b8c@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
 MIME-Version: 1.0
 
-On Thu, 2024-02-08 at 17:42 +0100, Jan Beulich wrote:
-> On 02.02.2024 19:03, Oleksii Kurochko wrote:
+On Thu, 2024-02-08 at 21:30 +0000, Julien Grall wrote:
+> Hi Oleksii,
+Hi Julien,
+
+>=20
+> On 02/02/2024 18:03, Oleksii Kurochko wrote:
 > > Move the macros mentioned in the commit subject to their
 > > appropriate
 > > locations.
@@ -134,26 +137,9 @@ On Thu, 2024-02-08 at 17:42 +0100, Jan Beulich wrote:
 > >=20
 > > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 >=20
-> Acked-by: Jan Beulich <jbeulich@suse.com>
-> with one nit:
->=20
-> > --- a/xen/include/xen/cpumask.h
-> > +++ b/xen/include/xen/cpumask.h
-> > @@ -55,6 +55,7 @@
-> > =C2=A0 * for_each_present_cpu(cpu)		for-loop cpu over
-> > cpu_present_map
-> > =C2=A0 */
-> > =C2=A0
-> > +#include <xen/bug.h>
-> > =C2=A0#include <xen/bitmap.h>
-> > =C2=A0#include <xen/kernel.h>
-> > =C2=A0#include <xen/random.h>
->=20
-> I think everywhere else you nicely inserted new #include-s so respect
-> alphabetical ordering, just here the insertion would want to move one
-> line down. Likely easy to do while committing, if no other reason for
-> a v2 arises ...
-I'll be happy if it can be done during committing.
-
+> Acked-by: Julien Grall <jgrall@amazon.com>
 Thanks.
+
+~ Oleksii
+
 
