@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC77C48260
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Feb 2024 12:17:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.679850.1057659 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6EBBC4829A
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Feb 2024 13:07:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.679893.1057668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rZrjK-0000EL-OU; Tue, 13 Feb 2024 12:17:42 +0000
+	id 1rZsVO-0008Rh-Bd; Tue, 13 Feb 2024 13:07:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 679850.1057659; Tue, 13 Feb 2024 12:17:42 +0000
+Received: by outflank-mailman (output) from mailman id 679893.1057668; Tue, 13 Feb 2024 13:07:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rZrjK-0000EE-Lh; Tue, 13 Feb 2024 12:17:42 +0000
-Received: by outflank-mailman (input) for mailman id 679850;
- Tue, 13 Feb 2024 11:21:36 +0000
+	id 1rZsVO-0008Ra-8h; Tue, 13 Feb 2024 13:07:22 +0000
+Received: by outflank-mailman (input) for mailman id 679893;
+ Tue, 13 Feb 2024 13:07:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DGbd=JW=gmail.com=breno.debian@srs-se1.protection.inumbo.net>)
- id 1rZqr2-0004Sn-SF
- for xen-devel@lists.xenproject.org; Tue, 13 Feb 2024 11:21:36 +0000
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
- [209.85.208.53]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0b931cc6-ca62-11ee-98f5-efadbce2ee36;
- Tue, 13 Feb 2024 12:21:34 +0100 (CET)
-Received: by mail-ed1-f53.google.com with SMTP id
- 4fb4d7f45d1cf-55a5e7fa471so5527101a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 13 Feb 2024 03:21:34 -0800 (PST)
-Received: from localhost (fwdproxy-lla-005.fbsv.net.
- [2a03:2880:30ff:5::face:b00c]) by smtp.gmail.com with ESMTPSA id
- vw3-20020a170907a70300b00a3c66ac512asm1191224ejc.214.2024.02.13.03.21.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 03:21:33 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=W/Jz=JW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rZsVN-0008RU-8k
+ for xen-devel@lists.xenproject.org; Tue, 13 Feb 2024 13:07:21 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d0dabed7-ca70-11ee-98f5-efadbce2ee36;
+ Tue, 13 Feb 2024 14:07:18 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40fb3b5893eso34095165e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Feb 2024 05:07:19 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ hi7-20020a05600c534700b00410be9b8b96sm7140957wmb.37.2024.02.13.05.07.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Feb 2024 05:07:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,65 +47,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b931cc6-ca62-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: d0dabed7-ca70-11ee-98f5-efadbce2ee36
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1707829638; x=1708434438; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Sd18wvrol6QQ+0l525rSim8sbUKG0K0n74QLzBOifzc=;
+        b=UacjFxd6eSQMp7NQLGX+3RqcyJIAt9OCSLKY8LGTDdGlzJOZ5s6AHL5Q+asNpRuNos
+         S87zbpEOFxPMLNClnB+0nnPPXaqAuFvsHpvF7ACaWVdbYF/1dTqrcqAJut53EKMZ+LFq
+         uLWvQ25o9oFGMu96FCbI/LMfuGRgELUFLxZAZkh8l0+bsWLCh3HvZuKdkPeswdKFMpOz
+         moZ9gYTV378wQ3PFHD/+zv+G1kZMrHccBNqKA0ExkbtqMjsKLAMajpPysYEQPVRK5Vnp
+         hs2dm2n1L5tir5h6W+P274dXEn7rwIJizZKxDYODfRGX0L7qua6Ek9zz/2LESw9DWizy
+         YchA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707823294; x=1708428094;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cuiaVQ6xHYwzgr9cteCqN0D6TVSa51dvKVi3pXWKJaE=;
-        b=iYT59SR82LjDRbcm+rFHvSLwzipnK53Fg/PhBv2zOF2sfUeb45KK+XF4nql6rrjZEh
-         d0H9tb9ud6SgmC+dhtGYWHRIIaNVyGuAXCaVHQMNKdSxqpbJacbn/frkADZIbbIb7OwD
-         3mnAJaQZjD4UhxXzjrqyDDZgzIuDAApFHVmIbHwDyCC1ufoWML8lkiqU5ptk2iA3+8ot
-         fgmDarmv18Ssbhu5C3Z6ibuh5K6f3VaslwBMf0obkCyFr897Wj3FonDDm5pCIhhRW3Rx
-         2JsYdW4xFywtE9/IiVafuyYc+bCUZ71PQvYLGYMihziaHThdJsWPX8pU0IkktaNGbDNR
-         2ZQA==
-X-Gm-Message-State: AOJu0Yzn/VvlilsCaX/14+IPJhZYt39/wmEHUwNbUlUAJxTah2nWa47t
-	KydpEC0+29D8OP+7ckSJCNHPGoPlGBeoj8ZcyLb6hGgaQZEP7w+c
-X-Google-Smtp-Source: AGHT+IEv53qb/jU/q9VIX3Gx9EPG0zlDnaS4y/im5dQM+F2RnxQvedrUeNJK514EezeM/+8URcxAEw==
-X-Received: by 2002:a17:906:4144:b0:a3c:82ed:5b46 with SMTP id l4-20020a170906414400b00a3c82ed5b46mr5065767ejk.59.1707823293939;
-        Tue, 13 Feb 2024 03:21:33 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCUz0v9+Mi6zmFUyJoPQn8nNZKJnBjRetK0SFlIJ9CNm4LQ1UNy0UiKtLBlEEtGLEbzUxs3YRg/JptpG2rh0DJINfUNyx2noHYPNlsDiQmwFHDXWKoZSgsnQ4RZtu7I6wjLW58bcNXhXpRMADteqtr+y93bZTemChK1U2JwCroTv22PFl2FuYECkpkBvL7i0HoO2Ut3SJY1eF7os1cD1p9uRly8yNiU0MyAMaMNhc1e7QX9TrPkHGBrPIq/r0sV6P1rBiw2HpoB8NIQE0rfgYl/BO201iAj6M7U5m2OsRA==
-From: Breno Leitao <leitao@debian.org>
-To: kuba@kernel.org,
-	davem@davemloft.net,
-	pabeni@redhat.com,
-	edumazet@google.com,
-	Wei Liu <wei.liu@kernel.org>,
-	Paul Durrant <paul@xen.org>
-Cc: netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	horms@kernel.org,
-	xen-devel@lists.xenproject.org (moderated list:XEN NETWORK BACKEND DRIVER)
-Subject: [PATCH net 1/7] net: fill in MODULE_DESCRIPTION()s for xen-netback
-Date: Tue, 13 Feb 2024 03:21:16 -0800
-Message-Id: <20240213112122.404045-2-leitao@debian.org>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20240213112122.404045-1-leitao@debian.org>
-References: <20240213112122.404045-1-leitao@debian.org>
+        d=1e100.net; s=20230601; t=1707829638; x=1708434438;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Sd18wvrol6QQ+0l525rSim8sbUKG0K0n74QLzBOifzc=;
+        b=lsG3jIOA5GSoWIeNO3aZ18iF4swBwvCHmZJBYg/11s+7zoklLIQSHNwGaY7T4ETXHK
+         rNcBNzxvzgG/5v4bFjKstpLMU4x1xiVyyocoyGX5ue6ZLxnuXKYLi0h/iND6y+UG0e1E
+         BUsSfckPkqHGLbfE21U6axD7SamAA6qqaJ3uj7oiS18pNMTstrCtdulRGOWeO40u+P0v
+         NIq+FVSEZgr69yfDybntdeFgu2eTMSQ/kNaiY2Jp2AE2pjyUmtZwSaHLhR+7wJ9dHNcJ
+         uRWKO1FwckxC8LgZMnRa7IXdjNL908rVvdoHQMH/mPBFu+slequxhO/rFVdnm9kdmt79
+         zD4w==
+X-Forwarded-Encrypted: i=1; AJvYcCU/JqPXl8zVgpztjZNtEYuouu/7hs0uhtDMW5YvFTpFKyK7GKHYcXcWJnknM/iBvj9QGId/D/rfMqVet7DCcDI/L1jE0OErQ4A+/+bnqHM=
+X-Gm-Message-State: AOJu0YyGqWVQbgiKYcaVQofoRnb+ZYyP3DD3FnzbohJd60XVeStGkL+7
+	LRlwBuD2OT2suMQcJZFbg2y9FdU3Ph3qHicmiecPs0sCUb/u7f5KsWcUlrqL9Q==
+X-Google-Smtp-Source: AGHT+IHF2bz+1gU3NCdTxSAzlHFdMJgOvqByXMvg8DYY9nFLuGACwqXJbFazgy7jqd+8HcXOWHM1SA==
+X-Received: by 2002:a05:600c:5190:b0:411:a596:a2ac with SMTP id fa16-20020a05600c519000b00411a596a2acmr2379849wmb.1.1707829638397;
+        Tue, 13 Feb 2024 05:07:18 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCVLx5DMliR3ShmZwHBYzspQgEwhYnk2RMLP4zqsT8Rp8yC2DPH03nA71rHaOFMsqiuzLnkYeGE8xBySOa0LbbW7q2poCW+Bg2b7bLWpw0u2rnPRXCuk1yWpM8T5g1oTQxL0BnuDgJFGmL3dVatAyUxjXDYUe1ahc+VWWm+NqZchr84SXn9zzHkJPlyHPDVDjWNMAjdgDsRe1gfTrQuu8coAD8oY0RQlFY5aKz5FH6CZ/hODjK5d0/17kBXX4/ymUxrVMxgcbBE0jUx5z5hnidExQCvSGieNYy+Xvq26qfVnRLL/yHYb9aA=
+Message-ID: <d6078dea-6bb4-447a-9d4e-5f223e3472b8@suse.com>
+Date: Tue, 13 Feb 2024 14:07:17 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 22/30] xen/riscv: define an address of frame table
+Content-Language: en-US
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1707146506.git.oleksii.kurochko@gmail.com>
+ <796853f19b883c474998ba97c1ee66cf224b1bde.1707146506.git.oleksii.kurochko@gmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <796853f19b883c474998ba97c1ee66cf224b1bde.1707146506.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-W=1 builds now warn if module is built without a MODULE_DESCRIPTION().
-Add descriptions to the Xen backend network module.
+On 05.02.2024 16:32, Oleksii Kurochko wrote:
+> Also, the patch adds some helpful macros that assist in avoiding
+> the redefinition of memory layout for each MMU mode.
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Signed-off-by: Breno Leitao <leitao@debian.org>
----
- drivers/net/xen-netback/netback.c | 1 +
- 1 file changed, 1 insertion(+)
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-diff --git a/drivers/net/xen-netback/netback.c b/drivers/net/xen-netback/netback.c
-index fab361a250d6..ef76850d9bcd 100644
---- a/drivers/net/xen-netback/netback.c
-+++ b/drivers/net/xen-netback/netback.c
-@@ -1778,5 +1778,6 @@ static void __exit netback_fini(void)
- }
- module_exit(netback_fini);
- 
-+MODULE_DESCRIPTION("Xen backend network device module");
- MODULE_LICENSE("Dual BSD/GPL");
- MODULE_ALIAS("xen-backend:vif");
--- 
-2.39.3
 
 
