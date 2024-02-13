@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7342C4829F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9FE1C48BC4
 	for <xen-devel@archiver.kernel.org>; Tue, 13 Feb 2024 22:33:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.680155.1058078 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.680153.1058058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ra1LV-0007Hv-Fv; Tue, 13 Feb 2024 22:33:45 +0000
+	id 1ra1LL-0006m3-RH; Tue, 13 Feb 2024 22:33:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 680155.1058078; Tue, 13 Feb 2024 22:33:45 +0000
+Received: by outflank-mailman (output) from mailman id 680153.1058058; Tue, 13 Feb 2024 22:33:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ra1LV-0007Hn-CU; Tue, 13 Feb 2024 22:33:45 +0000
-Received: by outflank-mailman (input) for mailman id 680155;
- Tue, 13 Feb 2024 22:33:44 +0000
+	id 1ra1LL-0006lw-OL; Tue, 13 Feb 2024 22:33:35 +0000
+Received: by outflank-mailman (input) for mailman id 680153;
+ Tue, 13 Feb 2024 22:33:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kFBu=JW=amd.com=stefano.stabellini@srs-se1.protection.inumbo.net>)
- id 1ra1LU-0006lq-6L
- for xen-devel@lists.xenproject.org; Tue, 13 Feb 2024 22:33:44 +0000
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20601.outbound.protection.outlook.com
- [2a01:111:f403:2409::601])
+ id 1ra1LJ-0006lq-Ry
+ for xen-devel@lists.xenproject.org; Tue, 13 Feb 2024 22:33:33 +0000
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on20601.outbound.protection.outlook.com
+ [2a01:111:f403:2405::601])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f10b30f7-cabf-11ee-8a4d-1f161083a0e0;
- Tue, 13 Feb 2024 23:33:42 +0100 (CET)
-Received: from MW4PR03CA0174.namprd03.prod.outlook.com (2603:10b6:303:8d::29)
- by MN6PR12MB8541.namprd12.prod.outlook.com (2603:10b6:208:47a::19)
+ id ea1af306-cabf-11ee-8a4d-1f161083a0e0;
+ Tue, 13 Feb 2024 23:33:32 +0100 (CET)
+Received: from BYAPR21CA0022.namprd21.prod.outlook.com (2603:10b6:a03:114::32)
+ by SJ2PR12MB7919.namprd12.prod.outlook.com (2603:10b6:a03:4cc::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.26; Tue, 13 Feb
- 2024 22:33:39 +0000
-Received: from MWH0EPF000971E3.namprd02.prod.outlook.com
- (2603:10b6:303:8d:cafe::dc) by MW4PR03CA0174.outlook.office365.com
- (2603:10b6:303:8d::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.41 via Frontend
- Transport; Tue, 13 Feb 2024 22:33:39 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.17; Tue, 13 Feb
+ 2024 22:33:29 +0000
+Received: from MWH0EPF000971E6.namprd02.prod.outlook.com
+ (2603:10b6:a03:114:cafe::7e) by BYAPR21CA0022.outlook.office365.com
+ (2603:10b6:a03:114::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.9 via Frontend
+ Transport; Tue, 13 Feb 2024 22:33:29 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MWH0EPF000971E3.mail.protection.outlook.com (10.167.243.70) with Microsoft
+ MWH0EPF000971E6.mail.protection.outlook.com (10.167.243.74) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7292.25 via Frontend Transport; Tue, 13 Feb 2024 22:33:39 +0000
+ 15.20.7292.25 via Frontend Transport; Tue, 13 Feb 2024 22:33:28 +0000
 Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 13 Feb
- 2024 16:33:38 -0600
+ 2024 16:33:27 -0600
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
  (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 13 Feb
- 2024 16:33:38 -0600
-Received: from smtp.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Tue, 13 Feb 2024 16:33:37 -0600
+ 2024 16:33:27 -0600
+Received: from ubuntu-20.04.2-arm64.shared (10.180.168.240) by
+ SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35 via Frontend Transport; Tue, 13 Feb 2024 16:33:26 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,92 +66,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f10b30f7-cabf-11ee-8a4d-1f161083a0e0
+X-Inumbo-ID: ea1af306-cabf-11ee-8a4d-1f161083a0e0
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mOwfAcMZPgHCWxG/koGBqR4f3sex3ECXOf/H6hVdb4rVQyYgDQ6mtxr9Z2GOprDQ7+vWanoftorv7YJkSopXVXVU+/AmjOnMMRaz1GWhVA74fyBCUMMhQG7HLCHO3H8EnraataC4R9zheSTffg55lBbf6zuK7XkSiR6S77UliKsQb23xxiG+UP6ZNsEz4iJ/MXvKOXWXM5YjLevydoomDmPK/qmsFkjtZh6GdDpmZkkABWrjdyFTV/mQkxupcw1PZMyCYyAVkdkm3PFwNnTAB7CdR8252v1+8toUzlTlIZFXGssQSX18grwYP22xjHPImpu+k6lmTGPxnjVnlm/ebA==
+ b=FSCe+JYEPgiprKCi3bFbNmeUzlMCwtW6FRSBzVVa1+f+q5/0+byzSyb4KW6obrZyY1v9BMkksFdwYnX8eGKf9+v+S14z1tHFQn2Zm1NN0udYSxJon38wBFtwMvQ9uPnI1IEoAJvl8jmQtW28RRuwvm10VFrSZI4JuCfP68MQyiEz2XvMTIUPwTE6EwsVAoUJBdjHgbyvb6pRdXChaFX9hZL+amkW+nZDprZKgc+Bw8WLRIcsvoXda/PSl/7EHpAETCRwhBSYLzRWZyo00690r0AM6RtvPdHA7PAYAH9TGLECz/ybPCyFgFM92zGcXK3Pcr4QhTn8FpBpxzx0mTzbdw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fMlULJhvmyTxrcJKAvuzeEpM4IUs0jtR0Nuwpoxpqos=;
- b=m2gllIaQRPdwmog3iuLQgUsehqvLIQIQDtj4gpEDrIzop8afxHCQXjhOB35Vrb9q/yGZj2eaCx/PZ/+tyN2i8AXGoC+KxmmPiSXZ05Da4d5YYxG6C2K6xG0BXFUwCn5dLI0jibQBCB7kJ2EtYVdzShXTTgG1pWarAlmf5Im0YqoZTT0Zf30JPDxooZUwojhKlWcfGoWjah70sJPxP5wfpMqOlFT9dn8tiugmlwR83tFk6yn7dEFPXLFbd/ptuanVchwIT+uCM0Hc8JvAz5ZF70ncyVON4M8MHu6wrLFzGu/Gu1kDBIQiEliewII0pEV409oY6Ie71gbdGG6KyBJpjQ==
+ bh=K2EGIVFayJXte1/ifsz9IeqstFIZA97IZnNrIWiSUO8=;
+ b=ffYN7oUEP/2JMO3/D4SKVIm8zGhQDCwVRP0hlCubxgkQsBrohtrcy9QVaa8eZ095EjJIMiBEVlyPw45j9QSBtvqpD67A8Sv2Gi1oezUHKk8D3QU+gjiO1Jq3lFC4wBhJtXmLOgCY1t1WCA5BEc4BkOqhhvWYzVNc3hxgW0Ka68VOu4dZYJou/MFWWXq31XsYO6BITbdqyeo4RtJjwn3Mm3Dt1lGFJ6S9ofaYtJiAl5Hd+1ER4FVdEFDPwXvuiBhr97R/HsdYh1/ihIEJK5SNZL8T66cEqBW2e9KJtynl15uksO2R3ZCknvfWIhKJfj6kyFE1MhZwTXbGBi+4AM29Zw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fMlULJhvmyTxrcJKAvuzeEpM4IUs0jtR0Nuwpoxpqos=;
- b=X7eLJEDNXlB6nzEFZESC94f81TK51C55nUd0LfKdkTSl54bs99YIpMDIsC4tLRS1iqq2kfl2UV/dKbn9Gcr/dM/v4RLdicUfL1zGCYH3ipYVY4cdg+ilVHi054wtO3svQgwQFba8tNw8UhVg4/2+QvuMQ/cgfmK7yZ47aVsyDQ0=
+ bh=K2EGIVFayJXte1/ifsz9IeqstFIZA97IZnNrIWiSUO8=;
+ b=0zifFnoNG5qvh6Ho1qg6ASJAAoQvuGWWNbtHsr9810xy1wSREV/kJBmNQDq7jxbld0ReDaUoQMTbc6+yDfb4PlSgChXG3rvRkqkreZo0pP3hLgSI7KnVOglvH8P80AuW7Uw/wLBZXrrDPkVKUILaoxzhkVP3Dt3EhndHilTZIug=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Date: Tue, 13 Feb 2024 14:33:25 -0800
 From: Stefano Stabellini <stefano.stabellini@amd.com>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: <xen-devel@lists.xenproject.org>
 CC: <stefano.stabellini@amd.com>, <andrew.cooper3@citrix.com>,
 	<jbeulich@suse.com>, <george.dunlap@citrix.com>, <julien@xen.org>,
 	<bertrannd.marquis@arm.com>, <roger.pau@citrix.com>,
 	<roberto.bagnara@bugseng.com>, <federico.serafini@bugseng.com>
-Subject: [PATCH v2 3/3] docs/misra/rules.rst: add rule 14.4
-Date: Tue, 13 Feb 2024 14:33:34 -0800
-Message-ID: <20240213223334.3693410-3-stefano.stabellini@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <alpine.DEB.2.22.394.2402131431070.1925432@ubuntu-linux-20-04-desktop>
-References: <alpine.DEB.2.22.394.2402131431070.1925432@ubuntu-linux-20-04-desktop>
+Subject: [PATCH v2] docs/misra/rules.rst update
+Message-ID: <alpine.DEB.2.22.394.2402131431070.1925432@ubuntu-linux-20-04-desktop>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="US-ASCII"
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E3:EE_|MN6PR12MB8541:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3da4ff8e-5b8a-499c-36bd-08dc2ce3d36e
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E6:EE_|SJ2PR12MB7919:EE_
+X-MS-Office365-Filtering-Correlation-Id: 00aaf083-51bb-4d79-af24-08dc2ce3ccd4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	HMqEZAmaelDMIsmHF6y+F9dPA0Qd4cWV6apIzEhAm4KJkQNFalJ2grwndN+/h/Jx+kWPbMxPkj1hcbAcTXr0ex/tkjPGVksvg3rGFc/AdegOHtUUFb8V46EOUmY2uVfgzn8qxJb3Czdcs4UuV8dsFbhK7vnb4BvffvRseI/SD6Dbp14+PYyhqO0cbQ0upL0OcwldN2ruX+qX2XWB5BTcM4yHyFmaprXwbnlBJ3uKNhislW8NxbIF76BgpukfBL/LxAy+doLsZz618Njl9Af4vDX5DRMtLbp9THhrQeG6RVx6bi4DYRTy81uBAdmkMgjfEjexinq1aWwmal6wUMHeQJxuu4k2MusGCo08w0Us3gLwwCYcDpJNBhqDrxq2ZJwQu6SK1g+SJyidknH2YrQ97i16uQUDfaU30EKCZqkzoRyFGwYXsUWs7gwTDS8OYONeTpr62AuwSiZcOm2hVhLh8ivwR7+kIEsvJFRpm/QHg6iPO0rYshigFMunu1L55OhUeEbaLIgp+hCpRlyWkEbJLWZeVE2Zhm0o8vArNIKW0KTLDp7nxno10pEja69H/KdMGvKwS5YqjOIQl3R06R0nGV4ieWiR+2NrFGRjhic8SIM0cCYuuZbNq5Unol7gXuWx
+	ZiEO4KT4b13Zdt0wO0WEfb7hdyagyVn3c89Yuy3aspG892wVYyExd4/BjnCQ4rfS2HHaGCHgCvuQ2K7hTT/hW0h4SiUtqGdQ0nL6EykzNt4ciC97LORo1PxM6aCzHs6Kh/tqhHDPRgt3V++VxdCoXi5PVXmiXG+Ls9QjWlidm51aSVaXzhItIK6omBALnleMv0WlNj2paRUPBrNsjr/wMfoYOautU2z6S2C2Ad/JBX+ADTdmGSwm9sYvIlOZBceeeVbna00sEucI2K1neI26HGiuU4lk8hXp5gUoT4myKW9AnwuUr4nrV6rnWXkkl87fegXGZUkjY23cpOIZCSlgbmdwcCjE87tzNsRsNOFGxJP+IEoAfwjZuY8T+LBQiKuikUxk2ALY/s9AOrnkNh/x06kJKE8hQQHMvfDjUb8XeKfVhJU1ND5QTGvP74pXj76NE8uVdcjTsx0eG6k8DHpr8xhZmqrEkfmV1+EsB7OFemBMeqRVVVDVaG1v1y6uFX3qLtVsvgXiwOfgOl8IJtmUCnAFRaYcZOUcvb6KIr03OV0CRrHcux5Zm1WBT+EOpQp9WQHKaeZFsEQVZyU2FAwFNqr8S4kV+Xa/X22l68rPPIA=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(396003)(376002)(136003)(39860400002)(230922051799003)(1800799012)(186009)(82310400011)(451199024)(64100799003)(40470700004)(46966006)(36840700001)(2906002)(5660300002)(4326008)(41300700001)(8936002)(44832011)(8676002)(356005)(86362001)(82740400003)(81166007)(36756003)(2616005)(54906003)(316002)(6916009)(336012)(6666004)(426003)(1076003)(70586007)(70206006)(478600001)(26005);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(7916004)(396003)(39860400002)(136003)(376002)(346002)(230922051799003)(82310400011)(64100799003)(451199024)(186009)(1800799012)(46966006)(36840700001)(40470700004)(4326008)(8936002)(44832011)(8676002)(15650500001)(5660300002)(33716001)(336012)(426003)(83380400001)(81166007)(558084003)(26005)(356005)(70206006)(86362001)(82740400003)(6916009)(70586007)(316002)(54906003)(9686003)(2906002)(478600001)(41300700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2024 22:33:39.4619
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2024 22:33:28.3894
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3da4ff8e-5b8a-499c-36bd-08dc2ce3d36e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 00aaf083-51bb-4d79-af24-08dc2ce3ccd4
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000971E3.namprd02.prod.outlook.com
+	MWH0EPF000971E6.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8541
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7919
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
----
- docs/misra/rules.rst | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Hi all,
 
-diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
-index 931158b354..3e6f94d7bd 100644
---- a/docs/misra/rules.rst
-+++ b/docs/misra/rules.rst
-@@ -468,6 +468,15 @@ maintainers if you want to suggest a change.
- 
-        while(0) and while(1) and alike are allowed.
- 
-+   * - `Rule 14.4 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_14_04.c>`_
-+     - Required
-+     - The controlling expression of an if-statement and the controlling
-+       expression of an iteration-statement shall have essentially
-+       Boolean type
-+     - Automatic conversions of integer types to bool are permitted.
-+       Automatic conversions of pointer types to bool are permitted.
-+       This rule still applies to enum types.
-+
-    * - `Rule 16.3 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_16_03.c>`_
-      - Required
-      - An unconditional break statement shall terminate every
--- 
-2.25.1
+Update docs/misra/rules.rst to reflect the MISRA C rules accepted in the
+last couple of months.
 
+Cheers,
+
+Stefano
 
