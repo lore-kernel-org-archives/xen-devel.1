@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 309DBC48BC1
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Feb 2024 11:42:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.680622.1058683 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E637C48BEB
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Feb 2024 11:46:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.680646.1058692 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raDeR-0006nM-78; Wed, 14 Feb 2024 11:42:07 +0000
+	id 1raDiB-0000EL-VO; Wed, 14 Feb 2024 11:45:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 680622.1058683; Wed, 14 Feb 2024 11:42:07 +0000
+Received: by outflank-mailman (output) from mailman id 680646.1058692; Wed, 14 Feb 2024 11:45:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raDeR-0006n7-23; Wed, 14 Feb 2024 11:42:07 +0000
-Received: by outflank-mailman (input) for mailman id 680622;
- Wed, 14 Feb 2024 11:42:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1raDiB-0000EE-Sg; Wed, 14 Feb 2024 11:45:59 +0000
+Received: by outflank-mailman (input) for mailman id 680646;
+ Wed, 14 Feb 2024 11:45:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WArD=JX=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1raDeQ-0006Bc-07
- for xen-devel@lists.xenproject.org; Wed, 14 Feb 2024 11:42:06 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 13158367-cb2e-11ee-98f5-efadbce2ee36;
- Wed, 14 Feb 2024 12:42:04 +0100 (CET)
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2d0d7985dfdso75380661fa.2
- for <xen-devel@lists.xenproject.org>; Wed, 14 Feb 2024 03:42:04 -0800 (PST)
-Received: from localhost ([213.195.118.74]) by smtp.gmail.com with ESMTPSA id
- bl20-20020a05620a1a9400b007871de8ec59sm1213626qkb.129.2024.02.14.03.42.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Feb 2024 03:42:03 -0800 (PST)
+ <SRS0=4Sn1=JX=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1raDiA-0000E8-6J
+ for xen-devel@lists.xenproject.org; Wed, 14 Feb 2024 11:45:58 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9dd9986c-cb2e-11ee-8a4d-1f161083a0e0;
+ Wed, 14 Feb 2024 12:45:57 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a38271c0bd5so684742966b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Feb 2024 03:45:57 -0800 (PST)
+Received: from [10.80.67.149] (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ s22-20020a170906285600b00a3d6590e4d7sm98842ejc.84.2024.02.14.03.45.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Feb 2024 03:45:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,91 +47,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13158367-cb2e-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 9dd9986c-cb2e-11ee-8a4d-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1707910924; x=1708515724; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GJNvqG2IGk9PsE23BxVL4PP6tdgbjCcG8XCSUoGj9SA=;
-        b=fYam6ZkLBgALIdNuWAFx7UiX271DdFtImeyeOUyx0kknu/6atDJK797eneyGEVVYhS
-         Re7FTwNIL6a7pRFuGgV2Iyr+2hpPlEB7IXFqUl91lG075/qjkC0lMAiyo+yDzpdRYj7E
-         dH2BKL9+62Ej1Omt6nIJkUIPx44P07ojnFS/4=
+        d=citrix.com; s=google; t=1707911157; x=1708515957; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=w/Mu3JHm0P4wjycZ6WMNTmkQvj92o0r1X1GhbBbxUyM=;
+        b=Mgbf4zoHumiITNIOsF+rLnHDAs8bDXi9LORQPDvLXusjyJD+paF+5RczfQVuz0q3sg
+         Sbx1Z9PtEY6fftKGUbUoXTMCh0Yd9badFGG4JU32/psk604cslQwY0/nWFzpPWKPL63T
+         FrTmWvphXfAHc+CyOMMq3M6KXBMObXfk/d1ho=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707910924; x=1708515724;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=GJNvqG2IGk9PsE23BxVL4PP6tdgbjCcG8XCSUoGj9SA=;
-        b=Jv1OUFNCs97A6mBuOwtiX8IwfECfW+cxMgtARfOKdbg2I09j5QnwKkGSmdrSJot9Yo
-         fvym4KYl37Zbb+HKlqKILlXnPuLn4CkwTs1wEIq+Pq0VabNapjYSYBT44eFEwW5sdHhh
-         JE3R5NwmPgUy6z5JenAXkSARBZWWtacd/GMsz1cZ3XXBQHYfiDaTNtGotEVobFMqQt/2
-         5+n1EDtMe8HXspF77yEV7Ju5Tzerm15h+WMBUnDaJujgdKkMpNTidvJRr5f797q/w/CQ
-         ZpEi/FA6DWJEcbyZLlIphEI04JRhEQIop7w2AIYDDDFx0Q6B3lsi0/9BYzzmPldanmik
-         zXQg==
-X-Gm-Message-State: AOJu0YwNYjinrEf71GABLCv30e9q9xxP6NHdHcR/nxqbKtKKfV6Oi9oZ
-	6jXy6f7JvR0ER0b/TQlDMgAkSpO9mCuBBhA6g8pb5qToX6b6s+yRRxPgxmdQYrZoB9zCEJJQbm7
-	V
-X-Google-Smtp-Source: AGHT+IERu49AGLIkPi283NJAq1+/A4S0ucosD9AQdE9Pv8SPP/1s0udEm7HZ9T+ks4n26Nx+Dh+bSQ==
-X-Received: by 2002:a05:651c:1425:b0:2d0:aa28:6f77 with SMTP id u37-20020a05651c142500b002d0aa286f77mr1534669lje.45.1707910923934;
-        Wed, 14 Feb 2024 03:42:03 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCUiClLFOh55PWam1Jc8L+bOL+KWodINot4ElxIAPkcWyyWduLUh/Prog/oIShPDXpmPyM3yEHr7dTmShha8Q3352O8rjla6S86V9p2imJdeYf6w26ogCW+bDGotQ1PWpRU9QYo/3P1p28QE3F9akc6c0XsZnqZDq11Gfk7rmbmUlusoxxZmcFHZ6gcDyeeTzaTBbc1XbKZZoEFkRSmCp1gcSLuILQsOZvtiYQ==
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 5/5] mm: add the __must_check attribute to {gfn,mfn}_add()
-Date: Wed, 14 Feb 2024 11:37:41 +0100
-Message-ID: <20240214103741.16189-6-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240214103741.16189-1-roger.pau@citrix.com>
-References: <20240214103741.16189-1-roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1707911157; x=1708515957;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=w/Mu3JHm0P4wjycZ6WMNTmkQvj92o0r1X1GhbBbxUyM=;
+        b=TTCEuloNAHVz0x3kfaMUyOM0OBVbPQKzULBaEDVjXtS6bR3eg5hN8BW3QsqupBXiXG
+         XAdMdTQLMiMgaGnypRC251Umrxw6Y2F+pf2BXsGcm6sQWVqM4z+3roS6ihOIhheBpVGA
+         ACrjY2B8k7Y4EbM+8Nje37xp3oAS6rRwY1g7JpHs1w7XxVJdoFK5DKYCXUrxAw2GOGVa
+         aPaDlgJUmJY+R0WF58MXC49EstX63stcRN8eEezbxitwMMhYNDbfNXH01QNTOf5AFLs+
+         WEqq8L9fvoYdxQ4EJmVekzDZKjcpXXMb3BbExLJ/6kzQiCqgdf3at/8ik18xWevymRWx
+         Wilw==
+X-Gm-Message-State: AOJu0YwoTfTXkUqNelOcQA5IZuvLUOx3s41GdsbStkZCTlN62cN98x6C
+	D1PlKZUyd4pQ0hnuZEJ/fVVuMKvzRkLFyQHvV0unXLYQXVBbdGz3YtAzgm7jMls=
+X-Google-Smtp-Source: AGHT+IHBHws9hnAQs/21HEXnOV9LVtBy31PavabBJuaj1V/U/poOWA7qiTU93uV/O1IfJKvJjOy5/g==
+X-Received: by 2002:a17:906:dc0a:b0:a3c:c980:5936 with SMTP id yy10-20020a170906dc0a00b00a3cc9805936mr1722493ejb.24.1707911156876;
+        Wed, 14 Feb 2024 03:45:56 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCUm87J+Fx14s8ChPQl/T6DKxtoD7gX1Xc1TPuV6lwXF2azO1Ebgm5YdR78n9regKIMlwSW30ieN2hXohYsOqnNMVUm+QLwHL8IEjpgyHoLS882LsdAy/TJEvMIgq9LQ7vZGEKBp00illLGl+Am92Agf0Kql4+3frpytGzjnsj9uM9AH7X81XUgR5YchVfaNfjAWCv18Tw==
+Message-ID: <046415d5-d4f4-4870-a588-60637ea3bc3a@citrix.com>
+Date: Wed, 14 Feb 2024 11:45:56 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] tools/ocaml: Add missing vmtrace_buf_kb field
+To: Jan Beulich <jbeulich@suse.com>,
+ Christian Lindig <christian.lindig@cloud.com>, =?UTF-8?Q?Petr_Bene=C5=A1?=
+ <w1benny@gmail.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, David Scott
+ <dave@recoil.org>, Wei Liu <wl@xen.org>,
+ Anthony PERARD <anthony.perard@citrix.com>
+References: <9b9909c9e93cb540b3488c784935acc2bc9e071e.1707343396.git.w1benny@gmail.com>
+ <3A858D7F-C953-4EF0-8919-AE96D6105AB1@cloud.com>
+ <01b0d902-1903-4618-ad43-f625e57b61e1@suse.com>
+Content-Language: en-GB
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <01b0d902-1903-4618-ad43-f625e57b61e1@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It's not obvious from the function itself whether the incremented value will be
-stored in the parameter, or returned to the caller.  That has leads to bugs in
-the past as callers assume the incremented value is stored in the parameter.
+On 14/02/2024 7:11 am, Jan Beulich wrote:
+> On 08.02.2024 10:13, Christian Lindig wrote:
+>>> On 7 Feb 2024, at 22:04, Petr Beneš <w1benny@gmail.com> wrote:
+>>> Add the missing `vmtrace_buf_kb` field to the OCaml bindings to match the
+>>> vm.cfg configuration, correcting an oversight from its initial introduction.
+>>>
+>>> Signed-off-by: Petr Beneš <w1benny@gmail.com>
+>> Acked-by: Christian Lindig <christian.lindig@cloud.com>
+>>
+>> This looks correct from an OCaml perspective. Why was the new field added in the middle of the record type domctl_create_config and thus forcing changes to the index of fields coming later in the record versus just appending the new field to the record type?
+>>
+>> The critical bit is using the correct type in "Int32_val(VAL_VMTRACE_BUF_KB)” that matches the type "vmtrace_buf_kb: int32;” - which it does.
+> Is this then perhaps also lacking a
+>
+> Fixes: 45ba9a7d7688 ("tools/[lib]xl: Add vmtrace_buf_size parameter")
+>
+> and hence wanting backporting?
 
-Add the __must_check attribute to the function to easily spot callers that
-don't consume the returned value, which signals an error in the caller logic.
+It ought to have been part of that at the time, but I suggest not
+backporting.
 
-No functional change intended.
+API changes in Ocaml are all breaking (module compatibility is checked
+by hash).
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/include/xen/mm-frame.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Xapi is the only consumer of this interface.  I've fixed up the build
+against staging, but we're not going to be running KFX under Xapi any
+time soon.
 
-diff --git a/xen/include/xen/mm-frame.h b/xen/include/xen/mm-frame.h
-index 922ae418807a..c25e836f255a 100644
---- a/xen/include/xen/mm-frame.h
-+++ b/xen/include/xen/mm-frame.h
-@@ -23,7 +23,7 @@ TYPE_SAFE(unsigned long, mfn);
- #undef mfn_x
- #endif
- 
--static inline mfn_t mfn_add(mfn_t mfn, unsigned long i)
-+static inline mfn_t __must_check mfn_add(mfn_t mfn, unsigned long i)
- {
-     return _mfn(mfn_x(mfn) + i);
- }
-@@ -62,7 +62,7 @@ TYPE_SAFE(unsigned long, gfn);
- #undef gfn_x
- #endif
- 
--static inline gfn_t gfn_add(gfn_t gfn, unsigned long i)
-+static inline gfn_t __must_check gfn_add(gfn_t gfn, unsigned long i)
- {
-     return _gfn(gfn_x(gfn) + i);
- }
--- 
-2.43.0
+Ultimately it's Christian's call.
 
+~Andrew
 
