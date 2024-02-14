@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0D43C48BC3
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Feb 2024 16:06:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.681052.1059597 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5BE6C48BC3
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Feb 2024 16:07:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.681054.1059607 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raHlh-0000Gp-8B; Wed, 14 Feb 2024 16:05:53 +0000
+	id 1raHmn-0000no-N1; Wed, 14 Feb 2024 16:07:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 681052.1059597; Wed, 14 Feb 2024 16:05:53 +0000
+Received: by outflank-mailman (output) from mailman id 681054.1059607; Wed, 14 Feb 2024 16:07:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raHlh-0000Gi-4e; Wed, 14 Feb 2024 16:05:53 +0000
-Received: by outflank-mailman (input) for mailman id 681052;
- Wed, 14 Feb 2024 16:05:51 +0000
+	id 1raHmn-0000nk-Ix; Wed, 14 Feb 2024 16:07:01 +0000
+Received: by outflank-mailman (input) for mailman id 681054;
+ Wed, 14 Feb 2024 16:07:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WArD=JX=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1raHlf-0000Ga-FW
- for xen-devel@lists.xenproject.org; Wed, 14 Feb 2024 16:05:51 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
+ <SRS0=xNvu=JX=actia.se=john.ernberg@srs-se1.protection.inumbo.net>)
+ id 1raHmm-0000fn-Uj
+ for xen-devel@lists.xenproject.org; Wed, 14 Feb 2024 16:07:00 +0000
+Received: from mail.actia.se (mail.actia.se [212.181.117.226])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ec0879f7-cb52-11ee-8a4d-1f161083a0e0;
- Wed, 14 Feb 2024 17:05:50 +0100 (CET)
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2d073b54359so82906611fa.0
- for <xen-devel@lists.xenproject.org>; Wed, 14 Feb 2024 08:05:50 -0800 (PST)
-Received: from localhost ([213.195.118.74]) by smtp.gmail.com with ESMTPSA id
- q19-20020ac84513000000b0042c6e5192e6sm2099376qtn.60.2024.02.14.08.05.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Feb 2024 08:05:49 -0800 (PST)
+ id 15bb1de6-cb53-11ee-8a4d-1f161083a0e0;
+ Wed, 14 Feb 2024 17:07:00 +0100 (CET)
+Received: from S036ANL.actianordic.se (10.12.31.117) by S036ANL.actianordic.se
+ (10.12.31.117) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 14 Feb
+ 2024 17:06:59 +0100
+Received: from S036ANL.actianordic.se ([fe80::e13e:1feb:4ea6:ec69]) by
+ S036ANL.actianordic.se ([fe80::e13e:1feb:4ea6:ec69%4]) with mapi id
+ 15.01.2507.035; Wed, 14 Feb 2024 17:06:59 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,92 +45,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec0879f7-cb52-11ee-8a4d-1f161083a0e0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1707926750; x=1708531550; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Ee2PqXgtqlaFAmPhieq1rCz/wnguvI78ivIy080wfc8=;
-        b=BaQRnTfp2a1IXrkxgDdSHcxxFcQexVBIvcn6InJSiUvdScTBuN9bjtuoLwQW+9KzE5
-         I24VfDb+AsDmpyLQRfVyP/hJm0LbtRKUSyM4iw4cB578hNMeCIH+0DdRTchPQdPOukz8
-         VOb3HKJ7MLGjWwKZ1V4mjEHBUdUmvwKAmiylo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707926750; x=1708531550;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ee2PqXgtqlaFAmPhieq1rCz/wnguvI78ivIy080wfc8=;
-        b=uA1h2cEMQrQuCcIJCOGBx+rVEhLtnEMMn9cQTV832Y0gzgFTXwdmzqYfR82/1b18i2
-         X/yWXPEst1bqcBl5BxIP4wD10Vd1YAQFT65izsWGzlRLzjVTRdMV+dGoKI8Yu0u4bTHQ
-         NqEO7ZU7tQdYNjzN3Fujgf97fkT7j1ATNvK+zo3UBnX7nHGNoXX3BciwHyO2xa6UUDhv
-         FI0bx6LGpzx/WPb2bXUTsZxI2eRICAUfqYCvf/f+cUJVaNd82XLhdy2mxt+oWdZM2115
-         S94+AcI5zLcTgrK5j5vH96PlhIh8eFZVpdm6CmJnKZZFxAWBG0mNSBAk7Mg5z1DiMKwL
-         yAGA==
-X-Forwarded-Encrypted: i=1; AJvYcCVohhLd6OZeXEU4h6mZ4A82TjrjCD+lBxZbf7txHpfzGkJhRWG/hriVsPMNXgX9/z5iSdqAOytrb8j9YypJ746iRiTVJstD9A2CEKSIC7E=
-X-Gm-Message-State: AOJu0YyfFp7vYJk2QnDn8oGyHSBgOwQn9XukH1CNHDNts9BIfllRwAYw
-	COejGpLGtrVIh7zh2o0k+AakFj8LUzV1Xt9WcGNJamRcVfPpjnt5qLWe79L6klA=
-X-Google-Smtp-Source: AGHT+IHRWxlXoOK62vctLZxPl61VPJarAdCAPHPH+0kN2sfqq03shMl6M1jmieBJUtbNM8PvaxlrIg==
-X-Received: by 2002:a2e:a452:0:b0:2d1:1c11:38b with SMTP id v18-20020a2ea452000000b002d11c11038bmr1253094ljn.13.1707926749662;
-        Wed, 14 Feb 2024 08:05:49 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCWPTgJ42MSi5x5/UAPm56vwhiDtwZFUEZweHmgrxKlzZgeZ6i9JJX5O935ukZHL8/C3sSIGs212weuQ6Goh/8pFgXFZdAo/jHcNNfKVOEAtLjo/U8ZT5F/kWu1WkidyKARj/Hu6AeaAnvY3rde2ECgtw10k/VI=
-Date: Wed, 14 Feb 2024 17:05:47 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org,
-	Wei Liu <wl@xen.org>, Frediano Ziglio <frediano.ziglio@cloud.com>
-Subject: Re: [PATCH v2] Reduce assembly code size of exception entry points
-Message-ID: <Zczk2-YaeOwk1MUI@macbook>
-References: <20240214103558.13655-1-frediano.ziglio@cloud.com>
- <ZczWAg-zmoLXiWAr@macbook>
- <ce3ae020-92b2-44fd-8055-694e374f68a9@suse.com>
- <ZczcPhpcWuAO7OYh@macbook>
- <7f92673f-fa33-478f-ab27-bbec2ead5c40@citrix.com>
+X-Inumbo-ID: 15bb1de6-cb53-11ee-8a4d-1f161083a0e0
+From: John Ernberg <john.ernberg@actia.se>
+To: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
+	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Peng
+ Fan" <peng.fan@nxp.com>, Jonas Blixt <jonas.blixt@actia.se>, John Ernberg
+	<john.ernberg@actia.se>
+Subject: [PATCH v2 0/2] Xen: ARM: Improved NXP iMX8 platform support
+Thread-Topic: [PATCH v2 0/2] Xen: ARM: Improved NXP iMX8 platform support
+Thread-Index: AQHaX1/WsH0KS4ZeU0CO5OqKnDdxdQ==
+Date: Wed, 14 Feb 2024 16:06:59 +0000
+Message-ID: <20240214160644.3418228-1-john.ernberg@actia.se>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: git-send-email 2.43.0
+x-originating-ip: [10.12.12.30]
+x-esetresult: clean, is OK
+x-esetid: 37303A2958D72955607464
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <7f92673f-fa33-478f-ab27-bbec2ead5c40@citrix.com>
 
-On Wed, Feb 14, 2024 at 03:53:24PM +0000, Andrew Cooper wrote:
-> On 14/02/2024 3:29 pm, Roger Pau Monné wrote:
-> > On Wed, Feb 14, 2024 at 04:08:12PM +0100, Jan Beulich wrote:
-> >> On 14.02.2024 16:02, Roger Pau Monné wrote:
-> >>> On Wed, Feb 14, 2024 at 10:35:58AM +0000, Frediano Ziglio wrote:
-> >>>> We just pushed a 8-bytes zero and exception constants are
-> >>>> small so we can just write a single byte saving 3 bytes for
-> >>>> instruction.
-> >>>> With ENDBR64 this reduces the size of many entry points from 32 to
-> >>>> 16 bytes (due to alignment).
-> >>>> Similar code is already used in autogen_stubs.
-> >>> Will using movb instead of movl have any performance impact?  I don't
-> >>> think we should trade speed for code size, so this needs to be
-> >>> mentioned in the commit message.
-> >> That's really what the last sentence is about (it could have been said
-> >> more explicitly though): If doing so on interrupt paths is fine, it
-> >> ought to be fine on exception paths as well.
-> > I might view it the other way around: maybe it's autogen_stubs that
-> > needs changing to use movl instead of movb for performance reasons?
-> >
-> > I think this needs to be clearly stated, and ideally some kind of
-> > benchmarks should be provided to demonstrate no performance change if
-> > there are doubts whether movl and movb might perform differently.
-> 
-> The push and the mov are overlapping stores either way.  Swapping
-> between movl and movb will make no difference at all.
-> 
-> However, the shorter instruction ends up halving the size of the entry
-> stub when alignment is considered, and that will make a marginal
-> difference.  Fewer cache misses (to a first approximation, even #PF will
-> be L1-cold), and better utilisation of branch prediction resource (~>
-> less likely to be BP-cold).
-> 
-> I doubt you'll be able to see a difference without perf counters
-> (whatever difference is covered here will be dwarfed by the speculation
-> workarounds), but a marginal win is still a win.
+The iMX lpuart driver added at 44e17aa60d47 ("xen/arm: Add i.MX lpuart driv=
+er")
+is not enough to boot a Linux based dom0 when certain drivers, such as the
+watchdog driver, are enabled.
 
-I'm happy just stating in the commit message that the change doesn't
-make any performance difference.
+We're also fixing compatibles in imx-lpuart to allow Xen to use the UART
+on the QXP variant as well.
 
-Thanks, Roger.
+NOTE:
+There's still an open point regarding the watchdog from v1, but I wanted
+to post this series to show the filtering changes mostly because they also
+clarify what exists and what we can definitely get away with blocking /
+ignoring out of all the SMC SIP calls.
+
+v2: (See each path for complete changelog)
+ - Added SIP call filtering (Julien Grall)
+ - Replace lpuart compatible instead (Julien Grall)
+
+v1: https://lore.kernel.org/xen-devel/20240131114952.305805-1-john.ernberg@=
+actia.se
+
+John Ernberg (2):
+  xen/arm: Add imx8q{m,x} platform glue
+  xen/drivers: imx-lpuart: Replace iMX8QM compatible with iMX8QXP
+
+ xen/arch/arm/platforms/Makefile |   1 +
+ xen/arch/arm/platforms/imx8qm.c | 143 ++++++++++++++++++++++++++++++++
+ xen/drivers/char/imx-lpuart.c   |   2 +-
+ 3 files changed, 145 insertions(+), 1 deletion(-)
+ create mode 100644 xen/arch/arm/platforms/imx8qm.c
+
+--=20
+2.43.0
 
