@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6611CC4829E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Feb 2024 06:59:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.681300.1060064 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259B1C48BEF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Feb 2024 06:59:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.681304.1060078 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raVia-0003kv-Mr; Thu, 15 Feb 2024 06:59:36 +0000
+	id 1raVie-0004iN-S6; Thu, 15 Feb 2024 06:59:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 681300.1060064; Thu, 15 Feb 2024 06:59:36 +0000
+Received: by outflank-mailman (output) from mailman id 681304.1060078; Thu, 15 Feb 2024 06:59:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raVia-0003ja-EF; Thu, 15 Feb 2024 06:59:36 +0000
-Received: by outflank-mailman (input) for mailman id 681300;
- Thu, 15 Feb 2024 06:59:35 +0000
+	id 1raVie-0004hX-Os; Thu, 15 Feb 2024 06:59:40 +0000
+Received: by outflank-mailman (input) for mailman id 681304;
+ Thu, 15 Feb 2024 06:59:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4buu=JY=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1raVga-0003NA-08
- for xen-devel@lists.xenproject.org; Thu, 15 Feb 2024 06:57:32 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ id 1raVgl-0003NA-5X
+ for xen-devel@lists.xenproject.org; Thu, 15 Feb 2024 06:57:43 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7d0fac3e-cbcf-11ee-8a4d-1f161083a0e0;
- Thu, 15 Feb 2024 07:57:31 +0100 (CET)
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:98])
+ id 83c200a5-cbcf-11ee-8a4d-1f161083a0e0;
+ Thu, 15 Feb 2024 07:57:42 +0100 (CET)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id ECE0A21FF3;
- Thu, 15 Feb 2024 06:57:30 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 435131F854;
+ Thu, 15 Feb 2024 06:57:42 +0000 (UTC)
 Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id AD63E1346A;
- Thu, 15 Feb 2024 06:57:30 +0000 (UTC)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 0E1961346A;
+ Thu, 15 Feb 2024 06:57:42 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap2.dmz-prg2.suse.org with ESMTPSA id lNDEKNq1zWWeSQAAn2gu4w
- (envelope-from <jgross@suse.com>); Thu, 15 Feb 2024 06:57:30 +0000
+ by imap2.dmz-prg2.suse.org with ESMTPSA id z9/jAea1zWWxSQAAn2gu4w
+ (envelope-from <jgross@suse.com>); Thu, 15 Feb 2024 06:57:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,220 +53,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7d0fac3e-cbcf-11ee-8a4d-1f161083a0e0
+X-Inumbo-ID: 83c200a5-cbcf-11ee-8a4d-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707980251; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1707980262; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xUq3AE+SsnVI0DjnPSJQwNriZRE6cVmY47vrUqUrQuc=;
-	b=jqcVKPMpWufFO0TwxgB+8mTv+zIq/586V1AGNg25zlfX+XSj3Iokrxs/kvHI0L9NRwid1Y
-	59MyBja/v9Q+I3qQ6vlhxhNmLTs7elFnV3gLmT8JFrx2VL7WQbMuG+JB2UiCJ7vsTSfx/Y
-	nQjn3nOr/vH1tqONF26USXVWBmCeg/8=
+	bh=GGQ2M6ZDlC8Q8t5jjlaB/u1rTlT60Df0gemVV+Z+fCo=;
+	b=MZuXh1/rRnf54vH7uhs4GK42aaJ1w/jf7bFQUZgbLMegMuJKE8VLTydKayhMWcTsTXjDhh
+	qdDJmW/Ol1CEUz1s0i39PZ7bn4WaX4DUIVUD8mg5+NIgwzmm+yE4X14LdvnO6mEHalwiNs
+	8HYBPPJmb266QncFMxRP4JOtNtaXx54=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1707980250; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1707980262; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xUq3AE+SsnVI0DjnPSJQwNriZRE6cVmY47vrUqUrQuc=;
-	b=ILytG+GZXPWroDz1IUIW5TG1OUc8M2PUtRiK6mbiRnJQY57lhkPOcvnA70QUOpQ0f6UWYA
-	vgBj093YJhveGTjL4NvqEj+Pk9WrQVKpQVwNImPHy83gHmdDD0RGxT0fIPEl3a9x+9D6Wu
-	DszT9Z88VeWbgbwWUohYyc/tf5pC8S4=
+	bh=GGQ2M6ZDlC8Q8t5jjlaB/u1rTlT60Df0gemVV+Z+fCo=;
+	b=MZuXh1/rRnf54vH7uhs4GK42aaJ1w/jf7bFQUZgbLMegMuJKE8VLTydKayhMWcTsTXjDhh
+	qdDJmW/Ol1CEUz1s0i39PZ7bn4WaX4DUIVUD8mg5+NIgwzmm+yE4X14LdvnO6mEHalwiNs
+	8HYBPPJmb266QncFMxRP4JOtNtaXx54=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Jason Andryuk <jandryuk@gmail.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v6 19/21] tools/xenstored: add helpers for filename handling
-Date: Thu, 15 Feb 2024 07:55:39 +0100
-Message-Id: <20240215065541.21067-20-jgross@suse.com>
+	Jason Andryuk <jandryuk@gmail.com>
+Subject: [PATCH v6 21/21] tools/xenstored: have a single do_control_memreport()
+Date: Thu, 15 Feb 2024 07:55:41 +0100
+Message-Id: <20240215065541.21067-22-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240215065541.21067-1-jgross@suse.com>
 References: <20240215065541.21067-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: /
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=ILytG+GZ
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [0.49 / 50.00];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:98:from];
-	 TO_DN_SOME(0.00)[];
-	 R_MISSING_CHARSET(2.50)[];
-	 BROKEN_CONTENT_TYPE(1.50)[];
-	 RCVD_COUNT_THREE(0.00)[3];
-	 DKIM_TRACE(0.00)[suse.com:+];
-	 MX_GOOD(-0.01)[];
-	 RCPT_COUNT_SEVEN(0.00)[7];
-	 NEURAL_HAM_SHORT(-0.20)[-1.000];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 BAYES_HAM(-3.00)[100.00%];
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [4.89 / 50.00];
 	 ARC_NA(0.00)[];
-	 R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
 	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
 	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
 	 MIME_GOOD(-0.10)[text/plain];
-	 NEURAL_HAM_LONG(-1.00)[-1.000];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 RCPT_COUNT_FIVE(0.00)[6];
+	 RCVD_COUNT_THREE(0.00)[3];
 	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	 MID_CONTAINS_FROM(1.00)[];
-	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:email];
+	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
 	 FUZZY_BLOCKED(0.00)[rspamd.com];
-	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com,amazon.com];
-	 RCVD_TLS_ALL(0.00)[]
-X-Rspamd-Queue-Id: ECE0A21FF3
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-0.01)[50.66%]
 
-Add some helpers for handling filenames which might need different
-implementations between stubdom and daemon environments:
-
-- expansion of relative filenames (those are not really defined today,
-  just expand them to be relative to /var/lib/xen/xenstore)
-- expansion of xenstore_daemon_rundir() (used e.g. for saving the state
-  file in case of live update - needs to be unchanged in the daemon
-  case, but should result in /var/lib/xen/xenstore for stubdom)
+With 9pfs now available in Xenstore-stubdom, there is no reason to
+have distinct do_control_memreport() variants for the daemon and the
+stubdom implementations.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V3:
-- make absolute_filename() return a pointer to const (Julien Grall)
----
- tools/xenstored/core.c      | 15 +++++++++++++--
- tools/xenstored/core.h      |  5 ++++-
- tools/xenstored/lu_daemon.c |  4 ++--
- tools/xenstored/minios.c    |  5 +++++
- tools/xenstored/posix.c     |  8 +++++++-
- 5 files changed, 31 insertions(+), 6 deletions(-)
+ tools/xenstored/control.c | 27 +++++++--------------------
+ 1 file changed, 7 insertions(+), 20 deletions(-)
 
-diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index 48fc787ac1..bada1ad9a2 100644
---- a/tools/xenstored/core.c
-+++ b/tools/xenstored/core.c
-@@ -63,7 +63,7 @@ char **orig_argv;
- LIST_HEAD(connections);
- int tracefd = -1;
- bool keep_orphans = false;
--char *tracefile = NULL;
-+const char *tracefile = NULL;
- static struct hashtable *nodes;
- unsigned int trace_flags = TRACE_OBJ | TRACE_IO;
- 
-@@ -137,6 +137,17 @@ void trace_destroy(const void *data, const char *type)
- 		trace("obj: DESTROY %s %p\n", type, data);
+diff --git a/tools/xenstored/control.c b/tools/xenstored/control.c
+index dae23a5ac0..9561289179 100644
+--- a/tools/xenstored/control.c
++++ b/tools/xenstored/control.c
+@@ -216,23 +216,11 @@ static int do_control_logfile(const void *ctx, struct connection *conn,
+ 	return 0;
  }
  
-+/*
-+ * Return an absolute filename.
-+ * In case of a relative filename given as input, prepend XENSTORE_LIB_DIR.
-+ */
-+const char *absolute_filename(const void *ctx, const char *filename)
-+{
-+	if (filename[0] != '/')
-+		return talloc_asprintf(ctx, XENSTORE_LIB_DIR "/%s", filename);
-+	return talloc_strdup(ctx, filename);
-+}
-+
- void close_log(void)
+-#ifdef __MINIOS__
+-static int do_control_memreport(const void *ctx, struct connection *conn,
+-				const char **vec, int num)
+-{
+-	if (num)
+-		return EINVAL;
+-
+-	talloc_report_full(NULL, stdout);
+-
+-	send_ack(conn, XS_CONTROL);
+-	return 0;
+-}
+-#else
+ static int do_control_memreport(const void *ctx, struct connection *conn,
+ 				const char **vec, int num)
  {
- 	if (tracefd >= 0)
-@@ -2759,7 +2770,7 @@ int main(int argc, char *argv[])
- #endif
- 
- 	if (tracefile)
--		tracefile = talloc_strdup(NULL, tracefile);
-+		tracefile = absolute_filename(NULL, tracefile);
- 
- #ifndef NO_LIVE_UPDATE
- 	/* Read state in case of live update. */
-diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
-index fe0ee90581..e58779e88c 100644
---- a/tools/xenstored/core.h
-+++ b/tools/xenstored/core.h
-@@ -341,7 +341,7 @@ void close_log(void);
- extern int orig_argc;
- extern char **orig_argv;
- 
--extern char *tracefile;
-+extern const char *tracefile;
- extern int tracefd;
- 
- /* Trace flag values must be kept in sync with trace_switches[] contents. */
-@@ -405,6 +405,9 @@ void set_socket_fd(int fd);
- void mount_9pfs(void);
- #endif
- 
-+const char *xenstore_rundir(void);
-+const char *absolute_filename(const void *ctx, const char *filename);
-+
- /* Close stdin/stdout/stderr to complete daemonize */
- void finish_daemonize(void);
- 
-diff --git a/tools/xenstored/lu_daemon.c b/tools/xenstored/lu_daemon.c
-index 71bcabadd3..6351111ab0 100644
---- a/tools/xenstored/lu_daemon.c
-+++ b/tools/xenstored/lu_daemon.c
-@@ -24,7 +24,7 @@ void lu_get_dump_state(struct lu_dump_state *state)
- 	state->size = 0;
- 
- 	state->filename = talloc_asprintf(NULL, "%s/state_dump",
--					  xenstore_daemon_rundir());
-+					  xenstore_rundir());
- 	if (!state->filename)
- 		barf("Allocation failure");
- 
-@@ -65,7 +65,7 @@ FILE *lu_dump_open(const void *ctx)
+ 	FILE *fp;
++	const char *filename;
  	int fd;
  
- 	filename = talloc_asprintf(ctx, "%s/state_dump",
--				   xenstore_daemon_rundir());
-+				   xenstore_rundir());
- 	if (!filename)
- 		return NULL;
+ 	if (num > 1)
+@@ -255,8 +243,12 @@ static int do_control_memreport(const void *ctx, struct connection *conn,
+ 			if (!fp)
+ 				close(fd);
+ 		}
+-	} else
+-		fp = fopen(vec[0], "a");
++	} else {
++		filename = absolute_filename(ctx, vec[0]);
++		if (!filename)
++			return ENOMEM;
++		fp = fopen(filename, "a");
++	}
  
-diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
-index 562a9b4972..e70386f8c7 100644
---- a/tools/xenstored/minios.c
-+++ b/tools/xenstored/minios.c
-@@ -128,3 +128,8 @@ void mount_9pfs(void)
- {
- 	create_thread("mount-9pfs", mount_thread, NULL);
+ 	if (!fp)
+ 		return EBADF;
+@@ -267,7 +259,6 @@ static int do_control_memreport(const void *ctx, struct connection *conn,
+ 	send_ack(conn, XS_CONTROL);
+ 	return 0;
  }
-+
-+const char *xenstore_rundir(void)
-+{
-+	return XENSTORE_LIB_DIR;
-+}
-diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
-index 496329dfd1..d88c82d972 100644
---- a/tools/xenstored/posix.c
-+++ b/tools/xenstored/posix.c
-@@ -326,9 +326,10 @@ void early_init(bool live_update, bool dofork, const char *pidfile)
- {
- 	reopen_log();
+-#endif
  
--	/* Make sure xenstored directory exists. */
-+	/* Make sure xenstored directories exist. */
- 	/* Errors ignored here, will be reported when we open files */
- 	mkdir(xenstore_daemon_rundir(), 0755);
-+	mkdir(XENSTORE_LIB_DIR, 0755);
- 
- 	if (dofork) {
- 		openlog("xenstored", 0, LOG_DAEMON);
-@@ -406,3 +407,8 @@ void set_socket_fd(int fd)
- {
- 	sock = fd;
- }
-+
-+const char *xenstore_rundir(void)
-+{
-+	return xenstore_daemon_rundir();
-+}
+ static int do_control_print(const void *ctx, struct connection *conn,
+ 			    const char **vec, int num)
+@@ -310,11 +301,7 @@ static struct cmd_s cmds[] = {
+ 		"    Default timeout is 60 seconds.", 5 },
+ #endif
+ 	{ "logfile", do_control_logfile, "<file>" },
+-#ifdef __MINIOS__
+-	{ "memreport", do_control_memreport, "" },
+-#else
+ 	{ "memreport", do_control_memreport, "[<file>]" },
+-#endif
+ 	{ "print", do_control_print, "<string>" },
+ 	{ "quota", do_control_quota,
+ 		"[set <name> <val>|<domid>|max [-r]]" },
 -- 
 2.35.3
 
