@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBDA1C4829E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Feb 2024 13:10:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.681734.1060688 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F04C48BF0
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Feb 2024 13:10:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.681731.1060677 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rabUx-0002XC-UT; Thu, 15 Feb 2024 13:09:55 +0000
+	id 1rabUx-0002O0-Bm; Thu, 15 Feb 2024 13:09:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 681734.1060688; Thu, 15 Feb 2024 13:09:55 +0000
+Received: by outflank-mailman (output) from mailman id 681731.1060677; Thu, 15 Feb 2024 13:09:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rabUx-0002Vm-Of; Thu, 15 Feb 2024 13:09:55 +0000
-Received: by outflank-mailman (input) for mailman id 681734;
+	id 1rabUx-0002Nt-7Y; Thu, 15 Feb 2024 13:09:55 +0000
+Received: by outflank-mailman (input) for mailman id 681731;
  Thu, 15 Feb 2024 13:09:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=YE+Y=JY=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rabRY-0002j3-58
- for xen-devel@lists.xenproject.org; Thu, 15 Feb 2024 13:06:24 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=4buu=JY=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1rabS8-0002j3-IQ
+ for xen-devel@lists.xenproject.org; Thu, 15 Feb 2024 13:07:00 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 04105be3-cc03-11ee-98f5-efadbce2ee36;
- Thu, 15 Feb 2024 14:06:22 +0100 (CET)
-Received: from nico.bugseng.com (unknown [147.123.100.131])
- by support.bugseng.com (Postfix) with ESMTPSA id EA5CD4EE0737;
- Thu, 15 Feb 2024 14:06:19 +0100 (CET)
+ id 19d40f09-cc03-11ee-98f5-efadbce2ee36;
+ Thu, 15 Feb 2024 14:06:58 +0100 (CET)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5FFC62218B;
+ Thu, 15 Feb 2024 13:06:58 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 17AB9139D0;
+ Thu, 15 Feb 2024 13:06:58 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id aBk4BHIMzmXlFQAAn2gu4w
+ (envelope-from <jgross@suse.com>); Thu, 15 Feb 2024 13:06:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,115 +53,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04105be3-cc03-11ee-98f5-efadbce2ee36
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+X-Inumbo-ID: 19d40f09-cc03-11ee-98f5-efadbce2ee36
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1708002418; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=xUq3AE+SsnVI0DjnPSJQwNriZRE6cVmY47vrUqUrQuc=;
+	b=Z8GQHXYLcYMI+4d3BxocWdQ8ugWSTSeWig17x3hZy+1S6u9hFchxBjqrSZsr5C9eaiV2GW
+	C5/0N5G8dVorAaUWLstuJaFqhJOgtdNX5t6qsPxa6N/TM95D43h3U7zeYWHP+JHj/pcHK2
+	u92XgSkHq/3h1qP4xXb37nwmG5WPSxU=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1708002418; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=xUq3AE+SsnVI0DjnPSJQwNriZRE6cVmY47vrUqUrQuc=;
+	b=Z8GQHXYLcYMI+4d3BxocWdQ8ugWSTSeWig17x3hZy+1S6u9hFchxBjqrSZsr5C9eaiV2GW
+	C5/0N5G8dVorAaUWLstuJaFqhJOgtdNX5t6qsPxa6N/TM95D43h3U7zeYWHP+JHj/pcHK2
+	u92XgSkHq/3h1qP4xXb37nwmG5WPSxU=
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	michal.orzel@amd.com,
-	xenia.ragiadakou@amd.com,
-	ayan.kumar.halder@amd.com,
-	consulting@bugseng.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	bertrand.marquis@arm.com,
-	julien@xen.org,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2] automation/eclair_analysis: deviate certain macros for Rule 20.12
-Date: Thu, 15 Feb 2024 14:06:17 +0100
-Message-Id: <7bc72f6ccd858e0405d62d49c32449e3b5abd790.1707996317.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Jason Andryuk <jandryuk@gmail.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v7 19/21] tools/xenstored: add helpers for filename handling
+Date: Thu, 15 Feb 2024 14:05:07 +0100
+Message-Id: <20240215130509.24008-20-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20240215130509.24008-1-jgross@suse.com>
+References: <20240215130509.24008-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spamd-Result: default: False [0.70 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	 MIME_GOOD(-0.10)[text/plain];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 NEURAL_HAM_LONG(-1.00)[-1.000];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-0.20)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[7];
+	 MID_CONTAINS_FROM(1.00)[];
+	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com,amazon.com];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-3.00)[100.00%]
 
-Certain macros are allowed to violate the Rule, since their meaning and
-intended use is well-known to all Xen developers.
+Add some helpers for handling filenames which might need different
+implementations between stubdom and daemon environments:
 
-Variadic macros that rely on the GCC extension for removing a trailing
-comma when token pasting the variable argument are similarly
-well-understood and therefore allowed.
+- expansion of relative filenames (those are not really defined today,
+  just expand them to be relative to /var/lib/xen/xenstore)
+- expansion of xenstore_daemon_rundir() (used e.g. for saving the state
+  file in case of live update - needs to be unchanged in the daemon
+  case, but should result in /var/lib/xen/xenstore for stubdom)
 
-No functional change.
-
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-Changes in v2:
-- Restrict deviation for GENERATE_CASE to vcpreg.c.
-- Improve deviation justifications.
+V3:
+- make absolute_filename() return a pointer to const (Julien Grall)
 ---
- .../eclair_analysis/ECLAIR/deviations.ecl     | 20 +++++++++++++++++
- docs/misra/deviations.rst                     | 22 +++++++++++++++++++
- 2 files changed, 42 insertions(+)
+ tools/xenstored/core.c      | 15 +++++++++++++--
+ tools/xenstored/core.h      |  5 ++++-
+ tools/xenstored/lu_daemon.c |  4 ++--
+ tools/xenstored/minios.c    |  5 +++++
+ tools/xenstored/posix.c     |  8 +++++++-
+ 5 files changed, 31 insertions(+), 6 deletions(-)
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index fd32ff8a9cae..04cb41e16a50 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -387,6 +387,26 @@ in assignments."
- {safe, "left_right(^[(,\\[]$,^[),\\]]$)"}
- -doc_end
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 48fc787ac1..bada1ad9a2 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -63,7 +63,7 @@ char **orig_argv;
+ LIST_HEAD(connections);
+ int tracefd = -1;
+ bool keep_orphans = false;
+-char *tracefile = NULL;
++const char *tracefile = NULL;
+ static struct hashtable *nodes;
+ unsigned int trace_flags = TRACE_OBJ | TRACE_IO;
  
-+-doc_begin="Uses of variadic macros that have one of their arguments defined as
-+a macro and used within the body for both ordinary parameter expansion and as an
-+operand to the # or ## operators have a behavior that is well-understood and
-+deliberate."
-+-config=MC3R1.R20.12,macros+={deliberate, "variadic()"}
-+-doc_end
-+
-+-doc_begin="Uses of a macro parameter for ordinary expansion and as an operand
-+to the # or ## operators within the following macros are deliberate, to provide
-+useful diagnostic messages to the user."
-+-config=MC3R1.R20.12,macros+={deliberate, "name(ASSERT||BUILD_BUG_ON||BUILD_BUG_ON_ZERO)"}
-+-doc_end
-+
-+-doc_begin="The helper macro GENERATE_CASE may use a macro parameter for ordinary
-+expansion and token pasting to improve readability. Only instances where this
-+leads to a violation of the Rule are deviated."
-+-file_tag+={deliberate_generate_case, "^xen/arch/arm/vcpreg\\.c$"}
-+-config=MC3R1.R20.12,macros+={deliberate, "name(GENERATE_CASE)&&loc(file(deliberate_generate_case))"}
-+-doc_end
-+
- #
- # General
- #
-diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-index 123c78e20a01..84da637ef888 100644
---- a/docs/misra/deviations.rst
-+++ b/docs/misra/deviations.rst
-@@ -330,6 +330,28 @@ Deviations related to MISRA C:2012 Rules:
-        (4) as lhs in assignments.
-      - Tagged as `safe` for ECLAIR.
+@@ -137,6 +137,17 @@ void trace_destroy(const void *data, const char *type)
+ 		trace("obj: DESTROY %s %p\n", type, data);
+ }
  
-+   * - R20.12
-+     - Variadic macros that use token pasting often employ the gcc extension
-+       `ext_paste_comma`, as detailed in `C-language-toolchain.rst`, which is
-+       not easily replaceable; macros that in addition perform regular argument
-+       expansion on the same argument subject to the # or ## operators violate
-+       the Rule if the argument is a macro. 
-+     - Tagged as `deliberate` for ECLAIR.
++/*
++ * Return an absolute filename.
++ * In case of a relative filename given as input, prepend XENSTORE_LIB_DIR.
++ */
++const char *absolute_filename(const void *ctx, const char *filename)
++{
++	if (filename[0] != '/')
++		return talloc_asprintf(ctx, XENSTORE_LIB_DIR "/%s", filename);
++	return talloc_strdup(ctx, filename);
++}
 +
-+   * - R20.12
-+     - Macros that are used for runtime or build-time assertions contain
-+       deliberate uses of an argument as both a regular argument and a
-+       stringification token, to provide useful diagnostic messages.
-+     - Tagged as `deliberate` for ECLAIR.
-+
-+   * - R20.12
-+     - GENERATE_CASE is a local helper macro that allows some selected switch
-+       statements to be more compact and readable. As such, the risk of
-+       developer confusion in using such macro is deemed negligible. This
-+       construct is deviated only in Translation Units that present a violation
-+       of the Rule due to uses of this macro.
-+     - Tagged as `deliberate` for ECLAIR.
-+
- Other deviations:
- -----------------
+ void close_log(void)
+ {
+ 	if (tracefd >= 0)
+@@ -2759,7 +2770,7 @@ int main(int argc, char *argv[])
+ #endif
  
+ 	if (tracefile)
+-		tracefile = talloc_strdup(NULL, tracefile);
++		tracefile = absolute_filename(NULL, tracefile);
+ 
+ #ifndef NO_LIVE_UPDATE
+ 	/* Read state in case of live update. */
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index fe0ee90581..e58779e88c 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -341,7 +341,7 @@ void close_log(void);
+ extern int orig_argc;
+ extern char **orig_argv;
+ 
+-extern char *tracefile;
++extern const char *tracefile;
+ extern int tracefd;
+ 
+ /* Trace flag values must be kept in sync with trace_switches[] contents. */
+@@ -405,6 +405,9 @@ void set_socket_fd(int fd);
+ void mount_9pfs(void);
+ #endif
+ 
++const char *xenstore_rundir(void);
++const char *absolute_filename(const void *ctx, const char *filename);
++
+ /* Close stdin/stdout/stderr to complete daemonize */
+ void finish_daemonize(void);
+ 
+diff --git a/tools/xenstored/lu_daemon.c b/tools/xenstored/lu_daemon.c
+index 71bcabadd3..6351111ab0 100644
+--- a/tools/xenstored/lu_daemon.c
++++ b/tools/xenstored/lu_daemon.c
+@@ -24,7 +24,7 @@ void lu_get_dump_state(struct lu_dump_state *state)
+ 	state->size = 0;
+ 
+ 	state->filename = talloc_asprintf(NULL, "%s/state_dump",
+-					  xenstore_daemon_rundir());
++					  xenstore_rundir());
+ 	if (!state->filename)
+ 		barf("Allocation failure");
+ 
+@@ -65,7 +65,7 @@ FILE *lu_dump_open(const void *ctx)
+ 	int fd;
+ 
+ 	filename = talloc_asprintf(ctx, "%s/state_dump",
+-				   xenstore_daemon_rundir());
++				   xenstore_rundir());
+ 	if (!filename)
+ 		return NULL;
+ 
+diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
+index 562a9b4972..e70386f8c7 100644
+--- a/tools/xenstored/minios.c
++++ b/tools/xenstored/minios.c
+@@ -128,3 +128,8 @@ void mount_9pfs(void)
+ {
+ 	create_thread("mount-9pfs", mount_thread, NULL);
+ }
++
++const char *xenstore_rundir(void)
++{
++	return XENSTORE_LIB_DIR;
++}
+diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
+index 496329dfd1..d88c82d972 100644
+--- a/tools/xenstored/posix.c
++++ b/tools/xenstored/posix.c
+@@ -326,9 +326,10 @@ void early_init(bool live_update, bool dofork, const char *pidfile)
+ {
+ 	reopen_log();
+ 
+-	/* Make sure xenstored directory exists. */
++	/* Make sure xenstored directories exist. */
+ 	/* Errors ignored here, will be reported when we open files */
+ 	mkdir(xenstore_daemon_rundir(), 0755);
++	mkdir(XENSTORE_LIB_DIR, 0755);
+ 
+ 	if (dofork) {
+ 		openlog("xenstored", 0, LOG_DAEMON);
+@@ -406,3 +407,8 @@ void set_socket_fd(int fd)
+ {
+ 	sock = fd;
+ }
++
++const char *xenstore_rundir(void)
++{
++	return xenstore_daemon_rundir();
++}
 -- 
-2.34.1
+2.35.3
 
 
