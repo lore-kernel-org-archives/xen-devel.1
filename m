@@ -4,46 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B263EC48BEB
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Feb 2024 13:10:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.681767.1060767 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4B46C4829E
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Feb 2024 13:41:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.681813.1060777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rabVe-0007tg-A3; Thu, 15 Feb 2024 13:10:38 +0000
+	id 1rabzd-00089X-M0; Thu, 15 Feb 2024 13:41:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 681767.1060767; Thu, 15 Feb 2024 13:10:38 +0000
+Received: by outflank-mailman (output) from mailman id 681813.1060777; Thu, 15 Feb 2024 13:41:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rabVe-0007tZ-6d; Thu, 15 Feb 2024 13:10:38 +0000
-Received: by outflank-mailman (input) for mailman id 681767;
- Thu, 15 Feb 2024 13:10:37 +0000
+	id 1rabzd-00089Q-I2; Thu, 15 Feb 2024 13:41:37 +0000
+Received: by outflank-mailman (input) for mailman id 681813;
+ Thu, 15 Feb 2024 13:41:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4buu=JY=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rabS2-0002j3-Of
- for xen-devel@lists.xenproject.org; Thu, 15 Feb 2024 13:06:54 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [2a07:de40:b251:101:10:150:64:2])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=G1Z8=JY=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rabzc-00089K-BN
+ for xen-devel@lists.xenproject.org; Thu, 15 Feb 2024 13:41:36 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 167399cd-cc03-11ee-98f5-efadbce2ee36;
- Thu, 15 Feb 2024 14:06:53 +0100 (CET)
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:98])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id AE2561F8A4;
- Thu, 15 Feb 2024 13:06:52 +0000 (UTC)
-Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 61994139D0;
- Thu, 15 Feb 2024 13:06:52 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap2.dmz-prg2.suse.org with ESMTPSA id KqoqFmwMzmXgFQAAn2gu4w
- (envelope-from <jgross@suse.com>); Thu, 15 Feb 2024 13:06:52 +0000
+ id ee70022f-cc07-11ee-98f5-efadbce2ee36;
+ Thu, 15 Feb 2024 14:41:33 +0100 (CET)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a3da5bf7f9cso61225266b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Feb 2024 05:41:33 -0800 (PST)
+Received: from [192.168.206.239] ([94.75.70.14])
+ by smtp.gmail.com with ESMTPSA id
+ n13-20020a170906088d00b00a3d2f55bc2esm546073eje.161.2024.02.15.05.41.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Feb 2024 05:41:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,201 +47,324 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 167399cd-cc03-11ee-98f5-efadbce2ee36
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1708002412; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GuKS5JMiiFYV782dbcVdzQvPQKcEtbDic1ZOTvla/ok=;
-	b=kMLckWSFMkQtF6U6N8FrxhjleNVeWZgPEz8ruSgoyl1jSP1DgC53AHZ2HLN+hkBQVp6F30
-	qTX4MDM4DN0nPD/+frTaYS+7m4+deVLbHPpj3nnOf3GS7Y+AlBs9bF8AsTLS6hwheSJa24
-	2vFPHRGzssljphMjQnmavCaJHsf7r8U=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1708002412; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GuKS5JMiiFYV782dbcVdzQvPQKcEtbDic1ZOTvla/ok=;
-	b=kMLckWSFMkQtF6U6N8FrxhjleNVeWZgPEz8ruSgoyl1jSP1DgC53AHZ2HLN+hkBQVp6F30
-	qTX4MDM4DN0nPD/+frTaYS+7m4+deVLbHPpj3nnOf3GS7Y+AlBs9bF8AsTLS6hwheSJa24
-	2vFPHRGzssljphMjQnmavCaJHsf7r8U=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Jason Andryuk <jandryuk@gmail.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v7 18/21] tools/xenstored: mount 9pfs device in stubdom
-Date: Thu, 15 Feb 2024 14:05:06 +0100
-Message-Id: <20240215130509.24008-19-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240215130509.24008-1-jgross@suse.com>
-References: <20240215130509.24008-1-jgross@suse.com>
+X-Inumbo-ID: ee70022f-cc07-11ee-98f5-efadbce2ee36
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1708004493; x=1708609293; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=T5SfKdVPXndjEJEfVT6v0PanudGXm19wJIc9RSghH4I=;
+        b=CS82GIxtYJzRtOnsfE7euASlDa6YQMFSgl3aW8eGao/PHz+pvENJhZIQl++oqWSXBD
+         AFXTWp7xO7wwkZiyUC82WDOGwQ+cdC4BdF0SUtGpDynfW7TgvEOG5C0uZ8DGiwmeTzOz
+         bgXbL/VCqcEeEPO9ZPQKkPA7EbPL2dE3V1V4+j0QzVB/hcF/s9CHuRm6oLSlP1qjWiLh
+         7PIGGRCYO/b5ybrUThdX0jCp379IRWHuaGdBUxdoyUn3cL7JcZhl4DDgAc1boNn4bH8k
+         vKX2j2K25OHqlWEZeLbGdS6gROkSVTQYOjiztJ/OKG6rPYD/yegd8HSLBM3T28ui8EE/
+         Y6dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708004493; x=1708609293;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=T5SfKdVPXndjEJEfVT6v0PanudGXm19wJIc9RSghH4I=;
+        b=dTpQbebwKHkV1HHtMpte5S+YBue5iivRSghA60aAhQv9CMmELQm5abPUdTYwq7yiw+
+         mv6m0rBvB1hFOIEOU0LKYouDV922g5Kfw5chetyF4k9dizuy0I00mWJM31qpPsS0x5pJ
+         vSSN7FAmanFDMqKFJCpsP4EP5eK2U4sQ6+yGTgoxM1frobFXZWrj8YMtE+Svf2iu1m3w
+         mZ1zGFdbuNVOTNnXOJljJsAR40DlHBh6byitC9XBOfZKdWvdzpcH4hl51OWkv2paiXgf
+         yaGmF1GN+ID9i4Q65xuBU5XBj7PVXpTXgt++O4eA5lWPWRHbTecGgJI55u77TyCRl76/
+         IONg==
+X-Forwarded-Encrypted: i=1; AJvYcCU23ye6dQl0lnN+n9uXcDlBdXolrBdRLB7XpMf/i+nhSHO+vSW92ps8cHsfg1+Ay9rJmLvaw03NJfURxfUE5WvO5fSxUP1Yb4gQxnKW56o=
+X-Gm-Message-State: AOJu0YwbRwx5QEe1J3GGNniruVAJR/5lg9g2iEcR4yZ62yEVA3nDuuKf
+	iIWqk8cXgSmUFXXoxgwUFDQgVOwk7PdJxbwQM5nC33j3BVjvaTIe
+X-Google-Smtp-Source: AGHT+IHsix9v3lLgCfSz8k3QYchAIfRy3on6asWIKp0wqkHHYXR45obzOeQnN3NfswppfMwqtPa89Q==
+X-Received: by 2002:a17:906:855:b0:a3c:d5b2:f53 with SMTP id f21-20020a170906085500b00a3cd5b20f53mr1177819ejd.15.1708004492968;
+        Thu, 15 Feb 2024 05:41:32 -0800 (PST)
+Message-ID: <28844fdfcf5eea515497fb7b5fd8ea6fb1c5ebaa.camel@gmail.com>
+Subject: Re: [PATCH v4 12/30] xen/riscv: introduce cmpxchg.h
+From: Oleksii <oleksii.kurochko@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, Bob Eshleman
+ <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, George Dunlap
+ <george.dunlap@citrix.com>,  Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, 
+ xen-devel@lists.xenproject.org
+Date: Thu, 15 Feb 2024 14:41:31 +0100
+In-Reply-To: <9e50ef30-8dc6-4380-aa65-724e5a376c10@suse.com>
+References: <cover.1707146506.git.oleksii.kurochko@gmail.com>
+	 <25315ca95baffc9b222fb0ae89375a94b01a9b46.1707146506.git.oleksii.kurochko@gmail.com>
+	 <9e50ef30-8dc6-4380-aa65-724e5a376c10@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=kMLckWSF
-X-Spamd-Result: default: False [1.69 / 50.00];
-	 ARC_NA(0.00)[];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	 SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:98:from];
-	 FROM_HAS_DN(0.00)[];
-	 TO_DN_SOME(0.00)[];
-	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	 R_MISSING_CHARSET(2.50)[];
-	 MIME_GOOD(-0.10)[text/plain];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 BROKEN_CONTENT_TYPE(1.50)[];
-	 DWL_DNSWL_BLOCKED(0.00)[suse.com:dkim];
-	 RCVD_COUNT_THREE(0.00)[3];
-	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 DKIM_TRACE(0.00)[suse.com:+];
-	 MX_GOOD(-0.01)[];
-	 RCPT_COUNT_SEVEN(0.00)[7];
-	 MID_CONTAINS_FROM(1.00)[];
-	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:email];
-	 FUZZY_BLOCKED(0.00)[rspamd.com];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 FREEMAIL_CC(0.00)[suse.com,xen.org,citrix.com,gmail.com,amazon.com];
-	 RCVD_TLS_ALL(0.00)[];
-	 BAYES_HAM(-3.00)[100.00%]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: AE2561F8A4
-X-Spamd-Bar: +
 
-Mount the 9pfs device in stubdom enabling it to use files.
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 : "=3Dr" (ret), "+A" (*ptr)=
+ \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 : "r" (new) \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 : "memory" ); \
+> > +})
+> > +
+> > +#define emulate_xchg_1_2(ptr, new, ret, release_barrier,
+> > acquire_barrier) \
+> > +({ \
+> > +=C2=A0=C2=A0=C2=A0 uint32_t *ptr_32b_aligned =3D (uint32_t *)ALIGN_DOW=
+N((unsigned
+> > long)ptr, 4); \
+>=20
+> You now appear to assume that this macro is only used with inputs not
+> crossing word boundaries. That's okay as long as suitably guaranteed
+> at the use sites, but imo wants saying in a comment.
+>=20
+> > +=C2=A0=C2=A0=C2=A0 uint8_t mask_l =3D ((unsigned long)(ptr) & (0x8 - s=
+izeof(*ptr)))
+> > * BITS_PER_BYTE; \
+>=20
+> Why 0x8 (i.e. spanning 64 bits), not 4 (matching the uint32_t use
+> above)?
+The idea to read 8 bytes was to deal with crossing word boundary. So if
+our address is 0x3 and we have to xchg() 2 bytes, what will cross 4
+byte boundary. Instead we align add 0x3, so it will become 0x0 and then
+just always work with 8 bytes.
 
-This has to happen in a worker thread in order to allow the main thread
-handling the required Xenstore accesses in parallel.
+>=20
+> > +=C2=A0=C2=A0=C2=A0 unsigned long new_ =3D (unsigned long)(new) << mask=
+_l; \
+> > +=C2=A0=C2=A0=C2=A0 unsigned long ret_; \
+> > +=C2=A0=C2=A0=C2=A0 unsigned long rc; \
+>=20
+> Similarly, why unsigned long here?
+sizeof(unsigned long) is 8 bytes and it was chosen as we are working
+with lc/sc.d which are working with 8 bytes.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
----
-V3:
-- add logging in case of errors (Julien Grall)
----
- tools/xenstored/core.h   |  6 +++++
- tools/xenstored/domain.c |  2 ++
- tools/xenstored/minios.c | 54 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 62 insertions(+)
+>=20
+> I also wonder about the mix of underscore suffixed (or not) variable
+> names here.
+If the question about ret_, then the same as before size of ret
+argument of the macros will be 1 or 2, but {lc/sc}.d expected to work
+with 8 bytes.
 
-diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
-index f6af086f01..fe0ee90581 100644
---- a/tools/xenstored/core.h
-+++ b/tools/xenstored/core.h
-@@ -36,6 +36,8 @@
- #include "list.h"
- #include "hashtable.h"
- 
-+#define XENSTORE_LIB_DIR	XEN_LIB_DIR "/xenstore"
-+
- #ifndef O_CLOEXEC
- #define O_CLOEXEC 0
- /* O_CLOEXEC support is needed for Live Update in the daemon case. */
-@@ -399,6 +401,10 @@ void handle_special_fds(void);
- int get_socket_fd(void);
- void set_socket_fd(int fd);
- 
-+#ifdef __MINIOS__
-+void mount_9pfs(void);
-+#endif
-+
- /* Close stdin/stdout/stderr to complete daemonize */
- void finish_daemonize(void);
- 
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 1a7d5e9756..64c8fd0cc3 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -1236,6 +1236,8 @@ void stubdom_init(void)
- 		barf_perror("Failed to initialize stubdom");
- 
- 	xenevtchn_notify(xce_handle, stubdom->port);
-+
-+	mount_9pfs();
- #endif
- }
- 
-diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
-index 22ac8defbd..562a9b4972 100644
---- a/tools/xenstored/minios.c
-+++ b/tools/xenstored/minios.c
-@@ -17,10 +17,20 @@
- */
- #include <sys/types.h>
- #include <sys/mman.h>
-+#include <syslog.h>
-+#include "talloc.h"
- #include "core.h"
- #include "utils.h"
- #include <xen/grant_table.h>
- #include <mini-os/lib.h>
-+#include <mini-os/9pfront.h>
-+#include <mini-os/sched.h>
-+#include <mini-os/xenbus.h>
-+#include <mini-os/xmalloc.h>
-+
-+#define P9_STATE_PATH	"device/9pfs/0/state"
-+
-+static void *p9_device;
- 
- void finish_daemonize(void)
- {
-@@ -74,3 +84,47 @@ int get_socket_fd(void)
- void set_socket_fd(int fd)
- {
- }
-+
-+static void mount_thread(void *p)
-+{
-+	xenbus_event_queue events = NULL;
-+	char *err;
-+	char *dummy;
-+
-+	err = xenbus_watch_path_token(XBT_NIL, P9_STATE_PATH, "9pfs", &events);
-+	if (err) {
-+		log("error \"%s\" when setting watch on \"%s\"\n", err,
-+		    P9_STATE_PATH);
-+		free(err);
-+		return;
-+	}
-+
-+	for (;;) {
-+		xenbus_wait_for_watch(&events);
-+
-+		/*
-+		 * We only care for existence of the state node.
-+		 * State changes are handled in init_9pfront().
-+		 */
-+		err = xenbus_read(XBT_NIL, P9_STATE_PATH, &dummy);
-+		if (!err)
-+			break;
-+		free(err);
-+	}
-+
-+	free(dummy);
-+
-+	err = xenbus_unwatch_path_token(XBT_NIL, P9_STATE_PATH, "9pfs");
-+	if (err) {
-+		log("error \"%s\" when unwatching \"%s\", leaking watch\n",
-+		    err, P9_STATE_PATH);
-+		free(err);
-+	}
-+
-+	p9_device = init_9pfront(0, XENSTORE_LIB_DIR);
-+}
-+
-+void mount_9pfs(void)
-+{
-+	create_thread("mount-9pfs", mount_thread, NULL);
-+}
--- 
-2.35.3
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 release_barrier \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "0: lr.d %0, %2\n" \
+>=20
+> Even here it's an 8-byte access. Even if - didn't check - the insn
+> was
+> okay to use with just a 4-byte aligned pointer, wouldn't it make
+> sense
+> then to 8-byte align it, and be consistent throughout this macro wrt
+> the base unit acted upon? Alternatively, why not use lr.w here, thus
+> reducing possible collisions between multiple CPUs accessing the same
+> cache line?
+According to the docs:
+LR and SC operate on naturally-aligned 64-bit (RV64 only) or 32-bit
+words in memory. Misaligned
+addresses will generate misaligned address exceptions.
+
+My intention was to deal with 4-byte crossing boundary. so if ptr is 4-
+byte aligned then by reading 8-bytes we shouldn't care about boundary
+crossing, if I am not missing something.
+
+But your opinion about reduction of collisions makes sense also...
+
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=C2=A0=C2=A0 and=C2=A0 %1,=
+ %0, %z4\n" \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=C2=A0=C2=A0 or=C2=A0=C2=
+=A0 %1, %1, %z3\n" \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=C2=A0=C2=A0 sc.d %1, %1, =
+%2\n" \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=C2=A0=C2=A0 bnez %1, 0b\n=
+" \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 acquire_barrier \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 : "=3D&r" (ret_), "=3D&r" (=
+rc), "+A" (*ptr_32b_aligned) \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 : "rJ" (new_), "rJ" (~mask)=
+ \
+>=20
+> I think that as soon as there are more than 2 or maybe 3 operands,
+> legibility is vastly improved by using named asm() operands.
+Just to clarify you mean that it would be better to use instead of %0
+use names?
+
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 : "memory"); \
+>=20
+> Nit: Missing blank before closing parenthesis.
+>=20
+> > +=C2=A0=C2=A0=C2=A0 \
+> > +=C2=A0=C2=A0=C2=A0 ret =3D (__typeof__(*(ptr)))((ret_ & mask) >> mask_=
+l); \
+> > +})
+>=20
+> Why does "ret" need to be a macro argument? If you had only the
+> expression here, not the the assigment, ...
+>=20
+> > +#define __xchg_generic(ptr, new, size, sfx, release_barrier,
+> > acquire_barrier) \
+> > +({ \
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(ptr) ptr__ =3D (ptr); \
+>=20
+> Is this local variable really needed? Can't you use "ptr" directly
+> in the three macro invocations?
+>=20
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(*(ptr)) new__ =3D (new); \
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(*(ptr)) ret__; \
+> > +=C2=A0=C2=A0=C2=A0 switch (size) \
+> > +=C2=A0=C2=A0=C2=A0 { \
+> > +=C2=A0=C2=A0=C2=A0 case 1: \
+> > +=C2=A0=C2=A0=C2=A0 case 2: \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 emulate_xchg_1_2(ptr__, new=
+__, ret__, release_barrier,
+> > acquire_barrier); \
+>=20
+> ... this would become
+>=20
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret__ =3D emulate_xchg_1_2(ptr=
+__, new__, release_barrier,
+> acquire_barrier); \
+>=20
+> But, unlike assumed above, there's no enforcement here that a 2-byte
+> quantity won't cross a word, double-word, cache line, or even page
+> boundary. That might be okay if then the code would simply crash
+> (like
+> the AMO insns emitted further down would), but aiui silent
+> misbehavior
+> would result.
+As I mentioned above with 4-byte alignment and then reading and working
+with 8-byte then crossing a word or double-word boundary shouldn't be
+an issue.
+
+I am not sure that I know how to check that we are crossing cache line
+boundary.
+
+Regarding page boundary, if the next page is mapped then all should
+work fine, otherwise it will be an exception.
+
+>=20
+> Also nit: The switch() higher up is (still/again) missing blanks.
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break; \
+> > +=C2=A0=C2=A0=C2=A0 case 4: \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 __amoswap_generic(ptr__, ne=
+w__, ret__,\
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 ".w" sfx,=C2=A0 release_barrier,
+> > acquire_barrier); \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break; \
+> > +=C2=A0=C2=A0=C2=A0 case 8: \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 __amoswap_generic(ptr__, ne=
+w__, ret__,\
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 ".d" sfx,=C2=A0 release_barrier,
+> > acquire_barrier); \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break; \
+> > +=C2=A0=C2=A0=C2=A0 default: \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 STATIC_ASSERT_UNREACHABLE()=
+; \
+> > +=C2=A0=C2=A0=C2=A0 } \
+> > +=C2=A0=C2=A0=C2=A0 ret__; \
+> > +})
+> > +
+> > +#define xchg_relaxed(ptr, x) \
+> > +({ \
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(*(ptr)) x_ =3D (x); \
+> > +=C2=A0=C2=A0=C2=A0 (__typeof__(*(ptr)))__xchg_generic(ptr, x_, sizeof(=
+*(ptr)),
+> > "", "", ""); \
+> > +})
+> > +
+> > +#define xchg_acquire(ptr, x) \
+> > +({ \
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(*(ptr)) x_ =3D (x); \
+> > +=C2=A0=C2=A0=C2=A0 (__typeof__(*(ptr)))__xchg_generic(ptr, x_, sizeof(=
+*(ptr)), \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 "", "",
+> > RISCV_ACQUIRE_BARRIER); \
+> > +})
+> > +
+> > +#define xchg_release(ptr, x) \
+> > +({ \
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(*(ptr)) x_ =3D (x); \
+> > +=C2=A0=C2=A0=C2=A0 (__typeof__(*(ptr)))__xchg_generic(ptr, x_, sizeof(=
+*(ptr)),\
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 "", RISCV_RELEASE_BARRIER,
+> > ""); \
+> > +})
+> > +
+> > +#define xchg(ptr,x) \
+> > +({ \
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(*(ptr)) ret__; \
+> > +=C2=A0=C2=A0=C2=A0 ret__ =3D (__typeof__(*(ptr))) \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 __x=
+chg_generic(ptr, (unsigned long)(x),
+> > sizeof(*(ptr)), \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 ".aqrl", "", ""); \
+>=20
+> The .aqrl doesn't look to affect the (emulated) 1- and 2-byte cases.
+>=20
+> Further, amoswap also exists in release-only and acquire-only forms.
+> Why do you prefer explicit barrier insns over those? (Looks to
+> similarly apply to the emulation path as well as to the cmpxchg
+> machinery then, as both lr and sc also come in all four possible
+> acquire/release forms. Perhaps for the emulation path using
+> explicit barriers is better, in case the acquire/release forms of
+> lr/sc - being used inside the loop - might perform worse.)
+As 1- and 2-byte cases are emulated I decided that is not to provide
+sfx argument for emulation macros as it will not have to much affect on
+emulated types and just consume more performance on acquire and release
+version of sc/ld instructions.
+
+
+> >=20
+>=20
+> No RISCV_..._BARRIER for use here and ...
+>=20
+> > +=C2=A0=C2=A0=C2=A0 ret__; \
+> > +})
+> > +
+> > +#define __cmpxchg(ptr, o, n, s) \
+> > +({ \
+> > +=C2=A0=C2=A0=C2=A0 __typeof__(*(ptr)) ret__; \
+> > +=C2=A0=C2=A0=C2=A0 ret__ =3D (__typeof__(*(ptr))) \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 __c=
+mpxchg_generic(ptr, (unsigned long)(o), (unsigned
+> > long)(n), \
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s, ".rl", "", " fence rw, rw\n"); \
+>=20
+> ... here? And anyway, wouldn't it make sense to have
+>=20
+> #define cmpxchg(ptr, o, n) __cmpxchg(ptr, o, n, sizeof(*(ptr))
+>=20
+> to limit redundancy?
+>=20
+> Plus wouldn't
+>=20
+> #define __cmpxchg(ptr, o, n, s) \
+> =C2=A0=C2=A0=C2=A0 ((__typeof__(*(ptr))) \
+> =C2=A0=C2=A0=C2=A0=C2=A0 __cmpxchg_generic(ptr, (unsigned long)(o), (unsi=
+gned long)(n), \
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s, ".rl", "", =
+" fence rw, rw\n"))
+>=20
+> be shorter and thus easier to follow as well? As I notice only now,
+> this would apparently apply further up as well.
+I understand your point about "#define cmpxchg(ptr, o, n) __cmpxchg(",
+but I can't undestand how the definition of __cmxchng should be done
+shorter. Could you please clarify that?
+
+~ Oleksii
 
 
