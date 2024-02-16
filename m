@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E44C48BC4
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Feb 2024 16:32:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.682281.1061400 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D00C48BEF
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Feb 2024 16:32:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.682279.1061380 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rb180-0000kI-2P; Fri, 16 Feb 2024 16:31:56 +0000
+	id 1rb17p-0000EN-L3; Fri, 16 Feb 2024 16:31:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 682281.1061400; Fri, 16 Feb 2024 16:31:56 +0000
+Received: by outflank-mailman (output) from mailman id 682279.1061380; Fri, 16 Feb 2024 16:31:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rb17z-0000kB-Vz; Fri, 16 Feb 2024 16:31:55 +0000
-Received: by outflank-mailman (input) for mailman id 682281;
- Fri, 16 Feb 2024 16:31:55 +0000
+	id 1rb17p-0000EG-IZ; Fri, 16 Feb 2024 16:31:45 +0000
+Received: by outflank-mailman (input) for mailman id 682279;
+ Fri, 16 Feb 2024 16:31:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=LzRM=JZ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1rb17z-0000EA-1k
- for xen-devel@lists.xenproject.org; Fri, 16 Feb 2024 16:31:55 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 1rb17o-0000EA-RB
+ for xen-devel@lists.xenproject.org; Fri, 16 Feb 2024 16:31:44 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [2a07:de40:b251:101:10:150:64:2])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e456d40a-cce8-11ee-98f5-efadbce2ee36;
- Fri, 16 Feb 2024 17:31:53 +0100 (CET)
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:98])
+ id ddff5890-cce8-11ee-98f5-efadbce2ee36;
+ Fri, 16 Feb 2024 17:31:42 +0100 (CET)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id E9C861FB7D;
- Fri, 16 Feb 2024 16:31:52 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 9FC611FB7A;
+ Fri, 16 Feb 2024 16:31:41 +0000 (UTC)
 Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id BA14513343;
- Fri, 16 Feb 2024 16:31:52 +0000 (UTC)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 5C20613343;
+ Fri, 16 Feb 2024 16:31:41 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap2.dmz-prg2.suse.org with ESMTPSA id 1gzoK/iNz2VEVAAAn2gu4w
- (envelope-from <jgross@suse.com>); Fri, 16 Feb 2024 16:31:52 +0000
+ by imap2.dmz-prg2.suse.org with ESMTPSA id nAP0FO2Nz2U4VAAAn2gu4w
+ (envelope-from <jgross@suse.com>); Fri, 16 Feb 2024 16:31:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,187 +54,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e456d40a-cce8-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: ddff5890-cce8-11ee-98f5-efadbce2ee36
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1708101101; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=44RbCMtlPx/YsHv8XPhvBu4VsidyaCEOqPGz709Iy7s=;
+	b=Ie9I96rP5aIR/69VSDeNJzLbBtwMSr/sjWSDBJNs4QixMmSoqNPXYvSJh/543NdMxQb6Gv
+	mYsp+u8s1e4C8+0QPRls6E9zQcknA8hMgiWfrFcdf07K9Mm3tMCJfo/+vmEl+p9qZubiur
+	aWJPdxIGs0kI8AQHRVTkCK1kxNtw76E=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1708101101; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=44RbCMtlPx/YsHv8XPhvBu4VsidyaCEOqPGz709Iy7s=;
+	b=Ie9I96rP5aIR/69VSDeNJzLbBtwMSr/sjWSDBJNs4QixMmSoqNPXYvSJh/543NdMxQb6Gv
+	mYsp+u8s1e4C8+0QPRls6E9zQcknA8hMgiWfrFcdf07K9Mm3tMCJfo/+vmEl+p9qZubiur
+	aWJPdxIGs0kI8AQHRVTkCK1kxNtw76E=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Nick Rosbrook <rosbrookn@gmail.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Jason Andryuk <jandryuk@gmail.com>
-Subject: [PATCH v8 2/8] tools/xl: support new 9pfs backend xen_9pfsd
-Date: Fri, 16 Feb 2024 17:31:33 +0100
-Message-Id: <20240216163139.9093-3-jgross@suse.com>
+	Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Julien Grall <julien@xen.org>
+Subject: [PATCH v8 0/8] tools: enable xenstore-stubdom to use 9pfs
+Date: Fri, 16 Feb 2024 17:31:31 +0100
+Message-Id: <20240216163139.9093-1-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240216163139.9093-1-jgross@suse.com>
-References: <20240216163139.9093-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Authentication-Results: smtp-out2.suse.de;
 	none
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	 REPLY(-4.00)[]
-X-Rspamd-Queue-Id: E9C861FB7D
+X-Spamd-Result: default: False [0.70 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	 MIME_GOOD(-0.10)[text/plain];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 NEURAL_HAM_LONG(-1.00)[-1.000];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-0.20)[-1.000];
+	 RCPT_COUNT_SEVEN(0.00)[8];
+	 MID_CONTAINS_FROM(1.00)[];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 FREEMAIL_CC(0.00)[suse.com,citrix.com,gmail.com,xen.org,ens-lyon.org];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-3.00)[100.00%]
 
-Add support for the new 9pfs backend "xen_9pfsd". For this backend type
-the tag defaults to "Xen" and the host side path to
-"/var/log/xen/guests/<dom-name>".
+This series is adding 9pfs support to Xenstore-stubdom, enabling it
+to do logging to a dom0 directory.
 
-Do most of the default settings in libxl. Unfortunately the default
-path can't easily be set in libxl, as the domain name isn't available
-in the related 9pfs specific function.
+This is a prerequisite for the final goal to add live update support
+to Xenstore-stubdom, as it enables the stubdom to store its state in
+a dom0 file.
 
-Settings the defaults in libxl requires to move the sanity checking
-of 9pfs parameters from xl to libxl, too.
+Reposting the rest series.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
----
-V2:
-- test max_files and max_open_files, too (Jason Andryuk)
-V4:
-- fix man page to use the "xen_9pfsd" type due to idl limitation
-  (Jason Andryuk)
-- set (most of) the defaults in libxl (Anthony Perard)
----
- docs/man/xl.cfg.5.pod.in      | 36 +++++++++++++++++++++++++++++++++--
- tools/libs/light/libxl_9pfs.c | 18 ++++++++++++++++++
- tools/xl/xl_parse.c           | 23 +++++++++++++++++++---
- 3 files changed, 72 insertions(+), 5 deletions(-)
+Changes in V8:
+- patches 1-13 of V7 have been applied
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index ea8d41727d..039e057318 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -772,10 +772,16 @@ settings, from the following list:
- 
- =over 4
- 
-+=item B<type=TYPE>
-+
-+The backendtype for the PV device. Supported values are B<qemu> and
-+B<xen_9pfsd>.  The default is B<qemu>.
-+
- =item B<tag=STRING>
- 
- 9pfs tag to identify the filesystem share. The tag is needed on the
--guest side to mount it.
-+guest side to mount it. For the backendtype of B<xen_9pfsd> the tag defaults to
-+"Xen".
- 
- =item B<security_model="none">
- 
-@@ -785,12 +791,38 @@ squash or remap).
- 
- =item B<path=STRING>
- 
--Filesystem path on the backend to export.
-+Filesystem path on the backend to export. For the backendtype of B<xen_9pfsd>
-+the path defaults to "@XEN_LOG_DIR@/guests/<guest-name>".
- 
- =item B<backend=domain-id>
- 
- Specify the backend domain name or id, defaults to dom0.
- 
-+=item B<max-files=NUMBER>
-+
-+Specify the maximum number of files below B<path>. A value of 0 (which
-+is the default) doesn't limit the number of files. Only valid for
-+B<type=xen_9pfsd>.
-+
-+=item B<max-open-files=NUMBER>
-+
-+Specify the maximum number of concurrently opened files below B<path>.
-+Multiple opens of the same file are counted individually. Only valid for
-+B<type=xen_9pfsd>, which has a default of B<max-open-files=5>.
-+
-+=item B<max-space=NUMBER>
-+
-+Specify the maximum used disk space in MiB below B<path>. A value of 0 (which
-+is the default) doesn't limit the usable disk space. Only valid for
-+B<type=xen_9pfsd>.
-+
-+=item B<auto-delete=BOOLEAN>
-+
-+When set the backend will delete the oldest file which is currently not
-+opened by the guest in case the disk space limit set via B<max-space> or the
-+file limit set via B<max-files> is being reached. Only valid for
-+B<type=xen_9pfsd>.
-+
- =back
- 
- =item B<pvcalls=[ "backend=domain-id", ... ]>
-diff --git a/tools/libs/light/libxl_9pfs.c b/tools/libs/light/libxl_9pfs.c
-index 900c0d46a0..ddeb4f20a7 100644
---- a/tools/libs/light/libxl_9pfs.c
-+++ b/tools/libs/light/libxl_9pfs.c
-@@ -20,6 +20,24 @@
- static int libxl__device_p9_setdefault(libxl__gc *gc, uint32_t domid,
-                                        libxl_device_p9 *p9, bool hotplug)
- {
-+    if (p9->type == LIBXL_P9_TYPE_UNKNOWN) {
-+        p9->type = LIBXL_P9_TYPE_QEMU;
-+    }
-+    if (p9->type == LIBXL_P9_TYPE_QEMU &&
-+        (p9->max_files || p9->max_open_files || p9->max_space ||
-+         p9->auto_delete)) {
-+        LOGD(ERROR, domid, "Illegal 9pfs parameter combination");
-+        return ERROR_INVAL;
-+    }
-+    if (p9->type == LIBXL_P9_TYPE_XEN_9PFSD && !p9->tag) {
-+        p9->tag = libxl__strdup(NOGC, "Xen");
-+    }
-+
-+    if (!p9->path || !p9->security_model || !p9->tag) {
-+        LOGD(ERROR, domid, "9pfs spec missing required field!");
-+        return ERROR_INVAL;
-+    }
-+
-     return libxl__resolve_domid(gc, p9->backend_domname, &p9->backend_domid);
- }
- 
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 9b358f11b8..80ffe85f5e 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2233,6 +2233,20 @@ void parse_config_data(const char *config_source,
-                     replace_string(&p9->tag, value);
-                 } else if (!strcmp(key, "backend")) {
-                     replace_string(&p9->backend_domname, value);
-+                } else if (!strcmp(key, "type")) {
-+                    if (libxl_p9_type_from_string(value, &p9->type)) {
-+                        fprintf(stderr, "failed to parse 9pfs type: %s\n",
-+                                value);
-+                        exit(1);
-+                    }
-+                } else if (!strcmp(key, "max-files")) {
-+                    p9->max_files = parse_ulong(value);
-+                } else if (!strcmp(key, "max-open-files")) {
-+                    p9->max_open_files = parse_ulong(value);
-+                } else if (!strcmp(key, "max-space")) {
-+                    p9->max_space = parse_ulong(value);
-+                } else if (!strcmp(key, "auto-delete")) {
-+                    p9->auto_delete = strtoul(value, NULL, 0);
-                 } else {
-                     fprintf(stderr, "Unknown 9pfs parameter '%s'\n", key);
-                     exit(1);
-@@ -2243,9 +2257,12 @@ void parse_config_data(const char *config_source,
- 
-             libxl_string_list_dispose(&pairs);
- 
--            if (!p9->path || !p9->security_model || !p9->tag) {
--                fprintf(stderr, "9pfs spec missing required field!\n");
--                exit(1);
-+            if (p9->type == LIBXL_P9_TYPE_XEN_9PFSD && !p9->path) {
-+                char *path;
-+
-+                xasprintf(&path, XEN_LOG_DIR "/guests/%s", c_info->name);
-+                replace_string(&p9->path, path);
-+                free(path);
-             }
-         }
-     }
+Changes in V7:
+- fixed V6 bugs
+
+Changes in V6:
+- patch 1 of V5 has been applied
+- rebase
+- addressed comments
+
+Changes in V5:
+- 10 patches have been applied already
+- rename source directory to tools/9pfsd
+- addressed comments
+
+Changes in V4:
+- patch 2 of V3 was applied
+- added support of reading directories
+- addressed review comments
+
+Changes in V3:
+- new patches 1, 23-25
+- addressed review comments
+
+Changes in V2:
+- support of multiple rings per device
+- xenlogd->xen-9pfsd rename
+- addressed review comments
+- fixed some bugs
+
+Juergen Gross (8):
+  tools/libs/light: add backend type for 9pfs PV devices
+  tools/xl: support new 9pfs backend xen_9pfsd
+  stubdom: extend xenstore stubdom configs
+  tools: add 9pfs device to xenstore-stubdom
+  tools/xenstored: mount 9pfs device in stubdom
+  tools/xenstored: add helpers for filename handling
+  tools/xenstored: support complete log capabilities in stubdom
+  tools/xenstored: have a single do_control_memreport()
+
+ docs/man/xl.cfg.5.pod.in                      |  36 +++-
+ stubdom/xenstore-minios.cfg                   |   2 +-
+ stubdom/xenstorepvh-minios.cfg                |   2 +-
+ tools/golang/xenlight/helpers.gen.go          |  10 +
+ tools/golang/xenlight/types.gen.go            |  12 ++
+ tools/helpers/init-xenstore-domain.c          |   7 +
+ .../Linux/init.d/sysconfig.xencommons.in      |   1 -
+ tools/hotplug/Linux/launch-xenstore.in        |   1 +
+ tools/include/libxl.h                         |  22 ++
+ tools/libs/light/libxl_9pfs.c                 | 191 +++++++++++++++++-
+ tools/libs/light/libxl_create.c               |   4 +-
+ tools/libs/light/libxl_dm.c                   |   2 +-
+ tools/libs/light/libxl_types.idl              |  11 +
+ tools/libs/light/libxl_types_internal.idl     |   1 +
+ tools/xenstored/control.c                     |  29 +--
+ tools/xenstored/core.c                        |  15 +-
+ tools/xenstored/core.h                        |  11 +-
+ tools/xenstored/domain.c                      |   2 +
+ tools/xenstored/lu_daemon.c                   |   4 +-
+ tools/xenstored/minios.c                      |  62 ++++++
+ tools/xenstored/posix.c                       |   8 +-
+ tools/xl/xl_parse.c                           |  23 ++-
+ 22 files changed, 414 insertions(+), 42 deletions(-)
+
 -- 
 2.35.3
 
