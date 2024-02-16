@@ -4,37 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 061A3C48BF9
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Feb 2024 12:39:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.682189.1061296 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F63BC48BEB
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Feb 2024 12:48:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.682231.1061351 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raxV4-0007K4-2X; Fri, 16 Feb 2024 12:39:30 +0000
+	id 1raxdr-0003iq-Gt; Fri, 16 Feb 2024 12:48:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 682189.1061296; Fri, 16 Feb 2024 12:39:30 +0000
+Received: by outflank-mailman (output) from mailman id 682231.1061351; Fri, 16 Feb 2024 12:48:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1raxV3-0007JU-SG; Fri, 16 Feb 2024 12:39:29 +0000
-Received: by outflank-mailman (input) for mailman id 682189;
- Fri, 16 Feb 2024 12:39:29 +0000
+	id 1raxdr-0003ij-Du; Fri, 16 Feb 2024 12:48:35 +0000
+Received: by outflank-mailman (input) for mailman id 682231;
+ Fri, 16 Feb 2024 12:48:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=acXU=JZ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1raxV3-0006oP-5c
- for xen-devel@lists.xenproject.org; Fri, 16 Feb 2024 12:39:29 +0000
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [2a00:1450:4864:20::536])
+ <SRS0=AOVM=JZ=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1raxdq-0003id-Mn
+ for xen-devel@lists.xenproject.org; Fri, 16 Feb 2024 12:48:34 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20600.outbound.protection.outlook.com
+ [2a01:111:f403:2412::600])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6c0f7a5b-ccc8-11ee-98f5-efadbce2ee36;
- Fri, 16 Feb 2024 13:39:27 +0100 (CET)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-563c2b2bddbso1917233a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 16 Feb 2024 04:39:27 -0800 (PST)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- lj8-20020a170907188800b00a3db1734b92sm1121608ejc.43.2024.02.16.04.39.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 04:39:25 -0800 (PST)
+ id b0abecee-ccc9-11ee-98f5-efadbce2ee36;
+ Fri, 16 Feb 2024 13:48:32 +0100 (CET)
+Received: from CH0PR03CA0397.namprd03.prod.outlook.com (2603:10b6:610:11b::30)
+ by PH8PR12MB7349.namprd12.prod.outlook.com (2603:10b6:510:217::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.26; Fri, 16 Feb
+ 2024 12:48:27 +0000
+Received: from CH2PEPF00000099.namprd02.prod.outlook.com
+ (2603:10b6:610:11b:cafe::70) by CH0PR03CA0397.outlook.office365.com
+ (2603:10b6:610:11b::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.26 via Frontend
+ Transport; Fri, 16 Feb 2024 12:48:27 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH2PEPF00000099.mail.protection.outlook.com (10.167.244.20) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7292.25 via Frontend Transport; Fri, 16 Feb 2024 12:48:27 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 16 Feb
+ 2024 06:48:26 -0600
+Received: from [10.252.147.188] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Fri, 16 Feb 2024 06:48:26 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,281 +61,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c0f7a5b-ccc8-11ee-98f5-efadbce2ee36
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708087166; x=1708691966; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ThFYlqJK5oTZpY8W/cIg7Lb/8W/p8jm22dHZpYH2e2M=;
-        b=g18ZyPL6DZGbI1XbJJ/pOsMnhC1qgil3AsgbM/i+4rUhJaEanKRMTbA8rjSXXtiZcq
-         CkHzb7elCmt0CWRy6QgtDBiMF9ygwwg+10iEaY06w3EbzFQT1Fg43suOB3hyykQrD3Yd
-         OT8n37upIIdCEbcPXEizjOFE6xJ0A58JHtevqDsBm+ocz88tHrCQaJPr5296Hu7fM9JK
-         gHnhNr1Z2qAblPRGcGsRnNem8FnWmKeoOvH43N7MYdmraMQoH5vWWkyyljTKwZTDNu39
-         ujYbk/oJOlnt0GRDnDfNwtgFMFfJNHOwiIZ6jsVMU459xqcl6X87G+QqxCwEMSD99Wsq
-         YokQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708087166; x=1708691966;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ThFYlqJK5oTZpY8W/cIg7Lb/8W/p8jm22dHZpYH2e2M=;
-        b=UvwUxUpFbLj/LrwE8tChBF4fzapf30xVhL4YeICQgcyJZVNO0kNOWnw+ZufYt0cs8f
-         6i9mM0w1T1m9iUiVy1kiwv+s5RHiqfdWRgQCh5Ky5CS9w2OdnfiMhJIOoi5AWeHwFFy1
-         2dzIAFfDmpI/KruXEpwtSKOjYShiO0kzX0RmuSUCN7jsHgQGQYgkNxGfXVtzt5VcrjHR
-         sSpXdS3wBA5xtVkQuTQpw9R5Mf8ShKKJY3WEOnrwCMKU4yqoEp6/KBrJxczvnVhVwXiy
-         coSj3nYaB/CCgq1y7PH2wVlOcAxzqfR4AG26IGXIGRt2r8lvyJkYY0QRYbK62bdPcgHu
-         /fZw==
-X-Gm-Message-State: AOJu0Ywd4nNW5BEXow7QsbJTKOrz2hdDhVEcpWUniau5MufleAFCOVH6
-	V8edHqRl/7tTEZeJlcn0veCXWT1E0rsL9HDHQ/kIQGjkxe5DA+zkkITFrYf3
-X-Google-Smtp-Source: AGHT+IFgq4auslyaCnWeuNKH+MtZ4S5D0tRHphnqTMD5UeBYjyISJtyIhIEUjTq7mMP+mc7a+GeRGA==
-X-Received: by 2002:a17:906:2b09:b0:a3d:6592:a72 with SMTP id a9-20020a1709062b0900b00a3d65920a72mr3093778ejg.8.1708087166161;
-        Fri, 16 Feb 2024 04:39:26 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v9 2/7] xen/asm-generic: introduce stub header monitor.h
-Date: Fri, 16 Feb 2024 13:39:14 +0100
-Message-ID: <296530c13b8400f6872d4afc8cc14e2fcfc7a2d5.1708086092.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1708086091.git.oleksii.kurochko@gmail.com>
-References: <cover.1708086091.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: b0abecee-ccc9-11ee-98f5-efadbce2ee36
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KaBPvpiTgTP8UZ7kxZSavi9pcxK3HqNVdhI36DuseF3XGDEUI+OJjReyJmStFsGXMfFjvnNS6qn1dQia7VGnUlWjWaRonptmim7LGSzwvs7d4pnqCL4q3hClFdyQHGZ5hBrCPUZDBcELb1O0/ehwgUlZTLOsqqfnrBpoo89hlPL3iRaXvOjLoz9jT62+B6nkSmNmHF85hcNm942zLQdY04UTfYb/bO0oY3jLINkNMS00ZPrx5NTk2Z3MqsRrqsjujKNJLxd3YfUQteH4Wh0BBAhCEJ07VOb2aNEhNqObO1jpzOEBwXK0xJ39XILCV7u1sZ+yEESCsLBRopTbg8kdFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JAxFwtbfnmDfEgXkrnAnZHx5SMdcWKlyFBhUESUvpoM=;
+ b=UXGUMW/UIDb2Dd6kXO52BHzJFJMhdFnKyTof3zx1g1sFHek8eyriJZ3d4q29fF7ebn7IWv+qMLfGUiWXIEIeoXRcLuhTHh8TUgYo5rnf/kFMl3T60efu8THEy/A1VrSrtvVDMhDZfr1dR3hoUK+GHvPFd+bZNOlp2WJUjpk6Zmv49PETJ5ihd9MxQi3uIGXhwdVsDz7HeD31//qtAow6DvdQJAnYgzqVrYMjEPPiYutLxZa5McLEzA95UNKR1jEjjrRxN2BQIJftlShRH2UoPUQNCA6GY1G7MBKJ2y0GTGm/IKTXiN0y4ZcC1sZlUx95m9+8G4lkTOPvX0TucIcd1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JAxFwtbfnmDfEgXkrnAnZHx5SMdcWKlyFBhUESUvpoM=;
+ b=tmuEggIr5VnNZJHwsOywUn2TkvFTvl7OZ17Sn/c8komau4Asq84zSqHECPw20+HSiQhebd+Cy1k4yZWvHk0jpokI6wUQEYnBneZRIsXPfHuIobP6OaDpHN5iisWfDbYI4JFeU4OIZsIPwoXeY6iqOCfNH9qLnR4Ovzx/FE5t7qs=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <6240bdb3-ab07-49d8-a0ee-30e01cb12554@amd.com>
+Date: Fri, 16 Feb 2024 13:48:25 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 1/7] automation: introduce fixed randconfig for RISC-V
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	<xen-devel@lists.xenproject.org>
+CC: Doug Goldstein <cardoe@cardoe.com>, Stefano Stabellini
+	<sstabellini@kernel.org>
+References: <cover.1708086091.git.oleksii.kurochko@gmail.com>
+ <d8e330c26394d9415a0d76b2d951bf57b0b6dd4b.1708086092.git.oleksii.kurochko@gmail.com>
+Content-Language: en-US
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <d8e330c26394d9415a0d76b2d951bf57b0b6dd4b.1708086092.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000099:EE_|PH8PR12MB7349:EE_
+X-MS-Office365-Filtering-Correlation-Id: ffa84830-a267-4f6f-d3f0-08dc2eed9226
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	2TjH8dcOr4gbULPhPbmt4S0FEo4d6fPQcJcVdGLlrvi5vuv7jjtDFrQMrcHlMMsWuUvDY+D3+Z6ABzYX0NcLpdwHvQcV6odGZIv+IYhNBDV0yf1F+6l47Jo15wOPjrgFbfPDimbaUJY/NLHg1xM0ODya1EyS+4sN9yOucywSMrMfWCzqfCTDr10CQ0c7vfUrPb/qOA7oAlfC4ILJf+fc3dsObiX/lr61kSaCHBbmfBL0/F+sQXIYMCqMy/xIyugq48J7m/n/jof9EUIs3+hezF6Tz6TQtQvX81S/ug2ZF4YnTUaLYgOlqrtZnhlKnOVvh7v0ypvz9VHLNOlwpsVUxGhe7GBivq74DaRa31VVDGi+00xEbRcWae0IByeQVEWYWP/qxIswfsoxhnZfkQetYjJMOkGCfW0tvx/T2RGRLK9JdGu3epZfoe053TTav+Qo6VQYdH6nx3U2+jsC0hyq9IL5PHWNpZlIV761+Hqwxinlf3cFMyr8kOAWOk5d3kpGoR7B0eh7imreLANDsEoRp3Vuw6fxA4pWxTISL3dxTcQDxxXvoYNAagtDXbWcrmo4wuZojbeaR00Rj/Nveh+uR9wodg2CvuJF+msDLwvP6MbRZNcAmqGz2sd7NmKrW/3CLIlnvnpH7O0r7+0R7QNOFokNorLEmapOO9+BWOQ6C8M=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(396003)(346002)(39860400002)(376002)(230922051799003)(451199024)(36860700004)(82310400011)(64100799003)(1800799012)(186009)(40470700004)(46966006)(31696002)(31686004)(86362001)(5660300002)(8676002)(8936002)(82740400003)(36756003)(2906002)(26005)(44832011)(4744005)(4326008)(2616005)(336012)(81166007)(426003)(356005)(478600001)(83380400001)(70206006)(70586007)(316002)(54906003)(41300700001)(16576012)(53546011)(110136005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2024 12:48:27.3287
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ffa84830-a267-4f6f-d3f0-08dc2eed9226
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH2PEPF00000099.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7349
 
-The header is shared between several archs so it is
-moved to asm-generic.
+Hi,
 
-Switch partly Arm and PPC to asm-generic/monitor.h and only
-arch_monitor_get_capabilities() left in arch-specific/monitor.h.
+On 16/02/2024 13:39, Oleksii Kurochko wrote:
+> 
+> 
+> This patch introduces the anchor riscv-fixed-randconfig,
+> which includes all configurations that should be disabled for
+> randconfig builds.
+> 
+> Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
----
-Changes in V9:
- - Add Acked-by: Julien Grall <jgrall@amazon.com> for Arm part
----
-Changes in V8:
- - Add Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
----
-Changes in V7:
- - Drop definition of arch_monitor_domctl_event for PPC.
- - define arch_monitor_domctl_event in asm-generic/monitor.h.
- - add "define HAS_ARCH_MONITOR_DOMCTL_EVENT" in arm/.../monitor.h as it has arch specific implementation.
----
-Changes in V6:
- - Rebase only.
----
-Changes in V5:
-  - Switched partly Arm and PPC to asm-generic monitor.h only
-    arch_monitor_get_capabilities() left in arch-specific/monitor.h.
-  - Updated the commit message.
----
-Changes in V4:
- - Removed the double blank line.
- - Added Acked-by: Jan Beulich <jbeulich@suse.com>.
- - Update the commit message
----
-Changes in V3:
- - Use forward-declaration of struct domain instead of " #include <xen/sched.h> ".
- - Add ' include <xen/errno.h> '
- - Drop PPC's monitor.h.
----
-Changes in V2:
-	- remove inclusion of "+#include <public/domctl.h>"
-	- add "struct xen_domctl_monitor_op;"
-	- remove one of SPDX tags.
----
- xen/arch/arm/include/asm/monitor.h | 25 +-----------
- xen/arch/ppc/include/asm/monitor.h | 28 +------------
- xen/arch/ppc/stubs.c               |  8 ----
- xen/include/asm-generic/monitor.h  | 64 ++++++++++++++++++++++++++++++
- 4 files changed, 67 insertions(+), 58 deletions(-)
- create mode 100644 xen/include/asm-generic/monitor.h
-
-diff --git a/xen/arch/arm/include/asm/monitor.h b/xen/arch/arm/include/asm/monitor.h
-index 7567be66bd..77a3c1a36c 100644
---- a/xen/arch/arm/include/asm/monitor.h
-+++ b/xen/arch/arm/include/asm/monitor.h
-@@ -25,34 +25,13 @@
- #include <xen/sched.h>
- #include <public/domctl.h>
- 
--static inline
--void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
--{
--}
-+#define HAS_ARCH_MONITOR_DOMCTL_EVENT
- 
--static inline
--int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
--{
--    /* No arch-specific monitor ops on ARM. */
--    return -EOPNOTSUPP;
--}
-+#include <asm-generic/monitor.h>
- 
- int arch_monitor_domctl_event(struct domain *d,
-                               struct xen_domctl_monitor_op *mop);
- 
--static inline
--int arch_monitor_init_domain(struct domain *d)
--{
--    /* No arch-specific domain initialization on ARM. */
--    return 0;
--}
--
--static inline
--void arch_monitor_cleanup_domain(struct domain *d)
--{
--    /* No arch-specific domain cleanup on ARM. */
--}
--
- static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
- {
-     uint32_t capabilities = 0;
-diff --git a/xen/arch/ppc/include/asm/monitor.h b/xen/arch/ppc/include/asm/monitor.h
-index e5b0282bf1..89000dacc6 100644
---- a/xen/arch/ppc/include/asm/monitor.h
-+++ b/xen/arch/ppc/include/asm/monitor.h
-@@ -6,33 +6,7 @@
- #include <public/domctl.h>
- #include <xen/errno.h>
- 
--static inline
--void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
--{
--}
--
--static inline
--int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
--{
--    /* No arch-specific monitor ops on PPC. */
--    return -EOPNOTSUPP;
--}
--
--int arch_monitor_domctl_event(struct domain *d,
--                              struct xen_domctl_monitor_op *mop);
--
--static inline
--int arch_monitor_init_domain(struct domain *d)
--{
--    /* No arch-specific domain initialization on PPC. */
--    return 0;
--}
--
--static inline
--void arch_monitor_cleanup_domain(struct domain *d)
--{
--    /* No arch-specific domain cleanup on PPC. */
--}
-+#include <asm-generic/monitor.h>
- 
- static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
- {
-diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
-index a96e45626d..da193839bd 100644
---- a/xen/arch/ppc/stubs.c
-+++ b/xen/arch/ppc/stubs.c
-@@ -95,14 +95,6 @@ void arch_get_domain_info(const struct domain *d,
-     BUG_ON("unimplemented");
- }
- 
--/* monitor.c */
--
--int arch_monitor_domctl_event(struct domain *d,
--                              struct xen_domctl_monitor_op *mop)
--{
--    BUG_ON("unimplemented");
--}
--
- /* smp.c */
- 
- void arch_flush_tlb_mask(const cpumask_t *mask)
-diff --git a/xen/include/asm-generic/monitor.h b/xen/include/asm-generic/monitor.h
-new file mode 100644
-index 0000000000..1ade289099
---- /dev/null
-+++ b/xen/include/asm-generic/monitor.h
-@@ -0,0 +1,64 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * include/asm-generic/monitor.h
-+ *
-+ * Arch-specific monitor_op domctl handler.
-+ *
-+ * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-+ * Copyright (c) 2016, Bitdefender S.R.L.
-+ *
-+ */
-+
-+#ifndef __ASM_GENERIC_MONITOR_H__
-+#define __ASM_GENERIC_MONITOR_H__
-+
-+#include <xen/errno.h>
-+#include <xen/lib.h>
-+
-+struct domain;
-+struct xen_domctl_monitor_op;
-+
-+static inline
-+void arch_monitor_allow_userspace(struct domain *d, bool allow_userspace)
-+{
-+}
-+
-+static inline
-+int arch_monitor_domctl_op(struct domain *d, struct xen_domctl_monitor_op *mop)
-+{
-+    /* No arch-specific monitor ops on GENERIC. */
-+    return -EOPNOTSUPP;
-+}
-+
-+#ifndef HAS_ARCH_MONITOR_DOMCTL_EVENT
-+static inline
-+int arch_monitor_domctl_event(struct domain *d,
-+                              struct xen_domctl_monitor_op *mop)
-+{
-+    BUG_ON("unimplemented");
-+}
-+#endif
-+
-+static inline
-+int arch_monitor_init_domain(struct domain *d)
-+{
-+    /* No arch-specific domain initialization on GENERIC. */
-+    return 0;
-+}
-+
-+static inline
-+void arch_monitor_cleanup_domain(struct domain *d)
-+{
-+    /* No arch-specific domain cleanup on GENERIC. */
-+}
-+
-+#endif /* __ASM_GENERIC_MONITOR_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: BSD
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
--- 
-2.43.0
+~Michal
 
 
