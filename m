@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E5BEC48BC3
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Feb 2024 12:50:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.682789.1062027 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8259DC48BF8
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Feb 2024 13:13:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.682846.1062037 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rc35x-0002Wd-Le; Mon, 19 Feb 2024 12:50:05 +0000
+	id 1rc3S0-0006Eg-Cv; Mon, 19 Feb 2024 13:12:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 682789.1062027; Mon, 19 Feb 2024 12:50:05 +0000
+Received: by outflank-mailman (output) from mailman id 682846.1062037; Mon, 19 Feb 2024 13:12:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rc35x-0002WA-H8; Mon, 19 Feb 2024 12:50:05 +0000
-Received: by outflank-mailman (input) for mailman id 682789;
- Mon, 19 Feb 2024 11:41:27 +0000
+	id 1rc3S0-0006EZ-9n; Mon, 19 Feb 2024 13:12:52 +0000
+Received: by outflank-mailman (input) for mailman id 682846;
+ Mon, 19 Feb 2024 13:12:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TU0m=J4=gmail.com=guixiongwei@srs-se1.protection.inumbo.net>)
- id 1rc21X-0005nR-17
- for xen-devel@lists.xenproject.org; Mon, 19 Feb 2024 11:41:27 +0000
-Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com
- [2607:f8b0:4864:20::544])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=SL20=J4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rc3Rz-0006ET-2D
+ for xen-devel@lists.xenproject.org; Mon, 19 Feb 2024 13:12:51 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cdf719d4-cf1b-11ee-98f5-efadbce2ee36;
- Mon, 19 Feb 2024 12:41:23 +0100 (CET)
-Received: by mail-pg1-x544.google.com with SMTP id
- 41be03b00d2f7-5cedfc32250so3451510a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 19 Feb 2024 03:41:23 -0800 (PST)
-Received: from [10.4.72.30] ([139.177.225.242])
- by smtp.gmail.com with ESMTPSA id
- w3-20020a17090a528300b002990d91d31dsm4956437pjh.15.2024.02.19.03.41.17
+ id 939dfef0-cf28-11ee-98f5-efadbce2ee36;
+ Mon, 19 Feb 2024 14:12:49 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-410e820a4feso29787235e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Feb 2024 05:12:47 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ t12-20020a5d460c000000b0033b48190e5esm10330769wrq.67.2024.02.19.05.12.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Feb 2024 03:41:21 -0800 (PST)
+ Mon, 19 Feb 2024 05:12:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,160 +47,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cdf719d4-cf1b-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 939dfef0-cf28-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708342881; x=1708947681; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DseBf/8i17+ETW7/Dma7xksfJzr0mR0ZxNxdl75ecBo=;
-        b=N6lEOHHdxvDxzBeKYmSbMgK2LT7CcyqkuRoxLtyIEJNFgmvsePUAwP3VqL6QsVBWpL
-         8+yY4N5i16Hx+5uAuoiPtb9xvHakEWxT893pY4Rq3bZ7OFWuSeEktS5ofiZCk89mc7ER
-         cd4FHphVZJCvjdxQLcEvoih309u+wRvUu6Tt2SMjgkhDjng4d1CzrIsqZ09i6usEINWb
-         khP8fnZJLgO8yUzTzIEZSowu/9BMLJ1iM+Ep+KFkb/ynVoEXvb8CDEuVzSP+tSvrMDKB
-         mrkqOMXuiXFnAbkpkZCM/es2huylxiMhuv6IMyScwcTLYpF53N5yaFS5RZ9PbxCkkrkr
-         3VPw==
+        d=suse.com; s=google; t=1708348367; x=1708953167; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=+SQhz9bz5DkV8QKGE2lk//F5x/WEOKaWqPgS8b52BRQ=;
+        b=ZtNkAtrRlCFtHBoQ16uZdDmrfaC1ikpOMc68/5revpwZ98uNb1Dh4ye6Tvvt/uK+ic
+         U20YH/FvwxyHwKbxWCNfwSqnmmPdCPci3r2zJaGBNUXE2q8HX51nuOdcOTjsGYi5Vcxs
+         eSY/6i8Onjngf+63ewbIbfAZOnvFSLV741LKl01wC0ZASfmwqSCDuPUPywYNetx/ia9e
+         fOPYLbOROk6hajSfVKS5PQUAAeEfckH3vfeaV6WpQ6LCAXm9UQ4yaC9ZF8hkocc/BqTj
+         e8rwiqEItUKXz07nK+7tutE9jYEGDKPYB63z5ututNyaOTa77uf5BaSkt7YWkZxg4oSF
+         PTiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708342881; x=1708947681;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=DseBf/8i17+ETW7/Dma7xksfJzr0mR0ZxNxdl75ecBo=;
-        b=MPNM00Rjg+Q8SJdL3pzeOYQeZ+og8QwC3uPW+nrdQZ8gWxd42SX9GdOgKVvwI03ytI
-         wLL7Uu+ClIqjaraaHQt84pKE3jLdIkoGxIpdZqzNAy0eOfEk1+Rnof0ZPchNfKimPEgZ
-         9dGfKsWwWv2WlcpdaY0xwi54JRKj9ne1bxRymnlFxUwWUO6pzymxlr8uVecnAEmRl5p7
-         rQ/x/DjCQZjmOlr901gr1Bq5WW5tj4LiB6OMp8NzvYcg9KalMXUeDcOsHLCYSJcFB0Wt
-         V+a+NAw7h8nN8ppkCYZVs5hLg7jFYzBDRYpsB68L2D1oLK2wazfOn7Bz2XteOHJk80bT
-         VjWQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWNRI0aE+eYM+u3J1UH9dL213VwOGzjETuJJWL4YNPjiHo7bgpYUf830JwVV2aZZWUZQBjPyT5Iwq+FUnuPRuz2oCW0OuX1OZ0g3vvur6U=
-X-Gm-Message-State: AOJu0YwCeIiVlau8Ae7BWko9EikfQyFxUYKj9ctXTZl08IPYCPM+Aiqx
-	WDEnUbSkrz/WhyCYFbamkavzGNvEfjvjnO0rKQin38l+FaXSvg49
-X-Google-Smtp-Source: AGHT+IHt9rUtlOsN4joDJDaLQ46HZsx+ssQX5mNojSpy9mOPjyyNMVV/S4A0DycY+IBGc04fyk0DsA==
-X-Received: by 2002:a17:90a:134f:b0:299:11c0:13c4 with SMTP id y15-20020a17090a134f00b0029911c013c4mr7631636pjf.24.1708342881478;
-        Mon, 19 Feb 2024 03:41:21 -0800 (PST)
-Message-ID: <7a1c2bf7-df85-431a-ae21-82eeb171f1c4@gmail.com>
-Date: Mon, 19 Feb 2024 19:41:13 +0800
+        d=1e100.net; s=20230601; t=1708348367; x=1708953167;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=+SQhz9bz5DkV8QKGE2lk//F5x/WEOKaWqPgS8b52BRQ=;
+        b=SNkyBIIYvnnO3MtIj7kdVnOcvsYA4As4ZsYg2iqXTG1dKVOoFztITrCnrFb+3uS/Ld
+         iazBbmoSUROcfPkDEV0pXusFhf8aFdob5qCwRrGib6EK+l51FKvYArBnKksF+JWL2Hn6
+         IC3gsfka3K1xvBIlEyXIwXYSbmbLVj83C/St00YyaxFwYky+XmbYqmN7CFGIvXDwATaC
+         dkC/7ZrK4vIIpZCCNBNVA3VhNUHJ46/Odt2bnQqxqvi3lAeTKuG4IJjYwmsKtGIO8HAF
+         kMRUAA65uLveRoJ8yYuG32lK41u2VWfK5VI1hwz/zmfIO7RQKEDJtalAJyV0VVKdhH1i
+         Mpdg==
+X-Forwarded-Encrypted: i=1; AJvYcCVyC+EM6oe37wKzt+RXTndjBZ1wNsV9aDxVkE9Bv7x+lCrt2E2X2BI0mUxeF3YQw6NwE7q4MYiUkvbllHnj3zCG0B7Auy5qlt21oxDloHM=
+X-Gm-Message-State: AOJu0YxP+ps0lYKcF7t8vQ/Oysl4nhXT5x0CGDbTclCDG9l0rLryZ2x2
+	VYT1P3oNPZ01ivgg8rIHAaBCjiH0bsjZuV/7pDon10n7r+0bJamhmuIqkPo6yA==
+X-Google-Smtp-Source: AGHT+IG2UxnGZZICregw2HZKS8TCYBUvJRgU+tkohDP1e3pbPoACQ+yLbuyFaV51CaVq+TABtsVu4g==
+X-Received: by 2002:adf:e947:0:b0:33d:2567:995c with SMTP id m7-20020adfe947000000b0033d2567995cmr6009730wrn.1.1708348367244;
+        Mon, 19 Feb 2024 05:12:47 -0800 (PST)
+Message-ID: <39e8845b-8d41-40e5-8e7a-49e734012d78@suse.com>
+Date: Mon, 19 Feb 2024 14:12:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND RFC] kernel/ksysfs.c: restrict /sys/kernel/notes to root
- access
-To: Kees Cook <keescook@chromium.org>, Greg KH <gregkh@linuxfoundation.org>
-Cc: linux-hardening@vger.kernel.org, Juergen Gross <jgross@suse.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Guixiong Wei <weiguixiong@bytedance.com>, linux-kernel@vger.kernel.org,
+Subject: Re: [PATCH v13.2 01/14] vpci: use per-domain PCI lock to protect vpci
+ structure
+Content-Language: en-US
+To: Stewart Hildebrand <stewart.hildebrand@amd.com>
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+ Paul Durrant <paul@xen.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
  xen-devel@lists.xenproject.org
-References: <20240218073501.54555-1-guixiongwei@gmail.com>
- <2024021825-skiing-trustee-a56a@gregkh> <202402180028.6DB512C50@keescook>
-From: Guixiong Wei <guixiongwei@gmail.com>
-In-Reply-To: <202402180028.6DB512C50@keescook>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20240202213321.1920347-1-stewart.hildebrand@amd.com>
+ <20240202213321.1920347-2-stewart.hildebrand@amd.com>
+ <20240219114750.151730-1-stewart.hildebrand@amd.com>
+ <8e807612-fd14-4d01-b200-1deb583afa22@suse.com>
+ <68bb972c-5e45-4706-a06f-0dcd65c40581@amd.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <68bb972c-5e45-4706-a06f-0dcd65c40581@amd.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+On 19.02.2024 13:47, Stewart Hildebrand wrote:
+> On 2/19/24 07:10, Jan Beulich wrote:
+>> On 19.02.2024 12:47, Stewart Hildebrand wrote:
+>>> @@ -895,6 +891,15 @@ int vpci_msix_arch_print(const struct vpci_msix *msix)
+>>>  {
+>>>      unsigned int i;
+>>>  
+>>> +    /*
+>>> +     * Assert that d->pdev_list doesn't change. ASSERT_PDEV_LIST_IS_READ_LOCKED
+>>> +     * is not suitable here because it may allow either pcidevs_lock() or
+>>> +     * d->pci_lock to be held, but here we rely on d->pci_lock being held, not
+>>> +     * pcidevs_lock().
+>>> +     */
+>>> +    ASSERT(rw_is_locked(&msix->pdev->domain->pci_lock));
+>>> +    ASSERT(spin_is_locked(&msix->pdev->vpci->lock));
+>>
+>> There's no "d" in sight here, so it's a little odd that "d" is being talked
+>> about. But I guess people can infer what's meant without too much trouble.
+> 
+> I can s/d->pci_lock/msix->pdev->domain->pci_lock/ for the next rev.
 
-On 2024/2/18 17:04, Kees Cook wrote:
-> On Sun, Feb 18, 2024 at 08:47:03AM +0100, Greg KH wrote:
->> On Sun, Feb 18, 2024 at 03:35:01PM +0800, Guixiong Wei wrote:
->>> From: Guixiong Wei <weiguixiong@bytedance.com>
->>>
->>> Restrict non-privileged user access to /sys/kernel/notes to
->>> avoid security attack.
->>>
->>> The non-privileged users have read access to notes. The notes
->>> expose the load address of startup_xen. This address could be
->>> used to bypass KASLR.
->> How can it be used to bypass it?
+Or simply drop the d-s? That would be better for readability's sake,
+I think.
+
+>>> @@ -313,17 +316,36 @@ void vpci_dump_msi(void)
+>>>                  {
+>>>                      /*
+>>>                       * On error vpci_msix_arch_print will always return without
+>>> -                     * holding the lock.
+>>> +                     * holding the locks.
+>>>                       */
+>>>                      printk("unable to print all MSI-X entries: %d\n", rc);
+>>> -                    process_pending_softirqs();
+>>> -                    continue;
+>>> +                    goto pdev_done;
+>>>                  }
+>>>              }
+>>>  
+>>> +            /*
+>>> +             * Unlock locks to process pending softirqs. This is
+>>> +             * potentially unsafe, as d->pdev_list can be changed in
+>>> +             * meantime.
+>>> +             */
+>>>              spin_unlock(&pdev->vpci->lock);
+>>> +            read_unlock(&d->pci_lock);
+>>> +        pdev_done:
+>>>              process_pending_softirqs();
+>>> +            if ( !read_trylock(&d->pci_lock) )
+>>> +            {
+>>> +                printk("unable to access other devices for the domain\n");
+>>> +                goto domain_done;
+>>> +            }
+>>>          }
+>>> +        read_unlock(&d->pci_lock);
+>>> +    domain_done:
+>>> +        /*
+>>> +         * We need this label at the end of the loop, but some
+>>> +         * compilers might not be happy about label at the end of the
+>>> +         * compound statement so we adding an empty statement here.
+>>> +         */
+>>> +        ;
 >>
->> KASLR is, for local users, pretty much not an issue, as that's not what
->> it protects from, only remote ones.
->>
->>> For example, the startup_xen is built at 0xffffffff82465180 and
->>> commit_creds is built at 0xffffffff810ad570 which could read from
->>> the /boot/System.map. And the loaded address of startup_xen is
->>> 0xffffffffbc265180 which read from /sys/kernel/notes. So the loaded
->>> address of commit_creds is 0xffffffffbc265180 - (0xffffffff82465180
->>>   - 0xffffffff810ad570) = 0xffffffffbaead570.
->> I've cc: the hardening list on this, I'm sure the developers there have
->> opinions about this.
-> Oh eww, why is Xen spewing addresses into the notes section? (This must
-> be how it finds its entry point? But that would be before relocations
-> happen...)
->
-> But yes, I can confirm that relocations are done against the .notes
-> section at boot, so the addresses exposed in .notes is an immediate
-> KASLR offset exposure.
->
-> In /sys/kernel/notes (are there any tools to read this? I wrote my own...)
->
-> 	type: 1
-> 	name: Xen
-> 	desc: 0xb4a711c0 0xffffffff
->
-> which matches a privileged read of /proc/kallsysms:
->
-> 	ffffffffb4a711c0 T startup_xen
->
-> (and the hypercall_page too)
->
-> There are all coming from arch/x86/xen/xen-head.S:
->
->          ELFNOTE(Xen, XEN_ELFNOTE_GUEST_OS,       .asciz "linux")
->          ELFNOTE(Xen, XEN_ELFNOTE_GUEST_VERSION,  .asciz "2.6")
->          ELFNOTE(Xen, XEN_ELFNOTE_XEN_VERSION,    .asciz "xen-3.0")
-> #ifdef CONFIG_XEN_PV
->          ELFNOTE(Xen, XEN_ELFNOTE_VIRT_BASE,      _ASM_PTR __START_KERNEL_map)
->          /* Map the p2m table to a 512GB-aligned user address. */
->          ELFNOTE(Xen, XEN_ELFNOTE_INIT_P2M,       .quad (PUD_SIZE * PTRS_PER_PUD))
->          ELFNOTE(Xen, XEN_ELFNOTE_ENTRY,          _ASM_PTR startup_xen)
-> ...
->
-> Introduced in commit 5ead97c84fa7 ("xen: Core Xen implementation")
->
-> Exposed in commit da1a679cde9b ("Add /sys/kernel/notes")
->
-> Amazingly these both went in on the same release (v2.6.23, 2007). This
-> has been exposed for longer than KASLR has been upstream. :P
->
->>> Signed-off-by: Guixiong Wei <weiguixiong@bytedance.com>
->>> ---
->>>   kernel/ksysfs.c | 2 +-
->>>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/kernel/ksysfs.c b/kernel/ksysfs.c
->>> index b1292a57c2a5..09bc0730239b 100644
->>> --- a/kernel/ksysfs.c
->>> +++ b/kernel/ksysfs.c
->>> @@ -199,7 +199,7 @@ static ssize_t notes_read(struct file *filp, struct kobject *kobj,
->>>   static struct bin_attribute notes_attr __ro_after_init  = {
->>>   	.attr = {
->>>   		.name = "notes",
->>> -		.mode = S_IRUGO,
->>> +		.mode = S_IRUSR,
->>>   	},
->>>   	.read = &notes_read,
->>>   };
-> Yes please.
->
-> Reviewed-by: Kees Cook <keescook@chromium.org>
->
-> I wonder if we should also remove relocations that are aimed at the
-> .notes section for good measure? If that had already been true, this
-> would have just given the same info as System.map.
-That's a good idea, but it depends on whether the user space tool can 
-accept the remove relocation address.
->> No objection from me, but what userspace tool requires access to this
->> file today?  Will it break if permissions are changed on it?
- From the exposed content, it seems that the main users are Xen-related 
-tools. I add Xen list, developers should be able to provide some 
-information.
->> And what about the module notes files?  If you change one, shouldn't you
->> change all?
- From what I currently know, the module note files do not expose any 
-kernel symbol address, so there is no need for modification.
-> Luckily all of _those_ contain what I'd expect: the Linux and
-> GNU.build-id notes, which are harmless. But if we're going to suddenly
-> have things appearing in here, let's make those root-only too.
-Yes, but I also not sure whether the user space tools using this file 
-can accept this permission modification.
+>> As to "some compilers": Are there any which accept a label not followed
+>> by a statement? Depending on the answer, this comment may be viewed as
+>> superfluous. Or else I'd ask about wording: Besides a grammar issue I
+>> also don't view it as appropriate that a comment talks about "adding"
+>> something when its adjacent code that is meant. That something is there
+>> when the comment is there, hence respective wording should imo be used.
+> 
+> It seems like hit or miss whether gcc would accept it or not (prior
+> discussion at [1]). I agree the comment is rather lengthy for what it's
+> trying to convey. I'd be happy to either remove the comment or reduce
+> it to:
+> 
+>     domain_done:
+>         ; /* Empty statement to make some compilers happy */
+> 
+> [1] https://lore.kernel.org/xen-devel/98b8c131-b0b9-f46c-5f46-c2136f2e3b4e@amd.com/
+
+This earlier discussion only proves that there is at least one compiler
+objecting. There's no proof there that any compiler exists which, as a
+language extension, actually permits such syntax. Yet if the comment
+was purely about normal language syntax, then imo it should be zapped
+altogether, not just be shrunk.
+
+Jan
 
