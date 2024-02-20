@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7656AC48BC3
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Feb 2024 08:53:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.683264.1062718 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48F2EC48BC3
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Feb 2024 08:53:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.683271.1062727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rcLsH-0002ve-CH; Tue, 20 Feb 2024 08:53:13 +0000
+	id 1rcLsd-0003mk-Oo; Tue, 20 Feb 2024 08:53:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 683264.1062718; Tue, 20 Feb 2024 08:53:13 +0000
+Received: by outflank-mailman (output) from mailman id 683271.1062727; Tue, 20 Feb 2024 08:53:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rcLsH-0002vV-7g; Tue, 20 Feb 2024 08:53:13 +0000
-Received: by outflank-mailman (input) for mailman id 683264;
- Tue, 20 Feb 2024 08:53:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zzaM=J5=linaro.org=manos.pitsidianakis@srs-se1.protection.inumbo.net>)
- id 1rcLsF-0002dz-GK
- for xen-devel@lists.xenproject.org; Tue, 20 Feb 2024 08:53:11 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7959e3ec-cfcd-11ee-8a52-1f161083a0e0;
- Tue, 20 Feb 2024 09:53:10 +0100 (CET)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a3e8c1e4aa7so194147066b.2
- for <xen-devel@lists.xenproject.org>; Tue, 20 Feb 2024 00:53:10 -0800 (PST)
-Received: from localhost.localdomain (adsl-245.37.6.163.tellas.gr.
- [37.6.163.245]) by smtp.gmail.com with ESMTPSA id
- cu3-20020a170906ba8300b00a3d014fa12esm3747876ejd.196.2024.02.20.00.53.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 00:53:10 -0800 (PST)
+	id 1rcLsd-0003mc-LA; Tue, 20 Feb 2024 08:53:35 +0000
+Received: by outflank-mailman (input) for mailman id 683271;
+ Tue, 20 Feb 2024 08:53:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=YSgb=J5=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rcLsc-0002F1-Hp
+ for xen-devel@lists.xenproject.org; Tue, 20 Feb 2024 08:53:34 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 868ac1f3-cfcd-11ee-98f5-efadbce2ee36;
+ Tue, 20 Feb 2024 09:53:32 +0100 (CET)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-412698cdd77so8099685e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Feb 2024 00:53:32 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ w14-20020adfcd0e000000b0033d14c96ec1sm12607957wrm.45.2024.02.20.00.53.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Feb 2024 00:53:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,251 +47,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7959e3ec-cfcd-11ee-8a52-1f161083a0e0
+X-Inumbo-ID: 868ac1f3-cfcd-11ee-98f5-efadbce2ee36
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1708419190; x=1709023990; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=74P+PKZ6orTLj/5plkkdrxWuHnGI5wedPF2+fgfkjP0=;
-        b=Wy2Zd/LcuH+3l8id/j9RzCXBT3y4P0QzKrhPQ3jsLvYKL5NM7v74NgOJ+tyq2ONb0V
-         NTcfTwS5A2Kd1yOxY8L8KDNyUrFrDv+0WzNenc5F6e42yXuA/tH2jZryHP3M+Yebzp8l
-         Qd12qScioQ87FOmZtY6fLQi1FM0rwbRoqlj754Y8ESvFKPYlrr9wqhGB79dijbsRmzKk
-         +aJ3mawLZskCs+oa5jwUQUH11A5pfrHfHU0Y2e8r6RaY6nB1TWzTdZhkl8Glgj/3Q6EN
-         HKtZkZpn1Qp+YsWJYHBGCAiD+sGzoJi7XO9faLfclIqhy0ei0trB9PJ5VNcR98fgBw0H
-         frag==
+        d=suse.com; s=google; t=1708419212; x=1709024012; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
+         :from:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=uPp0elCmf96AfayiOwn8U2QJcfk2O81aOrNPDxDcp70=;
+        b=CxZovJAV5o3cIq+PVjJeqWA671HKoDoc5D9KDuXqyRtBYbzZEkgnRb5fFEqdfcYUum
+         6JivygeyVIJQvjQWoSJz86C2gi/KP0WSHM+FRddzXMTa+qfFX3YYMBBFVr0atoAgSCeX
+         8Y1pawcF4RDU3T2ZGGy7J5BQErRAJp1WJvnoMaRYny+1+idV8zKf3CTzgxl7MEUwTELs
+         JhW1MRCho6Ziz5aZmQ4g7AJ27HIYN55oH+Rcqh7zO+XNOPi9AgLwbi2hbteXEA3EOTkC
+         NpvcqvsjhAlLNADFTFI/x2tZfq1849QCvLl7Q/c9OGLxH9DMmqYyuAhR8csLPK2GT4lb
+         9n1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708419190; x=1709023990;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=74P+PKZ6orTLj/5plkkdrxWuHnGI5wedPF2+fgfkjP0=;
-        b=XTIQenuEf85xei1cIa2bz+L2fq9OprFu1JhNOlgGQ9yUqBRgLX42xiKqYbqMrOrc+z
-         FjUvFsZexwalEmtBYG6VgIj4AQHRJhfRQtD+EbJsUaOQz+4znaWJgxJ2efRSFWrd6eLF
-         UXMNPawYZzB1UoE8WH/YJt4atA8XsWnxNsLhKxc7Qz63qu6OArDOnt98nRHz8OgbSLtg
-         EdCStW3yii0dG6kagz8FzvBpl850IMNjDIJN1zsfsxgcB5RYsuNbFCXlxgwWRXaxTS7q
-         ArysrVj1Py1py5lRVf6srBjlGkF5h+4EdRNwjjH1sOohIteI+5Tp9bF9gmuWX1Nhh04v
-         V4pg==
-X-Forwarded-Encrypted: i=1; AJvYcCVXJS8X0Bv4W43tVq2ZY2jdoHnHoQe7zSffnD2G2rIsuA96duDgJ3V/BqV95dA9ESbFc/+Q7xFALKLjjkdL+RK5BFoXYN9fhPJZLmb0yEc=
-X-Gm-Message-State: AOJu0YxVl4kQElLKjY5KLEevY5AKxxG2gQhkMdpmnQWzhkOaSxslg2dN
-	CNBUfobRyOWAVfj98VWxfozNT5t/bx0Lkl4CHF9l4jIwYN07bksadxb8FZvlfmk=
-X-Google-Smtp-Source: AGHT+IH0/5iDtgDsLwpGN/YmUhRGA55XSWPIdNMzHkhCmG1fsWPv29/an+50Zc6oVwnQznVwV1dJEg==
-X-Received: by 2002:a17:906:57ca:b0:a3f:ce8:1234 with SMTP id u10-20020a17090657ca00b00a3f0ce81234mr403891ejr.68.1708419190280;
-        Tue, 20 Feb 2024 00:53:10 -0800 (PST)
-From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-To: qemu-trivial@nongnu.org
-Cc: qemu-devel@nongnu.org,
-	Michael Tokarev <mjt@tls.msk.ru>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v1 03/21] Xen headers: correct typos
-Date: Tue, 20 Feb 2024 10:52:10 +0200
-Message-Id: <dca380ada7f7eabfb473828eccafc2902b1985b7.1708419115.git.manos.pitsidianakis@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1708419115.git.manos.pitsidianakis@linaro.org>
-References: <cover.1708419115.git.manos.pitsidianakis@linaro.org>
+        d=1e100.net; s=20230601; t=1708419212; x=1709024012;
+        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
+         :from:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uPp0elCmf96AfayiOwn8U2QJcfk2O81aOrNPDxDcp70=;
+        b=vk2MtnlFsFjvpK4ZMd5CC2CR1XNEbnhIOrBXV+duJIQEqQWgnN4zCg/L4TO4YIOJQ+
+         Mc7A8lFEoGMUP4S4x3xpNi7cDoDEviF0ikvtE+qYcq+DQRzilWAdJYZ4q6ppVhoo12LH
+         0FiPBF2kKINvbeYPgPsU40Tp/rgfPuD3olkqVFsSayQzxIJPIwvilCVkk/BEd4FkFrob
+         O5FWTgFE49DyZsdzCw3NHLP9lepRKpyyZlymw/p1q+GDld4EjCnSgFqhdUze0e1D6e8p
+         4C4CsKCLjL8bN+iFPpQPl31Kv/awR5uG+xUH+hNU4dNkIQupH0eXlD5Vu5sp0EeaAq04
+         G9/A==
+X-Gm-Message-State: AOJu0YzFNyDVEfKFR4sM/b1DkkFvbKjACFZmww0iwOP+sUXDvv3bIf9m
+	iTdG/rxGWjOxWTTMTB0szBRT3uRHUiKVHg+NJuVn91gr9Y6rWZnn+sDuLScoQW5RLUBEjbzt64s
+	=
+X-Google-Smtp-Source: AGHT+IFHtjbHbKo4h5YKKP2rg1k+1j2Twm/B3b+aRITSLkoDCKBr6vLlArxlwCAT4vJ98Z5XQY+t1w==
+X-Received: by 2002:a05:600c:45d1:b0:412:6de4:cbe1 with SMTP id s17-20020a05600c45d100b004126de4cbe1mr1344836wmo.15.1708419212431;
+        Tue, 20 Feb 2024 00:53:32 -0800 (PST)
+Message-ID: <9836c01a-7f9f-4f8e-ba7d-1a7ab7e2e4e1@suse.com>
+Date: Tue, 20 Feb 2024 09:53:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: [PATCH v4 3/8] serial: drop serial_rx_fn's regs parameter
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <e5f62a45-5b68-404d-908e-909f84f87b44@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <e5f62a45-5b68-404d-908e-909f84f87b44@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Correct typos automatically found with the `typos` tool
-<https://crates.io/crates/typos>
+It's simply not needed anymore.
 
-Signed-off-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
- include/hw/xen/interface/arch-x86/xen-x86_64.h | 2 +-
- include/hw/xen/interface/arch-x86/xen.h        | 2 +-
- include/hw/xen/interface/event_channel.h       | 2 +-
- include/hw/xen/interface/grant_table.h         | 2 +-
- include/hw/xen/interface/hvm/hvm_op.h          | 2 +-
- include/hw/xen/interface/io/blkif.h            | 4 ++--
- include/hw/xen/interface/io/fbif.h             | 2 +-
- include/hw/xen/interface/io/kbdif.h            | 2 +-
- include/hw/xen/interface/io/ring.h             | 2 +-
- include/hw/xen/interface/memory.h              | 2 +-
- include/hw/xen/interface/physdev.h             | 4 ++--
- include/hw/xen/interface/xen.h                 | 4 ++--
- 12 files changed, 15 insertions(+), 15 deletions(-)
+v2: Re-base over earlier (new/split) patches.
 
-diff --git a/include/hw/xen/interface/arch-x86/xen-x86_64.h b/include/hw/xen/interface/arch-x86/xen-x86_64.h
-index 5d9035ed22..3e94eeb0bf 100644
---- a/include/hw/xen/interface/arch-x86/xen-x86_64.h
-+++ b/include/hw/xen/interface/arch-x86/xen-x86_64.h
-@@ -89,7 +89,7 @@
-  *   RING1 -> RING3 kernel mode.
-  *   RING2 -> RING3 kernel mode.
-  *   RING3 -> RING3 user mode.
-- * However RING0 indicates that the guest kernel should return to iteself
-+ * However RING0 indicates that the guest kernel should return to itself
-  * directly with
-  *      orb   $3,1*8(%rsp)
-  *      iretq
-diff --git a/include/hw/xen/interface/arch-x86/xen.h b/include/hw/xen/interface/arch-x86/xen.h
-index c0f4551247..323bd06a63 100644
---- a/include/hw/xen/interface/arch-x86/xen.h
-+++ b/include/hw/xen/interface/arch-x86/xen.h
-@@ -156,7 +156,7 @@ typedef uint64_t tsc_timestamp_t; /* RDTSC timestamp */
-  * information in this structure is updated, the fields read include: fpu_ctxt
-  * (if VGCT_I387_VALID is set), flags, user_regs and debugreg[*].
-  *
-- * Note: VCPUOP_initialise for HVM guests is non-symetric with
-+ * Note: VCPUOP_initialise for HVM guests is non-symmetric with
-  * DOMCTL_setvcpucontext, and uses struct vcpu_hvm_context from hvm/hvm_vcpu.h
-  */
- struct vcpu_guest_context {
-diff --git a/include/hw/xen/interface/event_channel.h b/include/hw/xen/interface/event_channel.h
-index 0d91a1c4af..d446863230 100644
---- a/include/hw/xen/interface/event_channel.h
-+++ b/include/hw/xen/interface/event_channel.h
-@@ -302,7 +302,7 @@ typedef struct evtchn_set_priority evtchn_set_priority_t;
-  * ` enum neg_errnoval
-  * ` HYPERVISOR_event_channel_op_compat(struct evtchn_op *op)
-  * `
-- * Superceded by new event_channel_op() hypercall since 0x00030202.
-+ * Superseded by new event_channel_op() hypercall since 0x00030202.
-  */
- struct evtchn_op {
-     uint32_t cmd; /* enum event_channel_op */
-diff --git a/include/hw/xen/interface/grant_table.h b/include/hw/xen/interface/grant_table.h
-index 1dfa17a6d0..7652e8bf81 100644
---- a/include/hw/xen/interface/grant_table.h
-+++ b/include/hw/xen/interface/grant_table.h
-@@ -607,7 +607,7 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_cache_flush_t);
-  /*
-   * GNTMAP_contains_pte subflag:
-   *  0 => This map request contains a host virtual address.
--  *  1 => This map request contains the machine addess of the PTE to update.
-+  *  1 => This map request contains the machine address of the PTE to update.
-   */
- #define _GNTMAP_contains_pte    (4)
- #define GNTMAP_contains_pte     (1<<_GNTMAP_contains_pte)
-diff --git a/include/hw/xen/interface/hvm/hvm_op.h b/include/hw/xen/interface/hvm/hvm_op.h
-index e22adf0319..3defe1c108 100644
---- a/include/hw/xen/interface/hvm/hvm_op.h
-+++ b/include/hw/xen/interface/hvm/hvm_op.h
-@@ -337,7 +337,7 @@ struct xen_hvm_altp2m_op {
- #define HVMOP_altp2m_vcpu_disable_notify  13
- /* Get the active vcpu p2m index */
- #define HVMOP_altp2m_get_p2m_idx          14
--/* Set the "Supress #VE" bit for a range of pages */
-+/* Set the "Suppress #VE" bit for a range of pages */
- #define HVMOP_altp2m_set_suppress_ve_multi 15
- /* Set visibility for a given altp2m view */
- #define HVMOP_altp2m_set_visibility       16
-diff --git a/include/hw/xen/interface/io/blkif.h b/include/hw/xen/interface/io/blkif.h
-index 22f1eef0c0..4356956975 100644
---- a/include/hw/xen/interface/io/blkif.h
-+++ b/include/hw/xen/interface/io/blkif.h
-@@ -42,7 +42,7 @@
-  * All data in the XenStore is stored as strings.  Nodes specifying numeric
-  * values are encoded in decimal.  Integer value ranges listed below are
-  * expressed as fixed sized integer types capable of storing the conversion
-- * of a properly formated node string, without loss of information.
-+ * of a properly formatted node string, without loss of information.
-  *
-  * Any specified default value is in effect if the corresponding XenBus node
-  * is not present in the XenStore.
-@@ -406,7 +406,7 @@
-  *     further requests may reuse these grants and require write permissions.
-  * (9) Linux implementation doesn't have a limit on the maximum number of
-  *     grants that can be persistently mapped in the frontend driver, but
-- *     due to the frontent driver implementation it should never be bigger
-+ *     due to the frontend driver implementation it should never be bigger
-  *     than RING_SIZE * BLKIF_MAX_SEGMENTS_PER_REQUEST.
-  *(10) The discard-secure property may be present and will be set to 1 if the
-  *     backing device supports secure discard.
-diff --git a/include/hw/xen/interface/io/fbif.h b/include/hw/xen/interface/io/fbif.h
-index 93c73195d8..46046f6775 100644
---- a/include/hw/xen/interface/io/fbif.h
-+++ b/include/hw/xen/interface/io/fbif.h
-@@ -72,7 +72,7 @@ union xenfb_out_event
-  * just ignore it.  Frontends that use the advice should immediately
-  * refresh the framebuffer (and send an update notification event if
-  * those have been requested), then use the update frequency to guide
-- * their periodical refreshs.
-+ * their periodical refresh.
-  */
- #define XENFB_TYPE_REFRESH_PERIOD 1
- #define XENFB_NO_REFRESH 0
-diff --git a/include/hw/xen/interface/io/kbdif.h b/include/hw/xen/interface/io/kbdif.h
-index 4bde6b3821..5794cc33f8 100644
---- a/include/hw/xen/interface/io/kbdif.h
-+++ b/include/hw/xen/interface/io/kbdif.h
-@@ -22,7 +22,7 @@
-  * All data in XenStore is stored as strings.  Nodes specifying numeric
-  * values are encoded in decimal. Integer value ranges listed below are
-  * expressed as fixed sized integer types capable of storing the conversion
-- * of a properly formated node string, without loss of information.
-+ * of a properly formatted node string, without loss of information.
-  *
-  *****************************************************************************
-  *                            Backend XenBus Nodes
-diff --git a/include/hw/xen/interface/io/ring.h b/include/hw/xen/interface/io/ring.h
-index 025939278b..6d8f63d7a5 100644
---- a/include/hw/xen/interface/io/ring.h
-+++ b/include/hw/xen/interface/io/ring.h
-@@ -145,7 +145,7 @@ typedef struct __name##_back_ring __name##_back_ring_t
-  *
-  * N.B. these macros do NO INTERLOCKS OR FLOW CONTROL.
-  * This is OK in 1-for-1 request-response situations where the
-- * requestor (front end) never has more than RING_SIZE()-1
-+ * requester (front end) never has more than RING_SIZE()-1
-  * outstanding requests.
-  */
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -526,7 +526,7 @@ static void switch_serial_input(void)
+     printk("\n");
+ }
  
-diff --git a/include/hw/xen/interface/memory.h b/include/hw/xen/interface/memory.h
-index 29cf5c8239..ad11573d90 100644
---- a/include/hw/xen/interface/memory.h
-+++ b/include/hw/xen/interface/memory.h
-@@ -167,7 +167,7 @@ struct xen_machphys_mfn_list {
+-static void __serial_rx(char c, struct cpu_user_regs *regs)
++static void __serial_rx(char c)
+ {
+     switch ( console_rx )
+     {
+@@ -578,7 +578,7 @@ static void __serial_rx(char c, struct c
+ #endif
+ }
  
-     /*
-      * Pointer to buffer to fill with list of extent starts. If there are
--     * any large discontiguities in the machine address space, 2MB gaps in
-+     * any large discontinuities in the machine address space, 2MB gaps in
-      * the machphys table will be represented by an MFN base of zero.
-      */
-     XEN_GUEST_HANDLE(xen_pfn_t) extent_start;
-diff --git a/include/hw/xen/interface/physdev.h b/include/hw/xen/interface/physdev.h
-index f0c0d4727c..053c045cf5 100644
---- a/include/hw/xen/interface/physdev.h
-+++ b/include/hw/xen/interface/physdev.h
-@@ -206,7 +206,7 @@ typedef struct physdev_manage_pci_ext physdev_manage_pci_ext_t;
- DEFINE_XEN_GUEST_HANDLE(physdev_manage_pci_ext_t);
+-static void cf_check serial_rx(char c, struct cpu_user_regs *regs)
++static void cf_check serial_rx(char c)
+ {
+     static int switch_code_count = 0;
  
- /*
-- * Argument to physdev_op_compat() hypercall. Superceded by new physdev_op()
-+ * Argument to physdev_op_compat() hypercall. Superseded by new physdev_op()
-  * hypercall since 0x00030202.
-  */
- struct physdev_op {
-@@ -332,7 +332,7 @@ DEFINE_XEN_GUEST_HANDLE(physdev_dbgp_op_t);
+@@ -594,10 +594,10 @@ static void cf_check serial_rx(char c, s
+     }
  
- #if __XEN_INTERFACE_VERSION__ < 0x00040600
- /*
-- * These all-capitals physdev operation names are superceded by the new names
-+ * These all-capitals physdev operation names are superseded by the new names
-  * (defined above) since interface version 0x00030202. The guard above was
-  * added post-4.5 only though and hence shouldn't check for 0x00030202.
-  */
-diff --git a/include/hw/xen/interface/xen.h b/include/hw/xen/interface/xen.h
-index 920567e006..b8fe746f78 100644
---- a/include/hw/xen/interface/xen.h
-+++ b/include/hw/xen/interface/xen.h
-@@ -733,8 +733,8 @@ struct shared_info {
-      * are delivered by this mechanism:
-      *  1. Bi-directional inter- and intra-domain connections. Domains must
-      *     arrange out-of-band to set up a connection (usually by allocating
--     *     an unbound 'listener' port and avertising that via a storage service
--     *     such as xenstore).
-+     *     an unbound 'listener' port and advertising that via a storage
-+     *     service such as xenstore).
-      *  2. Physical interrupts. A domain with suitable hardware-access
-      *     privileges can bind an event-channel port to a physical interrupt
-      *     source.
--- 
-γαῖα πυρί μιχθήτω
+     for ( ; switch_code_count != 0; switch_code_count-- )
+-        __serial_rx(switch_code, regs);
++        __serial_rx(switch_code);
+ 
+     /* Finally process the just-received character. */
+-    __serial_rx(c, regs);
++    __serial_rx(c);
+ }
+ 
+ static void cf_check notify_dom0_con_ring(void *unused)
+--- a/xen/drivers/char/serial.c
++++ b/xen/drivers/char/serial.c
+@@ -68,7 +68,7 @@ void serial_rx_interrupt(struct serial_p
+     spin_unlock_irqrestore(&port->rx_lock, flags);
+ 
+     if ( fn != NULL )
+-        (*fn)(c & 0x7f, regs);
++        fn(c & 0x7f);
+ }
+ 
+ void serial_tx_interrupt(struct serial_port *port, struct cpu_user_regs *regs)
+--- a/xen/drivers/char/xen_pv_console.c
++++ b/xen/drivers/char/xen_pv_console.c
+@@ -118,7 +118,7 @@ size_t pv_console_rx(struct cpu_user_reg
+     {
+         c = cons_ring->in[MASK_XENCONS_IDX(cons++, cons_ring->in)];
+         if ( cons_rx_handler )
+-            cons_rx_handler(c, regs);
++            cons_rx_handler(c);
+         recv++;
+     }
+ 
+--- a/xen/include/xen/serial.h
++++ b/xen/include/xen/serial.h
+@@ -15,7 +15,7 @@
+ struct cpu_user_regs;
+ 
+ /* Register a character-receive hook on the specified COM port. */
+-typedef void (*serial_rx_fn)(char c, struct cpu_user_regs *regs);
++typedef void (*serial_rx_fn)(char c);
+ void serial_set_rx_handler(int handle, serial_rx_fn fn);
+ 
+ /* Number of characters we buffer for a polling receiver. */
 
 
