@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAA8C48BC3
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Feb 2024 07:02:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.683811.1063420 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD0EC48BC3
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Feb 2024 07:09:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.683818.1063442 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rcgcc-0000Bl-HQ; Wed, 21 Feb 2024 07:02:26 +0000
+	id 1rcgjM-0001A5-Ff; Wed, 21 Feb 2024 07:09:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 683811.1063420; Wed, 21 Feb 2024 07:02:26 +0000
+Received: by outflank-mailman (output) from mailman id 683818.1063442; Wed, 21 Feb 2024 07:09:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rcgcc-0000Bd-Ex; Wed, 21 Feb 2024 07:02:26 +0000
-Received: by outflank-mailman (input) for mailman id 683811;
- Wed, 21 Feb 2024 07:02:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CeSM=J6=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1rcgcb-0000BX-OV
- for xen-devel@lists.xenproject.org; Wed, 21 Feb 2024 07:02:25 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29a5dbdf-d087-11ee-98f5-efadbce2ee36;
- Wed, 21 Feb 2024 08:02:23 +0100 (CET)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-512b29f82d1so4404510e87.1
- for <xen-devel@lists.xenproject.org>; Tue, 20 Feb 2024 23:02:23 -0800 (PST)
+	id 1rcgjM-00019y-BL; Wed, 21 Feb 2024 07:09:24 +0000
+Received: by outflank-mailman (input) for mailman id 683818;
+ Wed, 21 Feb 2024 07:09:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=TA2L=J6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rcgjL-00019P-I2
+ for xen-devel@lists.xenproject.org; Wed, 21 Feb 2024 07:09:23 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 21f17d81-d088-11ee-8a53-1f161083a0e0;
+ Wed, 21 Feb 2024 08:09:20 +0100 (CET)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a3e891b5e4eso333104166b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Feb 2024 23:09:20 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ tz3-20020a170907c78300b00a3e0b7e7217sm4571618ejc.48.2024.02.20.23.09.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Feb 2024 23:09:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,145 +47,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29a5dbdf-d087-11ee-98f5-efadbce2ee36
+X-Inumbo-ID: 21f17d81-d088-11ee-8a53-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1708498943; x=1709103743; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0ZDuYmCw68tSZSZV15ysOk1bl/+jDWERuA9QV+0SCDw=;
-        b=f7WWbUHlfp/jFxA+/VbPZqVyqhlbDTxJhPa6wtaKtFwwIY2QkQ96Y6KwkOgwFRtO1J
-         PFCzccyatNLy9tY5vVoEr7UdZ8VtqGkB9ZmBoHQm1eM8lgO8S9h55pE/TutN5zVLxdgA
-         w/V0wPlcnpFQnHZYkijsmr4QfFZw7qUEjOpww=
+        d=suse.com; s=google; t=1708499359; x=1709104159; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=LJduH8fD1eLpHOA380mFlZlKNFPfToyyPfK1YmR13nE=;
+        b=Kf8PIHnBh3IIx3RCfXKvgtUELvsDeyIv0J7jVcvhxvbfjX5AtnGLlBzE0YDyGKLB+f
+         ZBa+QVR9E5UyIg+ZYvhkNCHhrOKHpw9q804iFJtG+/1B8ZMkbG6g4OUBX20PnKvRWARg
+         2/GI6uGFhwOK3qwWSLp/g+LnV2jpHBsJz93j0SmGlFG3Z5u4O2bKIw8asHDqey69VlfC
+         /rmZ89Ixi2B6kTiZyrGDKs/66QiAGIJtRIiU7/XVe+mZS+xMYhwSwTZcViwTZe/sFvk/
+         FriFUKGBhAbk/FMMlaRWJsz6suwtMOGP0cEbOatt1f/5jErn7MrTNg9oT2dOAmu8ErHo
+         kfpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708498943; x=1709103743;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0ZDuYmCw68tSZSZV15ysOk1bl/+jDWERuA9QV+0SCDw=;
-        b=TV+pF8w2h/WJ1PfiwynZhhaltV7kgnMxpDkCo8x3+IdOqWkiFmr8HWViErdcWbXEyZ
-         ULmQjkq57WYsYWszP4pCaC58CXpXj8g9BpwaEY8rHXsZ6MiB4dVE/0hNpvm/VauzSCFB
-         ncG6JBOlw1Ak4B5f6oCs0BaXSYz1VMe7wr+uMdfr6QpDS3Sp7uU7pAHMWsCzwD4JdThx
-         +2HREd5sDyVe9vsvgseUFlkSmcfhsALhG21PTFohL3K91vO7NTfgS6XAGvYfy2L7i5+i
-         X1xHXZkodNmD8jbMyUkm621leK2pQ9Pp0OMcjX6CyW2iklUXAkXHOdMZC8y3CyeB5lRo
-         I8Jg==
-X-Forwarded-Encrypted: i=1; AJvYcCXFnwHeZj3i2/SM65z8mfpq9dRhYZSR2XuryaH490k7UqST3ayTWCCunuXiT5mN7k8mYhVVc6dFxaE7ikBy8V5FojgMbCHcxTZmM+111Ls=
-X-Gm-Message-State: AOJu0YzdqiCKBtpcNEctoKaYx6yiexUMy66ZdN10i7kagVzXqN96q+mk
-	XeWSaVDg7RGch5+nbXuHEvm0W1KEDZkM5DKU7qm4Mvgg8bmLYH2WGGLvzX/vR2vYK+VJFtUOXm8
-	OG84eWtZfwRDgK1EQFYKT0z2OMlusCtDnXMrT6g==
-X-Google-Smtp-Source: AGHT+IEuPx0Dxmb1fEwJS9ag9XvHSGKUCqc9RozVlhurOAtTecM0QJqWBIaAKTY30AbN6O2OBLFLCXL6ddtpkVnzj6Y=
-X-Received: by 2002:ac2:4f8a:0:b0:511:7259:370d with SMTP id
- z10-20020ac24f8a000000b005117259370dmr10189457lfs.33.1708498942856; Tue, 20
- Feb 2024 23:02:22 -0800 (PST)
+        d=1e100.net; s=20230601; t=1708499359; x=1709104159;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=LJduH8fD1eLpHOA380mFlZlKNFPfToyyPfK1YmR13nE=;
+        b=hSHy5CFYPvP17rBVybXcR8BVme9H0ivyOAnnF/1FwG6f4nmGhCjimLCClEq5wxfrST
+         73yEk0gcVis8Taq84SoZIfCapB1zcYIfRmPnr90OqBNbYITvNBCFDbAAKZBwocht2TFb
+         zbTvplEulrraL9ddl6CFnyovNNkcsSaFES75tiiHZIofolPEsBYMPXNbtB7qBhwRXk1M
+         hPiKM466wd81I7VEpow7yTMNirG2YPFrtQrVjkybNQjCdM/oCI/KVogNSC2Qrj26PRng
+         /fQUb65DDaO1vLu2Q/AON5hmXTIwXSLByxdeH8gxPduoHF9w13vanxy4MJ3YyFS/Pqd2
+         t0ng==
+X-Forwarded-Encrypted: i=1; AJvYcCWZUjKLhCuQ0+ce6Ku6EFBg7T8FzqTEp1eX9Vp/O/HzolbA2dWyDkL0Xj7LApiz8f+WJoadKVRrhugxQ/v9xxSwctMj4seWqHCOOGSuJgg=
+X-Gm-Message-State: AOJu0YxLy/z8E/8tUIKW2cOHJ5c8Q7D41qcodb5vNFKw0xxZGGVhA5T9
+	dz4d37fq5xzKX4U7Uu6DBhUCjXbopfqQHiaL2vmiNcnOOkeKCYN1zJVRdppAQQ==
+X-Google-Smtp-Source: AGHT+IE8k2jkPTWX+k0kZM2Xv3gZbFg0kL2x6CD392XXuVLw4m3xphkdDt46CMG5FaeYKs7Uzix0MA==
+X-Received: by 2002:a17:906:7d4:b0:a3e:cc03:d40e with SMTP id m20-20020a17090607d400b00a3ecc03d40emr4222580ejc.63.1708499359398;
+        Tue, 20 Feb 2024 23:09:19 -0800 (PST)
+Message-ID: <e7c4b08f-724a-4419-977a-caa1342c47eb@suse.com>
+Date: Wed, 21 Feb 2024 08:09:18 +0100
 MIME-Version: 1.0
-References: <20240206012051.3564035-1-george.dunlap@cloud.com>
- <20240206012051.3564035-2-george.dunlap@cloud.com> <66962dfc-db89-40bc-8411-9b92f9458b16@suse.com>
-In-Reply-To: <66962dfc-db89-40bc-8411-9b92f9458b16@suse.com>
-From: George Dunlap <george.dunlap@cloud.com>
-Date: Wed, 21 Feb 2024 15:02:11 +0800
-Message-ID: <CA+zSX=ZwUT4Wf7eY3DFyp=Bf_MndExoKCZBVGEhF-ByaOEH7tw@mail.gmail.com>
-Subject: Re: [PATCH 1/6] xen/hvm: Convert hap_capabilities into a bitfield
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Wei Liu <wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN v5 1/3] xen/arm: Introduce CONFIG_PARTIAL_EMULATION and
+ "partial-emulation" cmd option
+Content-Language: en-US
+To: Ayan Kumar Halder <ayankuma@amd.com>,
+ Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+Cc: sstabellini@kernel.org, stefano.stabellini@amd.com, julien@xen.org,
+ Volodymyr_Babchuk@epam.com, bertrand.marquis@arm.com, michal.orzel@amd.com,
+ xen-devel@lists.xenproject.org
+References: <20240220121743.3680715-1-ayan.kumar.halder@amd.com>
+ <20240220121743.3680715-2-ayan.kumar.halder@amd.com>
+ <e3a8ce5d-841e-4ff1-8d23-48de822972ef@suse.com>
+ <5f526deb-7376-4c34-85d1-d22b1b14d90e@amd.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <5f526deb-7376-4c34-85d1-d22b1b14d90e@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 19, 2024 at 9:36=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 06.02.2024 02:20, George Dunlap wrote:
-> > hvm_function_table is an internal structure; rather than manually
-> > |-ing and &-ing bits, just make it a boolean bitfield and let the
-> > compiler do all the work.  This makes everything easier to read, and
-> > presumably allows the compiler more flexibility in producing efficient
-> > code.
-> >
-> > No functional change intended.
-> >
-> > Signed-off-by: George Dunlap <george.dunlap@cloud.com>
->
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
->
-> > ---
-> > Questions:
-> >
-> > * Should hap_superpage_2m really be set unconditionally, or should we
-> >   condition it on cpu_has_svm_npt?
->
-> That's HAP capabilities; there's not going to be any use of HAP when
-> there's no NPT (on an AMD system). IOW - all is fine as is, imo.
+On 20.02.2024 16:22, Ayan Kumar Halder wrote:
+> On 20/02/2024 12:33, Jan Beulich wrote:
+>> On 20.02.2024 13:17, Ayan Kumar Halder wrote:
+>>> --- a/SUPPORT.md
+>>> +++ b/SUPPORT.md
+>>> @@ -101,6 +101,18 @@ Extension to the GICv3 interrupt controller to support MSI.
+>>>   
+>>>       Status: Experimental
+>>>   
+>>> +### ARM/Partial Emulation
+>>> +
+>>> +Enable partial emulation of registers, otherwise considered unimplemented,
+>>> +that would normally trigger a fault injection.
+>>> +
+>>> +    Status: Supported, with caveats
+>>> +
+>>> +Bugs allowing the userspace to attack the guest OS will not be considered
+>>> +security vulnerabilities.
+>>> +
+>>> +Bugs that could compromise Xen will be considered security vulnerabilities.
+>> ... the odd statement regarding in-guest vulnerabilities that might be
+>> introduced. I see only two ways of treating this as supported: Either
+>> you simply refuse emulation when the access is from user space,
+> 
+> I am wondering how do we enforce that.
+> 
+> Let me try to understand this with the current implementation of partial 
+> emulation for system registers.
+> 
+> 1. DBGDTRTX_EL0 :- I understand that EL0 access to this register will 
+> cause a trap to EL2. The reason being MDCR_EL2.TDA == 1.
+> 
+> In that case, if we refuse emulation then an undef exception is injected 
+> to the guest (this is the behavior as of today even without this patch).
+> 
+> So, are you saying that the undef exception is to be injected to the 
+> user space process. This may be possible for Arm64 guests 
+> (inject_undef64_exception() needs to be changed).
 
-Basically there are two stances to take:
+No, injection is always to the guest, not to a specific entity within the
+guest. That ought to be the same on bare hardware: An exception when
+raised has an architecturally defined entry point for handling. That'll
+typically be kernel code. The handler then figures out whether the source
+of the exception was in user or kernel mode. For user mode code, the
+kernel may or may not try to handle the exception and then continue the
+user mode process. If it can't or doesn't want to handle it, it'll raise
+(in UNIX terms) a signal to the process. That signal, in turn, may or may
+not be fatal to the process. But such an exception from user mode should
+never be fatal to the guest as a whole.
 
-1. hap_superpage_2m always has meaning.  If there's no HAP, then there
-are no HAP superpages, so we should say that there are no superpages.
+> However for Arm32 guests, this may not be possible as the mode changes 
+> to PSR_MODE_UND.
 
-2. hap_superpage_2m only has meaning if hap is enabled.  If there's no
-HAP, then the question "are there superpages" is moot; nobody should
-be paying attention to it.
+I'm afraid my Arm foo isn't good enough to understand this. On the surface
+it looks to violate above outlined principle.
 
-The second is not without precedent, but is it really the best stance?
- It means that before reading hap_superpage_2m, you have to first
-check hap; and it introduces a risk (no matter how small) that someone
-will forget to check, and end up doing the wrong thing.
+> Let me know if I understood you correctly.
+> 
+>> or you
+>> support that mode of emulation as much as that of kernel space accesses.
+> 
+> Do you mean we support partial emulation only for traps from EL1 mode ?
 
-Not a huge deal, but overall my vote would be #1.  I may send a patch
-at some point in the future.
+Possibly.
 
-> > * Do we really need to "!!cpu_has_svm_npt"?  If so, wouldn't it be
-> >   better to put the "!!"  in the #define, rather than requiring the
-> >   user to know that it's needed?
->
-> Considering that hap_supported is bool now, the !! can simply be
-> dropped. We've been doing so as code was touched anyway, not in a
-> concerted effort.
-
-Right, forgot to actually delete this para after adding a patch to address =
-it.
-
-> > --- a/xen/arch/x86/hvm/vmx/vmcs.c
-> > +++ b/xen/arch/x86/hvm/vmx/vmcs.c
-> > @@ -113,8 +113,8 @@ static int cf_check parse_ept_param_runtime(const c=
-har *s)
-> >      int val;
-> >
-> >      if ( !cpu_has_vmx_ept || !hvm_funcs.hap_supported ||
-> > -         !(hvm_funcs.hap_capabilities &
-> > -           (HVM_HAP_SUPERPAGE_2MB | HVM_HAP_SUPERPAGE_1GB)) )
-> > +         !(hvm_funcs.caps.hap_superpage_2mb ||
-> > +           hvm_funcs.caps.hap_superpage_1gb) )
-> >      {
-> >          printk("VMX: EPT not available, or not in use - ignoring\n");
->
-> Just to mention it: The conditional and the log message don't really
-> fit together. (I was first wondering what the 2mb/1gb checks had to
-> do here at all, but that's immediately clear when seeing that the
-> only sub-option here is "exec-sp".)
-
-So you mean basically that the checks & error message are poorly
-factored, because there's only a single sub-option?  (i.e., if there
-were options which didn't rely on superpages, the check would be
-incorrect?)
-
-Let me know if there's something concrete you'd like me to do here.
-
-> > @@ -104,8 +96,11 @@ struct hvm_function_table {
-> >      /* Hardware virtual interrupt delivery enable? */
-> >      bool virtual_intr_delivery_enabled;
-> >
-> > -    /* Indicate HAP capabilities. */
-> > -    unsigned int hap_capabilities;
-> > +    struct {
-> > +        /* Indicate HAP capabilities. */
-> > +        bool hap_superpage_1gb:1,
-> > +            hap_superpage_2mb:1;
->
-> Nit: Would be nice imo if the two identifiers aligned vertically with
-> one another.
-
-Done.
-
- -George
+Jan
 
