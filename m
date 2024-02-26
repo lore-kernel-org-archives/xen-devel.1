@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5097EC48BF6
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Feb 2024 16:49:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.685675.1066779 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4611C5478C
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Feb 2024 16:53:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.685677.1066790 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1reeAV-00052W-Vq; Mon, 26 Feb 2024 16:49:31 +0000
+	id 1reeDt-0007PC-FK; Mon, 26 Feb 2024 16:53:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 685675.1066779; Mon, 26 Feb 2024 16:49:31 +0000
+Received: by outflank-mailman (output) from mailman id 685677.1066790; Mon, 26 Feb 2024 16:53:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1reeAV-00052P-TL; Mon, 26 Feb 2024 16:49:31 +0000
-Received: by outflank-mailman (input) for mailman id 685675;
- Mon, 26 Feb 2024 16:49:30 +0000
+	id 1reeDt-0007P5-CW; Mon, 26 Feb 2024 16:53:01 +0000
+Received: by outflank-mailman (input) for mailman id 685677;
+ Mon, 26 Feb 2024 16:53:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hPQ6=KD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ree6R-0000BK-U3
- for xen-devel@lists.xenproject.org; Mon, 26 Feb 2024 16:45:19 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
+ id 1reeDr-0007Oz-Uv
+ for xen-devel@lists.xenproject.org; Mon, 26 Feb 2024 16:52:59 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6cfdc0e4-d4c6-11ee-8a58-1f161083a0e0;
- Mon, 26 Feb 2024 17:45:19 +0100 (CET)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-512bd533be0so3923413e87.0
- for <xen-devel@lists.xenproject.org>; Mon, 26 Feb 2024 08:45:19 -0800 (PST)
+ id 7ee6b210-d4c7-11ee-8a58-1f161083a0e0;
+ Mon, 26 Feb 2024 17:52:58 +0100 (CET)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a3e552eff09so359939066b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Feb 2024 08:52:58 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d18-20020a056402401200b005640022af58sm2509237eda.83.2024.02.26.08.45.18
+ r19-20020a170906365300b00a3d68aad90dsm2591068ejb.97.2024.02.26.08.52.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Feb 2024 08:45:18 -0800 (PST)
+ Mon, 26 Feb 2024 08:52:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,50 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6cfdc0e4-d4c6-11ee-8a58-1f161083a0e0
+X-Inumbo-ID: 7ee6b210-d4c7-11ee-8a58-1f161083a0e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1708965919; x=1709570719; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
-         :from:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=XYZOa3J14PwMoF80jvxD0VhtxRYvyB0LOPQq6Y/apVY=;
-        b=RsKSjMVR+mNCv97sPMaKUUhTvDzU+HokmPK7Qg98ElUbHU2RLXdd372r4sEhM1SZgK
-         7uJsuvlvB/ePqvfF9QhaqFs2OkyJJBWLCajnagiAALsxnqPV/Nyb9j1dzGbP95Ym6aRh
-         ooAxiDaA2vNlj6PbyF+wZ2G/+bIOMlv2Yi5LoTFbjt276IHbOA4PP5oT3MZCdxg/v8C1
-         5G7kX1l6d3ZCxHHaKT+sqWMNv/pRL60Wzhu8V1EBV2udVpmb+YFn9Fsp8yn0u/EssWmC
-         /BlxvIhko5sKL90XBrLpPAzESYuINEzrPX/yG4yBesQSgtE9NBentBdZKu9UXdQMlYyj
-         mcVQ==
+        d=suse.com; s=google; t=1708966378; x=1709571178; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=zyFC6O9pVQ06Jhy/ge+QJAOQeVFoqSyVhea9OGY/icE=;
+        b=WwRF9//g3m4qwp2Ue8H+8LbZcOLOtNPt8OOtUFa9PPUPqlQxmksKmhawA8AFnllwoF
+         55fPE/kMe54J8Rja41CGIVoRwOl4kSA10AIi07mf+Ywe1vKBqFNFrVdVe/tArXO8H7kj
+         oMO4NZLQ3USA1Kw37ZIEzWVE/6upambwYzcQHqzt3utn/epxv/K1grSFvJNfPeMJwU+z
+         2xCSrUNQ7doptYvapcjdtY/koBjNvKg/N8H86wcWVgeWVKO3EIXgfk5j0XQDem5hwgJr
+         akb1z/gxz0Lce/3+AOV/h3PmVM/6thX6UELTz1y79ElymcEg2aQ2/lYlI+Iw9Ow5OqyY
+         AFUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708965919; x=1709570719;
-        h=content-transfer-encoding:in-reply-to:autocrypt:references:cc:to
-         :from:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XYZOa3J14PwMoF80jvxD0VhtxRYvyB0LOPQq6Y/apVY=;
-        b=KMoSvHppyeC7uUCuX80xl2WNm+DmHUio/WzQHxwnVbJsvqeiRC2mpHZbhRf7n1eR1f
-         Mg0v6Xjfl9cpDGz3waigNW/gijNSiOUchsBiNu4dGRX7HkF37OPYN/0LoMJ1Dqzm9dvx
-         h1z8+O6TidLmatRk2eFckcjdjEWSD6CrSl5Uu29C21AchxJiBvctdZFjekEAyIDHejqp
-         Ayh6UQVO4yeXQNp66+qLc0CyZ4nrz+xLnzpP8llo3fm9vaKx3luiiVdlOWDDMZylEoAo
-         bXV72qD20QGhdc3BrD5BtwMYndaxtpT/tf1CFa3GQtU857GoxjBmE7CZbWbiXL2Q5YUA
-         ImFA==
-X-Gm-Message-State: AOJu0YwS30+2V3yknpPOPmmrgixh0K7XkFCO7f3pG6hhTOUwdyFQg/20
-	HZ+2Au9vY39W8RDRKmn2pJT2BpEGNB7tV2r92uPZiFb7scHqC0okqj904P1a5u9+f4D8KaPnJSk
-	=
-X-Google-Smtp-Source: AGHT+IEJZL8vn/EMuwZRGM3/4zNNuLIusBD3O5kk1RqbEsr4YKFsolMj3+CB5jypecUGTBMBxffYIw==
-X-Received: by 2002:a05:6512:20c7:b0:512:f69f:fc45 with SMTP id u7-20020a05651220c700b00512f69ffc45mr2912115lfr.27.1708965918966;
-        Mon, 26 Feb 2024 08:45:18 -0800 (PST)
-Message-ID: <a4db4772-f6d5-42d9-8d5f-be451b5639ff@suse.com>
-Date: Mon, 26 Feb 2024 17:45:18 +0100
+        d=1e100.net; s=20230601; t=1708966378; x=1709571178;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zyFC6O9pVQ06Jhy/ge+QJAOQeVFoqSyVhea9OGY/icE=;
+        b=YdE3GKpWjGbIzw+agsVyUm1T1HsVhUdLbJ/pFHFQ1R6FRq7LAPNXsf3V9s2Xx5l9Ft
+         BCH6YRog66cGKx+ddnIHgcIbbNdnZO2YpWeqe8nrfOc2kYv9Dd5n4p4f5r2X3+06yg04
+         +k2wTKJBEwjyYwKe+FHWgIt6qtA4vP2qyCegESE/TLEPEH+Wa4tXxEOqbXetA2vuEUnP
+         zeGv0X6pwMYTydVJllhFvJ330EKXmBGc7NX7AWhLuli/nIQCHjloovSg3COmWNCiu09O
+         N9eVUSILW8WLuM2QjMnOWfbSA4Cvtct+0EtgKQIdzBPlLJqKHSH5wFwjHFm18jOhoxZL
+         QaEQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX/s+xBGdYarYoJ38nJ19MGErPSngNhcMuRA2BkvUtFTODytPBb/W2wit+vXBqjefCNcn/jIatezr4k8BpmNREAyN20T+krLMq5yMDDN14=
+X-Gm-Message-State: AOJu0YyOdLtkd9purW5vJg7Yl9cRoHomtyaIIwPI5bA1zb2MwzdAtQW8
+	+tGRPlX4Vr9sFhlQGvS1471g0vT3IuO0lcJfnknkPUbZfpFlZzsS+F/E1y+XuQ==
+X-Google-Smtp-Source: AGHT+IG3aLTKib0FsS/a33AaUyViTnOvhl3GigJjoR9+U0zLbfY4g9JDPQWZD6/4wC/z4P1QxRWBQA==
+X-Received: by 2002:a17:906:2794:b0:a43:72f6:723 with SMTP id j20-20020a170906279400b00a4372f60723mr1410817ejc.17.1708966378327;
+        Mon, 26 Feb 2024 08:52:58 -0800 (PST)
+Message-ID: <d026feda-1997-43fc-94e6-cb9da1ef807c@suse.com>
+Date: Mon, 26 Feb 2024 17:52:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v3 10/12] VMX: convert vmx_vmentry_control
+Subject: Re: [PATCH] docs/sphinx: Start an FAQ, and add Kconfig/CET details
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <George.Dunlap@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Julien Grall <julien@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
+References: <20240226162527.1247421-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>
-References: <293e5aef-8843-461c-bc96-709a605b2680@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -114,115 +114,81 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <293e5aef-8843-461c-bc96-709a605b2680@suse.com>
+In-Reply-To: <20240226162527.1247421-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-... to a field in the capability/controls struct.
+On 26.02.2024 17:25, Andrew Cooper wrote:
+> This is long overdue, and we need to start somewhere.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v2: New.
+Acked-by: Jan Beulich <jbeulich@suse.com>
+perhaps (nit) with ...
 
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -162,7 +162,6 @@ static int cf_check parse_ept_param_runt
- 
- /* Dynamic (run-time adjusted) execution control flags. */
- struct vmx_caps __ro_after_init vmx_caps;
--u32 vmx_vmentry_control __read_mostly;
- u64 vmx_ept_vpid_cap __read_mostly;
- static uint64_t __read_mostly vmx_vmfunc;
- 
-@@ -259,7 +258,6 @@ static int vmx_init_vmcs_config(bool bsp
-     struct vmx_caps caps = {};
-     u64 _vmx_ept_vpid_cap = 0;
-     u64 _vmx_misc_cap = 0;
--    u32 _vmx_vmentry_control;
-     u64 _vmx_vmfunc = 0;
-     bool mismatch = false;
- 
-@@ -480,7 +478,7 @@ static int vmx_init_vmcs_config(bool bsp
-     min = 0;
-     opt = (VM_ENTRY_LOAD_GUEST_PAT | VM_ENTRY_LOAD_GUEST_EFER |
-            VM_ENTRY_LOAD_BNDCFGS);
--    _vmx_vmentry_control = adjust_vmx_controls(
-+    caps.vmentry_control = adjust_vmx_controls(
-         "VMEntry Control", min, opt, MSR_IA32_VMX_ENTRY_CTLS, &mismatch);
- 
-     if ( mismatch )
-@@ -491,7 +489,6 @@ static int vmx_init_vmcs_config(bool bsp
-         /* First time through. */
-         vmx_caps = caps;
-         vmx_ept_vpid_cap           = _vmx_ept_vpid_cap;
--        vmx_vmentry_control        = _vmx_vmentry_control;
-         vmx_caps.basic_msr = ((uint64_t)vmx_basic_msr_high << 32) |
-                              vmx_basic_msr_low;
-         vmx_vmfunc                 = _vmx_vmfunc;
-@@ -531,7 +528,7 @@ static int vmx_init_vmcs_config(bool bsp
-             vmx_caps.vmexit_control, caps.vmexit_control);
-         mismatch |= cap_check(
-             "VMEntry Control",
--            vmx_vmentry_control, _vmx_vmentry_control);
-+            vmx_caps.vmentry_control, caps.vmentry_control);
-         mismatch |= cap_check(
-             "EPT and VPID Capability",
-             vmx_ept_vpid_cap, _vmx_ept_vpid_cap);
-@@ -1091,7 +1088,7 @@ static int construct_vmcs(struct vcpu *v
- {
-     struct domain *d = v->domain;
-     uint32_t vmexit_ctl = vmx_caps.vmexit_control;
--    u32 vmentry_ctl = vmx_vmentry_control;
-+    u32 vmentry_ctl = vmx_caps.vmentry_control;
-     int rc = 0;
- 
-     vmx_vmcs_enter(v);
-@@ -2202,7 +2199,6 @@ int __init vmx_vmcs_init(void)
-          * Make sure all dependent features are off as well.
-          */
-         memset(&vmx_caps, 0, sizeof(vmx_caps));
--        vmx_vmentry_control        = 0;
-         vmx_ept_vpid_cap           = 0;
-         vmx_vmfunc                 = 0;
-     }
---- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -235,7 +235,6 @@ void vmx_vmcs_reload(struct vcpu *v);
- #define VM_ENTRY_LOAD_GUEST_PAT         0x00004000
- #define VM_ENTRY_LOAD_GUEST_EFER        0x00008000
- #define VM_ENTRY_LOAD_BNDCFGS           0x00010000
--extern u32 vmx_vmentry_control;
- 
- #define SECONDARY_EXEC_VIRTUALIZE_APIC_ACCESSES 0x00000001U
- #define SECONDARY_EXEC_ENABLE_EPT               0x00000002U
-@@ -297,6 +296,7 @@ struct vmx_caps {
-     uint32_t secondary_exec_control;
-     uint64_t tertiary_exec_control;
-     uint32_t vmexit_control;
-+    uint32_t vmentry_control;
- };
- extern struct vmx_caps vmx_caps;
- 
-@@ -325,9 +325,9 @@ extern struct vmx_caps vmx_caps;
- #define cpu_has_monitor_trap_flag \
-     (vmx_caps.cpu_based_exec_control & CPU_BASED_MONITOR_TRAP_FLAG)
- #define cpu_has_vmx_pat \
--    (vmx_vmentry_control & VM_ENTRY_LOAD_GUEST_PAT)
-+    (vmx_caps.vmentry_control & VM_ENTRY_LOAD_GUEST_PAT)
- #define cpu_has_vmx_efer \
--    (vmx_vmentry_control & VM_ENTRY_LOAD_GUEST_EFER)
-+    (vmx_caps.vmentry_control & VM_ENTRY_LOAD_GUEST_EFER)
- #define cpu_has_vmx_unrestricted_guest \
-     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_UNRESTRICTED_GUEST)
- #define vmx_unrestricted_guest(v)               \
-@@ -355,7 +355,7 @@ extern struct vmx_caps vmx_caps;
-     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_PML)
- #define cpu_has_vmx_mpx \
-     ((vmx_caps.vmexit_control & VM_EXIT_CLEAR_BNDCFGS) && \
--     (vmx_vmentry_control & VM_ENTRY_LOAD_BNDCFGS))
-+     (vmx_caps.vmentry_control & VM_ENTRY_LOAD_BNDCFGS))
- #define cpu_has_vmx_xsaves \
-     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_XSAVES)
- #define cpu_has_vmx_tsc_scaling \
+> --- /dev/null
+> +++ b/docs/faq.rst
+> @@ -0,0 +1,71 @@
+> +.. SPDX-License-Identifier: CC-BY-4.0
+> +
+> +Frequently Asked Questions
+> +==========================
+> +
+> +How do I...
+> +-----------
+> +
+> +... check whether a Kconfig option is active?
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +  Kconfig is a build time configuration system, combining inherent knowledge,
+> +  the capabilities of the toolchain, and explicit user choice to form a
+> +  configuration of a build of Xen.
+> +
+> +  A file, by default ``.config``, is produced by the build identifying the
+> +  configuration used.  Kconfig symbols all start with ``CONFIG_``, and come in
+> +  a variety of types including strings, integers and booleans.  Booleans are
+> +  the most common, and when active are expressed with ``...=y``.  e.g.::
+> +
+> +    xen.git/xen$ grep CONFIG_FOO .config
+> +    CONFIG_FOO_BOOLEAN=y
+> +    CONFIG_FOO_STRING="lorem ipsum"
+> +    CONFIG_FOO_INTEGER=42
+> +
+> +  Symbols which are either absent, or expressed as ``... is not set`` are
+> +  disabled.  e.g.::
+> +
+> +    xen.git/xen$ grep CONFIG_BAR .config
+> +    # CONFIG_BAR is not set
+> +
+> +  Builds of Xen configured with ``CONFIG_HYPFS_CONFIG=y`` embed their own
+> +  ``.config`` at build time, and can provide it to the :term:`control domain`
+> +  upon requested.  e.g.::
+> +
+> +    [root@host ~]# xenhypfs cat /buildinfo/config | grep -e FOO -e BAR
+> +    CONFIG_FOO=y
+> +    # CONFIG_BAR is not set
+> +
+> +
+> +... tell if CET is active?
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +  Control-flow Enforcement Technology support was added to Xen 4.14.  It is
+> +  build time conditional, dependent on both having a new-enough toolchain and
+> +  an explicit Kconfig option, and also requires capable hardware.  See
+> +  :term:`CET`.
+> +
+> +  For CET-SS, Shadow Stacks, the minimum toolchain requirements are ``binutils
+> +  >= 2.29`` or ``LLVM >= 6``.  No specific compiler support is required.
+> +  Check for ``CONFIG_XEN_SHSTK`` being active.
+> +
+> +  For CET-IBT, Indirect Branch Tracking, the minimum toolchain requirements
+> +  are ``GCC >= 9`` and ``binutils >= 2.29``.  Xen relies on a compiler feature
+> +  which is specific to GCC at the time of writing.  Check for
+> +  ``CONFIG_XEN_IBT`` being active.
+> +
+> +  If a capable Xen with booted on capable hardware, and CET is not disabled by
 
+... s/with/is/ (or "was").
+
+Jan
 
