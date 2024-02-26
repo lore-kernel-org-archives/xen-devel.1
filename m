@@ -4,52 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3104EC54E49
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Feb 2024 10:55:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.685452.1066193 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27481C54E49
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Feb 2024 11:08:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.685459.1066213 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1reYdM-0008Ku-IB; Mon, 26 Feb 2024 10:54:56 +0000
+	id 1reYqC-0002mF-1W; Mon, 26 Feb 2024 11:08:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 685452.1066193; Mon, 26 Feb 2024 10:54:56 +0000
+Received: by outflank-mailman (output) from mailman id 685459.1066213; Mon, 26 Feb 2024 11:08:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1reYdM-0008Kn-Et; Mon, 26 Feb 2024 10:54:56 +0000
-Received: by outflank-mailman (input) for mailman id 685452;
- Mon, 26 Feb 2024 10:54:54 +0000
+	id 1reYqB-0002m8-Td; Mon, 26 Feb 2024 11:08:11 +0000
+Received: by outflank-mailman (input) for mailman id 685459;
+ Mon, 26 Feb 2024 11:08:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=fECz=KD=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
- id 1reYdK-0008Kd-E6
- for xen-devel@lists.xenproject.org; Mon, 26 Feb 2024 10:54:54 +0000
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20601.outbound.protection.outlook.com
- [2a01:111:f403:2409::601])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=CwqN=KD=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1reYqB-0002Xk-7v
+ for xen-devel@lists.xenproject.org; Mon, 26 Feb 2024 11:08:11 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 76f4bb0e-d495-11ee-98f5-efadbce2ee36;
- Mon, 26 Feb 2024 11:54:51 +0100 (CET)
-Received: from BL0PR0102CA0015.prod.exchangelabs.com (2603:10b6:207:18::28) by
- DS0PR12MB9060.namprd12.prod.outlook.com (2603:10b6:8:c4::12) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7316.34; Mon, 26 Feb 2024 10:54:49 +0000
-Received: from BL6PEPF0001AB78.namprd02.prod.outlook.com
- (2603:10b6:207:18:cafe::73) by BL0PR0102CA0015.outlook.office365.com
- (2603:10b6:207:18::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.49 via Frontend
- Transport; Mon, 26 Feb 2024 10:54:49 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF0001AB78.mail.protection.outlook.com (10.167.242.171) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7292.25 via Frontend Transport; Mon, 26 Feb 2024 10:54:48 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 26 Feb
- 2024 04:54:47 -0600
-Received: from [10.65.148.173] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Mon, 26 Feb 2024 04:54:46 -0600
+ id 530829cc-d497-11ee-98f5-efadbce2ee36;
+ Mon, 26 Feb 2024 12:08:09 +0100 (CET)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-512aafb3ca8so2794424e87.3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Feb 2024 03:08:09 -0800 (PST)
+Received: from localhost ([213.195.118.74]) by smtp.gmail.com with ESMTPSA id
+ ma6-20020a0562145b0600b0068fa5e5c245sm2789775qvb.84.2024.02.26.03.08.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Feb 2024 03:08:08 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,105 +46,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76f4bb0e-d495-11ee-98f5-efadbce2ee36
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=faUl4LFR8YwFVwKmcrgDE5FPKpzzi4tKyqhMrdxyi7Fqw1XABY8m6kxshSub0v4rgGQqGohOqKqZWa1H/hjiI5GQDVgISytxiVyRXfKMRDvitXY07+MMZDSFBEK+rYNQJyteVyL5Wg4Hrm/6N3c6+bBRK1TKqktuFCjWvCum9O3ThFJ8P5TpuIWed8/RwMGvm33TParFYzJWUkz0GZ4V52AiC0Uii53XsV2nsY1izwAaG+YB6FLk210zcFjqE6qppsba2Pq9/s56pI0ZPsXqGbMwpswA7MAUVGe+FufxotMOhyIJ/ORfJ1pkFZKjNBZA+N6QX88FV5HfFma7tu9XxQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OTcY3MjSx4LU/IzmIoFgBTZJC2kZ2k0EUf/dwknBL7I=;
- b=YfpQYa5zZqQru/vswb/gHsFEgkLPrZzWurwsCuIjdNErJAZ7BANrh+8kMvwkQnwgElD8f/h6/+vwWD/3i0fOEc3Scc04rhGaHn1hWdnuo6j6Lpw+hq1uXKrON2hJhTID1so2YlsYZ3No5NdTJtE5/kGt81YAiFroMs9vWv+8oIQd5MQGRtBnxXRzTfieyIhIXGLbesI5ka6rtYDA4LJuXbFc5SiBgS6dEXitOdooAuwepL2fdX+7KWOLLy9c4EU5l+jFbpOnf1tC7Z1L8hwzX8C1J1PvSqVfftdJSzMHaOmYeUnTaVmwu87VI1+Ko7HxgVv8Yqx0s4IKeNAEql38zA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OTcY3MjSx4LU/IzmIoFgBTZJC2kZ2k0EUf/dwknBL7I=;
- b=XFE/EhJ2lzHZHpA0vfpJE0GOIuk9O1oAaIfX1E3WmUmu1EWJf4m1Ro0IZxXYyyAi35Af66d6TpMzTY7pX8rNEEKEVcUptoS8r0E3xxFgnJjc/98QNP24xCGvHSphI8YsGpq3a/90mLV4fclbPTFbnSqf8q6YSYaHBgzOOdgkpJI=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <61789c6a-c306-40fa-b6ef-9b5b5b32e1b7@amd.com>
-Date: Mon, 26 Feb 2024 18:54:45 +0800
+X-Inumbo-ID: 530829cc-d497-11ee-98f5-efadbce2ee36
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1708945689; x=1709550489; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JwcqS4buxW/Jeygm8zvIbxwG10HttMJtYAWj5OZTXl0=;
+        b=ZziypYdtto2mnD9xS444oMHwY/08n7H+rCSLTqnKJ7dlehlZZ6+Rtvr7AVUEngYHRK
+         h5jElp6SQiyQqSioSZOST7oIiMO9yAXrbfU42ayN6Isoi+afYEaGqKKvtKMqHrdaNI+Q
+         bYDWuPLzGzqI+02WXicdtzBeJfdCWHfJOyamU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708945689; x=1709550489;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JwcqS4buxW/Jeygm8zvIbxwG10HttMJtYAWj5OZTXl0=;
+        b=YTan8m1+VGzodByfiwu1A9slrzg7QmqsRvKpCWH4u+bO+FJTljcYRAyqntIQZilDTI
+         Qk3SHMsM8WcIU7EP9L39faLR4QeQJVsYDdy0fc/MJivnZnj5oJSNpYImvVH5xmj62TLY
+         U6csZJDJcVAxoNbzlGhB0mvrscvHoVY02ZGvTSx5Key0x/N1nLp2/FIju4U61hsI26a1
+         5V+iBTJLlBNCtrkGYRubdjSy7oduodL9I9mSzu3fmrpr8eiEJEDBy7ZHKMItpesmMTaI
+         6RyX93zLRJUpagsPVNJ4b6BZNI+qqXhrID6758aYEtPSRsq7ypf8aiRSb4j4aPOc09SO
+         Oqiw==
+X-Gm-Message-State: AOJu0Yz4Pdv2YQB7YVuJb8DudW9QjMZS+1cszMH8KW2b1AiDOkScCwuE
+	wSIRMWJLFVIbU6CHzLMJvIWoaUENJC6sZbCoForJlAAa8zpeH0CMYZloBzkGacDt+7JPJnZtAu/
+	A
+X-Google-Smtp-Source: AGHT+IEckDKUWpABW+/YnVGbsKMeCnsqI4GOJxHp/u6i3Fib9QKC799WoK3U/L4+dpF6VaORefjJrw==
+X-Received: by 2002:a05:6512:3f04:b0:512:d5c7:60d9 with SMTP id y4-20020a0565123f0400b00512d5c760d9mr5437819lfa.3.1708945689250;
+        Mon, 26 Feb 2024 03:08:09 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 1/4] x86/spec: print the built-in SPECULATIVE_HARDEN_* options
+Date: Mon, 26 Feb 2024 12:07:45 +0100
+Message-ID: <20240226110748.80254-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240226110748.80254-1-roger.pau@citrix.com>
+References: <20240226110748.80254-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: Set correct per-cpu cpu_core_mask
-Content-Language: en-US
-To: Michal Orzel <michal.orzel@amd.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-References: <20240226030146.179465-1-xin.wang2@amd.com>
- <de4c6988-7051-4d44-9b44-e850ad4b4cc1@amd.com>
- <DS0PR12MB9448472A793F33228BE6A185A15A2@DS0PR12MB9448.namprd12.prod.outlook.com>
- <e5cad59d-9c3f-4e4c-8b97-5e0fbd4eeda2@amd.com>
-From: Henry Wang <xin.wang2@amd.com>
-In-Reply-To: <e5cad59d-9c3f-4e4c-8b97-5e0fbd4eeda2@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB03.amd.com: xin.wang2@amd.com does not designate
- permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB78:EE_|DS0PR12MB9060:EE_
-X-MS-Office365-Filtering-Correlation-Id: b98cda1d-2062-4436-dbf0-08dc36b95a27
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	NifDSP/WtPoolJUJUQuya3ys3Q0eBaDFpatsSOgqvTYkhyguew3bq9atQVdOQTyx4nhhkl1zoyDpf9XvP3c8Yxx98aIL4rUkq11RDLeDxzKviPO49E7VP/UMcjS5WIAlbdjrJ2/cgO9ZIFhDxcvQygjKC3zzXrkkDddrdBVz4li/K14pqxAIY5ymCgSoYst1qakPkfAXn+zri8+o1XAQZqUpaVPgGz51GQzK8gvD91p2WCFDonqRACvAsaEyVb458vGYen9bomXRgALkQx/rG+gAza2P6EaP1MOcE2wDiISZLd4vhwEvtXFllVLVPxRP5kLuOtVKF+aTmpPoZQvlwZ86GRc+MyKIrRy7Yn6q7GXWV/jidu1bI8EaSV5/I13/+8jcY58SZQJa25NRXzdAEM35CLPuR1/W1sT/+JqxCaUQUMmbTnup0K2c7ODT2NQhgm1tC2Yu9WuDQ/P5ma+s0V7Cql5+yoZ565sjPqoj4yTQXZuR6PiqdXVXk+ZlC0Fc0ZQ1ObI/UYWhv71Yg4o5l0ddgCVNORxCEXG/i3S/dSrK6M6sRGwla4Rc8sUy5Bt7Fei4vidWk1wSRNcK5ZrWcC8JgjV2SjW7X8qAoJXsAgZ10v8AX8Sk4Pv98Z/+TdEWtt2Uqc9i58v6bFwDhwY85eWsikMhVm201DQcZrppAGBy5h5SDbc8tuCJE7GHtKPpn4z83tt1Rvrt6lO7T4+NYKXP2ziMSDvgDGO1fjewof8RVSgnaRuf47IrA44E9VzD
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2024 10:54:48.7616
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b98cda1d-2062-4436-dbf0-08dc36b95a27
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB78.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9060
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Michal,
+Just like it's done for INDIRECT_THUNK and SHADOW_PAGING.
 
-On 2/26/2024 6:43 PM, Michal Orzel wrote:
-> On 26/02/2024 10:54, Wang, Henry wrote:
->>>>   xen/arch/arm/smpboot.c | 6 +++++-
->>>>   1 file changed, 5 insertions(+), 1 deletion(-)
->>>>
->>>> +    /* PE not implemented using a multithreading type approach. */
->>>> +    if ( system_cpuinfo.mpidr.mt == 0 )
->>> Do we need this check? It mt was true, cpu_sibling_mask would be incorrect
->>> anyway (it would still be 1).
->> I added this check for playing safe, because I only want to do the correct thing
->> in this patch and avoid make things worse for MT case. With this patch, non-MT
->> case can be improved and the MT case is remain unchanged.
->>
->> But I agree with you, and I would be more than happy if I can run a MT setup and
->> finish the "else" part with this patch or follow-ups. Do you know maybe qemu can
->> allow me to emulate a MT setup so that I can fix it properly in v2? Thanks!
-> A65 is the only Arm CPU with SMT and I'm not aware of Qemu being able to emulate it.
-> AFAICT, in Xen on Arm we assume no SMT, hence my question about your check. With or without it,
-> some parts would still be incorrect (like cpu_sibling_mask), so what's the point in having a partial check.
-> I would keep your solution without the check. Others may have a different opinion though.
+Reported-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v2:
+ - New in this version.
+---
+ xen/arch/x86/spec_ctrl.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-You made a point. So I think we can wait a bit more for others to share 
-their thoughts and I will change accordingly after.
-
-Just taking a note from the chat that we just had - maybe remove the if 
-check and add an ASSERT() of the non-MT would also be a good idea (not 
-sure if this change will break some existing HW setups though).
-
-Kind regards,
-Henry
-
-> ~Michal
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 421fe3f640df..9f5ed8772533 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -466,13 +466,25 @@ static void __init print_details(enum ind_thunk thunk)
+            (e21a & cpufeat_mask(X86_FEATURE_SBPB))           ? " SBPB"           : "");
+ 
+     /* Compiled-in support which pertains to mitigations. */
+-    if ( IS_ENABLED(CONFIG_INDIRECT_THUNK) || IS_ENABLED(CONFIG_SHADOW_PAGING) )
++    if ( IS_ENABLED(CONFIG_INDIRECT_THUNK) || IS_ENABLED(CONFIG_SHADOW_PAGING) ||
++         IS_ENABLED(CONFIG_SPECULATIVE_HARDEN_ARRAY) ||
++         IS_ENABLED(CONFIG_SPECULATIVE_HARDEN_BRANCH) ||
++         IS_ENABLED(CONFIG_SPECULATIVE_HARDEN_GUEST_ACCESS) )
+         printk("  Compiled-in support:"
+ #ifdef CONFIG_INDIRECT_THUNK
+                " INDIRECT_THUNK"
+ #endif
+ #ifdef CONFIG_SHADOW_PAGING
+                " SHADOW_PAGING"
++#endif
++#ifdef CONFIG_SPECULATIVE_HARDEN_ARRAY
++               " SPECULATIVE_HARDEN_ARRAY"
++#endif
++#ifdef CONFIG_SPECULATIVE_HARDEN_BRANCH
++               " SPECULATIVE_HARDEN_BRANCH"
++#endif
++#ifdef CONFIG_SPECULATIVE_HARDEN_GUEST_ACCESS
++               " SPECULATIVE_HARDEN_GUEST_ACCESS"
+ #endif
+                "\n");
+ 
+-- 
+2.43.0
 
 
