@@ -4,44 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 363E9C48BF6
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Feb 2024 09:15:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.685363.1065939 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A51C54E49
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Feb 2024 09:23:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.685381.1065972 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1reX4r-0001LS-0I; Mon, 26 Feb 2024 09:15:13 +0000
+	id 1reXD1-00046Z-2i; Mon, 26 Feb 2024 09:23:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 685363.1065939; Mon, 26 Feb 2024 09:15:12 +0000
+Received: by outflank-mailman (output) from mailman id 685381.1065972; Mon, 26 Feb 2024 09:23:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1reX4q-0001LB-So; Mon, 26 Feb 2024 09:15:12 +0000
-Received: by outflank-mailman (input) for mailman id 685363;
- Mon, 26 Feb 2024 09:15:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1reXD1-00046S-07; Mon, 26 Feb 2024 09:23:39 +0000
+Received: by outflank-mailman (input) for mailman id 685381;
+ Mon, 26 Feb 2024 09:23:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=+ho1=KD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1reX4p-0001J9-7V
- for xen-devel@lists.xenproject.org; Mon, 26 Feb 2024 09:15:11 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 89d9ba7c-d487-11ee-8a58-1f161083a0e0;
- Mon, 26 Feb 2024 10:15:09 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id DDE2D1FB3E;
- Mon, 26 Feb 2024 09:15:08 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A74A013A58;
- Mon, 26 Feb 2024 09:15:08 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap1.dmz-prg2.suse.org with ESMTPSA id sHifJpxW3GVkHQAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 26 Feb 2024 09:15:08 +0000
+ (envelope-from <SRS0=hPQ6=KD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1reXD0-000468-Hg
+ for xen-devel@lists.xenproject.org; Mon, 26 Feb 2024 09:23:38 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b7de75b3-d488-11ee-98f5-efadbce2ee36;
+ Mon, 26 Feb 2024 10:23:36 +0100 (CET)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a4348aaa705so86503266b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Feb 2024 01:23:36 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ vo1-20020a170907a80100b00a42ea946917sm2213752ejc.130.2024.02.26.01.23.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Feb 2024 01:23:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,77 +47,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 89d9ba7c-d487-11ee-8a58-1f161083a0e0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1708938908; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=HMjGI0U8bcjZJ5c6EYnbel/ON6czihwwfryCuQFsuxM=;
-	b=L4iAxLX4HrgRtWe9oEdxAlGSf6b5MNv2tNfgIvBkEazqOQCYO6Q31FC/xq1+lj/04elTJR
-	nyQvrwOixFA+YaNFe8w44Z4NtbX280ijutvB1dXfXJLNA4o6nLkhippHSMep5xeOOQKAvO
-	lgHXEaEMU+9B9yRNLI4Qw+dIL0G2n/M=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1708938908; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=HMjGI0U8bcjZJ5c6EYnbel/ON6czihwwfryCuQFsuxM=;
-	b=L4iAxLX4HrgRtWe9oEdxAlGSf6b5MNv2tNfgIvBkEazqOQCYO6Q31FC/xq1+lj/04elTJR
-	nyQvrwOixFA+YaNFe8w44Z4NtbX280ijutvB1dXfXJLNA4o6nLkhippHSMep5xeOOQKAvO
-	lgHXEaEMU+9B9yRNLI4Qw+dIL0G2n/M=
-Message-ID: <d21b9f82-ddfd-4014-b653-42e52ef3abfa@suse.com>
-Date: Mon, 26 Feb 2024 10:15:08 +0100
+X-Inumbo-ID: b7de75b3-d488-11ee-98f5-efadbce2ee36
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1708939415; x=1709544215; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=/XhYtCShDR93lDUGaWIA4sRv0Pa4Hm9U6nYsk/8VuPY=;
+        b=GXNpM/h17BwPImWIcMM71tZwhZPhmP0Ur6wmd5XFPykOYgTG0qWiEj/lux8FFEJ6rC
+         jVGhvVxdr5i1MXwfUfHSweNYRkw9mnmaEWEsyaznAQatHN3e4mGCj1dW/y5rbYvTcKs1
+         GjZo6x2fmbihQNw8CQ4aR9v9+dJaTZOfu/njFXyuy0Xop5rPDKbPAnigEtdqMUDQ/4+T
+         hz3kY7cwQJ1Mgx60iBoN5l/hdoxGpNlge+KS2gG+nNo7nKOux+/udGsheMvZlIBsifKB
+         moAWUEi+PiqIWHveRL6eqj6ut/0eSWROkfWeFqOcwltjW96koahXAzITFiPGas+mSzj0
+         Kz2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708939416; x=1709544216;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=/XhYtCShDR93lDUGaWIA4sRv0Pa4Hm9U6nYsk/8VuPY=;
+        b=OEvC8dp6q7j2nbhHpSNbpFShI4TEsggN6SsZL91GBWMaifAxpUSooBw7TZDoAC+mUM
+         CFunh/N/F5LQvd8iuf8epc4SzmExXO24cq5F+F5meoQ/ZD0he51zPwFOrFL5uiJYEV/8
+         kTj2mR7bhtm5k7M/EjRMzm3haG2RvD0edaExW384bFXuymT0PEudFFDlbInUX/Tc+mMR
+         9GHR5t5lDHJ2cUsBl5kWOhOZZQJzXHOGML02XDZQeZ5zjW01A4KASUE0NWoSsTnJqaga
+         mXiQblPCqjGIHSKclAgHwD1eMEGSSavwjFW9N/ULN+NlYmHt3ViviWP4NahoZJ7w51RQ
+         FatA==
+X-Forwarded-Encrypted: i=1; AJvYcCVtkZOg1e5vmZL9oSYZnQRSSr5XwNNo0vMXQLONd6ZoWsQRQA67uV6lRIdIkNoaXjxPyIjj0njlBo4X9FuseuZchOf0rqvoagblrixXSts=
+X-Gm-Message-State: AOJu0YzCWTA/VYq52Xu0wMLAmZ5g6hHKuDHXE5rFEIssFLgYvG56/4Ov
+	D835ZG0muH7sqgAV4R9xjVYPQRWwLrIuLj1C/ddricHfuw71UD3P6GqkEXcyJQ==
+X-Google-Smtp-Source: AGHT+IG1nahSdqZFD9/93euE3j9WPovmK3TPqq49DdnB3QeZtnSQRsuNgc82YteRoZznguXWzlqmJw==
+X-Received: by 2002:a17:906:254b:b0:a3f:f73:411f with SMTP id j11-20020a170906254b00b00a3f0f73411fmr4066862ejb.45.1708939415701;
+        Mon, 26 Feb 2024 01:23:35 -0800 (PST)
+Message-ID: <e48c4fce-e7f3-4bce-bf7b-2cfcc0659426@suse.com>
+Date: Mon, 26 Feb 2024 10:23:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Mini-OS: add symbol exports for xenstore stubdom
+Subject: Re: [XEN PATCH] automation: Rework "build-each-commit-gcc" test
 Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>
-Cc: samuel.thibault@ens-lyon.org, wl@xen.org,
- minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org
-References: <20240226083955.19350-1-jgross@suse.com>
- <707666cc-914e-42da-b823-fdc5a38271be@suse.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-In-Reply-To: <707666cc-914e-42da-b823-fdc5a38271be@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20240220140733.40980-1-anthony.perard@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20240220140733.40980-1-anthony.perard@citrix.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Authentication-Results: smtp-out2.suse.de;
-	none
-X-Spamd-Result: default: False [-1.47 / 50.00];
-	 ARC_NA(0.00)[];
-	 RCVD_VIA_SMTP_AUTH(0.00)[];
-	 XM_UA_NO_VERSION(0.01)[];
-	 FROM_HAS_DN(0.00)[];
-	 TO_DN_SOME(0.00)[];
-	 TO_MATCH_ENVRCPT_ALL(0.00)[];
-	 BAYES_HAM(-1.01)[87.29%];
-	 MIME_GOOD(-0.10)[text/plain];
-	 NEURAL_HAM_LONG(-1.00)[-1.000];
-	 RCPT_COUNT_FIVE(0.00)[5];
-	 RCVD_COUNT_THREE(0.00)[3];
-	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	 NEURAL_HAM_SHORT(-0.20)[-1.000];
-	 DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
-	 FUZZY_BLOCKED(0.00)[rspamd.com];
-	 FROM_EQ_ENVFROM(0.00)[];
-	 MIME_TRACE(0.00)[0:+];
-	 R_MIXED_CHARSET(0.83)[subject];
-	 RCVD_TLS_ALL(0.00)[];
-	 MID_RHS_MATCH_FROM(0.00)[]
 
-On 26.02.24 09:44, Jan Beulich wrote:
-> On 26.02.2024 09:39, Juergen Gross wrote:
->> Xenstore stubdom needs some more symbols exported.
->>
->> Signed-off-by: Juergen Gross <jgross@suse.com>
+On 20.02.2024 15:07, Anthony PERARD wrote:
+> Current issues with this test are:
+> - when the job timeout, the log file is lost as there is no chance to
+>   run the `mv` command.
+> - GitLab job log is limited in size, so one usually have to download
+>   the artifacts, which may be missing.
 > 
-> Any Reported-by: possibly applicable here?
+> Use $GITLAB_CI to detect when the script is run as part of a GitLab
+> pipeline. GitLab will add "GITLAB_CI=true" in the environment
+> variables.
+> 
+> When run as part of $GITLAB_CI, ignore "dirty" worktree to allow to
+> write "build-each-commit-gcc.log", which can then be grabbed as
+> artifacts, even when the job timeout. The `git clean` command is
+> changed to keep those build logs.
+> 
+> When run as part of $GITLAB_CI, we will also store the build output in
+> a log file instead of writing it to stdout, because GitLab's job log
+> is limited. But we will write the log to stdout in case of error, so
+> we can find out more quickly why there's been an error.
+> 
+> This patch also make use of a GitLab feature, "log sections", which we
+> will collapse by default. One section per commit been built.
+> 
+> There's a bit of colour added to the logs.
+> 
+> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 
-If any, then Andrew.
+I was trying to commit this, but ...
 
-He reported a CI loop failure.
+> --- a/automation/scripts/build-test.sh
+> +++ b/automation/scripts/build-test.sh
+> @@ -9,6 +9,37 @@
+>  # Set NON_SYMBOLIC_REF=1 if you want to use this script in detached HEAD state.
+>  # This is currently used by automated test system.
+>  
+> +# Colors with ANSI escape sequences
+> +txt_info='[32m'
+> +txt_err='[31m'
+> +txt_clr='[0m'
+> +
+> +# $GITLAB_CI should be "true" or "false".
+> +if [ "$GITLAB_CI" != true ]; then
+> +    GITLAB_CI=false
+> +fi
+> +
+> +gitlab_log_section() {
+> +    if $GITLAB_CI; then
+> +        echo -n "[0Ksection_$1:$(date +%s):$2
+> [0K"
 
+... there was either corruption on transmit here, or there's an embedded
+newline that I don't know how to deal with.
 
-Juergen
-
+Jan
 
