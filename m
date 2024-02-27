@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96300C54798
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Feb 2024 13:29:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.686181.1067866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE99C54798
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Feb 2024 13:32:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.686183.1067877 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rexWF-0003Qd-Ul; Tue, 27 Feb 2024 13:29:15 +0000
+	id 1rexZE-0005zi-Bd; Tue, 27 Feb 2024 13:32:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 686181.1067866; Tue, 27 Feb 2024 13:29:15 +0000
+Received: by outflank-mailman (output) from mailman id 686183.1067877; Tue, 27 Feb 2024 13:32:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rexWF-0003QW-Re; Tue, 27 Feb 2024 13:29:15 +0000
-Received: by outflank-mailman (input) for mailman id 686181;
- Tue, 27 Feb 2024 13:29:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rexZE-0005zb-8f; Tue, 27 Feb 2024 13:32:20 +0000
+Received: by outflank-mailman (input) for mailman id 686183;
+ Tue, 27 Feb 2024 13:32:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rG8r=KE=cloud.com=fouad.hilly@srs-se1.protection.inumbo.net>)
- id 1rexWE-0003ON-6T
- for xen-devel@lists.xenproject.org; Tue, 27 Feb 2024 13:29:14 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 31c49571-d574-11ee-a1ee-f123f15fe8a2;
- Tue, 27 Feb 2024 14:29:12 +0100 (CET)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-55a5e7fa471so5747459a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 27 Feb 2024 05:29:12 -0800 (PST)
-Received: from fhilly.citrite.net (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- f8-20020a056402194800b005648d0eebdbsm739946edz.96.2024.02.27.05.29.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Feb 2024 05:29:10 -0800 (PST)
+ <SRS0=FeT6=KE=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
+ id 1rexZC-0005zV-SJ
+ for xen-devel@lists.xenproject.org; Tue, 27 Feb 2024 13:32:18 +0000
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [2a00:1450:4864:20::22c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a063d41e-d574-11ee-afd6-a90da7624cb6;
+ Tue, 27 Feb 2024 14:32:17 +0100 (CET)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2d2ab9c5e83so1171611fa.2
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Feb 2024 05:32:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,206 +42,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31c49571-d574-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: a063d41e-d574-11ee-afd6-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1709040551; x=1709645351; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O8OPP4zUnBp0qZtUz97nx+VGwT/g+6InQ+dRne4geAI=;
-        b=cQA64swXFCmnMaXsAGqlVmEelAPV+1PFyN5xNK3QrSqrAURKVe/QoreIkfhzwVVT8k
-         A9L3qcPDgqviDFnuQcAxsloBILbNVAWaTlqNsYshp4E5jjn5/v40EpgY6stSNIgBMjgf
-         +MzLIwMTmZLY+U9/qFiyPiaOQzFSCLoVUG7bE=
+        d=cloud.com; s=cloud; t=1709040737; x=1709645537; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wlfFfCKXh6eF1WcOCQlyirhSLscGtf3veXkT7yBHVjk=;
+        b=NZ+XsX0CkIKLFloaTjKq8bK0rQUsHrdDwXp+183wEhoU9MmF3EdFCJsZFOB5QHlauB
+         SnJVkQCgiXLnPp7rruacJKyPu2rKJUMnBqMdOaxYflVGfXkUNf9pWesRCHPaOd9GWBnV
+         0WG92QnxCMT5NddlyzjEuqhe+ZxPI/dXBU9ng=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709040551; x=1709645351;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=O8OPP4zUnBp0qZtUz97nx+VGwT/g+6InQ+dRne4geAI=;
-        b=o1g8mzIjAyA6F0cBDdOVnYWM9wy8Mh6KC4Q1Z/swaRBP8HTm0jFNRIFqt61xd+s5HM
-         +mw7ZUVRsBNdn183EBFLHgmVP8BQn/wND+IRo3vZ4XVBH/EVnpFu5kfFZeTvPokOQDM1
-         v8qsG8+xnwOkrTIdRvV6p29LpyiPBJ1hHltqK534ycpvGrHEqnas9HXyajQH+8ib7Alw
-         hGpc7lfth3d4iCX41ybBDn9cOHcvk4PuDOqc7L/+jah+ggOxcVeGqicz1ULtaIesJMGi
-         v1xxYjA52kLrq/UsyS9w2KFuSnfaTu9fFlplaNP40T3qeDOLk98PBJtIxAY6E1ZsRNca
-         MUVw==
-X-Gm-Message-State: AOJu0YyO6rVwuMboUJcSrUUOVPkRhBNcloVIlgrw3htZVqXJXyDefE/3
-	7qvzYqP9iMbLpTjO8brY+49eEZPKwP4hYOJgBGaANMosjImnZK2pji36L8LoSkH/NxFmpFt4IOO
-	OYi4=
-X-Google-Smtp-Source: AGHT+IGMGnZx1EQaEb4du/db3axhqXjvwFvuH3yFWHOii2P0hvfLukl9yJ5Lq4s3jlKQ94tRWdea2w==
-X-Received: by 2002:a05:6402:612:b0:566:1fbd:22bb with SMTP id n18-20020a056402061200b005661fbd22bbmr2249049edv.9.1709040551191;
-        Tue, 27 Feb 2024 05:29:11 -0800 (PST)
-From: Fouad Hilly <fouad.hilly@cloud.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Fouad Hilly <fouad.hilly@cloud.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2] tools/xentop: Add VBD3 support to xentop
-Date: Tue, 27 Feb 2024 13:26:28 +0000
-Message-ID: <20240227132628.2157031-1-fouad.hilly@cloud.com>
-X-Mailer: git-send-email 2.42.0
+        d=1e100.net; s=20230601; t=1709040737; x=1709645537;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=wlfFfCKXh6eF1WcOCQlyirhSLscGtf3veXkT7yBHVjk=;
+        b=ECe7CtlOB89nFP3NCMPD1W8MFiig0oWje7s0xSHCg23iAKUFZY/kJf/+dPEUxYQmCI
+         S77h8iZsK2FMHrmA8792P+TgZkxN0luZqbQwMsqjOU1CDeqPETuZoYlT1Z1SN8GI7dg0
+         8sMNV+WclJCtuhJG7DzLv0LdUVmSKNhIfXu6IojpoAPqiZJVb5ibfYceFZBHYgIt0F4D
+         oBxt74ODht0o+ltOb0RXTg8/gg9QJr6ND/5iH1H4PNde9qmUGt1XU+O7wr4VOo1RUSFW
+         awz/epj7L1O6D7o5BwgzNZpqr3HfmGJVj+bQ5sc9Z82pCC4JJ0ijV1Z17sBwDf2CGI8V
+         rrOg==
+X-Gm-Message-State: AOJu0YzkR8u9xc/LtJCVzVPT7Dbe0CkdQ769LGfNQ1INbk5ffNjGW9aT
+	oh8i+IrCjKQZtUq9zFc3yK3ujDtsSM2s3E6CNfsvHKI6a5CDcgtOSMhMxnHA4Y3zWgGkJsiyD/0
+	uxUdmrhYRNAlr03cMiiYFn3+uM8/1b45hoOqL
+X-Google-Smtp-Source: AGHT+IERoOUncLhTrpIy++4f2blcDkUt2umlcfRtBoX9WwR/Q0vuRVOXt/pHKCIltgv2iWsIlsQ4nyyXkYc6o6qKQiM=
+X-Received: by 2002:a2e:9881:0:b0:2d2:7392:5057 with SMTP id
+ b1-20020a2e9881000000b002d273925057mr6004309ljj.30.1709040737512; Tue, 27 Feb
+ 2024 05:32:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240131165816.58762-1-roger.pau@citrix.com>
+In-Reply-To: <20240131165816.58762-1-roger.pau@citrix.com>
+From: Ross Lagerwall <ross.lagerwall@cloud.com>
+Date: Tue, 27 Feb 2024 13:32:05 +0000
+Message-ID: <CAG7k0EqfMecUGQJSqMLxmR7vOjushAYQuG-r+3eAhs4a-UhuTw@mail.gmail.com>
+Subject: Re: [PATCH] livepatch-build-tools: allow patch file name sizes up to
+ 128 characters
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Pritha Srivastava <pritha.srivastava@citrix.com>
+On Wed, Jan 31, 2024 at 4:58=E2=80=AFPM Roger Pau Monne <roger.pau@citrix.c=
+om> wrote:
+>
+> XenServer uses quite long Xen version names, and encode such in the livep=
+atch
+> filename, and it's currently running out of space in the file name.
+>
+> Bump max filename size to 128, so it also matches the patch name length i=
+n the
+> hypervisor interface.
+>
+> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> ---
+>  livepatch-build | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/livepatch-build b/livepatch-build
+> index cdb852cc7fea..78dd2d801048 100755
+> --- a/livepatch-build
+> +++ b/livepatch-build
+> @@ -72,8 +72,8 @@ function make_patch_name()
+>      fi
+>
+>      # Only allow alphanumerics and '_' and '-' in the patch name.  Every=
+thing
+> -    # else is replaced with '-'.  Truncate to 48 chars.
+> -    echo ${PATCHNAME//[^a-zA-Z0-9_-]/-} |cut -c 1-48
+> +    # else is replaced with '-'.  Truncate to 128 chars.
+> +    echo ${PATCHNAME//[^a-zA-Z0-9_-]/-} |cut -c -128
+>  }
 
-xl now knows how to drive tapdisk, so modify libxenstat to
-understand vbd3 statistics.
+I think it should be XEN_LIVEPATCH_NAME_SIZE - 1 to match the hypervisor
+since AFAICT the hypervisor expects the last character to be NUL.
 
-Signed-off-by: Pritha Srivastava <pritha.srivastava@citrix.com>
-Signed-off-by: Jorge Martin <jorge.martin@citrix.com>
-Signed-off-by: Fouad Hilly <fouad.hilly@cloud.com>
----
-CC: Wei Liu <wl@xen.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
-CC: Juergen Gross <jgross@suse.com>
+In get_name(), it checks:
 
-v2:
-- Fix order of SoB
-- Fix Syntax
-- Re-order free(path)
----
- tools/libs/stat/xenstat_linux.c | 65 ++++++++++++++++++++++++++++++++-
- tools/libs/stat/xenstat_priv.h  | 16 ++++++++
- tools/xentop/xentop.c           |  1 +
- 3 files changed, 81 insertions(+), 1 deletion(-)
+    if ( !name->size || name->size > XEN_LIVEPATCH_NAME_SIZE )
+        return -EINVAL;
 
-diff --git a/tools/libs/stat/xenstat_linux.c b/tools/libs/stat/xenstat_linux.c
-index cbba54aa83ee..6d82e204aad4 100644
---- a/tools/libs/stat/xenstat_linux.c
-+++ b/tools/libs/stat/xenstat_linux.c
-@@ -390,6 +390,38 @@ void xenstat_uninit_networks(xenstat_handle * handle)
- 		fclose(priv->procnetdev);
- }
- 
-+static int read_attributes_vbd3(char *vbd3_path, xenstat_vbd *vbd)
-+{
-+	FILE *fp;
-+	struct vbd3_stats vbd3_stats;
-+
-+	fp = fopen(vbd3_path, "rb");
-+
-+	if (fp == NULL) {
-+		return -1;
-+	}
-+
-+	if (fread(&vbd3_stats, sizeof(struct vbd3_stats), 1, fp) != 1) {
-+		fclose(fp);
-+		return -1;
-+	}
-+
-+	if (vbd3_stats.version != 1) {
-+		fclose(fp);
-+		return -1;
-+	}
-+
-+	vbd->oo_reqs = vbd3_stats.oo_reqs;
-+	vbd->rd_reqs = vbd3_stats.read_reqs_submitted;
-+	vbd->rd_sects = vbd3_stats.read_sectors;
-+	vbd->wr_reqs = vbd3_stats.write_reqs_submitted;
-+	vbd->wr_sects = vbd3_stats.write_sectors;
-+
-+	fclose(fp);
-+
-+	return 0;
-+}
-+
- static int read_attributes_vbd(const char *vbd_directory, const char *what, char *ret, int cap)
- {
- 	static char file_name[80];
-@@ -438,7 +470,7 @@ int xenstat_collect_vbds(xenstat_node * node)
- 		int ret;
- 		char buf[256];
- 
--		ret = sscanf(dp->d_name, "%3s-%u-%u", buf, &domid, &vbd.dev);
-+		ret = sscanf(dp->d_name, "%255[^-]-%u-%u", buf, &domid, &vbd.dev);
- 		if (ret != 3)
- 			continue;
- 		if (!(strstr(buf, "vbd")) && !(strstr(buf, "tap")))
-@@ -448,6 +480,8 @@ int xenstat_collect_vbds(xenstat_node * node)
- 			vbd.back_type = 1;
- 		else if (strcmp(buf,"tap") == 0)
- 			vbd.back_type = 2;
-+		else if (strcmp(buf,"vbd3") == 0)
-+			vbd.back_type = 3;
- 		else
- 			vbd.back_type = 0;
- 
-@@ -479,6 +513,35 @@ int xenstat_collect_vbds(xenstat_node * node)
- 				vbd.error = 1;
- 			}
- 		}
-+		else if (vbd.back_type == 3)
-+		{
-+			char *td3_pid;
-+			char *path;
-+
-+			vbd.back_type = 3;
-+			vbd.error = 0;
-+
-+			if (asprintf(&path, "/local/domain/0/backend/vbd3/%u/%u/kthread-pid", domid, vbd.dev) < 0)
-+				continue;
-+
-+			td3_pid = xs_read(node->handle->xshandle, XBT_NULL, path, NULL);
-+
-+			free(path);
-+
-+			if (td3_pid == NULL)
-+				continue;
-+
-+			if (asprintf(&path, "/dev/shm/td3-%s/vbd-%u-%u", td3_pid, domid, vbd.dev) < 0) {
-+				free(td3_pid);
-+				continue;
-+			}
-+
-+			if (read_attributes_vbd3(path, &vbd) < 0)
-+				vbd.error = 1;
-+
-+			free(td3_pid);
-+			free(path);
-+		}
- 		else
- 		{
- 			vbd.error = 1;
-diff --git a/tools/libs/stat/xenstat_priv.h b/tools/libs/stat/xenstat_priv.h
-index 4eb44a8ebb84..c3a9635240e9 100644
---- a/tools/libs/stat/xenstat_priv.h
-+++ b/tools/libs/stat/xenstat_priv.h
-@@ -98,6 +98,22 @@ struct xenstat_vbd {
- 	unsigned long long wr_sects;
- };
- 
-+struct vbd3_stats {
-+	uint32_t version;
-+	uint32_t __pad;
-+	uint64_t oo_reqs;
-+	uint64_t read_reqs_submitted;
-+	uint64_t read_reqs_completed;
-+	uint64_t read_sectors;
-+	uint64_t read_total_ticks;
-+	uint64_t write_reqs_submitted;
-+	uint64_t write_reqs_completed;
-+	uint64_t write_sectors;
-+	uint64_t write_total_ticks;
-+	uint64_t io_errors;
-+	uint64_t flags;
-+};
-+
- extern int xenstat_collect_networks(xenstat_node * node);
- extern void xenstat_uninit_networks(xenstat_handle * handle);
- extern int xenstat_collect_vbds(xenstat_node * node);
-diff --git a/tools/xentop/xentop.c b/tools/xentop/xentop.c
-index 0a2fab7f15a3..f5a456fd4dfd 100644
---- a/tools/xentop/xentop.c
-+++ b/tools/xentop/xentop.c
-@@ -1124,6 +1124,7 @@ void do_vbd(xenstat_domain *domain)
- 		"Unidentified",           /* number 0 */
- 		"BlkBack",           /* number 1 */
- 		"BlkTap",            /* number 2 */
-+		"Tapdisk3"           /* number 3 */
- 	};
- 
- 	num_vbds = xenstat_domain_num_vbds(domain);
--- 
-2.42.0
+... and:
 
+    if ( n[name->size - 1] )
+        return -EINVAL;
+
+Do you agree with that?
+
+Ross
 
