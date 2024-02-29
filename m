@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E3FEC54E58
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADD38C54E59
 	for <xen-devel@archiver.kernel.org>; Thu, 29 Feb 2024 15:28:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.687199.1070296 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.687195.1070266 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rfiKY-0001Xr-5R; Thu, 29 Feb 2024 15:28:18 +0000
+	id 1rfiKV-0000rj-Bx; Thu, 29 Feb 2024 15:28:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 687199.1070296; Thu, 29 Feb 2024 15:28:18 +0000
+Received: by outflank-mailman (output) from mailman id 687195.1070266; Thu, 29 Feb 2024 15:28:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rfiKX-0001Vj-Qj; Thu, 29 Feb 2024 15:28:17 +0000
-Received: by outflank-mailman (input) for mailman id 687199;
- Thu, 29 Feb 2024 15:28:16 +0000
+	id 1rfiKV-0000rA-6I; Thu, 29 Feb 2024 15:28:15 +0000
+Received: by outflank-mailman (input) for mailman id 687195;
+ Thu, 29 Feb 2024 15:28:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ot4I=KG=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rfiKW-0008Ql-Nu
- for xen-devel@lists.xenproject.org; Thu, 29 Feb 2024 15:28:16 +0000
+ id 1rfiKT-0008Ql-F2
+ for xen-devel@lists.xenproject.org; Thu, 29 Feb 2024 15:28:13 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 27e30321-d717-11ee-a1ee-f123f15fe8a2;
- Thu, 29 Feb 2024 16:28:15 +0100 (CET)
+ id 25de8189-d717-11ee-a1ee-f123f15fe8a2;
+ Thu, 29 Feb 2024 16:28:11 +0100 (CET)
 Received: from nico.bugseng.com (unknown [46.228.253.196])
- by support.bugseng.com (Postfix) with ESMTPSA id 2F2B24EE0750;
- Thu, 29 Feb 2024 16:28:14 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id C5A944EE074D;
+ Thu, 29 Feb 2024 16:28:10 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27e30321-d717-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 25de8189-d717-11ee-a1ee-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -57,9 +57,9 @@ Cc: sstabellini@kernel.org,
 	julien@xen.org,
 	George Dunlap <george.dunlap@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 09/10] xen/include: tasklet: address violations of MISRA C Rule 20.7
-Date: Thu, 29 Feb 2024 16:28:01 +0100
-Message-Id: <952d13bdb830cb1d8d3282e49333323bc8755cd5.1709219010.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 04/10] xen/public: address violations of MISRA C Rule 20.7
+Date: Thu, 29 Feb 2024 16:27:56 +0100
+Message-Id: <0cdc4dc2fcad699a2274277b32de3ee0207d5a2d.1709219010.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1709219010.git.nicola.vetrini@bugseng.com>
 References: <cover.1709219010.git.nicola.vetrini@bugseng.com>
@@ -67,31 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 MISRA C Rule 20.7 states: "Expressions resulting from the expansion
-of macro parameters shall be enclosed in parentheses". Therefore, some
-macro definitions should gain additional parentheses to ensure that all
-current and future users will be safe with respect to expansions that
-can possibly alter the semantics of the passed-in macro parameter.
+of macro parameters shall be enclosed in parentheses". Therefore
+the macro XEN_DEFINE_UUID_ should wrap its parameters in parentheses.
 
 No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/include/xen/tasklet.h | 2 +-
+ xen/include/public/xen.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/include/xen/tasklet.h b/xen/include/xen/tasklet.h
-index 593d6a2400fb..78760b694a39 100644
---- a/xen/include/xen/tasklet.h
-+++ b/xen/include/xen/tasklet.h
-@@ -27,7 +27,7 @@ struct tasklet
+diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
+index b47d48d0e2d6..fa23080bd7af 100644
+--- a/xen/include/public/xen.h
++++ b/xen/include/public/xen.h
+@@ -988,7 +988,7 @@ typedef struct {
+       ((b) >>  8) & 0xFF, ((b) >>  0) & 0xFF,                           \
+       ((c) >>  8) & 0xFF, ((c) >>  0) & 0xFF,                           \
+       ((d) >>  8) & 0xFF, ((d) >>  0) & 0xFF,                           \
+-                e1, e2, e3, e4, e5, e6}}
++                (e1), (e2), (e3), (e4), (e5), (e6)}}
  
- #define _DECLARE_TASKLET(name, func, data, softirq)                     \
-     struct tasklet name = {                                             \
--        LIST_HEAD_INIT(name.list), -1, softirq, 0, 0, func, data }
-+        LIST_HEAD_INIT((name).list), -1, softirq, 0, 0, func, data }
- #define DECLARE_TASKLET(name, func, data)               \
-     _DECLARE_TASKLET(name, func, data, 0)
- #define DECLARE_SOFTIRQ_TASKLET(name, func, data)       \
+ #if defined(__STDC_VERSION__) ? __STDC_VERSION__ >= 199901L : defined(__GNUC__)
+ #define XEN_DEFINE_UUID(a, b, c, d, e1, e2, e3, e4, e5, e6)             \
 -- 
 2.34.1
 
