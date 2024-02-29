@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70DCEC54E5D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74A55C54E5C
 	for <xen-devel@archiver.kernel.org>; Thu, 29 Feb 2024 15:28:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.687200.1070302 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.687198.1070291 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rfiKY-0001fA-In; Thu, 29 Feb 2024 15:28:18 +0000
+	id 1rfiKX-0001Rx-IP; Thu, 29 Feb 2024 15:28:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 687200.1070302; Thu, 29 Feb 2024 15:28:18 +0000
+Received: by outflank-mailman (output) from mailman id 687198.1070291; Thu, 29 Feb 2024 15:28:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rfiKY-0001cQ-6M; Thu, 29 Feb 2024 15:28:18 +0000
-Received: by outflank-mailman (input) for mailman id 687200;
- Thu, 29 Feb 2024 15:28:17 +0000
+	id 1rfiKX-0001RX-BU; Thu, 29 Feb 2024 15:28:17 +0000
+Received: by outflank-mailman (input) for mailman id 687198;
+ Thu, 29 Feb 2024 15:28:15 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ot4I=KG=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rfiKX-0008Ql-4w
- for xen-devel@lists.xenproject.org; Thu, 29 Feb 2024 15:28:17 +0000
+ id 1rfiKV-0008Ql-QY
+ for xen-devel@lists.xenproject.org; Thu, 29 Feb 2024 15:28:15 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 28499bfa-d717-11ee-a1ee-f123f15fe8a2;
- Thu, 29 Feb 2024 16:28:15 +0100 (CET)
-Received: from nico.bugseng.com (unknown [46.228.253.196])
- by support.bugseng.com (Postfix) with ESMTPSA id D53774EE0752;
+ id 277a35f8-d717-11ee-a1ee-f123f15fe8a2;
  Thu, 29 Feb 2024 16:28:14 +0100 (CET)
+Received: from nico.bugseng.com (unknown [46.228.253.196])
+ by support.bugseng.com (Postfix) with ESMTPSA id 7B5DA4EE0751;
+ Thu, 29 Feb 2024 16:28:13 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 28499bfa-d717-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 277a35f8-d717-11ee-a1ee-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -57,9 +57,9 @@ Cc: sstabellini@kernel.org,
 	julien@xen.org,
 	George Dunlap <george.dunlap@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 10/10] xen/keyhandler: address violations of MISRA C Rule 20.7
-Date: Thu, 29 Feb 2024 16:28:02 +0100
-Message-Id: <2bc4a964f0f2f47488e72237678e944dbdbd7bb7.1709219010.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH 08/10] xen/errno: address violations of MISRA C Rule 20.7
+Date: Thu, 29 Feb 2024 16:28:00 +0100
+Message-Id: <92dbcd9e5aa2ab45c50f3f567ddece59108568ad.1709219010.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1709219010.git.nicola.vetrini@bugseng.com>
 References: <cover.1709219010.git.nicola.vetrini@bugseng.com>
@@ -76,26 +76,22 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/common/keyhandler.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/include/xen/errno.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
-index 127ca506965c..4c1ce007870f 100644
---- a/xen/common/keyhandler.c
-+++ b/xen/common/keyhandler.c
-@@ -42,10 +42,10 @@ static struct keyhandler {
- } key_table[128] __read_mostly =
- {
- #define KEYHANDLER(k, f, desc, diag)            \
--    [k] = { { .fn = (f) }, desc, 0, diag }
-+    [k] = { { .fn = (f) }, (desc), 0, (diag) }
+diff --git a/xen/include/xen/errno.h b/xen/include/xen/errno.h
+index 69b28dd3c6c5..506674701fae 100644
+--- a/xen/include/xen/errno.h
++++ b/xen/include/xen/errno.h
+@@ -3,7 +3,7 @@
  
- #define IRQ_KEYHANDLER(k, f, desc, diag)        \
--    [k] = { { .irq_fn = (f) }, desc, 1, diag }
-+    [k] = { { .irq_fn = (f) }, (desc), 1, (diag) }
+ #ifndef __ASSEMBLY__
  
-     IRQ_KEYHANDLER('A', do_toggle_alt_key, "toggle alternative key handling", 0),
-     IRQ_KEYHANDLER('d', dump_registers, "dump registers", 1),
+-#define XEN_ERRNO(name, value) name = value,
++#define XEN_ERRNO(name, value) name = (value),
+ enum {
+ #include <public/errno.h>
+ };
 -- 
 2.34.1
 
