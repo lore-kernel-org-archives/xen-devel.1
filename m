@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDC1DC48BF6
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Mar 2024 08:33:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.688205.1072121 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90816C48BF6
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Mar 2024 08:42:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.688211.1072131 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rh3l4-0000rE-8R; Mon, 04 Mar 2024 08:33:14 +0000
+	id 1rh3tc-0002tD-4a; Mon, 04 Mar 2024 08:42:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 688205.1072121; Mon, 04 Mar 2024 08:33:14 +0000
+Received: by outflank-mailman (output) from mailman id 688211.1072131; Mon, 04 Mar 2024 08:42:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rh3l4-0000r7-5X; Mon, 04 Mar 2024 08:33:14 +0000
-Received: by outflank-mailman (input) for mailman id 688205;
- Mon, 04 Mar 2024 08:33:13 +0000
+	id 1rh3tc-0002t6-1H; Mon, 04 Mar 2024 08:42:04 +0000
+Received: by outflank-mailman (input) for mailman id 688211;
+ Mon, 04 Mar 2024 08:42:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Kl9k=KK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rh3l3-0000r1-6f
- for xen-devel@lists.xenproject.org; Mon, 04 Mar 2024 08:33:13 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
+ id 1rh3ta-0002t0-No
+ for xen-devel@lists.xenproject.org; Mon, 04 Mar 2024 08:42:02 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d5ade12d-da01-11ee-a1ee-f123f15fe8a2;
- Mon, 04 Mar 2024 09:33:11 +0100 (CET)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5658082d2c4so5686677a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 04 Mar 2024 00:33:11 -0800 (PST)
+ id 11713a14-da03-11ee-a1ee-f123f15fe8a2;
+ Mon, 04 Mar 2024 09:42:00 +0100 (CET)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a4532f84144so90948966b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Mar 2024 00:42:00 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- u11-20020aa7d54b000000b005676dc74568sm22766edr.92.2024.03.04.00.33.09
+ lf12-20020a170906ae4c00b00a3f27031d7bsm4478192ejb.104.2024.03.04.00.41.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Mar 2024 00:33:10 -0800 (PST)
+ Mon, 04 Mar 2024 00:42:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d5ade12d-da01-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 11713a14-da03-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1709541190; x=1710145990; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1709541720; x=1710146520; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=Ut64ZgYtVOtqepmTe4ahlByQcsflnD3AE8O5tiYr2uM=;
-        b=P6xjlcv4OnXIJRWyUZG1VXDG3YJ6cZrpkya+3gVkt26M+BZ7sEhEEAxlth5eKMWFcy
-         y3E0isxwxFB2nOT68k0nE0iGBzT4Jbwx+j3SG+OqoX9sqs44txKI0Rhg90ZzGPlrSJ5K
-         iAHUXFuxFk+zbKZumbRyE9V54xH3PBbZByZguebJF81UnVzzodjK9E1SZHjaz2UxgoUv
-         iJ1TRuCmIVMmLDfsVBODn621N+jwl7wWDvfDhurlsQ6w3GBrEJv4fbGlIafEr4vtdSx4
-         xs4AbAsYcAQGz1twkpiD6VwRqeIYQoJchbuDJ63ibNPa3rHZsSMbXeDcxFWmDtxyj3x8
-         BVpA==
+        bh=dH71Eg9TYrklzTXB5rbvvDpAAx3jxhgWpBFzwoM4zGc=;
+        b=T6NgJeIeM7ANxykKTKzINTRIVZlRPTQhRD+BhT1rAilWSr11PaBEXAe3mSTJb04N7e
+         pXwP6I9StBmm896MCv0MvaUTbopYR/xgwC9Xbp6DRo2AL/FsGT/E8N1wOm6QvZe7v2SE
+         qx1uUZPmdRqttBs6nuJQho3cVvB0OVPyTqwMyA5fZIKTJovUZAc/Q40rd6KUhIc8vHGP
+         imjvslYUqwBE/7VJu3twT1VwF12cSq3M9t74AUUED5Y9EvmXWyxUfsnQQzYhO0qJliqU
+         2SaVpQOTlb73oDSiGhLZUCUDt7ULWGCwvk2mLs2HmTFwaNiSEe1+3GN9gA7xbME6fKUo
+         ThKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709541190; x=1710145990;
+        d=1e100.net; s=20230601; t=1709541720; x=1710146520;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ut64ZgYtVOtqepmTe4ahlByQcsflnD3AE8O5tiYr2uM=;
-        b=dPVUfe3xIB58XytqLDwPpvmMCIDGrHwo/7qnxo+/+0bmROBbQAWkDd4p1XwfuEjtOL
-         v9o/G352CCOq12m14kv998MG44nnqAZtKS6ML0WTww/DHL5kRToPFiCvo9jIdrxundku
-         Vkuz4dJZ4585D/QFXg4OTRvnKQFk93H1c0M45FT+vvDDf0RJvn/xc6uGX3JeCDD7zD6v
-         yZa8FYmlycCKcv1kOzknrdSdQKUyWJKWqzKLYIo+iGGJyobZGLN7T7t4QLMP2x6Cnpcx
-         WETfmefs8eUMBEfF5cGEyFYfBeTD6dA7jyUHtPCsgblI+Edm6O7d/SVEQ/OAlL/PS5WY
-         IewQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVPW4FAgjD9/RDBF8H2fy26thIaHXBnwNacoH/DIUkhR+29RKRZp0bttLmXeFW0djNp0zjkEPvf7x4zZmC9gucj75mtW4x7yMIYqzMiZYc=
-X-Gm-Message-State: AOJu0Yy+DRTeSL9YovxuwZJSyIy6pPR+JYc9BBc27vgLiMdg4nih1d1D
-	IQlS3PuNFnlDIhAVp8PVkUUGUNDSc3B1bxKX68FgYDD5ITEaETHeW3R8UthASw==
-X-Google-Smtp-Source: AGHT+IE5pkF2L5/EFj3QzEpp2TA7uLEF/c3/IsKsebGorzXzi1O0vADGmo+fTiEiD9Yav40TLLx2GQ==
-X-Received: by 2002:a50:8dc7:0:b0:566:131a:26ee with SMTP id s7-20020a508dc7000000b00566131a26eemr5275332edh.35.1709541190462;
-        Mon, 04 Mar 2024 00:33:10 -0800 (PST)
-Message-ID: <da6bb1e7-fa8f-4aca-8ba1-36f49f41d38b@suse.com>
-Date: Mon, 4 Mar 2024 09:33:11 +0100
+        bh=dH71Eg9TYrklzTXB5rbvvDpAAx3jxhgWpBFzwoM4zGc=;
+        b=nNsC06rlQVfgl1SYg3wXgQP9LYnPs7HN63NU/MYN0mF/F9SR3rMHHSYYZLx9yAAkkh
+         7o3UBsDeWoraUJErjNVHbld61FM8wAHq/SHYRqPUmrzCYJDrHRQnG0dDUxXoE+D0ciTx
+         ZtX9Ng2oc6RuAJhHvvPcBRb4DkianVibThWFOLanShS2npybV6FRBanSg/2gOMLKHlwc
+         //6BA3mkYS5d+vhZ89rmcn6F8TB8J90ujNuC2SYc9NtCxWWYyfT0/0+hF5oDHD+WsD90
+         N0uXlQFMWrfgprA0UEZaDQfKLWlWGwLnnF5yQ4+/SmB20lBniArdAU9lX/JbeM1MxOY7
+         r/NQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV3YeFuC/2AeQmd39BaGujFLDEuDua+xHVCXLIcBsPO4FDjX4CWtkjtQulZ65KaYKcWn6GMF0Ub7wlnYxIaYWuldQ7M/S+jjDunfJNms8E=
+X-Gm-Message-State: AOJu0Yw+BrwbQAuF+fPIK1DDLzuH25FxcZxN0AMCrAL5ral2++k+ULDY
+	8CJmrGxuVJsqSfwCPhnXSaTLa3cC775B7zwsCctm+IbvMQksP1ydOq2PEcHbdg==
+X-Google-Smtp-Source: AGHT+IHDajJxFhYTX+wXFxFGtArV2QmMXH/5WGT41ipjk4FCcWoihqod32doUjFn0hyZUzSl8GT/xg==
+X-Received: by 2002:a17:906:fa92:b0:a3e:d5ac:9995 with SMTP id lt18-20020a170906fa9200b00a3ed5ac9995mr5715611ejb.59.1709541720390;
+        Mon, 04 Mar 2024 00:42:00 -0800 (PST)
+Message-ID: <0751a4ac-4e3b-47e4-8727-f3dd4610d446@suse.com>
+Date: Mon, 4 Mar 2024 09:42:01 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/cpu-policy: Hide x2APIC from PV guests
+Subject: Re: [PATCH] x86/cpu-policy: Fix visibility of HTT/CMP_LEGACY in max
+ policies
 Content-Language: en-US
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Wei Liu <wl@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
-References: <20240229221448.2593171-1-andrew.cooper3@citrix.com>
+References: <20240301112829.2657865-1-andrew.cooper3@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -112,45 +113,50 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240229221448.2593171-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20240301112829.2657865-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 29.02.2024 23:14, Andrew Cooper wrote:
-> PV guests can't write to MSR_APIC_BASE (in order to set EXTD), nor can they
-> access any of the x2APIC MSR range.  Therefore they mustn't see the x2APIC
-> CPUID bit saying that they can.
+On 01.03.2024 12:28, Andrew Cooper wrote:
+> --- a/xen/arch/x86/cpu-policy.c
+> +++ b/xen/arch/x86/cpu-policy.c
+> @@ -464,6 +464,16 @@ static void __init guest_common_max_feature_adjustments(uint32_t *fs)
+>               raw_cpu_policy.feat.clwb )
+>              __set_bit(X86_FEATURE_CLWB, fs);
+>      }
+> +
+> +    /*
+> +     * Topology information inside the guest is entirely at the toolstack's
+> +     * disgression, and bears no relationship to the host we're running on.
+> +     *
+> +     * HTT identifies p->basic.lppp as valid
+> +     * CMP_LEGACY identifies p->extd.nc as valid
+> +     */
+> +    __set_bit(X86_FEATURE_HTT, fs);
+> +    __set_bit(X86_FEATURE_CMP_LEGACY, fs);
+>  }
+>  
+>  static void __init guest_common_default_feature_adjustments(uint32_t *fs)
+> @@ -514,6 +524,18 @@ static void __init guest_common_default_feature_adjustments(uint32_t *fs)
+>              __clear_bit(X86_FEATURE_CLWB, fs);
+>      }
+>  
+> +    /*
+> +     * Topology information is at the toolstack's discretion so these are
+> +     * unconditionally set in max, but pick a default which matches the host.
+> +     */
+> +    __clear_bit(X86_FEATURE_HTT, fs);
+> +    if ( cpu_has_htt )
+> +        __set_bit(X86_FEATURE_HTT, fs);
+> +
+> +    __clear_bit(X86_FEATURE_CMP_LEGACY, fs);
+> +    if ( cpu_has_cmp_legacy )
+> +        __set_bit(X86_FEATURE_CMP_LEGACY, fs);
 
-This argumentation could then be used equally for the APIC bit. Why is it
-correct to hide x2APIC, but not APIC?
-
-> Right now, the host x2APIC flag filters into PV guests, meaning that PV guests
-> generally see x2APIC except on Zen1-and-older AMD systems.
-> 
-> Linux works around this by explicitly hiding the bit itself, and filtering
-> EXTD out of MSR_APIC_BASE reads.  NetBSD behaves more in the spirit of PV
-> guests, and entirely ignores the APIC when built as a PV guest.
-> 
-> Change the annotation from !A to !S.  This has a consequence of stripping it
-> out of both PV featuremasks.  However, as existing guests may have seen the
-> bit, set it back into the PV Max policy; a VM which saw the bit and is alive
-> enough to migrate will have ignored it one way or another.
-> 
-> Hiding x2APIC does also change the contents of leaf 0xb, but as the
-> information is nonsense to begin with, this is likely an improvement on the
-> status quo.  The blind reporting of APIC_ID = vCPU_ID * 2 isn't interlinked
-> with the host's topology structure, and the APIC_IDs are useless without an
-> MADT to start with.  Dom0 is the only PV VM to get an MADT but it's the host
-> one, meaning the two sets of APIC_IDs are from different address spaces.
-
-Aiui the field will now be seen as zero on all CPUs. Is all CPUs having the
-same APIC ID there really better than them all having different ones?
-
-Also while I agree that logically CPUID leaf 0xb EDX is tied to x2APIC being
-available as a feature, nothing is said in this regard in the documentation
-of that leaf. This in particular leaves open whether on a system with x2APIC
-disabled in/by firmware the value would actually be zero. Yet that case could
-be considered somewhat similar to the PV case here.
+When running on a host with the respective bit clear, won't this break
+(at least older) Linux'es logic? Iirc the unconditional setting of at
+least HTT was tied to the unconditional multiplying by 2 of the vCPU ID
+to derive the (fake) APIC ID.
 
 Jan
 
