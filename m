@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48B42C54798
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Mar 2024 18:57:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.688890.1073618 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2FBBC54E41
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Mar 2024 19:13:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.688894.1073637 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rhZyg-0001bo-VS; Tue, 05 Mar 2024 18:57:26 +0000
+	id 1rhaER-0005G2-FY; Tue, 05 Mar 2024 19:13:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 688890.1073618; Tue, 05 Mar 2024 18:57:26 +0000
+Received: by outflank-mailman (output) from mailman id 688894.1073637; Tue, 05 Mar 2024 19:13:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rhZyg-0001bh-S1; Tue, 05 Mar 2024 18:57:26 +0000
-Received: by outflank-mailman (input) for mailman id 688890;
- Tue, 05 Mar 2024 18:57:25 +0000
+	id 1rhaER-0005Fv-Cs; Tue, 05 Mar 2024 19:13:43 +0000
+Received: by outflank-mailman (input) for mailman id 688894;
+ Tue, 05 Mar 2024 19:13:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4c3Q=KL=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rhZyf-0001bV-Bg
- for xen-devel@lists.xenproject.org; Tue, 05 Mar 2024 18:57:25 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
+ <SRS0=OsR7=KL=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1rhaEP-00051h-JD
+ for xen-devel@lists.xenproject.org; Tue, 05 Mar 2024 19:13:41 +0000
+Received: from wfhigh5-smtp.messagingengine.com
+ (wfhigh5-smtp.messagingengine.com [64.147.123.156])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 32ee4834-db22-11ee-a1ee-f123f15fe8a2;
- Tue, 05 Mar 2024 19:57:22 +0100 (CET)
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5135540c40dso1143695e87.3
- for <xen-devel@lists.xenproject.org>; Tue, 05 Mar 2024 10:57:22 -0800 (PST)
-Received: from [192.168.206.239] ([94.75.70.14])
- by smtp.gmail.com with ESMTPSA id
- i10-20020a056512340a00b00513409c4472sm1309286lfr.31.2024.03.05.10.57.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 10:57:21 -0800 (PST)
+ id 7724e8af-db24-11ee-a1ee-f123f15fe8a2;
+ Tue, 05 Mar 2024 20:13:39 +0100 (CET)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailfhigh.west.internal (Postfix) with ESMTP id C2CF518000D6;
+ Tue,  5 Mar 2024 14:13:34 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute2.internal (MEProxy); Tue, 05 Mar 2024 14:13:35 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 5 Mar 2024 14:13:32 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,97 +46,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 32ee4834-db22-11ee-a1ee-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709665042; x=1710269842; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=5WVydwxx6qmSKti8h+I/VwaGiN8g3FTWWDmAIX3/W9w=;
-        b=ndxj2oqP06EHVj5IvVD24o0LslXzB3FFtT1ENOF0cPCFhffO5vKFgAbZvrWFFRDEXv
-         rb0pXP432g3bQnKMd/PDDagmIJadpWhBRqV5fEA7XtOk23FKWu11pslkRFJ7FCvrcrbp
-         35KexwFq09NDcNTttQWcs2XkITUHAA+CoTW6qq4VDPgLLIFZ1NIf7EUeUhvhj7C75jkc
-         TkV+znMezVcCL8jz41+MydsRJm1AlnrKzkw56g1LZtCqo1JHbNnB0VfZMDgCHlHL0ML2
-         fgte0jdxWlG/z8JzL50WxZL/+cV8WzirUM0RMLBUhDWYjgeQFBRH+gM/l6CWH50ai7AL
-         5iyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709665042; x=1710269842;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=5WVydwxx6qmSKti8h+I/VwaGiN8g3FTWWDmAIX3/W9w=;
-        b=gik4mLPfHBBebbmzdp5Uy8UGuBSt6hP3dl5evT+IVRl40x86E0UiOa3jKkCeD+10go
-         Q/FK1ke65dxip0GD5XhNOUe8YAQ2g0P0ObNi9DGq1D3FoO+mrLlg7ouVCEu3EEYQVLzT
-         Ztl91VmGRaY+cYrfdJwMQhkfikBSs3v3691+sJ4InwnYU44yLKckh1+v6/DzfRGutrmy
-         swzb9f9cIM5d3yeaQVuPSlzGgTmrjRSliGKGp2JBZmdSVD+otrcWMnf+T8vxeBv6xWRN
-         sZTVFT+roiH+1hhC7lYr+TXCzo1H8f337fxtjLGp6Hkamc0ieNOH9bg+rZyXlimPO/O/
-         F3Lg==
-X-Forwarded-Encrypted: i=1; AJvYcCV29pGHdZfiVw1oJWKZUpEXVviTrrgaLAGXXt6mNmFrqRnIHP/jmkeLsa3qwS3GwIJjjsG7mTdyTMnqcgz2OKFoNSlZcgGrTJNS/7Z/chI=
-X-Gm-Message-State: AOJu0YxdsJ0gl3Ga3H9GqSTvhwuNN3Df7z+gOtfy6grEEDarS3LsHa0A
-	zL9tsbmBnTuDG4EDJIeL7E3vQhl1/WAFgOvcLZwy77fFRCv2grAP
-X-Google-Smtp-Source: AGHT+IFIId0y+YC76TnEEV4w8GFSRvSlBM0QpTQSRnIU72hUrlWcihBk6BKl+zWEpMmJhBUhSAL41g==
-X-Received: by 2002:ac2:495d:0:b0:513:f34:3f1c with SMTP id o29-20020ac2495d000000b005130f343f1cmr1770708lfi.27.1709665041652;
-        Tue, 05 Mar 2024 10:57:21 -0800 (PST)
-Message-ID: <3317829c581ff532e27fcc41c69033e520feec1c.camel@gmail.com>
-Subject: Re: [PATCH 1/2] xen/*/nospec: Provide common versions of
- evaluate_nospec/block_speculation
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Bertrand Marquis
- <bertrand.marquis@arm.com>,  Michal Orzel <michal.orzel@amd.com>, Shawn
- Anastasio <sanastasio@raptorengineering.com>, Xen-devel
- <xen-devel@lists.xenproject.org>, Andrew Cooper
- <andrew.cooper3@citrix.com>,  Julien Grall <julien@xen.org>
-Date: Tue, 05 Mar 2024 19:56:52 +0100
-In-Reply-To: <3d585715-7729-4a5a-b4e4-c0eb96601882@suse.com>
-References: <20240304161041.3465897-1-andrew.cooper3@citrix.com>
-	 <20240304161041.3465897-2-andrew.cooper3@citrix.com>
-	 <c9f92495-2c00-443f-bffd-1b09cb8a8c84@xen.org>
-	 <d343c58c-2a3a-45a9-8d67-64d1506d973c@suse.com>
-	 <5c06c437-b62c-4bee-8694-1be597887718@xen.org>
-	 <141ed8a2-df4f-492c-a192-4ffa7f4c8384@suse.com>
-	 <4fb729fa-8519-4244-a795-cc66a79cd346@citrix.com>
-	 <c6f9c9fa-a252-41c4-b92f-435c57044cd2@xen.org>
-	 <3bc0b828-d3c5-447d-b338-c478d8e337fc@citrix.com>
-	 <7df33568918536487ec75a05cd47cee128150c0c.camel@gmail.com>
-	 <3d585715-7729-4a5a-b4e4-c0eb96601882@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
+X-Inumbo-ID: 7724e8af-db24-11ee-a1ee-f123f15fe8a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm1; t=1709666014; x=1709752414; bh=nvOByvjx8k
+	WPG63sTIRe1BmgTRsqS6ZcwNedyy8aBUw=; b=L6mvHLd9wrihsHtOosYggrdoiw
+	ZFihyd4oYfbtRnm4FKjyjxkTdLCcU25GEKv0b8kZmzHRqwoZbxNvtbMridFrya65
+	wXfSegSOTFQ1wKym+NPQFvSZY+Hm6NpcKXMxMJK20PuiLmiLAgtWh4MCrLaiaSSE
+	ZImwdSQ3JXurzgEeVa8A0m6cKDInjax1xZ4jfoeUb/NgCYcQ3cbqOz61cxb2ujMB
+	d5RQNrt8D4NFDHhZWy+o/znXhLGNHyeLoHJjqwAKoEQgM4Hi53Osu0WqTyo56Jyi
+	ItEKIx061RI/IJu9vtyVmrTUCGJ3UsaEqBsYBbUvPjs8K4dNJWIXYTWtHU0Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1709666014; x=
+	1709752414; bh=nvOByvjx8kWPG63sTIRe1BmgTRsqS6ZcwNedyy8aBUw=; b=m
+	duf5xbhB+kuAWGNS/+tzky4SMcW1CNQijU+qO3HPNujymJjZjucR9UK/Uf5cLaSk
+	rvdUxa6ZGf6zAtaKNOSi3mv8Dkhtx9fcUs7bc4aqWZkLxc35HpG3xzIyPdaQM3Ox
+	J5NxLDaur+XqRy+fM2q9GqU5b2uSD3KptMjOeV1cK9GyriupEGZ0yhEFZvXuDrp5
+	0f5PYZipxF9g+npcWUKlQzFjiWV4r/5iKD3yCnIPiCdNr1aT2UtaWjwRUVSe2Uyu
+	0TWNblTpPydOHrzO14JLfC603glPDk3EjgU+pMorfY3CUC8uYr7pWi/kyR4g+Y/F
+	harrfNhgTQHSFkfllWsNA==
+X-ME-Sender: <xms:3m7nZWRm49Zp1QEUJuC2yjKAigaPQMSAmucSoDqmYe-E5zEkzSlpJg>
+    <xme:3m7nZbyM9jB4SpcOQ8JcB3_GTxNOlAhB9OTzvhqWrHkkhA1Fo_Io0d2NNeqlbp3vx
+    wIw9NFRKB4rLA>
+X-ME-Received: <xmr:3m7nZT0sGxitUm7P8jKYW1dZfOi6q33gXD9OSAf-lHAP4SjxefitLkfd-du6gtEfAoIGRaKheYe9p2qzql0MO1ZjXcxBR4gTIagCPI72gL8xjkrOPls>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrheelgdduudekucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
+    vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
+    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
+    ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
+    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
+    khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:3m7nZSAQcKD_byCa-aHKFZeHh6NegEEh7Tw2wLIOJMgly-VbYgjYdQ>
+    <xmx:3m7nZfhh99cauj60AqUvY3-nLCvebW2RbUivv-FlTUnaLZQ_Fu0gcg>
+    <xmx:3m7nZeoi4BcxeME6Yj1K7-wd59RX_Xdj9GzABINaVsbbRkOv_B7kGQ>
+    <xmx:3m7nZfi9TJOO3_BeGP0Olp0tiozO7VlSt7z6LzYHfb6lB5GU-apFGFH0MLo>
+Feedback-ID: i1568416f:Fastmail
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: qemu-devel@nongnu.org
+Cc: Jason Andryuk <jandryuk@gmail.com>,
+	=?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?= <frederic.pierret@qubes-os.org>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
+Subject: [PATCH v2 2/2] xen: fix stubdom PCI addr
+Date: Tue,  5 Mar 2024 20:12:30 +0100
+Message-ID: <20240305191312.321127-2-marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240305191312.321127-1-marmarek@invisiblethingslab.com>
+References: <20240305191312.321127-1-marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, 2024-03-05 at 16:43 +0100, Jan Beulich wrote:
-> On 05.03.2024 16:15, Oleksii wrote:
-> > I agree that upon examining the current state of the code around
-> > these
-> > functions, it appears safe to provide stubs. However, the reason my
-> > patch was rejected is that it may not be entirely safe, as Julien
-> > pointed out that even with Arm, some functions shouldn't be empty.
-> >=20
-> > What I would like to propose is that it might be beneficial, at
-> > least
-> > in CONFIG_DEBUG=3Dy, to have a warning message. Does that make sense?
->=20
-> A warning message to what effect? And are you thinking of a build-
-> time
-> warning, or a runtime one? Plus wouldn't different aspects quickly
-> lead
-> to proliferation of warnings?
-A warning message about that an empty definition is provided for
-evaluate_nospec/block_speculation functions, so a developer will know
-that it can be an issue.
+From: Frédéric Pierret (fepitre) <frederic.pierret@qubes-os.org>
 
-Personally, I am OK with having this function empty by default as it is
-done in the patch with opportunity to being redefined in arch specific
-code if it is necessary, but I remembered that I had the similar
-questions in my patch series which probably should be covered in this
-patch series.
+When running in a stubdomain, the config space access via sysfs needs to
+use BDF as seen inside stubdomain (connected via xen-pcifront), which is
+different from the real BDF. For other purposes (hypercall parameters
+etc), the real BDF needs to be used.
+Get the in-stubdomain BDF by looking up relevant PV PCI xenstore
+entries.
 
-Runtime message can also be an option, but I thought about build-time,
-but I agree that it can lead to proliferation of warning, so not the
-best one idea.
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+Changes in v2:
+- use xs_node_scanf
+- use %d instead of %u to read values written as %d
+- add a comment from another iteration of this patch by Jason Andryuk
+---
+ hw/xen/xen-host-pci-device.c | 69 +++++++++++++++++++++++++++++++++++-
+ hw/xen/xen-host-pci-device.h |  6 ++++
+ 2 files changed, 74 insertions(+), 1 deletion(-)
 
-~ Oleksii
+diff --git a/hw/xen/xen-host-pci-device.c b/hw/xen/xen-host-pci-device.c
+index 8c6e9a1716..8ea2a5a4af 100644
+--- a/hw/xen/xen-host-pci-device.c
++++ b/hw/xen/xen-host-pci-device.c
+@@ -9,6 +9,8 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "qemu/cutils.h"
++#include "hw/xen/xen-legacy-backend.h"
++#include "hw/xen/xen-bus-helper.h"
+ #include "xen-host-pci-device.h"
+ 
+ #define XEN_HOST_PCI_MAX_EXT_CAP \
+@@ -33,13 +35,67 @@
+ #define IORESOURCE_PREFETCH     0x00001000      /* No side effects */
+ #define IORESOURCE_MEM_64       0x00100000
+ 
++/*
++ * Non-passthrough (dom0) accesses are local PCI devices and use the given BDF
++ * Passthough (stubdom) accesses are through PV frontend PCI device.  Those
++ * either have a BDF identical to the backend's BDF (xen-backend.passthrough=1)
++ * or a local virtual BDF (xen-backend.passthrough=0)
++ *
++ * We are always given the backend's BDF and need to lookup the appropriate
++ * local BDF for sysfs access.
++ */
++static void xen_host_pci_fill_local_addr(XenHostPCIDevice *d, Error **errp)
++{
++    unsigned int num_devs, len, i;
++    unsigned int domain, bus, dev, func;
++    char *be_path = NULL;
++    char path[80];
++
++    be_path = qemu_xen_xs_read(xenstore, 0, "device/pci/0/backend", &len);
++    if (!be_path)
++        goto out;
++
++    if (xs_node_scanf(xenstore, 0, be_path, "num_devs", NULL, "%d", &num_devs) != 1) {
++        error_setg(errp, "Failed to read or parse %s/num_devs\n", be_path);
++        goto out;
++    }
++
++    for (i = 0; i < num_devs; i++) {
++        snprintf(path, sizeof(path), "dev-%d", i);
++        if (xs_node_scanf(xenstore, 0, be_path, path, NULL,
++                          "%x:%x:%x.%x", &domain, &bus, &dev, &func) != 4) {
++            error_setg(errp, "Failed to read or parse %s/%s\n", be_path, path);
++            goto out;
++        }
++        if (domain != d->domain ||
++                bus != d->bus ||
++                dev != d->dev ||
++                func!= d->func)
++            continue;
++        snprintf(path, sizeof(path), "vdev-%d", i);
++        if (xs_node_scanf(xenstore, 0, be_path, path, NULL,
++                          "%x:%x:%x.%x", &domain, &bus, &dev, &func) != 4) {
++            error_setg(errp, "Failed to read or parse %s/%s\n", be_path, path);
++            goto out;
++        }
++        d->local_domain = domain;
++        d->local_bus = bus;
++        d->local_dev = dev;
++        d->local_func = func;
++        goto out;
++    }
++
++out:
++    free(be_path);
++}
++
+ static void xen_host_pci_sysfs_path(const XenHostPCIDevice *d,
+                                     const char *name, char *buf, ssize_t size)
+ {
+     int rc;
+ 
+     rc = snprintf(buf, size, "/sys/bus/pci/devices/%04x:%02x:%02x.%d/%s",
+-                  d->domain, d->bus, d->dev, d->func, name);
++                  d->local_domain, d->local_bus, d->local_dev, d->local_func, name);
+     assert(rc >= 0 && rc < size);
+ }
+ 
+@@ -342,6 +398,17 @@ void xen_host_pci_device_get(XenHostPCIDevice *d, uint16_t domain,
+     d->dev = dev;
+     d->func = func;
+ 
++    if (xen_is_stubdomain) {
++        xen_host_pci_fill_local_addr(d, errp);
++        if (*errp)
++            goto error;
++    } else {
++        d->local_domain = d->domain;
++        d->local_bus = d->bus;
++        d->local_dev = d->dev;
++        d->local_func = d->func;
++    }
++
+     xen_host_pci_config_open(d, errp);
+     if (*errp) {
+         goto error;
+diff --git a/hw/xen/xen-host-pci-device.h b/hw/xen/xen-host-pci-device.h
+index 4d8d34ecb0..270dcb27f7 100644
+--- a/hw/xen/xen-host-pci-device.h
++++ b/hw/xen/xen-host-pci-device.h
+@@ -23,6 +23,12 @@ typedef struct XenHostPCIDevice {
+     uint8_t dev;
+     uint8_t func;
+ 
++    /* different from the above in case of stubdomain */
++    uint16_t local_domain;
++    uint8_t local_bus;
++    uint8_t local_dev;
++    uint8_t local_func;
++
+     uint16_t vendor_id;
+     uint16_t device_id;
+     uint32_t class_code;
+-- 
+2.43.0
+
 
