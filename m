@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6E5BC54E49
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Mar 2024 10:00:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.689711.1074939 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F56FC48BF6
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Mar 2024 10:08:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.689724.1074953 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riAYR-0007eO-0e; Thu, 07 Mar 2024 10:00:47 +0000
+	id 1riAg6-0008N4-Qn; Thu, 07 Mar 2024 10:08:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 689711.1074939; Thu, 07 Mar 2024 10:00:46 +0000
+Received: by outflank-mailman (output) from mailman id 689724.1074953; Thu, 07 Mar 2024 10:08:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riAYQ-0007eH-US; Thu, 07 Mar 2024 10:00:46 +0000
-Received: by outflank-mailman (input) for mailman id 689711;
- Thu, 07 Mar 2024 10:00:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Z5IG=KN=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1riAYQ-0007dw-3g
- for xen-devel@lists.xenproject.org; Thu, 07 Mar 2024 10:00:46 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90b1cd7d-dc69-11ee-afda-a90da7624cb6;
- Thu, 07 Mar 2024 11:00:45 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-412e96284b9so5660745e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 07 Mar 2024 02:00:45 -0800 (PST)
-Received: from localhost ([213.195.118.74]) by smtp.gmail.com with ESMTPSA id
- y24-20020a05600c341800b00412f6f4dea4sm2027120wmp.41.2024.03.07.02.00.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 02:00:44 -0800 (PST)
+	id 1riAg6-0008Mx-OE; Thu, 07 Mar 2024 10:08:42 +0000
+Received: by outflank-mailman (input) for mailman id 689724;
+ Thu, 07 Mar 2024 10:08:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=tO0P=KN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1riAg5-0008Mr-CE
+ for xen-devel@lists.xenproject.org; Thu, 07 Mar 2024 10:08:41 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ab2ec8bc-dc6a-11ee-a1ee-f123f15fe8a2;
+ Thu, 07 Mar 2024 11:08:39 +0100 (CET)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a3ddc13bbb3so332366666b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Mar 2024 02:08:39 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ wp1-20020a170907060100b00a44ce0671b1sm6025741ejb.108.2024.03.07.02.08.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Mar 2024 02:08:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,69 +47,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90b1cd7d-dc69-11ee-afda-a90da7624cb6
+X-Inumbo-ID: ab2ec8bc-dc6a-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1709805645; x=1710410445; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=arMovgd2mIYnMLIDoAuAlvPpErBwmnW02thqvjtKbD8=;
-        b=JzGhEDG8HX+8eC8HfN74hDEs+XswOz5zYD69nQFbTLFSf/mDa/vdVgIIEYBEotksaf
-         dDSfyIv2NQcJcM3ee0IOBxIr7YD1iPPOPeZ4RenD3sZu8UjR7T3sK2KAiqiAxGrVIfSR
-         ysylCckgDKj85F2zSdfKQ78jIaMLcNH6JvwuE=
+        d=suse.com; s=google; t=1709806119; x=1710410919; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=jy4yY8qzffNwpBmB6TvO9ZBFkChaWm7czzs2MCLfRnI=;
+        b=E7vpgZEt/buqeyDMtKPY18fO+j4s9so2RIdhS1xd9p/3ZEVc7+rXuZoQo86PIDET/F
+         3ZLheJRtEZklGAlCZnFh0pG5qH2fO5dgRokVx1xR2AVv3XlWbCdhJNNyLeo2KBIqcM+d
+         wOfiEyeEeVIzu5vrePT/Ov+HTghWnJ0sqU5Q3MU4TvA74sKOV+l4bWvhC0US/N7hJFeV
+         UjVdoo/av0mH8N9K0HHiNUnxM80yEnmhSndRkHQmh6ZPHkLa8kvYZkIYpy4eezieJi/Z
+         C1uMHi64MPq4+/kCt9eojEUVpdz7KDz2OmYcMW/ylFL+2gTaP4+oB3GB39HMkgnttXhy
+         uA0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709805645; x=1710410445;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=arMovgd2mIYnMLIDoAuAlvPpErBwmnW02thqvjtKbD8=;
-        b=mKRjZ8CvpE+jfbxi3XaJGGw1CEtChlulTzWZwG0xJm/X0xh/IS2O71zpu2RHfGPkoP
-         abPG6XsI70wLOkZ24LzYdJ6SWJRB2XVjkCu1H0P1CBZCRlgzVPcOu2IPQR6eJae/4H0A
-         qJQI+RYgjxfLRN1F8r4fPnlVxwa7cABNokgnDlGN5Snwi0l/egoPgAxdC+q9r3LMhETr
-         BUom+zXilFDHYfAyHJ9nPShwwR+xKXIvncCOHSB3lDQZ1bdAyTeB26w2LuciAX5wrbjo
-         xcMUuW8hobShFbuRla5H/bKgY8gEbhwQ/fQA8ee04+oU8qbWQ91Hsyv6ddq5lkU61VLN
-         1kcA==
-X-Gm-Message-State: AOJu0Ywl8nuH/PrfDkZmrmyh6Afh1KSr7klgqwVD6jRFLjoBAv29T45o
-	Pyf6BUVDg/Zn5rhmYlaOCIZOSNeuLM4qJbjfTjMkq7B2FhXJo4BwYHdLk6WZfVY=
-X-Google-Smtp-Source: AGHT+IEUn/aZgDVhaZFPBF+ELwsOFaLiJMxKSj+uLOEmBCVVeca61mkWd8QhlvtEgqXvD03JizpeLQ==
-X-Received: by 2002:a05:600c:3ba5:b0:412:f979:587b with SMTP id n37-20020a05600c3ba500b00412f979587bmr2424003wms.17.1709805644662;
-        Thu, 07 Mar 2024 02:00:44 -0800 (PST)
-Date: Thu, 7 Mar 2024 11:00:43 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH 0/3] x86/pvh: Support relocating dom0 kernel
-Message-ID: <ZemQS-8a_a5pwzf-@macbook>
-References: <20240306185032.103216-1-jason.andryuk@amd.com>
+        d=1e100.net; s=20230601; t=1709806119; x=1710410919;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=jy4yY8qzffNwpBmB6TvO9ZBFkChaWm7czzs2MCLfRnI=;
+        b=hkR8Pp6D1XLQGzcwvHvm5FbOub1H//2c4K+1ZnmBPlekpROHfqVJOz5SnUs9iS6NSe
+         x5ZjSDkgeNEZATsNAPDUbsCOcbpQFMF9VN9KkvRWcwhDrsEYFgPbG7ALANMRSGHtWFel
+         plKqkhhjplOtyFbsn3roZvA/PtkDzIYaESNO+QFPIn+ycOA3oE9A55y4PIPKjZ2aTUkK
+         DS9ncsJAHB7NnqoCRQUZrk7/WvPFere/jJry7cl/zB/lza56cddJdQFFR2V46xExYQRw
+         TeoaIry7JCgeIsiRMZLTGrXZi/zPLMaGgWwzSxQj4DgXrC6qntr2Nv3C97atcbX3dMRg
+         WLmA==
+X-Gm-Message-State: AOJu0Yx7slteStuS1TvJe1zCKGfA74FqBtako98CaryFhQIXx5gN33Xh
+	EktcOs62yZuwDujqwfoEVjcFk98UFwJaE/2QHWSduW4GMdLUPSldLWH7YRikuw==
+X-Google-Smtp-Source: AGHT+IGx5v/S6Rg5mrHSdNUfi3/pV9V/H/8NiW756G0g+UfkTPLRNhCjGLrUcmdgvR7a/943LfqlDw==
+X-Received: by 2002:a17:906:894:b0:a43:acbd:db59 with SMTP id n20-20020a170906089400b00a43acbddb59mr941806eje.3.1709806118795;
+        Thu, 07 Mar 2024 02:08:38 -0800 (PST)
+Message-ID: <f6cbaf67-f5c7-4947-a07a-0f1d8f693462@suse.com>
+Date: Thu, 7 Mar 2024 11:08:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20240306185032.103216-1-jason.andryuk@amd.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] x86/pvh: Support relocating dom0 kernel
+Content-Language: en-US
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Jason Andryuk <jason.andryuk@amd.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>
+References: <20240306185032.103216-1-jason.andryuk@amd.com>
+ <ZemQS-8a_a5pwzf-@macbook>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <ZemQS-8a_a5pwzf-@macbook>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Mar 06, 2024 at 01:50:29PM -0500, Jason Andryuk wrote:
-> Xen tries to load a PVH dom0 kernel at the fixed guest physical address
-> from the elf headers.  For Linux, this defaults to 0x1000000 (16MB), but
-> it can be configured.
+On 07.03.2024 11:00, Roger Pau Monné wrote:
+> On Wed, Mar 06, 2024 at 01:50:29PM -0500, Jason Andryuk wrote:
+>> Xen tries to load a PVH dom0 kernel at the fixed guest physical address
+>> from the elf headers.  For Linux, this defaults to 0x1000000 (16MB), but
+>> it can be configured.
+>>
+>> Unfortunately there exist firmwares that have reserved regions at this
+>> address, so Xen fails to load the dom0 kernel since it's not RAM.
+>>
+>> The other issue is that the Linux PVH entry point is not
+>> position-independent.  It expects to run at the compiled
+>> CONFIG_PHYSICAL_ADDRESS.
+>>
+>> This patch set expands the PVH dom0 builder to try to relocate the
+>> kernel if needed and possible.  XENFEAT_pvh_relocatable is added for
+>> kernels to indicate they are relocatable.  However, we may want to
+>> switch to an additional ELF note with the kernel alignment.  Linux
+>> specifies a kernel alignment in the bzImage boot_params.setup_header,
+>> but that is not present the ELF vmlinux file.
 > 
-> Unfortunately there exist firmwares that have reserved regions at this
-> address, so Xen fails to load the dom0 kernel since it's not RAM.
-> 
-> The other issue is that the Linux PVH entry point is not
-> position-independent.  It expects to run at the compiled
-> CONFIG_PHYSICAL_ADDRESS.
-> 
-> This patch set expands the PVH dom0 builder to try to relocate the
-> kernel if needed and possible.  XENFEAT_pvh_relocatable is added for
-> kernels to indicate they are relocatable.  However, we may want to
-> switch to an additional ELF note with the kernel alignment.  Linux
-> specifies a kernel alignment in the bzImage boot_params.setup_header,
-> but that is not present the ELF vmlinux file.
+> I wonder whether we need a pair of notes, to signal the min/max
+> addresses the kernel supports being relocated to.
 
-I wonder whether we need a pair of notes, to signal the min/max
-addresses the kernel supports being relocated to.
+Plus, as per your other reply, a 3rd one to specify alignment needs.
 
-Thanks, Roger.
+Then again - a single note can have multiple values. So perhaps it
+doesn't need to be more than one new notes (except if dealing with
+multi-value ones is deemed too complicated).
+
+Jan
 
