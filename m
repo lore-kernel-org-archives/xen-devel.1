@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42CF8C54798
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Mar 2024 11:57:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.689810.1075132 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B01D7C54798
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Mar 2024 11:59:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.689812.1075142 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riCNP-0003Kv-Du; Thu, 07 Mar 2024 11:57:31 +0000
+	id 1riCOs-0003tb-OM; Thu, 07 Mar 2024 11:59:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 689810.1075132; Thu, 07 Mar 2024 11:57:31 +0000
+Received: by outflank-mailman (output) from mailman id 689812.1075142; Thu, 07 Mar 2024 11:59:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riCNP-0003Ko-B2; Thu, 07 Mar 2024 11:57:31 +0000
-Received: by outflank-mailman (input) for mailman id 689810;
- Thu, 07 Mar 2024 11:57:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NZPn=KN=linaro.org=manos.pitsidianakis@srs-se1.protection.inumbo.net>)
- id 1riCNN-0003Ki-Ha
- for xen-devel@lists.xenproject.org; Thu, 07 Mar 2024 11:57:29 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id de3d06bb-dc79-11ee-a1ee-f123f15fe8a2;
- Thu, 07 Mar 2024 12:57:27 +0100 (CET)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-33e383546c1so414375f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 07 Mar 2024 03:57:27 -0800 (PST)
-Received: from meli.delivery (adsl-101.37.6.0.tellas.gr. [37.6.0.101])
- by smtp.gmail.com with ESMTPSA id
- ck4-20020a5d5e84000000b0033e2b9f647asm14506048wrb.31.2024.03.07.03.57.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 03:57:26 -0800 (PST)
+	id 1riCOs-0003tU-LZ; Thu, 07 Mar 2024 11:59:02 +0000
+Received: by outflank-mailman (input) for mailman id 689812;
+ Thu, 07 Mar 2024 11:59:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=tO0P=KN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1riCOq-0003tK-Lg
+ for xen-devel@lists.xenproject.org; Thu, 07 Mar 2024 11:59:00 +0000
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 152fe795-dc7a-11ee-afda-a90da7624cb6;
+ Thu, 07 Mar 2024 12:58:59 +0100 (CET)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-512ed314881so777460e87.2
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Mar 2024 03:58:59 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ij26-20020a056402159a00b00562d908daf4sm7917540edb.84.2024.03.07.03.58.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Mar 2024 03:58:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,98 +47,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: de3d06bb-dc79-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 152fe795-dc7a-11ee-afda-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1709812647; x=1710417447; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to
-         :references:user-agent:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=57A09yidrpDPUR1r7F8CHS4CvBdl9GurP/NjYKl3Cg4=;
-        b=eke7JxnznCc0A/kZKQdl5wxi1VxhfDQJdWJ2ilw3NL3MdP6Pc2tdcOriBRKL8LpiX3
-         PXjS3mwH5S2nqc+rc2GV5IwfTBbAi3MdEhva/Sj+vZiwId7E3v18KyCDhGiehZdfK/GM
-         wcvjaLyq7dUddhaDM36qerigS0xXo37HjASeX1xFTzuJPZnTSjHBCMCPXn7G9Kenr9lI
-         oDjFgXXfvyhbs0AGqqIh7Uu+BtBrxafPD7JrZ6sju6kqFmmg8EZWRjGvdVMj2fKOtvd2
-         4famhP7Qh9qRHkah5/DopySo0bnywT85AXBYGnThHpzqlacNyJp2PZ9gENW9ARpVo7XN
-         /rmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709812647; x=1710417447;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to
-         :references:user-agent:subject:cc:to:from:date:x-gm-message-state
+        d=suse.com; s=google; t=1709812739; x=1710417539; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=57A09yidrpDPUR1r7F8CHS4CvBdl9GurP/NjYKl3Cg4=;
-        b=UMOSgVtRK8q5L+n7SkRs1+cam7fIk5XpYUDW6x4cVJzrguXYJprR8yL3tn4KKQUclM
-         7ck7IgyfV6YNtqlJr2d5B+brPvqhYzncYYnho9Xhp69MLNbOjORzNSqQoVjtpqc83NbB
-         9TSosDIJhltHFb5PjO3Ely8V7JJUqw2EqjJW5COQY0LXSVBAPuKSgCwnPnvttSp+RsU3
-         hJInLDnOX76u8T0vNDLrO57u3ViOd3vTcXDVu+i6yii6z8hwiwup2P+FiUm17XtX5NXr
-         7KlQJqDsOBM3J8QwF+KKSzBcBAazrQHwv/GDHo7aZSDDst2+adn+MUXSGgbXHgd9gIaC
-         AIhQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXHw9Morm6qkLjNTgzG3MKnqctzsPQvIKAItdYLCKdPqOEY+rFoV+fWnyWr5n/Xs3Eq0kV3/LvPqWB2SnAo94nwk48v5/RV4XpRE3MyD2Y=
-X-Gm-Message-State: AOJu0Yza3Y79eERDHtskgiWQuZgpINTWKWIdrglSXxQIPuZVkGudI8X+
-	/YgNjNFKclkY0x9HzonbGhniyWdVCnY7Sc/OpU8OaC9f9wyEzFnEsKfNDnWIYDw=
-X-Google-Smtp-Source: AGHT+IESCFwpHQmPxOg130/0yHnqMR5/u93SMsub5nGrOR8b42+ayiblaPN9pioxp+dZdBxzB/xsng==
-X-Received: by 2002:a5d:6e90:0:b0:33e:d27:4f8c with SMTP id k16-20020a5d6e90000000b0033e0d274f8cmr12927971wrz.6.1709812647026;
-        Thu, 07 Mar 2024 03:57:27 -0800 (PST)
-Date: Thu, 07 Mar 2024 13:55:56 +0200
-From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-To: qemu-arm@nongnu.org, Philippe Mathieu-Daud=?UTF-8?B?w6kg?=<philmd@linaro.org>, qemu-devel@nongnu.org
-Cc: Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>, David Woodhouse <dwmw@amazon.co.uk>, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, Alex Benn=?UTF-8?B?w6k=?= e <alex.bennee@linaro.org>, xen-devel@lists.xenproject.org, Philippe Mathieu-Daud=?UTF-8?B?w6kg?=<philmd@linaro.org>, Richard Henderson <richard.henderson@linaro.org>, Eduardo Habkost <eduardo@habkost.net>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: Re: [PATCH-for-9.0 5/9] hw/xen/hvm: Expose xen_read_physmap() prototype
-User-Agent: meli 0.8.5-rc.3
-References: <20231114163123.74888-1-philmd@linaro.org> <20231114163123.74888-6-philmd@linaro.org>
-In-Reply-To: <20231114163123.74888-6-philmd@linaro.org>
-Message-ID: <9z7vo.cvkkbfxdigjz@linaro.org>
+        bh=NkWgtVrgHNXYdr5zpOWR3hO6nJsL4QKcOzXrz3opT4s=;
+        b=S0ActWMyVWscpOXDYLKZsP8m/NqAbjukSi+L771wiyAJ4qWBgJhw/fBq5GOwWrsjmo
+         iZhkEZPCaOyIHUCCrQJc+KHd6moYIvRKZNzMd5cC1q3+18xDP2mbwTCHs3GGwp1qwZ07
+         eyUrn6+XYECLfKMDmIddcutL0e89qQTGVi0M/Pwg+KCMDW4IA8uviGFDIwWWhpHquhFY
+         JTHObddQlbG8TzX/2SvNZN5D4gPfKM0EQGzG/x4eH8zjuZM90crP8ejLB13YBIWmGsLh
+         X//9AhRz8PVwAqxn9ClAeTe8X0So+t9dcburg1nnkgwF8bSNI0xtYJVf0kvMpNyrsYT5
+         vUiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709812739; x=1710417539;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=NkWgtVrgHNXYdr5zpOWR3hO6nJsL4QKcOzXrz3opT4s=;
+        b=IOfDit8yEfexAF689rDIRh9OrRZoEhbiL07hsMCWb//rJJP3lt4PUUvUDjOVqH17M5
+         pqWsA9MDXg7WaXFpFo2qfPx2EihkJ5Jy+QbMcWJZlulMOw76huEOVo7NmpXCCqhAq5qb
+         jEo3rvrO1CZkxudNO7amihCaZ4MWs/sdBJxEncGoB7KFBsFcVIKYBznGO/IYo+FpN8kj
+         YE41VHFjyh5pBBtiG+N5yk6XR7VwLcdPnL3vC6ur/F5jTri33dDVq/SRPKj8fpEM0fkO
+         dTSGSYTQXLUSBCXZnjYR4DDalHdCVK5EfO62lMJyMocJG06rKZ3bZOh+jA4vVTS87O4t
+         gB2A==
+X-Forwarded-Encrypted: i=1; AJvYcCWE8zOiUwVbghI3k+DBNU2cmnGN1JLMWpPgefIkVJG+QrEw/RR8FlUfPeRTGLSvldZvxAvXwI5PUf0B3jnYDRSUYx5AWRbKoQGiQkYm1sY=
+X-Gm-Message-State: AOJu0YzX5OVPUv/D8vBM1vQBuXiVFD0BwttBebgmrzkCbiuBwiVRGWVM
+	IoA5GpUsB7EEKUgMBRIE0HAuHWWX/jyWyN7eVg5gE5ItQAUDYHJ4Ji2Lb3K1YQ==
+X-Google-Smtp-Source: AGHT+IGQpnrdn98AeRdJWp4PM5NewRjaKr5623O/73AB2yb4toaBuVxTfTmjzg8C29o4pfcbtjU+8w==
+X-Received: by 2002:a05:6512:118e:b0:513:25dc:25f8 with SMTP id g14-20020a056512118e00b0051325dc25f8mr1491189lfr.32.1709812739038;
+        Thu, 07 Mar 2024 03:58:59 -0800 (PST)
+Message-ID: <818ac202-5473-4638-b140-45272b1041ed@suse.com>
+Date: Thu, 7 Mar 2024 12:58:57 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] xen/virtual-region: Include rodata pointers
+Content-Language: en-US
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ Ross Lagerwall <ross.lagerwall@cloud.com>
+References: <20240305121121.3527944-1-andrew.cooper3@citrix.com>
+ <20240305121121.3527944-3-andrew.cooper3@citrix.com>
+ <87b82706-f538-4807-abaf-1e59cebd286b@suse.com>
+ <CAG7k0EqWrPU0qocSJHyJAQca44LakQwZwAbiv5GRk-sQeaAYAg@mail.gmail.com>
+ <82126c3a-0cde-452f-86aa-2571482f42aa@citrix.com>
+ <76ce9dcf-8cac-44b3-9550-f516024bad6e@suse.com>
+ <9e827057-9306-4a2a-8816-410661bf8892@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <9e827057-9306-4a2a-8816-410661bf8892@citrix.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset=utf-8; format=flowed
 
-On Tue, 14 Nov 2023 18:31, Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
->In a pair of commit we are going to call xen_read_physmap()
->out of hw/i386/xen/xen-hvm.c.
->
->Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->---
-> include/hw/xen/xen-hvm-common.h | 1 +
-> hw/i386/xen/xen-hvm.c           | 4 ++--
-> 2 files changed, 3 insertions(+), 2 deletions(-)
->
->diff --git a/include/hw/xen/xen-hvm-common.h b/include/hw/xen/xen-hvm-common.h
->index 0fed15ed04..536712dc83 100644
->--- a/include/hw/xen/xen-hvm-common.h
->+++ b/include/hw/xen/xen-hvm-common.h
->@@ -97,6 +97,7 @@ void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
+On 07.03.2024 12:31, Andrew Cooper wrote:
+> On 07/03/2024 7:39 am, Jan Beulich wrote:
+>> On 06.03.2024 18:21, Andrew Cooper wrote:
+>>> On 06/03/2024 5:09 pm, Ross Lagerwall wrote:
+>>>> On Tue, Mar 5, 2024 at 2:17 PM Jan Beulich <jbeulich@suse.com> wrote:
+>>>>> On 05.03.2024 13:11, Andrew Cooper wrote:
+>>>>>> --- a/xen/include/xen/virtual_region.h
+>>>>>> +++ b/xen/include/xen/virtual_region.h
+>>>>>> @@ -16,6 +16,9 @@ struct virtual_region
+>>>>>>      const void *text_start;                /* .text virtual address start. */
+>>>>>>      const void *text_end;                  /* .text virtual address end. */
+>>>>>>
+>>>>>> +    const void *rodata_start;              /* .rodata virtual address start (optional). */
+>>>>>> +    const void *rodata_end;                /* .rodata virtual address end. */
+>>>>>> +
+>>>>>>      /* If this is NULL the default lookup mechanism is used. */
+>>>>>>      symbols_lookup_t *symbols_lookup;
+>>>>> While perhaps the least bad one can do without quite a bit more churn,
+>>>>> I'm still irritated by a virtual region (singular) suddenly covering
+>>>>> two ranges of VA space. At the very least I think the description should
+>>>>> say a word of justification in this regard. An alternative, after all,
+>>>>> could have been for livepatch code to register separate regions for
+>>>>> rodata (if present in a patch).
+>>>>>
+>>>>> A follow-on question then would be why ordinary data isn't reflected in
+>>>>> a virtual region. Aiui that's just because livepatch presently has no
+>>>>> need for it.
+>>>>>
+>>>>> Underlying question to both: Is the virtual region concept indeed meant
+>>>>> to be fully tied to livepatch and its needs?
+>>>>>
+>>>> Virtual regions were introduced for live patching but I don't think it
+>>>> is completely tied to live patching. It was introduced so that any code
+>>>> can participate in symbol lookup, bug frame and exception table entry
+>>>> search, rather than special casing "if livepatch" in many places.
+>>>>
+>>>> I agree that the virtual region concept is being abused here - it's just
+>>>> being used as a convenient place to store rodata start/end and doesn't
+>>>> really have much to do with the text start & end / bug frame / exception
+>>>> table entry search that the virtual region is intended for.
+>>>>
+>>>> Maybe Andrew can explain why he used this approach?
+>>> I feel the simplicity and obviousness of patch 3 speaks for itself.
+>>>
+>>> How do you propose fixing it differently.
+>> I'm not opposed to doing it the way you do, but I think it then needs
+>> clarifying (up front) what a virtual region really is. It looks to be
+>> morphing into a module description instead ... One easy option might
+>> be to have a comment next to the struct additions here making clear
+>> that this is rather an abuse, but chosen to be this way to keep things
+>> simple elsewhere.
 > 
-> void cpu_ioreq_pio(ioreq_t *req);
-> 
->+void xen_read_physmap(XenIOState *state);
-> void xen_arch_handle_ioreq(XenIOState *state, ioreq_t *req);
-> void xen_arch_set_memory(XenIOState *state,
->                          MemoryRegionSection *section,
->diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
->index a65a96f0de..789779d02c 100644
->--- a/hw/i386/xen/xen-hvm.c
->+++ b/hw/i386/xen/xen-hvm.c
->@@ -525,7 +525,7 @@ static void handle_vmport_ioreq(XenIOState *state, ioreq_t *req)
-> }
-> 
-> #ifdef XEN_COMPAT_PHYSMAP
->-static void xen_read_physmap(XenIOState *state)
->+void xen_read_physmap(XenIOState *state)
-> {
->     XenPhysmap *physmap = NULL;
->     unsigned int len, num, i;
->@@ -573,7 +573,7 @@ static void xen_read_physmap(XenIOState *state)
->     free(entries);
-> }
-> #else
->-static void xen_read_physmap(XenIOState *state)
->+void xen_read_physmap(XenIOState *state)
-> {
-> }
-> #endif
->-- 
->2.41.0
->
->
+> The thing called virtual_region already describes 6 ranges, and I'm
+> adding a 7th.
 
-Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Hmm, yes, in a way you're right.
+
+> It has been a module-ish description right from the very outset.  I
+> don't think it is fair to describe this as an abuse at all.
+> 
+> Is this going to satisfy the outstanding concerns?
+
+Yes. And thank you for bearing with me.
+
+Jan
+
+> diff --git a/xen/include/xen/virtual_region.h
+> b/xen/include/xen/virtual_region.h
+> index d05362071135..9d150beb8a87 100644
+> --- a/xen/include/xen/virtual_region.h
+> +++ b/xen/include/xen/virtual_region.h
+> @@ -9,6 +9,12 @@
+>  #include <xen/list.h>
+>  #include <xen/symbols.h>
+>  
+> +/*
+> + * Despite it's name, this is module(ish) description.
+> + *
+> + * There's one region for .text/etc, one region for .init during boot only,
+> + * and one region per livepatch.
+> + */
+>  struct virtual_region
+>  {
+>      struct list_head list;
+> 
+> ~Andrew
+
 
