@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 054B1C54E49
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Mar 2024 01:55:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.690075.1075735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED57C54E4A
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Mar 2024 01:55:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.690077.1075755 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riPRj-00026F-LG; Fri, 08 Mar 2024 01:54:51 +0000
+	id 1riPRs-0002bu-72; Fri, 08 Mar 2024 01:55:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 690075.1075735; Fri, 08 Mar 2024 01:54:51 +0000
+Received: by outflank-mailman (output) from mailman id 690077.1075755; Fri, 08 Mar 2024 01:55:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riPRj-000268-Ic; Fri, 08 Mar 2024 01:54:51 +0000
-Received: by outflank-mailman (input) for mailman id 690075;
- Fri, 08 Mar 2024 01:54:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1riPRs-0002bl-3x; Fri, 08 Mar 2024 01:55:00 +0000
+Received: by outflank-mailman (input) for mailman id 690077;
+ Fri, 08 Mar 2024 01:54:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=OTfa=KO=amd.com=Xin.Wang2@srs-se1.protection.inumbo.net>)
- id 1riPRi-000262-P4
- for xen-devel@lists.xenproject.org; Fri, 08 Mar 2024 01:54:50 +0000
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20602.outbound.protection.outlook.com
- [2a01:111:f400:7ea9::602])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d78fdf4e-dcee-11ee-a1ee-f123f15fe8a2;
- Fri, 08 Mar 2024 02:54:48 +0100 (CET)
-Received: from DM6PR10CA0001.namprd10.prod.outlook.com (2603:10b6:5:60::14) by
- PH0PR12MB7010.namprd12.prod.outlook.com (2603:10b6:510:21c::11) with
- Microsoft SMTP Server (version=TLS1_2,
+ id 1riPRq-0002aR-DV
+ for xen-devel@lists.xenproject.org; Fri, 08 Mar 2024 01:54:58 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20601.outbound.protection.outlook.com
+ [2a01:111:f403:200a::601])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dd69a49a-dcee-11ee-afda-a90da7624cb6;
+ Fri, 08 Mar 2024 02:54:57 +0100 (CET)
+Received: from CH0PR03CA0057.namprd03.prod.outlook.com (2603:10b6:610:b3::32)
+ by LV2PR12MB5944.namprd12.prod.outlook.com (2603:10b6:408:14f::12)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.26; Fri, 8 Mar
- 2024 01:54:44 +0000
-Received: from CH3PEPF0000000D.namprd04.prod.outlook.com
- (2603:10b6:5:60:cafe::9b) by DM6PR10CA0001.outlook.office365.com
- (2603:10b6:5:60::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.27 via Frontend
- Transport; Fri, 8 Mar 2024 01:54:44 +0000
+ 2024 01:54:53 +0000
+Received: from CH3PEPF00000009.namprd04.prod.outlook.com
+ (2603:10b6:610:b3:cafe::83) by CH0PR03CA0057.outlook.office365.com
+ (2603:10b6:610:b3::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.37 via Frontend
+ Transport; Fri, 8 Mar 2024 01:54:53 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH3PEPF0000000D.mail.protection.outlook.com (10.167.244.43) with Microsoft
+ CH3PEPF00000009.mail.protection.outlook.com (10.167.244.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7362.11 via Frontend Transport; Fri, 8 Mar 2024 01:54:43 +0000
+ 15.20.7362.11 via Frontend Transport; Fri, 8 Mar 2024 01:54:52 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 7 Mar
- 2024 19:54:43 -0600
+ 2024 19:54:51 -0600
 Received: from henry-MS-7D54.amd.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Thu, 7 Mar 2024 19:54:38 -0600
+ Transport; Thu, 7 Mar 2024 19:54:48 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d78fdf4e-dcee-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: dd69a49a-dcee-11ee-afda-a90da7624cb6
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WNuE5xxsvFf4xHIugzT8Xm6ceMac17QjOcve+bIo68ipvAzytXEtJDELHgLh0PfFAquexVWxKc1cumvQCJ3nO7iTY9gaOFI5bVBQxeV2/dDRcGDi30BRsBO08tz9hfJMgPnU+/Hu5Eogywvi+xgVFx8JcSBU1vAxLRV90n3gqIQDPqDDZBa+gi8TniYRQqHO5e/1Ei4x3EvtmTnAINDLGSu54isA144MwiHbUv9yGADlQuKsi1gTWBl41NFqjjdgwOZoZiseRtVSjLBCvG4BGh0P5eHpnzq14am6jbashu32+/pD5NbhM3hEEwsUxs4gIvDWA9fwVynwvajAER7q6w==
+ b=GSs6ZcY4ffWJ1SQDXMRasVmV/zSNHo7EaKF/09azEe7oYUggQnqd1cZUL4iSQcoKRP40SUZsNks1hNOncxJtXZv7pM62himqUOtEALk7mcBVysjpDPasdvFBMbtIDP7Rga64nZEbjFJC9uzTuv43WoOXgatCzDesbVzS1x7g9jxixfeBAZXhvw0QHIimZ0+kst/AD+I+SetOOTTqpbxL/ChfIEfZQZ3ZQ69pLUl6IlhLL2p/bG7dQi0bGCj1/5f4fYOMM/cvwTevCGIsluOL2pBHvFtzneQPpp+ssza+SweQvElqirrGLQ/3x3RWT6yFMpdDhkJimyY8XZnG/Hvq/A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GhUdtdfcxsQe269IkHKqtEwCey5V9ybQdEKmYerVnUM=;
- b=hoNJmeMXSoGSx9zUSDAOzAofVMkbge7EcYZYwrN6jGDQwzWX+GmNKq8gg7VNmckS4YzmGoKzZnJ4eDJ1DNHE8YsF/9bgFn7adsbN8BznxwAsnNhDl06k99+wgKxzVFwAzIkFAhMFVbB5ND9PXm8fAP3zq94ylQ/lkNt7tdOMgxkOR06gHjZjQgTqr+mw/fKbmvsuDnZaQtzPLq0JjtozDzAnD9JDJaIjaWus4kVW+oKXmPlrtE2+Ix5Az0WaG081n/xQtm1jRfnQuSe0Uk1GE8i2WBZ7oKEBqNHr0Ly8454rRiuLDp9Oy7Imrmav9KZ5tmwrAJ+BAXZH447DKF7Duw==
+ bh=jTrQweeqJ5wfSQ1EelNhRROTV7nnkDh3tQqIf7Bk5jk=;
+ b=ZK+zljpj6ZIthlzADNJbbkaTcBGBTpgEwqgME+dVn2b3SG1vze20wwAZa66cthI9eHiUcBCSVvvLXXvCDuq9AMKaqkvQroJVhuq14KTwAm/HeyVpts8g5BgoFCAea1vQZJt3MyI6IaJhsZ1cmfBoErAs8jF2PCcfY9JiqbLCwpClatLmxj+2OjTM+yzgsWYFcDaydrjtyPiL9nBeRB0SaU9BCC7FS5HZtsEnplLIAkcB3WjGxbBP9UvwaX+bTp00gR/GkRECH9jFlrgSQPaN0uPTEXzYy3/q+hajVjQEKlcq1MDXmh5pAvlqK6dExOKf3+ACBCtWjYQVcWDP7tTolw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GhUdtdfcxsQe269IkHKqtEwCey5V9ybQdEKmYerVnUM=;
- b=D1W5aYFB/iZGkco2/plYdO7HKqwdNWUi/Os5C5FnoNwINBGpQEgQd38ZX7L7vhhMNMJ23cbPH5lWJ+8KKoVnP5luLhvX97wKEPpCspeBPxe3zQx/PEX3QVaaADWr9v0LIbK0hvEPOUGCo4+XE2YvhrPDUMAjls0ilgZGhc4rpP4=
+ bh=jTrQweeqJ5wfSQ1EelNhRROTV7nnkDh3tQqIf7Bk5jk=;
+ b=VeCQykNFOg29ITZ3pXoS1YURxh6H91pI89/X2qSPnw27RvnqmATj6hYk3YHpD5c1fJSEbL4oeaW7FuA3cSVZKwXtCOLVtMW6rgBjd8VKAO/8o8IL6LOBMMpQouhUCAtNNRJ6p2uyrKCBTyaRLUwRsmHu6bUjVNWg4SHU5b4UsnI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -94,12 +94,13 @@ CC: Henry Wang <xin.wang2@amd.com>, Stefano Stabellini
 	<sanastasio@raptorengineering.com>, Alistair Francis
 	<alistair.francis@wdc.com>, Bob Eshleman <bobbyeshleman@gmail.com>, "Connor
  Davis" <connojdavis@gmail.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, "Juergen
- Gross" <jgross@suse.com>
-Subject: [PATCH v2 0/5] DOMCTL-based guest magic regions allocation for dom0less
-Date: Fri, 8 Mar 2024 09:54:30 +0800
-Message-ID: <20240308015435.4044339-1-xin.wang2@amd.com>
+	<roger.pau@citrix.com>
+Subject: [PATCH v2 2/5] xen/domain.h: Centrialize is_domain_direct_mapped()
+Date: Fri, 8 Mar 2024 09:54:32 +0800
+Message-ID: <20240308015435.4044339-3-xin.wang2@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240308015435.4044339-1-xin.wang2@amd.com>
+References: <20240308015435.4044339-1-xin.wang2@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -107,82 +108,120 @@ Received-SPF: None (SATLEXMB04.amd.com: xin.wang2@amd.com does not designate
  permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000D:EE_|PH0PR12MB7010:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1528252f-2a49-4dc1-c6f7-08dc3f12b9b4
+X-MS-TrafficTypeDiagnostic: CH3PEPF00000009:EE_|LV2PR12MB5944:EE_
+X-MS-Office365-Filtering-Correlation-Id: b2327975-6b70-4fb4-6436-08dc3f12bf00
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	QApuq2I/5jo41AUlwKjCZbFfkPNGDTO46qJuEFKoFhM+0b5xNWY5CG97EPWhTgi76j7acTz0QehJ11G6KrIGrP9iJtE8flETBhqPWU+MYucxgTLWlYwy4YznZLVkSpulMoBJHZTFUhniAWVUuHr7xemPul3wvsxPE/Ryrn1kIjwW8iVdIxx/VWmZu6LRcf2YD5B673BV0/d66nh3EL+stxRVwdN35lWtFb4eOiBKYgQnSDqkE/xMt72jeDX8YkBiI6SOvNegzumRvyQj1GfICSw21X7Sp5NmILUhZ5z9yHMyGeboErF9/yjVv5+mrQfxKpLFVz8ICoLmj8qdmMKacD0XkQnYjdcETfqTs97LiRqvEQKKUrlXYCiwX34etYbgFAC67myT49HAA/VLCBjR2TVI5k41s00KmuePVq62QEd0Gwdub7CaRYoDYDiTE1rZmxmPh7Vq2P5EYISPqmcWtByzd3w4MGqFZrTDCXrkeNuEUODjREmQlllzurxF1Ivfok8HRrIb3PUFZpk+aatrvS8UNWiivuAJ6GOBLFLqanHeTmb69KF7yQ2bHsBIKG1vgC7ASi5+xpSCOancQfYCD4b0D6sgYoj1SIOgH38Ym3p8HBXDD9ylHfW/2xwnX6Uxx9bTaONqN1n+oA6/OmzdAa0KkhuNSB35n6Fx9rx+LiH4a6iw37mCgiQPPlu/advAsXOh7GKZQRyxMy3z3NmdIwWYDkqkQ5iFRUZnBY+KBXvOeoOtow3oVtVZkXX1qHNh
+	2uhOvfvapcZUJ6UsU8iuObgLlp7sB0bdDo3yY7b+0LOckNzr87hHHmp7GWKdmjm96bpfj8ygM3gRqOsCv5jhrkc9TPnYYE+MIeWwXtz5GkX3SyK0xyNZcP2aLEJ6DsfQWj3Z+2vZ9dj2Zqpd1tmvMbCeZWXYGZ05q5I5bSaDOKSg3inv7RWDUMA1jGh3nhDhseLq1mGgu+KG5M31pu+MR6NXCbKeNA2jHbQwLNKj3DZYr1E4VvnqAkjzPCYFawfodtYVkMv3hdunUnSy189KCUDamV5QlgpdiVSJ89LWEHc4+xA1vQBsr17LUObIDZoyWtg/AjsaVmq2Y+oMIlH1IfSSx1CiTOAXSs1ZV5jBhni1g+SxKOUH1f0OmEvdqBA+VjTtccLZyGqK4NHjlWAIXSRQsDCCOlwqYIyarqvudTwXyI0cOVE7UWTRRCmYDunjZa3sTMJrgriZBmUdBRPT1bblI1TlB6eD99UfFrtTtZy3XDLSke6Yo0jHtR4m7hYlxtM1xZaVKTJgkW4oRRh0pNkGJfUN1QtjTLONP/0uJaRCbso37tXV6e9gSzWPWVNVVUuLki5IeUMW4ES5jemnN32u0bVUsoF+4Q03SC9wptc32IRxBk64WOg2gr2ZK+ZtyJv1E6mQuUV2zh84Cbd36plvd0J3YfqcB3w5WSlj36RS3OpkvVH/XUQgMvxQWqgnm19/QlOjVayRWv9O1kZBYIN5hXFH39oNWqhITjqSDCV8OS6zX/PPXJ6Uffzdvii5
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(376005)(7416005)(36860700004)(82310400014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(1800799015)(7416005)(376005)(36860700004)(82310400014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2024 01:54:43.6892
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2024 01:54:52.5577
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1528252f-2a49-4dc1-c6f7-08dc3f12b9b4
+X-MS-Exchange-CrossTenant-Network-Message-Id: b2327975-6b70-4fb4-6436-08dc3f12bf00
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH3PEPF0000000D.namprd04.prod.outlook.com
+	CH3PEPF00000009.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7010
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5944
 
-An error message can seen from the init-dom0less application on
-direct-mapped 1:1 domains:
-```
-Allocating magic pages
-memory.c:238:d0v0 mfn 0x39000 doesn't belong to d1
-Error on alloc magic pages
-```
+Currently direct mapped domain is only supported by the Arm
+architecture at the domain creation time by setting the CDF_directmap
+flag. There is not a need for every non-Arm architecture, i.e. x86,
+RISC-V and PPC, to define a stub is_domain_direct_mapped() in arch
+header.
 
-This is because populate_physmap() automatically assumes gfn == mfn
-for direct mapped domains. This cannot be true for the magic pages
-that are allocated later for Dom0less DomUs from the init-dom0less
-helper application executed in Dom0. For domain using statically
-allocated memory but not 1:1 direct-mapped, similar error "failed to
-retrieve a reserved page" can be seen as the reserved memory list
-is empty at that time.
+Move is_domain_direct_mapped() to a centralized place at xen/domain.h
+and evaluate CDF_directmap for non-Arm architecture to 0.
 
-This series tries to fix this issue using a DOMCTL-based approach,
-because for 1:1 direct-mapped domUs, we need to avoid the RAM regions
-and inform the toolstack about the region found by hypervisor for
-mapping the magic pages. The first 2 patches are simple clean-ups.
-Patch 3 introduced a new DOMCTL to get the guest memory map, currently
-only used for the magic page regions. Patch 4 uses the same approach
-as finding the extended regions to find the guest magic page regions
-for direct-mapped DomUs. Patch 5 makes the init-dom0less application
-consume the DOMCTL to avoid hardcoding the guest magic base address.
+Signed-off-by: Henry Wang <xin.wang2@amd.com>
+---
+v2:
+- New patch
+---
+ xen/arch/arm/include/asm/domain.h   | 2 --
+ xen/arch/ppc/include/asm/domain.h   | 2 --
+ xen/arch/riscv/include/asm/domain.h | 2 --
+ xen/arch/x86/include/asm/domain.h   | 1 -
+ xen/include/xen/domain.h            | 3 +++
+ 5 files changed, 3 insertions(+), 7 deletions(-)
 
-Henry Wang (5):
-  xen/arm: Rename assign_static_memory_11() for consistency
-  xen/domain.h: Centrialize is_domain_direct_mapped()
-  xen/domctl, tools: Introduce a new domctl to get guest memory map
-  xen/arm: Find unallocated spaces for magic pages of direct-mapped domU
-  xen/memory, tools: Make init-dom0less consume XEN_DOMCTL_get_mem_map
-
- tools/helpers/init-dom0less.c            | 22 +++++++++---
- tools/include/xenctrl.h                  |  4 +++
- tools/libs/ctrl/xc_domain.c              | 32 +++++++++++++++++
- xen/arch/arm/dom0less-build.c            | 45 +++++++++++++++++++++++-
- xen/arch/arm/domain.c                    |  6 ++++
- xen/arch/arm/domain_build.c              | 30 ++++++++++------
- xen/arch/arm/domctl.c                    | 19 +++++++++-
- xen/arch/arm/include/asm/domain.h        | 10 ++++--
- xen/arch/arm/include/asm/domain_build.h  |  2 ++
- xen/arch/arm/include/asm/static-memory.h |  8 ++---
- xen/arch/arm/static-memory.c             |  5 +--
- xen/arch/ppc/include/asm/domain.h        |  2 --
- xen/arch/riscv/include/asm/domain.h      |  2 --
- xen/arch/x86/include/asm/domain.h        |  1 -
- xen/common/memory.c                      | 10 ++++--
- xen/include/public/arch-arm.h            |  4 +++
- xen/include/public/domctl.h              | 21 +++++++++++
- xen/include/public/memory.h              |  5 +++
- xen/include/xen/domain.h                 |  3 ++
- xen/include/xen/mm.h                     |  2 ++
- 20 files changed, 201 insertions(+), 32 deletions(-)
-
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index 8218afb862..f1d72c6e48 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -29,8 +29,6 @@ enum domain_type {
+ #define is_64bit_domain(d) (0)
+ #endif
+ 
+-#define is_domain_direct_mapped(d) ((d)->cdf & CDF_directmap)
+-
+ /*
+  * Is the domain using the host memory layout?
+  *
+diff --git a/xen/arch/ppc/include/asm/domain.h b/xen/arch/ppc/include/asm/domain.h
+index 573276d0a8..3a447272c6 100644
+--- a/xen/arch/ppc/include/asm/domain.h
++++ b/xen/arch/ppc/include/asm/domain.h
+@@ -10,8 +10,6 @@ struct hvm_domain
+     uint64_t              params[HVM_NR_PARAMS];
+ };
+ 
+-#define is_domain_direct_mapped(d) ((void)(d), 0)
+-
+ /* TODO: Implement */
+ #define guest_mode(r) ({ (void)(r); BUG_ON("unimplemented"); 0; })
+ 
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 0f5dc2be40..027bfa8a93 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -10,8 +10,6 @@ struct hvm_domain
+     uint64_t              params[HVM_NR_PARAMS];
+ };
+ 
+-#define is_domain_direct_mapped(d) ((void)(d), 0)
+-
+ struct arch_vcpu_io {
+ };
+ 
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 622d22bef2..4bd78e3a6d 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -22,7 +22,6 @@
+ #define is_hvm_pv_evtchn_domain(d) (is_hvm_domain(d) && \
+         ((d)->arch.hvm.irq->callback_via_type == HVMIRQ_callback_vector || \
+          (d)->vcpu[0]->arch.hvm.evtchn_upcall_vector))
+-#define is_domain_direct_mapped(d) ((void)(d), 0)
+ 
+ #define VCPU_TRAP_NONE         0
+ #define VCPU_TRAP_NMI          1
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index b1a4aa6f38..3de5635291 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -41,6 +41,8 @@ void arch_get_domain_info(const struct domain *d,
+ #ifdef CONFIG_ARM
+ /* Should domain memory be directly mapped? */
+ #define CDF_directmap            (1U << 1)
++#else
++#define CDF_directmap            0
+ #endif
+ /* Is domain memory on static allocation? */
+ #ifdef CONFIG_STATIC_MEMORY
+@@ -49,6 +51,7 @@ void arch_get_domain_info(const struct domain *d,
+ #define CDF_staticmem            0
+ #endif
+ 
++#define is_domain_direct_mapped(d) ((d)->cdf & CDF_directmap)
+ #define is_domain_using_staticmem(d) ((d)->cdf & CDF_staticmem)
+ 
+ /*
 -- 
 2.34.1
 
