@@ -4,40 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED7FC54E4A
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Mar 2024 10:44:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.690194.1075985 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF73C54E4A
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Mar 2024 11:21:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.690220.1076005 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riXiB-0007mP-3O; Fri, 08 Mar 2024 10:44:23 +0000
+	id 1riYHq-0006Lr-0P; Fri, 08 Mar 2024 11:21:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 690194.1075985; Fri, 08 Mar 2024 10:44:23 +0000
+Received: by outflank-mailman (output) from mailman id 690220.1076005; Fri, 08 Mar 2024 11:21:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riXiA-0007mI-VQ; Fri, 08 Mar 2024 10:44:22 +0000
-Received: by outflank-mailman (input) for mailman id 690194;
- Fri, 08 Mar 2024 10:44:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=iEmX=KO=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1riXi9-0007mC-Ip
- for xen-devel@lists.xenproject.org; Fri, 08 Mar 2024 10:44:21 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d1a4c762-dd38-11ee-afda-a90da7624cb6;
- Fri, 08 Mar 2024 11:44:20 +0100 (CET)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a45c006ab82so258820866b.3
- for <xen-devel@lists.xenproject.org>; Fri, 08 Mar 2024 02:44:20 -0800 (PST)
-Received: from ?IPV6:2003:e5:8715:c000:52ff:24ed:f304:23c0?
- (p200300e58715c00052ff24edf30423c0.dip0.t-ipconnect.de.
- [2003:e5:8715:c000:52ff:24ed:f304:23c0])
- by smtp.gmail.com with ESMTPSA id
- qw28-20020a1709066a1c00b00a381ca0e589sm9143282ejc.22.2024.03.08.02.44.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 08 Mar 2024 02:44:19 -0800 (PST)
+	id 1riYHp-0006Lk-TS; Fri, 08 Mar 2024 11:21:13 +0000
+Received: by outflank-mailman (input) for mailman id 690220;
+ Fri, 08 Mar 2024 11:21:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=PBuc=KO=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1riYHo-00067H-2M
+ for xen-devel@lists.xenproject.org; Fri, 08 Mar 2024 11:21:12 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f70e9300-dd3d-11ee-a1ee-f123f15fe8a2;
+ Fri, 08 Mar 2024 12:21:10 +0100 (CET)
+Received: from nico.bugseng.com (unknown [46.228.253.194])
+ by support.bugseng.com (Postfix) with ESMTPSA id 0CAA94EE074D;
+ Fri,  8 Mar 2024 12:21:08 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,73 +41,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1a4c762-dd38-11ee-afda-a90da7624cb6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1709894659; x=1710499459; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=rqyo1Ozj3kkEIPRj2BTXEgAdVk5xtil/9n1qtnu1Pcw=;
-        b=Lu4mSfUUgW2Bw5/gqqPDAcobscRxihzP4vDA9twF98zuMfgXONKEfosHpCb9KXaWam
-         Z5/B0m1/9zd+rxePRx/3zcJg3ctEOkmDuvKODu6SIYr3dnxHCKaN2me8xUecw3ARwpgB
-         04Eikq3RubK3Lw6ArRija1/V6bQwfToGyQwOI6g31vvQN0enB7nOIeljU7K/gY6920Y4
-         JjUHejD1rdXKOcJm9MR6lzF/6LeP2ngJb7aeJzX6ZGzchEHBLFyIge6ElYIN9r80D0AS
-         RTDkxf5gJbUNbKI+bR+gdQT22NYpCWW7i07k/ZCAsn1rs5Oy/Qjpk9OS59AEFIOmBW15
-         ZBYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709894659; x=1710499459;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=rqyo1Ozj3kkEIPRj2BTXEgAdVk5xtil/9n1qtnu1Pcw=;
-        b=R4N53CoB6G4fSk57doWY0HYquZXuRt6cGgvr8T+jn6xBIxFUxLyg9mgHyClwmVS4Hd
-         o/lA0X0hPlQDVcQopArTL5bJZyoaAlDbhpAqVN3XK4jmkRjDTuBFXT6DkooKNVLk6S45
-         PQPFfVCYKSmOI//OxcTtHfYEB8oI39sm+fVQFbuljLjoNQP9jhc9ctDmR6oKXJ7onLcz
-         A164Zz6SITW4yyNybahtS/Mm5jk0z77Uizogllj6qqWdYLtSvSH26HT6oNENdPvE26ja
-         +nX88CX7KSoZohRa0zm40xUeIedvmvbOA0LEo9dRQK0x0ATMaU1ez4KCjNjn0YbBRdiN
-         KLNQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVjU6zT3CKogdbpGh674QYYbD/zxdOmnsj6IFJMw3gzN1jtmIE926Q4mwPyIwv/MD4wUcPKbJyTZZ1z4ALeFftd9sx5BpBLtBLD9d+sge4=
-X-Gm-Message-State: AOJu0YwFMoUX+A0OfBJ6/CWDWQDTK6/ow70KF1wHPPRb0B3LvG/V9kSp
-	MZlh+6G+ULaPOaG3/M2UBdX6/onkqph7kMZw4odtb8mIUlU2SvyroXyHD+DPufA=
-X-Google-Smtp-Source: AGHT+IFa6C3iAF/szUL0WlQeNpe8wcBtHEqOX8Y5ln2fUfYZWdhgUrMKRCSGzkxNxe3X+0IVFHoIFA==
-X-Received: by 2002:a17:906:35cd:b0:a44:dc35:df19 with SMTP id p13-20020a17090635cd00b00a44dc35df19mr12080192ejb.67.1709894659653;
-        Fri, 08 Mar 2024 02:44:19 -0800 (PST)
-Message-ID: <23249fa7-1721-4d47-a0d4-b592913e4560@suse.com>
-Date: Fri, 8 Mar 2024 11:44:18 +0100
+X-Inumbo-ID: f70e9300-dd3d-11ee-a1ee-f123f15fe8a2
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: nicola.vetrini@bugseng.com,
+	xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	michal.orzel@amd.com,
+	xenia.ragiadakou@amd.com,
+	ayan.kumar.halder@amd.com,
+	consulting@bugseng.com,
+	bertrand.marquis@arm.com,
+	julien@xen.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 1/7] xen/spinlock: address violations of MISRA C Rule 20.7
+Date: Fri,  8 Mar 2024 12:20:58 +0100
+Message-Id: <59e9749d3c6a22469bc9fb804b7b7c13850e9e94.1709896401.git.nicola.vetrini@bugseng.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1709896401.git.nicola.vetrini@bugseng.com>
+References: <cover.1709896401.git.nicola.vetrini@bugseng.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/grant-dma-iommu: Convert to platform remove callback
- returning void
-Content-Language: en-US
-To: =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- xen-devel@lists.xenproject.org, kernel@pengutronix.de
-References: <20240307181135.191192-2-u.kleine-koenig@pengutronix.de>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-In-Reply-To: <20240307181135.191192-2-u.kleine-koenig@pengutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 07.03.24 19:11, Uwe Kleine-König wrote:
-> The .remove() callback for a platform driver returns an int which makes
-> many driver authors wrongly assume it's possible to do error handling by
-> returning an error code. However the value returned is ignored (apart
-> from emitting a warning) and this typically results in resource leaks.
-> 
-> To improve here there is a quest to make the remove callback return
-> void. In the first step of this quest all drivers are converted to
-> .remove_new(), which already returns void. Eventually after all drivers
-> are converted, .remove_new() will be renamed to .remove().
-> 
-> Trivially convert this driver from always returning zero in the remove
-> callback to the void returning variant.
-> 
-> Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+MISRA C Rule 20.7 states: "Expressions resulting from the expansion
+of macro parameters shall be enclosed in parentheses". Therefore, some
+macro definitions should gain additional parentheses to ensure that all
+current and future users will be safe with respect to expansions that
+can possibly alter the semantics of the passed-in macro parameter.
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
+No functional change.
 
+Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+ xen/include/xen/spinlock.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Juergen
+diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
+index 1cd9120eac7a..0e6a083dfb9e 100644
+--- a/xen/include/xen/spinlock.h
++++ b/xen/include/xen/spinlock.h
+@@ -94,7 +94,7 @@ struct lock_profile_qhead {
+     int32_t                   idx;     /* index for printout */
+ };
+ 
+-#define _LOCK_PROFILE(lockname) { .name = #lockname, .lock = &lockname, }
++#define _LOCK_PROFILE(lockname) { .name = #lockname, .lock = &(lockname), }
+ #define _LOCK_PROFILE_PTR(name)                                               \
+     static struct lock_profile * const __lock_profile_##name                  \
+     __used_section(".lockprofile.data") =                                     \
+-- 
+2.34.1
 
 
