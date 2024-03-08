@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 814B1C5475B
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Mar 2024 14:14:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.690319.1076218 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A1CC5475B
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Mar 2024 15:20:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.690335.1076239 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riaz2-0003zn-C9; Fri, 08 Mar 2024 14:14:00 +0000
+	id 1ric0k-00087V-US; Fri, 08 Mar 2024 15:19:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 690319.1076218; Fri, 08 Mar 2024 14:14:00 +0000
+Received: by outflank-mailman (output) from mailman id 690335.1076239; Fri, 08 Mar 2024 15:19:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riaz2-0003ze-8g; Fri, 08 Mar 2024 14:14:00 +0000
-Received: by outflank-mailman (input) for mailman id 690319;
- Fri, 08 Mar 2024 14:13:59 +0000
+	id 1ric0k-00087O-RX; Fri, 08 Mar 2024 15:19:50 +0000
+Received: by outflank-mailman (input) for mailman id 690335;
+ Fri, 08 Mar 2024 15:19:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0woU=KO=cloud.com=kelly.choi@srs-se1.protection.inumbo.net>)
- id 1riaz1-0003xm-0L
- for xen-devel@lists.xenproject.org; Fri, 08 Mar 2024 14:13:59 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=7MCP=KO=rabbit.lu=slack@srs-se1.protection.inumbo.net>)
+ id 1ric0i-000860-S4
+ for xen-devel@lists.xenproject.org; Fri, 08 Mar 2024 15:19:48 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1a0b060b-dd56-11ee-a1ee-f123f15fe8a2;
- Fri, 08 Mar 2024 15:13:57 +0100 (CET)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-563bb51c36eso2285340a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 08 Mar 2024 06:13:57 -0800 (PST)
+ id 4bca6f16-dd5f-11ee-a1ee-f123f15fe8a2;
+ Fri, 08 Mar 2024 16:19:46 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-41316512055so7978985e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Mar 2024 07:19:46 -0800 (PST)
+Received: from localhost.localdomain (82-64-138-184.subs.proxad.net.
+ [82.64.138.184]) by smtp.googlemail.com with ESMTPSA id
+ d8-20020a05600c4c0800b004130889c7b3sm5993105wmp.34.2024.03.08.07.19.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Mar 2024 07:19:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,68 +47,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a0b060b-dd56-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 4bca6f16-dd5f-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1709907236; x=1710512036; darn=lists.xenproject.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=05gSGMW5+/FEQxjOa7nPRDuwgAU8PNa0oI5umgHVvaA=;
-        b=CrLst/0T1JJAZNX+G0YQrM2kdUzcSU8c8Yqpj44Pi7/bU3JtdlOT+X06ALcySNCU5G
-         zSHGsCYq+JVuGH+9PflJ3qKLZ7b1Eg9j+NbQehk7ILDiFYhlxVa3nUtOwW86tua04pet
-         nrIabGAqrV8YyoPxZzPv2WJACiPeP1/O4Lf5M=
+        d=rabbit-lu.20230601.gappssmtp.com; s=20230601; t=1709911185; x=1710515985; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0Thr5ENyvPLoF4bqDxKM90EiB1TJ9YdmJBGx+I/Z+q8=;
+        b=DO4hSaa6tIxmFn3NXc4O3l0KFQPob5PyFPN6dQikXP9OIR3Gu46sc2VvpcespgsEG2
+         pm3tSB1uO8mBubyP0N1SHaUV/uz+N0JtA+fooVSqlvM56RYtPQUbOyPYah5JuiKFqlCk
+         4m6mVn/x7WmQJKg/FpKa5v+KlghoNGMUA4V07lWxyOhUVdIpRvB10wbu3ddYDhFNwzir
+         WTOLazUx3XXkTNhkqmvpExn4+7v5+4BZYtyPABMVhovTnb1OPVjEVmF/RFfsnzZYnK5C
+         8Su6loz6Or1vCvMkKULhW8S3A8m7O8mautd8VS+luhVPRooGCyDh/MWInYmRLwDd4cwo
+         06hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709907236; x=1710512036;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=05gSGMW5+/FEQxjOa7nPRDuwgAU8PNa0oI5umgHVvaA=;
-        b=h3SjZu2ghDT30vzX/AkEWLvwg1QgPa+pg5aOgqs+QFnkz1tpss2IYeC+hIP2z+jQyD
-         INJ7dfH0DoiCPAGgBZNJUee0j20jr+/JzGXbEVm07TJCnFUCMtDjONMAitI9itZz1ETl
-         GMS6nkxVLMB/J1GXGaeQmNUdpttiv1JXH8N3QwJW4CmWqADjwQPnnxxxIdma0WOweQAf
-         0jKr7/DIEok+VUL1y7wJYEQKjdj0V4bu0+fdUP6WDSW6qjzjrOOeLN9aip5i4JkvqG4A
-         hH68D22xGflOGuakcEGJyoAZwxQfpDFSVZUwsd2g2heBWWY25zYYsHgbDhsBKWSbr4y0
-         HAPw==
-X-Gm-Message-State: AOJu0YxKJQwFZSZNxnp7QLBDutQ1ZcNd60xzDoGzVRX3rddqrThrYpeF
-	2FoRAAocC3KXwqVZOiVIyi78CowqEmWE8CRtDahCBcZF6wW9+4YUsv1xVmZ07A2I2CnDCQisvvZ
-	fw3r1LyRQrKnabt42fvwe1jqKSRoMZXqxetCKyQDIL0fyS46UN+s=
-X-Google-Smtp-Source: AGHT+IFBZuMIBZ2JDLXUCEPXwGPzLtMtOZWsXrT95Ig+kYeC0Q+w7SyoMmtxdcLVeuCUxB+/7YpxqRSXoCkcdqWV3Xc=
-X-Received: by 2002:a50:c314:0:b0:565:7116:d533 with SMTP id
- a20-20020a50c314000000b005657116d533mr2304117edb.6.1709907235980; Fri, 08 Mar
- 2024 06:13:55 -0800 (PST)
+        d=1e100.net; s=20230601; t=1709911185; x=1710515985;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0Thr5ENyvPLoF4bqDxKM90EiB1TJ9YdmJBGx+I/Z+q8=;
+        b=rvZgLW9YWz3amAfv+/gIWDNrYOECrlWMkk65VTBsJ02SHhHE+8SeTtmFToy+TNip1A
+         9f8l3oxV6966JNPCvoNLDgCJH28ptr6jQV9IFNssAXFHMvc/Cb4f2CenxoFHNrXlRQg5
+         NDqYxbsx3ZVhDz+Qd7I2e8weCHEG3kBIpDw4vEaFA8uhpvE6WO6ihPZmqllFQydlw1oX
+         qnM51Z4KVk0oL3tiF8e30OAwj/dOMoLeoG0HG9XUGAnK0xNoZArmjB3zdl9gj3G3Wlr0
+         qEPo+aiNCihvH2/yqfEj7hluA5NzHR3IRWbE+ljAy3KIeVlx1a9ehkzTh9koByGjlkgP
+         zztA==
+X-Gm-Message-State: AOJu0Yx1M9jpOeQ+K86DePlsE/n0iH6VgB7wgXpp5v7E0WoTUehkt5iv
+	Kgvwmg24+OXjlD0UQBpfT0MX+ByOUEmbWUGefmT+jtgLHWaswNCZw/W+4w5akCJO0IRxSrNOxhJ
+	I
+X-Google-Smtp-Source: AGHT+IHiaAJqPMGi9k6Smk9LMBKkuT2WruGkYhVCrqw6IuwF0IcCTr53NN+mer6aP7WmLNw7uYa5Iw==
+X-Received: by 2002:a05:600c:3515:b0:412:eff3:8497 with SMTP id h21-20020a05600c351500b00412eff38497mr7544830wmq.1.1709911185282;
+        Fri, 08 Mar 2024 07:19:45 -0800 (PST)
+From: =?UTF-8?q?zithro=20/=20Cyril=20R=C3=A9bert?= <slack@rabbit.lu>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?zithro=20/=20Cyril=20R=C3=A9bert?= <slack@rabbit.lu>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2] docs/man: add shutdown reasons to xl (list) man page
+Date: Fri,  8 Mar 2024 16:19:20 +0100
+Message-Id: <0a2fcad111622431b8cd54c69adc3dedd24fb572.1709910923.git.slack@rabbit.lu>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-From: Kelly Choi <kelly.choi@cloud.com>
-Date: Fri, 8 Mar 2024 14:13:19 +0000
-Message-ID: <CAO-mL=x=boq41C8zzdaEdyJAUxpNSiDaUFP8k9xxeFKOHo-BGQ@mail.gmail.com>
-Subject: March - Community call recording
-To: xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: multipart/alternative; boundary="000000000000666aba061326cd4b"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---000000000000666aba061326cd4b
-Content-Type: text/plain; charset="UTF-8"
+Add the shutdown reasons to the paragraph of "xl list" concerning the
+shutdown status.
+I have adapted the explanations from the source code :
 
-Hi all,
+ - tools/xl/xl_info.c : function "list_domains()", variable
+   "shutdown_reason_letters"
+ - xen/include/public/sched.h : variable "shed_shutdown_reason"
 
-The March community call recording has been uploaded:
-https://youtu.be/IBKUEy5ZSrQ
-This has also been saved in the Cryptpad file.
+Suggested-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Cyril Rébert / zithro <slack@rabbit.lu>
+---
+v2:
+- apply changes from Anthony and Roger
 
-Many thanks,
-Kelly Choi
+Questions (unblocking):
+ - why a double space between all sentences ?
+ - how to get a "simple LF" ? Ie. I want to use <br>, not <p>
+   (a simple <Enter> has no effect, a double renders a <p>)
+---
+ docs/man/xl.1.pod.in | 40 +++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 39 insertions(+), 1 deletion(-)
 
-Community Manager
-Xen Project
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index bed8393473..d37227ba58 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -370,12 +370,50 @@ scheduling by the Xen hypervisor.
+ The guest OS has shut down (SCHEDOP_shutdown has been called) but the
+ domain is not dying yet.
+ 
+-=item B<c - crashed>
++There are six shutdown reasons, which will be displayed after the "s" : B<-rscwS>.
++
++Note that some states will only be displayed if "on_poweroff=preserve" is set in
++the config file, see L<xl.cfg(5)>).
++
++=over 4
++
++=over 4
++
++=item B<s- : poweroff>
++
++The domain exited normally, it will get destroyed.
++
++=item B<sr : reboot>
++
++The domain will reboot.
++
++=item B<ss : suspend>
++
++The domain is suspended to disk or to RAM. If suspended to disk, the domain will
++get destroyed.
++
++=item B<sc : crash>
+ 
+ The domain has crashed, which is always a violent ending.  Usually
+ this state only occurs if the domain has been configured not to
+ restart on a crash.  See L<xl.cfg(5)> for more info.
+ 
++=item B<sw : watchdog>
++
++Restart because watchdog time expired.
++
++=item B<sS : soft_reset>
++
++The domain asked to perform 'soft reset' for it.  The expected behavior
++is to reset internal Xen state for the domain returning it to the point
++where it was created but leaving the domain's memory contents and vCPU
++contexts intact.  This will allow the domain to start over and set up
++all Xen specific interfaces again.
++
++=back
++
++=back
++
+ =item B<d - dying>
+ 
+ The domain is in the process of dying, but hasn't completely shut down or
+-- 
+2.39.2
 
---000000000000666aba061326cd4b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi all,<div><br></div><div>The March community call record=
-ing has been uploaded:=C2=A0<a href=3D"https://youtu.be/IBKUEy5ZSrQ">https:=
-//youtu.be/IBKUEy5ZSrQ</a><br clear=3D"all"><div><div dir=3D"ltr" class=3D"=
-gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div>T=
-his has also been saved in the Cryptpad file.</div><div><br></div><div>Many=
- thanks,</div><div>Kelly Choi</div><div><br></div><div><div style=3D"color:=
-rgb(136,136,136)">Community Manager</div><div style=3D"color:rgb(136,136,13=
-6)">Xen Project=C2=A0<br></div></div></div></div></div></div></div>
-
---000000000000666aba061326cd4b--
 
