@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF73C54E4A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C492C5475B
 	for <xen-devel@archiver.kernel.org>; Fri,  8 Mar 2024 11:21:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.690220.1076005 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.690221.1076009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riYHq-0006Lr-0P; Fri, 08 Mar 2024 11:21:14 +0000
+	id 1riYHq-0006P5-7n; Fri, 08 Mar 2024 11:21:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 690220.1076005; Fri, 08 Mar 2024 11:21:13 +0000
+Received: by outflank-mailman (output) from mailman id 690221.1076009; Fri, 08 Mar 2024 11:21:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1riYHp-0006Lk-TS; Fri, 08 Mar 2024 11:21:13 +0000
-Received: by outflank-mailman (input) for mailman id 690220;
+	id 1riYHq-0006Om-4d; Fri, 08 Mar 2024 11:21:14 +0000
+Received: by outflank-mailman (input) for mailman id 690221;
  Fri, 08 Mar 2024 11:21:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PBuc=KO=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1riYHo-00067H-2M
+ id 1riYHo-00067S-Te
  for xen-devel@lists.xenproject.org; Fri, 08 Mar 2024 11:21:12 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f70e9300-dd3d-11ee-a1ee-f123f15fe8a2;
- Fri, 08 Mar 2024 12:21:10 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f80cadda-dd3d-11ee-afda-a90da7624cb6;
+ Fri, 08 Mar 2024 12:21:12 +0100 (CET)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id 0CAA94EE074D;
- Fri,  8 Mar 2024 12:21:08 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 5DC274EE074E;
+ Fri,  8 Mar 2024 12:21:10 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f70e9300-dd3d-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: f80cadda-dd3d-11ee-afda-a90da7624cb6
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -56,9 +56,9 @@ Cc: sstabellini@kernel.org,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 1/7] xen/spinlock: address violations of MISRA C Rule 20.7
-Date: Fri,  8 Mar 2024 12:20:58 +0100
-Message-Id: <59e9749d3c6a22469bc9fb804b7b7c13850e9e94.1709896401.git.nicola.vetrini@bugseng.com>
+Subject: [XEN PATCH v2 2/7] xen/include: address violations of MISRA C Rule 20.7
+Date: Fri,  8 Mar 2024 12:20:59 +0100
+Message-Id: <5be252bfb30682d33aecca11921dcdfcc17f9ae6.1709896401.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1709896401.git.nicola.vetrini@bugseng.com>
 References: <cover.1709896401.git.nicola.vetrini@bugseng.com>
@@ -75,22 +75,42 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/include/xen/spinlock.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- split from an earlier patch
+---
+ xen/include/xen/bug.h  | 2 +-
+ xen/include/xen/init.h | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
-index 1cd9120eac7a..0e6a083dfb9e 100644
---- a/xen/include/xen/spinlock.h
-+++ b/xen/include/xen/spinlock.h
-@@ -94,7 +94,7 @@ struct lock_profile_qhead {
-     int32_t                   idx;     /* index for printout */
- };
+diff --git a/xen/include/xen/bug.h b/xen/include/xen/bug.h
+index 2c45c462fc63..77fe1e1ba840 100644
+--- a/xen/include/xen/bug.h
++++ b/xen/include/xen/bug.h
+@@ -80,7 +80,7 @@ struct bug_frame {
+     [bf_type]    "i" (type),                                                 \
+     [bf_ptr]     "i" (ptr),                                                  \
+     [bf_msg]     "i" (msg),                                                  \
+-    [bf_line_lo] "i" ((line & ((1 << BUG_LINE_LO_WIDTH) - 1))                \
++    [bf_line_lo] "i" (((line) & ((1 << BUG_LINE_LO_WIDTH) - 1))              \
+                       << BUG_DISP_WIDTH),                                    \
+     [bf_line_hi] "i" (((line) >> BUG_LINE_LO_WIDTH) << BUG_DISP_WIDTH)
  
--#define _LOCK_PROFILE(lockname) { .name = #lockname, .lock = &lockname, }
-+#define _LOCK_PROFILE(lockname) { .name = #lockname, .lock = &(lockname), }
- #define _LOCK_PROFILE_PTR(name)                                               \
-     static struct lock_profile * const __lock_profile_##name                  \
-     __used_section(".lockprofile.data") =                                     \
+diff --git a/xen/include/xen/init.h b/xen/include/xen/init.h
+index 1d7c0216bc80..0a4223833755 100644
+--- a/xen/include/xen/init.h
++++ b/xen/include/xen/init.h
+@@ -63,9 +63,9 @@ typedef int (*initcall_t)(void);
+ typedef void (*exitcall_t)(void);
+ 
+ #define presmp_initcall(fn) \
+-    const static initcall_t __initcall_##fn __init_call("presmp") = fn
++    const static initcall_t __initcall_##fn __init_call("presmp") = (fn)
+ #define __initcall(fn) \
+-    const static initcall_t __initcall_##fn __init_call("1") = fn
++    const static initcall_t __initcall_##fn __init_call("1") = (fn)
+ #define __exitcall(fn) \
+     static exitcall_t __exitcall_##fn __exit_call = fn
+ 
 -- 
 2.34.1
 
