@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0BE3C54E58
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D52E8C54E68
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 09:00:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691270.1077124 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.691271.1077114 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW9-0000KW-Vr; Mon, 11 Mar 2024 09:00:21 +0000
+	id 1rjbW9-000081-0f; Mon, 11 Mar 2024 09:00:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691270.1077124; Mon, 11 Mar 2024 09:00:21 +0000
+Received: by outflank-mailman (output) from mailman id 691271.1077114; Mon, 11 Mar 2024 09:00:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW9-0000Ek-7p; Mon, 11 Mar 2024 09:00:21 +0000
-Received: by outflank-mailman (input) for mailman id 691270;
+	id 1rjbW8-0008U8-Dc; Mon, 11 Mar 2024 09:00:20 +0000
+Received: by outflank-mailman (input) for mailman id 691271;
  Mon, 11 Mar 2024 09:00:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xWeI=KR=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rjbW6-0006iu-1H
+ id 1rjbW6-0006j9-0j
  for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 09:00:18 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c7f9c963-df85-11ee-afdc-a90da7624cb6;
- Mon, 11 Mar 2024 10:00:17 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c7593b5a-df85-11ee-a1ee-f123f15fe8a2;
+ Mon, 11 Mar 2024 10:00:16 +0100 (CET)
 Received: from beta.station (net-93-144-106-196.cust.vodafonedsl.it
  [93.144.106.196])
- by support.bugseng.com (Postfix) with ESMTPSA id D11F94EE0C95;
- Mon, 11 Mar 2024 10:00:16 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id B42534EE0C90;
+ Mon, 11 Mar 2024 10:00:15 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,98 +42,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c7f9c963-df85-11ee-afdc-a90da7624cb6
+X-Inumbo-ID: c7593b5a-df85-11ee-a1ee-f123f15fe8a2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
-	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>,
+	Simone Ballarin <simone.ballarin@bugseng.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>,
-	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH v3 12/16] xen: address violations of MISRA C:2012 Directive 4.10
-Date: Mon, 11 Mar 2024 09:59:21 +0100
-Message-Id: <ab967347ae22d662c82962b1fdd6e6449bdd8c5e.1710145041.git.simone.ballarin@bugseng.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
+Subject: [XEN PATCH v3 10/16] x86/asm: address violations of MISRA C:2012 Directive 4.10
+Date: Mon, 11 Mar 2024 09:59:19 +0100
+Message-Id: <1e44047e767431c32621ae44d3121bc2152b3cb5.1710145041.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1710145041.git.simone.ballarin@bugseng.com>
 References: <cover.1710145041.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
+Amend generation script, add inclusion guards to address violations
+of MISRA C:2012 Directive 4.10 ("Precautions shall be taken in order
+to prevent the contents of a header file being included more than
+once").
 
-Modify creation rule for asm-offsets.h to conform to
-the new standard and to not generate conflicting guards
-between architectures (which is a violation of the directive).
-Modify generic-y creation rule to generate code without violations
-and to conform to the new standard.
+This patch amends the Makefile adding the required inclusion guards
+for xlat.h.
 
-Mechanical change.
----
-Commit introduced in v3
+Add deviation comment for files intended for multiple inclusion.
 
+Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
-Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
----
- xen/build.mk                     |  6 ++++--
- xen/scripts/Makefile.asm-generic | 16 +++++++++++++++-
- 2 files changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/xen/build.mk b/xen/build.mk
-index 0f490ca71b..bd8b93e2ae 100644
---- a/xen/build.mk
-+++ b/xen/build.mk
-@@ -45,6 +45,8 @@ asm-offsets.s: arch/$(SRCARCH)/$(ARCH)/asm-offsets.c
- 	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
- 	$(call move-if-changed,$@.new,$@)
+---
+Changes in v3:
+- fix inconsistent deviation ID
+- remove trailing underscores
+Changes in v2:
+- merge patches 7/13 and 13/13 of v1 as they had the same
+  commit message
+- amend the Makefile to produce the required inclusion guard
+- use the format introduced with doc/misra/safe.json instead of
+  a generic text-based deviation
+---
+ docs/misra/safe.json                   |  8 ++++++++
+ xen/arch/x86/include/asm/compat.h      |  5 +++++
+ xen/arch/x86/include/asm/cpufeatures.h |  5 +----
+ xen/arch/x86/include/asm/efibind.h     |  5 +++++
+ xen/include/Makefile                   | 10 ++++++++--
+ 5 files changed, 27 insertions(+), 6 deletions(-)
+
+diff --git a/docs/misra/safe.json b/docs/misra/safe.json
+index 363c9e21b0..13208d18ec 100644
+--- a/docs/misra/safe.json
++++ b/docs/misra/safe.json
+@@ -52,6 +52,14 @@
+         },
+         {
+             "id": "SAF-6-safe",
++            "analyser": {
++                "eclair": "MC3R1.D4.10"
++            },
++            "name": "Dir 4.10: file intended for multiple inclusion",
++            "text": "Files intended for multiple inclusion are not supposed to comply with D4.10."
++        },
++        {
++            "id": "SAF-7-safe",
+             "analyser": {},
+             "name": "Sentinel",
+             "text": "Next ID to be used"
+diff --git a/xen/arch/x86/include/asm/compat.h b/xen/arch/x86/include/asm/compat.h
+index 818cad87db..36e7750843 100644
+--- a/xen/arch/x86/include/asm/compat.h
++++ b/xen/arch/x86/include/asm/compat.h
+@@ -2,6 +2,9 @@
+  * compat.h
+  */
+ 
++#ifndef ASM_X86_COMPAT_H
++#define ASM_X86_COMPAT_H
++
+ #ifdef CONFIG_COMPAT
+ 
+ #define COMPAT_BITS_PER_LONG 32
+@@ -18,3 +21,5 @@ int switch_compat(struct domain *);
+ #include <xen/errno.h>
+ static inline int switch_compat(struct domain *d) { return -EOPNOTSUPP; }
+ #endif
++
++#endif /* ASM_X86_COMPAT_H */
+diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
+index c3aad21c3b..a65754d553 100644
+--- a/xen/arch/x86/include/asm/cpufeatures.h
++++ b/xen/arch/x86/include/asm/cpufeatures.h
+@@ -1,7 +1,4 @@
+-/*
+- * Explicitly intended for multiple inclusion.
+- */
+-
++/* SAF-6-safe file intended for multiple inclusion */
+ #include <xen/lib/x86/cpuid-autogen.h>
+ 
+ /* Number of capability words covered by the featureset words. */
+diff --git a/xen/arch/x86/include/asm/efibind.h b/xen/arch/x86/include/asm/efibind.h
+index bce02f3707..75684742be 100644
+--- a/xen/arch/x86/include/asm/efibind.h
++++ b/xen/arch/x86/include/asm/efibind.h
+@@ -1,2 +1,7 @@
++#ifndef ASM_X86_EFIBIND_H
++#define ASM_X86_EFIBIND_H
++
+ #include <xen/types.h>
+ #include <asm/x86_64/efibind.h>
++
++#endif /* ASM_X86_EFIBIND_H */
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index a77c9ffb7e..e777921eb1 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -104,10 +104,16 @@ $(obj)/compat/.xlat/%.lst: $(srcdir)/xlat.lst FORCE
+ xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+[^[:blank:]]+[[:blank:]]+,,p' $(srcdir)/xlat.lst | uniq)
+ xlat-y := $(filter $(patsubst compat/%,%,$(headers-y)),$(xlat-y))
  
 +ARCHDIR = $(shell echo $(SRCARCH) | tr a-z A-Z)
 +
- arch/$(SRCARCH)/include/asm/asm-offsets.h: asm-offsets.s
- 	@(set -e; \
- 	  echo "/*"; \
-@@ -54,8 +56,8 @@ arch/$(SRCARCH)/include/asm/asm-offsets.h: asm-offsets.s
- 	  echo " *"; \
- 	  echo " */"; \
- 	  echo ""; \
--	  echo "#ifndef __ASM_OFFSETS_H__"; \
--	  echo "#define __ASM_OFFSETS_H__"; \
-+	  echo "#ifndef ASM_$(ARCHDIR)_ASM_OFFSETS_H"; \
-+	  echo "#define ASM_$(ARCHDIR)_ASM_OFFSETS_H"; \
- 	  echo ""; \
- 	  sed -rne "/^[^#].*==>/{s:.*==>(.*)<==.*:\1:; s: [\$$#]: :; p;}"; \
- 	  echo ""; \
-diff --git a/xen/scripts/Makefile.asm-generic b/xen/scripts/Makefile.asm-generic
-index b0d356bfa3..3b538bc7a4 100644
---- a/xen/scripts/Makefile.asm-generic
-+++ b/xen/scripts/Makefile.asm-generic
-@@ -31,8 +31,22 @@ generated-y := $(addprefix $(obj)/, $(generated-y))
- old-headers := $(wildcard $(obj)/*.h)
- unwanted    := $(filter-out $(generic-y) $(generated-y),$(old-headers))
- 
-+define header_stub
-+#ifndef ASM_GENERIC_$(3)_$(2)_H
-+#define ASM_GENERIC_$(3)_$(2)_H
-+
-+#include <asm-generic/$(1).h>
-+
-+#endif /* ASM_GENERIC_$(3)_$(2)_H */
+ quiet_cmd_xlat_h = GEN     $@
+-cmd_xlat_h = \
+-	cat $(filter %.h,$^) >$@.new; \
++define cmd_xlat_h
++	echo "#ifndef ASM_$(ARCHDIR)_COMPAT_XLAT_H" > $@.new; \
++	echo "#define ASM_$(ARCHDIR)_COMPAT_XLAT_H" >> $@.new; \
++	cat $(filter %.h,$^) >> $@.new; \
++	echo "#endif /* ASM_$(ARCHDIR)_COMPAT_XLAT_H */" >> $@.new; \
+ 	mv -f $@.new $@
 +endef
-+
-+arch = $(shell echo $(SRCARCH) | tr a-z A-Z)
-+
-+header_body = $(call header_stub,$*,$(shell echo "$*" | tr a-z A-Z),$(arch))
-+export header_body
-+
- quiet_cmd_wrap = WRAP    $@
--      cmd_wrap = echo "\#include <asm-generic/$*.h>" > $@
-+      cmd_wrap = echo "$$header_body" > $@
  
- quiet_cmd_remove = REMOVE  $(unwanted)
-       cmd_remove = rm -f $(unwanted)
+ $(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) FORCE
+ 	$(call if_changed,xlat_h)
 -- 
 2.34.1
 
