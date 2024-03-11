@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C992BC54E68
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 09:00:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691268.1077096 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA33DC5475B
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 09:00:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.691262.1077047 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW7-0008Db-1w; Mon, 11 Mar 2024 09:00:19 +0000
+	id 1rjbW2-00070S-Iu; Mon, 11 Mar 2024 09:00:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691268.1077096; Mon, 11 Mar 2024 09:00:18 +0000
+Received: by outflank-mailman (output) from mailman id 691262.1077047; Mon, 11 Mar 2024 09:00:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW6-0008Ad-Po; Mon, 11 Mar 2024 09:00:18 +0000
-Received: by outflank-mailman (input) for mailman id 691268;
- Mon, 11 Mar 2024 09:00:17 +0000
+	id 1rjbW2-0006zX-Cl; Mon, 11 Mar 2024 09:00:14 +0000
+Received: by outflank-mailman (input) for mailman id 691262;
+ Mon, 11 Mar 2024 09:00:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xWeI=KR=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rjbW4-0006j9-Q4
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 09:00:16 +0000
+ id 1rjbW1-0006j9-AA
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 09:00:13 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c6a8ece6-df85-11ee-a1ee-f123f15fe8a2;
- Mon, 11 Mar 2024 10:00:15 +0100 (CET)
+ id c45e3e27-df85-11ee-a1ee-f123f15fe8a2;
+ Mon, 11 Mar 2024 10:00:11 +0100 (CET)
 Received: from beta.station (net-93-144-106-196.cust.vodafonedsl.it
  [93.144.106.196])
- by support.bugseng.com (Postfix) with ESMTPSA id BECF04EE0CA0;
- Mon, 11 Mar 2024 10:00:14 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id B8C4D4EE0C96;
+ Mon, 11 Mar 2024 10:00:10 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,60 +42,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6a8ece6-df85-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: c45e3e27-df85-11ee-a1ee-f123f15fe8a2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
-Subject: [XEN PATCH v3 08/16] xen/efi: address violations of MISRA C:2012 Directive 4.10
-Date: Mon, 11 Mar 2024 09:59:17 +0100
-Message-Id: <f1d014e5013c65ed66dcaf91bd0f962c078451d9.1710145041.git.simone.ballarin@bugseng.com>
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [XEN PATCH v3 01/16] misra: add deviation for headers that explicitly avoid guards
+Date: Mon, 11 Mar 2024 09:59:10 +0100
+Message-Id: <310fe4a0ccd0ad45bcf1cd9811ac56c9a560dd0b.1710145041.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1710145041.git.simone.ballarin@bugseng.com>
 References: <cover.1710145041.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add inclusion guards to address violations of
-MISRA C:2012 Directive 4.10 ("Precautions shall be taken in order
-to prevent the contents of a header file being included more than
-once").
+Some headers, under specific circumstances (documented in a comment at
+the beginning of the file), explicitly avoid inclusion guards: the caller
+is responsible for including them correctly.
 
-Mechanical change.
+These files are not supposed to comply with Directive 4.10:
+"Precautions shall be taken in order to prevent the contents of a header
+file being included more than once"
+
+This patch adds deviation cooments for headers that avoid guards.
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
-Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
 
 ---
 Changes in v3:
-- remove trailing underscores
-- change inclusion guard name to adhere to the new standard
+- fix inconsistent deviation ID
+- change comment-based deviation text
 Changes in v2:
-- drop changes in C files
+- use the format introduced with doc/misra/safe.json instead of
+  a generic text-based deviation
 ---
- xen/common/efi/efi.h | 5 +++++
- 1 file changed, 5 insertions(+)
+ docs/misra/safe.json                        | 9 +++++++++
+ xen/include/public/arch-x86/cpufeatureset.h | 1 +
+ xen/include/public/errno.h                  | 1 +
+ 3 files changed, 11 insertions(+)
 
-diff --git a/xen/common/efi/efi.h b/xen/common/efi/efi.h
-index c02fbb7b69..ab604ebd59 100644
---- a/xen/common/efi/efi.h
-+++ b/xen/common/efi/efi.h
-@@ -1,3 +1,6 @@
-+#ifndef XEN_COMMON_EFI_EFI_H
-+#define XEN_COMMON_EFI_EFI_H
+diff --git a/docs/misra/safe.json b/docs/misra/safe.json
+index 952324f85c..e98956d604 100644
+--- a/docs/misra/safe.json
++++ b/docs/misra/safe.json
+@@ -28,6 +28,15 @@
+         },
+         {
+             "id": "SAF-3-safe",
++            "analyser": {
++                "eclair": "MC3R1.D4.10"
++            },
++            "name": "Dir 4.10: headers that leave it up to the caller to include them correctly",
++            "text": "Headers that deliberatively avoid inclusion guards explicitly leaving responsibility to the caller are allowed."
 +
- #include <asm/efibind.h>
- #include <efi/efidef.h>
- #include <efi/efierr.h>
-@@ -51,3 +54,5 @@ void free_ebmalloc_unused_mem(void);
++            },
++            {
++            "id": "SAF-4-safe",
+             "analyser": {},
+             "name": "Sentinel",
+             "text": "Next ID to be used"
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 0374cec3a2..f78a461d93 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -23,6 +23,7 @@
+  * their XEN_CPUFEATURE() being appropriate in the included context.
+  */
  
- const void *pe_find_section(const void *image, const UINTN image_size,
-                             const CHAR16 *section_name, UINTN *size_out);
-+
-+#endif /* XEN_COMMON_EFI_EFI_H */
++/* SAF-3-safe omitted inclusion guard */
+ #ifndef XEN_CPUFEATURE
+ 
+ /*
+diff --git a/xen/include/public/errno.h b/xen/include/public/errno.h
+index 5a78a7607c..28e064b67f 100644
+--- a/xen/include/public/errno.h
++++ b/xen/include/public/errno.h
+@@ -17,6 +17,7 @@
+  * will unilaterally #undef XEN_ERRNO().
+  */
+ 
++/* SAF-3-safe omitted inclusion guard */
+ #ifndef XEN_ERRNO
+ 
+ /*
 -- 
 2.34.1
 
