@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C17EAC5475B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0BE3C54E58
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 09:00:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691269.1077106 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.691270.1077124 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW7-0008LK-Sb; Mon, 11 Mar 2024 09:00:19 +0000
+	id 1rjbW9-0000KW-Vr; Mon, 11 Mar 2024 09:00:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691269.1077106; Mon, 11 Mar 2024 09:00:19 +0000
+Received: by outflank-mailman (output) from mailman id 691270.1077124; Mon, 11 Mar 2024 09:00:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW7-0008Ia-Gr; Mon, 11 Mar 2024 09:00:19 +0000
-Received: by outflank-mailman (input) for mailman id 691269;
- Mon, 11 Mar 2024 09:00:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rjbW9-0000Ek-7p; Mon, 11 Mar 2024 09:00:21 +0000
+Received: by outflank-mailman (input) for mailman id 691270;
+ Mon, 11 Mar 2024 09:00:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xWeI=KR=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rjbW5-0006j9-D7
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 09:00:17 +0000
+ id 1rjbW6-0006iu-1H
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 09:00:18 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c6fdbf60-df85-11ee-a1ee-f123f15fe8a2;
- Mon, 11 Mar 2024 10:00:15 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c7f9c963-df85-11ee-afdc-a90da7624cb6;
+ Mon, 11 Mar 2024 10:00:17 +0100 (CET)
 Received: from beta.station (net-93-144-106-196.cust.vodafonedsl.it
  [93.144.106.196])
- by support.bugseng.com (Postfix) with ESMTPSA id 2D0764EE0CA3;
- Mon, 11 Mar 2024 10:00:15 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id D11F94EE0C95;
+ Mon, 11 Mar 2024 10:00:16 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,133 +42,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6fdbf60-df85-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: c7f9c963-df85-11ee-afdc-a90da7624cb6
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
-	Simone Ballarin <simone.ballarin@bugseng.com>,
+	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>,
-	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
-Subject: [XEN PATCH v3 09/16] xen: address violations of MISRA C:2012 Directive 4.10
-Date: Mon, 11 Mar 2024 09:59:18 +0100
-Message-Id: <504cdd2a0f27d28e0a87492f75476b123b68bbc0.1710145041.git.simone.ballarin@bugseng.com>
+	Simone Ballarin <simone.ballarin@bugseng.com>
+Subject: [XEN PATCH v3 12/16] xen: address violations of MISRA C:2012 Directive 4.10
+Date: Mon, 11 Mar 2024 09:59:21 +0100
+Message-Id: <ab967347ae22d662c82962b1fdd6e6449bdd8c5e.1710145041.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1710145041.git.simone.ballarin@bugseng.com>
 References: <cover.1710145041.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Amend inclusion guards to address violations of
-MISRA C:2012 Directive 4.10 ("Precautions shall be taken in order
-to prevent the contents of a header file being included more than
-once").
+From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
 
-Inclusion guards must appear at the beginning of the headers
-(comments are permitted anywhere) and the #if directive cannot
-be used for other checks.
+Modify creation rule for asm-offsets.h to conform to
+the new standard and to not generate conflicting guards
+between architectures (which is a violation of the directive).
+Modify generic-y creation rule to generate code without violations
+and to conform to the new standard.
 
 Mechanical change.
+---
+Commit introduced in v3
 
-Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
 Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
-
+Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
 ---
-Changes in v3:
-- remove trailing underscores
-- change inclusion guard name to adhere to the new standard
-Changes in v2:
-- drop changes in xen/include/xen/unaligned.h since this second
-  series adds a comment-based deviation in a separate patch
-- use #ifndef instead of #if !defined()
----
- xen/include/xen/err.h     | 8 +++++---
- xen/include/xen/pci_ids.h | 5 +++++
- xen/include/xen/softirq.h | 8 +++++---
- xen/include/xen/vmap.h    | 8 +++++---
- 4 files changed, 20 insertions(+), 9 deletions(-)
+ xen/build.mk                     |  6 ++++--
+ xen/scripts/Makefile.asm-generic | 16 +++++++++++++++-
+ 2 files changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/xen/include/xen/err.h b/xen/include/xen/err.h
-index cbdd1bf7f8..360307c5da 100644
---- a/xen/include/xen/err.h
-+++ b/xen/include/xen/err.h
-@@ -1,5 +1,6 @@
--#if !defined(__XEN_ERR_H__) && !defined(__ASSEMBLY__)
--#define __XEN_ERR_H__
-+#ifndef XEN_INCLUDE_XEN_ERR_H
-+#define XEN_INCLUDE_XEN_ERR_H
-+#ifndef __ASSEMBLY__
+diff --git a/xen/build.mk b/xen/build.mk
+index 0f490ca71b..bd8b93e2ae 100644
+--- a/xen/build.mk
++++ b/xen/build.mk
+@@ -45,6 +45,8 @@ asm-offsets.s: arch/$(SRCARCH)/$(ARCH)/asm-offsets.c
+ 	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
+ 	$(call move-if-changed,$@.new,$@)
  
- #include <xen/compiler.h>
- #include <xen/errno.h>
-@@ -41,4 +42,5 @@ static inline int __must_check PTR_RET(const void *ptr)
- 	return IS_ERR(ptr) ? PTR_ERR(ptr) : 0;
- }
- 
--#endif /* __XEN_ERR_H__ */
-+#endif /* __ASSEMBLY__ */
-+#endif /* XEN_INCLUDE_XEN_ERR_H */
-diff --git a/xen/include/xen/pci_ids.h b/xen/include/xen/pci_ids.h
-index e798477a7e..8f2318bccd 100644
---- a/xen/include/xen/pci_ids.h
-+++ b/xen/include/xen/pci_ids.h
-@@ -1,3 +1,6 @@
-+#ifndef XEN_INCLUDE_XEN_PCI_IDS_H
-+#define XEN_INCLUDE_XEN_PCI_IDS_H
++ARCHDIR = $(shell echo $(SRCARCH) | tr a-z A-Z)
 +
- #define PCI_VENDOR_ID_AMD                0x1022
+ arch/$(SRCARCH)/include/asm/asm-offsets.h: asm-offsets.s
+ 	@(set -e; \
+ 	  echo "/*"; \
+@@ -54,8 +56,8 @@ arch/$(SRCARCH)/include/asm/asm-offsets.h: asm-offsets.s
+ 	  echo " *"; \
+ 	  echo " */"; \
+ 	  echo ""; \
+-	  echo "#ifndef __ASM_OFFSETS_H__"; \
+-	  echo "#define __ASM_OFFSETS_H__"; \
++	  echo "#ifndef ASM_$(ARCHDIR)_ASM_OFFSETS_H"; \
++	  echo "#define ASM_$(ARCHDIR)_ASM_OFFSETS_H"; \
+ 	  echo ""; \
+ 	  sed -rne "/^[^#].*==>/{s:.*==>(.*)<==.*:\1:; s: [\$$#]: :; p;}"; \
+ 	  echo ""; \
+diff --git a/xen/scripts/Makefile.asm-generic b/xen/scripts/Makefile.asm-generic
+index b0d356bfa3..3b538bc7a4 100644
+--- a/xen/scripts/Makefile.asm-generic
++++ b/xen/scripts/Makefile.asm-generic
+@@ -31,8 +31,22 @@ generated-y := $(addprefix $(obj)/, $(generated-y))
+ old-headers := $(wildcard $(obj)/*.h)
+ unwanted    := $(filter-out $(generic-y) $(generated-y),$(old-headers))
  
- #define PCI_VENDOR_ID_NVIDIA             0x10de
-@@ -11,3 +14,5 @@
- #define PCI_VENDOR_ID_BROADCOM           0x14e4
- 
- #define PCI_VENDOR_ID_INTEL              0x8086
++define header_stub
++#ifndef ASM_GENERIC_$(3)_$(2)_H
++#define ASM_GENERIC_$(3)_$(2)_H
 +
-+#endif /* XEN_INCLUDE_XEN_PCI_IDS_H */
-diff --git a/xen/include/xen/softirq.h b/xen/include/xen/softirq.h
-index 33d6f2ecd2..d108cdd4bc 100644
---- a/xen/include/xen/softirq.h
-+++ b/xen/include/xen/softirq.h
-@@ -1,5 +1,6 @@
--#if !defined(__XEN_SOFTIRQ_H__) && !defined(__ASSEMBLY__)
--#define __XEN_SOFTIRQ_H__
-+#ifndef XEN_INCLUDE_XEN_SOFTIRQ_H
-+#define XEN_INCLUDE_XEN_SOFTIRQ_H
-+#ifndef __ASSEMBLY__
++#include <asm-generic/$(1).h>
++
++#endif /* ASM_GENERIC_$(3)_$(2)_H */
++endef
++
++arch = $(shell echo $(SRCARCH) | tr a-z A-Z)
++
++header_body = $(call header_stub,$*,$(shell echo "$*" | tr a-z A-Z),$(arch))
++export header_body
++
+ quiet_cmd_wrap = WRAP    $@
+-      cmd_wrap = echo "\#include <asm-generic/$*.h>" > $@
++      cmd_wrap = echo "$$header_body" > $@
  
- /* Low-latency softirqs come first in the following list. */
- enum {
-@@ -40,4 +41,5 @@ void cpu_raise_softirq_batch_finish(void);
-  */
- void process_pending_softirqs(void);
- 
--#endif /* __XEN_SOFTIRQ_H__ */
-+#endif /* __ASSEMBLY__ */
-+#endif /* XEN_INCLUDE_XEN_SOFTIRQ_H */
-diff --git a/xen/include/xen/vmap.h b/xen/include/xen/vmap.h
-index 0c16baa85f..bb83f5f64a 100644
---- a/xen/include/xen/vmap.h
-+++ b/xen/include/xen/vmap.h
-@@ -1,5 +1,6 @@
--#if !defined(__XEN_VMAP_H__) && defined(VMAP_VIRT_START)
--#define __XEN_VMAP_H__
-+#ifndef XEN_INCLUDE_XEN_VMAP_H
-+#define XEN_INCLUDE_XEN_VMAP_H
-+#ifdef VMAP_VIRT_START
- 
- #include <xen/mm-frame.h>
- #include <xen/page-size.h>
-@@ -42,4 +43,5 @@ static inline void vm_init(void)
-     vm_init_type(VMAP_DEFAULT, (void *)VMAP_VIRT_START, arch_vmap_virt_end());
- }
- 
--#endif /* __XEN_VMAP_H__ */
-+#endif /* VMAP_VIRT_START */
-+#endif /* XEN_INCLUDE_XEN_VMAP_H */
+ quiet_cmd_remove = REMOVE  $(unwanted)
+       cmd_remove = rm -f $(unwanted)
 -- 
 2.34.1
 
