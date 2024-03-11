@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3BB3C54E69
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 09:00:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691266.1077082 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10534C54E66
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 09:00:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.691272.1077133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW5-0007j6-8j; Mon, 11 Mar 2024 09:00:17 +0000
+	id 1rjbWB-0000er-6q; Mon, 11 Mar 2024 09:00:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691266.1077082; Mon, 11 Mar 2024 09:00:17 +0000
+Received: by outflank-mailman (output) from mailman id 691272.1077133; Mon, 11 Mar 2024 09:00:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjbW4-0007hC-Pw; Mon, 11 Mar 2024 09:00:16 +0000
-Received: by outflank-mailman (input) for mailman id 691266;
- Mon, 11 Mar 2024 09:00:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rjbWA-0000aS-JB; Mon, 11 Mar 2024 09:00:22 +0000
+Received: by outflank-mailman (input) for mailman id 691272;
+ Mon, 11 Mar 2024 09:00:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xWeI=KR=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1rjbW3-0006j9-QO
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 09:00:15 +0000
+ id 1rjbW6-0006iu-Pw
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 09:00:18 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c616516b-df85-11ee-a1ee-f123f15fe8a2;
- Mon, 11 Mar 2024 10:00:14 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c85b0784-df85-11ee-afdc-a90da7624cb6;
+ Mon, 11 Mar 2024 10:00:18 +0100 (CET)
 Received: from beta.station (net-93-144-106-196.cust.vodafonedsl.it
  [93.144.106.196])
- by support.bugseng.com (Postfix) with ESMTPSA id AC1DE4EE0C9F;
- Mon, 11 Mar 2024 10:00:13 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 65B984EE0C9E;
+ Mon, 11 Mar 2024 10:00:17 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,87 +42,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c616516b-df85-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: c85b0784-df85-11ee-afdc-a90da7624cb6
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	sstabellini@kernel.org,
+	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	Wei Liu <wl@xen.org>,
-	Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
-Subject: [XEN PATCH v3 06/16] x86/EFI: address violations of MISRA C:2012 Directive 4.10
-Date: Mon, 11 Mar 2024 09:59:15 +0100
-Message-Id: <d12db1f6cca220ed83f7d7502dfca4bdc4127786.1710145041.git.simone.ballarin@bugseng.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [XEN PATCH v3 13/16] xen: add deviations for MISRA C.2012 Directive 4.10
+Date: Mon, 11 Mar 2024 09:59:22 +0100
+Message-Id: <787aa5a65135796c825d366b43e00ba018c0065b.1710145041.git.simone.ballarin@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1710145041.git.simone.ballarin@bugseng.com>
 References: <cover.1710145041.git.simone.ballarin@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add inclusion guard to address violations of
-MISRA C:2012 Directive 4.10 ("Precautions shall be taken in order
-to prevent the contents of a header file being included more than
-once").
+From: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
 
-Mechanical change.
+Add safe deviation for *.c files, as estabilished in past discussion.
+Add SAF deviation for files that need an #include directive before guard.
 
-Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
-Signed-off-by: Maria Celeste Cesario <maria.celeste.cesario@bugseng.com>
-
+Signed-off-by: Maria Celeste Cesario  <maria.celeste.cesario@bugseng.com>
+Signed-off-by: Simone Ballarin  <simone.ballarin@bugseng.com>
 ---
-Changes in v3:
-- remove trailing underscores
-- change inclusion guard name to adhere to the new standard
----
- xen/arch/x86/efi/efi-boot.h | 7 +++++++
- xen/arch/x86/efi/runtime.h  | 5 +++++
- 2 files changed, 12 insertions(+)
+Commit introduced in v3
 
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index 8ea64e31cd..df6eaa9e9e 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -3,6 +3,11 @@
-  * is intended to be included by common/efi/boot.c _only_, and
-  * therefore can define arch specific global variables.
-  */
-+
-+#ifndef XEN_ARCH_X86_EFI_EFI_BOOT_H
-+#define XEN_ARCH_X86_EFI_EFI_BOOT_H
-+
-+
- #include <xen/vga.h>
- #include <asm/e820.h>
- #include <asm/edd.h>
-@@ -905,6 +910,8 @@ void asmlinkage __init efi_multiboot2(EFI_HANDLE ImageHandle,
-     efi_exit_boot(ImageHandle, SystemTable);
- }
+Link to the discussion thread:
+https://lists.xenproject.org/archives/html/xen-devel/2023-09/msg00239.html
+---
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 5 +++++
+ docs/misra/deviations.rst                        | 7 +++++++
+ docs/misra/safe.json                             | 8 ++++++++
+ xen/include/public/arch-x86/xen.h                | 1 +
+ 4 files changed, 21 insertions(+)
+
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index 039ffaf52a..8082239ccc 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -69,6 +69,11 @@ conform to the directive."
+ -config=MC3R1.D4.10,reports+={safe, "first_area(text(^/\\* Generated file, do not edit! \\*/$, begin-3))"}
+ -doc_end
  
-+#endif /* XEN_ARCH_X86_EFI_EFI_BOOT_H */
++-doc_begin="Including multiple times a .c file is safe because every function or data item
++it defines would (in the common case) be already defined. Peer reviewed by the community."
++-config=MC3R1.D4.10,reports+={safe, "all_area(all_loc(^.*\\.c$))"}
++-doc_end
 +
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/efi/runtime.h b/xen/arch/x86/efi/runtime.h
-index 77866c5f21..13d4ba66b6 100644
---- a/xen/arch/x86/efi/runtime.h
-+++ b/xen/arch/x86/efi/runtime.h
-@@ -1,3 +1,6 @@
-+#ifndef XEN_ARCH_X86_EFI_RUNTIME_H
-+#define XEN_ARCH_X86_EFI_RUNTIME_H
+ #
+ # Series 5.
+ #
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+index ce855ddae6..7b32dbd23f 100644
+--- a/docs/misra/deviations.rst
++++ b/docs/misra/deviations.rst
+@@ -30,6 +30,13 @@ Deviations related to MISRA C:2012 Directives:
+        not to add an additional encapsulation layer.
+      - Tagged as `deliberate` for ECLAIR.
+ 
++   * - D4.10
++     - Including multiple times a .c file is safe because every function or data item
++       it defines would in (the common case) be already defined.
++       Peer reviewed by the community.
++     - Tagged as `safe` for ECLAIR.
 +
- #include <xen/domain_page.h>
- #include <xen/mm.h>
- #include <asm/atomic.h>
-@@ -17,3 +20,5 @@ void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t l4e)
-     }
- }
- #endif
 +
-+#endif /* XEN_ARCH_X86_EFI_RUNTIME_H */
+ Deviations related to MISRA C:2012 Rules:
+ -----------------------------------------
+ 
+diff --git a/docs/misra/safe.json b/docs/misra/safe.json
+index 13208d18ec..dd61b47194 100644
+--- a/docs/misra/safe.json
++++ b/docs/misra/safe.json
+@@ -60,6 +60,14 @@
+         },
+         {
+             "id": "SAF-7-safe",
++            "analyser": {
++                "eclair": "MC3R1.D4.10"
++            },
++            "name": "Dir 4.10: include needed before guard",
++            "text": "These files need to start with an include directive to generate preprocessed code in the correct order."
++        },
++        {
++            "id": "SAF-8-safe",
+             "analyser": {},
+             "name": "Sentinel",
+             "text": "Next ID to be used"
+diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
+index c0f4551247..0b2e9271f8 100644
+--- a/xen/include/public/arch-x86/xen.h
++++ b/xen/include/public/arch-x86/xen.h
+@@ -7,6 +7,7 @@
+  * Copyright (c) 2004-2006, K A Fraser
+  */
+ 
++/* SAF-7-safe include before guard needed for correct code generation */
+ #include "../xen.h"
+ 
+ #ifndef __XEN_PUBLIC_ARCH_X86_XEN_H__
 -- 
 2.34.1
 
