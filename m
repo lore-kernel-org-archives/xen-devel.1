@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D26C54E60
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A740C54E67
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 12:40:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691471.1077476 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.691468.1077445 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjex9-0001wy-4p; Mon, 11 Mar 2024 12:40:27 +0000
+	id 1rjex2-0001De-AL; Mon, 11 Mar 2024 12:40:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691471.1077476; Mon, 11 Mar 2024 12:40:27 +0000
+Received: by outflank-mailman (output) from mailman id 691468.1077445; Mon, 11 Mar 2024 12:40:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjex9-0001wo-1O; Mon, 11 Mar 2024 12:40:27 +0000
-Received: by outflank-mailman (input) for mailman id 691471;
- Mon, 11 Mar 2024 12:40:26 +0000
+	id 1rjex2-0001DX-6z; Mon, 11 Mar 2024 12:40:20 +0000
+Received: by outflank-mailman (input) for mailman id 691468;
+ Mon, 11 Mar 2024 12:40:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tAYR=KR=bounce.vates.tech=bounce-md_30504962.65eefbb7.v1-6e106d0a939c4ed98993494d8a9ebb63@srs-se1.protection.inumbo.net>)
- id 1rjex7-0001DQ-Vd
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 12:40:25 +0000
-Received: from mail133-16.atl131.mandrillapp.com
- (mail133-16.atl131.mandrillapp.com [198.2.133.16])
+ <SRS0=Ncu5=KR=bounce.vates.tech=bounce-md_30504962.65eefbad.v1-0d202f572a42476ba738db1285fab61f@srs-se1.protection.inumbo.net>)
+ id 1rjex0-0001DQ-Du
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 12:40:18 +0000
+Received: from mail137-23.atl71.mandrillapp.com
+ (mail137-23.atl71.mandrillapp.com [198.2.137.23])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 876d2021-dfa4-11ee-a1ee-f123f15fe8a2;
- Mon, 11 Mar 2024 13:40:24 +0100 (CET)
-Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail133-16.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4Ttbw71sPJzB5p4sx
- for <xen-devel@lists.xenproject.org>; Mon, 11 Mar 2024 12:40:23 +0000 (GMT)
+ id 8247e937-dfa4-11ee-a1ee-f123f15fe8a2;
+ Mon, 11 Mar 2024 13:40:15 +0100 (CET)
+Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail137-23.atl71.mandrillapp.com (Mailchimp) with ESMTP id
+ 4Ttbvx4Gbzz1XLHZS
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Mar 2024 12:40:13 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 6e106d0a939c4ed98993494d8a9ebb63; Mon, 11 Mar 2024 12:40:23 +0000
+ 0d202f572a42476ba738db1285fab61f; Mon, 11 Mar 2024 12:40:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,80 +45,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 876d2021-dfa4-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 8247e937-dfa4-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1710160823; x=1710421323;
-	bh=ObAF48AeNm2DpnzGP89I41fPkikpyHP3PqijIW+HbJw=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=zsEQ87j2Raj6duvyqT7L88rKgjns1yT66T5Hhk6ds9gfjeC/frAIalQhnQh5rlv+X
-	 i5UCKxzQRUxwxnNdrPtFK5qtDloWh4/oJDeuIZoY8vigq83FpZKThPi6Sv29af0Oll
-	 BEPiLFN/T1ffPpsJsHnxKlo6MbhOcINQ61P1tX1haXN3aedowv0O0UZ5EAPvxDPLEA
-	 okdAcl3hh7UZQT0dmnKzQ93rkMuri1AXFC7pfwSm5k4ZLsND2K+uwfWwBBiUXV1W72
-	 EC4Sol5PvLTYboAjI7zRIOOTTC/RrDN/VEkVwaO2ziZFCRYDQnLFS43NmNKJNM5bpS
-	 zS6NaQHXVdtmQ==
+	s=mte1; t=1710160813; x=1710421313;
+	bh=hIyJ/wVgm7EM796HLFHzmm1TJtjO8KPO/CkfRPlI9cc=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=rUvnEDs4joSaTUHjhf33Bl2CJa2m5Me/SxoJhoJgJyheLxVops/7MoLtxLRuvt0jV
+	 eo8F21LPR3yEabvNvvxPVwzB4yx1lccn1PQPtV20ITOWZZ/cI3h6QGctu1ROwuHPz+
+	 x8DZ3kXd5yYayRm3ZDbcg4uco3PYhjsz0x972hqT8FZWLB6ajLKmdkSrC/mE2RmZAA
+	 jCsQNDlRDMGLw3sW5kL+S29pO33II2X2HhtoaGx1ROIuqsn4zcc0znw2Qu3yYDtoAR
+	 PYz6qVpbDpD+UJxJzLPekiFaSvPVCygGAZLJJbc0sCu5hnHLSLexRO9mj/ni2BxJHl
+	 QMVOowBaibSZA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1710160823; x=1710421323; i=vaishali.thakkar@vates.tech;
-	bh=ObAF48AeNm2DpnzGP89I41fPkikpyHP3PqijIW+HbJw=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=d3BTdvb9m6Ine2ZVIvNrtZIi7F/LCubi9egWqs2/GZFiVT8W7bjDaf/ZVwIon7qS+
-	 us/WtsDn3HJIgWsA2Rn0owd/rhjM/NIiq0a9sH23IE0D7NV8xtGqqhBZsssCU5/O4J
-	 cBAWL0sS+ASyTC6Juh/HQBl1X6I1rlHHDSOpvNPzEYLKXdJ9XoMm8rfECUIVZNd8pi
-	 Q9KTrUR34NQlnFPiql/Wxhcj8Onvlf80jlAmi9v0fIKWObJqsIn1WQdih6cHbITKFk
-	 YalhZNZmP9HJcIARXNW+l0p7+o8voBa2WHZTcz27dUBzc0ca78WVYZGN4Lri5bzCnd
-	 DSO6hAoOr1HRg==
+	t=1710160813; x=1710421313; i=vaishali.thakkar@vates.tech;
+	bh=hIyJ/wVgm7EM796HLFHzmm1TJtjO8KPO/CkfRPlI9cc=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=TQ2tzfAzGtI/UYIDPJoKKZe057H44t07FxBkSpBGMKx+rd9n8rk5dw4nDSQF0FSd1
+	 OOCDx2cMOBNflpcG+nKPMicJB8LZhIagbwtivE8L8Mp3SAu/gNmR/H8v3wDpA98cSO
+	 +9HNoBt9tQf2AC9XhcPLTQBpYF9803Y6EwJV/pvkcZ5AAEQEz6hFFP1APoeOKzxaiU
+	 scFd2Hx+/DZUA6fYxizssye0y05rXlgdAyFZkKZnCCi8NxLwpoq6Ek6pIplRy20qfN
+	 +kUnY5z+o+QZNhYchkNXjXxLplAaINAy3ZcYhO5PdZD/RgJfCYBc4a9DF3RGPvqJte
+	 9YnmuDuGAnrdA==
 From: Vaishali Thakkar <vaishali.thakkar@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v2=203/3]=20x86/svmdebug:=20Print=20sev=20and=20sev=5Fes=20vmcb=20bits?=
+Subject: =?utf-8?Q?[PATCH=20v2=200/3]=20x86/svm=20:=20Misc=20changes=20for=20few=20vmcb=20bits?=
 X-Mailer: git-send-email 2.44.0
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1710160820928
+X-Bm-Transport-Timestamp: 1710160812371
 To: xen-devel@lists.xenproject.org
 Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com, wl@xen.org, Vaishali Thakkar <vaishali.thakkar@vates.tech>
-Message-Id: <0e688a18a97e495352e2b08cb7634abbc238da1b.1710149462.git.vaishali.thakkar@vates.tech>
-In-Reply-To: <cover.1710149462.git.vaishali.thakkar@vates.tech>
-References: <cover.1710149462.git.vaishali.thakkar@vates.tech>
+Message-Id: <cover.1710149462.git.vaishali.thakkar@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.6e106d0a939c4ed98993494d8a9ebb63?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.0d202f572a42476ba738db1285fab61f?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20240311:md
-Date: Mon, 11 Mar 2024 12:40:23 +0000
+Date: Mon, 11 Mar 2024 12:40:13 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-While sev and sev_es bits are not yet enabled in xen,
-including their status in the VMCB dump could be
-informational.Therefore, print it via svmdebug.
+Hi,
 
-Signed-off-by: Vaishali Thakkar <vaishali.thakkar@vates.tech>
----
+In this patchset, first & second patch removes the unnecessary 
+suffix from a bunch of vmcb bits. Third patch is about printing
+the status of sev and sev-es bits while dumping VMCB.
+
 Changes since v1:
-        - Pretty printing
----
- xen/arch/x86/hvm/svm/svmdebug.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+  - Address comments from Andrew and Jan
+  - Add extrapatch to drop the suffix _guest as per Andrew's
+    suggestion in one of the reviews
+  - Address Andrew's comment with respect to pretty printing
 
-diff --git a/xen/arch/x86/hvm/svm/svmdebug.c b/xen/arch/x86/hvm/svm/svmdebug.c
-index 0d714c728c..ba5fa40071 100644
---- a/xen/arch/x86/hvm/svm/svmdebug.c
-+++ b/xen/arch/x86/hvm/svm/svmdebug.c
-@@ -51,8 +51,11 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
-            vmcb->exitcode, vmcb->exit_int_info.raw);
-     printk("exitinfo1 = %#"PRIx64" exitinfo2 = %#"PRIx64"\n",
-            vmcb->exitinfo1, vmcb->exitinfo2);
--    printk("np_ctrl = %#"PRIx64" asid = %#x\n",
--           vmcb_get_np_ctrl(vmcb), vmcb_get_asid(vmcb));
-+    printk("asid = %#x np_ctrl = %#"PRIx64" - %s%s%s\n",
-+           vmcb_get_asid(vmcb), vmcb_get_np_ctrl(vmcb),
-+           vmcb_get_np(vmcb)     ? "NP"     : "",
-+           vmcb_get_sev(vmcb)    ? "SEV"    : "",
-+           vmcb_get_sev_es(vmcb) ? "SEV_ES" : "");
-     printk("virtual vmload/vmsave = %d, virt_ext = %#"PRIx64"\n",
-            vmcb->virt_ext.fields.vloadsave_enable, vmcb->virt_ext.bytes);
-     printk("cpl = %d efer = %#"PRIx64" star = %#"PRIx64" lstar = %#"PRIx64"\n",
+Vaishali Thakkar (3):
+  x86/svm: Drop the _enabled suffix from vmcb bits
+  x86/svm: Drop the suffix _guest from vmcb bit
+  x86/svmdebug: Print sev and sev_es vmcb bits
+
+ xen/arch/x86/hvm/svm/asid.c                  |  6 ++---
+ xen/arch/x86/hvm/svm/nestedsvm.c             | 22 +++++++++---------
+ xen/arch/x86/hvm/svm/svm.c                   |  2 +-
+ xen/arch/x86/hvm/svm/svmdebug.c              |  7 ++++--
+ xen/arch/x86/hvm/svm/vmcb.c                  |  2 +-
+ xen/arch/x86/include/asm/hvm/svm/nestedsvm.h |  2 +-
+ xen/arch/x86/include/asm/hvm/svm/vmcb.h      | 24 ++++++++++----------
+ 7 files changed, 34 insertions(+), 31 deletions(-)
+
 -- 
 2.44.0
 
