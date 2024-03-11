@@ -4,40 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC93C54E58
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 12:12:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691462.1077436 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0D0C5475B
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Mar 2024 12:40:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.691470.1077463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjeWD-0004rS-6W; Mon, 11 Mar 2024 12:12:37 +0000
+	id 1rjex5-0001Ye-Vm; Mon, 11 Mar 2024 12:40:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691462.1077436; Mon, 11 Mar 2024 12:12:37 +0000
+Received: by outflank-mailman (output) from mailman id 691470.1077463; Mon, 11 Mar 2024 12:40:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rjeWD-0004rL-3v; Mon, 11 Mar 2024 12:12:37 +0000
-Received: by outflank-mailman (input) for mailman id 691462;
- Mon, 11 Mar 2024 12:12:36 +0000
+	id 1rjex5-0001XA-Pa; Mon, 11 Mar 2024 12:40:23 +0000
+Received: by outflank-mailman (input) for mailman id 691470;
+ Mon, 11 Mar 2024 12:40:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tNCb=KR=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1rjeWC-0004rD-7L
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 12:12:36 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [2a01:111:f403:2412::600])
+ <SRS0=vXtE=KR=bounce.vates.tech=bounce-md_30504962.65eefbb4.v1-ba8489844df646b8be3e19510b24de5f@srs-se1.protection.inumbo.net>)
+ id 1rjex4-0001Rf-IE
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2024 12:40:22 +0000
+Received: from mail137-23.atl71.mandrillapp.com
+ (mail137-23.atl71.mandrillapp.com [198.2.137.23])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a3e60ad2-dfa0-11ee-afdc-a90da7624cb6;
- Mon, 11 Mar 2024 13:12:35 +0100 (CET)
-Received: from PH8PR12MB7326.namprd12.prod.outlook.com (2603:10b6:510:216::7)
- by SJ2PR12MB8830.namprd12.prod.outlook.com (2603:10b6:a03:4d0::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.34; Mon, 11 Mar
- 2024 12:12:30 +0000
-Received: from PH8PR12MB7326.namprd12.prod.outlook.com
- ([fe80::32a0:32b6:d5af:9ad0]) by PH8PR12MB7326.namprd12.prod.outlook.com
- ([fe80::32a0:32b6:d5af:9ad0%5]) with mapi id 15.20.7362.035; Mon, 11 Mar 2024
- 12:12:30 +0000
+ id 85ae7c8b-dfa4-11ee-afdc-a90da7624cb6;
+ Mon, 11 Mar 2024 13:40:21 +0100 (CET)
+Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail137-23.atl71.mandrillapp.com (Mailchimp) with ESMTP id
+ 4Ttbw42Nt0z1XLHZT
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Mar 2024 12:40:20 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ ba8489844df646b8be3e19510b24de5f; Mon, 11 Mar 2024 12:40:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,168 +45,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a3e60ad2-dfa0-11ee-afdc-a90da7624cb6
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FXP74RcxFOYoZ5WsbxL1BFHjDdD+rxQYaYqwVevU2A3NFoOJ1kJWmSQA7YTFOKUWGjRH7cRYwDCQlkEzPaKUF4mZswy23MBcw1JI0WBiTQsnG1KX73/Nal6lY0iHuSgnd5pY0OdGbWRA3TC16wcdFn9TBbabkAfBK1O5ycJN6XHwFWn7kQZ64P/I7aLUwBb8q31aiZFAn9QA4esXr8vzvy04H//0Ttkqae4cPMZqrGA1SrrMO8Gk1BIHxyoLiG3ucDP68zKXVV2g8eVU+H//+O1yi1LFH75rIXhx5ChR0zufZbCq8MZlY+Ap+LslO7Lxl7a65FPPiT4PlhSuYnh51A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7elGRJ+5uZHqWxZOechfI8xXAJnZFubshb8angl6ins=;
- b=lfwOX9+vjuea2dQ0uEUo4wXcfBS6jdhOTxJhdZ7p6F4GLyCs9QGZWb3leIeeM/Qfs9cV4IksKUPLHALUbXfQ/SIril7dqGI96vb1p1qWvgRmkQCJSOBkWGkvkXeD+g0SAsq8jWPWK/2uGuz3vymnPuNKFh32y1EaWWQYorgFU64yS2icdlaUMW5Hoyu36wOEBUnQDUEaaVV9h/abHHBF79+OLdJVln1n2Lg3AcUUCNP7AdpBqYStkdUUD2GwOf826VNugNJgqTdT+5ZWu5ncJbCQywUzvqSXkj4KAdfbu7VUFF2YMX5q7edXHFDi9emj06uaux8CWQZUfeHf+i5oQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7elGRJ+5uZHqWxZOechfI8xXAJnZFubshb8angl6ins=;
- b=KrrysTpowxWnF9pUAfbry/GRCUBTumpD6FMokSoqfHYXWOTlvW8nXPvcnRZV31pM7TjdzV+35gZtL7RAAx+Fv9eqvKHW2HieNclRqhTn5CLAbMhPy0YnrcUVyxioWWsAppUbvJ69Iq8nkRZBjKl3rHTTr+c6Wk08DfWUkzGA+QM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <bca6fc44-af57-4b64-9b97-7193e6b1b5e1@amd.com>
-Date: Mon, 11 Mar 2024 12:12:24 +0000
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 13/15] xen/arm: make consider_modules() available for
- xen relocation
-To: Henry Wang <xin.wang2@amd.com>, Julien Grall <julien@xen.org>,
- Ayan Kumar Halder <ayan.kumar.halder@amd.com>, xen-devel@lists.xenproject.org
-Cc: andrea.bastoni@minervasys.tech,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Carlo Nonato <carlo.nonato@minervasys.tech>
-References: <20240129171811.21382-1-carlo.nonato@minervasys.tech>
- <20240129171811.21382-14-carlo.nonato@minervasys.tech>
- <1439263a-c96d-48bb-bd3c-1427071ecd17@xen.org>
- <8df22d81-ce3d-4a90-8aa9-34ec66d237c6@amd.com>
-Content-Language: en-GB
-From: Ayan Kumar Halder <ayankuma@amd.com>
-In-Reply-To: <8df22d81-ce3d-4a90-8aa9-34ec66d237c6@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0162.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:188::23) To PH8PR12MB7326.namprd12.prod.outlook.com
- (2603:10b6:510:216::7)
+X-Inumbo-ID: 85ae7c8b-dfa4-11ee-afdc-a90da7624cb6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1710160820; x=1710421320;
+	bh=Cxgq3bbdihMzzz0i/yJ6y0gLddK7ZJN9AgjAgXDglbY=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=ewq9IwVliO7fJjXd7JSJPnb4ywN9wTTx2jye8wjZNGU0eoCTC0aZQzrrRQjsWBXdA
+	 Wy8yh/dqthYroV9uSuGuv+/sVKrAQRVugZro7WVwTfcM8K4O/X+435G/YNRMN3KmR1
+	 nQp2ztlYJh8Qoko8XcoiS3IAY0h39RmQQ9e7wL3rWSDfiHdHM6RQQCwmhASXV7aKCq
+	 1YwAXPXqyzoaEujfsDTzpRK+YHtmK0GaC+1M2nMWLYTZxy6BOwTrx362mRc7K1QdK1
+	 aDy/0SGoYEIwlm4kojcR8ls8GJsLp08j6QwEyVwTciAMEZWV0cREO7o5dDbrHGppgx
+	 MRFt4bIDwMXtw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1710160820; x=1710421320; i=vaishali.thakkar@vates.tech;
+	bh=Cxgq3bbdihMzzz0i/yJ6y0gLddK7ZJN9AgjAgXDglbY=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=EPJLYuhCeQWHHb/RwHi5+jxffaZLJco29SZ99Rxu7aiAGdwhTJMIgn2ajhSBId+ru
+	 rDfYOkvohrFAauPB5AAdF7Kz9qYtx9X5e5u5//iC6ccKKce+wKoWvfWxRL+nMNhW+s
+	 1a6SGNT7etd171Jtp78QiTNVFUFSJL5kKz8bc7sefqfBIaOjeZaipZDg7Dp6j0xEA9
+	 OtMcqhtHxTwkdLKFsxzgfgGZNU7t6jGqvkeAiIP6/w/OsXXU21zVsDi/YL7Jvignwt
+	 PIWS0TWdih6eDTfp1FD34bKCGF8I2oh93wpt5mmbeNTCXs5GJhpDY85BU52kOnPWva
+	 ku0dA3aX9OuoA==
+From: Vaishali Thakkar <vaishali.thakkar@vates.tech>
+Subject: =?utf-8?Q?[PATCH=20v2=202/3]=20x86/svm:=20Drop=20the=20suffix=20=5Fguest=20from=20vmcb=20bit?=
+X-Mailer: git-send-email 2.44.0
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1710160819329
+To: xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com, wl@xen.org, Vaishali Thakkar <vaishali.thakkar@vates.tech>
+Message-Id: <b0e5dde517599e8af5aadbaff7dd4410e83fcf86.1710149462.git.vaishali.thakkar@vates.tech>
+In-Reply-To: <cover.1710149462.git.vaishali.thakkar@vates.tech>
+References: <cover.1710149462.git.vaishali.thakkar@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.ba8489844df646b8be3e19510b24de5f?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20240311:md
+Date: Mon, 11 Mar 2024 12:40:20 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH8PR12MB7326:EE_|SJ2PR12MB8830:EE_
-X-MS-Office365-Filtering-Correlation-Id: 50c4f2ac-17a7-4ef4-c190-08dc41c4861d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	ZT3vLFTdzseovab42DdYh4je8BJ2l079b4LROtYU98je8c7etuMLmphzH9AuppiAoNuAfJqXPJ3MIk0duaL7kCr2XQ7axBig6FjjeyXZc4r49h/YR6a8OnjafBGarRG6CN+PedNVbh3qXzozWjPNxyw42fNtZuhfIfHwL+mL3pljMtlk575jZv16Q9eqw32OSyhDzbe0D+eFObnFILHCOsRtSWj9rhBBzM9c9pfadCLt5ws9x4IuuZUWRxCtrjBU2ifs+XlRk8L6IA8y5fKNiQnjAwKpn4Wy9BurkLVsYDzKClE23LyaFHo/wmasWEPNH2YjXQe0EPzFJ4NPXJ7VnEK/xu3IN0rNTj71St5tVR4XtASsVu2wujspwbWqWbG7z4YS1WKtffblLrYJGId7atRincmnRia4mtP4bnTigKsbMMWAy6FUMeYDnueBT0Du3X+5/USYULPsw1IHwOds3P5tdFYVbW0JmwuR6R154ELG8kiT3y5wFvKg/Snr8OMRsa6UoZflENx92n7H9albtK4dz8uZUnSuoIxJxNDCGhyPqeND6f2vWiSFyA1REDG/hnaVVAVrVCcqVpk57zsWDGbGu2ROSPhX86bYOJhTiscU2J+cKyFAdr49LFjf7xguL4zGf2Tg9dd027oGwsAGHY1ipJ78BZtbF6BgIfSOxjo=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH8PR12MB7326.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(376005);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NEZjUTRRa1pLb0VlOXRMYTFNZ0pJNDUzNXpsS0FzNnNkSzJUMGtQdVNyNzZL?=
- =?utf-8?B?WFdNQVJmc2t6R2FERjVZNWtJU21zUk5nL09WenorWFJvSDlNb2ZkTVdBLzN2?=
- =?utf-8?B?OFZmeEdYVk9pUERxZStCVFFadGM2Vi9RZXBQeTc3RnJYdjZMc2NLYXFLSElK?=
- =?utf-8?B?bDBTdmxlL1VsK3owQlMrYUswdmgyTjRVVElFa3lqUmhEODM2WXZSaTRlZFRk?=
- =?utf-8?B?eVZDMWJmSDBkOENqUFk3OFFqYWsyb3RIUkQ0d3lHek5ZYkNVSHk2b2Z3UUNl?=
- =?utf-8?B?NjVkdzZ4UHZremRrTGFuR292anZRS2dRYnI5WHI4UkMza2licGIxQk9aTlAr?=
- =?utf-8?B?LzNsdU04ZG5Gdk5RblhUdmloMys0KzRsbTZ6eHF2Sk0xNGpLVlN4RGF2aXRC?=
- =?utf-8?B?T0R2VXhlTG9VZnpQaUlvK0YvYk5kMFovcUZqTUxFVDNnSGdWdTRGdWxXc2Jr?=
- =?utf-8?B?bk91aFVocGlzajVKdlNtc01lWmdJZEdUTmd4SkZueFkyWTVndWdoSkUxaFo2?=
- =?utf-8?B?djdsOXpZMUZ0ZkJEc05nNGpza0x4K1JhdUg5M1RFTUVDUGZCNDNtVXBYME9j?=
- =?utf-8?B?Nzh0SVFrYkdneFQ2YmV3dzV6UGQwUTZ0SG1RczlHMGJwQ2V6WGtOdEtnTy9o?=
- =?utf-8?B?TlgzdUpwZVo5NWRzOXV2R2xkWkpnK0Z4NkFyT05NMjVuNjFsRkxVZWJYYXcv?=
- =?utf-8?B?RzVGU1VjMkFjaXFUMGhWTHFsYzFDYUZwQXpvTkpzanZXN0tWK2VCcm1yb0hD?=
- =?utf-8?B?ZUIrUG9nekpodnFpdllNMVpGS3IxNGZkckkyeWozTGpRUWFQRG93Q2FRN0J4?=
- =?utf-8?B?T2oyMnBldFJoNDdXTU13Smk2dytjL3BJVERkWkM5Y3JBc0swcXp3aHhzUmpw?=
- =?utf-8?B?dytzWmsyKzFocVhPRVhvTUtWR0NTNkk3NXBFa0pENS81ZURuakRyZldxZHd4?=
- =?utf-8?B?bDE1WmEzUytQYSs3ZU1CZ3BDYWk3bDZyRDNvOVlkMTdxNzFrcFdITEZ6cUhZ?=
- =?utf-8?B?c2w2eXkwZmlGVnJrRnltVm1TYm1RdmkxNVFNdTZ1TXZ3WU9pTVJ6NDBGQjhD?=
- =?utf-8?B?KzZOZlZLM25jNjhtWlFYVHV4LytaUGZiNWFwZzkvdTNvbjdhY1h5YVpQQXV3?=
- =?utf-8?B?aS9DSWFLd0ZJTDNtaFVTaHNiSXl0ZFBScFFlOThENzVzTHJISWlHeXRnN0J2?=
- =?utf-8?B?djhkVHphM3E0SjV3YkQ0UmF3WnMveVlqOSt4VDZTdjlaSE1rTmdFNloxTko4?=
- =?utf-8?B?ZE5pbThZRmprRlVYOVZ6eXltVjQ2ZHFxcHBkdDIxMHJGa0JRU05oZHFhT1Zx?=
- =?utf-8?B?OXl1SjZZa0Zvb1hUektOUjI3bjB3NHNlSUVWZWNFQ2N0L2pzaDR6dGw0R2Jw?=
- =?utf-8?B?Y2dhQ042VDV6YXNkQlJoUUpaNDNkRGEzVWZWTDd0UTU1YytyRG0rZlMzYU9Y?=
- =?utf-8?B?RGJmRHhuRnZKK0NkS1hDYXlESU5BOWxUMHFQc1ZkWEdCeTdDbUNWSlcyeXZV?=
- =?utf-8?B?cVlUeG01SkZRc0NOdC92NkhlWGFqTXpxcGhxblg2aWpyR0RZLzRSMktqd0Fk?=
- =?utf-8?B?UVJhWklYSjJyQnJGMG1WTVl4ZXRHcmZERHk4N0N2MmUveXdFdjJpMFZ6NGQ4?=
- =?utf-8?B?MXYzb1ZvSlc1V1dxQTFBMnl4M1BNZ2JnTE8wN1NWcHo2S2dRWFQ0Ty96OVNC?=
- =?utf-8?B?ZGpMVmlkbmg1VFh2clNYbmdTTlpOZVdRUjNZTmxiSTdLa2VpdWZHTnFISVJq?=
- =?utf-8?B?eHJxWGNXU0JkY1g3R3JZelNtNm94a05nU2FRNkk4Z0wxSE94WEFLODlvWDVi?=
- =?utf-8?B?ZlhrSitZZVZ1aDBhTzRsbkJXWFhseVBFZDc5eTl1YnpkY0tsRUwxaUZuelRH?=
- =?utf-8?B?N3N0UTg3NlZIbUwveXU5WE0wNEJTQzRvM2luVkx2Wmdlby9vbUJDOHFOKzk5?=
- =?utf-8?B?eFQxYlFaMVFDdTR1LzVOWm5MSk90QVlvRkdjTlFvc3lyek80MzY2c3BSVVdN?=
- =?utf-8?B?UWZNb3A1a3R0SkxMUlRGOXVrL3c1SmltbVdiY0ZLSmJNcnRldkZENjNMaDZP?=
- =?utf-8?B?UnZVRzZmS2t4NWpXY0QwVXR0OTZXbktJblcxZDhzK2xxVkhhSmZPbG1lUHF2?=
- =?utf-8?Q?1ewl/J+bGSApXe9b9RjyayZEY?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 50c4f2ac-17a7-4ef4-c190-08dc41c4861d
-X-MS-Exchange-CrossTenant-AuthSource: PH8PR12MB7326.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 12:12:30.2264
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: R2C6PvptPf6HnsAAqeKeips5ZmahWg9aDp+s2SUOguZ0U50avWFGvMA83fc13STapU61XSBG5VVsGiNrXbj8EQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8830
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
+The suffix _guest is redundant for asid bit. Drop it
+to avoid adding extra code volume.
 
-On 09/03/2024 06:44, Henry Wang wrote:
-> Hi Julien,
-Hi Julien/Henry,
->
-> On 3/9/2024 6:30 AM, Julien Grall wrote:
->> (+ Ayan + Henry)
->
-> (- my old email address + the new one)
->
->> Hi Carlo,
->>
->> On 29/01/2024 17:18, Carlo Nonato wrote:
->>> Cache coloring must physically relocate Xen in order to color the 
->>> hypervisor
->>> and consider_modules() is a key function that is needed to find a new
->>> available physical address.
->>>
->>> 672d67f339c0 ("xen/arm: Split MMU-specific setup_mm() and related 
->>> code out")
->>> moved consider_modules() under arm32. Move it back to setup.c and 
->>> make it
->>> non-static so that it can be used outside.
->>>
->>> Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
->>> ---
->>> v6:
->>> - new patch
->>> ---
->>>   xen/arch/arm/arm32/mmu/mm.c      | 93 
->>> +-------------------------------
->>>   xen/arch/arm/include/asm/setup.h |  3 ++
->>>   xen/arch/arm/setup.c             | 92 +++++++++++++++++++++++++++++++
->>
->> Ayan, Henry, will the function consider_modules() be used for the MPU 
->> code?
->
-> I checked all the MPU branches (the recent arm64 implementation and an 
-> arm32 branch to my best knowledge), no I don't think the function will 
-> be used for the MPU code. However I am not sure if Ayan has a newer 
-> arm32 MPU branch on top of the latest staging or so using the 
-> function, Ayan would you like to add some comments?
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Vaishali Thakkar <vaishali.thakkar@vates.tech>
+---
+Changes since v1:
+        - This patch wasn't part of v1. It's been added to
+          address Andrew's suggestion.
+---
+ xen/arch/x86/hvm/svm/asid.c                  | 6 +++---
+ xen/arch/x86/hvm/svm/nestedsvm.c             | 8 ++++----
+ xen/arch/x86/hvm/svm/svmdebug.c              | 4 ++--
+ xen/arch/x86/include/asm/hvm/svm/nestedsvm.h | 2 +-
+ xen/arch/x86/include/asm/hvm/svm/vmcb.h      | 6 +++---
+ 5 files changed, 13 insertions(+), 13 deletions(-)
 
-Yes, Henry is correct.
-
-consider_modules() is mmu specific only.
-
-- Ayan
-
->
->> If not, then I think the function should live in arm/mmu/setup.c.
->
-> +1, arm/mmu/setup.c is a good place.
->
-> Kind regards,
-> Henry
->
->>
->> Cheers,
->>
->
+diff --git a/xen/arch/x86/hvm/svm/asid.c b/xen/arch/x86/hvm/svm/asid.c
+index 28e0dbc176..d5f70f8848 100644
+--- a/xen/arch/x86/hvm/svm/asid.c
++++ b/xen/arch/x86/hvm/svm/asid.c
+@@ -37,14 +37,14 @@ void svm_asid_handle_vmrun(void)
+     /* ASID 0 indicates that ASIDs are disabled. */
+     if ( p_asid->asid == 0 )
+     {
+-        vmcb_set_guest_asid(vmcb, 1);
++        vmcb_set_asid(vmcb, 1);
+         vmcb->tlb_control =
+             cpu_has_svm_flushbyasid ? TLB_CTRL_FLUSH_ASID : TLB_CTRL_FLUSH_ALL;
+         return;
+     }
+ 
+-    if ( vmcb_get_guest_asid(vmcb) != p_asid->asid )
+-        vmcb_set_guest_asid(vmcb, p_asid->asid);
++    if ( vmcb_get_asid(vmcb) != p_asid->asid )
++        vmcb_set_asid(vmcb, p_asid->asid);
+ 
+     vmcb->tlb_control =
+         !need_flush ? TLB_CTRL_NO_FLUSH :
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index 37548cf05c..adbd49b5a2 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -157,7 +157,7 @@ int cf_check nsvm_vcpu_reset(struct vcpu *v)
+     svm->ns_hap_enabled = 0;
+     svm->ns_vmcb_guestcr3 = 0;
+     svm->ns_vmcb_hostcr3 = 0;
+-    svm->ns_guest_asid = 0;
++    svm->ns_asid = 0;
+     svm->ns_hostflags.bytes = 0;
+     svm->ns_vmexit.exitinfo1 = 0;
+     svm->ns_vmexit.exitinfo2 = 0;
+@@ -698,11 +698,11 @@ nsvm_vcpu_vmentry(struct vcpu *v, struct cpu_user_regs *regs,
+     /* Convert explicitely to boolean. Deals with l1 guests
+      * that use flush-by-asid w/o checking the cpuid bits */
+     nv->nv_flushp2m = !!ns_vmcb->tlb_control;
+-    if ( svm->ns_guest_asid != ns_vmcb->_guest_asid )
++    if ( svm->ns_asid != ns_vmcb->_asid )
+     {
+         nv->nv_flushp2m = 1;
+         hvm_asid_flush_vcpu_asid(&vcpu_nestedhvm(v).nv_n2asid);
+-        svm->ns_guest_asid = ns_vmcb->_guest_asid;
++        svm->ns_asid = ns_vmcb->_asid;
+     }
+ 
+     /* nested paging for the guest */
+@@ -1046,7 +1046,7 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+     /* Keep it. It's maintainted by the l1 guest. */
+ 
+     /* ASID */
+-    /* ns_vmcb->_guest_asid = n2vmcb->_guest_asid; */
++    /* ns_vmcb->_asid = n2vmcb->_asid; */
+ 
+     /* TLB control */
+     ns_vmcb->tlb_control = 0;
+diff --git a/xen/arch/x86/hvm/svm/svmdebug.c b/xen/arch/x86/hvm/svm/svmdebug.c
+index 24358c6eea..0d714c728c 100644
+--- a/xen/arch/x86/hvm/svm/svmdebug.c
++++ b/xen/arch/x86/hvm/svm/svmdebug.c
+@@ -51,8 +51,8 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+            vmcb->exitcode, vmcb->exit_int_info.raw);
+     printk("exitinfo1 = %#"PRIx64" exitinfo2 = %#"PRIx64"\n",
+            vmcb->exitinfo1, vmcb->exitinfo2);
+-    printk("np_ctrl = %#"PRIx64" guest_asid = %#x\n",
+-           vmcb_get_np_ctrl(vmcb), vmcb_get_guest_asid(vmcb));
++    printk("np_ctrl = %#"PRIx64" asid = %#x\n",
++           vmcb_get_np_ctrl(vmcb), vmcb_get_asid(vmcb));
+     printk("virtual vmload/vmsave = %d, virt_ext = %#"PRIx64"\n",
+            vmcb->virt_ext.fields.vloadsave_enable, vmcb->virt_ext.bytes);
+     printk("cpl = %d efer = %#"PRIx64" star = %#"PRIx64" lstar = %#"PRIx64"\n",
+diff --git a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+index 406fc082b1..7767cd6080 100644
+--- a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
++++ b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+@@ -51,7 +51,7 @@ struct nestedsvm {
+      *     the l1 guest nested page table
+      */
+     uint64_t ns_vmcb_guestcr3, ns_vmcb_hostcr3;
+-    uint32_t ns_guest_asid;
++    uint32_t ns_asid;
+ 
+     bool ns_hap_enabled;
+ 
+diff --git a/xen/arch/x86/include/asm/hvm/svm/vmcb.h b/xen/arch/x86/include/asm/hvm/svm/vmcb.h
+index 76507576ba..5d539fcdcf 100644
+--- a/xen/arch/x86/include/asm/hvm/svm/vmcb.h
++++ b/xen/arch/x86/include/asm/hvm/svm/vmcb.h
+@@ -383,7 +383,7 @@ typedef union
+         bool intercepts:1; /* 0:  cr/dr/exception/general intercepts,
+                             *     pause_filter_count, tsc_offset */
+         bool iopm:1;       /* 1:  iopm_base_pa, msrpm_base_pa */
+-        bool asid:1;       /* 2:  guest_asid */
++        bool asid:1;       /* 2:  asid */
+         bool tpr:1;        /* 3:  vintr */
+         bool np:1;         /* 4:  np_enable, h_cr3, g_pat */
+         bool cr:1;         /* 5:  cr0, cr3, cr4, efer */
+@@ -413,7 +413,7 @@ struct vmcb_struct {
+     u64 _iopm_base_pa;          /* offset 0x40 - cleanbit 1 */
+     u64 _msrpm_base_pa;         /* offset 0x48 - cleanbit 1 */
+     u64 _tsc_offset;            /* offset 0x50 - cleanbit 0 */
+-    u32 _guest_asid;            /* offset 0x58 - cleanbit 2 */
++    u32 _asid;                  /* offset 0x58 - cleanbit 2 */
+     u8  tlb_control;            /* offset 0x5C - TLB_CTRL_* */
+     u8  res07[3];
+     vintr_t _vintr;             /* offset 0x60 - cleanbit 3 */
+@@ -642,7 +642,7 @@ VMCB_ACCESSORS(pause_filter_thresh, intercepts)
+ VMCB_ACCESSORS(tsc_offset, intercepts)
+ VMCB_ACCESSORS(iopm_base_pa, iopm)
+ VMCB_ACCESSORS(msrpm_base_pa, iopm)
+-VMCB_ACCESSORS(guest_asid, asid)
++VMCB_ACCESSORS(asid, asid)
+ VMCB_ACCESSORS(vintr, tpr)
+ VMCB_ACCESSORS(np_ctrl, np)
+ VMCB_ACCESSORS_(np, bool, np)
+-- 
+2.44.0
 
