@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD8C9C54E68
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA50C54E60
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Mar 2024 13:04:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691813.1078232 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.691809.1078197 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rk1nS-0005JM-9Y; Tue, 12 Mar 2024 13:03:58 +0000
+	id 1rk1nM-0004Wm-5r; Tue, 12 Mar 2024 13:03:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691813.1078232; Tue, 12 Mar 2024 13:03:58 +0000
+Received: by outflank-mailman (output) from mailman id 691809.1078197; Tue, 12 Mar 2024 13:03:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rk1nS-0005IX-5X; Tue, 12 Mar 2024 13:03:58 +0000
-Received: by outflank-mailman (input) for mailman id 691813;
- Tue, 12 Mar 2024 13:03:56 +0000
+	id 1rk1nM-0004Wf-2w; Tue, 12 Mar 2024 13:03:52 +0000
+Received: by outflank-mailman (input) for mailman id 691809;
+ Tue, 12 Mar 2024 13:03:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=91vH=KS=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1rk1nQ-0004WU-MH
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2024 13:03:56 +0000
+ id 1rk1nL-0004WU-EE
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2024 13:03:51 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id fafeec37-e070-11ee-a1ee-f123f15fe8a2;
- Tue, 12 Mar 2024 14:03:54 +0100 (CET)
+ id f76ff84c-e070-11ee-a1ee-f123f15fe8a2;
+ Tue, 12 Mar 2024 14:03:49 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AC53F1570;
- Tue, 12 Mar 2024 06:04:31 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8E58A1007;
+ Tue, 12 Mar 2024 06:04:25 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 679BE3F762;
- Tue, 12 Mar 2024 06:03:53 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 487163F762;
+ Tue, 12 Mar 2024 06:03:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fafeec37-e070-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: f76ff84c-e070-11ee-a1ee-f123f15fe8a2
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,146 +52,62 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 04/11] xen/arm: Conditional compilation of kernel_info.shm_mem member
-Date: Tue, 12 Mar 2024 13:03:24 +0000
-Message-Id: <20240312130331.78418-5-luca.fancellu@arm.com>
+Subject: [PATCH 00/11] Static shared memory followup v2 - pt1
+Date: Tue, 12 Mar 2024 13:03:20 +0000
+Message-Id: <20240312130331.78418-1-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240312130331.78418-1-luca.fancellu@arm.com>
-References: <20240312130331.78418-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The user of shm_mem member of the 'struct kernel_info' is only
-the code managing the static shared memory feature, which can be
-compiled out using CONFIG_STATIC_SHM, so in case the feature is
-not requested, that member won't be used and will waste memory
-space.
+This serie is a partial rework of this other serie:
+https://patchwork.kernel.org/project/xen-devel/cover/20231206090623.1932275-1-Penny.Zheng@arm.com/
 
-To address this issue, protect the member with the Kconfig parameter
-and modify the signature of the only function using it to remove
-any reference to the member from outside the static-shmem module.
+The original serie is addressing an issue of the static shared memory feature
+that impacts the memory footprint of other component when the feature is
+enabled, another issue impacts the device tree generation for the guests when
+the feature is enabled and used and the last one is a missing feature that is
+the option to have a static shared memory region that is not from the host
+address space.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
- xen/arch/arm/dom0less-build.c           |  3 +--
- xen/arch/arm/domain_build.c             |  3 +--
- xen/arch/arm/include/asm/kernel.h       | 10 +++++++++-
- xen/arch/arm/include/asm/static-shmem.h | 11 ++++++-----
- xen/arch/arm/static-shmem.c             |  8 +++++---
- 5 files changed, 22 insertions(+), 13 deletions(-)
+This serie is handling some comment on the original serie and it is splitting
+the rework in two part, this first part is addressing the memory footprint issue
+and the device tree generation, there will be a following serie addressing the
+last missing feature soon.
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index 0165da6f2986..fe2a771d4984 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -647,8 +647,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     if ( ret )
-         goto err;
- 
--    ret = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
--                                &kinfo->shm_mem.common);
-+    ret = make_resv_memory_node(d, kinfo, addrcells, sizecells);
-     if ( ret )
-         goto err;
- 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 62fcdfbdaff2..b254f252e7cb 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -1780,8 +1780,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
-                 return res;
-         }
- 
--        res = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
--                                    &kinfo->shm_mem.common);
-+        res = make_resv_memory_node(d, kinfo, addrcells, sizecells);
-         if ( res )
-             return res;
-     }
-diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
-index d28b843c01a9..5785da985ccf 100644
---- a/xen/arch/arm/include/asm/kernel.h
-+++ b/xen/arch/arm/include/asm/kernel.h
-@@ -39,7 +39,9 @@ struct kernel_info {
-     void *fdt; /* flat device tree */
-     paddr_t unassigned_mem; /* RAM not (yet) assigned to a bank */
-     struct meminfo mem;
-+#ifdef CONFIG_STATIC_SHM
-     struct meminfo shm_mem;
-+#endif
- 
-     /* kernel entry point */
-     paddr_t entry;
-@@ -81,10 +83,16 @@ struct kernel_info {
- #define kernel_info_get_mem(kinfo) \
-     (&(kinfo)->mem.common)
- 
-+#ifdef CONFIG_STATIC_SHM
-+#define KERNEL_INFO_SHM_MEM_INIT .shm_mem.common.max_banks = NR_MEM_BANKS,
-+#else
-+#define KERNEL_INFO_SHM_MEM_INIT
-+#endif
-+
- #define KERNEL_INFO_INIT \
- { \
-     .mem.common.max_banks = NR_MEM_BANKS, \
--    .shm_mem.common.max_banks = NR_MEM_BANKS, \
-+    KERNEL_INFO_SHM_MEM_INIT \
- }
- 
- /*
-diff --git a/xen/arch/arm/include/asm/static-shmem.h b/xen/arch/arm/include/asm/static-shmem.h
-index cc6b414ed79b..108cedb55a9f 100644
---- a/xen/arch/arm/include/asm/static-shmem.h
-+++ b/xen/arch/arm/include/asm/static-shmem.h
-@@ -7,8 +7,9 @@
- 
- #ifdef CONFIG_STATIC_SHM
- 
--int make_resv_memory_node(const struct domain *d, void *fdt, int addrcells,
--                          int sizecells, const struct membanks *mem);
-+int make_resv_memory_node(const struct domain *d,
-+                          const struct kernel_info *kinfo, int addrcells,
-+                          int sizecells);
- 
- int process_shm(struct domain *d, struct kernel_info *kinfo,
-                 const struct dt_device_node *node);
-@@ -26,9 +27,9 @@ int process_shm_node(const void *fdt, int node, uint32_t address_cells,
- 
- #else /* !CONFIG_STATIC_SHM */
- 
--static inline int make_resv_memory_node(const struct domain *d, void *fdt,
--                                        int addrcells, int sizecells,
--                                        const struct membanks *mem)
-+static inline int make_resv_memory_node(const struct domain *d,
-+                                        const struct kernel_info *kinfo,
-+                                        int addrcells, int sizecells)
- {
-     return 0;
- }
-diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
-index fdc3bccde402..8b7da952be6e 100644
---- a/xen/arch/arm/static-shmem.c
-+++ b/xen/arch/arm/static-shmem.c
-@@ -490,13 +490,15 @@ int __init process_shm_node(const void *fdt, int node, uint32_t address_cells,
-     return 0;
- }
- 
--int __init make_resv_memory_node(const struct domain *d, void *fdt,
--                                 int addrcells, int sizecells,
--                                 const struct membanks *mem)
-+int __init make_resv_memory_node(const struct domain *d,
-+                                 const struct kernel_info *kinfo,
-+                                 int addrcells, int sizecells)
- {
-     int res = 0;
-     /* Placeholder for reserved-memory\0 */
-     const char resvbuf[16] = "reserved-memory";
-+    const struct membanks *mem = &kinfo->shm_mem.common;
-+    void *fdt = kinfo->fdt;
- 
-     if ( mem->nr_banks == 0 )
-         /* No shared memory provided. */
+Luca Fancellu (7):
+  xen/arm: Introduce a generic way to access memory bank structures
+  xen/arm: Conditional compilation of kernel_info.shm_mem member
+  xen/arm: Introduce helper for static memory pages
+  xen/arm: Avoid code duplication in find_unallocated_memory
+  xen/arm: Avoid code duplication in check_reserved_regions_overlap
+  xen/arm: Reduce struct membank size on static shared memory
+  xen/arm: List static shared memory regions as /memory nodes
+
+Penny Zheng (4):
+  xen/arm: remove stale addr_cells/size_cells in assign_shared_memory
+  xen/arm: avoid repetitive checking in process_shm_node
+  xen/arm: remove shm holes for extended regions
+  xen/arm: fix duplicate /reserved-memory node in Dom0
+
+ xen/arch/arm/acpi/domain_build.c         |   6 +-
+ xen/arch/arm/arm32/mmu/mm.c              |  68 ++++--
+ xen/arch/arm/arm64/mmu/mm.c              |   4 +-
+ xen/arch/arm/bootfdt.c                   |  28 +--
+ xen/arch/arm/dom0less-build.c            |  24 +-
+ xen/arch/arm/domain_build.c              | 187 +++++++++-------
+ xen/arch/arm/efi/efi-boot.h              |   8 +-
+ xen/arch/arm/efi/efi-dom0.c              |  13 +-
+ xen/arch/arm/include/asm/domain_build.h  |   4 +-
+ xen/arch/arm/include/asm/kernel.h        |  19 +-
+ xen/arch/arm/include/asm/setup.h         |  81 ++++++-
+ xen/arch/arm/include/asm/static-memory.h |  12 +
+ xen/arch/arm/include/asm/static-shmem.h  |  49 +++-
+ xen/arch/arm/kernel.c                    |  12 +-
+ xen/arch/arm/setup.c                     |  97 +++++---
+ xen/arch/arm/static-memory.c             |  35 ++-
+ xen/arch/arm/static-shmem.c              | 270 +++++++++++++++++------
+ 17 files changed, 634 insertions(+), 283 deletions(-)
+
 -- 
 2.34.1
 
