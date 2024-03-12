@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FAE3C54E5D
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Mar 2024 22:34:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692208.1079087 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00DDC54E58
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Mar 2024 22:45:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692212.1079107 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkAh2-00054W-8u; Tue, 12 Mar 2024 22:33:56 +0000
+	id 1rkAsQ-0007GO-GJ; Tue, 12 Mar 2024 22:45:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692208.1079087; Tue, 12 Mar 2024 22:33:56 +0000
+Received: by outflank-mailman (output) from mailman id 692212.1079107; Tue, 12 Mar 2024 22:45:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkAh2-00054P-5m; Tue, 12 Mar 2024 22:33:56 +0000
-Received: by outflank-mailman (input) for mailman id 692208;
- Tue, 12 Mar 2024 22:33:55 +0000
+	id 1rkAsQ-0007GH-D0; Tue, 12 Mar 2024 22:45:42 +0000
+Received: by outflank-mailman (input) for mailman id 692212;
+ Tue, 12 Mar 2024 22:45:41 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rkAh1-00054J-6F
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2024 22:33:55 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rkAsP-0007Fz-PU; Tue, 12 Mar 2024 22:45:41 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rkAh0-0005Ml-PI; Tue, 12 Mar 2024 22:33:54 +0000
-Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.154])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1rkAh0-0000WU-Hp; Tue, 12 Mar 2024 22:33:54 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rkAsP-0005YQ-Oh; Tue, 12 Mar 2024 22:45:41 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1rkAsP-00016l-D1; Tue, 12 Mar 2024 22:45:41 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1rkAsP-00014e-C5; Tue, 12 Mar 2024 22:45:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,64 +44,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=Xuqs4VS19SCppjtBHqwvkqmRQwOhWsFXBhEAXtiEhf0=; b=63yNCjM3XFWBczoNSxA7VgrUi6
-	tzuVLw+ZNRVxFOh6J2LuKEMhKpgsYjAcgdpi7kLo8ui4eifKOLKnjHkUoxXFqs33R5zIWwOp5XzB4
-	hBhekkT7LxRwDBO0YdlAajcIWdWa4WxlR0u8jLpreJJ3/0LTOW7VeI+v3MPszr99TgRE=;
-Message-ID: <a60c8977-8a62-475f-a392-8f0c75bcd6c7@xen.org>
-Date: Tue, 12 Mar 2024 22:33:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=7qhJDPUK5yjzi/azzWfoKjyyOG0AvuODKVwotPZvE28=; b=13+2fFdEctfebV/EUcPQjSp7ba
+	hgnEJhcDE6Vi8GotHcO/kHZ2PFxoGRQQYsmh5tBPwamqS3b8daFCETXigjtBXfWSXq0MIlgCHdpBm
+	t/J9/dmLazdxvPjXWVUIcmwHiNyI8KKt/KoZTWYCNrgF96nHkZlQp5BXzmcs505bLKo0=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-185005-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN v6 3/3] xen/arm: arm32: Add emulation of Debug Data Transfer
- Registers
-Content-Language: en-GB
-To: Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
- xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, stefano.stabellini@amd.com,
- Volodymyr_Babchuk@epam.com, bertrand.marquis@arm.com, michal.orzel@amd.com
-References: <20240307123943.1991755-1-ayan.kumar.halder@amd.com>
- <20240307123943.1991755-4-ayan.kumar.halder@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <20240307123943.1991755-4-ayan.kumar.halder@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [seabios test] 185005: tolerable FAIL - PUSHED
+X-Osstest-Failures:
+    seabios:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    seabios:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    seabios:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    seabios:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    seabios:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    seabios:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    seabios:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    seabios=3722c21de19ba64de56495502c0c025b913a9b15
+X-Osstest-Versions-That:
+    seabios=5d87ff2542c1116e07ae74ba84197a0013e08db1
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 12 Mar 2024 22:45:41 +0000
 
-Hi Ayan,
+flight 185005 seabios real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/185005/
 
-On 07/03/2024 12:39, Ayan Kumar Halder wrote:
-> When user enables HVC_DCC config option in Linux, it invokes access to debug
-> transfer register (i.e. DBGDTRTXINT). As this register is not emulated, Xen
-> injects an undefined exception to the guest and Linux crashes.
-> 
-> To prevent this crash, introduce a partial emulation of DBGDTR[TR]XINT (these
-> registers share the same encoding) as RAZ/WI and DBGDSCRINT as TXfull.
-> 
-> Refer ARM DDI 0487J.a ID042523, G8.3.19, DBGDTRTXint:
-> "If TXfull is set to 1, set DTRTX to UNKNOWN".
-> 
-> As a pre-requisite, DBGOSLSR should be emulated in the same way as its AArch64
-> variant (i.e. OSLSR_EL1). This is to ensure that DBGOSLSR.OSLK is 0, which
-> allows us to skip the emulation of DBGDSCREXT (TXfull is treated as UNK/SBZP)
-> and focus on DBGDSCRINT. DBGOSLSR.OSLM[1] is set to 1 to mantain consistency
-> with Arm64.
-> 
-> Take the opportunity to fix the minimum EL for DBGDSCRINT, which should be 0.
+Failures :-/ but no regressions.
 
-NIT: Strictly speaking Arm32 is using PL (Priviledge) rather than EL 
-(Exception Level) to describe each level :).
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 184988
+ test-amd64-i386-xl-qemuu-win7-amd64 19 guest-stop             fail like 184988
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 184988
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 184988
+ test-amd64-i386-xl-qemuu-ws16-amd64 19 guest-stop             fail like 184988
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
 
-Anyway,
+version targeted for testing:
+ seabios              3722c21de19ba64de56495502c0c025b913a9b15
+baseline version:
+ seabios              5d87ff2542c1116e07ae74ba84197a0013e08db1
 
-> 
-> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Last test of basis   184988  2024-03-10 17:11:02 Z    2 days
+Testing same since   185005  2024-03-12 14:43:08 Z    0 days    1 attempts
 
-Acked-by: Julien Grall <jgrall@amazon.com>
+------------------------------------------------------------
+People who touched revisions under test:
+  Daniel Verkamp <daniel@drv.nu>
 
-Cheers,
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         pass    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              pass    
 
--- 
-Julien Grall
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/seabios.git
+   5d87ff2..3722c21  3722c21de19ba64de56495502c0c025b913a9b15 -> xen-tested-master
 
