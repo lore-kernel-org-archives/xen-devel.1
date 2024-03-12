@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA50C54E60
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Mar 2024 13:04:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.691809.1078197 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95C9DC54E5D
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Mar 2024 13:04:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.691814.1078248 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rk1nM-0004Wm-5r; Tue, 12 Mar 2024 13:03:52 +0000
+	id 1rk1nT-0005mp-Om; Tue, 12 Mar 2024 13:03:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 691809.1078197; Tue, 12 Mar 2024 13:03:52 +0000
+Received: by outflank-mailman (output) from mailman id 691814.1078248; Tue, 12 Mar 2024 13:03:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rk1nM-0004Wf-2w; Tue, 12 Mar 2024 13:03:52 +0000
-Received: by outflank-mailman (input) for mailman id 691809;
- Tue, 12 Mar 2024 13:03:51 +0000
+	id 1rk1nT-0005me-K8; Tue, 12 Mar 2024 13:03:59 +0000
+Received: by outflank-mailman (input) for mailman id 691814;
+ Tue, 12 Mar 2024 13:03:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=91vH=KS=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1rk1nL-0004WU-EE
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2024 13:03:51 +0000
+ id 1rk1nR-0004WU-TL
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2024 13:03:57 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id f76ff84c-e070-11ee-a1ee-f123f15fe8a2;
- Tue, 12 Mar 2024 14:03:49 +0100 (CET)
+ id fbd26df8-e070-11ee-a1ee-f123f15fe8a2;
+ Tue, 12 Mar 2024 14:03:56 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8E58A1007;
- Tue, 12 Mar 2024 06:04:25 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 01ADE15A1;
+ Tue, 12 Mar 2024 06:04:33 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 487163F762;
- Tue, 12 Mar 2024 06:03:47 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B16933F762;
+ Tue, 12 Mar 2024 06:03:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f76ff84c-e070-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: fbd26df8-e070-11ee-a1ee-f123f15fe8a2
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,62 +52,73 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 00/11] Static shared memory followup v2 - pt1
-Date: Tue, 12 Mar 2024 13:03:20 +0000
-Message-Id: <20240312130331.78418-1-luca.fancellu@arm.com>
+Subject: [PATCH 05/11] xen/arm: Introduce helper for static memory pages
+Date: Tue, 12 Mar 2024 13:03:25 +0000
+Message-Id: <20240312130331.78418-6-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240312130331.78418-1-luca.fancellu@arm.com>
+References: <20240312130331.78418-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This serie is a partial rework of this other serie:
-https://patchwork.kernel.org/project/xen-devel/cover/20231206090623.1932275-1-Penny.Zheng@arm.com/
+Introduce a new helper function in the static-memory module
+that can be called to manage static memory banks, this is
+done to reuse the code when other modules would like to
+manage static memory banks that are not part of the
+reserved_mem structure.
 
-The original serie is addressing an issue of the static shared memory feature
-that impacts the memory footprint of other component when the feature is
-enabled, another issue impacts the device tree generation for the guests when
-the feature is enabled and used and the last one is a missing feature that is
-the option to have a static shared memory region that is not from the host
-address space.
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+ xen/arch/arm/include/asm/static-memory.h | 12 ++++++++++++
+ xen/arch/arm/static-memory.c             | 12 +-----------
+ 2 files changed, 13 insertions(+), 11 deletions(-)
 
-This serie is handling some comment on the original serie and it is splitting
-the rework in two part, this first part is addressing the memory footprint issue
-and the device tree generation, there will be a following serie addressing the
-last missing feature soon.
-
-Luca Fancellu (7):
-  xen/arm: Introduce a generic way to access memory bank structures
-  xen/arm: Conditional compilation of kernel_info.shm_mem member
-  xen/arm: Introduce helper for static memory pages
-  xen/arm: Avoid code duplication in find_unallocated_memory
-  xen/arm: Avoid code duplication in check_reserved_regions_overlap
-  xen/arm: Reduce struct membank size on static shared memory
-  xen/arm: List static shared memory regions as /memory nodes
-
-Penny Zheng (4):
-  xen/arm: remove stale addr_cells/size_cells in assign_shared_memory
-  xen/arm: avoid repetitive checking in process_shm_node
-  xen/arm: remove shm holes for extended regions
-  xen/arm: fix duplicate /reserved-memory node in Dom0
-
- xen/arch/arm/acpi/domain_build.c         |   6 +-
- xen/arch/arm/arm32/mmu/mm.c              |  68 ++++--
- xen/arch/arm/arm64/mmu/mm.c              |   4 +-
- xen/arch/arm/bootfdt.c                   |  28 +--
- xen/arch/arm/dom0less-build.c            |  24 +-
- xen/arch/arm/domain_build.c              | 187 +++++++++-------
- xen/arch/arm/efi/efi-boot.h              |   8 +-
- xen/arch/arm/efi/efi-dom0.c              |  13 +-
- xen/arch/arm/include/asm/domain_build.h  |   4 +-
- xen/arch/arm/include/asm/kernel.h        |  19 +-
- xen/arch/arm/include/asm/setup.h         |  81 ++++++-
- xen/arch/arm/include/asm/static-memory.h |  12 +
- xen/arch/arm/include/asm/static-shmem.h  |  49 +++-
- xen/arch/arm/kernel.c                    |  12 +-
- xen/arch/arm/setup.c                     |  97 +++++---
- xen/arch/arm/static-memory.c             |  35 ++-
- xen/arch/arm/static-shmem.c              | 270 +++++++++++++++++------
- 17 files changed, 634 insertions(+), 283 deletions(-)
-
+diff --git a/xen/arch/arm/include/asm/static-memory.h b/xen/arch/arm/include/asm/static-memory.h
+index 3e3efd70c38d..665d4df50eda 100644
+--- a/xen/arch/arm/include/asm/static-memory.h
++++ b/xen/arch/arm/include/asm/static-memory.h
+@@ -7,6 +7,18 @@
+ 
+ #ifdef CONFIG_STATIC_MEMORY
+ 
++static inline void init_staticmem_bank(const struct membank *bank)
++{
++    mfn_t bank_start = _mfn(PFN_UP(bank->start));
++    unsigned long bank_pages = PFN_DOWN(bank->size);
++    mfn_t bank_end = mfn_add(bank_start, bank_pages);
++
++    if ( mfn_x(bank_end) <= mfn_x(bank_start) )
++        return;
++
++    unprepare_staticmem_pages(mfn_to_page(bank_start), bank_pages, false);
++}
++
+ void allocate_static_memory(struct domain *d, struct kernel_info *kinfo,
+                             const struct dt_device_node *node);
+ void assign_static_memory_11(struct domain *d, struct kernel_info *kinfo,
+diff --git a/xen/arch/arm/static-memory.c b/xen/arch/arm/static-memory.c
+index 34bd12696a53..d4585c5a0633 100644
+--- a/xen/arch/arm/static-memory.c
++++ b/xen/arch/arm/static-memory.c
+@@ -265,17 +265,7 @@ void __init init_staticmem_pages(void)
+     for ( bank = 0 ; bank < reserved_mem->nr_banks; bank++ )
+     {
+         if ( reserved_mem->bank[bank].type == MEMBANK_STATIC_DOMAIN )
+-        {
+-            mfn_t bank_start = _mfn(PFN_UP(reserved_mem->bank[bank].start));
+-            unsigned long bank_pages = PFN_DOWN(reserved_mem->bank[bank].size);
+-            mfn_t bank_end = mfn_add(bank_start, bank_pages);
+-
+-            if ( mfn_x(bank_end) <= mfn_x(bank_start) )
+-                return;
+-
+-            unprepare_staticmem_pages(mfn_to_page(bank_start),
+-                                      bank_pages, false);
+-        }
++            init_staticmem_bank(&reserved_mem->bank[bank]);
+     }
+ }
+ 
 -- 
 2.34.1
 
