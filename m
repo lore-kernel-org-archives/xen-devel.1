@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C20C54E5D
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Mar 2024 22:45:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692211.1079097 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 795B8C54E58
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Mar 2024 22:55:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692220.1079117 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkAsN-00071n-A3; Tue, 12 Mar 2024 22:45:39 +0000
+	id 1rkB1L-00018Y-Fe; Tue, 12 Mar 2024 22:54:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692211.1079097; Tue, 12 Mar 2024 22:45:39 +0000
+Received: by outflank-mailman (output) from mailman id 692220.1079117; Tue, 12 Mar 2024 22:54:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkAsN-00071g-6E; Tue, 12 Mar 2024 22:45:39 +0000
-Received: by outflank-mailman (input) for mailman id 692211;
- Tue, 12 Mar 2024 22:45:37 +0000
+	id 1rkB1L-00018R-Ce; Tue, 12 Mar 2024 22:54:55 +0000
+Received: by outflank-mailman (input) for mailman id 692220;
+ Tue, 12 Mar 2024 22:54:53 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1rkAsL-00071a-IR
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2024 22:45:37 +0000
+ (envelope-from <julien@xen.org>) id 1rkB1J-00018L-F8
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2024 22:54:53 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1rkAsL-0005Y9-AZ; Tue, 12 Mar 2024 22:45:37 +0000
+ id 1rkB1I-0005hm-3K; Tue, 12 Mar 2024 22:54:52 +0000
 Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.154])
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1rkAsL-00018u-5O; Tue, 12 Mar 2024 22:45:37 +0000
+ id 1rkB1H-0001L0-Rs; Tue, 12 Mar 2024 22:54:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,57 +44,48 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=gYwp3dnViVB/eN1qzGIIYwSY09T0ajrbpV/Yuj2C0j4=; b=7BBzk+JEWpxjLzHbWCcnluqFfL
-	U+wUslOX+NpHlDFal5i/0TNojZXAhxDXiYizxMRMJvtbcWyx9lYf779TiifSW3AJ13WHE71Np4Gu1
-	oJHENB+Qh70oAnkrfhK0qLDhcWby3sxx3ljMyzRpsP1SjboJpV6GitJA+ZjTxbYUnemM=;
-Message-ID: <30b70df5-a53f-4faa-b15a-1673cceec022@xen.org>
-Date: Tue, 12 Mar 2024 22:45:35 +0000
+	bh=+3Plp8OivpTp8tfi0wGJHpcxyXU3r+blrkCifIiIQj4=; b=QacMagjAYTvooNkal8TbaDEWYh
+	VxCMKgtIV/4X34c4bMP4Brb6MhosYiIqUF5RM2kVdooGV+HW/WimKtZPdLWDRGwjvI+01eEUFGuWu
+	cgwniUQmkMo3N96VFyDUoEYXSFcjjSId3Xnfnt6g0HMBX2vHVpMvqMYMkZKsgkaBsVVM=;
+Message-ID: <319d8ffb-624f-43b7-8475-0a8ac93f2f83@xen.org>
+Date: Tue, 12 Mar 2024 22:54:50 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] README: bump minimum required clang/llvm version
+Subject: Re: [PATCH v3 1/3] restrict concept of pIRQ to x86
 Content-Language: en-GB
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ George Dunlap <george.dunlap@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Doug Goldstein <cardoe@cardoe.com>
-References: <20240229095529.17723-1-roger.pau@citrix.com>
- <20240229095529.17723-2-roger.pau@citrix.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+References: <7cb0d24e-2bda-dcda-4874-2c01ba179947@suse.com>
+ <e58f365c-13bf-3ad7-cf37-ca1ea043750b@suse.com>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <20240229095529.17723-2-roger.pau@citrix.com>
+In-Reply-To: <e58f365c-13bf-3ad7-cf37-ca1ea043750b@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Hi Roger,
+Hi Jan,
 
-On 29/02/2024 09:55, Roger Pau Monne wrote:
-> We no longer have a way to build with the minimum required clang/llvm version
-> stated in the README on the gitlab CI loop, since we dropped the Debian Jessie
-> container that had Clang 3.5.0.
+On 27/07/2023 08:38, Jan Beulich wrote:
+> ... by way of a new arch-selectable Kconfig control.
 > 
-> Bump the minimum required Clang/LLVM to the one used in the oldest production
-> FreeBSD version (13.2 currently), as that's the main reason I care to maintain
-> Clang/LLVM support, and as far as I know FreeBSD is the only production
-> deployment of Xen built with Clang/LLVM.
+> Note that some smaller pieces of code are left without #ifdef, to keep
+> things better readable. Hence items like ECS_PIRQ, nr_static_irqs, or
+> domain_pirq_to_irq() remain uniformly.
 > 
-> Purge the build jobs for non-supported Clang versions from Gitlab CI.  Note the
-> .dockerfiles for the respective distros are explicitly not adjusted to drop the
-> install of the clang packages, or else those jobs would start to fail on older
-> Xen branches.
+> As to XEN_DOMCTL_irq_permission - this, despite having a uniformly
+> available wrapper in libxc, is unused on Arm: libxl bypasses those
+> calls, and the Python and OCamL bindings have no users at all.
 > 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
-> I'm willing to consider older versions, but there needs to be a reason (iow:
-> use-case) for considering those, as maintaining support for older toolchains is
-> a burden.
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-It makes sense. On another thread I mentioned that QEMU also took the 
-approach to only support compilers from currently (security?) supported 
-distros.
+Sorry for the late reply:
 
 Acked-by: Julien Grall <jgrall@amazon.com>
-
-This could always be relaxed.
 
 Cheers,
 
