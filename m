@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A90C54791
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 12:28:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692405.1079520 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C58C8C54791
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 13:06:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692426.1079529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkNiq-0006Xv-2f; Wed, 13 Mar 2024 12:28:40 +0000
+	id 1rkOIx-0004kk-Ty; Wed, 13 Mar 2024 13:05:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692405.1079520; Wed, 13 Mar 2024 12:28:40 +0000
+Received: by outflank-mailman (output) from mailman id 692426.1079529; Wed, 13 Mar 2024 13:05:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkNip-0006Xm-UD; Wed, 13 Mar 2024 12:28:39 +0000
-Received: by outflank-mailman (input) for mailman id 692405;
- Wed, 13 Mar 2024 12:28:39 +0000
+	id 1rkOIx-0004kd-RD; Wed, 13 Mar 2024 13:05:59 +0000
+Received: by outflank-mailman (input) for mailman id 692426;
+ Wed, 13 Mar 2024 13:05:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5AcA=KT=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1rkNip-0005zY-33
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 12:28:39 +0000
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [2607:f8b0:4864:20::e30])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=bR7k=KT=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rkOIw-0004kX-Qs
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 13:05:58 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 36e6b213-e135-11ee-a1ee-f123f15fe8a2;
- Wed, 13 Mar 2024 13:28:37 +0100 (CET)
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-4726c259cc9so202522137.0
- for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 05:28:37 -0700 (PDT)
-Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- ne7-20020a056214424700b00690dbc390dcsm2283874qvb.89.2024.03.13.05.28.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 05:28:34 -0700 (PDT)
+ id 6e13c694-e13a-11ee-a1ee-f123f15fe8a2;
+ Wed, 13 Mar 2024 14:05:56 +0100 (CET)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a4663b29334so49924066b.0
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 06:05:56 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ qw14-20020a170906fcae00b00a46647b6496sm216421ejb.155.2024.03.13.06.05.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Mar 2024 06:05:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,353 +47,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36e6b213-e135-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 6e13c694-e13a-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1710332916; x=1710937716; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NhL6carBpJAEJcZDaFIRwTP2onUiQlD3W4fFGQ9k40Q=;
-        b=dVL7WNClQmrDcfAxtyI++4r5yeaLaZwINuGIy4KawlKNo4x7feTK7l8gf/2hOHhsuB
-         KwdNBPOeu0bIfVBKSx/gvahNVbP6nY4fCeM5/Mym7darsfb1qanzIa9clf2lFSubskoH
-         lUMVJevvqVATb4wrbPzqTw6zF0Nf2o4KlS6kQ=
+        d=suse.com; s=google; t=1710335156; x=1710939956; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=PG9X11rAKz0pdL4PSeFP3B9ILmrSKoHnHWalOxkEruY=;
+        b=G3dpIAfMJf4q17muPSyuer7i4Kky7O+nrRfb8i8YBcidsgdLe27aNj6oDvv6ProDBo
+         Z9IUDNtSwBArYlyYSXEG8AzymyUrFkGZ9Fck17X8rZrqQ0Y0nh0nbVOf7MWFkUYBBOnA
+         bpHRGoNTNLD+T7xN/vJwUqKdYCqUOivqRbsw7TV+At5D7a20wTBWPH3/RodJtPcr+SZ8
+         PoV4SJ2/5gjHypXQf5ntZ7qIHW95zbPuCt4AivkIef9natxBdqWBTJqvA4EjfJMhFUh7
+         +3J9xX2ec7Xm+OhynfOwbL6Vb42aMUFou3nVMc+tB11zITA2W53t79uIcQp9ll8GfizP
+         FLUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710332916; x=1710937716;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NhL6carBpJAEJcZDaFIRwTP2onUiQlD3W4fFGQ9k40Q=;
-        b=gB5xk5wCc+xQxvZr4Ake+cBPqQDoAv5B0wl2e1oWh23LqsIppK6k8MhISavnG+6+p7
-         R9XSoPYoQta0enreol7yxz91p+Kumfg7ZYqVQcvYrLNWsP9YgMX7duZ7j7NYAn/hnb0g
-         ilD7NIH89FRLaanBR41UUU+yGfP/r/2RBFrQ2PRMHhBm6QCBKo5fk/NvJ4SbES+Oqa8k
-         Y93/DWkToTfN65wTUnKIjuB9irXeGEeErp1oAdHpLyCZisWPuH0T0ZWEWCDEeeER4+V6
-         IbpiCZa+c7thiU/2QBev39oHNMKWY3FiWaRXHJFcp5AtmfFQYE9p6xNx6n/UaQ000/BJ
-         zvkw==
-X-Gm-Message-State: AOJu0Yzw4VMbkZxoeSGVH/PdgkHbm4nM5C6QHN7v8DEH0yAOUj+tWIkP
-	apULcm2G2gJdQl6iTefzqWuG45C3YUmmJ0kaBiKD6cEcmM5IgV/vJFzIf4TkltJXSmmXrLwtYsU
-	l
-X-Google-Smtp-Source: AGHT+IFFv7kFFTxdBKMJcSkfT8J6KHRXut4JimbWmQW5uk6S+fSYjizgtJgRKE7DIltJJDUa9uQdtQ==
-X-Received: by 2002:a05:6102:11ed:b0:473:4d73:5e1c with SMTP id e13-20020a05610211ed00b004734d735e1cmr3528715vsg.9.1710332914410;
-        Wed, 13 Mar 2024 05:28:34 -0700 (PDT)
-From: George Dunlap <george.dunlap@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>
-Subject: [PATCH v2 3/3] svm/nestedsvm: Introduce nested capabilities bit
-Date: Wed, 13 Mar 2024 12:24:54 +0000
-Message-Id: <20240313122454.965566-4-george.dunlap@cloud.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240313122454.965566-1-george.dunlap@cloud.com>
-References: <20240313122454.965566-1-george.dunlap@cloud.com>
+        d=1e100.net; s=20230601; t=1710335156; x=1710939956;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=PG9X11rAKz0pdL4PSeFP3B9ILmrSKoHnHWalOxkEruY=;
+        b=LbYXscX5JYvVYu4ct6IHXHtBHnezu8EoJD++9tW/RprjgjJGKlAYFJfqnLYFNaxmuH
+         BdmndGErJvI4M7MV8lH5ZeeKQDk6ioeVp2Vk3azNUnuaB35IS3BrIsgyqf5JgY7K7vMe
+         gSxXyEXSYfMqOmclcdpz19QI1MUAzki+pI2CnYSVb6M008e+caHUkSxh6/wdUYnOt90Z
+         CXNzBMqiLY38gv3gKaLDv8oqbb1gnYN4Edpfmh2DEZE/oN0QKStUefAdM5gBiLtM5g8M
+         e2YeXJkcj3gJUkNYYqjQvdeV3uU0Yg43J0viQoNBtrkPLoqvk9pcxvE2y5/cjuiMz8vv
+         lmSg==
+X-Forwarded-Encrypted: i=1; AJvYcCU0MZajachFBWqwO1LjtOLPPuElP9If26h0HT3uvbDjFC1ey+A+Ni8X+4PpSYfkEioML6pmWZSFhMr7QieW7nlAvToarxczVn6ZudBFPE8=
+X-Gm-Message-State: AOJu0Yz9puQOFt7zT8TqK5J/z27o1/Yz6kYBf+mKQboQ92A4FKORp2X1
+	gHp9QgYX0iHLO0WvWAQFqA+AWVqSCFvtLUOwu/GT1oOA5euYpE1HZox1PVHiSA==
+X-Google-Smtp-Source: AGHT+IFkPMIZPIjhqYKbN/rjm5UbUFqyY38iqfvwMq0FV0MP1LKRlOeUm5DaFRmKkA+18ctxNHZVsw==
+X-Received: by 2002:a17:907:367:b0:a46:637c:db67 with SMTP id rs7-20020a170907036700b00a46637cdb67mr547853ejb.5.1710335156115;
+        Wed, 13 Mar 2024 06:05:56 -0700 (PDT)
+Message-ID: <84ae44c0-7812-4532-a367-4763d9b44198@suse.com>
+Date: Wed, 13 Mar 2024 14:05:54 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH 5/9] x86/smp: call x2apic_ap_setup() earlier
+Content-Language: en-US
+To: Krystian Hebel <krystian.hebel@3mdeb.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+References: <cover.1699982111.git.krystian.hebel@3mdeb.com>
+ <7c13554e60cc76516922992b7faf911b91f99a2a.1699982111.git.krystian.hebel@3mdeb.com>
+ <a9a44e5d-80cf-404a-abe0-985a11f6d668@suse.com>
+ <e131471c-9fe2-4b64-9f6f-81a0ac087874@3mdeb.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <e131471c-9fe2-4b64-9f6f-81a0ac087874@3mdeb.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-In order to make implementation and testing tractable, we will require
-specific host functionality.  Add a nested_virt bit to hvm_funcs.caps,
-and return an error if a domain is created with nested virt and this
-bit isn't set.  Create VMX and SVM callbacks to be executed from
-start_nested_svm(), which is guaranteed to execute after all
-command-line options have been procesed.
+On 12.03.2024 17:02, Krystian Hebel wrote:
+> 
+> On 7.02.2024 18:02, Jan Beulich wrote:
+>> On 14.11.2023 18:50, Krystian Hebel wrote:
+>>> It used to be called from smp_callin(), however BUG_ON() was invoked on
+>>> multiple occasions before that. It may end up calling machine_restart()
+>>> which tries to get APIC ID for CPU running this code. If BSP detected
+>>> that x2APIC is enabled, get_apic_id() will try to use it for all CPUs.
+>>> Enabling x2APIC on secondary CPUs earlier protects against an endless
+>>> loop of #GP exceptions caused by attempts to read IA32_X2APIC_APICID
+>>> MSR while x2APIC is disabled in IA32_APIC_BASE.
+>>>
+>>> Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+>>> ---
+>>>   xen/arch/x86/smpboot.c | 9 ++++++++-
+>>>   1 file changed, 8 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+>>> index 8ae65ab1769f..a3895dafa267 100644
+>>> --- a/xen/arch/x86/smpboot.c
+>>> +++ b/xen/arch/x86/smpboot.c
+>>> @@ -184,7 +184,6 @@ static void smp_callin(void)
+>>>        * update until we finish. We are free to set up this CPU: first the APIC.
+>>>        */
+>>>       Dprintk("CALLIN, before setup_local_APIC().\n");
+>>> -    x2apic_ap_setup();
+>>>       setup_local_APIC(false);
+>>>   
+>>>       /* Save our processor parameters. */
+>>> @@ -351,6 +350,14 @@ void start_secondary(void *unused)
+>>>       get_cpu_info()->xen_cr3 = 0;
+>>>       get_cpu_info()->pv_cr3 = 0;
+>>>   
+>>> +    /*
+>>> +     * BUG_ON() used in load_system_tables() and later code may end up calling
+>>> +     * machine_restart() which tries to get APIC ID for CPU running this code.
+>>> +     * If BSP detected that x2APIC is enabled, get_apic_id() will try to use it
+>>> +     * for _all_ CPUs. Enable x2APIC on secondary CPUs now so we won't end up
+>>> +     * with endless #GP loop.
+>>> +     */
+>>> +    x2apic_ap_setup();
+>>>       load_system_tables();
+>> While I find the argument convincing, I seem to recall that there was a
+>> firm plan to have load_system_tables() as early as possible. Andrew?
+> This is where the code failed for me during testing. How about moving
+> x2apic_ap_setup() into load_system_tables(),
 
-For VMX, start with always enabling it if HAP is present; this
-shouldn't change current behvior.
+How does a call to x2apic_ap_setup() fit in a function named
+load_system_tables()?
 
-For SVM, require some basic functionality, adding a document
-explaining the rationale.
+> just before BUG_ON? Or maybe
+> move those BUG_ON one level higher, after load_system_tables() returns?
 
-NB that only SVM CPUID bits 0-7 have been considered.  Bits 10-16 may
-be considered in a follow-up patch.
+But they're there for a reason.
 
-Signed-off-by: George Dunlap <george.dunlap@cloud.com>
----
-v2:
- - Fixed typo in title
- - Added hvm_nested_virt_supported() def for !CONFIG_HVM
- - Rebased over previous changes
- - Tweak some wording in document
- - Require npt rather than nrips twice
- - Remove stray __init from header
- - Set caps.nested_virt from callback from nestedhvm_setup()
+> Either way some code will end up in place it doesn't belong, but I'd 
+> argue that
+> BUG_ON is only useful if it itself doesn't crash.
 
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: George Dunlap <george.dunlap@citrix.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: "Roger Pau Monné" <roger.pau@citrix.com>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
----
- docs/designs/nested-svm-cpu-features.md  | 111 +++++++++++++++++++++++
- xen/arch/x86/domain.c                    |   6 ++
- xen/arch/x86/hvm/nestedhvm.c             |  10 ++
- xen/arch/x86/hvm/svm/nestedsvm.c         |  14 +++
- xen/arch/x86/hvm/vmx/vvmx.c              |   8 ++
- xen/arch/x86/include/asm/hvm/hvm.h       |  16 +++-
- xen/arch/x86/include/asm/hvm/nestedhvm.h |   4 +
- 7 files changed, 168 insertions(+), 1 deletion(-)
+I guess I don't understand this: That BUG_ON() is already guarded by a
+system_state check, to prevent it uselessly hanging the system.
 
-diff --git a/docs/designs/nested-svm-cpu-features.md b/docs/designs/nested-svm-cpu-features.md
-new file mode 100644
-index 0000000000..837a96df05
---- /dev/null
-+++ b/docs/designs/nested-svm-cpu-features.md
-@@ -0,0 +1,111 @@
-+# Nested SVM (AMD) CPUID requirements
-+
-+The first step in making nested SVM production-ready is to make sure
-+that all features are implemented and well-tested.  To make this
-+tractable, we will initially be limiting the "supported" range of
-+nested virt to a specific subset of host and guest features.  This
-+document describes the criteria for deciding on features, and the
-+rationale behind each feature.
-+
-+For AMD, all virtualization-related features can be found in CPUID
-+leaf 8000000A:edx
-+
-+# Criteria
-+
-+- Processor support: At a minimum we want to support processors from
-+  the last 5 years.  All things being equal, we'd prefer to cover
-+  older processors than not.  Bits 0:7 were available in the very
-+  earliest processors; and even through bit 15 we should be pretty
-+  good support-wise.
-+
-+- Faithfulness to hardware: We need the behavior of the "virtual cpu"
-+  from the L1 hypervisor's perspective to be as close as possible to
-+  the original hardware.  In particular, the behavior of the hardware
-+  on error paths 1) is not easy to understand or test, 2) can be the
-+  source of surprising vulnerabiliies.  (See XSA-7 for an example of a
-+  case where subtle error-handling differences can open up a privilege
-+  escalation.)  We should avoid emulating any bit of the hardware with
-+  complex error paths if we can at all help it.
-+
-+- Cost of implementation: We want to minimize the cost of
-+  implementation (where this includes bringing an existing sub-par
-+  implementation up to speed).  All things being equal, we'll favor a
-+  configuration which does not require any new implementation.
-+
-+- Performance: All things being equal, we'd prefer to choose a set of
-+  L0 / L1 CPUID bits that are faster than slower.
-+
-+
-+# Bits
-+
-+- 0 `NP` *Nested Paging*: Required both for L0 and L1.
-+
-+  Based primarily on faithfulness and performance, as well as
-+  potential cost of implementation.  Available on earliest hardware,
-+  so no compatibility issues.
-+
-+- 1 `LbrVirt` *LBR / debugging virtualization*: Require for L0 and L1.
-+
-+  For L0 this is required for performance: There's no way to tell the
-+  guests not to use the LBR-related registers; and if the guest does,
-+  then you have to save and restore all LBR-related registers on
-+  context switch, which is prohibitive.  Furthermore, the additional
-+  emulation risks a security-relevant difference to come up.
-+
-+  Providing it to L1 when we have it in L0 is basically free, and
-+  already implemented.
-+
-+  Just require it and provide it.
-+
-+- 2 `SVML` *SVM Lock*: Not required for L0, not provided to L1
-+
-+  Seems to be aboult enabling an operating system to prevent "blue
-+  pill" attacks against itself.
-+
-+  Xen doesn't use it, nor provide it; so it would need to be
-+  implementend.  The best way to protect a guest OS is to leave nested
-+  virt disabled in the tools.
-+
-+- 3 `NRIPS` NRIP Save: Require for both L0 and L1
-+
-+  If NRIPS is not present, the software interrupt injection
-+  functionality can't be used; and Xen has to emulate it.  That's
-+  another source of potential security issues.  If hardware supports
-+  it, then providing it to guest is basically free.
-+
-+- 4 `TscRateMsr`: Not required by L0, not provided to L1
-+
-+  The main putative use for this would be trying to maintain an
-+  invariant TSC across cores with different clock speeds, or after a
-+  migrate.  Unlike others, this doesn't have an error path to worry
-+  about compatibility-wise; and according to tests done when nestedSVM
-+  was first implemented, it's actually faster to emliate TscRateMSR in
-+  the L0 hypervisor than for L1 to attempt to emulate it itself.
-+
-+  However, using this properly in L0 will take some implementation
-+  effort; and composing it properly with L1 will take even more
-+  effort.  Just leave it off for now.
-+
-+ - 5 `VmcbClean`: VMCB Clean Bits: Not required by L0, provide to L1
-+
-+  This is a pure optimization, both on the side of the L0 and L1.  The
-+  implementaiton for L1 is entirely Xen-side, so can be provided even
-+  on hardware that doesn't provide it.  And it's purely an
-+  optimization, so could be "implemented" by ignoring the bits
-+  entirely.
-+
-+  As such, we don't need to require it for L0; and as it's already
-+  implemented, no reason not to provide it to L1.  Before this feature
-+  was available those bits were marked SBZ ("should be zero"); setting
-+  them was already advertised to cause unpredictable behavior.
-+
-+- 6 `FlushByAsid`: Require for L0, provide to L1
-+
-+  This is cheap and easy to use for L0 and to provide to the L1;
-+  there's no reson not to just pass it through.
-+
-+- 7 `DecodeAssists`: Require for L0, provide to L1
-+
-+  Using it in L0 reduces the chance that we'll make some sort of error
-+  in the decode path.  And if hardware supports it, it's easy enough
-+  to provide to the L1.
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index bda853e3c9..a25f498265 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -673,6 +673,12 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-          */
-         config->flags |= XEN_DOMCTL_CDF_oos_off;
- 
-+    if ( nested_virt && !hvm_nested_virt_supported() )
-+    {
-+        dprintk(XENLOG_INFO, "Nested virt requested but not available\n");
-+        return -EINVAL;        
-+    }
-+
-     if ( nested_virt && !hap )
-     {
-         dprintk(XENLOG_INFO, "Nested virt not supported without HAP\n");
-diff --git a/xen/arch/x86/hvm/nestedhvm.c b/xen/arch/x86/hvm/nestedhvm.c
-index 12bf7172b8..451c4da6d4 100644
---- a/xen/arch/x86/hvm/nestedhvm.c
-+++ b/xen/arch/x86/hvm/nestedhvm.c
-@@ -150,6 +150,16 @@ static int __init cf_check nestedhvm_setup(void)
-     __clear_bit(0x80, shadow_io_bitmap[0]);
-     __clear_bit(0xed, shadow_io_bitmap[1]);
- 
-+    /* 
-+     * NB this must be called after all command-line processing has been
-+     * done, so that if (for example) HAP is disabled, nested virt is
-+     * disabled as well.
-+     */
-+    if ( cpu_has_vmx )
-+        start_nested_vmx(&hvm_funcs);
-+    else if ( cpu_has_svm )
-+        start_nested_svm(&hvm_funcs);
-+
-     return 0;
- }
- __initcall(nestedhvm_setup);
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index a5319ab729..ad2e9f5c35 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1666,3 +1666,17 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
-         }
-     }
- }
-+
-+void __init start_nested_svm(struct hvm_function_table *hvm_function_table)
-+{
-+    /* 
-+     * Required host functionality to support nested virt.  See
-+     * docs/designs/nested-svm-cpu-features.md for rationale.
-+     */
-+    hvm_function_table->caps.nested_virt =
-+        hvm_function_table->caps.hap && 
-+        cpu_has_svm_lbrv &&
-+        cpu_has_svm_nrips &&
-+        cpu_has_svm_flushbyasid &&
-+        cpu_has_svm_decode;
-+}
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index ece0aa243a..ed058d9d2b 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -2816,6 +2816,14 @@ void nvmx_set_cr_read_shadow(struct vcpu *v, unsigned int cr)
-     __vmwrite(read_shadow_field, v->arch.hvm.nvcpu.guest_cr[cr]);
- }
- 
-+void __init start_nested_vmx(struct hvm_function_table *hvm_function_table)
-+{
-+    /* TODO: Require hardware support before enabling nested virt */
-+    hvm_function_table->caps.nested_virt =
-+        hvm_function_table->caps.hap;
-+}
-+
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 87a6935d97..e6f937fed7 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -97,7 +97,10 @@ struct hvm_function_table {
-              singlestep:1,
-             
-              /* Hardware virtual interrupt delivery enable? */
--             virtual_intr_delivery:1;
-+             virtual_intr_delivery:1,
-+
-+             /* Nested virt capabilities */
-+             nested_virt:1;
-     } caps;
- 
-     /*
-@@ -654,6 +657,12 @@ static inline bool hvm_altp2m_supported(void)
-     return hvm_funcs.caps.altp2m;
- }
- 
-+/* Returns true if we have the minimum hardware requirements for nested virt */
-+static inline bool hvm_nested_virt_supported(void)
-+{
-+    return hvm_funcs.caps.nested_virt;
-+}
-+
- /* updates the current hardware p2m */
- static inline void altp2m_vcpu_update_p2m(struct vcpu *v)
- {
-@@ -797,6 +806,11 @@ static inline bool hvm_hap_supported(void)
-     return false;
- }
- 
-+static inline bool hvm_nested_virt_supported(void)
-+{
-+    return false;
-+}
-+
- static inline bool nhvm_vmcx_hap_enabled(const struct vcpu *v)
- {
-     ASSERT_UNREACHABLE();
-diff --git a/xen/arch/x86/include/asm/hvm/nestedhvm.h b/xen/arch/x86/include/asm/hvm/nestedhvm.h
-index 56a2019e1b..0568acb25f 100644
---- a/xen/arch/x86/include/asm/hvm/nestedhvm.h
-+++ b/xen/arch/x86/include/asm/hvm/nestedhvm.h
-@@ -82,4 +82,8 @@ static inline bool vvmcx_valid(const struct vcpu *v)
-     return vcpu_nestedhvm(v).nv_vvmcxaddr != INVALID_PADDR;
- }
- 
-+
-+void start_nested_svm(struct hvm_function_table *);
-+void start_nested_vmx(struct hvm_function_table *);
-+
- #endif /* _HVM_NESTEDHVM_H */
--- 
-2.25.1
+In any event - besides you still wanting to get input from Andrew, it
+ought to be clear that anything unusual / unexpected will require extra
+justification in the description.
 
+Jan
 
