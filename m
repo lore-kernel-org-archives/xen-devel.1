@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E0C0C54E6A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 345A7C54E66
 	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 17:27:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692670.1080017 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.692674.1080058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkSNy-0002EH-BZ; Wed, 13 Mar 2024 17:27:26 +0000
+	id 1rkSO4-0003KC-NK; Wed, 13 Mar 2024 17:27:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692670.1080017; Wed, 13 Mar 2024 17:27:26 +0000
+Received: by outflank-mailman (output) from mailman id 692674.1080058; Wed, 13 Mar 2024 17:27:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkSNy-0002EA-8j; Wed, 13 Mar 2024 17:27:26 +0000
-Received: by outflank-mailman (input) for mailman id 692670;
- Wed, 13 Mar 2024 17:27:24 +0000
+	id 1rkSO4-0003K3-KE; Wed, 13 Mar 2024 17:27:32 +0000
+Received: by outflank-mailman (input) for mailman id 692674;
+ Wed, 13 Mar 2024 17:27:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M9/O=KT=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rkSNw-0001lR-LF
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 17:27:24 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
+ id 1rkSO2-0001lR-EE
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 17:27:30 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f3d14d5f-e15e-11ee-a1ee-f123f15fe8a2;
- Wed, 13 Mar 2024 18:27:23 +0100 (CET)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a450615d1c4so24687366b.0
- for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 10:27:23 -0700 (PDT)
+ id f738e570-e15e-11ee-a1ee-f123f15fe8a2;
+ Wed, 13 Mar 2024 18:27:28 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a46682e71a9so9111466b.3
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 10:27:28 -0700 (PDT)
 Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- f15-20020a170906048f00b00a42ee62b634sm5005732eja.106.2024.03.13.10.27.20
+ f15-20020a170906048f00b00a42ee62b634sm5005732eja.106.2024.03.13.10.27.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 10:27:21 -0700 (PDT)
+ Wed, 13 Mar 2024 10:27:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3d14d5f-e15e-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: f738e570-e15e-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710350842; x=1710955642; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1710350848; x=1710955648; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=k2oya0isulzFAqiR2Y4bOr7KNgkZIK98TBQV1YHRgn0=;
-        b=tgN3u5Rl4VBjVMYFfH665xVPT01FrfQ26DouBvPsUIp6/IEpYZHe67CTfWwzTMDDgE
-         GKTWbszIJA+rXPqCv84CSN5rKscOiGd2vjIAx31MEdRvylichcslzc2ny5I0Lm7OXt+b
-         5URllXOM0AmYh6pJjYOT1uJ6opYp+xaC0zCMI=
+        bh=42OziT0p0S95gIbK7k1NI+z53JEbfaX+0bPN+VqyNws=;
+        b=NLpoAP1pmRjhQeTgPHFob4IXM4K69d91fLRP41wKjX8WysAXj4kZL0vM96vnQ+z1qV
+         RaDsM8kEfO7IVaTz9pVqkr2+1Lo7mWo2/JB6LpJjuywQQ8ZU2rruXSsjeYI7k3PnyPNc
+         Vu5/9sGuMKo1LShOrJRfCGAB3f1YOQwjoDAIk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710350842; x=1710955642;
+        d=1e100.net; s=20230601; t=1710350848; x=1710955648;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=k2oya0isulzFAqiR2Y4bOr7KNgkZIK98TBQV1YHRgn0=;
-        b=bzGWniYsk53HGq4U8N94gAFlV6jLk9ltByn2ZlqXyTp+Y0fEm1JF2XwNC6Et+bOB7k
-         /RuF1lQ8wRSfsmiFQZOv1yF8YhLw2UrONjPn82v4ELSqMHt3tondTNCufIGtrtdRyqxR
-         LxEriIah61QRj+PqKXSorSmM7ciKRAGCdr50xjegCfI3neLnoRpJMMSh0Po9IGcSje2p
-         Eynq5tTo88p0/P+bN4ppLSJfn+EWeOFLjkmgPEzw7hbHLAKdtBDhZflGePngZB649kNc
-         IrMvoxNXBbw29Cr/b4WT5DL9RHevBSBN1MbaEZ8eM7VsltZ8XeRCIHYrjXe4exa0jdWO
-         vH4g==
-X-Gm-Message-State: AOJu0YxTESqZqPOSklFzmgv8PAEfY5KIiA3Gqeh+xFSLvYs6ZiB0/U2q
-	i0ZofzQC/PLPYVDHJHwyZ4ws1ZexsNzRrbfnzYxA+dUQpvfDGFRU4YMSduF8Cch9wV1YndpnvuP
-	c
-X-Google-Smtp-Source: AGHT+IHOjqUYc+9/WYFvjA5tif1UP2IANWkp92gtxXAy0+hCRxUW7p1lSXmMlZsvtX+23e1kctw02A==
-X-Received: by 2002:a17:906:7d50:b0:a45:f1fa:a17d with SMTP id l16-20020a1709067d5000b00a45f1faa17dmr2704000ejp.25.1710350842139;
-        Wed, 13 Mar 2024 10:27:22 -0700 (PDT)
+        bh=42OziT0p0S95gIbK7k1NI+z53JEbfaX+0bPN+VqyNws=;
+        b=GBwY1cv47zhZ5iocf4BPCYspFyaWRP9sOY6jMJeLQUqvExqvcB1duPfURMeH9uoM/T
+         li7WuPzTR0I9wB+PkDOXh+Awhj1ajWhqrDCzgJ1QRO/Iz5pMp1fEJw9HqMEncjM17IWE
+         PtQCwuQmHULv6KM6rnU3yV6289hVO0j/sGF82Emu7WvCGRViYERvDSRcrHfhMRMtI0EJ
+         LBpDe4Efb4HjWHGACGq8zxW996/jIQnPqp8Vt/xU3b5ycAhEU691odoJNpRQScXu3nyL
+         Htgn6O71T13nbUPYzUcU/ZyDBZN5pnYJqDScrpqkDJdaUflNj9HTdfbjN5vA8IOvIlFl
+         +HGQ==
+X-Gm-Message-State: AOJu0Yws3/bs8krlmaBv68J4QoTLquOrc/nKfOq1HrL92R+nTWkIC8sQ
+	2eXxFWXXS7cnh0yDqDuW0WxvZmSbzvWgj3yXRgnl8KuHgjzNzHgBkFZHxtUe2rm+qXpYmTT6Fha
+	Q
+X-Google-Smtp-Source: AGHT+IHDA9kAwEE71Zrgue/ZSZqfSO4un1kmimxgYrjALg0+zIY9/UH8mGWH25XVKZ8g/4LSy1rdDA==
+X-Received: by 2002:a17:907:104b:b0:a45:bcac:c7e0 with SMTP id oy11-20020a170907104b00b00a45bcacc7e0mr8414663ejb.65.1710350847919;
+        Wed, 13 Mar 2024 10:27:27 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -92,9 +92,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>,
 	Federico Serafini <federico.serafini@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 2/7] xen/bitops: Implement ffs() in common logic
-Date: Wed, 13 Mar 2024 17:27:11 +0000
-Message-Id: <20240313172716.2325427-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 6/7] xen: Swap find_first_set_bit() for ffsl() - 1
+Date: Wed, 13 Mar 2024 17:27:15 +0000
+Message-Id: <20240313172716.2325427-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240313172716.2325427-1-andrew.cooper3@citrix.com>
 References: <20240313172716.2325427-1-andrew.cooper3@citrix.com>
@@ -102,22 +102,14 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Allow the optimiser to elimiate the call completely, and use the compiler
-builtin by default.  Architectures should only proide arch_ffs() if they think
-they can do better than the compiler.
+find_first_set_bit() is a Xen-ism which has undefined behaviour with a 0
+input.  The latter is well defined with an input of 0, and is a found outside
+of Xen too.
 
-Confirm the expected behaviour with compile time and boot time tests.
+_init_heap_pages() is the one special case here, comparing the LSB of two
+different addresses.  The -1 cancels off both sides of the expression.
 
-For x86, correct the prototype, and simplify the asm() with the statement
-given by the Intel architects to Linux about the behaviour on processors newer
-than the 486.
-
-For PPC, __builtin_ffs() is 1/3 of the size of size of the transform to
-generic_fls().  Drop the definition entirely.
-
-For ARM, simply rename ffs() to arch_ffs().  It appears that the
-transformation to __builtin_clz() still makes better code than
-__builtin_ffs().
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -136,121 +128,223 @@ CC: Simone Ballarin <simone.ballarin@bugseng.com>
 CC: Federico Serafini <federico.serafini@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/arm/include/asm/bitops.h |  2 +-
- xen/arch/ppc/include/asm/bitops.h |  1 -
- xen/arch/x86/include/asm/bitops.h | 19 +++++++++++++------
- xen/common/bitops.c               | 10 ++++++++++
- xen/include/xen/bitops.h          | 15 +++++++++++++++
- 5 files changed, 39 insertions(+), 8 deletions(-)
+ xen/arch/x86/guest/xen/xen.c                 | 4 ++--
+ xen/arch/x86/hvm/dom0_build.c                | 2 +-
+ xen/arch/x86/hvm/hpet.c                      | 8 ++++----
+ xen/arch/x86/include/asm/pt-contig-markers.h | 2 +-
+ xen/arch/x86/mm.c                            | 2 +-
+ xen/arch/x86/mm/p2m-pod.c                    | 4 ++--
+ xen/common/page_alloc.c                      | 2 +-
+ xen/common/softirq.c                         | 2 +-
+ xen/drivers/passthrough/amd/iommu_map.c      | 2 +-
+ xen/drivers/passthrough/iommu.c              | 4 ++--
+ xen/drivers/passthrough/x86/iommu.c          | 4 ++--
+ 11 files changed, 18 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/bitops.h b/xen/arch/arm/include/asm/bitops.h
-index ab030b6cb032..09c6064274a7 100644
---- a/xen/arch/arm/include/asm/bitops.h
-+++ b/xen/arch/arm/include/asm/bitops.h
-@@ -157,7 +157,7 @@ static inline int fls(unsigned int x)
+diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
+index d9768cc9527d..7484b3f73ad3 100644
+--- a/xen/arch/x86/guest/xen/xen.c
++++ b/xen/arch/x86/guest/xen/xen.c
+@@ -168,14 +168,14 @@ static void cf_check xen_evtchn_upcall(void)
+ 
+     while ( pending )
+     {
+-        unsigned int l1 = find_first_set_bit(pending);
++        unsigned int l1 = ffsl(pending) - 1;
+         unsigned long evtchn = xchg(&XEN_shared_info->evtchn_pending[l1], 0);
+ 
+         __clear_bit(l1, &pending);
+         evtchn &= ~XEN_shared_info->evtchn_mask[l1];
+         while ( evtchn )
+         {
+-            unsigned int port = find_first_set_bit(evtchn);
++            unsigned int port = ffsl(evtchn) - 1;
+ 
+             __clear_bit(port, &evtchn);
+             port += l1 * BITS_PER_LONG;
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index bbae8a564522..7bc092675628 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -139,7 +139,7 @@ static int __init pvh_populate_memory_range(struct domain *d,
+         order = get_order_from_pages(end - start + 1);
+         order = min(order ? order - 1 : 0, max_order);
+         /* The order allocated and populated must be aligned to the address. */
+-        order = min(order, start ? find_first_set_bit(start) : MAX_ORDER);
++        order = min(order, start ? ffsl(start) - 1 : MAX_ORDER);
+         page = alloc_domheap_pages(d, order, dom0_memflags | MEMF_no_scrub);
+         if ( page == NULL )
+         {
+diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
+index 1db9c0b60ee0..30ec14b24110 100644
+--- a/xen/arch/x86/hvm/hpet.c
++++ b/xen/arch/x86/hvm/hpet.c
+@@ -336,7 +336,7 @@ static void timer_sanitize_int_route(HPETState *h, unsigned int tn)
+      * enabled pick the first irq.
+      */
+     timer_config(h, tn) |=
+-        MASK_INSR(find_first_set_bit(timer_int_route_cap(h, tn)),
++        MASK_INSR(ffsl(timer_int_route_cap(h, tn)) - 1,
+                   HPET_TN_ROUTE);
  }
  
+@@ -410,7 +410,7 @@ static int cf_check hpet_write(
+         {
+             bool active;
  
--#define ffs(x) ({ unsigned int __t = (x); fls(ISOLATE_LSB(__t)); })
-+#define arch_ffs(x) ({ unsigned int __t = (x); fls(ISOLATE_LSB(__t)); })
- #define ffsl(x) ({ unsigned long __t = (x); flsl(ISOLATE_LSB(__t)); })
+-            i = find_first_set_bit(new_val);
++            i = ffsl(new_val) - 1;
+             if ( i >= HPET_TIMER_NUM )
+                 break;
+             __clear_bit(i, &new_val);
+@@ -536,14 +536,14 @@ static int cf_check hpet_write(
+     /* stop/start timers whos state was changed by this write. */
+     while (stop_timers)
+     {
+-        i = find_first_set_bit(stop_timers);
++        i = ffsl(stop_timers) - 1;
+         __clear_bit(i, &stop_timers);
+         hpet_stop_timer(h, i, guest_time);
+     }
  
- /**
-diff --git a/xen/arch/ppc/include/asm/bitops.h b/xen/arch/ppc/include/asm/bitops.h
-index 5820b9ce7bb5..635a3b4e3e33 100644
---- a/xen/arch/ppc/include/asm/bitops.h
-+++ b/xen/arch/ppc/include/asm/bitops.h
-@@ -173,7 +173,6 @@ static inline int __test_and_clear_bit(int nr, volatile void *addr)
+     while (start_timers)
+     {
+-        i = find_first_set_bit(start_timers);
++        i = ffsl(start_timers) - 1;
+         __clear_bit(i, &start_timers);
+         hpet_set_timer(h, i, guest_time);
+     }
+diff --git a/xen/arch/x86/include/asm/pt-contig-markers.h b/xen/arch/x86/include/asm/pt-contig-markers.h
+index b3c1fe803534..e8c8157d605f 100644
+--- a/xen/arch/x86/include/asm/pt-contig-markers.h
++++ b/xen/arch/x86/include/asm/pt-contig-markers.h
+@@ -60,7 +60,7 @@ static bool pt_update_contig_markers(uint64_t *pt, unsigned int idx,
+     /* Step 1: Reduce markers in lower numbered entries. */
+     while ( i )
+     {
+-        b = find_first_set_bit(i);
++        b = ffsl(i) - 1;
+         i &= ~(1U << b);
+         if ( GET_MARKER(pt[i]) <= b )
+             break;
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 62f5b811bbe8..28e9a159b577 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -3418,7 +3418,7 @@ static int vcpumask_to_pcpumask(
+         {
+             unsigned int cpu;
  
- #define flsl(x) generic_flsl(x)
- #define fls(x) generic_fls(x)
--#define ffs(x) ({ unsigned int t_ = (x); fls(t_ & -t_); })
- #define ffsl(x) ({ unsigned long t_ = (x); flsl(t_ & -t_); })
- 
- /* Based on linux/include/asm-generic/bitops/ffz.h */
-diff --git a/xen/arch/x86/include/asm/bitops.h b/xen/arch/x86/include/asm/bitops.h
-index 5a71afbc89d5..2c5b103cbbd9 100644
---- a/xen/arch/x86/include/asm/bitops.h
-+++ b/xen/arch/x86/include/asm/bitops.h
-@@ -430,16 +430,23 @@ static inline int ffsl(unsigned long x)
-     return (int)r+1;
- }
- 
--static inline int ffs(unsigned int x)
-+static inline unsigned int arch_ffs(unsigned int x)
+-            vcpu_id = find_first_set_bit(vmask);
++            vcpu_id = ffsl(vmask) - 1;
+             vmask &= ~(1UL << vcpu_id);
+             vcpu_id += vcpu_bias;
+             if ( (vcpu_id >= d->max_vcpus) )
+diff --git a/xen/arch/x86/mm/p2m-pod.c b/xen/arch/x86/mm/p2m-pod.c
+index 65d31e552305..e0ad934d2e30 100644
+--- a/xen/arch/x86/mm/p2m-pod.c
++++ b/xen/arch/x86/mm/p2m-pod.c
+@@ -684,7 +684,7 @@ unsigned long
+ p2m_pod_decrease_reservation(struct domain *d, gfn_t gfn, unsigned int order)
  {
--    int r;
-+    int r = -1;
-+
-+    /*
-+     * The AMD manual states that BSF won't modify the destination register if
-+     * x=0.  The Intel manual states that the result is undefined, but the
-+     * architects have said that the register is written back with it's old
-+     * value, possibly zero extended above 32 bits.
-+     */
-+    asm ( "bsf %[val], %[res]"
-+          : [res] "+r" (r)
-+          : [val] "rm" (x) );
+     unsigned long left = 1UL << order, ret = 0;
+-    unsigned int chunk_order = find_first_set_bit(gfn_x(gfn) | left);
++    unsigned int chunk_order = ffsl(gfn_x(gfn) | left) - 1;
  
--    asm ( "bsf %1,%0\n\t"
--          "jnz 1f\n\t"
--          "mov $-1,%0\n"
--          "1:" : "=r" (r) : "rm" (x));
-     return r + 1;
- }
-+#define arch_ffs arch_ffs
- 
- /**
-  * fls - find last bit set
-diff --git a/xen/common/bitops.c b/xen/common/bitops.c
-index 4c07191b4030..484df68768ad 100644
---- a/xen/common/bitops.c
-+++ b/xen/common/bitops.c
-@@ -34,8 +34,18 @@
-         RUNTIME_CHECK(fn, val, res);            \
-     } while ( 0 )
- 
-+static void test_ffs(void)
-+{
-+    /* unsigned int ffs(unsigned int) */
-+    CHECK(ffs, 0, 0);
-+    CHECK(ffs, 1, 1);
-+    CHECK(ffs, 0x80000000U, 32);
-+}
-+
- static int __init cf_check test_bitops(void)
+     do {
+         ret += decrease_reservation(d, gfn, chunk_order);
+@@ -1384,7 +1384,7 @@ guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
+                                       unsigned int order)
  {
-+    test_ffs();
-+
-     return 0;
- }
- __initcall(test_bitops);
-diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
-index 9b40f20381a2..fb3645d9cf87 100644
---- a/xen/include/xen/bitops.h
-+++ b/xen/include/xen/bitops.h
-@@ -110,6 +110,21 @@ static inline int generic_flsl(unsigned long x)
+     unsigned long left = 1UL << order;
+-    unsigned int chunk_order = find_first_set_bit(gfn | left);
++    unsigned int chunk_order = ffsl(gfn | left) - 1;
+     int rc;
  
- #include <asm/bitops.h>
+     if ( !paging_mode_translate(d) )
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 2ec17df9b420..812eac51ea0d 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1817,7 +1817,7 @@ static void _init_heap_pages(const struct page_info *pg,
+     if ( unlikely(!avail[nid]) )
+     {
+         bool use_tail = IS_ALIGNED(s, 1UL << MAX_ORDER) &&
+-                        (find_first_set_bit(e) <= find_first_set_bit(s));
++                        (ffsl(e) <= ffsl(s));
+         unsigned long n;
  
-+/*
-+ * Find First Set bit.  Bits are labelled from 1.
-+ */
-+static always_inline __pure unsigned int ffs(unsigned int x)
-+{
-+    if ( __builtin_constant_p(x) )
-+        return __builtin_ffs(x);
-+
-+#ifndef arch_ffs
-+#define arch_ffs __builtin_ffs
-+#endif
-+
-+    return arch_ffs(x);
-+}
-+
- /* --------------------- Please tidy below here --------------------- */
+         n = init_node_heap(nid, s, nr_pages, &use_tail);
+diff --git a/xen/common/softirq.c b/xen/common/softirq.c
+index 321d26902d37..bee4a82009c3 100644
+--- a/xen/common/softirq.c
++++ b/xen/common/softirq.c
+@@ -48,7 +48,7 @@ static void __do_softirq(unsigned long ignore_mask)
+              || cpu_is_offline(cpu) )
+             break;
  
- #ifndef find_next_bit
+-        i = find_first_set_bit(pending);
++        i = ffsl(pending) - 1;
+         clear_bit(i, &softirq_pending(cpu));
+         (*softirq_handlers[i])();
+     }
+diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
+index e0f4fe736a8d..f1061bfc798c 100644
+--- a/xen/drivers/passthrough/amd/iommu_map.c
++++ b/xen/drivers/passthrough/amd/iommu_map.c
+@@ -137,7 +137,7 @@ static void set_iommu_ptes_present(unsigned long pt_mfn,
+         ASSERT(!pde->u);
+ 
+         if ( pde > table )
+-            ASSERT(pde->ign0 == find_first_set_bit(pde - table));
++            ASSERT(pde->ign0 == ffsl(pde - table) - 1);
+         else
+             ASSERT(pde->ign0 == CONTIG_LEVEL_SHIFT);
+ 
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 996c31be1284..67dd8e5cd9e1 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -301,7 +301,7 @@ static unsigned int mapping_order(const struct domain_iommu *hd,
+ {
+     unsigned long res = dfn_x(dfn) | mfn_x(mfn);
+     unsigned long sizes = hd->platform_ops->page_sizes;
+-    unsigned int bit = find_first_set_bit(sizes), order = 0;
++    unsigned int bit = ffsl(sizes) - 1, order = 0;
+ 
+     ASSERT(bit == PAGE_SHIFT);
+ 
+@@ -309,7 +309,7 @@ static unsigned int mapping_order(const struct domain_iommu *hd,
+     {
+         unsigned long mask;
+ 
+-        bit = find_first_set_bit(sizes);
++        bit = ffsl(sizes) - 1;
+         mask = (1UL << bit) - 1;
+         if ( nr <= mask || (res & mask) )
+             break;
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index a3fa0aef7c37..d721ea27a033 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -641,7 +641,7 @@ struct page_info *iommu_alloc_pgtable(struct domain_iommu *hd,
+     if ( contig_mask )
+     {
+         /* See pt-contig-markers.h for a description of the marker scheme. */
+-        unsigned int i, shift = find_first_set_bit(contig_mask);
++        unsigned int i, shift = ffsl(contig_mask) - 1;
+ 
+         ASSERT((CONTIG_LEVEL_SHIFT & (contig_mask >> shift)) == CONTIG_LEVEL_SHIFT);
+ 
+@@ -652,7 +652,7 @@ struct page_info *iommu_alloc_pgtable(struct domain_iommu *hd,
+ 
+         for ( i = 4; i < PAGE_SIZE / sizeof(*p); i += 4 )
+         {
+-            p[i + 0] = (find_first_set_bit(i) + 0ULL) << shift;
++            p[i + 0] = (ffsl(i) - 1ULL) << shift;
+             p[i + 1] = 0;
+             p[i + 2] = 1ULL << shift;
+             p[i + 3] = 0;
 -- 
 2.30.2
 
