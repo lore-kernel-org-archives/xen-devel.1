@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CEF2C54E66
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942E1C54E69
 	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 19:39:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692751.1080186 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.692753.1080206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkURK-0007JU-Oz; Wed, 13 Mar 2024 19:39:02 +0000
+	id 1rkURV-0007rb-7n; Wed, 13 Mar 2024 19:39:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692751.1080186; Wed, 13 Mar 2024 19:39:02 +0000
+Received: by outflank-mailman (output) from mailman id 692753.1080206; Wed, 13 Mar 2024 19:39:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkURK-0007JN-MB; Wed, 13 Mar 2024 19:39:02 +0000
-Received: by outflank-mailman (input) for mailman id 692751;
- Wed, 13 Mar 2024 19:39:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rkURV-0007rR-4J; Wed, 13 Mar 2024 19:39:13 +0000
+Received: by outflank-mailman (input) for mailman id 692753;
+ Wed, 13 Mar 2024 19:39:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EOmT=KT=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1rkURJ-0007JH-Ou
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 19:39:01 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20600.outbound.protection.outlook.com
- [2a01:111:f403:2009::600])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 564bc085-e171-11ee-afdd-a90da7624cb6;
- Wed, 13 Mar 2024 20:39:00 +0100 (CET)
-Received: from BN1PR10CA0012.namprd10.prod.outlook.com (2603:10b6:408:e0::17)
- by PH0PR12MB7864.namprd12.prod.outlook.com (2603:10b6:510:26c::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.36; Wed, 13 Mar
- 2024 19:38:57 +0000
-Received: from BN3PEPF0000B06E.namprd21.prod.outlook.com
- (2603:10b6:408:e0:cafe::46) by BN1PR10CA0012.outlook.office365.com
- (2603:10b6:408:e0::17) with Microsoft SMTP Server (version=TLS1_2,
+ id 1rkURT-0007Yd-U2
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 19:39:11 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20607.outbound.protection.outlook.com
+ [2a01:111:f400:7e88::607])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5ce1089e-e171-11ee-a1ee-f123f15fe8a2;
+ Wed, 13 Mar 2024 20:39:10 +0100 (CET)
+Received: from CY5P221CA0145.NAMP221.PROD.OUTLOOK.COM (2603:10b6:930:6a::25)
+ by CY5PR12MB6369.namprd12.prod.outlook.com (2603:10b6:930:21::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Wed, 13 Mar
+ 2024 19:39:06 +0000
+Received: from CY4PEPF0000E9CF.namprd03.prod.outlook.com
+ (2603:10b6:930:6a:cafe::44) by CY5P221CA0145.outlook.office365.com
+ (2603:10b6:930:6a::25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.20 via Frontend
- Transport; Wed, 13 Mar 2024 19:38:57 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B06E.mail.protection.outlook.com (10.167.243.73) with Microsoft
+ Transport; Wed, 13 Mar 2024 19:39:05 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CY4PEPF0000E9CF.mail.protection.outlook.com (10.167.241.142) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.0 via Frontend Transport; Wed, 13 Mar 2024 19:38:56 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.7386.12 via Frontend Transport; Wed, 13 Mar 2024 19:39:05 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 13 Mar
- 2024 14:38:56 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ 2024 14:39:04 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 13 Mar
- 2024 14:38:55 -0500
+ 2024 14:39:04 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Wed, 13 Mar 2024 14:38:55 -0500
+ Transport; Wed, 13 Mar 2024 14:39:02 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,106 +65,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 564bc085-e171-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 5ce1089e-e171-11ee-a1ee-f123f15fe8a2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IY35FrMSL9AQQ4+xljyowJsW74P4wtsdMvqzVcTh6CSAuOLBdb4gpJ18dM/P4oQ+v+USlWYEVbC3FIzyW43TxrTUXwDDjTSn7HaOu7ZzW4O1bKYv6G4NpgrW/4k0LLamNjm0qFMLnZna1ujoBsrCI1L1482CPk3jUYjnWrnrX5SFc/9aA7OyfZNWGP5STJM/tuA30uKzmIjON1ukzhCbwPxzcOePsrBv9PDNpdmPZR4e3QLnQ1481gxNfkUI/BkaNKo53phn/QGDRjztZ7WQjPmbiXcMv0eqCmKfp0n96DbsFGVTCVC0tNTTMFz4hTZwI+poV4Wnx8KtwGaN0F6+TA==
+ b=jSEtrjmKZKsOC7FOfgVsewbMOvUuqXGS5Zh+kjMOlVgaxscvewr2+QZmV1WNRvn2R2VRilaqTTo0luK5ScITdm1Rv9drtGnNBBNZzT75dAYtBK/yJ7kxSmIJ58NWN1i/lQs3mkfRRsp71XPs6LVpGs1iK+0JWGx+Y52ZFB6yLjK+T6j2MGcAZNm0HedXdPuGvzl96JlrfOnQxbWbBLGnKG18lip6CuaFD4tYeeHAa24DAyh6u8mzSLWo3+UXOYLGJl7QSLGIRtGdncL2mzaTMKCu6oNKyp6gg4cpoOVn5Wx159ERHcoq2ZdYcLoJZ92ZjvuqBnHSjaXKasEulAx+eg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Lz4h54/N/vGW4eVNNvLMe6hEsmbsEffwEzT057PZlXs=;
- b=cobKFs16vqbSl/boAwlV/bgvQqvu2Nswg8is3wJOXgBi7SNIHxe7DB/ddIg44sQmDpbyIghW+stT90ZtRxoo5cAzw6v/gz/AYC5ZhMp2x/cBDwcMGPwmOczupAyeHDQOFJQuHncWh6I26SkxfZwPrCBXUMku2sjRXfrzV9v33U5w5R3FCP/+gk2FF+9mIoeFbllgxoi8At6tbUOxVeALpQP+gRIiQ+zJp/aXl2+Xvq9qbC1EB38XO9Ctdd+5ZD0CJ7997TKP3TmPsFF/+NTQUiEcfmu/LU3/tHxzBmMDCSJF4+TAWuY+gmo+Cjp6Lxso7E0x8gqfW33VWtYEHrpwYw==
+ bh=ZaYStxNKhxziDBKjMiI264ns3R4OBvC1TLDcC7wP1GE=;
+ b=c8V27ODprsF40khRs7sXT878TaNomsTM3deuhqat6hMdP2Y3aqTb5N5Td5sxSsggb97dosDP50wPH9tFRlvmlErCQ8SBkbgR5AT/ME3iZcnuDTOs8K0LdN6n3VVSmZkTWW1TVFHTaerYJHJpv0lxGe63l8NZDyTopFPfFQiHfE7DDD0B1/AcadokcgCWPGBdvYAAJaTbp/ZCI7oXrSM7Md5kHyJYBqFEX78PkvfOvUT1qcgMsh5NfiXMd/pM4kty2XR+qRyL7tQgDUnBnt0PoIqQLN/bYjm/9WcnBktEZikLT98T8cvbwFWyxiobT0ZOZYfLcGaK/xRjrIOWB5Q71g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Lz4h54/N/vGW4eVNNvLMe6hEsmbsEffwEzT057PZlXs=;
- b=JFrAHE1fKxniWaUIZvIM7fGZAT3OzBbfTTU8xLYtsvlFGCafEi03IndHAeHnup1grOIj+319OFNHWf9EVXJllt2lDqQ/KVl1TH5290Uo/cWOvjY9N4bB+na94hHkQDgcMajK8afmZIj61lr1CAYwcgA7DPbJapYYrTBb42nrd8I=
+ bh=ZaYStxNKhxziDBKjMiI264ns3R4OBvC1TLDcC7wP1GE=;
+ b=1AIdR64+BBhfKZrT5wZXd2DOXZsy15FrI5hLVo/FK1NEvUzEtataiEYK8PKEKI6XNN3o06njZdl0loLPSzcp1E4GdclbPUoR1lNBCM4r09NPnzC74VKsJ3j+AuEk/OhzICaIq3B61/1DoIuU9QrpaYhE8tRfTNK5K4GCyTEPJis=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, George Dunlap <george.dunlap@citrix.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 0/3] x86/pvh: Support relocating dom0 kernel
-Date: Wed, 13 Mar 2024 15:30:18 -0400
-Message-ID: <20240313193021.241764-1-jason.andryuk@amd.com>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 2/3] libelf: Expand ELF note printing
+Date: Wed, 13 Mar 2024 15:30:20 -0400
+Message-ID: <20240313193021.241764-3-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240313193021.241764-1-jason.andryuk@amd.com>
+References: <20240313193021.241764-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06E:EE_|PH0PR12MB7864:EE_
-X-MS-Office365-Filtering-Correlation-Id: 07128a3d-93b0-48b5-66af-08dc439538f5
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CF:EE_|CY5PR12MB6369:EE_
+X-MS-Office365-Filtering-Correlation-Id: 338926f9-b4e0-4fd2-fcee-08dc43953e35
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	NI0tetK6zEeojuZ1GrjDoEuynu0nAvJagg2FOO67ScBtTzDvGvJD8rC28a7VH+R5vXw8XsCOx1ZXUB8o7hh7gtPKO3TIGaAcEDYHrnOZsrVcOdzM1OB/u7C9sDXMaUx+eHw3zejWPoyLsO1RBSTy9D90EGJjQ+z0uybrolXJRVgxT3crF2+lSEl7Uq4td3cZtxhpUeWm+4PddeoVYZxsukQGBZlhbQvJdcGSQKOBcPrayJbJ4NG/oOMHE8w4kEqzqI3d/3aArx01BRsT1oVd7wecOCNa3n/9u6GwOMmu+05vuq1AmM5PjOM2s9BiX3+GTgvGYcK5B4VESVb7Rn+CvgkDZIuJWrM4ZLV0huUXQoI28oQE/PO1UcTTZxpV2pH7Qv9R+e30sfgZIBF3CQSWP+GhAoiuVk2uxOn3MOHvas1+7q3TrjE93KnAYyn907tAfMNvSr36ymkGk3crVE7bc+c3b8gE7is8kM1oy52XLtzyOr05x8guF9/Gt/mhW1aVihGBvvLxGOmz5+/C5VOHiIgUSs2lIFud/7gx1aT+kEBkbWRdLjaR2vtfBrh1wH6og4mu6D9McLf8XB58W/0ymfL0APagNM1LDdJHiFV117O9IvA56gmSVP2LnDa8cJG6cMx45dWehHnVgOghC6CJEF/jhPp4JZDKYo3eraGhZj5F3qRVxAsGm2TYZ1xJqW8OZ9aI/anWcDpyv7uugW1891x0FYHCi6WpTO4U9KilzSL4vIOnPFhAuGz3cf8y9tRh
+	xDEYkK9IRi2EoBCjF20Ik0ap0chhjn7aMoWF7sNlv/qF5/23/chd7BB/9UKtnBGJH/gGVc1HA9qKapPR0gDVueC2BbVCY/szsK0xmKo3eD1PGIYlhVVxkBV0AZDCVICHnU4HGNO5ZL9+L+68QPD1Bl3YkfZppxFXsalCs9nhJfQKj3ng+l55GrTdyx4u4caVlq0VR0SOkOzEWBqTsAAG6HV6pX2GGNhpA9I7Q/xTKURXtR5+wW50ySKF+MPiC2AhVh2WoviA3/2UtR9vXGNH1swE5t8eYqumikW2vXYYpbm88c60V8RNHXmC5WmF5NwpHnwBQsyJe+UWD8lTY8ef5iMAvYhgr4N0jYZPb4FI4DEez1nLR4BxSYu3Htt7mlP32kkTGk2uolVCtY8CUNqY2tQJU0xaOVySuG5DmWXCSTKbbj1m3A2rbQgro2lCI1IcspMGGYPLMaMxMQIdKl3ALMD89yBdBSCt9oLSxiMHBCDxQmQQTwZG/dagBJRfPLFQN7fx20wJ3QUxbnrmWUTs+Pq5UQ9SewQdmkgHOXWJGXohTpgghdlp+wxu+7edwPxB4dHw0OxrXQO3Y1PhXV22tkBr3yhQQpEYIETkrMPmaSYepeEKWL8ONQY2GT3ClJ6TQTv4KJTEx8o/y8NhHBTx5qOvcE5lny8Uj3kEcEtn6XkOJTNMOyzhB4MQdvOjlJctnw7nLyjDCx+dIMoj6Xcp5daf8K++4Me06C0vqoHEZOHaAJZjdRzxsWEFvTnQcXsn
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(82310400014)(1800799015)(376005);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2024 19:38:56.4093
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2024 19:39:05.1587
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 07128a3d-93b0-48b5-66af-08dc439538f5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 338926f9-b4e0-4fd2-fcee-08dc43953e35
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B06E.namprd21.prod.outlook.com
+	CY4PEPF0000E9CF.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7864
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6369
 
-Xen tries to load a PVH dom0 kernel at the fixed guest physical address
-from the elf headers.  For Linux, this defaults to 0x1000000 (16MB), but
-it can be configured.
+The XEN_ELFNOTE_L1_MFN_VALID is an arrray of two values, but it is
+printed as:
+(XEN) ELF: note: L1_MFN_VALID = 0
 
-Unfortunately there exist firmwares that have reserved regions at this
-address, so Xen fails to load the dom0 kernel since it's not RAM.
+Expand the printing to handle an array.
+(XEN) ELF: note: L1_MFN_VALID = mask: 0x1 val: 0x1
 
-The other issue is that the Linux PVH entry point is not
-position-independent.  It expects to run at the compiled
-CONFIG_PHYSICAL_ADDRESS.
+ELFNOTE_OTHER prints the name and " = ", but not the value.
+Implementing a switch case is needed to show the value, which should
+include a newline.
 
-This patch set expands the PVH dom0 builder to try to relocate the
-kernel if needed and possible.  XEN_ELFNOTE_PVH_RELOCATION is added for
-kernels to indicate they are relocatable and their acceptable address
-range and alignment.
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+ xen/common/libelf/libelf-dominfo.c | 59 +++++++++++++++++++-----------
+ 1 file changed, 38 insertions(+), 21 deletions(-)
 
-The first patch reverts "xen/x86: bzImage parse kernel_alignment" since
-the alignment will be specified by the ELF note.
-
-The second patch expands ELF note printing so arrays of values can be
-handled.
-
-The third patch expands the pvh dom0 kernel placement code.
-
-I'll post an additional patch showing the Linux changes to make PVH
-relocatable.
-
-Jason Andryuk (3):
-  Revert "xen/x86: bzImage parse kernel_alignment"
-  libelf: Expand ELF note printing
-  x86/PVH: Support relocatable dom0 kernels
-
- xen/arch/x86/bzimage.c             |   4 +-
- xen/arch/x86/hvm/dom0_build.c      | 112 ++++++++++++++++++++++++++++-
- xen/arch/x86/include/asm/bzimage.h |   2 +-
- xen/arch/x86/pv/dom0_build.c       |   2 +-
- xen/common/libelf/libelf-dominfo.c |  72 +++++++++++++------
- xen/include/public/elfnote.h       |  11 +++
- xen/include/xen/libelf.h           |   3 +
- 7 files changed, 177 insertions(+), 29 deletions(-)
-
+diff --git a/xen/common/libelf/libelf-dominfo.c b/xen/common/libelf/libelf-dominfo.c
+index a13a5e4db6..7cc7b18a51 100644
+--- a/xen/common/libelf/libelf-dominfo.c
++++ b/xen/common/libelf/libelf-dominfo.c
+@@ -101,26 +101,30 @@ elf_errorstatus elf_xen_parse_note(struct elf_binary *elf,
+ /* *INDENT-OFF* */
+     static const struct {
+         const char *name;
+-        bool str;
++        enum {
++            ELFNOTE_INT,
++            ELFNOTE_STRING,
++            ELFNOTE_OTHER
++        } type;
+     } note_desc[] = {
+-        [XEN_ELFNOTE_ENTRY] = { "ENTRY", 0},
+-        [XEN_ELFNOTE_HYPERCALL_PAGE] = { "HYPERCALL_PAGE", 0},
+-        [XEN_ELFNOTE_VIRT_BASE] = { "VIRT_BASE", 0},
+-        [XEN_ELFNOTE_INIT_P2M] = { "INIT_P2M", 0},
+-        [XEN_ELFNOTE_PADDR_OFFSET] = { "PADDR_OFFSET", 0},
+-        [XEN_ELFNOTE_HV_START_LOW] = { "HV_START_LOW", 0},
+-        [XEN_ELFNOTE_XEN_VERSION] = { "XEN_VERSION", 1},
+-        [XEN_ELFNOTE_GUEST_OS] = { "GUEST_OS", 1},
+-        [XEN_ELFNOTE_GUEST_VERSION] = { "GUEST_VERSION", 1},
+-        [XEN_ELFNOTE_LOADER] = { "LOADER", 1},
+-        [XEN_ELFNOTE_PAE_MODE] = { "PAE_MODE", 1},
+-        [XEN_ELFNOTE_FEATURES] = { "FEATURES", 1},
+-        [XEN_ELFNOTE_SUPPORTED_FEATURES] = { "SUPPORTED_FEATURES", 0},
+-        [XEN_ELFNOTE_BSD_SYMTAB] = { "BSD_SYMTAB", 1},
+-        [XEN_ELFNOTE_L1_MFN_VALID] = { "L1_MFN_VALID", false },
+-        [XEN_ELFNOTE_SUSPEND_CANCEL] = { "SUSPEND_CANCEL", 0 },
+-        [XEN_ELFNOTE_MOD_START_PFN] = { "MOD_START_PFN", 0 },
+-        [XEN_ELFNOTE_PHYS32_ENTRY] = { "PHYS32_ENTRY", 0 },
++        [XEN_ELFNOTE_ENTRY] = { "ENTRY", ELFNOTE_INT },
++        [XEN_ELFNOTE_HYPERCALL_PAGE] = { "HYPERCALL_PAGE", ELFNOTE_INT },
++        [XEN_ELFNOTE_VIRT_BASE] = { "VIRT_BASE", ELFNOTE_INT },
++        [XEN_ELFNOTE_INIT_P2M] = { "INIT_P2M", ELFNOTE_INT },
++        [XEN_ELFNOTE_PADDR_OFFSET] = { "PADDR_OFFSET", ELFNOTE_INT },
++        [XEN_ELFNOTE_HV_START_LOW] = { "HV_START_LOW", ELFNOTE_INT },
++        [XEN_ELFNOTE_XEN_VERSION] = { "XEN_VERSION", ELFNOTE_STRING },
++        [XEN_ELFNOTE_GUEST_OS] = { "GUEST_OS", ELFNOTE_STRING },
++        [XEN_ELFNOTE_GUEST_VERSION] = { "GUEST_VERSION", ELFNOTE_STRING },
++        [XEN_ELFNOTE_LOADER] = { "LOADER", ELFNOTE_STRING },
++        [XEN_ELFNOTE_PAE_MODE] = { "PAE_MODE", ELFNOTE_STRING },
++        [XEN_ELFNOTE_FEATURES] = { "FEATURES", ELFNOTE_STRING },
++        [XEN_ELFNOTE_SUPPORTED_FEATURES] = { "SUPPORTED_FEATURES", ELFNOTE_INT },
++        [XEN_ELFNOTE_BSD_SYMTAB] = { "BSD_SYMTAB", ELFNOTE_STRING },
++        [XEN_ELFNOTE_L1_MFN_VALID] = { "L1_MFN_VALID", ELFNOTE_OTHER },
++        [XEN_ELFNOTE_SUSPEND_CANCEL] = { "SUSPEND_CANCEL", ELFNOTE_INT },
++        [XEN_ELFNOTE_MOD_START_PFN] = { "MOD_START_PFN", ELFNOTE_INT },
++        [XEN_ELFNOTE_PHYS32_ENTRY] = { "PHYS32_ENTRY", ELFNOTE_INT },
+     };
+ /* *INDENT-ON* */
+ 
+@@ -136,7 +140,7 @@ elf_errorstatus elf_xen_parse_note(struct elf_binary *elf,
+         return 0;
+     }
+ 
+-    if ( note_desc[type].str )
++    if ( note_desc[type].type == ELFNOTE_STRING )
+     {
+         str = elf_strval(elf, elf_note_desc(elf, note));
+         if (str == NULL)
+@@ -146,13 +150,17 @@ elf_errorstatus elf_xen_parse_note(struct elf_binary *elf,
+         parms->elf_notes[type].type = XEN_ENT_STR;
+         parms->elf_notes[type].data.str = str;
+     }
+-    else
++    else if ( note_desc[type].type == ELFNOTE_INT )
+     {
+         val = elf_note_numeric(elf, note);
+         elf_msg(elf, "ELF: note: %s = %#" PRIx64 "\n", note_desc[type].name, val);
+         parms->elf_notes[type].type = XEN_ENT_LONG;
+         parms->elf_notes[type].data.num = val;
+     }
++    else
++    {
++        elf_msg(elf, "ELF: note: %s = ", note_desc[type].name);
++    }
+     parms->elf_notes[type].name = note_desc[type].name;
+ 
+     switch ( type )
+@@ -217,6 +225,15 @@ elf_errorstatus elf_xen_parse_note(struct elf_binary *elf,
+     case XEN_ELFNOTE_PHYS32_ENTRY:
+         parms->phys_entry = val;
+         break;
++
++    case XEN_ELFNOTE_L1_MFN_VALID:
++        if ( elf_uval(elf, note, descsz) != 2 * sizeof(uint64_t) )
++            return -1;
++
++        elf_msg(elf, "mask: %#"PRIx64" val: %#"PRIx64"\n",
++                elf_note_numeric_array(elf, note, 8, 0),
++                elf_note_numeric_array(elf, note, 8, 1));
++        break;
+     }
+     return 0;
+ }
 -- 
 2.44.0
 
