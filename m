@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5EA2C54E69
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 15:17:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692557.1079815 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F26C54E6A
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 15:17:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692561.1079856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkQLk-0005hU-9Y; Wed, 13 Mar 2024 15:17:00 +0000
+	id 1rkQLq-0006hd-GC; Wed, 13 Mar 2024 15:17:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692557.1079815; Wed, 13 Mar 2024 15:17:00 +0000
+Received: by outflank-mailman (output) from mailman id 692561.1079856; Wed, 13 Mar 2024 15:17:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkQLk-0005gx-5V; Wed, 13 Mar 2024 15:17:00 +0000
-Received: by outflank-mailman (input) for mailman id 692557;
- Wed, 13 Mar 2024 15:16:59 +0000
+	id 1rkQLq-0006ga-7f; Wed, 13 Mar 2024 15:17:06 +0000
+Received: by outflank-mailman (input) for mailman id 692561;
+ Wed, 13 Mar 2024 15:17:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WIWB=KT=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1rkQLj-0005e0-8l
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 15:16:59 +0000
-Received: from fout3-smtp.messagingengine.com (fout3-smtp.messagingengine.com
- [103.168.172.146]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bb051b42-e14c-11ee-a1ee-f123f15fe8a2;
- Wed, 13 Mar 2024 16:16:57 +0100 (CET)
+ id 1rkQLo-0005e0-QW
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 15:17:04 +0000
+Received: from fhigh6-smtp.messagingengine.com
+ (fhigh6-smtp.messagingengine.com [103.168.172.157])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id be8de75e-e14c-11ee-a1ee-f123f15fe8a2;
+ Wed, 13 Mar 2024 16:17:03 +0100 (CET)
 Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailfout.nyi.internal (Postfix) with ESMTP id 74D8513800A7;
- Wed, 13 Mar 2024 11:16:56 -0400 (EDT)
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 6CC4E11400FF;
+ Wed, 13 Mar 2024 11:17:02 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute7.internal (MEProxy); Wed, 13 Mar 2024 11:16:56 -0400
+ by compute7.internal (MEProxy); Wed, 13 Mar 2024 11:17:02 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 13 Mar 2024 11:16:54 -0400 (EDT)
+ 13 Mar 2024 11:17:01 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,63 +46,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb051b42-e14c-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: be8de75e-e14c-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm1; t=1710343016; x=1710429416; bh=G9GKN9B8dH
-	TGd4PXNPHUeKZSdjSUiY5pvs4yUwY572k=; b=THMohA7j8GCuaUm4OWNqJ5qAIr
-	SXO34opW77Frm+pxeTW1cCtAzJzFnTbuDH7gT9NfZFj+HnIjEKOeHzQMxHRdDJzY
-	6WKM/VKkvfnymn3rwX2XDnowvXKgXw1VSlYeGL0qzjBVvPJ/3kcjqX+RpgPrfWpO
-	53pCjlREs6rB5CxWcvKJFYGWl6ioeaH/JdXH6ufHtEmR/8idKYURJSLggVVgjegZ
-	b6q7rrZg4FqLyhE9D/fCIi/LAekJCjBcGnAfFouqtNRc127+aEPSYjAQcIJyBY4m
-	gWaS6fLPAHGRS1L/XCcVo0PAXTuewCdkgQr6HlOoCVQmPnxg/koDmUEe2VXg==
+	:subject:to:to; s=fm1; t=1710343022; x=1710429422; bh=i5H8JidWWb
+	TxxhBJM5jd/OPNyDg2YLsGie249e88IWE=; b=UKvjsY1vxQCEsNgn1NvSASZJoX
+	pC8aLwCl5sLjzxT4OQ9Dg17DN2aJXfyEym/U2Kxndo4u7HtrzwzDPjedgB+qrNu5
+	3E1JODtwBLtCb8h99WBxL32dvSYLfQjFLGpFSzzkAzp9EgunpsMaYbTVP7VUh4VE
+	vLIur6Gbo9E8yz/lnlSzkSKNaj24DdYopTlgD8OHPHAZEbM3LPr1e1N/vKfu6V88
+	swr0+L6LQPYMVwcL5Kq+9nmjoe9c7wojGI0PTfdLCUGGUPyZthsHnqx/rRO/kgtv
+	Ll64MMjn4YG3ZkVHDxc4eLSm1W2YzXZcbAJLDHhOQum1xwtemkI8M+XrFU0A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1710343016; x=
-	1710429416; bh=G9GKN9B8dHTGd4PXNPHUeKZSdjSUiY5pvs4yUwY572k=; b=Y
-	jNN8vNAoZxGkodc9tFNvuGk/xsa6iFmhUdjCk+f89GqBVHtN38gBq/39lGMJnAU2
-	2A2NUZOKjYvTpqcNYzXvKauNjxl92Lr8ETfExGTQRLu1PAseutIJLDfteUqWxvVX
-	0IqRmljTxclqjhgaVGaU66Tk98rZ71O6KvVXMqqnvFVaqMDOhDd1BZc9o3SbWEn5
-	GbqauV7lfC4SlpkpGgjqpnG+iWTt/JmXj6Mt4jyh9k7GbiTQifIpT2Nafmgc9qu8
-	iPW0WimKaWdlbGe6gnyDwdBW7eiLu99X8StfXznuL8RRY/gs05iOQnd7bRkCu/wL
-	t/q/2PY2NgjUJek/T3K/A==
-X-ME-Sender: <xms:aMPxZS7M9rMFI24Sp7z22i8hJFl_kt8zOHNmR_CEvgwMztOGJyGgHQ>
-    <xme:aMPxZb5f5ME_J_lklhCBQFThKGkQu8M9fEwQMHE6QhqSaepLboFGHCBcAeMAIuza1
-    uzRWVEkMRKR_w>
-X-ME-Received: <xmr:aMPxZRfQybqPtiv38iOfbLZYowVj03YHQVWgEyrjkXq0mw8FmDGkSPxJEBkVZIo_op2kjtbZqSYdhA9wsuGAyKc1MO2nJkYCYA6YG35tfZmsA1Az8Bs>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1710343022; x=
+	1710429422; bh=i5H8JidWWbTxxhBJM5jd/OPNyDg2YLsGie249e88IWE=; b=B
+	Ryd5Gz71E/xqjdh+hLpHF1s6usSvZ7wmu8PgBUnfhM4MPSbUg7316DtNRP8cVTSl
+	Oxut5vsoQBIohFQr0tDayu95L19ilUXuT2ZkL+eY869urylBE8h5apVFVOwsxQ9E
+	Ek5F3My6NFkGVrobko4Soem7jEkmk0Tp7sAcK1wtMzVD+Mh1ghUOXH/ev3gd+RG9
+	Lb3jqQptdiKGH4f568DgHnl3OcsiDQ7kDia4KzV8Kcfk0aVogblyZdRQXJXQVmrA
+	MWLOt0/Fo+MIoCV1E/VJykslsIjFm4+nTkXX7KK6rkxnlYeNJJUgjk3BVeooZ50t
+	QzcOz3w4NhgdKyECS99og==
+X-ME-Sender: <xms:bsPxZYL6OJbcN8M0hsc35Gy1xgTOdKKHyJJo6nmi6DnmBLTugkgNgA>
+    <xme:bsPxZYKRIRuKr4FyQhmzlc_kpXSjAceGN8sPfZUBomp-pc_80zfRl9TgTejMt-VDE
+    3jHbbemfOWpwg>
+X-ME-Received: <xmr:bsPxZYsYPo3will0EuUzg5vYVfRYh2J86H2beXpmrRcg4ezW5jY7_tTWY4E0pYPYsYTY-7ygm_tRD3Iblxx-st7yHZ5KjxHGlMqSInXkOAO7dHy1a4A>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrjeehgdejgecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
     fjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgv
     khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
-    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeu
-    udehgfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluh
-    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
-    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:aMPxZfKv-eSQdZw0tiMeAgZ5GDAnw8GADhlbKnML-F1ETErrEdlYmA>
-    <xmx:aMPxZWIavx0aPL1-V4Xmnqd9CvgXZIU2zwwwMy-iBeAiOqd5iGrJ2A>
-    <xmx:aMPxZQzkUCufg0C97IOCxPqGFSiulTLbQZ-5Ed0EWbfdkyCNjzwEmQ>
-    <xmx:aMPxZaJyATS39qSY1POnU2JFwGp8IE9BfaE54mVylfli04m2csPQHg>
-    <xmx:aMPxZTWxgq3E0xRF2g0CmThGjknxJrDBvXoaAkdLUiyXrqyp3EIi5Q>
+    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepffei
+    tdegveffteelvdeghffhvefghfefkeelheeujeejgedvvdfgffejuedtvdelnecuffhomh
+    grihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
+    mhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgsh
+    hlrggsrdgtohhm
+X-ME-Proxy: <xmx:bsPxZVbBhFyf6ol0OG1IwSy63HhMkTJ69oGfE3r3dwMd7y_87UxlOg>
+    <xmx:bsPxZfZZxbXF8innZCLqNyOk8LnHuR5VS2DCCAaihQMmGONqaBVsgg>
+    <xmx:bsPxZRDuiHcpI5soTp24Evu539frPz0jQkq1fcHrbKS11839qFy9uQ>
+    <xmx:bsPxZVZOjbQVGvl0QLtC4i2bpElcnKBJzMRdRYJvr3boZurauMdaSg>
+    <xmx:bsPxZeURPhs6kKQmRrmvnHeeDA6q8z4oqFlyi5iNiIr2v7ZxPY4QVg>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 1/7] x86/msi: passthrough all MSI-X vector ctrl writes to device model
-Date: Wed, 13 Mar 2024 16:16:06 +0100
-Message-ID: <3e1150560a41bd567049627d684cd4e754530869.1710342968.git-series.marmarek@invisiblethingslab.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH v5 5/7] automation: switch to a wifi card on ADL system
+Date: Wed, 13 Mar 2024 16:16:10 +0100
+Message-ID: <30d445332e4cd70ce1d53a71d878107e43f128c5.1710342968.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.afa2d89161590f5193dd6bfd340c5e9347877aae.1710342968.git-series.marmarek@invisiblethingslab.com>
 References: <cover.afa2d89161590f5193dd6bfd340c5e9347877aae.1710342968.git-series.marmarek@invisiblethingslab.com>
@@ -109,135 +106,98 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-QEMU needs to know whether clearing maskbit of a vector is really
-clearing, or was already cleared before. Currently Xen sends only
-clearing that bit to the device model, but not setting it, so QEMU
-cannot detect it. Because of that, QEMU is working this around by
-checking via /dev/mem, but that isn't the proper approach.
+Switch to a wifi card that has registers on a MSI-X page. This tests the
+"x86/hvm: Allow writes to registers on the same page as MSI-X table"
+feature. Switch it only for HVM test, because MSI-X adjacent write is
+not supported on PV.
 
-Give all necessary information to QEMU by passing all ctrl writes,
-including masking a vector. Advertise the new behavior via
-XENVER_get_features, so QEMU can know it doesn't need to access /dev/mem
-anymore.
-
-While this commit doesn't move the whole maskbit handling to QEMU (as
-discussed on xen-devel as one of the possibilities), it is a necessary
-first step anyway. Including telling QEMU it will get all the required
-information to do so. The actual implementation would need to include:
- - a hypercall for QEMU to control just maskbit (without (re)binding the
-   interrupt again
- - a methor for QEMU to tell Xen it will actually do the work
-Those are not part of this series.
+This requires also including drivers and firmware in system for tests.
+Remove firmware unrelated to the test, to not increase initrd size too
+much (all firmware takes over 100MB compressed).
+And finally adjusts test script to handle not only eth0 as a test device,
+but also wlan0 and connect it to the wifi network.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-I did not added any control to enable/disable this new behavior (as
-Roger have suggested for possible non-QEMU ioreqs). I don't see how the
-new behavior could be problematic for some existing ioreq server (they
-already received writes to those addresses, just not all of them),
-but if that's really necessary, I can probably add a command line option
-to restore previous behavior system-wide.
+This needs two new gitlab variables: WIFI_HW2_SSID and WIFI_HW2_PSK. I'll
+provide them in private.
 
-Changes in v5:
-- announce the feature only on x86
-- style fixes
+This change requires rebuilding test containers.
 
-Changes in v4:
-- ignore unaligned writes with X86EMUL_OKAY
-- restructure the code to forward all writes in _msixtbl_write() instead
-  of manipulating return value of msixtbl_write() - this makes
-  WRITE_LEN4_COMPLETION special case unnecessary
-- advertise the changed behavior via XENVER_get_features instead of DMOP
-v3:
- - advertise changed behavior in XEN_DMOP_get_ioreq_server_info - make
-   "flags" parameter IN/OUT
- - move len check back to msixtbl_write() - will be needed there anyway
-   in a later patch
-v2:
- - passthrough quad writes to emulator too (Jan)
- - (ab)use len==0 for write len=4 completion (Jan), but add descriptive
-   #define for this magic value
+This can be applied only after QEMU change is committed. Otherwise the
+test will fail.
 ---
- xen/arch/x86/hvm/vmsi.c       | 19 ++++++++++++++-----
- xen/common/kernel.c           |  1 +
- xen/include/public/features.h |  8 ++++++++
- 3 files changed, 23 insertions(+), 5 deletions(-)
+ automation/gitlab-ci/test.yaml                      | 4 ++++
+ automation/scripts/qubes-x86-64.sh                  | 7 +++++++
+ automation/tests-artifacts/alpine/3.18.dockerfile   | 7 +++++++
+ automation/tests-artifacts/kernel/6.1.19.dockerfile | 2 ++
+ 4 files changed, 20 insertions(+)
 
-diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
-index adbac965f9f7..999917983789 100644
---- a/xen/arch/x86/hvm/vmsi.c
-+++ b/xen/arch/x86/hvm/vmsi.c
-@@ -283,8 +283,8 @@ static int msixtbl_write(struct vcpu *v, unsigned long address,
-     unsigned long flags;
-     struct irq_desc *desc;
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 8b7b2e4da92d..23a183fad967 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -193,6 +193,10 @@ adl-pci-pv-x86-64-gcc-debug:
  
--    if ( (len != 4 && len != 8) || (address & (len - 1)) )
--        return r;
-+    if ( !IS_ALIGNED(address, len) )
-+        return X86EMUL_OKAY;
- 
-     rcu_read_lock(&msixtbl_rcu_lock);
- 
-@@ -345,8 +345,7 @@ static int msixtbl_write(struct vcpu *v, unsigned long address,
- 
- unlock:
-     spin_unlock_irqrestore(&desc->lock, flags);
--    if ( len == 4 )
--        r = X86EMUL_OKAY;
-+    r = X86EMUL_OKAY;
- 
- out:
-     rcu_read_unlock(&msixtbl_rcu_lock);
-@@ -357,7 +356,17 @@ static int cf_check _msixtbl_write(
-     const struct hvm_io_handler *handler, uint64_t address, uint32_t len,
-     uint64_t val)
- {
--    return msixtbl_write(current, address, len, val);
-+    /* Ignore invalid length or unaligned writes. */
-+    if ( (len != 4 && len != 8) || !IS_ALIGNED(address, len) )
-+        return X86EMUL_OKAY;
-+
-+    /*
-+     * This function returns X86EMUL_UNHANDLEABLE even if write is properly
-+     * handled, to propagate it to the device model (so it can keep its
-+     * internal state in sync).
-+     */
-+    msixtbl_write(current, address, len, val);
-+    return X86EMUL_UNHANDLEABLE;
- }
- 
- static bool cf_check msixtbl_range(
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index 08dbaa2a054c..b44b2439ca8e 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -637,6 +637,7 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-                 fi.submap |= (1U << XENFEAT_hvm_safe_pvclock) |
-                              (1U << XENFEAT_hvm_callback_vector) |
-                              (has_pirq(d) ? (1U << XENFEAT_hvm_pirqs) : 0);
-+            fi.submap |= (1U << XENFEAT_dm_msix_all_writes);
- #endif
-             if ( !paging_mode_translate(d) || is_domain_direct_mapped(d) )
-                 fi.submap |= (1U << XENFEAT_direct_mapped);
-diff --git a/xen/include/public/features.h b/xen/include/public/features.h
-index 4437f25d2532..880193094713 100644
---- a/xen/include/public/features.h
-+++ b/xen/include/public/features.h
-@@ -120,6 +120,14 @@
- #define XENFEAT_runstate_phys_area        18
- #define XENFEAT_vcpu_time_phys_area       19
- 
-+/*
-+ * If set, Xen will passthrough all MSI-X vector ctrl writes to device model,
-+ * not only those unmasking an entry. This allows device model to properly keep
-+ * track of the MSI-X table without having to read it from the device behind
-+ * Xen's backs. This information is relevant only for device models.
-+ */
-+#define XENFEAT_dm_msix_all_writes        20
-+
- #define XENFEAT_NR_SUBMAPS 1
- 
- #endif /* __XEN_PUBLIC_FEATURES_H__ */
+ adl-pci-hvm-x86-64-gcc-debug:
+   extends: .adl-x86-64
++  variables:
++    PCIDEV: "00:14.3"
++    WIFI_SSID: "$WIFI_HW2_SSID"
++    WIFI_PSK: "$WIFI_HW2_PSK"
+   script:
+     - ./automation/scripts/qubes-x86-64.sh pci-hvm 2>&1 | tee ${LOGFILE}
+   needs:
+diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
+index 7eabc1bd6ad4..60498ef1e89a 100755
+--- a/automation/scripts/qubes-x86-64.sh
++++ b/automation/scripts/qubes-x86-64.sh
+@@ -94,6 +94,13 @@ on_reboot = "destroy"
+     domU_check="
+ set -x -e
+ interface=eth0
++if [ -e /sys/class/net/wlan0 ]; then
++    interface=wlan0
++    set +x
++    wpa_passphrase "$WIFI_SSID" "$WIFI_PSK" > /etc/wpa_supplicant.conf
++    set -x
++    wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf
++fi
+ ip link set \"\$interface\" up
+ timeout 30s udhcpc -i \"\$interface\"
+ pingip=\$(ip -o -4 r show default|cut -f 3 -d ' ')
+diff --git a/automation/tests-artifacts/alpine/3.18.dockerfile b/automation/tests-artifacts/alpine/3.18.dockerfile
+index 9cde6c9ad4da..c323e266c7da 100644
+--- a/automation/tests-artifacts/alpine/3.18.dockerfile
++++ b/automation/tests-artifacts/alpine/3.18.dockerfile
+@@ -34,6 +34,13 @@ RUN \
+   apk add udev && \
+   apk add pciutils && \
+   apk add libelf && \
++  apk add wpa_supplicant && \
++  # Select firmware for hardware tests
++  apk add linux-firmware-other && \
++  mkdir /lib/firmware-preserve && \
++  mv /lib/firmware/iwlwifi-so-a0-gf-a0* /lib/firmware-preserve/ && \
++  rm -rf /lib/firmware && \
++  mv /lib/firmware-preserve /lib/firmware && \
+   \
+   # Xen
+   cd / && \
+diff --git a/automation/tests-artifacts/kernel/6.1.19.dockerfile b/automation/tests-artifacts/kernel/6.1.19.dockerfile
+index 3a4096780d20..84ed5dff23ae 100644
+--- a/automation/tests-artifacts/kernel/6.1.19.dockerfile
++++ b/automation/tests-artifacts/kernel/6.1.19.dockerfile
+@@ -32,6 +32,8 @@ RUN curl -fsSLO https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-"$LINUX_VERSI
+     make xen.config && \
+     scripts/config --enable BRIDGE && \
+     scripts/config --enable IGC && \
++    scripts/config --enable IWLWIFI && \
++    scripts/config --enable IWLMVM && \
+     cp .config .config.orig && \
+     cat .config.orig | grep XEN | grep =m |sed 's/=m/=y/g' >> .config && \
+     make -j$(nproc) bzImage && \
 -- 
 git-series 0.9.1
 
