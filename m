@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE84C54E67
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 14:27:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692456.1079619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7469AC54791
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 14:59:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692470.1079640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkPZC-0003xB-JP; Wed, 13 Mar 2024 14:26:50 +0000
+	id 1rkQ4m-0001QG-6w; Wed, 13 Mar 2024 14:59:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692456.1079619; Wed, 13 Mar 2024 14:26:50 +0000
+Received: by outflank-mailman (output) from mailman id 692470.1079640; Wed, 13 Mar 2024 14:59:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkPZC-0003x4-Ga; Wed, 13 Mar 2024 14:26:50 +0000
-Received: by outflank-mailman (input) for mailman id 692456;
- Wed, 13 Mar 2024 14:26:48 +0000
+	id 1rkQ4m-0001Q9-47; Wed, 13 Mar 2024 14:59:28 +0000
+Received: by outflank-mailman (input) for mailman id 692470;
+ Wed, 13 Mar 2024 14:59:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=M9/O=KT=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rkPZA-0003iP-GP
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 14:26:48 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
+ <SRS0=HSGV=KT=cloud.com=kelly.choi@srs-se1.protection.inumbo.net>)
+ id 1rkQ4l-0001Oo-Aq
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 14:59:27 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b8fa6dd5-e145-11ee-afdd-a90da7624cb6;
- Wed, 13 Mar 2024 15:26:47 +0100 (CET)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-512bde3d197so5790762e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 07:26:46 -0700 (PDT)
-Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- b15-20020a170906194f00b00a4665f829a9sm159681eje.90.2024.03.13.07.26.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 07:26:44 -0700 (PDT)
+ id 48ce857b-e14a-11ee-afdd-a90da7624cb6;
+ Wed, 13 Mar 2024 15:59:26 +0100 (CET)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5683089d4bbso7271764a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 07:59:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,226 +42,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8fa6dd5-e145-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 48ce857b-e14a-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710340005; x=1710944805; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nXVQ+Dqyc78LR6Ra+wwAzbMl89ontQsPF8SkdAS3z1w=;
-        b=t51o/givEajLPkvwof0HL6ErCeyMP9BmTW7/P6FgX47PLkos1Hs+M0sVihzoVmpD13
-         GtPvwkEDyRrUhUj1j+PQc/3x/PoBGl6kJHAMaDEp9MZZhubQR4HdT1HJv5tXObsAYSde
-         hUjBRbW9nUzWMsmkUBoxK36Vkwp3AkdslwkHw=
+        d=cloud.com; s=cloud; t=1710341965; x=1710946765; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=hCinrcfC+9irVXRne3N2PTAFGdJZMBrm1hz95sPNsWY=;
+        b=W5ub9HYSo5V1MgW+Gq0c55BiOqEFLnXg0ob+r/tJ8N/+qfohELtBhPH60HVnHLwzXI
+         +IuPVl58/tTXpQew/dWLNaVV3jjOj93wgpYZjVw5LNwtAwzUhtA6p9C0/hdKkmuP6CR+
+         QMaxxLs7JQfs0dF+mIeYM5tNQB5wghhCxuG/I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710340005; x=1710944805;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nXVQ+Dqyc78LR6Ra+wwAzbMl89ontQsPF8SkdAS3z1w=;
-        b=B00/vCdmMqpMjh+X9SL7wU+Edo4WMMMvIQf5GvhG2Nfw1aIM0YvFUAUgDcDTO+8U6s
-         N7bmSXqKQX9KBK4zy3mQze2CaDDbqjDbQjqipERIDzI9AQmjV3WjmCl20b2EeBod/X+R
-         PIbY1k96/ANXRHEY3ZcGX05coEtASrDb7p3v86RcyfFP00QdY/JvydKdn7uH1SV6FW4l
-         MGddQYvPgzP/kO7ueFWvfUHI9vBvn0fhrHbpaKiF/5zjUnLuLlmESKIJ58nQuIGJiYPz
-         55zzpFWGlar8ung4RoWiIZug60M5GSy3uVtWPyiufTFNdPXc7CmpT6OEYFSupQmo8ztA
-         l37A==
-X-Gm-Message-State: AOJu0YzIGqyfJV5ugqFIFDYolAsvsue1N02QS9e5zK7LIqnt59LNNC+N
-	ighOTv1mrPJOuo3vsGP0F8aheSO8jhbN/DMBliOBA9CboMC2TcgOGywPLM2doAQpPckxJHdLkDS
-	i
-X-Google-Smtp-Source: AGHT+IFEPQpjfCqBquDUOKQ25b+Y0k4nn9j6cItZnIX349LqilO1ebgxQxDtOd7IeiVurWP0nATcNA==
-X-Received: by 2002:a19:7715:0:b0:513:a2b1:6291 with SMTP id s21-20020a197715000000b00513a2b16291mr6760022lfc.7.1710340005393;
-        Wed, 13 Mar 2024 07:26:45 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 1/2] x86/entry: Introduce POP_GPRS
-Date: Wed, 13 Mar 2024 14:26:40 +0000
-Message-Id: <20240313142641.2150302-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240313142641.2150302-1-andrew.cooper3@citrix.com>
-References: <20240313142641.2150302-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20230601; t=1710341965; x=1710946765;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=hCinrcfC+9irVXRne3N2PTAFGdJZMBrm1hz95sPNsWY=;
+        b=PypJUG2U6RzXN5ieXAB04YNASkZPjmnz14PVxanKvc2fCR3/llcVv88BPmT46ovkbZ
+         lSMWf4x+RX0PkrM1YsUY8CKDyfUPf5zm6lvIW4LVJmJkH4/jYgiZpslhEg45CstXa6fK
+         u37PFLm9INsD6/hhy7HwveDrjA2JeoUIOuvtObVZEEgdjrWBQ0EM1KwOYC9tKtU/o5do
+         IfUFEsmVbC3/tVsVRKt4ZFbUhg4ljx+s2xlQivOyPiv20aOE+VNScxoPIJ0qNJWFW5ks
+         0gXqbnE2oMeyCLujiwY+sBzHBb/Kz3gCNyxgtL9YXrObBKMfT7jDfTwQDW0wuDPM6nNJ
+         yOaw==
+X-Gm-Message-State: AOJu0YySCL+gkN0CjfCAJaHsA8MFybQ/x9qcd4VKBKfASqMVrUywhacH
+	4PvWhw9Xx/16Rw9b0z7tasMoTU2yW805I7zF39yOIbKiG5rrQ54X7Zdj6rD2lsy8tYTveLKquad
+	Ce5L4K+VjM1dmjFNw2gMz9wOj2K1v2riB03PaUfHWYhiiDONjBXY=
+X-Google-Smtp-Source: AGHT+IHXpaLhuRlbbe0xRr3WNGSKgzdHHBq7QsmFWYXfAarQgLZuOI9iJptwCB2G6Xfl4uPiBhgHb/XBn5aSv+9Mtzk=
+X-Received: by 2002:a50:8d55:0:b0:568:3362:ccdb with SMTP id
+ t21-20020a508d55000000b005683362ccdbmr8734973edt.10.1710341965326; Wed, 13
+ Mar 2024 07:59:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Kelly Choi <kelly.choi@cloud.com>
+Date: Wed, 13 Mar 2024 14:58:49 +0000
+Message-ID: <CAO-mL=xXRaQUHh0HOnqm8d2FtNo8dsm8Dn1oX6Wb=qJ_4a-YNw@mail.gmail.com>
+Subject: Mailing list changes
+To: xen-devel <xen-devel@lists.xenproject.org>, xen-users@lists.xenproject.org
+Cc: advisory-board@lists.xenproject.org, committers@xenproject.org
+Content-Type: multipart/alternative; boundary="00000000000049cf6406138c05af"
 
-The macro named RESTORE_ALL has several problems.  It adjusts the stack
-pointer despite this not being clear to the caller.  It also goes against
-recommendations in the optimisation guides because of trying to do too many
-things at once.  (i.e. there's a reason why compilers don't emit code looking
-like this.)
+--00000000000049cf6406138c05af
+Content-Type: text/plain; charset="UTF-8"
 
-Introduce a new POP_GPRS macro which only POPs GPRs.  Use it for the HVM paths
-which are already using POPs.
+Hi everyone,
 
-Also use it for restore_all_{xen,guest}().  This saves most of a cacheline
-worth of code from two fastpaths:
+We recently discussed some mailing list changes in our last community call.
 
-  add/remove: 0/0 grow/shrink: 0/2 up/down: 0/-99 (-99)
-  Function                                     old     new   delta
-  restore_all_guest                            378     330     -48
-  restore_all_xen                              165     114     -51
+*Issue:*
 
-but it also avoids having an explicit modification to the stack pointer
-between %rsp-relative accesses, which avoids stalls in the stack-engine
-optimisations in some microarchitectures.
+   - Lists.xenproject.org software is outdated, DKIM, DMARC, ARC is no
+   longer sufficient, and there's no clear update path from Mailman2 to
+   Mailman3.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/hvm/svm/entry.S         | 17 ++---------------
- xen/arch/x86/hvm/vmx/entry.S         | 16 +---------------
- xen/arch/x86/include/asm/asm_defns.h | 23 +++++++++++++++++++++++
- xen/arch/x86/x86_64/asm-offsets.c    |  1 +
- xen/arch/x86/x86_64/entry.S          | 12 ++++++------
- 5 files changed, 33 insertions(+), 36 deletions(-)
+*Potential solution:*
 
-diff --git a/xen/arch/x86/hvm/svm/entry.S b/xen/arch/x86/hvm/svm/entry.S
-index 60b0b00ed0af..305f9466096a 100644
---- a/xen/arch/x86/hvm/svm/entry.S
-+++ b/xen/arch/x86/hvm/svm/entry.S
-@@ -74,22 +74,9 @@ __UNLIKELY_END(nsvm_hap)
-         ALTERNATIVE "", svm_vmentry_spec_ctrl, X86_FEATURE_SC_MSR_HVM
-         ALTERNATIVE "", DO_SPEC_CTRL_DIV, X86_FEATURE_SC_DIV
- 
--        pop  %r15
--        pop  %r14
--        pop  %r13
--        pop  %r12
--        pop  %rbp
-         mov  VCPU_svm_vmcb_pa(%rbx),%rax
--        pop  %rbx
--        pop  %r11
--        pop  %r10
--        pop  %r9
--        pop  %r8
--        pop  %rcx /* Skip %rax: restored by VMRUN. */
--        pop  %rcx
--        pop  %rdx
--        pop  %rsi
--        pop  %rdi
-+
-+        POP_GPRS rax=%rcx /* Skip %rax.  It's restored by VMRUN. */
- 
-         sti
-         vmrun
-diff --git a/xen/arch/x86/hvm/vmx/entry.S b/xen/arch/x86/hvm/vmx/entry.S
-index 1bead826caa3..92d8b919198c 100644
---- a/xen/arch/x86/hvm/vmx/entry.S
-+++ b/xen/arch/x86/hvm/vmx/entry.S
-@@ -115,21 +115,7 @@ UNLIKELY_END(realmode)
-         and  $SCF_verw, %eax
-         or   %eax, %ecx
- 
--        pop  %r15
--        pop  %r14
--        pop  %r13
--        pop  %r12
--        pop  %rbp
--        pop  %rbx
--        pop  %r11
--        pop  %r10
--        pop  %r9
--        pop  %r8
--        pop  %rax
--        pop  %rcx
--        pop  %rdx
--        pop  %rsi
--        pop  %rdi
-+        POP_GPRS
- 
-         jpe  .L_skip_verw
-         /* VERW clobbers ZF, but preserves all others, including SF. */
-diff --git a/xen/arch/x86/include/asm/asm_defns.h b/xen/arch/x86/include/asm/asm_defns.h
-index a69fae78b123..ec10a8e1dfc6 100644
---- a/xen/arch/x86/include/asm/asm_defns.h
-+++ b/xen/arch/x86/include/asm/asm_defns.h
-@@ -314,6 +314,29 @@ static always_inline void stac(void)
-         subq  $-(UREGS_error_code-UREGS_r15+\adj), %rsp
- .endm
- 
-+/*
-+ * POP GPRs from a UREGS_* frame on the stack.  Does not modify flags.
-+ *
-+ * @rax: Alternative destination for the %rax value on the stack.
-+ */
-+.macro POP_GPRS rax=%rax
-+        pop   %r15
-+        pop   %r14
-+        pop   %r13
-+        pop   %r12
-+        pop   %rbp
-+        pop   %rbx
-+        pop   %r11
-+        pop   %r10
-+        pop   %r9
-+        pop   %r8
-+        pop   \rax
-+        pop   %rcx
-+        pop   %rdx
-+        pop   %rsi
-+        pop   %rdi
-+.endm
-+
- #ifdef CONFIG_PV32
- #define CR4_PV32_RESTORE                               \
-     ALTERNATIVE_2 "",                                  \
-diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
-index d8903a3ce9c7..944f49a82171 100644
---- a/xen/arch/x86/x86_64/asm-offsets.c
-+++ b/xen/arch/x86/x86_64/asm-offsets.c
-@@ -59,6 +59,7 @@ void __dummy__(void)
-     DEFINE(sym, offsetof(struct cpu_user_regs, mem) -                   \
-                 offsetof(struct cpu_user_regs, error_code) __VA_ARGS__)
- 
-+    OFFSET_EF(EFRAME_error_code,      error_code);
-     OFFSET_EF(EFRAME_entry_vector,    entry_vector);
-     OFFSET_EF(EFRAME_rip,             rip);
-     OFFSET_EF(EFRAME_cs,              cs);
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 7d686b762807..9280216a5436 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -186,7 +186,8 @@ FUNC_LOCAL(restore_all_guest)
-         /* WARNING! `ret`, `call *`, `jmp *` not safe beyond this point. */
-         SPEC_CTRL_EXIT_TO_PV    /* Req: a=spec_ctrl %rsp=regs/cpuinfo, Clob: cd */
- 
--        RESTORE_ALL
-+        POP_GPRS
-+
-         BUILD_BUG_ON(TRAP_syscall & 0xff)
-         testb $TRAP_syscall >> 8, EFRAME_entry_vector + 1(%rsp)
-         jz    iret_exit_to_guest
-@@ -696,20 +697,19 @@ UNLIKELY_END(exit_cr3)
-         /* WARNING! `ret`, `call *`, `jmp *` not safe beyond this point. */
-         SPEC_CTRL_EXIT_TO_XEN /* Req: %r12=ist_exit %r14=end %rsp=regs, Clob: abcd */
- 
--        RESTORE_ALL adj=8
-+        POP_GPRS
- 
-         /*
-          * When the CPU pushed this exception frame, it zero-extended eflags.
-          * For an IST exit, SPEC_CTRL_EXIT_TO_XEN stashed shadow copies of
-          * spec_ctrl_flags and ver_sel above eflags, as we can't use any GPRs,
-          * and we're at a random place on the stack, not in a CPUFINFO block.
--         *
--         * Account for ev/ec having already been popped off the stack.
-          */
-         SPEC_CTRL_COND_VERW \
--            scf=STK_REL(EFRAME_shadow_scf, EFRAME_rip), \
--            sel=STK_REL(EFRAME_shadow_sel, EFRAME_rip)
-+            scf=STK_REL(EFRAME_shadow_scf, EFRAME_error_code), \
-+            sel=STK_REL(EFRAME_shadow_sel, EFRAME_error_code)
- 
-+        add   $8, %rsp
-         iretq
- END(restore_all_xen)
- 
--- 
-2.30.2
+   - Host them at https://subspace.kernel.org/ due to us being part of the
+   Linux Foundation
+   - No additional cost to the project
 
+There was no objection to this during the call. For everyone else who was
+not present, please feel free to give your feedback here on the
+mailing list (should you have any).
+
+Many thanks,
+Kelly Choi
+
+Community Manager
+Xen Project
+
+--00000000000049cf6406138c05af
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi everyone,<div><br></div><div>We recently discussed some=
+ mailing list changes in our last community call.=C2=A0</div><div><br></div=
+><div><b>Issue:</b></div><div><ul><li><a href=3D"http://Lists.xenproject.or=
+g">Lists.xenproject.org</a> software is outdated, DKIM, DMARC, ARC is no lo=
+nger sufficient, and there&#39;s no clear update path from Mailman2 to Mail=
+man3.=C2=A0</li></ul><b>Potential solution:</b></div><div><ul><li>Host them=
+ at=C2=A0<a href=3D"https://subspace.kernel.org/">https://subspace.kernel.o=
+rg/</a>=C2=A0due to us being part of the Linux Foundation</li><li>No additi=
+onal cost to the project</li></ul><div>There was no objection to this durin=
+g the call. For everyone else who was not present, please feel free to give=
+ your feedback here on the mailing=C2=A0list (should you have any).</div></=
+div><div><br clear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_signature" =
+data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div>Many thanks,</div>=
+<div>Kelly Choi</div><div><br></div><div><div style=3D"color:rgb(136,136,13=
+6)">Community Manager</div><div style=3D"color:rgb(136,136,136)">Xen Projec=
+t=C2=A0<br></div></div></div></div></div></div></div>
+
+--00000000000049cf6406138c05af--
 
