@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD06FC54791
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 12:26:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692398.1079479 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC1FC54791
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Mar 2024 12:28:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692402.1079489 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkNgN-000530-UR; Wed, 13 Mar 2024 12:26:07 +0000
+	id 1rkNik-0005eN-BB; Wed, 13 Mar 2024 12:28:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692398.1079479; Wed, 13 Mar 2024 12:26:07 +0000
+Received: by outflank-mailman (output) from mailman id 692402.1079489; Wed, 13 Mar 2024 12:28:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkNgN-00052t-Rw; Wed, 13 Mar 2024 12:26:07 +0000
-Received: by outflank-mailman (input) for mailman id 692398;
- Wed, 13 Mar 2024 12:26:06 +0000
+	id 1rkNik-0005eG-8Z; Wed, 13 Mar 2024 12:28:34 +0000
+Received: by outflank-mailman (input) for mailman id 692402;
+ Wed, 13 Mar 2024 12:28:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5AcA=KT=cloud.com=george.dunlap@srs-se1.protection.inumbo.net>)
- id 1rkNgM-00052f-FY
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 12:26:06 +0000
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [2001:4860:4864:20::34])
+ id 1rkNii-0005e0-WB
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2024 12:28:32 +0000
+Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
+ [2607:f8b0:4864:20::92f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dc2edde8-e134-11ee-afdd-a90da7624cb6;
- Wed, 13 Mar 2024 13:26:05 +0100 (CET)
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-221e1910c3bso2018342fac.1
- for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 05:26:05 -0700 (PDT)
+ id 33b6ac3f-e135-11ee-afdd-a90da7624cb6;
+ Wed, 13 Mar 2024 13:28:31 +0100 (CET)
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-7dc3a92c4b8so226409241.0
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2024 05:28:32 -0700 (PDT)
+Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ ne7-20020a056214424700b00690dbc390dcsm2283874qvb.89.2024.03.13.05.28.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Mar 2024 05:28:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,59 +47,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc2edde8-e134-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 33b6ac3f-e135-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1710332764; x=1710937564; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=x9JCDC61iNKYNQIve/QaGBY5AdoE81HbyRknOAkalEo=;
-        b=lyY2Ofn94lTGmZDSc8QEvqlV4qfLezeMM5ByF5aebBcGxtG2vHww6K0fdOr1Ow/Ivt
-         9Q41YwLqMCWEzbbweXJKdoEYRvRyBDDN6X0V1wpusu+v09IXOa3jdg5CRYutt1/1hGoe
-         HEyz+sup1OuudPAzkDJWUWE9ZmFdHaH0SE8q8=
+        d=cloud.com; s=cloud; t=1710332910; x=1710937710; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=N/gG4e04OlvTPcRsxemRlv/QFnImY3oZ7Z0GxspCzBQ=;
+        b=A7gdLSso5xAH3KuOhcnIpho9ibounN9Ex1OKU07/NTofKZ+w/uHgx5OiWTIMtyoqJM
+         LrfwUkoqomiscqF1OJaCf36D+VSa0JY07LOk1vNpydhpqB8PfvqB7SAgIhS97+AxwEU6
+         W2qd2cpr3BI3cjGGRF+enD56qrb8mN+XZm0f8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710332764; x=1710937564;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=x9JCDC61iNKYNQIve/QaGBY5AdoE81HbyRknOAkalEo=;
-        b=pPZdWnAKEZ//NbCZNGqXLP8tx+MbpGLUE1gkXMHs30XWYxEOShtyr/cFkHwKUM8qip
-         9uluSfZXMT3ThszHpqQriL1g4zabJDgo7ZouTPdwQsTBUEYorC93wyTZB7C5RWl3RHm4
-         lyPw+51NqpRdILHIX+j8foFSibbJL6sizI0XvhsxHMOk80PTfdZSOI57yTgzIxpux+DJ
-         O0i+RUQvzR9ww48bRC4mDGhC84dGjzQY7fGeKX6Wi7aeF6FWCSdldVqa+EsedueSEI5B
-         T5nENfPW8YA0foUdDVkMn9hpXfimOES5j9AytDcajplpgYQmFprZNadfZX124MPD5++1
-         2OBw==
-X-Gm-Message-State: AOJu0Yzts+lRI9FlfHfno1HZyZ/Jd9WPNtrbKcDivMujDCJYPgB35IjC
-	2FfzB7pRLo4nwIjWxiPinL/JVfpVq8B65hjQw2dVl8E4m+REZTQT8dppMStDlddOaFh17tZUUq8
-	7denO4B0mx1p2S3mW5NO2I0e+We2b1EaC0QERLoybw/cf6Jd+
-X-Google-Smtp-Source: AGHT+IHi4KV+JtS0Yup9YLsW4GC+ypeG73864X60BTfpHdywmbKBm8ywDW8L461FCSiJw7YnCk6vpvBnOXWQokByAkE=
-X-Received: by 2002:a05:6870:1197:b0:220:fffc:e085 with SMTP id
- 23-20020a056870119700b00220fffce085mr10399622oau.18.1710332764089; Wed, 13
- Mar 2024 05:26:04 -0700 (PDT)
-MIME-Version: 1.0
-References: <ac46f25b-e669-f309-b36e-c4760e10479e@suse.com>
- <740404f0-3da9-4ae5-b4a5-b24cb2907e7d@suse.com> <CA+zSX=YiG9dskoZVw8u+bKtD5a-8Sc1Z+hRMUgzv=a1HmYawZg@mail.gmail.com>
- <064ec76a-4957-448b-9afe-1bd264fd81c7@suse.com> <CA+zSX=ZMjFRqj9BhVWN=JF5RidejTwjbzzHQQx=trfMBZ-90Ew@mail.gmail.com>
-In-Reply-To: <CA+zSX=ZMjFRqj9BhVWN=JF5RidejTwjbzzHQQx=trfMBZ-90Ew@mail.gmail.com>
+        d=1e100.net; s=20230601; t=1710332910; x=1710937710;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=N/gG4e04OlvTPcRsxemRlv/QFnImY3oZ7Z0GxspCzBQ=;
+        b=FoPEVw66IuCOhS/fSx9oxnBIDFPKd6ykY427YifwvIRRPH3B1CRqMJpKel6limobkr
+         uGC2BeuHHB8hQQ36VqcUQrUXP99wV48LUtY7Zgdmxvo95Ulzsnf5hh1xXVZmbK4CnKeZ
+         FYA//Kyw6fCi9B1HTjiJl5x+mshHwSvkXynpoI6iZRexANzWEXVFbfUvMAW704WDeSLH
+         rRgxsZaGf+e5hLJrd4SvYp5ZHUVVA/WTQpZP6CpKoniZWqkN6myxSt/3gYmi53RHnr2R
+         cLvXkN6jdvGrCoUZ1BwSEMgavkUTYpQrcGz3sYGuOHyfMtG/bGaZ4bDXkZRZcMaQZdEm
+         TIAQ==
+X-Gm-Message-State: AOJu0Yz1i388ac383EgN7PrungB58j5hQ2Cizjp7XI9BDuCTYQ/xyIgy
+	uQMKfmSpqsPNQNZBcENOHbzwNdeU8tkGdDzfXw4SZJ6b7XjERgO18LKBVjnQDzRNbDaCX8ilKKb
+	0
+X-Google-Smtp-Source: AGHT+IEVZ9jkA8cU8kiKfUtF/Gmqt5BEut+6B6N+5C5V/HiOCOmTvf2aM7XtgkHVehpP3uSBg3dFPA==
+X-Received: by 2002:a05:6102:32ca:b0:473:44f2:caae with SMTP id o10-20020a05610232ca00b0047344f2caaemr8385482vss.21.1710332910659;
+        Wed, 13 Mar 2024 05:28:30 -0700 (PDT)
 From: George Dunlap <george.dunlap@cloud.com>
-Date: Wed, 13 Mar 2024 12:25:53 +0000
-Message-ID: <CA+zSX=bhitA9nr=q3+jqCR5E7pPQRY+Q84OX2uHtyG8WLYtnbA@mail.gmail.com>
-Subject: Re: [PATCH v3] x86/PoD: tie together P2M update and increment of
- entry count
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@cloud.com>
+Subject: [PATCH v2 0/3] AMD Nested Virt Preparation
+Date: Wed, 13 Mar 2024 12:24:51 +0000
+Message-Id: <20240313122454.965566-1-george.dunlap@cloud.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Mar 13, 2024 at 12:25=E2=80=AFPM George Dunlap <george.dunlap@cloud=
-.com> wrote:
-> I keep missing your post-commit-message remarks due to the way I'm
-> applying your series.
+This series lays the groundwork for revamp of the AMD nested virt
+functionality.  The first two patches are clean-ups or reorganizations
+of existing code.  The final patch is the first major step towards making
+the feature supportable: allowing Xen to refuse nested virt support if certain
+hardware features are not present.
 
-Er, just to be clear, this is a problem with my workflow, not with
-your patches...
+George Dunlap (3):
+  x86: Move SVM features exposed to guest into hvm_max_cpu_policy
+  nestedsvm: Disable TscRateMSR
+  svm/nestedsvm: Introduce nested capabilities bit
 
- -George
+ docs/designs/nested-svm-cpu-features.md      | 111 +++++++++++++++++++
+ xen/arch/x86/cpu-policy.c                    |  29 ++---
+ xen/arch/x86/domain.c                        |   6 +
+ xen/arch/x86/hvm/nestedhvm.c                 |  10 ++
+ xen/arch/x86/hvm/svm/nestedsvm.c             |  16 ++-
+ xen/arch/x86/hvm/svm/svm.c                   |  57 ----------
+ xen/arch/x86/hvm/vmx/vvmx.c                  |   8 ++
+ xen/arch/x86/include/asm/hvm/hvm.h           |  16 ++-
+ xen/arch/x86/include/asm/hvm/nestedhvm.h     |   4 +
+ xen/arch/x86/include/asm/hvm/svm/nestedsvm.h |   5 -
+ 10 files changed, 184 insertions(+), 78 deletions(-)
+ create mode 100644 docs/designs/nested-svm-cpu-features.md
+
+-- 
+2.25.1
+
 
