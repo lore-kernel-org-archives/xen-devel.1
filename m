@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4C5C54E5D
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 16:33:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.693379.1081374 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A7C4C54E5D
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 16:35:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.693383.1081384 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rko1H-0002VH-KU; Thu, 14 Mar 2024 16:33:27 +0000
+	id 1rko2s-000351-Ub; Thu, 14 Mar 2024 16:35:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 693379.1081374; Thu, 14 Mar 2024 16:33:27 +0000
+Received: by outflank-mailman (output) from mailman id 693383.1081384; Thu, 14 Mar 2024 16:35:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rko1H-0002VA-Go; Thu, 14 Mar 2024 16:33:27 +0000
-Received: by outflank-mailman (input) for mailman id 693379;
- Thu, 14 Mar 2024 16:33:25 +0000
+	id 1rko2s-00034u-RH; Thu, 14 Mar 2024 16:35:06 +0000
+Received: by outflank-mailman (input) for mailman id 693383;
+ Thu, 14 Mar 2024 16:35:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hJ7k=KU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rko1F-0002Uq-MP
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 16:33:25 +0000
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [2a00:1450:4864:20::12f])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=n3nm=KU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rko2r-00034o-Ni
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 16:35:05 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 76e93c41-e220-11ee-afdd-a90da7624cb6;
- Thu, 14 Mar 2024 17:32:35 +0100 (CET)
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-513d212f818so964664e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 14 Mar 2024 09:32:35 -0700 (PDT)
-Received: from [192.168.206.239] ([94.75.70.14])
- by smtp.gmail.com with ESMTPSA id
- h4-20020a056512350400b00513c541dba8sm328441lfs.300.2024.03.14.09.32.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Mar 2024 09:32:34 -0700 (PDT)
+ id cfa83ca7-e220-11ee-afdd-a90da7624cb6;
+ Thu, 14 Mar 2024 17:35:04 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a468004667aso5208466b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Mar 2024 09:35:04 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ i12-20020a1709064fcc00b00a4671721babsm775175ejw.208.2024.03.14.09.35.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 14 Mar 2024 09:35:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,125 +47,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76e93c41-e220-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: cfa83ca7-e220-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710433955; x=1711038755; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=MC2xlIiAZTrvR9ntYM+yVSRnEvX4TUjWNo9cEE/e3Ds=;
-        b=LUs6RVlif4ba+0yhLx3t8a9u5sYCHR+si87Kp1oENqg8Zdz/2wk1BJ/g9LbKniCTnL
-         hOn3F0nxYEzzVE64n4NISwJWZ8Ot/ysWeWBSRwIdZfd1wnJk7j3IM0ybON5+qyd9WMLZ
-         1DwdXailvdl4J4MOM/Gz905ApfADylc92uHrjKQd5Cd3+/IKnm7QI1TElhWIY9OJ4+jl
-         Bd49cSzUrnak3XiVnQMqA8pW4VvpvHwPT2utHTK5CSkUI2MK3Zp0j5AK+k35UVtUMwl6
-         KpqQAExK5Ajmso81aEsiteqP0KowLrdshD2E3kTht/uVE7jXBhoLXu/lav958TIty50q
-         sZYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710433955; x=1711038755;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+        d=suse.com; s=google; t=1710434104; x=1711038904; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=MC2xlIiAZTrvR9ntYM+yVSRnEvX4TUjWNo9cEE/e3Ds=;
-        b=Q7OFxq7UbeNl1okAVrOOPPNKQmdcEu3gpYvkonOdMH1g53rgqwelWIyspkRL6LvxOG
-         g8FCaLpSONwdP+cpEOtiUWOF4OVM0Hnri0Ic3S5cbH7DIOqyGiJLoRBspvoT+C+6gyTC
-         ecMm1nN9l1zRNDXxoWSOejk17vTaN3rcag9c4vNMFmMMo/LWYj5PqOP9xX5RuBCOftMX
-         V1IPbwZz6ZjhYqIpxF7356QvncwAdGugAf+CjdFC1+6WRBslpbwkIt4awSVnGlPSpWHj
-         AeRPLQTlwyjPaGUxeW3OiNmjcXq08qXxEBjeJoo00mOMY3QldeMuxEpzycIPi2ZoY0p3
-         XsKw==
-X-Forwarded-Encrypted: i=1; AJvYcCU0P8Jx7qq5PDvutM2EXtB/8nbGKhR4KMMVMQzOuvAGti7ZWnMrn0a/4TijjFBBkVFx4qAljylB1RFGDmCD37kzSxo7jTT+9joljxcz6j8=
-X-Gm-Message-State: AOJu0YysByihzfckkzLT/iVkzhnd1GEV17gmXrT5ek6yiJ4Hw4GJwOxm
-	UhQ3FMtdILQX1zCiXRbfbcYO9aMz8qXa5UREpO05ZnaNx1dsQw2T
-X-Google-Smtp-Source: AGHT+IFzHfiUXap42ebsC2x25ld3F3zf9UHSZSflWpQI33y+sVa3PW5Svq1H5tORK0+kwkhJB5cBFg==
-X-Received: by 2002:a19:a408:0:b0:513:572f:88f0 with SMTP id q8-20020a19a408000000b00513572f88f0mr506862lfc.41.1710433955169;
-        Thu, 14 Mar 2024 09:32:35 -0700 (PDT)
-Message-ID: <308749abd97ac659b09ff42b3f80f8c57cdeb51a.camel@gmail.com>
-Subject: Re: [RISCV] [PATCH 0/7] xen/bitops: Reduce the mess, starting with
- ffs()
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>
-Cc: Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
- Shawn Anastasio <sanastasio@raptorengineering.com>, "consulting @ bugseng .
- com" <consulting@bugseng.com>, Simone Ballarin
- <simone.ballarin@bugseng.com>,  Federico Serafini
- <federico.serafini@bugseng.com>, Nicola Vetrini
- <nicola.vetrini@bugseng.com>, Xen-devel <xen-devel@lists.xenproject.org>
-Date: Thu, 14 Mar 2024 17:32:33 +0100
-In-Reply-To: <e233c298-66aa-4653-9b83-18006abe63eb@suse.com>
-References: <20240313172716.2325427-1-andrew.cooper3@citrix.com>
-	 <1805b028-e21f-448f-bf94-2156092e40a5@citrix.com>
-	 <e233c298-66aa-4653-9b83-18006abe63eb@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
+        bh=VyO1w9mGTBI1hva3ZwaMWtjIpqiAoenVVUo8FHOBu6E=;
+        b=CIolnPI9ZrWJy4NXFmarjI5FkCWCygxwsFAXW5no2qYM8nKHGmFpAOSG+YoY90MtPG
+         t3mx0LwysPs5EHqyOJulIj+rp95aAuDqmPTv6rUmGthYESeBunUQq8EBFq4qRHu66pCi
+         SQD1UsBD3x26HCKIpuWmRnZDT3Mo5DAHRAUK9FTJ1DWe5I7Pvei1Kl/Wq6551rgcH251
+         lol3HI6sRicD1cgg/q7rIA5sQF7FYzSc1VntuBxEXzxuDKRptwqebjMmpzDCUmPzmxGm
+         7CiyNubBCB6ilsgnOxizMIGK1khNWaneOFpy6FhycxL+7nccBhnuPYFaDdGlIo3NJxsf
+         OCMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1710434104; x=1711038904;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=VyO1w9mGTBI1hva3ZwaMWtjIpqiAoenVVUo8FHOBu6E=;
+        b=aQ3UTLP3Yhvpihg2eAcLt7zfFYNQ93z8OGA14I4IPtoh3vGWxpvgPOMbc0uZUHV8dn
+         GAE4aOYKhMFPyI2fh/XW980tsFRVxup+pQh8Z9xqJHJlbJVtwrI9XTDkNDV42HL/BS//
+         L1c/ggDPMM7NXVGj0aBEAHpZ1ZFthZbylSZcuUMP0whR8cXeiGj6tJ6o2k/lQg/k6AyT
+         yFMuFla2yXDNVZh/LKSNuQq8PmzoiBW6shGH+B+KeEUDKZAE3UXQakkjLMdb5mkbmy5v
+         lHYn9jp5V1meHKD5hrJoLsbX6hvQZK6WJ50GwWefI83sBJFK3pWeTgZ3SlJ7xZJUW1UK
+         sXqQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWGo4BGJxJePxji1Fsk50vI15d+jjn8vu4kF33dgs16DisRiNbKYLO28wUrZ8N9ziaDNlMncrJ+E+Su0oEKwbG2LR9p2rwH8j4lByPG/5g=
+X-Gm-Message-State: AOJu0YweRQtWZYKDkPs9V7BqQDKgk9HWPRCye+QkVGTMbRw0WXVPY8oN
+	WZHKHLYUtx9JdIFp0TBuE9EEFiZtJ9hifE/w54EDMwDjV0Yv5HHt+1rEg/KRDg==
+X-Google-Smtp-Source: AGHT+IEOxPg04E7dOA8H2rbdnSzTk+WscLVX9lTCXX6ojmK3ZrLEFB+5uim0VIUZ7aaa0IjieIYHpA==
+X-Received: by 2002:a17:907:8b9b:b0:a46:74d2:a0e7 with SMTP id tb27-20020a1709078b9b00b00a4674d2a0e7mr1485517ejc.11.1710434104230;
+        Thu, 14 Mar 2024 09:35:04 -0700 (PDT)
+Message-ID: <06cedbcc-fee9-4a58-a0bb-42f6b594ccf8@suse.com>
+Date: Thu, 14 Mar 2024 17:35:02 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/7] xen/bitops: Implement ffs() in common logic
+Content-Language: en-US
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Shawn Anastasio <sanastasio@raptorengineering.com>,
+ "consulting @ bugseng . com" <consulting@bugseng.com>,
+ Simone Ballarin <simone.ballarin@bugseng.com>,
+ Federico Serafini <federico.serafini@bugseng.com>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20240313172716.2325427-1-andrew.cooper3@citrix.com>
+ <20240313172716.2325427-3-andrew.cooper3@citrix.com>
+ <76a1e81d-86d1-438c-975e-c4db46af93ee@suse.com>
+ <6a3c09a1-f35f-4d1e-bbba-342388da71ef@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <6a3c09a1-f35f-4d1e-bbba-342388da71ef@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2024-03-14 at 16:33 +0100, Jan Beulich wrote:
-> On 14.03.2024 15:45, Andrew Cooper wrote:
-> > On 13/03/2024 5:27 pm, Andrew Cooper wrote:
-> > > Start cleaning it up with ffs() and friends.=C2=A0 Across the board,
-> > > this adds:
-> > >=20
-> > > =C2=A0* Functioning bitops without arch-specific asm
-> >=20
-> > It turns out that RISC-V doesn't have a CLZ instruction in the base
-> > ISA.=C2=A0 As a consequence, __builtin_ffs() emits a library call to
-> > ffs() on
-> > GCC, or a de Bruijn sequence on Clang.
-> >=20
-> > The optional Zbb extension adds a CLZ instruction, after which
-> > __builtin_ffs() emits a very simple sequence.
-> >=20
-> > This leaves us with several options.
-> >=20
-> > 1) Put generic_ffs() back in, although if we do this then it's
-> > going to
-> > be out-of-line in lib/ where it can be mostly ignored.
-> >=20
-> > 2) Require Zbb for Xen.
-> >=20
-> > 3) Alternative it up with Zbb or generic_ffs().
-> >=20
-> >=20
-> > I've got half a mind to do 1) irrespective.=C2=A0 It's mostly just
-> > shuffling
-> > logic out of bitops.h into lib/.
->=20
-> Yes. Might also help with the bi-sectability issue you faced.
->=20
-> > I also think we should do option 2 for RISCV.=C2=A0 Given the
-> > instruction
-> > groups that H does mandate, it's unrealistic to expect that such a
-> > chip
-> > wouldn't support Zbb/etc.
->=20
-> I'm not so sure here.
-If to look at available specs of CPUs with H, then, for example, SiFive
-P600 series family doesn't support Zbb extenstion:
-https://sifive.cdn.prismic.io/sifive/7be0420e-dac1-4558-85bc-50c7a10787e7_p=
-600_datasheet.pdf
+On 14.03.2024 17:23, Andrew Cooper wrote:
+> On 14/03/2024 2:16 pm, Jan Beulich wrote:
+>> On 13.03.2024 18:27, Andrew Cooper wrote:
+>>> --- a/xen/arch/arm/include/asm/bitops.h
+>>> +++ b/xen/arch/arm/include/asm/bitops.h
+>>> @@ -157,7 +157,7 @@ static inline int fls(unsigned int x)
+>>>  }
+>>>  
+>>>  
+>>> -#define ffs(x) ({ unsigned int __t = (x); fls(ISOLATE_LSB(__t)); })
+>>> +#define arch_ffs(x) ({ unsigned int __t = (x); fls(ISOLATE_LSB(__t)); })
+>> The way the macro is invoked, I don't think the helper local variable
+>> is then needed anymore?
+> 
+> I strongly suspect It is still needed.  ISOLATE_LSB() double-expands its
+> parameter.
 
-But I asked a team who are producing CPU with H support and they have
-Zbb extenstion.
+Even that double evaluation doesn't matter when the invoking entity is an
+inline function, and it doesn't use any non-trivial expression as argument.
 
->=20
-> > Also, getting full alternatives working is yet-more work that's not
-> > trivial at this point in RISCV's development.=C2=A0 I think it is
-> > entirely
-> > reasonable to avoid this work for now, and make it a problem for
-> > anyone
-> > who has an H-capable Zbb-incapable system.=C2=A0 (with a strong
-> > implication
-> > that this is work that probably never needs to be done.)
->=20
-> That's definitely for later.
-Considering that we are mainly using QEMU and it provides Zbb extension
-we can just update -march, and that a real h/w where I can ask to test
-a code also support this extenstion I will update riscv/booting.txt and
-update -march.
+>>> --- a/xen/include/xen/bitops.h
+>>> +++ b/xen/include/xen/bitops.h
+>>> @@ -110,6 +110,21 @@ static inline int generic_flsl(unsigned long x)
+>>>  
+>>>  #include <asm/bitops.h>
+>>>  
+>>> +/*
+>>> + * Find First Set bit.  Bits are labelled from 1.
+>>> + */
+>>> +static always_inline __pure unsigned int ffs(unsigned int x)
+>> Why always_inline?
+> 
+> For all the normal reasons to counter Clang and GCC doing stupid things
+> with inlines that contain assembly.
 
-~ Oleksii
+Hmm, there are issues when the asm() would look "complex" to the compiler,
+but that's not the case here. I was asking because, as you imply by how
+you responded, we may need to gain many more always_inline when at some
+time even you were arguing against overriding compiler decisions like this
+(unless I'm mis-remembering).
+
+Jan
 
