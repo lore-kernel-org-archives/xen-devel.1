@@ -4,29 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF21C5475B
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 08:28:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692968.1080745 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73781C54E5D
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 08:32:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692976.1080755 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkgRN-0005oO-LN; Thu, 14 Mar 2024 08:27:53 +0000
+	id 1rkgVr-0008MA-5t; Thu, 14 Mar 2024 08:32:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692968.1080745; Thu, 14 Mar 2024 08:27:53 +0000
+Received: by outflank-mailman (output) from mailman id 692976.1080755; Thu, 14 Mar 2024 08:32:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkgRN-0005oH-Ii; Thu, 14 Mar 2024 08:27:53 +0000
-Received: by outflank-mailman (input) for mailman id 692968;
- Thu, 14 Mar 2024 08:13:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NhVs=KU=zamaudio.com=damien@srs-se1.protection.inumbo.net>)
- id 1rkgDK-0002aN-WA
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 08:13:23 +0000
-Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b7044d2d-e1da-11ee-a1ee-f123f15fe8a2;
- Thu, 14 Mar 2024 09:13:19 +0100 (CET)
+	id 1rkgVr-0008M3-3A; Thu, 14 Mar 2024 08:32:31 +0000
+Received: by outflank-mailman (input) for mailman id 692976;
+ Thu, 14 Mar 2024 08:32:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=n3nm=KU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1rkgVq-0008Lx-Bu
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 08:32:30 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 64d26b68-e1dd-11ee-afdd-a90da7624cb6;
+ Thu, 14 Mar 2024 09:32:29 +0100 (CET)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5654f700705so953495a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Mar 2024 01:32:29 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ vi2-20020a170907d40200b00a45c8b6e965sm474970ejc.3.2024.03.14.01.32.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 14 Mar 2024 01:32:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,99 +47,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7044d2d-e1da-11ee-a1ee-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zamaudio.com;
-	s=protonmail2; t=1710403996; x=1710663196;
-	bh=QX53ikl/A6rMwZE/LD2LcGZ0Q9sfRlbAsySKSrfXqK4=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=V0Kck0tDfBs4pvj9H1hF6PLb9iAB4i695ciID5PLM1yecDAwThq37UUSgD0dzxDPu
-	 GobFkvPpWVTtjze+9jWhoqklXe1M44QBmAkB23RcW3tWd1dDjhXHkxtzWWdGZYhjbo
-	 t7l3/R/Tmx9SyXBG/wOz4pXh0EW4cnbIt12f9/qdmqD4G+cxh0ZYHDJOmhGRNvJu24
-	 Uc7yL8DsaEYVxUtMgsbcbGGi80/+BiktE+kEaUV+r0Ll9FotioYrH+cuHEnwlKGIbh
-	 ONh8nvLBHTXoWYPvbOg0dGDeh50yTmNyaw4htiqi2QwooqRCce5UvgssGKvGuCoPhC
-	 WnWGa+h0CoqRA==
-Date: Thu, 14 Mar 2024 08:12:55 +0000
-To: grub-devel@gnu.org, ross.lagerwall@citrix.com
-From: Damien Zammit <damien@zamaudio.com>
-Cc: jbeulich@suse.com, xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, daniel.kiper@oracle.com
-Subject: Re: [PATCH 1/7] multiboot2: Add load type header and support for the PE binary type
-Message-ID: <AF72X2ysQoPQwSN_InXfIHzizVxNQs0hUR86S4yu_BZgD9iYFNosWTrYx9W5LW3MsdasBvKu6rugHbbVFFv18dRjcJBsqTdaYsZdVsEUbF8=@zamaudio.com>
-In-Reply-To: <c6e79962-0537-4ed8-b99f-f2614f5a7987@suse.com>
-References: <20240313150748.791236-1-ross.lagerwall@citrix.com> <20240313150748.791236-2-ross.lagerwall@citrix.com> <c6e79962-0537-4ed8-b99f-f2614f5a7987@suse.com>
-Feedback-ID: 43209410:user:proton
+X-Inumbo-ID: 64d26b68-e1dd-11ee-afdd-a90da7624cb6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1710405149; x=1711009949; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=eAq5lHzW3IOwT/BTYiASAU2qB4P+zsotmrOl4INl2+Q=;
+        b=MKp7E2uqKWtCFRLkHWx5m+C5iDaRWC2u2TwqdsYNSQ0nMGmIhqr3Xhm/A/9fpkNswj
+         +HAes7apsoJPT/BHbHC+NVb5mp8mvMrZ9JL3keE080+j3oV1XxD51YM7vk7Q7lWFmmzE
+         Q2qbQj+1vkcPTeXaer2p8fMWeUGsZPgN9rQkc4lKruPlUFzm8CCrrE2oiU4rtAu5Rsoz
+         YGHty+AGbmp4ETl5XK53X7HFbM395/DGsLvf1w2aT3X3Ju/DQl7W6kP4JPKbGAFYvuDp
+         0pvRIiz2WdsT5xEsZIOFia2/x2LQcom5Zq6zTvXeLpQ+6el/1AVXoPjX0Q9rvKkInCaa
+         KodQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1710405149; x=1711009949;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=eAq5lHzW3IOwT/BTYiASAU2qB4P+zsotmrOl4INl2+Q=;
+        b=SRG67mEDlBzS3mB+4yALwMFqrjtoGjcuPwR0slzCFuI/SuTn4vycwTaDNN1LTLD7rl
+         NsZsEckLYJ1MvthZVYzV3h59gIAP/BTYD2ZlmRPImdRnIu1tEFriAOw4HjUUx82XvNSd
+         NDqZmk3Mi/b1djCOyfF7rxWxrCCBzzIpuh3qlMwi7KQ2dfKFiphlU7jVIO/C55AYfpjI
+         bvFiC6lyDOwv8Enc7ECwtOXrk2YwqACZH9U3iswmzQ6E4e4Hp/ypcdjypys9Ke0tQDOE
+         r/L9D02YYhMaaYMoijjo42rrGZhMpeFcB4Cfuu8FeTVGXOY32md5i3zO7IIZHHvc9RWH
+         rd9Q==
+X-Forwarded-Encrypted: i=1; AJvYcCX8M72xjZrBaK2/uNAHuv3uMEBP+ggAhQZuFtKrO//l1Rh+pbZP6ZdyB/JNv+C4LVqkTIpXraUZeF6cvGkuVoAWRpvjssxLK/kMiUehGlw=
+X-Gm-Message-State: AOJu0Yw+jJc4Zf30AWRSF7CasAbmQVdXoAKeFHm5bcUKPs6kmAGyy0O6
+	LmQUj3xV/oK+O8H4n/7ayxJ/JoILpAbagT3+kLiV3i5koXHeRJn9v51aWb5KzA==
+X-Google-Smtp-Source: AGHT+IHpzrOffIcWE2Wi3cSg242I/M5nZ1oNnuAYKUMyt9f48X1FwHGz2/DA09gA2fIpxQ/VyKuWKQ==
+X-Received: by 2002:a17:907:2d21:b0:a43:bf25:989 with SMTP id gs33-20020a1709072d2100b00a43bf250989mr879258ejc.9.1710405148691;
+        Thu, 14 Mar 2024 01:32:28 -0700 (PDT)
+Message-ID: <6186b676-660c-4bfa-a825-18ff7f0d7f62@suse.com>
+Date: Thu, 14 Mar 2024 09:32:27 +0100
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH] amd/iommu: add fixed size to function parameter of
+ array type
+Content-Language: en-US
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
+ ayan.kumar.halder@amd.com, consulting@bugseng.com, bertrand.marquis@arm.com,
+ julien@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <533a2d4f0c92d7fe92aa200b64434389de546f69.1710343652.git.nicola.vetrini@bugseng.com>
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <533a2d4f0c92d7fe92aa200b64434389de546f69.1710343652.git.nicola.vetrini@bugseng.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-This is a multi-part message in MIME format.
+On 14.03.2024 08:42, Nicola Vetrini wrote:
+> The 'cmd' parameter of amd_iommu_send_guest_cmd is passed
+> to a function that expects arrays of size 4, therefore
+> specifying explicitly the size also in amd_iommu_send_guest_cmd
+> allows not to accidentally pass a smaller array or assume that
+> send_iommu_command handles array sizes >4 correctly.
+> 
+> No functional change.
+> 
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+> ---
+> All current users pass an array of size 4, hence this patch is addressing
+> a potential issue noticed by the analyzer in the context of Rule 17.5
+> ("The function argument corresponding to a parameter declared to have an array
+> type shall have an appropriate number of elements"), not an actual problem in
+> the sources.
 
---b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+While true, I think we want to consider alternatives. First one being to rip
+out this dead code (thus addressing other Misra concerns as well). Second,
+if we meant to keep it, to properly do away with the (ab)use of u32[].
 
-SGksIEkgc2F3IHRoaXMgb24gdGhlIGxpc3QgYW5kIGhhdmUgY29uY2VybnM6CgotLS0tLS0tLSBP
-cmlnaW5hbCBNZXNzYWdlIC0tLS0tLS0tCk9uIDE0IE1hciAyMDI0LCA2OjI04oCvcG0sIEphbiBC
-ZXVsaWNoIHZpYSBHcnViLWRldmVsIDwgZ3J1Yi1kZXZlbEBnbnUub3JnPiB3cm90ZToKT24gMTMu
-MDMuMjAyNCAxNjowNywgUm9zcyBMYWdlcndhbGwgd3JvdGU6Cj4+IEluIGFkZGl0aW9uIHRvIHRo
-ZSBleGlzdGluZyBhZGRyZXNzIGFuZCBFTEYgbG9hZCB0eXBlcywgc3BlY2lmeSBhIG5ldwo+PiBv
-cHRpb25hbCBQRSBiaW5hcnkgbG9hZCB0eXBlLiBUaGlzIG5ldyB0eXBlIGlzIGEgdXNlZnVsIGFk
-ZGl0aW9uIHNpbmNlCj4+IFBFIGJpbmFyaWVzIGNhbiBiZSBzaWduZWQgYW5kIHZlcmlmaWVkIChp
-LmUuIHVzZWQgd2l0aCBTZWN1cmUgQm9vdCkuCgo+IEFuZCB0aGUgY29uc2lkZXJhdGlvbiB0byBo
-YXZlIEVMRiBzaWduYWJsZSAoYnkgd2hhdGV2ZXIgZXh0ZW5zaW9uIHRvIHRoZSBFTEYgc3BlYykg
-d2VudCBub3doZXJlPyBKYW4KCklmIHRoZSBwdXJwb3NlIG9mIHNpZ25pbmcgYmluYXJpZXMgaXMg
-dG8gcHJldmVudCB0aGVpciBleGVjdXRpb24gdW5sZXNzIHRoZXkgYXJlIHNpZ25lZCBieSB0aGVp
-ciBvd25lciwgdGhpcyBpcyBNQUxXQVJFIHVubGVzcyB0aGUgZW5kIHVzZXIgY2FuIHJlcGxhY2Ug
-dGhlIGtleXMgd2l0aCBvbmUgb2YgdGhlaXIgY2hvb3NpbmcuCkFkZGluZyBhIGZpZWxkIHRvIGVs
-ZiB0byBwcm92aWRlIHRoaXMgZmVhdHVyZSBpcyBJTUhPIGFza2luZyBmb3IgdHJvdWJsZSBiZWNh
-dXNlIHRoZSBrZXkgaXMgc3RvcmVkIGVsc2V3aGVyZSBhbmQgdGhlcmUgaXMgbm90aGluZyB0byBw
-cmV2ZW50IGFidXNlIG9mIHRoaXMgZmllbGQgdG8gZGVueSB1c2VycyB0aGVpciBmcmVlZG9tIHRv
-IHJ1biBjb2RlLCAoaWUgYnkgbm90IHByb3ZpZGluZyB0aGVtIHRoZSBrZXkgb3IgYSBndWFyYW50
-ZWVkIG1lY2hhbmlzbSBmb3IgcHJvdmlkaW5nIHRoZWlyIG93bikuCgpPbiB0aGF0IG5vdGUsIHdo
-eSBpcyBpdCBzdWNoIGEgdXNlZnVsIGZlYXR1cmUgdG8gcmVzdHJpY3QgdGhlIGZyZWVkb20gdG8g
-cnVuIGNvZGUgaW4gZ3J1Yj8gSWYgZ3J1YiBzZWxlY3RzIG1hbHdhcmUgdG8gZXhlY3V0ZSwgdGhl
-IHVzZXIgbXVzdCBoYXZlIGNob3NlbiB0byBydW4gaXQgLSBvciBncnViIGl0c2VsZiBpcyBjb21w
-cm9taXNlZD8KCkRvIHlvdSB0aGluayB0aGF0IGxvY2tpbmcgYmluYXJpZXMgZG93biBpcyB0aGUg
-ZnV0dXJlIGZvciB1c2VycyB0byBlbnN1cmUgdGhlaXIgb3duIHNlY3VyaXR5IG9yIGl0IGlzIGFj
-Y2VwdGFibGUgZm9yIDNyZCBwYXJ0aWVzIHRvIGhpZGUgcGxhdGZvcm0ga2V5cyB0byBsb2NrIGFs
-bCBzeXN0ZW1zIGRvd24sIGV2ZW4gYnkgYmluYXJ5PwoKSSdtIG5vdCBjb252aW5jZWQuCgpEYW1p
-ZW4gWmFtbWl0CkdOVS9IdXJkIGhhY2tlcg==
+Finally, if to be taken in this least-effort shape, ...
 
---b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
+> --- a/xen/drivers/passthrough/amd/iommu.h
+> +++ b/xen/drivers/passthrough/amd/iommu.h
+> @@ -346,7 +346,7 @@ void cf_check amd_iommu_crash_shutdown(void);
+>  
+>  /* guest iommu support */
+>  #ifdef CONFIG_HVM
+> -void amd_iommu_send_guest_cmd(struct amd_iommu *iommu, u32 cmd[]);
+> +void amd_iommu_send_guest_cmd(struct amd_iommu *iommu, u32 cmd[4]);
 
-SGksIEkgc2F3IHRoaXMgb24gdGhlIGxpc3QgYW5kIGhhdmUgY29uY2VybnM6PGJyPjxicj4tLS0t
-LS0tLSBPcmlnaW5hbCBNZXNzYWdlIC0tLS0tLS0tPGJyPk9uIDE0IE1hciAyMDI0LCA2OjI04oCv
-cG0sIEphbiBCZXVsaWNoIHZpYSBHcnViLWRldmVsICZsdDsgZ3J1Yi1kZXZlbEBnbnUub3JnJmd0
-OyB3cm90ZTo8YnI+T24gMTMuMDMuMjAyNCAxNjowNywgUm9zcyBMYWdlcndhbGwgd3JvdGU6IDxi
-cj4mZ3Q7Jmd0OyBJbiBhZGRpdGlvbiB0byB0aGUgZXhpc3RpbmcgYWRkcmVzcyBhbmQgRUxGIGxv
-YWQgdHlwZXMsIHNwZWNpZnkgYSBuZXc8YnI+Jmd0OyZndDsgb3B0aW9uYWwgUEUgYmluYXJ5IGxv
-YWQgdHlwZS4gVGhpcyBuZXcgdHlwZSBpcyBhIHVzZWZ1bCBhZGRpdGlvbiBzaW5jZSA8YnI+Jmd0
-OyZndDsgUEUgYmluYXJpZXMgY2FuIGJlIHNpZ25lZCBhbmQgdmVyaWZpZWQgKGkuZS4gdXNlZCB3
-aXRoIFNlY3VyZSBCb290KS48YnI+PGJyPiZndDsgQW5kIHRoZSBjb25zaWRlcmF0aW9uIHRvIGhh
-dmUgRUxGIHNpZ25hYmxlIChieSB3aGF0ZXZlciBleHRlbnNpb24gdG8gdGhlIEVMRiBzcGVjKSB3
-ZW50IG5vd2hlcmU/IEphbiA8YnI+PGJyPklmIHRoZSBwdXJwb3NlIG9mIHNpZ25pbmcgYmluYXJp
-ZXMgaXMgdG8gcHJldmVudCB0aGVpciBleGVjdXRpb24gdW5sZXNzIHRoZXkgYXJlIHNpZ25lZCBi
-eSB0aGVpciBvd25lciwgdGhpcyBpcyBNQUxXQVJFIHVubGVzcyB0aGUgZW5kIHVzZXIgY2FuIHJl
-cGxhY2UgdGhlIGtleXMgd2l0aCBvbmUgb2YgdGhlaXIgY2hvb3NpbmcuPGJyPkFkZGluZyBhIGZp
-ZWxkIHRvIGVsZiB0byBwcm92aWRlIHRoaXMgZmVhdHVyZSBpcyBJTUhPIGFza2luZyBmb3IgdHJv
-dWJsZSBiZWNhdXNlIHRoZSBrZXkgaXMgc3RvcmVkIGVsc2V3aGVyZSBhbmQgdGhlcmUgaXMgbm90
-aGluZyB0byBwcmV2ZW50IGFidXNlIG9mIHRoaXMgZmllbGQgdG8gZGVueSB1c2VycyB0aGVpciBm
-cmVlZG9tIHRvIHJ1biBjb2RlLCAoaWUgYnkgbm90IHByb3ZpZGluZyB0aGVtIHRoZSBrZXkgb3Ig
-YSBndWFyYW50ZWVkIG1lY2hhbmlzbSBmb3IgcHJvdmlkaW5nIHRoZWlyIG93bikuPGJyPjxicj5P
-biB0aGF0IG5vdGUsIHdoeSBpcyBpdCBzdWNoIGEgdXNlZnVsIGZlYXR1cmUgdG8gcmVzdHJpY3Qg
-dGhlIGZyZWVkb20gdG8gcnVuIGNvZGUgaW4gZ3J1Yj8gIElmIGdydWIgc2VsZWN0cyBtYWx3YXJl
-IHRvIGV4ZWN1dGUsIHRoZSB1c2VyIG11c3QgaGF2ZSBjaG9zZW4gdG8gcnVuIGl0IC0gb3IgZ3J1
-YiBpdHNlbGYgaXMgY29tcHJvbWlzZWQ/PGJyPjxicj5EbyB5b3UgdGhpbmsgdGhhdCBsb2NraW5n
-IGJpbmFyaWVzIGRvd24gaXMgdGhlIGZ1dHVyZSBmb3IgdXNlcnMgdG8gZW5zdXJlIHRoZWlyIG93
-biBzZWN1cml0eSBvciBpdCBpcyBhY2NlcHRhYmxlIGZvciAzcmQgcGFydGllcyB0byBoaWRlIHBs
-YXRmb3JtIGtleXMgdG8gbG9jayBhbGwgc3lzdGVtcyBkb3duLCBldmVuIGJ5IGJpbmFyeT88YnI+
-PGJyPkknbSBub3QgY29udmluY2VkLjxicj48YnI+RGFtaWVuIFphbW1pdDxicj5HTlUvSHVyZCBo
-YWNrZXI8YnI+PGJyPjxicj4=
+... u32 here and ...
 
+> --- a/xen/drivers/passthrough/amd/iommu_cmd.c
+> +++ b/xen/drivers/passthrough/amd/iommu_cmd.c
+> @@ -390,7 +390,7 @@ void amd_iommu_flush_all_caches(struct amd_iommu *iommu)
+>      flush_command_buffer(iommu, 0);
+>  }
+>  
+> -void amd_iommu_send_guest_cmd(struct amd_iommu *iommu, u32 cmd[])
+> +void amd_iommu_send_guest_cmd(struct amd_iommu *iommu, u32 cmd[4])
 
---b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8--
+... here would better be replaced by uint32_t at the same time, not the
+least because that's what ...
 
+>  {
+>      send_iommu_command(iommu, cmd);
+
+... this function already takes afaics.
+
+Jan
 
