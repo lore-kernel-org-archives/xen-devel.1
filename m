@@ -4,38 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B478C5475B
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 08:26:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692972.1080735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF21C5475B
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 08:28:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692968.1080745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkgPT-0005I1-Ay; Thu, 14 Mar 2024 08:25:55 +0000
+	id 1rkgRN-0005oO-LN; Thu, 14 Mar 2024 08:27:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692972.1080735; Thu, 14 Mar 2024 08:25:55 +0000
+Received: by outflank-mailman (output) from mailman id 692968.1080745; Thu, 14 Mar 2024 08:27:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkgPT-0005Hu-8K; Thu, 14 Mar 2024 08:25:55 +0000
-Received: by outflank-mailman (input) for mailman id 692972;
- Thu, 14 Mar 2024 08:25:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=n3nm=KU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rkgPS-0005Ho-Km
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 08:25:54 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7859c334-e1dc-11ee-afdd-a90da7624cb6;
- Thu, 14 Mar 2024 09:25:52 +0100 (CET)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5684ea117a3so881250a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 14 Mar 2024 01:25:52 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- sa37-20020a1709076d2500b00a4635a21ff0sm467385ejc.38.2024.03.14.01.25.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Mar 2024 01:25:51 -0700 (PDT)
+	id 1rkgRN-0005oH-Ii; Thu, 14 Mar 2024 08:27:53 +0000
+Received: by outflank-mailman (input) for mailman id 692968;
+ Thu, 14 Mar 2024 08:13:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=NhVs=KU=zamaudio.com=damien@srs-se1.protection.inumbo.net>)
+ id 1rkgDK-0002aN-WA
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 08:13:23 +0000
+Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b7044d2d-e1da-11ee-a1ee-f123f15fe8a2;
+ Thu, 14 Mar 2024 09:13:19 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,92 +38,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7859c334-e1dc-11ee-afdd-a90da7624cb6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1710404752; x=1711009552; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=E4BQVZCAUZLtOYbg/K1gx8DsAF2ZNaLfyFD+765ChUs=;
-        b=S2E6PyR3X8YA6JUy4BOQzjXtxe2Q3v44QmbQfr+IAZV1qQvqoPpuFnGjJrtpzF7ISj
-         B7o61CZj5RtO20s6DkjuivOYRvF9MR3wpSJCcphQc2aWN4M80zrPjgCR3+n2sgWGz6HE
-         GME+FUfmzF4uD+cXOqe4C7CKpR0SzJhPZm5iNX3KmIJnlhAgp6djNEfgJcJrLwhvaw9L
-         aO6PhAMlUIBbRFiyCNfAac/uFtZo3hMXuLKgs43AdS9tqIiJWZkY4rP6xCHPMDGGhgVv
-         pb9SH44g5TEMJFPt6mmXz5PiqZ9tWmuB19Hj03cBqTQoobAReaZP5jX1fL42sSMmfKPz
-         SUSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710404752; x=1711009552;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=E4BQVZCAUZLtOYbg/K1gx8DsAF2ZNaLfyFD+765ChUs=;
-        b=dRbRPOnzDbDRzwoJpD6tb5AcuUxgzTnt+zaJ4htvgAZiYfZtoyGHSj4B45FgZ0BpId
-         V3TIwIhvPoHb8mv6oL+m9K/GBDNw/By+UyatPhQ1P9qlYmmoH962INAwYE43LlY3LW38
-         Du4XvPwCsGUlSeAtwoQ6CGUGzb6sbIXuHf29zsDQcFFSE85ik40NbuYyYugh/y3axioY
-         dXMVP3Y07Xyw1D8puCld0mltgUohR7m9mjJ5fjK/5UPHdBAcX1cMOuwmitW/IVoo+xO9
-         66/HFeFtATLgbn11OIyXbmX0KS3fWZk1dtgzzCH9Mp//AA1yAZfF6yv/0A69QNeRpFvk
-         rbwA==
-X-Forwarded-Encrypted: i=1; AJvYcCVB887i37/ZWDFTq/jmmBL8xmvXEZ1VCa/1oZPV5leLzoDztAdd0uCNs4LNt8BJINTf+alykFEEZ5yKEr5ctvPX6wir02qqJUGdZFQFw5M=
-X-Gm-Message-State: AOJu0YyAk6lgz6uqRzS9Y2WBWiylpOncAp3A69OvBeLBFjWRuhR/++cv
-	m7avEeiKIYBB0ZGUcybzVdRfVE8St6Q/iBVOplHK5D0iYwKcUOFpLWTeVCnJ3A==
-X-Google-Smtp-Source: AGHT+IFJxzEXEIIRmszXVnSvDzECzMhxKKcMo2qJi3iESG9UivHQQgDKP6KO6UK4SpqW3hvu8TVw7A==
-X-Received: by 2002:a17:907:a705:b0:a46:4d97:82a3 with SMTP id vw5-20020a170907a70500b00a464d9782a3mr732254ejc.59.1710404751893;
-        Thu, 14 Mar 2024 01:25:51 -0700 (PDT)
-Message-ID: <4fd5140b-0a34-464c-8ed8-4c38a094e9b1@suse.com>
-Date: Thu, 14 Mar 2024 09:25:50 +0100
+X-Inumbo-ID: b7044d2d-e1da-11ee-a1ee-f123f15fe8a2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zamaudio.com;
+	s=protonmail2; t=1710403996; x=1710663196;
+	bh=QX53ikl/A6rMwZE/LD2LcGZ0Q9sfRlbAsySKSrfXqK4=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=V0Kck0tDfBs4pvj9H1hF6PLb9iAB4i695ciID5PLM1yecDAwThq37UUSgD0dzxDPu
+	 GobFkvPpWVTtjze+9jWhoqklXe1M44QBmAkB23RcW3tWd1dDjhXHkxtzWWdGZYhjbo
+	 t7l3/R/Tmx9SyXBG/wOz4pXh0EW4cnbIt12f9/qdmqD4G+cxh0ZYHDJOmhGRNvJu24
+	 Uc7yL8DsaEYVxUtMgsbcbGGi80/+BiktE+kEaUV+r0Ll9FotioYrH+cuHEnwlKGIbh
+	 ONh8nvLBHTXoWYPvbOg0dGDeh50yTmNyaw4htiqi2QwooqRCce5UvgssGKvGuCoPhC
+	 WnWGa+h0CoqRA==
+Date: Thu, 14 Mar 2024 08:12:55 +0000
+To: grub-devel@gnu.org, ross.lagerwall@citrix.com
+From: Damien Zammit <damien@zamaudio.com>
+Cc: jbeulich@suse.com, xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, daniel.kiper@oracle.com
+Subject: Re: [PATCH 1/7] multiboot2: Add load type header and support for the PE binary type
+Message-ID: <AF72X2ysQoPQwSN_InXfIHzizVxNQs0hUR86S4yu_BZgD9iYFNosWTrYx9W5LW3MsdasBvKu6rugHbbVFFv18dRjcJBsqTdaYsZdVsEUbF8=@zamaudio.com>
+In-Reply-To: <c6e79962-0537-4ed8-b99f-f2614f5a7987@suse.com>
+References: <20240313150748.791236-1-ross.lagerwall@citrix.com> <20240313150748.791236-2-ross.lagerwall@citrix.com> <c6e79962-0537-4ed8-b99f-f2614f5a7987@suse.com>
+Feedback-ID: 43209410:user:proton
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] x86/entry: Delete RESTORE_ALL
-Content-Language: en-US
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
-References: <20240313142641.2150302-1-andrew.cooper3@citrix.com>
- <20240313142641.2150302-3-andrew.cooper3@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240313142641.2150302-3-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/alternative;
+ boundary="b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8"
 
-On 13.03.2024 15:26, Andrew Cooper wrote:
-> There is only a single user now, and it's the one odd case.  Inline and
-> simplify it to just the compat case.
-> 
-> No functional change.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+This is a multi-part message in MIME format.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+--b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
 
-> In principle we want to delay the %rsp adjustment until after VERW, but that
-> turns disp8's into disp32's, making the overall code size larger.
+SGksIEkgc2F3IHRoaXMgb24gdGhlIGxpc3QgYW5kIGhhdmUgY29uY2VybnM6CgotLS0tLS0tLSBP
+cmlnaW5hbCBNZXNzYWdlIC0tLS0tLS0tCk9uIDE0IE1hciAyMDI0LCA2OjI04oCvcG0sIEphbiBC
+ZXVsaWNoIHZpYSBHcnViLWRldmVsIDwgZ3J1Yi1kZXZlbEBnbnUub3JnPiB3cm90ZToKT24gMTMu
+MDMuMjAyNCAxNjowNywgUm9zcyBMYWdlcndhbGwgd3JvdGU6Cj4+IEluIGFkZGl0aW9uIHRvIHRo
+ZSBleGlzdGluZyBhZGRyZXNzIGFuZCBFTEYgbG9hZCB0eXBlcywgc3BlY2lmeSBhIG5ldwo+PiBv
+cHRpb25hbCBQRSBiaW5hcnkgbG9hZCB0eXBlLiBUaGlzIG5ldyB0eXBlIGlzIGEgdXNlZnVsIGFk
+ZGl0aW9uIHNpbmNlCj4+IFBFIGJpbmFyaWVzIGNhbiBiZSBzaWduZWQgYW5kIHZlcmlmaWVkIChp
+LmUuIHVzZWQgd2l0aCBTZWN1cmUgQm9vdCkuCgo+IEFuZCB0aGUgY29uc2lkZXJhdGlvbiB0byBo
+YXZlIEVMRiBzaWduYWJsZSAoYnkgd2hhdGV2ZXIgZXh0ZW5zaW9uIHRvIHRoZSBFTEYgc3BlYykg
+d2VudCBub3doZXJlPyBKYW4KCklmIHRoZSBwdXJwb3NlIG9mIHNpZ25pbmcgYmluYXJpZXMgaXMg
+dG8gcHJldmVudCB0aGVpciBleGVjdXRpb24gdW5sZXNzIHRoZXkgYXJlIHNpZ25lZCBieSB0aGVp
+ciBvd25lciwgdGhpcyBpcyBNQUxXQVJFIHVubGVzcyB0aGUgZW5kIHVzZXIgY2FuIHJlcGxhY2Ug
+dGhlIGtleXMgd2l0aCBvbmUgb2YgdGhlaXIgY2hvb3NpbmcuCkFkZGluZyBhIGZpZWxkIHRvIGVs
+ZiB0byBwcm92aWRlIHRoaXMgZmVhdHVyZSBpcyBJTUhPIGFza2luZyBmb3IgdHJvdWJsZSBiZWNh
+dXNlIHRoZSBrZXkgaXMgc3RvcmVkIGVsc2V3aGVyZSBhbmQgdGhlcmUgaXMgbm90aGluZyB0byBw
+cmV2ZW50IGFidXNlIG9mIHRoaXMgZmllbGQgdG8gZGVueSB1c2VycyB0aGVpciBmcmVlZG9tIHRv
+IHJ1biBjb2RlLCAoaWUgYnkgbm90IHByb3ZpZGluZyB0aGVtIHRoZSBrZXkgb3IgYSBndWFyYW50
+ZWVkIG1lY2hhbmlzbSBmb3IgcHJvdmlkaW5nIHRoZWlyIG93bikuCgpPbiB0aGF0IG5vdGUsIHdo
+eSBpcyBpdCBzdWNoIGEgdXNlZnVsIGZlYXR1cmUgdG8gcmVzdHJpY3QgdGhlIGZyZWVkb20gdG8g
+cnVuIGNvZGUgaW4gZ3J1Yj8gSWYgZ3J1YiBzZWxlY3RzIG1hbHdhcmUgdG8gZXhlY3V0ZSwgdGhl
+IHVzZXIgbXVzdCBoYXZlIGNob3NlbiB0byBydW4gaXQgLSBvciBncnViIGl0c2VsZiBpcyBjb21w
+cm9taXNlZD8KCkRvIHlvdSB0aGluayB0aGF0IGxvY2tpbmcgYmluYXJpZXMgZG93biBpcyB0aGUg
+ZnV0dXJlIGZvciB1c2VycyB0byBlbnN1cmUgdGhlaXIgb3duIHNlY3VyaXR5IG9yIGl0IGlzIGFj
+Y2VwdGFibGUgZm9yIDNyZCBwYXJ0aWVzIHRvIGhpZGUgcGxhdGZvcm0ga2V5cyB0byBsb2NrIGFs
+bCBzeXN0ZW1zIGRvd24sIGV2ZW4gYnkgYmluYXJ5PwoKSSdtIG5vdCBjb252aW5jZWQuCgpEYW1p
+ZW4gWmFtbWl0CkdOVS9IdXJkIGhhY2tlcg==
 
-While beneficial for SPEC_CTRL_COND_VERW, that might then harm the IRETQ.
-So aiui neither placement is ideal, and hence the Disp<N> consideration
-is the determining factor either way.
+--b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
 
-Jan
+SGksIEkgc2F3IHRoaXMgb24gdGhlIGxpc3QgYW5kIGhhdmUgY29uY2VybnM6PGJyPjxicj4tLS0t
+LS0tLSBPcmlnaW5hbCBNZXNzYWdlIC0tLS0tLS0tPGJyPk9uIDE0IE1hciAyMDI0LCA2OjI04oCv
+cG0sIEphbiBCZXVsaWNoIHZpYSBHcnViLWRldmVsICZsdDsgZ3J1Yi1kZXZlbEBnbnUub3JnJmd0
+OyB3cm90ZTo8YnI+T24gMTMuMDMuMjAyNCAxNjowNywgUm9zcyBMYWdlcndhbGwgd3JvdGU6IDxi
+cj4mZ3Q7Jmd0OyBJbiBhZGRpdGlvbiB0byB0aGUgZXhpc3RpbmcgYWRkcmVzcyBhbmQgRUxGIGxv
+YWQgdHlwZXMsIHNwZWNpZnkgYSBuZXc8YnI+Jmd0OyZndDsgb3B0aW9uYWwgUEUgYmluYXJ5IGxv
+YWQgdHlwZS4gVGhpcyBuZXcgdHlwZSBpcyBhIHVzZWZ1bCBhZGRpdGlvbiBzaW5jZSA8YnI+Jmd0
+OyZndDsgUEUgYmluYXJpZXMgY2FuIGJlIHNpZ25lZCBhbmQgdmVyaWZpZWQgKGkuZS4gdXNlZCB3
+aXRoIFNlY3VyZSBCb290KS48YnI+PGJyPiZndDsgQW5kIHRoZSBjb25zaWRlcmF0aW9uIHRvIGhh
+dmUgRUxGIHNpZ25hYmxlIChieSB3aGF0ZXZlciBleHRlbnNpb24gdG8gdGhlIEVMRiBzcGVjKSB3
+ZW50IG5vd2hlcmU/IEphbiA8YnI+PGJyPklmIHRoZSBwdXJwb3NlIG9mIHNpZ25pbmcgYmluYXJp
+ZXMgaXMgdG8gcHJldmVudCB0aGVpciBleGVjdXRpb24gdW5sZXNzIHRoZXkgYXJlIHNpZ25lZCBi
+eSB0aGVpciBvd25lciwgdGhpcyBpcyBNQUxXQVJFIHVubGVzcyB0aGUgZW5kIHVzZXIgY2FuIHJl
+cGxhY2UgdGhlIGtleXMgd2l0aCBvbmUgb2YgdGhlaXIgY2hvb3NpbmcuPGJyPkFkZGluZyBhIGZp
+ZWxkIHRvIGVsZiB0byBwcm92aWRlIHRoaXMgZmVhdHVyZSBpcyBJTUhPIGFza2luZyBmb3IgdHJv
+dWJsZSBiZWNhdXNlIHRoZSBrZXkgaXMgc3RvcmVkIGVsc2V3aGVyZSBhbmQgdGhlcmUgaXMgbm90
+aGluZyB0byBwcmV2ZW50IGFidXNlIG9mIHRoaXMgZmllbGQgdG8gZGVueSB1c2VycyB0aGVpciBm
+cmVlZG9tIHRvIHJ1biBjb2RlLCAoaWUgYnkgbm90IHByb3ZpZGluZyB0aGVtIHRoZSBrZXkgb3Ig
+YSBndWFyYW50ZWVkIG1lY2hhbmlzbSBmb3IgcHJvdmlkaW5nIHRoZWlyIG93bikuPGJyPjxicj5P
+biB0aGF0IG5vdGUsIHdoeSBpcyBpdCBzdWNoIGEgdXNlZnVsIGZlYXR1cmUgdG8gcmVzdHJpY3Qg
+dGhlIGZyZWVkb20gdG8gcnVuIGNvZGUgaW4gZ3J1Yj8gIElmIGdydWIgc2VsZWN0cyBtYWx3YXJl
+IHRvIGV4ZWN1dGUsIHRoZSB1c2VyIG11c3QgaGF2ZSBjaG9zZW4gdG8gcnVuIGl0IC0gb3IgZ3J1
+YiBpdHNlbGYgaXMgY29tcHJvbWlzZWQ/PGJyPjxicj5EbyB5b3UgdGhpbmsgdGhhdCBsb2NraW5n
+IGJpbmFyaWVzIGRvd24gaXMgdGhlIGZ1dHVyZSBmb3IgdXNlcnMgdG8gZW5zdXJlIHRoZWlyIG93
+biBzZWN1cml0eSBvciBpdCBpcyBhY2NlcHRhYmxlIGZvciAzcmQgcGFydGllcyB0byBoaWRlIHBs
+YXRmb3JtIGtleXMgdG8gbG9jayBhbGwgc3lzdGVtcyBkb3duLCBldmVuIGJ5IGJpbmFyeT88YnI+
+PGJyPkknbSBub3QgY29udmluY2VkLjxicj48YnI+RGFtaWVuIFphbW1pdDxicj5HTlUvSHVyZCBo
+YWNrZXI8YnI+PGJyPjxicj4=
+
+
+--b1_5UKU0ZFo1nzlsuNs6kMAoj1fU1IoP1eCT3hclJ8--
+
 
