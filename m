@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB00C54E5D
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 07:26:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.692914.1080629 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06B0CC54E5D
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Mar 2024 07:28:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.692919.1080638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkfU9-0003Ax-Gt; Thu, 14 Mar 2024 07:26:41 +0000
+	id 1rkfWC-0003qV-QR; Thu, 14 Mar 2024 07:28:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 692914.1080629; Thu, 14 Mar 2024 07:26:41 +0000
+Received: by outflank-mailman (output) from mailman id 692919.1080638; Thu, 14 Mar 2024 07:28:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rkfU9-0003Aq-D5; Thu, 14 Mar 2024 07:26:41 +0000
-Received: by outflank-mailman (input) for mailman id 692914;
- Thu, 14 Mar 2024 07:26:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rkfWC-0003qO-Nv; Thu, 14 Mar 2024 07:28:48 +0000
+Received: by outflank-mailman (input) for mailman id 692919;
+ Thu, 14 Mar 2024 07:28:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=n3nm=KU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rkfU8-0003Ak-BR
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 07:26:40 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 31e664d1-e1d4-11ee-a1ee-f123f15fe8a2;
- Thu, 14 Mar 2024 08:26:38 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a466a256726so119611766b.1
- for <xen-devel@lists.xenproject.org>; Thu, 14 Mar 2024 00:26:38 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- f23-20020a1709067f9700b00a43e8e76825sm424651ejr.149.2024.03.14.00.26.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Mar 2024 00:26:37 -0700 (PDT)
+ (envelope-from <SRS0=CDQ4=KU=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1rkfPP-0005cd-8l
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2024 07:21:47 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 84170f40-e1d3-11ee-afdd-a90da7624cb6;
+ Thu, 14 Mar 2024 08:21:46 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 623A91F79B;
+ Thu, 14 Mar 2024 07:21:46 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1F2EE13977;
+ Thu, 14 Mar 2024 07:21:46 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 6SIlBoql8mWXDgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 14 Mar 2024 07:21:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,88 +53,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31e664d1-e1d4-11ee-a1ee-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1710401198; x=1711005998; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=DgaqQRLa/bceGTxMnXEXk4fxq4M6cGxB2GPnK5l9feI=;
-        b=VWRcASX33rwHVNM/wXJHrT7xIK4X/nVdQLEaSSwQHMNZVC8VoeMmEKFho3hdLptO3t
-         t+mabPYJz5VaJdiCw3bnhd3vu42bq2M8uNw9JDzqAY43OP6rKDWgcmlBfk29vjVRG67M
-         73suKqvw5i6aBd4tukQODhrc18lZkP7OsCHIOia8qnc5KAweR+JjPZPpWTThHk7KMMz+
-         eHi4CmnaSb8PFAlgUaP5L5dUBjuFZXXbrs2KDJHhj5PHJWs3Yfy6OSX0bRE2qV2cPJev
-         P+sRNlwzJontsLAN0sagqWtzcITz1x14SjyMJr/SRKhS6kgrgcRB/uv7Yi5lryCVPrqu
-         jNkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710401198; x=1711005998;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=DgaqQRLa/bceGTxMnXEXk4fxq4M6cGxB2GPnK5l9feI=;
-        b=MztA5qfSS1lnlX+oR5f1DiGKUzNqAy+m1n1rdUcU1kGeMz5LgL4LhHxnZ7gbqKv+gq
-         LtM43Mk/L2S3mFiUKZL6IGQjfr+gwZoMq6FPULlgbWc+7PUusXlF98E02+auMaDAVPX3
-         IBfxJUXWeLYHBlmnGlLAcj9I5f1EtXl3MdTPDHeHl2LbRW11N3HwONbV1IUoGC8B2Zcq
-         UMHscl2DGXntJ63FTkL1SQM1PwBA/AVA7o2DCKXFAj/R3arOpt8C+DdgSHB5KVFkyVI3
-         DIjiIXomKPxB2odstYzKSG70u0epI2O7ims9o6OGdS+5cvnQqx9mA8OtV9wBDZcDaim8
-         wytQ==
-X-Forwarded-Encrypted: i=1; AJvYcCU2cstJWGObRp4mspxKCdaR0+B2GZDB41QF2ysHgn0zIVVJ/FJKyoAaYF2EA2BzWhpHmbyJ3MSUs4bdAxHY0SU5YRvQbQKHHKl9wC85Odg=
-X-Gm-Message-State: AOJu0YyYigeaAnyu8tIkPUVrZXtpk4B7qU3N+1EFhmYOqO6usZfYc4yq
-	P8M1qghzPpVxT3n9wcHk72F86El6vdnVZ9ywWlcvAqhrn0lEkzO8Yc11LrNQeg==
-X-Google-Smtp-Source: AGHT+IEESfg3kAvlJ0pFbGpp9wwXZHIsccwivDl9X+A3LfW2040M7bnzjFpf7TwRUgN+twxMvRYN7Q==
-X-Received: by 2002:a17:906:6a03:b0:a46:75d3:dd46 with SMTP id qw3-20020a1709066a0300b00a4675d3dd46mr320990ejc.17.1710401197826;
-        Thu, 14 Mar 2024 00:26:37 -0700 (PDT)
-Message-ID: <cf161b43-0011-4faa-8d96-f99384448544@suse.com>
-Date: Thu, 14 Mar 2024 08:26:36 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 13/13] xen: allow up to 16383 cpus
-Content-Language: en-US
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
+X-Inumbo-ID: 84170f40-e1d3-11ee-afdd-a90da7624cb6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1710400906; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=svDhVGjKFzIPpcWjFYARn/2rWUfeidU+xfRiYlSjnX4=;
+	b=EkBnLKOBMPSiT+mLfvH5diIs5oNZa3ZYrVL2mqE0YS3a3slf6xVaQ1xNZbcKaPWCXxlsId
+	saQdPEEfqZF0QIsteoa/J3SfuX2vLdA99ZEWn4uun0ngYCOJjlesSCZY3akhpEmeiPfPqf
+	CBS9SfE5xRbTmX3zGkjFY4/M9SIZ0JY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1710400906; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=svDhVGjKFzIPpcWjFYARn/2rWUfeidU+xfRiYlSjnX4=;
+	b=EkBnLKOBMPSiT+mLfvH5diIs5oNZa3ZYrVL2mqE0YS3a3slf6xVaQ1xNZbcKaPWCXxlsId
+	saQdPEEfqZF0QIsteoa/J3SfuX2vLdA99ZEWn4uun0ngYCOJjlesSCZY3akhpEmeiPfPqf
+	CBS9SfE5xRbTmX3zGkjFY4/M9SIZ0JY=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v5 13/13] xen: allow up to 16383 cpus
+Date: Thu, 14 Mar 2024 08:20:29 +0100
+Message-Id: <20240314072029.16937-14-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20240314072029.16937-1-jgross@suse.com>
 References: <20240314072029.16937-1-jgross@suse.com>
- <20240314072029.16937-14-jgross@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20240314072029.16937-14-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [4.90 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 URIBL_BLOCKED(0.00)[suse.com:email];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 R_MISSING_CHARSET(2.50)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 BROKEN_CONTENT_TYPE(1.50)[];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 RCPT_COUNT_SEVEN(0.00)[8];
+	 MID_CONTAINS_FROM(1.00)[];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_TLS_ALL(0.00)[]
 
-On 14.03.2024 08:20, Juergen Gross wrote:
-> With lock handling now allowing up to 16384 cpus (spinlocks can handle
-> 65535 cpus, rwlocks can handle 16384 cpus), raise the allowed limit for
-> the number of cpus to be configured to 16383.
-> 
-> The new limit is imposed by IOMMU_CMD_BUFFER_MAX_ENTRIES and
-> QINVAL_MAX_ENTRY_NR required to be larger than 2 * CONFIG_NR_CPUS.
+With lock handling now allowing up to 16384 cpus (spinlocks can handle
+65535 cpus, rwlocks can handle 16384 cpus), raise the allowed limit for
+the number of cpus to be configured to 16383.
 
-That's quite sad - I was really hoping we'd finally end up with a
-power-of-2 upper bound.
+The new limit is imposed by IOMMU_CMD_BUFFER_MAX_ENTRIES and
+QINVAL_MAX_ENTRY_NR required to be larger than 2 * CONFIG_NR_CPUS.
 
-Jan
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V5:
+- new patch (Jan Beulich)
+---
+ xen/arch/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/xen/arch/Kconfig b/xen/arch/Kconfig
+index 67ba38f32f..308ce129a8 100644
+--- a/xen/arch/Kconfig
++++ b/xen/arch/Kconfig
+@@ -6,7 +6,7 @@ config PHYS_ADDR_T_32
+ 
+ config NR_CPUS
+ 	int "Maximum number of CPUs"
+-	range 1 4095
++	range 1 16383
+ 	default "256" if X86
+ 	default "8" if ARM && RCAR3
+ 	default "4" if ARM && QEMU
+-- 
+2.35.3
+
 
