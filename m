@@ -4,35 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C15BC54E67
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 18:08:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694006.1082854 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83CFFC54E67
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 18:08:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694017.1082869 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlByW-0006TA-Sv; Fri, 15 Mar 2024 18:08:12 +0000
+	id 1rlByy-0007f0-E4; Fri, 15 Mar 2024 18:08:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694006.1082854; Fri, 15 Mar 2024 18:08:12 +0000
+Received: by outflank-mailman (output) from mailman id 694017.1082869; Fri, 15 Mar 2024 18:08:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlByW-0006T3-Ou; Fri, 15 Mar 2024 18:08:12 +0000
-Received: by outflank-mailman (input) for mailman id 694006;
- Fri, 15 Mar 2024 18:08:11 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rlByV-0006R8-Et; Fri, 15 Mar 2024 18:08:11 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rlByV-0000KT-6l; Fri, 15 Mar 2024 18:08:11 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1rlByU-0003nB-OD; Fri, 15 Mar 2024 18:08:10 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1rlByU-0008P6-NS; Fri, 15 Mar 2024 18:08:10 +0000
+	id 1rlByy-0007dz-8B; Fri, 15 Mar 2024 18:08:40 +0000
+Received: by outflank-mailman (input) for mailman id 694017;
+ Fri, 15 Mar 2024 18:08:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=mDue=KV=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rlBwy-0005yW-Pt
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 18:06:36 +0000
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [2a00:1450:4864:20::22d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c35ef7e6-e2f6-11ee-afdd-a90da7624cb6;
+ Fri, 15 Mar 2024 19:06:36 +0100 (CET)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2d46dd8b0b8so29375531fa.2
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 11:06:36 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ g29-20020a05651c079d00b002d0acb57c89sm568939lje.64.2024.03.15.11.06.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Mar 2024 11:06:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,109 +46,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=IfOeSQxn/kT/Iy+tzuw6Lq77GsSztYCqYSPCV4m7mWc=; b=AjAesQIraJgeJs51mjvvPG07hh
-	oH2GbQfcLiFTJIxHnBxRt7thk0K4KgaO7gEBBQnn2eo5UHwhkiK/FlMv+dItfgUZZmaC6kyTaTzOG
-	ly8LBOCA7zW3teBGb+60nnPtNACUKLcijvMsvaqB4zvY7e+YqbKXLDVGSdrP31rIKJWE=;
+X-Inumbo-ID: c35ef7e6-e2f6-11ee-afdd-a90da7624cb6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1710525996; x=1711130796; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+NcaJ1FDBCgUizy11pti52TjBeZ8r/7o9i/6uOLh9pE=;
+        b=VUevo1mlyzsIjlX02nKe+Uzl+W04mhqolgcz1olCi9pbeW3cbYyoqh0gIwOL7sYGDh
+         2reK5Hob875uGjVsno0OMl20HJYagZuNOIgdxvoavMnqeiZ5zkgD6OaGzi5uu8Rs2bhN
+         6Hh087pvc+coaDV5jLEbNvIGCYpyAgd7DzOcUo3YHTSzw77+xmauYk8PUpmh8Yy+OIIi
+         58AH6YMWIMACuQN2fZxfbgR/DxLjYIBDdwnl1uL1lqSP0kYWAdLqwlgc8XiasVOOl0ym
+         l555KAdv5B0o4hvJu+HurhuDP0tEd3rGZCfMrlEbXpQxkyvNjAhbVePb4hcfO2mkzEcw
+         Y4jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1710525996; x=1711130796;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+NcaJ1FDBCgUizy11pti52TjBeZ8r/7o9i/6uOLh9pE=;
+        b=SD0X0g2rWCum7I8bJaGP0txq0GxvIRZ2cjKpDpQlqQvB176r+6yLcB5+LTptrAlNPH
+         Al2WNexckJLT/W19wFXOhUZ0z+IgbX+4UdlcUfXp2QK0cIra2xRdl80FVrTKJsiLSVCO
+         jcbwQkpwj/pTLYNvN4V8p1vFDa3d+mEA2/YrRBETbzHNRTYuiW1qqh7BL8WlCSSSQnL3
+         N0RiA7FRpD0MQvjudE0IMyzzuhb2gAhOdQElzUn8QwnDPgRDIGQ/1OHpeL3ax5Ghocqy
+         UHJZOd539Jl87hK3Mf1wiTTpcxaqhjr3YvUudcrtAJ6qt0V62gV7fmj+LgwiXZy0Hr68
+         5jQw==
+X-Gm-Message-State: AOJu0YzCfjJ/NKV4sWMQ4H2TByRA3WAZLyQiTVyAbW4w/mV9ilamwysj
+	I520RpSWBGIp9dZO8ekLYw7L4NHlzn/mwcpS/+xbGHehNsezLjYoFcjlrAwieU8=
+X-Google-Smtp-Source: AGHT+IFUA3l0o9eYEyt5lnD3XT9b0AohpyxLIuldInNn5GFm49HJTE/aTML44nK1r1Z3YqeXQ9yXFw==
+X-Received: by 2002:a2e:3c10:0:b0:2d4:64db:d661 with SMTP id j16-20020a2e3c10000000b002d464dbd661mr4275254lja.0.1710525995665;
+        Fri, 15 Mar 2024 11:06:35 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-185050-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v6 14/20] xen/riscv: add minimal stuff to page.h to build full Xen
+Date: Fri, 15 Mar 2024 19:06:10 +0100
+Message-ID: <d005b450f6a02a5f49e85d2551739779affe9e5c.1710517542.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1710517542.git.oleksii.kurochko@gmail.com>
+References: <cover.1710517542.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Subject: [seabios test] 185050: tolerable FAIL - PUSHED
-X-Osstest-Failures:
-    seabios:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-    seabios:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    seabios:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    seabios=192e23b78418abc23a92a7174ae2294fabe4b8a3
-X-Osstest-Versions-That:
-    seabios=3722c21de19ba64de56495502c0c025b913a9b15
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 15 Mar 2024 18:08:10 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 185050 seabios real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/185050/
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V5-6:
+ - Nothing changed. Only rebase.
+---
+Changes in V4:
+---
+ - Change message -> subject in "Changes in V3"
+ - s/BUG/BUG_ON("...")
+ - Do proper rebase ( pfn_to_paddr() and paddr_to_pfn() aren't removed ).
+---
+Changes in V3:
+ - update the commit subject
+ - add implemetation of PAGE_HYPERVISOR macros
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>
+ - drop definition of pfn_to_addr, and paddr_to_pfn in <asm/mm.h>
+---
+Changes in V2:
+ - Nothing changed. Only rebase.
+---
+ xen/arch/riscv/include/asm/page.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-Failures :-/ but no regressions.
+diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
+index 95074e29b3..c831e16417 100644
+--- a/xen/arch/riscv/include/asm/page.h
++++ b/xen/arch/riscv/include/asm/page.h
+@@ -6,6 +6,7 @@
+ #ifndef __ASSEMBLY__
+ 
+ #include <xen/const.h>
++#include <xen/bug.h>
+ #include <xen/types.h>
+ 
+ #include <asm/mm.h>
+@@ -32,6 +33,10 @@
+ #define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
+ #define PTE_TABLE                   (PTE_VALID)
+ 
++#define PAGE_HYPERVISOR_RW          (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
++
++#define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
++
+ /* Calculate the offsets into the pagetables for a given VA */
+ #define pt_linear_offset(lvl, va)   ((va) >> XEN_PT_LEVEL_SHIFT(lvl))
+ 
+@@ -62,6 +67,20 @@ static inline bool pte_is_valid(pte_t p)
+     return p.pte & PTE_VALID;
+ }
+ 
++static inline void invalidate_icache(void)
++{
++    BUG_ON("unimplemented");
++}
++
++#define clear_page(page) memset((void *)(page), 0, PAGE_SIZE)
++#define copy_page(dp, sp) memcpy(dp, sp, PAGE_SIZE)
++
++/* TODO: Flush the dcache for an entire page. */
++static inline void flush_page_to_ram(unsigned long mfn, bool sync_icache)
++{
++    BUG_ON("unimplemented");
++}
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* _ASM_RISCV_PAGE_H */
+-- 
+2.43.0
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 185005
- test-amd64-i386-xl-qemuu-win7-amd64 19 guest-stop             fail like 185005
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 185005
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 185005
- test-amd64-i386-xl-qemuu-ws16-amd64 19 guest-stop             fail like 185005
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
-
-version targeted for testing:
- seabios              192e23b78418abc23a92a7174ae2294fabe4b8a3
-baseline version:
- seabios              3722c21de19ba64de56495502c0c025b913a9b15
-
-Last test of basis   185005  2024-03-12 14:43:08 Z    3 days
-Testing same since   185050  2024-03-15 14:41:08 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Daniel Verkamp <daniel@drv.nu>
-  Kevin O'Connor <kevin@koconnor.net>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
- test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
- test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         pass    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/seabios.git
-   3722c21..192e23b  192e23b78418abc23a92a7174ae2294fabe4b8a3 -> xen-tested-master
 
