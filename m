@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99550C54E58
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E727C54E6E
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 18:06:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.693988.1082695 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.693991.1082734 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlBwn-00069n-Ox; Fri, 15 Mar 2024 18:06:25 +0000
+	id 1rlBwq-0007AT-Q0; Fri, 15 Mar 2024 18:06:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 693988.1082695; Fri, 15 Mar 2024 18:06:25 +0000
+Received: by outflank-mailman (output) from mailman id 693991.1082734; Fri, 15 Mar 2024 18:06:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlBwn-00068K-Kw; Fri, 15 Mar 2024 18:06:25 +0000
-Received: by outflank-mailman (input) for mailman id 693988;
- Fri, 15 Mar 2024 18:06:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rlBwq-00079a-IA; Fri, 15 Mar 2024 18:06:28 +0000
+Received: by outflank-mailman (input) for mailman id 693991;
+ Fri, 15 Mar 2024 18:06:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mDue=KV=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rlBwm-0005yV-Nz
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 18:06:24 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id baa43a90-e2f6-11ee-a1ee-f123f15fe8a2;
- Fri, 15 Mar 2024 19:06:22 +0100 (CET)
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d29aad15a5so28945411fa.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 11:06:22 -0700 (PDT)
+ id 1rlBwp-0005yW-BD
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 18:06:27 +0000
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [2a00:1450:4864:20::22b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bda8ec48-e2f6-11ee-afdd-a90da7624cb6;
+ Fri, 15 Mar 2024 19:06:26 +0100 (CET)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2d2509c66daso33949101fa.3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 11:06:26 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g29-20020a05651c079d00b002d0acb57c89sm568939lje.64.2024.03.15.11.06.20
+ g29-20020a05651c079d00b002d0acb57c89sm568939lje.64.2024.03.15.11.06.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 11:06:20 -0700 (PDT)
+ Fri, 15 Mar 2024 11:06:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,107 +46,262 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: baa43a90-e2f6-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: bda8ec48-e2f6-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710525980; x=1711130780; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1710525985; x=1711130785; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bnZCS2jkOQG1OwG5+NnDvOYWHQ+YyiN+63x/P+hS844=;
-        b=CkqH++FjYYpEW1Pu7IAlD3oX9jh7rYJoI6qwTDFCDABGF6/1i9/7uo+jhJmE1QczsK
-         TdJ8gBNBSU5/cbWDYT+/IHgpUxDWhomcNrbGGYPLBOancy10gFvw/xZHgCosRRFqFXOu
-         SnRWUuxIbZ3KO4F6VEbacPYmlmbsWl/T1S9Thal99gri8FQP5HNl49gvX581WGi212OD
-         LlAQM4wiNLQhXSVJpF8VAhYGzWVk/c68VbbGmIXPLGmJRgQBfCEFbGaoKYtt8562gfZP
-         P+q7h2mYs/a9wkvy6HQbqpLX1bjV8iENyHSOqvi3NA57TwfjaplpObI9/KMxeC8yDuuH
-         77Ow==
+        bh=ZLjLu7NTZLQs4Ktw0PAaKJT749xyDrNgvm4eQvKv/jw=;
+        b=XaWI6uKxw02paAqGsB4GaPOcUSvIRO40T+wVYItiUYobvZcMyOmW2CrBhnDVQRCWTO
+         0lqke7b/Q9BX+ML2RQxjlPMLVrmkiXqZB85g35FwhjglwJbMY0nW6Bx0toCtGzPrDqUq
+         v2TKeHA3hPdCGhQwpigIdanzAwUlsfGEpPoarnU+ePEKBB481P+KG/q0L7iX1GF1dksY
+         zj3QKK37Cav4kGfAIM7rhxmGspWL4fJxZo1pfbJrkMtZ1A24fc3XXwN6gr3320kaRsIP
+         m34vRLm6YfWEemJ4w6AsV6PrGPndAZw6B0EfW7kBdS0xDUwhsW6Va1OPJISoNaVSdmgP
+         ZgQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710525980; x=1711130780;
+        d=1e100.net; s=20230601; t=1710525985; x=1711130785;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bnZCS2jkOQG1OwG5+NnDvOYWHQ+YyiN+63x/P+hS844=;
-        b=JcjpHj6KGG2HoGslKj2OCky/nnkdz9caWuuEq1GdnND5tTme39n3urh9bp4TuF2MM8
-         qtvsFtCLhEamCbd5kAjjhQUfgfewo5mDAUxjvk4mg+i3DAnrKt7YCPwoTx1AHQvYO/sx
-         BV/pptfRTkLEeJJIhEwYxrDnIS1VNY/agXZKYzsoXtvJpg3FKRO2/lEHwN9nBlJCp/p+
-         HAf60s2wWZ8JOUasTj3F89xtEgfaWD1Yx7WKrPoptKUIA/vmABsk+Z4ckQyKPB3txjDK
-         DgzCh0qUctzwTEX3plq+a8TzoEwDWbFmZrI4xgpkQQtvNre1234Kbjfv/OmPpglVye31
-         gYjQ==
-X-Gm-Message-State: AOJu0Yxz/BEBUXJwJkiuNODgXh2QTOWDZMttjXK6VRgqEABGFB4d5fci
-	4rpKdUVfpAmj42nK2NiaMKyxYC7br280AJNQ8yjoKXVtvF7+wj2LC9VjXqOcXNw=
-X-Google-Smtp-Source: AGHT+IE7CXomGSgKuwJJpH8tAd57HXXdUUH5gqwKlDD0cS04ArIqQSpMGEqHTi7M7Y1tC2d2O80frw==
-X-Received: by 2002:a2e:8011:0:b0:2d4:6910:2ee5 with SMTP id j17-20020a2e8011000000b002d469102ee5mr2530317ljg.8.1710525980466;
-        Fri, 15 Mar 2024 11:06:20 -0700 (PDT)
+        bh=ZLjLu7NTZLQs4Ktw0PAaKJT749xyDrNgvm4eQvKv/jw=;
+        b=l0g4XXlYT0kNF6SaQ2+XnsGHBc0IC5k8GLONej1cW4l7q4HhKy60vDguJELshLaxQN
+         roYkszp2jQ4zKCMVnZvsE9JncBpyYxy7X0M+kLsc0qLJ8fh4C7q45aZv64DO5LS0M3Gp
+         ua2qPm8f/S2/bY5yx5kSIHE85Shvc9pL0o/AFcUXB/LiJTnavMk+wy/gV9dRHAanHMFP
+         jCPvH4URxeEZkJUGhqLpmIEs15Al1yAUWVlFaNju5AD+a2aiCTlSGRDpwSuZX4YJg4DV
+         DVEX/gnqHLuPqegstMtyZPCfoIKre5e25LcWwM9N6VN4I6PansW3bWkY66dq+b7Jg/jd
+         yjRw==
+X-Gm-Message-State: AOJu0Yz96wC2ZjUOqlPscj6jDVPSHiZ7hIKzCo3L8Zr/uJFodB3lZ4i8
+	DOyvv4qhfDONdzeSaOFb+1vzXG7xwWE3O0B8SVc1vQ5K9alLtYRhZSJwUP07D/Y=
+X-Google-Smtp-Source: AGHT+IGCsFBtBhS2vCW2niqNiPD74qj+Jg9e+Rhh+ldepWAMvFmN3caWAbPP+JYe7DVl2qxWuWwtjg==
+X-Received: by 2002:a2e:9357:0:b0:2d3:f3bc:bb65 with SMTP id m23-20020a2e9357000000b002d3f3bcbb65mr3692888ljh.11.1710525985392;
+        Fri, 15 Mar 2024 11:06:25 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v6 01/20] automation: introduce fixed randconfig for RISC-V
-Date: Fri, 15 Mar 2024 19:05:57 +0100
-Message-ID: <d0812213d126ade5f99aec32802941f1b153fc31.1710517542.git.oleksii.kurochko@gmail.com>
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v6 05/20] xen/bitops: implement fls{l}() in common logic
+Date: Fri, 15 Mar 2024 19:06:01 +0100
+Message-ID: <e7fc769a4f08ca00972faf4ce99e562d2eb3c00c.1710517542.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1710517542.git.oleksii.kurochko@gmail.com>
 References: <cover.1710517542.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch introduces the anchor riscv-fixed-randconfig,
-which includes all configurations that should be disabled for
-randconfig builds.
+Return type was left 'int' because of the following compilation error:
 
-Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
+./include/xen/kernel.h:18:21: error: comparison of distinct pointer types lacks a cast [-Werror]
+       18 |         (void) (&_x == &_y);            \
+          |                     ^~
+    common/page_alloc.c:1843:34: note: in expansion of macro 'min'
+     1843 |         unsigned int inc_order = min(MAX_ORDER, flsl(e - s) - 1);
+
+generic_fls{l} was used instead of __builtin_clz{l}(x) as if x is 0,
+the result in undefined.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in V6:
- - new patch for this patch series
- - Reviewed-by and Acked-by was added. ( in another patch series they were
-   recieved. )
+ - new patch for the patch series.
 ---
- automation/gitlab-ci/build.yaml | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ xen/arch/arm/include/asm/arm32/bitops.h |  2 +-
+ xen/arch/arm/include/asm/arm64/bitops.h |  6 ++----
+ xen/arch/arm/include/asm/bitops.h       |  7 ++-----
+ xen/arch/ppc/include/asm/bitops.h       |  3 ---
+ xen/arch/x86/include/asm/bitops.h       |  6 ++++--
+ xen/common/bitops.c                     | 22 ++++++++++++++++++++++
+ xen/include/xen/bitops.h                | 24 ++++++++++++++++++++++++
+ 7 files changed, 55 insertions(+), 15 deletions(-)
 
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 6d2cb18b88..aac29ee13a 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -512,6 +512,14 @@ alpine-3.18-gcc-debug-arm64-boot-cpupools:
-       CONFIG_BOOT_TIME_CPUPOOLS=y
+diff --git a/xen/arch/arm/include/asm/arm32/bitops.h b/xen/arch/arm/include/asm/arm32/bitops.h
+index d0309d47c1..5552d4e945 100644
+--- a/xen/arch/arm/include/asm/arm32/bitops.h
++++ b/xen/arch/arm/include/asm/arm32/bitops.h
+@@ -1,7 +1,7 @@
+ #ifndef _ARM_ARM32_BITOPS_H
+ #define _ARM_ARM32_BITOPS_H
  
- # RISC-V 64 cross-build
-+.riscv-fixed-randconfig:
-+  variables: &riscv-fixed-randconfig
-+    EXTRA_FIXED_RANDCONFIG: |
-+      CONFIG_COVERAGE=n
-+      CONFIG_EXPERT=y
-+      CONFIG_GRANT_TABLE=n
-+      CONFIG_MEM_ACCESS=n
+-#define flsl fls
++#define arch_flsl fls
+ 
+ /*
+  * Little endian assembly bitops.  nr = 0 -> byte 0 bit 0.
+diff --git a/xen/arch/arm/include/asm/arm64/bitops.h b/xen/arch/arm/include/asm/arm64/bitops.h
+index 0efde29068..5f5d97faa0 100644
+--- a/xen/arch/arm/include/asm/arm64/bitops.h
++++ b/xen/arch/arm/include/asm/arm64/bitops.h
+@@ -22,17 +22,15 @@ static /*__*/always_inline unsigned long __ffs(unsigned long word)
+  */
+ #define ffz(x)  __ffs(~(x))
+ 
+-static inline int flsl(unsigned long x)
++static inline int arch_flsl(unsigned long x)
+ {
+         uint64_t ret;
+ 
+-        if (__builtin_constant_p(x))
+-               return generic_flsl(x);
+-
+         asm("clz\t%0, %1" : "=r" (ret) : "r" (x));
+ 
+         return BITS_PER_LONG - ret;
+ }
++#define arch_flsl arch_flsl
+ 
+ /* Based on linux/include/asm-generic/bitops/find.h */
+ 
+diff --git a/xen/arch/arm/include/asm/bitops.h b/xen/arch/arm/include/asm/bitops.h
+index 5104334e48..bcf7b48731 100644
+--- a/xen/arch/arm/include/asm/bitops.h
++++ b/xen/arch/arm/include/asm/bitops.h
+@@ -145,17 +145,14 @@ static inline int test_bit(int nr, const volatile void *addr)
+  * the clz instruction for much better code efficiency.
+  */
+ 
+-static inline int fls(unsigned int x)
++static inline int arch_fls(unsigned int x)
+ {
+         int ret;
+ 
+-        if (__builtin_constant_p(x))
+-               return generic_fls(x);
+-
+         asm("clz\t%"__OP32"0, %"__OP32"1" : "=r" (ret) : "r" (x));
+         return 32 - ret;
+ }
+-
++#define arch_fls arch_fls
+ 
+ #define arch_ffs(x) ({ unsigned int __t = (x); fls(ISOLATE_LSB(__t)); })
+ #define arch_ffsl(x) ({ unsigned long __t = (x); flsl(ISOLATE_LSB(__t)); })
+diff --git a/xen/arch/ppc/include/asm/bitops.h b/xen/arch/ppc/include/asm/bitops.h
+index 989d341a44..16447a4be6 100644
+--- a/xen/arch/ppc/include/asm/bitops.h
++++ b/xen/arch/ppc/include/asm/bitops.h
+@@ -171,9 +171,6 @@ static inline int __test_and_clear_bit(int nr, volatile void *addr)
+     return (old & mask) != 0;
+ }
+ 
+-#define flsl(x) generic_flsl(x)
+-#define fls(x) generic_fls(x)
+-
+ /* Based on linux/include/asm-generic/bitops/ffz.h */
+ /*
+  * ffz - find first zero in word.
+diff --git a/xen/arch/x86/include/asm/bitops.h b/xen/arch/x86/include/asm/bitops.h
+index dd439b69a0..87e91a1b7b 100644
+--- a/xen/arch/x86/include/asm/bitops.h
++++ b/xen/arch/x86/include/asm/bitops.h
+@@ -438,7 +438,7 @@ static always_inline unsigned int arch_ffsl(unsigned long x)
+  *
+  * This is defined the same way as ffs.
+  */
+-static inline int flsl(unsigned long x)
++static always_inline int arch_flsl(unsigned long x)
+ {
+     long r;
+ 
+@@ -448,8 +448,9 @@ static inline int flsl(unsigned long x)
+           "1:" : "=r" (r) : "rm" (x));
+     return (int)r+1;
+ }
++#define arch_flsl arch_flsl
+ 
+-static inline int fls(unsigned int x)
++static always_inline int arch_fls(unsigned int x)
+ {
+     int r;
+ 
+@@ -459,6 +460,7 @@ static inline int fls(unsigned int x)
+           "1:" : "=r" (r) : "rm" (x));
+     return r + 1;
+ }
++#define arch_fls arch_fls
+ 
+ /**
+  * hweightN - returns the hamming weight of a N-bit word
+diff --git a/xen/common/bitops.c b/xen/common/bitops.c
+index a8c32f6767..95bc47176b 100644
+--- a/xen/common/bitops.c
++++ b/xen/common/bitops.c
+@@ -62,9 +62,31 @@ static void test_ffs(void)
+     CHECK(ffs64, (uint64_t)0x8000000000000000, 64);
+ }
+ 
++static void test_fls(void)
++{
++    /* unsigned int ffs(unsigned int) */
++    CHECK(fls, 1, 1);
++    CHECK(fls, 3, 2);
++    CHECK(fls, 3U << 30, 32);
 +
- archlinux-current-gcc-riscv64:
-   extends: .gcc-riscv64-cross-build
-   variables:
-@@ -532,8 +540,7 @@ archlinux-current-gcc-riscv64-randconfig:
-     CONTAINER: archlinux:current-riscv64
-     KBUILD_DEFCONFIG: tiny64_defconfig
-     RANDCONFIG: y
--    EXTRA_FIXED_RANDCONFIG:
--      CONFIG_COVERAGE=n
-+    <<: *riscv-fixed-randconfig
++    /* unsigned int flsl(unsigned long) */
++    CHECK(flsl, 1, 1);
++    CHECK(flsl, 1UL << (BITS_PER_LONG - 1), BITS_PER_LONG);
++#if BITS_PER_LONG > 32
++    CHECK(flsl, 3UL << 32, 34);
++#endif
++
++    /* unsigned int fls64(uint64_t) */
++    CHECK(fls64, 1, 1);
++    CHECK(fls64, 0x00000000C0000000ULL, 32);
++    CHECK(fls64, 0x0000000180000000ULL, 33);
++    CHECK(fls64, 0xC000000000000000ULL, 64);
++}
++
+ static int __init cf_check test_bitops(void)
+ {
+     test_ffs();
++    test_fls();
  
- archlinux-current-gcc-riscv64-debug-randconfig:
-   extends: .gcc-riscv64-cross-build-debug
-@@ -541,8 +548,7 @@ archlinux-current-gcc-riscv64-debug-randconfig:
-     CONTAINER: archlinux:current-riscv64
-     KBUILD_DEFCONFIG: tiny64_defconfig
-     RANDCONFIG: y
--    EXTRA_FIXED_RANDCONFIG:
--      CONFIG_COVERAGE=n
-+    <<: *riscv-fixed-randconfig
+     return 0;
+ }
+diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
+index f14ad0d33a..fac8f768ff 100644
+--- a/xen/include/xen/bitops.h
++++ b/xen/include/xen/bitops.h
+@@ -69,6 +69,30 @@ static inline int generic_flsl(unsigned long x)
  
- # Power cross-build
- debian-bullseye-gcc-ppc64le:
+ #include <asm/bitops.h>
+ 
++static always_inline __pure int fls(unsigned int x)
++{
++    if (__builtin_constant_p(x))
++        return generic_fls(x);
++
++#ifndef arch_fls
++#define arch_fls generic_fls
++#endif
++
++    return arch_fls(x);
++}
++
++static always_inline __pure int flsl(unsigned long x)
++{
++    if (__builtin_constant_p(x))
++        return generic_flsl(x);
++
++#ifndef arch_flsl
++#define arch_flsl generic_flsl
++#endif
++
++    return arch_flsl(x);
++}
++
+ /*
+  * Find First Set bit.  Bits are labelled from 1.
+  */
 -- 
 2.43.0
 
