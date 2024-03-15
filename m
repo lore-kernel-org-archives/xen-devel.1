@@ -4,39 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08351C54E67
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 17:52:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.693976.1082664 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A22EC54E6A
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 18:06:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.693987.1082690 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlBjL-000373-Mn; Fri, 15 Mar 2024 17:52:31 +0000
+	id 1rlBwn-00061t-HY; Fri, 15 Mar 2024 18:06:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 693976.1082664; Fri, 15 Mar 2024 17:52:31 +0000
+Received: by outflank-mailman (output) from mailman id 693987.1082690; Fri, 15 Mar 2024 18:06:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlBjL-00036w-JQ; Fri, 15 Mar 2024 17:52:31 +0000
-Received: by outflank-mailman (input) for mailman id 693976;
- Fri, 15 Mar 2024 17:52:30 +0000
+	id 1rlBwn-00060j-BS; Fri, 15 Mar 2024 18:06:25 +0000
+Received: by outflank-mailman (input) for mailman id 693987;
+ Fri, 15 Mar 2024 18:06:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+CdM=KV=cloud.com=matthew.barnes@srs-se1.protection.inumbo.net>)
- id 1rlBjK-0002sX-4J
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 17:52:30 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ <SRS0=mDue=KV=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1rlBwm-0005yW-5n
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 18:06:24 +0000
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [2a00:1450:4864:20::236])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ca78f8af-e2f4-11ee-afdd-a90da7624cb6;
- Fri, 15 Mar 2024 18:52:29 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-413f76fcf41so14585645e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 10:52:29 -0700 (PDT)
-Received: from EMEAENGAAD91498.citrite.net
- (default-46-102-197-201.interdsl.co.uk. [46.102.197.201])
- by smtp.gmail.com with ESMTPSA id
- s6-20020a5d69c6000000b0033e9f6997c7sm3631448wrw.66.2024.03.15.10.52.27
+ id bb93d62c-e2f6-11ee-afdd-a90da7624cb6;
+ Fri, 15 Mar 2024 19:06:23 +0100 (CET)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2d2509c66daso33948251fa.3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 11:06:23 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ g29-20020a05651c079d00b002d0acb57c89sm568939lje.64.2024.03.15.11.06.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 10:52:27 -0700 (PDT)
+ Fri, 15 Mar 2024 11:06:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,179 +46,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca78f8af-e2f4-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: bb93d62c-e2f6-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1710525148; x=1711129948; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1710525982; x=1711130782; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A3xo7OpI3t17GvZtWVbf/bOFO4OxNlnVn4a3LYdu7XY=;
-        b=lD31A+PCY8pEBsu1/GrO+uUYPeTT4tztVBGCoLJZjNtgvdPF31T4F9OvXX2iSWO678
-         G/O/FEBjwp/IrRZWcAKiu3rXoJPg1UlEnEGVDwTiBVmcUssY9OWh4K0AxYLjq3OqnpnJ
-         9GLbIfMo9Rxcy2lGfQgjsld6MGeyn9Ct0XL9U=
+        bh=b956toTh9DhRZ58EEcldn/bf2x22T6+RI+Lzdk85ScQ=;
+        b=e727lqbUDai+CJTFcFdEl1/H1UlCA4YU+fzYnh+cOxeOMYZhX74NNzYl7HHZZD9CSL
+         Z0W8JPg8Jggq/pOsblEOH78N64xy+paUSY5PyOI+qRrB18Ro5hIG+xea5U6sxXukXTjv
+         suVlLQCQV5n9AZxAGRIplA3+olr1h+px8MgNzSLGriVhoy4vXzwlKy3Loq8MHNi2ZwQ+
+         gbzJQBnWJpB/6OWufvHpU9s2FqM15NR/DN8u4aLuUzys0QoF0SiIJiMmd6RBC1nZ1D7q
+         l26sv/CDwy3Ro91SduGYpmC8F2AK8cuEuRkNMcMvFErUzUt40PdpxAR6vOZydcH+CAjJ
+         id0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710525148; x=1711129948;
+        d=1e100.net; s=20230601; t=1710525982; x=1711130782;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=A3xo7OpI3t17GvZtWVbf/bOFO4OxNlnVn4a3LYdu7XY=;
-        b=gDoduhQTVM7bR9KVuuuG2qtlyrGOwmY/MZV/DOoeQmSxxo+rMo+LnIZY4OyzkFW4fY
-         R+LufwxQyKwiRw81sE3v2SJv9xJhOFEpKHRgriZQDyPlwZjebin9w79PeaDZcC/bGNSM
-         wNiWF11JeEb+Pg62BjOUAga1CKkWQIbQu2lLTJ5h6+ZuOEXqPOka1FvusTTHjnwsrUno
-         Lt68q98qr0NFdX1z1oKz5EqOiWKk24iHUb3C9LQAKoX1t2OQojCe2Q572vkhmHxWp/SX
-         ViZWV+R3peVwbdnqeLZfZapSc1FM5X/AQaAI4eVQKx0+/kEYihHvlSTISuxHKU0uwwXL
-         SNFA==
-X-Gm-Message-State: AOJu0YwWBzviF0Aca2Cgz1MNqp3DCU/ep9//KvKuE5icpyNAaBRF6gri
-	Sil1d8fiWzkGoBPjeBdcetS+ObfrYjdqc7iyaFJw5dRcGwZ5tHO19COWhWe2c5Q3N+FbhrgnDId
-	V
-X-Google-Smtp-Source: AGHT+IFZr9DuyeXZebztwFFVMcKj7dEhu/jn+GFXCDO8LtgYFsieP3WM/Qj8hWEkm8nk9Euy5eeCzw==
-X-Received: by 2002:adf:ff87:0:b0:33e:6833:8fa9 with SMTP id j7-20020adfff87000000b0033e68338fa9mr3985505wrr.44.1710525148557;
-        Fri, 15 Mar 2024 10:52:28 -0700 (PDT)
-From: Matthew Barnes <matthew.barnes@cloud.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Matthew Barnes <matthew.barnes@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 1/2] x86: Enable BLD and handle #DB traps
-Date: Fri, 15 Mar 2024 17:52:23 +0000
-Message-Id: <5c0c2fd252f425a397981546496438ebac439db2.1710524011.git.matthew.barnes@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1710524011.git.matthew.barnes@cloud.com>
-References: <cover.1710524011.git.matthew.barnes@cloud.com>
+        bh=b956toTh9DhRZ58EEcldn/bf2x22T6+RI+Lzdk85ScQ=;
+        b=KdYvLIQS9v6eDEz31yM4NvJS8Z+eWlBwMnNg0BY7dNWxh4mJjY8lEOcR/1ei/tsVzf
+         ofqV/+3EKgoaLNnm0x25ToThmyClz+bkATdRpdEk5fVdtU1A764XqDewT/vSeDAQ9XAy
+         ihn9/Mh7qMNFfNJxsRxpXIy0jPScLcO5klxvbVc3XPOFkC1r+mr8hBY+jonL8b2WkR+w
+         xKCT/BwSJyPZmePotIqaPIT2YTl+Dpu4klUTcty8i43kLEepBUsMUBUthSQcU6QAmoin
+         cdnl+vwnHAe5gRpeD2W18xv6qqZgUSK96nlfs1hcNmevDqtL09VSVQJoH2T5bByz7sEI
+         GzEA==
+X-Gm-Message-State: AOJu0YwtLwxbCZAKrEvHggf8tguXgypzo/Ffqeqjn7W+EOELfA6FiQvc
+	75vlHs17Jrb3x+gdgiyTrqhHGFu0wUOk2o2ZOp+3ciro26WFkOMdFzBFPG+z44s=
+X-Google-Smtp-Source: AGHT+IEKZeiL7AjpnXkkbaowoYHyzoJTG23T1OhsLFonO4lxu26OuDUItxfXRVkVZcJK/PCBAV3i3w==
+X-Received: by 2002:a05:651c:1050:b0:2d4:71bd:b072 with SMTP id x16-20020a05651c105000b002d471bdb072mr4127027ljm.14.1710525981785;
+        Fri, 15 Mar 2024 11:06:21 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v6 02/20] xen/riscv: disable unnecessary configs
+Date: Fri, 15 Mar 2024 19:05:58 +0100
+Message-ID: <5a1b905601db481a1a625dafbbf9b28dbe12876c.1710517542.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1710517542.git.oleksii.kurochko@gmail.com>
+References: <cover.1710517542.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Enable Bus Lock Detect if available, and handle #DB traps to reduce
-effects of DoS.
+This patch disables unnecessary configs for two cases:
+1. By utilizing EXTRA_FIXED_RANDCONFIG for randconfig builds (GitLab CI jobs).
+2. By using tiny64_defconfig for non-randconfig builds.
 
-The value to restore MSR_DEBUGCTL to after VMExit will now depend on
-whether BLD is enabled or not.
-
-Restore MSR_DEBUGCTL after being cleared by storing a copy of the
-register value in memory, instead of hard-coding it.
-
-Signed-off-by: Matthew Barnes <matthew.barnes@cloud.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/x86/cpu/common.c            |  5 +++++
- xen/arch/x86/hvm/vmx/entry.S         |  2 +-
- xen/arch/x86/include/asm/debugreg.h  |  1 +
- xen/arch/x86/include/asm/msr-index.h |  1 +
- xen/arch/x86/include/asm/msr.h       |  2 ++
- xen/arch/x86/msr.c                   |  2 ++
- xen/arch/x86/traps.c                 | 10 ++++++++--
- 7 files changed, 20 insertions(+), 3 deletions(-)
+Changes in V6:
+ - Nothing changed. Only rebase.
+---
+Changes in V5:
+ - Rebase and drop duplicated configs in EXTRA_FIXED_RANDCONFIG list
+ - Update the commit message
+---
+Changes in V4:
+ - Nothing changed. Only rebase
+---
+Changes in V3:
+ - Remove EXTRA_FIXED_RANDCONFIG for non-randconfig jobs.
+   For non-randconfig jobs, it is sufficient to disable configs by using the defconfig.
+ - Remove double blank lines in build.yaml file before archlinux-current-gcc-riscv64-debug
+---
+Changes in V2:
+ - update the commit message.
+ - remove xen/arch/riscv/Kconfig changes.
+---
+ automation/gitlab-ci/build.yaml         | 24 ++++++++++++++++++++++++
+ xen/arch/riscv/configs/tiny64_defconfig | 17 +++++++++++++++++
+ 2 files changed, 41 insertions(+)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 28d7f34c4dbe..f11ac06f8292 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -623,6 +623,11 @@ void identify_cpu(struct cpuinfo_x86 *c)
- 	}
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index aac29ee13a..3b3d2c47dc 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -519,6 +519,30 @@ alpine-3.18-gcc-debug-arm64-boot-cpupools:
+       CONFIG_EXPERT=y
+       CONFIG_GRANT_TABLE=n
+       CONFIG_MEM_ACCESS=n
++      CONFIG_SCHED_CREDIT=n
++      CONFIG_SCHED_CREDIT2=n
++      CONFIG_SCHED_RTDS=n
++      CONFIG_SCHED_NULL=n
++      CONFIG_SCHED_ARINC653=n
++      CONFIG_TRACEBUFFER=n
++      CONFIG_HYPFS=n
++      CONFIG_SPECULATIVE_HARDEN_ARRAY=n
++      CONFIG_ARGO=n
++      CONFIG_HYPFS_CONFIG=n
++      CONFIG_CORE_PARKING=n
++      CONFIG_DEBUG_TRACE=n
++      CONFIG_IOREQ_SERVER=n
++      CONFIG_CRASH_DEBUG=n
++      CONFIG_KEXEC=n
++      CONFIG_LIVEPATCH=n
++      CONFIG_NUMA=n
++      CONFIG_PERF_COUNTERS=n
++      CONFIG_HAS_PMAP=n
++      CONFIG_XENOPROF=n
++      CONFIG_COMPAT=n
++      CONFIG_UBSAN=n
++      CONFIG_NEEDS_LIBELF=n
++      CONFIG_XSM=n
  
- 	setup_doitm();
-+
-+	if (cpu_has(c, X86_FEATURE_BLD)) {
-+		host_msr_debugctl |= IA32_DEBUGCTLMSR_BLD;
-+		wrmsrl(MSR_IA32_DEBUGCTLMSR, host_msr_debugctl);
-+	}
- }
+ archlinux-current-gcc-riscv64:
+   extends: .gcc-riscv64-cross-build
+diff --git a/xen/arch/riscv/configs/tiny64_defconfig b/xen/arch/riscv/configs/tiny64_defconfig
+index 09defe236b..35915255e6 100644
+--- a/xen/arch/riscv/configs/tiny64_defconfig
++++ b/xen/arch/riscv/configs/tiny64_defconfig
+@@ -7,6 +7,23 @@
+ # CONFIG_GRANT_TABLE is not set
+ # CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
+ # CONFIG_MEM_ACCESS is not set
++# CONFIG_ARGO is not set
++# CONFIG_HYPFS_CONFIG is not set
++# CONFIG_CORE_PARKING is not set
++# CONFIG_DEBUG_TRACE is not set
++# CONFIG_IOREQ_SERVER is not set
++# CONFIG_CRASH_DEBUG is not setz
++# CONFIG_KEXEC is not set
++# CONFIG_LIVEPATCH is not set
++# CONFIG_NUMA is not set
++# CONFIG_PERF_COUNTERS is not set
++# CONFIG_HAS_PMAP is not set
++# CONFIG_TRACEBUFFER is not set
++# CONFIG_XENOPROF is not set
++# CONFIG_COMPAT is not set
++# CONFIG_COVERAGE is not set
++# CONFIG_UBSAN is not set
++# CONFIG_NEEDS_LIBELF is not set
  
- /* leaf 0xb SMT level */
-diff --git a/xen/arch/x86/hvm/vmx/entry.S b/xen/arch/x86/hvm/vmx/entry.S
-index 1bead826caa3..a0148f78584d 100644
---- a/xen/arch/x86/hvm/vmx/entry.S
-+++ b/xen/arch/x86/hvm/vmx/entry.S
-@@ -46,8 +46,8 @@ ENTRY(vmx_asm_vmexit_handler)
-         /* WARNING! `ret`, `call *`, `jmp *` not safe before this point. */
- 
-         /* Hardware clears MSR_DEBUGCTL on VMExit.  Reinstate it if debugging Xen. */
-+        mov host_msr_debugctl(%rip), %eax
-         .macro restore_lbr
--            mov $IA32_DEBUGCTLMSR_LBR, %eax
-             mov $MSR_IA32_DEBUGCTLMSR, %ecx
-             xor %edx, %edx
-             wrmsr
-diff --git a/xen/arch/x86/include/asm/debugreg.h b/xen/arch/x86/include/asm/debugreg.h
-index 2bdaf5d9aa11..9c048ae215d6 100644
---- a/xen/arch/x86/include/asm/debugreg.h
-+++ b/xen/arch/x86/include/asm/debugreg.h
-@@ -19,6 +19,7 @@
- #define DR_TRAP1        (0x2)           /* db1 */
- #define DR_TRAP2        (0x4)           /* db2 */
- #define DR_TRAP3        (0x8)           /* db3 */
-+#define DR_TRAP11       (0x800)         /* db11 */
- #define DR_STEP         (0x4000)        /* single-step */
- #define DR_SWITCH       (0x8000)        /* task switch */
- #define DR_NOT_RTM      (0x10000)       /* clear: #BP inside RTM region */
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 92dd9fa4962c..2e397bd28c77 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -292,6 +292,7 @@
- #define MSR_IA32_DEBUGCTLMSR		0x000001d9
- #define IA32_DEBUGCTLMSR_LBR		(1<<0) /* Last Branch Record */
- #define IA32_DEBUGCTLMSR_BTF		(1<<1) /* Single Step on Branches */
-+#define IA32_DEBUGCTLMSR_BLD		(1<<2) /* Bus Lock Detect */
- #define IA32_DEBUGCTLMSR_TR		(1<<6) /* Trace Message Enable */
- #define IA32_DEBUGCTLMSR_BTS		(1<<7) /* Branch Trace Store */
- #define IA32_DEBUGCTLMSR_BTINT		(1<<8) /* Branch Trace Interrupt */
-diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index 1d8ea9f26faa..9ff7dcc8ca8b 100644
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -432,4 +432,6 @@ int init_vcpu_msr_policy(struct vcpu *v);
- int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val);
- int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val);
- 
-+extern uint32_t host_msr_debugctl;
-+
- #endif /* __ASM_MSR_H */
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 9babd441f9d4..7d9d162cb8b4 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -24,6 +24,8 @@
- 
- #include <public/hvm/params.h>
- 
-+uint32_t host_msr_debugctl;
-+
- DEFINE_PER_CPU(uint32_t, tsc_aux);
- 
- int init_vcpu_msr_policy(struct vcpu *v)
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index d554c9d41edd..7d8eee013d00 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -1936,9 +1936,12 @@ void asmlinkage do_debug(struct cpu_user_regs *regs)
-      */
-     write_debugreg(6, X86_DR6_DEFAULT);
- 
-+    if ( !( dr6 & DR_TRAP11 ) )
-+        return;
-+
-     /* #DB automatically disabled LBR.  Reinstate it if debugging Xen. */
-     if ( cpu_has_xen_lbr )
--        wrmsrl(MSR_IA32_DEBUGCTLMSR, IA32_DEBUGCTLMSR_LBR);
-+        wrmsrl(MSR_IA32_DEBUGCTLMSR, host_msr_debugctl);
- 
-     if ( !guest_mode(regs) )
-     {
-@@ -2130,7 +2133,10 @@ void percpu_traps_init(void)
-     }
- 
-     if ( cpu_has_xen_lbr )
--        wrmsrl(MSR_IA32_DEBUGCTLMSR, IA32_DEBUGCTLMSR_LBR);
-+    {
-+        host_msr_debugctl |= IA32_DEBUGCTLMSR_LBR;
-+        wrmsrl(MSR_IA32_DEBUGCTLMSR, host_msr_debugctl);
-+    }
- }
- 
- /* Exception entries */
+ CONFIG_RISCV_64=y
+ CONFIG_DEBUG=y
 -- 
-2.34.1
+2.43.0
 
 
