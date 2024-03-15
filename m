@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E052C54E6A
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 18:09:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694033.1082893 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC0AC54E58
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 19:10:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694061.1082903 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlC01-0001VO-Vh; Fri, 15 Mar 2024 18:09:45 +0000
+	id 1rlCwQ-0000mA-AE; Fri, 15 Mar 2024 19:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694033.1082893; Fri, 15 Mar 2024 18:09:45 +0000
+Received: by outflank-mailman (output) from mailman id 694061.1082903; Fri, 15 Mar 2024 19:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlC01-0001VH-Sy; Fri, 15 Mar 2024 18:09:45 +0000
-Received: by outflank-mailman (input) for mailman id 694033;
- Fri, 15 Mar 2024 18:09:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mDue=KV=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rlBx5-0005yW-Ao
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 18:06:43 +0000
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [2a00:1450:4864:20::22b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c74b4bfc-e2f6-11ee-afdd-a90da7624cb6;
- Fri, 15 Mar 2024 19:06:42 +0100 (CET)
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2d4698f4936so31765381fa.1
- for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 11:06:42 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g29-20020a05651c079d00b002d0acb57c89sm568939lje.64.2024.03.15.11.06.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 11:06:41 -0700 (PDT)
+	id 1rlCwQ-0000m3-6c; Fri, 15 Mar 2024 19:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 694061;
+ Fri, 15 Mar 2024 19:10:04 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1rlCwO-0000Xq-Pc
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 19:10:04 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rlCwG-0001t9-9C; Fri, 15 Mar 2024 19:09:56 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.240])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1rlCwF-0002bE-Vt; Fri, 15 Mar 2024 19:09:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,99 +41,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c74b4bfc-e2f6-11ee-afdd-a90da7624cb6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710526002; x=1711130802; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jsMXEbuzvQgFJEn0K8X9h9yZxAaRur+Xb5WLOt3ikK8=;
-        b=gePbBkmJGKQc7GUheasZf2LMvRMy9qzQAbCCtTpR6vS63ZhiMsuFVE+vhkJfHAFHUD
-         8ZAlJ7jT/ylSclX+H8lLLDuP6fyRk4KHtqqyTLbU7YFfEO+ebsd/0ZYKFmTbUfTW0siU
-         oX4BfaqFMCB89EEZ6CjKp/J9rdu8raPd3fz3D9TP92OuLK+6eItrEbR6N2qZP2nLXqBO
-         t6PyhIyM0YXc7onWomajyNzqZFHBJUkNtgdAvQ8USE7mVgthHlpuGnIaKzC302DFaVTL
-         wjV8vd4ODsPn0rBp5Kkc/oRWbDm/1NQVytFlrGvzgd7yafUxqgVH6ZPao8UsK7m6U0wv
-         oLEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710526002; x=1711130802;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jsMXEbuzvQgFJEn0K8X9h9yZxAaRur+Xb5WLOt3ikK8=;
-        b=YUUZgP6k+2NuldVj0iyCIOLEN05bNnpyhCzegobsuNjB2Cyy0kBTEOtcd+r2+5Y+yZ
-         t2p4YP4+qOv0d5UwR9fXt3/v0+HKA+WLfkfLLSF0FyDT6hBdbbwl0mdQHchOWbO7fiUZ
-         vKExxoHERw8UqTXTJBhw7SAZDsY8l1gN/u8X4wg55Y4gD+PpbMfb5nKffENJLoOlFmpH
-         FsxyQL5ZccabRxV8B7qb64me+3YAI6TjCJMQIwfhQThY2hPX8NTgb2yg9lD92Lolk5Rl
-         EMszOGyH9ZTvh6AEzdeMWfoTP0d3A/X+M909L4w8mDclF5Jl73e6KvJ8ikINJnn7AVG4
-         Zebw==
-X-Gm-Message-State: AOJu0YzifmZR7nrh8iUrdmMOdHMaahbsg0bB9Og5MArfBoFE5w1apViW
-	9313EfU4NREMyeYnY6t89LK7wFM5UzCKyLQd9h2BGwlHN3efuT2DVmzlDCw0x/w=
-X-Google-Smtp-Source: AGHT+IE9dXphkeMbJR8ERhFEV7xr9bENpzyXUz8rXvndWu6/JOiC/7cONEq9zSxMkFaOAq+Cvy7U9Q==
-X-Received: by 2002:a2e:8806:0:b0:2d4:3c32:814d with SMTP id x6-20020a2e8806000000b002d43c32814dmr4122685ljh.26.1710526001704;
-        Fri, 15 Mar 2024 11:06:41 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v6 20/20] xen/README: add compiler and binutils versions for RISC-V64
-Date: Fri, 15 Mar 2024 19:06:16 +0100
-Message-ID: <6bbbc11bc16f31ee8b2a5f47405c61236c97d205.1710517542.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1710517542.git.oleksii.kurochko@gmail.com>
-References: <cover.1710517542.git.oleksii.kurochko@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=sgnd/LKnDObv7oG77bNP0S+oSMGArRJNgYRVwHSnbuY=; b=vCMmw7XOwCEXrxij6G56PisUrj
+	PlSi4yft4Ez/QfrSNQcEe4H1svO+vd5vp4KYrl0owI9F+NH5jk4mgf6VR/GW6dQRgkPHRzf3qMdT5
+	+Nf8KqwMWNKM0W2DACJc5w6EeYSK8N+IA3+HN5pLhRfUHBi0SA+PH/M6QhgO9VR9uIXM=;
+Message-ID: <3914ac5b-2088-4b91-bd34-8a2c52c2c816@xen.org>
+Date: Fri, 15 Mar 2024 19:09:54 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 4/8] Arm: annotate entry points with type and size
+Content-Language: en-GB
+To: Jan Beulich <jbeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>
+Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <e4bf47ca-2ae6-1fd4-56a6-e4e777150b64@suse.com>
+ <7a133ed9-9d13-4e2c-893a-00c083c8a35d@suse.com>
+ <7871702a-b5ca-4430-b282-148b46fccc71@suse.com>
+ <362fb92c-98a9-4ec8-a715-cebbc5321b36@suse.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <362fb92c-98a9-4ec8-a715-cebbc5321b36@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This patch doesn't represent a strict lower bound for GCC and
-GNU Binutils; rather, these versions are specifically employed by
-the Xen RISC-V container and are anticipated to undergo continuous
-testing. Older GCC and GNU Binutils would work,
-but this is not a guarantee.
+Hi Jan,
 
-While it is feasible to utilize Clang, it's important to note that,
-currently, there is no Xen RISC-V CI job in place to verify the
-seamless functioning of the build with Clang.
+On 22/01/2024 13:22, Jan Beulich wrote:
+> On 15.01.2024 15:36, Jan Beulich wrote:
+>> Use the generic framework in xen/linkage.h. No change in generated code
+>> except for the changed padding value (noticable when config.gz isn't a
+>> multiple of 4 in size). Plus of course the converted symbols change to
+>> be hidden ones.
+>>
+>> Note that ASM_INT() is switched to DATA(), not DATA_LOCAL(), as the only
+>> use site wants the symbol global anyway.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> Reviewed-by: Julien Grall <jgrall@amazon.com>
+>> ---
+>> Only one each of the assembly files is being converted for now. More
+>> could be done right here or as follow-on in separate patches.
+> 
+> As this was meanwhile committed, I'd like to understand you preference
+> for further conversion steps: I can certainly see to find time to make
+> some actual progress here, but it might also be that you prefer to do
+> so yourself. Please let me know.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- Changes in V6:
-  - update the message in README.
----
- Changes in V5:
-  - update the commit message and README file with additional explanation about GCC and
-    GNU Binutils version. Additionally, it was added information about Clang.
----
- Changes in V4:
-  - Update version of GCC (12.2) and GNU Binutils (2.39) to the version
-    which are in Xen's contrainter for RISC-V
----
- Changes in V3:
-  - new patch
----
- README | 4 ++++
- 1 file changed, 4 insertions(+)
+Sorry for the late reply. I will have a look.
 
-diff --git a/README b/README
-index c8a108449e..30da5ff9c0 100644
---- a/README
-+++ b/README
-@@ -48,6 +48,10 @@ provided by your OS distributor:
-       - For ARM 64-bit:
-         - GCC 5.1 or later
-         - GNU Binutils 2.24 or later
-+      - For RISC-V 64-bit:
-+        - GCC 12.2 or later
-+        - GNU Binutils 2.39 or later
-+          Older GCC and GNU Binutils would work, but this is not a guarantee.
-     * POSIX compatible awk
-     * Development install of zlib (e.g., zlib-dev)
-     * Development install of Python 2.7 or later (e.g., python-dev)
+Cheers,
+
 -- 
-2.43.0
-
+Julien Grall
 
