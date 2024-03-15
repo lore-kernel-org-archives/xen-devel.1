@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C2CC54E67
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 18:06:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.693990.1082724 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99550C54E58
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 18:06:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.693988.1082695 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlBwp-0006rD-Fr; Fri, 15 Mar 2024 18:06:27 +0000
+	id 1rlBwn-00069n-Ox; Fri, 15 Mar 2024 18:06:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 693990.1082724; Fri, 15 Mar 2024 18:06:27 +0000
+Received: by outflank-mailman (output) from mailman id 693988.1082695; Fri, 15 Mar 2024 18:06:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rlBwp-0006q7-9Q; Fri, 15 Mar 2024 18:06:27 +0000
-Received: by outflank-mailman (input) for mailman id 693990;
- Fri, 15 Mar 2024 18:06:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rlBwn-00068K-Kw; Fri, 15 Mar 2024 18:06:25 +0000
+Received: by outflank-mailman (input) for mailman id 693988;
+ Fri, 15 Mar 2024 18:06:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mDue=KV=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1rlBwn-0005yW-Rl
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 18:06:25 +0000
+ id 1rlBwm-0005yV-Nz
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 18:06:24 +0000
 Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
  [2a00:1450:4864:20::229])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bcc33c8d-e2f6-11ee-afdd-a90da7624cb6;
- Fri, 15 Mar 2024 19:06:25 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id baa43a90-e2f6-11ee-a1ee-f123f15fe8a2;
+ Fri, 15 Mar 2024 19:06:22 +0100 (CET)
 Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d29aad15a5so28946081fa.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 11:06:25 -0700 (PDT)
+ 38308e7fff4ca-2d29aad15a5so28945411fa.3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 11:06:22 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- g29-20020a05651c079d00b002d0acb57c89sm568939lje.64.2024.03.15.11.06.22
+ g29-20020a05651c079d00b002d0acb57c89sm568939lje.64.2024.03.15.11.06.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 11:06:22 -0700 (PDT)
+ Fri, 15 Mar 2024 11:06:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,232 +46,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bcc33c8d-e2f6-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: baa43a90-e2f6-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710525984; x=1711130784; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1710525980; x=1711130780; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kG3msNYRo0R9LmvVapMrH1VBiKyep4RKTNNpLZUcFSg=;
-        b=HQMq3zyIHg6lQtWnD0cYIQ08wLZRqY3TUUoYiElXgLkso8ilRWhio7bIUUrNZug2hE
-         xMhGiTJHHvVZB+RQEwTMxuMA0qF9scZZKVMdErql+FWHj0vC0X7p1zpfFndRLRDnf+xV
-         WqnvR6A5A/JT7YkrNM0fXAkjoidthKVD86m3d6kmKCIP3laTJarNiVR7nn6lsFZZDoLX
-         A4kIcNtPd67zZGczyP6j1TNKI/yozZlpZno05djpCZKwISxvxKi+0Kgd2MT9D69b3nzR
-         Ru1E6IEegTgG412WVw0B93TcYWMgXHXaVUPbCB29t8FqToCVFbfjQfiVlCE/444BYLLL
-         dMNg==
+        bh=bnZCS2jkOQG1OwG5+NnDvOYWHQ+YyiN+63x/P+hS844=;
+        b=CkqH++FjYYpEW1Pu7IAlD3oX9jh7rYJoI6qwTDFCDABGF6/1i9/7uo+jhJmE1QczsK
+         TdJ8gBNBSU5/cbWDYT+/IHgpUxDWhomcNrbGGYPLBOancy10gFvw/xZHgCosRRFqFXOu
+         SnRWUuxIbZ3KO4F6VEbacPYmlmbsWl/T1S9Thal99gri8FQP5HNl49gvX581WGi212OD
+         LlAQM4wiNLQhXSVJpF8VAhYGzWVk/c68VbbGmIXPLGmJRgQBfCEFbGaoKYtt8562gfZP
+         P+q7h2mYs/a9wkvy6HQbqpLX1bjV8iENyHSOqvi3NA57TwfjaplpObI9/KMxeC8yDuuH
+         77Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710525984; x=1711130784;
+        d=1e100.net; s=20230601; t=1710525980; x=1711130780;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kG3msNYRo0R9LmvVapMrH1VBiKyep4RKTNNpLZUcFSg=;
-        b=se2Yw2CV/FTAlioj41ON9jAqmaUT/bGpvkekO4YsXAiwhmq8wjOxIK9l9jqYgg4mFd
-         HfoFfU9thpaHc0qWdih99iPOTmQ6GBV3to52fZSqvefdXr1Pxn706UmgmmG/7Y6dXbXz
-         xhYSycd0s2s5OhjopqF12qQW5h6k/vmUbgch3mk5Shfc+1kznbQA2ZUUCQ5v9uuPJCvm
-         4pudoP2w57PwIxhHWn6oW+v7YoIHbHYsfnDkh81lURUq7U1ODyAur3KogZ3G4lXrrMKy
-         lShEJGnQm7c7yPq+TQ+ABwK9Wa2Zps+k76FS0v4e1UXvXvi4Toz1a5ZmfLo+tnDGiL0A
-         rPwQ==
-X-Gm-Message-State: AOJu0YwWTWMWgKCUl4C5UL5GIHrOS0DKujpIUuy0EFq/+opIeOQUeL14
-	8wpq/rGyVLuicEPkCK/qYVs97vFdsBKQZrq3iEC684OgGvfzdsMNAT/kcfiMxws=
-X-Google-Smtp-Source: AGHT+IER1qGM0C2g3OstU5cOLa+nT5EL75+B1RORH7m39YFrVWH7RrPkHs/GjfPERvRLRxUa7iHGhQ==
-X-Received: by 2002:a2e:9b07:0:b0:2d3:8b2:6885 with SMTP id u7-20020a2e9b07000000b002d308b26885mr2522340lji.49.1710525984085;
-        Fri, 15 Mar 2024 11:06:24 -0700 (PDT)
+        bh=bnZCS2jkOQG1OwG5+NnDvOYWHQ+YyiN+63x/P+hS844=;
+        b=JcjpHj6KGG2HoGslKj2OCky/nnkdz9caWuuEq1GdnND5tTme39n3urh9bp4TuF2MM8
+         qtvsFtCLhEamCbd5kAjjhQUfgfewo5mDAUxjvk4mg+i3DAnrKt7YCPwoTx1AHQvYO/sx
+         BV/pptfRTkLEeJJIhEwYxrDnIS1VNY/agXZKYzsoXtvJpg3FKRO2/lEHwN9nBlJCp/p+
+         HAf60s2wWZ8JOUasTj3F89xtEgfaWD1Yx7WKrPoptKUIA/vmABsk+Z4ckQyKPB3txjDK
+         DgzCh0qUctzwTEX3plq+a8TzoEwDWbFmZrI4xgpkQQtvNre1234Kbjfv/OmPpglVye31
+         gYjQ==
+X-Gm-Message-State: AOJu0Yxz/BEBUXJwJkiuNODgXh2QTOWDZMttjXK6VRgqEABGFB4d5fci
+	4rpKdUVfpAmj42nK2NiaMKyxYC7br280AJNQ8yjoKXVtvF7+wj2LC9VjXqOcXNw=
+X-Google-Smtp-Source: AGHT+IE7CXomGSgKuwJJpH8tAd57HXXdUUH5gqwKlDD0cS04ArIqQSpMGEqHTi7M7Y1tC2d2O80frw==
+X-Received: by 2002:a2e:8011:0:b0:2d4:6910:2ee5 with SMTP id j17-20020a2e8011000000b002d469102ee5mr2530317ljg.8.1710525980466;
+        Fri, 15 Mar 2024 11:06:20 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v6 04/20] xen/asm-generic: introduce generic non-atomic test_*bit()
-Date: Fri, 15 Mar 2024 19:06:00 +0100
-Message-ID: <48b7dfafccc7a0ed814b5dfb0f109a0473a1b4b4.1710517542.git.oleksii.kurochko@gmail.com>
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v6 01/20] automation: introduce fixed randconfig for RISC-V
+Date: Fri, 15 Mar 2024 19:05:57 +0100
+Message-ID: <d0812213d126ade5f99aec32802941f1b153fc31.1710517542.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1710517542.git.oleksii.kurochko@gmail.com>
 References: <cover.1710517542.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The patch introduces the following generic functions:
-* test_bit
-* generic___test_and_set_bit
-* generic___test_and_clear_bit
-* generic___test_and_change_bit
+This patch introduces the anchor riscv-fixed-randconfig,
+which includes all configurations that should be disabled for
+randconfig builds.
 
-Also, the patch introduces the following generics which are
-used by the functions mentioned above:
-* BITOP_BITS_PER_WORD
-* BITOP_MASK
-* BITOP_WORD
-* BITOP_TYPE
-
-These functions and macros can be useful for architectures
-that don't have corresponding arch-specific instructions.
-
+Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- Changes in V6:
-  - Nothing changed ( only rebase )
+Changes in V6:
+ - new patch for this patch series
+ - Reviewed-by and Acked-by was added. ( in another patch series they were
+   recieved. )
 ---
- Changes in V5:
-   - new patch
----
- xen/include/asm-generic/bitops/bitops-bits.h  | 21 +++++
- .../asm-generic/bitops/generic-non-atomic.h   | 89 +++++++++++++++++++
- xen/include/asm-generic/bitops/test-bit.h     | 18 ++++
- 3 files changed, 128 insertions(+)
- create mode 100644 xen/include/asm-generic/bitops/bitops-bits.h
- create mode 100644 xen/include/asm-generic/bitops/generic-non-atomic.h
- create mode 100644 xen/include/asm-generic/bitops/test-bit.h
+ automation/gitlab-ci/build.yaml | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/xen/include/asm-generic/bitops/bitops-bits.h b/xen/include/asm-generic/bitops/bitops-bits.h
-new file mode 100644
-index 0000000000..4ece2affd6
---- /dev/null
-+++ b/xen/include/asm-generic/bitops/bitops-bits.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _ASM_GENERIC_BITOPS_BITS_H_
-+#define _ASM_GENERIC_BITOPS_BITS_H_
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 6d2cb18b88..aac29ee13a 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -512,6 +512,14 @@ alpine-3.18-gcc-debug-arm64-boot-cpupools:
+       CONFIG_BOOT_TIME_CPUPOOLS=y
+ 
+ # RISC-V 64 cross-build
++.riscv-fixed-randconfig:
++  variables: &riscv-fixed-randconfig
++    EXTRA_FIXED_RANDCONFIG: |
++      CONFIG_COVERAGE=n
++      CONFIG_EXPERT=y
++      CONFIG_GRANT_TABLE=n
++      CONFIG_MEM_ACCESS=n
 +
-+#ifndef BITOP_BITS_PER_WORD
-+#define BITOP_BITS_PER_WORD     32
-+#endif
-+
-+#ifndef BITOP_MASK
-+#define BITOP_MASK(nr)          (1U << ((nr) % BITOP_BITS_PER_WORD))
-+#endif
-+
-+#ifndef BITOP_WORD
-+#define BITOP_WORD(nr)          ((nr) / BITOP_BITS_PER_WORD)
-+#endif
-+
-+#ifndef BITOP_TYPE
-+typedef uint32_t bitops_uint_t;
-+#endif
-+
-+#endif /* _ASM_GENERIC_BITOPS_BITS_H_ */
-diff --git a/xen/include/asm-generic/bitops/generic-non-atomic.h b/xen/include/asm-generic/bitops/generic-non-atomic.h
-new file mode 100644
-index 0000000000..02d5721bfe
---- /dev/null
-+++ b/xen/include/asm-generic/bitops/generic-non-atomic.h
-@@ -0,0 +1,89 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * The file is based on Linux ( 6.4.0 ) header:
-+ *   include/asm-generic/bitops/generic-non-atomic.h
-+ * 
-+ * Only functions that can be reused in Xen were left; others were removed.
-+ * 
-+ * Also, the following changes were done:
-+ *  - it was updated the message inside #ifndef ... #endif.
-+ *  - __always_inline -> always_inline to be align with definition in
-+ *    xen/compiler.h.
-+ *  - update function prototypes from
-+ *    generic___test_and_*(unsigned long nr nr, volatile unsigned long *addr) to
-+ *    generic___test_and_*(unsigned long nr, volatile void *addr) to be
-+ *    consistent with other related macros/defines.
-+ *  - convert identations from tabs to spaces.
-+ *  - inside generic__test_and_* use 'bitops_uint_t' instead of 'unsigned long'
-+ *    to be generic.
-+ */
-+
-+#ifndef __ASM_GENERIC_BITOPS_GENERIC_NON_ATOMIC_H
-+#define __ASM_GENERIC_BITOPS_GENERIC_NON_ATOMIC_H
-+
-+#include <xen/compiler.h>
-+
-+#include <asm-generic/bitops/bitops-bits.h>
-+
-+#ifndef XEN_BITOPS_H
-+#error only <xen/bitops.h> can be included directly
-+#endif
-+
-+/*
-+ * Generic definitions for bit operations, should not be used in regular code
-+ * directly.
-+ */
-+
-+/**
-+ * generic___test_and_set_bit - Set a bit and return its old value
-+ * @nr: Bit to set
-+ * @addr: Address to count from
-+ *
-+ * This operation is non-atomic and can be reordered.
-+ * If two examples of this operation race, one can appear to succeed
-+ * but actually fail.  You must protect multiple accesses with a lock.
-+ */
-+static always_inline bool
-+generic___test_and_set_bit(unsigned long nr, volatile void *addr)
-+{
-+    bitops_uint_t mask = BITOP_MASK(nr);
-+    bitops_uint_t *p = ((bitops_uint_t *)addr) + BITOP_WORD(nr);
-+    bitops_uint_t old = *p;
-+
-+    *p = old | mask;
-+    return (old & mask) != 0;
-+}
-+
-+/**
-+ * generic___test_and_clear_bit - Clear a bit and return its old value
-+ * @nr: Bit to clear
-+ * @addr: Address to count from
-+ *
-+ * This operation is non-atomic and can be reordered.
-+ * If two examples of this operation race, one can appear to succeed
-+ * but actually fail.  You must protect multiple accesses with a lock.
-+ */
-+static always_inline bool
-+generic___test_and_clear_bit(bitops_uint_t nr, volatile void *addr)
-+{
-+    bitops_uint_t mask = BITOP_MASK(nr);
-+    bitops_uint_t *p = ((bitops_uint_t *)addr) + BITOP_WORD(nr);
-+    bitops_uint_t old = *p;
-+
-+    *p = old & ~mask;
-+    return (old & mask) != 0;
-+}
-+
-+/* WARNING: non atomic and it can be reordered! */
-+static always_inline bool
-+generic___test_and_change_bit(unsigned long nr, volatile void *addr)
-+{
-+    bitops_uint_t mask = BITOP_MASK(nr);
-+    bitops_uint_t *p = ((bitops_uint_t *)addr) + BITOP_WORD(nr);
-+    bitops_uint_t old = *p;
-+
-+    *p = old ^ mask;
-+    return (old & mask) != 0;
-+}
-+
-+#endif /* __ASM_GENERIC_BITOPS_GENERIC_NON_ATOMIC_H */
-diff --git a/xen/include/asm-generic/bitops/test-bit.h b/xen/include/asm-generic/bitops/test-bit.h
-new file mode 100644
-index 0000000000..6fb414d808
---- /dev/null
-+++ b/xen/include/asm-generic/bitops/test-bit.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _ASM_GENERIC_BITOPS_TESTBIT_H_
-+#define _ASM_GENERIC_BITOPS_TESTBIT_H_
-+
-+#include <asm-generic/bitops/bitops-bits.h>
-+
-+/**
-+ * test_bit - Determine whether a bit is set
-+ * @nr: bit number to test
-+ * @addr: Address to start counting from
-+ */
-+static inline int test_bit(int nr, const volatile void *addr)
-+{
-+    const volatile bitops_uint_t *p = addr;
-+    return 1 & (p[BITOP_WORD(nr)] >> (nr & (BITOP_BITS_PER_WORD - 1)));
-+}
-+
-+#endif /* _ASM_GENERIC_BITOPS_TESTBIT_H_ */
+ archlinux-current-gcc-riscv64:
+   extends: .gcc-riscv64-cross-build
+   variables:
+@@ -532,8 +540,7 @@ archlinux-current-gcc-riscv64-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    <<: *riscv-fixed-randconfig
+ 
+ archlinux-current-gcc-riscv64-debug-randconfig:
+   extends: .gcc-riscv64-cross-build-debug
+@@ -541,8 +548,7 @@ archlinux-current-gcc-riscv64-debug-randconfig:
+     CONTAINER: archlinux:current-riscv64
+     KBUILD_DEFCONFIG: tiny64_defconfig
+     RANDCONFIG: y
+-    EXTRA_FIXED_RANDCONFIG:
+-      CONFIG_COVERAGE=n
++    <<: *riscv-fixed-randconfig
+ 
+ # Power cross-build
+ debian-bullseye-gcc-ppc64le:
 -- 
 2.43.0
 
