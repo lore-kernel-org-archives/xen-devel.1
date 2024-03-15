@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5BBC54E67
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 15:13:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.693908.1082571 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8535C54E68
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Mar 2024 15:49:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.693916.1082603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rl9Fj-00023l-4U; Fri, 15 Mar 2024 15:13:47 +0000
+	id 1rl9nn-0007GF-AQ; Fri, 15 Mar 2024 15:48:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 693908.1082571; Fri, 15 Mar 2024 15:13:47 +0000
+Received: by outflank-mailman (output) from mailman id 693916.1082603; Fri, 15 Mar 2024 15:48:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rl9Fj-00023e-1K; Fri, 15 Mar 2024 15:13:47 +0000
-Received: by outflank-mailman (input) for mailman id 693908;
- Fri, 15 Mar 2024 15:13:45 +0000
+	id 1rl9nn-0007G8-7k; Fri, 15 Mar 2024 15:48:59 +0000
+Received: by outflank-mailman (input) for mailman id 693916;
+ Fri, 15 Mar 2024 15:48:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BtVl=KV=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1rl9Fh-00023Y-JV
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 15:13:45 +0000
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [2607:f8b0:4864:20::736])
+ <SRS0=8ka1=KV=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1rl9nl-0006nS-Mo
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2024 15:48:57 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9c0be137-e2de-11ee-a1ee-f123f15fe8a2;
- Fri, 15 Mar 2024 16:13:43 +0100 (CET)
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7882d713f6fso96033985a.0
- for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 08:13:43 -0700 (PDT)
-Received: from localhost ([85.31.135.62]) by smtp.gmail.com with ESMTPSA id
- h3-20020ae9ec03000000b007882e204d45sm2150529qkg.37.2024.03.15.08.13.40
+ id 87ceb89e-e2e3-11ee-a1ee-f123f15fe8a2;
+ Fri, 15 Mar 2024 16:48:56 +0100 (CET)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-33e9ba0eadcso1737201f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Mar 2024 08:48:56 -0700 (PDT)
+Received: from localhost.localdomain
+ (cpc92320-cmbg19-2-0-cust35.5-4.cable.virginm.net. [82.13.64.36])
+ by smtp.gmail.com with ESMTPSA id
+ bw29-20020a0560001f9d00b0033ecaf7a2adsm3394689wrb.23.2024.03.15.08.48.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 08:13:41 -0700 (PDT)
+ Fri, 15 Mar 2024 08:48:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,102 +48,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9c0be137-e2de-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 87ceb89e-e2e3-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710515622; x=1711120422; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=VDrHQpeXdupsys/4qNHCU8Q1I9aBw1O7iUAfnS9FPA8=;
-        b=EQ3WJ8EBBigNISTmybS/NUSyN6L9G3kz73Ky4oDuLG3jVkHrS9IV7fPasadt6hDwIS
-         cydCmFOX4SMTuoL4sEylpLqaoKws6lAi1sgGyIz+tDn+bkAylDR5aLLlKnMQxvEeFqkC
-         tt/vz0wLr29DYQg+4Jig6CRDt82pGWeDOIUrM=
+        d=citrix.com; s=google; t=1710517735; x=1711122535; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Cff+tBKrHygNjFy5WuxJ/QQ3GCTm7QZWRNHRxDD+f0Y=;
+        b=qu1d5hb+4s8N3YWQ5eJoYhoguaQaj08LUSi1GH149/ZC++jYG6eIfvdJfhtL/5Kst8
+         1DHW1qlwWodEBJTkr2BPvFwuAk+1vkrm6jNXdNJFvOBj0lOqvF/SC80e7+QGAGqTqMKr
+         HVp6SGHcLD4rD3kWyw9LF5PggDeBvqlo4m9GI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710515622; x=1711120422;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=VDrHQpeXdupsys/4qNHCU8Q1I9aBw1O7iUAfnS9FPA8=;
-        b=q4qHTqs2MkX+UOfPIHXJNjvpJXQTcjCrefyxP3hG2G+dnh7lbrzvSUOMlBdNi1CmoD
-         x0lnRliBk7RrmnhetQkEiNyG3ugI2JGSmCFPDaVXIpy47LOyt6lPEOTaudtHupjek/pn
-         dfnpE5fxjS2v2pdpANMVMgSJpQ9iRcJ1gnxP+thbb5SGBy6B4fSVgpFXv0HVlpUKTBkC
-         2Ro4jO8UwLQaCHgsmLSlLqBaKnDelJJyclLF0jpaVbsq/9/v/PkfhNBP5M0mODMiXu9B
-         RImHDqjdiklbHfSrcfmNNoG1+5S2rbfljd8ttTCb1DGnlioDbC9Ft9CKQRJF9UfJ2Gno
-         ha8A==
-X-Gm-Message-State: AOJu0YywA/PHLq1aH0pKrAS7O6yZoTF+3YzJYi7b+W+VsNAgc89fqtGc
-	3kEChCVy4ZE/RJjwqXz6zXqzN5VJ7LhWysm89dSc1wMKvB0bTTXaTgESslCP+hg=
-X-Google-Smtp-Source: AGHT+IE3gBfmUccLkJ6PqoN3LYo502VaBZkMs8nQsU3rOl0gPlQoiLfk+IHRG7gOAQ0QtNJdbtm26A==
-X-Received: by 2002:a05:620a:4081:b0:789:e93a:ae88 with SMTP id f1-20020a05620a408100b00789e93aae88mr884497qko.15.1710515621813;
-        Fri, 15 Mar 2024 08:13:41 -0700 (PDT)
-Date: Fri, 15 Mar 2024 16:13:39 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH] xen/vpci: Improve code generation in mask_write()
-Message-ID: <ZfRlo2mzARgue1cz@macbook>
-References: <20240315121322.3300387-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20230601; t=1710517735; x=1711122535;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Cff+tBKrHygNjFy5WuxJ/QQ3GCTm7QZWRNHRxDD+f0Y=;
+        b=qTIxg2dTj9n/nixrtAKRh+LKofEsE/KxlTU1Dsxxy2o4+N0EiTdmZlxT/Db4oSaM1t
+         0qUBWaZVGWeqxjwsDaaRZwKRMLNeaCnTEHaghwfjhofVTYfPXFJn2nMIQ6gjn4vPdMig
+         cvYOLbmXx/UW6s8UnuddThF81CWv6WAemSWIe7zKD6xNq5HQrhnBHbP7XMtMRIfiakCh
+         ekoKoXdz7R1YOZg29rGlHySH4Jdr2jZE+3b13lkl8Z7LQdA44FdgR9oVrlhj16goBwiD
+         lGLIQ8elsz+iyWQl9No8RVoDdANMxLnhnmKSrrhYT4HiKYb8HD/qWTpGI3TkZE8vrUaK
+         Tulw==
+X-Gm-Message-State: AOJu0YwvHzh2njAtn8rpIYTkyDClDkbRU+FmATOirxckMfa16FjVKrYf
+	tVpDzLkJOEmViSyUQi+ZtiP15qDb/o7+WT0oW8LoS0ZlCUzXMIzWqMZcWKR+PTKfP90IdfZ3vNT
+	K
+X-Google-Smtp-Source: AGHT+IE+Q3XFie4743wbkm+Cs8yfcDEkexgkNESoNnzxOrsUwhfQSsm5hBauDDfM7Dkh3oVC0kKRhA==
+X-Received: by 2002:a5d:428c:0:b0:33e:774f:e3ca with SMTP id k12-20020a5d428c000000b0033e774fe3camr4246024wrq.64.1710517735190;
+        Fri, 15 Mar 2024 08:48:55 -0700 (PDT)
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [OSSTEST PATCH v2 2/3] mfi-common: Rework toolstack-disk_format test matrix
+Date: Fri, 15 Mar 2024 15:48:48 +0000
+Message-Id: <20240315154849.28819-3-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240315154849.28819-1-anthony.perard@citrix.com>
+References: <20240315154849.28819-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240315121322.3300387-1-andrew.cooper3@citrix.com>
 
-On Fri, Mar 15, 2024 at 12:13:22PM +0000, Andrew Cooper wrote:
-> The use of __clear_bit() forces dmask to be spilled to the stack, and
-> interferes with the compiler heuristcs for some upcoming improvements to the
-> ffs() code generation.
-> 
-> First, shrink dmask to just the active vectors by making out the upper bits.
-> This replaces the "i < msi->vectors" part of the loop condition.
-> 
-> Next, use a simple while() loop with "clear bottom bit" expressed in plane C,
-> which affords the optimiser a far better understanding of what the loop is
-> doing.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Roger Pau Monné <roger.pau@citrix.com>
-> 
-> Noticed when looking at the ffs() code gen improvements.
-> 
-> Any suggestion on how to test this?  test_vcpi doesn't seem to check anything
-> here.  I think I've got the boundary conditions for msi->vectors right, but
-> I'd be lying if I said I was certain...
+There is 6 potenteil test of toolstack disk_format combination:
+{xl,libvirt}-{raw,vhd,qcow2}. Commit f536e834f673 ("make-flight: Trim
+the matrix of disk format flights") introduced a way to avoid testing
+on every architecture and actually do only 6 tests accross all
+arches, 3 on x86, 3 on armhf (no arm64 at the time).
 
-There's no easy way to test this because it relies on having a PCI
-device underneath.  test_vpci just checks the logic to add & remove
-handlers, but doesn't get remotely close as to attempting to provide
-some kind of dummy environment for pass through to be sanity tested.
+But, commit 5c70735f177f ("fmtarches: Use dom0arches, not hardcoded
+arch list") broke that. There's an extra space ' ' added at the
+begining of the string in variable $fmtarches_outer which break the
+algorithm. This mean that the combination of xl+raw is never tested
+and both armhf and amd64 are testing the same combination of
+toolstack+disk_format.
 
-I should look into it.
+We could just remove the extra ' ', but that would mean 3 extra tests
+on armhf and 3 extra tests on arm64. At least x86 would have a test
+for each combination.
 
-> 
-> bloat-o-meter reports:
-> 
->   add/remove: 0/0 grow/shrink: 0/1 up/down: 0/-28 (-28)
->   Function                                     old     new   delta
->   mask_write                                   142     114     -28
-> 
-> which is a consequence of the compiler having a much better idea of what's
-> going on in the loop.  There's more to come with the ffs() improvements too.
-> ---
->  xen/drivers/vpci/msi.c | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
-> 
-> diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
-> index d3aa5df08941..30adcf7df05d 100644
-> --- a/xen/drivers/vpci/msi.c
-> +++ b/xen/drivers/vpci/msi.c
-> @@ -169,13 +169,15 @@ static void cf_check mask_write(
->  
->      if ( msi->enabled )
->      {
-> -        unsigned int i;
-> +        /* Skip changes to vectors which aren't enabled. */
-> +        dmask &= (~0U >> (32 - msi->vectors));
+I'd like to avoid adding more arm* tests due to limited capacity, so
+the new goal is to have the 6 combination of toolstack-disk_format
+spread on both arm*, where each get to test all possible disk_format.
+On x86, we are also going to tests all 6 combinations, which might all
+happen on dom0=amd64 if we don't test dom0=i386, or they will be
+spread on both kind of dom0.
 
-Do we need to ASSERT that msi->vectors <= 32 in order to avoid
-theoretical UB?
+To avoid too many changes in jobs on x86 with the current list of
+jobs, we reverse the order of "i386" and "amd64".
 
-Thanks, Roger.
+Jobs changes on xen-unstable and most branches:
+x86:
++ test-amd64-amd64-xl-raw
++ test-amd64-i386-libvirt-qcow2
+arm*:
+- test-armhf-armhf-libvirt-qcow2
+- test-armhf-armhf-libvirt-raw
+- test-armhf-armhf-xl-vhd
++ test-armhf-armhf-libvirt-vhd
++ test-armhf-armhf-xl-qcow2
++ test-armhf-armhf-xl-raw
+
+Jobs changes on linux-{linus,next,6.1}:
+x86:
++ test-amd64-amd64-libvirt-vhd
++ test-amd64-amd64-xl-qcow2
++ test-amd64-amd64-xl-raw
+arm*:
+- test-armhf-armhf-libvirt-qcow2
+- test-armhf-armhf-libvirt-raw
+- test-armhf-armhf-xl-vhd
++ test-armhf-armhf-libvirt-vhd
++ test-armhf-armhf-xl-qcow2
++ test-armhf-armhf-xl-raw
+
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+
+Notes:
+    Putting i386 in second or later in dom0arches mean that the freebsd10
+    jobs on i386 are been renamed to have -qemuu... but those will
+    disappear with a follow-up change to use linux 6.1, as will stop i386
+    dom0 tests.
+
+ mfi-common | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/mfi-common b/mfi-common
+index d8d167fd..00669677 100644
+--- a/mfi-common
++++ b/mfi-common
+@@ -649,7 +649,7 @@ test_matrix_iterate () {
+       esac
+ 
+       dom0arches=''
+-      for dom0arch in i386 armhf amd64 arm64; do
++      for dom0arch in amd64 i386 armhf arm64; do
+ 
+         case ${xenarch}_${dom0arch} in
+             amd64_amd64) ;;
+@@ -667,9 +667,15 @@ test_matrix_iterate () {
+ 
+         dom0arches+=" $dom0arch"
+       done
++      dom0arches=${dom0arches# }
+ 
+       for dom0arch in $dom0arches; do
+ 
++        # For disk format tests, in do_pv_debian_tests()
++        case $xenarch in
++            arm*) dom0arches="armhf arm64" ;;
++        esac
++
+         eval "
+             arch_runvars=\"\$ARCH_RUNVARS_$dom0arch\"
+         "
+-- 
+Anthony PERARD
+
 
