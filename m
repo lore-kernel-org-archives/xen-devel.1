@@ -4,39 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3CC7C54E5D
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:11:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.695073.1084629 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6373DC54E58
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:20:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.695091.1084639 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGWK-0002v5-TX; Mon, 18 Mar 2024 17:11:32 +0000
+	id 1rmGf1-0000Xl-Nh; Mon, 18 Mar 2024 17:20:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 695073.1084629; Mon, 18 Mar 2024 17:11:32 +0000
+Received: by outflank-mailman (output) from mailman id 695091.1084639; Mon, 18 Mar 2024 17:20:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGWK-0002uy-Qa; Mon, 18 Mar 2024 17:11:32 +0000
-Received: by outflank-mailman (input) for mailman id 695073;
- Mon, 18 Mar 2024 17:11:31 +0000
+	id 1rmGf1-0000Xe-Kp; Mon, 18 Mar 2024 17:20:31 +0000
+Received: by outflank-mailman (input) for mailman id 695091;
+ Mon, 18 Mar 2024 17:20:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=az6s=KY=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1rmGHV-0002gq-Ka
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:56:13 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ <SRS0=Otdy=KY=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
+ id 1rmGez-0000XY-Uz
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 17:20:29 +0000
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [2607:f8b0:4864:20::c29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6c40284e-e548-11ee-afdd-a90da7624cb6;
- Mon, 18 Mar 2024 17:56:11 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-41411421113so7765955e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:56:11 -0700 (PDT)
-Received: from localhost.localdomain
- (cpc92320-cmbg19-2-0-cust35.5-4.cable.virginm.net. [82.13.64.36])
- by smtp.gmail.com with ESMTPSA id
- a18-20020a05600c349200b0041413d11838sm2020141wmq.26.2024.03.18.09.56.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 09:56:10 -0700 (PDT)
+ id d0d5c3e2-e54b-11ee-afdd-a90da7624cb6;
+ Mon, 18 Mar 2024 18:20:29 +0100 (CET)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5a4a2d99598so867614eaf.2
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 10:20:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,71 +42,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c40284e-e548-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: d0d5c3e2-e54b-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710780970; x=1711385770; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1710782428; x=1711387228; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=a1FmchBsn53IniDlrcuaP8DsX+RYkOrmvm7uzgbbq7I=;
-        b=GCIDuRpdPlNgeAGAnH0+/8OzTcPZufOurq4jpflyQ45brtbpbvt3QM6dExvcltJE45
-         ZMEUZxYsaTTvLA+4WVQ1WmWMn5cQ3DcRPLOv59loa8u4Q7AQxBoDPlyaL+HC/CxosnWO
-         eaI5J1Rut1cONFewmRLPZ5TfMduTSZcO5xuBo=
+        bh=MRFfA5psmxpI/SQG+I5c+atf9Gqhl39S47/tTYJbKvc=;
+        b=Q2xys6GllBRK/2u/3EVT9+f6oF3wxm1YwqfAkie+ls8RHxn6FG5FV3sVNcvBVzhI3x
+         +x9vmPv0HNhWG4rBuFEuo6oEuRXgFVC3NsvGGT54JhOtaw4Tm7LnE+RALUZaG8ZZWJSW
+         R3zGPboxVN45Xm7t32btltgHVVISY7shj3WIk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710780970; x=1711385770;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1710782428; x=1711387228;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=a1FmchBsn53IniDlrcuaP8DsX+RYkOrmvm7uzgbbq7I=;
-        b=cl8FTVMZLI57AmhAkW0JHYMTYGfX2h7IloMVV50rrKZlLwhRbqKkd5+ThNQVVuEn7F
-         EHmZomkCamrZ/MRfHAFK4daxhGASJYObQqCWbkgT71o8qVsMKMdxBJS6xTpxygykwG4R
-         ONOVdmSWx8+fPDP2bFUel+46AJB4O3iMlXhXuHqbR2d4RDRRG89cayJ5q+Yhke8XHIM+
-         A23VdXTws3plnXxx0O9t1eaKNjFYcA11SpQZo24JlYilKPW0/SQ+rXwtvK96c9k/4E4d
-         T6NhJKilIfwzO3qi88Fq/SJxAN4i/4zszxiB4NUC0HUa6z92TNeRASPLItKG0+qf3pnQ
-         wxzA==
-X-Gm-Message-State: AOJu0YzeS6Ygj5q5uuDV9dVve1j2QWfZQziC5sn8d+KzKUfJ69JiijyD
-	eDIxoyHVUWEzWwcZbo08vEsGxAHhki6TrA93Y3R7pIvgdyDUMvhhUCmNbJgLkE6DppxY6tcasG7
-	k
-X-Google-Smtp-Source: AGHT+IHUWsml3D4ikWb31YIkSLv/z6wgQgGRvJNqTp7bVNw7TXv3i6SHWlKhpDk7+qlnPGxvigH7tw==
-X-Received: by 2002:a05:600c:1554:b0:414:39c:d9f0 with SMTP id f20-20020a05600c155400b00414039cd9f0mr27157wmg.2.1710780970663;
-        Mon, 18 Mar 2024 09:56:10 -0700 (PDT)
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [OSSTEST PATCH 23/36] bookworm: Extend ARM clock workaround
-Date: Mon, 18 Mar 2024 16:55:32 +0000
-Message-Id: <20240318165545.3898-24-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240318165545.3898-1-anthony.perard@citrix.com>
-References: <20240318165545.3898-1-anthony.perard@citrix.com>
+        bh=MRFfA5psmxpI/SQG+I5c+atf9Gqhl39S47/tTYJbKvc=;
+        b=ex3n+Dor1JrpShRDravmOMcflsOzhUwK+mlVgjBrBtaG93/hUejislgzsV5WsH1+Bt
+         PpIPIq4zWIbuqIOw36yNYf91stYVraXTI7uWam8ToHsoj1ZWDuLTKH+GrJKwItp4UCO3
+         oRNxO1mhUi6zZ3+pE8iaBz036QF8m275Ng2ntOoJpnkuBAwuyc9Yp0RFKuFq8AZzvrhM
+         AOtcAZvan26yto26a+IgcY51puu2pq2QAstZgsWYuPuKN9wnD8JjPmfh/CTqOF939snG
+         v2faPPM78XN3xnlYeorgopNUxUEHd1j9Uimv07INxcZEFXpKoWykYAzSmx1ECzgOOmVA
+         CRhA==
+X-Gm-Message-State: AOJu0Yz6b+gAAJFNdAZJ2jg0c1AhmcKQx19neJdqQ/vLCUOM5S+eGRR/
+	C0BwtnjyxwdTUDL/BsltVDzmtC5pBPdTzPwDhPLprDQ8heGAQCNi8AFVojHfg5AlqwIrg/F9w+3
+	hM0bDgtt4VrXft13hmswBk9Qc14UFAXHT1SPW
+X-Google-Smtp-Source: AGHT+IE0+3glIPabxQE8gkIiHq4hq+82ClKk4n+ky6RcZAIFss1sBo+HA/rESppmyhkUigeBtEMV6pKNgUk4mMdkY0k=
+X-Received: by 2002:a05:6358:782:b0:17e:6954:5750 with SMTP id
+ n2-20020a056358078200b0017e69545750mr7944930rwj.9.1710782427852; Mon, 18 Mar
+ 2024 10:20:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240318110442.3653997-1-andrew.cooper3@citrix.com> <20240318110442.3653997-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20240318110442.3653997-3-andrew.cooper3@citrix.com>
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date: Mon, 18 Mar 2024 17:20:15 +0000
+Message-ID: <CAG7k0Eoa65GYgShW-nOe=e8q-3iHGNjvx_JzNVy+pJ3J4tjg_A@mail.gmail.com>
+Subject: Re: [PATCH 2/4] xen/virtual-region: Rework how bugframe linkage works
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich <JBeulich@suse.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>, 
+	Michal Orzel <michal.orzel@amd.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+	Shawn Anastasio <sanastasio@raptorengineering.com>, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Still broken on arndale, serial stop working early, then the machine
-timeout when working on creating a xen guest with xen-create-guest.
+On Mon, Mar 18, 2024 at 11:04=E2=80=AFAM Andrew Cooper
+<andrew.cooper3@citrix.com> wrote:
+>
+> The start/stop1/etc linkage scheme predates struct virtual_region, and as
+> setup_virtual_regions() shows, it's awkward to express in the new scheme.
+>
+> Change the linker to provide explicit start/stop symbols for each bugfram=
+e
+> type, and change virtual_region to have a stop pointer rather than a coun=
+t.
+>
+> This marginly simplifies both do_bug_frame()s and prepare_payload(), but =
+it
+> massively simplifies setup_virtual_regions() by allowing the compiler to
+> initialise the .frame[] array at build time.
+>
+> virtual_region.c is the only user of the linker symbols, and this is unli=
+kely
+> to change given the purpose of struct virtual_region, so move their exter=
+ns
+> out of bug.h
+>
+> No functional change.
+>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
- Osstest/Debian.pm | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index 4f07cdef..68f1be60 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -253,8 +253,10 @@ END
- 	my @xenkopt = @kopt;
- 	push @xenkopt, $xenkopt;
- 	# https://bugs.xenproject.org/xen/bug/45
-+	# #45 - arm: domain 0 disables clocks which are in fact being used
-+	# https://lore.kernel.org/xen-devel/1414672390.2064.31.camel@citrix.com/
- 	push @xenkopt, "clk_ignore_unused"
--	    if $ho->{Suite} =~ m/wheezy|jessie|stretch|buster/;
-+	    if $ho->{Suite} =~ m/wheezy|jessie|stretch|buster|bookworm/;
- 
- 	$xenkopt = join ' ', @xenkopt;
- 	logm("Dom0 Linux options: $xenkopt");
--- 
-Anthony PERARD
-
+Reviewed-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
