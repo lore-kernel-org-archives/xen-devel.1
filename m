@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47E64C54E5D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 250A3C54E74
 	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 11:54:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694609.1083492 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.694615.1083556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmBZ5-0001Hx-Mk; Mon, 18 Mar 2024 11:54:03 +0000
+	id 1rmBZA-0002v7-KF; Mon, 18 Mar 2024 11:54:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694609.1083492; Mon, 18 Mar 2024 11:54:03 +0000
+Received: by outflank-mailman (output) from mailman id 694615.1083556; Mon, 18 Mar 2024 11:54:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmBZ5-0001HD-Gc; Mon, 18 Mar 2024 11:54:03 +0000
-Received: by outflank-mailman (input) for mailman id 694609;
- Mon, 18 Mar 2024 11:54:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1rmBZA-0002uf-Eu; Mon, 18 Mar 2024 11:54:08 +0000
+Received: by outflank-mailman (input) for mailman id 694615;
+ Mon, 18 Mar 2024 11:54:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QoDm=KY=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1rmBZ4-0001F3-UO
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 11:54:02 +0000
+ id 1rmBZ8-0001F2-QW
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 11:54:06 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 35d9b533-e51e-11ee-afdd-a90da7624cb6;
- Mon, 18 Mar 2024 12:54:01 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 37a10472-e51e-11ee-a1ee-f123f15fe8a2;
+ Mon, 18 Mar 2024 12:54:04 +0100 (CET)
 Received: from nico.bugseng.com (unknown [46.228.253.194])
- by support.bugseng.com (Postfix) with ESMTPSA id 92BBE4EE0745;
- Mon, 18 Mar 2024 12:54:00 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPSA id 0A9304EE0748;
+ Mon, 18 Mar 2024 12:54:02 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35d9b533-e51e-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 37a10472-e51e-11ee-a1ee-f123f15fe8a2
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: nicola.vetrini@bugseng.com,
 	xen-devel@lists.xenproject.org
@@ -50,10 +50,16 @@ Cc: sstabellini@kernel.org,
 	xenia.ragiadakou@amd.com,
 	ayan.kumar.halder@amd.com,
 	consulting@bugseng.com,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [XEN PATCH 03/10] xen/xsm: add parentheses to comply with MISRA C Rule 20.7
-Date: Mon, 18 Mar 2024 12:53:46 +0100
-Message-Id: <4eeb9be581e3fa07378f5a7deb23c9066474638b.1710762555.git.nicola.vetrini@bugseng.com>
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 07/10] xen/efi: efibind: address violations of MISRA C Rule 20.7
+Date: Mon, 18 Mar 2024 12:53:50 +0100
+Message-Id: <d2bc16c1b2d00b85f4b1a96bd855bbfe38861e87.1710762555.git.nicola.vetrini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1710762555.git.nicola.vetrini@bugseng.com>
 References: <cover.1710762555.git.nicola.vetrini@bugseng.com>
@@ -70,31 +76,45 @@ No functional change.
 
 Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/include/xsm/dummy.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+This file is matched by exclude-list.json, but the fix is rather trivial
+and impacts code that in under the scope of MISRA compliance.
+---
+ xen/arch/arm/include/asm/arm64/efibind.h  | 4 ++--
+ xen/arch/x86/include/asm/x86_64/efibind.h | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
-index 8671af1ba4d3..88039fdd227c 100644
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -58,7 +58,7 @@ void __xsm_action_mismatch_detected(void);
+diff --git a/xen/arch/arm/include/asm/arm64/efibind.h b/xen/arch/arm/include/asm/arm64/efibind.h
+index f13eadd4f0ab..a1323d452e2e 100644
+--- a/xen/arch/arm/include/asm/arm64/efibind.h
++++ b/xen/arch/arm/include/asm/arm64/efibind.h
+@@ -22,9 +22,9 @@ Revision History
+ #pragma pack()
+ #endif
  
- #define XSM_DEFAULT_ARG /* */
- #define XSM_DEFAULT_VOID void
--#define XSM_ASSERT_ACTION(def) xsm_default_t action = def; (void)action
-+#define XSM_ASSERT_ACTION(def) xsm_default_t action = (def); (void)action
+-#define EFIERR(a)           (0x8000000000000000ULL | a)
++#define EFIERR(a)           (0x8000000000000000ULL | (a))
+ #define EFI_ERROR_MASK      0x8000000000000000ULL
+-#define EFIERR_OEM(a)       (0xc000000000000000ULL | a)
++#define EFIERR_OEM(a)       (0xc000000000000000ULL | (a))
  
- #else /* CONFIG_XSM */
+ #define BAD_POINTER         0xFBFBFBFBFBFBFBFBULL
+ #define MAX_ADDRESS         0xFFFFFFFFFFFFFFFFULL
+diff --git a/xen/arch/x86/include/asm/x86_64/efibind.h b/xen/arch/x86/include/asm/x86_64/efibind.h
+index e23cd16cb6a0..28bc18c24bb3 100644
+--- a/xen/arch/x86/include/asm/x86_64/efibind.h
++++ b/xen/arch/x86/include/asm/x86_64/efibind.h
+@@ -117,9 +117,9 @@ typedef uint64_t   UINTN;
+     #endif
+ #endif
  
-@@ -71,7 +71,7 @@ void __xsm_action_mismatch_detected(void);
- #define XSM_INLINE always_inline
- #define XSM_DEFAULT_ARG xsm_default_t action,
- #define XSM_DEFAULT_VOID xsm_default_t action
--#define XSM_ASSERT_ACTION(def) LINKER_BUG_ON(def != action)
-+#define XSM_ASSERT_ACTION(def) LINKER_BUG_ON((def) != action)
+-#define EFIERR(a)           (0x8000000000000000 | a)
++#define EFIERR(a)           (0x8000000000000000 | (a))
+ #define EFI_ERROR_MASK      0x8000000000000000
+-#define EFIERR_OEM(a)       (0xc000000000000000 | a)
++#define EFIERR_OEM(a)       (0xc000000000000000 | (a))
  
- #endif /* CONFIG_XSM */
  
+ #define BAD_POINTER         0xFBFBFBFBFBFBFBFB
 -- 
 2.34.1
 
