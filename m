@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 993F1C54E69
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 11:05:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694592.1083476 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B130C54E71
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 11:05:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694590.1083456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmAna-0008Rx-QS; Mon, 18 Mar 2024 11:04:58 +0000
+	id 1rmAnY-0007vZ-1T; Mon, 18 Mar 2024 11:04:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694592.1083476; Mon, 18 Mar 2024 11:04:58 +0000
+Received: by outflank-mailman (output) from mailman id 694590.1083456; Mon, 18 Mar 2024 11:04:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmAna-0008Ro-MD; Mon, 18 Mar 2024 11:04:58 +0000
-Received: by outflank-mailman (input) for mailman id 694592;
- Mon, 18 Mar 2024 11:04:57 +0000
+	id 1rmAnX-0007vS-UJ; Mon, 18 Mar 2024 11:04:55 +0000
+Received: by outflank-mailman (input) for mailman id 694590;
+ Mon, 18 Mar 2024 11:04:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=we9v=KY=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1rmAnZ-0007RX-3u
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 11:04:57 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ id 1rmAnW-0007RX-Iz
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 11:04:54 +0000
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [2a00:1450:4864:20::230])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5a40b7b6-e517-11ee-a1ee-f123f15fe8a2;
- Mon, 18 Mar 2024 12:04:55 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a466a1f9ea0so300097766b.1
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 04:04:55 -0700 (PDT)
+ id 58a83f6e-e517-11ee-a1ee-f123f15fe8a2;
+ Mon, 18 Mar 2024 12:04:53 +0100 (CET)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2d46c44dcc0so51891901fa.2
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 04:04:52 -0700 (PDT)
 Received: from andrewcoop.citrite.net (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- f22-20020aa7d856000000b0056b818544a9sm324882eds.90.2024.03.18.04.04.53
+ f22-20020aa7d856000000b0056b818544a9sm324882eds.90.2024.03.18.04.04.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 04:04:53 -0700 (PDT)
+ Mon, 18 Mar 2024 04:04:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a40b7b6-e517-11ee-a1ee-f123f15fe8a2
+X-Inumbo-ID: 58a83f6e-e517-11ee-a1ee-f123f15fe8a2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710759894; x=1711364694; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1710759892; x=1711364692; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LlCKlDfbOhZKV1J2ps7ot3moOOwpsbpj+o2HtA/2dsQ=;
-        b=Ip1clXr2Dhfpc+rr4dbYtc7lovnNLe3WxpJ/Has1xw/8Iu2izlozTgwB5ldJyW6hdw
-         a6+sJRyZ3Pi1MznlWCwvb7XETM2gY3PHZsQBAM+ZqSTmBY1G4XfYDNJU7wnreoHKXCuw
-         7SMkB/Qpbcm/kqN/7wKds6DgmMTgEoV6Jpk70=
+        bh=6AClSgW20j4Oof9oRGR4px4rDSNwV8dwcCuptcu56/k=;
+        b=ItN3jlNh7zJvOVQtMEbzjLKe5ggjLdecBcWzh9TNMph6Sp91s59laCHQzmLYi7W7GV
+         LCYL/xYIt3G+RDDfjP2k2zm3zHNvAjF1B4tSEpaCNwSQmB/aYY9pCgXZXbfb0keft455
+         Anq6hVDRngml8w3JlTXGcXepQEZt1kFxEhtYQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710759894; x=1711364694;
+        d=1e100.net; s=20230601; t=1710759892; x=1711364692;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LlCKlDfbOhZKV1J2ps7ot3moOOwpsbpj+o2HtA/2dsQ=;
-        b=ZDKQde2GfKr6andkXfVUTcwhSaVc8nM5sr+TslgI89dbZjH6eAhdgrjVQXxkve9qsS
-         dMY5HsfFuKwfvxLFApMzY0hwH9NrX5vGENiRDvAExKdbp79lVHl/bokwjIfmIQIq0c+D
-         vwE4rhMWYfPiaex4Sumu+vqPIuotxUlIl/utlYp7dwhaWOCdF+8xPy4gD7mkfAItVBzs
-         of8vlsWFvDJDy2I1/wtxQEcgnMJIT+YOhj1WN2XlyOEsDMBcUp/L9ObGzY5ZVYyNhf67
-         +A4rKBUFT7ynn63iIJ1U+Esb6gIUiPg1xuJlJrCSY3gFK5GT2pZEKUxstKhWdfknYw+D
-         iu2w==
-X-Gm-Message-State: AOJu0YzKqyKgECnof3HJaal2SYkZNs1Uo4ob3vI1i6Ifw/RbizBfs0cA
-	3yrS0qB9nKrVW30kYnisoOJ0igr0sfxZfB5PSgIReTejIoT+Z31DEH3n9wfbRhKY+uRYXb7As/Z
-	J
-X-Google-Smtp-Source: AGHT+IHMJ6j/otP77lTUgBDpwoiX+lsd05gj3mtFFuAjMNu82dHTyGRpN770FaBUz6STDrp4ntfLlQ==
-X-Received: by 2002:a05:6402:1d34:b0:568:29f8:1d79 with SMTP id dh20-20020a0564021d3400b0056829f81d79mr4412379edb.38.1710759894351;
-        Mon, 18 Mar 2024 04:04:54 -0700 (PDT)
+        bh=6AClSgW20j4Oof9oRGR4px4rDSNwV8dwcCuptcu56/k=;
+        b=CB/4+sQ1j0ekEQrf8kVAF4gTqV4O0p+hVqfWa/djqB1nRnSVHPac7hyPR7zu9O2qRp
+         jx+qmr7H6R2kpjn+rjvGpmoqzDa90RspAdcvXVeXDJNJBXG4qCT6GmPBGIQ0Xb+ysWWV
+         iVdxqrGLq6HkKG7wWUHslwzkvbyMmHJ2fteUIMUDlmxUI6TJEbtAmiP5/knBdWmFZZKs
+         yEf2L5iIgcVSvwyAGBM5/zqB4uO28i0Ad1hQC7gCVlkXK37T3ELsidP5C1ca0UAbrclV
+         ZRDP5Twqm3gzqErXZqhqC+QcpE+l7UAJq1MsTum0Iqrwpc9WxOkK+oWUMwjB0sDIINOn
+         A8dA==
+X-Gm-Message-State: AOJu0YzX3Qg5dY/oz/FnBYV9Tf8G7A4g66HRTNdwpE9rGGlsthPQNzn3
+	HN+eSZElcaqrVNWAGAs8fheqj0x51Hn/najhs3/tpyOFDJYENDNTRfHUs+BAbV348IaObbFClI9
+	V
+X-Google-Smtp-Source: AGHT+IGjILct9cPcKheTXRHra5yIQEReuWJ6pyjCoLkoCxZHKBCtSluGbPbB5UYkJV5dQTWgacbxMg==
+X-Received: by 2002:a2e:874d:0:b0:2d4:6863:5072 with SMTP id q13-20020a2e874d000000b002d468635072mr7615283ljj.44.1710759891920;
+        Mon, 18 Mar 2024 04:04:51 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -90,9 +90,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>,
 	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
 	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH 4/4] xen/virtual-region: Drop setup_virtual_regions()
-Date: Mon, 18 Mar 2024 11:04:42 +0000
-Message-Id: <20240318110442.3653997-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/4] xen/virtual-region: Rework how bugframe linkage works
+Date: Mon, 18 Mar 2024 11:04:40 +0000
+Message-Id: <20240318110442.3653997-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240318110442.3653997-1-andrew.cooper3@citrix.com>
 References: <20240318110442.3653997-1-andrew.cooper3@citrix.com>
@@ -100,10 +100,21 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-All other actions it used to perform have been converted to build-time
-initialisation.  The extable setup can done at build time too.
+The start/stop1/etc linkage scheme predates struct virtual_region, and as
+setup_virtual_regions() shows, it's awkward to express in the new scheme.
 
-This is one fewer setup step required to get exceptions working.
+Change the linker to provide explicit start/stop symbols for each bugframe
+type, and change virtual_region to have a stop pointer rather than a count.
+
+This marginly simplifies both do_bug_frame()s and prepare_payload(), but it
+massively simplifies setup_virtual_regions() by allowing the compiler to
+initialise the .frame[] array at build time.
+
+virtual_region.c is the only user of the linker symbols, and this is unlikely
+to change given the purpose of struct virtual_region, so move their externs
+out of bug.h
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -120,92 +131,201 @@ CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 CC: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 CC: Ross Lagerwall <ross.lagerwall@citrix.com>
 ---
- xen/arch/arm/setup.c             |  1 -
- xen/arch/x86/setup.c             |  2 --
- xen/common/virtual_region.c      | 17 ++++++++++-------
- xen/include/xen/virtual_region.h |  2 --
- 4 files changed, 10 insertions(+), 12 deletions(-)
+ xen/arch/arm/traps.c             |  5 ++--
+ xen/common/bug.c                 |  5 ++--
+ xen/common/livepatch.c           |  7 +++--
+ xen/common/virtual_region.c      | 45 ++++++++++++++------------------
+ xen/include/xen/bug.h            |  6 -----
+ xen/include/xen/virtual_region.h |  3 +--
+ xen/include/xen/xen.lds.h        |  8 +++++-
+ 7 files changed, 35 insertions(+), 44 deletions(-)
 
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 424744ad5e1a..b9a7f61f73ef 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -719,7 +719,6 @@ void asmlinkage __init start_xen(unsigned long boot_phys_offset,
-     percpu_init_areas();
-     set_processor_id(0); /* needed early, for smp_processor_id() */
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 9cffe7f79005..a8039087c805 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -1226,10 +1226,9 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
+         for ( id = 0; id < BUGFRAME_NR; id++ )
+         {
+             const struct bug_frame *b;
+-            unsigned int i;
  
--    setup_virtual_regions(NULL, NULL);
-     /* Initialize traps early allow us to get backtrace when an error occurred */
-     init_traps();
+-            for ( i = 0, b = region->frame[id].bugs;
+-                  i < region->frame[id].n_bugs; b++, i++ )
++            for ( b = region->frame[id].start;
++                  b < region->frame[id].stop; b++ )
+             {
+                 if ( ((vaddr_t)bug_loc(b)) == pc )
+                 {
+diff --git a/xen/common/bug.c b/xen/common/bug.c
+index c43e7c439735..b7c5d8fd4d4a 100644
+--- a/xen/common/bug.c
++++ b/xen/common/bug.c
+@@ -25,10 +25,9 @@ int do_bug_frame(const struct cpu_user_regs *regs, unsigned long pc)
+     for ( id = 0; id < BUGFRAME_NR; id++ )
+     {
+         const struct bug_frame *b;
+-        size_t i;
  
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index a21984b1ccd8..801f5ca01a26 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1014,8 +1014,6 @@ void asmlinkage __init noreturn __start_xen(unsigned long mbi_p)
-     smp_prepare_boot_cpu();
-     sort_exception_tables();
+-        for ( i = 0, b = region->frame[id].bugs;
+-              i < region->frame[id].n_bugs; b++, i++ )
++        for ( b = region->frame[id].start;
++              b < region->frame[id].stop; b++ )
+         {
+             if ( bug_loc(b) == pc )
+             {
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index cabfb6391117..351a3e0b9a60 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -804,12 +804,11 @@ static int prepare_payload(struct payload *payload,
+         if ( !sec )
+             continue;
  
--    setup_virtual_regions(__start___ex_table, __stop___ex_table);
--
-     /* Full exception support from here on in. */
+-        if ( !section_ok(elf, sec, sizeof(*region->frame[i].bugs)) )
++        if ( !section_ok(elf, sec, sizeof(*region->frame[i].start)) )
+             return -EINVAL;
  
-     rdmsrl(MSR_EFER, this_cpu(efer));
+-        region->frame[i].bugs = sec->load_addr;
+-        region->frame[i].n_bugs = sec->sec->sh_size /
+-                                  sizeof(*region->frame[i].bugs);
++        region->frame[i].start = sec->load_addr;
++        region->frame[i].stop  = sec->load_addr + sec->sec->sh_size;
+     }
+ 
+     sec = livepatch_elf_sec_by_name(elf, ".altinstructions");
 diff --git a/xen/common/virtual_region.c b/xen/common/virtual_region.c
-index ad39bb74e15c..5322766ac765 100644
+index b4325bcda71e..eb9645daa99d 100644
 --- a/xen/common/virtual_region.c
 +++ b/xen/common/virtual_region.c
-@@ -39,6 +39,11 @@ static struct virtual_region core = {
-         { __start_bug_frames_2, __stop_bug_frames_2 },
-         { __start_bug_frames_3, __stop_bug_frames_3 },
-     },
+@@ -9,12 +9,25 @@
+ #include <xen/spinlock.h>
+ #include <xen/virtual_region.h>
+ 
++extern const struct bug_frame
++    __start_bug_frames_0[], __stop_bug_frames_0[],
++    __start_bug_frames_1[], __stop_bug_frames_1[],
++    __start_bug_frames_2[], __stop_bug_frames_2[],
++    __start_bug_frames_3[], __stop_bug_frames_3[];
 +
-+#ifdef CONFIG_X86
-+    .ex = __start___ex_table,
-+    .ex_end = __stop___ex_table,
-+#endif
+ static struct virtual_region core = {
+     .list = LIST_HEAD_INIT(core.list),
+     .text_start = _stext,
+     .text_end = _etext,
+     .rodata_start = _srodata,
+     .rodata_end = _erodata,
++
++    .frame = {
++        { __start_bug_frames_0, __stop_bug_frames_0 },
++        { __start_bug_frames_1, __stop_bug_frames_1 },
++        { __start_bug_frames_2, __stop_bug_frames_2 },
++        { __start_bug_frames_3, __stop_bug_frames_3 },
++    },
  };
  
  /* Becomes irrelevant when __init sections are cleared. */
-@@ -57,6 +62,11 @@ static struct virtual_region core_init __initdata = {
-         { __start_bug_frames_2, __stop_bug_frames_2 },
-         { __start_bug_frames_3, __stop_bug_frames_3 },
-     },
+@@ -22,6 +35,13 @@ static struct virtual_region core_init __initdata = {
+     .list = LIST_HEAD_INIT(core_init.list),
+     .text_start = _sinittext,
+     .text_end = _einittext,
 +
-+#ifdef CONFIG_X86
-+    .ex = __start___ex_table,
-+    .ex_end = __stop___ex_table,
-+#endif
++    .frame = {
++        { __start_bug_frames_0, __stop_bug_frames_0 },
++        { __start_bug_frames_1, __stop_bug_frames_1 },
++        { __start_bug_frames_2, __stop_bug_frames_2 },
++        { __start_bug_frames_3, __stop_bug_frames_3 },
++    },
  };
  
  /*
-@@ -168,13 +178,6 @@ void __init unregister_init_virtual_region(void)
-     remove_virtual_region(&core_init);
- }
- 
--void __init setup_virtual_regions(const struct exception_table_entry *start,
--                                  const struct exception_table_entry *end)
--{
--    core_init.ex = core.ex = start;
--    core_init.ex_end = core.ex_end = end;
--}
+@@ -133,31 +153,6 @@ void __init unregister_init_virtual_region(void)
+ void __init setup_virtual_regions(const struct exception_table_entry *start,
+                                   const struct exception_table_entry *end)
+ {
+-    size_t sz;
+-    unsigned int i;
+-    static const struct bug_frame *const __initconstrel bug_frames[] = {
+-        __start_bug_frames,
+-        __stop_bug_frames_0,
+-        __stop_bug_frames_1,
+-        __stop_bug_frames_2,
+-        __stop_bug_frames_3,
+-        NULL
+-    };
 -
- /*
-  * Local variables:
-  * mode: C
+-    for ( i = 1; bug_frames[i]; i++ )
+-    {
+-        const struct bug_frame *s;
+-
+-        s = bug_frames[i - 1];
+-        sz = bug_frames[i] - s;
+-
+-        core.frame[i - 1].n_bugs = sz;
+-        core.frame[i - 1].bugs = s;
+-
+-        core_init.frame[i - 1].n_bugs = sz;
+-        core_init.frame[i - 1].bugs = s;
+-    }
+-
+     core_init.ex = core.ex = start;
+     core_init.ex_end = core.ex_end = end;
+ 
+diff --git a/xen/include/xen/bug.h b/xen/include/xen/bug.h
+index 77fe1e1ba840..99814c4bef36 100644
+--- a/xen/include/xen/bug.h
++++ b/xen/include/xen/bug.h
+@@ -155,12 +155,6 @@ int do_bug_frame(const struct cpu_user_regs *regs, unsigned long pc);
+ 
+ #endif /* CONFIG_GENERIC_BUG_FRAME */
+ 
+-extern const struct bug_frame __start_bug_frames[],
+-                              __stop_bug_frames_0[],
+-                              __stop_bug_frames_1[],
+-                              __stop_bug_frames_2[],
+-                              __stop_bug_frames_3[];
+-
+ #endif /* !__ASSEMBLY__ */
+ 
+ #endif /* __XEN_BUG_H__ */
 diff --git a/xen/include/xen/virtual_region.h b/xen/include/xen/virtual_region.h
-index c8a90e3ef26d..2c4deaaa2889 100644
+index dcdc95ba494c..c8a90e3ef26d 100644
 --- a/xen/include/xen/virtual_region.h
 +++ b/xen/include/xen/virtual_region.h
-@@ -37,8 +37,6 @@ struct virtual_region
- };
+@@ -29,8 +29,7 @@ struct virtual_region
+     symbols_lookup_t *symbols_lookup;
  
- const struct virtual_region *find_text_region(unsigned long addr);
--void setup_virtual_regions(const struct exception_table_entry *start,
--                           const struct exception_table_entry *end);
- void unregister_init_virtual_region(void);
- void register_virtual_region(struct virtual_region *r);
- void unregister_virtual_region(struct virtual_region *r);
+     struct {
+-        const struct bug_frame *bugs; /* The pointer to array of bug frames. */
+-        size_t n_bugs;          /* The number of them. */
++        const struct bug_frame *start, *stop; /* Pointers to array of bug frames. */
+     } frame[BUGFRAME_NR];
+ 
+     const struct exception_table_entry *ex;
+diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
+index decd6db5fc6d..96f86ac58f38 100644
+--- a/xen/include/xen/xen.lds.h
++++ b/xen/include/xen/xen.lds.h
+@@ -105,13 +105,19 @@
+ /* List of constructs other than *_SECTIONS in alphabetical order. */
+ 
+ #define BUGFRAMES                               \
+-    __start_bug_frames = .;                     \
++    __start_bug_frames_0 = .;                   \
+     *(.bug_frames.0)                            \
+     __stop_bug_frames_0 = .;                    \
++                                                \
++    __start_bug_frames_1 = .;                   \
+     *(.bug_frames.1)                            \
+     __stop_bug_frames_1 = .;                    \
++                                                \
++    __start_bug_frames_2 = .;                   \
+     *(.bug_frames.2)                            \
+     __stop_bug_frames_2 = .;                    \
++                                                \
++    __start_bug_frames_3 = .;                   \
+     *(.bug_frames.3)                            \
+     __stop_bug_frames_3 = .;
+ 
 -- 
 2.30.2
 
