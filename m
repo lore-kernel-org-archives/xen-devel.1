@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7915EC54E5D
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 16:51:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694939.1084234 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA25C54E5D
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 16:56:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694945.1084278 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGCW-00022v-4o; Mon, 18 Mar 2024 16:51:04 +0000
+	id 1rmGHF-0003QZ-N4; Mon, 18 Mar 2024 16:55:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694939.1084234; Mon, 18 Mar 2024 16:51:04 +0000
+Received: by outflank-mailman (output) from mailman id 694945.1084278; Mon, 18 Mar 2024 16:55:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGCW-00022m-28; Mon, 18 Mar 2024 16:51:04 +0000
-Received: by outflank-mailman (input) for mailman id 694939;
- Mon, 18 Mar 2024 16:51:02 +0000
+	id 1rmGHF-0003PE-Gu; Mon, 18 Mar 2024 16:55:57 +0000
+Received: by outflank-mailman (input) for mailman id 694945;
+ Mon, 18 Mar 2024 16:55:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=emy9=KY=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1rmGCU-00022Y-G0
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:51:02 +0000
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [2a00:1450:4864:20::634])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=az6s=KY=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1rmGHE-0002gq-9i
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:55:56 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b3aa82c7-e547-11ee-afdd-a90da7624cb6;
- Mon, 18 Mar 2024 17:51:01 +0100 (CET)
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a44f2d894b7so539656166b.1
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:51:01 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- e9-20020a170906c00900b00a46ce8f5e11sm564072ejz.152.2024.03.18.09.51.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Mar 2024 09:51:00 -0700 (PDT)
+ id 63090c5b-e548-11ee-afdd-a90da7624cb6;
+ Mon, 18 Mar 2024 17:55:55 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-414624a65beso19915e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:55:55 -0700 (PDT)
+Received: from localhost.localdomain
+ (cpc92320-cmbg19-2-0-cust35.5-4.cable.virginm.net. [82.13.64.36])
+ by smtp.gmail.com with ESMTPSA id
+ a18-20020a05600c349200b0041413d11838sm2020141wmq.26.2024.03.18.09.55.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Mar 2024 09:55:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,92 +48,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b3aa82c7-e547-11ee-afdd-a90da7624cb6
+X-Inumbo-ID: 63090c5b-e548-11ee-afdd-a90da7624cb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1710780661; x=1711385461; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=47KOIssaEzxtjQTqyt3uWH4deUrbCtDwYpwQMeCeJGo=;
-        b=DQSyAUCYne15jovCr3OADkRATzgkLwMOdXwbxkXoqnewfTq55eYN95T7efMNPYO6gc
-         5hGIee+hY00dPHlIczPEqA3+Sfp4nEKEXr2YBpVOulFzwZDYOA8mV7qSGlUVt6b3AMmO
-         cR7N+cKSUWSXHSs9W+IF3NH7fumEcBA2k3QcLZujMc+Xik5+jwBC9bIk1fZjXRbuNA48
-         gL4fJJ4Y1ZEKX/at0+zFZfqLoETJ+d0Mqy7Fexzc8DNZkxOQeYahaflOIu7MYGqSBAyS
-         6sNbzVU92K+miBHqfL5AnEzVdHmZN0LT8p6qJY11vad63KE4PnS89uFQUxOwnbHiK9Il
-         MRYA==
+        d=citrix.com; s=google; t=1710780955; x=1711385755; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pJd5erfZkWtwSzXglEFDYQHe8C/Kx7YDmuH1rlEbXsI=;
+        b=W+3SSKsj25z4mEM2262ebLcKPVVrUDuKL8880DMLcgNqRaBkJUkE20KT2d4jbpQ2ZE
+         zGeA7IeFFelyEZ1PBnCQ5YFXzD4q7PGvmqaHXzNe6g57USnYojqsicBleJBjzJq9ZSP1
+         CWNhpcrY1NOgT876Jw7j8JArRO0StL2KWFm54=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710780661; x=1711385461;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=47KOIssaEzxtjQTqyt3uWH4deUrbCtDwYpwQMeCeJGo=;
-        b=sJZ6PvqR+DYFs9OkhZ2hZ2gpg2oG/rgamsTtb9xBRoMeDA02o39XrgHuQ2t5UzNrIL
-         RmaMLVId6QpaN/Oyh/QMkaghsY8p7kBLn8R/6ESpfVxgwiBdiUxS9AR7fIRs/gsAujp1
-         7Ysns4/6fWnG9QlCgpVRQQpGqpGmN5XURZpDazI5/yvIqtIrD5I9L4Vizk+R5O1StBDt
-         4pS2mIMtzJc1YVmkCGXreEoU0X8R0gpKiNuVoechI8NgAS1EM0odljN2FUl3RJ4dxBab
-         0Tplo528prArjuof0hvyfMt8ahOp9MKMhxin90LPB+51OIkk40ssDdwdGdxJbQ7/p5V3
-         6+9A==
-X-Forwarded-Encrypted: i=1; AJvYcCW1QmkxspjHwvLKVzis06EUfwKywFb3wDNN0Ws0Uf11DjH31s8DNLTv3j96kYHg2eJjAJfH995IVdxxF1zFfrBeIEbDkpNa39bX7LRwNio=
-X-Gm-Message-State: AOJu0YyuDQuQqSc9pEQ0tAaG1rFgBOtbAHzUbxFOd8ybVy/WTTwbV/Pm
-	8aapeMqX75AGSLeArcCu1f0dqnmc+y97lsMFXIP5unNC62UKQO2m1z4jWIKhNw==
-X-Google-Smtp-Source: AGHT+IEdBP/KVZsHXgiJzGrfhE8yUR9Zkaay7bZZ6mmt4cZw0CeZvzwhQWI+K/1w/G55jvDJUFw0UA==
-X-Received: by 2002:a17:906:e951:b0:a44:dc35:df19 with SMTP id jw17-20020a170906e95100b00a44dc35df19mr7926837ejb.67.1710780661123;
-        Mon, 18 Mar 2024 09:51:01 -0700 (PDT)
-Message-ID: <d8bc12b1-1128-46c8-971b-928996889726@suse.com>
-Date: Mon, 18 Mar 2024 17:51:00 +0100
+        d=1e100.net; s=20230601; t=1710780955; x=1711385755;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=pJd5erfZkWtwSzXglEFDYQHe8C/Kx7YDmuH1rlEbXsI=;
+        b=NHnv4F+Lwd7xeD3sWv/cKIPA/xiJAb/kWpDBnI/xhPN9PHkrikd1tjkecAfx5XdYUw
+         B0uUBQUERjFjjjzUAAAxK3Ev+Pt+rm0ejqN4fJgnZAHgPKlGkETJgQJmSNsjDJwsxtPS
+         DeSrd0pGvs5gqMOVPoqUiYWNAWr0zXlaMpAN3m1FTlCqaQGJhlDomAbFVNhi1LDmuEW+
+         UA5ohZ0YmJRtEvIU6rGTNmp2XLfDdOPjPVR6rcxeaGZz/csSY2KfQ8KGedWLTqlgLWtK
+         zIIbPMN1hG6r7Tvgr1R1Ojpb5mQEALO8IKIJMuAI0Xtvo8nGYnOYMSq9fJVUXRv36znY
+         B8cQ==
+X-Gm-Message-State: AOJu0YzwN9D3yvpySyxKy+2e48kWNWrxflfiquSUPyHz/f5sTvFbZEBL
+	lVf7g7XP13LldfG+ZVHKM/yjH50R/ekZwXIlf7cTAyn9VJigyhtCJSBR60wnXjbtmuBMwbhDwtA
+	P
+X-Google-Smtp-Source: AGHT+IEJ2/iL6KmWbo51mROrBbNxnkrtty+8fZDPRUDG1OnLfQQ6qKRZF4wesc3cLJt4vWLpR13A7A==
+X-Received: by 2002:a05:600c:458b:b0:413:e523:eed2 with SMTP id r11-20020a05600c458b00b00413e523eed2mr10017053wmo.33.1710780955190;
+        Mon, 18 Mar 2024 09:55:55 -0700 (PDT)
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [OSSTEST PATCH 05/36] ts-host-install: fix ntp.conf path on bookworm
+Date: Mon, 18 Mar 2024 16:55:14 +0000
+Message-Id: <20240318165545.3898-6-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240318165545.3898-1-anthony.perard@citrix.com>
+References: <20240318165545.3898-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH 09/10] xen/wait: address violations of MISRA C Rule
- 20.7
-Content-Language: en-US
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
- ayan.kumar.halder@amd.com, consulting@bugseng.com,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
-References: <cover.1710762555.git.nicola.vetrini@bugseng.com>
- <1d9f79590a224b4007f34a609b8024b36dd44a04.1710762555.git.nicola.vetrini@bugseng.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1d9f79590a224b4007f34a609b8024b36dd44a04.1710762555.git.nicola.vetrini@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 18.03.2024 12:53, Nicola Vetrini wrote:
-> MISRA C Rule 20.7 states: "Expressions resulting from the expansion
-> of macro parameters shall be enclosed in parentheses". Therefore, some
-> macro definitions should gain additional parentheses to ensure that all
-> current and future users will be safe with respect to expansions that
-> can possibly alter the semantics of the passed-in macro parameter.
-> 
-> No functional change.
-> 
-> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ ts-host-install | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
-
+diff --git a/ts-host-install b/ts-host-install
+index f79a1beb..61433e64 100755
+--- a/ts-host-install
++++ b/ts-host-install
+@@ -151,7 +151,13 @@ END
+ 
+     my $ntpserver = get_target_property($ho, 'NtpServer');
+     if ($ntpserver) {
+-	target_editfile_root($ho, '/etc/ntp.conf', sub {
++        my $ntpconf_path;
++        if ($ho->{Suite} =~ m/lenny|squeeze|wheezy|jessie|stretch|buster/) {
++            $ntpconf_path = '/etc/ntp.conf';
++        } else {
++            $ntpconf_path = '/etc/ntpsec/ntp.conf';
++        }
++	target_editfile_root($ho, $ntpconf_path, sub {
+ 	    my $done= 0;
+ 	    while (<EI>) {
+ 		if (m/^server\b|^pool\b\s/) {
+-- 
+Anthony PERARD
 
 
