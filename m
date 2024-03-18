@@ -4,39 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1174AC54E5D
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:02:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.694987.1084463 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83AE8C54E5D
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Mar 2024 17:03:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.694996.1084473 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGN2-0007af-9y; Mon, 18 Mar 2024 17:01:56 +0000
+	id 1rmGOD-0008HG-Jw; Mon, 18 Mar 2024 17:03:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 694987.1084463; Mon, 18 Mar 2024 17:01:56 +0000
+Received: by outflank-mailman (output) from mailman id 694996.1084473; Mon, 18 Mar 2024 17:03:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1rmGN2-0007aY-6v; Mon, 18 Mar 2024 17:01:56 +0000
-Received: by outflank-mailman (input) for mailman id 694987;
- Mon, 18 Mar 2024 17:01:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1rmGOD-0008H9-HU; Mon, 18 Mar 2024 17:03:09 +0000
+Received: by outflank-mailman (input) for mailman id 694996;
+ Mon, 18 Mar 2024 17:03:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=az6s=KY=cloud.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1rmGHc-0002f9-VH
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 16:56:20 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6f1a7b56-e548-11ee-a1ee-f123f15fe8a2;
- Mon, 18 Mar 2024 17:56:16 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-414624a65beso23055e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 18 Mar 2024 09:56:16 -0700 (PDT)
-Received: from localhost.localdomain
- (cpc92320-cmbg19-2-0-cust35.5-4.cable.virginm.net. [82.13.64.36])
- by smtp.gmail.com with ESMTPSA id
- a18-20020a05600c349200b0041413d11838sm2020141wmq.26.2024.03.18.09.56.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 09:56:15 -0700 (PDT)
+ <SRS0=QoDm=KY=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1rmGOC-0008Gz-Cy
+ for xen-devel@lists.xenproject.org; Mon, 18 Mar 2024 17:03:08 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 640fefa6-e549-11ee-afdd-a90da7624cb6;
+ Mon, 18 Mar 2024 18:03:07 +0100 (CET)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ by support.bugseng.com (Postfix) with ESMTPA id 8D9E84EE0744;
+ Mon, 18 Mar 2024 18:03:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,82 +41,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f1a7b56-e548-11ee-a1ee-f123f15fe8a2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1710780975; x=1711385775; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UQG3ZS/KBjrX61gOBxTf9yeYNXKYHvM6r6BPx94cQKs=;
-        b=fJK4BJ2mYlO7zN2Vef512nm9m3Uqv81Bmis0gqsEdCT4kE5bMgWrgNSslWytVDqwHs
-         sGjRLf4T3H5tPZkJfWFB+kTTP76lGH/FwhYEh4PFdhurYexZrshmCvZOUI8phFoPSfrn
-         5TIIYAGydoi7jERBCM29O3+T9qjXUwq1LATi4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710780975; x=1711385775;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=UQG3ZS/KBjrX61gOBxTf9yeYNXKYHvM6r6BPx94cQKs=;
-        b=XGjMQshHKgBNUBVHcptEV/7rlZuh4s4dwjiPaINy2MLLqm2I50F5VOX3HCkgvDWhsE
-         gEdoO8dXJRutNbF5TjLcrOBHW/UoX26wbUMXZJnTbt722ZOtktsdLA/tydUWbB0VCT01
-         9ILahsh21pTo4eEyUQqgXfeIDnoDTKgC3IFP9a6ND9peXFIA1Gv44q5azczQctXhpB1k
-         oixHYnGk9rlLDQq7ejmESaNFXgF2rBOoYeX45jPaqxwUKAt43uN1VrvjLN+G5csCpbyU
-         EonMdt8p0VI/t7Ly59gC8/p+RUrpuEQULERH88ifVJ2yFtKwR0S6JUjsjaHyaIkpBbE6
-         BxzQ==
-X-Gm-Message-State: AOJu0YzeVLd1NTHCian01YUDdJqDtvI5XS2h8uW/S7mQIJt26AJOZdFm
-	EYucUfwDX41xyfKEYvMNfePUvBcz1dmCZTyU1DrF9ZcoL+N+UwEb2x8uGJ+zCUvrrsLRpMG+3NU
-	W
-X-Google-Smtp-Source: AGHT+IFxPNgilfqdmRvgJO2Paa+HImA+CbRYKWFQN+pgq1nbnYiSEISR9mtJGNc7Acdzf42snqeVxQ==
-X-Received: by 2002:a05:600c:3c99:b0:413:fa31:b9f6 with SMTP id bg25-20020a05600c3c9900b00413fa31b9f6mr9694564wmb.2.1710780975478;
-        Mon, 18 Mar 2024 09:56:15 -0700 (PDT)
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [OSSTEST PATCH 29/36] ts-debian-hvm-install: Increase min guest ram size
-Date: Mon, 18 Mar 2024 16:55:38 +0000
-Message-Id: <20240318165545.3898-30-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240318165545.3898-1-anthony.perard@citrix.com>
-References: <20240318165545.3898-1-anthony.perard@citrix.com>
+X-Inumbo-ID: 640fefa6-e549-11ee-afdd-a90da7624cb6
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Mon, 18 Mar 2024 18:03:06 +0100
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: sstabellini@kernel.org, michal.orzel@amd.com, xenia.ragiadakou@amd.com,
+ ayan.kumar.halder@amd.com, consulting@bugseng.com, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
+Subject: Re: [XEN PATCH 07/10] xen/efi: efibind: address violations of MISRA C
+ Rule 20.7
+In-Reply-To: <28eaf480-4ed6-4c1d-9508-63e8d497d530@suse.com>
+References: <cover.1710762555.git.nicola.vetrini@bugseng.com>
+ <d2bc16c1b2d00b85f4b1a96bd855bbfe38861e87.1710762555.git.nicola.vetrini@bugseng.com>
+ <28eaf480-4ed6-4c1d-9508-63e8d497d530@suse.com>
+Message-ID: <c2626d7ac0551a988e8519d86c739ad3@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-768 MB for the guest isn't enough anymore for Debian Bookworm, at boot
-it print this message:
+On 2024-03-18 17:49, Jan Beulich wrote:
+> On 18.03.2024 12:53, Nicola Vetrini wrote:
+>> MISRA C Rule 20.7 states: "Expressions resulting from the expansion
+>> of macro parameters shall be enclosed in parentheses". Therefore, some
+>> macro definitions should gain additional parentheses to ensure that 
+>> all
+>> current and future users will be safe with respect to expansions that
+>> can possibly alter the semantics of the passed-in macro parameter.
+>> 
+>> No functional change.
+>> 
+>> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+>> ---
+>> This file is matched by exclude-list.json, but the fix is rather 
+>> trivial
+>> and impacts code that in under the scope of MISRA compliance.
+> 
+> On the same basis as the other change:
+> Acked-by: Jan Beulich <jbeulich@suse.com>
+> 
 
-    Low memory
-    ----------
+Thanks.
 
-    Entering low memory mode
+> I wonder though: Where do we draw the line?
+> 
+> Jan
 
-    This system has relatively little free memory, so it will enter low memory
-    mode. Among other things, this means that this program will proceed in English.
-    You should set up swap space as soon as possible.
-    [Press enter to continue]
+So far the policy, at least from my side, has been to submit a patch if 
+the change is simple enough, to avoid adding a special case that needs 
+to be documented and maintained.
+In case concerns were raised, propose a deviation and follow up from 
+there.
 
-So, automatic installation fails. An empiric test shows that the min
-was 817M for one particular situation (test-amd64-amd64-xl-qemuu-ovmf-amd64)
-but we probably need some leg room, so increase to 1 GB.
-
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
- ts-debian-hvm-install | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/ts-debian-hvm-install b/ts-debian-hvm-install
-index 44eb3ab1..60c95b37 100755
---- a/ts-debian-hvm-install
-+++ b/ts-debian-hvm-install
-@@ -241,7 +241,7 @@ sub prep () {
-          if ($host_freemem_mb > $ram_lots * 2 + $ram_minslop) {
-               $ram_mb = $ram_lots;
-          } else {
--              $ram_mb = 768;
-+              $ram_mb = 1024;
-          }
-     }
-     logm("Host has $host_freemem_mb MB free memory, setting guest memory size to $ram_mb MB");
 -- 
-Anthony PERARD
-
+Nicola Vetrini, BSc
+Software Engineer, BUGSENG srl (https://bugseng.com)
 
